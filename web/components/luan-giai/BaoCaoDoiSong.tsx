@@ -278,6 +278,12 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
             {hop.map((h, k) => <HopNoiBat key={`${h.ma_mau ?? h.tieu_de}-${k}`} hop={h} thuatNgu={c.thuat_ngu} />)}
           </div>
         )}
+        {c.loi_hoan_canh && (
+          <div className="mt-3" data-testid="loi-hoan-canh">
+            <p className="mb-1.5 text-xs font-medium uppercase tracking-wide text-fg-faint">Với bạn lúc này</p>
+            <HopNoiBat hop={c.loi_hoan_canh} thuatNgu={c.thuat_ngu} />
+          </div>
+        )}
         {thamChieuDs.length > 0 && (
           <div className="mt-3 space-y-2">
             {thamChieuDs.map((h) => {

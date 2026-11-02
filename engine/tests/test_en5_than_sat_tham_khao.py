@@ -132,3 +132,16 @@ def test_hoi_dap_thien_la_noi_ro_khac_bat_han():
 def test_khong_bat_nham(cau):
     from app.hoidap import battu as hd
     assert hd.phan_loai(cau)["chu_de"] != "than_sat_tk"
+
+
+@pytest.mark.parametrize("cau, la_than_sat", [
+    ("Con tôi có học đường tốt không?", False),
+    ("Học đường của con tôi có ổn không", False),
+    ("Lá số tôi có sao Học Đường không?", True),
+    ("Thần sát Học Đường trong lá số của tôi nghĩa là gì?", True),
+])
+def test_dinh_tuyen_hoc_duong_khong_bat_nham_cau_doi_thuong(cau, la_than_sat):
+    """Review V5: "học đường" là chữ thường (trường học) — chỉ hiểu là thần sát khi câu nói rõ sao / thần sát / lá số."""
+    from app.hoidap import battu as hd
+    pl = hd.phan_loai(cau)
+    assert (pl.get("chu_de") == "than_sat_tk" or "than_sat_tk" in str(pl)) is la_than_sat, pl

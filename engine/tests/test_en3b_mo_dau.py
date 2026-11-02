@@ -107,6 +107,9 @@ CAU_MANG = [
 
 @pytest.mark.parametrize("md, cau, mau", CAU_MANG)
 def test_doan_mo_dau_dung_dieu_hoi(md, cau, mau):
+    from app.hoidap import phongthuy as _pt
+    if md == "phongthuy" and not _pt.PT_MO_DAU:
+        pytest.skip("Phong thuỷ: đoạn mở đầu chưa bật (holdout lùi 72 → 68 %) — xem test_phong_thuy_chua_bat_mo_dau")
     van = _hoi(md, cau)
     p = van.split("\n\n")
     assert p[0].startswith("Về ") or md == "phongthuy", p[0][:120]   # Phong thuỷ bố trí: mở bằng tên tình huống (KB)
@@ -169,3 +172,13 @@ def test_so_trong_mo_dau_co_trong_goi():
                 "lam sao de toi tu tin hon khi phai noi truoc dam dong", "Tháng 3 năm sau có phải lúc tốt để tôi khai trương?"):
         out = hoi_van.tra_loi(cau, NGUOI, None, XEM, dung_llm=False)
         assert [x for x in hoi_van.kiem_tra_dau_ra(out["cau_tra_loi"], out["bang_chung"]) if x.startswith("số lạ")] == [], cau
+
+
+def test_phong_thuy_chua_bat_mo_dau(monkeypatch):
+    """Cờ tắt → câu trả lời Phong thuỷ y như khi không có module mở đầu (không ghép nửa vời)."""
+    from app.hoidap import mo_dau, phongthuy as _pt
+    assert _pt.PT_MO_DAU is False
+    cau = "Nhà hướng Đông Nam có hợp với tôi không?"
+    a = _hoi("phongthuy", cau)
+    monkeypatch.setattr(mo_dau, "dat_dau", lambda van, *x, **k: (_ for _ in ()).throw(AssertionError("không được gọi")))
+    assert _hoi("phongthuy", cau) == a

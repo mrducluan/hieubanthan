@@ -70,8 +70,8 @@ def test_khong_hai_hop_cung_tieu_de_battu(bai_bt):
 
 
 def _hop_than_the(c: dict) -> list[dict]:
-    """Hộp phần cơ thể (theo sao) — không tính hộp lục sát "Thói quen dễ hao sức" / hộp nếp chung / hộp hoàn cảnh (EN-2 mục 5)."""
-    return [h for h in c["hop"] if h["ma_mau"].split(".")[2] not in ("sat", "chung", "hoan_canh")]
+    """Hộp phần cơ thể (theo sao) — không tính hộp lục sát "Thói quen dễ hao sức" / hộp nếp chung."""
+    return [h for h in c["hop"] if h["ma_mau"].split(".")[2] not in ("sat", "chung")]
 
 
 def test_suc_khoe_mot_hop_than_the_du_bo_phan(bai_tv):

@@ -74,59 +74,91 @@ def test_hop_duoi_18_khong_co():
     assert hc.hop("tinh_cam", "thuan", dt.date(2010, 1, 1), XEM, "doc_than", "ds") is None
 
 
-def test_hop_ma_mau_hop_le_sql():
-    h = hc.hop("gia_dinh", "can_chu_dong", dt.date(1990, 1, 1), XEM, "co_doi", "ds.bt")
-    assert SQL_DS.match(h["ma_mau"]) and len(h["ma_mau"]) <= 60
-    assert h["ma_mau"] == "ds.bt.gia_dinh.hoan_canh.can_chu_dong.t25_44.co_doi"
-    assert h["loai"] == "loi_khuyen" and h["hoan_canh"] == {"nhom_tuoi": "t25_44", "tinh_trang": "co_doi"}
+def test_hop_ma_mau_hop_le_sql_va_khong_mang_tinh_trang():
+    """Review C1: mã kiểm chứng (ghi DB + đo lường) chỉ dựng từ dữ kiện ĐÃ TÍNH — không mang tình trạng tự khai."""
+    for tt in ("co_doi", "doc_than", None):
+        h = hc.hop("gia_dinh", "can_chu_dong", dt.date(1990, 1, 1), XEM, tt, "ds.bt")
+        assert SQL_DS.match(h["ma_mau"]) and len(h["ma_mau"]) <= 60
+        assert h["ma_mau"] == "ds.bt.gia_dinh.hoan_canh.can_chu_dong.t25_44"
+        assert h["loai"] == "loi_khuyen" and "hoan_canh" not in h
 
 
 def test_tinh_trang_la_khong_hop_le_coi_nhu_chua_noi():
-    h = hc.hop("tinh_cam", "thuan", dt.date(1990, 1, 1), XEM, "hen_ho", "ds")
-    assert h["ma_mau"].endswith(".chua_noi")
+    a = hc.hop("tinh_cam", "thuan", dt.date(1990, 1, 1), XEM, "hen_ho", "ds")
+    b = hc.hop("tinh_cam", "thuan", dt.date(1990, 1, 1), XEM, None, "ds")
+    assert a["noi_dung"] == b["noi_dung"] == hc.loi("tinh_cam", "thuan", "t25_44", "chua_noi")["noi_dung"]
 
 
 def test_chuong_khong_doc_tinh_trang():
-    h = hc.hop("su_nghiep", "thuan", dt.date(1990, 1, 1), XEM, "doc_than", "ds")
-    assert h["ma_mau"].endswith(".t25_44") and "doc_than" not in h["ma_mau"]
+    a = hc.hop("su_nghiep", "thuan", dt.date(1990, 1, 1), XEM, "doc_than", "ds")
+    b = hc.hop("su_nghiep", "thuan", dt.date(1990, 1, 1), XEM, "co_doi", "ds")
+    assert a == b and a["ma_mau"] == "ds.su_nghiep.hoan_canh.thuan.t25_44"
+
+
+def test_hop_suc_khoe_kem_cau_bac_si():
+    h = hc.hop("suc_khoe", "can_chu_dong", dt.date(1960, 1, 1), XEM, None, "ds")
+    assert "không thay lời bác sĩ" in h["noi_dung"]
 
 
 def _hop_hc(bc):
-    return {c["ma"]: [h for h in c["hop"] if ".hoan_canh." in h.get("ma_mau", "")] for c in bc["chuong"]}
+    return {c["ma"]: ([c["loi_hoan_canh"]] if c.get("loi_hoan_canh") else []) for c in bc["chuong"]}
+
+
+def _ma_tat_ca(bc):
+    return [h.get("ma_mau") for c in bc["chuong"] for h in c["hop"]]
 
 
 @pytest.mark.parametrize("mang", ["tuvi", "battu"])
-def test_bao_cao_co_hop_hoan_canh_dung_chuong(mang):
-    if mang == "tuvi":
-        bc = toan_bo.tuvi({**SINH_TV, "tinh_trang": "co_doi"}, ngay_xem=XEM)
-    else:
-        bc = toan_bo.battu({**SINH_BT, "tinh_trang": "co_doi"}, ngay_xem=XEM)
+def test_bao_cao_co_hop_hoan_canh_dung_chuong(mang, monkeypatch):
+    lap = toan_bo.tuvi if mang == "tuvi" else toan_bo.battu
+    sinh = {**(SINH_TV if mang == "tuvi" else SINH_BT), "tinh_trang": "co_doi"}
+    bc = lap(sinh, ngay_xem=XEM)
     hh = _hop_hc(bc)
     for ch in hc.CHUONG:
-        assert len(hh.get(ch, [])) == 1, (mang, ch)
         c = next(x for x in bc["chuong"] if x["ma"] == ch)
-        h = hh[ch][0]
-        assert f".{c['muc']}." in h["ma_mau"], "hộp theo đúng mức chương"
-        assert len(c["hop"]) <= 6
-    assert hh["tinh_cam"][0]["ma_mau"].endswith(".co_doi")
+        assert len(hh[ch]) == 1 and len(c["hop"]) <= 6, (mang, ch)
+        assert f".{c['muc']}." in hh[ch][0]["ma_mau"], "lời theo đúng mức chương"
+        assert not any(".hoan_canh." in (h.get("ma_mau") or "") for h in c["hop"])
     for ch, ds in hh.items():
         if ch not in hc.CHUONG:
             assert not ds
     assert not any(".hoan_canh." in (h.get("ma_mau") or "") for h in bc["cot_loi"])
+    # Review C2: không xoá / thay hộp nào đã có — mọi mã của báo cáo khi tắt lớp hoàn cảnh vẫn còn nguyên.
+    monkeypatch.setattr(hc, "ap", lambda *a, **k: None)
+    goc = lap(sinh, ngay_xem=XEM)
+    assert _ma_tat_ca(bc) == _ma_tat_ca(goc)
+    assert [c["hop"] for c in bc["chuong"]] == [c["hop"] for c in goc["chuong"]]
+
+
+@pytest.mark.parametrize("mang", ["tuvi", "battu"])
+def test_dau_ra_khong_mang_tinh_trang(mang):
+    """Review C1: đầu ra (lưu bài, phiếu, đo lường đều lấy từ đây) không có giá trị tình trạng ở trường nào."""
+    import json
+    lap = toan_bo.tuvi if mang == "tuvi" else toan_bo.battu
+    for tt in ("co_doi", "doc_than"):
+        chu = json.dumps(lap({**(SINH_TV if mang == "tuvi" else SINH_BT), "tinh_trang": tt}, ngay_xem=XEM), ensure_ascii=False)
+        assert tt not in chu and "tinh_trang" not in chu
 
 
 def test_khong_chon_tinh_trang_thi_chua_noi():
     bc = toan_bo.tuvi(SINH_TV, ngay_xem=XEM)
-    assert _hop_hc(bc)["tinh_cam"][0]["ma_mau"].endswith(".chua_noi")
+    h = _hop_hc(bc).get("tinh_cam")
+    assert h
+    if h:
+        assert h[0]["noi_dung"] == hc.loi("tinh_cam", next(c for c in bc["chuong"] if c["ma"] == "tinh_cam")["muc"],
+                                            "t25_44", "chua_noi")["noi_dung"]
 
 
 def test_dong_tinh_trang_doi_dung_hop_tinh_cam_gia_dinh():
     a = toan_bo.tuvi({**SINH_TV, "tinh_trang": "doc_than"}, ngay_xem=XEM)
     b = toan_bo.tuvi({**SINH_TV, "tinh_trang": "co_doi"}, ngay_xem=XEM)
     ha, hb = _hop_hc(a), _hop_hc(b)
-    assert ha["tinh_cam"][0]["noi_dung"] != hb["tinh_cam"][0]["noi_dung"]
-    assert ha["su_nghiep"][0]["noi_dung"] == hb["su_nghiep"][0]["noi_dung"]
-    # mức các chương không đổi theo tình trạng
+    for ch in ("tinh_cam", "gia_dinh"):
+        assert ha[ch] and hb[ch]
+        if ha.get(ch):
+            assert ha[ch][0]["noi_dung"] != hb[ch][0]["noi_dung"] and ha[ch][0]["ma_mau"] == hb[ch][0]["ma_mau"]
+    for ch in ("su_nghiep", "tien_bac", "suc_khoe"):
+        assert ha.get(ch) == hb.get(ch)
     assert [c["muc"] for c in a["chuong"]] == [c["muc"] for c in b["chuong"]]
 
 
@@ -142,8 +174,8 @@ def test_api_tuvi_nhan_tinh_trang_va_tu_choi_gia_tri_la():
     la = {"birth_date": "1990-05-17", "birth_time": "08:00", "gender": "nu", "noi_sinh": "ha-noi"}
     r = c.post("/v1/tuvi/luan-giai", json={"la_so": {**la, "tinh_trang": "doc_than"}, "ngay_xem": "2026-11-02"})
     assert r.status_code == 200, r.text
-    ma = [h["ma_mau"] for ch in r.json()["chuong"] for h in ch["hop"] if ".hoan_canh." in h.get("ma_mau", "")]
-    assert any(m.endswith(".doc_than") for m in ma)
+    ma = [ch["loi_hoan_canh"]["ma_mau"] for ch in r.json()["chuong"] if ch.get("loi_hoan_canh")]
+    assert len(ma) == 5 and "doc_than" not in r.text
     r2 = c.post("/v1/tuvi/luan-giai", json={"la_so": {**la, "tinh_trang": "goa"}, "ngay_xem": "2026-11-02"})
     assert r2.status_code == 422
 
@@ -155,5 +187,16 @@ def test_api_battu_nhan_tinh_trang():
     la = {"birth_date": "1990-05-17", "birth_time": "08:00", "gender": "nu", "noi_sinh": "ha-noi", "tinh_trang": "co_doi"}
     r = c.post("/v1/battu/luan-giai", json={"la_so": la, "ngay_xem": "2026-11-02"})
     assert r.status_code == 200, r.text
-    ma = [h["ma_mau"] for ch in r.json()["chuong"] for h in ch["hop"] if ".hoan_canh." in h.get("ma_mau", "")]
-    assert any(m.startswith("ds.bt.tinh_cam.hoan_canh.") and m.endswith(".co_doi") for m in ma)
+    ma = [ch["loi_hoan_canh"]["ma_mau"] for ch in r.json()["chuong"] if ch.get("loi_hoan_canh")]
+    assert len(ma) == 5 and all(m.startswith("ds.bt.") for m in ma) and "co_doi" not in r.text
+
+
+def test_hoc_ha_loi_hoan_canh_khi_ty_le_thap():
+    goc = toan_bo.tuvi(SINH_TV, ngay_xem=XEM)
+    ma = next(c for c in goc["chuong"] if c["ma"] == "su_nghiep")["loi_hoan_canh"]["ma_mau"]
+    b = toan_bo.tuvi(SINH_TV, ngay_xem=XEM, trong_so={ma: {"dung": 10, "chua_dung": 110}})
+    c = next(x for x in b["chuong"] if x["ma"] == "su_nghiep")
+    assert "loi_hoan_canh" not in c and any("Đang xem lại" in str(x) for x in c["can_cu"])
+    b2 = toan_bo.tuvi(SINH_TV, ngay_xem=XEM, trong_so={ma: {"dung": 30, "chua_dung": 10}})
+    h = next(x for x in b2["chuong"] if x["ma"] == "su_nghiep")["loi_hoan_canh"]
+    assert h["ty_le_dung"] == 0.75 and h["so_phieu"] == 40

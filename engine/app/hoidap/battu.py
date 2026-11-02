@@ -178,8 +178,8 @@ def _hoi_cung_than(raw: str, t: str) -> bool:
 
 # EN-5.3 (2026-11-02): thần sát THAM KHẢO (Học Đường, Thiên La Địa Võng, Kim Thần). "học đường" là chữ thường (trường
 # học), "kim thân" / "thiện là" trùng khi bỏ dấu → gõ có dấu so trên chữ có dấu, gõ không dấu cần ngữ cảnh.
-_TK_CO_DAU = [r"thiên la", r"địa võng", r"kim thần", r"(sao|thần sát|có|chính) học đường",
-              r"học đường (trong|ở trụ|là sao|của (tôi|mình|em)|không)"]
+_TK_CO_DAU = [r"thiên la", r"địa võng", r"kim thần", r"(sao|thần sát|chính) học đường",
+              r"học đường (trong (lá số|bát tự|tứ trụ|trụ)|ở trụ|là sao)"]   # review V5: "có học đường tốt" = trường học
 _TK_KHONG_DAU = [r"thien la dia vong", r"dia vong", r"(sao|than sat|co|pham|bi) thien la",
                  r"thien la (o tru|trong|cua|khong)", r"(sao|than sat|co|chinh) (hoc duong|kim than)",
                  r"(hoc duong|kim than) (trong|o tru|la sao|cua (toi|minh|em)|khong)"]

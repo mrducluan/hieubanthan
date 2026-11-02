@@ -40,7 +40,7 @@
     },
     "t60": {
      "tieu_de": "Việc làm đều đặn giữ đầu óc minh mẫn",
-     "noi_dung": "Giữ một việc có lịch cố định trong tuần — dạy, làm vườn, giúp con cháu việc kinh doanh — để ngày có nhịp."
+     "noi_dung": "Giữ một việc có lịch cố định trong tuần — dạy, làm vườn, giúp người thân việc buôn bán — để ngày có nhịp."
     }
    },
    "can_chu_dong": {
@@ -114,7 +114,7 @@
     },
     "t60": {
      "tieu_de": "Tiền tuổi này cần được bảo vệ kỹ",
-     "noi_dung": "Cảnh giác cuộc gọi, lời mời đầu tư hứa lãi nhanh; giao dịch lớn luôn có con cháu tin cậy cùng xem."
+     "noi_dung": "Cảnh giác cuộc gọi, lời mời đầu tư hứa lãi nhanh; giao dịch lớn luôn có một người thân tin cậy cùng xem."
     }
    }
   },
@@ -197,7 +197,7 @@
      },
      "co_doi": {
       "tieu_de": "Có đôi và tình cảm thuận: hợp để bàn chuyện dài lâu",
-      "noi_dung": "Dành một buổi riêng để nói về kế hoạch vài năm tới — nhà ở, tiền bạc, con cái — khi cả hai đang vui."
+      "noi_dung": "Dành một buổi riêng để nói về kế hoạch vài năm tới — chỗ ở, tiền bạc, điều mỗi người mong — khi cả hai đang vui."
      },
      "chua_noi": {
       "tieu_de": "Tình cảm đang thuận: hợp để vun đắp",
@@ -210,7 +210,7 @@
       "noi_dung": "Đi những nơi đông người cùng sở thích; quen chậm, hiểu nhau trước rồi mới tính chuyện xa."
      },
      "co_doi": {
-      "tieu_de": "Vợ chồng tuổi này có nhịp thuận để gần nhau hơn",
+      "tieu_de": "Đang có đôi ở tuổi này: nhịp thuận để gần nhau hơn",
       "noi_dung": "Dành lại thời gian riêng cho hai người, như một chuyến đi ngắn hay một thú vui chung mới."
      },
      "chua_noi": {
@@ -224,7 +224,7 @@
       "noi_dung": "Tham gia hội nhóm cùng tuổi, đi lễ, đi tập; có người trò chuyện mỗi ngày đã là điều tốt."
      },
      "co_doi": {
-      "tieu_de": "Hai ông bà có nhịp thuận để vui bên nhau",
+      "tieu_de": "Có người bên cạnh ở tuổi này: nhịp thuận để vui cùng nhau",
       "noi_dung": "Cùng nhau giữ một nếp nhỏ mỗi ngày, như đi bộ buổi sáng hay uống trà chiều."
      },
      "chua_noi": {
@@ -268,7 +268,7 @@
       "noi_dung": "Giữ đời sống riêng phong phú; người phù hợp dễ đến khi bạn đang vui với chính mình."
      },
      "co_doi": {
-      "tieu_de": "Vợ chồng tuổi này cần làm mới cách nói chuyện",
+      "tieu_de": "Đang có đôi ở tuổi này: nên làm mới cách nói chuyện",
       "noi_dung": "Bớt nhắc chuyện cũ, thêm chuyện mới cùng làm; khi giận, hẹn nói lại lúc cả hai đã bình tĩnh."
      },
      "chua_noi": {
@@ -282,12 +282,12 @@
       "noi_dung": "Giữ liên lạc đều với bạn cũ, hàng xóm; nhận lời các buổi gặp mặt cùng tuổi."
      },
      "co_doi": {
-      "tieu_de": "Hai ông bà nhịp đều: nhường nhau những việc nhỏ",
+      "tieu_de": "Hai người nhịp đều: nhường nhau những việc nhỏ",
       "noi_dung": "Chia việc nhà theo sức mỗi người, cùng đi khám, cùng nhắc nhau uống thuốc."
      },
      "chua_noi": {
       "tieu_de": "Tình cảm tuổi này bình yên, cần giữ nếp gặp gỡ",
-      "noi_dung": "Hẹn con cháu, bạn bè một ngày cố định trong tuần để gặp hay gọi điện."
+      "noi_dung": "Hẹn người thân, bạn bè một ngày cố định trong tuần để gặp hay gọi điện."
      }
     }
    },
@@ -326,7 +326,7 @@
       "noi_dung": "Quen chậm, gặp nơi đông người, chưa bàn chuyện tiền bạc hay tài sản trong thời gian đầu."
      },
      "co_doi": {
-      "tieu_de": "Vợ chồng tuổi này cần kiên nhẫn với nhau hơn",
+      "tieu_de": "Đang có đôi ở tuổi này: cần kiên nhẫn với nhau hơn",
       "noi_dung": "Khi bất đồng, nói về việc chứ không nói về con người; tìm người hai bên cùng tin để góp ý khi cần."
      },
      "chua_noi": {
@@ -337,15 +337,15 @@
     "t60": {
      "doc_than": {
       "tieu_de": "Tuổi này dễ thấy cô đơn: chủ động tìm người trò chuyện",
-      "noi_dung": "Tham gia sinh hoạt ở xóm, ở hội; nói với con cháu khi bạn cần có người bên cạnh."
+      "noi_dung": "Tham gia sinh hoạt ở xóm, ở hội; nói với người thân khi bạn cần có người bên cạnh."
      },
      "co_doi": {
-      "tieu_de": "Hai ông bà dễ va nhau vì chuyện nhỏ: nhường một bước",
+      "tieu_de": "Hai người dễ va nhau vì chuyện nhỏ: nhường một bước",
       "noi_dung": "Mỗi người giữ một thú vui riêng, buổi tối ngồi lại kể chuyện ngày của nhau."
      },
      "chua_noi": {
       "tieu_de": "Tuổi này cần người thân để ý nhiều hơn",
-      "noi_dung": "Hẹn con cháu gọi điện đều đặn, nói rõ khi bạn buồn hay mệt."
+      "noi_dung": "Hẹn người thân gọi điện đều đặn, nói rõ khi bạn buồn hay mệt."
      }
     }
    }
@@ -369,11 +369,11 @@
     "t25_44": {
      "doc_than": {
       "tieu_de": "Gia đình đang thuận: hợp để giúp đỡ bố mẹ, anh chị em",
-      "noi_dung": "Bàn trước với anh chị em cách chia nhau chăm bố mẹ, để không ai gánh một mình."
+      "noi_dung": "Bàn trước với người thân cách chia nhau chăm người lớn trong nhà, để không ai gánh một mình."
      },
      "co_doi": {
       "tieu_de": "Nhà riêng đang thuận: hợp để dựng nếp nhà",
-      "noi_dung": "Hai vợ chồng thống nhất vài nếp nhà — giờ ăn chung, cách dạy con, cách chi tiêu — rồi giữ đều."
+      "noi_dung": "Hai người thống nhất vài nếp chung — giờ ăn chung, cách chi tiêu, việc nhà ai lo — rồi giữ đều."
      },
      "chua_noi": {
       "tieu_de": "Gia đình đang thuận, hợp để làm việc chung",
@@ -386,8 +386,8 @@
       "noi_dung": "Tổ chức một bữa họp mặt họ hàng, giúp người nhỏ tuổi biết thêm về gia đình mình."
      },
      "co_doi": {
-      "tieu_de": "Nhà đang thuận: con cái và bố mẹ hai bên đều cần bạn",
-      "noi_dung": "Dành thời gian nói chuyện với con như với người lớn, đồng thời đặt lịch thăm bố mẹ hai bên."
+      "tieu_de": "Nhà đang thuận: người thân hai bên đều cần bạn",
+      "noi_dung": "Đặt lịch thăm người lớn hai bên; nếu có con, nói chuyện với con như với người lớn."
      },
      "chua_noi": {
       "tieu_de": "Gia đình thuận lợi, hợp để vun vén",
@@ -396,16 +396,16 @@
     },
     "t60": {
      "doc_than": {
-      "tieu_de": "Con cháu đang gần gũi: tận hưởng những buổi sum vầy",
-      "noi_dung": "Kể cho con cháu nghe chuyện ngày xưa, dạy lại một món ăn hay một nghề của nhà."
+      "tieu_de": "Người thân đang gần gũi: tận hưởng những buổi sum vầy",
+      "noi_dung": "Kể cho người nhỏ tuổi trong nhà nghe chuyện ngày xưa, dạy lại một món ăn hay một nghề của nhà."
      },
      "co_doi": {
-      "tieu_de": "Hai ông bà và con cháu đang thuận hoà",
-      "noi_dung": "Cùng nhau giữ ngày họp mặt cố định, để con cháu có dịp về đông đủ."
+      "tieu_de": "Hai người và người thân đang thuận hoà",
+      "noi_dung": "Cùng nhau giữ ngày họp mặt cố định, để người thân có dịp về đông đủ."
      },
      "chua_noi": {
       "tieu_de": "Gia đình đang thuận, hợp để truyền lại nếp nhà",
-      "noi_dung": "Viết lại công thức món ăn, chuyện họ hàng, giấy tờ quan trọng để con cháu giữ."
+      "noi_dung": "Viết lại công thức món ăn, chuyện họ hàng, giấy tờ quan trọng để người thân giữ."
      }
     }
    },
@@ -431,7 +431,7 @@
      },
      "co_doi": {
       "tieu_de": "Nhà riêng nhịp đều: chia việc rõ để đỡ va chạm",
-      "noi_dung": "Ghi ra việc nhà, việc con cái ai lo phần nào; xem lại mỗi tháng khi lịch làm thay đổi."
+      "noi_dung": "Ghi ra việc nhà, việc chung ai lo phần nào; xem lại mỗi tháng khi lịch làm thay đổi."
      },
      "chua_noi": {
       "tieu_de": "Gia đình đều nhịp: chăm từng người một chút",
@@ -440,12 +440,12 @@
     },
     "t45_59": {
      "doc_than": {
-      "tieu_de": "Chuyện nhà đều nhịp: chăm bố mẹ và chăm mình cùng lúc",
-      "noi_dung": "Chia việc chăm bố mẹ với anh chị em theo lịch; giữ thời gian nghỉ cho chính mình."
+      "tieu_de": "Chuyện nhà đều nhịp: chăm người lớn trong nhà và chăm mình cùng lúc",
+      "noi_dung": "Chia việc chăm người lớn trong nhà với người thân theo lịch; giữ thời gian nghỉ cho chính mình."
      },
      "co_doi": {
-      "tieu_de": "Nhà riêng nhịp đều: con lớn cần được nói chuyện như người lớn",
-      "noi_dung": "Hỏi ý con trước những việc liên quan đến con; vợ chồng thống nhất trước khi nói với con."
+      "tieu_de": "Nhà riêng nhịp đều: việc chung nên bàn trước, nói sau",
+      "noi_dung": "Hai người thống nhất với nhau trước rồi mới nói với người thân; nếu có con, hỏi ý con trước những việc liên quan đến con."
      },
      "chua_noi": {
       "tieu_de": "Gia đình đều nhịp: giữ nếp họp mặt",
@@ -454,16 +454,16 @@
     },
     "t60": {
      "doc_than": {
-      "tieu_de": "Gia đình nhịp đều: nói rõ mong muốn với con cháu",
-      "noi_dung": "Cho con cháu biết bạn muốn sống thế nào, cần giúp những việc gì, để mọi người dễ sắp xếp."
+      "tieu_de": "Gia đình nhịp đều: nói rõ mong muốn với người thân",
+      "noi_dung": "Cho người thân biết bạn muốn sống thế nào, cần giúp những việc gì, để mọi người dễ sắp xếp."
      },
      "co_doi": {
-      "tieu_de": "Hai ông bà nhịp đều: giữ sự riêng tư của mỗi nhà",
-      "noi_dung": "Giúp con cháu khi được nhờ, góp ý khi được hỏi; giữ nếp sinh hoạt riêng của hai ông bà."
+      "tieu_de": "Hai người nhịp đều: giữ sự riêng tư của mỗi nhà",
+      "noi_dung": "Giúp người thân khi được nhờ, góp ý khi được hỏi; giữ nếp sinh hoạt riêng của hai người."
      },
      "chua_noi": {
       "tieu_de": "Gia đình đều nhịp: sắp xếp giấy tờ, việc nhà cho gọn",
-      "noi_dung": "Để giấy tờ quan trọng ở một chỗ, nói cho một người con tin cậy biết."
+      "noi_dung": "Để giấy tờ quan trọng ở một chỗ, nói cho một người thân tin cậy biết."
      }
     }
    },
@@ -489,7 +489,7 @@
      },
      "co_doi": {
       "tieu_de": "Nhà riêng đang dễ căng: ưu tiên nói chuyện hơn đúng sai",
-      "noi_dung": "Mỗi tuần một buổi hai vợ chồng nói chuyện bình tĩnh về việc nhà, việc con; cần thì nhờ người tư vấn."
+      "noi_dung": "Mỗi tuần một buổi hai người nói chuyện bình tĩnh về việc nhà, việc tiền; cần thì nhờ người tư vấn."
      },
      "chua_noi": {
       "tieu_de": "Gia đình đang cần chủ động giữ hoà khí",
@@ -499,11 +499,11 @@
     "t45_59": {
      "doc_than": {
       "tieu_de": "Chuyện nhà nhiều việc đổ dồn: sắp lại cho kịp sức",
-      "noi_dung": "Viết ra việc của bố mẹ, của mình, việc nào nhờ được thì nhờ; giữ một ngày nghỉ trong tuần."
+      "noi_dung": "Viết ra việc của người lớn trong nhà, của mình, việc nào nhờ được thì nhờ; giữ một ngày nghỉ trong tuần."
      },
      "co_doi": {
-      "tieu_de": "Nhà riêng nhiều sức ép: vợ chồng cần đứng cùng một phía",
-      "noi_dung": "Thống nhất trước chuyện tiền, chuyện con, chuyện bố mẹ hai bên rồi mới nói với người ngoài."
+      "tieu_de": "Nhà riêng nhiều sức ép: hai người cần đứng cùng một phía",
+      "noi_dung": "Thống nhất trước chuyện tiền, chuyện người lớn hai bên rồi mới nói với người ngoài."
      },
      "chua_noi": {
       "tieu_de": "Gia đình đang cần sự kiên nhẫn của bạn",
@@ -512,16 +512,16 @@
     },
     "t60": {
      "doc_than": {
-      "tieu_de": "Chuyện nhà cần được nói rõ để con cháu yên tâm",
-      "noi_dung": "Sắp xếp giấy tờ, tài sản, mong muốn chăm sóc khi ốm đau, nói với các con cùng lúc."
+      "tieu_de": "Chuyện nhà cần được nói rõ để người thân yên tâm",
+      "noi_dung": "Sắp xếp giấy tờ, tài sản, mong muốn chăm sóc khi ốm đau, nói với người thân cùng lúc."
      },
      "co_doi": {
-      "tieu_de": "Hai ông bà cần con cháu giúp nhiều hơn: cứ nói ra",
-      "noi_dung": "Nói rõ việc nào cần con cháu đỡ; chia việc cho từng người để không ai bị quá tải."
+      "tieu_de": "Hai người cần người thân giúp nhiều hơn: cứ nói ra",
+      "noi_dung": "Nói rõ việc nào cần người thân đỡ; chia việc cho từng người để không ai bị quá tải."
      },
      "chua_noi": {
       "tieu_de": "Gia đình đang cần bạn mở lời trước",
-      "noi_dung": "Gọi cho người con, người cháu lâu chưa nói chuyện; chuyện cũ khép lại bằng một câu nhẹ nhàng."
+      "noi_dung": "Gọi cho người thân lâu chưa nói chuyện; chuyện cũ khép lại bằng một câu nhẹ nhàng."
      }
     }
    }

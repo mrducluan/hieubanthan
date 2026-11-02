@@ -108,7 +108,7 @@ def test_constraints_ghim_moi_goi_trong_requirements_va_thoa_dieu_kien():
     ghim = _ghim()
     for dong in (ENGINE / "requirements.txt").read_text(encoding="utf-8").splitlines():
         dong = dong.split("#")[0].strip()
-        if not dong:
+        if not dong or dong.startswith("-"):
             continue
         r = Requirement(dong)
         ten = re.sub(r"[-_.]+", "-", r.name).lower()
@@ -125,3 +125,9 @@ def test_mot_ban_python_dockerfile_ci_python_version():
             assert m == ban, f"{tep.name}: python-version {m} khác {ban}"
         if "pip install -r engine/requirements.txt" in tep.read_text(encoding="utf-8"):
             assert "-c engine/constraints.txt" in tep.read_text(encoding="utf-8"), tep.name
+
+
+def test_requirements_tro_toi_constraints():
+    """Review T4: `-c constraints.txt` nằm trong requirements.txt → mọi lệnh `pip install -r requirements.txt` (và
+    Dependabot) đi cùng tệp ràng buộc; PR Dependabot nâng cả hai tệp, không đỏ CI vì lệch."""
+    assert "-c constraints.txt" in (ENGINE / "requirements.txt").read_text(encoding="utf-8").splitlines()

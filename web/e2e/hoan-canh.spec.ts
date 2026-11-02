@@ -12,7 +12,7 @@ test("chọn tình trạng → lưu trên máy, gửi kèm lá số, báo cáo c
   await page.getByLabel("Nơi sinh").selectOption("ha-noi");
   const tt = page.getByLabel("Tình trạng (tuỳ chọn)");
   await expect(tt).toHaveValue("");
-  await expect(page.getByTestId("tinh-trang-ghi-chu")).toContainText("không lưu trên máy chủ");
+  await expect(page.getByTestId("tinh-trang-ghi-chu")).toContainText("máy chủ không lưu");
   await tt.selectOption("co_doi");
   await page.getByRole("button", { name: "Lưu và xem" }).click();
   await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
@@ -27,8 +27,26 @@ test("chọn tình trạng → lưu trên máy, gửi kèm lá số, báo cáo c
   expect(req.postDataJSON().la_so.tinh_trang).toBe("co_doi");
   expect(res.status()).toBe(200);
   const bc = await res.json();
-  const ma: string[] = bc.chuong.flatMap((c: { hop: { ma_mau?: string }[] }) => c.hop.map((x) => x.ma_mau ?? ""));
-  expect(ma.some((m) => m.startsWith("ds.tinh_cam.hoan_canh.") && m.endsWith(".co_doi"))).toBe(true);
+  // Lời theo hoàn cảnh ở trường riêng của chương; mã kiểm chứng + toàn bộ đầu ra KHÔNG mang tình trạng.
+  type C = { ma: string; loi_hoan_canh?: { ma_mau?: string } };
+  const tc = (bc.chuong as C[]).find((c) => c.ma === "tinh_cam");
+  expect(tc?.loi_hoan_canh?.ma_mau).toMatch(/^ds\.tinh_cam\.hoan_canh\.[a-z_]+\.t\d+(_\d+)?$/);
+  expect(JSON.stringify(bc)).not.toContain("co_doi");
+  // Chương 1 (mở sẵn) không phải chương có lời hoàn cảnh; mở chương Tình yêu thấy dòng "Với bạn lúc này".
+  const ch = page.getByTestId("lg-chuong-tinh_cam");
+  await ch.getByTestId("lg-mo-chuong").click();
+  await expect(ch.getByTestId("loi-hoan-canh")).toContainText("Với bạn lúc này");
+});
+
+test("tình trạng chỉ đi kèm luận giải toàn bộ, không theo lá số / hỏi đáp", async ({ page }) => {
+  await napHoSo(page, { ...HO_SO_MAU, tinh_trang: "doc_than" });
+  const cacBody: { url: string; body: string }[] = [];
+  page.on("request", (r) => { if (r.method() === "POST" && r.url().includes("/api/tuvi/")) cacBody.push({ url: r.url(), body: r.postData() ?? "" }); });
+  await page.goto("/tu-vi");
+  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
+  const laSo = cacBody.filter((x) => !x.url.endsWith("/luan-giai"));
+  expect(laSo.length).toBeGreaterThan(0);
+  expect(laSo.every((x) => !x.body.includes("tinh_trang"))).toBe(true);
 });
 
 test("bỏ chọn tình trạng → xoá khỏi hồ sơ, không gửi", async ({ page }) => {

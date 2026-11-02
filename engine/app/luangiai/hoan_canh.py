@@ -5,8 +5,14 @@ Một hộp "với bạn lúc này" (loại `loi_khuyen`) ở 5 chương đời 
 khoẻ — chọn theo: MỨC chương đã chấm (không đổi mức) × nhóm tuổi tròn (18–24 · 25–44 · 45–59 · từ 60) × tình trạng
 (độc thân / có đôi) mà NGƯỜI DÙNG TỰ CHỌN trên hồ sơ (chỉ chương tình yêu + gia đình đọc; không chọn → lời chung
 "chua_noi"; không bao giờ suy đoán). Dưới 18 tuổi: không thêm hộp (lời cho trẻ đã có ở chương vận hạn).
-Tình trạng chỉ đi qua lượt gọi để chọn câu, engine không lưu. Lời ở KB `kb/data/hoan_canh_kb.json` (source_id + school_id).
-Mã kiểm chứng `<tiền tố>.<chương>.hoan_canh.<mức>.<nhóm>[.<tình trạng>]` — qua regex `doi_song` của 0017 (không migration).
+Tình trạng chỉ đi qua lượt gọi để chọn câu, engine không lưu và KHÔNG ghi ra bất kỳ trường nào của đầu ra: mã kiểm chứng
+`<tiền tố>.<chương>.hoan_canh.<mức>.<nhóm tuổi>` (chỉ dữ kiện ĐÃ TÍNH — quy tắc riêng tư (d) CLAUDE.md; phiếu "Đúng với
+mình" ghi DB + đo lường không được mang tình trạng — review 2026-11-02 C1), qua regex `doi_song` của 0017.
+Lời ở KB `kb/data/hoan_canh_kb.json` (source_id + school_id). Hộp sức khoẻ luôn kèm câu không thay lời bác sĩ.
+Đặt ở TRƯỜNG RIÊNG của chương `loi_hoan_canh` (web hiện thành dòng "Với bạn lúc này" dưới các hộp) — không chen vào `hop`:
+không tranh trần 6 hộp, không bao giờ xoá / thay hộp gắn lá số + phiếu của người dùng (review C2: chen vào `hop` thì chương
+Gia đình Tử vi luôn đầy, lời không bao giờ hiện). Chương khoá SAO-2 bị web cắt còn tiêu đề → trường này không lộ. Không vào
+"Điều quan trọng nhất", không đi vào lời nhắc AI diễn đạt (AI chỉ nhận đoạn + hộp).
 """
 from __future__ import annotations
 
@@ -24,6 +30,7 @@ MUC = ("thuan", "can_bang", "can_chu_dong")
 NHOM = ("t18_24", "t25_44", "t45_59", "t60")
 TINH_TRANG = ("doc_than", "co_doi", "chua_noi")
 TUOI_TOI_THIEU = 18
+BAC_SI = "Đây là lời nhắc chăm sóc, không thay lời bác sĩ."
 
 _KB = Path(__file__).resolve().parents[1] / "kb" / "data" / "hoan_canh_kb.json"
 
@@ -84,33 +91,32 @@ def hop(chuong: str, muc: str | None, ngay_sinh: dt.date, ngay_xem: dt.date, tin
     o = loi(chuong, muc, nhom, tt)
     if not o:
         return None
-    ma = ".".join([tien_to, chuong, "hoan_canh", muc, nhom] + ([tt] if tt else []))
-    return {"loai": "loi_khuyen", "tieu_de": o["tieu_de"], "noi_dung": o["noi_dung"],
-            "can_cu": ["Lời chọn theo mức của chương, nhóm tuổi" + (" và tình trạng bạn tự chọn" if tt and tt != "chua_noi"
-                                                                    else "") + " — không đổi mức, không suy đoán."],
-            "ma_mau": ma, "hoan_canh": {"nhom_tuoi": nhom, "tinh_trang": tt}, "_w": 0.0, "_ch": chuong}
+    ma = ".".join([tien_to, chuong, "hoan_canh", muc, nhom])
+    noi = o["noi_dung"]
+    if chuong == "suc_khoe" and BAC_SI not in noi:
+        noi = f"{noi} {BAC_SI}"
+    return {"loai": "loi_khuyen", "tieu_de": o["tieu_de"], "noi_dung": noi,
+            "can_cu": ["Lời chọn theo mức của chương và nhóm tuổi" + (", cùng lựa chọn bạn tự khai trên hồ sơ"
+                                                                   if chuong in CHUONG_THEO_TINH_TRANG else "")
+                       + " — không đổi mức, không suy đoán."],
+            "ma_mau": ma, "_w": 0.0, "_ch": chuong}
 
 
 def ap(chuong_ds: list[dict], ngay_sinh: dt.date, ngay_xem: dt.date, tinh_trang: str | None, tien_to: str,
-       hoc: tuple = (None, None), toi_da_hop: int = 6) -> None:
-    """Thêm hộp hoàn cảnh vào cuối 5 chương (sửa tại chỗ). Chương đã đủ `toi_da_hop` → thay hộp NHẸ NHẤT không phải
-    "lưu ý" (trọng số `_w` nhỏ nhất, hoà thì hộp đứng sau) để giữ trần số hộp — lời lưu ý luôn được giữ.
-    `hoc` = (trong_so, ca_nhan): áp lại đúng luật HỌC dùng chung cho chương vừa thêm (hộp người xem bấm "chưa đúng" vẫn
-    xếp cuối; hộp hoàn cảnh có tỉ lệ đúng thấp cũng rời lớp đời thường như mọi hộp khác)."""
+       hoc: tuple = (None, None)) -> None:
+    """Gắn `loi_hoan_canh` cho 5 chương (sửa tại chỗ). Luật HỌC dùng chung (`kh.danh_gia_phieu`): ≥ 30 phiếu → gắn tỉ lệ
+    đúng; ≥ 100 phiếu & < 40 % đúng → không hiện, ghi một dòng "Đang xem lại" vào `can_cu` như mọi hộp khác."""
+    trong_so = hoc[0] or {}
     for c in chuong_ds:
         h = hop(c.get("ma", ""), c.get("muc"), ngay_sinh, ngay_xem, tinh_trang, tien_to)
         if not h:
             continue
-        ds = c.setdefault("hop", [])
-        if len(ds) < toi_da_hop:
-            ds.append(h)
-            continue
-        ung_vien = [i for i, x in enumerate(ds) if x.get("loai") != "luu_y"]
-        if not ung_vien:
-            continue
-        bo = min(ung_vien, key=lambda i: (float(ds[i].get("_w") or 0.0), -i))
-        del ds[bo]
-        ds.append(h)
-    for c in chuong_ds:
-        if any(".hoan_canh." in (x.get("ma_mau") or "") for x in c.get("hop", [])):
-            kh.ap_hoc(c, *hoc)
+        h.pop("_w", None)
+        h.pop("_ch", None)
+        dg = kh.danh_gia_phieu(trong_so.get(h["ma_mau"]))
+        if dg:
+            h["ty_le_dung"], h["so_phieu"] = dg[0], dg[1]
+            if dg[2]:
+                c.setdefault("can_cu", []).append(f"Đang xem lại: {h['tieu_de']}")
+                continue
+        c["loi_hoan_canh"] = h

@@ -53,9 +53,13 @@ const MUI_GIO: [string, string][] = [
 // ĐY-1: chưa có đồng ý xử lý dữ liệu (lib/dong-y-du-lieu) → khối đồng ý ngắn ngay trên nút, nút thành "Đồng ý và xem kết
 // quả", và KHÔNG gửi gì lên máy chủ (kể cả xem trước đổi lịch) cho tới khi người dùng bấm. Đã đồng ý → nút như cũ + dòng
 // "Bạn đã đồng ý · Thu hồi" (thu hồi = xoá đồng ý + hồ sơ trên máy). Không modal che trang, không ô tích sẵn.
-/** EN-2 mục 5: chỉ hỏi tình trạng người từ 18 tuổi (lọc hiển thị theo năm sinh; lời theo tuổi do engine chọn). */
-function du18(namSinh: number): boolean {
-  return namSinh > 1900 && new Date().getFullYear() - namSinh >= 18;
+/** EN-2 mục 5: chỉ hỏi tình trạng người đủ 18 tuổi tròn (review T1: so đủ ngày/tháng/năm — không thu dữ liệu của người
+ *  17 tuổi sinh cuối năm). Chỉ lọc hiển thị; lời theo tuổi do engine chọn. */
+function du18(nam: number, thang: number, ngay: number): boolean {
+  if (!(nam > 1900 && thang >= 1 && thang <= 12 && ngay >= 1 && ngay <= 31)) return false;
+  const h = new Date();
+  const tuoi = h.getFullYear() - nam - ((h.getMonth() + 1 < thang || (h.getMonth() + 1 === thang && h.getDate() < ngay)) ? 1 : 0);
+  return tuoi >= 18;
 }
 
 export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
@@ -157,7 +161,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
       ...(nuocNgoai && gioMuaHe ? { gio_mua_he: true } : {}),
       ...(nuocNgoai && utcNoiSinh !== "" ? { utc_noi_sinh: Number(utcNoiSinh) } : {}),
       ...(canVung && (vung === "north" || vung === "south") ? { vung } : {}),
-      ...((tinhTrang === "doc_than" || tinhTrang === "co_doi") && du18(dg.nam) ? { tinh_trang: tinhTrang } : {}),
+      ...((tinhTrang === "doc_than" || tinhTrang === "co_doi") && du18(dg.nam, dg.thang, dg.ngay) ? { tinh_trang: tinhTrang } : {}),
       ...(macDinh?.tao_luc ? { tao_luc: macDinh.tao_luc } : {}),
     });
     if (!macDinh) {
@@ -336,7 +340,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                 </Select>
               </div>
             )}
-            {can === "day_du" && du18(Number(nam) || 0) && (
+            {can === "day_du" && du18(Number(nam) || 0, Number(thang) || 0, Number(ngay) || 0) && (
               <div className="space-y-2 sm:col-span-2">
                 <Label htmlFor="tinh-trang">Tình trạng (tuỳ chọn)</Label>
                 <Select id="tinh-trang" value={tinhTrang} onChange={(e) => setTinhTrang(e.target.value)}>
@@ -345,8 +349,8 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                   <option value="co_doi">Đang có đôi</option>
                 </Select>
                 <p className="text-xs text-fg-faint" data-testid="tinh-trang-ghi-chu">
-                  Chỉ dùng để chọn lời khuyên hợp hơn ở chương Tình yêu và Gia đình. Lưu trên máy bạn, không lưu trên máy
-                  chủ, không đồng bộ tài khoản. Không chọn cũng được.
+                  Chỉ dùng để chọn lời khuyên hợp hơn ở chương Tình yêu và Gia đình khi xem luận giải toàn bộ. Lưu trên máy
+                  bạn; máy chủ không lưu, không đồng bộ tài khoản. Không chọn cũng được.
                 </p>
               </div>
             )}

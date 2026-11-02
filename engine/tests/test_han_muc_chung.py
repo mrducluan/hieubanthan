@@ -125,7 +125,16 @@ def test_tu_env_khong_dat_thi_nhu_cu(monkeypatch):
 def test_tu_env_dat_thi_dung_kho_chung(monkeypatch):
     monkeypatch.setenv("HAN_MUC_REDIS_URL", "https://redis.gia")
     monkeypatch.setenv("HAN_MUC_REDIS_TOKEN", "t")
+    monkeypatch.setenv("HAN_MUC_MUOI", "bi-mat-rieng-0123456789")
     assert isinstance(ns.tu_env(), ns.NganSachRedis)
+
+
+def test_tu_env_thieu_muoi_bi_mat_thi_khong_bat(monkeypatch):
+    """Review V3: không có muối bí mật riêng thì không gửi mã băm IP sang kho ngoài."""
+    monkeypatch.setenv("HAN_MUC_REDIS_URL", "https://redis.gia")
+    monkeypatch.setenv("HAN_MUC_REDIS_TOKEN", "t")
+    monkeypatch.delenv("HAN_MUC_MUOI", raising=False)
+    assert type(ns.tu_env()) is ns.NganSach
 
 
 def test_tu_env_url_khong_https_thi_khong_bat(monkeypatch):
@@ -135,11 +144,23 @@ def test_tu_env_url_khong_https_thi_khong_bat(monkeypatch):
 
 
 def test_bam_on_dinh_giua_tien_trinh_khi_co_muoi_chung(monkeypatch):
+    monkeypatch.setenv("HAN_MUC_MUOI", "bi-mat-rieng-0123456789")
+    assert ns._muoi() == b"bi-mat-rieng-0123456789" and ns.bam("1.2.3.4") == ns.bam("1.2.3.4")
     monkeypatch.setenv("HAN_MUC_REDIS_TOKEN", "t")
-    m1, m2 = ns._muoi(), ns._muoi()
-    assert m1 == m2
-    monkeypatch.delenv("HAN_MUC_REDIS_TOKEN")
-    assert ns._muoi() != m1           # không có kho chung → muối ngẫu nhiên theo tiến trình như cũ
+    a = ns.bam("1.2.3.4")
+    monkeypatch.setenv("HAN_MUC_REDIS_TOKEN", "token-khac")
+    assert ns.bam("1.2.3.4") == a     # biết token Redis cũng không dò được: muối không suy từ token
+    monkeypatch.delenv("HAN_MUC_MUOI")
+    assert ns._muoi() == ns._MUOI     # không có muối chung → ngẫu nhiên theo tiến trình như cũ
+
+
+def test_bam_doi_theo_ngay(monkeypatch):
+    import time as _t
+    monkeypatch.setenv("HAN_MUC_MUOI", "bi-mat-rieng-0123456789")
+    a = ns.bam("1.2.3.4")
+    goc = _t.gmtime
+    monkeypatch.setattr(ns.time, "gmtime", lambda *x: goc(_t.time() + 86400))
+    assert ns.bam("1.2.3.4") != a
 
 
 def test_khoa_khong_lo_trong_repr():
@@ -148,3 +169,40 @@ def test_khoa_khong_lo_trong_repr():
     a, _ = _hai_tien_trinh(r)
     a.xin(None)
     assert "bi-mat" not in repr(a)
+
+
+def test_cau_dao_kho_loi_thi_ngat_mot_luc():
+    """Review V1: kho lỗi → các lượt sau không gọi kho nữa trong 60 s (không cộng dồn thời gian chờ)."""
+    r = RedisGia()
+    r.hong = True
+    a, _ = _hai_tien_trinh(r, gio_tong=50)
+    a.xin(None)
+    so = len(r.dau_xac_thuc)
+    for _ in range(5):
+        a.xin(None)
+    assert len(r.dau_xac_thuc) == so
+
+
+def test_vuot_tran_ma_tra_luot_loi_van_tu_choi():
+    """Review V2: INCR đã báo vượt trần thì luôn từ chối, kể cả khi lệnh trả lượt (DECR) lỗi."""
+    class HongKhiDecr(RedisGia):
+        def __call__(self, req):
+            if b"DECR" in req.content:
+                return httpx.Response(500, json={"error": "hong"})
+            return super().__call__(req)
+    r = HongKhiDecr()
+    a, _ = _hai_tien_trinh(r, gio_tong=1)
+    assert a.xin(None) is None
+    assert a.xin(None) == "tong_gio"
+
+
+def test_expire_loi_khong_lam_hong_luot_dem():
+    class KhongNX(RedisGia):
+        def __call__(self, req):
+            resp = super().__call__(req)
+            ra = [({"error": "ERR syntax"} if json.loads(req.content)[i][0] == "EXPIRE" else x)
+                  for i, x in enumerate(resp.json())]
+            return httpx.Response(200, json=ra)
+    r = KhongNX()
+    a, b = _hai_tien_trinh(r, gio_tong=2)
+    assert a.xin(None) is None and b.xin(None) is None and a.xin(None) == "tong_gio"

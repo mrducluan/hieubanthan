@@ -92,6 +92,9 @@ export async function hoSoTaiKhoan(userId: string): Promise<HoSoTaiKhoan | null>
 
 /** Postgres: vi phạm ràng buộc check (vd 0015 chưa chạy → do_tin_gio chưa nhận 'unknown'). */
 const VI_PHAM_CHECK = "23514";
+/** Lỗi "thiếu cột" (PostgREST không thấy cột trong schema cache / Postgres undefined_column) — dấu hiệu migration chưa
+ *  chạy. Chỉ lỗi này mới lùi bộ cột; lỗi khác (mạng, quyền…) báo lỗi ngay (review T5: lùi nhầm để lại múi giờ cũ). */
+const THIEU_COT = new Set(["PGRST204", "42703"]);
 
 type Upsert = (hang: Record<string, unknown>) => PromiseLike<{ error: { code?: string } | null }>;
 
@@ -113,10 +116,10 @@ export async function ghiHoSo(upsert: Upsert, userId: string, h: HoSo): Promise<
   // utc luôn gửi (null khi sinh trong nước) để đổi nơi sinh về tỉnh thì xoá múi giờ cũ.
   let hang: Record<string, unknown> = { ...day_du, utc_noi_sinh: utcHopLe(h.noi_sinh, h.utc_noi_sinh) };
   let { error } = await upsert(hang);
-  if (error && error.code !== VI_PHAM_CHECK) ({ error } = await upsert(hang = day_du));   // chưa chạy 0033
+  if (error && THIEU_COT.has(error.code ?? "")) ({ error } = await upsert(hang = day_du));   // chưa chạy 0033
   if (error?.code === VI_PHAM_CHECK) {
     if (khongBiet) ({ error } = await upsert({ ...hang, do_tin_gio: null }));      // chưa chạy 0015
-  } else if (error) {
+  } else if (error && THIEU_COT.has(error.code ?? "")) {
     ({ error } = await upsert(co_ban));                                           // chưa chạy 0007
   }
   if (error) throw new Error("Chưa lưu được vào tài khoản.");

@@ -145,7 +145,6 @@ export const NUOC_NGOAI = "nuoc_ngoai";
 export function laSoTuHoSo(h: HoSo | null | undefined): {
   birth_date: string; birth_time: string; gender: "nam" | "nu"; noi_sinh: string;
   vung?: "north" | "south"; gio_mua_he?: boolean; utc_noi_sinh?: number; do_tin_gio?: "exact" | "approx" | "unknown";
-  tinh_trang?: "doc_than" | "co_doi";
 } | null {
   if (!h?.gio || !h.gioi_tinh || !h.noi_sinh) return null;
   const nuocNgoai = h.noi_sinh === NUOC_NGOAI;
@@ -156,7 +155,6 @@ export function laSoTuHoSo(h: HoSo | null | undefined): {
     ...(nuocNgoai && h.gio_mua_he ? { gio_mua_he: true } : {}),
     ...(nuocNgoai && typeof h.utc_noi_sinh === "number" ? { utc_noi_sinh: h.utc_noi_sinh } : {}),
     ...(h.do_tin_gio ? { do_tin_gio: h.do_tin_gio } : {}),
-    ...(h.tinh_trang ? { tinh_trang: h.tinh_trang } : {}),
   };
 }
 
@@ -171,4 +169,10 @@ export function gioHienThi(h: Pick<HoSo, "gio" | "do_tin_gio"> | null | undefine
 /** "14/9 (nhuận) Mậu Thìn" — chỉ định dạng dữ liệu engine đã trả. */
 export function moTaAm(am: NonNullable<HoSo["am"]>, canChi?: string): string {
   return `${am.ngay}/${am.thang}${am.nhuan ? " nhuận" : ""}/${am.nam}${canChi ? ` (${canChi})` : ""}`;
+}
+
+/** EN-2 mục 5: tình trạng tự chọn CHỈ gửi kèm luận giải toàn bộ (báo cáo đời sống chọn lời theo hoàn cảnh) — review T3:
+ *  không gắn vào `laSoTuHoSo` (hỏi đáp, vận hạn, lưu nguyệt… không cần, không gửi thừa dữ liệu cá nhân). */
+export function kemTinhTrang<T extends object>(laSo: T | null, h: HoSo | null | undefined): T | null {
+  return laSo && h?.tinh_trang ? { ...laSo, tinh_trang: h.tinh_trang } : laSo;
 }

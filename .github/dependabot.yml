@@ -23,6 +23,7 @@ updates:
     schedule: { interval: monthly }
     ignore:
       - dependency-name: iztro   # ghim 2.6.0 — bản đã sinh golden (quyết định 2026-09-30)
+  # requirements.txt có dòng `-c constraints.txt` (khoá bản mọi gói con, EN-6) → PR nâng bản sửa cả hai tệp.
   - package-ecosystem: pip
     directory: /engine
     schedule: { interval: weekly, day: monday }

@@ -33,7 +33,7 @@ import { ghi } from "@/lib/do-luong";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
-import { gioHienThi, laSoTuHoSo, useHoSo } from "@/lib/hoso";
+import { gioHienThi, kemTinhTrang, laSoTuHoSo, useHoSo } from "@/lib/hoso";
 import { taiAnhSvg } from "@/lib/tai-anh-svg";
 import { cn } from "@/lib/utils";
 
@@ -230,7 +230,7 @@ export function TuVi() {
 
       {laSo && ls && (
         <section aria-label="Luận giải toàn bộ" className="mt-10">
-          <LuanGiaiToanBo duongDan="/api/tuvi/luan-giai" laSo={laSo} ten="lá số Tử vi" />
+          <LuanGiaiToanBo duongDan="/api/tuvi/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten="lá số Tử vi" />
           <CuoiBaiDoc moDun="tuvi" cauHoi="Lá số và phần luận giải có giúp bạn hiểu mình hơn?" />
         </section>
       )}

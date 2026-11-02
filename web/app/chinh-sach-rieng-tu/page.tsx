@@ -63,7 +63,7 @@ export default async function ChinhSachRiengTu() {
       noiDung: (
         <>
           <Bang dau={["Dữ liệu", "Khi nào", "Lưu ở đâu", "Bao lâu"]} dong={[
-            [<b key="a">Hồ sơ trên máy</b>, "Bạn nhập họ tên, ngày giờ sinh, giới tính, nơi sinh; tình trạng độc thân / có đôi nếu bạn tự chọn (chỉ để chọn lời khuyên ở chương Tình yêu, Gia đình — không lưu trên máy chủ, không đồng bộ tài khoản)", "Chỉ trong trình duyệt của bạn", "Đến khi bạn xoá hồ sơ hoặc xoá dữ liệu trình duyệt"],
+            [<b key="a">Hồ sơ trên máy</b>, "Bạn nhập họ tên, ngày giờ sinh, giới tính, nơi sinh; tình trạng độc thân / có đôi nếu bạn tự chọn (chỉ gửi kèm khi xem luận giải toàn bộ, để chọn lời khuyên ở chương Tình yêu, Gia đình; máy chủ không lưu, không đồng bộ tài khoản, không ghi vào phiếu góp ý — bài đọc bạn tự bấm Lưu thì giữ nguyên lời đã đọc)", "Chỉ trong trình duyệt của bạn", "Đến khi bạn xoá hồ sơ hoặc xoá dữ liệu trình duyệt"],
             [<b key="b">Dữ liệu gửi để tính</b>, "Mỗi lần xem bài đọc, lá số, hợp đôi", "Máy chủ tính toán xử lý trong bộ nhớ", "Không lưu — bỏ ngay sau khi trả kết quả"],
             [<b key="c">Tài khoản</b>, "Bạn đăng nhập bằng email, Google hoặc số điện thoại", "Máy chủ dữ liệu tại Singapore", "Đến khi bạn xoá tài khoản"],
             [<b key="d">Hồ sơ lưu vào tài khoản</b>, "Chỉ khi bạn bấm lưu", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được", "Đến khi bạn xoá hồ sơ hoặc tài khoản"],

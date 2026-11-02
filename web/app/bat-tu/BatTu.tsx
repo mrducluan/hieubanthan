@@ -24,7 +24,7 @@ import type { LaSoBatTu, LuuNienBatTu } from "@/lib/battu-kieu";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang } from "@/lib/hoi-mang";
-import { laSoTuHoSo, tenGoi, useHoSo } from "@/lib/hoso";
+import { kemTinhTrang, laSoTuHoSo, tenGoi, useHoSo } from "@/lib/hoso";
 import { taiAnhHtml } from "@/lib/tai-anh-html";
 import { cn } from "@/lib/utils";
 
@@ -284,7 +284,7 @@ export function BatTu() {
       {laSo && ls && (
         <section id="luan-giai" aria-label="Luận giải toàn bộ" className="mt-10 scroll-mt-24">
           <CachChinhBatTu.Provider value={{ cach: cachChinh }}>
-            <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={laSo} ten="Bát tự" />
+            <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten="Bát tự" />
           </CachChinhBatTu.Provider>
           <CuoiBaiDoc moDun="battu" cauHoi="Tứ trụ và phần luận giải có giúp bạn hiểu mình hơn?" />
         </section>

@@ -15,6 +15,8 @@ from app.hoidap import chung, hieu_cau, mo_dau
 from app.kb import phongthuy_kb as kb
 from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
+
+PT_MO_DAU = False   # EN-3b: xem chỗ dùng
 from app.narrative.ngan_sach import mo_ta_loi
 
 HUONG_KD = {"dong bac": "Đông Bắc", "dong nam": "Đông Nam", "tay bac": "Tây Bắc", "tay nam": "Tây Nam",
@@ -561,7 +563,9 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
             goi["muc"].insert(0, mn)                 # trả lời theo đúng nhà trước, kiến thức chung sau
             goi["phan_loai"]["theo_nha"] = True
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
-    if pl["xu_ly"] not in chung.DAC_BIET and not goi["phan_loai"].get("theo_nha"):   # EN-3b: đoạn mở đầu đúng điều được hỏi
+    # EN-3b: đoạn mở đầu Phong thuỷ CHƯA bật — trên holdout đóng băng trả lời thẳng lùi 72 → 68 % khi bật (đoạn mở đầu đẩy
+    # đoạn bố trí ra khỏi đoạn 1–2). Hàm `mo_dau.pt_mo` giữ lại; bật khi sửa được bằng bộ dev mà holdout không lùi.
+    if PT_MO_DAU and pl["xu_ly"] not in chung.DAC_BIET and not goi["phan_loai"].get("theo_nha"):
         van = mo_dau.dat_dau(van, mo_dau.pt_mo(goi, pl["cau_chuan_hoa"], cau_hoi), goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:

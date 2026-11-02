@@ -121,6 +121,12 @@ test.describe("lưu/đọc hồ sơ tài khoản — múi giờ nơi sinh (0033)
     expect(g.goi[1]).toMatchObject({ noi_sinh: "nuoc_ngoai", gio_sinh: "06:10" });
   });
 
+  test("lỗi không phải thiếu cột (mạng, quyền) → báo lỗi ngay, không lùi bộ cột", async () => {
+    const g = gia("08006");
+    await expect(ghiHoSo(g.upsert, "u2", NN)).rejects.toThrow("Chưa lưu được");
+    expect(g.goi).toHaveLength(1);
+  });
+
   test("chưa chạy 0015 nhưng đã chạy 0033 → thử lại vẫn giữ múi giờ", async () => {
     const g = gia("23514");
     await ghiHoSo(g.upsert, "u2", { ...NN, do_tin_gio: "unknown" });
