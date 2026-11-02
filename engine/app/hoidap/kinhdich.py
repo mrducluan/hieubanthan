@@ -17,7 +17,7 @@ import unicodedata
 
 from app.calc import kinhdich, kinhdich_maihoa as mh, luc_hao as lh, vuong_suy as vs
 from app.calc.kinhdich_vendor import CHI_NH, KHAC, SINH
-from app.hoidap import chung, hieu_cau
+from app.hoidap import chung, hieu_cau, mo_dau
 from app.kb import kinhdich_kb as kb
 from app.luangiai import kinhdich_doi_song as kd_ds, truc_quan
 from app.narrative import hoi_van
@@ -489,7 +489,17 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
                               "xem thế của việc ở lúc gieo, không chấm riêng từng tháng hay từng năm — nếu đang cân "
                               "hai mốc, chọn mốc bạn chuẩn bị kịp hơn."})
         chung.ket(goi)
+    doc_que = None
+    if que is not None and can_que:
+        pt = None
+        try:
+            pt = lh.phan_tich(que, tg, pl["dung_than"] or cd.get("dung_than") or "Ứng", luc)
+        except Exception:  # noqa: BLE001 — góc nhìn phụ, không làm vỡ câu trả lời
+            pt = None
+        doc_que = kd_ds.doc_que(que, pl, goi, mai_hoa=mai_hoa, luc_hao=pt, thoi_diem=luc, chu_de=ma_cd)
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
+    if doc_que is not None and pl["xu_ly"] not in chung.DAC_BIET:     # EN-3b: đoạn mở đầu trả lời đúng điều được hỏi
+        van = mo_dau.dat_dau(van, mo_dau.que_mo(doc_que, pl["cau_chuan_hoa"], cau_hoi, moc), goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:
@@ -504,14 +514,6 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
     if pl["truong_phai"] and pl["loai"] != "doc_que_da_co":
         co.append({"loai": "khong_gieo_lai", "chi_tiet": kb.mau("gieo_lai")})
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    doc_que = None
-    if que is not None and can_que:
-        pt = None
-        try:
-            pt = lh.phan_tich(que, tg, pl["dung_than"] or cd.get("dung_than") or "Ứng", luc)
-        except Exception:  # noqa: BLE001 — góc nhìn phụ, không làm vỡ câu trả lời
-            pt = None
-        doc_que = kd_ds.doc_que(que, pl, goi, mai_hoa=mai_hoa, luc_hao=pt, thoi_diem=luc, chu_de=ma_cd)
     return {"phan_loai": goi["phan_loai"], "que": que, "mai_hoa": mai_hoa, "bang_chung": goi,
             "cau_tra_loi": van, "che_do_van": che_do_van, "loi_kiem_tra": loi,
             "can_them": goi["can_them"], "co_canh_bao": co,
