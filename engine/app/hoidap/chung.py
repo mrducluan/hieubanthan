@@ -45,7 +45,7 @@ TU_CHOI_HH_TAT_CA = [m for ds in _h.TU_CHOI.values() for m in ds if m not in _BO
 TAM_LINH = [
     # "căn" và "cần" cùng bỏ dấu thành "can" → chỉ bắt "nặng căn", "nhiều căn", "căn đồng/cô/cậu/quan/tu".
     r"(?<!\w)vong (theo|nhap|vao|goi|am|linh|hon)", r"co vong", r"can dong", r"(?<!\w)(nang|nhieu) can(?!\w)",
-    r"(co|la|phai) can (co|cau|quan|tu|ong|nang)(?!\w)", r"trinh dong", r"mo phu", r"(co|thay|nhin thay|la|hay co) ma (khong|ko|k)(?!\w)",
+    r"(co|la|phai) can (co|cau|quan|tu|ong|nang)(?!\w)", r"trinh dong", r"mo phu", r"(co|thay|nhin thay|la|hay co|phai|bi) ma (khong|ko|k)(?!\w)",
     r"(co|thay|hay la|la) ma$", r"nhin thay ma", r"bong de", r"(bo|yem|giai|chon|dinh|bi) bua", r"bua ngai", r"(?<!\w)ngai nap",
     r"trung tang", r"duyen am", r"tien kiep", r"nghiep (nang|chuong|bao)", r"tran trach", r"am binh",
     r"(moi|nho) thay (ve|cung|giai|xem|tran)", r"(di xem|xem|tim|gap) thay (bua|boi|giai|tran|cung sao|cung giai)", r"thay (ve )?(giai bua|tran trach|cung giai)", r"goi hon", r"ap vong", r"vong nhap", r"nhap hon",

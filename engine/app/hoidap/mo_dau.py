@@ -155,9 +155,13 @@ def cac_dieu_hoi(t: str, raw: str | None = None) -> list[dict]:
         # câu, rồi vế (dấu phẩy / chấm phẩy): "Mình đang làm kinh doanh, tôi có số xuất ngoại không?" — vế mở đầu là
         # hoàn cảnh, điều được hỏi ở vế sau.
         cau_ = [chuan_hoa_cau(c) for c in re.split(r"(?<=[.!?])\s+|\n+|[,;]\s*", raw.strip()) if c.strip()]
-        cau_ = [c for c in cau_ if not _HOAN_CANH.match(c)]          # vế giới thiệu bản thân không phải điều được hỏi
-        if len(cau_) >= 1:
-            for c in reversed(cau_):
+        loc = [c for c in cau_ if not _HOAN_CANH.match(c)]          # vế giới thiệu bản thân không phải điều được hỏi
+        # EN-3c (review): "Tôi đang tính đổi việc, có nên không?" — vế sau chỉ là đuôi hỏi, điều được hỏi nằm ở vế "giới
+        # thiệu" → khi các vế còn lại không nhận ra điều gì mà vế cuối là đuôi hỏi trơn, xét cả vế hoàn cảnh.
+        if loc and not any(_cac(c) for c in loc) and _DUOI_HOI.match(loc[-1]):
+            loc = cau_
+        if len(loc) >= 1:
+            for c in reversed(loc):
                 ds = _cac(c)
                 if ds:
                     return ds
@@ -167,6 +171,8 @@ def cac_dieu_hoi(t: str, raw: str | None = None) -> list[dict]:
 
 # Vế giới thiệu hoàn cảnh ("Mình 24 tuổi mới đi làm", "Em là mẹ bỉm hai con", "Tôi năm nay 52 tuổi") — không mang
 # điều được hỏi.
+# Đuôi hỏi trơn, không tự mang điều được hỏi ("có nên không", "được không ạ", "thế nào").
+_DUOI_HOI = re.compile(r"^(co |thi )?(nen|duoc|on|hop|tot|sao)?( (khong|ko|k|chua|a|nhi|the nao|ra sao))*\s*(a|nhe|nhi)?\s*$")
 _HOAN_CANH = re.compile(r"^(toi|minh|em|tui|chau|con)( (la|dang|moi|vua|nam nay|sinh|hoc|da|\d+ tuoi|nu|nam)\b)|^\d+ tuoi")
 
 
@@ -305,10 +311,35 @@ def dat_dau(van: str, mo: str | None, goi: dict | None = None) -> str:
     return "\n\n".join([mo, *than, *sau, *chan])
 
 
+# ---------------------------------------------------------------- câu không dựng đoạn mở đầu
+# EN-3c (review độc lập): câu khủng hoảng quan hệ (ngoại tình, ly hôn, bạo hành…) — đoạn mở đầu nêu "mảng tình cảm ở mức
+# thuận lợi" hay một việc vặt là lệch chủ đề, vô cảm. Không dựng đoạn mở đầu; phần thân giữ nguyên thứ tự cũ.
+KHUNG_HOANG_QH = [r"ngoai tinh", r"ly (hon|di|than)", r"phan boi", r"bao (hanh|luc)", r"danh dap", r"(?<!\w)co bo",
+                  r"(chong|vo|nguoi yeu|anh ay|co ay) (danh|bo roi|bo di|bo|lua doi|phan boi)( toi| em| minh)?(?!\w)",
+                  r"(bi|dang bi) (danh|xam hai|hanh ha)", r"(?<!\w)cam sung", r"nguoi thu ba", r"(?<!\w)tieu tam"]
+
+
+DONG_CAM_QH = ("Chuyện bạn đang trải qua rất nặng lòng. Không lá số, quẻ hay con số nào quyết thay bạn việc giữ hay buông; "
+               "phần dưới chỉ gợi một cách nhìn để bạn tự cân nhắc. Nếu có bạo lực hoặc bạn thấy không an toàn, hãy ưu tiên "
+               "an toàn của mình và tìm một người tin cậy để cùng tính.")
+
+
+def khong_mo(t: str) -> bool:
+    return _co(t, KHUNG_HOANG_QH)
+
+
 # ---------------------------------------------------------------- lời cố định của đoạn mở đầu
 KHONG_QUYET = "Lá số không quyết thay bạn; nó cho biết nhịp để bạn chọn cách làm và lúc làm."
 KHONG_QUYET_QUE = "Quẻ không quyết thay bạn; nó cho biết thế của việc lúc này để bạn chọn cách làm."
 KHONG_QUYET_SO = "Con số không quyết thay bạn; nó cho biết nhịp và điểm mạnh để bạn chọn cách làm."
+# EN-3c: điều được hỏi là đầu tư → ranh giới tài chính ngay trong đoạn mở đầu (một nguồn với báo cáo đời sống).
+KHONG_DAU_TU = "Đây không phải lời khuyên đầu tư; mua bán, vay, góp vốn hãy tính bằng con số thật."
+_DAU_TU = [r"(?<!bat )dau tu", r"chung khoan", r"co phieu", r"\bcoin\b", r"tien ao", r"crypto", r"(mua|ban|tich|luot) vang",
+           r"vang (mieng|nhan|sjc)", r"gui tiet kiem", r"luot song", r"gop von"]
+
+
+def hoi_dau_tu(t: str, dieu: dict | None = None) -> bool:
+    return (dieu or {}).get("ma") == "dau_tu" or _co(t, _DAU_TU)
 
 
 def la_quyet_dinh(t: str) -> bool:
@@ -319,6 +350,21 @@ def la_quyet_dinh(t: str) -> bool:
 
 # ---------------------------------------------------------------- Tử vi · Bát tự (mức chương đời sống, mức từng năm)
 _NGUON = {"tuvi": "trên lá số", "battu": "theo tứ trụ"}
+
+
+# EN-3c: chương "Gia đình" gộp cha mẹ, anh em, con cái — việc nên làm phải lấy từ hộp đúng người được hỏi (mã kiểm chứng
+# `ma_mau` mang cung Tử vi / nhóm thập thần Bát tự); không có hộp khớp → không nêu "Việc nên làm" (không mượn hộp người khác).
+_HOP_KHOP = {"con_cai": ("tu_nu", ".thuc", "thuc_", ".thuong", "thuong_", ".con", "con_", "gio"),
+             "bo_me": ("phu_mau", ".an", "an_", "nam_thang", ".me", ".cha"),
+             "anh_em": ("huynh_de", "ty_kiep", ".kiep", "kiep_", ".ty", "ty_")}
+
+
+def _hop_khop(ds: dict, dieu: dict | None) -> dict:
+    """`ds` chỉ giữ các hộp khớp điều được hỏi khi điều đó là một người trong chương gia đình."""
+    khoa = _HOP_KHOP.get((dieu or {}).get("ma") or "")
+    if not khoa or ds.get("chuong") != "gia_dinh":
+        return ds
+    return {**ds, "hop": [h for h in ds.get("hop") or [] if any(k in (h.get("ma_mau") or "") for k in khoa)]}
 
 
 def _viec_hop(ds: dict) -> str:
@@ -373,10 +419,13 @@ def _ngu_hanh_cau(muc: list[dict]) -> tuple[str, str]:
         s += {"nhược": f"; sức tự thân yếu ({ten_nc}thân nhược)", "vượng": f"; sức tự thân mạnh ({ten_nc}thân vượng)"}.get(
             kl, f"; sức tự thân {kl}")
     th = next((m for m in muc if m.get("loai") == "hanh" and m.get("vai") == "thieu"), None)
-    viec = ""
+    # EN-3c (review): ứng dụng dân gian (màu, hướng, nghề) chỉ là tham khảo — KHÔNG thành "Việc nên làm: bù hành X" (dụng
+    # thần luôn trình bày hai cách, hệ thống không tự chọn hành cần bù).
+    tk = ""
     if th and th.get("ung_dung"):
-        viec = f"bù hành {th['hanh']} bằng những thứ dân gian gắn với nó — {bo_dau_cham(th['ung_dung'])}"
-    return s, viec
+        tk = (f"dân gian gắn hành {th['hanh']} với {thuong(bo_dau_cham(th['ung_dung']))} — chỉ để tham khảo; nên bù hành "
+              f"nào còn tuỳ cách lấy dụng thần, hai cách được trình bày bên dưới")
+    return s, tk
 
 
 def _dai_van_cau(muc: list[dict]) -> str:
@@ -434,18 +483,26 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
     ds = next((m for m in muc if m.get("loai") == "doi_song" and m.get("nhan_muc")), None)
     sn = next((m for m in muc if m.get("loai") == "so_nam" and m.get("nam")), None)
     cs = next((m for m in muc if m.get("loai") == "cua_so"), None)
-    nh_cau, nh_viec = _ngu_hanh_cau(muc) if (mon == "battu" and pl.get("chu_de") == "ngu_hanh") else ("", "")
+    if khong_mo(t):
+        return DONG_CAM_QH                          # câu trung tính, đồng cảm — không nêu mức, không "việc nên làm"
+    nh_cau, nh_tk = _ngu_hanh_cau(muc) if (mon == "battu" and pl.get("chu_de") == "ngu_hanh") else ("", "")
     dv_cau = _dai_van_cau(muc) if (mon == "battu" and pl.get("loai") == "van" and re.search(r"dai van|\bvan\b", t)) else ""
     if ds and sn and ds.get("chuong") in ("nam_nay", "cuoc_doi"):
         ds = None                                   # "năm nay" của báo cáo không phải năm được hỏi
+    if ds and dv_cau and ds.get("chuong") == "nam_nay" and not _co(t, [r"nam (nay|sau|toi)", r"luu nien", r"nam \d{4}"]):
+        ds = None                                   # EN-3c: hỏi giai đoạn mười năm — mức "năm nay" không phải điều được hỏi
     th_moc, th_cau, th_viec = _thang_cau(muc) if mon == "tuvi" else (None, "", "")
     if not (ds or sn or cs or nh_cau or dv_cau or th_cau):
         return None
     dieu = dieu_hoi(t, raw, (ds or {}).get("chuong"))
+    if ds:
+        ds = _hop_khop(ds, dieu)
     nguon = _NGUON.get(mon, "trên lá số")
     moc, phan = None, []
     if nh_cau:
         phan.append(nh_cau)
+    if nh_tk:
+        phan.append(nh_tk)
     if dv_cau:
         phan.append(dv_cau)
     if th_cau:
@@ -473,12 +530,14 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
         phan.append(muc_cau)
         if ly:
             phan.append(ly)
-    v = nh_viec or th_viec or (_viec_hop(ds) if ds else "")
+    v = th_viec or (_viec_hop(ds) if ds else "")
     if v:
         phan.append("Việc nên làm: " + thuong(v))
     if ds and ds.get("chuong") == "suc_khoe" or (dieu or {}).get("mang") == "suc_khoe":
         from app.kb import tuvi_doi_song_kb as _kbds  # noqa: PLC0415
         phan.append(_kbds.suc_khoe_chung())          # câu miễn trừ cố định (một nguồn với báo cáo đời sống)
+    if hoi_dau_tu(t, dieu):
+        phan.append(KHONG_DAU_TU)
     if la_quyet_dinh(t):
         phan.append(KHONG_QUYET)
     if dieu and ds and chuong_cua(dieu) and chuong_cua(dieu) != ds.get("chuong") and not (sn or th_cau or cs):
@@ -500,6 +559,8 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
 def que_mo(dq: dict | None, t: str, raw: str | None = None, moc: str | None = None) -> str | None:
     """Điều được hỏi + mức quẻ (theo phái đang đọc) + nghĩa của mức + hình ảnh quẻ + việc đầu của nhóm việc đúng mức.
     Mọi chữ lấy từ `doc_que` (KB `kinhdich_doi_song` + "Hiểu đơn giản" của quẻ)."""
+    if khong_mo(t):
+        return DONG_CAM_QH
     if not dq or not dq.get("nhan_muc"):
         return None
     from app.luangiai import kinhdich_doi_song as kd  # noqa: PLC0415
@@ -524,6 +585,8 @@ def que_mo(dq: dict | None, t: str, raw: str | None = None, moc: str | None = No
     if moc:
         phan.append("Kinh Dịch xem thế của việc ở lúc gieo, không chấm riêng từng tháng hay từng năm — nếu đang cân "
                     "hai mốc, chọn mốc bạn chuẩn bị kịp hơn")
+    if hoi_dau_tu(t, dieu):
+        phan.append(KHONG_DAU_TU)
     if la_quyet_dinh(t):
         phan.append(KHONG_QUYET_QUE)
     dau = dau_cau(dieu, ten_cd, f"vào {moc}" if moc else None)
@@ -616,6 +679,8 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
             or pl.get("doi_tuong") not in (None, "ban_than") or pl.get("linh_vuc") in ("ky_thuat", "hop_doi") \
             or goi.get("thu_tu_co_dinh"):            # câu bấm từ bảng nỗi đau: đã trả lời đúng chỉ số của thẻ
         return None
+    if khong_mo(t):
+        return DONG_CAM_QH
     from app.hoidap import hieu_cau  # noqa: PLC0415
     if hieu_cau.kieu(t) == "kien_thuc" or _co(t, [r"(?<!\w)(nguoi )?so (chu dao |duong doi )?\d{1,2}(?!\d)"]):
         return None                      # câu kiến thức / câu về MỘT con số được nêu tên: phần dưới đã trả lời thẳng
@@ -630,6 +695,8 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
             x = tg[0]
             moc = f"tháng {x['thang']}/{x['nam']}" if x.get("thang") else f"năm {x['nam']}"
         phan += ba
+        if hoi_dau_tu(t, dieu):
+            phan.append(KHONG_DAU_TU)
         if la_quyet_dinh(t):
             phan.append(KHONG_QUYET_SO)
         return f"{dau_cau(dieu, _TEN_LV.get(pl.get('linh_vuc') or '', 'con số của bạn'), moc)}: {ghep(*phan)}"
@@ -659,6 +726,8 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
                  ("Việc nên làm: " + thuong(bo_dau_cham(viec))) if viec else ""]
     if (dieu or {}).get("mang") == "suc_khoe":
         phan.append("Lời này không thay lời bác sĩ hay chuyên gia tâm lý")      # câu cố định của thần số
+    if hoi_dau_tu(t, dieu):
+        phan.append(KHONG_DAU_TU)
     if la_quyet_dinh(t):
         phan.append(KHONG_QUYET_SO)
     dau = dau_cau(dieu, _TEN_LV.get(pl.get("linh_vuc") or "", "con số của bạn"), moc)

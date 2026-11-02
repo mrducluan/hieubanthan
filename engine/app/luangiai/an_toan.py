@@ -101,6 +101,11 @@ KHUNG_HOANG: list[tuple[str, str | None]] = [
     (r"danh (toi|em) (gay|chay mau|tim|bam)", r"đánh (tôi|em) (gãy|chảy máu|tím|bầm)"),
     # biến cố dồn dập (giữ từ bản cũ)
     (r"bi lua het tien|no nan chong chat", r"bị lừa hết tiền|nợ nần chồng chất"),
+    # EN-3c (review độc lập): kể mình (hay người thân) ĐANG bị trầm cảm → lời hỗ trợ, không phải câu từ chối "ngoài phạm
+    # vi". Câu hỏi thuốc ("dừng thuốc chống trầm cảm") vẫn ở nhóm từ chối bên dưới.
+    # Câu hỏi chẩn đoán "có bị trầm cảm không" vẫn là từ chối (MT-ĐS) → loại khi theo sau là đuôi hỏi.
+    (r"(?<!co )(bi|mac|dang bi|dang|toi|em|minh|to|tui) (benh )?tram cam(?! (la|co phai|khac|va|khong|ko|k|chua|hay khong))",
+     r"(?<!có )(bị|mắc|đang bị|đang|tôi|em|mình|tớ|tui) (bệnh )?trầm cảm(?! (là|có phải|khác|và|không|ko|k|chưa|hay không))"),
     (r"(me|bo|con|chong|vo|ong|ba|anh|chi|em) (toi |minh |em )?vua mat(?! viec| tien| tich| ngu| dien| nuoc)",
      r"(mẹ|bố|con|chồng|vợ|ông|bà|anh|chị|em) (tôi |mình |em )?vừa mất(?! việc| tiền| tích| ngủ| điện| nước)"),
 ]
@@ -142,12 +147,15 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
     (r"bao gio (thi )?(toi|em|bo toi|me toi|ong toi|ba toi|chong toi|vo toi|bo|me)? ?(chet|qua doi)",
      r"bao giờ (thì )?(tôi|em|bố tôi|mẹ tôi|ông tôi|bà tôi|chồng tôi|vợ tôi|bố|mẹ|ba tôi)? ?(chết|qua đời|mất)"
      r"(?! (việc|tiền|ngủ|điện|nước|lòng|giá|mạng|sóng|hút))", "du_doan_cu_the"),
+    # EN-3c: "tôi chết năm nào", "qua đời vào tuổi bao nhiêu" (đảo trật tự của các mẫu trên)
+    (r"(chet|qua doi) (vao )?(nam|thang|ngay|luc|tuoi) (nao|may|bao nhieu)",
+     r"(chết|qua đời) (vào )?(năm|tháng|ngày|lúc|tuổi) (nào|mấy|bao nhiêu)", "du_doan_cu_the"),
     (r"(co|con) qua khoi (khong|ko|duoc)|song (duoc )?(qua|den het) nam nay|con bao lau|song (duoc )?(den )?bao nhieu tuoi",
      r"(có|còn) qua khỏi (không|ko|được)|sống (được )?(qua|đến hết) năm nay|còn bao lâu|sống (được )?(đến )?bao nhiêu tuổi",
      "du_doan_cu_the"),
     (r"(so|con so|xin so) (de|lo)(?! an| xuat)|lo de|danh de(?! an| xuat| nghi| tai| cu)|xo so|ve so|trung so|ca do|ca cuoc"
-     r"|danh lo|so chot|danh con (gi|so)", r"(số|con số|xin số) (đề|lô)(?! án| xuất)|lô đề|đánh đề(?! án| xuất| nghị| tài| cử)|xổ số|vé số|trúng số|cá độ|cá cược"
-     r"|đánh lô|số chốt|đánh con (gì|số)", "may_rui"),
+     r"|danh lo|so chot|danh con (gi|so)|(xem|soi|bat|cho) de (hom nay|ngay mai|toi nay|mien)|(?<!\w)de .{0,15}(ve|ra) con (gi|nao|so)", r"(số|con số|xin số) (đề|lô)(?! án| xuất)|lô đề|đánh đề(?! án| xuất| nghị| tài| cử)|xổ số|vé số|trúng số|cá độ|cá cược"
+     r"|đánh lô|số chốt|đánh con (gì|số)|(xem|soi|bắt|cho) đề (hôm nay|ngày mai|tối nay|miền)|(?<!\w)đề .{0,15}(về|ra) con (gì|nào|số)", "may_rui"),
     (r"(gap|bi) tai nan (chet|nang|mat mang)|tai nan chet nguoi", r"(gặp|bị) tai nạn (chết|nặng|mất mạng)|tai nạn chết người",
      "du_doan_cu_the"),
 ]

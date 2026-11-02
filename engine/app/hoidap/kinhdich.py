@@ -42,14 +42,25 @@ QUYET_DINH = [r"co nen", r"nen .* hay", r"nen lam gi", r"nen ung xu", r"nen xu l
               r"xin mot que", r"dinh huong", r"nen the nao", r"nen chon", r"nen tra", r"nen noi",
               r"nen hieu the nao"]
 # EN-3: lĩnh vực dự phòng khi cả từ khoá chung lẫn 20 chủ đề đời sống đều không bắt (thứ tự = ưu tiên).
-LV_DU_PHONG = [("tien_bac", [r"chung khoan", r"co phieu", r"\bcoin\b", r"crypto", r"dau tu", r"\bvay\b", r"rut von",
+LV_DU_PHONG = [("tien_bac", [r"hun von", r"mo xuong", r"chung khoan", r"co phieu", r"\bcoin\b", r"crypto", r"dau tu", r"\bvay\b", r"rut von",
                              r"cat lo", r"(mieng|manh|lo) dat", r"mua dat", r"gui tiet kiem", r"\blai suat\b"]),
-               ("cong_viec", [r"du an", r"nghi viec", r"bo viec", r"nghi phep", r"xin viec", r"\bluong\b", r"cong ty",
+               ("cong_viec", [r"chuyen cong tac", r"du an", r"nghi viec", r"bo viec", r"nghi phep", r"xin viec", r"\bluong\b", r"cong ty",
                               r"\bsep\b", r"khach hang", r"cua hang", r"mo quan", r"kinh doanh"]),
-               ("tinh_cam", [r"nguoi (phu hop|hop voi|danh cho)", r"gap duoc nguoi", r"hen ho", r"qua mang", r"tinh yeu"]),
+               ("tinh_cam", [r"that long", r"dang tim hieu", r"nguoi (phu hop|hop voi|danh cho)", r"gap duoc nguoi", r"hen ho", r"qua mang", r"tinh yeu"]),
                ("hoc_hanh", [r"\bhoc\b", r"\bthi\b", r"van bang", r"du hoc"])]
 KY_THUAT = [r"la gi", r"nghia la gi", r"co y nghia gi", r"khac .* the nao", r"tai sao", r"vi sao",
             r"doc the nao", r"the nao cho dung", r"khac gi"]
+
+# EN-3c: thuật ngữ Kinh Dịch — câu "X khác Y thế nào / là gì" có thuật ngữ này là câu kiến thức (không gieo quẻ).
+THUAT_NGU = [r"que (bien|ho|chu|ban|thuan)", r"hao (dong|bien|the|ung|tinh)", r"luc hao", r"mai hoa", r"dung than", r"the dung",
+             r"(?<!\w)the ung", r"luc than", r"luc thu", r"phuc than", r"nguyet pha", r"tuan khong", r"bat quai", r"tien thien",
+             r"hau thien", r"kinh dich", r"thoan tu", r"hao tu"]
+
+
+def td_kd(t: str) -> bool:
+    """Câu có lời nhờ quyết định / dự đoán (không phải câu kiến thức thuần)."""
+    return chung.co(t, QUYET_DINH + DU_DOAN)
+
 
 # (dụng thần, mẫu) — thứ tự ưu tiên: người cụ thể → tiền → giấy tờ → công danh → khác.
 DUNG_THAN = [
@@ -146,8 +157,21 @@ def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
     # EN-3: chủ đề đời sống (KB 20 chủ đề, từ khoá nhiều chữ — cùng bộ chọn dụng thần) cụ thể hơn từ khoá lĩnh vực chung
     # ("bán nhà" là chuyện tiền, không phải chuyện gia đình) → có chủ đề thì lĩnh vực theo chủ đề; không có thì giữ cũ.
     from app.luangiai import kinhdich_doi_song as _kd  # noqa: PLC0415
-    kq["linh_vuc"] = (_kd.kb.chu_de(_kd.chu_de_tu_cau(t)) or {}).get("linh_vuc") or kq["linh_vuc"] \
-        or next((lv for lv, mau in LV_DU_PHONG if chung.co(t, mau)), None)
+    cd = "khac"
+    cac = [c for c in re.split(r"(?<=[.!?])\s+", cau_hoi.strip()) if c.strip()]
+    if len(cac) >= 2:               # EN-3c: câu kể chuyện — chủ đề lấy từ câu hỏi cuối, ngược lên khi câu cuối chung chung
+        cac = [c for c in cac if c.rstrip().endswith("?")][::-1] + [c for c in cac if not c.rstrip().endswith("?")][::-1]
+        for c in cac:
+            cd = _kd.chu_de_tu_cau(chung.chuan_hoa_cau(c))
+            if cd != "khac":
+                break
+    if cd == "khac":
+        cd = _kd.chu_de_tu_cau(t)
+    lv_cd = (_kd.kb.chu_de(cd) or {}).get("linh_vuc")
+    if cd in ("ban_be", "giay_to", "tranh_chap") and kq["linh_vuc"] == "tien_bac":
+        lv_cd = None        # EN-3c: "cho bạn thân mượn tiền", "hồ sơ vay", "kiện đòi tiền" — người / thủ tục chỉ là
+        #                     khung, việc chính là tiền
+    kq["linh_vuc"] = lv_cd or kq["linh_vuc"] or next((lv for lv, mau in LV_DU_PHONG if chung.co(t, mau)), None)
     # Đã nêu tên quẻ + hỏi chuyện cần quyết → đọc chính quẻ đó (người hỏi đã có quẻ), không gieo quẻ khác.
     if kq["que_nhac"] and (re.search(r"gieo duoc|duoc que|ra que", t) or chung.co(t, QUYET_DINH + DU_DOAN)):
         kq.update(loai="doc_que_da_co", truong_phai="nghia_ly")
@@ -159,6 +183,9 @@ def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
     if kq["giai_thich"] or tra:
         kq["loai"] = "ky_thuat"
         return kq
+    if not td_kd(t) and chung.co(t, KY_THUAT) and chung.co(t, THUAT_NGU) and not chung.co(t, [r"\btoi\b", r"\bminh\b", r"\bem\b"]):
+        kq["loai"] = "ky_thuat"      # EN-3c: "Quẻ biến khác quẻ hỗ thế nào" — câu kiến thức về thuật ngữ, không gieo quẻ
+        return kq
     if td := hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "kinhdich"):
         kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển, không gieo quẻ
         return kq
@@ -168,6 +195,8 @@ def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
         loai, phai = "quyet_dinh", "nghia_ly"
     elif chung.co(t, DU_DOAN):
         loai, phai = "du_doan", "luc_hao"
+    elif chung.co(t, [r"(?<!\w)co (?!nen\b).{1,50}(khong|ko|k|chua)\W*$"]):
+        loai, phai = "du_doan", "luc_hao"   # EN-3c: câu có/không về kết quả, không hỏi nên làm ("có quay lại với tôi không")
     else:
         loai, phai = "quyet_dinh", "nghia_ly"
     if che_do == "nghia_ly":

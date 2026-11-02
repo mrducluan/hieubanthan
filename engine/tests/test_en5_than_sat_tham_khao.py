@@ -139,6 +139,10 @@ def test_khong_bat_nham(cau):
     ("Học đường của con tôi có ổn không", False),
     ("Lá số tôi có sao Học Đường không?", True),
     ("Thần sát Học Đường trong lá số của tôi nghĩa là gì?", True),
+    # EN-3c (review độc lập): không dấu cũng không bắt nhầm trường học; có dấu không lùi khi nêu lá số / trụ
+    ("con toi co hoc duong tot khong", False),
+    ("Bát tự tôi có Học Đường không", True),
+    ("Học Đường của tôi ở trụ nào", True),
 ])
 def test_dinh_tuyen_hoc_duong_khong_bat_nham_cau_doi_thuong(cau, la_than_sat):
     """Review V5: "học đường" là chữ thường (trường học) — chỉ hiểu là thần sát khi câu nói rõ sao / thần sát / lá số."""
