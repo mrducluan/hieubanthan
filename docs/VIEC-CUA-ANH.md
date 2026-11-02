@@ -14,7 +14,7 @@ mỗi lượt xem trang sinh 40–100 lượt chạy hàm vì Next.js tải trư
 
 - [ ] **Xem chỉ số nào vượt**: vercel.com → chọn team → tab **Usage** → chụp màn hình gửi em (thường là Function
       Invocations / Active CPU / Fast Origin Transfer / Edge Requests). Em đối chiếu với con số đo được.
-- [ ] **Mở lại site** — chọn một:
+- [x] **Mở lại site** — anh đã nâng lên Pro (2026-11-02), site chạy lại. Chọn một:
   - **(Nên chọn) Nâng lên Pro** (Settings → Billing → Upgrade; khoảng 20 USD/tháng mỗi thành viên, giá xem trên trang Vercel lúc
     nâng). Site mở lại ngay. Gói Hobby theo điều khoản Vercel chỉ cho dùng **cá nhân, phi thương mại** — hieuban.com có
     bán Sao / thanh toán payOS nên thuộc diện phải dùng Pro (cũng đúng lộ trình GĐ2 trong CLAUDE.md).
