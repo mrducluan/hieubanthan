@@ -1,7 +1,7 @@
 // Thư viện kiến thức (hub SEO/GEO) — liên kết nội bộ tới mọi chủ đề.
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CHU_DE, TEN_MANG_SILO, THU_TU_TRU, dsCumTru, mucLuc } from "@/lib/kien-thuc";

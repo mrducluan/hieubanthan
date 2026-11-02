@@ -2,7 +2,7 @@
 // (bài CMS thắng khi trùng slug; mọi link giữ dạng /blog/{slug}). Chip chuyên mục dẫn tới /blog/chuyen-muc/{slug}.
 // SEO-K: phân trang 24 bài/trang — trang 1 ở /blog, trang sau ở /blog/trang/{n}.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ChipChuyenMuc, chuyenMucCoBai, LuoiBai } from "@/components/blog/LuoiBai";

@@ -1,6 +1,6 @@
 // TDG-1 — "Hướng xấu theo năm": năm âm hiện tại (dựng ở máy chủ) + link năm sau.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { BangHanNam } from "@/components/tuoi/KetQuaTuoi";

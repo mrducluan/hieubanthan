@@ -2,7 +2,7 @@
 // NHIP-1 — "Nhịp của bạn" ở /ban-than (khâu QUAY LẠI): tháng này, tháng tới, năm cá nhân còn bao nhiêu ngày, năm tới.
 // Mọi con số + chủ đề do engine trả (/api/thanso/nhip); web chỉ vẽ. Gợi chủ đề để tự soi, không dự báo.
 import { useEffect } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, CalendarRange } from "lucide-react";
 import type { HoSo } from "@/lib/hoso";
 import { useNhip, type NhipNam, type NhipThang } from "@/lib/nhip";

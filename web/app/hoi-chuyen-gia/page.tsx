@@ -4,7 +4,7 @@
 // /api/chuyen-gia/thong-tin kèm token để biết lần đầu / hội viên — phần giới thiệu, cách hoạt động, giá nằm trong
 // HoiChuyenGia để hiện theo đúng trạng thái đó.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CHUYEN_GIA, duongChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
 import { thongTinChuyenGia } from "@/lib/chuyen-gia-may-chu";

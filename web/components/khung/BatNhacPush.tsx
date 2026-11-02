@@ -3,7 +3,7 @@
 // đăng nhập (để xoá được). Không tự hỏi quyền khi mở trang — chỉ khi người dùng bấm. iPhone: hướng dẫn 2 bước
 // "Thêm vào màn hình chính". Mỗi ngày tối đa 1 thông báo, chỉ cho mốc người dùng tự đánh dấu.
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { BellOff, BellRing, Share } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { useNguoiDung } from "@/lib/tai-khoan";

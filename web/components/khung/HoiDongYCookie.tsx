@@ -1,6 +1,6 @@
 "use client";
 // Hộp hỏi đồng ý cookie đo lường (chỉ hiện khi có cài GTM/GA). Không có ô tích sẵn; "Từ chối" ngang hàng "Đồng ý".
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useState } from "react";
 import { Cookie } from "lucide-react";
 import { Button } from "@/components/ui/button";

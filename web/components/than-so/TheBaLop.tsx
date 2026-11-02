@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { motion, AnimatePresence } from "motion/react";
 import type { ViTriLuanGiai } from "@/lib/engine";
 import { TEN_VI_TRI } from "@/lib/bai-doc";

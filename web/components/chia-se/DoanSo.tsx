@@ -3,7 +3,7 @@
 // nằm trong mã đã ký), lật thẻ ra đáp án + lời giải nhỏ (từ khoá engine), đúng thì sao lấp lánh, rồi mời tự xem bản đồ
 // của mình (?tu= đo referral). Không lưu gì; chỉ đo guess_played{dung, bien_the}.
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Eye } from "lucide-react";
 import { QuaNguoiNhan } from "@/components/sao/QuaNguoiNhan";

@@ -5,7 +5,7 @@
 // ở góc phải mở toàn bộ menu (kể cả menu con và mục không có ở tab dưới, vd Blog).
 // Bốn trung tâm Bản thân · Hợp đôi · Huyền học · Tài khoản là "nhà" dễ nhận ra (docs/THIET-KE-UI.md §5) — mặc định giữ.
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { usePathname } from "next/navigation";
 import {
   BookOpen, CalendarDays, ChevronDown, Compass, HeartHandshake, Menu, Newspaper, Sparkles, Star, UserRound,

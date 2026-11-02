@@ -1,6 +1,6 @@
 // /ung-ho — ủng hộ nhà phát triển (quà tặng tự nguyện). Địa chỉ ví / tài khoản đọc từ env máy chủ (lib/ung-ho.ts).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { HeartHandshake, Landmark, Wallet } from "lucide-react";
 import { NutChep } from "@/components/ung-ho/NutChep";
 import { KhoiCms } from "@/components/cms/KhoiCms";

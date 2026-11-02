@@ -1,6 +1,6 @@
 // SEO-F → SEO-K — mục lục 46 trang "tuổi X hợp hướng nào" (1960–2005, mỗi trang cả nam và nữ), nhóm theo thập niên.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { dsTuoiHuong, duongTuoi } from "@/lib/kien-thuc";
 import { goiLd, ldDuongDan, metaTrang, urlDayDu } from "@/lib/seo";

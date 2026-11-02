@@ -2,7 +2,7 @@
 // SAO-CG — danh sách câu hỏi chuyên gia của chính mình (/api/chuyen-gia/cua-toi, kèm access token). Hạn trả lời ghi TRUNG TÍNH
 // ("còn khoảng N giờ"), không đếm ngược giục. Đánh giá 1–5 sau khi có trả lời; huỷ khi còn chờ thanh toán.
 import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2, Clock, Loader2, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";

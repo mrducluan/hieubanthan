@@ -1,6 +1,6 @@
 // PL-1 — khung chung cho trang pháp lý / giới thiệu: tiêu đề, ngày hiệu lực, mục lục neo, nội dung dễ đọc.
 import type { ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { NGAY_HIEU_LUC } from "@/lib/van-hanh";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { goiLd, ldDuongDan } from "@/lib/seo";

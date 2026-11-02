@@ -5,7 +5,7 @@
 // Mọi chữ cố định ở bảng chữ lib/chu/trang-tinh.ts (CHU_HUYEN_HOC) — sửa được ở CMS. Trang không tính gì.
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import {
   ArrowRight, BookOpen, CalendarCheck, CalendarDays, CalendarRange, Check, Compass, DoorOpen, HeartHandshake, Home, Hourglass,
   ListOrdered, MessageCircleQuestion, MoonStar, Navigation, Repeat, Sparkles, Sun, UserRound, type LucideIcon,

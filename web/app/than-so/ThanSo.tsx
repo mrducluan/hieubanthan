@@ -2,7 +2,7 @@
 import { fetchSao } from "@/lib/sao-client";
 import { ghiLuot, type LuotHoi } from "@/lib/hoi-mang";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useRouter } from "next/navigation";
 import { HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";

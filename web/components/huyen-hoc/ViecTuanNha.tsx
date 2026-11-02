@@ -2,7 +2,7 @@
 // Y4 — thẻ "Việc 0 đồng tuần này" trên Hôm nay: mỗi tuần một việc không tốn tiền từ dấu hiệu đã khai trong hồ sơ nhà (trên
 // máy). Engine chọn việc (ưu tiên nhóm nên xử lý trước, xoay theo tuần). Bấm "Đã làm" → nhớ trên máy + đưa MÃ hộp vào hàng
 // đợi hỏi lại sau 30 ngày (Q7, lib/kiem-chung-sau) — phiếu sau 30 ngày vì thế mang nghĩa "đã làm thật". Không gửi nhà đi lưu.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useState } from "react";
 import { Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";

@@ -1,7 +1,7 @@
 // MT-ĐS B3 — "Sao hạn năm {năm}": MỘT trang cho mọi tuổi sinh 1960–2005, hai giới (không trang theo tuổi — bảng chu kỳ
 // 9 lặp lại, tránh nội dung mỏng). Lời từng sao từ KB; câu cố định + hỏi đáp (có cần cúng không → GHPGVN 2019).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

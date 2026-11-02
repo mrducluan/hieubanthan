@@ -1,7 +1,7 @@
 // UI-KD 6 — trang nhận thẻ "Quẻ của tôi": sáu vạch quẻ bản (+ quẻ biến) từ mã đã ký (không câu hỏi, không giờ gieo, không
 // lời đọc) + lời mời "Gieo quẻ của bạn" về /kinh-dich, mang ?tu=qu.<…> để đo referral_signup như các thẻ khác. Không index.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, Lock } from "lucide-react";
 import { docMaQue, tuTuMa } from "@/lib/ma-moi";
 import { QuaNguoiNhan } from "@/components/sao/QuaNguoiNhan";

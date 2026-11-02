@@ -1,7 +1,7 @@
 // HL-1 — trang một ngày (/xem-ngay-tot/2026-10-13) hoặc một tháng (/xem-ngay-tot/thang-10-2026).
 // Ngày ngoài cửa sổ hữu ích (7 ngày trước → 400 ngày tới) vẫn xem được nhưng noindex; tháng index trong ±2 năm.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { HoiDapHien, TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";

@@ -4,7 +4,7 @@
 // Tự nhận thưởng chào mừng + thưởng được mời MỘT lần sau khi hồ sơ đã lưu vào tài khoản (lib/nhan-thuong.ts;
 // điều kiện do hàm SQL kiểm, client chỉ gọi).
 import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Check, Copy, Gift, HandCoins, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

@@ -3,7 +3,7 @@
 // người dùng đã cho — trên máy này và trong tài khoản — mỗi dòng một nút rút / xoá có hiệu lực ngay. Không có route xuất
 // dữ liệu tự động → nút "Yêu cầu bản sao qua email" mở thư tới hộp dữ liệu cá nhân (xử lý tay theo chính sách).
 // Hồ sơ trên máy / trong tài khoản và nhắc trên điện thoại đã có nút riêng ở các mục trên trang Tài khoản → chỉ trỏ tới.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

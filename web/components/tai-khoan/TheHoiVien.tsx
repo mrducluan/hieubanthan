@@ -3,7 +3,7 @@
 // tháng), câu hỏi chuyên gia còn; nhắc gia hạn trung tính khi còn ≤ 30 ngày. Không là hội viên + công tắc bật → một dòng
 // mời sang /hoi-vien. Chưa chạy 0028 / công tắc tắt và không là hội viên → ẩn hẳn.
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowUpCircle, BadgeCheck, CalendarClock, MessageCircleQuestion, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

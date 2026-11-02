@@ -1,7 +1,7 @@
 // Phần giới thiệu render phía máy chủ ở cuối trang công cụ (Thần số, Tử vi, Bát tự…): nói công cụ làm gì, cần gì,
 // tính thế nào, hỏi đáp thường gặp. Máy tìm kiếm và bot AI đọc được nội dung này, không phải đợi JavaScript.
 // Kèm schema WebPage + BreadcrumbList + FAQPage. Chỉ mô tả cách hệ thống làm việc, không viết nghĩa mới.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TEN_MANG_SILO, truCua } from "@/lib/kien-thuc";
 import { anhBai, goiLd, ldAnh, ldDuongDan, ldHoiDap, ldThucThe, mangTheoDuong, siteUrl, urlDayDu } from "@/lib/seo";

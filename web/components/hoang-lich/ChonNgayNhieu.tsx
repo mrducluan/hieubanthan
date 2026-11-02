@@ -3,7 +3,7 @@
 // người cùng làm). Engine chọn ngày hợp việc, không xung tuổi ai, gắn lưu ý tháng xung / Kim lâu / tuổi làm nhà của người
 // chính — web chỉ hiển thị. Năm sinh của người khác chỉ đi qua lượt gọi, không lưu ở máy chủ hay trên máy.
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { CalendarHeart, Plus, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";

@@ -1,6 +1,6 @@
 // TDG-1 — trang "Tuổi xông đất năm {năm} cho gia chủ sinh {năm sinh}" (engine dựng). Index: Tết năm nay + Tết tới.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

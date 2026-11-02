@@ -22,7 +22,7 @@ import { HenChinhMinh } from "@/components/khung/HenChinhMinh";
 import type { TrangThaiChuoi } from "@/lib/chuoi-ngay";
 import { nhoYDinhHomNay } from "@/lib/hom-qua";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import {
   BookOpen, Briefcase, CalendarDays, CalendarHeart, Clock, Hexagon, Coffee, Dumbbell, Globe2, Handshake, Heart, Home, LifeBuoy, MessageCircleQuestion,
   MoonStar, Palette, Plane, Rocket, Share2, Sparkles, Sunrise, Wallet, type LucideIcon,

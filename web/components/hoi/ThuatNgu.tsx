@@ -2,7 +2,7 @@
 // GN — giải nghĩa thuật ngữ bằng ngôn ngữ đời thường (chủ dự án yêu cầu 2026-10-02). Engine trả danh sách
 // thuật ngữ có trong đoạn văn (tra từ điển KB, `thuat_ngu`); web chỉ gạch chân đúng các chữ đã khớp và hiện
 // lời giải nghĩa — không tự tìm hay tự viết nghĩa.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";

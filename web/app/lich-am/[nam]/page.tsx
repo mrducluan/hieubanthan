@@ -1,7 +1,7 @@
 // SEO-L5 — "Lịch âm năm {năm}": các tháng âm lịch Việt (mùng 1 dương lịch, đủ/thiếu, nhuận), Tết, rằm — engine tính
 // (Hồ Ngọc Đức UTC+7). Index ±10 năm quanh năm nay; năm khác vẫn xem được, noindex.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

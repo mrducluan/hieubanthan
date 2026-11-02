@@ -1,7 +1,7 @@
 // Dải thông báo toàn site (chiến dịch mời, sự kiện). Nội dung do ban biên tập đặt ở CMS → "Trang chủ & banner"
 // (bật/tắt, chữ ≤ 160, link trong site, khung ngày hiện). CMS chưa nối / tắt / ngoài khung ngày = không hiện gì.
 // Chỉ là chữ thuần + link nội bộ (không HTML). Số/công tắc ảnh hưởng Sao vẫn ở /quan-tri (docs/KIEN-TRUC-CMS.md mục 0).
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Megaphone } from "lucide-react";
 import { dangHien, duongLienKet, trangChuCms } from "@/lib/cms";
 

@@ -6,7 +6,7 @@
 //   Đã đăng nhập: tiến độ từng nhiệm vụ; xong thì "Nhận N Sao". Công tắc tắt → vẫn hiện tiến độ, ghi rõ chưa mở thưởng.
 //   Nhận đủ cả ba → hộp tự ẩn (lần mở sau). Giọng: mời làm, không doạ, không đếm ngược.
 import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Check, Gift, Loader2, MessageCircle, Save, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

@@ -1,7 +1,7 @@
 // TCS-1 — trang nhận thẻ "Điểm hai người": hiện thẻ từ mã đã ký (không ngày sinh) + lời mời "Xem điểm của bạn với
 // người ấy" dẫn về khối "Xem lá số 2 người" ở /tu-vi, mang ?tu=hp.<…> để hồ sơ đầu tiên tính referral_signup.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, Lock } from "lucide-react";
 import { docMaHai, tuTuMa } from "@/lib/ma-moi";
 import { MAU_MUC_HAI, NHAN_MUC_HAI, TEN_QUAN_HE_HAI, TEN_TIEU_CHI_HAI, tenHai } from "@/lib/the-chia-se";

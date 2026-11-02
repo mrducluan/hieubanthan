@@ -1,6 +1,6 @@
 // QH-URL — khối "Kiến thức {mảng}" ở trang công cụ (trang trụ): liệt kê các cụm con trong silo (/tu-vi → chính tinh,
 // cung, sao ở cung, tứ hoá, lá số mẫu…). Liên kết trụ ↔ cụm hai chiều: cụm có breadcrumb về trụ, trụ trỏ xuống cụm.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
 import { TheLap } from "@/components/khung/TheLap";
 import { TEN_MANG_SILO, dsCumTru } from "@/lib/kien-thuc";

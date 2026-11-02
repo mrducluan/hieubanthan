@@ -1,7 +1,7 @@
 // HL-1 — "Xem ngày tốt hôm nay": máy chủ dựng sẵn thẻ hôm nay (giờ Việt Nam) cho người xem + SEO; hồ sơ trên máy
 // thêm phần tuổi xung/hợp ở trình duyệt.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { XemNgayTot } from "@/components/hoang-lich/XemNgayTot";

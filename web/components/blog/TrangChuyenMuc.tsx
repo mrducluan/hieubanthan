@@ -1,7 +1,7 @@
 // Khung /blog/chuyen-muc/{slug}[/trang/{n}] — bài theo chuyên mục (chuyên mục tạo trong CMS). Trang thật có URL riêng: Google lập chỉ mục
 // được cụm chủ đề (CollectionPage + ItemList), người đọc chia sẻ được. Chuyên mục không có bài → noindex.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ChipChuyenMuc, chuyenMucCoBai, duongChuyenMuc, LuoiBai } from "@/components/blog/LuoiBai";

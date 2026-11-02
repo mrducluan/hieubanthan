@@ -5,7 +5,7 @@
 // và ỦNG HỘ (donate_cta_clicked). Mọi câu "luận giải nhỏ" do engine ghép (/v1/goi-y-cheo) từ con số đã tính + KB — web
 // chỉ hiển thị. Chưa có hồ sơ → engine trả câu chung mời nhập. Không lưu gì; sự kiện chỉ mang mã.
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, BookOpenText, CalendarHeart, HeartHandshake, LockKeyhole, Sun, UserPlus } from "lucide-react";
 import { BieuTuongManh } from "@/components/chia-se/TheBanDo";

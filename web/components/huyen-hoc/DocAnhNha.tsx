@@ -4,7 +4,7 @@
 // thống mới luận. Ảnh thu nhỏ trên trình duyệt (lib/anh-nha.ts: bỏ EXIF, ≤ 1280 px, ≤ ~1 MB), xem trước là `blob:`
 // trên máy; không lưu ảnh ở đâu (kể cả base64 trong hồ sơ nhà). Dấu hiệu CHƯA bấm không đi vào bố cục.
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Check, ImagePlus, ScanEye, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { chuanBiAnhGui, SO_ANH_TOI_DA } from "@/lib/anh-nha";

@@ -1,6 +1,6 @@
 // SEO-L5 — "Đổi lịch âm dương": công cụ (engine đổi) + lối vào lịch âm từng năm. Khung TrangCongCu (CMS sửa được chữ).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { DoiLich } from "@/components/lich/DoiLich";

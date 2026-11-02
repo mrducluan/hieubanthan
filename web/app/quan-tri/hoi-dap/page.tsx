@@ -2,7 +2,7 @@
 // câu hỏi đã lọc). Mục tiêu: biết người dùng hỏi gì mà kho chưa trả lời tốt → viết thêm → họ quay lại.
 // Đọc qua hàm thong_ke_hoi / nhat_ky_hoi_gan_day (migration 0011, mọi vai trò quản trị đã qua MFA).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";

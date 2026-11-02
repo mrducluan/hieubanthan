@@ -1,7 +1,7 @@
 "use client";
 // KC-4 — khối "Mốc bạn đã đánh dấu" trên Hôm nay: mốc hôm nay / hôm qua / 7 ngày tới (lưu trên máy), xoá được;
 // GĐ1: nút bật nhắc qua thông báo (Web Push) ngay dưới danh sách.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Bell, X } from "lucide-react";
 import { nhacSapToi, useNhacViec, xoaNhac } from "@/lib/nhac-viec";
 import { BatNhacPush } from "@/components/khung/BatNhacPush";

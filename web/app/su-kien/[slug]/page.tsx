@@ -1,7 +1,7 @@
 // CMS-3 — trang đích /su-kien/{slug}: ban biên tập ghép khối trong CMS (Trang đích) — chiến dịch mời bạn, dịp lễ,
 // mùa thi… không cần sửa code. Hết hạn → báo đã kết thúc + noindex. Schema WebPage (+ FAQPage nếu có khối hỏi đáp).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { KhoiTrangDichView } from "@/components/trang-dich/KhoiTrangDich";

@@ -2,7 +2,7 @@
 // mới gọi NotFair → notFound() sau cùng. Bản nháp CMS chỉ hiện trong draft mode (link xem trước có ký, /api/cms/xem-truoc).
 // Thân bài là HTML từ xa → luôn lọc (cms-html / sanitizeNotFairArticleHtml), không render HTML thô.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound, permanentRedirect } from "next/navigation";
 import { CalendarDays, Clock } from "lucide-react";
 import { NotFairPostHero } from "notfair-nextjs-blog/react";

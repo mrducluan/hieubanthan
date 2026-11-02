@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang, ngayHienThi } from "@/lib/noi-dung-trang";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 
 const META: Metadata = {

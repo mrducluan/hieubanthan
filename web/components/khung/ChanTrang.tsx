@@ -5,7 +5,7 @@
 // ND-1: lời giới thiệu, 3 cam kết, lời miễn trừ, nhãn nút ủng hộ sửa ở CMS; ô trống → chữ trong code (lib/menu-chan-trang.ts).
 // Dòng ©, thông tin đơn vị vận hành (env) luôn giữ trong code. (Đường dây khẩn cấp đã bỏ khỏi chân trang — TC-HOOK; lời
 // hỗ trợ khủng hoảng nằm trong hỏi đáp + trang Miễn trừ.)
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { BadgeCheck, BookOpen, Compass, HeartHandshake, Lock, Mail, MapPin, Phone, Scale, Server, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
 import { coUngHo } from "@/lib/ung-ho";
 import { vanHanh } from "@/lib/van-hanh";

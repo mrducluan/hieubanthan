@@ -4,7 +4,7 @@
 // chuyên gia là tác giả bài họ chưa đọc; bài chuyên gia đã đọc, sửa, duyệt mới ghi "Biên soạn & thẩm định".
 // DX-1: "Chủ biên … duyệt xuất bản" = quyết định biên tập cho toàn kho (như tổng biên tập duyệt đăng), không phải
 // thẩm định từng bài → không gắn reviewedBy, không đổi nhãn "Đã thẩm định".
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { BookOpen, ShieldCheck } from "lucide-react";
 import { CHUYEN_GIA, duongChuyenGia, ngayVN } from "@/lib/chuyen-gia";
 import type { TrangKienThuc } from "@/lib/kien-thuc";

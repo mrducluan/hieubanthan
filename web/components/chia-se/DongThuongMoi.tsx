@@ -2,7 +2,7 @@
 // SAO-V — dòng nhỏ dưới nút chia sẻ nói rõ điều kiện thưởng mời (và hoa hồng nạp Sao khi bật). Đăng nhập: link đã gắn
 // mã mời (?gt=) → nói ai nhận gì khi nào. Khách: mời đăng nhập để link có thưởng. Chưa bật tài khoản / mức thưởng 0 →
 // không hứa gì (ẩn). Mức đọc từ /api/sao/muc (lib/muc-sao.ts); số thật do hàm SQL quyết.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { usePathname } from "next/navigation";
 import { Gift } from "lucide-react";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";

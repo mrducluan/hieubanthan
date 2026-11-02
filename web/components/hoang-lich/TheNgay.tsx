@@ -2,7 +2,7 @@
 // HL-1 — thẻ hoàng lịch một ngày. Engine tính, web chỉ hiển thị. Lời lẽ theo kiểu "sách lịch cổ ghi…", không doạ.
 // Giờ hoàng đạo "sắp tới" tính theo đồng hồ giờ Việt Nam của máy người xem (chỉ khi thẻ là hôm nay).
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { CalendarHeart, Clock, Compass, MoonStar, Sparkles, Sunrise, ThumbsDown, ThumbsUp, UserRound } from "lucide-react";
 import type { GioNgay, NgayTot } from "@/lib/hoang-lich";
 import { duongNgay, homNayVN } from "@/lib/hoang-lich";

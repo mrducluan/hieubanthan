@@ -1,7 +1,7 @@
 "use client";
 // LG-ĐS — danh sách + xem + xoá bài luận đã lưu (máy chủ: /api/luan-giai/luu, RLS chủ sở hữu). Bài mở ra hiện bằng
 // CÙNG component với lúc vừa đọc (components/luan-giai/BaoCaoDoiSong) — không gọi lại engine.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowLeft, BookOpenText, Printer, Trash2 } from "lucide-react";

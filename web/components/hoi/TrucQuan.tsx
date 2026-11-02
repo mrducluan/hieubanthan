@@ -5,7 +5,7 @@
 import { createContext, useContext, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { useChieuSang } from "@/components/hoi/ChieuSang";
 import { motion, useReducedMotion } from "motion/react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
 import { duongTrangKb } from "@/lib/duong-silo";

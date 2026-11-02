@@ -1,7 +1,7 @@
 // NAM-1 — "Cưới năm {năm}: tuổi nào không phạm Kim lâu?" — Kim lâu theo tuổi mụ CÔ DÂU (chủ dự án chốt 2026-10-30),
 // cô dâu tuổi mụ 20–45. Engine `/v1/nam/{nam}/cuoi-hoi`; web hiển thị + lối sang ngày tốt cưới hỏi từng tháng.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

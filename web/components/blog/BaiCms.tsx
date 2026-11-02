@@ -3,7 +3,7 @@
 // Chữ ký theo EEAT-1 / BM-1 / DX-1 (components/blog/KhungKyBai.tsx, đặt ở CUỐI bài): chưa có chuyên gia đọc → "Ban biên tập …
 // · Chủ biên duyệt xuất bản" (author = Organization); chỉ khi CMS ghi "tác giả"/"thẩm định" (có xác nhận, có ngày) mới đứng tên người.
 import { duongBlog } from "@/lib/blog-gop";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { CalendarDays, Clock, Eye } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CtaBen, CtaBlog } from "@/components/blog/CtaBlog";

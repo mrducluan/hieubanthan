@@ -1,6 +1,6 @@
 // Banner trang chủ (chiến dịch, sự kiện, bài nổi bật) — ban biên tập đặt ở CMS → "Trang chủ & banner": bật/tắt,
 // nhãn, tiêu đề, mô tả, ảnh, nút + link trong site, khung ngày hiện. Tắt / ngoài khung ngày / CMS chưa nối → không hiện.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
 import { anhCms, dangHien, duongLienKet, trangChuCms } from "@/lib/cms";
 

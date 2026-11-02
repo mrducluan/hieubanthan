@@ -2,7 +2,7 @@
 // HL-1 — "Xem ngày tốt": thẻ ngày (máy chủ dựng sẵn bản công khai cho SEO) + cá nhân hoá theo hồ sơ trên máy
 // (tuổi xung/hợp — ngày sinh chỉ gửi để tính, không lưu) + lịch tháng + tìm ngày tốt cho một việc.
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TheNgay } from "@/components/hoang-lich/TheNgay";

@@ -2,7 +2,7 @@
 // mời người nhận xem tháng này của họ ở /hom-nay, mang ?tu=tk.<…> để đo referral_signup như các thẻ khác. Không ngày sinh,
 // không chuỗi, không huy hiệu, không hạng hội viên. Không index.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, Lock } from "lucide-react";
 import { docMaThang, tuTuMa } from "@/lib/ma-moi";
 import { oLichThang, THU_NGAN } from "@/lib/lich-thang";

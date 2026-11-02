@@ -1,7 +1,7 @@
 "use client";
 // Lỗi khi hiển thị một trang: báo thân thiện + thử lại, và gửi lỗi về Sentry (nếu bật).
 import { useEffect } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { baoLoi } from "@/lib/giam-sat";

@@ -1,6 +1,6 @@
 // QT-1 — danh sách file kho tri thức (đọc từ nhánh main trên GitHub = nguồn gốc) + các PR đề xuất đang chờ merge.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ExternalLink, FileJson, GitPullRequest, Lock, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";

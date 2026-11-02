@@ -2,7 +2,7 @@
 // Một khung "Sắp có" gọn: dịch vụ là gì (một câu), vì sao chưa dùng được, và lối quay về. Không hứa ngày mở, không "báo
 // tôi khi mở" (chưa có kênh thật), không đếm ngược.
 import type { ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowLeft, Compass, Hourglass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 

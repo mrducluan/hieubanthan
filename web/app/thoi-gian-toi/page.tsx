@@ -2,7 +2,7 @@
 // năm tới, ghép thần số + Tử vi + Bát tự + tập quán theo tuổi (engine `/v1/thoi-gian-toi`). Trang công cụ: H1 + giới
 // thiệu + hỏi đáp dựng sẵn trên máy chủ (SEO), phần riêng dựng ở trình duyệt từ hồ sơ trên máy.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";

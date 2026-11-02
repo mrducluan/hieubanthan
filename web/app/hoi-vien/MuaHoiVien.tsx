@@ -6,7 +6,7 @@
 //   xem thẻ thường → không nút (hạ hạng khi hết hạn). Tạo đơn: POST /api/thanh-toan/tao-don {loai: "hoi_vien", hang}.
 // Không đếm ngược, không "ưu đãi", không gạch giá, không nhãn "phổ biến" — nhãn thẻ Chuyên gia nói đúng điều khác biệt.
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { CheckCircle2, Clock, Loader2, MessageCircleQuestion, QrCode, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
