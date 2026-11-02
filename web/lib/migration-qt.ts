@@ -32,6 +32,7 @@ export const MIGRATION: readonly Migration[] = [
   { so: "0030", ten: "Ngày nghỉ chuỗi + huy hiệu", dau: { ham: "huy_hieu_cua_toi" } },
   { so: "0031", ten: "Nhật ký hỏi đáp dùng khoá riêng", dau: { ham: "ghi_nhat_ky_hoi" } },
   { so: "0032", ten: "Nhật ký ngày ghé (Tháng của tôi)", dau: { bang: "nhat_ky_ghe" } },
+  { so: "0033", ten: "Múi giờ nơi sinh trong hồ sơ", dau: { bang: "ho_so", cot: "utc_noi_sinh" } },
 ];
 
 /** Công tắc / số ở /quan-tri/cai-dat chỉ có tác dụng khi các migration này đã chạy (tiền tố khoá → số migration). */

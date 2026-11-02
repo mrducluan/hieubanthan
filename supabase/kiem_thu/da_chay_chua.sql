@@ -41,6 +41,9 @@ select * from (values
   ('0029 hỏi chuyên gia (trả VND)',  to_regprocedure('public.cg_han_gio_cho(uuid)') is not null),
   ('0030 ngày nghỉ chuỗi + huy hiệu',  to_regprocedure('public.huy_hieu_cua_toi()') is not null),
   ('0031 nhật ký hỏi đáp dùng khoá riêng', to_regprocedure('public.ghi_nhat_ky_hoi(text,jsonb,text)') is not null),
-  ('0032 nhật ký ngày ghé (Tháng của tôi)', to_regclass('public.nhat_ky_ghe') is not null)
+  ('0032 nhật ký ngày ghé (Tháng của tôi)', to_regclass('public.nhat_ky_ghe') is not null),
+  ('0033 múi giờ nơi sinh trong hồ sơ', exists (select 1 from information_schema.columns
+                                           where table_schema = 'public' and table_name = 'ho_so'
+                                             and column_name = 'utc_noi_sinh'))
 ) as t(migration, da_chay)
 order by 1;

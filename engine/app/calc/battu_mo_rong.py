@@ -133,6 +133,64 @@ def than_sat(tru: list[dict]) -> list[dict]:
             for t in _Y if t in o]
 
 
+# --------------------------------------------------------------------------- thần sát THAM KHẢO (EN-5.3, 2026-11-02)
+# Học Đường · Thiên La · Địa Võng · Kim Thần — sách chép nhiều cách, nên: một cách CHÍNH theo Tam Mệnh Thông Hội (cùng
+# nguồn bảng trên) + cách khác của sách ghi ở `theo_cach_khac`. Danh sách RIÊNG, không nhập `than_sat` → không vào bảng
+# đếm cát / hung của luận giải đời sống, không đổi mức nào. Lời trung tính (không "tai hoạ"). docs/QUYET-DINH-EN5-EN6.md.
+THAN_SAT_TK_NGUON = ("Tam Mệnh Thông Hội (Vạn Dân Anh, đời Minh) — quyển 3 'Luận Học Đường Từ Quán', 'Luận Thiên La "
+                     "Địa Võng'; quyển 6 'Kim Thần'")
+# Nơi Trường Sinh của hành nạp âm năm ("Ngũ hành sinh xứ vi học đường"; Thủy, Thổ cùng sinh ở Thân).
+_HOC_DUONG = {"Kim": "Tỵ", "Mộc": "Hợi", "Thủy": "Thân", "Thổ": "Thân", "Hỏa": "Dần"}
+_KIM_THAN = {("Ất", "Sửu"), ("Kỷ", "Tỵ"), ("Quý", "Dậu")}
+_TK = {   # tên → (nhóm, loại, ý ngắn, cách khác của sách)
+    "Học Đường": ("Học Đường", "cát", "thuận việc học, thích tìm hiểu đến nơi đến chốn; học đều tay thì dễ thành nghề",
+                  "Phái Tử Bình lấy nơi Trường Sinh của can ngày (Giáp gặp Hợi, Ất gặp Ngọ, Bính gặp Dần…), có ở một trụ "
+                  "tháng hoặc giờ là đủ."),
+    "Thiên La": ("Thiên La Địa Võng", "trung", "sách xưa ví như lúc thấy mình bị vây: việc dễ chậm, vướng thủ tục — hợp "
+                 "làm chắc từng bước, giấy tờ rõ ràng, không vội ký",
+                 "Có sách chỉ xét chi, không xét mệnh: trụ có Tuất, Hợi là Thiên La — theo cách này rất nhiều lá số có. "
+                 "Sách cũng ghi nam để ý Thiên La nhiều hơn."),
+    "Địa Võng": ("Thiên La Địa Võng", "trung", "sách xưa ví như lúc thấy mình bị vây: việc dễ chậm, vướng thủ tục — hợp "
+                 "làm chắc từng bước, giấy tờ rõ ràng, không vội ký",
+                 "Có sách chỉ xét chi, không xét mệnh: trụ có Thìn, Tỵ là Địa Võng — theo cách này rất nhiều lá số có. "
+                 "Sách cũng ghi nữ để ý Địa Võng nhiều hơn."),
+    "Kim Thần": ("Kim Thần", "trung", "tính cương, quyết đoán, dám làm; sách xưa nói cần sự mềm mỏng tiết chế (gặp Hỏa) "
+                 "thì cái cứng mới thành việc",
+                 "Nhiều sách thời nay xét cả trụ ngày lẫn trụ giờ là Ất Sửu, Kỷ Tỵ, Quý Dậu, không kể can ngày."),
+}
+
+
+def than_sat_tham_khao(tru: list[dict]) -> list[dict]:
+    """Bốn sao tham khảo (luôn đủ 4 mục, `co` = có theo cách chính). Mỗi mục: {ten, nhom, loai, y, co, tru, goc, phai,
+    cach_khac, theo_cach_khac}; Học Đường thêm `chinh` / `chinh_tru` (Chính Học Đường: can chi có nạp âm cùng hành mệnh).
+    Cách chính lấy gốc ở nạp âm năm / can ngày nên không xét chính trụ năm (như các thần sát khác)."""
+    can = [t["can"] for t in tru]
+    chi = [t["chi"] for t in tru]
+    hanh = can_chi.nap_am(can[0], chi[0])["hanh"]
+    sau = range(1, 4)
+    hd = [i for i in sau if chi[i] == _HOC_DUONG[hanh]]
+    o = {
+        "Học Đường": (hd, f"nạp âm năm, hành {hanh}",
+                      [i for i in range(4) if truong_sinh(can[2], chi[i]) == "Trường Sinh"]),
+        "Thiên La": ([i for i in sau if chi[i] in ("Tuất", "Hợi")] if hanh == "Hỏa" else [], f"nạp âm năm, hành {hanh}",
+                     [i for i in range(4) if chi[i] in ("Tuất", "Hợi")]),
+        "Địa Võng": ([i for i in sau if chi[i] in ("Thìn", "Tỵ")] if hanh in ("Thủy", "Thổ") else [],
+                     f"nạp âm năm, hành {hanh}", [i for i in range(4) if chi[i] in ("Thìn", "Tỵ")]),
+        "Kim Thần": ([3] if (can[3], chi[3]) in _KIM_THAN and can[2] in ("Giáp", "Kỷ") else [], "trụ giờ, can ngày",
+                     [i for i in (2, 3) if (can[i], chi[i]) in _KIM_THAN]),
+    }
+    ra = []
+    for ten, (nhom, loai, y, khac) in _TK.items():
+        ds, goc, theo_khac = o[ten]
+        m = {"ten": ten, "nhom": nhom, "loai": loai, "y": y, "co": bool(ds), "tru": ds, "goc": goc,
+             "phai": "Tam Mệnh Thông Hội", "cach_khac": khac, "theo_cach_khac": theo_khac}
+        if ten == "Học Đường":
+            ct = [i for i in ds if can_chi.nap_am(can[i], chi[i])["hanh"] == hanh]
+            m |= {"chinh": bool(ct), "chinh_tru": ct}
+        ra.append(m)
+    return ra
+
+
 # --------------------------------------------------------------------------- quan hệ can chi
 _DOI = {
     "lục hợp": [("Tý", "Sửu"), ("Dần", "Hợi"), ("Mão", "Tuất"), ("Thìn", "Dậu"), ("Tỵ", "Thân"), ("Ngọ", "Mùi")],
@@ -236,6 +294,8 @@ def mo_rong(ls: dict) -> dict:
         "khong_vong": {"ngay": tuan_khong(tru[2]["can"], tru[2]["chi"]), "nam": tuan_khong(tru[0]["can"], tru[0]["chi"])},
         "than_sat": than_sat(tru),
         "than_sat_nguon": THAN_SAT_NGUON,
+        "than_sat_tham_khao": than_sat_tham_khao(tru),                     # EN-5.3 (2026-11-02): không vào bảng đếm
+        "than_sat_tham_khao_nguon": THAN_SAT_TK_NGUON,
         "cung_than": cung_than(ls),                                        # EN-5.3
         "tieu_van": cac_tieu_van(ls),
         "quan_he": quan_he(tru),

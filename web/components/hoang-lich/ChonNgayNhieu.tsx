@@ -7,7 +7,7 @@ import Link from "@/components/khung/Lien";
 import { CalendarHeart, Plus, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
-import { congNgay, duongNgay, type ChonNgayNhieuKq, type NgayNhieu } from "@/lib/hoang-lich";
+import { congNgay, duongNgay, type ChonNgayNhieuKq, type NgayNhieu, type ThangGiaThu } from "@/lib/hoang-lich";
 
 const VIEC = [
   { ma: "cuoi_hoi", ten: "Cưới hỏi" }, { ma: "khai_truong", ten: "Khai trương" }, { ma: "nhap_trach", ten: "Về nhà mới" },
@@ -41,7 +41,7 @@ function NhanLuuY({ ds }: { ds: string[] }) {
   );
 }
 
-function DongNgay({ n }: { n: NgayNhieu }) {
+function DongNgay({ n, nhan }: { n: NgayNhieu; nhan?: ThangGiaThu["nhan"] }) {
   return (
     <li>
       <Link href={duongNgay(n.ngay)} className="block rounded-xl border border-line/70 px-3 py-2 hover:border-gold/50">
@@ -57,6 +57,11 @@ function DongNgay({ n }: { n: NgayNhieu }) {
           </span>
         )}
         {n.luu_y.length > 0 && <NhanLuuY ds={n.luu_y} />}
+        {n.gia_thu && nhan && (
+          <span className="mt-1 inline-block rounded-full border border-line px-2 py-0.5 text-[11px] text-fg-muted" data-testid="nhan-gia-thu">
+            {nhan[n.gia_thu]}
+          </span>
+        )}
       </Link>
     </li>
   );
@@ -160,10 +165,17 @@ export function ChonNgayNhieu({ tu }: { tu: string }) {
               <p className="mt-2 text-xs text-fg-faint">Ngày có lưu ý vẫn hiện để gia đình tự cân nhắc, xếp sau ngày không vướng.</p>
             </details>
           )}
+          {kq.thang_gia_thu && (
+            <details className="rounded-xl border border-line/70 px-3 py-2 text-sm" data-testid="gia-thu-nhieu">
+              <summary className="cursor-pointer font-semibold">Tháng đại lợi / tiểu lợi theo tuổi cô dâu (tập quán)</summary>
+              <p className="mt-2 text-fg-muted">{kq.thang_gia_thu.loi}</p>
+              <p className="mt-2 text-xs text-fg-faint">Nguồn: {kq.thang_gia_thu.nguon}.</p>
+            </details>
+          )}
           {kq.ngay_noi_bat.length > 0 && (
             <div>
               <h3 className="mb-1.5 text-sm font-semibold text-fg-muted">Ngày nên xem trước</h3>
-              <ol className="space-y-2">{kq.ngay_noi_bat.map((n) => <DongNgay key={n.ngay} n={n} />)}</ol>
+              <ol className="space-y-2">{kq.ngay_noi_bat.map((n) => <DongNgay key={n.ngay} n={n} nhan={kq.thang_gia_thu?.nhan} />)}</ol>
             </div>
           )}
           <details className="rounded-xl border border-line/70 px-3 py-2">
@@ -190,7 +202,7 @@ export function ChonNgayNhieu({ tu }: { tu: string }) {
           </details>
           <details className="text-xs text-fg-faint">
             <summary className="cursor-pointer">Cách chọn</summary>
-            <p className="mt-1">{kq.cach_chon} {kq.chua_xet}</p>
+            <p className="mt-1">{kq.cach_chon}{kq.chua_xet ? ` ${kq.chua_xet}` : ""}</p>
             <p className="mt-1">Tuổi đã xét: {kq.nguoi.map((p) => `${p.ten_vai} ${p.can_chi}`).join(" · ")}.</p>
             <p className="mt-1">{kq.luu_y}</p>
           </details>

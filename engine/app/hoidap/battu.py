@@ -153,6 +153,7 @@ def phan_loai(cau_hoi: str) -> dict:
     else:
         kq["loai"] = "la_so"
         kq["chu_de"] = "cung_than" if _hoi_cung_than(cau_hoi, t_chinh) else \
+            "than_sat_tk" if _hoi_ts_tk(cau_hoi, t_chinh) else \
             next((cd for cd, mau in CHU_DE if chung.co(t_chinh, mau)), None)
         if kq["thap_than"] or kq["nhom"]:
             kq["chu_de"] = kq["chu_de"] if kq["chu_de"] in ("nghe_tien", "hon_nhan", "con_cai", "phap_ly", "di_xa", "an_toan",
@@ -173,6 +174,20 @@ _CT_KHONG_DAU = [r"(xem|tinh|cua|ve) (menh cung|thai nguyen|than cung)", r"(menh
 
 def _hoi_cung_than(raw: str, t: str) -> bool:
     return chung.khop_dau(raw, t, _CT_CO_DAU, _CT_KHONG_DAU)
+
+
+# EN-5.3 (2026-11-02): thần sát THAM KHẢO (Học Đường, Thiên La Địa Võng, Kim Thần). "học đường" là chữ thường (trường
+# học), "kim thân" / "thiện là" trùng khi bỏ dấu → gõ có dấu so trên chữ có dấu, gõ không dấu cần ngữ cảnh.
+_TK_CO_DAU = [r"thiên la", r"địa võng", r"kim thần", r"(sao|thần sát|có|chính) học đường",
+              r"học đường (trong|ở trụ|là sao|của (tôi|mình|em)|không)"]
+_TK_KHONG_DAU = [r"thien la dia vong", r"dia vong", r"(sao|than sat|co|pham|bi) thien la",
+                 r"thien la (o tru|trong|cua|khong)", r"(sao|than sat|co|chinh) (hoc duong|kim than)",
+                 r"(hoc duong|kim than) (trong|o tru|la sao|cua (toi|minh|em)|khong)"]
+_TK_HOI = (("Học Đường", r"hoc duong"), ("Thiên La", r"thien la"), ("Địa Võng", r"dia vong"), ("Kim Thần", r"kim than"))
+
+
+def _hoi_ts_tk(raw: str, t: str) -> bool:
+    return chung.khop_dau(raw, t, _TK_CO_DAU, _TK_KHONG_DAU)
 
 
 # ------------------------------------------------------------------ gói bằng chứng
@@ -300,6 +315,14 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
         muc.append({"loai": "than_sat", "ds": ts, "hoi": hoi, "tru_ten": list(TRU_TEN.values()), **kb.meta()})
         goi["luu_y"] = ("Thần sát là lớp phụ trong Tử Bình — sách Trích Thiên Tuỷ coi nhẹ thần sát so với ngũ hành "
                         "và thập thần; đọc như sắc thái, không như điềm báo.")
+        return chung.ket(goi)
+    if cd == "than_sat_tk":                       # EN-5.3 (2026-11-02)
+        ds = battu_mo_rong.than_sat_tham_khao(ls["tru"])
+        hoi = [ten for ten, mau in _TK_HOI if re.search(mau, pl["cau_chuan_hoa"])] or [x["ten"] for x in ds]
+        muc.append({"loai": "than_sat_tk", "ds": [x for x in ds if x["ten"] in hoi], "hoi": hoi,
+                    "tru_ten": list(TRU_TEN.values()), "nguon": battu_mo_rong.THAN_SAT_TK_NGUON, **kb.meta()})
+        goi["luu_y"] = ("Học Đường, Thiên La Địa Võng, Kim Thần mỗi sách chép một cách; hệ thống theo Tam Mệnh Thông Hội "
+                        "và chỉ để tham khảo — các sao này không làm đổi mức nào trong bài luận giải.")
         return chung.ket(goi)
     if cd == "cung_than":                         # EN-5.3
         ct = battu_mo_rong.cung_than(ls)
@@ -463,6 +486,23 @@ def _doan(m: dict) -> tuple[str, str | None]:
                            f"đầu): {ds}.")
             else:
                 cau.append(f"{m['giai_thich']['tieu_van']} Bạn vào đại vận đầu ngay từ năm sinh nên không có năm tiểu vận.")
+        return " ".join(cau), None
+    if l == "than_sat_tk":
+        tt = m["tru_ten"]
+        cau = []
+        for x in m["ds"]:
+            if x["co"]:
+                s = (f"{x['ten']} có ở trụ {', '.join(tt[i] for i in x['tru'])}"
+                     + (" — Chính Học Đường" if x.get("chinh") else "") + f": {x['y']}.")
+            else:
+                s = f"Theo cách {x['phai']} (gốc ở {x['goc']}), tứ trụ của bạn không có {x['ten']}."
+            k = x["theo_cach_khac"]
+            s += f" Cách khác: {x['cach_khac']} " + (f"Theo cách đó, bạn có ở trụ {', '.join(tt[i] for i in k)}."
+                                                   if k else "Theo cách đó bạn cũng không có.")
+            cau.append(s)
+        if {"Thiên La", "Địa Võng"} & set(m["hoi"]):
+            cau.append("Thiên La, Địa Võng cũng là tên hai hạn trong Bát hạn — hạn đó xếp theo tuổi mụ, giống nhau cho "
+                       "mọi người cùng tuổi, khác với thần sát trong tứ trụ ở trên.")
         return " ".join(cau), None
     if l == "than_sat":
         tt = m["tru_ten"]
