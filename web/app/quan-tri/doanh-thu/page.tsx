@@ -2,7 +2,7 @@
 // ai mời được nhiều bạn (và bạn được mời có nạp không), đơn gần đây để đối soát. Hàm SQL thong_ke_doanh_thu (0013)
 // kiểm vai trò + MFA trong DB và ghi nhật ký mỗi lần xem. Phễu xem trước → mở khoá ở trang Tăng trưởng (PostHog).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";

@@ -1,7 +1,7 @@
 "use client";
 // Thẻ nhỏ "Ủng hộ nhà phát triển" — phần hiển thị dùng chung (UngHoNho phía máy chủ kiểm env rồi gọi; khối "Đọc tiếp"
 // cuối phần xem gọi khi máy chủ báo có ví/tài khoản ủng hộ). `tu`: mã trang để đo donate_cta_clicked (chỉ mã).
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { HeartHandshake } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 

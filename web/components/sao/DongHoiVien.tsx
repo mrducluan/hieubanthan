@@ -2,7 +2,7 @@
 // KV-THANG — một dòng "Hội viên năm · tới dd/mm/yyyy" ở Bản thân (RIÊNG TƯ, không lên thẻ chia sẻ): trước chỉ có ở /tai-khoan.
 // Chưa bật tài khoản / chưa đăng nhập / DB chưa chạy 0028 / không là hội viên → ẩn. Không nhắc gia hạn ở đây (đã có ở Tài khoản).
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { BadgeCheck } from "lucide-react";
 import { coTaiKhoan, supabase } from "@/lib/supabase/trinh-duyet";
 import { docHoiVien, ngayVn, TEN_HANG, type HoiVien } from "@/lib/thanh-toan/hoi-vien";

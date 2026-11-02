@@ -2,7 +2,7 @@
 // Cụm đủ 5 lần "chưa đúng" chuyển "chờ duyệt"; người duyệt đọc mẫu ghi chú, sửa KB ở Kho tri thức (PR) rồi đánh dấu
 // "đã sửa". Hệ thống KHÔNG tự bật luật. Đọc qua qt_cum_bat_thuong (migration 0016).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";

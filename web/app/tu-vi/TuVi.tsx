@@ -3,7 +3,7 @@
 // → hỏi đáp AI ở DƯỚI, chiếm hết chiều ngang (chủ dự án chốt 2026-10-01).
 import { useChu } from "@/components/cms/DauCms";
 import { useChuChung } from "@/components/cms/ChuChung";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { CalendarClock, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, Moon, Orbit, ScrollText, Waypoints } from "lucide-react";
 import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";

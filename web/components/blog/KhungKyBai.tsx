@@ -3,7 +3,7 @@
 // <details> thuần HTML: không cần JS, nội dung xổ ra vẫn nằm trong HTML máy chủ (Google / bot AI đọc đủ), bàn phím Enter/Space mở được.
 // Quy tắc chữ ký (EEAT-1 / BM-1 / DX-1) giữ nguyên: chưa có chuyên gia đọc → "Ban biên tập … · Chủ biên duyệt xuất bản" (không gắn
 // reviewedBy); chỉ khi CMS ghi "tác giả"/"thẩm định" (có xác nhận, có ngày) mới đứng tên người.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { BookOpen, ChevronDown, ShieldCheck } from "lucide-react";
 import { CHUYEN_GIA, duongChuyenGia, ngayVN } from "@/lib/chuyen-gia";
 import type { BaiCms as Bai, NguoiCms } from "@/lib/cms";

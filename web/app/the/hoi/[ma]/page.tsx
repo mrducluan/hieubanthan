@@ -2,7 +2,7 @@
 // của khung hỏi đáp) + lời mời "Hỏi câu này về chính bạn" → trang công cụ của mảng với ?cau= (khung hỏi đáp chỉ điền sẵn khi
 // câu nằm trong danh mục engine) và ?tu=hq.<…> để đo referral_signup như các thẻ khác. Không index.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, Lock } from "lucide-react";
 import { docMaHoi, tuTuMa } from "@/lib/ma-moi";
 import { DUONG_MANG, TEN_MANG, tieuDeThe, veKhoi } from "@/lib/the-hoi";

@@ -1,7 +1,7 @@
 "use client";
 // ND — nút kêu gọi đặt từ CMS: link trong site + ghi sự kiện cms_khoi_bam (mã đo do ban biên tập đặt, trang, vị trí)
 // để so số bấm theo URL. Không gửi gì khác.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";

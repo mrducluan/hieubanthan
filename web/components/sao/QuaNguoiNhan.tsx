@@ -3,7 +3,7 @@
 // Sao chào mừng, cộng Sao "được mời" khi link mang mã giới thiệu (?gt=). Số đọc từ cài đặt (/api/sao/muc, /api/luan-giai/phi);
 // số thật do hàm SQL quyết. Chưa bật tài khoản / đã đăng nhập (người cũ) / không có thưởng → không hiện.
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Gift } from "lucide-react";
 import { useMucSao } from "@/lib/muc-sao";
 import { maGioiThieuDaNho } from "@/lib/ma-gioi-thieu";

@@ -1,5 +1,5 @@
 // Lời báo khi chưa vào được trang quản trị — nói rõ thiếu bước nào (docs/VIEC-CUA-ANH.md mục Q).
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

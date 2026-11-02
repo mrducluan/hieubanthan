@@ -1,6 +1,6 @@
 // CMS-3 — dựng từng khối của trang đích (/su-kien/{slug}). Chữ từ CMS hiện dạng VĂN BẢN THUẦN (React tự thoát ký tự),
 // link chỉ nhận đường dẫn trong site (duongLienKet) → không có HTML lạ, không link ngoài.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, Gift } from "lucide-react";
 import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { TheLap } from "@/components/khung/TheLap";

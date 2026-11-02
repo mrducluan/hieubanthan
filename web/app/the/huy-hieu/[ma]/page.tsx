@@ -2,7 +2,7 @@
 // để đo share_clicked → referral_signup như các thẻ khác (GhiVaoTrang đọc ?tu trên URL). Không tên, không ngày đạt → không
 // cần ký mã. Không index.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { ArrowRight, Award, Lock } from "lucide-react";
 import { CAU_BAN_CHAT, DANH_MUC, maTuDuongHuyHieu, THE_HUY_HIEU } from "@/lib/huy-hieu";

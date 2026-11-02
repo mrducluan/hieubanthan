@@ -1,7 +1,7 @@
 // UI-PT2 P7 — trang nhận thẻ "Nhà của bạn": sơ đồ 3×3 tô màu từ mã đã ký (không địa chỉ, không năm sinh) + lời mời
 // "Đọc nhà của bạn" về /phong-thuy, mang ?tu=nh.<…> để hồ sơ đầu tiên tính referral_signup. Không index.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, Lock } from "lucide-react";
 import { docMaNha, tuTuMa } from "@/lib/ma-moi";
 import { MAU_MUC_THE, NHAN_MUC_THE, TEN_LOAI_NHA_THE, TEN_PHONG_THE, tenNhaThe } from "@/lib/the-chia-se";

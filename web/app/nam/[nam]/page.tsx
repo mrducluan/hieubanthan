@@ -2,7 +2,7 @@
 // mốc lễ, hạn năm + lối sang mọi trang tra theo tuổi của năm đó và "Năm {năm} của riêng bạn" (/thoi-gian-toi).
 // Engine dựng toàn bộ dữ kiện (`/v1/nam/{nam}`); web chỉ hiển thị. Index năm âm hiện tại + năm sau.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

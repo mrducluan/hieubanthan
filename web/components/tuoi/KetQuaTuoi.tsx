@@ -1,6 +1,6 @@
 // TDG-1 — hiển thị kết quả (engine tính): tuổi làm nhà / cưới, hướng xấu theo năm (bàn 9 cung), tuổi xông đất.
 // Dùng được cả ở máy chủ (trang SEO) lẫn trình duyệt (công cụ). Lời lẽ trung tính, không doạ.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { CalendarHeart, Compass, Home, Sparkles, Users } from "lucide-react";
 import type { HanNam, LamNha, SaoHan, XongDat } from "@/lib/tuoi-dan-gian";
 import { duongHanNam, duongLamNha } from "@/lib/tuoi-dan-gian";

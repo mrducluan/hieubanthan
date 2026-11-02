@@ -28,8 +28,13 @@ async function lamMoiPhien(req: NextRequest): Promise<CookieMoi[]> {
   return moi;
 }
 
+// SỰ CỐ-VERCEL (2026-11-02): proxy chạy Node trên Vercel = MỘT lần chạy hàm mỗi yêu cầu khớp. Chỉ trang HTML / điều
+// hướng mới cần nonce CSP; ảnh, tệp tĩnh có đuôi, ảnh /og và API JSON thì không (header bảo mật nền vẫn có từ
+// next.config.mjs). Giữ: /api/quan-tri (làm mới phiên), .js (sw.js cần CSP của chính nó), .md (bản Markdown trang).
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon\\.ico|og(?:/|$)|api/(?!quan-tri)|.*\\.(?:png|jpe?g|gif|svg|ico|webp|avif|woff2?|ttf|otf|txt|xml|json|webmanifest|ics|pdf|map)$).*)",
+  ],
 };
 
 export async function proxy(req: NextRequest): Promise<NextResponse> {

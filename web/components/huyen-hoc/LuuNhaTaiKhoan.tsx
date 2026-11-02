@@ -1,7 +1,7 @@
 "use client";
 // KC-2 — nút "Lưu nhà vào tài khoản" (chỉ người đã đăng nhập; đồng ý rõ ràng mỗi lần bấm) + "Tải nhà từ tài khoản".
 // Dữ liệu: hướng, năm xây, người cùng ở (năm sinh + giới tính), bố cục — không tên, không luận giải.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useState } from "react";
 import { CloudDownload, CloudUpload } from "lucide-react";
 import { Button } from "@/components/ui/button";

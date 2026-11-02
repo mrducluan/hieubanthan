@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import {
   ArrowRight, BookOpen, Calculator, CalendarDays, Check, ListChecks, ListOrdered, Lock, Minus, Scale, Sparkles, Split, X,
   type LucideIcon,

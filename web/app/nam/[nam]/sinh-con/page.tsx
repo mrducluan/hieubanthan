@@ -2,7 +2,7 @@
 // thường / dân gian hay nhắc cân nhắc — không điểm số) + quan hệ nạp âm để đọc thêm. Engine `/v1/nam/{nam}/sinh-con`.
 // Ranh giới: sức khoẻ của mẹ + lời bác sĩ đi trước con giáp; không khuyên chọn ngày sinh mổ theo tuổi.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

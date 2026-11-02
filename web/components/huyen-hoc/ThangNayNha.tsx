@@ -1,7 +1,7 @@
 "use client";
 // KC-2 — thẻ "Tháng này nhà bạn" trên Hôm nay: đọc hồ sơ nhà lưu trên máy (lib/ho-so-nha), hỏi engine sao tháng tại cung
 // cửa (đổi theo tiết khí → lý do quay lại mỗi tháng). Chưa có nhà → một dòng mời đo hướng ở trang Phong thuỷ.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useState } from "react";
 import { Home } from "lucide-react";
 import { ChipMuc } from "@/components/luan-giai/BaoCaoDoiSong";

@@ -1,5 +1,5 @@
 // SEO-K — thanh phân trang blog: link thật (bot đi được), trang hiện tại aria-current.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { duongTrangSo } from "@/lib/phan-trang";
 
 export function PhanTrang({ goc, n, tong }: { goc: string; n: number; tong: number }) {

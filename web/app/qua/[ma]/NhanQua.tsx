@@ -3,7 +3,7 @@
 // khoản mà chưa lưu hồ sơ → hướng dẫn lưu (chương được tặng nằm trong báo cáo của CHÍNH người nhận); đủ điều kiện → "Nhận
 // quà" rồi chuyển tới trang công cụ của mảng. Quà đã nhận / hết hạn → câu nhẹ nhàng + công cụ miễn phí.
 // Đo: gift_opened{mo_dun, con_dung}, gift_claimed{mo_dun, ket_qua} — không bao giờ gửi mã quà.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Gift, LogIn, Save, Sparkles } from "lucide-react";

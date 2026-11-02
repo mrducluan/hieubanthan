@@ -5,7 +5,7 @@
 // Có hồ sơ trên máy → gọi /api/goi-y-cheo (engine ghép "luận giải nhỏ" từ con số đã tính + KB) và hiện câu riêng của mảng
 // đó; chưa có → câu chung + 3 điều sẽ nhận. Dưới cùng dùng lại CtaCuoiBai (gợi mở chéo · luận giải/Sao · rủ bạn · ủng hộ).
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, BookOpenText, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BieuTuongManh } from "@/components/chia-se/TheBanDo";

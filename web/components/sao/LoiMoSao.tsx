@@ -3,7 +3,7 @@
 // bạn" (link mời xem hợp đôi gắn mã mời ?gt=, gửi một chạm ngay trong hộp) và thẻ hội viên năm. Câu chữ ở lib/loi-sao.ts.
 // Thưởng mời chỉ cộng khi bạn bè THẬT đăng nhập + lưu hồ sơ (hàm SQL quyết) — thẻ nói rõ, không thưởng cho cú bấm.
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Check, Crown, Loader2, Share2, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChepTay, guiHoacChep } from "@/components/chia-se/GuiLink";

@@ -1,7 +1,7 @@
 // SEO-L1 — "Tuổi nào làm nhà, cưới hỏi năm {năm}?": bảng 46 tuổi 1960–2005 (Kim lâu, Hoang ốc, Tam tai) do engine ghép
 // từ đúng hàm của từng tuổi; link xuống trang từng tuổi. Index cùng cửa sổ với trang con (năm âm hiện tại + năm sau).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

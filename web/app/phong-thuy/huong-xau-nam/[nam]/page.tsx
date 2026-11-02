@@ -1,6 +1,6 @@
 // TDG-1 — trang "Hướng xấu năm {năm}". Index năm âm hiện tại −1…+2.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

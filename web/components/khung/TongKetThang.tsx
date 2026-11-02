@@ -8,7 +8,7 @@
 //   CTA Sao: Link sang /than-so#ban-do-con-so (chương "12 tháng tới" thuộc Bản đồ con số, mở cả gói theo SAO-2) — hộp thoại
 //   Sao chỉ sống khi báo cáo đang mount nên ở đây không trừ Sao, chỉ dẫn đường; thu_sao tắt → "đang miễn phí".
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, BookOpen, Check, Download, Share2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChepTay, guiHoacChep } from "@/components/chia-se/GuiLink";

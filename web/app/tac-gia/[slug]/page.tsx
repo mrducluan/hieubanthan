@@ -2,7 +2,7 @@
 // Schema ProfilePage + Person (Google: trang hồ sơ tác giả là tín hiệu "Who" của E-E-A-T). Chỉ ghi điều đã công bố.
 import { lopCot } from "@/lib/luoi";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { ArrowRight, BookOpenCheck, Feather, ShieldCheck } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";

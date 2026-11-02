@@ -5,7 +5,7 @@
 //   (ghi MỘT lần ở đầu mục, không lặp từng dòng). Huy hiệu không mua bán, không đổi ra Sao / tiền — ghi rõ ngay dưới khối.
 //   Không doạ, không thúc, không đếm ngược.
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, Award, BadgeCheck, ChevronDown, CalendarCheck, Cloud, Compass, Flame, HeartHandshake, MessageCircle, Orbit, Trophy, UserPlus, Users, type LucideIcon } from "lucide-react";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { ghi } from "@/lib/do-luong";

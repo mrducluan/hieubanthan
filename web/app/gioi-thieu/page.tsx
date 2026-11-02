@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Bang, TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 import { vanHanh } from "@/lib/van-hanh";
 import { coUngHo } from "@/lib/ung-ho";

@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useRef, useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { ArrowRight, ChevronDown, Lock, ShieldCheck } from "lucide-react";

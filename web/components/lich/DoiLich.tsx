@@ -1,7 +1,7 @@
 "use client";
 // SEO-L5 — công cụ đổi ngày âm ↔ dương. Engine đổi (POST /api/lich/doi), web chỉ hiển thị; không lưu gì.
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 
 interface KetQua {
   duong: { ngay: number; thang: number; nam: number }; am_viet: { ngay: number; thang: number; nam: number; nhuan: boolean };

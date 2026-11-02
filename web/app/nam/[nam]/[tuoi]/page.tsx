@@ -3,7 +3,7 @@
 // sao hạn hai giới bằng lời đời thường + việc nên làm, tứ hoá của năm, lối sang lá số riêng. Engine dựng hết
 // (`/v1/nam/{nam}/tuoi/{ns}`); web chỉ hiển thị. Index năm âm hiện tại + năm sau, năm sinh 1960–2005.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { ArrowRight, CircleDot, Compass, Sparkles } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";

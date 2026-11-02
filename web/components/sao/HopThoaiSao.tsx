@@ -9,7 +9,7 @@
 // mời bạn (gửi ngay trong hộp, con số thật từ cài đặt) · Hội viên năm (khi bật). Câu chữ: lib/loi-sao.ts.
 import { useEffect, useRef, useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Gift, Loader2, QrCode, Sparkles, UserPlus, Zap } from "lucide-react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";

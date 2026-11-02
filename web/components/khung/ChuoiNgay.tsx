@@ -9,7 +9,7 @@
 //   KV-THANG (0032): gửi kèm {so: số ngày cá nhân engine trả} để máy chủ ghi nhật ký ghé; lịch tháng này (chấm ngày đã ghé —
 //   máy chủ trả, không thì nhật ký máy); chạm mốc chuỗi → nút chia sẻ (thẻ ngày sẵn có), không link trống.
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Check, Flame, Gift, Leaf, Share2 } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { loiChuoiMay, loiChuoiMayChu, loiMoiKhach, type TrangThaiChuoi } from "@/lib/chuoi-ngay";

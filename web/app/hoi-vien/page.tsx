@@ -3,7 +3,7 @@
 // rõ; công tắc sao.hoi_vien.bat tắt (hoặc chưa có cổng) → trang vẫn có (noindex) nhưng chỉ một khung "Sắp có" gọn, không giá
 // (rà UX mục 17). Không đếm ngược, không "ưu đãi", không gạch giá. Giá hiển thị đọc từ cùng cài đặt mà máy chủ dùng khi tạo đơn.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { BookOpenText, CalendarCheck, Sparkles } from "lucide-react";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { SapCo } from "@/components/khung/SapCo";

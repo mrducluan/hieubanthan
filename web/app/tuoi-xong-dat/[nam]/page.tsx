@@ -1,7 +1,7 @@
 // SEO-L1 — "Tuổi xông đất Tết {năm}": bảng gia chủ sinh 1960–2005 → 3 tuổi hợp nhất (engine ghép từ đúng hàm của trang
 // từng tuổi), tuổi nên tránh, giờ hoàng đạo mùng 1. Index cùng cửa sổ trang con (Tết năm nay + Tết tới).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

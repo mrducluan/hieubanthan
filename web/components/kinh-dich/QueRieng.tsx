@@ -3,7 +3,7 @@
 // khởi. Engine tính (`/v1/kinhdich/que-rieng`) + nghĩa nôm na KB; web chỉ hiển thị và NHỚ TRÊN MÁY theo ngày (`hbt.que_rieng.v1`)
 // — một ngày một quẻ, không "khởi lại cho đẹp" (lời quẻ Mông). Không câu hỏi, không hồ sơ, không gửi gì ngoài hai số.
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Hexagon, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

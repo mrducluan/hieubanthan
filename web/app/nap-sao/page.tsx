@@ -1,7 +1,7 @@
 // /nap-sao — nạp Sao (khâu 5 của vòng tăng trưởng, docs/KE-HOACH-THANH-TOAN.md). Một trang, ít bước: chọn gói →
 // sang trang payOS quét QR bằng app ngân hàng / ví bất kỳ → quay về /nap-sao/ket-qua, Sao vào ngay khi tiền về.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { CheckCircle2 } from "lucide-react";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { lopKieuChu } from "@/lib/kieu-chu";

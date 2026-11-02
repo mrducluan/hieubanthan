@@ -2,7 +2,7 @@
 // cụm trang" (lib/noi-dung-trang.ts đã gộp + lọc khung ngày). Chữ hiện dạng VĂN BẢN THUẦN (React tự thoát ký tự), link
 // chỉ nhận đường dẫn trong site, video chỉ youtube-nocookie và chỉ tải khi người đọc bấm → không HTML lạ, không link
 // ngoài, không làm chậm trang công cụ. Ảnh chỉ từ kho ảnh CMS (CSP img-src đã cho phép). Khối hỏi đáp KHÔNG xuất FAQPage (trang công cụ đã có FAQPage của phần giới thiệu).
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, Info, Lightbulb, ListChecks, MessageCircleQuestionMark, Quote } from "lucide-react";
 import { KhoiTrangDichView } from "@/components/trang-dich/KhoiTrangDich";
 import { NutMoiCms } from "@/components/cms/NutMoiCms";

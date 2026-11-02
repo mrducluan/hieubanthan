@@ -1,6 +1,6 @@
 // "Bài viết liên quan" theo mảng — đặt ở trang công cụ, Huyền học, Kiến thức; "Bài viết mới" ở trang chủ. Bài lấy từ CMS,
 // ban biên tập bật/tắt + đổi số bài + ghim bài ở CMS → Trang chủ & banner. Chưa có bài / CMS tắt → không hiện gì.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
 import { TheLap } from "@/components/khung/TheLap";
 import { duongBlog } from "@/lib/blog-gop";

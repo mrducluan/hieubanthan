@@ -3,7 +3,7 @@
 // hay chưa, không bao giờ hiện giá trị khoá.
 import type { Metadata } from "next";
 import { Activity, BookOpen, Database, ExternalLink, KeyRound, ScrollText, ShieldCheck, TrendingUp, Users } from "lucide-react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";

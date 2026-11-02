@@ -1,7 +1,7 @@
 // SEO-K — "Cùng tuổi {can chi} {năm}": link chéo giữa các trang theo năm sinh (mệnh, hướng hợp tuổi, làm nhà, xông đất).
 // Anchor có can chi (người ta tìm "tuổi Canh Ngọ 1990"), không chỉ con số. Chỉ dựng link — can chi do ENGINE trả
 // (trang gọi truyền vào), web không tự tính (CLAUDE.md: một bộ tính duy nhất).
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { duongTuoi } from "@/lib/kien-thuc";
 import { NAM_SINH_SEO, duongLamNha, duongXongDat } from "@/lib/tuoi-dan-gian";
 import { duongNamTuoi } from "@/lib/nam";

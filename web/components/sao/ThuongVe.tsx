@@ -5,7 +5,7 @@
 // Đọc sổ của chính mình (RLS), tối đa 5 phút/lần mỗi phiên; mốc "đã báo" = id dòng sổ lớn nhất, lưu trên máy theo tài khoản.
 // Không nói bạn nào (SAO-V: người mời chỉ thấy ngày + số Sao).
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Sparkles, UserPlus, X } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { loiThuongVe } from "@/lib/loi-sao";

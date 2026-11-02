@@ -2,7 +2,7 @@
 // bằng số thật: phễu sự kiện PostHog, Search Console (truy vấn, trang, CƠ HỘI viết nội dung), GA4 (kênh, sự kiện).
 // Mọi khoá chỉ đọc, đặt ở env Vercel. Thiếu khoá → mục đó hiện hướng dẫn kết nối. Cache 1 giờ.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";

@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

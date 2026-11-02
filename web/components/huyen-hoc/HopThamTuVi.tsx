@@ -3,7 +3,7 @@
 // chiều ngược lại khi người kia đủ giờ + giới tính + nơi sinh), kèm ĐIỂM THAM KHẢO hợp – khắc 0–100 theo 5 tiêu chí
 // (chủ dự án chốt 2026-10-21, chỉ cho phần Tử vi 2 người). Engine tính hết, web chỉ hiển thị.
 // Ngày sinh người kia chỉ gửi đi để tính, không lưu (không localStorage, không tài khoản).
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useState } from "react";
 import { ChevronDown, HeartHandshake, ListChecks, Lock, MessageCircleQuestion, Send } from "lucide-react";
 import { QUAN_HE_HOP_THAM, type ChartInputVao, type HoaVaoT, type HopThamOutputT } from "@/app/api/tuvi/schema";

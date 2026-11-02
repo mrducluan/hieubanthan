@@ -2,7 +2,7 @@
 // QT-1 — trình sửa một file kho tri thức: duyệt cây, tìm chữ, sửa giá trị chuỗi, xem khác biệt, Xuất bản = mở PR.
 // Chỉ sửa chuỗi đã có (lib/kb-sua.ts) — thêm/xoá mục là việc của kỹ sư. Máy chủ kiểm lại toàn bộ trước khi mở PR.
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ChevronRight, ExternalLink, GitPullRequest, Search, Sparkles, Undo2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

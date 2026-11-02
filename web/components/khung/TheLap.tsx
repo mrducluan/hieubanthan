@@ -1,7 +1,7 @@
 // CTA-2 — thẻ bù lưới cuối trang (lib/the-lap.ts): cùng khung với thẻ bên cạnh để hàng liền mạch, thêm chip "Kiến thức /
 // Công cụ / Thư viện" ở chân thẻ để người đọc biết đây là lối đi tiếp chứ không phải bài cùng loại. Đo bằng data-the-lap (e2e) — bấm
 // đi qua link thường, không thêm sự kiện riêng.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
 import { HinhMang } from "@/components/minh-hoa/TrangTri";
 import type { TheLap as TheLapT } from "@/lib/the-lap";

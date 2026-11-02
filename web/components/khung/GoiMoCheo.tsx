@@ -1,7 +1,7 @@
 "use client";
 // KC-3 — "Cùng chuyện này, mảng khác nói gì": link gợi mở sang mảng khác theo từ điển ý định dùng chung (engine KB).
 // Nhận sẵn `goiMo` từ bài đọc, hoặc tự tra theo (mo_dun, ma). Chỉ link trong site; đo bằng mã, không chữ.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useState } from "react";
 import { Compass } from "lucide-react";
 import { ghi } from "@/lib/do-luong";

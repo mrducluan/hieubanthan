@@ -3,7 +3,7 @@
 // tóm tắt Bản đồ con số (chương nào còn khoá), ký ức, nhiệm vụ Sao, lối tắt. KHÔNG lặp bài đọc — bốn thẻ số, chân dung,
 // chiều sâu, hỏi đáp nằm ở /than-so (cửa vào + bài đọc). Người chưa có hồ sơ nhập ở đây rồi sang /than-so xem hé lộ.
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useRouter } from "next/navigation";
 import { ArrowRight, BookOpen, CalendarCheck, Compass, HeartHandshake, History, MessageCircle, Pencil, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";

@@ -1,7 +1,7 @@
 // MT-ĐS B3 — "Xem sao hạn theo tuổi": công cụ (năm sinh + giới tính từ hồ sơ trên máy) + link bảng theo năm. Tập quán,
 // miễn phí, không nghi lễ, không vật phẩm; lời ở KB sao_han_kb.json (engine), web chỉ hiển thị.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { CongCuTuoi } from "@/components/tuoi/CongCuTuoi";

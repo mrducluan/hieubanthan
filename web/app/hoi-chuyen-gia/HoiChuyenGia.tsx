@@ -4,7 +4,7 @@
 // Hồ sơ gửi đi = ảnh chụp CHỈ các trường cần (lib/chuyen-gia-hoi HoSoCg), lấy từ hồ sơ trên máy, chỉ khi ô đồng ý được tích.
 import { useEffect, useState, type ReactNode } from "react";
 import { SapCo } from "@/components/khung/SapCo";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useRouter } from "next/navigation";
 import { HeartHandshake, Loader2, QrCode, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";

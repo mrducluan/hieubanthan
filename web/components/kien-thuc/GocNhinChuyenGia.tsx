@@ -1,6 +1,6 @@
 // GN-1 — khung "Góc nhìn chuyên gia": 2–4 câu kinh nghiệm thật do CHÍNH chuyên gia viết (engine chỉ trả khi trang đã
 // được người đó thẩm định hoặc tự viết). Web chỉ hiển thị nguyên văn, không thêm chữ nào vào lời chuyên gia.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Quote } from "lucide-react";
 import { CHUYEN_GIA, duongChuyenGia, ngayVN } from "@/lib/chuyen-gia";
 import type { LoaiTrang, TrangKienThuc } from "@/lib/kien-thuc";

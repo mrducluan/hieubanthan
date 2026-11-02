@@ -1,8 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "regions": ["sin1"],
+  "regions": [
+    "sin1"
+  ],
+  "ignoreCommand": "node scripts/bo-qua-build.mjs",
   "crons": [
-    { "path": "/api/thanh-toan/doi-soat", "schedule": "17 2 * * *" },
-    { "path": "/api/cron/hang-ngay", "schedule": "3 1 * * *" }
+    {
+      "path": "/api/thanh-toan/doi-soat",
+      "schedule": "17 2 * * *"
+    },
+    {
+      "path": "/api/cron/hang-ngay",
+      "schedule": "3 1 * * *"
+    }
   ]
 }

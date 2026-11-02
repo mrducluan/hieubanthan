@@ -1,7 +1,7 @@
 "use client";
 // KC-5 — khối cuối bài đọc (sau góp ý): (1) gợi mở sang mảng khác cùng nỗi băn khoăn (từ điển ý định chung), (2) luận giải
 // toàn bộ / nạp Sao khi đang thu Sao, (3) mời bạn, (4) ủng hộ. Không doạ, không đếm ngược; mọi link trong site.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useState } from "react";
 import { Gift, HeartHandshake, Sparkles, UserPlus } from "lucide-react";
 import { ghi } from "@/lib/do-luong";

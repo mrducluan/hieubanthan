@@ -1,7 +1,7 @@
 // Lưới bài blog dùng chung cho /blog và /blog/chuyen-muc/{slug}: bài mới nhất nổi bật (rộng hai cột), thẻ có loại bài,
 // chuyên mục, ngày, thời gian đọc. Chip chuyên mục là LINK (trang thật, có URL riêng cho SEO) — không lọc bằng JS.
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, CalendarDays, Clock } from "lucide-react";
 import { duongBlog, type BaiBlog } from "@/lib/blog-gop";
 import { NHAN_LOAI, type ChuyenMucCms } from "@/lib/cms";

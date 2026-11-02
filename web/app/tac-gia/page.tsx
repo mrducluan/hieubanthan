@@ -1,6 +1,6 @@
 // EEAT-1 — đội ngũ chuyên gia (hiện có chủ biên; chuyên gia cộng đồng thêm theo docs/LO-TRINH-CHUYEN-GIA.md).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CHUYEN_GIA, duongChuyenGia, ldNguoi } from "@/lib/chuyen-gia";

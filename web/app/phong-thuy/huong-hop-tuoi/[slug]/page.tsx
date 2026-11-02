@@ -5,7 +5,7 @@
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound, permanentRedirect } from "next/navigation";
 import { ArrowRight, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";

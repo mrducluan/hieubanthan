@@ -2,7 +2,7 @@
 // Trang /huyen-hoc — lớp hồ sơ trên máy: hồ sơ đã nhập đủ cho mảng nào thì chip "cần gì" của thẻ đổi thành "Sẵn sàng",
 // còn thiếu thì nói ĐÚNG trường thiếu ("Thiếu giờ sinh, nơi sinh"). Chỉ đọc trường nào có / chưa có trong hồ sơ (không
 // tính gì). Máy chủ và lúc chưa đọc hồ sơ: hiện chữ "cần gì" tĩnh.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Check, CircleDashed, UserRound } from "lucide-react";
 import { tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 import type { KhoaMangHH } from "@/lib/huyen-hoc";

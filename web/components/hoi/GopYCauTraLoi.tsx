@@ -2,7 +2,7 @@
 // TS-V3 tầng HỌC — "Câu trả lời này có đúng với bạn không?" dưới mỗi câu trả lời thần số.
 // Gửi /api/thanso/phan-hoi: máy chủ chỉ lưu các con số đã tính + mã câu + phái (không tên, không ngày sinh); ghi chú chỉ
 // được lưu khi người dùng TỰ tích đồng ý, và đã lọc email / số điện thoại / ngày tháng. PostHog chỉ nhận mã.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { Button } from "@/components/ui/button";

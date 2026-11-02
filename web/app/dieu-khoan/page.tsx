@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang, ngayHienThi } from "@/lib/noi-dung-trang";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 import { DANG_CAP_NHAT, vanHanh } from "@/lib/van-hanh";
 import { HOAN_TIEN_HOI_VIEN } from "@/lib/thanh-toan/hoi-vien";

@@ -2,7 +2,7 @@
 // LG-ĐS mục 3 — "Lưu vào tài khoản" cho bài luận đời sống: chỉ người đã đăng nhập, chỉ khi người dùng bấm (hoặc tự bật
 // "Tự lưu các bài luận sau" — KHÔNG tích sẵn). Máy chủ (bảng luan_giai_luu, RLS chủ sở hữu, 12 tháng) chưa bật →
 // `{ok:false, ly_do:'chua_bat'}` → ẩn cả khối. Không lưu trên trình duyệt.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useRef, useState } from "react";
 import { BookmarkCheck, BookmarkPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";

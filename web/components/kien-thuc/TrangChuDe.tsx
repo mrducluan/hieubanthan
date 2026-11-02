@@ -2,7 +2,7 @@
 // ItemList. QH-URL: cụm nằm dưới trang công cụ của mảng (trang trụ) — breadcrumb Trang chủ › {mảng} › {cụm}.
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CHU_DE, HINH_CHU_DE, TEN_MANG_SILO, duongTrang, mucLuc, truCua } from "@/lib/kien-thuc";

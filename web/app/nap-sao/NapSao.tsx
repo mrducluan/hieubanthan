@@ -3,7 +3,7 @@
 // SAO-ND (0027): mỗi gói ghi giá VND + "≈ N báo cáo"; công tắc tặng lần nạp đầu bật và người xem chưa từng nạp → một
 // dòng trung tính + số Sao tặng của từng gói (không đếm ngược, không giới hạn suất, không gạch giá).
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Check, Gift, Loader2, LockKeyhole, QrCode, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";

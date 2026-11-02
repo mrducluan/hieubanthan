@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Mail, MapPin, MessageSquareHeart, Phone, ShieldCheck } from "lucide-react";
 import { TrangPhapLy, type Muc } from "@/components/phap-ly/TrangPhapLy";
 import { DANG_CAP_NHAT, vanHanh } from "@/lib/van-hanh";

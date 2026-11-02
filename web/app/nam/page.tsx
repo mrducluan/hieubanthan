@@ -1,7 +1,7 @@
 // NAM-1 — mục lục "Xem theo năm": năm âm lịch đang đi + năm tới (trang trụ /nam/{năm}) và lối sang "Thời gian tới của
 // bạn". Năm lấy từ engine (namAmHienTai) → tự trượt sau Tết, không sửa tay mỗi năm.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";

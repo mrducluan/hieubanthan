@@ -1,6 +1,6 @@
 // MAU6 — mục lục 6 lá số minh hoạ (nhân vật hư cấu) đọc từng bước. Server Component cho SEO.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
 import { dsLaSoMau } from "@/lib/kien-thuc";
 import { JsonLd } from "@/components/seo/JsonLd";

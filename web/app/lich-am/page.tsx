@@ -1,7 +1,7 @@
 // NAM-1 — /lich-am trước đây 404 (chỉ có /lich-am/{năm}): mục lục các năm (năm âm hiện tại −2 … +3, cùng cửa sổ sitemap
 // SEO-L5) + lối sang công cụ đổi lịch. Năm lấy từ engine (tự trượt sau Tết).
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";

@@ -1,6 +1,6 @@
 // HL-1 — khối nổi bật thứ hai ở trang chủ (ngay dưới hồ sơ thần số): hoàng lịch hôm nay dựng sẵn ở máy chủ.
 // Phần "tuổi bạn" chạy ở trình duyệt từ hồ sơ trên máy (TuoiHomNay).
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, CalendarDays, Clock } from "lucide-react";
 import { homNayVN, ngayTotCongKhai } from "@/lib/hoang-lich";
 import { TuoiHomNay } from "./TuoiHomNay";

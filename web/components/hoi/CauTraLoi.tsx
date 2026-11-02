@@ -5,7 +5,7 @@
 //  · Ý 6: "Lưu" vào Bài đã lưu (bảng luan_giai_luu — chỉ khi người dùng bấm, RLS chủ sở hữu, xoá được, hết hạn 12 tháng).
 //  · Ý 2: "Chia sẻ" thẻ câu trả lời (lib/the-hoi.ts — chỉ dữ liệu danh mục cố định + câu hỏi chuẩn, không câu gõ / ngày sinh).
 import { useState, type ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { BookmarkCheck, BookmarkPlus, Check, Copy, Download, Info, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

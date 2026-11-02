@@ -2,7 +2,7 @@
 // QH-BT — tóm tắt "Bản đồ con số" trên trang của tôi (/ban-than): câu mở của chương Tổng quan + từng chương còn lại
 // (mở hay còn khoá, điểm nhấn đã tính). Chỉ gọi bản xem trước — không gửi x-mo-khoa nên không bao giờ trừ Sao, không
 // ghi paywall_viewed (phễu đo ở bài đọc /than-so). Đọc đầy đủ / mở khoá ở /than-so#ban-do-con-so.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useState } from "react";
 import { ArrowRight, LockKeyhole, Map as BanDo, BookOpenCheck } from "lucide-react";
 import { postJson } from "@/lib/goi-api";

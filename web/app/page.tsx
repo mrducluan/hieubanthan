@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { ArrowRight, ListChecks, Sparkles, Sun, Zap } from "lucide-react";
 import { HinhBauTroi, HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { CuaVao } from "@/components/hoso/CuaVao";

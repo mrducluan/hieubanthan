@@ -1,6 +1,6 @@
 // TDG-1 — "Xem tuổi xông đất": công cụ (gia chủ từ hồ sơ trên máy) + mục lục theo năm sinh cho Tết sắp tới.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { CongCuTuoi } from "@/components/tuoi/CongCuTuoi";

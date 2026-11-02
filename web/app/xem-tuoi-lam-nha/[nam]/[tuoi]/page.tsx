@@ -1,7 +1,7 @@
 // TDG-1 — trang "Tuổi {năm sinh} làm nhà năm {năm} được không" (engine dựng nội dung). Index: năm âm hiện tại + năm sau,
 // năm sinh 1960–2005; ngoài cửa sổ vẫn xem được, noindex.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

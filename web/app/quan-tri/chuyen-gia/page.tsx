@@ -2,7 +2,7 @@
 // lại trong từng hàm SQL). Thấy câu hỏi + ảnh chụp hồ sơ (chỉ khi người hỏi đồng ý; mỗi lần đọc ghi nhật ký) + bảng số engine
 // tính theo mảng; viết trả lời có kiểm cụm cấm trước khi gửi; chủ sở hữu bấm Hoàn sau khi đã chuyển tiền ngoài hệ thống.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri, TEN_VAI_TRO } from "@/lib/quan-tri";

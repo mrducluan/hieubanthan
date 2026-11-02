@@ -1,7 +1,7 @@
 // CTA-1 — trang nhận thẻ "Bản đồ 5 mảng": chòm sao 5 mảnh từ mã đã ký (không ngày sinh), trò "Đoán số" (đáp án trong
 // mã), rồi mời tự xem bản đồ của mình — link mang ?tu=bd.<…> để hồ sơ đầu tiên tính referral_signup. Không index.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { docMaBanDo, tuTuMa } from "@/lib/ma-moi";
 import { bienThe, dien } from "@/lib/the-ban-do";
 import { Button } from "@/components/ui/button";

@@ -5,7 +5,7 @@
 // Không lưu ở máy chủ — trừ khi người dùng đã đăng nhập tự bấm "Lưu vào tài khoản" (LG-ĐS, báo cáo đời sống).
 // Báo cáo `phien_ban: "doi_song_1"` (Tử vi LG-ĐS + Bát tự BT-ĐS, docs/LUAN-GIAI-DOI-SONG.md) hiện bằng
 // components/luan-giai/BaoCaoDoiSong; báo cáo khác (Bản đồ con số thần số) giữ cách hiện cũ bên dưới.
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BookOpenText, Clock, Gift, LockKeyhole, Printer, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 import { docMa } from "@/lib/ma-moi";
 import { Button } from "@/components/ui/button";
 import { NhanLoiMoi } from "./NhanLoiMoi";

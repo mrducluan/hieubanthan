@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import Link from "@/components/khung/Lien";
 // VH-1 — dòng 10 năm của chương "Vận hạn & điều nên tránh" (Tử vi + Bát tự đời sống, docs/LUAN-GIAI-DOI-SONG.md mục 8).
 // Chỉ VẼ số engine đã chấm: mỗi năm một chấm màu theo mức (lục = thuận lợi · vàng = cân bằng · hổ phách = cần lưu ý —
 // KHÔNG đỏ), năm nay có vòng vàng + nhãn "Năm nay", cờ nhỏ tập quán dân gian (năm tuổi, xung tuổi, tam tai…). Bấm một năm

@@ -5,6 +5,25 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4t. KHẨN — Vercel tạm dừng cả tài khoản (2026-11-02): hieuban.com + cms.hieuban.com đều tắt
+
+Trang báo "This deployment is temporarily paused" = Vercel trả `402 Payment required · DEPLOYMENT_DISABLED` cho CẢ web lẫn
+CMS: tài khoản gói Hobby (miễn phí) đã vượt hạn mức tháng. Gói Hobby không tính thêm tiền mà **tạm dừng mọi deploy, và
+không tự mở lại** cho tới khi anh xử lý. Nguyên nhân phía code em đã tìm ra và sửa (mục SỰ CỐ-VERCEL trong CLAUDE.md):
+mỗi lượt xem trang sinh 40–100 lượt chạy hàm vì Next.js tải trước mọi link → nay còn 1–2.
+
+- [ ] **Xem chỉ số nào vượt**: vercel.com → chọn team → tab **Usage** → chụp màn hình gửi em (thường là Function
+      Invocations / Active CPU / Fast Origin Transfer / Edge Requests). Em đối chiếu với con số đo được.
+- [ ] **Mở lại site** — chọn một:
+  - **(Nên chọn) Nâng lên Pro** (Settings → Billing → Upgrade; khoảng 20 USD/tháng mỗi thành viên, giá xem trên trang Vercel lúc
+    nâng). Site mở lại ngay. Gói Hobby theo điều khoản Vercel chỉ cho dùng **cá nhân, phi thương mại** — hieuban.com có
+    bán Sao / thanh toán payOS nên thuộc diện phải dùng Pro (cũng đúng lộ trình GĐ2 trong CLAUDE.md).
+  - Giữ Hobby: gửi yêu cầu Vercel Support xin mở lại (họ có thể mở, nhưng có thể từ chối vì site thương mại).
+- [ ] **Sau khi mở lại**: merge PR sửa lỗi (nếu chưa) để bản mới deploy; 2–3 ngày sau xem lại tab Usage — đường biểu đồ
+      Function Invocations phải giảm mạnh.
+- [ ] Nếu lên Pro: Settings → Billing → **Spend Management** — đặt mức báo động (email) thay vì mức "tạm dừng" quá
+      thấp, kẻo site lại tắt khi có đợt khách đông.
+
 ### 4s. Sau EN-4 … EN-6 nâng cấp engine (2026-11-01)
 
 - [ ] **Chọn mô hình AI diễn đạt mới** (mặc định hiện cũ) rồi **chạy lại bộ 55 câu AI thật** theo
