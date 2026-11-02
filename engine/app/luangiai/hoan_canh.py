@@ -91,29 +91,34 @@ def hop(chuong: str, muc: str | None, ngay_sinh: dt.date, ngay_xem: dt.date, tin
     o = loi(chuong, muc, nhom, tt)
     if not o:
         return None
-    ma = ".".join([tien_to, chuong, "hoan_canh", muc, nhom])
     noi = o["noi_dung"]
     if chuong == "suc_khoe" and BAC_SI not in noi:
         noi = f"{noi} {BAC_SI}"
-    return {"loai": "loi_khuyen", "tieu_de": o["tieu_de"], "noi_dung": noi,
-            "can_cu": ["Lời chọn theo mức của chương và nhóm tuổi" + (", cùng lựa chọn bạn tự khai trên hồ sơ"
-                                                                   if chuong in CHUONG_THEO_TINH_TRANG else "")
-                       + " — không đổi mức, không suy đoán."],
-            "ma_mau": ma, "_w": 0.0, "_ch": chuong}
+    h = {"loai": "loi_khuyen", "tieu_de": o["tieu_de"], "noi_dung": noi,
+         "can_cu": ["Lời chọn theo mức của chương và giai đoạn tuổi — không đổi mức, không suy đoán."],
+         "_w": 0.0, "_ch": chuong}
+    # Mã kiểm chứng chỉ khi MỘT mã ↔ MỘT lời (review lần 2): chương tình yêu / gia đình có ba lời theo tình trạng mà mã không
+    # được mang tình trạng → chỉ lời chung ("chua_noi") nhận phiếu; hai lời kia không có nút kiểm chứng, không gộp tỉ lệ.
+    if tt in (None, "chua_noi"):
+        h["ma_mau"] = ".".join([tien_to, chuong, "hoan_canh", muc, nhom])
+    return h
 
 
 def ap(chuong_ds: list[dict], ngay_sinh: dt.date, ngay_xem: dt.date, tinh_trang: str | None, tien_to: str,
        hoc: tuple = (None, None)) -> None:
     """Gắn `loi_hoan_canh` cho 5 chương (sửa tại chỗ). Luật HỌC dùng chung (`kh.danh_gia_phieu`): ≥ 30 phiếu → gắn tỉ lệ
-    đúng; ≥ 100 phiếu & < 40 % đúng → không hiện, ghi một dòng "Đang xem lại" vào `can_cu` như mọi hộp khác."""
-    trong_so = hoc[0] or {}
+    đúng; ≥ 100 phiếu & < 40 % đúng → không hiện, ghi một dòng "Đang xem lại" vào `can_cu` như mọi hộp khác. Phiếu của
+    chính người xem "chưa đúng" → không hiện với người đó (dòng đơn lẻ, không có chỗ "xếp cuối")."""
+    trong_so, ca_nhan = hoc[0] or {}, hoc[1] or {}
     for c in chuong_ds:
         h = hop(c.get("ma", ""), c.get("muc"), ngay_sinh, ngay_xem, tinh_trang, tien_to)
         if not h:
             continue
         h.pop("_w", None)
         h.pop("_ch", None)
-        dg = kh.danh_gia_phieu(trong_so.get(h["ma_mau"]))
+        if ca_nhan.get(h.get("ma_mau", "")) == "chua_dung":    # chính người xem đã bấm "chưa đúng" → không hiện lại với họ
+            continue
+        dg = kh.danh_gia_phieu(trong_so.get(h.get("ma_mau", "")))
         if dg:
             h["ty_le_dung"], h["so_phieu"] = dg[0], dg[1]
             if dg[2]:

@@ -30,7 +30,10 @@ test("chọn tình trạng → lưu trên máy, gửi kèm lá số, báo cáo c
   // Lời theo hoàn cảnh ở trường riêng của chương; mã kiểm chứng + toàn bộ đầu ra KHÔNG mang tình trạng.
   type C = { ma: string; loi_hoan_canh?: { ma_mau?: string } };
   const tc = (bc.chuong as C[]).find((c) => c.ma === "tinh_cam");
-  expect(tc?.loi_hoan_canh?.ma_mau).toMatch(/^ds\.tinh_cam\.hoan_canh\.[a-z_]+\.t\d+(_\d+)?$/);
+  expect(tc?.loi_hoan_canh).toBeTruthy();
+  expect(tc?.loi_hoan_canh?.ma_mau).toBeUndefined();            // lời theo tình trạng không nhận phiếu (một mã ↔ một lời)
+  const sn = (bc.chuong as C[]).find((c) => c.ma === "su_nghiep");
+  expect(sn?.loi_hoan_canh?.ma_mau).toMatch(/^ds\.su_nghiep\.hoan_canh\.[a-z_]+\.t\d+(_\d+)?$/);
   expect(JSON.stringify(bc)).not.toContain("co_doi");
   // Chương 1 (mở sẵn) không phải chương có lời hoàn cảnh; mở chương Tình yêu thấy dòng "Với bạn lúc này".
   const ch = page.getByTestId("lg-chuong-tinh_cam");

@@ -15,9 +15,9 @@ from app.hoidap import chung, hieu_cau, mo_dau
 from app.kb import phongthuy_kb as kb
 from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
-
-PT_MO_DAU = False   # EN-3b: xem chỗ dùng
 from app.narrative.ngan_sach import mo_ta_loi
+
+PT_MO_DAU = False   # EN-3b: đoạn mở đầu Phong thuỷ chưa bật — xem chỗ dùng trong tra_loi
 
 HUONG_KD = {"dong bac": "Đông Bắc", "dong nam": "Đông Nam", "tay bac": "Tây Bắc", "tay nam": "Tây Nam",
             "bac": "Bắc", "nam": "Nam", "dong": "Đông", "tay": "Tây"}

@@ -144,10 +144,10 @@ class NganSachRedis:
             dem.append(("nguoi_goi_gio", f"hbt:ai:ng:{ai}:{gio}", self.gio_nguoi, int(GIO * 2)))
         lenh: list[list] = []
         for _, khoa, _, ttl in dem:
-            lenh += [["INCR", khoa], ["EXPIRE", khoa, str(ttl), "NX"]]
+            lenh += [["INCR", khoa], ["EXPIRE", khoa, str(ttl)]]     # EXPIRE thường (mọi kho đều nhận): khoá luôn có hạn
         try:
-            # Chỉ kết quả INCR quyết định; EXPIRE lỗi (kho không hỗ trợ NX…) không làm hỏng lượt đếm — khoá có số cửa sổ
-            # trong tên nên cửa sổ cũ không bao giờ được đọc lại.
+            # Chỉ kết quả INCR quyết định; EXPIRE lỗi không làm hỏng lượt đếm. Đặt lại hạn mỗi lượt vô hại: khoá mang số
+            # cửa sổ giờ/ngày trong tên nên cửa sổ cũ không bao giờ được đọc lại, và luôn hết hạn ≤ 2 cửa sổ sau lượt cuối.
             kq = [int(x["result"]) for x in self._goi(lenh)[0::2]]
         except Exception:  # noqa: BLE001 — kho lỗi / chậm: đếm trong bộ nhớ tiến trình, ngắt kho một lúc
             self._ngat()

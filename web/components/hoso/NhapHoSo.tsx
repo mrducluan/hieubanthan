@@ -62,6 +62,13 @@ function du18(nam: number, thang: number, ngay: number): boolean {
   return tuoi >= 18;
 }
 
+/** Ô đang gõ có thể là ngày ÂM (đi sau ngày dương ~1 tháng): cộng một tháng trước khi so — nghiêng về không hỏi sớm. Lúc
+ *  lưu dùng ngày dương đã đổi (`dg`). */
+function du18Nhap(lich: "duong" | "am", nam: number, thang: number, ngay: number): boolean {
+  if (lich !== "am") return du18(nam, thang, ngay);
+  return thang >= 12 ? du18(nam + 1, 1, ngay) : du18(nam, thang + 1, ngay);
+}
+
 export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const c = useChuChung();
   const dongY = useDongYDuLieu();
@@ -340,7 +347,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                 </Select>
               </div>
             )}
-            {can === "day_du" && du18(Number(nam) || 0, Number(thang) || 0, Number(ngay) || 0) && (
+            {can === "day_du" && du18Nhap(lich, Number(nam) || 0, Number(thang) || 0, Number(ngay) || 0) && (
               <div className="space-y-2 sm:col-span-2">
                 <Label htmlFor="tinh-trang">Tình trạng (tuỳ chọn)</Label>
                 <Select id="tinh-trang" value={tinhTrang} onChange={(e) => setTinhTrang(e.target.value)}>

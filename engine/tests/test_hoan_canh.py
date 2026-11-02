@@ -64,6 +64,21 @@ def test_kb_khong_giong_ai_khong_doa_khong_vat_pham():
             assert not re.search(rf"(?<![\wà-ỹ]){re.escape(c)}(?![\wà-ỹ])", chu), (ch, muc, nhom, tt, c)
 
 
+GIA_DINH = ("bố mẹ", "anh chị em", "của con", "với con", "nhà riêng", "hai bên", "uống thuốc", "rượu bia", "công ty",
+            "vợ chồng", "ông bà", "con cháu", "dạy con")
+
+
+def test_kb_khong_gia_dinh_hoan_canh():
+    """Review V4: "có đôi" không có nghĩa đã cưới / sống chung / có con; không mặc định bố mẹ còn, có anh chị em, đang dùng
+    thuốc, uống rượu, làm ở công ty. Chỉ được nói khi câu có "nếu"."""
+    for ch, muc, nhom, tt in hc.moi_to_hop():
+        o = hc.loi(ch, muc, nhom, tt)
+        for cau in re.split(r"(?<=[.;:!?])\s+|\s+[—–]\s+", f"{o['tieu_de']}. {o['noi_dung']}"):
+            thap = cau.lower()
+            for c in GIA_DINH:
+                assert c not in thap or "nếu" in thap, (ch, muc, nhom, tt, cau)
+
+
 def test_tinh_trang_doi_loi_tinh_cam():
     a = hc.loi("tinh_cam", "thuan", "t25_44", "doc_than")
     b = hc.loi("tinh_cam", "thuan", "t25_44", "co_doi")
@@ -76,11 +91,13 @@ def test_hop_duoi_18_khong_co():
 
 def test_hop_ma_mau_hop_le_sql_va_khong_mang_tinh_trang():
     """Review C1: mã kiểm chứng (ghi DB + đo lường) chỉ dựng từ dữ kiện ĐÃ TÍNH — không mang tình trạng tự khai."""
-    for tt in ("co_doi", "doc_than", None):
-        h = hc.hop("gia_dinh", "can_chu_dong", dt.date(1990, 1, 1), XEM, tt, "ds.bt")
-        assert SQL_DS.match(h["ma_mau"]) and len(h["ma_mau"]) <= 60
-        assert h["ma_mau"] == "ds.bt.gia_dinh.hoan_canh.can_chu_dong.t25_44"
-        assert h["loai"] == "loi_khuyen" and "hoan_canh" not in h
+    h = hc.hop("gia_dinh", "can_chu_dong", dt.date(1990, 1, 1), XEM, None, "ds.bt")
+    assert SQL_DS.match(h["ma_mau"]) and len(h["ma_mau"]) <= 60
+    assert h["ma_mau"] == "ds.bt.gia_dinh.hoan_canh.can_chu_dong.t25_44" and h["loai"] == "loi_khuyen"
+    for tt in ("co_doi", "doc_than"):           # một mã ↔ một lời: lời theo tình trạng không nhận phiếu, không gộp tỉ lệ
+        assert "ma_mau" not in hc.hop("gia_dinh", "can_chu_dong", dt.date(1990, 1, 1), XEM, tt, "ds.bt")
+    h2 = hc.hop("su_nghiep", "thuan", dt.date(1990, 1, 1), XEM, "co_doi", "ds")
+    assert h2["ma_mau"] == "ds.su_nghiep.hoan_canh.thuan.t25_44"     # chương không đọc tình trạng: luôn có mã
 
 
 def test_tinh_trang_la_khong_hop_le_coi_nhu_chua_noi():
@@ -117,7 +134,8 @@ def test_bao_cao_co_hop_hoan_canh_dung_chuong(mang, monkeypatch):
     for ch in hc.CHUONG:
         c = next(x for x in bc["chuong"] if x["ma"] == ch)
         assert len(hh[ch]) == 1 and len(c["hop"]) <= 6, (mang, ch)
-        assert f".{c['muc']}." in hh[ch][0]["ma_mau"], "lời theo đúng mức chương"
+        if ch not in hc.CHUONG_THEO_TINH_TRANG:
+            assert f".{c['muc']}." in hh[ch][0]["ma_mau"], "lời theo đúng mức chương"
         assert not any(".hoan_canh." in (h.get("ma_mau") or "") for h in c["hop"])
     for ch, ds in hh.items():
         if ch not in hc.CHUONG:
@@ -156,7 +174,7 @@ def test_dong_tinh_trang_doi_dung_hop_tinh_cam_gia_dinh():
     for ch in ("tinh_cam", "gia_dinh"):
         assert ha[ch] and hb[ch]
         if ha.get(ch):
-            assert ha[ch][0]["noi_dung"] != hb[ch][0]["noi_dung"] and ha[ch][0]["ma_mau"] == hb[ch][0]["ma_mau"]
+            assert ha[ch][0]["noi_dung"] != hb[ch][0]["noi_dung"] and "ma_mau" not in ha[ch][0]
     for ch in ("su_nghiep", "tien_bac", "suc_khoe"):
         assert ha.get(ch) == hb.get(ch)
     assert [c["muc"] for c in a["chuong"]] == [c["muc"] for c in b["chuong"]]
@@ -174,8 +192,9 @@ def test_api_tuvi_nhan_tinh_trang_va_tu_choi_gia_tri_la():
     la = {"birth_date": "1990-05-17", "birth_time": "08:00", "gender": "nu", "noi_sinh": "ha-noi"}
     r = c.post("/v1/tuvi/luan-giai", json={"la_so": {**la, "tinh_trang": "doc_than"}, "ngay_xem": "2026-11-02"})
     assert r.status_code == 200, r.text
-    ma = [ch["loi_hoan_canh"]["ma_mau"] for ch in r.json()["chuong"] if ch.get("loi_hoan_canh")]
-    assert len(ma) == 5 and "doc_than" not in r.text
+    lhc = [ch["loi_hoan_canh"] for ch in r.json()["chuong"] if ch.get("loi_hoan_canh")]
+    assert len(lhc) == 5 and "doc_than" not in r.text
+    assert sum(1 for x in lhc if x.get("ma_mau")) == 3          # tình yêu + gia đình theo tình trạng: không nhận phiếu
     r2 = c.post("/v1/tuvi/luan-giai", json={"la_so": {**la, "tinh_trang": "goa"}, "ngay_xem": "2026-11-02"})
     assert r2.status_code == 422
 
@@ -187,8 +206,9 @@ def test_api_battu_nhan_tinh_trang():
     la = {"birth_date": "1990-05-17", "birth_time": "08:00", "gender": "nu", "noi_sinh": "ha-noi", "tinh_trang": "co_doi"}
     r = c.post("/v1/battu/luan-giai", json={"la_so": la, "ngay_xem": "2026-11-02"})
     assert r.status_code == 200, r.text
-    ma = [ch["loi_hoan_canh"]["ma_mau"] for ch in r.json()["chuong"] if ch.get("loi_hoan_canh")]
-    assert len(ma) == 5 and all(m.startswith("ds.bt.") for m in ma) and "co_doi" not in r.text
+    lhc = [ch["loi_hoan_canh"] for ch in r.json()["chuong"] if ch.get("loi_hoan_canh")]
+    ma = [x["ma_mau"] for x in lhc if x.get("ma_mau")]
+    assert len(lhc) == 5 and len(ma) == 3 and all(m.startswith("ds.bt.") for m in ma) and "co_doi" not in r.text
 
 
 def test_hoc_ha_loi_hoan_canh_khi_ty_le_thap():
@@ -200,3 +220,10 @@ def test_hoc_ha_loi_hoan_canh_khi_ty_le_thap():
     b2 = toan_bo.tuvi(SINH_TV, ngay_xem=XEM, trong_so={ma: {"dung": 30, "chua_dung": 10}})
     h = next(x for x in b2["chuong"] if x["ma"] == "su_nghiep")["loi_hoan_canh"]
     assert h["ty_le_dung"] == 0.75 and h["so_phieu"] == 40
+
+
+def test_nguoi_xem_cham_chua_dung_thi_an_voi_ho():
+    goc = toan_bo.tuvi(SINH_TV, ngay_xem=XEM)
+    ma = next(c for c in goc["chuong"] if c["ma"] == "tien_bac")["loi_hoan_canh"]["ma_mau"]
+    b = toan_bo.tuvi(SINH_TV, ngay_xem=XEM, ca_nhan={ma: "chua_dung"})
+    assert "loi_hoan_canh" not in next(c for c in b["chuong"] if c["ma"] == "tien_bac")
