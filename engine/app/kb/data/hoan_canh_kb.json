@@ -1,0 +1,530 @@
+{
+ "_meta": {
+  "source_id": "hbt_bien_tap_hoan_canh_v1",
+  "school_id": "lien_mon",
+  "trang_thai": "nhap_ai",
+  "ghi_chu": "EN-2 mục 5 — lời theo tuổi và hoàn cảnh cho 5 chương đời sống (luangiai/hoan_canh.py). Chọn theo mức chương đã chấm × nhóm tuổi × tình trạng do người dùng tự chọn; không đổi mức, không phán đoán."
+ },
+ "chuong": {
+  "su_nghiep": {
+   "thuan": {
+    "t18_24": {
+     "tieu_de": "Mới vào nghề mà gặp nhịp thuận: nên học thật nhanh lúc này",
+     "noi_dung": "Nhận thêm việc khó vừa sức, xin người đi trước góp ý từng việc; một năm làm kỹ bằng ba năm làm qua loa."
+    },
+    "t25_44": {
+     "tieu_de": "Đang dựng sự nghiệp, nhịp thuận hợp để nhận vai lớn hơn",
+     "noi_dung": "Chủ động đề xuất một việc bạn dẫn dắt từ đầu đến cuối, ghi lại kết quả bằng con số để lần sau đàm phán."
+    },
+    "t45_59": {
+     "tieu_de": "Kinh nghiệm đang là lợi thế: hợp để giữ vị trí và kèm người",
+     "noi_dung": "Chọn một hai người trẻ để truyền nghề, viết lại cách làm của mình thành quy trình — việc chạy được cả khi bạn vắng."
+    },
+    "t60": {
+     "tieu_de": "Việc quen tay vẫn thuận: làm vừa đủ, giữ niềm vui với nghề",
+     "noi_dung": "Nhận việc tư vấn hay làm bán thời gian theo sức, ưu tiên việc bạn thích hơn việc nhiều tiền."
+    }
+   },
+   "can_bang": {
+    "t18_24": {
+     "tieu_de": "Giai đoạn đầu đi làm, nhịp đều: thử nhiều để biết mình hợp gì",
+     "noi_dung": "Mỗi quý thử một kỹ năng mới gắn với việc đang làm, ghi lại việc nào làm bạn quên giờ."
+    },
+    "t25_44": {
+     "tieu_de": "Nhịp công việc đều tay, tiến lên nhờ kỹ năng chứ không nhờ may",
+     "noi_dung": "Chọn một kỹ năng làm bạn khác người khác trong nhóm và luyện đều 3 tháng trước khi tính đổi chỗ làm."
+    },
+    "t45_59": {
+     "tieu_de": "Công việc ổn định, hợp để sắp lại cho nhẹ đầu",
+     "noi_dung": "Bớt một việc tốn sức mà ít giá trị, dành thời gian ấy cho việc chỉ bạn làm tốt nhất."
+    },
+    "t60": {
+     "tieu_de": "Việc làm đều đặn giữ đầu óc minh mẫn",
+     "noi_dung": "Giữ một việc có lịch cố định trong tuần — dạy, làm vườn, giúp con cháu việc kinh doanh — để ngày có nhịp."
+    }
+   },
+   "can_chu_dong": {
+    "t18_24": {
+     "tieu_de": "Mới đi làm mà nhiều va vấp: học cách làm, chưa vội đổi việc",
+     "noi_dung": "Ở lại đủ lâu để học hết một vòng công việc, hỏi thẳng người quản lý mình cần sửa điều gì trước."
+    },
+    "t25_44": {
+     "tieu_de": "Công việc đang cần đi chậm: giữ chỗ đứng trước khi tính bước lớn",
+     "noi_dung": "Đổi việc hay mở việc riêng thì chuẩn bị quỹ dự phòng ít nhất 6 tháng chi tiêu và một người góp ý thẳng thắn."
+    },
+    "t45_59": {
+     "tieu_de": "Giai đoạn công việc nhiều sức ép: bảo vệ thứ đã có trước",
+     "noi_dung": "Cập nhật kỹ năng mới mà nghề đang cần, giữ quan hệ tốt với đồng nghiệp trẻ; quyết định lớn bàn với gia đình trước."
+    },
+    "t60": {
+     "tieu_de": "Việc làm thêm nên nhẹ tay, tránh gánh trách nhiệm lớn",
+     "noi_dung": "Không đứng tên vay hay bảo lãnh cho việc làm ăn mới; nhận việc theo sức khoẻ, có người cùng làm."
+    }
+   }
+  },
+  "tien_bac": {
+   "thuan": {
+    "t18_24": {
+     "tieu_de": "Tiền đang dễ vào: tập thói quen giữ lại ngay từ bây giờ",
+     "noi_dung": "Mỗi lần nhận lương chuyển trước một phần vào tài khoản tiết kiệm riêng, rồi mới tiêu phần còn lại."
+    },
+    "t25_44": {
+     "tieu_de": "Nhịp tiền thuận: hợp để dựng quỹ và tính chuyện tài sản lớn",
+     "noi_dung": "Lập quỹ dự phòng đủ 6 tháng chi tiêu trước, phần dư mới đưa vào việc dài hạn bạn hiểu rõ."
+    },
+    "t45_59": {
+     "tieu_de": "Tiền thuận ở tuổi này nên dành cho chặng sau nghỉ làm",
+     "noi_dung": "Tính trước khoản cần cho tuổi già và việc học của con, chia ra từng phần, không dồn vào một chỗ."
+    },
+    "t60": {
+     "tieu_de": "Tiền đủ dùng: ưu tiên an toàn hơn sinh lời",
+     "noi_dung": "Để tiền ở nơi rút được khi cần, ghi rõ giấy tờ tài sản cho người thân biết, nói không với lời mời lãi cao."
+    }
+   },
+   "can_bang": {
+    "t18_24": {
+     "tieu_de": "Tiền vào ra đều: học ghi chép trước khi học đầu tư",
+     "noi_dung": "Ghi chi tiêu một tháng liền để biết tiền đi đâu; bớt một khoản nhỏ lặp lại mỗi ngày."
+    },
+    "t25_44": {
+     "tieu_de": "Tiền ổn nhưng chưa dư nhiều: giữ kỷ luật hơn tìm cơ hội",
+     "noi_dung": "Đặt trần cho các khoản trả góp, mua lớn thì chờ thêm một tuần rồi mới quyết."
+    },
+    "t45_59": {
+     "tieu_de": "Tài chính đều tay: rà lại các khoản cố định mỗi năm",
+     "noi_dung": "Xem lại bảo hiểm, khoản vay, khoản cho mượn; khoản nào không còn cần thì thu gọn."
+    },
+    "t60": {
+     "tieu_de": "Chi tiêu đều đặn, giữ thói quen tiêu có kế hoạch",
+     "noi_dung": "Chia tiền theo tháng, để riêng một khoản cho khám sức khoẻ và việc bất ngờ."
+    }
+   },
+   "can_chu_dong": {
+    "t18_24": {
+     "tieu_de": "Tiền dễ hụt ở giai đoạn này: đừng vay để theo kịp bạn bè",
+     "noi_dung": "Tránh mua trả sau cho thứ không cần ngay; nếu đã nợ, trả khoản lãi cao trước."
+    },
+    "t25_44": {
+     "tieu_de": "Tiền bạc cần đi chậm: giữ quỹ dự phòng trước mọi kế hoạch",
+     "noi_dung": "Không cho vay hay góp vốn khi chưa có giấy tờ rõ ràng; việc lớn bàn với người cùng gánh chi tiêu."
+    },
+    "t45_59": {
+     "tieu_de": "Giai đoạn cần giữ tiền chắc tay hơn kiếm thêm",
+     "noi_dung": "Không đứng ra bảo lãnh, không dồn tiền vào một chỗ; khoản đầu tư mới chờ một quý rồi mới quyết."
+    },
+    "t60": {
+     "tieu_de": "Tiền tuổi này cần được bảo vệ kỹ",
+     "noi_dung": "Cảnh giác cuộc gọi, lời mời đầu tư hứa lãi nhanh; giao dịch lớn luôn có con cháu tin cậy cùng xem."
+    }
+   }
+  },
+  "suc_khoe": {
+   "thuan": {
+    "t18_24": {
+     "tieu_de": "Sức đang tốt: tạo nếp sống ngay khi còn dễ",
+     "noi_dung": "Giữ giờ ngủ ổn định và một môn vận động bạn thích; nếp này theo bạn rất lâu."
+    },
+    "t25_44": {
+     "tieu_de": "Sức khoẻ thuận, nhưng tuổi bận rộn dễ lơ là",
+     "noi_dung": "Khám tổng quát mỗi năm một lần dù thấy khoẻ, giữ ba buổi vận động mỗi tuần."
+    },
+    "t45_59": {
+     "tieu_de": "Sức khoẻ thuận: giữ nhịp, đừng gồng quá sức",
+     "noi_dung": "Khám định kỳ đủ mục theo tuổi, đi bộ đều mỗi ngày, ăn nhạt hơn một chút."
+    },
+    "t60": {
+     "tieu_de": "Sức khoẻ thuận: vận động nhẹ mỗi ngày giữ sức lâu",
+     "noi_dung": "Đi bộ, tập dưỡng sinh hay làm vườn đều đặn; khám định kỳ theo lịch bác sĩ dặn."
+    }
+   },
+   "can_bang": {
+    "t18_24": {
+     "tieu_de": "Sức khoẻ bình thường: để ý giấc ngủ và màn hình",
+     "noi_dung": "Tắt điện thoại trước giờ ngủ nửa tiếng, uống đủ nước, ăn sáng đều."
+    },
+    "t25_44": {
+     "tieu_de": "Sức khoẻ ở mức giữ được: cần nếp nghỉ rõ ràng",
+     "noi_dung": "Đặt một ngày trong tuần không mở việc, ngủ đủ 7 tiếng, đi khám khi cơ thể báo mệt kéo dài."
+    },
+    "t45_59": {
+     "tieu_de": "Sức khoẻ cần giữ đều: thói quen nhỏ quan trọng hơn thuốc bổ",
+     "noi_dung": "Ăn đúng bữa, đứng dậy đi lại sau mỗi giờ ngồi, khám định kỳ theo tuổi."
+    },
+    "t60": {
+     "tieu_de": "Sức khoẻ cần chăm đều: nghỉ đúng lúc, vận động vừa sức",
+     "noi_dung": "Giữ giờ ăn ngủ cố định, uống thuốc đúng hẹn bác sĩ, có người thân biết lịch khám của bạn."
+    }
+   },
+   "can_chu_dong": {
+    "t18_24": {
+     "tieu_de": "Cơ thể đang nhắc bạn bớt thức khuya, bớt cố sức",
+     "noi_dung": "Ngủ trước nửa đêm, không bỏ bữa để làm việc; mệt kéo dài thì đi khám sớm."
+    },
+    "t25_44": {
+     "tieu_de": "Sức đang bị việc và nhà kéo căng: cần chủ động nghỉ",
+     "noi_dung": "Chia bớt việc nhà, việc công ty cho người khác; khám sức khoẻ trong quý này, đừng đợi."
+    },
+    "t45_59": {
+     "tieu_de": "Giai đoạn cần chăm sức khoẻ chủ động hơn mọi năm",
+     "noi_dung": "Khám định kỳ đủ mục theo tuổi, giảm rượu bia và thức khuya, vận động nhẹ mỗi ngày."
+    },
+    "t60": {
+     "tieu_de": "Sức khoẻ cần người thân để mắt cùng",
+     "noi_dung": "Đi khám có người đi kèm, giữ nhà sáng và lối đi gọn, báo bác sĩ ngay khi thấy khác thường."
+    }
+   }
+  },
+  "tinh_cam": {
+   "thuan": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Tuổi trẻ gặp nhịp thuận: dễ quen người hợp mình",
+      "noi_dung": "Mở rộng vòng bạn bè qua việc bạn thật sự thích — câu lạc bộ, lớp học — người hợp thường gặp ở đó."
+     },
+     "co_doi": {
+      "tieu_de": "Đang có đôi lúc tình cảm thuận: cùng nhau lớn lên",
+      "noi_dung": "Cùng đặt một mục tiêu nhỏ chung, như học một thứ mới hay để dành cho chuyến đi, để hai người có chuyện cùng làm."
+     },
+     "chua_noi": {
+      "tieu_de": "Tình cảm tuổi trẻ đang thuận lợi",
+      "noi_dung": "Dành thời gian cho người bạn quý, nói điều mình nghĩ thẳng và nhẹ nhàng."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Độc thân mà nhịp tình cảm thuận: hợp để mở lòng nghiêm túc",
+      "noi_dung": "Nói rõ với bạn bè thân rằng bạn sẵn sàng gặp người mới; ưu tiên người cùng nhìn về một hướng sống."
+     },
+     "co_doi": {
+      "tieu_de": "Có đôi và tình cảm thuận: hợp để bàn chuyện dài lâu",
+      "noi_dung": "Dành một buổi riêng để nói về kế hoạch vài năm tới — nhà ở, tiền bạc, con cái — khi cả hai đang vui."
+     },
+     "chua_noi": {
+      "tieu_de": "Tình cảm đang thuận: hợp để vun đắp",
+      "noi_dung": "Giữ một buổi hẹn đều đặn mỗi tuần dành cho người quan trọng với bạn."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "Một mình ở tuổi này vẫn có nhịp thuận để gặp người hợp",
+      "noi_dung": "Đi những nơi đông người cùng sở thích; quen chậm, hiểu nhau trước rồi mới tính chuyện xa."
+     },
+     "co_doi": {
+      "tieu_de": "Vợ chồng tuổi này có nhịp thuận để gần nhau hơn",
+      "noi_dung": "Dành lại thời gian riêng cho hai người, như một chuyến đi ngắn hay một thú vui chung mới."
+     },
+     "chua_noi": {
+      "tieu_de": "Tình cảm tuổi này đang thuận, hợp để nói lời cảm ơn",
+      "noi_dung": "Nói với người thân yêu một điều bạn biết ơn ở họ — việc nhỏ mà giữ được lâu."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "Tuổi xế chiều vẫn có nhịp vui để có bạn tâm giao",
+      "noi_dung": "Tham gia hội nhóm cùng tuổi, đi lễ, đi tập; có người trò chuyện mỗi ngày đã là điều tốt."
+     },
+     "co_doi": {
+      "tieu_de": "Hai ông bà có nhịp thuận để vui bên nhau",
+      "noi_dung": "Cùng nhau giữ một nếp nhỏ mỗi ngày, như đi bộ buổi sáng hay uống trà chiều."
+     },
+     "chua_noi": {
+      "tieu_de": "Tình cảm tuổi này đang êm, hợp để sum vầy",
+      "noi_dung": "Gọi điện hay hẹn gặp người bạn cũ, người thân lâu ngày chưa gặp."
+     }
+    }
+   },
+   "can_bang": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Tình cảm nhịp đều: chưa cần vội, hiểu mình trước đã",
+      "noi_dung": "Để ý mình vui khi ở cạnh kiểu người nào; quen từ tình bạn thường bền hơn."
+     },
+     "co_doi": {
+      "tieu_de": "Đang có đôi, nhịp đều: giữ thói quen hỏi han nhau",
+      "noi_dung": "Mỗi ngày một câu hỏi thật về ngày của người kia, nghe hết rồi mới góp ý."
+     },
+     "chua_noi": {
+      "tieu_de": "Chuyện tình cảm đang bình thường, không có gì gấp",
+      "noi_dung": "Dành sức cho việc học, việc làm; người hợp đến khi bạn sống đúng nhịp của mình."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Độc thân, nhịp đều: gặp gỡ có chủ đích hơn là chờ",
+      "noi_dung": "Mỗi tháng nhận lời một buổi gặp mới; nói sớm điều bạn cần trong một mối quan hệ."
+     },
+     "co_doi": {
+      "tieu_de": "Có đôi, nhịp đều: đừng để công việc lấn hết chỗ của nhau",
+      "noi_dung": "Thống nhất ai lo việc gì trong nhà, giữ một buổi tối mỗi tuần không điện thoại."
+     },
+     "chua_noi": {
+      "tieu_de": "Tình cảm ổn định, cần chăm như chăm việc",
+      "noi_dung": "Hẹn trước thời gian cho người quan trọng như hẹn một cuộc họp, và giữ đúng hẹn."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "Một mình ở tuổi này: sống thoải mái trước, gặp ai sau",
+      "noi_dung": "Giữ đời sống riêng phong phú; người phù hợp dễ đến khi bạn đang vui với chính mình."
+     },
+     "co_doi": {
+      "tieu_de": "Vợ chồng tuổi này cần làm mới cách nói chuyện",
+      "noi_dung": "Bớt nhắc chuyện cũ, thêm chuyện mới cùng làm; khi giận, hẹn nói lại lúc cả hai đã bình tĩnh."
+     },
+     "chua_noi": {
+      "tieu_de": "Tình cảm tuổi này đều nhịp, hợp để chăm chút nhỏ",
+      "noi_dung": "Nhớ những ngày quan trọng của người thân, một lời hỏi thăm đúng lúc đáng hơn quà lớn."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "Tuổi này có bạn trò chuyện quan trọng hơn mọi thứ",
+      "noi_dung": "Giữ liên lạc đều với bạn cũ, hàng xóm; nhận lời các buổi gặp mặt cùng tuổi."
+     },
+     "co_doi": {
+      "tieu_de": "Hai ông bà nhịp đều: nhường nhau những việc nhỏ",
+      "noi_dung": "Chia việc nhà theo sức mỗi người, cùng đi khám, cùng nhắc nhau uống thuốc."
+     },
+     "chua_noi": {
+      "tieu_de": "Tình cảm tuổi này bình yên, cần giữ nếp gặp gỡ",
+      "noi_dung": "Hẹn con cháu, bạn bè một ngày cố định trong tuần để gặp hay gọi điện."
+     }
+    }
+   },
+   "can_chu_dong": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Tình cảm tuổi trẻ đang dễ vấp: chậm lại để không tổn thương",
+      "noi_dung": "Đừng vội tin hết lời hứa; giữ việc học, việc làm và bạn bè của riêng mình."
+     },
+     "co_doi": {
+      "tieu_de": "Đang có đôi mà dễ giận nhau: học cách nói khi bình tĩnh",
+      "noi_dung": "Giận thì tạm dừng cuộc nói chuyện, hẹn lại sau vài tiếng; không quyết chuyện lớn lúc nóng."
+     },
+     "chua_noi": {
+      "tieu_de": "Chuyện tình cảm đang cần nhẹ tay với chính mình",
+      "noi_dung": "Ưu tiên giấc ngủ, việc học và người bạn tin cậy; chuyện tình cảm không cần quyết ngay."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Độc thân lúc nhịp chậm: chọn kỹ hơn là chọn nhanh",
+      "noi_dung": "Quan sát cách người kia giữ lời và đối xử với người xung quanh trước khi tiến xa."
+     },
+     "co_doi": {
+      "tieu_de": "Có đôi lúc nhịp chậm: chuyện nhỏ nói sớm, đừng để dồn",
+      "noi_dung": "Mỗi tuần dành mười lăm phút nói chuyện nhà, chuyện tiền một cách bình tĩnh; cần thì nhờ người ngoài góp ý."
+     },
+     "chua_noi": {
+      "tieu_de": "Tình cảm đang cần chủ động giữ gìn",
+      "noi_dung": "Bớt hứa, làm nhiều hơn; lời xin lỗi đúng lúc giữ được nhiều điều."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "Một mình ở tuổi này: cẩn trọng với người mới quen",
+      "noi_dung": "Quen chậm, gặp nơi đông người, chưa bàn chuyện tiền bạc hay tài sản trong thời gian đầu."
+     },
+     "co_doi": {
+      "tieu_de": "Vợ chồng tuổi này cần kiên nhẫn với nhau hơn",
+      "noi_dung": "Khi bất đồng, nói về việc chứ không nói về con người; tìm người hai bên cùng tin để góp ý khi cần."
+     },
+     "chua_noi": {
+      "tieu_de": "Tình cảm tuổi này cần được chăm kỹ hơn thường lệ",
+      "noi_dung": "Hỏi han người thân nhiều hơn, bớt trách móc; chuyện khó nói thì chọn lúc yên tĩnh."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "Tuổi này dễ thấy cô đơn: chủ động tìm người trò chuyện",
+      "noi_dung": "Tham gia sinh hoạt ở xóm, ở hội; nói với con cháu khi bạn cần có người bên cạnh."
+     },
+     "co_doi": {
+      "tieu_de": "Hai ông bà dễ va nhau vì chuyện nhỏ: nhường một bước",
+      "noi_dung": "Mỗi người giữ một thú vui riêng, buổi tối ngồi lại kể chuyện ngày của nhau."
+     },
+     "chua_noi": {
+      "tieu_de": "Tuổi này cần người thân để ý nhiều hơn",
+      "noi_dung": "Hẹn con cháu gọi điện đều đặn, nói rõ khi bạn buồn hay mệt."
+     }
+    }
+   }
+  },
+  "gia_dinh": {
+   "thuan": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Nhà đang êm: hợp để gần bố mẹ hơn",
+      "noi_dung": "Về nhà hay gọi điện đều đặn, kể cho bố mẹ nghe kế hoạch của mình trước khi quyết."
+     },
+     "co_doi": {
+      "tieu_de": "Gia đình hai bên đang thuận: hợp để ra mắt, làm quen",
+      "noi_dung": "Đến thăm nhà người kia vào dịp thoải mái, mang quà nhỏ, lắng nghe nhiều hơn nói."
+     },
+     "chua_noi": {
+      "tieu_de": "Không khí gia đình đang thuận",
+      "noi_dung": "Góp một tay việc nhà, dành một bữa cơm mỗi tuần ăn cùng cả nhà."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Gia đình đang thuận: hợp để giúp đỡ bố mẹ, anh chị em",
+      "noi_dung": "Bàn trước với anh chị em cách chia nhau chăm bố mẹ, để không ai gánh một mình."
+     },
+     "co_doi": {
+      "tieu_de": "Nhà riêng đang thuận: hợp để dựng nếp nhà",
+      "noi_dung": "Hai vợ chồng thống nhất vài nếp nhà — giờ ăn chung, cách dạy con, cách chi tiêu — rồi giữ đều."
+     },
+     "chua_noi": {
+      "tieu_de": "Gia đình đang thuận, hợp để làm việc chung",
+      "noi_dung": "Rủ cả nhà một chuyến đi ngắn hay một bữa họp mặt; việc nhà chia đều cho mọi người."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "Gia đình đang thuận: hợp để làm cầu nối giữa các thế hệ",
+      "noi_dung": "Tổ chức một bữa họp mặt họ hàng, giúp người nhỏ tuổi biết thêm về gia đình mình."
+     },
+     "co_doi": {
+      "tieu_de": "Nhà đang thuận: con cái và bố mẹ hai bên đều cần bạn",
+      "noi_dung": "Dành thời gian nói chuyện với con như với người lớn, đồng thời đặt lịch thăm bố mẹ hai bên."
+     },
+     "chua_noi": {
+      "tieu_de": "Gia đình thuận lợi, hợp để vun vén",
+      "noi_dung": "Ghi lại những dịp quan trọng của mọi người, góp một bữa cơm sum họp mỗi tháng."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "Con cháu đang gần gũi: tận hưởng những buổi sum vầy",
+      "noi_dung": "Kể cho con cháu nghe chuyện ngày xưa, dạy lại một món ăn hay một nghề của nhà."
+     },
+     "co_doi": {
+      "tieu_de": "Hai ông bà và con cháu đang thuận hoà",
+      "noi_dung": "Cùng nhau giữ ngày họp mặt cố định, để con cháu có dịp về đông đủ."
+     },
+     "chua_noi": {
+      "tieu_de": "Gia đình đang thuận, hợp để truyền lại nếp nhà",
+      "noi_dung": "Viết lại công thức món ăn, chuyện họ hàng, giấy tờ quan trọng để con cháu giữ."
+     }
+    }
+   },
+   "can_bang": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Chuyện nhà nhịp đều: tự lập dần mà vẫn giữ liên lạc",
+      "noi_dung": "Tự lo được một phần chi tiêu của mình, gọi về nhà ít nhất mỗi tuần một lần."
+     },
+     "co_doi": {
+      "tieu_de": "Hai gia đình còn lạ nhau: đi từng bước",
+      "noi_dung": "Để hai bên làm quen tự nhiên, đừng ép gặp; tôn trọng nếp nhà của người kia."
+     },
+     "chua_noi": {
+      "tieu_de": "Gia đình nhịp đều, mỗi người một việc",
+      "noi_dung": "Hỏi bố mẹ cần giúp gì trong tuần, làm một việc nhà cố định của mình."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Gia đình nhịp đều: giữ ranh giới mà không xa cách",
+      "noi_dung": "Nói nhẹ nhàng với bố mẹ về lựa chọn của mình; giúp việc nhà theo sức, không hứa quá khả năng."
+     },
+     "co_doi": {
+      "tieu_de": "Nhà riêng nhịp đều: chia việc rõ để đỡ va chạm",
+      "noi_dung": "Ghi ra việc nhà, việc con cái ai lo phần nào; xem lại mỗi tháng khi lịch làm thay đổi."
+     },
+     "chua_noi": {
+      "tieu_de": "Gia đình đều nhịp: chăm từng người một chút",
+      "noi_dung": "Mỗi tuần hỏi han riêng một người trong nhà, ngoài những lần nói chuyện chung cả nhóm."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "Chuyện nhà đều nhịp: chăm bố mẹ và chăm mình cùng lúc",
+      "noi_dung": "Chia việc chăm bố mẹ với anh chị em theo lịch; giữ thời gian nghỉ cho chính mình."
+     },
+     "co_doi": {
+      "tieu_de": "Nhà riêng nhịp đều: con lớn cần được nói chuyện như người lớn",
+      "noi_dung": "Hỏi ý con trước những việc liên quan đến con; vợ chồng thống nhất trước khi nói với con."
+     },
+     "chua_noi": {
+      "tieu_de": "Gia đình đều nhịp: giữ nếp họp mặt",
+      "noi_dung": "Một bữa cơm chung mỗi tuần, ai bận thì gọi điện vào giờ ấy."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "Gia đình nhịp đều: nói rõ mong muốn với con cháu",
+      "noi_dung": "Cho con cháu biết bạn muốn sống thế nào, cần giúp những việc gì, để mọi người dễ sắp xếp."
+     },
+     "co_doi": {
+      "tieu_de": "Hai ông bà nhịp đều: giữ sự riêng tư của mỗi nhà",
+      "noi_dung": "Giúp con cháu khi được nhờ, góp ý khi được hỏi; giữ nếp sinh hoạt riêng của hai ông bà."
+     },
+     "chua_noi": {
+      "tieu_de": "Gia đình đều nhịp: sắp xếp giấy tờ, việc nhà cho gọn",
+      "noi_dung": "Để giấy tờ quan trọng ở một chỗ, nói cho một người con tin cậy biết."
+     }
+    }
+   },
+   "can_chu_dong": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Trong nhà dễ bất đồng: nói lý lẽ nhẹ nhàng thay vì cãi",
+      "noi_dung": "Chọn lúc bố mẹ thoải mái để nói điều bạn muốn, nghe hết lý do của bố mẹ trước."
+     },
+     "co_doi": {
+      "tieu_de": "Gia đình hai bên còn khúc mắc: đừng ép, cho thời gian",
+      "noi_dung": "Không bắt người kia chọn bên; lễ phép và kiên nhẫn với gia đình người ấy."
+     },
+     "chua_noi": {
+      "tieu_de": "Chuyện nhà đang cần nhẹ nhàng hơn",
+      "noi_dung": "Khi bất đồng, tạm dừng rồi nói lại sau; nhờ người lớn trong họ mà cả nhà tin để góp ý."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Chuyện nhà đang nhiều sức ép: chia việc, đừng gánh một mình",
+      "noi_dung": "Họp anh chị em để chia việc nhà, việc tiền rõ ràng, ghi lại để không ai hiểu lầm."
+     },
+     "co_doi": {
+      "tieu_de": "Nhà riêng đang dễ căng: ưu tiên nói chuyện hơn đúng sai",
+      "noi_dung": "Mỗi tuần một buổi hai vợ chồng nói chuyện bình tĩnh về việc nhà, việc con; cần thì nhờ người tư vấn."
+     },
+     "chua_noi": {
+      "tieu_de": "Gia đình đang cần chủ động giữ hoà khí",
+      "noi_dung": "Bớt nói lúc mệt, chuyện tiền trong nhà ghi ra rõ ràng, có gì không vừa ý thì nói sớm."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "Chuyện nhà nhiều việc đổ dồn: sắp lại cho kịp sức",
+      "noi_dung": "Viết ra việc của bố mẹ, của mình, việc nào nhờ được thì nhờ; giữ một ngày nghỉ trong tuần."
+     },
+     "co_doi": {
+      "tieu_de": "Nhà riêng nhiều sức ép: vợ chồng cần đứng cùng một phía",
+      "noi_dung": "Thống nhất trước chuyện tiền, chuyện con, chuyện bố mẹ hai bên rồi mới nói với người ngoài."
+     },
+     "chua_noi": {
+      "tieu_de": "Gia đình đang cần sự kiên nhẫn của bạn",
+      "noi_dung": "Chuyện tài sản, thừa kế nói sớm, có giấy tờ; chuyện tình cảm nói lúc yên tĩnh."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "Chuyện nhà cần được nói rõ để con cháu yên tâm",
+      "noi_dung": "Sắp xếp giấy tờ, tài sản, mong muốn chăm sóc khi ốm đau, nói với các con cùng lúc."
+     },
+     "co_doi": {
+      "tieu_de": "Hai ông bà cần con cháu giúp nhiều hơn: cứ nói ra",
+      "noi_dung": "Nói rõ việc nào cần con cháu đỡ; chia việc cho từng người để không ai bị quá tải."
+     },
+     "chua_noi": {
+      "tieu_de": "Gia đình đang cần bạn mở lời trước",
+      "noi_dung": "Gọi cho người con, người cháu lâu chưa nói chuyện; chuyện cũ khép lại bằng một câu nhẹ nhàng."
+     }
+    }
+   }
+  }
+ }
+}

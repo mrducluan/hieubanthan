@@ -25,6 +25,9 @@ export const HoSo = z.object({
   utc_noi_sinh: z.number().min(-12).max(14).multipleOf(0.25).optional(),
   /** TV-V2: "unknown" = không biết giờ → `gio` là giờ đại diện 12:00 chỉ để an tạm lá số; Tử vi mở khối định giờ 12 canh. */
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).optional(),
+  /** EN-2 mục 5: tình trạng NGƯỜI DÙNG TỰ CHỌN (không suy đoán) — chỉ để chọn lời ở chương tình yêu / gia đình. CHỈ lưu
+   *  trên máy (không đồng bộ tài khoản, engine không lưu); bỏ chọn = xoá trường. Chỉ hỏi người từ 18 tuổi. */
+  tinh_trang: z.enum(["doc_than", "co_doi"]).optional(),
   /** Người dùng nhập theo lịch nào; ngày/tháng/năm ở trên LUÔN là dương lịch (engine đổi). */
   lich_nhap: z.enum(["duong", "am"]).optional(),
   /** TP-LICH: ngày âm nhập theo âm lịch Việt Nam (mặc định) hay Trung Quốc (sổ tử vi / lịch Trung Quốc). */
@@ -142,6 +145,7 @@ export const NUOC_NGOAI = "nuoc_ngoai";
 export function laSoTuHoSo(h: HoSo | null | undefined): {
   birth_date: string; birth_time: string; gender: "nam" | "nu"; noi_sinh: string;
   vung?: "north" | "south"; gio_mua_he?: boolean; utc_noi_sinh?: number; do_tin_gio?: "exact" | "approx" | "unknown";
+  tinh_trang?: "doc_than" | "co_doi";
 } | null {
   if (!h?.gio || !h.gioi_tinh || !h.noi_sinh) return null;
   const nuocNgoai = h.noi_sinh === NUOC_NGOAI;
@@ -152,6 +156,7 @@ export function laSoTuHoSo(h: HoSo | null | undefined): {
     ...(nuocNgoai && h.gio_mua_he ? { gio_mua_he: true } : {}),
     ...(nuocNgoai && typeof h.utc_noi_sinh === "number" ? { utc_noi_sinh: h.utc_noi_sinh } : {}),
     ...(h.do_tin_gio ? { do_tin_gio: h.do_tin_gio } : {}),
+    ...(h.tinh_trang ? { tinh_trang: h.tinh_trang } : {}),
   };
 }
 

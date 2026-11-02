@@ -53,6 +53,11 @@ const MUI_GIO: [string, string][] = [
 // ĐY-1: chưa có đồng ý xử lý dữ liệu (lib/dong-y-du-lieu) → khối đồng ý ngắn ngay trên nút, nút thành "Đồng ý và xem kết
 // quả", và KHÔNG gửi gì lên máy chủ (kể cả xem trước đổi lịch) cho tới khi người dùng bấm. Đã đồng ý → nút như cũ + dòng
 // "Bạn đã đồng ý · Thu hồi" (thu hồi = xoá đồng ý + hồ sơ trên máy). Không modal che trang, không ô tích sẵn.
+/** EN-2 mục 5: chỉ hỏi tình trạng người từ 18 tuổi (lọc hiển thị theo năm sinh; lời theo tuổi do engine chọn). */
+function du18(namSinh: number): boolean {
+  return namSinh > 1900 && new Date().getFullYear() - namSinh >= 18;
+}
+
 export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const c = useChuChung();
   const dongY = useDongYDuLieu();
@@ -75,6 +80,8 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const [gioMuaHe, setGioMuaHe] = useState(Boolean(macDinh?.gio_mua_he));
   const [utcNoiSinh, setUtcNoiSinh] = useState(typeof macDinh?.utc_noi_sinh === "number" ? String(macDinh.utc_noi_sinh) : "");
   const [vung, setVung] = useState<string>(macDinh?.vung ?? "");
+  // EN-2 mục 5: tình trạng tự chọn (chỉ trên máy). Giữ giá trị cũ cả khi ô không hiện ở trang đang mở.
+  const [tinhTrang, setTinhTrang] = useState<string>(macDinh?.tinh_trang ?? "");
   const [doi, setDoi] = useState<KetQuaDoi | null>(null);
   const [loiDoi, setLoiDoi] = useState<string | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
@@ -150,6 +157,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
       ...(nuocNgoai && gioMuaHe ? { gio_mua_he: true } : {}),
       ...(nuocNgoai && utcNoiSinh !== "" ? { utc_noi_sinh: Number(utcNoiSinh) } : {}),
       ...(canVung && (vung === "north" || vung === "south") ? { vung } : {}),
+      ...((tinhTrang === "doc_than" || tinhTrang === "co_doi") && du18(dg.nam) ? { tinh_trang: tinhTrang } : {}),
       ...(macDinh?.tao_luc ? { tao_luc: macDinh.tao_luc } : {}),
     });
     if (!macDinh) {
@@ -166,6 +174,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
     thuHoiDongY();
     setTen(""); setNgay(""); setThang(""); setNam(""); setNhuan(false); setLich("duong"); setLichAm("viet");
     setTenKhac(""); setGio(""); setDoTin("exact"); setGioiTinh(""); setNoiSinh(""); setGioMuaHe(false); setVung("");
+    setUtcNoiSinh(""); setTinhTrang("");
     setMoThem(Boolean(can)); setDoi(null); setLoiDoi(null); setLoi(null);
   }
 
@@ -325,6 +334,20 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                   <option value="north">Bờ Bắc (Vĩnh Linh)</option>
                   <option value="south">Bờ Nam (Gio Linh, Đông Hà, Quảng Trị…)</option>
                 </Select>
+              </div>
+            )}
+            {can === "day_du" && du18(Number(nam) || 0) && (
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="tinh-trang">Tình trạng (tuỳ chọn)</Label>
+                <Select id="tinh-trang" value={tinhTrang} onChange={(e) => setTinhTrang(e.target.value)}>
+                  <option value="">Không muốn nói</option>
+                  <option value="doc_than">Đang độc thân</option>
+                  <option value="co_doi">Đang có đôi</option>
+                </Select>
+                <p className="text-xs text-fg-faint" data-testid="tinh-trang-ghi-chu">
+                  Chỉ dùng để chọn lời khuyên hợp hơn ở chương Tình yêu và Gia đình. Lưu trên máy bạn, không lưu trên máy
+                  chủ, không đồng bộ tài khoản. Không chọn cũng được.
+                </p>
               </div>
             )}
             <p className="text-xs text-fg-faint sm:col-span-2">
