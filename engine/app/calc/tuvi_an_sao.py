@@ -247,6 +247,32 @@ def _chay_node(ngay: str, ti: int, gioi_tinh: str, ngon_ngu: str, ngay_xem: str,
     return kq.stdout
 
 
+def tu_kiem() -> None:
+    """Tự kiểm lúc build ảnh Docker (engine/Dockerfile): an một lá mẫu qua CẢ HAI đường — mỗi lượt một tiến trình
+    (`an_sao.mjs`) và tiến trình chạy sẵn (`may_chu.mjs`) — gọi thẳng, không qua bộ nhớ và không rơi về đường kia (đường
+    dự phòng che mất lỗi của đường chính). Thiếu tệp .mjs / node_modules → AnSaoLoi, build hỏng. Sự cố 2026-11-02:
+    ảnh thiếu an_sao_lib.mjs → mọi lượt an sao trên production lỗi 503."""
+    for tep in (SCRIPT, MAY_CHU, THU_MUC / "an_sao_lib.mjs"):
+        if not tep.is_file():
+            raise AnSaoLoi(f"Thiếu {tep.name} trong {THU_MUC}")
+    v = dict(ngay="1988-10-24", ti=4, gioi_tinh="nam", ngon_ngu="vi-VN", ngay_xem="2027-02-06", am="", am_xem="",
+             fix_leap=True)
+    may = _MayChay(1)
+    try:
+        ket_qua = {"an_sao.mjs": json.loads(_chay_node(**v)), "may_chu.mjs": json.loads(may.goi(v))}
+    except AnSaoLoi:
+        raise
+    except Exception as e:  # noqa: BLE001 — tiến trình chạy sẵn thoát / treo: báo rõ thay vì lỗi lạ
+        raise AnSaoLoi(f"may_chu.mjs không chạy được: {e}") from e
+    finally:
+        may.dong_het()
+    for ten, la in ket_qua.items():
+        if len(la.get("palaces") or []) != 12 or not la.get("horoscope"):
+            raise AnSaoLoi(f"{ten}: lá số mẫu không đủ 12 cung / thiếu vận hạn")
+    if ket_qua["an_sao.mjs"] != ket_qua["may_chu.mjs"]:
+        raise AnSaoLoi("an_sao.mjs và may_chu.mjs cho lá số mẫu khác nhau")
+
+
 THANG_NHUAN = ("thang_sau", "thang_chinh")   # nửa sau tháng nhuận: tính sang tháng sau (iztro) / như tháng chính
 HOA_LINH = ("viet", "trung")                 # lối Việt (Nam phái) / Trung Châu (iztro)
 

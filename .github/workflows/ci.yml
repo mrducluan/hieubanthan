@@ -43,6 +43,27 @@ jobs:
         working-directory: engine
         run: python -m pytest -q
 
+  # Sự cố 2026-11-02: pytest xanh nhưng ẢNH Docker thiếu ziwei/an_sao_lib.mjs → production mọi lượt an sao 503. Dựng
+  # đúng ảnh Render dùng, chạy rồi gọi thử an sao + Thời gian tới (đường dùng tiến trình chạy sẵn).
+  engine-docker:
+    name: engine-docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: build ảnh engine (bước build tự chạy tuvi_an_sao.tu_kiem)
+        run: docker build -t hbt-engine engine
+      - name: chạy ảnh + gọi thử
+        run: |
+          docker run -d --name hbt -p 8000:8000 -e ENGINE_API_KEY=ci hbt-engine
+          for i in $(seq 1 60); do curl -sf localhost:8000/health && break; sleep 1; done
+          ls_so='{"birth_date":"1988-10-24","birth_time":"08:30","gender":"nam","noi_sinh":"ha-noi"}'
+          curl -sf -X POST localhost:8000/v1/tuvi/an-sao -H 'x-engine-key: ci' -H 'content-type: application/json' \
+            -d "$ls_so" -o /dev/null
+          curl -sf -X POST localhost:8000/v1/thoi-gian-toi -H 'x-engine-key: ci' -H 'content-type: application/json' \
+            -d "{\"ngay_sinh\":\"1988-10-24\",\"nam\":2027,\"la_so\":$ls_so}" -o /dev/null
+      - if: failure()
+        run: docker logs hbt || true
+
   web:
     name: web
     runs-on: ubuntu-latest
