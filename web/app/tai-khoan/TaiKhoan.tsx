@@ -136,7 +136,8 @@ export function TaiKhoan({ emailDuLieu = null, dichVu = { hoiVien: false, chuyen
                         // đã khai trên máy nếu cùng nơi sinh.
                         const giu = typeof h.utc_noi_sinh !== "number" && hoSo && typeof hoSo.utc_noi_sinh === "number" &&
                           hoSo.noi_sinh === h.noi_sinh ? { utc_noi_sinh: hoSo.utc_noi_sinh } : {};
-                        luuHoSo({ ...h, ...giu });
+                        // EN-2 mục 5: tình trạng chỉ lưu trên máy (không đồng bộ tài khoản) → giữ lựa chọn của máy này.
+                        luuHoSo({ ...h, ...giu, ...(hoSo?.tinh_trang ? { tinh_trang: hoSo.tinh_trang } : {}) });
                       }}>Dùng bản trong tài khoản</Button>
                     </div>
                   </div>
