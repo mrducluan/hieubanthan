@@ -22,8 +22,8 @@ COPY --from=ziwei /usr/local/bin/node /usr/local/bin/node
 WORKDIR /app
 
 # Cài phụ thuộc trước (tận dụng cache Docker khi code đổi mà deps không đổi).
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt constraints.txt ./
+RUN pip install --no-cache-dir -r requirements.txt -c constraints.txt
 
 COPY --from=ziwei /ziwei ./ziwei
 COPY app ./app

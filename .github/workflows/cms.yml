@@ -100,9 +100,11 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: engine/requirements.txt
+          cache-dependency-path: |
+            engine/requirements.txt
+            engine/constraints.txt
       - name: Cài engine
-        run: pip install -r engine/requirements.txt && npm ci --prefix engine/ziwei
+        run: pip install -r engine/requirements.txt -c engine/constraints.txt && npm ci --prefix engine/ziwei
       - name: Cài Chromium
         working-directory: cms
         run: npx playwright install --with-deps chromium
