@@ -5,6 +5,16 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4u. Đợt 2026-11-02 (bảo mật thư viện · lời theo hoàn cảnh · EN-5/EN-6)
+
+- [ ] **Deploy engine trước web** (Render dựng lại từ main; web cần trường `tinh_trang` + thần sát tham khảo của engine mới).
+- [ ] Chạy migration **0033** (múi giờ nơi sinh vào hồ sơ tài khoản) — mục 4s; chưa chạy thì web vẫn chạy như cũ.
+- [ ] GitHub → Security → Dependabot: sau khi merge, các cảnh báo zod / undici / happy-dom / fast-uri / esbuild / glob /
+      minimatch / postcss-selector-parser tự đóng. Còn **deepmerge** (mức thấp, nằm trong Payload, chưa có bản vá) — để
+      mở hoặc bấm "Dismiss → No bandwidth / tolerable risk".
+- [ ] (Khi engine chạy ≥ 2 tiến trình / máy) tạo Redis Upstash miễn phí, đặt ở Render **`HAN_MUC_REDIS_URL`** (https) +
+      **`HAN_MUC_REDIS_TOKEN`** để hạn mức lượt AI đếm chung. Một tiến trình như hiện nay thì chưa cần.
+
 ### 4t. KHẨN — Vercel tạm dừng cả tài khoản (2026-11-02): hieuban.com + cms.hieuban.com đều tắt
 
 Trang báo "This deployment is temporarily paused" = Vercel trả `402 Payment required · DEPLOYMENT_DISABLED` cho CẢ web lẫn

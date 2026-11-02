@@ -106,6 +106,8 @@ Mỗi đợt một PR, có test viết trước và thước đo trước/sau. T
 Thước đo: an toàn holdout 68% → **100%**; p95 kb/trang 1.354 → < 100 ms; không còn lỗi 500 với ngày sinh lạ.
 
 ### EN-2 · Nhất quán + lời luận (2–3 tuần) — khâu NẠP Sao (bán được chương thứ hai)
+> **Trạng thái 2026-11-02: mục 5 đã làm** (lớp hoàn cảnh `luangiai/hoan_canh.py` — một hộp lời khuyên theo mức chương ×
+> nhóm tuổi × tình trạng người dùng tự chọn, chỉ lưu trên máy; dòng EN-2 mục 5 trong `CLAUDE.md`).
 > **Trạng thái 2026-11-01: đã làm** mục 1, 2, 3 (lý do theo sao, lời mời theo hộp riêng), 4, 6, 7, 8 — chi tiết ở dòng EN-2
 > của `CLAUDE.md`. **Chưa làm mục 5** (lời theo nhóm tuổi / tình trạng độc thân – có đôi): cần ô chọn tình trạng trên hồ sơ
 > (người dùng tự chọn) → để chung đợt với EN-3 (hỏi đáp đã có trích ô người thứ hai / quan hệ). Thước đo câu trùng giữa hồ
@@ -276,6 +278,11 @@ Xếp theo bằng chứng thị trường (agent D) × khả thi (agent B):
    (BT-DC) và định giờ sinh thành một luồng "đọc theo cách khớp với đời bạn".
 
 ### EN-6 · Nền móng dài hạn (song song, mỗi đợt một ít)
+> **Trạng thái 2026-11-02 — đợt 2 đã làm:** golden hoàng lịch MỌI ngày 1930–2030 (băm theo tháng, khớp oracle 100 %);
+> khoá bản Python 3.12 (`engine/constraints.txt` + `.python-version`, Dockerfile và mọi workflow); bộ đếm hạn mức lượt AI
+> dùng chung qua Redis REST khi đặt env (`HAN_MUC_REDIS_URL`/`_TOKEN`, mặc định như cũ); gom khuôn `doi_song_1` — chọn
+> giữ hàm riêng + hợp đồng KC-1 + golden 951 mã kiểm chứng (`tests/test_ma_mau_golden.py`) thay vì thay hàm (đổi chữ,
+> rủi ro mất phiếu). Chi tiết dòng EN-6 đợt 2 trong `CLAUDE.md`.
 > **Trạng thái 2026-11-01 — đợt 1 đã làm:**
 >
 > - **BI-1…3 → `ENGINE_VERSION` 0.1.6.** BI-1: đồng hồ miền Nam UTC+8 01/04/1947 – 01/07/1955 01:00 (tzdata). Lịch âm
