@@ -18,7 +18,7 @@ import unicodedata
 from app import config
 from app.calc import lunar, tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
 from app.calc import tuvi_luu_nguyet as ln
-from app.hoidap import chung, hieu_cau, doi_song_muc as dsm
+from app.hoidap import chung, hieu_cau, mo_dau, doi_song_muc as dsm
 from app.kb import tuvi_doi_song_kb as kds
 from app.kb import tuvi_kb as kb
 from app.kb import tuvi_phi_hoa_kb as pkb
@@ -865,13 +865,18 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict,
     lời vẫn như cũ."""
     cung = pl["cung"][0] if pl["cung"] else None
     chuong = dsm.CUNG_CHUONG.get(cung) if cung else ("nam_nay" if pl["loai"] == "han" else None)
-    if not chuong:
+    # EN-3b: câu không chỉ ra cung (hoặc chỉ "Năm nay") mà điều được hỏi rõ một mảng → mượn chương của mảng đó.
+    cd = None
+    if chuong in (None, "nam_nay"):
+        cd = mo_dau.chuong_cua(mo_dau.dieu_hoi(pl["cau_chuan_hoa"], pl.get("cau_goc"), chuong))
+    if not chuong and not cd:
         return
     try:
         bc = _lap_doi_song(sinh, ngay_xem, ls, vh)
     except Exception:  # noqa: BLE001 — báo cáo đời sống là lớp thêm, không được làm hỏng hỏi đáp
         return
-    m = dsm.muc_doi_song(bc, chuong, lo_so=bool(pl.get("lo_so")))
+    m = (dsm.muc_doi_song(bc, cd, lo_so=bool(pl.get("lo_so"))) if cd and cd != chuong else None) \
+        or dsm.muc_doi_song(bc, chuong, lo_so=bool(pl.get("lo_so")))
     if not m:
         return
     if pl.get("lo_so"):
@@ -1471,6 +1476,8 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
         goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
         chung.ket(goi)
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
+    if pl["xu_ly"] not in chung.DAC_BIET:            # EN-3b: đoạn mở đầu trả lời đúng điều được hỏi
+        van = mo_dau.dat_dau(van, mo_dau.doi_song_mo(goi, pl["cau_chuan_hoa"], "tuvi", pl.get("cau_goc")), goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:

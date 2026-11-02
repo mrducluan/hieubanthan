@@ -164,6 +164,14 @@ Thước đo: an toàn holdout 68% → **100%**; p95 kb/trang 1.354 → < 100 ms
 > năm sinh tính luôn; câu kiến thức trả bằng từ điển, không cá nhân hoá), mục 5 (9 mục `bo_tri` + 10 thuật ngữ). **Còn lại
 > (EN-3b)**: "trả lời thẳng" 74 → 85% cần đoạn mở đầu soạn theo đúng điều được hỏi ở từng mảng (hiện mới sắp lại đoạn có
 > sẵn); mục 6 (bộ phân xử Naive Bayes) chưa cần — luật hoà điểm hiếm.
+>
+> **EN-3b (2026-11-02, đã làm một phần)**: `hoidap/mo_dau.py` soạn đoạn mở đầu cho 5 mảng (điều được hỏi theo danh mục
+> cố định ~45 mục — không chép chữ người dùng; mức / điều chính + một lý do + một việc; quyết định lớn: "không quyết thay
+> bạn"; sức khoẻ: "không thay lời bác sĩ"; câu đặc biệt không có mở đầu; số trong đoạn mở đầu phải có trong gói). Đoạn
+> mở đầu tóm đoạn nó lấy chữ (không lặp; phần chi tiết còn lại dời xuống). Thước đo dev có mẫu tiêu điểm riêng
+> (`dev_en3_tieu_diem.json`, viết theo câu hỏi): dev 70 → 86%. Holdout_v2: **74 → 77%** (Tử vi 76→78, Bát tự 72→81,
+> Kinh Dịch 82→88, Thần số 70→72; Phong thuỷ 72→68) — **chưa đạt 85%**; không nhìn holdout để đẩy tiếp (giới hạn: đoạn
+> mở đầu thêm một đoạn nên đẩy đoạn 2 cũ xuống khi không tóm được nó; định tuyến 90% là trần của thước đo).
 
 1. **Module "Hiểu câu hỏi" dùng chung 5 mảng** (RULES, tất định):
    - chuẩn hoá + từ điển viết tắt (ck, vk, cv, sk, bh…);
