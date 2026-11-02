@@ -50,7 +50,8 @@ CHU_DE_CUNG = [   # (cung, mẫu) — câu hỏi cá nhân không nêu tên cung
                r"co hieu", r"con (minh|em) sinh", r"con (minh|em|toi) \d{4}"]),
     ("Phu Thê", [r"tinh duyen", r"hon nhan", r"vo chong", r"nguoi yeu", r"ket hon", r"lay chong",
                  r"lay vo", r"dao hoa", r"hong loan", r"hai doi", r"tinh yeu", r"chong toi", r"vo toi",
-                 r"muon chong", r"muon vo", r"ly hon", r"tinh cam", r"lay (nguoi|ai)", r"ban doi",
+                 r"muon chong", r"muon vo", r"ly hon", r"lay duoc (chong|vo)", r"(chong|vo) (em|minh)", r"dam cuoi", r"cuoi hoi",
+                 r"(?<!\w)cuoi(?! (nam|thang|tuan|cung|ngo|hem|ky|doi|gio|ngay|chieu|duong|nha|dong|toa|day))", r"tinh cam", r"lay (nguoi|ai)", r"ban doi",
                  r"nua kia", r"chong con", r"nha chong", r"nha vo", r"me chong", r"bo chong",
                  # MT-ĐS B1: mấy đời chồng, phản bội, lập gia đình muộn, chồng bỏ, cô đơn, người thương
                  r"doi (chong|vo)", r"phan boi", r"ngoai tinh", r"lap gia dinh", r"chia tay", r"co don",
@@ -67,7 +68,7 @@ CHU_DE_CUNG = [   # (cung, mẫu) — câu hỏi cá nhân không nêu tên cung
                   r"bi thuong", r"gap chuyen", r"di phuot", r"di xa", r"xuat ngoai", r"nuoc ngoai", r"dinh cu",
                   r"xa que", r"du hoc", r"lap nghiep", r"len thanh pho", r"phuong nao", r"tha huong",
                   r"xuat khau lao dong", r"di (nhat|han|duc|my|uc|canada|dai loan)", r"sang (nhat|han|duc|my|uc|canada|nuoc)",
-                  r"bay sang", r"xuat hanh", r"doi cho o"]),
+                  r"bay sang", r"xuat hanh", r"doi cho o", r"(o|lam an|lam viec|song) xa(?! hoa)", r"xa nha"]),
     ("Tật Ách", [r"suc khoe", r"cang thang", r"ap luc", r"nghi ngoi", r"can bang", r"met moi", r"mat ngu", r"hay om",
                  r"om (yeu|dau)", r"dao keo", r"di kham", r"tai uong", r"yeu (hon|di)"]),
     ("Tài Bạch", [r"lam an", r"tien", r"tai chinh", r"giau", r"lam giau", r"thu nhap", r"tai loc", r"lua tien",
@@ -79,11 +80,15 @@ CHU_DE_CUNG = [   # (cung, mẫu) — câu hỏi cá nhân không nêu tên cung
                   r"thi cu", r"lam quan", r"chuc vu", r"hop nghe", r"(?<!bat )tu toi", r"(bi|ngoi|vao|dinh) tu(?!\w)", r"di tu (khong|ko|toi|day|ra)", r"phap luat", r"phap ly",
                   r"thi (do|dau|lai|dai hoc|cong chuc|khoi|vao|lop)", r"hoc (thac si|them|muon|gioi|dot|khoi)",
                   r"khoi (a|b|c|d)(?!\w)", r"nhan chuc", r"mat viec", r"doi viec", r"cong chuc", r"van xuong", r"hoa khoa",
-                  r"thi cong chuc", r"thi dau", r"dau cong chuc"]),
+                  r"thi cong chuc", r"thi dau", r"dau cong chuc",
+                  # EN-3c: ngành nghề, đổi / tìm việc, học lên hay đi làm — đều là chuyện công danh
+                  r"(?<!chon )(?<!hoc )nganh(?! hoc)", r"cao hoc", r"hoc tiep", r"(?<!\w)di lam(?! xa)",
+                  r"(chuyen|nhay|nghi|bo|xin|tim) viec", r"viec (moi|lam)", r"hieu (truong|pho)", r"giao vien", r"khai truong",
+                  r"mo (cua hang|quan|tiem|shop|cong ty|xuong)"]),
     ("Phụ Mẫu", [r"cha me", r"bo me", r"cap tren", r"sep", r"(?<!\w)bo (toi|em|minh)", r"(?<!\w)me (toi|em|minh)",
                  r"(?<!\w)ba (toi|em|minh)", r"(?<!\w)ong (toi|em|minh)", r"xa cha me", r"cham bo", r"cham me"]),
     ("Huynh Đệ", [r"anh chi em", r"anh em", r"chi em", r"anh trai", r"em trai", r"chi gai", r"em gai", r"con ut"]),
-    ("Điền Trạch", [r"nha rieng", r"o tro", r"doi nha", r"mua duoc nha"]),
+    ("Điền Trạch", [r"nha rieng", r"o tro", r"doi nha", r"mua duoc nha", r"chuyen nha"]),
     ("Phúc Đức", [r"phuc", r"dong ho", r"binh an", r"to tien", r"hau van", r"tuoi gia", r"ve gia", r"an nhan", r"duong gia",
                   r"ve huu", r"nghi huu", r"con chau"]),
 ]
@@ -92,8 +97,9 @@ LO_SO = [r"co bi .{0,30}(khong|ko|k)(?!\w)", r"co (gap|dinh|vuong|hay bi|phai|bi
          r"(so|sợ) qua", r"lo qua", r"co nguy hiem", r"hay gap chuyen", r"xui"]
 # MT-ĐS B1: hợp tuổi làm ăn / góp vốn (không phải hôn nhân) và sinh con hợp tuổi bố mẹ → mẫu riêng (không an lá số).
 _CHI = r"(ty|suu|dan|mao|thin|ngo|mui|than|dau|tuat|hoi)"
-HOP_LAM_AN = [r"xem tuoi lam an", rf"(hop tac|hun hap|gop von|lam an|ky hop dong|dung ten|chung von) .{{0,40}}tuoi {_CHI}(?!\w)",
-              rf"tuoi {_CHI} .{{0,40}}(hop tac|hun hap|gop von|lam an|lam ban|chung von)", rf"tuoi {_CHI} .{{0,30}}(lam ban|choi voi)"]
+HOP_LAM_AN = [rf"tuoi {_CHI}.{{0,40}}tuoi {_CHI}.{{0,40}}(lam viec chung|lam chung|lam an|hop tac|gop von)",  # EN-3c
+              r"xem tuoi lam an", rf"(hop tac|hun hap|hun von|gop von|lam an|ky hop dong|dung ten|chung von) .{{0,40}}tuoi {_CHI}(?!\w)",
+              rf"tuoi {_CHI} .{{0,40}}(hop tac|hun hap|hun von|gop von|lam an|lam ban|chung von)", rf"tuoi {_CHI} .{{0,30}}(lam ban|choi voi)"]
 SINH_CON_TUOI = [r"sinh con nam (nao|\d{4}|tuoi|\w+ )", r"(co nen|nen) sinh con(?! gio)", rf"con tuoi {_CHI} .{{0,25}}(bo|me|cha|ba) tuoi",
                  r"sinh con .{0,25}(hop|xung|khac|kieng)", r"sinh nam \w+ co (khac|xung|hop)", r"(?<!\w)de con nam"]
 SAO_KW = {"Tử Vi": [r"sao tu vi", r"tu vi (thu|o|tai|toa|nam|cu|dong)", r"(co|nguoi co|gap) tu vi", r"tu phu"],
@@ -106,13 +112,20 @@ PHU_KW = {"Hàm Trì": [r"dao hoa", r"ham tri"], "Hỏa Tinh": [r"hoa tinh"]}
 CA_NHAN = [r"toi", r"cua minh", r"minh co", r"minh la", r"la so cua", r"em co", r"cua em", r"toi co"]
 HOP_HON = [r"hop tuoi", r"hop hon", r"hop nhau", r"xung khac", r"ky nhau", r"xem tuoi lam an",
            r"tuoi \w+ lay (chong|vo) tuoi", r"hai la so", r"hop voi (anh|chi|co|chong|vo|nguoi)",
-           r"tuoi \w+.{0,30}tuoi \w+.{0,30}(xung|hop|khac|ky)"]           # HH-CT2: "chồng tuổi Thân, tôi tuổi Hợi, có xung"
+           r"tuoi \w+.{0,30}tuoi \w+.{0,30}(xung|hop|khac|ky)",
+           r"(chong|vo|nguoi yeu|ny) (toi|em|minh) (voi|va) (toi|em|minh)\b.{0,30}hop",     # EN-3c: "ck e với e … có hợp"
+           # EN-3c: hai tuổi + một người bạn đời ("tôi tuổi Thìn, người yêu tuổi Tuất, có nên cưới")
+           rf"(nguoi yeu|\bny\b|vo|chong|ban trai|ban gai) .{{0,12}}tuoi {_CHI}.{{0,50}}(cuoi|lay|hop|xung|khac|ket hon)",
+           rf"tuoi {_CHI}.{{0,30}}(nguoi yeu|\bny\b|vo|chong|ban trai|ban gai) .{{0,12}}tuoi {_CHI}"]           # HH-CT2: "chồng tuổi Thân, tôi tuổi Hợi, có xung"
 CON = [r"(cho|cua) con toi", r"la so cho con", r"be nha toi", r"sinh con nam nao", r"sinh con gio",
        r"con toi sinh", r"sinh con thang", r"nen sinh con",
-       r"con (gai|trai) (toi|minh|em)", r"(be|con) (moi|vua) sinh"]          # HH-CT2
+       r"con (gai|trai) (toi|minh|em)", r"(be|con) (moi|vua) sinh",          # HH-CT2
+       r"(lap|xem|an|coi) la so (cho|cua) (con|be)"]                            # EN-3c
 NGUOI_KHAC = [r"cho (chong|vo|me|bo|ong|ba|anh|chi|em|ban gai|ban trai|ban|nguoi yeu|sep) toi",
               r"(sep|chong|vo|me|bo|nguoi yeu|ban trai|ban gai|dong nghiep) toi (tuoi|sinh|co so|la nguoi)",
-              r"xem (tu vi|la so) cho (?!toi)", r"tuoi \w+ \w+, tinh cach"]
+              r"xem (tu vi|la so) cho (?!toi)", r"tuoi \w+ \w+, tinh cach",
+              r"(chong|vo|bo|me|sep|nguoi yeu|ban trai|ban gai) toi (nam nay|nam sau|nam toi) (co |bi |gap )?(han|xui|tot|the nao)",
+              r"(chong|vo|bo|me|sep|nguoi yeu|ban trai|ban gai) toi (co |bi |gap )han"]
 HAN = [r"dai han", r"tieu han", r"luu nien", r"nam nay", r"nam sau", r"nam toi", r"nam 20\d\d",
        r"muoi nam", r"10 nam", r"nam nao", r"khi nao", r"bao gio", r"thang nao", r"han gi",
        r"tam tai", r"thai tue", r"nam tuoi", r"van han", r"hao tai", r"hanh han",
@@ -191,6 +204,11 @@ Y_DINH_CAU_HINH = {
 _LOAI_NHAN_Y_DINH = ("la_so", "han", "ky_thuat", "la_so_con")
 # Loại câu được nhận ý định GỢI Ý từ kho vectơ (hẹp hơn luật từ khoá: câu kỹ thuật "X là gì" không bao giờ đổi loại).
 _LOAI_GOI_Y = ("la_so", "han")
+# EN-3c: "tôi với bố mẹ / sếp có hợp nhau không" là câu về cung người thân trên lá số của chính mình, không phải hợp hôn.
+_NGUOI_NHA = [r"(bo|cha) me", r"(?<!\w)(bo|me|ba|cha) (toi|em|minh)", r"anh (chi )?em", r"\bsep\b", r"cap tren",
+              r"dong nghiep", r"con (toi|minh|em)"]
+_BAN_DOI = [r"vo chong", r"(chong|vo) (toi|em|minh)", r"nguoi yeu", r"\bny\b", r"ban (trai|gai)", r"lay (chong|vo)",
+            r"ket hon", r"cuoi", r"tuoi \w+ lay"]
 PHI_HOA_KW = [r"phi hoa", r"phi tinh", r"duong bay", r"lai nhan", r"cung (nao )?tu hoa"]
 
 
@@ -338,9 +356,11 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
     kq["sao_han"] = chung.sao_han_hoi(t)
     if chung.co(t, SINH_CON_TUOI):
         kq["loai"] = "sinh_con_tuoi"
+    elif chung.co(t, [r"xem (tu vi|la so) cho (?!toi|minh|em\b)\w+"]) and chung.co(t, NGUOI_KHAC) and not chung.co(t, CON):
+        kq["loai"] = "nguoi_khac"     # EN-3c: "xem tử vi cho chồng tôi tuổi Ngọ … làm ăn" — người khác, không phải hợp tuổi
     elif chung.co(t, HOP_LAM_AN):
         kq["loai"] = "hop_lam_an"
-    elif chung.co(t, HOP_HON):
+    elif chung.co(t, HOP_HON) and not (chung.co(t, _NGUOI_NHA) and not chung.co(t, _BAN_DOI)):
         kq["loai"] = "hop_hon"
     elif chung.co(t, CON):
         kq["loai"] = "la_so_con"
@@ -370,7 +390,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
         kq["loai"] = "han"
     elif not kq["ca_nhan"] and (kq["sao"] or kq["hoa"]) and (kq["cung"] or kq["sao"]):
         kq["loai"] = "tu_hoa_cung" if kq["hoa"] and kq["cung"] else "sao_cung"
-    elif not kq["ca_nhan"] and kq["phu"] and chung.co(t_chinh, [r"la gi", r"y nghia", r"nghia la"]):
+    elif not kq["ca_nhan"] and kq["phu"] and chung.co(t_chinh, [r"la gi", r"y nghia", r"nghia la", r"la (sao|cung|cach) gi"]):
         kq["loai"] = "phu_tinh"
     elif chung.co(t_chinh, HAN) and not kq["cung"]:
         kq["loai"] = "han"
@@ -380,6 +400,11 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
         kq["cung"] = [c for c, m in CHU_DE_CUNG if chung.co(t_chinh, m)][:2]
         kq["do_tin_thap"] = not kq["cung"] and not (kq["sao"] or kq["hoa"] or kq["phu"])   # EN-3: mời chọn cụ thể
         kq["cung"] = kq["cung"] or ["Mệnh"]
+    # EN-3c: cung trọng tâm mặc định của loại câu khi câu không nêu tên cung (hợp hôn → Phu Thê; sát tinh → Mệnh)
+    if kq["loai"] == "hop_hon" and not kq["cung"]:
+        kq["cung"] = ["Phu Thê"]
+    if kq["loai"] == "sat_tinh_la_so" and not kq["cung"]:
+        kq["cung"] = ["Mệnh"]
     if kq["loai"] == "la_so" and "Tật Ách" in kq["cung"]:
         kq["xu_ly"] = "tra_loi_kem_luu_y"
     if kq["loai"] == "han":
@@ -407,7 +432,12 @@ def _ap_y_dinh(kq: dict, yd: str, t: str) -> None:
     ch, y = Y_DINH_CAU_HINH[yd], _kb_y_dinh(yd)
     tu_chu_de = [c for c, m in CHU_DE_CUNG if chung.co(t, m)]
     kq["y_dinh"] = yd
-    if kq["loai"] in ("ky_thuat", "la_so_con"):
+    # EN-3c: câu nêu năm sinh / lá số RIÊNG của con ("con gái tôi sinh 2018", "lá số bé") → giữ la_so_con (đọc lá của
+    # con khi có dữ liệu), chỉ gắn ý định; câu chung "con tôi học hành" mới đọc cung Tử Nữ trên lá của người hỏi.
+    if kq["loai"] == "la_so_con" and chung.co(t, [r"sinh (nam )?(19|20)\d\d", r"la so (cua |cho )?(be|con)",
+                                                   r"(con|be) (trai|gai)? ?(toi |minh |em )?(sinh|sn) (19|20)\d\d"]):
+        pass
+    elif kq["loai"] in ("ky_thuat", "la_so_con"):
         kq["loai"] = "la_so"
     if ch.get("loai_han"):
         kq["loai"] = "han"

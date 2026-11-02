@@ -357,7 +357,9 @@
    "goi_y": "Đặt vách, bình phong hoặc xoay chân cầu thang nếu được.",
    "nguon": "dan_gian",
    "tu_khoa": [
-    "cau thang doi dien"
+    "cau thang doi dien",
+    "cua (chinh )?.{0,15}(nhin thang|doi dien|huong thang) (vao |ra )?cau thang",
+    "cau thang .{0,15}(doi dien|nhin thang|dam thang) (vao )?cua"
    ],
    "giai_thich_hien_dai": "Cầu thang đâm thẳng ra cửa làm lối vào chật, người ngoài nhìn thẳng lên tầng trên; gió theo thang hút thẳng lên.",
    "viec": [

@@ -187,7 +187,9 @@ LINH_VUC_KW: dict[str, list[str]] = {
                   r"burnout", r"nhuong quyen", r"quan ca phe", r"shop", r"thua lo", r"lam tu xa",
                   r"di lam", r"ghi nhan", r"lam o", r"nghe y", r"tu van", r"chua lanh",
                   r"kinh doanh online", r"lam viec nhom", r"lam viec mot minh", r"moi truong lam viec",
-                  r"lam ky su", r"gop von", r"phong van", r"xin viec", r"hop dong", r"that nghiep", r"nop don nghi"],
+                  r"lam ky su", r"gop von", r"phong van", r"xin viec", r"hop dong", r"that nghiep", r"nop don nghi",
+                  r"lam (ke toan|bac si|y ta|duoc si|kien truc su|thiet ke|lap trinh)",
+                  r"chuyen (sang (lam|day|nghe|nganh)|nghe|nganh)", r"day hoc"],
     "tai_chinh": [r"(?<!thang )(?<!uu )tien", r"giau", r"tien bac", r"tai chinh", r"(?<!bat )dau tu", r"chung khoan", r"giu cua", r"tieu xai",
                   r"giu tien", r"hoang phi", r"mua nha", r"mua dat",
                   r"tien ao", r"no nan", r"dang no", r"no nhieu", r"tra het", r"vay tien", r"cho vay", r"tiet kiem", r"tieu tien", r"chi tieu", r"mua sam", r"tai loc",
@@ -197,7 +199,8 @@ LINH_VUC_KW: dict[str, list[str]] = {
                 r"tieng trung", r"diem so", r"hoc them", r"su pham", r"bo hoc", r"thi lai", r"xao nhang"],
     "suc_khoe": [r"cang thang", r"stress", r"mat ngu", r"kiet suc", r"can bang cuoc song", r"thu gian",
                  r"tram buon", r"tram cam", r"an uong", r"lo au", r"chuyen gia tam ly", r"ngu ngon",
-                 r"cau gat", r"the thao", r"thoi quen(?! xau)", r"suc khoe", r"tinh than"],
+                 r"cau gat", r"the thao", r"thoi quen(?! xau)", r"suc khoe", r"tinh than",
+                 r"can suc", r"cho can bang", r"sap xep cuoc song"],
     "tam_linh": [r"no nghiep", r"bai hoc nghiep", r"kiep truoc", r"luan hoi", r"can tu",
                  r"di tu", r"giac quan thu sau", r"nguoi duoc chon", r"so hiem", r"qua bao",
                  r"bai hoc cuoc doi", r"bai hoc lon nhat"],
@@ -209,7 +212,8 @@ LINH_VUC_KW: dict[str, list[str]] = {
                       r"phat long", r"nguoi ban tot", r"choi voi"],
     "cuoc_song": [r"chuyen nha", r"chuyen vao", r"ve que", r"dinh cu", r"mua xe", r"thanh pho",
                   r"nong thon", r"so thich", r"du lich", r"nghi huu", r"thu cung", r"cuoi tuan",
-                  r"tuoi gia", r"noi o", r"ve que lap nghiep", r"tang may", r"so nha"],
+                  r"tuoi gia", r"noi o", r"ve que lap nghiep", r"tang may", r"so nha",
+                  r"nuoi (cho|meo|thu|ca|chim)", r"thu nuoi"],
     "ban_than": [r"tinh cach", r"con nguoi", r"diem manh", r"diem yeu", r"tu tin", r"tu ti",
                  r"muc dich song", r"su menh", r"dam me", r"huong noi", r"huong ngoai", r"nong tinh",
                  r"cau toan", r"tri hoan", r"bo do", r"lanh dao", r"tai nang", r"nang khieu", r"ban than",
@@ -234,7 +238,9 @@ THOI_DIEM = [r"nam nay", r"nam sau", r"nam ngoai", r"nam 20\d\d", r"thang nay", 
 # Hỏi CHỌN ngày/tháng tốt cho một việc ("ngày nào hợp để ký hợp đồng", "ngày mai có phải ngày tốt để tỏ tình")
 # → thời vận: trả lời theo ngày/tháng/năm cá nhân; việc (hợp đồng, tỏ tình…) chỉ là bối cảnh.
 CHON_THOI_DIEM = [r"giai doan nao( trong doi)?( toi)? nen", r"(ngay|thang) nao( trong (thang|nam)( nay)?)? (hop|tot)", r"co phai (la )?(ngay|thang|nam) tot",
-                  r"thang nao trong nam"]
+                  r"thang nao trong nam",
+                  # EN-3c: "Ngày mai có hợp để ký…", "tuần sau có tốt để…" — hỏi một mốc gần có thuận không
+                  r"(ngay mai|hom nay|tuan (nay|sau|toi)|thang (nay|sau|toi)) co (hop|tot|thuan|dep)"]
 
 KY_THUAT_CHUNG = [r"tinh the nao", r"cach tinh", r"la gi$", r"tinh theo", r"co chinh xac",
                   r"co khoa hoc", r"co phai la mot"]
@@ -329,6 +335,10 @@ def _tach_gioi_thieu(cau_hoi: str) -> tuple[str, str]:
     """'Em học lớp 12, tôi hợp nghề gì?' → ('em hoc lop 12', 'toi hop nghe gi')."""
     if "," in cau_hoi:
         dau, sau = cau_hoi.split(",", 1)
+        # EN-3c: vế sau chỉ là đuôi hỏi trơn ("Tôi đang tính đổi việc, có nên không?") → vế đầu chính là câu hỏi
+        if re.fullmatch(r"(co |thi )?(nen|duoc|on|hop|tot|sao)?( (khong|ko|k|chua|a|nhi|the nao|ra sao))*\s*(a|nhe|nhi)?\s*",
+                        chuan_hoa_cau(sau)):
+            return "", chuan_hoa_cau(cau_hoi)
         if re.search(GIOI_THIEU, chuan_hoa_cau(dau)) and chuan_hoa_cau(sau):
             return chuan_hoa_cau(dau), chuan_hoa_cau(sau)
     return "", chuan_hoa_cau(cau_hoi)
@@ -368,7 +378,10 @@ def phan_loai(cau_hoi: str) -> dict:
     # đáp riêng sâu hơn ở nhánh lĩnh vực (vòng đo thanso-tu-cai-thien: 14 câu "Nợ nghiệp X là gì" bị giành nếu mở rộng).
     if not gt and (td := [m for m in hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "thanso")
                           if m["ma"] in TU_DIEN_PHUONG_PHAP
-                          or re.search(r"cach tinh|(duoc )?tinh (sao|the nao|nhu the nao|ra sao|bang cach nao)", t)]):
+                          or re.search(r"cach tinh|(duoc )?tinh (sao|the nao|nhu the nao|ra sao|bang cach nao|tu dau)"
+                                       # EN-3c: "được tính từ họ tên như thế nào", "X khác Y ở điểm nào"
+                                       r"|tinh .{0,25}(the nao|nhu the nao|ra sao)"
+                                       r"|khac .{0,40}(o )?(diem nao|the nao|ra sao|cho nao)", t)]):
         kq["tu_dien"] = [m["ma"] for m in td]          # câu kiến thức → từ điển thuật ngữ, không đọc số của người hỏi
         return xong("ky_thuat", "ban_than", "tra_loi", "giai_thich")
 
@@ -390,7 +403,7 @@ def phan_loai(cau_hoi: str) -> dict:
                  and re.search(r"(?<!\w)" + LIEN_QUAN_NGUOI + r"(?!\w)|toi va|va (anh|co|ban|nguoi)", t)
                  # "hợp làm sếp", "hợp với nghề gì": hỏi độ hợp NGHỀ của chính mình, không phải hai người
                  and not re.search(r"hop (lam|voi nghe|nghe|voi cong viec|voi viec|voi nganh|voi moi truong|"
-                                   r"voi vi tri|voi vai tro|voi kieu)", t))
+                                   r"voi vi tri|voi vai tro|voi kieu|voi (con )?so)", t))
     # "Làm sao để hoà hợp với mẹ chồng" là xin cách sống chung (gia đình), không phải so cặp số.
     if hai_nguoi and cap is None and len(ngay) < 2 and re.search(r"lam sao de hoa hop voi", t):
         hai_nguoi = False
