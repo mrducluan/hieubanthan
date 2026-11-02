@@ -162,7 +162,7 @@ Thước đo: an toàn holdout 68% → **100%**; p95 kb/trang 1.354 → < 100 ms
 > Đã làm: mục 1 (module `hoidap/hieu_cau.py`: kiểu câu, mốc thời gian, người thứ hai; mở viết tắt `chuan_hoa_cau`), mục 2
 > (`hoi_lai` + khối chọn trên web), một phần mục 3 (`chung.tra_loi_truoc` + đoạn mốc thời gian lên đầu), mục 4 (vợ/chồng có
 > năm sinh tính luôn; câu kiến thức trả bằng từ điển, không cá nhân hoá), mục 5 (9 mục `bo_tri` + 10 thuật ngữ). **Còn lại
-> (EN-3b)**: "trả lời thẳng" 74 → 85% cần đoạn mở đầu soạn theo đúng điều được hỏi ở từng mảng (hiện mới sắp lại đoạn có
+> (EN-3b)** — **2026-11-02: EN-3b + EN-3c đã làm** (đoạn mở đầu `hoidap/mo_dau.py`, Phong thuỷ tắt bằng cờ; định tuyến theo bộ dev mới `dev_en3c`): holdout trả lời thẳng 74 → **78 %**, định tuyến 90 → **92 %**, không chỉ số bảo vệ nào lùi. Mục tiêu 85 % CHƯA đạt: phần còn hụt là nội dung đoạn 1 của Thần số (72 %) và Phong thuỷ (72 %) — đợt sau (EN-3d) viết lại đoạn mở đầu hai mảng này bằng bộ dev, holdout chỉ chấm cuối. Bản cũ:: "trả lời thẳng" 74 → 85% cần đoạn mở đầu soạn theo đúng điều được hỏi ở từng mảng (hiện mới sắp lại đoạn có
 > sẵn); mục 6 (bộ phân xử Naive Bayes) chưa cần — luật hoà điểm hiếm.
 >
 > **EN-3b (2026-11-02, đã làm một phần)**: `hoidap/mo_dau.py` soạn đoạn mở đầu cho 5 mảng (điều được hỏi theo danh mục
