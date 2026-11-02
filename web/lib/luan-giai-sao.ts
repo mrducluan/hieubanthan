@@ -105,7 +105,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   if (!daMo && !moKhoa) {
     // Quà của bạn bè: thêm đúng một chương sau các chương miễn phí (chương mienPhi + 1), cùng đường cắt + diễn đạt AI.
     const tang = await chuongDuocTang(phien, moDun);
-    const kq = await goiEngineDaKiem({ ...parsed.data, dien_dat_toi_da: mienPhi + tang }, path, dauNguoiGoi(req));
+    const kq = await goiEngineDaKiem({ ...(parsed.data as Record<string, unknown>), dien_dat_toi_da: mienPhi + tang }, path, dauNguoiGoi(req));
     if (!kq.ok) return kq.res;
     const day = kq.body as BaoCaoDay;
     const ban = catXemTruoc(day, mienPhi + tang);

@@ -113,7 +113,7 @@ const Cung = z.object({
   dai_han: z.object({ tu_tuoi: z.number(), den_tuoi: z.number() }),
   tieu_han_tuoi: z.array(z.number()),
   /** TV-NP2 — độ sáng lối Việt của phụ tinh, tạp diệu, Đại/Tiểu Hao, Hoá Kỵ trong cung (chỉ sao có luận). */
-  do_sang_phu: z.record(z.string()).optional(),
+  do_sang_phu: z.record(z.string(), z.string()).optional(),
 });
 
 export const LaSoOutput = z.object({
@@ -210,8 +210,8 @@ export const LuuNguyetOutput = z.object({
   thang_sinh: z.number(), gio_sinh: z.string(), thang_nhuan: z.string(), tuoi_mu: z.number(),
   han_nam: z.object({ dai_han: TenCung, luu_nien: TenCung, tieu_han: TenCung }),
   thang: z.array(ThangLuu),
-  so_sanh_phai: z.record(z.object({ ten: z.string(), thang_gieng: TenCung, theo_thang: z.array(z.string()) })),
-  cac_phai: z.record(z.object({ ten: z.string(), cach_tinh: z.string(), nguon: z.string() })),
+  so_sanh_phai: z.record(z.string(), z.object({ ten: z.string(), thang_gieng: TenCung, theo_thang: z.array(z.string()) })),
+  cac_phai: z.record(z.string(), z.object({ ten: z.string(), cach_tinh: z.string(), nguon: z.string() })),
   uu_tien: z.string(),
   luu_y: z.string(),
 });
