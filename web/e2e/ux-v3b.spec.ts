@@ -76,19 +76,23 @@ test("M4 lá bài: lật 3D thấy pha giữa (~550 ms), giảm chuyển động
   // để phép đo thời gian nghiêng không lẫn khung hình bị rơi do hiệu ứng khác chạy cùng lúc.
   await page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== "running"), null, { timeout: 5_000 }).catch(() => {});
   await page.waitForTimeout(400);
-  // Mẫu [thời điểm, góc] mỗi khung hình. Đo THỜI GIAN lá đang nghiêng (không đếm khung: trình duyệt không giao diện có lúc
-  // chạy < 60 khung/giây khi máy bận → số khung dao động, thời gian thì không).
+  // Mẫu [thời điểm tính từ LÚC BẤM, góc] mỗi khung hình. Đo THỜI GIAN từ lúc bấm tới khi lá nằm hẳn 180° — máy chạy test
+  // bận làm rơi khung chỉ khiến số này DÀI ra, không ngắn đi (bản cũ đo khoảng giữa khung nghiêng đầu và cuối → rơi khung
+  // làm khoảng đo co lại 116–149 ms dù hiệu ứng vẫn chạy đủ, hỏng ~1/5 lần cả trên main).
   const mau = await page.evaluate(() => new Promise<[number, number][]>((ok) => {
     const el = document.querySelector<HTMLElement>("[data-testid='la-bai'] .relative.size-full")!;
     const doc = () => { const t = getComputedStyle(el).transform; const m = new DOMMatrix(t === "none" ? undefined : t); return Math.abs(Math.round(Math.atan2(-m.m13, m.m11) * 180 / Math.PI)); };
-    const ds: [number, number][] = []; let t0: number | undefined;
-    const vong = (t: number) => { t0 ??= t; ds.push([t - t0, doc()]); if (t - t0 < 900) requestAnimationFrame(vong); else ok(ds); };
+    const ds: [number, number][] = [];
     document.querySelector<HTMLButtonElement>("[data-testid='la-bai-up']")!.click();
+    const t0 = performance.now();
+    const vong = (t: number) => { ds.push([t - t0, doc()]); if (t - t0 < 1500) requestAnimationFrame(vong); else ok(ds); };
     requestAnimationFrame(vong);
   }));
-  const nghieng = mau.filter(([, g]) => g > 20 && g < 160).map(([t]) => t);
-  expect(nghieng.length).toBeGreaterThanOrEqual(2);                                   // có pha giữa (không lật tức thì)
-  expect(nghieng[nghieng.length - 1]! - nghieng[0]!).toBeGreaterThanOrEqual(150);     // pha nghiêng kéo dài (lật ~550 ms)
+  const nghieng = mau.filter(([, g]) => g > 20 && g < 160);
+  expect(nghieng.length, JSON.stringify(mau)).toBeGreaterThanOrEqual(1);                  // có pha giữa (không lật tức thì)
+  const xong = mau.find(([, g]) => g === 180);
+  expect(xong, JSON.stringify(mau)).toBeTruthy();
+  expect(xong![0], JSON.stringify(mau)).toBeGreaterThanOrEqual(450);                       // lật ~550 ms, không tức thì
   expect(mau[mau.length - 1]![1]).toBe(180);
   const mat = page.getByTestId("la-bai-mat");
   await expect(mat).toHaveAttribute("data-loai", /^(viec|cau_hoi|gio)$/);
