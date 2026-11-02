@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase/trinh-duyet";
-import { GIO_DAI_DIEN_KHONG_BIET, ngaySinhIso, type HoSo } from "@/lib/hoso";
+import { GIO_DAI_DIEN_KHONG_BIET, NUOC_NGOAI, ngaySinhIso, type HoSo } from "@/lib/hoso";
 
 /** undefined = đang kiểm tra · null = chưa đăng nhập (hoặc tài khoản chưa bật). */
 export function useNguoiDung(): User | null | undefined {
@@ -32,10 +32,14 @@ export interface HangHoSo {
   // 'unknown' từ 0015 (TV-V2 "Không biết giờ": gio_sinh để null — không lưu giờ đại diện như giờ thật).
   do_tin_gio?: "exact" | "approx" | "unknown" | null;
   am_ngay?: number | null; am_thang?: number | null; am_nam?: number | null; am_nhuan?: boolean;
+  // 0033 (EN-6 BI-3) — múi giờ chuẩn nơi sinh, chỉ khi noi_sinh = 'nuoc_ngoai'. PostgREST trả numeric dạng số
+  // (chuỗi nếu bật chế độ numeric-as-string) → luôn Number().
+  utc_noi_sinh?: number | string | null;
 }
 
 const COT_0006 = "ho_ten,ten_khac,ngay_sinh,gio_sinh,gioi_tinh,vung,cap_nhat_luc";
 const COT_0007 = `${COT_0006},noi_sinh,gio_mua_he,do_tin_gio,lich_nhap,am_ngay,am_thang,am_nam,am_nhuan`;
+const COT_0033 = `${COT_0007},utc_noi_sinh`;
 
 async function batBuoc() {
   const sb = await supabase();
@@ -43,12 +47,21 @@ async function batBuoc() {
   return sb;
 }
 
-export type HoSoTaiKhoan = Omit<HoSo, "v" | "tao_luc"> & { cap_nhat_luc: string };
+/** `cot_utc`: đọc được cột utc_noi_sinh (0033 đã chạy) — chưa chạy thì tài khoản không mang múi giờ, đừng coi là khác máy. */
+export type HoSoTaiKhoan = Omit<HoSo, "v" | "tao_luc"> & { cap_nhat_luc: string; cot_utc?: boolean };
+
+/** Múi giờ nơi sinh hợp lệ để lưu / đọc (−12…14, bước 0,25, chỉ khi sinh ở nước ngoài) — ngoài ra null. */
+export function utcHopLe(noiSinh: string | null | undefined, v: unknown): number | null {
+  const n = typeof v === "string" && v.trim() !== "" ? Number(v) : v;
+  return noiSinh === NUOC_NGOAI && typeof n === "number" && Number.isFinite(n) && n >= -12 && n <= 14 && Number.isInteger(n * 4)
+    ? n : null;
+}
 
 /** Dòng ho_so → hồ sơ máy. 'unknown' → giờ đại diện 12:00 (như form "Không biết giờ" lưu trên máy). */
 export function hoSoTuHang(data: HangHoSo): HoSoTaiKhoan {
   const [nam, thang, ngay] = data.ngay_sinh.split("-").map(Number) as [number, number, number];
   const khongBiet = data.do_tin_gio === "unknown";
+  const utc = utcHopLe(data.noi_sinh, data.utc_noi_sinh);
   const gio = khongBiet ? GIO_DAI_DIEN_KHONG_BIET : data.gio_sinh?.slice(0, 5);
   return {
     ho_ten: data.ho_ten, ngay, thang, nam,
@@ -59,6 +72,8 @@ export function hoSoTuHang(data: HangHoSo): HoSoTaiKhoan {
     ...(data.noi_sinh ? { noi_sinh: data.noi_sinh } : {}),
     ...(data.gio_mua_he ? { gio_mua_he: true } : {}),
     ...(data.do_tin_gio ? { do_tin_gio: data.do_tin_gio } : {}),
+    ...(utc !== null ? { utc_noi_sinh: utc } : {}),
+    ...("utc_noi_sinh" in data ? { cot_utc: true } : {}),
     ...(data.lich_nhap ? { lich_nhap: data.lich_nhap } : {}),
     ...(data.am_ngay && data.am_thang && data.am_nam
       ? { am: { ngay: data.am_ngay, thang: data.am_thang, nam: data.am_nam, nhuan: Boolean(data.am_nhuan) } } : {}),
@@ -68,8 +83,9 @@ export function hoSoTuHang(data: HangHoSo): HoSoTaiKhoan {
 
 export async function hoSoTaiKhoan(userId: string): Promise<HoSoTaiKhoan | null> {
   const doc = async (cot: string) => (await batBuoc()).from("ho_so").select(cot).eq("user_id", userId).maybeSingle<HangHoSo>();
-  let { data, error } = await doc(COT_0007);
-  if (error) ({ data, error } = await doc(COT_0006));
+  let { data, error } = await doc(COT_0033);
+  if (error) ({ data, error } = await doc(COT_0007));                    // chưa chạy 0033
+  if (error) ({ data, error } = await doc(COT_0006));                    // chưa chạy 0007
   if (error) throw new Error("Không đọc được hồ sơ trong tài khoản.");
   return data ? hoSoTuHang(data) : null;
 }
@@ -80,6 +96,7 @@ const VI_PHAM_CHECK = "23514";
 type Upsert = (hang: Record<string, unknown>) => PromiseLike<{ error: { code?: string } | null }>;
 
 /** Ghi hồ sơ bằng `upsert` (tách khỏi Supabase để kiểm thử). Thứ tự lùi:
+ *  0) đủ cột 0007 + utc_noi_sinh (0033); lỗi KHÁC vi phạm check (0033 chưa chạy, thiếu cột) → bỏ cột utc_noi_sinh, rồi:
  *  1) đủ cột 0007, 'unknown' thật (0015) · 2) chỉ khi vi phạm check (0015 chưa chạy) + không biết giờ: vẫn cột 0007,
  *  do_tin_gio null (như cũ) · 3) lỗi KHÁC ở lần 1 (0007 chưa chạy, thiếu cột): bộ cột 0006. */
 export async function ghiHoSo(upsert: Upsert, userId: string, h: HoSo): Promise<void> {
@@ -93,9 +110,12 @@ export async function ghiHoSo(upsert: Upsert, userId: string, h: HoSo): Promise<
     lich_nhap: h.lich_nhap ?? "duong", am_ngay: h.am?.ngay ?? null, am_thang: h.am?.thang ?? null,
     am_nam: h.am?.nam ?? null, am_nhuan: Boolean(h.am?.nhuan),
   };
-  let { error } = await upsert(day_du);
+  // utc luôn gửi (null khi sinh trong nước) để đổi nơi sinh về tỉnh thì xoá múi giờ cũ.
+  let hang: Record<string, unknown> = { ...day_du, utc_noi_sinh: utcHopLe(h.noi_sinh, h.utc_noi_sinh) };
+  let { error } = await upsert(hang);
+  if (error && error.code !== VI_PHAM_CHECK) ({ error } = await upsert(hang = day_du));   // chưa chạy 0033
   if (error?.code === VI_PHAM_CHECK) {
-    if (khongBiet) ({ error } = await upsert({ ...day_du, do_tin_gio: null }));   // chưa chạy 0015
+    if (khongBiet) ({ error } = await upsert({ ...hang, do_tin_gio: null }));      // chưa chạy 0015
   } else if (error) {
     ({ error } = await upsert(co_ban));                                           // chưa chạy 0007
   }

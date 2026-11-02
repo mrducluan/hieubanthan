@@ -2,6 +2,10 @@
 export interface Tru { can: string; chi: string }
 export interface TruNapAm extends Tru { nap_am: string }
 export interface ThanSat { ten: string; loai: "cát" | "hung" | "trung"; y: string; tru: number[]; goc: string }
+/** EN-5.3 (2026-11-02) — thần sát tham khảo (Tam Mệnh Thông Hội), luôn đủ 4 mục; không vào luận giải. */
+export interface ThanSatThamKhao extends ThanSat {
+  nhom: string; co: boolean; phai: string; cach_khac: string; theo_cach_khac: number[]; chinh?: boolean; chinh_tru?: number[];
+}
 export interface QuanHe { loai: string; tru: number[]; mo_ta: string }
 export interface NapAm { ten: string; hanh: string; han: string }
 
@@ -34,6 +38,8 @@ export interface LaSoBatTu {
     khong_vong: { ngay: string[]; nam: string[] };
     than_sat: ThanSat[];
     than_sat_nguon: string;
+    than_sat_tham_khao?: ThanSatThamKhao[];
+    than_sat_tham_khao_nguon?: string;
     /** EN-5.3 — Thai nguyên, Mệnh cung, Thân cung (+ nạp âm) và tiểu vận trước khi vào đại vận. */
     cung_than?: { thai_nguyen: TruNapAm; menh_cung: TruNapAm; than_cung: TruNapAm; giai_thich: Record<string, string>; nguon: string };
     tieu_van?: (TruNapAm & { nam: number; tuoi_mu: number })[];

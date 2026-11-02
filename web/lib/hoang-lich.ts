@@ -50,6 +50,13 @@ export interface ChonNgayKq {
 export interface NgayNhieu extends TomTatNgay {
   hop: { vai: string; ten_vai: string; quan_he: string; ten: string }[];
   luu_y: string[];
+  /** EN-5.1 (2026-11-02) — nhãn tập quán theo tuổi cô dâu (chỉ cưới hỏi có cô dâu); không ảnh hưởng thứ tự. */
+  gia_thu?: "dai_loi" | "tieu_loi" | null;
+}
+export interface ThangGiaThu {
+  co_dau: { nam_sinh: number; con_giap: string };
+  dai_loi: number[]; tieu_loi: number[]; dai_loi_chi: string[]; tieu_loi_chi: string[];
+  nhan: { dai_loi: string; tieu_loi: string }; nguon: string; loi: string;
 }
 export interface ChonNgayNhieuKq {
   viec: { ma: string; ten: string }; tu: string; den: string;
@@ -57,7 +64,8 @@ export interface ChonNgayNhieuKq {
     nam: { nam_am: number; tuoi_mu: number; luu_y: string[] }[] }[];
   ngay: NgayNhieu[]; ngay_noi_bat: NgayNhieu[];
   thang: { thang: string; so_ngay: number; ngay: NgayNhieu[]; luu_y: string[] }[];
-  tom_tat: string; goi_y: string[]; giai_thich?: { nhan: string; loi: string }[]; cach_chon: string; chua_xet: string; luu_y: string;
+  tom_tat: string; goi_y: string[]; giai_thich?: { nhan: string; loi: string }[]; cach_chon: string; chua_xet?: string; luu_y: string;
+  thang_gia_thu?: ThangGiaThu | null;
 }
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";

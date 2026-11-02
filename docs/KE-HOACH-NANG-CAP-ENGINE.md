@@ -238,15 +238,16 @@ Thước đo trên holdout_v2:
 > - **Mục 1 chọn ngày cho cả nhà** — `luangiai/chon_ngay_nhieu.py` + `/v1/lich/chon-ngay-nhieu`, khối "Chọn ngày cho cả
 >   nhà" trên `/xem-ngay-tot`: ngày hợp việc theo sách lịch, không xung tuổi ai (≤ 8 người); người chính (cô dâu, chú rể,
 >   người đứng tên) có lưu ý tháng xung tuổi, Kim lâu cô dâu, tuổi làm nhà, Tam tai (không loại ngày, xếp sau); 12 tháng có
->   nhãn ngắn + một khối giải thích; gợi ý năm âm không vướng. Chỉ nhập năm sinh, không lưu. **Bảng tháng đại lợi /
->   tiểu lợi theo tuổi cô dâu chưa đưa vào** — chưa tìm được nguồn đối chiếu (không bịa công thức).
+>   nhãn ngắn + một khối giải thích; gợi ý năm âm không vướng. Chỉ nhập năm sinh, không lưu. **Tháng đại lợi / tiểu lợi
+>   theo tuổi cô dâu (2026-11-02)**: quy tắc đọc thẳng Hiệp Kỷ Biện Phương Thư q.36, chỉ là nhãn tập quán (sách đó bác
+>   thuyết này) — không xếp, không loại ngày (`docs/QUYET-DINH-EN5-EN6.md`).
 > - **Mục 2 sao lưu năm Tử vi** — vị trí đọc từ iztro (Lộc Tồn, Kình Dương, Đà La, Thiên Mã, Khôi Việt, Xương Khúc lưu +
 >   Thái Tuế, Tang Môn, Bạch Hổ lưu), đối chứng khẩu quyết 12 năm; lời đời thường KB `tuvi_sao_luu_kb.json` (nháp); khối
 >   trong chương Vận hạn (tên sao chỉ ở "Vì sao nói vậy", khoá SAO-2 không lộ); hỏi đáp "năm nay có Kình Đà lưu không".
 >   Sao lưu không đổi mức của năm.
 > - **Mục 3 Bát tự** — Thai nguyên, Mệnh cung, Thân cung (+ nạp âm), tiểu vận trước khởi đại vận: golden 42 ca oracle
->   lunar-typescript; thần sát thêm Thiên Y, Hàm Trì (= Đào Hoa). **Chưa làm**: Thiên La Địa Võng, Học Đường, Kim Thần
->   (sách chép nhiều cách khác nhau, cần chủ dự án chọn phái); chọn ngày theo Bát tự cá nhân (cần cả ngày giờ sinh từng
+>   lunar-typescript; thần sát thêm Thiên Y, Hàm Trì (= Đào Hoa). **2026-11-02**: Thiên La Địa Võng, Học Đường, Kim Thần
+>   theo Tam Mệnh Thông Hội + ghi cách khác, lớp tham khảo không đổi mức (`docs/QUYET-DINH-EN5-EN6.md`); chọn ngày theo Bát tự cá nhân (cần cả ngày giờ sinh từng
 >   người — để đợt sau, dùng lại khung mục 1).
 > - **Mục 4 cửa sổ quyết định** — "có nên / khi nào … trong N tháng tới" → `luangiai/cua_so.py` dùng đúng hàm tháng của
 >   Thời gian tới (Tử vi tháng âm, Bát tự tháng tiết), đoạn đầu câu trả lời nêu tháng thuận / tháng nên đi chậm, không
@@ -280,7 +281,8 @@ Xếp theo bằng chứng thị trường (agent D) × khả thi (agent B):
 > - **BI-1…3 → `ENGINE_VERSION` 0.1.6.** BI-1: đồng hồ miền Nam UTC+8 01/04/1947 – 01/07/1955 01:00 (tzdata). Lịch âm
 >   miền Nam vẫn UTC+8 chỉ 1960–1975, tách bằng `config.tz_lich_am`. BI-2: giờ Tý muộn Tử vi an đúng như sinh ngày hôm
 >   sau, giờ Tý, chuẩn hoá ở đầu vào. Ngày âm hiển thị giữ ngày sinh, có cờ `ty_muon_ngay_sau`. BI-3: Bát tự sinh ở nước
->   ngoài so mốc tiết theo múi giờ chuẩn nơi sinh; ô chọn nằm trong form hồ sơ, chưa khai thì gắn cờ nhắc.
+>   ngoài so mốc tiết theo múi giờ chuẩn nơi sinh; ô chọn nằm trong form hồ sơ, chưa khai thì gắn cờ nhắc. Lưu vào tài
+>   khoản: migration 0033 (2026-11-02, chờ chủ dự án chạy; chưa chạy thì chỉ lưu trên máy).
 > - **Golden mở rộng trong CI:**
 >   - mọi mùng 1 lịch Trung Quốc 1901–2099 (2.461 tháng; 5 ca sóc sát nửa đêm ghi tên);
 >   - 5.000 tứ trụ + chiều đại vận, gồm hơn 300 ca dạ Tý;

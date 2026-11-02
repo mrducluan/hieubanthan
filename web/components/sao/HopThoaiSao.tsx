@@ -205,7 +205,7 @@ function NhanChaoMung({ y, xong, daNhan: baoDaNhan }: { y: YeuCauSao; xong: () =
           ? <>Quà chào mừng: <b className="text-gold">{y.chao_mung} Sao</b> cho tài khoản đã lưu hồ sơ{du ? " — đủ mở ngay." : "."}</>
           : <>Quà chào mừng: lưu hồ sơ <b>{hs?.ho_ten ?? "của bạn"}</b> vào tài khoản để nhận <b className="text-gold">{y.chao_mung} Sao</b>{du ? " — đủ mở ngay." : "."}</>}</span></p>
       {!tkCoHoSo && (
-        <p className="mt-1 text-xs text-fg-faint">Bấm nút là bạn đồng ý lưu <b>họ tên (kèm tên thường gọi), ngày giờ sinh (kèm cách nhập lịch), giới tính, nơi sinh</b> vào tài khoản để dùng trên máy khác.
+        <p className="mt-1 text-xs text-fg-faint">Bấm nút là bạn đồng ý lưu <b>họ tên (kèm tên thường gọi), ngày giờ sinh (kèm cách nhập lịch), giới tính, nơi sinh (kèm múi giờ nếu sinh ở nước ngoài)</b> vào tài khoản để dùng trên máy khác.
           Nội dung bài đọc và câu hỏi không được lưu. Xoá được bất cứ lúc nào ở trang Tài khoản.{" "}
           <Link href="/chinh-sach-rieng-tu#du-lieu" className="text-gold underline">Chính sách quyền riêng tư</Link></p>
       )}

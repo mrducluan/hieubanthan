@@ -132,6 +132,12 @@ test("EN-5.1 chọn ngày cho cả nhà: cưới hỏi 4 người, Kim lâu cô 
   const kq = page.getByTestId("ket-qua-nhieu");
   await expect(kq).toContainText("không xung tuổi ai trong 3 người");
   await expect(kq).toContainText("Năm âm 2027 cô dâu vướng lưu ý");
+  // EN-5.1 (2026-11-02): tháng đại lợi / tiểu lợi theo tuổi cô dâu (2000 Canh Thìn) — chỉ thông tin tập quán, có nguồn
+  const gt = page.getByTestId("gia-thu-nhieu");
+  await gt.getByText(/Tháng đại lợi \/ tiểu lợi/).click();
+  await expect(gt).toContainText("tháng đại lợi là tháng 4 (Tỵ), tháng 10 (Hợi)");
+  await expect(gt).toContainText("không dùng để xếp hay bỏ ngày nào");
+  await expect(gt).toContainText("Hiệp Kỷ Biện Phương Thư");
   await kq.getByText("Theo từng tháng").click();
   await expect(page.getByTestId("thang-nhieu").locator("> li")).toHaveCount(12);
   await expect(page.getByTestId("thang-nhieu")).toContainText("Kim lâu");

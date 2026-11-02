@@ -1,0 +1,18 @@
+{
+  "_nguon": "Khâm định Hiệp Kỷ Biện Phương Thư (1741, cổ thư công cộng; bản Tứ khố toàn thư) — quyển 36 'Biện ngoa · Nam nữ hợp hôn đại lợi nguyệt' và tờ tấu ở quyển đầu. Nguyên văn quy tắc (q.36): 其法以女命為主，子寅辰午申戌六陽年自本命前一月向前順數，丑卯巳未酉亥六陰年自本命後一月向後逆數，第一月為大利，第二月妨媒氏首子，第三月妨翁姑，第四月妨女父母，第五月妨夫，第六月妨本身，至第七月又復一轉. Tờ tấu q.首 chép lại cùng quy tắc (陽年本命前一月，陰年本命後一月為大利，次月妨媒…). Sách nói rõ đây là thuyết của thuật sĩ, triều đình đã tâu xin bỏ (今已奏准刪除) — nên hệ thống chỉ hiện làm thông tin tập quán, không xếp hạng, không loại ngày.",
+  "_quy_uoc": "Tháng theo nguyệt kiến (tiết khí): Dần = tháng 1 (Giêng) … Tý = tháng 11, Sửu = tháng 12. 'dai_loi' = tháng thứ nhất + tháng thứ bảy; 'tieu_loi' = tháng thứ hai + tháng thứ tám (sách gốc ghi 'phương môi thị thủ tử'; lịch Việt dân gian quen gọi 'tiểu lợi'). Bảng tính tay từ quy tắc trên — bốn nhóm tháng còn lại không đưa ra (lời doạ, sách gốc đã bác).",
+  "bang": {
+    "Tý":   {"dai_loi": [6, 12], "tieu_loi": [1, 7]},
+    "Sửu":  {"dai_loi": [5, 11], "tieu_loi": [4, 10]},
+    "Dần":  {"dai_loi": [2, 8],  "tieu_loi": [3, 9]},
+    "Mão":  {"dai_loi": [1, 7],  "tieu_loi": [6, 12]},
+    "Thìn": {"dai_loi": [4, 10], "tieu_loi": [5, 11]},
+    "Tỵ":   {"dai_loi": [3, 9],  "tieu_loi": [2, 8]},
+    "Ngọ":  {"dai_loi": [6, 12], "tieu_loi": [1, 7]},
+    "Mùi":  {"dai_loi": [5, 11], "tieu_loi": [4, 10]},
+    "Thân": {"dai_loi": [2, 8],  "tieu_loi": [3, 9]},
+    "Dậu":  {"dai_loi": [1, 7],  "tieu_loi": [6, 12]},
+    "Tuất": {"dai_loi": [4, 10], "tieu_loi": [5, 11]},
+    "Hợi":  {"dai_loi": [3, 9],  "tieu_loi": [2, 8]}
+  }
+}

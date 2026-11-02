@@ -8,7 +8,9 @@ RULES tất định, chỉ ghép CALC/KB có sẵn (một bộ tính):
   án chốt 2026-10-30), tuổi làm nhà (động thổ / nhập trạch / sửa nhà: Kim lâu · Hoang ốc · Tam tai của chủ — đúng hàm
   trang "Xem tuổi làm nhà"), Tam tai (khai trương, cầu tài, ký kết của chủ) → lưu ý. Lưu ý KHÔNG loại ngày: gia đình tự
   sắp, nhiều nhà mượn tuổi — chỉ xếp ngày có lưu ý ra sau.
-- Không điểm số. Bảng "tháng đại lợi / tiểu lợi" theo tuổi cô dâu CHƯA đưa vào: chưa đối chiếu được nguồn (2026-11-01).
+- Không điểm số. Tháng "đại lợi / tiểu lợi" theo tuổi cô dâu (EN-5.1, 2026-11-02): chỉ là THÔNG TIN TẬP QUÁN — nhãn
+  `gia_thu` trên từng ngày + khối `thang_gia_thu`, KHÔNG vào khoá xếp, không loại ngày. Quy tắc đọc thẳng Hiệp Kỷ Biện
+  Phương Thư q.36, sách đó cũng bác thuyết này (docs/QUYET-DINH-EN5-EN6.md).
 Không lưu gì: năm sinh chỉ đi qua lượt gọi."""
 from __future__ import annotations
 
@@ -32,6 +34,9 @@ TOI_DA_NGUOI = 8
 TOI_DA_NGAY = 400
 _LAM_NHA = {"dong_tho", "nhap_trach"}
 _TAM_TAI = {"khai_truong", "cau_tai", "ky_ket"}
+GIA_THU_NGUON = ("Hiệp Kỷ Biện Phương Thư (1741), quyển 36 — mục bàn về tháng gả cưới theo tuổi cô dâu; bộ sách này "
+                 "ghi lại quy tắc rồi cho là không có căn cứ")
+GIA_THU_NHAN = {"dai_loi": "tháng đại lợi (tập quán)", "tieu_loi": "tháng tiểu lợi (tập quán)"}
 
 
 def _ten_chi(z: str) -> str:
@@ -94,6 +99,8 @@ def chon(viec: str, tu: dt.date, den: dt.date, nguoi: list[dict]) -> dict:
     nam_luu_y: dict[tuple[str, int], list[tuple[str, str]]] = {}
     giai_thich: dict[str, str] = {}             # nhãn ngắn → lời giải thích (hiện một lần, không lặp ở từng tháng)
     ngay: list[dict] = []
+    co_dau = next((p for p in ps if p["vai"] == "co_dau"), None) if viec == "cuoi_hoi" else None
+    gia_thu = t.thang_gia_thu(co_dau["con_giap"]) if co_dau else None
     d = tu
     while d <= den:
         c = L._calc(d)
@@ -119,10 +126,15 @@ def chon(viec: str, tu: dt.date, den: dt.date, nguoi: list[dict]) -> dict:
                 for nhan, dai in nam_luu_y[key]:
                     giai_thich[nhan] = dai
                     luu_y.append(nhan)
-            ngay.append({**L.tom_tat(d), "hop": hop, "luu_y": luu_y,
-                         "diem_cong": [x for x in ("hoàng đạo" if c["hoang_dao"] else None,
-                                                   f"trực {L.KB['truc'][c['truc']]['ten']}" if c["truc"] in L.TRUC_TOT
-                                                   else None) if x]})
+            n = {**L.tom_tat(d), "hop": hop, "luu_y": luu_y,
+                 "diem_cong": [x for x in ("hoàng đạo" if c["hoang_dao"] else None,
+                                           f"trực {L.KB['truc'][c['truc']]['ten']}" if c["truc"] in L.TRUC_TOT
+                                           else None) if x]}
+            if gia_thu:                         # nhãn tập quán — không vào khoá xếp
+                ct = _ten_chi(chi_thang)
+                n["gia_thu"] = ("dai_loi" if ct in gia_thu["dai_loi_chi"] else
+                                "tieu_loi" if ct in gia_thu["tieu_loi_chi"] else None)
+            ngay.append(n)
         d += dt.timedelta(days=1)
 
     def khoa(n: dict) -> tuple:
@@ -170,5 +182,18 @@ def chon(viec: str, tu: dt.date, den: dt.date, nguoi: list[dict]) -> dict:
             "cach_chon": ("Ngày có việc này trong mục Nên của sách lịch, không nằm trong mục Kiêng, trực không thuộc nhóm "
                           "sách khuyên tránh, và không xung tuổi ai trong danh sách. Tháng xung tuổi và năm phạm tuổi chỉ "
                           "xét cho người chính (cô dâu, chú rể, người đứng tên); ngày vướng các lưu ý này vẫn hiện, xếp sau."),
-            "chua_xet": "Bảng tháng đại lợi / tiểu lợi theo tuổi cô dâu chưa đưa vào vì chưa đối chiếu được nguồn sách.",
+            "thang_gia_thu": _gia_thu_ra(co_dau, gia_thu),
             "luu_y": L.LUU_Y}
+
+
+def _gia_thu_ra(co_dau: dict | None, g: dict | None) -> dict | None:
+    if not co_dau or not g:
+        return None
+    ten = lambda ds, ch: ", ".join(f"tháng {m} ({c})" for m, c in zip(ds, ch))   # noqa: E731
+    return {"co_dau": {"nam_sinh": co_dau["nam_sinh"], "con_giap": co_dau["con_giap"]},
+            **g, "nhan": GIA_THU_NHAN, "nguon": GIA_THU_NGUON,
+            "loi": (f"Lịch dân gian chia tháng gả cưới theo tuổi cô dâu. Cô dâu tuổi {co_dau['con_giap']}: tháng đại lợi là "
+                    f"{ten(g['dai_loi'], g['dai_loi_chi'])}; tháng tiểu lợi là {ten(g['tieu_loi'], g['tieu_loi_chi'])}. "
+                    "Tháng ở đây tính theo tiết khí (tháng Dần là tháng Giêng), lịch in theo tháng âm có thể lệch vài "
+                    "ngày quanh đầu tháng. Chính bộ sách lịch ghi lại cách chia này cũng nói nó không có căn cứ, nên hệ thống "
+                    "chỉ gắn nhãn để gia đình tham khảo — không dùng để xếp hay bỏ ngày nào.")}

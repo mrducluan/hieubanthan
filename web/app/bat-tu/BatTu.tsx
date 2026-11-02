@@ -218,6 +218,28 @@ export function BatTu() {
                     ))}
                   </ul>
                   <p className="mt-2 text-xs text-[var(--ls-mo)]">Bảng tra: {ls.mo_rong.than_sat_nguon}. Thần sát chỉ là tín hiệu phụ — luận chính dựa vào ngũ hành, thập thần, dụng thần.</p>
+                  {ls.mo_rong.than_sat_tham_khao && ls.mo_rong.than_sat_tham_khao.length > 0 && (
+                    <div className="mt-4" data-testid="than-sat-tham-khao">
+                      <p className="font-medium">Học Đường · Thiên La Địa Võng · Kim Thần (tham khảo)</p>
+                      <p className="mt-1 text-xs text-[var(--ls-mo)]">Mỗi sách chép một cách. Ở đây theo {ls.mo_rong.than_sat_tham_khao_nguon}; cách khác ghi ngay dưới. Các sao này không làm đổi mức nào trong bài luận giải.</p>
+                      <ul className="mt-2 grid gap-2 sm:grid-cols-2">
+                        {ls.mo_rong.than_sat_tham_khao.map((t) => {
+                          const tenTru = (ds: number[]) => ds.map((i) => ["năm", "tháng", "ngày", "giờ"][i]).join(", ");
+                          return (
+                            <li key={t.ten}>
+                              <b>{t.ten}</b>{" "}
+                              <span className="text-[var(--ls-mo)]">
+                                {t.co ? <>— có ở trụ {tenTru(t.tru)}{t.chinh ? " (Chính Học Đường)" : ""}: {t.y}</> : <>— không có (gốc ở {t.goc})</>}
+                              </span>
+                              <span className="block text-xs text-[var(--ls-mo)]">
+                                Cách khác: {t.cach_khac} {t.theo_cach_khac.length ? `Theo cách đó: có ở trụ ${tenTru(t.theo_cach_khac)}.` : "Theo cách đó: không có."}
+                              </span>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  )}
                 </details>
               )}
               {ls.mo_rong?.cung_than && (
