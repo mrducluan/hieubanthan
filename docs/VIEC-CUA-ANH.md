@@ -13,7 +13,9 @@
       minimatch / postcss-selector-parser tự đóng. Còn **deepmerge** (mức thấp, nằm trong Payload, chưa có bản vá) — để
       mở hoặc bấm "Dismiss → No bandwidth / tolerable risk".
 - [ ] (Khi engine chạy ≥ 2 tiến trình / máy) tạo Redis Upstash miễn phí, đặt ở Render **`HAN_MUC_REDIS_URL`** (https) +
-      **`HAN_MUC_REDIS_TOKEN`** để hạn mức lượt AI đếm chung. Một tiến trình như hiện nay thì chưa cần.
+      **`HAN_MUC_REDIS_TOKEN`** + **`HAN_MUC_MUOI`** (chuỗi ngẫu nhiên ≥ 16 ký tự, giữ bí mật) để hạn mức lượt AI đếm
+      chung. Một tiến trình như hiện nay thì chưa cần. Khi bật: thêm nhà cung cấp Redis vào Chính sách quyền riêng tư
+      (nhận mã băm IP đổi theo ngày, không nhận IP).
 
 ### 4t. KHẨN — Vercel tạm dừng cả tài khoản (2026-11-02): hieuban.com + cms.hieuban.com đều tắt
 
