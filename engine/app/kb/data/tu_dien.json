@@ -2862,6 +2862,62 @@
    "de_hieu": "Trường phái xét chín sao bay theo thời gian (vận 20 năm, năm, tháng) chồng lên hướng nhà — dùng chủ yếu để chọn lúc sửa chữa, động thổ và phía nên giữ yên.",
    "vi_du": null,
    "tu_dong": true
+  },
+  {
+   "ma": "nap_giap",
+   "ten": "Nạp giáp",
+   "bien_the": [
+    "nạp giáp"
+   ],
+   "han": "納甲",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Cách gắn mỗi hào của quẻ với một địa chi (Tý, Sửu, Dần…) theo quẻ ba vạch dưới và trên. Nhờ địa chi, hào có ngũ hành để xét lục thân và so với ngày, tháng gieo quẻ.",
+   "vi_du": "Quẻ Thuần Khảm: hào 1 đến hào 6 lần lượt là Dần, Thìn, Ngọ, Thân, Tuất, Tý.",
+   "tu_dong": false
+  },
+  {
+   "ma": "thac_quai",
+   "ten": "Thác quái",
+   "bien_the": [
+    "thác quái",
+    "quẻ thác"
+   ],
+   "han": "錯卦",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Quẻ có được khi đổi hết sáu hào: âm thành dương, dương thành âm — mặt đối nghịch của tình thế.",
+   "vi_du": "Thác quái của Thuần Khảm là Thuần Ly.",
+   "tu_dong": false
+  },
+  {
+   "ma": "tong_quai",
+   "ten": "Tổng quái",
+   "bien_the": [
+    "tổng quái",
+    "quẻ tổng",
+    "quẻ lật"
+   ],
+   "han": "綜卦",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Quẻ có được khi lật ngược sáu hào (hào 6 thành hào 1) — cùng việc nhìn từ phía người kia.",
+   "vi_du": "Tổng quái của Thủy Lôi Truân là Sơn Thủy Mông.",
+   "tu_dong": false
+  },
+  {
+   "ma": "bat_cung",
+   "ten": "Bát cung",
+   "bien_the": [
+    "bát cung",
+    "cung của quẻ"
+   ],
+   "han": "八宮",
+   "mo_dun": "kinhdich",
+   "nhom": null,
+   "de_hieu": "Cách xếp 64 quẻ thành 8 nhóm theo 8 quẻ thuần (Càn, Khảm, Cấn, Chấn, Tốn, Ly, Khôn, Đoài); hành của cung dùng để xét lục thân của từng hào, và mỗi quẻ có một hào Thế, một hào Ứng.",
+   "vi_du": null,
+   "tu_dong": false
   }
  ]
 }

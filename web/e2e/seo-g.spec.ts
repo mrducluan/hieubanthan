@@ -29,5 +29,6 @@ test("trang chủ đề, sitemap, cặp số chỉ có một chiều (a ≤ b)",
   expect(sm).toContain("/than-so/nam-ca-nhan/nam-ca-nhan-9</loc>");
   expect(sm).toContain("/than-so/so-kep/so-kep-52</loc>");
   expect(sm).toContain("/xem-ngay-tot/thang-");
-  expect((await request.get("/hop-doi/cap-so/so-chu-dao-6-va-3")).status()).toBe(404);
+  // Rà soát 2026-11-03: gõ ngược thứ tự → 308 về bản a ≤ b (trước 404).
+  expect((await request.get("/hop-doi/cap-so/so-chu-dao-6-va-3", { maxRedirects: 0 })).status()).toBe(308);
 });

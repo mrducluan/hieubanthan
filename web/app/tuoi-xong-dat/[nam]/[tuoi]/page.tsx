@@ -8,6 +8,7 @@ import { KetQuaXongDat } from "@/components/tuoi/KetQuaTuoi";
 import { CungTuoi } from "@/components/tuoi/CungTuoi";
 import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNam, docTuoi, duongHanNam, duongLamNha, duongXongDat, duongXongDatNam, namAmHienTai, xongDatCongKhai, xongDatIndex, NAM_BANG_TU } from "@/lib/tuoi-dan-gian";
+import { namTuoiSeo } from "@/lib/nam";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { duongNgay } from "@/lib/hoang-lich";
@@ -35,7 +36,7 @@ async function metaGoc(p: P): Promise<Metadata> {
 export default async function Page(p: P) {
   const x = await doc(p);
   if (!x) notFound();
-  const [d, namAm] = await Promise.all([xongDatCongKhai(x.n, x.ns), namAmHienTai()]);
+  const [d, namAm, namSeo] = await Promise.all([xongDatCongKhai(x.n, x.ns), namAmHienTai(), namTuoiSeo()]);
   if (!d) throw new Error("engine không phản hồi");
   // ND-7: mẫu cụm "/tuoi-xong-dat/{nam}/tuoi-{nam_sinh}" — khối + chữ sửa được ở CMS.
   const duong = duongXongDat(x.n, x.ns);
@@ -55,7 +56,7 @@ export default async function Page(p: P) {
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
       <div className="mb-6"><TraLoiNhanh chu={d.tra_loi_nhanh} /></div>
-      <KetQuaXongDat d={d} />
+      <KetQuaXongDat d={d} trangTuoi />
       {/* SEO-M: link chéo tới các trang cùng năm / cùng tuổi (trước đây chỉ 2 link trong nội dung chính). */}
       <nav aria-label="Xem thêm" className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm">
         <Link href={duongNgay(d.mung_mot.ngay)} className="text-gold underline">{c("xem.mung_mot", bien)}</Link>
@@ -65,7 +66,7 @@ export default async function Page(p: P) {
       </nav>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-6 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/tuoi-xong-dat" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>
-      <CungTuoi namSinh={x.ns} canChi={d.chu.can_chi} namAm={namAm} bo="xong_dat" />
+      <CungTuoi namSinh={x.ns} canChi={d.chu.can_chi} namSeo={namSeo} namTet={namAm + 1} boQua={duongXongDat(x.n, x.ns)} />
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </div>
   );

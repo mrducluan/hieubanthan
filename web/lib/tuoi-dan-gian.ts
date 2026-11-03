@@ -2,11 +2,12 @@
 import { unstable_noStore as noStore } from "next/cache";
 
 export interface MetaKb { nguon: string; trang_thai: string; luu_y: string }
-export interface HuongTranh { ma: string; ten: string; nghia: string; phuong: string; chi?: string[] }
+export interface HuongTranh { ma: string; ten: string; nghia?: string; phuong: string; chi?: string[] }
 export interface HanNam extends MetaKb {
-  nam: number; can_chi: string; huong_tranh: HuongTranh[]; moc: string;
+  nam: number; can_chi: string; huong_tranh: HuongTranh[]; moc?: string;
   tra_loi_nhanh?: string; hoi_dap?: { hoi: string; dap: string }[];   // SEO-M (engine cũ: không có)
-  phi_tinh: { cung: string; phuong: string; sao: number; ten_sao: string; y_nghia: string | null }[];
+  /** AUD-P1: trang SEO theo tuổi nhận bản gọn (không bàn 9 cung, không moc) — chỉ công cụ / trang năm có đủ. */
+  phi_tinh?: { cung: string; phuong: string; sao: number; ten_sao: string; y_nghia: string | null }[];
 }
 export interface LamNha extends MetaKb {
   nam_sinh: number; nam_sinh_am: number; can_chi: string; nam_xay: number; can_chi_nam_xay: string; tuoi_mu: number;
@@ -17,15 +18,20 @@ export interface LamNha extends MetaKb {
   cac_nam_tam_tai: string[];
   ket_luan: { ma: "thuan" | "can_nhac"; chu: string };
   nam_thuan: { nam: number; can_chi: string; tuoi_mu: number }[];
-  cuoi_hoi: string; cach_dan_gian: string | null; cach_tinh: string; han_nam: HanNam; tra_loi_nhanh?: string;
+  cuoi_hoi: string; cach_dan_gian: string | null; cach_tinh?: string; han_nam: HanNam; tra_loi_nhanh?: string;
+  /** AUD-P1: 10 năm tới của tuổi (chỉ trang SEO theo tuổi; engine tính bằng đúng hàm công cụ từng năm). */
+  muoi_nam?: { nam: number; can_chi: string; tuoi_mu: number; kim_lau: string | null; hoang_oc: string; tam_tai: number | null; thuan: boolean }[];
 }
 export interface XongDat extends MetaKb {
   nam: { nam: number; can_chi: string }; chu: { nam_sinh: number; can_chi: string }; uoc_luong_nam_sinh: boolean;
   tuoi_hop: { nam_sinh: number; can_chi: string; nap_am: string; ly_do: string[] }[];
   nen_tranh: string[];
-  mung_mot: { ngay: string; can_chi: string; hoang_dao: boolean; than: string;
-    gio_hoang_dao: { chi: string; khung: string }[]; huong: { hy_than: string; tai_than: string; phuc_than: string } };
-  cach_chon: string; tra_loi_nhanh?: string;
+  // AUD-P1: trang SEO theo tuổi nhận mùng 1 bản gọn (ngày, can chi, hoàng đạo) + không cách chọn; công cụ nhận đủ.
+  mung_mot: { ngay: string; can_chi: string; hoang_dao: boolean; than?: string;
+    gio_hoang_dao?: { chi: string; khung: string }[]; huong?: { hy_than: string; tai_than: string; phuc_than: string } };
+  cach_chon?: string; tra_loi_nhanh?: string;
+  /** AUD-P1: tuổi hợp xông đất cho các Tết kế tiếp (chỉ trang SEO theo tuổi). */
+  tet_toi?: { nam: number; can_chi: string; tuoi: { nam_sinh: number; can_chi: string }[] }[];
 }
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
@@ -64,8 +70,8 @@ export const duongLamNhaNam = (nam: number) => `/xem-tuoi-lam-nha/${nam}`;
 export const duongXongDatNam = (nam: number) => `/tuoi-xong-dat/${nam}`;
 
 export const hanNamCongKhai = (nam: number) => layHoacLoi<HanNam>(`/v1/tuoi/han-nam/${nam}`);
-export const lamNhaCongKhai = (nam: number, namSinh: number) => layHoacLoi<LamNha>(`/v1/tuoi/lam-nha/${nam}/${namSinh}`);
-export const xongDatCongKhai = (nam: number, namSinh: number) => layHoacLoi<XongDat>(`/v1/tuoi/xong-dat/${nam}/${namSinh}`);
+export const lamNhaCongKhai = (nam: number, namSinh: number) => layHoacLoi<LamNha>(`/v1/tuoi/lam-nha/${nam}/${namSinh}?gon=1`);
+export const xongDatCongKhai = (nam: number, namSinh: number) => layHoacLoi<XongDat>(`/v1/tuoi/xong-dat/${nam}/${namSinh}?gon=1`);
 
 /** Năm sinh có trang SEO (cùng dải với trang tuổi hợp hướng: nhóm đang làm nhà / con cái tìm cho bố mẹ). */
 export const NAM_SINH_SEO = Array.from({ length: 2005 - 1960 + 1 }, (_, i) => 1960 + i);
@@ -98,9 +104,12 @@ export async function namAmHienTai(): Promise<number> {
   return (await ngayTotCongKhai(iso))?.am.nam ?? Number(iso.slice(0, 4));
 }
 
-/** Cửa sổ index: làm nhà năm âm hiện tại + năm sau; xông đất Tết sắp tới (+ năm hiện tại); hướng xấu năm −1…+2. */
-export const lamNhaIndex = (nam: number, namAm: number, ns: number) => (nam === namAm || nam === namAm + 1) && NAM_SINH_SEO.includes(ns);
-export const xongDatIndex = (nam: number, namAm: number, ns: number) => (nam === namAm || nam === namAm + 1) && NAM_SINH_SEO.includes(ns);
+/** Cửa sổ index trang THEO TUỔI. AUD-Q1 (chủ dự án 2026-11-03): chỉ MỘT năm — năm sắp tới (`namTuoiSeo`, cùng năm
+ *  menu "Năm …": năm tới khi Tết sau còn ≤ 120 ngày, không thì năm âm đang đi); năm đang qua thôi index (trang con cùng
+ *  tuổi khác năm gần trùng 47–57 %). Bảng theo năm + hướng xấu năm giữ cửa sổ riêng. */
+export const lamNhaIndex = (nam: number, namSeo: number, ns: number) => nam === namSeo && NAM_SINH_SEO.includes(ns);
+/** Xông đất: "năm sắp tới" luôn là Tết SẮP TỚI (năm âm hiện tại + 1) — sau Tết, Tết vừa qua thôi index ngay. */
+export const xongDatIndex = (nam: number, namAm: number, ns: number) => nam === namAm + 1 && NAM_SINH_SEO.includes(ns);
 export const hanNamIndex = (nam: number, namAm: number) => nam >= namAm - 1 && nam <= namAm + 2;
 
 // ---- MT-ĐS B3 — sao hạn Cửu Diệu + Bát hạn (tập quán theo tuổi, miễn phí; bảng một trang theo năm, không trang theo tuổi)

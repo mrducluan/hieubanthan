@@ -110,6 +110,18 @@ export async function viecThangCongKhai(ma: string, nam: number, thang: number):
   if (!r) noStore();
   return r;
 }
+/** AUD-Q3: số ngày tốt của 6 việc SEO cho `so` tháng từ (nam, thang) — engine đếm bằng đúng `chon_ngay` của trang việc. */
+export interface DemViecThang { nam: number; thang: number; ma: string; slug: string; so_ngay: number }
+export async function demViecThang(nam: number, thang: number, so: number): Promise<DemViecThang[] | null> {
+  const r = await lay<{ thang: DemViecThang[] }>(`/v1/lich/viec-thang-dem/${nam}/${thang}?so=${so}`);
+  return r?.thang ?? null;
+}
+/** AUD-Q3 (chủ dự án 2026-11-03): trang "ngày tốt {việc} tháng" chỉ index khi là tháng này → hết cửa sổ (khớp sitemap)
+ *  VÀ có ít nhất một ngày tốt — tháng 0 ngày (vd mua xe 9/25 tháng) không có câu trả lời, để noindex. */
+export function viecThangIndex(nam: number, thang: number, soNgay: number | null, h?: string): boolean {
+  const l = lechThang(nam, thang, h);
+  return l >= 0 && l <= THANG_SAU && soNgay !== 0;
+}
 export const duongViecThang = (slug: string, nam: number, thang: number) => `/xem-ngay-tot/${slug}-thang-${thang}-${nam}`;
 const RE_VIEC = /^([a-z-]+)-thang-(\d{1,2})-(\d{4})$/;
 
@@ -162,7 +174,10 @@ export function thangIndex(nam: number, thang: number, h?: string): boolean {
   return l >= -THANG_TRUOC && l <= THANG_SAU;
 }
 
-/** Trang ngày được index khi nằm trong cửa sổ hữu ích (7 ngày trước → 400 ngày tới); ngoài ra vẫn xem được, noindex. */
+/** Số ngày tới được index. AUD-Q4 (chủ dự án 2026-11-03): rút 400 → 180 SAU 90 ngày theo dõi Search Console
+ *  (mốc xem lại 2027-02-01 → xem `docs/VIEC-CUA-ANH.md` mục 4u) — đổi đúng MỘT số này, sitemap ngày đi theo. */
+export const NGAY_SAU = 400;
+/** Trang ngày được index khi nằm trong cửa sổ hữu ích (7 ngày trước → NGAY_SAU ngày tới); ngoài ra vẫn xem được, noindex. */
 export function ngayDangIndex(iso: string, homNay: string = homNayVN()): boolean {
-  return iso >= congNgay(homNay, -7) && iso <= congNgay(homNay, 400);
+  return iso >= congNgay(homNay, -7) && iso <= congNgay(homNay, NGAY_SAU);
 }

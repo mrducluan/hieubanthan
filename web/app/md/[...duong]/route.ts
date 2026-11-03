@@ -1,7 +1,7 @@
 // Bản Markdown cho bot AI: /<đường dẫn>.md được rewrite sang /md/<đường dẫn> (next.config.mjs).
 // /index.md · /huyen-hoc.md · /kien-thuc.md · /<mảng>/<cụm>.md · /<mảng>/<cụm>/<trang>.md · /phong-thuy/huong-hop-tuoi[/<tuổi>].md · /tu-dien.md
-import { CHU_DE, dsCumTru, dsTuoiHuong, duongTuoi, khoaTheoDuong, mucLuc, trang, tuDien, tuoiHuong } from "@/lib/kien-thuc";
-import { mdChuDe, mdDsTuoi, mdHuyenHoc, mdThuVien, mdTrang, mdTuDien, mdTuoi, TEN_MANG, traMd } from "@/lib/markdown";
+import { CHU_DE, cungPhi, dsCumTru, dsCungPhi, duongTuoi, khoaTheoDuong, mucLuc, trang, tuDien } from "@/lib/kien-thuc";
+import { mdChuDe, mdDsTuoi, mdHuyenHoc, mdThuVien, mdTrang, mdTuDien, mdCung, TEN_MANG, traMd } from "@/lib/markdown";
 import { MANG_HH, TRA_CUU_THEM, lichHH, namNayVn } from "@/lib/huyen-hoc";
 import { CHU_HUYEN_HOC, SO_HOI_DAP_HUYEN_HOC } from "@/lib/chu/trang-tinh";
 import { mucSoTrang } from "@/lib/so-trang";
@@ -31,9 +31,9 @@ export async function GET(_req: Request, { params: thamSo }: { params: Promise<{
     return d ? traMd(mdTuDien(d.muc, TEN_MANG), "/tu-dien") : KHONG_CO();
   }
   if (p[0] === "phong-thuy" && p[1] === "huong-hop-tuoi" && p.length <= 3) {
-    if (p.length === 2) return traMd(mdDsTuoi(await dsTuoiHuong()), duongTuoi("huong-hop-tuoi"));
-    const t = await tuoiHuong(p[2]!);
-    return t ? traMd(await voiKhoi(mdTuoi(t), duongTuoi(t.slug), { tieu_de: t.tieu_de }), duongTuoi(t.slug)) : KHONG_CO();
+    if (p.length === 2) { const d = await dsCungPhi(); return traMd(mdDsTuoi(d.cung, d.tuoi), duongTuoi("huong-hop-tuoi")); }
+    const c = await cungPhi(p[2]!);   // AUD-Q2: trang cung phi (trang năm .md đã 308 về mục lục .md)
+    return c ? traMd(await voiKhoi(mdCung(c), duongTuoi(c.slug), { tieu_de: c.tieu_de }), duongTuoi(c.slug)) : KHONG_CO();
   }
   if (p[0] === "blog" && p.length === 2) {
     // Bài CMS: bản Markdown cùng nội dung trang HTML (tắt được ở CMS → Tính năng nội dung).

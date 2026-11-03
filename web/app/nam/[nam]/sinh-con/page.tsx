@@ -92,7 +92,7 @@ export default async function Page(p: P) {
         ))}</dl>
       </section>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
-      <p className="mt-8 text-sm text-fg-muted">Xem mọi tra cứu khác của năm này: <Link href={duongNam(n)} className="text-gold underline">Năm {n} {d.con.can_chi}</Link>. <span data-nosnippet="">{d.luu_y}</span></p>
+      <p className="mt-8 text-sm text-fg-muted">Xem mọi tra cứu khác của năm này: <Link href={duongNam(n)} className="text-gold underline">Năm {n} {d.con.can_chi}</Link>. <span data-testid="luu-y-tap-quan">{d.luu_y}</span></p>
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </div>
   );

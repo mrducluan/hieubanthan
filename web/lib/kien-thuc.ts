@@ -235,11 +235,35 @@ export interface TuoiHuong {
   tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; nguon: string; luu_y: string[]; trang_thai: string;
   ngay_dang?: string; cap_nhat?: string;
 }
-/** "huong-hop-tuoi" = trang mục lục; "tuoi-1990" = trang con dưới mục lục (QH-URL). */
-export const duongTuoi = (slug: string) => (slug === "huong-hop-tuoi" ? CHUYEN.tuoi_huong : `${CHUYEN.tuoi_huong}/${slug}`);
+/** "huong-hop-tuoi" = trang mục lục; "tuoi-1990" = DÒNG năm trên mục lục (AUD-Q2: trang năm đã gộp theo cung phi);
+ *  "cung-kham-bac"… = trang cung phi dưới mục lục. */
+export const duongTuoi = (slug: string) => (slug === "huong-hop-tuoi" ? CHUYEN.tuoi_huong
+  : /^tuoi-\d{4}$/.test(slug) ? `${CHUYEN.tuoi_huong}#${slug}` : `${CHUYEN.tuoi_huong}/${slug}`);
 export const SLUG_TUOI = /^tuoi-\d{4}$/;
 /** Slug cũ trước SEO-K (một giới tính) → slug gộp; null nếu không phải dạng cũ. */
 export const slugTuoiGop = (slug: string) => /^tuoi-\d{4}-(nam|nu)$/.test(slug) ? slug.slice(0, 9) : null;
+// AUD-Q2 (chủ dự án duyệt 2026-11-03): 8 trang theo CUNG PHI + bảng năm sinh. Engine GET /v1/phongthuy/cung-phi[/slug].
+export interface MucCungPhi { slug: string; quai: string; so: number; nhom: string; tieu_de: string; phuong?: string }
+export interface GioiCung { quai: string; nhom: string; slug: string; tot: string[] }
+export interface DongTuoiCung { nam: number; slug: string; can_chi: string; lap_xuan: string; nam_gioi: GioiCung; nu_gioi: GioiCung; huong_chung: string[] }
+export interface CungPhi {
+  slug: string; quai: string; so: number; nhom: string; tieu_de: string; mo_ta: string; ngay_dang: string; cap_nhat: string;
+  thong_tin: { ngu_hanh?: string; phuong?: string; nguoi?: string; tinh_chat?: string };
+  huong_tot: HuongDuNien[]; huong_xau: HuongDuNien[]; bang_huong: Record<string, string>; goi_y: TuoiTheoGioi["goi_y"];
+  nam_sinh: { nam: number; gioi_tinh: "nam" | "nu"; can_chi: string; lap_xuan: string }[];
+  cung_cung_nhom: { slug: string; quai: string }[]; cung_khac_nhom: { slug: string; quai: string }[];
+  tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; nguon: string; luu_y: string[]; trang_thai: string;
+}
+export const SLUG_CUNG = /^cung-[a-z-]+$/;
+export async function dsCungPhi(): Promise<{ cung: MucCungPhi[]; tuoi: DongTuoiCung[] }> {
+  const d = await lay<{ cung: MucCungPhi[]; tuoi: DongTuoiCung[] }>("/v1/phongthuy/cung-phi");
+  if (!d) noStore();
+  return { cung: d?.cung ?? [], tuoi: d?.tuoi ?? [] };
+}
+export function cungPhi(slug: string): Promise<CungPhi | null> {
+  return SLUG_CUNG.test(slug) ? layTrangMot<CungPhi>(`/v1/phongthuy/cung-phi/${slug}`) : Promise.resolve(null);
+}
+/** @deprecated AUD-Q2 — trang năm đã gộp theo cung phi; chỉ còn cho route engine cũ trong lúc deploy lệch. */
 export async function dsTuoiHuong(): Promise<MucTuoiHuong[]> {
   const d = await lay<{ trang: MucTuoiHuong[] }>("/v1/phongthuy/tuoi-gop");
   if (!d) noStore();

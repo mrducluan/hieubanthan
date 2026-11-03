@@ -18,7 +18,7 @@ test("trang chưa thẩm định vẫn index, ghi Ban biên tập + Chủ biên"
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Càn");
   await expect(page.locator("[data-dong-tac-gia]")).toContainText("Ban biên tập Hiểu Bản Thân");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /^index/);
-  await page.getByRole("link", { name: "Quẻ Khôn" }).click();
+  await page.getByRole("link", { name: "Quẻ Khôn" }).first().click();   // AUD: khối Cấu trúc quẻ cũng link Khôn (thác quái của Càn)
   await expect(page).toHaveURL(/que-2-khon/);
 });
 
@@ -27,6 +27,10 @@ test("robots, sitemap, llms.txt cho máy tìm kiếm và AI", async ({ request }
   // BM-2: bot AI trả lời/tìm kiếm được vào; bot huấn luyện bị chặn toàn site
   expect(robots).toMatch(/User-Agent: OAI-SearchBot[\s\S]*?Allow: \//);
   expect(robots).toMatch(/User-Agent: GPTBot[\s\S]*?Disallow: \/\n/);
+  // AUD-Q6 (chủ dự án 2026-11-03): mở Google-Extended (Gemini trích dẫn / grounding) — nằm trong nhóm được vào, không trong nhóm chặn.
+  const nhom = robots.split(/\n\s*\n/).find((k) => k.includes("User-Agent: Google-Extended")) ?? "";
+  expect(nhom).toContain("Allow: /");
+  expect(nhom).not.toMatch(/Disallow: \/\n/);
   expect(robots).not.toContain("llms-full");
   expect(robots).toContain("Disallow: /tai-khoan");
   expect(robots).toContain("Sitemap: http://localhost:3000/sitemap.xml");
@@ -39,11 +43,11 @@ test("robots, sitemap, llms.txt cho máy tìm kiếm và AI", async ({ request }
   expect(sm).not.toContain("/tai-khoan");
   const llms = await (await request.get("/llms.txt")).text();
   expect(llms.startsWith("# Hiểu Bản Thân")).toBe(true);
-  expect(llms).toContain("/kinh-dich/que/que-64-");
+  expect(llms).toContain("/kinh-dich/que/que-1-can)");   // AUD-P0: thư viện một dòng mỗi cụm — ví dụ quẻ 1, không liệt kê đủ 64
   // BM-2: llms.txt chỉ gợi ý + dẫn link trang HTML; không còn bản toàn văn
   expect(llms).not.toContain(".md)");
   expect(llms).toContain("Công cụ miễn phí");
-  expect(llms.length).toBeLessThan(80_000);
+  expect(llms.length).toBeLessThan(15_000);
   expect((await request.get("/llms-full.txt")).status()).toBe(404);
 });
 

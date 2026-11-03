@@ -1,6 +1,6 @@
 // AIO/GEO — bản Markdown của trang công khai cho bot AI / LLM đọc (chuẩn llmstxt.org: cùng URL + ".md").
 // Chỉ định dạng lại dữ liệu KB engine đã trả — không viết thêm nghĩa. Dùng ở route handler (server).
-import { CHU_DE, duongTrang, duongTuoi, type MucLuc, type MucTuDien, type MucTuoiHuong, type TrangKienThuc, type TuoiHuong } from "@/lib/kien-thuc";
+import { CHU_DE, duongTrang, duongTuoi, type MucLuc, type MucTuDien, type TrangKienThuc, type CungPhi, type MucCungPhi, type DongTuoiCung } from "@/lib/kien-thuc";
 import { CHUYEN_GIA, duongChuyenGia } from "@/lib/chuyen-gia";
 import { MO_TA_SITE, TEN_SITE, urlDayDu } from "@/lib/seo";
 import { duongMoi } from "@/lib/duong-silo";
@@ -106,30 +106,27 @@ export function traMd(noiDung: string, duongHtml: string): Response {
   });
 }
 
-// SEO-F → SEO-K — trang tuổi hợp hướng (nam + nữ một trang)
-export function mdTuoi(t: TuoiHuong): string {
-  const d = [`# ${t.tieu_de}`, "", `> ${t.mo_ta}`, "", `URL: ${urlDayDu(duongTuoi(t.slug))}`,
-    `Năm ${t.can_chi} · nạp âm ${t.nap_am.ten} · ${t.gioi.map((g) => `${g.gioi_tinh === "nam" ? "nam" : "nữ"} mệnh quái ${g.menh_quai.quai} (${g.menh_quai.nhom})`).join(" · ")}`, "",
-    "## Trả lời nhanh", "", t.tra_loi_nhanh, "",
-    ...(t.huong_chung.length ? [`Hướng tốt chung của nam và nữ cùng năm: ${t.huong_chung.join(", ")}.`, ""] : [])];
-  for (const g of t.gioi) {
-    const ten = g.gioi_tinh === "nam" ? "Nam" : "Nữ";
-    d.push(`## ${ten} sinh năm ${t.nam}: mệnh ${g.menh_quai.quai}`, "", g.tra_loi_nhanh, "", "### 4 hướng tốt (từ tốt nhất)", "",
-      ...g.huong_tot.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "", "### 4 hướng nên tránh", "",
-      ...g.huong_xau.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "", "### Cửa, bếp, giường, bàn làm việc", "",
-      ...g.goi_y.map((x) => `- ${x.tieu_de}: ${x.huong.join(" → ")}. ${x.noi_dung}`), "");
-  }
-  d.push("## Mốc đầu năm", "",
-    `- Lập xuân: ${t.moc_dau_nam.lap_xuan}; Tết (lịch Việt): ${t.moc_dau_nam.tet_viet}; Tết (lịch Trung Quốc): ${t.moc_dau_nam.tet_trung}.`,
-    `- Sinh trước mốc: tính năm ${t.sinh_truoc_moc.nam_tinh} (${t.gioi.map((g) => `${g.gioi_tinh === "nam" ? "nam" : "nữ"} ${g.sinh_truoc_moc.quai}`).join(", ")}).`, "",
-    "## Câu hỏi thường gặp", "", ...t.hoi_dap.flatMap((h) => [`**${h.hoi}**`, "", h.dap, ""]),
-    `Nguồn: ${t.nguon}.`, "");
-  return d.join("\n");
+// AUD-Q2 — trang cung phi + mục lục bảng năm sinh (thay 46 trang năm).
+export function mdCung(c: CungPhi): string {
+  const ns = (g: "nam" | "nu") => c.nam_sinh.filter((x) => x.gioi_tinh === g).map((x) => `${x.nam} (${x.can_chi})`).join(", ") || "không có";
+  return [`# ${c.tieu_de}`, "", `> ${c.mo_ta}`, "", `URL: ${urlDayDu(duongTuoi(c.slug))}`,
+    `Mệnh quái số ${c.so} · ${c.nhom}${c.thong_tin.ngu_hanh ? ` · hành ${c.thong_tin.ngu_hanh}` : ""} · cập nhật ${c.cap_nhat}`, "",
+    "## Trả lời nhanh", "", c.tra_loi_nhanh, "",
+    "## 4 hướng tốt (từ tốt nhất)", "", ...c.huong_tot.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "",
+    "## 4 hướng nên tránh", "", ...c.huong_xau.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "",
+    "## Cửa, bếp, giường, bàn làm việc", "", ...c.goi_y.map((x) => `- ${x.tieu_de}: ${x.huong.join(" → ")}. ${x.noi_dung}`), "",
+    `## Năm sinh có cung ${c.quai} (1960–2005, tính từ Lập xuân)`, "", `- Nam: ${ns("nam")}`, `- Nữ: ${ns("nu")}`, "",
+    `Cung cùng nhóm ${c.nhom}: ${c.cung_cung_nhom.map((x) => `[cung ${x.quai}](${urlDayDu(duongTuoi(x.slug))})`).join(", ")}.`, "",
+    "## Câu hỏi thường gặp", "", ...c.hoi_dap.flatMap((h) => [`**${h.hoi}**`, "", h.dap, ""]),
+    `Nguồn: ${c.nguon}.`, ""].join("\n");
 }
 
-export function mdDsTuoi(ds: MucTuoiHuong[]): string {
-  return ["# Hướng hợp tuổi (1960–2005, nam và nữ)", "", `URL: ${urlDayDu("/phong-thuy/huong-hop-tuoi")}`, "",
-    ...ds.map((t) => `- [${t.tieu_de}](${urlDayDu(duongTuoi(t.slug))}.md): nam ${t.quai_nam} (${t.nhom_nam}), nữ ${t.quai_nu} (${t.nhom_nu})`), ""].join("\n");
+export function mdDsTuoi(cung: MucCungPhi[], tuoi: DongTuoiCung[]): string {
+  return ["# Hướng hợp tuổi: tuổi nào hợp hướng nào (1960–2005)", "", `URL: ${urlDayDu("/phong-thuy/huong-hop-tuoi")}`, "",
+    "Hướng hợp tuổi theo Bát trạch đi theo cung phi (mệnh quái), tính từ năm sinh và giới tính; năm tính từ Lập xuân.", "",
+    "## 8 cung phi", "", ...cung.map((c) => `- [Cung ${c.quai}](${urlDayDu(duongTuoi(c.slug))}) — ${c.nhom}`), "",
+    "## Bảng cung phi theo năm sinh", "", "| Năm | Can chi | Lập xuân | Nam | Nữ | Hướng tốt chung |", "|---|---|---|---|---|---|",
+    ...tuoi.map((t) => `| ${t.nam} | ${t.can_chi} | ${t.lap_xuan} | ${t.nam_gioi.quai} | ${t.nu_gioi.quai} | ${t.huong_chung.join(", ") || "—"} |`), ""].join("\n");
 }
 
 // HH-1 — hub /huyen-hoc: cùng chữ + cùng thứ tự với trang HTML (lib/huyen-hoc.ts + bảng chữ CHU_HUYEN_HOC qua `c`).

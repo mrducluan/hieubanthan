@@ -86,7 +86,7 @@ export default async function Page(p: P) {
         <p className="mt-2 text-xs text-fg-faint">Sinh tháng 1 hoặc đầu tháng 2/{n} trước Tết thì thuộc năm {d.nam_truoc_tet.can_chi} ({d.nam_truoc_tet.nam}).</p>
       </section>
 
-      <section className="mt-8 rounded-2xl border border-line bg-surface/40 p-5" aria-labelledby="ca-nhan">
+      <section className="mt-8 rounded-2xl border border-line bg-surface/40 p-5" aria-labelledby="ca-nhan" data-nosnippet="">
         <h2 id="ca-nhan" className="text-xl">{c("ca_nhan.tieu_de", bien)}</h2>
         <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{c("ca_nhan.mo_ta", bien)}</p>
         <Link href={`/thoi-gian-toi?nam=${n}`} className="mt-3 inline-flex rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-bg" data-testid="nut-ca-nhan">{c("ca_nhan.nut", bien)}</Link>
@@ -171,7 +171,8 @@ export default async function Page(p: P) {
         ))}</dl>
       </section>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
-      <p className="mt-8 text-sm text-fg-muted" data-nosnippet="">{d.luu_y}</p>
+      {/* AUD-Q5 (chủ dự án 2026-11-03): câu "tập quán, không phải tiên đoán" ĐƯỢC trích — AI trích lời tục lệ phải kèm câu rào này. */}
+      <p className="mt-8 text-sm text-fg-muted" data-testid="luu-y-tap-quan">{d.luu_y}</p>
       <p className="mt-3 flex flex-wrap gap-3 text-sm">
         {n > 2006 && <Link href={duongNam(n - 1)} className="text-gold underline">Năm {n - 1}</Link>}
         {n < 2099 && <Link href={duongNam(n + 1)} className="text-gold underline">Năm {n + 1}</Link>}

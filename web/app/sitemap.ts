@@ -1,14 +1,14 @@
 // sitemap.xml — trang công khai + mọi trang kiến thức có index=true (engine quyết theo chính sách).
 import type { MetadataRoute } from "next";
-import { CHU_DE, dsLaSoMau, dsTuoiHuong, duongTrang, duongTuoi, mucLuc } from "@/lib/kien-thuc";
+import { CHU_DE, dsCungPhi, dsLaSoMau, duongTrang, duongTuoi, mucLuc } from "@/lib/kien-thuc";
 import { dsBaiTongHop, duongBlog } from "@/lib/blog";
 import { urlDayDu } from "@/lib/seo";
 import { daHetHan, dsTrangDichCms } from "@/lib/cms";
 import { duongTrangSo, soTrang } from "@/lib/phan-trang";
-import { THANG_SAU, THANG_TRUOC, VIEC_SEO, duongThang, duongViecThang, homNayVN } from "@/lib/hoang-lich";
+import { THANG_SAU, THANG_TRUOC, VIEC_SEO, demViecThang, duongThang, duongViecThang, homNayVN, viecThangIndex } from "@/lib/hoang-lich";
 import { duongLichAm } from "@/lib/lich-am";
-import { duongCuoiHoi, duongNam, duongNamTuoi, duongSinhCon } from "@/lib/nam";
-import { NAM_SINH_SEO, duongHanNam, duongLamNha, duongLamNhaNam, duongSaoHanNam, duongXongDat, duongXongDatNam, namAmHienTai } from "@/lib/tuoi-dan-gian";
+import { duongCuoiHoi, duongNam, duongNamTuoi, duongSinhCon, namTuoiIndex, namTuoiSeo } from "@/lib/nam";
+import { NAM_SINH_SEO, duongHanNam, duongLamNha, duongLamNhaNam, duongSaoHanNam, duongXongDat, duongXongDatNam, lamNhaIndex, namAmHienTai, xongDatIndex } from "@/lib/tuoi-dan-gian";
 
 export const revalidate = 21600;
 
@@ -26,7 +26,9 @@ function thangSitemap(): string[] {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [ds, mau, tuoi, blog, suKien, namAm] = await Promise.all([mucLuc(), dsLaSoMau(), dsTuoiHuong(), dsBaiTongHop(), dsTrangDichCms(), namAmHienTai()]);
+  const h = homNayVN();
+  const [ds, mau, tuoi, blog, suKien, namAm, namSeo, demViec] = await Promise.all([mucLuc(), dsLaSoMau(), dsCungPhi(), dsBaiTongHop(), dsTrangDichCms(), namAmHienTai(), namTuoiSeo(),
+    demViecThang(Number(h.slice(0, 4)), Number(h.slice(5, 7)), THANG_SAU + 1)]);
   return [
     // CMS-3: trang đích còn hạn, không noindex
     ...suKien.filter((t) => !t.noindex && !daHetHan(t)).map((t) => ({
@@ -38,24 +40,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // HL-1: lịch ngày tốt theo tháng — đúng cửa sổ index của trang tháng (trang ngày được link từ lịch tháng).
     ...thangSitemap().map((d) => ({ url: urlDayDu(d), changeFrequency: "weekly" as const, priority: 0.6 })),
     // TDG-1: tuổi làm nhà (năm âm hiện tại + năm sau), xông đất (Tết năm nay + Tết tới), hướng xấu (−1…+2).
-    ...[namAm, namAm + 1].flatMap((n) => NAM_SINH_SEO.map((ns) => ({ url: urlDayDu(duongLamNha(n, ns)), changeFrequency: "yearly" as const, priority: 0.5 }))),
-    ...[namAm, namAm + 1].flatMap((n) => NAM_SINH_SEO.map((ns) => ({ url: urlDayDu(duongXongDat(n, ns)), changeFrequency: "yearly" as const, priority: 0.5 }))),
+    // AUD-Q1 (chủ dự án 2026-11-03): trang THEO TUỔI chỉ một năm — làm nhà theo năm sắp tới (`namTuoiSeo`), xông đất
+    // theo Tết sắp tới (năm âm + 1); khớp `lamNhaIndex` / `xongDatIndex`.
+    ...NAM_SINH_SEO.filter((ns) => lamNhaIndex(namSeo, namSeo, ns)).map((ns) => ({ url: urlDayDu(duongLamNha(namSeo, ns)), changeFrequency: "yearly" as const, priority: 0.5 })),
+    ...NAM_SINH_SEO.filter((ns) => xongDatIndex(namAm + 1, namAm, ns)).map((ns) => ({ url: urlDayDu(duongXongDat(namAm + 1, ns)), changeFrequency: "yearly" as const, priority: 0.5 })),
     ...[namAm - 1, namAm, namAm + 1, namAm + 2].map((n) => ({ url: urlDayDu(duongHanNam(n)), changeFrequency: "yearly" as const, priority: 0.6 })),
     // SEO-L1: bảng theo năm (cùng cửa sổ trang con).
     ...[namAm, namAm + 1].flatMap((n) => [duongLamNhaNam(n), duongXongDatNam(n), duongSaoHanNam(n)]).map((d) => ({ url: urlDayDu(d), changeFrequency: "monthly" as const, priority: 0.7 })),
     // SEO-L2 → NAM-1 (chủ dự án duyệt 2026-11-01): ngày tốt theo việc — tháng này → hết cửa sổ index (+24 tháng), khớp
     // `thangIndex` để không còn trang index mà thiếu trong sitemap (vd cưới hỏi, động thổ cả năm 2027–2028).
-    ...thangSitemap().slice(THANG_TRUOC).flatMap((d) => {
-      const [, m, y] = d.match(/thang-(\d+)-(\d{4})$/)!;
-      return VIEC_SEO.map((v) => ({ url: urlDayDu(duongViecThang(v.slug, Number(y), Number(m))), changeFrequency: "weekly" as const, priority: 0.6 }));
-    }),
+    // AUD-Q3 (chủ dự án 2026-11-03): bỏ tháng 0 ngày tốt (engine đếm, cùng luật `viecThangIndex`); engine lỗi → giữ đủ như cũ.
+    ...(demViec
+      ? demViec.filter((x) => viecThangIndex(x.nam, x.thang, x.so_ngay)).map((x) => ({ url: urlDayDu(duongViecThang(x.slug, x.nam, x.thang)), changeFrequency: "weekly" as const, priority: 0.6 }))
+      : thangSitemap().slice(THANG_TRUOC).flatMap((d) => {
+        const [, m, y] = d.match(/thang-(\d+)-(\d{4})$/)!;
+        return VIEC_SEO.map((v) => ({ url: urlDayDu(duongViecThang(v.slug, Number(y), Number(m))), changeFrequency: "weekly" as const, priority: 0.6 }));
+      })),
     // NAM-1: trang trụ năm + sinh con + cưới hỏi (năm âm hiện tại + năm sau).
     ...[namAm, namAm + 1].flatMap((n) => [duongNam(n), duongSinhCon(n), duongCuoiHoi(n)]).map((d) => ({ url: urlDayDu(d), changeFrequency: "monthly" as const, priority: 0.8 })),
     // NAM-3: Tử vi năm theo tuổi (năm sinh 1960–2005).
-    ...[namAm, namAm + 1].flatMap((n) => NAM_SINH_SEO.map((ns) => ({ url: urlDayDu(duongNamTuoi(n, ns)), changeFrequency: "yearly" as const, priority: 0.6 }))),
+    ...NAM_SINH_SEO.filter((ns) => namTuoiIndex(namSeo, namSeo, ns)).map((ns) => ({ url: urlDayDu(duongNamTuoi(namSeo, ns)), changeFrequency: "yearly" as const, priority: 0.6 })),
     // SEO-L5: lịch âm năm nay −2 … +3.
     ...Array.from({ length: 6 }, (_, i) => namAm - 2 + i).map((n) => ({ url: urlDayDu(duongLichAm(n)), changeFrequency: "yearly" as const, priority: 0.6 })),
-    ...tuoi.map((t) => ({ url: urlDayDu(duongTuoi(t.slug)), changeFrequency: "yearly" as const, priority: 0.6 })),
+    // AUD-Q2: 8 trang cung phi (thay 46 trang năm sinh).
+    ...tuoi.cung.map((c) => ({ url: urlDayDu(duongTuoi(c.slug)), changeFrequency: "yearly" as const, priority: 0.6 })),
     ...mau.map((m) => ({ url: urlDayDu(`/tu-vi/la-so-mau/${m.slug}`), changeFrequency: "monthly" as const, priority: 0.7 })),
     ...ds.filter((t) => t.index).map((t) => ({
       url: urlDayDu(duongTrang(t.loai, t.slug)), lastModified: t.cap_nhat, changeFrequency: "monthly" as const,

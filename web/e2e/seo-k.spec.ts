@@ -64,7 +64,7 @@ test("công cụ có WebApplication riêng; từ điển có @id từng thuật 
   expect(td).toMatch(/"@type":"DefinedTerm","@id":"[^"]*\/tu-dien#[a-z_0-9-]+"/);
   const ln = await (await request.get("/xem-tuoi-lam-nha/2027/tuoi-1990")).text();
   expect(ln).toContain('"@type":"WebPage"');
-  expect(ln).toContain('href="/phong-thuy/huong-hop-tuoi/tuoi-1990"');
+  expect(ln).toContain('href="/phong-thuy/huong-hop-tuoi#tuoi-1990"');   // AUD-Q2: dòng năm trên mục lục
   expect(ln).toContain("Cùng tuổi Canh Ngọ 1990");
 });
 

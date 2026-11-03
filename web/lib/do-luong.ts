@@ -56,6 +56,7 @@ export type SuKien =
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   feature_version: "string",
+  den_tu: "string", ai: "string",   // AUD-P0: mã nguồn vào (lib/nguon-vao.ts) — không bao giờ là URL
   mo_dun: "string",
   kind: "string",
   ma_moi: "string",

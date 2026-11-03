@@ -37,7 +37,11 @@ def test_1990_tinh_tay():
     assert "27/01/1990" in moc and "04/02/1990" in moc and "Kỷ Tỵ" in moc       # trước Tết: năm Kỷ Tỵ 1989
     assert t["minh_hoa"] == {"kieu": "menh", "hanh": "Thổ", "nap_am": "Lộ Bàng Thổ", "han": "路旁土", "can_chi": "Canh Ngọ"}
     # SEO-K: trang tuổi hợp hướng gộp nam + nữ
-    assert t["lien_ket_ngoai"] == [{"duong": "/phong-thuy/huong-hop-tuoi/tuoi-1990", "ten": "Tuổi Canh Ngọ 1990 hợp hướng nào"}]
+    # AUD-Q2: trang hướng hợp tuổi gộp theo cung phi → link trang cung của nam (Khảm) và nữ (Cấn).
+    assert t["lien_ket_ngoai"] == [
+        {"duong": "/phong-thuy/huong-hop-tuoi/cung-kham-bac", "ten": "Nam sinh năm 1990 cung Khảm hợp hướng nào"},
+        {"duong": "/phong-thuy/huong-hop-tuoi/cung-can-dong-bac", "ten": "Nữ sinh năm 1990 cung Cấn hợp hướng nào"},
+    ]
     nam = next(m for m in t["muc"] if m["tieu_de"].startswith("Những năm đáng chú ý"))["danh_sach"]
     assert "tháng 5 nhuận" in nam[0] and "2026 (37 tuổi mụ)" in nam[1]      # 1990 nhuận tháng 5; tính tay 2026−1990+1
     assert "2016, 2017, 2018" in nam[3]                                     # tuổi Ngọ: Tam tai năm Thân, Dậu, Tuất

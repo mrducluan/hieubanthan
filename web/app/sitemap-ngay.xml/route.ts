@@ -1,7 +1,7 @@
 // SEO-K (chủ dự án duyệt 2026-10-21) — sitemap riêng cho trang ngày /xem-ngay-tot/{yyyy-mm-dd}: đúng cửa sổ index
 // (7 ngày trước → 400 ngày tới, ngayDangIndex) để Google biết sớm trang ngày sắp tới thay vì chỉ tìm qua lịch tháng.
 // Khai trong robots.txt cạnh /sitemap.xml. Chỉ dựng danh sách URL — không gọi engine.
-import { congNgay, duongNgay, homNayVN, ngayDangIndex } from "@/lib/hoang-lich";
+import { NGAY_SAU, congNgay, duongNgay, homNayVN, ngayDangIndex } from "@/lib/hoang-lich";
 import { urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
@@ -10,7 +10,7 @@ function dsNgaySitemap(homNay: string = homNayVN()): string[] {
   const ra: string[] = [];
   // Chừa 1 ngày ở hai đầu cửa sổ index (−7…+400): sitemap cache tới 6 giờ, qua nửa đêm không lọt ngày vừa ra khỏi
   // cửa sổ (rà site thật 2026-10-23: /xem-ngay-tot/2026-10-15 trong sitemap nhưng đã noindex).
-  for (let i = -6; i <= 399; i++) {
+  for (let i = -6; i <= NGAY_SAU - 1; i++) {
     const iso = congNgay(homNay, i);
     if (ngayDangIndex(iso, homNay)) ra.push(iso);
   }

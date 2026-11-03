@@ -45,7 +45,7 @@ export default async function Page(p: P) {
       <section aria-label="Trả lời nhanh" className="rounded-2xl border border-gold/30 bg-gold/5 p-5">
         <p className="eyebrow">Trả lời nhanh</p>
         <p className="mt-2 leading-relaxed text-fg">{d.tra_loi_nhanh}</p>
-        <p className="mt-2 text-sm text-fg-muted" data-nosnippet="">{d.cau_co_dinh}</p>
+        <p className="mt-2 text-sm text-fg-muted" data-testid="luu-y-tap-quan">{d.cau_co_dinh}</p>
       </section>
 
       <section className="mt-8" aria-labelledby="bang-nam">
@@ -56,7 +56,7 @@ export default async function Page(p: P) {
             <thead className="text-xs text-fg-faint"><tr><th className="py-2 pr-3">Năm sinh</th><th className="pr-3">Tuổi mụ</th><th className="pr-3">Nam</th><th>Nữ</th></tr></thead>
             <tbody>
               {d.ds.map((x) => (
-                <tr key={x.nam_sinh} className="border-t border-line/50">
+                <tr key={x.nam_sinh} id={`tuoi-${x.nam_sinh}`} className="scroll-mt-24 border-t border-line/50 target:bg-gold/10">
                   <td className="py-2 pr-3 text-fg">{x.nam_sinh} <span className="text-fg-faint">{x.can_chi}</span></td>
                   <td className="pr-3 tabular-nums text-fg-muted">{x.tuoi_mu}</td>
                   <td className="pr-3">{x.nam ? <a href={`#sao-${slug(x.nam)}`} className="text-gold underline decoration-gold/40 underline-offset-2">{x.nam}</a> : "—"}

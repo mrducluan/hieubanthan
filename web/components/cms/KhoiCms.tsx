@@ -88,7 +88,7 @@ function MotKhoi({ k, duong, viTri }: { k: KhoiCmsT; duong: string; viTri: ViTri
       const link = lk(k.cong_cu), loi = chu(k.loi_moi);
       if (!link || !loi) return null;
       return (
-        <section data-khoi="keu_goi" className="glass flex flex-col items-start gap-4 rounded-2xl p-5 sm:flex-row sm:items-center">
+        <section data-khoi="keu_goi" data-nosnippet="" className="glass flex flex-col items-start gap-4 rounded-2xl p-5 sm:flex-row sm:items-center">
           <p className="flex-1 text-lg">{loi}</p>
           <Link href={link} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 font-medium text-bg">
             {chu(k.nut) ?? "Xem của tôi"} <ArrowRight className="size-4" aria-hidden />
