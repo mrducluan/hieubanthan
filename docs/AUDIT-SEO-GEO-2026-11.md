@@ -152,5 +152,9 @@ bình 0,015 (thấp nhất vẫn 0,311 > ngưỡng 0,30) — nên làm chỉ s�
   (chỉ đo chữ engine trả). Hai cách đo cùng chiều kết luận.
 - Nguồn bên ngoài về llms.txt / GA4 phần lớn từ bên bán dịch vụ; thông tin Google-Extended lấy từ bài tóm tắt bên thứ
   ba — cần đối chiếu trang gốc của Google trước khi quyết Q6.
-- Hai test e2e "Hôm nay: Việc 0 đồng tuần này" (`dau-hieu.spec.ts`) hỏng cả khi chưa có thay đổi của PR này (lỗi có
-  sẵn, phụ thuộc ngày chạy) — để riêng, không sửa trong phạm vi audit.
+- Kiểm tra đợt 2 (2026-11-03): engine 6.736 test xanh; CMS 85 test unit + tsc xanh; migration dữ liệu
+  `aud_q2_cung_phi` chạy thử up → up lần 2 → down trên Postgres 16 tạm (đúng, idempotent); e2e web đầy đủ 609/614 ở
+  lượt đầu → sửa 1 test do PR (`seo.spec` còn đòi llms.txt liệt kê quẻ 64). 2 test cảm biến (lắc điện thoại
+  `kinh-dich.spec:309`, la bàn giả lập `phong-thuy.spec:107`) hỏng y hệt trên code gốc trước PR (môi trường chạy thử dùng
+  bản trình duyệt khác bản dự án ghim) — không thuộc phạm vi audit; `ux-v3b.spec:49` Bát tự chập chờn (lần đầu khi
+  máy chủ dev còn biên dịch, chạy lại 2/2 xanh).
