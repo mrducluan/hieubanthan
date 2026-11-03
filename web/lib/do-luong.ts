@@ -4,6 +4,7 @@
 // Tắt autocapture + session recording (ô nhập ngày sinh không bao giờ bị ghi).
 import type { PostHog } from "posthog-js";
 import { ghiMangDaXem } from "@/lib/huy-hieu";
+import { choRanh } from "@/lib/cho-ranh";
 
 export type SuKien =
   | "landing_viewed" | "reading_started" | "reading_completed" | "profile_created"
@@ -174,7 +175,8 @@ function nap(): Promise<PostHog | null> {
   const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
   if (!key || typeof window === "undefined") return Promise.resolve(null);
   if (ph) return Promise.resolve(ph);
-  dangNap ??= import("posthog-js").then(({ default: posthog }) => {
+  // PERF-2: posthog-js (97 KB) nạp khi người dùng tương tác / quá hạn chờ — sự kiện ghi trước đó đợi trong lời hứa này.
+  dangNap ??= choRanh().then(() => import("posthog-js")).then(({ default: posthog }) => {
     posthog.init(key, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com",
       autocapture: false,

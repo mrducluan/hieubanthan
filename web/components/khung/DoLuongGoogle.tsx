@@ -41,10 +41,16 @@ export function DoLuongGoogle({ nonce }: { nonce?: string }) {
   }, []);
 
   if (GTM_ID) {
+    // PERF-2: đồng ý mặc định + dataLayer đặt NGAY (rất nhẹ); gtm.js (kéo theo GA4 + thẻ) chờ người dùng tương tác / hạn chờ.
     return (
       <Script id="gtm" strategy="afterInteractive" nonce={nonce}>{`${KHOI_DONG}
 dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-(function(d){var s=d.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id='+${JSON.stringify(GTM_ID)};var n=d.currentScript&&d.currentScript.nonce;if(n)s.setAttribute('nonce',n);d.head.appendChild(s);})(document);`}</Script>
+(function(d){var s=d.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id='+${JSON.stringify(GTM_ID)};var n=d.currentScript&&d.currentScript.nonce;if(n)s.setAttribute('nonce',n);
+var ev=['pointerdown','keydown','touchstart','scroll','wheel'],go=false,t;
+function nap(){if(go)return;go=true;clearTimeout(t);ev.forEach(function(e){removeEventListener(e,nap)});d.head.appendChild(s);}
+ev.forEach(function(e){addEventListener(e,nap,{passive:true})});
+function hen(){t=setTimeout(nap,8000);}
+if(d.readyState==='complete')hen();else addEventListener('load',hen,{once:true});})(document);`}</Script>
     );
   }
   if (!GA_ID) return null;
