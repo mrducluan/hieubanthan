@@ -95,6 +95,6 @@ test("neo tuổi sao hạn, lời mời theo loại trang, llms URL không dính
   expect(sc).toContain("Trên lá số của bạn, sao này nằm ở cung nào");
   expect(sc).toMatch(/data-nosnippet="">[^]*?Trên lá số của bạn/);
   const llms = await (await request.get("/llms.txt")).text();
-  expect(llms).not.toMatch(/https?:\/\/\S+\{[^}]*\}(?!`)/);   // mẫu có {…} luôn trong `…`
+  expect(llms).not.toMatch(/(^|[^`])https?:\/\/[^\s`]*\{/m);   // mẫu có {…} luôn nằm trong `…`
   expect(llms).not.toMatch(/[^(<`]https?:\/\/[^\s<>`()]+[;:]\s/);   // URL trần không dính ; :
 });
