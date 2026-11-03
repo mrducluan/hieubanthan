@@ -45,7 +45,7 @@ export default async function Page(p: P) {
       <section aria-label="Trả lời nhanh" className="rounded-2xl border border-gold/30 bg-gold/5 p-5">
         <p className="eyebrow">Trả lời nhanh</p>
         <p className="mt-2 leading-relaxed text-fg">{d.tra_loi_nhanh}</p>
-        <p className="mt-2 text-sm text-fg-muted" data-nosnippet="">{d.cau_co_dinh}</p>
+        <p className="mt-2 text-sm text-fg-muted" data-testid="luu-y-tap-quan">{d.cau_co_dinh}</p>
       </section>
 
       <section className="mt-8" aria-labelledby="bang-nam">

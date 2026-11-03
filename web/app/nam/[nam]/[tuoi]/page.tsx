@@ -13,7 +13,7 @@ import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { CungTuoi } from "@/components/tuoi/CungTuoi";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNamBang, docTuoi, duongLamNha, namAmHienTai } from "@/lib/tuoi-dan-gian";
-import { type DiemNhan, type SaoGioi, duongCuoiHoi, duongNam, duongNamTuoi, namTheoTuoiCongKhai, namTuoiIndex } from "@/lib/nam";
+import { type DiemNhan, type SaoGioi, duongCuoiHoi, duongNam, duongNamTuoi, namTheoTuoiCongKhai, namTuoiIndex, namTuoiSeo } from "@/lib/nam";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_NAM_TUOI } from "@/lib/chu/trang-con";
@@ -32,7 +32,7 @@ async function metaGoc(p: P): Promise<Metadata> {
   const m = metaTrang({ tieuDe: `Tử vi năm ${x.n} tuổi ${x.ns} nam mạng, nữ mạng`,
     moTa: `Tuổi ${x.ns} năm ${x.n}: hợp hay xung với năm, Tam tai, Kim lâu, làm nhà, sao hạn nam mạng và nữ mạng đọc bằng lời đời thường, việc nên làm trong năm — không phán hung, không cúng giải.`,
     duong: duongNamTuoi(x.n, x.ns), anh: anhBai({ tieuDe: `Tử vi ${x.n} tuổi ${x.ns}`, mang: "lich" }) });
-  return namTuoiIndex(x.n, await namAmHienTai(), x.ns) ? m : { ...m, robots: { index: false, follow: true } };
+  return namTuoiIndex(x.n, await namTuoiSeo(), x.ns) ? m : { ...m, robots: { index: false, follow: true } };
 }
 
 const KIEU: Record<DiemNhan["loai"], { nhan: string; lop: string; cham: string }> = {
@@ -61,7 +61,7 @@ function TheSao({ gioi, s }: { gioi: string; s: SaoGioi }) {
 export default async function Page(p: P) {
   const x = await doc(p);
   if (!x) notFound();
-  const [d, namAm] = await Promise.all([namTheoTuoiCongKhai(x.n, x.ns), namAmHienTai()]);
+  const [d, namAm, namSeo] = await Promise.all([namTheoTuoiCongKhai(x.n, x.ns), namAmHienTai(), namTuoiSeo()]);
   if (!d) throw new Error("engine không phản hồi");
   const duong = duongNamTuoi(x.n, x.ns);
   const bien = { nam: String(x.n), nam_sinh: String(x.ns), can_chi: d.nguoi.can_chi, can_chi_nam: d.can_chi_nam };
@@ -165,7 +165,7 @@ export default async function Page(p: P) {
         ))}</dl>
       </section>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
-      <CungTuoi namSinh={x.ns} canChi={d.nguoi.can_chi} namAm={namAm} bo="tu_vi" boQuaNam={x.n} />
+      <CungTuoi namSinh={x.ns} canChi={d.nguoi.can_chi} namSeo={namSeo} namTet={namAm + 1} boQua={duongNamTuoi(x.n, x.ns)} />
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </div>
   );

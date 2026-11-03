@@ -98,9 +98,12 @@ export async function namAmHienTai(): Promise<number> {
   return (await ngayTotCongKhai(iso))?.am.nam ?? Number(iso.slice(0, 4));
 }
 
-/** Cửa sổ index: làm nhà năm âm hiện tại + năm sau; xông đất Tết sắp tới (+ năm hiện tại); hướng xấu năm −1…+2. */
-export const lamNhaIndex = (nam: number, namAm: number, ns: number) => (nam === namAm || nam === namAm + 1) && NAM_SINH_SEO.includes(ns);
-export const xongDatIndex = (nam: number, namAm: number, ns: number) => (nam === namAm || nam === namAm + 1) && NAM_SINH_SEO.includes(ns);
+/** Cửa sổ index trang THEO TUỔI. AUD-Q1 (chủ dự án 2026-11-03): chỉ MỘT năm — năm sắp tới (`namTuoiSeo`, cùng năm
+ *  menu "Năm …": năm tới khi Tết sau còn ≤ 120 ngày, không thì năm âm đang đi); năm đang qua thôi index (trang con cùng
+ *  tuổi khác năm gần trùng 47–57 %). Bảng theo năm + hướng xấu năm giữ cửa sổ riêng. */
+export const lamNhaIndex = (nam: number, namSeo: number, ns: number) => nam === namSeo && NAM_SINH_SEO.includes(ns);
+/** Xông đất: "năm sắp tới" luôn là Tết SẮP TỚI (năm âm hiện tại + 1) — sau Tết, Tết vừa qua thôi index ngay. */
+export const xongDatIndex = (nam: number, namAm: number, ns: number) => nam === namAm + 1 && NAM_SINH_SEO.includes(ns);
 export const hanNamIndex = (nam: number, namAm: number) => nam >= namAm - 1 && nam <= namAm + 2;
 
 // ---- MT-ĐS B3 — sao hạn Cửu Diệu + Bát hạn (tập quán theo tuổi, miễn phí; bảng một trang theo năm, không trang theo tuổi)

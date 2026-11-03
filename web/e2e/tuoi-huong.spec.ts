@@ -1,40 +1,53 @@
-// SEO-F → SEO-K — 46 trang "tuổi X hợp hướng nào" (nam + nữ một trang) + mục lục + bản .md + sitemap; bản một giới tính 308.
+// SEO-F → SEO-K → AUD-Q2 (chủ dự án duyệt 2026-11-03): "tuổi X hợp hướng nào" gộp theo CUNG PHI — 8 trang cung
+// (/phong-thuy/huong-hop-tuoi/cung-…) + mục lục có bảng 46 năm sinh × nam/nữ; trang năm cũ 308 về đúng dòng năm trên mục lục.
 import { test, expect } from "@playwright/test";
 
-test("trang tuổi 1990: HTML máy chủ có H1, nam Khảm + nữ Cấn, hướng tốt, mốc đầu năm, schema, link cùng tuổi", async ({ request, page }) => {
-  const html = await (await request.get("/phong-thuy/huong-hop-tuoi/tuoi-1990")).text();
+test("trang cung Khảm: HTML máy chủ có H1, trả lời nhanh tự đứng, hướng tốt, năm sinh, schema, link cung cùng nhóm", async ({ request }) => {
+  const r = await request.get("/phong-thuy/huong-hop-tuoi/cung-kham-bac");
+  expect(r.status()).toBe(200);
+  const html = await r.text();
   expect((html.match(/<h1[\s>]/g) ?? []).length).toBe(1);
-  expect(html).toContain("Tuổi Canh Ngọ 1990 hợp hướng nào? Nam mệnh Khảm, nữ mệnh Cấn");
+  expect(html).toContain("Cung Khảm hợp hướng nào?");
+  expect(html).toMatch(/Cung phi Khảm \(mệnh quái số 1, hành Thuỷ, thuộc Đông tứ mệnh\)/);
   for (const loai of ['"@type":"Article"', '"@type":"FAQPage"', '"@type":"BreadcrumbList"', '"@type":"ImageObject"']) expect(html).toContain(loai);
   expect(html).toMatch(/og:image" content="[^"]*mang=phong-thuy/);
-  expect(html).toMatch(/"datePublished":"\d{4}-\d{2}-\d{2}"/);                     // Article có ngày (review SEO-K)                    // ảnh đại diện có la bàn
-  expect(html).toContain('href="/bat-tu/menh-theo-nam/sinh-nam-1990-menh-gi"');          // cùng tuổi: mệnh theo năm
-  expect(html).toMatch(/href="\/xem-tuoi-lam-nha\/\d{4}\/tuoi-1990"/);                    // cùng tuổi: làm nhà
-  await page.goto("/phong-thuy/huong-hop-tuoi/tuoi-1990");
-  const tr = page.getByTestId("tuoi-huong");
-  await expect(tr).toContainText("Nam sinh năm 1990: mệnh Khảm");
-  await expect(tr).toContainText("Nữ sinh năm 1990: mệnh Cấn");
-  await expect(tr).toContainText("Đông Nam · Sinh Khí");
-  await expect(tr).toContainText("04/02/1990");                  // Lập xuân
-  await expect(tr).toContainText("27/01/1990");                  // Tết lịch Việt
+  expect(html).toMatch(/"datePublished":"\d{4}-\d{2}-\d{2}"/);
+  expect(html).toContain("Đông Nam");                                             // hướng tốt nhất (Sinh Khí)
+  expect(html).toContain('id="nam-1990"');                                        // nam 1990 có cung Khảm
+  for (const c of ["cung-ly-nam", "cung-chan-dong", "cung-ton-dong-nam"]) expect(html).toContain(`href="/phong-thuy/huong-hop-tuoi/${c}"`);
+  expect((await request.get("/phong-thuy/huong-hop-tuoi/cung-abc")).status()).toBe(404);
 });
 
-test("mục lục 46 trang, bản .md, sitemap, 308 bản cũ, 404 năm ngoài phạm vi", async ({ request, page }) => {
+test("mục lục: 8 cung + bảng 46 năm sinh có neo, bản .md, sitemap chỉ có trang cung", async ({ request, page }) => {
   await page.goto("/phong-thuy/huong-hop-tuoi");
-  await expect(page.getByTestId("huong-hop-tuoi").locator('a[href^="/phong-thuy/huong-hop-tuoi/tuoi-"]')).toHaveCount(46);
-  const md = await request.get("/phong-thuy/huong-hop-tuoi/tuoi-1985.md");
-  expect(md.status()).toBe(200);
-  const mdChu = await md.text();
-  expect(mdChu).toContain("Tết (lịch Trung Quốc): 1985-02-20");
-  expect(mdChu).toContain("## Nam sinh năm 1985");
-  expect(mdChu).toContain("## Nữ sinh năm 1985");
-  expect((await request.get("/phong-thuy/huong-hop-tuoi.md")).status()).toBe(200);
+  const ml = page.getByTestId("huong-hop-tuoi");
+  await expect(ml.locator('a[href^="/phong-thuy/huong-hop-tuoi/cung-"]').first()).toBeVisible();
+  await expect(ml.locator('tr[id^="tuoi-"]')).toHaveCount(46);
+  const dong = ml.locator("#tuoi-1990");
+  await expect(dong).toContainText("Canh Ngọ");
+  await expect(dong).toContainText("Khảm");
+  await expect(dong).toContainText("Cấn");
+  const md = await (await request.get("/phong-thuy/huong-hop-tuoi.md")).text();
+  expect(md).toContain("| 1990 | Canh Ngọ |");
+  const mdCung = await request.get("/phong-thuy/huong-hop-tuoi/cung-ly-nam.md");
+  expect(mdCung.status()).toBe(200);
+  expect(await mdCung.text()).toContain("## Trả lời nhanh");
   const sm = await (await request.get("/sitemap.xml")).text();
-  expect(sm).toContain("/phong-thuy/huong-hop-tuoi/tuoi-2005</loc>");
-  expect(sm).not.toMatch(/huong-hop-tuoi\/tuoi-\d{4}-(nam|nu)</);
-  const cu = await request.get("/phong-thuy/huong-hop-tuoi/tuoi-1990-nu", { maxRedirects: 0 });
-  expect(cu.status()).toBe(308);
-  expect(new URL(cu.headers()["location"]!, "http://x").pathname).toBe("/phong-thuy/huong-hop-tuoi/tuoi-1990");
-  expect((await request.get("/phong-thuy/huong-hop-tuoi/tuoi-1800")).status()).toBe(404);
-  expect((await request.get("/phong-thuy/huong-hop-tuoi/tuoi-1959")).status()).toBe(404);
+  expect(sm).toContain("/phong-thuy/huong-hop-tuoi/cung-can-dong-bac</loc>");
+  expect(sm).not.toMatch(/huong-hop-tuoi\/tuoi-\d{4}/);
+});
+
+test("trang năm cũ (cả bản một giới tính, .md) 308 một bước về dòng năm trên mục lục", async ({ request }) => {
+  for (const [cu, den] of [
+    ["/phong-thuy/huong-hop-tuoi/tuoi-1990", "/phong-thuy/huong-hop-tuoi#tuoi-1990"],
+    ["/phong-thuy/huong-hop-tuoi/tuoi-1990-nu", "/phong-thuy/huong-hop-tuoi#tuoi-1990"],
+    ["/phong-thuy/tuoi-1985-nam", "/phong-thuy/huong-hop-tuoi#tuoi-1985"],
+    ["/phong-thuy/huong-hop-tuoi/tuoi-1990.md", "/phong-thuy/huong-hop-tuoi.md"],
+    ["/phong-thuy/tuoi-1990-nam.md", "/phong-thuy/huong-hop-tuoi.md"],
+  ] as const) {
+    const r = await request.get(cu, { maxRedirects: 0 });
+    expect(r.status(), cu).toBe(308);
+    const u = new URL(r.headers()["location"]!, "http://x");
+    expect(u.pathname + u.hash, cu).toBe(den);
+  }
 });

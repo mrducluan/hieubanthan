@@ -129,8 +129,11 @@ def trang_menh_nam(nam: int, slug: str) -> dict:
         {"hoi": f"Mệnh {ten} và cung phi khác nhau thế nào?",
          "dap": f"Mệnh nạp âm ({ten}) dùng chung cho cả nam và nữ; cung phi (nam {q_nam['quai']}, nữ {q_nu['quai']}) dùng chọn hướng nhà."},
     ]
-    # SEO-K: trang tuổi hợp hướng gộp nam + nữ một trang (308 từ bản -nam/-nu).
-    lien_ket = ([{"duong": f"/phong-thuy/huong-hop-tuoi/tuoi-{nam}", "ten": f"Tuổi {can} {chi} {nam} hợp hướng nào"}]
+    # AUD-Q2: trang hướng hợp tuổi gộp theo CUNG PHI → link sang trang cung của nam và của nữ (năm dùng Lập xuân như trang
+    # cung; 1960–2005 như bảng mục lục).
+    from app.luangiai import phongthuy_tuoi as _pt_tuoi
+    lien_ket = ([{"duong": f"/phong-thuy/huong-hop-tuoi/{_pt_tuoi.CUNG_SLUG[q['quai']]}",
+                  "ten": f"{gt} sinh năm {nam} cung {q['quai']} hợp hướng nào"} for gt, q in (("Nam", q_nam), ("Nữ", q_nu))]
                 if _PT_DAU <= nam <= _PT_CUOI else [])
     ln = [n for n in (nam - 1, nam + 1) if NAM_DAU <= n <= NAM_CUOI]
     return {

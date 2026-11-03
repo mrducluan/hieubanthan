@@ -296,6 +296,19 @@ def viec_tu_slug(slug: str) -> str | None:
     return _THEO_SLUG.get(slug)
 
 
+def dem_viec_thang(nam: int, thang_: int, so: int) -> list[dict]:
+    """AUD-Q3: số ngày tốt của 6 việc SEO cho `so` tháng liên tiếp từ (nam, thang_) — đúng `chon_ngay` như trang việc,
+    để web dựng sitemap + robots một lần (trang 0 ngày tốt → noindex, không vào sitemap)."""
+    ra = []
+    for i in range(so):
+        n, t = nam + (thang_ - 1 + i) // 12, (thang_ - 1 + i) % 12 + 1
+        tu = dt.date(n, t, 1)
+        den = dt.date(n + (t == 12), t % 12 + 1, 1) - dt.timedelta(days=1)
+        for v in VIEC_SEO:
+            ra.append({"nam": n, "thang": t, "ma": v["ma"], "slug": v["slug"], "so_ngay": len(chon_ngay(v["ma"], tu, den)["ngay"])})
+    return ra
+
+
 def viec_thang(viec: str, nam: int, thang_: int) -> dict:
     tu = dt.date(nam, thang_, 1)
     den = (dt.date(nam + (thang_ == 12), thang_ % 12 + 1, 1) - dt.timedelta(days=1))

@@ -3,7 +3,7 @@
 import Link from "@/components/khung/Lien";
 import { CalendarHeart, Compass, Home, Sparkles, Users } from "lucide-react";
 import type { HanNam, LamNha, SaoHan, XongDat } from "@/lib/tuoi-dan-gian";
-import { duongHanNam, duongLamNha } from "@/lib/tuoi-dan-gian";
+import { duongHanNam, duongLamNha, duongXongDatNam } from "@/lib/tuoi-dan-gian";
 
 // Bàn 9 cung, phía Nam ở trên (như la bàn phong thuỷ truyền thống).
 const LUOI = [["Tốn", "Ly", "Khôn"], ["Chấn", "Trung cung", "Đoài"], ["Cấn", "Khảm", "Càn"]];
@@ -55,7 +55,19 @@ export function BangHanNam({ h, gon = false }: { h: HanNam; gon?: boolean }) {
   );
 }
 
-export function KetQuaLamNha({ d }: { d: LamNha }) {
+/** AUD-Q1 (2026-11-03): trên TRANG THEO TUỔI (SEO), khối chung của cả năm (bàn 9 cung, mùng 1 Tết) giống hệt ở 46 trang →
+ *  chỉ giữ một câu tóm + link về trang năm; công cụ (trình duyệt) vẫn hiện đầy đủ. */
+function HanNamGon({ h }: { h: HanNam }) {
+  return (
+    <p className="glass rounded-2xl p-4 text-sm text-fg-muted" data-testid="han-nam-gon">
+      Năm {h.can_chi} ({h.nam}), chung cho mọi tuổi:{" "}
+      {h.huong_tranh.map((x) => `${x.ten} ở ${x.phuong}`).join(" · ")}.{" "}
+      <Link href={duongHanNam(h.nam)} className="text-gold underline">Bàn 9 cung và ý nghĩa từng hướng năm {h.nam}</Link>
+    </p>
+  );
+}
+
+export function KetQuaLamNha({ d, trangTuoi = false }: { d: LamNha; trangTuoi?: boolean }) {
   const thuan = d.ket_luan.ma === "thuan";
   return (
     <div className="space-y-4" data-testid="ket-qua-lam-nha">
@@ -101,13 +113,13 @@ export function KetQuaLamNha({ d }: { d: LamNha }) {
         </section>
       </div>
       {d.cach_dan_gian && <p className="glass rounded-2xl p-4 text-sm text-fg-muted" data-nosnippet="">{d.cach_dan_gian}</p>}
-      <BangHanNam h={d.han_nam} gon />
+      {trangTuoi ? <HanNamGon h={d.han_nam} /> : <BangHanNam h={d.han_nam} gon />}
       <p className="text-xs text-fg-muted">{d.cach_tinh} {d.luu_y}</p>
     </div>
   );
 }
 
-export function KetQuaXongDat({ d }: { d: XongDat }) {
+export function KetQuaXongDat({ d, trangTuoi = false }: { d: XongDat; trangTuoi?: boolean }) {
   const tet = d.mung_mot.ngay.split("-").reverse().join("/");
   return (
     <div className="space-y-4" data-testid="ket-qua-xong-dat">
@@ -127,12 +139,21 @@ export function KetQuaXongDat({ d }: { d: XongDat }) {
         <p className="mt-4 text-sm"><span className="text-moon">Nên tránh:</span> {d.nen_tranh.join(" · ")}.</p>
         {d.uoc_luong_nam_sinh && <p className="mt-2 text-xs text-fg-muted">Tính theo năm sinh âm lịch; sinh trước Tết thì tuổi thuộc năm trước.</p>}
       </div>
-      <section className="glass rounded-2xl p-5" aria-labelledby="mung-mot">
+{trangTuoi ? (
+        <p className="glass rounded-2xl p-4 text-sm text-fg-muted" data-testid="mung-mot-gon">
+          Mùng 1 Tết ({tet}) — ngày {d.mung_mot.can_chi}, {d.mung_mot.hoang_dao ? "Hoàng đạo" : "Hắc đạo"}; giờ đẹp và hướng
+          xuất hành chung cho mọi tuổi:{" "}
+          <Link href={`/xem-ngay-tot/${d.mung_mot.ngay}`} className="text-gold underline">Xem đầy đủ hoàng lịch mùng 1</Link>
+          {" · "}<Link href={duongXongDatNam(d.nam.nam)} className="text-gold underline">bảng tuổi xông đất mọi gia chủ năm {d.nam.nam}</Link>
+        </p>
+      ) : (
+            <section className="glass rounded-2xl p-5" aria-labelledby="mung-mot">
         <h2 id="mung-mot" className="text-lg">Mùng 1 Tết ({tet}) — ngày {d.mung_mot.can_chi}, {d.mung_mot.hoang_dao ? "Hoàng đạo" : "Hắc đạo"} ({d.mung_mot.than})</h2>
         <p className="mt-2 text-sm"><span className="text-fg-muted">Giờ hoàng đạo:</span> {d.mung_mot.gio_hoang_dao.map((g) => `${g.chi} (${g.khung})`).join(" · ")}</p>
         <p className="mt-1 text-sm"><span className="text-fg-muted">Hướng xuất hành:</span> Hỷ thần {d.mung_mot.huong.hy_than} · Tài thần {d.mung_mot.huong.tai_than}</p>
         <Link href={`/xem-ngay-tot/${d.mung_mot.ngay}`} className="mt-2 inline-block text-sm text-gold underline">Xem đầy đủ hoàng lịch mùng 1</Link>
       </section>
+      )}
       <p className="text-xs text-fg-muted">{d.cach_chon} {d.luu_y}</p>
     </div>
   );

@@ -56,8 +56,8 @@ export interface NamTheoTuoi extends MetaKb {
 }
 export const namTheoTuoiCongKhai = (nam: number, ns: number) => lay<NamTheoTuoi>(`/v1/nam/${nam}/tuoi/${ns}`);
 export const duongNamTuoi = (nam: number, ns: number) => `/nam/${nam}/tuoi-${ns}`;
-/** Có trang index: năm âm hiện tại + năm sau, năm sinh 1960–2005 (như cụm tuổi làm nhà / xông đất). */
-export const namTuoiIndex = (nam: number, namAm: number, ns: number) => namIndex(nam, namAm) && ns >= 1960 && ns <= 2005;
+/** Có trang index: CHỈ năm sắp tới (`namTuoiSeo`, AUD-Q1), năm sinh 1960–2005 (như cụm tuổi làm nhà / xông đất). */
+export const namTuoiIndex = (nam: number, namSeo: number, ns: number) => nam === namSeo && ns >= 1960 && ns <= 2005;
 
 export const namCongKhai = (nam: number) => lay<NamTongQuan>(`/v1/nam/${nam}`);
 export const sinhConCongKhai = (nam: number) => lay<NamSinhCon>(`/v1/nam/${nam}/sinh-con`);
@@ -87,4 +87,10 @@ export async function namThoiGianToi(hanMs = 10_000): Promise<{ cac_nam: number[
   const y = vn.getUTCFullYear(), m = vn.getUTCMonth() + 1;
   const namAm = m === 1 ? y - 1 : y;   // tháng 1 thường còn trước Tết
   return { cac_nam: [namAm, namAm + 1], mac_dinh: m >= 10 || m === 1 ? namAm + 1 : null };
+}
+
+/** AUD-Q1: năm duy nhất của trang theo tuổi được index = năm mặc định của menu / Thời gian tới (engine quyết). */
+export async function namTuoiSeo(): Promise<number> {
+  const r = await namThoiGianToi();
+  return r.mac_dinh ?? r.cac_nam[0] ?? new Date(Date.now() + 7 * 3600_000).getUTCFullYear();
 }

@@ -171,7 +171,8 @@ export default async function Page(p: P) {
         ))}</dl>
       </section>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
-      <p className="mt-8 text-sm text-fg-muted" data-nosnippet="">{d.luu_y}</p>
+      {/* AUD-Q5 (chủ dự án 2026-11-03): câu "tập quán, không phải tiên đoán" ĐƯỢC trích — AI trích lời tục lệ phải kèm câu rào này. */}
+      <p className="mt-8 text-sm text-fg-muted" data-testid="luu-y-tap-quan">{d.luu_y}</p>
       <p className="mt-3 flex flex-wrap gap-3 text-sm">
         {n > 2006 && <Link href={duongNam(n - 1)} className="text-gold underline">Năm {n - 1}</Link>}
         {n < 2099 && <Link href={duongNam(n + 1)} className="text-gold underline">Năm {n + 1}</Link>}

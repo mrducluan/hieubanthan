@@ -9,6 +9,7 @@ import { KetQuaLamNha } from "@/components/tuoi/KetQuaTuoi";
 import { CungTuoi } from "@/components/tuoi/CungTuoi";
 import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNam, docTuoi, duongLamNha, duongLamNhaNam, lamNhaCongKhai, lamNhaIndex, namAmHienTai, NAM_BANG_TU } from "@/lib/tuoi-dan-gian";
+import { namTuoiSeo } from "@/lib/nam";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { taoChu } from "@/lib/chu-trang";
@@ -29,13 +30,13 @@ async function metaGoc(p: P): Promise<Metadata> {
   const m = metaTrang({ tieuDe: `Tuổi ${x.ns} làm nhà năm ${x.n} được không? Kim lâu, Hoang ốc`,
     moTa: `Sinh năm ${x.ns} làm nhà, cưới hỏi năm ${x.n}: tuổi mụ, Kim lâu, Hoang ốc, Tam tai, năm thuận gần nhất và hướng nên giữ yên trong năm.`,
     duong: duongLamNha(x.n, x.ns) });
-  return lamNhaIndex(x.n, await namAmHienTai(), x.ns) ? m : { ...m, robots: { index: false, follow: true } };
+  return lamNhaIndex(x.n, await namTuoiSeo(), x.ns) ? m : { ...m, robots: { index: false, follow: true } };
 }
 
 export default async function Page(p: P) {
   const x = await doc(p);
   if (!x) notFound();
-  const [d, namAm] = await Promise.all([lamNhaCongKhai(x.n, x.ns), namAmHienTai()]);
+  const [d, namAm, namSeo] = await Promise.all([lamNhaCongKhai(x.n, x.ns), namAmHienTai(), namTuoiSeo()]);
   if (!d) throw new Error("engine không phản hồi");
   // ND-7: mẫu cụm "/xem-tuoi-lam-nha/{nam}/tuoi-{nam_sinh}" — khối + chữ sửa được ở CMS.
   const duong = duongLamNha(x.n, x.ns);
@@ -53,11 +54,11 @@ export default async function Page(p: P) {
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
       <div className="mb-6"><TraLoiNhanh chu={d.tra_loi_nhanh} /></div>
-      <KetQuaLamNha d={d} />
+      <KetQuaLamNha d={d} trangTuoi />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-6 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/xem-tuoi-lam-nha" className="text-gold underline">{c("cuoi.link", bien)}</Link> ·{" "}
         <Link href={duongLamNha(x.n + 1, x.ns)} className="text-gold underline">{c("cuoi.nam_sau", bien)}</Link></p>
-      <CungTuoi namSinh={x.ns} canChi={d.can_chi} namAm={namAm} bo="lam_nha" />
+      <CungTuoi namSinh={x.ns} canChi={d.can_chi} namSeo={namSeo} namTet={namAm + 1} boQua={duongLamNha(x.n, x.ns)} />
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </div>
   );

@@ -22,7 +22,7 @@ test("trang SEO tuổi 1990 làm nhà 2026: H1, Kim lâu Thân, Tứ Tấn Tài,
   await expect(page.getByTestId("nhan-hoang-oc")).toContainText("Tứ Tấn Tài");
   await expect(page.getByTestId("ket-luan")).toHaveText("Dân gian thường tránh");
   await expect(page.getByTestId("nam-thuan").locator("a").first()).toBeVisible();
-  await expect(page.getByTestId("han-nam")).toContainText("Ngũ Hoàng");
+  await expect(page.getByTestId("han-nam-gon")).toContainText("Ngũ Hoàng");   // AUD-Q1: khối chung của năm chỉ một câu + link
   expect(await page.locator("main").innerText()).not.toMatch(CAM);
   expect((await request.get("/xem-tuoi-lam-nha/2026/tuoi-2030")).status()).toBe(404);
 });

@@ -13,14 +13,19 @@ function chuyenHuong() {
   );
   for (const [khoa, moi] of Object.entries(CHUYEN.chu_de)) them(`/kien-thuc/${khoa}`, moi);
   for (const [cu, moi] of CHUYEN.trang) them(cu, moi);
-  // SEO-K: trang tuổi gộp nam + nữ → /phong-thuy/huong-hop-tuoi/tuoi-1990(.md). Bản một giới tính (cả đường dẫn trước
-  // QH-URL /phong-thuy/tuoi-1990-nam) đi THẲNG một bước tới bản gộp.
+  // SEO-K → AUD-Q2 (chủ dự án duyệt 2026-11-03): trang năm (cả bản một giới tính, cả đường dẫn trước QH-URL
+  // /phong-thuy/tuoi-1990-nam) đã gộp theo CUNG PHI → đi THẲNG một bước tới DÒNG năm trên mục lục (#tuoi-1990);
+  // bản .md → mục lục .md (bảng năm sinh).
   for (const goc of ["/phong-thuy", CHUYEN.tuoi_huong]) {
     ds.push(
-      { source: `${goc}/tuoi-:nam(\\d{4})-:gioi(nam|nu)`, destination: `${CHUYEN.tuoi_huong}/tuoi-:nam`, permanent: true },
-      { source: `${goc}/tuoi-:nam(\\d{4})-:gioi(nam|nu).md`, destination: `${CHUYEN.tuoi_huong}/tuoi-:nam.md`, permanent: true },
+      { source: `${goc}/tuoi-:nam(\\d{4})-:gioi(nam|nu)`, destination: `${CHUYEN.tuoi_huong}#tuoi-:nam`, permanent: true },
+      { source: `${goc}/tuoi-:nam(\\d{4})-:gioi(nam|nu).md`, destination: `${CHUYEN.tuoi_huong}.md`, permanent: true },
     );
   }
+  ds.push(
+    { source: `${CHUYEN.tuoi_huong}/tuoi-:nam(\\d{4})`, destination: `${CHUYEN.tuoi_huong}#tuoi-:nam`, permanent: true },
+    { source: `${CHUYEN.tuoi_huong}/tuoi-:nam(\\d{4}).md`, destination: `${CHUYEN.tuoi_huong}.md`, permanent: true },
+  );
   return ds;
 }
 

@@ -42,3 +42,21 @@ def test_dep_nhat_khong_vuong_kieng_dan_gian():
         for v in ("xuat_hanh", "cuoi_hoi", "khai_truong"):
             d = viec_thang(v, nam, th)["dep_nhat"]
             assert d is None or not d.get("ky_dan_gian"), (v, nam, th, d)
+
+
+def test_dem_viec_thang_khop_tung_trang():
+    """AUD-Q3 (chủ dự án 2026-11-03): sitemap + robots trang "ngày tốt {việc} tháng" dùng số ngày tốt do engine đếm —
+    MỘT nguồn: đúng `viec_thang(...)["so_ngay"]` của từng trang; tháng 12 nối sang tháng 1 năm sau."""
+    ds = L.dem_viec_thang(2026, 11, 3)
+    assert [(x["nam"], x["thang"]) for x in ds[:: len(L.VIEC_SEO)]] == [(2026, 11), (2026, 12), (2027, 1)]
+    assert len(ds) == 3 * len(L.VIEC_SEO)
+    for x in ds:
+        assert x["so_ngay"] == L.viec_thang(x["ma"], x["nam"], x["thang"])["so_ngay"]
+        assert x["slug"] == next(v["slug"] for v in L.VIEC_SEO if v["ma"] == x["ma"])
+
+
+def test_api_dem_viec_thang():
+    r = client.get("/v1/lich/viec-thang-dem/2026/11?so=2")
+    assert r.status_code == 200 and len(r.json()["thang"]) == 2 * len(L.VIEC_SEO)
+    assert client.get("/v1/lich/viec-thang-dem/2026/11?so=40").status_code == 422
+    assert client.get("/v1/lich/viec-thang-dem/2026/13").status_code == 422

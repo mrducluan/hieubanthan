@@ -27,6 +27,10 @@ test("robots, sitemap, llms.txt cho máy tìm kiếm và AI", async ({ request }
   // BM-2: bot AI trả lời/tìm kiếm được vào; bot huấn luyện bị chặn toàn site
   expect(robots).toMatch(/User-Agent: OAI-SearchBot[\s\S]*?Allow: \//);
   expect(robots).toMatch(/User-Agent: GPTBot[\s\S]*?Disallow: \/\n/);
+  // AUD-Q6 (chủ dự án 2026-11-03): mở Google-Extended (Gemini trích dẫn / grounding) — nằm trong nhóm được vào, không trong nhóm chặn.
+  const nhom = robots.split(/\n\s*\n/).find((k) => k.includes("User-Agent: Google-Extended")) ?? "";
+  expect(nhom).toContain("Allow: /");
+  expect(nhom).not.toMatch(/Disallow: \/\n/);
   expect(robots).not.toContain("llms-full");
   expect(robots).toContain("Disallow: /tai-khoan");
   expect(robots).toContain("Sitemap: http://localhost:3000/sitemap.xml");
