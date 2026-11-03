@@ -77,8 +77,10 @@ def trang_dau_hieu(ma: str, slug: str) -> dict:
     chung = [q for _, q in qt if not (q.get("ap_dung") or {}).get("loai_nha")]
     viec_can_ho = bc._viec_cho(ma, m, "can_ho")
 
-    tra_loi = ((f"{ten} là dấu hiệu tốt theo {nguon_y}. " if tot else "")
-               + (f"Đây là một trong những dấu hiệu nên xử lý trước. " if veto else "")
+    # AUD-P0 (GEO): câu đầu tự đứng — nêu dấu hiệu + "phong thuỷ nhà ở" (không mở bằng "Đây là…").
+    tra_loi = ((f"{ten} là dấu hiệu tốt trong phong thuỷ nhà ở, theo {nguon_y}. " if tot else
+                f"{ten} là một trong những dấu hiệu phong thuỷ nhà ở nên xử lý trước. " if veto else
+                f"{ten} là một dấu hiệu được xét trong phong thuỷ nhà ở. ")
                + _cau_dau(m["noi_dung"]) + " " + _cau_dau(m.get("giai_thich_hien_dai") or "")
                + (f" Việc không tốn tiền: {v0}" if v0 else "")).strip()
     muc = [{"tieu_de": "Sách xưa nói gì" if m["nguon"] != "dan_gian" else "Dân gian nói gì",

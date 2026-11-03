@@ -51,3 +51,15 @@ test("trang tuổi: năm đang qua noindex, năm sắp tới index + có trong s
   }
   for (const d of ["/xem-tuoi-lam-nha/2026/tuoi-1990<", "/nam/2026/tuoi-1990<", "/tuoi-xong-dat/2026/tuoi-1990<"]) expect(sm).not.toContain(d);
 });
+
+// AUD-P0: llms.txt gọn (≤ 15 KB, bot trả lời không đọc hết bản dài), có mục mùa Tết, ví dụ trỏ trang đang index.
+test("llms.txt gọn, có mùa Tết, mỗi cụm một dòng mục lục + ví dụ", async ({ request }) => {
+  const t = await (await request.get("/llms.txt")).text();
+  expect(Buffer.byteLength(t, "utf8")).toBeLessThanOrEqual(15_000);
+  expect(t).toMatch(/## Mùa Tết — năm \d{4}/);
+  expect(t).toMatch(/\/nam\/\d{4}\/tuoi-1990\)/);
+  expect(t).toContain("/thoi-gian-toi");
+  expect(t).toContain("/than-so/y-nghia-so/so-7)");
+  expect((t.match(/\]\(https?:\/\/[^)]+\/tu-vi\/sao-o-cung\/[a-z-]+\)/g) ?? []).length).toBeLessThanOrEqual(3);
+  expect(t).toContain("## Thư viện kiến thức");
+});

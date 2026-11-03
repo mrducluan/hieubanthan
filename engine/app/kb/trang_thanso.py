@@ -50,7 +50,7 @@ def trang_cap_so(k: str, slug: str) -> dict:
     a, b = k.split("-")
     qh = t._doc("thanso_quan_he.json")["theo_so"]
     ld = t._doc("thanso_linh_vuc.json")["noi_dung"]
-    tra_loi = (f"Thần số học không chấm điểm hợp hay khắc. Với số chủ đạo {a} và {b}: dễ hoà ở chỗ "
+    tra_loi = (f"Trong thần số học, cặp số chủ đạo {a} và {b} không chấm điểm hợp hay khắc: dễ hoà ở chỗ "
                f"{c['hoa'][:1].lower() + c['hoa'][1:]} Dễ va ở chỗ {c['va'][:1].lower() + c['va'][1:]}")
     muc = [{"tieu_de": "Dễ hoà ở đâu", "doan": c["hoa"]},
            {"tieu_de": "Dễ va ở đâu", "doan": c["va"]},
@@ -94,7 +94,8 @@ def trang_nghe(so: str, slug: str) -> dict:
     cv = t._doc("thanso_chan_dung.json")["so"][so]["cong_viec"]
     lv = t._doc("thanso_linh_vuc.json")["noi_dung"][so]
     sn, tc = lv["su_nghiep"], lv["tai_chinh"]
-    tra_loi = f"{sn['xu_huong']} Thế mạnh: {t._cau(cv['the_manh'][:1].lower() + cv['the_manh'][1:])}"
+    tra_loi = (f"Theo thần số học, {sn['xu_huong'][:1].lower() + sn['xu_huong'][1:]} "
+               f"Thế mạnh: {t._cau(cv['the_manh'][:1].lower() + cv['the_manh'][1:])}")
     muc = [{"tieu_de": f"Nghề thường hợp với số {so}", "danh_sach": cv["nghe"]},
            {"tieu_de": "Thế mạnh trong công việc", "doan": t._cau(cv["the_manh"])},
            {"tieu_de": "Môi trường làm việc hợp", "doan": t._cau(cv["moi_truong"])},
@@ -131,7 +132,7 @@ def trang_tinh_yeu(so: str, slug: str) -> dict:
     tc = t._doc("thanso_chan_dung.json")["so"][so]["tinh_cam"]
     ty = t._doc("thanso_linh_vuc.json")["noi_dung"][so]["tinh_yeu"]
     goc = _SO_GOC.get(so, so)
-    tra_loi = f"{ty['xu_huong']} {t._cau(tc['cach_yeu'])}"
+    tra_loi = f"Theo thần số học, {ty['xu_huong'][:1].lower() + ty['xu_huong'][1:]} {t._cau(tc['cach_yeu'])}"
     muc = [{"tieu_de": "Cách yêu", "doan": t._cau(tc["cach_yeu"])},
            {"tieu_de": "Cần được", "doan": t._cau(tc["can_duoc"])},
            {"tieu_de": "Điểm mù trong tình cảm", "doan": t._cau(tc["diem_mu"]) + " " + t._cau(ty["mat_toi"])},

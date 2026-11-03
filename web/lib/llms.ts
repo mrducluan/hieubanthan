@@ -4,24 +4,33 @@
 // - mỗi mục là một câu mô tả ngắn (móc câu), không đưa toàn văn — bỏ hẳn /llms-full.txt;
 // - nói rõ câu hỏi cá nhân (theo ngày giờ sinh) phải tính bằng công cụ trên web → AI chỉ đường cho người dùng;
 // - cụm trang lớn (sao × cung, tứ hoá × cung, mệnh theo năm) chỉ ghi mục lục + mẫu URL + ví dụ.
+// AUD-P0 (kiểm toán GEO 2026-11): bản cũ 98 KB / 313 link, bot trả lời gần như không đọc hết → thư viện còn MỘT dòng
+// mỗi cụm (mục lục + số trang + mẫu URL + một ví dụ; mục tiêu ≤ 15 KB); thêm mục "Mùa Tết" (năm theo menu, không ghi cứng); ví dụ ngày/tháng lấy
+// theo hôm nay (ví dụ cũ đã ra khỏi cửa sổ index); bài viết ≤ 15.
 import { CHU_DE, duongTrang, mucLuc, type MucLuc } from "@/lib/kien-thuc";
 import { NGUYEN_TAC } from "@/lib/markdown";
 import { MO_TA_SITE, TEN_SITE, urlDayDu } from "@/lib/seo";
 import { vanHanh } from "@/lib/van-hanh";
 import { dsBaiCms, tinhNangCms } from "@/lib/cms";
+import { homNayVN } from "@/lib/hoang-lich";
+import { namTuoiSeo } from "@/lib/nam";
 
-/** Chủ đề có quá nhiều trang cùng khuôn → chỉ liệt kê mục lục + mẫu URL + vài ví dụ. */
-const CUM_LON: Record<string, { mau: string; viDu: string[] }> = {
+/** Mỗi cụm: mẫu URL (cụm lớn) + ví dụ ưu tiên (slug); thiếu thì lấy các trang đầu. Chỉ mục lục + ví dụ, không liệt kê hết. */
+const CUM: Record<string, { mau?: string; viDu?: string[] }> = {
+  "than-so": { viDu: ["so-7"] },
   "sao-cung": { mau: "/tu-vi/sao-o-cung/{sao}-cung-{cung}", viDu: ["tu-vi-cung-menh", "thai-duong-cung-quan-loc", "tham-lang-cung-phu-the"] },
   "tu-hoa": { mau: "/tu-vi/tu-hoa/hoa-{loc|quyen|khoa|ky}-cung-{cung}", viDu: ["hoa-loc-cung-menh", "hoa-ky-cung-tai-bach", "hoa-khoa-cung-quan-loc"] },
   "menh-tuoi": { mau: "/bat-tu/menh-theo-nam/sinh-nam-{1950…2027}-menh-gi", viDu: ["sinh-nam-1990-menh-gi", "sinh-nam-1995-menh-gi", "sinh-nam-2000-menh-gi"] },
+  "kinh-dich": { mau: "/kinh-dich/que/que-{1…64}-{tên}", viDu: ["que-1-can", "que-29-kham", "que-63-ky-te"] },
 };
+const catMo = (s: string, n = 150) => (s.length > n ? `${s.slice(0, s.lastIndexOf(" ", n - 1))}…` : s);
 
-const dongTrang = (t: MucLuc) => `- [${t.tieu_de}](${urlDayDu(duongTrang(t.loai, t.slug))}): ${t.mo_ta}`;
 
 export async function taoLlmsTxt(): Promise<string> {
-  const ds = await mucLuc();
+  const [ds, nam] = await Promise.all([mucLuc(), namTuoiSeo()]);
   const vh = vanHanh();
+  const h = homNayVN(), y = Number(h.slice(0, 4)), m = Number(h.slice(5, 7));
+  const thangSau = m === 12 ? [1, y + 1] : [m + 1, y];
   const dong: string[] = [
     `# ${TEN_SITE}`,
     "",
@@ -45,12 +54,19 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Bát tự (Tứ trụ)](${urlDayDu("/bat-tu")}): tứ trụ, ngũ hành vượng suy, thập thần, cách cục, đại vận.`,
     `- [Kinh Dịch](${urlDayDu("/kinh-dich")}): gieo quẻ cho một câu hỏi cụ thể — quẻ chủ, hào động, quẻ biến.`,
     `- [Phong thuỷ nhà](${urlDayDu("/phong-thuy")}): mệnh quái Bát trạch, hướng tốt/xấu, khảo sát bố cục nhà, đo hướng bằng la bàn điện thoại.`,
-    `- [Xem tuổi làm nhà, cưới hỏi](${urlDayDu("/xem-tuoi-lam-nha")}): tuổi mụ có phạm Kim lâu, Hoang ốc, Tam tai không, năm thuận gần nhất; trang theo năm sinh dạng ${urlDayDu("/xem-tuoi-lam-nha/2027/tuoi-1990")}, bảng mọi tuổi một năm dạng ${urlDayDu("/xem-tuoi-lam-nha/2027")}.`,
-    `- [Hướng xấu theo năm](${urlDayDu("/phong-thuy/huong-xau-nam")}): Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc + bàn phi tinh 9 cung (dạng ${urlDayDu("/phong-thuy/huong-xau-nam/2027")}).`,
-    `- [Sao hạn theo tuổi](${urlDayDu("/xem-sao-han")}): sao Cửu Diệu của năm theo tuổi mụ và giới tính, lời đời thường + việc nên làm, không hướng dẫn cúng sao (bảng mọi tuổi dạng ${urlDayDu("/xem-sao-han/2027")}).`,
-    `- [Tuổi xông đất](${urlDayDu("/tuoi-xong-dat")}): tuổi hợp gia chủ cho Tết, tuổi nên tránh, giờ hoàng đạo mùng 1 (dạng ${urlDayDu("/tuoi-xong-dat/2027/tuoi-1990")}; bảng mọi tuổi gia chủ dạng ${urlDayDu("/tuoi-xong-dat/2027")}).`,
+    `- [Xem tuổi làm nhà, cưới hỏi](${urlDayDu("/xem-tuoi-lam-nha")}): tuổi mụ có phạm Kim lâu, Hoang ốc, Tam tai không, năm thuận gần nhất; trang theo năm sinh dạng ${urlDayDu(`/xem-tuoi-lam-nha/${nam}/tuoi-1990`)}, bảng mọi tuổi một năm dạng ${urlDayDu(`/xem-tuoi-lam-nha/${nam}`)}.`,
+    `- [Hướng xấu theo năm](${urlDayDu("/phong-thuy/huong-xau-nam")}): Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc + bàn phi tinh 9 cung (dạng ${urlDayDu(`/phong-thuy/huong-xau-nam/${nam}`)}).`,
+    `- [Sao hạn theo tuổi](${urlDayDu("/xem-sao-han")}): sao Cửu Diệu của năm theo tuổi mụ và giới tính, lời đời thường + việc nên làm, không hướng dẫn cúng sao (bảng mọi tuổi dạng ${urlDayDu(`/xem-sao-han/${nam}`)}).`,
+    `- [Tuổi xông đất](${urlDayDu("/tuoi-xong-dat")}): tuổi hợp gia chủ cho Tết, tuổi nên tránh, giờ hoàng đạo mùng 1 (dạng ${urlDayDu(`/tuoi-xong-dat/${nam}/tuoi-1990`)}; bảng mọi tuổi gia chủ dạng ${urlDayDu(`/tuoi-xong-dat/${nam}`)}).`,
     `- [Xem ngày tốt](${urlDayDu("/xem-ngay-tot")}): hoàng lịch theo giờ Việt Nam — hoàng đạo/hắc đạo, trực, giờ hoàng đạo, việc nên làm/kiêng, tuổi xung; tìm ngày đẹp cưới hỏi, khai trương, về nhà mới cho tuổi người dùng.`,
-    `- [Đổi lịch âm dương](${urlDayDu("/doi-lich-am-duong")}): đổi ngày dương ↔ âm theo âm lịch Việt Nam (giờ Hà Nội), can chi, tháng nhuận; lịch âm cả năm dạng ${urlDayDu("/lich-am/2027")}.`,
+    `- [Đổi lịch âm dương](${urlDayDu("/doi-lich-am-duong")}): đổi ngày dương ↔ âm theo âm lịch Việt Nam (giờ Hà Nội), can chi, tháng nhuận; lịch âm cả năm dạng ${urlDayDu(`/lich-am/${nam}`)}.`,
+    "",
+    `## Mùa Tết — năm ${nam}`,
+    "",
+    `- [Năm ${nam}: tổng quan](${urlDayDu(`/nam/${nam}`)}): can chi, nạp âm, Tết, Lập xuân, tam tai, kim lâu, hướng nên giữ yên — một trang cho mọi tuổi.`,
+    `- [Tử vi năm ${nam} theo tuổi](${urlDayDu(`/nam/${nam}/tuoi-1990`)}): mỗi năm sinh 1960–2005 một trang (dạng ${urlDayDu(`/nam/${nam}/tuoi-{năm sinh}`)}) — điều chung theo tuổi; phần riêng cần ngày giờ sinh ở ${urlDayDu("/thoi-gian-toi")}.`,
+    `- [Sinh con năm ${nam}](${urlDayDu(`/nam/${nam}/sinh-con`)}) · [Cưới hỏi năm ${nam}](${urlDayDu(`/nam/${nam}/cuoi-hoi`)}) · [Tuổi xông đất Tết ${nam}](${urlDayDu(`/tuoi-xong-dat/${nam}`)}) · [Sao hạn ${nam}](${urlDayDu(`/xem-sao-han/${nam}`)}) · [Lịch âm ${nam}](${urlDayDu(`/lich-am/${nam}`)})`,
+    `- [Thời gian tới của bạn](${urlDayDu("/thoi-gian-toi")}): 12 tháng tới theo ngày giờ sinh (thần số, Tử vi, Bát tự, con giáp, phong thuỷ) — cần nhập hồ sơ.`,
     "",
     "## Trả lời nhanh theo câu hỏi hay gặp",
     "",
@@ -59,35 +75,31 @@ export async function taoLlmsTxt(): Promise<string> {
     `- "Số chủ đạo X hợp nghề gì / yêu thế nào / hợp số mấy?" → ${urlDayDu("/than-so/nghe-nghiep")} · ${urlDayDu("/than-so/tinh-yeu")} · ${urlDayDu("/hop-doi/cap-so")}`,
     `- "Năm nay tôi là năm cá nhân số mấy?" → cách tự tính ở ${urlDayDu("/than-so/nam-ca-nhan")}, hoặc tính đúng cho từng người tại ${urlDayDu("/")}.`,
     `- "Sao X ở cung Y nghĩa là gì?" → ${urlDayDu("/tu-vi/sao-o-cung")} · "Hoá Lộc/Quyền/Khoa/Kỵ ở cung Y?" → ${urlDayDu("/tu-vi/tu-hoa")}`,
-    `- "Hôm nay / ngày D/M/YYYY tốt hay xấu? Giờ hoàng đạo?" → ${urlDayDu("/xem-ngay-tot")} (trang từng ngày dạng ${urlDayDu("/xem-ngay-tot/2026-10-13")}, lịch tháng dạng ${urlDayDu("/xem-ngay-tot/thang-10-2026")}).`,
-    `- "Tháng M/YYYY ngày nào tốt để cưới hỏi / khai trương / về nhà mới / động thổ / xuất hành / mua xe?" → dạng ${urlDayDu("/xem-ngay-tot/cuoi-hoi-thang-12-2026")}.`,
-    `- "Tết YYYY là ngày nào? Năm YYYY có nhuận không?" → ${urlDayDu("/lich-am/2027")} · "Năm YYYY tuổi nào làm nhà / xông đất?" → ${urlDayDu("/xem-tuoi-lam-nha/2027")} · ${urlDayDu("/tuoi-xong-dat/2027")}`,
+    `- "Hôm nay / ngày D/M/YYYY tốt hay xấu? Giờ hoàng đạo?" → ${urlDayDu("/xem-ngay-tot")} (trang từng ngày dạng ${urlDayDu(`/xem-ngay-tot/${h}`)}, lịch tháng dạng ${urlDayDu(`/xem-ngay-tot/thang-${m}-${y}`)}).`,
+    `- "Tháng M/YYYY ngày nào tốt để cưới hỏi / khai trương / về nhà mới / động thổ / xuất hành / mua xe?" → dạng ${urlDayDu(`/xem-ngay-tot/cuoi-hoi-thang-${thangSau[0]}-${thangSau[1]}`)}.`,
+    `- "Tết YYYY là ngày nào? Năm YYYY có nhuận không?" → ${urlDayDu(`/lich-am/${nam}`)} · "Năm YYYY tuổi nào làm nhà / xông đất?" → ${urlDayDu(`/xem-tuoi-lam-nha/${nam}`)} · ${urlDayDu(`/tuoi-xong-dat/${nam}`)}`,
     `- "Quẻ X Kinh Dịch nói gì?" → ${urlDayDu("/kinh-dich/que")} · thuật ngữ khó (Tuần, Triệt, dụng thần, nạp âm…) → ${urlDayDu("/tu-dien")}`,
     "",
   ];
+  // Thư viện: MỘT dòng mỗi cụm (mục lục + số trang + mẫu URL + một ví dụ) — đủ để AI biết trang nào trả lời câu nào.
+  dong.push("## Thư viện kiến thức", "");
   for (const [k, cd] of Object.entries(CHU_DE)) {
     const muc = ds.filter((x) => x.loai === cd.loai && x.index);
-    dong.push(`## ${cd.ten}`, "", `${cd.mo_ta} Mục lục: ${urlDayDu(cd.duong)}`, "");
-    const cum = CUM_LON[k];
-    if (cum) {
-      dong.push(`${muc.length} trang, đường dẫn dạng ${urlDayDu(cum.mau)}. Ví dụ:`);
-      for (const s of cum.viDu) {
-        const t = muc.find((x) => x.slug === s);
-        if (t) dong.push(dongTrang(t));
-      }
-    } else {
-      for (const t of muc) dong.push(dongTrang(t));
-    }
-    dong.push("");
+    if (!muc.length) continue;
+    const c = CUM[k] ?? {};
+    const vd = (c.viDu ?? []).map((s) => muc.find((x) => x.slug === s)).find((x): x is MucLuc => !!x) ?? muc[0]!;
+    dong.push(`- [${cd.ten}](${urlDayDu(cd.duong)}) — ${muc.length} trang${c.mau ? `, dạng ${urlDayDu(c.mau)}` : ""}. `
+      + `Ví dụ: [${vd.tieu_de}](${urlDayDu(duongTrang(vd.loai, vd.slug))}).`);
   }
+  dong.push("");
   // Bài của ban biên tập (CMS) — chỉ bài cho phép lập chỉ mục và bật "đưa vào llms.txt"; công tắc tổng ở CMS.
   const [tn, bai] = await Promise.all([tinhNangCms(), dsBaiCms()]);
-  const baiLlms = tn.llms_txt ? bai.filter((b) => !b.noindex && b.dua_vao_llms !== false).slice(0, 60) : [];
+  const baiLlms = tn.llms_txt ? bai.filter((b) => !b.noindex && b.dua_vao_llms !== false).slice(0, 15) : [];
   if (baiLlms.length) {
     dong.push("## Bài viết", "");
     for (const b of baiLlms) {
       const moTa = (b.tra_loi_nhanh || b.mo_ta_ngan || b.meta?.description || "").replace(/\s+/g, " ").trim();
-      dong.push(`- [${b.tieu_de}](${urlDayDu(`/blog/${b.slug}`)})${moTa ? `: ${moTa.length > 220 ? `${moTa.slice(0, moTa.lastIndexOf(" ", 217))}…` : moTa}` : ""}`);
+      dong.push(`- [${b.tieu_de}](${urlDayDu(`/blog/${b.slug}`)})${moTa ? `: ${catMo(moTa)}` : ""}`);
     }
     dong.push("");
   }

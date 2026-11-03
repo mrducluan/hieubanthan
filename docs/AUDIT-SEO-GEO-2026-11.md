@@ -72,9 +72,33 @@ Ba nguyên tắc:
 
 Không migration, không dependency, không đổi phép tính → không tăng `ENGINE_VERSION`.
 
+## 4b. Đợt 2 (chủ dự án duyệt Q1–Q6 + "làm các việc theo đề xuất", 2026-11-03)
+
+| Mã | Đã làm | Số đo / test |
+|---|---|---|
+| Q1 | Trang theo tuổi (`/xem-tuoi-lam-nha/*/tuoi-*`, `/nam/*/tuoi-*`) index **một** năm = năm menu (`namTuoiSeo`, năm tới khi Tết sau còn ≤ 120 ngày); xông đất = Tết sắp tới. Sitemap + link "Cùng tuổi" theo đúng năm đó. Bàn 9 cung và mùng 1 Tết (giống hệt 46 trang) rút còn một câu + link trang năm | 3 × 92 → 3 × 46 URL index; e2e `aud-geo` |
+| Q2 | 46 trang năm → **8 trang cung phi** `/phong-thuy/huong-hop-tuoi/cung-{kham-bac…}` + mục lục bảng 46 năm × nam/nữ (neo `#tuoi-{năm}`); mọi URL năm cũ 308 một bước về đúng dòng; .md, sitemap, sitemap cụm, llms.txt, mẫu cụm CMS (migration dữ liệu `aud_q2_cung_phi`); trang mệnh theo năm link sang trang cung nam + nữ | Phần riêng (dữ liệu engine) **0,13 → 0,38–0,39**; engine `test_phongthuy_cung_phi`, e2e `tuoi-huong` |
+| Q3 | Engine `/v1/lich/viec-thang-dem` đếm ngày tốt (đúng `chon_ngay`); trang việc-tháng 0 ngày → noindex + ra khỏi sitemap; việc-tháng của tháng đã qua thôi index (khớp sitemap) | 9 trang "mua xe" bỏ index; `test_viec_thang` |
+| Q4 | Cửa sổ trang ngày thành MỘT hằng `NGAY_SAU` — đổi 400 → 180 sau 90 ngày theo dõi (mốc 01/02/2027, `VIEC-CUA-ANH` 4u) | — |
+| Q5 | Bỏ `data-nosnippet` câu "tập quán, không phải tiên đoán" ở `/nam`, sinh con, `/xem-sao-han/*` | e2e `aud-geo` |
+| Q6 | Robots mở `Google-Extended` (lưu ý: Google không tách grounding với huấn luyện Gemini) | e2e `seo` |
+| P0-1 | 168 trang "sao ở cung": mục "Khi X ở cung Y, cung Mệnh có sao gì" (Tử Vi toạ Mệnh: tam phương) — CALC `tuvi_vi_tri.sao_o_cung_cach_menh / tom_tat_cung_khac`, câu khung KB `su_kien_kb.json`; Mệnh cố định → câu + link (không bảng trùng) | khớp **60/60 lá** lasotuvi; 86/154 cặp có sao Mệnh cố định |
+| P0-2 | 64 trang quẻ: khối "Cấu trúc quẻ" (bát cung, thế/ứng, nạp giáp, lục thân, hỗ/thác/tổng, quẻ biến từng hào + link) | `test_trang_que_cau_truc` (quẻ Khảm đối chiếu truyền thống) |
+| P0-3 | Câu đầu "Trả lời nhanh" tự đứng (nêu đối tượng + bộ môn): quẻ, sao ở cung, dấu hiệu nhà, cặp số, nghề, tình yêu | `test_tra_loi_nhanh_tu_dung` |
+| P0-4 | Khoá các con số gõ tay trong `bo_sung_*.json` bằng test đối chiếu calc (Đường đời 2 cách, thập thần 100 ô, tháng cá nhân, 18 câu "x% số ngày") | `test_bo_sung_so_lieu` |
+| P0-5 | `landing_viewed` thêm mã nguồn vào `den_tu` (ai / tim_kiem / mxh / truc_tiep / noi_bo / khac) + `ai` (tên trợ lý) — chỉ mã, không URL | e2e `nguon-vao` |
+| P0-6 | `llms.txt` 98 KB → **≤ 15 KB**: thư viện một dòng mỗi cụm, mục "Mùa Tết — năm {năm menu}", ví dụ ngày/tháng theo hôm nay | e2e `aud-geo` |
+| P0-7 | `engine/scripts/do_rieng_cong_cu.py` — đo phần riêng họ trang engine (tuổi, năm, cung phi) | xem dưới |
+
+**Số đo phần riêng (dữ liệu engine, năm 2027):** làm nhà 0,06 · xông đất 0,08 · năm theo tuổi 0,12 · cung phi 0,39.
+Trang tuổi vẫn mỏng ở tầng dữ liệu (engine trả kèm dữ kiện chung của năm) — web đã rút khối chung, nhưng bước tiếp nên
+là engine **tách hẳn dữ kiện chung của năm khỏi gói trang tuổi** (P1 mới, dưới). Thước đo cụm 6 từ phạt cả câu dữ kiện
+viết theo khung: mục "cung Mệnh có sao gì" là dữ kiện mới thật nhưng làm điểm cụm 6 từ của họ "sao ở cung" giảm trung
+bình 0,015 (thấp nhất vẫn 0,311 > ngưỡng 0,30) — nên làm chỉ số thứ hai `su_kien_rieng` (P2-2) trước khi thêm dữ kiện.
+
 ## 5. Lộ trình tiếp theo
 
-### P0 — em làm được ngay, không đổi quyết định cũ (chỉ cần anh nói "làm")
+### P0 — ĐÃ LÀM (mục 4b)
 
 1. **Khối "Cấu trúc quẻ"** cho 64 trang quẻ (dữ kiện engine đã có, chỉ chưa xuất ra).
 2. **Sao ở cung: "cung Mệnh / tam phương luôn có sao gì"** (`tuvi_vi_tri`, đối chứng 60 lá) — họ trang này đang sát ngưỡng phần riêng (thấp nhất 0,33).
@@ -84,7 +108,13 @@ Không migration, không dependency, không đổi phép tính → không tăng 
 6. **Đo lượt từ AI**: `landing_viewed` thêm mã nguồn `ai` (từ referrer chatgpt/perplexity/gemini/copilot/claude, không lưu URL đầy đủ).
 7. **`llms.txt` gọn ≤ 15 KB** + thêm cụm mùa Tết (`/nam/*`, `/thoi-gian-toi`); bỏ ví dụ ngày đã noindex.
 
-### P1 — cần anh quyết (đổi quyết định đã chốt)
+### P1 mới (sau đợt 2)
+
+- Engine tách dữ kiện chung của năm (bàn phi tinh, mùng 1 Tết, Kim lâu/Hoang ốc giải thích) khỏi gói trang tuổi, chỉ trả
+  dữ kiện riêng theo năm sinh + link trang năm — đưa phần riêng trang tuổi lên ≥ 0,30 trước mùa Tết.
+- Thêm `do_rieng_cong_cu` vào lưới tự noindex (hiện chỉ báo cáo).
+
+### P1 — ĐÃ QUYẾT (chủ dự án 2026-11-03: làm cả 6 — xem mục 4b)
 
 | # | Đề xuất | Lý do (số đo) | Đụng quyết định |
 |---|---|---|---|

@@ -5,6 +5,23 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4u. Kiểm toán SEO/GEO (AUD, 2026-11-03) — sau khi merge (deploy ENGINE trước web)
+
+- [ ] **Deploy engine trước web** (route mới `/v1/phongthuy/cung-phi`, `/v1/lich/viec-thang-dem`); CMS deploy tự chạy
+      migration dữ liệu `aud_q2_cung_phi` (mẫu cụm hướng hợp tuổi → trang cung phi).
+- [ ] **Search Console (10 phút):** Sitemaps → gửi lại `sitemap.xml`; Kiểm tra URL → `https://hieuban.com/phong-thuy/huong-hop-tuoi/cung-kham-bac`
+      và `https://hieuban.com/phong-thuy/huong-hop-tuoi` → "Yêu cầu lập chỉ mục". 46 URL `…/huong-hop-tuoi/tuoi-{năm}` đã 308
+      về mục lục — Search Console sẽ báo "Trang có chuyển hướng", đó là đúng.
+- [ ] **CMS (nếu có ghi đè chữ cho trang `…/huong-hop-tuoi/tuoi-{năm}`):** chép chữ cần giữ sang trang cung tương ứng
+      (Trang website) — migration không tự gộp được vì nhiều năm dồn về một cung.
+- [ ] **GA4 (5 phút, tuỳ chọn):** PostHog đã có `landing_viewed.den_tu = ai` + `ai = chatgpt|perplexity|gemini|copilot|claude`;
+      GA4 tạo kênh "AI assistants" như mục D `docs/DE-XUAT-CHAT-LUONG-NOI-DUNG.md` nếu muốn xem cả ở GA4.
+- [ ] **Ngày 01/02/2027 — Q4 cửa sổ trang ngày:** Search Console → Hiệu suất → lọc trang chứa `/xem-ngay-tot/20` → so lượt
+      hiển thị của ngày cách hôm nay 180–400 ngày. Ít (vd < 5% tổng) → nhắn em đổi `NGAY_SAU = 400 → 180`
+      (`web/lib/hoang-lich.ts`, một dòng, sitemap ngày tự theo).
+- [ ] **Thẩm định thật** 10 trang/tuần theo `scripts/tham_dinh.py hang-doi --gsc Trang.csv` — sổ thẩm định hiện 0 trang
+      (máy không làm thay được; đòn bẩy E-E-A-T lớn nhất).
+
 ### 4t. KHẨN — Vercel tạm dừng cả tài khoản (2026-11-02): hieuban.com + cms.hieuban.com đều tắt
 
 Trang báo "This deployment is temporarily paused" = Vercel trả `402 Payment required · DEPLOYMENT_DISABLED` cho CẢ web lẫn

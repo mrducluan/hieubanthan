@@ -74,5 +74,5 @@ test("sitemap + llms.txt có trang mới", async ({ request }) => {
   expect(sm).toMatch(/\/xem-ngay-tot\/cuoi-hoi-thang-\d{1,2}-\d{4}<\/loc>/);
   const llms = await (await request.get("/llms.txt")).text();
   expect(llms).toContain("/doi-lich-am-duong");
-  expect(llms).toContain("cuoi-hoi-thang-12-2026");
+  expect(llms).toMatch(/cuoi-hoi-thang-\d{1,2}-\d{4}/);   // AUD-P0: ví dụ theo tháng sau hôm nay (không ghi cứng)
 });
