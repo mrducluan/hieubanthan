@@ -63,3 +63,20 @@ test("llms.txt gọn, có mùa Tết, mỗi cụm một dòng mục lục + ví 
   expect((t.match(/\]\(https?:\/\/[^)]+\/tu-vi\/sao-o-cung\/[a-z-]+\)/g) ?? []).length).toBeLessThanOrEqual(3);
   expect(t).toContain("## Thư viện kiến thức");
 });
+
+// AUD-P1: trang theo tuổi bỏ dữ kiện chung của năm (bàn 9 cung, mùng 1 đầy đủ, lời giải thích sao) và có dữ kiện RIÊNG
+// của tuổi: 10 năm tới làm nhà, các Tết tới xông đất, 10 năm tới theo tuổi.
+test("trang tuổi: dữ kiện riêng của tuổi, phần chung của năm chỉ còn link", async ({ request }) => {
+  const ln = await (await request.get("/xem-tuoi-lam-nha/2027/tuoi-1990")).text();
+  expect((ln.match(/data-testid="muoi-nam"/g) ?? []).length).toBe(1);
+  expect(ln).toContain('href="/xem-tuoi-lam-nha/2036/tuoi-1990"');            // dòng cuối của 10 năm
+  expect(ln).not.toContain('data-testid="han-nam"');                           // không bàn 9 cung
+  expect(ln).toContain('href="/xem-tuoi-lam-nha/2027"');                       // cách tính → bảng năm
+  const xd = await (await request.get("/tuoi-xong-dat/2027/tuoi-1990")).text();
+  expect(xd).toContain('data-testid="tet-toi"');
+  expect(xd).toContain('href="/tuoi-xong-dat/2031/tuoi-1990"');
+  const nt = await (await request.get("/nam/2027/tuoi-1990")).text();
+  expect(nt).toContain('data-testid="nam-toi"');
+  expect(nt).toContain('href="/nam/2037/tuoi-1990"');
+  expect(nt).toMatch(/href="\/xem-sao-han\/2027#sao-tho-tu"/);                 // sao gọn → trang sao hạn năm
+});

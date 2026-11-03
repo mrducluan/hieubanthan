@@ -25,6 +25,11 @@ _BO = {"engine_version", "slug", "duong", "url", "trang_thai", "source_id", "sch
 
 
 def _chu(o) -> list[str]:
+    """Chữ người đọc thấy: mọi chuỗi + mọi CON SỐ (năm, tuổi mụ… hiện trên trang); bỏ True/False và khoá kỹ thuật."""
+    if isinstance(o, bool) or o is None:
+        return []
+    if isinstance(o, (int, float)):
+        return [str(o)]
     if isinstance(o, str):
         return [o]
     if isinstance(o, dict):
@@ -52,9 +57,9 @@ def main() -> None:
     ns = range(1960, 2006)
     from app.luangiai import phongthuy_tuoi as pt
     ho = {
-        "lam_nha": {str(n): f"/v1/tuoi/lam-nha/{nam}/{n}" for n in ns},
-        "xong_dat": {str(n): f"/v1/tuoi/xong-dat/{nam}/{n}" for n in ns},
-        "nam_tuoi": {str(n): f"/v1/nam/{nam}/tuoi/{n}" for n in ns},
+        "lam_nha": {str(n): f"/v1/tuoi/lam-nha/{nam}/{n}?gon=1" for n in ns},
+        "xong_dat": {str(n): f"/v1/tuoi/xong-dat/{nam}/{n}?gon=1" for n in ns},
+        "nam_tuoi": {str(n): f"/v1/nam/{nam}/tuoi/{n}?gon=1" for n in ns},
         "tuoi_huong_cu (46 trang năm, đã gộp)": {str(n): f"/v1/phongthuy/tuoi-gop/tuoi-{n}" for n in ns},
         "cung_phi (8 trang mới)": {s: f"/v1/phongthuy/cung-phi/{s}" for _, _, s in pt.CUNG_PHI},
     }

@@ -110,8 +110,16 @@ bình 0,015 (thấp nhất vẫn 0,311 > ngưỡng 0,30) — nên làm chỉ s�
 
 ### P1 mới (sau đợt 2)
 
-- Engine tách dữ kiện chung của năm (bàn phi tinh, mùng 1 Tết, Kim lâu/Hoang ốc giải thích) khỏi gói trang tuổi, chỉ trả
-  dữ kiện riêng theo năm sinh + link trang năm — đưa phần riêng trang tuổi lên ≥ 0,30 trước mùa Tết.
+- ✅ **AUD-P1 (đã làm 2026-11-03)** — engine tách dữ kiện chung của năm khỏi gói trang tuổi (`luangiai/trang_tuoi.py`,
+  GET công khai `?gon=1`; không có `gon` = bản đầy đủ cũ, nên web cũ trong lúc deploy lệch không vỡ; công cụ POST giữ
+  nguyên): bàn 9 cung → tên + phương; mùng 1 Tết → ngày, can chi, hoàng đạo; bỏ câu cách tính / cách chọn (link bảng
+  năm); sao hạn → tên + hạn (link `/xem-sao-han/{năm}#sao-…`); tứ hoá → tên sao; bỏ câu hỏi đáp lặp câu rào. Thêm dữ
+  kiện RIÊNG của tuổi, tính bằng đúng hàm công cụ: **10 năm tới làm nhà**, **tuổi hợp 4 Tết tới**, **10 năm tới theo
+  tuổi**. Phần riêng (dữ liệu engine, năm 2027, thấp nhất; thước đo nay đếm cả con số hiện trên trang):
+  làm nhà **0,07 → 0,31** · xông đất **0,04 → 0,12** · Tử vi theo tuổi **0,11 → 0,19**. Hai họ sau chưa tới 0,30: phần
+  còn lặp là lời giải thích từng mối hợp / xung và lý do từng tuổi hợp — người đọc cần, không xoá để chạy theo con số.
+  Test `test_trang_tuoi.py` chặn lùi (0,30 / 0,11 / 0,18). Lựa chọn còn lại nếu muốn an toàn tuyệt đối với xông đất:
+  chỉ index bảng năm `/tuoi-xong-dat/{năm}` (đã có đủ 46 gia chủ), trang từng gia chủ `noindex` — cần anh quyết.
 - Thêm `do_rieng_cong_cu` vào lưới tự noindex (hiện chỉ báo cáo).
 
 ### P1 — ĐÃ QUYẾT (chủ dự án 2026-11-03: làm cả 6 — xem mục 4b)

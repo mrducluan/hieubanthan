@@ -3,7 +3,7 @@
 import Link from "@/components/khung/Lien";
 import { CalendarHeart, Compass, Home, Sparkles, Users } from "lucide-react";
 import type { HanNam, LamNha, SaoHan, XongDat } from "@/lib/tuoi-dan-gian";
-import { duongHanNam, duongLamNha, duongXongDatNam } from "@/lib/tuoi-dan-gian";
+import { duongHanNam, duongLamNha, duongLamNhaNam, duongXongDat, duongXongDatNam } from "@/lib/tuoi-dan-gian";
 
 // Bàn 9 cung, phía Nam ở trên (như la bàn phong thuỷ truyền thống).
 const LUOI = [["Tốn", "Ly", "Khôn"], ["Chấn", "Trung cung", "Đoài"], ["Cấn", "Khảm", "Càn"]];
@@ -18,7 +18,7 @@ function Nhan({ tot, children, testId }: { tot: boolean; children: React.ReactNo
 }
 
 export function BangHanNam({ h, gon = false }: { h: HanNam; gon?: boolean }) {
-  const theo = Object.fromEntries(h.phi_tinh.map((x) => [x.cung, x]));
+  const theo = Object.fromEntries((h.phi_tinh ?? []).map((x) => [x.cung, x]));
   const canTranh = new Set(h.huong_tranh.filter((x) => x.ma === "ngu_hoang" || x.ma === "nhi_hac").map((x) => x.phuong));
   return (
     <section aria-labelledby={`han-nam-${h.nam}`} className="bau-troi p-5 sm:p-6" data-testid="han-nam">
@@ -64,6 +64,51 @@ function HanNamGon({ h }: { h: HanNam }) {
       {h.huong_tranh.map((x) => `${x.ten} ở ${x.phuong}`).join(" · ")}.{" "}
       <Link href={duongHanNam(h.nam)} className="text-gold underline">Bàn 9 cung và ý nghĩa từng hướng năm {h.nam}</Link>
     </p>
+  );
+}
+
+/** AUD-P1: 10 năm tới của CHÍNH tuổi này (dữ kiện riêng của trang — engine tính bằng đúng hàm công cụ từng năm). */
+function MuoiNam({ d }: { d: LamNha }) {
+  const ds = d.muoi_nam ?? [];
+  return (
+    <section className="glass rounded-2xl p-5" aria-labelledby="muoi-nam" data-testid="muoi-nam">
+      <h2 id="muoi-nam" className="text-lg">Tuổi {d.can_chi} ({d.nam_sinh}) làm nhà 10 năm tới</h2>
+      <div className="mt-3 overflow-x-auto">
+        <table className="w-full min-w-[30rem] text-left text-sm">
+          <thead className="text-fg-faint"><tr><th className="py-1.5 pr-3 font-normal">Năm</th><th className="py-1.5 pr-3 font-normal">Tuổi mụ</th>
+            <th className="py-1.5 pr-3 font-normal">Kim lâu</th><th className="py-1.5 pr-3 font-normal">Hoang ốc</th><th className="py-1.5 pr-3 font-normal">Tam tai</th><th className="py-1.5 font-normal">Làm nhà</th></tr></thead>
+          <tbody>
+            {ds.map((x) => (
+              <tr key={x.nam} className="border-t border-line/50">
+                <td className="py-1.5 pr-3"><Link href={duongLamNha(x.nam, d.nam_sinh)} className="text-gold underline decoration-gold/40 underline-offset-2">{x.nam}</Link> <span className="text-fg-faint">{x.can_chi}</span></td>
+                <td className="py-1.5 pr-3">{x.tuoi_mu}</td>
+                <td className="py-1.5 pr-3">{x.kim_lau ?? "—"}</td>
+                <td className="py-1.5 pr-3">{x.hoang_oc}</td>
+                <td className="py-1.5 pr-3">{x.tam_tai ? `năm thứ ${x.tam_tai}` : "—"}</td>
+                <td className={`py-1.5 ${x.thuan ? "text-jade" : "text-moon"}`}>{x.thuan ? "Thuận" : "Cân nhắc"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
+/** AUD-P1: tuổi hợp xông đất cho CÁC TẾT KẾ TIẾP của chính gia chủ này. */
+function TetToi({ d }: { d: XongDat }) {
+  return (
+    <section className="glass rounded-2xl p-5" aria-labelledby="tet-toi" data-testid="tet-toi">
+      <h2 id="tet-toi" className="text-lg">Gia chủ {d.chu.can_chi} ({d.chu.nam_sinh}): tuổi hợp xông đất các Tết tới</h2>
+      <ul className="mt-3 space-y-2 text-sm">
+        {(d.tet_toi ?? []).map((t) => (
+          <li key={t.nam}>
+            <Link href={duongXongDat(t.nam, d.chu.nam_sinh)} className="text-gold underline decoration-gold/40 underline-offset-2">Tết {t.nam} ({t.can_chi})</Link>:{" "}
+            <span className="text-fg-muted">{t.tuoi.length ? t.tuoi.map((x) => `${x.nam_sinh} (${x.can_chi})`).join(", ") : "chưa thấy tuổi đủ điều kiện"}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 
@@ -113,8 +158,9 @@ export function KetQuaLamNha({ d, trangTuoi = false }: { d: LamNha; trangTuoi?: 
         </section>
       </div>
       {d.cach_dan_gian && <p className="glass rounded-2xl p-4 text-sm text-fg-muted" data-nosnippet="">{d.cach_dan_gian}</p>}
+      {trangTuoi && d.muoi_nam?.length ? <MuoiNam d={d} /> : null}
       {trangTuoi ? <HanNamGon h={d.han_nam} /> : <BangHanNam h={d.han_nam} gon />}
-      <p className="text-xs text-fg-muted">{d.cach_tinh} {d.luu_y}</p>
+      <p className="text-xs text-fg-muted">{d.cach_tinh ?? <>Cách tính tuổi mụ, Kim lâu, Hoang ốc, Tam tai: <Link href={duongLamNhaNam(d.nam_xay)} className="underline">bảng mọi tuổi năm {d.nam_xay}</Link>.</>} {d.luu_y}</p>
     </div>
   );
 }
@@ -149,11 +195,12 @@ export function KetQuaXongDat({ d, trangTuoi = false }: { d: XongDat; trangTuoi?
       ) : (
             <section className="glass rounded-2xl p-5" aria-labelledby="mung-mot">
         <h2 id="mung-mot" className="text-lg">Mùng 1 Tết ({tet}) — ngày {d.mung_mot.can_chi}, {d.mung_mot.hoang_dao ? "Hoàng đạo" : "Hắc đạo"} ({d.mung_mot.than})</h2>
-        <p className="mt-2 text-sm"><span className="text-fg-muted">Giờ hoàng đạo:</span> {d.mung_mot.gio_hoang_dao.map((g) => `${g.chi} (${g.khung})`).join(" · ")}</p>
-        <p className="mt-1 text-sm"><span className="text-fg-muted">Hướng xuất hành:</span> Hỷ thần {d.mung_mot.huong.hy_than} · Tài thần {d.mung_mot.huong.tai_than}</p>
+        <p className="mt-2 text-sm"><span className="text-fg-muted">Giờ hoàng đạo:</span> {(d.mung_mot.gio_hoang_dao ?? []).map((g) => `${g.chi} (${g.khung})`).join(" · ")}</p>
+        <p className="mt-1 text-sm"><span className="text-fg-muted">Hướng xuất hành:</span> Hỷ thần {d.mung_mot.huong?.hy_than} · Tài thần {d.mung_mot.huong?.tai_than}</p>
         <Link href={`/xem-ngay-tot/${d.mung_mot.ngay}`} className="mt-2 inline-block text-sm text-gold underline">Xem đầy đủ hoàng lịch mùng 1</Link>
       </section>
       )}
+      {trangTuoi && d.tet_toi?.length ? <TetToi d={d} /> : null}
       <p className="text-xs text-fg-muted">{d.cach_chon} {d.luu_y}</p>
     </div>
   );

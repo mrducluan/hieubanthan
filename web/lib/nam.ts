@@ -43,7 +43,8 @@ async function lay<T>(duong: string): Promise<T | null> {
 }
 
 // NAM-3 — "Tử vi năm {nam} tuổi {can chi}" (một trang mỗi năm sinh, gộp nam + nữ mạng).
-export interface SaoGioi { ten: string; han: string | null; nghia: string; viec: string[]; tu_soi: string }
+/** AUD-P1: trang SEO theo tuổi nhận sao bản gọn (tên + hạn); lời giải thích ở trang sao hạn năm. */
+export interface SaoGioi { ten: string; han: string | null; nghia?: string; viec?: string[]; tu_soi?: string }
 export interface DiemNhan { loai: "thuan" | "luu_y" | "trung"; tieu_de: string; noi_dung: string; can_cu: string }
 export interface NamTheoTuoi extends MetaKb {
   nam: number; can_chi_nam: string; nap_am_nam: string; tuoi_mu: number;
@@ -51,10 +52,13 @@ export interface NamTheoTuoi extends MetaKb {
   quan_he: { chi: string; can: string; nap_am: string }; diem_nhan: DiemNhan[];
   sao: { nam: SaoGioi | null; nu: SaoGioi | null }; tam_tai: number | null; kim_lau: string | null;
   lam_nha: { thuan: boolean; xau: string[]; hoang_oc: string };
-  tu_hoa: { hoa: "Lộc" | "Quyền" | "Khoa" | "Kỵ"; sao: string; y_nghia: string }[]; tu_hoa_loi: string; ranh_gioi: string;
+  tu_hoa: { hoa: "Lộc" | "Quyền" | "Khoa" | "Kỵ"; sao: string; y_nghia?: string }[]; tu_hoa_loi: string; ranh_gioi: string;
   tra_loi_nhanh: string; hoi_dap: HoiDap[];
+  /** AUD-P1: 10 năm tới của tuổi (quan hệ địa chi, Tam tai, Kim lâu, sao hạn hai giới) — engine tính, web chỉ hiện. */
+  nam_toi?: { nam: number; can_chi: string; tuoi_mu: number; dia_chi: string | null; tam_tai: number | null; kim_lau: string | null;
+    sao_nam: string | null; sao_nu: string | null }[];
 }
-export const namTheoTuoiCongKhai = (nam: number, ns: number) => lay<NamTheoTuoi>(`/v1/nam/${nam}/tuoi/${ns}`);
+export const namTheoTuoiCongKhai = (nam: number, ns: number) => lay<NamTheoTuoi>(`/v1/nam/${nam}/tuoi/${ns}?gon=1`);
 export const duongNamTuoi = (nam: number, ns: number) => `/nam/${nam}/tuoi-${ns}`;
 /** Có trang index: CHỈ năm sắp tới (`namTuoiSeo`, AUD-Q1), năm sinh 1960–2005 (như cụm tuổi làm nhà / xông đất). */
 export const namTuoiIndex = (nam: number, namSeo: number, ns: number) => nam === namSeo && ns >= 1960 && ns <= 2005;

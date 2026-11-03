@@ -43,17 +43,22 @@ const KIEU: Record<DiemNhan["loai"], { nhan: string; lop: string; cham: string }
 const MAU_HOA: Record<string, string> = { "Lộc": "text-jade border-jade/40", "Quyền": "text-moon border-moon/40", "Khoa": "text-moon border-moon/40", "Kỵ": "text-gold border-gold/40 bg-gold/5" };
 const NGAN_HOA: Record<string, string> = { "Lộc": "thuận lợi, nguồn lợi", "Quyền": "chủ động, sức mạnh", "Khoa": "tiếng tốt, học hỏi", "Kỵ": "chỗ nên để tâm" };
 
-function TheSao({ gioi, s }: { gioi: string; s: SaoGioi }) {
+/** AUD-P1: engine gửi sao bản gọn (tên + hạn) cho trang theo tuổi — lời giải thích + việc nên làm giống hệt mọi tuổi cùng
+ *  sao, nằm ở trang sao hạn năm (`#sao-{tên}`); engine cũ (bản đầy đủ) vẫn hiện như trước. */
+const slugSao = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase().replace(/\s+/g, "-");
+function TheSao({ gioi, s, nam }: { gioi: string; s: SaoGioi; nam: number }) {
   return (
     <article className="glass rounded-2xl p-5" data-testid={`sao-${gioi === "Nam mạng" ? "nam" : "nu"}`}>
       <p className="eyebrow">{gioi}</p>
       <h3 className="mt-1 font-serif text-2xl text-gold">{s.ten}</h3>
       {s.han && <p className="text-xs text-fg-faint">Hạn {s.han}</p>}
-      <p className="mt-3 text-sm leading-relaxed text-fg">{s.nghia}</p>
-      <ul className="mt-3 space-y-1.5 text-sm">
-        {s.viec.map((v) => <li key={v} className="flex gap-2 text-fg-muted"><CircleDot className="mt-1 size-3.5 shrink-0 text-gold" aria-hidden />{v}</li>)}
-      </ul>
-      <p className="mt-3 border-t border-line/60 pt-3 text-sm italic text-fg-muted">Tự soi: {s.tu_soi}</p>
+      {s.nghia ? <>
+        <p className="mt-3 text-sm leading-relaxed text-fg">{s.nghia}</p>
+        <ul className="mt-3 space-y-1.5 text-sm">
+          {(s.viec ?? []).map((v) => <li key={v} className="flex gap-2 text-fg-muted"><CircleDot className="mt-1 size-3.5 shrink-0 text-gold" aria-hidden />{v}</li>)}
+        </ul>
+        {s.tu_soi && <p className="mt-3 border-t border-line/60 pt-3 text-sm italic text-fg-muted">Tự soi: {s.tu_soi}</p>}
+      </> : <Link href={`/xem-sao-han/${nam}#sao-${slugSao(s.ten)}`} className="mt-3 inline-block text-sm text-gold underline">Sao {s.ten} nghĩa là gì, nên làm gì</Link>}
     </article>
   );
 }
@@ -117,10 +122,35 @@ export default async function Page(p: P) {
       {d.sao.nam && d.sao.nu && (
         <section className="mt-10" aria-labelledby="sao-nam">
           <h2 id="sao-nam" className="text-2xl">{c("sao.tieu_de", bien)}</h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2"><TheSao gioi="Nam mạng" s={d.sao.nam} /><TheSao gioi="Nữ mạng" s={d.sao.nu} /></div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2"><TheSao gioi="Nam mạng" s={d.sao.nam} nam={x.n} /><TheSao gioi="Nữ mạng" s={d.sao.nu} nam={x.n} /></div>
           <p className="mt-2 text-xs text-fg-faint">Sao hạn là tục lệ xếp theo tuổi mụ và giới tính, giống nhau với mọi người cùng tuổi. <Link href={`/xem-sao-han/${x.n}`} className="underline">Bảng sao hạn năm {x.n}</Link>.</p>
         </section>
       )}
+
+      {d.nam_toi?.length ? (
+        <section className="mt-10" aria-labelledby="nam-toi" data-testid="nam-toi">
+          <h2 id="nam-toi" className="text-2xl">Tuổi {d.nguoi.can_chi} ({x.ns}) mười năm tới</h2>
+          <p className="mt-2 text-sm text-fg-muted">Từng năm theo tục: tuổi mụ, quan hệ con giáp với năm, Tam tai, Kim lâu, sao hạn nam / nữ.</p>
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full min-w-[34rem] text-left text-sm">
+              <thead className="text-fg-faint"><tr><th className="py-1.5 pr-3 font-normal">Năm</th><th className="py-1.5 pr-3 font-normal">Tuổi mụ</th>
+                <th className="py-1.5 pr-3 font-normal">Con giáp</th><th className="py-1.5 pr-3 font-normal">Tam tai</th><th className="py-1.5 pr-3 font-normal">Kim lâu</th><th className="py-1.5 font-normal">Sao nam / nữ</th></tr></thead>
+              <tbody>
+                {d.nam_toi.map((y) => (
+                  <tr key={y.nam} className="border-t border-line/50">
+                    <td className="py-1.5 pr-3"><Link href={duongNamTuoi(y.nam, x.ns)} className="text-gold underline decoration-gold/40 underline-offset-2">{y.nam}</Link> <span className="text-fg-faint">{y.can_chi}</span></td>
+                    <td className="py-1.5 pr-3">{y.tuoi_mu}</td>
+                    <td className="py-1.5 pr-3">{y.dia_chi ?? "—"}</td>
+                    <td className="py-1.5 pr-3">{y.tam_tai ? `năm thứ ${y.tam_tai}` : "—"}</td>
+                    <td className="py-1.5 pr-3">{y.kim_lau ?? "—"}</td>
+                    <td className="py-1.5">{y.sao_nam && y.sao_nu ? `${y.sao_nam} / ${y.sao_nu}` : "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
 
       <section className="mt-10" aria-labelledby="lam-nha">
         <h2 id="lam-nha" className="text-2xl">Làm nhà năm {x.n}</h2>
