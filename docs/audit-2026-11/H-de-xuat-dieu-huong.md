@@ -1,4 +1,9 @@
-# H — Đánh giá lối vào các cụm trang + 3 phương án điều hướng (2026-11-03, CHỜ CHỦ DỰ ÁN DUYỆT)
+# H — Đánh giá lối vào các cụm trang + 3 phương án điều hướng (2026-11-03)
+
+> **Trạng thái:** chủ dự án "đồng ý hết" (A + C-2, menu đổi 3 mục, gom "Hiển thị", tên theo việc, đợt 1 = 6 thanh, nhãn
+> sửa ở CMS) → đã làm ở TM-1 (CLAUDE.md). Lệch so với minh hoạ: Kinh Dịch "Quẻ đầu ngày" → "Quẻ theo giờ" (quẻ đầu ngày
+> cần hồ sơ ở /hom-nay); bảng "Hiển thị" mở NGAY DƯỚI hàng điều khiển (không phải popover nổi) vì khung Trường phái có
+> lời giải thích dài; điện thoại còn 2 hàng (không phải 1) — 4 nút không vừa 358 px.
 
 Tổng hợp từ hai báo cáo cùng thư mục: `F-loi-vao-menu.md` (kiểm kê code: cụm nào có lối vào ở đâu) và
 `G-ui-dieu-huong.md` (82 ảnh chụp thật ở 1280 px và 390 px, có / chưa có hồ sơ). Chưa sửa gì trong mã.

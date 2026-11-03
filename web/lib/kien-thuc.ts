@@ -59,9 +59,7 @@ export const CHU_DE: Record<string, ChuDe & { duong: string }> = Object.fromEntr
   return [k, { ...v, duong }];
 }));
 /** Trang công cụ = trang trụ (pillar) của silo; tên hiện ở breadcrumb và khối "Kiến thức {mảng}". */
-export const TEN_MANG_SILO: Record<string, string> = {
-  "/than-so": "Thần số học", "/hop-doi": "Hợp đôi", "/tu-vi": "Tử vi", "/bat-tu": "Bát tự", "/kinh-dich": "Kinh Dịch", "/phong-thuy": "Phong thuỷ",
-};
+export { TEN_MANG_SILO } from "@/lib/duong-silo";
 /** Trang trụ của một đường dẫn cụm/trang: "/tu-vi/sao-o-cung/x" → "/tu-vi". */
 export const truCua = (duong: string) => `/${duong.split("/")[1] ?? ""}`;
 /** Khoá chủ đề theo URL cụm ("/tu-vi/sao-o-cung" → "sao-cung"); không phải cụm → null. */

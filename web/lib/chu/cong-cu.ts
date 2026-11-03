@@ -13,16 +13,17 @@ const KHUNG: BangChu = {
 };
 
 /** Bốn mảng huyền học dùng khung DauMang (biểu tượng + dòng nhỏ + nhãn "Diễn giải từ kho tri thức…"). */
-const mangHuyenHoc = (coHoiAi: boolean): BangChu => gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ cạnh biểu tượng", mac_dinh: "Huyền học", toi_da: 60 },
+// TM-1: dòng nhỏ cạnh biểu tượng nói mảng này làm gì (breadcrumb ngay trên đã ghi "Huyền học" — không lặp lại).
+const mangHuyenHoc = (coHoiAi: boolean, nhanTren: string): BangChu => gopBang(KHUNG, {
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ cạnh biểu tượng", mac_dinh: nhanTren, toi_da: 60 },
   "dau.nhan_duoi": { nhom: DAU, nhan: "Nhãn viền dưới lời dẫn", mac_dinh: "Diễn giải từ kho tri thức Hiểu Bản Thân · tham khảo văn hoá", toi_da: 100 },
   ...(coHoiAi ? { "hoi.tieu_de": { nhom: "Hỏi đáp", nhan: "Tiêu đề khung hỏi đáp", mac_dinh: "Hỏi đáp chuyên sâu", toi_da: 60 } } : {}),
 });
 
-export const CHU_TU_VI = mangHuyenHoc(true);
-export const CHU_BAT_TU = mangHuyenHoc(true);
-export const CHU_PHONG_THUY = mangHuyenHoc(true);
-export const CHU_KINH_DICH = mangHuyenHoc(false);
+export const CHU_TU_VI = mangHuyenHoc(true, "Lá số 12 cung · Tử vi Đẩu Số");
+export const CHU_BAT_TU = mangHuyenHoc(true, "Tứ trụ · ngũ hành · thập thần");
+export const CHU_PHONG_THUY = mangHuyenHoc(true, "Hướng nhà · bố trí · Bát trạch");
+export const CHU_KINH_DICH = mangHuyenHoc(false, "Gieo quẻ · 64 quẻ · lời hào");
 
 export const CHU_THAN_SO = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề (chưa có hồ sơ)", mac_dinh: "Thần số học", toi_da: 60 },

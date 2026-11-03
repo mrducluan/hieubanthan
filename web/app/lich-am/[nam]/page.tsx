@@ -37,10 +37,11 @@ export default async function Page(p: P) {
     <div className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(
         ldTrangWeb({ duong, ten: tieuDe, tomTat: d.tra_loi_nhanh, about: ["Âm lịch Việt Nam", `Năm ${d.can_chi}`, "Tết Nguyên đán"] }),
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Đổi lịch âm dương", duong: "/doi-lich-am-duong" }, { ten: `Lịch âm ${n}`, duong }]),
+        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Lịch âm", duong: "/lich-am" }, { ten: `Lịch âm ${n}`, duong }]),
         ldHoiDap(d.hoi_dap),
       )} />
-      <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/doi-lich-am-duong" className="hover:underline">Đổi lịch âm dương</Link></nav>
+      {/* TM-1: mục lục /lich-am trước không có link nào trỏ vào (breadcrumb cũ về công cụ đổi lịch). */}
+      <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/lich-am" className="hover:underline">Lịch âm các năm</Link> · <Link href="/doi-lich-am-duong" className="hover:underline">Đổi lịch âm dương</Link></nav>
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
       <section aria-label="Trả lời nhanh" className="rounded-2xl border border-gold/30 bg-gold/5 p-5">

@@ -18,6 +18,8 @@ import { CHU_DE, TEN_MANG_SILO, duongTrang, trang, truCua, type TrangKienThuc } 
 import { anhBai, catMoTa, goiLd, ldAnh, ldDuongDan, ldHoiDap, ldThucThe, mangTheoDuong, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import { duongMoi } from "@/lib/duong-silo";
 import { idTu } from "@/lib/cms-html";
+import { DuongDan } from "@/components/khung/DuongDan";
+import { duongDanCum } from "@/lib/duong-dan";
 
 type Thamso = { khoa: string | null; slug: string };
 
@@ -96,6 +98,7 @@ export async function TrangKienThucView(params: Thamso) {
   const nhap = t.trang_thai !== "da_duyet";
   const tacGia = [t.tac_gia, t.tham_dinh?.nguoi].find((x) => x && CHUYEN_GIA[x]);
 
+  const dd = duongDanCum({ ten: cd.ten, duong: cd.duong }, { ten: t.tieu_de, duong });
   const ld = goiLd(
     {
       "@type": "Article",
@@ -137,12 +140,7 @@ export async function TrangKienThucView(params: Thamso) {
     ...[...new Set([t.chu_bien, t.tac_gia, t.tham_dinh?.nguoi])].map((x) => (x ? CHUYEN_GIA[x] : undefined))
       .filter((cg) => cg !== undefined).map(ldNguoi),
     ldHoiDap(t.hoi_dap),
-    ldDuongDan([
-      { ten: "Trang chủ", duong: "/" },
-      { ten: TEN_MANG_SILO[truCua(cd.duong)] ?? "Kiến thức", duong: truCua(cd.duong) },
-      { ten: cd.ten, duong: cd.duong },
-      { ten: t.tieu_de, duong },
-    ]),
+    ldDuongDan(dd),
   );
   // Neo mục: bỏ dấu từ tiêu đề; trùng (hoặc trùng neo sẵn có của trang) thì thêm hậu tố số.
   const daDung = new Set(["hoi-dap", "lien-quan", "trang-con", "trang-con-hoa"]);
@@ -157,12 +155,7 @@ export async function TrangKienThucView(params: Thamso) {
   return (
     <article className="mx-auto max-w-3xl">
       <JsonLd data={ld} />
-      <nav aria-label="Đường dẫn" className="text-xs text-fg-faint">
-        <ol className="flex flex-wrap gap-1.5">
-          <li><Link href={truCua(cd.duong)} className="hover:text-fg">{TEN_MANG_SILO[truCua(cd.duong)] ?? "Kiến thức"}</Link> ›</li>
-          <li><Link href={cd.duong} className="hover:text-fg">{cd.ten}</Link> ›</li>
-        </ol>
-      </nav>
+      <DuongDan ds={dd} />
 
       <header className="mt-4">
         <h1 className="text-3xl leading-tight sm:text-5xl">{t.tieu_de}</h1>

@@ -8,6 +8,8 @@ import { goiLd, ldDuongDan, metaTrang } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { DuongDan } from "@/components/khung/DuongDan";
+import { duongDanCum } from "@/lib/duong-dan";
 
 export const revalidate = 21600;
 
@@ -23,13 +25,16 @@ export async function generateMetadata(): Promise<Metadata> {
   return apDungSeo(META, await layNoiDungTrang(DUONG));
 }
 
+const DD = duongDanCum({ ten: "Lá số mẫu", duong: "/tu-vi/la-so-mau" });
+
 export default async function Page() {
   const [ds, nd] = await Promise.all([dsLaSoMau(), layNoiDungTrang(DUONG)]);
   // SEO-L3: engine lỗi → 5xx (Google thử lại), không trả trang 200 rỗng.
   if (!ds.length) throw new Error("Engine chưa trả danh sách lá số mẫu");
   return (
     <div className="mx-auto max-w-4xl">
-      <JsonLd data={goiLd(ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Tử vi", duong: "/tu-vi" }, { ten: "Lá số mẫu", duong: "/tu-vi/la-so-mau" }]))} />
+      <JsonLd data={goiLd(ldDuongDan(DD))} />
+      <DuongDan ds={DD} className="mb-4" />
       <p className="eyebrow">Học đọc lá số</p>
       <h1 className="mt-2 text-3xl leading-tight sm:text-5xl">{nd.dau.h1 ?? "Lá số Tử vi mẫu — đọc từng bước"}</h1>
       <LoiDanCms nd={nd} className="mt-4 max-w-2xl text-fg-muted">

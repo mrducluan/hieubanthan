@@ -8,6 +8,8 @@ import { goiLd, ldDuongDan, metaTrang, urlDayDu } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { DuongDan } from "@/components/khung/DuongDan";
+import { duongDanCum } from "@/lib/duong-dan";
 
 export const revalidate = 21600;
 
@@ -19,6 +21,7 @@ const META: Metadata = metaTrang({
 });
 
 const DUONG = "/phong-thuy/huong-hop-tuoi";
+const DD = duongDanCum({ ten: "Hướng hợp tuổi", duong: DUONG });
 const dm = (iso: string) => iso.slice(8, 10) + "/" + iso.slice(5, 7);
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,8 +37,9 @@ export default async function Page() {
         { "@type": "CollectionPage", name: "Hướng hợp tuổi", url: urlDayDu(DUONG), inLanguage: "vi-VN",
           mainEntity: { "@type": "ItemList", numberOfItems: cung.length,
             itemListElement: cung.map((c, i) => ({ "@type": "ListItem", position: i + 1, url: urlDayDu(duongTuoi(c.slug)), name: c.tieu_de })) } },
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Phong thuỷ", duong: "/phong-thuy" }, { ten: "Hướng hợp tuổi", duong: DUONG }]),
+        ldDuongDan(DD),
       )} />
+      <DuongDan ds={DD} className="mb-4" />
       <p className="eyebrow">Phong thuỷ · Bát trạch</p>
       <h1 className="mt-2 text-3xl leading-tight sm:text-5xl">{nd.dau.h1 ?? "Tuổi nào hợp hướng nào?"}</h1>
       <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">

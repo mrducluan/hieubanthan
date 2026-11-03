@@ -21,9 +21,11 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/kinh-dich", ten: "Kinh Dịch", mo_ta: "Gieo 3 đồng xu, quẻ đầu ngày, lời hào" },
     { href: "/phong-thuy", ten: "Phong thuỷ", mo_ta: "La bàn đo hướng, khảo sát nhà, bố trí" },
     { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi", mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
-    { href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm", mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
-    { href: "/tuoi-xong-dat", ten: "Tuổi xông đất", mo_ta: "Tuổi hợp gia chủ, giờ đẹp mùng 1" },
-    { href: "/xem-sao-han", ten: "Sao hạn theo tuổi", mo_ta: "La Hầu, Kế Đô, Thái Bạch… đọc bằng lời thường" },
+    // TM-1 (chủ dự án duyệt 2026-11-03): 3 công cụ đã có bản theo năm ở menu "Năm" (hướng xấu, xông đất, sao hạn) nhường
+    // chỗ cho 3 cụm kiến thức lớn nhất chưa có lối vào menu. Ba công cụ vẫn ở menu Năm, hub Huyền học, chân trang.
+    { href: "/tu-vi/sao-o-cung", ten: "Sao ở từng cung Tử vi", mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
+    { href: "/kinh-dich/que", ten: "64 quẻ Kinh Dịch", mo_ta: "Ý nghĩa từng quẻ, lời hào, cách hiểu đơn giản" },
+    { href: "/bat-tu/menh-theo-nam", ten: "Sinh năm nào mệnh gì", mo_ta: "Can chi, nạp âm, màu hợp, tuổi hợp 1950–2027" },
     { href: "/phong-thuy/huong-hop-tuoi", ten: "Hướng nhà hợp tuổi", mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
     { href: "/phong-thuy/dau-hieu", ten: "Dấu hiệu trong nhà", mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
     { href: "/kien-thuc", ten: "Thư viện kiến thức", mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },

@@ -1,11 +1,12 @@
 "use client";
 // VZ-2 — trang Tử vi: lá số lớn (2 giao diện, lớp vận hạn theo năm xem) → chi tiết cung đang chọn
 // → hỏi đáp AI ở DƯỚI, chiếm hết chiều ngang (chủ dự án chốt 2026-10-01).
+import { caoDinhTren } from "@/lib/thanh-mang";
 import { useChu } from "@/components/cms/DauCms";
 import { useChuChung } from "@/components/cms/ChuChung";
 import Link from "@/components/khung/Lien";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { CalendarClock, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, Moon, Orbit, ScrollText, Waypoints } from "lucide-react";
+import { CalendarClock, ChevronDown, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, Moon, Orbit, ScrollText, SlidersHorizontal, Waypoints } from "lucide-react";
 import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { HanhDongTrucQuan } from "@/components/hoi/TrucQuan";
@@ -88,6 +89,12 @@ export function TuVi() {
   const chatRef = useRef<HTMLElement>(null);
 
   const chiMenh = ls?.cung.find((c) => c.la_menh)?.chi ?? ls?.chi_cung_menh ?? "Dần";
+  // TM-1: như TruongPhai — có lựa chọn khác mặc định / điều cần biết thì nút "Hiển thị" có chấm, nhắc hiện cả khi đóng.
+  const phaiKhac = lich !== "viet" || phaiDoSang !== "nam" || hoaLinh !== "viet" || luuNguyet !== "dau_quan_thai_tue" || thangNhuan !== "thang_sau";
+  const nhacPhai = [
+    ls?.phai?.lich_khac && "Ngày sinh của bạn lệch giữa lịch Việt và lịch Trung Quốc — đổi lịch sẽ ra lá số khác.",
+    (ls?.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh") && "Bạn sinh nửa sau tháng nhuận — mỗi phái tính một kiểu, Mệnh và Cục có thể khác.",
+  ].filter(Boolean).join(" ");
   const chiChon = chon ?? chiMenh;
   const khongBietGio = hoSo?.do_tin_gio === "unknown";
   const xemCung = (c: string) => {
@@ -102,7 +109,7 @@ export function TuVi() {
     requestAnimationFrame(() => {
       const el = svgRef.current;
       if (!el) return;
-      const dau = document.querySelector<HTMLElement>("[data-thanh-dau]")?.getBoundingClientRect().height ?? 0;
+      const dau = caoDinhTren();
       const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
       window.scrollTo({ top: window.scrollY + el.getBoundingClientRect().top - dau - 8, behavior: giam ? "auto" : "smooth" });
     });
@@ -137,29 +144,41 @@ export function TuVi() {
                   <TabsTrigger value="giay"><ScrollText className="mr-1.5 inline size-3.5" aria-hidden />Giấy cổ</TabsTrigger>
                 </TabsList>
               </Tabs>
-              <div className="flex items-center rounded-full border border-line bg-surface/60 p-1" role="group" aria-label="Năm xem hạn">
+              <div className="order-2 flex items-center rounded-full border border-line bg-surface/60 p-1 sm:order-none" role="group" aria-label="Năm xem hạn">
                 <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label="Năm trước" onClick={() => setNamXem((n) => Math.max(1900, n - 1))}><ChevronLeft className="size-4" /></button>
-                <span className="min-w-[7.5rem] text-center text-sm" aria-live="polite">
-                  Năm <b className="text-fg">{namXem}</b>{vh && vh.nam_xem === namXem ? <span className="text-fg-faint"> · {vh.can_chi_nam_xem}</span> : null}
+                <span className="min-w-[5.5rem] text-center text-sm sm:min-w-[7.5rem]" aria-live="polite">
+                  Năm <b className="text-fg">{namXem}</b>{vh && vh.nam_xem === namXem ? <span className="hidden text-fg-faint sm:inline"> · {vh.can_chi_nam_xem}</span> : null}
                 </span>
                 <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label="Năm sau" onClick={() => setNamXem((n) => Math.min(2100, n + 1))}><ChevronRight className="size-4" /></button>
               </div>
-              {(["dai_han", "luu_nien"] as const).map((k) => (
-                <button key={k} type="button" aria-pressed={lop[k]} onClick={() => setLop((l) => ({ ...l, [k]: !l[k] }))}
-                  className={cn("rounded-full border px-3.5 py-1.5 text-sm transition-colors",
-                    lop[k] ? (k === "dai_han" ? "border-[rgb(126_172_255)] bg-[rgb(126_172_255)]/15 text-fg" : "border-gold bg-gold/15 text-fg") : "border-line text-fg-muted hover:text-fg")}>
-                  {k === "dai_han" ? "Lớp đại hạn" : "Lớp lưu niên"}
-                </button>
-              ))}
-              <Button variant="ghost" size="sm" className="ml-auto" disabled={dangTai} onClick={async () => {
+              {/* TM-1: lớp hạn + trường phái gom vào "Hiển thị" (trước là 2 nút rời + khung riêng — đọc như thanh tab, điện thoại
+                  gãy 3 hàng). Nhãn nút nói đang hiện lớp nào; có điều cần biết (lệch lịch, tháng nhuận) thì nhắc ngay dưới hàng. */}
+              <button type="button" aria-expanded={moPhai} aria-controls="tv-hien-thi" data-testid="tv-hien-thi-mo"
+                onClick={() => { setMoPhai(!moPhai); if (!moPhai) ghi("chart_interacted", { mo_dun: "tuvi", kind: "mo_truong_phai" }); }}
+                className={cn("order-3 inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3.5 text-sm transition-colors sm:order-none",
+                  moPhai ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>
+                <SlidersHorizontal className="size-4" aria-hidden />
+                Hiển thị
+                <span className="hidden text-fg-faint sm:inline">· {lop.dai_han && lop.luu_nien ? "Đại hạn + lưu niên" : lop.dai_han ? "Đại hạn" : lop.luu_nien ? "Lưu niên" : "Không lớp hạn"}</span>
+                {(phaiKhac || nhacPhai) && <span className="size-1.5 rounded-full bg-moon" aria-label="Có lựa chọn khác mặc định hoặc điều cần biết" />}
+                <ChevronDown className={cn("size-4 transition-transform motion-reduce:transition-none", moPhai && "rotate-180")} aria-hidden />
+              </button>
+              {/* Điện thoại: nút tải ảnh (chỉ biểu tượng) đứng cùng hàng giao diện → còn 2 hàng thay vì 3. */}
+              <Button variant="ghost" size="sm" className="order-1 ml-auto sm:order-none" disabled={dangTai} onClick={async () => {
                 if (!svgRef.current) return;
                 setDangTai(true);
                 setLoiAnh(null);
                 try { await taiAnhSvg(svgRef.current, `la-so-tu-vi-${ls.can_chi_nam.can}-${ls.can_chi_nam.chi}.png`); ghi("chart_interacted", { mo_dun: "tuvi", kind: "tai_anh" }); }
                 catch (e) { setLoiAnh(e instanceof Error ? e.message : "Chưa xuất được ảnh."); }
                 finally { setDangTai(false); }
-              }}><Download aria-hidden /> {cc("doc.tai_anh")}</Button>
+              }} aria-label={cc("doc.tai_anh")}><Download aria-hidden /> <span className="hidden sm:inline">{cc("doc.tai_anh")}</span></Button>
             </div>
+            {!moPhai && nhacPhai && (
+              <p className="flex items-start gap-1.5 text-xs leading-relaxed text-moon" data-testid="truong-phai-nhac">
+                <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-moon" aria-hidden />
+                <span>{nhacPhai} <button type="button" className="underline underline-offset-2" onClick={() => setMoPhai(true)}>Xem trường phái</button></span>
+              </p>
+            )}
 
             {loiAnh && <p role="alert" className="text-sm text-cinnabar">{loiAnh}</p>}
             {khongBietGio && (
@@ -168,14 +187,31 @@ export function TuVi() {
                 12 canh giờ với những năm bạn nhớ rõ, rồi tự sửa giờ trong hồ sơ.
               </p>
             )}
-            <TruongPhai
-              lich={lich} setLich={setLich} lichKhac={!!ls.phai?.lich_khac}
-              phaiDoSang={phaiDoSang} setPhaiDoSang={setPhaiDoSang}
-              hoaLinh={hoaLinh} setHoaLinh={setHoaLinh}
-              thangNhuan={thangNhuan} setThangNhuan={setThangNhuan}
-              coNhuan={!!ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh"}
-              luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }}
-              mo={moPhai} doiMo={(v) => { setMoPhai(v); if (v) ghi("chart_interacted", { mo_dun: "tuvi", kind: "mo_truong_phai" }); }} />
+            {moPhai && (
+              <div id="tv-hien-thi" className="space-y-3" data-testid="tv-hien-thi">
+                <div className="rounded-2xl border border-line/70 bg-surface/40 px-4 py-3 sm:px-5" role="group" aria-labelledby="tv-lop-han">
+                  <p id="tv-lop-han" className="text-sm font-semibold text-fg">Lớp hạn trên lá số</p>
+                  <p className="mt-1 text-xs leading-relaxed text-fg-muted">Tô lên lá số cung đại hạn (10 năm) và cung lưu niên của năm đang xem. Chỉ đổi cách hiển thị, không đổi lá số.</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {(["dai_han", "luu_nien"] as const).map((k) => (
+                      <button key={k} type="button" aria-pressed={lop[k]} onClick={() => setLop((l) => ({ ...l, [k]: !l[k] }))}
+                        className={cn("min-h-10 rounded-full border px-3.5 py-1.5 text-sm transition-colors",
+                          lop[k] ? (k === "dai_han" ? "border-[rgb(126_172_255)] bg-[rgb(126_172_255)]/15 text-fg" : "border-gold bg-gold/15 text-fg") : "border-line text-fg-muted hover:text-fg")}>
+                        {k === "dai_han" ? "Lớp đại hạn" : "Lớp lưu niên"}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <TruongPhai
+                  lich={lich} setLich={setLich} lichKhac={!!ls.phai?.lich_khac}
+                  phaiDoSang={phaiDoSang} setPhaiDoSang={setPhaiDoSang}
+                  hoaLinh={hoaLinh} setHoaLinh={setHoaLinh}
+                  thangNhuan={thangNhuan} setThangNhuan={setThangNhuan}
+                  coNhuan={!!ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh"}
+                  luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }}
+                  mo doiMo={(v) => { if (!v) setMoPhai(false); }} />
+              </div>
+            )}
             {/* Lá số: điện thoại mặc định thu vừa màn hình, "Phóng to" để đọc chữ rõ rồi vuốt (Trục 1 — KhungLaSo) */}
             <KhungLaSo chon={chiChon} chan={<ChanLaSo giaoDien={giaoDien} tieuDe="Lá số Tử vi" duong="/tu-vi" />}>
               <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={hoSo?.ho_ten} gioSinh={gioHienThi(hoSo)}

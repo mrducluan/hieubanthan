@@ -48,7 +48,9 @@ export default async function HuyenHoc() {
   const c = taoChu(CHU_HUYEN_HOC, nd.chu);
   const MD = macDinh();
   const nam = namNayVn();
-  const cum = Object.fromEntries(MANG_HH.map((m) => [m.khoa, [...dsCumTru(m.href), ...(TRA_CUU_THEM[m.khoa] ?? [])].slice(0, 4)]));
+  // TM-1: đủ mọi cụm của mảng (trước cắt còn 4 → mất Nợ nghiệp, Số kép, Lá số mẫu…; trùng đường dẫn thì bỏ bản sau).
+  const cum = Object.fromEntries(MANG_HH.map((m) => [m.khoa, [...dsCumTru(m.href), ...(TRA_CUU_THEM[m.khoa] ?? [])]
+    .filter((x, i, tat) => tat.findIndex((y) => y.duong === x.duong) === i)]));
   const dau = await layDauNhieuTrang(Object.values(cum).flat().map((x) => x.duong));
   const soBai = (khoa: string | null) => (khoa ? ds.filter((t) => t.loai === CHU_DE[khoa]!.loai).length : 0);
   const hoiDap = Array.from({ length: SO_HOI_DAP_HUYEN_HOC }, (_, i) => ({ hoi: c(`hoi_dap.hoi_${i + 1}`), dap: c(`hoi_dap.dap_${i + 1}`) }));

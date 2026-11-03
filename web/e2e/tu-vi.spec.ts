@@ -67,7 +67,7 @@ test("độ sáng sao: mặc định Nam phái, chuyển được sang phái Tru
   const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
   const menh = laSo.getByRole("button", { name: /^Cung Mệnh/ });
   await expect(menh).toHaveAccessibleName(/Tử Vi Bình/);              // lối Việt: Tử Vi tại Mão bình hoà
-  await page.getByTestId("truong-phai-mo").click();
+  await page.getByTestId("tv-hien-thi-mo").click();   // TM-1: lớp hạn + trường phái trong "Hiển thị"
   await page.getByRole("tab", { name: "Phái Trung" }).click();
   await expect(menh).toHaveAccessibleName(/Tử Vi Vượng/);             // bảng iztro
 });
@@ -131,7 +131,7 @@ test("trường phái: Hoả/Linh lối Việt ↔ Trung Châu đổi cách cụ
   await page.goto("/tu-vi");
   const cc = page.getByTestId("cach-cuc");
   await expect(cc).toContainText("Linh Tham");
-  await page.getByTestId("truong-phai-mo").click();               // TP-GON: khung trường phái thu gọn mặc định
+  await page.getByTestId("tv-hien-thi-mo").click();   // TM-1: lớp hạn + trường phái trong "Hiển thị"               // TP-GON: khung trường phái thu gọn mặc định
   await page.getByRole("tab", { name: "Trung Châu" }).click();
   await expect(cc).toContainText("Hoả Tham");
 });
@@ -143,7 +143,7 @@ test("sinh nửa sau tháng nhuận: chọn cách tính tháng → cung Mệnh �
   const menh = laSo.getByRole("button", { name: /^Cung Mệnh/ });
   const truoc = await menh.getAttribute("aria-label");
   await expect(page.getByTestId("truong-phai-nhac")).toContainText("nửa sau tháng nhuận");   // nhắc hiện cả khi khung đóng
-  await page.getByTestId("truong-phai-mo").click();
+  await page.getByTestId("tv-hien-thi-mo").click();   // TM-1: lớp hạn + trường phái trong "Hiển thị"
   await expect(page.getByTestId("chon-thang-nhuan")).toBeVisible();
   await page.getByRole("tab", { name: "Như tháng chính" }).click();
   await expect(menh).not.toHaveAttribute("aria-label", truoc!);
@@ -188,7 +188,7 @@ test("TV-LICH: khung Trường phái — đổi lịch Việt ↔ Trung ra lá k
   const tp = page.getByTestId("truong-phai");
   await expect(page.getByTestId("truong-phai-nhac")).toContainText("lệch giữa lịch Việt và lịch Trung Quốc");
   await expect(tp.getByRole("tab", { name: "Lịch Trung Quốc" })).toHaveCount(0);   // TP-GON: đóng mặc định
-  await page.getByTestId("truong-phai-mo").click();
+  await page.getByTestId("tv-hien-thi-mo").click();   // TM-1: lớp hạn + trường phái trong "Hiển thị"
   await expect(tp).toContainText("lệch nhau");
   const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
   await expect(laSo).toContainText("Thái Tuế");                          // tên sách Việt
@@ -207,6 +207,8 @@ test("TV-LICH: khung Trường phái — đổi lịch Việt ↔ Trung ra lá k
 test("TV-LICH: ngày hai lịch trùng → báo đổi lịch không làm lá số thay đổi", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/tu-vi");
+  await expect(page.getByTestId("truong-phai-nhac")).toHaveCount(0);   // không lệch lịch → không nhắc dưới hàng điều khiển
+  await page.getByTestId("tv-hien-thi-mo").click();
   await expect(page.getByTestId("truong-phai")).toContainText("hai lịch trùng nhau");
 });
 
@@ -230,7 +232,7 @@ test("TV-LN: lưu nguyệt theo phái — tháng Giêng 2026 ở Phu Thê (Đẩ
   await expect(ct).toContainText("Hoá Khoa Thái Âm · Phu Thê · đúng cung tháng");
   await expect(page.getByTestId("so-sanh-phai")).toContainText("Theo địa chi của tháng");
   // Đổi phái: tháng Giêng tại cung lưu niên (Ngọ = Tật Ách). Lá số gốc giữ nguyên.
-  await page.getByTestId("truong-phai-mo").click();
+  await page.getByTestId("tv-hien-thi-mo").click();   // TM-1: lớp hạn + trường phái trong "Hiển thị"
   await page.getByTestId("truong-phai").getByRole("combobox", { name: "Phái tính lưu nguyệt" }).selectOption("luu_nien");
   await expect(ln).toContainText("Tháng Giêng tại cung lưu niên");
   await ln.getByRole("button", { name: /^Tháng 1\b/ }).click();
