@@ -22,9 +22,12 @@
     color-scheme: dark;
   }
 
-  /* TM-1: thanh mảng dính dưới menu chính ghi chiều cao đang chiếm vào --tm-h → neo (#mục) không bị thanh che.
-     Cộng thêm vào scroll-margin (scroll-mt-*) sẵn có của từng mục. */
-  html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--tm-h, 0px); }
+  /* TM-1: thanh mảng dính dưới menu chính (h-11) đang hiện → --tm-h = chiều cao của nó; neo (#mục) cộng thêm khoảng này
+     vào scroll-margin sẵn có (scroll-mt-*) nên không bị thanh che. Đặt bằng CSS (không chờ JavaScript) → mở thẳng link
+     có #neo cũng đúng. Thanh ẩn khi cuộn (điện thoại, data-an="1") → 0. */
+  :root { --tm-h: 0px; }
+  html:has([data-thanh-mang][data-an="0"]) { --tm-h: 2.75rem; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--tm-h); }
   body {
     @apply bg-bg text-fg font-sans antialiased;
     font-size: 16px;

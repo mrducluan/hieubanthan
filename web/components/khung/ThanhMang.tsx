@@ -1,8 +1,10 @@
 "use client";
 // TM-1 — thanh mảng (lib/thanh-mang.ts): dải điều hướng phụ dính ngay dưới menu chính ở mọi trang của một mảng.
 // Máy tính (≥ lg): luôn hiện. Điện thoại: cuộn xuống thì ẩn (nhường chỗ đọc), cuộn lên thì hiện lại — kiểu thanh địa chỉ
-// trình duyệt. Chiều cao đang chiếm ghi vào biến CSS --tm-h trên <html> để neo (#mục) và các thanh dính khác (mục lục
-// chương của báo cáo) không bị che (globals.css: scroll-padding-top; MucLucChuong: top). Link thường (Lien, không prefetch).
+// trình duyệt. Chiều cao đang chiếm = biến CSS --tm-h, đặt bằng CSS theo data-an của chính thanh (globals.css, chạy ngay từ
+// HTML máy chủ — mở thẳng link #neo cũng không bị che) → scroll-padding-top + top của các thanh dính khác.
+// Link thường (Lien, không prefetch). Mục có ?cach=… sáng theo query đọc sau khi mở trang (thanh nằm ở layout, máy chủ
+// không biết query → đọc trong effect để không lệch hydrate).
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "@/components/khung/Lien";
@@ -10,15 +12,16 @@ import { useChuChung } from "@/components/cms/ChuChung";
 import { khoaChu, mucDangXem, thanhCua } from "@/lib/thanh-mang";
 import { cn } from "@/lib/utils";
 
-const CAO = "2.75rem";   // h-11 — vùng chạm 44 px
-
 export function ThanhMang({ dem = {} }: { dem?: Record<string, number> }) {
   const path = usePathname() ?? "/";
   const t = thanhCua(path);
   const c = useChuChung();
   const [an, setAn] = useState(false);
+  const [query, setQuery] = useState("");
   const cuon = useRef<HTMLDivElement>(null);
-  const dang = t ? mucDangXem(t, path) : -1;
+  useEffect(() => { setQuery(window.location.search); }, [path]);
+  const dang = t ? mucDangXem(t, path + query) : -1;
+  const dungTrang = (duong: string) => (path + query).replace(/\/$/, "") === duong;
 
   // Ẩn khi cuộn xuống (chỉ < lg); luôn hiện khi gần đầu trang hoặc khi bàn phím đang ở trong thanh.
   useEffect(() => {
@@ -38,22 +41,18 @@ export function ThanhMang({ dem = {} }: { dem?: Record<string, number> }) {
     return () => { window.removeEventListener("scroll", xem); mq.removeEventListener("change", doiCo); };
   }, [t]);
 
-  useEffect(() => {
-    const goc = document.documentElement.style;
-    if (t && !an) goc.setProperty("--tm-h", CAO); else goc.setProperty("--tm-h", "0px");
-    return () => goc.setProperty("--tm-h", "0px");
-  }, [t, an]);
-
   // Mục đang xem nằm giữa dải (điện thoại cuộn ngang) — chỉnh scrollLeft, không dùng scrollIntoView (sẽ cuộn cả trang).
   useEffect(() => {
-    const k = cuon.current, el = k?.querySelector<HTMLElement>('[aria-current="page"]');
+    const k = cuon.current, el = k?.querySelector<HTMLElement>("[aria-current]");
     if (k && el) k.scrollLeft = Math.max(0, el.offsetLeft - (k.clientWidth - el.offsetWidth) / 2);
-  }, [path]);
+  }, [path, dang]);
 
   if (!t) return null;
   return (
     <div
       data-thanh-mang={t.ma} data-an={an ? "1" : "0"}
+      // Bàn phím vào thanh đang ẩn (điện thoại) → hiện lại, không để focus nằm trong vùng vô hình.
+      onFocusCapture={() => setAn(false)}
       className={cn("sticky top-16 z-30 border-b border-line/50 bg-bg/85 backdrop-blur-lg transition-[transform,opacity] duration-200 print:hidden",
         an && "pointer-events-none -translate-y-full opacity-0")}
     >
@@ -70,14 +69,14 @@ export function ThanhMang({ dem = {} }: { dem?: Record<string, number> }) {
               const Lk = m.duong.includes("?") ? "a" : Link;
               return (
                 <li key={m.ma} className="flex">
-                  <Lk href={m.duong} aria-current={on ? "page" : undefined} data-muc={m.ma}
+                  <Lk href={m.duong} aria-current={on ? (dungTrang(m.duong) ? "page" : "location") : undefined} data-muc={m.ma}
                     className={cn("relative flex shrink-0 items-center whitespace-nowrap px-2.5 text-[0.84rem] text-fg-muted transition-colors hover:text-fg",
                       "focus-visible:rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold",
                       i === 0 && "font-medium text-fg",
                       on && "text-gold after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:rounded-full after:bg-gold")}>
                     {i === 0 && <span aria-hidden className="mr-1.5 size-1.5 rounded-full bg-gold" />}
                     {nhan}
-                    {so ? <span className="ml-1.5 text-[0.7rem] tabular-nums text-fg-faint">{so}<span className="sr-only"> trang</span></span> : null}
+                    {so ? <span className="ml-1.5 text-[0.7rem] tabular-nums text-fg-faint"><span className="sr-only">, </span>{so}<span className="sr-only"> trang</span></span> : null}
                   </Lk>
                 </li>
               );

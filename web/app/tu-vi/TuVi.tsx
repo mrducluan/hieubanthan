@@ -62,6 +62,7 @@ export function TuVi() {
   const [lich, setLich] = useState<"viet" | "trung">("viet");
   // TP-GON: khung Trường phái thu gọn — giữ trạng thái mở ở đây vì lá số tạm gỡ mỗi lần engine an lại.
   const [moPhai, setMoPhai] = useState(false);
+  const nutHienThi = useRef<HTMLButtonElement>(null);   // TM-1: "Thu gọn" trong bảng Hiển thị → trả focus về nút mở
   // TP-LICH: hồ sơ nhập ngày âm theo lịch Trung Quốc → mở lá số theo lịch đó (người dùng vẫn đổi được).
   const lichHoSo = hoSo?.lich_am;
   useEffect(() => { if (lichHoSo === "trung") setLich("trung"); }, [lichHoSo]);
@@ -153,14 +154,14 @@ export function TuVi() {
               </div>
               {/* TM-1: lớp hạn + trường phái gom vào "Hiển thị" (trước là 2 nút rời + khung riêng — đọc như thanh tab, điện thoại
                   gãy 3 hàng). Nhãn nút nói đang hiện lớp nào; có điều cần biết (lệch lịch, tháng nhuận) thì nhắc ngay dưới hàng. */}
-              <button type="button" aria-expanded={moPhai} aria-controls="tv-hien-thi" data-testid="tv-hien-thi-mo"
+              <button type="button" ref={nutHienThi} aria-expanded={moPhai} aria-controls={moPhai ? "tv-hien-thi" : undefined} data-testid="tv-hien-thi-mo"
                 onClick={() => { setMoPhai(!moPhai); if (!moPhai) ghi("chart_interacted", { mo_dun: "tuvi", kind: "mo_truong_phai" }); }}
                 className={cn("order-3 inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3.5 text-sm transition-colors sm:order-none",
                   moPhai ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>
                 <SlidersHorizontal className="size-4" aria-hidden />
                 Hiển thị
                 <span className="hidden text-fg-faint sm:inline">· {lop.dai_han && lop.luu_nien ? "Đại hạn + lưu niên" : lop.dai_han ? "Đại hạn" : lop.luu_nien ? "Lưu niên" : "Không lớp hạn"}</span>
-                {(phaiKhac || nhacPhai) && <span className="size-1.5 rounded-full bg-moon" aria-label="Có lựa chọn khác mặc định hoặc điều cần biết" />}
+                {(phaiKhac || nhacPhai) && <><span className="size-1.5 rounded-full bg-moon" aria-hidden /><span className="sr-only">(có lựa chọn khác mặc định hoặc điều cần biết)</span></>}
                 <ChevronDown className={cn("size-4 transition-transform motion-reduce:transition-none", moPhai && "rotate-180")} aria-hidden />
               </button>
               {/* Điện thoại: nút tải ảnh (chỉ biểu tượng) đứng cùng hàng giao diện → còn 2 hàng thay vì 3. */}
@@ -209,7 +210,7 @@ export function TuVi() {
                   thangNhuan={thangNhuan} setThangNhuan={setThangNhuan}
                   coNhuan={!!ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh"}
                   luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }}
-                  mo doiMo={(v) => { if (!v) setMoPhai(false); }} />
+                  mo doiMo={(v) => { if (!v) { setMoPhai(false); requestAnimationFrame(() => nutHienThi.current?.focus()); } }} />
               </div>
             )}
             {/* Lá số: điện thoại mặc định thu vừa màn hình, "Phóng to" để đọc chữ rõ rồi vuốt (Trục 1 — KhungLaSo) */}

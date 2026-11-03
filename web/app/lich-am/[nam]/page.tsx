@@ -12,6 +12,7 @@ import { docNamLich, duongLichAm, lichAmIndex, lichNamCongKhai } from "@/lib/lic
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_LICH_AM_NAM } from "@/lib/chu/trang-con";
+import { DuongDan } from "@/components/khung/DuongDan";
 
 type P = { params: Promise<{ nam: string }> };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
@@ -33,15 +34,16 @@ export default async function Page(p: P) {
   const duong = duongLichAm(n), bien = { nam: String(n), can_chi: d.can_chi };
   const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_LICH_AM_NAM, nd.chu);
   const tieuDe = c("dau.tieu_de", bien);
+  const dd = [{ ten: "Trang chủ", duong: "/" }, { ten: "Lịch âm", duong: "/lich-am" }, { ten: `Lịch âm ${n}`, duong }];
   return (
     <div className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(
         ldTrangWeb({ duong, ten: tieuDe, tomTat: d.tra_loi_nhanh, about: ["Âm lịch Việt Nam", `Năm ${d.can_chi}`, "Tết Nguyên đán"] }),
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Lịch âm", duong: "/lich-am" }, { ten: `Lịch âm ${n}`, duong }]),
+        ldDuongDan(dd),
         ldHoiDap(d.hoi_dap),
       )} />
-      {/* TM-1: mục lục /lich-am trước không có link nào trỏ vào (breadcrumb cũ về công cụ đổi lịch). */}
-      <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/lich-am" className="hover:underline">Lịch âm các năm</Link> · <Link href="/doi-lich-am-duong" className="hover:underline">Đổi lịch âm dương</Link></nav>
+      {/* TM-1: mục lục /lich-am trước không có link nào trỏ vào (breadcrumb cũ về công cụ đổi lịch). Hiển thị = JSON-LD. */}
+      <DuongDan ds={dd} className="mb-2" />
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
       <section aria-label="Trả lời nhanh" className="rounded-2xl border border-gold/30 bg-gold/5 p-5">

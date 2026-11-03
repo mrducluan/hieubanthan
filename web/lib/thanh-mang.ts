@@ -74,15 +74,18 @@ export function thanhCua(duong: string): ThanhMang | null {
 }
 
 /** Mục đang xem: đường dẫn dài nhất khớp (cụm và trang con của cụm); mục công cụ chỉ sáng khi đúng trang công cụ.
- *  Mục có ? hoặc # (lối tắt tới một chế độ / một khối) không bao giờ sáng. Không khớp → -1. */
+ *  Mục có ?query (một chế độ của công cụ, vd ?cach=mai_hoa) sáng khi đường dẫn đang xem có đúng query đó và thắng mục
+ *  công cụ; mục có # (lối tắt tới một khối) không bao giờ sáng. Không khớp → -1. */
 export function mucDangXem(t: ThanhMang, duong: string): number {
   const p = boDuoi(duong).replace(/\/$/, "") || "/";
+  const q = duong.split("#")[0]!.slice(p.length).replace(/^\//, "");
   let tot = -1, dai = -1;
   t.muc.forEach((m, i) => {
-    if (/[?#]/.test(m.duong)) return;
-    const k = m.duong;
-    const khop = k === t.tru ? p === k : p === k || p.startsWith(`${k}/`);
-    if (khop && k.length > dai) { tot = i; dai = k.length; }
+    if (m.duong.includes("#")) return;
+    const [k, mq] = m.duong.split("?") as [string, string | undefined];
+    const khop = mq !== undefined ? p === k && new URLSearchParams(q).toString().split("&").includes(mq)
+      : k === t.tru ? p === k : p === k || p.startsWith(`${k}/`);
+    if (khop && m.duong.length > dai) { tot = i; dai = m.duong.length; }
   });
   return tot;
 }

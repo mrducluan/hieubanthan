@@ -13,6 +13,8 @@ import { gioiThieuTu, layDauNhieuTrang, layNoiDungTrang } from "@/lib/noi-dung-t
 import { mucSoTrang } from "@/lib/so-trang";
 import { soCanLap, theLap } from "@/lib/the-lap";
 import { DuongDan } from "@/components/khung/DuongDan";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { goiLd, ldDuongDan } from "@/lib/seo";
 import { duongDanCongCu } from "@/lib/duong-dan";
 import { thanhCua } from "@/lib/thanh-mang";
 import { boLap } from "@/lib/the-lap-cms";
@@ -31,7 +33,11 @@ export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
   const ten = nd.ten ?? mucSoTrang(duong)?.ten ?? "";
   return (
     <>
-      {thanhCua(duong) && ten && <DuongDan ds={duongDanCongCu(duong, ten)} className="-mt-2 mb-5 md:-mt-4" />}
+      {/* Một nguồn: dải hiển thị và BreadcrumbList JSON-LD cùng mảng (GioiThieuCongCu bỏ breadcrumb cho 6 trụ). */}
+      {thanhCua(duong) && ten && <>
+        <JsonLd data={goiLd(ldDuongDan(duongDanCongCu(duong, ten)))} />
+        <DuongDan ds={duongDanCongCu(duong, ten)} className="-mt-2 mb-5 md:-mt-4" />
+      </>}
       {truoc}
       <DauCms h1={nd.dau.h1} loiDan={nd.dau.loiDan} kieuChu={nd.dau.kieuChu} bang={bang} chu={locChu(bang, nd.chu)}
         khoiTren={nd.khoi.tren.length ? <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" /> : null}>

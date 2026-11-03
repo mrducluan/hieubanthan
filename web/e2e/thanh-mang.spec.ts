@@ -35,7 +35,10 @@ test("thanh mảng: tìm đúng thanh theo đoạn đầu đường dẫn, mục
   expect(ma("/tu-vi/sao-o-cung/thai-duong-cung-menh")).toBe("sao_cung");
   expect(ma("/tu-vi/la-so-mau/a")).toBe("la_so_mau");
   const kd = thanhCua("/kinh-dich")!;
-  expect(kd.muc[mucDangXem(kd, "/kinh-dich")]!.ma).toBe("cong_cu");   // mục ?cach=… không bao giờ sáng
+  expect(kd.muc[mucDangXem(kd, "/kinh-dich")]!.ma).toBe("cong_cu");
+  expect(kd.muc[mucDangXem(kd, "/kinh-dich?cach=mai_hoa")]!.ma).toBe("mai_hoa");   // chế độ của công cụ thắng mục công cụ
+  expect(kd.muc[mucDangXem(kd, "/kinh-dich?cach=mai_hoa_so&so=1,2")]!.ma).toBe("cong_cu");
+  expect(kd.muc[mucDangXem(kd, "/kinh-dich/que?cach=mai_hoa")]!.ma).toBe("que");
   const hd = thanhCua("/hop-doi/abc")!;
   expect(mucDangXem(hd, "/hop-doi/abc")).toBe(-1);                    // trang nhận lời mời: không mục nào sáng
 });
@@ -123,11 +126,20 @@ test("trang con: breadcrumb 5 cấp, thanh mảng vẫn sáng cụm cha; bấm t
   await page.goto("/tu-vi/sao-o-cung/thai-duong-cung-menh");
   expect((await breadcrumb(page)).slice(0, 4)).toEqual(["Trang chủ", "Huyền học", "Tử vi", "Chính tinh ở từng cung Tử vi"]);
   const tm = page.locator("[data-thanh-mang=tuvi]");
-  await expect(tm.locator("[data-muc=sao_cung]")).toHaveAttribute("aria-current", "page");
+  await expect(tm.locator("[data-muc=sao_cung]")).toHaveAttribute("aria-current", "location");   // cụm cha, không phải chính trang
   await tm.locator("[data-muc=tu_hoa]").click();
   await expect(page).toHaveURL(/\/tu-vi\/tu-hoa$/);
   await expect(tm.locator("[data-muc=tu_hoa]")).toHaveAttribute("aria-current", "page");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Tứ hoá");
+});
+
+test("Kinh Dịch: mục 'Quẻ theo giờ' mở chế độ Mai Hoa và sáng khi đang ở chế độ đó", async ({ page }) => {
+  await page.goto("/kinh-dich");
+  const tm = page.locator("[data-thanh-mang=kinhdich]");
+  await tm.locator("[data-muc=mai_hoa]").click();
+  await expect(page).toHaveURL(/\/kinh-dich\?cach=mai_hoa$/);
+  await expect(tm.locator("[data-muc=mai_hoa]")).toHaveAttribute("aria-current", "page");
+  await expect(tm.locator("[aria-current]")).toHaveCount(1);
 });
 
 test("trang công cụ: breadcrumb thật thay chữ 'Huyền học' tĩnh; dòng nhỏ nói mảng làm gì", async ({ page, request }) => {
@@ -148,7 +160,7 @@ test("không có thanh mảng ngoài 6 mảng; mọi trang của 6 mảng đều
     ["/phong-thuy/huong-hop-tuoi", "phongthuy"], ["/phong-thuy/dau-hieu", "phongthuy"], ["/tu-vi/la-so-mau", "tuvi"]] as const) {
     await page.goto(p);
     await expect(page.locator(`[data-thanh-mang=${ma}]`), p).toBeVisible();
-    await expect(page.locator(`[data-thanh-mang=${ma}] [aria-current=page]`), p).toHaveCount(1);
+    await expect(page.locator(`[data-thanh-mang=${ma}] [aria-current]`), p).toHaveCount(1);
   }
 });
 
@@ -156,25 +168,43 @@ test("thanh mảng điện thoại: cuộn xuống thì ẩn (neo không bị ch
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/kinh-dich/que");
   const tm = page.locator("[data-thanh-mang]");
+  const tmH = () => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--tm-h").trim());
   await expect(tm).toHaveAttribute("data-an", "0");
+  expect(await tmH()).toBe("2.75rem");                                // CSS đặt ngay từ HTML máy chủ, không chờ JS
   // mục đang xem nằm trong khung nhìn của dải (đã tự cuộn ngang)
-  const muc = await tm.locator("[aria-current=page]").boundingBox();
-  expect(muc!.x).toBeGreaterThanOrEqual(0);
-  expect(muc!.x + muc!.width).toBeLessThanOrEqual(390);
-  // Chờ thanh chạy xong (đã ghi --tm-h) rồi mới cuộn — cuộn trước khi trang hydrate thì không có ai nghe sự kiện.
-  await expect.poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue("--tm-h"))).toBe("2.75rem");
-  await page.mouse.move(200, 500);
-  await page.mouse.wheel(0, 1200);
+  await expect.poll(async () => { const r = await tm.locator("[aria-current]").boundingBox(); return r ? r.x >= 0 && r.x + r.width <= 390 : false; }).toBe(true);
+  // Chờ trang hydrate (thanh đã nghe sự kiện cuộn) — mục lục cụm là client, xuất hiện ô lọc tương tác được.
+  await expect(page.getByTestId("cum-tim")).toBeEditable();
+  const cuon = async (y: number) => { await page.evaluate((v) => window.scrollTo(0, v), y); await page.waitForTimeout(120); };
+  for (const y of [400, 800, 1600]) await cuon(y);
   await expect(tm).toHaveAttribute("data-an", "1");
-  expect(await page.evaluate(() => document.documentElement.style.getPropertyValue("--tm-h"))).toBe("0px");
-  await page.mouse.wheel(0, -300);
+  await expect.poll(tmH).toBe("0px");
+  for (const y of [1400, 1200]) await cuon(y);                         // cuộn lên, vẫn xa đầu trang
   await expect(tm).toHaveAttribute("data-an", "0");
-  expect(await page.evaluate(() => document.documentElement.style.getPropertyValue("--tm-h"))).toBe("2.75rem");
+  await expect.poll(tmH).toBe("2.75rem");
+  // Thanh đang ẩn mà bàn phím vào → hiện lại.
+  for (const y of [2000, 2600]) await cuon(y);
+  await expect(tm).toHaveAttribute("data-an", "1");
+  await tm.locator("a").first().focus();
+  await expect(tm).toHaveAttribute("data-an", "0");
   await page.setViewportSize({ width: 1280, height: 800 });
-  await page.mouse.wheel(0, 1500);
-  await page.waitForTimeout(300);
+  for (const y of [3000, 3600]) await cuon(y);
   await expect(tm).toHaveAttribute("data-an", "0");
   expect(await page.evaluate(() => document.body.scrollWidth <= window.innerWidth)).toBe(true);
+});
+
+test("mở thẳng link có #neo: tiêu đề nhóm nằm dưới menu + thanh mảng (không bị che)", async ({ page }) => {
+  for (const w of [390, 1280]) {
+    await page.setViewportSize({ width: w, height: 844 });
+    await page.goto("/tu-vi/sao-o-cung#nhom-thai-duong");
+    const h = page.locator("#nhom-thai-duong-h");
+    await expect.poll(async () => { const a = await page.evaluate(() => scrollY); await page.waitForTimeout(150); return a === await page.evaluate(() => scrollY) && a > 0; }).toBe(true);
+    const day = await page.evaluate(() => {
+      const tm = document.querySelector<HTMLElement>("[data-thanh-mang]")!.getBoundingClientRect();
+      return tm.bottom;
+    });
+    expect((await h.boundingBox())!.y, `rộng ${w}`).toBeGreaterThanOrEqual(day - 1);
+  }
 });
 
 test("mục lục cụm 'Sao ở cung': 14 nhóm theo sao, lọc theo cung + gõ tên, bỏ lọc; HTML máy chủ đủ 168 link", async ({ page, request }) => {
@@ -187,28 +217,26 @@ test("mục lục cụm 'Sao ở cung': 14 nhóm theo sao, lọc theo cung + gõ
   await expect(ds.getByRole("heading", { level: 2 }).first()).toContainText("Tử Vi");
   await ds.getByTestId("cum-chip-loc").filter({ hasText: /^Mệnh$/ }).click();
   await expect(ds.getByTestId("cum-dem")).toContainText("Đang hiện 14 trang");
-  await expect(ds.locator("section li")).toHaveCount(14);
+  await expect(ds.locator("section li:visible")).toHaveCount(14);
   await ds.getByTestId("cum-tim").fill("thai duong");                 // gõ không dấu vẫn khớp
-  await expect(ds.locator("section li")).toHaveCount(1);
+  await expect(ds.locator("section li:visible")).toHaveCount(1);
   await ds.getByRole("button", { name: "Bỏ lọc" }).click();
-  await expect(ds.locator("section li")).toHaveCount(168);
+  await expect(ds.locator("section li:visible")).toHaveCount(168);
   await ds.getByTestId("cum-tim").fill("không có sao này");
   await expect(ds).toContainText("Không có trang nào khớp");
   await ds.getByTestId("cum-tim").fill("");
   await ds.getByTestId("cum-chip-nhom").filter({ hasText: "Thái Dương" }).click();
   await expect(page).toHaveURL(/#nhom-thai-duong$/);
-  const top = await page.locator("#nhom-thai-duong").evaluate((e) => e.getBoundingClientRect().top);
-  expect(top).toBeGreaterThan(64 + 44 - 2);                           // không bị menu + thanh mảng che
 });
 
 test("mục lục 64 quẻ theo quái trên; cặp số lọc 'Có số 7' ra đủ 9 cặp", async ({ page }) => {
   await page.goto("/kinh-dich/que");
   await expect(page.getByTestId("danh-sach-cum").locator("section")).toHaveCount(8);
-  await expect(page.locator("#nhom-thien li")).toHaveCount(8);
+  await expect(page.locator("#nhom-thien li:visible")).toHaveCount(8);
   await page.goto("/hop-doi/cap-so");
   const ds = page.getByTestId("danh-sach-cum");
   await ds.getByTestId("cum-chip-loc").filter({ hasText: /^Số 7$/ }).click();
-  await expect(ds.locator("section li")).toHaveCount(9);
+  await expect(ds.locator("section li:visible")).toHaveCount(9);
 });
 
 test("hub Huyền học: thẻ mảng đủ mọi cụm (không cắt còn 4)", async ({ page }) => {
@@ -229,14 +257,19 @@ test("menu đầu trang: bảng Huyền học có 3 cụm mới", async ({ page 
 test("xem ngày tốt: lối vào ngày tốt theo việc tháng này + tháng sau (12 link, có số ngày)", async ({ page }) => {
   await page.goto("/xem-ngay-tot");
   const k = page.getByTestId("ngay-tot-theo-viec");
-  await expect(k.getByRole("link")).toHaveCount(12);
-  await expect(k.getByRole("link").first()).toHaveAttribute("href", /^\/xem-ngay-tot\/cuoi-hoi-thang-\d{1,2}-\d{4}$/);
-  await expect(k).toContainText(/ngày tốt|chưa có ngày đủ tốt/);
+  await expect(k.getByRole("listitem")).toHaveCount(12);
+  await expect(k).toContainText(/\d+ ngày tốt/);                       // số do engine đếm đã điền
+  // tháng có ngày tốt = link; tháng 0 ngày (trang noindex) = chữ thường, không link
+  const lk = await k.getByRole("link").count(), khong = await k.getByText("chưa có ngày đủ tốt").count();
+  expect(lk + khong).toBe(12);
+  await expect(k.getByRole("link").first()).toHaveAttribute("href", /^\/xem-ngay-tot\/[a-z-]+-thang-\d{1,2}-\d{4}$/);
 });
 
 test("lịch âm năm: breadcrumb có link về mục lục /lich-am", async ({ page }) => {
   await page.goto("/lich-am/2027");
-  await expect(page.getByRole("navigation", { name: "Đường dẫn" }).getByRole("link", { name: "Lịch âm các năm" })).toHaveAttribute("href", "/lich-am");
+  expect(await breadcrumb(page)).toEqual(["Trang chủ", "Lịch âm", "Lịch âm 2027"]);
+  await expect(page.getByTestId("duong-dan").getByRole("link", { name: "Lịch âm" })).toHaveAttribute("href", "/lich-am");
+  expect(ldBreadcrumb(await page.content())).toEqual(["Trang chủ", "Lịch âm", "Lịch âm 2027"]);
 });
 
 test("Tử vi: lớp hạn + trường phái trong 'Hiển thị'; điện thoại hàng điều khiển ≤ 2 hàng", async ({ page }) => {
