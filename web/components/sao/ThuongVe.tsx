@@ -10,6 +10,7 @@ import { Sparkles, UserPlus, X } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { loiThuongVe } from "@/lib/loi-sao";
 import { coTaiKhoan, supabase } from "@/lib/supabase/trinh-duyet";
+import { choRanh } from "@/lib/cho-ranh";
 
 const CACH = 5 * 60_000;
 const KHOA_LUC = "hbt.thuong_ve.luc";
@@ -19,8 +20,16 @@ export function ThuongVe() {
 
   useEffect(() => {
     if (!coTaiKhoan()) return;
+    // PERF-2: khách chưa từng đăng nhập (không có cookie/khoá phiên Supabase) → khỏi nạp supabase-js (68 KB) chỉ để biết là "chưa có phiên".
+    try {
+      const coPhien = /(?:^|;\s*)sb-[^=]*-auth-token/.test(document.cookie)
+        || Object.keys(localStorage).some((k) => k.startsWith("sb-") && k.endsWith("-auth-token"));
+      if (!coPhien) return;
+    } catch { /* storage bị chặn: cứ kiểm tra như cũ */ }
     let huy = false;
     void (async () => {
+      await choRanh();   // đã đăng nhập: kiểm tra sổ Sao khi trang đã rảnh, không tranh CPU lúc hydrate
+      if (huy) return;
       const sb = await supabase();
       const uid = (await sb?.auth.getSession())?.data.session?.user.id;
       if (!sb || !uid) return;

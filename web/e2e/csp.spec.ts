@@ -38,12 +38,15 @@ for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong
   });
 }
 
-test("GTM nạp ngay khi mở trang (không chờ đồng ý): đoạn khởi động có nonce + gtm.js chạy được, không vi phạm CSP", async ({ page }) => {
+test("GTM nạp khi người dùng tương tác (PERF-2; không chờ đồng ý): đoạn khởi động có nonce + gtm.js chạy được, không vi phạm CSP", async ({ page }) => {
   const vp = ghiViPham(page);
   await page.route(/googletagmanager\.com/, (r) => r.fulfill({ status: 200, contentType: "text/javascript", body: "window.__gtm_da_tai=1;" }));
   await page.goto("/");
   await page.evaluate(() => localStorage.removeItem("hbt.dong-y-cookie.v1"));
   await page.reload();
+  // PERF-2: gtm.js chờ tương tác đầu tiên (hoặc 8 giây) để không nằm trong Total Blocking Time.
+  expect(await page.evaluate(() => (window as unknown as { __gtm_da_tai?: number }).__gtm_da_tai)).toBeUndefined();
+  await page.mouse.wheel(0, 200);
   await expect.poll(() => page.evaluate(() => (window as unknown as { __gtm_da_tai?: number }).__gtm_da_tai)).toBe(1);
   expect(vp).toEqual([]);
 });
