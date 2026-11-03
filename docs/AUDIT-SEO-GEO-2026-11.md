@@ -1,0 +1,126 @@
+# Kiểm toán SEO + GEO toàn site hieuban.com (AUD, 2026-11-03)
+
+Chủ dự án giao: gọi agent SEO/GEO giỏi, audit toàn site, phân loại URL nào là trang engine dựng, URL nào cần SEO/GEO
+(AI trích một phần nhỏ rồi người đọc bấm về web), kiểm xem có dính "nội dung AI tạo hàng loạt" không, lấy dữ liệu
+engine bù nội dung, đề xuất cách làm tốt nhất. **Khâu của vòng tăng trưởng: THU HÚT** (Search + câu trả lời AI → công
+cụ). Đo bằng: hiển thị/nhấp Search Console theo sitemap cụm, `landing_viewed` có nguồn AI, tỉ lệ trang được index.
+
+Bốn agent làm độc lập trên site thật (~1.300 lượt tải, không sửa repo), em đối chiếu chéo và tự kiểm lại các phát
+hiện quan trọng nhất. Báo cáo gốc từng agent (số đo, bảng, script tái lập được):
+
+| Tệp | Nội dung |
+|---|---|
+| [`audit-2026-11/A-url-inventory.md`](audit-2026-11/A-url-inventory.md) | Kiểm kê 1.575 URL, phân loại, robots ↔ sitemap ↔ canonical, trang mỏng, ngân sách thu thập |
+| [`audit-2026-11/B-noi-dung-hang-loat.md`](audit-2026-11/B-noi-dung-hang-loat.md) | Đo trùng lặp theo cụm (cụm 5–6 từ, Jaccard), giọng AI, tỉ lệ nháp / thẩm định, 15 URL tệ nhất |
+| [`audit-2026-11/C-geo.md`](audit-2026-11/C-geo.md) | AI có lấy được câu trả lời không, mẫu "câu mồi trích dẫn" 8 loại trang, data-nosnippet, đo lượt từ AI |
+| [`audit-2026-11/D-du-lieu-engine.md`](audit-2026-11/D-du-lieu-engine.md) | Phép tính engine chưa lên trang, khuôn trang "dữ kiện trước", kho dữ kiện có mã |
+
+## 1. Kết luận ngắn
+
+1. **Kỹ thuật nền tốt.** 195/195 trang mẫu trả 200, canonical tự trỏ, 1 H1, tiêu đề/mô tả đúng độ dài, nội dung
+   nằm trong HTML máy chủ, bot AI (OAI-SearchBot, PerplexityBot) và Googlebot nhận giống người dùng. TTFB p50 0,65 s.
+2. **Rủi ro "nội dung hàng loạt" có thật nhưng KHÔNG nằm ở trang kiến thức** — nằm ở **~322 trang theo tuổi** (xông
+   đất, làm nhà, hướng hợp tuổi, năm theo tuổi): phần riêng chỉ 15–22 %, nhiều cặp trang gần trùng (hướng hợp tuổi:
+   146/1.035 cặp Jaccard > 0,6 — vì cung phi lặp 9 năm, thực chất ~9 bài). Trang kiến thức (quẻ, cung, chính tinh, thập
+   thần, nhật chủ, số, cặp số, tứ hoá, dấu hiệu…) **an toàn**: phần riêng 54–96 %, không cặp nào gần trùng.
+3. **Giọng AI không phải vấn đề chính** (0–0,9 lần/1.000 từ). Có một lỗi thật: câu "điều quan trọng là" (nằm trong
+   danh sách cấm `cum_cam`) hiện trên mọi trang `/nam/*/tuoi-*` — **đã sửa trong PR này**.
+4. **GEO: câu trả lời bị chôn.** Ở ~600 trang kiến thức, "Trả lời nhanh" đứng sau ~110–150 chữ lặp (khung tác giả,
+   chú thích hình, dải QR "Quét để mở bài này" là chữ HTML thật) → **đã sửa trong PR này**. Còn lại: câu đầu chưa tự
+   đứng (không nêu tên đối tượng), lý do để bấm nằm cuối trang và giống hệt mọi trang.
+5. **Uy tín (E-E-A-T) là điểm yếu lớn nhất còn lại**: 51/51 tệp KB ở trạng thái nháp, sổ thẩm định có **0** trang đã
+   thẩm định (chỉ 12 trang ý nghĩa số chuyên gia tự viết). Máy không làm thay được phần này.
+
+## 2. URL nào là gì — và nên đối xử thế nào
+
+| Nhóm | Số URL | Ví dụ | Vai trò | Index | Mồi GEO (lộ ra để AI trích) | Giữ sau cú bấm |
+|---|---|---|---|---|---|---|
+| (a) Công cụ / trang trụ | 19 | `/tu-vi`, `/than-so`, `/xem-ngay-tot` | Trang trụ của silo, nơi chuyển đổi | Có | 1 câu "công cụ này cho bạn biết gì + cần nhập gì" ở đầu (hiện chưa có) | Kết quả cá nhân |
+| (b) Trang ENGINE dựng theo ngày / năm / tuổi | 1.015 | `/xem-ngay-tot/2026-12-12`, `/nam/2027/tuoi-1990`, `/tuoi-xong-dat/2027/tuoi-1985`, `/bat-tu/menh-theo-nam/…` | Đón truy vấn mùa vụ dài đuôi | **Có, nhưng cửa sổ hẹp + chỉ khi có dữ kiện riêng** | Dữ kiện chung đúng-cho-mọi-người: "Tuổi 1985 năm 2027 (tuổi mụ 43) không phạm Kim lâu…", "Tháng 12/2026 có 4 ngày tốt cưới hỏi…" | Xung tuổi riêng, lá số riêng, sao ở cung nào trên lá của mình |
+| (c) Trang KIẾN THỨC từ KB | 511 | `/tu-vi/sao-o-cung/…`, `/kinh-dich/que/que-1-can`, `/than-so/y-nghia-so/so-7` | Nền tri thức, được AI trích nhiều nhất | Có | Câu định nghĩa tự đứng: "Trong Tử vi Đẩu Số, sao Tử Vi ở cung Mệnh…" + 1 dữ kiện tính được | "Trên lá số của bạn sao này nằm ở đâu" |
+| (d) Blog | 23 | `/blog/than-so-hoc-la-gi` | Bài trụ chủ đề rộng | Có (gộp hai bài trùng ý định "thần số học là gì") | Đoạn trả lời thẳng đầu bài | Công cụ |
+| (e) Pháp lý / tiện ích | 7 | `/dieu-khoan` | Niềm tin | Có | — | — |
+
+Ngoài sitemap còn ~87 URL đang `index` (trang ngày theo việc của tháng đã qua, `/lich-am` ngoài 2024–2029) → lệch
+robots ↔ sitemap, xem P1.
+
+## 3. Cách tiếp cận đề xuất: "Dữ kiện trước, ít trang hơn, câu mồi tự đứng"
+
+So ba hướng: (A) viết thêm văn cho trang mỏng — **loại**: thêm văn AI đúng là thứ Google gọi là nội dung hàng loạt;
+(B) noindex hàng loạt — an toàn nhưng mất truy vấn mùa Tết; (C) **chọn**: mỗi trang chỉ được index khi có **dữ kiện
+riêng do engine tính** (con số, bảng, quan hệ kiểm lại được), phần giải thích chung dời lên trang mẹ một lần, câu đầu
+"Trả lời nhanh" tự đứng và mang một dữ kiện mà AI muốn trả lời đúng thì phải trích kèm.
+
+Ba nguyên tắc:
+
+1. **Dữ kiện trước, văn sau.** Khuôn trang: Trả lời nhanh (dữ kiện) → bảng tính → sách xưa nói gì → giải thích ngắn
+   → câu tự soi → mời dùng công cụ. Engine đã tính sẵn rất nhiều thứ chưa lên trang (báo cáo D, 15 mục): quẻ có bát
+   cung, thế/ứng, nạp giáp 6 hào, hỗ/thác/tổng quái, 6 quẻ biến; sao ở cung biết cung Mệnh luôn có sao gì (86/154 cặp);
+   mệnh theo năm có 12 trụ tháng kèm ngày giao tiết riêng từng năm; trang ngày có năm sinh xung với ngày đó.
+2. **Mỗi trang phải có lý do tồn tại.** Đo phần riêng trên **chữ trang thật** cho cả trang engine (hiện `do_rieng`
+   chỉ đo 13 họ trang KB). Dưới ngưỡng → gộp/noindex tự động, như lưới an toàn của SEO-K.
+3. **Câu mồi trích dẫn.** Mẫu đã có sẵn và tốt: "Sinh trước Tết 27/01/1990 thì tính theo năm 1989" — dữ kiện thật, AI
+   muốn đúng phải trích, tự gợi người đọc kiểm tra trường hợp của mình. Báo cáo C có chữ mẫu cho 8 loại trang.
+
+## 4. Đã làm trong PR này (an toàn, có test)
+
+| Mã | Việc | Test |
+|---|---|---|
+| AUD-1 | Trang kiến thức (~600): "Trả lời nhanh" lên ngay dưới tiêu đề, trước hình + dải QR; dải QR và khung tác giả mang `data-nosnippet` (vẫn hiện cho người đọc, schema tác giả không đổi) | `web/e2e/aud-geo.spec.ts` |
+| AUD-11 | Bỏ "điều quan trọng là", "Hãy để" khỏi KB trang năm (`nam_tong_quan_kb.json`) | `test_kb_nam_khong_giong_ai` |
+| AUD-12 | Câu "trùng chu kỳ" bỏ "~22 triệu người" (ước tính dân số, trái TS-V3c) — chỉ nói điều suy ra từ phép tính | `test_thanso_trung_chu_ky.py` |
+
+Không migration, không dependency, không đổi phép tính → không tăng `ENGINE_VERSION`.
+
+## 5. Lộ trình tiếp theo
+
+### P0 — em làm được ngay, không đổi quyết định cũ (chỉ cần anh nói "làm")
+
+1. **Khối "Cấu trúc quẻ"** cho 64 trang quẻ (dữ kiện engine đã có, chỉ chưa xuất ra).
+2. **Sao ở cung: "cung Mệnh / tam phương luôn có sao gì"** (`tuvi_vi_tri`, đối chứng 60 lá) — họ trang này đang sát ngưỡng phần riêng (thấp nhất 0,33).
+3. **Khoá 250 con số gõ tay trong `bo_sung_*.json`** bằng test đối chiếu calc (hiện đúng cả 250 nhưng không có gì giữ khi calc đổi).
+4. **Câu 1 "Trả lời nhanh" tự đứng** (nêu tên đối tượng + bộ môn) cho quẻ, dấu hiệu nhà, sao ở cung, cặp số — sửa ở engine, có test "câu đầu chứa tên đối tượng".
+5. **Bộ đo phần riêng cho trang engine** (đo trên chữ trang thật, báo cáo — chưa tự noindex) để có số trước khi quyết P1.
+6. **Đo lượt từ AI**: `landing_viewed` thêm mã nguồn `ai` (từ referrer chatgpt/perplexity/gemini/copilot/claude, không lưu URL đầy đủ).
+7. **`llms.txt` gọn ≤ 15 KB** + thêm cụm mùa Tết (`/nam/*`, `/thoi-gian-toi`); bỏ ví dụ ngày đã noindex.
+
+### P1 — cần anh quyết (đổi quyết định đã chốt)
+
+| # | Đề xuất | Lý do (số đo) | Đụng quyết định |
+|---|---|---|---|
+| Q1 | Trang theo tuổi (xông đất, làm nhà, năm theo tuổi): **dời khối giải thích chung lên trang năm**, trang tuổi chỉ giữ dữ kiện riêng; **index chỉ năm âm sắp tới** (bỏ năm đang qua sau Tết) | Phần riêng 15–22 %; cùng tuổi khác năm Jaccard 0,47–0,57 | SEO-L (index năm hiện tại + năm sau) |
+| Q2 | **Gộp hướng hợp tuổi 46 → ~9 trang theo cung phi** (năm sinh → 308 về trang cung phi, giữ dòng riêng năm sinh trong bảng) | 146/1.035 cặp gần trùng, Jaccard tối đa 0,71 | SEO-K (gộp nam+nữ thành 46 trang) |
+| Q3 | Trang ngày tốt theo việc **có 0 ngày tốt → noindex + bỏ khỏi sitemap** (vd "mua xe": 9/25 tháng 0 ngày) | Trang không có câu trả lời | SEO-L (2) |
+| Q4 | Rút cửa sổ index trang ngày +399 → +180 ngày **sau 90 ngày theo dõi Search Console** | 406 trang, 68 % chữ chung | SEO-K (6) |
+| Q5 | Câu "tập quán, không phải tiên đoán" ở `/nam`, `/xem-sao-han` **bỏ data-nosnippet** để AI trích kèm | AI trích lời tục lệ mà thiếu câu rào thì sai tinh thần hơn | SEO-M (4) |
+| Q6 | Mở `Google-Extended` (grounding trong Gemini; không ảnh hưởng AI Overviews) | Thêm một kênh AI trích dẫn | BM-2 |
+
+### P2 — nền móng nội dung + dữ liệu
+
+1. **Kho dữ kiện có mã** `engine/app/kb/su_kien.py`: mỗi con số một mã ổn định (vd `sk.que.29.ho_quai`), dùng chung
+   cho trang, Trả lời nhanh, llms.txt, hỏi đáp; ảnh chụp giá trị `fixtures/golden/su_kien.json` + test → PR nào làm
+   calc đổi số là thấy ngay. Chữ KB viết chỗ giữ `{sk:mã}` thay vì gõ số. **Không cần Postgres** (git vẫn là nguồn KB).
+2. **Chỉ số thứ hai `su_kien_rieng`** (đếm dữ kiện riêng mỗi trang) — chỉ số cụm 6 từ hiện phạt câu dữ kiện viết
+   theo khung (thêm câu "Mệnh luôn có…" làm điểm giảm 0,328 → 0,318 dù trang hay hơn).
+3. **`bo_sung_menh_nam.json`** (78 trang, phần riêng 34 %, chưa có bổ sung).
+4. **Gắn `source_id` từng mục** cho `tuvi_kb`, `battu_kb` (hiện chỉ nguồn chung cả tệp, vẫn `can_doi_chieu`).
+5. **`citation` thành CreativeWork có URL** (ctext) thay chuỗi chữ; Person Đức Luân thêm `sameAs` (chờ link thật — 4i).
+6. Trang công cụ trụ có câu trả lời ở đầu; lá số mẫu có Trả lời nhanh + `.md`; trang ngày/tuổi/năm có dòng cập nhật + biên soạn.
+7. Gộp hai bài blog trùng ý định "thần số học là gì" (giữ bài mạnh hơn, 308 bài kia).
+
+## 6. Việc của anh (máy không làm thay được)
+
+- **Thẩm định thật theo Search Console** (`scripts/tham_dinh.py hang-doi --gsc Trang.csv`): mỗi trang anh đọc + duyệt
+  là một trang E-E-A-T thật. Đề xuất 10 trang/tuần, bắt đầu từ cụm có hiển thị cao. Đây là đòn bẩy uy tín lớn nhất.
+- **`sameAs`** cho tổ chức + anh (mục 4i `VIEC-CUA-ANH.md`) — AI cần thấy nơi khác trên web nhắc tới site / anh.
+- **Kênh GA4 "AI assistants"** (mục D `DE-XUAT-CHAT-LUONG-NOI-DUNG.md`) + mỗi tháng tự hỏi 20 câu cố định trên ChatGPT/Perplexity/Gemini xem site có được trích không.
+- Quyết Q1–Q6 ở mục 5.
+
+## 7. Ghi chú về độ tin
+
+- Số đo phần riêng của agent B đo trên chữ trang thật (bỏ menu/chân trang), nên thấp hơn số `do_rieng` của engine
+  (chỉ đo chữ engine trả). Hai cách đo cùng chiều kết luận.
+- Nguồn bên ngoài về llms.txt / GA4 phần lớn từ bên bán dịch vụ; thông tin Google-Extended lấy từ bài tóm tắt bên thứ
+  ba — cần đối chiếu trang gốc của Google trước khi quyết Q6.
+- Hai test e2e "Hôm nay: Việc 0 đồng tuần này" (`dau-hieu.spec.ts`) hỏng cả khi chưa có thay đổi của PR này (lỗi có
+  sẵn, phụ thuộc ngày chạy) — để riêng, không sửa trong phạm vi audit.

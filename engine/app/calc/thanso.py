@@ -289,13 +289,14 @@ def chu_ky_9_nam(
 
 
 def so_nguoi_trung_chu_ky() -> dict[str, str]:
-    """Chu kỳ chỉ phụ thuộc ngày+tháng sinh → 1/366 dân số có chuỗi y hệt."""
+    """Chu kỳ năm cá nhân chỉ phụ thuộc ngày + tháng sinh (năm xem cộng vào như nhau cho mọi người).
+
+    Chỉ nói điều suy ra từ phép tính — không ước tính số người trên thế giới (TS-V3c)."""
     return {
         "ty_le": "1/366",
-        "uoc_tinh_toan_cau": "~22 triệu người",
         "y_nghia": (
-            "Chuỗi năm cá nhân của anh trùng khít với ~22 triệu người khác, "
-            "suốt đời, không lệch một năm nào."
+            "Chuỗi năm cá nhân chỉ phụ thuộc ngày và tháng sinh: ai cùng ngày, cùng tháng sinh với bạn "
+            "thì có chuỗi năm cá nhân y hệt, không lệch năm nào."
         ),
     }
 

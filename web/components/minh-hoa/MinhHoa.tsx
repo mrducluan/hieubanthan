@@ -52,7 +52,7 @@ function ChanHinh({ duong, sang }: { duong: string; sang: boolean }) {
   try { qr = maHoaQr(url); } catch { return null; }
   const n = qr.kichThuoc + 8;                    // cạnh = số ô × 2px → mỗi ô sắc nét kể cả màn hình thường, chụp màn hình vẫn quét được
   return (
-    <div className={`mt-3 flex items-center justify-center gap-3 border-t pt-3 ${sang ? "border-[#b8892b]/30" : "border-line/50"}`} data-testid="minh-hoa-qr">
+    <div className={`mt-3 flex items-center justify-center gap-3 border-t pt-3 ${sang ? "border-[#b8892b]/30" : "border-line/50"}`} data-testid="minh-hoa-qr" data-nosnippet="">
       <svg viewBox={`0 0 ${n} ${n}`} width={n * 2} height={n * 2} shapeRendering="crispEdges" role="img" aria-label={`Mã QR mở ${TEN_MIEN}${duong}`}
         className={`shrink-0 rounded-md ${sang ? "ring-1 ring-[#b8892b]/40" : ""}`}>
         <rect width={n} height={n} fill="#f4efe2" />

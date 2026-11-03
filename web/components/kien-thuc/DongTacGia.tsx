@@ -21,7 +21,7 @@ export function DongTacGia({ chu_bien, tac_gia, tham_dinh, duyet_xuat_ban }: Pro
   const nguoi = tac_gia ?? tham_dinh?.nguoi ?? chu_bien;
   const cg = CHUYEN_GIA[nguoi];
   return (
-    <div className="mt-5 flex items-start gap-3 rounded-2xl border border-line/70 p-4" data-dong-tac-gia>
+    <div className="mt-5 flex items-start gap-3 rounded-2xl border border-line/70 p-4" data-dong-tac-gia data-nosnippet="">
       <span aria-hidden
         className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/50 bg-gold/10 font-serif text-base text-gold">
         {cg ? cg.ten.split(" ").map((w) => w[0]).join("") : "?"}

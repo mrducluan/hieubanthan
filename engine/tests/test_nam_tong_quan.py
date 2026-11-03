@@ -163,3 +163,27 @@ def test_bang_con_giap_co_nam_sinh_trang():
     assert g["Ngọ"]["nam_sinh_trang"] == [1966, 1978, 1990, 2002]
     assert sum(len(r["nam_sinh_trang"]) for r in g.values()) == 46
     assert N.theo_tuoi(2027, 1997)["diem_nhan"][1]["tieu_de"] == "Năm Đinh trùng can tuổi bạn"
+
+
+def test_kb_nam_khong_giong_ai():
+    """AUD-11: chữ KB trang năm / năm theo tuổi không chứa cụm "giọng AI" của `cum_cam`.
+    Bỏ các từ chuyên môn trùng danh sách (ngũ hành "khắc") — đó là thuật ngữ, không phải giọng văn."""
+    from pathlib import Path
+
+    data = Path(__file__).resolve().parents[1] / "app" / "kb" / "data"
+    cum = json.loads((data / "tuvi_doi_song_kb.json").read_text(encoding="utf-8"))["cum_cam"]
+    cum = [c.lower() for c in cum if c.lower() not in {"khắc"}]
+    kb = json.loads((data / "nam_tong_quan_kb.json").read_text(encoding="utf-8"))
+
+    def chu(o):
+        if isinstance(o, str):
+            yield o
+        elif isinstance(o, dict):
+            for v in o.values():
+                yield from chu(v)
+        elif isinstance(o, list):
+            for v in o:
+                yield from chu(v)
+
+    loi = [(c, s[:80]) for s in chu(kb) for c in cum if c in s.lower()]
+    assert loi == [], loi

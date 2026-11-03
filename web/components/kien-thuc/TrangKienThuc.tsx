@@ -155,13 +155,15 @@ export async function TrangKienThucView(params: Thamso) {
         <DongTacGia chu_bien={t.chu_bien} tac_gia={t.tac_gia} tham_dinh={t.tham_dinh} duyet_xuat_ban={t.duyet_xuat_ban} />
       </header>
 
-      <MinhHoa mh={t.minh_hoa} duong={duong} />
-      <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-6" />
-
+      {/* AUD-1 (2026-11): "Trả lời nhanh" đứng ngay dưới tiêu đề — trước hình + dải QR — để máy tìm kiếm / AI gặp câu
+          trả lời trong ~50 chữ đầu thay vì sau ~110–150 chữ chú thích hình. */}
       <section aria-label="Trả lời nhanh" className="mt-6 rounded-2xl border border-gold/30 bg-gold/5 p-5">
         <p className="eyebrow">Trả lời nhanh</p>
         <p className="mt-2 text-lg leading-relaxed text-fg">{t.tra_loi_nhanh}</p>
       </section>
+      <MinhHoa mh={t.minh_hoa} duong={duong} />
+      <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-6" />
+
 
       {t.goc_nhin && <GocNhinChuyenGia goc_nhin={t.goc_nhin} loai={t.loai} />}
 

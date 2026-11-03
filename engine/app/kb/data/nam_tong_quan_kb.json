@@ -66,7 +66,7 @@
       "binh": "Không tam hợp, lục hợp hay xung theo địa chi; vài tuổi có quan hệ hình, hại nhẹ theo dân gian — ghi ở cột địa chi.",
       "luu_y": "Tuổi bố/mẹ xung với tuổi con theo địa chi. Đây chỉ là quan niệm dân gian: tình thương và cách nuôi dạy quyết định chuyện cha con, mẹ con hoà hợp."
     },
-    "ranh_gioi": "Con cái là chuyện duyên và sức khoẻ. Hãy để sức khoẻ của mẹ, điều kiện gia đình và lời khuyên của bác sĩ đi trước con giáp; không nên ép ngày sinh hay can thiệp y khoa chỉ để con đúng tuổi."
+    "ranh_gioi": "Con cái là chuyện duyên và sức khoẻ. Sức khoẻ của mẹ, điều kiện gia đình và lời khuyên của bác sĩ luôn đi trước con giáp; không nên ép ngày sinh hay can thiệp y khoa chỉ để con đúng tuổi."
   },
   "cuoi_hoi": {
     "cach_tinh": "Dân gian xét Kim lâu cưới theo tuổi mụ của cô dâu: tuổi mụ = năm cưới − năm sinh âm lịch + 1, chia 9 dư 1, 3, 6, 8 là phạm Kim lâu. Có nơi xét thêm tuổi chú rể hoặc tính theo cách khác — hệ thống chỉ tính theo cô dâu, cách phổ biến nhất.",
@@ -105,7 +105,7 @@
       "bi_khac": "bị bạn khắc",
       "binh_hoa": "cùng hành"
     },
-    "tu_hoa": "Bốn sao hoá của năm {can_chi} là chung cho mọi người; với riêng bạn, điều quan trọng là Lộc, Kỵ rơi vào cung nào trên lá số — cần ngày giờ sinh để xem.",
+    "tu_hoa": "Bốn sao hoá của năm {can_chi} là chung cho mọi người; với riêng bạn, phải xem Lộc, Kỵ rơi vào cung nào trên lá số — cần ngày giờ sinh để xem.",
     "ranh_gioi": "Đây là phần đọc chung theo năm sinh — mọi người cùng năm sinh đều giống nhau. Lá số Tử vi, Bát tự tính từ ngày giờ sinh của riêng bạn sát hơn; khi hai bên nói khác nhau, hãy tin phần đọc từ lá số."
   }
 }
