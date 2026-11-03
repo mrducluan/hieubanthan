@@ -36,7 +36,7 @@ test("phong thuỷ tuổi, hướng xấu năm, lá số mẫu: URL cũ → 308 
   // SEO-K → AUD-Q2: trang năm (trước QH-URL, một giới tính, bản gộp) đều 308 MỘT bước về dòng năm trên mục lục; .md → mục lục .md.
   expect(await tim308(request, "/phong-thuy/tuoi-1990-nam")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi#tuoi-1990" });
   expect(await tim308(request, "/phong-thuy/tuoi-1990-nu.md")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi.md" });
-  expect(await tim308(request, "/phong-thuy/huong-hop-tuoi/tuoi-1990-nu")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi#tuoi-1990" });
+  expect(await tim308(request, "/phong-thuy/huong-hop-tuoi/tuoi-1990-nu")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi/cung-can-dong-bac#nu-1990" });
   expect(await tim308(request, "/phong-thuy/huong-hop-tuoi/tuoi-1990-nam.md")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi.md" });
   expect(await tim308(request, "/phong-thuy/huong-hop-tuoi/tuoi-1990")).toEqual({ st: 308, den: "/phong-thuy/huong-hop-tuoi#tuoi-1990" });
   expect(await tim308(request, "/huong-xau-nam")).toEqual({ st: 308, den: "/phong-thuy/huong-xau-nam" });

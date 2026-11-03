@@ -60,7 +60,9 @@ def _moc(nam: int, tet: dt.date, tet_sau: dt.date) -> list[dict]:
         ("vu_lan", "Rằm tháng Bảy · Vu Lan", _am(15, 7, nam)),
         ("trung_thu", "Tết Trung thu (15/8 âm)", _am(15, 8, nam)),
         ("ong_tao", "Ông Công ông Táo (23 tháng Chạp)", _am(23, 12, nam)),
-        ("giao_thua", "Ngày cuối năm âm lịch (đêm Giao thừa)", tet_sau - dt.timedelta(days=1)),
+        # Người Việt hỏi "giao thừa 2027" là đêm đón Tết 2027 (cuối năm âm trước) — nêu cả hai đêm, tên rõ năm (rà soát 2026-11-03).
+        ("giao_thua_don", f"Đêm Giao thừa đón Tết {nam}", tet - dt.timedelta(days=1)),
+        ("giao_thua", f"Đêm Giao thừa cuối năm, đón Tết {nam + 1}", tet_sau - dt.timedelta(days=1)),
     ]
     return sorted(({"ma": m, "ten": ten, "duong": d.isoformat()} for m, ten, d in ds), key=lambda x: x["duong"])
 

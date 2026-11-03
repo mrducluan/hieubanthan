@@ -40,7 +40,8 @@ test("mục lục: 8 cung + bảng 46 năm sinh có neo, bản .md, sitemap ch�
 test("trang năm cũ (cả bản một giới tính, .md) 308 một bước về dòng năm trên mục lục", async ({ request }) => {
   for (const [cu, den] of [
     ["/phong-thuy/huong-hop-tuoi/tuoi-1990", "/phong-thuy/huong-hop-tuoi#tuoi-1990"],
-    ["/phong-thuy/huong-hop-tuoi/tuoi-1990-nu", "/phong-thuy/huong-hop-tuoi#tuoi-1990"],
+    ["/phong-thuy/huong-hop-tuoi/tuoi-1990-nu", "/phong-thuy/huong-hop-tuoi/cung-can-dong-bac#nu-1990"],   // biết giới tính → trang cung
+    ["/phong-thuy/huong-hop-tuoi/tuoi-1990-nam", "/phong-thuy/huong-hop-tuoi/cung-kham-bac#nam-1990"],
     ["/phong-thuy/tuoi-1985-nam", "/phong-thuy/huong-hop-tuoi#tuoi-1985"],
     ["/phong-thuy/huong-hop-tuoi/tuoi-1990.md", "/phong-thuy/huong-hop-tuoi.md"],
     ["/phong-thuy/tuoi-1990-nam.md", "/phong-thuy/huong-hop-tuoi.md"],

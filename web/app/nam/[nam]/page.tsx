@@ -86,7 +86,7 @@ export default async function Page(p: P) {
         <p className="mt-2 text-xs text-fg-faint">Sinh tháng 1 hoặc đầu tháng 2/{n} trước Tết thì thuộc năm {d.nam_truoc_tet.can_chi} ({d.nam_truoc_tet.nam}).</p>
       </section>
 
-      <section className="mt-8 rounded-2xl border border-line bg-surface/40 p-5" aria-labelledby="ca-nhan">
+      <section className="mt-8 rounded-2xl border border-line bg-surface/40 p-5" aria-labelledby="ca-nhan" data-nosnippet="">
         <h2 id="ca-nhan" className="text-xl">{c("ca_nhan.tieu_de", bien)}</h2>
         <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{c("ca_nhan.mo_ta", bien)}</p>
         <Link href={`/thoi-gian-toi?nam=${n}`} className="mt-3 inline-flex rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-bg" data-testid="nut-ca-nhan">{c("ca_nhan.nut", bien)}</Link>

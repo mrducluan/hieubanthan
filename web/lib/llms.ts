@@ -14,6 +14,7 @@ import { vanHanh } from "@/lib/van-hanh";
 import { dsBaiCms, tinhNangCms } from "@/lib/cms";
 import { homNayVN } from "@/lib/hoang-lich";
 import { namTuoiSeo } from "@/lib/nam";
+import { namAmHienTai } from "@/lib/tuoi-dan-gian";
 
 /** Mỗi cụm: mẫu URL (cụm lớn) + ví dụ ưu tiên (slug); thiếu thì lấy các trang đầu. Chỉ mục lục + ví dụ, không liệt kê hết. */
 const CUM: Record<string, { mau?: string; viDu?: string[] }> = {
@@ -23,11 +24,17 @@ const CUM: Record<string, { mau?: string; viDu?: string[] }> = {
   "menh-tuoi": { mau: "/bat-tu/menh-theo-nam/sinh-nam-{1950…2027}-menh-gi", viDu: ["sinh-nam-1990-menh-gi", "sinh-nam-1995-menh-gi", "sinh-nam-2000-menh-gi"] },
   "kinh-dich": { mau: "/kinh-dich/que/que-{1…64}-{tên}", viDu: ["que-1-can", "que-29-kham", "que-63-ky-te"] },
 };
-const catMo = (s: string, n = 150) => (s.length > n ? `${s.slice(0, s.lastIndexOf(" ", n - 1))}…` : s);
+const catMo = (s: string, n = 150) => {
+  if (s.length <= n) return s;
+  const i = s.lastIndexOf(" ", n - 1);
+  return `${s.slice(0, i > 0 ? i : n - 1)}…`;
+};
 
 
 export async function taoLlmsTxt(): Promise<string> {
-  const [ds, nam] = await Promise.all([mucLuc(), namTuoiSeo()]);
+  // Xông đất index theo Tết SẮP TỚI (năm âm hiện tại + 1, khớp `xongDatIndex`), khác năm menu từ Tết tới ~tháng 10.
+  const [ds, nam, namAm] = await Promise.all([mucLuc(), namTuoiSeo(), namAmHienTai()]);
+  const tet = namAm + 1;
   const vh = vanHanh();
   const h = homNayVN(), y = Number(h.slice(0, 4)), m = Number(h.slice(5, 7));
   const thangSau = m === 12 ? [1, y + 1] : [m + 1, y];
@@ -57,15 +64,15 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Xem tuổi làm nhà, cưới hỏi](${urlDayDu("/xem-tuoi-lam-nha")}): tuổi mụ có phạm Kim lâu, Hoang ốc, Tam tai không, năm thuận gần nhất; trang theo năm sinh dạng ${urlDayDu(`/xem-tuoi-lam-nha/${nam}/tuoi-1990`)}, bảng mọi tuổi một năm dạng ${urlDayDu(`/xem-tuoi-lam-nha/${nam}`)}.`,
     `- [Hướng xấu theo năm](${urlDayDu("/phong-thuy/huong-xau-nam")}): Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc + bàn phi tinh 9 cung (dạng ${urlDayDu(`/phong-thuy/huong-xau-nam/${nam}`)}).`,
     `- [Sao hạn theo tuổi](${urlDayDu("/xem-sao-han")}): sao Cửu Diệu của năm theo tuổi mụ và giới tính, lời đời thường + việc nên làm, không hướng dẫn cúng sao (bảng mọi tuổi dạng ${urlDayDu(`/xem-sao-han/${nam}`)}).`,
-    `- [Tuổi xông đất](${urlDayDu("/tuoi-xong-dat")}): tuổi hợp gia chủ cho Tết, tuổi nên tránh, giờ hoàng đạo mùng 1 (dạng ${urlDayDu(`/tuoi-xong-dat/${nam}/tuoi-1990`)}; bảng mọi tuổi gia chủ dạng ${urlDayDu(`/tuoi-xong-dat/${nam}`)}).`,
+    `- [Tuổi xông đất](${urlDayDu("/tuoi-xong-dat")}): tuổi hợp gia chủ cho Tết, tuổi nên tránh, giờ hoàng đạo mùng 1 (dạng ${urlDayDu(`/tuoi-xong-dat/${tet}/tuoi-1990`)}; bảng mọi tuổi gia chủ dạng ${urlDayDu(`/tuoi-xong-dat/${tet}`)}).`,
     `- [Xem ngày tốt](${urlDayDu("/xem-ngay-tot")}): hoàng lịch theo giờ Việt Nam — hoàng đạo/hắc đạo, trực, giờ hoàng đạo, việc nên làm/kiêng, tuổi xung; tìm ngày đẹp cưới hỏi, khai trương, về nhà mới cho tuổi người dùng.`,
     `- [Đổi lịch âm dương](${urlDayDu("/doi-lich-am-duong")}): đổi ngày dương ↔ âm theo âm lịch Việt Nam (giờ Hà Nội), can chi, tháng nhuận; lịch âm cả năm dạng ${urlDayDu(`/lich-am/${nam}`)}.`,
     "",
     `## Mùa Tết — năm ${nam}`,
     "",
     `- [Năm ${nam}: tổng quan](${urlDayDu(`/nam/${nam}`)}): can chi, nạp âm, Tết, Lập xuân, tam tai, kim lâu, hướng nên giữ yên — một trang cho mọi tuổi.`,
-    `- [Tử vi năm ${nam} theo tuổi](${urlDayDu(`/nam/${nam}/tuoi-1990`)}): mỗi năm sinh 1960–2005 một trang (dạng ${urlDayDu(`/nam/${nam}/tuoi-{năm sinh}`)}) — điều chung theo tuổi; phần riêng cần ngày giờ sinh ở ${urlDayDu("/thoi-gian-toi")}.`,
-    `- [Sinh con năm ${nam}](${urlDayDu(`/nam/${nam}/sinh-con`)}) · [Cưới hỏi năm ${nam}](${urlDayDu(`/nam/${nam}/cuoi-hoi`)}) · [Tuổi xông đất Tết ${nam}](${urlDayDu(`/tuoi-xong-dat/${nam}`)}) · [Sao hạn ${nam}](${urlDayDu(`/xem-sao-han/${nam}`)}) · [Lịch âm ${nam}](${urlDayDu(`/lich-am/${nam}`)})`,
+    `- [Tử vi năm ${nam} theo tuổi](${urlDayDu(`/nam/${nam}/tuoi-1990`)}): mỗi năm sinh 1960–2005 một trang (dạng ${urlDayDu(`/nam/${nam}/tuoi-{năm-sinh}`)}) — điều chung theo tuổi; phần riêng cần ngày giờ sinh ở ${urlDayDu("/thoi-gian-toi")}.`,
+    `- [Sinh con năm ${nam}](${urlDayDu(`/nam/${nam}/sinh-con`)}) · [Cưới hỏi năm ${nam}](${urlDayDu(`/nam/${nam}/cuoi-hoi`)}) · [Tuổi xông đất Tết ${tet}](${urlDayDu(`/tuoi-xong-dat/${tet}`)}) · [Sao hạn ${nam}](${urlDayDu(`/xem-sao-han/${nam}`)}) · [Lịch âm ${nam}](${urlDayDu(`/lich-am/${nam}`)})`,
     `- [Thời gian tới của bạn](${urlDayDu("/thoi-gian-toi")}): 12 tháng tới theo ngày giờ sinh (thần số, Tử vi, Bát tự, con giáp, phong thuỷ) — cần nhập hồ sơ.`,
     "",
     "## Trả lời nhanh theo câu hỏi hay gặp",
@@ -113,5 +120,15 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Điều khoản sử dụng](${urlDayDu("/dieu-khoan")})`,
     `- [Miễn trừ trách nhiệm](${urlDayDu("/mien-tru-trach-nhiem")})`,
     `- [Liên hệ](${urlDayDu("/lien-he")})`, "");
-  return dong.join("\n");
+  return bocUrl(dong.join("\n"));
+}
+
+/** URL trần (không nằm trong [chữ](link)) → <url>, mẫu có {…} → `mẫu`: bộ tách link của AI không dính dấu câu liền sau
+ *  ("…cung-kham-bac:", "…tuoi-1990;") và không biến mẫu thành link chết (rà soát GEO 2026-11-03). */
+export function bocUrl(s: string): string {
+  return s.replace(/(^|[^(<`\w])(https?:\/\/[^\s<>`()]+)/g, (_m, truoc: string, url: string) => {
+    const du = url.match(/[.,;:]+$/)?.[0] ?? "";
+    const goc = du ? url.slice(0, -du.length) : url;
+    return `${truoc}${goc.includes("{") ? `\`${goc}\`` : `<${goc}>`}${du}`;
+  });
 }

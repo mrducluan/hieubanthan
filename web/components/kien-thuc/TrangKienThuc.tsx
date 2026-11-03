@@ -66,6 +66,26 @@ async function metaGoc(params: Thamso): Promise<Metadata> {
 }
 
 /** Trang kiến thức một mục KB (QH-URL: /{mảng}/{cụm}/{trang}); route của từng mảng chỉ đổi đường dẫn → khoá chủ đề. */
+/** Lời mời cuối trang theo loại trang — câu hỏi người đọc chỉ trả lời được bằng dữ liệu của chính mình. */
+const LOI_MOI: Partial<Record<string, string>> = {
+  sao_cung: "Trên lá số của bạn, sao này nằm ở cung nào, sáng hay hãm, năm nào được hoá? Nhập ngày giờ sinh để xem — có từng bước an sao.",
+  sao: "Trên lá số của bạn, sao này nằm ở cung nào, sáng hay hãm? Nhập ngày giờ sinh để xem — có từng bước an sao.",
+  cung: "Cung này trên lá số của bạn có những sao nào, mười năm nào đi qua? Nhập ngày giờ sinh để xem.",
+  hoa_cung: "Năm sinh của bạn cho sao nào hoá Lộc, Quyền, Khoa, Kỵ, rơi vào cung nào? Nhập ngày giờ sinh để xem.",
+  que: "Gieo một quẻ cho đúng việc bạn đang băn khoăn — sáu hào, hào động, quẻ biến tính sẵn, có lời đời thường.",
+  so: "Số chủ đạo, linh hồn, sứ mệnh, năm cá nhân của chính bạn là bao nhiêu? Nhập tên và ngày sinh — có từng bước cộng.",
+  so_kep: "Tên và ngày sinh của bạn ra số kép nào theo bảng Chaldea? Nhập để xem từng bước cộng.",
+  nghe: "Số chủ đạo của bạn là bao nhiêu, hợp kiểu việc nào? Nhập tên và ngày sinh — có từng bước cộng.",
+  tinh_yeu: "Số chủ đạo của bạn là bao nhiêu, yêu theo kiểu nào? Nhập tên và ngày sinh — có từng bước cộng.",
+  nam_ca_nhan: "Năm nay bạn đang ở năm cá nhân số mấy, tháng này số mấy? Nhập ngày sinh để biết.",
+  no_nghiep: "Ngày sinh và tên của bạn có mang nợ nghiệp 13, 14, 16, 19 không, nằm ở chỉ số nào? Nhập để xem từng bước.",
+  cap_so: "Hai người cụ thể hợp ở đâu, dễ va ở đâu, nên cùng làm gì? Nhập ngày sinh của hai người.",
+  thap_than: "Tứ trụ của bạn có những thập thần nào, đậm hay nhạt? Nhập ngày giờ sinh để lập tứ trụ.",
+  nhat_chu: "Nhật chủ của bạn là can nào, thân mạnh hay yếu? Nhập ngày giờ sinh để lập tứ trụ.",
+  menh_nam: "Ngoài mệnh theo năm sinh, ngũ hành trong tứ trụ của bạn thiếu đủ thế nào? Nhập ngày giờ sinh để xem.",
+  dau_hieu: "Nhà bạn có dấu hiệu này không, nên xử lý gì trước, việc nào không tốn tiền? Khảo sát nhà miễn phí.",
+};
+
 export async function TrangKienThucView(params: Thamso) {
   const kq = await tai(params);
   if (!kq) notFound();
@@ -262,9 +282,11 @@ export async function TrangKienThucView(params: Thamso) {
       </section>
 
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-10" />
-      <aside className="glass mt-10 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center">
+      {/* Rà soát 2026-11-03: lời mời nói rõ người đọc sẽ nhận được gì, theo đúng loại trang; data-nosnippet để đoạn trích /
+          câu AI trích không dính lời mời. */}
+      <aside className="glass mt-10 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center" data-nosnippet="">
         <BookOpen className="size-6 shrink-0 text-gold" aria-hidden />
-        <p className="flex-1 text-fg-muted">Đọc chung chung chỉ là điểm bắt đầu. Xem con số, lá số của <b className="text-fg">chính bạn</b> — có từng bước tính để tự kiểm.</p>
+        <p className="flex-1 text-fg-muted">{LOI_MOI[t.loai] ?? <>Đọc chung chung chỉ là điểm bắt đầu. Xem con số, lá số của <b className="text-fg">chính bạn</b> — có từng bước tính để tự kiểm.</>}</p>
         <Button asChild><Link href={cd.mang}>Xem của tôi <ArrowRight aria-hidden /></Link></Button>
       </aside>
 

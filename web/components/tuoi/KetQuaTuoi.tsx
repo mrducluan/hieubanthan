@@ -3,7 +3,7 @@
 import Link from "@/components/khung/Lien";
 import { CalendarHeart, Compass, Home, Sparkles, Users } from "lucide-react";
 import type { HanNam, LamNha, SaoHan, XongDat } from "@/lib/tuoi-dan-gian";
-import { duongHanNam, duongLamNha, duongLamNhaNam, duongXongDat, duongXongDatNam } from "@/lib/tuoi-dan-gian";
+import { NAM_BANG_TU, duongHanNam, duongLamNha, duongLamNhaNam, duongXongDat, duongXongDatNam } from "@/lib/tuoi-dan-gian";
 
 // Bàn 9 cung, phía Nam ở trên (như la bàn phong thuỷ truyền thống).
 const LUOI = [["Tốn", "Ly", "Khôn"], ["Chấn", "Trung cung", "Đoài"], ["Cấn", "Khảm", "Càn"]];
@@ -160,7 +160,7 @@ export function KetQuaLamNha({ d, trangTuoi = false }: { d: LamNha; trangTuoi?: 
       {d.cach_dan_gian && <p className="glass rounded-2xl p-4 text-sm text-fg-muted" data-nosnippet="">{d.cach_dan_gian}</p>}
       {trangTuoi && d.muoi_nam?.length ? <MuoiNam d={d} /> : null}
       {trangTuoi ? <HanNamGon h={d.han_nam} /> : <BangHanNam h={d.han_nam} gon />}
-      <p className="text-xs text-fg-muted">{d.cach_tinh ?? <>Cách tính tuổi mụ, Kim lâu, Hoang ốc, Tam tai: <Link href={duongLamNhaNam(d.nam_xay)} className="underline">bảng mọi tuổi năm {d.nam_xay}</Link>.</>} {d.luu_y}</p>
+      <p className="text-xs text-fg-muted">{d.cach_tinh ?? (d.nam_xay >= NAM_BANG_TU ? <>Cách tính tuổi mụ, Kim lâu, Hoang ốc, Tam tai: <Link href={duongLamNhaNam(d.nam_xay)} className="underline">bảng mọi tuổi năm {d.nam_xay}</Link>.</> : null)} {d.luu_y}</p>
     </div>
   );
 }
@@ -190,7 +190,7 @@ export function KetQuaXongDat({ d, trangTuoi = false }: { d: XongDat; trangTuoi?
           Mùng 1 Tết ({tet}) — ngày {d.mung_mot.can_chi}, {d.mung_mot.hoang_dao ? "Hoàng đạo" : "Hắc đạo"}; giờ đẹp và hướng
           xuất hành chung cho mọi tuổi:{" "}
           <Link href={`/xem-ngay-tot/${d.mung_mot.ngay}`} className="text-gold underline">Xem đầy đủ hoàng lịch mùng 1</Link>
-          {" · "}<Link href={duongXongDatNam(d.nam.nam)} className="text-gold underline">bảng tuổi xông đất mọi gia chủ năm {d.nam.nam}</Link>
+          {d.nam.nam >= NAM_BANG_TU && <>{" · "}<Link href={duongXongDatNam(d.nam.nam)} className="text-gold underline">bảng tuổi xông đất mọi gia chủ năm {d.nam.nam}</Link></>}
         </p>
       ) : (
             <section className="glass rounded-2xl p-5" aria-labelledby="mung-mot">

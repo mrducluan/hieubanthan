@@ -96,6 +96,30 @@ là engine **tách hẳn dữ kiện chung của năm khỏi gói trang tuổi**
 viết theo khung: mục "cung Mệnh có sao gì" là dữ kiện mới thật nhưng làm điểm cụm 6 từ của họ "sao ở cung" giảm trung
 bình 0,015 (thấp nhất vẫn 0,311 > ngưỡng 0,30) — nên làm chỉ số thứ hai `su_kien_rieng` (P2-2) trước khi thêm dữ kiện.
 
+## 4c. Rà soát đợt 3 — review code độc lập + 3 agent đóng vai người dùng (2026-11-03)
+
+Chạy trên bản build production cục bộ (code mới). Báo cáo gốc: `audit-2026-11/E-REVIEW.md` (review code), `E-persona-A.md`
+(chị 46 tuổi, nhà cửa + Tết), `E-persona-B.md` (bạn 27 tuổi, thần số / Tử vi / quẻ), `E-persona-C.md` (máy trả lời AI đọc
+HTML thô: **178/210 điểm**). Bộ rà SEO toàn sitemap (992 trang): **0 lỗi**, TTFB p50 37 ms.
+
+Đã sửa ngay:
+- **BM-1 lọt**: trang dấu hiệu nhà ghi "Nháp AI tổng hợp …" ở mục Nguồn → luật lọc `cong_khai` + test quét MỌI trang kiến thức.
+- Link cũ `…/huong-hop-tuoi/tuoi-1981-nu|nam` 308 thẳng tới **trang cung của đúng người** (`…/cung-can-dong-bac#nu-1981`); bảng
+  mục lục ghi **hướng tốt nhất** cạnh từng cung; trang cung có câu "nhà quay hướng xấu thì có phải đổi nhà không".
+- Quẻ: **tên đầy đủ** trong tiêu đề + trả lời nhanh ("Thuần Khảm", "Thủy Lôi Truân"); khối Cấu trúc quẻ có chú giải Thế/Ứng,
+  nạp giáp, lục thân, hỗ/thác/tổng quái; từ điển thêm Nạp giáp, Thác quái, Tổng quái, Bát cung.
+- Tử vi: "Khi Tử Vi hãm" → "kém sáng" khi sao không có vị trí hãm; giải thích "toạ Mệnh", "vô chính diệu"; trang Hoá × cung
+  bỏ câu "Vũ Khúc ở đây ứng với các năm Nhâm" (đọc như ai cũng có) → "Tuỳ sao nằm ở cung này trên lá số của bạn: …".
+- llms.txt: xông đất theo **Tết sắp tới** (trước trỏ Tết vừa qua, noindex); URL trần bọc `<…>`, mẫu `{…}` bọc `` `…` ``.
+- Cặp số gõ ngược (`7-va-2`) 308 về `2-va-7` (trước 404); trang năm có cả "Giao thừa đón Tết {năm}" lẫn đêm cuối năm;
+  bảng sao hạn có neo `#tuoi-{năm}`; câu "có 0 ngày tốt" → "chưa có ngày nào đủ điều kiện".
+- Lời mời cuối trang kiến thức **theo loại trang** ("Trên lá số của bạn, sao này nằm ở cung nào, sáng hay hãm…") + `data-nosnippet`
+  (cả khối kêu gọi CMS, khối "năm của riêng bạn").
+- Review code: link bảng năm có chặn năm < 2006 (404), route đếm ngày tốt không vượt 12/2099, đo nguồn AI nhận `utm_source=chatgpt`,
+  không coi mail/docs.google.com là tìm kiếm.
+
+Cần chủ dự án quyết (luật / nội dung đã có từ trước, em không tự đổi): xem mục 6b.
+
 ## 5. Lộ trình tiếp theo
 
 ### P0 — ĐÃ LÀM (mục 4b)
@@ -153,6 +177,23 @@ bình 0,015 (thấp nhất vẫn 0,311 > ngưỡng 0,30) — nên làm chỉ s�
 - **`sameAs`** cho tổ chức + anh (mục 4i `VIEC-CUA-ANH.md`) — AI cần thấy nơi khác trên web nhắc tới site / anh.
 - **Kênh GA4 "AI assistants"** (mục D `DE-XUAT-CHAT-LUONG-NOI-DUNG.md`) + mỗi tháng tự hỏi 20 câu cố định trên ChatGPT/Perplexity/Gemini xem site có được trích không.
 - Quyết Q1–Q6 ở mục 5.
+
+## 6b. Câu hỏi cho anh (sau rà soát đợt 3)
+
+1. **Trang ngày vs trang "ngày tốt theo việc" nói ngược nhau**: `/xem-ngay-tot/2027-01-01` ghi ngày hắc đạo nhưng "hợp cưới
+   hỏi" (theo mục Nên của sách lịch), còn `/xem-ngay-tot/cuoi-hoi-thang-1-2027` không liệt kê ngày đó (luật chọn ngày loại vì
+   kiêng Nạp thái / Kết ước). Đề xuất: câu đầu trang ngày dùng đúng luật chọn ngày ("sách lịch ghi nên cưới hỏi, nhưng ngày
+   kiêng Nạp thái nên không xếp vào ngày tốt cưới hỏi"), và trang tháng ghi hoàng đạo / hắc đạo cạnh từng ngày.
+2. **Làm nhà "Thuận" nhưng là năm tuổi** (vd 1981 năm 2029): luật làm nhà chỉ xét Kim lâu, Hoang ốc, Tam tai. Có xét thêm năm
+   tuổi / xung tuổi không (nhiều nhà vẫn kiêng)? Đề xuất: không đổi mức, thêm dòng "năm tuổi — nhiều gia đình vẫn kiêng".
+3. **Trang "Sinh năm X mệnh gì" gợi hướng theo ngũ hành** (Mộc → Đông) có thể ngược Bát trạch của chính người đó (nữ 1981 Cấn:
+   Đông là Lục Sát). Đề xuất: bỏ gợi hướng theo ngũ hành ở trang mệnh, chỉ link sang trang cung phi nam / nữ.
+4. **Số 7 hai trang nói khác** (ý nghĩa số xếp 7 cùng nhóm 1, 5; trang tình yêu nói hợp 4, 7, 9) — trang ý nghĩa số do anh
+   biên soạn, em không sửa; anh muốn thống nhất theo bảng nào?
+5. **Công cụ "Nhà của bạn"** (nhà hướng Đông Nam): ghi "cùng nhóm hướng Tây — bố trí dễ" và gợi đặt cửa Tây Nam — cần em điều
+   tra luật Phong thuỷ đời sống không? (ngoài phạm vi SEO, có từ trước.)
+6. **CMS**: mẫu cụm "Hướng hợp tuổi" cũ có thể dùng biến `{nam}` — trang cung không có biến này nên sẽ hiện nguyên `{nam}`. Anh
+   (hoặc em khi có quyền CMS) kiểm mẫu cụm sau deploy.
 
 ## 7. Ghi chú về độ tin
 

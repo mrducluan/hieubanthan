@@ -11,7 +11,7 @@
     "tieu_de": "Khi {sao} ở cung {cung}, cung Mệnh có sao gì",
     "luon_co": "Khi {sao} ở cung {cung}, cung Mệnh luôn có {luon_co} (xét đủ 12 vị trí của Tử Vi).",
     "khong_co": "Khi {sao} ở cung {cung}, cung Mệnh không cố định một sao.",
-    "vo_chinh_dieu": "{n}/12 vị trí Mệnh vô chính diệu, mượn sao cung đối diện.",
+    "vo_chinh_dieu": "{n}/12 vị trí Mệnh không có chính tinh nào (vô chính diệu) — khi đó đọc mượn sao ở cung đối diện.",
     "cot": [
       "Chính tinh ở cung Mệnh",
       "Số vị trí trên 12"
@@ -19,8 +19,8 @@
     "dong_vcd": "Vô chính diệu (không có chính tinh)"
   },
   "sao_toa_menh": {
-    "tieu_de": "Khi {sao} toạ Mệnh: Tài Bạch, Quan Lộc, Thiên Di có sao gì",
-    "doan": "Xét đủ 12 vị trí của sao Tử Vi: khi {sao} ở cung Mệnh, ba cung tam phương tứ chính luôn có sao như bảng dưới — đây là bộ khung đi kèm {sao} trên mọi lá số có {sao} toạ Mệnh.",
+    "tieu_de": "Khi {sao} ở ngay cung Mệnh: Tài Bạch, Quan Lộc, Thiên Di có sao gì",
+    "doan": "Xét đủ 12 vị trí của sao Tử Vi: khi {sao} ở ngay cung Mệnh (toạ Mệnh), ba cung cùng nhìn với Mệnh — Tài Bạch, Quan Lộc, Thiên Di (tam phương tứ chính) — có sao như bảng dưới; đây là bộ khung đi kèm {sao} trên mọi lá số có {sao} ở Mệnh.",
     "cot": [
       "Cung",
       "Luôn có",
@@ -64,6 +64,22 @@
       "Hào 5",
       "Hào 6 (Thượng)"
     ],
-    "tra_loi": "Quẻ {ten} ({ten_han}), quẻ số {so} trong Kinh Dịch: {y}"
+    "tra_loi": "Quẻ {ten_day_du} ({ten_han}), quẻ số {so} trong Kinh Dịch: {y}",
+    "chu_giai": [
+      "Thế: hào đại diện người hỏi; Ứng: hào đại diện việc hoặc người phía bên kia.",
+      "Nạp giáp: gắn mỗi hào với một địa chi để biết hành của hào.",
+      "Lục thân: vai trò của hào so với hành của cung — Huynh Đệ, Tử Tôn, Thê Tài, Quan Quỷ, Phụ Mẫu.",
+      "Hỗ quái ghép hào 2–4 và 3–5 (diễn biến bên trong); thác quái đổi hết âm dương; tổng quái lật ngược sáu hào."
+    ]
+  },
+  "ten_tuong": {
+    "Càn": "Thiên",
+    "Đoài": "Trạch",
+    "Ly": "Hỏa",
+    "Chấn": "Lôi",
+    "Tốn": "Phong",
+    "Khảm": "Thủy",
+    "Cấn": "Sơn",
+    "Khôn": "Địa"
   }
 }

@@ -79,7 +79,7 @@ def tuoi(nam: int, gioi_tinh: str) -> dict:
          "dap": f"Theo nguyên tắc toạ hung hướng cát: thân bếp đặt ở phương xấu, miệng bếp quay về "
                 f"{', '.join(gy['mieng_bep']['huong'])}."},
         {"hoi": f"{gt.capitalize()} {nam} kê đầu giường hướng nào?",
-         "dap": f"Đầu giường nên quay về {', '.join(gy['dau_giuong']['huong'])} (quan niệm dân gian, ghi rõ nguồn)."},
+         "dap": f"Đầu giường nên quay về {', '.join(gy['dau_giuong']['huong'])} (quan niệm dân gian)."},
         {"hoi": f"{gt.capitalize()} {nam} ngồi làm việc quay mặt hướng nào?",
          "dap": f"Ưu tiên quay mặt về {', '.join(gy['ban_lam_viec']['huong'])}."},
         {"hoi": f"Sinh đầu năm {nam} (tháng 1, đầu tháng 2) thì tính mệnh quái thế nào?",
@@ -286,14 +286,18 @@ def cung_phi(slug: str) -> dict:
          "dap": f"Theo nguyên tắc toạ hung hướng cát: thân bếp đặt ở phương xấu ({ten_xau}), miệng bếp quay về "
                 f"{', '.join(gy['mieng_bep']['huong'])}."},
         {"hoi": f"Cung {q} kê đầu giường hướng nào?",
-         "dap": f"Đầu giường nên quay về {', '.join(gy['dau_giuong']['huong'])} (quan niệm dân gian, ghi rõ nguồn)."},
+         "dap": f"Đầu giường nên quay về {', '.join(gy['dau_giuong']['huong'])} (quan niệm dân gian)."},
         {"hoi": f"Cung {q} ngồi làm việc quay mặt hướng nào?",
          "dap": f"Ưu tiên quay mặt về {', '.join(gy['ban_lam_viec']['huong'])}."},
         {"hoi": f"Những ai có cung phi {q}?",
          "dap": f"Trong các năm 1960–2005: {ai}. Cung phi tính theo năm sinh và giới tính, nên vợ chồng cùng tuổi có thể khác cung."},
         {"hoi": f"Cung {q} hợp với cung nào khi ở chung nhà?",
-         "dap": f"Cùng nhóm {nhom}: {', '.join(x['quai'] for x in cung_nhom)} — bốn cung này chung bốn hướng tốt. "
+         "dap": f"Cùng nhóm {nhom}: {', '.join(x['quai'] for x in cung_nhom)} — cùng cung {q}, cả bốn cung chung bốn hướng tốt. "
                 "Hai người khác nhóm thường ưu tiên mệnh người trụ cột cho cửa chính, phòng riêng theo mệnh từng người."},
+        {"hoi": f"Nhà đang quay về hướng xấu với cung {q} thì có phải đổi nhà không?",
+         "dap": (f"Không cần. Bát trạch xét nhiều chỗ chứ không riêng cửa chính: người cung {q} có thể kê đầu giường, bàn làm việc, "
+                 f"miệng bếp quay về {tot[0]['huong']} hoặc {tot[1]['huong']}; người cùng nhà khác cung thì xếp phòng theo mệnh từng người. "
+                 "Đây là quan niệm tham khảo, không phải lý do để bán hay sửa lớn căn nhà đang ở.")},
         {"hoi": "Sinh tháng 1 hoặc đầu tháng 2 thì xem cung phi thế nào?",
          "dap": "Bát trạch lấy mốc Lập xuân (khoảng 3–5/2 dương lịch): sinh trước ngày này thì tính theo năm trước. "
                 "Có sách lấy mốc Tết âm lịch — công cụ Phong thuỷ cho bạn chọn mốc và nhập đúng ngày sinh."},

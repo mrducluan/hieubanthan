@@ -12,7 +12,7 @@ import { ArrowRight, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
-import { cungPhi, duongTuoi, type CungPhi, type HuongDuNien } from "@/lib/kien-thuc";
+import { cungPhi, dsCungPhi, duongTuoi, type CungPhi, type HuongDuNien } from "@/lib/kien-thuc";
 import { anhBai, catMoTa, goiLd, ldAnh, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 
 export const revalidate = 21600;
@@ -53,8 +53,15 @@ function The({ ten, h }: { ten: string; h: HuongDuNien }) {
 
 export default async function Page({ params: thamSo }: Props) {
   const params = await thamSo;
-  // Trang năm cũ (next.config.mjs đã 308; đây là lưới an toàn khi gọi thẳng route).
-  const m = params.slug.match(/^(tuoi-\d{4})(?:-(?:nam|nu))?$/);
+  // Trang năm cũ một giới tính (tuoi-1990-nu): biết giới tính → 308 thẳng tới trang cung của người đó, đúng dòng năm sinh.
+  const g = params.slug.match(/^tuoi-(\d{4})-(nam|nu)$/);
+  if (g) {
+    const dong = (await dsCungPhi()).tuoi.find((t) => t.nam === Number(g[1]));
+    if (!dong) notFound();
+    permanentRedirect(`${duongTuoi((g[2] === "nam" ? dong.nam_gioi : dong.nu_gioi).slug)}#${g[2]}-${g[1]}`);
+  }
+  // Trang năm gộp cũ (next.config.mjs đã 308 về dòng năm; đây là lưới an toàn khi gọi thẳng route).
+  const m = params.slug.match(/^(tuoi-\d{4})$/);
   if (m) permanentRedirect(duongTuoi(m[1]!));
   const c = await cungPhi(params.slug);
   if (!c) notFound();

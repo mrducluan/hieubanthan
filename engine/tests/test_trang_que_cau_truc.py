@@ -41,4 +41,13 @@ def test_tra_loi_nhanh_tu_dung():
     for k, _ in trang._ds_que():
         t = _t(k)
         ten = trang._doc("kinhdich_kb.json")["que"][k]["ten"]
-        assert t["tra_loi_nhanh"].startswith(f"Quẻ {ten}") and "Kinh Dịch" in t["tra_loi_nhanh"][:80], k
+        assert t["tra_loi_nhanh"].startswith("Quẻ ") and ten in t["tra_loi_nhanh"][:40] and "Kinh Dịch" in t["tra_loi_nhanh"][:90], k
+
+
+def test_ten_day_du_va_chu_giai():
+    # tên thường gọi: quẻ trên + quẻ dưới + tên; quẻ thuần → "Thuần …" (người tìm "quẻ Thuần Khảm", "Thủy Lôi Truân")
+    assert trang.ten_que_day_du("29") == "Thuần Khảm" and trang.ten_que_day_du("1") == "Thuần Càn"
+    assert trang.ten_que_day_du("3") == "Thủy Lôi Truân" and trang.ten_que_day_du("63") == "Thủy Hỏa Ký Tế"
+    t = _t("29")
+    assert "Thuần Khảm" in t["tieu_de"] and t["tra_loi_nhanh"].startswith("Quẻ Thuần Khảm")
+    assert any(x.startswith("Thế:") for x in _muc(t)["danh_sach"])

@@ -49,6 +49,7 @@ def test_tong_quan_moc_le():
     assert m["tet"]["duong"] == "2027-02-06"
     assert m["ram_gieng"]["duong"] == "2027-02-20"
     assert m["giao_thua"]["duong"] == "2028-01-25"
+    assert m["giao_thua_don"]["duong"] == "2027-02-05" and "đón Tết 2027" in m["giao_thua_don"]["ten"]
     ngay = [x["duong"] for x in d["moc"]]
     assert ngay == sorted(ngay)
 

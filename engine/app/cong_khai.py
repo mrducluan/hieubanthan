@@ -74,6 +74,10 @@ QUY_TAC: list[tuple[re.Pattern[str], str]] = [(re.compile(m), t) for m, t in [
      r"github\.com/nmhaaa3218/TuViMCP\); cổ ca", " Cổ ca"),
     (r"[;,] nháp AI chờ [^.\"]*\.", "."),
     (r" — nháp AI chờ duyệt\.", "."),
+    # Phong thuỷ (`phongthuy_kb._nguon`, lộ ở mục Nguồn trang dấu hiệu — agent rà soát 2026-11-03 bắt được)
+    (r"Nháp AI tổng hợp ", "Tổng hợp từ "),
+    (r"; (?:nháp AI, )?chưa đối chiếu nguyên văn\.", "."),
+    (r"(?i:nháp AI), chờ chủ dự án đối chiếu\.", ""),
     (r"(?i:dịch nghĩa \+ ý luận): nháp AI theo lối", "Dịch nghĩa + ý luận: theo lối"),
     (r"dịch nghĩa nháp AI từ", "dịch nghĩa từ"),
     (r": nháp AI — ", ": "),

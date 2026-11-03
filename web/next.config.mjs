@@ -16,11 +16,11 @@ function chuyenHuong() {
   // SEO-K → AUD-Q2 (chủ dự án duyệt 2026-11-03): trang năm (cả bản một giới tính, cả đường dẫn trước QH-URL
   // /phong-thuy/tuoi-1990-nam) đã gộp theo CUNG PHI → đi THẲNG một bước tới DÒNG năm trên mục lục (#tuoi-1990);
   // bản .md → mục lục .md (bảng năm sinh).
+  // Bản một giới tính dưới /huong-hop-tuoi/ (tuoi-1990-nu) do TRANG xử lý: biết giới tính → 308 thẳng tới trang cung của
+  // đúng người đó (#nu-1990) — cung phi do engine tính, next.config không tính được (agent rà soát 2026-11-03).
+  ds.push({ source: "/phong-thuy/tuoi-:nam(\\d{4})-:gioi(nam|nu)", destination: `${CHUYEN.tuoi_huong}#tuoi-:nam`, permanent: true });
   for (const goc of ["/phong-thuy", CHUYEN.tuoi_huong]) {
-    ds.push(
-      { source: `${goc}/tuoi-:nam(\\d{4})-:gioi(nam|nu)`, destination: `${CHUYEN.tuoi_huong}#tuoi-:nam`, permanent: true },
-      { source: `${goc}/tuoi-:nam(\\d{4})-:gioi(nam|nu).md`, destination: `${CHUYEN.tuoi_huong}.md`, permanent: true },
-    );
+    ds.push({ source: `${goc}/tuoi-:nam(\\d{4})-:gioi(nam|nu).md`, destination: `${CHUYEN.tuoi_huong}.md`, permanent: true });
   }
   ds.push(
     { source: `${CHUYEN.tuoi_huong}/tuoi-:nam(\\d{4})`, destination: `${CHUYEN.tuoi_huong}#tuoi-:nam`, permanent: true },

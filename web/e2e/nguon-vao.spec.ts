@@ -12,6 +12,10 @@ test("phân loại nguồn vào theo referrer / utm_source", () => {
   expect(phanLoaiNguon("https://claude.ai/chat/1", null, h)).toEqual({ den_tu: "ai", ai: "claude" });
   expect(phanLoaiNguon("", "chatgpt.com", h)).toEqual({ den_tu: "ai", ai: "chatgpt" });       // ChatGPT gắn utm_source
   expect(phanLoaiNguon("https://www.google.com/", null, h)).toEqual({ den_tu: "tim_kiem" });
+  expect(phanLoaiNguon("https://www.google.com.vn/", null, h)).toEqual({ den_tu: "tim_kiem" });
+  expect(phanLoaiNguon("https://mail.google.com/mail/u/0", null, h)).toEqual({ den_tu: "khac" });   // không phải tìm kiếm
+  expect(phanLoaiNguon("", "chatgpt", h)).toEqual({ den_tu: "ai", ai: "chatgpt" });                  // utm chỉ là tên
+  expect(phanLoaiNguon("", "Perplexity", h)).toEqual({ den_tu: "ai", ai: "perplexity" });
   expect(phanLoaiNguon("https://coccoc.com/search", null, h)).toEqual({ den_tu: "tim_kiem" });
   expect(phanLoaiNguon("https://l.facebook.com/l.php", null, h)).toEqual({ den_tu: "mxh" });
   expect(phanLoaiNguon("https://zalo.me/x", null, h)).toEqual({ den_tu: "mxh" });

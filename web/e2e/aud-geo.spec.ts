@@ -80,3 +80,21 @@ test("trang tuổi: dữ kiện riêng của tuổi, phần chung của năm ch�
   expect(nt).toContain('href="/nam/2037/tuoi-1990"');
   expect(nt).toMatch(/href="\/xem-sao-han\/2027#sao-tho-tu"/);                 // sao gọn → trang sao hạn năm
 });
+
+// Rà soát 2026-11-03: cặp số gõ ngược thứ tự → 308 về bản a ≤ b (trước 404).
+test("cặp số ngược thứ tự 308 về bản đúng", async ({ request }) => {
+  const r = await request.get("/hop-doi/cap-so/so-chu-dao-7-va-2", { maxRedirects: 0 });
+  expect(r.status()).toBe(308);
+  expect(new URL(r.headers()["location"]!, "http://x").pathname).toBe("/hop-doi/cap-so/so-chu-dao-2-va-7");
+});
+
+// Rà soát 2026-11-03: bảng sao hạn có neo từng tuổi; lời mời cuối trang kiến thức theo loại trang + không trích; llms URL bọc.
+test("neo tuổi sao hạn, lời mời theo loại trang, llms URL không dính dấu câu", async ({ request }) => {
+  expect(await (await request.get("/xem-sao-han/2027")).text()).toContain('id="tuoi-1990"');
+  const sc = await (await request.get("/tu-vi/sao-o-cung/thai-duong-cung-phu-the")).text();
+  expect(sc).toContain("Trên lá số của bạn, sao này nằm ở cung nào");
+  expect(sc).toMatch(/data-nosnippet="">[^]*?Trên lá số của bạn/);
+  const llms = await (await request.get("/llms.txt")).text();
+  expect(llms).not.toMatch(/https?:\/\/\S+\{[^}]*\}(?!`)/);   // mẫu có {…} luôn trong `…`
+  expect(llms).not.toMatch(/[^(<`]https?:\/\/[^\s<>`()]+[;:]\s/);   // URL trần không dính ; :
+});

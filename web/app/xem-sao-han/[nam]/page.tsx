@@ -56,7 +56,7 @@ export default async function Page(p: P) {
             <thead className="text-xs text-fg-faint"><tr><th className="py-2 pr-3">Năm sinh</th><th className="pr-3">Tuổi mụ</th><th className="pr-3">Nam</th><th>Nữ</th></tr></thead>
             <tbody>
               {d.ds.map((x) => (
-                <tr key={x.nam_sinh} className="border-t border-line/50">
+                <tr key={x.nam_sinh} id={`tuoi-${x.nam_sinh}`} className="scroll-mt-24 border-t border-line/50 target:bg-gold/10">
                   <td className="py-2 pr-3 text-fg">{x.nam_sinh} <span className="text-fg-faint">{x.can_chi}</span></td>
                   <td className="pr-3 tabular-nums text-fg-muted">{x.tuoi_mu}</td>
                   <td className="pr-3">{x.nam ? <a href={`#sao-${slug(x.nam)}`} className="text-gold underline decoration-gold/40 underline-offset-2">{x.nam}</a> : "—"}

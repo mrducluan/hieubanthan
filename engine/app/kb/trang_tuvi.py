@@ -164,7 +164,7 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
         muc.append({"tieu_de": f"Khi {sao} sáng ở cung {cung}",
                     "doan": f"{sao} sáng (Miếu/Vượng/Đắc) khi cung {cung} rơi vào {cs}.", "danh_sach": loi_sang})
     if loi_ham:
-        muc.append({"tieu_de": f"Khi {sao} hãm ở cung {cung}",
+        muc.append({"tieu_de": f"Khi {sao} hãm ở cung {cung}" if ham else f"Khi {sao} kém sáng ở cung {cung}",
                     "doan": (f"{sao} hãm khi cung {cung} rơi vào {ch}." if ham else
                              f"{sao} không có vị trí hãm theo bảng Nam phái; ý dưới đây dùng khi sao đứng chỗ kém sáng."),
                     "danh_sach": loi_ham})

@@ -129,8 +129,10 @@ def api_thang_cong_khai(nam: Annotated[int, Path(ge=1901, le=2099)], thang: Anno
 
 # AUD-Q3: số ngày tốt theo việc cho nhiều tháng (sitemap + robots trang việc-tháng; không dữ liệu cá nhân).
 @router.get("/v1/lich/viec-thang-dem/{nam}/{thang}")
-def api_dem_viec_thang(nam: Annotated[int, Path(ge=1901, le=2097)], thang: Annotated[int, Path(ge=1, le=12)],
+def api_dem_viec_thang(nam: Annotated[int, Path(ge=1901, le=2099)], thang: Annotated[int, Path(ge=1, le=12)],
                        so: Annotated[int, Query(ge=1, le=30)] = 25) -> dict:
+    if (nam - 1901) * 12 + thang - 1 + so > (2099 - 1901 + 1) * 12:     # tháng cuối không vượt 12/2099 (giới hạn lịch)
+        raise HTTPException(422, detail="Khoảng tháng vượt quá 12/2099")
     return {"thang": L.dem_viec_thang(nam, thang, so)}
 
 

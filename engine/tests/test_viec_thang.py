@@ -60,3 +60,7 @@ def test_api_dem_viec_thang():
     assert r.status_code == 200 and len(r.json()["thang"]) == 2 * len(L.VIEC_SEO)
     assert client.get("/v1/lich/viec-thang-dem/2026/11?so=40").status_code == 422
     assert client.get("/v1/lich/viec-thang-dem/2026/13").status_code == 422
+    assert client.get("/v1/lich/viec-thang-dem/2099/11?so=2").status_code == 200       # tới đúng 12/2099
+    assert client.get("/v1/lich/viec-thang-dem/2099/11?so=3").status_code == 422       # vượt lịch → 422, không 500
+    rong = L.viec_thang("mua_xe", 2027, 1)
+    assert rong["so_ngay"] == 0 and "0 ngày" not in rong["tra_loi_nhanh"] and "chưa có ngày nào" in rong["tra_loi_nhanh"]

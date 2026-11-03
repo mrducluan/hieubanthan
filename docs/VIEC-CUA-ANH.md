@@ -19,6 +19,9 @@
 - [ ] **Ngày 01/02/2027 — Q4 cửa sổ trang ngày:** Search Console → Hiệu suất → lọc trang chứa `/xem-ngay-tot/20` → so lượt
       hiển thị của ngày cách hôm nay 180–400 ngày. Ít (vd < 5% tổng) → nhắn em đổi `NGAY_SAU = 400 → 180`
       (`web/lib/hoang-lich.ts`, một dòng, sitemap ngày tự theo).
+- [ ] **CMS → Mẫu cụm "Hướng hợp tuổi theo cung phi"** (sau migration `aud_q2_cung_phi`): nếu chữ khối có `{nam}` thì sửa —
+      trang cung không có biến năm, `{nam}` sẽ hiện nguyên văn.
+- [ ] **Trả lời 6 câu hỏi** ở `docs/AUDIT-SEO-GEO-2026-11.md` mục 6b (ngày tốt, năm tuổi khi làm nhà, hướng ở trang mệnh, số 7…).
 - [ ] **Thẩm định thật** 10 trang/tuần theo `scripts/tham_dinh.py hang-doi --gsc Trang.csv` — sổ thẩm định hiện 0 trang
       (máy không làm thay được; đòn bẩy E-E-A-T lớn nhất).
 

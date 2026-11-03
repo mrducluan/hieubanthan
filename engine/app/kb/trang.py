@@ -153,8 +153,20 @@ def _muc_cau_truc_que(k: str) -> dict:
             "doan": m["doan"].format(ten=que[k]["ten"], ha=info["ha_quai"], thuong=info["thuong_quai"], cung=bc["cung"],
                                      hanh=bc["cung_ngu_hanh"], loai=bc["loai"], the=bc["the"], ung=bc["ung"],
                                      ho=ten(kv.ho_quai(bits)), thac=ten(kv.thac_quai(bits)), tong=ten(kv.tong_quai(bits))),
-            "bang": {"cot": m["cot"], "dong": dong},
+            "bang": {"cot": m["cot"], "dong": dong}, "danh_sach": m["chu_giai"],
             "xem_them": [{"loai": "que", "slug": slug[x]} for x in xem]}
+
+
+def ten_que_day_du(k: str) -> str:
+    """Tên thường gọi đủ của quẻ: hình tượng quẻ trên + quẻ dưới + tên ("Thủy Lôi Truân"); quẻ thuần → "Thuần Khảm".
+    Tra từ bảng KB `su_kien_kb.ten_tuong` + quẻ dưới/trên do `kinhdich_vendor` tính (người tìm thường gõ tên này)."""
+    from app.calc import kinhdich_vendor as kv
+    ten = _doc("kinhdich_kb.json")["que"][k]["ten"]
+    ha, thuong = next((h, t) for h, row in kv.KW.items() for t, so in row.items() if so == int(k))
+    if ha == thuong:
+        return f"Thuần {ten}"
+    tt = _doc("su_kien_kb.json")["ten_tuong"]
+    return f"{tt[thuong]} {tt[ha]} {ten}"
 
 
 def _ds_que() -> list[tuple[str, str]]:
@@ -195,11 +207,11 @@ def _trang_que(k: str, slug: str) -> dict:
     i = [s for _, s in ds].index(slug)
     return {
         "loai": "que", "slug": slug,
-        "tieu_de": f"Quẻ {k} {q['ten']} ({q['ten_han']}) — ý nghĩa Kinh Dịch",
+        "tieu_de": f"Quẻ {k} {ten_que_day_du(k)} ({q['ten_han']}) — ý nghĩa Kinh Dịch",
         "mo_ta": _cat(f"Quẻ {q['ten']} ({q['ten_han']}): {q['y_chinh']}"),
         # AUD-P0: câu đầu tự đứng (tên quẻ + Kinh Dịch) — AI / đoạn trích Google trích đúng đối tượng.
         "tra_loi_nhanh": _doc("su_kien_kb.json")["que_cau_truc"]["tra_loi"].format(
-            ten=q["ten"], ten_han=q["ten_han"], so=k, y=q["y_chinh"][:1].lower() + q["y_chinh"][1:]),
+            ten_day_du=ten_que_day_du(k), ten_han=q["ten_han"], so=k, y=q["y_chinh"][:1].lower() + q["y_chinh"][1:]),
         "muc": muc, "hoi_dap": hoi_dap,
         "nguon": list(kb["source"].values()),
         "trang_thai": kb.get("trang_thai", "nhap_ai"),

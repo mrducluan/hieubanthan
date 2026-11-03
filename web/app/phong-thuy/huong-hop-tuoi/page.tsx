@@ -76,15 +76,17 @@ export default async function Page() {
               <table className="w-full min-w-[34rem] text-left text-sm">
                 <thead className="text-fg-faint">
                   <tr><th className="py-2 pr-3 font-normal">Năm sinh</th><th className="py-2 pr-3 font-normal">Lập xuân</th>
-                    <th className="py-2 pr-3 font-normal">Nam</th><th className="py-2 pr-3 font-normal">Nữ</th><th className="py-2 font-normal">Hướng tốt chung</th></tr>
+                    <th className="py-2 pr-3 font-normal">Nam</th><th className="py-2 pr-3 font-normal">Nữ</th><th className="py-2 font-normal">Vợ chồng cùng năm: hướng tốt chung</th></tr>
                 </thead>
                 <tbody>
                   {tuoi.map((t) => (
                     <tr key={t.nam} id={t.slug} className="scroll-mt-24 border-t border-line/50 target:bg-gold/10">
                       <td className="py-2 pr-3 text-fg"><b>{t.nam}</b> <span className="text-fg-muted">{t.can_chi}</span></td>
                       <td className="py-2 pr-3 text-fg-muted">{dm(t.lap_xuan)}</td>
-                      <td className="py-2 pr-3"><Link href={duongTuoi(t.nam_gioi.slug)} className="text-gold underline decoration-gold/40 underline-offset-2">{t.nam_gioi.quai}</Link></td>
-                      <td className="py-2 pr-3"><Link href={duongTuoi(t.nu_gioi.slug)} className="text-gold underline decoration-gold/40 underline-offset-2">{t.nu_gioi.quai}</Link></td>
+                      <td className="py-2 pr-3"><Link href={`${duongTuoi(t.nam_gioi.slug)}#nam-${t.nam}`} className="text-gold underline decoration-gold/40 underline-offset-2">{t.nam_gioi.quai}</Link>
+                        <span className="block text-xs text-fg-muted">tốt nhất {t.nam_gioi.tot[0]}</span></td>
+                      <td className="py-2 pr-3"><Link href={`${duongTuoi(t.nu_gioi.slug)}#nu-${t.nam}`} className="text-gold underline decoration-gold/40 underline-offset-2">{t.nu_gioi.quai}</Link>
+                        <span className="block text-xs text-fg-muted">tốt nhất {t.nu_gioi.tot[0]}</span></td>
                       <td className="py-2 text-fg-muted">{t.huong_chung.length ? t.huong_chung.join(", ") : "không chung — theo người trụ cột"}</td>
                     </tr>
                   ))}

@@ -322,8 +322,9 @@ def viec_thang(viec: str, nam: int, thang_: int) -> dict:
     thang_am = _thang_am(nam, thang_, den)
     # "Đẹp nhất" = ngày đầu bảng xếp hạng KHÔNG vướng kiêng dân gian (Tam nương, Nguyệt kỵ…); cả tháng đều vướng thì không nêu.
     dep = next((x for x in kq["ngay"] if not x.get("ky_dan_gian")), None)
-    tra_loi = (f"Tháng {thang_}/{nam} ({thang_am}) có {len(ds)} ngày tốt cho {ten} theo hoàng lịch: "
-               + (", ".join(am(x) for x in ds) + "." if ds else "không có ngày nào đủ điều kiện — nên xem tháng kế tiếp.")
+    tra_loi = ((f"Tháng {thang_}/{nam} ({thang_am}) có {len(ds)} ngày tốt cho {ten} theo hoàng lịch: "
+                + ", ".join(am(x) for x in ds) + ".") if ds else
+               f"Tháng {thang_}/{nam} ({thang_am}) chưa có ngày nào đủ điều kiện tốt cho {ten} theo hoàng lịch — nên xem tháng kế tiếp."
                + (f" Đẹp nhất: {am(dep)} — {', '.join(dep['diem_cong'])}." if dep and dep["diem_cong"] else ""))
     hd = [
         {"hoi": f"Tháng {thang_} năm {nam} ngày nào tốt để {ten}?", "dap": tra_loi},

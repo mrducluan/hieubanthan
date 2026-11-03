@@ -17,7 +17,9 @@ from app.kb import do_rieng
 def test_sao_cung_co_loi_doi_thuong_rieng():
     t = trang.lay("sao_cung", "tu-vi-cung-menh")
     tieu = [m["tieu_de"] for m in t["muc"]]
-    assert "Khi Tử Vi sáng ở cung Mệnh" in tieu and "Khi Tử Vi hãm ở cung Mệnh" in tieu
+    # Tử Vi không có vị trí hãm (bảng Nam phái) → mục thứ hai là "kém sáng", không gọi "hãm" (rà soát 2026-11-03).
+    assert "Khi Tử Vi sáng ở cung Mệnh" in tieu and "Khi Tử Vi kém sáng ở cung Mệnh" in tieu
+    assert "Khi Tử Vi hãm ở cung Mệnh" not in tieu
     sang = next(m for m in t["muc"] if m["tieu_de"] == "Khi Tử Vi sáng ở cung Mệnh")
     assert any("chốt hướng đi" in d for d in sang["danh_sach"])
     # khối chung chỉ còn một câu + link sang trang gốc

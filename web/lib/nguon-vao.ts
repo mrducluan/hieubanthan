@@ -7,12 +7,17 @@ const AI: [RegExp, string][] = [
   [/(^|\.)(chatgpt\.com|chat\.openai\.com|openai\.com)$/, "chatgpt"],
   [/(^|\.)perplexity\.ai$/, "perplexity"],
   [/(^|\.)gemini\.google\.com$|(^|\.)bard\.google\.com$/, "gemini"],
-  [/(^|\.)copilot\.microsoft\.com$|(^|\.)bing\.com\/chat/, "copilot"],
+  [/(^|\.)copilot\.microsoft\.com$/, "copilot"],
   [/(^|\.)claude\.ai$/, "claude"],
   [/(^|\.)(deepseek\.com|chat\.deepseek\.com)$/, "deepseek"],
   [/(^|\.)(you\.com|phind\.com|meta\.ai|grok\.com|x\.ai)$/, "khac"],
 ];
-const TIM_KIEM = /(^|\.)(google\.[a-z.]+|bing\.com|coccoc\.com|duckduckgo\.com|yahoo\.com|yandex\.[a-z]+|search\.brave\.com|ecosia\.org)$/;
+// tenMien() đã bỏ "www." → khớp nguyên tên miền: chỉ trang tìm kiếm Google (google.com, google.com.vn…), không mail/docs/
+// drive.google.com. Copilot trong Bing (bing.com/chat) cùng tên miền với Bing tìm kiếm → không tách được, tính tim_kiem.
+const TIM_KIEM = /^(google\.[a-z]{2,3}(\.[a-z]{2})?|bing\.com|coccoc\.com|duckduckgo\.com|(search\.)?yahoo\.com|yandex\.[a-z]+|search\.brave\.com|ecosia\.org)$/;
+/** utm_source chỉ là TÊN (vd "chatgpt", "perplexity") — không phải tên miền. */
+const AI_TEN: Record<string, string> = { chatgpt: "chatgpt", openai: "chatgpt", perplexity: "perplexity", gemini: "gemini",
+  copilot: "copilot", claude: "claude", deepseek: "deepseek" };
 const MXH = /(^|\.)(facebook\.com|fb\.com|messenger\.com|zalo\.me|chat\.zalo\.me|tiktok\.com|youtube\.com|instagram\.com|threads\.net|x\.com|t\.co|twitter\.com|linkedin\.com|lnkd\.in|reddit\.com|pinterest\.com)$/;
 
 const tenMien = (s: string): string | null => {
@@ -22,6 +27,8 @@ const tenMien = (s: string): string | null => {
 };
 
 export function phanLoaiNguon(referrer: string, utmSource: string | null, host: string): NguonVao {
+  const ten = (utmSource ?? "").trim().toLowerCase();
+  if (AI_TEN[ten]) return { den_tu: "ai", ai: AI_TEN[ten] };
   for (const nguon of [utmSource ?? "", referrer]) {
     const h = tenMien(nguon);
     if (!h) continue;
