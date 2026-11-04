@@ -106,6 +106,8 @@ Mỗi đợt một PR, có test viết trước và thước đo trước/sau. T
 Thước đo: an toàn holdout 68% → **100%**; p95 kb/trang 1.354 → < 100 ms; không còn lỗi 500 với ngày sinh lạ.
 
 ### EN-2 · Nhất quán + lời luận (2–3 tuần) — khâu NẠP Sao (bán được chương thứ hai)
+> **Trạng thái 2026-11-02: mục 5 đã làm** (lớp hoàn cảnh `luangiai/hoan_canh.py` — một hộp lời khuyên theo mức chương ×
+> nhóm tuổi × tình trạng người dùng tự chọn, chỉ lưu trên máy; dòng EN-2 mục 5 trong `CLAUDE.md`).
 > **Trạng thái 2026-11-01: đã làm** mục 1, 2, 3 (lý do theo sao, lời mời theo hộp riêng), 4, 6, 7, 8 — chi tiết ở dòng EN-2
 > của `CLAUDE.md`. **Chưa làm mục 5** (lời theo nhóm tuổi / tình trạng độc thân – có đôi): cần ô chọn tình trạng trên hồ sơ
 > (người dùng tự chọn) → để chung đợt với EN-3 (hỏi đáp đã có trích ô người thứ hai / quan hệ). Thước đo câu trùng giữa hồ
@@ -160,8 +162,16 @@ Thước đo: an toàn holdout 68% → **100%**; p95 kb/trang 1.354 → < 100 ms
 > Đã làm: mục 1 (module `hoidap/hieu_cau.py`: kiểu câu, mốc thời gian, người thứ hai; mở viết tắt `chuan_hoa_cau`), mục 2
 > (`hoi_lai` + khối chọn trên web), một phần mục 3 (`chung.tra_loi_truoc` + đoạn mốc thời gian lên đầu), mục 4 (vợ/chồng có
 > năm sinh tính luôn; câu kiến thức trả bằng từ điển, không cá nhân hoá), mục 5 (9 mục `bo_tri` + 10 thuật ngữ). **Còn lại
-> (EN-3b)**: "trả lời thẳng" 74 → 85% cần đoạn mở đầu soạn theo đúng điều được hỏi ở từng mảng (hiện mới sắp lại đoạn có
+> (EN-3b)** — **2026-11-02: EN-3b + EN-3c đã làm** (đoạn mở đầu `hoidap/mo_dau.py`, Phong thuỷ tắt bằng cờ; định tuyến theo bộ dev mới `dev_en3c`): holdout trả lời thẳng 74 → **78 %**, định tuyến 90 → **92 %**, không chỉ số bảo vệ nào lùi. Mục tiêu 85 % CHƯA đạt: phần còn hụt là nội dung đoạn 1 của Thần số (72 %) và Phong thuỷ (72 %) — đợt sau (EN-3d) viết lại đoạn mở đầu hai mảng này bằng bộ dev, holdout chỉ chấm cuối. Bản cũ:: "trả lời thẳng" 74 → 85% cần đoạn mở đầu soạn theo đúng điều được hỏi ở từng mảng (hiện mới sắp lại đoạn có
 > sẵn); mục 6 (bộ phân xử Naive Bayes) chưa cần — luật hoà điểm hiếm.
+>
+> **EN-3b (2026-11-02, đã làm một phần)**: `hoidap/mo_dau.py` soạn đoạn mở đầu cho 5 mảng (điều được hỏi theo danh mục
+> cố định ~45 mục — không chép chữ người dùng; mức / điều chính + một lý do + một việc; quyết định lớn: "không quyết thay
+> bạn"; sức khoẻ: "không thay lời bác sĩ"; câu đặc biệt không có mở đầu; số trong đoạn mở đầu phải có trong gói). Đoạn
+> mở đầu tóm đoạn nó lấy chữ (không lặp; phần chi tiết còn lại dời xuống). Thước đo dev có mẫu tiêu điểm riêng
+> (`dev_en3_tieu_diem.json`, viết theo câu hỏi): dev 70 → 86%. Holdout_v2: **74 → 77%** (Tử vi 76→78, Bát tự 72→81,
+> Kinh Dịch 82→88, Thần số 70→72; Phong thuỷ 72→68) — **chưa đạt 85%**; không nhìn holdout để đẩy tiếp (giới hạn: đoạn
+> mở đầu thêm một đoạn nên đẩy đoạn 2 cũ xuống khi không tóm được nó; định tuyến 90% là trần của thước đo).
 
 1. **Module "Hiểu câu hỏi" dùng chung 5 mảng** (RULES, tất định):
    - chuẩn hoá + từ điển viết tắt (ck, vk, cv, sk, bh…);
@@ -238,15 +248,16 @@ Thước đo trên holdout_v2:
 > - **Mục 1 chọn ngày cho cả nhà** — `luangiai/chon_ngay_nhieu.py` + `/v1/lich/chon-ngay-nhieu`, khối "Chọn ngày cho cả
 >   nhà" trên `/xem-ngay-tot`: ngày hợp việc theo sách lịch, không xung tuổi ai (≤ 8 người); người chính (cô dâu, chú rể,
 >   người đứng tên) có lưu ý tháng xung tuổi, Kim lâu cô dâu, tuổi làm nhà, Tam tai (không loại ngày, xếp sau); 12 tháng có
->   nhãn ngắn + một khối giải thích; gợi ý năm âm không vướng. Chỉ nhập năm sinh, không lưu. **Bảng tháng đại lợi /
->   tiểu lợi theo tuổi cô dâu chưa đưa vào** — chưa tìm được nguồn đối chiếu (không bịa công thức).
+>   nhãn ngắn + một khối giải thích; gợi ý năm âm không vướng. Chỉ nhập năm sinh, không lưu. **Tháng đại lợi / tiểu lợi
+>   theo tuổi cô dâu (2026-11-02)**: quy tắc đọc thẳng Hiệp Kỷ Biện Phương Thư q.36, chỉ là nhãn tập quán (sách đó bác
+>   thuyết này) — không xếp, không loại ngày (`docs/QUYET-DINH-EN5-EN6.md`).
 > - **Mục 2 sao lưu năm Tử vi** — vị trí đọc từ iztro (Lộc Tồn, Kình Dương, Đà La, Thiên Mã, Khôi Việt, Xương Khúc lưu +
 >   Thái Tuế, Tang Môn, Bạch Hổ lưu), đối chứng khẩu quyết 12 năm; lời đời thường KB `tuvi_sao_luu_kb.json` (nháp); khối
 >   trong chương Vận hạn (tên sao chỉ ở "Vì sao nói vậy", khoá SAO-2 không lộ); hỏi đáp "năm nay có Kình Đà lưu không".
 >   Sao lưu không đổi mức của năm.
 > - **Mục 3 Bát tự** — Thai nguyên, Mệnh cung, Thân cung (+ nạp âm), tiểu vận trước khởi đại vận: golden 42 ca oracle
->   lunar-typescript; thần sát thêm Thiên Y, Hàm Trì (= Đào Hoa). **Chưa làm**: Thiên La Địa Võng, Học Đường, Kim Thần
->   (sách chép nhiều cách khác nhau, cần chủ dự án chọn phái); chọn ngày theo Bát tự cá nhân (cần cả ngày giờ sinh từng
+>   lunar-typescript; thần sát thêm Thiên Y, Hàm Trì (= Đào Hoa). **2026-11-02**: Thiên La Địa Võng, Học Đường, Kim Thần
+>   theo Tam Mệnh Thông Hội + ghi cách khác, lớp tham khảo không đổi mức (`docs/QUYET-DINH-EN5-EN6.md`); chọn ngày theo Bát tự cá nhân (cần cả ngày giờ sinh từng
 >   người — để đợt sau, dùng lại khung mục 1).
 > - **Mục 4 cửa sổ quyết định** — "có nên / khi nào … trong N tháng tới" → `luangiai/cua_so.py` dùng đúng hàm tháng của
 >   Thời gian tới (Tử vi tháng âm, Bát tự tháng tiết), đoạn đầu câu trả lời nêu tháng thuận / tháng nên đi chậm, không
@@ -275,12 +286,18 @@ Xếp theo bằng chứng thị trường (agent D) × khả thi (agent B):
    (BT-DC) và định giờ sinh thành một luồng "đọc theo cách khớp với đời bạn".
 
 ### EN-6 · Nền móng dài hạn (song song, mỗi đợt một ít)
+> **Trạng thái 2026-11-02 — đợt 2 đã làm:** golden hoàng lịch MỌI ngày 1930–2030 (băm theo tháng, khớp oracle 100 %);
+> khoá bản Python 3.12 (`engine/constraints.txt` + `.python-version`, Dockerfile và mọi workflow); bộ đếm hạn mức lượt AI
+> dùng chung qua Redis REST khi đặt env (`HAN_MUC_REDIS_URL`/`_TOKEN`, mặc định như cũ); gom khuôn `doi_song_1` — chọn
+> giữ hàm riêng + hợp đồng KC-1 + golden 951 mã kiểm chứng (`tests/test_ma_mau_golden.py`) thay vì thay hàm (đổi chữ,
+> rủi ro mất phiếu). Chi tiết dòng EN-6 đợt 2 trong `CLAUDE.md`.
 > **Trạng thái 2026-11-01 — đợt 1 đã làm:**
 >
 > - **BI-1…3 → `ENGINE_VERSION` 0.1.6.** BI-1: đồng hồ miền Nam UTC+8 01/04/1947 – 01/07/1955 01:00 (tzdata). Lịch âm
 >   miền Nam vẫn UTC+8 chỉ 1960–1975, tách bằng `config.tz_lich_am`. BI-2: giờ Tý muộn Tử vi an đúng như sinh ngày hôm
 >   sau, giờ Tý, chuẩn hoá ở đầu vào. Ngày âm hiển thị giữ ngày sinh, có cờ `ty_muon_ngay_sau`. BI-3: Bát tự sinh ở nước
->   ngoài so mốc tiết theo múi giờ chuẩn nơi sinh; ô chọn nằm trong form hồ sơ, chưa khai thì gắn cờ nhắc.
+>   ngoài so mốc tiết theo múi giờ chuẩn nơi sinh; ô chọn nằm trong form hồ sơ, chưa khai thì gắn cờ nhắc. Lưu vào tài
+>   khoản: migration 0033 (2026-11-02, chờ chủ dự án chạy; chưa chạy thì chỉ lưu trên máy).
 > - **Golden mở rộng trong CI:**
 >   - mọi mùng 1 lịch Trung Quốc 1901–2099 (2.461 tháng; 5 ca sóc sát nửa đêm ghi tên);
 >   - 5.000 tứ trụ + chiều đại vận, gồm hơn 300 ca dạ Tý;

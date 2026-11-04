@@ -16,7 +16,7 @@ import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 import { coGoogle } from "@/lib/dong-y";
 import type { DichVuMo } from "@/lib/thanh-toan/dich-vu";
 import { dangXuat, hoSoTaiKhoan, luuVaoTaiKhoan, useNguoiDung, xoaHoSoTaiKhoan, xoaTaiKhoan } from "@/lib/tai-khoan";
-import { gioHienThi, luuHoSo, useHoSo, xoaHoSo, type HoSo } from "@/lib/hoso";
+import { NUOC_NGOAI, gioHienThi, luuHoSo, useHoSo, xoaHoSo, type HoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 import { baoNhanThuong, nhanThuongSauLuu } from "@/lib/nhan-thuong";
 
@@ -30,7 +30,9 @@ function giongNhau(a: HoSo, b: NonNullable<HoSoTK>): boolean {
     // "Không biết giờ" (0015: lưu 'unknown', đọc lại giờ đại diện 12:00) và bản lưu chưa có giờ đều = "không có giờ thật".
     (gioHienThi(a) ?? null) === (gioHienThi(b) ?? null) && (a.gioi_tinh ?? null) === (b.gioi_tinh ?? null) &&
     (a.ten_khac ?? null) === (b.ten_khac ?? null) && (a.vung ?? null) === (b.vung ?? null) &&
-    (a.noi_sinh ?? null) === (b.noi_sinh ?? null) && Boolean(a.gio_mua_he) === Boolean(b.gio_mua_he);
+    (a.noi_sinh ?? null) === (b.noi_sinh ?? null) && Boolean(a.gio_mua_he) === Boolean(b.gio_mua_he) &&
+    // EN-6 BI-3: chỉ so múi giờ nơi sinh khi tài khoản có cột (0033) — chưa chạy migration thì không coi là khác.
+    (!b.cot_utc || (a.noi_sinh === NUOC_NGOAI ? a.utc_noi_sinh ?? null : null) === (b.utc_noi_sinh ?? null));
 }
 
 export function TaiKhoan({ emailDuLieu = null, dichVu = { hoiVien: false, chuyenGia: false } }: {
@@ -129,11 +131,15 @@ export function TaiKhoan({ emailDuLieu = null, dichVu = { hoiVien: false, chuyen
                         return baoNhanThuong(kq);
                       }, "Đã cập nhật tài khoản theo máy này.")}>Cập nhật tài khoản theo máy này</Button>
                       <Button size="sm" variant="secondary" onClick={() => {
-                        const { cap_nhat_luc: _bo, ...h } = tk;
-                        // EN-6 BI-3: tài khoản chưa có cột múi giờ nơi sinh (cần migration) → giữ múi giờ đã khai trên máy
-                        const giu = hoSo && typeof hoSo.utc_noi_sinh === "number" && hoSo.noi_sinh === h.noi_sinh
-                          ? { utc_noi_sinh: hoSo.utc_noi_sinh } : {};
-                        luuHoSo({ ...h, ...giu });
+                        const { cap_nhat_luc: _bo, cot_utc: _cot, ...h } = tk;
+                        // EN-6 BI-3: tài khoản chưa mang múi giờ nơi sinh (0033 chưa chạy, hoặc lưu trước đó) → giữ múi giờ
+                        // đã khai trên máy nếu cùng nơi sinh.
+                        const giu = typeof h.utc_noi_sinh !== "number" && hoSo && typeof hoSo.utc_noi_sinh === "number" &&
+                          hoSo.noi_sinh === h.noi_sinh ? { utc_noi_sinh: hoSo.utc_noi_sinh } : {};
+                        // EN-2 mục 5: tình trạng chỉ lưu trên máy (không đồng bộ tài khoản) → giữ lựa chọn của máy này, CHỈ
+                        // khi hồ sơ tài khoản là cùng một người (review T2: không mang sang người khác).
+                        const cungNguoi = hoSo && hoSo.ho_ten === h.ho_ten && hoSo.ngay === h.ngay && hoSo.thang === h.thang && hoSo.nam === h.nam;
+                        luuHoSo({ ...h, ...giu, ...(cungNguoi && hoSo.tinh_trang ? { tinh_trang: hoSo.tinh_trang } : {}) });
                       }}>Dùng bản trong tài khoản</Button>
                     </div>
                   </div>
@@ -142,7 +148,7 @@ export function TaiKhoan({ emailDuLieu = null, dichVu = { hoiVien: false, chuyen
                   <div className="space-y-3">
                     <label className="flex items-start gap-3 text-sm">
                       <input type="checkbox" checked={dongY} onChange={(e) => setDongY(e.target.checked)} className="mt-1 size-4 accent-[rgb(var(--gold))]" />
-                      <span>Tôi đồng ý lưu <b>họ tên, ngày giờ sinh, giới tính, nơi sinh</b> vào tài khoản để dùng trên máy khác. Tôi có thể xoá bất cứ lúc nào. Nội dung bài đọc và câu hỏi không được lưu.{" "}
+                      <span>Tôi đồng ý lưu <b>họ tên, ngày giờ sinh, giới tính, nơi sinh</b> (kèm múi giờ nếu sinh ở nước ngoài) vào tài khoản để dùng trên máy khác. Tôi có thể xoá bất cứ lúc nào. Nội dung bài đọc và câu hỏi không được lưu.{" "}
                         <Link href="/chinh-sach-rieng-tu#du-lieu" className="text-gold underline">Chính sách quyền riêng tư</Link></span>
                     </label>
                     <Button disabled={!dongY || dang} onClick={() => lam(async () => {

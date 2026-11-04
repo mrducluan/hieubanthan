@@ -138,6 +138,7 @@ def api_luan_giai(inp: LuanGiaiBTInput) -> dict:
     from app.luangiai import toan_bo
     from app.narrative import luan_giai_van
     sinh, flags = _sinh(inp.la_so)
+    sinh["tinh_trang"] = inp.la_so.tinh_trang       # EN-2 mục 5: chỉ báo cáo đời sống đọc
     trong_so = {k: v.model_dump() for k, v in inp.trong_so.items()} if inp.trong_so else None
     bc = toan_bo.battu(sinh, ngay_xem=inp.ngay_xem, trong_so=trong_so, ca_nhan=inp.ca_nhan)
     if inp.la_so.do_tin_gio is HourConfidence.UNKNOWN:

@@ -244,6 +244,30 @@ def _goi_tong_hop(goi: dict, pl: dict, nguoi: dict, ngay_xem: dt.date) -> dict:
     return hoi._ket({**goi, "muc": [muc, *goi["muc"]]})
 
 
+def _chung_md():
+    from app.hoidap import mo_dau  # noqa: PLC0415 — tránh vòng import (hoidap → narrative)
+    return mo_dau
+
+
+def _mo_dau_so(goi: dict, pl: dict, cau_hoi: str, nguoi: dict, ngay_xem: dt.date, template: str) -> str | None:
+    """EN-3b: đoạn mở đầu Thần số — viết lại đoạn đầu thân bài (mục làm ra nó) cho đúng điều được hỏi, kèm một câu từ
+    mục KB của đúng điều đó (bảng nỗi đau / lĩnh vực của điều hỏi) khi gói chưa có."""
+    md = _chung_md()
+    if goi.get("thu_tu_co_dinh"):
+        them = []
+    else:
+        ma_nd = md.NOI_DAU_THEO_MA.get((md.dieu_hoi(pl["cau_chuan_hoa"], cau_hoi) or {}).get("ma"))
+        them = (noi_dau.muc_theo_ma(goi, ma_nd, nguoi, ngay_xem) if ma_nd
+                else md.so_bo_sung(goi, pl["cau_chuan_hoa"], cau_hoi, nguoi, ngay_xem))
+    dau = template.split("\n\n")[0]
+    dau_muc = next((m for m in goi["muc"] if _doan(m)[0] == dau), None)
+    mo = md.so_mo(goi, pl["cau_chuan_hoa"], cau_hoi, ngay_xem, dau_muc, them, doan_fn=lambda m: _doan(m)[0])
+    if mo and them:
+        goi["muc"].extend(them)          # mục đoạn mở đầu dùng → vào gói bằng chứng (số, nguồn), thân bài không đổi
+        hoi._ket(goi)
+    return mo
+
+
 def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
             ngay_xem: dt.date | None = None, dung_llm: bool = True, phai: str = "pitago") -> dict:
     ngay_xem = ngay_xem or _hom_nay_vn()
@@ -260,6 +284,8 @@ def tra_loi(cau_hoi: str, nguoi: dict, nguoi_kia: dict | None = None,
     template = van_template(goi)
     if not goi.get("thu_tu_co_dinh"):
         template = _chung.tra_loi_truoc(template, pl["cau_chuan_hoa"])   # EN-3: đoạn khớp câu hỏi lên đầu
+    if pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y") and phai != "chaldea":
+        template = _chung_md().dat_dau(template, _mo_dau_so(goi, pl, cau_hoi, nguoi, ngay_xem, template), goi)
     co_key = bool(os.environ.get("OPENROUTER_API_KEY"))
     che_do, van, loi = "template", template, []
     if dung_llm and co_key and goi["muc"] and not goi["can_them"]:

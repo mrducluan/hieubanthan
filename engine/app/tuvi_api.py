@@ -71,6 +71,8 @@ class TuanTrietInput(BaseModel):
     # TP-LICH (chủ dự án yêu cầu 2026-10-08): Bát tự — sinh 23:xx giữ trụ ngày hôm đó (dạ Tý, mặc định) hay đổi
     # ngày lúc 23:00. Chỉ Bát tự đọc trường này (Tử vi theo iztro luôn sang ngày mới lúc 23:00).
     gio_ty: Literal["da_ty", "sang_ngay"] = "da_ty"
+    # EN-2 mục 5: tình trạng NGƯỜI DÙNG TỰ CHỌN (không suy đoán), chỉ để chọn lời ở chương tình yêu / gia đình; không lưu.
+    tinh_trang: Literal["doc_than", "co_doi"] | None = None
 
 
 class _DauVao:
@@ -518,7 +520,7 @@ def api_luan_giai(inp: LuanGiaiInput) -> dict:
     dv = _DauVao(inp.la_so)
     cal = dv.tb.calendar_dt
     sinh = {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender,
-            "tz_lich": dv.tz_lich, **dv.tuy_chon, "luu_nguyet": inp.la_so.luu_nguyet}
+            "tz_lich": dv.tz_lich, **dv.tuy_chon, "luu_nguyet": inp.la_so.luu_nguyet, "tinh_trang": inp.la_so.tinh_trang}
     trong_so = {k: v.model_dump() for k, v in inp.trong_so.items()} if inp.trong_so else None
     try:
         bc = toan_bo.tuvi(sinh, ngay_xem=inp.ngay_xem, trong_so=trong_so, ca_nhan=inp.ca_nhan)

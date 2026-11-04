@@ -39,6 +39,12 @@ test("tứ trụ từ hồ sơ + dụng thần hai cách", async ({ page }) => {
   await expect(ct).toContainText("Nhâm Ngọ");
   await expect(ct).toContainText("Mậu Tý");
   await expect(ct).toContainText("1990: Đinh Mùi");            // tiểu vận năm đầu = trụ giờ Bính Ngọ tiến một (oracle)
+  // EN-5.3 (2026-11-02): Học Đường · Thiên La Địa Võng · Kim Thần tham khảo — Canh Ngọ là Lộ Bàng Thổ, tháng Tân Tỵ → Địa Võng
+  await page.getByText(/Ý nghĩa các thần sát trong lá số/).click();
+  const tk = page.getByTestId("than-sat-tham-khao");
+  await expect(tk).toContainText("Địa Võng — có ở trụ tháng");
+  await expect(tk).toContainText("Kim Thần — không có");
+  await expect(tk).toContainText("Tam Mệnh Thông Hội");
   const ans = await hoi(page, "Dụng thần của tôi là gì?");
   await expect(ans).toContainText("Canh Ngọ · Tân Tỵ · Nhâm Ngọ · Bính Ngọ");
   await expect(ans).toContainText("không tự chọn");

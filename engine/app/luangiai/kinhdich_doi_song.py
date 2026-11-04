@@ -30,11 +30,15 @@ _UU_TIEN = ["con_cai", "gia_dinh", "hon_nhan", "tinh_cam", "ban_be", "mua_nha", 
             "hop_tac", "thang_tien", "chuyen_viec", "tranh_chap", "thi_cu", "giay_to", "xe_co", "suc_khoe", "di_xa"]
 
 
+# EN-3c: "cuối" và "cưới" cùng bỏ dấu thành "cuoi" — "cuối năm / tháng / tuần / cùng" không phải chuyện cưới.
+_SAU_CUOI = r"(?! (nam|thang|tuan|cung|ngo|hem|ky|doi|gio|ngay|chieu|duong|nha|dong|toa|day))"
+
 # ----------------------------------------------------------------------------- chủ đề
 def _diem_chu_de(t: str) -> dict[str, int]:
     diem: dict[str, int] = {}
     for ma, m in kb.chu_de_tat_ca().items():
-        n = sum(1 for k in m.get("tu_khoa", []) if re.search(r"(?<!\w)" + re.escape(k) + r"(?!\w)", t))
+        n = sum(1 for k in m.get("tu_khoa", [])
+                if re.search(r"(?<!\w)" + re.escape(k) + (_SAU_CUOI if k == "cuoi" else "") + r"(?!\w)", t))
         if n:
             diem[ma] = n
     return diem

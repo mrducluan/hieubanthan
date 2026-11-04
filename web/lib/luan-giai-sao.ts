@@ -59,8 +59,17 @@ const TEN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", thans
 /** `them`: trường bổ sung CHỈ gửi engine, không tính vào khoá "đã mở hôm nay" (vd LG-ĐS: bảng tỉ lệ kiểm chứng
  *  `trong_so` + phiếu của chính người xem `ca_nhan` — đổi theo thời gian, không đổi bản chất báo cáo). Engine bản cũ
  *  chưa nhận trường đó (422) → gọi lại không kèm, báo cáo vẫn ra. */
+/** EN-2 mục 5: tình trạng (độc thân / có đôi) chỉ đổi MỘT hộp lời khuyên, không đổi bản chất báo cáo → không tính vào
+ *  khoá "đã mở hôm nay" (đổi lựa chọn trong ngày không bị trừ Sao lần hai). */
+export function boTinhTrang(d: Record<string, unknown>): Record<string, unknown> {
+  const ls = d.la_so;
+  if (!ls || typeof ls !== "object" || !("tinh_trang" in ls)) return d;
+  const { tinh_trang: _bo, ...con } = ls as Record<string, unknown>;
+  return { ...d, la_so: con };
+}
+
 export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: string, moDun: string,
-                                    khoaTu: (d: Record<string, unknown>) => unknown = (d) => d,
+                                    khoaTu: (d: Record<string, unknown>) => unknown = boTinhTrang,
                                     them?: () => Promise<Record<string, unknown>>): Promise<NextResponse> {
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
@@ -105,7 +114,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   if (!daMo && !moKhoa) {
     // Quà của bạn bè: thêm đúng một chương sau các chương miễn phí (chương mienPhi + 1), cùng đường cắt + diễn đạt AI.
     const tang = await chuongDuocTang(phien, moDun);
-    const kq = await goiEngineDaKiem({ ...parsed.data, dien_dat_toi_da: mienPhi + tang }, path, dauNguoiGoi(req));
+    const kq = await goiEngineDaKiem({ ...(parsed.data as Record<string, unknown>), dien_dat_toi_da: mienPhi + tang }, path, dauNguoiGoi(req));
     if (!kq.ok) return kq.res;
     const day = kq.body as BaoCaoDay;
     const ban = catXemTruoc(day, mienPhi + tang);

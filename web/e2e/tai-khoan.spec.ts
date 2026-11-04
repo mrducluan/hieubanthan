@@ -62,13 +62,14 @@ test.describe("lưu/đọc hồ sơ tài khoản — Không biết giờ (0015)"
     expect(g.goi.every((x) => "noi_sinh" in x)).toBe(true);
   });
 
-  test("thiếu cột 0007 (lỗi khác) → lùi về bộ cột 0006 như trước", async () => {
-    const g = gia("PGRST204");
+  test("thiếu cột 0007 (lỗi khác) → bỏ cột 0033 rồi lùi về bộ cột 0006 như trước", async () => {
+    const g = gia("PGRST204", "PGRST204");
     await ghiHoSo(g.upsert, "u1", { ...H, do_tin_gio: "exact", gio: "12:30" });
-    expect(g.goi).toHaveLength(2);
+    expect(g.goi).toHaveLength(3);
     expect(g.goi[0]).toMatchObject({ do_tin_gio: "exact", gio_sinh: "12:30" });
-    expect("noi_sinh" in g.goi[1]!).toBe(false);
-    expect(g.goi[1]).toMatchObject({ gio_sinh: "12:30" });
+    expect("utc_noi_sinh" in g.goi[1]!).toBe(false);
+    expect("noi_sinh" in g.goi[2]!).toBe(false);
+    expect(g.goi[2]).toMatchObject({ gio_sinh: "12:30" });
   });
 
   test("đọc lại 'unknown' → hồ sơ máy giờ 12:00 + unknown; bản lưu cũ (null) → không có giờ", async () => {
@@ -79,5 +80,68 @@ test.describe("lưu/đọc hồ sơ tài khoản — Không biết giờ (0015)"
     expect(cu.gio).toBeUndefined();
     expect(cu.do_tin_gio).toBeUndefined();
     expect(hoSoTuHang({ ...hang, gio_sinh: "08:15:00", do_tin_gio: "approx" })).toMatchObject({ gio: "08:15", do_tin_gio: "approx" });
+  });
+});
+
+// EN-6 BI-3 + migration 0033: múi giờ nơi sinh (người sinh ở nước ngoài) đi theo tài khoản; chưa chạy 0033 vẫn lưu được.
+test.describe("lưu/đọc hồ sơ tài khoản — múi giờ nơi sinh (0033)", () => {
+  const NN = { v: 1 as const, ho_ten: "B", ngay: 4, thang: 2, nam: 1990, gio: "06:10", gioi_tinh: "nu" as const,
+    noi_sinh: "nuoc_ngoai", utc_noi_sinh: -5, tao_luc: "2026-11-02T00:00:00Z" };
+  const gia = (...loi: (string | null)[]) => {
+    const goi: Record<string, unknown>[] = [];
+    const upsert = async (hang: Record<string, unknown>) => {
+      goi.push(hang);
+      const ma = loi[goi.length - 1] ?? null;
+      return { error: ma ? { code: ma, message: ma } : null };
+    };
+    return { goi, upsert };
+  };
+
+  test("sinh nước ngoài → lưu utc_noi_sinh; sinh trong nước → gửi null (xoá múi giờ cũ)", async () => {
+    const g = gia();
+    await ghiHoSo(g.upsert, "u2", NN);
+    expect(g.goi).toHaveLength(1);
+    expect(g.goi[0]).toMatchObject({ noi_sinh: "nuoc_ngoai", utc_noi_sinh: -5 });
+    const t = gia();
+    await ghiHoSo(t.upsert, "u2", { ...NN, noi_sinh: "ha-noi" });
+    expect(t.goi[0]).toMatchObject({ noi_sinh: "ha-noi", utc_noi_sinh: null });
+  });
+
+  test("giá trị lạ (không bội 0,25 / ngoài −12…14) → không gửi", async () => {
+    const g = gia();
+    await ghiHoSo(g.upsert, "u2", { ...NN, utc_noi_sinh: 7.1 });
+    expect(g.goi[0]).toMatchObject({ utc_noi_sinh: null });
+  });
+
+  test("chưa chạy 0033 (thiếu cột) → ghi lại không có cột đó, vẫn giữ cột 0007", async () => {
+    const g = gia("PGRST204");
+    await ghiHoSo(g.upsert, "u2", NN);
+    expect(g.goi).toHaveLength(2);
+    expect("utc_noi_sinh" in g.goi[1]!).toBe(false);
+    expect(g.goi[1]).toMatchObject({ noi_sinh: "nuoc_ngoai", gio_sinh: "06:10" });
+  });
+
+  test("lỗi không phải thiếu cột (mạng, quyền) → báo lỗi ngay, không lùi bộ cột", async () => {
+    const g = gia("08006");
+    await expect(ghiHoSo(g.upsert, "u2", NN)).rejects.toThrow("Chưa lưu được");
+    expect(g.goi).toHaveLength(1);
+  });
+
+  test("chưa chạy 0015 nhưng đã chạy 0033 → thử lại vẫn giữ múi giờ", async () => {
+    const g = gia("23514");
+    await ghiHoSo(g.upsert, "u2", { ...NN, do_tin_gio: "unknown" });
+    expect(g.goi).toHaveLength(2);
+    expect(g.goi[1]).toMatchObject({ do_tin_gio: null, utc_noi_sinh: -5 });
+  });
+
+  test("đọc lại: có cột → mang múi giờ + cot_utc; chưa có cột → không cot_utc; tỉnh trong nước bỏ múi giờ", async () => {
+    const hang = { ho_ten: "B", ten_khac: null, ngay_sinh: "1990-02-04", gio_sinh: "06:10:00", gioi_tinh: "nu" as const,
+      vung: null, cap_nhat_luc: "2026-11-02T00:00:00Z", noi_sinh: "nuoc_ngoai", utc_noi_sinh: "5.75" };
+    expect(hoSoTuHang(hang)).toMatchObject({ utc_noi_sinh: 5.75, cot_utc: true, noi_sinh: "nuoc_ngoai" });
+    const { utc_noi_sinh: _bo, ...cu } = hang;
+    const k = hoSoTuHang(cu);
+    expect(k.utc_noi_sinh).toBeUndefined();
+    expect(k.cot_utc).toBeUndefined();
+    expect(hoSoTuHang({ ...hang, noi_sinh: "ha-noi", utc_noi_sinh: 7 }).utc_noi_sinh).toBeUndefined();
   });
 });

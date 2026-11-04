@@ -89,3 +89,45 @@ def test_tu_kiem_bat_loi_import_du_tep_ton_tai(tmp_path, monkeypatch):
     monkeypatch.setattr(tuvi_an_sao, "MAY_CHU", tmp_path / "may_chu.mjs")
     with pytest.raises(tuvi_an_sao.AnSaoLoi):
         tuvi_an_sao.tu_kiem()
+
+
+# ---- EN-6: khoá bản dependency + một bản Python giữa máy dev, CI và ảnh Docker ------------------------------------------
+def _ghim() -> dict[str, str]:
+    ra = {}
+    for dong in (ENGINE / "constraints.txt").read_text(encoding="utf-8").splitlines():
+        dong = dong.strip()
+        if dong and not dong.startswith("#"):
+            ten, _, ban = dong.partition("==")
+            assert ban, f"constraints.txt phải ghim '==': {dong}"
+            ra[re.sub(r"[-_.]+", "-", ten).lower()] = ban
+    return ra
+
+
+def test_constraints_ghim_moi_goi_trong_requirements_va_thoa_dieu_kien():
+    from packaging.requirements import Requirement
+    ghim = _ghim()
+    for dong in (ENGINE / "requirements.txt").read_text(encoding="utf-8").splitlines():
+        dong = dong.split("#")[0].strip()
+        if not dong or dong.startswith("-"):
+            continue
+        r = Requirement(dong)
+        ten = re.sub(r"[-_.]+", "-", r.name).lower()
+        assert ten in ghim, f"{r.name} chưa có trong constraints.txt — sinh lại bằng pip freeze trong ảnh Docker"
+        assert r.specifier.contains(ghim[ten], prereleases=True), f"{r.name}=={ghim[ten]} không thoả '{r.specifier}'"
+
+
+def test_mot_ban_python_dockerfile_ci_python_version():
+    ban = (ENGINE / ".python-version").read_text(encoding="utf-8").strip()
+    assert f"FROM python:{ban}-slim" in DOCKERFILE.read_text(encoding="utf-8")
+    wf = ENGINE.parent / ".github" / "workflows"
+    for tep in wf.glob("*.yml"):
+        for m in re.findall(r'python-version:\s*"?([0-9.]+)"?', tep.read_text(encoding="utf-8")):
+            assert m == ban, f"{tep.name}: python-version {m} khác {ban}"
+        if "pip install -r engine/requirements.txt" in tep.read_text(encoding="utf-8"):
+            assert "-c engine/constraints.txt" in tep.read_text(encoding="utf-8"), tep.name
+
+
+def test_requirements_tro_toi_constraints():
+    """Review T4: `-c constraints.txt` nằm trong requirements.txt → mọi lệnh `pip install -r requirements.txt` (và
+    Dependabot) đi cùng tệp ràng buộc; PR Dependabot nâng cả hai tệp, không đỏ CI vì lệch."""
+    assert "-c constraints.txt" in (ENGINE / "requirements.txt").read_text(encoding="utf-8").splitlines()

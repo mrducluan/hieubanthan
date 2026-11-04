@@ -32,6 +32,7 @@ from app.luangiai import tuvi_phi_hoa as phl
 from app.luangiai import tuvi_sao_luu as tvsl
 from app.luangiai import doi_song_chung as dsc
 from app.luangiai import doi_song_khuon as kh
+from app.luangiai import hoan_canh as hc
 from app.luangiai.doi_song_chung import (  # noqa: F401 — tách dùng chung với Bát tự (BT-ĐS), giữ tên cũ
     MA_MAU_RE, TOI_DA_HOP, _ap_hoc, _cac_cau, _cau_dau, _hoa_dau, _ma, _sach, _sap, _tieu_de, slug, trong_so_xem_lai)
 
@@ -1274,6 +1275,8 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
             h["_ch"] = ma
         ds.append(c)
     cot_loi = dsc.them_cot_loi_van_han(chon_cot_loi(ds), ds, nam_am_xem)
+    # EN-2 mục 5: hộp lời theo tuổi + tình trạng (người dùng tự chọn) ở 5 chương — sau khi chọn cốt lõi (không vào cốt lõi).
+    hc.ap(ds, sinh["ngay"], ngay_xem, sinh.get("tinh_trang"), "ds", hoc)
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).
     kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
     from app.luangiai import luu_y_mang as lym  # noqa: PLC0415

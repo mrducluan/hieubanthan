@@ -52,6 +52,24 @@ def kim_lau(tuoi: int) -> str | None:
     return KIM_LAU.get(tuoi % 9)
 
 
+def thang_gia_thu(chi_nam_co_dau: str) -> dict:
+    """EN-5.1 (2026-11-02) — tháng "đại lợi / tiểu lợi" gả cưới theo chi năm sinh cô dâu, đúng quy tắc Hiệp Kỷ Biện
+    Phương Thư q.36 nêu (năm dương: từ tháng sau tháng bản mệnh đếm thuận; năm âm: từ tháng trước đếm nghịch; tháng thứ
+    nhất = đại lợi, thứ hai = tháng lịch Việt gọi "tiểu lợi", lặp lại sau 6 tháng). Tháng = nguyệt kiến (tiết khí):
+    Dần = tháng 1 … Sửu = tháng 12. Chỉ trả hai nhóm này (bốn nhóm còn lại là lời doạ, sách gốc đã bác)."""
+    i = CHI.index(chi_nam_co_dau)
+    buoc = 1 if i % 2 == 0 else -1
+    dau = [CHI[(i + buoc * k) % 12] for k in (1, 2)]             # tháng thứ nhất, thứ hai (theo chi tháng)
+
+    def thang(chi: str) -> list[int]:
+        so = (CHI.index(chi) - 2) % 12 + 1                       # Dần → 1
+        return sorted((so, (so + 5) % 12 + 1))
+
+    dl, tl = thang(dau[0]), thang(dau[1])
+    ten = lambda ds: [CHI[(m + 1) % 12] for m in ds]             # noqa: E731
+    return {"dai_loi": dl, "tieu_loi": tl, "dai_loi_chi": ten(dl), "tieu_loi_chi": ten(tl)}
+
+
 def hoang_oc(tuoi: int) -> int:
     """Chỉ số cung 0..5 (HOANG_OC)."""
     chuc, le = divmod(tuoi, 10)

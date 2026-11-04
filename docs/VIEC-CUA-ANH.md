@@ -38,6 +38,18 @@
 - [ ] **Thẩm định thật** 10 trang/tuần theo `scripts/tham_dinh.py hang-doi --gsc Trang.csv` — sổ thẩm định hiện 0 trang
       (máy không làm thay được; đòn bẩy E-E-A-T lớn nhất).
 
+### 4w. Đợt 2026-11-02 (bảo mật thư viện · lời theo hoàn cảnh · EN-5/EN-6)
+
+- [ ] **Deploy engine trước web** (Render dựng lại từ main; web cần trường `tinh_trang` + thần sát tham khảo của engine mới).
+- [ ] Chạy migration **0033** (múi giờ nơi sinh vào hồ sơ tài khoản) — mục 4s; chưa chạy thì web vẫn chạy như cũ.
+- [ ] GitHub → Security → Dependabot: sau khi merge, các cảnh báo zod / undici / happy-dom / fast-uri / esbuild / glob /
+      minimatch / postcss-selector-parser tự đóng. Còn **deepmerge** (mức thấp, nằm trong Payload, chưa có bản vá) — để
+      mở hoặc bấm "Dismiss → No bandwidth / tolerable risk".
+- [ ] (Khi engine chạy ≥ 2 tiến trình / máy) tạo Redis Upstash miễn phí, đặt ở Render **`HAN_MUC_REDIS_URL`** (https) +
+      **`HAN_MUC_REDIS_TOKEN`** + **`HAN_MUC_MUOI`** (chuỗi ngẫu nhiên ≥ 16 ký tự, giữ bí mật) để hạn mức lượt AI đếm
+      chung. Một tiến trình như hiện nay thì chưa cần. Khi bật: thêm nhà cung cấp Redis vào Chính sách quyền riêng tư
+      (nhận mã băm IP đổi theo ngày, không nhận IP).
+
 ### 4t. KHẨN — Vercel tạm dừng cả tài khoản (2026-11-02): hieuban.com + cms.hieuban.com đều tắt
 
 Trang báo "This deployment is temporarily paused" = Vercel trả `402 Payment required · DEPLOYMENT_DISABLED` cho CẢ web lẫn
@@ -64,10 +76,15 @@ mỗi lượt xem trang sinh 40–100 lượt chạy hàm vì Next.js tải trư
 - [ ] **Deploy engine trước web** cho đợt này: `ENGINE_VERSION` 0.1.6 (lá số của người sinh miền Nam 01/04/1947–01/07/1955,
       người sinh 23:xx ngày cuối tháng âm / nửa sau tháng nhuận / đêm giao thừa có thể đổi so với trước — đúng quy tắc
       đã chốt, không đổi phái).
-- [ ] (Khi muốn) **Migration thêm cột `utc_noi_sinh` vào bảng `ho_so`** để múi giờ nơi sinh (người sinh ở nước ngoài) đi
-      theo tài khoản sang máy khác; hiện chỉ lưu trên máy (EN-6 BI-3).
-- [ ] (Khi muốn) **Chọn phái** cho thần sát Thiên La Địa Võng / Học Đường / Kim Thần — sách chép nhiều cách khác nhau nên
-      em chưa đưa vào (EN-5.3). Bảng "tháng đại lợi / tiểu lợi" theo tuổi cô dâu cũng chờ một nguồn anh tin dùng (EN-5.1).
+- [ ] **Chạy migration 0033** (`supabase/migrations/0033_ho_so_utc_noi_sinh.sql`, Supabase → SQL Editor, sau 0007; 2 phút)
+      để múi giờ nơi sinh (người sinh ở nước ngoài) đi theo tài khoản sang máy khác (EN-6 BI-3). Chưa chạy thì web vẫn như
+      cũ: múi giờ chỉ lưu trên máy. Kiểm: `/quan-tri` thẻ "Migration Supabase" hoặc `supabase/kiem_thu/da_chay_chua.sql`.
+      Rollback: `0033_ho_so_utc_noi_sinh.down.sql`.
+- [ ] (Khi tiện, 5 phút) **Đọc lại 2 quyết định em đã chốt thay anh** (`docs/QUYET-DINH-EN5-EN6.md`): thần sát Học Đường /
+      Thiên La Địa Võng / Kim Thần theo *Tam Mệnh Thông Hội*, chỉ tham khảo, không đổi mức (EN-5.3); tháng đại lợi / tiểu
+      lợi theo tuổi cô dâu chỉ là nhãn tập quán vì chính *Hiệp Kỷ Biện Phương Thư* đã bác thuyết này (EN-5.1). Muốn đổi
+      phái hay muốn tháng đại lợi được xếp ngày lên trước → báo em.
+- [ ] **Deploy engine trước web** cho đợt 2026-11-02 (trường mới `than_sat_tham_khao`, `thang_gia_thu`; web cũ bỏ qua).
 
 ### 4r. Bản đồ vệ tinh để đo hướng nhà trên máy tính (DH-PC2, 2026-10-27, `docs/DO-HUONG-MAY-TINH.md`)
 

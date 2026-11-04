@@ -25,6 +25,9 @@ export const HoSo = z.object({
   utc_noi_sinh: z.number().min(-12).max(14).multipleOf(0.25).optional(),
   /** TV-V2: "unknown" = không biết giờ → `gio` là giờ đại diện 12:00 chỉ để an tạm lá số; Tử vi mở khối định giờ 12 canh. */
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).optional(),
+  /** EN-2 mục 5: tình trạng NGƯỜI DÙNG TỰ CHỌN (không suy đoán) — chỉ để chọn lời ở chương tình yêu / gia đình. CHỈ lưu
+   *  trên máy (không đồng bộ tài khoản, engine không lưu); bỏ chọn = xoá trường. Chỉ hỏi người từ 18 tuổi. */
+  tinh_trang: z.enum(["doc_than", "co_doi"]).optional(),
   /** Người dùng nhập theo lịch nào; ngày/tháng/năm ở trên LUÔN là dương lịch (engine đổi). */
   lich_nhap: z.enum(["duong", "am"]).optional(),
   /** TP-LICH: ngày âm nhập theo âm lịch Việt Nam (mặc định) hay Trung Quốc (sổ tử vi / lịch Trung Quốc). */
@@ -166,4 +169,10 @@ export function gioHienThi(h: Pick<HoSo, "gio" | "do_tin_gio"> | null | undefine
 /** "14/9 (nhuận) Mậu Thìn" — chỉ định dạng dữ liệu engine đã trả. */
 export function moTaAm(am: NonNullable<HoSo["am"]>, canChi?: string): string {
   return `${am.ngay}/${am.thang}${am.nhuan ? " nhuận" : ""}/${am.nam}${canChi ? ` (${canChi})` : ""}`;
+}
+
+/** EN-2 mục 5: tình trạng tự chọn CHỈ gửi kèm luận giải toàn bộ (báo cáo đời sống chọn lời theo hoàn cảnh) — review T3:
+ *  không gắn vào `laSoTuHoSo` (hỏi đáp, vận hạn, lưu nguyệt… không cần, không gửi thừa dữ liệu cá nhân). */
+export function kemTinhTrang<T extends object>(laSo: T | null, h: HoSo | null | undefined): T | null {
+  return laSo && h?.tinh_trang ? { ...laSo, tinh_trang: h.tinh_trang } : laSo;
 }

@@ -15,6 +15,8 @@
 | lasotuvi 0.1.2 (doanguyen) | Golden độ sáng sao, Hoả Linh, vòng Thái Tuế lối Việt | MIT — chỉ sinh dữ liệu đối chiếu |
 | lunar-typescript | Golden tiết khí, can chi cho Bát tự | Chỉ đối chiếu, không chạy runtime |
 | lunar-python 1.4.8 (6tail) | Bảng hoàng lịch: nghi/kỵ, thần sát, 28 tú, Bành Tổ, hướng thần (`calc/hoang_lich_vendor.py`) + golden 898 ngày | MIT — bảng chép nguyên văn kèm bản quyền; thư viện chỉ làm oracle, không chạy runtime |
+| shunshi-bazi-core 0.2.0 | Golden 5.000 tứ trụ cho thần sát tham khảo Bát tự (Kim Thần, Địa Võng trụ ngày, Chính Học Đường — `fixtures/_generate_than_sat_tham_khao.mjs`) | MIT — chỉ sinh dữ liệu đối chiếu, không chép mã, không chạy runtime |
+| Kanseki Repository (kanripo) | Bản số hoá Tứ khố toàn thư: *Tam Mệnh Thông Hội*, *Hiệp Kỷ Biện Phương Thư* — đọc nguyên văn để đối chiếu (`docs/QUYET-DINH-EN5-EN6.md`) | Cổ thư công cộng; chỉ trích ngắn quy tắc, không chép bản số hoá vào repo |
 | horosa-skill (Horace-Maxwell) | Chỉ đọc danh mục kỹ thuật để đánh giá thiếu hụt (`docs/DANH-GIA-ENGINE-HUYEN-HOC.md`) | **AGPL — KHÔNG chép mã/dữ liệu** |
 | VSOP87 rút gọn | Tiết khí cho Bát tự (sai ≤ 0,63 phút) | Mô hình thiên văn công bố, tự cài đặt |
 | TuViMCP (© 2026 Manh Ha Nguyen) | Danh mục cách cục Tử vi để đối chiếu | MIT |

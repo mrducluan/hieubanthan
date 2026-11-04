@@ -11,16 +11,19 @@ import datetime as dt
 import re
 
 from app.calc import phongthuy as pt
-from app.hoidap import chung, hieu_cau
+from app.hoidap import chung, hieu_cau, mo_dau
 from app.kb import phongthuy_kb as kb
 from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
 from app.narrative.ngan_sach import mo_ta_loi
 
+PT_MO_DAU = False   # EN-3b: đoạn mở đầu Phong thuỷ chưa bật — xem chỗ dùng trong tra_loi
+
 HUONG_KD = {"dong bac": "Đông Bắc", "dong nam": "Đông Nam", "tay bac": "Tây Bắc", "tay nam": "Tây Nam",
             "bac": "Bắc", "nam": "Nam", "dong": "Đông", "tay": "Tây"}
 _H_RX = r"(dong bac|dong nam|tay bac|tay nam|bac|nam|dong|tay)"
-TIEN_TO = r"(huong|phia|goc|phuong|mat tien|can huong|cua chinh huong|quay)"
+# EN-3c: "hướng nhà Đông Nam", "bếp hướng Tây Bắc" — chen tên vật giữa "hướng" và phương
+TIEN_TO = r"(huong|phia|goc|phuong|mat tien|can huong|cua chinh huong|quay)(?:\s+(?:nha|bep|cua|cong|ban tho))?"
 QUAI_KD = {"kham": "Khảm", "khon": "Khôn", "chan": "Chấn", "ton": "Tốn", "can": "Càn", "doai": "Đoài",
            "ly": "Ly"}
 DU_NIEN_KD = {chung.chuan_hoa(k): k for k in ["Sinh Khí", "Thiên Y", "Diên Niên", "Phục Vị", "Hoạ Hại",
@@ -32,7 +35,7 @@ HUONG_CA_NHAN = [r"hop huong", r"huong nha", r"huong gi", r"huong nao", r"cung p
                  r"huong ban", r"quay dau", r"phong ngu", r"hop khong",
                  r"nha huong (dong|tay|nam|bac)( (nam|bac))?\b.{0,20}\b(tot|xau|hop)\b"]       # HH-CT3: "nhà hướng Tây có xấu không"
 NAM_KW = [r"nam nay", r"nam sau", r"nam 20\d\d"]
-NAM_VIEC = [r"sua nha", r"lam nha", r"dong tho", r"xay nha", r"ngu hoang", r"tranh dong", r"kim lau",
+NAM_VIEC = [r"sua nha", r"lam nha", r"sua (bep|phong|cong|cua|tuong|mai|lai nha)", r"sua chua", r"(dap|duc) (tuong|pha|bo)", r"dong tho", r"xay nha", r"ngu hoang", r"tranh dong", r"kim lau",
             r"hoang oc", r"tam tai", r"thai tue", r"xem tuoi"]
 HOP = [r"vo chong", r"ca hai", r"hai vo chong", r"vo toi", r"chong toi"]
 AM_TRACH = [r"mo phan", r"dat mo", r"tang thu", r"long mach", r"hai cot", r"boc mo", r"xay mo", r"ngoi mo",
@@ -132,11 +135,16 @@ def phan_loai(cau_hoi: str) -> dict:
         kq["loai"] = "ky_thuat"
     elif not kq["bo_tri"] and (td := hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "phongthuy")):
         kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển
+    elif kq["huong"] and kq["ca_nhan"] and chung.co(t, [r"hop (voi )?(toi|minh|em)", r"(on|tot|hop) (voi|cho) (toi|minh|em)",
+                                                         r"hop (toi|minh|em) hon", r"hop huong", r"huong nao (hop|tot)"]):
+        kq["loai"] = "huong_ca_nhan"   # EN-3c: "chung cư hướng Đông hay Tây hợp tôi hơn", "góc Tây Nam có ổn với tôi"
     elif kq["bo_tri"]:
         kq["loai"] = "bo_tri"
         if any(kb.bo_tri(m)["nguon"] == "dan_gian" for m in kq["bo_tri"]):
             kq["xu_ly"] = "tra_loi_kem_luu_y"
-    elif chung.co(t, HUONG_CA_NHAN) or kq["ca_nhan"]:
+    elif chung.co(t, HUONG_CA_NHAN) or kq["ca_nhan"] or (kq["huong"] and chung.co(t, [
+            r"(dat|ke|quay|de|xoay) (bep|giuong|ban|ban tho|cua|ban hoc)", r"(bep|giuong|ban lam viec|ban hoc|ban tho|cua chinh) "
+            r".{0,25}(huong|goc|phia)"])):          # EN-3c: "nên đặt bếp ở góc Đông hay góc Nam" — chọn phương cho một vật
         kq["loai"] = "huong_ca_nhan"
         kq["do_tin_thap"] = not chung.co(t, HUONG_CA_NHAN) and not kq["huong"]   # EN-3: chỉ có "của tôi" → mời chọn
     else:
@@ -561,6 +569,10 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
             goi["muc"].insert(0, mn)                 # trả lời theo đúng nhà trước, kiến thức chung sau
             goi["phan_loai"]["theo_nha"] = True
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
+    # EN-3b: đoạn mở đầu Phong thuỷ CHƯA bật — trên holdout đóng băng trả lời thẳng lùi 72 → 68 % khi bật (đoạn mở đầu đẩy
+    # đoạn bố trí ra khỏi đoạn 1–2). Hàm `mo_dau.pt_mo` giữ lại; bật khi sửa được bằng bộ dev mà holdout không lùi.
+    if PT_MO_DAU and pl["xu_ly"] not in chung.DAC_BIET and not goi["phan_loai"].get("theo_nha"):
+        van = mo_dau.dat_dau(van, mo_dau.pt_mo(goi, pl["cau_chuan_hoa"], cau_hoi), goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:

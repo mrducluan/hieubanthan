@@ -178,3 +178,20 @@ def bo_sung_goi(goi: dict, cau_hoi: str, nguoi: dict, ngay_xem: dt.date) -> dict
                 dau.append(m)
     con_lai = [m for m in goi["muc"] if m not in dau]
     return hoi._ket({**goi, "muc": dau + con_lai, "thu_tu_co_dinh": True})   # EN-3: không sắp lại — câu của thẻ đứng đầu
+
+
+def muc_theo_ma(goi: dict, ma: str, nguoi: dict, ngay_xem: dt.date) -> list[dict]:
+    """EN-3b: câu hỏi tự gõ nói đúng một nỗi đau của bảng (điều được hỏi nhận theo danh mục cố định `hoidap.mo_dau`) →
+    bằng chứng của ĐÚNG các chỉ số của câu đó (cùng hàm như câu bấm từ bảng) cho đoạn mở đầu; không đổi gói."""
+    q = next((x for x in _kb()["cau_hoi"] if x["ma"] == ma), None)
+    pl = goi["phan_loai"]
+    if not q or pl["xu_ly"] in ("an_toan", "tu_choi_nhe") or goi["can_them"] or pl["linh_vuc"] == "hop_doi" \
+            or pl.get("doi_tuong") not in (None, "ban_than"):
+        return []
+    cs = _chi_so(nguoi, ngay_xem)
+    ra: list[dict] = []
+    for c in q["chi_so"]:
+        for m in _muc_chi_so(c, cs, nguoi, pl["linh_vuc"], ngay_xem):
+            if m not in ra and m not in goi["muc"]:
+                ra.append(m)
+    return ra

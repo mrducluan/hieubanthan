@@ -89,6 +89,8 @@ export interface ChuongDoiSongMo {
   ma: string; tieu_de: string; khoa?: false;
   cau_hoi?: string; muc?: Muc; nhan_muc?: string; tom_tat?: string;
   hop?: Hop[]; doan: string[]; can_cu?: string[]; cau_tu_soi?: string;
+  /** EN-2 mục 5: lời theo tuổi + hoàn cảnh (dòng "Với bạn lúc này", ngoài danh sách hộp — không tranh trần 6 hộp). */
+  loi_hoan_canh?: Hop;
   van_ai?: string; che_do?: string; thuat_ngu?: ThuatNgu[];
   /** Chương sức khoẻ: câu "không thay lời bác sĩ". */
   mien_tru?: string;
@@ -137,7 +139,8 @@ export const NHAN_MUC: Record<Muc, string> = { thuan: "Thuận lợi", can_bang:
 
 /** Mọi mã kiểm chứng trong báo cáo (để xin tỉ lệ một lần cho cả bài). */
 export function maMauBaoCao(bc: Pick<BaoCaoDoiSong, "cot_loi" | "chuong">): string[] {
-  const ds = [...(bc.cot_loi ?? []), ...bc.chuong.flatMap((c) => (c.khoa ? [] : c.hop ?? []))];
+  const ds = [...(bc.cot_loi ?? []), ...bc.chuong.flatMap((c) => (c.khoa ? []
+    : [...(c.hop ?? []), ...(c.loi_hoan_canh ? [c.loi_hoan_canh] : [])]))];
   return [...new Set(ds.filter((h) => !h.dang_xem_lai && h.ma_mau).map((h) => h.ma_mau!))].sort();
 }
 
