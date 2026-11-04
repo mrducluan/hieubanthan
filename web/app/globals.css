@@ -222,6 +222,7 @@
   --ls-ky: rgb(206 204 228); --ls-luu: rgb(185 167 255); --ls-nhan: rgb(233 196 106); --ls-nhan-mo: rgb(233 196 106 / 0.45);
   --ls-nhan-nen: rgb(233 196 106 / 0.05); --ls-hoa-van: rgb(185 167 255 / 0.22); --ls-han: rgb(233 196 106 / 0.22);
   --ls-tt-nen: rgb(236 235 247); --ls-tt-chu: rgb(14 14 32);
+  --ls-ky-han: rgb(217 151 58);   /* TV-HOA-HAN: Kỵ của lớp hạn — hổ phách, không đỏ */
 }
 /* A11Y-1: màu chữ Giấy cổ đạt tương phản ≥ 4.5:1 (WCAG AA) trên mọi nền ô — kiểm lại khi đổi màu. */
 .la-so-giay {
@@ -232,6 +233,7 @@
   --ls-ky: rgb(30 24 20); --ls-luu: rgb(98 72 178); --ls-nhan: rgb(160 44 28); --ls-nhan-mo: rgb(160 44 28 / 0.45);
   --ls-nhan-nen: rgb(160 44 28 / 0.04); --ls-hoa-van: rgb(160 120 60 / 0.25); --ls-han: rgb(120 80 40 / 0.35);
   --ls-tt-nen: rgb(30 24 20); --ls-tt-chu: rgb(250 244 230);
+  --ls-ky-han: rgb(146 84 8);
 }
 /* Nhãn nhỏ (eyebrow) trong vùng Giấy cổ: màu xám của giao diện tối chỉ đạt ~3:1 trên giấy → dùng màu chữ của giấy. */
 .la-so-giay .eyebrow { color: var(--ls-mo); }

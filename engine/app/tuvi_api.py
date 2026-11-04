@@ -11,6 +11,7 @@ Phạm vi output khai báo rõ: /tuan-triet → pham_vi = "tuan_triet_only";
 from __future__ import annotations
 
 import datetime as _dt
+from functools import lru_cache
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException
@@ -24,7 +25,7 @@ from app.hoidap import tuvi as hoidap_tv
 from app.luangiai import tuvi_luu_nguyet as luan_luu_nguyet
 from app.luangiai import tuvi_the_cung as the_cung
 from app import nhat_ky
-from app.kb import tuvi_kb
+from app.kb import trang_tuvi, tuvi_kb
 from app.config import ENGINE_VERSION, HourConfidence, Region
 
 router = APIRouter(prefix="/v1/tuvi", tags=["tuvi"])
@@ -279,6 +280,12 @@ def _sao(s: dict) -> dict:
     return {"ten": s["name"], "do_sang": s["brightness"] or None, "tu_hoa": s["mutagen"] or None}
 
 
+@lru_cache(maxsize=1)
+def _trang_sao_cung() -> dict[tuple[str, str], str]:
+    """(chính tinh, tên cung) → slug trang kiến thức "sao ở cung" (một nguồn với mục lục kiến thức)."""
+    return dict(trang_tuvi.ds_sao_cung())
+
+
 def _phu(s: dict) -> dict:
     # loai = phân nhóm của iztro: soft (cát), tough (sát), lucun, tianma, flower, helper, adjective
     return {**_sao(s), "loai": s["type"]}
@@ -371,7 +378,8 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             "la_menh": p["name"] == "Mệnh", "la_than": p["isBodyPalace"],
             "la_lai_nhan": p["isOriginalPalace"],
             "chinh_tinh": [{**_sao(x), "do_sang_nam_phai": (ds := tuvi_do_sang_vn.do_sang(x["name"], p["earthlyBranch"])),
-                            "giai_nghia": _giai_nghia_sao(x["name"], ds, p["name"])}
+                            "giai_nghia": _giai_nghia_sao(x["name"], ds, p["name"]),
+                            "trang_sao_cung": _trang_sao_cung().get((x["name"], p["name"]))}
                            for x in p["majorStars"]],
             "phu_tinh": [{**_phu(x), "do_sang_nam_phai": tuvi_do_sang_vn.do_sang_phu(x["name"], p["earthlyBranch"])}
                          for x in p["minorStars"]],
@@ -379,7 +387,10 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             "truong_sinh": p["changsheng12"], "bac_si": p["boshi12"],
             "tuong_tien": p["jiangqian12"], "tue_tien": p["suiqian12"],
             "thai_tue_nam_phai": tuvi_thai_tue_vn.ten_nam_phai(p["suiqian12"]),
-            "dai_han": {"tu_tuoi": p["decadal"]["range"][0], "den_tuoi": p["decadal"]["range"][1]},
+            # TV-HOA-HAN: năm (âm lịch) đầu / cuối hạn = năm âm lập lá + tuổi mụ − 1 — để nhảy năm xem tới đúng hạn.
+            "dai_han": {"tu_tuoi": p["decadal"]["range"][0], "den_tuoi": p["decadal"]["range"][1],
+                        "tu_nam": dv.am_lap[2] + p["decadal"]["range"][0] - 1,
+                        "den_nam": dv.am_lap[2] + p["decadal"]["range"][1] - 1},
             "tieu_han_tuoi": p["ages"],
             "do_sang_phu": _do_sang_phu(p),
         } for p in la["palaces"]],
