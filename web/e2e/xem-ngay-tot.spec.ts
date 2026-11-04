@@ -155,6 +155,6 @@ test("6b-1: trang ngày và trang 'ngày tốt cưới hỏi tháng' nói cùng 
   const ds = page.getByTestId("ngay-tot-viec");
   await expect(ds).not.toContainText("01/01/2027");
   await expect(ds.getByTestId("nhan-dao").first()).toBeVisible();
-  await expect(ds.getByTestId("nhan-dao", { hasText: "Hắc đạo" }).first()).toBeVisible();
+  await expect(ds.getByTestId("nhan-dao").filter({ hasText: "Hắc đạo" }).first()).toBeVisible();
   await expect(page.getByLabel("Trả lời nhanh")).toContainText("Đẹp nhất");
 });
