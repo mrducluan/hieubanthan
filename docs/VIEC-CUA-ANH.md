@@ -5,6 +5,17 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4v. Thanh mảng + breadcrumb + menu Huyền học (TM-1, 2026-11-03) — sau khi merge
+
+- [ ] **CMS → Giao diện website → Menu đầu trang** (sau khi CMS deploy chạy migration `tm_1_menu_huyen_hoc`): mở menu con
+      "Huyền học", kiểm thấy 3 mục mới (Sao ở từng cung Tử vi · 64 quẻ Kinh Dịch · Sinh năm nào mệnh gì). Nếu anh từng tự
+      sửa chữ 3 mục cũ (Hướng xấu theo năm / Tuổi xông đất / Sao hạn theo tuổi) thì migration giữ nguyên — đổi tay ở đây.
+- [ ] **CMS → Chữ dùng chung** (tuỳ chọn): bấm "Đồng bộ ngay" ở Trang website → xuất hiện các nhóm "Thanh mảng · Tử vi…";
+      đổi nhãn thanh ở đây (để trống = chữ gốc). Đường dẫn không sửa được ở CMS — muốn thêm / bớt mục thì nhắn em.
+- [ ] **Sau 4–6 tuần**: PostHog sự kiện `nav_bar_clicked` (tu = mảng, den = mục) — mục nào ít người bấm thì bỏ / đổi tên;
+      Search Console cụm `/tu-vi/sao-o-cung`, `/kinh-dich/que`, `/bat-tu/menh-theo-nam` (lượt hiển thị trước ↔ sau). Sau
+      60–90 ngày có số thì quyết làm mega-menu (phương án B, `docs/audit-2026-11/H-de-xuat-dieu-huong.md`) hay không.
+
 ### 4u. Kiểm toán SEO/GEO (AUD, 2026-11-03) — sau khi merge (deploy ENGINE trước web)
 
 - [ ] **Deploy engine trước web** (route mới `/v1/phongthuy/cung-phi`, `/v1/lich/viec-thang-dem`); CMS deploy tự chạy

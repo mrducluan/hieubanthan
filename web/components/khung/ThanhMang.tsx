@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "@/components/khung/Lien";
 import { useChuChung } from "@/components/cms/ChuChung";
+import { ghi } from "@/lib/do-luong";
 import { khoaChu, mucDangXem, thanhCua } from "@/lib/thanh-mang";
 import { cn } from "@/lib/utils";
 
@@ -69,7 +70,7 @@ export function ThanhMang({ dem = {} }: { dem?: Record<string, number> }) {
               const Lk = m.duong.includes("?") ? "a" : Link;
               return (
                 <li key={m.ma} className="flex">
-                  <Lk href={m.duong} aria-current={on ? (dungTrang(m.duong) ? "page" : "location") : undefined} data-muc={m.ma}
+                  <Lk href={m.duong} onClick={() => ghi("nav_bar_clicked", { tu: t.ma, den: m.ma, trang: path })} aria-current={on ? (dungTrang(m.duong) ? "page" : "location") : undefined} data-muc={m.ma}
                     className={cn("relative flex shrink-0 items-center whitespace-nowrap px-2.5 text-[0.84rem] text-fg-muted transition-colors hover:text-fg",
                       "focus-visible:rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold",
                       i === 0 && "font-medium text-fg",

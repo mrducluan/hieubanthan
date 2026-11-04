@@ -129,6 +129,10 @@ test("trang con: breadcrumb 5 cấp, thanh mảng vẫn sáng cụm cha; bấm t
   await expect(tm.locator("[data-muc=sao_cung]")).toHaveAttribute("aria-current", "location");   // cụm cha, không phải chính trang
   await tm.locator("[data-muc=tu_hoa]").click();
   await expect(page).toHaveURL(/\/tu-vi\/tu-hoa$/);
+  // đo lượt bấm thanh: chỉ mã mảng + mã mục + đường dẫn đang xem
+  const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: { su_kien?: string; event?: string; tu?: string; den?: string }[] }).__hbt_su_kien ?? []);
+  expect(JSON.stringify(sk)).toContain("nav_bar_clicked");
+  expect(JSON.stringify(sk)).toMatch(/"tu":"tuvi"[^}]*"den":"tu_hoa"|"den":"tu_hoa"[^}]*"tu":"tuvi"/);
   await expect(tm.locator("[data-muc=tu_hoa]")).toHaveAttribute("aria-current", "page");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Tứ hoá");
 });
