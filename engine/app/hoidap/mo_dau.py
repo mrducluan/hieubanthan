@@ -69,7 +69,8 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
      [r"ket hon", r"(?<!\w)cuoi(?! (nam|thang|tuan|doi|ngay|cung|ky))", r"lay (vo|chong)", r"dinh hon", r"dam cuoi",
       r"(?<!\w)hon nhan", r"lap gia dinh", r"thanh hon"]),
     ("vo_chong", "chuyện vợ chồng", "tinh_cam",
-     [r"vo chong", r"(chong|vo) (toi|em|minh|tui)", r"ly hon", r"ly di", r"ngoai tinh", r"phu the"]),
+     [r"vo chong", r"(chong|vo) (toi|em|minh|tui)", r"ly hon", r"ly di", r"ngoai tinh", r"phu the",
+      r"(?<!\w)(toi|em|minh|tui) (va|voi) (chong|vo)(?!\w)"]),
     ("tinh_duyen", "chuyện tình cảm, tình duyên", "tinh_cam",
      [r"(?<!song )(?<!trong )tinh (duyen|cam|yeu)", r"nguoi yeu", r"\bcrush\b", r"(?<!\w)e (hoai|mai|lau)", r"(?<!\w)doc than", r"dao hoa",
       r"to tinh", r"(?<!\w)yeu (ai|nhau|xa|lai|duong|duoc|nguoi)", r"(?<!\w)(dang|chua|moi|biet) yeu", r"(ban|nguoi) (trai|gai)(?! (toi|em|minh) (sinh|nam))",
@@ -108,7 +109,8 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
      [r"(nuoc|ra) ngoai", r"xuat ngoai", r"du hoc", r"di xa", r"xa (que|nha)", r"dinh cu", r"cong tac", r"thien di",
       r"lap nghiep", r"ve que", r"thanh pho", r"(?<!\w)que (nha|huong)"]),
     ("mua_nha", "chuyện mua nhà, đất", "nha_cua",
-     [r"mua (nha|dat|can ho|chung cu|mieng dat)", r"tau (nha|dat)", r"nha (dat|rieng)", r"dien trach", r"bat dong san"]),
+     [r"mua (nha|dat|can ho|chung cu|mieng dat|lo dat|manh dat)", r"tau (nha|dat)", r"nha (dat|rieng)", r"dien trach",
+      r"bat dong san", r"(manh|lo|mieng|thua) dat.{0,25}(mua|dinh mua)", r"(dat|rut) coc"]),
     ("ban_nha", "chuyện bán nhà, đất", "nha_cua",
      [r"ban (nha|dat|can ho)", r"rao ban", r"nguoi mua"]),
     ("lam_nha", "chuyện làm nhà, sửa nhà", "nha_cua",
@@ -142,8 +144,62 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
 _THEO_MA = {ma: (ma, nhan, mang, mau) for ma, nhan, mang, mau in DIEU_HOI}
 
 
+# EN-3d: nhãn RÕ hơn cho đầu câu "Về …" — vẫn từ danh mục cố định (không chép chữ người dùng). Chỉ đổi NHÃN hiển thị
+# khi điều cha (mã trong DIEU_HOI) đã nhận ra ở cùng vế; mã, mảng, chương giữ nguyên (định tuyến không đổi).
+# (nhãn rõ, mã cha, mẫu) — thứ tự: cụ thể trước.
+NHAN_RO: list[tuple[str, tuple[str, ...], list[str]]] = [
+    ("chuyện ở lại hay nhảy việc", ("doi_viec",), [r"(o lai|tiep tuc).{0,40}(hay|hoac).{0,30}(nhay|doi|nghi|chuyen|bo)",
+                                                   r"nhay viec"]),
+    ("chuyện chuyển công tác", ("doi_viec", "di_xa"), [r"(chuyen|xin|di) cong tac", r"dieu chuyen", r"luan chuyen"]),
+    ("chuyện xin việc, phỏng vấn", ("doi_viec",), [r"phong van", r"xin viec", r"(nop|gui) (don|ho so|cv)", r"tim viec"]),
+    ("chuyện nghỉ việc", ("doi_viec",), [r"nghi viec", r"bo viec", r"xin nghi"]),
+    ("chuyện lương, xin tăng lương", ("thang_tien", "lam_giau"), [r"(tang|len|deal|dam phan|xin) luong", r"(?<!\w)luong (thang|co|len|tang)"]),
+    ("chuyện mở rộng việc làm ăn", ("kinh_doanh",), [r"mo rong", r"(them|mo them) (chi nhanh|cua hang|co so|diem ban)"]),
+    ("chuyện sang nhượng quán, cửa hàng", ("kinh_doanh",), [r"sang (nhuong|lai|quan|tiem|cua hang|mat bang)"]),
+    ("chuyện khai trương", ("kinh_doanh",), [r"khai truong"]),
+    ("chuyện mở quán, mở cửa hàng", ("kinh_doanh",), [r"mo (quan|tiem|cua hang|shop|nha hang|spa|salon|cua tiem|xuong)",
+                                                     r"ban (online|hang online)"]),
+    ("chuyện vay ngân hàng", ("vay_no",), [r"vay (ngan hang|von|the chap)", r"(di|xin|ho so|duoc) vay"]),
+    ("chuyện cho vay, cho mượn tiền", ("vay_no",), [r"cho (muon|vay)"]),
+    ("chuyện đòi nợ", ("vay_no",), [r"doi no", r"(no|vay).{0,20}(khong|chua) tra"]),
+    ("chuyện chứng khoán, cổ phiếu", ("dau_tu",), [r"chung khoan", r"co phieu"]),
+    ("chuyện mua vàng", ("dau_tu",), [r"(mua|tich|tru) vang", r"vang (mieng|nhan)"]),
+    ("chuyện tiền ảo", ("dau_tu",), [r"\bcoin\b", r"tien ao", r"crypto"]),
+    ("chuyện tiền cọc mua nhà", ("mua_nha", "ban_nha"), [r"(dat|rut|mat|lay lai|tra) coc", r"tien coc"]),
+    ("chuyện mua căn hộ chung cư", ("mua_nha",), [r"(can ho|chung cu)"]),
+    ("chuyện mua đất", ("mua_nha",), [r"mua (dat|mieng dat|lo dat|manh dat)", r"(manh|lo|mieng|thua) dat"]),
+    ("chuyện xin visa", ("kien_tung",), [r"\bvisa\b", r"thi thuc"]),
+    ("chuyện thừa kế", ("kien_tung",), [r"thua ke", r"chia (tai san|dat|nha)"]),
+    ("chuyện kiện tụng", ("kien_tung",), [r"(?<!\w)kien (tung|cao|ai|nguoi|doi|ra|len|nhau|hang xom)",
+                                         r"(thua|thang|vu|bi|di|khoi) kien", r"(?<!\w)toa (an|xu|tuyen)"]),
+    ("chuyện hợp đồng", ("kien_tung",), [r"hop dong", r"ky ket"]),
+    ("chuyện ly hôn", ("vo_chong",), [r"ly (hon|di|than)"]),
+    ("chuyện làm lành sau cãi nhau", ("vo_chong", "tinh_duyen"), [r"lam (lanh|hoa)", r"cai nhau", r"gian nhau",
+                                                                   r"(?<!\w)xin loi"]),
+    ("chuyện người cũ quay lại", ("tinh_duyen",), [r"(nguoi yeu|ny|nguoi) cu", r"quay lai", r"tai hop"]),
+    ("chuyện người ấy có thật lòng", ("tinh_duyen",), [r"that long", r"thuc long", r"(co|that) yeu (toi|em|minh)"]),
+    ("chuyện tỏ tình", ("tinh_duyen",), [r"to tinh"]),
+    ("chuyện học tiếp hay đi làm", ("thi_cu", "cong_viec"), [r"nghi hoc", r"bo hoc", r"(hoc tiep|hoc len).{0,30}(hay|hoac).{0,20}(di lam|lam)",
+                                                             r"(di lam).{0,20}(hay|hoac).{0,20}hoc"]),
+    ("chuyện du học", ("di_xa", "thi_cu"), [r"du hoc"]),
+    ("chuyện về quê lập nghiệp", ("di_xa",), [r"ve que (lam|song|nuoi|trong|mo|lap)", r"ve que"]),
+]
+
+
+def _ro(c: str, ma: str) -> str | None:
+    return next((n for n, cha, mau in NHAN_RO if ma in cha and _co(c, mau)), None)
+
+
 def _cac(t: str) -> list[dict]:
-    return [{"ma": ma, "nhan": nhan, "mang": mang} for ma, nhan, mang, mau in DIEU_HOI if _co(t, mau)]
+    ra = []
+    for ma, nhan, mang, mau in DIEU_HOI:
+        if _co(t, mau):
+            d = {"ma": ma, "nhan": nhan, "mang": mang}
+            ro = _ro(t, ma)
+            if ro:
+                d["nhan_ro"] = ro
+            ra.append(d)
+    return ra
 
 
 def cac_dieu_hoi(t: str, raw: str | None = None) -> list[dict]:
@@ -181,11 +237,16 @@ def dieu_hoi(t: str, raw: str | None = None, chuong: str | None = None) -> dict 
     phân loại của mảng đã chọn): trong các điều nhận ra, ưu tiên điều thuộc đúng chương đó (phân loại của mảng đã xét
     kỹ hơn — "gia đình nội ngoại có hỗ trợ không" là chuyện gia đình, không phải chuyện người giúp)."""
     ds = cac_dieu_hoi(t, raw)
+    d0 = None
     if chuong:
-        for d in ds:
-            if chuong_cua(d) == chuong:
-                return d
-    return ds[0] if ds else None
+        d0 = next((d for d in ds if chuong_cua(d) == chuong), None)
+    d0 = d0 or (ds[0] if ds else None)
+    if d0 and d0.get("nhan_ro"):
+        # EN-3d: hai việc cụ thể khác mảng trong cùng câu ("vay ngân hàng mở shop") → nêu cả hai.
+        kem = next((d for d in ds if d is not d0 and d["mang"] != d0["mang"] and d.get("nhan_ro")), None)
+        if kem:
+            d0 = {**d0, "nhan_ro": f"{d0['nhan_ro']} và {kem['nhan_ro'].removeprefix('chuyện ')}"}
+    return d0
 
 
 # Mảng của điều được hỏi → chương báo cáo đời sống (Tử vi / Bát tự); một số mã có chương riêng.
@@ -248,7 +309,7 @@ def ghep(*phan: str | None) -> str:
 
 def dau_cau(dieu: dict | None, mac_dinh: str, moc: str | None = None) -> str:
     """"Về {điều được hỏi}{, mốc}" — nhãn từ danh mục cố định; không nhận ra thì dùng `mac_dinh` (tên mảng)."""
-    nhan = (dieu or {}).get("nhan") or mac_dinh
+    nhan = (dieu or {}).get("nhan_ro") or (dieu or {}).get("nhan") or mac_dinh
     return f"Về {nhan}" + (f" {moc}" if moc else "")
 
 
@@ -322,6 +383,12 @@ KHUNG_HOANG_QH = [r"ngoai tinh", r"ly (hon|di|than)", r"phan boi", r"bao (hanh|l
 DONG_CAM_QH = ("Chuyện bạn đang trải qua rất nặng lòng. Không lá số, quẻ hay con số nào quyết thay bạn việc giữ hay buông; "
                "phần dưới chỉ gợi một cách nhìn để bạn tự cân nhắc. Nếu có bạo lực hoặc bạn thấy không an toàn, hãy ưu tiên "
                "an toàn của mình và tìm một người tin cậy để cùng tính.")
+
+
+def dong_cam(dieu: dict | None) -> str:
+    """Câu đồng cảm cho câu khủng hoảng quan hệ; gọi tên điều được hỏi (nhãn danh mục) khi nhận ra."""
+    nhan = (dieu or {}).get("nhan_ro") or ((dieu or {}).get("nhan") if (dieu or {}).get("mang") == "tinh_cam" else None)
+    return DONG_CAM_QH if not nhan else DONG_CAM_QH.replace("Chuyện bạn đang", hoa(nhan) + " bạn đang", 1)
 
 
 def khong_mo(t: str) -> bool:
@@ -484,7 +551,7 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
     sn = next((m for m in muc if m.get("loai") == "so_nam" and m.get("nam")), None)
     cs = next((m for m in muc if m.get("loai") == "cua_so"), None)
     if khong_mo(t):
-        return DONG_CAM_QH                          # câu trung tính, đồng cảm — không nêu mức, không "việc nên làm"
+        return dong_cam(dieu_hoi(t, raw))           # câu trung tính, đồng cảm — không nêu mức, không "việc nên làm"
     nh_cau, nh_tk = _ngu_hanh_cau(muc) if (mon == "battu" and pl.get("chu_de") == "ngu_hanh") else ("", "")
     dv_cau = _dai_van_cau(muc) if (mon == "battu" and pl.get("loai") == "van" and re.search(r"dai van|\bvan\b", t)) else ""
     if ds and sn and ds.get("chuong") in ("nam_nay", "cuoc_doi"):
@@ -560,7 +627,7 @@ def que_mo(dq: dict | None, t: str, raw: str | None = None, moc: str | None = No
     """Điều được hỏi + mức quẻ (theo phái đang đọc) + nghĩa của mức + hình ảnh quẻ + việc đầu của nhóm việc đúng mức.
     Mọi chữ lấy từ `doc_que` (KB `kinhdich_doi_song` + "Hiểu đơn giản" của quẻ)."""
     if khong_mo(t):
-        return DONG_CAM_QH
+        return dong_cam(dieu_hoi(t, raw))
     if not dq or not dq.get("nhan_muc"):
         return None
     from app.luangiai import kinhdich_doi_song as kd  # noqa: PLC0415
@@ -680,7 +747,7 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
             or goi.get("thu_tu_co_dinh"):            # câu bấm từ bảng nỗi đau: đã trả lời đúng chỉ số của thẻ
         return None
     if khong_mo(t):
-        return DONG_CAM_QH
+        return dong_cam(dieu_hoi(t, raw))
     from app.hoidap import hieu_cau  # noqa: PLC0415
     if hieu_cau.kieu(t) == "kien_thuc" or _co(t, [r"(?<!\w)(nguoi )?so (chu dao |duong doi )?\d{1,2}(?!\d)"]):
         return None                      # câu kiến thức / câu về MỘT con số được nêu tên: phần dưới đã trả lời thẳng

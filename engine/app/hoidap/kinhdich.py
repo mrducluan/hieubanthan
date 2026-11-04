@@ -185,6 +185,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
         return kq
     if not td_kd(t) and chung.co(t, KY_THUAT) and chung.co(t, THUAT_NGU) and not chung.co(t, [r"\btoi\b", r"\bminh\b", r"\bem\b"]):
         kq["loai"] = "ky_thuat"      # EN-3c: "Quẻ biến khác quẻ hỗ thế nào" — câu kiến thức về thuật ngữ, không gieo quẻ
+        kq["tu_dien"] = [m["ma"] for m in hieu_cau.tu_dien_khop(cau_hoi, "kinhdich")]   # EN-3d: trước trả lời rỗng
         return kq
     if td := hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "kinhdich"):
         kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển, không gieo quẻ
