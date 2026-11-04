@@ -414,6 +414,17 @@ def _khuon(so: dict, ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy_uoc
             hop.append(kh.hop("loi_khuyen", "Tiền bạc", f"{_dau(cv['tien_bac'])}.", ma=kh.ma_mau("thanso", "su_nghiep", "tien", str(so["duong_doi"]))))
     hop.append(kh.hop("thoi_diem", f"Giai đoạn {hien['dinh']}/4 (tuổi {_tuoi(hien)})", f"Số {hien['so']} — {nd.get('chu_de', '')}." + (f" Từ năm {ke['tu_nam']}: giai đoạn {ke['dinh']}." if ke else ""),
                       ma=kh.ma_mau("thanso", "su_nghiep", "giai_doan", str(hien["dinh"])), tu_tuoi=hien.get("tu_tuoi"), den_tuoi=hien.get("den_tuoi")))
+    # CY-1: năm cá nhân có chủ đề tiền / việc (KB chu_y_kb) trong mười năm tới → "Năm nên chú ý tiền bạc, công việc hơn".
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    if ngay_xem.year - nam >= cyn.TUOI_TOI_THIEU:
+        mangs = cyn.kb.chuong("thanso").get("su_nghiep") or []
+        theo = {m: cyn.thanso_nam_nguoi(ngay, thang, m, y) for m in mangs}
+        co = [m for m in mangs if theo[m]]
+        if co:
+            h_cy = cyn.hop_chuong(theo, kh.ma_mau("thanso", "su_nghiep", "chu_y", "+".join(co), cyn.ma_ly_do(theo[co[0]][0])),
+                                  lambda loai, td, nd, cu, ma, _w, **k: kh.hop(loai, td, nd, can_cu=cu, ma=ma, **k))
+            if h_cy:
+                hop.insert(min(2, len(hop)), h_cy)
     ra["su_nghiep"] = {"hop": hop, "tom_tat": (f"Thế mạnh {cv.get('the_manh', '').split(',')[0].lower()}; " if cv else "") + f"giai đoạn {hien['dinh']}/4.",
                        "can_cu": [f"Chân dung công việc theo Đường đời {so['duong_doi']}, Sứ mệnh {so.get('su_menh')}, Nhân cách {so.get('nhan_cach')}; giai đoạn đỉnh cao theo chu kỳ 9 năm."],
                        "cau_tu_soi": "Kiểu việc nào dùng được cả thế mạnh hằng ngày lẫn đích bạn hướng tới?"}

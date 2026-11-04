@@ -16,6 +16,8 @@ MA = re.compile(r"\b[a-z]+(?:_[a-z0-9]+)+\b")
 TRUONG_MA = {"ma", "vi_tri", "loai", "phai", "quan_he", "nhom", "school_id", "source_id", "quy_uoc_duong_doi", "trang_thai",
              "muc", "ma_mau", "tham_chieu", "che_do", "y_dinh", "linh_vuc", "xu_ly", "tru", "doi_tuong", "id", "khoa", "engine_version",
              "loai_goc", "tu_chuong", "phien_ban", "mat", "vai", "do_phu", "kieu", "nguon_id"}
+# Trường là DANH SÁCH mã (CY-1: `chu_y` = mảng của hộp "Năm nên chú ý … hơn", web chỉ dùng làm thuộc tính) — không quét.
+TRUONG_MA_DS = {"chu_y"}
 NGAY_XEM = dt.date(2026, 10, 26)
 NGUOI = [("Trần Thị Mai", 14, 3, 1998), ("Nguyễn Đức Luân", 24, 10, 1988), ("Lê Văn Bình", 19, 7, 1985), ("Phạm Thu Hà", 13, 4, 1993)]
 
@@ -24,7 +26,7 @@ def _quet(x, duong="", gap=None):
     gap = [] if gap is None else gap
     if isinstance(x, dict):
         for k, v in x.items():
-            if k in TRUONG_MA and not isinstance(v, (dict, list)):
+            if k in TRUONG_MA and not isinstance(v, (dict, list)) or k in TRUONG_MA_DS:
                 continue
             _quet(v, f"{duong}.{k}", gap)
     elif isinstance(x, list):

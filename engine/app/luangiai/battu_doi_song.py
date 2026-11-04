@@ -66,6 +66,7 @@ from app.kb import battu_kb
 from app.luangiai import doi_song_chung as dsc
 from app.luangiai import doi_song_khuon as kh
 from app.luangiai import hoan_canh as hc
+from app.luangiai import chu_y_nam as cyn
 from app.luangiai import suc_khoe_nam as skn
 from app.luangiai.doi_song_chung import (  # noqa: F401 — dùng chung với Tử vi (LG-ĐS)
     MA_MAU_RE, TOI_DA_HOP, _ap_hoc, _cac_cau, _cau_dau, _hoa_dau, _ma, _sach, _sap, _tieu_de, slug, trong_so_xem_lai)
@@ -1565,6 +1566,9 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
             h["_ch"] = ma
         ds.append(c)
     cot_loi = dsc.them_cot_loi_van_han(chon_cot_loi(ds), ds, nam0)
+    # CY-1: "Năm nên chú ý {mảng} hơn" (lưu niên, hai cách cùng không thấy thuận) — sau cốt lõi, không đổi mức.
+    cyn.ap(ds, "battu", lambda m: cyn.battu_nam(ls, dong, m), lambda ch, mg, ly: _mm(ch, "chu_y", mg, ly), _hop, hoc,
+           tuoi=tuoi)
     # EN-2 mục 5: hộp lời theo tuổi + tình trạng (người dùng tự chọn) ở 5 chương — sau khi chọn cốt lõi (không vào cốt lõi).
     hc.ap(ds, sinh["lich"].date(), ngay_xem, sinh.get("tinh_trang"), "ds.bt", hoc)
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).

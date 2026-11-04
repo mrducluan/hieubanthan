@@ -465,6 +465,23 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
                        if x.get("tieu_de") == skn.TIEU_DE_HOP and nam in (x.get("cac_nam") or [])), None)
             if sk:
                 hop3.append(_gan(sk, nguon))
+            # CY-1: năm đích nằm trong "Năm nên chú ý {mảng} hơn" của các chương mảng đời (cùng hàm báo cáo)
+            from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+            for h_cy in [h for c in bc["chuong"] for h in c.get("hop") or [] if h.get("chu_y")]:
+                x = cyn.hop_nam_dich(h_cy, nam)
+                if x:
+                    hop3.append(_gan(x, nguon))
+    # CY-1: năm cá nhân của năm đích có chủ đề một mảng đời (KB chu_y_kb) → lời nhắc chủ động (không cần giờ sinh)
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    if nam - ngay_sinh.year >= cyn.TUOI_TOI_THIEU:
+        theo_ts = {m: cyn.thanso_nam({nam: so_nam}, m) for m in cyn.MANG_VAN_HAN}
+        co_ts = [m for m, v in theo_ts.items() if v]
+        if co_ts:
+            h_ts = cyn.hop_chuong({m: theo_ts[m] for m in co_ts},
+                                  kh.ma_mau("thanso", "nam_day_du", "chu_y", "+".join(co_ts), f"so{so_nam}"),
+                                  lambda loai, td, nd, cu, ma, _w, **k: kh.hop(loai, td, nd, can_cu=cu, ma=ma, **k))
+            if h_ts:
+                hop3.append(_gan(h_ts, "thanso"))
     hop3 += cg_nam + hop_pt + _hop_tap_quan(tq, nam, True)
     doan3 = [f"Năm {nam} ghép các lớp: năm cá nhân (thần số), lá số Tử vi và Bát tự của bạn chạy cho năm {nam}, con "
              "giáp và mệnh theo tuổi, góc nhà hợp bạn theo phong thuỷ, cùng tập quán theo tuổi." if tv else

@@ -36,6 +36,8 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
     ("tap_trung", "chuyện tập trung", "ban_than",
      [r"(khong|ko|kho|mat|thieu|it) tap trung", r"(de|hay) xao nhang", r"tap trung (kem|duoc|hon)"]),
     # ---- công việc
+    ("giu_viec", "chuyện giữ việc", "cong_viec",                       # CY-1: "có mất việc / bị sa thải không"
+     [r"mat viec", r"(bi )?sa thai", r"that nghiep", r"(bi )?duoi viec", r"cat giam (nhan su|nguoi)"]),
     ("doi_viec", "chuyện đổi việc, nghỉ việc", "cong_viec",
      [r"doi (viec|cong viec|nghe|cong ty|cho lam)", r"nhay viec", r"chuyen (viec|nghe|nganh|cong ty|sang)",
       r"nghi viec", r"bo viec", r"(ve|sang|qua) lam (cho|o|tai|ben)", r"sang cong ty", r"cong ty moi", r"(nop|gui) (don|ho so|cv)", r"viec (moi|khac)",
@@ -66,7 +68,7 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
       r"(?<!\w)(om|gong|ganh) no", r"\bno\b \d+"]),
     ("giu_tien", "chuyện giữ tiền", "tien_bac",
      [r"giu (tien|cua)", r"tiet kiem", r"tieu (xai|tien|pha)", r"chi tieu", r"tich (luy|gop)", r"tien (vao|di) .{0,20}(ra|het)",
-      r"kho giu", r"de tien"]),
+      r"kho giu", r"de tien", r"pha san", r"vo no", r"mat (het )?tien", r"thua lo", r"lo von", r"hao tai"]),
     # ---- tình cảm, gia đình
     ("ket_hon", "chuyện cưới hỏi, kết hôn", "tinh_cam",
      [r"ket hon", r"(?<!\w)cuoi(?! (nam|thang|tuan|doi|ngay|cung|ky))", r"lay (vo|chong)", r"dinh hon", r"dam cuoi",
@@ -677,6 +679,10 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
         hn = next((h for h in ds.get("hop") or [] if h.get("tieu_de") == _skn.TIEU_DE_HOP), None)
         if hn:
             phan.append(hn["noi_dung"].replace(_skn.mien_tru(), "").strip())
+    cy = next((m for m in muc if m.get("ma") == "chu_y_nam" and m.get("lo_ro") and m.get("cau_nam")), None)
+    if cy:
+        # CY-1: câu hỏi về điều người dùng lo → năm nên chú ý của mảng nói ngay ở đoạn mở đầu (cùng mục, cùng hàm báo cáo)
+        phan.append(cy["cau_nam"])
     if ds and ds.get("chuong") == "suc_khoe" or (dieu or {}).get("mang") == "suc_khoe":
         from app.kb import tuvi_doi_song_kb as _kbds  # noqa: PLC0415
         phan.append(_kbds.suc_khoe_chung())          # câu miễn trừ cố định (một nguồn với báo cáo đời sống)
@@ -841,6 +847,9 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
             x = tg[0]
             moc = f"tháng {x['thang']}/{x['nam']}" if x.get("thang") else f"năm {x['nam']}"
         phan += ba
+        cy = next((m for m in muc if m.get("ma") == "chu_y_nam" and m.get("lo_ro") and m.get("cau_nam")), None)
+        if cy:                              # CY-1: năm nên chú ý của mảng nói ngay ở đoạn mở đầu
+            phan.append(bo_dau_cham(cy["cau_nam"]))
         if hoi_dau_tu(t, dieu):
             phan.append(KHONG_DAU_TU)
         if la_quyet_dinh(t):
@@ -870,6 +879,9 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
             phan.append(chinh)
         phan += [("Dễ vấp: " + thuong(bo_dau_cham(vap))) if vap else "",
                  ("Việc nên làm: " + thuong(bo_dau_cham(viec))) if viec else ""]
+    cy = next((m for m in muc if m.get("ma") == "chu_y_nam" and m.get("lo_ro") and m.get("cau_nam")), None)
+    if cy:                                  # CY-1: năm nên chú ý của mảng nói ngay ở đoạn mở đầu
+        phan.append(bo_dau_cham(cy["cau_nam"]))
     if (dieu or {}).get("mang") == "suc_khoe":
         phan.append("Lời này không thay lời bác sĩ hay chuyên gia tâm lý")      # câu cố định của thần số
     if hoi_dau_tu(t, dieu):

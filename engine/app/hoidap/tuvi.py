@@ -76,7 +76,9 @@ CHU_DE_CUNG = [   # (cung, mẫu) — câu hỏi cá nhân không nêu tên cung
                  # SK-1: câu sức khoẻ chung, bộ phận ("có bị bệnh gì", "hay đau dạ dày", "kham suc khoe")
                  r"(?<!\w)benh (gi|tat)", r"mac benh", r"dau (da day|bung|dau|lung|khop)", r"tieu hoa", r"kham (tong quat|dinh ky)"]),
     ("Tài Bạch", [r"lam an", r"tien", r"tai chinh", r"giau", r"lam giau", r"thu nhap", r"tai loc", r"lua tien",
-                  r"dau tu", r"no nan", r"tieu (hoang|xai|pha)", r"chi tieu"]),
+                  r"dau tu", r"no nan", r"tieu (hoang|xai|pha)", r"chi tieu",
+                  # CY-1: lo chuyện tiền ("có bị phá sản / vỡ nợ / mất tiền không")
+                  r"pha san", r"vo no", r"mat (het )?tien", r"thua lo", r"lo von", r"hao tai"]),
     ("Điền Trạch", [r"nha cua", r"nha dat", r"bat dong san", r"mua nha", r"nha o", r"dat dai", r"tai san", r"thua ke",
                     r"mua dat", r"ban dat", r"ban nha", r"xay nha", r"lam nha", r"sua nha", r"chung cu"]),
     ("Quan Lộc", [r"su nghiep", r"cong viec", r"nghe", r"lam viec", r"thang chuc", r"kinh doanh",
@@ -899,7 +901,7 @@ def _lap_doi_song(sinh: dict, ngay_xem: dt.date, ls: dict, vh: dict | None) -> d
     return bc
 
 
-def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict, vh: dict | None = None) -> None:
+def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict, vh: dict | None = None) -> dict | None:
     """MT-ĐS B2: mượn chương báo cáo đời sống cho mảng của câu hỏi (cung hỏi → chương; hạn không cung → "Năm nay").
     Kiểu "có bị … không" đặt mục này LÊN ĐẦU (mở bằng mức của mảng sống hằng ngày). Lỗi dựng báo cáo → bỏ qua, câu trả
     lời vẫn như cũ."""
@@ -910,15 +912,15 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict,
     if chuong in (None, "nam_nay"):
         cd = mo_dau.chuong_cua(mo_dau.dieu_hoi(pl["cau_chuan_hoa"], pl.get("cau_goc"), chuong))
     if not chuong and not cd:
-        return
+        return None
     try:
         bc = _lap_doi_song(sinh, ngay_xem, ls, vh)
     except Exception:  # noqa: BLE001 — báo cáo đời sống là lớp thêm, không được làm hỏng hỏi đáp
-        return
+        return None
     m = (dsm.muc_doi_song(bc, cd, lo_so=bool(pl.get("lo_so"))) if cd and cd != chuong else None) \
         or dsm.muc_doi_song(bc, chuong, lo_so=bool(pl.get("lo_so")))
     if not m:
-        return
+        return bc
     if pl.get("lo_so"):
         goi["muc"].insert(0, m)
     else:
@@ -926,6 +928,23 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict,
     if m.get("chuong") == "suc_khoe" and (g := chung.muc_suc_khoe_hoi(pl["cau_chuan_hoa"])):   # SK-1: bộ phận → đi khám
         goi["muc"].insert(goi["muc"].index(m) + 1, g)
     chung.ket(goi)
+    return bc
+
+
+def _them_chu_y(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict, bc: dict | None) -> None:
+    """CY-1: câu hỏi về điều người dùng lo ở một mảng → năm nên chú ý của mảng (đọc lại hộp báo cáo — cùng hàm; báo cáo
+    không có hộp của mảng thì tính bằng `chu_y_nam.tuvi_nam`)."""
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    tz = sinh.get("tz_lich", config.CALENDAR_MERIDIAN_TZ)
+    nam_am_xem = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, config.CALENDAR_MERIDIAN_TZ)[2]
+    nam_am_sinh = lunar.solar_to_lunar(sinh["ngay"].day, sinh["ngay"].month, sinh["ngay"].year, tz)[2]
+
+    def tinh(mg: str) -> list[dict]:
+        x = cyn.tu_bao_cao((bc or {}).get("chuong"), mg, nam_am_xem)
+        return x if x is not None else cyn.tuvi_nam(ls, nam_am_xem, nam_am_sinh, mg)
+
+    chung.them_chu_y(goi, pl, tinh, nam_am_xem, "Theo lá số Tử vi", ("sao_han",),
+                     chung.nam_hoi_hh(pl["cau_chuan_hoa"], ngay_xem, "am"))
 
 
 def _cac_dai_han(ls: dict) -> list[dict]:
@@ -1510,8 +1529,9 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
     if pl["loai"] in _LOAI_KIEN_THUC and pl.get("phuong_phap") and not goi["can_them"]:
         goi["muc"] += ybs.muc_phuong_phap(pl)          # TV-YBS: ý phương pháp (ý chung, đã viết lại) sau phần kiến thức
         chung.ket(goi)
+    bc_ds = None
     if ls is not None and pl["loai"] in ("la_so", "han") and not goi["can_them"]:
-        _them_doi_song(goi, pl, sinh, ngay_xem, ls, vh)
+        bc_ds = _them_doi_song(goi, pl, sinh, ngay_xem, ls, vh)
     if pl.get("sao_han") and sinh and not goi["can_them"]:
         nam_xem = pl["nam_xem"] or lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, config.CALENDAR_MERIDIAN_TZ)[2] \
             + (1 if pl["han_sau"] else 0)
@@ -1519,6 +1539,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
         chung.ket(goi)
     if ls is not None and sinh and not goi["can_them"] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"):
         _them_so_nam(goi, pl, sinh, ngay_xem, ls)
+        _them_chu_y(goi, pl, sinh, ngay_xem, ls, bc_ds)                  # CY-1
     if ls is not None and sinh:
         chung.them_cua_so(goi, pl, "tuvi", sinh, ngay_xem, ls, ("sao_han",))   # EN-5.4
     if sinh:

@@ -22,9 +22,8 @@ SO_NAM = 10
 TOI_DA_NAM = 3            # hộp / câu trả lời nêu tối đa 3 năm gần nhất (đủ để sắp lịch khám, không dài như danh sách lo)
 CUNG_SK = "Tật Ách"
 CUNG_XUNG_SK = "Phụ Mẫu"   # cung đối của Tật Ách (Kỵ ở đây chiếu sang Tật Ách)
-_DIEM = {"ky_nhap": 2, "ky_chieu": 1, "luu_nien": 1, "dai_han": 1, "ky_dai_han": 1, "sao_luu": 1}
-NGUONG_TUVI = 2
-_LOP_NAM = {"ky_nhap", "ky_chieu", "luu_nien", "sao_luu"}     # lý do của riêng một năm (không phải lớp mười năm)
+# CY-1: thang điểm năm Tử vi dùng chung với mọi mảng (`chu_y_nam`) — một luật.
+from app.luangiai.chu_y_nam import _DIEM, _LOP_NAM, NGUONG_TUVI  # noqa: E402,F401
 
 
 # ------------------------------------------------------------------ câu
@@ -82,50 +81,17 @@ def tuvi_nam(ls: dict, nam_am_xem: int, nam_am_sinh: int, so_nam: int = SO_NAM,
     = tên các sao đó) · TV-YBS: lý do thêm của năm từ KB ý bổ sung (`them` = {năm: [(mã lý do, căn cứ)]}, mỗi lý do 1
     điểm, là lý do của riêng năm — vd cung năm có Kình Dương / Đà La). → [{nam, tuoi, diem, ly_do: [mã], can_cu: [câu],
     he}] theo năm tăng dần."""
-    from app.calc import lunar  # noqa: PLC0415
-    from app.calc import tuvi_phi_hoa as phi  # noqa: PLC0415
+    # CY-1: sức khoẻ là MỘT mảng của cơ chế "năm nên chú ý" chung (`chu_y_nam.tuvi_nam_cung`, cung Tật Ách) — kết quả,
+    # căn cứ và mã giữ nguyên như SK-1.
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
     he0 = tuvi_he(ls)
     ra = []
-    for k in range(so_nam):
-        nam = nam_am_xem + k
-        can, chi = lunar.can_chi_nam(nam)
-        tuoi = nam - nam_am_sinh + 1
-        ky = next(x for x in phi.phi_tu_can(can, ls["cung"]) if x["hoa"] == "Kỵ")
-        ly, cu = [], []
-        if ky["den_cung"] == CUNG_SK:
-            ly.append("ky_nhap")
-            cu.append(f"Hoá Kỵ năm {can} {chi} ({ky['sao']}) nhập cung Tật Ách")
-        elif ky["xung_cung"] == CUNG_SK:
-            ly.append("ky_chieu")
-            cu.append(f"Hoá Kỵ năm {can} {chi} ({ky['sao']}) ở cung {ky['den_cung']}, chiếu sang Tật Ách")
-        c_ln = next(c for c in ls["cung"] if c["chi"] == chi)
-        if c_ln["ten"] == CUNG_SK:
-            ly.append("luu_nien")
-            cu.append(f"Cung lưu niên năm {nam} ({chi}) là Tật Ách")
-        dh = next((c for c in ls["cung"] if c["dai_han"][0] <= tuoi <= c["dai_han"][1]), None)
-        if dh:
-            if dh["ten"] == CUNG_SK:
-                ly.append("dai_han")
-                cu.append(f"Đại hạn {dh['dai_han'][0]}–{dh['dai_han'][1]} tuổi đi cung Tật Ách")
-            if dh.get("can"):
-                ky_dh = next(x for x in phi.phi_tu_can(dh["can"], ls["cung"]) if x["hoa"] == "Kỵ")
-                if ky_dh["den_cung"] == CUNG_SK:
-                    ly.append("ky_dai_han")
-                    cu.append(f"Hoá Kỵ của can đại hạn {dh['can']} ({ky_dh['sao']}) nhập Tật Ách")
-        if k == 0 and sao_luu_ta:
-            ly.append("sao_luu")
-            cu.append(f"Sao lưu năm {nam} ở Tật Ách: {', '.join(sao_luu_ta)}")
-        for ma, cau in (them or {}).get(nam, []):
-            if ma not in ly:
-                ly.append(ma)
-                cu.append(cau)
-        diem = sum(_DIEM.get(x, 1) for x in ly)
-        # năm chỉ có lớp mười năm (đại hạn) không thành "năm" riêng — lớp đó nói ở câu giai đoạn (`tuvi_giai_doan`)
-        if diem < NGUONG_TUVI or not (set(ly) & _LOP_NAM or any(x not in _DIEM for x in ly)):
-            continue
+    for x in cyn.tuvi_nam_cung(ls, nam_am_xem, nam_am_sinh, CUNG_SK, so_nam, sao_luu_ta, them):
+        ky_sao = x.pop("ky_sao")
         # hệ: Kỵ năm nhập Tật Ách mang sao có phần cơ thể sách xưa ghi → hệ của sao đó; còn lại → hệ của lá số
-        he = (kb.he_sao(ky["sao"]) if "ky_nhap" in ly else None) or he0
-        ra.append({"nam": nam, "tuoi": tuoi, "diem": diem, "ly_do": ly, "can_cu": cu, "he": he, "hien_tai": k == 0})
+        he = (kb.he_sao(ky_sao) if "ky_nhap" in x["ly_do"] else None) or he0
+        ra.append({"nam": x["nam"], "tuoi": x["tuoi"], "diem": x["diem"], "ly_do": x["ly_do"], "can_cu": x["can_cu"],
+                   "he": he, "hien_tai": x["hien_tai"]})
     return ra
 
 

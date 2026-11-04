@@ -33,6 +33,7 @@ from app.luangiai import tuvi_sao_luu as tvsl
 from app.luangiai import doi_song_chung as dsc
 from app.luangiai import doi_song_khuon as kh
 from app.luangiai import hoan_canh as hc
+from app.luangiai import chu_y_nam as cyn
 from app.luangiai import suc_khoe_nam as skn
 from app.luangiai import tuvi_y_bo_sung as yb
 from app.luangiai.doi_song_chung import (  # noqa: F401 — tách dùng chung với Bát tự (BT-ĐS), giữ tên cũ
@@ -1299,6 +1300,10 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     cot_loi = dsc.them_cot_loi_van_han(chon_cot_loi(ds), ds, nam_am_xem)
     if bs:                                        # pha 2: hộp mới (≤ 2 / chương) + khung "Góc nhìn khác"
         yb.them_vao(ds, bs, hoc)
+    # CY-1: "Năm nên chú ý {mảng} hơn" ở các chương mảng đời (cùng thang SK-1, cung theo mảng) — sau cốt lõi, không đổi mức.
+    cyn.ap(ds, "tuvi", lambda m: cyn.tuvi_nam(ls, nam_am_xem, nam_am_sinh, m, sl),
+           lambda ch, mg, ly: _ma("ds", ch, "chu_y", mg, ly), _hop, hoc, tuoi=vh["tuoi_mu"] - 1,
+           toi_da_hop=TOI_DA_HOP, toi_da_them=yb.TOI_DA_HOP_MOI)
     # EN-2 mục 5: hộp lời theo tuổi + tình trạng (người dùng tự chọn) ở 5 chương — sau khi chọn cốt lõi (không vào cốt lõi).
     hc.ap(ds, sinh["ngay"], ngay_xem, sinh.get("tinh_trang"), "ds", hoc)
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).

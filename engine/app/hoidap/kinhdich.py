@@ -521,6 +521,14 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
                               "xem thế của việc ở lúc gieo, không chấm riêng từng tháng hay từng năm — nếu đang cân "
                               "hai mốc, chọn mốc bạn chuẩn bị kịp hơn."})
         chung.ket(goi)
+    if goi["muc"] and not goi["can_them"] and pl["xu_ly"] not in chung.DAC_BIET:
+        # CY-1: câu về điều người dùng lo ở một mảng → việc nên giữ + ranh giới (quẻ không chỉ ra năm) — đứng sau lời quẻ
+        from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+        mg = cyn.mang_hoi(pl["cau_chuan_hoa"])
+        if mg and mg not in ("suc_khoe", "van_han"):
+            goi["muc"].append({"loai": "ghi_chu", "ma": "chu_y_nam", "mang": mg,
+                               "noi_dung": cyn.kinhdich_doan_hoi(mg), **cyn.kb.meta()})
+            chung.ket(goi)
     doc_que = None
     if que is not None and can_que:
         pt = None

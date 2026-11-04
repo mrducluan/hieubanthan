@@ -171,7 +171,8 @@ def cum_chung_chung() -> list[str]:
 
 # Cụm ngắn trùng với từ ghép vô hại: "khắc" ≠ "khắc phục", "xui" ≠ "xui khiến". So khớp theo ranh giới âm tiết.
 _NGOAI_LE = {"khắc": ("phục", "khoải", "ghi", "hoạ", "sâu", "kỷ", "khổ"), "xui": ("khiến", "giục")}
-_NGOAI_LE_TRUOC = {"khắc": ("nghiêm", "khoảnh", "điêu", "chạm", "tạc", "thời"), "xui": ("giục",)}
+_NGOAI_LE_TRUOC = {"khắc": ("nghiêm", "khoảnh", "điêu", "chạm", "tạc", "thời"), "xui": ("giục",),
+                   "cúng": ("ấm",)}       # CY-1: "ấm cúng" (nhà ấm cúng) không phải chuyện cúng bái
 
 
 @lru_cache(maxsize=512)

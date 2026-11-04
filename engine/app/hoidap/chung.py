@@ -113,7 +113,51 @@ def mau_tu_choi(goc: str | None, t: str, mau_chung: str, he_la_so: dict | None =
         return f"{suc_khoe_kb.mau('nguoi_than')} {skn.mien_tru()}"
     if nhom == "hoi_benh":
         return f"{skn.doan_hoi_benh(t, he_la_so)} {skn.mien_tru()}"
-    return mau_chung
+    # CY-1: câu may rủi / tai nạn nặng / tuyển dụng vẫn từ chối như cũ, nhưng kèm một lời nhắc "nên chú ý…" đúng mảng
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    goi_y = cyn.goi_y_tu_choi(goc or t, _at.tu_choi(goc or t))
+    return f"{mau_chung} {goi_y}".strip() if goi_y else mau_chung
+
+
+def them_chu_y(goi: dict, pl: dict, tinh, nam_hien_tai: int, mon_ten: str | None = None,
+               dung_dau: tuple[str, ...] = ("tu_tru", "sao_han"), nam_hoi: list[int] | None = None) -> dict | None:
+    """CY-1 (2026-11-04): câu hỏi về điều người dùng lo ở một mảng đời ("năm nào nên cẩn thận tiền bạc", "có bị phá sản
+    không", "có mất việc không", "có bị kiện không", "vận hạn năm nay có xấu không"…) → mục `chu_y_nam`: năm nên chú ý
+    của mảng (`tinh(mảng)` — cùng hàm báo cáo), việc cụ thể nên làm, ranh giới của mảng (luật sư / không phải lời
+    khuyên đầu tư / an toàn giao thông) — không bao giờ có / không. Đặt ngay sau mục đời sống (hoặc sau các mục luôn
+    đứng đầu `dung_dau`). Câu đặc biệt / thiếu dữ liệu → không thêm."""
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    if pl.get("xu_ly") in DAC_BIET or goi.get("can_them"):
+        return None
+    t = pl.get("cau_chuan_hoa") or ""
+    mg = cyn.mang_hoi(t)
+    chac = cyn.noi_chac(t)
+    if (not mg or mg == "suc_khoe") and chac:
+        # "cho tôi biết chắc", "ngày cụ thể": không từ chối — nói rõ không nói chắc được, phần dưới là nhịp thời gian
+        m = {"loai": "ghi_chu", "ma": "khong_noi_chac", "noi_dung": f"{cyn.kb.mau('khong_noi_chac')} {cyn.kb.mau('hh_dau')}",
+             **cyn.kb.meta()}
+        goi["muc"].insert(next((k for k, x in enumerate(goi["muc"]) if x.get("loai") not in dung_dau), len(goi["muc"])), m)
+        ket(goi)
+        return m
+    if not mg or mg == "suc_khoe":
+        return None
+    try:
+        if mg == "van_han":
+            m = cyn.muc_van_han({x: tinh(x) for x in cyn.MANG_VAN_HAN}, [nam_hien_tai, nam_hien_tai + 1], chac)
+        else:
+            if not nam_hoi and co(t, [r"nam nay"]):
+                nam_hoi = [nam_hien_tai]
+            m = cyn.muc_hoi(mg, tinh(mg), mon_ten, chac, nam_hoi)
+    except Exception:  # noqa: BLE001 — lớp đọc thêm, không được làm hỏng hỏi đáp
+        return None
+    m["lo_ro"] = cyn.lo_ro(t)
+    muc = goi["muc"]
+    i = next((k + 1 for k, x in enumerate(muc) if x.get("loai") == "doi_song"), None)
+    if i is None:
+        i = next((k for k, x in enumerate(muc) if x.get("loai") not in dung_dau), len(muc))
+    muc.insert(i, m)
+    ket(goi)
+    return m
 
 
 def muc_suc_khoe_hoi(t: str) -> dict | None:
