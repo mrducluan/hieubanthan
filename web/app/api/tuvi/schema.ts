@@ -147,6 +147,8 @@ export const LaSoOutput = z.object({
     dieu_kien: z.string(), y: z.string(), mat_toi: z.string(), loi_khuyen: z.string(),
     co_ca: z.string().optional(),   // KB-TV2: phiên âm Hán Việt bài phú cổ (cổ thư công cộng)
     cung_lien_quan: z.array(z.string()), sat_hoi: z.array(z.string()),
+    // KB-TV3: điều kiện có / điểm cộng / điểm trừ — engine tính, KB dựng chữ (chỉ thuật ngữ). Engine cũ không có.
+    dieu_kien_dat: z.array(z.object({ loai: z.enum(["can", "tang", "giam"]), noi_dung: z.string() })).optional(),
   })).optional(),
   cach_cuc_luu_y: z.string().optional(),
   cung: z.array(Cung).length(12),
