@@ -5,6 +5,15 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4w. Học từ repo Tử vi ziwei-doushu (TV-ZW, 2026-11-04) — sau khi merge
+
+- [ ] **Deploy engine trước web** (trường mới `tu_hoa_sao`, `dieu_kien_dat`, `trang_sao_cung`, tháng nhuận `ca_thang_sau`; web thiếu
+      trường thì tự ẩn phần mới).
+- [ ] (5 phút) Mở `/tu-vi` với hồ sơ của anh → bật lớp đại hạn / lưu niên, bấm một giai đoạn 10 năm, bấm tên sao trong chi tiết cung —
+      xem chữ có dễ hiểu không. 13 cách cục mới là **nháp ban biên tập** — đọc lời ở khung "Cách cục" khi gặp.
+- [ ] (Quyết định, khi tiện) Đọc mục 5 `docs/HOC-TU-ZIWEI-DOUSHU.md`: cụm "Cốt Tủy Phú" (cần nguyên văn từ bản in thật),
+      "Cùng sao Mệnh x %" thay "người nổi tiếng", "Lá số người thân" lưu trên máy.
+
 ### 4v. Thanh mảng + breadcrumb + menu Huyền học (TM-1, 2026-11-03) — sau khi merge
 
 - [ ] **CMS → Giao diện website → Menu đầu trang** (sau khi CMS deploy chạy migration `tm_1_menu_huyen_hoc`): mở menu con

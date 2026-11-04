@@ -13,14 +13,17 @@ const MAU: Record<CC["nhom"], string> = {
 const NHAN: Record<CC["nhom"], string> = { "cát": "text-gold", "hung": "text-cinnabar", "trung": "text-moon" };
 
 // KB-TV3: engine trả điều kiện đã thoả trên chính lá số (chữ thuật ngữ từ KB) — web chỉ chia ba nhóm để hiện.
+// Cách "cần lưu ý": "tang" là điều làm nhẹ đi, "giam" là điều làm nặng thêm — đổi nhãn để không đọc ngược nghĩa.
 const NHOM_DK = [["can", "Điều kiện có"], ["tang", "Điểm cộng"], ["giam", "Điểm trừ"]] as const;
+const NHAN_HUNG: Record<string, string> = { tang: "Điều giúp nhẹ đi", giam: "Điều khiến nặng hơn" };
 
-function DieuKienDat({ ds }: { ds?: CC["dieu_kien_dat"] }) {
+function DieuKienDat({ ds, hung }: { ds?: CC["dieu_kien_dat"]; hung?: boolean }) {
   if (!ds?.length) return null;
   return (
     <div className="space-y-1.5 rounded-xl border border-fg-faint/15 p-3 text-xs" data-testid="dieu-kien-dat">
       <p className="text-fg-faint">Vì sao nói vậy</p>
-      {NHOM_DK.map(([loai, nhan]) => {
+      {NHOM_DK.map(([loai, nhanGoc]) => {
+        const nhan = (hung && NHAN_HUNG[loai]) || nhanGoc;
         const muc = ds.filter((d) => d.loai === loai);
         if (!muc.length) return null;
         return (
@@ -70,7 +73,7 @@ export function CachCuc({ ds, luuY, onHoi }: { ds: CC[]; luuY?: string; onHoi: (
                   <p><span className="text-fg-faint">Mặt tối: </span>{c.mat_toi}</p>
                   <p><span className="text-fg-faint">Gợi ý: </span>{c.loi_khuyen}</p>
                   {c.sat_hoi.length > 0 && <p className="text-xs text-cinnabar">Tam phương có {c.sat_hoi.join(", ")} hội về — sách xưa coi là giảm cách.</p>}
-                  <DieuKienDat ds={c.dieu_kien_dat} />
+                  <DieuKienDat ds={c.dieu_kien_dat} hung={c.nhom === "hung"} />
                   <button type="button" onClick={() => onHoi(`Cách cục ${c.ten} trong lá số của tôi nghĩa là gì?`)}
                     className="inline-flex items-center gap-1.5 text-xs text-gold hover:underline">
                     <MessageCircleQuestion className="size-3.5" aria-hidden />Hỏi thêm về cách này
