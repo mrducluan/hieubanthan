@@ -4,6 +4,6 @@ starlette>=1.3.1,<2
 uvicorn[standard]==0.32.*
 pytest==9.*
 httpx==0.28.*
-sentry-sdk[fastapi]==2.71.*
+sentry-sdk[fastapi]==2.73.*
 # EN-6: khoá bản mọi gói (cả gói con) — Dependabot đọc dòng -c này và nâng constraints.txt trong cùng PR (review T4).
 -c constraints.txt
