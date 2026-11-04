@@ -20,6 +20,7 @@ from app.kb import phongthuy_do_thi as do_thi
 from app.kb import phongthuy_doi_song_kb as kb
 from app.kb import phongthuy_kb as kbp
 from app.luangiai import doi_song_khuon as kh
+from app.luangiai import suc_khoe_nam as skn
 from app.luangiai import phongthuy_bo_cuc as bo_cuc
 from app.luangiai import tuoi_dan_gian as tdg_luan
 
@@ -524,6 +525,17 @@ def _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem: dt.date) -> dict:
         c["hop"].append(_hop("thoi_diem", f"Tuổi làm nhà năm {nam}", tl["ket_luan"]["chu"] + (f" Năm thuận gần nhất theo tuổi: {', '.join(str(x['nam']) for x in tl['nam_thuan'][:2])}." if tl["ket_luan"]["ma"] != "thuan" and tl["nam_thuan"] else ""),
                              muc="thuan" if tl["ket_luan"]["ma"] == "thuan" else "can_bang"))
         c["can_cu"].append(tl["cach_tinh"])
+    # SK-1 (2026-11-04): năm sao lưu niên 2 / 5 (sách xưa gắn với sức khoẻ người ở) tới phía phòng ngủ chính (không có
+    # thì phía toạ — sơn = người ở) → lời nhắc khám định kỳ; không đổi mức chương.
+    vt_ngu = next((v for v in (bc_luan or {}).get("da_tinh", {}).get("vi_tri", []) if v["phong"] == "phong_ngu_chinh"
+                   and v["cung"] in _CUNG_QUAI), None)
+    q_sk, noi_sk = ((_CUNG_QUAI[vt_ngu["cung"]], f"phòng ngủ chính ({vt_ngu['cung']})") if vt_ngu
+                    else ((b["toa"]["quai"], "toạ (lưng nhà)") if b else (None, None)))
+    if q_sk:
+        h_sk = skn.hop_nam(skn.phongthuy_nam(q_sk, nam, noi=noi_sk), "",
+                           lambda loai, td, nd, cu, _ma, _w, **k: _hop(loai, td, nd, can_cu=cu, **k))
+        if h_sk:
+            c["hop"].append(h_sk)
     c["muc"] = _gop_muc(muc_nam, *mucs)
     c["nhan_muc"] = kb.nhan_muc(c["muc"])
     phuong_yen = list(dict.fromkeys(x["phuong"] for x in hn["huong_tranh"]))

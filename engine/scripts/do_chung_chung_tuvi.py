@@ -63,6 +63,8 @@ DINH_NGHIA = re.compile(r"^(?:Cung [A-ZĐ][^ ]* ?[^ ]* (?:là|nói về|cho bi�
 # Câu cố định CÓ CHỦ Ý (miễn trừ, câu nối giải thích cách đọc) — không tính là Barnum.
 CO_DINH = {
     kb.suc_khoe_chung(),
+    # SK-1: câu miễn trừ cố định của hộp / lời đáp "năm nên chú ý sức khoẻ" (KB suc_khoe_kb.mau.mien_tru)
+    __import__("app.kb.suc_khoe_kb", fromlist=["x"]).mien_tru(),
     "Đây là cách các mảng đời tác động lẫn nhau, không phải lời đoán sự kiện.",
     "Khi các lớp nói khác nhau, ưu tiên mười năm trước, rồi đến năm, rồi mới đến tháng.",
     # hỏi đáp về sức khoẻ: câu miễn trừ cố định (tách câu theo dấu chấm)

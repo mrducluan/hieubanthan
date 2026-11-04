@@ -459,6 +459,12 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
             c = _doi_nam(c, nam) if nam_toi else c
             hop3 += _hop_nam(c, nguon)
             can_cu3 += c["can_cu"][:4]
+            # SK-1 (2026-11-04): năm đích nằm trong "Năm nên chú ý sức khoẻ hơn" của chương Sức khoẻ (cùng hàm báo cáo)
+            from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+            sk = next((x for x in _chuong_cua(bc, "suc_khoe")["hop"]
+                       if x.get("tieu_de") == skn.TIEU_DE_HOP and nam in (x.get("cac_nam") or [])), None)
+            if sk:
+                hop3.append(_gan(sk, nguon))
     hop3 += cg_nam + hop_pt + _hop_tap_quan(tq, nam, True)
     doan3 = [f"Năm {nam} ghép các lớp: năm cá nhân (thần số), lá số Tử vi và Bát tự của bạn chạy cho năm {nam}, con "
              "giáp và mệnh theo tuổi, góc nhà hợp bạn theo phong thuỷ, cùng tập quán theo tuổi." if tv else

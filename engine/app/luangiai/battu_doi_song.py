@@ -66,6 +66,7 @@ from app.kb import battu_kb
 from app.luangiai import doi_song_chung as dsc
 from app.luangiai import doi_song_khuon as kh
 from app.luangiai import hoan_canh as hc
+from app.luangiai import suc_khoe_nam as skn
 from app.luangiai.doi_song_chung import (  # noqa: F401 — dùng chung với Tử vi (LG-ĐS)
     MA_MAU_RE, TOI_DA_HOP, _ap_hoc, _cac_cau, _cau_dau, _hoa_dau, _ma, _sach, _sap, _tieu_de, slug, trong_so_xem_lai)
 
@@ -1091,7 +1092,15 @@ def _chuong_su_nghiep(cm: dict, pt: dict, hoc: tuple, da_dung: set[str]) -> dict
     return _chuong_mang("su_nghiep", cm, pt, hoc, da_dung, them)
 
 
-def _chuong_suc_khoe(pt: dict, cm: dict, hoc: tuple) -> dict:
+def _kham_them(loi: str, hanh: str) -> str:
+    """SK-1: lời chăm sóc + việc đi khám cụ thể của hệ cơ quan sách xưa gắn với hành (KB `suc_khoe_kb`, một nguồn)."""
+    he = skn.kb.he_hanh(hanh)
+    if not he or he["kham"] in loi:
+        return loi
+    return f"{loi.rstrip('.')}; nên {he['kham']} định kỳ."
+
+
+def _chuong_suc_khoe(pt: dict, cm: dict, hoc: tuple, dong: list[dict] | None = None) -> dict:
     tl = pt["ty_le_hanh"]
     x = cm["suc_khoe"]
     cand = []
@@ -1101,11 +1110,12 @@ def _chuong_suc_khoe(pt: dict, cm: dict, hoc: tuple) -> dict:
         nd = (f"Sách xưa gắn {lon} với {_hai_phan(k['co_the'])} — nên chăm sóc phòng ngừa." if k.get("co_the") else "")
         nd = f"{nd} {k.get('nhip_thua') or ''}".strip() or "Bạn nên để ý nhịp nghỉ của mình."
         cand.append(_hop("luu_y", "Phần cơ thể nên chăm sóc", nd, [f"{lon} chiếm {_pct(tl[lon])} điểm ngũ hành (thừa)"],
-                         _mm("suc_khoe", "thua", slug(lon), "vap"), 2.0, huong=k.get("loi_khuyen_sk") or _SK_MAC_DINH))
+                         _mm("suc_khoe", "thua", slug(lon), "vap"), 2.0,
+                         huong=_kham_them(k.get("loi_khuyen_sk") or _SK_MAC_DINH, lon)))
     for i, h in enumerate([h for h in THU_TU_HANH if pt["diem"][h] == 0][:2]):
         k = kb.hanh(h)
         nd = (f"Phần sách xưa gắn với {h} là {_hai_phan(k['co_the'])} — nên chăm sóc phòng ngừa." if k.get("co_the") else "")
-        nd = f"{nd} {k.get('nhip_thieu') or ''} {k.get('loi_khuyen_sk') or _SK_MAC_DINH}".strip()
+        nd = f"{nd} {k.get('nhip_thieu') or ''} {_kham_them(k.get('loi_khuyen_sk') or _SK_MAC_DINH, h)}".strip()
         cand.append(_hop("loi_khuyen", f"Phần nên bù thêm: {h}", nd, [f"{h}: 0 điểm (thiếu)"],
                          _mm("suc_khoe", "thieu", slug(h), "khuyen"), 1.8 - 0.01 * i))
     o = kb.suc_khoe_than(pt["than"]) or {}
@@ -1117,6 +1127,12 @@ def _chuong_suc_khoe(pt: dict, cm: dict, hoc: tuple) -> dict:
         cand.append(_hop("loi_khuyen", "Nếp sinh hoạt nên giữ",
                          f"{kb.suc_khoe_can_doi() or 'Năm hành của bạn khá cân.'} {_SK_MAC_DINH}",
                          ["Không hành nào thiếu hẳn hay vượt 30%"], _mm("suc_khoe", "can_doi", "khuyen"), 1.0))
+    # SK-1 (2026-11-04): năm đè lên hành yếu nhất / dồn thêm hành thừa — hộp đọc thêm, không đổi mức chương.
+    if dong:
+        ds_nam = skn.battu_nam(tl, {g["nam"]: g["muc"] for g in dong}, dong[0]["nam"], len(dong), NGUONG_DAM)
+        h_nam = skn.hop_nam(ds_nam, _mm("suc_khoe", "nam", skn.ma_ly_do(ds_nam[0])) if ds_nam else "", _hop, 1.7)
+        if h_nam:
+            cand.insert(1 if cand else 0, h_nam)
     hop, xem_lai = _ap_hoc(cand, *hoc)
     chung = kb.suc_khoe_chung()
     tom = _tom("suc_khoe", x["muc"])
@@ -1536,7 +1552,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
         elif ma == "tinh_cam":
             c = _chuong_tinh_cam(cm, pt, hoc, da_dung)
         elif ma == "suc_khoe":
-            c = _chuong_suc_khoe(pt, cm, hoc)
+            c = _chuong_suc_khoe(pt, cm, hoc, dong)
         elif ma == "nam_nay":
             c = _chuong_nam_nay(pt, tgb, ngay_xem, hoc, vt)
         elif ma == "van_han":

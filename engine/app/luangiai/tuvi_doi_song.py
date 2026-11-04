@@ -33,6 +33,7 @@ from app.luangiai import tuvi_sao_luu as tvsl
 from app.luangiai import doi_song_chung as dsc
 from app.luangiai import doi_song_khuon as kh
 from app.luangiai import hoan_canh as hc
+from app.luangiai import suc_khoe_nam as skn
 from app.luangiai.doi_song_chung import (  # noqa: F401 — tách dùng chung với Bát tự (BT-ĐS), giữ tên cũ
     MA_MAU_RE, TOI_DA_HOP, _ap_hoc, _cac_cau, _cau_dau, _hoa_dau, _ma, _sach, _sap, _tieu_de, slug, trong_so_xem_lai)
 
@@ -565,7 +566,8 @@ def _hai_phan(ds: list[str]) -> str:
     return " và ".join(phan)
 
 
-def _chuong_suc_khoe(cc: dict, hoc: tuple) -> dict:
+def _chuong_suc_khoe(cc: dict, hoc: tuple, ls: dict | None = None, nam_am_xem: int | None = None,
+                     nam_am_sinh: int | None = None, sao_luu: dict | None = None) -> dict:
     x = cc["Tật Ách"]
     cand = []
     nguon = [(s, "Tật Ách") for s in x["chinh"]] + [(s, "Mệnh") for s in cc["Mệnh"]["chinh"][:1]]
@@ -614,6 +616,17 @@ def _chuong_suc_khoe(cc: dict, hoc: tuple) -> dict:
     if not cand:
         cand.append(_hop("loi_khuyen", "Nếp sinh hoạt nên giữ", kb.suc_khoe_vo_chinh_dieu() or _SK_MAC_DINH,
                          ["Cung Tật Ách không có điểm nhấn rõ"], _ma("ds", "suc_khoe", "chung", "nep", "khuyen"), 1.0))
+    # SK-1 (2026-11-04): năm nên chú ý sức khoẻ hơn (Kỵ năm / đại hạn / lưu niên / sao lưu chạm Tật Ách) — hộp đọc
+    # thêm, không đổi mức; đứng sau hộp phần cơ thể để chương vẫn mở bằng nếp chăm sóc.
+    if ls is not None and nam_am_xem is not None and nam_am_sinh is not None:
+        ta = [m["ten"] for m in (sao_luu or {}).get("muc") or []
+              if m["ma"] in tvsl._CHU_Y and skn.CUNG_SK in m["cac_cung"]]
+        ds_nam = skn.tuvi_nam(ls, nam_am_xem, nam_am_sinh, sao_luu_ta=ta)
+        gd = skn.tuvi_giai_doan(ls, nam_am_xem, nam_am_sinh)
+        goc = ds_nam[0] if ds_nam else (gd[0] if gd else None)
+        h_nam = skn.hop_nam(ds_nam, _ma("ds", "suc_khoe", "nam", skn.ma_ly_do(goc)) if goc else "", _hop, 1.4, gd)
+        if h_nam:
+            cand.insert(1 if cand else 0, h_nam)
     hop, xem_lai = _ap_hoc(cand, *hoc)
     chung = kb.suc_khoe_chung()
     # Tóm tắt nêu đúng chỗ nên giữ của LÁ NÀY (bộ phận sách xưa gắn với sao ở Tật Ách, không có thì sao ở Mệnh)
@@ -1240,6 +1253,11 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     da_dung: set[str] = set()
     tgb = thoi_gian_bieu(ls, cc, vh["tuoi_mu"], nam_am_sinh)
     dong = dong_muoi_nam(ls, cc, nam_am_xem, nam_am_sinh, sinh.get("gioi_tinh"))
+    try:                                          # sao lưu năm đang xem: chương Vận hạn + nhắc sức khoẻ (SK-1)
+        sl = {**tvsl.doc(ls, az.sao_luu_nam(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], ngay_xem, **kw),
+                         nam_am_xem), "nam": nam_am_xem}
+    except Exception:  # noqa: BLE001 — sao lưu là phần đọc thêm; lỗi không làm hỏng báo cáo
+        sl = None
 
     ds: list[dict] = []
     for ma, _, _, cung in CHUONG:
@@ -1251,7 +1269,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
             dao = _hop_dao_hoa(ma, "Phu Thê", cc["Phu Thê"]) + _hop_dao_hoa(ma, "Mệnh", cc["Mệnh"])
             c = _chuong_cung(ma, cung, cc, hoc, da_dung, dao)
         elif ma == "suc_khoe":
-            c = _chuong_suc_khoe(cc, hoc)
+            c = _chuong_suc_khoe(cc, hoc, ls, nam_am_xem, nam_am_sinh, sl)
         elif ma == "tien_bac":
             # Điền Trạch ở chương tiền bạc chỉ lấy lớp tích luỹ (tứ hoá, cát/sát); chính tinh để chương nhà cửa.
             c = _chuong_cung(ma, cung, cc, hoc, da_dung, chi_phu={"Điền Trạch": 2},
@@ -1261,11 +1279,6 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
         elif ma == "nam_nay":
             c = _chuong_nam_nay(sinh, ls, cc, vh, ngay_xem, hoc, nam_vh=dong[0] if dong else None)
         elif ma == "van_han":
-            try:
-                sl = {**tvsl.doc(ls, az.sao_luu_nam(sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], ngay_xem, **kw),
-                                 nam_am_xem), "nam": nam_am_xem}
-            except Exception:  # noqa: BLE001 — sao lưu là phần đọc thêm; lỗi không làm hỏng báo cáo
-                sl = None
             c = _chuong_van_han(dong, vh, ls, hoc, sl)
         elif ma == "loi_khuyen":
             c = _chuong_loi_khuyen(ds, None, hoc)     # VH-1: chương tổng hợp không mang mức riêng

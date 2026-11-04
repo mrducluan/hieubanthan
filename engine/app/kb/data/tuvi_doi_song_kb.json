@@ -2685,7 +2685,7 @@
   }
  },
  "van_han": {
-  "_nguon": "VH-1 (2026-10-21) — chương 'Vận hạn & điều nên tránh', nháp AI viết lời đời thường. Khoá: ky_nhap/ky_chieu/loc_nhap.<Cung> (nhan = vế sau tiêu đề 'Năm N: …', mang = mảng đời) + tre (18–34 tuổi) / lon (từ 35 tuổi) {y, tranh, lam}; nho = dưới 18 tuổi (lời cho cha mẹ); co = cờ tập quán dân gian theo chi năm sinh. Không vật phẩm, không giải hạn, không tên bệnh, không đoán năm ốm.",
+  "_nguon": "VH-1 (2026-10-21) — chương 'Vận hạn & điều nên tránh', nháp AI viết lời đời thường. Khoá: ky_nhap/ky_chieu/loc_nhap.<Cung> (nhan = vế sau tiêu đề 'Năm N: …', mang = mảng đời) + tre (18–34 tuổi) / lon (từ 35 tuổi) {y, tranh, lam}; nho = dưới 18 tuổi (lời cho cha mẹ); co = cờ tập quán dân gian theo chi năm sinh. Không vật phẩm, không giải hạn, không tên bệnh; năm nên chú ý sức khoẻ nói bằng lời phòng ngừa ở chương Sức khoẻ (SK-1, luangiai/suc_khoe_nam.py).",
   "source_id": "tuvi_vn",
   "school_id": "nam_phai_viet",
   "ky_nhap": {

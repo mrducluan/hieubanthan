@@ -33,7 +33,7 @@ THUAT_NGU = re.compile(r"Miếu|Hãm|(?<!\w)[Hh]oá (?:Lộc|Quyền|Khoa|Kỵ)|
 # Cấm doạ / phán (mục 2.4) — so theo ranh giới âm tiết
 DOA = ["chắc chắn", "định mệnh", "số phận", "tai hoạ", "tai họa", "xui xẻo", "đại hạn xấu", "khắc", "phá sản",
        "ly hôn", "chết", "tai nạn", "hạn nặng"]
-BENH = ["bệnh", "ung thư", "tiểu đường", "huyết áp", "đột quỵ", "viêm", "khối u", "sẽ bị", "bạn có bị",
+BENH = ["bệnh", "ung thư", "tiểu đường", "cao huyết áp", "tăng huyết áp", "sẽ ốm", "đột quỵ", "viêm", "khối u", "sẽ bị", "bạn có bị",
         "trầm cảm", "suy thận", "xơ gan"]
 _G = json.loads((Path(__file__).parents[1] / "fixtures" / "golden" / "lasotuvi_60.json").read_text("utf-8"))["cases"]
 
