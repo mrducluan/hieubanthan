@@ -214,7 +214,8 @@ _CHAN = (r"^Câu hỏi để tự soi", r"^Đây là góc nhìn tham khảo", r"
 # Đoạn không bao giờ đưa lên đầu (review EN-3): tự soi / lưu ý / ranh giới giữa bài, đoạn chuyên môn (thang điểm, dụng
 # thần, đại hạn của người hỏi khi câu nói về con…), dòng dữ kiện.
 _KHONG_LEN = (r"^Câu hỏi để tự soi", r"^Lưu ý", r"^Phần này chỉ nói", r"^Ngũ hành", r"^Dụng thần", r"^Giai đoạn mười năm",
-              r"^Năm đang xem", r"^Tứ trụ", r"^Đây là góc nhìn", r"^Tuổi mụ", r"^Đại vận", r"^Lời này không thay")
+              r"^Năm đang xem", r"^Tứ trụ", r"^Đây là góc nhìn", r"^Tuổi mụ", r"^Đại vận", r"^Lời này không thay",
+              r"^Một cách đọc thêm", r"^Một trường phái khác")          # TV-YBS: đoạn thêm luôn đứng sau câu chính
 _BO_TU = {"toi", "em", "minh", "ban", "co", "khong", "nen", "the", "nao", "gi", "la", "cua", "va", "voi", "cho", "thi",
           "nay", "do", "nhu", "duoc", "hay", "bi", "se", "da", "dang", "mot", "nhung", "cac", "ve", "o", "tu", "den",
           "lam", "sao", "xem", "giup", "a", "nhe", "vay", "roi", "con", "so", "nam", "thang", "ngay", "theo", "khi"}
