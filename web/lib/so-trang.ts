@@ -119,7 +119,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     doan: [
       "Nhập ngày giờ sinh, giới tính và nơi sinh (63 tỉnh thành hoặc nước ngoài). Lá số an ngay trên hệ thống của Hiểu Bản Thân theo âm lịch Việt Nam, có xử lý múi giờ lịch sử trước năm 1975; sinh ở nước ngoài lập theo giờ địa phương.",
       "Lá số vẽ 12 cung với 14 chính tinh, phụ tinh, tứ hoá, Tuần Triệt, độ sáng theo Nam phái (có công tắc xem bảng phái Trung). Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn › lưu nguyệt; lưu nguyệt cho bạn chọn phái tính tháng.",
-      "Các khác biệt giữa trường phái (lịch Việt/Trung, Hoả Linh, tháng nhuận…) gom trong khung “Trường phái” có giải thích. Không phán bệnh tật, tai nạn hay sống chết.",
+      "Các khác biệt giữa trường phái (lịch Việt/Trung, Hoả Linh, tháng nhuận…) gom trong khung “Trường phái” có giải thích. Không nêu tên bệnh, không phán tai nạn hay sống chết; sức khoẻ chỉ gợi năm nên chú ý và đi khám.",
     ],
     hoi_dap: [
       { hoi: "Không biết giờ sinh chính xác có lập được không?", dap: "Tử vi cần giờ sinh theo canh giờ (12 giờ âm). Nếu không chắc, hãy hỏi người thân hoặc so vài giờ gần nhau; hỏi đáp kiến thức chung vẫn dùng được không cần lá số." },

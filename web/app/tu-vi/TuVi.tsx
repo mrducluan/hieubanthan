@@ -148,7 +148,7 @@ export function TuVi() {
 
   useBatDauDoc("tuvi", Boolean(ls) && !nt);
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Orbit} ten="Tử vi" mo_ta="Lá số an ngay trên hệ thống của Hiểu Bản Thân — ngày giờ sinh không gửi cho bên thứ ba. Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn. Không phán bệnh, tai nạn hay sống chết." />;
+  const dau = <DauMang Icon={Orbit} ten="Tử vi" mo_ta="Lá số an ngay trên hệ thống của Hiểu Bản Thân — ngày giờ sinh không gửi cho bên thứ ba. Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn. Không nêu tên bệnh, không phán tai nạn hay sống chết; sức khoẻ chỉ gợi năm nên chú ý và đi khám." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   return (
     <div>
