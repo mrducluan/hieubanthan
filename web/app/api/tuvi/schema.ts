@@ -200,7 +200,8 @@ export const VanHanOutput = z.object({
   nam_xem: z.number(),
   can_chi_nam_xem: z.string(),
   tuoi_mu: z.number(),
-  dai_han: LopHan.extend({ tu_tuoi: z.number(), den_tuoi: z.number() }),
+  /** TV-DT: `dong_han` = tuổi mụ còn nhỏ hơn tuổi khởi đại hạn đầu (1 … cục − 1) — chưa vào giai đoạn 10 năm nào. */
+  dai_han: LopHan.extend({ tu_tuoi: z.number(), den_tuoi: z.number(), dong_han: z.boolean().optional() }),
   tieu_han: z.object({ chi_so: z.number(), can: z.string(), chi: z.string(), cung_goc: z.string() }),
   luu_nien: LopHan,
 });
