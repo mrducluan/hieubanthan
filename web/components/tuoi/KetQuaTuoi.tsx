@@ -85,12 +85,14 @@ function MuoiNam({ d }: { d: LamNha }) {
                 <td className="py-1.5 pr-3">{x.kim_lau ?? "—"}</td>
                 <td className="py-1.5 pr-3">{x.hoang_oc}</td>
                 <td className="py-1.5 pr-3">{x.tam_tai ? `năm thứ ${x.tam_tai}` : "—"}</td>
-                <td className={`py-1.5 ${x.thuan ? "text-jade" : "text-moon"}`}>{x.thuan ? "Thuận" : "Cân nhắc"}</td>
+                <td className={`py-1.5 ${x.thuan ? "text-jade" : "text-moon"}`}>{x.thuan ? "Thuận" : "Cân nhắc"}
+                  {x.nam_tuoi && <span className="block text-xs text-fg-faint" data-testid="muoi-nam-tuoi">{x.nam_tuoi === "trung" ? "năm tuổi — nhiều nhà vẫn kiêng" : "năm xung tuổi — có nhà kiêng"}</span>}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {ds.some((x) => x.nam_tuoi) && <p className="mt-2 text-xs text-fg-muted">Năm tuổi, năm xung tuổi không thuộc ba điều kiêng chính khi làm nhà (Kim lâu, Hoang ốc, Tam tai) nên không đổi mức; nhiều gia đình vẫn tránh hoặc mượn tuổi người khác.</p>}
     </section>
   );
 }

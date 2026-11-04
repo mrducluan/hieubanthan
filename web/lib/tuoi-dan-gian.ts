@@ -20,7 +20,9 @@ export interface LamNha extends MetaKb {
   nam_thuan: { nam: number; can_chi: string; tuoi_mu: number }[];
   cuoi_hoi: string; cach_dan_gian: string | null; cach_tinh?: string; han_nam: HanNam; tra_loi_nhanh?: string;
   /** AUD-P1: 10 năm tới của tuổi (chỉ trang SEO theo tuổi; engine tính bằng đúng hàm công cụ từng năm). */
-  muoi_nam?: { nam: number; can_chi: string; tuoi_mu: number; kim_lau: string | null; hoang_oc: string; tam_tai: number | null; thuan: boolean }[];
+  muoi_nam?: { nam: number; can_chi: string; tuoi_mu: number; kim_lau: string | null; hoang_oc: string; tam_tai: number | null; thuan: boolean;
+    /** 6b-2: năm tuổi ("trung") / năm xung tuổi ("xung") — chỉ ghi chú, không đổi mức. Engine cũ không có trường này. */
+    nam_tuoi?: "trung" | "xung" | null }[];
 }
 export interface XongDat extends MetaKb {
   nam: { nam: number; can_chi: string }; chu: { nam_sinh: number; can_chi: string }; uoc_luong_nam_sinh: boolean;

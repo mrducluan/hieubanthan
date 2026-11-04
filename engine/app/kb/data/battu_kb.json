@@ -262,31 +262,41 @@
    "tinh_chat": "sinh trưởng, nhân ái, kế hoạch",
    "khi_thieu": "thiếu Mộc: khó khởi đầu, thiếu mềm dẻo",
    "khi_thua": "thừa Mộc: cố chấp, ôm đồm",
-   "ung_dung": "xanh lá; hướng Đông; nhóm nghề giáo dục, xuất bản, cây trồng, thời trang"
+   "ung_dung": "xanh lá; hướng Đông; nhóm nghề giáo dục, xuất bản, cây trồng, thời trang",
+   "mau": "xanh lá",
+   "nghe": "giáo dục, xuất bản, cây trồng, thời trang"
   },
   "Hỏa": {
    "tinh_chat": "nhiệt huyết, lễ nghĩa, biểu đạt",
    "khi_thieu": "thiếu Hoả: thiếu động lực, khó thể hiện",
    "khi_thua": "thừa Hoả: nóng vội, dễ kiệt sức",
-   "ung_dung": "đỏ, cam; hướng Nam; nhóm nghề truyền thông, năng lượng, ẩm thực, nghệ thuật trình diễn"
+   "ung_dung": "đỏ, cam; hướng Nam; nhóm nghề truyền thông, năng lượng, ẩm thực, nghệ thuật trình diễn",
+   "mau": "đỏ, cam",
+   "nghe": "truyền thông, năng lượng, ẩm thực, nghệ thuật trình diễn"
   },
   "Thổ": {
    "tinh_chat": "ổn định, tín nghĩa, bao dung",
    "khi_thieu": "thiếu Thổ: thiếu điểm tựa, hay dao động",
    "khi_thua": "thừa Thổ: trì trệ, bảo thủ",
-   "ung_dung": "vàng, nâu; trung tâm/Đông Bắc/Tây Nam; nhóm nghề bất động sản, xây dựng, nông nghiệp, quản trị"
+   "ung_dung": "vàng, nâu; trung tâm/Đông Bắc/Tây Nam; nhóm nghề bất động sản, xây dựng, nông nghiệp, quản trị",
+   "mau": "vàng, nâu",
+   "nghe": "bất động sản, xây dựng, nông nghiệp, quản trị"
   },
   "Kim": {
    "tinh_chat": "quyết đoán, nghĩa khí, kỷ luật",
    "khi_thieu": "thiếu Kim: thiếu dứt khoát, khó đặt ranh giới",
    "khi_thua": "thừa Kim: cứng rắn, lạnh lùng",
-   "ung_dung": "trắng, bạc; hướng Tây; nhóm nghề tài chính, kỹ thuật, cơ khí, pháp chế"
+   "ung_dung": "trắng, bạc; hướng Tây; nhóm nghề tài chính, kỹ thuật, cơ khí, pháp chế",
+   "mau": "trắng, bạc",
+   "nghe": "tài chính, kỹ thuật, cơ khí, pháp chế"
   },
   "Thủy": {
    "tinh_chat": "trí tuệ, linh hoạt, giao tiếp",
    "khi_thieu": "thiếu Thuỷ: khó thích nghi, thiếu mềm mỏng",
    "khi_thua": "thừa Thuỷ: tản mạn, bất định",
-   "ung_dung": "đen, xanh dương; hướng Bắc; nhóm nghề thương mại, vận tải, du lịch, tư vấn, công nghệ thông tin"
+   "ung_dung": "đen, xanh dương; hướng Bắc; nhóm nghề thương mại, vận tải, du lịch, tư vấn, công nghệ thông tin",
+   "mau": "đen, xanh dương",
+   "nghe": "thương mại, vận tải, du lịch, tư vấn, công nghệ thông tin"
   }
  },
  "cach_cuc": {

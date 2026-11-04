@@ -62,12 +62,22 @@ export const theTrang = (duong: string) => `trang:${duong}`;
 export function thayBien(s: string, bien: Record<string, string>): string {
   return s.replace(/\{([a-z_]+)\}/g, (m, k: string) => (Object.hasOwn(bien, k) ? bien[k]! : m));
 }
+const BO_QUA_BIEN = ["blockType", "id", "url", "link", "nut_link", "duong_dan", "cong_cu"];
 /** Thay biến trong mọi chuỗi của một khối (đệ quy), bỏ qua đường dẫn / mã. */
 function thayBienKhoi<T>(v: T, bien: Record<string, string>, khoa = ""): T {
-  if (typeof v === "string") return (["blockType", "id", "url", "link", "nut_link", "duong_dan", "cong_cu"].includes(khoa) ? v : thayBien(v, bien)) as T;
+  if (typeof v === "string") return (BO_QUA_BIEN.includes(khoa) ? v : thayBien(v, bien)) as T;
   if (Array.isArray(v)) return v.map((x) => thayBienKhoi(x, bien, khoa)) as T;
   if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, thayBienKhoi(x, bien, k)])) as T;
   return v;
+}
+
+/** 6b-6: còn biến {x} chưa thay (mẫu cụm dùng biến trang này không có, vd {nam} sau khi gộp trang tuổi thành trang cung
+ *  phi) → khối bị bỏ, không hiện chữ "{nam}" trần trên trang. CMS chặn xuất bản khi gặp biến lạ (bien_la). */
+function conBienLa(v: unknown, khoa = ""): boolean {
+  if (typeof v === "string") return !BO_QUA_BIEN.includes(khoa) && /\{[a-z_]+\}/.test(v);
+  if (Array.isArray(v)) return v.some((x) => conBienLa(x, khoa));
+  if (v && typeof v === "object") return Object.entries(v).some(([k, x]) => conBienLa(x, k));
+  return false;
 }
 
 const chu = (v: unknown): string | null => (typeof v === "string" && v.trim() ? v.trim() : null);
@@ -91,7 +101,7 @@ export function gopNoiDung(duong: string, macDinh: MacDinhTrang & { nhom?: NhomT
     const rieng = khoiHien(t[`khoi_${vt}`], now), cua = khoiHien(mau?.[`khoi_${vt}`], now);
     const cheDo = t.che_do_mau?.[vt] ?? "thay";
     const ds = cheDo === "an_mau" ? rieng : cheDo === "them_sau" ? [...cua, ...rieng] : rieng.length ? rieng : cua;
-    khoi[vt] = Object.keys(bien).length ? ds.map((k) => thayBienKhoi(k, bien)) : ds;
+    khoi[vt] = (Object.keys(bien).length ? ds.map((k) => thayBienKhoi(k, bien)) : ds).filter((k) => !conBienLa(k));
   }
   const chuCms: Record<string, string> = {};
   for (const nguon of [mau?.chu, t.chu]) {

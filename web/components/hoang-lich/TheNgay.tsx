@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { CalendarHeart, Clock, Compass, MoonStar, Sparkles, Sunrise, ThumbsDown, ThumbsUp, UserRound } from "lucide-react";
 import type { GioNgay, NgayTot } from "@/lib/hoang-lich";
-import { duongNgay, homNayVN } from "@/lib/hoang-lich";
+import { duongNgay, duongViecThang, homNayVN } from "@/lib/hoang-lich";
 import { VongGio, canhGioHienTai } from "./VongGio";
 
 /** Giờ hiện tại (phút trong ngày, giờ VN) + canh giờ của NGÀY ĐANG XEM (dùng chung với vòng giờ; 23:xx = 12, đã qua). */
@@ -136,6 +136,8 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
         </section>
       </div>
 
+      {d.viec_lon && d.viec_lon.length > 0 && <ViecLon d={d} />}
+
       {(d.nghi.length > 0 || d.ky.length > 0) && (
         <details className="glass rounded-2xl px-5 py-3 text-sm" data-testid="giai-nghia-nghi-ky">
           <summary className="cursor-pointer text-gold">Giải nghĩa các việc nên / kiêng</summary>
@@ -196,3 +198,27 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
   );
 }
 
+const NHAN_VIEC = { tot: "Ngày tốt", binh: "Bình thường", tranh: "Nên chọn ngày khác" } as const;
+
+/** 6b-1 — 6 việc lớn chấm bằng ĐÚNG luật của trang "ngày tốt {việc} tháng": sách ghi Nên mà vướng mục Kiêng (vd nên cưới
+ *  gả nhưng kiêng Nạp thái) thì không gọi là ngày tốt — hai trang nói cùng một kết luận. Engine chấm, web chỉ hiển thị. */
+function ViecLon({ d }: { d: NgayTot }) {
+  const m = Number(d.ngay.slice(5, 7)), y = Number(d.ngay.slice(0, 4));
+  return (
+    <section aria-labelledby="viec-lon" className="glass rounded-2xl p-5" data-testid="viec-lon">
+      <h2 id="viec-lon" className="inline-flex items-center gap-2 text-lg"><CalendarHeart className="size-5 text-gold" aria-hidden />Việc lớn hôm nay</h2>
+      <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+        {d.viec_lon!.map((v) => (
+          <li key={v.ma} data-danh-gia={v.danh_gia}>
+            <Link href={duongViecThang(v.slug, y, m)} className="block rounded-xl border border-line/70 px-3 py-2 text-sm hover:border-gold/50">
+              <b>{v.ten}</b>{" "}
+              <span className={v.danh_gia === "tot" ? "text-jade" : v.danh_gia === "tranh" ? "text-moon" : "text-fg-muted"}>· {NHAN_VIEC[v.danh_gia]}</span>
+              <span className="mt-0.5 block text-xs text-fg-muted">{v.chu.charAt(0).toUpperCase() + v.chu.slice(1)}.</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-xs leading-relaxed text-fg-faint">Một việc chỉ tính là ngày tốt khi sách lịch ghi ở mục Nên và không vướng mục Kiêng, trực hay ngày kiêng dân gian — giống danh sách &quot;ngày tốt theo việc&quot; từng tháng. Chưa xét tuổi.</p>
+    </section>
+  );
+}

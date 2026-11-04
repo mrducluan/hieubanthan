@@ -51,6 +51,19 @@ test("gộp khối: mẫu cụm áp cho trang KB; ghi đè 'thay' / 'thêm sau' 
   expect(ghiDe.nguon).toEqual({ trang: true, mau: true });
 });
 
+test("6b-6: khối mẫu cụm còn biến lạ (vd {nam} trên trang cung phi) bị bỏ, không hiện chữ trần; link không tính", () => {
+  const mau = { khoi_tren: [
+    { blockType: "van_ban", id: "a", noi_dung: "Người sinh năm {nam} hợp hướng nào" },
+    { blockType: "van_ban", id: "b", noi_dung: "Về {tieu_de}", link: "/x/{slug}" },
+    { blockType: "nut", id: "c", nhan: "Xem", nut_link: "/phong-thuy/{slug}" },
+  ] };
+  const g = gopNoiDung("/phong-thuy/huong-hop-tuoi/cung-kham-bac", {}, null, mau, { tieu_de: "Cung Khảm", slug: "cung-kham-bac" });
+  expect(g.khoi.tren.map((x) => x.id)).toEqual(["b", "c"]);
+  expect(JSON.stringify(g.khoi)).not.toContain("{nam}");
+  // Trang không có biến nào cũng không hiện biến trần.
+  expect(gopNoiDung("/tu-vi", {}, { khoi_tren: [{ blockType: "van_ban", id: "x", noi_dung: "Năm {nam}" }] }, null).khoi.tren).toEqual([]);
+});
+
 test("layNoiDungTrang: chưa nối CMS → không bao giờ null, trả mặc định; đường dẫn lạ vẫn trả khung rỗng", async () => {
   const cu = process.env.CMS_URL; delete process.env.CMS_URL;
   try {

@@ -31,8 +31,10 @@
       hiển thị của ngày cách hôm nay 180–400 ngày. Ít (vd < 5% tổng) → nhắn em đổi `NGAY_SAU = 400 → 180`
       (`web/lib/hoang-lich.ts`, một dòng, sitemap ngày tự theo).
 - [ ] **CMS → Mẫu cụm "Hướng hợp tuổi theo cung phi"** (sau migration `aud_q2_cung_phi`): nếu chữ khối có `{nam}` thì sửa —
-      trang cung không có biến năm, `{nam}` sẽ hiện nguyên văn.
-- [ ] **Trả lời 6 câu hỏi** ở `docs/AUDIT-SEO-GEO-2026-11.md` mục 6b (ngày tốt, năm tuổi khi làm nhà, hướng ở trang mệnh, số 7…).
+      từ 6b (2026-11-04) web KHÔNG hiện khối còn biến lạ và CMS chặn xuất bản, nên khối đó đang bị ẩn tới khi sửa.
+- [x] ~~Trả lời 6 câu hỏi ở `docs/AUDIT-SEO-GEO-2026-11.md` mục 6b~~ — anh giao em quyết, đã làm 2026-11-04 (xem mục 6b).
+- [ ] **Search Console → Sơ đồ trang web** (một lần, không bắt buộc): thêm `sitemap-cum.xml` + `sitemap-ngay.xml`, bấm gửi lại
+      `sitemap.xml`. Không cần khai báo lại sau mỗi lần sửa — robots.txt đã khai cả ba.
 - [ ] **Thẩm định thật** 10 trang/tuần theo `scripts/tham_dinh.py hang-doi --gsc Trang.csv` — sổ thẩm định hiện 0 trang
       (máy không làm thay được; đòn bẩy E-E-A-T lớn nhất).
 

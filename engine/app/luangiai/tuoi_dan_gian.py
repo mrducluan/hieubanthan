@@ -41,6 +41,20 @@ def _danh_gia_nam(nam_sinh_am: int, nam_xay: int) -> dict:
     return {"tuoi": tuoi, "kl": kl, "ho": ho, "tt": tt, "xau": xau}
 
 
+def _nam_tuoi(can_tuoi: str, chi_tuoi: str, nam_xay: int) -> dict | None:
+    """6b-2: năm tuổi / năm xung tuổi KHÔNG thuộc ba điều kiêng chính (Kim lâu, Hoang ốc, Tam tai) → không đổi mức, chỉ ghi
+    chú vì nhiều gia đình vẫn kiêng. Câu gắn đúng can chi người xem (trang theo tuổi không lặp nguyên câu giữa các tuổi)."""
+    can_n, chi_n = t.can_chi_nam(nam_xay)
+    qh = t.quan_he_chi(chi_n, chi_tuoi)
+    if qh == "trung":
+        return {"ma": "trung", "chu": f"Năm {nam_xay} ({can_n} {chi_n}) là năm tuổi của người {can_tuoi} {chi_tuoi}: ngoài ba "
+                                       f"điều kiêng chính, nhiều nhà vẫn tránh động thổ hoặc mượn tuổi."}
+    if qh == "xung":
+        return {"ma": "xung", "chu": f"Năm {nam_xay} ({can_n} {chi_n}) xung tuổi {chi_tuoi} của người {can_tuoi} {chi_tuoi}: "
+                                      f"không thuộc ba điều kiêng chính, có nhà vẫn tránh hoặc mượn tuổi."}
+    return None
+
+
 def xem_tuoi_lam_nha(nam_sinh: int, nam_xay: int, thang_sinh: int | None = None, ngay_sinh: int | None = None) -> dict:
     nsa = nam_am_sinh(nam_sinh, thang_sinh, ngay_sinh)
     can, chi = t.can_chi_nam(nsa)
@@ -56,6 +70,12 @@ def xem_tuoi_lam_nha(nam_sinh: int, nam_xay: int, thang_sinh: int | None = None,
            if not d["xau"] else
            {"ma": "can_nhac", "chu": f"Năm {nam_xay} tuổi {d['tuoi']} rơi vào {', '.join(d['xau'])} — dân gian thường tránh làm nhà năm này"
                                      + ("; với cưới hỏi, Kim lâu chỉ xét tuổi cô dâu." if d["kl"] else ".")})
+    # 6b-2 (2026-11-04): năm tuổi / năm xung tuổi KHÔNG thuộc ba điều kiêng chính khi làm nhà (Kim lâu, Hoang ốc, Tam tai) —
+    # sách lịch dân gian không xếp vào; nhưng nhiều gia đình vẫn tránh động thổ năm tuổi (phạm Thái Tuế) hoặc mượn tuổi.
+    # Ghi chú, KHÔNG đổi mức (mức chỉ từ ba điều kiêng — một luật cho trang tuổi, công cụ, hỏi đáp).
+    nam_tuoi = _nam_tuoi(can, chi, nam_xay)
+    if nam_tuoi:
+        ket = {**ket, "chu": f"{ket['chu']} {nam_tuoi['chu']}"}
     # SEO-M: trả lời trước — chỉ ghép kết luận + năm thuận đã tính.
     tra_loi = (f"{ket['chu']} Người sinh năm {nam_sinh} ({can} {chi}) tính tuổi mụ {d['tuoi']} vào năm {nam_xay}."
                + (f" Năm gần nhất không phạm: {nam_thuan[0]['nam']} ({nam_thuan[0]['can_chi']}, tuổi {nam_thuan[0]['tuoi_mu']})."
@@ -69,7 +89,7 @@ def xem_tuoi_lam_nha(nam_sinh: int, nam_xay: int, thang_sinh: int | None = None,
         "hoang_oc": {"ma": d["ho"], **KB["hoang_oc"][d["ho"]]},
         "tam_tai": ({"nam_thu": d["tt"], **KB["tam_tai"]} if d["tt"] else None),
         "cac_nam_tam_tai": t.tam_tai(chi),
-        "ket_luan": ket, "nam_thuan": nam_thuan,
+        "ket_luan": ket, "nam_thuan": nam_thuan, "nam_tuoi": nam_tuoi,
         "cuoi_hoi": ("Với cưới hỏi, dân gian xét Kim lâu theo tuổi mụ của cô dâu: "
                      + (f"tuổi {d['tuoi']} phạm {KB['kim_lau'][d['kl']]['ten']}." if d["kl"] else f"tuổi {d['tuoi']} không phạm Kim lâu.")),
         "cach_dan_gian": KB["cach_dan_gian"] if d["xau"] else None,

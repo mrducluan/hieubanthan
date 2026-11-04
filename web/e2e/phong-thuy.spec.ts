@@ -34,7 +34,7 @@ test("PT-ĐS: Nhà của bạn — đọc bằng lời thường, 5 chương, ng
   await expect(c2).toContainText("Nhà hướng Nam. Với bạn");
   await expect(c2.getByTestId("chip-muc").first()).toContainText("Thuận lợi");
   await expect(c2).toContainText("khác nhóm");                              // vợ 1992 → Đoài, Tây tứ
-  await expect(bc.getByTestId("nha-goi-y-phong")).toContainText("Cửa chính / lối vào");
+  await expect(bc.getByTestId("nha-goi-y-phong")).toContainText("Cửa chính: đang quay về Nam");   // 6b-5: nói về cửa đang có
   await expect(bc.getByTestId("nha-ba-thang").locator("[data-muc]")).toHaveCount(3);
   await expect(bc.getByTestId("nha-han-nam")).toContainText("Thái Tuế");
   await expect(bc.getByTestId("nha-hanh-dong")).toContainText("Làm ngay");

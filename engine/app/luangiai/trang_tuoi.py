@@ -36,7 +36,8 @@ def lam_nha(nam: int, nam_sinh: int) -> dict:
         g = L.xem_tuoi_lam_nha(nam_sinh, y)
         muoi.append({"nam": y, "can_chi": g["can_chi_nam_xay"], "tuoi_mu": g["tuoi_mu"],
                      "kim_lau": g["kim_lau"]["ten"] if g["kim_lau"] else None, "hoang_oc": g["hoang_oc"]["ten"],
-                     "tam_tai": g["tam_tai"]["nam_thu"] if g["tam_tai"] else None, "thuan": g["ket_luan"]["ma"] == "thuan"})
+                     "tam_tai": g["tam_tai"]["nam_thu"] if g["tam_tai"] else None, "thuan": g["ket_luan"]["ma"] == "thuan",
+                     "nam_tuoi": (g["nam_tuoi"] or {}).get("ma")})
     d["muoi_nam"] = muoi
     return d
 

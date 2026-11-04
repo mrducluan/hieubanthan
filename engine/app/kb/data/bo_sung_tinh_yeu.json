@@ -30,7 +30,7 @@
    ],
    "bang": {
     "tieu_de": "Số 1 hợp với số nào trong tình yêu?",
-    "chu_thich": "Không có số nào bị coi là không hợp với số 1; mỗi cặp chỉ khác nhau ở chỗ dễ và chỗ cần nói rõ. Cặp với số 2, 4 hoặc 6 thường dễ chia vai: một người mở đường, một người giữ nhịp. Cặp với số 1 hoặc 8 dễ có hai người cùng cầm lái. Bảng chỉ mô tả, không chấm điểm.",
+    "chu_thich": "Không có số nào bị coi là không hợp với số 1; bảng chỉ mô tả, không chấm điểm. Theo cách chia nhóm phổ biến (như ở trang Ý nghĩa số), số 1 cùng nhóm với số 5 và 7 — những người thích tự quyết, cần khoảng riêng — nên dễ hiểu nhịp nhau, chỉ cần nói rõ ai quyết việc gì. Với số 2, 4 hoặc 6, hai người dễ chia vai: một người mở đường, một người giữ nhịp. Hai số 1, hoặc số 1 với số 8, dễ thành hai người cùng cầm lái.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -138,7 +138,7 @@
    ],
    "bang": {
     "tieu_de": "Số 2 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 2 có thể gắn bó với mọi số; khác nhau là kiểu dễ chịu và điều cần nói thẳng. Với số 4, 6 hoặc 8, số 2 thường thấy yên vì nhịp sống rõ ràng. Với số 5 hoặc 7, cần nói rõ chuyện khoảng riêng. Bảng tóm tắt từng cặp, không chấm điểm.",
+    "chu_thich": "Số 2 có thể gắn bó với mọi số; bảng không chấm điểm. Theo cách chia nhóm phổ biến (như ở trang Ý nghĩa số), số 2 cùng nhóm với số 4 và 8 — coi trọng sự ổn định và việc thật — nên thường thấy yên vì nhịp sống rõ ràng. Với số 6, hai người cùng biết chăm nhau. Với số 1, 5 hoặc 7, cần nói rõ chuyện khoảng riêng và ai quyết việc gì.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -246,7 +246,7 @@
    ],
    "bang": {
     "tieu_de": "Số 3 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 3 vui với nhiều kiểu người; cặp nào cũng có chỗ thuận và chỗ cần thoả thuận. Số 1, 5 hoặc 9 hợp nhịp vui và thích cái mới. Số 4 hoặc 8 mang phần thực tế số 3 hay thiếu. Bảng không chấm điểm, chỉ mô tả.",
+    "chu_thich": "Số 3 vui với nhiều kiểu người; bảng không chấm điểm. Theo cách chia nhóm phổ biến (như ở trang Ý nghĩa số), số 3 cùng nhóm với số 6 và 9 — sống bằng cảm xúc, thích sáng tạo — nên dễ hiểu nhịp nhau. Số 1 hoặc 5 hợp nhịp vui và thích cái mới; số 4 hoặc 8 mang phần thực tế số 3 hay thiếu, đổi lại cần thoả thuận chuyện tiền và giờ giấc.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -354,7 +354,7 @@
    ],
    "bang": {
     "tieu_de": "Số 4 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 4 có thể bền với mọi số nếu hai người nói rõ nhịp sống. Số 2, 6 hoặc 8 thường dễ chung kế hoạch dài. Số 3 hoặc 5 mang sự tươi mới mà số 4 hay thiếu, đổi lại cần thoả thuận về sự linh hoạt.",
+    "chu_thich": "Số 4 có thể bền với mọi số nếu hai người nói rõ nhịp sống; bảng không chấm điểm. Theo cách chia nhóm phổ biến (như ở trang Ý nghĩa số), số 4 cùng nhóm với số 2 và 8 — coi trọng ổn định và việc thật — nên dễ chung kế hoạch dài. Số 3 hoặc 5 mang sự tươi mới mà số 4 hay thiếu, đổi lại cần thoả thuận về sự linh hoạt.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -462,7 +462,7 @@
    ],
    "bang": {
     "tieu_de": "Số 5 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 5 có thể gắn bó với mọi số nếu khoảng tự do được nói rõ. Số 1, 3 hoặc 9 thường hợp nhịp năng động. Số 2, 4 hoặc 6 mang sự ấm và nề nếp, đổi lại cần thoả thuận về thời gian bên nhau. Bảng chỉ mô tả, không chấm điểm.",
+    "chu_thich": "Số 5 có thể gắn bó với mọi số nếu khoảng tự do được nói rõ; bảng chỉ mô tả, không chấm điểm. Theo cách chia nhóm phổ biến (như ở trang Ý nghĩa số), số 5 cùng nhóm với số 1 và 7 — cần tự do, không thích bị giữ chặt — nên ít ràng buộc nhau. Số 3 hoặc 9 hợp nhịp năng động; số 2, 4 hoặc 6 mang sự ấm và nề nếp, đổi lại cần thoả thuận về thời gian bên nhau.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -570,7 +570,7 @@
    ],
    "bang": {
     "tieu_de": "Số 6 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 6 có thể ấm với mọi số; mỗi cặp khác nhau ở phần dễ và phần cần thoả thuận. Số 2, 4 hoặc 8 thường cùng hướng về gia đình và sự ổn định. Số 5 hoặc 7 cần khoảng riêng nhiều hơn mức số 6 quen cho. Bảng không chấm điểm.",
+    "chu_thich": "Số 6 có thể ấm với mọi số; bảng không chấm điểm. Theo cách chia nhóm phổ biến (như ở trang Ý nghĩa số), số 6 cùng nhóm với số 3 và 9 — sống bằng cảm xúc, thích chăm người — nên dễ hiểu cách thương của nhau. Số 2, 4 hoặc 8 cùng hướng về gia đình và sự ổn định; số 1, 5 hoặc 7 cần khoảng riêng nhiều hơn mức số 6 quen cho.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -678,7 +678,7 @@
    ],
    "bang": {
     "tieu_de": "Số 7 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 7 có thể gắn bó sâu với mọi số; khác nhau ở chỗ hợp nhịp và chỗ cần nói ra. Số 4, 7 hoặc 9 thường hợp nhịp suy nghĩ và tôn trọng khoảng riêng. Số 2, 3 hoặc 6 mang hơi ấm, đổi lại cần thoả thuận giờ riêng. Bảng không chấm điểm.",
+    "chu_thich": "Số 7 có thể gắn bó sâu với mọi số; bảng không chấm điểm. Theo cách chia nhóm phổ biến (như ở trang Ý nghĩa số), số 7 cùng nhóm với số 1 và 5 — sống bằng đầu óc, cần khoảng riêng — nên ít đòi hỏi nhau phải có mặt mọi lúc. Số 4 hoặc 9 hay hợp nhịp suy nghĩ và chuyện sâu; số 2, 3 hoặc 6 mang hơi ấm, đổi lại cần thoả thuận giờ riêng.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -786,7 +786,7 @@
    ],
    "bang": {
     "tieu_de": "Số 8 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 8 có thể bền với mọi số khi vai trò được chia rõ. Số 2, 4 hoặc 6 thường bổ sung phần gắn kết và ổn định. Số 1 hoặc 8 cùng chí lớn, dễ cạnh tranh ngầm nếu không tách vai. Bảng không chấm điểm.",
+    "chu_thich": "Số 8 có thể bền với mọi số khi vai trò được chia rõ; bảng không chấm điểm. Theo cách chia nhóm phổ biến (như ở trang Ý nghĩa số), số 8 cùng nhóm với số 2 và 4 — thực tế, coi trọng kết quả và sự ổn định — nên dễ bổ sung phần gắn kết. Số 1 hoặc 8 cùng chí lớn, dễ cạnh tranh ngầm nếu không tách vai; với số 3 hoặc 9, cần thống nhất chuyện tiền.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -894,7 +894,7 @@
    ],
    "bang": {
     "tieu_de": "Số 9 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 9 có thể hoà hợp với mọi số; mỗi cặp có điểm gặp nhau và điểm cần nói thẳng. Số 3, 6 hoặc 9 thường chung giá trị và lòng thương người. Số 4 hoặc 8 giúp số 9 đứng vững hơn về thực tế, đổi lại cần thống nhất chuyện tiền. Bảng không chấm điểm.",
+    "chu_thich": "Số 9 có thể hoà hợp với mọi số; bảng không chấm điểm. Theo cách chia nhóm phổ biến (như ở trang Ý nghĩa số), số 9 cùng nhóm với số 3 và 6 — sống bằng cảm xúc, muốn làm điều có ích — nên chung giá trị và lòng thương người. Số 4 hoặc 8 giúp số 9 đứng vững hơn về thực tế, đổi lại cần thống nhất chuyện tiền.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -1002,7 +1002,7 @@
    ],
    "bang": {
     "tieu_de": "Số 11 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 11 thường được xét như số 2 ở cường độ cao, nên bảng dựa trên các cặp của số 2 và thêm điều số 11 cần chú ý. Mọi cặp đều có thể bền; khác nhau ở chỗ dễ và chỗ cần nói rõ, không chấm điểm.",
+    "chu_thich": "Số 11 thường được xét như số 2 ở cường độ cao, nên cùng nhóm 2, 4, 8 (như ở trang Ý nghĩa số); bảng dựa trên các cặp của số 2 và thêm điều số 11 cần chú ý. Mọi cặp đều có thể bền; khác nhau ở chỗ dễ và chỗ cần nói rõ, không chấm điểm.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -1110,7 +1110,7 @@
    ],
    "bang": {
     "tieu_de": "Số 22 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 22 thường được xét như số 4 ở cường độ cao, nên bảng dựa trên các cặp của số 4 và thêm phần áp lực riêng của số 22. Cặp nào cũng có thể bền; khác nhau ở chỗ thuận và chỗ cần nói rõ, không chấm điểm.",
+    "chu_thich": "Số 22 thường được xét như số 4 ở cường độ cao, nên cùng nhóm 2, 4, 8 (như ở trang Ý nghĩa số); bảng dựa trên các cặp của số 4 và thêm phần áp lực riêng của số 22. Cặp nào cũng có thể bền; khác nhau ở chỗ thuận và chỗ cần nói rõ, không chấm điểm.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
@@ -1218,7 +1218,7 @@
    ],
    "bang": {
     "tieu_de": "Số 33 hợp với số nào trong tình yêu?",
-    "chu_thich": "Số 33 thường được xét như số 6 ở cường độ cao, nên bảng dựa trên các cặp của số 6 và thêm điều số 33 cần để ý. Mọi cặp đều có thể bền; bảng chỉ mô tả, không chấm điểm.",
+    "chu_thich": "Số 33 thường được xét như số 6 ở cường độ cao, nên cùng nhóm 3, 6, 9 (như ở trang Ý nghĩa số); bảng dựa trên các cặp của số 6 và thêm điều số 33 cần để ý. Mọi cặp đều có thể bền; bảng chỉ mô tả, không chấm điểm.",
     "cot": [
      "Số đường đời người kia",
      "Điểm hoà hợp",
