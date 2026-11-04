@@ -54,10 +54,12 @@
     "web khac",
     "ra so khac",
     "ung dung khac",
-    "hai trang",
-    "trang web",
-    "moi trang",
-    "app khac"
+    "tren hai trang",
+    "hai trang web",
+    "moi trang web",
+    "trang web lai ra",
+    "app lai ra",
+    "moi app ra"
    ]
   },
   "so_cai": {
@@ -71,8 +73,8 @@
     "so cai 11 22 33",
     "so bac thay",
     "22 voi so 4",
-    "22 va 4",
-    "22 khac 4"
+    "22 khac 4",
+    "so 22 va so 4"
    ]
   },
   "ba_chi_so_ten": {
@@ -80,11 +82,11 @@
    "noi_dung": "Cả ba tính từ họ tên. Sứ mệnh: cộng mọi chữ cái. Linh hồn: chỉ nguyên âm — điều bạn khao khát bên trong. Nhân cách: chỉ phụ âm — ấn tượng bạn tạo cho người khác.",
    "tu_khoa": [
     "su menh linh hon nhan cach",
-    "linh hon khac",
     "linh hon va nhan cach",
     "nhan cach va linh hon",
     "su menh va linh hon",
-    "khac so nhan cach"
+    "khac so nhan cach",
+    "so linh hon khac so nhan cach"
    ]
   },
   "nam_ca_nhan": {
@@ -275,13 +277,15 @@
    "tieu_de": "Thần số học bắt nguồn từ đâu?",
    "noi_dung": "Ý tưởng con số mang ý nghĩa thường được gắn với trường phái Pythagoras ở Hy Lạp cổ, nhưng thần số học theo kiểu đang phổ biến (cộng ngày sinh ra số chủ đạo, đổi chữ trong tên ra số) hình thành ở Mỹ đầu thế kỷ 20, qua các tác giả như L. Dow Balliett và Juno Jordan. Trường phái Chaldea (Cheiro) là một nhánh khác, coi trọng tên thường gọi. Đây là truyền thống văn hoá để tự soi, không phải môn khoa học.",
    "tu_khoa": [
-    "xuat phat tu dau",
-    "nguon goc",
-    "bat nguon",
-    "ra doi tu",
-    "ai sang lap",
-    "ai nghi ra",
-    "lich su than so"
+    "than so hoc xuat phat",
+    "than so hoc bat nguon",
+    "than so hoc ra doi",
+    "than so hoc co tu",
+    "nguon goc than so",
+    "nguon goc cua than so",
+    "lich su than so",
+    "ai sang lap than so",
+    "ai nghi ra than so"
    ]
   },
   "chi_so_quan_trong": {
@@ -289,9 +293,10 @@
    "noi_dung": "Hầu hết sách đặt số chủ đạo (đường đời) lên đầu: nó nói về con đường và bài học chính. Số sứ mệnh (từ họ tên) nói về cách bạn thể hiện ra ngoài và việc bạn dễ làm tốt; số linh hồn nói điều bạn mong mỏi bên trong; số nhân cách là ấn tượng người khác thấy. Không chỉ số nào 'thắng' chỉ số nào — đọc chung, chỗ các số giống nhau là nét rõ nhất, chỗ khác nhau là chỗ bạn hay giằng co.",
    "tu_khoa": [
     "chi so nao quan trong",
-    "so nao quan trong",
-    "cai nao quan trong hon",
-    "quan trong hon so",
+    "so nao quan trong hon",
+    "so nao quan trong nhat",
+    "duong doi cai nao quan trong",
+    "su menh cai nao quan trong",
     "nen xem so nao truoc",
     "so nao chinh xac hon"
    ]

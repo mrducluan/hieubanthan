@@ -115,12 +115,12 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
     # bệnh nặng / chẩn đoán / bỏ thuốc
     (r"(bi|co|mac|chan doan|khoi) u (gan|phoi|nao|vu|xo|tuyen giap|da day|buong trung|tu cung)",
      r"(bị|có|mắc|chẩn đoán|khối) u (gan|phổi|não|vú|xơ|tuyến giáp|dạ dày|buồng trứng|tử cung)", "suc_khoe_the_chat"),
-    (r"chan doan (u|ung thu|benh)|lanh hay ac|ung thu|xo gan|dot tu|dot quy|tai bien|vo sinh(?! (nam )?\d{2,4}(?!\w))|tim bam sinh|tieu duong",
+    (r"chan doan (u|ung thu|benh)|lanh hay ac|ung thu|xo gan|dot tu|dot quy|tai bien|vo sinh(?! (nam )?(19\d{2}|200\d|201\d)(?!\w))|tim bam sinh|tieu duong",
      r"chẩn đoán (u|ung thư|bệnh)|lành hay ác|ung thư|xơ gan|đột tử|đột quỵ|tai biến|vô sinh|tim bẩm sinh|tiểu đường",
      "suc_khoe_the_chat"),
     # EN-3d (bộ dev): triệu chứng tim mạch + hỏi bệnh ("đau ngực… có phải dễ bị bệnh tim") → khuyên đi khám, không luận số.
-    (r"benh (tim|phoi|gan|than|mau)(?! (la|nhu))|(bi|hay|thay|dang) (dau|tuc) nguc|(bi|hay|dang) kho tho(?! (vi|qua vi|voi))",
-     r"bệnh (tim|phổi|gan|thận|máu)|(bị|hay|thấy|đang) (đau|tức) ngực|(bị|hay|đang) khó thở(?! (vì|quá vì|với))", "suc_khoe_the_chat"),
+    (r"(?<!khoa )(?<!kham )benh (tim|phoi|gan|than|mau)(?! (la|nhu))|(bi|hay|thay|dang) (dau|tuc) nguc|(bi|hay|dang) kho tho(?! (vi|qua vi|voi))",
+     r"(?<!khoa )(?<!khám )bệnh (tim|phổi|gan|thận|máu)|(bị|hay|thấy|đang) (đau|tức) ngực|(bị|hay|đang) khó thở(?! (vì|quá vì|với))", "suc_khoe_the_chat"),
     (r"(be|con|chau|bi) .{0,15}(sot cao|co giat)|co giat", r"(bé|con|cháu|bị|đang) .{0,15}sốt cao|sốt cao (co giật|liên tục|mấy ngày|không hạ|không dứt)|co giật", "suc_khoe_the_chat"),
     (r"(bi|benh|con|be|chau) .{0,12}dong kinh", r"động kinh", "suc_khoe_the_chat"),
     (r"tu ky(?! luat)", r"tự kỷ(?! luật)", "suc_khoe_the_chat"),
@@ -197,7 +197,7 @@ def _hai_ban(raw: str) -> tuple[str, str, bool]:
 # dấu trùng chữ thường ("vợ sinh 1993" ≡ "vô sinh", "có cần quan tâm" ≡ "có căn quan"). Người dùng gõ CÓ dấu → mẫu chỉ
 # áp khi câu có đúng chữ có dấu ở cột phải; gõ không dấu → vẫn áp như cũ (an toàn hơn chặn thiếu).
 MO_HO: dict[str, str] = {
-    r"vo sinh(?! (nam )?\d{2,4}(?!\w))": r"vô sinh",
+    r"vo sinh(?! (nam )?(19\d{2}|200\d|201\d)(?!\w))": r"vô sinh",
     r"(co|la|phai) can (co|cau|quan|tu|ong|nang)(?!\w)": r"căn",
     r"(?<!\w)(nang|nhieu) can(?!\w)": r"căn",
     r"can dong": r"căn đồng",
@@ -206,23 +206,61 @@ MO_HO: dict[str, str] = {
 }
 
 
+_RX_DUNG: dict[str, re.Pattern] = {}
+
+
+def _dung_dau(c: str) -> re.Pattern:
+    """Mẫu CÓ dấu chấp nhận cả chữ gõ KHÔNG dấu, nhưng không chấp nhận chữ gõ SAI dấu: "vô sinh" → v[ôo] sinh — khớp
+    "vô sinh", "vo sinh"; không khớp "vợ sinh". Review EN-3d: câu gõ dấu một phần ("Tôi bị vo sinh", "có trung so không",
+    "đau nguc kho tho") không được lọt bộ chặn; câu gõ đủ dấu vẫn phân biệt "dạy/dậy", "cần/căn"."""
+    if c in _RX_DUNG:
+        return _RX_DUNG[c]
+    out, trong_lop, i = [], False, 0
+    while i < len(c):
+        ch = c[i]
+        if ch == "\\" and i + 1 < len(c):
+            out.append(c[i:i + 2])
+            i += 2
+            continue
+        if ch == "[":
+            trong_lop = True
+        elif ch == "]":
+            trong_lop = False
+        goc = _bo_dau(ch)
+        if goc != ch and goc.isalpha():
+            out.append(ch + goc if trong_lop else f"[{ch}{goc}]")
+        else:
+            out.append(ch)
+        i += 1
+    _RX_DUNG[c] = re.compile(r"(?<!\w)(?:" + "".join(out) + r")(?!\w)")
+    return _RX_DUNG[c]
+
+
 def bo_qua_mo_ho(mau: str, raw: str | None) -> bool:
-    """True khi mẫu không dấu `mau` là mẫu mơ hồ và câu gốc (có dấu) không có chữ có dấu tương ứng."""
+    """True khi mẫu không dấu `mau` là mẫu mơ hồ, câu gốc gõ có dấu, và câu KHÔNG có chữ cần chặn (kể cả gõ không dấu)
+    — "vợ sinh 1993", "có cần quan tâm" bỏ qua; "Tôi bị vo sinh", "Tôi có can co" vẫn chặn."""
     if mau not in MO_HO or not raw:
         return False
     cd, _kd, co_dau = _hai_ban(raw)
-    return co_dau and not re.search(MO_HO[mau], cd)
+    return co_dau and not _dung_dau(MO_HO[mau]).search(cd)
+
+
+def _khop(k: str, c: str | None, cd: str, kd: str, co_dau: bool) -> bool:
+    """Câu gõ có dấu → mẫu có dấu (chấp nhận chữ gõ không dấu, `_dung_dau`); câu không dấu → mẫu không dấu."""
+    if not (co_dau and c):
+        return bool(_rx(k).search(kd))
+    return bool(_dung_dau(c).search(cd))
 
 
 def khung_hoang(raw: str) -> bool:
     cd, kd, co_dau = _hai_ban(raw)
-    return any((_rx(c).search(cd) if co_dau and c else _rx(k).search(kd)) for k, c in KHUNG_HOANG)
+    return any(_khop(k, c, cd, kd, co_dau) for k, c in KHUNG_HOANG)
 
 
 def tu_choi(raw: str) -> str | None:
     """Loại từ chối ('suc_khoe_the_chat' | 'du_doan_cu_the') hoặc None."""
     cd, kd, co_dau = _hai_ban(raw)
     for k, c, loai in TU_CHOI:
-        if _rx(c).search(cd) if co_dau and c else _rx(k).search(kd):
+        if _khop(k, c, cd, kd, co_dau):
             return loai
     return None

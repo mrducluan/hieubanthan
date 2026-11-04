@@ -63,6 +63,7 @@ def _la_nam_sinh(t: str, a: int, b: int) -> bool:
     truoc, sau = t[:a], t[b:]
     return bool(re.search(r"(sinh|sn|tuoi|doi|nam sinh|ns)\s*(nam\s*)?(\d{4}\s*(va|,|hoac|voi)\s*)?$", truoc)
                 or re.search(r"\d{1,2}[/-]\d{1,2}[/-]$", truoc)
+                or re.search(r"(sinh|sn)\s*(vao\s*)?(thang\s*)?\d{1,2}[/-]$", truoc)              # "sinh tháng 5/2015"
                 or re.search(r"^\s*(sinh|sn)\b", sau)                               # "năm 1975 sinh"
                 or (re.search(r"(?<!\w)" + _VAI + r"( (toi|minh|em|tui))?\s*$", truoc)     # "vợ tôi 1993", "tôi 1990"
                     and not re.search(r"(sinh|lay|cuoi|don|gap|de|nhan|co them) " + _VAI + r"\s*$", truoc)))  # "sinh con 2027"
@@ -104,7 +105,10 @@ def thoi_gian(t: str, hom_nay: dt.date) -> list[dict]:
             y = next(e for _, e in nam_ev if "tuong_doi" not in e)["nam"]
         thang_ev.append((m.start(), {"nam": y, "thang": th}))
     for m in re.finditer(r"thang (1[0-2]|0?[1-9])[/-](20\d{2})(?!\d)", t):        # EN-3d: "tháng 1/2027"
-        thang_ev.append((m.start(), {"nam": int(m.group(2)), "thang": int(m.group(1))}))
+        y, th = int(m.group(2)), int(m.group(1))
+        if _la_nam_sinh(t, m.start(), m.end()) or (y, th) < (hom_nay.year, hom_nay.month):
+            continue                                                              # "sinh tháng 5/2015", mốc đã qua
+        thang_ev.append((m.start(), {"nam": y, "thang": th}))
     k = re.search(r"(ba|3|hai|2|may|vai|sau|6) thang (toi|sap toi|nua)\b", t)
     if k:
         n = {"ba": 3, "3": 3, "hai": 2, "2": 2}.get(k.group(1), 3)                  # "mấy / 6 tháng tới" → 3 tháng đầu

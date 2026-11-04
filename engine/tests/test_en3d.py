@@ -99,7 +99,8 @@ def test_dac_biet_than_so(q, xl):
 
 # ---- Thần số: số người hỏi tự nêu, cặp cùng số, câu kiến thức
 @pytest.mark.parametrize("q,so", [("Tôi số 6, hay ôm việc của người khác, làm sao để bớt?", {"duong_doi": 6}),
-                                  ("Tôi rất cầu toàn, có phải do số 7 không?", {"duong_doi": 7}),
+                                  ("Tôi muốn là số 1 trong công ty, có hợp làm sếp không", {}),
+                                  ("Tôi là số 1 Việt Nam về bán hàng", {}),
                                   ("nhà tôi số 8 có tốt không", {}), ("tôi số 5 người", {})])
 def test_so_tu_neu(q, so):
     assert hoi.phan_loai(q)["so_nhac"] == so
@@ -170,3 +171,58 @@ def test_que_mo_dau_co_so_trong_viec_nen_lam():
     assert dau.startswith("Về chuyện tiền ảo")
     import re as _re
     assert all(int(n) in kq["bang_chung"]["so_trong_goi"] for n in _re.findall(r"\d+", dau))
+
+
+# ---- review độc lập EN-3d: các ca hồi quy
+@pytest.mark.parametrize("q", ["Tôi bị vo sinh có con được không", "Vợ tôi vo sinh thì sao", "Năm nay tôi có trung so không",
+                               "vo sinh 10 nam nay co con duoc khong", "Tôi bị đau nguc kho tho có sao không"])
+def test_go_dau_mot_phan_van_chan(q):
+    """Gõ dấu một phần không được lọt bộ chặn (mẫu có dấu chấp nhận chữ gõ không dấu)."""
+    assert chung.dac_biet(chuan_hoa_cau(q), q) == "tu_choi_nhe" and hoi.phan_loai(q)["xu_ly"] == "tu_choi_nhe"
+
+
+@pytest.mark.parametrize("q", ["Tôi làm bác sĩ khoa bệnh tim có hợp không", "Tôi muốn mở phòng khám bệnh máu",
+                               "Tôi muốn thức dạy sớm hơn", "Nên đi từ từ hay vội"])
+def test_khong_chan_nham(q):
+    assert chung.dac_biet(chuan_hoa_cau(q), q) is None and hoi.phan_loai(q)["xu_ly"] != "tu_choi_nhe"
+
+
+@pytest.mark.parametrize("q,ky_vong", [("Tôi bị người ta yểm bùa có thật không", "dan_huong"),
+                                        ("Tôi muốn yểm bùa nhà hàng xóm", "tu_choi_nhe"),
+                                        ("Linh hồn con tôi là số mấy", None)])
+def test_tam_linh_review(q, ky_vong):
+    assert chung.dac_biet(chuan_hoa_cau(q), q) == ky_vong
+
+
+@pytest.mark.parametrize("q,ma", [("Năm nay tiền bạc của tôi thế nào, tôi hay lo lắng", "lam_giau"),
+                                   ("Tôi kiểm soát chi tiêu thế nào cho tốt", "giu_tien"),
+                                   ("Mẹ tôi hay lo lắng cho tôi", "bo_me"),
+                                   ("Tôi hay nói thẳng nên mất lòng sếp", "dong_nghiep"),
+                                   ("Tôi nên ở lại quê hay đi lên thành phố", "di_xa"),
+                                   ("Tôi bán đồ ăn online có ổn không?", None)])
+def test_net_tinh_cach_nhuong_chu_de(q, ma):
+    assert (mo_dau.dieu_hoi(chuan_hoa_cau(q), q) or {}).get("ma") == ma
+
+
+@pytest.mark.parametrize("q", ["Nhà thờ dòng họ nên đặt hướng nào", "Mua đất anh họ có nên không",
+                               "Phòng ngủ ổn quá, có cần đổi giường không", "Mẫu nhà ống 2 tầng nào hợp tuổi tôi",
+                               "Phong thổ vùng này có hợp xây nhà không", "Năm nay anh cưới vợ có hợp xây nhà không"])
+def test_bo_tri_moi_khong_khop_nham(q):
+    moi = {"dong_ho", "tranh_treo", "duong_lon_on", "mau_son", "dat_meo", "ban_tho"}
+    assert not set(pt.phan_loai(q).get("bo_tri") or []) & moi
+
+
+@pytest.mark.parametrize("q", ["Tôi muốn làm trang web bán hàng có hợp không", "Bệnh của bố bắt nguồn từ đâu",
+                               "Tiền bạc và gia đình cái nào quan trọng hơn với tôi"])
+def test_giai_thich_moi_khong_qua_rong(q):
+    assert not hoi.phan_loai(q)["giai_thich"]
+
+
+def test_sinh_thang_khong_la_moc_hoi():
+    from app.hoidap import hieu_cau
+    assert hieu_cau.thoi_gian(chuan_hoa_cau("Con tôi sinh tháng 5/2015 hợp nghề gì"), dt.date(2026, 11, 1)) == []
+
+
+@pytest.mark.parametrize("q", ["Tôi và em gái cùng số 8 tuổi", "Hai đứa con tôi cùng là số 3"])
+def test_cung_so_khong_qua_rong(q):
+    assert hoi.phan_loai(q)["cap_nhac"] is None

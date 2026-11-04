@@ -532,7 +532,9 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
         mo = mo_dau.que_mo(doc_que, pl["cau_chuan_hoa"], cau_hoi, moc)
         # EN-3d: số trong "việc nên làm" (KB nhóm việc của quẻ, vd "dòng tiền 6 tháng") là dữ kiện của gói đọc quẻ —
         # đăng ký vào gói bằng chứng, nếu không bất biến "số phải có trong gói" bỏ cả đoạn mở đầu.
-        so_kb = {int(n) for x in doc_que.get("hanh_dong") or [] for v in x.get("viec") or [] for n in re.findall(r"\d+", v)}
+        viec0 = next((x["viec"][0] for x in doc_que.get("hanh_dong") or [] if x.get("muc") == doc_que.get("muc")
+                      and x.get("viec")), "")                       # đúng việc que_mo chọn (review: không gom mọi nhóm)
+        so_kb = {int(n) for n in re.findall(r"\d+", viec0)}
         if mo and (la := set(mo_dau.so_la(mo, goi))) and la <= so_kb:
             goi["so_trong_goi"] = sorted(set(goi.get("so_trong_goi") or []) | la)
         van = mo_dau.dat_dau(van, mo, goi)

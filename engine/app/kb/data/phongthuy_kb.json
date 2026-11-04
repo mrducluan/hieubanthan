@@ -454,7 +454,7 @@
    "nguon": "dan_gian",
    "tu_khoa": [
     "ban tho",
-    "phong tho"
+    "phong tho (tren|o tang|dat o|nen dat|tang thuong|rieng)"
    ]
   },
   "cua_doi_nhau": {
@@ -1093,9 +1093,9 @@
    "goi_y": "Sau lưng sofa chọn tranh cảnh vững, màu êm; tranh thác nước treo ở tường đối diện cửa vào, dòng nước hướng vào trong nhà; ảnh cưới đầu giường chọn khung nhẹ, bắt vít chắc hoặc đặt trên kệ.",
    "nguon": "dan_gian",
    "tu_khoa": [
-    "(treo|dat) (tranh|anh)",
+    "(treo|dat) (tranh|buc tranh|anh cuoi|anh gia dinh|anh tho)",
     "tranh (thac nuoc|son thuy|nui|phong canh|ca chep|ma dao)",
-    "anh cuoi",
+    "anh cuoi( to| lon)? (tren dau|treo|o dau|dau giuong|trong phong|o phong)",
     "tranh .{0,15}(sau lung|tren dau|dau giuong|phong khach|sofa)",
     "buc tranh"
    ],
@@ -1121,7 +1121,9 @@
    "goi_y": "Phòng ngủ dùng đồng hồ chạy êm, không tiếng, đặt bên cạnh chứ không treo đối diện mặt; phòng khách treo ở tường bên, dễ nhìn từ chỗ ngồi.",
    "nguon": "dan_gian",
    "tu_khoa": [
-    "dong ho"
+    "(treo|dat|ke|gan) dong ho",
+    "dong ho (treo|o|dat|doi dien|tren|trong phong|bao thuc|keu|hong|chet)",
+    "cai dong ho"
    ],
    "giai_thich_hien_dai": "Đồng hồ ngay tầm mắt khi nằm khiến nhiều người nhìn giờ liên tục lúc khó ngủ, càng sốt ruột càng tỉnh; tiếng kêu đều trong đêm cũng làm giấc ngủ nông hơn.",
    "viec": [
@@ -1145,7 +1147,7 @@
    "goi_y": "Lấy màu hợp mệnh làm điểm nhấn (một mảng tường, rèm, gối) thay vì sơn kín cả phòng; tường chính vẫn nên chọn màu sáng, dịu để nhà đủ sáng. Gạch lát nền màu quá tối làm phòng bí, dễ lộ bụi — nền sáng hoặc màu gỗ dễ sống hơn.",
    "nguon": "dan_gian",
    "tu_khoa": [
-    "mau (son|gach|tuong|nha|phong|sac|op|lat|noi that|rem|cua)",
+    "mau (son|gach|tuong|sac|op lat|noi that|rem)",
     "son (nha|phong|tuong) (mau|gi)",
     "(son|gach|lat nen|lat san) .{0,20}mau",
     "mau gi .{0,20}(menh|hop)",
@@ -1233,7 +1235,7 @@
    "goi_y": "Nếu cân nhắc đất méo: thử phác mặt bằng xem phần vuông dùng được còn bao nhiêu; xây theo khối vuông trên phần đất chính, góc nhọn làm sân, vườn hoặc kho.",
    "nguon": "co_thu",
    "tu_khoa": [
-    "dat (hinh )?(tam giac|meo|xeo|nhon|lech|vat)",
+    "(manh |lo |mieng |thua )?dat (hinh )?(tam giac|meo|xeo|nhon)",
     "manh dat .{0,15}(meo|xeo|tam giac|nhon)",
     "dat co goc nhon",
     "lo dat .{0,15}(meo|tam giac)"
@@ -1366,7 +1368,7 @@
    "nguon": "co_thu",
    "tu_khoa": [
     "(gan|sat|canh|ngay) (duong cao toc|duong lon|quoc lo|duong tau|duong ray|dai lo)",
-    "(nha|phong) .{0,15}(on ao|bui bam|on qua)",
+    "(on ao|bui bam|on) .{0,20}(xe|duong|tau|cong trinh)",
     "xe chay (nhieu|suot)"
    ],
    "giai_thich_hien_dai": "Tiếng ồn liên tục làm giấc ngủ nông và người dễ cáu dù đã quen tai; bụi đường bám vào nhà nhanh. Giảm ồn ở phòng ngủ là việc đáng đầu tư nhất.",

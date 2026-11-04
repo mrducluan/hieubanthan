@@ -31,43 +31,6 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
     ("tinh_khi", "chuyện tính nóng", "ban_than",
      [r"nong (nay|tinh)", r"(?<!\w)cau (gat|kinh)", r"(?<!\w)de (gian|noi nong|cau)", r"buc boi", r"(?<!\w)nong (voi|len)",
       r"tinh khi", r"kiem che", r"(?<!\w)gian (du|giu)"]),
-    ("om_viec", "chuyện ôm việc, khó từ chối", "ban_than",
-     [r"om (viec|het|dom)", r"(kho|khong biet|khong dam|ngai) tu choi", r"ganh (viec|het)", r"lam ho (nguoi|viec)"]),
-    ("kien_tri", "chuyện bỏ dở giữa chừng", "ban_than",
-     [r"bo do", r"(khong|thieu|kem) kien tri", r"ca the ba phai", r"(hay|de) bo cuoc", r"nhanh chan", r"ba phut"]),
-    ("cau_toan", "tính cầu toàn", "ban_than",
-     [r"cau toan", r"hoan hao", r"ki tinh", r"ky tinh"]),
-    ("lanh_dao", "chuyện làm lãnh đạo, dẫn dắt", "cong_viec",
-     [r"lanh dao", r"truong nhom", r"dan dat", r"\bleader\b", r"quan ly (nhom|nguoi|doi)"]),
-    # EN-3d: nét tính cách / thói quen hay hỏi (nhãn cố định, gọi tên điều người hỏi băn khoăn)
-    ("lo_nghi", "chuyện hay lo nghĩ", "ban_than",
-     [r"(hay|de|qua|nhieu) (lo|lo lang|lo au|nghi ngoi|suy nghi|overthinking|nghi nhieu)", r"lo xa", r"suy nghi qua nhieu",
-      r"overthink"]),
-    ("nhay_cam", "chuyện dễ tổn thương, nhạy cảm", "ban_than",
-     [r"(de|hay|qua) (ton thuong|nhay cam|tu ai|tui than|khoc|buon)", r"de bi ton thuong", r"(hay|de) gian doi"]),
-    ("do_du", "chuyện thiếu quyết đoán", "ban_than",
-     [r"(thieu|khong|kem) quyet doan", r"do du", r"phan van mai", r"(kho|khong dam) quyet dinh", r"lung lung"]),
-    ("ca_ne", "chuyện cả nể, sống vì người khác", "ban_than",
-     [r"ca ne", r"de (mem long|xieu long)", r"mem long", r"song vi nguoi khac", r"(chieu|lam vua long) (nguoi khac|moi nguoi)",
-      r"(?<!\w)ne (nguoi|moi nguoi)"]),
-    ("cung_dau", "tính cứng đầu, bảo thủ", "ban_than",
-     [r"cung dau", r"bao thu", r"co chap", r"(hay|de) cai", r"khong chiu nghe", r"ghe ghe"]),
-    ("huong_noi", "chuyện hướng nội, ít nói", "ban_than",
-     [r"huong noi", r"it noi", r"tram tinh", r"(thich|hay) (o )?mot minh", r"ngai (giao tiep|noi chuyen|gap nguoi)"]),
-    ("huong_ngoai", "chuyện hướng ngoại, nói nhiều", "ban_than",
-     [r"huong ngoai", r"noi nhieu", r"(hay|de) noi (leo|thang|qua)", r"thang tinh", r"(?<!\w)noi thang"]),
-    ("ghen_ti", "chuyện ganh tị, so bì", "ban_than",
-     [r"ganh ti", r"ghen ti", r"so bi", r"so do", r"ti nanh"]),
-    ("de_chan", "chuyện dễ chán, thiếu động lực", "ban_than",
-     [r"(de|hay|nhanh) chan", r"(thieu|mat|khong co) dong luc", r"chan nan", r"uon (ao|ai)", r"luoi bieng"]),
-    ("nong_voi", "chuyện nóng vội, thiếu kiên nhẫn", "ban_than",
-     [r"nong voi", r"(thieu|khong|kem) kien nhan", r"(hap tap|vo vap|voi vang)"]),
-    ("kiem_soat", "chuyện muốn kiểm soát", "ban_than",
-     [r"kiem soat", r"(ap dat|bat nguoi khac)", r"gia truong", r"doc doan"]),
-    ("so_that_bai", "chuyện sợ thất bại, ngại thay đổi", "ban_than",
-     [r"so (that bai|thay doi|sai|bi che|rui ro)", r"ngai thay doi", r"(khong dam|ngai) (thu|bat dau|buoc ra)", r"vung an toan"]),
-    ("nghien_viec", "chuyện làm việc quá sức", "ban_than",
-     [r"nghien viec", r"tham cong tiec viec", r"lam (viec )?(qua suc|khong nghi|quen ca)", r"workaholic", r"cuong viec"]),
     ("tri_hoan", "thói trì hoãn", "ban_than",
      [r"tri hoan", r"deadline", r"chan chu", r"(?<!\w)luoi", r"no viec", r"ky luat"]),
     ("tap_trung", "chuyện tập trung", "ban_than",
@@ -76,14 +39,14 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
     ("doi_viec", "chuyện đổi việc, nghỉ việc", "cong_viec",
      [r"doi (viec|cong viec|nghe|cong ty|cho lam)", r"nhay viec", r"chuyen (viec|nghe|nganh|cong ty|sang)",
       r"nghi viec", r"bo viec", r"(ve|sang|qua) lam (cho|o|tai|ben)", r"sang cong ty", r"cong ty moi", r"(nop|gui) (don|ho so|cv)", r"viec (moi|khac)",
-      r"tim viec", r"(o lai|tiep tuc lam) .{0,40}(hay|hoac) (nghi|di|bo|doi)"]),
+      r"tim viec", r"(o lai|tiep tuc lam) (cong ty|cho cu|o cong ty|lam|tiep).{0,40}(hay|hoac) (nghi|bo|doi|nhay|di)"]),
     ("thang_tien", "chuyện thăng tiến, làm quản lý", "cong_viec",
      [r"thang (chuc|tien)", r"len (chuc|chuc vu|cap)", r"de bat", r"(lam|len|nhan) (quan ly|lanh dao|truong|pho|giam doc)",
       r"tang luong", r"chuc vu", r"hieu (truong|pho)", r"bo nhiem"]),
     ("kinh_doanh", "chuyện kinh doanh, làm chủ", "cong_viec",
      [r"kinh doanh", r"buon ban", r"lam (chu|rieng|an rieng)", r"khoi nghiep", r"khai truong",
       r"mo (quan|tiem|cua hang|shop|cong ty|xuong|spa|salon|nha hang|cua tiem)", r"tu (mo|lam chu)", r"ban hang",
-      r"don hang", r"chot (don|hop dong|deal)", r"dam phan", r"chi nhanh", r"(doi|chuyen) (dia diem|mat bang)",
+      r"don hang", r"chot (don|hop dong|deal)", r"dam phan", r"mo (them )?chi nhanh", r"(doi|chuyen) (dia diem|mat bang)",
       r"(quan|tiem|cua hang|shop) .{0,25}(vang khach|e am|it khach|ban cham|dong khach)"]),
     ("hop_tac", "chuyện góp vốn, làm ăn chung", "cong_viec",
      [r"gop von", r"hop tac", r"(?<!\w)hun ", r"doi tac", r"lam an (chung|voi)", r"chung von", r"goi von",
@@ -144,8 +107,9 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
     ("thi_cu", "chuyện học hành, thi cử", "hoc_hanh",
      [r"(?<!\w)thi (lai|dai hoc|do|dau|cu|tot nghiep|chung chi|ielts|toeic|cong chuc)", r"on thi", r"ky thi", r"hoc bong",
       r"\bielts\b", r"(?<!\w)hoc (hanh|van|tap|them|thac si|len|nganh|dai hoc|lai|tiep|bang)", r"thac si", r"dai hoc",
-      r"van bang", r"chung chi", r"chuyen truong", r"(?<!\w)bang cap", r"luan van", r"khoa luan", r"do an",
-      r"bai tap lon", r"nop bai", r"bao ve (luan|do an|de tai)"]),
+      r"van bang", r"chung chi", r"chuyen truong", r"(?<!\w)bang cap", r"luan van", r"khoa luan",
+      r"(lam|nop|bao ve) do an", r"do an (tot nghiep|mon|hoc|chuyen nganh)", r"bai tap lon", r"nop bai",
+      r"bao ve (luan|de tai)"]),
     ("di_xa", "chuyện đi xa, ra nước ngoài", "di_xa",
      [r"(nuoc|ra) ngoai", r"xuat ngoai", r"du hoc", r"di xa", r"xa (que|nha)", r"dinh cu", r"cong tac", r"thien di",
       r"lap nghiep", r"ve que", r"thanh pho", r"(?<!\w)que (nha|huong)", r"chuyen di", r"xuat khau lao dong",
@@ -182,25 +146,68 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
      [r"gia dinh", r"(?<!\w)ho hang", r"noi ngoai", r"dong ho", r"to tien", r"phuc duc", r"gia dao", r"huong hoa"]),
     ("ban_be", "chuyện bạn bè", "quan_he",
      [r"ban (be|than|cu)", r"no boc", r"giao tiep", r"cac moi quan he", r"quan he"]),
+    # EN-3d (review): nét tính cách đứng SAU các chủ đề đời sống — "tiền bạc thế nào, tôi hay lo" là chuyện tiền bạc.
+    ("om_viec", "chuyện ôm việc, khó từ chối", "ban_than",
+     [r"om (viec|het|dom)", r"(kho|khong biet|khong dam|ngai) tu choi", r"ganh (viec|het)", r"lam ho (nguoi|viec)"]),
+    ("kien_tri", "chuyện bỏ dở giữa chừng", "ban_than",
+     [r"bo do", r"(khong|thieu|kem) kien tri", r"ca the ba phai", r"(hay|de) bo cuoc", r"nhanh chan", r"ba phut"]),
+    ("cau_toan", "tính cầu toàn", "ban_than",
+     [r"cau toan", r"hoan hao", r"ki tinh", r"ky tinh"]),
+    ("lanh_dao", "chuyện làm lãnh đạo, dẫn dắt", "cong_viec",
+     [r"lanh dao", r"truong nhom", r"dan dat", r"\bleader\b", r"quan ly (nhom|nguoi|doi)"]),
+    # EN-3d: nét tính cách / thói quen hay hỏi (nhãn cố định, gọi tên điều người hỏi băn khoăn)
+    ("lo_nghi", "chuyện hay lo nghĩ", "ban_than",
+     [r"(hay|de|qua|nhieu) (lo|lo lang|lo au|nghi ngoi|suy nghi|overthinking|nghi nhieu)", r"lo xa", r"suy nghi qua nhieu",
+      r"overthink"]),
+    ("nhay_cam", "chuyện dễ tổn thương, nhạy cảm", "ban_than",
+     [r"(de|hay|qua) (ton thuong|nhay cam|tu ai|tui than|khoc|buon)", r"de bi ton thuong", r"(hay|de) gian doi"]),
+    ("do_du", "chuyện thiếu quyết đoán", "ban_than",
+     [r"(thieu|khong|kem) quyet doan", r"do du", r"phan van mai", r"(kho|khong dam) quyet dinh", r"lung lung"]),
+    ("ca_ne", "chuyện cả nể, sống vì người khác", "ban_than",
+     [r"ca ne", r"de (mem long|xieu long)", r"mem long", r"song vi nguoi khac", r"(chieu|lam vua long) (nguoi khac|moi nguoi)",
+      r"(?<!\w)ne (nguoi|moi nguoi)"]),
+    ("cung_dau", "tính cứng đầu, bảo thủ", "ban_than",
+     [r"cung dau", r"bao thu", r"co chap", r"(hay|de) cai", r"khong chiu nghe", r"ghe ghe"]),
+    ("huong_noi", "chuyện hướng nội, ít nói", "ban_than",
+     [r"huong noi", r"it noi", r"tram tinh", r"(thich|hay) (o )?mot minh", r"ngai (giao tiep|noi chuyen|gap nguoi)"]),
+    ("huong_ngoai", "chuyện hướng ngoại, nói nhiều", "ban_than",
+     [r"huong ngoai", r"noi nhieu", r"(hay|de) noi (leo|thang|qua)", r"thang tinh"]),
+    ("ghen_ti", "chuyện ganh tị, so bì", "ban_than",
+     [r"ganh ti", r"ghen ti", r"so bi", r"ti nanh"]),
+    ("de_chan", "chuyện dễ chán, thiếu động lực", "ban_than",
+     [r"(de|hay|nhanh) chan", r"(thieu|mat|khong co) dong luc", r"chan nan", r"uon (ao|ai)", r"luoi bieng"]),
+    ("nong_voi", "chuyện nóng vội, thiếu kiên nhẫn", "ban_than",
+     [r"nong voi", r"(thieu|khong|kem) kien nhan", r"(hap tap|vo vap|voi vang)"]),
+    ("kiem_soat", "chuyện muốn kiểm soát", "ban_than",
+     [r"kiem soat", r"(ap dat|bat nguoi khac)", r"gia truong", r"doc doan"]),
+    ("so_that_bai", "chuyện sợ thất bại, ngại thay đổi", "ban_than",
+     [r"so (that bai|thay doi|sai|bi che|rui ro)", r"ngai thay doi", r"(khong dam|ngai) (thu|bat dau|buoc ra)", r"vung an toan"]),
+    ("nghien_viec", "chuyện làm việc quá sức", "ban_than",
+     [r"nghien viec", r"tham cong tiec viec", r"lam (viec )?(qua suc|khong nghi|quen ca)", r"workaholic", r"cuong viec"]),
     ("tinh_cach", "tính cách của bạn", "ban_than",
      [r"tinh cach", r"con nguoi", r"noi tam", r"(la|kieu) nguoi (the nao|ra sao|gi)", r"ban than", r"(?<!\w)tinh (toi|em|minh)"]),
 ]
 _THEO_MA = {ma: (ma, nhan, mang, mau) for ma, nhan, mang, mau in DIEU_HOI}
+# Nét tính cách EN-3d — nhường chủ đề đời sống ở vế khác của câu.
+_NET = {"om_viec", "kien_tri", "cau_toan", "lo_nghi", "nhay_cam", "do_du", "ca_ne", "cung_dau", "huong_noi", "huong_ngoai",
+        "ghen_ti", "de_chan", "nong_voi", "kiem_soat", "so_that_bai", "nghien_viec"}
 
 
 # EN-3d: nhãn RÕ hơn cho đầu câu "Về …" — vẫn từ danh mục cố định (không chép chữ người dùng). Chỉ đổi NHÃN hiển thị
 # khi điều cha (mã trong DIEU_HOI) đã nhận ra ở cùng vế; mã, mảng, chương giữ nguyên (định tuyến không đổi).
 # (nhãn rõ, mã cha, mẫu) — thứ tự: cụ thể trước.
 NHAN_RO: list[tuple[str, tuple[str, ...], list[str]]] = [
-    ("chuyện ở lại hay nhảy việc", ("doi_viec",), [r"(o lai|tiep tuc).{0,40}(hay|hoac).{0,30}(nhay|doi|nghi|chuyen|bo)",
+    ("chuyện ở lại hay nhảy việc", ("doi_viec",), [r"(o lai|tiep tuc) (cong ty|cho cu|o cong ty|lam|tiep).{0,40}(hay|hoac).{0,30}(nhay|doi|nghi|chuyen|bo|di)",
                                                    r"nhay viec"]),
-    ("chuyện chuyển công tác", ("doi_viec", "di_xa"), [r"(chuyen|xin|di) cong tac", r"dieu chuyen", r"luan chuyen"]),
+    ("chuyện chuyển công tác", ("doi_viec", "di_xa"), [r"(xin )?chuyen cong tac", r"dieu chuyen", r"luan chuyen"]),
+    ("chuyện đi công tác", ("di_xa",), [r"(di|chuyen di|dot) cong tac"]),
     ("chuyện xin việc, phỏng vấn", ("doi_viec",), [r"phong van", r"xin viec", r"(nop|gui) (don|ho so|cv)", r"tim viec"]),
     ("chuyện nghỉ việc", ("doi_viec",), [r"nghi viec", r"bo viec", r"xin nghi"]),
     ("chuyện lương, xin tăng lương", ("thang_tien", "lam_giau"), [r"(tang|len|deal|dam phan|xin) luong", r"(?<!\w)luong (thang|co|len|tang)"]),
     ("chuyện chốt đơn hàng, đàm phán", ("kinh_doanh",), [r"don hang", r"chot (don|hop dong|deal)", r"dam phan"]),
-    ("chuyện mở thêm chi nhánh", ("kinh_doanh",), [r"chi nhanh"]),
-    ("chuyện đổi địa điểm kinh doanh", ("kinh_doanh",), [r"(doi|chuyen) (dia diem|mat bang)", r"vang khach", r"it khach"]),
+    ("chuyện mở thêm chi nhánh", ("kinh_doanh",), [r"mo (them )?chi nhanh", r"chi nhanh (moi|thu)"]),
+    ("chuyện đổi địa điểm kinh doanh", ("kinh_doanh",), [r"(doi|chuyen) (dia diem|mat bang)"]),
+    ("chuyện quán vắng khách", ("kinh_doanh",), [r"vang khach", r"it khach", r"e am", r"ban cham"]),
     ("chuyện gọi vốn", ("hop_tac",), [r"goi von", r"nha dau tu"]),
     ("chuyện ký hợp đồng với đối tác", ("hop_tac",), [r"hop dong", r"ky ket", r"(?<!\w)ky (ket|voi)"]),
     ("chuyện nói trước đông người", ("tu_tin",), [r"dam dong", r"dong nguoi", r"thuyet trinh", r"dien gia", r"noi truoc"]),
@@ -209,7 +216,8 @@ NHAN_RO: list[tuple[str, tuple[str, ...], list[str]]] = [
                                               r"(sang|qua|di) (nhat|han|uc|my|dai loan|duc|phap|canada|singapore|chau au) (lam|lao dong)",
                                               r"(lam viec|di lam) (o|tai|ben) (nuoc ngoai|nhat|han|uc|my|dai loan|duc)",
                                               r"chuyen di .{0,15}lam viec"]),
-    ("chuyện luận văn, đồ án", ("thi_cu",), [r"luan van", r"khoa luan", r"do an", r"bai tap lon", r"bao ve (luan|do an|de tai)"]),
+    ("chuyện luận văn, đồ án", ("thi_cu",), [r"luan van", r"khoa luan", r"(lam|nop|bao ve) do an",
+                                              r"do an (tot nghiep|mon|hoc|chuyen nganh)", r"bai tap lon", r"bao ve (luan|de tai)"]),
     ("chuyện mở rộng việc làm ăn", ("kinh_doanh",), [r"mo rong", r"(them|mo them) (chi nhanh|cua hang|co so|diem ban)"]),
     ("chuyện sang nhượng quán, cửa hàng", ("kinh_doanh",), [r"sang (nhuong|lai|quan|tiem|cua hang|mat bang)"]),
     ("chuyện khai trương", ("kinh_doanh",), [r"khai truong"]),
@@ -232,7 +240,7 @@ NHAN_RO: list[tuple[str, tuple[str, ...], list[str]]] = [
     ("chuyện ly hôn", ("vo_chong",), [r"ly (hon|di|than)"]),
     ("chuyện làm lành sau cãi nhau", ("vo_chong", "tinh_duyen"), [r"lam (lanh|hoa)", r"cai nhau", r"gian nhau",
                                                                    r"(?<!\w)xin loi"]),
-    ("chuyện người cũ quay lại", ("tinh_duyen",), [r"(nguoi yeu|ny|nguoi) cu", r"quay lai", r"tai hop"]),
+    ("chuyện người cũ quay lại", ("tinh_duyen", "vo_chong"), [r"(nguoi yeu|ny|nguoi|vo|chong) cu", r"quay lai", r"tai hop"]),
     ("chuyện người ấy có thật lòng", ("tinh_duyen",), [r"that long", r"thuc long", r"(co|that) yeu (toi|em|minh)"]),
     ("chuyện tỏ tình", ("tinh_duyen",), [r"to tinh"]),
     ("chuyện học tiếp hay đi làm", ("thi_cu", "cong_viec"), [r"nghi hoc", r"bo hoc", r"(hoc tiep|hoc len).{0,30}(hay|hoac).{0,20}(di lam|lam)",
@@ -273,11 +281,17 @@ def cac_dieu_hoi(t: str, raw: str | None = None) -> list[dict]:
         if loc and not any(_cac(c) for c in loc) and _DUOI_HOI.match(loc[-1]):
             loc = cau_
         if len(loc) >= 1:
+            ra = []
             for c in reversed(loc):
                 ds = _cac(c)
-                if ds:
-                    return ds
-            return []
+                if ds and not ra:
+                    ra = ds
+                    if not all(d["ma"] in _NET for d in ds):
+                        return ds
+                elif ds and not all(d["ma"] in _NET for d in ds):
+                    # review EN-3d: "tiền bạc thế nào, tôi hay lo lắng" — vế cuối chỉ là nét tính cách, chủ đề ở vế trước
+                    return ds + ra
+            return ra
     return _cac(t)
 
 

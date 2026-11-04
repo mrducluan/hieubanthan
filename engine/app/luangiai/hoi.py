@@ -114,7 +114,7 @@ TU_CHOI = {
                 r"so may man de", r"danh lo"],
     "tuyen_dung": [r"tuyen ung vien", r"ung vien", r"sa thai nhan vien", r"nhan vien so chu dao",
                    r"nen tuyen", r"sa thai nhan vien nao"],
-    "suc_khoe_the_chat": [r"benh gi", r"mac benh", r"ung thu", r"dau da day", r"vo sinh(?! (nam )?\d{2,4}(?!\w))",
+    "suc_khoe_the_chat": [r"benh gi", r"mac benh", r"ung thu", r"dau da day", r"vo sinh(?! (nam )?(19\d{2}|200\d|201\d)(?!\w))",
                           r"sinh con duoc khong", r"co nen mo vao", r"phau thuat", r"song tho", r"an gi cho hop",
                           r"suc khoe cua toi the nao", r"khoi benh"],
     # "tai nạn": thần số không có cơ sở đoán tai nạn → từ chối nhẹ (vòng đo thanso-tu-cai-thien bắt lùi sau EN-1).
@@ -300,8 +300,10 @@ def _trich_so(t: str) -> tuple[dict[str, int], tuple[int, int] | None]:
                    rf"(chong|vo|toi|anh|em|co ay|anh ay) (so chu dao |so ){_SO}", t)
     if not cap and m2:
         cap = (int(m2.group(3)), int(m2.group(6)))
-    m4 = re.search(rf"(cung|deu) (la )?(so chu dao |duong doi |chu dao |so )(so )?{_SO}(?!\d)", t)
-    if not cap and m4 and re.search(r"(?<!\w)(hai|vo chong|va|voi|ca hai|chi em|anh em)(?!\w)", t):
+    m4 = re.search(rf"(cung|deu) (la )?(so chu dao |duong doi |chu dao |so )(so )?{_SO}(?!\d)"
+                   r"(?! (tuoi|nguoi|lan|nam|thang|ngay|dua|dua con|con)\b)", t)
+    if not cap and m4 and re.search(r"(?<!\w)(hai|vo chong|va|voi|ca hai|chi em|anh em)(?!\w)", t) \
+            and not re.search(r"(?<!\w)(con|dua con) (toi|minh|em)?\s*(cung|deu)|hai (dua|be|chau) con", t):
         cap = (int(m4.group(5)), int(m4.group(5)))       # EN-3d: "hai vợ chồng cùng số chủ đạo 4" → cặp 4–4
     m3 = re.search(rf"(linh hon|nhan cach|su menh) (so )?{_SO} va (linh hon |nhan cach |su menh )?(so )?{_SO}", t)
     if not cap and m3:
@@ -317,7 +319,10 @@ def _trich_so(t: str) -> tuple[dict[str, int], tuple[int, int] | None]:
         if mm and not cap:
             so[vt] = int(mm.groups()[-1])
     # EN-3d (bộ dev): "Tôi số 6, hay ôm việc…", "người số 3", "có phải do số 7" — cách nói thường ngày của số chủ đạo.
-    mm = re.search(rf"(?<!\w)(toi|minh|em|tui|to|nguoi|la|do|vi) (la )?so (?P<so>11|22|33|[1-9])(?!\d)(?! (nguoi|lan|nam|thang|ngay|tuoi|tien|trieu|k\b))", t)
+    # Review EN-3d: chỉ ngôi thứ nhất / "người số N"; thứ hạng ("muốn là số 1 trong công ty", "số 1 Việt Nam", "số 2 trong
+    # nhà") không phải con số thần số.
+    mm = re.search(rf"(?<!\w)(?<!muon )(?<!muon la )(toi|minh|em|tui|to|nguoi) (la )?so (?P<so>11|22|33|[1-9])(?!\d)"
+                   r"(?! (nguoi|lan|nam|thang|ngay|tuoi|tien|trieu|k|trong|o|tai|ve|cua|viet nam|the gioi|lop|nha|cong ty|ca)\b)", t)
     if mm and not cap and not so.keys() & {"duong_doi", "su_menh", "linh_hon", "nhan_cach"} \
             and not re.search(r"(nam|thang|ngay) ca nhan|so (nha|phong|dien thoai|xe|tai khoan|tang)"
                                  r"|(nha|phong|xe|sim|bien|can ho|tang|lop|ban) (toi |minh |em )?(la )?so \d", t):
