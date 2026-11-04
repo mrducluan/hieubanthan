@@ -58,5 +58,17 @@ khung cách cục tách điều kiện, (thiếu ở cả hai) dải nhảy nhan
    API trả phí ctext, không cào), phiên âm Hán Việt, nghĩa đời thường (nháp), mỗi câu nối trang cách cục / sao ở cung + dòng tính
    "câu này ứng với lá số bạn khi …". Lấp 47 cách cục chưa có `co_ca`. Công: L.
 2. Vẽ vòng Tướng tiền / Tuế tiền vận hạn trên lá số (engine đã trả ở đợt này).
-3. "Cùng sao Mệnh" thay người nổi tiếng (mục 4).
+3. ~~"Cùng sao Mệnh" thay người nổi tiếng (mục 4).~~ **Đã làm (TV-ZW-CSM, 2026-11-04)**:
+   CALC `engine/app/calc/tuvi_sao_menh.py` — đường tính nhanh chính tinh cung Mệnh bằng Python thuần (cung Mệnh theo tháng ×
+   giờ, Ngũ Hổ Độn → Cục nạp âm, an Tử Vi theo ngày âm + Cục, 13 sao còn lại `tuvi_vi_tri`; nửa sau tháng nhuận tính tháng
+   sau, Tý muộn = Tý ngày sau) **chỉ để đếm mẫu**, test khoá trùng iztro trên 1.000 lá `lasotuvi_1000` + ~130 ngày dễ lệch;
+   lá số người dùng vẫn do iztro an. Bảng `engine/app/calc/data/tuvi_sao_menh_ty_le.json` (50 tổ hợp, mọi ngày 1940–2010 ×
+   12 canh = 311.196 thời điểm, âm lịch Việt UTC+7 cả nước — không phải thống kê dân số) dựng bằng
+   `engine/scripts/sinh_tuvi_sao_menh.py`, test dựng lại toàn bộ và so từng số. Một sao đứng một mình ≈ 4,1–4,3 % (1 trong
+   ~23), cặp sao / vô chính diệu ≈ 1,3–1,5 % (1 trong ~70) → ngưỡng "khá phổ biến" ≥ 3 %, dưới là "ít gặp". RULES
+   `luangiai/cung_sao_menh.py` + KB `tuvi_cung_sao_menh_kb.json` (nháp): câu "Cùng sao Mệnh, **không cùng cuộc đời**" (cụm
+   "số phận" nằm trong `cum_cam` nên không dùng). `/v1/tuvi/an-sao` trả `cung_sao_menh` (null khi không biết giờ); web
+   `/tu-vi` một dòng dưới dải đại hạn (`CungSaoMenh.tsx`), thẻ Bản đồ 5 mảng mang thêm `r` (1 trong r lá số — chỉ tỉ lệ
+   trên mẫu, không suy ra ngày giờ sinh; mã cũ vẫn đọc được). Đo `chart_interacted{kind: cung_sao_menh}` khi mở "Vì sao
+   nói vậy".
 4. "Lá số người thân" lưu trên máy (≤ 5) — cần chủ dự án quyết vì là dữ liệu người thứ ba.

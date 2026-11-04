@@ -24,6 +24,7 @@ from app.calc import tuvi_luu_nguyet as calc_luu_nguyet
 from app.hoidap import tuvi as hoidap_tv
 from app.luangiai import tuvi_luu_nguyet as luan_luu_nguyet
 from app.luangiai import tuvi_the_cung as the_cung
+from app.luangiai import cung_sao_menh
 from app import nhat_ky
 from app.kb import trang_tuvi, tuvi_kb
 from app.config import ENGINE_VERSION, HourConfidence, Region
@@ -402,6 +403,9 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
                       "dieu_kien_dat": tuvi_kb.dieu_kien_dat(c["du_kien"])}
                      for c in tuvi_cach_cuc.nhan_dien(la)],
         "cach_cuc_luu_y": tuvi_kb.luu_y_pha_cach(),
+        # TV-ZW "Cùng sao Mệnh": tỉ lệ thời điểm sinh (mẫu 1940–2010 × 12 canh) có cùng chính tinh cung Mệnh — không
+        # phải thống kê dân số. Không biết giờ sinh → cung Mệnh là tạm, không hiện.
+        "cung_sao_menh": None if inp.do_tin_gio is HourConfidence.UNKNOWN else cung_sao_menh.tu_la_so(la),
         "phai": dv.phai,
         "co_canh_bao": flags,
     }

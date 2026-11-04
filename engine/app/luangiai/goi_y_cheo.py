@@ -29,6 +29,7 @@ from fastapi import HTTPException
 
 from app.calc import battu, lunar, phongthuy as pt, thanso, thanso_mo_rong as mr
 from app.kb import battu_kb, store, thanso_v2, tuvi_doi_song_kb as kb_tv
+from app.luangiai import cung_sao_menh
 
 # Trang công cụ có khối "Đọc tiếp" (mã mảng ở web = khoá này).
 MANG_TRANG = ("than_so", "tu_vi", "bat_tu", "phong_thuy", "kinh_dich", "hop_doi", "hom_nay", "xem_ngay",
@@ -367,6 +368,9 @@ def ban_do_5_mang(h: HoSo, ngay_xem: dt.date) -> dict:
     sao = None
     if isinstance(sm, dict) and sm["sao"]:
         sao = {"nhan": ", ".join(sm["sao"]), "muon": sm["muon"]}
+        cs = cung_sao_menh.dung(sm["sao"], sm["muon"])          # TV-ZW: chỉ tỉ lệ trên mẫu, không ngày giờ sinh
+        if cs:
+            sao["cung"] = {"mot_trong": cs["mot_trong"], "muc": cs["muc"]}
     kq = {
         "duong_doi": {"so": so, "tu_khoa": (store.nghia_so(so) or {}).get("tu_khoa")},
         "nhat_chu": {"can": b["can"], "hanh": b["hanh"], "nhan": f"{b['can']} {b['hanh']}",

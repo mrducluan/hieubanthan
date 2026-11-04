@@ -167,6 +167,7 @@ def test_ban_do_du_5_manh_khong_ngay_sinh():
     assert bd["duong_doi"]["so"] == 5 and bd["duong_doi"]["tu_khoa"]
     assert bd["nhat_chu"]["nhan"] and bd["nhat_chu"]["hinh_tuong"]
     assert bd["sao_menh"]["nhan"] == "Cự Môn"
+    assert bd["sao_menh"]["cung"] == {"mot_trong": 23, "muc": "pho_bien"}       # TV-ZW "Cùng sao Mệnh"
     assert bd["cung_phi"]["quai"] == "Khảm" and bd["cung_phi"]["huong"] == "Đông Nam"
     assert bd["que_ngay"]["ten"]
     van = json.dumps(bd, ensure_ascii=False)

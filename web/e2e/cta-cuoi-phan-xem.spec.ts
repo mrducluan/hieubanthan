@@ -125,6 +125,7 @@ test("thẻ Bản đồ 5 mảng: API ký không lộ ngày sinh, ảnh OG 200 P
   expect(tu).toMatch(/^bd\.[0-9a-f]{10}$/);
   expect(bien_the).toMatch(/^b[0-2]$/);
   expect(the.m).toBe("Cự Môn");
+  expect(the.r).toBeGreaterThan(1);                                   // TV-ZW: 1 trong r lá số có cùng sao Mệnh
   expect(the.o).toContain(the.s);
   const than = Buffer.from(ma.split(".")[0], "base64url").toString("utf8");
   for (const s of SINH) expect(than).not.toContain(s);
@@ -157,6 +158,7 @@ test("tạo thẻ từ khối CTA → trang nhận → Đoán số (lật thẻ,
   await k.getByTestId("tao-the-ban-do").click();
   await expect(k.getByTestId("xem-truoc-ban-do")).toBeVisible();
   await expect(k.getByTestId("xem-truoc-ban-do").getByTestId("manh-sao")).toContainText("Cự Môn");
+  await expect(k.getByTestId("xem-truoc-ban-do").getByTestId("manh-sao")).toContainText("lá số có sao này");
   const link = await k.getByTestId("link-the-ban-do").inputValue();
   const u = new URL(link);
   expect(u.pathname).toMatch(/^\/the\/ban-do\/[A-Za-z0-9_-]+\.[A-Za-z0-9_-]{16}$/);
