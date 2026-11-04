@@ -177,8 +177,13 @@ async function layTrangMot<T>(duong: string): Promise<T | null> {
   throw new LoiEngine(`engine lỗi ${r.status}: ${duong}`);
 }
 
+// Khoá đệm của mục lục đổi theo bản deploy: bộ đệm dữ liệu Vercel sống qua các lần deploy, nên nếu không đổi khoá thì
+// cụm kiến thức MỚI (engine đã có, deploy trước web) vẫn thấy mục lục cũ tới 6 giờ → trang cụm 5xx, sitemap thiếu.
+// Engine bỏ qua tham số lạ. Không có biến (máy cá nhân) → khoá như cũ.
+const BAN_DEPLOY = (process.env.VERCEL_GIT_COMMIT_SHA ?? "").slice(0, 12);
+
 export async function mucLuc(): Promise<MucLuc[]> {
-  const ds = (await lay<{ trang: MucLuc[] }>("/v1/kb/trang"))?.trang;
+  const ds = (await lay<{ trang: MucLuc[] }>(BAN_DEPLOY ? `/v1/kb/trang?b=${BAN_DEPLOY}` : "/v1/kb/trang"))?.trang;
   // Engine chưa sẵn sàng (vd lúc build, Render đang ngủ): KHÔNG cache bản rỗng 6 giờ —
   // chuyển trang sang render động; dữ liệu engine vẫn được cache ở tầng fetch khi lấy được.
   if (!ds) noStore();
