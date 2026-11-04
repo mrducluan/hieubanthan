@@ -3,10 +3,11 @@
 // độ sáng viết đầy đủ, tam phương tứ chính, Tuần/Triệt, lớp vận hạn; nút đẩy câu hỏi xuống khung hỏi đáp.
 // TV-HOA-HAN: chạm một sao → thẻ nhỏ ngay dưới: độ sáng, hoá năm sinh, hoá theo đại hạn / năm xem (engine `tu_hoa_sao`),
 // "Đọc kỹ" sang trang "sao ở cung" (slug engine dựng) và "Hỏi về sao này" (chỉ ĐIỀN SẴN câu vào khung hỏi đáp, không gửi).
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { BookOpen, MessageCircleQuestion } from "lucide-react";
 import type { LaSoOutputT, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { ViSao } from "@/components/luan-giai/HopNoiBat";
+import { useChu } from "@/components/cms/DauCms";
 import Lien from "@/components/khung/Lien";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
@@ -31,8 +32,9 @@ interface MucSao { ten: string; hien: string; doSang: string | null; nguonDoSang
 const nguon = (s: { do_sang_nam_phai?: string | null; do_sang: string | null }) =>
   s.do_sang_nam_phai ? "Nam phái" : s.do_sang ? "phái Trung" : undefined;
 
-export function ChiTietCung({ ls, chi, vanHan, hanSao, onHoi, onDienCau, phai = "nam", moDun = "tuvi" }: {
+export function ChiTietCung({ ls, chi, vanHan, hanSao, lop, onHoi, onDienCau, phai = "nam", moDun = "tuvi" }: {
   ls: LaSoOutputT; chi: string; vanHan?: VanHanOutputT | null; onHoi: (cau: string) => void; phai?: PhaiDoSang;
+  /** Lớp hạn đang bật trên lá số — dòng vòng sao theo hạn chỉ hiện cho lớp đang bật. */ lop?: { dai_han: boolean; luu_nien: boolean };
   /** Vận hạn của năm xem cho thẻ sao (kể cả khi lớp hạn đang tắt trên lá số). */ hanSao?: VanHanOutputT | null;
   /** Điền sẵn câu vào khung hỏi đáp (không gửi). Không có → dùng onHoi. */ onDienCau?: (cau: string) => void;
   moDun?: string;
@@ -135,6 +137,7 @@ export function ChiTietCung({ ls, chi, vanHan, hanSao, onHoi, onDienCau, phai = 
                   đại hạn coi là cung <b>{vanHan.dai_han.ten_cung[i]}</b>, lưu niên coi là cung <b>{vanHan.luu_nien.ten_cung[i]}</b>
                   {vanHan.luu_nien.sao[i]?.length ? <span className="text-moon"> · {vanHan.luu_nien.sao[i]!.join(", ")}</span> : null}
                 </dd>
+                {lop && <VongHan vh={vanHan} i={i} lop={lop} phai={phai} />}
               </>
             )}
           </dl>
@@ -161,6 +164,33 @@ export function ChiTietCung({ ls, chi, vanHan, hanSao, onHoi, onDienCau, phai = 
         </div>
       </div>
     </section>
+  );
+}
+
+/** TV-VONG — vòng Thái Tuế + vòng Tướng tiền của lớp hạn đang bật tại cung này (engine trả 12 tên theo mảng cung, 0 = Dần).
+ *  Tên vòng Thái Tuế theo phái đang chọn như vòng gốc (tenThaiTue). Chỉ hiển thị — không đổi mức nào. */
+function VongHan({ vh, i, lop, phai }: { vh: VanHanOutputT; i: number; lop: { dai_han: boolean; luu_nien: boolean }; phai: PhaiDoSang }) {
+  const c = useChu();
+  const ten = (l: VanHanOutputT["dai_han"] | VanHanOutputT["luu_nien"]) => {
+    const tue = l.vong_thai_tue?.[i];
+    if (!tue) return null;
+    const tueHien = tenThaiTue({ tue_tien: tue, thai_tue_nam_phai: l.vong_thai_tue_nam_phai?.[i] }, phai);
+    return [tueHien, l.vong_tuong_tien?.[i]].filter(Boolean).join(" · ");
+  };
+  const dong = [
+    lop.dai_han && { ma: "dh", nhan: c("vong_han.dai_han"), chu: ten(vh.dai_han) },
+    lop.luu_nien && { ma: "ln", nhan: c("vong_han.nam", { nam: String(vh.nam_xem) }), chu: ten(vh.luu_nien) },
+  ].filter((d): d is { ma: string; nhan: string; chu: string } => Boolean(d && d.chu));
+  if (!dong.length) return null;
+  return (
+    <>
+      {dong.map((d) => (
+        <Fragment key={d.ma}>
+          <dt className="text-fg-faint">{d.nhan}</dt><dd data-testid="vong-han" data-lop={d.ma}>{d.chu}</dd>
+        </Fragment>
+      ))}
+      <dd className="col-span-2 -mt-1"><ViSao canCu={[c("vong_han.giai_thich")]} nho /></dd>
+    </>
   );
 }
 

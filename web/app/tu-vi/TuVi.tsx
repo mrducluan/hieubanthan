@@ -256,7 +256,7 @@ export function TuVi() {
             <CungSaoMenh d={ls.cung_sao_menh} />
 
             <div ref={chiTietRef} className="scroll-mt-20">
-              <ChiTietCung ls={ls} chi={chiChon} phai={phaiDoSang} vanHan={lop.dai_han || lop.luu_nien ? vh : null}
+              <ChiTietCung ls={ls} chi={chiChon} phai={phaiDoSang} vanHan={lop.dai_han || lop.luu_nien ? vh : null} lop={lop}
                 hanSao={vh && vh.nam_xem === namXem ? vh : null} onHoi={hoi} onDienCau={dienCau} />
             </div>
             {lnm && lnm.nam_am === namXem ? (
