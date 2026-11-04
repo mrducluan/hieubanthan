@@ -86,6 +86,7 @@ const LOI_MOI: Partial<Record<string, string>> = {
   nhat_chu: "Nhật chủ của bạn là can nào, thân mạnh hay yếu? Nhập ngày giờ sinh để lập tứ trụ.",
   menh_nam: "Ngoài mệnh theo năm sinh, ngũ hành trong tứ trụ của bạn thiếu đủ thế nào? Nhập ngày giờ sinh để xem.",
   dau_hieu: "Nhà bạn có dấu hiệu này không, nên xử lý gì trước, việc nào không tốn tiền? Khảo sát nhà miễn phí.",
+  co_thu: "Câu phú nào ứng với lá số của bạn — sao nào ở Mệnh, cách cục nào thành? Nhập ngày giờ sinh để xem, có từng bước an sao.",
 };
 
 export async function TrangKienThucView(params: Thamso) {
@@ -205,10 +206,14 @@ export async function TrangKienThucView(params: Thamso) {
             {m.trich_dan && (
               <div className="mt-3 space-y-3">
                 {m.trich_dan.map((x) => (
-                  <blockquote key={`${x.sach}${x.chuong ?? ""}${x.nghia ?? ""}`} className="border-l-2 border-gold/50 pl-4">
-                    {x.nguyen_van && <p className="font-serif text-lg text-fg" lang="zh">{x.nguyen_van}</p>}
+                  <blockquote key={`${x.sach}${x.chuong ?? ""}${x.nghia ?? ""}`} {...(x.neo ? { id: x.neo } : {})}
+                    className="scroll-mt-24 border-l-2 border-gold/50 pl-4">
+                    {x.nguyen_van && <p className="font-serif text-lg text-fg" lang="zh-Hant">{x.nguyen_van}</p>}
                     {x.phien_am && <p className="text-sm italic text-fg-muted">{x.phien_am}</p>}
                     {x.nghia && <p className="mt-1 leading-relaxed text-fg-muted">{x.nghia}</p>}
+                    {/* TV-CTP: điều kiện trên lá số bằng lời thường + chú thích chữ của bản chép. */}
+                    {x.khi && <p className="mt-1 text-sm text-fg-muted"><span className="text-gold">Câu này nói về lá số khi</span> {x.khi}.</p>}
+                    {x.chu_thich && <p className="mt-1 text-xs text-fg-faint">Chú thích: {x.chu_thich}</p>}
                     <footer className="mt-1 text-xs text-fg-faint">— <cite>{x.sach}</cite>{x.chuong ? `, ${x.chuong}` : ""}</footer>
                   </blockquote>
                 ))}
