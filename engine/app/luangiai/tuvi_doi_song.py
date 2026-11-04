@@ -796,7 +796,7 @@ def _chuong_nam_nay(sinh: dict, ls: dict, cc: dict, vh: dict, ngay_xem: dt.date,
     # Mã kiểm chứng theo CUNG tháng + mức + lý do đầu (trước đây theo số thứ tự tháng trong khung — vô nghĩa khi so).
     for i, t in enumerate((nhip or {}).get("thang", []), 1):
         ten_t = f"Tháng {t['thang']}{' nhuận' if t['nhuan'] else ''} âm lịch"
-        if t["phan"] in ("nua_dau", "nua_sau"):
+        if t["phan"] in ("nua_dau", "nua_sau") or (t["nhuan"] and t["thang_tinh"] != t["thang"]):   # TV-NHUAN3
             ten_t = f"{t['nhan_thang']} âm lịch"
         ly = t["ly_do"][0]["ma"] if t["ly_do"] else "chung"
         cand.append(_hop("thoi_diem", ten_t, f"{t['tieu_de_thang']}. {t['goi_y']}", t["can_cu"],

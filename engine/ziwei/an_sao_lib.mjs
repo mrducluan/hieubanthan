@@ -34,10 +34,12 @@ conv.solar2lunar = (s) => {
   const v = tim(s);
   if (!v || (goc.lunarYear === v.nam && goc.lunarMonth === v.thang && goc.lunarDay === v.ngay
              && goc.isLeap === !!v.nhuan)) return goc;          // lịch Việt trùng lịch Trung Quốc
-  const chuoi = `${[...String(v.nam)].map((c) => SO[+c]).join('')}年${v.nhuan ? '闰' : ''}${THANG[v.thang - 1]}月${chuNgay(v.ngay)}`;
+  // TV-NHUAN3: "ca_thang_sau" đưa vào tháng đã đổi (tháng + 1, có thể 13) để an sao; nhãn giữ ngày sinh thật (v.nhan).
+  const n = v.nhan || v;
+  const chuoi = `${[...String(n.nam)].map((c) => SO[+c]).join('')}年${n.nhuan ? '闰' : ''}${THANG[n.thang - 1]}月${chuNgay(n.ngay)}`;
   return {
     lunarYear: v.nam, lunarMonth: v.thang, lunarDay: v.ngay, isLeap: !!v.nhuan,
-    toString: (cn) => (cn ? chuoi : `${v.nam}-${v.thang}-${v.ngay}`),
+    toString: (cn) => (cn ? chuoi : `${n.nam}-${n.thang}-${n.ngay}`),
   };
 };
 // Số ngày của tháng âm (29/30): iztro dùng để "gói" ngày 30 + Tý muộn; tháng Việt có thể 30 ngày khi bên kia 29.
@@ -87,8 +89,10 @@ export function anSao(vao) {
     const h = a.horoscope(ngay);
     // EN-5.2: vòng Thái Tuế lưu (suiqian12 theo vị trí 12 cung) — sao lưu năm đọc từ đây, không tự tính lại
     const vong = (h.yearly.yearlyDecStar && h.yearly.yearlyDecStar.suiqian12) || [];
+    // TV-VONG: vòng Tướng tiền lưu niên (chỉ hiển thị)
+    const tuong = (h.yearly.yearlyDecStar && h.yearly.yearlyDecStar.jiangqian12) || [];
     return { decadal: hc(h.decadal), age: { ...hc(h.age), nominalAge: h.age.nominalAge },
-             yearly: { ...hc(h.yearly), suiqian12: vong } };
+             yearly: { ...hc(h.yearly), suiqian12: vong, jiangqian12: tuong } };
   };
   if (vao.ds_xem) return { la: ra, xem: vao.ds_xem.map((x) => ({ ngay_xem: x.ngay_xem, horoscope: van(x.ngay_xem) })) };
   if (vao.ngay_xem) ra.horoscope = van(vao.ngay_xem);

@@ -175,7 +175,7 @@ def _tv_thang(tv_sinh: dict, tu: dt.date, so_lan: int, ls: dict | None) -> list[
         kq = nhip3.lap(tv_sinh, ngay, phai, ls=ls)
         for th in kq["thang"]:
             ten = f"Tháng {th['thang']}{' nhuận' if th['nhuan'] else ''} âm lịch"
-            if th["phan"] in ("nua_dau", "nua_sau"):
+            if th["phan"] in ("nua_dau", "nua_sau") or nhip3.tinh_thang_sau(th):
                 ten = f"{th['nhan_thang']} âm lịch"
             ly = th["ly_do"][0]["ma"] if th["ly_do"] else "chung"
             from app.luangiai.doi_song_chung import _ma, slug  # noqa: PLC0415

@@ -11,7 +11,7 @@ import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { HanhDongTrucQuan } from "@/components/hoi/TrucQuan";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
-import { TruongPhai } from "@/components/huyen-hoc/TruongPhai";
+import { TruongPhai, type ThangNhuan } from "@/components/huyen-hoc/TruongPhai";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
@@ -57,7 +57,7 @@ export function TuVi() {
   const c = useChu();
   // TV-PHAI (chủ dự án chốt 2026-10-02): "hiện cả hai" — Hoả/Linh lối Việt | Trung Châu; nửa sau tháng nhuận.
   const [hoaLinh, setHoaLinh] = useState<"viet" | "trung">("viet");
-  const [thangNhuan, setThangNhuan] = useState<"thang_sau" | "thang_chinh">("thang_sau");
+  const [thangNhuan, setThangNhuan] = useState<ThangNhuan>("thang_sau");
   // TV-LICH (chủ dự án yêu cầu 2026-10-02): âm lịch Việt Nam (mặc định) ↔ lịch Trung Quốc.
   const [lich, setLich] = useState<"viet" | "trung">("viet");
   // TP-GON: khung Trường phái thu gọn — giữ trạng thái mở ở đây vì lá số tạm gỡ mỗi lần engine an lại.
@@ -69,7 +69,7 @@ export function TuVi() {
   // TV-LN (chủ dự án yêu cầu 2026-10-08): phái tính lưu nguyệt — chỉ đổi cung tháng, không đổi lá số gốc.
   const [luuNguyet, setLuuNguyet] = useState<PhaiLuuNguyet>("dau_quan_thai_tue");
   const goc = laSoTuHoSo(hoSo);
-  const laSoGoc = goc ? { ...goc, ...(hoaLinh === "trung" ? { hoa_linh: hoaLinh } : {}), ...(thangNhuan === "thang_chinh" ? { thang_nhuan: thangNhuan } : {}), ...(lich === "trung" ? { lich } : {}) } : null;
+  const laSoGoc = goc ? { ...goc, ...(hoaLinh === "trung" ? { hoa_linh: hoaLinh } : {}), ...(thangNhuan !== "thang_sau" ? { thang_nhuan: thangNhuan } : {}), ...(lich === "trung" ? { lich } : {}) } : null;
   const laSo = laSoGoc ? { ...laSoGoc, ...(luuNguyet !== "dau_quan_thai_tue" ? { luu_nguyet: luuNguyet } : {}) } : null;
   // Lá số gốc không phụ thuộc phái lưu nguyệt → không an lại khi chỉ đổi phái tháng.
   const { data: ls, loi, thuLai } = usePost<LaSoOutputT>("/api/tuvi/la-so", laSoGoc);
@@ -92,9 +92,11 @@ export function TuVi() {
   const chiMenh = ls?.cung.find((c) => c.la_menh)?.chi ?? ls?.chi_cung_menh ?? "Dần";
   // TM-1: như TruongPhai — có lựa chọn khác mặc định / điều cần biết thì nút "Hiển thị" có chấm, nhắc hiện cả khi đóng.
   const phaiKhac = lich !== "viet" || phaiDoSang !== "nam" || hoaLinh !== "viet" || luuNguyet !== "dau_quan_thai_tue" || thangNhuan !== "thang_sau";
+  // TV-NHUAN3: sinh trong tháng nhuận (mọi ngày — cách "cả tháng tính tháng sau" đổi cả nửa đầu tháng)
+  const coNhuan = !!ls?.phai?.co_the_doi_thang_nhuan || !!ls?.phai?.sinh_thang_nhuan || thangNhuan !== "thang_sau";
   const nhacPhai = [
     ls?.phai?.lich_khac && "Ngày sinh của bạn lệch giữa lịch Việt và lịch Trung Quốc — đổi lịch sẽ ra lá số khác.",
-    (ls?.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh") && "Bạn sinh nửa sau tháng nhuận — mỗi phái tính một kiểu, Mệnh và Cục có thể khác.",
+    coNhuan && "Bạn sinh trong tháng nhuận — mỗi phái tính một kiểu, Mệnh và Cục có thể khác.",
   ].filter(Boolean).join(" ");
   const chiChon = chon ?? chiMenh;
   const khongBietGio = hoSo?.do_tin_gio === "unknown";
@@ -208,7 +210,7 @@ export function TuVi() {
                   phaiDoSang={phaiDoSang} setPhaiDoSang={setPhaiDoSang}
                   hoaLinh={hoaLinh} setHoaLinh={setHoaLinh}
                   thangNhuan={thangNhuan} setThangNhuan={setThangNhuan}
-                  coNhuan={!!ls.phai?.co_the_doi_thang_nhuan || thangNhuan === "thang_chinh"}
+                  coNhuan={coNhuan}
                   luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }}
                   mo doiMo={(v) => { if (!v) { setMoPhai(false); requestAnimationFrame(() => nutHienThi.current?.focus()); } }} />
               </div>

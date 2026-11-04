@@ -26,6 +26,10 @@ Từ tháng Giêng, các tháng sau đi **thuận**, mỗi tháng một cung.
   tháng lẫn can chi tháng** (nên tứ hoá tháng cũng là của tháng sau). Sửa 2026-10-21 (NHIP-2): trước đó nửa sau đếm
   cung như tháng sau nhưng giữ can chi tháng nhuận → tứ hoá tháng lệch iztro 80/80 ca xem ngày 16+ tháng nhuận.
 - `thang_chinh`: cả tháng nhuận tính như tháng chính.
+- `ca_thang_sau` (TV-NHUAN3, 2026-11-04): cả tháng nhuận tính như tháng sau — cung tháng lẫn can chi tháng, cho cả
+  tháng sinh (lá số an như sinh tháng + 1) và tháng xem. Tháng Chạp nhuận → đếm 13 ≡ tháng Giêng, năm giữ năm sinh
+  (1900–2100 không có tháng Chạp nhuận). Ngày không kẹp: ngày 30 giữ 30 dù tháng sau 29 ngày, nên ngày 16–hết trùng
+  khít `thang_sau`. Golden tính tay: `fixtures/golden/tuvi_thang_nhuan_3_phai.json`.
 
 **Tứ hoá tháng** theo can tháng (Ngũ hổ độn), dùng bảng giống iztro. Can Canh và Nhâm giữ theo iztro, như quyết định 2026-10-02.
 
