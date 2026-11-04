@@ -8,6 +8,7 @@ import type { BangChu, MucChu } from "@/lib/chu-trang";
 import { THANH_MANG, khoaChu } from "@/lib/thanh-mang";
 
 const HS = "Form hồ sơ", CV = "Ô vào trang chủ", HD = "Khung hỏi đáp", L = "Báo lỗi";
+const NT = "Lá số người thân (Tử vi)";
 const GB = "Góp ý cuối bài", GC = "Góp ý dưới câu trả lời", KC = "Kiểm chứng “Đúng với mình”", CS = "Nút chia sẻ", BD = "Bài đọc";
 
 // TM-1: nhãn thanh mảng (dải điều hướng dưới menu chính ở trang của từng mảng). Chỉ đổi CHỮ — đường dẫn, thứ tự, số
@@ -79,5 +80,23 @@ export const CHU_CHUNG = {
 
   "doc.vi_sao": { nhom: BD, nhan: "Nút mở căn cứ (thuật ngữ) dưới mỗi hộp / câu trả lời", mac_dinh: "Vì sao nói vậy", toi_da: 30 },
   "doc.tai_anh": { nhom: BD, nhan: "Nút tải ảnh lá số / tứ trụ", mac_dinh: "Tải ảnh", toi_da: 30 },
+
+  // NT-1: lá số người thân lưu trên máy. Câu cam kết "Chỉ lưu trên máy này…" giữ trong code (lib/nguoi-than.ts).
+  "nguoi_than.dang_xem": { nhom: NT, nhan: "Nhãn trước tên người đang xem lá số", mac_dinh: "Đang xem", toi_da: 30 },
+  "nguoi_than.ban": { nhom: NT, nhan: "Tên chỉ chính người dùng trong ô chọn", mac_dinh: "Bạn", toi_da: 20 },
+  "nguoi_than.them": { nhom: NT, nhan: "Nút mở form thêm người thân", mac_dinh: "Thêm người thân", toi_da: 40 },
+  "nguoi_than.ten_goi": { nhom: NT, nhan: "Nhãn ô tên gọi (tuỳ chọn)", mac_dinh: "Tên gọi / biệt danh (tuỳ chọn)", toi_da: 60 },
+  "nguoi_than.dong_y": { nhom: NT, nhan: "Ô đồng ý (không tích sẵn) trước khi lưu", mac_dinh: "Người này đồng ý cho tôi lưu, hoặc tôi là cha mẹ, người giám hộ", toi_da: 140 },
+  "nguoi_than.luu": { nhom: NT, nhan: "Nút lưu", mac_dinh: "Lưu trên máy này", toi_da: 40 },
+  "nguoi_than.luu_nguoi_nay": { nhom: NT, nhan: "Lời mời lưu người vừa xem (Xem lá số 2 người)", mac_dinh: "Lưu người này trên máy", toi_da: 60 },
+  "nguoi_than.chon": { nhom: NT, nhan: "Ô chọn người đã lưu (Xem lá số 2 người)", mac_dinh: "Chọn từ người thân đã lưu", toi_da: 60 },
+  "nguoi_than.xoa": { nhom: NT, nhan: "Nút xoá một người", mac_dinh: "Xoá", toi_da: 20 },
+  "nguoi_than.xoa_tat_ca": { nhom: NT, nhan: "Nút xoá tất cả", mac_dinh: "Xoá tất cả", toi_da: 30 },
+  "nguoi_than.ve_ban": { nhom: NT, nhan: "Nút quay về lá số của chính người dùng", mac_dinh: "Về lá số của bạn", toi_da: 40 },
+  "nguoi_than.chi_xem": { nhom: NT, nhan: "Dòng nhắc khi đang xem lá số người thân", mac_dinh: "Bạn đang xem lá số của người khác: chỉ xem lá số và hỏi đáp — không lưu bài, không luận giải toàn bộ, không ghi góp ý.", toi_da: 200 },
+  "nguoi_than.chua_dong_y": { nhom: NT, nhan: "Báo khi bấm lưu mà chưa tích ô đồng ý", mac_dinh: "Hãy tích ô đồng ý trước khi lưu.", toi_da: 100 },
+  "nguoi_than.day": { nhom: NT, nhan: "Báo khi đã lưu đủ 5 người", mac_dinh: "Đã đủ 5 người — xoá bớt một người để lưu thêm.", toi_da: 100 },
+  "nguoi_than.da_luu": { nhom: NT, nhan: "Báo lưu xong", mac_dinh: "Đã lưu trên máy này.", toi_da: 60 },
+  "nguoi_than.thieu": { nhom: NT, nhan: "Ghi chú người thiếu giờ / giới tính / nơi sinh (chỉ dùng cho Xem lá số 2 người)", mac_dinh: "Chưa đủ giờ sinh, giới tính, nơi sinh — chỉ dùng để điền Xem lá số 2 người.", toi_da: 120 },
   ...CHU_THANH,
 } as const satisfies BangChu;
