@@ -20,6 +20,7 @@ from app import config
 from app.calc import lunar, tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
 from app.calc import tuvi_luu_nguyet as ln
 from app.hoidap import chung, hieu_cau, mo_dau, doi_song_muc as dsm
+from app.hoidap import tuvi_y_bo_sung as ybs
 from app.kb import tuvi_doi_song_kb as kds
 from app.kb import tuvi_kb as kb
 from app.kb import tuvi_phi_hoa_kb as pkb
@@ -344,6 +345,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
           "ca_nhan": chung.co(t_chinh, CA_NHAN), "su_kien": chung.co(t, SU_KIEN),
           "nam_xem": _nam_nhac(t), "han_sau": chung.co(t, NAM_SAU), "han_toi": chung.co(t, TOI_KE),
           "hoi_thang": chung.co(t, THANG), "sao_tim": [], "y_dinh": None,
+          "phuong_phap": [] if chung.co(t_chinh, CA_NHAN) else ybs.phuong_phap_nhac(t_chinh),
           "nhan_ra_y_dinh": False, "co_the_goi_y": False, "y_dinh_tu_goi_y": False}
     t_loc = t
     if che_do == "chi_tiet":
@@ -373,8 +375,8 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
         kq["loai"] = "phi_hoa"
     elif chung.co(t_chinh, PHI_HOA_KW) and not kq["ca_nhan"]:
         kq["loai"] = "phi_hoa_khai_niem"
-    elif kq["giai_thich"] and not kq["ca_nhan"]:
-        kq["loai"] = "ky_thuat"
+    elif (kq["giai_thich"] or kq["phuong_phap"] and not (kq["sao"] or kq["hoa"] or kq["phu"])) and not kq["ca_nhan"]:
+        kq["loai"] = "ky_thuat"     # TV-YBS: câu hỏi phương pháp ("xem Phu Thê có cần xem Phúc Đức") → kiến thức
     elif chung.khop_dau(cau_hoi, t_chinh, SAO_LUU_CD, SAO_LUU_KW) \
             and not chung.co(t_chinh, [r"la gi", r"nghia la", r"y nghia"]):
         kq["loai"], kq["sao_luu"] = "han", True
@@ -636,6 +638,9 @@ def _lop_han(ls: dict, lop: str, vh: dict, che_do: str) -> dict:
         m["xu_huong"] = {"cat": cat, "sat": sat + [f"{s} hoá Kỵ" for s in ky],
                          "ket": "thuận hơn" if diem > 0 else "nhiều thử thách hơn" if diem < 0 else "cân bằng"}
     return m
+
+
+_LOAI_KIEN_THUC = ("ky_thuat", "phu_tinh", "sao_cung", "tu_hoa_cung", "cach_cuc_chung", "phi_hoa_khai_niem")
 
 
 def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | None = None,
@@ -1356,6 +1361,10 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         return chung.doan_so_nam(m["nam"]), None
     if l == "ghi_chu":
         return m["noi_dung"], None
+    if l == "phuong_phap":
+        return m["noi_dung"], None
+    if l == "y_bo_sung":                         # TV-YBS: thân bài = doi_thuong; căn cứ = ý gốc (thuật ngữ được dùng)
+        return m["can_cu"], None
     if l == "doi_song":
         return dsm.doan_doi_song(m), None
     if l == "sao_han":
@@ -1395,7 +1404,7 @@ def goi_cho_llm(goi: dict) -> dict:
         elif "doi_thuong" not in m:
             muc.append(m)
         elif m["doi_thuong"]:
-            muc.append({"loai": m.get("loai"), "noi_dung": m["doi_thuong"],
+            muc.append({"loai": m.get("loai"), "noi_dung": m["doi_thuong"], **({"ma": m["ma"]} if m.get("ma") else {}),
                         **({"cau_tu_soi": m["cau_tu_soi"]} if m.get("cau_tu_soi") else {})})
     return {**goi, "muc": muc}
 
@@ -1498,6 +1507,9 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
             nam_am = lunar.solar_to_lunar(xem_phi.day, xem_phi.month, xem_phi.year, config.CALENDAR_MERIDIAN_TZ)[2]
             them["phi"] = phl.lap(ls, ls["can_nam"], nam_am if (ch.get("han") or yd == "tong_quan_nam") else None)
     goi = goi_bang_chung(pl, ls, vh, vh_toi, lnm, them)
+    if pl["loai"] in _LOAI_KIEN_THUC and pl.get("phuong_phap") and not goi["can_them"]:
+        goi["muc"] += ybs.muc_phuong_phap(pl)          # TV-YBS: ý phương pháp (ý chung, đã viết lại) sau phần kiến thức
+        chung.ket(goi)
     if ls is not None and pl["loai"] in ("la_so", "han") and not goi["can_them"]:
         _them_doi_song(goi, pl, sinh, ngay_xem, ls, vh)
     if pl.get("sao_han") and sinh and not goi["can_them"]:
@@ -1509,12 +1521,15 @@ def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,
         _them_so_nam(goi, pl, sinh, ngay_xem, ls)
     if ls is not None and sinh:
         chung.them_cua_so(goi, pl, "tuvi", sinh, ngay_xem, ls, ("sao_han",))   # EN-5.4
+    if sinh:
+        ybs.them(goi, pl, ls, vh, sinh.get("gioi_tinh"), vh_toi)   # TV-YBS: "Một cách đọc thêm" — cuối câu trả lời chính
     if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
         goi["luu_y"] = kb.luu_y("xac_nhan") + (" " + goi["luu_y"] if goi.get("luu_y") else "")
         chung.ket(goi)
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     if pl["xu_ly"] not in chung.DAC_BIET:            # EN-3b: đoạn mở đầu trả lời đúng điều được hỏi
         van = mo_dau.dat_dau(van, mo_dau.doi_song_mo(goi, pl["cau_chuan_hoa"], "tuvi", pl.get("cau_goc")), goi)
+    van = ybs.xep_cuoi(van, mo_dau._CHAN + chung._CHAN)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:
