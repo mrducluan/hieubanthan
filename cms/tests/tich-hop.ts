@@ -689,9 +689,12 @@ await ca("mẫu cụm: không tạo tay; biến lạ chỉ cảnh báo; cộng t
   await nem(() => payload.create({ collection: "mau-cum", user: chuBien, overrideAccess: false, draft: true,
     data: { mau_duong: "/x/{slug}" } as never }), /đồng bộ/);
   const m = (await payload.find({ collection: "mau-cum", overrideAccess: true, where: { mau_duong: { equals: `${nd}/kien-thuc/{slug}` } } })).docs[0]!;
+  // 6b-6: biến lạ trong khối = lỗi chặn xuất bản (trước chỉ cảnh báo) — web bỏ khối còn biến lạ.
+  await nem(() => payload.update({ collection: "mau-cum", id: m.id, user: chuBien, overrideAccess: false,
+    data: { khoi_duoi: [{ blockType: "van_ban", noi_dung: "Đọc thêm về {tieu_de} và {la}" }], _status: "published" } as never }), /\{la\}/);
   const r = await payload.update({ collection: "mau-cum", id: m.id, user: chuBien, overrideAccess: false,
-    data: { khoi_duoi: [{ blockType: "van_ban", noi_dung: "Đọc thêm về {tieu_de} và {la}" }], _status: "published" } as never }) as unknown as { ghi_chu_kiem_dinh: string };
-  assert.match(r.ghi_chu_kiem_dinh, /\{la\}/);
+    data: { khoi_duoi: [{ blockType: "van_ban", noi_dung: "Đọc thêm về {tieu_de}" }], _status: "published" } as never }) as unknown as { ghi_chu_kiem_dinh: string };
+  assert.doesNotMatch(r.ghi_chu_kiem_dinh ?? "", /bien_la|biến không có/);
   await nem(() => payload.find({ collection: "noi-dung-trang", user: ctv, overrideAccess: false }), /not allowed|Forbidden|quyền/i);
   await nem(() => payload.find({ collection: "mau-cum", user: ctv, overrideAccess: false }), /not allowed|Forbidden|quyền/i);
   const khach = await payload.find({ collection: "mau-cum", overrideAccess: false, where: { mau_duong: { like: nd } } });
