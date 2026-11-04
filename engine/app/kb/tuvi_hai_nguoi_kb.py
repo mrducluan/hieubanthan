@@ -88,3 +88,8 @@ def goi_y(quan_he: str) -> list[str]:
 
 def loi_dan() -> str | None:
     return _chuoi(_lay("loi_dan"))
+
+
+def cach_doc_them(khoa: str) -> str | None:
+    """TV-YBS đợt 4: chữ của hộp diễn giải ("nhan", "can_cu_chung", "tieu_de.<mã>") — lời chính ở tuvi_y_bo_sung.json."""
+    return _chuoi(_lay("cach_doc_them", *khoa.split(".")))

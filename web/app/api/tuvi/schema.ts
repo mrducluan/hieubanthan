@@ -392,6 +392,15 @@ export const DiemHaiNguoi = z.object({
 }).passthrough();
 export type DiemHaiNguoiT = z.infer<typeof DiemHaiNguoi>;
 export type TieuChiDiemT = z.infer<typeof TieuChiDiem>;
+// TV-YBS đợt 4: hộp diễn giải từ ý Tử vi bổ sung (Phu Thê / Mệnh hai lá) — KHÔNG tính vào điểm. Mã `ds.hai.*` (loại
+// kiểm chứng doi_song, migration 0017), phái = trường phái của ý.
+const HopCachDoc = z.object({
+  loai: z.literal("loi_khuyen"), nhan: z.string(),
+  tieu_de: z.string(), noi_dung: z.string(), huong_xu_ly: z.string().optional(),
+  can_cu: z.array(z.string()).default([]),
+  ma_mau: z.string().regex(/^ds\.hai\.[a-z0-9_]+\.(ban|kia|hai)\.[a-z_]+$/).max(60),
+  phai: z.string().regex(/^[a-z0-9_]{2,32}$/),
+}).passthrough();
 export const HopThamOutput = z.object({
   engine_version: z.string(),
   quan_he: z.string(), nhan_quan_he: z.string(),
@@ -404,6 +413,8 @@ export const HopThamOutput = z.object({
   luu_y: z.array(z.string()).default([]),
   diem: DiemHaiNguoi.nullable().optional(),
   khong_cham_diem: z.boolean(),
+  // Hộp lỗi dạng (engine lệch deploy) → bỏ cả khối, không làm hỏng điểm.
+  cach_doc_them: z.array(HopCachDoc).max(4).catch([]),
 }).passthrough();
 export type HopThamOutputT = z.infer<typeof HopThamOutput>;
 

@@ -238,7 +238,8 @@ function KetQuaHopTham({ kq, yeuCau, vaoNT, onHoi, onLai }: {
   const d = kq.diem;
   const hop = d ? [...d.diem_manh, ...d.can_dung_hoa] : [];
   // "x% trong N người thấy đúng" (≥ 30 phiếu) — một lời gọi cho mọi mã hộp; số engine gắn sẵn (`ty_le_dung`) ưu tiên.
-  const tyLe = useTyLe(hop.map((h) => h.ma_mau).filter((m): m is string => Boolean(m)));
+  const cachDoc = kq.cach_doc_them ?? [];
+  const tyLe = useTyLe([...hop.map((h) => h.ma_mau), ...cachDoc.map((h) => h.ma_mau)].filter((m): m is string => Boolean(m)));
   return (
     <div className="space-y-5" data-testid="hop-tham-ket-qua">
       <p className="text-sm text-fg-muted">
@@ -254,6 +255,20 @@ function KetQuaHopTham({ kq, yeuCau, vaoNT, onHoi, onLai }: {
             {hop.map((h) => <HopNoiBat key={h.ma_mau ?? h.tieu_de} hop={h} />)}
           </div>
         </KiemChungBai.Provider>
+      )}
+
+      {cachDoc.length > 0 && (
+        // TV-YBS đợt 4: ý Tử vi bổ sung về Phu Thê / Mệnh hai lá — lời diễn giải, KHÔNG tính vào điểm. Kiểm chứng loại
+        // "doi_song" (mã ds.hai.*, migration 0017), phái = trường phái engine ghi trong từng hộp.
+        <section aria-labelledby="hai-nguoi-cach-doc" data-testid="hai-nguoi-cach-doc">
+          <h3 id="hai-nguoi-cach-doc" className="font-sans text-[1.02rem] font-semibold text-fg">Thêm một cách đọc</h3>
+          <p className="mt-0.5 text-xs text-fg-faint">Lời diễn giải theo một trường phái khác — không tính vào điểm ở trên.</p>
+          <KiemChungBai.Provider value={{ tyLe, phai: cachDoc[0]?.phai ?? "nam_phai_viet", loai: "doi_song" }}>
+            <div className="mt-2 grid gap-3 sm:grid-cols-2">
+              {cachDoc.map((h) => <HopNoiBat key={h.ma_mau} hop={h} />)}
+            </div>
+          </KiemChungBai.Provider>
+        </section>
       )}
 
       {d && d.goi_y.length > 0 && (

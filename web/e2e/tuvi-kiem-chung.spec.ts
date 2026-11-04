@@ -160,3 +160,36 @@ test("API kiểm chứng: loại hai_nguoi chỉ nhận đúng dạng mã + phá
     expect((await gui(sai)).status(), JSON.stringify(sai)).toBe(422);
   }
 });
+
+test("Xem lá số 2 người: hộp 'Thêm một cách đọc' (không tính điểm) kiểm chứng loại doi_song, mã ds.hai.*", async ({ page }) => {
+  const CDT = [
+    { loai: "loi_khuyen", nhan: "Thêm một cách đọc", tieu_de: "Lá số của bạn phác ra người bạn đời thế nào",
+      noi_dung: "Người bạn đời thường có chuyên môn rõ.", huong_xu_ly: "Tôn trọng giờ làm chuyên môn của nhau.",
+      can_cu: ["Cung Phu Thê của bạn có Hoá Khoa."], ma_mau: "ds.hai.phu_the_khoa_chuyen_mon.ban.vo_chong", phai: "tam_hop_hien_dai" },
+    { loai: "loi_khuyen", nhan: "Thêm một cách đọc", tieu_de: "Lá số người ấy phác ra người bạn đời thế nào",
+      noi_dung: "Đọc từ phía người ấy — chữ “bạn” ở đây là người ấy: Bạn dễ thích nhanh.", huong_xu_ly: "Chờ qua giai đoạn say nắng.",
+      can_cu: ["Cung Phu Thê của người ấy có Thất Sát."], ma_mau: "ds.hai.that_sat_phu_the_nhanh.kia.vo_chong", phai: "tam_hop_hien_dai" },
+  ];
+  for (const h of CDT) expect(MA_DOI_SONG.test(h.ma_mau), h.ma_mau).toBe(true);
+  const guiMayChu: Record<string, unknown>[] = [];
+  await napHoSo(page);
+  await mock(page);
+  await page.route("**/api/tuvi/hop-tham", (r) => r.fulfill({ json: { ...HOP_THAM, cach_doc_them: CDT } }));
+  await page.route("**/api/kiem-chung", (r) => { guiMayChu.push(r.request().postDataJSON()); return r.fulfill({ json: { ok: true, da_luu: true } }); });
+  await page.route("**/api/kiem-chung/ty-le**", (r) => r.fulfill({ json: { ty_le: {} } }));
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: /Xem lá số 2 người/ }).click();
+  const form = page.getByTestId("hop-tham-form");
+  await form.getByLabel("Ngày sinh người ấy").fill("3");
+  await form.getByLabel("Tháng sinh người ấy").fill("4");
+  await form.getByLabel("Năm sinh người ấy").fill("1995");
+  await form.getByRole("button", { name: "Xem độ hợp" }).click();
+  const khoi = page.getByTestId("hai-nguoi-cach-doc");
+  await expect(khoi).toContainText("không tính vào điểm");
+  await expect(khoi.getByTestId("hop-noi-bat")).toHaveCount(2);
+  // điểm giữ nguyên: hộp điểm vẫn đủ, tổng vẫn số engine
+  await expect(page.getByTestId("diem-tong")).toHaveAttribute("data-diem", String(HOP_THAM.diem!.tong));
+  await khoi.getByTestId("hop-noi-bat").nth(1).getByRole("button", { name: "Đúng với mình" }).click();
+  await expect.poll(() => guiMayChu.length).toBe(1);
+  expect(guiMayChu[0]).toEqual({ loai: "doi_song", mau: CDT[1]!.ma_mau, phai: "tam_hop_hien_dai", ket_qua: "dung" });
+});

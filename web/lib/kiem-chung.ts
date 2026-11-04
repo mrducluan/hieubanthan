@@ -84,6 +84,7 @@ export const TEN_CHUONG_DS: Record<string, string> = {
   nha_cua: "Nhà cửa", duong_bay: "Đường bay tứ hoá", nam_nay: "Năm nay & 3 tháng tới", van_han: "Mười năm tới & điều nên tránh (vận hạn)",
   loi_khuyen: "Lời khuyên",
   cot_loi: "Điều quan trọng nhất",
+  hai: "Xem lá số 2 người · cách đọc thêm",
 };
 const TEN_PHAN_DS: Record<string, string> = {
   sang: "sáng", ham: "hãm", manh: "điểm mạnh", de_vap: "dễ vấp", loi_khuyen: "lời khuyên", luu_y: "lưu ý",
@@ -97,6 +98,8 @@ const TEN_PHAN_DS: Record<string, string> = {
   ky_nhap: "Kỵ năm nhập", ky_chieu: "Kỵ năm chiếu", loc_nhap: "Lộc năm nhập", song_loc: "song Lộc", tre: "tuổi trẻ",
   lon: "từ 35 tuổi", nho: "dưới 18 tuổi", can: "năm cần lưu ý", giu_nhip: "năm nên giữ nhịp", don_suc: "năm đáng dồn sức",
   thang: "12 tháng tới", cham: "có tháng nên chậm",
+  // TV-YBS đợt 4 (ds.hai.<ý>.<ai>.<quan hệ>)
+  ban: "lá của bạn", kia: "lá người ấy", nguoi_yeu: "người yêu", vo_chong: "vợ chồng",
 };
 
 /** Nhãn đọc được cho người biên tập ở /quan-tri (giải mã ngược, không cần engine). */

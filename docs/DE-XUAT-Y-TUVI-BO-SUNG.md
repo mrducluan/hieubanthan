@@ -129,9 +129,18 @@ Hồng Loan đại + tiểu hạn, "năm thuận dễ lơ là". Sức khoẻ the
 
 **Đợt 3 — trang "sao ở cung"** (`kb/trang_tuvi.py`, phần bổ sung ban biên tập): sắc thái riêng như Tham Lang ở Tý/Hợi
 khác Ngọ, Thái Dương ở Phu Thê lá nữ — thêm phần riêng cho 168 trang (giúp SEO-K/M "phần riêng").
+→ **Đã làm (2026-11-04)**: bộ lọc tĩnh `trang_tuvi.noi_y_bo_sung` — mục "Thêm một cách đọc" (`hop`) và mục gập
+"Góc nhìn khác (tham khảo)" (`goc_nhin_khac`, ≤ 3 ý mỗi mục) trên trang sao / cung / sao ở cung / Hoá ở cung; mỗi ý
+MỘT trang (trang đầu khớp điều kiện) để không lặp chữ giữa các trang cùng họ. Bỏ qua ý cần hai lá, ý theo nhóm, ý chỉ
+có ghi chú. Test `tests/test_tuvi_y_bo_sung_trang.py`.
 
 **Đợt 4 — Xem lá số 2 người**: `hai.*` (Phu Thê ↔ Mệnh, hai Sát Phá Tham, đại hạn cùng thuận) chỉ làm **lời diễn giải**,
 không đổi điểm 0–100 (luật chấm công khai `hai_nguoi_1`; đổi điểm = luật mới + golden mới).
+→ **Đã làm (2026-11-04)**: `tuvi_hai_nguoi.cach_doc_them` → trường `cach_doc_them` (≤ 4 hộp) của `/v1/tuvi/hop-tham`:
+Phu Thê bạn ↔ Mệnh người ấy, hai Mệnh Sát Phá Tham, Sát Phá Tham + Cơ Nguyệt Đồng Lương (cần đủ lá người kia) và một ý
+Phu Thê của mỗi lá (chỉ người yêu / vợ chồng). Mã `ds.hai.<ý>.<ban|kia|hai>.<quan hệ>` đi qua ràng buộc `doi_song` có sẵn
+(danh mục `hn.*` của 0021 cố định 5 tiêu chí chấm điểm — mã mới sẽ trùng phiếu hộp điểm), không migration. Chưa làm
+`hai.dai_han_cung_thuan` (cần mức đại hạn hiện tại của cả hai lá). Test `tests/test_tuvi_hai_nguoi_cach_doc.py`.
 
 **Chưa nên nối**: bảng chi → tạng phủ (12 mục `sk.chi_*`) và bản đồ thân thể (`sk.vung_dau_*`, `sk.nu_vung_bung_duoi`)
 — rất đặc thù trường phái, dễ bị đọc như chẩn đoán; tứ hoá "đứng yên" (`pp.tu_hoa_dung_yen`) — ngược với phi hoá ta

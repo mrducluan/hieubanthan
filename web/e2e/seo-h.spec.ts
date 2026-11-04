@@ -27,3 +27,21 @@ test("trang sao và trang cung có danh sách trang con; chủ đề + sitemap",
   expect(await (await request.get("/sitemap.xml")).text()).toContain("/tu-vi/sao-o-cung/tu-vi-cung-menh</loc>");
   expect((await request.get("/tu-vi/sao-o-cung/sao-khong-co-cung-menh")).status()).toBe(404);
 });
+
+// TV-YBS đợt 3: ý Tử vi bổ sung chỉ trên trang khớp điều kiện; "Góc nhìn khác" gập sẵn nhưng chữ có trong HTML máy chủ.
+test("ý bổ sung: đúng trang, góc nhìn khác gập sẵn, có trong bản .md", async ({ request, page }) => {
+  const html = await (await request.get("/tu-vi/sao-o-cung/tham-lang-cung-menh")).text();
+  expect(html).toContain("Thêm một cách đọc");
+  expect(html).toContain("Khi Tham Lang ở cung Mệnh, cung ở Tý hoặc Hợi");
+  expect(html).toContain("Góc nhìn khác (tham khảo)");
+  expect(html).not.toMatch(/Nghê|Hải Hạ|bài giảng/);
+  expect(await (await request.get("/tu-vi/sao-o-cung/tu-vi-cung-menh")).text()).not.toContain("Thêm một cách đọc");
+  expect(await (await request.get("/tu-vi/sao-o-cung/tham-lang-cung-menh.md")).text()).toContain("Thêm một cách đọc");
+  await page.goto("/tu-vi/sao-o-cung/tham-lang-cung-menh");
+  const gap = page.getByTestId("muc-gap");
+  await expect(gap).not.toHaveAttribute("open", /.*/);
+  const dong = gap.locator("li").first();
+  await expect(dong).toBeHidden();
+  await gap.locator("summary").click();
+  await expect(dong).toBeVisible();
+});
