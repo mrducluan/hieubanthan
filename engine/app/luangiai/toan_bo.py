@@ -107,8 +107,9 @@ def diem_nhan_hop(chuong: dict | None) -> str | None:
     doạ), thay câu tóm tắt dạng "ở mức… nét của bạn…" giống nhau giữa nhiều người. Hộp tham chiếu / đang xem lại bỏ qua."""
     if (chuong or {}).get("ma") == "van_han":         # VH-1: lời mời Vận hạn chỉ nói năm thuận (đoạn đã dựng sẵn)
         return None
+    # TV-YBS: hộp ý bổ sung (mã `.yb.`) không làm lời mời — chương khoá không lộ chữ của chúng.
     hop = [h for h in (chuong or {}).get("hop") or [] if not h.get("tham_chieu") and not h.get("dang_xem_lai")
-           and (h.get("tieu_de") or "").strip()]
+           and (h.get("tieu_de") or "").strip() and ".yb." not in (h.get("ma_mau") or "")]
     for loai in ("diem_manh", "loi_khuyen"):            # chỉ điều đang đỡ / việc nên làm — lời mời không doạ
         for h in (x for x in hop if x["loai"] == loai):
             t = h["tieu_de"].strip().rstrip(".")

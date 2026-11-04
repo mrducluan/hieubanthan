@@ -75,11 +75,13 @@ def tuvi_he(ls: dict) -> dict | None:
 
 
 def tuvi_nam(ls: dict, nam_am_xem: int, nam_am_sinh: int, so_nam: int = SO_NAM,
-             sao_luu_ta: list[str] | None = None) -> list[dict]:
+             sao_luu_ta: list[str] | None = None, them: dict[int, list[tuple[str, str]]] | None = None) -> list[dict]:
     """Năm âm lịch trong `so_nam` năm tới mà chỉ báo sức khoẻ của lá số được kích hoạt (điểm ≥ NGUONG_TUVI):
     Hoá Kỵ năm nhập Tật Ách (2) · Kỵ năm ở Phụ Mẫu chiếu Tật Ách (1) · cung lưu niên là Tật Ách (1) · đại hạn đang đi
     cung Tật Ách (1) · Hoá Kỵ của can đại hạn nhập Tật Ách (1) · sao lưu khó ở Tật Ách năm đang xem (1, `sao_luu_ta`
-    = tên các sao đó). → [{nam, tuoi, diem, ly_do: [mã], can_cu: [câu], he}] theo năm tăng dần."""
+    = tên các sao đó) · TV-YBS: lý do thêm của năm từ KB ý bổ sung (`them` = {năm: [(mã lý do, căn cứ)]}, mỗi lý do 1
+    điểm, là lý do của riêng năm — vd cung năm có Kình Dương / Đà La). → [{nam, tuoi, diem, ly_do: [mã], can_cu: [câu],
+    he}] theo năm tăng dần."""
     from app.calc import lunar  # noqa: PLC0415
     from app.calc import tuvi_phi_hoa as phi  # noqa: PLC0415
     he0 = tuvi_he(ls)
@@ -113,9 +115,13 @@ def tuvi_nam(ls: dict, nam_am_xem: int, nam_am_sinh: int, so_nam: int = SO_NAM,
         if k == 0 and sao_luu_ta:
             ly.append("sao_luu")
             cu.append(f"Sao lưu năm {nam} ở Tật Ách: {', '.join(sao_luu_ta)}")
-        diem = sum(_DIEM[x] for x in ly)
+        for ma, cau in (them or {}).get(nam, []):
+            if ma not in ly:
+                ly.append(ma)
+                cu.append(cau)
+        diem = sum(_DIEM.get(x, 1) for x in ly)
         # năm chỉ có lớp mười năm (đại hạn) không thành "năm" riêng — lớp đó nói ở câu giai đoạn (`tuvi_giai_doan`)
-        if diem < NGUONG_TUVI or not set(ly) & _LOP_NAM:
+        if diem < NGUONG_TUVI or not (set(ly) & _LOP_NAM or any(x not in _DIEM for x in ly)):
             continue
         # hệ: Kỵ năm nhập Tật Ách mang sao có phần cơ thể sách xưa ghi → hệ của sao đó; còn lại → hệ của lá số
         he = (kb.he_sao(ky["sao"]) if "ky_nhap" in ly else None) or he0

@@ -49,6 +49,15 @@ export interface Hop {
   nam?: number; nam_gop?: number[];
   /** Phong thuỷ Q1: dấu hiệu nhóm veto (xử lý trước, trần mức chương). Q5: việc nên làm theo chi phí. An toàn: lửa điện, nước… */
   veto?: boolean; viec?: { chi_phi: "khong_ton" | "it_tien" | "sua_chua"; lam: string }[]; an_toan?: string[];
+  /** TV-YBS: ý Tử vi bổ sung gộp vào hộp đang có (cùng nội dung) — một câu + một việc; mã của hộp không đổi. */
+  y_bo_sung?: { noi_dung: string; viec?: string };
+}
+
+/** TV-YBS: khung gập "Góc nhìn khác" của một chương — 1–3 ý của một trường phái khác, mỗi ý có mã kiểm chứng + phái
+ *  riêng (`phai`) để học dần "Đúng với mình". */
+export interface GocNhinKhac {
+  loai: "goc_nhin_khac"; tieu_de: string; ghi_chu: string;
+  y: (Omit<Hop, "loai"> & { loai?: LoaiHop })[];
 }
 export const TEN_CHI_PHI: Record<"khong_ton" | "it_tien" | "sua_chua", string> = { khong_ton: "0 đồng", it_tien: "Ít tiền", sua_chua: "Sửa chữa" };
 
@@ -91,6 +100,8 @@ export interface ChuongDoiSongMo {
   hop?: Hop[]; doan: string[]; can_cu?: string[]; cau_tu_soi?: string;
   /** EN-2 mục 5: lời theo tuổi + hoàn cảnh (dòng "Với bạn lúc này", ngoài danh sách hộp — không tranh trần 6 hộp). */
   loi_hoan_canh?: Hop;
+  /** TV-YBS: khung gập "Góc nhìn khác" (ý riêng trường phái — tham khảo), ngoài danh sách hộp. */
+  goc_nhin_khac?: GocNhinKhac;
   van_ai?: string; che_do?: string; thuat_ngu?: ThuatNgu[];
   /** Chương sức khoẻ: câu "không thay lời bác sĩ". */
   mien_tru?: string;
@@ -140,7 +151,7 @@ export const NHAN_MUC: Record<Muc, string> = { thuan: "Thuận lợi", can_bang:
 /** Mọi mã kiểm chứng trong báo cáo (để xin tỉ lệ một lần cho cả bài). */
 export function maMauBaoCao(bc: Pick<BaoCaoDoiSong, "cot_loi" | "chuong">): string[] {
   const ds = [...(bc.cot_loi ?? []), ...bc.chuong.flatMap((c) => (c.khoa ? []
-    : [...(c.hop ?? []), ...(c.loi_hoan_canh ? [c.loi_hoan_canh] : [])]))];
+    : [...(c.hop ?? []), ...(c.loi_hoan_canh ? [c.loi_hoan_canh] : []), ...(c.goc_nhin_khac?.y ?? [])]))];
   return [...new Set(ds.filter((h) => !h.dang_xem_lai && h.ma_mau).map((h) => h.ma_mau!))].sort();
 }
 
