@@ -346,5 +346,18 @@
     "gia_dinh": ["Việc chung có tiền thì ghi giấy.", "Gặp mặt dịp lễ, giữ chủ đề nhẹ nhàng.",
                  "Giúp nhau bằng việc cụ thể hơn lời khuyên."]
   },
-  "loi_dan": "Điểm này là tham khảo, chấm theo luật dân gian và sách Tử vi, Bát trạch. Mối quan hệ tốt hay không do cách hai người cư xử với nhau mỗi ngày."
+  "loi_dan": "Điểm này là tham khảo, chấm theo luật dân gian và sách Tử vi, Bát trạch. Mối quan hệ tốt hay không do cách hai người cư xử với nhau mỗi ngày.",
+  "cach_doc_them": {
+    "_ghi_chu": "TV-YBS đợt 4: nhãn + tiêu đề cho hộp diễn giải lấy ý từ tuvi_y_bo_sung.json (nhóm hôn nhân). Chỉ là lời diễn giải, KHÔNG tính vào điểm. Lời chính của hộp lấy nguyên từ tuvi_y_bo_sung.json.",
+    "nhan": "Thêm một cách đọc",
+    "tieu_de": {
+      "phu_the_trung_menh_nguoi_kia": "Người ấy gần với hình mẫu bạn đời trong lá số của bạn",
+      "hai_nguoi_sat_pha_tham": "Hai người đều thích tự quyết",
+      "dong_tinh_bu_nhau": "Một người mở việc, một người giữ nếp",
+      "ban": "Lá số của bạn phác ra người bạn đời thế nào",
+      "kia": "Lá số người ấy phác ra người bạn đời thế nào"
+    },
+    "dan_kia": "Đọc từ phía người ấy — chữ “bạn” ở đây là người ấy:",
+    "can_cu_chung": "Ý luận đoán của một trường phái Tử vi tam hợp hiện đại, ban biên tập viết lại bằng lời đời thường. Phần này không tính vào điểm."
+  }
 }

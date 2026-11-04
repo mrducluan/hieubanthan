@@ -111,6 +111,8 @@ export interface MucTrang {
   tieu_de: string; doan?: string; danh_sach?: string[]; xem_them?: { loai: LoaiTrang; slug: string; tieu_de: string }[];
   /** SEO-M: bảng thật · trích dẫn · phần do ban biên tập bổ sung trên trang chuyên gia tự viết (EEAT-1). */
   bang?: { cot: string[]; dong: string[][] }; trich_dan?: TrichDan[]; bien_tap?: boolean;
+  /** TV-YBS: mục phụ hiện gập sẵn (vd "Góc nhìn khác (tham khảo)") — chữ vẫn trong HTML máy chủ. */
+  gap?: boolean;
 }
 export interface TrangKienThuc {
   loai: LoaiTrang; slug: string; tieu_de: string; mo_ta: string; tra_loi_nhanh: string;

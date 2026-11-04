@@ -5,7 +5,7 @@
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
-import { ArrowRight, BookOpen, CalendarDays, ShieldCheck } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarDays, ChevronDown, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { MinhHoa } from "@/components/minh-hoa/MinhHoa";
@@ -186,50 +186,23 @@ export async function TrangKienThucView(params: Thamso) {
           // SEO-M: mục nói sức khoẻ (luôn kèm "không thay lời bác sĩ") → data-nosnippet, AI Overviews không cắt câu ra ngoài ngữ cảnh.
           <section key={m.tieu_de} {...(/bác sĩ/.test(`${m.doan ?? ""} ${(m.danh_sach ?? []).join(" ")}`) ? { "data-nosnippet": "" } : {})}>
             {/* Neo ổn định cho từng mục: người đọc và trợ lý AI dẫn link thẳng tới đoạn (#ten-muc). */}
-            <h2 id={idMuc[i]} className="scroll-mt-24 text-2xl">{m.tieu_de}</h2>
-            {m.bien_tap && <p className="mt-1 text-xs text-fg-faint">Ban biên tập bổ sung</p>}
-            {m.doan && <p className="mt-2 leading-relaxed text-fg-muted">{m.doan}</p>}
-            {m.bang && (
-              // SEO-M: bảng thật (caption + th) — trợ lý AI và Google đọc được dạng lưới.
-              <div className="mt-3 overflow-x-auto rounded-xl border border-line/70">
-                <table className="w-full min-w-[32rem] border-collapse text-left text-sm">
-                  <caption className="sr-only">{m.tieu_de}</caption>
-                  <thead><tr>{m.bang.cot.map((c) => <th key={c} scope="col" className="border-b border-line/70 bg-white/5 px-3 py-2 font-medium text-fg">{c}</th>)}</tr></thead>
-                  <tbody>{m.bang.dong.map((d, j) => (
-                    <tr key={j} className="border-b border-line/40 last:border-0">{d.map((o, k) => k === 0
-                      ? <th key={k} scope="row" className="px-3 py-2 align-top font-medium text-fg">{o}</th>
-                      : <td key={k} className="px-3 py-2 align-top text-fg-muted">{o}</td>)}</tr>
-                  ))}</tbody>
-                </table>
-              </div>
-            )}
-            {m.trich_dan && (
-              <div className="mt-3 space-y-3">
-                {m.trich_dan.map((x) => (
-                  <blockquote key={`${x.sach}${x.chuong ?? ""}${x.nghia ?? ""}`} {...(x.neo ? { id: x.neo } : {})}
-                    className="scroll-mt-24 border-l-2 border-gold/50 pl-4">
-                    {x.nguyen_van && <p className="font-serif text-lg text-fg" lang="zh-Hant">{x.nguyen_van}</p>}
-                    {x.phien_am && <p className="text-sm italic text-fg-muted">{x.phien_am}</p>}
-                    {x.nghia && <p className="mt-1 leading-relaxed text-fg-muted">{x.nghia}</p>}
-                    {/* TV-CTP: điều kiện trên lá số bằng lời thường + chú thích chữ của bản chép. */}
-                    {x.khi && <p className="mt-1 text-sm text-fg-muted"><span className="text-gold">Câu này nói về lá số khi</span> {x.khi}.</p>}
-                    {x.chu_thich && <p className="mt-1 text-xs text-fg-faint">Chú thích: {x.chu_thich}</p>}
-                    <footer className="mt-1 text-xs text-fg-faint">— <cite>{x.sach}</cite>{x.chuong ? `, ${x.chuong}` : ""}</footer>
-                  </blockquote>
-                ))}
-              </div>
-            )}
-            {m.danh_sach && (
-              <ul className="mt-3 space-y-2">
-                {m.danh_sach.map((d) => <li key={d} className="flex gap-2 leading-relaxed text-fg-muted"><span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-gold/70" aria-hidden />{d}</li>)}
-              </ul>
-            )}
-            {m.xem_them && m.xem_them.length > 0 && (
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {m.xem_them.map((x) => (
-                  <li key={x.slug}><Link href={duongTrang(x.loai, x.slug)} className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-gold/40 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold hover:text-fg">{x.tieu_de}<ArrowRight className="size-3.5 text-gold/70" aria-hidden /></Link></li>
-                ))}
-              </ul>
+            {m.gap ? (
+              // TV-YBS: mục phụ ("Góc nhìn khác") — gập sẵn, chữ vẫn nằm trong HTML máy chủ (bot đọc được).
+              <details className="group rounded-2xl border border-line/70 px-4 py-3" data-testid="muc-gap">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-3">
+                  <span>
+                    <h2 id={idMuc[i]} className="scroll-mt-24 text-xl">{m.tieu_de}</h2>
+                    <span className="mt-1 block text-sm text-fg-faint">Cách đọc riêng của một trường phái, chưa được đối chiếu rộng — bấm để xem.</span>
+                  </span>
+                  <ChevronDown className="mt-1.5 size-4 shrink-0 text-fg-muted transition-transform group-open:rotate-180" aria-hidden />
+                </summary>
+                <ThanMuc m={m} />
+              </details>
+            ) : (
+              <>
+                <h2 id={idMuc[i]} className="scroll-mt-24 text-2xl">{m.tieu_de}</h2>
+                <ThanMuc m={m} />
+              </>
             )}
           </section>
         ))}
@@ -309,5 +282,57 @@ export async function TrangKienThucView(params: Thamso) {
         <p className="mt-3">Tham khảo văn hoá và tự suy ngẫm — không phải dự báo, không thay thế tư vấn y tế, pháp lý, tài chính.</p>
       </footer>
     </article>
+  );
+}
+
+/** Thân một mục (dùng chung cho mục thường và mục gập "Góc nhìn khác"). */
+function ThanMuc({ m }: { m: TrangKienThuc["muc"][number] }) {
+  return (
+    <>
+      {m.bien_tap && <p className="mt-1 text-xs text-fg-faint">Ban biên tập bổ sung</p>}
+      {m.doan && <p className="mt-2 leading-relaxed text-fg-muted">{m.doan}</p>}
+      {m.bang && (
+        // SEO-M: bảng thật (caption + th) — trợ lý AI và Google đọc được dạng lưới.
+        <div className="mt-3 overflow-x-auto rounded-xl border border-line/70">
+          <table className="w-full min-w-[32rem] border-collapse text-left text-sm">
+            <caption className="sr-only">{m.tieu_de}</caption>
+            <thead><tr>{m.bang.cot.map((c) => <th key={c} scope="col" className="border-b border-line/70 bg-white/5 px-3 py-2 font-medium text-fg">{c}</th>)}</tr></thead>
+            <tbody>{m.bang.dong.map((d, j) => (
+              <tr key={j} className="border-b border-line/40 last:border-0">{d.map((o, k) => k === 0
+                ? <th key={k} scope="row" className="px-3 py-2 align-top font-medium text-fg">{o}</th>
+                : <td key={k} className="px-3 py-2 align-top text-fg-muted">{o}</td>)}</tr>
+            ))}</tbody>
+          </table>
+        </div>
+      )}
+      {m.trich_dan && (
+        <div className="mt-3 space-y-3">
+          {m.trich_dan.map((x) => (
+            <blockquote key={`${x.sach}${x.chuong ?? ""}${x.nghia ?? ""}`} {...(x.neo ? { id: x.neo } : {})}
+              className="scroll-mt-24 border-l-2 border-gold/50 pl-4">
+              {x.nguyen_van && <p className="font-serif text-lg text-fg" lang="zh-Hant">{x.nguyen_van}</p>}
+              {x.phien_am && <p className="text-sm italic text-fg-muted">{x.phien_am}</p>}
+              {x.nghia && <p className="mt-1 leading-relaxed text-fg-muted">{x.nghia}</p>}
+              {/* TV-CTP: điều kiện trên lá số bằng lời thường + chú thích chữ của bản chép. */}
+              {x.khi && <p className="mt-1 text-sm text-fg-muted"><span className="text-gold">Câu này nói về lá số khi</span> {x.khi}.</p>}
+              {x.chu_thich && <p className="mt-1 text-xs text-fg-faint">Chú thích: {x.chu_thich}</p>}
+              <footer className="mt-1 text-xs text-fg-faint">— <cite>{x.sach}</cite>{x.chuong ? `, ${x.chuong}` : ""}</footer>
+            </blockquote>
+          ))}
+        </div>
+      )}
+      {m.danh_sach && (
+        <ul className="mt-3 space-y-2">
+          {m.danh_sach.map((d) => <li key={d} className="flex gap-2 leading-relaxed text-fg-muted"><span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-gold/70" aria-hidden />{d}</li>)}
+        </ul>
+      )}
+      {m.xem_them && m.xem_them.length > 0 && (
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {m.xem_them.map((x) => (
+            <li key={x.slug}><Link href={duongTrang(x.loai, x.slug)} className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-gold/40 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold hover:text-fg">{x.tieu_de}<ArrowRight className="size-3.5 text-gold/70" aria-hidden /></Link></li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
