@@ -397,7 +397,9 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             "tieu_han_tuoi": p["ages"],
             "do_sang_phu": _do_sang_phu(p),
         } for p in la["palaces"]],
-        "cach_cuc": [{**(tuvi_kb.cach_cuc(c["ma"]) or {}), "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"]}
+        # KB-TV3: `dieu_kien_dat` = điều kiện có / điểm cộng / điểm trừ (dữ kiện đã tính, chữ từ KB, chỉ thuật ngữ).
+        "cach_cuc": [{**(tuvi_kb.cach_cuc(c["ma"]) or {}), "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"],
+                      "dieu_kien_dat": tuvi_kb.dieu_kien_dat(c["du_kien"])}
                      for c in tuvi_cach_cuc.nhan_dien(la)],
         "cach_cuc_luu_y": tuvi_kb.luu_y_pha_cach(),
         "phai": dv.phai,

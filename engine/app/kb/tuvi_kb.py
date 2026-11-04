@@ -129,6 +129,34 @@ def luu_y_pha_cach() -> str:
     return _cc()["luu_y_pha_cach"]
 
 
+def _chu_dieu_kien(f: dict, mau: dict) -> str:
+    ds = mau["noi"].join(f.get("ds", []))
+    k = f["kieu"]
+    if k == "sao":
+        nhan = mau["sao_hoa"].format(**f) if f.get("hoa") else f["sao"]
+        return mau[f"vi_tri_{f['vi_tri']}"].format(nhan=nhan, cung=f.get("cung", ""), chi=f.get("chi", ""))
+    if k == "sang":
+        return mau["sang"].format(sao=f["sao"], chi=f["chi"], muc=mau.get(f"muc_{f['muc']}", f["muc"].lower()))
+    return mau[k].format(ds=ds, **{a: f[a] for a in ("sao", "hoa", "cung", "chi") if a in f})
+
+
+def dieu_kien_dat(ds: list[dict] | None) -> list[dict]:
+    """KB-TV3: dữ kiện điều kiện của một cách (`tuvi_cach_cuc.nhan_dien(...)[i]["du_kien"]`) → chữ hiển thị
+    [{loai: can|tang|giam, noi_dung}] theo mẫu `dieu_kien_mau` — chỉ thuật ngữ, cho phần "Vì sao nói vậy".
+    Thứ tự: điều kiện có → điểm cộng → điểm trừ; câu trùng chỉ giữ một lần."""
+    mau = _cc()["dieu_kien_mau"]
+    ra, da = [], set()
+    for loai in ("can", "tang", "giam"):
+        for f in ds or []:
+            if f.get("loai") != loai:
+                continue
+            nd = _chu_dieu_kien(f, mau)
+            if nd and nd not in da:
+                da.add(nd)
+                ra.append({"loai": loai, "noi_dung": nd})
+    return ra
+
+
 def doc_tung_buoc(ma: str) -> dict | None:
     """MAU6: tiêu đề + lời giải thích (đời thường) cho từng bước đọc lá số."""
     return _d()["doc_tung_buoc"].get(ma)
