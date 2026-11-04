@@ -21,7 +21,7 @@ CUNG_CHUONG = {"Mệnh": "tong_quan", "Phúc Đức": "tong_quan", "Quan Lộc":
                "Huynh Đệ": "gia_dinh", "Tật Ách": "suc_khoe", "Nô Bộc": "quan_he", "Thiên Di": "quan_he"}
 CHU_DE_CHUONG = {"tinh_cach": "tong_quan", "ngu_hanh": "ngu_hanh", "nghe_tien": "su_nghiep", "hon_nhan": "tinh_cam",
                  "gia_dinh": "gia_dinh", "con_cai": "gia_dinh", "loi_song": "suc_khoe", "hoc_hanh": "hoc_tap",
-                 "quan_he": "quan_he", "phap_ly": "quan_he", "an_toan": "suc_khoe", "di_xa": "quan_he",
+                 "quan_he": "quan_he", "phap_ly": "quan_he", "an_toan": "quan_he", "di_xa": "quan_he",
                  "hau_van": "cuoc_doi", "than_sat": None, "xung_hop": None, "cach_cuc": None, "tru": "gia_dinh",
                  "thap_than": None}
 _TOI_DA_HOP = 2

@@ -1301,7 +1301,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     if bs:                                        # pha 2: hộp mới (≤ 2 / chương) + khung "Góc nhìn khác"
         yb.them_vao(ds, bs, hoc)
     # CY-1: "Năm nên chú ý {mảng} hơn" ở các chương mảng đời (cùng thang SK-1, cung theo mảng) — sau cốt lõi, không đổi mức.
-    cyn.ap(ds, "tuvi", lambda m: cyn.tuvi_nam(ls, nam_am_xem, nam_am_sinh, m, sl),
+    cyn.ap(ds, "tuvi", lambda m: cyn.tuvi_nam(ls, nam_am_xem, nam_am_sinh, m, sl, dong={g["nam"]: g for g in dong}),
            lambda ch, mg, ly: _ma("ds", ch, "chu_y", mg, ly), _hop, hoc, tuoi=vh["tuoi_mu"] - 1,
            toi_da_hop=TOI_DA_HOP, toi_da_them=yb.TOI_DA_HOP_MOI)
     # EN-2 mục 5: hộp lời theo tuổi + tình trạng (người dùng tự chọn) ở 5 chương — sau khi chọn cốt lõi (không vào cốt lõi).

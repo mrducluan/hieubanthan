@@ -547,6 +547,14 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
         so_kb = {int(n) for n in re.findall(r"\d+", viec0)}
         if mo and (la := set(mo_dau.so_la(mo, goi))) and la <= so_kb:
             goi["so_trong_goi"] = sorted(set(goi.get("so_trong_goi") or []) | la)
+        cy = next((m for m in goi["muc"] if m.get("ma") == "chu_y_nam"), None)
+        if mo and cy and not mo_dau.khong_mo(pl["cau_chuan_hoa"]):
+            from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+            if cyn.lo_ro(pl["cau_chuan_hoa"]):
+                # Review CY-1: câu LO ("có bị mất tiền / tai nạn / thắng kiện không") — đoạn mở đầu nói khung trước ("quẻ
+                # không trả lời có hay không…"), rồi mới tới lời quẻ — mức quẻ đứng đầu đọc thành câu trả lời có / không.
+                nhan, _, than = mo.partition(": ")
+                mo = f"{nhan}: {cyn.kinhdich_khung()} {mo_dau.hoa(than)}" if than else f"{cyn.kinhdich_khung()} {mo}"
         van = mo_dau.dat_dau(van, mo, goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
