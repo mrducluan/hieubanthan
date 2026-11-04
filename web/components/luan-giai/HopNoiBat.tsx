@@ -57,9 +57,12 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
   const nhan = hop.nhan ?? nhanLoai;
   const idTieuDe = useId();
   const khoang = hop.tu && hop.den ? `${ngayDuong(hop.tu)} – ${ngayDuong(hop.den)} dương lịch`
-    : typeof hop.tu_tuoi === "number" && typeof hop.den_tuoi === "number" ? `${hop.tu_tuoi}–${hop.den_tuoi} tuổi` : null;
+    : typeof hop.tu_tuoi === "number" && typeof hop.den_tuoi === "number" ? `${hop.tu_tuoi}–${hop.den_tuoi} tuổi`
+    // CY-1 / SK-1: hộp "Năm nên chú ý … hơn" — hàng dưới nêu các năm (lời nhắc chủ động, không có chip mức)
+    : hop.cac_nam?.length ? `Năm ${hop.cac_nam.join(" · ")}` : null;
   return (
     <section role="note" aria-labelledby={idTieuDe} data-loai={hop.loai} data-testid="hop-noi-bat"
+      data-chu-y={hop.chu_y?.join(" ") || undefined}
       className={cn("hop-nb flex flex-col rounded-2xl p-4", className)}>
       {/* Mức của hộp thời điểm đứng cùng hàng nhãn, góc phải — lướt qua lưới 12 tháng / dòng giai đoạn là thấy ngay
           tháng nào thuận, tháng nào cần lưu ý, không phải đọc hết hộp. Hàng dưới chỉ còn khoảng ngày / tuổi. */}

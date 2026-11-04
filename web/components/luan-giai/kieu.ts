@@ -47,6 +47,8 @@ export interface Hop {
   muc?: Muc; tu?: string; den?: string; tu_tuoi?: number; den_tuoi?: number;
   /** VH-1 chương Vận hạn: năm của hộp (+ các năm cùng mẫu đã gộp). */
   nam?: number; nam_gop?: number[];
+  /** CY-1: hộp "Năm nên chú ý {mảng} hơn" (+ SK-1 sức khoẻ) — các năm nêu trong hộp, mảng chú ý. Không mang mức. */
+  cac_nam?: number[]; chu_y?: string[];
   /** Phong thuỷ Q1: dấu hiệu nhóm veto (xử lý trước, trần mức chương). Q5: việc nên làm theo chi phí. An toàn: lửa điện, nước… */
   veto?: boolean; viec?: { chi_phi: "khong_ton" | "it_tien" | "sua_chua"; lam: string }[]; an_toan?: string[];
   /** TV-YBS: ý Tử vi bổ sung gộp vào hộp đang có (cùng nội dung) — một câu + một việc; mã của hộp không đổi. */
