@@ -1000,7 +1000,7 @@ export interface MauCum {
     | null;
   tren_web?: boolean | null;
   /**
-   * Gõ {ten_bien} trong chữ khối, web thay bằng giá trị của từng trang. Biến lạ giữ nguyên chữ.
+   * Gõ {ten_bien} trong chữ khối, web thay bằng giá trị của từng trang. Biến lạ chặn xuất bản; web không hiện khối còn biến lạ.
    */
   bien?:
     | {

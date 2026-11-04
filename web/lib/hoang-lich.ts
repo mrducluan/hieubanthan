@@ -30,6 +30,8 @@ export interface NgayTot {
   ky_dan_gian: { ma: string; ten: string; nghia: string }[];
   tuoi: { nam_am: number; can_chi: string; uoc_luong: boolean; quan_he: QuanHeTuoi } | null;
   viec: { ma_viec: string; ten: string; danh_gia: "tot" | "binh" | "tranh"; ly_do: string[]; ngay_tot_gan: TomTatNgay | null } | null;
+  /** 6b-1: 6 việc lớn theo đúng luật của trang "ngày tốt {việc} tháng" (engine cũ không có → tuỳ chọn). */
+  viec_lon?: { ma: string; slug: string; ten: string; danh_gia: "tot" | "binh" | "tranh"; chu: string }[];
   ngay_mai: TomTatNgay; ngay_tot_gan: TomTatNgay | null;
   danh_sach_viec: { ma: string; ten: string }[];
   nguon: string; trang_thai: string; luu_y: string; tra_loi_nhanh?: string;

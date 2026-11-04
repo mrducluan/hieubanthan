@@ -178,22 +178,43 @@ Cần chủ dự án quyết (luật / nội dung đã có từ trước, em kh�
 - **Kênh GA4 "AI assistants"** (mục D `DE-XUAT-CHAT-LUONG-NOI-DUNG.md`) + mỗi tháng tự hỏi 20 câu cố định trên ChatGPT/Perplexity/Gemini xem site có được trích không.
 - Quyết Q1–Q6 ở mục 5.
 
-## 6b. Câu hỏi cho anh (sau rà soát đợt 3)
+## 6b. Câu hỏi cho anh (sau rà soát đợt 3) — ĐÃ TRẢ LỜI + ĐÃ LÀM (2026-11-04, chủ dự án giao em quyết)
 
-1. **Trang ngày vs trang "ngày tốt theo việc" nói ngược nhau**: `/xem-ngay-tot/2027-01-01` ghi ngày hắc đạo nhưng "hợp cưới
-   hỏi" (theo mục Nên của sách lịch), còn `/xem-ngay-tot/cuoi-hoi-thang-1-2027` không liệt kê ngày đó (luật chọn ngày loại vì
-   kiêng Nạp thái / Kết ước). Đề xuất: câu đầu trang ngày dùng đúng luật chọn ngày ("sách lịch ghi nên cưới hỏi, nhưng ngày
-   kiêng Nạp thái nên không xếp vào ngày tốt cưới hỏi"), và trang tháng ghi hoàng đạo / hắc đạo cạnh từng ngày.
-2. **Làm nhà "Thuận" nhưng là năm tuổi** (vd 1981 năm 2029): luật làm nhà chỉ xét Kim lâu, Hoang ốc, Tam tai. Có xét thêm năm
-   tuổi / xung tuổi không (nhiều nhà vẫn kiêng)? Đề xuất: không đổi mức, thêm dòng "năm tuổi — nhiều gia đình vẫn kiêng".
-3. **Trang "Sinh năm X mệnh gì" gợi hướng theo ngũ hành** (Mộc → Đông) có thể ngược Bát trạch của chính người đó (nữ 1981 Cấn:
-   Đông là Lục Sát). Đề xuất: bỏ gợi hướng theo ngũ hành ở trang mệnh, chỉ link sang trang cung phi nam / nữ.
-4. **Số 7 hai trang nói khác** (ý nghĩa số xếp 7 cùng nhóm 1, 5; trang tình yêu nói hợp 4, 7, 9) — trang ý nghĩa số do anh
-   biên soạn, em không sửa; anh muốn thống nhất theo bảng nào?
-5. **Công cụ "Nhà của bạn"** (nhà hướng Đông Nam): ghi "cùng nhóm hướng Tây — bố trí dễ" và gợi đặt cửa Tây Nam — cần em điều
-   tra luật Phong thuỷ đời sống không? (ngoài phạm vi SEO, có từ trước.)
-6. **CMS**: mẫu cụm "Hướng hợp tuổi" cũ có thể dùng biến `{nam}` — trang cung không có biến này nên sẽ hiện nguyên `{nam}`. Anh
-   (hoặc em khi có quyền CMS) kiểm mẫu cụm sau deploy.
+Nguyên tắc chung: không đổi phép tính, không đổi mức đã chấm; sửa chỗ hai trang nói khác nhau và lời dễ hiểu nhầm.
+
+1. **Trang ngày ↔ trang "ngày tốt theo việc"** — *Cách sách xử lý:* hoàng lịch ghi Nên/Kiêng theo TỪNG lễ (嫁娶 cưới gả,
+   纳采 nạp thái = dạm ngõ, 订盟 kết ước = đính ước); người chọn ngày cưới hỏi ở Việt Nam xem cả chuỗi lễ, ngày ghi nên cưới
+   gả mà kiêng nạp thái / kết ước thì thầy chọn ngày thường gạt. *Chọn:* giữ luật chặt của trang việc-tháng (một việc chỉ là
+   ngày tốt khi có trong mục Nên VÀ không lễ nào của việc đó trong mục Kiêng), cho trang ngày dùng ĐÚNG luật đó. *Đã làm:*
+   engine `ngay_xem` trả `viec_lon` (6 việc, `_danh_gia_viec` + câu vì sao), "Trả lời nhanh" thêm "Theo cách chọn ngày của
+   trang: hợp …; chưa xếp vào ngày tốt cưới hỏi (sách ghi nên Cưới hỏi nhưng kiêng Nạp thái, Kết ước)"; web khối "Việc lớn hôm
+   nay" (link sang trang việc-tháng); trang việc-tháng có nhãn Hoàng đạo / Hắc đạo từng ngày + số ngày hoàng đạo; sửa lỗi
+   "Đẹp nhất" không bao giờ hiện (dấu ngoặc sai). Test khoá: mọi ngày tháng 2/2027 × 6 việc, hai trang cùng kết luận.
+2. **Làm nhà năm tuổi** — *Cách sách xử lý:* ba điều kiêng chính khi làm nhà là Kim lâu, Hoang ốc, Tam tai; năm tuổi / năm
+   xung Thái Tuế là kiêng thêm theo nếp nhà (nhiều nơi mượn tuổi), không phải điều kiện phạm. *Chọn:* không đổi mức, ghi chú.
+   *Đã làm:* `tuoi_dan_gian._nam_tuoi` → kết luận + "Trả lời nhanh" thêm câu năm tuổi / xung tuổi; bảng 10 năm ghi "năm tuổi —
+   nhiều nhà vẫn kiêng" cạnh năm Thuận.
+3. **Hướng ở trang mệnh** — *Cách sách xử lý:* hướng nhà theo Bát trạch tính từ CUNG PHI (khác nam / nữ), không theo mệnh
+   nạp âm; hướng theo ngũ hành chỉ là cách nói dân gian và có thể rơi đúng hướng xấu (nữ 1981 Cấn: Đông là Lục Sát). *Chọn:*
+   bỏ. *Đã làm:* mục "Màu và nhóm nghề theo ngũ hành (dân gian)" không còn hướng; mục mới "Cung phi và hướng hợp" nêu cung,
+   nhóm, hướng tốt nhất (Sinh Khí) và 4 hướng tốt cho nam và nữ + hỏi đáp "hợp hướng nhà nào?" (76 trang).
+4. **Số 7** — *Cách sách xử lý:* cách chia ba nhóm phổ biến 1-5-7 (trí, tự do) / 2-4-8 (thực tế) / 3-6-9 (cảm xúc, sáng tạo)
+   là cách trang Ý nghĩa số (anh biên soạn) đang dùng. *Chọn:* giữ trang của anh, sửa phần bổ sung của ban biên tập ở 12 trang
+   tình yêu cho cùng nhóm (số 7 cùng nhóm 1, 5; 4 và 9 chỉ còn là "hay hợp nhịp suy nghĩ"). Test khoá 12 số.
+5. **"Nhà của bạn" hướng Đông Nam** — *Điều tra:* KHÔNG sai phép tính. Bát trạch xếp nhóm nhà theo LƯNG nhà (toạ): nhà quay
+   Đông Nam toạ Tây Bắc = Càn trạch = nhóm Tây; câu "cùng nhóm hướng Tây — bố trí dễ" đúng về lý nhưng dễ hiểu nhầm là "cửa
+   hướng Tây". *Đã làm:* câu nói rõ "Bát trạch xếp nhóm nhà theo lưng nhà: nhà toạ Tây Bắc là nhà nhóm Tây…" (4 trường hợp cửa
+   hợp / không, cùng / khác nhóm); gợi cửa nói về CỬA ĐANG CÓ ("đang quay về … — đã hợp, giữ nguyên" hoặc "không cần đổi cửa;
+   nếu có cửa phụ phía … thì dùng làm lối đi"), không bảo đặt cửa mới. Mức không đổi.
+6. **CMS biến `{nam}`** — *Đã làm:* CMS báo **lỗi chặn xuất bản** khi khối mẫu cụm dùng biến không có trong mẫu (trước chỉ cảnh
+   báo; `cms/src/lib/bien-la.ts`); web **bỏ hẳn khối còn biến lạ** (`conBienLa`, `web/lib/noi-dung-trang.ts`) — trang cung không
+   bao giờ hiện chữ `{nam}` trần, kể cả mẫu đã xuất bản từ trước. Anh vẫn nên mở mẫu cụm sau deploy: khối có `{nam}` sẽ không
+   hiện cho tới khi sửa.
+
+**Sitemap:** không cần khai báo lại. `/sitemap.xml` giữ nguyên địa chỉ, Google tự đọc lại định kỳ; robots.txt đã khai cả ba
+(`sitemap.xml`, `sitemap-ngay.xml`, `sitemap-cum.xml`). Nên làm một lần: Search Console → Sơ đồ trang web → thêm
+`sitemap-cum.xml` và `sitemap-ngay.xml` (để xem chỉ mục theo từng cụm) và bấm gửi lại `sitemap.xml` (đẩy nhanh việc đọc lại sau
+đợt đổi URL hướng hợp tuổi → cung phi).
 
 ## 7. Ghi chú về độ tin
 

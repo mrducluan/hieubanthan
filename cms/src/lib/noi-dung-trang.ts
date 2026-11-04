@@ -1,6 +1,7 @@
 // ND — kiểm định chữ của "Trang website" / "Mẫu cụm trang" trước khi lưu (máy chủ): gom mọi ô chữ biên tập viên gõ,
 // chạy luật ranh giới chung (kiem-dinh.ts kiemRanhGioi) + link trong site + biến mẫu. Không gọi AI.
 import { docLexical, kiemRanhGioi, type MucKiem } from "../kiem-dinh/kiem-dinh";
+import { mucBienLa } from "./bien-la";
 import { chuDaSua } from "./chu-trang";
 
 type Dong = Record<string, unknown>;
@@ -34,18 +35,14 @@ export function gomChu(d: Dong, { mucNoiQuyTrinh = false } = {}) {
     muc.push(chu(m.tieu_de), l.van);
     lienKetNgoai.push(...l.lienKetNgoai);
   }
-  const loiMoi: string[] = [];
+  const loiMoi: string[] = [], khoi: string[] = [];
   for (const vt of VI_TRI) for (const k of mang(d[vt])) {
-    (KHOI_MOI.has(String(k.blockType)) ? loiMoi : tuDo).push(...chuTrongKhoi(k));
+    const ds = chuTrongKhoi(k);
+    (KHOI_MOI.has(String(k.blockType)) ? loiMoi : tuDo).push(...ds);
+    khoi.push(...ds);
   }
   return { tuDo: tuDo.filter(Boolean).join("\n"), muc: muc.filter(Boolean).join("\n"), loiMoi: loiMoi.filter(Boolean).join("\n"),
-    lienKetNgoai, mucNoiQuyTrinh };
-}
-
-/** Biến {x} trong chữ khối không thuộc danh sách biến của mẫu → cảnh báo (web giữ nguyên chữ "{x}"). */
-export function bienLa(van: string, bien: string[]): string[] {
-  const co = new Set(bien);
-  return [...new Set([...van.matchAll(/\{([a-z_]+)\}/g)].map((m) => m[1]!))].filter((b) => !co.has(b));
+    khoi: khoi.filter(Boolean).join("\n"), lienKetNgoai, mucNoiQuyTrinh };
 }
 
 export function kiemTrang(d: Dong, opt: { mucNoiQuyTrinh?: boolean; bien?: string[] } = {}): { muc: MucKiem[]; chan: MucKiem[] } {
@@ -57,11 +54,7 @@ export function kiemTrang(d: Dong, opt: { mucNoiQuyTrinh?: boolean; bien?: strin
   ];
   if (g.lienKetNgoai.length) muc.push({ ma: "lien_ket_ngoai", nhom: "noi_dung", muc_do: "loi", chan: true,
     thong_diep: `Mục văn bản có link ra ngoài site (${g.lienKetNgoai.slice(0, 3).join(", ")}) — chỉ dùng đường dẫn trong site.` });
-  if (opt.bien) {
-    const la = bienLa([g.tuDo, g.loiMoi].join("\n"), opt.bien);
-    if (la.length) muc.push({ ma: "bien_la", nhom: "noi_dung", muc_do: "canh_bao",
-      thong_diep: `Biến không có trong mẫu: ${la.map((b) => `{${b}}`).join(", ")} — web sẽ giữ nguyên chữ này.` });
-  }
+  if (opt.bien) muc.push(...mucBienLa(g.khoi, opt.bien));
   // Gộp trùng (cùng mã + thông điệp) khi một lỗi xuất hiện ở nhiều nhóm ô.
   const thay = new Set<string>();
   const gon = muc.filter((m) => !thay.has(m.ma + m.thong_diep) && Boolean(thay.add(m.ma + m.thong_diep)));

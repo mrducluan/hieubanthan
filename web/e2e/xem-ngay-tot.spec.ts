@@ -142,3 +142,19 @@ test("EN-5.1 chọn ngày cho cả nhà: cưới hỏi 4 người, Kim lâu cô 
   await khoi.getByRole("button", { name: "Tìm ngày" }).click();
   await expect(khoi.getByRole("alert")).toContainText("Mỗi vai chỉ một người");
 });
+
+test("6b-1: trang ngày và trang 'ngày tốt cưới hỏi tháng' nói cùng một kết luận; trang việc ghi hoàng/hắc đạo", async ({ page }) => {
+  await page.goto("/xem-ngay-tot/2027-01-01");
+  const vl = page.getByTestId("viec-lon");
+  await expect(vl.locator("li")).toHaveCount(6);
+  const cuoi = vl.locator("li", { hasText: "Cưới hỏi" });
+  await expect(cuoi).toHaveAttribute("data-danh-gia", "tranh");
+  await expect(cuoi).toContainText("Nạp thái");
+  await expect(page.getByLabel("Trả lời nhanh").first()).toContainText("chưa xếp vào ngày tốt cưới hỏi");
+  await page.goto("/xem-ngay-tot/cuoi-hoi-thang-1-2027");
+  const ds = page.getByTestId("ngay-tot-viec");
+  await expect(ds).not.toContainText("01/01/2027");
+  await expect(ds.getByTestId("nhan-dao").first()).toBeVisible();
+  await expect(ds.getByTestId("nhan-dao", { hasText: "Hắc đạo" }).first()).toBeVisible();
+  await expect(page.getByLabel("Trả lời nhanh")).toContainText("Đẹp nhất");
+});

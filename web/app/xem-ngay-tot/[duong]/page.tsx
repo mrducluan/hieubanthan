@@ -168,7 +168,10 @@ async function TrangViecThang({ x }: { x: { viec: (typeof VIEC_SEO)[number]; nam
               {d.ngay.map((n) => (
                 <li key={n.ngay}><Link href={duongNgay(n.ngay)} className="block rounded-xl border border-line/70 px-3 py-2 text-sm hover:border-gold/50">
                   <b>{dmy(n.ngay)}</b> <span className="text-fg-muted">({n.am} âm · {n.can_chi}) · {n.than} · trực {n.truc}</span>
-                  {n.diem_cong && n.diem_cong.length > 0 && <span className="mt-0.5 block text-xs text-jade">{n.diem_cong.join(" · ")}</span>}
+                  <span className={`ml-1 inline-flex rounded-full px-2 text-xs ${n.hoang_dao ? "bg-gold/15 text-gold" : "border border-moon/50 text-moon"}`}
+                    data-testid="nhan-dao">{n.hoang_dao ? "Hoàng đạo" : "Hắc đạo"}</span>
+                  {n.diem_cong && n.diem_cong.filter((x) => x !== "hoàng đạo").length > 0 &&
+                    <span className="mt-0.5 block text-xs text-jade">{n.diem_cong.filter((x) => x !== "hoàng đạo").join(" · ")}</span>}
                 </Link></li>
               ))}
             </ul>
