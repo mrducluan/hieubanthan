@@ -109,10 +109,12 @@ test("menu Huyền học: 3 cụm kiến thức lớn thay 3 công cụ đã có
 });
 
 // ---------- trang ----------
+// Thanh nằm trong <Suspense> ở layout (số trang điền sau): lúc HTML còn đang truyền, bản đầy đủ đứng tạm trong <div hidden>
+// chờ thay chỗ bản chờ → luôn nhắm thanh ĐANG HIỆN (:visible), không đếm bản ẩn.
 
 test("trang cụm: thanh mảng sáng đúng mục + có số trang, breadcrumb đủ cấp (hiển thị = JSON-LD)", async ({ page }) => {
   await page.goto("/tu-vi/sao-o-cung");
-  const tm = page.locator("[data-thanh-mang=tuvi]");
+  const tm = page.locator("[data-thanh-mang=tuvi]:visible");
   await expect(tm).toBeVisible();
   await expect(tm.getByRole("link", { name: /Sao ở cung/ })).toHaveAttribute("aria-current", "page");
   await expect(tm.locator("[data-muc=sao_cung]")).toContainText("168");
@@ -125,7 +127,7 @@ test("trang cụm: thanh mảng sáng đúng mục + có số trang, breadcrumb 
 test("trang con: breadcrumb 5 cấp, thanh mảng vẫn sáng cụm cha; bấm thanh đổi trang và mục sáng", async ({ page }) => {
   await page.goto("/tu-vi/sao-o-cung/thai-duong-cung-menh");
   expect((await breadcrumb(page)).slice(0, 4)).toEqual(["Trang chủ", "Huyền học", "Tử vi", "Chính tinh ở từng cung Tử vi"]);
-  const tm = page.locator("[data-thanh-mang=tuvi]");
+  const tm = page.locator("[data-thanh-mang=tuvi]:visible");
   await expect(tm.locator("[data-muc=sao_cung]")).toHaveAttribute("aria-current", "location");   // cụm cha, không phải chính trang
   await tm.locator("[data-muc=tu_hoa]").click();
   await expect(page).toHaveURL(/\/tu-vi\/tu-hoa$/);
@@ -139,7 +141,7 @@ test("trang con: breadcrumb 5 cấp, thanh mảng vẫn sáng cụm cha; bấm t
 
 test("Kinh Dịch: mục 'Quẻ theo giờ' mở chế độ Mai Hoa và sáng khi đang ở chế độ đó", async ({ page }) => {
   await page.goto("/kinh-dich");
-  const tm = page.locator("[data-thanh-mang=kinhdich]");
+  const tm = page.locator("[data-thanh-mang=kinhdich]:visible");
   await tm.locator("[data-muc=mai_hoa]").click();
   await expect(page).toHaveURL(/\/kinh-dich\?cach=mai_hoa$/);
   await expect(tm.locator("[data-muc=mai_hoa]")).toHaveAttribute("aria-current", "page");
@@ -149,7 +151,7 @@ test("Kinh Dịch: mục 'Quẻ theo giờ' mở chế độ Mai Hoa và sáng k
 test("trang công cụ: breadcrumb thật thay chữ 'Huyền học' tĩnh; dòng nhỏ nói mảng làm gì", async ({ page, request }) => {
   await page.goto("/bat-tu");
   expect(await breadcrumb(page)).toEqual(["Trang chủ", "Huyền học", "Bát tự"]);
-  await expect(page.locator("[data-thanh-mang=battu] [data-muc=cong_cu]")).toHaveAttribute("aria-current", "page");
+  await expect(page.locator("[data-thanh-mang=battu]:visible [data-muc=cong_cu]")).toHaveAttribute("aria-current", "page");
   await expect(page.locator("header .eyebrow").first()).toHaveText(/Tứ trụ/);
   const html = await (await request.get("/phong-thuy/huong-xau-nam")).text();
   expect(ldBreadcrumb(html)).toEqual(["Trang chủ", "Huyền học", "Phong thuỷ", "Hướng xấu theo năm"]);
@@ -163,15 +165,15 @@ test("không có thanh mảng ngoài 6 mảng; mọi trang của 6 mảng đều
   for (const [p, ma] of [["/than-so/y-nghia-so", "thanso"], ["/hop-doi/cap-so", "hopdoi"], ["/kinh-dich/que", "kinhdich"],
     ["/phong-thuy/huong-hop-tuoi", "phongthuy"], ["/phong-thuy/dau-hieu", "phongthuy"], ["/tu-vi/la-so-mau", "tuvi"]] as const) {
     await page.goto(p);
-    await expect(page.locator(`[data-thanh-mang=${ma}]`), p).toBeVisible();
-    await expect(page.locator(`[data-thanh-mang=${ma}] [aria-current]`), p).toHaveCount(1);
+    await expect(page.locator(`[data-thanh-mang=${ma}]:visible`), p).toBeVisible();
+    await expect(page.locator(`[data-thanh-mang=${ma}]:visible [aria-current]`), p).toHaveCount(1);
   }
 });
 
 test("thanh mảng điện thoại: cuộn xuống thì ẩn (neo không bị che), cuộn lên thì hiện; máy tính luôn hiện", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/kinh-dich/que");
-  const tm = page.locator("[data-thanh-mang]");
+  const tm = page.locator("[data-thanh-mang]:visible");
   const tmH = () => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--tm-h").trim());
   await expect(tm).toHaveAttribute("data-an", "0");
   expect(await tmH()).toBe("2.75rem");                                // CSS đặt ngay từ HTML máy chủ, không chờ JS
@@ -204,7 +206,7 @@ test("mở thẳng link có #neo: tiêu đề nhóm nằm dưới menu + thanh m
     const h = page.locator("#nhom-thai-duong-h");
     await expect.poll(async () => { const a = await page.evaluate(() => scrollY); await page.waitForTimeout(150); return a === await page.evaluate(() => scrollY) && a > 0; }).toBe(true);
     const day = await page.evaluate(() => {
-      const tm = document.querySelector<HTMLElement>("[data-thanh-mang]")!.getBoundingClientRect();
+      const tm = [...document.querySelectorAll<HTMLElement>("[data-thanh-mang]")].find((e) => !e.closest("[hidden]"))!.getBoundingClientRect();
       return tm.bottom;
     });
     expect((await h.boundingBox())!.y, `rộng ${w}`).toBeGreaterThanOrEqual(day - 1);
