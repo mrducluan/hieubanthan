@@ -28,7 +28,8 @@ test("trang kiến thức cũ + .md → đúng trang mới; trang mới có cano
   const html = await (await request.get("/tu-vi/sao-o-cung/tu-vi-cung-menh")).text();
   expect(html).toMatch(/<link rel="canonical" href="[^"]*\/tu-vi\/sao-o-cung\/tu-vi-cung-menh"/);
   const bc = [...html.matchAll(/"@type":"ListItem","position":(\d),"name":"([^"]+)","item":"([^"]*)"/g)].map((m) => [m[2], new URL(m[3]!).pathname]);
-  expect(bc.slice(0, 3)).toEqual([["Trang chủ", "/"], ["Tử vi", "/tu-vi"], ["Chính tinh ở từng cung Tử vi", "/tu-vi/sao-o-cung"]]);
+  // TM-1: thêm cấp hub "Huyền học" (cùng dải breadcrumb hiển thị trên trang).
+  expect(bc.slice(0, 4)).toEqual([["Trang chủ", "/"], ["Huyền học", "/huyen-hoc"], ["Tử vi", "/tu-vi"], ["Chính tinh ở từng cung Tử vi", "/tu-vi/sao-o-cung"]]);
   expect(html).not.toMatch(/href="\/kien-thuc\/(?!")/);       // liên kết trong trang không trỏ URL cũ
 });
 

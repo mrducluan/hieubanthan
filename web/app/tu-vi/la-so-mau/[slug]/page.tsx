@@ -11,6 +11,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { laSoMau } from "@/lib/kien-thuc";
 import { anhBai, catMoTa, goiLd, ldAnh, ldDuongDan, ldThucThe, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import { DocLaSoMau } from "./DocLaSoMau";
+import { DuongDan } from "@/components/khung/DuongDan";
+import { duongDanCum } from "@/lib/duong-dan";
 
 export const revalidate = 21600;
 
@@ -49,17 +51,13 @@ export default async function Page({ params: thamSo }: Props) {
       about: ldThucThe("tu-vi"), articleSection: m.buoc.map((b) => b.tieu_de),
       ...(m.ngay_dang ? { datePublished: m.ngay_dang, dateModified: m.cap_nhat ?? m.ngay_dang } : {}),
     },
-    ldDuongDan([
-      { ten: "Trang chủ", duong: "/" }, { ten: "Tử vi", duong: "/tu-vi" }, { ten: "Lá số mẫu", duong: "/tu-vi/la-so-mau" }, { ten: m.tieu_de, duong },
-    ]),
+    ldDuongDan(duongDanCum({ ten: "Lá số mẫu", duong: "/tu-vi/la-so-mau" }, { ten: m.tieu_de, duong })),
   );
   const [nam, thang, ngay] = m.ngay.split("-");
   return (
     <article className="mx-auto max-w-5xl">
       <JsonLd data={ld} />
-      <nav aria-label="Đường dẫn" className="text-xs text-fg-faint">
-        <Link href="/tu-vi" className="hover:text-fg">Tử vi</Link> › <Link href="/tu-vi/la-so-mau" className="hover:text-fg">Lá số mẫu</Link> ›
-      </nav>
+      <DuongDan ds={duongDanCum({ ten: "Lá số mẫu", duong: "/tu-vi/la-so-mau" }, { ten: m.tieu_de, duong })} />
       <header className="mt-3">
         <p className="eyebrow">{m.ten} · {m.gioi_tinh === "nam" ? "Nam" : "Nữ"} · sinh {ngay}/{thang}/{nam} lúc {m.gio}</p>
         <h1 className="mt-1 text-3xl leading-tight sm:text-5xl">{m.tieu_de}</h1>

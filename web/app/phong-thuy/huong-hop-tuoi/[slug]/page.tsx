@@ -14,6 +14,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
 import { cungPhi, dsCungPhi, duongTuoi, type CungPhi, type HuongDuNien } from "@/lib/kien-thuc";
 import { anhBai, catMoTa, goiLd, ldAnh, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
+import { DuongDan } from "@/components/khung/DuongDan";
+import { duongDanCum } from "@/lib/duong-dan";
 
 export const revalidate = 21600;
 
@@ -89,17 +91,12 @@ export default async function Page({ params: thamSo }: Props) {
     { "@type": "WebPage", "@id": `${urlDayDu(duong)}#trang`, url: urlDayDu(duong), name: c.tieu_de, inLanguage: "vi-VN",
       isPartOf: { "@id": `${siteUrl()}/#website` }, primaryImageOfPage: ldAnh(anh, c.tieu_de) },
     ldHoiDap(c.hoi_dap),
-    ldDuongDan([
-      { ten: "Trang chủ", duong: "/" }, { ten: "Phong thuỷ", duong: "/phong-thuy" },
-      { ten: "Hướng hợp tuổi", duong: "/phong-thuy/huong-hop-tuoi" }, { ten: `Cung ${c.quai}`, duong },
-    ]),
+    ldDuongDan(duongDanCum({ ten: "Hướng hợp tuổi", duong: "/phong-thuy/huong-hop-tuoi" }, { ten: `Cung ${c.quai}`, duong })),
   );
   return (
     <article className="mx-auto max-w-3xl" data-testid="cung-phi">
       <JsonLd data={ld} />
-      <nav aria-label="Đường dẫn" className="text-xs text-fg-faint">
-        <Link href="/phong-thuy" className="hover:text-fg">Phong thuỷ</Link> › <Link href="/phong-thuy/huong-hop-tuoi" className="hover:text-fg">Hướng hợp tuổi</Link>
-      </nav>
+      <DuongDan ds={duongDanCum({ ten: "Hướng hợp tuổi", duong: "/phong-thuy/huong-hop-tuoi" }, { ten: `Cung ${c.quai}`, duong })} />
       <header className="mt-4">
         <h1 className="text-3xl leading-tight sm:text-5xl">{c.tieu_de}</h1>
         <p className="mt-3 text-sm text-fg-muted">

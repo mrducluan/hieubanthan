@@ -4,10 +4,19 @@
 // KHÔNG đưa vào đây: câu cam kết dữ liệu (link "không có ngày sinh", ô đồng ý lưu ghi chú…) và câu tỉ lệ "x% thấy đúng" —
 // đó là lời hứa về hệ thống, sửa tự do dễ thành nói sai; đổi bằng PR như trang pháp lý. Mã đo (feedback_submitted…) không
 // phụ thuộc chữ: đổi nhãn nút không làm lệch số Gate.
-import type { BangChu } from "@/lib/chu-trang";
+import type { BangChu, MucChu } from "@/lib/chu-trang";
+import { THANH_MANG, khoaChu } from "@/lib/thanh-mang";
 
 const HS = "Form hồ sơ", CV = "Ô vào trang chủ", HD = "Khung hỏi đáp", L = "Báo lỗi";
 const GB = "Góp ý cuối bài", GC = "Góp ý dưới câu trả lời", KC = "Kiểm chứng “Đúng với mình”", CS = "Nút chia sẻ", BD = "Bài đọc";
+
+// TM-1: nhãn thanh mảng (dải điều hướng dưới menu chính ở trang của từng mảng). Chỉ đổi CHỮ — đường dẫn, thứ tự, số
+// trang khoá trong code (lib/thanh-mang.ts). Sinh từ THANH_MANG để thêm mục là có ô sửa ngay.
+const CHU_THANH: Record<string, MucChu> = Object.fromEntries(THANH_MANG.flatMap((t) => [
+  [`thanh.${t.ma}.ten`, { nhom: `Thanh mảng · ${t.ten}`, nhan: "Tên mảng (đầu thanh)", mac_dinh: t.ten, toi_da: 24 }],
+  ...t.muc.map((m, i) => [khoaChu(t, m), { nhom: `Thanh mảng · ${t.ten}`,
+    nhan: i === 0 ? `Mục đầu — mở công cụ (${m.duong})` : `Mục ${m.duong}`, mac_dinh: m.nhan, toi_da: 28 }]),
+]));
 
 export const CHU_CHUNG = {
   "ho_so.ho_ten": { nhom: HS, nhan: "Nhãn ô họ tên", mac_dinh: "Họ và tên đầy đủ", toi_da: 40 },
@@ -70,4 +79,5 @@ export const CHU_CHUNG = {
 
   "doc.vi_sao": { nhom: BD, nhan: "Nút mở căn cứ (thuật ngữ) dưới mỗi hộp / câu trả lời", mac_dinh: "Vì sao nói vậy", toi_da: 30 },
   "doc.tai_anh": { nhom: BD, nhan: "Nút tải ảnh lá số / tứ trụ", mac_dinh: "Tải ảnh", toi_da: 30 },
+  ...CHU_THANH,
 } as const satisfies BangChu;

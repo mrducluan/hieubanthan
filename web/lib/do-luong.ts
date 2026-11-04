@@ -52,7 +52,9 @@ export type SuKien =
   | "hub_viewed"
   // CTA-2: khối thẻ cuối trang (Kiến thức {mảng}, Bài viết liên quan, Đọc tiếp…) — thấy khối (lap=0) / thấy từng thẻ bù
   // (lap=1, den = đường dẫn thẻ) / bấm thẻ (lap=1 thẻ bù, 0 = thẻ thật). Chỉ mã khối + đường dẫn trong site.
-  | "end_cta_viewed" | "end_cta_clicked";
+  | "end_cta_viewed" | "end_cta_clicked"
+  // TM-1: bấm thanh mảng (dải điều hướng dưới menu chính) — tu = mã mảng của thanh, den = mã mục, trang = đường dẫn đang xem
+  | "nav_bar_clicked";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {

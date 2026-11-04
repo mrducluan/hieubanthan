@@ -142,7 +142,7 @@ export function ThanhChuongGon({ ds, dang, onChon }: { ds: MucChuong[]; dang: st
   return (
     <>
     <div ref={moc} aria-hidden className="h-px lg:hidden" />
-    <div className="sticky top-16 z-20 -mx-5 h-0 sm:-mx-8 lg:hidden print:hidden">
+    <div className="sticky top-[calc(4rem+var(--tm-h,0px))] z-20 -mx-5 h-0 transition-[top] duration-200 motion-reduce:transition-none sm:-mx-8 lg:hidden print:hidden">
     <div ref={goc} data-testid="lg-thanh-chuong" data-mo={mo ? "1" : "0"} data-hien={daQua ? "1" : "0"}
       className={cn("absolute inset-x-0 top-0 transition-[opacity,transform,visibility] duration-200 motion-reduce:transition-none",
         daQua ? "visible translate-y-0 opacity-100" : "pointer-events-none invisible -translate-y-1 opacity-0")}>
@@ -179,7 +179,7 @@ export function CotChuong({ ds, dang, onChon, moTatCa }: {
   const viTri = Math.max(0, ds.findIndex((c) => c.ma === dang));
   const daMo = ds.filter((c) => c.mo).length, coThe = ds.filter((c) => !c.khoa).length;
   return (
-    <nav aria-label="Các chương" className="sticky top-24 hidden self-start text-sm lg:block print:hidden" data-testid="lg-cot-chuong">
+    <nav aria-label="Các chương" className="sticky top-[calc(6rem+var(--tm-h,0px))] hidden self-start text-sm lg:block print:hidden" data-testid="lg-cot-chuong">
       <div className="rounded-2xl border border-line/70 bg-surface/50 p-3">
         <div className="flex items-center justify-between px-2">
           <span className="eyebrow">Chương {viTri + 1}/{ds.length}</span>

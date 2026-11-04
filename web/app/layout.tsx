@@ -10,6 +10,8 @@ import { GhiVaoTrang } from "@/components/khung/GhiVaoTrang";
 import { ChanTrang, KhungChanTrang } from "@/components/khung/ChanTrang";
 import { COT_CHAN_TRANG } from "@/lib/menu-chan-trang";
 import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
+import { ThanhMang } from "@/components/khung/ThanhMang";
+import { ThanhMangDem } from "@/components/khung/ThanhMangDem";
 import { TabDuoiCms, ThanhTrenCms } from "@/components/khung/MenuCms";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { GhiGioiThieu } from "@/components/khung/GhiGioiThieu";
@@ -96,6 +98,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <Suspense fallback={null}><XemNhap /></Suspense>
         <Suspense fallback={null}><ThongBaoSite /></Suspense>
         <Suspense fallback={<ThanhTren />}><ThanhTrenCms /></Suspense>
+        {/* TM-1: thanh mảng (chỉ hiện ở trang của 6 mảng) — hiện ngay, số trang mỗi cụm điền vào khi engine trả. */}
+        <ChuChung chu={chuChung}><Suspense fallback={<ThanhMang />}><ThanhMangDem /></Suspense></ChuChung>
         <main id="noi-dung" className="container pb-12 pt-6 md:pb-16 md:pt-10">
           <ChuChung chu={chuChung}>{children}</ChuChung>
         </main>

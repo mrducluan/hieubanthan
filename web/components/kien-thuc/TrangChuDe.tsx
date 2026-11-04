@@ -5,13 +5,17 @@ import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { CHU_DE, HINH_CHU_DE, TEN_MANG_SILO, duongTrang, mucLuc, truCua } from "@/lib/kien-thuc";
+import { CHU_DE, HINH_CHU_DE, duongTrang, mucLuc, truCua } from "@/lib/kien-thuc";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang } from "@/components/minh-hoa/TrangTri";
 import { goiLd, ldDuongDan, ldThucThe, mangTheoDuong, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { DuongDan } from "@/components/khung/DuongDan";
+import { duongDanCum } from "@/lib/duong-dan";
+import { DanhSachCum } from "@/components/kien-thuc/DanhSachCum";
+import { mucLucCum } from "@/lib/nhom-cum";
 
 // Chủ đề kiến thức → mảng bài CMS, suy từ trang công cụ của chủ đề (CHU_DE[x].mang) — thêm chủ đề không phải sửa ở đây.
 const MANG_CONG_CU: Record<string, string> = {
@@ -33,6 +37,9 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
   const ds = tatCa.filter((t) => t.loai === cd.loai);
   // SEO-L3: cụm rỗng = engine chưa trả mục lục (lỗi) → 5xx thay vì trang 200 rỗng (soft-404).
   if (ds.length === 0) throw new Error("engine chưa trả mục lục kiến thức");
+  const dd = duongDanCum({ ten: cd.ten, duong });
+  // TM-1 (C-2): cụm dài (≥ 40 trang) có mục lục theo nhóm + lọc nhanh; cụm ngắn giữ lưới phẳng.
+  const ml = mucLucCum(khoa, ds.map((t) => ({ duong: duongTrang(t.loai, t.slug), tieu_de: t.tieu_de, mo_ta: t.mo_ta })));
   return (
     <div className="mx-auto max-w-4xl">
       <JsonLd data={goiLd(
@@ -41,14 +48,14 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
           about: [ldThucThe(mangTheoDuong(duong))].filter(Boolean),
           mainEntity: { "@type": "ItemList", numberOfItems: ds.length,
             itemListElement: ds.map((t, i) => ({ "@type": "ListItem", position: i + 1, url: urlDayDu(duongTrang(t.loai, t.slug)), name: t.tieu_de })) } },
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: TEN_MANG_SILO[tru] ?? "Kiến thức", duong: tru }, { ten: cd.ten, duong }]),
+        ldDuongDan(dd),
       )} />
-      <nav aria-label="Đường dẫn" className="text-xs text-fg-faint"><Link href={tru} className="hover:text-fg">{TEN_MANG_SILO[tru] ?? "Kiến thức"}</Link> ›</nav>
+      <DuongDan ds={dd} />
       <HinhMang kieu={HINH_CHU_DE[khoa] ?? "than-so"} className="mt-4 h-20" />
       <h1 className="mt-3 text-4xl sm:text-5xl">{nd.dau.h1 ?? cd.ten}</h1>
       <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{cd.mo_ta}</LoiDanCms>
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-8" />
-      <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+      {ml ? <DanhSachCum ml={ml} /> : <ul className="mt-8 grid gap-3 sm:grid-cols-2">
         {ds.map((t) => (
           <li key={t.slug}>
             <Link href={duongTrang(t.loai, t.slug)} className="glass block h-full rounded-2xl p-5 transition-colors hover:border-gold/50">
@@ -57,7 +64,7 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
             </Link>
           </li>
         ))}
-      </ul>
+      </ul>}
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-12" />
       <Suspense fallback={null}><BaiLienQuanMang mang={MANG_CONG_CU[cd.mang] ?? null} className="mt-12" tru={tru} boQua={[duong]} duong={duong} /></Suspense>
     </div>

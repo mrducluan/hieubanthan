@@ -47,3 +47,8 @@ export function duongTrangKb(loai: string, slug: string): string | null {
   const goc = k ? (CHUYEN.chu_de as Record<string, string>)[k] : undefined;
   return goc && /^[a-z0-9-]+$/.test(slug) ? `${goc}/${slug}` : null;
 }
+
+/** Trang công cụ = trang trụ (pillar) của silo; tên hiện ở breadcrumb và khối "Kiến thức {mảng}". Dùng được ở trình duyệt. */
+export const TEN_MANG_SILO: Record<string, string> = {
+  "/than-so": "Thần số học", "/hop-doi": "Hợp đôi", "/tu-vi": "Tử vi", "/bat-tu": "Bát tự", "/kinh-dich": "Kinh Dịch", "/phong-thuy": "Phong thuỷ",
+};
