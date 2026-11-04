@@ -1,0 +1,458 @@
+{
+ "_nguon": "CY-1 (2026-11-04, chủ dự án giao) — MỘT nguồn cho lời \"năm nên chú ý {mảng} hơn\" ở mọi mảng đời người dùng hay lo (tiền bạc, công việc, tình cảm, gia đạo, nhà cửa, đi lại, giấy tờ, bạn bè) — mở rộng cách làm SK-1 (suc_khoe_kb.json) sang mảng khác: năm do phép tính CÓ SẴN chỉ ra (dòng mười năm Tử vi, lưu niên Bát tự hai cách, năm cá nhân Thần số, sao lưu niên Huyền Không), lời là LỜI NHẮC chủ động (việc cụ thể nên làm), không phải lời đoán; không đổi mức chương nào. Cách đọc theo cung (Tử vi Đẩu Số Toàn Thư), thập thần (Uyên Hải Tử Bình), năm cá nhân (thần số Pitago), sao lưu niên (Thẩm thị Huyền Không) — nháp ban biên tập, chưa đối chiếu nguyên văn. Cấm: \"sẽ mất tiền / sẽ phá sản / sẽ ly hôn / sẽ bị kiện / sẽ gặp tai nạn\", từ doạ, vật phẩm, giải hạn.",
+ "source": {
+  "tvds_toan_thu": "Tử Vi Đẩu Số Toàn Thư (mười hai cung, lưu niên, tứ hoá)",
+  "tu_binh": "Uyên Hải Tử Bình, Tử Bình Chân Thuyên (thập thần, lưu niên, xung hình)",
+  "thanso_pitago": "Thần số Pitago (năm cá nhân)",
+  "tham_thi": "Thẩm thị Huyền Không học (sao lưu niên)"
+ },
+ "source_id": "tvds_toan_thu",
+ "school_id": "doi_song_chu_y",
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "mang": {
+  "tien_bac": {
+   "ten": "tiền bạc",
+   "viec": "hạn chế cho vay, đứng tên bảo lãnh cho người khác; chia nhỏ khoản chi lớn và giữ một quỹ dự phòng đủ vài tháng",
+   "viec_nay": "rà lại các khoản đang cho vay, đang góp; khoản chi lớn còn lại của năm nên chia nhỏ và giữ quỹ dự phòng",
+   "ranh_gioi": "Lời nhắc về tiền ở đây là để chủ động giữ tiền, không phải lời khuyên đầu tư — việc lớn nên tính theo số liệu thật và hỏi người có chuyên môn.",
+   "tuvi": {
+    "cung": "Tài Bạch",
+    "source_id": "tvds_toan_thu",
+    "school_id": "nam_phai_viet"
+   },
+   "battu": {
+    "thap_than": [
+     "Kiếp Tài",
+     "Tỷ Kiên"
+    ],
+    "ly": "năm {tt}: tiền dễ bị chia, dễ hao vì người ngang hàng rủ rê",
+    "source_id": "tu_binh",
+    "school_id": "tu_binh"
+   },
+   "thanso": {
+    "so": {
+     "4": "năm cá nhân 4 — năm của kỷ luật, làm từng bước",
+     "8": "năm cá nhân 8 — năm của tiền và quyết định lớn"
+    },
+    "source_id": "thanso_pitago",
+    "school_id": "pitago"
+   },
+   "phongthuy": {
+    "sao": {
+     "7": "sao 7 (Thất Xích) bay tới phía cửa chính — sách xưa gắn với tiêu xài, thị phi"
+    },
+    "source_id": "tham_thi",
+    "school_id": "huyen_khong"
+   }
+  },
+  "cong_viec": {
+   "ten": "công việc",
+   "viec": "giữ quan hệ tốt với cấp trên và đồng nghiệp, cập nhật kỹ năng; không bỏ việc khi chưa có chỗ mới",
+   "viec_nay": "làm rõ phần việc của mình với cấp trên, ghi lại kết quả đã làm; nếu muốn đổi việc thì tìm chỗ mới trước rồi mới nghỉ",
+   "ranh_gioi": "Đây là lời nhắc để chủ động giữ việc, không phải lời đoán chuyện được hay mất việc — quyết định lớn nên dựa trên điều kiện thật của bạn.",
+   "tuvi": {
+    "cung": "Quan Lộc",
+    "source_id": "tvds_toan_thu",
+    "school_id": "nam_phai_viet"
+   },
+   "battu": {
+    "thap_than": [
+     "Thất Sát"
+    ],
+    "ly": "năm {tt}: áp lực công việc dồn lên, dễ bị thúc ép",
+    "source_id": "tu_binh",
+    "school_id": "tu_binh"
+   },
+   "thanso": {
+    "so": {
+     "7": "năm cá nhân 7 — năm chậm lại, nhìn lại hướng đi",
+     "9": "năm cá nhân 9 — năm khép lại một chặng việc"
+    },
+    "source_id": "thanso_pitago",
+    "school_id": "pitago"
+   }
+  },
+  "tinh_cam": {
+   "ten": "chuyện tình cảm",
+   "viec": "nói rõ điều mình mong với người kia, dành thời gian riêng cho hai người; tránh quyết định lớn lúc đang giận",
+   "viec_nay": "hẹn một buổi nói chuyện thẳng thắn về điều cả hai đang mong; chuyện lớn để qua cơn giận rồi mới bàn",
+   "ranh_gioi": "Không ai nói trước được hai người có chia tay hay không; điều nên làm là chăm chút chuyện tình cảm hơn vào những lúc này.",
+   "tuvi": {
+    "cung": "Phu Thê",
+    "source_id": "tvds_toan_thu",
+    "school_id": "nam_phai_viet"
+   },
+   "battu": {
+    "quan_he": "ngay",
+    "ly": "năm {chi} va chạm với chi ngày (cung người bạn đời)",
+    "source_id": "tu_binh",
+    "school_id": "tu_binh"
+   },
+   "thanso": {
+    "so": {
+     "2": "năm cá nhân 2 — năm nhạy cảm, cần nhiều kiên nhẫn trong quan hệ",
+     "9": "năm cá nhân 9 — năm khép lại, dễ buông những gì đã cũ"
+    },
+    "source_id": "thanso_pitago",
+    "school_id": "pitago"
+   }
+  },
+  "gia_dao": {
+   "ten": "chuyện trong nhà",
+   "viec": "dành thời gian cho người nhà, nói chuyện sớm khi có điều chưa vui; việc chung của nhà nên bàn cả nhà",
+   "viec_nay": "chọn một buổi trong tuần ăn cơm, nói chuyện với cả nhà; điều chưa vui nên nói sớm, nói nhẹ",
+   "ranh_gioi": "Đây là lời nhắc để chăm chút không khí trong nhà, không phải lời đoán chuyện xào xáo.",
+   "tuvi": {
+    "cung": "Tử Nữ",
+    "source_id": "tvds_toan_thu",
+    "school_id": "nam_phai_viet"
+   },
+   "battu": {
+    "quan_he": "thang_gio",
+    "ly": "năm {chi} xung trụ tháng hoặc trụ giờ (gốc gác, con cái)",
+    "source_id": "tu_binh",
+    "school_id": "tu_binh"
+   },
+   "thanso": {
+    "so": {
+     "6": "năm cá nhân 6 — năm của gia đình và trách nhiệm"
+    },
+    "source_id": "thanso_pitago",
+    "school_id": "pitago"
+   }
+  },
+  "nha_cua": {
+   "ten": "nhà cửa",
+   "viec": "kiểm tra kỹ giấy tờ trước khi mua bán, đặt cọc; việc sửa lớn nên làm theo kế hoạch, có dự phòng tiền và thời gian",
+   "viec_nay": "đọc kỹ giấy tờ nhà đất trước khi ký hay đặt cọc; việc sửa lớn còn lại của năm nên lên kế hoạch và dự phòng",
+   "ranh_gioi": "Đây là lời nhắc để cẩn thận với việc nhà đất, không phải lời khuyên mua bán — giá và pháp lý nên hỏi người có chuyên môn.",
+   "tuvi": {
+    "cung": "Điền Trạch",
+    "source_id": "tvds_toan_thu",
+    "school_id": "nam_phai_viet"
+   },
+   "battu": {
+    "quan_he": "ngay_xung",
+    "ly": "năm {chi} xung chi ngày — dễ xáo trộn chỗ ở",
+    "source_id": "tu_binh",
+    "school_id": "tu_binh"
+   },
+   "thanso": {
+    "so": {
+     "4": "năm cá nhân 4 — năm xây nền, hợp làm chắc từng việc"
+    },
+    "source_id": "thanso_pitago",
+    "school_id": "pitago"
+   },
+   "phongthuy": {
+    "sao": {
+     "5": "sao 5 (Ngũ Hoàng) bay tới phía cửa chính — sách xưa khuyên giữ yên phía đó"
+    },
+    "source_id": "tham_thi",
+    "school_id": "huyen_khong"
+   }
+  },
+  "di_lai": {
+   "ten": "đi lại",
+   "viec": "kiểm tra xe trước chuyến xa, đội mũ bảo hiểm, thắt dây an toàn; không lái xe khi mệt hay đã uống rượu bia",
+   "viec_nay": "bảo dưỡng xe, sắp chuyến xa vào lúc khoẻ; không lái xe khi mệt hay đã uống rượu bia",
+   "ranh_gioi": "Không ai nói được có xảy ra va chạm hay không; điều nên làm là giữ thói quen đi lại an toàn mỗi ngày.",
+   "tuvi": {
+    "cung": "Thiên Di",
+    "source_id": "tvds_toan_thu",
+    "school_id": "nam_phai_viet"
+   },
+   "battu": {
+    "quan_he": "nam",
+    "ly": "năm {chi} xung chi năm sinh — năm hay xê dịch, dễ vội",
+    "source_id": "tu_binh",
+    "school_id": "tu_binh"
+   },
+   "thanso": {
+    "so": {
+     "5": "năm cá nhân 5 — năm thay đổi, đi lại nhiều"
+    },
+    "source_id": "thanso_pitago",
+    "school_id": "pitago"
+   }
+  },
+  "giay_to": {
+   "ten": "giấy tờ",
+   "viec": "đọc kỹ hợp đồng trước khi ký, giữ bản sao giấy tờ quan trọng; việc tranh chấp nên hỏi luật sư sớm",
+   "viec_nay": "rà lại hợp đồng, giấy tờ đang có hiệu lực; chỗ nào chưa rõ thì hỏi người có chuyên môn trước khi ký thêm",
+   "ranh_gioi": "Không ai nói trước được thắng hay thua một vụ việc; chuyện pháp lý nên hỏi luật sư hoặc cơ quan có thẩm quyền.",
+   "tuvi": {
+    "cung": "Phụ Mẫu",
+    "source_id": "tvds_toan_thu",
+    "school_id": "nam_phai_viet"
+   },
+   "battu": {
+    "thap_than": [
+     "Thương Quan"
+    ],
+    "ly": "năm {tt}: dễ lời qua tiếng lại, va chạm với quy định",
+    "source_id": "tu_binh",
+    "school_id": "tu_binh"
+   },
+   "thanso": {
+    "so": {
+     "8": "năm cá nhân 8 — năm của hợp đồng, quyền lợi"
+    },
+    "source_id": "thanso_pitago",
+    "school_id": "pitago"
+   },
+   "phongthuy": {
+    "sao": {
+     "3": "sao 3 (Tam Bích) bay tới phía cửa chính — sách xưa gắn với lời qua tiếng lại, giấy tờ"
+    },
+    "source_id": "tham_thi",
+    "school_id": "huyen_khong"
+   }
+  },
+  "ban_be": {
+   "ten": "chuyện bạn bè, người ngoài",
+   "viec": "giữ ranh giới với lời rủ góp vốn, làm ăn chung; việc tiền bạc với bạn bè nên ghi rõ ràng bằng giấy",
+   "viec_nay": "khoản góp, cho mượn với bạn bè nên ghi lại rõ ràng; lời rủ làm ăn mới để vài ngày rồi mới trả lời",
+   "ranh_gioi": "Đây là lời nhắc giữ ranh giới, không phải lời đoán ai sẽ làm gì — người cụ thể bạn tự nhìn bằng việc họ làm.",
+   "tuvi": {
+    "cung": "Nô Bộc",
+    "source_id": "tvds_toan_thu",
+    "school_id": "nam_phai_viet"
+   },
+   "battu": {
+    "thap_than": [
+     "Kiếp Tài"
+    ],
+    "ly": "năm {tt}: người ngang hàng dễ lôi kéo, tranh phần",
+    "source_id": "tu_binh",
+    "school_id": "tu_binh"
+   },
+   "thanso": {
+    "so": {
+     "3": "năm cá nhân 3 — năm giao du, dễ hứa nhiều",
+     "5": "năm cá nhân 5 — năm gặp nhiều người mới"
+    },
+    "source_id": "thanso_pitago",
+    "school_id": "pitago"
+   }
+  }
+ },
+ "chuong": {
+  "_ghi_chu": "Chương báo cáo đời sống → các mảng chú ý (mảng đầu đứng trước trong hộp). Sức khoẻ có hộp riêng SK-1. Giấy tờ ở chương Bạn bè / người ngoài như khung Cần lưu ý (MT-ĐS: pháp lý đọc cùng người ngoài) — dòng giấy tờ của khung chỉ đọc năm của chính chương đó (chương khoá không lộ).",
+  "tuvi": {
+   "su_nghiep": [
+    "cong_viec"
+   ],
+   "tien_bac": [
+    "tien_bac"
+   ],
+   "tinh_cam": [
+    "tinh_cam"
+   ],
+   "gia_dinh": [
+    "gia_dao"
+   ],
+   "quan_he": [
+    "ban_be",
+    "di_lai",
+    "giay_to"
+   ],
+   "nha_cua": [
+    "nha_cua"
+   ]
+  },
+  "battu": {
+   "su_nghiep": [
+    "cong_viec"
+   ],
+   "tien_bac": [
+    "tien_bac"
+   ],
+   "tinh_cam": [
+    "tinh_cam"
+   ],
+   "gia_dinh": [
+    "gia_dao"
+   ],
+   "quan_he": [
+    "ban_be",
+    "di_lai",
+    "giay_to"
+   ]
+  },
+  "thanso": {
+   "su_nghiep": [
+    "tien_bac",
+    "cong_viec"
+   ]
+  },
+  "phongthuy": {
+   "nam_nay": [
+    "tien_bac",
+    "giay_to",
+    "nha_cua"
+   ]
+  }
+ },
+ "mau": {
+  "nam": "Năm {nam} nên chú ý {mang} hơn: {viec}.",
+  "nam_nay": "Năm {nam} (năm đang đi) nên chú ý {mang} hơn: {viec}.",
+  "tieu_de": "Năm nên chú ý {mang} hơn",
+  "khong_noi_chac": "Không ai nói chắc được chuyện này có xảy ra hay không, nên câu trả lời ở đây không phải có hay không.",
+  "khong_nam": "Mười năm tới không có năm nào nổi riêng về {mang}; giữ nếp đều là đủ.",
+  "may_rui": "Năm, tháng nào cũng vậy, nên giữ tiền cho việc chính và tránh các khoản may rủi.",
+  "tai_nan_nang": "Điều này hệ thống không xem được và không bàn tới. Điều nên làm là giữ thói quen đi lại an toàn: kiểm tra xe, đội mũ bảo hiểm, không lái xe khi mệt hay đã uống rượu bia.",
+  "tuyen_dung": "Khi tuyển hay giữ người, nên dựa vào kỹ năng, kết quả làm việc và một buổi trao đổi thẳng thắn — công bằng cho người ứng tuyển và chắc hơn cho bạn.",
+  "van_han_chung": "Về vận hạn của bạn: {ds}",
+  "van_han_khong": "Mười năm tới không có năm nào nổi hẳn ở các mảng hay lo; giữ nếp đều là đủ.",
+  "thanso_dau": "Thần số không đoán được sự việc; điều con số nói được là năm nào nên chú ý hơn.",
+  "nam_khong": "Năm {nam} không nằm trong những năm nổi riêng về {mang}; việc nên giữ: {viec}.",
+  "nam_khac": "Những năm nên chú ý {mang} hơn trong mười năm tới: {nam}.",
+  "hh_dau": "Điều lá số nói được là nhịp thời gian và việc nên chuẩn bị, ở phần dưới."
+ },
+ "hoi": {
+  "_ghi_chu": "Từ khoá (chữ đã bỏ dấu) nhận câu hỏi về điều người dùng lo ở từng mảng → mảng chú ý. Thứ tự là ưu tiên.",
+  "giay_to": [
+   "kien",
+   "kien tung",
+   "phap ly",
+   "giay to",
+   "hop dong",
+   "tranh chap",
+   "hau toa",
+   "ra toa",
+   "bi phat"
+  ],
+  "di_lai": [
+   "tai nan",
+   "va cham",
+   "di lai",
+   "lai xe",
+   "chay xe",
+   "di duong",
+   "an toan",
+   "di xa"
+  ],
+  "ban_be": [
+   "bi lua",
+   "lua dao",
+   "bi phan boi",
+   "tieu nhan",
+   "bi hai",
+   "bi lat"
+  ],
+  "nha_cua": [
+   "mua nha",
+   "ban nha",
+   "mua dat",
+   "ban dat",
+   "nha dat",
+   "nha cua",
+   "chuyen nha",
+   "sua nha",
+   "xay nha",
+   "bat dong san"
+  ],
+  "tien_bac": [
+   "mat tien",
+   "pha san",
+   "vo no",
+   "no nan",
+   "hao tai",
+   "thua lo",
+   "lo von",
+   "dau tu",
+   "chung khoan",
+   "crypto",
+   "coin",
+   "tien bac",
+   "tai chinh",
+   "tien",
+   "cho vay",
+   "lam an"
+  ],
+  "cong_viec": [
+   "mat viec",
+   "bi sa thai",
+   "that nghiep",
+   "duoi viec",
+   "cong viec",
+   "su nghiep"
+  ],
+  "tinh_cam": [
+   "do vo",
+   "chia tay",
+   "ly hon",
+   "ly di",
+   "tinh cam",
+   "tinh duyen",
+   "hon nhan",
+   "vo chong",
+   "nguoi yeu"
+  ],
+  "gia_dao": [
+   "gia dao",
+   "bat hoa",
+   "xao xao",
+   "cai nhau trong nha",
+   "gia dinh"
+  ]
+ },
+ "hoi_lo": [
+  "co bi",
+  "co (mat|gap|thang|thua|do vo|pha san|vo no)",
+  "(?<!\\w)bi (lua|kien|mat|sa thai|duoi|phat|tai nan|hai|lat|phan boi|thua)",
+  "can than",
+  "chu y",
+  "de y",
+  "nam nao",
+  "co nen",
+  "(?<!\\w)xau(?!\\w)",
+  "(?<!\\w)xui",
+  "(?<!\\w)(so|lo) (bi|mat|gap|vo|pha|thua)",
+  "do vo",
+  "pha san",
+  "vo no",
+  "mat viec",
+  "nguy hiem",
+  "rui ro",
+  "an toan",
+  "rac roi"
+ ],
+ "van_han": [
+  "van han",
+  "han nam",
+  "nam han",
+  "nam xui",
+  "xui xeo",
+  "nam nay co xau",
+  "nam sau co xau",
+  "van nam",
+  "co gi xau"
+ ],
+ "cum_cam": [
+  "sẽ mất tiền",
+  "sẽ phá sản",
+  "sẽ ly hôn",
+  "sẽ chia tay",
+  "sẽ bị kiện",
+  "sẽ gặp tai nạn",
+  "sẽ bị tai nạn",
+  "sẽ mất việc",
+  "sẽ bị lừa",
+  "sẽ thua kiện",
+  "sẽ đổ vỡ",
+  "phá sản",
+  "tán gia bại sản",
+  "tai hoạ",
+  "tai họa",
+  "đại hung",
+  "xui xẻo",
+  "mất mạng",
+  "giải hạn",
+  "vật phẩm",
+  "cúng sao",
+  "dâng sao"
+ ]
+}
