@@ -20,7 +20,10 @@ const mangHuyenHoc = (coHoiAi: boolean, nhanTren: string): BangChu => gopBang(KH
   ...(coHoiAi ? { "hoi.tieu_de": { nhom: "Hỏi đáp", nhan: "Tiêu đề khung hỏi đáp", mac_dinh: "Hỏi đáp chuyên sâu", toi_da: 60 } } : {}),
 });
 
-export const CHU_TU_VI = mangHuyenHoc(true, "Lá số 12 cung · Tử vi Đẩu Số");
+export const CHU_TU_VI = gopBang(mangHuyenHoc(true, "Lá số 12 cung · Tử vi Đẩu Số"), {
+  // TV-HOA-HAN: dải 12 giai đoạn 10 năm dưới lá số (chạm → năm xem nhảy tới đầu giai đoạn).
+  "dai_han.tieu_de": { nhom: "Lá số", nhan: "Tiêu đề dải giai đoạn 10 năm dưới lá số", mac_dinh: "Các giai đoạn 10 năm — chạm để xem", toi_da: 80 },
+});
 export const CHU_BAT_TU = mangHuyenHoc(true, "Tứ trụ · ngũ hành · thập thần");
 export const CHU_PHONG_THUY = mangHuyenHoc(true, "Hướng nhà · bố trí · Bát trạch");
 export const CHU_KINH_DICH = mangHuyenHoc(false, "Gieo quẻ · 64 quẻ · lời hào");

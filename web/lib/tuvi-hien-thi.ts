@@ -82,3 +82,25 @@ export function tamPhuong(chi: string): { tam_hop: string[]; xung: string } {
 export function tachTuTru(s: string): string[] {
   return s.split(/\s*-\s*/).filter(Boolean);
 }
+
+// TV-HOA-HAN — tứ hoá của lớp hạn (đại hạn / năm xem) đặt lên lá số. Engine trả `tu_hoa_sao` (sao + cung gốc nơi sao
+// đóng); web chỉ LỌC theo cung để vẽ, không tra bảng tứ hoá.
+export const TEN_HOA_MA = { loc: "Lộc", quyen: "Quyền", khoa: "Khoa", ky: "Kỵ" } as const;
+export type MaHoa = keyof typeof TEN_HOA_MA;
+export type LopHanMa = "dh" | "ln";
+/** Nhãn nhỏ của huy hiệu trên lá số: ĐH = đại hạn 10 năm, Năm = năm đang xem. */
+export const NHAN_LOP_HAN: Record<LopHanMa, string> = { dh: "ĐH", ln: "Năm" };
+export interface HoaHan { lop: LopHanMa; hoa: MaHoa; sao: string; chi_so: number | null; cung: string | null; chinh_tinh: boolean }
+type CoHoaHan = { tu_hoa_sao?: Omit<HoaHan, "lop">[] };
+
+/** Hoá của các lớp hạn đang bật (đại hạn trước, năm xem sau). Engine cũ không có `tu_hoa_sao` → mảng rỗng. */
+export function hoaHanDangBat(
+  vanHan: { dai_han: CoHoaHan; luu_nien: CoHoaHan } | null | undefined,
+  lop: { dai_han: boolean; luu_nien: boolean },
+): HoaHan[] {
+  if (!vanHan) return [];
+  return [
+    ...(lop.dai_han ? (vanHan.dai_han.tu_hoa_sao ?? []).map((x) => ({ ...x, lop: "dh" as const })) : []),
+    ...(lop.luu_nien ? (vanHan.luu_nien.tu_hoa_sao ?? []).map((x) => ({ ...x, lop: "ln" as const })) : []),
+  ];
+}

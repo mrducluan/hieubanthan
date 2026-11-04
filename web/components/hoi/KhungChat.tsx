@@ -53,6 +53,8 @@ interface Props {
   goiYO?: string;
   /** Câu hỏi đẩy từ ngoài vào (vd bấm một cung trên lá số); đổi `lan` để hỏi lại. */
   cauNgoai?: { cau: string; lan: number } | null;
+  /** TV-HOA-HAN: câu CHỈ điền sẵn vào ô (không tự gửi — người dùng tự đọc, sửa, bấm gửi); đổi `lan` để điền lại. */
+  cauDienSan?: { cau: string; lan: number } | null;
   /** Tên mảng cho đo lường (không gửi nội dung câu hỏi). */
   moDun: string;
   className?: string;
@@ -60,7 +62,7 @@ interface Props {
 
 // Mỗi mảng một khung chat (chủ dự án chốt): lịch sử trong phiên, gợi ý câu hỏi, không lưu phía server
 // ngoài nhật ký ẩn danh đã lọc (0004/0005).
-export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi của bạn", goiYO, cauNgoai, moDun, className }: Props) {
+export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi của bạn", goiYO, cauNgoai, cauDienSan, moDun, className }: Props) {
   const cc = useChuChung();
   const [tin, setTin] = useState<Tin[]>([]);
   const [cau, setCau] = useState("");
@@ -92,6 +94,18 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
     return () => { huy = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- một lần khi mở trang
   }, []);
+
+  // TV-HOA-HAN: điền sẵn từ ngoài (vd "Hỏi về sao này" ở thẻ chi tiết cung) — chỉ điền + đưa ô nhập vào màn hình.
+  useEffect(() => {
+    if (!cauDienSan) return;
+    setCau(cauDienSan.cau);
+    requestAnimationFrame(() => {
+      const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      vung.current?.scrollIntoView({ block: "center", behavior: giam ? "auto" : "smooth" });
+      oNhap.current?.focus({ preventScroll: true });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ khi có câu điền sẵn mới
+  }, [cauDienSan?.lan]);
 
   // Một lần cuộn duy nhất tới khung (khung chờ / câu trả lời mới). Trang ngoài KHÔNG tự cuộn thêm khi đẩy câu vào
   // (hai lệnh cuộn mượt chồng nhau làm màn hình giật). Giảm chuyển động → nhảy thẳng.

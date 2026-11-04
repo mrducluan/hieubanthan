@@ -14,6 +14,7 @@ import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { TruongPhai, type ThangNhuan } from "@/components/huyen-hoc/TruongPhai";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
+import { DaiHanNhay, DongHoaHan } from "@/components/huyen-hoc/HanLaSo";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { LuuNguyet } from "@/components/huyen-hoc/LuuNguyet";
@@ -82,6 +83,8 @@ export function TuVi() {
   const [chon, setChon] = useState<string | null>(null);
   const [cheDo, setCheDo] = useState<"tham_khao" | "chi_tiet">("tham_khao");
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
+  // TV-HOA-HAN: "Hỏi về sao này" chỉ điền sẵn câu vào ô hỏi đáp (người dùng tự bấm gửi).
+  const [cauDienSan, setCauDienSan] = useState<{ cau: string; lan: number } | null>(null);
   const [dangTai, setDangTai] = useState(false);
   const cc = useChuChung();
   const [loiAnh, setLoiAnh] = useState<string | null>(null);
@@ -120,6 +123,14 @@ export function TuVi() {
   const hoi = (cau: string) => {
     setCauNgoai({ cau, lan: Date.now() });
     chatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const dienCau = (cau: string) => setCauDienSan({ cau, lan: Date.now() });
+  // TV-HOA-HAN: chạm một giai đoạn 10 năm → năm xem nhảy tới năm đầu giai đoạn (engine trả), bật lớp đại hạn.
+  const nhayDaiHan = (nam: number) => {
+    setNamXem(Math.min(2100, Math.max(1900, nam)));
+    setLop((l) => ({ ...l, dai_han: true }));
+    ghi("chart_interacted", { mo_dun: "tuvi", kind: "nhay_dai_han" });
   };
 
   useBatDauDoc("tuvi", Boolean(ls));
@@ -224,9 +235,12 @@ export function TuVi() {
                   if (window.matchMedia("(max-width: 639px)").matches) requestAnimationFrame(() => chiTietRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
                 }} />
             </KhungLaSo>
+            <DongHoaHan vh={vh} lop={lop} namXem={namXem} />
+            <DaiHanNhay ls={ls} vh={vh} namXem={namXem} tieuDe={c("dai_han.tieu_de")} onNhay={nhayDaiHan} />
 
             <div ref={chiTietRef} className="scroll-mt-20">
-              <ChiTietCung ls={ls} chi={chiChon} phai={phaiDoSang} vanHan={lop.dai_han || lop.luu_nien ? vh : null} onHoi={hoi} />
+              <ChiTietCung ls={ls} chi={chiChon} phai={phaiDoSang} vanHan={lop.dai_han || lop.luu_nien ? vh : null}
+                hanSao={vh && vh.nam_xem === namXem ? vh : null} onHoi={hoi} onDienCau={dienCau} />
             </div>
             {lnm && lnm.nam_am === namXem ? (
               <LuuNguyet d={lnm} onHoi={hoi} onChonCung={xemCung} />
@@ -283,6 +297,7 @@ export function TuVi() {
           loiChao={laSo ? "Hỏi về một cung, một sao, hoặc hạn hiện tại của bạn." : "Hỏi kiến thức chung về cung, sao, tứ hoá — hoặc bổ sung giờ sinh để hỏi về lá số của bạn."}
           goiY={GOI_Y}
           cauNgoai={cauNgoai}
+          cauDienSan={cauDienSan}
           nhanO="Câu hỏi Tử vi"
           dieuKhien={
             <Tabs value={cheDo} onValueChange={(v) => setCheDo(v as "tham_khao" | "chi_tiet")}>

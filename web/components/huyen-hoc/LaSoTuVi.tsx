@@ -6,7 +6,8 @@ import { forwardRef, useId, useMemo, useState, type KeyboardEvent } from "react"
 import { motion, useReducedMotion } from "motion/react";
 import type { LaSoOutputT, VanHanOutputT } from "@/app/api/tuvi/schema";
 import {
-  AN_TAP_DIEU, DO_SANG_TAT, HANH_SAO, NEO, VI_TRI, nhomSao, tachTuTru, tamPhuong, type NhomSao,
+  AN_TAP_DIEU, DO_SANG_TAT, HANH_SAO, NEO, NHAN_LOP_HAN, TEN_HOA_MA, VI_TRI, hoaHanDangBat, nhomSao, tachTuTru, tamPhuong,
+  type HoaHan, type MaHoa, type NhomSao,
 } from "@/lib/tuvi-hien-thi";
 import type { GiaoDien } from "@/lib/giao-dien-la-so";
 
@@ -85,6 +86,40 @@ function vuaO(chu: string, co: number, rong = RONG_GON): { textLength?: number; 
   return chu.length * co * 0.56 > rong ? { textLength: rong, lengthAdjust: "spacingAndGlyphs" } : {};
 }
 
+// TV-HOA-HAN — huy hiệu tứ hoá của lớp hạn (đại hạn "ĐH" / năm xem "Năm"): khung VIỀN ĐỨT, chữ màu theo hoá — khác hẳn
+// "Hoá Lộc…" sinh niên (chữ đậm, không khung). Kỵ màu hổ phách (--ls-ky-han), không đỏ. Chính tinh: huy hiệu đứng ngay sau
+// tên sao (đủ chỗ) hoặc dòng nhỏ ngay dưới; phụ tinh: một dòng "ĐH Khoa · Văn Xương" dưới chính tinh.
+const MAU_HOA_HAN: Record<MaHoa, string> = {
+  loc: "var(--ls-moc)", quyen: "var(--ls-hoa)", khoa: "var(--ls-thuy)", ky: "var(--ls-ky-han)",
+};
+const CO_HUY = 11.5;
+const chuHuy = (b: HoaHan, coSao: boolean) => `${TEN_HOA_MA[b.hoa]}${coSao ? ` · ${b.sao}` : ""}`;
+/** Bề rộng ước của một huy hiệu (đơn vị viewBox) — như vuaO: theo số ký tự. */
+function rongHuy(b: HoaHan, co: number, coSao = false): number {
+  return (NHAN_LOP_HAN[b.lop].length + 1 + chuHuy(b, coSao).length) * co * 0.58 + co;
+}
+function HuyHan({ b, x, y, co = CO_HUY, coSao = false }: { b: HoaHan; x: number; y: number; co?: number; coSao?: boolean }) {
+  const w = rongHuy(b, co, coSao);
+  const h = co * 1.45;
+  const mau = MAU_HOA_HAN[b.hoa];
+  return (
+    <g transform={`translate(${x},${y})`} data-hoa-han={`${b.lop}-${b.hoa}`}>
+      <rect x={0} y={-co * 1.04} width={w} height={h} rx={h / 2} fill="var(--ls-o)" stroke={mau} strokeWidth={1.2} strokeDasharray="3 2.4" />
+      <text x={w / 2} y={0} textAnchor="middle" fontSize={co} fontWeight={700} fill={mau}>
+        <tspan fontSize={co * 0.82} fontWeight={600} fill="var(--ls-mo)">{NHAN_LOP_HAN[b.lop]} </tspan>{chuHuy(b, coSao)}
+      </text>
+    </g>
+  );
+}
+/** Một hàng huy hiệu canh giữa tại tâm `cx`. */
+function HangHuy({ ds, cx, y, co = CO_HUY, coSao = false }: { ds: HoaHan[]; cx: number; y: number; co?: number; coSao?: boolean }) {
+  const rong = ds.map((b) => rongHuy(b, co, coSao));
+  const tong = rong.reduce((a, b) => a + b, 0) + (ds.length - 1) * 5;
+  let x = cx - tong / 2;
+  return <>{ds.map((b, k) => { const el = <HuyHan key={`${b.lop}${b.hoa}`} b={b} x={x} y={y} co={co} coSao={coSao} />; x += rong[k]! + 5; return el; })}</>;
+}
+const loiHoaHan = (ds: HoaHan[]) => ds.map((b) => `${b.lop === "dh" ? "đại hạn" : "năm xem"}: ${b.sao} hoá ${TEN_HOA_MA[b.hoa]}`).join(", ");
+
 function catDong(ds: DongSao[], toiDa: number): DongSao[] {
   if (ds.length <= toiDa) return ds;
   return [...ds.slice(0, toiDa - 1), { ten: `+${ds.length - toiDa + 1} sao`, mau: "var(--ls-mo)", nghieng: true }];
@@ -113,6 +148,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
   const chiSo = (chi: string) => ls.cung.findIndex((c) => c.chi === chi);
   const tru = tachTuTru(ls.tu_tru);
   const cungThan = ls.cung.find((c) => c.la_than)?.ten;
+  const hoaHan = useMemo(() => hoaHanDangBat(vanHan, lop), [vanHan, lop]);
 
   const neo = (chi: string): [number, number] => {
     const [x, y] = NEO[chi]!;
@@ -163,8 +199,24 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
         const laXung = tp.xung === c.chi;
         const { trai, phai } = dongSaoCot(c, phaiDoSang);
         const yChinh = 62;
-        const soChinh = Math.max(1, c.chinh_tinh.length);
-        const yCot = yChinh + soChinh * 25 + 4;
+        // TV-HOA-HAN: hoá của lớp hạn rơi vào cung này → xếp chỗ cho huy hiệu (sau tên sao, hoặc dòng nhỏ ngay dưới).
+        const hhCung = hoaHan.filter((b) => b.chi_so === i);
+        const hhPhu = hhCung.filter((b) => !b.chinh_tinh);
+        let yTiep = yChinh;
+        const dongChinh = c.chinh_tinh.map((s) => {
+          const d = doSang(s, phaiDoSang, true);
+          const tat = d ? DO_SANG_TAT[d] : undefined;
+          const huy = hhCung.filter((b) => b.chinh_tinh && b.sao === s.ten);
+          const rongSao = s.ten.length * 19 * 0.56 + (tat ? 4 * 14 * 0.56 : 0);
+          const rongHuyDs = huy.reduce((a, b) => a + rongHuy(b, CO_HUY) + 5, 0);
+          const canhNhau = huy.length > 0 && rongSao + 6 + rongHuyDs <= RONG_GON;
+          const y0 = yTiep;
+          yTiep = y0 + (huy.length && !canhNhau ? 18 + 23 : 25);
+          return { s, tat, huy, canhNhau, y: y0, xSao: canhNhau ? W / 2 - (rongSao + 6 + rongHuyDs - 5) / 2 : W / 2, rongSao };
+        });
+        if (!c.chinh_tinh.length) yTiep = yChinh + 25;
+        const yPhuHuy = hhPhu.map((_, k) => yTiep - 4 + k * 17);
+        const yCot = yTiep + 4 + hhPhu.length * 17;
         const coLuu = lop.luu_nien && vanHan;
         const toiDa = Math.floor((H - (coLuu ? 58 : 40) - yCot) / DONG) + 1;
         const luuSao = coLuu ? vanHan.luu_nien.sao[i] ?? [] : [];
@@ -178,7 +230,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
         return (
           <g key={c.chi} transform={`translate(${x},${y})`} role="button" tabIndex={0}
             aria-pressed={c.chi === chon}
-            aria-label={`Cung ${c.ten}${c.la_than ? " (Thân cư)" : ""}, ${c.can} ${c.chi}, đại hạn ${c.dai_han.tu_tuoi}–${c.dai_han.den_tuoi}: ${chinh || "vô chính diệu"}`}
+            aria-label={`Cung ${c.ten}${c.la_than ? " (Thân cư)" : ""}, ${c.can} ${c.chi}, đại hạn ${c.dai_han.tu_tuoi}–${c.dai_han.den_tuoi}: ${chinh || "vô chính diệu"}${hhCung.length ? `; hoá theo hạn — ${loiHoaHan(hhCung)}` : ""}`}
             onClick={() => onChon(c.chi)} onKeyDown={phim(c.chi)}
             onMouseEnter={() => setDi(c.chi)} onMouseLeave={() => setDi(null)}
             onFocus={() => setDi(c.chi)} onBlur={() => setDi(null)}
@@ -205,13 +257,19 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
               fill={c.la_menh ? "var(--ls-nhan)" : "var(--ls-chu)"}>{nhan}</text>
             <text x={W - 16} y={30} textAnchor="end" fontSize={15} fontWeight={600} fill="var(--ls-chu)">{c.dai_han.tu_tuoi}</text>
             {/* Chính tinh */}
-            {c.chinh_tinh.length ? c.chinh_tinh.map((s, k) => (
-              <text key={s.ten} x={W / 2} y={yChinh + k * 25} textAnchor="middle" fontSize={19} fontWeight={650}
-                fill={MAU_HANH[HANH_SAO[s.ten] ?? "Thổ"]}>
-                {s.ten}
-                {(() => { const d = doSang(s, phaiDoSang, true); return d && DO_SANG_TAT[d] ? <tspan fontSize={14} fontWeight={500} fill="var(--ls-mo)"> ({DO_SANG_TAT[d]})</tspan> : null; })()}
-              </text>
+            {c.chinh_tinh.length ? dongChinh.map(({ s, tat, huy, canhNhau, y: yS, xSao, rongSao }) => (
+              <g key={s.ten}>
+                <text x={xSao} y={yS} textAnchor={canhNhau ? "start" : "middle"} fontSize={19} fontWeight={650}
+                  fill={MAU_HANH[HANH_SAO[s.ten] ?? "Thổ"]}>
+                  {s.ten}
+                  {tat ? <tspan fontSize={14} fontWeight={500} fill="var(--ls-mo)"> ({tat})</tspan> : null}
+                </text>
+                {huy.length > 0 && (canhNhau
+                  ? <HangHuy ds={huy} cx={xSao + rongSao + 6 + (huy.reduce((a, b) => a + rongHuy(b, CO_HUY) + 5, 0) - 5) / 2} y={yS - 2} />
+                  : <HangHuy ds={huy} cx={W / 2} y={yS + 18} />)}
+              </g>
             )) : <text x={W / 2} y={yChinh} textAnchor="middle" fontSize={14} fontStyle="italic" fill="var(--ls-mo)">vô chính diệu</text>}
+            {hhPhu.map((b, k) => <HangHuy key={`${b.lop}${b.hoa}`} ds={[b]} cx={W / 2} y={yPhuHuy[k]!} coSao />)}
             {/* Hai cột phụ tinh */}
             {catDong(trai, toiDa).map((d, k) => (
               <text key={`t${k}`} x={16} y={yCot + k * DONG} fontSize={13} fill={d.mau} fontWeight={d.dam ? 600 : 400} fontStyle={d.nghieng ? "italic" : undefined}>{d.ten}</text>
@@ -237,7 +295,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
               </>
             )}
             </g>
-            <OGon c={c} phai={phaiDoSang} han={[laDh && "Đại hạn", laLn && "Lưu niên", laTh && "Tiểu hạn"].filter((t): t is string => Boolean(t))} />
+            <OGon c={c} phai={phaiDoSang} hh={hhCung.filter((b) => b.chinh_tinh)} han={[laDh && "Đại hạn", laLn && "Lưu niên", laTh && "Tiểu hạn"].filter((t): t is string => Boolean(t))} />
           </g>
         );
       })}
@@ -249,27 +307,61 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
 });
 
 /** Lớp gọn của một ô (chỉ hiện ở điện thoại khi lá số đang vừa khung — xem CHI_TIET / GON). */
-function OGon({ c, phai, han }: { c: CungT; phai: PhaiDoSang; han: string[] }) {
+function OGon({ c, phai, han, hh }: { c: CungT; phai: PhaiDoSang; han: string[]; hh: HoaHan[] }) {
   const ten = `${c.ten}${c.la_than ? " · Thân" : ""}`;
+  // TV-HOA-HAN: vừa khung chỉ hiện huy hiệu của CHÍNH TINH — một hàng ngay dưới tên sao.
+  let yTiep = 96;
+  const dong = c.chinh_tinh.map((s) => {
+    const y = yTiep;
+    const huy = hh.filter((b) => b.sao === s.ten);
+    yTiep += huy.length ? 31 + 36 : 36;
+    return { s, y, huy };
+  });
   return (
     <g className={GON} display="none" aria-hidden>
       <text x={W / 2} y={40} textAnchor="middle" fontSize={CO_GON} fontWeight={700}
         fill={c.la_menh ? "var(--ls-nhan)" : "var(--ls-chu)"} {...vuaO(ten, CO_GON)}>{ten}</text>
-      {c.chinh_tinh.length ? c.chinh_tinh.map((s, k) => {
+      {c.chinh_tinh.length ? dong.map(({ s, y, huy }) => {
         const d = doSang(s, phai, true);
         const tat = d ? DO_SANG_TAT[d] : undefined;
         const chu = `${s.ten}${tat ? ` (${tat})` : ""}`;
         return (
-          <text key={s.ten} x={W / 2} y={96 + k * 36} textAnchor="middle" fontSize={CO_GON + 1} fontWeight={650}
-            fill={MAU_HANH[HANH_SAO[s.ten] ?? "Thổ"]} {...vuaO(chu, CO_GON + 1)}>
-            {s.ten}{tat && <tspan fontWeight={500} fill="var(--ls-mo)"> ({tat})</tspan>}
-          </text>
+          <g key={s.ten}>
+            <text x={W / 2} y={y} textAnchor="middle" fontSize={CO_GON + 1} fontWeight={650}
+              fill={MAU_HANH[HANH_SAO[s.ten] ?? "Thổ"]} {...vuaO(chu, CO_GON + 1)}>
+              {s.ten}{tat && <tspan fontWeight={500} fill="var(--ls-mo)"> ({tat})</tspan>}
+            </text>
+            {huy.length > 0 && <HuyGon ds={huy} y={y + 31} />}
+          </g>
         );
       }) : <text x={W / 2} y={96} textAnchor="middle" fontSize={CO_GON} fontStyle="italic" fill="var(--ls-mo)">vô chính diệu</text>}
       {han.map((t, k) => (
         <text key={t} x={W / 2} y={H - 22 - (han.length - 1 - k) * 32} textAnchor="middle" fontSize={CO_GON} fontWeight={700}
           fill={t === "Đại hạn" ? "var(--ls-thuy)" : t === "Lưu niên" ? "var(--ls-nhan)" : "var(--ls-mo)"}>{t}</text>
       ))}
+    </g>
+  );
+}
+
+/** Huy hiệu hoá theo hạn ở lớp gọn: MỘT dòng chữ cỡ như lớp gọn (≥ 9px ở 375px — e2e di-dong), dài thì co ngang vừa ô
+ *  như dòng chính tinh (vuaO); khung viền đứt bao cả dòng. */
+function HuyGon({ ds, y }: { ds: HoaHan[]; y: number }) {
+  const chu = ds.map((b) => `${NHAN_LOP_HAN[b.lop]} ${TEN_HOA_MA[b.hoa]}`).join(" · ");
+  const vua = vuaO(chu, CO_GON, RONG_GON - 20);
+  const rong = (vua.textLength ?? chu.length * CO_GON * 0.56) + 20;
+  return (
+    <g data-hoa-han-gon={ds.map((b) => `${b.lop}-${b.hoa}`).join(" ")}>
+      <rect x={W / 2 - rong / 2} y={y - CO_GON * 0.95} width={rong} height={CO_GON * 1.3} rx={CO_GON * 0.65} fill="var(--ls-o)"
+        stroke={ds.length === 1 ? MAU_HOA_HAN[ds[0]!.hoa] : "var(--ls-mo)"} strokeWidth={1.4} strokeDasharray="4 3" />
+      <text x={W / 2} y={y} textAnchor="middle" fontSize={CO_GON} fontWeight={700} {...vua}>
+        {ds.map((b, k) => (
+          <tspan key={`${b.lop}${b.hoa}`}>
+            {k > 0 && <tspan fill="var(--ls-mo)"> · </tspan>}
+            <tspan fill="var(--ls-mo)" fontWeight={600}>{NHAN_LOP_HAN[b.lop]} </tspan>
+            <tspan fill={MAU_HOA_HAN[b.hoa]}>{TEN_HOA_MA[b.hoa]}</tspan>
+          </tspan>
+        ))}
+      </text>
     </g>
   );
 }

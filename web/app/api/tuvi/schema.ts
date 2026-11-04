@@ -90,6 +90,8 @@ const Sao = z.object({
   giai_nghia: z.object({
     thuong_thay: z.string(), nen_lam: z.string().nullable(), can_cu: z.array(z.string()).optional(),
   }).nullable().optional(),
+  /** TV-HOA-HAN: chính tinh — slug trang kiến thức "sao ở cung" (engine dựng, một nguồn với mục lục kiến thức). */
+  trang_sao_cung: z.string().nullable().optional(),
 });
 
 const PhuTinh = Sao.extend({ loai: z.string().optional() });
@@ -110,7 +112,8 @@ const Cung = z.object({
   tue_tien: z.string(),
   /** TV-LICH: tên vòng Thái Tuế theo sách Việt (iztro dùng tên phái Trung). */
   thai_tue_nam_phai: z.string().optional(),
-  dai_han: z.object({ tu_tuoi: z.number(), den_tuoi: z.number() }),
+  /** tu_nam/den_nam (TV-HOA-HAN): năm âm lịch đầu / cuối hạn do engine tính — để nhảy năm xem tới đúng hạn. */
+  dai_han: z.object({ tu_tuoi: z.number(), den_tuoi: z.number(), tu_nam: z.number().optional(), den_nam: z.number().optional() }),
   tieu_han_tuoi: z.array(z.number()),
   /** TV-NP2 — độ sáng lối Việt của phụ tinh, tạp diệu, Đại/Tiểu Hao, Hoá Kỵ trong cung (chỉ sao có luận). */
   do_sang_phu: z.record(z.string(), z.string()).optional(),
@@ -171,6 +174,12 @@ const LopHan = z.object({
   ten_cung: z.array(z.string()),
   sao: z.array(z.array(z.string())),
   cung_goc: z.string(),
+  /** TV-HOA-HAN: bốn sao hoá của lớp hạn + cung gốc nơi sao đóng (engine đọc từ chính lá số). Engine cũ → không có. */
+  tu_hoa_sao: z.array(z.object({
+    hoa: z.enum(["loc", "quyen", "khoa", "ky"]), sao: z.string(),
+    chi_so: z.number().int().min(0).max(11).nullable(), cung: z.string().nullable(), chi: z.string().nullable(),
+    chinh_tinh: z.boolean(),
+  })).optional(),
 });
 export const VanHanOutput = z.object({
   engine_version: z.string(),

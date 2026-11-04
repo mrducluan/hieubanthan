@@ -416,6 +416,7 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
             # Tên cung lưu + sao lưu đặt theo vị trí 12 cung của lá số gốc (để vẽ lớp phủ).
             m["ten_cung"] = o.get("palaceNames", [])
             m["sao"] = [[x["name"] for x in ds] for ds in o.get("stars", [])]
+            m["tu_hoa_sao"] = _tu_hoa_sao(o["mutagen"], cung)
         return m
 
     dh = cung[h["decadal"]["index"]]["decadal"]["range"]
@@ -444,6 +445,21 @@ def _vong_dh(chi: str) -> dict:
     return {"vong_thai_tue": tuvi_vong_han.vong_tue_tien(chi),
             "vong_thai_tue_nam_phai": tuvi_vong_han.vong_tue_tien(chi, nam_phai=True),
             "vong_tuong_tien": tuvi_vong_han.vong_tuong_tien(chi)}
+
+
+_MA_HOA = ("loc", "quyen", "khoa", "ky")
+
+
+def _tu_hoa_sao(tu_hoa: list[str], cung: list[dict]) -> list[dict]:
+    """TV-HOA-HAN: bốn sao hoá [Lộc, Quyền, Khoa, Kỵ] của một lớp hạn (mảng `mutagen` iztro đã tính) + cung GỐC nơi sao
+    đóng trên chính lá số đó — chỉ đọc vị trí, không tính thêm. `chi_so` theo mảng 12 cung của lá số (0 = cung Dần)."""
+    noi = {s["name"]: (k, s in p["majorStars"]) for k, p in enumerate(cung) for s in p["majorStars"] + p["minorStars"]}
+    ra = []
+    for ma, sao in zip(_MA_HOA, tu_hoa):
+        k, chinh = noi.get(sao, (None, False))
+        ra.append({"hoa": ma, "sao": sao, "chi_so": k, "cung": cung[k]["name"] if k is not None else None,
+                   "chi": cung[k]["earthlyBranch"] if k is not None else None, "chinh_tinh": chinh})
+    return ra
 
 
 # EN-5.2 — sao lưu năm: tên iztro (vi-VN) → mã; vị trí đọc từ kết quả iztro (stars + suiqian12), không tự tính lại.
