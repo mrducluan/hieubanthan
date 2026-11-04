@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Nháp ý tưởng Tử vi bổ sung (`app/kb/data/nhap/tuvi_y_bo_sung_nhap.json`) — CHƯA nối vào RULES/NARRATIVE.
+"""Ý Tử vi bổ sung (`app/kb/data/tuvi_y_bo_sung.json`, TV-YBS 2026-11-04: đã chuyển khỏi nhap/, nối theo `hien_thi`).
 
 Tệp là bản viết lại ở mức QUY TẮC (điều kiện → ý nghĩa) từ một bộ bài giảng hiện đại có giấy phép phi thương mại
 (docs/DE-XUAT-Y-TUVI-BO-SUNG.md). Test khoá các ranh giới trước khi chủ dự án duyệt:
@@ -26,14 +26,14 @@ from tests.test_tuvi_cach_cuc_3 import _CAM_DOA
 from tests.test_tuvi_doi_song import BENH, DOA, THUAT_NGU
 
 DATA = Path(__file__).parents[1] / "app" / "kb" / "data"
-TEP = DATA / "nhap" / "tuvi_y_bo_sung_nhap.json"
+TEP = DATA / "tuvi_y_bo_sung.json"
 KB = json.loads(TEP.read_text(encoding="utf-8"))
 MUC = KB["muc"]
 
 LOAI = {"sao_cung", "cap_sao", "tu_hoa_cung", "thoi_diem", "hon_nhan", "nghe_nghiep", "suc_khoe_phong_ngua",
         "phuong_phap"}
 TRUONG = ["id", "loai", "dieu_kien", "y_goc_tom_tat", "loi_doi_thuong", "viec_nen_lam", "co_trong_co_thu",
-          "rieng_phai", "trung_voi", "source_id", "school_id", "trang_thai", "can_duyet"]
+          "rieng_phai", "trung_voi", "source_id", "school_id", "trang_thai", "can_duyet", "hien_thi"]
 HAN = re.compile(r"[㐀-鿿豈-﫿]")
 # Không lộ người giảng / khoá học / nguồn video; không dẫn số tập, mốc thời gian.
 LO_NGUON = re.compile(r"Nghê|倪|Haixia|Ni Hai|Thiên Kỷ|bilibili|BV1|\b\d{1,2}:\d{2}:\d{2}\b|tập \d|bài giảng số", re.I)
@@ -160,3 +160,14 @@ def test_loi_khong_lap():
         ds = [m[k] for m in MUC]
         lap = {s for s in ds if ds.count(s) > 1}
         assert not lap, (k, lap)
+
+
+def test_hien_thi_hop_le():
+    """TV-YBS: ý riêng trường phái không bao giờ gộp thẳng vào hộp luận; bản đồ giờ → tạng phủ không hiện."""
+    for m in MUC:
+        assert m["hien_thi"] in {"hop", "goc_nhin_khac", "khong"}, m["id"]
+        if m["rieng_phai"]:
+            assert m["hien_thi"] != "hop", m["id"]
+        if m["id"].startswith("yb.sk.chi_"):
+            assert m["hien_thi"] == "khong", m["id"]
+        assert "đã từng có gia đình" not in m["loi_doi_thuong"] + m["y_goc_tom_tat"], m["id"]

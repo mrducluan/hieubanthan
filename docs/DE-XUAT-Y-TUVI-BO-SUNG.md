@@ -1,7 +1,7 @@
 # Đề xuất: lấy Ý (quy tắc) từ bài giảng Tử vi hiện đại, viết lại bằng lời mình, lối khơi gợi
 
 > Trạng thái: **NHÁP, chờ chủ dự án duyệt.** Chưa nối vào RULES / NARRATIVE / web nào.
-> Tệp nháp: `engine/app/kb/data/nhap/tuvi_y_bo_sung_nhap.json` (200 mục) · test: `engine/tests/test_kb_y_bo_sung_nhap.py`.
+> Tệp nháp: `engine/app/kb/data/tuvi_y_bo_sung.json` (200 mục, TV-YBS đã nối theo trường `hien_thi`) · bộ đọc `engine/app/kb/tuvi_y_bo_sung.py` · test: `engine/tests/test_kb_y_bo_sung.py`.
 > Đối chiếu mục tiêu tăng trưởng: nền móng cho khâu **QUAY LẠI + NẠP Sao** — lời luận Tử vi có thêm chi tiết cụ thể
 > (ai ảnh hưởng hôn nhân, khi nào hợp thi / hợp tác / di chuyển, nghề nào hợp) thì chương đời sống đáng đọc tiếp hơn;
 > đo bằng tỉ lệ "Đúng với mình" của các hộp mới (`ds.*`) và `reading_completed{mo_dun=tuvi}`.
