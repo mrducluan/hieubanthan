@@ -22,7 +22,7 @@ Pygments==2.21.0
 pytest==9.2.0
 python-dotenv==1.2.4
 PyYAML==6.0.3
-sentry-sdk==2.71.0
+sentry-sdk==2.73.0
 starlette==1.10.0
 typing-inspection==0.4.4
 typing_extensions==4.16.0
