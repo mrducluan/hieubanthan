@@ -88,15 +88,23 @@ export const KHOA_THEO_HO_SO = ["hbt.hom_nay", "hbt.la_bai.v1", "hbt.hen.v1", "h
   // lần ghé Bản thân, nhắc chuỗi đã đóng.
   "hbt.hom_nay_y_dinh", "hbt.battu.doi_chieu.v1", "hbt.kc_sau.v1", "hbt.thanso_phieu", "hbt.ban_than_lan_ghe", "hbt.chuoi_do"] as const;
 
+/** NT-1: lá số người thân trên máy (lib/nguoi-than) — khoá đặt ở đây để `xoaHoSo()` xoá theo mà không nhập vòng. */
+export const KHOA_NGUOI_THAN = "hbt.nguoi_than.v1";
+/** Sự kiện cùng tab báo kho người thân đọc lại (storage event chỉ bắn ở tab khác). */
+export const SU_KIEN_NGUOI_THAN = "hbt-nguoi-than";
+
 export function xoaHoSo(): void {
   hienTai = null;
   daDoc = true;
   try {
     window.localStorage.removeItem(KHOA_HO_SO);
     for (const k of KHOA_THEO_HO_SO) window.localStorage.removeItem(k);
+    // NT-1: xoá hồ sơ (kể cả thu hồi đồng ý ở "Dữ liệu của tôi") xoá luôn lá số người thân đã lưu trên máy.
+    window.localStorage.removeItem(KHOA_NGUOI_THAN);
   } catch {
     /* bỏ qua */
   }
+  try { window.dispatchEvent(new Event(SU_KIEN_NGUOI_THAN)); } catch { /* bỏ qua */ }
   bao();
 }
 

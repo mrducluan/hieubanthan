@@ -7,7 +7,7 @@ import { useChuChung } from "@/components/cms/ChuChung";
 import Link from "@/components/khung/Lien";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { CalendarClock, ChevronDown, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, Moon, Orbit, ScrollText, SlidersHorizontal, Waypoints } from "lucide-react";
-import type { LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
+import type { ChartInputVao, LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { HanhDongTrucQuan } from "@/components/hoi/TrucQuan";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
@@ -23,6 +23,7 @@ import { PhiHoa } from "@/components/huyen-hoc/PhiHoa";
 import { NhipBaThang } from "@/components/huyen-hoc/NhipBaThang";
 import { DinhGioSinh } from "@/components/huyen-hoc/DinhGioSinh";
 import { HopThamTuVi } from "@/components/huyen-hoc/HopThamTuVi";
+import { ChonNguoiXem, XemNguoiThanCtx } from "@/components/huyen-hoc/NguoiThan";
 import { ChonYDinh, XacNhanYDinh, type GoiYVec } from "@/components/huyen-hoc/XacNhanYDinh";
 import { LaSoTuVi, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import { KhungLaSo } from "@/components/huyen-hoc/KhungLaSo";
@@ -36,6 +37,7 @@ import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
 import { gioHienThi, kemTinhTrang, laSoTuHoSo, useHoSo } from "@/lib/hoso";
+import { laSoNguoiThan, tenHien, useNguoiThan, type NguoiThan } from "@/lib/nguoi-than";
 import { taiAnhSvg } from "@/lib/tai-anh-svg";
 import { cn } from "@/lib/utils";
 
@@ -64,12 +66,17 @@ export function TuVi() {
   // TP-GON: khung Trường phái thu gọn — giữ trạng thái mở ở đây vì lá số tạm gỡ mỗi lần engine an lại.
   const [moPhai, setMoPhai] = useState(false);
   const nutHienThi = useRef<HTMLButtonElement>(null);   // TM-1: "Thu gọn" trong bảng Hiển thị → trả focus về nút mở
+  // NT-1: lá số người thân đã lưu trên máy (chỉ xem) — null = lá số của chính người dùng.
+  const dsNguoiThan = useNguoiThan();
+  const [xemId, setXemId] = useState<string | null>(null);
+  const nt = (xemId && dsNguoiThan?.find((x) => x.id === xemId)) || null;
   // TP-LICH: hồ sơ nhập ngày âm theo lịch Trung Quốc → mở lá số theo lịch đó (người dùng vẫn đổi được).
   const lichHoSo = hoSo?.lich_am;
   useEffect(() => { if (lichHoSo === "trung") setLich("trung"); }, [lichHoSo]);
   // TV-LN (chủ dự án yêu cầu 2026-10-08): phái tính lưu nguyệt — chỉ đổi cung tháng, không đổi lá số gốc.
   const [luuNguyet, setLuuNguyet] = useState<PhaiLuuNguyet>("dau_quan_thai_tue");
-  const goc = laSoTuHoSo(hoSo);
+  const laSoBan = laSoTuHoSo(hoSo);
+  const goc: ChartInputVao | null = nt ? laSoNguoiThan(nt) : laSoBan;
   const laSoGoc = goc ? { ...goc, ...(hoaLinh === "trung" ? { hoa_linh: hoaLinh } : {}), ...(thangNhuan !== "thang_sau" ? { thang_nhuan: thangNhuan } : {}), ...(lich === "trung" ? { lich } : {}) } : null;
   const laSo = laSoGoc ? { ...laSoGoc, ...(luuNguyet !== "dau_quan_thai_tue" ? { luu_nguyet: luuNguyet } : {}) } : null;
   // Lá số gốc không phụ thuộc phái lưu nguyệt → không an lại khi chỉ đổi phái tháng.
@@ -102,7 +109,7 @@ export function TuVi() {
     coNhuan && "Bạn sinh trong tháng nhuận — mỗi phái tính một kiểu, Mệnh và Cục có thể khác.",
   ].filter(Boolean).join(" ");
   const chiChon = chon ?? chiMenh;
-  const khongBietGio = hoSo?.do_tin_gio === "unknown";
+  const khongBietGio = !nt && hoSo?.do_tin_gio === "unknown";
   const xemCung = (c: string) => {
     setChon(c);
     requestAnimationFrame(() => chiTietRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
@@ -133,7 +140,13 @@ export function TuVi() {
     ghi("chart_interacted", { mo_dun: "tuvi", kind: "nhay_dai_han" });
   };
 
-  useBatDauDoc("tuvi", Boolean(ls));
+  // NT-1: đổi người xem → về cung Mệnh, lịch theo hồ sơ người đó.
+  const chonNguoi = (moi: NguoiThan | null) => {
+    setXemId(moi?.id ?? null); setChon(null);
+    setLich((moi ? moi.lich_am : lichHoSo) === "trung" ? "trung" : "viet");
+  };
+
+  useBatDauDoc("tuvi", Boolean(ls) && !nt);
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
   const dau = <DauMang Icon={Orbit} ten="Tử vi" mo_ta="Lá số an ngay trên hệ thống của Hiểu Bản Thân — ngày giờ sinh không gửi cho bên thứ ba. Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn. Không phán bệnh, tai nạn hay sống chết." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
@@ -141,7 +154,9 @@ export function TuVi() {
     <div>
       {dau}
 
+      <XemNguoiThanCtx.Provider value={Boolean(nt)}>
       <section aria-label="Lá số" className="space-y-4">
+        {(laSoBan || (dsNguoiThan?.length ?? 0) > 0) && <ChonNguoiXem dangXem={nt} onChon={chonNguoi} coBan={Boolean(laSoBan)} />}
         {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Để an lá số cần giờ sinh, giới tính và nơi sinh (nơi sinh quyết định múi giờ lúc bạn chào đời). Bạn vẫn hỏi được câu kiến thức chung ở khung bên dưới." />}
         <p className="text-sm text-fg-faint">
           Mới làm quen Tử vi? <Link href="/tu-vi/la-so-mau" className="text-gold underline">Xem 6 lá số mẫu được đọc từng bước</Link>, có giải nghĩa từng thuật ngữ.
@@ -228,7 +243,7 @@ export function TuVi() {
             )}
             {/* Lá số: điện thoại mặc định thu vừa màn hình, "Phóng to" để đọc chữ rõ rồi vuốt (Trục 1 — KhungLaSo) */}
             <KhungLaSo chon={chiChon} chan={<ChanLaSo giaoDien={giaoDien} tieuDe="Lá số Tử vi" duong="/tu-vi" />}>
-              <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={hoSo?.ho_ten} gioSinh={gioHienThi(hoSo)}
+              <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={nt ? tenHien(nt) : hoSo?.ho_ten} gioSinh={nt ? gioHienThi(nt) : gioHienThi(hoSo)}
                 chon={chiChon} phaiDoSang={phaiDoSang} onChon={(c) => {
                   setChon(c); ghi("chart_interacted", { mo_dun: "tuvi", kind: "chon_cung" });
                   // Điện thoại: chi tiết cung nằm dưới lá số, ngoài tầm mắt → cuộn tới.
@@ -258,6 +273,8 @@ export function TuVi() {
                   onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "nhip_3_thang" })}>
                   <NhipBaThang laSo={laSo} onHoi={hoi} onChonCungTen={(ten) => { const c = ls.cung.find((k) => k.ten === ten); if (c) xemCung(c.chi); }} />
                 </KhoiMoLuoi>
+                {/* NT-1: định giờ (sửa giờ trong hồ sơ của bạn) và xem 2 người (so với lá số của bạn) chỉ cho lá số của chính bạn. */}
+                {!nt && <>
                 <KhoiMoLuoi id="dinh-gio" Icon={Clock3} tieuDe="Định giờ sinh"
                   moTa={khongBietGio
                     ? "Chưa biết giờ sinh? Đối chiếu đủ 12 canh giờ với những năm bạn nhớ rõ."
@@ -270,6 +287,7 @@ export function TuVi() {
                   onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "hop_tham" })}>
                   <HopThamTuVi laSo={laSoGoc} onHoi={hoi} />
                 </KhoiMoLuoi>
+                </>}
               </div>
             )}
             <ChuGiai />
@@ -281,7 +299,8 @@ export function TuVi() {
         )}
       </section>
 
-      {laSo && ls && (
+      {/* NT-1: luận giải toàn bộ (trả Sao, lưu bài, góp ý) chỉ cho lá số của chính người dùng. */}
+      {laSo && ls && !nt && (
         <section aria-label="Luận giải toàn bộ" className="mt-10">
           <LuanGiaiToanBo duongDan="/api/tuvi/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten="lá số Tử vi" />
           <CuoiBaiDoc moDun="tuvi" cauHoi="Lá số và phần luận giải có giúp bạn hiểu mình hơn?" />
@@ -293,6 +312,7 @@ export function TuVi() {
         {/* HD-CS đợt 2 (hướng C): "Xem trên lá số" trong câu trả lời chọn đúng cung trên lá số phía trên. */}
         <HanhDongTrucQuan.Provider value={laSo && ls ? { xemCung: xemTrenLaSo } : {}}>
         <KhungChat
+          key={nt?.id ?? "ban"}
           moDun="tuvi"
           loiChao={laSo ? "Hỏi về một cung, một sao, hoặc hạn hiện tại của bạn." : "Hỏi kiến thức chung về cung, sao, tứ hoá — hoặc bổ sung giờ sinh để hỏi về lá số của bạn."}
           goiY={GOI_Y}
@@ -324,6 +344,7 @@ export function TuVi() {
         />
         </HanhDongTrucQuan.Provider>
       </section>
+      </XemNguoiThanCtx.Provider>
     </div>
   );
 }

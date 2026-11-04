@@ -21,6 +21,7 @@ import { ViSao } from "@/components/luan-giai/HopNoiBat";
 import { KIEU_BIET, TrucQuan, type CoCauChuan, type KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 import { banDoKhop, useChieuSang, VungChieuSang } from "@/components/hoi/ChieuSang";
 import type { KetQuaHoi } from "@/components/hoi/KhungChat";
+import { useXemNguoiThan } from "@/components/huyen-hoc/XemNguoiThan";
 
 interface Props {
   t: KetQuaHoi;
@@ -117,7 +118,9 @@ function NutLuu({ t, cauHoi, moDun }: { t: KetQuaHoi; cauHoi?: string; moDun: st
   const nguoi = useNguoiDung();
   const [trang, setTrang] = useState<"" | "dang" | "da" | "an">("");
   const [loi, setLoi] = useState<string | null>(null);
-  if (!nguoi || trang === "an") return null;
+  // NT-1: đang xem lá số người thân → không lưu câu trả lời vào tài khoản người xem.
+  const xemNguoiThan = useXemNguoiThan();
+  if (!nguoi || trang === "an" || xemNguoiThan) return null;
   if (trang === "da") {
     return (
       <Button asChild size="sm" variant="ghost" data-testid="da-luu-tra-loi">

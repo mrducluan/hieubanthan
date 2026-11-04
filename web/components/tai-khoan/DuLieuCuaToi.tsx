@@ -13,6 +13,7 @@ import { ngayDongY, thuHoiDongY, useDongYDuLieu } from "@/lib/dong-y-du-lieu";
 import { useDanhSachNha, useHoSoNha, xoaMoiNhaTrenMay } from "@/lib/ho-so-nha";
 import { useHoSo } from "@/lib/hoso";
 import { useKyUc } from "@/lib/ky-uc";
+import { useNguoiThan, xoaTatCaNguoiThan } from "@/lib/nguoi-than";
 import { useNhacViec, xoaNhac } from "@/lib/nhac-viec";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { nhaTaiKhoan, xoaNhaTaiKhoan } from "@/lib/tai-khoan-nha";
@@ -41,6 +42,7 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
   const nhac = useNhacViec();
   const user = useNguoiDung();
   const kyUc = useKyUc();
+  const nguoiThan = useNguoiThan();
   const [cookie, setCookie] = useState<"dong_y" | "tu_choi" | null | undefined>(undefined);
   const [coGa, setCoGa] = useState(false);
   const [nhaTk, setNhaTk] = useState<boolean | null>(null);
@@ -83,6 +85,9 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
           <Dong ten="Hồ sơ nhà (hướng, năm xây, người cùng ở, bố cục)" testId="dl-nha-may"
             trangThai={soNha ? `${soNha} căn trên máy này.` : "Không có."}
             nut={soNha ? <Button size="sm" variant="outline" className={NUT} onClick={() => { xoaMoiNhaTrenMay(); setBao("Đã xoá hồ sơ nhà trên máy này."); }}>Xoá hồ sơ nhà trên máy</Button> : undefined} />
+          <Dong ten="Lá số người thân (tên gọi, quan hệ, ngày giờ sinh, giới tính, nơi sinh)" testId="dl-nguoi-than"
+            trangThai={nguoiThan?.length ? `${nguoiThan.length} người trên máy này — không gửi lên tài khoản.` : "Không có."}
+            nut={nguoiThan?.length ? <Button size="sm" variant="outline" className={NUT} data-testid="dl-nguoi-than-xoa" onClick={() => { xoaTatCaNguoiThan(); setBao("Đã xoá lá số người thân trên máy này."); }}>Xoá người thân trên máy</Button> : undefined} />
           <Dong ten="Mốc nhắc (hiện ở Hôm nay)" testId="dl-nhac-may"
             trangThai={nhac.length ? `${nhac.length} mốc trên máy này.` : "Không có."}
             nut={nhac.length ? <Button size="sm" variant="outline" className={NUT} onClick={() => { for (const n of nhac) xoaNhac(n.id); setBao("Đã xoá mốc nhắc trên máy này."); }}>Xoá mốc nhắc trên máy</Button> : undefined} />
