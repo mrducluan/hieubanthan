@@ -459,10 +459,11 @@ def _hop_cdt(m: dict, ai: str, quan_he: str, can_cu: str) -> dict:
     khoa = ma if ai == "hai" else ai
     return {"loai": "loi_khuyen", "nhan": kb.cach_doc_them("nhan") or _NHAN_CDT,
             "tieu_de": kb.cach_doc_them(f"tieu_de.{khoa}") or _TIEU_DE_CDT[khoa],
-            # ý Phu Thê của lá người ấy viết từ phía chủ lá ("bạn" = người ấy) → nói rõ trước câu
-            "noi_dung": (f"{kb.cach_doc_them('dan_kia') or _DAN_KIA} {m['loi_doi_thuong']}" if ai == "kia"
-                         else m["loi_doi_thuong"]),
-            "huong_xu_ly": m["viec_nen_lam"],
+            # ý Phu Thê của lá người ấy: lời ngôi thứ ba viết riêng (`loi_nguoi_ay` — review CY-1: không tả thẳng một nét
+            # xấu của người thứ ba, nói như nhịp giữa hai người); KB thiếu thì giữ lời dẫn cũ
+            "noi_dung": ((m.get("loi_nguoi_ay") or f"{kb.cach_doc_them('dan_kia') or _DAN_KIA} {m['loi_doi_thuong']}")
+                         if ai == "kia" else m["loi_doi_thuong"]),
+            "huong_xu_ly": (m.get("viec_nguoi_ay") or m["viec_nen_lam"]) if ai == "kia" else m["viec_nen_lam"],
             "can_cu": [can_cu, kb.cach_doc_them("can_cu_chung") or _CAN_CU_CDT],
             "ma_mau": f"ds.hai.{ma}.{ai}.{quan_he}", "phai": m["school_id"]}
 

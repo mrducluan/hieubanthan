@@ -76,20 +76,26 @@ def _cham(s: str) -> str:
     return s if s.endswith((".", "!", "?", "…")) else s + "."
 
 
-def loi(m: dict, tien_to: str) -> str:
-    """Đoạn hiển thị: tiền tố + lời đời thường + việc nên làm (+ câu không thay lời bác sĩ khi nói sức khoẻ)."""
-    van = f"{tien_to}{_cham(_thuong(m['loi_doi_thuong']))} Việc nên làm: {_cham(_thuong(m['viec_nen_lam']))}"
+def loi(m: dict, tien_to: str, nc: dict | None = None, cung: str | None = None) -> str:
+    """Đoạn hiển thị: tiền tố + lời đời thường + việc nên làm (+ câu không thay lời bác sĩ khi nói sức khoẻ). Lời = bản
+    tự đứng được của báo cáo (`yb.loi_hien`: không "nét này" trơ trọi, đúng nửa sáng / hãm, `{mang}` theo cung khớp)."""
+    cung = cung or (m.get("cung_khop") or [None])[0]
+    van = (f"{tien_to}{_cham(_thuong(yb.loi_hien(m, nc, cung) or ''))} "
+           f"Việc nên làm: {_cham(_thuong(yb.viec_hien(m)))}")
     if (m["loai"] == "suc_khoe_phong_ngua" or "sức khoẻ" in van or "sức khỏe" in van) and KHONG_THAY not in van:
         van += " Lời này không thay lời bác sĩ."
     return van
 
 
-def _muc(m: dict, vai: str) -> dict:
+def _muc(m: dict, vai: str, nc: dict | None = None, cung: str | None = None) -> dict:
     tien_to = TIEN_TO_HOP if vai == "hop" else TIEN_TO_GOC
+    cung = cung or (m.get("cung_khop") or [None])[0]
+    dk = yb.dieu_kien_loi(m)          # review CY-1: dòng điều kiện viết lại — không lộ bản tóm tắt nguồn nội bộ
     return {"loai": "y_bo_sung", "ma": m["id"], "vai": vai, "loai_y": m["loai"], "cung_khop": m.get("cung_khop", []),
             "source_id": m["source_id"], "school_id": m["school_id"], "trang_thai": m["trang_thai"],
-            "loi_doi_thuong": m["loi_doi_thuong"], "viec_nen_lam": m["viec_nen_lam"],
-            "can_cu": f"Cách đọc thêm — căn cứ: {m['y_goc_tom_tat']}", "doi_thuong": loi(m, tien_to)}
+            "loi_doi_thuong": yb.loi_hien(m, nc, cung) or "", "viec_nen_lam": yb.viec_hien(m),
+            "can_cu": "Cách đọc thêm — căn cứ: " + (dk or f"cung {cung}" if cung else dk or "lá số của bạn"),
+            "doi_thuong": loi(m, tien_to, nc, cung)}
 
 
 _Y_DINH_BO = ("ba_thang_toi", "chon_thoi_diem", "phan_van")
@@ -163,13 +169,19 @@ def chon(pl: dict, nc: dict) -> list[dict]:
             return True                          # loại đúng mảng (đã lọc theo CHU_DE)
         return bool(noi & cung_hoi) if cung_hoi else bool(sao_hoi)
 
+    def cung_cua(m: dict) -> str | None:
+        noi = m.get("cung_khop") or []
+        return next((c for c in noi if c in cung_hoi), noi[0] if noi else None)
+
     ra = []
-    hop = [m for m in yb.tim(nc, loai=sorted(loai_dung), hien_thi="hop") if hop_le(m, False)]
+    hop = [m for m in yb.tim(nc, loai=sorted(loai_dung), hien_thi="hop")
+           if hop_le(m, False) and yb.loi_hien(m, nc, cung_cua(m))]
     if hop:
-        ra.append(_muc(hop[0], "hop"))
-    goc = [m for m in yb.tim(nc, loai=sorted(loai_dung), hien_thi="goc_nhin_khac") if hop_le(m, True)]
+        ra.append(_muc(hop[0], "hop", nc, cung_cua(hop[0])))
+    goc = [m for m in yb.tim(nc, loai=sorted(loai_dung), hien_thi="goc_nhin_khac")
+           if hop_le(m, True) and yb.loi_hien(m, nc, cung_cua(m))]
     if goc:
-        ra.append(_muc(goc[0], "goc_nhin_khac"))
+        ra.append(_muc(goc[0], "goc_nhin_khac", nc, cung_cua(goc[0])))
     return ra
 
 
@@ -231,8 +243,7 @@ def muc_phuong_phap(pl: dict) -> list[dict]:
         m = kyb.lay(ma)
         if not m:
             continue
-        van = (f"{_cham(m['y_goc_tom_tat'])} Nói đời thường: {_cham(_thuong(m['loi_doi_thuong']))} "
-               f"Việc nên làm: {_cham(_thuong(m['viec_nen_lam']))}")
+        van = (f"{_cham(m['loi_doi_thuong'])} Việc nên làm: {_cham(_thuong(m['viec_nen_lam']))}")   # không lộ ý nguồn
         cung = [c for c in pl.get("cung") or [] if c in THU_TU_CUNG]
         if ma == "yb.pp.doi_cung_tam_phuong" and len(cung) >= 2:
             a, b = cung[0], cung[1]
