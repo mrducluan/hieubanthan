@@ -28,7 +28,9 @@ _BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khon
                # có chương sức khoẻ → vẫn không đọc quẻ cho hai cụm này (`KD_SUC_KHOE`).
                r"dau da day", r"suc khoe cua toi the nao"}
 KD_SUC_KHOE = [r"dau da day", r"suc khoe cua toi the nao"]
-TU_CHOI_THEM = [r"so de", r"song duoc bao lau", r"nao chet", r"tho bao nhieu", r"doan benh",
+# Review CY-1: tuổi thọ / sống chết ("sống được bao lâu", "năm nào chết", "thọ bao nhiêu", "chết sớm"…) đã dời về bộ chung
+# `luangiai/an_toan.py` — cả 5 mảng cùng chặn (trước Thần số trả lời bằng chân dung số).
+TU_CHOI_THEM = [r"so de", r"doan benh",
                 r"benh gan",
                 # "yểm bùa nhà hàng xóm" = tác động lên người khác → từ chối; "nhà tôi có BỊ yểm bùa không" = nỗi sợ tâm
                 # linh → dẫn hướng (TAM_LINH) — EN-3d.
@@ -39,11 +41,7 @@ CHUA_BENH = (r"(benh|bi om|viem|sot|mat ngu|di ung|ung thu|huyet ap|tieu duong|p
 _at.MO_HO[CHUA_BENH] = r"chữa"
 # MT-ĐS B0 — thọ / chết / sống được không (kể cả người thân, thai nhi), tên bệnh & bộ phận, lô đề, nhân sự trá hình.
 TU_CHOI_HH = [
-    r"tho (duoc )?bao nhieu", r"song (duoc )?(bao lau|den bao nhieu|bao nhieu tuoi|may nam|duoc may)",
-    r"(con|be|no|ong|ba|bo|me|toi|minh|em|chau|vo|chong) (co )?song duoc (khong|ko)", r"co qua khoi",
-    r"(\d{2,3} tuoi|ong noi|ong ngoai|ba noi|ba ngoai|cu nha).{0,40}co (di|mat|ra di) (khong|ko)",
-    r"ket thuc doi", r"bat dac ky tu", r"(de|hay|phai) chet(?!\w)", r"so chet (tre|som|bat)", r"chet som", r"chet tre",
-    r"nam nao .{0,30}co nguoi mat", r"(?<!khoa )(?<!kham )benh (phoi|tim|gan|than|xuong|mau)",
+    r"co qua khoi", r"ket thuc doi", r"(de|hay|phai) chet(?!\w)", r"(?<!khoa )(?<!kham )benh (phoi|tim|gan|than|xuong|mau)",
     r"(gan|than|tim|phoi|ung thu|da day) hay (gan|than|tim|phoi|ung thu|da day)", r"uong thuoc gi",
     r"khoi (duoc )?benh", r"choi (lo|de)(?!\w)", r"so chot", r"danh con (gi|so)", r"so may de trung", r"danh .{0,12}(de|cho) trung",
     r"lam hr|(?<!\w)hr(?!\w)", r"chu (cty|cong ty|doanh nghiep).{0,40}(ung vien|nhan vien|nhan|tuyen)",
@@ -110,7 +108,7 @@ def mau_tu_choi(goc: str | None, t: str, mau_chung: str, he_la_so: dict | None =
     if nhom == "cap_cuu":
         return suc_khoe_kb.mau("cap_cuu")
     if nhom == "nguoi_than":                 # sức khoẻ người khác: không đọc lá số của người hỏi (review SK-1)
-        return f"{suc_khoe_kb.mau('nguoi_than')} {skn.mien_tru()}"
+        return suc_khoe_kb.mau("nguoi_than")   # không đọc gì → không kèm lời "nhắc phòng ngừa theo sách xưa"
     if nhom == "hoi_benh":
         return f"{skn.doan_hoi_benh(t, he_la_so)} {skn.mien_tru()}"
     # CY-1: câu may rủi / tai nạn nặng / tuyển dụng vẫn từ chối như cũ, nhưng kèm một lời nhắc "nên chú ý…" đúng mảng

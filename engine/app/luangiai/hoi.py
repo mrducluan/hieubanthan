@@ -707,7 +707,7 @@ def _mau_suc_khoe_ts(nhom: str, t: str, nguoi: dict | None, ngay_xem: _dt.date, 
     if nhom == "cap_cuu":
         return skb.mau("cap_cuu")
     if nhom == "nguoi_than":           # review SK-1: không lấy năm cá nhân của người hỏi để nói về sức khoẻ người thân
-        return f"{skb.mau('nguoi_than')} {skn.mien_tru()}"
+        return skb.mau("nguoi_than")      # không đọc gì → không kèm lời "nhắc phòng ngừa theo sách xưa"
     phan = ["Thần số học không gắn con số với bộ phận cơ thể nào, nên không trả lời được cơ thể bạn có vấn đề hay không — "
             "chỉ bác sĩ thăm khám mới trả lời được."]
     he = skb.he_cau_hoi(t)
@@ -760,7 +760,7 @@ def _muc_chu_y(pl: dict, nguoi: dict, ngay_xem: _dt.date) -> dict:
                         [n for n in nam_hoi if y <= n < y + cyn.SO_NAM])
         tieu = cyn.tieu_de([mg])
     return {"loai": "giai_thich", "ma": "chu_y_nam", "tieu_de": tieu,
-            "noi_dung": f"{cykb.mau('thanso_dau')} {m['noi_dung']}", "cau_nam": m.get("cau_nam", ""),
+            "noi_dung": f"{cykb.mau('thanso_dau')} {m['noi_dung']}", "cau_nam": m.get("cau_nam", ""), "mang": mg,
             "lo_ro": bool(pl.get("lo_ro")), "source_id": "thanso_pitago", "school_id": "pitago"}
 
 

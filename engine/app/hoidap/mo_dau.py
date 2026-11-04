@@ -130,7 +130,7 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
     ("kien_tung", "chuyện giấy tờ, hợp đồng, kiện tụng", "phap_ly",
      [r"(?<!\w)kien (tung|cao|ai|nguoi|doi|ra|len|nhau|hang xom)", r"(thua|thang|vu|bi|di|khoi) kien", r"(?<!\w)toa (an|xu|tuyen)", r"tranh chap", r"giay to", r"hop dong", r"phap ly", r"thua ke", r"\bvisa\b",
       r"ho so", r"(?<!\w)duyet"]),
-    ("di_lai", "chuyện đi lại", "suc_khoe",
+    ("di_lai", "chuyện đi lại", "di_xa",          # review CY-1: đi lại = mảng ra ngoài (chương Bạn bè / đi lại), không phải sức khoẻ
      [r"lai xe", r"di duong", r"(?<!\w)xe (co|may)", r"giao thong"]),
     ("tim_do", "chuyện tìm lại đồ, người, vật thất lạc", "ban_than",
      [r"(lam |bi )?(mat|roi|lac|trom)\b.{0,30}(tim|ve|lai)", r"tim (lai|thay)", r"(?<!\w)bi trom", r"di lac"]),
@@ -378,6 +378,19 @@ def ghep(*phan: str | None) -> str:
         p = hoa(p)
         out.append(p if p.endswith((".", "!", "?", ":", "…")) else p + ".")
     return " ".join(out)
+
+
+def cy_lo(muc: list[dict]) -> dict | None:
+    """CY-1: mục "năm nên chú ý {mảng}" của câu hỏi LO RÕ về một mảng (không phải câu vận hạn chung)."""
+    return next((m for m in muc if m.get("ma") == "chu_y_nam" and m.get("lo_ro") and (m.get("cau_nam_rieng") or m.get("cau_nam"))
+                 and m.get("mang") not in (None, "van_han")), None)
+
+
+def ve_mang(mang: str) -> str:
+    """"Về chuyện đi lại" / "Về chuyện tình cảm" — nhãn đoạn mở đầu theo mảng của câu lo (KB `chu_y_kb`)."""
+    from app.kb import chu_y_kb as cykb  # noqa: PLC0415
+    t = cykb.ten(mang)
+    return f"Về {t}" if t.startswith("chuyện") else f"Về chuyện {t}"
 
 
 def dau_cau(dieu: dict | None, mac_dinh: str, moc: str | None = None) -> str:
@@ -680,12 +693,19 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
         if hn:
             phan.append(hn["noi_dung"].replace(_skn.mien_tru(), "").strip())
     cy = next((m for m in muc if m.get("ma") == "chu_y_nam" and m.get("lo_ro") and m.get("cau_nam")), None)
-    if cy:
+    cy_dau = cy_lo(muc)
+    if cy_dau:
+        # Review CY-1: câu LO về một mảng ("có bị tai nạn không", "năm nào gặp tai nạn giao thông") — câu năm nên chú ý của
+        # mảng đứng ĐẦU (không mở bằng mức của một mảng khác), ranh giới của mảng ở cuối đoạn.
+        phan.insert(0, cy_dau.get("cau_nam_rieng") or cy_dau["cau_nam"])
+    elif cy:
         # CY-1: câu hỏi về điều người dùng lo → năm nên chú ý của mảng nói ngay ở đoạn mở đầu (cùng mục, cùng hàm báo cáo)
         phan.append(cy["cau_nam"])
     if ds and ds.get("chuong") == "suc_khoe" or (dieu or {}).get("mang") == "suc_khoe":
         from app.kb import tuvi_doi_song_kb as _kbds  # noqa: PLC0415
         phan.append(_kbds.suc_khoe_chung())          # câu miễn trừ cố định (một nguồn với báo cáo đời sống)
+    if cy_dau and cy_dau.get("cau_nam_rieng") and cy_dau.get("ranh_gioi"):
+        phan.append(cy_dau["ranh_gioi"])
     if hoi_dau_tu(t, dieu):
         phan.append(KHONG_DAU_TU)
     if la_quyet_dinh(t):
@@ -702,6 +722,8 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
         dau = f"Về {moc}"
     else:
         dau = dau_cau(None, ds["ten_mang"] if ds else "việc bạn hỏi", moc)
+    if cy_dau and not moc:
+        dau = ve_mang(cy_dau["mang"])
     return f"{dau}: {thuong(ghep(*phan))}"
 
 
@@ -837,6 +859,17 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
         return None                      # câu kiến thức / câu CHỈ về một con số được nêu tên: phần dưới đã trả lời thẳng
         #                                  (EN-3d: có điều được hỏi — "tôi số 1 hay nóng với đồng nghiệp" — vẫn mở đầu,
         #                                  gói đã dùng đúng con số người hỏi nêu)
+    cy_dau = cy_lo(muc)
+    if cy_dau:
+        # Review CY-1: câu LO về một mảng ("Tôi có bị tai nạn không?") — đoạn mở đầu là câu trả lời về đúng mảng đó (con
+        # số không đoán sự việc + năm nên chú ý + việc + ranh giới), không mở bằng một nét chân dung lạc chủ đề.
+        from app.kb import chu_y_kb as _cykb  # noqa: PLC0415
+        phan = [_cykb.mau("thanso_dau"), bo_dau_cham(cy_dau["cau_nam"])]
+        if hoi_dau_tu(t, dieu):
+            phan.append(KHONG_DAU_TU)
+        if la_quyet_dinh(t):
+            phan.append(KHONG_QUYET_SO)
+        return f"{ve_mang(cy_dau['mang'])}: {thuong(ghep(*phan))}"
     moc = None
     tg = hieu_cau.thoi_gian(t, ngay_xem or _ngay_xem(goi))
     hoi_moc = bool(tg) or _co(t, [r"(nam|thang|ngay) ca nhan", r"nam nay", r"thang nay", r"hom nay", r"ngay mai"])

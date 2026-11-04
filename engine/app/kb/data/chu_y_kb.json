@@ -15,7 +15,9 @@
    "ten": "tiền bạc",
    "viec": "hạn chế cho vay, đứng tên bảo lãnh cho người khác; chia nhỏ khoản chi lớn và giữ một quỹ dự phòng đủ vài tháng",
    "viec_nay": "rà lại các khoản đang cho vay, đang góp; khoản chi lớn còn lại của năm nên chia nhỏ và giữ quỹ dự phòng",
+   "viec_ngan": "hạn chế cho vay, giữ một quỹ dự phòng",
    "ranh_gioi": "Lời nhắc về tiền ở đây là để chủ động giữ tiền, không phải lời khuyên đầu tư — việc lớn nên tính theo số liệu thật và hỏi người có chuyên môn.",
+   "ranh_gioi_gon": "không phải lời khuyên đầu tư",
    "tuvi": {
     "cung": "Tài Bạch",
     "source_id": "tvds_toan_thu",
@@ -50,7 +52,9 @@
    "ten": "công việc",
    "viec": "giữ quan hệ tốt với cấp trên và đồng nghiệp, cập nhật kỹ năng; không bỏ việc khi chưa có chỗ mới",
    "viec_nay": "làm rõ phần việc của mình với cấp trên, ghi lại kết quả đã làm; nếu muốn đổi việc thì tìm chỗ mới trước rồi mới nghỉ",
+   "viec_ngan": "giữ quan hệ tốt ở chỗ làm, chưa có chỗ mới thì chưa nghỉ",
    "ranh_gioi": "Đây là lời nhắc để chủ động giữ việc, không phải lời đoán chuyện được hay mất việc — quyết định lớn nên dựa trên điều kiện thật của bạn.",
+   "ranh_gioi_gon": "",
    "tuvi": {
     "cung": "Quan Lộc",
     "source_id": "tvds_toan_thu",
@@ -77,7 +81,9 @@
    "ten": "chuyện tình cảm",
    "viec": "nói rõ điều mình mong với người kia, dành thời gian riêng cho hai người; tránh quyết định lớn lúc đang giận",
    "viec_nay": "hẹn một buổi nói chuyện thẳng thắn về điều cả hai đang mong; chuyện lớn để qua cơn giận rồi mới bàn",
+   "viec_ngan": "nói rõ điều mình mong, chuyện lớn để qua cơn giận",
    "ranh_gioi": "Không ai nói trước được hai người có chia tay hay không; điều nên làm là chăm chút chuyện tình cảm hơn vào những lúc này.",
+   "ranh_gioi_gon": "",
    "tuvi": {
     "cung": "Phu Thê",
     "source_id": "tvds_toan_thu",
@@ -102,7 +108,9 @@
    "ten": "chuyện trong nhà",
    "viec": "dành thời gian cho người nhà, nói chuyện sớm khi có điều chưa vui; việc chung của nhà nên bàn cả nhà",
    "viec_nay": "chọn một buổi trong tuần ăn cơm, nói chuyện với cả nhà; điều chưa vui nên nói sớm, nói nhẹ",
+   "viec_ngan": "dành thời gian cho người nhà, có gì chưa vui thì nói sớm",
    "ranh_gioi": "Đây là lời nhắc để chăm chút không khí trong nhà, không phải lời đoán chuyện xào xáo.",
+   "ranh_gioi_gon": "",
    "tuvi": {
     "cung": "Tử Nữ",
     "source_id": "tvds_toan_thu",
@@ -126,7 +134,9 @@
    "ten": "nhà cửa",
    "viec": "kiểm tra kỹ giấy tờ trước khi mua bán, đặt cọc; việc sửa lớn nên làm theo kế hoạch, có dự phòng tiền và thời gian",
    "viec_nay": "đọc kỹ giấy tờ nhà đất trước khi ký hay đặt cọc; việc sửa lớn còn lại của năm nên lên kế hoạch và dự phòng",
+   "viec_ngan": "đọc kỹ giấy tờ trước khi đặt cọc, sửa lớn có dự phòng",
    "ranh_gioi": "Đây là lời nhắc để cẩn thận với việc nhà đất, không phải lời khuyên mua bán — giá và pháp lý nên hỏi người có chuyên môn.",
+   "ranh_gioi_gon": "giá và pháp lý nhà đất nên hỏi người có chuyên môn",
    "tuvi": {
     "cung": "Điền Trạch",
     "source_id": "tvds_toan_thu",
@@ -157,7 +167,9 @@
    "ten": "đi lại",
    "viec": "kiểm tra xe trước chuyến xa, đội mũ bảo hiểm, thắt dây an toàn; không lái xe khi mệt hay đã uống rượu bia",
    "viec_nay": "bảo dưỡng xe, sắp chuyến xa vào lúc khoẻ; không lái xe khi mệt hay đã uống rượu bia",
+   "viec_ngan": "kiểm tra xe, không lái khi mệt hay đã uống rượu bia",
    "ranh_gioi": "Không ai nói được có xảy ra va chạm hay không; điều nên làm là giữ thói quen đi lại an toàn mỗi ngày.",
+   "ranh_gioi_gon": "giữ thói quen đi lại an toàn mỗi ngày",
    "tuvi": {
     "cung": "Thiên Di",
     "source_id": "tvds_toan_thu",
@@ -181,7 +193,9 @@
    "ten": "giấy tờ",
    "viec": "đọc kỹ hợp đồng trước khi ký, giữ bản sao giấy tờ quan trọng; việc tranh chấp nên hỏi luật sư sớm",
    "viec_nay": "rà lại hợp đồng, giấy tờ đang có hiệu lực; chỗ nào chưa rõ thì hỏi người có chuyên môn trước khi ký thêm",
+   "viec_ngan": "đọc kỹ hợp đồng trước khi ký, giữ bản sao",
    "ranh_gioi": "Không ai nói trước được thắng hay thua một vụ việc; chuyện pháp lý nên hỏi luật sư hoặc cơ quan có thẩm quyền.",
+   "ranh_gioi_gon": "chuyện pháp lý nên hỏi luật sư",
    "tuvi": {
     "cung": "Phụ Mẫu",
     "source_id": "tvds_toan_thu",
@@ -214,7 +228,9 @@
    "ten": "chuyện bạn bè, người ngoài",
    "viec": "giữ ranh giới với lời rủ góp vốn, làm ăn chung; việc tiền bạc với bạn bè nên ghi rõ ràng bằng giấy",
    "viec_nay": "khoản góp, cho mượn với bạn bè nên ghi lại rõ ràng; lời rủ làm ăn mới để vài ngày rồi mới trả lời",
+   "viec_ngan": "góp vốn, cho mượn với bạn bè nên ghi rõ bằng giấy",
    "ranh_gioi": "Đây là lời nhắc giữ ranh giới, không phải lời đoán ai sẽ làm gì — người cụ thể bạn tự nhìn bằng việc họ làm.",
+   "ranh_gioi_gon": "",
    "tuvi": {
     "cung": "Nô Bộc",
     "source_id": "tvds_toan_thu",
@@ -309,7 +325,9 @@
   "thanso_dau": "Thần số không đoán được sự việc; điều con số nói được là năm nào nên chú ý hơn.",
   "nam_khong": "Năm {nam} không nằm trong những năm nổi riêng về {mang}; việc nên giữ: {viec}.",
   "nam_khac": "Những năm nên chú ý {mang} hơn trong mười năm tới: {nam}.",
-  "hh_dau": "Điều lá số nói được là nhịp thời gian và việc nên chuẩn bị, ở phần dưới."
+  "hh_dau": "Điều lá số nói được là nhịp thời gian và việc nên chuẩn bị, ở phần dưới.",
+  "ranh_gioi_nhieu": "Đây là lời nhắc để chủ động hơn, không phải lời đoán chuyện gì sẽ xảy ra",
+  "kinhdich_khung": "Quẻ không trả lời có hay không cho chuyện này, cũng không nói trước năm nào; quẻ gợi thế của việc lúc bạn hỏi và cách nên giữ mình."
  },
  "hoi": {
   "_ghi_chu": "Từ khoá (chữ đã bỏ dấu) nhận câu hỏi về điều người dùng lo ở từng mảng → mảng chú ý. Thứ tự là ưu tiên.",

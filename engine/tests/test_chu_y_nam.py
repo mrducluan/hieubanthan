@@ -139,8 +139,10 @@ def test_hop_bao_cao(ten, request):
             assert MA_SQL.match(h["ma_mau"]) and ".chu_y." in h["ma_mau"] and len(h["ma_mau"]) <= 60
             assert all(2026 <= n < 2037 for n in h["cac_nam"]) and h["can_cu"]
             assert not cyn.kiem(h["noi_dung"]) and not tim_cum_cam(h["noi_dung"], kh.cum_cam_chung())
-            for m in h["chu_y"]:
-                assert kb.ranh_gioi(m) in h["noi_dung"]
+            if len(h["chu_y"]) == 1:
+                assert kb.ranh_gioi(h["chu_y"][0]) in h["noi_dung"]
+            else:                     # review CY-1: hộp nhiều mảng — MỘT lời miễn trừ chung
+                assert cyn.ranh_gioi_nhieu(h["chu_y"]) in h["noi_dung"]
         assert not kh.kiem_giong_van(bc, mo_dun=mon)
     assert co >= len(ds)          # phần lớn lá có ít nhất một hộp
 
@@ -215,7 +217,8 @@ def test_hoi_cau_lo_tra_loi_nam(md, cau, mang):
 @pytest.mark.parametrize("md", ["thanso", "tuvi", "battu"])
 def test_hoi_nam_len_doan_mo_dau(md):
     p0 = _hoi(md, "Năm nào tôi nên cẩn thận tiền bạc?")["cau_tra_loi"].split("\n\n")[0]
-    assert re.search(r"Năm 20\d\d( và 20\d\d)?.{0,20} nên chú ý tiền bạc hơn", p0) and "không phải lời khuyên đầu tư" in p0
+    assert re.search(r"Năm 20\d\d( và 20\d\d)?.{0,20} nên chú ý tiền bạc hơn|không có năm nào nổi riêng về tiền bạc", p0, re.I) \
+        and "không phải lời khuyên đầu tư" in p0
 
 
 @pytest.mark.parametrize("md", ["thanso", "tuvi", "battu", "phongthuy", "kinhdich"])

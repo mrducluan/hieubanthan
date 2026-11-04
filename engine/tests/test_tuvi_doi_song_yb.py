@@ -95,7 +95,8 @@ def test_gioi_han_va_cho_dat(cap):
             for h in moi:
                 assert h["loai"] in ("loi_khuyen", "thoi_diem") and "muc" not in h
                 assert h["ma_mau"].startswith(f"ds.{c['ma']}.yb.") and SQL_DS.match(h["ma_mau"]) and len(h["ma_mau"]) <= 60
-                assert h["huong_xu_ly"] and h["can_cu"]
+                # lời một câu: tiêu đề = câu, thân = việc nên làm (review CY-1 — tiêu đề ≠ thân, thân không rỗng)
+                assert (h["huong_xu_ly"] or h["noi_dung"]) and h["noi_dung"] and h["can_cu"]
             giau = [h for h in c["hop"] if h.get("y_bo_sung")]
             assert len(giau) <= yb.TOI_DA_LAM_GIAU
             co_giau += len(giau)
@@ -109,7 +110,7 @@ def test_gioi_han_va_cho_dat(cap):
                 assert 1 <= len(g["y"]) <= yb.TOI_DA_GNK
                 for y in g["y"]:
                     assert y["ma_mau"].startswith(f"ds.{c['ma']}.yb.") and SQL_DS.match(y["ma_mau"])
-                    assert y["phai"] == yb.PHAI_GNK and y["tieu_de"] and y["noi_dung"] and y["huong_xu_ly"]
+                    assert y["phai"] == yb.PHAI_GNK and y["tieu_de"] and y["noi_dung"]
             assert c["ma"] not in ("duong_bay", "loi_khuyen") or (not moi and not c.get("goc_nhin_khac"))
         # SK-1: vẫn MỘT hộp năm sức khoẻ, không hộp phần cơ thể thứ hai
         sk = next(c for c in co["chuong"] if c["ma"] == "suc_khoe")
@@ -130,8 +131,8 @@ def test_loi_doi_thuong_sach(cap):
         moi = set(kh.kiem_giong_van(co, mo_dun="tuvi")) - set(kh.kiem_giong_van(_, mo_dun="tuvi"))
         assert not moi, moi
         for c in co["chuong"]:
-            van = [x for h in _yb_hop(c) for x in (h["tieu_de"], h["noi_dung"], h["huong_xu_ly"])]
-            van += [x for h in c["hop"] if h.get("y_bo_sung") for x in h["y_bo_sung"].values()]
+            van = [x for h in _yb_hop(c) for x in (h["tieu_de"], h["noi_dung"], h["huong_xu_ly"]) if x]
+            van += [h["y_bo_sung"][k] for h in c["hop"] if h.get("y_bo_sung") for k in ("noi_dung", "viec")]
             van += [x for y in (c.get("goc_nhin_khac") or {}).get("y", []) for x in (y["tieu_de"], y["noi_dung"])]
             for s in van:
                 assert not THUAT_NGU.search(s), s

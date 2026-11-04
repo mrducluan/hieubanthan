@@ -413,7 +413,41 @@ def _r_chuan_bi_truoc(nc):
     return [("dai_han", sau)] if _so_sat(nc, sau) >= 2 or _co_hoa(nc["tu_hoa"], "Kỵ", [sau]) else []
 
 
+# Review CY-1 (ý "chung chung"): Hoá Kỵ của năm Kỷ / Tân luôn rơi trên Văn Khúc / Văn Xương → luật cũ khớp 99,9 % lá
+# (ai cũng có năm 2029). Nay chỉ khi Kỵ đó vào cung học hành / công danh (Mệnh, Quan Lộc, Phụ Mẫu) hoặc chính cung của
+# năm, và tuổi còn hay đi thi (15–35 tuổi mụ; ngữ cảnh không biết tuổi → không xét tuổi). Ý "năm thuận cho thi cử" cùng
+# khung tuổi.
+TUOI_THI = (15, 35)
+_CUNG_HOC = ("Mệnh", "Quan Lộc", "Phụ Mẫu")
+
+
+def _tuoi_thi(nc) -> bool:
+    t = nc.get("tuoi_mu")
+    return t is None or TUOI_THI[0] <= t <= TUOI_THI[1]
+
+
+def _r_xuong_ky_thi(nc):
+    ln = nc["lop"].get("luu_nien")
+    if not ln or not _tuoi_thi(nc):
+        return []
+    noi = (*_CUNG_HOC, ln["cung"])
+    return [("luu_nien", x["cung"]) for x in ln.get("tu_hoa") or []
+            if x["hoa"] == "Kỵ" and x["sao"] in ("Văn Xương", "Văn Khúc") and x["cung"] in noi][:1]
+
+
+def _r_khoa_xuong_thi(nc):
+    ln = nc["lop"].get("luu_nien")
+    if not ln or not _tuoi_thi(nc) or ln["cung"] not in nc["cung"]:
+        return []
+    c = ln["cung"]
+    co = any(x["hoa"] == "Khoa" and x["cung"] == c for x in ln.get("tu_hoa") or []) \
+        or any(s in nc["cung"][c]["phu"] for s in ("Văn Xương", "Thiên Việt"))
+    return [("luu_nien", c)] if co else []
+
+
 _RIENG: dict[str, Callable[[dict], list[tuple[str, str]]]] = {
+    "yb.hoa.xuong_ky_nam_thi": _r_xuong_ky_thi,
+    "yb.hoa.khoa_hoac_xuong_nam_thi": _r_khoa_xuong_thi,
     "yb.cap.nhat_nguyet_phan_boi": _r_phan_boi,
     "yb.cap.nhat_nguyet_phan_boi_vo_chong": _r_phan_boi,
     "yb.cap.nhat_nguyet_phan_boi_tu_lap": _r_phan_boi_tu_lap,
@@ -592,9 +626,52 @@ def _loi_thoi(loi: str, khi: str) -> tuple[str, str]:
     return tieu, f"{khi}: {moi}"
 
 
-def _can_cu(m: dict, lop: str, cung: str, nam: int | None) -> str:
-    noi = f"cung {cung}" + (f" ({_TEN_LOP[lop]}{f' năm {nam}' if lop == 'luu_nien' and nam else ''})" if lop != "goc" else "")
-    return f"Ý bổ sung (tham khảo) — {noi}: {m['y_goc_tom_tat']}"
+def dieu_kien_loi(m: dict) -> str:
+    """Dòng điều kiện viết lại ("Khi …", cùng hàm trang kiến thức `kb.trang_tuvi._khi`) — thay `y_goc_tom_tat` (bản tóm
+    ý nguồn, nội bộ — review CY-1: không bao giờ ra "Vì sao nói vậy" / gói hỏi đáp). Điều kiện chỉ có cung chung chung
+    → rỗng."""
+    from app.kb.trang_tuvi import _khi  # noqa: PLC0415 — trang_tuvi không import mô-đun này
+    try:
+        s = _khi(m.get("dieu_kien") or {}).strip()
+    except Exception:  # noqa: BLE001 — điều kiện lạ: bỏ dòng, không vỡ báo cáo
+        return ""
+    return s if len(s) > 12 else ""
+
+
+def _can_cu(m: dict, lop: str, cung: str, nam: int | None, than: str | None = None) -> str:
+    ten = f"cung an Thân ({cung})" if than and cung == than and cung != "Mệnh" else f"cung {cung}"
+    noi = ten + (f" ({_TEN_LOP[lop]}{f' năm {nam}' if lop == 'luu_nien' and nam else ''})" if lop != "goc" else "")
+    dk = dieu_kien_loi(m)
+    return f"Ý bổ sung (tham khảo) — {noi}" + (f": {dk}" if dk else "")
+
+
+def _sao_dk(m: dict) -> list[str]:
+    dk = m.get("dieu_kien") or {}
+    return _ds(dk.get("sao")) + _ds(dk.get("sao_mot_trong"))
+
+
+def loi_hien(m: dict, nc: dict | None = None, cung: str | None = None) -> str | None:
+    """Lời hiển thị của một ý trong BÁO CÁO / HỎI ĐÁP (trang kiến thức vẫn dùng `loi_doi_thuong` sau dòng điều kiện):
+    `loi_ro` (tự đứng được — không "nét này" trơ trọi; `{mang}` = tên đời thường của cung khớp) hoặc lời gốc. Ý có hai
+    đầu sáng / hãm (`loi_do_sang`) → chỉ nửa đúng với sao trong cung khớp; không xác định được → None (không hiện)."""
+    hai = m.get("loi_do_sang")
+    if hai:
+        if not nc or not cung or cung not in nc.get("cung", {}):
+            return None
+        nhom = [g for g in dict.fromkeys(_nhom_sang(nc, cung, x) for x in _sao_dk(m) if _co_sao(nc, cung, x, []))
+                if g]
+        if not nhom:
+            return None
+        return " ".join(hai[g] for g in ("sang", "ham") if g in nhom)
+    s = m.get("loi_ro") or m["loi_doi_thuong"]
+    if "{mang}" in s:
+        from app.luangiai.tuvi_doi_song import _vat  # noqa: PLC0415 — tránh vòng import
+        s = s.replace("{mang}", _vat(cung) if cung else "mảng đó")
+    return s
+
+
+def viec_hien(m: dict) -> str:
+    return m.get("viec_ro") or m["viec_nen_lam"]
 
 
 # Rà "chung chung" (test_tuvi_doi_song_chung_chung): ý theo năm của MỘT sao gốc gần như ai cũng gặp trong mười năm (cung năm
@@ -602,6 +679,19 @@ def _can_cu(m: dict, lop: str, cung: str, nam: int | None) -> str:
 SO_NAM_Y = 4
 # Điều kiện chỉ là "vắng" (không có hoá / sao / chính tinh / cát tinh) đúng với rất nhiều lá → chỉ làm giàu hộp đang có.
 _CHI_VANG = {"khong_co", "khong_co_hoa", "khong_chinh_tinh", "khong_co_cat_tinh"}
+
+
+# Review CY-1 (audit 1.000 lá golden, ý vào báo cáo ở > 60 % số lá — lời chung, ai cũng nhận): chỉ giữ ở trang kiến
+# thức + hỏi đáp, không vào báo cáo; hoặc chỉ vào báo cáo khi đúng cung nói về điều ý ấy tả (điều kiện riêng của lá).
+_CHI_TRANG = {"yb.cung.han_cung_co_nguoi_cuoi", "yb.pp.sat_don_thu"}
+_CUNG_BAO_CAO = {"yb.hoa.ky_nghi_khong_thong": ("Mệnh", "Phúc Đức"),        # "nghĩ không thông" = nét của tâm trí
+                 "yb.sao.cu_mon_sang_ham": ("Mệnh", "Quan Lộc", "Thiên Di", "Nô Bộc")}   # lời nói ở chỗ làm, ra ngoài
+# lời nói về CẢ GIAI ĐOẠN ("Giai đoạn này nhiều việc phải tự chạy…") — trong báo cáo chỉ khi chính đại hạn mang sao đó
+# (lớp lưu niên đi qua cung có Thất Sát / Phá Quân gần như năm nào cũng có → 67 % lá)
+_LOP_BAO_CAO = {"yb.cap.sat_pha_tham_dai_han": ("dai_han",)}
+# ý theo năm đi qua cung có một cặp sao phổ biến (Khôi / Việt: 4 năm đầu gần như luôn gặp — 60 % lá) → báo cáo chỉ nói
+# năm đang xem và năm sau (lời gần, cụ thể), các năm khác để hỏi đáp
+_NAM_GAN_BAO_CAO = {"yb.sao.khoi_viet_nam_nang_do": 2}
 
 
 def _chi_vang(dk: dict) -> bool:
@@ -621,6 +711,10 @@ def chuan_bi(ls: dict, gioi_tinh: str | None, nam_am_xem: int, nam_am_sinh: int,
         n_k = nc if k == 0 else ngu_canh_nam(nc, nam)
         for x in tim(n_k, LOAI_BAO_CAO):
             ct = x["_chi_tiet"] if k == 0 else [c for c in x["_chi_tiet"] if c[0] == "luu_nien"]
+            if k >= _NAM_GAN_BAO_CAO.get(x["id"], so_nam):
+                continue
+            if x["id"] in _LOP_BAO_CAO:
+                ct = [c for c in ct if c[0] in _LOP_BAO_CAO[x["id"]]]
             if not ct:
                 continue
             lop, cung = _neo(ct)
@@ -639,6 +733,14 @@ def chuan_bi(ls: dict, gioi_tinh: str | None, nam_am_xem: int, nam_am_sinh: int,
                     chi_lam_giau = True
             if _chi_vang(dk) and m["id"] not in _RIENG:
                 chi_lam_giau = True
+            if m["id"] in _CHI_TRANG:
+                continue
+            if m["id"] in _CUNG_BAO_CAO:
+                cho = [t for t in cac_cung if t in (*_CUNG_BAO_CAO[m["id"]], nc["than"])]
+                if not cho:
+                    continue
+                cac_cung = cho
+                cung = cung if cung in cho else cho[0]
             # Sức khoẻ theo lá gốc: chỉ làm giàu MỘT hộp phần cơ thể (UX v3 M3 — không hộp phần cơ thể thứ hai).
             if lop == "goc" and m["loai"] == "suc_khoe_phong_ngua" and m["hien_thi"] == "hop":
                 chi_lam_giau = True
@@ -646,7 +748,7 @@ def chuan_bi(ls: dict, gioi_tinh: str | None, nam_am_xem: int, nam_am_sinh: int,
                 continue
             if m["loai"] == "suc_khoe_phong_ngua" and m["hien_thi"] == "hop" and lop != "goc":
                 if lop == "luu_nien":           # SK-1: thêm lý do của năm (một hộp sức khoẻ, không hộp thứ hai)
-                    sk.setdefault(nam, []).append((slug_ma(m["id"]), _can_cu(m, lop, cung, nam)))
+                    sk.setdefault(nam, []).append((slug_ma(m["id"]), _can_cu(m, lop, cung, nam, nc["than"])))
                 continue                        # đại hạn đi Tật Ách: SK-1 đã có lý do `dai_han`
             if k >= SO_NAM_Y:
                 continue
@@ -730,23 +832,45 @@ def lam_giau(ds: list[dict], bs: dict) -> None:
         ch = next(c["ma"] for c in ds if any(y is h for y in c.get("hop", [])))
         if dem.get(ch, 0) >= TOI_DA_LAM_GIAU:
             continue
-        dem[ch] = dem.get(ch, 0) + 1
         m = x["m"]
-        h["y_bo_sung"] = {"noi_dung": m["loi_doi_thuong"], "viec": m["viec_nen_lam"]}
-        h.setdefault("can_cu", []).append(_can_cu(m, x["lop"], x["cung"], x["nam"]))
+        cung = h.get("_cung") or x["cung"]
+        loi = loi_hien(m, x["nc"], cung)
+        if not loi:
+            continue
+        if x["lop"] != "goc":                  # ý thời điểm trong hộp năm: nói thẳng mốc ("Năm nay: …")
+            loi = _loi_thoi(loi, _khi(x["lop"], x["nam"], x["nc"], loi)[0])[1]
+        dem[ch] = dem.get(ch, 0) + 1
+        h["y_bo_sung"] = {"noi_dung": loi, "viec": viec_hien(m), "ma": m["id"]}
+        h.setdefault("can_cu", []).append(_can_cu(m, x["lop"], cung, x["nam"], x["nc"].get("than")))
         x["da_dung"] = True
 
 
-def _y(x: dict, ch: str, phai: str | None = None) -> dict:
+_TIEU_DE_CHUNG = "Một nét nên biết thêm"
+
+
+def _chuan_td(s: str) -> str:
+    return " ".join(re.sub(r"[^\w ]", " ", (s or "").lower()).split())
+
+
+def _y(x: dict, ch: str, phai: str | None = None) -> dict | None:
+    from app.luangiai import doi_song_khuon as kh  # noqa: PLC0415
     from app.luangiai.doi_song_chung import _tieu_de  # noqa: PLC0415
     m, lop = x["m"], x["lop"]
-    loi, them = m["loi_doi_thuong"], {}
-    tieu = _tieu_de(loi, "Một nét nên biết thêm")
+    loi, them = loi_hien(m, x["nc"], x["cung"]), {}
+    if not loi:
+        return None
+    tieu = _tieu_de(loi, _TIEU_DE_CHUNG)
     if lop != "goc":
         khi, them = _khi(lop, x["nam"], x["nc"], loi)
         tieu, loi = _loi_thoi(loi, khi)
-    y = {"tieu_de": tieu, "noi_dung": loi, "huong_xu_ly": m["viec_nen_lam"],
-         "can_cu": [_can_cu(m, lop, x["cung"], x["nam"])], "ma_mau": ma_mau(ch, m["id"]), **them}
+    # Review CY-1: tiêu đề không được là cả thân / thân không được rỗng. Khuôn hộp (`tach_tieu_de`) lấy trọn câu đầu
+    # làm tiêu đề → lời một câu thì tiêu đề = câu đó, thân = việc nên làm (không lặp ở `huong_xu_ly`).
+    tieu, than = kh.tach_tieu_de(tieu, loi)
+    huong = viec_hien(m)
+    if len(_chuan_td(than).split()) < 4 or _chuan_td(than) == _chuan_td(tieu):
+        than, huong = huong, None
+    y = {"tieu_de": tieu, "noi_dung": than, "huong_xu_ly": huong,
+         "can_cu": [_can_cu(m, lop, x["cung"], x["nam"], x["nc"].get("than"))], "ma_mau": ma_mau(ch, m["id"]), **them}
     if phai:
         y["phai"] = phai
     return y
@@ -786,6 +910,8 @@ def them_vao(ds: list[dict], bs: dict, hoc: tuple = (None, None)) -> None:
         toi_da = TOI_DA_HOP_MOI if loai == "hop" else TOI_DA_GNK
         for x in xs:
             y = _y(x, ch, PHAI_GNK if loai == "goc_nhin_khac" else None)
+            if y is None:
+                continue
             if len(x.get("_nam") or []) > 1:
                 _ghi_nam(y, x["_nam"][:3])
             dg = kh.danh_gia_phieu(trong_so.get(y["ma_mau"]))

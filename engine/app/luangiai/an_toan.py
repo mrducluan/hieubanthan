@@ -162,6 +162,34 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
      r"|đánh lô|số chốt|đánh con (gì|số)|(xem|soi|bắt|cho) đề (hôm nay|ngày mai|tối nay|miền)|(?<!\w)đề .{0,15}(về|ra) con (gì|nào|số)", "may_rui"),
     (r"(gap|bi) tai nan (chet|nang|mat mang)|tai nan chet nguoi", r"(gặp|bị) tai nạn (chết|nặng|mất mạng)|tai nạn chết người",
      "du_doan_cu_the"),
+    # Review CY-1: tuổi thọ / sống chết — trước chỉ có ở bộ Huyền học (`hoidap.chung.TU_CHOI_THEM`), Thần số trả lời "Tôi
+    # sống được bao lâu?" bằng chân dung số. Gom về bộ chung (cả 5 mảng). Không chặn "sống ở … lâu rồi", "sống bao lâu
+    # thì nên mua nhà" (không có chủ ngữ người / không "được").
+    (r"(toi|minh|em|con|bo|me|ba|ong|cha|chong|vo|be|no|chau|anh|chi|tui|to)( toi| em| minh)? (con )?(se )?song (duoc )?"
+     r"(bao lau|them bao lau|den bao nhieu( tuoi)?|bao nhieu tuoi|may nam|duoc may|den may tuoi|den nam nao)"
+     r"|song duoc (bao lau|bao nhieu tuoi|den bao nhieu|may nam|den may tuoi)|tho (duoc )?(bao nhieu|may tuoi|den bao nhieu)"
+     r"|(nam|thang|ngay|luc|khi|tuoi) nao .{0,15}(chet|qua doi)(?!\w)|chet (som|tre|yeu|bat dac)(?!\w)|so chet (tre|som|bat)"
+     r"|bat dac ky tu|(\d{2,3} tuoi|ong noi|ong ngoai|ba noi|ba ngoai|cu nha).{0,40}co (di|mat|ra di) (khong|ko)"
+     r"|(con|be|no|ong|ba|bo|me|toi|minh|em|chau|vo|chong) (co )?song duoc (khong|ko)(?!\w)|nam nao .{0,30}co nguoi mat",
+     r"(tôi|mình|em|con|bố|mẹ|ba|ông|bà|cha|chồng|vợ|bé|nó|cháu|anh|chị|tui|tớ)( tôi| em| mình)? (còn )?(sẽ )?sống (được )?"
+     r"(bao lâu|thêm bao lâu|đến bao nhiêu( tuổi)?|bao nhiêu tuổi|mấy năm|được mấy|đến mấy tuổi|đến năm nào)"
+     r"|sống được (bao lâu|bao nhiêu tuổi|đến bao nhiêu|mấy năm|đến mấy tuổi)|thọ (được )?(bao nhiêu|mấy tuổi|đến bao nhiêu)"
+     r"|(năm|tháng|ngày|lúc|khi|tuổi) nào .{0,15}(chết|qua đời)(?!\w)|chết (sớm|trẻ|yểu|bất đắc)(?!\w)|số chết (trẻ|sớm|bất)"
+     r"|bất đắc kỳ tử|(\d{2,3} tuổi|ông nội|ông ngoại|bà nội|bà ngoại|cụ nhà).{0,40}có (đi|mất|ra đi) (không|ko)"
+     r"|(con|bé|nó|ông|bà|bố|mẹ|tôi|mình|em|cháu|vợ|chồng) (có )?sống được (không|ko)(?!\w)|năm nào .{0,30}có người mất",
+     "du_doan_cu_the"),
+    # Review CY-1: tuyển dụng trá hình ("tuổi nào hợp làm nhân viên kế toán cho tôi") — bộ chung cho cả 5 mảng.
+    (r"(tuoi|nguoi tuoi|menh|con giap|nguoi sinh nam) (nao|gi) .{0,25}(lam|vao vi tri|vao lam) (nhan vien|ke toan|thu ky"
+     r"|tro ly|quan ly|bao ve|tai xe|lai xe|giup viec|nhan su|ban hang|thu ngan|cong nhan)(?!\w).{0,30}"
+     r"(cho|giup|o) (toi|em|minh|cong ty|cty|shop|cua hang|quan|xuong|doanh nghiep)"
+     r"|(nen|co nen) tuyen (nguoi|nhan vien|ung vien|ke toan|thu ky)|tuyen (nguoi|nhan vien|ke toan|thu ky|nhan su) "
+     r"(tuoi|menh|sinh nam|so)|tuyen ung vien|sa thai nhan vien|(chon|giu|loai) nhan vien",
+     r"(tuổi|người tuổi|mệnh|con giáp|người sinh năm) (nào|gì) .{0,25}(làm|vào vị trí|vào làm) (nhân viên|kế toán|thư ký"
+     r"|trợ lý|quản lý|bảo vệ|tài xế|lái xe|giúp việc|nhân sự|bán hàng|thu ngân|công nhân)(?!\w).{0,30}"
+     r"(cho|giúp|ở) (tôi|em|mình|công ty|cty|shop|cửa hàng|quán|xưởng|doanh nghiệp)"
+     r"|(nên|có nên) tuyển (người|nhân viên|ứng viên|kế toán|thư ký)|tuyển (người|nhân viên|kế toán|thư ký|nhân sự) "
+     r"(tuổi|mệnh|sinh năm|số)|tuyển ứng viên|sa thải nhân viên|(chọn|giữ|loại) nhân viên",
+     "tuyen_dung"),
 ]
 
 _RX: dict[str, re.Pattern] = {}
@@ -285,6 +313,20 @@ _HOI_BENH: list[tuple[str, str | None]] = [
      r"|(bi|mac) benh (nang|nan y)|(co|se) bi om (nang |dau )?(khong|ko)|bi om nang|om dau (gi|khong|ko)",
      r"bệnh gì|mắc bệnh|đổ bệnh|(có|sẽ|bị) (bị |mắc )?bệnh (nặng |nan y )?(không|ko|k|nào|nặng|chưa)(?!\w)"
      r"|(bị|mắc) bệnh (nặng|nan y)|(có|sẽ) (bị )?ốm (nặng |đau )?(không|ko)|bị ốm nặng|ốm đau (gì|không|ko)"),
+    # Review CY-1: hỏi THỜI ĐIỂM mắc một bệnh ("Năm nào tôi bị ung thư?", "Tôi bị đột quỵ khi nào?") — câu hỏi có / không
+    # bệnh đội lốt câu chọn năm: không bao giờ trả lời bằng năm (đặt năm cạnh tên bệnh đọc thành lời đoán).
+    (r"(nam|thang|khi|luc|tuoi|dip) nao .{0,25}(bi|mac|do|phat|nhiem|len con) (benh|ung thu|u|tieu duong|dot quy|tai bien"
+     r"|xo gan|suy than|huyet ap|tim mach|dau tim|ung buou|alzheimer|parkinson|om)(?!\w)"
+     r"|(bao gio|may tuoi|nam may) .{0,25}(bi|mac|do|phat|nhiem) (benh|ung thu|u|tieu duong|dot quy|tai bien|xo gan"
+     r"|suy than|huyet ap|tim mach|dau tim|ung buou|om)(?!\w)"
+     r"|(bi|mac|do|phat) (benh|ung thu|tieu duong|dot quy|tai bien|xo gan|suy than|huyet ap|ung buou)(?!\w).{0,20}"
+     r"(nam nao|khi nao|bao gio|luc nao|may tuoi|thang nao)",
+     r"(năm|tháng|khi|lúc|tuổi|dịp) nào .{0,25}(bị|mắc|đổ|phát|nhiễm|lên cơn) (bệnh|ung thư|u|tiểu đường|đột quỵ|tai biến"
+     r"|xơ gan|suy thận|huyết áp|tim mạch|đau tim|ung bướu|alzheimer|parkinson|ốm)(?!\w)"
+     r"|(bao giờ|mấy tuổi|năm mấy) .{0,25}(bị|mắc|đổ|phát|nhiễm) (bệnh|ung thư|u|tiểu đường|đột quỵ|tai biến|xơ gan"
+     r"|suy thận|huyết áp|tim mạch|đau tim|ung bướu|ốm)(?!\w)"
+     r"|(bị|mắc|đổ|phát) (bệnh|ung thư|tiểu đường|đột quỵ|tai biến|xơ gan|suy thận|huyết áp|ung bướu)(?!\w).{0,20}"
+     r"(năm nào|khi nào|bao giờ|lúc nào|mấy tuổi|tháng nào)"),
 ]
 
 # ------------------------------------------------------------------ SK-1: sức khoẻ của NGƯỜI KHÁC

@@ -40,9 +40,13 @@ def _noi(ds: list) -> str:
     return ds[0] if len(ds) == 1 else ", ".join(ds[:-1]) + f" và {ds[-1]}"
 
 
-def cau_mang(mang: str, ds: list[dict], toi_da: int = TOI_DA_NAM) -> str:
-    """"Năm 2027 và 2030 nên chú ý tiền bạc hơn: hạn chế cho vay…" — năm đang đi riêng một câu (việc làm ngay)."""
+def cau_mang(mang: str, ds: list[dict], toi_da: int = TOI_DA_NAM, viec: str | None = None) -> str:
+    """"Năm 2027 và 2030 nên chú ý tiền bạc hơn: hạn chế cho vay…" — năm đang đi riêng một câu (việc làm ngay).
+    `viec` = việc ngắn dùng chung cho mọi năm (hộp nhiều mảng) — năm đang đi không tách câu riêng."""
     ds = ds[:toi_da]
+    if viec is not None:
+        nam = _noi([x["nam"] for x in ds]) + (" (năm đang đi)" if len(ds) == 1 and ds[0].get("hien_tai") else "")
+        return kb.mau("nam").format(nam=nam, mang=kb.ten(mang), viec=viec)
     nay = [x["nam"] for x in ds if x.get("hien_tai")]
     sau = [x["nam"] for x in ds if not x.get("hien_tai")]
     ra = []
@@ -64,53 +68,97 @@ def kiem(van: str) -> list[str]:
 
 
 # ------------------------------------------------------------------ Tử vi
+# Review CY-1 (2026-11-04): mảng đời KHÁC sức khoẻ dùng thang chặt hơn và ĐỌC CÙNG dữ liệu với chương Vận hạn — trước
+# đây Kỵ của can đại hạn cộng +1 cho MỌI năm trong mười năm nên một lý do của năm đã đủ ngưỡng (28/99 năm "nên chú ý"
+# rơi đúng năm Vận hạn gọi là thuận; mỗi báo cáo 5–6 hộp). Nay: chỉ lý do của RIÊNG năm cộng điểm (Kỵ năm nhập 2 · Kỵ năm
+# chiếu 1 · cung lưu niên là cung đó 1 · chồng Kỵ gốc 1 · Vận hạn chấm năm đó "Cần lưu ý" vì Kỵ chạm đúng cung 1 · sao
+# lưu khó năm đang xem 1 · ý bổ sung của năm 1), ngưỡng 3; lớp mười năm chỉ ghi làm bối cảnh. Năm Vận hạn chấm thuận,
+# hoặc Hoá Lộc năm nhập đúng cung → không phải năm nên chú ý mảng đó (không nói ngược chương Vận hạn / Năm nay).
+_DIEM_MANG = {"ky_nhap": 2, "ky_chieu": 1, "luu_nien": 1, "chong_ky": 1, "van_han_can": 1, "sao_luu": 1}
+NGUONG_MANG = 3
+_BOI_CANH = ("dai_han", "ky_dai_han")
+
+
+def _dong_van_han(ls: dict, nam_am_xem: int, nam_am_sinh: int) -> dict[int, dict]:
+    """Dòng mười năm của chương Vận hạn (`tuvi_doi_song.dong_muoi_nam`) — một bộ tính cho hỏi đáp khi chưa có báo cáo."""
+    from app.luangiai import tuvi_doi_song as tvd  # noqa: PLC0415
+    return {g["nam"]: g for g in tvd.dong_muoi_nam(ls, tvd.cham_cung(ls), nam_am_xem, nam_am_sinh)}
+
+
 def tuvi_nam_cung(ls: dict, nam_am_xem: int, nam_am_sinh: int, cung: str, so_nam: int = SO_NAM,
-                  sao_luu_ta: list[str] | None = None, them: dict[int, list[tuple[str, str]]] | None = None) -> list[dict]:
-    """Năm âm lịch trong `so_nam` năm tới mà cung `cung` được kích hoạt (luật ở docstring mô-đun; SK-1 dùng chính hàm này
-    cho Tật Ách). `them` = {năm: [(mã lý do, căn cứ)]} (lý do riêng của năm, mỗi lý do 1 điểm). → [{nam, tuoi, diem,
-    ly_do, can_cu, hien_tai, ky_sao}] theo năm tăng dần (`ky_sao` = sao hoá Kỵ của năm — SK-1 lấy hệ cơ quan)."""
+                  sao_luu_ta: list[str] | None = None, them: dict[int, list[tuple[str, str]]] | None = None,
+                  dong: dict[int, dict] | None = None, mang_thuong: bool = False) -> list[dict]:
+    """Năm âm lịch trong `so_nam` năm tới mà cung `cung` được kích hoạt. `them` = {năm: [(mã lý do, căn cứ)]} (lý do
+    riêng của năm, mỗi lý do 1 điểm). Hoá Lộc năm nhập đúng cung → bỏ năm (cả SK-1).
+    - SK-1 (`mang_thuong=False`, sức khoẻ): thang SK-1 (`_DIEM`, ngưỡng 2, cần ≥ 1 lý do của riêng năm).
+    - Mảng đời khác (`mang_thuong=True`): thang `_DIEM_MANG`, ngưỡng `NGUONG_MANG`, lớp mười năm chỉ là bối cảnh; năm
+      `dong` (dòng Vận hạn {năm: dòng}) chấm thuận → bỏ.
+    Mỗi dòng căn cứ mở bằng "Năm {n} ({can chi}): …" → [{nam, tuoi, diem, ly_do, can_cu, boi_canh, hien_tai, ky_sao}]."""
     from app.calc import lunar  # noqa: PLC0415
     from app.calc import tuvi_phi_hoa as phi  # noqa: PLC0415
+    goc_ky = next((x["cung"] for x in ls.get("tu_hoa") or [] if x["hoa"] == "Kỵ"), None)
     ra = []
     for k in range(so_nam):
         nam = nam_am_xem + k
         can, chi = lunar.can_chi_nam(nam)
         tuoi = nam - nam_am_sinh + 1
-        ky = next(x for x in phi.phi_tu_can(can, ls["cung"]) if x["hoa"] == "Kỵ")
-        ly, cu = [], []
+        hoa = {x["hoa"]: x for x in phi.phi_tu_can(can, ls["cung"])}
+        ky, loc = hoa["Kỵ"], hoa["Lộc"]
+        g = (dong or {}).get(nam) or {}
+        # SK-1 giữ bất biến "Kỵ năm nhập Tật Ách luôn là năm nên chú ý" — Lộc cùng vào thì vẫn nhắc đi khám
+        if (loc["den_cung"] == cung and (mang_thuong or ky["den_cung"] != cung)) or (mang_thuong and g.get("muc") == "thuan"):
+            continue
+        dau = f"Năm {nam} ({can} {chi}): "
+        ly, cu, bc = [], [], []
         if ky["den_cung"] == cung:
             ly.append("ky_nhap")
-            cu.append(f"Hoá Kỵ năm {can} {chi} ({ky['sao']}) nhập cung {cung}")
+            cu.append(f"{dau}Hoá Kỵ năm ({ky['sao']}) nhập cung {cung}")
+            if mang_thuong and goc_ky == cung:
+                ly.append("chong_ky")
+                cu.append(f"{dau}trùng cung Hoá Kỵ gốc (chồng Kỵ)")
         elif ky["xung_cung"] == cung:
             ly.append("ky_chieu")
-            cu.append(f"Hoá Kỵ năm {can} {chi} ({ky['sao']}) ở cung {ky['den_cung']}, chiếu sang {cung}")
+            cu.append(f"{dau}Hoá Kỵ năm ({ky['sao']}) ở cung {ky['den_cung']}, chiếu sang {cung}")
         c_ln = next(c for c in ls["cung"] if c["chi"] == chi)
         if c_ln["ten"] == cung:
             ly.append("luu_nien")
-            cu.append(f"Cung lưu niên năm {nam} ({chi}) là {cung}")
+            cu.append(f"{dau}cung lưu niên ({chi}) là {cung}")
+        if mang_thuong and g.get("muc") == "can_chu_dong" and (g.get("_tac") or (None, None))[1] == cung:
+            ly.append("van_han_can")
+            cu.append(f"{dau}chương Vận hạn chấm năm này Cần lưu ý vì Hoá Kỵ năm chạm cung {cung}")
         dh = next((c for c in ls["cung"] if c["dai_han"][0] <= tuoi <= c["dai_han"][1]), None)
+        lop10 = []
         if dh:
             if dh["ten"] == cung:
-                ly.append("dai_han")
-                cu.append(f"Đại hạn {dh['dai_han'][0]}–{dh['dai_han'][1]} tuổi đi cung {cung}")
+                lop10.append(("dai_han", f"Đại hạn {dh['dai_han'][0]}–{dh['dai_han'][1]} tuổi đi cung {cung}"))
             if dh.get("can"):
                 ky_dh = next(x for x in phi.phi_tu_can(dh["can"], ls["cung"]) if x["hoa"] == "Kỵ")
                 if ky_dh["den_cung"] == cung:
-                    ly.append("ky_dai_han")
-                    cu.append(f"Hoá Kỵ của can đại hạn {dh['can']} ({ky_dh['sao']}) nhập {cung}")
+                    lop10.append(("ky_dai_han", f"Hoá Kỵ của can đại hạn {dh['can']} ({ky_dh['sao']}) nhập {cung}"))
+        for ma, cau in lop10:
+            if mang_thuong:
+                bc.append(f"Bối cảnh cả giai đoạn (không tính điểm cho từng năm): {cau}")
+            else:
+                ly.append(ma)
+                cu.append(f"{dau}{cau}")
         if k == 0 and sao_luu_ta:
             ly.append("sao_luu")
-            cu.append(f"Sao lưu năm {nam} ở {cung}: {', '.join(sao_luu_ta)}")
+            cu.append(f"{dau}sao lưu ở {cung}: {', '.join(sao_luu_ta)}")
         for ma, cau in (them or {}).get(nam, []):
             if ma not in ly:
                 ly.append(ma)
-                cu.append(cau)
-        diem = sum(_DIEM.get(x, 1) for x in ly)
-        # năm chỉ có lớp mười năm (đại hạn) không thành "năm" riêng — lớp đó là cả giai đoạn
-        if diem < NGUONG_TUVI or not (set(ly) & _LOP_NAM or any(x not in _DIEM for x in ly)):
-            continue
-        ra.append({"nam": nam, "tuoi": tuoi, "diem": diem, "ly_do": ly, "can_cu": cu, "hien_tai": k == 0,
-                   "ky_sao": ky["sao"]})
+                cu.append(f"{dau}{cau}")
+        if mang_thuong:
+            diem = sum(_DIEM_MANG.get(x, 1) for x in ly)
+            if diem < NGUONG_MANG:
+                continue
+        else:
+            diem = sum(_DIEM.get(x, 1) for x in ly)
+            # năm chỉ có lớp mười năm (đại hạn) không thành "năm" riêng — lớp đó là cả giai đoạn
+            if diem < NGUONG_TUVI or not (set(ly) & _LOP_NAM or any(x not in _DIEM for x in ly)):
+                continue
+        ra.append({"nam": nam, "tuoi": tuoi, "diem": diem, "ly_do": ly, "can_cu": cu, "boi_canh": bc,
+                   "hien_tai": k == 0, "ky_sao": ky["sao"]})
     return ra
 
 
@@ -121,22 +169,25 @@ def sao_luu_kho(sao_luu: dict | None, cung: str) -> list[str]:
 
 
 def tuvi_nam(ls: dict, nam_am_xem: int, nam_am_sinh: int, mang: str, sao_luu: dict | None = None,
-             so_nam: int = SO_NAM) -> list[dict]:
-    """Năm nên chú ý mảng `mang` theo lá số Tử vi (cung của mảng trong KB). Sức khoẻ → SK-1."""
+             so_nam: int = SO_NAM, dong: dict[int, dict] | None = None) -> list[dict]:
+    """Năm nên chú ý mảng `mang` theo lá số Tử vi (cung của mảng trong KB). Sức khoẻ → SK-1. `dong` = dòng mười năm
+    của chương Vận hạn ({năm: dòng}, báo cáo truyền vào); không có → tự dựng bằng cùng hàm (hỏi đáp)."""
     if mang == "suc_khoe":
         from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
         return skn.tuvi_nam(ls, nam_am_xem, nam_am_sinh, so_nam, sao_luu_kho(sao_luu, skn.CUNG_SK))
     cung = kb.theo_mon(mang, "tuvi").get("cung")
     if not cung:
         return []
+    if dong is None:
+        dong = _dong_van_han(ls, nam_am_xem, nam_am_sinh)
     return [{**x, "mang": mang} for x in tuvi_nam_cung(ls, nam_am_xem, nam_am_sinh, cung, so_nam,
-                                                       sao_luu_kho(sao_luu, cung))]
+                                                       sao_luu_kho(sao_luu, cung), dong=dong, mang_thuong=True)]
 
 
 def ma_ly_do(x: dict) -> str:
     """Lý do mạnh nhất của một năm → phần cuối mã kiểm chứng (theo LOẠI chỉ báo, không theo năm)."""
     ly = x.get("ly_do") or ["chung"]
-    return max(ly, key=lambda m: (_DIEM.get(m, 0), -ly.index(m)))
+    return max(ly, key=lambda m: (_DIEM.get(m, _DIEM_MANG.get(m, 0)), -ly.index(m)))
 
 
 # ------------------------------------------------------------------ Bát tự
@@ -167,8 +218,9 @@ def battu_nam(ls: dict, dong: list[dict], mang: str) -> list[dict]:
                       o["ly"].format(tt=g.get("_tt"), chi=ln["chi"]) + f" ({q['mo_ta']})")
         if not ly:
             continue
-        cu = [f"Năm {g['nam']} {ln['can']} {ln['chi']} (tính từ Lập xuân): {ly[1]}",
-              f"Hai cách lấy dụng thần đều không thấy năm {g['nam']} thuận (cách 1: {_nhan(g.get('muc_cach_1'))}, "
+        dau = f"Năm {g['nam']} ({ln['can']} {ln['chi']}, tính từ Lập xuân): "
+        cu = [f"{dau}{ly[1]}",
+              f"{dau}hai cách lấy dụng thần đều không thấy năm này thuận (cách 1: {_nhan(g.get('muc_cach_1'))}, "
               f"cách 2: {_nhan(g.get('muc_cach_2'))})"]
         ra.append({"nam": g["nam"], "tuoi": g.get("tuoi"), "ly_do": [ly[0]], "can_cu": cu,
                    "hien_tai": bool(g.get("hien_tai")), "mang": mang})
@@ -223,23 +275,46 @@ def hop_chuong(theo_mang: dict[str, list[dict]], ma_mau: str, hop_fn, trong: flo
     co = [(m, ds[:TOI_DA_NAM]) for m, ds in theo_mang.items() if ds]
     if not co:
         return None
-    nd = " ".join(f"{cau_mang(m, ds)} {kb.ranh_gioi(m)}".strip() for m, ds in co)
-    cu = [c for _, ds in co for x in ds for c in x["can_cu"]]
+    nd = noi_dung_hop([(m, ds) for m, ds in co])
+    # căn cứ theo năm CÓ CẤU TRÚC ({mảng: [{nam, can_cu}]}) — Thời gian tới / hỏi đáp lọc theo năm, không dò chuỗi
+    theo_nam = {m: [{"nam": x["nam"], "can_cu": list(dict.fromkeys(x["can_cu"]))} for x in ds] for m, ds in co}
+    cu = list(dict.fromkeys(c for v in theo_nam.values() for y in v for c in y["can_cu"]))
+    cu += list(dict.fromkeys(c for _, ds in co for x in ds for c in x.get("boi_canh") or [] if c not in cu))
     cac_nam = sorted({x["nam"] for _, ds in co for x in ds})
     return hop_fn("thoi_diem", tieu_de([m for m, _ in co]), nd, cu, ma_mau, trong,
                   nam=cac_nam[0], cac_nam=cac_nam, chu_y=[m for m, _ in co],
-                  nam_theo_mang={m: [x["nam"] for x in ds] for m, ds in co})
+                  nam_theo_mang={m: [x["nam"] for x in ds] for m, ds in co}, can_cu_theo_nam=theo_nam)
+
+
+def ranh_gioi_nhieu(cac_mang: list[str]) -> str:
+    """MỘT lời miễn trừ cho hộp nhiều mảng: câu chung + vế riêng ngắn của mảng cần (luật sư, đầu tư…)."""
+    them = list(dict.fromkeys(kb.mang(m).get("ranh_gioi_gon") or "" for m in cac_mang))
+    them = [x for x in them if x]
+    return kb.mau("ranh_gioi_nhieu") + ("; " + "; ".join(them) if them else "") + "."
+
+
+def noi_dung_hop(co: list[tuple[str, list[dict]]]) -> str:
+    """Một mảng → câu năm + việc + ranh giới của mảng. Nhiều mảng (review CY-1: hộp 3 mảng 168 chữ, ba lời miễn trừ) →
+    mỗi mảng một câu năm + việc NGẮN (`viec_ngan`), rồi MỘT lời miễn trừ chung."""
+    if len(co) == 1:
+        m, ds = co[0]
+        return f"{cau_mang(m, ds)} {kb.ranh_gioi(m)}".strip()
+    cau = " ".join(cau_mang(m, ds, viec=kb.mang(m).get("viec_ngan") or kb.viec(m)) for m, ds in co)
+    return f"{cau} {ranh_gioi_nhieu([m for m, _ in co])}"
 
 
 def hop_nam_dich(h: dict, nam: int) -> dict | None:
     """Bản của hộp `h` chỉ nói NĂM `nam` (Thời gian tới đọc một năm đích): mảng có năm đó → câu năm (không "năm đang đi",
-    vì báo cáo nguồn chạy ở Tết năm đích) + ranh giới; căn cứ chỉ giữ dòng của năm đó. Không mảng nào → None."""
+    vì báo cáo nguồn chạy ở Tết năm đích) + ranh giới; căn cứ chỉ giữ dòng của năm đó (theo `can_cu_theo_nam`, có cấu
+    trúc — không dò chuỗi). Không mảng nào → None."""
     co = [m for m in h.get("chu_y") or [] if nam in ((h.get("nam_theo_mang") or {}).get(m) or [])]
     if not co:
         return None
-    nd = " ".join(f"{cau_mang(m, [{'nam': nam}])} {kb.ranh_gioi(m)}".strip() for m in co)
+    nd = noi_dung_hop([(m, [{"nam": nam}]) for m in co])
+    theo = {m: [y for y in (h.get("can_cu_theo_nam") or {}).get(m) or [] if y["nam"] == nam] for m in co}
     return {**h, "tieu_de": tieu_de(co), "noi_dung": nd, "chu_y": co, "nam": nam, "cac_nam": [nam],
-            "nam_theo_mang": {m: [nam] for m in co}, "can_cu": [c for c in h.get("can_cu") or [] if str(nam) in c]}
+            "nam_theo_mang": {m: [nam] for m in co}, "can_cu_theo_nam": theo,
+            "can_cu": list(dict.fromkeys(c for v in theo.values() for y in v for c in y["can_cu"]))}
 
 
 def tim_hop(chuong_ds: list[dict], mang: str) -> dict | None:
@@ -275,7 +350,8 @@ def ap(chuong_ds: list[dict], mon: str, tinh, ma_fn, hop_fn, hoc: tuple = (None,
         if not co:
             continue
         dau = theo[co[0]][0]
-        h = hop_chuong(theo, ma_fn(c["ma"], "+".join(co), ma_ly_do(dau)), hop_fn)
+        # hộp nhiều mảng: mã theo BỘ mảng (không theo lý do của năm đầu — năm đầu đổi mỗi năm, phiếu cũ mất)
+        h = hop_chuong(theo, ma_fn(c["ma"], "+".join(co), ma_ly_do(dau) if len(co) == 1 else ""), hop_fn)
         if not h:
             continue
         dg = kh.danh_gia_phieu(trong_so.get(h["ma_mau"]))
@@ -333,8 +409,9 @@ def tu_bao_cao(chuong_ds: list[dict] | None, mang: str, nam_hien_tai: int) -> li
     if not h:
         return None
     nam = (h.get("nam_theo_mang") or {}).get(mang) or []
+    theo = (h.get("can_cu_theo_nam") or {}).get(mang) or []
     return [{"nam": n, "hien_tai": n == nam_hien_tai, "mang": mang,
-             "can_cu": [c for c in h.get("can_cu") or [] if str(n) in c]} for n in nam]
+             "can_cu": list(dict.fromkeys(c for y in theo if y["nam"] == n for c in y["can_cu"]))} for n in nam]
 
 
 NOI_CHAC = [r"chac chan", r"cho (toi|em|minh) biet chac", r"biet chac", r"ngay cu the", r"noi chac"]
@@ -379,8 +456,15 @@ def muc_hoi(mang: str, ds: list[dict], mon_ten: str | None = None, chac: bool = 
         ds_cu = ds[:TOI_DA_NAM]
     if chac:
         nd = f"{kb.mau('khong_noi_chac')} {nd}"
+    rg = kb.ranh_gioi(mang)
+    # câu cho đoạn mở đầu của câu LO (không kèm ranh giới — đoạn mở đầu đặt ranh giới ở cuối); không có năm nào → câu
+    # "mười năm tới không có năm nào nổi riêng về …" + việc nên giữ (vẫn trả lời đúng mảng được hỏi)
+    rieng = cau_nam or doan_mang(mang, [])
+    rieng = rieng[: -len(rg)].strip() if rg and rieng.endswith(rg) else rieng
     return {"loai": "ghi_chu", "ma": "chu_y_nam", "mang": mang, "cac_nam": [x["nam"] for x in ds_cu],
-            "cau_nam": cau_nam, "noi_dung": nd, "can_cu": [c for x in ds_cu for c in x["can_cu"]], **kb.meta()}
+            "cau_nam": cau_nam, "cau_nam_rieng": rieng,
+            "ranh_gioi": rg, "noi_dung": nd, "can_cu": list(dict.fromkeys(c for x in ds_cu for c in x["can_cu"])),
+            **kb.meta()}
 
 
 def doan_van_han(theo_mang: dict[str, list[dict]], nam_xem: list[int]) -> str:
@@ -428,10 +512,15 @@ def phongthuy_doan_hoi(mang: str, tu_nam: int, huong_cua: str | None = None, so_
     return f"{s} {kb.ranh_gioi(mang)}"
 
 
+def kinhdich_khung() -> str:
+    """Câu khung mở đầu cho câu lo ở Kinh Dịch (KB `mau.kinhdich_khung`)."""
+    return kb.mau("kinhdich_khung")
+
+
 def kinhdich_doan_hoi(mang: str) -> str:
-    """Hỏi đáp Kinh Dịch — quẻ đọc cho việc đang hỏi, không chấm riêng từng năm: chỉ nêu việc nên làm + ranh giới."""
-    return (f"Quẻ đọc cho việc bạn đang hỏi, không chỉ ra năm nào; điều nên giữ về {kb.ten(mang)}: {kb.viec(mang)}. "
-            f"{kb.ranh_gioi(mang)}")
+    """Hỏi đáp Kinh Dịch — quẻ đọc cho việc đang hỏi, không chấm riêng từng năm, không trả lời có / không: câu khung +
+    việc nên giữ + ranh giới."""
+    return f"{kinhdich_khung()} Điều nên giữ về {kb.ten(mang)}: {kb.viec(mang)}. {kb.ranh_gioi(mang)}"
 
 
 MANG_VAN_HAN = ("tien_bac", "cong_viec", "tinh_cam", "di_lai", "giay_to", "nha_cua", "ban_be", "gia_dao")

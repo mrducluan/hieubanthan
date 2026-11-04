@@ -324,7 +324,11 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_do_sang": {
+        "sang": "Điểm khó của bạn thường lộ rõ từ sớm, nên bạn kịp thấy và xoay xở.",
+        "ham": "Điểm khó của bạn thường đến lặng lẽ, khó thấy trước, nên cần tự kiểm tra định kỳ."
+      }
     },
     {
       "id": "yb.pp.sat_don_thu",
@@ -540,7 +544,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_ro": "Với {mang}, khi gặp việc khó bạn thường có người hoặc cách đỡ kịp, dù vậy vẫn nên chuẩn bị."
     },
     {
       "id": "yb.sao.tu_vi_thien_di",
@@ -739,7 +744,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_ro": "Lá số của bạn có một phần nói về cách bạn trải nghiệm những người nam gần gũi nhất: cha, người bạn đời, con trai."
     },
     {
       "id": "yb.sao.thai_duong_ham_phu_the_nu",
@@ -912,7 +918,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Con người bạn hợp cả việc có kỷ luật lẫn kinh doanh; kinh doanh suôn hơn khi phần tiền bạc cũng có điểm hỗ trợ, và nên tách chuyện tình cảm khỏi chuyện tiền."
     },
     {
       "id": "yb.cap.liem_sat_sang",
@@ -935,7 +942,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "viec_ro": "Nhận phụ trách một mảng có chỉ tiêu rõ ràng để dùng đúng sức làm việc có kỷ luật của bạn."
     },
     {
       "id": "yb.cap.liem_sat_ham",
@@ -1454,7 +1462,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Chuyện đôi lứa của người ấy dễ có những lần thay đổi lớn; hai người dễ đến với nhau nhanh theo cảm giác."
     },
     {
       "id": "yb.sao.tham_lang_tien_va_cuoc_vui",
@@ -1531,7 +1540,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Sức hút ở bạn thiên về uy và sức quyết hơn là chuyện tình cảm; bạn hợp vai dẫn dắt đội nhóm."
     },
     {
       "id": "yb.cap.tham_ma_dieu_chuyen",
@@ -1579,7 +1589,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời có thể hơn tuổi hoặc rất khác nếp sống; sách xưa có nói vậy nhưng không phải lúc nào cũng thế."
     },
     {
       "id": "yb.cap.tham_lang_ky_xung_phu_the",
@@ -1632,7 +1643,11 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_do_sang": {
+        "sang": "Lời nói là thế mạnh của bạn: dạy, thuyết phục, đàm phán đều hợp.",
+        "ham": "Lời nói của bạn dễ thành chuyện qua lại, hiểu lầm hơn bạn nghĩ."
+      }
     },
     {
       "id": "yb.sao.cu_mon_tuoi_di_hoc",
@@ -1733,7 +1748,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Với người ấy, chuyện đôi lứa dễ căng vì lời nói hơn vì việc làm; hai người cùng mềm mỏng thì chuyện nhỏ không thành lớn."
     },
     {
       "id": "yb.cap.cu_nhat_loi_noi",
@@ -1838,7 +1854,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_ro": "Năm làm ăn nên giữ chắc dòng tiền: kế hoạch lớn dễ vướng giữa chừng, không hợp để dồn hết vốn."
     },
     {
       "id": "yb.sao.kiep_gap_tai_tinh",
@@ -1863,7 +1880,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Ở chuyện tiền bạc, những khoản hao bất chợt được nền tài chính vững của bạn đỡ phần lớn, chỉ mất chút ít."
     },
     {
       "id": "yb.sao.hoa_linh_nam_cong_su",
@@ -1886,7 +1904,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_ro": "Năm bất đồng với cộng sự hoặc người nhà dễ bùng to; bỏ ra làm riêng lúc đang nóng là phản ứng hay gặp."
     },
     {
       "id": "yb.sao.kinh_da_nguoi_gan_qua_lo",
@@ -1960,7 +1979,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_ro": "Năm người trên dễ để ý và nâng đỡ bạn; cơ hội thường đến qua lời giới thiệu."
     },
     {
       "id": "yb.sao.khoi_viet_thien_di",
@@ -2045,8 +2065,8 @@
         "lop": "luu_nien",
         "co_the_tinh": true
       },
-      "y_goc_tom_tat": "Năm thi gặp Văn Xương Hoá Kỵ: có thi mà không đỗ.",
-      "loi_doi_thuong": "Năm có kỳ thi mà gặp nét này, kết quả dễ chưa như mong muốn dù đã học.",
+      "y_goc_tom_tat": "Năm đi thi gặp Văn Xương hoặc Văn Khúc hoá Kỵ ở cung học hành, công danh: việc thi cử, hồ sơ dễ trắc trở hơn, cần chuẩn bị kỹ.",
+      "loi_doi_thuong": "Năm thi cử, nộp hồ sơ cần chuẩn bị kỹ hơn thường lệ, nhất là phần bạn còn chưa chắc.",
       "viec_nen_lam": "Đăng ký sẵn một phương án dự phòng, và ôn bằng đề thật thay vì học thêm lý thuyết.",
       "co_trong_co_thu": true,
       "rieng_phai": false,
@@ -2055,7 +2075,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_ro": "Năm thi cử, nộp hồ sơ cần chuẩn bị kỹ hơn thường lệ, nhất là phần bạn còn chưa chắc."
     },
     {
       "id": "yb.hoa.khoa_hoac_xuong_nam_thi",
@@ -2102,7 +2123,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Với {mang}, bạn quen làm người giúp người khác mà ít khi được ai giúp lại."
     },
     {
       "id": "yb.sao.ta_huu_menh_pho_ta",
@@ -2599,7 +2621,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "viec_ro": "Dùng tài khoản tiết kiệm có kỳ hạn để giữ tiền khỏi tầm tay; với con cái tiêu tiền nhanh, cha mẹ nên cho tiền theo kế hoạch."
     },
     {
       "id": "yb.cung.sao_dung_cho",
@@ -2848,7 +2871,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời có chủ kiến mạnh, hay quyết nhiều việc trong nhà; hai người nên tập nhường nhau."
     },
     {
       "id": "yb.cung.phu_the_khoa_chuyen_mon",
@@ -2868,7 +2892,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời có chuyên môn rõ, có tiếng trong nghề; hai người dễ cùng ngành."
     },
     {
       "id": "yb.cung.phu_the_vu_khuc_cung_nghe",
@@ -2946,7 +2971,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Với người ấy, chuyện đôi lứa dễ có giai đoạn xa cách hoặc thay đổi lớn; điều giữ hai người gần nhau là chủ động kết nối và nói rõ kỳ vọng."
     },
     {
       "id": "yb.cung.phu_the_liem_sat",
@@ -2994,7 +3020,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Giai đoạn này hai người dễ hiểu lầm nhau qua lời nói, nhất là khi cả hai cùng mệt."
     },
     {
       "id": "yb.cung.phu_the_tu_tuong",
@@ -3017,7 +3044,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời hiền, giỏi, biết lo — một điểm tựa mà hai người có thể cùng giữ."
     },
     {
       "id": "yb.cung.phu_the_tu_vi_ta_huu",
@@ -3043,7 +3071,9 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời có năng lực và được nhiều người quý; sự giúp đỡ qua lại là thế mạnh của hai người.",
+      "viec_nguoi_ay": "Ghi nhận phần việc mỗi người làm và để mỗi người đứng tên những việc mình giỏi."
     },
     {
       "id": "yb.cung.qua_ky_moi_cuoi",
@@ -3307,7 +3337,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Sách xưa nhắc nhà của bạn nên để ý an toàn lửa và điện."
     },
     {
       "id": "yb.cung.dien_trach_kinh_da",
@@ -3508,7 +3539,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Với người làm kinh doanh, danh tiếng là điểm mạnh của bạn: tên tuổi giúp mở cửa."
     },
     {
       "id": "yb.hoa.khoa_dac_loc_day_them",
@@ -3703,7 +3735,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_ro": "Với {mang}, bạn dễ nghĩ mãi một chuyện, khó buông dù đã biết nên buông."
     },
     {
       "id": "yb.hoa.ky_xung_nang_hon_toa",
@@ -4055,7 +4088,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Người ấy quen có không gian riêng, kể cả khi đã có đôi; đó không phải là xa cách, và hai người nên hiểu điều này về nhau."
     },
     {
       "id": "yb.hon.phu_the_sat_tim_hieu_lau",
@@ -4098,7 +4132,9 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời thông minh, nhạy, hay đổi ý; chênh lệch tuổi đôi khi giúp hai người bù cho nhau.",
+      "viec_nguoi_ay": "Khi kế hoạch đổi, hai người hỏi nhau lý do trước khi phản ứng."
     },
     {
       "id": "yb.hon.thien_luong_phu_the_moi_dau",
@@ -4120,7 +4156,9 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Người ấy quý người chín chắn, có trách nhiệm; khi đã gắn bó, mối quan hệ thường bền.",
+      "viec_nguoi_ay": "Đừng vội kết luận về mối quan hệ qua một lần bất đồng."
     },
     {
       "id": "yb.hon.that_sat_phu_the_nhanh",
@@ -4142,7 +4180,9 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Nhịp tình cảm của người ấy đi nhanh, dễ cuốn vào nhau từ đầu; hai người cần thời gian để biết điều gì giữ được lâu.",
+      "viec_nguoi_ay": "Hai người chờ qua giai đoạn say nắng ban đầu rồi mới quyết định lớn."
     },
     {
       "id": "yb.hon.thien_tuong_phu_the_nguoi_quen",
@@ -4164,7 +4204,9 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời hiền hoà, biết điều, hay đến từ những người đã quen lâu: bạn học, đồng nghiệp, hàng xóm.",
+      "viec_nguoi_ay": "Để ý những điểm chung đã có từ lâu giữa hai người."
     },
     {
       "id": "yb.hai.phu_the_trung_menh_nguoi_kia",
@@ -4578,7 +4620,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_ro": "Sách xưa gắn phần này của lá số với đôi mắt — bên trái theo mặt trời, bên phải theo mặt trăng — nên chăm sóc phòng ngừa; lời nhắc này không thay lời bác sĩ."
     },
     {
       "id": "yb.sk.kinh_da_nam_kham",
@@ -4601,7 +4644,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "hop"
+      "hien_thi": "hop",
+      "loi_ro": "Năm nên chú ý sức khoẻ bản thân và những va chạm nhỏ, sắp xếp đi khám tổng quát — không thay lời bác sĩ."
     },
     {
       "id": "yb.sk.dai_han_tat_ach",
@@ -4672,7 +4716,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Giai đoạn này nên chú ý sức khoẻ bản thân hơn thường lệ, sắp xếp đi khám tổng quát mỗi năm — không thay lời bác sĩ."
     },
     {
       "id": "yb.sk.dai_tieu_han_trung_cung",
@@ -4695,7 +4740,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Năm nên giảm việc quá sức, chú ý sức khoẻ bản thân và sắp xếp đi khám tổng quát — không thay lời bác sĩ."
     },
     {
       "id": "yb.sk.thai_duong_ham_nam_mat",
@@ -4721,7 +4767,8 @@
       "school_id": "tam_hop_hien_dai",
       "trang_thai": "nhap",
       "can_duyet": true,
-      "hien_thi": "goc_nhin_khac"
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Giai đoạn này nên chú ý đôi mắt, hạn chế làm việc dưới ánh sáng kém và đi khám mắt — không thay lời bác sĩ."
     },
     {
       "id": "yb.sk.vung_dau_ban_do_than_the",

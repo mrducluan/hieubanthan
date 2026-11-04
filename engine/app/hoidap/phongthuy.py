@@ -626,6 +626,12 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         chung.ket(goi)
     if pl["xu_ly"] not in chung.DAC_BIET and not goi["can_them"]:
         _them_chu_y(goi, pl, nha, nam_xem)                                  # CY-1
+    if pl["xu_ly"] not in chung.DAC_BIET and mo_dau.khong_mo(pl["cau_chuan_hoa"]):
+        # Review CY-1: câu khủng hoảng quan hệ (ngoại tình, ly hôn…) — Phong thuỷ cũng mở bằng câu đồng cảm như 4 mảng kia
+        # (đoạn mở đầu Phong thuỷ đang tắt nên câu này vào gói như một mục đứng đầu).
+        goi["muc"].insert(0, {"loai": "ghi_chu", "ma": "dong_cam",
+                              "noi_dung": mo_dau.dong_cam(mo_dau.dieu_hoi(pl["cau_chuan_hoa"], cau_hoi))})
+        chung.ket(goi)
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     # EN-3b: đoạn mở đầu Phong thuỷ CHƯA bật — trên holdout đóng băng trả lời thẳng lùi 72 → 68 % khi bật (đoạn mở đầu đẩy
     # đoạn bố trí ra khỏi đoạn 1–2). Hàm `mo_dau.pt_mo` giữ lại; bật khi sửa được bằng bộ dev mà holdout không lùi.
