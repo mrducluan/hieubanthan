@@ -182,6 +182,19 @@ test("Nội dung: vùng cấm, liên hệ, tên nội bộ là LỖI CHẶN xu�
   assert.ok(kiemDinhBai(b).loi_chan.some((m) => m.ma === "vung_cam"), "quét cả hỏi đáp");
 });
 
+test("SK-1 sức khoẻ: tên bệnh / lời đoán ốm chặn; hệ cơ quan + đi khám + năm nên chú ý được phép", () => {
+  for (const [cau, maLoi] of [["Người tuổi này dễ bị ung thư phổi.", "ten_benh"],
+    ["Năm 2028 bạn sẽ ốm nặng.", "vung_cam"], ["Dễ cao huyết áp về già.", "ten_benh"]] as [string, string][]) {
+    const b = baiTot();
+    b.noi_dung = goc(doan(chu(cau)));
+    assert.ok(kiemDinhBai(b).loi_chan.some((m) => m.ma === maLoi), `${cau} → ${maLoi}`);
+  }
+  const b = baiTot();
+  b.noi_dung = goc(doan(chu("Năm 2028 nên chú ý sức khoẻ bản thân hơn, nhất là đường hô hấp; sắp xếp đi khám phổi và đo huyết áp đầu năm. Đây là lời nhắc phòng ngừa, không thay lời bác sĩ.")));
+  const kq = kiemDinhBai(b);
+  assert.ok(!kq.loi_chan.some((m) => m.ma === "ten_benh" || m.ma === "vung_cam"), JSON.stringify(kq.loi_chan));
+});
+
 test("Nội dung: giọng phán chỉ cảnh báo (không chặn)", () => {
   const b = baiTot();
   b.noi_dung = goc(doan(chu("Bạn sẽ chắc chắn sẽ thành công, định mệnh rồi. " + tu(700))));

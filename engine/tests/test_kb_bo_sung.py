@@ -16,7 +16,7 @@ from app.narrative import hoi_van
 
 CAM_KB = ["bạn sẽ", "chắc chắn sẽ", "định mệnh", "số phận đã", "không thể tránh", "bẩm sinh", "vốn dĩ", "tiền định",
           "lời nguyền", "chết yểu", "phá sản", "ly hôn chắc", "khắc chết", "xui xẻo", "tai hoạ", "đại kỵ", "giải hạn",
-          "hoá giải bằng", "vật phẩm", "chẩn đoán", "ung thư", "tiểu đường", "huyết áp", "trầm cảm", "vô sinh"]
+          "hoá giải bằng", "vật phẩm", "chẩn đoán", "ung thư", "tiểu đường", "cao huyết áp", "trầm cảm", "vô sinh", "sẽ ốm"]
 SUC_KHOE = re.compile(r"sức khoẻ|sức khỏe|\bbệnh\b|cơ thể", re.I)
 KHONG_THAY = re.compile(r"không thay (?:cho )?lời (?:khuyên của )?bác sĩ", re.I)
 CO = [l for l in bo_sung.LOAI if bo_sung.doc(l)]

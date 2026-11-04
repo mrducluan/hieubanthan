@@ -17,6 +17,7 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
+from app.kb import suc_khoe_kb
 from app.narrative import hoi_van
 
 _FILE = Path(__file__).parent / "data" / "tham_dinh.json"
@@ -44,6 +45,9 @@ def _doc_so() -> dict:
 GOC_NHIN_TOI_THIEU, GOC_NHIN_TOI_DA = 60, 800
 _CAM_GOC_NHIN = [*hoi_van.CAM, "lời nguyền", "khắc chết", "chết yểu", "phá sản", "ly hôn chắc", "hoá giải",
                  "giải hạn", "vật phẩm", "bùa", "cúng sao", "dâng sao", "chữa bệnh", "trúng số", "lô đề"]
+# SK-1 (2026-11-04): chuyên gia được viết hệ cơ quan + việc đi khám + năm nên chú ý sức khoẻ; vẫn cấm tên bệnh, lời đoán
+# ốm, sống chết — danh sách lấy từ KB `suc_khoe_kb.cum_cam` (một nguồn với bộ kiểm AI và báo cáo).
+_CAM_GOC_NHIN += [c for c in suc_khoe_kb.cum_cam() if c not in _CAM_GOC_NHIN]
 _LIEN_HE = re.compile(r"https?://|www\.|\b\d[\d .]{8,}\d\b|@\w+\.\w+|zalo", re.I)
 # Chuẩn hoá bỏ dấu kiểu cũ/mới (hóa ↔ hoá) trước khi so cụm cấm.
 _DAU = str.maketrans({"ó": "o", "ò": "o", "ỏ": "o", "õ": "o", "ọ": "o", "á": "a", "à": "a", "ả": "a", "ã": "a",

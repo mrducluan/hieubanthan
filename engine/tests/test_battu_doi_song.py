@@ -43,7 +43,7 @@ THUAT_NGU = re.compile(
     rf"(?<!\w)(?:{_CAN}) (?:{_CHI})(?!\w)")
 DOA = ["chắc chắn", "định mệnh", "số phận", "tai hoạ", "tai họa", "xui xẻo", "khắc", "phá sản", "ly hôn", "chết",
        "tai nạn", "hạn nặng", "vận xấu", "năm xấu"]
-BENH = ["bệnh", "ung thư", "tiểu đường", "huyết áp", "đột quỵ", "viêm", "khối u", "sẽ bị", "bạn có bị", "trầm cảm",
+BENH = ["bệnh", "ung thư", "tiểu đường", "cao huyết áp", "tăng huyết áp", "sẽ ốm", "đột quỵ", "viêm", "khối u", "sẽ bị", "bạn có bị", "trầm cảm",
         "suy thận", "xơ gan", "suy tim"]
 _GF = Path(__file__).parents[1] / "fixtures" / "golden" / "battu_doi_song.json"
 _G = json.loads(_GF.read_text("utf-8"))["cases"]
@@ -263,8 +263,11 @@ def test_suc_khoe_mien_tru_khong_ten_benh(bc):
     chu = " ".join([sk["tom_tat"], *sk["doan"], *(h["noi_dung"] for h in sk["hop"])]).lower()
     for b in BENH:
         assert b not in chu, b
-    assert re.search(r"khám (sức khoẻ )?định kỳ", chu)
-    assert not re.search(r"(năm|tuổi) \d+.{0,20}(ốm|đau)", chu)
+    assert re.search(r"khám (sức khoẻ )?định kỳ|định kỳ", chu)
+    # SK-1 (2026-11-04): được nêu năm nên chú ý sức khoẻ (lời phòng ngừa) — vẫn cấm lời đoán "sẽ ốm / sẽ bệnh / mắc bệnh"
+    assert not re.search(r"(năm|tuổi) \d+.{0,20}(sẽ |bị )(ốm|đau|bệnh)", chu)
+    from app.luangiai import suc_khoe_nam as skn
+    assert not skn.kiem(chu), skn.kiem(chu)
 
 
 def test_khong_lap_cau_giua_cac_chuong(bc):

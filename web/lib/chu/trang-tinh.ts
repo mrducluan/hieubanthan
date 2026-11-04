@@ -111,7 +111,7 @@ export const CHU_HUYEN_HOC = {
     [`so_sanh.goc_${k}`, { nhom: "Bảng so sánh", nhan: `${ten} — gốc sách (không ghi tên thư viện, phần mềm)`, mac_dinh: goc, toi_da: 80 }],
   ])),
   "so_sanh.ket": { nhom: "Bảng so sánh", nhan: "Câu dưới bảng", toi_da: 200,
-    mac_dinh: "Không mảng nào phán bệnh tật, sống chết hay xổ số — đó là những câu trang luôn từ chối." },
+    mac_dinh: "Không mảng nào nêu tên bệnh, phán sống chết hay xổ số. Sức khoẻ chỉ gợi năm nên chú ý và đi khám, không thay lời bác sĩ." },
 
   "cach.nho": { nhom: "Cách làm", nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Cách Hiểu Bản Thân làm huyền học", toi_da: 60 },
   "cach.lon": { nhom: "Cách làm", nhan: "Tiêu đề mục", mac_dinh: "Ba lớp, tách bạch", toi_da: 80 },

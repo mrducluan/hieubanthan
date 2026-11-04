@@ -6,7 +6,8 @@ Kỷ luật:
   - LLM không tính can chi, tiết khí, đại vận — engine tính (tiết khí VSOP87, golden lunar-typescript).
   - Dụng thần: trình bày cả phù ức/điều hậu (Trích Thiên Tuỷ) và cách cục (Tử Bình Chân Thuyên),
     không tự chọn. Thân vượng/nhược theo thang điểm công bố.
-  - Không phán thọ, bệnh, "khắc chồng khắc con"; không chọn giờ sinh / đặt tên cho con.
+  - Không phán thọ, không tên bệnh, không "khắc chồng khắc con"; không chọn giờ sinh / đặt tên cho con. Sức khoẻ (SK-1):
+    được gợi hệ cơ quan theo hành + đi khám và năm nên chú ý sức khoẻ (lời phòng ngừa, không đoán).
 """
 from __future__ import annotations
 
@@ -97,7 +98,8 @@ CHU_DE = [
                   r"nhat chu .{0,20}(manh|yeu|vuong|nhuoc)", r"mau (sac )?(may man|hop|nao|gi)",
                   r"thieu (kim|moc|thuy|hoa|tho)\b", r"(deo|mang|dung) (gi|da gi|vat gi)"]),
     ("loi_song", [r"loi song", r"sinh hoat", r"suc khoe", r"song the nao", r"mat ngu", r"nghi ngoi", r"kieng gi",
-                  r"(?<!\w)yeu(?!\w)", r"(?<!\w)met(?!\w)", r"tim mach", r"dau xuong", r"hay lanh", r"an gi", r"co hon", r"nong tinh"]),
+                  r"(?<!\w)yeu(?!\w)", r"(?<!\w)met(?!\w)", r"tim mach", r"dau xuong", r"hay lanh", r"an gi", r"co hon", r"nong tinh",
+                  r"(?<!\w)benh (gi|tat)", r"mac benh", r"dau (da day|bung|dau|lung|khop)", r"tieu hoa", r"kham (tong quat|dinh ky)"]),
     ("gia_dinh", [r"cha me", r"to tien", r"anh em", r"con cai", r"gan bo me", r"gia dinh", r"(?<!\w)bo (toi|em|minh)",
                   r"(?<!\w)me (toi|em|minh)", r"em trai", r"chi gai", r"anh trai", r"to nghiep", r"cham bo", r"cham me",
                   r"(?<!\w)bo .{0,12}mat som", r"co nghiep", r"ve que"]),
@@ -268,6 +270,13 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
     if pl["xu_ly"] in ("an_toan", "tu_choi_nhe"):
         from app.kb import kinhdich_kb  # noqa: PLC0415 — mẫu dùng chung Huyền học
         goi["mau"] = kinhdich_kb.mau("an_toan" if pl["xu_ly"] == "an_toan" else "tu_choi")
+        if pl["xu_ly"] == "tu_choi_nhe":          # SK-1: câu hỏi có bệnh → hệ cơ quan (hành yếu nhất) + đi khám
+            he = None
+            if ls:
+                from app.kb import suc_khoe_kb  # noqa: PLC0415
+                tl = ls["ngu_hanh"]["diem"]
+                he = suc_khoe_kb.he_hanh(min(("Mộc", "Hỏa", "Thổ", "Kim", "Thủy"), key=lambda h: tl.get(h, 0)))
+            goi["mau"] = chung.mau_tu_choi(pl.get("cau_goc"), pl["cau_chuan_hoa"], goi["mau"], he)
         return chung.ket(goi)
     if pl["xu_ly"] == "dan_huong":
         goi["mau"] = chung.mau_dan_huong(pl["cau_chuan_hoa"])
@@ -488,6 +497,8 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict)
         goi["muc"].insert(1 if goi["muc"] and goi["muc"][0]["loai"] == "tu_tru" else 0, m)
     else:
         goi["muc"].append(m)
+    if m.get("chuong") == "suc_khoe" and (g := chung.muc_suc_khoe_hoi(t)):       # SK-1: câu nhắc bộ phận → đi khám
+        goi["muc"].insert(goi["muc"].index(m) + 1, g)
     chung.ket(goi)
 
 

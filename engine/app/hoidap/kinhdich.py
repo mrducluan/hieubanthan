@@ -268,7 +268,7 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | 
         goi["mau"] = kb.mau("an_toan")
         return chung.ket(goi)
     if pl["xu_ly"] == "tu_choi_nhe":
-        goi["mau"] = kb.mau("tu_choi")
+        goi["mau"] = chung.mau_tu_choi(pl.get("cau_goc"), pl["cau_chuan_hoa"], kb.mau("tu_choi"))     # SK-1
         return chung.ket(goi)
     if pl["xu_ly"] == "dan_huong":
         goi["mau"] = chung.mau_dan_huong(pl["cau_chuan_hoa"])

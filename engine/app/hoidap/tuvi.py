@@ -4,7 +4,8 @@ gói bằng chứng chỉ từ lá số (iztro, CALC) + KB; NARRATIVE: template 
 
 Kỷ luật từ skill `tuvi-vn` (source-skills/tuvi-vn/SKILL.md):
   - LLM không an sao, không tự tính hạn: lá số và vận hạn do engine (iztro 2.6.0) tính.
-  - Không phán bệnh, thọ yểu, tai nạn, kiện tụng, con số tiền; hạn = chủ đề giai đoạn.
+  - Không phán thọ yểu, tai nạn, kiện tụng, con số tiền; hạn = chủ đề giai đoạn. Sức khoẻ (SK-1, 2026-11-04): không
+    tên bệnh, không chẩn đoán — được gợi hệ cơ quan + đi khám và năm nên chú ý sức khoẻ (lời phòng ngừa).
   - Ba lớp hạn đọc tách bạch, ưu tiên đã khoá: đại hạn > lưu niên > tiểu hạn.
   - Không xem lá số người khác khi thiếu dữ liệu/đồng ý; hợp hôn không phán "khắc".
 Chế độ (quyết định 2026-09-30): tham_khao (mặc định) | chi_tiet.
@@ -70,7 +71,9 @@ CHU_DE_CUNG = [   # (cung, mẫu) — câu hỏi cá nhân không nêu tên cung
                   r"xuat khau lao dong", r"di (nhat|han|duc|my|uc|canada|dai loan)", r"sang (nhat|han|duc|my|uc|canada|nuoc)",
                   r"bay sang", r"xuat hanh", r"doi cho o", r"(o|lam an|lam viec|song) xa(?! hoa)", r"xa nha"]),
     ("Tật Ách", [r"suc khoe", r"cang thang", r"ap luc", r"nghi ngoi", r"can bang", r"met moi", r"mat ngu", r"hay om",
-                 r"om (yeu|dau)", r"dao keo", r"di kham", r"tai uong", r"yeu (hon|di)"]),
+                 r"om (yeu|dau)", r"dao keo", r"di kham", r"tai uong", r"yeu (hon|di)",
+                 # SK-1: câu sức khoẻ chung, bộ phận ("có bị bệnh gì", "hay đau dạ dày", "kham suc khoe")
+                 r"(?<!\w)benh (gi|tat)", r"mac benh", r"dau (da day|bung|dau|lung|khop)", r"tieu hoa", r"kham (tong quat|dinh ky)"]),
     ("Tài Bạch", [r"lam an", r"tien", r"tai chinh", r"giau", r"lam giau", r"thu nhap", r"tai loc", r"lua tien",
                   r"dau tu", r"no nan", r"tieu (hoang|xai|pha)", r"chi tieu"]),
     ("Điền Trạch", [r"nha cua", r"nha dat", r"bat dong san", r"mua nha", r"nha o", r"dat dai", r"tai san", r"thua ke",
@@ -646,7 +649,9 @@ def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | No
         goi["mau"] = _mau_chung("an_toan")
         return chung.ket(goi)
     if pl["xu_ly"] == "tu_choi_nhe":
-        goi["mau"] = _mau_chung("tu_choi")
+        from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+        goi["mau"] = chung.mau_tu_choi(pl.get("cau_goc"), pl["cau_chuan_hoa"], _mau_chung("tu_choi"),
+                                       skn.tuvi_he(ls) if ls else None)
         return chung.ket(goi)
     if pl["xu_ly"] == "dan_huong":
         goi["mau"] = chung.mau_dan_huong(pl["cau_chuan_hoa"])
@@ -913,6 +918,8 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict,
         goi["muc"].insert(0, m)
     else:
         goi["muc"].append(m)
+    if m.get("chuong") == "suc_khoe" and (g := chung.muc_suc_khoe_hoi(pl["cau_chuan_hoa"])):   # SK-1: bộ phận → đi khám
+        goi["muc"].insert(goi["muc"].index(m) + 1, g)
     chung.ket(goi)
 
 

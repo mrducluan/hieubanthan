@@ -49,7 +49,7 @@ TN_BT = re.compile(r"Tỷ Kiên|Kiếp Tài|Thực Thần|Thương Quan|Thiên T
 DOA = ["chắc chắn", "định mệnh", "số phận", "tai hoạ", "tai họa", "xui xẻo", "xui", "khắc", "phá sản", "ly hôn", "chết",
        "tai nạn", "hạn nặng", "vận xấu", "năm xấu", "đại hạn xấu", "giải hạn", "cúng", "bùa", "vật phẩm", "phong thuỷ",
        "bạn sẽ", "điềm xấu", "đếm ngược"]
-BENH = ["bệnh", "ung thư", "tiểu đường", "huyết áp", "đột quỵ", "viêm", "khối u", "sẽ bị", "trầm cảm", "suy thận"]
+BENH = ["bệnh", "ung thư", "tiểu đường", "cao huyết áp", "tăng huyết áp", "sẽ ốm", "đột quỵ", "viêm", "khối u", "sẽ bị", "trầm cảm", "suy thận"]
 NGUOI_LON = ["vay", "bảo lãnh", "cưới", "hợp đồng", "đầu tư", "góp vốn", "nhà đất"]
 GOLDEN_TV = json.loads((Path(__file__).parents[1] / "fixtures" / "golden" / "lasotuvi_60.json").read_text("utf-8"))["cases"]
 

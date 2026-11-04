@@ -21,7 +21,10 @@ from app.luangiai import an_toan as _at  # noqa: E402
 
 # Từ chối nhẹ: bộ Thần số dùng chung TRỪ các cụm Huyền học trả lời được theo kiểu "định hướng" (MT-ĐS mục 4):
 # "chắc chắn" (B0); "tai nạn", "thắng kiện" (B1: trả lời bằng mảng đi lại / giấy tờ + lưu ý, không có/không).
-_BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khong|nam nay|nam sau)", r"thang kien"}
+_BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khong|nam nay|nam sau)", r"thang kien",
+               # SK-1 (2026-11-04): câu sức khoẻ CHUNG không nêu tên bệnh → trả lời bằng chương sức khoẻ (mức, hệ cơ quan,
+               # năm nên chú ý, đi khám, câu không thay lời bác sĩ), không từ chối nữa.
+               r"benh gi", r"mac benh", r"dau da day", r"suc khoe cua toi the nao"}
 TU_CHOI_THEM = [r"so de", r"song duoc bao lau", r"nao chet", r"tho bao nhieu", r"doan benh",
                 r"benh gan",
                 # "yểm bùa nhà hàng xóm" = tác động lên người khác → từ chối; "nhà tôi có BỊ yểm bùa không" = nỗi sợ tâm
@@ -40,6 +43,11 @@ TU_CHOI_HH = [
     r"lam hr|(?<!\w)hr(?!\w)", r"chu (cty|cong ty|doanh nghiep).{0,40}(ung vien|nhan vien|nhan|tuyen)",
     r"nhan vien .{0,40}(nghi viec|trung thuc|giu|chon|nhan|sa thai)", r"tuyen (ke toan|nhan vien|nguoi|nhan su|thu ky)",
     r"ai trung thuc", r"(chon|giu|loai) nhan vien",
+    # SK-1: câu sức khoẻ chung về CHÍNH mình được trả lời; vẫn từ chối (lời đáp gợi hệ cơ quan + đi khám): hỏi bệnh gì
+    # kèm bộ phận cụ thể, hỏi bệnh của người khác, hỏi cách chữa.
+    r"benh gi .{0,12}(phoi|gan|than|tim|da day|mau|xuong|ruot|mat)", r"(gan|than|tim|phoi|da day) hay (gi|cai gi)",
+    r"(?<!\w)(con|be|me|bo|ong|ba|chong|vo|chau|anh|chi) (toi |em |minh )?.{0,25}benh gi",
+    r"chua (the nao|ra sao|sao cho|kieu gi|bang gi)",
 ]
 TU_CHOI_HH_TAT_CA = [m for ds in _h.TU_CHOI.values() for m in ds if m not in _BO_CHAN_HH] + TU_CHOI_THEM + TU_CHOI_HH
 # MT-ĐS B1 — câu tâm linh (vong, căn, ma, bùa, trùng tang, nghiệp…): KHÔNG luận, KHÔNG nối sang lá số (nối = ngầm xác
@@ -82,6 +90,32 @@ def dac_biet(t: str, raw: str | None = None) -> str | None:
     if co(t, [m for m in TAM_LINH if not _at.bo_qua_mo_ho(m, raw)]):
         return "dan_huong"
     return None
+
+
+def mau_tu_choi(goc: str | None, t: str, mau_chung: str, he_la_so: dict | None = None) -> str:
+    """SK-1: lời đáp câu đã xếp từ chối. Triệu chứng cấp → khuyên đi khám NGAY; câu hỏi có bệnh / đoán bệnh → không
+    xác nhận, không phủ nhận, gợi hệ cơ quan (theo câu hỏi, không rõ thì theo lá số `he_la_so`) + đi khám + câu không
+    thay lời bác sĩ; còn lại (sống chết, chữa trị, thai nhi, may rủi…) → `mau_chung` như cũ."""
+    from app.kb import suc_khoe_kb  # noqa: PLC0415
+    from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+    nhom = _at.nhom_suc_khoe(goc or t)
+    if nhom == "cap_cuu":
+        return suc_khoe_kb.mau("cap_cuu")
+    if nhom == "hoi_benh":
+        return f"{skn.doan_hoi_benh(t, he_la_so)} {skn.mien_tru()}"
+    return mau_chung
+
+
+def muc_suc_khoe_hoi(t: str) -> dict | None:
+    """SK-1: câu sức khoẻ (không bị từ chối) nhắc một bộ phận / hệ ("hay đau dạ dày", "lo về tim") → mục gợi đi khám đúng
+    hệ đó (không chép chữ người dùng, chỉ tên hệ từ KB)."""
+    from app.kb import suc_khoe_kb  # noqa: PLC0415
+    he = suc_khoe_kb.he_cau_hoi(t)
+    if not he:
+        return None
+    return {"loai": "ghi_chu", "ma": "suc_khoe_hoi", "he": he["he"], "kham": he["kham"],
+            "noi_dung": suc_khoe_kb.mau("hoi_benh").format(he=he["he"], kham=he["kham"]),
+            **suc_khoe_kb.meta()}
 
 
 def mau_dan_huong(t: str) -> str:

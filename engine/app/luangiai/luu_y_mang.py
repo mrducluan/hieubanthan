@@ -122,6 +122,16 @@ def dung(bc_chuong: list[dict], mo_dun: str, muc_cung: dict[str, str] | None = N
         else:
             dong = {"luu_y": o["luu_y"], "viec": o["viec"], "ma_mau": None,
                     "can_cu": [f"Mức của mảng lấy từ chương {c['tieu_de']}" if c else "Mức của mảng theo cung đã chấm"]}
+        if ma == "suc_khoe" and c:
+            # SK-1 (2026-11-04): năm nên chú ý sức khoẻ của chương (cùng hộp, cùng hàm) nối vào điều nên để ý — câu gọn,
+            # lời đủ (hệ cơ quan, việc đi khám) ở hộp của chương
+            from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+            hn = next((x for x in c.get("hop") or [] if x.get("tieu_de") == skn.TIEU_DE_HOP and x.get("cac_nam")), None)
+            if hn:
+                cn = hn["cac_nam"]
+                dong["luu_y"] = (f"{dong['luu_y']} Năm nên chú ý sức khoẻ và đi khám kỹ hơn: "
+                                 f"{', '.join(str(n) for n in cn)}.")
+                dong["can_cu"] = [*dong["can_cu"], *(hn.get("can_cu") or [])]
         ra.append({"ma": ma, "ten": ten, "muc": muc, "nhan_muc": _nhan_muc(mo_dun, muc), "tu_chuong": ch,
                    "ranh_gioi": (kb.get("_ranh_gioi") or {}).get(ma), **dong})
     return ra
