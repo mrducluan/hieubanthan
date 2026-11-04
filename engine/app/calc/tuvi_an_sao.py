@@ -24,7 +24,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from app import config
-from app.calc import lunar, tuvi_hoa_linh_vn
+from app.calc import lunar, tuvi_hoa_linh_vn, tuvi_thai_tue_vn, tuvi_vong_han
 
 THU_MUC = Path(__file__).resolve().parents[2] / "ziwei"
 SCRIPT = THU_MUC / "an_sao.mjs"
@@ -61,11 +61,35 @@ def phien_ban_iztro() -> str:
     return json.loads(p.read_text(encoding="utf-8"))["version"]
 
 
-def _am(x: dt.date, tz_lich: float) -> str:
-    """Âm lịch VIỆT NAM (Hồ Ngọc Đức) của ngày dương `x` theo múi giờ lịch `tz_lich`, dạng JSON cho an_sao.mjs."""
+def _am(x: dt.date, tz_lich: float, thang_nhuan: str = "thang_sau") -> str:
+    """Âm lịch VIỆT NAM (Hồ Ngọc Đức) của ngày dương `x` theo múi giờ lịch `tz_lich`, dạng JSON cho an_sao.mjs.
+
+    TV-NHUAN3 `ca_thang_sau` + ngày thuộc tháng nhuận: đưa vào iztro ngày âm ĐÃ ĐỔI — tháng + 1, không nhuận (tháng Chạp
+    nhuận → 13, iztro đếm vòng 12 ≡ tháng Giêng, như nửa sau nhuận tháng Chạp của cách `thang_sau`); năm giữ năm sinh
+    (chưa qua Tết); ngày KHÔNG kẹp (ngày 30 giữ 30 dù tháng sau 29 ngày — như iztro tính nửa sau tháng nhuận, nên ngày
+    16–hết trùng khít `thang_sau`). `nhan` = ngày âm thật, chỉ để in nhãn. Lựa chọn khác: JSON y như trước."""
     ng, th, na, nh = lunar.solar_to_lunar(x.day, x.month, x.year, tz_lich)
-    return json.dumps({"nam": na, "thang": th, "ngay": ng, "nhuan": bool(nh),
-                       "so_ngay": lunar.so_ngay_thang(th, na, nh, tz_lich)})
+    so = lunar.so_ngay_thang(th, na, nh, tz_lich)
+    if nh and thang_nhuan == "ca_thang_sau":
+        return json.dumps({"nam": na, "thang": th + 1, "ngay": ng, "nhuan": False, "so_ngay": so,
+                           "nhan": {"nam": na, "thang": th, "ngay": ng, "nhuan": True}})
+    return json.dumps({"nam": na, "thang": th, "ngay": ng, "nhuan": bool(nh), "so_ngay": so})
+
+
+def _am_sinh(x: dt.date, tz_lich: float, lich: str, thang_nhuan: str) -> str:
+    """Ngày âm của NGÀY SINH đưa vào iztro. Lịch Trung Quốc: để iztro tự đổi ("") — trừ `ca_thang_sau` rơi vào tháng
+    nhuận (lịch Trung Quốc = Hồ Ngọc Đức UTC+8, khớp lunar-lite của iztro mọi ngày nhuận 1900–2100)."""
+    if lich != "trung":
+        return _am(x, tz_lich, thang_nhuan)
+    if thang_nhuan == "ca_thang_sau" and lunar.solar_to_lunar(x.day, x.month, x.year, TZ_TRUNG)[3]:
+        return _am(x, TZ_TRUNG, thang_nhuan)
+    return ""
+
+
+def _fix_leap(thang_nhuan: str) -> bool:
+    """`fix_leap` của iztro: nửa sau tháng nhuận tính tháng sau. `ca_thang_sau` đã tự đổi tháng ở `_am` (không còn
+    nhuận) nên giữ True — ngày không nhuận cùng khoá bộ nhớ với `thang_sau`."""
+    return thang_nhuan != "thang_chinh"
 
 
 # EN-1 HT-1: mỗi tiến trình Node (iztro) chiếm tới ~67 MB; pool luồng FastAPI 120 → vài chục lượt Tử vi cùng lúc làm
@@ -273,7 +297,9 @@ def tu_kiem() -> None:
         raise AnSaoLoi("an_sao.mjs và may_chu.mjs cho lá số mẫu khác nhau")
 
 
-THANG_NHUAN = ("thang_sau", "thang_chinh")   # nửa sau tháng nhuận: tính sang tháng sau (iztro) / như tháng chính
+# Tháng nhuận: nửa sau tính sang tháng sau (iztro, mặc định) / cả tháng như tháng chính / TV-NHUAN3 cả tháng tính như
+# tháng sau. Golden tính tay: fixtures/golden/tuvi_thang_nhuan_3_phai.json.
+THANG_NHUAN = ("thang_sau", "thang_chinh", "ca_thang_sau")
 HOA_LINH = ("viet", "trung")                 # lối Việt (Nam phái) / Trung Châu (iztro)
 
 
@@ -327,12 +353,12 @@ def an_sao_tho(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngon_ngu: str = "vi
     goc, ti_goc = ngay_duong, ti
     ngay_duong, ti = _ty_muon(ngay_duong, ti)
     la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, ngon_ngu,
-                          am=_am(ngay_duong, tz_lich) if lich == "viet" else "",
-                          fix_leap=thang_nhuan == "thang_sau"))
+                          am=_am_sinh(ngay_duong, tz_lich, lich, thang_nhuan),
+                          fix_leap=_fix_leap(thang_nhuan)))
     if ti_goc == 12:
         # nhãn hiển thị (ngày dương / âm, "Tý muộn") giữ theo ngày giờ người dùng nhập; sao, cung, tứ trụ theo ngày sau
         nhan = json.loads(_chay(_d(goc), 12, gioi_tinh, ngon_ngu, am=_am(goc, tz_lich) if lich == "viet" else "",
-                                fix_leap=thang_nhuan == "thang_sau"))
+                                fix_leap=_fix_leap(thang_nhuan)))
         la.update({k: nhan[k] for k in ("solarDate", "lunarDate", "time", "timeRange")})
         la["ty_muon_an_ngay_sau"] = True
     if hoa_linh == "viet":
@@ -372,12 +398,14 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
         raise ValueError("time_index phải trong 0..12")
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
+    if thang_nhuan not in THANG_NHUAN:
+        raise ValueError("thang_nhuan không hợp lệ")
     viet = lich != "trung"
     ngay_duong, ti = _ty_muon(ngay_duong, ti)
     la = json.loads(_chay(_d(ngay_duong), ti, gioi_tinh, "vi-VN", _d(ngay_xem),
-                          am=_am(ngay_duong, tz_lich) if viet else "",
+                          am=_am_sinh(ngay_duong, tz_lich, lich, thang_nhuan),
                           am_xem=_am(ngay_xem, config.CALENDAR_MERIDIAN_TZ) if viet else "",
-                          fix_leap=thang_nhuan == "thang_sau"))
+                          fix_leap=_fix_leap(thang_nhuan)))
     h, cung = la["horoscope"], la["palaces"]
 
     def _lop(o: dict, tu_hoa: bool = True) -> dict:
@@ -397,11 +425,25 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
     return {
         "tuoi_mu": h["age"]["nominalAge"],
         "dai_han": {**_lop(h["decadal"]), "tu_tuoi": dh[0], "den_tuoi": dh[1],
-                    "cung_goc": cung[h["decadal"]["index"]]["name"]},
+                    "cung_goc": cung[h["decadal"]["index"]]["name"],
+                    **(_vong_dh(h["decadal"]["earthlyBranch"]) if chi_tiet else {})},
         "tieu_han": {**_lop(h["age"], False), "cung_goc": cung[h["age"]["index"]]["name"]},
         "luu_nien": {**_lop(h["yearly"]), "cung_goc": cung[h["yearly"]["index"]]["name"],
-                     **({"vong_thai_tue": _ln_vong} if chi_tiet else {})},
+                     **({"vong_thai_tue": _ln_vong, **_vong_ln(_ln)} if chi_tiet else {})},
     }
+
+
+def _vong_ln(ln: dict) -> dict:
+    """TV-VONG (chỉ hiển thị): vòng Tướng tiền lưu niên của iztro + tên sách Việt cho vòng Thái Tuế lưu niên."""
+    return {"vong_tuong_tien": ln.get("jiangqian12", []),
+            "vong_thai_tue_nam_phai": [tuvi_thai_tue_vn.ten_nam_phai(t) for t in ln.get("suiqian12", [])]}
+
+
+def _vong_dh(chi: str) -> dict:
+    """TV-VONG (chỉ hiển thị): vòng Thái Tuế + Tướng tiền của đại hạn, khởi từ chi cung đại hạn (iztro không có)."""
+    return {"vong_thai_tue": tuvi_vong_han.vong_tue_tien(chi),
+            "vong_thai_tue_nam_phai": tuvi_vong_han.vong_tue_tien(chi, nam_phai=True),
+            "vong_tuong_tien": tuvi_vong_han.vong_tuong_tien(chi)}
 
 
 # EN-5.2 — sao lưu năm: tên iztro (vi-VN) → mã; vị trí đọc từ kết quả iztro (stars + suiqian12), không tự tính lại.
@@ -429,11 +471,13 @@ def nap_truoc(ngay_duong: dt.date, ti: int, gioi_tinh: str, ds_xem: list[dt.date
     if not _dung_chay_san() or not 0 <= ti <= 12 or gioi_tinh not in ("nam", "nu"):
         return
     ngay_duong, ti = _ty_muon(ngay_duong, ti)
+    if thang_nhuan not in THANG_NHUAN:
+        return
     viet = lich != "trung"
     tz_sinh = TZ_TRUNG if lich == "trung" else tz_lich
-    ngay, am = _d(ngay_duong), (_am(ngay_duong, tz_sinh) if viet else "")
-    fix = thang_nhuan == "thang_sau"
-    am_vh = _am(ngay_duong, tz_lich) if viet else ""          # van_han dùng tz_lich (như hàm van_han)
+    ngay, am = _d(ngay_duong), _am_sinh(ngay_duong, tz_sinh, lich, thang_nhuan)
+    fix = _fix_leap(thang_nhuan)
+    am_vh = _am_sinh(ngay_duong, tz_lich, lich, thang_nhuan)   # van_han dùng tz_lich (như hàm van_han)
     con = []
     for x in dict.fromkeys(ds_xem):
         k = (ngay, ti, gioi_tinh, "vi-VN", _d(x), am_vh, _am(x, config.CALENDAR_MERIDIAN_TZ) if viet else "", fix)

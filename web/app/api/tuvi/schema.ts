@@ -26,7 +26,7 @@ export const ChartInput = z.object({
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).default("exact"),
   /** TV-PHAI — Hoả/Linh lối Việt | Trung Châu; nửa sau tháng nhuận tính tháng sau | như tháng chính. */
   hoa_linh: z.enum(["viet", "trung"]).optional(),
-  thang_nhuan: z.enum(["thang_sau", "thang_chinh"]).optional(),
+  thang_nhuan: z.enum(["thang_sau", "thang_chinh", "ca_thang_sau"]).optional(),
   /** TV-LICH — âm lịch Việt Nam (mặc định) | lịch Trung Quốc. */
   lich: z.enum(["viet", "trung"]).optional(),
   /** TV-LN — phái tính lưu nguyệt (tháng hạn). */
@@ -153,6 +153,7 @@ export const LaSoOutput = z.object({
   co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })),
   /** TV-PHAI — trường phái đang dùng cho lá số này. */
   phai: z.object({ hoa_linh: z.string(), thang_nhuan: z.string(), co_the_doi_thang_nhuan: z.boolean(),
+    sinh_thang_nhuan: z.boolean().optional(),   // TV-NHUAN3: sinh trong tháng nhuận (mọi ngày)
     lich: z.string().optional(), lich_khac: z.boolean().optional(), luu_nguyet: z.string().optional() }).optional(),
 });
 export type LaSoOutputT = z.infer<typeof LaSoOutput>;

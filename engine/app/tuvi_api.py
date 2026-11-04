@@ -62,7 +62,8 @@ class TuanTrietInput(BaseModel):
     do_tin_gio: HourConfidence = HourConfidence.EXACT
     # TV-PHAI (chủ dự án chốt 2026-10-02): "hiện cả hai" — mặc định lối Việt / tính tháng sau.
     hoa_linh: Literal["viet", "trung"] = "viet"
-    thang_nhuan: Literal["thang_sau", "thang_chinh"] = "thang_sau"
+    # TV-NHUAN3: "ca_thang_sau" = cả tháng nhuận tính như tháng sau (tuvi_an_sao.THANG_NHUAN).
+    thang_nhuan: Literal["thang_sau", "thang_chinh", "ca_thang_sau"] = "thang_sau"
     # TV-LICH (chủ dự án yêu cầu 2026-10-02): âm lịch Việt Nam (mặc định) ↔ lịch Trung Quốc (cách iztro tự đổi).
     lich: Literal["viet", "trung"] = "viet"
     # TV-LN (chủ dự án yêu cầu 2026-10-08): phái tính lưu nguyệt (tháng hạn), người dùng chọn.
@@ -163,6 +164,8 @@ class _DauVao:
         self.phai = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan, "lich": inp.lich,
                      "luu_nguyet": inp.luu_nguyet,
                      "co_the_doi_thang_nhuan": bool(self.am_lap[3]) and self.am_lap[0] > 15,
+                     # TV-NHUAN3: sinh trong tháng nhuận (mọi ngày) — cách "cả tháng tính tháng sau" đổi được lá số
+                     "sinh_thang_nhuan": bool(self.am_lap[3]),
                      # ngày sinh này có ngày âm khác nhau giữa lịch Việt và lịch Trung Quốc → lá số có thể khác
                      "lich_khac": self.lich_khac}
         self.tuy_chon = {"hoa_linh": inp.hoa_linh, "thang_nhuan": inp.thang_nhuan, "lich": inp.lich}

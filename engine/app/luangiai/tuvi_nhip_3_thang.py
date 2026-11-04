@@ -164,11 +164,16 @@ def nua_sau_nhu(thang: int) -> str:
     return f"tháng {sau}" + (" năm sau" if sau == 1 else "")
 
 
+def tinh_thang_sau(t: dict) -> bool:
+    """TV-NHUAN3: tháng nhuận được tính CẢ tháng như tháng sau (lựa chọn `ca_thang_sau`)."""
+    return bool(t.get("nhuan")) and t.get("phan") == "ca_thang" and t.get("thang_tinh", t["thang"]) != t["thang"]
+
+
 def nhan_thang(t: dict) -> str:
     """"tháng 9" · "tháng 6 nhuận" · "nửa đầu tháng 6 nhuận" · "nửa sau tháng 6 nhuận (tính như tháng 7)" — chữ
     thường, để ghép giữa câu. Nửa sau mang can chi THÁNG SAU, nên nhãn nói rõ để can chi in cạnh không gây hiểu lầm."""
     s = f"tháng {t['thang']}" + (" nhuận" if t["nhuan"] else "")
-    if t["phan"] == "nua_sau":
+    if t["phan"] == "nua_sau" or tinh_thang_sau(t):
         s += f" (tính như {nua_sau_nhu(t['thang'])})"
     return {"nua_dau": "nửa đầu ", "nua_sau": "nửa sau "}.get(t["phan"], "") + s
 
@@ -282,6 +287,10 @@ def dien_giai_thang(t: dict, th: list[dict], nam: dict, muc: str, ly: list[dict]
         so = t["thang_tinh"] % 12 or 12
         can_cu.append(f"Nửa sau tháng nhuận tính như tháng {so}: cả cung tháng lẫn can chi tháng (lựa chọn "
                       "\"tính tháng sau\" trong khung Trường phái).")
+    elif tinh_thang_sau(t):
+        so = t["thang_tinh"] % 12 or 12
+        can_cu.append(f"Cả tháng nhuận tính như tháng {so}: cả cung tháng lẫn can chi tháng (lựa chọn "
+                      "\"cả tháng tính tháng sau\" trong khung Trường phái).")
     can_cu += [x["noi_dung"] for x in ly_do]
     can_cu.append(_GIAI_MUC[muc])
     can_cu += cu_lk[1:]

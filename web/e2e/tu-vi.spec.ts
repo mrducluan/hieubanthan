@@ -142,10 +142,23 @@ test("sinh nửa sau tháng nhuận: chọn cách tính tháng → cung Mệnh �
   const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
   const menh = laSo.getByRole("button", { name: /^Cung Mệnh/ });
   const truoc = await menh.getAttribute("aria-label");
-  await expect(page.getByTestId("truong-phai-nhac")).toContainText("nửa sau tháng nhuận");   // nhắc hiện cả khi khung đóng
+  await expect(page.getByTestId("truong-phai-nhac")).toContainText("trong tháng nhuận");   // nhắc hiện cả khi khung đóng
   await page.getByTestId("tv-hien-thi-mo").click();   // TM-1: lớp hạn + trường phái trong "Hiển thị"
   await expect(page.getByTestId("chon-thang-nhuan")).toBeVisible();
   await page.getByRole("tab", { name: "Như tháng chính" }).click();
+  await expect(menh).not.toHaveAttribute("aria-label", truoc!);
+});
+
+test("TV-NHUAN3: sinh nửa đầu tháng nhuận → có lựa chọn \"Cả tháng tính tháng sau\", cung Mệnh đổi", async ({ page }) => {
+  await napHoSo(page, { ...HO_SO_MAU, ngay: 3, thang: 8, nam: 2025, gio: "08:00", gioi_tinh: "nam" });
+  await page.goto("/tu-vi");
+  const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
+  const menh = laSo.getByRole("button", { name: /^Cung Mệnh/ });
+  const truoc = await menh.getAttribute("aria-label");
+  await expect(page.getByTestId("truong-phai-nhac")).toContainText("trong tháng nhuận");
+  await page.getByTestId("tv-hien-thi-mo").click();
+  await expect(page.getByTestId("chon-thang-nhuan")).toBeVisible();
+  await page.getByRole("tab", { name: "Cả tháng tính tháng sau" }).click();
   await expect(menh).not.toHaveAttribute("aria-label", truoc!);
 });
 
