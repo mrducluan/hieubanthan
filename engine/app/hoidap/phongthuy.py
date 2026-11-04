@@ -75,7 +75,7 @@ def phan_loai(cau_hoi: str) -> dict:
                 and chung.chuan_hoa_cau(sau):
             t_chinh = chung.chuan_hoa_cau(sau)
     nam, gioi = _nam_gioi(cau_hoi, t)
-    kq = {"cau_chuan_hoa": t, "loai": None, "xu_ly": "tra_loi", "huong": _huong_nhac(t),
+    kq = {"cau_chuan_hoa": t, "cau_goc": cau_hoi, "loai": None, "xu_ly": "tra_loi", "huong": _huong_nhac(t),
           "quai": next((QUAI_KD[m] for m in re.findall(r"menh quai (kham|khon|chan|ton|can|doai|ly)\b", t)
                         + re.findall(r"quai (kham|khon|chan|ton|can|doai|ly)\b", t)), None),
           "du_nien": [v for k, v in DU_NIEN_KD.items() if re.search(rf"(?<!\w){k}(?!\w)", t)],

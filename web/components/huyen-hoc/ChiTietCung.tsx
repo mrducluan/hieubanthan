@@ -198,7 +198,7 @@ function VongHan({ vh, i, lop, phai }: { vh: VanHanOutputT; i: number; lop: { da
 function TheSao({ m, cung, han, onHoi }: { m: MucSao; cung: string; han?: VanHanOutputT | null; onHoi: () => void }) {
   const theoHan = han ? [
     ...(han.dai_han.tu_hoa_sao ?? []).filter((x) => x.sao === m.ten)
-      .map((x) => ({ hoa: x.hoa, nhan: `Đại hạn ${han.dai_han.tu_tuoi}–${han.dai_han.den_tuoi} tuổi` })),
+      .map((x) => ({ hoa: x.hoa, nhan: `${han.dai_han.dong_han ? "Đồng hạn" : "Đại hạn"} ${han.dai_han.tu_tuoi}–${han.dai_han.den_tuoi} tuổi` })),
     ...(han.luu_nien.tu_hoa_sao ?? []).filter((x) => x.sao === m.ten)
       .map((x) => ({ hoa: x.hoa, nhan: `Năm ${han.nam_xem}` })),
   ] : [];

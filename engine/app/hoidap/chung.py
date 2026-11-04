@@ -22,15 +22,21 @@ from app.luangiai import an_toan as _at  # noqa: E402
 # Từ chối nhẹ: bộ Thần số dùng chung TRỪ các cụm Huyền học trả lời được theo kiểu "định hướng" (MT-ĐS mục 4):
 # "chắc chắn" (B0); "tai nạn", "thắng kiện" (B1: trả lời bằng mảng đi lại / giấy tờ + lưu ý, không có/không).
 _BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khong|nam nay|nam sau)", r"thang kien",
-               # SK-1 (2026-11-04): câu sức khoẻ CHUNG không nêu tên bệnh → trả lời bằng chương sức khoẻ (mức, hệ cơ quan,
-               # năm nên chú ý, đi khám, câu không thay lời bác sĩ), không từ chối nữa.
-               r"benh gi", r"mac benh", r"dau da day", r"suc khoe cua toi the nao"}
+               # SK-1 (2026-11-04): câu sức khoẻ CHUNG về chính mình ("sức khoẻ của tôi thế nào", "hay đau dạ dày") → trả
+               # lời bằng chương sức khoẻ (mức, hệ cơ quan, năm nên chú ý, đi khám, câu không thay lời bác sĩ). Câu hỏi CÓ /
+               # KHÔNG bệnh ("bệnh gì", "mắc bệnh") vẫn là câu đặc biệt (`an_toan.hoi_benh`) — review SK-1. Kinh Dịch không
+               # có chương sức khoẻ → vẫn không đọc quẻ cho hai cụm này (`KD_SUC_KHOE`).
+               r"dau da day", r"suc khoe cua toi the nao"}
+KD_SUC_KHOE = [r"dau da day", r"suc khoe cua toi the nao"]
 TU_CHOI_THEM = [r"so de", r"song duoc bao lau", r"nao chet", r"tho bao nhieu", r"doan benh",
                 r"benh gan",
                 # "yểm bùa nhà hàng xóm" = tác động lên người khác → từ chối; "nhà tôi có BỊ yểm bùa không" = nỗi sợ tâm
                 # linh → dẫn hướng (TAM_LINH) — EN-3d.
                 r"(muon|cach|lam sao|giup toi|giup minh|nho thay) .{0,12}yem bua|yem bua (nha|nguoi|cho|ke|hang xom|ban|vo|chong|sep|dong nghiep|doi thu)(?! .{0,15}(toi|minh|em|nha toi)(?!\w))", r"chua duoc benh", r"nen tuyen", r"tuyen nhan vien",
                 r"de quyet dinh tuyen", r"chon so lo", r"so lo"]
+CHUA_BENH = (r"(benh|bi om|viem|sot|mat ngu|di ung|ung thu|huyet ap|tieu duong|phoi|da day|xuong khop|trieu chung"
+             r"|dau (dau|bung|lung|khop|da day|rang|mat|nguc|bao tu))(?!\w).{0,40}chua (the nao|ra sao|sao cho|kieu gi|bang gi)")
+_at.MO_HO[CHUA_BENH] = r"chữa"
 # MT-ĐS B0 — thọ / chết / sống được không (kể cả người thân, thai nhi), tên bệnh & bộ phận, lô đề, nhân sự trá hình.
 TU_CHOI_HH = [
     r"tho (duoc )?bao nhieu", r"song (duoc )?(bao lau|den bao nhieu|bao nhieu tuoi|may nam|duoc may)",
@@ -47,7 +53,9 @@ TU_CHOI_HH = [
     # kèm bộ phận cụ thể, hỏi bệnh của người khác, hỏi cách chữa.
     r"benh gi .{0,12}(phoi|gan|than|tim|da day|mau|xuong|ruot|mat)", r"(gan|than|tim|phoi|da day) hay (gi|cai gi)",
     r"(?<!\w)(con|be|me|bo|ong|ba|chong|vo|chau|anh|chi) (toi |em |minh )?.{0,25}benh gi",
-    r"chua (the nao|ra sao|sao cho|kieu gi|bang gi)",
+    # "chưa" và "chữa" cùng bỏ dấu thành "chua" (review SK-1: "Công việc vẫn chưa ra sao cả" bị từ chối) → cần chữ chỉ
+    # bệnh / triệu chứng đứng trước, và gõ có dấu thì phải đúng chữ "chữa" (`an_toan.MO_HO`).
+    CHUA_BENH,
 ]
 TU_CHOI_HH_TAT_CA = [m for ds in _h.TU_CHOI.values() for m in ds if m not in _BO_CHAN_HH] + TU_CHOI_THEM + TU_CHOI_HH
 # MT-ĐS B1 — câu tâm linh (vong, căn, ma, bùa, trùng tang, nghiệp…): KHÔNG luận, KHÔNG nối sang lá số (nối = ngầm xác
@@ -101,6 +109,8 @@ def mau_tu_choi(goc: str | None, t: str, mau_chung: str, he_la_so: dict | None =
     nhom = _at.nhom_suc_khoe(goc or t)
     if nhom == "cap_cuu":
         return suc_khoe_kb.mau("cap_cuu")
+    if nhom == "nguoi_than":                 # sức khoẻ người khác: không đọc lá số của người hỏi (review SK-1)
+        return f"{suc_khoe_kb.mau('nguoi_than')} {skn.mien_tru()}"
     if nhom == "hoi_benh":
         return f"{skn.doan_hoi_benh(t, he_la_so)} {skn.mien_tru()}"
     return mau_chung

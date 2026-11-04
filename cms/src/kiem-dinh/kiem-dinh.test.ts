@@ -1,7 +1,7 @@
 // Viết TRƯỚC kiem-dinh.ts (quy tắc dự án). Chạy: npm test (node --test, không cần thư viện test).
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { boDau, docLexical, kiemDinhBai, slugViet, TIEU_DE_TAM, type BaiKiem } from "./kiem-dinh.ts";
+import { boDau, docLexical, kiemDinhBai, kiemRanhGioi, slugViet, TIEU_DE_TAM, type BaiKiem } from "./kiem-dinh.ts";
 
 // ---- trợ giúp dựng cây Lexical tối giản (đúng dạng Payload lưu) ----
 const chu = (text: string) => ({ type: "text", text, format: 0, version: 1 });
@@ -193,6 +193,24 @@ test("SK-1 sức khoẻ: tên bệnh / lời đoán ốm chặn; hệ cơ quan +
   b.noi_dung = goc(doan(chu("Năm 2028 nên chú ý sức khoẻ bản thân hơn, nhất là đường hô hấp; sắp xếp đi khám phổi và đo huyết áp đầu năm. Đây là lời nhắc phòng ngừa, không thay lời bác sĩ.")));
   const kq = kiemDinhBai(b);
   assert.ok(!kq.loi_chan.some((m) => m.ma === "ten_benh" || m.ma === "vung_cam"), JSON.stringify(kq.loi_chan));
+});
+
+test("SK-1 review: trầm cảm / khối u trong bài giải thích, hỗ trợ → chỉ cảnh báo; lời đoán mắc → chặn", () => {
+  for (const cau of ["Thần số học không chẩn đoán trầm cảm; nếu bạn buồn kéo dài, hãy tìm người hỗ trợ và bác sĩ.",
+    "Lá số không cho biết một khối u lành hay ác — chỉ bác sĩ mới trả lời được."]) {
+    const b = baiTot();
+    b.noi_dung = goc(doan(chu(cau)));
+    const kq = kiemDinhBai(b);
+    assert.ok(!kq.loi_chan.some((m) => m.ma.startsWith("ten_benh")), `${cau}: ${JSON.stringify(kq.loi_chan)}`);
+    assert.ok(kq.muc.some((m) => m.ma === "ten_benh_ho_tro" && m.muc_do === "canh_bao"), cau);
+    assert.ok(!kiemRanhGioi(cau).some((m) => m.chan), cau);
+  }
+  for (const cau of ["Người số 7 dễ bị trầm cảm.", "Năm 2028 bạn có nguy cơ mắc khối u.", "Tuổi này sẽ bị trầm cảm về già."]) {
+    const b = baiTot();
+    b.noi_dung = goc(doan(chu(cau)));
+    assert.ok(kiemDinhBai(b).loi_chan.some((m) => m.ma === "ten_benh"), cau);
+    assert.ok(kiemRanhGioi(cau).some((m) => m.ma === "ten_benh" && m.chan), cau);
+  }
 });
 
 test("Nội dung: giọng phán chỉ cảnh báo (không chặn)", () => {

@@ -19,7 +19,7 @@ export function DongHoaHan({ vh, lop, namXem }: { vh: VanHanOutputT | null | und
   const ds = hoaHanDangBat(vh, lop);
   if (!ds.length) return null;
   const nhom = [
-    lop.dai_han && { ma: "dh" as const, nhan: `Đại hạn ${vh.dai_han.tu_tuoi}–${vh.dai_han.den_tuoi} tuổi`, phu: `cung ${vh.dai_han.cung_goc}` },
+    lop.dai_han && { ma: "dh" as const, nhan: `${vh.dai_han.dong_han ? "Đồng hạn" : "Đại hạn"} ${vh.dai_han.tu_tuoi}–${vh.dai_han.den_tuoi} tuổi`, phu: `cung ${vh.dai_han.cung_goc}` },
     lop.luu_nien && { ma: "ln" as const, nhan: `Năm ${vh.nam_xem}`, phu: vh.can_chi_nam_xem },
   ].filter((x): x is { ma: "dh" | "ln"; nhan: string; phu: string } => Boolean(x));
   return (
@@ -51,8 +51,11 @@ export function DaiHanNhay({ ls, vh, namXem, tieuDe, onNhay }: {
 }) {
   const ds = ls.cung.map((c, i) => ({ c, i })).filter(({ c }) => typeof c.dai_han.tu_nam === "number")
     .sort((a, b) => a.c.dai_han.tu_tuoi - b.c.dai_han.tu_tuoi);
+  // Đồng hạn (tuổi mụ < tuổi khởi hạn đầu): chưa vào giai đoạn 10 năm nào — không sáng ô nào, hiện nhãn riêng trước dải
+  // (engine vẫn trả cung đồng hạn ở `chi_so`, đó là cung tuổi nhỏ, không phải giai đoạn trong dải).
+  const dongHan = vh && vh.nam_xem === namXem && vh.dai_han.dong_han ? vh.dai_han : null;
   // Giai đoạn đang xem: theo engine (chỉ số cung đại hạn của năm xem); chờ engine thì theo năm đầu/cuối engine trả.
-  const dang = vh && vh.nam_xem === namXem ? vh.dai_han.chi_so
+  const dang = dongHan ? undefined : vh && vh.nam_xem === namXem ? vh.dai_han.chi_so
     : ds.find(({ c }) => c.dai_han.tu_nam! <= namXem && namXem <= (c.dai_han.den_nam ?? c.dai_han.tu_nam! + 9))?.i;
   const khung = useRef<HTMLDivElement>(null);
   // Đưa giai đoạn đang xem vào giữa dải (chỉ cuộn TRONG dải, không cuộn trang).
@@ -68,6 +71,14 @@ export function DaiHanNhay({ ls, vh, namXem, tieuDe, onNhay }: {
       <p className="text-sm font-semibold text-fg">{tieuDe}</p>
       <div ref={khung} className="-mx-4 overflow-x-auto overscroll-x-contain px-4 pb-1 sm:mx-0 sm:px-0">
         <ol className="flex min-w-max gap-1.5 lg:min-w-0">
+          {dongHan && (
+            <li className="lg:flex-1" data-testid="dong-han" aria-current="true">
+              <span className="flex min-h-11 w-[5.25rem] flex-col items-center justify-center rounded-xl border border-[rgb(126_172_255)] bg-[rgb(126_172_255)]/15 px-1.5 py-1.5 text-center text-fg lg:w-full">
+                <span className="text-sm font-semibold">Đồng hạn</span>
+                <span className="text-[0.7rem] leading-tight tabular-nums">{dongHan.tu_tuoi}–{dongHan.den_tuoi} tuổi</span>
+              </span>
+            </li>
+          )}
           {ds.map(({ c, i }) => {
             const laDang = i === dang;
             return (

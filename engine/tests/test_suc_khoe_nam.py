@@ -188,7 +188,9 @@ def _hoi(mang, cau):
 
 
 @pytest.mark.parametrize("mang", ["tuvi", "battu", "phongthuy", "thanso"])
-@pytest.mark.parametrize("cau", ["Năm nào tôi cần để ý sức khoẻ?", "Tôi có bị bệnh gì không?",
+# "Tôi có bị bệnh gì không?" chuyển sang nhóm câu đặc biệt (review SK-1 — `test_an_toan_sk1.py`): đọc mức chương cho câu
+# hỏi có / không bệnh thành lời "không bệnh".
+@pytest.mark.parametrize("cau", ["Năm nào tôi cần để ý sức khoẻ?", "Sức khoẻ của tôi năm nay thế nào?",
                                  "Sức khoẻ năm 2027 của tôi thế nào?", "Tôi hay bị đau dạ dày, lá số nói gì?"])
 def test_hoi_suc_khoe_tra_loi_co_nam_va_mien_tru(mang, cau):
     r = _hoi(mang, cau)

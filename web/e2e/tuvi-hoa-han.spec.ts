@@ -1,7 +1,7 @@
 // TV-HOA-HAN: tứ hoá theo hạn trên lá số + dòng tóm tắt, dải 12 giai đoạn 10 năm, chạm sao → thẻ sao (Đọc kỹ, Hỏi về
 // sao này — chỉ điền sẵn, không gửi). Dữ liệu đều từ engine thật (playwright.config khởi động engine).
 import { test, expect, type Page } from "@playwright/test";
-import { napHoSo } from "./_hoso";
+import { HO_SO_MAU, napHoSo } from "./_hoso";
 
 const suKien = (page: Page) => page.evaluate(() =>
   ((window as unknown as { __hbt_su_kien?: { su_kien: string; kind?: string }[] }).__hbt_su_kien ?? []));
@@ -41,6 +41,23 @@ test("dải giai đoạn 10 năm: chạm một giai đoạn → năm xem nhảy 
   await expect(dai.locator("[aria-current='true']")).toHaveAttribute("aria-label", nhan);
   await expect(page.getByTestId("dong-hoa-han").locator("[data-lop='dh']")).toBeVisible();
   expect((await suKien(page)).some((e) => e.su_kien === "chart_interacted" && e.kind === "nhay_dai_han")).toBe(true);
+});
+
+test("đồng hạn (bé 2 tuổi): không sáng giai đoạn 10 năm nào, nhãn Đồng hạn trước dải và trên lá số", async ({ page }) => {
+  // Sinh 15/9/2025 (cục 5): tuổi mụ 2–4 còn trong đồng hạn 1–4 tuổi — engine trả `dai_han.dong_han`, cung là cung tuổi nhỏ.
+  await napHoSo(page, { ...HO_SO_MAU, ho_ten: "Bé An", ngay: 15, thang: 9, nam: 2025 });
+  await page.goto("/tu-vi");
+  const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
+  await expect(laSo).toContainText("LƯU NIÊN");
+  const dai = page.getByTestId("dai-han-nhay");
+  await expect(dai.getByTestId("dong-han")).toContainText(/Đồng hạn\s*1–\d tuổi/);
+  await expect(dai.getByRole("button")).toHaveCount(12);
+  await expect(dai.locator("button[aria-current]")).toHaveCount(0);           // không giai đoạn 10 năm nào đang đi
+  await page.getByTestId("tv-hien-thi-mo").click();
+  await page.getByRole("button", { name: "Lớp đại hạn" }).click();
+  await expect(page.getByTestId("dong-hoa-han").locator("[data-lop='dh']")).toContainText(/Đồng hạn 1–\d tuổi/);
+  await expect(laSo.locator(".ls-chi-tiet [data-nhan-han='dai_han']")).toContainText("ĐỒNG HẠN");
+  await expect(laSo).not.toContainText("ĐẠI HẠN");
 });
 
 test("chạm sao trong chi tiết cung → thẻ sao; Hỏi về sao này chỉ điền sẵn câu", async ({ page }) => {

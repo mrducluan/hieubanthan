@@ -189,7 +189,19 @@ const CAM_CHAN = ["chết sớm", "sẽ chết", "chết yểu", "khắc chết"
 // SK-1: tên bệnh vẫn cấm (lỗi chặn) — thay bằng hệ cơ quan + việc đi khám ("nên chú ý đường hô hấp, đi khám phổi").
 // Cùng danh sách với engine app/kb/data/suc_khoe_kb.json `cum_cam` (phần tên bệnh).
 const TEN_BENH = ["ung thư", "tiểu đường", "đột quỵ", "tai biến", "xơ gan", "viêm gan", "suy thận", "suy tim",
-  "cao huyết áp", "tăng huyết áp", "trầm cảm", "khối u"];
+  "cao huyết áp", "tăng huyết áp"];
+// Review SK-1: "trầm cảm", "khối u" hay có trong bài GIẢI THÍCH / hỗ trợ ("thần số không chẩn đoán trầm cảm", "lá số không
+// cho biết khối u lành hay ác") → chỉ cảnh báo; lời ĐOÁN mắc ("dễ bị trầm cảm", "năm 2028 … khối u") vẫn chặn.
+const BENH_HO_TRO = ["trầm cảm", "khối u"];
+const DU_DOAN_BENH = new RegExp(chuanCum(
+  "(sẽ|dễ|hay|có thể|có nguy cơ|nguy cơ) (bị |mắc |mắc phải |gặp )?(trầm cảm|khối u)|năm \\d{4}[^.!?;]{0,40}(trầm cảm|khối u)"));
+/** Tên bệnh: [lỗi chặn] + [chỉ cảnh báo] trong một đoạn chữ. */
+const timBenh = (van: string) => {
+  const ho = timCum(van, BENH_HO_TRO);
+  const doan = ho.length && DU_DOAN_BENH.test(chuanCum(van)) ? ho : [];
+  return { chan: [...timCum(van, TEN_BENH), ...doan], canh_bao: ho.filter((c) => !doan.includes(c)) };
+};
+const LOI_BENH_HO_TRO = (ds: string[]) => `Có ${ds.map((c) => `"${c}"`).join(", ")} — được nhắc khi GIẢI THÍCH hay hướng tới hỗ trợ (vd "không chẩn đoán …", "hãy tìm bác sĩ"); không viết lời đoán ai dễ mắc, năm nào mắc.`;
 const LOI_TEN_BENH = (ds: string[]) => `Tên bệnh (cấm): ${ds.map((c) => `"${c}"`).join(", ")} — viết hệ cơ quan nên chú ý + việc đi khám (vd "nên chú ý đường hô hấp, đi khám phổi định kỳ"), có thể nêu năm nên chú ý sức khoẻ bằng lời phòng ngừa, kèm câu không thay lời bác sĩ.`;
 // Nhạy cảm: có thể hợp lệ khi bài GIẢI THÍCH vì sao không làm → chỉ cảnh báo để người biên tập đọc lại.
 const NHAY_CAM = ["giải hạn", "hoá giải", "vật phẩm", "tai nạn", "phá sản", "lời nguyền", "ly hôn", "bệnh"];
@@ -364,8 +376,9 @@ export function kiemDinhBai(bai: BaiKiem): KetQuaKiem {
   const cam = timCum(toanVan, CAM_CHAN);
   if (cam.length) them("vung_cam", "noi_dung", "loi", `Ngoài ranh giới nội dung: ${cam.map((c) => `"${c}"`).join(", ")}.`, true);
   else them("vung_cam", "noi_dung", "dat", "Không có nội dung ngoài ranh giới.");
-  const benh = timCum(toanVan, TEN_BENH);
-  if (benh.length) them("ten_benh", "noi_dung", "loi", LOI_TEN_BENH(benh), true);
+  const benh = timBenh(toanVan);
+  if (benh.chan.length) them("ten_benh", "noi_dung", "loi", LOI_TEN_BENH(benh.chan), true);
+  if (benh.canh_bao.length) them("ten_benh_ho_tro", "noi_dung", "canh_bao", LOI_BENH_HO_TRO(benh.canh_bao));
   const nhay = timCum(toanVan, NHAY_CAM);
   if (nhay.length) them("nhay_cam", "noi_dung", "canh_bao",
     `Có cụm nhạy cảm ${nhay.map((c) => `"${c}"`).join(", ")} — đọc lại: chỉ giải thích, không khuyên làm, không doạ.`);
@@ -442,8 +455,9 @@ export function kiemRanhGioi(van: string, { choThamDinh = false, loiMoi = false 
     const doa = timCum(van, DOA);
     if (doa.length) them("doa", "loi", `Lời mời không doạ, không đếm ngược: ${doa.map((c) => `"${c}"`).join(", ")}.`, true);
   }
-  const benh = timCum(van, TEN_BENH);
-  if (benh.length) them("ten_benh", "loi", LOI_TEN_BENH(benh), true);
+  const benh = timBenh(van);
+  if (benh.chan.length) them("ten_benh", "loi", LOI_TEN_BENH(benh.chan), true);
+  if (benh.canh_bao.length) them("ten_benh_ho_tro", "canh_bao", LOI_BENH_HO_TRO(benh.canh_bao));
   const nhay = timCum(van, NHAY_CAM);
   if (nhay.length) them("nhay_cam", "canh_bao", `Có cụm nhạy cảm ${nhay.map((c) => `"${c}"`).join(", ")} — chỉ giải thích, không khuyên làm, không doạ.`);
   const phan = timCum(van, GIONG_PHAN);
