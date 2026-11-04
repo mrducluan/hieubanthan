@@ -53,7 +53,11 @@
     "trang khac",
     "web khac",
     "ra so khac",
-    "ung dung khac"
+    "ung dung khac",
+    "hai trang",
+    "trang web",
+    "moi trang",
+    "app khac"
    ]
   },
   "so_cai": {
@@ -64,14 +68,23 @@
     "33 co duoc",
     "rut ve 6",
     "22/4",
-    "so cai 11 22 33"
+    "so cai 11 22 33",
+    "so bac thay",
+    "22 voi so 4",
+    "22 va 4",
+    "22 khac 4"
    ]
   },
   "ba_chi_so_ten": {
    "tieu_de": "Sứ mệnh, linh hồn, nhân cách khác nhau thế nào?",
    "noi_dung": "Cả ba tính từ họ tên. Sứ mệnh: cộng mọi chữ cái. Linh hồn: chỉ nguyên âm — điều bạn khao khát bên trong. Nhân cách: chỉ phụ âm — ấn tượng bạn tạo cho người khác.",
    "tu_khoa": [
-    "su menh linh hon nhan cach"
+    "su menh linh hon nhan cach",
+    "linh hon khac",
+    "linh hon va nhan cach",
+    "nhan cach va linh hon",
+    "su menh va linh hon",
+    "khac so nhan cach"
    ]
   },
   "nam_ca_nhan": {
@@ -101,7 +114,9 @@
    "tu_khoa": [
     "dinh cao va thu thach la gi",
     "dinh cao la gi",
-    "thu thach la gi"
+    "thu thach la gi",
+    "thu thach 0",
+    "thu thach so 0"
    ]
   },
   "bieu_do": {
@@ -254,6 +269,31 @@
    "noi_dung": "Không nên. Không có bằng chứng con số dự báo năng lực, và loại ứng viên vì ngày sinh là phân biệt đối xử. Hãy dùng mô tả công việc rõ, bài thử thực tế và phỏng vấn có cấu trúc.",
    "tu_khoa": [
     "dung de tuyen dung"
+   ]
+  },
+  "nguon_goc": {
+   "tieu_de": "Thần số học bắt nguồn từ đâu?",
+   "noi_dung": "Ý tưởng con số mang ý nghĩa thường được gắn với trường phái Pythagoras ở Hy Lạp cổ, nhưng thần số học theo kiểu đang phổ biến (cộng ngày sinh ra số chủ đạo, đổi chữ trong tên ra số) hình thành ở Mỹ đầu thế kỷ 20, qua các tác giả như L. Dow Balliett và Juno Jordan. Trường phái Chaldea (Cheiro) là một nhánh khác, coi trọng tên thường gọi. Đây là truyền thống văn hoá để tự soi, không phải môn khoa học.",
+   "tu_khoa": [
+    "xuat phat tu dau",
+    "nguon goc",
+    "bat nguon",
+    "ra doi tu",
+    "ai sang lap",
+    "ai nghi ra",
+    "lich su than so"
+   ]
+  },
+  "chi_so_quan_trong": {
+   "tieu_de": "Chỉ số nào quan trọng hơn?",
+   "noi_dung": "Hầu hết sách đặt số chủ đạo (đường đời) lên đầu: nó nói về con đường và bài học chính. Số sứ mệnh (từ họ tên) nói về cách bạn thể hiện ra ngoài và việc bạn dễ làm tốt; số linh hồn nói điều bạn mong mỏi bên trong; số nhân cách là ấn tượng người khác thấy. Không chỉ số nào 'thắng' chỉ số nào — đọc chung, chỗ các số giống nhau là nét rõ nhất, chỗ khác nhau là chỗ bạn hay giằng co.",
+   "tu_khoa": [
+    "chi so nao quan trong",
+    "so nao quan trong",
+    "cai nao quan trong hon",
+    "quan trong hon so",
+    "nen xem so nao truoc",
+    "so nao chinh xac hon"
    ]
   }
  }

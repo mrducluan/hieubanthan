@@ -103,6 +103,8 @@ def thoi_gian(t: str, hom_nay: dt.date) -> list[dict]:
         if not sau and len([e for _, e in nam_ev if "tuong_doi" not in e]) == 1:
             y = next(e for _, e in nam_ev if "tuong_doi" not in e)["nam"]
         thang_ev.append((m.start(), {"nam": y, "thang": th}))
+    for m in re.finditer(r"thang (1[0-2]|0?[1-9])[/-](20\d{2})(?!\d)", t):        # EN-3d: "tháng 1/2027"
+        thang_ev.append((m.start(), {"nam": int(m.group(2)), "thang": int(m.group(1))}))
     k = re.search(r"(ba|3|hai|2|may|vai|sau|6) thang (toi|sap toi|nua)\b", t)
     if k:
         n = {"ba": 3, "3": 3, "hai": 2, "2": 2}.get(k.group(1), 3)                  # "mấy / 6 tháng tới" → 3 tháng đầu

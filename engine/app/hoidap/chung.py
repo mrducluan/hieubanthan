@@ -23,7 +23,10 @@ from app.luangiai import an_toan as _at  # noqa: E402
 # "chắc chắn" (B0); "tai nạn", "thắng kiện" (B1: trả lời bằng mảng đi lại / giấy tờ + lưu ý, không có/không).
 _BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khong|nam nay|nam sau)", r"thang kien"}
 TU_CHOI_THEM = [r"so de", r"song duoc bao lau", r"nao chet", r"tho bao nhieu", r"doan benh",
-                r"benh gan", r"yem bua", r"chua duoc benh", r"nen tuyen", r"tuyen nhan vien",
+                r"benh gan",
+                # "yểm bùa nhà hàng xóm" = tác động lên người khác → từ chối; "nhà tôi có BỊ yểm bùa không" = nỗi sợ tâm
+                # linh → dẫn hướng (TAM_LINH) — EN-3d.
+                r"(?<!bi )(?<!bi ai )(?<!bi nguoi )yem bua", r"chua duoc benh", r"nen tuyen", r"tuyen nhan vien",
                 r"de quyet dinh tuyen", r"chon so lo", r"so lo"]
 # MT-ĐS B0 — thọ / chết / sống được không (kể cả người thân, thai nhi), tên bệnh & bộ phận, lô đề, nhân sự trá hình.
 TU_CHOI_HH = [
@@ -50,6 +53,8 @@ TAM_LINH = [
     r"trung tang", r"duyen am", r"tien kiep", r"nghiep (nang|chuong|bao)", r"tran trach", r"am binh",
     r"(moi|nho) thay (ve|cung|giai|xem|tran)", r"(di xem|xem|tim|gap) thay (bua|boi|giai|tran|cung sao|cung giai)", r"thay (ve )?(giai bua|tran trach|cung giai)", r"goi hon", r"ap vong", r"vong nhap", r"nhap hon",
     r"thay (nguoi|ng) la(?!\w)", r"thay nguoi mac ao",
+    # EN-3d (bộ dev): hồn người mất chưa đi — "nghe tiếng bước chân… người chết chưa siêu thoát"
+    r"sieu thoat", r"(la|co|thay|bi|nhu) hon ma|hon ma (theo|o|ve|nao)", r"linh hon (nguoi|ong|ba|bo|me|cha|con)",
 ]
 TANG = [r"trung tang", r"nguoi (chet|mat)(?! viec| tien| tich)", r"chet trong nha", r"vua mat", r"mat .{0,12}nguoi"]
 
@@ -72,9 +77,9 @@ def dac_biet(t: str, raw: str | None = None) -> str | None:
     goc = raw or t
     if _at.khung_hoang(goc) or co(t, _h.AN_TOAN):
         return "an_toan"
-    if _at.tu_choi(goc) or co(t, TU_CHOI_HH_TAT_CA):
+    if _at.tu_choi(goc) or co(t, [m for m in TU_CHOI_HH_TAT_CA if not _at.bo_qua_mo_ho(m, raw)]):
         return "tu_choi_nhe"
-    if tam_linh(t):
+    if co(t, [m for m in TAM_LINH if not _at.bo_qua_mo_ho(m, raw)]):
         return "dan_huong"
     return None
 

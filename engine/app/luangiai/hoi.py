@@ -110,11 +110,11 @@ def _dem(t: str, mau: list[str]) -> int:
 AN_TOAN = [r"giai doan cuoi", r"ket lieu", r"song cung chang", r"ket thuc som"]
 
 TU_CHOI = {
-    "may_rui": [r"danh de(?! an| xuat| nghi| tai| cu)", r"xo so", r"ve so", r"trung so", r"lo de", r"ca cuoc", r"ca do",
+    "may_rui": [r"danh de(?! an| xuat| nghi| tai| cu)", r"xo so", r"ve so", r"(?<!tap )trung so", r"lo de", r"ca cuoc", r"ca do",
                 r"so may man de", r"danh lo"],
     "tuyen_dung": [r"tuyen ung vien", r"ung vien", r"sa thai nhan vien", r"nhan vien so chu dao",
                    r"nen tuyen", r"sa thai nhan vien nao"],
-    "suc_khoe_the_chat": [r"benh gi", r"mac benh", r"ung thu", r"dau da day", r"vo sinh",
+    "suc_khoe_the_chat": [r"benh gi", r"mac benh", r"ung thu", r"dau da day", r"vo sinh(?! (nam )?\d{2,4}(?!\w))",
                           r"sinh con duoc khong", r"co nen mo vao", r"phau thuat", r"song tho", r"an gi cho hop",
                           r"suc khoe cua toi the nao", r"khoi benh"],
     # "tai nạn": thần số không có cơ sở đoán tai nạn → từ chối nhẹ (vòng đo thanso-tu-cai-thien bắt lùi sau EN-1).
@@ -182,6 +182,9 @@ LINH_VUC_KW: dict[str, list[str]] = {
                   r"mo cong ty", r"lam an", r"su nghiep", r"lam thue", r"freelancer", r"startup",
                   r"cong ty", r"tang luong", r"sa thai", r"ban hang", r"lam giao vien", r"nganh it", r"chuyen nganh", r"nganh gi", r"su nghiep", r"nghe nghiep", r"dong nghiep", r"doi viec",
                   r"sang tao noi dung", r"lam sep", r"lam viec", r"nha nuoc", r"luat su", r"marketing",
+                  # EN-3d (bộ dev): vai trò ở chỗ làm
+                  r"\bsales\b", r"lam (lanh dao|quan ly|truong nhom|truong phong|leader)", r"(nhan|lam|len) truong nhom",
+                  r"hop (lam )?lanh dao", r"\bleader\b",
                   r"ngan hang", r"nghe si", r"kol", r"livestream", r"nong nghiep", r"nhan su",
                   r"nghe tay trai", r"hai viec", r"cuoc hop", r"quan ly nhan vien", r"om viec",
                   r"burnout", r"nhuong quyen", r"quan ca phe", r"shop", r"thua lo", r"lam tu xa",
@@ -297,6 +300,9 @@ def _trich_so(t: str) -> tuple[dict[str, int], tuple[int, int] | None]:
                    rf"(chong|vo|toi|anh|em|co ay|anh ay) (so chu dao |so ){_SO}", t)
     if not cap and m2:
         cap = (int(m2.group(3)), int(m2.group(6)))
+    m4 = re.search(rf"(cung|deu) (la )?(so chu dao |duong doi |chu dao |so )(so )?{_SO}(?!\d)", t)
+    if not cap and m4 and re.search(r"(?<!\w)(hai|vo chong|va|voi|ca hai|chi em|anh em)(?!\w)", t):
+        cap = (int(m4.group(5)), int(m4.group(5)))       # EN-3d: "hai vợ chồng cùng số chủ đạo 4" → cặp 4–4
     m3 = re.search(rf"(linh hon|nhan cach|su menh) (so )?{_SO} va (linh hon |nhan cach |su menh )?(so )?{_SO}", t)
     if not cap and m3:
         cap = (int(m3.group(3)), int(m3.group(6)))
@@ -310,6 +316,12 @@ def _trich_so(t: str) -> tuple[dict[str, int], tuple[int, int] | None]:
         mm = re.search(mau, t)
         if mm and not cap:
             so[vt] = int(mm.groups()[-1])
+    # EN-3d (bộ dev): "Tôi số 6, hay ôm việc…", "người số 3", "có phải do số 7" — cách nói thường ngày của số chủ đạo.
+    mm = re.search(rf"(?<!\w)(toi|minh|em|tui|to|nguoi|la|do|vi) (la )?so (?P<so>11|22|33|[1-9])(?!\d)(?! (nguoi|lan|nam|thang|ngay|tuoi|tien|trieu|k\b))", t)
+    if mm and not cap and not so.keys() & {"duong_doi", "su_menh", "linh_hon", "nhan_cach"} \
+            and not re.search(r"(nam|thang|ngay) ca nhan|so (nha|phong|dien thoai|xe|tai khoan|tang)"
+                                 r"|(nha|phong|xe|sim|bien|can ho|tang|lop|ban) (toi |minh |em )?(la )?so \d", t):
+        so["duong_doi"] = int(mm.group("so"))
     mm = re.search(r"sinh ngay (\d{1,2})(?![/\d])", t)
     if mm and 1 <= int(mm.group(1)) <= 31:
         so["ngay_sinh"] = int(mm.group(1))
@@ -363,7 +375,7 @@ def phan_loai(cau_hoi: str) -> dict:
         return xong("suc_khoe" if loai_tc == "suc_khoe_the_chat" else "ngoai_pham_vi", "ban_than", "tu_choi_nhe",
                     "du_doan")
     for loai, mau in TU_CHOI.items():
-        if _co(t, mau):
+        if _co(t, [m for m in mau if not _at.bo_qua_mo_ho(m, cau_hoi)]):
             kq["tu_choi"] = loai
             lv = {"suc_khoe_the_chat": "suc_khoe"}.get(loai, "ngoai_pham_vi")
             dt = "nguoi_khac" if loai == "tuyen_dung" else "ban_than"
@@ -554,7 +566,8 @@ def _them_thoi_diem(muc: list, cs: dict, t: str, ngay_xem: _dt.date, nguoi: dict
     if ngay_hoi:
         thang_xem = ngay_hoi
     thang_tg = [x for x in tg if x.get("thang")] if not ngay_hoi else []
-    if thang_tg and not re.search(r"thang ca nhan", t):        # EN-3: đúng (các) tháng được hỏi, kể cả tháng năm sau
+    if thang_tg and not re.search(r"thang ca nhan (so )?[1-9]", t):   # EN-3: đúng (các) tháng được hỏi (EN-3d: kể cả
+        #                                  câu "tháng 1/2027 là tháng cá nhân mấy"; chỉ bỏ khi người hỏi đã nêu số tháng)
         for x in thang_tg[:3]:
             so = mr.thang_ca_nhan(d, m, x["nam"], x["thang"])
             n = kb.nghia_phu("thang_ca_nhan", so)

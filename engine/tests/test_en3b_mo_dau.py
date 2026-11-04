@@ -42,7 +42,7 @@ def _chuan(c: str) -> str:
     ("Mình kết hôn 7 năm chưa có con. Bát tự có nói gì về đường con cái không?", "con_cai"),
     ("Làm cách nào để tôi bớt nóng với đồng nghiệp?", "tinh_khi"),
     ("Mình đang làm kinh doanh, tôi có số xuất ngoại không?", "di_xa"),      # vế hoàn cảnh không phải điều hỏi
-    ("Tôi hay bỏ cuộc, làm sao để kiên trì?", None),                        # "kiên trì" không phải "kiện"
+    ("Tôi hay bỏ cuộc, làm sao để kiên trì?", "kien_tri"),                        # "kiên trì" không phải "kiện"
     ("Tôi có đang che giấu con người thật không?", "tinh_cach"),             # "giấu" không phải "giàu"
     ("Thái Âm ở cung Mệnh nghĩa là gì?", None),                             # "Thái" không phải "thai"
     ("Chuyện tình cảm của tôi sao cứ dang dở hoài vậy?", "tinh_duyen"),      # "vậy" không phải "vay"

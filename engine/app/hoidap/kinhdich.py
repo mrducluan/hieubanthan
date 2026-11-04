@@ -529,7 +529,13 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
         doc_que = kd_ds.doc_que(que, pl, goi, mai_hoa=mai_hoa, luc_hao=pt, thoi_diem=luc, chu_de=ma_cd)
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     if doc_que is not None and pl["xu_ly"] not in chung.DAC_BIET:     # EN-3b: đoạn mở đầu trả lời đúng điều được hỏi
-        van = mo_dau.dat_dau(van, mo_dau.que_mo(doc_que, pl["cau_chuan_hoa"], cau_hoi, moc), goi)
+        mo = mo_dau.que_mo(doc_que, pl["cau_chuan_hoa"], cau_hoi, moc)
+        # EN-3d: số trong "việc nên làm" (KB nhóm việc của quẻ, vd "dòng tiền 6 tháng") là dữ kiện của gói đọc quẻ —
+        # đăng ký vào gói bằng chứng, nếu không bất biến "số phải có trong gói" bỏ cả đoạn mở đầu.
+        so_kb = {int(n) for x in doc_que.get("hanh_dong") or [] for v in x.get("viec") or [] for n in re.findall(r"\d+", v)}
+        if mo and (la := set(mo_dau.so_la(mo, goi))) and la <= so_kb:
+            goi["so_trong_goi"] = sorted(set(goi.get("so_trong_goi") or []) | la)
+        van = mo_dau.dat_dau(van, mo, goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:

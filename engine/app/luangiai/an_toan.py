@@ -115,9 +115,12 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
     # bệnh nặng / chẩn đoán / bỏ thuốc
     (r"(bi|co|mac|chan doan|khoi) u (gan|phoi|nao|vu|xo|tuyen giap|da day|buong trung|tu cung)",
      r"(bị|có|mắc|chẩn đoán|khối) u (gan|phổi|não|vú|xơ|tuyến giáp|dạ dày|buồng trứng|tử cung)", "suc_khoe_the_chat"),
-    (r"chan doan (u|ung thu|benh)|lanh hay ac|ung thu|xo gan|dot tu|dot quy|tai bien|vo sinh|tim bam sinh|tieu duong",
+    (r"chan doan (u|ung thu|benh)|lanh hay ac|ung thu|xo gan|dot tu|dot quy|tai bien|vo sinh(?! (nam )?\d{2,4}(?!\w))|tim bam sinh|tieu duong",
      r"chẩn đoán (u|ung thư|bệnh)|lành hay ác|ung thư|xơ gan|đột tử|đột quỵ|tai biến|vô sinh|tim bẩm sinh|tiểu đường",
      "suc_khoe_the_chat"),
+    # EN-3d (bộ dev): triệu chứng tim mạch + hỏi bệnh ("đau ngực… có phải dễ bị bệnh tim") → khuyên đi khám, không luận số.
+    (r"benh (tim|phoi|gan|than|mau)(?! (la|nhu))|(bi|hay|thay|dang) (dau|tuc) nguc|(bi|hay|dang) kho tho(?! (vi|qua vi|voi))",
+     r"bệnh (tim|phổi|gan|thận|máu)|(bị|hay|thấy|đang) (đau|tức) ngực|(bị|hay|đang) khó thở(?! (vì|quá vì|với))", "suc_khoe_the_chat"),
     (r"(be|con|chau|bi) .{0,15}(sot cao|co giat)|co giat", r"(bé|con|cháu|bị|đang) .{0,15}sốt cao|sốt cao (co giật|liên tục|mấy ngày|không hạ|không dứt)|co giật", "suc_khoe_the_chat"),
     (r"(bi|benh|con|be|chau) .{0,12}dong kinh", r"động kinh", "suc_khoe_the_chat"),
     (r"tu ky(?! luat)", r"tự kỷ(?! luật)", "suc_khoe_the_chat"),
@@ -188,6 +191,27 @@ def _hai_ban(raw: str) -> tuple[str, str, bool]:
     cd = _co_dau_thuong(raw)
     kd = _bo_dau(cd)
     return cd, kd, cd != kd
+
+
+# EN-3d: mẫu KHÔNG DẤU ở các bộ chặn cũ (thần số `hoi.TU_CHOI`, Huyền học `chung.TU_CHOI_HH_TAT_CA`, `TAM_LINH`) mà khi bỏ
+# dấu trùng chữ thường ("vợ sinh 1993" ≡ "vô sinh", "có cần quan tâm" ≡ "có căn quan"). Người dùng gõ CÓ dấu → mẫu chỉ
+# áp khi câu có đúng chữ có dấu ở cột phải; gõ không dấu → vẫn áp như cũ (an toàn hơn chặn thiếu).
+MO_HO: dict[str, str] = {
+    r"vo sinh(?! (nam )?\d{2,4}(?!\w))": r"vô sinh",
+    r"(co|la|phai) can (co|cau|quan|tu|ong|nang)(?!\w)": r"căn",
+    r"(?<!\w)(nang|nhieu) can(?!\w)": r"căn",
+    r"can dong": r"căn đồng",
+    r"(?<!tap )trung so": r"trúng số",
+    r"(la|co|thay|bi|nhu) hon ma|hon ma (theo|o|ve|nao)": r"hồn ma",
+}
+
+
+def bo_qua_mo_ho(mau: str, raw: str | None) -> bool:
+    """True khi mẫu không dấu `mau` là mẫu mơ hồ và câu gốc (có dấu) không có chữ có dấu tương ứng."""
+    if mau not in MO_HO or not raw:
+        return False
+    cd, _kd, co_dau = _hai_ban(raw)
+    return co_dau and not re.search(MO_HO[mau], cd)
 
 
 def khung_hoang(raw: str) -> bool:
