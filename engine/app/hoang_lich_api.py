@@ -6,7 +6,7 @@ from __future__ import annotations
 import datetime as _dt
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, HTTPException, Path
+from fastapi import APIRouter, HTTPException, Path, Query
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.luangiai import hoang_lich as L
@@ -125,6 +125,15 @@ def api_ngay_tot_cong_khai(ngay: _dt.date) -> dict:
 @router.get("/v1/lich/thang/{nam}/{thang}")
 def api_thang_cong_khai(nam: Annotated[int, Path(ge=1901, le=2099)], thang: Annotated[int, Path(ge=1, le=12)]) -> dict:
     return L.thang(nam, thang)
+
+
+# AUD-Q3: số ngày tốt theo việc cho nhiều tháng (sitemap + robots trang việc-tháng; không dữ liệu cá nhân).
+@router.get("/v1/lich/viec-thang-dem/{nam}/{thang}")
+def api_dem_viec_thang(nam: Annotated[int, Path(ge=1901, le=2099)], thang: Annotated[int, Path(ge=1, le=12)],
+                       so: Annotated[int, Query(ge=1, le=30)] = 25) -> dict:
+    if (nam - 1901) * 12 + thang - 1 + so > (2099 - 1901 + 1) * 12:     # tháng cuối không vượt 12/2099 (giới hạn lịch)
+        raise HTTPException(422, detail="Khoảng tháng vượt quá 12/2099")
+    return {"thang": L.dem_viec_thang(nam, thang, so)}
 
 
 # SEO-L2: ngày tốt theo việc trong một tháng (không dữ liệu cá nhân → web cache được).

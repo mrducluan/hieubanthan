@@ -9,14 +9,15 @@ const CU_MOI: [string, string][] = [
   ...(CHUYEN.trang as [string, string][]),
 ];
 // SEO-K: trang tuổi một giới tính (cả trước QH-URL) → trang gộp nam + nữ.
-const TUOI_CU = /^\/phong-thuy\/(?:huong-hop-tuoi\/)?(tuoi-\d{4})-(?:nam|nu)(\.md)?$/;
+// AUD-Q2: trang năm (gộp hay một giới tính) → dòng năm trên mục lục; .md → mục lục .md.
+const TUOI_CU = /^\/phong-thuy\/(?:huong-hop-tuoi\/)?(tuoi-\d{4})(?:-(?:nam|nu))?(\.md)?$/;
 
 /** URL cũ (trước QH-URL) → URL mới; URL khác giữ nguyên. Giữ query/hash. */
 export function duongMoi(duong: string): string {
   const m = duong.match(/^([^?#]*)(.*)$/)!;
   const p = m[1]!, duoi = m[2]!;
   const t = p.match(TUOI_CU);
-  if (t) return `${CHUYEN.tuoi_huong}/${t[1]}${t[2] ?? ""}${duoi}`;
+  if (t) return t[2] ? `${CHUYEN.tuoi_huong}.md` : `${CHUYEN.tuoi_huong}${duoi.split("#")[0]}#${t[1]}`;
   for (const [cu, moi] of CU_MOI) {
     if (p === cu || p === `${cu}.md`) return `${moi}${p.slice(cu.length)}${duoi}`;
     if (p.startsWith(`${cu}/`)) return `${moi}${p.slice(cu.length)}${duoi}`;
@@ -46,3 +47,8 @@ export function duongTrangKb(loai: string, slug: string): string | null {
   const goc = k ? (CHUYEN.chu_de as Record<string, string>)[k] : undefined;
   return goc && /^[a-z0-9-]+$/.test(slug) ? `${goc}/${slug}` : null;
 }
+
+/** Trang công cụ = trang trụ (pillar) của silo; tên hiện ở breadcrumb và khối "Kiến thức {mảng}". Dùng được ở trình duyệt. */
+export const TEN_MANG_SILO: Record<string, string> = {
+  "/than-so": "Thần số học", "/hop-doi": "Hợp đôi", "/tu-vi": "Tử vi", "/bat-tu": "Bát tự", "/kinh-dich": "Kinh Dịch", "/phong-thuy": "Phong thuỷ",
+};

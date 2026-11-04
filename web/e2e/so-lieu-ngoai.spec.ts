@@ -102,6 +102,8 @@ test("menu đầu trang mặc định của web trùng MENU_DAU_MAC_DINH trong C
   // Trang năm sáng "Năm 2027" (đường dẫn dài nhất), trang gốc công cụ vẫn sáng "Huyền học".
   expect(co[mucDangO("/xem-sao-han/2027", co)]!.href).toBe("/nam/2027");
   expect(co[mucDangO("/xem-sao-han", co)]!.href).toBe("/huyen-hoc");
+  expect(co[mucDangO("/tuoi-xong-dat", co)]!.href).toBe("/huyen-hoc");      // TM-1: không còn dòng menu con, vẫn sáng hub
+  expect(co[mucDangO("/tuoi-xong-dat/2027", co)]!.href).toBe("/nam/2027");
   expect(co[mucDangO("/thoi-gian-toi", co)]!.href).toBe("/nam/2027");
 });
 

@@ -6,17 +6,18 @@ import { duongTuoi } from "@/lib/kien-thuc";
 import { NAM_SINH_SEO, duongLamNha, duongXongDat } from "@/lib/tuoi-dan-gian";
 import { duongNamTuoi } from "@/lib/nam";
 
-export function CungTuoi({ namSinh, canChi: cc, namAm, bo, boQuaNam }: { namSinh: number; canChi: string; namAm: number; boQuaNam?: number; bo?: "huong" | "lam_nha" | "xong_dat" | "tu_vi" }) {
+/** AUD-Q1 (2026-11-03): link sang trang theo tuổi của ĐÚNG năm đang được index (`namSeo` = `namTuoiSeo()`), một link mỗi
+ *  công cụ — không trỏ vào năm đã noindex; xông đất theo Tết sắp tới (`namTet` = năm âm hiện tại + 1). `boQua`: đường dẫn trang đang xem (không tự trỏ về mình). */
+export function CungTuoi({ namSinh, canChi: cc, namSeo, namTet, boQua }: { namSinh: number; canChi: string; namSeo: number; namTet: number; boQua?: string }) {
   const ds: [string, string][] = [];
   if (namSinh >= 1950 && namSinh <= 2027) ds.push([`/bat-tu/menh-theo-nam/sinh-nam-${namSinh}-menh-gi`, `Sinh năm ${namSinh} mệnh gì`]);
-  if (bo !== "huong" && NAM_SINH_SEO.includes(namSinh)) ds.push([duongTuoi(`tuoi-${namSinh}`), `Tuổi ${cc} ${namSinh} hợp hướng nào`]);
   if (NAM_SINH_SEO.includes(namSinh)) {
-    for (const n of [namAm, namAm + 1]) if (bo !== "lam_nha" || n !== namAm) ds.push([duongLamNha(n, namSinh), `Tuổi ${cc} làm nhà năm ${n}`]);
-    ds.push([duongXongDat(namAm + 1, namSinh), `Tuổi xông đất Tết ${namAm + 1} cho gia chủ ${cc}`]);
-    // NAM-3: Tử vi năm theo tuổi (năm âm hiện tại + năm sau; trang đang xem thì bỏ đúng năm đó qua `boQuaNam`).
-    for (const n of [namAm, namAm + 1]) if (!(bo === "tu_vi" && n === boQuaNam)) ds.push([duongNamTuoi(n, namSinh), `Tử vi năm ${n} tuổi ${cc}`]);
+    ds.push([duongTuoi(`tuoi-${namSinh}`), `Tuổi ${cc} ${namSinh} hợp hướng nào`]);
+    ds.push([duongLamNha(namSeo, namSinh), `Tuổi ${cc} làm nhà năm ${namSeo}`]);
+    ds.push([duongXongDat(namTet, namSinh), `Tuổi xông đất Tết ${namTet} cho gia chủ ${cc}`]);
+    ds.push([duongNamTuoi(namSeo, namSinh), `Tử vi năm ${namSeo} tuổi ${cc}`]);
   }
-  const loc = ds.filter(([d], i) => ds.findIndex(([x]) => x === d) === i);
+  const loc = ds.filter(([d], i) => d !== boQua && ds.findIndex(([x]) => x === d) === i);
   if (!loc.length) return null;
   return (
     <nav className="mt-10" aria-labelledby="cung-tuoi">

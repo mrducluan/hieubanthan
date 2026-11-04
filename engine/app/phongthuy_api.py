@@ -339,6 +339,19 @@ def api_tuoi_gop(slug: str) -> dict:
     return {"engine_version": ENGINE_VERSION, **pt_tuoi.tuoi_gop(nam)}
 
 
+# AUD-Q2: 8 trang cung phi + bảng năm sinh (thay 46 trang năm; route tuoi-gop giữ cho bản web cũ trong lúc deploy).
+@router.get("/cung-phi")
+def api_cung_phi_danh_sach() -> dict:
+    return {"engine_version": ENGINE_VERSION, "cung": pt_tuoi.danh_sach_cung(), "tuoi": pt_tuoi.muc_luc_tuoi()}
+
+
+@router.get("/cung-phi/{slug}")
+def api_cung_phi(slug: str) -> dict:
+    if pt_tuoi.cung_tu_slug(slug) is None:
+        raise HTTPException(404, detail="Không có cung phi này")
+    return {"engine_version": ENGINE_VERSION, **pt_tuoi.cung_phi(slug)}
+
+
 # --------------------------------------------------------------------------- #
 # PT-ĐS — báo cáo "Nhà của bạn" (đời thường, tất định, miễn phí)
 # --------------------------------------------------------------------------- #

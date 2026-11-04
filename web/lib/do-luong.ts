@@ -4,6 +4,7 @@
 // Tắt autocapture + session recording (ô nhập ngày sinh không bao giờ bị ghi).
 import type { PostHog } from "posthog-js";
 import { ghiMangDaXem } from "@/lib/huy-hieu";
+import { choRanh } from "@/lib/cho-ranh";
 
 export type SuKien =
   | "landing_viewed" | "reading_started" | "reading_completed" | "profile_created"
@@ -51,11 +52,14 @@ export type SuKien =
   | "hub_viewed"
   // CTA-2: khối thẻ cuối trang (Kiến thức {mảng}, Bài viết liên quan, Đọc tiếp…) — thấy khối (lap=0) / thấy từng thẻ bù
   // (lap=1, den = đường dẫn thẻ) / bấm thẻ (lap=1 thẻ bù, 0 = thẻ thật). Chỉ mã khối + đường dẫn trong site.
-  | "end_cta_viewed" | "end_cta_clicked";
+  | "end_cta_viewed" | "end_cta_clicked"
+  // TM-1: bấm thanh mảng (dải điều hướng dưới menu chính) — tu = mã mảng của thanh, den = mã mục, trang = đường dẫn đang xem
+  | "nav_bar_clicked";
 
 /** Thuộc tính được phép và kiểu giá trị. Thứ khác bị bỏ. */
 const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   feature_version: "string",
+  den_tu: "string", ai: "string",   // AUD-P0: mã nguồn vào (lib/nguon-vao.ts) — không bao giờ là URL
   mo_dun: "string",
   kind: "string",
   ma_moi: "string",
@@ -173,7 +177,8 @@ function nap(): Promise<PostHog | null> {
   const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
   if (!key || typeof window === "undefined") return Promise.resolve(null);
   if (ph) return Promise.resolve(ph);
-  dangNap ??= import("posthog-js").then(({ default: posthog }) => {
+  // PERF-2: posthog-js (97 KB) nạp khi người dùng tương tác / quá hạn chờ — sự kiện ghi trước đó đợi trong lời hứa này.
+  dangNap ??= choRanh().then(() => import("posthog-js")).then(({ default: posthog }) => {
     posthog.init(key, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com",
       autocapture: false,

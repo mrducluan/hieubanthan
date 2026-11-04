@@ -155,6 +155,50 @@ def _ly_do(c: dict, v: dict) -> list[str]:
     return ra
 
 
+def _ten_nk(ds) -> str:
+    return ", ".join(KB["nghi_ky"][x]["ten"] if x in KB["nghi_ky"] else x for x in ds)
+
+
+def _viec_lon(c: dict) -> list[dict]:
+    """6b-1: 6 việc lớn theo ĐÚNG luật chọn ngày của trang "ngày tốt {việc} tháng" (`_danh_gia_viec`), kèm câu ngắn vì sao —
+    để trang ngày không nói "hợp cưới hỏi" (sách ghi Nên) trong khi trang việc-tháng bỏ ngày đó (vướng mục Kiêng)."""
+    ra = []
+    for sv in VIEC_SEO:
+        v = _VIEC[sv["ma"]]
+        dg = _danh_gia_viec(c, v)
+        nen = [x for x in v["nghi"] if x in c["nghi"]]
+        ky = [x for x in v["nghi"] if x in c["ky"]]
+        if dg == "tot":
+            chu = f"sách lịch ghi nên {_ten_nk(nen)}, không vướng mục Kiêng"
+        elif dg == "binh":
+            chu = "sách lịch không ghi riêng việc này"
+        else:
+            ly = []
+            if ky:
+                ly.append((f"sách ghi nên {_ten_nk(nen)} nhưng kiêng {_ten_nk(ky)}" if nen else f"sách ghi kiêng {_ten_nk(ky)}"))
+            if c["truc"] in v["tranh_truc"]:
+                ly.append(f"trực {KB['truc'][c['truc']]['ten']} sách khuyên tránh việc này")
+            ly += [f"ngày {KB['ky_dan_gian'][k]['ten']}" for k in c["ky_dan_gian"] if k in v["tranh_dan_gian"]]
+            if "诸事不宜" in c["ky"]:
+                ly.append("sách khuyên hoãn mọi việc lớn")
+            elif not ly and "馀事勿取" in c["nghi"]:
+                ly.append("sách chỉ khuyên làm các việc ghi ở mục Nên")
+            chu = "; ".join(ly)
+        ra.append({"ma": sv["ma"], "slug": sv["slug"], "ten": sv["ten"], "danh_gia": dg, "chu": chu})
+    return ra
+
+
+def _cau_viec_lon(ds: list[dict]) -> str:
+    th = lambda x: x["ten"][:1].lower() + x["ten"][1:]  # noqa: E731
+    tot = [th(x) for x in ds if x["danh_gia"] == "tot"]
+    tr = [f"{th(x)} ({x['chu']})" for x in ds if x["danh_gia"] == "tranh"]
+    if not tot and not tr:
+        return ""
+    return (" Theo cách chọn ngày của trang (việc có trong mục Nên, không vướng mục Kiêng, trực và ngày kiêng dân gian): "
+            + (f"hợp {', '.join(tot)}" if tot else "chưa có việc lớn nào đủ điều kiện")
+            + (f"; chưa xếp vào ngày tốt {'; '.join(tr)}" if tr else "") + ".")
+
+
 def ngay_xem(d: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = None, ngay_sinh: int | None = None,
              gioi_tinh: str | None = None, viec: str | None = None) -> dict:
     c = _calc(d)
@@ -179,9 +223,11 @@ def ngay_xem(d: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = N
     nghi3 = [KB["nghi_ky"][x]["ten"].lower() for x in c["nghi"] if x in KB["nghi_ky"]][:3]
     ky_dg = [KB["ky_dan_gian"][k]["ten"] for k in c["ky_dan_gian"]]
     gio_hd = [_CHI[g["chi"]] for g in c["gio"] if g["hoang_dao"]]
+    viec_lon = _viec_lon(c)
     tra_loi = (f"{thu}, {d.day}/{d.month}/{d.year} (âm lịch {am_chu}, ngày {_gz(c['ngay_gz'])}) là ngày "
                f"{'hoàng đạo' if c['hoang_dao'] else 'hắc đạo'} ({KB['than'][c['than']]['ten']}), trực {truc['ten']} — "
                f"hợp {truc['hop']}." + (f" Sách lịch ghi nên: {', '.join(nghi3)}." if nghi3 else "")
+               + _cau_viec_lon(viec_lon)
                + (f" Dân gian thường tránh việc lớn vì là ngày {', '.join(ky_dg)}." if ky_dg else "")
                + f" Xung tuổi {_CAN[xc['can']]} {_CHI[xc['chi']]}. Giờ hoàng đạo: {', '.join(gio_hd)}.")
     return {
@@ -205,6 +251,7 @@ def ngay_xem(d: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = N
         "ky_dan_gian": [{"ma": k, **KB["ky_dan_gian"][k]} for k in c["ky_dan_gian"]],
         "tuoi": ({**t, "quan_he": _quan_he(c["ngay_gz"][1], t)} if t else None),
         "viec": viec_kq,
+        "viec_lon": viec_lon,
         "ngay_mai": tom_tat(mai),
         "ngay_tot_gan": ngay_tot_gan(d, None, t),
         "danh_sach_viec": [{"ma": v["ma"], "ten": v["ten"]} for v in KB["viec"]],
@@ -296,6 +343,19 @@ def viec_tu_slug(slug: str) -> str | None:
     return _THEO_SLUG.get(slug)
 
 
+def dem_viec_thang(nam: int, thang_: int, so: int) -> list[dict]:
+    """AUD-Q3: số ngày tốt của 6 việc SEO cho `so` tháng liên tiếp từ (nam, thang_) — đúng `chon_ngay` như trang việc,
+    để web dựng sitemap + robots một lần (trang 0 ngày tốt → noindex, không vào sitemap)."""
+    ra = []
+    for i in range(so):
+        n, t = nam + (thang_ - 1 + i) // 12, (thang_ - 1 + i) % 12 + 1
+        tu = dt.date(n, t, 1)
+        den = dt.date(n + (t == 12), t % 12 + 1, 1) - dt.timedelta(days=1)
+        for v in VIEC_SEO:
+            ra.append({"nam": n, "thang": t, "ma": v["ma"], "slug": v["slug"], "so_ngay": len(chon_ngay(v["ma"], tu, den)["ngay"])})
+    return ra
+
+
 def viec_thang(viec: str, nam: int, thang_: int) -> dict:
     tu = dt.date(nam, thang_, 1)
     den = (dt.date(nam + (thang_ == 12), thang_ % 12 + 1, 1) - dt.timedelta(days=1))
@@ -309,9 +369,14 @@ def viec_thang(viec: str, nam: int, thang_: int) -> dict:
     thang_am = _thang_am(nam, thang_, den)
     # "Đẹp nhất" = ngày đầu bảng xếp hạng KHÔNG vướng kiêng dân gian (Tam nương, Nguyệt kỵ…); cả tháng đều vướng thì không nêu.
     dep = next((x for x in kq["ngay"] if not x.get("ky_dan_gian")), None)
-    tra_loi = (f"Tháng {thang_}/{nam} ({thang_am}) có {len(ds)} ngày tốt cho {ten} theo hoàng lịch: "
-               + (", ".join(am(x) for x in ds) + "." if ds else "không có ngày nào đủ điều kiện — nên xem tháng kế tiếp.")
-               + (f" Đẹp nhất: {am(dep)} — {', '.join(dep['diem_cong'])}." if dep and dep["diem_cong"] else ""))
+    so_hd = sum(x["hoang_dao"] for x in ds)
+    # 6b-1: nêu số ngày hoàng đạo; "Đẹp nhất" gắn sau danh sách (trước chỉ nối vào nhánh "không có ngày" nên không bao giờ hiện).
+    tra_loi = ((f"Tháng {thang_}/{nam} ({thang_am}) có {len(ds)} ngày tốt cho {ten} theo hoàng lịch"
+                + (f", trong đó {so_hd} ngày hoàng đạo" if so_hd else ", đều là ngày hắc đạo") + ": "
+                + ", ".join(am(x) for x in ds) + "."
+                + (f" Đẹp nhất: {am(dep)} — {', '.join(dep['diem_cong'])}." if dep and dep["diem_cong"] else ""))
+               if ds else
+               f"Tháng {thang_}/{nam} ({thang_am}) chưa có ngày nào đủ điều kiện tốt cho {ten} theo hoàng lịch — nên xem tháng kế tiếp.")
     hd = [
         {"hoi": f"Tháng {thang_} năm {nam} ngày nào tốt để {ten}?", "dap": tra_loi},
         {"hoi": f"Chọn ngày {ten} dựa vào đâu?", "dap": kq["cach_chon"] + " Ngày nào cũng nên xem thêm có xung tuổi người chủ việc không."},

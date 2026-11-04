@@ -51,6 +51,19 @@ test("gộp khối: mẫu cụm áp cho trang KB; ghi đè 'thay' / 'thêm sau' 
   expect(ghiDe.nguon).toEqual({ trang: true, mau: true });
 });
 
+test("6b-6: khối mẫu cụm còn biến lạ (vd {nam} trên trang cung phi) bị bỏ, không hiện chữ trần; link không tính", () => {
+  const mau = { khoi_tren: [
+    { blockType: "van_ban", id: "a", noi_dung: "Người sinh năm {nam} hợp hướng nào" },
+    { blockType: "van_ban", id: "b", noi_dung: "Về {tieu_de}", link: "/x/{slug}" },
+    { blockType: "nut", id: "c", nhan: "Xem", nut_link: "/phong-thuy/{slug}" },
+  ] };
+  const g = gopNoiDung("/phong-thuy/huong-hop-tuoi/cung-kham-bac", {}, null, mau, { tieu_de: "Cung Khảm", slug: "cung-kham-bac" });
+  expect(g.khoi.tren.map((x) => x.id)).toEqual(["b", "c"]);
+  expect(JSON.stringify(g.khoi)).not.toContain("{nam}");
+  // Trang không có biến nào cũng không hiện biến trần.
+  expect(gopNoiDung("/tu-vi", {}, { khoi_tren: [{ blockType: "van_ban", id: "x", noi_dung: "Năm {nam}" }] }, null).khoi.tren).toEqual([]);
+});
+
 test("layNoiDungTrang: chưa nối CMS → không bao giờ null, trả mặc định; đường dẫn lạ vẫn trả khung rỗng", async () => {
   const cu = process.env.CMS_URL; delete process.env.CMS_URL;
   try {
@@ -76,8 +89,7 @@ test("sổ trang: không sót URL tĩnh của sitemap + mọi chủ đề; khôn
   expect(SO_TRANG.length).toBeLessThanOrEqual(52);   // bản gọn (mục 8.1): không tạo sẵn tài liệu cho trang KB; +1 trang cụm dấu hiệu (Y5), +1 SAO-HV (/hoi-vien), +1 SAO-CG (/hoi-chuyen-gia), +1 /xem-sao-han (MT-ĐS), +3 /nam, /lich-am, /thoi-gian-toi (NAM-1/2)
   expect(MAU_CUM.length).toBe(Object.keys(CHU_DE).length + 17);  // + tuổi hợp hướng, lá số mẫu, 6 cụm trang con (ND-7), 4 cụm SEO-L, sao hạn theo năm (MT-ĐS), 3 cụm năm (NAM-1), Tử vi năm theo tuổi (NAM-3)
   expect(khopMauCum("/tu-vi/sao-o-cung/tu-vi-cung-menh")?.bien).toEqual({ slug: "tu-vi-cung-menh" });
-  expect(khopMauCum("/phong-thuy/huong-hop-tuoi/tuoi-1990")?.bien).toEqual({ nam: "1990" });       // SEO-K: gộp nam + nữ
-  expect(khopMauCum("/phong-thuy/huong-hop-tuoi/tuoi-1990-nam")).toBeNull();
+  expect(khopMauCum("/phong-thuy/huong-hop-tuoi/cung-kham-bac")?.bien).toEqual({ slug: "cung-kham-bac" });   // AUD-Q2: theo cung phi
   expect(khopMauCum("/phong-thuy/huong-hop-tuoi")).toBeNull();
   expect(khopMauCum("/tu-vi/sao-o-cung")).toBeNull();
   // ND-7: trang con theo ngày/năm — tháng khớp TRƯỚC ngày (cùng tiền tố).

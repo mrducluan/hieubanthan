@@ -1,4 +1,5 @@
 "use client";
+import { caoDinhTren } from "@/lib/thanh-mang";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { AnimatePresence, motion } from "motion/react";
@@ -104,7 +105,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
     const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     const cuon = (top: number) => window.scrollTo({ top: Math.max(0, top), behavior: giam ? "auto" : "smooth" });
     const cao = window.innerHeight;
-    const dau = document.querySelector<HTMLElement>("[data-thanh-dau]")?.getBoundingClientRect().height ?? 0;
+    const dau = caoDinhTren();
     const duoiEl = document.querySelector<HTMLElement>("[data-thanh-duoi]");
     const duoi = duoiEl && duoiEl.offsetParent !== null ? duoiEl.getBoundingClientRect().height : 0;
     const dayNhin = cao - duoi;

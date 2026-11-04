@@ -1,6 +1,7 @@
 // Phần giới thiệu render phía máy chủ ở cuối trang công cụ (Thần số, Tử vi, Bát tự…): nói công cụ làm gì, cần gì,
 // tính thế nào, hỏi đáp thường gặp. Máy tìm kiếm và bot AI đọc được nội dung này, không phải đợi JavaScript.
 // Kèm schema WebPage + BreadcrumbList + FAQPage. Chỉ mô tả cách hệ thống làm việc, không viết nghĩa mới.
+import { thanhCua } from "@/lib/thanh-mang";
 import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TEN_MANG_SILO, truCua } from "@/lib/kien-thuc";
@@ -34,9 +35,10 @@ export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [], 
           isPartOf: { "@id": `${siteUrl()}/#ung-dung` },
           potentialAction: { "@type": "UseAction", target: { "@type": "EntryPoint", urlTemplate: urlDayDu(duong), actionPlatform: ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"] } } },
         // QH-URL: công cụ nằm trong silo (vd /phong-thuy/huong-xau-nam) → cha là trang trụ; công cụ gốc → cha là hub Huyền học.
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" },
+        // TM-1: trang thuộc 6 mảng — TrangCongCu đã phát BreadcrumbList cùng dải hiển thị (lib/duong-dan.ts) → không lặp.
+        ...(thanhCua(duong) ? [] : [ldDuongDan([{ ten: "Trang chủ", duong: "/" },
           duong.split("/").length > 2 && TEN_MANG_SILO[truCua(duong)] ? { ten: TEN_MANG_SILO[truCua(duong)]!, duong: truCua(duong) } : { ten: "Huyền học", duong: "/huyen-hoc" },
-          { ten, duong }]),
+          { ten, duong }])]),
         ldHoiDap(hoiDap),
       )} />
       <h2 id="gioi-thieu-cong-cu" className="text-2xl text-fg">{nhan.tieuDe || `Về công cụ ${ten}`}</h2>

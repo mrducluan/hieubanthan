@@ -321,10 +321,10 @@ const MAU_CUM_GOC: readonly MauCumTrang[] = [
     bien: ["tieu_de", "mo_ta", "slug", "ten_chu_de"], o: O_CUM,
     nguon_kb: { kieu: "kb", loai: c.loai, vi_du: VI_DU[c.loai], tep_kb: TEP_KB_THEO_LOAI[c.loai] },
   })),
-  // SEO-K: một trang cho cả nam và nữ cùng năm (CMS migration seo_k_tuoi_gop đổi mẫu cũ "tuoi-{nam}-{gioi}").
-  { mau_duong: "/phong-thuy/huong-hop-tuoi/tuoi-{nam}", nhom: "tuoi", ten: "Tuổi hợp hướng (1960–2005)",
-    bien: ["tieu_de", "nam"], o: O_CUM,
-    nguon_kb: { kieu: "tuoi", vi_du: "tuoi-1990", tep_kb: ["phongthuy_kb.json"] } },
+  // AUD-Q2: hướng hợp tuổi gộp theo CUNG PHI (8 trang; CMS migration aud_q2_cung_phi đổi mẫu cũ "tuoi-{nam}").
+  { mau_duong: "/phong-thuy/huong-hop-tuoi/{slug}", nhom: "tuoi", ten: "Hướng hợp tuổi theo cung phi (8 cung)",
+    bien: ["tieu_de", "slug"], o: O_CUM,
+    nguon_kb: { kieu: "tuoi", vi_du: "cung-kham-bac", tep_kb: ["phongthuy_kb.json"] } },
   { mau_duong: "/tu-vi/la-so-mau/{slug}", nhom: "la_so_mau", ten: "Lá số Tử vi mẫu", bien: ["tieu_de", "slug"], o: O_CUM,
     nguon_kb: { kieu: "la_so_mau", vi_du: "tu-phu-dong-cung", tep_kb: ["tuvi_kb.json", "tuvi_cach_cuc.json"] } },
   // ND-7 — trang con theo ngày/năm của công cụ (nội dung engine tính, không phải kho tri thức): khối + "Chữ trên trang".

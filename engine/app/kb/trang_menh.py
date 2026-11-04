@@ -63,6 +63,19 @@ def _nam_dang_chu_y(nam: int, chi: str) -> list[str]:
     ]
 
 
+_THU_TU_CAT = ("Sinh Khí", "Thiên Y", "Diên Niên", "Phục Vị")
+
+
+def _huong_tot(q: dict) -> list[str]:
+    """Bốn hướng tốt (Bát trạch) của cung phi, từ tốt nhất: Sinh Khí → Thiên Y → Diên Niên → Phục Vị."""
+    b = pt.bang_huong(q["quai"])
+    return sorted([h for h in b if b[h] in _THU_TU_CAT], key=lambda h: _THU_TU_CAT.index(b[h]))
+
+
+def _sinh_khi(q: dict) -> str:
+    return _huong_tot(q)[0]
+
+
 def ds_menh_nam() -> list[tuple[int, str]]:
     return [(n, f"sinh-nam-{n}-menh-gi") for n in range(NAM_DAU, NAM_CUOI + 1)]
 
@@ -97,17 +110,23 @@ def trang_menh_nam(nam: int, slug: str) -> dict:
         {"tieu_de": f"Ngũ hành của mệnh {hanh}",
          "danh_sach": [f"{sinh_ta} sinh {hanh} — hành nâng đỡ bản mệnh.", f"{hanh} sinh {ta_sinh} — hành bản mệnh nuôi dưỡng.",
                        f"{khac_ta} khắc {hanh} — hành gây áp lực cho bản mệnh.", f"{hanh} khắc {ta_khac} — hành bản mệnh chế ngự."]},
-        {"tieu_de": f"Màu và hướng theo ngũ hành (dân gian)",
-         "doan": "Ứng dụng dân gian của ngũ hành, tham khảo khi chọn màu, đồ dùng; không thay cho sở thích và điều kiện thực tế.",
-         "danh_sach": [f"Hành {hanh} (bản mệnh): {nh[hanh]['ung_dung']}.", f"Hành {sinh_ta} (sinh bản mệnh): {nh[sinh_ta]['ung_dung']}.",
-                       f"Nên dùng vừa phải hành {khac_ta} (khắc bản mệnh): {nh[khac_ta]['ung_dung'].split(';')[0]}."]},
+        # 6b-3 (2026-11-04): BỎ hướng theo ngũ hành (Mộc → Đông…) — hướng nhà theo Bát trạch đi theo cung phi nam/nữ, có
+        # thể ngược hẳn (nữ 1981 cung Cấn: Đông là Lục Sát). Hướng chỉ nêu ở mục Cung phi bên dưới.
+        {"tieu_de": f"Màu và nhóm nghề theo ngũ hành (dân gian)",
+         "doan": "Ứng dụng dân gian của ngũ hành, tham khảo khi chọn màu, đồ dùng; không thay cho sở thích và điều kiện thực tế. "
+                 "Hướng nhà không chọn theo mệnh nạp âm — xem mục Cung phi bên dưới.",
+         "danh_sach": [f"Hành {hanh} (bản mệnh): màu {nh[hanh]['mau']}; nhóm nghề {nh[hanh]['nghe']}.",
+                       f"Hành {sinh_ta} (sinh bản mệnh): màu {nh[sinh_ta]['mau']}; nhóm nghề {nh[sinh_ta]['nghe']}.",
+                       f"Nên dùng vừa phải hành {khac_ta} (khắc bản mệnh): màu {nh[khac_ta]['mau']}."]},
         {"tieu_de": f"Tuổi hợp và tuổi xung với tuổi {chi}",
          "doan": "Theo địa chi năm sinh — quan niệm dân gian về hợp tính, không phải điều kiện để chọn bạn đời hay đối tác.",
          "danh_sach": [f"Tam hợp: {', '.join(tam_hop)}.", f"Lục hợp: {luc_hop}.", f"Lục xung: {luc_xung}.",
                        f"Tứ hành xung: {', '.join(tu_xung)}."]},
-        {"tieu_de": f"Cung phi người sinh năm {nam}",
-         "doan": "Bát trạch (chọn hướng nhà) dùng cung phi theo năm sinh và giới tính, không dùng mệnh nạp âm.",
-         "danh_sach": [f"Nam {nam}: cung {q_nam['quai']} ({q_nam['nhom']}).", f"Nữ {nam}: cung {q_nu['quai']} ({q_nu['nhom']})."]},
+        {"tieu_de": f"Cung phi và hướng hợp người sinh năm {nam}",
+         "doan": "Bát trạch (chọn hướng nhà, hướng giường, bàn) dùng cung phi theo năm sinh và giới tính, không dùng mệnh nạp âm — "
+                 "nên nam và nữ cùng năm có thể hợp hai hướng khác hẳn nhau.",
+         "danh_sach": [f"Nam {nam}: cung {q_nam['quai']} ({q_nam['nhom']}), hướng tốt nhất {_sinh_khi(q_nam)}; bốn hướng tốt: {', '.join(_huong_tot(q_nam))}.",
+                       f"Nữ {nam}: cung {q_nu['quai']} ({q_nu['nhom']}), hướng tốt nhất {_sinh_khi(q_nu)}; bốn hướng tốt: {', '.join(_huong_tot(q_nu))}."]},
         {"tieu_de": f"Sinh đầu năm {nam} thì tính tuổi nào",
          "doan": (f"Năm âm lịch {can} {chi} bắt đầu từ Tết ({_dmy(tet)}, theo âm lịch Việt Nam) — cách tính tuổi và mệnh nạp âm "
                   f"phổ biến. Bát tự và Bát trạch lấy mốc Lập xuân ({_dmy(lx)}). Sinh trước mốc thì thuộc năm {can_t} {chi_t} "
@@ -126,11 +145,17 @@ def trang_menh_nam(nam: int, slug: str) -> dict:
          "dap": f"Tam hợp {', '.join(x for x in tam_hop if x != chi)}; lục hợp {luc_hop}. Lục xung {luc_xung}. Đây là quan niệm dân gian, chỉ để tham khảo."},
         {"hoi": f"Sinh tháng 1 năm {nam} thì mệnh gì?",
          "dap": f"Trước Tết ({_dmy(tet)}) thì thuộc năm {can_t} {chi_t}, mệnh {na_t['ten']}; từ Tết trở đi là {ten}."},
+        {"hoi": f"Người sinh năm {nam} hợp hướng nhà nào?",
+         "dap": f"Theo Bát trạch, hướng nhà đi theo cung phi chứ không theo mệnh {ten}: nam {nam} cung {q_nam['quai']} hợp nhất "
+                f"hướng {_sinh_khi(q_nam)}, nữ {nam} cung {q_nu['quai']} hợp nhất hướng {_sinh_khi(q_nu)}."},
         {"hoi": f"Mệnh {ten} và cung phi khác nhau thế nào?",
          "dap": f"Mệnh nạp âm ({ten}) dùng chung cho cả nam và nữ; cung phi (nam {q_nam['quai']}, nữ {q_nu['quai']}) dùng chọn hướng nhà."},
     ]
-    # SEO-K: trang tuổi hợp hướng gộp nam + nữ một trang (308 từ bản -nam/-nu).
-    lien_ket = ([{"duong": f"/phong-thuy/huong-hop-tuoi/tuoi-{nam}", "ten": f"Tuổi {can} {chi} {nam} hợp hướng nào"}]
+    # AUD-Q2: trang hướng hợp tuổi gộp theo CUNG PHI → link sang trang cung của nam và của nữ (năm dùng Lập xuân như trang
+    # cung; 1960–2005 như bảng mục lục).
+    from app.luangiai import phongthuy_tuoi as _pt_tuoi
+    lien_ket = ([{"duong": f"/phong-thuy/huong-hop-tuoi/{_pt_tuoi.CUNG_SLUG[q['quai']]}",
+                  "ten": f"{gt} sinh năm {nam} cung {q['quai']} hợp hướng nào"} for gt, q in (("Nam", q_nam), ("Nữ", q_nu))]
                 if _PT_DAU <= nam <= _PT_CUOI else [])
     ln = [n for n in (nam - 1, nam + 1) if NAM_DAU <= n <= NAM_CUOI]
     return {

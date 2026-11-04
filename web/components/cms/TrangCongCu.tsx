@@ -12,6 +12,11 @@ import { TEN_MANG_SILO, dsCumTru } from "@/lib/kien-thuc";
 import { gioiThieuTu, layDauNhieuTrang, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { mucSoTrang } from "@/lib/so-trang";
 import { soCanLap, theLap } from "@/lib/the-lap";
+import { DuongDan } from "@/components/khung/DuongDan";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { goiLd, ldDuongDan } from "@/lib/seo";
+import { duongDanCongCu } from "@/lib/duong-dan";
+import { thanhCua } from "@/lib/thanh-mang";
 import { boLap } from "@/lib/the-lap-cms";
 
 export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
@@ -24,8 +29,15 @@ export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
   const daHien = [duong, ...cum, ...theLap(soCanLap(cum.length), { ...lapTuyChon, tru: duong, boQua: [duong, ...cum] }).map((t) => t.duong)];
   // ND-7: bảng chữ của URL + chữ CMS đã lọc → công cụ (client) đọc qua DauCms/useChu; phần dưới đọc ngay ở đây.
   const bang = mucSoTrang(duong)?.mac_dinh.chu ?? {}, c = taoChu(bang, nd.chu);
+  // TM-1: trang thuộc 6 mảng có breadcrumb thật (Trang chủ › Huyền học › {mảng}); thanh mảng nằm ở layout.
+  const ten = nd.ten ?? mucSoTrang(duong)?.ten ?? "";
   return (
     <>
+      {/* Một nguồn: dải hiển thị và BreadcrumbList JSON-LD cùng mảng (GioiThieuCongCu bỏ breadcrumb cho 6 trụ). */}
+      {thanhCua(duong) && ten && <>
+        <JsonLd data={goiLd(ldDuongDan(duongDanCongCu(duong, ten)))} />
+        <DuongDan ds={duongDanCongCu(duong, ten)} className="-mt-2 mb-5 md:-mt-4" />
+      </>}
       {truoc}
       <DauCms h1={nd.dau.h1} loiDan={nd.dau.loiDan} kieuChu={nd.dau.kieuChu} bang={bang} chu={locChu(bang, nd.chu)}
         khoiTren={nd.khoi.tren.length ? <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" /> : null}>

@@ -92,7 +92,7 @@ export const MauCum: CollectionConfig = {
     docChi({ name: "nhom", label: "Nhóm", type: "select", options: NHOM_TRANG, admin: { readOnly: true, position: "sidebar" } }),
     docChi({ name: "tren_web", label: "Còn trên web", type: "checkbox", defaultValue: true, admin: { readOnly: true, position: "sidebar" } }),
     docChi({ name: "bien", label: "Biến dùng được trong chữ khối", type: "json", admin: { readOnly: true,
-      description: "Gõ {ten_bien} trong chữ khối, web thay bằng giá trị của từng trang. Biến lạ giữ nguyên chữ." } }),
+      description: "Gõ {ten_bien} trong chữ khối, web thay bằng giá trị của từng trang. Biến lạ chặn xuất bản; web không hiện khối còn biến lạ." } }),
     docChi({ name: "o", label: "Vị trí khối", type: "json", admin: { hidden: true } }),
     docChi({ name: "nguon_kb", label: "Nguồn kho tri thức", type: "json", admin: { hidden: true } }),
     docChi({ name: "mac_dinh", label: "Chữ mặc định trong code", type: "json", admin: { hidden: true } }),

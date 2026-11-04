@@ -105,6 +105,40 @@ def _loi_doi_song(sao: str, cung: str, tt: str) -> list[str]:
 _KHONG_THAY_BAC_SI = "Đây là thói quen nên để ý theo quan niệm Tử vi, không phải chẩn đoán và không thay lời bác sĩ."
 
 
+def _muc_su_kien_menh(sao: str, cung: str) -> dict:
+    """AUD-P0: dữ kiện TÍNH riêng của trang (CALC `tuvi_vi_tri`, xét đủ 12 vị trí Tử Vi) — cung Mệnh có sao gì khi sao ở
+    cung này; sao toạ Mệnh thì ba cung tam phương. Câu khung ở KB `su_kien_kb.json`."""
+    t = _t()
+    kb = t._doc("su_kien_kb.json")
+    k = _vong().index(cung)
+    if k == 0:
+        m = kb["sao_toa_menh"]
+        dong = []
+        for ten, lech in m["cung"]:
+            tt = vt.tom_tat_cung_khac(sao, 0, lech)
+            kn = [f"{' · '.join(x['sao'])} ({x['so_vi_tri']})" for x in tt["to_hop"]]
+            if tt["vo_chinh_dieu"]:
+                kn.append(f"vô chính diệu ({tt['vo_chinh_dieu']})")
+            dong.append([ten, " · ".join(tt["luon_co"]) or m["khong_co"], "; ".join(kn)])
+        return {"ma": "su_kien_menh", "tieu_de": m["tieu_de"].format(sao=sao), "doan": m["doan"].format(sao=sao),
+                "bang": {"cot": m["cot"], "dong": dong}}
+    m = kb["sao_cung_menh"]
+    tt = vt.tom_tat_cung_khac(sao, k, 0)
+    luon = " và ".join(tt["luon_co"])
+    doan = (m["luon_co"].format(sao=sao, cung=cung, luon_co=luon) if tt["luon_co"]
+            else m["khong_co"].format(sao=sao, cung=cung))
+    if tt["vo_chinh_dieu"]:
+        doan += " " + m["vo_chinh_dieu"].format(n=tt["vo_chinh_dieu"])
+    # Mệnh cố định một sao → bảng phân bố giống hệt ở các trang cùng sao Mệnh (trùng lặp) → chỉ câu dữ kiện + link
+    # sang trang sao đó ở Mệnh; Mệnh không cố định → bảng các khả năng (thông tin riêng của cặp sao × cung này).
+    dong = [[" · ".join(x["sao"]), f"{x['so_vi_tri']}/12"] for x in tt["to_hop"]]
+    if tt["vo_chinh_dieu"]:
+        dong.append([m["dong_vcd"], f"{tt['vo_chinh_dieu']}/12"])
+    return {"ma": "su_kien_menh", "tieu_de": m["tieu_de"].format(sao=sao, cung=cung), "doan": doan,
+            **({} if tt["luon_co"] else {"bang": {"cot": m["cot"], "dong": dong}}),
+            **({"xem_them": [{"loai": "sao_cung", "slug": f"{t._slug(x)}-cung-menh"} for x in tt["luon_co"]]} if tt["luon_co"] else {})}
+
+
 def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
     t, kb = _t(), _kb()
     sao, cung = k
@@ -116,7 +150,7 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
     lv = dsg["linh_vuc"].get(cung, {})
     loi_sang, loi_ham = _loi_doi_song(sao, cung, "sang"), _loi_doi_song(sao, cung, "ham")
     manh_sang = (dsg["sao_linh_vuc"].get(sao, {}).get(cung, {}).get("sang") or {}).get("manh", "")
-    tra_loi = (f"{sao} ở cung {cung}: {t._cau(nd)} {manh_sang} "
+    tra_loi = (f"Trong Tử vi, {sao} ở cung {cung}: {t._cau(nd)} {manh_sang} "
                f"Nghĩa đậm hay nhạt tuỳ {sao} sáng hay hãm ở chi cung {cung} rơi vào, và sao nào đi cùng.").replace("  ", " ")
     cs, ch = (", ".join(sang) or "không chi nào"), (", ".join(ham) if ham else "")
     muc = [
@@ -130,7 +164,7 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
         muc.append({"tieu_de": f"Khi {sao} sáng ở cung {cung}",
                     "doan": f"{sao} sáng (Miếu/Vượng/Đắc) khi cung {cung} rơi vào {cs}.", "danh_sach": loi_sang})
     if loi_ham:
-        muc.append({"tieu_de": f"Khi {sao} hãm ở cung {cung}",
+        muc.append({"tieu_de": f"Khi {sao} hãm ở cung {cung}" if ham else f"Khi {sao} kém sáng ở cung {cung}",
                     "doan": (f"{sao} hãm khi cung {cung} rơi vào {ch}." if ham else
                              f"{sao} không có vị trí hãm theo bảng Nam phái; ý dưới đây dùng khi sao đứng chỗ kém sáng."),
                     "danh_sach": loi_ham})
@@ -156,6 +190,7 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
                                   for can, h in hoa if cung in kb["tu_hoa_cung"].get(h, {})],
                     "xem_them": [{"loai": "hoa_cung", "slug": f"{_slug_hoa(h)}-cung-{t._slug(cung)}"}
                                  for h in dict.fromkeys(h for _, h in hoa)]})
+    muc.append(_muc_su_kien_menh(sao, cung))
     muc.append({"tieu_de": "Câu hỏi tự soi", "doan": s["cau_tu_soi"]})
 
     tot_xau = f"Khi sáng: {manh_sang}" if manh_sang else ""

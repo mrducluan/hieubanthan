@@ -43,3 +43,33 @@ def bo_cuc_theo_sao(sao: str) -> dict[str, dict]:
                    "xung_chieu_chi": doi,
                    "xung_chieu": [t for t in CHINH_TINH if v[t] == doi]}
     return {c: ra[c] for c in CHI}
+
+
+def sao_o_cung_cach_menh(sao: str, k: int) -> list[dict]:
+    """AUD-P0: `sao` đứng ở cung thứ `k` tính NGHỊCH từ Mệnh (0 Mệnh, 1 Huynh Đệ, …, 11 Phụ Mẫu — cung thứ k nằm ở chi
+    Mệnh − k) → với mỗi trong 12 vị trí của Tử Vi: chi của sao, chi của Mệnh, chính tinh ở Mệnh."""
+    ra = []
+    for chi_tv in CHI:
+        v = vi_tri_chinh_tinh(chi_tv)
+        c = CHI.index(v[sao])
+        m = CHI[(c + k) % 12]
+        ra.append({"chi_sao": v[sao], "chi_menh": m, "menh": [t for t in CHINH_TINH if v[t] == m]})
+    return ra
+
+
+def tom_tat_cung_khac(sao: str, k: int, lech: int) -> dict:
+    """Khi `sao` ở cung thứ `k`, cung thứ `lech` (cùng thứ tự) có chính tinh nào, gom trên 12 vị trí của Tử Vi:
+    `luon_co` (có ở cả 12), `to_hop` (mỗi tổ hợp + số vị trí, nhiều trước), `vo_chinh_dieu` (số vị trí không có chính tinh).
+    Đếm VỊ TRÍ trên bàn sao (mỗi vị trí một lần) — không phải tỉ lệ người."""
+    bo: list[tuple[str, ...]] = []
+    for chi_tv in CHI:
+        v = vi_tri_chinh_tinh(chi_tv)
+        dich = CHI[(CHI.index(v[sao]) + k - lech) % 12]
+        bo.append(tuple(t for t in CHINH_TINH if v[t] == dich))
+    dem: dict[tuple[str, ...], int] = {}
+    for b in bo:
+        if b:
+            dem[b] = dem.get(b, 0) + 1
+    luon = [t for t in CHINH_TINH if all(t in b for b in bo)]
+    to_hop = [{"sao": list(b), "so_vi_tri": n} for b, n in sorted(dem.items(), key=lambda x: (-x[1], [CHINH_TINH.index(t) for t in x[0]]))]
+    return {"luon_co": luon, "to_hop": to_hop, "vo_chinh_dieu": sum(1 for b in bo if not b)}

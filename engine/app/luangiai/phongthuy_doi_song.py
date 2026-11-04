@@ -294,6 +294,22 @@ def _thanh_vien(mq: dict | None, thanh_vien: list[dict]) -> list[dict]:
 
 
 # ----------------------------------------------------------------------------- chương 2
+def _cau_nhom(trach: dict, mq: dict, cua_hop: bool, cung_nhom: bool) -> str:
+    """6b-5 (2026-11-04): Bát trạch xếp nhà theo phía LƯNG nhà (toạ), không theo phía cửa — nhà hướng Đông Nam toạ Tây Bắc
+    nên là nhà Tây tứ trạch. Trước đây câu "Nhà và bạn cùng nhóm hướng Tây — bố trí dễ" đứng ngay sau "cửa quay về phía
+    kém" → người đọc thấy hai câu ngược nhau. Nay nói rõ nhóm tính theo lưng nhà và ghép đúng bốn trường hợp; mức chương
+    không đổi (vẫn du niên của cửa + nhóm trạch–mệnh)."""
+    n_nha, n_ban = trach["nhom"].split()[0], mq["nhom"].split()[0]
+    goc = f"Bát trạch xếp nhóm nhà theo lưng nhà: nhà toạ {trach['toa']} là nhà nhóm {n_nha}"
+    if cua_hop and cung_nhom:
+        return f"{goc}, cùng nhóm với bạn — cả cửa lẫn lưng nhà đều thuận."
+    if cua_hop:
+        return f"{goc}, khác nhóm {n_ban} của bạn — chuyện rất thường gặp khi cửa đã hợp; xếp phòng ngủ, bàn làm việc theo bạn là đủ."
+    if cung_nhom:
+        return f"{goc}, cùng nhóm với bạn — lưng nhà hợp nên dồn phòng ngủ, bàn làm việc về phía sau và hai bên hợp với bạn."
+    return f"{goc}, bạn nhóm {n_ban} — cả cửa lẫn lưng nhà đều chưa hợp, nên chọn phòng và đầu giường theo bạn thay vì theo nhà."
+
+
 def _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan) -> dict:
     c = {"ma": "ngoi_nha_voi_ban", **kb.chuong("ngoi_nha_voi_ban"), "muc": None, "nhan_muc": None, "hop": [], "doan": [], "can_cu": []}
     if not huong:
@@ -316,9 +332,7 @@ def _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan) -> dict:
         c["hop"].append(_hop("cot_loi", f"Hướng {huong} với bạn: {_ten_thuong(dn)}",
                              ((_cau_sau_ten(dn) + " ").lstrip() if dn in pt.CAT else
                               "Cửa nhà quay về phía kém với riêng bạn — không cần đổi nhà; bù bằng đầu giường, bàn làm việc "
-                              "quay về phía hợp với bạn. ") + (f"Nhà và bạn cùng nhóm hướng {trach['nhom'].split()[0]} — bố trí dễ."
-                                                                             if cung_nhom else
-                                                                             f"Nhà thuộc nhóm hướng {trach['nhom'].split()[0]}, bạn nhóm {mq['nhom'].split()[0]} — khác nhóm, nên chọn phòng và đầu giường theo bạn thay vì theo nhà.")))
+                              "quay về phía hợp với bạn. ") + _cau_nhom(trach, mq, dn in pt.CAT, cung_nhom)))
     else:
         c["hop"].append(_hop("cot_loi", f"Nhà hướng {huong}", f"Các phía hợp với nhà là "
                              + ", ".join(h for h in pt.HUONG if pt.bang_huong(trach["quai"])[h] in pt.CAT) + ". Thêm năm sinh để so với mệnh bạn."))
@@ -426,14 +440,24 @@ def _chuong_tung_phong(mq, huong, b, bc_luan, bo_cuc_in) -> dict:  # noqa: C901
     if bang:
         tot = sorted([h for h in pt.HUONG if bang[h] in pt.CAT], key=lambda h: _UU_TIEN_DU_NIEN.index(bang[h]))
         kem = sorted([h for h in pt.HUONG if bang[h] not in pt.CAT], key=lambda h: -_UU_TIEN_DU_NIEN.index(bang[h]))
-        goi = [("cua_chinh", f"Cửa chính / lối vào: phía {tot[0]} ({bang[tot[0]]})"),
+        # 6b-5: nhà đã có hướng → nói về CỬA ĐANG CÓ (không gợi "đặt cửa Tây Nam" cho nhà đang quay Đông Nam).
+        if huong in bang:
+            cua = (f"Cửa chính: đang quay về {huong} ({bang[huong]}) — đã hợp, giữ nguyên, giữ lối vào sáng và gọn"
+                   if bang[huong] in pt.CAT else
+                   f"Cửa chính: đang quay về {huong} ({bang[huong]}) — không cần đổi cửa; nếu nhà có cửa phụ, lối vào phía "
+                   f"{tot[0]} ({bang[tot[0]]}) thì dùng làm lối đi hằng ngày")
+        else:
+            cua = f"Cửa chính / lối vào: phía {tot[0]} ({bang[tot[0]]})"
+        goi = [("cua_chinh", cua),
                ("phong_ngu_chinh", f"Phòng ngủ chính, đầu giường: phía {next((h for h in tot if bang[h] == 'Diên Niên'), tot[0])}"),
                ("bep", f"Bếp: thân bếp đặt phía kém ({kem[0]} {bang[kem[0]]}), miệng bếp quay về phía {next((h for h in tot if bang[h] == 'Thiên Y'), tot[0])}"),
                ("ban_tho", f"Bàn thờ, bàn học: phía {next((h for h in tot if bang[h] == 'Phục Vị'), tot[-1])} ({bang[next((h for h in tot if bang[h] == 'Phục Vị'), tot[-1])]})"),
                ("ve_sinh", f"Nhà vệ sinh, kho: phía {kem[0]} hoặc {kem[1]}")]
         c["goi_y_phong"] = [{"phong": p, "ten": _TEN_PHONG.get(p, p), "goi_y": g} for p, g in goi]
         if not c["hop"]:
-            c["hop"].append(_hop("loi_khuyen", "Ba chỗ quan trọng nhất", f"Cửa về {tot[0]}; đầu giường về {goi[1][1].split('phía ')[1]}; miệng bếp về {goi[2][1].split('quay về phía ')[1]}. Ba điểm này sách xưa gọi là cửa – chủ – bếp."))
+            cua_ngan = (f"cửa giữ hướng {huong}" if huong in bang and bang[huong] in pt.CAT else
+                        f"lối đi hằng ngày phía {tot[0]}" if huong in bang else f"cửa về {tot[0]}")
+            c["hop"].append(_hop("loi_khuyen", "Ba chỗ quan trọng nhất", f"{cua_ngan[:1].upper() + cua_ngan[1:]}; đầu giường về {goi[1][1].split('phía ')[1]}; miệng bếp về {goi[2][1].split('quay về phía ')[1]}. Ba điểm này sách xưa gọi là cửa – chủ – bếp."))
         c["can_cu"].append(("Theo mệnh bạn" if mq else "Theo trạch") + ": " + "; ".join(f"{h} {bang[h]}" for h in pt.HUONG) + ".")
     c["nhan_muc"] = kb.nhan_muc(c["muc"]) if c["muc"] else None
     _ap_tran_muc(c, _veto(bc_luan))

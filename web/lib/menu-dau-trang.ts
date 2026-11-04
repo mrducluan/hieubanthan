@@ -21,9 +21,11 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/kinh-dich", ten: "Kinh Dịch", mo_ta: "Gieo 3 đồng xu, quẻ đầu ngày, lời hào" },
     { href: "/phong-thuy", ten: "Phong thuỷ", mo_ta: "La bàn đo hướng, khảo sát nhà, bố trí" },
     { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi", mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
-    { href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm", mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
-    { href: "/tuoi-xong-dat", ten: "Tuổi xông đất", mo_ta: "Tuổi hợp gia chủ, giờ đẹp mùng 1" },
-    { href: "/xem-sao-han", ten: "Sao hạn theo tuổi", mo_ta: "La Hầu, Kế Đô, Thái Bạch… đọc bằng lời thường" },
+    // TM-1 (chủ dự án duyệt 2026-11-03): 3 công cụ đã có bản theo năm ở menu "Năm" (hướng xấu, xông đất, sao hạn) nhường
+    // chỗ cho 3 cụm kiến thức lớn nhất chưa có lối vào menu. Ba công cụ vẫn ở menu Năm, hub Huyền học, chân trang.
+    { href: "/tu-vi/sao-o-cung", ten: "Sao ở từng cung Tử vi", mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
+    { href: "/kinh-dich/que", ten: "64 quẻ Kinh Dịch", mo_ta: "Ý nghĩa từng quẻ, lời hào, cách hiểu đơn giản" },
+    { href: "/bat-tu/menh-theo-nam", ten: "Sinh năm nào mệnh gì", mo_ta: "Can chi, nạp âm, màu hợp, tuổi hợp 1950–2027" },
     { href: "/phong-thuy/huong-hop-tuoi", ten: "Hướng nhà hợp tuổi", mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
     { href: "/phong-thuy/dau-hieu", ten: "Dấu hiệu trong nhà", mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
     { href: "/kien-thuc", ten: "Thư viện kiến thức", mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
@@ -51,10 +53,15 @@ export const MENU_DAU_TRANG: MucMenu[] = [
   ] },
 ];
 
+/** TM-1: trang thuộc một mục cha nhưng không có dòng menu con riêng (vd /xem-sao-han, /tuoi-xong-dat — menu con của chúng
+ *  nằm ở "Năm" dưới dạng /…/{nam}, nhưng trang gốc là công cụ của hub Huyền học). Chỉ dùng để làm sáng mục cha. */
+const THUOC_THEM: Record<string, string[]> = { "/tai-khoan": ["/dang-nhap"], "/huyen-hoc": ["/xem-sao-han", "/tuoi-xong-dat"] };
+const duongCua = (m: Pick<MucMenu, "href" | "con">) => [m.href, ...m.con.map((c) => c.href), ...(THUOC_THEM[m.href] ?? [])];
+
 /** Đang ở mục này: trùng đường dẫn mục cha hoặc một menu con (vd /tu-vi/... → "Huyền học"); /tai-khoan gồm cả /dang-nhap. */
 export function dangOMuc(path: string, m: Pick<MucMenu, "href" | "con">): boolean {
   // Link có "#" (vd /tu-vi#hop-tham dưới Hợp đôi) chỉ là lối tắt tới một khối — không làm mục cha sáng cả trang gốc.
-  const ds = [m.href, ...m.con.map((c) => c.href), ...(m.href === "/tai-khoan" ? ["/dang-nhap"] : [])]
+  const ds = duongCua(m)
     .filter((h) => !h.includes("#")).map((h) => h.split("?")[0]!).filter((h) => h && h !== "/");
   return ds.some((k) => path === k || path.startsWith(k + "/"));
 }
@@ -77,7 +84,7 @@ export function ganChuyenMucBlog(menu: MucMenu[], ds: { slug: string; ten: strin
 export function mucDangO(path: string, ds: Pick<MucMenu, "href" | "con">[]): number {
   let tot = -1, dai = -1;
   ds.forEach((m, i) => {
-    for (const h of [m.href, ...m.con.map((c) => c.href), ...(m.href === "/tai-khoan" ? ["/dang-nhap"] : [])]) {
+    for (const h of duongCua(m)) {
       if (h.includes("#")) continue;
       const k = h.split("?")[0]!;
       if (k && k !== "/" && (path === k || path.startsWith(k + "/")) && k.length > dai) { tot = i; dai = k.length; }

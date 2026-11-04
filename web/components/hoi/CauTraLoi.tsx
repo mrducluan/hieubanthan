@@ -104,7 +104,7 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
         // Một cột trên điện thoại (hình trước, lời sau). Máy tính: khung ≥ ~46rem mới chia hai cột đều nhau, hình dính.
         <div className="space-y-4 lg:grid lg:items-start lg:gap-6 lg:space-y-0 lg:[grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))]"
           data-testid="tra-loi-co-hinh">
-          <div className="min-w-0 lg:sticky lg:top-24"><TrucQuan ds={t.trucQuan} /></div>
+          <div className="min-w-0 lg:sticky lg:top-[calc(6rem+var(--tm-h,0px))]"><TrucQuan ds={t.trucQuan} /></div>
           {loi}
         </div>
       ) : loi}

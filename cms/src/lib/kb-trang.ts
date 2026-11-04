@@ -15,7 +15,9 @@ export function duongEngine(n: NguonKb, slug: string): string | null {
   if (!SLUG.test(slug)) return null;
   if (n.kieu === "kb") return n.loai && LOAI.test(n.loai) ? `/v1/kb/trang/${n.loai}/${slug}` : null;
   // SEO-K: trang tuổi gộp nam + nữ (tuoi-1990); slug cũ -nam/-nu engine vẫn tra được về bản gộp.
-  if (n.kieu === "tuoi") return /^tuoi-\d{4}(-(nam|nu))?$/.test(slug) ? `/v1/phongthuy/tuoi-gop/${slug}` : null;
+  // AUD-Q2: trang hướng hợp tuổi theo cung phi (cung-kham-bac…); slug năm cũ engine vẫn tra được bản gộp cũ.
+  if (n.kieu === "tuoi") return /^cung-[a-z-]+$/.test(slug) ? `/v1/phongthuy/cung-phi/${slug}`
+    : /^tuoi-\d{4}(-(nam|nu))?$/.test(slug) ? `/v1/phongthuy/tuoi-gop/${slug}` : null;
   return `/v1/tuvi/la-so-mau/${slug}`;
 }
 

@@ -5,6 +5,7 @@ import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
+import { NgayTotTheoViec } from "@/components/hoang-lich/NgayTotTheoViec";
 import { homNayVN, ngayTotCongKhai, thangCongKhai } from "@/lib/hoang-lich";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { metaTrang } from "@/lib/seo";
@@ -26,6 +27,7 @@ export default async function Page() {
           mo_ta="Ngày hoàng đạo hay hắc đạo, giờ tốt, việc sách lịch ghi nên làm và nên kiêng — và ngày này có xung tuổi bạn không." />
         <XemNgayTot banDau={d} thang={t} />
         <p className="mt-4 text-xs text-fg-faint">Đường dẫn cố định của ngày này: <Link href={`/xem-ngay-tot/${iso}`} className="text-gold underline">/xem-ngay-tot/{iso}</Link></p>
+        <NgayTotTheoViec className="mt-10" />
       </div>
     </TrangCongCu>
   );

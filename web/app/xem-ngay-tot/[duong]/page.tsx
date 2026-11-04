@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { LichThang, XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
-import { VIEC_SEO, docDuong, duongNgay, duongThang, duongViecThang, ngayDangIndex, ngayTotCongKhai, thangCongKhai, thangIndex, viecThangCongKhai } from "@/lib/hoang-lich";
+import { VIEC_SEO, docDuong, duongNgay, duongThang, duongViecThang, ngayDangIndex, ngayTotCongKhai, thangCongKhai, thangIndex, viecThangCongKhai, viecThangIndex } from "@/lib/hoang-lich";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { taoChu } from "@/lib/chu-trang";
@@ -42,7 +42,9 @@ async function metaGoc({ params }: P): Promise<Metadata> {
     const m = metaTrang({ tieuDe: `Ngày tốt ${ten} tháng ${x.thang}/${x.nam} theo hoàng lịch`,
       moTa: `Các ngày tốt ${ten} tháng ${x.thang} năm ${x.nam}: ngày âm, can chi, hoàng đạo, trực — chọn theo mục nên/kiêng của sách lịch, kèm ngày đẹp nhất trong tháng.`,
       duong: duongViecThang(x.viec.slug, x.nam, x.thang), anh: anhBai({ tieuDe: `Ngày tốt ${ten} tháng ${x.thang}/${x.nam}`, mang: "lich" }) });
-    return thangIndex(x.nam, x.thang) ? m : { ...m, robots: { index: false, follow: true } };
+    // AUD-Q3: số ngày tốt lấy từ cùng dữ liệu trang (cache fetch dùng chung); engine lỗi → null → chỉ xét cửa sổ tháng.
+    const d = viecThangIndex(x.nam, x.thang, null) ? await viecThangCongKhai(x.viec.ma, x.nam, x.thang) : null;
+    return viecThangIndex(x.nam, x.thang, d ? d.so_ngay : null) ? m : { ...m, robots: { index: false, follow: true } };
   }
   if (x.loai === "ngay") {
     const m = metaTrang({ tieuDe: `Ngày ${dmy(x.iso)} tốt hay xấu? Hoàng đạo, giờ tốt, việc nên làm`,
@@ -166,7 +168,10 @@ async function TrangViecThang({ x }: { x: { viec: (typeof VIEC_SEO)[number]; nam
               {d.ngay.map((n) => (
                 <li key={n.ngay}><Link href={duongNgay(n.ngay)} className="block rounded-xl border border-line/70 px-3 py-2 text-sm hover:border-gold/50">
                   <b>{dmy(n.ngay)}</b> <span className="text-fg-muted">({n.am} âm · {n.can_chi}) · {n.than} · trực {n.truc}</span>
-                  {n.diem_cong && n.diem_cong.length > 0 && <span className="mt-0.5 block text-xs text-jade">{n.diem_cong.join(" · ")}</span>}
+                  <span className={`ml-1 inline-flex rounded-full px-2 text-xs ${n.hoang_dao ? "bg-gold/15 text-gold" : "border border-moon/50 text-moon"}`}
+                    data-testid="nhan-dao">{n.hoang_dao ? "Hoàng đạo" : "Hắc đạo"}</span>
+                  {n.diem_cong && n.diem_cong.filter((x) => x !== "hoàng đạo").length > 0 &&
+                    <span className="mt-0.5 block text-xs text-jade">{n.diem_cong.filter((x) => x !== "hoàng đạo").join(" · ")}</span>}
                 </Link></li>
               ))}
             </ul>

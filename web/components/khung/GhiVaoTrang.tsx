@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { ghi, lanDauTrongPhien, nhoMaMoi } from "@/lib/do-luong";
 import { laTrangKienThuc } from "@/lib/duong-silo";
 import { dangChayApp } from "@/lib/che-do-app";
+import { phanLoaiNguon } from "@/lib/nguon-vao";
 
 export function GhiVaoTrang() {
   useEffect(() => {
@@ -20,8 +21,10 @@ export function GhiVaoTrang() {
     }
     const nguon = u.pathname.split("/")[1] || "trang_chu";
     if (nguon === "quan-tri") return;   // người vận hành, không phải người dùng
+    // AUD-P0: nguồn vào dạng MÃ (ai + tên trợ lý / tim_kiem / mxh / truc_tiep / noi_bo / khac) — không gửi URL giới thiệu.
     if (lanDauTrongPhien("vao-trang")) ghi("landing_viewed", { nguon, loai: laTrangKienThuc(u.pathname) ? "kien_thuc" : "khac",
-      app: dangChayApp() ? 1 : 0 });   // KC-4 GĐ2: % phiên mở ở chế độ app đã cài
+      app: dangChayApp() ? 1 : 0,   // KC-4 GĐ2: % phiên mở ở chế độ app đã cài
+      ...phanLoaiNguon(document.referrer, u.searchParams.get("utm_source"), window.location.hostname) });
   }, []);
   return null;
 }

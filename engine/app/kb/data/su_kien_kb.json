@@ -1,0 +1,85 @@
+{
+  "source_id": "tuvi_vi_tri_v1",
+  "school_id": "nam_phai",
+  "trang_thai": "nhap_ai",
+  "source": {
+    "tuvi_vi_tri_v1": "Khẩu quyết an 14 chính tinh theo vị trí Tử Vi (Tử Vi Đẩu Số toàn thư) — tính tất định, đối chiếu 60 lá số mẫu",
+    "kinhdich_cau_truc_v1": "Bát cung, thế ứng, nạp giáp, lục thân (Kinh Phòng — Hoả châu lâm); hỗ, thác, tổng quái theo quy tắc lật hào — tính tất định"
+  },
+  "ghi_chu": "AUD-P0 (2026-11): câu khung cho dữ kiện TÍNH trên trang kiến thức. Chỉ chứa khung câu; con số do CALC điền. Không nói tỉ lệ người.",
+  "sao_cung_menh": {
+    "tieu_de": "Khi {sao} ở cung {cung}, cung Mệnh có sao gì",
+    "luon_co": "Khi {sao} ở cung {cung}, cung Mệnh luôn có {luon_co} (xét đủ 12 vị trí của Tử Vi).",
+    "khong_co": "Khi {sao} ở cung {cung}, cung Mệnh không cố định một sao.",
+    "vo_chinh_dieu": "{n}/12 vị trí Mệnh không có chính tinh nào (vô chính diệu) — khi đó đọc mượn sao ở cung đối diện.",
+    "cot": [
+      "Chính tinh ở cung Mệnh",
+      "Số vị trí trên 12"
+    ],
+    "dong_vcd": "Vô chính diệu (không có chính tinh)"
+  },
+  "sao_toa_menh": {
+    "tieu_de": "Khi {sao} ở ngay cung Mệnh: Tài Bạch, Quan Lộc, Thiên Di có sao gì",
+    "doan": "Xét đủ 12 vị trí của sao Tử Vi: khi {sao} ở ngay cung Mệnh (toạ Mệnh), ba cung cùng nhìn với Mệnh — Tài Bạch, Quan Lộc, Thiên Di (tam phương tứ chính) — có sao như bảng dưới; đây là bộ khung đi kèm {sao} trên mọi lá số có {sao} ở Mệnh.",
+    "cot": [
+      "Cung",
+      "Luôn có",
+      "Các khả năng (số vị trí trên 12)"
+    ],
+    "khong_co": "không cố định",
+    "cung": [
+      [
+        "Tài Bạch",
+        4
+      ],
+      [
+        "Quan Lộc",
+        8
+      ],
+      [
+        "Thiên Di",
+        6
+      ]
+    ]
+  },
+  "que_cau_truc": {
+    "source_id": "kinhdich_cau_truc_v1",
+    "school_id": "kinh_phong",
+    "tieu_de": "Cấu trúc quẻ {ten}",
+    "doan": "Quẻ {ten} ghép từ quẻ dưới {ha} và quẻ trên {thuong}. Theo bát cung, quẻ thuộc cung {cung} (hành {hanh}), loại {loai}, hào thế {the}, hào ứng {ung}. Hỗ quái là {ho}, thác quái (đổi hết âm dương) là {thac}, tổng quái (lật ngược) là {tong}. Bảng dưới ghi nạp giáp, lục thân từng hào và quẻ biến khi chỉ một hào động.",
+    "cot": [
+      "Hào",
+      "Âm dương",
+      "Nạp giáp",
+      "Hành",
+      "Lục thân",
+      "Thế / Ứng",
+      "Động hào này ra quẻ"
+    ],
+    "hao": [
+      "Hào 1 (Sơ)",
+      "Hào 2",
+      "Hào 3",
+      "Hào 4",
+      "Hào 5",
+      "Hào 6 (Thượng)"
+    ],
+    "tra_loi": "Quẻ {ten_day_du} ({ten_han}), quẻ số {so} trong Kinh Dịch: {y}",
+    "chu_giai": [
+      "Thế: hào đại diện người hỏi; Ứng: hào đại diện việc hoặc người phía bên kia.",
+      "Nạp giáp: gắn mỗi hào với một địa chi để biết hành của hào.",
+      "Lục thân: vai trò của hào so với hành của cung — Huynh Đệ, Tử Tôn, Thê Tài, Quan Quỷ, Phụ Mẫu.",
+      "Hỗ quái ghép hào 2–4 và 3–5 (diễn biến bên trong); thác quái đổi hết âm dương; tổng quái lật ngược sáu hào."
+    ]
+  },
+  "ten_tuong": {
+    "Càn": "Thiên",
+    "Đoài": "Trạch",
+    "Ly": "Hỏa",
+    "Chấn": "Lôi",
+    "Tốn": "Phong",
+    "Khảm": "Thủy",
+    "Cấn": "Sơn",
+    "Khôn": "Địa"
+  }
+}

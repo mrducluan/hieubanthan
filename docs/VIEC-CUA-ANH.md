@@ -5,7 +5,40 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
-### 4u. Đợt 2026-11-02 (bảo mật thư viện · lời theo hoàn cảnh · EN-5/EN-6)
+### 4v. Thanh mảng + breadcrumb + menu Huyền học (TM-1, 2026-11-03) — sau khi merge
+
+- [ ] **CMS → Giao diện website → Menu đầu trang** (sau khi CMS deploy chạy migration `tm_1_menu_huyen_hoc`): mở menu con
+      "Huyền học", kiểm thấy 3 mục mới (Sao ở từng cung Tử vi · 64 quẻ Kinh Dịch · Sinh năm nào mệnh gì). Nếu anh từng tự
+      sửa chữ 3 mục cũ (Hướng xấu theo năm / Tuổi xông đất / Sao hạn theo tuổi) thì migration giữ nguyên — đổi tay ở đây.
+- [ ] **CMS → Chữ dùng chung** (tuỳ chọn): bấm "Đồng bộ ngay" ở Trang website → xuất hiện các nhóm "Thanh mảng · Tử vi…";
+      đổi nhãn thanh ở đây (để trống = chữ gốc). Đường dẫn không sửa được ở CMS — muốn thêm / bớt mục thì nhắn em.
+- [ ] **Sau 4–6 tuần**: PostHog sự kiện `nav_bar_clicked` (tu = mảng, den = mục) — mục nào ít người bấm thì bỏ / đổi tên;
+      Search Console cụm `/tu-vi/sao-o-cung`, `/kinh-dich/que`, `/bat-tu/menh-theo-nam` (lượt hiển thị trước ↔ sau). Sau
+      60–90 ngày có số thì quyết làm mega-menu (phương án B, `docs/audit-2026-11/H-de-xuat-dieu-huong.md`) hay không.
+
+### 4u. Kiểm toán SEO/GEO (AUD, 2026-11-03) — sau khi merge (deploy ENGINE trước web)
+
+- [ ] **Deploy engine trước web** (route mới `/v1/phongthuy/cung-phi`, `/v1/lich/viec-thang-dem`); CMS deploy tự chạy
+      migration dữ liệu `aud_q2_cung_phi` (mẫu cụm hướng hợp tuổi → trang cung phi).
+- [ ] **Search Console (10 phút):** Sitemaps → gửi lại `sitemap.xml`; Kiểm tra URL → `https://hieuban.com/phong-thuy/huong-hop-tuoi/cung-kham-bac`
+      và `https://hieuban.com/phong-thuy/huong-hop-tuoi` → "Yêu cầu lập chỉ mục". 46 URL `…/huong-hop-tuoi/tuoi-{năm}` đã 308
+      về mục lục — Search Console sẽ báo "Trang có chuyển hướng", đó là đúng.
+- [ ] **CMS (nếu có ghi đè chữ cho trang `…/huong-hop-tuoi/tuoi-{năm}`):** chép chữ cần giữ sang trang cung tương ứng
+      (Trang website) — migration không tự gộp được vì nhiều năm dồn về một cung.
+- [ ] **GA4 (5 phút, tuỳ chọn):** PostHog đã có `landing_viewed.den_tu = ai` + `ai = chatgpt|perplexity|gemini|copilot|claude`;
+      GA4 tạo kênh "AI assistants" như mục D `docs/DE-XUAT-CHAT-LUONG-NOI-DUNG.md` nếu muốn xem cả ở GA4.
+- [ ] **Ngày 01/02/2027 — Q4 cửa sổ trang ngày:** Search Console → Hiệu suất → lọc trang chứa `/xem-ngay-tot/20` → so lượt
+      hiển thị của ngày cách hôm nay 180–400 ngày. Ít (vd < 5% tổng) → nhắn em đổi `NGAY_SAU = 400 → 180`
+      (`web/lib/hoang-lich.ts`, một dòng, sitemap ngày tự theo).
+- [ ] **CMS → Mẫu cụm "Hướng hợp tuổi theo cung phi"** (sau migration `aud_q2_cung_phi`): nếu chữ khối có `{nam}` thì sửa —
+      từ 6b (2026-11-04) web KHÔNG hiện khối còn biến lạ và CMS chặn xuất bản, nên khối đó đang bị ẩn tới khi sửa.
+- [x] ~~Trả lời 6 câu hỏi ở `docs/AUDIT-SEO-GEO-2026-11.md` mục 6b~~ — anh giao em quyết, đã làm 2026-11-04 (xem mục 6b).
+- [ ] **Search Console → Sơ đồ trang web** (một lần, không bắt buộc): thêm `sitemap-cum.xml` + `sitemap-ngay.xml`, bấm gửi lại
+      `sitemap.xml`. Không cần khai báo lại sau mỗi lần sửa — robots.txt đã khai cả ba.
+- [ ] **Thẩm định thật** 10 trang/tuần theo `scripts/tham_dinh.py hang-doi --gsc Trang.csv` — sổ thẩm định hiện 0 trang
+      (máy không làm thay được; đòn bẩy E-E-A-T lớn nhất).
+
+### 4w. Đợt 2026-11-02 (bảo mật thư viện · lời theo hoàn cảnh · EN-5/EN-6)
 
 - [ ] **Deploy engine trước web** (Render dựng lại từ main; web cần trường `tinh_trang` + thần sát tham khảo của engine mới).
 - [ ] Chạy migration **0033** (múi giờ nơi sinh vào hồ sơ tài khoản) — mục 4s; chưa chạy thì web vẫn chạy như cũ.

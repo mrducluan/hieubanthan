@@ -13,6 +13,8 @@ import { duongLichAm } from "@/lib/lich-am";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_HAN_NAM_CON } from "@/lib/chu/trang-con";
+import { DuongDan } from "@/components/khung/DuongDan";
+import { duongDanCum } from "@/lib/duong-dan";
 
 type P = { params: Promise<{ nam: string }> };
 
@@ -34,16 +36,17 @@ export default async function Page(p: P) {
   // ND-7: mẫu cụm "/phong-thuy/huong-xau-nam/{nam}" — khối + chữ sửa được ở CMS.
   const duong = duongHanNam(n), bien = { nam: String(n), can_chi: h.can_chi };
   const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_HAN_NAM_CON, nd.chu);
+  const dd = duongDanCum({ ten: "Hướng xấu theo năm", duong: "/phong-thuy/huong-xau-nam" }, { ten: `Năm ${n}`, duong: duongHanNam(n) });
   return (
     <div className="mx-auto max-w-3xl space-y-5">
       <JsonLd data={goiLd(
         ldTrangWeb({ duong: duongHanNam(n), ten: `Hướng xấu năm ${n}`, about: ["Ngũ Hoàng", "Tam Sát", "Thái Tuế", `Năm ${h.can_chi}`] }),
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Phong thuỷ", duong: "/phong-thuy" }, { ten: "Hướng xấu theo năm", duong: "/phong-thuy/huong-xau-nam" }, { ten: `Năm ${n}`, duong: duongHanNam(n) }]),
+        ldDuongDan(dd),
         ldHoiDap(h.hoi_dap?.length ? h.hoi_dap : [{ hoi: `Ngũ Hoàng năm ${n} ở hướng nào?`, dap: `Hướng ${ten("ngu_hoang").phuong}.` },
           { hoi: `Tam Sát năm ${n} ở đâu?`, dap: `Phía ${ten("tam_sat").phuong}.` },
           { hoi: `Thái Tuế năm ${n} ở hướng nào?`, dap: `Hướng ${ten("thai_tue").phuong}; Tuế Phá ở ${ten("tue_pha").phuong}.` }]),
       )} />
-      <nav aria-label="Đường dẫn" className="text-sm text-fg-muted"><Link href="/phong-thuy" className="hover:underline">Phong thuỷ</Link> › <Link href="/phong-thuy/huong-xau-nam" className="hover:underline">Hướng xấu theo năm</Link></nav>
+      <DuongDan ds={dd} />
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={c("dau.tieu_de", bien)} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" />
       <TraLoiNhanh chu={h.tra_loi_nhanh} />
