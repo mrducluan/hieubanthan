@@ -45,6 +45,8 @@ export function mdTrang(t: TrangKienThuc, cap = 1): string {
     for (const x of m.trich_dan ?? []) {
       if (x.nguyen_van) d.push(`> ${x.nguyen_van}`, ...(x.phien_am ? [`> _${x.phien_am}_`] : []), ">");
       if (x.nghia) d.push(`> ${x.nghia}`);
+      if (x.khi) d.push(`> Câu này nói về lá số khi ${x.khi}.`);
+      if (x.chu_thich) d.push(`> Chú thích: ${x.chu_thich}`);
       d.push(`> — ${x.sach}${x.chuong ? `, ${x.chuong}` : ""}`, "");
     }
     if (m.xem_them?.length) d.push(...m.xem_them.map((x) => `- Xem: [${x.tieu_de}](${urlDayDu(duongTrang(x.loai, x.slug))}.md)`), "");

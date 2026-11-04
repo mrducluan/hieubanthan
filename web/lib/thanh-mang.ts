@@ -25,6 +25,7 @@ export const THANH_MANG: readonly ThanhMang[] = [
     { ma: "sao_cung", duong: cum("sao-cung"), nhan: "Sao ở cung", dem: "sao-cung" },
     { ma: "tu_hoa", duong: cum("tu-hoa"), nhan: "Tứ hoá", dem: "tu-hoa" },
     { ma: "la_so_mau", duong: "/tu-vi/la-so-mau", nhan: "Lá số mẫu", dem: "la-so-mau" },
+    { ma: "co_thu", duong: cum("co-thu"), nhan: "Cổ thư" },
   ] },
   { tru: "/bat-tu", ma: "battu", ten: "Bát tự", muc: [
     { ma: "cong_cu", duong: "/bat-tu", nhan: "Lá số của tôi" },

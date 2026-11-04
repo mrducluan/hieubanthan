@@ -191,6 +191,9 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
                     "xem_them": [{"loai": "hoa_cung", "slug": f"{_slug_hoa(h)}-cung-{t._slug(cung)}"}
                                  for h in dict.fromkeys(h for _, h in hoa)]})
     muc.append(_muc_su_kien_menh(sao, cung))
+    from app.kb import trang_co_thu as tct      # TV-CTP: câu Cốt Tuỷ Phú nhắc đúng sao ở cung này
+    if (ct := tct.muc_trich(sao=sao, cung=cung)):
+        muc.append(ct)
     muc.append({"tieu_de": "Câu hỏi tự soi", "doan": s["cau_tu_soi"]})
 
     tot_xau = f"Khi sáng: {manh_sang}" if manh_sang else ""
@@ -271,6 +274,9 @@ def trang_hoa_cung(k: tuple[str, str], slug: str) -> dict:
          "xem_them": [{"loai": "hoa_cung", "slug": f"{_slug_hoa(h)}-cung-{t._slug(x)}"} for x in (doi, th1, th2)]},
         {"tieu_de": "Lưu ý khi đọc", "doan": t._cau(th["luu_y"])},
     ]
+    from app.kb import trang_co_thu as tct      # TV-CTP: câu Cốt Tuỷ Phú nhắc Hoá này ở cung này
+    if (ct := tct.muc_trich(cung=cung, hoa=h)):
+        muc.append(ct)
     hoi_dap = [
         {"hoi": f"Hoá {h} ở cung {cung} nghĩa là gì?", "dap": f"{t._cau(nd)} {o.get('y', '')}".strip()},
         {"hoi": f"Năm sinh nào có Hoá {h}?",

@@ -8,7 +8,7 @@ import CHUYEN from "@/lib/chuyen-huong.json";
 import { CHU_DE_THEO_LOAI as CHU_DE_THEO_LOAI_GOC } from "@/lib/duong-silo";
 
 export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu"
-  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu";
+  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu" | "co_thu";
 
 type ChuDe = { loai: LoaiTrang; ten: string; mo_ta: string; mang: string };
 /** Khoá = mã chủ đề (giữ nguyên làm mã nội bộ: CMS, hình, llms); `duong` = URL cụm theo silo mảng (lib/chuyen-huong.json). */
@@ -50,6 +50,9 @@ const CHU_DE_GOC: Record<string, ChuDe> = {
   // Y5: dấu hiệu nhà ở — một trang cho mỗi dấu hiệu của form Khảo sát nhà (engine kb/trang_phongthuy.py)
   "dau-hieu": { loai: "dau_hieu", ten: "Dấu hiệu nhà ở", mang: "/phong-thuy",
     mo_ta: "23 dấu hiệu nhà ở hay gặp (gương đối giường, xà ngang, nhà vệ sinh giữa nhà…): sách xưa nói gì, nhìn theo đời sống hiện đại, việc nên làm từ 0 đồng." },
+  // TV-CTP: cổ thư Tử vi — nguyên văn chữ Hán, phiên âm, nghĩa đời thường (engine kb/trang_co_thu.py)
+  "co-thu": { loai: "co_thu", ten: "Cổ thư Tử vi", mang: "/tu-vi",
+    mo_ta: "Phú Tử vi trong Tử Vi Đẩu Số Toàn Thư đọc từng câu: nguyên văn chữ Hán, phiên âm Hán Việt, nghĩa đời thường và câu nào ứng với lá số khi nào." },
 };
 // QH-URL (phương án B): cụm kiến thức nằm dưới trang công cụ của mảng — /{mảng}/{cụm}/{trang}. URL cũ /kien-thuc/{khoá}/…
 // chuyển 308 (next.config.mjs đọc cùng lib/chuyen-huong.json).
@@ -93,13 +96,17 @@ export function dsCumTru(tru: string): CumHienThi[] {
 export const HINH_CHU_DE: Record<string, KieuMang> = {
   "than-so": "than-so", "kinh-dich": "kinh-dich", "tu-vi": "tu-vi", "cung-tu-vi": "tu-vi", "thap-than": "bat-tu", "nhat-chu": "bat-tu",
   "hop-so": "than-so", "nghe-nghiep": "than-so", "tinh-yeu": "than-so", "nam-ca-nhan": "than-so", "no-nghiep": "than-so", "so-kep": "than-so",
-  "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu", "dau-hieu": "phong-thuy",
+  "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu", "dau-hieu": "phong-thuy", "co-thu": "tu-vi",
 };
 export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = CHU_DE_THEO_LOAI_GOC;
 
 /** SEO-K: `xem_them` = link sang trang gốc thay cho chép lại khối dùng chung (engine dựng, tiêu đề điền sẵn). */
 /** SEO-M: trích dẫn sách (nguyên văn ≤ 2 câu, có phiên âm + nghĩa) — KB bo_sung_<loai>.json. */
-export interface TrichDan { sach: string; chuong?: string; nguyen_van?: string; phien_am?: string; nghia?: string }
+export interface TrichDan {
+  sach: string; chuong?: string; nguyen_van?: string; phien_am?: string; nghia?: string;
+  /** TV-CTP: điều kiện trên lá số bằng lời thường ("Câu này nói về lá số khi …"), chú thích chữ, neo #cau-n. */
+  khi?: string; chu_thich?: string; neo?: string;
+}
 export interface MucTrang {
   tieu_de: string; doan?: string; danh_sach?: string[]; xem_them?: { loai: LoaiTrang; slug: string; tieu_de: string }[];
   /** SEO-M: bảng thật · trích dẫn · phần do ban biên tập bổ sung trên trang chuyên gia tự viết (EEAT-1). */

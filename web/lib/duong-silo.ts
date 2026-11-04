@@ -38,7 +38,7 @@ export function laTrangKienThuc(duong: string): boolean {
 export const CHU_DE_THEO_LOAI = {
   so: "than-so", que: "kinh-dich", sao: "tu-vi", cung: "cung-tu-vi", thap_than: "thap-than", nhat_chu: "nhat-chu",
   cap_so: "hop-so", nghe: "nghe-nghiep", tinh_yeu: "tinh-yeu", nam_ca_nhan: "nam-ca-nhan", no_nghiep: "no-nghiep", so_kep: "so-kep",
-  sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi", dau_hieu: "dau-hieu",
+  sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi", dau_hieu: "dau-hieu", co_thu: "co-thu",
 } as const;
 
 /** Đường dẫn trang kiến thức theo (loại, slug) — dùng được ở trình duyệt (khối hình trong hỏi đáp trỏ sang trang). */
