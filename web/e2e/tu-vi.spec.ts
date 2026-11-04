@@ -269,3 +269,16 @@ test("EN-6 BI-3: chọn sinh ở nước ngoài thì có ô múi giờ nơi sinh
   const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1")!));
   expect(h.utc_noi_sinh).toBe(-5);
 });
+
+test("TV-ZW Cùng sao Mệnh: một dòng tỉ lệ dưới lá số, thuật ngữ trong \"Vì sao nói vậy\", đo chỉ mã", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  const d = page.getByTestId("cung-sao-menh");
+  await expect(d).toContainText(/Cứ khoảng \d+ thời điểm sinh/);
+  await expect(d).toContainText("Cùng sao Mệnh, không cùng cuộc đời");
+  await expect(d).toContainText("Cự Môn");
+  await d.getByText("Vì sao nói vậy").click();
+  await expect(d).toContainText("không phải số người thật");
+  await expect.poll(async () => (await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []))
+    .some((e) => e.su_kien === "chart_interacted" && e.kind === "cung_sao_menh")).toBe(true);
+});

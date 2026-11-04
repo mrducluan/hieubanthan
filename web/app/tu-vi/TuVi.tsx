@@ -13,6 +13,7 @@ import { HanhDongTrucQuan } from "@/components/hoi/TrucQuan";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { TruongPhai, type ThangNhuan } from "@/components/huyen-hoc/TruongPhai";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
+import { CungSaoMenh } from "@/components/huyen-hoc/CungSaoMenh";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DaiHanNhay, DongHoaHan } from "@/components/huyen-hoc/HanLaSo";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
@@ -252,6 +253,7 @@ export function TuVi() {
             </KhungLaSo>
             <DongHoaHan vh={vh} lop={lop} namXem={namXem} />
             <DaiHanNhay ls={ls} vh={vh} namXem={namXem} tieuDe={c("dai_han.tieu_de")} onNhay={nhayDaiHan} />
+            <CungSaoMenh d={ls.cung_sao_menh} />
 
             <div ref={chiTietRef} className="scroll-mt-20">
               <ChiTietCung ls={ls} chi={chiChon} phai={phaiDoSang} vanHan={lop.dai_han || lop.luu_nien ? vh : null}

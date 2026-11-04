@@ -154,6 +154,12 @@ export const LaSoOutput = z.object({
     dieu_kien_dat: z.array(z.object({ loai: z.enum(["can", "tang", "giam"]), noi_dung: z.string() })).optional(),
   })).optional(),
   cach_cuc_luu_y: z.string().optional(),
+  // TV-ZW "Cùng sao Mệnh": tỉ lệ thời điểm sinh (mẫu 1940–2010 × 12 canh) có cùng chính tinh cung Mệnh — không phải
+  // thống kê dân số. null khi chưa biết giờ sinh; engine cũ không có.
+  cung_sao_menh: z.object({
+    khoa: z.string(), mot_trong: z.number().int().positive(), phan_tram: z.string(),
+    muc: z.enum(["pho_bien", "it_gap"]), nhan_muc: z.string(), loi: z.string(), nhan_ngan: z.string(), can_cu: z.string(),
+  }).nullable().optional(),
   cung: z.array(Cung).length(12),
   co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })),
   /** TV-PHAI — trường phái đang dùng cho lá số này. */

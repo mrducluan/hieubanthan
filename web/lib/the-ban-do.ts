@@ -34,11 +34,12 @@ export const dien = (mau: string, t: string) => mau.replaceAll("{t}", t);
 export type ManhBanDo = { ma: "so" | "nhat_chu" | "sao" | "phi" | "que"; nhom: string; gia_tri: string; phu: string; thieu: boolean };
 
 /** Năm mảnh theo thứ tự trên chòm sao (dữ liệu chỉ từ mã đã ký / engine). `anSo`: giấu đường đời (trò đoán). */
-export function manhBanDo(nd: Pick<NoiDungMaBanDo, "s" | "k" | "n" | "h" | "m" | "c" | "g" | "q">, anSo = false): ManhBanDo[] {
+export function manhBanDo(nd: Pick<NoiDungMaBanDo, "s" | "k" | "n" | "h" | "m" | "c" | "g" | "q"> & { r?: number }, anSo = false): ManhBanDo[] {
   return [
     { ma: "so", nhom: "Đường đời", gia_tri: anSo ? "?" : String(nd.s), phu: anSo ? "đoán xem" : nd.k, thieu: false },
     { ma: "nhat_chu", nhom: "Bản chất", gia_tri: nd.n, phu: nd.h, thieu: !nd.n },
-    { ma: "sao", nhom: "Sao chủ mệnh", gia_tri: nd.m || "?", phu: nd.m ? "Tử vi" : "cần giờ sinh", thieu: !nd.m },
+    // TV-ZW "Cùng sao Mệnh": tỉ lệ lá số (mẫu cố định) có cùng sao — mã cũ không có `r` thì giữ chữ "Tử vi".
+    { ma: "sao", nhom: "Sao chủ mệnh", gia_tri: nd.m || "?", phu: !nd.m ? "cần giờ sinh" : nd.r ? `1 trong ${nd.r} lá số có sao này` : "Tử vi", thieu: !nd.m },
     { ma: "phi", nhom: "Hướng hợp", gia_tri: nd.g || "?", phu: nd.c ? `cung ${nd.c}` : "cần giới tính", thieu: !nd.g },
     { ma: "que", nhom: "Quẻ hôm ấy", gia_tri: nd.q, phu: "Kinh Dịch", thieu: !nd.q },
   ];
