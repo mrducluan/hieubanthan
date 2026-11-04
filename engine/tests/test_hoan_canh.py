@@ -133,7 +133,9 @@ def test_bao_cao_co_hop_hoan_canh_dung_chuong(mang, monkeypatch):
     hh = _hop_hc(bc)
     for ch in hc.CHUONG:
         c = next(x for x in bc["chuong"] if x["ma"] == ch)
-        assert len(hh[ch]) == 1 and len([h for h in c["hop"] if ".yb." not in (h.get("ma_mau") or "")]) <= 6, (mang, ch)
+        # CY-1: hộp "Năm nên chú ý … hơn" dùng chung chỗ hộp thêm (như ý bổ sung) — không tính vào trần 6
+        assert len(hh[ch]) == 1 and len([h for h in c["hop"] if ".yb." not in (h.get("ma_mau") or "")
+                                         and ".chu_y." not in (h.get("ma_mau") or "")]) <= 6, (mang, ch)
         if ch not in hc.CHUONG_THEO_TINH_TRANG:
             assert f".{c['muc']}." in hh[ch][0]["ma_mau"], "lời theo đúng mức chương"
         assert not any(".hoan_canh." in (h.get("ma_mau") or "") for h in c["hop"])

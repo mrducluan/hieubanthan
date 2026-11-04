@@ -536,6 +536,18 @@ def _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem: dt.date) -> dict:
                            lambda loai, td, nd, cu, _ma, _w, **k: _hop(loai, td, nd, can_cu=cu, **k))
         if h_sk:
             c["hop"].append(h_sk)
+    # CY-1: sao lưu niên KB của từng mảng (7 tiền bạc, 3 giấy tờ, 5 nhà cửa) bay tới phía cửa chính → "Năm nên chú ý …
+    # hơn" (lời nhắc chủ động, không đổi mức chương).
+    if q_huong:
+        from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+        mangs = cyn.kb.chuong("phongthuy").get("nam_nay") or []
+        theo = {m: cyn.phongthuy_nam(q_huong, nam, m, noi=f"cửa chính ({huong})") for m in mangs}
+        co = [m for m in mangs if theo[m]]
+        if co:
+            h_cy = cyn.hop_chuong(theo, kh.ma_mau("phongthuy", "nam_nay", "chu_y", "+".join(co), cyn.ma_ly_do(theo[co[0]][0])),
+                                  lambda loai, td, nd, cu, ma, _w, **k: _hop(loai, td, nd, can_cu=cu, ma_mau=ma, **k))
+            if h_cy:
+                c["hop"].append(h_cy)
     c["muc"] = _gop_muc(muc_nam, *mucs)
     c["nhan_muc"] = kb.nhan_muc(c["muc"])
     phuong_yen = list(dict.fromkeys(x["phuong"] for x in hn["huong_tranh"]))

@@ -62,12 +62,15 @@ def test_khong_doi_muc_khong_mat_ma_khong_doi_cot_loi(cap):
     for co, khong in cap:
         assert [c["muc"] for c in co["chuong"]] == [c["muc"] for c in khong["chuong"]]
         assert [g["muc"] for g in co["thoi_gian_bieu"]] == [g["muc"] for g in khong["thoi_gian_bieu"]]
-        assert _ma(khong) <= _ma(co), sorted(_ma(khong) - _ma(co))[:5]
+        assert {m for m in _ma(khong) if ".chu_y." not in m} <= _ma(co), sorted(_ma(khong) - _ma(co))[:5]
         assert [h["ma_mau"] for h in co["cot_loi"]] == [h["ma_mau"] for h in khong["cot_loi"]]
         assert not any(".yb." in h["ma_mau"] for h in co["cot_loi"])
         # hộp cũ: lời + mã giữ nguyên (ý bổ sung nằm ở trường riêng `y_bo_sung`)
         for c1, c0 in zip(co["chuong"], khong["chuong"]):
-            cu = [h for h in c1["hop"] if ".yb." not in h["ma_mau"]]
+            # CY-1: hộp "Năm nên chú ý {mảng} hơn" dùng chung chỗ hộp thêm với ý bổ sung → có thể nhường chỗ khi chương
+            # đã có 2 hộp ý bổ sung; so phần còn lại.
+            cu = [h for h in c1["hop"] if ".yb." not in h["ma_mau"] and ".chu_y." not in h["ma_mau"]]
+            c0 = {**c0, "hop": [h for h in c0["hop"] if ".chu_y." not in h["ma_mau"]]}
             # hộp SK-1 có thể XUẤT HIỆN khi ý bổ sung thêm lý do cho một năm (vẫn một hộp) — các hộp khác y nguyên
             sk_moi = [h["ma_mau"] for h in cu if h["ma_mau"].startswith("ds.suc_khoe.nam.")]
             assert len(sk_moi) <= 1

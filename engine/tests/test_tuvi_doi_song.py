@@ -80,8 +80,10 @@ def test_hop_dong(bc):
             assert c["muc"] in MUC and c["nhan_muc"] == kb.nhan_muc(c["muc"])
         assert 1 <= len(c["doan"]) <= 4 and all(isinstance(d, str) and d for d in c["doan"])
         # TV-YBS: ≤ 6 hộp luận theo lá số + ≤ 2 hộp ý bổ sung (mã `.yb.`)
-        assert len([h for h in c["hop"] if ".yb." not in h["ma_mau"]]) <= 6
+        assert len([h for h in c["hop"] if ".yb." not in h["ma_mau"] and ".chu_y." not in h["ma_mau"]]) <= 6
         assert len([h for h in c["hop"] if ".yb." in h["ma_mau"]]) <= 2
+        # CY-1: ≤ 1 hộp "Năm nên chú ý {mảng} hơn", dùng chung chỗ của hộp thêm (tổng ≤ 6 + 2)
+        assert len([h for h in c["hop"] if ".chu_y." in h["ma_mau"]]) <= 1 and len(c["hop"]) <= 8
         # Sức khoẻ: mọi phần cơ thể gộp một hộp (UX v3 M3) → có thể chỉ một hộp khi cung không có sát tinh.
         if c["ma"] not in ("nha_cua", "suc_khoe"):
             assert len(c["hop"]) >= 2, c["ma"]
@@ -350,7 +352,7 @@ def test_golden_60_la(ca):
     assert len(ma) == len(set(ma)) and all(ds.MA_MAU_RE.match(m) for m in ma)
     for c in b["chuong"]:
         assert c["doan"] and (c["muc"] in MUC or c["ma"] in KHONG_MUC) \
-            and len([h for h in c["hop"] if ".yb." not in h["ma_mau"]]) <= 6
+            and len([h for h in c["hop"] if ".yb." not in h["ma_mau"] and ".chu_y." not in h["ma_mau"]]) <= 6
         for h in c["hop"]:
             assert not THUAT_NGU.search(h["noi_dung"]), (c["ma"], h["noi_dung"])
             if h["loai"] == "luu_y":
