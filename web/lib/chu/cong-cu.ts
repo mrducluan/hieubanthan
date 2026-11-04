@@ -23,6 +23,11 @@ const mangHuyenHoc = (coHoiAi: boolean, nhanTren: string): BangChu => gopBang(KH
 export const CHU_TU_VI = gopBang(mangHuyenHoc(true, "Lá số 12 cung · Tử vi Đẩu Số"), {
   // TV-HOA-HAN: dải 12 giai đoạn 10 năm dưới lá số (chạm → năm xem nhảy tới đầu giai đoạn).
   "dai_han.tieu_de": { nhom: "Lá số", nhan: "Tiêu đề dải giai đoạn 10 năm dưới lá số", mac_dinh: "Các giai đoạn 10 năm — chạm để xem", toi_da: 80 },
+  // TV-VONG: hai vòng sao theo hạn trong thẻ chi tiết cung (chỉ hiển thị, không đổi mức nào).
+  "vong_han.dai_han": { nhom: "Lá số", nhan: "Nhãn dòng vòng sao theo hạn 10 năm (chi tiết cung)", mac_dinh: "Theo hạn 10 năm", toi_da: 40 },
+  "vong_han.nam": { nhom: "Lá số", nhan: "Nhãn dòng vòng sao theo năm xem ({nam} = năm)", mac_dinh: "Theo năm {nam}", toi_da: 40 },
+  "vong_han.giai_thich": { nhom: "Lá số", nhan: "Giải thích hai vòng sao theo hạn (trong \"Vì sao nói vậy\")",
+    mac_dinh: "Mỗi giai đoạn 10 năm và mỗi năm có hai vòng 12 sao riêng — vòng Thái Tuế và vòng Tướng tinh — xếp lại từ cung của hạn đó. Ở đây chỉ để bạn đối chiếu với sách: hai vòng này không làm đổi mức thuận lợi hay lưu ý nào trong bài đọc.", toi_da: 320 },
 });
 export const CHU_BAT_TU = mangHuyenHoc(true, "Tứ trụ · ngũ hành · thập thần");
 export const CHU_PHONG_THUY = mangHuyenHoc(true, "Hướng nhà · bố trí · Bát trạch");

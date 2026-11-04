@@ -93,6 +93,7 @@ const MAU_HOA_HAN: Record<MaHoa, string> = {
   loc: "var(--ls-moc)", quyen: "var(--ls-hoa)", khoa: "var(--ls-thuy)", ky: "var(--ls-ky-han)",
 };
 const CO_HUY = 11.5;
+const CO_HUY_NHO = 10;      // thử cỡ nhỏ hơn trước khi đẩy huy hiệu xuống dòng dưới (đỡ đẩy cột phụ tinh)
 const chuHuy = (b: HoaHan, coSao: boolean) => `${TEN_HOA_MA[b.hoa]}${coSao ? ` · ${b.sao}` : ""}`;
 /** Bề rộng ước của một huy hiệu (đơn vị viewBox) — như vuaO: theo số ký tự. */
 function rongHuy(b: HoaHan, co: number, coSao = false): number {
@@ -208,20 +209,42 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
           const tat = d ? DO_SANG_TAT[d] : undefined;
           const huy = hhCung.filter((b) => b.chinh_tinh && b.sao === s.ten);
           const rongSao = s.ten.length * 19 * 0.56 + (tat ? 4 * 14 * 0.56 : 0);
-          const rongHuyDs = huy.reduce((a, b) => a + rongHuy(b, CO_HUY) + 5, 0);
+          // Hai huy hiệu (ĐH + Năm) không vừa cạnh tên sao ở cỡ thường → thử cỡ nhỏ trước khi xuống dòng.
+          const rongDs = (co: number) => huy.reduce((a, b) => a + rongHuy(b, co) + 5, 0);
+          const coHuy = huy.length && rongSao + 6 + rongDs(CO_HUY) > RONG_GON ? CO_HUY_NHO : CO_HUY;
+          const rongHuyDs = rongDs(coHuy);
           const canhNhau = huy.length > 0 && rongSao + 6 + rongHuyDs <= RONG_GON;
           const y0 = yTiep;
           yTiep = y0 + (huy.length && !canhNhau ? 18 + 23 : 25);
-          return { s, tat, huy, canhNhau, y: y0, xSao: canhNhau ? W / 2 - (rongSao + 6 + rongHuyDs - 5) / 2 : W / 2, rongSao };
+          return { s, tat, huy, coHuy: canhNhau ? coHuy : CO_HUY, canhNhau, y: y0, rongSao, rongHuyDs,
+            xSao: canhNhau ? W / 2 - (rongSao + 6 + rongHuyDs - 5) / 2 : W / 2 };
         });
         if (!c.chinh_tinh.length) yTiep = yChinh + 25;
-        const yPhuHuy = hhPhu.map((_, k) => yTiep - 4 + k * 17);
-        const yCot = yTiep + 4 + hhPhu.length * 17;
+        // Huy hiệu hoá theo hạn của phụ tinh: xếp chung hàng khi vừa (mỗi hàng ≤ RONG_GON) — mỗi hàng chỉ đẩy cột phụ tinh 17.
+        const hangPhu: HoaHan[][] = [];
+        for (const b of hhPhu) {
+          const hang = hangPhu[hangPhu.length - 1];
+          const rong = (ds: HoaHan[]) => ds.reduce((a, x) => a + rongHuy(x, CO_HUY, true) + 5, -5);
+          if (hang && rong([...hang, b]) <= RONG_GON) hang.push(b); else hangPhu.push([b]);
+        }
+        const yPhuHuy = hangPhu.map((_, k) => yTiep - 4 + k * 17);
+        const yCot = yTiep + 4 + hangPhu.length * 17;
         const coLuu = lop.luu_nien && vanHan;
-        const toiDa = Math.floor((H - (coLuu ? 58 : 40) - yCot) / DONG) + 1;
-        const luuSao = coLuu ? vanHan.luu_nien.sao[i] ?? [] : [];
         const tenDh = lop.dai_han && vanHan ? vanHan.dai_han.ten_cung[i] : null;
         const tenLn = lop.luu_nien && vanHan ? vanHan.luu_nien.ten_cung[i] : null;
+        // Đáy ô: "ĐH.<cung>" trái · vòng Trường sinh giữa · "L.<cung>" phải. Ước bề rộng (như vuaO); không vừa một hàng thì
+        // Trường sinh dời sang khoảng trống còn lại, vẫn không vừa → lên một dòng riêng ngay trên (sao lưu lên thêm một dòng).
+        const rongChu = (t: string, co: number) => t.length * co * 0.6;
+        const bienTrai = tenDh ? 16 + rongChu(`ĐH.${tenDh}`, 11.5) + 8 : 16;
+        const bienPhai = tenLn ? W - 16 - rongChu(`L.${tenLn}`, 11.5) - 8 : W - 16;
+        const rongTs = rongChu(c.truong_sinh, 14);
+        const xTs = W / 2 - rongTs / 2 >= bienTrai && W / 2 + rongTs / 2 <= bienPhai ? W / 2
+          : bienPhai - bienTrai >= rongTs ? (bienTrai + bienPhai) / 2 : null;
+        const tsRieng = xTs === null;
+        const yLuu = H - (tsRieng ? 56 : 40);
+        const dayCot = coLuu ? yLuu - 18 : H - (tsRieng ? 56 : 40);
+        const toiDa = Math.floor((dayCot - yCot) / DONG) + 1;
+        const luuSao = coLuu ? vanHan.luu_nien.sao[i] ?? [] : [];
         const laDh = lop.dai_han && vanHan?.dai_han.chi_so === i;
         const laLn = lop.luu_nien && vanHan?.luu_nien.chi_so === i;
         const laTh = lop.luu_nien && vanHan?.tieu_han.chi_so === i;
@@ -244,7 +267,8 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
             {(laDh || laLn || laTh) && (
               <g>
                 {[laDh && "Đại hạn", laLn && "Lưu niên", laTh && "Tiểu hạn"].filter(Boolean).map((t, k, ds) => (
-                  <g key={String(t)} transform={`translate(${W / 2 - (ds.length * 74 - 4) / 2 + k * 74},${r === 0 ? 1 : -6})`}>
+                  <g key={String(t)} transform={`translate(${W / 2 - (ds.length * 74 - 4) / 2 + k * 74},${r === 0 ? 1 : -6})`}
+                    data-nhan-han={t === "Đại hạn" ? "dai_han" : t === "Lưu niên" ? "luu_nien" : "tieu_han"}>
                     <rect width={70} height={16} rx={8} fill={t === "Đại hạn" ? "var(--ls-thuy)" : t === "Lưu niên" ? "var(--ls-nhan)" : "var(--ls-mo)"} />
                     <text x={35} y={11.8} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="var(--ls-nen)">{String(t).toUpperCase()}</text>
                   </g>
@@ -257,7 +281,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
               fill={c.la_menh ? "var(--ls-nhan)" : "var(--ls-chu)"}>{nhan}</text>
             <text x={W - 16} y={30} textAnchor="end" fontSize={15} fontWeight={600} fill="var(--ls-chu)">{c.dai_han.tu_tuoi}</text>
             {/* Chính tinh */}
-            {c.chinh_tinh.length ? dongChinh.map(({ s, tat, huy, canhNhau, y: yS, xSao, rongSao }) => (
+            {c.chinh_tinh.length ? dongChinh.map(({ s, tat, huy, coHuy, canhNhau, y: yS, xSao, rongSao, rongHuyDs }) => (
               <g key={s.ten}>
                 <text x={xSao} y={yS} textAnchor={canhNhau ? "start" : "middle"} fontSize={19} fontWeight={650}
                   fill={MAU_HANH[HANH_SAO[s.ten] ?? "Thổ"]}>
@@ -265,11 +289,11 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
                   {tat ? <tspan fontSize={14} fontWeight={500} fill="var(--ls-mo)"> ({tat})</tspan> : null}
                 </text>
                 {huy.length > 0 && (canhNhau
-                  ? <HangHuy ds={huy} cx={xSao + rongSao + 6 + (huy.reduce((a, b) => a + rongHuy(b, CO_HUY) + 5, 0) - 5) / 2} y={yS - 2} />
+                  ? <HangHuy ds={huy} cx={xSao + rongSao + 6 + (rongHuyDs - 5) / 2} y={yS - 2} co={coHuy} />
                   : <HangHuy ds={huy} cx={W / 2} y={yS + 18} />)}
               </g>
             )) : <text x={W / 2} y={yChinh} textAnchor="middle" fontSize={14} fontStyle="italic" fill="var(--ls-mo)">vô chính diệu</text>}
-            {hhPhu.map((b, k) => <HangHuy key={`${b.lop}${b.hoa}`} ds={[b]} cx={W / 2} y={yPhuHuy[k]!} coSao />)}
+            {hangPhu.map((ds, k) => <HangHuy key={ds.map((b) => `${b.lop}${b.hoa}`).join()} ds={ds} cx={W / 2} y={yPhuHuy[k]!} coSao />)}
             {/* Hai cột phụ tinh */}
             {catDong(trai, toiDa).map((d, k) => (
               <text key={`t${k}`} x={16} y={yCot + k * DONG} fontSize={13} fill={d.mau} fontWeight={d.dam ? 600 : 400} fontStyle={d.nghieng ? "italic" : undefined}>{d.ten}</text>
@@ -279,7 +303,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
             ))}
             {/* Sao lưu niên */}
             {luuSao.length > 0 && (
-              <text x={W / 2} y={H - 40} textAnchor="middle" fontSize={12} fontStyle="italic" fill="var(--ls-luu)">
+              <text x={W / 2} y={yLuu} textAnchor="middle" fontSize={12} fontStyle="italic" fill="var(--ls-luu)">
                 {luuSao.slice(0, 4).join(" · ")}
               </text>
             )}
@@ -287,7 +311,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
             {(
               <>
                 {tenDh && <text x={16} y={H - 20} fontSize={11.5} fontWeight={600} fill="var(--ls-thuy)">ĐH.{tenDh}</text>}
-                <text x={W / 2} y={H - 20} textAnchor="middle" fontSize={14} fontWeight={600}
+                <text x={xTs ?? W / 2} y={tsRieng ? H - 37 : H - 20} textAnchor="middle" fontSize={14} fontWeight={600}
                   fill={SINH_TOT.has(c.truong_sinh) ? "var(--ls-moc)" : SINH_XAU.has(c.truong_sinh) ? "var(--ls-sat)" : "var(--ls-tho)"}>
                   {c.truong_sinh}
                 </text>
@@ -366,26 +390,38 @@ function HuyGon({ ds, y }: { ds: HoaHan[]; y: number }) {
   );
 }
 
+// Tuần/Triệt đóng trên ĐƯỜNG RANH hai cung (lối Việt). Nhãn đặt ở MÉP NGOÀI của đường ranh — hai cung cạnh nhau theo hàng
+// (Ngọ–Mùi trên, Tý–Sửu dưới): sát mép trên / dưới lá số; theo cột (Dần–Mão, Thìn–Tỵ trái; Thân–Dậu, Tuất–Hợi phải): sát
+// mép trái / phải. Đặt giữa đường ranh (cách cũ) đè lên dòng phụ tinh, nhãn ĐẠI HẠN/LƯU NIÊN hoặc dòng đáy ô.
+const TT_CAO = 15;
 function TuanTriet({ tt, chiSo }: { tt: { tuan: string[]; triet: string[] }; chiSo: (c: string) => number }) {
-  const giua = (cap: string[]): [number, number] | null => {
-    const [a, b] = cap;
-    if (!a || !b || chiSo(a) < 0) return null;
-    const [ra, ca] = VI_TRI[a]!;
-    const [rb, cb] = VI_TRI[b]!;
-    return [((ca + cb) / 2 + 0.5) * W, ((ra + rb) / 2 + 0.5) * H];
-  };
   const trung = tt.tuan.join() === tt.triet.join();
-  const muc = trung
-    ? [{ nhan: "Tuần · Triệt", p: giua(tt.tuan) }]
-    : [{ nhan: "Tuần", p: giua(tt.tuan) }, { nhan: "Triệt", p: giua(tt.triet) }];
+  const muc = trung ? [{ nhan: "Tuần · Triệt", cap: tt.tuan }] : [{ nhan: "Tuần", cap: tt.tuan }, { nhan: "Triệt", cap: tt.triet }];
   return (
     <g aria-hidden>
-      {muc.map(({ nhan, p }) => p && (
-        <g key={nhan} transform={`translate(${p[0]},${p[1]})`}>
-          <rect x={-(nhan.length * 4.6 + 14)} y={-12} width={nhan.length * 9.2 + 28} height={24} rx={6} fill="var(--ls-tt-nen)" />
-          <text y={5} textAnchor="middle" fontSize={13} fontWeight={700} letterSpacing="0.05em" fill="var(--ls-tt-chu)">{nhan}</text>
-        </g>
-      ))}
+      {muc.map(({ nhan, cap }) => {
+        const [a, b] = cap;
+        if (!a || !b || chiSo(a) < 0 || !VI_TRI[a] || !VI_TRI[b]) return null;
+        const [ra, ca] = VI_TRI[a]!;
+        const [rb, cb] = VI_TRI[b]!;
+        // "Tuần · Triệt" (hai vòng trùng cặp cung) dùng chữ nhỏ hơn để không chạm nhãn ĐẠI HẠN/LƯU NIÊN của ô dưới.
+        const co = trung ? 10.5 : 11.5;
+        const rong = nhan.length * (trung ? 6 : 7.2) + (trung ? 12 : 16);
+        let x: number, y: number;
+        if (ra === rb) {                       // cùng hàng → đường ranh dọc
+          x = ((ca + cb) / 2 + 0.5) * W;
+          y = ra === 0 ? TT_CAO / 2 : 4 * H - TT_CAO / 2 + 0.5;   // nằm trên dòng can chi / dưới dòng đáy ô
+        } else {                               // cùng cột → đường ranh ngang
+          y = ((ra + rb) / 2 + 0.5) * H;
+          x = ca === 0 ? rong / 2 + 1 : 4 * W - rong / 2 - 1;
+        }
+        return (
+          <g key={nhan} transform={`translate(${x},${y})`} data-tuan-triet={nhan}>
+            <rect x={-rong / 2} y={-TT_CAO / 2} width={rong} height={TT_CAO} rx={5} fill="var(--ls-tt-nen)" />
+            <text y={co * 0.36} textAnchor="middle" fontSize={co} fontWeight={700} letterSpacing={trung ? "0.02em" : "0.05em"} fill="var(--ls-tt-chu)">{nhan}</text>
+          </g>
+        );
+      })}
     </g>
   );
 }

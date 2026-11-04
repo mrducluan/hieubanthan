@@ -182,6 +182,11 @@ const LopHan = z.object({
     chi_so: z.number().int().min(0).max(11).nullable(), cung: z.string().nullable(), chi: z.string().nullable(),
     chinh_tinh: z.boolean(),
   })).optional(),
+  /** TV-VONG (chỉ hiển thị): vòng Thái Tuế (tên iztro = phái Trung; `_nam_phai` = tên sách Việt) + vòng Tướng tiền của
+   *  lớp hạn, 12 tên theo đúng mảng `cung` (0 = Dần). Không phép chấm mức nào đọc. Engine cũ → không có. */
+  vong_thai_tue: z.array(z.string()).optional(),
+  vong_thai_tue_nam_phai: z.array(z.string()).optional(),
+  vong_tuong_tien: z.array(z.string()).optional(),
 });
 export const VanHanOutput = z.object({
   engine_version: z.string(),
