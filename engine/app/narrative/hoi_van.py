@@ -253,8 +253,8 @@ def _mo_dau_so(goi: dict, pl: dict, cau_hoi: str, nguoi: dict, ngay_xem: dt.date
     """EN-3b: đoạn mở đầu Thần số — viết lại đoạn đầu thân bài (mục làm ra nó) cho đúng điều được hỏi, kèm một câu từ
     mục KB của đúng điều đó (bảng nỗi đau / lĩnh vực của điều hỏi) khi gói chưa có."""
     md = _chung_md()
-    if goi.get("thu_tu_co_dinh"):
-        them = []
+    if goi.get("thu_tu_co_dinh") or pl.get("so_nhac", {}).keys() & {"duong_doi", "su_menh", "linh_hon", "nhan_cach"}:
+        them = []                        # EN-3d: người hỏi tự nêu con số → không kéo thêm mục theo số của hồ sơ
     else:
         ma_nd = md.NOI_DAU_THEO_MA.get((md.dieu_hoi(pl["cau_chuan_hoa"], cau_hoi) or {}).get("ma"))
         them = (noi_dau.muc_theo_ma(goi, ma_nd, nguoi, ngay_xem) if ma_nd

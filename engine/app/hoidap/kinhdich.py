@@ -185,6 +185,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
         return kq
     if not td_kd(t) and chung.co(t, KY_THUAT) and chung.co(t, THUAT_NGU) and not chung.co(t, [r"\btoi\b", r"\bminh\b", r"\bem\b"]):
         kq["loai"] = "ky_thuat"      # EN-3c: "Quẻ biến khác quẻ hỗ thế nào" — câu kiến thức về thuật ngữ, không gieo quẻ
+        kq["tu_dien"] = [m["ma"] for m in hieu_cau.tu_dien_khop(cau_hoi, "kinhdich")]   # EN-3d: trước trả lời rỗng
         return kq
     if td := hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "kinhdich"):
         kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển, không gieo quẻ
@@ -528,7 +529,15 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
         doc_que = kd_ds.doc_que(que, pl, goi, mai_hoa=mai_hoa, luc_hao=pt, thoi_diem=luc, chu_de=ma_cd)
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     if doc_que is not None and pl["xu_ly"] not in chung.DAC_BIET:     # EN-3b: đoạn mở đầu trả lời đúng điều được hỏi
-        van = mo_dau.dat_dau(van, mo_dau.que_mo(doc_que, pl["cau_chuan_hoa"], cau_hoi, moc), goi)
+        mo = mo_dau.que_mo(doc_que, pl["cau_chuan_hoa"], cau_hoi, moc)
+        # EN-3d: số trong "việc nên làm" (KB nhóm việc của quẻ, vd "dòng tiền 6 tháng") là dữ kiện của gói đọc quẻ —
+        # đăng ký vào gói bằng chứng, nếu không bất biến "số phải có trong gói" bỏ cả đoạn mở đầu.
+        viec0 = next((x["viec"][0] for x in doc_que.get("hanh_dong") or [] if x.get("muc") == doc_que.get("muc")
+                      and x.get("viec")), "")                       # đúng việc que_mo chọn (review: không gom mọi nhóm)
+        so_kb = {int(n) for n in re.findall(r"\d+", viec0)}
+        if mo and (la := set(mo_dau.so_la(mo, goi))) and la <= so_kb:
+            goi["so_trong_goi"] = sorted(set(goi.get("so_trong_goi") or []) | la)
+        van = mo_dau.dat_dau(van, mo, goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:
         try:

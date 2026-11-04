@@ -410,7 +410,8 @@
    "tu_khoa": [
     "guong (doi dien|chieu|chieu thang|chieu vao|ngay) cua",
     "guong o (loi|cua) vao",
-    "guong bat quai"
+    "guong bat quai",
+    "guong .{0,30}(doi dien|chieu thang|chieu vao) (cua chinh|cua ra vao|cua vao|loi vao)"
    ],
    "giai_thich_hien_dai": "Gương đối thẳng cửa làm người bước vào giật mình vì thấy bóng mình, và phản chiếu ánh sáng, cảnh ngoài vào nhà.",
    "viec": [
@@ -452,7 +453,8 @@
    "goi_y": "Yên tĩnh, sạch sẽ, cao hơn tầm mắt là đủ trang trọng.",
    "nguon": "dan_gian",
    "tu_khoa": [
-    "ban tho"
+    "ban tho",
+    "phong tho (tren|o tang|dat o|nen dat|tang thuong|rieng)"
    ]
   },
   "cua_doi_nhau": {
@@ -569,7 +571,8 @@
     "bep doi dien (cua )?(nha )?ve sinh",
     "bep doi dien (wc|toilet)",
     "(nha )?ve sinh doi dien bep",
-    "bep .{0,12}doi dien (cua )?(nha )?ve sinh"
+    "bep .{0,12}doi dien (cua )?(nha )?ve sinh",
+    "(nha ve sinh|wc|toilet) .{0,20}(canh|sat|ngay canh) (phong )?bep"
    ],
    "giai_thich_hien_dai": "Bếp sát nhà vệ sinh là chuyện vệ sinh thực phẩm: ẩm và mùi từ nhà vệ sinh lan sang chỗ nấu; cửa nhà vệ sinh mở ra bếp lại càng khó chịu.",
    "viec": [
@@ -716,7 +719,8 @@
     "cay (gi|nao) truoc (cua|nha)",
     "cay truoc (cua|nha)",
     "cay to truoc",
-    "cay chan cua"
+    "cay chan cua",
+    "cay .{0,15}truoc (cua|nha)"
    ],
    "giai_thich_hien_dai": "Cây lớn ngay trước cửa che bớt sáng và tầm nhìn ra đường, lá rụng làm ẩm hiên, rễ có thể đội nền hay nứt tường rào. Nhưng cây cũng cho bóng mát và chắn bụi, tiếng ồn — vấn đề là cây đứng đúng giữa lối vào và quá sát, không phải có cây là xấu.",
    "viec": [
@@ -933,7 +937,9 @@
    "nguon": "dan_gian",
    "tu_khoa": [
     "giuong .{0,15}(sat|thang|doi dien) cua (ra vao|phong|chinh|di)",
-    "giuong ke (sat|thang) cua"
+    "giuong ke (sat|thang) cua",
+    "(ngu|nam|giuong) .{0,10}(quay|huong|duoi) chan ra cua",
+    "chan (quay |huong )?ra cua"
    ],
    "giai_thich_hien_dai": "Khi nằm, người ta yên tâm hơn nếu thấy được cửa mà không nằm ngay trên lối đi. Cửa mở thẳng vào giường đem theo gió, ánh sáng hành lang và tiếng ồn.",
    "viec": [
@@ -1052,6 +1058,332 @@
     {
      "chi_phi": "sua_chua",
      "lam": "Khi sửa nhà, dời cửa nhà vệ sinh lệch đi hoặc làm vách ngăn nhỏ ở hành lang."
+    }
+   ]
+  },
+  "bep_nuoc": {
+   "tieu_de": "Bếp kẹp sát bồn rửa, tủ lạnh, máy giặt",
+   "noi_dung": "Quan niệm dân gian gọi là 'thuỷ hoả tương xung': bếp (lửa) đặt sát ngay bồn rửa, tủ lạnh hay máy giặt (nước) thì không hợp. Thực tế: nước bắn vào bếp đang nấu, hơi nóng làm tủ lạnh chạy nặng, và người nấu bị kẹt chỗ đứng.",
+   "goi_y": "Chừa một khoảng mặt bàn giữa bếp và bồn rửa để đặt đồ sơ chế; tủ lạnh và máy giặt đặt cách bếp, không sát hông bếp.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "bep .{0,20}(canh|sat|ke|ngay) .{0,10}(bon rua|chau rua|tu lanh|may giat)",
+    "(bon rua|chau rua|tu lanh|may giat) .{0,20}(canh|sat|ke|ngay|doi dien) .{0,10}bep",
+    "thuy hoa (tuong )?xung"
+   ],
+   "giai_thich_hien_dai": "Bếp sát bồn rửa thì nước, dầu bắn qua lại, người nấu không có chỗ đặt đồ; tủ lạnh sát bếp hút hơi nóng nên tốn điện, mau hỏng gioăng. Chừa khoảng giữa vừa sạch vừa dễ làm.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dọn một khoảng mặt bàn giữa bếp và bồn rửa làm chỗ sơ chế; lau khô quanh bếp sau khi rửa."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Dán tấm chắn bắn nước giữa bồn rửa và bếp; kê tủ lạnh lùi ra khỏi hông bếp một chút cho thoáng."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa bếp, xếp theo thứ tự tủ lạnh – bồn rửa – mặt sơ chế – bếp; dời máy giặt ra khu giặt riêng."
+    }
+   ]
+  },
+  "tranh_treo": {
+   "tieu_de": "Tranh, ảnh treo trong nhà",
+   "noi_dung": "Quan niệm dân gian: tranh nước (thác, sông) nên chảy vào nhà, không treo sau lưng chỗ ngồi chính; sau lưng sofa, bàn làm việc hợp tranh núi, cảnh vững (gọi là 'có chỗ tựa'); ảnh, tranh to trên đầu giường nên treo chắc, không quá nặng. Thực tế: tranh nặng treo trên chỗ ngồi, chỗ nằm là chuyện an toàn khi rơi.",
+   "goi_y": "Sau lưng sofa chọn tranh cảnh vững, màu êm; tranh thác nước treo ở tường đối diện cửa vào, dòng nước hướng vào trong nhà; ảnh cưới đầu giường chọn khung nhẹ, bắt vít chắc hoặc đặt trên kệ.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "(treo|dat) (tranh|buc tranh|anh cuoi|anh gia dinh|anh tho)",
+    "tranh (thac nuoc|son thuy|nui|phong canh|ca chep|ma dao)",
+    "anh cuoi( to| lon)? (tren dau|treo|o dau|dau giuong|trong phong|o phong)",
+    "tranh .{0,15}(sau lung|tren dau|dau giuong|phong khach|sofa)",
+    "buc tranh"
+   ],
+   "giai_thich_hien_dai": "Chỗ ngồi có bức tường vững, tranh êm sau lưng thì người ngồi thấy yên; tranh nặng ngay trên đầu khi ngủ khiến nhiều người khó thả lỏng, rơi xuống còn nguy hiểm.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đổi chỗ tranh sẵn có: tranh nước sang tường đối diện cửa, tranh núi ra sau lưng ghế; gỡ tranh nặng khỏi đầu giường."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Thay khung nhẹ, dùng móc treo chịu lực hoặc kệ đặt tranh thay vì treo một đinh."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa nhà, chừa sẵn mảng tường liền sau sofa và bàn làm việc, bố trí đèn rọi tranh."
+    }
+   ]
+  },
+  "dong_ho": {
+   "tieu_de": "Đồng hồ treo trong nhà",
+   "noi_dung": "Quan niệm dân gian: không treo đồng hồ ngay trên đầu giường hay đối diện thẳng giường ngủ, không đối diện cửa chính; đồng hồ hỏng nên sửa hoặc cất. Thực tế: tiếng tích tắc và mặt số phát sáng làm khó ngủ, nhìn giờ lúc đêm dễ sốt ruột.",
+   "goi_y": "Phòng ngủ dùng đồng hồ chạy êm, không tiếng, đặt bên cạnh chứ không treo đối diện mặt; phòng khách treo ở tường bên, dễ nhìn từ chỗ ngồi.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "(treo|dat|ke|gan) dong ho",
+    "dong ho (treo|o|dat|doi dien|tren|trong phong|bao thuc|keu|hong|chet)",
+    "cai dong ho"
+   ],
+   "giai_thich_hien_dai": "Đồng hồ ngay tầm mắt khi nằm khiến nhiều người nhìn giờ liên tục lúc khó ngủ, càng sốt ruột càng tỉnh; tiếng kêu đều trong đêm cũng làm giấc ngủ nông hơn.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dời đồng hồ khỏi tường đối diện giường sang tường bên hoặc phòng khác; tháo pin đồng hồ hỏng."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Đổi sang đồng hồ kim trôi không tiếng, đèn mặt số dịu."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa phòng ngủ, không làm hộc treo đồng hồ đối diện giường; chừa chỗ ở tường bên."
+    }
+   ]
+  },
+  "mau_son": {
+   "tieu_de": "Màu sơn, màu gạch theo mệnh",
+   "noi_dung": "Quan niệm dân gian chọn màu theo ngũ hành của mệnh: Kim hợp trắng, xám, ghi (bản mệnh) và vàng, nâu đất (Thổ sinh Kim); Mộc hợp xanh lá (bản mệnh) và xanh dương, đen (Thuỷ sinh Mộc); Thuỷ hợp xanh dương, đen (bản mệnh) và trắng, xám (Kim sinh Thuỷ); Hoả hợp đỏ, hồng, cam (bản mệnh) và xanh lá (Mộc sinh Hoả); Thổ hợp vàng, nâu đất (bản mệnh) và đỏ, cam (Hoả sinh Thổ). Màu là gợi ý dân gian, không đổi được vận.",
+   "goi_y": "Lấy màu hợp mệnh làm điểm nhấn (một mảng tường, rèm, gối) thay vì sơn kín cả phòng; tường chính vẫn nên chọn màu sáng, dịu để nhà đủ sáng. Gạch lát nền màu quá tối làm phòng bí, dễ lộ bụi — nền sáng hoặc màu gỗ dễ sống hơn.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "mau (son|gach|tuong|sac|op lat|noi that|rem)",
+    "son (nha|phong|tuong) (mau|gi)",
+    "(son|gach|lat nen|lat san) .{0,20}mau",
+    "mau gi .{0,20}(menh|hop)",
+    "mau hop menh",
+    "(menh|hanh) (kim|moc|thuy|hoa|tho) .{0,25}mau"
+   ],
+   "giai_thich_hien_dai": "Màu tường và nền quyết định phòng sáng hay tối: tường sáng, nền vừa phải thì phòng rộng mắt, đỡ tốn đèn. Màu hợp sở thích người ở quan trọng không kém — dùng màu mệnh ở chi tiết là đủ.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Thêm màu hợp mệnh bằng đồ có sẵn: gối, khăn trải bàn, chậu cây; dọn bớt đồ tối màu ở chỗ thiếu sáng."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Đổi rèm, thảm hoặc sơn một mảng tường điểm nhấn theo màu hợp mệnh."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sơn lại hay lát nền, chọn nền màu sáng vừa phải, tường chính màu dịu, màu mệnh dùng ở mảng nhỏ."
+    }
+   ]
+  },
+  "nen_thap": {
+   "tieu_de": "Nền nhà thấp hơn mặt đường",
+   "noi_dung": "Sách xưa coi nền nhà trũng hơn đường trước mặt là 'nước dồn vào nhà', khí không tụ. Thực tế rõ nhất là mưa to nước tràn vào, nhà ẩm, đồ đạc chân tường mau hỏng.",
+   "goi_y": "Ưu tiên chống nước trước: ngưỡng cửa cao, rãnh thoát nước trước cửa, đồ điện và đồ quý kê cao; khi có điều kiện thì nâng nền.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "(nen|san) (nha )?(thap|trung) hon (mat )?duong",
+    "nha (thap|trung) hon (mat )?duong",
+    "nuoc (tran|tat|chay) vao nha",
+    "duong cao hon nha",
+    "nha bi ngap"
+   ],
+   "giai_thich_hien_dai": "Nhà thấp hơn đường thì nước mưa, bùn đất chảy thẳng vào; ẩm kéo dài làm tường mốc, không khí nặng — người ở khó chịu là có thật, không cần tới chuyện khí.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Kê đồ điện, giấy tờ, đồ quý lên cao khỏi nền; giữ rãnh trước cửa thông, dọn rác chắn rãnh."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Lắp ngưỡng chắn nước rời ở cửa, máy hút ẩm cho phòng sát nền."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Nâng nền hoặc làm bậc cửa cao, rãnh thu nước trước nhà khi sửa nhà."
+    }
+   ]
+  },
+  "nha_toi_am": {
+   "tieu_de": "Nhà tối, ẩm, thiếu sáng",
+   "noi_dung": "Sách xưa coi trọng nhà 'sáng sủa, khô ráo, thông khí' — nhà tối, ẩm thì khí tù. Thực tế: thiếu nắng và ẩm mốc làm không khí ngột, đồ đạc mau hỏng, người ở dễ uể oải. Đây là việc nên sửa trước mọi chuyện hướng.",
+   "goi_y": "Mở lối cho ánh sáng và gió (giếng trời, cửa sổ, ô thoáng), chữa chỗ dột, xử lý tường thấm trước rồi mới tính chuyện bày trí.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "(nha|phong|giua nha) .{0,10}(toi om|toi tam|toi qua|thieu sang|am thap|am uot|am moc|bi toi)",
+    "am moc",
+    "mai dot",
+    "tuong (am|tham|moc)",
+    "thieu (anh )?sang",
+    "khong co cua so",
+    "nha ong .{0,20}(toi om|toi tam|thieu sang)",
+    "(nha|phong) (rat |hoi |qua )?toi (qua|om|tam)"
+   ],
+   "giai_thich_hien_dai": "Ánh sáng và gió quyết định nhà dễ sống hay không: đủ nắng thì khô, ít mốc, ban ngày đỡ bật đèn; phòng tối ẩm làm người ở mệt và ngại về nhà.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Mở cửa sổ, cửa thông gió mỗi sáng; dọn bớt đồ chắn ánh sáng ở lối giữa nhà."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Lắp quạt hút, máy hút ẩm; thay đèn sáng trắng ấm ở khoảng giữa nhà ống."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Làm giếng trời hoặc ô lấy sáng giữa nhà, chữa dột, chống thấm tường khi sửa nhà."
+    }
+   ]
+  },
+  "dat_meo": {
+   "tieu_de": "Đất hình méo, tam giác",
+   "noi_dung": "Sách xưa ưa đất vuông vắn, nở hậu; đất hình tam giác, nhiều góc nhọn bị coi là khó tụ khí. Thực tế: đất méo khó xếp phòng vuông, góc nhọn thành chỗ bỏ phí, xây tốn hơn.",
+   "goi_y": "Nếu cân nhắc đất méo: thử phác mặt bằng xem phần vuông dùng được còn bao nhiêu; xây theo khối vuông trên phần đất chính, góc nhọn làm sân, vườn hoặc kho.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "(manh |lo |mieng |thua )?dat (hinh )?(tam giac|meo|xeo|nhon)",
+    "manh dat .{0,15}(meo|xeo|tam giac|nhon)",
+    "dat co goc nhon",
+    "lo dat .{0,15}(meo|tam giac)"
+   ],
+   "giai_thich_hien_dai": "Phòng vuông dễ kê đồ và dễ ở; mảnh đất méo buộc phải có góc hẹp, bỏ trống hoặc khó dùng, nên giá trị dùng được thấp hơn diện tích ghi trên sổ.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Phác mặt bằng trên giấy, tô phần vuông dùng được trước khi quyết định."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Nhờ người vẽ thử hai phương án xếp phòng để so phần dùng được."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Xây khối nhà vuông trên phần đất chính, phần góc nhọn làm sân, bồn cây hoặc kho."
+    }
+   ]
+  },
+  "goc_nhon": {
+   "tieu_de": "Góc nhọn, cạnh tường nhà khác chĩa vào",
+   "noi_dung": "Loan đầu gọi là 'giác sát': góc nhà, mái hay cạnh tường bên ngoài chĩa thẳng vào cửa, cửa sổ. Thực tế: mắt luôn thấy một cạnh sắc đâm tới, khó chịu khi ngồi lâu; với góc trong nhà là chuyện va quệt.",
+   "goi_y": "Che tầm nhìn thẳng tới góc nhọn bằng rèm, cây tán rộng hoặc lam chắn; trong nhà thì bo tròn, bọc cạnh góc tủ, góc tường hay va.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "goc nhon",
+    "(goc|canh) (nha|tuong|mai) .{0,20}(chia|dam|huong) (vao|thang)",
+    "giac sat",
+    "chia vao (nha|cua)",
+    "goc cot .{0,15}(chia|dam)"
+   ],
+   "giai_thich_hien_dai": "Cạnh sắc ngay trước mắt làm nhiều người thấy căng mà không rõ vì sao; che bớt tầm nhìn là đủ thấy dễ chịu hơn. Góc nhọn trong nhà thì đơn giản là dễ va.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Kê ghế ngồi lệch khỏi hướng nhìn thẳng ra góc nhọn; kéo rèm mỏng ở cửa sổ đó."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Đặt chậu cây tán rộng hoặc mành che trước cửa sổ nhìn ra góc nhọn; bọc góc tủ trong nhà."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Làm lam chắn, hàng rào cây phía trước khi sửa mặt tiền."
+    }
+   ]
+  },
+  "nha_cu_mua_lai": {
+   "tieu_de": "Nhà cũ mua lại, trước khi dọn vào",
+   "noi_dung": "Tập quán dân gian: nhà cũ trước khi vào ở thường dọn sạch, sơn sửa, mở cửa cho thoáng, rồi chọn ngày nhập trạch, thắp hương báo cáo theo phong tục gia đình. Thực tế: đây là lúc kiểm điện, nước, chống thấm và mối mọt — dễ làm nhất khi nhà còn trống.",
+   "goi_y": "Làm theo thứ tự: kiểm tra điện nước, thấm dột, mối mọt; sơn sửa, vệ sinh kỹ; mở thông gió vài ngày; rồi mới chuyển đồ và làm lễ theo phong tục nhà mình.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "nha cu .{0,25}(mua lai|truoc khi|don vao|vao o|can lam)",
+    "mua (lai )?nha cu",
+    "nha (nguoi khac|cua nguoi truoc) (de lai|o truoc)",
+    "nha cu .{0,15}(chu cu|nguoi truoc)"
+   ],
+   "giai_thich_hien_dai": "Nhà người khác ở lâu thường có chỗ hỏng khuất: dây điện cũ, ống nước rỉ, tường thấm. Sửa khi nhà trống vừa rẻ vừa yên tâm; dọn sạch, đổi mùi nhà cũ cũng giúp mình thấy 'nhà của mình' hơn.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Mở hết cửa cho thoáng nhiều ngày, dọn sạch đồ người cũ để lại; ghi danh sách chỗ hỏng."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Thay ổ khoá, kiểm tra và thay ổ điện, vòi nước cũ; diệt mối mọt."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Đi lại dây điện, chống thấm, sơn lại toàn bộ trước khi chuyển đồ vào."
+    }
+   ]
+  },
+  "phong_tren_khoang_trong": {
+   "tieu_de": "Phòng ngủ trên gara, trên khoảng trống",
+   "noi_dung": "Quan niệm dân gian: phòng ngủ đặt trên gara, kho xe hay khoảng trống không có người ở thì 'dưới chân không vững'. Thực tế: sàn trên gara thường lạnh, có mùi xăng dầu, tiếng xe ra vào sớm muộn làm mất giấc.",
+   "goi_y": "Cách âm và cách nhiệt sàn phòng, giữ gara thông gió, không nổ máy xe lâu trong gara; có lựa chọn thì người ngủ nông chọn phòng khác.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "(phong ngu|giuong) .{0,15}(tren|ngay tren) .{0,10}(gara|nha xe|cho de xe|ham xe|kho)",
+    "(gara|nha xe|ham xe) .{0,15}duoi phong ngu"
+   ],
+   "giai_thich_hien_dai": "Tiếng cửa cuốn, tiếng xe và mùi khói từ gara đi thẳng lên phòng phía trên; sàn không có phòng ấm phía dưới thì lạnh chân về đêm.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Không nổ máy xe lâu trong gara; mở cửa gara cho bay mùi trước khi đóng."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Trải thảm dày, lót cao su giảm ồn dưới chân giường; dán gioăng kín cửa thông gara."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Làm trần cách âm, cách nhiệt cho gara; lắp quạt hút mùi gara khi sửa nhà."
+    }
+   ]
+  },
+  "cau_thang_cua_phong": {
+   "tieu_de": "Cầu thang đổ thẳng vào cửa phòng",
+   "noi_dung": "Quan niệm dân gian: chân cầu thang hay đầu cầu thang đâm thẳng vào cửa phòng ngủ thì 'khí xông vào phòng'. Thực tế: lối đi chung dồn ngay trước cửa, tiếng bước chân và ánh đèn hành lang lọt vào, mở cửa là đụng người lên xuống.",
+   "goi_y": "Đóng cửa phòng khi ngủ; kê giường không thẳng trục với cửa; đặt rèm hoặc tấm che ngay sau cửa để chắn tầm nhìn từ cầu thang.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "cau thang .{0,25}(cua phong|phong ngu)",
+    "(cua phong|phong ngu) .{0,20}(doi dien|ngay|sat) .{0,10}cau thang"
+   ],
+   "giai_thich_hien_dai": "Cửa phòng sát đầu cầu thang là chỗ người qua lại nhiều nhất trong nhà; người trong phòng bị làm phiền và mất cảm giác riêng tư.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đóng cửa phòng khi nghỉ, kê giường lệch khỏi đường thẳng từ cửa vào."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Treo rèm hoặc đặt bình phong nhỏ sau cửa; dán gioăng giảm tiếng."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi sửa nhà, xoay hướng mở cửa phòng hoặc lùi cửa khỏi đầu cầu thang."
+    }
+   ]
+  },
+  "duong_lon_on": {
+   "tieu_de": "Nhà sát đường lớn, cao tốc, ồn ào",
+   "noi_dung": "Sách xưa nói nhà sát đường lớn, dòng xe chạy nhanh là 'khí đi gấp', khó giữ yên. Thực tế: ồn, bụi và rung là chuyện lớn nhất, nhất là phòng ngủ quay ra đường.",
+   "goi_y": "Phòng ngủ, phòng học đặt phía sau, xa mặt đường; mặt tiền dùng cửa kính hai lớp, rèm dày, hàng cây giảm bụi.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "(gan|sat|canh|ngay) (duong cao toc|duong lon|quoc lo|duong tau|duong ray|dai lo)",
+    "(on ao|bui bam|on) .{0,20}(xe|duong|tau|cong trinh)",
+    "xe chay (nhieu|suot)"
+   ],
+   "giai_thich_hien_dai": "Tiếng ồn liên tục làm giấc ngủ nông và người dễ cáu dù đã quen tai; bụi đường bám vào nhà nhanh. Giảm ồn ở phòng ngủ là việc đáng đầu tư nhất.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đổi phòng ngủ sang phía sau nhà nếu được; đóng cửa sổ mặt đường giờ cao điểm."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Rèm cách âm, gioăng cửa, nút tai lúc ngủ; chậu cây tán dày ở ban công trước."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Thay cửa kính hai lớp ở mặt tiền, làm vách cách âm cho phòng ngủ khi sửa nhà."
     }
    ]
   }

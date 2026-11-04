@@ -23,7 +23,10 @@ from app.luangiai import an_toan as _at  # noqa: E402
 # "chắc chắn" (B0); "tai nạn", "thắng kiện" (B1: trả lời bằng mảng đi lại / giấy tờ + lưu ý, không có/không).
 _BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khong|nam nay|nam sau)", r"thang kien"}
 TU_CHOI_THEM = [r"so de", r"song duoc bao lau", r"nao chet", r"tho bao nhieu", r"doan benh",
-                r"benh gan", r"yem bua", r"chua duoc benh", r"nen tuyen", r"tuyen nhan vien",
+                r"benh gan",
+                # "yểm bùa nhà hàng xóm" = tác động lên người khác → từ chối; "nhà tôi có BỊ yểm bùa không" = nỗi sợ tâm
+                # linh → dẫn hướng (TAM_LINH) — EN-3d.
+                r"(muon|cach|lam sao|giup toi|giup minh|nho thay) .{0,12}yem bua|yem bua (nha|nguoi|cho|ke|hang xom|ban|vo|chong|sep|dong nghiep|doi thu)(?! .{0,15}(toi|minh|em|nha toi)(?!\w))", r"chua duoc benh", r"nen tuyen", r"tuyen nhan vien",
                 r"de quyet dinh tuyen", r"chon so lo", r"so lo"]
 # MT-ĐS B0 — thọ / chết / sống được không (kể cả người thân, thai nhi), tên bệnh & bộ phận, lô đề, nhân sự trá hình.
 TU_CHOI_HH = [
@@ -31,7 +34,7 @@ TU_CHOI_HH = [
     r"(con|be|no|ong|ba|bo|me|toi|minh|em|chau|vo|chong) (co )?song duoc (khong|ko)", r"co qua khoi",
     r"(\d{2,3} tuoi|ong noi|ong ngoai|ba noi|ba ngoai|cu nha).{0,40}co (di|mat|ra di) (khong|ko)",
     r"ket thuc doi", r"bat dac ky tu", r"(de|hay|phai) chet(?!\w)", r"so chet (tre|som|bat)", r"chet som", r"chet tre",
-    r"nam nao .{0,30}co nguoi mat", r"benh (phoi|tim|gan|than|xuong|mau)",
+    r"nam nao .{0,30}co nguoi mat", r"(?<!khoa )(?<!kham )benh (phoi|tim|gan|than|xuong|mau)",
     r"(gan|than|tim|phoi|ung thu|da day) hay (gan|than|tim|phoi|ung thu|da day)", r"uong thuoc gi",
     r"khoi (duoc )?benh", r"choi (lo|de)(?!\w)", r"so chot", r"danh con (gi|so)", r"so may de trung", r"danh .{0,12}(de|cho) trung",
     r"lam hr|(?<!\w)hr(?!\w)", r"chu (cty|cong ty|doanh nghiep).{0,40}(ung vien|nhan vien|nhan|tuyen)",
@@ -50,6 +53,8 @@ TAM_LINH = [
     r"trung tang", r"duyen am", r"tien kiep", r"nghiep (nang|chuong|bao)", r"tran trach", r"am binh",
     r"(moi|nho) thay (ve|cung|giai|xem|tran)", r"(di xem|xem|tim|gap) thay (bua|boi|giai|tran|cung sao|cung giai)", r"thay (ve )?(giai bua|tran trach|cung giai)", r"goi hon", r"ap vong", r"vong nhap", r"nhap hon",
     r"thay (nguoi|ng) la(?!\w)", r"thay nguoi mac ao",
+    # EN-3d (bộ dev): hồn người mất chưa đi — "nghe tiếng bước chân… người chết chưa siêu thoát"
+    r"sieu thoat", r"(la|co|thay|bi|nhu) hon ma|hon ma (theo|o|ve|nao)", r"linh hon (nguoi )?(chet|da mat|mat|qua co)", r"linh hon (ong|ba|bo|me|cha|con) .{0,10}(da mat|qua co|chet)",
 ]
 TANG = [r"trung tang", r"nguoi (chet|mat)(?! viec| tien| tich)", r"chet trong nha", r"vua mat", r"mat .{0,12}nguoi"]
 
@@ -72,9 +77,9 @@ def dac_biet(t: str, raw: str | None = None) -> str | None:
     goc = raw or t
     if _at.khung_hoang(goc) or co(t, _h.AN_TOAN):
         return "an_toan"
-    if _at.tu_choi(goc) or co(t, TU_CHOI_HH_TAT_CA):
+    if _at.tu_choi(goc) or co(t, [m for m in TU_CHOI_HH_TAT_CA if not _at.bo_qua_mo_ho(m, raw)]):
         return "tu_choi_nhe"
-    if tam_linh(t):
+    if co(t, [m for m in TAM_LINH if not _at.bo_qua_mo_ho(m, raw)]):
         return "dan_huong"
     return None
 
