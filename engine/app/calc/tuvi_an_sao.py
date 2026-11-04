@@ -420,6 +420,12 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
         return m
 
     dh = cung[h["decadal"]["index"]]["decadal"]["range"]
+    # TV-DT đồng hạn: tuổi mụ còn nhỏ hơn tuổi khởi đại hạn đầu tiên (= số cục) → iztro trả đúng cung đồng hạn
+    # (一命二財三疾厄 四歲夫妻五福德) nhưng `range` là của chính cung đó (vd bé 2 tuổi ra "86–95"). Khoảng đúng: 1 … cục − 1.
+    khoi = min(p["decadal"]["range"][0] for p in cung)
+    dong_han = h["age"]["nominalAge"] < khoi
+    if dong_han:
+        dh = [1, khoi - 1]
     if chi_tiet:
         _ln = h["yearly"]
         _ln_vong = _ln.get("suiqian12", [])
@@ -427,6 +433,7 @@ def van_han(ngay_duong: dt.date, ti: int, gioi_tinh: str, ngay_xem: dt.date,
         "tuoi_mu": h["age"]["nominalAge"],
         "dai_han": {**_lop(h["decadal"]), "tu_tuoi": dh[0], "den_tuoi": dh[1],
                     "cung_goc": cung[h["decadal"]["index"]]["name"],
+                    **({"dong_han": True} if dong_han else {}),
                     **(_vong_dh(h["decadal"]["earthlyBranch"]) if chi_tiet else {})},
         "tieu_han": {**_lop(h["age"], False), "cung_goc": cung[h["age"]["index"]]["name"]},
         "luu_nien": {**_lop(h["yearly"]), "cung_goc": cung[h["yearly"]["index"]]["name"],

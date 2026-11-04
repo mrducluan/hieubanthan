@@ -106,8 +106,13 @@ def test_van_han_va_lich_trung(lich):
     la = az.an_sao_tho(d, 4, "nam", thang_nhuan="ca_thang_sau", lich=lich)
     assert next(p["earthlyBranch"] for p in la["palaces"] if p["name"] == "Mệnh") == "Thìn"
     v = az.van_han(d, 4, "nam", dt.date(2027, 7, 1), thang_nhuan="ca_thang_sau", lich=lich)
-    # đại hạn khởi từ cung Mệnh của CHÍNH lá đã an theo lựa chọn này
-    assert la["palaces"][v["dai_han"]["chi_so"]]["decadal"]["range"] == [v["dai_han"]["tu_tuoi"], v["dai_han"]["den_tuoi"]]
+    # đại hạn khởi từ cung Mệnh của CHÍNH lá đã an theo lựa chọn này; bé 2–3 tuổi còn ở đồng hạn (TV-DT):
+    # khoảng = 1 … tuổi khởi đại hạn đầu − 1 (không phải khoảng của chính cung đồng hạn)
+    khoi = min(p["decadal"]["range"][0] for p in la["palaces"])
+    assert v["dai_han"].get("dong_han") is True
+    assert [v["dai_han"]["tu_tuoi"], v["dai_han"]["den_tuoi"]] == [1, khoi - 1]
+    v2 = az.van_han(d, 4, "nam", dt.date(2045, 7, 1), thang_nhuan="ca_thang_sau", lich=lich)
+    assert la["palaces"][v2["dai_han"]["chi_so"]]["decadal"]["range"] == [v2["dai_han"]["tu_tuoi"], v2["dai_han"]["den_tuoi"]]
 
 
 def test_nap_truoc_trung_goi_le():

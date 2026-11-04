@@ -95,14 +95,13 @@ def test_van_han_khop_khau_quyet(c):
         assert v["dai_han"]["vong_thai_tue"][CHI_DAN.index(x["dai_han"]["chi"])] == "Tuế Kiện"
 
 
-@pytest.mark.xfail(strict=True, reason="LỖI CỦA TA (chưa sửa — đổi kết quả mặc định, chờ chủ dự án): tuổi mụ < số cục "
-                   "(đồng hạn), iztro trả cung đồng hạn (đúng) nhưng van_han lấy `range` của chính cung đó → bé 2 tuổi "
-                   "báo 'đại hạn 86–95'. Đúng: 1 … cục − 1, gắn cờ đồng hạn.")
 def test_dong_han_khoang_tuoi():
+    """Đã sửa (ENGINE_VERSION 0.1.7): tuổi mụ < số cục → khoảng 1 … cục − 1 + cờ `dong_han` (trước: khoảng của chính cung)."""
     c = next(c for c in G if c["id"] == "dong_han_2_tuoi")
     x = next(x for x in c["xem"] if x["dong_han"])
     v = _vh(c, x)
     assert (v["dai_han"]["tu_tuoi"], v["dai_han"]["den_tuoi"]) == (1, c["cuc"] - 1)
+    assert v["dai_han"].get("dong_han") is True
 
 
 def test_dong_han_cung_va_can_dung():
