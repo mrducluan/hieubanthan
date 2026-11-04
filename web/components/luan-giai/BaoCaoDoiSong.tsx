@@ -21,6 +21,7 @@ import { DongMuoiNam } from "./DongMuoiNam";
 import { SaoLuuNam } from "./SaoLuuNam";
 import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
 import { ChuQua } from "./ChuQua";
+import { GocNhinKhac } from "./GocNhinKhac";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
 import { ChamMuc, ChuThichMuc, CotChuong, giamChuyenDong, ThanhChuongGon, useChuongDangDoc, type MucChuong } from "./MucLucChuong";
 import { maMauBaoCao, NHAN_MUC, type BaoCaoDoiSong, type ChuongDoiSongMo, type Hop, type LuuYMang, type MocDaiHan, type Muc } from "./kieu";
@@ -284,6 +285,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
             <HopNoiBat hop={c.loi_hoan_canh} thuatNgu={c.thuat_ngu} />
           </div>
         )}
+        {c.goc_nhin_khac && c.goc_nhin_khac.y.length > 0 && <GocNhinKhac g={c.goc_nhin_khac} chuong={c.ma} thuatNgu={c.thuat_ngu} />}
         {thamChieuDs.length > 0 && (
           <div className="mt-3 space-y-2">
             {thamChieuDs.map((h) => {

@@ -1,6 +1,11 @@
 # Đề xuất: lấy Ý (quy tắc) từ bài giảng Tử vi hiện đại, viết lại bằng lời mình, lối khơi gợi
 
-> Trạng thái: **NHÁP, chờ chủ dự án duyệt.** Chưa nối vào RULES / NARRATIVE / web nào.
+> Trạng thái: **ĐÃ NỐI (2026-11-04)** — một bộ so điều kiện `engine/app/luangiai/tuvi_y_bo_sung.py` (test
+> `test_tuvi_y_bo_sung_khop*.py`) dùng chung cho hỏi đáp ("Một cách đọc thêm") và báo cáo đời sống Tử vi: ý "hop" làm giàu
+> hộp đang có (`hop.y_bo_sung`) hoặc thành hộp mới (≤ 2 / chương, mã `ds.<chương>.yb.*`), ý thời điểm vào "Năm nay" /
+> "Vận hạn", ý sức khoẻ theo năm thêm lý do vào SK-1 (vẫn một hộp), ý "goc_nhin_khac" vào khung gập "Góc nhìn khác"
+> (≤ 3 ý / chương, phái `tam_hop_hien_dai`, luật HỌC chung). Không đổi mức nào. Độ phủ: `engine/scripts/do_phu_y_bo_sung.py`.
+> Nội dung KB vẫn là nháp, chuyên gia duyệt dần.
 > Tệp nháp: `engine/app/kb/data/tuvi_y_bo_sung.json` (200 mục, TV-YBS đã nối theo trường `hien_thi`) · bộ đọc `engine/app/kb/tuvi_y_bo_sung.py` · test: `engine/tests/test_kb_y_bo_sung.py`.
 > Đối chiếu mục tiêu tăng trưởng: nền móng cho khâu **QUAY LẠI + NẠP Sao** — lời luận Tử vi có thêm chi tiết cụ thể
 > (ai ảnh hưởng hôn nhân, khi nào hợp thi / hợp tác / di chuyển, nghề nào hợp) thì chương đời sống đáng đọc tiếp hơn;

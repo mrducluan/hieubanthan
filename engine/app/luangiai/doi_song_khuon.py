@@ -329,6 +329,8 @@ def lop_doi_thuong(bc: dict) -> list[str]:
 
     def _hop(h: dict):
         ra.extend([h.get("tieu_de", ""), h.get("noi_dung", ""), h.get("huong_xu_ly") or ""])
+        yb = h.get("y_bo_sung") or {}                 # TV-YBS: ý bổ sung gộp vào hộp đang có
+        ra.extend([yb.get("noi_dung") or "", yb.get("viec") or ""])
 
     for h in bc.get("cot_loi") or []:
         _hop(h)
@@ -344,6 +346,8 @@ def lop_doi_thuong(bc: dict) -> list[str]:
     for c in bc.get("chuong") or []:
         ra.extend([c.get("tieu_de", ""), c.get("tom_tat") or "", c.get("cau_tu_soi") or ""])
         for h in c.get("hop", []):
+            _hop(h)
+        for h in (c.get("goc_nhin_khac") or {}).get("y") or []:     # TV-YBS: khung "Góc nhìn khác"
             _hop(h)
         for n in c.get("hanh_dong") or []:
             ra.extend(n.get("viec", []) if isinstance(n, dict) else [])

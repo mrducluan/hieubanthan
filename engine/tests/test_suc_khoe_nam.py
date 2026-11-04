@@ -19,7 +19,7 @@ from app.calc import battu, huyen_khong as hk, lunar, tuvi_an_sao as az, tuvi_ph
 from app.hoidap import battu as bh, chung, kinhdich as kd, phongthuy as ph, tuvi as tv
 from app.hoidap.tuvi import tom_tat
 from app.kb import suc_khoe_kb as kb
-from app.luangiai import an_toan, suc_khoe_nam as skn, toan_bo, tuvi_doi_song as tds
+from app.luangiai import an_toan, suc_khoe_nam as skn, toan_bo, tuvi_doi_song as tds, tuvi_y_bo_sung as yb
 from app.narrative import hoi_van, kiem_ai
 
 XEM = dt.date(2026, 11, 4)
@@ -109,8 +109,12 @@ def test_tuvi_bao_cao_co_hop_nam_va_khong_doi_muc():
         ls = _ls(ca)
         assert sk["muc"] == tds.cham_cung(ls)["Tật Ách"]["muc"]
         nam_am_xem = lunar.solar_to_lunar(XEM.day, XEM.month, XEM.year, 7)[2]
-        ds = skn.tuvi_nam(ls, nam_am_xem, nam_am_xem - bc["tuoi_mu"] + 1)
+        nam_am_sinh = nam_am_xem - bc["tuoi_mu"] + 1
+        # TV-YBS: lý do thêm của năm từ KB ý bổ sung (vd cung năm có Kình / Đà) đi vào CÙNG hộp này
+        them = yb.chuan_bi(ls, sinh["gioi_tinh"], nam_am_xem, nam_am_sinh)["sk"]
+        ds = skn.tuvi_nam(ls, nam_am_xem, nam_am_sinh, them=them)
         h = [x for x in sk["hop"] if x["tieu_de"] == skn.TIEU_DE_HOP]
+        assert len(h) <= 1                     # vẫn MỘT hộp "Năm nên chú ý sức khoẻ hơn"
         if ds:
             co += 1
             assert h, ca["ngay"]

@@ -34,6 +34,7 @@ from app.luangiai import doi_song_chung as dsc
 from app.luangiai import doi_song_khuon as kh
 from app.luangiai import hoan_canh as hc
 from app.luangiai import suc_khoe_nam as skn
+from app.luangiai import tuvi_y_bo_sung as yb
 from app.luangiai.doi_song_chung import (  # noqa: F401 — tách dùng chung với Bát tự (BT-ĐS), giữ tên cũ
     MA_MAU_RE, TOI_DA_HOP, _ap_hoc, _cac_cau, _cau_dau, _hoa_dau, _ma, _sach, _sap, _tieu_de, slug, trong_so_xem_lai)
 
@@ -567,7 +568,8 @@ def _hai_phan(ds: list[str]) -> str:
 
 
 def _chuong_suc_khoe(cc: dict, hoc: tuple, ls: dict | None = None, nam_am_xem: int | None = None,
-                     nam_am_sinh: int | None = None, sao_luu: dict | None = None) -> dict:
+                     nam_am_sinh: int | None = None, sao_luu: dict | None = None,
+                     them_sk: dict[int, list[tuple[str, str]]] | None = None) -> dict:
     x = cc["Tật Ách"]
     cand = []
     nguon = [(s, "Tật Ách") for s in x["chinh"]] + [(s, "Mệnh") for s in cc["Mệnh"]["chinh"][:1]]
@@ -621,9 +623,11 @@ def _chuong_suc_khoe(cc: dict, hoc: tuple, ls: dict | None = None, nam_am_xem: i
     if ls is not None and nam_am_xem is not None and nam_am_sinh is not None:
         ta = [m["ten"] for m in (sao_luu or {}).get("muc") or []
               if m["ma"] in tvsl._CHU_Y and skn.CUNG_SK in m["cac_cung"]]
-        ds_nam = skn.tuvi_nam(ls, nam_am_xem, nam_am_sinh, sao_luu_ta=ta)
+        ds_nam = skn.tuvi_nam(ls, nam_am_xem, nam_am_sinh, sao_luu_ta=ta, them=them_sk)
         gd = skn.tuvi_giai_doan(ls, nam_am_xem, nam_am_sinh)
-        goc = ds_nam[0] if ds_nam else (gd[0] if gd else None)
+        # TV-YBS: lý do thêm từ KB ý bổ sung chỉ làm giàu nội dung; mã kiểm chứng vẫn theo lý do SK-1 gốc (phiếu cũ giữ).
+        ds_cu = skn.tuvi_nam(ls, nam_am_xem, nam_am_sinh, sao_luu_ta=ta) if them_sk else ds_nam
+        goc = ds_cu[0] if ds_cu else (gd[0] if gd else (ds_nam[0] if ds_nam else None))
         h_nam = skn.hop_nam(ds_nam, _ma("ds", "suc_khoe", "nam", skn.ma_ly_do(goc)) if goc else "", _hop, 1.4, gd)
         if h_nam:
             cand.insert(1 if cand else 0, h_nam)
@@ -1232,9 +1236,10 @@ def chon_cot_loi(ds_chuong: list[dict], toi_da: int = 5) -> list[dict]:
 
 # ------------------------------------------------------------------ điểm vào
 def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
-        ca_nhan: dict | None = None, ls: dict | None = None, vh: dict | None = None) -> dict:
+        ca_nhan: dict | None = None, ls: dict | None = None, vh: dict | None = None, y_bo_sung: bool = True) -> dict:
     """`sinh` như `hoidap.tuvi.tra_loi` (+ `luu_nguyet` tuỳ chọn). → báo cáo `doi_song_1` (chưa có moi_xem / phí —
-    `toan_bo.tuvi` gắn)."""
+    `toan_bo.tuvi` gắn). `y_bo_sung` = nối KB ý Tử vi bổ sung (TV-YBS — `luangiai/tuvi_y_bo_sung.py`; tắt chỉ để test so
+    với bản không có ý bổ sung)."""
     from app.hoidap.tuvi import tom_tat          # tránh vòng import
 
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
@@ -1258,6 +1263,8 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
                          nam_am_xem), "nam": nam_am_xem}
     except Exception:  # noqa: BLE001 — sao lưu là phần đọc thêm; lỗi không làm hỏng báo cáo
         sl = None
+    # TV-YBS: ý bổ sung khớp lá số (một lần cho cả bài) — không đổi mức nào.
+    bs = yb.chuan_bi(ls, sinh.get("gioi_tinh"), nam_am_xem, nam_am_sinh, vh) if y_bo_sung else None
 
     ds: list[dict] = []
     for ma, _, _, cung in CHUONG:
@@ -1269,7 +1276,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
             dao = _hop_dao_hoa(ma, "Phu Thê", cc["Phu Thê"]) + _hop_dao_hoa(ma, "Mệnh", cc["Mệnh"])
             c = _chuong_cung(ma, cung, cc, hoc, da_dung, dao)
         elif ma == "suc_khoe":
-            c = _chuong_suc_khoe(cc, hoc, ls, nam_am_xem, nam_am_sinh, sl)
+            c = _chuong_suc_khoe(cc, hoc, ls, nam_am_xem, nam_am_sinh, sl, them_sk=(bs or {}).get("sk"))
         elif ma == "tien_bac":
             # Điền Trạch ở chương tiền bạc chỉ lấy lớp tích luỹ (tứ hoá, cát/sát); chính tinh để chương nhà cửa.
             c = _chuong_cung(ma, cung, cc, hoc, da_dung, chi_phu={"Điền Trạch": 2},
@@ -1287,7 +1294,11 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
         for h in c["hop"]:
             h["_ch"] = ma
         ds.append(c)
+    if bs:                                        # pha 1: làm giàu hộp đang có (trước khi chọn "Điều quan trọng nhất")
+        yb.lam_giau(ds, bs)
     cot_loi = dsc.them_cot_loi_van_han(chon_cot_loi(ds), ds, nam_am_xem)
+    if bs:                                        # pha 2: hộp mới (≤ 2 / chương) + khung "Góc nhìn khác"
+        yb.them_vao(ds, bs, hoc)
     # EN-2 mục 5: hộp lời theo tuổi + tình trạng (người dùng tự chọn) ở 5 chương — sau khi chọn cốt lõi (không vào cốt lõi).
     hc.ap(ds, sinh["ngay"], ngay_xem, sinh.get("tinh_trang"), "ds", hoc)
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).

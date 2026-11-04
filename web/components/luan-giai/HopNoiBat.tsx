@@ -82,6 +82,13 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
       {hop.huong_xu_ly && !hop.noi_dung.includes(hop.huong_xu_ly) && (
         <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg"><b className="hop-nhan font-semibold">Nên:</b> {hop.huong_xu_ly}</p>
       )}
+      {hop.y_bo_sung?.noi_dung && (
+        // TV-YBS: ý bổ sung gộp vào hộp (cùng nội dung) — một câu thêm sắc thái + một việc, chữ nhỏ hơn lời chính.
+        <div className="mt-2 border-l-2 border-line/70 pl-3 text-sm leading-relaxed text-fg-muted" data-testid="hop-y-bo-sung">
+          <p>{hop.y_bo_sung.noi_dung}</p>
+          {hop.y_bo_sung.viec && <p className="mt-1"><b className="hop-nhan font-semibold">Thử:</b> {hop.y_bo_sung.viec}</p>}
+        </div>
+      )}
       {hop.lop && hop.lop.length > 0 && <CacLop lop={hop.lop} />}
       {hop.an_toan && hop.an_toan.length > 1 && (
         <ul className="mt-1.5 list-disc space-y-0.5 pl-5 text-sm text-fg-muted" data-testid="hop-an-toan">{hop.an_toan.slice(1).map((x) => <li key={x}>{x}</li>)}</ul>

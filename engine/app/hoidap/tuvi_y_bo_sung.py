@@ -127,7 +127,7 @@ def chon(pl: dict, nc: dict) -> list[dict]:
     cung_hoi = {c for c in (pl.get("cung") or [])[:2] if c in THU_TU_CUNG}
     sao_hoi = set(pl.get("sao") or []) | {s for s, k in _PHU_KD.items() if re.search(rf"(?<!\w){k}(?!\w)", t)}
     if sao_hoi and not _neu_cung(pl):           # "Thất Sát trong lá số của tôi" → cung nơi sao đứng
-        cung_hoi = {c["ten"] for c in nc["cung"] if sao_hoi & c["sao"]}
+        cung_hoi = {t for t in nc["thu_tu"] if sao_hoi & yb.sao_trong_cung(nc, t)}
     han = loai_cau == "han"
     chi_dai_han = han and (bool(pl.get("han_toi")) or chung.co(t, _HOI_DAI_HAN) and not chung.co(t, _HOI_NAM))
     loai_dung: set[str] = set()
