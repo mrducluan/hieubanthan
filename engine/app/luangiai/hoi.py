@@ -678,6 +678,45 @@ def _them_phu(muc: list, cs: dict, t: str, lv: str, so_nhac: dict):
             muc.append({"loai": "thai_do", "so": so, "noi_dung": n, **kb.meta_phu()})
 
 
+def _mau_suc_khoe_ts(nhom: str, t: str, nguoi: dict | None, ngay_xem: _dt.date) -> str:
+    """SK-1 (2026-11-04): câu sức khoẻ ở Thần số. Triệu chứng cấp → đi khám ngay. Câu hỏi có bệnh / sức khoẻ thế nào →
+    Thần số không gắn với bộ phận cơ thể nên không trả lời có hay không; nêu hệ cơ quan nếu câu hỏi nhắc (đi khám), và
+    năm cá nhân tới có chủ đề nghỉ ngơi / chăm sức khoẻ (KB `suc_khoe_kb.nam_ca_nhan`, mốc 1/1 như trang đọc) + khám tổng
+    quát + câu không thay lời bác sĩ."""
+    from app.kb import suc_khoe_kb as skb  # noqa: PLC0415
+    from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+    if nhom == "cap_cuu":
+        return skb.mau("cap_cuu")
+    phan = ["Thần số học không gắn con số với bộ phận cơ thể nào, nên không trả lời được cơ thể bạn có vấn đề hay không — "
+            "chỉ bác sĩ thăm khám mới trả lời được."]
+    he = skb.he_cau_hoi(t)
+    if he:
+        phan.append(f"Nếu bạn đang lo về {he['he']}, hãy đi {he['kham']} để bác sĩ kiểm tra sớm.")
+    if (ds := _sk_nam_ts(nguoi, ngay_xem.year)):
+        phan.append("Điều con số nói được là nhịp sống. " + ds)
+    phan.append(skn.mien_tru())
+    return " ".join(phan)
+
+
+def _skn_mt() -> str:
+    from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+    return skn.mien_tru()
+
+
+def _sk_nam_ts(nguoi: dict | None, nam0: int) -> str:
+    """Hai năm cá nhân gần nhất (trong 10 năm tới) có chủ đề nghỉ ngơi / chăm sức khoẻ → câu nhắc khám tổng quát."""
+    from app.kb import suc_khoe_kb as skb  # noqa: PLC0415
+    from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+    if not (nguoi and nguoi.get("ngay") and nguoi.get("thang")):
+        return ""
+    ncn = {y: thanso.nam_ca_nhan(nguoi["ngay"], nguoi["thang"], y, moc="duong_lich") for y in range(nam0, nam0 + 10)}
+    ds = skn.thanso_nam(ncn, nam0)[:2]
+    if not ds:
+        return ""
+    return " ".join(f"Năm {x['nam']} là năm cá nhân {x['so']} ({skb.nam_ca_nhan(x['so'])['ly_do']})." for x in ds) \
+        + " " + skn.cau_cac_nam(ds)
+
+
 def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.date) -> dict:
     """Dựng gói bằng chứng từ phân loại + chỉ số + KB. Chỉ chứa nội dung có nguồn."""
     t, lv, dt_, xl = pl["cau_chuan_hoa"], pl["linh_vuc"], pl["doi_tuong"], pl["xu_ly"]
@@ -688,6 +727,9 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
         return goi
     if xl == "tu_choi_nhe":
         goi["mau"] = kb.mau(pl["tu_choi"] or "du_doan_cu_the")
+        nhom = _at.nhom_suc_khoe(pl.get("cau_goc") or t) if pl["tu_choi"] == "suc_khoe_the_chat" else None
+        if nhom:
+            goi["mau"] = _mau_suc_khoe_ts(nhom, t, nguoi, ngay_xem)
         return goi
 
     muc = goi["muc"]
@@ -846,6 +888,14 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
         lv_muc = [m for m in muc if m["loai"] == "linh_vuc"]
         muc[:] = khac + lv_muc[:1]
 
+    if nguoi and (lv == "suc_khoe" and re.search(r"suc khoe|nam nao|khi nao|nghi ngoi|kiet suc|qua suc", t)
+                  or re.search(r"suc khoe", t)):
+        # SK-1 (2026-11-04): năm cá nhân tới có chủ đề nghỉ ngơi / chăm sức khoẻ → nhắc khám định kỳ (cùng hàm câu từ chối)
+        nam0 = ngay_xem.year
+        ds = _sk_nam_ts(nguoi, nam0)
+        if ds:
+            muc.append({"loai": "giai_thich", "ma": "suc_khoe_nam", "tieu_de": "Năm nên chú ý sức khoẻ hơn",
+                        "noi_dung": f"{ds} {_skn_mt()}", "source_id": "thanso_pitago", "school_id": "pitago"})
     ma_luu_y = (LUU_Y_THEO_LV.get(lv) or ("thoi_diem" if pl["y_dinh"] == "thoi_diem" else None)
                 or ("quyet_dinh" if pl["y_dinh"] == "quyet_dinh" else None))
     if dt_ == "con":

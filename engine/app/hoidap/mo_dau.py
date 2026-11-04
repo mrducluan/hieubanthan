@@ -671,6 +671,12 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
     v = th_viec or (_viec_hop(ds) if ds else "")
     if v:
         phan.append("Việc nên làm: " + thuong(v))
+    if ds and ds.get("chuong") == "suc_khoe":
+        # SK-1 (2026-11-04): năm nên chú ý sức khoẻ (hộp của chương, cùng hàm báo cáo) nói ngay ở đoạn mở đầu.
+        from app.luangiai import suc_khoe_nam as _skn  # noqa: PLC0415
+        hn = next((h for h in ds.get("hop") or [] if h.get("tieu_de") == _skn.TIEU_DE_HOP), None)
+        if hn:
+            phan.append(hn["noi_dung"].replace(_skn.mien_tru(), "").strip())
     if ds and ds.get("chuong") == "suc_khoe" or (dieu or {}).get("mang") == "suc_khoe":
         from app.kb import tuvi_doi_song_kb as _kbds  # noqa: PLC0415
         phan.append(_kbds.suc_khoe_chung())          # câu miễn trừ cố định (một nguồn với báo cáo đời sống)

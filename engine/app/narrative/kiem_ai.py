@@ -13,8 +13,15 @@ from functools import lru_cache
 
 _LIEN_KET = re.compile(r"(https?://|www\.)\S+|\b[\w-]+\.(com|vn|net|org|io|xyz|info|me)\b", re.IGNORECASE)
 CAM = ["chắc chắn sẽ", "bạn sẽ", "định mệnh", "số phận đã", "không thể tránh", "bẩm sinh", "vốn dĩ", "100%", "tiền định"]
-Y_TE = ["ung thư", "tiểu đường", "huyết áp", "tim mạch", "đột quỵ", "trầm cảm", "chẩn đoán", "phẫu thuật", "xạ trị",
-        "hoá trị", "hóa trị", "nhập viện", "uống thuốc", "kê đơn", "khối u", "suy thận", "viêm gan"]
+# SK-1 (2026-11-04): tên hệ cơ quan + việc đi khám ("tim mạch", "đo huyết áp", "khám phổi") nay có trong chính nguồn
+# (chương sức khoẻ, hộp "Năm nên chú ý sức khoẻ hơn") nên AI DIỄN ĐẠT lại được; AI tự thêm khi nguồn không có vẫn là thêm
+# dữ kiện → vi phạm. Tên bệnh, lời đoán ốm / sống chết lấy từ KB `suc_khoe_kb.cum_cam` (một nguồn với mọi bộ kiểm).
+Y_TE = ["tim mạch", "huyết áp", "phẫu thuật", "xạ trị", "hoá trị", "hóa trị", "nhập viện", "uống thuốc", "kê đơn"]
+
+
+def _y_te() -> list[str]:
+    from app.kb import suc_khoe_kb  # noqa: PLC0415
+    return list(dict.fromkeys([*Y_TE, *(c.lower() for c in suc_khoe_kb.cum_cam())]))
 # Ranh giới cứng: không bán / gợi vật phẩm "hoá giải", lễ giải hạn — chỉ chặn khi nguồn không có
 VAT_PHAM = ["vòng tay", "thạch anh", "tỳ hưu", "tì hưu", "linh vật", "vật phẩm", "đá phong thuỷ", "đá phong thủy",
             "bùa", "giải hạn", "cúng sao", "dâng sao", "trấn yểm", "hoá giải bằng", "hóa giải bằng", "cóc ngậm tiền",
@@ -82,7 +89,8 @@ def kiem(van: str, nguon: str, so_duoc: set[int] | None = None, cum_them: list[s
     for c in CAM + list(cum_them or []):
         if c.lower() in thap and c.lower() not in goc:
             loi.append(f"cụm cấm: {c}")
-    loi += [f"từ y tế: {c}" for c in Y_TE if c in thap and c not in goc]
+    loi += [f"từ y tế: {c}" for c in _y_te() if re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", thap)
+            and not re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", goc)]
     loi += [f"vật phẩm: {c}" for c in VAT_PHAM if re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", thap)
             and not re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", goc)]
     if kiem_y_moi:

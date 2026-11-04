@@ -121,6 +121,10 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
     # EN-3d (bộ dev): triệu chứng tim mạch + hỏi bệnh ("đau ngực… có phải dễ bị bệnh tim") → khuyên đi khám, không luận số.
     (r"(?<!khoa )(?<!kham )benh (tim|phoi|gan|than|mau)(?! (la|nhu))|(bi|hay|thay|dang) (dau|tuc) nguc|(bi|hay|dang) kho tho(?! (vi|qua vi|voi))",
      r"(?<!khoa )(?<!khám )bệnh (tim|phổi|gan|thận|máu)|(bị|hay|thấy|đang) (đau|tức) ngực|(bị|hay|đang) khó thở(?! (vì|quá vì|với))", "suc_khoe_the_chat"),
+    # SK-1 (2026-11-04): triệu chứng cấp nói không có "bị / đang" ("Tôi đau ngực khó thở quá") → khuyên đi khám ngay.
+    (r"(?:^|[,.!?;] )" + _AI_KD + r" (dau|tuc|nhoi) nguc|(dau|tuc|nhoi) nguc .{0,12}kho tho|kho tho (qua|lam|that su)" + _H,
+     r"(?:^|[,.!?;] )" + _AI + r" (đau|tức|nhói) ngực|(đau|tức|nhói) ngực .{0,12}khó thở|khó thở (quá|lắm|thật sự)" + _H,
+     "suc_khoe_the_chat"),
     (r"(be|con|chau|bi) .{0,15}(sot cao|co giat)|co giat", r"(bé|con|cháu|bị|đang) .{0,15}sốt cao|sốt cao (co giật|liên tục|mấy ngày|không hạ|không dứt)|co giật", "suc_khoe_the_chat"),
     (r"(bi|benh|con|be|chau) .{0,12}dong kinh", r"động kinh", "suc_khoe_the_chat"),
     (r"tu ky(?! luat)", r"tự kỷ(?! luật)", "suc_khoe_the_chat"),
@@ -263,4 +267,41 @@ def tu_choi(raw: str) -> str | None:
     for k, c, loai in TU_CHOI:
         if _khop(k, c, cd, kd, co_dau):
             return loai
+    return None
+
+
+# ------------------------------------------------------------------ SK-1: câu từ chối thuộc nhóm sức khoẻ
+# Chính sách SK-1 (chủ dự án duyệt 2026-11-04): câu NÊU tên bệnh / bộ phận ("tôi có bị … không", "đoán bệnh") vẫn không
+# được xác nhận hay phủ nhận, nhưng lời đáp gợi HỆ CƠ QUAN + đi khám để bác sĩ kiểm tra (thay câu "ngoài phạm vi").
+# Giữ lời từ chối cũ (không đổi): sống chết / tuổi thọ, bỏ thuốc / chữa trị / mổ, thai nhi, hỏi lành hay ác của khối
+# đã có; triệu chứng cấp → khuyên đi khám NGAY.
+_CAP_CUU = [(r"(dau|tuc|nhoi) nguc|kho tho(?! (vi|qua vi|voi))|sot cao|co giat|ngat xiu|bat tinh|liet nua nguoi",
+             r"(đau|tức|nhói) ngực|khó thở(?! (vì|quá vì|với))|sốt cao|co giật|ngất xỉu|bất tỉnh|liệt nửa người")]
+_GIU_TU_CHOI = [
+    (r"chet|qua doi|tu vong|(co|con) qua khoi|qua (duoc|noi) (khong|ko|nam)|song (duoc|qua|den)|con bao lau|tho (bao|duoc)"
+     r"|bao gio .{0,12}mat",
+     r"chết|qua đời|tử vong|(có|còn) qua khỏi|qua (được|nổi) (không|ko|năm)|sống (được|qua|đến)|còn bao lâu|thọ (bao|được)"
+     r"|bao giờ .{0,12}mất"),
+    (r"(bo|ngung|dung) (uong )?thuoc|thuoc nam|hoa tri|xa tri|dieu tri|chua (duoc|khoi|bang)|khoi (duoc )?benh|cho khoi"
+     r"|phau thuat|(nen|co nen) mo|chay than|nhap vien|uong thuoc gi",
+     r"(bỏ|ngưng|ngừng|dừng) (uống )?thuốc|thuốc nam|(hoá|hóa) trị|xạ trị|điều trị|chữa (được|khỏi|bằng)|khỏi (được )?bệnh"
+     r"|cho khỏi|phẫu thuật|(nên|có nên) mổ|chạy thận|nhập viện|uống thuốc gì"),
+    (r"thai nhi|(co|mang) thai|thai (\d|may|thang|ky)|mang bau|di tat|(hoi chung|bi) down|be .{0,10}(sinh ra|trong bung)",
+     r"thai|mang bầu|dị tật|(hội chứng|bị) down|bé .{0,10}(sinh ra|trong bụng)"),
+    (r"lanh hay ac|giai doan (\d|cuoi|dau)|tu ky|dong kinh", r"lành hay ác|giai đoạn (\d|cuối|đầu)|tự kỷ|động kinh"),
+]
+_SUC_KHOE_KD = re.compile(r"(?<!\w)(benh|ung thu|khoi u|tieu duong|vo sinh|suc khoe|dau da day|xo gan|suy than)(?!\w)")
+
+
+def nhom_suc_khoe(raw: str) -> str | None:
+    """Câu đã bị xếp từ chối: 'cap_cuu' (triệu chứng cấp — khuyên đi khám ngay) · 'hoi_benh' (hỏi có bệnh / đoán bệnh —
+    gợi hệ cơ quan + đi khám) · None (giữ lời từ chối cũ: sống chết, chữa trị, thai nhi, may rủi…)."""
+    cd, kd, co_dau = _hai_ban(raw)
+    if any(_khop(k, c, cd, kd, co_dau) for k, c in _GIU_TU_CHOI):
+        return None
+    if any(_khop(k, c, cd, kd, co_dau) for k, c in _CAP_CUU):
+        return "cap_cuu"
+    loai = tu_choi(raw)
+    if loai == "suc_khoe_the_chat" or (loai is None and _SUC_KHOE_KD.search(kd)):
+        return "hoi_benh"
     return None
