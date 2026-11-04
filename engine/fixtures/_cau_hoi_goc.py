@@ -513,9 +513,23 @@ NHOM = [
     ("ngoai_pham_vi", "du_doan_cu_the", "du_doan", "ban_than", "tu_choi_nhe",
      [], [
         "Năm nào tôi chết?",
+    ]),
+    # CY-1 (chủ dự án đổi 2026-11-04): câu lo một mảng đời không còn từ chối — trả lời bằng năm nên chú ý (năm cá nhân)
+    # + việc nên làm + ranh giới (an toàn giao thông / luật sư), mở bằng "không ai nói chắc được".
+    ("thoi_van", "chu_y_nam", "thoi_diem", "ban_than", "tra_loi_kem_luu_y",
+     ["nam_ca_nhan"], [
         "Tôi có bị tai nạn năm nay không?",
+    ]),
+    ("ban_than", "chu_y_nam", "du_doan", "ban_than", "tra_loi_kem_luu_y",
+     ["nam_ca_nhan"], [
         "Tôi có thắng kiện không?",
+    ]),
+    ("tinh_yeu", "chu_y_nam", "du_doan", "ban_than", "tra_loi",
+     ["duong_doi"], [
         "Chồng tôi có ngoại tình không, cho tôi biết chắc chắn.",
+    ]),
+    ("ngoai_pham_vi", "du_doan_cu_the", "du_doan", "ban_than", "tu_choi_nhe",
+     [], [
         "Bao giờ bố tôi khỏi bệnh?",
     ]),
     ("ngoai_pham_vi", "tuyen_dung", "quyet_dinh", "nguoi_khac", "tu_choi_nhe",
@@ -976,12 +990,23 @@ NHOM += [
         "Tôi đọc thấy đúng hết, vậy có phải thần số học chính xác?",
     ]),
     # ---------------------------------------------------- NGOÀI PHẠM VI (bổ sung)
+    # CY-1: "cho tôi ngày cụ thể" → không nói chắc được, trả lời bằng nhịp thời gian; "năm nào tôi ly hôn" → năm nên chú
+    # ý tình cảm + ranh giới (không đoán chia tay).
+    ("thoi_van", "chu_y_nam", "thoi_diem", "ban_than", "tra_loi",
+     ["nam_ca_nhan"], [
+        "Ngày nào tôi được thăng chức, cho tôi ngày cụ thể.",
+    ]),
     ("ngoai_pham_vi", "du_doan_cu_the", "du_doan", "ban_than", "tu_choi_nhe",
      [], [
-        "Ngày nào tôi được thăng chức, cho tôi ngày cụ thể.",
         "Người yêu tôi tên gì, sinh năm nào?",
         "Tôi sẽ có mấy đứa con?",
+    ]),
+    ("tinh_yeu", "chu_y_nam", "du_doan", "ban_than", "tra_loi_kem_luu_y",
+     ["nam_ca_nhan"], [
         "Năm nào tôi ly hôn?",
+    ]),
+    ("ngoai_pham_vi", "du_doan_cu_the", "du_doan", "ban_than", "tu_choi_nhe",
+     [], [
         "Giá vàng tháng sau lên hay xuống theo thần số?",
         "Đội nào thắng trận chung kết?",
     ]),

@@ -553,6 +553,40 @@ def van_template(goi: dict) -> str:
     return "\n\n".join(doan)
 
 
+def _them_chu_y(goi: dict, pl: dict, nha: dict | None, nam_xem: int) -> None:
+    """CY-1: câu hỏi về điều người dùng lo ở một mảng (tiền bạc, giấy tờ, nhà cửa… / vận hạn) → mục "năm nên chú ý":
+    sao lưu niên tới phía cửa chính (cùng hàm báo cáo Nhà của bạn) + việc + ranh giới; đứng đầu (sau sao hạn, nhà riêng)."""
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    t = pl["cau_chuan_hoa"]
+    mg = cyn.mang_hoi(t)
+    if not mg or mg == "suc_khoe":
+        return
+    huong = None
+    if nha:
+        try:
+            from app.luangiai import phongthuy_doi_song as pds  # noqa: PLC0415
+            huong = pds._huong_nha(nha)[0]
+        except (ValueError, TypeError, KeyError):
+            huong = None
+    if mg == "van_han":
+        if not huong:
+            return
+        from app.calc import huyen_khong as hk  # noqa: PLC0415
+        q = next((k for k, v in hk.QUAI.items() if v[1] == huong), None)
+        if not q:
+            return
+        m = cyn.muc_van_han({x: cyn.phongthuy_nam(q, nam_xem, x, cyn.SO_NAM, f"cửa chính ({huong})")
+                             for x in ("tien_bac", "giay_to", "nha_cua")}, [nam_xem, nam_xem + 1], cyn.noi_chac(t))
+    else:
+        nd = cyn.phongthuy_doan_hoi(mg, nam_xem, huong)
+        if cyn.noi_chac(t):
+            nd = f"{cyn.kb.mau('khong_noi_chac')} {nd}"
+        m = {"loai": "ghi_chu", "ma": "chu_y_nam", "mang": mg, "noi_dung": nd, **cyn.kb.meta()}
+    i = next((k for k, x in enumerate(goi["muc"]) if x.get("loai") not in ("sao_han", "nha_rieng")), len(goi["muc"]))
+    goi["muc"].insert(i, m)
+    chung.ket(goi)
+
+
 def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = None,
             dung_llm: bool = False, nha: dict | None = None) -> dict:
     """`sinh` = {"nam": int, "gioi_tinh": "nam"|"nu", "ngay": date|None}. `nha` (Y6) = hồ sơ nhà trên máy người hỏi
@@ -590,6 +624,8 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         if (g := chung.muc_suc_khoe_hoi(pl["cau_chuan_hoa"])):
             goi["muc"].insert(1, g)
         chung.ket(goi)
+    if pl["xu_ly"] not in chung.DAC_BIET and not goi["can_them"]:
+        _them_chu_y(goi, pl, nha, nam_xem)                                  # CY-1
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     # EN-3b: đoạn mở đầu Phong thuỷ CHƯA bật — trên holdout đóng băng trả lời thẳng lùi 72 → 68 % khi bật (đoạn mở đầu đẩy
     # đoạn bố trí ra khỏi đoạn 1–2). Hàm `mo_dau.pt_mo` giữ lại; bật khi sửa được bằng bộ dev mà holdout không lùi.

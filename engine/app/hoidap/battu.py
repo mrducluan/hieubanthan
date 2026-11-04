@@ -91,7 +91,9 @@ CHU_DE = [
                    r"su nghiep", r"cong danh", r"thang chuc", r"cong viec", r"lam quan", r"mat viec", r"doi viec",
                    r"cong ty", r"gop von", r"ngheo", r"giu duoc", r"hao tien", r"bat dong san", r"mua dat", r"ban (dat|nha)",
                    r"tra no", r"(?<!\w)no(?!\w)", r"cua hang", r"nhan loi", r"mua nha", r"khoi nghiep", r"khai truong", r"mo (cua hang|quan|tiem|shop|cong ty|xuong)", r"(tang|deal|xin) luong", r"(?<!\w)luong (thang|cao|thap|bong)",
-                   r"hop lam (?!nha|dau|ban)", r"lam chu", r"nhan vien", r"(?<!\w)it(?!\w)", r"lam thue"]),
+                   r"hop lam (?!nha|dau|ban)", r"lam chu", r"nhan vien", r"(?<!\w)it(?!\w)", r"lam thue",
+                   # CY-1: lo chuyện tiền / việc ("có bị phá sản không", "có mất việc không")
+                   r"pha san", r"vo no", r"mat (het )?tien", r"thua lo", r"lo von", r"hao tai", r"sa thai", r"that nghiep"]),
     ("ngu_hanh", [r"thieu hanh", r"ngu hanh", r"vuong suy", r"than vuong", r"than nhuoc", r"dung than",
                   r"hy than", r"ky than", r"mau gi", r"huong gi", r"bo sung", r"can bang", r"khi hau",
                   r"hanh gi", r"lan at", r"nhat chu toi yeu", r"(manh|vuong) hay (yeu|nhuoc)",
@@ -468,7 +470,7 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
     return chung.ket(goi)
 
 
-def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -> None:
+def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -> dict | None:
     """MT-ĐS B2: mượn chương báo cáo đời sống Bát tự cho chủ đề của câu hỏi (câu vận → "Năm nay")."""
     from app.luangiai import battu_doi_song as bds  # noqa: PLC0415
     t = pl["cau_chuan_hoa"]
@@ -478,21 +480,22 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict)
     else:
         chuong = dsm.CHU_DE_CHUONG.get(pl["chu_de"] or "")
         if pl["chu_de"] == "nghe_tien" and chung.co(t, [r"tien", r"giau", r"ngheo", r"tai van", r"tich luy", r"dau tu", r"(?<!\w)no(?!\w)",
-                                                        r"mua dat", r"ban (dat|nha)", r"tai loc", r"hao"]):
+                                                        r"mua dat", r"ban (dat|nha)", r"tai loc", r"hao",
+                                                        r"pha san", r"vo no", r"mat (het )?tien", r"thua lo", r"lo von"]):
             chuong = "tien_bac"
     # EN-3b: điều được hỏi (danh mục cố định) cụ thể hơn chủ đề phân loại ("khi nào tài vận khởi sắc" → Tiền bạc, không
     # phải Công việc) → mượn chương của điều được hỏi khi báo cáo có chương đó; câu năm/vận giữ "Năm nay" khi không rõ.
     cd = mo_dau.chuong_cua(mo_dau.dieu_hoi(t, pl.get("cau_goc"), chuong))
     if not chuong and not cd:
-        return
+        return None
     try:
         bc = bds.lap(sinh, ngay_xem, ls=ls)
     except Exception:  # noqa: BLE001
-        return
+        return None
     m = (dsm.muc_doi_song(bc, cd, lo_so=bool(pl.get("lo_so"))) if cd and cd != chuong else None) \
         or dsm.muc_doi_song(bc, chuong, lo_so=bool(pl.get("lo_so")))
     if not m:
-        return
+        return bc
     if pl.get("lo_so"):
         goi["muc"].insert(1 if goi["muc"] and goi["muc"][0]["loai"] == "tu_tru" else 0, m)
     else:
@@ -500,6 +503,28 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict)
     if m.get("chuong") == "suc_khoe" and (g := chung.muc_suc_khoe_hoi(t)):       # SK-1: câu nhắc bộ phận → đi khám
         goi["muc"].insert(goi["muc"].index(m) + 1, g)
     chung.ket(goi)
+    return bc
+
+
+def _them_chu_y(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict, bc: dict | None) -> None:
+    """CY-1: câu hỏi về điều người dùng lo ở một mảng → năm nên chú ý của mảng (đọc lại hộp báo cáo — cùng hàm; không
+    có hộp thì `chu_y_nam.battu_nam` trên dòng mười năm của báo cáo)."""
+    from app.luangiai import battu_doi_song as bds  # noqa: PLC0415
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    dong: list[dict] = []
+
+    def _dong() -> list[dict]:
+        if not dong:
+            dong.extend(bds.dong_nam_cua(sinh, ngay_xem, ls))
+        return dong
+
+    nam0 = chung.nam_xem_hh(None, ngay_xem, "")[0]
+
+    def tinh(mg: str) -> list[dict]:
+        x = cyn.tu_bao_cao((bc or {}).get("chuong"), mg, nam0)
+        return x if x is not None else cyn.battu_nam(ls, _dong(), mg)
+
+    chung.them_chu_y(goi, pl, tinh, nam0, "Theo tứ trụ", nam_hoi=chung.nam_hoi_hh(pl["cau_chuan_hoa"], ngay_xem, "lap_xuan"))
 
 
 # ------------------------------------------------------------------ NARRATIVE (template)
@@ -684,8 +709,9 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
                       sinh.get("utc_lich", config.CALENDAR_MERIDIAN_TZ))
     hien_tai = ngay_xem if not pl["nam_xem"] and nam_xem == chung.nam_xem_hh(None, ngay_xem, "")[0] else None
     goi = goi_bang_chung(pl, ls, sinh["gioi_tinh"] if sinh else None, nam_xem, hien_tai)
+    bc_ds = None
     if ls is not None and pl["loai"] in ("la_so", "van") and not goi["can_them"]:
-        _them_doi_song(goi, pl, sinh, ngay_xem, ls)
+        bc_ds = _them_doi_song(goi, pl, sinh, ngay_xem, ls)
     if pl.get("sao_han") and sinh and not goi["can_them"]:
         d = sinh["lich"]
         goi["muc"].insert(1 if goi["muc"] and goi["muc"][0]["loai"] == "tu_tru" else 0,
@@ -693,6 +719,7 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         chung.ket(goi)
     if ls is not None and sinh and not goi["can_them"] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"):
         _them_so_nam(goi, pl, sinh, ngay_xem, ls)
+        _them_chu_y(goi, pl, sinh, ngay_xem, ls, bc_ds)                  # CY-1
     if ls is not None and sinh:
         chung.them_cua_so(goi, pl, "battu", sinh, ngay_xem, ls, ("tu_tru", "sao_han"))   # EN-5.4
     if chung.xac_nhan(pl["cau_chuan_hoa"]) and goi["muc"]:
