@@ -51,7 +51,9 @@ def test_co_doan_khi_khop(cau, sinh, ma):
     m = kyb.lay(ma)
     d = _doan(kq)
     assert d and d[0].startswith(ybs.TIEN_TO_HOP)
-    assert m["loi_doi_thuong"][1:].rstrip(".") in d[0] and m["viec_nen_lam"][1:].rstrip(".") in d[0]
+    # lời hiển thị = bản tự đứng được (`yb.loi_hien`, review CY-1: không "nét này" trơ trọi)
+    loi = (m.get("loi_ro") or m["loi_doi_thuong"]).split("{mang}")[-1]
+    assert loi[1:].rstrip(".") in d[0] and ybs.yb.viec_hien(m)[1:].rstrip(".") in d[0]
     assert sum(p.startswith(ybs.TIEN_TO_HOP) for p in d) == 1          # MỘT đoạn ý chung
     assert sum(p.startswith(ybs.TIEN_TO_GOC) for p in d) <= 1
 
@@ -166,7 +168,9 @@ def test_cau_phuong_phap(cau, ma):
     assert not kq["can_them"]
     m = [x for x in kq["bang_chung"]["muc"] if x.get("loai") == "phuong_phap"]
     assert m and m[0]["ma"] == ma
-    assert kyb.lay(ma)["y_goc_tom_tat"][:30] in kq["cau_tra_loi"]
+    # review CY-1: bản tóm ý nguồn (`y_goc_tom_tat`) là nội bộ — câu trả lời dùng lời đời thường + việc nên làm
+    assert kyb.lay(ma)["loi_doi_thuong"][:30] in kq["cau_tra_loi"]
+    assert kyb.lay(ma)["y_goc_tom_tat"][:30] not in kq["cau_tra_loi"]
     assert hoi_van.kiem_tra_dau_ra(m[0]["noi_dung"], kq["bang_chung"], kq["cau_tra_loi"]) == []
 
 
