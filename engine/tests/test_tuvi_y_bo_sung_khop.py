@@ -141,8 +141,9 @@ def test_do_sang_chinh_va_phu():
     assert not yb.khop(_m(sao=["Thái Âm"], cung="Mệnh", do_sang="sang"), _nc(ls))
     assert yb.khop(_m(sao=["Thái Âm"], cung="Thiên Di", do_sang="sang"), _nc(ls))
     assert yb.khop(_m(sao=["Thái Âm"], cung="Mệnh", do_sang=["sang", "ham"]), _nc(ls))
-    assert not yb.khop(_m(sao=["Thái Âm"], cung="Mệnh", do_sang=["sang", "ham"]),
-                       _nc(_la({"Mệnh": [("Thái Âm", "Bình")]})))                    # Bình: không thuộc đầu nào
+    # cả hai đầu = luật nói cả khi sáng lẫn khi hãm → không ràng buộc độ sáng (cả Bình cũng khớp; gộp với bộ hỏi đáp)
+    assert yb.khop(_m(sao=["Thái Âm"], cung="Mệnh", do_sang=["sang", "ham"]), _nc(_la({"Mệnh": [("Thái Âm", "Bình")]})))
+    assert not yb.khop(_m(sao=["Thái Âm"], cung="Mệnh", do_sang="sang"), _nc(_la({"Mệnh": [("Thái Âm", "Bình")]})))
     # phụ tinh: bảng lối Việt theo chi (Kình Dương đắc ở Thìn Tuất Sửu Mùi, hãm ở Dần) — Mệnh ở Dần
     ls2 = _la({"Mệnh": ["Kình Dương"]})
     assert yb.khop(_m(sao_mot_trong=["Kình Dương", "Đà La"], cung="Mệnh", do_sang="ham"), _nc(ls2))
@@ -368,7 +369,7 @@ CHUA_TINH = {
     "yb.cung.phu_the_doc_cung_phuc_duc", "yb.hoa.khoa_nguoi_kinh_doanh",
     # ghi chú chưa cơ học hoá (cần chấm điểm giai đoạn / so sánh / định nghĩa riêng)
     "yb.pp.dau_kho_sau_thuan", "yb.pp.nam_thuan_de_chu_quan", "yb.cung.thien_di_ra_ngoai", "yb.cung.sao_dung_cho",
-    "yb.cung.no_boc_tai_minh_quyen", "yb.cung.qua_ky_moi_cuoi", "yb.hoa.khoa_den_muon",
+    "yb.cung.no_boc_tai_minh_quyen", "yb.hoa.khoa_den_muon",
     # sao engine không giữ trong lá số gọn (Tam Thai, Bát Toạ)
     "yb.sao.thien_phu_khong_tu_giai",
 }

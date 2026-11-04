@@ -147,10 +147,12 @@ def _moc_hoi(t: str, hom_nay: dt.date) -> str | None:
 
 def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
     t = chung.chuan_hoa_cau(cau_hoi)
-    kq = {"cau_chuan_hoa": t, "che_do": che_do, "que_nhac": _que_nhac(cau_hoi), "hao_nhac": _hao_nhac(cau_hoi),
+    kq = {"cau_chuan_hoa": t, "cau_goc": cau_hoi, "che_do": che_do, "que_nhac": _que_nhac(cau_hoi), "hao_nhac": _hao_nhac(cau_hoi),
           "giai_thich": _giai_thich_khop(t), "linh_vuc": chung.linh_vuc_doi_song(t),
           "truong_phai": None, "dung_than": None, "xu_ly": "tra_loi", "loai": None}
     db = chung.dac_biet(t, cau_hoi)
+    if not db and chung.co(t, chung.KD_SUC_KHOE):
+        db = "tu_choi_nhe"          # SK-1: Kinh Dịch không có chương sức khoẻ → không đọc quẻ cho câu sức khoẻ bản thân
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq

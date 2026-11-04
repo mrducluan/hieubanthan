@@ -366,7 +366,7 @@ def phan_loai(cau_hoi: str) -> dict:
     t = chuan_hoa_cau(cau_hoi)
     ngay = _trich_ngay(t)
     so_nhac, cap = _trich_so(t)
-    kq = {"cau_chuan_hoa": t, "gioi_thieu": gioi_thieu, "ngay_nhac": ngay, "so_nhac": so_nhac, "cap_nhac": cap,
+    kq = {"cau_chuan_hoa": t, "cau_goc": cau_hoi, "gioi_thieu": gioi_thieu, "ngay_nhac": ngay, "so_nhac": so_nhac, "cap_nhac": cap,
           "giai_thich": [], "tu_choi": None}
 
     def xong(lv, dt, xl, yd):
@@ -678,7 +678,7 @@ def _them_phu(muc: list, cs: dict, t: str, lv: str, so_nhac: dict):
             muc.append({"loai": "thai_do", "so": so, "noi_dung": n, **kb.meta_phu()})
 
 
-def _mau_suc_khoe_ts(nhom: str, t: str, nguoi: dict | None, ngay_xem: _dt.date) -> str:
+def _mau_suc_khoe_ts(nhom: str, t: str, nguoi: dict | None, ngay_xem: _dt.date, cau_goc: str | None = None) -> str:
     """SK-1 (2026-11-04): câu sức khoẻ ở Thần số. Triệu chứng cấp → đi khám ngay. Câu hỏi có bệnh / sức khoẻ thế nào →
     Thần số không gắn với bộ phận cơ thể nên không trả lời có hay không; nêu hệ cơ quan nếu câu hỏi nhắc (đi khám), và
     năm cá nhân tới có chủ đề nghỉ ngơi / chăm sức khoẻ (KB `suc_khoe_kb.nam_ca_nhan`, mốc 1/1 như trang đọc) + khám tổng
@@ -687,12 +687,16 @@ def _mau_suc_khoe_ts(nhom: str, t: str, nguoi: dict | None, ngay_xem: _dt.date) 
     from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
     if nhom == "cap_cuu":
         return skb.mau("cap_cuu")
+    if nhom == "nguoi_than":           # review SK-1: không lấy năm cá nhân của người hỏi để nói về sức khoẻ người thân
+        return f"{skb.mau('nguoi_than')} {skn.mien_tru()}"
     phan = ["Thần số học không gắn con số với bộ phận cơ thể nào, nên không trả lời được cơ thể bạn có vấn đề hay không — "
             "chỉ bác sĩ thăm khám mới trả lời được."]
     he = skb.he_cau_hoi(t)
     if he:
         phan.append(f"Nếu bạn đang lo về {he['he']}, hãy đi {he['kham']} để bác sĩ kiểm tra sớm.")
-    if (ds := _sk_nam_ts(nguoi, ngay_xem.year)):
+    # Câu hỏi CÓ / KHÔNG bệnh ("năm sau tôi có mắc bệnh không"): không nêu năm — "năm X nên chú ý sức khoẻ" đặt cạnh câu
+    # đó đọc thành "năm X sẽ bệnh" (review SK-1). Câu nhắc bộ phận ("hay đau dạ dày") vẫn nhận nhịp năm.
+    if not _at.hoi_benh(cau_goc or t) and (ds := _sk_nam_ts(nguoi, ngay_xem.year)):
         phan.append("Điều con số nói được là nhịp sống. " + ds)
     phan.append(skn.mien_tru())
     return " ".join(phan)
@@ -729,7 +733,7 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
         goi["mau"] = kb.mau(pl["tu_choi"] or "du_doan_cu_the")
         nhom = _at.nhom_suc_khoe(pl.get("cau_goc") or t) if pl["tu_choi"] == "suc_khoe_the_chat" else None
         if nhom:
-            goi["mau"] = _mau_suc_khoe_ts(nhom, t, nguoi, ngay_xem)
+            goi["mau"] = _mau_suc_khoe_ts(nhom, t, nguoi, ngay_xem, pl.get("cau_goc"))
         return goi
 
     muc = goi["muc"]

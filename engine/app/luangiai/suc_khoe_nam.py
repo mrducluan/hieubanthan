@@ -261,9 +261,12 @@ def thanso_nam(nam_ca_nhan_cua: dict[int, int], nam_hien_tai: int | None = None)
 def doan_hoi_benh(t_khong_dau: str, he_la_so: dict | None = None) -> str:
     """Câu hỏi NÊU tên bệnh / bộ phận ("tôi có bị … không"): không xác nhận, không phủ nhận — nói hệ cơ quan liên quan
     (theo câu hỏi; không rõ thì theo lá số) + đi khám để bác sĩ kiểm tra. Không nhắc lại tên bệnh."""
-    he = _tron(kb.he_cau_hoi(t_khong_dau)) or _tron(he_la_so)
+    he = _tron(kb.he_cau_hoi(t_khong_dau))
     if he:
         return kb.mau("hoi_benh").format(he=he["he"], kham=he["kham"])
+    he = _tron(he_la_so)
+    if he:                     # câu không nêu bộ phận → chỉ nói phần cơ thể LÁ SỐ nhắc chăm sóc (không "bạn đang lo về …")
+        return f"{kb.mau('hoi_benh_chung')} {kb.mau('he_chart').format(he=he['he'], kham=he['kham'])}"
     return kb.mau("hoi_benh_chung")
 
 

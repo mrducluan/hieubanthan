@@ -246,6 +246,8 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
         const toiDa = Math.floor((dayCot - yCot) / DONG) + 1;
         const luuSao = coLuu ? vanHan.luu_nien.sao[i] ?? [] : [];
         const laDh = lop.dai_han && vanHan?.dai_han.chi_so === i;
+        // TV-DT: tuổi còn trong đồng hạn → ô của cung đồng hạn mang nhãn "Đồng hạn", không gọi là đại hạn.
+        const nhanDh = vanHan?.dai_han.dong_han ? "Đồng hạn" : "Đại hạn";
         const laLn = lop.luu_nien && vanHan?.luu_nien.chi_so === i;
         const laTh = lop.luu_nien && vanHan?.tieu_han.chi_so === i;
         const nhan = [c.ten.toUpperCase(), c.la_than ? "THÂN" : null].filter(Boolean).join(" · ");
@@ -266,10 +268,10 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
             <g className={CHI_TIET}>
             {(laDh || laLn || laTh) && (
               <g>
-                {[laDh && "Đại hạn", laLn && "Lưu niên", laTh && "Tiểu hạn"].filter(Boolean).map((t, k, ds) => (
+                {[laDh && nhanDh, laLn && "Lưu niên", laTh && "Tiểu hạn"].filter(Boolean).map((t, k, ds) => (
                   <g key={String(t)} transform={`translate(${W / 2 - (ds.length * 74 - 4) / 2 + k * 74},${r === 0 ? 1 : -6})`}
-                    data-nhan-han={t === "Đại hạn" ? "dai_han" : t === "Lưu niên" ? "luu_nien" : "tieu_han"}>
-                    <rect width={70} height={16} rx={8} fill={t === "Đại hạn" ? "var(--ls-thuy)" : t === "Lưu niên" ? "var(--ls-nhan)" : "var(--ls-mo)"} />
+                    data-nhan-han={t === nhanDh ? "dai_han" : t === "Lưu niên" ? "luu_nien" : "tieu_han"}>
+                    <rect width={70} height={16} rx={8} fill={t === nhanDh ? "var(--ls-thuy)" : t === "Lưu niên" ? "var(--ls-nhan)" : "var(--ls-mo)"} />
                     <text x={35} y={11.8} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="var(--ls-nen)">{String(t).toUpperCase()}</text>
                   </g>
                 ))}
@@ -319,7 +321,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
               </>
             )}
             </g>
-            <OGon c={c} phai={phaiDoSang} hh={hhCung.filter((b) => b.chinh_tinh)} han={[laDh && "Đại hạn", laLn && "Lưu niên", laTh && "Tiểu hạn"].filter((t): t is string => Boolean(t))} />
+            <OGon c={c} phai={phaiDoSang} hh={hhCung.filter((b) => b.chinh_tinh)} han={[laDh && nhanDh, laLn && "Lưu niên", laTh && "Tiểu hạn"].filter((t): t is string => Boolean(t))} />
           </g>
         );
       })}
@@ -361,7 +363,7 @@ function OGon({ c, phai, han, hh }: { c: CungT; phai: PhaiDoSang; han: string[];
       }) : <text x={W / 2} y={96} textAnchor="middle" fontSize={CO_GON} fontStyle="italic" fill="var(--ls-mo)">vô chính diệu</text>}
       {han.map((t, k) => (
         <text key={t} x={W / 2} y={H - 22 - (han.length - 1 - k) * 32} textAnchor="middle" fontSize={CO_GON} fontWeight={700}
-          fill={t === "Đại hạn" ? "var(--ls-thuy)" : t === "Lưu niên" ? "var(--ls-nhan)" : "var(--ls-mo)"}>{t}</text>
+          fill={t === "Đại hạn" || t === "Đồng hạn" ? "var(--ls-thuy)" : t === "Lưu niên" ? "var(--ls-nhan)" : "var(--ls-mo)"}>{t}</text>
       ))}
     </g>
   );

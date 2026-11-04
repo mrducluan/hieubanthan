@@ -1,0 +1,47 @@
+{
+ "_ghi_chu": "SK-1 (review độc lập 2026-11-04) — bộ câu đóng băng cho lỗi do đổi chính sách sức khoẻ. Chạy ở cả 5 mảng hỏi đáp (Thần số, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ) + /v1/hoi/dac-biet. hoi_benh: câu hỏi có/không mắc bệnh — không xác nhận, không phủ nhận, không nêu mức chương, khuyên đi khám. cap_cuu: triệu chứng cấp — đi khám ngay / 115, kể cả khi câu nói tới chết. nguoi_than: sức khoẻ người khác — không đọc lá số / con số của người hỏi. binh_thuong: câu đời thường dùng chữ trùng ('chưa' ≠ 'chữa', 'khó thở' nghĩa bóng) — trả lời bình thường. suc_khoe_chung: sức khoẻ của chính mình — trả lời bằng chương sức khoẻ + năm nên chú ý (không áp cho Kinh Dịch).",
+ "hoi_benh": [
+  "Năm sau tôi có mắc bệnh không",
+  "Tôi có mắc bệnh gì nặng không",
+  "Tôi có bị bệnh gì không?",
+  "Năm 2027 tôi có bị bệnh không?",
+  "nam sau toi co mac benh khong",
+  "Tôi có bị ốm nặng không"
+ ],
+ "cap_cuu": [
+  "Tôi khó thở quá, sắp chết rồi",
+  "Đau ngực dữ dội, tôi có chết không",
+  "Tôi ngất xỉu mấy lần rồi",
+  "Tôi đau ngực khó thở quá",
+  "Em đang bị khó thở, xem tử vi giúp",
+  "Con em sốt cao co giật đêm qua",
+  "toi kho tho qua, sap chet roi"
+ ],
+ "nguoi_than": [
+  "Mẹ tôi bị bệnh gì?",
+  "Bố tôi năm nay sức khoẻ thế nào",
+  "Mẹ tôi có bị tiểu đường không?",
+  "Sức khoẻ của bố mẹ tôi năm sau ra sao?",
+  "Chồng tôi có bị bệnh gì không"
+ ],
+ "binh_thuong": [
+  "Công việc của tôi vẫn chưa ra sao cả, năm sau có khá hơn không",
+  "Chuyện tình cảm chưa thế nào, có nên chờ không",
+  "cong viec cua toi van chua ra sao ca, nam sau co kha hon khong",
+  "Áp lực tiền nhà làm tôi khó thở quá, năm sau có đỡ không",
+  "Không khí gia đình khó thở thật sự",
+  "ap luc tien nha lam toi kho tho qua, nam sau co do khong",
+  "Mẹ tôi ốm, tôi có nên nghỉ việc về quê chăm mẹ không",
+  "Thị trường nhà đất sốt cao, có nên mua nhà năm nay",
+  "Tôi bị ngất ngây vì người ấy, có nên tỏ tình không",
+  "Tôi muốn tìm tài xế, tháng nào tốt",
+  "Người yêu tôi hay ốm vặt, có hợp nhau không",
+  "Anh ấy có ôm tôi không"
+ ],
+ "suc_khoe_chung": [
+  "Sức khoẻ của tôi năm nay thế nào",
+  "Năm nào tôi nên chú ý sức khoẻ?",
+  "Sức khoẻ năm 2027 của tôi thế nào?",
+  "Tôi hay bị đau dạ dày, lá số nói gì?"
+ ]
+}
