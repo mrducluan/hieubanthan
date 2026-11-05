@@ -85,8 +85,46 @@ suất tải với các trang nhóm A.
 
 | Mã | Việc | Lợi | Đánh đổi |
 |---|---|---|---|
-| **Q-I1** | Thu cửa sổ index trang ngày −7 … +400 → **−7 … +90** ngay (thay mốc 01/02/2027 của Q4), sitemap việc-tháng tới **+6 tháng** (thay +24 của NAM-3) | Bớt ~410 URL nhóm C khỏi hàng đợi | Người tìm ngày cưới xa hơn 3 tháng vào trang tháng / trang việc thay vì trang ngày |
-| **Q-I2** | Bỏ Googlebot khỏi `htmlLimitedBots` (Googlebot chạy JS, Next mặc định cũng không xếp Googlebot vào nhóm này) | Googlebot nhận byte đầu sớm ~0,25 giây | Metadata tới trong luồng; phải chạy lại `kiem-tra-seo.mjs` + Kiểm tra URL trực tiếp để chắc thẻ title / canonical vẫn đúng |
+| **Q-I1** ✅ đã làm 05/11 | Thu cửa sổ index trang ngày −7 … +400 → **−7 … +90** ngay (thay mốc 01/02/2027 của Q4), sitemap việc-tháng tới **+6 tháng** (thay +24 của NAM-3) | Bớt ~410 URL nhóm C khỏi hàng đợi | Người tìm ngày cưới xa hơn 3 tháng vào trang tháng / trang việc thay vì trang ngày |
+| **Q-I2** ✅ đã làm 05/11 | Bỏ Googlebot khỏi `htmlLimitedBots` (Googlebot chạy JS, Next mặc định cũng không xếp Googlebot vào nhóm này) | Googlebot nhận byte đầu sớm ~0,25 giây | Metadata tới trong luồng; phải chạy lại `kiem-tra-seo.mjs` + Kiểm tra URL trực tiếp để chắc thẻ title / canonical vẫn đúng |
 | **Q-I3** | Cache HTML trang kiến thức / ngày / tuổi ở CDN (CSP theo hash / SRI hoặc PPR cho các trang này; trang công cụ giữ nonce) — việc SEO-K (4) để ngỏ "chờ số production"; số đã có ở mục 2 | Phản hồi ~1 giây → dưới 0,2 giây; bớt lượt chạy hàm Vercel | Việc lớn, đụng CSP-2; làm riêng một PR có e2e `csp.spec.ts` |
 
 Không khuyên: xoá trang nhóm A/B khỏi sitemap, đặt `noindex` hàng loạt, hay bấm yêu cầu lập chỉ mục từng URL con.
+
+## 5. Đối chiếu danh sách thật (file xuất Search Console 05/11) + Thống kê thu thập
+
+Chủ dự án xuất đủ danh sách (`Table.csv`, 862 URL). Số liệu báo cáo dừng ở **23/10** (`Chart.csv`: 132 → 607 ngày 13/10 → 856
+ngày 17/10 → 862 từ 20/10) — Search Console cập nhật báo cáo này chậm 1–2 tuần với site mới, nên các trang thêm sau 23/10
+(dấu hiệu trong nhà, năm 2027 theo tuổi, cung phi, trang ngày) chưa có trong danh sách.
+
+Chạy `phan-loai-gsc.mjs` trên danh sách:
+
+| Nhóm | URL | Kết luận |
+|---|---:|---|
+| **Không còn trong sitemap** — để chưa index là ĐÚNG | **190** | 92 trang hướng hợp tuổi theo năm sinh cũ (`/phong-thuy/huong-hop-tuoi/tuoi-{năm}-{nam\|nu}`, 308 về trang cung phi đúng giới, AUD-Q2) · 92 trang tuổi năm **2026** (`/xem-tuoi-lam-nha/2026/…`, `/tuoi-xong-dat/2026/…`: `noindex` vì AUD-Q1 chỉ index năm 2027) · 5 bài blog slug cũ có chữ "đ" (308 về slug không dấu, BLOG-7) · `/xem-ngay-tot/thang-10-2025` (ngoài cửa sổ, `noindex`) |
+| **A — phải index** (còn trong sitemap) | **563** | Gần như **toàn bộ kho kiến thức**: sao ở cung 168/168, 64/64 quẻ, tứ hoá 48/48, cặp số 45/45, số kép 43/43, mệnh theo năm 75/78, chính tinh, cung, ý nghĩa số, nghề, tình yêu, thập thần, nhật chủ, lá số mẫu… + 15 trang hub |
+| **B — index, chờ được** | **109** | 92 trang tuổi làm nhà / xông đất 2027 + 17 trang lịch tháng |
+| C (ngày, việc-tháng) | 0 | Không có trong danh sách (chưa vào báo cáo) |
+
+**Đọc ra:** tới 23/10 Google gần như **chưa tải trang kiến thức nào**. Đây là nhóm có giá trị nhất, nên việc cần làm là kéo suất
+thu thập về nhóm A — đúng hướng Q-I1 (bớt ~410 URL ngày / việc-tháng) + Q-I2 (trả trang nhanh hơn cho Googlebot) + yêu cầu lập
+chỉ mục bằng tay các hub còn trong danh sách:
+
+`/tu-vi/tu-hoa`, `/kinh-dich/que`, `/bat-tu/menh-theo-nam`, `/hop-doi/cap-so`, `/than-so/so-kep`, `/tu-vi/chinh-tinh`,
+`/tu-vi/cung`, `/than-so/y-nghia-so`, `/than-so/tinh-yeu`, `/than-so/nghe-nghiep`, `/than-so/nam-ca-nhan`, `/than-so/no-nghiep`,
+`/tu-vi/la-so-mau`, `/phong-thuy/huong-xau-nam` (`/tu-vi/sao-o-cung` không có trong danh sách — đã được tải).
+
+**Thống kê thu thập (ảnh chủ dự án gửi, 07/10 → 04/11):**
+
+- 2.260 lượt / ~4 tuần ≈ **50–100 lượt mỗi ngày**, 98 % trả 200, không lỗi máy chủ đáng kể, host `www` chỉ 8 lượt → máy chủ khoẻ,
+  Google chỉ đang cho site mới suất nhỏ.
+- Thời gian phản hồi trung bình **673 ms**, vọt lên ~1.350 ms quanh 24–26/10 (đúng đợt Google tải nhiều nhất) rồi số lượt giảm
+  theo — Google hạ tốc độ khi máy chủ chậm. Q-I2 bớt ~0,1–0,25 giây mỗi trang; Q-I3 (cache HTML) mới đưa về dưới 200 ms.
+- Chỉ **44 % lượt là HTML**; 42 % JavaScript + 9 % CSS ("Page resource load" 51 %). Mỗi lần deploy, tên tệp JS đổi nên Googlebot
+  tải lại bộ JS để dựng trang. Không sửa gấp, nhưng gom deploy web (ít lần / ngày) cũng đỡ phần này; Q-I3 làm trang dựng sẵn
+  còn giúp nhiều hơn.
+- "Refresh" 58 % / "Discovery" 42 %: Google dành hơn nửa suất để tải lại trang đã biết (trang chủ, trang công cụ, trang ngày) —
+  thêm lý do thu nhóm C.
+
+Việc tiếp: 2–3 tuần sau khi deploy, xuất lại danh sách → `node web/scripts/phan-loai-gsc.mjs Table.csv`; nhóm A phải giảm rõ. Xuất
+thêm danh sách "Đã thu thập – hiện chưa lập chỉ mục" (nếu có) — trạng thái đó mới là tín hiệu Google chê nội dung.
