@@ -5,6 +5,15 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4y. 862 URL "Đã phát hiện – chưa lập chỉ mục" (audit 2026-11-05, `docs/AUDIT-INDEX-2026-11.md`)
+
+Không có lỗi kỹ thuật — Google chưa tải các trang (xếp hàng). Việc của anh:
+- [ ] Search Console → Cài đặt → **Thống kê thu thập dữ liệu**: chụp "Thời gian phản hồi trung bình" + lỗi máy chủ quanh 02/11 gửi em.
+- [ ] **Kiểm tra URL → Yêu cầu lập chỉ mục** ~10 hub/ngày theo danh sách mục 4 của báo cáo (không yêu cầu từng trang con).
+- [ ] (Tuỳ chọn) Xuất danh sách 862 URL (nút Xuất → CSV) gửi em, hoặc tự chạy `node web/scripts/phan-loai-gsc.mjs Table.csv`.
+- [ ] (Quyết định) Q-I1 thu cửa sổ trang ngày / việc-tháng · Q-I2 bỏ Googlebot khỏi `htmlLimitedBots` · Q-I3 cache HTML trang kiến thức.
+- [ ] Sau 3–4 tuần: xem nhóm A (kiến thức) đã chuyển sang "Đã lập chỉ mục" chưa.
+
 ### 4x. Đợt 2 Tử vi + chính sách sức khoẻ mới (TV-ZW2 + SK-1, 2026-11-04) — sau khi merge
 
 - [ ] **Deploy engine trước web** (`ENGINE_VERSION` 0.1.7 — sửa khoảng tuổi đồng hạn; trường mới `cung_sao_menh`, hộp sức khoẻ theo năm,
