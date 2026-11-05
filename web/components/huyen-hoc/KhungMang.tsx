@@ -25,8 +25,8 @@ export function DauMang({ Icon, ten, mo_ta, chip, children }: { Icon: LucideIcon
       {/* CTA-LS: chip lợi ích (chỉ trang có khoá dau.chip_* — Tử vi, Bát tự). */}
       {chip && [1, 2, 3].some((i) => c(`dau.chip_${i}`)) && (
         <ul className="mt-4 flex flex-wrap gap-2" data-testid="dau-chip">
-          {[1, 2, 3].map((i) => c(`dau.chip_${i}`)).filter(Boolean).map((t) => (
-            <li key={t} className="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/[0.06] px-3 py-1 text-xs text-fg sm:text-sm">
+          {[1, 2, 3].map((i) => c(`dau.chip_${i}`)).filter(Boolean).map((t, i) => (
+            <li key={i} className="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/[0.06] px-3 py-1 text-xs text-fg sm:text-sm">
               <Check className="size-3.5 text-gold" aria-hidden />{t}
             </li>
           ))}

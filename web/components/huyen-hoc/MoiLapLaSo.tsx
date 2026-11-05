@@ -3,7 +3,7 @@
 // (A) nâng thẻ cũ vẫn bắt bấm mở bảng · (B) form ngay trên trang + xem trước thứ sẽ nhận · (C) lá số mẫu mờ làm mồi —
 // chọn B: bớt một cú bấm, người đọc thấy đúng thứ mình sẽ nhận, không gọi engine thêm. Hình minh hoạ là hình tĩnh, có
 // nhãn "Minh hoạ" — không phải lá số của ai. Chữ sửa được ở CMS (nhóm "Mời lập lá số" trong bảng chữ của trang).
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef } from "react";
 import { Check, Clock, MessageCircleQuestion } from "lucide-react";
 import Link from "@/components/khung/Lien";
 import { ChuNhan } from "@/components/cms/ChuNhan";
@@ -25,9 +25,10 @@ function conThieu(h: HoSo | null): string[] {
   ].filter(Boolean) as string[];
 }
 
-export function MoiLapLaSo({ moDun, hoSo, sauForm }: { moDun: MoDun; hoSo: HoSo | null; sauForm?: ReactNode }) {
+export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null }) {
   const c = useChu();
-  const ref = useRef<HTMLElement>(null);
+  // Theo dõi tiêu đề (không phải cả khối): trên điện thoại khối cao hơn màn hình, tỉ lệ diện tích không bao giờ đủ ngưỡng.
+  const ref = useRef<HTMLHeadingElement>(null);
   const daGhi = useRef(false);
   const thieu = conThieu(hoSo);
   // Đo: thấy khối → bấm gửi (profile_created do NhapHoSo ghi). Một lần mỗi lượt vào trang.
@@ -36,7 +37,7 @@ export function MoiLapLaSo({ moDun, hoSo, sauForm }: { moDun: MoDun; hoSo: HoSo 
     if (!el || daGhi.current || typeof IntersectionObserver === "undefined") return;
     const io = new IntersectionObserver((ds) => {
       if (ds.some((d) => d.isIntersecting) && !daGhi.current) { daGhi.current = true; ghi("chart_interacted", { mo_dun: moDun, kind: "moi_lap_thay", co_ho_so: Boolean(hoSo) }); io.disconnect(); }
-    }, { threshold: 0.4 });
+    }, { threshold: 1 });
     io.observe(el);
     return () => io.disconnect();
   }, [moDun, hoSo]);
@@ -46,14 +47,15 @@ export function MoiLapLaSo({ moDun, hoSo, sauForm }: { moDun: MoDun; hoSo: HoSo 
     : c("moi.tieu_de");
   const nhan = [1, 2, 3, 4].map((i) => c(`moi.nhan_${i}`)).filter(Boolean);
 
+  // Tên khối cố định (không trỏ vào h2): tiêu đề động "…còn thiếu: nơi sinh" sẽ trùng nhãn ô "Nơi sinh" của form.
   return (
-    <section ref={ref} aria-label={moDun === "tuvi" ? "Lập lá số Tử vi" : "Xem tứ trụ Bát tự"} data-testid="moi-lap-la-so"
+    <section aria-label={moDun === "tuvi" ? "Lập lá số Tử vi" : "Xem tứ trụ Bát tự"} data-testid="moi-lap-la-so"
       className="relative overflow-hidden rounded-3xl border border-gold/45 bg-gradient-to-br from-gold/[0.09] via-surface/70 to-bg/40 p-5 shadow-[0_0_60px_-24px_rgb(var(--gold)/0.55)] sm:p-8">
       <div className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-gold/10 blur-3xl" aria-hidden />
       <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,27rem)] lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-6">
         <div className="lg:col-start-1">
           <p className="eyebrow text-gold">{c("moi.nhan_tren")}</p>
-          <h2 className="mt-2 font-serif text-2xl leading-tight sm:text-3xl"><ChuNhan chu={tieuDe} /></h2>
+          <h2 ref={ref} className="mt-2 font-serif text-2xl leading-tight sm:text-3xl"><ChuNhan chu={tieuDe} /></h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-fg-muted sm:text-base">{c("moi.cau_phu")}</p>
         </div>
 
@@ -65,7 +67,6 @@ export function MoiLapLaSo({ moDun, hoSo, sauForm }: { moDun: MoDun; hoSo: HoSo 
               <Clock className="mt-0.5 size-3.5 shrink-0" aria-hidden />{c("moi.tran_an")}
             </p>
           </div>
-          {sauForm}
         </div>
 
         <div className="space-y-5 lg:col-start-1 lg:row-start-2">
@@ -73,12 +74,13 @@ export function MoiLapLaSo({ moDun, hoSo, sauForm }: { moDun: MoDun; hoSo: HoSo 
             <div>
               <p className="text-sm font-semibold text-fg">{c("moi.nhan_tieu_de")}</p>
               <ul className="mt-2 space-y-2">
-                {nhan.map((t) => (
-                  <li key={t} className="flex items-start gap-2 text-sm text-fg-muted sm:text-[0.95rem]">
+                {nhan.map((t, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-fg-muted sm:text-[0.95rem]">
                     <Check className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden /><span><ChuNhan chu={t} lopNhan="text-fg" /></span>
                   </li>
                 ))}
               </ul>
+              {c("moi.ghi_chu_nhan") && <p className="mt-2 text-xs text-fg-faint">{c("moi.ghi_chu_nhan")}</p>}
             </div>
           )}
           <figure className="hidden sm:block">
@@ -130,7 +132,7 @@ function MinhHoaTuVi() {
 // Bốn trụ (dấu hỏi — chữ của bạn) + năm cột ngũ hành thừa / thiếu.
 function MinhHoaBatTu() {
   const tru = ["Năm", "Tháng", "Ngày", "Giờ"];
-  const hanh = [["Kim", 0.35], ["Mộc", 0.8], ["Thủy", 0.2], ["Hỏa", 0.55], ["Thổ", 0.65]] as const;
+  const hanh = [["Kim", 0.35], ["Mộc", 0.8], ["Thuỷ", 0.2], ["Hoả", 0.55], ["Thổ", 0.65]] as const;
   return (
     <svg viewBox="0 0 260 130" className="w-full max-w-sm" aria-hidden>
       {tru.map((t, i) => (
