@@ -29,7 +29,7 @@ jobs:
           if [ -z "$SUPABASE_DB_URL" ] || [ -z "$BACKUP_PASSPHRASE" ]; then
             echo "::notice::Chưa đặt SUPABASE_DB_URL / BACKUP_PASSPHRASE — bỏ qua sao lưu."; echo "chay=0" >> "$GITHUB_OUTPUT"
           else echo "chay=1" >> "$GITHUB_OUTPUT"; fi
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         if: steps.co.outputs.chay == '1'
       # pg_dump phải cùng hoặc mới hơn bản Postgres của Supabase (15/17) → cài client 17 từ kho PGDG.
       - name: Cài pg_dump 17
