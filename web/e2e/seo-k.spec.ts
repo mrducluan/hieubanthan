@@ -32,7 +32,8 @@ test("robots khai 2 sitemap; sitemap ngày đúng cửa sổ; /blog/trang/1 → 
   const sn = await request.get("/sitemap-ngay.xml");
   expect(sn.status()).toBe(200);
   const locs = [...(await sn.text()).matchAll(/<loc>[^<]*\/xem-ngay-tot\/(\d{4}-\d{2}-\d{2})<\/loc>/g)];
-  expect(locs.length).toBeGreaterThanOrEqual(400);
+  // Q-I1 (2026-11-05): cửa sổ −7…+90 (chừa 1 ngày hai đầu) → 96 URL, trước là −7…+400.
+  expect(locs.length).toBe(96);
   const r1 = await request.get("/blog/trang/1", { maxRedirects: 0 });
   expect(r1.status()).toBe(308);
   expect((await request.get("/blog/trang/999")).status()).toBe(404);

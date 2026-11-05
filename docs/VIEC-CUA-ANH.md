@@ -5,6 +5,18 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4y. 862 URL "Đã phát hiện – chưa lập chỉ mục" (audit 2026-11-05, `docs/AUDIT-INDEX-2026-11.md`)
+
+Không có lỗi kỹ thuật — Google chưa tải các trang (xếp hàng). Q-I1 + Q-I2 em đã làm (đợi deploy). Việc của anh:
+- [x] Thống kê thu thập dữ liệu (anh gửi 05/11: 673 ms trung bình, 98 % OK) · [x] xuất danh sách 862 URL (em đã phân loại, mục 5 báo cáo).
+- [ ] **Sau khi deploy web**: Kiểm tra URL → `https://hieuban.com/tu-vi/tu-hoa/hoa-loc-cung-menh` → **Kiểm tra URL đang hoạt động** →
+      Xem trang đã kiểm tra → HTML: phải thấy `<title>` và `rel="canonical"` (kiểm Q-I2). Thấy thiếu thì báo em, em hoàn tác ngay.
+- [ ] Sau đó **Yêu cầu lập chỉ mục** ~10 hub/ngày theo danh sách mục 5 báo cáo (`/tu-vi/tu-hoa`, `/kinh-dich/que`, `/bat-tu/menh-theo-nam`…),
+      không yêu cầu từng trang con. Sơ đồ trang web → gửi lại `sitemap.xml` + `sitemap-ngay.xml` (số URL ngày giảm 406 → ~97 là đúng).
+- [ ] (Quyết định, khi tiện) **Q-I3** cache HTML trang kiến thức (đưa phản hồi từ ~670 ms xuống dưới 200 ms — việc lớn, đụng CSP).
+- [ ] Sau 2–3 tuần: xuất lại danh sách "Đã phát hiện – chưa lập chỉ mục" gửi em (nhóm kiến thức phải giảm rõ); nếu có danh sách
+      "Đã thu thập – hiện chưa lập chỉ mục" thì gửi luôn.
+
 ### 4x. Đợt 2 Tử vi + chính sách sức khoẻ mới (TV-ZW2 + SK-1, 2026-11-04) — sau khi merge
 
 - [ ] **Deploy engine trước web** (`ENGINE_VERSION` 0.1.7 — sửa khoảng tuổi đồng hạn; trường mới `cung_sao_menh`, hộp sức khoẻ theo năm,
@@ -47,9 +59,7 @@
       (Trang website) — migration không tự gộp được vì nhiều năm dồn về một cung.
 - [ ] **GA4 (5 phút, tuỳ chọn):** PostHog đã có `landing_viewed.den_tu = ai` + `ai = chatgpt|perplexity|gemini|copilot|claude`;
       GA4 tạo kênh "AI assistants" như mục D `docs/DE-XUAT-CHAT-LUONG-NOI-DUNG.md` nếu muốn xem cả ở GA4.
-- [ ] **Ngày 01/02/2027 — Q4 cửa sổ trang ngày:** Search Console → Hiệu suất → lọc trang chứa `/xem-ngay-tot/20` → so lượt
-      hiển thị của ngày cách hôm nay 180–400 ngày. Ít (vd < 5% tổng) → nhắn em đổi `NGAY_SAU = 400 → 180`
-      (`web/lib/hoang-lich.ts`, một dòng, sitemap ngày tự theo).
+- [x] ~~Ngày 01/02/2027 — Q4 cửa sổ trang ngày~~ — thay bởi Q-I1 (05/11/2026): `NGAY_SAU` đã rút ngay 400 → 90 (mục 4y).
 - [ ] **CMS → Mẫu cụm "Hướng hợp tuổi theo cung phi"** (sau migration `aud_q2_cung_phi`): nếu chữ khối có `{nam}` thì sửa —
       từ 6b (2026-11-04) web KHÔNG hiện khối còn biến lạ và CMS chặn xuất bản, nên khối đó đang bị ẩn tới khi sửa.
 - [x] ~~Trả lời 6 câu hỏi ở `docs/AUDIT-SEO-GEO-2026-11.md` mục 6b~~ — anh giao em quyết, đã làm 2026-11-04 (xem mục 6b).

@@ -5,7 +5,7 @@ import { dsBaiTongHop, duongBlog } from "@/lib/blog";
 import { urlDayDu } from "@/lib/seo";
 import { daHetHan, dsTrangDichCms } from "@/lib/cms";
 import { duongTrangSo, soTrang } from "@/lib/phan-trang";
-import { THANG_SAU, THANG_TRUOC, VIEC_SEO, demViecThang, duongThang, duongViecThang, homNayVN, viecThangIndex } from "@/lib/hoang-lich";
+import { THANG_SAU, THANG_TRUOC, VIEC_SEO, VIEC_THANG_SAU, demViecThang, duongThang, duongViecThang, homNayVN, viecThangIndex } from "@/lib/hoang-lich";
 import { duongLichAm } from "@/lib/lich-am";
 import { duongCuoiHoi, duongNam, duongNamTuoi, duongSinhCon, namTuoiIndex, namTuoiSeo } from "@/lib/nam";
 import { NAM_SINH_SEO, duongHanNam, duongLamNha, duongLamNhaNam, duongSaoHanNam, duongXongDat, duongXongDatNam, lamNhaIndex, namAmHienTai, xongDatIndex } from "@/lib/tuoi-dan-gian";
@@ -28,7 +28,7 @@ function thangSitemap(): string[] {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const h = homNayVN();
   const [ds, mau, tuoi, blog, suKien, namAm, namSeo, demViec] = await Promise.all([mucLuc(), dsLaSoMau(), dsCungPhi(), dsBaiTongHop(), dsTrangDichCms(), namAmHienTai(), namTuoiSeo(),
-    demViecThang(Number(h.slice(0, 4)), Number(h.slice(5, 7)), THANG_SAU + 1)]);
+    demViecThang(Number(h.slice(0, 4)), Number(h.slice(5, 7)), VIEC_THANG_SAU + 1)]);
   return [
     // CMS-3: trang đích còn hạn, không noindex
     ...suKien.filter((t) => !t.noindex && !daHetHan(t)).map((t) => ({
@@ -50,9 +50,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // SEO-L2 → NAM-1 (chủ dự án duyệt 2026-11-01): ngày tốt theo việc — tháng này → hết cửa sổ index (+24 tháng), khớp
     // `thangIndex` để không còn trang index mà thiếu trong sitemap (vd cưới hỏi, động thổ cả năm 2027–2028).
     // AUD-Q3 (chủ dự án 2026-11-03): bỏ tháng 0 ngày tốt (engine đếm, cùng luật `viecThangIndex`); engine lỗi → giữ đủ như cũ.
+    // Q-I1 (2026-11-05): chỉ tháng này → +VIEC_THANG_SAU (6) tháng.
     ...(demViec
       ? demViec.filter((x) => viecThangIndex(x.nam, x.thang, x.so_ngay)).map((x) => ({ url: urlDayDu(duongViecThang(x.slug, x.nam, x.thang)), changeFrequency: "weekly" as const, priority: 0.6 }))
-      : thangSitemap().slice(THANG_TRUOC).flatMap((d) => {
+      : thangSitemap().slice(THANG_TRUOC, THANG_TRUOC + VIEC_THANG_SAU + 1).flatMap((d) => {
         const [, m, y] = d.match(/thang-(\d+)-(\d{4})$/)!;
         return VIEC_SEO.map((v) => ({ url: urlDayDu(duongViecThang(v.slug, Number(y), Number(m))), changeFrequency: "weekly" as const, priority: 0.6 }));
       })),

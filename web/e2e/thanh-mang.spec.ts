@@ -10,6 +10,14 @@ import { MENU_DAU_TRANG } from "../lib/menu-dau-trang";
 import CHUYEN from "../lib/chuyen-huong.json";
 import { napHoSo } from "./_hoso";
 
+/** Chờ mọi phần tử đang hiện khớp `chon` đã được React gắn trình xử lý (tìm lại mỗi lần — Suspense có thể thay phần tử). */
+async function choHydrate(page: Page, chon: string) {
+  await page.waitForFunction((c) => {
+    const ds = [...document.querySelectorAll(c)].filter((el) => (el as HTMLElement).offsetParent !== null);
+    return ds.length > 0 && ds.every((el) => Object.keys(el).some((k) => k.startsWith("__reactProps")));
+  }, chon, { timeout: 30_000 });
+}
+
 const ENGINE = `http://127.0.0.1:${Number(process.env.E2E_ENGINE_PORT) || 8000}`;
 const breadcrumb = async (page: Page) => (await page.getByTestId("duong-dan").first().getByRole("listitem").allTextContents()).map((x) => x.replace("›", "").trim());
 const ldBreadcrumb = (html: string) => {
@@ -129,6 +137,9 @@ test("trang con: breadcrumb 5 cấp, thanh mảng vẫn sáng cụm cha; bấm t
   expect((await breadcrumb(page)).slice(0, 4)).toEqual(["Trang chủ", "Huyền học", "Tử vi", "Chính tinh ở từng cung Tử vi"]);
   const tm = page.locator("[data-thanh-mang=tuvi]:visible");
   await expect(tm.locator("[data-muc=sao_cung]")).toHaveAttribute("aria-current", "location");   // cụm cha, không phải chính trang
+  // Chờ React gắn trình xử lý bấm (hydrate xong) vào ĐÚNG phần tử đang hiện — thanh hiện bản tạm trước rồi bản có số
+  // trang (chờ engine) thay vào; bấm sớm / bám phần tử cũ thì trình duyệt tải lại trang thường, không có sự kiện đo.
+  await choHydrate(page, "[data-thanh-mang=tuvi] [data-muc=tu_hoa]");
   await tm.locator("[data-muc=tu_hoa]").click();
   await expect(page).toHaveURL(/\/tu-vi\/tu-hoa$/);
   // đo lượt bấm thanh: chỉ mã mảng + mã mục + đường dẫn đang xem
@@ -254,6 +265,7 @@ test("hub Huyền học: thẻ mảng đủ mọi cụm (không cắt còn 4)", 
 
 test("menu đầu trang: bảng Huyền học có 3 cụm mới", async ({ page }) => {
   await page.goto("/");
+  await choHydrate(page, '[data-testid="menu-dau-trang"] button');
   await page.getByTestId("menu-dau-trang").getByRole("button", { name: /Huyền học/ }).click();
   const menu = page.getByTestId("menu-dau-trang");
   for (const t of ["Sao ở từng cung Tử vi", "64 quẻ Kinh Dịch", "Sinh năm nào mệnh gì"]) await expect(menu.getByRole("link", { name: new RegExp(t) })).toBeVisible();

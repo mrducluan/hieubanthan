@@ -120,12 +120,15 @@ test("NAM-3 /nam/2027/tuoi-1990: điểm nhấn có màu theo loại, sao hai gi
   await expect(page.getByTestId("nut-ca-nhan")).toHaveAttribute("href", "/thoi-gian-toi?nam=2027");
   expect(await page.locator("main").innerText()).not.toMatch(CAM);
   expect((await request.get("/nam/2027/tuoi-2030")).status()).toBe(404);
-  // trang năm có lưới 12 con giáp trỏ xuống trang tuổi; sitemap có trang tuổi + ngày tốt theo việc tới +24 tháng
+  // trang năm có lưới 12 con giáp trỏ xuống trang tuổi; sitemap có trang tuổi + ngày tốt theo việc tới +6 tháng (Q-I1)
   await page.goto("/nam/2027");
   await expect(page.getByTestId("luoi-theo-tuoi").locator('a[href="/nam/2027/tuoi-1990"]')).toBeVisible();
   const sm = await (await request.get("/sitemap.xml")).text();
   expect(sm).toContain("/nam/2027/tuoi-1990</loc>");
-  expect(sm).toMatch(/\/xem-ngay-tot\/cuoi-hoi-thang-\d{1,2}-2028<\/loc>/);
+  const viec = [...sm.matchAll(/\/xem-ngay-tot\/cuoi-hoi-thang-(\d{1,2})-(\d{4})<\/loc>/g)].map((m) => Number(m[2]) * 12 + Number(m[1]));
+  const nay = new Date(); const goc = nay.getUTCFullYear() * 12 + nay.getUTCMonth() + 1;
+  expect(viec.length).toBeGreaterThan(0);
+  expect(Math.max(...viec) - goc).toBeLessThanOrEqual(6);
 });
 
 test("menu: Hợp đôi có menu con; /tu-vi vẫn sáng Huyền học (lối tắt #hop-tham không giành mục cha)", async ({ page }) => {
