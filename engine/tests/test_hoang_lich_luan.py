@@ -141,3 +141,40 @@ def test_khong_co_viec_kham_chua_benh():
 def test_khung_gio_ty_ro_rang():
     kq = L.ngay_xem(dt.date(2026, 10, 13))
     assert kq["gio"][0]["khung"] == "00:00–00:59" and "23:00" in kq["ghi_chu_gio_ty"]
+
+
+# ---- HL-TEN: tên việc Nên / Kiêng theo lối sống ngày nay (thành thị + nông thôn) ----
+_TU_CU = ("lùng bắt", "săn bắn", "nhậm chức", "nạp tài", "kén rể", "se mặt", "treo màn", "vấn danh", "nạp thái",
+          "kết ước", "cắt may áo", "động thổ (mộ)", "lập đàn")
+
+
+def test_ten_viec_theo_loi_ngay_nay():
+    for ma, m in L.KB["nghi_ky"].items():
+        if ma == "无":
+            continue
+        ten = m["ten"].lower()
+        assert not any(t in ten for t in _TU_CU), (ma, m["ten"])
+        assert len(m["ten"]) <= 26, (ma, m["ten"])  # chip ngắn — chi tiết ở `nghia`
+        assert m["nghia"] and m["nghia"].lower() != ten, ma
+    ten_chip = {m["ten"] for m in L.KB["nghi_ky"].values()}
+    assert "Động thổ" in ten_chip and "Đào huyệt, làm mộ" in ten_chip  # việc nhà ≠ việc mộ, không còn hai chip "Động thổ"
+
+
+def test_ten_goc_giu_cach_sach_xua_goi():
+    nk = L.KB["nghi_ky"]
+    assert nk["捕捉"]["ten_goc"].startswith("Bổ tróc") and "lùng bắt" in nk["捕捉"]["ten_goc"]
+    assert "săn bắn" in nk["畋猎"]["ten_goc"]
+    assert nk["纳采"]["ten_goc"] == "Nạp thái"
+    out = L._nk("捕捉")
+    assert out["ten"] == "Bắt chuột, diệt côn trùng" and out["ten_goc"] and "luu_y" not in out
+    assert "ten_goc" not in L._nk("嫁娶")
+
+
+def test_viec_y_te_phap_ly_co_luu_y():
+    # Sách lịch có thể ghi "kiêng chữa bệnh" — trang không được để người đọc hoãn đi khám (SK-1).
+    for ma in ("求医", "治病", "求医疗病", "针灸"):
+        ly = L.KB["nghi_ky"][ma]["luu_y"]
+        assert "đi ngay" in ly and "bác sĩ" in ly, ma
+        assert L._nk(ma)["luu_y"] == ly
+    assert "luật sư" in L.KB["nghi_ky"]["词讼"]["luu_y"]
+    assert "chữa mắt" not in L.KB["truc"]["闭"]["tranh"]

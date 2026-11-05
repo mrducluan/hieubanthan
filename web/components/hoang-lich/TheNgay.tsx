@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { CalendarHeart, Clock, Compass, MoonStar, Sparkles, Sunrise, ThumbsDown, ThumbsUp, UserRound } from "lucide-react";
-import type { GioNgay, NgayTot } from "@/lib/hoang-lich";
+import type { GioNgay, MucNghiKy, NgayTot } from "@/lib/hoang-lich";
 import { duongNgay, duongViecThang, homNayVN } from "@/lib/hoang-lich";
 import { VongGio, canhGioHienTai } from "./VongGio";
 
@@ -40,6 +40,13 @@ function GioSapToi({ gio }: { gio: GioNgay[] }) {
       Giờ hoàng đạo kế tiếp: <b className="text-gold">{gio[ke]!.chi}</b> ({gio[ke]!.khung}) — còn {chu}.
     </p>
   );
+}
+
+/** Lời nhắc cho việc y tế / pháp lý (engine `luu_y`): sách lịch ghi kiêng chữa bệnh không có nghĩa là hoãn đi khám. */
+function LuuYViec({ ds }: { ds: MucNghiKy[] }) {
+  const ly = [...new Set(ds.map((x) => x.luu_y).filter((x): x is string => !!x))];
+  if (!ly.length) return null;
+  return <div className="mt-3 space-y-1 text-xs text-fg-muted" data-testid="luu-y-viec">{ly.map((x) => <p key={x}>{x}</p>)}</div>;
 }
 
 function Chip({ ten, nghia, tone }: { ten: string; nghia?: string; tone: "tot" | "ky" | "trung" }) {
@@ -126,6 +133,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
             {d.nghi.length ? d.nghi.map((x) => <Chip key={x.ma} ten={x.ten} nghia={x.nghia} tone="tot" />)
               : <p className="text-sm text-fg-muted">Sách không ghi việc nên riêng cho ngày này.</p>}
           </div>
+          <LuuYViec ds={d.nghi} />
         </section>
         <section aria-labelledby="ky" className="glass rounded-2xl p-5">
           <h2 id="ky" className="inline-flex items-center gap-2 text-lg"><ThumbsDown className="size-5 text-cinnabar" aria-hidden />Sách lịch ghi kiêng</h2>
@@ -133,6 +141,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
             {d.ky.length ? d.ky.map((x) => <Chip key={x.ma} ten={x.ten} nghia={x.nghia} tone="ky" />)
               : <p className="text-sm text-fg-muted">Sách không ghi việc kiêng riêng cho ngày này.</p>}
           </div>
+          <LuuYViec ds={d.ky} />
         </section>
       </div>
 
@@ -143,7 +152,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
           <summary className="cursor-pointer text-gold">Giải nghĩa các việc nên / kiêng</summary>
           <dl className="mt-2 grid gap-x-6 gap-y-1 sm:grid-cols-2">
             {[...d.nghi, ...d.ky].filter((x) => x.nghia).map((x) => (
-              <div key={x.ma} className="flex gap-1.5"><dt className="font-medium">{x.ten}:</dt><dd className="text-fg-muted">{x.nghia}</dd></div>
+              <div key={x.ma} className="flex gap-1.5"><dt className="font-medium">{x.ten}:</dt><dd className="text-fg-muted">{x.nghia}{x.ten_goc && <span className="text-fg-faint"> · sách xưa ghi: {x.ten_goc}</span>}</dd></div>
             ))}
           </dl>
         </details>
@@ -201,7 +210,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
 const NHAN_VIEC = { tot: "Ngày tốt", binh: "Bình thường", tranh: "Nên chọn ngày khác" } as const;
 
 /** 6b-1 — 6 việc lớn chấm bằng ĐÚNG luật của trang "ngày tốt {việc} tháng": sách ghi Nên mà vướng mục Kiêng (vd nên cưới
- *  gả nhưng kiêng Nạp thái) thì không gọi là ngày tốt — hai trang nói cùng một kết luận. Engine chấm, web chỉ hiển thị. */
+ *  gả nhưng kiêng Dạm ngõ) thì không gọi là ngày tốt — hai trang nói cùng một kết luận. Engine chấm, web chỉ hiển thị. */
 function ViecLon({ d }: { d: NgayTot }) {
   const m = Number(d.ngay.slice(5, 7)), y = Number(d.ngay.slice(0, 4));
   return (

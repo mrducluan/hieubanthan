@@ -31,8 +31,9 @@ def _gz(s: str) -> str:
 
 
 def _nk(ma: str) -> dict:
+    """Tên việc theo lối ngày nay (chip); cách sách xưa gọi (`ten_goc`) chỉ để giải nghĩa; `luu_y` cho việc y tế / pháp lý."""
     m = KB["nghi_ky"][ma]
-    return {"ma": ma, "ten": m["ten"], "nghia": m["nghia"]}
+    return {"ma": ma, "ten": m["ten"], "nghia": m["nghia"], **{k: m[k] for k in ("ten_goc", "luu_y") if k in m}}
 
 
 def _ts(ma: str) -> dict:

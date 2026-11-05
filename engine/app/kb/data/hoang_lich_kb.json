@@ -9,12 +9,13 @@
  "trang_thai": "nhap_ai",
  "nghi_ky": {
   "祭祀": {
-   "ten": "Cúng tế",
-   "nghia": "cúng gia tiên, lễ chùa, đền"
+   "ten": "Cúng lễ",
+   "nghia": "cúng gia tiên, làm giỗ, đi lễ chùa, đền",
+   "ten_goc": "Tế tự (cúng tế)"
   },
   "祈福": {
    "ten": "Cầu phúc",
-   "nghia": "lễ cầu bình an, may mắn"
+   "nghia": "đi lễ cầu bình an, sức khoẻ, may mắn"
   },
   "求嗣": {
    "ten": "Cầu con",
@@ -22,19 +23,22 @@
   },
   "开光": {
    "ten": "Khai quang",
-   "nghia": "làm lễ khai quang tượng, vật thờ"
+   "nghia": "làm lễ khai quang tượng, vật thờ mới thỉnh về"
   },
   "塑绘": {
-   "ten": "Tạc, vẽ tượng",
-   "nghia": "đắp tượng, vẽ tranh thờ"
+   "ten": "Tô, đắp tượng thờ",
+   "nghia": "đắp, tô sơn tượng thờ, vẽ tranh thờ",
+   "ten_goc": "Tố hội (tạc, vẽ tượng)"
   },
   "齐醮": {
-   "ten": "Lập đàn chay",
-   "nghia": "lập đàn cúng chay, cầu siêu"
+   "ten": "Lễ cầu an, cầu siêu",
+   "nghia": "làm lễ chay cầu an, cầu siêu ở chùa hoặc tại nhà",
+   "ten_goc": "Trai tiếu (lập đàn chay)"
   },
   "斋醮": {
-   "ten": "Lập đàn chay",
-   "nghia": "lập đàn cúng chay, cầu siêu"
+   "ten": "Lễ cầu an, cầu siêu",
+   "nghia": "làm lễ chay cầu an, cầu siêu ở chùa hoặc tại nhà",
+   "ten_goc": "Trai tiếu (lập đàn chay)"
   },
   "沐浴": {
    "ten": "Tắm gội, tẩy uế",
@@ -45,8 +49,9 @@
    "nghia": "lễ tạ thần linh sau khi được việc"
   },
   "造庙": {
-   "ten": "Dựng đền miếu",
-   "nghia": "xây, sửa đền chùa, miếu"
+   "ten": "Xây sửa đình, chùa",
+   "nghia": "xây, sửa đình, chùa, miếu, nhà thờ họ",
+   "ten_goc": "Tạo miếu (dựng đền miếu)"
   },
   "祀灶": {
    "ten": "Cúng ông Táo",
@@ -57,8 +62,9 @@
    "nghia": "dâng hương"
   },
   "谢土": {
-   "ten": "Tạ thổ",
-   "nghia": "lễ tạ đất sau khi xây sửa"
+   "ten": "Lễ tạ đất",
+   "nghia": "lễ tạ đất đai sau khi xây sửa nhà xong",
+   "ten_goc": "Tạ thổ"
   },
   "出火": {
    "ten": "Dời bếp, bàn thờ",
@@ -66,27 +72,31 @@
   },
   "雕刻": {
    "ten": "Chạm khắc",
-   "nghia": "chạm trổ, điêu khắc"
+   "nghia": "chạm trổ, điêu khắc, khắc bia, khắc biển"
   },
   "嫁娶": {
    "ten": "Cưới hỏi",
-   "nghia": "cưới gả, rước dâu"
+   "nghia": "cưới gả, rước dâu, tổ chức tiệc cưới"
   },
   "订婚": {
-   "ten": "Đính hôn",
-   "nghia": "lễ ăn hỏi"
+   "ten": "Ăn hỏi",
+   "nghia": "lễ ăn hỏi, đính hôn",
+   "ten_goc": "Đính hôn"
   },
   "纳采": {
-   "ten": "Nạp thái",
-   "nghia": "nhà trai mang lễ dạm ngõ"
+   "ten": "Dạm ngõ",
+   "nghia": "nhà trai sang đặt vấn đề, mang lễ dạm ngõ",
+   "ten_goc": "Nạp thái"
   },
   "问名": {
-   "ten": "Vấn danh",
-   "nghia": "hỏi tên tuổi, xem tuổi đôi bên"
+   "ten": "Gặp mặt hai gia đình",
+   "nghia": "hai nhà gặp nhau, hỏi tên tuổi, ngày sinh đôi bên",
+   "ten_goc": "Vấn danh"
   },
   "纳婿": {
-   "ten": "Kén rể",
-   "nghia": "đón rể về nhà"
+   "ten": "Đón rể về ở",
+   "nghia": "chàng rể về ở bên nhà vợ (ở rể)",
+   "ten_goc": "Nạp tế (kén rể)"
   },
   "归宁": {
    "ten": "Lại mặt",
@@ -94,87 +104,100 @@
   },
   "安床": {
    "ten": "Kê giường",
-   "nghia": "đặt giường mới, kê giường cưới"
+   "nghia": "đặt giường mới, kê giường cưới, sắp lại phòng ngủ"
   },
   "合帐": {
-   "ten": "Treo màn cưới",
-   "nghia": "may, treo màn phòng cưới"
+   "ten": "Sắp phòng cưới",
+   "nghia": "treo màn, trải chăn, trang trí phòng tân hôn",
+   "ten_goc": "Hợp trướng (treo màn cưới)"
   },
   "冠笄": {
    "ten": "Lễ trưởng thành",
    "nghia": "lễ đội mũ, cài trâm khi đến tuổi"
   },
   "订盟": {
-   "ten": "Kết ước",
-   "nghia": "đính ước, giao kết"
+   "ten": "Đính ước",
+   "nghia": "hai bên hứa hẹn, giao ước (thường là ước hôn)",
+   "ten_goc": "Đính minh (kết ước)"
   },
   "进人口": {
-   "ten": "Nhận người",
-   "nghia": "nhận người làm, nhận con nuôi"
+   "ten": "Đón người về nhà",
+   "nghia": "nhận con nuôi, đón người thân về ở cùng, nhận người giúp việc",
+   "ten_goc": "Tiến nhân khẩu (nhận người)"
   },
   "裁衣": {
-   "ten": "Cắt may áo",
-   "nghia": "may đồ mới"
+   "ten": "May, sắm đồ mới",
+   "nghia": "cắt may hoặc mua quần áo mới (áo cưới, đồ Tết)",
+   "ten_goc": "Tài y (cắt may áo)"
   },
   "挽面": {
-   "ten": "Se mặt",
-   "nghia": "làm đẹp, se lông mặt"
+   "ten": "Chăm sóc da mặt",
+   "nghia": "se mặt, làm đẹp da mặt, đi spa",
+   "ten_goc": "Vãn diện (se mặt)"
   },
   "开容": {
-   "ten": "Sửa dung nhan",
-   "nghia": "chỉnh trang dung mạo"
+   "ten": "Làm đẹp",
+   "nghia": "chỉnh trang dung mạo, trang điểm, làm tóc, làm da",
+   "ten_goc": "Khai dung (sửa dung nhan)"
   },
   "修坟": {
    "ten": "Sửa mộ",
-   "nghia": "tu sửa phần mộ"
+   "nghia": "tu sửa, xây lại phần mộ"
   },
   "启钻": {
    "ten": "Cải táng",
    "nghia": "bốc mộ, sang cát"
   },
   "破土": {
-   "ten": "Động thổ (mộ)",
-   "nghia": "đào đất làm mộ"
+   "ten": "Đào huyệt, làm mộ",
+   "nghia": "đào đất làm huyệt, xây mộ — khác với động thổ làm nhà",
+   "ten_goc": "Phá thổ (động thổ việc mộ)"
   },
   "安葬": {
    "ten": "An táng",
    "nghia": "chôn cất"
   },
   "立碑": {
-   "ten": "Dựng bia",
-   "nghia": "dựng bia mộ"
+   "ten": "Dựng bia mộ",
+   "nghia": "dựng, thay bia mộ"
   },
   "成服": {
-   "ten": "Mặc đồ tang",
-   "nghia": "phát tang"
+   "ten": "Để tang",
+   "nghia": "mặc đồ tang, phát tang",
+   "ten_goc": "Thành phục (mặc đồ tang)"
   },
   "除服": {
-   "ten": "Bỏ đồ tang",
-   "nghia": "mãn tang, xả tang"
+   "ten": "Mãn tang",
+   "nghia": "bỏ đồ tang, xả tang",
+   "ten_goc": "Trừ phục (bỏ đồ tang)"
   },
   "开生坟": {
-   "ten": "Làm sinh phần",
-   "nghia": "xây mộ sẵn khi còn sống"
+   "ten": "Xây mộ sẵn",
+   "nghia": "xây sẵn phần mộ khi người còn sống",
+   "ten_goc": "Khai sinh phần (làm sinh phần)"
   },
   "合寿木": {
    "ten": "Đóng thọ mộc",
-   "nghia": "đóng quan tài sẵn"
+   "nghia": "đóng sẵn quan tài cho người cao tuổi"
   },
   "入殓": {
    "ten": "Nhập quan",
-   "nghia": "khâm liệm"
+   "nghia": "khâm liệm, đặt thi hài vào quan tài"
   },
   "移柩": {
-   "ten": "Di quan",
-   "nghia": "đưa linh cữu"
+   "ten": "Đưa linh cữu",
+   "nghia": "chuyển linh cữu, di quan",
+   "ten_goc": "Di cữu (di quan)"
   },
   "普渡": {
-   "ten": "Cúng thí thực",
-   "nghia": "cúng cô hồn, phổ độ"
+   "ten": "Cúng cô hồn",
+   "nghia": "cúng thí thực, phổ độ (như dịp rằm tháng Bảy)",
+   "ten_goc": "Phổ độ (cúng thí thực)"
   },
   "入宅": {
-   "ten": "Nhập trạch",
-   "nghia": "về nhà mới"
+   "ten": "Về nhà mới",
+   "nghia": "dọn vào ở nhà mới, làm lễ nhập trạch",
+   "ten_goc": "Nhập trạch"
   },
   "安香": {
    "ten": "An vị bàn thờ",
@@ -186,123 +209,134 @@
   },
   "修造": {
    "ten": "Sửa chữa nhà",
-   "nghia": "tu sửa, xây cất"
+   "nghia": "tu sửa, cải tạo, xây cất nhà cửa"
   },
   "起基": {
    "ten": "Đổ móng",
-   "nghia": "đào móng, làm nền"
+   "nghia": "đào móng, ép cọc, đổ móng"
   },
   "动土": {
    "ten": "Động thổ",
-   "nghia": "khởi công đào đất làm nhà"
+   "nghia": "khởi công, làm lễ động thổ nhà, công trình"
   },
   "上梁": {
    "ten": "Cất nóc",
-   "nghia": "gác đòn dông, đổ mái"
+   "nghia": "gác đòn nóc, đổ bê tông mái"
   },
   "竖柱": {
    "ten": "Dựng cột",
-   "nghia": "dựng cột nhà"
+   "nghia": "dựng cột, đổ cột nhà"
   },
   "开井开池": {
-   "ten": "Đào giếng, ao",
-   "nghia": "khơi giếng, đào ao"
+   "ten": "Khoan giếng, đào ao",
+   "nghia": "khoan giếng, đào ao, xây bể nước",
+   "ten_goc": "Khai tỉnh khai trì"
   },
   "作陂放水": {
-   "ten": "Đắp bờ tháo nước",
-   "nghia": "làm bờ, tháo nước ruộng"
+   "ten": "Làm thuỷ lợi",
+   "nghia": "đắp bờ, tháo nước cho ruộng, ao hồ",
+   "ten_goc": "Tác pha phóng thuỷ (đắp bờ tháo nước)"
   },
   "拆卸": {
    "ten": "Tháo dỡ",
    "nghia": "phá dỡ công trình cũ"
   },
   "破屋": {
-   "ten": "Phá nhà",
-   "nghia": "dỡ nhà cũ"
+   "ten": "Phá nhà cũ",
+   "nghia": "dỡ, phá nhà cũ để làm lại"
   },
   "坏垣": {
-   "ten": "Phá tường",
-   "nghia": "đập tường"
+   "ten": "Đập tường",
+   "nghia": "đập, phá tường"
   },
   "补垣": {
    "ten": "Sửa tường",
-   "nghia": "vá, xây lại tường"
+   "nghia": "vá, xây lại tường, hàng rào"
   },
   "伐木做梁": {
-   "ten": "Chặt cây làm xà",
-   "nghia": "đẵn gỗ làm rường nhà"
+   "ten": "Chuẩn bị gỗ làm nhà",
+   "nghia": "chặt cây, xẻ gỗ, làm xà kèo cho nhà",
+   "ten_goc": "Phạt mộc tố lương (chặt cây làm xà)"
   },
   "作灶": {
    "ten": "Làm bếp",
-   "nghia": "xây, đặt bếp mới"
+   "nghia": "xây, lắp bếp mới"
   },
   "解除": {
-   "ten": "Giải trừ",
-   "nghia": "dọn dẹp, tẩy uế, làm sạch nhà"
+   "ten": "Dọn dẹp, tẩy uế",
+   "nghia": "dọn dẹp, làm sạch nhà, làm lễ giải trừ",
+   "ten_goc": "Giải trừ"
   },
   "开柱眼": {
-   "ten": "Đục lỗ cột",
-   "nghia": "đục mộng cột"
+   "ten": "Khoan, đục cột",
+   "nghia": "đục mộng, khoan lỗ cột kèo",
+   "ten_goc": "Khai trụ nhãn (đục lỗ cột)"
   },
   "穿屏扇架": {
-   "ten": "Lắp vách, khung",
-   "nghia": "dựng vách ngăn, khung cửa"
+   "ten": "Lắp vách, khung cửa",
+   "nghia": "dựng vách ngăn, lắp khung cửa, cửa sổ",
+   "ten_goc": "Xuyên bình phiến giá"
   },
   "盖屋合脊": {
    "ten": "Lợp mái",
-   "nghia": "lợp nhà, gắn nóc"
+   "nghia": "lợp mái, đổ mái, gắn nóc nhà"
   },
   "开厕": {
    "ten": "Làm nhà vệ sinh",
-   "nghia": "đào, xây nhà vệ sinh"
+   "nghia": "xây, sửa nhà vệ sinh, bể phốt"
   },
   "造仓": {
    "ten": "Làm kho",
-   "nghia": "xây kho chứa"
+   "nghia": "xây kho chứa, nhà xưởng"
   },
   "塞穴": {
-   "ten": "Lấp hang",
-   "nghia": "bịt lỗ, lấp hang chuột kiến"
+   "ten": "Bịt lỗ, chống chuột",
+   "nghia": "bịt lỗ tường, lấp hang chuột, tổ kiến, chống mối",
+   "ten_goc": "Tắc huyệt (lấp hang)"
   },
   "平治道涂": {
-   "ten": "Sửa đường",
-   "nghia": "san lấp, làm đường"
+   "ten": "Làm đường, sân",
+   "nghia": "san lấp, làm đường, đổ sân, lát lối đi",
+   "ten_goc": "Bình trị đạo đồ (sửa đường)"
   },
   "造桥": {
-   "ten": "Bắc cầu",
-   "nghia": "xây cầu"
+   "ten": "Làm cầu",
+   "nghia": "xây, bắc cầu"
   },
   "作厕": {
    "ten": "Làm nhà vệ sinh",
-   "nghia": "xây nhà vệ sinh"
+   "nghia": "xây, sửa nhà vệ sinh, bể phốt"
   },
   "筑堤": {
-   "ten": "Đắp đê",
-   "nghia": "đắp bờ, đê"
+   "ten": "Đắp đê, kè bờ",
+   "nghia": "đắp đê, kè bờ ao, bờ sông"
   },
   "开池": {
-   "ten": "Đào ao",
-   "nghia": "đào ao, hồ"
+   "ten": "Đào ao, làm hồ",
+   "nghia": "đào ao, làm hồ cá, bể nước"
   },
   "伐木": {
-   "ten": "Chặt cây",
-   "nghia": "đốn cây"
+   "ten": "Chặt, tỉa cây",
+   "nghia": "đốn, chặt hoặc tỉa cây lớn"
   },
   "开渠": {
-   "ten": "Đào mương",
-   "nghia": "khơi mương, rãnh"
+   "ten": "Làm mương, cống",
+   "nghia": "khơi mương, làm rãnh, cống thoát nước",
+   "ten_goc": "Khai cừ (đào mương)"
   },
   "掘井": {
-   "ten": "Đào giếng",
-   "nghia": "khoan, đào giếng"
+   "ten": "Khoan giếng",
+   "nghia": "khoan, đào giếng nước",
+   "ten_goc": "Quật tỉnh (đào giếng)"
   },
   "扫舍": {
-   "ten": "Quét dọn nhà",
-   "nghia": "tổng vệ sinh nhà cửa"
+   "ten": "Tổng vệ sinh nhà",
+   "nghia": "quét dọn, lau dọn nhà cửa",
+   "ten_goc": "Tảo xá (quét nhà)"
   },
   "放水": {
    "ten": "Tháo nước",
-   "nghia": "xả nước ao ruộng"
+   "nghia": "xả nước ao, ruộng, bể chứa"
   },
   "造屋": {
    "ten": "Làm nhà",
@@ -310,11 +344,12 @@
   },
   "合脊": {
    "ten": "Gắn nóc",
-   "nghia": "hoàn thiện nóc nhà"
+   "nghia": "hoàn thiện nóc, đổ mái"
   },
   "造畜稠": {
-   "ten": "Làm chuồng",
-   "nghia": "làm chuồng trại vật nuôi"
+   "ten": "Làm chuồng trại",
+   "nghia": "làm chuồng trại vật nuôi, nhà cho thú cưng",
+   "ten_goc": "Tạo súc trù (làm chuồng)"
   },
   "修门": {
    "ten": "Sửa cửa",
@@ -322,115 +357,132 @@
   },
   "定磉": {
    "ten": "Đặt chân cột",
-   "nghia": "đặt đá kê chân cột"
+   "nghia": "đặt đá kê, đổ bệ chân cột",
+   "ten_goc": "Định tảng"
   },
   "作梁": {
-   "ten": "Làm xà",
-   "nghia": "làm rường, xà nhà"
+   "ten": "Làm xà, dầm",
+   "nghia": "làm xà, đổ dầm nhà"
   },
   "修饰垣墙": {
-   "ten": "Trang trí tường",
-   "nghia": "sơn sửa tường rào"
+   "ten": "Sơn sửa tường",
+   "nghia": "sơn, sửa, trang trí tường, hàng rào",
+   "ten_goc": "Tu sức viên tường"
   },
   "架马": {
-   "ten": "Dựng giàn",
-   "nghia": "dựng giàn giáo"
+   "ten": "Dựng giàn giáo",
+   "nghia": "dựng giàn giáo, khung tạm để thi công",
+   "ten_goc": "Giá mã (dựng giàn)"
   },
   "开市": {
    "ten": "Khai trương",
-   "nghia": "mở cửa hàng, bắt đầu buôn bán"
+   "nghia": "mở cửa hàng, văn phòng, bắt đầu buôn bán"
   },
   "挂匾": {
-   "ten": "Treo biển",
-   "nghia": "treo biển hiệu"
+   "ten": "Treo biển hiệu",
+   "nghia": "treo biển hiệu cửa hàng, công ty"
   },
   "纳财": {
-   "ten": "Nạp tài",
-   "nghia": "thu tiền, nhập hàng, đòi nợ"
+   "ten": "Thu tiền, nhập hàng",
+   "nghia": "thu tiền, nhận tiền hàng, nhập hàng, thu nợ",
+   "ten_goc": "Nạp tài"
   },
   "求财": {
-   "ten": "Cầu tài",
-   "nghia": "lo việc tiền bạc, làm ăn"
+   "ten": "Lo việc làm ăn",
+   "nghia": "bàn chuyện làm ăn, tìm khách, tìm cơ hội kiếm tiền",
+   "ten_goc": "Cầu tài"
   },
   "开仓": {
-   "ten": "Mở kho",
-   "nghia": "xuất kho, mở kho hàng"
+   "ten": "Mở kho, xuất hàng",
+   "nghia": "mở kho, xuất hàng ra bán",
+   "ten_goc": "Khai thương (mở kho)"
   },
   "买车": {
    "ten": "Mua xe",
    "nghia": "mua xe, phương tiện"
   },
   "置产": {
-   "ten": "Mua tài sản",
+   "ten": "Mua nhà đất, tài sản",
    "nghia": "mua nhà đất, sắm tài sản lớn"
   },
   "雇佣": {
-   "ten": "Thuê người",
+   "ten": "Thuê người làm",
    "nghia": "tuyển, thuê người làm"
   },
   "出货财": {
-   "ten": "Xuất hàng",
-   "nghia": "giao hàng, xuất tiền"
+   "ten": "Xuất hàng, chi tiền",
+   "nghia": "giao hàng, xuất tiền, chi khoản lớn",
+   "ten_goc": "Xuất hoá tài"
   },
   "安机械": {
    "ten": "Lắp máy móc",
-   "nghia": "đặt máy, khởi động thiết bị"
+   "nghia": "lắp đặt, chạy thử máy móc, thiết bị"
   },
   "造车器": {
-   "ten": "Đóng xe, dụng cụ",
-   "nghia": "làm xe, nông cụ"
+   "ten": "Làm xe, dụng cụ",
+   "nghia": "chế tạo, lắp ráp xe, máy, nông cụ, dụng cụ nghề",
+   "ten_goc": "Tạo xa khí (đóng xe, nông cụ)"
   },
   "经络": {
-   "ten": "Kéo sợi, dệt",
-   "nghia": "se tơ, dệt vải"
+   "ten": "Dệt may",
+   "nghia": "kéo sợi, dệt vải, may mặc",
+   "ten_goc": "Kinh lạc (kéo sợi, dệt vải)"
   },
   "酝酿": {
-   "ten": "Ủ rượu, làm tương",
-   "nghia": "ủ men, lên men"
+   "ten": "Làm đồ lên men",
+   "nghia": "nấu rượu, làm tương, muối dưa, ủ men",
+   "ten_goc": "Uấn nhưỡng (ủ rượu, làm tương)"
   },
   "作染": {
-   "ten": "Nhuộm",
-   "nghia": "nhuộm vải"
+   "ten": "Nhuộm vải",
+   "nghia": "nhuộm vải, nhuộm sợi",
+   "ten_goc": "Tác nhiễm (nhuộm)"
   },
   "鼓铸": {
-   "ten": "Đúc kim loại",
-   "nghia": "rèn, đúc"
+   "ten": "Rèn đúc kim loại",
+   "nghia": "rèn, đúc, hàn, gia công kim loại",
+   "ten_goc": "Cổ chú (đúc kim loại)"
   },
   "造船": {
-   "ten": "Đóng thuyền",
-   "nghia": "đóng tàu thuyền"
+   "ten": "Đóng tàu thuyền",
+   "nghia": "đóng, sửa tàu thuyền"
   },
   "割蜜": {
-   "ten": "Lấy mật",
-   "nghia": "thu mật ong"
+   "ten": "Lấy mật ong",
+   "nghia": "thu hoạch mật ong",
+   "ten_goc": "Cát mật (lấy mật)"
   },
   "栽种": {
-   "ten": "Trồng trọt",
-   "nghia": "gieo trồng, trồng cây"
+   "ten": "Trồng cây",
+   "nghia": "gieo hạt, trồng cây, trồng rau",
+   "ten_goc": "Tài chủng (trồng trọt)"
   },
   "取渔": {
-   "ten": "Đánh cá",
-   "nghia": "bắt cá"
+   "ten": "Đánh bắt cá",
+   "nghia": "đánh bắt cá, tát ao, thu hoạch thuỷ sản",
+   "ten_goc": "Thủ ngư (đánh cá)"
   },
   "结网": {
-   "ten": "Đan lưới",
-   "nghia": "đan lưới, làm chài"
+   "ten": "Sửa đồ nghề đánh bắt",
+   "nghia": "đan lưới, làm chài, sửa ngư cụ",
+   "ten_goc": "Kết võng (đan lưới)"
   },
   "牧养": {
    "ten": "Chăn nuôi",
-   "nghia": "chăn thả gia súc"
+   "nghia": "chăn thả, nuôi gia súc, gia cầm"
   },
   "安碓磑": {
-   "ten": "Đặt cối",
-   "nghia": "đặt cối xay, cối giã"
+   "ten": "Lắp máy xay, cối",
+   "nghia": "đặt cối giã, cối xay; nay là lắp máy xay xát, máy chế biến",
+   "ten_goc": "Đặt cối giã, cối xay"
   },
   "习艺": {
-   "ten": "Học nghề",
-   "nghia": "học kỹ năng, tay nghề"
+   "ten": "Học nghề, kỹ năng",
+   "nghia": "học nghề, học một kỹ năng mới"
   },
   "入学": {
    "ten": "Nhập học",
-   "nghia": "đi học, bắt đầu khoá học"
+   "nghia": "đi học ngày đầu, bắt đầu khoá học"
   },
   "理发": {
    "ten": "Cắt tóc",
@@ -438,79 +490,94 @@
   },
   "探病": {
    "ten": "Thăm người ốm",
-   "nghia": "đi thăm bệnh"
+   "nghia": "đi thăm người ốm, vào viện thăm"
   },
   "见贵": {
-   "ten": "Gặp người quan trọng",
-   "nghia": "gặp cấp trên, quý nhân"
+   "ten": "Gặp sếp, đối tác",
+   "nghia": "gặp cấp trên, đối tác, người có thể giúp mình; đi phỏng vấn",
+   "ten_goc": "Kiến quý (gặp quý nhân)"
   },
   "乘船": {
-   "ten": "Đi thuyền",
-   "nghia": "đi tàu thuyền"
+   "ten": "Đi tàu thuyền",
+   "nghia": "đi tàu, thuyền, du lịch sông nước, biển",
+   "ten_goc": "Thừa thuyền (đi thuyền)"
   },
   "渡水": {
-   "ten": "Qua sông nước",
-   "nghia": "vượt sông, đi đường thuỷ"
+   "ten": "Đi đường thuỷ",
+   "nghia": "qua sông, đi đường thuỷ",
+   "ten_goc": "Độ thuỷ (qua sông nước)"
   },
   "针灸": {
    "ten": "Châm cứu",
-   "nghia": "châm cứu, bấm huyệt"
+   "nghia": "châm cứu, bấm huyệt",
+   "luu_y": "Bệnh cần khám thì đi ngay, không chờ ngày đẹp; sách lịch chỉ là tập quán chọn ngày cho việc sắp xếp được, không thay lời bác sĩ."
   },
   "出行": {
-   "ten": "Xuất hành",
-   "nghia": "đi xa, lên đường"
+   "ten": "Xuất hành, đi xa",
+   "nghia": "lên đường đi xa, đi công tác, du lịch"
   },
   "移徙": {
    "ten": "Chuyển nhà",
-   "nghia": "dọn nhà, chuyển chỗ ở"
+   "nghia": "dọn nhà, chuyển chỗ ở, chuyển văn phòng"
   },
   "分居": {
    "ten": "Ra ở riêng",
    "nghia": "tách hộ, ra ở riêng"
   },
   "剃头": {
-   "ten": "Cạo đầu",
-   "nghia": "cạo tóc"
+   "ten": "Cắt tóc máu, xuống tóc",
+   "nghia": "cạo tóc: cắt tóc máu cho bé, xuống tóc đi tu",
+   "ten_goc": "Thế đầu (cạo đầu)"
   },
   "整手足甲": {
-   "ten": "Cắt móng",
-   "nghia": "cắt móng tay chân"
+   "ten": "Cắt sửa móng",
+   "nghia": "cắt, sửa móng tay chân, làm móng"
   },
   "纳畜": {
    "ten": "Mua vật nuôi",
-   "nghia": "nhập gia súc, thú nuôi"
+   "nghia": "mua, nhận gia súc, thú cưng về nuôi",
+   "ten_goc": "Nạp súc"
   },
   "捕捉": {
-   "ten": "Lùng bắt",
-   "nghia": "bắt kẻ gian, bắt thú"
+   "ten": "Bắt chuột, diệt côn trùng",
+   "nghia": "diệt chuột, trừ sâu bọ hại, bắt vật nuôi sổng chuồng",
+   "ten_goc": "Bổ tróc (lùng bắt kẻ gian, bắt thú)"
   },
   "畋猎": {
-   "ten": "Săn bắn",
-   "nghia": "đi săn"
+   "ten": "Đi câu, đặt bẫy",
+   "nghia": "đi câu, đặt bẫy, đánh bắt ngoài trời",
+   "ten_goc": "Điền liệp (săn bắn)"
   },
   "教牛马": {
-   "ten": "Luyện vật nuôi",
-   "nghia": "dạy trâu bò, ngựa"
+   "ten": "Huấn luyện vật nuôi",
+   "nghia": "tập, dạy trâu bò, chó, mèo, thú cưng",
+   "ten_goc": "Giáo ngưu mã (dạy trâu ngựa)"
   },
   "会亲友": {
    "ten": "Gặp họ hàng bạn bè",
    "nghia": "thăm hỏi, tụ họp"
   },
   "赴任": {
-   "ten": "Nhậm chức",
-   "nghia": "nhận việc, đi làm chỗ mới"
+   "ten": "Nhận việc mới",
+   "nghia": "ngày đầu đi làm, nhận chức, chuyển công tác",
+   "ten_goc": "Phó nhậm (nhậm chức)"
   },
   "求医": {
-   "ten": "Đi khám bệnh",
-   "nghia": "tìm thầy thuốc"
+   "ten": "Khám chữa bệnh",
+   "nghia": "bắt đầu một đợt khám, chữa bệnh có thể sắp xếp trước",
+   "ten_goc": "Cầu y (đi tìm thầy thuốc)",
+   "luu_y": "Bệnh cần khám thì đi ngay, không chờ ngày đẹp; sách lịch chỉ là tập quán chọn ngày cho việc sắp xếp được, không thay lời bác sĩ."
   },
   "治病": {
    "ten": "Chữa bệnh",
-   "nghia": "điều trị"
+   "nghia": "bắt đầu điều trị, liệu trình",
+   "luu_y": "Bệnh cần khám thì đi ngay, không chờ ngày đẹp; sách lịch chỉ là tập quán chọn ngày cho việc sắp xếp được, không thay lời bác sĩ."
   },
   "词讼": {
-   "ten": "Kiện tụng",
-   "nghia": "khởi kiện, tranh chấp"
+   "ten": "Khởi kiện, tranh chấp",
+   "nghia": "nộp đơn kiện, giải quyết tranh chấp",
+   "ten_goc": "Từ tụng (kiện tụng)",
+   "luu_y": "Thời hạn pháp lý không chờ ngày đẹp; việc kiện tụng nên hỏi luật sư."
   },
   "起基动土": {
    "ten": "Đổ móng, động thổ",
@@ -526,23 +593,24 @@
   },
   "造仓库": {
    "ten": "Làm kho",
-   "nghia": "xây kho"
+   "nghia": "xây kho chứa, nhà xưởng"
   },
   "立券交易": {
    "ten": "Ký kết, giao dịch",
-   "nghia": "lập hợp đồng, mua bán"
+   "nghia": "ký hợp đồng, mua bán, công chứng"
   },
   "交易": {
    "ten": "Giao dịch",
    "nghia": "mua bán, trao đổi"
   },
   "立券": {
-   "ten": "Ký kết",
-   "nghia": "làm giấy tờ, hợp đồng"
+   "ten": "Ký giấy tờ",
+   "nghia": "ký hợp đồng, làm giấy tờ",
+   "ten_goc": "Lập khoán (ký kết)"
   },
   "安机": {
-   "ten": "Lắp máy",
-   "nghia": "đặt máy móc"
+   "ten": "Lắp máy móc",
+   "nghia": "lắp đặt, chạy thử máy móc, thiết bị"
   },
   "会友": {
    "ten": "Gặp bạn",
@@ -550,14 +618,16 @@
   },
   "求医疗病": {
    "ten": "Khám chữa bệnh",
-   "nghia": "đi khám, điều trị"
+   "nghia": "bắt đầu một đợt khám, chữa bệnh có thể sắp xếp trước",
+   "ten_goc": "Cầu y liệu bệnh",
+   "luu_y": "Bệnh cần khám thì đi ngay, không chờ ngày đẹp; sách lịch chỉ là tập quán chọn ngày cho việc sắp xếp được, không thay lời bác sĩ."
   },
   "诸事不宜": {
    "ten": "Mọi việc nên hoãn",
    "nghia": "sách lịch khuyên không khởi sự việc lớn trong ngày này"
   },
   "馀事勿取": {
-   "ten": "Ngoài việc nêu thì nên hoãn",
+   "ten": "Việc khác nên hoãn",
    "nghia": "sách lịch khuyên chỉ làm các việc ghi ở mục Nên, việc khác để ngày khác"
   },
   "行丧": {
@@ -565,12 +635,14 @@
    "nghia": "lo việc tang"
   },
   "断蚁": {
-   "ten": "Diệt mối kiến",
-   "nghia": "trừ mối mọt"
+   "ten": "Diệt mối, kiến",
+   "nghia": "phun thuốc diệt mối, kiến, mọt",
+   "ten_goc": "Đoạn nghĩ (diệt mối kiến)"
   },
   "归岫": {
-   "ten": "Về nơi cũ",
-   "nghia": "trở về chốn cũ"
+   "ten": "Về quê, về nhà cũ",
+   "nghia": "trở về quê, về chốn cũ",
+   "ten_goc": "Quy tụ (về nơi cũ)"
   },
   "无": {
    "ten": "—",
@@ -1081,7 +1153,7 @@
    "ten": "Mãn",
    "y": "đầy đủ, viên mãn",
    "hop": "cầu tài, cúng tế, mở kho",
-   "tranh": "kiện tụng, nhậm chức"
+   "tranh": "kiện tụng, nhận chức mới"
   },
   "平": {
    "ten": "Bình",
@@ -1092,7 +1164,7 @@
   "定": {
    "ten": "Định",
    "y": "ổn định",
-   "hop": "ký kết, cưới hỏi, nhập trạch",
+   "hop": "ký kết, cưới hỏi, về nhà mới",
    "tranh": "kiện tụng, xuất hành xa"
   },
   "执": {
@@ -1111,7 +1183,7 @@
    "ten": "Nguy",
    "y": "chênh vênh",
    "hop": "cúng tế, việc nhỏ, việc cần cẩn trọng",
-   "tranh": "leo cao, đi thuyền, mạo hiểm"
+   "tranh": "leo cao, đi tàu thuyền, việc mạo hiểm"
   },
   "成": {
    "ten": "Thành",
@@ -1122,7 +1194,7 @@
   "收": {
    "ten": "Thu",
    "y": "thu về",
-   "hop": "nạp tài, thu nợ, thu hoạch",
+   "hop": "thu tiền, thu nợ, thu hoạch",
    "tranh": "an táng, xuất hành"
   },
   "开": {
@@ -1135,7 +1207,7 @@
    "ten": "Bế",
    "y": "đóng lại",
    "hop": "đắp đê, lấp hố, việc kết thúc",
-   "tranh": "khai trương, chữa mắt, xuất hành"
+   "tranh": "khai trương, xuất hành, khởi sự việc lớn"
   }
  },
  "than": {
