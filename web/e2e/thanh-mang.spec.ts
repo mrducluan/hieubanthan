@@ -129,6 +129,12 @@ test("trang con: breadcrumb 5 cấp, thanh mảng vẫn sáng cụm cha; bấm t
   expect((await breadcrumb(page)).slice(0, 4)).toEqual(["Trang chủ", "Huyền học", "Tử vi", "Chính tinh ở từng cung Tử vi"]);
   const tm = page.locator("[data-thanh-mang=tuvi]:visible");
   await expect(tm.locator("[data-muc=sao_cung]")).toHaveAttribute("aria-current", "location");   // cụm cha, không phải chính trang
+  // Chờ React gắn trình xử lý bấm vào link (hydrate xong) — bấm sớm hơn thì trình duyệt tải lại trang thường, không có
+  // sự kiện đo (CI chậm từng hỏng ở đây).
+  await tm.locator("[data-muc=tu_hoa]").evaluate((el) => new Promise<void>((xong) => {
+    const kiem = () => (Object.keys(el).some((k) => k.startsWith("__reactProps")) ? xong() : setTimeout(kiem, 50));
+    kiem();
+  }));
   await tm.locator("[data-muc=tu_hoa]").click();
   await expect(page).toHaveURL(/\/tu-vi\/tu-hoa$/);
   // đo lượt bấm thanh: chỉ mã mảng + mã mục + đường dẫn đang xem
