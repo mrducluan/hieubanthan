@@ -8,7 +8,8 @@ import { ArrowDown, ChevronDown, ChevronLeft, ChevronRight, Download, Layers, Mo
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
-import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
+import { DauMang } from "@/components/huyen-hoc/KhungMang";
+import { MoiLapLaSo } from "@/components/huyen-hoc/MoiLapLaSo";
 import { ChipPhai, DongGhiChu, DongPhai, KhungPhai, type PhaiDangDung } from "@/components/huyen-hoc/KhungPhai";
 import { DoiChieuCach } from "@/components/huyen-hoc/DoiChieuCach";
 import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
@@ -78,7 +79,7 @@ export function BatTu() {
 
   useBatDauDoc("battu", Boolean(ls));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Layers} ten="Bát tự" mo_ta="Tứ trụ năm – tháng – ngày – giờ theo tiết khí, ngũ hành chấm theo thang điểm công bố, dụng thần luôn trình bày hai cách để bạn tự cân nhắc." />;
+  const dau = <DauMang Icon={Layers} ten="Xem Bát tự: mệnh bạn thiếu hành gì?" mo_ta="Người bảo bạn thiếu Thuỷ, người bảo thiếu Hoả. Nhập ngày giờ sinh để tự thấy: năm hành của bạn dư thiếu ra sao, sức bạn đang mạnh hay đuối, và hai cách đọc hành nên bù để bạn so với chính đời mình." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   const lnDung = ln && ln.nam === namXem ? ln : null;
   const sinhGioTy = (goc?.birth_time ?? "") >= "23:00";
@@ -92,7 +93,7 @@ export function BatTu() {
       {dau}
 
       <section aria-label="Tứ trụ" className="space-y-4">
-        {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Tứ trụ cần giờ sinh, giới tính và nơi sinh. Giờ sinh càng chính xác càng tốt nếu bạn sinh gần ngày chuyển tiết." />}
+        {!laSo && <MoiLapLaSo moDun="battu" hoSo={hoSo} />}
         {laSo && !ls && !loi && <KhungTai dong={6} />}
         {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
         {/* Trục 2 UX: lời thường lên đầu (câu về nhật chủ từ KB đời sống + nút xuống luận giải), bảng kỹ thuật gập bên dưới. */}

@@ -221,11 +221,10 @@ test("form hồ sơ: chọn “Không biết giờ” → khoá ô giờ, lưu g
   await napHoSo(page, khongGio);
   await mock(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Thêm giờ sinh, giới tính, nơi sinh" }).click();
   await page.getByLabel("Giờ sinh này").selectOption("unknown");
   await expect(page.getByLabel("Giờ sinh", { exact: true })).toBeDisabled();
   await expect(page.getByTestId("nhac-khong-biet-gio")).toBeVisible();
-  await page.getByRole("button", { name: "Lưu và xem" }).click();
+  await page.getByRole("button", { name: "Lập lá số của tôi" }).click();
   await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
   const hs = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1") ?? "{}"));
   expect(hs).toMatchObject({ gio: "12:00", do_tin_gio: "unknown" });

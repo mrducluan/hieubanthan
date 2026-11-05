@@ -1,7 +1,7 @@
 "use client";
 import { useState, type ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
-import { Clock } from "lucide-react";
+import { Check, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { ChuNhan } from "@/components/cms/ChuNhan";
@@ -22,6 +22,16 @@ export function DauMang({ Icon, ten, mo_ta, children }: { Icon: LucideIcon; ten:
       </div>
       <h1 className="mt-4 text-4xl sm:text-5xl">{d.h1 ? <ChuNhan chu={d.h1} /> : ten}</h1>
       <LoiDan macDinh={mo_ta} />
+      {/* CTA-LS: chip lợi ích (chỉ trang có khoá dau.chip_* — Tử vi, Bát tự). */}
+      {[1, 2, 3].some((i) => c(`dau.chip_${i}`)) && (
+        <ul className="mt-4 flex flex-wrap gap-2" data-testid="dau-chip">
+          {[1, 2, 3].map((i) => c(`dau.chip_${i}`)).filter(Boolean).map((t) => (
+            <li key={t} className="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/[0.06] px-3 py-1 text-xs text-fg sm:text-sm">
+              <Check className="size-3.5 text-gold" aria-hidden />{t}
+            </li>
+          ))}
+        </ul>
+      )}
       <p className="mt-3 inline-flex rounded-full border border-line px-3 py-1 text-xs text-fg-faint">
         {c("dau.nhan_duoi") || "Diễn giải từ kho tri thức Hiểu Bản Thân · tham khảo văn hoá"}
       </p>

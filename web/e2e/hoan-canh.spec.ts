@@ -8,13 +8,12 @@ const { noi_sinh: _bo, ...THIEU_NOI_SINH } = HO_SO_MAU;
 test("chọn tình trạng → lưu trên máy, gửi kèm lá số, báo cáo có hộp theo hoàn cảnh", async ({ page }) => {
   await napHoSo(page, THIEU_NOI_SINH);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Thêm giờ sinh, giới tính, nơi sinh" }).click();
   await page.getByLabel("Nơi sinh").selectOption("ha-noi");
   const tt = page.getByLabel("Tình trạng (tuỳ chọn)");
   await expect(tt).toHaveValue("");
   await expect(page.getByTestId("tinh-trang-ghi-chu")).toContainText("máy chủ không lưu");
   await tt.selectOption("co_doi");
-  await page.getByRole("button", { name: "Lưu và xem" }).click();
+  await page.getByRole("button", { name: "Lập lá số của tôi" }).click();
   await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
   const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1")!));
   expect(h.tinh_trang).toBe("co_doi");
@@ -55,12 +54,11 @@ test("tình trạng chỉ đi kèm luận giải toàn bộ, không theo lá s�
 test("bỏ chọn tình trạng → xoá khỏi hồ sơ, không gửi", async ({ page }) => {
   await napHoSo(page, { ...THIEU_NOI_SINH, tinh_trang: "doc_than" });
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Thêm giờ sinh, giới tính, nơi sinh" }).click();
   await page.getByLabel("Nơi sinh").selectOption("ha-noi");
   const tt = page.getByLabel("Tình trạng (tuỳ chọn)");
   await expect(tt).toHaveValue("doc_than");
   await tt.selectOption("");
-  await page.getByRole("button", { name: "Lưu và xem" }).click();
+  await page.getByRole("button", { name: "Lập lá số của tôi" }).click();
   await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
   const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1")!));
   expect(h.tinh_trang).toBeUndefined();
@@ -69,7 +67,6 @@ test("bỏ chọn tình trạng → xoá khỏi hồ sơ, không gửi", async (
 test("người dưới 18 tuổi không được hỏi tình trạng", async ({ page }) => {
   await napHoSo(page, { ...THIEU_NOI_SINH, nam: new Date().getFullYear() - 14 });
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Thêm giờ sinh, giới tính, nơi sinh" }).click();
   await expect(page.getByLabel("Nơi sinh")).toBeVisible();
   await expect(page.getByLabel("Tình trạng (tuỳ chọn)")).toHaveCount(0);
 });

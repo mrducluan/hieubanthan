@@ -135,3 +135,17 @@ for (const [utc, can, chi, co] of [[undefined, "Kỷ", "Tỵ", true], [-5, "Canh
     await expect(page.getByText(/Chưa khai múi giờ nơi sinh/)).toHaveCount(co ? 1 : 0);
   });
 }
+
+test("CTA-LS: chưa có hồ sơ → form xem tứ trụ ngay trên trang, nhập xong ra tứ trụ", async ({ page }) => {
+  await napHoSo(page, (({ gio: _g, gioi_tinh: _t, noi_sinh: _n, ...h }) => h)(HO_SO_MAU));
+  await page.goto("/bat-tu");
+  await expect(page.locator("h1")).toHaveText("Xem Bát tự: mệnh bạn thiếu hành gì?");
+  const moi = page.getByTestId("moi-lap-la-so");
+  await expect(moi.getByRole("heading", { level: 2 })).toContainText("Còn 3 thông tin nữa là có tứ trụ");
+  await moi.getByLabel("Giờ sinh", { exact: true }).fill(HO_SO_MAU.gio!);
+  await moi.getByLabel("Giới tính").selectOption(HO_SO_MAU.gioi_tinh!);
+  await moi.getByLabel("Nơi sinh").selectOption(HO_SO_MAU.noi_sinh!);
+  await moi.getByRole("button", { name: "Xem năm hành của tôi" }).click();
+  await expect(page.getByTestId("bat-tu-loi-thuong")).toBeVisible();
+  await expect(page.getByTestId("moi-lap-la-so")).toHaveCount(0);
+});

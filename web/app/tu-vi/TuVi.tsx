@@ -16,7 +16,8 @@ import { CachCuc } from "@/components/huyen-hoc/CachCuc";
 import { CungSaoMenh } from "@/components/huyen-hoc/CungSaoMenh";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DaiHanNhay, DongHoaHan } from "@/components/huyen-hoc/HanLaSo";
-import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
+import { DauMang } from "@/components/huyen-hoc/KhungMang";
+import { MoiLapLaSo } from "@/components/huyen-hoc/MoiLapLaSo";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { LuuNguyet } from "@/components/huyen-hoc/LuuNguyet";
 import { KhoiMoLuoi } from "@/components/huyen-hoc/KhoiMoLuoi";
@@ -149,7 +150,7 @@ export function TuVi() {
 
   useBatDauDoc("tuvi", Boolean(ls) && !nt);
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Orbit} ten="Tử vi" mo_ta="Lá số an ngay trên hệ thống của Hiểu Bản Thân — ngày giờ sinh không gửi cho bên thứ ba. Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn. Không nêu tên bệnh, không phán tai nạn hay sống chết; sức khoẻ chỉ gợi năm nên chú ý và đi khám." />;
+  const dau = <DauMang Icon={Orbit} ten="Xem Tử vi: năm nay bạn nên chú ý gì?" mo_ta="Việc đang chững, tiền vào rồi lại ra, chuyện tình cảm chưa rõ? Nhập ngày giờ sinh để có lá số 12 cung, rồi đọc từng mảng đời bằng lời thường: chỗ đang thuận, chỗ nên chú ý, việc nên làm." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   return (
     <div>
@@ -158,10 +159,10 @@ export function TuVi() {
       <XemNguoiThanCtx.Provider value={Boolean(nt)}>
       <section aria-label="Lá số" className="space-y-4">
         {(laSoBan || (dsNguoiThan?.length ?? 0) > 0) && <ChonNguoiXem dangXem={nt} onChon={chonNguoi} coBan={Boolean(laSoBan)} />}
-        {!laSo && <XinThemDuLieu hoSo={hoSo} ly_do="Để an lá số cần giờ sinh, giới tính và nơi sinh (nơi sinh quyết định múi giờ lúc bạn chào đời). Bạn vẫn hỏi được câu kiến thức chung ở khung bên dưới." />}
-        <p className="text-sm text-fg-faint">
+        {!laSo && <MoiLapLaSo moDun="tuvi" hoSo={hoSo} />}
+        {laSo && <p className="text-sm text-fg-faint">
           Mới làm quen Tử vi? <Link href="/tu-vi/la-so-mau" className="text-gold underline">Xem 6 lá số mẫu được đọc từng bước</Link>, có giải nghĩa từng thuật ngữ.
-        </p>
+        </p>}
         {laSo && !ls && !loi && <KhungTai dong={6} />}
         {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
         {ls && (
