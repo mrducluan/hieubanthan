@@ -5,6 +5,26 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4x. Đợt 2 Tử vi + chính sách sức khoẻ mới (TV-ZW2 + SK-1, 2026-11-04) — sau khi merge
+
+- [ ] **Deploy engine trước web** (`ENGINE_VERSION` 0.1.7 — sửa khoảng tuổi đồng hạn; trường mới `cung_sao_menh`, hộp sức khoẻ theo năm,
+      cụm `/tu-vi/co-thu`). Web thiếu trường thì ẩn phần mới.
+- [ ] (20 phút) Đọc thử lời sức khoẻ mới: mở `/tu-vi` và `/bat-tu` bằng hồ sơ của anh → chương Sức khoẻ, hộp "Năm nên chú ý sức khoẻ hơn";
+      hỏi đáp thử "năm nào tôi cần để ý sức khoẻ?", "tôi có bị bệnh tim không?" — xem giọng có ổn không.
+- [ ] (Quyết định) Trả lời 7 câu hỏi ở `docs/DE-XUAT-Y-TUVI-BO-SUNG.md` mục 9 (200 ý viết lại từ lời giảng hiện đại) — trả lời xong em mới nối vào sản phẩm.
+- [ ] (Chuyên gia, dần dần) Đối chiếu 84 câu Cốt Tuỷ Phú với bản khắc / bản in (`docs/CO-THU-COT-TUY-PHU.md`), duyệt phiên âm + nghĩa.
+- [ ] (Quyết định nhỏ) Quân thần khánh hội: giữ "Tử Vi + 3/7 cát tinh" hay theo sách "phải đủ Tả Phù + Hữu Bật"? (`docs/DOI-CHIEU-ZIWEI-DOUSHU.md`)
+- [ ] Search Console → Kiểm tra URL `https://hieuban.com/tu-vi/co-thu/cot-tuy-phu` → Yêu cầu lập chỉ mục.
+
+### 4w. Học từ repo Tử vi ziwei-doushu (TV-ZW, 2026-11-04) — sau khi merge
+
+- [ ] **Deploy engine trước web** (trường mới `tu_hoa_sao`, `dieu_kien_dat`, `trang_sao_cung`, tháng nhuận `ca_thang_sau`; web thiếu
+      trường thì tự ẩn phần mới).
+- [ ] (5 phút) Mở `/tu-vi` với hồ sơ của anh → bật lớp đại hạn / lưu niên, bấm một giai đoạn 10 năm, bấm tên sao trong chi tiết cung —
+      xem chữ có dễ hiểu không. 13 cách cục mới là **nháp ban biên tập** — đọc lời ở khung "Cách cục" khi gặp.
+- [ ] (Quyết định, khi tiện) Đọc mục 5 `docs/HOC-TU-ZIWEI-DOUSHU.md`: cụm "Cốt Tủy Phú" (cần nguyên văn từ bản in thật),
+      "Cùng sao Mệnh x %" thay "người nổi tiếng", "Lá số người thân" lưu trên máy.
+
 ### 4v. Thanh mảng + breadcrumb + menu Huyền học (TM-1, 2026-11-03) — sau khi merge
 
 - [ ] **CMS → Giao diện website → Menu đầu trang** (sau khi CMS deploy chạy migration `tm_1_menu_huyen_hoc`): mở menu con

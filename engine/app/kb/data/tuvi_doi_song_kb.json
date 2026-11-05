@@ -2685,7 +2685,7 @@
   }
  },
  "van_han": {
-  "_nguon": "VH-1 (2026-10-21) — chương 'Vận hạn & điều nên tránh', nháp AI viết lời đời thường. Khoá: ky_nhap/ky_chieu/loc_nhap.<Cung> (nhan = vế sau tiêu đề 'Năm N: …', mang = mảng đời) + tre (18–34 tuổi) / lon (từ 35 tuổi) {y, tranh, lam}; nho = dưới 18 tuổi (lời cho cha mẹ); co = cờ tập quán dân gian theo chi năm sinh. Không vật phẩm, không giải hạn, không tên bệnh, không đoán năm ốm.",
+  "_nguon": "VH-1 (2026-10-21) — chương 'Vận hạn & điều nên tránh', nháp AI viết lời đời thường. Khoá: ky_nhap/ky_chieu/loc_nhap.<Cung> (nhan = vế sau tiêu đề 'Năm N: …', mang = mảng đời) + tre (18–34 tuổi) / lon (từ 35 tuổi) {y, tranh, lam}; nho = dưới 18 tuổi (lời cho cha mẹ); co = cờ tập quán dân gian theo chi năm sinh. Không vật phẩm, không giải hạn, không tên bệnh; năm nên chú ý sức khoẻ nói bằng lời phòng ngừa ở chương Sức khoẻ (SK-1, luangiai/suc_khoe_nam.py).",
   "source_id": "tuvi_vn",
   "school_id": "nam_phai_viet",
   "ky_nhap": {
@@ -2994,7 +2994,20 @@
   "quy_tinh_giap_menh": "Bạn hay được người có vị thế để ý và nâng đỡ; giữ lời và làm tốt phần mình để giữ được sự tin cậy ấy.",
   "quyen_sat_hoa_loc": "Bạn cứng cỏi, từng qua nhiều phen gian khó và biến áp lực thành uy tín; nhớ mềm mỏng với người thân.",
   "cu_phung_tu_sat": "Bạn dễ vướng lời qua tiếng lại, hiểu lầm; nói chậm lại và viết rõ những thoả thuận quan trọng là cách giữ yên.",
-  "menh_ly_phung_khong": "Bạn có ý tưởng khác người, hay theo đuổi điều trừu tượng; tiền đến rồi dễ đi, nên đặt nguyên tắc để dành thật chặt."
+  "menh_ly_phung_khong": "Bạn có ý tưởng khác người, hay theo đuổi điều trừu tượng; tiền đến rồi dễ đi, nên đặt nguyên tắc để dành thật chặt.",
+  "dong_luong_dan_than": "Bạn hiền hoà, hay giúp người và hợp việc chăm sóc, phục vụ; đặt mục tiêu rõ thì sự tử tế của bạn ra kết quả.",
+  "liem_tuong_dong_cung": "Bạn nghiêm túc, giữ chữ tín và làm việc có nguyên tắc; thêm chút mềm mỏng thì người khác dễ theo bạn hơn.",
+  "vu_sat_dong_cung": "Bạn quyết đoán, dám làm việc nặng nhưng dễ vội khi đụng chuyện tiền; đặt hạn mức, ghi rõ giấy tờ và để việc lớn qua một đêm rồi mới quyết.",
+  "tu_vi_co_quan": "Bạn có chính kiến và quen tự gánh việc; tìm được một hai người cộng sự tin được thì bạn đi xa hơn nhiều.",
+  "hoa_ky_thien_di": "Khi đi xa hay làm việc với người lạ, bạn dễ gặp trục trặc nhỏ, hiểu lầm; chuẩn bị kỹ giấy tờ, lịch trình và nói rõ thoả thuận từ đầu là đủ yên.",
+  "liem_sat_duong": "Bạn cứng cỏi, dám đối đầu nhưng dễ nóng và bỏ qua thủ tục; đi lại cẩn thận, đọc kỹ giấy tờ trước khi ký và nhờ người am hiểu khi có tranh chấp.",
+  "cu_hoa_duong": "Bạn dễ dồn nén bực bội, lời qua tiếng lại dễ căng; xả căng thẳng đều đặn và để chuyện bực mình qua một đêm rồi mới nói là cách giữ yên.",
+  "linh_xuong_da_vu": "Bạn hay gặp việc gấp phải xoay xở; có sẵn kế hoạch dự phòng cho việc lớn và giữ đúng quy định an toàn khi đi sông nước.",
+  "loc_ton_thu_menh": "Bạn cẩn trọng, biết dành dụm và làm ăn chắc tay; chỉ cần đừng tiết kiệm đến mức bỏ lỡ việc đáng làm.",
+  "loc_ton_thu_than": "Càng về sau bạn càng biết giữ của và vững về tài chính; lập kế hoạch tích luỹ dài hạn sớm thì càng thấy rõ.",
+  "thien_ma_menh_di": "Bạn năng động, hay di chuyển và hợp việc phải đi lại, giao thương; chọn chuyến đi có mục đích rõ thì mỗi lần đi đều có ích.",
+  "khoa_quyen_hoi_menh": "Bạn có uy tín và sức nắm việc, dễ được giao trách nhiệm; nói rõ giá trị công việc của mình thì thu nhập theo kịp tiếng tốt.",
+  "co_nguyet_dong_luong_ba": "Bạn chu đáo, thích ổn định và hợp làm chuyên môn trong tổ chức; mỗi vài năm tự đặt một bước tiến mới để khỏi đứng yên."
  },
  "cum_cam": [
   "hành trình",

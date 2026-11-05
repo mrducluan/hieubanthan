@@ -183,15 +183,19 @@ export const NoiDungMaBanDo = z.object({
   /** Mã biến thể câu mời 0–2. */
   b: z.number().int().min(0).max(2),
   d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  /** TV-ZW "Cùng sao Mệnh": khoảng 1 trong r lá số (mẫu 1940–2010 × 12 canh) có cùng chính tinh cung Mệnh; 0 = không
+   *  có (mã cũ / chưa có giờ). Chỉ là tỉ lệ trên mẫu cố định — không suy ra được ngày giờ sinh. */
+  r: z.number().int().min(0).max(999).default(0),
 }).refine((x) => x.o.includes(x.s));
 export type NoiDungMaBanDo = z.infer<typeof NoiDungMaBanDo>;
 
 const kyBanDo = (than: string) => b64u(createHmac("sha256", khoa()).update(`bd|${than}`).digest()).slice(0, 16);
 
-/** Gói: [1, t, s, k, n, h, m, c, g, q, o, b, số ngày từ 1/1/2026]. */
-export function kyMaBanDo(nd: Omit<NoiDungMaBanDo, "v" | "d">, homNay = new Date()): string {
+/** Gói: [1, t, s, k, n, h, m, c, g, q, o, b, số ngày từ 1/1/2026, r]. Mã cũ (13 phần, không có r) vẫn đọc được. */
+export function kyMaBanDo(nd: Omit<NoiDungMaBanDo, "v" | "d" | "r"> & { r?: number }, homNay = new Date()): string {
   const x = NoiDungMaBanDo.parse({ ...nd, v: 1, d: homNay.toISOString().slice(0, 10) });
   const goi = [1, x.t, x.s, x.k, x.n, x.h, x.m, x.c, x.g, x.q, x.o, x.b, Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  if (x.r) goi.push(x.r);
   const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
   return `${than}.${kyBanDo(than)}`;
 }
@@ -203,10 +207,10 @@ export function docMaBanDo(ma: string, homNay = new Date()): NoiDungMaBanDo | nu
   if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
   try {
     const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown[];
-    if (!Array.isArray(g) || g.length !== 13) return null;
+    if (!Array.isArray(g) || (g.length !== 13 && g.length !== 14)) return null;
     const nd = NoiDungMaBanDo.parse({
       v: g[0], t: g[1], s: g[2], k: g[3], n: g[4], h: g[5], m: g[6], c: g[7], g: g[8], q: g[9], o: g[10], b: g[11],
-      d: new Date(NGAY_GOC + Number(g[12]) * 86_400_000).toISOString().slice(0, 10),
+      d: new Date(NGAY_GOC + Number(g[12]) * 86_400_000).toISOString().slice(0, 10), r: g[13] ?? 0,
     });
     return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
   } catch {

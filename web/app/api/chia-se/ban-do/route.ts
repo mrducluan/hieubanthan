@@ -25,7 +25,7 @@ const Input = z.object({
 const BanDo = z.object({
   duong_doi: z.object({ so: z.number().int(), tu_khoa: z.string().nullable() }),
   nhat_chu: z.object({ nhan: z.string(), hinh_tuong: z.string().nullable() }),
-  sao_menh: z.object({ nhan: z.string() }).nullable(),
+  sao_menh: z.object({ nhan: z.string(), cung: z.object({ mot_trong: z.number().int().min(1).max(999) }).optional() }).nullable(),
   cung_phi: z.object({ quai: z.string(), huong: z.string() }).nullable(),
   que_ngay: z.object({ ten: z.string() }),
   doan: z.object({ lua_chon: z.array(z.number().int()).length(3) }),
@@ -47,7 +47,7 @@ export async function POST(req: Request): Promise<NextResponse> {
     const the = {
       t: ten_hien_thi, s: x.duong_doi.so, k: cat(x.duong_doi.tu_khoa, 60), n: cat(x.nhat_chu.nhan, 16),
       h: cat(x.nhat_chu.hinh_tuong, 40), m: cat(x.sao_menh?.nhan, 30), c: cat(x.cung_phi?.quai, 8), g: cat(x.cung_phi?.huong, 12),
-      q: cat(x.que_ngay.ten, 16), o: x.doan.lua_chon, b,
+      q: cat(x.que_ngay.ten, 16), o: x.doan.lua_chon, b, r: x.sao_menh?.cung?.mot_trong ?? 0,
     };
     const ma = kyMaBanDo(the);
     // `the`: đúng phần đã ký (để người gửi xem trước thẻ) — dữ liệu của chính họ, không có ngày sinh.

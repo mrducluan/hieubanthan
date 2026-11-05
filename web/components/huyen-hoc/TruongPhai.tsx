@@ -28,7 +28,14 @@ const CHIP_LUU_NGUYET: Record<PhaiLuuNguyet, string> = {
 };
 
 type Viet = "viet" | "trung";
-type TN = "thang_sau" | "thang_chinh";
+/** TV-NHUAN3 — cách tính tháng nhuận (engine `tuvi_an_sao.THANG_NHUAN`). */
+export type ThangNhuan = "thang_sau" | "thang_chinh" | "ca_thang_sau";
+type TN = ThangNhuan;
+const CHIP_NHUAN: Record<TN, string> = {
+  thang_sau: "Nhuận: nửa sau tính tháng sau",
+  thang_chinh: "Nhuận: như tháng chính",
+  ca_thang_sau: "Nhuận: cả tháng tính tháng sau",
+};
 
 export function TruongPhai(p: {
   lich: Viet; setLich: (v: Viet) => void; lichKhac: boolean;
@@ -44,12 +51,12 @@ export function TruongPhai(p: {
     { nhan: p.phaiDoSang === "nam" ? "Độ sáng Nam phái" : "Độ sáng phái Trung", khac: p.phaiDoSang !== "nam" },
     { nhan: p.hoaLinh === "viet" ? "Hoả Linh lối Việt" : "Hoả Linh Trung Châu", khac: p.hoaLinh !== "viet" },
     { nhan: CHIP_LUU_NGUYET[p.luuNguyet], khac: p.luuNguyet !== "dau_quan_thai_tue" },
-    ...(p.coNhuan ? [{ nhan: p.thangNhuan === "thang_sau" ? "Nhuận: tính tháng sau" : "Nhuận: như tháng chính", khac: p.thangNhuan !== "thang_sau" }] : []),
+    ...(p.coNhuan ? [{ nhan: CHIP_NHUAN[p.thangNhuan], khac: p.thangNhuan !== "thang_sau" }] : []),
   ];
   const daDoi = dangDung.some((d) => d.khac);
   const nhac = [
     p.lichKhac && "Ngày sinh của bạn lệch giữa lịch Việt và lịch Trung Quốc — đổi lịch sẽ ra lá số khác.",
-    p.coNhuan && "Bạn sinh nửa sau tháng nhuận — mỗi phái tính một kiểu, Mệnh và Cục có thể khác.",
+    p.coNhuan && "Bạn sinh trong tháng nhuận — mỗi phái tính một kiểu, Mệnh và Cục có thể khác.",
   ].filter(Boolean).join(" ");
 
   const veMacDinh = () => {
@@ -87,9 +94,9 @@ export function TruongPhai(p: {
       </DongKhung>
       {p.coNhuan && (
         <DongPhai testId="chon-thang-nhuan" ten="Tháng nhuận" nhan="Cách tính tháng nhuận" giaTri={p.thangNhuan} doi={p.setThangNhuan}
-          luaChon={[["thang_sau", "Tính sang tháng sau"], ["thang_chinh", "Như tháng chính"]]}
+          luaChon={[["thang_sau", "Nửa sau tính tháng sau"], ["thang_chinh", "Như tháng chính"], ["ca_thang_sau", "Cả tháng tính tháng sau"]]}
           noiBat nhanNoiBat="Áp dụng với bạn"
-          goiY="Bạn sinh nửa sau tháng nhuận — có phái tính sang tháng sau, có phái tính như tháng chính. Mệnh, Cục và các sao có thể khác." />
+          goiY="Bạn sinh trong tháng nhuận — sách thì tính ngày 16 trở đi sang tháng sau (phổ biến), sách tính cả tháng như tháng chính, sách tính cả tháng như tháng sau. Mệnh, Cục và các sao có thể khác." />
       )}
       {daDoi && (
         <div className="border-t border-line/50 pt-3">

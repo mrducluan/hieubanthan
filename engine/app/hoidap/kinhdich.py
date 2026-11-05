@@ -147,10 +147,12 @@ def _moc_hoi(t: str, hom_nay: dt.date) -> str | None:
 
 def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
     t = chung.chuan_hoa_cau(cau_hoi)
-    kq = {"cau_chuan_hoa": t, "che_do": che_do, "que_nhac": _que_nhac(cau_hoi), "hao_nhac": _hao_nhac(cau_hoi),
+    kq = {"cau_chuan_hoa": t, "cau_goc": cau_hoi, "che_do": che_do, "que_nhac": _que_nhac(cau_hoi), "hao_nhac": _hao_nhac(cau_hoi),
           "giai_thich": _giai_thich_khop(t), "linh_vuc": chung.linh_vuc_doi_song(t),
           "truong_phai": None, "dung_than": None, "xu_ly": "tra_loi", "loai": None}
     db = chung.dac_biet(t, cau_hoi)
+    if not db and chung.co(t, chung.KD_SUC_KHOE):
+        db = "tu_choi_nhe"          # SK-1: Kinh Dịch không có chương sức khoẻ → không đọc quẻ cho câu sức khoẻ bản thân
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq
@@ -268,7 +270,7 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | 
         goi["mau"] = kb.mau("an_toan")
         return chung.ket(goi)
     if pl["xu_ly"] == "tu_choi_nhe":
-        goi["mau"] = kb.mau("tu_choi")
+        goi["mau"] = chung.mau_tu_choi(pl.get("cau_goc"), pl["cau_chuan_hoa"], kb.mau("tu_choi"))     # SK-1
         return chung.ket(goi)
     if pl["xu_ly"] == "dan_huong":
         goi["mau"] = chung.mau_dan_huong(pl["cau_chuan_hoa"])
@@ -519,6 +521,14 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
                               "xem thế của việc ở lúc gieo, không chấm riêng từng tháng hay từng năm — nếu đang cân "
                               "hai mốc, chọn mốc bạn chuẩn bị kịp hơn."})
         chung.ket(goi)
+    if goi["muc"] and not goi["can_them"] and pl["xu_ly"] not in chung.DAC_BIET:
+        # CY-1: câu về điều người dùng lo ở một mảng → việc nên giữ + ranh giới (quẻ không chỉ ra năm) — đứng sau lời quẻ
+        from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+        mg = cyn.mang_hoi(pl["cau_chuan_hoa"])
+        if mg and mg not in ("suc_khoe", "van_han"):
+            goi["muc"].append({"loai": "ghi_chu", "ma": "chu_y_nam", "mang": mg,
+                               "noi_dung": cyn.kinhdich_doan_hoi(mg), **cyn.kb.meta()})
+            chung.ket(goi)
     doc_que = None
     if que is not None and can_que:
         pt = None
@@ -537,6 +547,14 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
         so_kb = {int(n) for n in re.findall(r"\d+", viec0)}
         if mo and (la := set(mo_dau.so_la(mo, goi))) and la <= so_kb:
             goi["so_trong_goi"] = sorted(set(goi.get("so_trong_goi") or []) | la)
+        cy = next((m for m in goi["muc"] if m.get("ma") == "chu_y_nam"), None)
+        if mo and cy and not mo_dau.khong_mo(pl["cau_chuan_hoa"]):
+            from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+            if cyn.lo_ro(pl["cau_chuan_hoa"]):
+                # Review CY-1: câu LO ("có bị mất tiền / tai nạn / thắng kiện không") — đoạn mở đầu nói khung trước ("quẻ
+                # không trả lời có hay không…"), rồi mới tới lời quẻ — mức quẻ đứng đầu đọc thành câu trả lời có / không.
+                nhan, _, than = mo.partition(": ")
+                mo = f"{nhan}: {cyn.kinhdich_khung()} {mo_dau.hoa(than)}" if than else f"{cyn.kinhdich_khung()} {mo}"
         van = mo_dau.dat_dau(van, mo, goi)
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:

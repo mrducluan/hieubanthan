@@ -68,7 +68,7 @@ export const CUM_THUC_EP = /chỉ còn|nhanh lên|gấp|sắp hết|đếm ngư�
 const CHAN_BENH = [
   "ung thư", "tiểu đường", "đột quỵ", "tai biến", "trầm cảm", "tâm thần", "suy thận", "suy tim", "xơ gan", "viêm gan",
   "lao phổi", "hiv", "sida", "vô sinh", "sảy thai", "u não", "u xơ", "bướu", "nhồi máu", "huyết áp cao", "cao huyết áp",
-  "chẩn đoán", "bệnh nặng", "bệnh hiểm nghèo", "mắc bệnh",
+  "chẩn đoán", "bệnh nặng", "bệnh hiểm nghèo", "mắc bệnh", "sẽ ốm", "sẽ bị ốm", "sẽ bệnh", "đổ bệnh", "phát bệnh",
 ];
 const CHAN_HUNG = ["chết", "tử vong", "qua đời", "tang tóc", "tai hoạ", "tai họa", "tai nạn", "đại kỵ", "đại hung", "cực hung", "hoạ sát thân", "xổ số", "lô đề", "số đề"];
 const CANH_BAO_PHAN = ["chắc chắn", "nhất định", "định mệnh", "số phận đã", "không thể tránh", "bạn sẽ", "sẽ gặp", "phải mua", "vật phẩm", "giải hạn", "cúng", "bùa"];
@@ -93,7 +93,7 @@ export function kiemTraLoi(van: string): KetQuaKiem {
   if (t.length < 20) chan.push("Câu trả lời quá ngắn (tối thiểu 20 ký tự).");
   if (t.length > TRA_LOI_TOI_DA) chan.push(`Quá ${TRA_LOI_TOI_DA.toLocaleString("vi-VN")} ký tự.`);
   const benh = CHAN_BENH.filter((c) => coCum(t, c));
-  if (benh.length) chan.push(`Tên bệnh / chẩn đoán (cấm): ${benh.map((x) => `"${x}"`).join(", ")} — nói "phần cơ thể sách xưa gắn với sao, nên chăm sóc phòng ngừa, khám định kỳ" và nhắc không thay lời bác sĩ.`);
+  if (benh.length) chan.push(`Tên bệnh / chẩn đoán (cấm): ${benh.map((x) => `"${x}"`).join(", ")} — nói hệ cơ quan nên chú ý + việc đi khám (vd "nên chú ý đường hô hấp, đi khám phổi"), được nêu năm nên chú ý sức khoẻ bằng lời phòng ngừa ("Năm 2028 nên chú ý sức khoẻ hơn, sắp xếp đi khám đầu năm"), và nhắc không thay lời bác sĩ.`);
   const hung = CHAN_HUNG.filter((c) => coCum(t, c));
   if (hung.length) chan.push(`Phán hung / sống chết / xổ số (cấm): ${hung.map((x) => `"${x}"`).join(", ")}.`);
   if (LIEN_HE.test(t)) chan.push("Có link, email, số điện thoại hoặc kênh liên hệ ngoài — mọi trao đổi ở trong trang.");

@@ -19,7 +19,9 @@ from enum import Enum
 # Ghi vào mọi bản ghi readings để tái lập được kết quả cũ.
 # 0.1.6 (EN-6, 2026-11-01): BI-1 đồng hồ miền Nam UTC+8 01/04/1947–01/07/1955 · BI-2 giờ Tý muộn Tử vi = ngày sau giờ Tý ·
 # BI-3 Bát tự sinh ở nước ngoài so mốc tiết theo múi giờ nơi sinh (khi khai).
-ENGINE_VERSION = "0.1.6"
+# 0.1.7 (TV-DT, 2026-11-04): đồng hạn Tử vi (tuổi mụ < số cục) báo khoảng đại hạn 1 … cục − 1 + cờ `dong_han`
+# (trước lấy khoảng của chính cung đồng hạn, vd bé 2 tuổi ra "86–95"); cung, can, tứ hoá không đổi.
+ENGINE_VERSION = "0.1.7"
 
 
 # ---------------------------------------------------------------------------

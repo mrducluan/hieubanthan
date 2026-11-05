@@ -186,4 +186,7 @@ def lap(ls_ban: dict, can_nam_ban: str, can_nam_kia: str, quan_he: str = MAC_DIN
             "nguoi_kia_vao_ban": vao_ban, "ban_vao_nguoi_kia": ban_vao,
             "can_menh_nguoi_kia": can_menh, "menh_nguoi_kia_vao_ban": menh_vao,
             "tom_tat": tom, "luu_y": (luu_y or [LUU_Y[0], LUU_Y[2]]) + ([LUU_Y[1]] if ls_kia is None else []),
-            "diem": diem, "khong_cham_diem": diem is None}
+            "diem": diem, "khong_cham_diem": diem is None,
+            # TV-YBS đợt 4: hộp diễn giải từ ý Tử vi bổ sung (Phu Thê / Mệnh hai lá) — KHÔNG tính vào điểm.
+            "cach_doc_them": tuvi_hai_nguoi.cach_doc_them(ls_ban, ls_kia, quan_he, (ban or {}).get("gioi_tinh"),
+                                                          (kia or {}).get("gioi_tinh"))}

@@ -64,6 +64,7 @@ export default async function ChinhSachRiengTu() {
         <>
           <Bang dau={["Dữ liệu", "Khi nào", "Lưu ở đâu", "Bao lâu"]} dong={[
             [<b key="a">Hồ sơ trên máy</b>, "Bạn nhập họ tên, ngày giờ sinh, giới tính, nơi sinh; tình trạng độc thân / có đôi nếu bạn tự chọn (chỉ gửi kèm khi xem luận giải toàn bộ, để chọn lời khuyên ở chương Tình yêu, Gia đình; máy chủ không lưu, không đồng bộ tài khoản, không ghi vào phiếu góp ý — bài đọc bạn tự bấm Lưu thì giữ nguyên lời đã đọc)", "Chỉ trong trình duyệt của bạn", "Đến khi bạn xoá hồ sơ hoặc xoá dữ liệu trình duyệt"],
+            [<b key="a2">Lá số người thân trên máy</b>, "Chỉ khi bạn bấm \"Lưu trên máy này\" và tự tích ô người đó đồng ý, hoặc bạn là cha mẹ, người giám hộ (không tích sẵn). Tối đa 5 người: tên gọi (tuỳ chọn), quan hệ, ngày giờ sinh, giới tính, nơi sinh — chỉ để xem nhanh lá số Tử vi của người đó và điền sẵn Xem lá số 2 người. Chỉ gửi đi để tính trong lượt bạn xem; không đồng bộ tài khoản, không ghi vào phiếu góp ý, không mở được luận giải toàn bộ hay lưu bài cho người đó", "Chỉ trong trình duyệt của bạn", "Đến khi bạn xoá từng người, bấm \"Xoá tất cả\", xoá hồ sơ trên máy hoặc xoá dữ liệu trình duyệt"],
             [<b key="b">Dữ liệu gửi để tính</b>, "Mỗi lần xem bài đọc, lá số, hợp đôi", "Máy chủ tính toán xử lý trong bộ nhớ", "Không lưu — bỏ ngay sau khi trả kết quả"],
             [<b key="c">Tài khoản</b>, "Bạn đăng nhập bằng email, Google hoặc số điện thoại", "Máy chủ dữ liệu tại Singapore", "Đến khi bạn xoá tài khoản"],
             [<b key="d">Hồ sơ lưu vào tài khoản</b>, "Chỉ khi bạn bấm lưu", "Máy chủ dữ liệu tại Singapore, chỉ chủ tài khoản đọc được", "Đến khi bạn xoá hồ sơ hoặc tài khoản"],
@@ -174,6 +175,7 @@ export default async function ChinhSachRiengTu() {
             <li><b>Tự làm ngay trên web</b>:
               <ul>
                 <li>sửa hoặc xoá hồ sơ trên máy ở mục Bản thân;</li>
+                <li>xoá từng người thân đã lưu (hoặc “Xoá tất cả”) ở ô “Đang xem” trên trang Tử vi, hoặc ở mục “Dữ liệu của tôi” trong Tài khoản. Bạn chỉ nên lưu ngày giờ sinh của người khác khi người đó đồng ý, hoặc khi bạn là cha mẹ, người giám hộ của người đó;</li>
                 <li>xoá hồ sơ đã lưu, hoặc <b>xoá hẳn tài khoản</b> ở mục <Link href="/tai-khoan" className="text-gold underline">Tài khoản</Link>. Xoá tài khoản là xoá luôn hồ sơ, ví Sao, mã mời, quan hệ mời, đơn nạp, chuỗi ngày ghé và quà tặng liên quan tới bạn.</li>
               </ul>
             </li>

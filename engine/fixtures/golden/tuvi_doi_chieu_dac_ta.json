@@ -1,0 +1,1724 @@
+{
+ "_ghi_chu": "Sinh bằng _sinh_tuvi_doi_chieu_dac_ta.py — khẩu quyết viết tay, KHÔNG gọi iztro. Chỉ số chi Tý = 0. Xem docstring tệp sinh.",
+ "cases": [
+  {
+   "id": "mau_thin_nam_thuan",
+   "ghi_chu": "Dương nam đi thuận. 2007-02-17 = Tết Việt (lịch Trung Quốc còn 30/12 Bính Tuất) → lưu niên Đinh Hợi.",
+   "duong": "1988-10-08",
+   "ti": 7,
+   "gioi_tinh": "nam",
+   "thang_nhuan": "thang_sau",
+   "nam_am": 1988,
+   "can_nam": "Mậu",
+   "chi_nam": "Thìn",
+   "thang_tinh": 8,
+   "ngay_am": 28,
+   "menh": "Dần",
+   "than": "Thìn",
+   "lai_nhan": "Ngọ",
+   "cuc": 2,
+   "sao": {
+    "Tử Vi": "Mão",
+    "Thiên Cơ": "Dần",
+    "Thái Dương": "Tý",
+    "Vũ Khúc": "Hợi",
+    "Thiên Đồng": "Tuất",
+    "Liêm Trinh": "Mùi",
+    "Thiên Phủ": "Sửu",
+    "Thái Âm": "Dần",
+    "Tham Lang": "Mão",
+    "Cự Môn": "Thìn",
+    "Thiên Tướng": "Tỵ",
+    "Thiên Lương": "Ngọ",
+    "Thất Sát": "Mùi",
+    "Phá Quân": "Hợi",
+    "Tả Phù": "Hợi",
+    "Hữu Bật": "Mão",
+    "Văn Khúc": "Hợi",
+    "Văn Xương": "Mão"
+   },
+   "hong_loan": "Hợi",
+   "thien_hy": "Tỵ",
+   "chieu_dai_han": "thuan",
+   "dai_han": [
+    {
+     "chi": "Dần",
+     "can": "Giáp",
+     "tu_tuoi": 2,
+     "den_tuoi": 11
+    },
+    {
+     "chi": "Mão",
+     "can": "Ất",
+     "tu_tuoi": 12,
+     "den_tuoi": 21
+    },
+    {
+     "chi": "Thìn",
+     "can": "Bính",
+     "tu_tuoi": 22,
+     "den_tuoi": 31
+    },
+    {
+     "chi": "Tỵ",
+     "can": "Đinh",
+     "tu_tuoi": 32,
+     "den_tuoi": 41
+    },
+    {
+     "chi": "Ngọ",
+     "can": "Mậu",
+     "tu_tuoi": 42,
+     "den_tuoi": 51
+    },
+    {
+     "chi": "Mùi",
+     "can": "Kỷ",
+     "tu_tuoi": 52,
+     "den_tuoi": 61
+    },
+    {
+     "chi": "Thân",
+     "can": "Canh",
+     "tu_tuoi": 62,
+     "den_tuoi": 71
+    },
+    {
+     "chi": "Dậu",
+     "can": "Tân",
+     "tu_tuoi": 72,
+     "den_tuoi": 81
+    },
+    {
+     "chi": "Tuất",
+     "can": "Nhâm",
+     "tu_tuoi": 82,
+     "den_tuoi": 91
+    },
+    {
+     "chi": "Hợi",
+     "can": "Quý",
+     "tu_tuoi": 92,
+     "den_tuoi": 101
+    },
+    {
+     "chi": "Tý",
+     "can": "Giáp",
+     "tu_tuoi": 102,
+     "den_tuoi": 111
+    },
+    {
+     "chi": "Sửu",
+     "can": "Ất",
+     "tu_tuoi": 112,
+     "den_tuoi": 121
+    }
+   ],
+   "tieu_han_tuoi_1": "Tuất",
+   "chieu_tieu_han": "thuan",
+   "xem": [
+    {
+     "ngay_xem": "2007-02-16",
+     "nam_am_xem": 2006,
+     "tuoi_mu": 19,
+     "dong_han": false,
+     "dai_han": {
+      "chi": "Mão",
+      "can": "Ất",
+      "tu_tuoi": 12,
+      "den_tuoi": 21,
+      "cung": "Phụ Mẫu",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Cơ",
+        "chi": "Dần"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Lương",
+        "chi": "Ngọ"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Tử Vi",
+        "chi": "Mão"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Thái Âm",
+        "chi": "Dần"
+       }
+      ]
+     },
+     "tieu_han": {
+      "chi": "Thìn",
+      "cung": "Phúc Đức"
+     },
+     "luu_nien": {
+      "can": "Bính",
+      "chi": "Tuất",
+      "cung": "Tài Bạch",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Đồng",
+        "chi": "Tuất"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Cơ",
+        "chi": "Dần"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Văn Xương",
+        "chi": "Mão"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Liêm Trinh",
+        "chi": "Mùi"
+       }
+      ]
+     }
+    },
+    {
+     "ngay_xem": "2007-02-17",
+     "nam_am_xem": 2007,
+     "tuoi_mu": 20,
+     "dong_han": false,
+     "dai_han": {
+      "chi": "Mão",
+      "can": "Ất",
+      "tu_tuoi": 12,
+      "den_tuoi": 21,
+      "cung": "Phụ Mẫu",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Cơ",
+        "chi": "Dần"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Lương",
+        "chi": "Ngọ"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Tử Vi",
+        "chi": "Mão"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Thái Âm",
+        "chi": "Dần"
+       }
+      ]
+     },
+     "tieu_han": {
+      "chi": "Tỵ",
+      "cung": "Điền Trạch"
+     },
+     "luu_nien": {
+      "can": "Đinh",
+      "chi": "Hợi",
+      "cung": "Tử Nữ",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thái Âm",
+        "chi": "Dần"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Đồng",
+        "chi": "Tuất"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Thiên Cơ",
+        "chi": "Dần"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Cự Môn",
+        "chi": "Thìn"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "canh_ngo_nu_nghich",
+   "ghi_chu": "Dương nữ đi nghịch, Thân Mệnh đồng cung. 2027-02-05 đã qua Lập xuân (4/2) nhưng chưa Tết (6/2) → vẫn Bính Ngọ.",
+   "duong": "1990-05-17",
+   "ti": 6,
+   "gioi_tinh": "nu",
+   "thang_nhuan": "thang_sau",
+   "nam_am": 1990,
+   "can_nam": "Canh",
+   "chi_nam": "Ngọ",
+   "thang_tinh": 4,
+   "ngay_am": 23,
+   "menh": "Hợi",
+   "than": "Hợi",
+   "lai_nhan": "Thìn",
+   "cuc": 5,
+   "sao": {
+    "Tử Vi": "Thân",
+    "Thiên Cơ": "Mùi",
+    "Thái Dương": "Tỵ",
+    "Vũ Khúc": "Thìn",
+    "Thiên Đồng": "Mão",
+    "Liêm Trinh": "Tý",
+    "Thiên Phủ": "Thân",
+    "Thái Âm": "Dậu",
+    "Tham Lang": "Tuất",
+    "Cự Môn": "Hợi",
+    "Thiên Tướng": "Tý",
+    "Thiên Lương": "Sửu",
+    "Thất Sát": "Dần",
+    "Phá Quân": "Ngọ",
+    "Tả Phù": "Mùi",
+    "Hữu Bật": "Mùi",
+    "Văn Khúc": "Tuất",
+    "Văn Xương": "Thìn"
+   },
+   "hong_loan": "Dậu",
+   "thien_hy": "Mão",
+   "chieu_dai_han": "nghich",
+   "dai_han": [
+    {
+     "chi": "Hợi",
+     "can": "Đinh",
+     "tu_tuoi": 5,
+     "den_tuoi": 14
+    },
+    {
+     "chi": "Tuất",
+     "can": "Bính",
+     "tu_tuoi": 15,
+     "den_tuoi": 24
+    },
+    {
+     "chi": "Dậu",
+     "can": "Ất",
+     "tu_tuoi": 25,
+     "den_tuoi": 34
+    },
+    {
+     "chi": "Thân",
+     "can": "Giáp",
+     "tu_tuoi": 35,
+     "den_tuoi": 44
+    },
+    {
+     "chi": "Mùi",
+     "can": "Quý",
+     "tu_tuoi": 45,
+     "den_tuoi": 54
+    },
+    {
+     "chi": "Ngọ",
+     "can": "Nhâm",
+     "tu_tuoi": 55,
+     "den_tuoi": 64
+    },
+    {
+     "chi": "Tỵ",
+     "can": "Tân",
+     "tu_tuoi": 65,
+     "den_tuoi": 74
+    },
+    {
+     "chi": "Thìn",
+     "can": "Canh",
+     "tu_tuoi": 75,
+     "den_tuoi": 84
+    },
+    {
+     "chi": "Mão",
+     "can": "Kỷ",
+     "tu_tuoi": 85,
+     "den_tuoi": 94
+    },
+    {
+     "chi": "Dần",
+     "can": "Mậu",
+     "tu_tuoi": 95,
+     "den_tuoi": 104
+    },
+    {
+     "chi": "Sửu",
+     "can": "Kỷ",
+     "tu_tuoi": 105,
+     "den_tuoi": 114
+    },
+    {
+     "chi": "Tý",
+     "can": "Mậu",
+     "tu_tuoi": 115,
+     "den_tuoi": 124
+    }
+   ],
+   "tieu_han_tuoi_1": "Thìn",
+   "chieu_tieu_han": "nghich",
+   "xem": [
+    {
+     "ngay_xem": "2027-02-05",
+     "nam_am_xem": 2026,
+     "tuoi_mu": 37,
+     "dong_han": false,
+     "dai_han": {
+      "chi": "Thân",
+      "can": "Giáp",
+      "tu_tuoi": 35,
+      "den_tuoi": 44,
+      "cung": "Tử Nữ",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Liêm Trinh",
+        "chi": "Tý"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Phá Quân",
+        "chi": "Ngọ"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Vũ Khúc",
+        "chi": "Thìn"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Thái Dương",
+        "chi": "Tỵ"
+       }
+      ]
+     },
+     "tieu_han": {
+      "chi": "Thìn",
+      "cung": "Nô Bộc"
+     },
+     "luu_nien": {
+      "can": "Bính",
+      "chi": "Ngọ",
+      "cung": "Tật Ách",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Đồng",
+        "chi": "Mão"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Cơ",
+        "chi": "Mùi"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Văn Xương",
+        "chi": "Thìn"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Liêm Trinh",
+        "chi": "Tý"
+       }
+      ]
+     }
+    },
+    {
+     "ngay_xem": "2027-02-06",
+     "nam_am_xem": 2027,
+     "tuoi_mu": 38,
+     "dong_han": false,
+     "dai_han": {
+      "chi": "Thân",
+      "can": "Giáp",
+      "tu_tuoi": 35,
+      "den_tuoi": 44,
+      "cung": "Tử Nữ",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Liêm Trinh",
+        "chi": "Tý"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Phá Quân",
+        "chi": "Ngọ"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Vũ Khúc",
+        "chi": "Thìn"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Thái Dương",
+        "chi": "Tỵ"
+       }
+      ]
+     },
+     "tieu_han": {
+      "chi": "Mão",
+      "cung": "Quan Lộc"
+     },
+     "luu_nien": {
+      "can": "Đinh",
+      "chi": "Mùi",
+      "cung": "Tài Bạch",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thái Âm",
+        "chi": "Dậu"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Đồng",
+        "chi": "Mão"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Thiên Cơ",
+        "chi": "Mùi"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Cự Môn",
+        "chi": "Hợi"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "dinh_ty_nam_nghich",
+   "ghi_chu": "Âm nam đi nghịch. 1985-02-01: lịch Việt đã sang Ất Sửu (Tết 21/1), lịch Trung Quốc còn Giáp Tý (Tết 20/2).",
+   "duong": "1977-04-20",
+   "ti": 3,
+   "gioi_tinh": "nam",
+   "thang_nhuan": "thang_sau",
+   "nam_am": 1977,
+   "can_nam": "Đinh",
+   "chi_nam": "Tỵ",
+   "thang_tinh": 3,
+   "ngay_am": 3,
+   "menh": "Sửu",
+   "than": "Mùi",
+   "lai_nhan": "Mùi",
+   "cuc": 3,
+   "sao": {
+    "Tử Vi": "Dần",
+    "Thiên Cơ": "Sửu",
+    "Thái Dương": "Hợi",
+    "Vũ Khúc": "Tuất",
+    "Thiên Đồng": "Dậu",
+    "Liêm Trinh": "Ngọ",
+    "Thiên Phủ": "Dần",
+    "Thái Âm": "Mão",
+    "Tham Lang": "Thìn",
+    "Cự Môn": "Tỵ",
+    "Thiên Tướng": "Ngọ",
+    "Thiên Lương": "Mùi",
+    "Thất Sát": "Thân",
+    "Phá Quân": "Tý",
+    "Tả Phù": "Ngọ",
+    "Hữu Bật": "Thân",
+    "Văn Khúc": "Mùi",
+    "Văn Xương": "Mùi"
+   },
+   "hong_loan": "Tuất",
+   "thien_hy": "Thìn",
+   "chieu_dai_han": "nghich",
+   "dai_han": [
+    {
+     "chi": "Sửu",
+     "can": "Quý",
+     "tu_tuoi": 3,
+     "den_tuoi": 12
+    },
+    {
+     "chi": "Tý",
+     "can": "Nhâm",
+     "tu_tuoi": 13,
+     "den_tuoi": 22
+    },
+    {
+     "chi": "Hợi",
+     "can": "Tân",
+     "tu_tuoi": 23,
+     "den_tuoi": 32
+    },
+    {
+     "chi": "Tuất",
+     "can": "Canh",
+     "tu_tuoi": 33,
+     "den_tuoi": 42
+    },
+    {
+     "chi": "Dậu",
+     "can": "Kỷ",
+     "tu_tuoi": 43,
+     "den_tuoi": 52
+    },
+    {
+     "chi": "Thân",
+     "can": "Mậu",
+     "tu_tuoi": 53,
+     "den_tuoi": 62
+    },
+    {
+     "chi": "Mùi",
+     "can": "Đinh",
+     "tu_tuoi": 63,
+     "den_tuoi": 72
+    },
+    {
+     "chi": "Ngọ",
+     "can": "Bính",
+     "tu_tuoi": 73,
+     "den_tuoi": 82
+    },
+    {
+     "chi": "Tỵ",
+     "can": "Ất",
+     "tu_tuoi": 83,
+     "den_tuoi": 92
+    },
+    {
+     "chi": "Thìn",
+     "can": "Giáp",
+     "tu_tuoi": 93,
+     "den_tuoi": 102
+    },
+    {
+     "chi": "Mão",
+     "can": "Quý",
+     "tu_tuoi": 103,
+     "den_tuoi": 112
+    },
+    {
+     "chi": "Dần",
+     "can": "Nhâm",
+     "tu_tuoi": 113,
+     "den_tuoi": 122
+    }
+   ],
+   "tieu_han_tuoi_1": "Mùi",
+   "chieu_tieu_han": "thuan",
+   "xem": [
+    {
+     "ngay_xem": "1985-02-01",
+     "nam_am_xem": 1985,
+     "tuoi_mu": 9,
+     "dong_han": false,
+     "dai_han": {
+      "chi": "Sửu",
+      "can": "Quý",
+      "tu_tuoi": 3,
+      "den_tuoi": 12,
+      "cung": "Mệnh",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Phá Quân",
+        "chi": "Tý"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Cự Môn",
+        "chi": "Tỵ"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Thái Âm",
+        "chi": "Mão"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Tham Lang",
+        "chi": "Thìn"
+       }
+      ]
+     },
+     "tieu_han": {
+      "chi": "Mão",
+      "cung": "Phúc Đức"
+     },
+     "luu_nien": {
+      "can": "Ất",
+      "chi": "Sửu",
+      "cung": "Mệnh",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Cơ",
+        "chi": "Sửu"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Lương",
+        "chi": "Mùi"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Tử Vi",
+        "chi": "Dần"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Thái Âm",
+        "chi": "Mão"
+       }
+      ]
+     }
+    },
+    {
+     "ngay_xem": "2026-08-01",
+     "nam_am_xem": 2026,
+     "tuoi_mu": 50,
+     "dong_han": false,
+     "dai_han": {
+      "chi": "Dậu",
+      "can": "Kỷ",
+      "tu_tuoi": 43,
+      "den_tuoi": 52,
+      "cung": "Tài Bạch",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Vũ Khúc",
+        "chi": "Tuất"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Tham Lang",
+        "chi": "Thìn"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Thiên Lương",
+        "chi": "Mùi"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Văn Khúc",
+        "chi": "Mùi"
+       }
+      ]
+     },
+     "tieu_han": {
+      "chi": "Thân",
+      "cung": "Tật Ách"
+     },
+     "luu_nien": {
+      "can": "Bính",
+      "chi": "Ngọ",
+      "cung": "Nô Bộc",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Đồng",
+        "chi": "Dậu"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Cơ",
+        "chi": "Sửu"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Văn Xương",
+        "chi": "Mùi"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Liêm Trinh",
+        "chi": "Ngọ"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "quy_hoi_nu_thuan",
+   "ghi_chu": "Âm nữ đi thuận.",
+   "duong": "1983-09-09",
+   "ti": 9,
+   "gioi_tinh": "nu",
+   "thang_nhuan": "thang_sau",
+   "nam_am": 1983,
+   "can_nam": "Quý",
+   "chi_nam": "Hợi",
+   "thang_tinh": 8,
+   "ngay_am": 3,
+   "menh": "Tý",
+   "than": "Ngọ",
+   "lai_nhan": "Hợi",
+   "cuc": 4,
+   "sao": {
+    "Tử Vi": "Sửu",
+    "Thiên Cơ": "Tý",
+    "Thái Dương": "Tuất",
+    "Vũ Khúc": "Dậu",
+    "Thiên Đồng": "Thân",
+    "Liêm Trinh": "Tỵ",
+    "Thiên Phủ": "Mão",
+    "Thái Âm": "Thìn",
+    "Tham Lang": "Tỵ",
+    "Cự Môn": "Ngọ",
+    "Thiên Tướng": "Mùi",
+    "Thiên Lương": "Thân",
+    "Thất Sát": "Dậu",
+    "Phá Quân": "Sửu",
+    "Tả Phù": "Hợi",
+    "Hữu Bật": "Mão",
+    "Văn Khúc": "Sửu",
+    "Văn Xương": "Sửu"
+   },
+   "hong_loan": "Thìn",
+   "thien_hy": "Tuất",
+   "chieu_dai_han": "thuan",
+   "dai_han": [
+    {
+     "chi": "Tý",
+     "can": "Giáp",
+     "tu_tuoi": 4,
+     "den_tuoi": 13
+    },
+    {
+     "chi": "Sửu",
+     "can": "Ất",
+     "tu_tuoi": 14,
+     "den_tuoi": 23
+    },
+    {
+     "chi": "Dần",
+     "can": "Giáp",
+     "tu_tuoi": 24,
+     "den_tuoi": 33
+    },
+    {
+     "chi": "Mão",
+     "can": "Ất",
+     "tu_tuoi": 34,
+     "den_tuoi": 43
+    },
+    {
+     "chi": "Thìn",
+     "can": "Bính",
+     "tu_tuoi": 44,
+     "den_tuoi": 53
+    },
+    {
+     "chi": "Tỵ",
+     "can": "Đinh",
+     "tu_tuoi": 54,
+     "den_tuoi": 63
+    },
+    {
+     "chi": "Ngọ",
+     "can": "Mậu",
+     "tu_tuoi": 64,
+     "den_tuoi": 73
+    },
+    {
+     "chi": "Mùi",
+     "can": "Kỷ",
+     "tu_tuoi": 74,
+     "den_tuoi": 83
+    },
+    {
+     "chi": "Thân",
+     "can": "Canh",
+     "tu_tuoi": 84,
+     "den_tuoi": 93
+    },
+    {
+     "chi": "Dậu",
+     "can": "Tân",
+     "tu_tuoi": 94,
+     "den_tuoi": 103
+    },
+    {
+     "chi": "Tuất",
+     "can": "Nhâm",
+     "tu_tuoi": 104,
+     "den_tuoi": 113
+    },
+    {
+     "chi": "Hợi",
+     "can": "Quý",
+     "tu_tuoi": 114,
+     "den_tuoi": 123
+    }
+   ],
+   "tieu_han_tuoi_1": "Sửu",
+   "chieu_tieu_han": "nghich",
+   "xem": [
+    {
+     "ngay_xem": "2030-03-01",
+     "nam_am_xem": 2030,
+     "tuoi_mu": 48,
+     "dong_han": false,
+     "dai_han": {
+      "chi": "Thìn",
+      "can": "Bính",
+      "tu_tuoi": 44,
+      "den_tuoi": 53,
+      "cung": "Quan Lộc",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Đồng",
+        "chi": "Thân"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Cơ",
+        "chi": "Tý"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Văn Xương",
+        "chi": "Sửu"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Liêm Trinh",
+        "chi": "Tỵ"
+       }
+      ]
+     },
+     "tieu_han": {
+      "chi": "Dần",
+      "cung": "Phúc Đức"
+     },
+     "luu_nien": {
+      "can": "Canh",
+      "chi": "Tuất",
+      "cung": "Phu Thê",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thái Dương",
+        "chi": "Tuất"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Vũ Khúc",
+        "chi": "Dậu"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Thái Âm",
+        "chi": "Thìn"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Thiên Đồng",
+        "chi": "Thân"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "ty_muon_cuoi_thang",
+   "ghi_chu": "23:xx ngày 30/1 âm → an như 1/2 âm giờ Tý (tháng đổi).",
+   "duong": "1985-02-19",
+   "ti": 12,
+   "gioi_tinh": "nu",
+   "thang_nhuan": "thang_sau",
+   "nam_am": 1985,
+   "can_nam": "Ất",
+   "chi_nam": "Sửu",
+   "thang_tinh": 2,
+   "ngay_am": 1,
+   "menh": "Mão",
+   "than": "Mão",
+   "lai_nhan": "Dậu",
+   "cuc": 5,
+   "sao": {
+    "Tử Vi": "Ngọ",
+    "Thiên Cơ": "Tỵ",
+    "Thái Dương": "Mão",
+    "Vũ Khúc": "Dần",
+    "Thiên Đồng": "Sửu",
+    "Liêm Trinh": "Tuất",
+    "Thiên Phủ": "Tuất",
+    "Thái Âm": "Hợi",
+    "Tham Lang": "Tý",
+    "Cự Môn": "Sửu",
+    "Thiên Tướng": "Dần",
+    "Thiên Lương": "Mão",
+    "Thất Sát": "Thìn",
+    "Phá Quân": "Thân",
+    "Tả Phù": "Tỵ",
+    "Hữu Bật": "Dậu",
+    "Văn Khúc": "Thìn",
+    "Văn Xương": "Tuất"
+   },
+   "hong_loan": "Dần",
+   "thien_hy": "Thân",
+   "chieu_dai_han": "thuan",
+   "dai_han": [
+    {
+     "chi": "Mão",
+     "can": "Kỷ",
+     "tu_tuoi": 5,
+     "den_tuoi": 14
+    },
+    {
+     "chi": "Thìn",
+     "can": "Canh",
+     "tu_tuoi": 15,
+     "den_tuoi": 24
+    },
+    {
+     "chi": "Tỵ",
+     "can": "Tân",
+     "tu_tuoi": 25,
+     "den_tuoi": 34
+    },
+    {
+     "chi": "Ngọ",
+     "can": "Nhâm",
+     "tu_tuoi": 35,
+     "den_tuoi": 44
+    },
+    {
+     "chi": "Mùi",
+     "can": "Quý",
+     "tu_tuoi": 45,
+     "den_tuoi": 54
+    },
+    {
+     "chi": "Thân",
+     "can": "Giáp",
+     "tu_tuoi": 55,
+     "den_tuoi": 64
+    },
+    {
+     "chi": "Dậu",
+     "can": "Ất",
+     "tu_tuoi": 65,
+     "den_tuoi": 74
+    },
+    {
+     "chi": "Tuất",
+     "can": "Bính",
+     "tu_tuoi": 75,
+     "den_tuoi": 84
+    },
+    {
+     "chi": "Hợi",
+     "can": "Đinh",
+     "tu_tuoi": 85,
+     "den_tuoi": 94
+    },
+    {
+     "chi": "Tý",
+     "can": "Mậu",
+     "tu_tuoi": 95,
+     "den_tuoi": 104
+    },
+    {
+     "chi": "Sửu",
+     "can": "Kỷ",
+     "tu_tuoi": 105,
+     "den_tuoi": 114
+    },
+    {
+     "chi": "Dần",
+     "can": "Mậu",
+     "tu_tuoi": 115,
+     "den_tuoi": 124
+    }
+   ],
+   "tieu_han_tuoi_1": "Mùi",
+   "chieu_tieu_han": "nghich",
+   "xem": [
+    {
+     "ngay_xem": "2026-08-01",
+     "nam_am_xem": 2026,
+     "tuoi_mu": 42,
+     "dong_han": false,
+     "dai_han": {
+      "chi": "Ngọ",
+      "can": "Nhâm",
+      "tu_tuoi": 35,
+      "den_tuoi": 44,
+      "cung": "Điền Trạch",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Lương",
+        "chi": "Mão"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Tử Vi",
+        "chi": "Ngọ"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Tả Phù",
+        "chi": "Tỵ"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Vũ Khúc",
+        "chi": "Dần"
+       }
+      ]
+     },
+     "tieu_han": {
+      "chi": "Dần",
+      "cung": "Huynh Đệ"
+     },
+     "luu_nien": {
+      "can": "Bính",
+      "chi": "Ngọ",
+      "cung": "Điền Trạch",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Đồng",
+        "chi": "Sửu"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Cơ",
+        "chi": "Tỵ"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Văn Xương",
+        "chi": "Tuất"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Liêm Trinh",
+        "chi": "Tuất"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "dong_han_2_tuoi",
+   "ghi_chu": "Hoả lục cục: tuổi mụ 1–5 là đồng hạn; tuổi 2 ở Tài Bạch, khoảng tuổi 1–5.",
+   "duong": "2024-03-10",
+   "ti": 4,
+   "gioi_tinh": "nam",
+   "thang_nhuan": "thang_sau",
+   "nam_am": 2024,
+   "can_nam": "Giáp",
+   "chi_nam": "Thìn",
+   "thang_tinh": 2,
+   "ngay_am": 1,
+   "menh": "Hợi",
+   "than": "Mùi",
+   "lai_nhan": "Tuất",
+   "cuc": 6,
+   "sao": {
+    "Tử Vi": "Dậu",
+    "Thiên Cơ": "Thân",
+    "Thái Dương": "Ngọ",
+    "Vũ Khúc": "Tỵ",
+    "Thiên Đồng": "Thìn",
+    "Liêm Trinh": "Sửu",
+    "Thiên Phủ": "Mùi",
+    "Thái Âm": "Thân",
+    "Tham Lang": "Dậu",
+    "Cự Môn": "Tuất",
+    "Thiên Tướng": "Hợi",
+    "Thiên Lương": "Tý",
+    "Thất Sát": "Sửu",
+    "Phá Quân": "Tỵ",
+    "Tả Phù": "Tỵ",
+    "Hữu Bật": "Dậu",
+    "Văn Khúc": "Thân",
+    "Văn Xương": "Ngọ"
+   },
+   "hong_loan": "Hợi",
+   "thien_hy": "Tỵ",
+   "chieu_dai_han": "thuan",
+   "dai_han": [
+    {
+     "chi": "Hợi",
+     "can": "Ất",
+     "tu_tuoi": 6,
+     "den_tuoi": 15
+    },
+    {
+     "chi": "Tý",
+     "can": "Bính",
+     "tu_tuoi": 16,
+     "den_tuoi": 25
+    },
+    {
+     "chi": "Sửu",
+     "can": "Đinh",
+     "tu_tuoi": 26,
+     "den_tuoi": 35
+    },
+    {
+     "chi": "Dần",
+     "can": "Bính",
+     "tu_tuoi": 36,
+     "den_tuoi": 45
+    },
+    {
+     "chi": "Mão",
+     "can": "Đinh",
+     "tu_tuoi": 46,
+     "den_tuoi": 55
+    },
+    {
+     "chi": "Thìn",
+     "can": "Mậu",
+     "tu_tuoi": 56,
+     "den_tuoi": 65
+    },
+    {
+     "chi": "Tỵ",
+     "can": "Kỷ",
+     "tu_tuoi": 66,
+     "den_tuoi": 75
+    },
+    {
+     "chi": "Ngọ",
+     "can": "Canh",
+     "tu_tuoi": 76,
+     "den_tuoi": 85
+    },
+    {
+     "chi": "Mùi",
+     "can": "Tân",
+     "tu_tuoi": 86,
+     "den_tuoi": 95
+    },
+    {
+     "chi": "Thân",
+     "can": "Nhâm",
+     "tu_tuoi": 96,
+     "den_tuoi": 105
+    },
+    {
+     "chi": "Dậu",
+     "can": "Quý",
+     "tu_tuoi": 106,
+     "den_tuoi": 115
+    },
+    {
+     "chi": "Tuất",
+     "can": "Giáp",
+     "tu_tuoi": 116,
+     "den_tuoi": 125
+    }
+   ],
+   "tieu_han_tuoi_1": "Tuất",
+   "chieu_tieu_han": "thuan",
+   "xem": [
+    {
+     "ngay_xem": "2025-06-01",
+     "nam_am_xem": 2025,
+     "tuoi_mu": 2,
+     "dong_han": true,
+     "dai_han": {
+      "chi": "Mùi",
+      "can": "Tân",
+      "tu_tuoi": 1,
+      "den_tuoi": 5,
+      "cung": "Tài Bạch",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Cự Môn",
+        "chi": "Tuất"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thái Dương",
+        "chi": "Ngọ"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Văn Khúc",
+        "chi": "Thân"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Văn Xương",
+        "chi": "Ngọ"
+       }
+      ]
+     },
+     "tieu_han": {
+      "chi": "Hợi",
+      "cung": "Mệnh"
+     },
+     "luu_nien": {
+      "can": "Ất",
+      "chi": "Tỵ",
+      "cung": "Thiên Di",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Cơ",
+        "chi": "Thân"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Lương",
+        "chi": "Tý"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Tử Vi",
+        "chi": "Dậu"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Thái Âm",
+        "chi": "Thân"
+       }
+      ]
+     }
+    },
+    {
+     "ngay_xem": "2029-06-01",
+     "nam_am_xem": 2029,
+     "tuoi_mu": 6,
+     "dong_han": false,
+     "dai_han": {
+      "chi": "Hợi",
+      "can": "Ất",
+      "tu_tuoi": 6,
+      "den_tuoi": 15,
+      "cung": "Mệnh",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Thiên Cơ",
+        "chi": "Thân"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Thiên Lương",
+        "chi": "Tý"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Tử Vi",
+        "chi": "Dậu"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Thái Âm",
+        "chi": "Thân"
+       }
+      ]
+     },
+     "tieu_han": {
+      "chi": "Mão",
+      "cung": "Quan Lộc"
+     },
+     "luu_nien": {
+      "can": "Kỷ",
+      "chi": "Dậu",
+      "cung": "Phu Thê",
+      "tu_hoa": [
+       {
+        "hoa": "loc",
+        "sao": "Vũ Khúc",
+        "chi": "Tỵ"
+       },
+       {
+        "hoa": "quyen",
+        "sao": "Tham Lang",
+        "chi": "Dậu"
+       },
+       {
+        "hoa": "khoa",
+        "sao": "Thiên Lương",
+        "chi": "Tý"
+       },
+       {
+        "hoa": "ky",
+        "sao": "Văn Khúc",
+        "chi": "Thân"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "nhuan6_ngay30_thang_sau",
+   "ghi_chu": "30/6 nhuận Đinh Dậu (tháng nhuận 30 ngày, tháng 7 chỉ 29 ngày): ngày 30 không kẹp về 29.",
+   "duong": "2017-08-21",
+   "ti": 4,
+   "gioi_tinh": "nam",
+   "thang_nhuan": "thang_sau",
+   "nam_am": 2017,
+   "can_nam": "Đinh",
+   "chi_nam": "Dậu",
+   "thang_tinh": 7,
+   "ngay_am": 30,
+   "menh": "Thìn",
+   "than": "Tý",
+   "lai_nhan": "Mùi",
+   "cuc": 6,
+   "sao": {
+    "Tử Vi": "Ngọ",
+    "Thiên Cơ": "Tỵ",
+    "Thái Dương": "Mão",
+    "Vũ Khúc": "Dần",
+    "Thiên Đồng": "Sửu",
+    "Liêm Trinh": "Tuất",
+    "Thiên Phủ": "Tuất",
+    "Thái Âm": "Hợi",
+    "Tham Lang": "Tý",
+    "Cự Môn": "Sửu",
+    "Thiên Tướng": "Dần",
+    "Thiên Lương": "Mão",
+    "Thất Sát": "Thìn",
+    "Phá Quân": "Thân",
+    "Tả Phù": "Tuất",
+    "Hữu Bật": "Thìn",
+    "Văn Khúc": "Thân",
+    "Văn Xương": "Ngọ"
+   },
+   "hong_loan": "Ngọ",
+   "thien_hy": "Tý",
+   "chieu_dai_han": "nghich",
+   "dai_han": [
+    {
+     "chi": "Thìn",
+     "can": "Giáp",
+     "tu_tuoi": 6,
+     "den_tuoi": 15
+    },
+    {
+     "chi": "Mão",
+     "can": "Quý",
+     "tu_tuoi": 16,
+     "den_tuoi": 25
+    },
+    {
+     "chi": "Dần",
+     "can": "Nhâm",
+     "tu_tuoi": 26,
+     "den_tuoi": 35
+    },
+    {
+     "chi": "Sửu",
+     "can": "Quý",
+     "tu_tuoi": 36,
+     "den_tuoi": 45
+    },
+    {
+     "chi": "Tý",
+     "can": "Nhâm",
+     "tu_tuoi": 46,
+     "den_tuoi": 55
+    },
+    {
+     "chi": "Hợi",
+     "can": "Tân",
+     "tu_tuoi": 56,
+     "den_tuoi": 65
+    },
+    {
+     "chi": "Tuất",
+     "can": "Canh",
+     "tu_tuoi": 66,
+     "den_tuoi": 75
+    },
+    {
+     "chi": "Dậu",
+     "can": "Kỷ",
+     "tu_tuoi": 76,
+     "den_tuoi": 85
+    },
+    {
+     "chi": "Thân",
+     "can": "Mậu",
+     "tu_tuoi": 86,
+     "den_tuoi": 95
+    },
+    {
+     "chi": "Mùi",
+     "can": "Đinh",
+     "tu_tuoi": 96,
+     "den_tuoi": 105
+    },
+    {
+     "chi": "Ngọ",
+     "can": "Bính",
+     "tu_tuoi": 106,
+     "den_tuoi": 115
+    },
+    {
+     "chi": "Tỵ",
+     "can": "Ất",
+     "tu_tuoi": 116,
+     "den_tuoi": 125
+    }
+   ],
+   "tieu_han_tuoi_1": "Mùi",
+   "chieu_tieu_han": "thuan",
+   "xem": []
+  },
+  {
+   "id": "nhuan6_ngay30_ca_thang_sau",
+   "ghi_chu": "Như trên, cả tháng nhuận tính tháng 7.",
+   "duong": "2017-08-21",
+   "ti": 4,
+   "gioi_tinh": "nam",
+   "thang_nhuan": "ca_thang_sau",
+   "nam_am": 2017,
+   "can_nam": "Đinh",
+   "chi_nam": "Dậu",
+   "thang_tinh": 7,
+   "ngay_am": 30,
+   "menh": "Thìn",
+   "than": "Tý",
+   "lai_nhan": "Mùi",
+   "cuc": 6,
+   "sao": {
+    "Tử Vi": "Ngọ",
+    "Thiên Cơ": "Tỵ",
+    "Thái Dương": "Mão",
+    "Vũ Khúc": "Dần",
+    "Thiên Đồng": "Sửu",
+    "Liêm Trinh": "Tuất",
+    "Thiên Phủ": "Tuất",
+    "Thái Âm": "Hợi",
+    "Tham Lang": "Tý",
+    "Cự Môn": "Sửu",
+    "Thiên Tướng": "Dần",
+    "Thiên Lương": "Mão",
+    "Thất Sát": "Thìn",
+    "Phá Quân": "Thân",
+    "Tả Phù": "Tuất",
+    "Hữu Bật": "Thìn",
+    "Văn Khúc": "Thân",
+    "Văn Xương": "Ngọ"
+   },
+   "hong_loan": "Ngọ",
+   "thien_hy": "Tý",
+   "chieu_dai_han": "nghich",
+   "dai_han": [
+    {
+     "chi": "Thìn",
+     "can": "Giáp",
+     "tu_tuoi": 6,
+     "den_tuoi": 15
+    },
+    {
+     "chi": "Mão",
+     "can": "Quý",
+     "tu_tuoi": 16,
+     "den_tuoi": 25
+    },
+    {
+     "chi": "Dần",
+     "can": "Nhâm",
+     "tu_tuoi": 26,
+     "den_tuoi": 35
+    },
+    {
+     "chi": "Sửu",
+     "can": "Quý",
+     "tu_tuoi": 36,
+     "den_tuoi": 45
+    },
+    {
+     "chi": "Tý",
+     "can": "Nhâm",
+     "tu_tuoi": 46,
+     "den_tuoi": 55
+    },
+    {
+     "chi": "Hợi",
+     "can": "Tân",
+     "tu_tuoi": 56,
+     "den_tuoi": 65
+    },
+    {
+     "chi": "Tuất",
+     "can": "Canh",
+     "tu_tuoi": 66,
+     "den_tuoi": 75
+    },
+    {
+     "chi": "Dậu",
+     "can": "Kỷ",
+     "tu_tuoi": 76,
+     "den_tuoi": 85
+    },
+    {
+     "chi": "Thân",
+     "can": "Mậu",
+     "tu_tuoi": 86,
+     "den_tuoi": 95
+    },
+    {
+     "chi": "Mùi",
+     "can": "Đinh",
+     "tu_tuoi": 96,
+     "den_tuoi": 105
+    },
+    {
+     "chi": "Ngọ",
+     "can": "Bính",
+     "tu_tuoi": 106,
+     "den_tuoi": 115
+    },
+    {
+     "chi": "Tỵ",
+     "can": "Ất",
+     "tu_tuoi": 116,
+     "den_tuoi": 125
+    }
+   ],
+   "tieu_han_tuoi_1": "Mùi",
+   "chieu_tieu_han": "thuan",
+   "xem": []
+  },
+  {
+   "id": "nhuan6_ngay30_thang_chinh",
+   "ghi_chu": "Như trên, tính như tháng 6.",
+   "duong": "2017-08-21",
+   "ti": 4,
+   "gioi_tinh": "nam",
+   "thang_nhuan": "thang_chinh",
+   "nam_am": 2017,
+   "can_nam": "Đinh",
+   "chi_nam": "Dậu",
+   "thang_tinh": 6,
+   "ngay_am": 30,
+   "menh": "Mão",
+   "than": "Hợi",
+   "lai_nhan": "Mùi",
+   "cuc": 4,
+   "sao": {
+    "Tử Vi": "Hợi",
+    "Thiên Cơ": "Tuất",
+    "Thái Dương": "Thân",
+    "Vũ Khúc": "Mùi",
+    "Thiên Đồng": "Ngọ",
+    "Liêm Trinh": "Mão",
+    "Thiên Phủ": "Tỵ",
+    "Thái Âm": "Ngọ",
+    "Tham Lang": "Mùi",
+    "Cự Môn": "Thân",
+    "Thiên Tướng": "Dậu",
+    "Thiên Lương": "Tuất",
+    "Thất Sát": "Hợi",
+    "Phá Quân": "Mão",
+    "Tả Phù": "Dậu",
+    "Hữu Bật": "Tỵ",
+    "Văn Khúc": "Thân",
+    "Văn Xương": "Ngọ"
+   },
+   "hong_loan": "Ngọ",
+   "thien_hy": "Tý",
+   "chieu_dai_han": "nghich",
+   "dai_han": [
+    {
+     "chi": "Mão",
+     "can": "Quý",
+     "tu_tuoi": 4,
+     "den_tuoi": 13
+    },
+    {
+     "chi": "Dần",
+     "can": "Nhâm",
+     "tu_tuoi": 14,
+     "den_tuoi": 23
+    },
+    {
+     "chi": "Sửu",
+     "can": "Quý",
+     "tu_tuoi": 24,
+     "den_tuoi": 33
+    },
+    {
+     "chi": "Tý",
+     "can": "Nhâm",
+     "tu_tuoi": 34,
+     "den_tuoi": 43
+    },
+    {
+     "chi": "Hợi",
+     "can": "Tân",
+     "tu_tuoi": 44,
+     "den_tuoi": 53
+    },
+    {
+     "chi": "Tuất",
+     "can": "Canh",
+     "tu_tuoi": 54,
+     "den_tuoi": 63
+    },
+    {
+     "chi": "Dậu",
+     "can": "Kỷ",
+     "tu_tuoi": 64,
+     "den_tuoi": 73
+    },
+    {
+     "chi": "Thân",
+     "can": "Mậu",
+     "tu_tuoi": 74,
+     "den_tuoi": 83
+    },
+    {
+     "chi": "Mùi",
+     "can": "Đinh",
+     "tu_tuoi": 84,
+     "den_tuoi": 93
+    },
+    {
+     "chi": "Ngọ",
+     "can": "Bính",
+     "tu_tuoi": 94,
+     "den_tuoi": 103
+    },
+    {
+     "chi": "Tỵ",
+     "can": "Ất",
+     "tu_tuoi": 104,
+     "den_tuoi": 113
+    },
+    {
+     "chi": "Thìn",
+     "can": "Giáp",
+     "tu_tuoi": 114,
+     "den_tuoi": 123
+    }
+   ],
+   "tieu_han_tuoi_1": "Mùi",
+   "chieu_tieu_han": "thuan",
+   "xem": []
+  }
+ ]
+}

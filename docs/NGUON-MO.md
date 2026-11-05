@@ -24,6 +24,10 @@
 | anko-ki-maya (Mahesh Koria) | Khung mục chân dung thần số (không chép nội dung) | MIT |
 | aov.cc | Oracle đối chiếu lá số khi phát triển | Không chạy runtime |
 | Cổ thư (ctext.org) | Nguyên văn Kinh Dịch, Tử Vi Đẩu Số Toàn Thư, Tử Bình Chân Thuyên… | Phạm vi công cộng; ctext cấm cào tự động |
+| Wikisource 紫微斗數全書/全覽 (oldid 850734, bản đóng băng) | Nguyên văn Đẩu Số Cốt Tuỷ Phú (`kb/data/tuvi_co_thu.json`, `docs/CO-THU-COT-TUY-PHU.md`) | Văn bản đời Minh công cộng; lớp trang Wikisource CC BY-SA — chỉ dùng chữ của cổ văn |
+| iztro-docs (SylarLong) · tianzhi-classics | Bản phồn thể đối chiếu chéo Cốt Tuỷ Phú (1.522/1.522 chữ) | MIT — chỉ đối chiếu |
+| ziwei-doushu (Renhuai123) | Đọc mã làm đặc tả để đối chiếu lá số (`docs/DOI-CHIEU-ZIWEI-DOUSHU.md`); KHÔNG chạy mã | MIT (mã) — bộ dữ liệu CC BY 4.0 không dùng; "cổ thư" trong repo là văn hiện đại → không dùng |
+| Bài giảng Tử vi tam hợp hiện đại (CC BY-NC-SA) | Chỉ rút Ý / quy tắc, viết lại hoàn toàn (`kb/data/tuvi_y_bo_sung.json`, `docs/DE-XUAT-Y-TUVI-BO-SUNG.md`) | Không trích, không dịch sát, không nêu tên người giảng công khai; chủ dự án duyệt 2026-11-04 |
 
 **Không dùng**: mã/dữ liệu GPL, AGPL (horosa, mingyu-core, gr8monk3ys/numerology, iching-shifa) hoặc không giấy phép
 (tuvi-neo, Ultimate-SoulCodex, tuongotpho/tuvi, kabalavn/La-So-Tu-Vi). Xem bảng quyết định trong `CLAUDE.md`.

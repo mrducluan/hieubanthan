@@ -336,6 +336,13 @@ test("engine thật: 4 route TV-V2 qua proxy web, các ca khó", async ({ reques
     expect(hai.khong_cham_diem).toBe(false);
     await goi("dinh-gio", { la_so });
   }
+  // TV-YBS đợt 4: hộp "Thêm một cách đọc" (Phu Thê hai lá) qua đúng hợp đồng zod; điểm vẫn luật hai_nguoi_1.
+  const vc = await goi("hop-tham", { la_so: binh, quan_he: "vo_chong",
+    nguoi_kia: { birth_date: "1991-02-14", birth_time: "10:00", gender: "nu", noi_sinh: "ha-noi" } });
+  expect(vc.diem.phien_ban).toBe("hai_nguoi_1");
+  expect(vc.cach_doc_them.map((h: { ma_mau: string }) => h.ma_mau)).toEqual(
+    ["ds.hai.phu_the_khoa_chuyen_mon.ban.vo_chong", "ds.hai.that_sat_phu_the_nhanh.kia.vo_chong"]);
+  expect((await goi("hop-tham", { la_so: binh, quan_he: "sep", nguoi_kia: { birth_date: "1993-01-20" } })).cach_doc_them).toEqual([]);
   // Người kia sinh 20/01/1993 (trước Tết Quý Dậu 23/01/1993) → năm âm Nhâm Thân, can Nhâm.
   expect((await goi("hop-tham", { la_so: binh, nguoi_kia: { birth_date: "1993-01-20" } })).can_nam_nguoi_kia).toBe("Nhâm");
   const dg12 = await goi("dinh-gio", { la_so: khongBiet, tat_ca_gio: true });

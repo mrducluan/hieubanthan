@@ -28,6 +28,7 @@ MANG = [
      [r"sức", r"ngủ", r"khám", r"cơ thể", r"vận động", r"ăn"]),
 ]
 _THU_TU_MUC = {"can_chu_dong": 0, "can_bang": 1, "thuan": 2}
+_MANG_CHU_Y = {"con_cai": "gia_dao"}          # mã dòng → mảng của hộp "Năm nên chú ý" (CY-1)
 
 
 def kb_mang(mo_dun: str) -> dict:
@@ -122,6 +123,25 @@ def dung(bc_chuong: list[dict], mo_dun: str, muc_cung: dict[str, str] | None = N
         else:
             dong = {"luu_y": o["luu_y"], "viec": o["viec"], "ma_mau": None,
                     "can_cu": [f"Mức của mảng lấy từ chương {c['tieu_de']}" if c else "Mức của mảng theo cung đã chấm"]}
+        if ma == "suc_khoe" and c:
+            # SK-1 (2026-11-04): năm nên chú ý sức khoẻ của chương (cùng hộp, cùng hàm) nối vào điều nên để ý — câu gọn,
+            # lời đủ (hệ cơ quan, việc đi khám) ở hộp của chương
+            from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+            hn = next((x for x in c.get("hop") or [] if x.get("tieu_de") == skn.TIEU_DE_HOP and x.get("cac_nam")), None)
+            if hn:
+                cn = hn["cac_nam"]
+                dong["luu_y"] = (f"{dong['luu_y']} Năm nên chú ý sức khoẻ và đi khám kỹ hơn: "
+                                 f"{', '.join(str(n) for n in cn)}.")
+                dong["can_cu"] = [*dong["can_cu"], *(hn.get("can_cu") or [])]
+        # CY-1: năm nên chú ý của mảng (hộp "Năm nên chú ý … hơn" của báo cáo — cùng hàm) nối vào điều nên để ý.
+        from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+        # chỉ hộp của CHÍNH chương của dòng (web khoá dòng theo chương — năm của chương khác không được lộ)
+        hc = cyn.tim_hop([c], _MANG_CHU_Y.get(ma, ma)) if c and ma != "suc_khoe" else None
+        if hc:
+            nam_m = (hc.get("nam_theo_mang") or {}).get(_MANG_CHU_Y.get(ma, ma)) or []
+            if nam_m:
+                dong["luu_y"] = f"{dong['luu_y']} Năm nên chú ý {cyn.kb.ten(_MANG_CHU_Y.get(ma, ma))} hơn: {cyn._noi(nam_m)}."
+                dong["can_cu"] = [*dong["can_cu"], *(hc.get("can_cu") or [])]
         ra.append({"ma": ma, "ten": ten, "muc": muc, "nhan_muc": _nhan_muc(mo_dun, muc), "tu_chuong": ch,
                    "ranh_gioi": (kb.get("_ranh_gioi") or {}).get(ma), **dong})
     return ra

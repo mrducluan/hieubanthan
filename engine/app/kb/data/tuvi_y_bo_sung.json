@@ -1,0 +1,4821 @@
+{
+  "_nguon": "Nháp ý tưởng (rule-level) do ban biên tập tự viết lại bằng lời mình từ việc nghe/đọc một bộ bài giảng Tử vi hiện đại có giấy phép phi thương mại. Chỉ giữ QUY TẮC (điều kiện → ý nghĩa), không trích nguyên văn, không dịch câu, không theo bố cục hay phân loại của nguồn, không ghi tên người giảng, không ghi số tập hay mốc thời gian. Lời luận viết lại theo lối khơi gợi: phán nặng → gợi ý chủ động; sức khoẻ chỉ là phần cơ thể sách xưa gắn với sao, kèm phòng ngừa.",
+  "_trang_thai_tep": "TV-YBS (2026-11-04): chủ dự án giao em chốt cách dùng — đã chuyển từ nhap/ sang KB chính. hien_thi: \"hop\" = ý chung, gộp vào hộp luận / trang / hỏi đáp; \"goc_nhin_khac\" = ý riêng trường phái, chỉ hiện trong khung gập \"Góc nhìn khác\" có kiểm chứng; \"khong\" = không hiện (bản đồ giờ → tạng phủ, bản đồ thân thể, phương pháp riêng) — tránh hai bản đồ cơ thể nói khác nhau, dễ đọc như chẩn đoán. Nội dung vẫn là nháp (hiện mọi nơi như KB khác, chuyên gia duyệt dần).",
+  "source": {
+    "tham_khao_tam_hop_hien_dai": "Ý luận đoán của các bài giảng Tử vi tam hợp hiện đại, rút ý và viết lại hoàn toàn (không trích, không dịch sát)"
+  },
+  "school": {
+    "tam_hop_hien_dai": "Tử vi tam hợp hiện đại (Trung Hoa / Đài Loan)"
+  },
+  "trang_thai": "nhap",
+  "can_doi_chieu": true,
+  "_tu_vung_dieu_kien": {
+    "sao": "danh sách sao phải CÙNG có mặt (mặc định cùng cung)",
+    "sao_mot_trong": "chỉ cần một trong các sao",
+    "sao_cap_mot_trong": "một trong các cặp sao (mỗi cặp phải cùng có mặt)",
+    "cung": "tên cung (12 cung) hoặc danh sách; 'bat_ky' = áp mọi cung",
+    "cung_than": "true = cung an Thân; hoặc tên cung mà Thân cư",
+    "vi_tri": "toa (mặc định) | xung_chieu | tam_phuong | giap | hai_cung_doi",
+    "do_sang": "sang (Miếu/Vượng/Đắc) | ham (Hãm/Bất) — theo bảng Nam phái của engine; danh sách = luật nói cả hai đầu",
+    "chi": "danh sách địa chi của cung",
+    "hoa": "Lộc | Quyền | Khoa | Kỵ; mặc định tứ hoá năm sinh, có 'lop' thì theo lớp đó",
+    "hoa_tren_sao": "sao mang hoá",
+    "hoa_tren_sao_mot_trong": "một trong các sao mang hoá",
+    "vi_tri_hoa": "toa | xung_chieu",
+    "hoa_tat_ca": "các hoá cùng có trong phạm vi vi_tri",
+    "khong_co": "các sao (hoặc Hoá) phải vắng",
+    "khong_co_hoa": "các hoá phải vắng",
+    "khong_chinh_tinh": "cung vô chính diệu",
+    "khong_co_cat_tinh": "cung không có lục cát tinh nào",
+    "gap": "sat_tinh | cat_tinh | nhieu_sat_hoac_ky — điều kiện phụ cần định nghĩa ngưỡng khi làm RULES",
+    "gioi_tinh": "nam | nu",
+    "nhom": "nhóm chính tinh của cung Mệnh (tuvi_kb.nhom_cach); danh sách = mỗi người một nhóm",
+    "nhom_ca_hai": "cả hai người cùng nhóm chính tinh này ở cung Mệnh",
+    "sao_them_tuy_chon": "sao đi kèm làm nặng/nhẹ thêm, không bắt buộc",
+    "lop": "goc | dai_han | luu_nien | tieu_han",
+    "tuoi": "mô tả tuổi của đại hạn (không dùng con số trong lời)",
+    "hai_nguoi": "true = luật cần hai lá số (Xem lá số 2 người)",
+    "hoac": "điều kiện thay thế",
+    "can_them": "điều kiện bổ sung ở cung khác",
+    "so_sanh": "điều kiện so sánh cần định nghĩa khi làm RULES",
+    "ghi_chu": "phần chưa cơ học hoá",
+    "co_the_tinh": "true = engine đã có đủ dữ kiện (sao, cung, độ sáng, hoá, chi, hạn) để kiểm điều kiện"
+  },
+  "muc": [
+    {
+      "id": "yb.pp.doi_cung_tam_phuong",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "cung": "bat_ky",
+        "vi_tri": [
+          "xung_chieu",
+          "tam_phuong"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Đọc một cung phải xem cả cung đối diện và hai cung tam hợp; cung không có chính tinh thì mượn sao cung đối diện.",
+      "loi_doi_thuong": "Một mảng đời không đứng riêng: nó được soi từ phía đối diện và hai phía hỗ trợ. Mảng trông như trống vẫn có nét riêng, mượn từ phía đối diện.",
+      "viec_nen_lam": "Khi đọc một mảng, đọc thêm mảng đối diện rồi mới kết luận.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.giai_thich.tam_phuong",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.pp.sao_doi_nghia_theo_cung",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "cung": "bat_ky",
+        "ghi_chu": "Cùng một sao, nghĩa gán cho người/việc của cung chứa nó",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Cùng một sao đặt ở cung khác thì nói về người hoặc việc khác: sao giỏi tiền ở cung anh em là nói anh em có lợi về tiền.",
+      "loi_doi_thuong": "Một nét hiện ở mảng nào thì nói về người hoặc việc của mảng đó: nét giỏi giữ tiền nằm ở mảng anh em là đang tả anh chị em, không phải tả bạn.",
+      "viec_nen_lam": "Đọc nét đó như mô tả người thân tương ứng rồi tự đối chiếu với người thật.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.cung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.pp.dai_han_chinh_luu_nien_phu",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "lop": [
+          "dai_han",
+          "luu_nien"
+        ],
+        "ghi_chu": "Ưu tiên đại hạn, lưu niên chỉ chỉnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Giai đoạn mười năm là chính, từng năm là phụ; mười năm thuận vẫn có vài năm hao, tổng cả giai đoạn mới quyết định.",
+      "loi_doi_thuong": "Nhìn cả giai đoạn mười năm trước rồi mới tới từng năm: một giai đoạn tốt vẫn có vài năm chững lại, và một năm chững không đổi được cả giai đoạn.",
+      "viec_nen_lam": "Đặt mục tiêu theo giai đoạn dài, còn mỗi năm chỉ chỉnh lại nhịp làm.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.giai_thich.dai_han",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.pp.menh_tot_khong_bang_han_tot",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "lop": [
+          "goc",
+          "dai_han"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Lá gốc vừa phải mà các đại hạn hội Khoa Quyền Lộc vẫn khá; lá gốc đẹp mà đại hạn lúc sung sức toàn sát tinh thì khó dùng được.",
+      "loi_doi_thuong": "Nền gốc chỉ là một nửa câu chuyện; giai đoạn bạn đang đi mới quyết định nhiều về việc có dùng được điểm mạnh hay không.",
+      "viec_nen_lam": "Xem giai đoạn hiện tại để biết lúc này nên dồn sức vào điểm mạnh nào.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.pp.cung_nam_la_chu_de",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "lop": "luu_nien",
+        "ghi_chu": "Cung lưu niên/tiểu hạn = chủ đề của năm",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Năm đi tới cung nào thì cung đó là việc trọng tâm của năm: rơi vào cung tiền thì năm đó lo chuyện tiền nhiều nhất.",
+      "loi_doi_thuong": "Mỗi năm có một mảng nổi lên; năm đó bạn dễ để tâm nhiều nhất vào chính mảng ấy.",
+      "viec_nen_lam": "Đầu năm, viết ra một việc cụ thể muốn làm cho mảng đang nổi lên.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chu_de_han",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.pp.nam_chi_xem_cung_va_doi_cung",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "lop": "luu_nien",
+        "vi_tri": [
+          "toa",
+          "xung_chieu"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Khi xem riêng một năm chỉ cần cung của năm và cung đối diện; các sao kẹp hai bên để dành cho lá gốc.",
+      "loi_doi_thuong": "Khi xem riêng một năm, chỉ cần nhìn mảng của năm và mảng đối diện; những yếu tố kẹp hai bên để dành cho nền gốc.",
+      "viec_nen_lam": "Khi đọc nhanh một năm, xem hai mảng này trước, chi tiết khác để sau.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.pp.tu_hoa_dung_yen",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "lop": "goc",
+        "ghi_chu": "Tứ hoá năm sinh cố định; năm chỉ là hạn di chuyển — trái lối phi hoá theo năm",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Có trường phái chỉ dùng tứ hoá năm sinh, để cố định trên lá gốc, coi các năm là hạn đi qua; không xếp lại tứ hoá theo từng năm.",
+      "loi_doi_thuong": "Có trường phái chỉ dùng bốn biến hoá của năm sinh và để chúng đứng yên, trường phái khác cho chúng đổi theo từng năm; hai cách có thể đọc ra nhịp năm khác nhau.",
+      "viec_nen_lam": "Nếu cả hai cách cùng chỉ vào một mảng, coi đó là mảng đáng để tâm nhất năm ấy.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_phi_hoa_kb.khai_niem",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.pp.noi_ket_qua_va_viec_lam",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "ghi_chu": "Nguyên tắc diễn đạt: nói kết quả + việc nên làm, không truy nguyên nhân",
+        "co_the_tinh": false
+      },
+      "y_goc_tom_tat": "Xem lá số là để thấy chỗ yếu sớm và bù vào, không để giải thích vì sao hay đổ lỗi.",
+      "loi_doi_thuong": "Lá số dùng để thấy sớm chỗ cần chuẩn bị, không để giải thích vì sao chuyện đã xảy ra.",
+      "viec_nen_lam": "Với mỗi điểm cần lưu ý, viết ra một việc làm được ngay trong tháng này.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.pp.chuan_bi_truoc_vai_nam",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "lop": "dai_han",
+        "ghi_chu": "Đại hạn kế tiếp nhiều sát/Kỵ → nhắc chuẩn bị từ đại hạn hiện tại",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Giai đoạn khó thấy trước thì nên chuẩn bị từ vài năm trước; tới nơi mới tìm cách thì đã muộn.",
+      "loi_doi_thuong": "Giai đoạn cần chủ động thường nhẹ hơn nhiều nếu bạn chuẩn bị từ vài năm trước: tiền dự phòng, thói quen nghỉ ngơi, những người tin được.",
+      "viec_nen_lam": "Nhìn trước giai đoạn mười năm kế tiếp và chọn một việc chuẩn bị bắt đầu từ bây giờ.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.pp.cach_cuc_can_han",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "lop": [
+          "goc",
+          "dai_han"
+        ],
+        "ghi_chu": "Cách cục chỉ phát huy khi đại hạn tuổi sung sức hợp",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tên cách cục chỉ là gợi ý nhấn mạnh; cách đẹp mà đại hạn đẹp rơi vào tuổi quá sớm hay quá muộn thì không dùng được bao nhiêu.",
+      "loi_doi_thuong": "Một cách cục đẹp chỉ phát huy khi gặp giai đoạn hợp; nếu giai đoạn ấy đến quá sớm hoặc quá muộn, nó chủ yếu là một nét tính cách.",
+      "viec_nen_lam": "Xem cách cục của mình rơi đúng vào giai đoạn mười năm nào để biết lúc nào nên dùng.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_cach_cuc.luu_y_pha_cach",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.pp.luc_than_kem_chinh_xac",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "cung": [
+          "Phụ Mẫu",
+          "Huynh Đệ",
+          "Tử Nữ"
+        ],
+        "ghi_chu": "Ghi chú diễn đạt cho cung người thân",
+        "co_the_tinh": false
+      },
+      "y_goc_tom_tat": "Tử vi đọc người thân kém chắc hơn đọc chính mình; muốn biết về con nên xem lá số của chính đứa con.",
+      "loi_doi_thuong": "Phần nói về người thân là cách bạn trải nghiệm họ, không phải mô tả chính họ; muốn hiểu một người, nên xem lá số của chính người đó.",
+      "viec_nen_lam": "Với người thân, dùng phần này để hiểu cách mình đối xử, không để đoán thay về họ.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.mau.con",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.pp.cat_xu_tang_hung",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "ghi_chu": "Cung nhiều cát tinh mà có một sát tinh hãm ẩn / cung nhiều sát nhưng sát miếu vượng",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nhiều sao tốt mà có một sao khó hãm nằm lẫn bên trong thì rủi ro khó thấy; nhiều sao khó nhưng sáng thì rủi ro lộ rõ, dễ phòng.",
+      "loi_doi_thuong": "Chỗ toàn tin vui vẫn có thể giấu một điểm dễ bỏ qua; chỗ khó khăn lộ rõ lại thường dễ phòng hơn.",
+      "viec_nen_lam": "Khi mọi thứ đang thuận, vẫn giữ thói quen kiểm tra an toàn và giấy tờ như lúc bình thường.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.pp.sat_sang_ham",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Kình Dương",
+          "Đà La",
+          "Hỏa Tinh",
+          "Linh Tinh"
+        ],
+        "do_sang": [
+          "sang",
+          "ham"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Sát tinh miếu vượng là rủi ro nhìn thấy được, kịp phòng; sát tinh hãm là rủi ro đến lặng lẽ, khó lường.",
+      "loi_doi_thuong": "Khi điểm khó nằm ở chỗ sáng, bạn thường thấy nó đến và kịp xoay xở; khi nằm ở chỗ tối, nó đến lặng lẽ hơn nên cần kiểm tra định kỳ.",
+      "viec_nen_lam": "Lập một danh sách kiểm tra định kỳ — giấy tờ, xe cộ, nhà cửa — cho mảng có điểm khó.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.do_sang",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_do_sang": {
+        "sang": "Điểm khó của bạn thường lộ rõ từ sớm, nên bạn kịp thấy và xoay xở.",
+        "ham": "Điểm khó của bạn thường đến lặng lẽ, khó thấy trước, nên cần tự kiểm tra định kỳ."
+      }
+    },
+    {
+      "id": "yb.pp.sat_don_thu",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Kình Dương",
+          "Đà La",
+          "Hỏa Tinh",
+          "Linh Tinh",
+          "Địa Không",
+          "Địa Kiếp"
+        ],
+        "khong_co_cat_tinh": true,
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Một sát tinh đứng một mình trong cung không có cát tinh nào thì nặng hơn nhiều; có cát tinh đi cùng thì nhẹ hẳn.",
+      "loi_doi_thuong": "Một điểm khó đứng một mình, không có gì đỡ, đáng để ý hơn cùng điểm khó ấy khi đứng cạnh nhiều điểm hỗ trợ.",
+      "viec_nen_lam": "Ở mảng đó, chủ động tìm người hoặc nguồn hỗ trợ từ trước khi cần đến.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.nhom_sao_linh_vuc.sat",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.pp.cung_gio_khac_nghi",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "ghi_chu": "Nguyên tắc diễn đạt: lá số là khí chất, lựa chọn là của người",
+        "co_the_tinh": false
+      },
+      "y_goc_tom_tat": "Cùng giờ sinh mà khác cách nghĩ, khác chỗ đứng thì đời khác nhau; ý nghĩ đúng lúc có thể rút ngắn khó khăn.",
+      "loi_doi_thuong": "Hai người cùng ngày giờ sinh vẫn sống khác nhau, vì cách nghĩ và lựa chọn mỗi ngày khác nhau.",
+      "viec_nen_lam": "Đọc lá số như bản đồ khí chất của mình; đường đi là do bạn chọn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.giai_thich.cung_gio_khac_doi",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.pp.thang_nhuan_tinh_thang_sau",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "ghi_chu": "Sinh tháng nhuận an như tháng sau",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Sinh tháng nhuận thì an sao như tháng kế tiếp.",
+      "loi_doi_thuong": "Người sinh tháng nhuận có vài cách an lá số; một cách phổ biến là tính như tháng kế tiếp.",
+      "viec_nen_lam": "Nếu sinh tháng nhuận, xem lá số theo cả hai cách trong phần chọn trường phái.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.pp.nghia_that_cua_xung_than",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "cung": [
+          "Phụ Mẫu",
+          "Huynh Đệ",
+          "Phu Thê",
+          "Tử Nữ"
+        ],
+        "ghi_chu": "Diễn đạt lại chữ dân gian về xung đột với người thân",
+        "co_the_tinh": false
+      },
+      "y_goc_tom_tat": "Chữ dân gian chỉ sự xung với người thân, hiểu đúng là người càng gần càng ảnh hưởng mạnh tới mình, thường vì quá quan tâm, không phải làm hại.",
+      "loi_doi_thuong": "Người ảnh hưởng mạnh nhất tới bạn thường là người thân nhất; va chạm với họ thường đến từ việc quá lo cho nhau.",
+      "viec_nen_lam": "Khi người thân góp ý quá nhiều, nói rõ việc nào bạn muốn tự quyết, việc nào cần họ giúp.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.luu_y.hon_nhan",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.pp.vuong_phu_vuong_the",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": [
+          "Phu Thê",
+          "Mệnh"
+        ],
+        "ghi_chu": "Định nghĩa lại 'vượng phu/thê'",
+        "co_the_tinh": false
+      },
+      "y_goc_tom_tat": "Vượng phu là người vợ làm cho chồng không phải lo phía sau; điều đó không bảo đảm hôn nhân tự êm.",
+      "loi_doi_thuong": "Một người giỏi vun vén làm bạn đời yên tâm làm việc, nhưng giỏi vun vén không thay được việc hai người cùng chăm cho mối quan hệ.",
+      "viec_nen_lam": "Mỗi tuần, nói thành lời một việc cụ thể người kia đã lo giúp mình.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.pp.tieu_han_nam_thuan_nu_nghich",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "lop": "tieu_han",
+        "ghi_chu": "Khởi tiểu hạn theo nhóm tam hợp chi năm sinh, nam thuận nữ nghịch — đối chiếu tiểu hạn engine",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tiểu hạn từng năm khởi theo nhóm chi năm sinh, nam đi thuận, nữ đi nghịch; mười hai năm quay lại cùng cung.",
+      "loi_doi_thuong": "Mỗi năm một mảng đời nổi lên theo vòng xoay riêng của bạn; nam và nữ đi theo hai chiều ngược nhau, mười hai năm lại quay về chỗ cũ.",
+      "viec_nen_lam": "Nhìn lại mười hai năm trước cùng mảng để thấy năm nay có thể giống điều gì.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.doc_tung_buoc.luu_nien",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.pp.dau_kho_sau_thuan",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "lop": "dai_han",
+        "ghi_chu": "Các đại hạn đầu nhiều sát, đại hạn sau nhiều cát",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Lá số tốt nhất là đầu đời vất vả, về sau thuận.",
+      "loi_doi_thuong": "Đầu đời vất vả rồi về sau thuận thường dễ sống hơn thuận sớm rồi khó về sau, vì bạn đã tích được vốn kinh nghiệm.",
+      "viec_nen_lam": "Nếu đang ở giai đoạn vất vả, ghi lại bài học mỗi năm — đó là vốn cho giai đoạn sau.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.pp.nam_thuan_de_chu_quan",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "lop": "luu_nien",
+        "ghi_chu": "Năm hội nhiều cát tinh / Khoa Quyền Lộc",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Năm rất tốt vẫn phải giữ cảnh giác; điều nghĩ không thể xảy ra lại hay xảy ra lúc đang thuận.",
+      "loi_doi_thuong": "Năm thuận nhất cũng là năm dễ lơ là nhất; điều bạn nghĩ không thể xảy ra lại hay đến đúng lúc này.",
+      "viec_nen_lam": "Năm thuận, giữ nguyên các quy tắc chi tiêu và an toàn của mình như năm thường.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.pp.tat_ach_xem_toan_ban",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "cung": "Tật Ách",
+        "ghi_chu": "Không đọc từng sao ở Tật Ách theo kiểu một sao một bộ phận; xem cung nào trên toàn bàn yếu nhất",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Sao trong cung Tật Ách đọc riêng lẻ ít giá trị; phải xem toàn bàn, tìm cung yếu nhất theo lối gắn chi với tạng phủ.",
+      "loi_doi_thuong": "Phần sức khoẻ không đọc theo kiểu một sao một bộ phận; nó chỉ gợi ý nên chăm sóc phần nào hơn — không thay lời bác sĩ.",
+      "viec_nen_lam": "Dùng phần này để chọn một thói quen phòng ngừa, và khám định kỳ như mọi người.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sao.tu_vi_giai_ach",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Tử Vi"
+        ],
+        "cung": "bat_ky",
+        "gap": "sat_tinh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tử Vi có sức giải: sát tinh đi cùng Tử Vi bị giảm lực, gặp khó có người đỡ.",
+      "loi_doi_thuong": "Ở mảng có nét này, khi gặp việc khó bạn thường có người hoặc cách đỡ kịp, dù vậy vẫn nên chuẩn bị.",
+      "viec_nen_lam": "Giữ quan hệ tốt với người có tiếng nói trong tổ chức, vì đó thường là chỗ đỡ của bạn.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Tử Vi",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_ro": "Với {mang}, khi gặp việc khó bạn thường có người hoặc cách đỡ kịp, dù vậy vẫn nên chuẩn bị."
+    },
+    {
+      "id": "yb.sao.tu_vi_thien_di",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Tử Vi"
+        ],
+        "cung": "Thiên Di",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tử Vi ở Thiên Di: ra ngoài gặp quý nhân có địa vị, nhưng ở nơi xa dễ thành người lẻ loi.",
+      "loi_doi_thuong": "Ra khỏi nơi quen thuộc, bạn dễ gặp người có tiếng nói giúp đỡ, nhưng cũng dễ thấy mình lẻ loi ở chỗ mới.",
+      "viec_nen_lam": "Khi chuyển tới nơi mới, chủ động tham gia một nhóm cùng sở thích ngay trong tháng đầu.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Tử Vi.Thiên Di",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.tu_vi_don_phuc_duc_nu",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Tử Vi"
+        ],
+        "cung": "Phúc Đức",
+        "khong_co": [
+          "Tả Phù",
+          "Hữu Bật"
+        ],
+        "gioi_tinh": "nu",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nữ có Tử Vi một mình ở Phúc Đức, không Tả Hữu: hay tự gánh, cô đơn về tinh thần.",
+      "loi_doi_thuong": "Bạn quen tự gánh chuyện trong lòng một mình, ít chia sẻ dù có người bên cạnh.",
+      "viec_nen_lam": "Chọn một người để kể chuyện đang lo, mỗi tuần một lần.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Tử Vi.Phúc Đức",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.tu_sat_quan_loc",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": "Quan Lộc",
+        "sao": [
+          "Tử Vi",
+          "Thất Sát"
+        ],
+        "hoac": {
+          "hoa": "Quyền",
+          "cung": "Quan Lộc"
+        },
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Quan Lộc có Tử Vi Thất Sát đồng cung hoặc Hoá Quyền: quyền chức nặng, nắm quyền thật.",
+      "loi_doi_thuong": "Bạn hợp vai được giao quyền quyết định thật chứ không phải chức danh suông; dùng quyền cần giữ chuẩn mực.",
+      "viec_nen_lam": "Khi nhận việc mới, hỏi rõ phạm vi bạn được tự quyết và báo cáo cho ai.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Tử Vi.Quan Lộc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.thien_co_van_chuc",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Cơ"
+        ],
+        "cung": [
+          "Mệnh",
+          "Quan Lộc"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Cơ là sao văn chức: giáo viên, công chức, nhân viên ngân hàng; không có sức giải.",
+      "loi_doi_thuong": "Bạn hợp việc dùng đầu óc trong một hệ thống có quy trình: dạy học, văn phòng, tài chính, lập kế hoạch.",
+      "viec_nen_lam": "Tìm vị trí có lộ trình rõ, nơi việc suy tính kỹ của bạn được ghi nhận.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thiên Cơ.Quan Lộc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.thai_duong_cong_quyen",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương"
+        ],
+        "cung": [
+          "Mệnh",
+          "Quan Lộc"
+        ],
+        "do_sang": "sang",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thái Dương được xếp vào nhóm võ chức: quân đội, công an, toà án, ngoại giao.",
+      "loi_doi_thuong": "Bạn hợp việc đứng ở chỗ công khai, có kỷ luật và trách nhiệm với nhiều người, như việc công, pháp lý, đối ngoại.",
+      "viec_nen_lam": "Chọn môi trường mà uy tín công khai là tài sản, và giữ nó bằng sự minh bạch.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thái Dương.Quan Lộc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.thai_duong_tai_bach_thu_nhap_dot",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương"
+        ],
+        "cung": "Tài Bạch",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thái Dương ở Tài Bạch chủ tiền tự làm ra, không cố định từng tháng (khác lương đều).",
+      "loi_doi_thuong": "Thu nhập của bạn dễ đến theo đợt từ việc tự làm hơn là lương đều đặn hằng tháng.",
+      "viec_nen_lam": "Lập quỹ dự phòng đủ chi tiêu vài tháng để đi qua những tháng thu ít.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thái Dương.Tài Bạch",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.thai_duong_ham_tai_bach",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương"
+        ],
+        "cung": "Tài Bạch",
+        "do_sang": "ham",
+        "khong_co_hoa": [
+          "Quyền",
+          "Lộc"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thái Dương hãm ở Tài Bạch mà không có Quyền Lộc: tự kinh doanh bận cả ngày đêm mà khó giữ được.",
+      "loi_doi_thuong": "Nếu tự kinh doanh, bạn dễ bận cả ngày lẫn đêm mà tiền giữ lại chưa tương xứng; làm chủ hợp hơn khi có thêm điểm hỗ trợ về quyền và tiền.",
+      "viec_nen_lam": "Trước khi tự mở việc, chạy thử một thời gian ngắn và tính kỹ phần lãi thật sau chi phí.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thái Dương.Tài Bạch",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.thai_duong_nu_nguoi_nam",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương"
+        ],
+        "gioi_tinh": "nu",
+        "ghi_chu": "Ý nghĩa vai: cha, chồng, con trai",
+        "co_the_tinh": false
+      },
+      "y_goc_tom_tat": "Ở lá nữ, Thái Dương đại diện cho cha, chồng và con trai.",
+      "loi_doi_thuong": "Ở lá số của bạn, nét này nói về cách bạn trải nghiệm những người nam gần gũi nhất: cha, người bạn đời, con trai.",
+      "viec_nen_lam": "Khi đọc phần này, nghĩ tới từng người cụ thể và tự hỏi mình đang chờ đợi gì ở họ.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Thái Dương",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_ro": "Lá số của bạn có một phần nói về cách bạn trải nghiệm những người nam gần gũi nhất: cha, người bạn đời, con trai."
+    },
+    {
+      "id": "yb.sao.thai_duong_ham_phu_the_nu",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương"
+        ],
+        "cung": "Phu Thê",
+        "do_sang": "ham",
+        "gioi_tinh": "nu",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nữ có Thái Dương hãm ở Phu Thê: chồng hay vắng, tụ ít tan nhiều; trường phái này gợi ý hợp người chín chắn hơn.",
+      "loi_doi_thuong": "Người bạn đời dễ bận việc, có giai đoạn ở xa; nhiều người hợp với người chín chắn, chịu được nhịp gặp ít mà chắc.",
+      "viec_nen_lam": "Thống nhất trước cách giữ liên lạc khi một người phải đi xa: giờ gọi, việc ai lo ở nhà.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thái Dương.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.vu_khuc_nong_nhanh_nguoi_nhanh",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Vũ Khúc"
+        ],
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Vũ Khúc là vua tài tinh, kiêm võ; tính nóng như Thái Dương nhưng nổi lên rồi qua nhanh.",
+      "loi_doi_thuong": "Bạn nóng lên nhanh nhưng nguôi cũng nhanh, không để bụng lâu; người xung quanh có thể chưa kịp nguôi như bạn.",
+      "viec_nen_lam": "Sau một lần lớn tiếng, chủ động nói lại một câu nhẹ nhàng ngay trong ngày.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Vũ Khúc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.vu_khuc_dai_han_dien_trach",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao": [
+          "Vũ Khúc"
+        ],
+        "cung": "Điền Trạch",
+        "lop": "dai_han",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Đại hạn đi vào Điền Trạch có Vũ Khúc: tài sản nhà đất tăng dần.",
+      "loi_doi_thuong": "Giai đoạn này hợp để tích dần tài sản lâu dài như nhà đất, từng bước một.",
+      "viec_nen_lam": "Lập kế hoạch tích lũy theo từng năm thay vì dồn vào một lần mua lớn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Vũ Khúc.Điền Trạch",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.vu_tham_menh_nu",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Vũ Khúc",
+          "Tham Lang"
+        ],
+        "cung": "Mệnh",
+        "gioi_tinh": "nu",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nữ Mệnh Vũ Tham: mạnh mẽ, dám xông pha, kiểu nữ hào kiệt; tính cương.",
+      "loi_doi_thuong": "Bạn mạnh mẽ, dám nhận việc khó mà người khác ngại; người bên cạnh cần hiểu bạn thích hành động hơn ngồi chờ.",
+      "viec_nen_lam": "Chọn việc có thử thách thật, và nói trước với gia đình về nhịp bận rộn của mình.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_cach_cuc.cach.tham_vu_dong_hanh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.thien_dong_nhan_hoa",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Đồng"
+        ],
+        "lop": [
+          "dai_han",
+          "luu_nien"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Đồng chủ nhân hoà; năm hoặc giai đoạn gặp Thiên Đồng hợp làm ăn chung, mở việc nhờ người.",
+      "loi_doi_thuong": "Giai đoạn này việc thuận nhờ quan hệ tốt; hợp rủ người cùng làm hơn là làm một mình.",
+      "viec_nen_lam": "Thử hợp tác bằng một việc nhỏ chung trước khi góp vốn lớn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Thiên Đồng",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.liem_trinh_dao_hoa_thu",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Liêm Trinh"
+        ],
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Liêm Trinh là đào hoa thứ (Tham Lang là đào hoa chính), kiêm võ chức.",
+      "loi_doi_thuong": "Bạn có sức hút lặng lẽ, kín đáo; người khác dễ để ý tới bạn mà bạn không cần cố.",
+      "viec_nen_lam": "Giữ ranh giới rõ ràng trong các mối quan hệ công việc.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Liêm Trinh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.hung_tu_kinh_doanh",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Liêm Trinh"
+        ],
+        "cung": "Mệnh",
+        "chi": [
+          "Dần",
+          "Thân"
+        ],
+        "can_them": {
+          "cung": "Tài Bạch",
+          "hoa_hoac_sao": [
+            "Lộc",
+            "Lộc Tồn"
+          ]
+        },
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Liêm Trinh toạ Mệnh Dần/Thân làm võ hoặc làm buôn; làm buôn cần Tài Bạch có Lộc; về sau dễ hao vì chuyện tình cảm.",
+      "loi_doi_thuong": "Nét này hợp cả việc có kỷ luật lẫn kinh doanh; kinh doanh suôn hơn khi phần tiền bạc cũng có điểm hỗ trợ, và nên tách chuyện tình cảm khỏi chuyện tiền.",
+      "viec_nen_lam": "Tách bạch tài khoản kinh doanh với chi tiêu cá nhân ngay từ đầu.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_cach_cuc.cach.hung_tu_can_nguyen",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Con người bạn hợp cả việc có kỷ luật lẫn kinh doanh; kinh doanh suôn hơn khi phần tiền bạc cũng có điểm hỗ trợ, và nên tách chuyện tình cảm khỏi chuyện tiền."
+    },
+    {
+      "id": "yb.cap.liem_sat_sang",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Liêm Trinh",
+          "Thất Sát"
+        ],
+        "do_sang": "sang",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Liêm Sát miếu vượng lại thành người tích được của, làm chủ một vùng.",
+      "loi_doi_thuong": "Bạn hợp làm người phụ trách một mảng riêng và biết tích của bằng kỷ luật.",
+      "viec_nen_lam": "Nhận phụ trách một mảng có chỉ tiêu rõ ràng để dùng đúng nét này.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Liêm Trinh.Mệnh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "viec_ro": "Nhận phụ trách một mảng có chỉ tiêu rõ ràng để dùng đúng sức làm việc có kỷ luật của bạn."
+    },
+    {
+      "id": "yb.cap.liem_sat_ham",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Liêm Trinh",
+          "Thất Sát"
+        ],
+        "do_sang": "ham",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Liêm Sát hãm đồng cung bị sách cũ đọc rất xấu về đường đi lại.",
+      "loi_doi_thuong": "Khi đang nóng hoặc vội, bạn dễ quyết liều; đi lại và làm việc tay chân nên có quy tắc an toàn của riêng mình.",
+      "viec_nen_lam": "Đặt một luật cho mình: không lái xe, không ký giấy tờ khi đang giận.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_cach_cuc.cach.liem_sat_duong",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.liem_pha",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Liêm Trinh",
+          "Phá Quân"
+        ],
+        "chi": [
+          "Mão",
+          "Dậu"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Liêm Phá chủ biến động bất ngờ và cô độc; sách cũ đọc rất nặng.",
+      "loi_doi_thuong": "Đời bạn có những khúc rẽ đến bất ngờ; bạn dễ quyết theo cảm hứng mạnh rồi một mình gánh phần sau.",
+      "viec_nen_lam": "Với việc lớn, chờ qua một đêm và hỏi ý một người tin được trước khi quyết.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.liem_tham_ham_thoi_quen",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Liêm Trinh",
+          "Tham Lang"
+        ],
+        "do_sang": "ham",
+        "chi": [
+          "Tỵ",
+          "Hợi"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Liêm Tham hãm dính rượu, sắc, cờ bạc, tiêu pha theo cảm xúc.",
+      "loi_doi_thuong": "Bạn dễ bị cuốn theo cuộc vui, đồ uống, trò may rủi hoặc mua sắm theo cảm xúc.",
+      "viec_nen_lam": "Đặt hạn mức chi cho vui chơi mỗi tháng và cho một người thân biết hạn mức đó.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_cach_cuc.cach.dao_hoa_pham_chu",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.liem_tham_ham_ap_luc",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "sao": [
+          "Liêm Trinh",
+          "Tham Lang"
+        ],
+        "do_sang": "ham",
+        "vi_tri": [
+          "toa",
+          "xung_chieu"
+        ],
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Liêm Tham hãm toạ hoặc chiếu Mệnh bị trường phái này đọc là dễ bế tắc tinh thần ở một giai đoạn giữa đời.",
+      "loi_doi_thuong": "Khi áp lực dồn lại, bạn dễ thu mình và thấy mọi thứ bế tắc hơn thực tế; đó là lúc nên nói ra với người tin được hoặc một chuyên gia tâm lý — không thay lời bác sĩ.",
+      "viec_nen_lam": "Lưu sẵn số của một người bạn thân và một nơi tư vấn tâm lý, và chăm giấc ngủ đều đặn trong những tuần căng thẳng.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.thien_phu_khong_tu_giai",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Phủ"
+        ],
+        "gap": "sat_tinh",
+        "khong_co": [
+          "Tam Thai",
+          "Bát Toạ"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này cho rằng Thiên Phủ không có sức giải như sách nói; năm gặp Thiên Phủ có sát tinh vẫn phải phòng; cần Tam Thai Bát Toạ mới có lực giải.",
+      "loi_doi_thuong": "Nét ôn hoà, giỏi giữ của này giúp bạn ổn định, nhưng không tự gạt được rủi ro; năm êm vẫn nên giữ thói quen phòng xa.",
+      "viec_nen_lam": "Giữ quỹ dự phòng và bảo hiểm cơ bản ngay cả khi mọi việc đang ổn.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.chinh_tinh.Thiên Phủ",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.thien_phu_tinh_toan",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Phủ"
+        ],
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Phủ giỏi lý tài, hiền, chăm, nhưng nhiều tính toán; ôn hoà không đồng nghĩa với dễ đoán.",
+      "loi_doi_thuong": "Bạn quản lý tiền giỏi, làm việc chăm, nhưng hay tính trước tính sau nên người khác có lúc khó đoán ý bạn.",
+      "viec_nen_lam": "Khi bàn việc chung, nói thẳng điều mình muốn thay vì để người khác tự đoán.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Thiên Phủ",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.thien_phu_khong_hop_xong_pha",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Phủ"
+        ],
+        "cung": [
+          "Mệnh",
+          "Quan Lộc"
+        ],
+        "ghi_chu": "Nghề đòi đối đầu, xông pha tuyến đầu",
+        "co_the_tinh": false
+      },
+      "y_goc_tom_tat": "Thiên Phủ đi làm võ chức là 'đặt cái tròn vào khuôn vuông', khó tiến.",
+      "loi_doi_thuong": "Bạn hợp vai quản lý, giữ nề nếp hơn là vai xông pha tuyến đầu đòi quyết nhanh và đối đầu.",
+      "viec_nen_lam": "Khi chọn việc, ưu tiên nơi cần người giữ ổn định và quản lý nguồn lực.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thiên Phủ.Quan Lộc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.thai_am_van_chuc",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Thái Âm"
+        ],
+        "cung": [
+          "Mệnh",
+          "Quan Lộc"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thái Âm văn chức, tài lộc chính (lương đều); làm quan thì thanh liêm, nhưng thanh còn phải minh — biết chọn thời.",
+      "loi_doi_thuong": "Bạn hợp thu nhập đều đặn trong một tổ chức và giữ mình trong sạch; điều cần thêm là biết chọn thời điểm, không đòi mọi việc đúng ngay.",
+      "viec_nen_lam": "Khi muốn thay đổi điều gì ở nơi làm, chia thành bước nhỏ theo từng quý.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thái Âm.Quan Lộc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.thai_am_ham_menh",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Thái Âm"
+        ],
+        "cung": "Mệnh",
+        "do_sang": "ham",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thái Âm hãm ở Mệnh: không bùng nổ mà chống đối thụ động, dồn nén bên trong.",
+      "loi_doi_thuong": "Khi không đồng ý, bạn hay im lặng làm theo ý mình thay vì nói ra; ấm ức dễ dồn lại bên trong.",
+      "viec_nen_lam": "Tập nói một câu 'mình chưa đồng ý vì…' ngay khi thấy không ổn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Thái Âm",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hoa.thai_am_ky_nam",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "hoa": "Kỵ",
+        "hoa_tren_sao": "Thái Âm",
+        "gioi_tinh": "nam",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Lá nam có Thái Âm Hoá Kỵ: mẹ và vợ khó hoà hợp.",
+      "loi_doi_thuong": "Mẹ và người bạn đời dễ có cách nghĩ khác nhau về việc nhà, và bạn hay bị kẹp ở giữa.",
+      "viec_nen_lam": "Đừng làm người chuyển lời; để hai người tự bàn những việc chung, bạn chỉ đứng ra khi cả hai cần.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cap.thai_am_xuong_khuc",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Thái Âm"
+        ],
+        "sao_mot_trong": [
+          "Văn Xương",
+          "Văn Khúc"
+        ],
+        "cung": "Mệnh",
+        "vi_tri": [
+          "toa",
+          "tam_phuong"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Xương Khúc gặp Thái Âm thì không chủ văn chương mà chủ tài nghệ, nghệ thuật nổi bật.",
+      "loi_doi_thuong": "Năng khiếu của bạn nghiêng về nghệ thuật, trình diễn, cái đẹp hơn là lý thuyết; người khác dễ bị cuốn theo nét duyên này.",
+      "viec_nen_lam": "Dành thời gian cố định mỗi tuần cho một môn nghệ thuật bạn thích.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.thien_luong_tiep_khach",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Lương"
+        ],
+        "cung": "Quan Lộc",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Lương được gọi như sao ăn uống; ở Quan Lộc thì công việc nhiều tiếp khách, xã giao.",
+      "loi_doi_thuong": "Công việc của bạn dễ gắn với tiếp khách, gặp gỡ, các bữa xã giao.",
+      "viec_nen_lam": "Giới hạn số buổi tiếp khách mỗi tuần và giữ bữa sáng ở nhà cho đều đặn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thiên Lương.Quan Lộc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.thien_luong_phan_xu",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Lương"
+        ],
+        "cung": [
+          "Mệnh",
+          "Quan Lộc"
+        ],
+        "hoac": {
+          "hoa": "Quyền",
+          "hoa_tren_sao": "Thiên Lương"
+        },
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Lương văn võ đều được, chính trực; Thiên Lương Hoá Quyền là quyền về tư pháp, ngoại giao.",
+      "loi_doi_thuong": "Bạn hợp vai đứng ra phân xử, giữ quy tắc, hoặc thay mặt tổ chức làm việc với bên ngoài.",
+      "viec_nen_lam": "Tìm vị trí nơi sự công tâm của bạn là một phần chính của công việc.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Thiên Lương",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.thien_tuong_pho_ta",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Tướng"
+        ],
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Tướng là tể tướng, tài phò tá: hợp trợ lý, thư ký, phó; vị cao mà ít quyền quyết.",
+      "loi_doi_thuong": "Bạn làm tốt nhất ở vai cánh tay phải, giữ việc chạy trơn tru cho người dẫn đầu; vị trí có thể cao mà quyền quyết cuối không nằm ở bạn.",
+      "viec_nen_lam": "Nếu muốn lên vai quyết định, nói rõ mong muốn đó và nhận dần việc có trách nhiệm cuối cùng.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Thiên Tướng",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.phu_tuong_hoi_menh_lam_cong",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Phủ",
+          "Thiên Tướng"
+        ],
+        "vi_tri": "tam_phuong",
+        "cung": "Mệnh",
+        "khong_co_hoa": [
+          "Khoa",
+          "Quyền",
+          "Lộc"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phủ Tướng hội Mệnh mà không có Khoa Quyền Lộc: sinh ra làm người phụ tá, hưởng lương.",
+      "loi_doi_thuong": "Bạn được việc và được tin cậy ở vai hỗ trợ; khi không có thêm điểm nhấn về quyền và tiền, con đường làm công ổn định hợp hơn tự làm chủ.",
+      "viec_nen_lam": "Chọn người lãnh đạo bạn tin và học được, vì chất lượng công việc của bạn gắn với người đó.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_cach_cuc.cach.phu_tuong_trieu_vien",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.that_sat_cung_than",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Thất Sát"
+        ],
+        "cung_than": true,
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thất Sát ở cung Thân: đời nhiều lần làm lại, thành ít bại nhiều theo lời sách.",
+      "loi_doi_thuong": "Về sau bạn hay tự mình gánh việc lớn và có nhiều lần bắt đầu lại; thành quả thường đến sau những lần như vậy.",
+      "viec_nen_lam": "Mỗi lần bắt đầu lại, giữ một khoản tiền và một người cũ tin được làm chỗ dựa.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.than_cu",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.that_sat_linh_tinh",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Thất Sát",
+          "Linh Tinh"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thất Sát gặp Linh Tinh: tính rất cương, trong cơn giận dễ gây lỗi khó sửa.",
+      "loi_doi_thuong": "Trong lúc rất giận, bạn có thể nói hoặc làm điều khó rút lại.",
+      "viec_nen_lam": "Khi thấy cơn giận lên, rời chỗ đó vài phút rồi mới trả lời.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.that_sat_ky_xung",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Thất Sát"
+        ],
+        "hoa": "Kỵ",
+        "vi_tri_hoa": "xung_chieu",
+        "lop": [
+          "goc",
+          "luu_nien"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thất Sát bị Hoá Kỵ xung: năm đó làm việc tốn công gấp mà thành quả ít.",
+      "loi_doi_thuong": "Có giai đoạn bạn bỏ công gấp đôi mà kết quả chỉ được một nửa, nhất là khi đầu óc bị chuyện tình cảm kéo đi.",
+      "viec_nen_lam": "Trong giai đoạn đó, nhận ít việc hơn và làm cho xong từng việc một.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.that_sat_dai_han",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao": [
+          "Thất Sát"
+        ],
+        "lop": "dai_han",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Đại hạn có Thất Sát chủ sự: một mình xông pha, vất vả.",
+      "loi_doi_thuong": "Giai đoạn này bạn dễ phải tự gánh phần lớn việc, ít người cùng chia.",
+      "viec_nen_lam": "Ngay đầu giai đoạn, tìm một người cố vấn hoặc nhóm trao đổi ngoài nơi làm.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.dai_han",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.pha_quan_tinh",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Phá Quân"
+        ],
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phá Quân cô độc, không trọng lợi, trọng cảm giác, hay kết hôn muộn, mang nghề đi khắp nơi.",
+      "loi_doi_thuong": "Bạn coi trọng cảm giác hơn tiền bạc, thích tự do và hay mang tay nghề đi nhiều nơi.",
+      "viec_nen_lam": "Chọn nghề có tay nghề mang theo được, và vẫn giữ một khoản tiết kiệm đều đặn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Phá Quân",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.pha_quan_phu_the",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Phá Quân"
+        ],
+        "cung": [
+          "Phu Thê",
+          "Phúc Đức"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phá Quân ở Phu Thê hoặc Phúc Đức chủ hôn nhân nhiều biến đổi.",
+      "loi_doi_thuong": "Chuyện đôi lứa của bạn dễ có những lần thay đổi lớn; bạn dễ đến với nhau nhanh theo cảm giác.",
+      "viec_nen_lam": "Cho mối quan hệ đủ thời gian đi qua vài mùa và vài lần bất đồng trước khi quyết định lớn.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Phá Quân.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Chuyện đôi lứa của người ấy dễ có những lần thay đổi lớn; hai người dễ đến với nhau nhanh theo cảm giác."
+    },
+    {
+      "id": "yb.sao.tham_lang_tien_va_cuoc_vui",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao": [
+          "Tham Lang"
+        ],
+        "do_sang": "sang",
+        "lop": [
+          "dai_han",
+          "luu_nien"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tham Lang gồm cả tửu, sắc, tài, khí; năm Tham Lang vượng thì tiền vào nhiều mà cũng kéo theo cuộc vui.",
+      "loi_doi_thuong": "Giai đoạn tiền vào nhiều cũng là lúc lời mời vui chơi tới nhiều; giữ được nhịp thì giữ được tiền.",
+      "viec_nen_lam": "Đặt sẵn một tỉ lệ tiết kiệm tự động cho mỗi khoản thu lớn.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Tham Lang",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.tham_lang_ty_hoi",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Tham Lang"
+        ],
+        "cung": "Mệnh",
+        "chi": [
+          "Tý",
+          "Hợi"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tham Lang ở Tý/Hợi (cung thuỷ) mới là đào hoa thật; người làm nghề giải trí có nét này thì nổi tiếng.",
+      "loi_doi_thuong": "Bạn có duyên với đám đông; nghề cần sức hút như trình diễn, bán hàng, truyền thông hợp với bạn, còn đời riêng cần ranh giới rõ.",
+      "viec_nen_lam": "Tách tài khoản mạng xã hội công việc với đời riêng.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.sao_cung.Tham Lang.Mệnh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.tham_lang_ngo_uy",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Tham Lang"
+        ],
+        "cung": "Mệnh",
+        "chi": [
+          "Ngọ"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tham Lang ở Ngọ không phải đào hoa mà là võ tinh, có uy, nắm quyền.",
+      "loi_doi_thuong": "Nét này ở bạn thiên về uy và sức quyết hơn là chuyện tình cảm; bạn hợp vai dẫn dắt đội nhóm.",
+      "viec_nen_lam": "Nhận vai trưởng nhóm cho một dự án có thời hạn rõ để thử sức.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.sao_cung.Tham Lang.Mệnh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Sức hút ở bạn thiên về uy và sức quyết hơn là chuyện tình cảm; bạn hợp vai dẫn dắt đội nhóm."
+    },
+    {
+      "id": "yb.cap.tham_ma_dieu_chuyen",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Tham Lang",
+          "Thiên Mã"
+        ],
+        "vi_tri": [
+          "toa",
+          "tam_phuong"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Võ tinh gặp Thiên Mã là quý; có điều động thì thăng.",
+      "loi_doi_thuong": "Cơ hội thăng tiến của bạn hay đến cùng một lần chuyển chỗ làm, chuyển nơi ở hoặc nhận việc ở nơi khác.",
+      "viec_nen_lam": "Khi có đề nghị điều chuyển, cân nhắc kỹ thay vì từ chối ngay.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.tham_lang_phu_the",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Tham Lang"
+        ],
+        "cung": "Phu Thê",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Sách tướng ghi Tham Lang ở Phu Thê thì vợ lớn tuổi hơn chồng nhiều; chỉ là một tình huống, không tuyệt đối.",
+      "loi_doi_thuong": "Người bạn đời có thể hơn tuổi bạn hoặc rất khác nếp sống; sách xưa có nói vậy nhưng không phải lúc nào cũng thế.",
+      "viec_nen_lam": "Tìm hiểu kỹ quá khứ tình cảm của nhau trước khi quyết định lớn.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Tham Lang.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời có thể hơn tuổi hoặc rất khác nếp sống; sách xưa có nói vậy nhưng không phải lúc nào cũng thế."
+    },
+    {
+      "id": "yb.cap.tham_lang_ky_xung_phu_the",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Tham Lang"
+        ],
+        "cung": "Phu Thê",
+        "hoa": "Kỵ",
+        "vi_tri_hoa": "xung_chieu",
+        "lop": [
+          "dai_han",
+          "luu_nien"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tham Lang thành sao đào hoa mà đối diện Hoá Kỵ: chuyện cưới khó thành trong giai đoạn đó.",
+      "loi_doi_thuong": "Có giai đoạn chuyện tình cảm dễ dang dở dù hai người đều có ý; không nên vội ép thành.",
+      "viec_nen_lam": "Dùng giai đoạn đó để hiểu nhau thêm, dời quyết định lớn sang lúc nhẹ nhàng hơn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.cu_mon_sang_ham",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Cự Môn"
+        ],
+        "do_sang": [
+          "sang",
+          "ham"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Cự Môn sáng thì ăn nói giỏi (cửa lớn của trường học), hãm thì dễ vướng thị phi, tranh chấp (cửa đóng).",
+      "loi_doi_thuong": "Khi nét này sáng, lời nói là thế mạnh để dạy, thuyết phục, đàm phán; khi tối, lời nói dễ thành chuyện qua lại, hiểu lầm.",
+      "viec_nen_lam": "Việc quan trọng thì chốt bằng văn bản và đọc lại trước khi gửi.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chinh_tinh.Cự Môn",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_do_sang": {
+        "sang": "Lời nói là thế mạnh của bạn: dạy, thuyết phục, đàm phán đều hợp.",
+        "ham": "Lời nói của bạn dễ thành chuyện qua lại, hiểu lầm hơn bạn nghĩ."
+      }
+    },
+    {
+      "id": "yb.sao.cu_mon_tuoi_di_hoc",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao": [
+          "Cự Môn"
+        ],
+        "lop": "dai_han",
+        "tuoi": "dai_han_dau_hoac_hai",
+        "ghi_chu": "Đại hạn rơi vào tuổi đi học",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Đại hạn tuổi đi học gặp Cự Môn: bạn bè phức tạp, dễ vướng chuyện.",
+      "loi_doi_thuong": "Giai đoạn đi học dễ gặp nhóm bạn nhiều chuyện; cha mẹ nên biết con đang chơi với ai.",
+      "viec_nen_lam": "Cha mẹ giữ một bữa tối trò chuyện mỗi tuần để nghe con kể về bạn bè.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hoa.cu_mon_ky",
+      "loai": "tu_hoa_cung",
+      "dieu_kien": {
+        "hoa": "Kỵ",
+        "hoa_tren_sao": "Cự Môn",
+        "sao_them_tuy_chon": [
+          "Thiên Hình"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Cự Môn vốn là sao thị phi, gặp Hoá Kỵ (thêm Thiên Hình) thì chuyện tranh chấp giấy tờ rất dễ thành.",
+      "loi_doi_thuong": "Giai đoạn này giấy tờ, hợp đồng, lời hứa miệng dễ thành chuyện tranh cãi kéo dài.",
+      "viec_nen_lam": "Rà kỹ hợp đồng, giữ biên nhận, và hỏi người có chuyên môn pháp lý trước khi ký.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.luu_y.phap_ly",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.cu_mon_thien_ma",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Cự Môn",
+          "Thiên Mã"
+        ],
+        "lop": [
+          "goc",
+          "luu_nien"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Cự Môn gặp Thiên Mã: vừa có tranh chấp vừa phải đi lại, dễ va chạm trên đường.",
+      "loi_doi_thuong": "Khi đang có chuyện tranh cãi mà phải đi lại nhiều, đầu óc dễ không tập trung trên đường.",
+      "viec_nen_lam": "Những ngày đang căng thẳng, đi xe công cộng hoặc nhờ người khác lái.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.cu_mon_phu_the_thieu_diu",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Cự Môn"
+        ],
+        "cung": "Phu Thê",
+        "khong_co": [
+          "Thiên Đồng",
+          "Thiên Việt",
+          "Văn Xương",
+          "Văn Khúc"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Cự Môn ở Phu Thê mà không có Thiên Đồng, Thiên Việt, Xương Khúc đi cùng: vợ chồng hay cãi vã.",
+      "loi_doi_thuong": "Hai người dễ cãi nhau vì lời nói hơn vì việc làm; thiếu sự mềm mỏng thì chuyện nhỏ thành lớn.",
+      "viec_nen_lam": "Khi tranh luận, mỗi người nhắc lại ý người kia một lần rồi mới nói ý mình.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Cự Môn.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Với người ấy, chuyện đôi lứa dễ căng vì lời nói hơn vì việc làm; hai người cùng mềm mỏng thì chuyện nhỏ không thành lớn."
+    },
+    {
+      "id": "yb.cap.cu_nhat_loi_noi",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Cự Môn",
+          "Thái Dương"
+        ],
+        "vi_tri": [
+          "toa",
+          "xung_chieu"
+        ],
+        "cung": "Mệnh",
+        "do_sang": [
+          "sang",
+          "ham"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Cự Nhật miếu vượng là cách buôn bán lớn, ăn nói giỏi; hãm thì miệng sắc, cố chấp.",
+      "loi_doi_thuong": "Lời nói là vốn của bạn: thuyết phục, buôn bán, truyền thông; khi căng thẳng, lời nói ấy dễ thành sắc và cố chấp.",
+      "viec_nen_lam": "Dùng lời nói vào việc tạo ra thu nhập, và tập dừng lại một nhịp trước câu trả đũa.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_cach_cuc.cach.cu_nhat_dong_cung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.loc_ton_giu_chat",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Lộc Tồn"
+        ],
+        "cung": [
+          "Mệnh",
+          "Tài Bạch"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Lộc Tồn ở Mệnh hoặc Tài Bạch: giỏi lý tài, tiết kiệm, có khi quá chặt.",
+      "loi_doi_thuong": "Bạn giỏi giữ tiền, có khi chặt đến mức người thân thấy khó mở lời.",
+      "viec_nen_lam": "Dành sẵn một khoản nhỏ mỗi tháng để chi cho người thân hoặc cho chính mình mà không phải đắn đo.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_cach_cuc.cach.loc_ton_thu_menh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.loc_ma_vat_va",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Lộc Tồn",
+          "Hoá Lộc"
+        ],
+        "sao": [
+          "Thiên Mã"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tài lộc đến phải gặp Thiên Mã, nghĩa là tiền đến từ bôn ba vất vả, không có tiền dễ.",
+      "loi_doi_thuong": "Tiền của bạn đến từ việc chịu đi, chịu chạy; ngồi yên một chỗ thì khó có.",
+      "viec_nen_lam": "Chọn việc có đi lại hoặc mở rộng ra nơi khác, và tính chi phí đi lại vào giá.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_cach_cuc.cach.loc_ma_giao_tri",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.khong_kiep_nam_kinh_doanh",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Địa Không",
+          "Địa Kiếp"
+        ],
+        "lop": "luu_nien",
+        "ghi_chu": "Áp cho người đang kinh doanh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Người làm ăn mà năm gặp Thiên Không, Địa Kiếp thì khó có lãi, dễ hao.",
+      "loi_doi_thuong": "Năm có nét này, kế hoạch làm ăn dễ hụt tiền hoặc đổ giữa chừng; không hợp để dồn hết vốn.",
+      "viec_nen_lam": "Chia vốn thành nhiều đợt và giữ lại một phần không đụng tới.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.nhom_sao_chi_tiet.Địa Kiếp",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_ro": "Năm làm ăn nên giữ chắc dòng tiền: kế hoạch lớn dễ vướng giữa chừng, không hợp để dồn hết vốn."
+    },
+    {
+      "id": "yb.sao.kiep_gap_tai_tinh",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Địa Kiếp"
+        ],
+        "sao_mot_trong": [
+          "Vũ Khúc",
+          "Lộc Tồn"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Địa Kiếp đi cùng tài tinh mạnh thì chỉ hao chút ít; đứng một mình mới đáng lo.",
+      "loi_doi_thuong": "Ở mảng tiền bạc, điểm hao này được nền tài chính vững của bạn đỡ phần lớn, chỉ mất chút ít.",
+      "viec_nen_lam": "Vẫn ghi chi tiêu theo tháng để thấy những khoản rò rỉ nhỏ.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Ở chuyện tiền bạc, những khoản hao bất chợt được nền tài chính vững của bạn đỡ phần lớn, chỉ mất chút ít."
+    },
+    {
+      "id": "yb.sao.hoa_linh_nam_cong_su",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Hỏa Tinh",
+          "Linh Tinh"
+        ],
+        "lop": "luu_nien",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Năm gặp Hỏa Linh: tính khí xung đột, hùn hạp dễ cãi nhau rồi tách; ở Phu Thê thì vợ chồng nóng nảy.",
+      "loi_doi_thuong": "Năm có nét này, bất đồng với cộng sự hoặc người nhà dễ bùng to; bỏ ra làm riêng lúc đang nóng là phản ứng hay gặp.",
+      "viec_nen_lam": "Trước khi quyết định tách ra, ngồi lại một buổi có người thứ ba trung lập.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.nhom_sao_chi_tiet.Hỏa Tinh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_ro": "Năm bất đồng với cộng sự hoặc người nhà dễ bùng to; bỏ ra làm riêng lúc đang nóng là phản ứng hay gặp."
+    },
+    {
+      "id": "yb.sao.kinh_da_nguoi_gan_qua_lo",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Kình Dương",
+          "Đà La"
+        ],
+        "cung": [
+          "Phụ Mẫu",
+          "Phu Thê",
+          "Huynh Đệ",
+          "Mệnh"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Kình Đà là người gây khó mà mình không thấy: thường chính là người thân quá lo cho mình nên làm hỏng việc.",
+      "loi_doi_thuong": "Điều làm bạn vướng đôi khi đến từ chính người thân, vì họ quá lo cho bạn mà can thiệp nhiều.",
+      "viec_nen_lam": "Cảm ơn sự quan tâm, rồi nói rõ phần việc bạn muốn tự quyết.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.phu_tinh.Kình Dương",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.khoi_viet_thi_gioi",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Thiên Khôi",
+          "Thiên Việt"
+        ],
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Người có Khôi Việt thi cử giỏi dù vẻ ngoài chẳng giống người học; đừng đánh giá qua dáng vẻ.",
+      "loi_doi_thuong": "Khả năng thi cử của bạn có thể tốt hơn nhiều so với vẻ ngoài người khác thấy.",
+      "viec_nen_lam": "Đừng để ai đánh giá năng lực học của bạn qua dáng vẻ; đăng ký thử sức ở kỳ thi bạn muốn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.phu_tinh.Thiên Khôi",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.khoi_viet_nam_nang_do",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Thiên Khôi",
+          "Thiên Việt"
+        ],
+        "lop": "luu_nien",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Năm gặp Thiên Việt (hoặc Khôi): được người trên để ý, được nâng lên dù lá gốc không có Quyền.",
+      "loi_doi_thuong": "Năm có nét này, người trên dễ để ý và nâng đỡ bạn; cơ hội thường đến qua lời giới thiệu.",
+      "viec_nen_lam": "Chủ động báo kết quả công việc cho cấp trên trực tiếp mỗi tháng.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.nhom_sao_chi_tiet.Thiên Việt",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_ro": "Năm người trên dễ để ý và nâng đỡ bạn; cơ hội thường đến qua lời giới thiệu."
+    },
+    {
+      "id": "yb.sao.khoi_viet_thien_di",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Thiên Khôi",
+          "Thiên Việt"
+        ],
+        "cung": "Thiên Di",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Di có Khôi Việt (toạ quý hướng quý): giỏi chuyên môn, làm quản lý ở công ty tư.",
+      "loi_doi_thuong": "Bạn tiến nhanh nhờ chuyên môn và hợp làm quản lý trong môi trường doanh nghiệp.",
+      "viec_nen_lam": "Chọn công ty có lộ trình thăng tiến theo năng lực, không theo thâm niên.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.van_xuong_don",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao": [
+          "Văn Xương"
+        ],
+        "cung": "Mệnh",
+        "khong_co": [
+          "Văn Khúc"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Văn Xương toạ Mệnh mà không gặp Văn Khúc dễ thành người học nhiều mà ít áp dụng.",
+      "loi_doi_thuong": "Bạn học nhiều, thuộc nhiều, nhưng dễ dừng ở lý thuyết.",
+      "viec_nen_lam": "Mỗi điều học được, thử làm một việc nhỏ áp dụng ngay trong tuần.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.phu_tinh.Văn Xương",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sao.xuong_khuc_tai_bach_chuyen_mon",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Văn Xương",
+          "Văn Khúc"
+        ],
+        "cung": "Tài Bạch",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Xương Khúc ở Tài Bạch: kiếm tiền bằng chuyên môn kỹ thuật — bác sĩ, luật sư, kế toán, kỹ sư, kiến trúc sư.",
+      "loi_doi_thuong": "Bạn kiếm tiền tốt nhất bằng một chuyên môn có chứng chỉ: y, luật, kế toán, kỹ thuật, thiết kế.",
+      "viec_nen_lam": "Đầu tư lấy một chứng chỉ chuyên môn được công nhận trong nghề.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hoa.xuong_ky_nam_thi",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "hoa": "Kỵ",
+        "hoa_tren_sao_mot_trong": [
+          "Văn Xương",
+          "Văn Khúc"
+        ],
+        "lop": "luu_nien",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Năm đi thi gặp Văn Xương hoặc Văn Khúc hoá Kỵ ở cung học hành, công danh: việc thi cử, hồ sơ dễ trắc trở hơn, cần chuẩn bị kỹ.",
+      "loi_doi_thuong": "Năm thi cử, nộp hồ sơ cần chuẩn bị kỹ hơn thường lệ, nhất là phần bạn còn chưa chắc.",
+      "viec_nen_lam": "Đăng ký sẵn một phương án dự phòng, và ôn bằng đề thật thay vì học thêm lý thuyết.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_ro": "Năm thi cử, nộp hồ sơ cần chuẩn bị kỹ hơn thường lệ, nhất là phần bạn còn chưa chắc."
+    },
+    {
+      "id": "yb.hoa.khoa_hoac_xuong_nam_thi",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Hoá Khoa",
+          "Văn Xương",
+          "Thiên Việt"
+        ],
+        "lop": "luu_nien",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Năm gặp Hoá Khoa hoặc Văn Xương (hay Thiên Việt) đúng lúc đi thi thì dễ đỗ.",
+      "loi_doi_thuong": "Năm thuận cho thi cử, chứng chỉ, xét tuyển.",
+      "viec_nen_lam": "Nếu đang định thi hay nộp hồ sơ, ưu tiên làm trong năm này.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sao.ta_huu_don_thu",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Tả Phù",
+          "Hữu Bật"
+        ],
+        "khong_chinh_tinh": true,
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tả Phù hoặc Hữu Bật đứng một mình trong cung không có chính tinh: cô tinh độc thủ, chủ sự lẻ loi.",
+      "loi_doi_thuong": "Ở mảng này bạn quen làm người giúp người khác mà ít khi được ai giúp lại.",
+      "viec_nen_lam": "Tập nhờ người khác một việc nhỏ mỗi tuần để họ có dịp giúp bạn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.phu_tinh.Hữu Bật",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Với {mang}, bạn quen làm người giúp người khác mà ít khi được ai giúp lại."
+    },
+    {
+      "id": "yb.sao.ta_huu_menh_pho_ta",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Tả Phù",
+          "Hữu Bật"
+        ],
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Người có Tả Hữu ở Mệnh sinh ra là tài phò tá; người làm chủ nên dùng người như vậy.",
+      "loi_doi_thuong": "Bạn là người phụ tá đáng tin; người làm chủ thường muốn có bạn bên cạnh.",
+      "viec_nen_lam": "Nếu thích vai này, chọn người dẫn đầu có tầm nhìn để cùng đi lâu dài.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.phu_tinh.Tả Phù",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cap.that_sat_thien_ma_di_xa_som",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Thất Sát",
+          "Thiên Mã"
+        ],
+        "cung": [
+          "Mệnh",
+          "Phụ Mẫu"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thất Sát gặp Thiên Mã: đi học xa, rời cha mẹ sớm, tự lực.",
+      "loi_doi_thuong": "Bạn dễ rời nhà sớm để đi học hoặc đi làm ở nơi xa và tự lo cho mình.",
+      "viec_nen_lam": "Giữ một lịch gọi về nhà cố định mỗi tuần.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cap.nhat_nguyet_phan_boi",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương",
+          "Thái Âm"
+        ],
+        "do_sang": "ham",
+        "ghi_chu": "Thái Dương ở cung đêm, Thái Âm ở cung ngày (nhật nguyệt phản bối)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nhật nguyệt phản bối: làm ngày làm đêm, phần nhiều rời quê lập nghiệp, tính cương và cố chấp.",
+      "loi_doi_thuong": "Bạn dễ làm việc cả ngày lẫn tối, rời quê đi lập nghiệp và tự đứng trên chân mình sớm; tính bạn cũng khá cứng.",
+      "viec_nen_lam": "Đặt giờ kết thúc làm việc mỗi ngày và giữ ít nhất một ngày nghỉ trọn vẹn mỗi tuần.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.nhat_nguyet_phan_boi_tu_lap",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương",
+          "Thái Âm"
+        ],
+        "do_sang": "ham",
+        "cung": [
+          "Phụ Mẫu",
+          "Huynh Đệ"
+        ],
+        "ghi_chu": "Phản bối + cung lục thân có sát",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nhật nguyệt phản bối kèm sát ở cung người thân: ít dựa được người nhà, phải tự lập.",
+      "loi_doi_thuong": "Bạn thường phải tự lo hơn là trông vào người nhà; sự giúp đỡ của gia đình đến ít hoặc muộn.",
+      "viec_nen_lam": "Xây một nhóm bạn tin cậy như một gia đình thứ hai.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cap.nhat_nguyet_phan_boi_vo_chong",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương",
+          "Thái Âm"
+        ],
+        "do_sang": "ham",
+        "ghi_chu": "Nhật nguyệt phản bối nói chung",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Mọi cách nhật nguyệt phản bối đều chủ vợ chồng tụ ít tan nhiều.",
+      "loi_doi_thuong": "Hai người dễ có giai đoạn ít thời gian bên nhau vì giờ làm lệch nhau.",
+      "viec_nen_lam": "Giữ một bữa ăn chung cố định mỗi ngày, dù ngắn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cap.nhat_nguyet_tinh_minh_cong_tam",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương",
+          "Thái Âm"
+        ],
+        "do_sang": "sang",
+        "vi_tri": "tam_phuong",
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nhật nguyệt cùng sáng hội Mệnh: người công tâm, sáng suốt, làm việc gì cũng thuận tay.",
+      "loi_doi_thuong": "Bạn công tâm, nhìn việc rõ ràng, và làm việc ở đâu cũng dễ được tin.",
+      "viec_nen_lam": "Nhận những việc cần người đứng giữa phân định, vì đó là chỗ bạn được việc nhất.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_cach_cuc.cach.nhat_nguyet_tinh_minh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.nhat_le_trung_thien_dai_han",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương"
+        ],
+        "chi": [
+          "Ngọ"
+        ],
+        "lop": "dai_han",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thái Dương ở Ngọ đến trong đại hạn: giai đoạn đó sáng nhất; hay nhất nếu rơi vào tuổi sung sức.",
+      "loi_doi_thuong": "Giai đoạn mười năm này là lúc bạn dễ được nhìn thấy nhất: thi tốt, việc tốt, tiếng tốt.",
+      "viec_nen_lam": "Dùng giai đoạn này để xây uy tín dài hạn: bằng cấp, dự án lớn, mạng lưới.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_cach_cuc.cach.nhat_le_trung_thien",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cap.tu_phu_giap_menh",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Tử Vi",
+          "Thiên Phủ"
+        ],
+        "vi_tri": "giap",
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tử Vi và Thiên Phủ ở hai cung kẹp Mệnh: được người có quyền nâng đỡ.",
+      "loi_doi_thuong": "Bạn hay được những người có vị trí đứng hai bên nâng đỡ, nhất là khi cần ra quyết định.",
+      "viec_nen_lam": "Giữ liên lạc với người đỡ đầu cũ và báo tin khi có bước tiến mới.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.kinh_da_giap_tai_mem",
+      "loai": "cap_sao",
+      "dieu_kien": {
+        "sao": [
+          "Kình Dương",
+          "Đà La"
+        ],
+        "vi_tri": "giap",
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Kình Đà kẹp Mệnh: không nên đọc là 'cả đời gặp tiểu nhân' mà là người dễ bị ảnh hưởng, nhẹ tai; hiểu ra điểm này thì bớt rắc rối.",
+      "loi_doi_thuong": "Bạn dễ nghe theo người xung quanh, nhất là khi họ nói chắc nịch; nhiều rắc rối đến từ việc chưa kịp nghĩ lại.",
+      "viec_nen_lam": "Với lời khuyên quan trọng, hẹn trả lời sau một ngày.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_cach_cuc.cach.kinh_da_giap_menh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cap.tuong_tinh_dai_han",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao": [
+          "Vũ Khúc",
+          "Phá Quân"
+        ],
+        "lop": "dai_han",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Vũ Khúc Phá Quân cùng hội (tướng tinh đắc địa) đến trong đại hạn: lúc thăng tiến trong ngành có kỷ luật.",
+      "loi_doi_thuong": "Giai đoạn này hợp với vai có trách nhiệm cao trong tổ chức có kỷ luật; thăng tiến đến nhanh nếu bạn nhận việc khó.",
+      "viec_nen_lam": "Xung phong nhận một việc khó có tên mình phụ trách trong năm đầu giai đoạn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_cach_cuc.cach.tuong_tinh_dac_dia",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cap.sat_pha_tham_dai_han",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Thất Sát",
+          "Phá Quân"
+        ],
+        "lop": [
+          "dai_han",
+          "luu_nien"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thất Sát, Phá Quân đến trong hạn chủ lao, chủ hao: bôn ba một mình, tiền vào ra khó tụ.",
+      "loi_doi_thuong": "Giai đoạn này nhiều việc phải tự chạy, tiền vào nhanh mà ra cũng nhanh.",
+      "viec_nen_lam": "Chuyển ngay một phần mỗi khoản thu vào một tài khoản khó rút.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.nhom_cach.Sát Phá Tham",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cap.sat_pha_tham_menh_nu",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "nhom": "Sát Phá Tham",
+        "cung": "Mệnh",
+        "gioi_tinh": "nu",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nữ Mệnh Sát Phá Tham: tính cương, cứng; trường phái này coi là mệnh nam trong thân nữ.",
+      "loi_doi_thuong": "Bạn cứng rắn và độc lập, quen tự quyết; người bạn đời hợp là người tôn trọng điều đó.",
+      "viec_nen_lam": "Nói rõ với người ấy những việc bạn muốn tự quyết từ đầu mối quan hệ.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.nhom_cach.Sát Phá Tham",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.thien_di_ra_ngoai",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Thiên Di",
+        "so_sanh": "Thiên Di nhiều cát tinh/Hoá Lộc hơn Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Có người phải ra ngoài một vòng mới khá; Thiên Di tốt hơn Mệnh thì ở xa hơn ở quê, ngược lại thì ở quê hơn đi xa.",
+      "loi_doi_thuong": "Bạn thường khá lên khi rời nơi quen thuộc: làm ăn ở nơi khác, đi xa hoặc ra nước ngoài.",
+      "viec_nen_lam": "Thử nhận một dự án hoặc khoá học ở nơi khác để xem mình có hợp không.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.linh_vuc.Thiên Di",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.thien_di_loc_buon_xa",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": "Thiên Di",
+        "hoa": "Lộc",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Di Hoá Lộc: lợi cho việc ra ngoài buôn bán.",
+      "loi_doi_thuong": "Tiền của bạn dễ đến từ việc buôn bán, làm việc với khách ở nơi khác.",
+      "viec_nen_lam": "Mở một kênh bán hàng hoặc hợp tác với khu vực ngoài nơi bạn ở.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.hoa_linh_vuc.Lộc.Thiên Di",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.thien_di_sat_ham_o_que",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Thiên Di",
+        "sao": [
+          "Thiên Tướng",
+          "Kình Dương"
+        ],
+        "do_sang": "ham",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Di có Thiên Tướng hãm và Kình Dương hãm: ra ngoài bất lợi, ở quê thì tốt.",
+      "loi_doi_thuong": "Ở nơi quen thuộc bạn vững hơn; đi xa làm ăn dễ gặp người khó lường.",
+      "viec_nen_lam": "Nếu phải đi xa, đi cùng người quen việc và giữ liên lạc thường xuyên với nhà.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.han_vao_thien_di",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "cung": "Thiên Di",
+        "lop": [
+          "luu_nien",
+          "tieu_han"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Năm đi vào Thiên Di là động, có di chuyển, không cần đợi Thiên Mã.",
+      "loi_doi_thuong": "Năm dễ có chuyện di chuyển: đổi chỗ làm, chuyển nhà, đi công tác dài.",
+      "viec_nen_lam": "Chuẩn bị giấy tờ và một khoản quỹ cho việc di chuyển từ đầu năm.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.chu_de_han.Thiên Di",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.tai_bach_quyen_loc_lam_chu",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": "Tài Bạch",
+        "hoa": "Quyền",
+        "sao_mot_trong": [
+          "Hoá Lộc",
+          "Lộc Tồn"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tài Bạch có Quyền gặp Lộc (quyền lộc tương phùng): sẽ tự đứng ra làm chủ.",
+      "loi_doi_thuong": "Bạn hợp tự làm chủ hoặc đứng ra kinh doanh: vừa quyết đoán vừa có duyên với tiền.",
+      "viec_nen_lam": "Bắt đầu bằng mô hình nhỏ do bạn tự quyết toàn bộ, rồi mới mở rộng.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_cach_cuc.cach.quyen_loc_hoi_menh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.tai_bach_chi_quyen",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": "Tài Bạch",
+        "hoa": "Quyền",
+        "khong_co_hoa": [
+          "Lộc"
+        ],
+        "khong_co": [
+          "Lộc Tồn"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tài Bạch có Quyền mà không có Lộc: làm quản lý ở doanh nghiệp tư, hưởng lương.",
+      "loi_doi_thuong": "Bạn mạnh ở quản lý tiền và người trong doanh nghiệp, hợp vai quản lý hưởng lương hơn tự bỏ vốn.",
+      "viec_nen_lam": "Đàm phán phần thưởng theo kết quả thay vì tự bỏ vốn kinh doanh.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.hoa_linh_vuc.Quyền.Tài Bạch",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.tai_bach_ky_lam_cong",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": "Tài Bạch",
+        "hoa": "Kỵ",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tài Bạch Hoá Kỵ: không đi làm ăn riêng mà đi đường làm công, việc nhà nước.",
+      "loi_doi_thuong": "Con đường thu nhập ổn định trong tổ chức hợp với bạn hơn tự kinh doanh; tiền tự làm dễ vướng mắc.",
+      "viec_nen_lam": "Nếu muốn làm thêm, chọn việc nhỏ không cần vay vốn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.hoa_linh_vuc.Kỵ.Tài Bạch",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.tai_bach_liem_pha",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": "Tài Bạch",
+        "sao": [
+          "Liêm Trinh",
+          "Phá Quân"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tài Bạch Liêm Phá: không thể tự làm ăn.",
+      "loi_doi_thuong": "Tự kinh doanh không phải thế mạnh của bạn; tiền bạc ổn hơn khi có thu nhập đều.",
+      "viec_nen_lam": "Giao việc giữ quỹ chung cho người cẩn thận hơn trong nhà.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.tai_bach_pha_kiep_ma",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Tài Bạch",
+        "sao": [
+          "Phá Quân",
+          "Địa Kiếp",
+          "Thiên Mã"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tài Bạch có Phá Quân, Địa Kiếp, Thiên Mã: tiêu pha rất nhanh; con có nét này thì cha mẹ đừng đưa nhiều tiền.",
+      "loi_doi_thuong": "Tiền qua tay bạn đi rất nhanh, vào nhiều cũng dễ hết.",
+      "viec_nen_lam": "Dùng tài khoản tiết kiệm có kỳ hạn để giữ tiền khỏi tầm tay; với con có nét này, cha mẹ nên cho tiền theo kế hoạch.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "viec_ro": "Dùng tài khoản tiết kiệm có kỳ hạn để giữ tiền khỏi tầm tay; với con cái tiêu tiền nhanh, cha mẹ nên cho tiền theo kế hoạch."
+    },
+    {
+      "id": "yb.cung.sao_dung_cho",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": [
+          "Quan Lộc",
+          "Tài Bạch"
+        ],
+        "ghi_chu": "Quan tinh ở Quan Lộc, tài tinh ở Tài Bạch là đắc vị; tài tinh/Hoá Lộc lớn ở Quan Lộc = nắm tài chính",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Quan tinh vào Quan Lộc, tài tinh vào Tài Bạch là đúng chỗ; tài tinh vào Quan Lộc thì nắm quyền tiền bạc chung, dễ sinh tham.",
+      "loi_doi_thuong": "Khi người hợp làm tiền ngồi ở vị trí nắm quyền chung, cám dỗ về tiền đến nhiều; minh bạch là cách giữ mình.",
+      "viec_nen_lam": "Với khoản chi lớn do bạn duyệt, luôn để hai người cùng ký.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.quan_loc_trong_kiep",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": "Quan Lộc",
+        "khong_chinh_tinh": true,
+        "sao_mot_trong": [
+          "Địa Không",
+          "Địa Kiếp"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Quan Lộc trống lại có Địa Kiếp: không đi đường làm quan.",
+      "loi_doi_thuong": "Con đường thăng tiến trong bộ máy hành chính ít hợp với bạn; bạn mạnh hơn ở việc tự làm hoặc làm theo dự án.",
+      "viec_nen_lam": "Chọn công việc trả theo sản phẩm hoặc dự án thay vì chờ thăng cấp theo năm.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.huynh_de_cat_minh_lam_chu",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": "Huynh Đệ",
+        "ghi_chu": "Huynh Đệ nhiều cát tinh + Mệnh có Quyền Lộc",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Mệnh có Quyền Lộc, Huynh Đệ tốt: mình làm chủ, anh em làm cổ đông giúp sức; còn hùn với bạn bè thì không nên.",
+      "loi_doi_thuong": "Nếu làm ăn, bạn hợp đứng đầu và để anh chị em góp sức như cổ đông hơn là hùn với bạn bè ngoài.",
+      "viec_nen_lam": "Ghi rõ phần góp và cách chia lợi nhuận bằng giấy, kể cả với anh em.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Tử Vi.Huynh Đệ",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.phu_mau_loc",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Phụ Mẫu",
+        "sao_mot_trong": [
+          "Hoá Lộc",
+          "Lộc Tồn"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phụ Mẫu có Lộc: cha mẹ làm buôn bán, có tiền cho con.",
+      "loi_doi_thuong": "Gia đình bạn có nền làm ăn; bạn dễ được cha mẹ hỗ trợ về tiền hoặc vốn ban đầu.",
+      "viec_nen_lam": "Nhận hỗ trợ kèm kế hoạch rõ ràng và báo lại kết quả cho cha mẹ.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.menh_khong_loc_tu_lap",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Mệnh",
+        "khong_co": [
+          "Hoá Lộc",
+          "Lộc Tồn"
+        ],
+        "ghi_chu": "Phụ Mẫu hoặc Điền Trạch có Lộc",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phụ Mẫu có Lộc mà Mệnh không có Lộc: dù tổ nghiệp lớn cũng không dựa vào đó mà lập nghiệp.",
+      "loi_doi_thuong": "Dù gia đình có của, bạn thường đi lên bằng việc của chính mình hơn là dựa vào phần để lại.",
+      "viec_nen_lam": "Đặt cho mình một mục tiêu tài chính độc lập với gia đình.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.phu_mau_kinh_ham",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Phụ Mẫu",
+        "sao": [
+          "Kình Dương"
+        ],
+        "do_sang": "ham",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phụ Mẫu có Kình Dương hãm: cha mẹ thương nhưng cách lo lại gây hại cho con.",
+      "loi_doi_thuong": "Cha mẹ thương bạn nhiều nhưng cách lo của họ có lúc làm bạn khó xoay xở.",
+      "viec_nen_lam": "Nói với cha mẹ một việc cụ thể họ giúp được, để sự quan tâm đi đúng chỗ.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.phu_mau_toi_tu_lap_som",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Phụ Mẫu",
+        "ghi_chu": "Phụ Mẫu trống có Địa Kiếp, hoặc Thái Dương hãm",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phụ Mẫu tối hoặc trống có Địa Kiếp: không có tổ nghiệp, sớm tự lập (sách cũ còn đọc nặng hơn).",
+      "loi_doi_thuong": "Bạn quen tự lo từ sớm, ít dựa vào nền tảng gia đình.",
+      "viec_nen_lam": "Dành một khoản riêng cho học hành, nâng nghề — đó là vốn chính của bạn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.phu_mau_nhat_nguyet_sang",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Phụ Mẫu",
+        "sao": [
+          "Thái Dương",
+          "Thái Âm"
+        ],
+        "do_sang": "sang",
+        "vi_tri": [
+          "toa",
+          "tam_phuong"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phụ Mẫu có nhật nguyệt cùng sáng: vượng cha mẹ, hiếu thuận.",
+      "loi_doi_thuong": "Bạn gần gũi và có hiếu với cha mẹ; nền nếp gia đình là chỗ dựa lớn của bạn.",
+      "viec_nen_lam": "Giữ một bữa cơm cuối tuần cùng cha mẹ.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.dai_han_phu_mau_che_cho",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "cung": "Phụ Mẫu",
+        "lop": "dai_han",
+        "tuoi": "dai_han_dau",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Đại hạn tuổi nhỏ đi vào Phụ Mẫu: cha mẹ là người trực, che bớt khó khăn.",
+      "loi_doi_thuong": "Giai đoạn tuổi nhỏ, cha mẹ là người đứng ra che chắn phần lớn khó khăn cho bạn.",
+      "viec_nen_lam": "Cha mẹ có con ở giai đoạn này nên ở gần con nhất vào những năm chuyển cấp.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.phu_the_doc_cung_phuc_duc",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": [
+          "Phu Thê",
+          "Phúc Đức"
+        ],
+        "ghi_chu": "Luận hôn nhân bắt buộc đọc cả Phúc Đức",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Xem hôn nhân chỉ nhìn Phu Thê là sai, phải xem cả Phúc Đức; Phu Thê đẹp mà Phúc Đức xấu vẫn có thể tan.",
+      "loi_doi_thuong": "Mối quan hệ bền hay không phụ thuộc cả vào sự bình an trong lòng bạn, chứ không riêng vào người bạn chọn.",
+      "viec_nen_lam": "Chăm đời sống tinh thần của chính mình — bạn bè, sở thích, giấc ngủ — như một phần của việc giữ gia đình.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.linh_vuc.Phúc Đức",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.phu_the_quyen_chu_dong",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": "Phu Thê",
+        "hoa": "Quyền",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phu Thê Hoá Quyền: người kia lãnh đạo, chủ kiến mạnh; hôn nhân thường do chủ động theo đuổi mà có.",
+      "loi_doi_thuong": "Người bạn đời có chủ kiến mạnh và hay quyết nhiều việc trong nhà; bạn dễ phải học cách nhường bớt.",
+      "viec_nen_lam": "Chia rõ những việc mỗi người tự quyết và những việc phải bàn chung.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.hoa_linh_vuc.Quyền.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời có chủ kiến mạnh, hay quyết nhiều việc trong nhà; hai người nên tập nhường nhau."
+    },
+    {
+      "id": "yb.cung.phu_the_khoa_chuyen_mon",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": "Phu Thê",
+        "hoa": "Khoa",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phu Thê Hoá Khoa: người kia sống bằng chuyên môn, nghề tự do hoặc dạy học; nhiều khi cùng nghề.",
+      "loi_doi_thuong": "Người bạn đời thường có chuyên môn rõ, có tiếng trong nghề; hai người dễ cùng ngành.",
+      "viec_nen_lam": "Tôn trọng giờ làm chuyên môn của nhau, nhất là khi nghề phải bận cả buổi tối.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.hoa_linh_vuc.Khoa.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời có chuyên môn rõ, có tiếng trong nghề; hai người dễ cùng ngành."
+    },
+    {
+      "id": "yb.cung.phu_the_vu_khuc_cung_nghe",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": "Phu Thê",
+        "sao": [
+          "Vũ Khúc"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Vũ Khúc ở Phu Thê: hai vợ chồng cùng nghề.",
+      "loi_doi_thuong": "Hai người dễ làm cùng nghề hoặc cùng ngành, hiểu nhau qua công việc.",
+      "viec_nen_lam": "Giữ một khoảng thời gian không nói chuyện công việc mỗi ngày.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Vũ Khúc.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.phu_the_phu_ma_nam",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": "Phu Thê",
+        "sao": [
+          "Thiên Phủ",
+          "Thiên Mã"
+        ],
+        "gioi_tinh": "nam",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Lá nam, Phu Thê có Thiên Phủ và Thiên Mã: lấy vợ là quyết định đúng nhất đời.",
+      "loi_doi_thuong": "Người bạn đời là chỗ dựa lớn nhất, giúp bạn lo toan và giữ của.",
+      "viec_nen_lam": "Bàn với người ấy trước các quyết định tiền bạc lớn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.phu_the_liem_tham_liem_pha",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": [
+          "Phu Thê",
+          "Phúc Đức"
+        ],
+        "sao_cap_mot_trong": [
+          [
+            "Liêm Trinh",
+            "Tham Lang"
+          ],
+          [
+            "Liêm Trinh",
+            "Phá Quân"
+          ]
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Liêm Tham hoặc Liêm Phá ở Phu Thê/Phúc Đức bị sách cũ đọc là hôn nhân dễ đứt đoạn, xa cách lâu dài.",
+      "loi_doi_thuong": "Mối quan hệ dễ có những giai đoạn xa cách hoặc thay đổi lớn; điều giữ được nhau là chủ động kết nối và nói rõ kỳ vọng.",
+      "viec_nen_lam": "Đặt lịch hai người nói chuyện thẳng về kỳ vọng mỗi quý, kể cả khi mọi việc đang yên.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Liêm Trinh.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Với người ấy, chuyện đôi lứa dễ có giai đoạn xa cách hoặc thay đổi lớn; điều giữ hai người gần nhau là chủ động kết nối và nói rõ kỳ vọng."
+    },
+    {
+      "id": "yb.cung.phu_the_liem_sat",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": "Phu Thê",
+        "sao": [
+          "Liêm Trinh",
+          "Thất Sát"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Liêm Sát ở Phu Thê lại không xấu như Liêm Tham, Liêm Phá.",
+      "loi_doi_thuong": "Người bạn đời mạnh mẽ, giỏi việc; hai người hợp nhau khi cùng có mục tiêu chung.",
+      "viec_nen_lam": "Đặt một mục tiêu chung cho năm, như mua nhà hay học thêm, để hai người cùng hướng.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Liêm Trinh.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.phu_the_ky_xung",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": "Phu Thê",
+        "hoa": "Kỵ",
+        "vi_tri_hoa": "xung_chieu",
+        "lop": [
+          "dai_han",
+          "luu_nien"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hoá Kỵ xung Phu Thê: hôn nhân căng thẳng; xung nặng hơn Kỵ ở tại cung.",
+      "loi_doi_thuong": "Giai đoạn có nét này, hai người dễ hiểu lầm nhau qua lời nói, nhất là khi cả hai cùng mệt.",
+      "viec_nen_lam": "Mỗi tuần dành một buổi chỉ hai người, không bàn chuyện tiền và chuyện con.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.hoa_linh_vuc.Kỵ.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Giai đoạn này hai người dễ hiểu lầm nhau qua lời nói, nhất là khi cả hai cùng mệt."
+    },
+    {
+      "id": "yb.cung.phu_the_tu_tuong",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": "Phu Thê",
+        "sao": [
+          "Tử Vi",
+          "Thiên Tướng"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tử Tướng ở Phu Thê: lấy được người hiền lương, giỏi.",
+      "loi_doi_thuong": "Người bạn đời hiền, giỏi, biết lo; đây là điểm mạnh lớn của gia đình bạn.",
+      "viec_nen_lam": "Cùng người ấy đặt mục tiêu gia đình cho vài năm tới và chia việc theo thế mạnh của mỗi người.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Tử Vi.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời hiền, giỏi, biết lo — một điểm tựa mà hai người có thể cùng giữ."
+    },
+    {
+      "id": "yb.cung.phu_the_tu_vi_ta_huu",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": "Phu Thê",
+        "sao": [
+          "Tử Vi"
+        ],
+        "sao_mot_trong": [
+          "Tả Phù",
+          "Hữu Bật"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tử Vi gặp Tả Hữu ở Phu Thê: người bạn đời rất giỏi, quý.",
+      "loi_doi_thuong": "Người bạn đời của bạn có năng lực và được nhiều người quý; sự giúp đỡ của người ấy là thế mạnh của gia đình.",
+      "viec_nen_lam": "Ghi nhận phần việc người ấy làm và để người ấy đứng tên những việc mình giỏi.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Tử Vi.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời có năng lực và được nhiều người quý; sự giúp đỡ qua lại là thế mạnh của hai người.",
+      "viec_nguoi_ay": "Ghi nhận phần việc mỗi người làm và để mỗi người đứng tên những việc mình giỏi."
+    },
+    {
+      "id": "yb.cung.qua_ky_moi_cuoi",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "cung": "Phu Thê",
+        "hoa": "Kỵ",
+        "lop": [
+          "dai_han",
+          "luu_nien"
+        ],
+        "ghi_chu": "Cưới sau khi hạn đã đi qua cung có Hoá Kỵ",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hôn nhân phải 'qua Kỵ' mới tốt: cưới sau khi đã đi qua giai đoạn có Hoá Kỵ thì bền, cưới trước đó dễ trắc trở.",
+      "loi_doi_thuong": "Có trường phái cho rằng quyết định cưới sau khi đã đi qua một giai đoạn nhiều trắc trở thì bền hơn cưới ngay giữa lúc trắc trở.",
+      "viec_nen_lam": "Nếu đang ở giai đoạn nhiều bất ổn, chưa vội quyết định lớn; dùng thời gian đó để hiểu nhau thêm.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.han_cung_co_nguoi_cuoi",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "cung": [
+          "Mệnh",
+          "Phụ Mẫu",
+          "Huynh Đệ",
+          "Phu Thê",
+          "Tử Nữ",
+          "Nô Bộc"
+        ],
+        "lop": "luu_nien",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Không phải chỉ năm gặp Hồng Loan Thiên Hỷ mới cưới; năm đi vào cung 'có người' cũng có thể cưới.",
+      "loi_doi_thuong": "Năm có nhiều việc gắn với con người — gia đình, bạn bè, người yêu — cũng là năm chuyện cưới hỏi dễ được bàn tới.",
+      "viec_nen_lam": "Nếu đang tìm hiểu ai, chọn năm này để nói chuyện nghiêm túc về dự định chung.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.phuc_duc_dao_hoa_ban_doi",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "cung": "Phúc Đức",
+        "ghi_chu": "Phúc Đức (của bạn đời) toàn sao đào hoa",
+        "co_the_tinh": false
+      },
+      "y_goc_tom_tat": "Phúc Đức của chồng toàn sao đào hoa thì cũng không cần sửa, có sửa cũng khó đổi.",
+      "loi_doi_thuong": "Nếu người ấy vốn quý sự vui vẻ và giao du rộng, nét đó ít khi đổi sau khi cưới.",
+      "viec_nen_lam": "Thoả thuận rõ ranh giới với người khác giới ngay từ đầu, thay vì mong người ấy tự đổi.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.tu_nu_ky_kho_bao",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Tử Nữ",
+        "hoa": "Kỵ",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tử Nữ có Hoá Kỵ: có con nhưng va chạm nhiều, khó bảo.",
+      "loi_doi_thuong": "Con cái và bạn dễ khác quan điểm, nhất là khi con lớn; dặn dò bằng lời ít hiệu quả.",
+      "viec_nen_lam": "Hỏi ý con trước khi quyết việc của con, và giữ đúng những lời hứa nhỏ với con.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.tu_hoa_cung.Kỵ.Tử Nữ",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.tu_nu_ma_con_xa",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Tử Nữ",
+        "sao_mot_trong": [
+          "Thiên Mã",
+          "Thất Sát"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tử Nữ có Thiên Mã (hoặc Thất Sát kèm Mã): con ở xa, không bên cạnh.",
+      "loi_doi_thuong": "Con cái dễ đi học, đi làm xa và sống tự lập sớm.",
+      "viec_nen_lam": "Chuẩn bị cho con kỹ năng tự lập từ sớm: nấu ăn, quản lý tiền, tự đi lại.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.no_boc_cat_hop_tac",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": "Nô Bộc",
+        "ghi_chu": "Nô Bộc nhiều cát tinh/quý tinh hoặc Hoá Lộc; chọn năm có tài tinh mới bắt đầu",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nô Bộc toàn cát tinh, quý tinh: hùn hạp rất lợi; còn khi nào hùn thì xem năm có tài tinh, năm hao thì làm một mình cũng lỗ.",
+      "loi_doi_thuong": "Bạn có duyên với bạn bè làm ăn; người bạn quen thường có điều kiện và chịu góp sức.",
+      "viec_nen_lam": "Chọn thời điểm bắt đầu hợp tác vào năm tiền bạc thuận, tránh năm đang hao.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thiên Cơ.Nô Bộc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.no_boc_sat_ky_bao_lanh",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": "Nô Bộc",
+        "sao_mot_trong": [
+          "Kình Dương",
+          "Đà La",
+          "Hỏa Tinh",
+          "Linh Tinh",
+          "Địa Không",
+          "Địa Kiếp",
+          "Hoá Kỵ",
+          "Cự Môn"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nô Bộc toàn sao hao, sát, Kỵ hay Cự Môn: hùn hạp với bạn thành thù, đứng ra bảo lãnh cũng không nên.",
+      "loi_doi_thuong": "Hợp tác với bạn bè dễ khiến bạn ôm hết việc, rồi khi rút ra thì sứt mẻ tình cảm; bảo lãnh vay cho người khác dễ thành gánh nặng của bạn.",
+      "viec_nen_lam": "Không đứng ra bảo lãnh khoản vay; nếu hợp tác, lập hợp đồng có điều khoản rút vốn.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.nhom_sao_linh_vuc.sat.Nô Bộc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.no_boc_ma_kiep",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Nô Bộc",
+        "sao": [
+          "Thiên Mã",
+          "Địa Kiếp"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Mã cùng Địa Kiếp ở Nô Bộc: chạy vì bạn, công nhiều lợi ít.",
+      "loi_doi_thuong": "Bạn hay chạy việc cho bạn bè, công nhiều mà ít khi được đáp lại.",
+      "viec_nen_lam": "Trước khi nhận giúp, hỏi rõ việc kéo dài bao lâu và ai chịu chi phí.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.no_boc_quyen_minh_loc",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": [
+          "Tài Bạch",
+          "Nô Bộc"
+        ],
+        "ghi_chu": "Lộc/tài tinh ở Tài Bạch mình, Hoá Quyền ở Nô Bộc",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Mình có Lộc lớn mà Quyền nằm ở Nô Bộc: hợp hùn với bạn, bạn làm chủ, mình làm việc.",
+      "loi_doi_thuong": "Trong hợp tác, bạn hợp vai góp vốn hoặc làm chuyên môn để người bạn giỏi điều hành lo việc hằng ngày.",
+      "viec_nen_lam": "Ghi rõ quyền biểu quyết của từng người trước khi góp vốn.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.no_boc_tai_minh_quyen",
+      "loai": "nghe_nghiep",
+      "dieu_kien": {
+        "cung": [
+          "Mệnh",
+          "Nô Bộc"
+        ],
+        "ghi_chu": "Mệnh có Hoá Quyền, tài tinh dồn ở Nô Bộc",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Mệnh có Quyền, tài tinh dồn ở Nô Bộc: bạn bè bỏ tiền, mình đứng ra làm, và mình hay quen người có của.",
+      "loi_doi_thuong": "Bạn hợp vai điều hành, còn vốn thường đến từ bạn bè có điều kiện.",
+      "viec_nen_lam": "Báo cáo tiền bạc định kỳ cho người góp vốn, kể cả khi họ không hỏi.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.dien_trach_lua",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Điền Trạch",
+        "sao_mot_trong": [
+          "Hỏa Tinh"
+        ],
+        "hoac": {
+          "sao": [
+            "Thái Dương"
+          ],
+          "do_sang": "ham",
+          "chi": [
+            "Hợi"
+          ]
+        },
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hỏa Tinh ở Điền Trạch (hay Thái Dương ở Hợi rơi vào Điền Trạch): nhà dễ gặp lửa.",
+      "loi_doi_thuong": "Sách xưa nhắc nhà có nét này nên để ý an toàn lửa và điện.",
+      "viec_nen_lam": "Kiểm tra dây điện, bếp ga định kỳ và để bình chữa cháy ở nơi dễ lấy.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Sách xưa nhắc nhà của bạn nên để ý an toàn lửa và điện."
+    },
+    {
+      "id": "yb.cung.dien_trach_kinh_da",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Điền Trạch",
+        "sao_mot_trong": [
+          "Kình Dương",
+          "Đà La"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Điền Trạch có sao tiểu nhân ẩn (Kình Đà): nhà dễ mất trộm.",
+      "loi_doi_thuong": "Nên chú ý an toàn tài sản trong nhà, nhất là khi vắng nhà lâu ngày.",
+      "viec_nen_lam": "Lắp khoá tốt, camera cửa, và không để đồ giá trị ở chỗ dễ thấy.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.dien_trach_thi_phi",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Điền Trạch",
+        "sao_mot_trong": [
+          "Cự Môn",
+          "Thiên Hình"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Điền Trạch có sao quan phi, thị phi: nhà đất dễ bị đem ra phân xử; không nên đứng tên tài sản.",
+      "loi_doi_thuong": "Giấy tờ nhà đất của bạn dễ vướng tranh chấp; việc đứng tên tài sản cần thận trọng.",
+      "viec_nen_lam": "Nhờ người có chuyên môn rà pháp lý trước khi mua, và cân nhắc kỹ ai đứng tên.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.dien_trach_tu_phu",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung": "Điền Trạch",
+        "sao_mot_trong": [
+          "Tử Vi",
+          "Thiên Phủ"
+        ],
+        "gap": "cat_tinh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Điền Trạch có Tử Phủ và cát tinh: càng mua càng vượng, thích sắm nhà đất.",
+      "loi_doi_thuong": "Bạn có duyên với nhà đất, càng tích càng thêm.",
+      "viec_nen_lam": "Mua theo khả năng trả nợ, mỗi lần một tài sản.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thiên Phủ.Điền Trạch",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.cung.than_tai_bach_giu_nghe",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung_than": "Tài Bạch",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thân ở Tài Bạch: nên đi làm suốt, đừng ngắt quãng; nữ nên là phụ nữ đi làm.",
+      "loi_doi_thuong": "Bạn hợp đi làm và tự có thu nhập suốt đời; đứt quãng công việc lâu dễ làm bạn hụt hẫng.",
+      "viec_nen_lam": "Nếu phải nghỉ một thời gian, giữ một việc nhỏ để không đứt mạch nghề.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.than_cu.Tài Bạch",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.than_thien_di_o_lai",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung_than": "Thiên Di",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thân ở Thiên Di: làm ăn ra xa, ra nước ngoài; đi học xa thường không quay về.",
+      "loi_doi_thuong": "Đi học hay đi làm xa, bạn dễ ở lại nơi mới lập nghiệp.",
+      "viec_nen_lam": "Trước khi đi xa, bàn với gia đình kế hoạch thăm nhà và chăm cha mẹ.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.than_cu.Thiên Di",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.cung.than_quan_loc",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "cung_than": "Quan Lộc",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thân ở Quan Lộc: hậu vận tự nhiên đi đường làm quan, việc công.",
+      "loi_doi_thuong": "Về sau, vai trò xã hội và chức trách là nơi bạn dồn sức nhất.",
+      "viec_nen_lam": "Giữ một mối quan tâm ngoài công việc để có chỗ nghỉ khi việc căng.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.than_cu.Quan Lộc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hoa.khoa_khong_quyen",
+      "loai": "tu_hoa_cung",
+      "dieu_kien": {
+        "hoa": "Khoa",
+        "khong_co_hoa": [
+          "Quyền"
+        ],
+        "cung": "Mệnh",
+        "vi_tri": [
+          "toa",
+          "tam_phuong"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Có Khoa mà không có Quyền: có chuyên môn nhưng không giỏi thống lĩnh, hợp làm quân sư, tham mưu.",
+      "loi_doi_thuong": "Bạn giỏi chuyên môn nhưng ít muốn chỉ huy; vai cố vấn, chuyên gia hợp hơn vai quản lý đông người.",
+      "viec_nen_lam": "Xây danh tiếng chuyên môn: viết, dạy, chia sẻ kinh nghiệm trong nghề.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hoa.khoa_quyen_cung_hoi",
+      "loai": "tu_hoa_cung",
+      "dieu_kien": {
+        "hoa_tat_ca": [
+          "Khoa",
+          "Quyền"
+        ],
+        "cung": "Mệnh",
+        "vi_tri": [
+          "toa",
+          "tam_phuong"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Khoa gặp Quyền: cùng là thầy thuốc, chỉ có Khoa thì mở phòng khám nhỏ, có cả Khoa Quyền thì làm trưởng khoa, giám đốc.",
+      "loi_doi_thuong": "Bạn có cả chuyên môn lẫn khả năng điều hành; hợp lên vị trí đứng đầu một bộ phận chuyên môn.",
+      "viec_nen_lam": "Học thêm kỹ năng quản lý người để đi tiếp từ chuyên gia lên quản lý.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_cach_cuc.cach.khoa_quyen_hoi_menh",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hoa.khoa_nguoi_kinh_doanh",
+      "loai": "tu_hoa_cung",
+      "dieu_kien": {
+        "hoa": "Khoa",
+        "ghi_chu": "Người đang kinh doanh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Với người làm buôn, Hoá Khoa không phải thi cử mà là danh tiếng lớn.",
+      "loi_doi_thuong": "Với người làm kinh doanh, nét này là danh tiếng: tên tuổi của bạn giúp mở cửa.",
+      "viec_nen_lam": "Chăm uy tín thương hiệu: giữ lời hứa, giao đúng hẹn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Với người làm kinh doanh, danh tiếng là điểm mạnh của bạn: tên tuổi giúp mở cửa."
+    },
+    {
+      "id": "yb.hoa.khoa_dac_loc_day_them",
+      "loai": "tu_hoa_cung",
+      "dieu_kien": {
+        "hoa": "Khoa",
+        "sao_mot_trong": [
+          "Hoá Lộc",
+          "Lộc Tồn"
+        ],
+        "vi_tri": "xung_chieu",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Nhân Khoa mà được Lộc: kiếm tiền bằng chuyên môn, nghề tự do; người như vậy nên dạy học thêm để vừa tiến bộ vừa có khách.",
+      "loi_doi_thuong": "Bạn kiếm tiền nhờ chính chuyên môn của mình, hợp nghề tự do có giấy phép hành nghề.",
+      "viec_nen_lam": "Ngoài việc chính, nhận dạy hoặc viết về chuyên môn — vừa có thêm khách vừa giữ tay nghề.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.tu_hoa_cung.Khoa.Quan Lộc",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hoa.khoa_thien_di_hoc_xa",
+      "loai": "tu_hoa_cung",
+      "dieu_kien": {
+        "hoa": "Khoa",
+        "cung": "Thiên Di",
+        "khong_co": [
+          "cung_than_o_Thiên_Di"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hoá Khoa ở Thiên Di mà Thân không ở Thiên Di: đi xa học lấy bằng, làm việc thì về quê.",
+      "loi_doi_thuong": "Bạn dễ học hành, lấy bằng ở nơi xa, rồi về gần nhà làm việc.",
+      "viec_nen_lam": "Khi đi học xa, giữ liên hệ với nơi làm việc ở quê để có chỗ quay về.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hoa.khoa_den_muon",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "hoa": "Khoa",
+        "lop": "dai_han",
+        "ghi_chu": "Khoa chỉ đến ở đại hạn muộn",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Khoa đến ở đại hạn muộn là danh tiếng đến muộn; có người như hoạ sĩ chỉ nổi tiếng sau khi mất.",
+      "loi_doi_thuong": "Tiếng tốt của bạn đến muộn: việc làm lặng lẽ hôm nay được biết đến về sau.",
+      "viec_nen_lam": "Lưu lại sản phẩm, ghi chép công việc của mình một cách có hệ thống.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hoa.khoa_gap_ky_chon_mot",
+      "loai": "tu_hoa_cung",
+      "dieu_kien": {
+        "hoa_tat_ca": [
+          "Khoa",
+          "Kỵ"
+        ],
+        "vi_tri": [
+          "toa",
+          "xung_chieu"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Khoa gặp Kỵ: muốn thi lại muốn cưới, giằng co hai đầu, áp lực lớn; cách gỡ là bỏ hẳn một bên.",
+      "loi_doi_thuong": "Khi phải chọn giữa hai việc lớn cùng lúc, như thi cử và cưới hỏi, bạn dễ giằng co rồi không xong việc nào.",
+      "viec_nen_lam": "Chọn một việc làm trước, và viết ra ngày bắt đầu việc còn lại.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hoa.loc_gap_ky_tien_vuong",
+      "loai": "tu_hoa_cung",
+      "dieu_kien": {
+        "hoa_tat_ca": [
+          "Lộc",
+          "Kỵ"
+        ],
+        "vi_tri": [
+          "toa",
+          "xung_chieu"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Lộc gặp Kỵ là tiền thị phi: sổ sách có lãi mà tiền về toàn séc khống, phải đi đòi.",
+      "loi_doi_thuong": "Tiền đến nhưng kèm vướng mắc: lãi trên sổ mà khó thu về, hoặc nguồn tiền dễ gây tranh cãi.",
+      "viec_nen_lam": "Chỉ nhận việc có hợp đồng rõ, và thu tiền theo từng đợt.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hoa.quyen_loc_dai_han_lam_chu",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "hoa_tat_ca": [
+          "Quyền",
+          "Lộc"
+        ],
+        "lop": "dai_han",
+        "vi_tri": [
+          "toa",
+          "xung_chieu"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Đại hạn có Lộc mà đối diện có Quyền (hay ngược lại): giai đoạn đứng ra tự làm chủ.",
+      "loi_doi_thuong": "Giai đoạn này hợp để tự đứng ra làm chủ hoặc mở việc riêng.",
+      "viec_nen_lam": "Chuẩn bị kế hoạch và vốn ngay năm đầu giai đoạn để kịp dùng thời điểm thuận.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hoa.khong_khoa_quyen_loc_lam_cong",
+      "loai": "tu_hoa_cung",
+      "dieu_kien": {
+        "cung": "Mệnh",
+        "vi_tri": [
+          "toa",
+          "tam_phuong"
+        ],
+        "khong_co_hoa": [
+          "Khoa",
+          "Quyền",
+          "Lộc"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tam phương Mệnh không có Khoa Quyền Lộc: chính tài, chính quan, đi làm hưởng lương cả đời.",
+      "loi_doi_thuong": "Thu nhập ổn định từ công việc làm công hợp với bạn; con đường đi lên là tay nghề và thâm niên.",
+      "viec_nen_lam": "Chọn nơi làm có lộ trình tăng lương rõ, và nâng nghề đều đặn mỗi năm.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hoa.ky_nghi_khong_thong",
+      "loai": "tu_hoa_cung",
+      "dieu_kien": {
+        "hoa": "Kỵ",
+        "cung": "bat_ky",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hoá Kỵ là trì trệ, thị phi, cô độc, hao tổn; về tính cách là 'nghĩ không thông', khó buông.",
+      "loi_doi_thuong": "Ở mảng có nét này, bạn dễ nghĩ mãi một chuyện, khó buông dù đã biết nên buông.",
+      "viec_nen_lam": "Khi thấy mình nghĩ quẩn, viết điều đang lo ra giấy và hẹn một ngày để quyết.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.tu_hoa.Kỵ",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_ro": "Với {mang}, bạn dễ nghĩ mãi một chuyện, khó buông dù đã biết nên buông."
+    },
+    {
+      "id": "yb.hoa.ky_xung_nang_hon_toa",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "hoa": "Kỵ",
+        "vi_tri_hoa": [
+          "toa",
+          "xung_chieu"
+        ],
+        "ghi_chu": "Trọng số: Kỵ xung > Kỵ toạ",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hoá Kỵ xung từ cung đối diện nặng hơn Hoá Kỵ ở tại cung.",
+      "loi_doi_thuong": "Khó khăn từ bên ngoài đẩy vào thường khó chịu hơn khó khăn nằm sẵn trong mảng đó.",
+      "viec_nen_lam": "Với mảng bị đẩy từ bên ngoài, chuẩn bị phương án từ sớm thay vì chờ việc đến.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_phi_hoa_kb.ky_chieu",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.hoa.ky_dai_han_chan",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "hoa": "Kỵ",
+        "lop": "dai_han",
+        "cung": [
+          "Mệnh",
+          "Quan Lộc"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Đại hạn có Hoá Kỵ: mười năm nhiều việc không thuận; mới ra trường đi làm công dễ bực bội rồi bỏ.",
+      "loi_doi_thuong": "Giai đoạn này nhiều việc không theo ý muốn; bạn dễ chán và muốn bỏ ngang.",
+      "viec_nen_lam": "Đặt mốc đánh giá sau một năm thay vì bỏ việc khi đang bực.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.dai_han",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hoa.thai_duong_ky_nu",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "hoa": "Kỵ",
+        "hoa_tren_sao": "Thái Dương",
+        "gioi_tinh": "nu",
+        "lop": "dai_han",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Lá nữ có Thái Dương Hoá Kỵ trong đại hạn: cha, chồng, con trai đều có chuyện trong mười năm ấy (sách cũ đọc rất nặng).",
+      "loi_doi_thuong": "Giai đoạn này bạn dễ bận lòng về những người nam thân thiết; quan tâm sớm giúp bạn yên tâm hơn.",
+      "viec_nen_lam": "Hỏi thăm cha và người bạn đời thường xuyên hơn trong giai đoạn này, nhất là về việc họ đang lo.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hoa.thai_am_ky_me",
+      "loai": "sao_cung",
+      "dieu_kien": {
+        "hoa": "Kỵ",
+        "hoa_tren_sao": "Thái Âm",
+        "do_sang": "sang",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thái Âm Hoá Kỵ mà sáng: mẹ con rất thân, mẹ lo lắng nhiều cho con; nếu hãm sách cũ đọc nặng hơn.",
+      "loi_doi_thuong": "Mẹ lo cho bạn nhiều, có lúc thành áp lực; tình mẹ con vẫn rất gần.",
+      "viec_nen_lam": "Kể cho mẹ nghe một tin vui nhỏ mỗi tuần để mẹ bớt lo.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hon.hong_hy_doi_xung",
+      "loai": "phuong_phap",
+      "dieu_kien": {
+        "sao": [
+          "Hồng Loan",
+          "Thiên Hỷ"
+        ],
+        "vi_tri": "hai_cung_doi",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hồng Loan và Thiên Hỷ luôn ở hai cung đối nhau; an không đối là an sai.",
+      "loi_doi_thuong": "Hai dấu hiệu chuyện vui luôn soi nhau từ hai phía đối diện; thấy một là có cái kia.",
+      "viec_nen_lam": "Khi kiểm tra lá số, xác nhận hai dấu hiệu này luôn nằm ở hai mảng đối diện.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.phu_tinh.Hồng Loan",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hon.hong_loan_phu_mau",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Hồng Loan"
+        ],
+        "cung": "Phụ Mẫu",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hồng Loan ở Phụ Mẫu: cưới theo lời cha mẹ, thường cưới sớm.",
+      "loi_doi_thuong": "Chuyện cưới hỏi của bạn dễ chịu ảnh hưởng của cha mẹ: được giới thiệu hoặc được cha mẹ thúc.",
+      "viec_nen_lam": "Nghe ý cha mẹ, nhưng dành đủ thời gian riêng với người ấy để tự mình đánh giá.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.phu_tinh.Hồng Loan",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hon.hong_loan_tu_nu",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Hồng Loan"
+        ],
+        "cung": "Tử Nữ",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hồng Loan ở Tử Nữ: cưới vì con, thường có con trước.",
+      "loi_doi_thuong": "Có trường phái đọc rằng chuyện con cái có thể đến trước hoặc thúc đẩy quyết định cưới.",
+      "viec_nen_lam": "Nói chuyện với người ấy về con cái và kế hoạch gia đình từ sớm.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.phu_tinh.Hồng Loan",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hon.hong_loan_no_boc",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Hồng Loan"
+        ],
+        "cung": "Nô Bộc",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hồng Loan ở Nô Bộc: bị bạn bè vun vào mà cưới.",
+      "loi_doi_thuong": "Bạn bè dễ là người đẩy bạn đến quyết định cưới, hoặc người ấy đến từ chính nhóm bạn.",
+      "viec_nen_lam": "Trước quyết định lớn, nghe bạn bè nhưng tự viết ra lý do của riêng mình.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.phu_tinh.Hồng Loan",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hon.hong_loan_menh_tu_quyet",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Hồng Loan"
+        ],
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hồng Loan ở Mệnh: chủ kiến mạnh, tự quyết hôn nhân của mình.",
+      "loi_doi_thuong": "Bạn tự quyết chuyện hôn nhân của mình, ít để ai sắp đặt.",
+      "viec_nen_lam": "Vì tự quyết, hỏi thêm một người đã có gia đình lâu năm để thấy chỗ mình có thể bỏ sót.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_kb.phu_tinh.Hồng Loan",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hon.hong_loan_menh_mat_nhin",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Hồng Loan",
+          "Thiên Hỷ"
+        ],
+        "cung": "Mệnh",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Mệnh có Hồng Loan: nam hay lấy vợ đẹp, nữ lấy chồng quý — vì có mắt nhìn người.",
+      "loi_doi_thuong": "Bạn có mắt nhìn người: dễ thấy trước ai về sau khá lên, và cũng dễ bị cuốn bởi vẻ ngoài.",
+      "viec_nen_lam": "Khi thích ai, ghi ra ba điều ngoài vẻ ngoài mà bạn quý ở người đó.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.phu_tinh.Hồng Loan",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hon.hong_hy_phuc_duc",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Hồng Loan",
+          "Thiên Hỷ"
+        ],
+        "cung": "Phúc Đức",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Hỷ hoặc Hồng Loan ở Phúc Đức: đời có nhiều lần duyên; về già người bên cạnh thường kém tuổi nhiều.",
+      "loi_doi_thuong": "Đời tình cảm của bạn có thể có nhiều chương; giai đoạn về sau, người bên cạnh có khi khác tuổi bạn nhiều.",
+      "viec_nen_lam": "Giữ sự rõ ràng và tôn trọng khi khép lại một mối quan hệ, để chương sau nhẹ hơn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hon.hong_hy_gap_ky",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Hồng Loan",
+          "Thiên Hỷ"
+        ],
+        "hoa": "Kỵ",
+        "lop": [
+          "dai_han",
+          "luu_nien"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hồng Loan Thiên Hỷ gặp Hoá Kỵ: chuyện vui khó thành; không có Kỵ thì không sao.",
+      "loi_doi_thuong": "Có giai đoạn chuyện vui như cưới hỏi dễ bị trì hoãn hoặc đổi kế hoạch.",
+      "viec_nen_lam": "Nếu định cưới trong giai đoạn này, dành thêm thời gian chuẩn bị và một phương án dời ngày.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hon.dai_tieu_han_hong_loan",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Hồng Loan",
+          "Thiên Hỷ"
+        ],
+        "lop": [
+          "dai_han",
+          "tieu_han"
+        ],
+        "ghi_chu": "Đại hạn và tiểu hạn cùng gặp",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Đại hạn và tiểu hạn cùng gặp Hồng Loan Thiên Hỷ: năm đó cưới.",
+      "loi_doi_thuong": "Năm dễ có chuyện vui về tình cảm, cưới hỏi; nhiều người thấy mình sẵn sàng hơn để tiến tới.",
+      "viec_nen_lam": "Nếu đang tìm hiểu ai, dành năm này để bàn nghiêm túc về tương lai chung.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hon.ta_huu_don_phu_the",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Tả Phù",
+          "Hữu Bật"
+        ],
+        "cung": "Phu Thê",
+        "khong_chinh_tinh": true,
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Một mình Tả Phù hoặc Hữu Bật ở Phu Thê (cung vốn chủ hai người) bị đọc là có hai lần hôn nhân.",
+      "loi_doi_thuong": "Chuyện đôi lứa dễ có những giai đoạn rất khác nhau; ở giai đoạn sau, bạn thường chọn người hợp hơn.",
+      "viec_nen_lam": "Nói rõ kỳ vọng của hai người về vai trò trong nhà ngay từ đầu.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hon.co_qua_phu_the",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Cô Thần",
+          "Quả Tú"
+        ],
+        "cung": [
+          "Phu Thê",
+          "Mệnh"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Cô Thần, Quả Tú ở Mệnh hoặc Phu Thê: duyên mỏng, tụ ít tan nhiều.",
+      "loi_doi_thuong": "Bạn quen có không gian riêng, kể cả khi đã có đôi; người bạn đời cần hiểu đó không phải là xa cách.",
+      "viec_nen_lam": "Thoả thuận một khoảng thời gian riêng cho mỗi người mỗi tuần.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.phu_tinh.Cô Thần",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Người ấy quen có không gian riêng, kể cả khi đã có đôi; đó không phải là xa cách, và hai người nên hiểu điều này về nhau."
+    },
+    {
+      "id": "yb.hon.phu_the_sat_tim_hieu_lau",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "cung": "Phu Thê",
+        "gap": "sat_tinh",
+        "khong_co_cat_tinh": true,
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Phu Thê có sát không có cát: nên cưới muộn; Vũ, Liêm, Sát, Phá ở Phu Thê đều khuyên muộn.",
+      "loi_doi_thuong": "Quyết định lớn về đôi lứa thường bền hơn khi bạn đã đủ trải nghiệm và hai người đã quen nhau đủ lâu.",
+      "viec_nen_lam": "Cho mối quan hệ đi qua ít nhất một năm, gồm cả lúc khó, trước khi cưới.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.nhom_sao_linh_vuc.sat.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hon.thien_co_phu_the_doi_y",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Cơ"
+        ],
+        "cung": "Phu Thê",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Cơ ở Phu Thê: hôn nhân nhiều thay đổi; hợp người chênh tuổi khá nhiều.",
+      "loi_doi_thuong": "Người bạn đời thông minh, nhạy, hay đổi ý; chênh lệch tuổi đôi khi giúp hai người bù cho nhau.",
+      "viec_nen_lam": "Khi người ấy đổi kế hoạch, hỏi lý do trước khi phản ứng.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thiên Cơ.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời thông minh, nhạy, hay đổi ý; chênh lệch tuổi đôi khi giúp hai người bù cho nhau.",
+      "viec_nguoi_ay": "Khi kế hoạch đổi, hai người hỏi nhau lý do trước khi phản ứng."
+    },
+    {
+      "id": "yb.hon.thien_luong_phu_the_moi_dau",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Lương"
+        ],
+        "cung": "Phu Thê",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Lương ở Phu Thê: thích người có trách nhiệm hoặc lớn tuổi hơn; trước cưới nhiều trắc trở, cưới rồi thì bền.",
+      "loi_doi_thuong": "Bạn quý người chín chắn, có trách nhiệm; mối tình đầu dễ dang dở nhưng khi đã cưới thì thường bền.",
+      "viec_nen_lam": "Đừng vội kết luận về mình qua một lần đổ vỡ.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thiên Lương.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Người ấy quý người chín chắn, có trách nhiệm; khi đã gắn bó, mối quan hệ thường bền.",
+      "viec_nguoi_ay": "Đừng vội kết luận về mối quan hệ qua một lần bất đồng."
+    },
+    {
+      "id": "yb.hon.that_sat_phu_the_nhanh",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Thất Sát"
+        ],
+        "cung": "Phu Thê",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thất Sát ở Phu Thê: thích nhanh, nguội nhanh; nên cưới muộn.",
+      "loi_doi_thuong": "Bạn dễ thích nhanh và cũng dễ nguội nhanh trong tình cảm.",
+      "viec_nen_lam": "Chờ qua giai đoạn say nắng ban đầu rồi mới quyết định lớn.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thất Sát.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Nhịp tình cảm của người ấy đi nhanh, dễ cuốn vào nhau từ đầu; hai người cần thời gian để biết điều gì giữ được lâu.",
+      "viec_nguoi_ay": "Hai người chờ qua giai đoạn say nắng ban đầu rồi mới quyết định lớn."
+    },
+    {
+      "id": "yb.hon.thien_tuong_phu_the_nguoi_quen",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "sao": [
+          "Thiên Tướng"
+        ],
+        "cung": "Phu Thê",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thiên Tướng ở Phu Thê: bạn đời hiền hoà; thường là người quen — bạn học, đồng nghiệp, hàng xóm.",
+      "loi_doi_thuong": "Người bạn đời hợp với bạn thường hiền hoà, biết điều, và hay đến từ những người đã quen: bạn học, đồng nghiệp, hàng xóm.",
+      "viec_nen_lam": "Để ý những người bạn đã quen lâu thay vì chỉ tìm ở chỗ mới.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.sao_linh_vuc.Thiên Tướng.Phu Thê",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_nguoi_ay": "Lá số người ấy phác ra một người bạn đời hiền hoà, biết điều, hay đến từ những người đã quen lâu: bạn học, đồng nghiệp, hàng xóm.",
+      "viec_nguoi_ay": "Để ý những điểm chung đã có từ lâu giữa hai người."
+    },
+    {
+      "id": "yb.hai.phu_the_trung_menh_nguoi_kia",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "hai_nguoi": true,
+        "ghi_chu": "Chính tinh Phu Thê người A trùng chính tinh Mệnh người B (một hoặc hai chiều)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Chính tinh ở Phu Thê của người này trùng chính tinh ở Mệnh người kia: người kia gần với hình mẫu bạn đời; trùng cả hai chiều là rất hợp.",
+      "loi_doi_thuong": "Người ấy khá gần với hình mẫu bạn đời mà lá số của bạn phác ra; điều đó giúp hai người dễ hiểu nhau từ đầu.",
+      "viec_nen_lam": "Dù hợp hình mẫu, vẫn bàn rõ chuyện tiền bạc và con cái trước khi quyết định lớn.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_hai_nguoi_kb.tieu_chi",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hai.hai_nguoi_sat_pha_tham",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "hai_nguoi": true,
+        "nhom_ca_hai": "Sát Phá Tham",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hai người cùng Mệnh Sát Phá Tham: hai cá tính mạnh đối nhau.",
+      "loi_doi_thuong": "Hai người đều mạnh, đều thích quyết; hợp nhau khi chia rõ ai lo việc gì.",
+      "viec_nen_lam": "Chia mảng quyết định: mỗi người làm chủ một mảng, mảng chung thì bàn đủ hai người.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_hai_nguoi_kb.tieu_chi",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hai.dong_tinh_bu_nhau",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "hai_nguoi": true,
+        "nhom": [
+          "Sát Phá Tham",
+          "Cơ Nguyệt Đồng Lương"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Một người Sát Phá Tham, một người Cơ Nguyệt Đồng Lương: một mở đường, một giữ nhà; cần mài giũa.",
+      "loi_doi_thuong": "Một người thích mở việc mới, một người thích giữ nề nếp; hai nhịp này bù cho nhau nếu không chê nhau.",
+      "viec_nen_lam": "Mỗi tháng chọn một việc mới làm cùng nhau và một thói quen cũ cùng giữ.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_hai_nguoi_kb.tieu_chi",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.hai.kieu_hop",
+      "loai": "hon_nhan",
+      "dieu_kien": {
+        "hai_nguoi": true,
+        "ghi_chu": "Không có điều kiện cơ học rõ; chỉ dùng làm lời diễn giải",
+        "co_the_tinh": false
+      },
+      "y_goc_tom_tat": "Hai lá số hợp nhau có thể hợp theo kiểu cha con, anh em, bạn bè, ngoài kiểu vợ chồng; hợp không có nghĩa là thành đôi.",
+      "loi_doi_thuong": "Hai lá số hợp nhau có thể hợp theo kiểu bạn thân hay anh em hơn là kiểu đôi lứa; hợp không có nghĩa là thành đôi.",
+      "viec_nen_lam": "Hỏi nhau thẳng thắn: hai người đang muốn mối quan hệ theo kiểu nào.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.hai.dai_han_cung_thuan",
+      "loai": "thoi_diem",
+      "dieu_kien": {
+        "hai_nguoi": true,
+        "lop": "dai_han",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hai người cùng đi đại hạn thuận là lúc tốt để làm việc lớn chung; một thuận một khó thì người thuận đỡ.",
+      "loi_doi_thuong": "Khi cả hai cùng đang ở giai đoạn thuận, đó là lúc hợp làm việc lớn chung; khi một người đang khó, người kia là chỗ đỡ.",
+      "viec_nen_lam": "Trước việc lớn chung như mua nhà, xem giai đoạn mười năm của cả hai người.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_hai_nguoi_kb.tieu_chi",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sk.chi_ty",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Tý"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Tý ứng với túi mật, đường mật; cung chi Tý nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Tý với túi mật, đường mật; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Ăn tối sớm, bớt đồ chiên nhiều dầu, và siêu âm bụng trong đợt khám định kỳ.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_suu",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Sửu"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Sửu ứng với gan; cung chi Sửu nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Sửu với gan; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Bớt rượu bia, ngủ đủ giấc, và khám chức năng gan trong đợt khám định kỳ.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_dan",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Dần"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Dần ứng với phổi, đường hô hấp; cung chi Dần nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Dần với phổi, đường hô hấp; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Tránh khói thuốc, đeo khẩu trang khi không khí bụi, và đi khám phổi định kỳ.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_mao",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Mão"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Mão ứng với ruột già, đường tiêu hoá dưới; cung chi Mão nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Mão với ruột già, đường tiêu hoá dưới; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Ăn đủ rau, uống đủ nước, và hỏi bác sĩ về khám tiêu hoá định kỳ theo tuổi.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_thin",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Thìn"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Thìn ứng với dạ dày; cung chi Thìn nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Thìn với dạ dày; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Ăn đúng bữa, bớt đồ cay khi căng thẳng, và đi khám tiêu hoá khi khó chịu kéo dài.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_ti",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Tỵ"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Tỵ ứng với tỳ vị, đường tiêu hoá; cung chi Tỵ nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Tỵ với tỳ vị, đường tiêu hoá; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Bớt lo nghĩ lúc ăn, nhai chậm, và kiểm tra tiêu hoá trong đợt khám định kỳ.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_ngo",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Ngọ"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Ngọ ứng với tim; cung chi Ngọ nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Ngọ với tim; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Đi bộ đều mỗi ngày, ngủ đủ, và khám tim mạch định kỳ.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_mui",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Mùi"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Mùi ứng với ruột non, đường hấp thu; cung chi Mùi nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Mùi với ruột non, đường hấp thu; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Ăn chín uống sôi, không ăn quá no, và khám tiêu hoá khi ăn uống kém kéo dài.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_than",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Thân"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Thân ứng với bàng quang, đường tiết niệu; cung chi Thân nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Thân với bàng quang, đường tiết niệu; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Uống đủ nước, không nhịn tiểu lâu, và xét nghiệm nước tiểu khi khám định kỳ.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_dau",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Dậu"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Dậu ứng với thận; cung chi Dậu nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Dậu với thận; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Uống đủ nước, bớt muối, và kiểm tra chức năng thận trong đợt khám định kỳ.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_tuat",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Tuất"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Tuất ứng với vùng ngực và nhịp tim khi căng thẳng; cung chi Tuất nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Tuất với vùng ngực và nhịp tim khi căng thẳng; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Tập thở chậm khi lo âu, nghỉ ngắn giữa giờ làm, và khám tim mạch định kỳ.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.chi_hoi",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Hợi"
+        ],
+        "cung": "bat_ky",
+        "gap": "nhieu_sat_hoac_ky",
+        "ghi_chu": "Cung chi này là cung yếu nhất toàn bàn (lối gắn chi với giờ y xưa)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này gắn mỗi chi với một tạng phủ theo giờ y xưa: chi Hợi ứng với sự điều hoà nước và nhiệt trong cơ thể theo y xưa; cung chi Hợi nhiều sát tinh hoặc Hoá Kỵ là chỗ nên chăm sóc.",
+      "loi_doi_thuong": "Sách y xưa gắn giờ Hợi với sự điều hoà nước và nhiệt trong cơ thể theo y xưa; khi phần ứng với giờ này trên lá số có nhiều nét khó, nên chăm sóc phòng ngừa và khám định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Giữ nhịp ăn ngủ đều, vận động nhẹ mỗi tuần, và làm xét nghiệm máu cơ bản khi khám định kỳ.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.chung",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.thai_duong_thai_am_mat",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Thái Dương",
+          "Thái Âm"
+        ],
+        "do_sang": "ham",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Thái Dương ứng mắt trái, Thái Âm ứng mắt phải; sao hãm thì nên giữ mắt.",
+      "loi_doi_thuong": "Sách xưa gắn nét này với đôi mắt — bên trái theo mặt trời, bên phải theo mặt trăng — nên chăm sóc phòng ngừa; lời nhắc này không thay lời bác sĩ.",
+      "viec_nen_lam": "Cho mắt nghỉ sau mỗi giờ nhìn màn hình và khám mắt định kỳ.",
+      "co_trong_co_thu": true,
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.Thái Dương",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_ro": "Sách xưa gắn phần này của lá số với đôi mắt — bên trái theo mặt trời, bên phải theo mặt trăng — nên chăm sóc phòng ngừa; lời nhắc này không thay lời bác sĩ."
+    },
+    {
+      "id": "yb.sk.kinh_da_nam_kham",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "sao_mot_trong": [
+          "Kình Dương",
+          "Đà La"
+        ],
+        "lop": "luu_nien",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Năm gặp Kình Đà: sách cũ nhắc chuyện sức khoẻ và các việc phải can thiệp y tế.",
+      "loi_doi_thuong": "Năm có nét này nên chú ý sức khoẻ bản thân và những va chạm nhỏ, sắp xếp đi khám tổng quát — không thay lời bác sĩ.",
+      "viec_nen_lam": "Đặt lịch khám sức khoẻ tổng quát đầu năm và giữ hộp sơ cứu ở nhà.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.sat_sao",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop",
+      "loi_ro": "Năm nên chú ý sức khoẻ bản thân và những va chạm nhỏ, sắp xếp đi khám tổng quát — không thay lời bác sĩ."
+    },
+    {
+      "id": "yb.sk.dai_han_tat_ach",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "cung": "Tật Ách",
+        "lop": "dai_han",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Đại hạn đi vào Tật Ách: mười năm chủ đề lớn nhất là thân thể.",
+      "loi_doi_thuong": "Giai đoạn mười năm này, sức khoẻ là việc nên đặt lên trước; chăm sóc phòng ngừa đều đặn giúp bạn đi qua nhẹ hơn — không thay lời bác sĩ.",
+      "viec_nen_lam": "Chọn một môn vận động bạn giữ được lâu và khám định kỳ mỗi năm.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": false,
+      "trung_voi": "tuvi_kb.chu_de_han.Tật Ách",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "hop"
+    },
+    {
+      "id": "yb.sk.lo_nghi_hao_suc",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "hoa": "Kỵ",
+        "cung": [
+          "Mệnh",
+          "Phúc Đức"
+        ],
+        "ghi_chu": "Lối y xưa: lo buồn hại phổi, nghĩ nhiều hại tỳ vị",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Y xưa nói lo buồn hại phổi, nghĩ nhiều hại tỳ vị; người hay nghĩ quẩn thì ho, ăn uống kém kéo dài.",
+      "loi_doi_thuong": "Sách y xưa cho rằng lo nghĩ kéo dài làm hao sức, nhất là đường thở và đường ăn uống; giữ đầu óc được nghỉ cũng là chăm sóc cơ thể — không thay lời bác sĩ.",
+      "viec_nen_lam": "Mỗi ngày có một khoảng không nghĩ chuyện việc, như đi bộ hay làm vườn, và đi khám nếu mệt kéo dài.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac"
+    },
+    {
+      "id": "yb.sk.tat_ach_sat_dai_han",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "cung": "Tật Ách",
+        "sao_mot_trong": [
+          "Đà La",
+          "Kình Dương"
+        ],
+        "lop": [
+          "goc",
+          "dai_han"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Tật Ách có Đà La (hay Kình Dương) và đại hạn đi tới đó: sách cũ đọc rất nặng về thân thể trong giai đoạn ấy.",
+      "loi_doi_thuong": "Giai đoạn có nét này nên chú ý sức khoẻ bản thân hơn thường lệ, sắp xếp đi khám tổng quát mỗi năm — không thay lời bác sĩ.",
+      "viec_nen_lam": "Đầu giai đoạn, làm một đợt khám tổng quát và giữ lịch khám lại hằng năm.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.sat_sao",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Giai đoạn này nên chú ý sức khoẻ bản thân hơn thường lệ, sắp xếp đi khám tổng quát mỗi năm — không thay lời bác sĩ."
+    },
+    {
+      "id": "yb.sk.dai_tieu_han_trung_cung",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "lop": [
+          "dai_han",
+          "tieu_han"
+        ],
+        "ghi_chu": "Đại hạn và tiểu hạn cùng rơi một cung nhiều sát tinh/Hoá Kỵ, nhất là Tật Ách",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Năm đại hạn và tiểu hạn cùng gặp một cung xấu (đại tiểu nhị hạn phùng) là năm trường phái này dặn phải cẩn thận nhất.",
+      "loi_doi_thuong": "Năm có nét này nên giảm việc quá sức, chú ý sức khoẻ bản thân và sắp xếp đi khám tổng quát — không thay lời bác sĩ.",
+      "viec_nen_lam": "Đặt lịch khám tổng quát vào quý đầu năm và hạn chế nhận thêm việc nặng trong năm.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Năm nên giảm việc quá sức, chú ý sức khoẻ bản thân và sắp xếp đi khám tổng quát — không thay lời bác sĩ."
+    },
+    {
+      "id": "yb.sk.thai_duong_ham_nam_mat",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "sao": [
+          "Thái Dương"
+        ],
+        "do_sang": "ham",
+        "lop": [
+          "dai_han",
+          "luu_nien"
+        ],
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Hạn đi tới Thái Dương hãm: sách cũ gắn với chuyện mắt, có khi đọc rất nặng.",
+      "loi_doi_thuong": "Giai đoạn có nét này nên chú ý đôi mắt, hạn chế làm việc dưới ánh sáng kém và đi khám mắt — không thay lời bác sĩ.",
+      "viec_nen_lam": "Khám mắt trong năm đầu giai đoạn, và đeo kính bảo hộ khi làm việc có bụi hay tia lửa.",
+      "co_trong_co_thu": "khong_ro",
+      "rieng_phai": true,
+      "trung_voi": "tuvi_doi_song_kb.suc_khoe.Thái Dương",
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "goc_nhin_khac",
+      "loi_ro": "Giai đoạn này nên chú ý đôi mắt, hạn chế làm việc dưới ánh sáng kém và đi khám mắt — không thay lời bác sĩ."
+    },
+    {
+      "id": "yb.sk.vung_dau_ban_do_than_the",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "chi": [
+          "Mùi"
+        ],
+        "sao_mot_trong": [
+          "Hỏa Tinh",
+          "Linh Tinh",
+          "Địa Kiếp"
+        ],
+        "ghi_chu": "Bản đồ thân thể riêng của trường phái: cung Mùi ứng vùng đầu (khác lối gắn chi theo giờ)",
+        "co_the_tinh": true
+      },
+      "y_goc_tom_tat": "Trường phái này còn một bản đồ thân thể khác: cung Mùi ứng vùng đầu; Hỏa Linh, Địa Kiếp tụ ở đây thì nên giữ vùng đầu.",
+      "loi_doi_thuong": "Theo một bản đồ thân thể trong sách, phần này ứng với vùng đầu; nên giữ giấc ngủ, nhịp nghỉ và kiểm tra tim mạch định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Đo các chỉ số tim mạch khi khám định kỳ và nghỉ ngay khi thấy chóng mặt, đau đầu kéo dài.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    },
+    {
+      "id": "yb.sk.nu_vung_bung_duoi",
+      "loai": "suc_khoe_phong_ngua",
+      "dieu_kien": {
+        "gioi_tinh": "nu",
+        "ghi_chu": "Theo bản đồ thân thể của trường phái: hai cung ứng vùng bụng dưới có nhiều sát tinh",
+        "co_the_tinh": false
+      },
+      "y_goc_tom_tat": "Với lá nữ, hai cung ứng vùng bụng dưới trong bản đồ thân thể mà nhiều sao khó thì nên lưu ý sức khoẻ sinh sản.",
+      "loi_doi_thuong": "Phần này ứng với vùng bụng dưới; nên chú ý sức khoẻ sinh sản và đi khám phụ khoa định kỳ — không thay lời bác sĩ.",
+      "viec_nen_lam": "Giữ lịch khám phụ khoa định kỳ hằng năm, kể cả khi không thấy gì bất thường.",
+      "co_trong_co_thu": false,
+      "rieng_phai": true,
+      "trung_voi": null,
+      "source_id": "tham_khao_tam_hop_hien_dai",
+      "school_id": "tam_hop_hien_dai",
+      "trang_thai": "nhap",
+      "can_duyet": true,
+      "hien_thi": "khong"
+    }
+  ]
+}

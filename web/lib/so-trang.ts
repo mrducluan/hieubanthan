@@ -119,7 +119,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     doan: [
       "Nhập ngày giờ sinh, giới tính và nơi sinh (63 tỉnh thành hoặc nước ngoài). Lá số an ngay trên hệ thống của Hiểu Bản Thân theo âm lịch Việt Nam, có xử lý múi giờ lịch sử trước năm 1975; sinh ở nước ngoài lập theo giờ địa phương.",
       "Lá số vẽ 12 cung với 14 chính tinh, phụ tinh, tứ hoá, Tuần Triệt, độ sáng theo Nam phái (có công tắc xem bảng phái Trung). Hạn đọc theo thứ tự đại hạn › lưu niên › tiểu hạn › lưu nguyệt; lưu nguyệt cho bạn chọn phái tính tháng.",
-      "Các khác biệt giữa trường phái (lịch Việt/Trung, Hoả Linh, tháng nhuận…) gom trong khung “Trường phái” có giải thích. Không phán bệnh tật, tai nạn hay sống chết.",
+      "Các khác biệt giữa trường phái (lịch Việt/Trung, Hoả Linh, tháng nhuận…) gom trong khung “Trường phái” có giải thích. Không nêu tên bệnh, không phán tai nạn hay sống chết; sức khoẻ chỉ gợi năm nên chú ý và đi khám.",
     ],
     hoi_dap: [
       { hoi: "Không biết giờ sinh chính xác có lập được không?", dap: "Tử vi cần giờ sinh theo canh giờ (12 giờ âm). Nếu không chắc, hãy hỏi người thân hoặc so vài giờ gần nhau; hỏi đáp kiến thức chung vẫn dùng được không cần lá số." },
@@ -300,13 +300,14 @@ export const TEP_KB_THEO_LOAI: Record<LoaiTrang, string[]> = {
   cap_so: ["thanso_cap_so.json", "thanso_quan_he.json"], nghe: ["thanso_chan_dung.json", "thanso_linh_vuc.json"],
   tinh_yeu: ["thanso_chan_dung.json", "thanso_linh_vuc.json"], nam_ca_nhan: ["thanso_depth.json"], no_nghiep: ["thanso_chi_so_phu.json"],
   so_kep: ["thanso_chaldean.json"], dau_hieu: ["phongthuy_kb.json", "phongthuy_do_thi.json"],
+  co_thu: ["tuvi_co_thu.json", "tuvi_cach_cuc.json"],
 };
 /** Trang mẫu của từng loại (để CMS xem trước chữ KB của cụm). */
 const VI_DU: Record<LoaiTrang, string> = {
   so: "so-1", que: "que-1-can", sao: "sao-tu-vi", cung: "cung-menh", thap_than: "ty-kien", nhat_chu: "nhat-chu-giap",
   cap_so: "so-chu-dao-1-va-1", nghe: "so-1-hop-nghe-gi", tinh_yeu: "so-1-trong-tinh-yeu", nam_ca_nhan: "nam-ca-nhan-1",
   no_nghiep: "no-nghiep-13", sao_cung: "tu-vi-cung-menh", hoa_cung: "hoa-loc-cung-menh", menh_nam: "sinh-nam-1950-menh-gi",
-  so_kep: "so-kep-10", dau_hieu: "duong-dam-thang-vao-nha",
+  so_kep: "so-kep-10", dau_hieu: "duong-dam-thang-vao-nha", co_thu: "cot-tuy-phu",
 };
 
 /** ND-7 đợt 2: mọi cụm (trừ hồ sơ chuyên gia) cho đặt MỘT ảnh chia sẻ dùng chung — thay ảnh /og tự vẽ theo tiêu đề. */

@@ -1,0 +1,24 @@
+{
+ "_nguon": "Nháp ban biên tập (TV-ZW 2026-11-04) — lời đời thường cho dòng \"Cùng sao Mệnh\" (thay ý \"người nổi tiếng có lá số giống bạn\"). Chỉ diễn đạt con số đã đếm trên mẫu ngày × canh giờ 1940–2010 (`app/calc/tuvi_sao_menh.py`); không phải thống kê dân số, không gợi ý ai giống ai. Thuật ngữ chỉ ở `can_cu`.",
+ "source_id": "tuvi_vn",
+ "school_id": "nam_phai_viet",
+ "trang_thai": "nhap_ai",
+ "nguong_pho_bien": 0.03,
+ "muc": {
+  "pho_bien": {
+   "nhan": "khá phổ biến",
+   "loi": "Cứ khoảng {mot_trong} thời điểm sinh thì có 1 thời điểm có {mo_ta} như bạn — khá phổ biến. Cùng sao Mệnh, không cùng cuộc đời: phần còn lại của lá số mới làm nên nét riêng của bạn."
+  },
+  "it_gap": {
+   "nhan": "ít gặp",
+   "loi": "Cứ khoảng {mot_trong} thời điểm sinh mới có 1 thời điểm có {mo_ta} như bạn — ít gặp. Cùng sao Mệnh, không cùng cuộc đời: ai có bộ sao này cũng sống nó theo cách của riêng mình."
+  }
+ },
+ "mo_ta": {
+  "mot": "sao {sao} ở cung Mệnh",
+  "hai": "cặp sao {sao} ở cung Mệnh",
+  "muon": "cung Mệnh để trống, mượn {sao} ở cung đối diện"
+ },
+ "can_cu": "Đếm trên mọi ngày dương lịch {mau} × 12 canh giờ ({tong} thời điểm), âm lịch Việt Nam; mỗi thời điểm tính như nhau — không phải số người thật. Tổ hợp chính tinh cung Mệnh của bạn: {khoa} — {so} thời điểm ({phan_tram} %), xếp thứ {hang} trong {so_to_hop} tổ hợp có thể có. Cung Mệnh an theo tháng và giờ sinh, sao Tử Vi theo ngày âm và Cục; giới tính không đổi vị trí chính tinh.",
+ "nhan_ngan": "1 trong {mot_trong} thời điểm sinh có cùng sao Mệnh"
+}

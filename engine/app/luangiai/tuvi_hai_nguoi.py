@@ -378,3 +378,128 @@ def cham_diem(ban: dict, kia: dict, quan_he: str, vao_ban: list[dict], ban_vao: 
             "tieu_chi": tieu_chi, "diem_manh": diem_manh, "can_dung_hoa": can_dung_hoa,
             "goi_y": goi[:3] if len(goi) >= 3 else _GOI_Y_MAC_DINH, "loi_dan": kb.loi_dan() or _LOI_DAN_MAC_DINH,
             "hai_chieu": bool(ban_vao), "nguon": kb.meta()}
+
+
+# ------------------------------------------------------------------ TV-YBS đợt 4: hộp diễn giải (KHÔNG tính điểm)
+# Ý Tử vi bổ sung (KB tuvi_y_bo_sung.json, `hien_thi = "hop"`) về Phu Thê / Mệnh của HAI lá số → hộp lời diễn giải đặt
+# cạnh điểm. Điểm 0–100 và luật `hai_nguoi_1` không đọc phần này. Bộ lọc tĩnh: chỉ sao (toạ), sao vắng, hoá năm sinh
+# toạ cung, cung vô chính diệu, độ sáng — ý có điều kiện khác (hạn, giáp, sát tinh, ghi chú chưa cơ học hoá) bỏ qua.
+# Mã hộp `ds.hai.<ý>.<ai>.<quan hệ>` (loại `doi_song` của 0017 — ràng buộc SQL có sẵn, không migration mới);
+# `ai` = ban | kia | hai. Mã chỉ từ dữ kiện đã tính (tên ý, vai, quan hệ) — không tên, ngày sinh, can chi.
+TOI_DA_CACH_DOC = 4
+QUAN_HE_DOI_LUA = ("nguoi_yeu", "vo_chong")
+_DK_HO_TRO = {"sao", "sao_mot_trong", "sao_cap_mot_trong", "cung", "hoa", "khong_co", "khong_chinh_tinh", "do_sang",
+              "gioi_tinh", "co_the_tinh"}
+_SANG, _HAM = {"Miếu", "Vượng", "Đắc"}, {"Hãm"}
+_NHAN_CDT = "Thêm một cách đọc"
+_DAN_KIA = "Đọc từ phía người ấy — chữ “bạn” ở đây là người ấy:"
+_CAN_CU_CDT = "Ý luận đoán của một trường phái Tử vi tam hợp hiện đại, ban biên tập viết lại. Không tính vào điểm."
+_TIEU_DE_CDT = {"phu_the_trung_menh_nguoi_kia": "Người ấy gần với hình mẫu bạn đời trong lá số của bạn",
+                "hai_nguoi_sat_pha_tham": "Hai người đều thích tự quyết",
+                "dong_tinh_bu_nhau": "Một người mở việc, một người giữ nếp",
+                "ban": "Lá số của bạn phác ra người bạn đời thế nào",
+                "kia": "Lá số người ấy phác ra người bạn đời thế nào"}
+
+
+def _l(x) -> list:
+    return [] if x is None else [x] if isinstance(x, str) else list(x)
+
+
+def _cung_ls(ls: dict | None, ten: str) -> dict | None:
+    return next((c for c in (ls or {}).get("cung", []) if c["ten"] == ten), None)
+
+
+def _chinh(c: dict | None) -> list[str]:
+    return [s["ten"] for s in (c or {}).get("chinh_tinh", [])]
+
+
+def _co_trong_cung(ls: dict, c: dict) -> set[str]:
+    """Sao có mặt ở cung: chính tinh + phụ tinh + "Hoá X" (tứ hoá năm sinh toạ cung)."""
+    hoa = {f"Hoá {h['hoa']}" for h in ls.get("tu_hoa", []) if h.get("cung") == c["ten"]}
+    hoa |= {f"Hoá {s['tu_hoa']}" for s in c.get("chinh_tinh", []) if s.get("tu_hoa")}
+    return set(_chinh(c)) | set(c.get("phu_tinh", [])) | hoa
+
+
+def _khop_phu_the(m: dict, ls: dict, gioi_tinh: str | None) -> list[str] | None:
+    """Ý Phu Thê khớp lá `ls` → danh sách sao làm căn cứ; không khớp / điều kiện không xét được → None."""
+    dk = m["dieu_kien"]
+    if set(dk) - _DK_HO_TRO or "Phu Thê" not in _l(dk.get("cung")):
+        return None
+    if dk.get("gioi_tinh") and dk["gioi_tinh"] != gioi_tinh:
+        return None
+    c = _cung_ls(ls, "Phu Thê")
+    if c is None:
+        return None
+    co = _co_trong_cung(ls, c)
+    sao, mot = _l(dk.get("sao")), _l(dk.get("sao_mot_trong"))
+    cap = [p for p in dk.get("sao_cap_mot_trong") or [] if set(p) <= co]
+    if (sao and not set(sao) <= co) or (mot and not set(mot) & co) or (dk.get("sao_cap_mot_trong") and not cap):
+        return None
+    if dk.get("hoa") and f"Hoá {dk['hoa']}" not in co:
+        return None
+    if set(_l(dk.get("khong_co"))) & co or (dk.get("khong_chinh_tinh") and _chinh(c)):
+        return None
+    if dk.get("do_sang") in ("sang", "ham"):
+        nhom = _SANG if dk["do_sang"] == "sang" else _HAM
+        if not all(s.get("do_sang") in nhom for s in c["chinh_tinh"] if s["ten"] in sao):
+            return None
+    if not (sao or mot or cap or dk.get("hoa") or dk.get("khong_chinh_tinh")):
+        return None                                   # chỉ "cung Phu Thê" chung chung → không đủ để nói riêng lá này
+    can = sao + [s for s in mot if s in co] + [s for p in cap for s in p] + ([f"Hoá {dk['hoa']}"] if dk.get("hoa") else [])
+    return list(dict.fromkeys(can)) or ["không có chính tinh"]
+
+
+def _nhom_menh(ls: dict | None) -> set[str]:
+    from app.kb import tuvi_kb
+    return {(tuvi_kb.chinh_tinh(s) or {}).get("nhom") for s in _chinh(_cung_ls(ls, "Mệnh"))} - {None}
+
+
+def _hop_cdt(m: dict, ai: str, quan_he: str, can_cu: str) -> dict:
+    ma = m["id"].rsplit(".", 1)[1]
+    khoa = ma if ai == "hai" else ai
+    return {"loai": "loi_khuyen", "nhan": kb.cach_doc_them("nhan") or _NHAN_CDT,
+            "tieu_de": kb.cach_doc_them(f"tieu_de.{khoa}") or _TIEU_DE_CDT[khoa],
+            # ý Phu Thê của lá người ấy: lời ngôi thứ ba viết riêng (`loi_nguoi_ay` — review CY-1: không tả thẳng một nét
+            # xấu của người thứ ba, nói như nhịp giữa hai người); KB thiếu thì giữ lời dẫn cũ
+            "noi_dung": ((m.get("loi_nguoi_ay") or f"{kb.cach_doc_them('dan_kia') or _DAN_KIA} {m['loi_doi_thuong']}")
+                         if ai == "kia" else m["loi_doi_thuong"]),
+            "huong_xu_ly": (m.get("viec_nguoi_ay") or m["viec_nen_lam"]) if ai == "kia" else m["viec_nen_lam"],
+            "can_cu": [can_cu, kb.cach_doc_them("can_cu_chung") or _CAN_CU_CDT],
+            "ma_mau": f"ds.hai.{ma}.{ai}.{quan_he}", "phai": m["school_id"]}
+
+
+def cach_doc_them(ls_ban: dict, ls_kia: dict | None, quan_he: str, gioi_ban: str | None = None,
+                  gioi_kia: str | None = None) -> list[dict]:
+    """Hộp diễn giải (≤ 4): ý hai lá số trước (cần đủ lá người kia), rồi một ý Phu Thê của bạn, một của người ấy —
+    ý Phu Thê chỉ cho người yêu / vợ chồng. Thứ tự ý theo KB. Không đọc, không đổi điểm."""
+    from app.kb import tuvi_y_bo_sung as ybs
+    y = ybs.theo_loai("hon_nhan", hien_thi="hop")
+    ra: list[dict] = []
+    if ls_kia is not None:
+        pt_ban, menh_kia = _chinh(_cung_ls(ls_ban, "Phu Thê")), _chinh(_cung_ls(ls_kia, "Mệnh"))
+        nb, nk = _nhom_menh(ls_ban), _nhom_menh(ls_kia)
+        for m in (x for x in y if x["dieu_kien"].get("hai_nguoi")):
+            ma, dk = m["id"].rsplit(".", 1)[1], m["dieu_kien"]
+            if ma == "phu_the_trung_menh_nguoi_kia":
+                chung = [s for s in pt_ban if s in menh_kia]
+                if chung and quan_he in QUAN_HE_DOI_LUA:
+                    ra.append(_hop_cdt(m, "hai", quan_he, f"Chính tinh cung Phu Thê của bạn ({', '.join(pt_ban)}) có "
+                                       f"{', '.join(chung)} — cũng là chính tinh cung Mệnh của người ấy."))
+            elif dk.get("nhom_ca_hai"):
+                if dk["nhom_ca_hai"] in nb and dk["nhom_ca_hai"] in nk:
+                    ra.append(_hop_cdt(m, "hai", quan_he, f"Cung Mệnh của cả hai người có sao nhóm {dk['nhom_ca_hai']}."))
+            elif isinstance(dk.get("nhom"), list) and len(dk["nhom"]) == 2:
+                a, b = dk["nhom"]
+                if (a in nb and b in nk and b not in nb) or (b in nb and a in nk and a not in nb):
+                    ra.append(_hop_cdt(m, "hai", quan_he, f"Cung Mệnh một người thuộc nhóm {a}, người kia thuộc nhóm "
+                                       f"{b} — hai nhịp khác nhau."))
+    if quan_he in QUAN_HE_DOI_LUA:
+        for ai, ls, gt in (("ban", ls_ban, gioi_ban), ("kia", ls_kia, gioi_kia)):
+            if ls is None:
+                continue
+            for m in y:
+                if (sao := _khop_phu_the(m, ls, gt)) is not None:
+                    ra.append(_hop_cdt(m, ai, quan_he, f"Cung Phu Thê của {'bạn' if ai == 'ban' else 'người ấy'} có "
+                                       f"{', '.join(sao)}."))
+                    break
+    return ra[:TOI_DA_CACH_DOC]

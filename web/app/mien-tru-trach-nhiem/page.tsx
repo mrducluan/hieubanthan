@@ -36,7 +36,9 @@ export default async function MienTru() {
       id: "khong-tra-loi", tieuDe: "Những điều hệ thống không trả lời",
       noiDung: (
         <ul>
-          <li>Ngày mất, tuổi thọ, tai nạn, chẩn đoán hay tiên lượng bệnh.</li>
+          <li>Ngày mất, tuổi thọ, tai nạn, chẩn đoán hay tiên lượng bệnh, có mắc một bệnh cụ thể hay không. Về sức khoẻ, bài đọc chỉ
+            gợi phần cơ thể sách xưa nhắc nên chăm sóc, việc nên đi khám và năm nên chú ý sức khoẻ hơn — lời nhắc phòng ngừa, không
+            phải lời đoán, không thay lời bác sĩ.</li>
           <li>Số xổ số, cá cược, mã chứng khoán, thời điểm mua bán tài sản.</li>
           <li>Có nên tuyển, cho thôi việc, cho vay hay kết hôn với một người cụ thể dựa trên ngày sinh của họ.</li>
           <li>Chấm điểm "hợp – khắc" để quyết định một mối quan hệ. Phần hợp đôi chỉ mô tả cách hai người khác nhau.</li>

@@ -117,12 +117,12 @@ TU_CHOI = {
     "suc_khoe_the_chat": [r"benh gi", r"mac benh", r"ung thu", r"dau da day", r"vo sinh(?! (nam )?(19\d{2}|200\d|201\d)(?!\w))",
                           r"sinh con duoc khong", r"co nen mo vao", r"phau thuat", r"song tho", r"an gi cho hop",
                           r"suc khoe cua toi the nao", r"khoi benh"],
-    # "tai nạn": thần số không có cơ sở đoán tai nạn → từ chối nhẹ (vòng đo thanso-tu-cai-thien bắt lùi sau EN-1).
-    # Huyền học bỏ mẫu này qua `chung._BO_CHAN_HH` (MT-ĐS trả lời bằng mức + việc giữ an toàn).
-    "du_doan_cu_the": [r"nam nao toi chet", r"bao gio toi chet", r"khi nao toi chet", r"(bi|gap|co) tai nan",
-                       r"tai nan (khong|nam nay|nam sau)",
-                       r"thang kien", r"cho toi biet chac", r"chac chan", r"ngay cu the",
-                       r"ten gi sinh nam nao", r"may dua con", r"nam nao toi ly hon",
+    # CY-1 (chủ dự án đổi 2026-11-04, thay quyết định EN-3 "Thần số từ chối 'bị tai nạn'"): câu "có bị tai nạn / thắng
+    # kiện / ly hôn không", "cho tôi biết chắc", "ngày cụ thể" KHÔNG còn từ chối — trả lời bằng năm nên chú ý của mảng
+    # (năm cá nhân) + việc nên làm + ranh giới, mở bằng "không ai nói chắc được" (`luangiai/chu_y_nam.py`). Vẫn từ chối:
+    # sống chết, tai nạn chết / nặng (bộ chung `an_toan`), đặt tên theo năm, số con, giá vàng, đội nào thắng.
+    "du_doan_cu_the": [r"nam nao toi chet", r"bao gio toi chet", r"khi nao toi chet",
+                       r"ten gi sinh nam nao", r"may dua con",
                        r"gia vang", r"doi nao thang", r"con bao lau"],
 }
 
@@ -366,7 +366,7 @@ def phan_loai(cau_hoi: str) -> dict:
     t = chuan_hoa_cau(cau_hoi)
     ngay = _trich_ngay(t)
     so_nhac, cap = _trich_so(t)
-    kq = {"cau_chuan_hoa": t, "gioi_thieu": gioi_thieu, "ngay_nhac": ngay, "so_nhac": so_nhac, "cap_nhac": cap,
+    kq = {"cau_chuan_hoa": t, "cau_goc": cau_hoi, "gioi_thieu": gioi_thieu, "ngay_nhac": ngay, "so_nhac": so_nhac, "cap_nhac": cap,
           "giai_thich": [], "tu_choi": None}
 
     def xong(lv, dt, xl, yd):
@@ -475,8 +475,27 @@ def phan_loai(cau_hoi: str) -> dict:
             and not _co(t, [r"doi viec"]):
         lv = "thoi_van"
 
-    kem = (lv in LUU_Y_THEO_LV or (y_dinh in ("quyet_dinh", "thoi_diem") and lv not in ("thoi_van", "hoc_tap")))
+    # CY-1: câu hỏi về điều người dùng lo ở một mảng đời → mục "năm nên chú ý {mảng} hơn" (gói bằng chứng); câu không
+    # có từ khoá lĩnh vực của thần số thì lĩnh vực theo mảng chú ý (không còn "độ tin thấp" → mời chọn lại).
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    cy = cyn.mang_hoi(t_chinh)              # câu hỏi chính — phần giới thiệu ("Tôi vừa ly hôn, …") chỉ là bối cảnh
+    if cy and cy != "suc_khoe":
+        kq["chu_y"], kq["khong_noi_chac"], kq["lo_ro"] = cy, cyn.noi_chac(t), cyn.lo_ro(t_chinh)
+        # câu chính không có từ khoá lĩnh vực (lĩnh vực mặc định hoặc mượn từ phần giới thiệu) → theo mảng chú ý
+        if lv != "thoi_van" and not any(_dem(t_chinh, kw) for kw in LINH_VUC_KW.values()):
+            lv = LV_CHU_Y.get(cy, lv)
+            kq["do_tin_thap"] = False
+    elif cyn.noi_chac(t):
+        kq["khong_noi_chac"] = True
+    kem = (lv in LUU_Y_THEO_LV or (y_dinh in ("quyet_dinh", "thoi_diem") and lv not in ("thoi_van", "hoc_tap"))
+           or bool(kq.get("chu_y")))
     return xong(lv, "ban_than", "tra_loi_kem_luu_y" if kem else "tra_loi", y_dinh)
+
+
+# CY-1: mảng chú ý → lĩnh vực thần số khi câu không có từ khoá lĩnh vực riêng
+LV_CHU_Y = {"tien_bac": "tai_chinh", "cong_viec": "su_nghiep", "tinh_cam": "tinh_yeu", "gia_dao": "gia_dinh",
+            "nha_cua": "cuoc_song", "di_lai": "cuoc_song", "giay_to": "ban_than", "ban_be": "ban_be_xa_hoi",
+            "van_han": "thoi_van"}
 
 
 # --------------------------------------------------------------------------- #
@@ -678,6 +697,73 @@ def _them_phu(muc: list, cs: dict, t: str, lv: str, so_nhac: dict):
             muc.append({"loai": "thai_do", "so": so, "noi_dung": n, **kb.meta_phu()})
 
 
+def _mau_suc_khoe_ts(nhom: str, t: str, nguoi: dict | None, ngay_xem: _dt.date, cau_goc: str | None = None) -> str:
+    """SK-1 (2026-11-04): câu sức khoẻ ở Thần số. Triệu chứng cấp → đi khám ngay. Câu hỏi có bệnh / sức khoẻ thế nào →
+    Thần số không gắn với bộ phận cơ thể nên không trả lời có hay không; nêu hệ cơ quan nếu câu hỏi nhắc (đi khám), và
+    năm cá nhân tới có chủ đề nghỉ ngơi / chăm sức khoẻ (KB `suc_khoe_kb.nam_ca_nhan`, mốc 1/1 như trang đọc) + khám tổng
+    quát + câu không thay lời bác sĩ."""
+    from app.kb import suc_khoe_kb as skb  # noqa: PLC0415
+    from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+    if nhom == "cap_cuu":
+        return skb.mau("cap_cuu")
+    if nhom == "nguoi_than":           # review SK-1: không lấy năm cá nhân của người hỏi để nói về sức khoẻ người thân
+        return skb.mau("nguoi_than")      # không đọc gì → không kèm lời "nhắc phòng ngừa theo sách xưa"
+    phan = ["Thần số học không gắn con số với bộ phận cơ thể nào, nên không trả lời được cơ thể bạn có vấn đề hay không — "
+            "chỉ bác sĩ thăm khám mới trả lời được."]
+    he = skb.he_cau_hoi(t)
+    if he:
+        phan.append(f"Nếu bạn đang lo về {he['he']}, hãy đi {he['kham']} để bác sĩ kiểm tra sớm.")
+    # Câu hỏi CÓ / KHÔNG bệnh ("năm sau tôi có mắc bệnh không"): không nêu năm — "năm X nên chú ý sức khoẻ" đặt cạnh câu
+    # đó đọc thành "năm X sẽ bệnh" (review SK-1). Câu nhắc bộ phận ("hay đau dạ dày") vẫn nhận nhịp năm.
+    if not _at.hoi_benh(cau_goc or t) and (ds := _sk_nam_ts(nguoi, ngay_xem.year)):
+        phan.append("Điều con số nói được là nhịp sống. " + ds)
+    phan.append(skn.mien_tru())
+    return " ".join(phan)
+
+
+def _skn_mt() -> str:
+    from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+    return skn.mien_tru()
+
+
+def _sk_nam_ts(nguoi: dict | None, nam0: int) -> str:
+    """Hai năm cá nhân gần nhất (trong 10 năm tới) có chủ đề nghỉ ngơi / chăm sức khoẻ → câu nhắc khám tổng quát."""
+    from app.kb import suc_khoe_kb as skb  # noqa: PLC0415
+    from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+    if not (nguoi and nguoi.get("ngay") and nguoi.get("thang")):
+        return ""
+    ncn = {y: thanso.nam_ca_nhan(nguoi["ngay"], nguoi["thang"], y, moc="duong_lich") for y in range(nam0, nam0 + 10)}
+    ds = skn.thanso_nam(ncn, nam0)[:2]
+    if not ds:
+        return ""
+    return " ".join(f"Năm {x['nam']} là năm cá nhân {x['so']} ({skb.nam_ca_nhan(x['so'])['ly_do']})." for x in ds) \
+        + " " + skn.cau_cac_nam(ds)
+
+
+def _muc_chu_y(pl: dict, nguoi: dict, ngay_xem: _dt.date) -> dict:
+    """CY-1: mục "năm nên chú ý {mảng} hơn" theo năm cá nhân (KB chu_y_kb, mốc 1/1 như trang đọc) — mười năm tới.
+    Câu vận hạn chung → các mảng có năm nay / năm sau. Luôn kèm "con số không đoán sự việc" + ranh giới của mảng."""
+    from app.kb import chu_y_kb as cykb  # noqa: PLC0415
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    y = ngay_xem.year
+    mg = pl["chu_y"]
+    if mg == "van_han":
+        m = cyn.muc_van_han({x: cyn.thanso_nam_nguoi(nguoi["ngay"], nguoi["thang"], x, y) for x in cyn.MANG_VAN_HAN},
+                            [y, y + 1], pl.get("khong_noi_chac"))
+        tieu = "Năm nay và năm sau nên chú ý gì"
+    else:
+        from app.hoidap import hieu_cau  # noqa: PLC0415
+        nam_hoi = sorted({y + (1 if x.get("tuong_doi") == "nam_sau" else 0) if x.get("tuong_doi")
+                          else y + x["lech"] if "lech" in x else x["nam"]
+                          for x in hieu_cau.thoi_gian(pl["cau_chuan_hoa"], ngay_xem) if not x.get("thang")})
+        m = cyn.muc_hoi(mg, cyn.thanso_nam_nguoi(nguoi["ngay"], nguoi["thang"], mg, y), None, pl.get("khong_noi_chac"),
+                        [n for n in nam_hoi if y <= n < y + cyn.SO_NAM])
+        tieu = cyn.tieu_de([mg])
+    return {"loai": "giai_thich", "ma": "chu_y_nam", "tieu_de": tieu,
+            "noi_dung": f"{cykb.mau('thanso_dau')} {m['noi_dung']}", "cau_nam": m.get("cau_nam", ""), "mang": mg,
+            "lo_ro": bool(pl.get("lo_ro")), "source_id": "thanso_pitago", "school_id": "pitago"}
+
+
 def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.date) -> dict:
     """Dựng gói bằng chứng từ phân loại + chỉ số + KB. Chỉ chứa nội dung có nguồn."""
     t, lv, dt_, xl = pl["cau_chuan_hoa"], pl["linh_vuc"], pl["doi_tuong"], pl["xu_ly"]
@@ -688,7 +774,16 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
         return goi
     if xl == "tu_choi_nhe":
         goi["mau"] = kb.mau(pl["tu_choi"] or "du_doan_cu_the")
-        return goi
+        nhom = _at.nhom_suc_khoe(pl.get("cau_goc") or t) if pl["tu_choi"] == "suc_khoe_the_chat" else None
+        if nhom:
+            goi["mau"] = _mau_suc_khoe_ts(nhom, t, nguoi, ngay_xem, pl.get("cau_goc"))
+        elif pl["tu_choi"] != "suc_khoe_the_chat":
+            # CY-1: may rủi → giữ tiền; tai nạn chết / nặng → an toàn đi lại; tuyển dụng → tuyển theo kỹ năng
+            from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+            gy = cyn.goi_y_tu_choi(pl.get("cau_goc") or t, pl["tu_choi"])
+            if gy:
+                goi["mau"] = f"{goi['mau']} {gy}"
+        return _ket(goi)
 
     muc = goi["muc"]
     for ma in pl["giai_thich"][:2]:
@@ -846,6 +941,21 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
         lv_muc = [m for m in muc if m["loai"] == "linh_vuc"]
         muc[:] = khac + lv_muc[:1]
 
+    if nguoi and (lv == "suc_khoe" and re.search(r"suc khoe|nam nao|khi nao|nghi ngoi|kiet suc|qua suc", t)
+                  or re.search(r"suc khoe", t)):
+        # SK-1 (2026-11-04): năm cá nhân tới có chủ đề nghỉ ngơi / chăm sức khoẻ → nhắc khám định kỳ (cùng hàm câu từ chối)
+        nam0 = ngay_xem.year
+        ds = _sk_nam_ts(nguoi, nam0)
+        if ds:
+            muc.append({"loai": "giai_thich", "ma": "suc_khoe_nam", "tieu_de": "Năm nên chú ý sức khoẻ hơn",
+                        "noi_dung": f"{ds} {_skn_mt()}", "source_id": "thanso_pitago", "school_id": "pitago"})
+    if pl.get("chu_y") and dt_ == "ban_than" and nguoi and nguoi.get("ngay") and nguoi.get("thang"):
+        muc.insert(0, _muc_chu_y(pl, nguoi, ngay_xem))                  # CY-1: năm nên chú ý của mảng đứng đầu
+    elif pl.get("khong_noi_chac") and muc:
+        from app.kb import chu_y_kb as cykb  # noqa: PLC0415
+        muc.insert(0, {"loai": "giai_thich", "ma": "khong_noi_chac", "tieu_de": "Điều con số nói được",
+                       "noi_dung": f"{cykb.mau('khong_noi_chac')} {cykb.mau('thanso_dau')}",
+                       "source_id": "thanso_pitago", "school_id": "pitago"})
     ma_luu_y = (LUU_Y_THEO_LV.get(lv) or ("thoi_diem" if pl["y_dinh"] == "thoi_diem" else None)
                 or ("quyet_dinh" if pl["y_dinh"] == "quyet_dinh" else None))
     if dt_ == "con":

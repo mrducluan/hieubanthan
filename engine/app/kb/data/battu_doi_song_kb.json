@@ -11,7 +11,7 @@
  "trang_thai": "nhap_ai",
  "can_doi_chieu": true,
  "van_han": {
-  "_nguon": "VH-1 (2026-10-21) — chương 'Vận hạn & điều nên tránh' của Bát tự, nháp AI viết lời đời thường. thap_than.<thập thần của can năm>: mang (mảng chịu tác động) · can (năm Cần lưu ý: nhan = vế sau tiêu đề 'Năm N: …'; tre 18–34 tuổi / lon từ 35 tuổi {y, tranh, lam}) · thuan (năm thuận: nhan, y, lam). nho = dưới 18 tuổi (lời cho cha mẹ). co = cờ tập quán dân gian theo chi trụ năm + năm xung / hình chi ngày. Không vật phẩm, không giải hạn, không tên bệnh, không đoán năm ốm.",
+  "_nguon": "VH-1 (2026-10-21) — chương 'Vận hạn & điều nên tránh' của Bát tự, nháp AI viết lời đời thường. thap_than.<thập thần của can năm>: mang (mảng chịu tác động) · can (năm Cần lưu ý: nhan = vế sau tiêu đề 'Năm N: …'; tre 18–34 tuổi / lon từ 35 tuổi {y, tranh, lam}) · thuan (năm thuận: nhan, y, lam). nho = dưới 18 tuổi (lời cho cha mẹ). co = cờ tập quán dân gian theo chi trụ năm + năm xung / hình chi ngày. Không vật phẩm, không giải hạn, không tên bệnh; năm nên chú ý sức khoẻ nói bằng lời phòng ngừa ở chương Sức khoẻ (SK-1, luangiai/suc_khoe_nam.py).",
   "source_id": "tu_binh_chan_thuyen",
   "school_id": "tu_binh",
   "thap_than": {

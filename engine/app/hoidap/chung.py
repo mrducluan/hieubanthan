@@ -21,25 +21,39 @@ from app.luangiai import an_toan as _at  # noqa: E402
 
 # Từ chối nhẹ: bộ Thần số dùng chung TRỪ các cụm Huyền học trả lời được theo kiểu "định hướng" (MT-ĐS mục 4):
 # "chắc chắn" (B0); "tai nạn", "thắng kiện" (B1: trả lời bằng mảng đi lại / giấy tờ + lưu ý, không có/không).
-_BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khong|nam nay|nam sau)", r"thang kien"}
-TU_CHOI_THEM = [r"so de", r"song duoc bao lau", r"nao chet", r"tho bao nhieu", r"doan benh",
+_BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khong|nam nay|nam sau)", r"thang kien",
+               # SK-1 (2026-11-04): câu sức khoẻ CHUNG về chính mình ("sức khoẻ của tôi thế nào", "hay đau dạ dày") → trả
+               # lời bằng chương sức khoẻ (mức, hệ cơ quan, năm nên chú ý, đi khám, câu không thay lời bác sĩ). Câu hỏi CÓ /
+               # KHÔNG bệnh ("bệnh gì", "mắc bệnh") vẫn là câu đặc biệt (`an_toan.hoi_benh`) — review SK-1. Kinh Dịch không
+               # có chương sức khoẻ → vẫn không đọc quẻ cho hai cụm này (`KD_SUC_KHOE`).
+               r"dau da day", r"suc khoe cua toi the nao"}
+KD_SUC_KHOE = [r"dau da day", r"suc khoe cua toi the nao"]
+# Review CY-1: tuổi thọ / sống chết ("sống được bao lâu", "năm nào chết", "thọ bao nhiêu", "chết sớm"…) đã dời về bộ chung
+# `luangiai/an_toan.py` — cả 5 mảng cùng chặn (trước Thần số trả lời bằng chân dung số).
+TU_CHOI_THEM = [r"so de", r"doan benh",
                 r"benh gan",
                 # "yểm bùa nhà hàng xóm" = tác động lên người khác → từ chối; "nhà tôi có BỊ yểm bùa không" = nỗi sợ tâm
                 # linh → dẫn hướng (TAM_LINH) — EN-3d.
                 r"(muon|cach|lam sao|giup toi|giup minh|nho thay) .{0,12}yem bua|yem bua (nha|nguoi|cho|ke|hang xom|ban|vo|chong|sep|dong nghiep|doi thu)(?! .{0,15}(toi|minh|em|nha toi)(?!\w))", r"chua duoc benh", r"nen tuyen", r"tuyen nhan vien",
                 r"de quyet dinh tuyen", r"chon so lo", r"so lo"]
+CHUA_BENH = (r"(benh|bi om|viem|sot|mat ngu|di ung|ung thu|huyet ap|tieu duong|phoi|da day|xuong khop|trieu chung"
+             r"|dau (dau|bung|lung|khop|da day|rang|mat|nguc|bao tu))(?!\w).{0,40}chua (the nao|ra sao|sao cho|kieu gi|bang gi)")
+_at.MO_HO[CHUA_BENH] = r"chữa"
 # MT-ĐS B0 — thọ / chết / sống được không (kể cả người thân, thai nhi), tên bệnh & bộ phận, lô đề, nhân sự trá hình.
 TU_CHOI_HH = [
-    r"tho (duoc )?bao nhieu", r"song (duoc )?(bao lau|den bao nhieu|bao nhieu tuoi|may nam|duoc may)",
-    r"(con|be|no|ong|ba|bo|me|toi|minh|em|chau|vo|chong) (co )?song duoc (khong|ko)", r"co qua khoi",
-    r"(\d{2,3} tuoi|ong noi|ong ngoai|ba noi|ba ngoai|cu nha).{0,40}co (di|mat|ra di) (khong|ko)",
-    r"ket thuc doi", r"bat dac ky tu", r"(de|hay|phai) chet(?!\w)", r"so chet (tre|som|bat)", r"chet som", r"chet tre",
-    r"nam nao .{0,30}co nguoi mat", r"(?<!khoa )(?<!kham )benh (phoi|tim|gan|than|xuong|mau)",
+    r"co qua khoi", r"ket thuc doi", r"(de|hay|phai) chet(?!\w)", r"(?<!khoa )(?<!kham )benh (phoi|tim|gan|than|xuong|mau)",
     r"(gan|than|tim|phoi|ung thu|da day) hay (gan|than|tim|phoi|ung thu|da day)", r"uong thuoc gi",
     r"khoi (duoc )?benh", r"choi (lo|de)(?!\w)", r"so chot", r"danh con (gi|so)", r"so may de trung", r"danh .{0,12}(de|cho) trung",
     r"lam hr|(?<!\w)hr(?!\w)", r"chu (cty|cong ty|doanh nghiep).{0,40}(ung vien|nhan vien|nhan|tuyen)",
     r"nhan vien .{0,40}(nghi viec|trung thuc|giu|chon|nhan|sa thai)", r"tuyen (ke toan|nhan vien|nguoi|nhan su|thu ky)",
     r"ai trung thuc", r"(chon|giu|loai) nhan vien",
+    # SK-1: câu sức khoẻ chung về CHÍNH mình được trả lời; vẫn từ chối (lời đáp gợi hệ cơ quan + đi khám): hỏi bệnh gì
+    # kèm bộ phận cụ thể, hỏi bệnh của người khác, hỏi cách chữa.
+    r"benh gi .{0,12}(phoi|gan|than|tim|da day|mau|xuong|ruot|mat)", r"(gan|than|tim|phoi|da day) hay (gi|cai gi)",
+    r"(?<!\w)(con|be|me|bo|ong|ba|chong|vo|chau|anh|chi) (toi |em |minh )?.{0,25}benh gi",
+    # "chưa" và "chữa" cùng bỏ dấu thành "chua" (review SK-1: "Công việc vẫn chưa ra sao cả" bị từ chối) → cần chữ chỉ
+    # bệnh / triệu chứng đứng trước, và gõ có dấu thì phải đúng chữ "chữa" (`an_toan.MO_HO`).
+    CHUA_BENH,
 ]
 TU_CHOI_HH_TAT_CA = [m for ds in _h.TU_CHOI.values() for m in ds if m not in _BO_CHAN_HH] + TU_CHOI_THEM + TU_CHOI_HH
 # MT-ĐS B1 — câu tâm linh (vong, căn, ma, bùa, trùng tang, nghiệp…): KHÔNG luận, KHÔNG nối sang lá số (nối = ngầm xác
@@ -82,6 +96,78 @@ def dac_biet(t: str, raw: str | None = None) -> str | None:
     if co(t, [m for m in TAM_LINH if not _at.bo_qua_mo_ho(m, raw)]):
         return "dan_huong"
     return None
+
+
+def mau_tu_choi(goc: str | None, t: str, mau_chung: str, he_la_so: dict | None = None) -> str:
+    """SK-1: lời đáp câu đã xếp từ chối. Triệu chứng cấp → khuyên đi khám NGAY; câu hỏi có bệnh / đoán bệnh → không
+    xác nhận, không phủ nhận, gợi hệ cơ quan (theo câu hỏi, không rõ thì theo lá số `he_la_so`) + đi khám + câu không
+    thay lời bác sĩ; còn lại (sống chết, chữa trị, thai nhi, may rủi…) → `mau_chung` như cũ."""
+    from app.kb import suc_khoe_kb  # noqa: PLC0415
+    from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+    nhom = _at.nhom_suc_khoe(goc or t)
+    if nhom == "cap_cuu":
+        return suc_khoe_kb.mau("cap_cuu")
+    if nhom == "nguoi_than":                 # sức khoẻ người khác: không đọc lá số của người hỏi (review SK-1)
+        return suc_khoe_kb.mau("nguoi_than")   # không đọc gì → không kèm lời "nhắc phòng ngừa theo sách xưa"
+    if nhom == "hoi_benh":
+        return f"{skn.doan_hoi_benh(t, he_la_so)} {skn.mien_tru()}"
+    # CY-1: câu may rủi / tai nạn nặng / tuyển dụng vẫn từ chối như cũ, nhưng kèm một lời nhắc "nên chú ý…" đúng mảng
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    goi_y = cyn.goi_y_tu_choi(goc or t, _at.tu_choi(goc or t))
+    return f"{mau_chung} {goi_y}".strip() if goi_y else mau_chung
+
+
+def them_chu_y(goi: dict, pl: dict, tinh, nam_hien_tai: int, mon_ten: str | None = None,
+               dung_dau: tuple[str, ...] = ("tu_tru", "sao_han"), nam_hoi: list[int] | None = None) -> dict | None:
+    """CY-1 (2026-11-04): câu hỏi về điều người dùng lo ở một mảng đời ("năm nào nên cẩn thận tiền bạc", "có bị phá sản
+    không", "có mất việc không", "có bị kiện không", "vận hạn năm nay có xấu không"…) → mục `chu_y_nam`: năm nên chú ý
+    của mảng (`tinh(mảng)` — cùng hàm báo cáo), việc cụ thể nên làm, ranh giới của mảng (luật sư / không phải lời
+    khuyên đầu tư / an toàn giao thông) — không bao giờ có / không. Đặt ngay sau mục đời sống (hoặc sau các mục luôn
+    đứng đầu `dung_dau`). Câu đặc biệt / thiếu dữ liệu → không thêm."""
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    if pl.get("xu_ly") in DAC_BIET or goi.get("can_them"):
+        return None
+    t = pl.get("cau_chuan_hoa") or ""
+    mg = cyn.mang_hoi(t)
+    chac = cyn.noi_chac(t)
+    if (not mg or mg == "suc_khoe") and chac:
+        # "cho tôi biết chắc", "ngày cụ thể": không từ chối — nói rõ không nói chắc được, phần dưới là nhịp thời gian
+        m = {"loai": "ghi_chu", "ma": "khong_noi_chac", "noi_dung": f"{cyn.kb.mau('khong_noi_chac')} {cyn.kb.mau('hh_dau')}",
+             **cyn.kb.meta()}
+        goi["muc"].insert(next((k for k, x in enumerate(goi["muc"]) if x.get("loai") not in dung_dau), len(goi["muc"])), m)
+        ket(goi)
+        return m
+    if not mg or mg == "suc_khoe":
+        return None
+    try:
+        if mg == "van_han":
+            m = cyn.muc_van_han({x: tinh(x) for x in cyn.MANG_VAN_HAN}, [nam_hien_tai, nam_hien_tai + 1], chac)
+        else:
+            if not nam_hoi and co(t, [r"nam nay"]):
+                nam_hoi = [nam_hien_tai]
+            m = cyn.muc_hoi(mg, tinh(mg), mon_ten, chac, nam_hoi)
+    except Exception:  # noqa: BLE001 — lớp đọc thêm, không được làm hỏng hỏi đáp
+        return None
+    m["lo_ro"] = cyn.lo_ro(t)
+    muc = goi["muc"]
+    i = next((k + 1 for k, x in enumerate(muc) if x.get("loai") == "doi_song"), None)
+    if i is None:
+        i = next((k for k, x in enumerate(muc) if x.get("loai") not in dung_dau), len(muc))
+    muc.insert(i, m)
+    ket(goi)
+    return m
+
+
+def muc_suc_khoe_hoi(t: str) -> dict | None:
+    """SK-1: câu sức khoẻ (không bị từ chối) nhắc một bộ phận / hệ ("hay đau dạ dày", "lo về tim") → mục gợi đi khám đúng
+    hệ đó (không chép chữ người dùng, chỉ tên hệ từ KB)."""
+    from app.kb import suc_khoe_kb  # noqa: PLC0415
+    he = suc_khoe_kb.he_cau_hoi(t)
+    if not he:
+        return None
+    return {"loai": "ghi_chu", "ma": "suc_khoe_hoi", "he": he["he"], "kham": he["kham"],
+            "noi_dung": suc_khoe_kb.mau("hoi_benh").format(he=he["he"], kham=he["kham"]),
+            **suc_khoe_kb.meta()}
 
 
 def mau_dan_huong(t: str) -> str:
@@ -180,7 +266,8 @@ _CHAN = (r"^Câu hỏi để tự soi", r"^Đây là góc nhìn tham khảo", r"
 # Đoạn không bao giờ đưa lên đầu (review EN-3): tự soi / lưu ý / ranh giới giữa bài, đoạn chuyên môn (thang điểm, dụng
 # thần, đại hạn của người hỏi khi câu nói về con…), dòng dữ kiện.
 _KHONG_LEN = (r"^Câu hỏi để tự soi", r"^Lưu ý", r"^Phần này chỉ nói", r"^Ngũ hành", r"^Dụng thần", r"^Giai đoạn mười năm",
-              r"^Năm đang xem", r"^Tứ trụ", r"^Đây là góc nhìn", r"^Tuổi mụ", r"^Đại vận", r"^Lời này không thay")
+              r"^Năm đang xem", r"^Tứ trụ", r"^Đây là góc nhìn", r"^Tuổi mụ", r"^Đại vận", r"^Lời này không thay",
+              r"^Một cách đọc thêm", r"^Một trường phái khác")          # TV-YBS: đoạn thêm luôn đứng sau câu chính
 _BO_TU = {"toi", "em", "minh", "ban", "co", "khong", "nen", "the", "nao", "gi", "la", "cua", "va", "voi", "cho", "thi",
           "nay", "do", "nhu", "duoc", "hay", "bi", "se", "da", "dang", "mot", "nhung", "cac", "ve", "o", "tu", "den",
           "lam", "sao", "xem", "giup", "a", "nhe", "vay", "roi", "con", "so", "nam", "thang", "ngay", "theo", "khi"}

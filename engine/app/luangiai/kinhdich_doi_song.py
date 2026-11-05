@@ -308,13 +308,22 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
         lk = (lk + " " + q["linh_vuc"][lv]).strip()
     if lk:
         hop.append(_hop("loi_khuyen", "Cách làm cho đúng", lk))
+    if ma == "suc_khoe":
+        # SK-1 (2026-11-04): Thuyết quái gắn quái dưới (bản thân người hỏi) với một phần cơ thể → gợi đi khám đúng chỗ
+        from app.kb import suc_khoe_kb  # noqa: PLC0415
+        he = suc_khoe_kb.he_quai(ban.get("ha_quai"))
+        if he:
+            hop.append({**_hop("loi_khuyen", "Phần cơ thể nên để ý",
+                               f"Sách xưa (Thuyết quái) gắn quái dưới {ban['ha_quai']} của quẻ với {he['he']} — nếu "
+                               f"thấy khó chịu ở đó, sắp xếp đi {he['kham']} để bác sĩ kiểm tra. {suc_khoe_kb.mien_tru()}"),
+                        "_loai_ma": "co_the"})
     td_van, ung_ky = _thoi_diem(que, gn, chinh, thoi_diem)
     if td_van:
         hop.append(_hop("thoi_diem", "Nhịp thời gian (gợi ý)", td_van))
 
     # HỌC-ĐS: mã kiểm chứng tất định ds.kinhdich.<chủ đề>.<loại hộp>.q<quẻ>.<mức> (chỉ dữ kiện đã tính, không chữ người dùng)
     for h in hop:
-        h["ma_mau"] = kh.ma_mau("kinhdich", ma, h["loai"], f"q{ban['so_king_wen']}", muc)
+        h["ma_mau"] = kh.ma_mau("kinhdich", ma, h.pop("_loai_ma", h["loai"]), f"q{ban['so_king_wen']}", muc)
 
     # ---- đoạn đời thường
     doan = []

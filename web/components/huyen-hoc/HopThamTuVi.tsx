@@ -2,7 +2,9 @@
 // TV-V2 + HN-2N — "Xem lá số 2 người" (tên mã cũ: hợp tham): can năm sinh người kia "phi hoá" vào lá số của bạn (và
 // chiều ngược lại khi người kia đủ giờ + giới tính + nơi sinh), kèm ĐIỂM THAM KHẢO hợp – khắc 0–100 theo 5 tiêu chí
 // (chủ dự án chốt 2026-10-21, chỉ cho phần Tử vi 2 người). Engine tính hết, web chỉ hiển thị.
-// Ngày sinh người kia chỉ gửi đi để tính, không lưu (không localStorage, không tài khoản).
+// Ngày sinh người kia chỉ gửi đi để tính, KHÔNG lưu — trừ khi người dùng tự bấm "Lưu người này trên máy" và tự tích ô
+// đồng ý (NT-1, chủ dự án duyệt 2026-11-04): khi đó chỉ lưu trong localStorage của máy này (lib/nguoi-than.ts, ≤ 5 người),
+// không bao giờ lên tài khoản. "Chọn từ người thân đã lưu" chỉ điền sẵn form, không tự gửi.
 import Link from "@/components/khung/Lien";
 import { useState } from "react";
 import { ChevronDown, HeartHandshake, ListChecks, Lock, MessageCircleQuestion, Send } from "lucide-react";
@@ -11,6 +13,7 @@ import { DiemHaiNguoi } from "@/components/huyen-hoc/DiemHaiNguoi";
 import { NutChiaSeHai } from "@/components/chia-se/NutChiaSeHai";
 import { NhanLop } from "@/components/huyen-hoc/KhoiMoLuoi";
 import { HopNoiBat, KiemChungBai } from "@/components/luan-giai/HopNoiBat";
+import { ChonTuNguoiThan, LuuSauHopTham } from "@/components/huyen-hoc/NguoiThan";
 import { MAU_HOA_DIU } from "@/components/huyen-hoc/PhiHoa";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
@@ -19,14 +22,11 @@ import { useDanhSachTinh } from "@/lib/dia-ly";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { ngayHopLe, NUOC_NGOAI } from "@/lib/hoso";
+import { TEN_QUAN_HE, type NguoiThan, type NguoiThanVao } from "@/lib/nguoi-than";
 import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 
 type MaQuanHe = (typeof QUAN_HE_HOP_THAM)[number];
-const TEN_QUAN_HE: Record<MaQuanHe, string> = {
-  nguoi_yeu: "Người yêu", vo_chong: "Vợ / chồng", ban_be: "Bạn bè", dong_nghiep: "Đồng nghiệp",
-  doi_tac: "Đối tác", sep: "Sếp", cha_me_con: "Cha mẹ – con", gia_dinh: "Gia đình",
-};
 
 const p2 = (v: string) => v.padStart(2, "0");
 const chiSo = (v: string, max: number) => v.replace(/\D/g, "").slice(0, max);
@@ -45,6 +45,8 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
   const [kq, setKq] = useState<HopThamOutputT | null>(null);
   // TCS-1: giữ đúng yêu cầu vừa xem (chỉ trong bộ nhớ trang) để máy chủ chấm lại khi tạo thẻ điểm chia sẻ.
   const [yeuCau, setYeuCau] = useState<Record<string, unknown> | null>(null);
+  // NT-1: đúng dữ liệu vừa xem (chỉ trong bộ nhớ trang) — để mời "Lưu người này trên máy" sau kết quả.
+  const [vaoNT, setVaoNT] = useState<NguoiThanVao | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const { tinh, loi: loiTinh, thuLai: taiLaiTinh } = useDanhSachTinh();
@@ -77,6 +79,13 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
       const r = await postJson<HopThamOutputT>("/api/tuvi/hop-tham", than);
       setKq(r);
       setYeuCau(than);
+      setVaoNT({
+        quan_he: quanHe, lich_nhap: lich, ngay: d, thang: m, nam: y, ...(lich === "am" && nhuan ? { am_nhuan: true } : {}),
+        ...(gio ? { gio, do_tin_gio: "exact" as const } : {}),
+        ...(gioiTinh === "nam" || gioiTinh === "nu" ? { gioi_tinh: gioiTinh } : {}),
+        ...(noiSinh ? { noi_sinh: noiSinh } : {}),
+        ...(canVung && (vung === "north" || vung === "south") ? { vung } : {}),
+      });
       // Đo: chỉ mã (quan hệ, mức điểm) — không ngày sinh, không điểm số cá nhân.
       ghi("chart_interacted", { mo_dun: "tuvi", kind: "hop_tham_xem", quan_he: quanHe, ...(r.diem ? { muc: r.diem.muc } : {}) });
     } catch (e2) {
@@ -86,7 +95,15 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
     }
   }
 
-  if (kq) return <KetQuaHopTham kq={kq} yeuCau={yeuCau} onHoi={onHoi} onLai={() => setKq(null)} />;
+  // NT-1: điền sẵn từ người thân đã lưu (người dùng vẫn tự bấm "Xem độ hợp").
+  const dienTu = (nt: NguoiThan) => {
+    setQuanHe(nt.quan_he); setLich(nt.lich_nhap);
+    setNgay(String(nt.ngay)); setThang(String(nt.thang)); setNam(String(nt.nam)); setNhuan(Boolean(nt.am_nhuan));
+    setGio(nt.do_tin_gio === "unknown" ? "" : nt.gio ?? ""); setGioiTinh(nt.gioi_tinh ?? ""); setNoiSinh(nt.noi_sinh ?? ""); setVung(nt.vung ?? "");
+    setLoi(null);
+  };
+
+  if (kq) return <KetQuaHopTham kq={kq} yeuCau={yeuCau} vaoNT={vaoNT} onHoi={onHoi} onLai={() => setKq(null)} />;
 
   return (
     <form onSubmit={xem} className="space-y-5" noValidate data-testid="hop-tham-form">
@@ -100,6 +117,7 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
           một con số để bạn tham khảo. Thần số học không có luật như vậy, nên trang <Link href="/hop-doi" className="text-gold underline">Hợp đôi</Link> chỉ nêu chỗ hoà, chỗ va của hai người.
         </span>
       </p>
+      <ChonTuNguoiThan onChon={dienTu} />
       <fieldset>
         <legend className="text-sm font-medium text-fg-muted">Người ấy là</legend>
         <div className="mt-2 flex flex-wrap gap-2">
@@ -184,7 +202,7 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
         <HeartHandshake aria-hidden /> {dang ? "Đang xem…" : "Xem độ hợp"}
       </Button>
       <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-fg-faint">
-        <span className="inline-flex items-center gap-1.5"><Lock className="size-3.5" aria-hidden /> Dữ liệu người ấy chỉ dùng để tính, không lưu lại.</span>
+        <span className="inline-flex items-center gap-1.5"><Lock className="size-3.5" aria-hidden /> Dữ liệu người ấy chỉ dùng để tính, không lưu lại (trừ khi bạn tự bấm lưu trên máy).</span>
         <Link href="/hop-doi" className="inline-flex items-center gap-1 text-gold underline"><Send className="size-3.5" aria-hidden />Không biết ngày sinh? Gửi link để người ấy tự nhập</Link>
       </p>
     </form>
@@ -212,15 +230,16 @@ function DanhSachHoa({ ds, tieuDe, moTa, testId }: { ds: HoaVaoT[]; tieuDe: stri
   );
 }
 
-function KetQuaHopTham({ kq, yeuCau, onHoi, onLai }: {
-  kq: HopThamOutputT; yeuCau: Record<string, unknown> | null; onHoi: (cau: string) => void; onLai: () => void;
+function KetQuaHopTham({ kq, yeuCau, vaoNT, onHoi, onLai }: {
+  kq: HopThamOutputT; yeuCau: Record<string, unknown> | null; vaoNT: NguoiThanVao | null; onHoi: (cau: string) => void; onLai: () => void;
 }) {
   // Khung hỏi đáp chỉ biết lá số của bạn → câu hỏi thêm hướng về cung của chính bạn mà người ấy chạm vào.
   const cungHoi = (kq.nguoi_kia_vao_ban.find((h) => h.hoa === "Kỵ") ?? kq.nguoi_kia_vao_ban[0])?.den_cung;
   const d = kq.diem;
   const hop = d ? [...d.diem_manh, ...d.can_dung_hoa] : [];
   // "x% trong N người thấy đúng" (≥ 30 phiếu) — một lời gọi cho mọi mã hộp; số engine gắn sẵn (`ty_le_dung`) ưu tiên.
-  const tyLe = useTyLe(hop.map((h) => h.ma_mau).filter((m): m is string => Boolean(m)));
+  const cachDoc = kq.cach_doc_them ?? [];
+  const tyLe = useTyLe([...hop.map((h) => h.ma_mau), ...cachDoc.map((h) => h.ma_mau)].filter((m): m is string => Boolean(m)));
   return (
     <div className="space-y-5" data-testid="hop-tham-ket-qua">
       <p className="text-sm text-fg-muted">
@@ -236,6 +255,20 @@ function KetQuaHopTham({ kq, yeuCau, onHoi, onLai }: {
             {hop.map((h) => <HopNoiBat key={h.ma_mau ?? h.tieu_de} hop={h} />)}
           </div>
         </KiemChungBai.Provider>
+      )}
+
+      {cachDoc.length > 0 && (
+        // TV-YBS đợt 4: ý Tử vi bổ sung về Phu Thê / Mệnh hai lá — lời diễn giải, KHÔNG tính vào điểm. Kiểm chứng loại
+        // "doi_song" (mã ds.hai.*, migration 0017), phái = trường phái engine ghi trong từng hộp.
+        <section aria-labelledby="hai-nguoi-cach-doc" data-testid="hai-nguoi-cach-doc">
+          <h3 id="hai-nguoi-cach-doc" className="font-sans text-[1.02rem] font-semibold text-fg">Thêm một cách đọc</h3>
+          <p className="mt-0.5 text-xs text-fg-faint">Lời diễn giải theo một trường phái khác — không tính vào điểm ở trên.</p>
+          <KiemChungBai.Provider value={{ tyLe, phai: cachDoc[0]?.phai ?? "nam_phai_viet", loai: "doi_song" }}>
+            <div className="mt-2 grid gap-3 sm:grid-cols-2">
+              {cachDoc.map((h) => <HopNoiBat key={h.ma_mau} hop={h} />)}
+            </div>
+          </KiemChungBai.Provider>
+        </section>
       )}
 
       {d && d.goi_y.length > 0 && (
@@ -283,6 +316,7 @@ function KetQuaHopTham({ kq, yeuCau, onHoi, onLai }: {
         <Button asChild size="sm" variant="ghost">
           <Link href="/hop-doi"><Send aria-hidden /> Gửi link để người ấy tự xem</Link>
         </Button>
+        {vaoNT && <LuuSauHopTham vao={vaoNT} />}
       </div>
     </div>
   );

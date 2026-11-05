@@ -1,0 +1,2194 @@
+{
+  "_nguon": "Đẩu Số Cốt Tuỷ Phú (斗數骨髓賦), Tử Vi Đẩu Số Toàn Thư quyển một — cổ thư công cộng (đời Minh). Nguyên văn: bản chép Wikisource tiếng Trung, trang 紫微斗數全書/全覽, bản sửa oldid 850734 (ảnh chụp cố định, sha256 760c3a8e3eaa8bb21fb955c24c585d04f5f396b9653f2fbc061cb942dc1831b1, lưu trong repo Apache-2.0 maker-luder/aion-governance-framework), mục 斗数骨髓赋 viết giản thể; chữ phồn thể theo vị trí từ bản iztro-docs (MIT, SylarLong) — hai bản trùng khớp 1.522/1.522 chữ, mọi chỗ khác nhau là cặp giản–phồn chuẩn trừ 罗/陀 ở câu 52. Sửa lỗi chuyển chữ một-nhiều của bản phồn thể: 鬥→斗, 幹→乾, 呂後→呂后, 誌→志, 兇→凶, 萬鐘→萬鍾. Chưa đối chiếu ảnh quét bản khắc Nam Dương Đường 1600 (Internet Archive, môi trường cloud chặn) → can_doi_chieu. Phiên âm Hán Việt, nghĩa đời thường, điều kiện 'khi' do ban biên tập soạn (nháp AI chờ chuyên gia duyệt). Không dùng 'cổ thư' trong repo ziwei-doushu (văn hiện đại giả cổ).",
+  "source": {
+    "cot_tuy_phu": "Đẩu Số Cốt Tuỷ Phú — Tử Vi Đẩu Số Toàn Thư, quyển một (tương truyền Trần Đoàn; bản khắc đời Minh)"
+  },
+  "source_id": "cot_tuy_phu",
+  "school_id": "tu_vi_dau_so",
+  "trang_thai": "nhap_ai",
+  "can_doi_chieu": true,
+  "ban_doi_chieu": {
+    "ban_chinh": "https://zh.wikisource.org/w/index.php?title=紫微斗數全書/全覽&oldid=850734 (mục 斗数骨髓赋, 84 dòng)",
+    "sha256_anh_chup": "760c3a8e3eaa8bb21fb955c24c585d04f5f396b9653f2fbc061cb942dc1831b1",
+    "ban_phu": "iztro-docs (MIT) zh_TW/learn/ancientBook-1.md mục 鬥數骨隨賦; tianzhi-classics (MIT) ziwei/entries/ziweiquanshu-juan1.json cùng gốc Wikisource",
+    "chua_doi_chieu": "Ảnh quét bản khắc Nam Dương Đường 1600 trên Internet Archive (định danh 20260506_20260506_1217)",
+    "nghi_van": [
+      "câu 27: 汲 (văn cảnh gợi 級)",
+      "câu 71: 稿 (văn cảnh gợi 槁)",
+      "câu 52: 羅/陀"
+    ]
+  },
+  "trang": {
+    "tieu_de": "Đẩu Số Cốt Tuỷ Phú: nguyên văn, phiên âm và nghĩa đời thường",
+    "mo_ta": "Đẩu Số Cốt Tuỷ Phú trong Tử Vi Đẩu Số Toàn Thư: đủ nguyên văn chữ Hán, phiên âm Hán Việt, nghĩa đời thường, câu nào ứng với lá số ra sao.",
+    "tra_loi_nhanh": "Trong Tử vi, Đẩu Số Cốt Tuỷ Phú là bài phú ở quyển một của Tử Vi Đẩu Số Toàn Thư (tương truyền của Trần Đoàn, bản khắc đời Minh), dạy cách đọc lá số: xem cách cục trước, xem sao sau, xét cả Mệnh, Thân và vận hạn. Trang này chép đủ {so_cau} câu nguyên văn, phiên âm, nghĩa đời thường và ghi rõ mỗi câu nói về lá số khi nào; các lời phán nặng được đọc lại theo cách sống ngày nay.",
+    "gioi_thieu": "Cốt tuỷ là phần cốt lõi: bài phú gói những điều căn bản nhất của Tử vi vào các câu đối ngắn, dễ thuộc. Mỗi câu thường có hai vế, mỗi vế nêu một tổ hợp sao rồi đến lời bình của sách xưa. Ở trang này, mỗi câu có bốn lớp: nguyên văn chữ Hán phồn thể, phiên âm Hán Việt, nghĩa đời thường do ban biên tập viết, và dòng 'Câu này nói về lá số khi…' nêu điều kiện trên lá số bằng lời thường. Bảng dưới đây chia bài phú thành {so_phan} phần theo nội dung. Văn bản chữ Hán chép theo bản Toàn Thư lưu hành rộng rãi và đã đối chiếu chéo giữa hai bản chép; ban biên tập đang tiếp tục so với bản khắc gỗ đời Minh, vài chữ còn khác nhau giữa các bản được ghi chú ngay tại câu.",
+    "cach_doc": "Bài phú viết theo thước đo của xã hội cũ: quan tước là thành công, nghèo khó và mất sớm là thất bại, có câu phê người phụ nữ rất khắt khe. Trang này giữ nguyên văn để bạn biết sách thật sự nói gì, nhưng phần nghĩa đọc lại theo cách sống ngày nay: một tổ hợp sao cho thấy thế mạnh dễ dùng hoặc điểm cần giữ gìn, không phải kết cục định sẵn. Chính bài phú cũng tự nhắc rằng người cùng giờ sinh vẫn có đời khác nhau, và lòng tốt nặng hơn lá số. Câu nào nhắc tới sức khoẻ chỉ là lời nhắc chăm sóc phòng ngừa, không thay lời bác sĩ.",
+    "hoi_dap": [
+      {
+        "hoi": "Đẩu Số Cốt Tuỷ Phú là gì?",
+        "dap": "Là bài phú ở quyển một của Tử Vi Đẩu Số Toàn Thư, tóm phần cốt lõi của cách đọc lá số Tử vi bằng các câu đối ngắn: cách cục, tính sao, vận hạn và lời khuyên về cách sống."
+      },
+      {
+        "hoi": "Ai viết Đẩu Số Cốt Tuỷ Phú?",
+        "dap": "Bài phú nằm trong Tử Vi Đẩu Số Toàn Thư, sách tương truyền của Trần Đoàn (Hi Di tiên sinh) thời Tống, được biên tập và khắc in đời Minh. Tên tác giả từng bài phú trong sách không được ghi chắc chắn."
+      },
+      {
+        "hoi": "Câu 'Mệnh vô chính diệu' trong Cốt Tuỷ Phú nghĩa là gì?",
+        "dap": "Nguyên văn 命無正曜，夭折孤貧 — sách xưa nói cung Mệnh không có chính tinh thì đời vất vả. Cách đọc ngày nay: Mệnh vô chính diệu mượn sao ở cung đối diện để luận, người có cách này thường uyển chuyển, nên chọn chỗ dựa vững và giữ một hướng đi lâu dài."
+      },
+      {
+        "hoi": "Có nên tin những câu phán nặng trong bài phú không?",
+        "dap": "Nên đọc như tư liệu của một thời: bài phú dùng thước đo quan tước và lời lẽ rất nặng. Tử vi chỉ là tham khảo văn hoá; một tổ hợp sao gợi điểm mạnh và điểm cần giữ gìn, còn cách sống, sức học và lựa chọn của bạn mới là phần quyết định."
+      },
+      {
+        "hoi": "Làm sao biết câu nào trong bài phú ứng với lá số của mình?",
+        "dap": "Mỗi câu trên trang có dòng 'Câu này nói về lá số khi…' nêu điều kiện, ví dụ Thất Sát toạ Mệnh ở Dần hoặc Thân. Lập lá số Tử vi bằng ngày giờ sinh rồi so các sao ở cung Mệnh và tam phương tứ chính với điều kiện đó."
+      }
+    ]
+  },
+  "chuong": [
+    {
+      "ma": "mo_dau",
+      "ten": "Mở bài: xem cách cục trước, xem sao sau",
+      "gioi_thieu": "Tám câu đầu nêu cách đọc một lá số: Tử Vi đứng đầu các sao, vận hạn nâng đỡ thân mệnh; xem cách cục trước rồi mới xem từng sao; người cùng giờ sinh vẫn có đời khác nhau nên không đoán theo một khuôn."
+    },
+    {
+      "ma": "giap_menh",
+      "ten": "Sao kẹp hai bên cung Mệnh",
+      "gioi_thieu": "Ba câu nói về hai cung kề cung Mệnh: sao tốt kẹp hai bên là được nâng đỡ, sao khó kẹp hai bên là chịu sức ép từ những gì ở gần mình."
+    },
+    {
+      "ma": "tinh_sao",
+      "ten": "Tính của sao và nhịp giàu nghèo",
+      "gioi_thieu": "Bảy câu nói tính chất từng nhóm sao và chuyện trước khó sau khá, trước khá sau khó — nhắc rằng đọc sao phải xét độ sáng và sao đi cùng, không theo tiếng tăm của sao."
+    },
+    {
+      "ma": "cach_quy_1",
+      "ten": "Những cách được khen là quý (phần một)",
+      "gioi_thieu": "Mười câu liệt kê các cách cục được sách xưa khen: Thất Sát triều Đẩu, Tử Phủ đồng cung, Cực hướng Ly minh, Tam kỳ gia hội, Nhật Nguyệt đồng lâm… Lời khen dùng thước đo quan trường thời xưa; ngày nay hiểu là thế mạnh dễ phát huy."
+    },
+    {
+      "ma": "cach_quy_2",
+      "ten": "Những cách được khen là quý (phần hai)",
+      "gioi_thieu": "Mười một câu tiếp theo: Sát Phá hợp ra ngoài lập nghiệp, Cơ Nguyệt Đồng Lương hợp việc trong bộ máy, Nhật chiếu Lôi môn, Nguyệt lãng Thiên môn, Đồng Lương ở Dần Thân, kèm vài cổ nhân làm ví dụ."
+    },
+    {
+      "ma": "van_han",
+      "ten": "Vận hạn và những tấm gương cổ nhân",
+      "gioi_thieu": "Tám câu nói về lúc vận hạn gặp sao khó, lấy các nhân vật lịch sử (Khuất Nguyên, Hạng Vũ, Thạch Sùng, Lã Hậu…) làm ví dụ. Đây là cách sách xưa minh hoạ, không phải lá số đã kiểm chứng của những người ấy."
+    },
+    {
+      "ma": "canh_bao",
+      "ten": "Những tổ hợp sách xưa cảnh báo",
+      "gioi_thieu": "Bảy câu có nhiều lời phán nặng nhất của bài phú. Trang này giữ nguyên văn để người đọc biết sách nói gì, còn phần nghĩa đọc lại theo cách sống ngày nay: tổ hợp ấy cho thấy điểm cần giữ gìn, không phải kết cục định sẵn."
+    },
+    {
+      "ma": "cach_quy_3",
+      "ten": "Cách quý khác và cách có hai mặt",
+      "gioi_thieu": "Mười bốn câu nói về các cách Triều Đẩu, Ngưỡng Đẩu, Đan Trì Quế Trì, Thạch trung ẩn ngọc, Minh Lộc ám Lộc, và những trường hợp sao đứng chỗ kém nhưng được hoá tốt thì đổi thành quý."
+    },
+    {
+      "ma": "van_menh",
+      "ten": "Mệnh, vận và cách sống",
+      "gioi_thieu": "Ba câu nhắc đọc Mệnh và Thân cho kỹ, và đặt cách sống tử tế lên trên lá số: làm điều thiện thì dù sao đứng chỗ hãm cũng không bị tổn hại."
+    },
+    {
+      "ma": "tinh_tinh",
+      "ten": "Tính tình theo sao",
+      "gioi_thieu": "Bốn câu xếp tính người theo sao ở Mệnh: nhóm sao cứng, nhóm sao hiền, nhóm sao khéo, và khi các sao mạnh gặp nhau."
+    },
+    {
+      "ma": "sao_kho",
+      "ten": "Nhóm sao khó và khi chúng gặp nhau",
+      "gioi_thieu": "Sáu câu nói về các sao sách xưa gọi là dữ, là hung (Tham Lang, Liêm Trinh, Phá Quân, Thất Sát, Kình Dương, Đà La, Hoả Tinh, Linh Tinh, Không, Kiếp, Hoá Kỵ) và các sao vòng năm (Thái Tuế, Quan Phù, Điếu Khách, Tang Môn)."
+    },
+    {
+      "ma": "loi_ket",
+      "ten": "Lời kết: lòng người và cái lý của số",
+      "gioi_thieu": "Ba câu kết: lòng tốt nặng hơn số, vận qua thì cái quý cũng không giữ mãi, và người học phải xem cho tường tận trước khi nói về ai."
+    }
+  ],
+  "cau": [
+    {
+      "id": "ctp_01",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "mo_dau",
+      "thu_tu": 1,
+      "nguyen_van": "太極星纏，乃群宿眾星之主，天門運限，即扶身助命之源，在天則運用無常，在人則命有格局。",
+      "phien_am": "Thái cực tinh triền, nãi quần tú chúng tinh chi chủ, thiên môn vận hạn, tức phù thân trợ mệnh chi nguyên, tại thiên tắc vận dụng vô thường, tại nhân tắc mệnh hữu cách cục.",
+      "nghia": "Lời mở bài: Tử Vi, ngôi sao ở cực bắc, được coi là chủ của các sao, còn vận hạn là chỗ nâng đỡ thân và mệnh. Trên trời các sao chuyển vần không ngừng; trong lá số, sự sắp đặt ấy được đọc thành cách cục.",
+      "sao": [
+        "Tử Vi"
+      ],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 1 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_02",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "mo_dau",
+      "thu_tu": 2,
+      "nguyen_van": "先明格局，次看眾星。或有同年同月同日同時而生，則有貧賤富貴壽夭之異。",
+      "phien_am": "Tiên minh cách cục, thứ khán chúng tinh. Hoặc hữu đồng niên đồng nguyệt đồng nhật đồng thời nhi sinh, tắc hữu bần tiện phú quý thọ yểu chi dị.",
+      "nghia": "Đọc lá số thì xem cách cục trước, rồi mới xem từng sao. Sách xưa thừa nhận người sinh cùng năm, tháng, ngày, giờ vẫn giàu nghèo, sống lâu hay không khác nhau, nên không đọc một lá số như lời phán cố định.",
+      "sao": [],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 2 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_03",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "mo_dau",
+      "thu_tu": 3,
+      "nguyen_van": "或在惡限，積百萬之金銀。或在旺鄉，遭連年之困苦。禍福不可一途而惟，吉凶不可一例而斷。",
+      "phien_am": "Hoặc tại ác hạn, tích bách vạn chi kim ngân. Hoặc tại vượng hương, tao liên niên chi khốn khổ. Hoạ phúc bất khả nhất đồ nhi duy, cát hung bất khả nhất lệ nhi đoán.",
+      "nghia": "Có người đang đi hạn bị coi là xấu mà vẫn dành dụm được nhiều; có người đi hạn đẹp mà khó khăn liên miên. Vì thế sách dặn: may rủi không đi một đường, tốt xấu không đoán theo một khuôn.",
+      "sao": [],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 3 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 兇→凶 (giữ chữ 凶 như bản giản thể và cách viết đời Minh)"
+    },
+    {
+      "id": "ctp_04",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "mo_dau",
+      "thu_tu": 4,
+      "nguyen_van": "要知一世之榮枯，定看五行之宮位。立命可知貴賤，安身便曉根基。",
+      "phien_am": "Yếu tri nhất thế chi vinh khô, định khán ngũ hành chi cung vị. Lập mệnh khả tri quý tiện, an thân tiện hiểu căn cơ.",
+      "nghia": "Muốn biết lúc thịnh lúc suy của một đời, sách xưa bảo xem ngũ hành và vị trí các cung. Cung Mệnh cho thấy dáng nét chung của đời người, cung Thân cho thấy cái nền mình dựa vào.",
+      "sao": [],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 4 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_05",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "mo_dau",
+      "thu_tu": 5,
+      "nguyen_van": "第一先看福德，再三細考遷移，分對宮之體用，定三合之源流。",
+      "phien_am": "Đệ nhất tiên khán Phúc Đức, tái tam tế khảo Thiên Di, phân đối cung chi thể dụng, định tam hợp chi nguyên lưu.",
+      "nghia": "Thứ tự đọc: trước hết xem cung Phúc Đức, rồi xét kỹ cung Thiên Di; phân biệt cung chính với cung đối diện, rồi lần theo ba cung tam hợp. Đây là gốc của cách đọc tam phương tứ chính.",
+      "sao": [],
+      "cung": [
+        "Phúc Đức",
+        "Thiên Di"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 5 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_06",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "mo_dau",
+      "thu_tu": 6,
+      "nguyen_van": "命無正曜，夭折孤貧。吉有凶星，美玉瑕玷。",
+      "phien_am": "Mệnh vô chính diệu, yểu chiết cô bần. Cát hữu hung tinh, mỹ ngọc hà điếm.",
+      "nghia": "Sách xưa nói cung Mệnh không có chính tinh thì đời vất vả, đơn chiếc — một lời rất nặng. Cách đọc ngày nay: Mệnh vô chính diệu mượn sao ở cung đối diện để luận, người có cách này thường uyển chuyển, dễ đổi theo môi trường, nên chọn chỗ dựa vững và giữ một hướng đi lâu dài. Vế sau: cách tốt mà xen sao xấu thì như ngọc có vết, đẹp nhưng cần để ý chỗ yếu.",
+      "sao": [],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "menh_vo_chinh_dieu"
+      ],
+      "khi": "cung Mệnh không có chính tinh nào",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 6 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 兇→凶 (giữ chữ 凶 như bản giản thể và cách viết đời Minh)"
+    },
+    {
+      "id": "ctp_07",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "mo_dau",
+      "thu_tu": 7,
+      "nguyen_van": "既得根源堅固，須知合局相生，堅固則富貴延壽，相生則財官昭著。",
+      "phien_am": "Ký đắc căn nguyên kiên cố, tu tri hợp cục tương sinh, kiên cố tắc phú quý diên thọ, tương sinh tắc tài quan chiêu trứ.",
+      "nghia": "Khi gốc của lá số đã vững, còn phải xem ngũ hành các cung có sinh cho nhau không. Gốc vững thì đời ổn và bền; các phần sinh cho nhau thì chuyện tiền bạc, công việc dễ hiện rõ thành quả.",
+      "sao": [],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 7 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_08",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "mo_dau",
+      "thu_tu": 8,
+      "nguyen_van": "命好身好限好到老榮昌。命衰身衰限衰終身乞丐。",
+      "phien_am": "Mệnh hảo thân hảo hạn hảo đáo lão vinh xương. Mệnh suy thân suy hạn suy chung thân khất cái.",
+      "nghia": "Mệnh, Thân và vận hạn cùng tốt thì sách xưa khen thịnh đến già; cả ba cùng yếu thì sách nói rất nặng là cả đời túng thiếu. Ý chính: phải xem cả ba lớp cùng lúc. Khi cả ba đều yếu, việc làm được là giữ nếp sinh hoạt đều, học một nghề chắc tay và chi tiêu dè dặt.",
+      "sao": [],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Mệnh, Thân và các vận hạn cùng mạnh hoặc cùng yếu",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 8 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_09",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "giap_menh",
+      "thu_tu": 9,
+      "nguyen_van": "夾貴夾祿少人知，夾權夾科世所宜。",
+      "phien_am": "Giáp quý giáp lộc thiểu nhân tri, giáp quyền giáp khoa thế sở nghi.",
+      "nghia": "Cung Mệnh được sao quý nhân hay sao Lộc kẹp hai bên là điều ít người để ý; được Hoá Quyền, Hoá Khoa kẹp hai bên thì sách cho là hợp với đời. Ý là sự nâng đỡ đến từ hai cung kề bên, như người thân cận giúp sức.",
+      "sao": [
+        "Thiên Khôi",
+        "Thiên Việt",
+        "Lộc Tồn"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Lộc",
+        "Quyền",
+        "Khoa"
+      ],
+      "cach_cuc": [
+        "quy_tinh_giap_menh",
+        "song_loc_giap_menh",
+        "khoa_quyen_loc_giap"
+      ],
+      "khi": "hai cung kề cung Mệnh có Thiên Khôi và Thiên Việt, có sao Lộc, hoặc có Hoá Quyền, Hoá Khoa",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 9 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_10",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "giap_menh",
+      "thu_tu": 10,
+      "nguyen_van": "夾日夾月誰能遇，夾昌夾曲主貴兮。",
+      "phien_am": "Giáp nhật giáp nguyệt thuỳ năng ngộ, giáp Xương giáp Khúc chủ quý hề.",
+      "nghia": "Mệnh được Thái Dương và Thái Âm kẹp hai bên là cách hiếm gặp; được Văn Xương và Văn Khúc kẹp hai bên thì sách cho là có danh, dễ được trọng nhờ học vấn, chữ nghĩa.",
+      "sao": [
+        "Thái Dương",
+        "Thái Âm",
+        "Văn Xương",
+        "Văn Khúc"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "quy_tinh_giap_menh",
+        "xuong_khuc_giap_menh"
+      ],
+      "khi": "hai cung kề cung Mệnh có Thái Dương và Thái Âm, hoặc có Văn Xương và Văn Khúc",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 10 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_11",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "giap_menh",
+      "thu_tu": 11,
+      "nguyen_van": "夾空夾劫主貧賤，夾羊夾陀為乞丐。",
+      "phien_am": "Giáp Không giáp Kiếp chủ bần tiện, giáp Dương giáp Đà vi khất cái.",
+      "nghia": "Mệnh bị Địa Không, Địa Kiếp hay Kình Dương, Đà La kẹp hai bên thì sách xưa nói đời chật vật. Cách hiểu ngày nay: sức ép đến từ hai phía gần mình như người thân, đồng nghiệp, các khoản chi, nên cần giữ ranh giới rõ, tiền bạc có kế hoạch và tránh đứng ra bảo lãnh cho người khác.",
+      "sao": [
+        "Địa Không",
+        "Địa Kiếp",
+        "Kình Dương",
+        "Đà La"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "khong_kiep_giap_menh",
+        "kinh_da_giap_menh"
+      ],
+      "khi": "hai cung kề cung Mệnh có Địa Không và Địa Kiếp, hoặc có Kình Dương và Đà La",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 11 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_12",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_sao",
+      "thu_tu": 12,
+      "nguyen_van": "廉貞七殺反為積富之人，天梁太陰卻作飄蓬之客。",
+      "phien_am": "Liêm Trinh Thất Sát phản vi tích phú chi nhân, Thiên Lương Thái Âm khước tác phiêu bồng chi khách.",
+      "nghia": "Liêm Trinh đi cùng Thất Sát, tưởng là sao cứng, lại là người biết tích luỹ của cải; Thiên Lương gặp Thái Âm lại hay đi đây đi đó, khó ở yên một chỗ. Câu này nhắc đừng đọc sao theo tiếng tăm của nó.",
+      "sao": [
+        "Liêm Trinh",
+        "Thất Sát",
+        "Thiên Lương",
+        "Thái Âm"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Liêm Trinh cùng Thất Sát, hoặc Thiên Lương cùng Thái Âm, hội về cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 12 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_13",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_sao",
+      "thu_tu": 13,
+      "nguyen_van": "廉貞主下賤孤寒，太陰主一生快樂。",
+      "phien_am": "Liêm Trinh chủ hạ tiện cô hàn, Thái Âm chủ nhất sinh khoái lạc.",
+      "nghia": "Sách xưa nói gọn: Liêm Trinh dễ cô quạnh, thiếu thốn; Thái Âm cho đời vui vẻ, thư thái. Đọc ngày nay nên đặt câu này cạnh độ sáng của sao: cùng một sao, sáng hay hãm cho hai nét khác nhau.",
+      "sao": [
+        "Liêm Trinh",
+        "Thái Âm"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Liêm Trinh hoặc Thái Âm toạ cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 13 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_14",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_sao",
+      "thu_tu": 14,
+      "nguyen_van": "先貧後富武貪同身命之宮，先富後貧只為運限逢劫殺。",
+      "phien_am": "Tiên bần hậu phú Vũ Tham đồng Thân Mệnh chi cung, tiên phú hậu bần chỉ vị vận hạn phùng Kiếp Sát.",
+      "nghia": "Vũ Khúc và Tham Lang cùng ở cung Mệnh hay cung Thân thì trước khó sau khá: tiền bạc đến muộn, nhờ bền sức. Trước khá sau sa sút thường vì vận hạn gặp sao Kiếp và sát tinh, nên lúc vận khó cần giữ tiền, tránh đầu tư liều.",
+      "sao": [
+        "Vũ Khúc",
+        "Tham Lang",
+        "Địa Kiếp"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "tham_vu_dong_hanh"
+      ],
+      "khi": "Vũ Khúc cùng Tham Lang ở cung Mệnh hoặc cung Thân",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 14 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_15",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_sao",
+      "thu_tu": 15,
+      "nguyen_van": "出世榮華權祿守財官之位，生來貧賤劫空臨財福之鄉。",
+      "phien_am": "Xuất thế vinh hoa Quyền Lộc thủ Tài Quan chi vị, sinh lai bần tiện Kiếp Không lâm Tài Phúc chi hương.",
+      "nghia": "Hoá Quyền, Hoá Lộc ở cung Tài Bạch, Quan Lộc thì sớm có chỗ đứng; Địa Kiếp, Địa Không rơi vào cung Tài Bạch, Phúc Đức thì tiền bạc khó giữ. Với trường hợp sau, việc làm được là có quỹ dự phòng và không dồn tiền vào một chỗ nhiều rủi ro.",
+      "sao": [
+        "Địa Kiếp",
+        "Địa Không"
+      ],
+      "cung": [
+        "Tài Bạch",
+        "Quan Lộc",
+        "Phúc Đức"
+      ],
+      "hoa": [
+        "Quyền",
+        "Lộc"
+      ],
+      "cach_cuc": [],
+      "khi": "Hoá Quyền, Hoá Lộc ở cung Tài Bạch hoặc Quan Lộc; hay Địa Không, Địa Kiếp ở cung Tài Bạch hoặc Phúc Đức",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 15 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_16",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_sao",
+      "thu_tu": 16,
+      "nguyen_van": "文曲武曲為人多學多能，左輔右弼稟性克寬克厚。",
+      "phien_am": "Văn Khúc Vũ Khúc vi nhân đa học đa năng, Tả Phù Hữu Bật bẩm tính khắc khoan khắc hậu.",
+      "nghia": "Văn Khúc với Vũ Khúc cho người học rộng, làm được nhiều việc; Tả Phù, Hữu Bật cho tính rộng lượng, hậu đãi người khác.",
+      "sao": [
+        "Văn Khúc",
+        "Vũ Khúc",
+        "Tả Phù",
+        "Hữu Bật"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Văn Khúc với Vũ Khúc, hoặc Tả Phù với Hữu Bật, ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 16 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_17",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_sao",
+      "thu_tu": 17,
+      "nguyen_van": "天府天相乃為衣祿之神，為仕為官定主亨通之兆。",
+      "phien_am": "Thiên Phủ Thiên Tướng nãi vi y lộc chi thần, vi sĩ vi quan định chủ hanh thông chi triệu.",
+      "nghia": "Thiên Phủ và Thiên Tướng là sao của cái ăn cái mặc, sự đủ đầy; đi làm việc công, việc tổ chức thì dễ suôn sẻ.",
+      "sao": [
+        "Thiên Phủ",
+        "Thiên Tướng"
+      ],
+      "cung": [
+        "Mệnh",
+        "Quan Lộc"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Thiên Phủ hoặc Thiên Tướng ở cung Mệnh hay Quan Lộc",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 17 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_18",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_sao",
+      "thu_tu": 18,
+      "nguyen_van": "苗而不秀科名陷於凶神，發不主財祿主躔於弱地。",
+      "phien_am": "Miêu nhi bất tú khoa danh hãm ư hung thần, phát bất chủ tài lộc chủ triền ư nhược địa.",
+      "nghia": "Lúa có mạ mà không trổ bông: Hoá Khoa, sao của học hành và danh tiếng, gặp sao xấu thì học giỏi mà khó thành danh. Có phát mà không giữ được tiền: sao chủ về lộc đứng ở chỗ kém sáng. Nên lo phần nền như bằng cấp, kỹ năng, cách quản lý tiền để công sức không bị hụt.",
+      "sao": [],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Khoa",
+        "Lộc"
+      ],
+      "cach_cuc": [],
+      "khi": "Hoá Khoa gặp sát tinh, hoặc sao Lộc đứng ở cung hãm địa",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 18 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 兇→凶 (giữ chữ 凶 như bản giản thể và cách viết đời Minh)"
+    },
+    {
+      "id": "ctp_19",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_1",
+      "thu_tu": 19,
+      "nguyen_van": "七殺朝斗爵祿榮昌，紫府同宮終身福厚。",
+      "phien_am": "Thất Sát triều Đẩu tước lộc vinh xương, Tử Phủ đồng cung chung thân phúc hậu.",
+      "nghia": "Thất Sát triều Đẩu (Thất Sát ở Dần, Thân, hướng về Tử Vi) thì sách khen có địa vị, bổng lộc; Tử Vi và Thiên Phủ cùng cung thì cả đời được phúc dày.",
+      "sao": [
+        "Thất Sát",
+        "Tử Vi",
+        "Thiên Phủ"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "that_sat_trieu_dau",
+        "tu_phu_dong_cung"
+      ],
+      "khi": "Thất Sát toạ Mệnh ở Dần hoặc Thân, hoặc Tử Vi cùng Thiên Phủ toạ Mệnh ở Dần hoặc Thân",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 19 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 鬥→斗 (bản phồn thể đối chiếu chuyển nhầm 斗)"
+    },
+    {
+      "id": "ctp_20",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_1",
+      "thu_tu": 20,
+      "nguyen_van": "紫微居午無殺湊位至三公，天府臨戌有星扶腰金衣紫。",
+      "phien_am": "Tử Vi cư Ngọ vô sát thấu vị chí tam công, Thiên Phủ lâm Tuất hữu tinh phù yêu kim y tử.",
+      "nghia": "Tử Vi ở cung Ngọ không gặp sát tinh thì sách khen lên tới chức cao nhất; Thiên Phủ ở Tuất có sao tốt phò trợ thì 'đeo vàng mặc tía', thời xưa là dấu hiệu quan sang. Ngày nay hiểu là dễ được giao vị trí có trách nhiệm.",
+      "sao": [
+        "Tử Vi",
+        "Thiên Phủ"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "cuc_huong_ly_minh"
+      ],
+      "khi": "Tử Vi toạ Mệnh ở Ngọ không có sát tinh, hoặc Thiên Phủ toạ Mệnh ở Tuất có cát tinh hội về",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 20 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_21",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_1",
+      "thu_tu": 21,
+      "nguyen_van": "科權祿拱名譽昭彰，武曲廟垣威名赫奕。",
+      "phien_am": "Khoa Quyền Lộc củng danh dự chiêu chương, Vũ Khúc miếu viên uy danh hách dịch.",
+      "nghia": "Hoá Khoa, Hoá Quyền, Hoá Lộc cùng chiếu về Mệnh thì tiếng tốt lan rộng; Vũ Khúc ở chỗ miếu vượng thì có uy, có tiếng.",
+      "sao": [
+        "Vũ Khúc"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Khoa",
+        "Quyền",
+        "Lộc"
+      ],
+      "cach_cuc": [
+        "tam_ky_gia_hoi"
+      ],
+      "khi": "Hoá Lộc, Hoá Quyền, Hoá Khoa cùng hội về tam phương tứ chính của Mệnh, hoặc Vũ Khúc miếu vượng ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 21 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_22",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_1",
+      "thu_tu": 22,
+      "nguyen_van": "科明祿暗位列三臺，日月同臨官居侯伯。",
+      "phien_am": "Khoa minh Lộc ám vị liệt tam thai, Nhật Nguyệt đồng lâm quan cư hầu bá.",
+      "nghia": "Hoá Khoa ở cung Mệnh, Lộc ở cung lục hợp ngầm hỗ trợ thì sách khen ngồi hàng tam thai, tức hàng quan cao; Thái Dương, Thái Âm cùng ở Mệnh thì địa vị như hầu, bá. Đây là lời khen theo thước đo quan trường xưa.",
+      "sao": [
+        "Thái Dương",
+        "Thái Âm"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Khoa",
+        "Lộc"
+      ],
+      "cach_cuc": [
+        "khoa_minh_loc_am",
+        "nhat_nguyet_dong_lam"
+      ],
+      "khi": "Hoá Khoa ở Mệnh và Lộc ở cung lục hợp với Mệnh, hoặc Thái Dương cùng Thái Âm toạ Mệnh ở Sửu, Mùi",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 22 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_23",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_1",
+      "thu_tu": 23,
+      "nguyen_van": "巨機同宮公卿之位，貪鈴並守將相之名。",
+      "phien_am": "Cự Cơ đồng cung công khanh chi vị, Tham Linh tịnh thủ tướng tướng chi danh.",
+      "nghia": "Cự Môn với Thiên Cơ cùng cung thì sách khen ngồi hàng công khanh, nhờ lời nói sắc và đầu óc nhanh; Tham Lang với Linh Tinh cùng ở Mệnh thì có tiếng như tướng, như quan.",
+      "sao": [
+        "Cự Môn",
+        "Thiên Cơ",
+        "Tham Lang",
+        "Linh Tinh"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "cu_co_dong_lam",
+        "linh_tham"
+      ],
+      "khi": "Cự Môn cùng Thiên Cơ toạ Mệnh ở Mão, Dậu, hoặc Tham Lang cùng Linh Tinh toạ Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 23 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_24",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_1",
+      "thu_tu": 24,
+      "nguyen_van": "天魁天鉞蓋世文章，天祿天馬驚人甲第。",
+      "phien_am": "Thiên Khôi Thiên Việt cái thế văn chương, Thiên Lộc Thiên Mã kinh nhân giáp đệ.",
+      "nghia": "Thiên Khôi, Thiên Việt cho tài văn chương hơn người; Lộc gặp Thiên Mã thì đỗ đạt làm người khác bất ngờ — thời nay là thi cử, sự nghiệp tiến nhanh nhờ chịu di chuyển, đổi môi trường.",
+      "sao": [
+        "Thiên Khôi",
+        "Thiên Việt",
+        "Lộc Tồn",
+        "Thiên Mã"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "khoi_viet_hoi_menh",
+        "loc_ma_giao_tri"
+      ],
+      "khi": "Thiên Khôi, Thiên Việt hội về Mệnh, hoặc sao Lộc cùng Thiên Mã trong tam phương tứ chính của Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 24 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_25",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_1",
+      "thu_tu": 25,
+      "nguyen_van": "左輔文昌會吉星尊居八座，貪狼火星居廟旺名鎮諸邦。",
+      "phien_am": "Tả Phù Văn Xương hội cát tinh tôn cư bát toạ, Tham Lang Hoả Tinh cư miếu vượng danh trấn chư bang.",
+      "nghia": "Tả Phù và Văn Xương gặp thêm sao tốt thì được trọng vọng, ngồi chỗ cao; Tham Lang với Hoả Tinh ở chỗ miếu vượng thì tiếng tăm vang xa.",
+      "sao": [
+        "Tả Phù",
+        "Văn Xương",
+        "Tham Lang",
+        "Hỏa Tinh"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "phu_cung_van_tinh",
+        "hoa_tham"
+      ],
+      "khi": "Tả Phù, Văn Xương cùng cát tinh hội về Mệnh, hoặc Tham Lang cùng Hoả Tinh toạ Mệnh ở chỗ miếu vượng",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 25 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_26",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_1",
+      "thu_tu": 26,
+      "nguyen_van": "巨日同宮官封三代，紫府朝垣食祿萬鍾。",
+      "phien_am": "Cự Nhật đồng cung quan phong tam đại, Tử Phủ triều viên thực lộc vạn chung.",
+      "nghia": "Cự Môn và Thái Dương cùng cung thì sách khen vinh hiển tới ba đời; Tử Vi, Thiên Phủ chiếu về Mệnh thì bổng lộc dồi dào. Ngày nay hiểu là danh tiếng và thu nhập có nền bền.",
+      "sao": [
+        "Cự Môn",
+        "Thái Dương",
+        "Tử Vi",
+        "Thiên Phủ"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "cu_nhat_dong_cung"
+      ],
+      "khi": "Cự Môn cùng Thái Dương toạ Mệnh ở Dần, Thân, hoặc Tử Vi, Thiên Phủ chiếu về Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 26 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 萬鐘→萬鍾 (钟 giản thể ứng hai chữ; 'vạn chung' là đấu đong thóc)"
+    },
+    {
+      "id": "ctp_27",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_1",
+      "thu_tu": 27,
+      "nguyen_van": "科權對拱躍三汲於禹門，日月並明佐九重於堯殿。",
+      "phien_am": "Khoa Quyền đối củng dược tam cấp ư Vũ môn, Nhật Nguyệt tịnh minh tá cửu trùng ư Nghiêu điện.",
+      "nghia": "Hoá Khoa, Hoá Quyền chiếu nhau qua cung đối diện thì như cá vượt ba bậc cửa Vũ, tức thi cử, thăng tiến vượt bậc; Thái Dương, Thái Âm cùng sáng thì được ví như người giúp vua ở điện vua Nghiêu.",
+      "sao": [
+        "Thái Dương",
+        "Thái Âm"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Khoa",
+        "Quyền"
+      ],
+      "cach_cuc": [
+        "khoa_quyen_hoi_menh",
+        "nhat_nguyet_tinh_minh"
+      ],
+      "khi": "Hoá Khoa và Hoá Quyền ở hai cung đối nhau trong tam phương tứ chính của Mệnh, hoặc Thái Dương, Thái Âm cùng ở chỗ sáng chiếu về Mệnh",
+      "chu_thich": "Bản chép dùng chữ 汲; theo văn cảnh (cá vượt ba bậc cửa Vũ) nghĩa là 'bậc'.",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 27 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_28",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_1",
+      "thu_tu": 28,
+      "nguyen_van": "府相同來會命宮全家食祿，三合明珠生旺地穩步蟾宮。",
+      "phien_am": "Phủ Tướng đồng lai hội Mệnh cung toàn gia thực lộc, tam hợp minh châu sinh vượng địa ổn bộ thiềm cung.",
+      "nghia": "Thiên Phủ, Thiên Tướng cùng chiếu về cung Mệnh thì cả nhà được nhờ; cách Minh châu, Thái Dương và Thái Âm sáng chiếu từ tam hợp, thì bước đều lên cung trăng, thời xưa là đỗ đạt.",
+      "sao": [
+        "Thiên Phủ",
+        "Thiên Tướng",
+        "Thái Dương",
+        "Thái Âm"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "phu_tuong_trieu_vien",
+        "minh_chau_xuat_hai"
+      ],
+      "khi": "Thiên Phủ và Thiên Tướng chiếu về Mệnh từ tam phương, hoặc Thái Dương, Thái Âm ở chỗ sáng chiếu về Mệnh từ tam hợp",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 28 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_29",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 29,
+      "nguyen_van": "七殺破軍宜出外，機月同梁作吏人。",
+      "phien_am": "Thất Sát Phá Quân nghi xuất ngoại, Cơ Nguyệt Đồng Lương tác lại nhân.",
+      "nghia": "Thất Sát, Phá Quân ở Mệnh thì hợp ra ngoài lập nghiệp, đi xa, đổi môi trường; Thiên Cơ, Thái Âm, Thiên Đồng, Thiên Lương hội về Mệnh thì hợp việc trong bộ máy, việc hành chính, việc cần sự cẩn thận.",
+      "sao": [
+        "Thất Sát",
+        "Phá Quân",
+        "Thiên Cơ",
+        "Thái Âm",
+        "Thiên Đồng",
+        "Thiên Lương"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "sat_pha_tham",
+        "co_nguyet_dong_luong"
+      ],
+      "khi": "Thất Sát hoặc Phá Quân toạ Mệnh, hoặc Thiên Cơ, Thái Âm, Thiên Đồng, Thiên Lương hội về tam phương tứ chính của Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 29 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_30",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 30,
+      "nguyen_van": "紫府日月居旺地斷定公侯器，日月科祿丑宮中定是方伯公。",
+      "phien_am": "Tử Phủ Nhật Nguyệt cư vượng địa đoán định công hầu khí, Nhật Nguyệt Khoa Lộc Sửu cung trung định thị phương bá công.",
+      "nghia": "Tử Vi, Thiên Phủ, Thái Dương, Thái Âm đều ở chỗ vượng thì sách cho là người có tầm vóc lớn; Thái Dương, Thái Âm gặp Hoá Khoa, Hoá Lộc ở cung Sửu thì như người đứng đầu một vùng.",
+      "sao": [
+        "Tử Vi",
+        "Thiên Phủ",
+        "Thái Dương",
+        "Thái Âm"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Khoa",
+        "Lộc"
+      ],
+      "cach_cuc": [
+        "nhat_nguyet_dong_lam"
+      ],
+      "khi": "Tử Vi, Thiên Phủ, Thái Dương, Thái Âm ở chỗ vượng hội về Mệnh, hoặc Thái Dương, Thái Âm cùng ở cung Sửu có Hoá Khoa, Hoá Lộc",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 30 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_31",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 31,
+      "nguyen_van": "天梁天馬陷飄蕩無疑，廉貞殺不加聲名遠播。",
+      "phien_am": "Thiên Lương Thiên Mã hãm phiêu đãng vô nghi, Liêm Trinh sát bất gia thanh danh viễn bá.",
+      "nghia": "Thiên Lương gặp Thiên Mã ở chỗ hãm thì hay trôi nổi, khó ở yên; Liêm Trinh không bị sát tinh chen vào thì tiếng tốt đi xa. Với vế đầu, nên chọn việc có di chuyển nhưng giữ một gốc cố định như nhà, quỹ, nghề chính.",
+      "sao": [
+        "Thiên Lương",
+        "Thiên Mã",
+        "Liêm Trinh"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Thiên Lương cùng Thiên Mã ở cung hãm, hoặc Liêm Trinh toạ Mệnh không gặp sát tinh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 31 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_32",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 32,
+      "nguyen_van": "日照雷門富貴榮華，月朗天門進爵封侯。",
+      "phien_am": "Nhật chiếu Lôi môn phú quý vinh hoa, Nguyệt lãng Thiên môn tiến tước phong hầu.",
+      "nghia": "Thái Dương ở cung Mão, mặt trời soi cửa sấm, thì giàu sang, vẻ vang; Thái Âm ở cung Hợi, trăng sáng ở cửa trời, thì được thăng tiến, phong thưởng.",
+      "sao": [
+        "Thái Dương",
+        "Thái Âm"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "nhat_chieu_loi_mon",
+        "nguyet_lang_thien_mon"
+      ],
+      "khi": "Thái Dương toạ Mệnh ở Mão, hoặc Thái Âm toạ Mệnh ở Hợi",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 32 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_33",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 33,
+      "nguyen_van": "寅逢府相位登一品之榮，墓逢左右尊居八座之貴。",
+      "phien_am": "Dần phùng Phủ Tướng vị đăng nhất phẩm chi vinh, mộ phùng Tả Hữu tôn cư bát toạ chi quý.",
+      "nghia": "Mệnh ở Dần gặp Thiên Phủ, Thiên Tướng thì sách khen lên hàng nhất phẩm; Mệnh ở cung mộ (Thìn, Tuất, Sửu, Mùi) gặp Tả Phù, Hữu Bật thì ngồi chỗ được kính trọng.",
+      "sao": [
+        "Thiên Phủ",
+        "Thiên Tướng",
+        "Tả Phù",
+        "Hữu Bật"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Mệnh ở Dần có Thiên Phủ, Thiên Tướng hội về, hoặc Mệnh ở Thìn, Tuất, Sửu, Mùi có Tả Phù, Hữu Bật",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 33 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_34",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 34,
+      "nguyen_van": "梁居午位官資清顯，曲遇梁星位至臺綱。",
+      "phien_am": "Lương cư Ngọ vị quan tư thanh hiển, Khúc ngộ Lương tinh vị chí đài cương.",
+      "nghia": "Thiên Lương ở cung Ngọ thì làm việc công trong sạch, có tiếng; Văn Khúc gặp Thiên Lương thì có thể giữ chức coi việc phép tắc, như ngành thanh tra, pháp chế ngày nay.",
+      "sao": [
+        "Thiên Lương",
+        "Văn Khúc"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "tho_tinh_nhap_mieu"
+      ],
+      "khi": "Thiên Lương toạ Mệnh ở Ngọ, hoặc Văn Khúc gặp Thiên Lương ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 34 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_35",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 35,
+      "nguyen_van": "科祿巡逢周勃欣然入相，文星暗拱賈誼允矣登科。",
+      "phien_am": "Khoa Lộc tuần phùng Chu Bột hân nhiên nhập tướng, văn tinh ám củng Giả Nghị doãn hĩ đăng khoa.",
+      "nghia": "Sách lấy cổ nhân làm ví dụ: Chu Bột đời Hán có Hoá Khoa, Hoá Lộc gặp nhau mà lên làm thừa tướng; Giả Nghị có sao văn ngầm chiếu mà đỗ đạt sớm. Đây là cách sách xưa minh hoạ, không phải lá số đã kiểm chứng.",
+      "sao": [
+        "Văn Xương",
+        "Văn Khúc"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Khoa",
+        "Lộc"
+      ],
+      "cach_cuc": [],
+      "khi": "Hoá Khoa, Hoá Lộc cùng gặp ở Mệnh hoặc tam phương, hoặc Văn Xương, Văn Khúc ngầm chiếu về Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 35 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_36",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 36,
+      "nguyen_van": "擎羊火星威權出眾，貪武同行威鎮邊夷。",
+      "phien_am": "Kình Dương Hoả Tinh uy quyền xuất chúng, Tham Vũ đồng hành uy trấn biên di.",
+      "nghia": "Kình Dương gặp Hoả Tinh cho người có uy, quyết liệt hơn người; Tham Lang đi cùng Vũ Khúc thì có sức trấn giữ nơi xa, ngày nay là hợp việc mở thị trường, quản lý vùng khó.",
+      "sao": [
+        "Kình Dương",
+        "Hỏa Tinh",
+        "Tham Lang",
+        "Vũ Khúc"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "tham_vu_dong_hanh"
+      ],
+      "khi": "Kình Dương cùng Hoả Tinh ở cung Mệnh, hoặc Tham Lang cùng Vũ Khúc toạ Mệnh ở Sửu, Mùi",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 36 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_37",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 37,
+      "nguyen_van": "李廣不封擎羊逢於力士，顏回夭折文昌陷於天傷。",
+      "phien_am": "Lý Quảng bất phong Kình Dương phùng ư Lực Sĩ, Nhan Hồi yểu chiết Văn Xương hãm ư Thiên Thương.",
+      "nghia": "Hai ví dụ cổ nhân: Lý Quảng giỏi mà không được phong tước, sách gắn với Kình Dương gặp sao Lực Sĩ; Nhan Hồi mất sớm, sách gắn với Văn Xương hãm gặp Thiên Thương. Ngày nay chỉ nên đọc là: tài giỏi vẫn cần đúng thời, đúng người nâng đỡ, và cần giữ nhịp nghỉ ngơi chứ đừng dồn hết vào học.",
+      "sao": [
+        "Kình Dương",
+        "Văn Xương"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Kình Dương gặp Lực Sĩ ở cung Mệnh, hoặc Văn Xương hãm ở cung có Thiên Thương",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 37 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_38",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 38,
+      "nguyen_van": "仲由威猛廉貞入廟遇將軍，子羽才能巨宿同梁沖且合。",
+      "phien_am": "Trọng Do uy mãnh Liêm Trinh nhập miếu ngộ Tướng Quân, Tử Vũ tài năng Cự tú Đồng Lương xung thả hợp.",
+      "nghia": "Trọng Do, học trò Khổng Tử, dũng mãnh — sách cho là Liêm Trinh miếu gặp sao Tướng Quân; Tử Vũ có tài — Cự Môn được Thiên Đồng, Thiên Lương xung chiếu và hội hợp. Đây là ví dụ cổ nhân để minh hoạ tính sao.",
+      "sao": [
+        "Liêm Trinh",
+        "Cự Môn",
+        "Thiên Đồng",
+        "Thiên Lương"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Liêm Trinh miếu ở cung Mệnh gặp Tướng Quân, hoặc Cự Môn ở Mệnh có Thiên Đồng, Thiên Lương chiếu về",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 38 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_39",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_2",
+      "thu_tu": 39,
+      "nguyen_van": "寅申最喜同梁會，辰戌應嫌陷巨門。",
+      "phien_am": "Dần Thân tối hỷ Đồng Lương hội, Thìn Tuất ưng hiềm hãm Cự Môn.",
+      "nghia": "Mệnh ở Dần, Thân rất hợp có Thiên Đồng, Thiên Lương; Mệnh ở Thìn, Tuất thì ngại Cự Môn, vì ở đó sao này hãm, dễ vướng lời qua tiếng lại — nên nói ít, viết rõ, giữ chữ tín.",
+      "sao": [
+        "Thiên Đồng",
+        "Thiên Lương",
+        "Cự Môn"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "dong_luong_dan_than"
+      ],
+      "khi": "Thiên Đồng, Thiên Lương toạ Mệnh ở Dần, Thân, hoặc Cự Môn toạ Mệnh ở Thìn, Tuất",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 39 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_40",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_han",
+      "thu_tu": 40,
+      "nguyen_van": "祿倒馬倒忌太歲之合劫空，運衰限衰喜紫微之解凶厄。",
+      "phien_am": "Lộc đảo Mã đảo kỵ Thái Tuế chi hợp Kiếp Không, vận suy hạn suy hỷ Tử Vi chi giải hung ách.",
+      "nghia": "Lộc, Mã mất sức lại gặp năm Thái Tuế hợp với Địa Kiếp, Địa Không thì việc tiền bạc, đi lại dễ trục trặc; vận hạn yếu mà gặp Tử Vi thì sách cho là được gỡ bớt khó khăn. Năm như vậy nên giữ kế hoạch thận trọng, có người tin cậy để hỏi ý.",
+      "sao": [
+        "Lộc Tồn",
+        "Thiên Mã",
+        "Địa Kiếp",
+        "Địa Không",
+        "Tử Vi",
+        "Thái Tuế"
+      ],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "vận hạn có Lộc, Mã ở chỗ kém gặp Không, Kiếp; hoặc vận hạn yếu có Tử Vi",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 40 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 兇→凶 (giữ chữ 凶 như bản giản thể và cách viết đời Minh)"
+    },
+    {
+      "id": "ctp_41",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_han",
+      "thu_tu": 41,
+      "nguyen_van": "孤貧多有壽，富貴即夭亡。",
+      "phien_am": "Cô bần đa hữu thọ, phú quý tức yểu vong.",
+      "nghia": "Một câu nghịch lý của sách xưa: người nghèo, đơn chiếc lại hay sống lâu, còn giàu sang vội vàng thì không bền. Ý ngầm: cái được và cái mất thường đi đôi, đừng chạy theo phú quý mà quên giữ sức.",
+      "sao": [],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 41 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_42",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_han",
+      "thu_tu": 42,
+      "nguyen_van": "吊客喪門綠珠有墮樓之厄，官符太歲公冶有縲紲之憂。",
+      "phien_am": "Điếu Khách Tang Môn Lục Châu hữu đoạ lâu chi ách, Quan Phù Thái Tuế Công Dã hữu luy tiết chi ưu.",
+      "nghia": "Hai ví dụ cổ nhân: nàng Lục Châu đời Tấn gặp nạn ở lầu cao, sách gắn với Điếu Khách, Tang Môn; Công Dã Trường, học trò Khổng Tử, bị giam oan, sách gắn với Quan Phù, Thái Tuế. Đọc ngày nay: năm có các sao này nên cẩn trọng giấy tờ, lời nói, và khi có chuyện buồn thì tìm người tin cậy để chia sẻ.",
+      "sao": [
+        "Điếu Khách",
+        "Tang Môn",
+        "Quan Phù",
+        "Thái Tuế"
+      ],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "năm hoặc hạn có Điếu Khách, Tang Môn, hoặc Quan Phù, Thái Tuế chiếu về",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 42 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_43",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_han",
+      "thu_tu": 43,
+      "nguyen_van": "限至天羅地網屈原溺水而身亡，運遇地劫天空阮籍有貧窮之苦。",
+      "phien_am": "Hạn chí Thiên La Địa Võng Khuất Nguyên nịch thuỷ nhi thân vong, vận ngộ Địa Kiếp Thiên Không Nguyễn Tịch hữu bần cùng chi khổ.",
+      "nghia": "Sách lấy Khuất Nguyên nước Sở làm ví dụ cho hạn đi vào Thiên La, Địa Võng (cung Thìn, Tuất), và Nguyễn Tịch đời Tấn túng thiếu khi vận gặp Địa Kiếp, Thiên Không (lá số lối Việt ghi là Địa Không). Đọc ngày nay: hạn ở hai cung này thường là lúc thấy bị bó buộc, nên tránh quyết định lớn khi đang buồn bực và giữ chi tiêu dè dặt.",
+      "sao": [
+        "Địa Kiếp",
+        "Địa Không"
+      ],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "đại hạn hoặc tiểu hạn đi vào cung Thìn, Tuất, hoặc vận gặp Địa Kiếp, Địa Không",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 43 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_44",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_han",
+      "thu_tu": 44,
+      "nguyen_van": "文昌文曲會廉貞喪命天年，命空限空無吉湊功名蹭蹬。",
+      "phien_am": "Văn Xương Văn Khúc hội Liêm Trinh táng mệnh thiên niên, mệnh Không hạn Không vô cát thấu công danh thặng đặng.",
+      "nghia": "Sách xưa nói rất nặng về Văn Xương, Văn Khúc gặp Liêm Trinh. Ngày nay nên hiểu là tổ hợp dễ liều, dễ vướng rắc rối khi bốc đồng, cần chậm lại trước việc mạo hiểm. Vế sau: Mệnh và hạn gặp sao Không mà không có sao tốt thì công danh lận đận, nên đi đường dài, tích luỹ từng bước.",
+      "sao": [
+        "Văn Xương",
+        "Văn Khúc",
+        "Liêm Trinh",
+        "Địa Không"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Văn Xương, Văn Khúc hội Liêm Trinh ở cung Mệnh, hoặc Mệnh và hạn cùng gặp sao Không mà không có cát tinh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 44 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_45",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_han",
+      "thu_tu": 45,
+      "nguyen_van": "生逢天空猶如半天折翅，命中遇劫恰如浪裏行船。",
+      "phien_am": "Sinh phùng Thiên Không do như bán thiên chiết sí, mệnh trung ngộ Kiếp kháp như lãng lý hành thuyền.",
+      "nghia": "Mệnh gặp Thiên Không như chim gãy cánh giữa trời, dự định hay dang dở; Mệnh gặp Địa Kiếp như thuyền đi trong sóng, nhiều xáo trộn. Hai hình ảnh này gợi cách sống: làm việc có kế hoạch dự phòng, không dồn hết vốn liếng vào một chỗ.",
+      "sao": [
+        "Địa Không",
+        "Địa Kiếp"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "menh_ly_phung_khong"
+      ],
+      "khi": "Địa Không hoặc Địa Kiếp ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 45 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_46",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_han",
+      "thu_tu": 46,
+      "nguyen_van": "項羽英雄限至天空而喪國，石崇豪富限行劫地以亡家。",
+      "phien_am": "Hạng Vũ anh hùng hạn chí Thiên Không nhi táng quốc, Thạch Sùng hào phú hạn hành Kiếp địa dĩ vong gia.",
+      "nghia": "Hai ví dụ cổ nhân: Hạng Vũ anh hùng mà mất nước khi hạn tới Thiên Không; Thạch Sùng giàu có mà tan nhà khi hạn đi vào Địa Kiếp. Ý của sách: lúc hạn có Không, Kiếp, người mạnh hay giàu cũng nên thận trọng, không dựa mãi vào thế đang có.",
+      "sao": [
+        "Địa Không",
+        "Địa Kiếp"
+      ],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "đại hạn hoặc tiểu hạn đi vào cung có Địa Không hoặc Địa Kiếp",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 46 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_47",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_han",
+      "thu_tu": 47,
+      "nguyen_van": "呂后專權兩重天祿天馬，楊妃好色三合文曲文昌。",
+      "phien_am": "Lã Hậu chuyên quyền lưỡng trùng Thiên Lộc Thiên Mã, Dương Phi hiếu sắc tam hợp Văn Khúc Văn Xương.",
+      "nghia": "Sách lấy Lã Hậu đời Hán làm ví dụ cho người nắm quyền nhờ hai lớp Lộc gặp Thiên Mã, và Dương Quý Phi đời Đường làm ví dụ cho người đẹp, đa tình khi Văn Khúc, Văn Xương hội từ tam hợp. Đây là lời phê theo quan niệm xưa, không nên dùng để đánh giá người khác.",
+      "sao": [
+        "Lộc Tồn",
+        "Thiên Mã",
+        "Văn Khúc",
+        "Văn Xương"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Lộc"
+      ],
+      "cach_cuc": [
+        "loc_ma_giao_tri"
+      ],
+      "khi": "Lộc Tồn, Hoá Lộc cùng Thiên Mã hội về Mệnh, hoặc Văn Xương, Văn Khúc chiếu về Mệnh từ tam hợp",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 47 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 呂後→呂后"
+    },
+    {
+      "id": "ctp_48",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "canh_bao",
+      "thu_tu": 48,
+      "nguyen_van": "天梁遇馬女命賤而且淫，昌曲夾墀男命貴而且顯。",
+      "phien_am": "Thiên Lương ngộ Mã nữ mệnh tiện nhi thả dâm, Xương Khúc giáp trì nam mệnh quý nhi thả hiển.",
+      "nghia": "Vế đầu là lời phê nặng nề của sách xưa với phụ nữ có Thiên Lương gặp Thiên Mã; thước đo ấy đã lỗi thời, ngày nay chỉ nên hiểu là người hay dịch chuyển, thích tự do, cần một gốc ổn định. Vế sau: nam có Văn Xương, Văn Khúc kẹp Mệnh thì có danh, được trọng.",
+      "sao": [
+        "Thiên Lương",
+        "Thiên Mã",
+        "Văn Xương",
+        "Văn Khúc"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "xuong_khuc_giap_menh"
+      ],
+      "khi": "Thiên Lương gặp Thiên Mã ở cung Mệnh, hoặc Văn Xương, Văn Khúc ở hai cung kề cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 48 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_49",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "canh_bao",
+      "thu_tu": 49,
+      "nguyen_van": "極居卯酉多為脫俗僧人，貞居卯酉定是公胥吏輩。",
+      "phien_am": "Cực cư Mão Dậu đa vi thoát tục tăng nhân, Trinh cư Mão Dậu định thị công tư lại bối.",
+      "nghia": "Tử Vi ở Mão, Dậu (luôn đi cùng Tham Lang) thì sách nói hay hướng về đời sống tâm linh, thoát tục; Liêm Trinh ở Mão, Dậu (đi cùng Phá Quân) thì hợp việc thừa hành trong bộ máy. Ngày nay hiểu là một bên thiên về chiều sâu tinh thần, một bên hợp việc có quy củ.",
+      "sao": [
+        "Tử Vi",
+        "Tham Lang",
+        "Liêm Trinh",
+        "Phá Quân"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "dao_hoa_pham_chu"
+      ],
+      "khi": "Tử Vi toạ Mệnh ở Mão, Dậu, hoặc Liêm Trinh toạ Mệnh ở Mão, Dậu",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 49 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_50",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "canh_bao",
+      "thu_tu": 50,
+      "nguyen_van": "左府同宮尊居萬乘，廉貞七殺流蕩天涯。",
+      "phien_am": "Tả Phủ đồng cung tôn cư vạn thặng, Liêm Trinh Thất Sát lưu đãng thiên nhai.",
+      "nghia": "Tả Phù đứng cùng Thiên Phủ thì sách khen ngôi cao; Liêm Trinh với Thất Sát thì hay đi xa, rày đây mai đó. Trong bài phú, Liêm Sát vừa được khen biết làm giàu (phần ba) vừa bị nói là phiêu bạt, cho thấy phải xem thêm sao đi cùng và độ sáng.",
+      "sao": [
+        "Tả Phù",
+        "Thiên Phủ",
+        "Liêm Trinh",
+        "Thất Sát"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Tả Phù cùng Thiên Phủ ở cung Mệnh, hoặc Liêm Trinh cùng Thất Sát toạ Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 50 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_51",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "canh_bao",
+      "thu_tu": 51,
+      "nguyen_van": "鄧通餓死運逢大耗之鄉，夫子絕糧限到天傷之內。",
+      "phien_am": "Đặng Thông ngạ tử vận phùng Đại Hao chi hương, Phu Tử tuyệt lương hạn đáo Thiên Thương chi nội.",
+      "nghia": "Đặng Thông đời Hán từng giàu nhất mà cuối đời túng đói, sách gắn với vận gặp Đại Hao; Khổng Tử từng hết lương ăn trên đường, sách gắn với hạn vào Thiên Thương. Bài học: lúc hạn có sao hao tán nên giữ quỹ dự phòng, tránh tiêu xài theo thói quen lúc khá.",
+      "sao": [
+        "Đại Hao",
+        "Thiên Thương"
+      ],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "vận hạn đi vào cung có Đại Hao hoặc Thiên Thương",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 51 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_52",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "canh_bao",
+      "thu_tu": 52,
+      "nguyen_van": "鈴昌羅武限至投河，巨火擎羊終身縊死。",
+      "phien_am": "Linh Xương La Vũ hạn chí đầu hà, Cự Hoả Kình Dương chung thân ải tử.",
+      "nghia": "Đây là một trong những câu nặng nề nhất của bài phú, nói về Linh Tinh, Văn Xương, Đà La, Vũ Khúc hội nhau và Cự Môn, Hoả Tinh, Kình Dương hội nhau. Ngày nay chỉ nên đọc là tổ hợp dễ dồn nén, bế tắc: khi thấy mình kiệt sức hay quá buồn, nên nói với người thân hoặc tìm chuyên gia tâm lý — đó là việc nên làm, không phải điều đáng ngại.",
+      "sao": [
+        "Linh Tinh",
+        "Văn Xương",
+        "Đà La",
+        "Vũ Khúc",
+        "Cự Môn",
+        "Hỏa Tinh",
+        "Kình Dương"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "linh_xuong_da_vu",
+        "cu_hoa_duong"
+      ],
+      "khi": "Linh Tinh, Văn Xương, Đà La, Vũ Khúc cùng hội về Mệnh hay hạn, hoặc Cự Môn, Hoả Tinh, Kình Dương cùng hội về Mệnh",
+      "chu_thich": "Bản chép này ghi 羅 (sao Đà La 陀羅); có bản chép 陀 — cùng chỉ một sao.",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 52 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); 羅 theo Wikisource, iztro-docs chép 陀"
+    },
+    {
+      "id": "ctp_53",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "canh_bao",
+      "thu_tu": 53,
+      "nguyen_van": "命裏逢空不飄流即主疾苦，馬頭帶劍非夭折則主刑傷。",
+      "phien_am": "Mệnh lý phùng Không bất phiêu lưu tức chủ tật khổ, Mã đầu đới kiếm phi yểu chiết tắc chủ hình thương.",
+      "nghia": "Mệnh gặp sao Không thì sách nói nếu không trôi dạt thì cũng nhiều nỗi khổ; Kình Dương ở cung Ngọ (đầu ngựa mang gươm) thì sách nhắc dễ bị thương tích. Đọc ngày nay: nên chăm sóc phòng ngừa — đi lại cẩn thận, nghỉ ngơi đủ, khám sức khoẻ định kỳ; đây là quan niệm sách xưa, không thay lời bác sĩ.",
+      "sao": [
+        "Địa Không",
+        "Kình Dương"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "menh_ly_phung_khong",
+        "ma_dau_doi_kiem"
+      ],
+      "khi": "Địa Không ở cung Mệnh, hoặc Kình Dương toạ Mệnh ở Ngọ",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 53 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_54",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "canh_bao",
+      "thu_tu": 54,
+      "nguyen_van": "子午破軍加官進祿，昌貪居命粉骨碎屍。",
+      "phien_am": "Tý Ngọ Phá Quân gia quan tiến lộc, Xương Tham cư mệnh phấn cốt toái thi.",
+      "nghia": "Phá Quân ở Tý, Ngọ thì thăng tiến, thêm bổng lộc; còn Văn Xương với Tham Lang cùng ở Mệnh thì sách dùng lời cực nặng. Ngày nay nên hiểu là tổ hợp vừa ham vui vừa thích liều, cần tránh việc mạo hiểm, cẩn thận khi đi đường và khi đầu tư.",
+      "sao": [
+        "Phá Quân",
+        "Văn Xương",
+        "Tham Lang"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "anh_tinh_nhap_mieu"
+      ],
+      "khi": "Phá Quân toạ Mệnh ở Tý, Ngọ, hoặc Văn Xương cùng Tham Lang ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 54 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_55",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 55,
+      "nguyen_van": "朝斗仰斗爵祿榮昌，文桂文華九重貴顯。",
+      "phien_am": "Triều Đẩu ngưỡng Đẩu tước lộc vinh xương, Văn Quế Văn Hoa cửu trùng quý hiển.",
+      "nghia": "Thất Sát triều Đẩu (ở Dần, Thân) hay ngưỡng Đẩu (ở Tý, Ngọ) đều được khen có địa vị; Văn Xương, Văn Khúc cùng ở Sửu, Mùi (cách Văn Quế Văn Hoa) thì được trọng tới chốn cao.",
+      "sao": [
+        "Thất Sát",
+        "Văn Xương",
+        "Văn Khúc"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "that_sat_trieu_dau",
+        "that_sat_nguong_dau",
+        "xuong_khuc_dong_cung"
+      ],
+      "khi": "Thất Sát toạ Mệnh ở Dần, Thân, Tý, Ngọ, hoặc Văn Xương, Văn Khúc cùng ở cung Mệnh tại Sửu, Mùi",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 55 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 鬥→斗 (bản phồn thể đối chiếu chuyển nhầm 斗)"
+    },
+    {
+      "id": "ctp_56",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 56,
+      "nguyen_van": "丹墀桂墀早遂青雲之志，合祿拱祿定為巨擘之臣。",
+      "phien_am": "Đan trì Quế trì tảo toại thanh vân chi chí, hợp Lộc củng Lộc định vi cự phách chi thần.",
+      "nghia": "Thái Dương, Thái Âm ở chỗ sáng (cách Đan Trì, Quế Trì) thì sớm đạt chí lớn; sao Lộc hợp về, chiếu về Mệnh thì thành người đứng đầu trong nghề.",
+      "sao": [
+        "Thái Dương",
+        "Thái Âm",
+        "Lộc Tồn"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Lộc"
+      ],
+      "cach_cuc": [
+        "dan_tri_que_tri"
+      ],
+      "khi": "Thái Dương ở Thìn, Tỵ, Ngọ hoặc Thái Âm ở Dậu, Tuất, Hợi thủ Mệnh, hoặc sao Lộc từ cung lục hợp, tam hợp chiếu về Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 56 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 誌→志"
+    },
+    {
+      "id": "ctp_57",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 57,
+      "nguyen_van": "陰陽會昌曲出世榮華，輔弼遇財官衣緋著紫。",
+      "phien_am": "Âm Dương hội Xương Khúc xuất thế vinh hoa, Phù Bật ngộ Tài Quan y phi trước tử.",
+      "nghia": "Thái Âm, Thái Dương gặp Văn Xương, Văn Khúc thì sớm vẻ vang; Tả Phù, Hữu Bật ở cung Tài Bạch, Quan Lộc thì 'mặc áo đỏ áo tía', được giao chức trách, có người giúp việc.",
+      "sao": [
+        "Thái Âm",
+        "Thái Dương",
+        "Văn Xương",
+        "Văn Khúc",
+        "Tả Phù",
+        "Hữu Bật"
+      ],
+      "cung": [
+        "Mệnh",
+        "Tài Bạch",
+        "Quan Lộc"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Thái Dương, Thái Âm hội Văn Xương, Văn Khúc về Mệnh, hoặc Tả Phù, Hữu Bật ở cung Tài Bạch, Quan Lộc",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 57 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_58",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 58,
+      "nguyen_van": "巨梁相會廉貞並，合祿鴛鴦一世榮。",
+      "phien_am": "Cự Lương tương hội Liêm Trinh tịnh, hợp Lộc uyên ương nhất thế vinh.",
+      "nghia": "Cự Môn, Thiên Lương hội nhau lại có Liêm Trinh, thêm cách Lộc hợp uyên ương (Lộc Tồn và Hoá Lộc gặp nhau) thì một đời vinh hiển.",
+      "sao": [
+        "Cự Môn",
+        "Thiên Lương",
+        "Liêm Trinh",
+        "Lộc Tồn"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Lộc"
+      ],
+      "cach_cuc": [
+        "loc_hop_uyen_uong"
+      ],
+      "khi": "Cự Môn, Thiên Lương, Liêm Trinh hội về Mệnh, có Lộc Tồn và Hoá Lộc gặp nhau",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 58 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_59",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 59,
+      "nguyen_van": "武曲閑宮多手藝，貪狼陷地作屠人。",
+      "phien_am": "Vũ Khúc nhàn cung đa thủ nghệ, Tham Lang hãm địa tác đồ nhân.",
+      "nghia": "Vũ Khúc ở cung nhàn (không đắc lực) thì giỏi tay nghề, sống bằng nghề khéo tay; Tham Lang hãm thì sách xưa nói làm nghề hàng thịt — ngày nay hiểu là hợp nghề tay chân, kỹ thuật, chế biến; nghề nào làm chân chính cũng đáng quý.",
+      "sao": [
+        "Vũ Khúc",
+        "Tham Lang"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Vũ Khúc toạ Mệnh ở cung kém sáng, hoặc Tham Lang hãm ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 59 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_60",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 60,
+      "nguyen_van": "天祿朝垣身榮貴顯，魁星臨命位列三臺。",
+      "phien_am": "Thiên Lộc triều viên thân vinh quý hiển, Khôi tinh lâm mệnh vị liệt tam thai.",
+      "nghia": "Lộc Tồn chiếu về Mệnh thì bản thân được vẻ vang; Thiên Khôi ở cung Mệnh thì được xếp vào hàng trên, dễ có người quý giúp.",
+      "sao": [
+        "Lộc Tồn",
+        "Thiên Khôi"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Lộc Tồn chiếu về Mệnh, hoặc Thiên Khôi ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 60 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_61",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 61,
+      "nguyen_van": "武曲居乾戌亥上，最怕太陰逢貪狼。",
+      "phien_am": "Vũ Khúc cư Càn Tuất Hợi thượng, tối phạ Thái Âm phùng Tham Lang.",
+      "nghia": "Vũ Khúc ở phương Càn (cung Tuất, Hợi) thì sợ nhất gặp Thái Âm với Tham Lang. Ý là tổ hợp này dễ sinh ham muốn quá đà về tiền và vui chơi, nên giữ nguyên tắc chi tiêu.",
+      "sao": [
+        "Vũ Khúc",
+        "Thái Âm",
+        "Tham Lang"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Vũ Khúc ở cung Tuất hoặc Hợi gặp Thái Âm, Tham Lang",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 61 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 幹→乾 (phương Càn)"
+    },
+    {
+      "id": "ctp_62",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 62,
+      "nguyen_van": "化祿還為好，休向墓中藏。",
+      "phien_am": "Hoá Lộc hoàn vi hảo, hưu hướng mộ trung tàng.",
+      "nghia": "Hoá Lộc vốn là tốt, nhưng đừng để nó nằm ở cung mộ (Thìn, Tuất, Sửu, Mùi): ở đó lộc như bị cất kín, khó dùng. Ý thực tế: có lộc thì đưa vào việc, đừng để đọng.",
+      "sao": [],
+      "cung": [],
+      "hoa": [
+        "Lộc"
+      ],
+      "cach_cuc": [],
+      "khi": "Hoá Lộc ở cung Thìn, Tuất, Sửu hoặc Mùi",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 62 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_63",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 63,
+      "nguyen_van": "子午巨門石中隱玉，明祿暗祿錦上添花。",
+      "phien_am": "Tý Ngọ Cự Môn thạch trung ẩn ngọc, minh Lộc ám Lộc cẩm thượng thiêm hoa.",
+      "nghia": "Cự Môn ở Tý, Ngọ như ngọc ẩn trong đá, tài có mà cần thời gian mới lộ; có Lộc ở Mệnh và Lộc ngầm ở cung lục hợp thì như gấm thêm hoa.",
+      "sao": [
+        "Cự Môn",
+        "Lộc Tồn"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Lộc"
+      ],
+      "cach_cuc": [
+        "thach_trung_an_ngoc",
+        "minh_loc_am_loc"
+      ],
+      "khi": "Cự Môn toạ Mệnh ở Tý, Ngọ, hoặc Mệnh có sao Lộc và cung lục hợp với Mệnh cũng có sao Lộc",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 63 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_64",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 64,
+      "nguyen_van": "紫微辰戌遇破軍，富而不貴有虛名。",
+      "phien_am": "Tử Vi Thìn Tuất ngộ Phá Quân, phú nhi bất quý hữu hư danh.",
+      "nghia": "Tử Vi ở Thìn, Tuất gặp Phá Quân từ cung đối diện thì có của mà danh không thật xứng. Gợi ý: muốn được trọng, nên làm việc có thành quả rõ ràng hơn là chú trọng danh nghĩa.",
+      "sao": [
+        "Tử Vi",
+        "Phá Quân"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Tử Vi toạ Mệnh ở Thìn hoặc Tuất, có Phá Quân ở cung đối diện",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 64 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_65",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 65,
+      "nguyen_van": "昌曲破軍逢刑克多勞碌，貪武墓中居三十才發福。",
+      "phien_am": "Xương Khúc Phá Quân phùng hình khắc đa lao lục, Tham Vũ mộ trung cư tam thập tài phát phúc.",
+      "nghia": "Văn Xương, Văn Khúc gặp Phá Quân lại thêm sao hình thì nhiều vất vả; Tham Lang, Vũ Khúc ở cung mộ (Sửu, Mùi) thì khoảng sau ba mươi tuổi mới khá lên — đi đường dài, đừng nản sớm.",
+      "sao": [
+        "Văn Xương",
+        "Văn Khúc",
+        "Phá Quân",
+        "Tham Lang",
+        "Vũ Khúc"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [
+        "tham_vu_dong_hanh"
+      ],
+      "khi": "Văn Xương, Văn Khúc gặp Phá Quân ở cung Mệnh, hoặc Tham Lang cùng Vũ Khúc toạ Mệnh ở Sửu, Mùi",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 65 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_66",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 66,
+      "nguyen_van": "天同戌宮為反背，丁人化吉主大貴。",
+      "phien_am": "Thiên Đồng Tuất cung vi phản bối, Đinh nhân hoá cát chủ đại quý.",
+      "nghia": "Thiên Đồng ở cung Tuất là chỗ 'quay lưng', kém sáng; nhưng người sinh năm can Đinh có Thiên Đồng hoá Quyền nên chuyển thành tốt, sách khen rất quý.",
+      "sao": [
+        "Thiên Đồng"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Quyền"
+      ],
+      "cach_cuc": [
+        "hoa_tinh_phan_quy"
+      ],
+      "khi": "Thiên Đồng toạ Mệnh ở Tuất và sinh năm can Đinh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 66 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_67",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 67,
+      "nguyen_van": "巨門辰戌為陷地，辛人化吉祿崢嶸。",
+      "phien_am": "Cự Môn Thìn Tuất vi hãm địa, Tân nhân hoá cát lộc tranh vanh.",
+      "nghia": "Cự Môn ở Thìn, Tuất là chỗ hãm; người sinh năm can Tân có Cự Môn hoá Lộc thì đổi thành tốt, lộc dồi dào.",
+      "sao": [
+        "Cự Môn"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Lộc"
+      ],
+      "cach_cuc": [
+        "hoa_tinh_phan_quy"
+      ],
+      "khi": "Cự Môn toạ Mệnh ở Thìn hoặc Tuất và sinh năm can Tân",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 67 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_68",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "cach_quy_3",
+      "thu_tu": 68,
+      "nguyen_van": "機梁酉上化吉者，縱遇財官也不榮。",
+      "phien_am": "Cơ Lương Dậu thượng hoá cát giả, túng ngộ tài quan dã bất vinh.",
+      "nghia": "Thiên Cơ, Thiên Lương ở cung Dậu dù được hoá tốt thì có tiền, có chức cũng khó thấy vẻ vang. Ý: đừng chỉ nhìn hoá tốt, còn phải xem sao đứng ở chỗ nào.",
+      "sao": [
+        "Thiên Cơ",
+        "Thiên Lương"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Thiên Cơ hoặc Thiên Lương toạ Mệnh ở Dậu, dù được hoá tốt",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 68 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_69",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_menh",
+      "thu_tu": 69,
+      "nguyen_van": "日月最嫌反背乃為失輝，命身定要精求恐差分數。",
+      "phien_am": "Nhật Nguyệt tối hiềm phản bối nãi vi thất huy, mệnh thân định yếu tinh cầu khủng sai phân số.",
+      "nghia": "Thái Dương, Thái Âm ngại nhất là 'phản bối': đứng chỗ tối, mất ánh sáng. Đọc Mệnh và Thân phải xem thật kỹ, sai một chút là lệch cả lời luận.",
+      "sao": [
+        "Thái Dương",
+        "Thái Âm"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Thái Dương hoặc Thái Âm ở cung hãm của Mệnh hay Thân",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 69 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_70",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_menh",
+      "thu_tu": 70,
+      "nguyen_van": "陰騭延年增百福，至於陷地不遭傷。",
+      "phien_am": "Âm chất diên niên tăng bách phúc, chí ư hãm địa bất tao thương.",
+      "nghia": "Sống tử tế, làm điều thiện không cần ai biết thì sống lâu, thêm phúc; dù sao ở chỗ hãm cũng không bị tổn hại. Đây là lời sách xưa nhắc rằng cách sống quan trọng hơn lá số.",
+      "sao": [],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 70 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_71",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "van_menh",
+      "thu_tu": 71,
+      "nguyen_van": "命實運堅稿田得雨，命衰限弱嫩草遭霜。",
+      "phien_am": "Mệnh thực vận kiên cảo điền đắc vũ, mệnh suy hạn nhược nộn thảo tao sương.",
+      "nghia": "Mệnh chắc, vận bền thì như ruộng khô gặp mưa; Mệnh yếu mà hạn cũng yếu thì như cỏ non gặp sương. Lúc như vậy nên làm chậm, giữ những gì đang có.",
+      "sao": [],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Mệnh và vận cùng vững, hoặc Mệnh và hạn cùng yếu",
+      "chu_thich": "Bản chép dùng chữ 稿; theo văn cảnh (ruộng gặp mưa) nghĩa là 'khô'.",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 71 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_72",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_tinh",
+      "thu_tu": 72,
+      "nguyen_van": "論命必推星善惡，巨破擎羊性必剛。",
+      "phien_am": "Luận mệnh tất suy tinh thiện ác, Cự Phá Kình Dương tính tất cương.",
+      "nghia": "Luận số phải xét sao lành hay sao dữ; Cự Môn, Phá Quân, Kình Dương ở Mệnh thì tính cứng, thẳng — có lợi khi cần quyết đoán, nhưng nên mềm lời khi làm việc với người.",
+      "sao": [
+        "Cự Môn",
+        "Phá Quân",
+        "Kình Dương"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Cự Môn, Phá Quân hoặc Kình Dương ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 72 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_73",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_tinh",
+      "thu_tu": 73,
+      "nguyen_van": "府相同梁性必好，火劫空貪性不常。",
+      "phien_am": "Phủ Tướng Đồng Lương tính tất hảo, Hoả Kiếp Không Tham tính bất thường.",
+      "nghia": "Thiên Phủ, Thiên Tướng, Thiên Đồng, Thiên Lương ở Mệnh thì tính hiền hoà, dễ mến; Hoả Tinh, Địa Kiếp, Địa Không, Tham Lang thì tính hay đổi, nhanh nóng nhanh nguội — nên tập dừng lại một nhịp trước khi quyết.",
+      "sao": [
+        "Thiên Phủ",
+        "Thiên Tướng",
+        "Thiên Đồng",
+        "Thiên Lương",
+        "Hỏa Tinh",
+        "Địa Kiếp",
+        "Địa Không",
+        "Tham Lang"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Thiên Phủ, Thiên Tướng, Thiên Đồng, Thiên Lương ở cung Mệnh, hoặc Hoả Tinh, Địa Kiếp, Địa Không, Tham Lang ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 73 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_74",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_tinh",
+      "thu_tu": 74,
+      "nguyen_van": "昌曲祿機清秀巧，陰陽左右最慈祥。",
+      "phien_am": "Xương Khúc Lộc Cơ thanh tú xảo, Âm Dương Tả Hữu tối từ tường.",
+      "nghia": "Văn Xương, Văn Khúc, Lộc Tồn, Thiên Cơ ở Mệnh thì người thanh tú, khéo léo; Thái Âm, Thái Dương, Tả Phù, Hữu Bật thì hiền từ, hoà nhã nhất.",
+      "sao": [
+        "Văn Xương",
+        "Văn Khúc",
+        "Lộc Tồn",
+        "Thiên Cơ",
+        "Thái Âm",
+        "Thái Dương",
+        "Tả Phù",
+        "Hữu Bật"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Văn Xương, Văn Khúc, Lộc Tồn, Thiên Cơ, hoặc Thái Âm, Thái Dương, Tả Phù, Hữu Bật ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 74 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_75",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "tinh_tinh",
+      "thu_tu": 75,
+      "nguyen_van": "武破貞貪沖合曲全固貴，羊陀七殺相雜互見則傷。",
+      "phien_am": "Vũ Phá Trinh Tham xung hợp khúc toàn cố quý, Dương Đà Thất Sát tương tạp hỗ kiến tắc thương.",
+      "nghia": "Vũ Khúc, Phá Quân, Liêm Trinh, Tham Lang chiếu nhau, hợp nhau một cách trọn vẹn thì vẫn quý; nếu Kình Dương, Đà La, Thất Sát chen lẫn vào nhau thì dễ tổn hại. Ý: cùng một nhóm sao, gặp thêm sao nào mới là điều quyết định.",
+      "sao": [
+        "Vũ Khúc",
+        "Phá Quân",
+        "Liêm Trinh",
+        "Tham Lang",
+        "Kình Dương",
+        "Đà La",
+        "Thất Sát"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Vũ Khúc, Phá Quân, Liêm Trinh, Tham Lang hội về Mệnh, hoặc Kình Dương, Đà La, Thất Sát cùng hội về Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 75 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_76",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "sao_kho",
+      "thu_tu": 76,
+      "nguyen_van": "貪狼廉貞破軍惡，七殺擎羊陀羅凶。",
+      "phien_am": "Tham Lang Liêm Trinh Phá Quân ác, Thất Sát Kình Dương Đà La hung.",
+      "nghia": "Sách xếp Tham Lang, Liêm Trinh, Phá Quân vào nhóm sao dữ, Thất Sát, Kình Dương, Đà La vào nhóm sao hung. 'Dữ' ở đây là sao mạnh, khó chiều: dùng đúng chỗ thì thành sức bật, dùng sai thì thành va chạm.",
+      "sao": [
+        "Tham Lang",
+        "Liêm Trinh",
+        "Phá Quân",
+        "Thất Sát",
+        "Kình Dương",
+        "Đà La"
+      ],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 76 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT); sửa chữ: 兇→凶 (giữ chữ 凶 như bản giản thể và cách viết đời Minh)"
+    },
+    {
+      "id": "ctp_77",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "sao_kho",
+      "thu_tu": 77,
+      "nguyen_van": "火星鈴星專作禍，劫空傷使禍重重。",
+      "phien_am": "Hoả Tinh Linh Tinh chuyên tác hoạ, Kiếp Không Thương Sứ hoạ trùng trùng.",
+      "nghia": "Hoả Tinh, Linh Tinh hay gây chuyện bất ngờ; Địa Kiếp, Địa Không, Thiên Thương, Thiên Sứ gặp nhau thì rắc rối chồng chất. Hạn có các sao này nên làm việc có dự phòng, kiểm lại giấy tờ, đi lại cẩn thận.",
+      "sao": [
+        "Hỏa Tinh",
+        "Linh Tinh",
+        "Địa Kiếp",
+        "Địa Không",
+        "Thiên Thương",
+        "Thiên Sứ"
+      ],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "vận hạn có Hoả Tinh, Linh Tinh, hoặc Địa Kiếp, Địa Không, Thiên Thương, Thiên Sứ cùng gặp",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 77 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_78",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "sao_kho",
+      "thu_tu": 78,
+      "nguyen_van": "巨門忌星皆不吉，運身命限忌相逢。",
+      "phien_am": "Cự Môn Kỵ tinh giai bất cát, vận thân mệnh hạn kỵ tương phùng.",
+      "nghia": "Cự Môn và Hoá Kỵ đều không phải sao lành; ngại nhất là chúng gặp nhau ở Mệnh, Thân hay ở vận hạn — dễ sinh hiểu lầm, thị phi. Nên nói ít, giữ lời, ghi rõ thoả thuận.",
+      "sao": [
+        "Cự Môn"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [
+        "Kỵ"
+      ],
+      "cach_cuc": [
+        "hoa_ky_thu_menh"
+      ],
+      "khi": "Cự Môn và Hoá Kỵ cùng gặp ở Mệnh, Thân hoặc ở vận hạn",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 78 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_79",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "sao_kho",
+      "thu_tu": 79,
+      "nguyen_van": "更兼太歲官符至，官非口舌決不空。",
+      "phien_am": "Cánh kiêm Thái Tuế Quan Phù chí, quan phi khẩu thiệt quyết bất không.",
+      "nghia": "Nếu thêm Thái Tuế, Quan Phù đến cùng lúc thì chuyện giấy tờ, lời qua tiếng lại khó tránh. Năm như vậy nên làm đúng thủ tục, giữ chứng từ, và chọn hoà giải trước khi tranh cãi.",
+      "sao": [
+        "Thái Tuế",
+        "Quan Phù"
+      ],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "vận hạn có Cự Môn, Hoá Kỵ lại gặp Thái Tuế, Quan Phù",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 79 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_80",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "sao_kho",
+      "thu_tu": 80,
+      "nguyen_van": "吊客喪門又相遇，管教災病兩相攻。",
+      "phien_am": "Điếu Khách Tang Môn hựu tương ngộ, quản giáo tai bệnh lưỡng tương công.",
+      "nghia": "Lại gặp Điếu Khách, Tang Môn thì sách nói chuyện buồn và chuyện ốm đau dễ đến cùng lúc. Đọc ngày nay: năm như vậy nên chăm sóc phòng ngừa, khám định kỳ, để ý người lớn tuổi trong nhà; đây là quan niệm sách xưa, không thay lời bác sĩ.",
+      "sao": [
+        "Điếu Khách",
+        "Tang Môn"
+      ],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "vận hạn có Điếu Khách, Tang Môn cùng gặp",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 80 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_81",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "sao_kho",
+      "thu_tu": 81,
+      "nguyen_van": "七殺守身終是夭，貪狼入命必為娼。",
+      "phien_am": "Thất Sát thủ thân chung thị yểu, Tham Lang nhập mệnh tất vi xướng.",
+      "nghia": "Hai vế này là lời phán rất khắt khe của sách xưa về Thất Sát ở cung Thân và Tham Lang ở cung Mệnh. Hiểu Bản Thân không dùng lời này để đánh giá ai: Thất Sát cho thấy người hay dấn thân, nên biết lượng sức; Tham Lang cho thấy người giàu cảm xúc, thích giao du, nên chọn bạn và giữ ranh giới.",
+      "sao": [
+        "Thất Sát",
+        "Tham Lang"
+      ],
+      "cung": [
+        "Mệnh"
+      ],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": "Thất Sát ở cung Thân, hoặc Tham Lang ở cung Mệnh",
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 81 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_82",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "loi_ket",
+      "thu_tu": 82,
+      "nguyen_van": "心好命微亦主壽，心毒命固亦夭亡。",
+      "phien_am": "Tâm hảo mệnh vi diệc chủ thọ, tâm độc mệnh cố diệc yểu vong.",
+      "nghia": "Lòng tốt mà số mỏng vẫn được sống lâu; lòng độc ác thì số có vững cũng không bền. Bài phú kết lại ở chỗ: cách sống của mình nặng hơn lá số.",
+      "sao": [],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 82 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_83",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "loi_ket",
+      "thu_tu": 83,
+      "nguyen_van": "今人命有千金貴，運去之時豈久長。",
+      "phien_am": "Kim nhân mệnh hữu thiên kim quý, vận khứ chi thời khởi cửu trường.",
+      "nghia": "Người nay dù số quý ngàn vàng, khi vận qua đi cũng chẳng giữ mãi được. Lúc thuận nên tích luỹ cho lúc nghịch.",
+      "sao": [],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 83 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    },
+    {
+      "id": "ctp_84",
+      "source_id": "cot_tuy_phu",
+      "school_id": "tu_vi_dau_so",
+      "chuong": "loi_ket",
+      "thu_tu": 84,
+      "nguyen_van": "數內包藏多少理，學者須當仔細詳。",
+      "phien_am": "Số nội bao tàng đa thiểu lý, học giả tu đương tử tế tường.",
+      "nghia": "Trong môn Tử vi chứa nhiều lẽ, người học phải xem cho tường tận. Câu kết nhắc đừng đọc vội một câu phú rồi kết luận về ai.",
+      "sao": [],
+      "cung": [],
+      "hoa": [],
+      "cach_cuc": [],
+      "khi": null,
+      "trang_thai": "nhap",
+      "can_doi_chieu": true,
+      "ban_doi_chieu": "Wikisource zh 紫微斗數全書/全覽 oldid 850734, mục 斗数骨髓赋, dòng 84 (giản thể); phồn thể theo iztro-docs zh_TW/learn/ancientBook-1.md (MIT)"
+    }
+  ]
+}

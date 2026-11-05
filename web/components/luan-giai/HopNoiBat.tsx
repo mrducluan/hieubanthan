@@ -57,9 +57,12 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
   const nhan = hop.nhan ?? nhanLoai;
   const idTieuDe = useId();
   const khoang = hop.tu && hop.den ? `${ngayDuong(hop.tu)} – ${ngayDuong(hop.den)} dương lịch`
-    : typeof hop.tu_tuoi === "number" && typeof hop.den_tuoi === "number" ? `${hop.tu_tuoi}–${hop.den_tuoi} tuổi` : null;
+    : typeof hop.tu_tuoi === "number" && typeof hop.den_tuoi === "number" ? `${hop.tu_tuoi}–${hop.den_tuoi} tuổi`
+    // CY-1 / SK-1: hộp "Năm nên chú ý … hơn" — hàng dưới nêu các năm (lời nhắc chủ động, không có chip mức)
+    : hop.cac_nam?.length ? `Năm ${hop.cac_nam.join(" · ")}` : null;
   return (
     <section role="note" aria-labelledby={idTieuDe} data-loai={hop.loai} data-testid="hop-noi-bat"
+      data-chu-y={hop.chu_y?.join(" ") || undefined}
       className={cn("hop-nb flex flex-col rounded-2xl p-4", className)}>
       {/* Mức của hộp thời điểm đứng cùng hàng nhãn, góc phải — lướt qua lưới 12 tháng / dòng giai đoạn là thấy ngay
           tháng nào thuận, tháng nào cần lưu ý, không phải đọc hết hộp. Hàng dưới chỉ còn khoảng ngày / tuổi. */}
@@ -81,6 +84,13 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
         data-testid={hop.lop?.length ? "hop-tom-lai" : undefined}>{hop.noi_dung}</p>}
       {hop.huong_xu_ly && !hop.noi_dung.includes(hop.huong_xu_ly) && (
         <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg"><b className="hop-nhan font-semibold">Nên:</b> {hop.huong_xu_ly}</p>
+      )}
+      {hop.y_bo_sung?.noi_dung && (
+        // TV-YBS: ý bổ sung gộp vào hộp (cùng nội dung) — một câu thêm sắc thái + một việc, chữ nhỏ hơn lời chính.
+        <div className="mt-2 border-l-2 border-line/70 pl-3 text-sm leading-relaxed text-fg-muted" data-testid="hop-y-bo-sung">
+          <p>{hop.y_bo_sung.noi_dung}</p>
+          {hop.y_bo_sung.viec && <p className="mt-1"><b className="hop-nhan font-semibold">Thử:</b> {hop.y_bo_sung.viec}</p>}
+        </div>
       )}
       {hop.lop && hop.lop.length > 0 && <CacLop lop={hop.lop} />}
       {hop.an_toan && hop.an_toan.length > 1 && (

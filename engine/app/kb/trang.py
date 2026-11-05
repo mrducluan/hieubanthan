@@ -28,7 +28,7 @@ CAP_NHAT = "2026-10-07"
 INDEX_NHAP_AI = True
 
 LOAI = ("so", "que", "sao", "cung", "thap_than", "nhat_chu", "cap_so", "nghe", "tinh_yeu", "nam_ca_nhan", "no_nghiep",
-        "sao_cung", "hoa_cung", "menh_nam", "so_kep", "dau_hieu")
+        "sao_cung", "hoa_cung", "menh_nam", "so_kep", "dau_hieu", "co_thu")
 _SO = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33")
 _SO_GOC = {"11": "2", "22": "4", "33": "6"}
 _LINH_VUC_QUE = {"cong_viec": "Công việc", "tinh_cam": "Tình cảm", "gia_dinh": "Gia đình",
@@ -242,6 +242,9 @@ def _trang_sao(ten: str, slug: str) -> dict:
                 "doan": (f"Cung nào chứa {ten} cũng rơi vào một trong 12 chi. Ở mỗi chi, độ sáng (bảng Nam phái), "
                          f"chính tinh đi cùng và chính tinh ở cung đối diện là cố định:"),
                 "danh_sach": ttv.theo_chi_sao(ten)})
+    from app.kb import trang_co_thu as tct      # TV-CTP: câu Cốt Tuỷ Phú nhắc sao này (≤ 2 câu, trỏ về trang trụ)
+    if (ct := tct.muc_trich(sao=ten)):
+        muc.append(ct)
     muc.append({"tieu_de": "Câu hỏi tự soi", "doan": s["cau_tu_soi"]})
     hoi_dap = [{"hoi": f"Sao {ten} trong Tử vi là gì?", "dap": tra_loi},
                {"hoi": f"Mặt tối của sao {ten}?", "dap": _cau(s["mat_toi"])}]
@@ -249,7 +252,7 @@ def _trang_sao(ten: str, slug: str) -> dict:
         hoi_dap.insert(1, {"hoi": f"Sao {ten} thủ cung Mệnh nói gì?", "dap": o_cung["Mệnh"]})
     ds = _ds_sao()
     i = [x for _, x in ds].index(slug)
-    return {
+    return _ttv.them_y_bo_sung({
         "loai": "sao", "slug": slug,
         "tieu_de": f"Sao {ten} ({s['ten_han']}) trong Tử vi — tính chất và 12 cung",
         "mo_ta": _cat(f"Sao {ten} ({s['ten_han']}), hành {s['ngu_hanh']}: {s['tinh_chat']} Điểm mạnh, mặt tối và ý nghĩa ở 12 cung."),
@@ -261,7 +264,7 @@ def _trang_sao(ten: str, slug: str) -> dict:
         # SEO-H: 12 trang "sao ở từng cung"
         "trang_con": {"tieu_de": f"{ten} ở từng cung",
                       "ds": [{"loai": "sao_cung", "slug": f"{_slug(ten)}-cung-{_slug(c)}"} for c in o_cung]},
-    }
+    }, "sao", ten)
 
 
 # ---- SEO-C: 12 cung Tử vi ---------------------------------------------------------
@@ -287,7 +290,7 @@ def _trang_cung(ten: str, slug: str) -> dict:
                 "dap": _cau(f"Không — cung {ten} {c['khong_tra_loi']}; nó cho thấy {c['xem_duoc']}")}]
     ds = _ds_cung()
     i = [x for _, x in ds].index(slug)
-    return {
+    return _ttv.them_y_bo_sung({
         "loai": "cung", "slug": slug,
         "tieu_de": f"Cung {ten} trong Tử vi — ý nghĩa và 14 chính tinh",
         "mo_ta": _cat(f"Cung {ten} Tử vi: {c['y_nghia']} 14 chính tinh và tứ hoá ở cung {ten}, kèm câu hỏi tự soi."),
@@ -304,7 +307,7 @@ def _trang_cung(ten: str, slug: str) -> dict:
         "trang_con": {"tieu_de": f"14 chính tinh ở cung {ten}",
                       "ds": [{"loai": "sao_cung", "slug": f"{_slug(sao)}-cung-{_slug(ten)}"}
                              for sao, o in kb["sao_cung"].items() if ten in o]},
-    }
+    }, "cung", ten)
 
 
 # ---- SEO-C: 10 thập thần · 10 nhật chủ Bát tự --------------------------------------
@@ -384,7 +387,9 @@ from app.kb import trang_menh as _tm  # noqa: E402 — SEO-J: 76 trang "sinh nă
 _TRANG.update(_tm.TRANG)
 from app.kb import trang_phongthuy as _tpt  # noqa: E402 — Y5: dấu hiệu nhà ở (bo_tri) /phong-thuy/dau-hieu
 _TRANG.update(_tpt.TRANG)
-_TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN, **_tpt.TEN_NGAN}
+from app.kb import trang_co_thu as _tct  # noqa: E402 — TV-CTP: cổ thư Tử vi /tu-vi/co-thu (Đẩu Số Cốt Tuỷ Phú)
+_TRANG.update(_tct.TRANG)
+_TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN, **_tpt.TEN_NGAN, **_tct.TEN_NGAN}
 from app.kb import bo_sung as _bs  # noqa: E402 — SEO-M: nội dung bổ sung trang mỏng (KB bo_sung_<loai>.json)
 _TRANG = {k: (ds, _bs.boc(dung)) for k, (ds, dung) in _TRANG.items()}
 

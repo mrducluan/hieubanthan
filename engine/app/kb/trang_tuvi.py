@@ -105,6 +105,207 @@ def _loi_doi_song(sao: str, cung: str, tt: str) -> list[str]:
 _KHONG_THAY_BAC_SI = "Đây là thói quen nên để ý theo quan niệm Tử vi, không phải chẩn đoán và không thay lời bác sĩ."
 
 
+# ---- TV-YBS đợt 3: ý Tử vi bổ sung (KB tuvi_y_bo_sung.json) trên trang kiến thức -----------------------------
+# Bộ lọc TĨNH (chỉ sao, cung, hoá, độ sáng, chi ghi trong điều kiện) — trang kiến thức không có lá số để xét lá thật.
+# Nơi đặt một ý (một nơi cho mỗi cặp, tránh lặp chữ giữa các họ trang):
+#   chính tinh + cung cụ thể + sao toạ ở cung đó → "sao ở cung" · chính tinh không gắn cung → trang sao
+#   hoá + cung cụ thể (không có chính tinh, hoá toạ) → "Hoá ở cung" · còn lại có cung cụ thể → trang cung.
+# Bỏ qua: ý cần hai lá số, ý theo nhóm chính tinh, ý mà điều kiện thật chỉ nằm trong ghi chú (chưa cơ học hoá) hoặc
+# cần so sánh / điều kiện ở cung khác, ý trải > 4 cung. Lời trang = `loi_doi_thuong` + `viec_nen_lam`, đầu dòng là
+# điều kiện viết bằng lời (dựng từ `dieu_kien`). Không nêu tên người / khoá học (BM-1).
+_TOI_DA_Y = 3
+_BO_QUA_DK = ("hai_nguoi", "nhom", "nhom_ca_hai", "so_sanh", "can_them")
+_CO_CAU_TRUC = ("sao", "sao_mot_trong", "sao_cap_mot_trong", "hoa", "hoa_tat_ca", "hoa_tren_sao",
+                "hoa_tren_sao_mot_trong", "do_sang", "chi", "khong_chinh_tinh", "khong_co_cat_tinh", "gap", "hoac")
+_LOP = {"dai_han": "mười năm (đại hạn)", "luu_nien": "năm (lưu niên)", "tieu_han": "tiểu hạn"}
+_TUOI = {"dai_han_dau": "ở giai đoạn mười năm đầu đời",
+         "dai_han_dau_hoac_hai": "ở một trong hai giai đoạn mười năm đầu đời"}
+_GAP = {"sat_tinh": "gặp sát tinh", "cat_tinh": "gặp cát tinh", "nhieu_sat_hoac_ky": "gặp nhiều sát tinh hoặc Hoá Kỵ"}
+_NGUON_Y = "Một trường phái Tử vi tam hợp hiện đại — ý luận đoán, ban biên tập rút ý và viết lại."
+_SUC_KHOE = re.compile(r"sức khoẻ|sức khỏe|đôi mắt|\bkhám\b|cơ thể", re.I)
+
+
+def _l(x) -> list:
+    return [] if x is None else [x] if isinstance(x, str) else list(x)
+
+
+def _ybs() -> list[dict]:
+    from app.kb import tuvi_y_bo_sung as ybs
+    return ybs.tat_ca()
+
+
+def _sao_trong_dk(dk: dict) -> list[str]:
+    ra = _l(dk.get("sao")) + _l(dk.get("sao_mot_trong")) + [s for c in dk.get("sao_cap_mot_trong") or [] for s in c]
+    return list(dict.fromkeys(ra + _l(dk.get("hoa_tren_sao")) + _l(dk.get("hoa_tren_sao_mot_trong"))))
+
+
+def _noi_mot(m: dict) -> list[tuple[str, object]]:
+    """MỘT trang cho mỗi ý: ý khớp nhiều trang cùng họ (vd "Mệnh hoặc Quan Lộc", cặp sao) chỉ đặt ở trang đầu tiên
+    (cung / sao KB ghi trước) — chữ lặp ở nhiều trang cùng họ làm giảm phần riêng (SEO-K/M)."""
+    return _noi_tat_ca(m)[:1]
+
+
+def _noi_tat_ca(m: dict) -> list[tuple[str, object]]:
+    dk = m["dieu_kien"]
+    if any(k in dk for k in _BO_QUA_DK):
+        return []
+    cung = [c for c in _l(dk.get("cung")) if c != "bat_ky"]
+    if isinstance(dk.get("cung_than"), str):
+        cung.append(dk["cung_than"])
+    if "ghi_chu" in dk and not any(k in dk for k in _CO_CAU_TRUC):
+        return []                                  # điều kiện thật chỉ nằm trong ghi chú
+    if len(cung) > 4:
+        return []
+    chinh = [s for s in _sao_trong_dk(dk) if s in _kb()["chinh_tinh"]]
+    toa = "toa" in _l(dk.get("vi_tri") or "toa")
+    hoa = _l(dk.get("hoa")) + _l(dk.get("hoa_tat_ca"))
+    if chinh and cung and toa:
+        return [("sao_cung", (s, c)) for s in chinh for c in cung if c in _kb()["sao_cung"].get(s, {})]
+    if chinh and not cung:
+        return [("sao", s) for s in chinh]
+    if cung and toa and hoa and not chinh and dk.get("vi_tri_hoa", "toa") == "toa":
+        return [("hoa_cung", (h, c)) for h in hoa for c in cung if c in _kb()["tu_hoa_cung"].get(h, {})]
+    return [("cung", c) for c in cung if c in _kb()["cung"]]
+
+
+def noi_y_bo_sung() -> dict[str, list[tuple[str, object]]]:
+    """Mã ý → các trang (loại, khoá) đặt ý đó. Ý không trang nào → không có mặt."""
+    return {m["id"]: n for m in _ybs() if (n := _noi_mot(m))}
+
+
+def y_cho_trang(loai: str, k) -> list[dict]:
+    """Ý bổ sung của một trang (≤ 3 ý mỗi nhóm hiển thị, theo thứ tự KB)."""
+    ra = {"hop": [], "goc_nhin_khac": []}
+    for m in _ybs():
+        if (loai, k) in _noi_mot(m) and len(ra[m["hien_thi"]]) < _TOI_DA_Y:
+            ra[m["hien_thi"]].append(m)
+    return ra["hop"] + ra["goc_nhin_khac"]
+
+
+def _hoac(ds: list[str]) -> str:
+    return ", ".join(ds[:-1]) + " hoặc " + ds[-1] if len(ds) > 1 else (ds[0] if ds else "")
+
+
+def _khi(dk: dict) -> str:
+    """Điều kiện tĩnh viết bằng lời: chủ thể (sao / hoá / cung) + nơi chốn, rồi các điều kiện phụ cách nhau dấu phẩy —
+    vd "Khi Liêm Trinh và Thất Sát đồng cung, đều sáng (Miếu, Vượng, Đắc)", "Khi Tham Lang ở cung Mệnh, cung ở Tý hoặc Hợi",
+    "Khi mười năm (đại hạn) đi qua cung có Thất Sát"."""
+    sao, mot, cap = _l(dk.get("sao")), _l(dk.get("sao_mot_trong")), dk.get("sao_cap_mot_trong") or []
+    hoa, tren = _l(dk.get("hoa")), _l(dk.get("hoa_tren_sao")) + _l(dk.get("hoa_tren_sao_mot_trong"))
+    vt = _l(dk.get("vi_tri") or "toa")
+    cung = [c for c in _l(dk.get("cung")) if c != "bat_ky"]
+    ds = dk.get("do_sang")
+    sang = ("" if ds is None else "sáng hoặc hãm" if isinstance(ds, list)
+            else ("đều " if len(sao) > 1 else "") + ("sáng (Miếu, Vượng, Đắc)" if ds == "sang" else "hãm"))
+    chu: list[str] = []                                  # chủ thể
+    if cap:
+        chu.append("cặp " + " hoặc ".join(" – ".join(c) for c in cap))
+    if sao:
+        # "sao" = các sao cùng có mặt, mặc định cùng cung; có ghi chú (vd nhật nguyệt phản bối) thì không khẳng định đồng cung
+        dong = len(sao) > 1 and "ghi_chu" not in dk
+        chu.append(_ds_ten(sao) + (" đồng cung" if dong and vt == ["toa"] else
+                                   " cùng cung hoặc ở tam phương của nhau" if dong and not cung and "tam_phuong" in vt
+                                   else ""))
+        if sang:
+            chu[-1] += ("," if chu[-1].endswith("đồng cung") else "") + " " + sang
+    if mot:
+        chu.append(("gặp " if chu else "có ") + _hoac(mot) + (f" {sang}" if sang and not sao and not tren else ""))
+    if tren and hoa:
+        chu.append(_hoac(tren) + (f" {sang}" if sang and not sao else "") + f" hoá {hoa[0]}")
+    elif (hoa or dk.get("hoa_tat_ca")) and dk.get("vi_tri_hoa") != "xung_chieu":
+        chu.append(("gặp " if chu else "có ") + " và ".join(f"Hoá {h}" for h in hoa or _l(dk.get("hoa_tat_ca"))))
+    noi = ""
+    if cung:
+        ten = _hoac(cung)
+        if "giap" in vt:
+            noi = f"kẹp hai bên cung {ten}"
+        elif "toa" not in vt and "tam_phuong" in vt:
+            noi = f"ở tam phương của cung {ten}"
+        else:
+            them = [c for x, c in (("tam_phuong", "tam phương"), ("xung_chieu", "cung đối diện")) if x in vt]
+            noi = f"ở cung {ten}" + (f" (hoặc {' và '.join(them)} của cung đó)" if them else "")
+    elif dk.get("chi"):
+        noi = f"ở {_hoac(_l(dk['chi']))}"
+    if dk.get("cung_than") is True:
+        noi = (noi + " " if noi else "") + "ở cung an Thân"
+    la_cung = not chu                                    # không có sao / hoá → cung là chủ thể
+    if la_cung:
+        chu, noi = [f"cung Thân nằm ở {dk['cung_than']}" if isinstance(dk.get("cung_than"), str)
+                    else f"cung {_hoac(cung)}"], ""
+    phu: list[str] = []                                  # điều kiện phụ
+    xung = dk.get("vi_tri_hoa") == "xung_chieu"
+    if xung:
+        phu.append("gặp Hoá " + _hoac(hoa) + " chiếu từ cung đối diện")
+    if dk.get("chi") and cung:
+        phu.append(f"cung ở {_hoac(_l(dk['chi']))}")
+    if dk.get("khong_chinh_tinh"):
+        phu.append("cung không có chính tinh")
+    if dk.get("gap") in _GAP:
+        phu.append(_GAP[dk["gap"]])
+    vang = [s for s in _l(dk.get("khong_co")) if "_" not in s]
+    if vang:
+        phu.append(f"không có {', '.join(vang)} đi cùng")
+    if dk.get("khong_co_hoa"):
+        phu.append("không có " + ", ".join(f"Hoá {h}" for h in _l(dk["khong_co_hoa"])))
+    if dk.get("khong_co_cat_tinh"):
+        phu.append("không có cát tinh nào đi cùng")
+    if dk.get("gioi_tinh") in ("nam", "nu"):
+        gt = "ở lá số " + ("nữ" if dk["gioi_tinh"] == "nu" else "nam")
+        noi, phu = (noi, phu + [gt]) if noi else (gt, phu)
+    lop = " hoặc ".join(_LOP[x] for x in _l(dk.get("lop")) if x in _LOP)
+    chinh = " ".join(x for x in (" ".join(chu), noi) if x)
+    if lop and (la_cung or not noi):
+        # "mười năm (đại hạn) đi qua cung Tật Ách" / "… đi qua cung có Thất Sát"
+        cau = f"{lop} đi qua {chinh}" if la_cung else f"{lop} đi qua cung có {chinh.removeprefix('có ')}"
+    else:
+        cau = chinh
+        if lop:
+            phu.append(f"trong {lop} đi qua cung đó")
+        if phu and ((la_cung and not lop) or xung or (not noi and phu[0].startswith("gặp "))):
+            cau, phu = f"{cau} {phu[0]}", phu[1:]       # "cung Phu Thê gặp sát tinh", "Thất Sát gặp Hoá Kỵ chiếu…"
+    if dk.get("tuoi") in _TUOI:
+        phu.append(_TUOI[dk["tuoi"]])
+    cau = ", ".join(x for x in (cau, *phu) if x)
+    if isinstance(dk.get("hoac"), dict):
+        cau += "; hoặc " + _khi(dk["hoac"])[4:]
+    return "Khi " + cau
+
+
+def muc_y_bo_sung(loai: str, k) -> list[dict]:
+    """0–2 mục: "Thêm một cách đọc" (ý chung) và "Góc nhìn khác (tham khảo)" (ý riêng trường phái, web hiện gập)."""
+    ds = y_cho_trang(loai, k)
+    ra = []
+    # Không thêm đoạn dẫn chung: câu lặp ở mọi trang làm giảm phần riêng; điều kiện đã ở đầu từng dòng, lời "chưa đối
+    # chiếu rộng" của nhóm góc nhìn khác do web ghi ở dòng tóm tắt khung gập.
+    for hien, tieu_de in (("hop", "Thêm một cách đọc"), ("goc_nhin_khac", "Góc nhìn khác (tham khảo)")):
+        y = [m for m in ds if m["hien_thi"] == hien]
+        if not y:
+            continue
+        dong = [f"{_khi(m['dieu_kien'])}: {_cau(m['loi_doi_thuong'])} Nên làm: {_cau(m['viec_nen_lam'])}" for m in y]
+        if any(m["loai"] == "suc_khoe_phong_ngua" or _SUC_KHOE.search(m["loi_doi_thuong"]) for m in y) \
+                and not any(re.search(r"không thay lời bác sĩ", d) for d in dong):
+            dong.append(_KHONG_THAY_BAC_SI)
+        ra.append({"ma": f"y_bo_sung_{hien}", "tieu_de": tieu_de, "danh_sach": dong, "bien_tap": True,
+                   **({"gap": True} if hien == "goc_nhin_khac" else {})})
+    return ra
+
+
+def _cau(s: str) -> str:
+    s = s.strip()
+    return s if s.endswith((".", "!", "?", "…")) else s + "."
+
+
+def them_y_bo_sung(t: dict, loai: str, k) -> dict:
+    """Chèn mục ý bổ sung trước "Câu hỏi tự soi" (mục cuối) và ghi nguồn chung một lần."""
+    moi = muc_y_bo_sung(loai, k)
+    if moi:
+        i = next((j for j, m in enumerate(t["muc"]) if m["tieu_de"] == "Câu hỏi tự soi"), len(t["muc"]))
+        t["muc"][i:i] = moi
+        if _NGUON_Y not in t["nguon"]:
+            t["nguon"].append(_NGUON_Y)
+    return t
+
+
 def _muc_su_kien_menh(sao: str, cung: str) -> dict:
     """AUD-P0: dữ kiện TÍNH riêng của trang (CALC `tuvi_vi_tri`, xét đủ 12 vị trí Tử Vi) — cung Mệnh có sao gì khi sao ở
     cung này; sao toạ Mệnh thì ba cung tam phương. Câu khung ở KB `su_kien_kb.json`."""
@@ -191,6 +392,9 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
                     "xem_them": [{"loai": "hoa_cung", "slug": f"{_slug_hoa(h)}-cung-{t._slug(cung)}"}
                                  for h in dict.fromkeys(h for _, h in hoa)]})
     muc.append(_muc_su_kien_menh(sao, cung))
+    from app.kb import trang_co_thu as tct      # TV-CTP: câu Cốt Tuỷ Phú nhắc đúng sao ở cung này
+    if (ct := tct.muc_trich(sao=sao, cung=cung)):
+        muc.append(ct)
     muc.append({"tieu_de": "Câu hỏi tự soi", "doan": s["cau_tu_soi"]})
 
     tot_xau = f"Khi sáng: {manh_sang}" if manh_sang else ""
@@ -212,7 +416,7 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
                         "dap": _hoa_dau("; ".join(f"năm {can}: hoá {h}" for can, h in hoa)) + "."})
     v = _vong()
     i = v.index(cung)
-    return {
+    return them_y_bo_sung({
         "loai": "sao_cung", "slug": slug,
         "tieu_de": f"{sao} ở cung {cung}: ý nghĩa, sáng hãm, sao đi cùng",
         "mo_ta": t._cat(f"{sao} ở cung {cung} trong Tử vi: {nd} Khi sáng, khi hãm, sao đồng cung, tam phương, tứ hoá."),
@@ -225,7 +429,7 @@ def trang_sao_cung(k: tuple[str, str], slug: str) -> dict:
                       {"loai": "sao_cung", "slug": f"{t._slug(sao)}-cung-{t._slug(v[(i - 1) % 12])}"}],
         "minh_hoa": {"kieu": "sao_cung", "ten": sao, "ten_han": s["ten_han"], "ngu_hanh": s["ngu_hanh"],
                      "chi_so": i, "vong": v},
-    }
+    }, "sao_cung", k)
 
 
 # ---- SEO-I: 48 trang "Hoá X ở cung Y" -----------------------------------------------------------------------
@@ -271,6 +475,9 @@ def trang_hoa_cung(k: tuple[str, str], slug: str) -> dict:
          "xem_them": [{"loai": "hoa_cung", "slug": f"{_slug_hoa(h)}-cung-{t._slug(x)}"} for x in (doi, th1, th2)]},
         {"tieu_de": "Lưu ý khi đọc", "doan": t._cau(th["luu_y"])},
     ]
+    from app.kb import trang_co_thu as tct      # TV-CTP: câu Cốt Tuỷ Phú nhắc Hoá này ở cung này
+    if (ct := tct.muc_trich(cung=cung, hoa=h)):
+        muc.append(ct)
     hoi_dap = [
         {"hoi": f"Hoá {h} ở cung {cung} nghĩa là gì?", "dap": f"{t._cau(nd)} {o.get('y', '')}".strip()},
         {"hoi": f"Năm sinh nào có Hoá {h}?",
@@ -283,7 +490,7 @@ def trang_hoa_cung(k: tuple[str, str], slug: str) -> dict:
     chinh = list(kb["chinh_tinh"])
     sao_con = list(dict.fromkeys(sao for _, sao in theo_can if sao in chinh))
     v = _vong()
-    return {
+    return them_y_bo_sung({
         "loai": "hoa_cung", "slug": slug,
         "tieu_de": f"Hoá {h} ở cung {cung}: ý nghĩa, năm sinh nào có",
         "mo_ta": t._cat(f"Hoá {h} ở cung {cung} trong Tử vi: {nd} Năm sinh nào có Hoá {h}, sao nào mang, tam phương tứ chính."),
@@ -296,7 +503,7 @@ def trang_hoa_cung(k: tuple[str, str], slug: str) -> dict:
         "trang_con": {"tieu_de": f"Sao mang Hoá {h} ở cung {cung}",
                       "ds": [{"loai": "sao_cung", "slug": f"{t._slug(sao)}-cung-{t._slug(cung)}"} for sao in sao_con]},
         "minh_hoa": {"kieu": "hoa_cung", "hoa": h, "chi_so": v.index(cung), "vong": v},
-    }
+    }, "hoa_cung", k)
 
 
 TRANG = {"sao_cung": (ds_sao_cung, trang_sao_cung), "hoa_cung": (ds_hoa_cung, trang_hoa_cung)}

@@ -26,7 +26,7 @@ export const ChartInput = z.object({
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).default("exact"),
   /** TV-PHAI — Hoả/Linh lối Việt | Trung Châu; nửa sau tháng nhuận tính tháng sau | như tháng chính. */
   hoa_linh: z.enum(["viet", "trung"]).optional(),
-  thang_nhuan: z.enum(["thang_sau", "thang_chinh"]).optional(),
+  thang_nhuan: z.enum(["thang_sau", "thang_chinh", "ca_thang_sau"]).optional(),
   /** TV-LICH — âm lịch Việt Nam (mặc định) | lịch Trung Quốc. */
   lich: z.enum(["viet", "trung"]).optional(),
   /** TV-LN — phái tính lưu nguyệt (tháng hạn). */
@@ -90,6 +90,8 @@ const Sao = z.object({
   giai_nghia: z.object({
     thuong_thay: z.string(), nen_lam: z.string().nullable(), can_cu: z.array(z.string()).optional(),
   }).nullable().optional(),
+  /** TV-HOA-HAN: chính tinh — slug trang kiến thức "sao ở cung" (engine dựng, một nguồn với mục lục kiến thức). */
+  trang_sao_cung: z.string().nullable().optional(),
 });
 
 const PhuTinh = Sao.extend({ loai: z.string().optional() });
@@ -110,7 +112,8 @@ const Cung = z.object({
   tue_tien: z.string(),
   /** TV-LICH: tên vòng Thái Tuế theo sách Việt (iztro dùng tên phái Trung). */
   thai_tue_nam_phai: z.string().optional(),
-  dai_han: z.object({ tu_tuoi: z.number(), den_tuoi: z.number() }),
+  /** tu_nam/den_nam (TV-HOA-HAN): năm âm lịch đầu / cuối hạn do engine tính — để nhảy năm xem tới đúng hạn. */
+  dai_han: z.object({ tu_tuoi: z.number(), den_tuoi: z.number(), tu_nam: z.number().optional(), den_nam: z.number().optional() }),
   tieu_han_tuoi: z.array(z.number()),
   /** TV-NP2 — độ sáng lối Việt của phụ tinh, tạp diệu, Đại/Tiểu Hao, Hoá Kỵ trong cung (chỉ sao có luận). */
   do_sang_phu: z.record(z.string(), z.string()).optional(),
@@ -147,12 +150,21 @@ export const LaSoOutput = z.object({
     dieu_kien: z.string(), y: z.string(), mat_toi: z.string(), loi_khuyen: z.string(),
     co_ca: z.string().optional(),   // KB-TV2: phiên âm Hán Việt bài phú cổ (cổ thư công cộng)
     cung_lien_quan: z.array(z.string()), sat_hoi: z.array(z.string()),
+    // KB-TV3: điều kiện có / điểm cộng / điểm trừ — engine tính, KB dựng chữ (chỉ thuật ngữ). Engine cũ không có.
+    dieu_kien_dat: z.array(z.object({ loai: z.enum(["can", "tang", "giam"]), noi_dung: z.string() })).optional(),
   })).optional(),
   cach_cuc_luu_y: z.string().optional(),
+  // TV-ZW "Cùng sao Mệnh": tỉ lệ thời điểm sinh (mẫu 1940–2010 × 12 canh) có cùng chính tinh cung Mệnh — không phải
+  // thống kê dân số. null khi chưa biết giờ sinh; engine cũ không có.
+  cung_sao_menh: z.object({
+    khoa: z.string(), mot_trong: z.number().int().positive(), phan_tram: z.string(),
+    muc: z.enum(["pho_bien", "it_gap"]), nhan_muc: z.string(), loi: z.string(), nhan_ngan: z.string(), can_cu: z.string(),
+  }).nullable().optional(),
   cung: z.array(Cung).length(12),
   co_canh_bao: z.array(z.object({ loai: z.string(), chi_tiet: z.string() })),
   /** TV-PHAI — trường phái đang dùng cho lá số này. */
   phai: z.object({ hoa_linh: z.string(), thang_nhuan: z.string(), co_the_doi_thang_nhuan: z.boolean(),
+    sinh_thang_nhuan: z.boolean().optional(),   // TV-NHUAN3: sinh trong tháng nhuận (mọi ngày)
     lich: z.string().optional(), lich_khac: z.boolean().optional(), luu_nguyet: z.string().optional() }).optional(),
 });
 export type LaSoOutputT = z.infer<typeof LaSoOutput>;
@@ -170,6 +182,17 @@ const LopHan = z.object({
   ten_cung: z.array(z.string()),
   sao: z.array(z.array(z.string())),
   cung_goc: z.string(),
+  /** TV-HOA-HAN: bốn sao hoá của lớp hạn + cung gốc nơi sao đóng (engine đọc từ chính lá số). Engine cũ → không có. */
+  tu_hoa_sao: z.array(z.object({
+    hoa: z.enum(["loc", "quyen", "khoa", "ky"]), sao: z.string(),
+    chi_so: z.number().int().min(0).max(11).nullable(), cung: z.string().nullable(), chi: z.string().nullable(),
+    chinh_tinh: z.boolean(),
+  })).optional(),
+  /** TV-VONG (chỉ hiển thị): vòng Thái Tuế (tên iztro = phái Trung; `_nam_phai` = tên sách Việt) + vòng Tướng tiền của
+   *  lớp hạn, 12 tên theo đúng mảng `cung` (0 = Dần). Không phép chấm mức nào đọc. Engine cũ → không có. */
+  vong_thai_tue: z.array(z.string()).optional(),
+  vong_thai_tue_nam_phai: z.array(z.string()).optional(),
+  vong_tuong_tien: z.array(z.string()).optional(),
 });
 export const VanHanOutput = z.object({
   engine_version: z.string(),
@@ -177,7 +200,8 @@ export const VanHanOutput = z.object({
   nam_xem: z.number(),
   can_chi_nam_xem: z.string(),
   tuoi_mu: z.number(),
-  dai_han: LopHan.extend({ tu_tuoi: z.number(), den_tuoi: z.number() }),
+  /** TV-DT: `dong_han` = tuổi mụ còn nhỏ hơn tuổi khởi đại hạn đầu (1 … cục − 1) — chưa vào giai đoạn 10 năm nào. */
+  dai_han: LopHan.extend({ tu_tuoi: z.number(), den_tuoi: z.number(), dong_han: z.boolean().optional() }),
   tieu_han: z.object({ chi_so: z.number(), can: z.string(), chi: z.string(), cung_goc: z.string() }),
   luu_nien: LopHan,
 });
@@ -369,6 +393,15 @@ export const DiemHaiNguoi = z.object({
 }).passthrough();
 export type DiemHaiNguoiT = z.infer<typeof DiemHaiNguoi>;
 export type TieuChiDiemT = z.infer<typeof TieuChiDiem>;
+// TV-YBS đợt 4: hộp diễn giải từ ý Tử vi bổ sung (Phu Thê / Mệnh hai lá) — KHÔNG tính vào điểm. Mã `ds.hai.*` (loại
+// kiểm chứng doi_song, migration 0017), phái = trường phái của ý.
+const HopCachDoc = z.object({
+  loai: z.literal("loi_khuyen"), nhan: z.string(),
+  tieu_de: z.string(), noi_dung: z.string(), huong_xu_ly: z.string().optional(),
+  can_cu: z.array(z.string()).default([]),
+  ma_mau: z.string().regex(/^ds\.hai\.[a-z0-9_]+\.(ban|kia|hai)\.[a-z_]+$/).max(60),
+  phai: z.string().regex(/^[a-z0-9_]{2,32}$/),
+}).passthrough();
 export const HopThamOutput = z.object({
   engine_version: z.string(),
   quan_he: z.string(), nhan_quan_he: z.string(),
@@ -381,6 +414,8 @@ export const HopThamOutput = z.object({
   luu_y: z.array(z.string()).default([]),
   diem: DiemHaiNguoi.nullable().optional(),
   khong_cham_diem: z.boolean(),
+  // Hộp lỗi dạng (engine lệch deploy) → bỏ cả khối, không làm hỏng điểm.
+  cach_doc_them: z.array(HopCachDoc).max(4).catch([]),
 }).passthrough();
 export type HopThamOutputT = z.infer<typeof HopThamOutput>;
 

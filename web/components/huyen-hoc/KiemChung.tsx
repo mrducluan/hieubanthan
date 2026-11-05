@@ -13,6 +13,7 @@ import { ghi, lanDauTrongPhien } from "@/lib/do-luong";
 import type { KetQuaKiemChung, LoaiKiemChung } from "@/lib/kiem-chung";
 import { tyLeHien, type TyLe } from "@/lib/ty-le-kiem-chung";
 import { ghiNhanDung } from "@/lib/kiem-chung-sau";
+import { useXemNguoiThan } from "@/components/huyen-hoc/XemNguoiThan";
 
 const KHOA = (k: string) => `hbt.mot-lan.kiem-chung.${k}`;
 
@@ -57,6 +58,9 @@ export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, the
     }
   };
   const giam = useReducedMotion();
+  // NT-1: phiếu nói về lá số của chính người bấm → đang xem lá số người thân thì không hỏi.
+  const xemNguoiThan = useXemNguoiThan();
+  if (xemNguoiThan) return null;
   const dongTyLe = tl && (
     <p className="text-fg-muted" data-testid="ty-le-dung">
       <b className="text-sm text-fg">{tl.phanTram}%</b> trong {tl.tong} người có cùng điểm này thấy đúng

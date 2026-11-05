@@ -35,6 +35,9 @@ HUONG_CA_NHAN = [r"hop huong", r"huong nha", r"huong gi", r"huong nao", r"cung p
                  r"huong ban", r"quay dau", r"phong ngu", r"hop khong",
                  r"nha huong (dong|tay|nam|bac)( (nam|bac))?\b.{0,20}\b(tot|xau|hop)\b"]       # HH-CT3: "nhà hướng Tây có xấu không"
 NAM_KW = [r"nam nay", r"nam sau", r"nam 20\d\d"]
+# SK-1: câu hỏi sức khoẻ (đã qua bộ chặn — không gồm sống chết / chữa trị)
+SUC_KHOE_KW = [r"suc khoe", r"(?<!\w)benh (gi|tat)", r"hay om", r"om dau", r"om yeu", r"dau (da day|bung|dau|lung|khop)",
+               r"kham (tong quat|dinh ky|suc khoe)", r"de y suc", r"chu y suc"]
 NAM_VIEC = [r"sua nha", r"lam nha", r"sua (bep|phong|cong|cua|tuong|mai|lai nha)", r"sua chua", r"(dap|duc) (tuong|pha|bo)", r"dong tho", r"xay nha", r"ngu hoang", r"tranh dong", r"kim lau",
             r"hoang oc", r"tam tai", r"thai tue", r"xem tuoi"]
 HOP = [r"vo chong", r"ca hai", r"hai vo chong", r"vo toi", r"chong toi"]
@@ -72,7 +75,7 @@ def phan_loai(cau_hoi: str) -> dict:
                 and chung.chuan_hoa_cau(sau):
             t_chinh = chung.chuan_hoa_cau(sau)
     nam, gioi = _nam_gioi(cau_hoi, t)
-    kq = {"cau_chuan_hoa": t, "loai": None, "xu_ly": "tra_loi", "huong": _huong_nhac(t),
+    kq = {"cau_chuan_hoa": t, "cau_goc": cau_hoi, "loai": None, "xu_ly": "tra_loi", "huong": _huong_nhac(t),
           "quai": next((QUAI_KD[m] for m in re.findall(r"menh quai (kham|khon|chan|ton|can|doai|ly)\b", t)
                         + re.findall(r"quai (kham|khon|chan|ton|can|doai|ly)\b", t)), None),
           "du_nien": [v for k, v in DU_NIEN_KD.items() if re.search(rf"(?<!\w){k}(?!\w)", t)],
@@ -198,6 +201,7 @@ def goi_bang_chung(pl: dict, sinh: dict | None, nam_xem: int, nam_am: int | None
         goi["mau"] = kinhdich_kb.mau("an_toan" if pl["xu_ly"] == "an_toan" else "tu_choi")
         if pl["xu_ly"] == "tu_choi_nhe":
             goi["mau"] += " " + kb.mau("tu_choi_vat_pham")
+            goi["mau"] = chung.mau_tu_choi(pl.get("cau_goc"), pl["cau_chuan_hoa"], goi["mau"])   # SK-1
         return chung.ket(goi)
     if pl["xu_ly"] == "dan_huong":
         goi["mau"] = chung.mau_dan_huong(pl["cau_chuan_hoa"])
@@ -531,6 +535,8 @@ def _doan(m: dict) -> tuple[str, str | None]:
         return f"{m['tieu_de']}: {m['noi_dung']}", None
     if l == "nha_rieng":
         return _doan_nha(m), None
+    if l == "ghi_chu":
+        return m["noi_dung"], None
     return "", None
 
 
@@ -545,6 +551,40 @@ def van_template(goi: dict) -> str:
         doan.append(goi["luu_y"])
     doan.append(hoi_van.KET)
     return "\n\n".join(doan)
+
+
+def _them_chu_y(goi: dict, pl: dict, nha: dict | None, nam_xem: int) -> None:
+    """CY-1: câu hỏi về điều người dùng lo ở một mảng (tiền bạc, giấy tờ, nhà cửa… / vận hạn) → mục "năm nên chú ý":
+    sao lưu niên tới phía cửa chính (cùng hàm báo cáo Nhà của bạn) + việc + ranh giới; đứng đầu (sau sao hạn, nhà riêng)."""
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    t = pl["cau_chuan_hoa"]
+    mg = cyn.mang_hoi(t)
+    if not mg or mg == "suc_khoe":
+        return
+    huong = None
+    if nha:
+        try:
+            from app.luangiai import phongthuy_doi_song as pds  # noqa: PLC0415
+            huong = pds._huong_nha(nha)[0]
+        except (ValueError, TypeError, KeyError):
+            huong = None
+    if mg == "van_han":
+        if not huong:
+            return
+        from app.calc import huyen_khong as hk  # noqa: PLC0415
+        q = next((k for k, v in hk.QUAI.items() if v[1] == huong), None)
+        if not q:
+            return
+        m = cyn.muc_van_han({x: cyn.phongthuy_nam(q, nam_xem, x, cyn.SO_NAM, f"cửa chính ({huong})")
+                             for x in ("tien_bac", "giay_to", "nha_cua")}, [nam_xem, nam_xem + 1], cyn.noi_chac(t))
+    else:
+        nd = cyn.phongthuy_doan_hoi(mg, nam_xem, huong)
+        if cyn.noi_chac(t):
+            nd = f"{cyn.kb.mau('khong_noi_chac')} {nd}"
+        m = {"loai": "ghi_chu", "ma": "chu_y_nam", "mang": mg, "noi_dung": nd, **cyn.kb.meta()}
+    i = next((k for k, x in enumerate(goi["muc"]) if x.get("loai") not in ("sao_han", "nha_rieng")), len(goi["muc"]))
+    goi["muc"].insert(i, m)
+    chung.ket(goi)
 
 
 def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = None,
@@ -568,6 +608,30 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
         if mn:
             goi["muc"].insert(0, mn)                 # trả lời theo đúng nhà trước, kiến thức chung sau
             goi["phan_loai"]["theo_nha"] = True
+    if pl["xu_ly"] not in chung.DAC_BIET and not goi["can_them"] and chung.co(pl["cau_chuan_hoa"], SUC_KHOE_KW):
+        # SK-1 (2026-11-04): câu sức khoẻ → năm sao lưu niên 2 / 5 tới phía phòng ngủ (cùng hàm báo cáo Nhà của bạn)
+        from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+        phuong = None
+        if nha:
+            try:
+                from app.luangiai import phongthuy_bo_cuc as bc  # noqa: PLC0415
+                vt = bc.luan(_bo_cuc_tu_nha(nha), sinh)["da_tinh"]["vi_tri"]
+                phuong = next((x["cung"] for x in vt if x["phong"] == "phong_ngu_chinh" and x["cung"] != "Trung cung"), None)
+            except (ValueError, TypeError, KeyError):
+                phuong = None
+        goi["muc"].insert(0, {"loai": "ghi_chu", "ma": "suc_khoe_nam", "noi_dung": skn.phongthuy_doan_hoi(nam_xem, phuong),
+                              **skn.kb.meta()})
+        if (g := chung.muc_suc_khoe_hoi(pl["cau_chuan_hoa"])):
+            goi["muc"].insert(1, g)
+        chung.ket(goi)
+    if pl["xu_ly"] not in chung.DAC_BIET and not goi["can_them"]:
+        _them_chu_y(goi, pl, nha, nam_xem)                                  # CY-1
+    if pl["xu_ly"] not in chung.DAC_BIET and mo_dau.khong_mo(pl["cau_chuan_hoa"]):
+        # Review CY-1: câu khủng hoảng quan hệ (ngoại tình, ly hôn…) — Phong thuỷ cũng mở bằng câu đồng cảm như 4 mảng kia
+        # (đoạn mở đầu Phong thuỷ đang tắt nên câu này vào gói như một mục đứng đầu).
+        goi["muc"].insert(0, {"loai": "ghi_chu", "ma": "dong_cam",
+                              "noi_dung": mo_dau.dong_cam(mo_dau.dieu_hoi(pl["cau_chuan_hoa"], cau_hoi))})
+        chung.ket(goi)
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi))   # EN-3
     # EN-3b: đoạn mở đầu Phong thuỷ CHƯA bật — trên holdout đóng băng trả lời thẳng lùi 72 → 68 % khi bật (đoạn mở đầu đẩy
     # đoạn bố trí ra khỏi đoạn 1–2). Hàm `mo_dau.pt_mo` giữ lại; bật khi sửa được bằng bộ dev mà holdout không lùi.

@@ -1,0 +1,50 @@
+{
+  "_ghi_chu": [
+    "TV-NHUAN3 — ba cách tính tháng nhuận cho lá số Tử vi, TÍNH TAY (không sinh bằng máy).",
+    "thang_sau (mặc định, iztro): ngày 1–15 tháng nhuận như tháng chính, ngày 16–hết tính tháng sau.",
+    "thang_chinh: cả tháng nhuận như tháng chính.",
+    "ca_thang_sau: CẢ tháng nhuận tính như tháng sau (tháng + 1, không nhuận). Tháng Chạp nhuận → đếm 13 ≡ tháng Giêng",
+    "trên vòng 12 cung (như iztro làm với nửa sau nhuận tháng Chạp); NĂM can chi giữ năm sinh (chưa qua Tết).",
+    "1900–2100 không có tháng Chạp nhuận (lịch Việt lẫn lịch Trung Quốc) — ca 12 nhuận chỉ kiểm ở hàm thuần.",
+    "NGÀY KHÔNG KẸP: ngày 30 của tháng nhuận 30 ngày giữ ngày 30 dù tháng sau chỉ 29 ngày — đúng như iztro làm với",
+    "nửa sau tháng nhuận (cách thang_sau), nên ngày 16–hết của ca_thang_sau trùng khít thang_sau. Bản kẹp ngày (đổi",
+    "30 → 29) chỉ là hệ quả của việc dựng lại một ngày âm hợp lệ để gọi byLunar, không phải quy tắc sách.",
+    "Công thức tay (chi 0 = Tý, M = tháng tính, h = chi giờ): Mệnh = Dần + (M−1) − h; Thân = Dần + (M−1) + h;",
+    "Tả Phù = Thìn + (M−1); Hữu Bật = Tuất − (M−1). Mọi ca giờ Thìn (08:00, h = 4), nam."
+  ],
+  "cases": [
+    {"id": "2025_nhuan6_ngay10", "duong": "2025-08-03", "am": {"ngay": 10, "thang": 6, "nam": 2025, "nhuan": true},
+     "ti": 4, "gioi_tinh": "nam",
+     "ky_vong": {
+       "thang_sau":    {"thang_tinh": 6, "menh": "Mão", "than": "Hợi", "ta_phu": "Dậu", "huu_bat": "Tỵ"},
+       "thang_chinh":  {"thang_tinh": 6, "menh": "Mão", "than": "Hợi", "ta_phu": "Dậu", "huu_bat": "Tỵ"},
+       "ca_thang_sau": {"thang_tinh": 7, "menh": "Thìn", "than": "Tý", "ta_phu": "Tuất", "huu_bat": "Thìn"}}},
+    {"id": "2025_nhuan6_ngay18", "duong": "2025-08-11", "am": {"ngay": 18, "thang": 6, "nam": 2025, "nhuan": true},
+     "ti": 4, "gioi_tinh": "nam",
+     "ky_vong": {
+       "thang_sau":    {"thang_tinh": 7, "menh": "Thìn", "than": "Tý", "ta_phu": "Tuất", "huu_bat": "Thìn"},
+       "thang_chinh":  {"thang_tinh": 6, "menh": "Mão", "than": "Hợi", "ta_phu": "Dậu", "huu_bat": "Tỵ"},
+       "ca_thang_sau": {"thang_tinh": 7, "menh": "Thìn", "than": "Tý", "ta_phu": "Tuất", "huu_bat": "Thìn"}}},
+    {"id": "2017_nhuan6_ngay30", "duong": "2017-08-21", "am": {"ngay": 30, "thang": 6, "nam": 2017, "nhuan": true},
+     "ti": 4, "gioi_tinh": "nam", "_ghi_chu": "tháng 6 nhuận 30 ngày, tháng 7 chỉ 29 ngày — không kẹp ngày",
+     "ky_vong": {
+       "thang_sau":    {"thang_tinh": 7, "menh": "Thìn", "than": "Tý", "ta_phu": "Tuất", "huu_bat": "Thìn"},
+       "thang_chinh":  {"thang_tinh": 6, "menh": "Mão", "than": "Hợi", "ta_phu": "Dậu", "huu_bat": "Tỵ"},
+       "ca_thang_sau": {"thang_tinh": 7, "menh": "Thìn", "than": "Tý", "ta_phu": "Tuất", "huu_bat": "Thìn"}}},
+    {"id": "2033_nhuan11_ngay5", "duong": "2033-12-26", "am": {"ngay": 5, "thang": 11, "nam": 2033, "nhuan": true},
+     "ti": 4, "gioi_tinh": "nam", "_ghi_chu": "tháng nhuận muộn nhất trong 1900–2100",
+     "ky_vong": {
+       "thang_sau":    {"thang_tinh": 11, "menh": "Thân", "than": "Thìn", "ta_phu": "Dần", "huu_bat": "Tý"},
+       "thang_chinh":  {"thang_tinh": 11, "menh": "Thân", "than": "Thìn", "ta_phu": "Dần", "huu_bat": "Tý"},
+       "ca_thang_sau": {"thang_tinh": 12, "menh": "Dậu", "than": "Tỵ", "ta_phu": "Mão", "huu_bat": "Hợi"}}}
+  ],
+  "ham_thuan": [
+    {"thang": 6, "ngay": 10, "nhuan": true, "thang_sau": 6, "thang_chinh": 6, "ca_thang_sau": 7},
+    {"thang": 6, "ngay": 15, "nhuan": true, "thang_sau": 6, "thang_chinh": 6, "ca_thang_sau": 7},
+    {"thang": 6, "ngay": 16, "nhuan": true, "thang_sau": 7, "thang_chinh": 6, "ca_thang_sau": 7},
+    {"thang": 6, "ngay": 30, "nhuan": true, "thang_sau": 7, "thang_chinh": 6, "ca_thang_sau": 7},
+    {"thang": 6, "ngay": 10, "nhuan": false, "thang_sau": 6, "thang_chinh": 6, "ca_thang_sau": 6},
+    {"thang": 12, "ngay": 3, "nhuan": true, "thang_sau": 12, "thang_chinh": 12, "ca_thang_sau": 13},
+    {"thang": 12, "ngay": 20, "nhuan": true, "thang_sau": 13, "thang_chinh": 12, "ca_thang_sau": 13}
+  ]
+}

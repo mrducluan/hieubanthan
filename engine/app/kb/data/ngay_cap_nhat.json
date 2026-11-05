@@ -226,10 +226,15 @@
    "dang": "2026-10-08",
    "sua": "2026-11-03"
   },
+  "co_thu/cot-tuy-phu": {
+   "bam": "d349fa8721cb8b9b",
+   "dang": "2026-11-04",
+   "sua": "2026-11-04"
+  },
   "cung/cung-dien-trach": {
-   "bam": "6e1eb82194e32684",
+   "bam": "9504fdbdc0ff8c49",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "cung/cung-huynh-de": {
    "bam": "debd99d3d83d0126",
@@ -237,54 +242,54 @@
    "sua": "2026-10-22"
   },
   "cung/cung-menh": {
-   "bam": "a5e024b549de56ad",
+   "bam": "224a5d8882b92834",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "cung/cung-no-boc": {
-   "bam": "94b9c5e442227884",
+   "bam": "c2e06957ba2fa09a",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "cung/cung-phu-mau": {
-   "bam": "59e69bfc3c3c5153",
+   "bam": "ef68e52d72a3dd5d",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "cung/cung-phu-the": {
-   "bam": "8bb34ef7cd231990",
+   "bam": "220c3fb23f4b6ff0",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "cung/cung-phuc-duc": {
-   "bam": "96df9c05504d8ea3",
+   "bam": "4413d797953a37c1",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "cung/cung-quan-loc": {
-   "bam": "bbdb8499a9b34e6d",
+   "bam": "f3ccebe3881ef9e3",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "cung/cung-tai-bach": {
-   "bam": "9fb85bdd45a59da3",
+   "bam": "b2eb571ab65a1d1a",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "cung/cung-tat-ach": {
-   "bam": "881d6e268c278241",
+   "bam": "a1452b8f5b2bf0a1",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "cung/cung-thien-di": {
-   "bam": "3919afad6e47810f",
+   "bam": "c0c1a7cc97b92ba7",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "cung/cung-tu-nu": {
-   "bam": "22dfca7a3b04872e",
+   "bam": "8479e16184903f52",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "dau_hieu/be-ca-trong-nha": {
    "bam": "bf556f955b709ac5",
@@ -412,9 +417,9 @@
    "sua": "2026-11-03"
   },
   "hoa_cung/hoa-khoa-cung-menh": {
-   "bam": "8e5938e3ab18e048",
+   "bam": "a7d7dfa2a03ee466",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-khoa-cung-no-boc": {
    "bam": "317c2f820f7d1bae",
@@ -427,9 +432,9 @@
    "sua": "2026-11-03"
   },
   "hoa_cung/hoa-khoa-cung-phu-the": {
-   "bam": "536f5aae5724333a",
+   "bam": "fdcd9956d58bd03f",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-khoa-cung-phuc-duc": {
    "bam": "e86360c0bada7bf8",
@@ -447,14 +452,14 @@
    "sua": "2026-10-23"
   },
   "hoa_cung/hoa-khoa-cung-tat-ach": {
-   "bam": "df6bd54d6f0ab914",
+   "bam": "913cfe180a708cb7",
    "dang": "2026-10-09",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-khoa-cung-thien-di": {
-   "bam": "564a96234c81a3ae",
+   "bam": "c56b3cc92d9dfd6a",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-khoa-cung-tu-nu": {
    "bam": "0e7f4b4276f985e0",
@@ -472,9 +477,9 @@
    "sua": "2026-10-23"
   },
   "hoa_cung/hoa-ky-cung-menh": {
-   "bam": "549ea7c6d8143593",
+   "bam": "56da3276022738b9",
    "dang": "2026-10-09",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-ky-cung-no-boc": {
    "bam": "7a13e84d8639fb56",
@@ -487,9 +492,9 @@
    "sua": "2026-10-23"
   },
   "hoa_cung/hoa-ky-cung-phu-the": {
-   "bam": "2992f5892e78d805",
+   "bam": "dee55eff4242d4d0",
    "dang": "2026-10-09",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-ky-cung-phuc-duc": {
    "bam": "d72f67f79fd59cc4",
@@ -502,14 +507,14 @@
    "sua": "2026-11-03"
   },
   "hoa_cung/hoa-ky-cung-tai-bach": {
-   "bam": "c9432506cebec6ce",
+   "bam": "a8a01f3419ca19a8",
    "dang": "2026-10-09",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-ky-cung-tat-ach": {
-   "bam": "64b5dc68628887c2",
+   "bam": "c352a49baa3af0d2",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-ky-cung-thien-di": {
    "bam": "3ff507980be3b92f",
@@ -517,9 +522,9 @@
    "sua": "2026-11-03"
   },
   "hoa_cung/hoa-ky-cung-tu-nu": {
-   "bam": "5021e996d89e52a9",
+   "bam": "77960a75d5f54f2d",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-loc-cung-dien-trach": {
    "bam": "be8e1798115db7dc",
@@ -532,9 +537,9 @@
    "sua": "2026-10-23"
   },
   "hoa_cung/hoa-loc-cung-menh": {
-   "bam": "1ca7c0fe67d95d07",
+   "bam": "f916a8067c459725",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-loc-cung-no-boc": {
    "bam": "2e2f02335072a459",
@@ -552,29 +557,29 @@
    "sua": "2026-11-03"
   },
   "hoa_cung/hoa-loc-cung-phuc-duc": {
-   "bam": "740620615bebfa26",
+   "bam": "978a54f20a1918fc",
    "dang": "2026-10-09",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-loc-cung-quan-loc": {
-   "bam": "97440b6621d72f50",
+   "bam": "e30bf0459f139799",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-loc-cung-tai-bach": {
-   "bam": "17cf2914d1468256",
+   "bam": "c8405a6347ab4cc2",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-loc-cung-tat-ach": {
-   "bam": "41cd1a3dc31fb01f",
+   "bam": "bb389d677cd2ec55",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-loc-cung-thien-di": {
-   "bam": "3cecf17aef684f5a",
+   "bam": "7213f83e98986b4d",
    "dang": "2026-10-09",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-loc-cung-tu-nu": {
    "bam": "b89c48f89456f6d1",
@@ -592,9 +597,9 @@
    "sua": "2026-11-03"
   },
   "hoa_cung/hoa-quyen-cung-menh": {
-   "bam": "2f3a43a0ab65a02d",
+   "bam": "58215cde62d1fe04",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-quyen-cung-no-boc": {
    "bam": "3aead0566ae93d31",
@@ -607,29 +612,29 @@
    "sua": "2026-10-23"
   },
   "hoa_cung/hoa-quyen-cung-phu-the": {
-   "bam": "1f3de40c881b483e",
+   "bam": "04c1630145447504",
    "dang": "2026-10-09",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-quyen-cung-phuc-duc": {
-   "bam": "dc80748d87576578",
+   "bam": "2b65d0ab1cfb2381",
    "dang": "2026-10-09",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-quyen-cung-quan-loc": {
-   "bam": "4602d18c46d818ff",
+   "bam": "951819ec18f22aaf",
    "dang": "2026-10-09",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-quyen-cung-tai-bach": {
-   "bam": "2bdf809d956b6e5c",
+   "bam": "eacde0cec67d2502",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-quyen-cung-tat-ach": {
-   "bam": "a9779c51a54181c1",
+   "bam": "b1eaddee8035f6bd",
    "dang": "2026-10-09",
-   "sua": "2026-10-23"
+   "sua": "2026-11-04"
   },
   "hoa_cung/hoa-quyen-cung-thien-di": {
    "bam": "6da9f80531cc3fb9",
@@ -1527,79 +1532,79 @@
    "sua": "2026-11-03"
   },
   "sao/sao-cu-mon": {
-   "bam": "31413ab213974647",
+   "bam": "8f847303b0c0480b",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-liem-trinh": {
-   "bam": "1342c278f1d157fe",
+   "bam": "665f921833af23a1",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-pha-quan": {
-   "bam": "86c74bf748940600",
+   "bam": "7af3f1c0dfd6f5ff",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-thai-am": {
-   "bam": "50dfe095afe86f94",
+   "bam": "42bd43cce1c4fe1f",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-thai-duong": {
-   "bam": "75d28688a0a3759f",
+   "bam": "1f528cb6de00c3db",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-tham-lang": {
-   "bam": "4e8456c27784a8fd",
+   "bam": "ecf214b768376819",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-that-sat": {
-   "bam": "3e137abca2edfb54",
+   "bam": "cb937d6296a44d3b",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-thien-co": {
-   "bam": "163d7cffc80841c5",
+   "bam": "3778efddeee22de2",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-thien-dong": {
-   "bam": "bb11dea36150143b",
+   "bam": "ddf955546e40195e",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-thien-luong": {
-   "bam": "f31c2720b9bd9535",
+   "bam": "41c96ec21ede6760",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-thien-phu": {
-   "bam": "7d883297fac0b03d",
+   "bam": "9a4c676f60fe1c36",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-thien-tuong": {
-   "bam": "2871df5dbc91922f",
+   "bam": "e557197640c02627",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-tu-vi": {
-   "bam": "6f82a63f1df837fe",
+   "bam": "c5285fba9fd1b9ff",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao/sao-vu-khuc": {
-   "bam": "18c1574925acd5a6",
+   "bam": "b911ce7a94497855",
    "dang": "2026-10-08",
-   "sua": "2026-10-22"
+   "sua": "2026-11-04"
   },
   "sao_cung/cu-mon-cung-dien-trach": {
-   "bam": "990611fb668b5798",
+   "bam": "910c35aa671d1713",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/cu-mon-cung-huynh-de": {
    "bam": "449d0c0fe45e7429",
@@ -1607,14 +1612,14 @@
    "sua": "2026-11-03"
   },
   "sao_cung/cu-mon-cung-menh": {
-   "bam": "dba7602a43045595",
+   "bam": "63871a92c8320bde",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/cu-mon-cung-no-boc": {
-   "bam": "2b68e611485c80a4",
+   "bam": "ca6d61afa6d8101e",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/cu-mon-cung-phu-mau": {
    "bam": "845bf15b5cc3ced0",
@@ -1622,9 +1627,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/cu-mon-cung-phu-the": {
-   "bam": "7512f8e5f51d6517",
+   "bam": "7490d9cacc533c29",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/cu-mon-cung-phuc-duc": {
    "bam": "4392891451802c19",
@@ -1667,9 +1672,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/liem-trinh-cung-menh": {
-   "bam": "75081f1a8c948ccd",
+   "bam": "7bb3325247ade341",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/liem-trinh-cung-no-boc": {
    "bam": "8dbb8293191422f3",
@@ -1682,9 +1687,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/liem-trinh-cung-phu-the": {
-   "bam": "21a27e6d578c5491",
+   "bam": "4ebff5e3f2fdf7c9",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/liem-trinh-cung-phuc-duc": {
    "bam": "17df931175a0d75e",
@@ -1697,9 +1702,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/liem-trinh-cung-tai-bach": {
-   "bam": "4aebed5a73330a28",
+   "bam": "bdafe9168aefec2c",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/liem-trinh-cung-tat-ach": {
    "bam": "d270c3eac3a537e5",
@@ -1727,9 +1732,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/pha-quan-cung-menh": {
-   "bam": "b1ec81db39763af4",
+   "bam": "a376dc420216b9d1",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/pha-quan-cung-no-boc": {
    "bam": "ef2b5834cde07f14",
@@ -1742,9 +1747,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/pha-quan-cung-phu-the": {
-   "bam": "94369330cc1e3465",
+   "bam": "7848e9fbff930e38",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/pha-quan-cung-phuc-duc": {
    "bam": "63cd6541537a0826",
@@ -1754,12 +1759,12 @@
   "sao_cung/pha-quan-cung-quan-loc": {
    "bam": "ee9db62733f12b16",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/pha-quan-cung-tai-bach": {
-   "bam": "b957bbb91613ddc1",
+   "bam": "61bcf411c587284f",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/pha-quan-cung-tat-ach": {
    "bam": "4736c7042180a028",
@@ -1769,7 +1774,7 @@
   "sao_cung/pha-quan-cung-thien-di": {
    "bam": "f42f1d4a35883def",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/pha-quan-cung-tu-nu": {
    "bam": "f34bd45093dcb4e7",
@@ -1787,9 +1792,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thai-am-cung-menh": {
-   "bam": "fe8bb7bb86805ad8",
+   "bam": "b88e7d73555d9d28",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thai-am-cung-no-boc": {
    "bam": "9c6cd841b54294e9",
@@ -1812,14 +1817,14 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thai-am-cung-quan-loc": {
-   "bam": "626467f625a76356",
+   "bam": "cf901db89ad7c6d0",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thai-am-cung-tai-bach": {
-   "bam": "69d72e0bc068f70e",
+   "bam": "23260d59cc02b13c",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thai-am-cung-tat-ach": {
    "bam": "a8c0f3fb91be237c",
@@ -1829,7 +1834,7 @@
   "sao_cung/thai-am-cung-thien-di": {
    "bam": "c117bff03badc029",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thai-am-cung-tu-nu": {
    "bam": "0486c94291f6b2a3",
@@ -1847,9 +1852,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thai-duong-cung-menh": {
-   "bam": "37a3d2e48ad8988e",
+   "bam": "e97bf8c6c4cc3b95",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thai-duong-cung-no-boc": {
    "bam": "e13c11c79292b8d3",
@@ -1857,14 +1862,14 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thai-duong-cung-phu-mau": {
-   "bam": "09e2fcc1422843e9",
+   "bam": "d629b17c78e84d9b",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thai-duong-cung-phu-the": {
-   "bam": "6785aa2ceaad50ae",
+   "bam": "85e64fb64fb95b1e",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thai-duong-cung-phuc-duc": {
    "bam": "1a0b07da8920bec6",
@@ -1872,14 +1877,14 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thai-duong-cung-quan-loc": {
-   "bam": "5bceff502f709a7d",
+   "bam": "1c8c1ea3a0073c8e",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thai-duong-cung-tai-bach": {
-   "bam": "d6bfcd74c1755cd4",
+   "bam": "397749a81287c564",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thai-duong-cung-tat-ach": {
    "bam": "554f62c88d4a64a2",
@@ -1907,9 +1912,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/tham-lang-cung-menh": {
-   "bam": "186f8b5bdca0493f",
+   "bam": "f2e95f967c3ed92d",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/tham-lang-cung-no-boc": {
    "bam": "cf05bff0c845882f",
@@ -1922,9 +1927,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/tham-lang-cung-phu-the": {
-   "bam": "cdf8f8ceff2a1ce5",
+   "bam": "d5a0d8dc87fdec35",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/tham-lang-cung-phuc-duc": {
    "bam": "1a43b3395f8e018f",
@@ -1967,9 +1972,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/that-sat-cung-menh": {
-   "bam": "5b9faf8f5e19dc1a",
+   "bam": "ad3a855e60b6470c",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/that-sat-cung-no-boc": {
    "bam": "c25292d9213782e9",
@@ -1982,9 +1987,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/that-sat-cung-phu-the": {
-   "bam": "ff350c675d98b672",
+   "bam": "4e6049be919a097b",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/that-sat-cung-phuc-duc": {
    "bam": "7323bb873ba7d0b6",
@@ -1994,7 +1999,7 @@
   "sao_cung/that-sat-cung-quan-loc": {
    "bam": "6d74b95ea855f085",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/that-sat-cung-tai-bach": {
    "bam": "8ee190fd2d609760",
@@ -2009,12 +2014,12 @@
   "sao_cung/that-sat-cung-thien-di": {
    "bam": "0642fe213cfd38e0",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/that-sat-cung-tu-nu": {
-   "bam": "dfc79e02946de6de",
+   "bam": "a34539ea466c075e",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-co-cung-dien-trach": {
    "bam": "08798711c72ad016",
@@ -2027,9 +2032,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-co-cung-menh": {
-   "bam": "59d42e0934574e45",
+   "bam": "ce30470de6abf006",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-co-cung-no-boc": {
    "bam": "c300a0486dcfa83d",
@@ -2042,9 +2047,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-co-cung-phu-the": {
-   "bam": "1dd048693bc9de17",
+   "bam": "790d917605744e54",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-co-cung-phuc-duc": {
    "bam": "60ffd032416eb2dd",
@@ -2054,7 +2059,7 @@
   "sao_cung/thien-co-cung-quan-loc": {
    "bam": "ae725eb027c0adc8",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-co-cung-tai-bach": {
    "bam": "69abd18ae06e29d2",
@@ -2069,7 +2074,7 @@
   "sao_cung/thien-co-cung-thien-di": {
    "bam": "684ea39ad3a9f429",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-co-cung-tu-nu": {
    "bam": "2f868e7ec74626e1",
@@ -2087,9 +2092,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-dong-cung-menh": {
-   "bam": "8dd2c43aba380a57",
+   "bam": "011c5016785253f4",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-dong-cung-no-boc": {
    "bam": "196162ce7d136858",
@@ -2114,7 +2119,7 @@
   "sao_cung/thien-dong-cung-quan-loc": {
    "bam": "40552a942df840f0",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-dong-cung-tai-bach": {
    "bam": "66945ad8f40c8a0d",
@@ -2129,7 +2134,7 @@
   "sao_cung/thien-dong-cung-thien-di": {
    "bam": "679397f636f9b0ce",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-dong-cung-tu-nu": {
    "bam": "1b42f44ab3e01ff2",
@@ -2147,9 +2152,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-luong-cung-menh": {
-   "bam": "cad3fba18f193b96",
+   "bam": "db415539ffd493bc",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-luong-cung-no-boc": {
    "bam": "143f8576cf9e6310",
@@ -2162,9 +2167,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-luong-cung-phu-the": {
-   "bam": "c740ccc6e968d1bc",
+   "bam": "bef49a551ba03148",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-luong-cung-phuc-duc": {
    "bam": "51bd1fe0c424395b",
@@ -2172,9 +2177,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-luong-cung-quan-loc": {
-   "bam": "ea3f2d0ccd092150",
+   "bam": "b20e7329687e4ca7",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-luong-cung-tai-bach": {
    "bam": "e0b6b7b913d8242d",
@@ -2189,7 +2194,7 @@
   "sao_cung/thien-luong-cung-thien-di": {
    "bam": "7db7de73bbd451b2",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-luong-cung-tu-nu": {
    "bam": "5e4087b57b2dd5c8",
@@ -2207,9 +2212,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-phu-cung-menh": {
-   "bam": "1da54ad51d92089d",
+   "bam": "297b681b4bedc678",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-phu-cung-no-boc": {
    "bam": "aaa3eefd0998bc34",
@@ -2222,9 +2227,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-phu-cung-phu-the": {
-   "bam": "9f465321e36f07f7",
+   "bam": "771d4cc70222d4f6",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-phu-cung-phuc-duc": {
    "bam": "c0cf4f02fa80132f",
@@ -2232,9 +2237,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-phu-cung-quan-loc": {
-   "bam": "c63abf502c48f642",
+   "bam": "f88ca11f3b3adbca",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-phu-cung-tai-bach": {
    "bam": "529603fad4dc09e9",
@@ -2267,9 +2272,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-tuong-cung-menh": {
-   "bam": "20d50a49dbffcfac",
+   "bam": "f8c5fdc1dcd553f2",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-tuong-cung-no-boc": {
    "bam": "7b9f4eb0711d358d",
@@ -2282,9 +2287,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-tuong-cung-phu-the": {
-   "bam": "c0edd1fce3591d74",
+   "bam": "0ad711416115e83f",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-tuong-cung-phuc-duc": {
    "bam": "94329f88fa6fc7c6",
@@ -2292,9 +2297,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-tuong-cung-quan-loc": {
-   "bam": "d0c68b4dd3937765",
+   "bam": "9ee796ef8c61ed31",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-tuong-cung-tai-bach": {
    "bam": "8a93381eac9ec07e",
@@ -2307,9 +2312,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/thien-tuong-cung-thien-di": {
-   "bam": "07d900bdd6b79b7b",
+   "bam": "12f2723f211c4332",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/thien-tuong-cung-tu-nu": {
    "bam": "90dd3847c259f339",
@@ -2317,9 +2322,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/tu-vi-cung-dien-trach": {
-   "bam": "012da2dafdaa34a8",
+   "bam": "0fb300d7459991f4",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/tu-vi-cung-huynh-de": {
    "bam": "83548743ca4d6ce5",
@@ -2327,9 +2332,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/tu-vi-cung-menh": {
-   "bam": "aaace39e919418b9",
+   "bam": "b9e422993489dedd",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/tu-vi-cung-no-boc": {
    "bam": "ac0895b1c4d6b911",
@@ -2342,19 +2347,19 @@
    "sua": "2026-11-03"
   },
   "sao_cung/tu-vi-cung-phu-the": {
-   "bam": "4f8eb72212cf8e66",
+   "bam": "26518d4ce6b7586a",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/tu-vi-cung-phuc-duc": {
-   "bam": "9d397c583a0aea99",
+   "bam": "6a750823c0009acf",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/tu-vi-cung-quan-loc": {
-   "bam": "a74d363c8b23017f",
+   "bam": "6e41fab422a673d1",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/tu-vi-cung-tai-bach": {
    "bam": "69626a677a001d69",
@@ -2367,9 +2372,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/tu-vi-cung-thien-di": {
-   "bam": "3c7cae2029f3a990",
+   "bam": "ff65680d8b8c2532",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/tu-vi-cung-tu-nu": {
    "bam": "7b1d97e56c24a3cb",
@@ -2377,9 +2382,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/vu-khuc-cung-dien-trach": {
-   "bam": "3284494381d455db",
+   "bam": "bd7dbaa2758d5064",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/vu-khuc-cung-huynh-de": {
    "bam": "a98efd6bb27b2943",
@@ -2387,9 +2392,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/vu-khuc-cung-menh": {
-   "bam": "5d779b3c155b64cc",
+   "bam": "81df9f9ddab17889",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/vu-khuc-cung-no-boc": {
    "bam": "7e48cc1eec111a89",
@@ -2402,9 +2407,9 @@
    "sua": "2026-11-03"
   },
   "sao_cung/vu-khuc-cung-phu-the": {
-   "bam": "d03c440c7181c02a",
+   "bam": "cf65070efc37732e",
    "dang": "2026-10-08",
-   "sua": "2026-11-03"
+   "sua": "2026-11-04"
   },
   "sao_cung/vu-khuc-cung-phuc-duc": {
    "bam": "ae0a29e46a3b0893",

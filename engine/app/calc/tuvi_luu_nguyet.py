@@ -44,7 +44,7 @@ PHAI: dict[str, dict] = {
 }
 MAC_DINH = "dau_quan_thai_tue"
 CHI = list(lunar.CHI)          # 0 = Tý … 11 = Hợi
-THANG_NHUAN = ("thang_sau", "thang_chinh")
+THANG_NHUAN = ("thang_sau", "thang_chinh", "ca_thang_sau")   # như tuvi_an_sao.THANG_NHUAN
 
 # Tứ hoá theo thiên can [Lộc, Quyền, Khoa, Kỵ] — giống iztro (giữ iztro cho Canh/Nhâm, quyết định 2026-10-02).
 TU_HOA: dict[str, list[str]] = {
@@ -68,10 +68,12 @@ def tu_hoa(can: str) -> list[str]:
 
 def thang_tinh(thang: int, ngay: int, nhuan: bool, thang_nhuan: str = "thang_sau") -> int:
     """Số tháng dùng để đếm cung. Nửa sau (từ ngày 16) tháng nhuận: `thang_sau` → tính sang tháng sau (iztro,
-    mặc định của dự án), `thang_chinh` → như tháng chính. Có thể ra 13 (nửa sau nhuận tháng Chạp) — đếm vòng 12."""
+    mặc định của dự án), `thang_chinh` → như tháng chính; TV-NHUAN3 `ca_thang_sau` → CẢ tháng nhuận tính tháng sau.
+    Có thể ra 13 (nhuận tháng Chạp) — đếm vòng 12."""
     if thang_nhuan not in THANG_NHUAN:
-        raise ValueError("thang_nhuan phải là 'thang_sau' hoặc 'thang_chinh'")
-    return thang + (1 if nhuan and ngay > 15 and thang_nhuan == "thang_sau" else 0)
+        raise ValueError("thang_nhuan phải là 'thang_sau', 'thang_chinh' hoặc 'ca_thang_sau'")
+    sau = nhuan and (thang_nhuan == "ca_thang_sau" or (thang_nhuan == "thang_sau" and ngay > 15))
+    return thang + (1 if sau else 0)
 
 
 def cung_thang_gieng(phai: str, chi_nam_xem: int, chi_tieu_han: int, thang_sinh: int, chi_gio: int) -> int:
@@ -97,9 +99,10 @@ def cung_luu_nguyet(phai: str, chi_nam_xem: int, chi_tieu_han: int, thang_sinh: 
 
 def cac_thang(nam_am: int, tz: float = 7.0, thang_nhuan: str = "thang_sau") -> list[dict]:
     """Các tháng âm của năm `nam_am` kèm khoảng ngày dương. Tháng nhuận: `thang_sau` tách hai nửa (1–15 tính như
-    tháng chính, 16–hết tính tháng sau); `thang_chinh` giữ nguyên cả tháng như tháng chính."""
+    tháng chính, 16–hết tính tháng sau); `thang_chinh` giữ nguyên cả tháng như tháng chính; `ca_thang_sau` (TV-NHUAN3)
+    giữ một mục cả tháng nhưng đếm cung + can chi như tháng sau (`thang_tinh` = tháng + 1)."""
     if thang_nhuan not in THANG_NHUAN:
-        raise ValueError("thang_nhuan phải là 'thang_sau' hoặc 'thang_chinh'")
+        raise ValueError("thang_nhuan phải là 'thang_sau', 'thang_chinh' hoặc 'ca_thang_sau'")
     nhuan = lunar.thang_nhuan(nam_am, tz)
     ra: list[dict] = []
     for m in range(1, 13):
@@ -118,6 +121,10 @@ def cac_thang(nam_am: int, tz: float = 7.0, thang_nhuan: str = "thang_sau") -> l
                 ra.append({**goc, "can": can2, "chi": chi2, "can_chi": f"{can2} {chi2}",
                            "phan": "nua_sau", "thang_tinh": m + 1, "ngay_am": (16, so),
                            "tu": tu + dt.timedelta(days=15), "den": tu + dt.timedelta(days=so - 1)})
+            elif la_nhuan and thang_nhuan == "ca_thang_sau":
+                can2, chi2 = lunar.can_chi_thang(m + 1, nam_am)
+                ra.append({**goc, "can": can2, "chi": chi2, "can_chi": f"{can2} {chi2}", "phan": "ca_thang",
+                           "thang_tinh": m + 1, "ngay_am": (1, so), "tu": tu, "den": tu + dt.timedelta(days=so - 1)})
             else:
                 ra.append({**goc, "phan": "ca_thang", "thang_tinh": m, "ngay_am": (1, so),
                            "tu": tu, "den": tu + dt.timedelta(days=so - 1)})

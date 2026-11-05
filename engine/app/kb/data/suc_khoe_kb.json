@@ -1,0 +1,276 @@
+{
+ "_nguon": "SK-1 (2026-11-04, chủ dự án duyệt) — MỘT nguồn cho gợi ý sức khoẻ của mọi mảng: (1) không nêu tên bệnh → gợi HỆ CƠ QUAN sách xưa gắn với hành / sao + việc đi khám cụ thể; (2) được gợi NĂM / GIAI ĐOẠN nên chú ý sức khoẻ (lời phòng ngừa, không phải lời đoán); (3) luôn kèm câu không thay lời bác sĩ. Ánh xạ ngũ hành – tạng phủ theo Hoàng Đế Nội Kinh (phạm vi công cộng); phần sao Tử vi lấy lại đúng phần cơ thể KB `tuvi_doi_song_kb.suc_khoe` đã ghi; sao 2, 5 Huyền Không là Thổ. Nháp ban biên tập, chưa đối chiếu nguyên văn. Vẫn cấm: tên bệnh, chẩn đoán, sống chết, khuyên bỏ thuốc.",
+ "source": {
+  "hoang_de_noi_kinh": "Hoàng Đế Nội Kinh — Tố Vấn (ngũ hành ứng ngũ tạng, phạm vi công cộng)",
+  "tvds_toan_thu": "Tử Vi Đẩu Số Toàn Thư (cung Tật Ách, lưu niên)",
+  "tu_binh": "Uyên Hải Tử Bình, Trích Thiên Tuỷ (ngũ hành thiên khô)",
+  "tham_thi": "Thẩm thị Huyền Không học (sao lưu niên)"
+ },
+ "source_id": "hoang_de_noi_kinh",
+ "school_id": "ngu_hanh_tang_phu",
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "he_co_quan": {
+  "Kim": {
+   "he": "đường hô hấp, phổi",
+   "kham": "khám hô hấp, phổi",
+   "source_id": "hoang_de_noi_kinh",
+   "school_id": "ngu_hanh_tang_phu"
+  },
+  "Thổ": {
+   "he": "tiêu hoá, dạ dày",
+   "kham": "khám tiêu hoá, dạ dày",
+   "source_id": "hoang_de_noi_kinh",
+   "school_id": "ngu_hanh_tang_phu"
+  },
+  "Mộc": {
+   "he": "gan, mật và gân cơ",
+   "kham": "kiểm tra gan, mật",
+   "source_id": "hoang_de_noi_kinh",
+   "school_id": "ngu_hanh_tang_phu"
+  },
+  "Thủy": {
+   "he": "thận, đường tiết niệu",
+   "kham": "khám thận, tiết niệu",
+   "source_id": "hoang_de_noi_kinh",
+   "school_id": "ngu_hanh_tang_phu"
+  },
+  "Hỏa": {
+   "he": "tim mạch, huyết áp và mắt",
+   "kham": "khám tim mạch, đo huyết áp và khám mắt",
+   "source_id": "hoang_de_noi_kinh",
+   "school_id": "ngu_hanh_tang_phu"
+  }
+ },
+ "sao_tuvi": {
+  "_ghi_chu": "Cùng phần cơ thể với tuvi_doi_song_kb.suc_khoe (một ý, viết gọn để ghép câu năm).",
+  "Tử Vi": {
+   "hanh": "Thổ",
+   "he": "tiêu hoá, dạ dày",
+   "kham": "khám tiêu hoá",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Thiên Cơ": {
+   "hanh": "Mộc",
+   "he": "gan và gân cơ",
+   "kham": "kiểm tra gan",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Thái Dương": {
+   "hanh": "Hỏa",
+   "he": "mắt và tim mạch",
+   "kham": "khám mắt, tim mạch",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Vũ Khúc": {
+   "hanh": "Kim",
+   "he": "đường hô hấp, phổi",
+   "kham": "khám hô hấp, phổi",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Thiên Đồng": {
+   "hanh": "Thủy",
+   "he": "thận, đường tiết niệu",
+   "kham": "kiểm tra thận, tiết niệu",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Liêm Trinh": {
+   "hanh": "Hỏa",
+   "he": "tim mạch và máu",
+   "kham": "xét nghiệm máu, khám tim mạch",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Thiên Phủ": {
+   "hanh": "Thổ",
+   "he": "dạ dày, tiêu hoá",
+   "kham": "khám tiêu hoá",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Thái Âm": {
+   "hanh": "Thủy",
+   "he": "thận, mắt và nội tiết",
+   "kham": "khám mắt, nội tiết",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Tham Lang": {
+   "hanh": "Mộc",
+   "he": "gan, thận",
+   "kham": "kiểm tra gan, thận",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Cự Môn": {
+   "hanh": "Thủy",
+   "he": "răng miệng, họng và tiêu hoá",
+   "kham": "khám răng miệng, tiêu hoá",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Thiên Tướng": {
+   "hanh": "Thủy",
+   "he": "da, đường tiết niệu",
+   "kham": "khám tiết niệu, da",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Thiên Lương": {
+   "hanh": "Thổ",
+   "he": "dạ dày, vùng ngực",
+   "kham": "khám tiêu hoá, vùng ngực",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Thất Sát": {
+   "hanh": "Kim",
+   "he": "phổi, hô hấp và xương khớp",
+   "kham": "khám hô hấp, xương khớp",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  },
+  "Phá Quân": {
+   "hanh": "Thủy",
+   "he": "thận, tiết niệu và ruột",
+   "kham": "khám thận, tiêu hoá",
+   "source_id": "tvds_toan_thu",
+   "school_id": "nam_phai_viet"
+  }
+ },
+ "sao_huyen_khong": {
+  "_ghi_chu": "Sao lưu niên Huyền Không sách xưa gắn với sức khoẻ người ở: 2 (Nhị Hắc) và 5 (Ngũ Hoàng), cả hai thuộc Thổ.",
+  "2": {
+   "ten": "Nhị Hắc",
+   "hanh": "Thổ",
+   "source_id": "tham_thi",
+   "school_id": "huyen_khong"
+  },
+  "5": {
+   "ten": "Ngũ Hoàng",
+   "hanh": "Thổ",
+   "source_id": "tham_thi",
+   "school_id": "huyen_khong"
+  }
+ },
+ "quai_bo_phan": {
+  "_ghi_chu": "Kinh Dịch — Thuyết quái truyện (phạm vi công cộng): 乾為首，坤為腹，震為足，巽為股，坎為耳，離為目，艮為手，兌為口. Đọc theo quái dưới (nội quái = bản thân người hỏi).",
+  "Càn": {"he": "vùng đầu", "kham": "khám tổng quát, đo huyết áp", "source_id": "thuyet_quai", "school_id": "kinh_dich"},
+  "Khôn": {"he": "bụng, tiêu hoá", "kham": "khám tiêu hoá", "source_id": "thuyet_quai", "school_id": "kinh_dich"},
+  "Chấn": {"he": "chân, gân cơ", "kham": "khám cơ xương khớp", "source_id": "thuyet_quai", "school_id": "kinh_dich"},
+  "Tốn": {"he": "đùi, hông và đường hô hấp", "kham": "khám cơ xương khớp, hô hấp", "source_id": "thuyet_quai", "school_id": "kinh_dich"},
+  "Khảm": {"he": "tai, thận", "kham": "khám tai, kiểm tra thận", "source_id": "thuyet_quai", "school_id": "kinh_dich"},
+  "Ly": {"he": "mắt, tim mạch", "kham": "khám mắt, tim mạch", "source_id": "thuyet_quai", "school_id": "kinh_dich"},
+  "Cấn": {"he": "tay, khớp", "kham": "khám cơ xương khớp", "source_id": "thuyet_quai", "school_id": "kinh_dich"},
+  "Đoài": {"he": "miệng, răng và họng", "kham": "khám răng miệng, họng", "source_id": "thuyet_quai", "school_id": "kinh_dich"}
+ },
+ "nam_ca_nhan": {
+  "_ghi_chu": "Thần số: năm cá nhân KB `thanso_depth.nam_ca_nhan` có chủ đề nghỉ ngơi (7), chăm sức khoẻ thể chất (4), dễ làm quá sức (8). Thần số không gắn hệ cơ quan → khám tổng quát.",
+  "4": {
+   "ly_do": "năm làm việc, sách thần số nhắc chăm sức khoẻ thể chất",
+   "source_id": "thanso_pitago",
+   "school_id": "pitago"
+  },
+  "7": {
+   "ly_do": "năm nội tâm, hợp để nghỉ ngơi và nhìn lại nhịp sống",
+   "source_id": "thanso_pitago",
+   "school_id": "pitago"
+  },
+  "8": {
+   "ly_do": "năm gặt hái, dễ làm quá sức",
+   "source_id": "thanso_pitago",
+   "school_id": "pitago"
+  }
+ },
+ "mau": {
+  "nam": "Năm {nam} nên chú ý sức khoẻ bản thân hơn, nhất là {he}; sắp xếp đi {kham} vào đầu năm.",
+  "nam_chung": "Năm {nam} nên chú ý sức khoẻ bản thân hơn; sắp xếp đi khám sức khoẻ tổng quát vào đầu năm.",
+  "nam_nay": "Năm {nam} (năm đang đi) nên chú ý sức khoẻ bản thân hơn, nhất là {he}; nếu chưa khám trong năm, sắp xếp đi {kham} sớm.",
+  "nam_nay_chung": "Năm {nam} (năm đang đi) nên chú ý sức khoẻ bản thân hơn; nếu chưa khám trong năm, sắp xếp đi khám sức khoẻ tổng quát sớm.",
+  "giai_doan": "Giai đoạn {tu}–{den} tuổi nên giữ lịch khám định kỳ đều hơn, nhất là {he}.",
+  "khong_nam": "Mười năm tới không có năm nào nổi riêng về sức khoẻ; giữ lịch khám tổng quát mỗi năm là đủ.",
+  "mien_tru": "Đây là lời nhắc phòng ngừa theo sách xưa, không phải lời đoán và không thay lời bác sĩ — có dấu hiệu bất thường hãy đi khám ngay.",
+  "hoi_benh": "Lá số không cho biết cơ thể bạn đang có vấn đề gì hay không — chỉ bác sĩ thăm khám mới trả lời được. Nếu bạn đang lo về {he}, hãy đi {kham} để bác sĩ kiểm tra sớm.",
+  "cap_cuu": "Đau ngực, khó thở, sốt cao, co giật hay ngất là dấu hiệu cần bác sĩ xem ngay — hãy đến cơ sở y tế gần nhất hoặc gọi cấp cứu 115. Lá số hay con số không thay được việc này; khi đã ổn, bạn quay lại hỏi tiếp nhé.",
+  "hoi_benh_chung": "Lá số không cho biết cơ thể bạn đang có vấn đề gì hay không — chỉ bác sĩ thăm khám mới trả lời được. Nếu bạn đang lo, hãy đi khám sức khoẻ tổng quát để bác sĩ kiểm tra sớm.",
+  "he_chart": "Theo sách xưa, phần cơ thể lá số của bạn nhắc chăm sóc kỹ là {he}; nên {kham} định kỳ.",
+  "nguoi_than": "Lá số hay con số của bạn không nói được sức khoẻ của người thân — mỗi người cần xem theo ngày giờ sinh của chính họ, và chỉ bác sĩ thăm khám mới biết cơ thể người đó ra sao. Nếu đang lo cho người thân, hãy đưa người đó đi khám sức khoẻ tổng quát để bác sĩ kiểm tra sớm. Muốn xem lá số riêng của người đó: trên trang Tử vi, bấm ô “Đang xem: Bạn” phía trên lá số rồi chọn “Thêm người thân” (thông tin chỉ lưu trên máy của bạn). Lời này không thay lời bác sĩ."
+ },
+ "benh_he": {
+  "_ghi_chu": "Câu hỏi NÊU tên bệnh → chỉ để biết hỏi về hệ cơ quan nào (mẫu chữ đã bỏ dấu). Không bao giờ nhắc lại tên bệnh trong lời đáp. Mẫu tránh chữ trùng khi bỏ dấu (gần/gan, thân/than, phối/phoi, tìm/tim).",
+  "Kim": [
+   "(ung thu|u|lao|viem|benh|kiem tra) phoi",
+   "phoi (yeu|nhiem|co dom)",
+   "ho hap",
+   "hen suyen",
+   "phe quan",
+   "xoang"
+  ],
+  "Thổ": [
+   "da day",
+   "tieu hoa",
+   "dai trang",
+   "ta trang",
+   "trao nguoc",
+   "(ung thu|u|viem|benh) (ruot|tuy)"
+  ],
+  "Mộc": [
+   "(ung thu|u|benh|viem|xo|kiem tra) gan",
+   "gan nhiem mo",
+   "men gan",
+   "(soi|viem) mat",
+   "gut",
+   "gout"
+  ],
+  "Thủy": [
+   "(suy|benh|soi|viem|ung thu) than",
+   "chay than",
+   "tiet nieu",
+   "bang quang",
+   "tien liet"
+  ],
+  "Hỏa": [
+   "(benh|dau|mo|mach|suy) tim",
+   "tim (mach|bam sinh)",
+   "huyet ap",
+   "dot quy",
+   "tai bien",
+   "nhoi mau",
+   "mo mau"
+  ]
+ },
+ "cum_cam": [
+  "sẽ ốm",
+  "sẽ bị ốm",
+  "sẽ bệnh",
+  "sẽ bị bệnh",
+  "sẽ mắc",
+  "mắc bệnh",
+  "đổ bệnh",
+  "phát bệnh",
+  "lâm bệnh",
+  "trọng bệnh",
+  "bệnh nặng",
+  "năm ốm",
+  "ung thư",
+  "tiểu đường",
+  "đột quỵ",
+  "tai biến",
+  "xơ gan",
+  "viêm gan",
+  "suy thận",
+  "suy tim",
+  "cao huyết áp",
+  "tăng huyết áp",
+  "trầm cảm",
+  "khối u",
+  "qua đời",
+  "tử vong",
+  "chẩn đoán"
+ ]
+}

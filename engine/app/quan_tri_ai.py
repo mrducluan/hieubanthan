@@ -41,8 +41,9 @@ RÀNG BUỘC TUYỆT ĐỐI:
 - Không thêm dữ kiện mới: không con số, năm, tên sách, trích dẫn cổ thư, tên người, nguồn nào không có trong \
 đoạn gốc hoặc ngữ cảnh. Không chắc thì bỏ, không bịa.
 - Giọng tham khảo ("thường được mô tả là", "theo cổ thư"), không phán ("bạn sẽ", "chắc chắn", "định mệnh").
-- Không nói về bệnh tật, sống chết, tai nạn; không khuyên mua vật phẩm, cúng, giải hạn, hoá giải; không lô đề, \
-xổ số; không link, số điện thoại.
+- Không nêu tên bệnh, không đoán ốm ("sẽ ốm", "mắc bệnh"), không nói sống chết, tai nạn; phần cơ thể nên chăm sóc, \
+việc đi khám và năm nên chú ý sức khoẻ CÓ SẴN trong đoạn gốc thì giữ (lời phòng ngừa, kèm câu không thay lời bác sĩ). \
+Không khuyên mua vật phẩm, cúng, giải hạn, hoá giải; không lô đề, xổ số; không link, số điện thoại.
 - Giữ thuật ngữ chuyên môn đúng như gốc (tên sao, cung, quẻ, can chi, số).
 - Nếu đoạn gốc có mặt tối hoặc câu tự soi thì giữ lại."""
 

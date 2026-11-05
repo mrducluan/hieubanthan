@@ -118,6 +118,8 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   lan_dau: "number",    // SAO-ND: checkout_started — 1 = tài khoản chưa từng nạp, 0 = đã nạp (khách: không gửi)
   ngay: "number",       // SAO-HH: self_goal_set / self_goal_reached — số ngày mục tiêu (7 / 30), KHÔNG phải ngày tháng
   phien_ban: "string",  // ĐY-1: mã bản đồng ý xử lý dữ liệu (lib/dong-y-du-lieu PHIEN_BAN_DONG_Y, vd "dl1") — không ngày giờ
+  chuong: "string",     // TV-YBS: mã chương báo cáo đời sống (tinh_cam, nam_nay…) khi mở khung "Góc nhìn khác"
+  so_y: "number",       // TV-YBS: số ý trong khung "Góc nhìn khác" (chỉ đếm)
   mien_phi: "number",   // SAO-CG: expert_question_started — 1 = dùng lượt hội viên, 0 = trả VND · /nap-sao checkout_viewed — 1 = chưa chỗ nào thu Sao
   khoi: "string",       // CTA-2: mã khối cuối trang (kien_thuc_tru, bai_lien_quan, bai_moi, doc_tiep, thu_vien, trang_dich)
   lap: "number",        // CTA-2: 1 = thẻ bù (lối đi tiếp), 0 = thẻ thật / cả khối

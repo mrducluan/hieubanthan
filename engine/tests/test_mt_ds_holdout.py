@@ -74,7 +74,12 @@ def test_chac_chan_khong_bi_chan():
     """Chặn nhầm cũ: "chắc chắn" nằm trong bộ từ chối Thần số dùng chung → Huyền học bỏ (chỉ giữ "cho tôi biết chắc")."""
     assert tuvi.phan_loai("Năm nay tôi có chắc chắn được thăng chức không?")["xu_ly"] != "tu_choi_nhe"
     assert battu.phan_loai("Tôi có chắc chắn hợp nghề kinh doanh không?")["xu_ly"] != "tu_choi_nhe"
-    assert tuvi.phan_loai("Cho tôi biết chắc năm nào tôi lấy chồng")["xu_ly"] == "tu_choi_nhe"
+    # CY-1 (chủ dự án đổi 2026-11-04): "cho tôi biết chắc" không còn từ chối — trả lời nhịp thời gian, mở bằng "không ai
+    # nói chắc được".
+    assert tuvi.phan_loai("Cho tôi biết chắc năm nào tôi lấy chồng")["xu_ly"] != "tu_choi_nhe"
+    van = tuvi.tra_loi("Cho tôi biết chắc năm nào tôi lấy chồng", sinh={"ngay": __import__("datetime").date(1990, 5, 17),
+                                                                       "ti": 6, "gioi_tinh": "nu"})["cau_tra_loi"]
+    assert "Không ai nói chắc được" in van
 
 
 # ---- Hồi quy sau rà soát (code review MT-ĐS): bẫy bỏ dấu + mục sao hạn không chèn trước câu đặc biệt ----------------
