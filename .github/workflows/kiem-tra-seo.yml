@@ -14,7 +14,7 @@ permissions:
   contents: read
 jobs:
   ra-seo:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # ghim: ubuntu-latest = 26.04 (11/2026) chưa có Playwright 1.56 + pg_dump 17 ghi SET transaction_timeout PG16 không hiểu
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4

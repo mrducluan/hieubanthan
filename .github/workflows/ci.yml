@@ -18,7 +18,7 @@ concurrency:
 jobs:
   engine:
     name: engine
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # ghim: ubuntu-latest = 26.04 (11/2026) chưa có Playwright 1.56 + pg_dump 17 ghi SET transaction_timeout PG16 không hiểu
     env:
       PYTHONIOENCODING: utf-8
       # SEO-L4: PR sửa KB từ /quan-tri (nhánh quan-tri/…) không chạy được lệnh cập nhật sổ ngày → chỉ kiểm khuôn sổ;
@@ -49,7 +49,7 @@ jobs:
   # đúng ảnh Render dùng, chạy rồi gọi thử an sao + Thời gian tới (đường dùng tiến trình chạy sẵn).
   engine-docker:
     name: engine-docker
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # ghim: ubuntu-latest = 26.04 (11/2026) chưa có Playwright 1.56 + pg_dump 17 ghi SET transaction_timeout PG16 không hiểu
     steps:
       - uses: actions/checkout@v4
       - name: build ảnh engine (bước build tự chạy tuvi_an_sao.tu_kiem)
@@ -68,7 +68,7 @@ jobs:
 
   web:
     name: web
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # ghim: ubuntu-latest = 26.04 (11/2026) chưa có Playwright 1.56 + pg_dump 17 ghi SET transaction_timeout PG16 không hiểu
     env:
       # Giá trị giả vô hại — build không gọi engine, không cần secret thật.
       ENGINE_URL: http://localhost:8000
@@ -91,7 +91,7 @@ jobs:
   # như người dùng + service role (supabase/kiem_thu/chay.sh). Lỗi ngoài dòng "phải bị chặn" → job đỏ.
   supabase:
     name: supabase
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # ghim: ubuntu-latest = 26.04 (11/2026) chưa có Playwright 1.56 + pg_dump 17 ghi SET transaction_timeout PG16 không hiểu
     services:
       postgres:
         image: pgvector/pgvector:pg16  # Postgres 16 + pgvector (migration 0017, LG-ĐS)
