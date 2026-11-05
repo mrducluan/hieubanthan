@@ -13,7 +13,12 @@ Không có lỗi kỹ thuật — Google chưa tải các trang (xếp hàng). Q
       Xem trang đã kiểm tra → HTML: phải thấy `<title>` và `rel="canonical"` (kiểm Q-I2). Thấy thiếu thì báo em, em hoàn tác ngay.
 - [ ] Sau đó **Yêu cầu lập chỉ mục** ~10 hub/ngày theo danh sách mục 5 báo cáo (`/tu-vi/tu-hoa`, `/kinh-dich/que`, `/bat-tu/menh-theo-nam`…),
       không yêu cầu từng trang con. Sơ đồ trang web → gửi lại `sitemap.xml` + `sitemap-ngay.xml` (số URL ngày giảm 406 → ~97 là đúng).
-- [ ] (Quyết định, khi tiện) **Q-I3** cache HTML trang kiến thức (đưa phản hồi từ ~670 ms xuống dưới 200 ms — việc lớn, đụng CSP).
+- [ ] **Khoảng 19–26/11/2026 — xem lại Q-I3** (anh chốt 05/11: đợi 2–3 tuần sau Q-I1 + Q-I2). Gửi em 2 ảnh: Search Console →
+      Cài đặt → Thống kê thu thập (thời gian phản hồi trung bình, số lượt/ngày) + danh sách "Đã phát hiện – chưa lập chỉ mục" xuất CSV.
+      Em quyết theo số: phản hồi vẫn > ~500 ms **hoặc** trang kiến thức (nhóm A) chưa giảm rõ → làm Q-I3 (lưu sẵn HTML trang kiến
+      thức, ~670 ms → < 200 ms). Đánh đổi khi làm: trang kiến thức dùng CSP danh sách tên miền thay khoá mỗi lượt — GTM, GA4,
+      Meta Pixel vẫn chạy (em ghi sẵn tên miền Google + Meta), nhưng thẻ MỚI gắn qua GTM phải thêm tên miền vào `CSP_THEM_MIEN`
+      mới chạy trên trang kiến thức; trang công cụ không đổi. Ngược lại số đã ổn → không làm, giữ CSP-2 như cũ.
 - [ ] Sau 2–3 tuần: xuất lại danh sách "Đã phát hiện – chưa lập chỉ mục" gửi em (nhóm kiến thức phải giảm rõ); nếu có danh sách
       "Đã thu thập – hiện chưa lập chỉ mục" thì gửi luôn.
 

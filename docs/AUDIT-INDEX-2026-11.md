@@ -87,7 +87,7 @@ suất tải với các trang nhóm A.
 |---|---|---|---|
 | **Q-I1** ✅ đã làm 05/11 | Thu cửa sổ index trang ngày −7 … +400 → **−7 … +90** ngay (thay mốc 01/02/2027 của Q4), sitemap việc-tháng tới **+6 tháng** (thay +24 của NAM-3) | Bớt ~410 URL nhóm C khỏi hàng đợi | Người tìm ngày cưới xa hơn 3 tháng vào trang tháng / trang việc thay vì trang ngày |
 | **Q-I2** ✅ đã làm 05/11 | Bỏ Googlebot khỏi `htmlLimitedBots` (Googlebot chạy JS, Next mặc định cũng không xếp Googlebot vào nhóm này) | Googlebot nhận byte đầu sớm ~0,25 giây | Metadata tới trong luồng; phải chạy lại `kiem-tra-seo.mjs` + Kiểm tra URL trực tiếp để chắc thẻ title / canonical vẫn đúng |
-| **Q-I3** | Cache HTML trang kiến thức / ngày / tuổi ở CDN (CSP theo hash / SRI hoặc PPR cho các trang này; trang công cụ giữ nonce) — việc SEO-K (4) để ngỏ "chờ số production"; số đã có ở mục 2 | Phản hồi ~1 giây → dưới 0,2 giây; bớt lượt chạy hàm Vercel | Việc lớn, đụng CSP-2; làm riêng một PR có e2e `csp.spec.ts` |
+| **Q-I3** ⏳ hẹn xem lại 19–26/11 (anh chốt 05/11) | Cache HTML trang kiến thức / ngày / tuổi ở CDN (CSP theo hash / SRI hoặc PPR cho các trang này; trang công cụ giữ nonce) — việc SEO-K (4) để ngỏ "chờ số production"; số đã có ở mục 2 | Phản hồi ~1 giây → dưới 0,2 giây; bớt lượt chạy hàm Vercel | Việc lớn, đụng CSP-2; làm riêng một PR có e2e `csp.spec.ts` |
 
 Không khuyên: xoá trang nhóm A/B khỏi sitemap, đặt `noindex` hàng loạt, hay bấm yêu cầu lập chỉ mục từng URL con.
 
