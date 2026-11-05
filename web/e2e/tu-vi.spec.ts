@@ -25,7 +25,10 @@ test("có hồ sơ đủ giờ sinh: vẽ lá số, chọn cung → chi tiết �
 
 test("không có hồ sơ: vẫn hỏi được câu kiến thức chung", async ({ page }) => {
   await page.goto("/tu-vi");
-  await expect(page.getByRole("button", { name: "Tạo hồ sơ" })).toBeVisible();
+  // CTA-LS: form lập lá số nằm ngay trên trang (không còn nút mở bảng trượt).
+  const moi = page.getByTestId("moi-lap-la-so");
+  await expect(moi).toBeVisible();
+  await expect(moi.getByLabel("Nơi sinh")).toBeVisible();
   const ans = await hoi(page, "Tham Lang ở cung Quan Lộc có ý nghĩa gì?");
   await expect(ans).toContainText("Tham Lang ở cung Quan Lộc");
 });
@@ -34,12 +37,11 @@ test("hồ sơ cũ thiếu nơi sinh: hỏi bổ sung đúng lúc → sinh ở n
   const { noi_sinh: _bo, ...cu } = HO_SO_MAU;
   await napHoSo(page, cu);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Thêm giờ sinh, giới tính, nơi sinh" }).click();
   const noi = page.getByLabel("Nơi sinh");
   await expect(noi.locator("option", { hasText: "Hà Nội" })).toHaveCount(1);
   await noi.selectOption("nuoc_ngoai");
   await page.getByLabel(/giờ mùa hè/).check();
-  await page.getByRole("button", { name: "Lưu và xem" }).click();
+  await page.getByRole("button", { name: "Lập lá số của tôi" }).click();
   const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
   await expect(laSo).toBeVisible();
   await expect(page.getByText(/giờ địa phương nơi sinh/)).toBeVisible();
@@ -259,12 +261,11 @@ test("EN-6 BI-3: chọn sinh ở nước ngoài thì có ô múi giờ nơi sinh
   const { noi_sinh: _bo, ...cu } = HO_SO_MAU;
   await napHoSo(page, cu);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Thêm giờ sinh, giới tính, nơi sinh" }).click();
   await page.getByLabel("Nơi sinh").selectOption("nuoc_ngoai");
   const mg = page.getByLabel("Múi giờ chuẩn nơi sinh");
   await expect(mg).toHaveValue("");
   await mg.selectOption("-5");
-  await page.getByRole("button", { name: "Lưu và xem" }).click();
+  await page.getByRole("button", { name: "Lập lá số của tôi" }).click();
   await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
   const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1")!));
   expect(h.utc_noi_sinh).toBe(-5);
@@ -281,4 +282,33 @@ test("TV-ZW Cùng sao Mệnh: một dòng tỉ lệ dưới lá số, thuật ng
   await expect(d).toContainText("không phải số người thật");
   await expect.poll(async () => (await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []))
     .some((e) => e.su_kien === "chart_interacted" && e.kind === "cung_sao_menh")).toBe(true);
+});
+
+test("CTA-LS: hồ sơ thần số (chỉ tên + ngày sinh) → khối mời nêu đúng mục còn thiếu, form điền sẵn", async ({ page }) => {
+  const { gio: _g, gioi_tinh: _t, noi_sinh: _n, ...thanSo } = HO_SO_MAU;
+  await napHoSo(page, thanSo);
+  await page.goto("/tu-vi");
+  const moi = page.getByTestId("moi-lap-la-so");
+  await expect(moi.getByRole("heading", { level: 2 })).toHaveText("Còn 3 thông tin nữa là có lá số: giờ sinh, giới tính, nơi sinh");
+  await expect(moi.getByLabel("Họ và tên đầy đủ")).toHaveValue(HO_SO_MAU.ho_ten);
+  await expect(page.getByTestId("dau-chip")).toContainText("Chương đầu đọc ngay");
+  await expect(page.locator("h1")).toHaveText("Xem Tử vi: năm nay bạn nên chú ý gì?");
+});
+
+test("CTA-LS: điện thoại 360px — khối mời không tràn ngang, tiêu đề + form trước danh sách; Phong thuỷ không có chip", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  for (const duong of ["/tu-vi", "/bat-tu"]) {
+    await page.goto(duong);
+    const moi = page.getByTestId("moi-lap-la-so");
+    await expect(moi).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth), duong).toBeLessThanOrEqual(360);
+    const yTieuDe = await moi.getByRole("heading", { level: 2 }).evaluate((e) => e.getBoundingClientRect().top);
+    const yForm = await moi.getByLabel("Họ và tên đầy đủ").evaluate((e) => e.getBoundingClientRect().top);
+    const yDs = await moi.getByText("Bạn nhận được").evaluate((e) => e.getBoundingClientRect().top);
+    expect(yTieuDe).toBeLessThan(yForm);
+    expect(yForm).toBeLessThan(yDs);
+    await expect(page.getByTestId("dau-chip")).toBeVisible();
+  }
+  await page.goto("/phong-thuy");
+  await expect(page.getByTestId("dau-chip")).toHaveCount(0);
 });

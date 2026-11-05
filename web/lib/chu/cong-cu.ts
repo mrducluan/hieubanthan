@@ -20,7 +20,58 @@ const mangHuyenHoc = (coHoiAi: boolean, nhanTren: string): BangChu => gopBang(KH
   ...(coHoiAi ? { "hoi.tieu_de": { nhom: "Hỏi đáp", nhan: "Tiêu đề khung hỏi đáp", mac_dinh: "Hỏi đáp chuyên sâu", toi_da: 60 } } : {}),
 });
 
-export const CHU_TU_VI = gopBang(mangHuyenHoc(true, "Lá số 12 cung · Tử vi Đẩu Số"), {
+// Chữ mặc định (CTA-LS) — đặt trước bảng để bảng đọc được.
+const MOI_TU_VI: MoiLap = {
+  chip: ["Chương đầu đọc ngay", "Không cần tài khoản", "Bạn tự chấm đúng hay chưa"],
+  nhan_tren: "Khoảng một phút",
+  tieu_de: "Lập lá số để xem *năm nay của bạn*",
+  tieu_de_thieu: "Còn {so} thông tin nữa là có lá số: {thieu}",
+  cau_phu: "Mỗi canh giờ cho ra một lá số khác. Nơi sinh cho biết giờ địa phương lúc bạn chào đời, nhất là người sinh trước 1975.",
+  nut: "Lập lá số của tôi",
+  tran_an: "Không nhớ giờ sinh? Chọn “Không biết giờ” ở ô “Giờ sinh này”, lá số vẫn lập được và ghi rõ là giờ tạm.",
+  nhan_tieu_de: "Bạn nhận được",
+  ghi_chu_nhan: "Lá số và chương đầu bài đọc miễn phí; các chương sau có thể cần Sao.",
+  nhan: ["Lá số 12 cung vẽ ngay, chạm từng cung để xem sao", "Mức *Thuận lợi, Cân bằng, Cần lưu ý* cho từng mảng đời", "Năm nào trong 10 năm tới nên chú ý tiền, việc, tình cảm", "Ba tháng tới: tháng nào nên đẩy việc, tháng nào nên chậm"],
+  minh_hoa: "Minh hoạ. Lá số thật hiện ngay sau khi bạn nhập.",
+  chua_san_sang: "Chưa muốn nhập? Bạn vẫn hỏi được câu kiến thức ở khung hỏi đáp bên dưới, hoặc",
+  la_so_mau: "xem 6 lá số mẫu đọc từng bước",
+};
+const MOI_BAT_TU: MoiLap = {
+  chip: ["Hành của bạn hiện ngay", "Hai cách tìm hành nên bù", "Chương đầu đọc ngay"],
+  nhan_tren: "Khoảng một phút",
+  tieu_de: "Xem năm hành của bạn *dư thiếu ra sao*",
+  tieu_de_thieu: "Còn {so} thông tin nữa là có tứ trụ: {thieu}",
+  cau_phu: "Giờ sinh cho ra trụ thứ tư của lá số. Nơi sinh để quy về đúng giờ đồng hồ lúc bạn chào đời. Giới tính để tính chiều các giai đoạn 10 năm.",
+  nut: "Xem năm hành của tôi",
+  tran_an: "Không nhớ giờ sinh? Chọn “Không biết giờ” ở ô “Giờ sinh này”; trang ghi rõ phần nào là tạm. Sinh gần ngày chuyển tiết thì giờ càng quan trọng.",
+  nhan_tieu_de: "Bạn nhận được",
+  ghi_chu_nhan: "Tứ trụ và chương đầu bài đọc miễn phí; các chương sau có thể cần Sao.",
+  nhan: ["Hành của bạn, kèm một hình ảnh dễ nhớ như cây lớn hay ngọn nến", "Hành nào đang *dư*, hành nào đang *hụt*, sức bạn mạnh hay yếu", "Hai cách đọc hành nên bù, nói rõ khi hai cách khác nhau", "Năm nay và từng tháng theo tiết: lúc nào nên đẩy, lúc nào nên chậm"],
+  minh_hoa: "Minh hoạ. Tứ trụ thật hiện ngay sau khi bạn nhập.",
+  chua_san_sang: "Chưa muốn nhập? Bạn vẫn hỏi được câu kiến thức ở khung hỏi đáp bên dưới.",
+};
+
+/** CTA-LS: khối "Mời lập lá số" (form ngay trên trang) + 3 chip lợi ích dưới lời dẫn của Tử vi / Bát tự. */
+type MoiLap = { chip: [string, string, string]; nhan_tren: string; tieu_de: string; tieu_de_thieu: string; cau_phu: string; nut: string;
+  tran_an: string; nhan_tieu_de: string; ghi_chu_nhan: string; nhan: [string, string, string, string]; minh_hoa: string; chua_san_sang: string; la_so_mau?: string };
+const M = "Mời lập lá số";
+const moiLap = (m: MoiLap): BangChu => ({
+  ...Object.fromEntries(m.chip.map((v, i) => [`dau.chip_${i + 1}`, { nhom: DAU, nhan: `Chip lợi ích ${i + 1} dưới lời dẫn`, mac_dinh: v, toi_da: 40 }])),
+  "moi.nhan_tren": { nhom: M, nhan: "Dòng nhỏ trên tiêu đề khối", mac_dinh: m.nhan_tren, toi_da: 60 },
+  "moi.tieu_de": { nhom: M, nhan: "Tiêu đề khối (chưa có hồ sơ) — *chữ* để nhấn màu", mac_dinh: m.tieu_de, toi_da: 80 },
+  "moi.tieu_de_thieu": { nhom: M, nhan: "Tiêu đề khi hồ sơ còn thiếu ({so} = số mục, {thieu} = các mục thiếu)", mac_dinh: m.tieu_de_thieu, toi_da: 100 },
+  "moi.cau_phu": { nhom: M, nhan: "Câu phụ dưới tiêu đề (vì sao cần giờ + nơi sinh)", mac_dinh: m.cau_phu, toi_da: 200 },
+  "moi.nut": { nhom: M, nhan: "Nhãn nút gửi (người đã đồng ý dữ liệu)", mac_dinh: m.nut, toi_da: 32 },
+  "moi.tran_an": { nhom: M, nhan: "Dòng gợi ý dưới form (không lặp lời riêng tư của form)", mac_dinh: m.tran_an, toi_da: 160 },
+  "moi.nhan_tieu_de": { nhom: M, nhan: "Tiêu đề danh sách \"Bạn nhận được\"", mac_dinh: m.nhan_tieu_de, toi_da: 60 },
+  "moi.ghi_chu_nhan": { nhom: M, nhan: "Dòng nhỏ dưới danh sách (phần nào miễn phí)", mac_dinh: m.ghi_chu_nhan, toi_da: 140 },
+  ...Object.fromEntries(m.nhan.map((v, i) => [`moi.nhan_${i + 1}`, { nhom: M, nhan: `Bạn nhận được — dòng ${i + 1} (*chữ* để nhấn)`, mac_dinh: v, toi_da: 110 }])),
+  "moi.minh_hoa": { nhom: M, nhan: "Chú thích dưới hình minh hoạ", mac_dinh: m.minh_hoa, toi_da: 100 },
+  "moi.chua_san_sang": { nhom: M, nhan: "Dòng cho người chưa muốn nhập", mac_dinh: m.chua_san_sang, toi_da: 160 },
+  ...(m.la_so_mau ? { "moi.la_so_mau": { nhom: M, nhan: "Chữ link lá số mẫu", mac_dinh: m.la_so_mau, toi_da: 60 } } : {}),
+});
+
+export const CHU_TU_VI = gopBang(mangHuyenHoc(true, "Tử vi 12 cung · Âm lịch Việt"), moiLap(MOI_TU_VI), {
   // TV-HOA-HAN: dải 12 giai đoạn 10 năm dưới lá số (chạm → năm xem nhảy tới đầu giai đoạn).
   "dai_han.tieu_de": { nhom: "Lá số", nhan: "Tiêu đề dải giai đoạn 10 năm dưới lá số", mac_dinh: "Các giai đoạn 10 năm — chạm để xem", toi_da: 80 },
   // TV-VONG: hai vòng sao theo hạn trong thẻ chi tiết cung (chỉ hiển thị, không đổi mức nào).
@@ -29,7 +80,7 @@ export const CHU_TU_VI = gopBang(mangHuyenHoc(true, "Lá số 12 cung · Tử vi
   "vong_han.giai_thich": { nhom: "Lá số", nhan: "Giải thích hai vòng sao theo hạn (trong \"Vì sao nói vậy\")",
     mac_dinh: "Mỗi giai đoạn 10 năm và mỗi năm có hai vòng 12 sao riêng — vòng Thái Tuế và vòng Tướng tinh — xếp lại từ cung của hạn đó. Ở đây chỉ để bạn đối chiếu với sách: hai vòng này không làm đổi mức thuận lợi hay lưu ý nào trong bài đọc.", toi_da: 320 },
 });
-export const CHU_BAT_TU = mangHuyenHoc(true, "Tứ trụ · ngũ hành · thập thần");
+export const CHU_BAT_TU = gopBang(mangHuyenHoc(true, "Bát tự tứ trụ · Ngũ hành"), moiLap(MOI_BAT_TU));
 export const CHU_PHONG_THUY = mangHuyenHoc(true, "Hướng nhà · bố trí · Bát trạch");
 export const CHU_KINH_DICH = mangHuyenHoc(false, "Gieo quẻ · 64 quẻ · lời hào");
 

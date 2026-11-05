@@ -152,7 +152,7 @@ test("trang công cụ: breadcrumb thật thay chữ 'Huyền học' tĩnh; dòn
   await page.goto("/bat-tu");
   expect(await breadcrumb(page)).toEqual(["Trang chủ", "Huyền học", "Bát tự"]);
   await expect(page.locator("[data-thanh-mang=battu]:visible [data-muc=cong_cu]")).toHaveAttribute("aria-current", "page");
-  await expect(page.locator("header .eyebrow").first()).toHaveText(/Tứ trụ/);
+  await expect(page.locator("header .eyebrow").first()).toHaveText(/tứ trụ/i);
   const html = await (await request.get("/phong-thuy/huong-xau-nam")).text();
   expect(ldBreadcrumb(html)).toEqual(["Trang chủ", "Huyền học", "Phong thuỷ", "Hướng xấu theo năm"]);
 });
