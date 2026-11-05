@@ -150,7 +150,7 @@ export function TuVi() {
 
   useBatDauDoc("tuvi", Boolean(ls) && !nt);
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Orbit} ten="Xem Tử vi: năm nay bạn nên chú ý gì?" mo_ta="Việc đang chững, tiền vào rồi lại ra, chuyện tình cảm chưa rõ? Nhập ngày giờ sinh để có lá số 12 cung, rồi đọc từng mảng đời bằng lời thường: chỗ đang thuận, chỗ nên chú ý, việc nên làm." />;
+  const dau = <DauMang Icon={Orbit} chip ten="Xem Tử vi: năm nay bạn nên chú ý gì?" mo_ta="Việc đang chững, tiền vào rồi lại ra, chuyện tình cảm chưa rõ? Nhập ngày giờ sinh để có lá số 12 cung, rồi đọc từng mảng đời bằng lời thường: chỗ đang thuận, chỗ nên chú ý, việc nên làm." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   return (
     <div>

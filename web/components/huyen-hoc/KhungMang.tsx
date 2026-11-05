@@ -11,7 +11,7 @@ import type { HoSo } from "@/lib/hoso";
 
 // Khung chung cho 4 mảng Huyền học: tiêu đề + nhãn nháp + hỏi thêm dữ liệu đúng lúc (BirthSheet).
 // ND-2: H1, lời dẫn, khối "phía trên" có thể do CMS phủ (DauCms bọc ở page.tsx); trống → chữ truyền vào.
-export function DauMang({ Icon, ten, mo_ta, children }: { Icon: LucideIcon; ten: string; mo_ta: string; children?: ReactNode }) {
+export function DauMang({ Icon, ten, mo_ta, chip, children }: { Icon: LucideIcon; ten: string; mo_ta: string; /** CTA-LS: hiện 3 chip `dau.chip_*` (chỉ trang có khoá đó trong bảng chữ). */ chip?: boolean; children?: ReactNode }) {
   const d = useDauCms(), c = useChu();
   return (
     <>
@@ -23,7 +23,7 @@ export function DauMang({ Icon, ten, mo_ta, children }: { Icon: LucideIcon; ten:
       <h1 className="mt-4 text-4xl sm:text-5xl">{d.h1 ? <ChuNhan chu={d.h1} /> : ten}</h1>
       <LoiDan macDinh={mo_ta} />
       {/* CTA-LS: chip lợi ích (chỉ trang có khoá dau.chip_* — Tử vi, Bát tự). */}
-      {[1, 2, 3].some((i) => c(`dau.chip_${i}`)) && (
+      {chip && [1, 2, 3].some((i) => c(`dau.chip_${i}`)) && (
         <ul className="mt-4 flex flex-wrap gap-2" data-testid="dau-chip">
           {[1, 2, 3].map((i) => c(`dau.chip_${i}`)).filter(Boolean).map((t) => (
             <li key={t} className="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/[0.06] px-3 py-1 text-xs text-fg sm:text-sm">

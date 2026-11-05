@@ -28,13 +28,14 @@ function conThieu(h: HoSo | null): string[] {
 export function MoiLapLaSo({ moDun, hoSo, sauForm }: { moDun: MoDun; hoSo: HoSo | null; sauForm?: ReactNode }) {
   const c = useChu();
   const ref = useRef<HTMLElement>(null);
+  const daGhi = useRef(false);
   const thieu = conThieu(hoSo);
   // Đo: thấy khối → bấm gửi (profile_created do NhapHoSo ghi). Một lần mỗi lượt vào trang.
   useEffect(() => {
     const el = ref.current;
-    if (!el || typeof IntersectionObserver === "undefined") return;
+    if (!el || daGhi.current || typeof IntersectionObserver === "undefined") return;
     const io = new IntersectionObserver((ds) => {
-      if (ds.some((d) => d.isIntersecting)) { ghi("chart_interacted", { mo_dun: moDun, kind: "moi_lap_thay", co_ho_so: Boolean(hoSo) }); io.disconnect(); }
+      if (ds.some((d) => d.isIntersecting) && !daGhi.current) { daGhi.current = true; ghi("chart_interacted", { mo_dun: moDun, kind: "moi_lap_thay", co_ho_so: Boolean(hoSo) }); io.disconnect(); }
     }, { threshold: 0.4 });
     io.observe(el);
     return () => io.disconnect();

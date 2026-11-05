@@ -294,3 +294,21 @@ test("CTA-LS: hồ sơ thần số (chỉ tên + ngày sinh) → khối mời n�
   await expect(page.getByTestId("dau-chip")).toContainText("Chương đầu đọc ngay");
   await expect(page.locator("h1")).toHaveText("Xem Tử vi: năm nay bạn nên chú ý gì?");
 });
+
+test("CTA-LS: điện thoại 360px — khối mời không tràn ngang, tiêu đề + form trước danh sách; Phong thuỷ không có chip", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  for (const duong of ["/tu-vi", "/bat-tu"]) {
+    await page.goto(duong);
+    const moi = page.getByTestId("moi-lap-la-so");
+    await expect(moi).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth), duong).toBeLessThanOrEqual(360);
+    const yTieuDe = await moi.getByRole("heading", { level: 2 }).evaluate((e) => e.getBoundingClientRect().top);
+    const yForm = await moi.getByLabel("Họ và tên đầy đủ").evaluate((e) => e.getBoundingClientRect().top);
+    const yDs = await moi.getByText("Bạn nhận được").evaluate((e) => e.getBoundingClientRect().top);
+    expect(yTieuDe).toBeLessThan(yForm);
+    expect(yForm).toBeLessThan(yDs);
+    await expect(page.getByTestId("dau-chip")).toBeVisible();
+  }
+  await page.goto("/phong-thuy");
+  await expect(page.getByTestId("dau-chip")).toHaveCount(0);
+});
