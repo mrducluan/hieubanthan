@@ -155,7 +155,7 @@ test("6b-1: trang ngày và trang 'ngày tốt cưới hỏi tháng' nói cùng 
   await expect(vl.locator("li")).toHaveCount(6);
   const cuoi = vl.locator("li", { hasText: "Cưới hỏi" });
   await expect(cuoi).toHaveAttribute("data-danh-gia", "tranh");
-  await expect(cuoi).toContainText("Nạp thái");
+  await expect(cuoi).toContainText("Dạm ngõ");
   await expect(page.getByLabel("Trả lời nhanh").first()).toContainText("chưa xếp vào ngày tốt cưới hỏi");
   await page.goto("/xem-ngay-tot/cuoi-hoi-thang-1-2027");
   const ds = page.getByTestId("ngay-tot-viec");

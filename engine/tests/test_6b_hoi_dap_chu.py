@@ -110,9 +110,9 @@ def test_ngay_xem_viec_lon_khop_trang_viec_thang():
     r = h.ngay_xem(d)
     v6 = {v["ma"]: v for v in r["viec_lon"]}
     assert set(v6) == {v["ma"] for v in h.VIEC_SEO}
-    # Sách ghi nên cưới gả nhưng kiêng Nạp thái, Kết ước → không phải ngày tốt cưới hỏi (đúng như trang việc-tháng).
+    # Sách ghi nên cưới gả nhưng kiêng Dạm ngõ, Đính ước (sách xưa: Nạp thái, Đính minh) → không phải ngày tốt cưới hỏi (đúng như trang việc-tháng).
     assert v6["cuoi_hoi"]["danh_gia"] == "tranh"
-    assert "Nạp thái" in v6["cuoi_hoi"]["chu"] and "Kết ước" in v6["cuoi_hoi"]["chu"]
+    assert "Dạm ngõ" in v6["cuoi_hoi"]["chu"] and "Đính ước" in v6["cuoi_hoi"]["chu"]
     ds = {x["ngay"] for x in h.viec_thang("cuoi_hoi", 2027, 1)["ngay"]}
     assert d.isoformat() not in ds
     for v in h.VIEC_SEO:

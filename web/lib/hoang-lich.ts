@@ -2,7 +2,8 @@
 // web chỉ hiển thị. Bản công khai (không ngày sinh) đọc bằng GET để cache; bản cá nhân đi qua /api/lich/*.
 import { unstable_noStore as noStore } from "next/cache";
 
-export interface MucNghiKy { ma: string; ten: string; nghia: string }
+/** `ten` = việc theo lối ngày nay; `ten_goc` = cách sách xưa gọi (chỉ ở phần giải nghĩa); `luu_y` = việc y tế / pháp lý. */
+export interface MucNghiKy { ma: string; ten: string; nghia: string; ten_goc?: string; luu_y?: string }
 export interface ThanSat { ma: string; ten: string; nghia?: string }
 export interface GioNgay {
   chi: string; can_chi: string; khung: string; than: string; hoang_dao: boolean;
