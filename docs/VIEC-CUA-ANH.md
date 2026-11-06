@@ -13,7 +13,13 @@
 - [ ] Menu Huyền học đã đủ 12 mục con — muốn `/chan-dung` vào menu thì chọn một mục nhường chỗ (CMS → Menu đầu trang); hiện vào từ hub `/huyen-hoc`, `/ban-than`, sổ trang, sitemap.
 - [ ] Search Console → Kiểm tra URL `https://hieuban.com/chan-dung` → Yêu cầu lập chỉ mục.
 
-**Bật "máy gợi ý từ ảnh gương mặt" (NT-1) — chỉ sau khi anh quyết pháp lý ở mục 4z:**
+**Bật "Tải ảnh chân dung" (ANH-1, `docs/ANH-CHAN-DUNG.md`) — chỉ sau khi anh quyết pháp lý ở mục 4z:** khối tải ảnh đã nằm sẵn đầu trang
+`/nhan-tuong` ở trạng thái "đang chờ bật"; thoả thuận riêng (bản `am1`) hỏi người dùng ngay chỗ tải ảnh, máy chủ từ chối lượt thiếu đồng ý.
+- [ ] Hỏi luật sư 3 điểm: hợp đồng xử lý dữ liệu với nhà cung cấp AI thị giác (qua OpenRouter → máy chủ ngoài VN), hồ sơ đánh giá tác động
+  thêm mục sinh trắc (`docs/ho-so-dlcn/`), thông báo chuyển dữ liệu ra nước ngoài. Xong thì làm các bước dưới.
+- [ ] (Tuỳ chọn, GĐ2) Duyệt dependency `@mediapipe/tasks-vision` nếu muốn đo điểm mốc ngay trên máy (ảnh không rời máy; cần mở CSP
+  `'wasm-unsafe-eval'` + miền mô hình) — phương án A trong docs; chưa duyệt thì giữ C như hiện tại.
+
 1. Render → dịch vụ `hieubanthan-engine-sg` → **Environment** → Add: `NHAN_TUONG_DOC_ANH` = `1`. `OPENROUTER_API_KEY` phải đã có ở cùng chỗ (đang dùng cho hỏi đáp AI); tuỳ chọn `DOC_ANH_MODEL` (mặc định `google/gemini-2.5-flash`, đổi model thị giác khác trên OpenRouter thì ghi tên vào đây).
 2. **Save Changes** → Render tự deploy lại (1–3 phút). Không cần đụng Vercel.
 3. Kiểm: mở `https://hieuban.com/api/nhan-tuong/cau-hinh` → `{"doc_anh":true}`; vào `/nhan-tuong` → trong Khảo sát hiện khối "Để máy gợi ý từ ảnh (thử nghiệm)" với ô đồng ý không tích sẵn.

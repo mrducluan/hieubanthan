@@ -254,6 +254,30 @@ def test_doc_anh_mat_mac_dinh_tat_va_hau_xu_ly(monkeypatch):
         dam.hau_xu_ly({"tra_loi": "x"})
 
 
+def test_anh1_nhieu_goc_va_kiem_tra_mat():
+    """ANH-1: ba góc chụp vào lời nhắc; kết quả kiểm ảnh của mô hình thành cờ tất định; không thấy đúng một mặt → không gợi ý."""
+    msg = dam.dung_prompt({"anh": [{"du_lieu": "QUJD", "loai": "image/jpeg", "goc": "thang"},
+                                   {"du_lieu": "QUJD", "loai": "image/jpeg", "goc": "nghieng_trai"},
+                                   {"du_lieu": "QUJD", "loai": "image/jpeg", "goc": "nghieng_phai"},
+                                   {"du_lieu": "QUJD", "loai": "image/jpeg"}]})          # ảnh thứ 4 bị bỏ
+    nd = msg[1]["content"]
+    assert [x["text"] for x in nd if x["type"] == "text"][1:] == ["Ảnh 1: chính diện.", "Ảnh 2: nghiêng trái.", "Ảnh 3: nghiêng phải."]
+    assert sum(1 for x in nd if x["type"] == "image_url") == 3
+    assert "kiem_tra" in msg[0]["content"] and "không nhận ra người đó là ai" in msg[0]["content"]
+    tot = {"kiem_tra": {"thay_mat": True, "so_nguoi": 1, "nhin_thang": True, "du_sang": True},
+           "tra_loi": [{"cau": "tam_dinh", "lua_chon": "can_doi", "do_tin": 0.9}], "luu_y": []}
+    kq = dam.hau_xu_ly(tot)
+    assert kq["kiem_tra"] == {"thay_mat": True, "so_nguoi": 1, "nhin_thang": True, "du_sang": True} and len(kq["tra_loi"]) == 1
+    hai = dam.hau_xu_ly({**tot, "kiem_tra": {"thay_mat": True, "so_nguoi": 2}})
+    assert hai["tra_loi"] == [] and "một mình" in hai["luu_y"][0]
+    khong = dam.hau_xu_ly({**tot, "kiem_tra": {"thay_mat": False}})
+    assert khong["tra_loi"] == [] and "gương mặt" in khong["luu_y"][0]
+    nghieng = dam.hau_xu_ly({**tot, "kiem_tra": {"thay_mat": True, "so_nguoi": 1, "nhin_thang": False, "du_sang": False}})
+    assert len(nghieng["tra_loi"]) == 1 and len(nghieng["luu_y"]) == 2
+    rac = dam.hau_xu_ly({**tot, "kiem_tra": "linh tinh"})          # mô hình trả sai kiểu → coi là ổn, vẫn gợi ý
+    assert rac["kiem_tra"]["thay_mat"] is True and len(rac["tra_loi"]) == 1
+
+
 def test_doc_anh_mat_khong_log_anh(monkeypatch, caplog):
     import httpx
     monkeypatch.setenv("NHAN_TUONG_DOC_ANH", "1")
@@ -288,8 +312,14 @@ def test_api():
     assert r.status_code == 422
     r = client.get("/v1/nhan-tuong/cau-hinh")
     assert r.status_code == 200 and r.json()["doc_anh"] is False
-    r = client.post("/v1/nhan-tuong/doc-anh", json={"anh": [{"du_lieu": "QUJDREVGR0hJSktMTU5PUA==", "loai": "image/png"}]})
-    assert r.status_code == 200 and r.json()["da_bat"] is False
+    anh = {"du_lieu": "QUJDREVGR0hJSktMTU5PUA==", "loai": "image/png"}
+    # ANH-1: thiếu đồng ý → 422 (máy chủ không nhận ảnh sinh trắc khi chưa có thoả thuận); đủ → chưa bật thì da_bat False
+    assert client.post("/v1/nhan-tuong/doc-anh", json={"anh": [anh]}).status_code == 422
+    assert client.post("/v1/nhan-tuong/doc-anh", json={"anh": [anh], "dong_y": False}).status_code == 422
+    r = client.post("/v1/nhan-tuong/doc-anh", json={"anh": [{**anh, "goc": "thang"}, {**anh, "goc": "nghieng_trai"}, {**anh, "goc": "nghieng_phai"}], "dong_y": True})
+    assert r.status_code == 200 and r.json()["da_bat"] is False and r.json()["kiem_tra"] is None
+    assert client.post("/v1/nhan-tuong/doc-anh", json={"anh": [anh] * 4, "dong_y": True}).status_code == 422
+    assert client.post("/v1/nhan-tuong/doc-anh", json={"anh": [{**anh, "goc": "nghieng_trai"}, {**anh, "goc": "nghieng_trai"}], "dong_y": True}).status_code == 422
     # BM-1: không lộ tên nội bộ / Drive / mô hình
     van = json.dumps(client.post("/v1/nhan-tuong/luan-giai", json={"tra_loi": TL_DAY}).json(), ensure_ascii=False).lower()
     for cam in ("drive", "seed", "gemini", "openrouter", "mediapipe"):
