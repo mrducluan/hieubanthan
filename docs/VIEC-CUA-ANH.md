@@ -5,6 +5,20 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4aa. Chân dung tổng hợp (CD-1, 2026-11-06) — sau khi merge (deploy ENGINE trước web)
+
+`/chan-dung`: Tử vi · Bát tự · Nhân tướng đặt cạnh nhau theo 6 mảng đời (ma trận + hộp "cùng thấy / nhìn khác nhau", mượn nguyên hộp từng môn). Thiết kế + 3 phương án: `docs/CHAN-DUNG-TONG-HOP.md`.
+- [ ] **Deploy tự động**: merge vào `main` → Render dựng engine (route mới `/v1/chan-dung`), Vercel dựng web. Kiểm: Render → `hieubanthan-engine-sg` → Events thấy "Deploy live" TRƯỚC khi Vercel xong (web gọi route chưa có thì trang báo "Chưa tải được"); rồi mở `https://hieuban.com/chan-dung` với hồ sơ đủ giờ sinh.
+- [ ] (5 phút) Đọc thử bài của chính anh: ma trận có đúng với mức ở hai bài Tử vi / Bát tự không (mức là chép lại, không tính mới); bấm "Đúng với mình" ở một hộp "Theo Tử vi" → phiếu về mã `ds.tong_quan…` của Tử vi.
+- [ ] Menu Huyền học đã đủ 12 mục con — muốn `/chan-dung` vào menu thì chọn một mục nhường chỗ (CMS → Menu đầu trang); hiện vào từ hub `/huyen-hoc`, `/ban-than`, sổ trang, sitemap.
+- [ ] Search Console → Kiểm tra URL `https://hieuban.com/chan-dung` → Yêu cầu lập chỉ mục.
+
+**Bật "máy gợi ý từ ảnh gương mặt" (NT-1) — chỉ sau khi anh quyết pháp lý ở mục 4z:**
+1. Render → dịch vụ `hieubanthan-engine-sg` → **Environment** → Add: `NHAN_TUONG_DOC_ANH` = `1`. `OPENROUTER_API_KEY` phải đã có ở cùng chỗ (đang dùng cho hỏi đáp AI); tuỳ chọn `DOC_ANH_MODEL` (mặc định `google/gemini-2.5-flash`, đổi model thị giác khác trên OpenRouter thì ghi tên vào đây).
+2. **Save Changes** → Render tự deploy lại (1–3 phút). Không cần đụng Vercel.
+3. Kiểm: mở `https://hieuban.com/api/nhan-tuong/cau-hinh` → `{"doc_anh":true}`; vào `/nhan-tuong` → trong Khảo sát hiện khối "Để máy gợi ý từ ảnh (thử nghiệm)" với ô đồng ý không tích sẵn.
+4. Tắt: xoá biến hoặc đặt `0` → Save → khối tự ẩn. Hạn mức lượt đi chung RL-1 (`LLM_LUOT_*`); ảnh không ghi đĩa / không log.
+
 ### 4z. Nhân tướng học — mảng mới (NT-1, 2026-11-06) — sau khi merge (deploy ENGINE trước web)
 
 Mảng thứ sáu: `/nhan-tuong` (tự soi gương 31 câu → bài đọc 8 chương, không ảnh) + cụm `/nhan-tuong/bo-vi` (25 trang). Thiết kế + 3 phương án UI: `docs/NANG-CAP-NHAN-TUONG.md`.

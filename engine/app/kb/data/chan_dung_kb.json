@@ -1,0 +1,86 @@
+{
+  "_meta": {
+    "source_id": "hbt_bien_tap_chan_dung_v1",
+    "school_id": "lien_mon",
+    "trang_thai": "nhap_ai",
+    "ghi_chu": "CD-1 — lời cho lớp 'Chân dung tổng hợp' (luangiai/chan_dung_tong_hop.py): ghép mức ba báo cáo đời sống (Tử vi · Bát tự · Nhân tướng) theo mảng đời. Chỉ ghép mức đã chấm; không điểm số, không phán môn nào đúng, không đổi mức môn nào."
+  },
+  "mon": {
+    "tuvi": {"ten": "Tử vi", "mat": "nhìn hoàn cảnh quanh bạn: việc, tiền, nhà, người"},
+    "battu": {"ten": "Bát tự", "mat": "nhìn sức của chính bạn: hành đang nhiều, hành đang thiếu"},
+    "nhantuong": {"ten": "Nhân tướng", "mat": "nhìn điều bạn đang thấy ở mình bây giờ: nét mặt, sắc, dáng"}
+  },
+  "mang": {
+    "cong_viec": {"ten": "Công việc", "ngan": "việc"},
+    "tien_bac": {"ten": "Tiền bạc", "ngan": "tiền"},
+    "tinh_cam": {"ten": "Tình cảm", "ngan": "tình cảm"},
+    "gia_dinh": {"ten": "Gia đình", "ngan": "gia đình"},
+    "suc_khoe": {"ten": "Sức khoẻ", "ngan": "sức khoẻ"},
+    "nam_nay": {"ten": "Năm nay", "ngan": "năm nay"}
+  },
+  "cung": {
+    "thuan": {
+      "tieu_de": "{mang}: {so} cách xem cùng thấy thuận",
+      "noi_dung": "{noi} — mỗi cách nhìn một mặt khác nhau — cùng chỉ về một hướng: mảng {ngan} đang là chỗ bạn có sẵn lực. Chỗ dễ vấp của mảng thuận là chủ quan, tiêu theo đà.",
+      "huong_xu_ly": "Chọn một việc về {ngan} bạn đã cân nhắc lâu và bắt đầu ngay tháng này; để riêng một phần thành quả, không dồn hết."
+    },
+    "can_bang": {
+      "tieu_de": "{mang}: {so} cách xem cùng thấy nhịp đều",
+      "noi_dung": "{noi} cùng thấy mảng {ngan} không có cú hích lớn, cũng không có chỗ vấp lớn. Kết quả nằm ở nhịp làm đều tay của bạn hơn là ở thời điểm.",
+      "huong_xu_ly": "Đặt một mốc nhỏ về {ngan} theo quý và giữ đúng; việc mới thử nhỏ trước khi mở rộng."
+    },
+    "can_chu_dong": {
+      "tieu_de": "{mang}: {so} cách xem cùng nhắc đi chậm",
+      "noi_dung": "{noi} cùng thấy mảng {ngan} cần bạn chủ động hơn thường lệ. Đây là lời nhắc sắp việc cẩn thận, không phải điềm gì — ba cách cùng nhắc thì đáng để ý hơn một cách.",
+      "huong_xu_ly": "Việc lớn về {ngan} chia nhỏ, có phương án dự phòng; giấy tờ và tiền bạc kiểm hai lần trước khi ký."
+    }
+  },
+  "khac": {
+    "tieu_de": "{mang}: các cách xem nhìn khác nhau",
+    "noi_dung": "{mat}. Các cách không cãi nhau — mỗi cách nhìn một mặt của cùng một mảng, nên mức có thể khác. Lấy mặt dè dặt nhất làm khung an toàn, mặt thuận để quyết việc đã chuẩn bị kỹ.",
+    "da_so": "Hai trong ba cách thấy {muc_da_so}; {mon_le} thấy {muc_le} — {mat_le}.",
+    "huong_xu_ly": {
+      "can_chu_dong": "Lấy mặt cần lưu ý làm khung: việc lớn về {ngan} chia nhỏ, có dự phòng; phần thuận dùng cho việc đã chuẩn bị kỹ.",
+      "can_bang": "Giữ nhịp đều làm nền cho mảng {ngan}; phần thuận dành cho một việc đã sẵn, không ôm thêm nhiều việc mới.",
+      "thuan": "Không cách nào thấy chỗ vấp lớn ở mảng {ngan} — chọn việc quan trọng nhất và làm sớm."
+    }
+  },
+  "tong_quan": {
+    "mo_dau": "Ba cách nhìn độc lập — lá số Tử vi (hoàn cảnh quanh bạn), lá số Bát tự (sức của chính bạn) và điều bạn tự quan sát trên gương mặt (bây giờ của bạn) — đặt cạnh nhau theo từng mảng đời. {so_cung} mảng các cách cùng một mức, {so_khac} mảng nhìn khác nhau.",
+    "mo_dau_hai_mon": "Hai lá số độc lập — Tử vi (hoàn cảnh quanh bạn) và Bát tự (sức của chính bạn) — đặt cạnh nhau theo từng mảng đời. {so_cung} mảng hai cách cùng một mức, {so_khac} mảng nhìn khác nhau. Thêm khảo sát gương mặt để có cách nhìn thứ ba.",
+    "cach_doc": "Mảng nào nhiều cách cùng thấy thì đáng tin hơn một cách; mảng nào khác nhau thì không phải sai, mà là mỗi cách đang soi một mặt. Không cách nào chấm điểm bạn.",
+    "ket": "Chân dung này ghép từ ba cách nhìn có sẵn của bạn, không thêm dữ kiện mới. Điều gì bạn thấy chưa đúng, bấm “Chưa đúng” ở hộp đó — phiếu đi về đúng cách xem đã nói câu ấy."
+  },
+  "chuong": {
+    "tong_quan": {"tieu_de": "Ba cách nhìn, một con người", "cau_hoi": "Ba cách xem độc lập có cùng thấy một điều về bạn không, và khác nhau ở đâu?"},
+    "con_nguoi": {"tieu_de": "Con người bạn qua ba cách nhìn", "cau_hoi": "Mỗi cách xem tả bạn bằng nét nào — và nét nào cả ba cùng nhắc?"},
+    "cong_viec_tien": {"tieu_de": "Công việc và tiền bạc", "cau_hoi": "Việc và tiền: cách nào thấy thuận, cách nào nhắc chậm, và nên làm gì trước?"},
+    "tinh_cam_gia_dinh": {"tieu_de": "Tình cảm và gia đình", "cau_hoi": "Chuyện đôi lứa và người thân: ba cách xem có cùng thấy một chỗ nên để ý không?"},
+    "suc_khoe": {"tieu_de": "Sức khoẻ và nhịp sinh hoạt", "cau_hoi": "Hệ cơ quan nào ba cách cùng nhắc chăm, và năm nào nên đi khám sớm hơn?"},
+    "nang_luong": {"tieu_de": "Hành lá số cần và dáng mặt", "cau_hoi": "Lá số đang thiếu hành gì, dáng mặt bạn mang hành gì — hai bên bù hay ngược nhau?"},
+    "nam_nay": {"tieu_de": "Năm nay qua ba cách nhìn", "cau_hoi": "Năm nay hai lá số cùng thấy gì, và gương mặt bảo nhìn vào vùng nào?"},
+    "loi_khuyen": {"tieu_de": "Việc nên làm, gom từ ba cách", "cau_hoi": "Nếu chỉ làm ba việc trong 90 ngày tới, ba cách xem cùng khuyên việc gì?"}
+  },
+  "mau": {
+    "con_nguoi_mo": "Mỗi cách xem tả bạn bằng một thứ ngôn ngữ: Tử vi qua sao ở cung Mệnh, Bát tự qua nhật chủ và hành trội, nhân tướng qua nét bạn tự thấy. Dưới đây là nét nổi nhất của từng cách — nét nào lặp lại ở hai cách trở lên là nét người thân bạn hay nhắc.",
+    "mang_mo": "Mỗi mảng dưới đây gồm: mức theo từng cách xem, một hộp tổng hợp, rồi hộp nguyên gốc của từng cách để bạn đối chiếu và bấm “Đúng với mình” cho đúng cách đã nói.",
+    "suc_khoe_mo": "Sức khoẻ ở đây là lời nhắc phòng ngừa: hệ cơ quan sách xưa gắn với sao, hành, vùng mặt — và năm nên đi khám sớm hơn. Không đoán bệnh, không thay lời bác sĩ.",
+    "suc_khoe_mien_tru": "Đây là lời nhắc chăm sóc từ ba cách xem, không phải chẩn đoán. Có triệu chứng thì đi khám, không chờ xem lá số hay soi gương.",
+    "nang_luong_mo": "Bát tự cho biết hành lá số đang thiếu (hai cách lấy dụng thần, luôn trình bày cả hai); nhân tướng xếp dáng mặt theo năm hành. Hai bên hợp nhau thì nhẹ; ngược nhau thì bù bằng thói quen, không bù bằng cách đổi gương mặt.",
+    "nang_luong_thieu": "Chưa có khảo sát gương mặt — chương này cần biết dáng mặt bạn mang hành gì. Hiện chỉ có hành lá số cần theo hai cách của Bát tự.",
+    "nam_nay_mo": "Năm nay nhìn theo ba cách: Tử vi đọc tứ hoá của năm vào các cung, Bát tự đọc hành của năm so với sức bạn, nhân tướng chỉ vùng mặt sách lưu niên xem ở tuổi này.",
+    "loi_khuyen_mo": "Việc nên làm gom từ các hộp của ba cách, ưu tiên mảng nhiều cách cùng nhắc đi chậm, rồi tới mảng thuận để bạn tận dụng. Chọn một việc, làm trong 21 ngày.",
+    "thieu_nhan_tuong": "Chưa có khảo sát gương mặt — làm Khảo sát ở trang Nhân tướng học (5 phút, không cần ảnh) để thêm cách nhìn thứ ba.",
+    "muon_hop": "Theo {mon}"
+  },
+  "cau_tu_soi": {
+    "tong_quan": "Mảng nào ba cách cùng thấy — bạn có thấy đúng với mình không?",
+    "con_nguoi": "Nét nào lặp ở hai cách trở lên — người thân thiết nhất của bạn có gật đầu không?",
+    "cong_viec_tien": "Ba tháng qua, việc hay tiền — mảng nào bạn đã dồn sức nhiều hơn, và kết quả có như ba cách nói?",
+    "tinh_cam_gia_dinh": "Một người trong nhà mà ba cách cùng nhắc bạn dành thời gian hơn — là ai?",
+    "suc_khoe": "Thói quen nào trong 30 ngày qua bạn biết đang làm mình hao sức?",
+    "nang_luong": "Thói quen nào của bạn đang bù cho hành lá số nói là thiếu?",
+    "nam_nay": "Việc lớn nhất năm nay của bạn rơi vào mảng nào — mảng ấy ba cách thấy sao?",
+    "loi_khuyen": "Trong các việc ở trên, việc nào bạn làm được ngay tuần này?"
+  }
+}

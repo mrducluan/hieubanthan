@@ -5,7 +5,7 @@
 import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { useRouter } from "next/navigation";
-import { ArrowRight, BookOpen, CalendarCheck, Compass, HeartHandshake, History, MessageCircle, Pencil, Share2 } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarCheck, Compass, HeartHandshake, History, Layers, MessageCircle, Pencil, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { Card } from "@/components/ui/card";
@@ -92,6 +92,7 @@ export function BanThan() {
           </Link>
           <div className="flex flex-wrap gap-2 pt-1">
             <Button asChild><Link href="/hop-doi"><HeartHandshake aria-hidden /> Xem hợp đôi</Link></Button>
+            <Button variant="secondary" asChild><Link href="/chan-dung"><Layers aria-hidden /> Chân dung tổng hợp</Link></Button>
             <Button variant="secondary" asChild><Link href="/chia-se"><Share2 aria-hidden /> Chia sẻ thẻ</Link></Button>
             <Button variant="ghost" onClick={() => setSuaMo(true)}><Pencil aria-hidden /> Sửa hồ sơ</Button>
           </div>

@@ -67,8 +67,8 @@ export default async function HuyenHoc() {
           primaryImageOfPage: ldAnh(anhBai({ tieuDe: MD.tieu_de_seo! }), h1),
           encoding: { "@type": "MediaObject", encodingFormat: "text/markdown", contentUrl: urlDayDu(`${DUONG}.md`) },
           about: [{ "@type": "Thing", name: "Huyền học", description: c("hoi_dap.dap_1") }, ...MANG_HH.map((m) => ldThucThe(m.mang))],
-          mainEntity: { "@type": "ItemList", name: c("mang.lon"), numberOfItems: MANG_HH.length + lich.length,
-            itemListElement: [...MANG_HH.map((m) => ({ href: m.href, ten: c(`the.${m.khoa}_ten`) })),
+          mainEntity: { "@type": "ItemList", name: c("mang.lon"), numberOfItems: MANG_HH.length + lich.length + 1,
+            itemListElement: [...MANG_HH.map((m) => ({ href: m.href, ten: c(`the.${m.khoa}_ten`) })), { href: "/chan-dung", ten: c("chan_dung.lon") },
               ...lich.map((href, i) => ({ href, ten: c(`lich.ten_${i + 1}`, { nam: String(nam) }) }))]
               .map((x, i) => ({ "@type": "ListItem", position: i + 1, name: x.ten, url: urlDayDu(x.href) })) } },
         ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Huyền học", duong: DUONG }]),
@@ -197,6 +197,29 @@ export default async function HuyenHoc() {
             </li>
           ); })}
         </ul>
+      </section>
+
+      {/* CD-1: chân dung tổng hợp — ba môn phương Đông đặt cạnh nhau theo mảng đời (engine chỉ đọc mức đã chấm). */}
+      <section aria-labelledby="chan-dung" data-testid="khoi-chan-dung"
+        className="relative overflow-hidden rounded-3xl border border-gold/40 bg-gradient-to-br from-gold/[0.08] via-surface/70 to-bg/40 p-6 sm:p-8">
+        <div className="pointer-events-none absolute -right-20 -top-20 size-64 rounded-full bg-gold/10 blur-3xl" aria-hidden />
+        <div className="relative grid items-center gap-6 lg:grid-cols-[1.3fr_1fr]">
+          <div>
+            <p className="eyebrow text-gold">{c("chan_dung.nho")}</p>
+            <h2 id="chan-dung" className="mt-2 text-3xl">{c("chan_dung.lon")}</h2>
+            <p className="mt-3 max-w-2xl text-fg-muted">{c("chan_dung.mo")}</p>
+            <div className="mt-5"><Button asChild size="lg"><Link href="/chan-dung">{c("chan_dung.nut")} <ArrowRight aria-hidden /></Link></Button></div>
+          </div>
+          <ul className="grid grid-cols-3 gap-2 text-center text-sm" aria-label="Ba cách nhìn">
+            {([["tu-vi", "Tử vi", "hoàn cảnh quanh bạn"], ["bat-tu", "Bát tự", "sức của chính bạn"], ["nhan-tuong", "Nhân tướng", "điều bạn đang thấy"]] as const).map(([k, ten, mo]) => (
+              <li key={k} className="glass rounded-2xl p-3">
+                <HinhMang kieu={k} className="mx-auto h-9" />
+                <span className="mt-2 block font-serif text-base text-fg">{ten}</span>
+                <span className="block text-xs leading-snug text-fg-muted">{mo}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       {/* Bảng so sánh: máy tính là bảng 4 cột; điện thoại mỗi hàng thành một thẻ (nhãn cột hiện bằng data-nhan). */}

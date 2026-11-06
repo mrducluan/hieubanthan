@@ -12,13 +12,14 @@ import { ND_XEM_NGAY } from "@/app/xem-ngay-tot/noi-dung";
 import { ND_HAN_NAM, ND_LAM_NHA, ND_SAO_HAN, ND_XONG_DAT } from "@/app/xem-tuoi-lam-nha/noi-dung";
 import { ND_DOI_LICH } from "@/app/doi-lich-am-duong/noi-dung";
 import { ND_THOI_GIAN_TOI } from "@/app/thoi-gian-toi/noi-dung";
+import { ND_CHAN_DUNG } from "@/app/chan-dung/noi-dung";
 import type { BangChu, BangHinh } from "@/lib/chu-trang";
 import { CHU_TRANG_CHU, HINH_TRANG_CHU } from "@/lib/chu/trang-chu";
 import { CHU_HUYEN_HOC, CHU_KIEN_THUC, HINH_HUYEN_HOC } from "@/lib/chu/trang-tinh";
 import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM, CHU_NAM, CHU_NAM_SINH_CON, CHU_NAM_CUOI_HOI, CHU_NAM_TUOI } from "@/lib/chu/trang-con";
 import {
   CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_SAO_HAN, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_NHAN_TUONG, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
-  CHU_XEM_NGAY, CHU_XONG_DAT, CHU_THOI_GIAN_TOI,
+  CHU_XEM_NGAY, CHU_XONG_DAT, CHU_THOI_GIAN_TOI, CHU_CHAN_DUNG,
 } from "@/lib/chu/cong-cu";
 
 export type NhomTrang = "cong_cu" | "tinh" | "phap_ly" | "chu_de" | "kien_thuc" | "tuoi" | "la_so_mau" | "blog_khung" | "cong_cu_con";
@@ -208,6 +209,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   tuNd(ND_SAO_HAN, "Xem sao hạn năm nay theo tuổi: La Hầu, Kế Đô, Thái Bạch…", CHU_SAO_HAN),   // MT-ĐS B3
   tuNd(ND_DOI_LICH, "Đổi lịch âm dương: ngày âm hôm nay, can chi, tháng nhuận", CHU_DOI_LICH),   // SEO-L5
   tuNd(ND_THOI_GIAN_TOI, "3 tháng tới, 12 tháng tới và năm tới của bạn", CHU_THOI_GIAN_TOI),   // NAM-2
+  tuNd(ND_CHAN_DUNG, "Chân dung tổng hợp: Tử vi, Bát tự và nhân tướng cùng nhìn bạn", CHU_CHAN_DUNG),   // CD-1
   { duong: "/ban-than", nhom: "cong_cu", ten: "Hồ sơ bản thân", o: ["seo", "khoi_duoi", "khoi_cuoi"], mac_dinh: {
     tieu_de_seo: "Hồ sơ bản thân",
     mo_ta_seo: "Trang của bạn: bốn con số chủ đạo, nhịp ngày – tháng – năm cá nhân, bản đồ con số và lối tắt sang hợp đôi, huyền học.",
