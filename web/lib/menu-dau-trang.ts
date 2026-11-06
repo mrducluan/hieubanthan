@@ -9,7 +9,6 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/than-so", ten: "Thần số học", mo_ta: "Bốn số cốt lõi, Bản đồ con số, năm cá nhân" },
     { href: "/hom-nay", ten: "Hôm nay của bạn", mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { href: "/xem-ngay-tot", ten: "Xem ngày tốt", mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
-    { href: "/nhan-tuong", ten: "Nhân tướng học", mo_ta: "Tự soi gương 31 câu, bài đọc 8 chương, không cần ảnh" },
   ] },
   { href: "/hop-doi", ten: "Hợp đôi", bieu_tuong: "trai_tim", di_dong: true, con: [
     { href: "/hop-doi", ten: "Hợp đôi thần số", mo_ta: "Hai con số chủ đạo, không chấm điểm" },
@@ -21,6 +20,9 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/bat-tu", ten: "Bát tự", mo_ta: "Tứ trụ, ngũ hành, thập thần" },
     { href: "/kinh-dich", ten: "Kinh Dịch", mo_ta: "Gieo 3 đồng xu, quẻ đầu ngày, lời hào" },
     { href: "/phong-thuy", ten: "Phong thuỷ", mo_ta: "La bàn đo hướng, khảo sát nhà, bố trí" },
+    // NT-1 (chủ dự án chốt 2026-11-06): Nhân tướng học nằm trong quy hoạch Huyền học; Từ điển nhường chỗ (≤ 12 mục con),
+    // vẫn có ở chân trang, hub Huyền học và mọi trang công cụ.
+    { href: "/nhan-tuong", ten: "Nhân tướng học", mo_ta: "Tự soi gương 31 câu, bài đọc 8 chương, không cần ảnh" },
     { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi", mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     // TM-1 (chủ dự án duyệt 2026-11-03): 3 công cụ đã có bản theo năm ở menu "Năm" (hướng xấu, xông đất, sao hạn) nhường
     // chỗ cho 3 cụm kiến thức lớn nhất chưa có lối vào menu. Ba công cụ vẫn ở menu Năm, hub Huyền học, chân trang.
@@ -30,7 +32,6 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/phong-thuy/huong-hop-tuoi", ten: "Hướng nhà hợp tuổi", mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
     { href: "/phong-thuy/dau-hieu", ten: "Dấu hiệu trong nhà", mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
     { href: "/kien-thuc", ten: "Thư viện kiến thức", mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
-    { href: "/tu-dien", ten: "Từ điển thuật ngữ", mo_ta: "Hơn 200 thuật ngữ giải nghĩa dễ hiểu" },
   ] },
   // NAM-1/NAM-2 (2026-10-30): menu lớn theo năm — {nam} thay bằng năm engine chọn (năm tới khi Tết sau còn ≤ 120 ngày,
   // không thì năm âm đang đi) lúc dựng trang → không phải sửa tay mỗi năm (`thayNamMenu`).

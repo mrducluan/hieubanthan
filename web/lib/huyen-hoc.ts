@@ -6,19 +6,19 @@ import type { MangAnh } from "@/lib/seo";
 export type KhoaMangHH = "than_so" | "tu_vi" | "bat_tu" | "phong_thuy" | "kinh_dich" | "nhan_tuong";
 export type MangHH = { khoa: KhoaMangHH; href: string; kieu: KieuMang; mang: MangAnh; han: string; lop: string };
 
-// Thứ tự = thứ tự đọc: thần số (cửa vào) → hai lá số → nhà → một việc. Lưới 6 cột: hai thẻ lớn rồi ba thẻ.
+// Thứ tự = thứ tự đọc: thần số (cửa vào) → hai lá số → nhà → một việc → gương mặt. Lưới 6 cột: ba thẻ một hàng.
 export const MANG_HH: MangHH[] = [
-  { khoa: "than_so", href: "/than-so", kieu: "than-so", mang: "than-so", han: "數", lop: "lg:col-span-3" },
-  { khoa: "tu_vi", href: "/tu-vi", kieu: "tu-vi", mang: "tu-vi", han: "紫微", lop: "lg:col-span-3" },
+  { khoa: "than_so", href: "/than-so", kieu: "than-so", mang: "than-so", han: "數", lop: "lg:col-span-2" },
+  { khoa: "tu_vi", href: "/tu-vi", kieu: "tu-vi", mang: "tu-vi", han: "紫微", lop: "lg:col-span-2" },
   { khoa: "bat_tu", href: "/bat-tu", kieu: "bat-tu", mang: "bat-tu", han: "八字", lop: "lg:col-span-2" },
   { khoa: "phong_thuy", href: "/phong-thuy", kieu: "phong-thuy", mang: "phong-thuy", han: "風水", lop: "lg:col-span-2" },
   { khoa: "kinh_dich", href: "/kinh-dich", kieu: "kinh-dich", mang: "kinh-dich", han: "易經", lop: "lg:col-span-2" },
-  // NT-1 (2026-11-06): mảng thứ sáu — tự quan sát gương mặt; lưới 6 cột: 3+3 / 2+2+2 / 6 (thẻ cuối trải ngang).
-  { khoa: "nhan_tuong", href: "/nhan-tuong", kieu: "nhan-tuong", mang: "nhan-tuong", han: "相", lop: "md:col-span-2 lg:col-span-6" },
+  // NT-1 (2026-11-06): mảng thứ sáu — tự quan sát gương mặt; lưới 6 cột: 2+2+2 / 2+2+2 (sáu thẻ đều nhau).
+  { khoa: "nhan_tuong", href: "/nhan-tuong", kieu: "nhan-tuong", mang: "nhan-tuong", han: "相", lop: "lg:col-span-2" },
 ];
 
 /** Đích của 6 câu "Bạn đang băn khoăn điều gì?" (chữ: hoi.cau_n / hoi.den_n). */
-export const HOI_HH = ["/than-so", "/hop-doi", "/tu-vi", "/kinh-dich", "/phong-thuy", "/xem-ngay-tot"] as const;
+export const HOI_HH = ["/than-so", "/hop-doi", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/xem-ngay-tot"] as const;
 
 /** Năm dương lịch hiện tại theo giờ Việt Nam (chỉ để dựng link /lich-am/{năm}). */
 export const namNayVn = () => Number(new Intl.DateTimeFormat("en", { year: "numeric", timeZone: "Asia/Ho_Chi_Minh" }).format(new Date()));

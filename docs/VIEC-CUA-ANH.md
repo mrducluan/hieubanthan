@@ -11,8 +11,9 @@ Mảng thứ sáu: `/nhan-tuong` (tự soi gương 31 câu → bài đọc 8 ch�
 - [ ] **Deploy engine trước web** (route mới `/v1/nhan-tuong/*`, loại trang `bo_vi`; web cũ không gọi gì mới).
 - [ ] (10 phút) Mở `/nhan-tuong` bằng điện thoại, soi gương trả lời thật 31 câu → đọc bài; bấm "Đúng với mình / Chưa đúng" vài hộp.
   Phiếu đi qua đúng bảng 0017 (mã `ds.nhantuong.*`), không cần migration mới.
-- [ ] **CMS → Giao diện website → Menu đầu trang**: mục "Bản thân" thêm menu con `/nhan-tuong` "Nhân tướng học" (code mặc định đã có;
-  CMS đang giữ menu riêng thì phải thêm tay). Chữ dùng chung → "Đồng bộ ngay" để có nhóm "Thanh mảng · Nhân tướng".
+- [ ] **CMS → Giao diện website → Menu đầu trang**: mục "Huyền học" thêm menu con `/nhan-tuong` "Nhân tướng học" ngay sau Phong thuỷ,
+  bỏ "Từ điển thuật ngữ" khỏi menu này (giới hạn 12 mục con; từ điển vẫn ở chân trang, hub và mọi trang công cụ). Code mặc định đã
+  đổi; CMS đang giữ menu riêng thì phải sửa tay. Chữ dùng chung → "Đồng bộ ngay" để có nhóm "Thanh mảng · Nhân tướng".
 - [ ] **Quyết định**: có bật "máy gợi ý từ ảnh gương mặt" không? Mặc định TẮT (env engine `NHAN_TUONG_DOC_ANH=1` mới bật). Ảnh gương mặt là
   **dữ liệu sinh trắc** (Luật 91/2025) — em đã viết Chính sách riêng tư (mục `#anh-mat`, hiệu lực 06/11/2026) cho CẢ hai trạng thái;
   khuyên hỏi luật sư trước khi bật (hồ sơ đánh giá tác động `docs/ho-so-dlcn/` cần thêm mục dữ liệu sinh trắc).

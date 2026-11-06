@@ -13,6 +13,8 @@ const MAU: Record<MucVung, string> = {
   trung_tinh: "fill-moon/20 stroke-moon/70",
 };
 const NHAN_MUC: Record<MucVung, string> = { thuan: "thuận", can_bang: "cân bằng", can_chu_dong: "nên chú ý", trung_tinh: "trung tính" };
+// Chấm màu chú thích — lớp viết đủ (Tailwind chỉ sinh lớp xuất hiện nguyên văn trong mã).
+const CHAM: Record<MucVung, string> = { thuan: "bg-jade", can_bang: "bg-gold", can_chu_dong: "bg-cinnabar", trung_tinh: "bg-moon" };
 
 type Hinh = { kieu: "rect"; x: number; y: number; w: number; h: number; rx?: number } | { kieu: "ellipse"; cx: number; cy: number; rx: number; ry: number } | { kieu: "path"; d: string };
 /** Hình của từng vùng (toạ độ 300×380, mặt nhìn thẳng, bên TRÁI của người soi = bên phải màn hình). `doi`: có bản đối xứng. */
@@ -95,7 +97,7 @@ export function BanDoMat({ muc = {}, sang = [], chon = null, onChon, nhan = {}, 
           const dangSang = vungSang.has(v);
           const dangChon = chon === v;
           const lop = cn("transition-colors duration-300",
-            m ? MAU[m] : coMuc ? "fill-transparent stroke-line/60" : "fill-transparent stroke-gold/25",
+            m ? MAU[m] : coMuc ? "fill-transparent stroke-line/50" : "fill-transparent stroke-gold/15",
             dangSang && "stroke-gold stroke-[2.5]", dangChon && "stroke-fg stroke-[2.5]",
             !tinh && onChon && "cursor-pointer hover:fill-gold/25 focus:outline-none focus-visible:stroke-fg");
           const ten = nhan[v] ?? v;
@@ -123,7 +125,7 @@ export function BanDoMat({ muc = {}, sang = [], chon = null, onChon, nhan = {}, 
           {coMuc && (
             <span className="mt-1 flex flex-wrap justify-center gap-x-3 gap-y-1" aria-label="Chú thích màu">
               {(["thuan", "can_bang", "can_chu_dong", "trung_tinh"] as MucVung[]).map((k) => (
-                <span key={k} className="inline-flex items-center gap-1"><i aria-hidden className={cn("inline-block size-2.5 rounded-full", MAU[k].split(" ")[0]!.replace("fill-", "bg-"))} />{NHAN_MUC[k]}</span>
+                <span key={k} className="inline-flex items-center gap-1"><i aria-hidden className={cn("inline-block size-2.5 rounded-full", CHAM[k])} />{NHAN_MUC[k]}</span>
               ))}
             </span>
           )}

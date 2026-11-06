@@ -240,11 +240,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   } },
   // Hub Huyền học (trước 2026-10-27 là /kham-pha "Khám phá" — 308 về đây, lib/chuyen-huong.json).
   { duong: "/huyen-hoc", nhom: "tinh", ten: "Huyền học", o: O_TINH, mac_dinh: { chu: CHU_HUYEN_HOC, hinh: HINH_HUYEN_HOC,
-    tieu_de_seo: "Huyền học online: Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, thần số",
-    mo_ta_seo: "Huyền học phương Đông và thần số học trong một hồ sơ: lá số Tử vi, Bát tự, gieo quẻ Kinh Dịch, phong thuỷ nhà ở. Tính minh bạch, có nguồn, miễn phí.",
-    h1: "Huyền học — năm cách nhìn lại mình",
+    tieu_de_seo: "Huyền học online: Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, thần số",
+    mo_ta_seo: "Huyền học phương Đông và thần số học trong một hồ sơ: lá số Tử vi, Bát tự, gieo quẻ Kinh Dịch, phong thuỷ nhà ở, nhân tướng tự soi gương. Tính minh bạch, có nguồn, miễn phí.",
+    h1: "Huyền học — sáu cách nhìn lại mình",
     // AIO: câu đầu định nghĩa thẳng "huyền học là gì" (≤ 45 chữ) để máy tìm kiếm / AI trích nguyên câu.
-    loi_dan: "Huyền học là những hệ thống người xưa dùng để đọc nhịp của con người và thời gian — qua con số, ngày giờ sinh, quẻ dịch và nơi ở. Thần số học là cửa vào nhanh nhất; Tử vi, Bát tự, Kinh Dịch, Phong thuỷ đi sâu hơn. Cả năm dùng chung một hồ sơ, tính từng bước, có nguồn sách.",
+    loi_dan: "Huyền học là những hệ thống người xưa dùng để đọc nhịp của con người và thời gian — qua con số, ngày giờ sinh, quẻ dịch, nơi ở và gương mặt. Thần số học là cửa vào nhanh nhất; Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng đi sâu hơn. Cả sáu dùng chung một hồ sơ, tính từng bước, có nguồn sách.",
   } },
   // NAM-1 (2026-10-30): mục lục năm + mục lục lịch âm (trước 404).
   { duong: "/nam", nhom: "tinh", ten: "Xem theo năm", o: O_TINH, mac_dinh: {

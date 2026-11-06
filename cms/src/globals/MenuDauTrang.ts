@@ -28,7 +28,6 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/than-so", "Thần số học"), mo_ta: "Bốn số cốt lõi, Bản đồ con số, năm cá nhân" },
     { ...lk("/hom-nay", "Hôm nay của bạn"), mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { ...lk("/xem-ngay-tot", "Xem ngày tốt"), mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
-    { ...lk("/nhan-tuong", "Nhân tướng học"), mo_ta: "Tự soi gương 31 câu, bài đọc 8 chương, không cần ảnh" },
   ] },
   { ...lk("/hop-doi", "Hợp đôi"), bieu_tuong: "trai_tim", di_dong: true, con: [
     { ...lk("/hop-doi", "Hợp đôi thần số"), mo_ta: "Hai con số chủ đạo, không chấm điểm" },
@@ -40,6 +39,7 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/bat-tu", "Bát tự"), mo_ta: "Tứ trụ, ngũ hành, thập thần" },
     { ...lk("/kinh-dich", "Kinh Dịch"), mo_ta: "Gieo 3 đồng xu, quẻ đầu ngày, lời hào" },
     { ...lk("/phong-thuy", "Phong thuỷ"), mo_ta: "La bàn đo hướng, khảo sát nhà, bố trí" },
+    { ...lk("/nhan-tuong", "Nhân tướng học"), mo_ta: "Tự soi gương 31 câu, bài đọc 8 chương, không cần ảnh" },
     { ...lk("/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"), mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     // TM-1: ba công cụ có bản theo năm ở menu "Năm" nhường chỗ cho 3 cụm kiến thức lớn (migration tm_1_menu_huyen_hoc).
     { ...lk("/tu-vi/sao-o-cung", "Sao ở từng cung Tử vi"), mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
@@ -48,7 +48,6 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/phong-thuy/huong-hop-tuoi", "Hướng nhà hợp tuổi"), mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
     { ...lk("/phong-thuy/dau-hieu", "Dấu hiệu trong nhà"), mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
     { ...lk("/kien-thuc", "Thư viện kiến thức"), mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
-    { ...lk("/tu-dien", "Từ điển thuật ngữ"), mo_ta: "Hơn 200 thuật ngữ giải nghĩa dễ hiểu" },
   ] },
   // NAM-1/NAM-2: "{nam}" được web thay bằng năm đang mời xem (gõ {nam} trong chữ / đường dẫn của mục bất kỳ).
   { ...lk("/nam/{nam}", "Năm {nam}"), bieu_tuong: "lich", di_dong: true, con: [

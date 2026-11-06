@@ -28,8 +28,10 @@ const HOI: [string, string][] = [
   ["Mình là người thế nào?", "Thần số học"],
   ["Hai người hoà ở đâu, va ở đâu?", "Hợp đôi"],
   ["Năm nay mình nên để ý mảng nào?", "Tử vi"],
+  ["Mình mạnh hành gì, cần bù hành gì?", "Bát tự"],
   ["Có nên nhận việc này không?", "Kinh Dịch"],
   ["Nhà này có hợp mình không?", "Phong thuỷ"],
+  ["Gương mặt mình kể gì về mình?", "Nhân tướng học"],
   ["Ngày nào làm việc lớn cho thuận?", "Xem ngày tốt"],
 ];
 const LICH: [string, string][] = [
@@ -57,9 +59,9 @@ const SO_SANH: [string, string, string, string, string][] = [
   ["nhan_tuong", "Nhân tướng học", "Điều bạn tự thấy trong gương (31 câu)", "Tính cách, nếp thói quen, vùng mặt nên chăm, tuổi lưu niên", "Ma Y Thần Tướng, Băng Giám, Nội Kinh"],
 ];
 const HOI_DAP: [string, string][] = [
-  ["Huyền học là gì?", "Là tên gọi chung cho các hệ thống người xưa dùng để đọc nhịp của con người và thời gian: qua con số (thần số học), ngày giờ sinh (Tử vi, Bát tự), quẻ dịch (Kinh Dịch) và nơi ở (Phong thuỷ). Ở đây chúng là nội dung văn hoá để tham khảo và tự soi, không phải lời tiên đoán."],
+  ["Huyền học là gì?", "Là tên gọi chung cho các hệ thống người xưa dùng để đọc nhịp của con người và thời gian: qua con số (thần số học), ngày giờ sinh (Tử vi, Bát tự), quẻ dịch (Kinh Dịch), nơi ở (Phong thuỷ) và gương mặt (Nhân tướng học). Ở đây chúng là nội dung văn hoá để tham khảo và tự soi, không phải lời tiên đoán."],
   ["Huyền học có phải mê tín không?", "Tuỳ cách dùng. Hiểu Bản Thân không dùng huyền học để phán hay doạ: phép tính hiện từng bước, nghĩa có ghi nguồn, mọi lời đọc kèm mặt tối và câu hỏi tự soi. Trang không trả lời chuyện bệnh tật, sống chết, xổ số và không bán vật phẩm hoá giải."],
-  ["Nên bắt đầu từ mảng nào?", "Mới làm quen thì bắt đầu từ thần số học: chỉ cần tên và ngày sinh, nửa phút có kết quả. Biết giờ sinh thì đi tiếp Tử vi hoặc Bát tự. Đang phân vân một việc cụ thể thì gieo một quẻ Kinh Dịch; lo chuyện nhà cửa thì xem Phong thuỷ."],
+  ["Nên bắt đầu từ mảng nào?", "Mới làm quen thì bắt đầu từ thần số học: chỉ cần tên và ngày sinh, nửa phút có kết quả. Biết giờ sinh thì đi tiếp Tử vi hoặc Bát tự. Đang phân vân một việc cụ thể thì gieo một quẻ Kinh Dịch; lo chuyện nhà cửa thì xem Phong thuỷ; chỉ có một tấm gương thì tự soi theo Nhân tướng học."],
   ["Thần số học có thuộc huyền học không?", "Thần số học có gốc phương Tây (Pythagoras, Chaldea); Tử vi, Bát tự, Kinh Dịch, Phong thuỷ là huyền học phương Đông. Ở Việt Nam người ta hay gọi chung là huyền học. Trang để thần số làm cửa vào vì cần nhập ít nhất."],
   ["Thông tin của tôi có bị lưu không?", "Hồ sơ lưu trên máy bạn; máy chủ tính xong là bỏ. Ngày sinh chỉ lưu trên máy chủ khi bạn tự chọn: lưu hồ sơ vào tài khoản, bật nhắc việc (chỉ ngày, tháng sinh) hoặc gửi kèm hồ sơ khi hỏi chuyên gia (xoá 30 ngày sau khi trả lời). Bài luận chỉ lưu khi bạn bấm Lưu hoặc bật Tự lưu."],
   ["Có mất phí không?", "Mọi phép tính, lá số và thư viện kiến thức đều miễn phí. Phần có phí chỉ áp dụng khi được bật: bản luận giải đầy đủ nhiều chương và câu hỏi vượt lượt (dùng Sao — điểm trong trang), Hội viên năm và Hỏi chuyên gia (trả bằng tiền). Trang luôn nói rõ trước khi trừ."],
