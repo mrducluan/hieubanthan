@@ -2,7 +2,7 @@
 // Chỉ VẼ theo tham số công khai (mảng, hướng tốt, số, hào) — không có dữ liệu cá nhân, không tự suy ra kiến thức.
 // Satori (next/og) vẽ <svg> thành ảnh nhưng không có font cho <text> trong svg → nhãn chữ đặt bằng <div> tuyệt đối.
 
-export const MANG_HINH = ["than-so", "tu-vi", "bat-tu", "kinh-dich", "phong-thuy", "lich"] as const;
+export const MANG_HINH = ["than-so", "tu-vi", "bat-tu", "kinh-dich", "phong-thuy", "nhan-tuong", "lich"] as const;
 export type MangHinh = (typeof MANG_HINH)[number];
 
 const VANG = "#e9c46a", NGOC = "#5fc4a5", CHU = "#e07a5f", MO = "rgba(236,235,247,0.55)", VIEN = "rgba(233,196,106,0.35)";
@@ -128,9 +128,25 @@ export function HinhMang({ mang, tot, so, hao }: { mang: MangHinh; tot: string[]
   if (mang === "kinh-dich") return <Que hao={hao} />;
   if (mang === "bat-tu") return <BonTru />;
   if (mang === "lich") return <Lich />;
+  if (mang === "nhan-tuong") return <GuongMat />;
   return <VongSo so={so} />;
 }
 
+/** NT-1: gương mặt giản lược với ba vạch tam đình (hình trang trí, không phải mặt ai). */
+function GuongMat() {
+  return (
+    <svg width={260} height={260} viewBox="0 0 120 120">
+      <path d="M60,8 C36,8 22,30 22,52 C22,76 42,98 60,98 C78,98 98,76 98,52 C98,30 84,8 60,8 Z" fill="none" stroke="#E9C46A" strokeWidth={2.2} />
+      <path d="M24,38 H96 M24,62 H96" stroke="#6FD3B5" strokeWidth={1.4} strokeDasharray="3 4" />
+      <path d="M38,44 Q46,38 54,44 M66,44 Q74,38 82,44" fill="none" stroke="#E9C46A" strokeWidth={2.4} strokeLinecap="round" />
+      <circle cx={46} cy={47} r={2.4} fill="#E9C46A" /><circle cx={74} cy={47} r={2.4} fill="#E9C46A" />
+      <path d="M60,50 L56,66 Q60,69 64,66 Z" fill="none" stroke="#E9C46A" strokeWidth={1.8} strokeLinejoin="round" />
+      <path d="M48,80 Q60,87 72,80" fill="none" stroke="#EF8A6F" strokeWidth={2.4} strokeLinecap="round" />
+      <path d="M22,50 Q14,52 20,64 M98,50 Q106,52 100,64" fill="none" stroke="#E9C46A" strokeWidth={1.6} />
+    </svg>
+  );
+}
+
 export const NHAN_MANG: Record<MangHinh, string> = {
-  "than-so": "Thần số học", "tu-vi": "Tử vi", "bat-tu": "Bát tự", "kinh-dich": "Kinh Dịch", "phong-thuy": "Phong thuỷ", lich: "Lịch âm · ngày tốt",
+  "than-so": "Thần số học", "tu-vi": "Tử vi", "bat-tu": "Bát tự", "kinh-dich": "Kinh Dịch", "phong-thuy": "Phong thuỷ", "nhan-tuong": "Nhân tướng học", lich: "Lịch âm · ngày tốt",
 };

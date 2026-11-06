@@ -29,7 +29,8 @@ def test_danh_sach_du_ba_loai():
                    "menh_nam": 78,    # SEO-J: sinh năm 1950–2025 mệnh gì; NAM-1 thêm 2026–2027
                    "so_kep": 43,      # TS-PHAI: số kép Chaldea 10–52
                    "dau_hieu": 23,    # Y5: dấu hiệu nhà ở (form Khảo sát nhà)
-                   "co_thu": 1}       # TV-CTP: Đẩu Số Cốt Tuỷ Phú (một trang trụ cho cả bài phú)
+                   "co_thu": 1,       # TV-CTP: Đẩu Số Cốt Tuỷ Phú (một trang trụ cho cả bài phú)
+                   "bo_vi": 25}       # NT-1: bộ vị gương mặt
     assert len({(t["loai"], t["slug"]) for t in ds}) == len(ds)
 
 
@@ -79,7 +80,7 @@ def test_lien_quan_tro_toi_trang_ton_tai():
 
 def test_api():
     r = client.get("/v1/kb/trang")
-    assert r.status_code == 200 and len(r.json()["trang"]) == 565
+    assert r.status_code == 200 and len(r.json()["trang"]) == 590
     r = client.get("/v1/kb/trang/so/so-22")
     assert r.status_code == 200 and r.json()["slug"] == "so-22"
     assert client.get("/v1/kb/trang/so/so-10").status_code == 404

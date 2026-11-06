@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 from app.hoidap import kinhdich as kd
-from app.luangiai import ban_do_con_so, phongthuy_doi_song, thoi_gian_toi, toan_bo
+from app.luangiai import ban_do_con_so, nhan_tuong, phongthuy_doi_song, thoi_gian_toi, toan_bo
 
 GOLDEN = Path(__file__).resolve().parents[1] / "fixtures" / "golden"
 XEM = dt.date(2026, 11, 2)
@@ -32,7 +32,7 @@ def _ma(x, ra: set[str]) -> set[str]:
 
 
 def chup() -> dict[str, list[str]]:
-    ra: dict[str, set[str]] = {k: set() for k in ("tuvi", "battu", "thanso", "phongthuy", "kinhdich", "thoi_gian")}
+    ra: dict[str, set[str]] = {k: set() for k in ("tuvi", "battu", "thanso", "phongthuy", "kinhdich", "thoi_gian", "nhantuong")}
     la60 = json.loads((GOLDEN / "lasotuvi_60.json").read_text(encoding="utf-8"))
     la60 = la60.get("cases", la60) if isinstance(la60, dict) else la60
     for i, ca in enumerate(la60[:12]):
@@ -57,4 +57,14 @@ def chup() -> dict[str, list[str]]:
                         {"lich": dt.datetime(1990, 5, 17, 12), "gioi_tinh": "nu", "gio_ty": "da_ty"}),
                        (dt.date(1984, 1, 30), None, None)):
         _ma(thoi_gian_toi.lap(ns, XEM, 2027, "nu", tv, bt), ra["thoi_gian"])
+    # NT-1: Nhân tướng học — ba bộ trả lời cố định (đủ, nửa, trống) × năm sinh / giới tính.
+    from tests.test_nhan_tuong import TL_DAY  # noqa: PLC0415
+    nua = {k: v for i, (k, v) in enumerate(TL_DAY.items()) if i % 2 == 0}
+    nghich = {"khuon_mat": "tren_hep_duoi_rong", "tam_dinh": "cam_ngan", "sac_tong": "do_ung", "cot_nhuc": "tro_xuong", "tran": "hep_thap",
+              "nep_tran": "nhieu_dut", "long_may": "roi_nguoc", "an_duong": "nep_doc", "mat_than": "sac_gat", "tam_bach": "duoi", "le_duong": "bong",
+              "son_can": "thap_gay", "chuan_dau": "nhon_mong", "canh_mui": "mong_lo", "luong_quyen": "cao_tro", "phap_lenh": "cham_mep", "mieng": "khoe_cup",
+              "cam": "nhon_lem", "tai": "dai_nep", "giong": "cao_nhanh", "net_mat": "buon_met", "dang": "nhanh_hap_tap", "nhan_trung": "nong_phang"}
+    for tl, ns, gt in ((TL_DAY, 1988, "nam"), (nua, 1975, "nu"), ({}, None, None), (nghich, 2001, "nu")):
+        _ma(nhan_tuong.bao_cao(tl, nam_sinh=ns, gioi_tinh=gt, ngay_xem=XEM,
+                               battu={"cach_1": {"hanh": ["Hỏa", "Thổ"]}, "cach_2": {"hanh": ["Kim"]}} if ns else None), ra["nhantuong"])
     return {k: sorted(v) for k, v in ra.items()}

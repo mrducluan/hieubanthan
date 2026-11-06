@@ -1,0 +1,5664 @@
+{
+ "_nguon": "NT-1 (2026-11-06) — kho tri thức Nhân tướng học, nháp ban biên tập viết lại từ cổ thư công cộng (Ma Y Thần Tướng, Thần Tướng Toàn Biên, Liễu Trang Thần Tướng, Băng Giám, Thuỷ Kính Tập, Hoàng Đế Nội Kinh — đều quá 100 năm, phạm vi công cộng); bộ seed 37 luật của chủ dự án được ĐỐI CHIẾU và viết lại theo quy tắc sức khoẻ SK-1 (hệ cơ quan + đi khám, không tên bệnh), CY-1 (nói bằng 'nên chú ý'), không điểm số, không doạ, không phán sống chết / hình khắc. Mọi câu phú Hán Việt chưa đối chiếu nguyên bản khắc in → can_doi_chieu. Tướng là CỦA CHÍNH NGƯỜI TỰ QUAN SÁT — không xem tướng người khác, không dùng để tuyển người / chọn đối tác (phân biệt đối xử theo ngoại hình).",
+ "source": {
+  "ma_y": "Ma Y Thần Tướng (麻衣神相, tương truyền Ma Y đạo giả, đời Tống)",
+  "than_tuong_toan_bien": "Thần Tướng Toàn Biên (神相全編, Trần Đoàn soạn, Viên Trung Triệt bổ — Minh)",
+  "lieu_trang": "Liễu Trang Thần Tướng (柳莊相法, Viên Củng — Minh)",
+  "bang_giam": "Băng Giám (冰鑑, Tăng Quốc Phiên — Thanh)",
+  "thuy_kinh": "Thuỷ Kính Tập (水鏡集, tương truyền Phạm Văn Viên)",
+  "noi_kinh": "Hoàng Đế Nội Kinh — Linh Khu (Ngũ Sắc thiên), Tố Vấn (phạm vi công cộng)",
+  "tam_tuong_thien": "Tâm Tướng Thiên (心相篇, Trần Đoàn)",
+  "dan_gian_vn": "Quan niệm nhân tướng dân gian Việt Nam (truyền khẩu)",
+  "seed_chu_du_an": "Bộ seed 37 luật của chủ dự án (Drive, 2026-11-06) — đối chiếu, viết lại"
+ },
+ "source_id": "ma_y",
+ "school_id": "tam_dinh_ngu_quan",
+ "trang_thai": "nhap_ai",
+ "can_doi_chieu": true,
+ "truong_phai": {
+  "tam_dinh_ngu_quan": {
+   "ten": "Tam đình – Ngũ quan – Thập nhị cung",
+   "ngan": "Hình tướng",
+   "mo_ta": "Nhìn tỉ lệ ba phần mặt, năm 'quan' (mày, mắt, tai, mũi, miệng) và 12 vùng gắn với từng mảng đời. Là trường phái nền, dễ tự quan sát nhất.",
+   "nguon": [
+    "ma_y",
+    "than_tuong_toan_bien"
+   ]
+  },
+  "tang_than_khi_sac": {
+   "ten": "Tàng thần – Khí sắc",
+   "ngan": "Thần & sắc",
+   "mo_ta": "Xem ánh mắt có 'thần' (yên, sáng, không lộ) và sắc da từng vùng theo mùa. Sách xưa xếp 'nhất thần, nhị khí' lên trước hình.",
+   "nguon": [
+    "bang_giam",
+    "thuy_kinh"
+   ]
+  },
+  "cot_phap_nhuc_phap": {
+   "ten": "Cốt pháp – Nhục pháp",
+   "ngan": "Xương & thịt",
+   "mo_ta": "Xương là khung (dương), thịt là bao bọc (âm). Xương không trơ, thịt không nhão là cân. Xem bằng cách sờ, ấn nhẹ.",
+   "nguon": [
+    "bang_giam",
+    "than_tuong_toan_bien"
+   ]
+  },
+  "y_tuong": {
+   "ten": "Y tướng (vọng chẩn)",
+   "ngan": "Sức khoẻ",
+   "mo_ta": "Mặt là tấm gương của bên trong: Nội Kinh gắn từng vùng mặt với một hệ cơ quan. Ở đây chỉ nói lời phòng ngừa và đi khám, không nói bệnh.",
+   "nguon": [
+    "noi_kinh"
+   ]
+  },
+  "tam_tuong": {
+   "ten": "Tâm tướng – Động tướng – Thanh tướng",
+   "ngan": "Nét do thói quen",
+   "mo_ta": "'Tướng tuỳ tâm sinh': nếp cười, nếp nhíu, giọng nói, dáng đi là dấu của thói quen nhiều năm — và đổi được khi thói quen đổi.",
+   "nguon": [
+    "tam_tuong_thien",
+    "bang_giam"
+   ]
+  }
+ },
+ "bo_vi": {
+  "thien_trung": {
+   "ten": "Thiên Trung",
+   "han": "天中",
+   "vi_tri": "giữa trán, sát chân tóc",
+   "vung": "tran_tren",
+   "cung": "quan_loc",
+   "nghia": "Sách xưa xem ở đây sự khởi đầu: nền nếp gia đình đầu đời và chuyện học hành thuở nhỏ.",
+   "tuoi": [
+    15,
+    16
+   ]
+  },
+  "thien_dinh": {
+   "ten": "Thiên Đình",
+   "han": "天庭",
+   "vi_tri": "giữa trán, phần trên",
+   "vung": "tran_tren",
+   "cung": "quan_loc",
+   "nghia": "Vùng trán giữa: cách nghĩ, tầm nhìn, tuổi trẻ và chuyện công việc sớm.",
+   "tuoi": [
+    19
+   ]
+  },
+  "tu_khong": {
+   "ten": "Tư Không",
+   "han": "司空",
+   "vi_tri": "giữa trán, phần giữa",
+   "vung": "tran_giua",
+   "cung": "quan_loc",
+   "nghia": "Cùng Trung Chính tạo nên cung Quan Lộc: con đường công việc, người trên.",
+   "tuoi": [
+    22
+   ]
+  },
+  "trung_chinh": {
+   "ten": "Trung Chính",
+   "han": "中正",
+   "vi_tri": "giữa trán, ngay trên Ấn Đường",
+   "vung": "tran_giua",
+   "cung": "quan_loc",
+   "nghia": "Trung tâm cung Quan Lộc: sự nghiệp ở tuổi 25, cách giữ vị trí.",
+   "tuoi": [
+    25
+   ]
+  },
+  "nhat_nguyet_giac": {
+   "ten": "Nhật giác – Nguyệt giác",
+   "han": "日角 月角",
+   "vi_tri": "hai bên trán, phía trên đầu lông mày",
+   "vung": "tran_ben",
+   "cung": "phu_mau",
+   "nghia": "Cung Phụ Mẫu: nền tảng cha mẹ, chỗ dựa thuở nhỏ. Nam xem Nhật giác (trái), nữ xem Nguyệt giác (phải) trước.",
+   "tuoi": [
+    17,
+    18
+   ]
+  },
+  "thien_thuong": {
+   "ten": "Thiên Thương (Dịch Mã)",
+   "han": "天倉 驛馬",
+   "vi_tri": "góc trán hai bên, trên đuôi mày",
+   "vung": "thai_duong",
+   "cung": "thien_di",
+   "nghia": "Cung Thiên Di: đi xa, đổi chỗ, mở rộng ra ngoài; cũng là 'kho trên' của Phúc Đức.",
+   "tuoi": [
+    23,
+    24
+   ]
+  },
+  "an_duong": {
+   "ten": "Ấn Đường",
+   "han": "印堂",
+   "vi_tri": "khoảng giữa hai đầu lông mày",
+   "vung": "an_duong",
+   "cung": "menh",
+   "he": "Kim",
+   "nghia": "Cung Mệnh: tổng thể con người, tinh thần hiện tại. Nội Kinh gắn vùng này với đường hô hấp.",
+   "tuoi": [
+    28
+   ]
+  },
+  "long_may": {
+   "ten": "Lông mày (Bảo Thọ quan)",
+   "han": "眉 保壽官",
+   "vi_tri": "hai lông mày",
+   "vung": "long_may",
+   "cung": "huynh_de",
+   "he": "Mộc",
+   "nghia": "Cung Huynh Đệ và quan Bảo Thọ: anh em, bạn bè, cách bạn gắn với người ngang hàng; sợi mày là dấu của khí huyết gan.",
+   "tuoi": [
+    31,
+    32,
+    33,
+    34
+   ]
+  },
+  "dien_trach": {
+   "ten": "Điền Trạch (mí trên)",
+   "han": "田宅",
+   "vi_tri": "khoảng giữa lông mày và mắt",
+   "vung": "dien_trach",
+   "cung": "dien_trach",
+   "nghia": "Cung Điền Trạch: nhà cửa, của để dành, không gian gia đình.",
+   "tuoi": [
+    35,
+    36
+   ]
+  },
+  "mat": {
+   "ten": "Mắt (Giám Sát quan)",
+   "han": "目 監察官",
+   "vi_tri": "hai mắt",
+   "vung": "mat",
+   "cung": "menh",
+   "he": "Mộc",
+   "nghia": "Quan Giám Sát: 'thần' tụ ở mắt — sách xưa xem mắt là quan trọng nhất trong ngũ quan; tuổi 35–40 nhìn vào mắt.",
+   "tuoi": [
+    35,
+    36,
+    37,
+    38,
+    39,
+    40
+   ]
+  },
+  "ngu_vi": {
+   "ten": "Ngư Vĩ – Gian Môn (đuôi mắt)",
+   "han": "魚尾 奸門",
+   "vi_tri": "đuôi mắt kéo ra thái dương",
+   "vung": "ngu_vi",
+   "cung": "phu_the",
+   "nghia": "Cung Phu Thê: đời sống đôi lứa, cách bạn ở cạnh một người.",
+   "tuoi": [
+    39,
+    40
+   ]
+  },
+  "le_duong": {
+   "ten": "Lệ Đường – Ngoạ Tằm (dưới mắt)",
+   "han": "淚堂 臥蠶",
+   "vi_tri": "vùng ngay dưới mắt",
+   "vung": "le_duong",
+   "cung": "tu_tuc",
+   "he": "Thủy",
+   "nghia": "Cung Tử Tức: con cái, người nhỏ tuổi hơn, sức nuôi dưỡng; Nội Kinh gắn vùng dưới mắt với thận và giấc ngủ.",
+   "tuoi": [
+    35,
+    36
+   ]
+  },
+  "son_can": {
+   "ten": "Sơn Căn",
+   "han": "山根",
+   "vi_tri": "gốc mũi, giữa hai mắt",
+   "vung": "son_can",
+   "cung": "tat_ach",
+   "he": "Hỏa",
+   "nghia": "Cung Tật Ách: sức bền, tuổi 41 — cầu nối giữa phần trán và phần mũi. Nội Kinh gắn vùng này với tim mạch.",
+   "tuoi": [
+    41
+   ]
+  },
+  "song_mui": {
+   "ten": "Niên Thượng – Thọ Thượng (sống mũi)",
+   "han": "年上 壽上",
+   "vi_tri": "sống mũi, từ gốc tới gần đầu mũi",
+   "vung": "song_mui",
+   "cung": "tat_ach",
+   "he": "Mộc",
+   "nghia": "Cột trụ giữa mặt, tuổi 44–45; Nội Kinh gắn sống mũi với gan mật.",
+   "tuoi": [
+    44,
+    45
+   ]
+  },
+  "luong_quyen": {
+   "ten": "Lưỡng Quyền (gò má)",
+   "han": "兩顴",
+   "vi_tri": "hai gò má",
+   "vung": "quyen",
+   "cung": "quyen",
+   "nghia": "'Quyền' là sức ảnh hưởng, khả năng cầm việc; gò má phải có thịt bao thì mới bền.",
+   "tuoi": [
+    46,
+    47
+   ]
+  },
+  "chuan_dau": {
+   "ten": "Chuẩn Đầu (đầu mũi)",
+   "han": "準頭",
+   "vi_tri": "chóp mũi",
+   "vung": "chuan_dau",
+   "cung": "tai_bach",
+   "he": "Thổ",
+   "nghia": "Cung Tài Bạch: tiền bạc, cách giữ của; tuổi 48. Nội Kinh gắn đầu mũi với tiêu hoá.",
+   "tuoi": [
+    48
+   ]
+  },
+  "canh_mui": {
+   "ten": "Lan Đài – Đình Uý (cánh mũi)",
+   "han": "蘭台 廷尉",
+   "vi_tri": "hai cánh mũi",
+   "vung": "canh_mui",
+   "cung": "tai_bach",
+   "he": "Thổ",
+   "nghia": "'Kho' của Tài Bạch: cánh mũi dày, kín là giữ được; mỏng, lộ là tiền vào rồi ra.",
+   "tuoi": [
+    49,
+    50
+   ]
+  },
+  "nhan_trung": {
+   "ten": "Nhân Trung",
+   "han": "人中",
+   "vi_tri": "rãnh giữa mũi và môi trên",
+   "vung": "nhan_trung",
+   "cung": "tu_tuc",
+   "he": "Thủy",
+   "nghia": "Rãnh nối trên – dưới: sức sống, con cái, tuổi 51; Nội Kinh gắn Nhân Trung với sinh dục và thận.",
+   "tuoi": [
+    51
+   ]
+  },
+  "phap_lenh": {
+   "ten": "Pháp Lệnh (rãnh cười)",
+   "han": "法令",
+   "vi_tri": "hai rãnh từ cánh mũi xuống mép",
+   "vung": "phap_lenh",
+   "cung": "quan_loc",
+   "nghia": "Dấu của uy tín và nề nếp: rãnh rõ, mở rộng xuống là người có kỷ luật, được nể; tuổi 56–57.",
+   "tuoi": [
+    56,
+    57
+   ]
+  },
+  "mieng": {
+   "ten": "Miệng (Xuất Nạp quan)",
+   "han": "口 出納官",
+   "vi_tri": "miệng và môi",
+   "vung": "mieng",
+   "cung": "tai_bach",
+   "he": "Thổ",
+   "nghia": "Quan Xuất Nạp: ăn nói, chữ tín, lộc ăn; tuổi 60. Môi là dấu của tiêu hoá và khí huyết.",
+   "tuoi": [
+    60
+   ]
+  },
+  "thua_tuong": {
+   "ten": "Thừa Tương",
+   "han": "承漿",
+   "vi_tri": "chỗ lõm giữa môi dưới và cằm",
+   "vung": "thua_tuong",
+   "cung": "no_boc",
+   "he": "Thủy",
+   "nghia": "Tuổi 61; sách xưa xem ở đây sự tiết độ ăn uống.",
+   "tuoi": [
+    61
+   ]
+  },
+  "dia_cac": {
+   "ten": "Địa Các (cằm)",
+   "han": "地閣",
+   "vi_tri": "cằm",
+   "vung": "cam",
+   "cung": "no_boc",
+   "he": "Thủy",
+   "nghia": "Hạ đình, hậu vận từ tuổi 70: nơi ở lúc về già, người dưới, sự ổn định.",
+   "tuoi": [
+    70,
+    71
+   ]
+  },
+  "ham": {
+   "ten": "Nô Bộc – Tai Cốt (quai hàm)",
+   "han": "奴僕 腮骨",
+   "vi_tri": "hai quai hàm",
+   "vung": "ham",
+   "cung": "no_boc",
+   "nghia": "Cung Nô Bộc: người dưới, cộng sự, sức chịu đựng; tuổi 72–75.",
+   "tuoi": [
+    72,
+    73,
+    74,
+    75
+   ]
+  },
+  "tai": {
+   "ten": "Tai (Thái Thính quan)",
+   "han": "耳 採聽官",
+   "vi_tri": "hai tai",
+   "vung": "tai",
+   "cung": "phu_mau",
+   "he": "Thủy",
+   "nghia": "Quan Thái Thính: tuổi 1–14 (nam tai trái trước, nữ tai phải trước); Nội Kinh gắn tai với thận và sức bền bẩm sinh.",
+   "tuoi": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+   ]
+  },
+  "khuon_mat": {
+   "ten": "Khuôn mặt tổng thể (Ngũ hình)",
+   "han": "五形",
+   "vi_tri": "cả gương mặt",
+   "vung": "toan_mat",
+   "cung": "tuong_mao",
+   "nghia": "Cung Tướng Mạo: dáng mặt xếp theo năm hành Kim – Mộc – Thuỷ – Hoả – Thổ, mỗi hình có cách sống hợp riêng.",
+   "tuoi": []
+  }
+ },
+ "cung": {
+  "menh": {
+   "ten": "Mệnh",
+   "noi_ve": "con người bạn nói chung, tinh thần lúc này",
+   "bo_vi": [
+    "an_duong",
+    "mat"
+   ]
+  },
+  "tai_bach": {
+   "ten": "Tài Bạch",
+   "noi_ve": "tiền bạc, cách kiếm và giữ của",
+   "bo_vi": [
+    "chuan_dau",
+    "canh_mui",
+    "mieng"
+   ]
+  },
+  "huynh_de": {
+   "ten": "Huynh Đệ",
+   "noi_ve": "anh em, bạn bè, người ngang hàng",
+   "bo_vi": [
+    "long_may"
+   ]
+  },
+  "dien_trach": {
+   "ten": "Điền Trạch",
+   "noi_ve": "nhà cửa, của để dành, không gian gia đình",
+   "bo_vi": [
+    "dien_trach"
+   ]
+  },
+  "tu_tuc": {
+   "ten": "Tử Tức",
+   "noi_ve": "con cái, người nhỏ tuổi hơn, sức nuôi dưỡng",
+   "bo_vi": [
+    "le_duong",
+    "nhan_trung"
+   ]
+  },
+  "no_boc": {
+   "ten": "Nô Bộc",
+   "noi_ve": "người dưới, cộng sự, hậu vận",
+   "bo_vi": [
+    "dia_cac",
+    "ham",
+    "thua_tuong"
+   ]
+  },
+  "phu_the": {
+   "ten": "Phu Thê",
+   "noi_ve": "đời sống đôi lứa",
+   "bo_vi": [
+    "ngu_vi"
+   ]
+  },
+  "tat_ach": {
+   "ten": "Tật Ách",
+   "noi_ve": "sức bền, điều nên chăm sóc",
+   "bo_vi": [
+    "son_can",
+    "song_mui"
+   ]
+  },
+  "thien_di": {
+   "ten": "Thiên Di",
+   "noi_ve": "đi xa, đổi chỗ, mở ra bên ngoài",
+   "bo_vi": [
+    "thien_thuong"
+   ]
+  },
+  "quan_loc": {
+   "ten": "Quan Lộc",
+   "noi_ve": "công việc, người trên, uy tín",
+   "bo_vi": [
+    "thien_dinh",
+    "tu_khong",
+    "trung_chinh",
+    "phap_lenh"
+   ]
+  },
+  "phuc_duc": {
+   "ten": "Phúc Đức",
+   "noi_ve": "phúc phần, sự an ổn",
+   "bo_vi": [
+    "thien_thuong",
+    "dia_cac"
+   ]
+  },
+  "phu_mau": {
+   "ten": "Phụ Mẫu",
+   "noi_ve": "cha mẹ, chỗ dựa thuở nhỏ",
+   "bo_vi": [
+    "nhat_nguyet_giac",
+    "tai"
+   ]
+  },
+  "quyen": {
+   "ten": "Quyền (gò má)",
+   "noi_ve": "sức ảnh hưởng, cầm việc",
+   "bo_vi": [
+    "luong_quyen"
+   ]
+  },
+  "tuong_mao": {
+   "ten": "Tướng Mạo",
+   "noi_ve": "tổng thể gương mặt",
+   "bo_vi": [
+    "khuon_mat"
+   ]
+  }
+ },
+ "luu_nien": [
+  {
+   "tuoi": 1,
+   "ten": "Thiên Luân",
+   "bo_vi": "tai",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 2,
+   "ten": "Thiên Luân",
+   "bo_vi": "tai",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 3,
+   "ten": "Thiên Thành",
+   "bo_vi": "tai",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 4,
+   "ten": "Thiên Thành",
+   "bo_vi": "tai",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 5,
+   "ten": "Thiên Khuếch",
+   "bo_vi": "tai",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 6,
+   "ten": "Thiên Khuếch",
+   "bo_vi": "tai",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 7,
+   "ten": "Thiên Khuếch",
+   "bo_vi": "tai",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 8,
+   "ten": "Thiên Luân",
+   "bo_vi": "tai",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 9,
+   "ten": "Thiên Luân",
+   "bo_vi": "tai",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 10,
+   "ten": "Thiên Thành",
+   "bo_vi": "tai",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 11,
+   "ten": "Thiên Thành",
+   "bo_vi": "tai",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 12,
+   "ten": "Thiên Khuếch",
+   "bo_vi": "tai",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 13,
+   "ten": "Thiên Khuếch",
+   "bo_vi": "tai",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 14,
+   "ten": "Thiên Khuếch",
+   "bo_vi": "tai",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 15,
+   "ten": "Hoả Tinh",
+   "bo_vi": "thien_trung",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 16,
+   "ten": "Thiên Trung",
+   "bo_vi": "thien_trung",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 17,
+   "ten": "Nhật Giác",
+   "bo_vi": "nhat_nguyet_giac",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 18,
+   "ten": "Nguyệt Giác",
+   "bo_vi": "nhat_nguyet_giac",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 19,
+   "ten": "Thiên Đình",
+   "bo_vi": "thien_dinh",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 20,
+   "ten": "Phụ Giác",
+   "bo_vi": "nhat_nguyet_giac",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 21,
+   "ten": "Phụ Giác",
+   "bo_vi": "nhat_nguyet_giac",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 22,
+   "ten": "Tư Không",
+   "bo_vi": "tu_khong",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 23,
+   "ten": "Biên Thành",
+   "bo_vi": "thien_thuong",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 24,
+   "ten": "Biên Thành",
+   "bo_vi": "thien_thuong",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 25,
+   "ten": "Trung Chính",
+   "bo_vi": "trung_chinh",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 26,
+   "ten": "Khâu Lăng",
+   "bo_vi": "thien_thuong",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 27,
+   "ten": "Trủng Mộ",
+   "bo_vi": "thien_thuong",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 28,
+   "ten": "Ấn Đường",
+   "bo_vi": "an_duong",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 29,
+   "ten": "Sơn Lâm",
+   "bo_vi": "thien_thuong",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 30,
+   "ten": "Sơn Lâm",
+   "bo_vi": "thien_thuong",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 31,
+   "ten": "Lăng Vân",
+   "bo_vi": "long_may",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 32,
+   "ten": "Tử Khí",
+   "bo_vi": "long_may",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 33,
+   "ten": "Phồn Hà",
+   "bo_vi": "long_may",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 34,
+   "ten": "Thái Hà",
+   "bo_vi": "long_may",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 35,
+   "ten": "Thái Dương",
+   "bo_vi": "mat",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 36,
+   "ten": "Thái Âm",
+   "bo_vi": "mat",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 37,
+   "ten": "Trung Dương",
+   "bo_vi": "mat",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 38,
+   "ten": "Trung Âm",
+   "bo_vi": "mat",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 39,
+   "ten": "Thiếu Dương",
+   "bo_vi": "ngu_vi",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 40,
+   "ten": "Thiếu Âm",
+   "bo_vi": "ngu_vi",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 41,
+   "ten": "Sơn Căn",
+   "bo_vi": "son_can",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 42,
+   "ten": "Tinh Xá",
+   "bo_vi": "son_can",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 43,
+   "ten": "Quang Điện",
+   "bo_vi": "son_can",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 44,
+   "ten": "Niên Thượng",
+   "bo_vi": "song_mui",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 45,
+   "ten": "Thọ Thượng",
+   "bo_vi": "song_mui",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 46,
+   "ten": "Quyền",
+   "bo_vi": "luong_quyen",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 47,
+   "ten": "Quyền",
+   "bo_vi": "luong_quyen",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 48,
+   "ten": "Chuẩn Đầu",
+   "bo_vi": "chuan_dau",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 49,
+   "ten": "Lan Đài",
+   "bo_vi": "canh_mui",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 50,
+   "ten": "Đình Uý",
+   "bo_vi": "canh_mui",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 51,
+   "ten": "Nhân Trung",
+   "bo_vi": "nhan_trung",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 52,
+   "ten": "Tiên Khố",
+   "bo_vi": "phap_lenh",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 53,
+   "ten": "Tiên Khố",
+   "bo_vi": "phap_lenh",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 54,
+   "ten": "Thực Thương",
+   "bo_vi": "phap_lenh",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 55,
+   "ten": "Lộc Thương",
+   "bo_vi": "phap_lenh",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 56,
+   "ten": "Pháp Lệnh",
+   "bo_vi": "phap_lenh",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 57,
+   "ten": "Pháp Lệnh",
+   "bo_vi": "phap_lenh",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 58,
+   "ten": "Hổ Nhĩ",
+   "bo_vi": "ham",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 59,
+   "ten": "Hổ Nhĩ",
+   "bo_vi": "ham",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 60,
+   "ten": "Thuỷ Tinh",
+   "bo_vi": "mieng",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 61,
+   "ten": "Thừa Tương",
+   "bo_vi": "thua_tuong",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 62,
+   "ten": "Địa Khố",
+   "bo_vi": "dia_cac",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 63,
+   "ten": "Địa Khố",
+   "bo_vi": "dia_cac",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 64,
+   "ten": "Pha Trì",
+   "bo_vi": "dia_cac",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 65,
+   "ten": "Nga Áp",
+   "bo_vi": "dia_cac",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 66,
+   "ten": "Kim Lũ",
+   "bo_vi": "phap_lenh",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 67,
+   "ten": "Kim Lũ",
+   "bo_vi": "phap_lenh",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 68,
+   "ten": "Quy Lai",
+   "bo_vi": "ham",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 69,
+   "ten": "Quy Lai",
+   "bo_vi": "ham",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 70,
+   "ten": "Tụng Đường",
+   "bo_vi": "dia_cac",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 71,
+   "ten": "Địa Các",
+   "bo_vi": "dia_cac",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 72,
+   "ten": "Nô Bộc",
+   "bo_vi": "ham",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 73,
+   "ten": "Nô Bộc",
+   "bo_vi": "ham",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 74,
+   "ten": "Tai Cốt",
+   "bo_vi": "ham",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 75,
+   "ten": "Tai Cốt",
+   "bo_vi": "ham",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 76,
+   "ten": "Vị Tý",
+   "bo_vi": "dia_cac",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 77,
+   "ten": "Vị Tý",
+   "bo_vi": "dia_cac",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 78,
+   "ten": "Vị Sửu",
+   "bo_vi": "ham",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 79,
+   "ten": "Vị Sửu",
+   "bo_vi": "ham",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 80,
+   "ten": "Vị Dần",
+   "bo_vi": "ham",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 81,
+   "ten": "Vị Dần",
+   "bo_vi": "ham",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 82,
+   "ten": "Vị Mão",
+   "bo_vi": "luong_quyen",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 83,
+   "ten": "Vị Mão",
+   "bo_vi": "luong_quyen",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 84,
+   "ten": "Vị Thìn",
+   "bo_vi": "thien_thuong",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 85,
+   "ten": "Vị Thìn",
+   "bo_vi": "thien_thuong",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 86,
+   "ten": "Vị Tỵ",
+   "bo_vi": "nhat_nguyet_giac",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 87,
+   "ten": "Vị Tỵ",
+   "bo_vi": "nhat_nguyet_giac",
+   "ben": "trai"
+  },
+  {
+   "tuoi": 88,
+   "ten": "Vị Ngọ",
+   "bo_vi": "thien_dinh",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 89,
+   "ten": "Vị Ngọ",
+   "bo_vi": "thien_dinh",
+   "ben": "giua"
+  },
+  {
+   "tuoi": 90,
+   "ten": "Vị Mùi",
+   "bo_vi": "nhat_nguyet_giac",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 91,
+   "ten": "Vị Mùi",
+   "bo_vi": "nhat_nguyet_giac",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 92,
+   "ten": "Vị Thân",
+   "bo_vi": "thien_thuong",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 93,
+   "ten": "Vị Thân",
+   "bo_vi": "thien_thuong",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 94,
+   "ten": "Vị Dậu",
+   "bo_vi": "luong_quyen",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 95,
+   "ten": "Vị Dậu",
+   "bo_vi": "luong_quyen",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 96,
+   "ten": "Vị Tuất",
+   "bo_vi": "ham",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 97,
+   "ten": "Vị Tuất",
+   "bo_vi": "ham",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 98,
+   "ten": "Vị Hợi",
+   "bo_vi": "ham",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 99,
+   "ten": "Vị Hợi",
+   "bo_vi": "ham",
+   "ben": "phai"
+  },
+  {
+   "tuoi": 100,
+   "ten": "Vị Tý (trở lại)",
+   "bo_vi": "dia_cac",
+   "ben": "giua"
+  }
+ ],
+ "ngu_hinh": {
+  "kim": {
+   "ten": "Kim hình",
+   "han": "金形",
+   "hanh": "Kim",
+   "dau_hieu": "Mặt vuông vức, góc cạnh rõ, da sáng hoặc hơi trắng, xương chắc, dáng gọn.",
+   "loi": "Người dáng Kim thường rõ ràng, dứt khoát, ưa trật tự và nói đi đôi với làm. Điểm dễ vấp: cứng với mình và với người, khó mềm giọng khi cần.",
+   "hop": "Sách xưa nói Kim hình ưa 'phương' (vuông), kỵ 'tròn': giữ nếp sống gọn, việc có khung sẽ bền.",
+   "viec": "Mỗi tuần một việc chỉ để làm cho vui, không cần hoàn hảo.",
+   "nguon": "ma_y"
+  },
+  "moc": {
+   "ten": "Mộc hình",
+   "han": "木形",
+   "hanh": "Mộc",
+   "dau_hieu": "Mặt dài, người gầy thẳng, mày mắt thanh, xương nhỏ mà chắc, sắc hơi xanh nhạt.",
+   "loi": "Người dáng Mộc thường tinh tế, ham học, bền bỉ theo một hướng lâu dài, hợp việc cần nghĩ sâu. Điểm dễ vấp: nghĩ nhiều, hay giữ trong lòng, dễ căng.",
+   "hop": "Mộc ưa 'thẳng và vươn': được tự do phát triển theo ý mình thì tốt, bị bó thì héo.",
+   "viec": "Đi bộ ngoài trời 20 phút mỗi ngày, ưu tiên nơi có cây.",
+   "nguon": "ma_y"
+  },
+  "thuy": {
+   "ten": "Thuỷ hình",
+   "han": "水形",
+   "hanh": "Thủy",
+   "dau_hieu": "Mặt tròn đầy, thịt mềm, mắt to nước, da hơi ngăm hoặc mịn, dáng tròn trịa.",
+   "loi": "Người dáng Thuỷ mềm mỏng, dễ hoà, nhạy với cảm xúc người khác, linh hoạt. Điểm dễ vấp: dễ theo hoàn cảnh, khó dứt khoát, hay giữ nước trong người.",
+   "hop": "Thuỷ ưa 'tròn và động': công việc có giao tiếp, có đi lại hợp hơn ngồi yên một chỗ.",
+   "viec": "Vận động ra mồ hôi 3 lần mỗi tuần; bớt ăn mặn.",
+   "nguon": "ma_y"
+  },
+  "hoa": {
+   "ten": "Hoả hình",
+   "han": "火形",
+   "hanh": "Hỏa",
+   "dau_hieu": "Trán hẹp hơn hàm (trên nhọn dưới rộng), sắc hồng đỏ, tóc hơi thưa hoặc dựng, mắt sáng, nói nhanh.",
+   "loi": "Người dáng Hoả nhiệt tình, nhanh, có sức lan, làm việc gì cũng muốn thấy kết quả ngay. Điểm dễ vấp: nóng, thiếu kiên nhẫn, dễ cạn sức.",
+   "hop": "Hoả ưa 'nhọn và sáng': việc có nhịp nhanh, có người xem, có thi đua hợp; việc lặp đều dễ chán.",
+   "viec": "Trước khi trả lời chuyện quan trọng, đếm chậm đến năm.",
+   "nguon": "ma_y"
+  },
+  "tho": {
+   "ten": "Thổ hình",
+   "han": "土形",
+   "hanh": "Thổ",
+   "dau_hieu": "Mặt dày, hàm rộng, da hơi vàng, thịt chắc, lưng dày, dáng nặng vững.",
+   "loi": "Người dáng Thổ vững vàng, chịu khó, giữ lời, là chỗ dựa của nhiều người. Điểm dễ vấp: chậm đổi, giữ việc trong tay quá lâu, nặng nề khi mệt.",
+   "hop": "Thổ ưa 'dày và tĩnh': việc cần bền, cần giữ (quản lý, sản xuất, đất đai) hợp.",
+   "viec": "Mỗi quý thử một cách làm mới cho một việc quen.",
+   "nguon": "ma_y"
+  },
+  "pha": {
+   "ten": "Hình pha (tạp hình)",
+   "han": "雜形",
+   "hanh": null,
+   "dau_hieu": "Không nghiêng hẳn về một dáng — đa số người là vậy.",
+   "loi": "Bạn mang vài nét của hai ba dáng cùng lúc; sách xưa gọi là tạp hình và dặn xem theo nét trội nhất. Người hình pha thường thích nghi tốt, ít cực đoan.",
+   "hop": "Nhìn hai hành trội nhất của bạn: hành sinh nhau thì thuận, hành kìm nhau thì cần cân.",
+   "viec": "Chọn một nét bạn thích nhất ở mình và nuôi nó cho rõ.",
+   "nguon": "than_tuong_toan_bien"
+  }
+ },
+ "ngu_hinh_luat": {
+  "khuon_mat": {
+   "vuong": "kim",
+   "dai": "moc",
+   "tron": "thuy",
+   "tren_hep_duoi_rong": "hoa",
+   "day_chac": "tho"
+  },
+  "sac_tong": {
+   "trang_bech": "kim",
+   "do_ung": "hoa",
+   "vang_xin": "tho",
+   "toi_sam": "thuy"
+  },
+  "cot_nhuc": {
+   "tro_xuong": "moc",
+   "mem_nhao": "thuy",
+   "san_chac": "tho"
+  },
+  "giong": {
+   "cao_nhanh": "hoa",
+   "tram_vang": "tho"
+  },
+  "dang": {
+   "nhanh_hap_tap": "hoa",
+   "vung_thang": "tho"
+  },
+  "tam_dinh": {
+   "tran_dai": "moc",
+   "cam_dai": "tho"
+  }
+ },
+ "ngu_hanh_sinh": {
+  "Mộc": "Hỏa",
+  "Hỏa": "Thổ",
+  "Thổ": "Kim",
+  "Kim": "Thủy",
+  "Thủy": "Mộc"
+ },
+ "khi_sac": {
+  "thanh": {
+   "ten": "sắc xanh xám",
+   "tang": "gan mật",
+   "hanh": "Mộc",
+   "he": "gan, mật và gân cơ",
+   "y": "Sách xưa: sắc xanh là khí gan bị nén — thường do nén giận, thức khuya, nghĩ nhiều.",
+   "loi": "Vùng da ngả xanh xám thường đi với mệt mỏi và căng thẳng kéo dài. Ngủ sớm hơn hai tuần rồi nhìn lại; nếu không đổi, đi kiểm tra gan mật định kỳ."
+  },
+  "xich": {
+   "ten": "sắc đỏ ửng",
+   "tang": "tim",
+   "hanh": "Hỏa",
+   "he": "tim mạch, huyết áp và mắt",
+   "y": "Sắc đỏ là nhiệt ở trên: nóng trong, gấp gáp, ngủ ít.",
+   "loi": "Mặt hay ửng đỏ khô, nhất là Ấn Đường và gò má, đi với nóng nảy, khó ngủ. Bớt cà phê, rượu; đo huyết áp định kỳ, khám tim mạch nếu kéo dài."
+  },
+  "hoang": {
+   "ten": "sắc vàng xỉn",
+   "tang": "tỳ vị",
+   "hanh": "Thổ",
+   "he": "tiêu hoá, dạ dày",
+   "y": "Vàng tươi nhuận là tốt (khí tỳ vượng); vàng xỉn, khô là tỳ mệt.",
+   "loi": "Da vàng xỉn, kém tươi thường gặp khi ăn uống thất thường, bỏ bữa. Ăn ấm, đúng giờ; nếu kèm chán ăn kéo dài, khám tiêu hoá."
+  },
+  "bach": {
+   "ten": "sắc trắng bệch",
+   "tang": "phổi",
+   "hanh": "Kim",
+   "he": "đường hô hấp, phổi",
+   "y": "Trắng nhuận là tốt; trắng bệch, khô là khí phổi và huyết đều thiếu.",
+   "loi": "Mặt trắng bệch, môi nhạt hay đi với thở nông, dễ mệt. Tập thở sâu, ra nắng sáng; khám hô hấp và kiểm tra máu định kỳ."
+  },
+  "hac": {
+   "ten": "sắc tối sạm",
+   "tang": "thận",
+   "hanh": "Thủy",
+   "he": "thận, đường tiết niệu",
+   "y": "Sắc đen tối, nhất là dưới mắt và cằm, sách xưa gắn với thận khí hao: ngủ ít, làm quá sức.",
+   "loi": "Quầng tối dưới mắt, sắc sạm quanh cằm thường do thiếu ngủ lâu ngày. Ngủ đủ, uống nước đều; khám thận, tiết niệu định kỳ nếu kéo dài."
+  },
+  "nhuan": {
+   "ten": "sắc sáng nhuận",
+   "tang": null,
+   "hanh": null,
+   "he": null,
+   "y": "'Sắc quý minh nhuận, bất quý nộn bạch': quý ở sáng và ẩm từ bên trong, không phải ở trắng.",
+   "loi": "Da sáng, ẩm, có ánh từ bên trong là dấu hiệu ngủ đủ, ăn đúng. Giữ nhịp này."
+  }
+ },
+ "not_ruoi": {
+  "tran": {
+   "ten": "nốt ruồi trên trán",
+   "loi": "Dân gian xem là dấu của người hay tự lập sớm, ít dựa người khác. Nếu nốt ruồi sáng, gọn thì được xem là thuận; mờ, lan thì chỉ nhắc nên chăm sóc da.",
+   "nguon": "dan_gian_vn"
+  },
+  "an_duong": {
+   "ten": "nốt ruồi ở Ấn Đường",
+   "loi": "Sách xưa xem giữa hai mày là chỗ 'ấn' nên ngại có vết; đời thường chỉ cần hiểu: người có nốt ruồi ở đây hay được chú ý, nói gì cũng dễ bị soi — giữ lời cho gọn là đủ.",
+   "nguon": "ma_y"
+  },
+  "long_may": {
+   "ten": "nốt ruồi trong lông mày",
+   "loi": "'Mi lý tàng châu' — nốt ruồi giấu trong mày được xem là dấu của người có trí, giàu tình anh em bạn bè.",
+   "nguon": "ma_y"
+  },
+  "duoi_mat": {
+   "ten": "nốt ruồi dưới mắt",
+   "loi": "Dân gian gọi là 'nốt ruồi lệ', xem là người nặng tình, dễ xúc động vì người khác. Chỉ là nét tính cách, không phải điềm.",
+   "nguon": "dan_gian_vn"
+  },
+  "duoi_mat_duoi": {
+   "ten": "nốt ruồi ở đuôi mắt",
+   "loi": "Đuôi mắt là cung Phu Thê; dân gian cho là người có duyên, dễ được để ý. Việc nên làm: rõ ràng với người mình chọn.",
+   "nguon": "dan_gian_vn"
+  },
+  "mui": {
+   "ten": "nốt ruồi trên mũi",
+   "loi": "Mũi là cung Tài Bạch; nốt ruồi ở sống hay đầu mũi dân gian nhắc 'tiền vào tiền ra' — nghĩa đời thường: nên có một khoản để riêng, không tiêu theo hứng.",
+   "nguon": "dan_gian_vn"
+  },
+  "canh_mui": {
+   "ten": "nốt ruồi ở cánh mũi",
+   "loi": "Cánh mũi là 'kho' — dân gian nhắc người có nốt ruồi ở đây dễ hào phóng quá tay. Việc nên làm: ghi chi tiêu một tháng.",
+   "nguon": "dan_gian_vn"
+  },
+  "moi": {
+   "ten": "nốt ruồi trên môi / quanh miệng",
+   "loi": "Quanh miệng là Xuất Nạp quan: dân gian xem là người có lộc ăn, khéo nói, ưa ăn ngon. Nhắc nhẹ: giữ lời đã hứa.",
+   "nguon": "dan_gian_vn"
+  },
+  "cam": {
+   "ten": "nốt ruồi ở cằm",
+   "loi": "Cằm là hậu vận và nhà cửa; dân gian xem nốt ruồi ở cằm là người gắn với đất đai, hay dời chỗ ở. Nghĩa đời thường: thích sắp xếp lại nơi mình sống.",
+   "nguon": "dan_gian_vn"
+  },
+  "go_ma": {
+   "ten": "nốt ruồi trên gò má",
+   "loi": "Gò má là 'quyền': dân gian xem người có nốt ruồi ở đây hay phải đứng ra cáng đáng. Nhắc: không ôm hết việc của người khác.",
+   "nguon": "dan_gian_vn"
+  },
+  "tai": {
+   "ten": "nốt ruồi trên tai",
+   "loi": "Tai là tuổi thơ và sức bền; nốt ruồi ở tai dân gian xem là thuận, người thông minh, hiếu thuận.",
+   "nguon": "dan_gian_vn"
+  },
+  "co": {
+   "ten": "nốt ruồi ở cổ",
+   "loi": "Dân gian xem là người nhẹ lòng, hay giúp người. Da cổ mỏng, nốt ruồi hay bị cọ: để ý nếu nó đổi màu, đổi cỡ thì đi khám da liễu.",
+   "nguon": "dan_gian_vn"
+  },
+  "chung": {
+   "ten": "nốt ruồi nói chung",
+   "loi": "Sách xưa dặn: nốt ruồi sáng, gọn, hơi nổi là 'hoạt chí' (nét sống), mờ lan là 'tử chí'. Đời thường chỉ cần nhớ một điều: nốt ruồi đổi màu, đổi cỡ, chảy nước thì đi khám da liễu — không xem bói thay khám.",
+   "nguon": "ma_y"
+  }
+ },
+ "buoc": [
+  {
+   "so": 1,
+   "ten": "Nhìn tổng thể",
+   "goi_y": "Đứng cách gương một sải tay, ánh sáng ban ngày, mặt mộc, tóc vén lên."
+  },
+  {
+   "so": 2,
+   "ten": "Trán và lông mày",
+   "goi_y": "Nhìn thẳng rồi nghiêng 45° để thấy độ đầy của trán."
+  },
+  {
+   "so": 3,
+   "ten": "Đôi mắt",
+   "goi_y": "Nhìn vào mắt mình 5 giây trong gương, để ý ánh mắt có yên không."
+  },
+  {
+   "so": 4,
+   "ten": "Mũi và gò má",
+   "goi_y": "Nhìn nghiêng để thấy sống mũi; nhìn thẳng để thấy cánh mũi và gò má."
+  },
+  {
+   "so": 5,
+   "ten": "Miệng, cằm và tai",
+   "goi_y": "Khép môi tự nhiên, không cười; vén tóc để thấy tai."
+  },
+  {
+   "so": 6,
+   "ten": "Giọng nói và dáng",
+   "goi_y": "Nhớ lại nhận xét của người quen về giọng và dáng của bạn."
+  }
+ ],
+ "cau_hoi": [
+  {
+   "ma": "khuon_mat",
+   "buoc": 1,
+   "bo_vi": "khuon_mat",
+   "nhom": "hinh",
+   "hoi": "Dáng mặt tổng thể của bạn gần với kiểu nào?",
+   "huong_dan": "So trán, gò má, hàm: phần nào rộng nhất; cằm nhọn hay vuông.",
+   "lua_chon": [
+    {
+     "ma": "vuong",
+     "nhan": "Vuông vức, góc cạnh rõ"
+    },
+    {
+     "ma": "dai",
+     "nhan": "Dài, hẹp, thanh"
+    },
+    {
+     "ma": "tron",
+     "nhan": "Tròn đầy, thịt mềm"
+    },
+    {
+     "ma": "tren_hep_duoi_rong",
+     "nhan": "Trán hẹp, hàm rộng (trên nhọn dưới rộng)"
+    },
+    {
+     "ma": "tren_rong_duoi_nhon",
+     "nhan": "Trán rộng, cằm nhọn (trên rộng dưới nhọn)"
+    },
+    {
+     "ma": "day_chac",
+     "nhan": "Dày, chắc, hàm rộng, thịt chắc"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "tam_dinh",
+   "buoc": 1,
+   "bo_vi": "khuon_mat",
+   "nhom": "hinh",
+   "hoi": "Chia mặt làm ba phần: chân tóc → đầu mày, đầu mày → đầu mũi, đầu mũi → cằm. Phần nào dài nhất?",
+   "huong_dan": "Dùng ngón tay đo thử; ba phần xấp xỉ nhau là 'cân'.",
+   "lua_chon": [
+    {
+     "ma": "can_doi",
+     "nhan": "Ba phần xấp xỉ nhau"
+    },
+    {
+     "ma": "tran_dai",
+     "nhan": "Phần trán dài rõ"
+    },
+    {
+     "ma": "mui_dai",
+     "nhan": "Phần giữa (mũi) dài rõ"
+    },
+    {
+     "ma": "cam_dai",
+     "nhan": "Phần cằm dài rõ"
+    },
+    {
+     "ma": "tran_ngan",
+     "nhan": "Phần trán ngắn rõ"
+    },
+    {
+     "ma": "cam_ngan",
+     "nhan": "Phần cằm ngắn rõ"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "sac_tong",
+   "buoc": 1,
+   "bo_vi": "khuon_mat",
+   "nhom": "khi_sac",
+   "hoi": "Sắc da mặt bạn gần đây, dưới ánh sáng ban ngày?",
+   "huong_dan": "Nhìn cả mặt, không nhìn một vùng; so với lúc bạn khoẻ nhất.",
+   "lua_chon": [
+    {
+     "ma": "sang_nhuan",
+     "nhan": "Sáng, hồng nhuận, có ánh"
+    },
+    {
+     "ma": "vang_xin",
+     "nhan": "Vàng xỉn, kém tươi"
+    },
+    {
+     "ma": "trang_bech",
+     "nhan": "Trắng bệch, môi nhạt"
+    },
+    {
+     "ma": "toi_sam",
+     "nhan": "Tối, sạm, xám"
+    },
+    {
+     "ma": "do_ung",
+     "nhan": "Đỏ ửng, khô"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "cot_nhuc",
+   "buoc": 1,
+   "bo_vi": "khuon_mat",
+   "nhom": "cot",
+   "hoi": "Ấn nhẹ ngón tay vào gò má và hàm: cảm giác thế nào?",
+   "huong_dan": "Xương có trơ không, thịt có đàn hồi không.",
+   "lua_chon": [
+    {
+     "ma": "san_chac",
+     "nhan": "Thịt săn, có đàn hồi, xương không trơ"
+    },
+    {
+     "ma": "tro_xuong",
+     "nhan": "Xương nổi rõ, ít thịt bao"
+    },
+    {
+     "ma": "mem_nhao",
+     "nhan": "Thịt mềm nhão, xương chìm"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "tran",
+   "buoc": 2,
+   "bo_vi": "thien_dinh",
+   "nhom": "hinh",
+   "hoi": "Trán của bạn",
+   "huong_dan": "Nhìn nghiêng: trán có tròn đầy hay dẹt, có lõm giữa không.",
+   "lua_chon": [
+    {
+     "ma": "cao_rong_day",
+     "nhan": "Cao, rộng, đầy, không lõm"
+    },
+    {
+     "ma": "hep_thap",
+     "nhan": "Hẹp hoặc thấp"
+    },
+    {
+     "ma": "go_loi",
+     "nhan": "Gồ, hai góc nhô"
+    },
+    {
+     "ma": "lom_giua",
+     "nhan": "Lõm hoặc dẹt ở giữa"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "nep_tran",
+   "buoc": 2,
+   "bo_vi": "thien_dinh",
+   "nhom": "tam_dong",
+   "hoi": "Nếp nhăn ngang trên trán",
+   "huong_dan": "Khi mặt thả lỏng, không nhướng mày.",
+   "lua_chon": [
+    {
+     "ma": "khong",
+     "nhan": "Chưa có hoặc rất mờ"
+    },
+    {
+     "ma": "vai_nep_lien",
+     "nhan": "Một đến ba nếp dài, liền"
+    },
+    {
+     "ma": "nhieu_dut",
+     "nhan": "Nhiều nếp ngắn, đứt đoạn"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "nhat_nguyet_giac",
+   "buoc": 2,
+   "bo_vi": "nhat_nguyet_giac",
+   "nhom": "hinh",
+   "hoi": "Hai bên trán phía trên đầu mày (nhìn nghiêng)",
+   "huong_dan": "Vùng này đầy hay lõm; hai bên có cân không.",
+   "lua_chon": [
+    {
+     "ma": "day_can",
+     "nhan": "Đầy, cân hai bên"
+    },
+    {
+     "ma": "lech",
+     "nhan": "Bên cao bên thấp"
+    },
+    {
+     "ma": "lom",
+     "nhan": "Lõm, thấp"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "long_may",
+   "buoc": 2,
+   "bo_vi": "long_may",
+   "nhom": "hinh",
+   "hoi": "Lông mày của bạn",
+   "huong_dan": "Sợi mày mọc xuôi hay rối, đuôi mày dài tới đâu so với đuôi mắt.",
+   "lua_chon": [
+    {
+     "ma": "thanh_dai",
+     "nhan": "Sợi mượt, mọc xuôi, dài qua đuôi mắt"
+    },
+    {
+     "ma": "dam_ngan",
+     "nhan": "Đậm, rậm, ngắn hơn mắt"
+    },
+    {
+     "ma": "thua_nhat",
+     "nhan": "Thưa, nhạt, đứt quãng"
+    },
+    {
+     "ma": "roi_nguoc",
+     "nhan": "Mọc rối, dựng ngược"
+    },
+    {
+     "ma": "giao_nhau",
+     "nhan": "Hai đầu mày gần chạm nhau"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "dien_trach",
+   "buoc": 2,
+   "bo_vi": "dien_trach",
+   "nhom": "hinh",
+   "hoi": "Khoảng giữa lông mày và mắt (mí trên)",
+   "huong_dan": "Rộng hay hẹp, đầy hay lõm.",
+   "lua_chon": [
+    {
+     "ma": "rong_day",
+     "nhan": "Rộng, đầy, phẳng"
+    },
+    {
+     "ma": "hep",
+     "nhan": "Hẹp, mày sát mắt"
+    },
+    {
+     "ma": "lom_gan",
+     "nhan": "Lõm sâu hoặc nổi gân xanh"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "an_duong",
+   "buoc": 2,
+   "bo_vi": "an_duong",
+   "nhom": "khi_sac",
+   "hoi": "Vùng giữa hai đầu mày (Ấn Đường)",
+   "huong_dan": "Rộng hơn một ngón tay là 'rộng'; để ý sắc và nếp dọc.",
+   "lua_chon": [
+    {
+     "ma": "rong_sang",
+     "nhan": "Rộng, phẳng, sáng"
+    },
+    {
+     "ma": "hep",
+     "nhan": "Hẹp, hai mày sát nhau"
+    },
+    {
+     "ma": "nep_doc",
+     "nhan": "Có nếp nhăn dọc"
+    },
+    {
+     "ma": "toi_xam",
+     "nhan": "Tối, xám"
+    },
+    {
+     "ma": "do_ung",
+     "nhan": "Ửng đỏ"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "mat_hinh",
+   "buoc": 3,
+   "bo_vi": "mat",
+   "nhom": "hinh",
+   "hoi": "Hình dáng mắt",
+   "huong_dan": "Nhìn chiều dài so với chiều cao; đuôi mắt chếch lên hay cụp xuống.",
+   "lua_chon": [
+    {
+     "ma": "dai_hep",
+     "nhan": "Dài, hơi hẹp, đuôi mắt kéo dài"
+    },
+    {
+     "ma": "tron_to",
+     "nhan": "Tròn, to, mở rộng"
+    },
+    {
+     "ma": "nho",
+     "nhan": "Nhỏ"
+    },
+    {
+     "ma": "xech_len",
+     "nhan": "Đuôi mắt chếch lên"
+    },
+    {
+     "ma": "cup_xuong",
+     "nhan": "Đuôi mắt cụp xuống"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "mat_than",
+   "buoc": 3,
+   "bo_vi": "mat",
+   "nhom": "than",
+   "hoi": "Nhìn vào mắt mình 5 giây: ánh mắt",
+   "huong_dan": "'Thần' là độ yên và sáng của ánh nhìn, không phải mắt to nhỏ.",
+   "lua_chon": [
+    {
+     "ma": "dinh_sang",
+     "nhan": "Yên, sáng, không đảo"
+    },
+    {
+     "ma": "mo_met",
+     "nhan": "Mờ, uể, nhiều tia đỏ"
+    },
+    {
+     "ma": "sac_gat",
+     "nhan": "Sắc, dễ gắt"
+    },
+    {
+     "ma": "dao_nhanh",
+     "nhan": "Hay đảo, khó giữ yên"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "tam_bach",
+   "buoc": 3,
+   "bo_vi": "mat",
+   "nhom": "than",
+   "hoi": "Khi nhìn thẳng, lòng trắng có lộ phía dưới hoặc trên tròng đen không?",
+   "huong_dan": "Tròng đen chạm cả mí trên và mí dưới là 'không lộ'.",
+   "lua_chon": [
+    {
+     "ma": "khong",
+     "nhan": "Không lộ"
+    },
+    {
+     "ma": "duoi",
+     "nhan": "Lộ lòng trắng phía dưới"
+    },
+    {
+     "ma": "tren",
+     "nhan": "Lộ lòng trắng phía trên"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "le_duong",
+   "buoc": 3,
+   "bo_vi": "le_duong",
+   "nhom": "khi_sac",
+   "hoi": "Vùng ngay dưới mắt",
+   "huong_dan": "Nhìn gò nhỏ dưới mắt (khi cười nhẹ) và màu da.",
+   "lua_chon": [
+    {
+     "ma": "day_tuoi",
+     "nhan": "Gò nhỏ đầy, sắc tươi"
+    },
+    {
+     "ma": "tham_quang",
+     "nhan": "Quầng thâm, trũng"
+    },
+    {
+     "ma": "bong",
+     "nhan": "Bọng, sưng nhẹ buổi sáng"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "ngu_vi",
+   "buoc": 3,
+   "bo_vi": "ngu_vi",
+   "nhom": "hinh",
+   "hoi": "Đuôi mắt kéo ra thái dương",
+   "huong_dan": "Phẳng hay trũng; nếp chân chim có từ sớm không.",
+   "lua_chon": [
+    {
+     "ma": "phang_sang",
+     "nhan": "Phẳng, sáng"
+    },
+    {
+     "ma": "nhieu_nep",
+     "nhan": "Nhiều nếp đan chéo từ sớm"
+    },
+    {
+     "ma": "trung_toi",
+     "nhan": "Trũng, tối"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "son_can",
+   "buoc": 4,
+   "bo_vi": "son_can",
+   "nhom": "hinh",
+   "hoi": "Gốc mũi giữa hai mắt (Sơn Căn)",
+   "huong_dan": "Nhìn nghiêng: gốc mũi nối liền trán hay gãy xuống.",
+   "lua_chon": [
+    {
+     "ma": "cao_lien",
+     "nhan": "Cao, nối liền với trán"
+    },
+    {
+     "ma": "thap_gay",
+     "nhan": "Thấp, gãy"
+    },
+    {
+     "ma": "nep_ngang",
+     "nhan": "Có nếp ngang cắt qua"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "song_mui",
+   "buoc": 4,
+   "bo_vi": "song_mui",
+   "nhom": "hinh",
+   "hoi": "Sống mũi",
+   "huong_dan": "Nhìn nghiêng.",
+   "lua_chon": [
+    {
+     "ma": "thang_cao",
+     "nhan": "Thẳng, cao, đều"
+    },
+    {
+     "ma": "go",
+     "nhan": "Gồ, có khúc"
+    },
+    {
+     "ma": "thap",
+     "nhan": "Thấp, ngắn"
+    },
+    {
+     "ma": "lech",
+     "nhan": "Lệch sang một bên"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "chuan_dau",
+   "buoc": 4,
+   "bo_vi": "chuan_dau",
+   "nhom": "hinh",
+   "hoi": "Đầu mũi",
+   "huong_dan": "Nhìn thẳng và nghiêng.",
+   "lua_chon": [
+    {
+     "ma": "tron_day",
+     "nhan": "Tròn, đầy, dày thịt"
+    },
+    {
+     "ma": "nhon_mong",
+     "nhan": "Nhọn, mỏng"
+    },
+    {
+     "ma": "to_tho",
+     "nhan": "To, thô"
+    },
+    {
+     "ma": "do_bong",
+     "nhan": "Hay ửng đỏ, bóng dầu"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "canh_mui",
+   "buoc": 4,
+   "bo_vi": "canh_mui",
+   "nhom": "hinh",
+   "hoi": "Cánh mũi",
+   "huong_dan": "Nhìn thẳng: có thấy lỗ mũi không.",
+   "lua_chon": [
+    {
+     "ma": "day_kin",
+     "nhan": "Dày, ôm kín lỗ mũi"
+    },
+    {
+     "ma": "mong_lo",
+     "nhan": "Mỏng, lỗ mũi lộ khi nhìn thẳng"
+    },
+    {
+     "ma": "xoe_rong",
+     "nhan": "Xoè rộng"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "luong_quyen",
+   "buoc": 4,
+   "bo_vi": "luong_quyen",
+   "nhom": "cot",
+   "hoi": "Gò má",
+   "huong_dan": "Nhìn thẳng: gò má nhô hay phẳng, có thịt bao không.",
+   "lua_chon": [
+    {
+     "ma": "cao_co_thit",
+     "nhan": "Nhô, có thịt bao đầy"
+    },
+    {
+     "ma": "cao_tro",
+     "nhan": "Nhô, trơ xương"
+    },
+    {
+     "ma": "thap_phang",
+     "nhan": "Thấp, phẳng"
+    },
+    {
+     "ma": "lech",
+     "nhan": "Bên cao bên thấp"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "nhan_trung",
+   "buoc": 5,
+   "bo_vi": "nhan_trung",
+   "nhom": "hinh",
+   "hoi": "Rãnh Nhân Trung (giữa mũi và môi trên)",
+   "huong_dan": "Nhìn gần: rãnh sâu hay nông, dài hay ngắn.",
+   "lua_chon": [
+    {
+     "ma": "sau_dai",
+     "nhan": "Sâu, dài, rõ, dưới hơi rộng"
+    },
+    {
+     "ma": "nong_phang",
+     "nhan": "Nông, phẳng, mờ"
+    },
+    {
+     "ma": "ngan",
+     "nhan": "Ngắn"
+    },
+    {
+     "ma": "lech",
+     "nhan": "Lệch"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "phap_lenh",
+   "buoc": 5,
+   "bo_vi": "phap_lenh",
+   "nhom": "tam_dong",
+   "hoi": "Hai rãnh từ cánh mũi xuống mép (Pháp Lệnh)",
+   "huong_dan": "Khi mặt thả lỏng.",
+   "lua_chon": [
+    {
+     "ma": "ro_mo",
+     "nhan": "Rõ, mở rộng dần xuống, không chạm mép"
+    },
+    {
+     "ma": "mo",
+     "nhan": "Mờ, chưa rõ"
+    },
+    {
+     "ma": "cham_mep",
+     "nhan": "Đâm thẳng vào mép / khoé miệng"
+    },
+    {
+     "ma": "lech",
+     "nhan": "Hai bên không đều"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "mieng",
+   "buoc": 5,
+   "bo_vi": "mieng",
+   "nhom": "hinh",
+   "hoi": "Miệng khi khép tự nhiên",
+   "huong_dan": "Không cười; để ý hai khoé miệng.",
+   "lua_chon": [
+    {
+     "ma": "rong_khoe_len",
+     "nhan": "Rộng vừa, khoé hơi hướng lên"
+    },
+    {
+     "ma": "nho_mong",
+     "nhan": "Nhỏ, môi mỏng"
+    },
+    {
+     "ma": "khoe_cup",
+     "nhan": "Khoé miệng cụp xuống"
+    },
+    {
+     "ma": "moi_day",
+     "nhan": "Môi dày, đầy"
+    },
+    {
+     "ma": "lech",
+     "nhan": "Lệch, khép không kín"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "moi_sac",
+   "buoc": 5,
+   "bo_vi": "mieng",
+   "nhom": "khi_sac",
+   "hoi": "Màu môi",
+   "huong_dan": "Không son, ánh sáng ban ngày.",
+   "lua_chon": [
+    {
+     "ma": "hong_nhuan",
+     "nhan": "Hồng, mịn"
+    },
+    {
+     "ma": "nhat_kho",
+     "nhan": "Nhạt, khô, bong"
+    },
+    {
+     "ma": "tham_tim",
+     "nhan": "Thâm, tím"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "cam",
+   "buoc": 5,
+   "bo_vi": "dia_cac",
+   "nhom": "hinh",
+   "hoi": "Cằm",
+   "huong_dan": "Nhìn nghiêng: cằm đưa ra hay lẹm vào.",
+   "lua_chon": [
+    {
+     "ma": "tron_day",
+     "nhan": "Tròn, đầy, hơi đưa ra trước"
+    },
+    {
+     "ma": "nhon_lem",
+     "nhan": "Nhọn hoặc lẹm vào"
+    },
+    {
+     "ma": "vuong_rong",
+     "nhan": "Vuông, rộng"
+    },
+    {
+     "ma": "che_doi",
+     "nhan": "Chẻ đôi"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "ham",
+   "buoc": 5,
+   "bo_vi": "ham",
+   "nhom": "cot",
+   "hoi": "Quai hàm",
+   "huong_dan": "Nhìn từ phía sau (nhờ người chụp) hoặc sờ.",
+   "lua_chon": [
+    {
+     "ma": "day_vung",
+     "nhan": "Đầy, vững"
+    },
+    {
+     "ma": "hep_gay",
+     "nhan": "Hẹp, gầy"
+    },
+    {
+     "ma": "banh",
+     "nhan": "Bành rộng, nhìn sau thấy rõ"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "tai",
+   "buoc": 5,
+   "bo_vi": "tai",
+   "nhom": "hinh",
+   "hoi": "Tai của bạn",
+   "huong_dan": "So đỉnh tai với lông mày; sờ dái tai.",
+   "lua_chon": [
+    {
+     "ma": "cao_day",
+     "nhan": "Đỉnh tai cao ngang mày, vành rõ, dái tai dày"
+    },
+    {
+     "ma": "mong_lat",
+     "nhan": "Mỏng, vành lật ra ngoài"
+    },
+    {
+     "ma": "nho_thap",
+     "nhan": "Nhỏ, thấp dưới tầm mắt"
+    },
+    {
+     "ma": "dai_nep",
+     "nhan": "Dái tai có nếp gấp chéo"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "cham_cot",
+   "buoc": 5,
+   "bo_vi": "ham",
+   "nhom": "cot",
+   "hoi": "Xương sau gáy (sờ dưới chỗ gáy gặp sọ)",
+   "huong_dan": "Ngửa nhẹ đầu, sờ ngang chỗ cổ gặp sọ.",
+   "lua_chon": [
+    {
+     "ma": "noi_tron",
+     "nhan": "Nổi tròn, đầy"
+    },
+    {
+     "ma": "phang",
+     "nhan": "Phẳng"
+    },
+    {
+     "ma": "khong_ro",
+     "nhan": "Không rõ"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "giong",
+   "buoc": 6,
+   "bo_vi": "mieng",
+   "nhom": "tam_dong",
+   "hoi": "Giọng nói của bạn (theo người quen nhận xét)",
+   "huong_dan": "Nghe lại một đoạn ghi âm của mình nếu được.",
+   "lua_chon": [
+    {
+     "ma": "tram_vang",
+     "nhan": "Trầm, ấm, vang, nói lâu không hụt"
+    },
+    {
+     "ma": "cao_nhanh",
+     "nhan": "Cao, nhanh"
+    },
+    {
+     "ma": "nho_yeu",
+     "nhan": "Nhỏ, yếu, hay hụt hơi"
+    },
+    {
+     "ma": "khan",
+     "nhan": "Khàn"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "net_mat",
+   "buoc": 6,
+   "bo_vi": "khuon_mat",
+   "nhom": "tam_dong",
+   "hoi": "Lúc không cười, người khác thường thấy mặt bạn",
+   "huong_dan": "Hỏi một người thân thiết.",
+   "lua_chon": [
+    {
+     "ma": "de_gan",
+     "nhan": "Dễ gần, ấm"
+    },
+    {
+     "ma": "nghiem",
+     "nhan": "Nghiêm, khó đoán"
+    },
+    {
+     "ma": "buon_met",
+     "nhan": "Buồn hoặc mệt"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  },
+  {
+   "ma": "dang",
+   "buoc": 6,
+   "bo_vi": "khuon_mat",
+   "nhom": "tam_dong",
+   "hoi": "Dáng đi, dáng ngồi của bạn",
+   "huong_dan": "Nhớ lại khi bước vào một căn phòng.",
+   "lua_chon": [
+    {
+     "ma": "vung_thang",
+     "nhan": "Vững, thẳng, chậm rãi"
+    },
+    {
+     "ma": "nhanh_hap_tap",
+     "nhan": "Nhanh, hấp tấp"
+    },
+    {
+     "ma": "khom_rut",
+     "nhan": "Khom, rụt, hay bồn chồn"
+    },
+    {
+     "ma": "khong_chac",
+     "nhan": "Không chắc / bỏ qua"
+    }
+   ]
+  }
+ ],
+ "dac_diem": {
+  "tam_dinh_can": {
+   "ten": "Ba phần mặt cân nhau",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tam_dinh": [
+     "can_doi"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Ba phần mặt cân nhau",
+   "noi_dung": "Trán, mũi, cằm dài xấp xỉ nhau — sách xưa gọi là 'tam đình bình đẳng', dấu của người có nhịp sống đều, ít lệch hẳn về một giai đoạn. Tuổi trẻ, trung niên, về già đều có phần.",
+   "viec": "Giữ nhịp: mỗi tuần dành thời gian cho đủ ba thứ — việc, người thân, sức khoẻ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Tam đình bình đẳng, chung thân y lộc vô khuy.",
+    "nguon": "ma_y",
+    "y": "Ba đình cân thì cả đời không thiếu ăn mặc (Ma Y)."
+   }
+  },
+  "tam_dinh_tran_dai": {
+   "ten": "Phần trán dài hơn",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tam_dinh": [
+     "tran_dai"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Phần trán dài hơn",
+   "noi_dung": "Thượng đình trội: sách xưa gắn với tuổi trẻ và trí nghĩ — người hay sống bằng đầu, có kế hoạch sớm, thuận ở giai đoạn 15–30. Phần sau đời phụ thuộc vào cách bạn chuyển từ nghĩ sang làm.",
+   "viec": "Với một dự định đang nghĩ lâu, đặt mốc 'làm thử' trong tuần này.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "tam_dinh_mui_dai": {
+   "ten": "Phần giữa mặt dài hơn",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tam_dinh": [
+     "mui_dai"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Phần giữa mặt dài hơn",
+   "noi_dung": "Trung đình trội: giai đoạn 31–50 là lúc bạn có nhiều lực nhất, hợp với người làm việc thực tế, cầm trịch. Người này ít dựa vào may, dựa vào tay.",
+   "viec": "Dồn sức cho việc chính ở giai đoạn 30–50; tuổi trẻ nếu chậm hơn người khác cũng không sao.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "tam_dinh_cam_dai": {
+   "ten": "Phần cằm dài hơn",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tam_dinh": [
+     "cam_dai"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Phần cằm dài hơn",
+   "noi_dung": "Hạ đình trội: sách xưa gắn với hậu vận và sự ổn định — người bền, đi chậm mà chắc, càng về sau càng vững. Điểm dễ vấp: tuổi trẻ sốt ruột vì thấy mình chưa bằng ai.",
+   "viec": "Chọn việc có thể tích luỹ theo năm, không chọn việc chỉ hái trong một mùa.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "tam_dinh_tran_ngan": {
+   "ten": "Phần trán ngắn",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tam_dinh": [
+     "tran_ngan"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Phần trán ngắn",
+   "noi_dung": "Thượng đình ngắn: tuổi trẻ phải tự lo nhiều, ít được đỡ; bù lại sớm va chạm nên thực tế. Sách xưa không xem đây là xấu, chỉ là giai đoạn đầu phải tự gây dựng.",
+   "viec": "Ghi lại ba điều bạn đã tự làm được trước 25 tuổi — đó là vốn thật.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "tam_dinh_cam_ngan": {
+   "ten": "Phần cằm ngắn",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tam_dinh": [
+     "cam_ngan"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Phần cằm ngắn",
+   "noi_dung": "Hạ đình ngắn: sách xưa dặn chuẩn bị hậu vận sớm — nói đời thường là phải tự tích luỹ, không trông vào người khác lo cho mình lúc về già.",
+   "viec": "Mở một khoản để dành tự động, dù nhỏ, từ tháng này.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mat_vuong": {
+   "ten": "Mặt vuông — nét Kim",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "khuon_mat": [
+     "vuong"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Mặt vuông — nét Kim",
+   "noi_dung": "Mặt vuông, góc cạnh rõ là nét của Kim hình: rõ ràng, dứt khoát, giữ nguyên tắc. Người này nói ít, làm nhiều, dễ được giao việc cần tin cậy.",
+   "viec": "Mỗi tuần một lần nói 'tôi chưa chắc' thay vì khẳng định ngay.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mat_dai": {
+   "ten": "Mặt dài, thanh — nét Mộc",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "khuon_mat": [
+     "dai"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Mặt dài, thanh — nét Mộc",
+   "noi_dung": "Mặt dài, thanh là nét của Mộc hình: ham học, bền với một hướng, nghĩ sâu. Hợp việc nghiên cứu, thiết kế, dạy học.",
+   "viec": "Khi nghĩ quá 30 phút một việc, đứng dậy đi bộ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mat_tron": {
+   "ten": "Mặt tròn đầy — nét Thuỷ",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "khuon_mat": [
+     "tron"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Mặt tròn đầy — nét Thuỷ",
+   "noi_dung": "Mặt tròn, thịt mềm là nét của Thuỷ hình: dễ hoà, nhạy cảm với người khác, linh hoạt. Người này ở đâu cũng có bạn, nhưng dễ bị kéo theo ý người.",
+   "viec": "Trước khi nhận lời, hỏi lại mình 'tôi muốn hay tôi ngại từ chối'.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mat_hoa": {
+   "ten": "Trán hẹp, hàm rộng — nét Hoả",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "khuon_mat": [
+     "tren_hep_duoi_rong"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Trán hẹp, hàm rộng — nét Hoả",
+   "noi_dung": "Trên nhọn dưới rộng là nét của Hoả hình: nhiệt, nhanh, có sức lan sang người khác. Người này làm việc gì cũng muốn thấy kết quả ngay.",
+   "viec": "Việc lớn chia thành mốc 2 tuần để cái 'ngay' của bạn có chỗ dùng.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mat_tam_giac_nguoc": {
+   "ten": "Trán rộng, cằm nhọn",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "khuon_mat": [
+     "tren_rong_duoi_nhon"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Trán rộng, cằm nhọn",
+   "noi_dung": "Trên rộng dưới nhọn: phần nghĩ mạnh hơn phần bền. Người này sáng ý, nhìn xa, nhưng dễ bỏ dở khi việc vào đoạn nhàm.",
+   "viec": "Giao đoạn 'hoàn thiện' của việc cho người bền hơn, hoặc đặt thưởng nhỏ cho chính mình khi xong.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mat_tho": {
+   "ten": "Mặt dày, chắc — nét Thổ",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "khuon_mat": [
+     "day_chac"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Mặt dày, chắc — nét Thổ",
+   "noi_dung": "Mặt dày, hàm rộng, thịt chắc là nét của Thổ hình: vững, giữ lời, là chỗ dựa. Người này chậm đổi, nhưng đã nhận thì làm tới cùng.",
+   "viec": "Mỗi quý thử một cách làm mới cho một việc quen.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "sac_sang": {
+   "ten": "Sắc mặt sáng nhuận",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tang_than_khi_sac",
+   "dieu_kien": {
+    "sac_tong": [
+     "sang_nhuan"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tong_quan",
+    "suc_khoe"
+   ],
+   "tieu_de": "Sắc mặt sáng nhuận",
+   "noi_dung": "Da sáng, có ánh từ bên trong — sách xưa quý sắc 'minh nhuận' hơn da trắng. Đây là dấu bạn đang ngủ đủ, ăn đúng; việc gì làm lúc này cũng dễ trôi.",
+   "viec": "Giữ nhịp hiện tại thêm một tháng, ghi lại xem điều gì làm bạn khoẻ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Sắc quý minh nhuận, bất quý nộn bạch.",
+    "nguon": "bang_giam",
+    "y": "Sắc quý ở sáng và ẩm, không quý ở non trắng (Băng Giám)."
+   }
+  },
+  "sac_vang_xin": {
+   "ten": "Sắc mặt vàng xỉn",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "sac_tong": [
+     "vang_xin"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Sắc mặt vàng xỉn",
+   "noi_dung": "Vàng xỉn, kém tươi thường gặp khi ăn uống thất thường, bỏ bữa, ngủ muộn. Nội Kinh gắn sắc vàng với tiêu hoá — lời nhắc là chăm bữa ăn, không phải lời đoán.",
+   "viec": "Ăn sáng đều 14 ngày rồi soi lại; nếu không đổi, đi khám tiêu hoá, dạ dày.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Thổ"
+  },
+  "sac_trang_bech": {
+   "ten": "Sắc mặt trắng bệch",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "sac_tong": [
+     "trang_bech"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Sắc mặt trắng bệch",
+   "noi_dung": "Trắng bệch, môi nhạt là dấu thiếu sức, thở nông. Nội Kinh gắn sắc trắng với phổi và khí huyết.",
+   "viec": "Tập thở sâu 5 phút buổi sáng, ra nắng sớm; khám hô hấp, phổi và kiểm tra máu định kỳ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Kim"
+  },
+  "sac_toi_sam": {
+   "ten": "Sắc mặt tối sạm",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "sac_tong": [
+     "toi_sam"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Sắc mặt tối sạm",
+   "noi_dung": "Sắc tối, xám thường đi với thiếu ngủ lâu ngày và làm quá sức. Nội Kinh gắn sắc đen với thận — nói đời thường là 'pin' đang cạn.",
+   "viec": "Ngủ trước 23 giờ hai tuần liền; khám thận, tiết niệu định kỳ nếu sắc không đổi.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Thủy"
+  },
+  "sac_do_ung": {
+   "ten": "Sắc mặt đỏ ửng, khô",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "sac_tong": [
+     "do_ung"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Sắc mặt đỏ ửng, khô",
+   "noi_dung": "Đỏ ửng khô cả mặt là 'nhiệt ở trên': gấp, nóng, ngủ ít. Nội Kinh gắn sắc đỏ với tim mạch.",
+   "viec": "Bớt cà phê, rượu; đo huyết áp định kỳ, khám tim mạch nếu đỏ kéo dài.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Hỏa"
+  },
+  "cot_nhuc_can": {
+   "ten": "Xương thịt cân nhau",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "cot_nhuc": [
+     "san_chac"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tong_quan",
+    "con_nguoi"
+   ],
+   "tieu_de": "Xương thịt cân nhau",
+   "noi_dung": "Thịt săn, có đàn hồi, xương không trơ — sách xưa gọi là 'cốt nhục tương xứng': sức bền tốt, chịu được áp lực mà vẫn mềm trong đối xử.",
+   "viec": "Vận động đều để giữ độ săn của cơ mặt và cơ người.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Cốt bất khả lộ, nhục bất khả phù.",
+    "nguon": "bang_giam",
+    "y": "Xương không được lộ, thịt không được nổi bệu (Băng Giám)."
+   }
+  },
+  "cot_tro": {
+   "ten": "Xương nổi, ít thịt bao",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "cot_nhuc": [
+     "tro_xuong"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tong_quan",
+    "con_nguoi"
+   ],
+   "tieu_de": "Xương nổi, ít thịt bao",
+   "noi_dung": "'Cốt trọng nhục khinh': ý chí mạnh hơn sức, hay cố quá. Người này quyết liệt, nhưng dễ cạn và dễ bị xem là khó gần.",
+   "viec": "Ăn đủ đạm, ngủ đủ; mỗi ngày một câu mềm với người bên cạnh.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "bang_giam",
+    "y": null
+   }
+  },
+  "nhuc_nhao": {
+   "ten": "Thịt mềm, xương chìm",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "cot_nhuc": [
+     "mem_nhao"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tong_quan",
+    "con_nguoi"
+   ],
+   "tieu_de": "Thịt mềm, xương chìm",
+   "noi_dung": "'Nhục trọng cốt khinh': hiền, dễ chịu, nhưng thiếu sức bật khi phải quyết. Sách xưa dặn người này tập cho cơ săn lại thì tinh thần cũng theo.",
+   "viec": "Đi bộ nhanh 30 phút, 4 lần mỗi tuần, trong một tháng.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "bang_giam",
+    "y": null
+   }
+  },
+  "nep_tran_khong": {
+   "ten": "Trán chưa có nếp",
+   "bo_vi": "thien_dinh",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "nep_tran": [
+     "khong"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Trán chưa có nếp",
+   "noi_dung": "Trán còn phẳng, chưa hằn nếp lo: bạn chưa để việc kéo lên trán — hoặc còn trẻ. Sách tâm tướng dặn giữ nếp này bằng cách lo đúng việc, không lo hộ.",
+   "viec": "Mỗi tối ghi một việc hôm nay bạn đã không cần lo mà vẫn ổn.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "tam_tuong_thien",
+    "y": null
+   }
+  },
+  "tam_bach_khong": {
+   "ten": "Tròng đen chạm cả hai mí",
+   "bo_vi": "mat",
+   "truong_phai": "tang_than_khi_sac",
+   "dieu_kien": {
+    "tam_bach": [
+     "khong"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Tròng đen chạm cả hai mí",
+   "noi_dung": "Mắt không lộ lòng trắng trên dưới — sách xưa gọi là 'thần không lộ': tâm vững, ít nghi, nhìn người bình tĩnh. Đây là nét nền cho một ánh mắt có thần.",
+   "viec": "Giữ: khi mệt thì nghỉ mắt thay vì cố nhìn màn hình.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "than_tuong_toan_bien",
+    "y": null
+   }
+  },
+  "cham_cot_noi": {
+   "ten": "Xương sau gáy nổi tròn",
+   "bo_vi": "ham",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "cham_cot": [
+     "noi_tron"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Xương sau gáy nổi tròn",
+   "noi_dung": "Chẩm cốt nổi đầy: sách cốt pháp xem là tướng chịu được trách nhiệm, càng áp lực càng vững; cũng là dấu cổ gáy chắc.",
+   "viec": "Giãn cơ cổ vai gáy 2 phút mỗi giờ ngồi lâu.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "than_tuong_toan_bien",
+    "y": null
+   }
+  },
+  "cot_vung_cham_day": {
+   "ten": "Khung xương vững, chẩm cốt đầy",
+   "bo_vi": "ham",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "cot_nhuc": [
+     "san_chac"
+    ],
+    "cham_cot": [
+     "noi_tron"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "con_nguoi",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Khung xương vững, chẩm cốt đầy",
+   "noi_dung": "Gò má có thịt bao, xương sau gáy nổi tròn: sách xưa xem là tướng của người gánh được trách nhiệm lớn, càng áp lực càng vững. Người này nói đi đôi với làm, điều phối tự nhiên.",
+   "viec": "Khi làm việc cường độ cao, thả lỏng hàm và vai gáy mỗi giờ một lần.",
+   "uu_tien": 2,
+   "sach": {
+    "trich": null,
+    "nguon": "than_tuong_toan_bien",
+    "y": null
+   }
+  },
+  "cham_phang": {
+   "ten": "Xương sau gáy phẳng",
+   "bo_vi": "ham",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "cham_cot": [
+     "phang",
+     "khong_ro"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Xương sau gáy phẳng",
+   "noi_dung": "Chẩm cốt phẳng: sách xưa dặn người này nên dựa vào tổ chức và lịch trình hơn là vào sức chịu đựng. Không phải điểm yếu — là cách làm việc khác.",
+   "viec": "Lập lịch tuần vào tối Chủ nhật.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "than_tuong_toan_bien",
+    "y": null
+   }
+  },
+  "tran_cao_rong": {
+   "ten": "Trán cao, rộng, đầy",
+   "bo_vi": "thien_dinh",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tran": [
+     "cao_rong_day"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Trán cao, rộng, đầy",
+   "noi_dung": "Thiên Đình đầy đặn: sách xưa gắn với tư duy có hệ thống, được dạy dỗ tốt, sớm có chỗ đứng. Người trên dễ để ý tới bạn.",
+   "viec": "Nhận một việc khó hơn mức hiện tại trong 6 tháng tới.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Thiên Đình bão mãn, thiếu niên đắc chí.",
+    "nguon": "ma_y",
+    "y": "Trán đầy, trẻ đã đạt chí (Ma Y)."
+   }
+  },
+  "tran_hep_thap": {
+   "ten": "Trán hẹp hoặc thấp",
+   "bo_vi": "thien_dinh",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tran": [
+     "hep_thap"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Trán hẹp hoặc thấp",
+   "noi_dung": "Trán hẹp: sách xưa nói tuổi trẻ ít được đỡ, phải tự đi. Đời thường: bạn học qua việc hơn qua sách, càng làm càng khá.",
+   "viec": "Chọn người đi trước để hỏi, thay vì tự mò một mình.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "tran_go": {
+   "ten": "Trán gồ, hai góc nhô",
+   "bo_vi": "thien_dinh",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "tran": [
+     "go_loi"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "cong_viec_tien",
+    "con_nguoi"
+   ],
+   "tieu_de": "Trán gồ, hai góc nhô",
+   "noi_dung": "Hai góc trán nhô (Nhật Nguyệt giác nổi): người có ý riêng mạnh, không dễ theo khuôn, hợp tự làm chủ hoặc chuyên môn sâu.",
+   "viec": "Khi không đồng ý, nói ra ý thay vì im rồi làm theo ý mình.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "tran_lom": {
+   "ten": "Trán lõm hoặc dẹt ở giữa",
+   "bo_vi": "thien_dinh",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tran": [
+     "lom_giua"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Trán lõm hoặc dẹt ở giữa",
+   "noi_dung": "Trán dẹt giữa: giai đoạn đầu sự nghiệp dễ đổi hướng vài lần. Sách xưa không xem là xấu — chỉ dặn đừng vội chốt một đời ở tuổi 25.",
+   "viec": "Cho phép mình thử tối đa ba nghề trước 30, rồi chọn một.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "nep_tran_lien": {
+   "ten": "Vài nếp trán dài, liền",
+   "bo_vi": "thien_dinh",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "nep_tran": [
+     "vai_nep_lien"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Vài nếp trán dài, liền",
+   "noi_dung": "Nếp ngang dài, liền là dấu của người hay nhướng mày suy nghĩ — tức hay lo cho việc, có trách nhiệm. Sách xưa xem nếp liền là thuận hơn nếp đứt.",
+   "viec": "Mỗi tối ghi ba việc 'không cần lo nữa'.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "tam_tuong_thien",
+    "y": null
+   }
+  },
+  "nep_tran_dut": {
+   "ten": "Nhiều nếp trán ngắn, đứt đoạn",
+   "bo_vi": "thien_dinh",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "nep_tran": [
+     "nhieu_dut"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Nhiều nếp trán ngắn, đứt đoạn",
+   "noi_dung": "Nếp đứt đoạn là dấu của lo lắng vụn: nhiều việc nhỏ kéo bạn. Đây là thói quen cơ mặt — đổi thói quen thì nếp cũng nhạt đi.",
+   "viec": "Gom việc nhỏ làm một lần trong ngày thay vì rải rác.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "tam_tuong_thien",
+    "y": null
+   }
+  },
+  "giac_day": {
+   "ten": "Hai bên trán đầy, cân",
+   "bo_vi": "nhat_nguyet_giac",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "nhat_nguyet_giac": [
+     "day_can"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tinh_cam_gia_dinh"
+   ],
+   "tieu_de": "Hai bên trán đầy, cân",
+   "noi_dung": "Nhật Nguyệt giác đầy cân: cung Phụ Mẫu thuận — nền tảng gia đình vững, bạn có chỗ dựa tinh thần từ cha mẹ (hoặc người nuôi dạy).",
+   "viec": "Gọi về nhà một lần trong tuần này.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Nhật Nguyệt giác khởi, phụ mẫu song toàn.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Hai góc trán nổi đầy, cha mẹ đủ đầy (Thần Tướng Toàn Biên)."
+   }
+  },
+  "giac_lech": {
+   "ten": "Hai bên trán lệch hoặc lõm",
+   "bo_vi": "nhat_nguyet_giac",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "nhat_nguyet_giac": [
+     "lech",
+     "lom"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tinh_cam_gia_dinh"
+   ],
+   "tieu_de": "Hai bên trán lệch hoặc lõm",
+   "noi_dung": "Sách xưa gắn với việc một bên cha mẹ xa cách sớm hoặc gia cảnh thuở nhỏ không tròn. Đời thường: bạn tự lập sớm, và điều đó là sức mạnh chứ không phải thiếu hụt.",
+   "viec": "Viết cho người đã nuôi mình một lời cảm ơn, dù không gửi.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "than_tuong_toan_bien",
+    "y": null
+   }
+  },
+  "may_thanh_dai": {
+   "ten": "Lông mày mượt, dài qua mắt",
+   "bo_vi": "long_may",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "long_may": [
+     "thanh_dai"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tinh_cam_gia_dinh",
+    "con_nguoi"
+   ],
+   "tieu_de": "Lông mày mượt, dài qua mắt",
+   "noi_dung": "'Mi thanh mục tú', mày dài quá mắt: anh em bạn bè hoà thuận, dễ có người giúp. Sợi mày mượt cũng là dấu khí huyết đều.",
+   "viec": "Nhắn cho một người bạn lâu không gặp.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Mi trường quá mục, huynh đệ hoà mục.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Mày dài qua mắt, anh em hoà thuận (Thần Tướng Toàn Biên)."
+   }
+  },
+  "may_dam_ngan": {
+   "ten": "Lông mày đậm, ngắn hơn mắt",
+   "bo_vi": "long_may",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "long_may": [
+     "dam_ngan"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tinh_cam_gia_dinh",
+    "con_nguoi"
+   ],
+   "tieu_de": "Lông mày đậm, ngắn hơn mắt",
+   "noi_dung": "Mày đậm mà ngắn: tình cảm nhiều nhưng nóng, với anh em bạn bè hay thẳng quá hoá va. Sức có, cần thêm kiên nhẫn.",
+   "viec": "Khi bực, đợi qua đêm rồi mới nhắn.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "may_thua": {
+   "ten": "Lông mày thưa, nhạt",
+   "bo_vi": "long_may",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "long_may": [
+     "thua_nhat"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tinh_cam_gia_dinh"
+   ],
+   "tieu_de": "Lông mày thưa, nhạt",
+   "noi_dung": "Mày thưa: sách xưa nói anh em ít dựa được nhau, phải tự lập; cũng là dấu khí huyết gan hơi yếu, hay mệt.",
+   "viec": "Ngủ trước 23 giờ; tìm 'anh em' trong bạn bè nếu ruột thịt xa.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   },
+   "he": "Mộc"
+  },
+  "may_roi": {
+   "ten": "Lông mày rối, dựng ngược",
+   "bo_vi": "long_may",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "long_may": [
+     "roi_nguoc"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Lông mày rối, dựng ngược",
+   "noi_dung": "Mày rối, dựng: tính nóng, hay cãi, dễ mất bạn vì lời nói. Sách xưa dặn 'tu tâm thì mày cũng xuôi' — nghĩa là tập được.",
+   "viec": "Chải mày mỗi sáng và tập nói chậm lại một nhịp.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "tam_tuong_thien",
+    "y": null
+   }
+  },
+  "may_giao": {
+   "ten": "Hai đầu mày gần chạm nhau",
+   "bo_vi": "long_may",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "long_may": [
+     "giao_nhau"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Hai đầu mày gần chạm nhau",
+   "noi_dung": "Mày giao nhau che Ấn Đường: người hay nghĩ nhiều, dễ tự dằn vặt, nhìn việc nặng hơn thực. Sách xưa khuyên tỉa cho Ấn Đường thoáng.",
+   "viec": "Tỉa khoảng giữa hai mày cho rộng bằng một ngón tay.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "dien_trach_rong": {
+   "ten": "Mí trên rộng, đầy",
+   "bo_vi": "dien_trach",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "dien_trach": [
+     "rong_day"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "cong_viec_tien",
+    "tinh_cam_gia_dinh"
+   ],
+   "tieu_de": "Mí trên rộng, đầy",
+   "noi_dung": "Điền Trạch rộng: tâm rộng, biết tích luỹ, nhà cửa về sau ổn. Người này không hay so đo chuyện nhỏ.",
+   "viec": "Sắp xếp lại một góc nhà cho gọn trong tuần này.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Điền Trạch khoan quảng, gia nghiệp hưng long.",
+    "nguon": "ma_y",
+    "y": "Điền Trạch rộng rãi, gia nghiệp hưng thịnh (Ma Y)."
+   }
+  },
+  "dien_trach_hep": {
+   "ten": "Mày sát mắt, mí trên hẹp",
+   "bo_vi": "dien_trach",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "dien_trach": [
+     "hep"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Mày sát mắt, mí trên hẹp",
+   "noi_dung": "Điền Trạch hẹp: sốt ruột, hay muốn có ngay, mua nhà sắm xe dễ vội. Sách xưa dặn chậm một nhịp ở việc liên quan đến nhà đất.",
+   "viec": "Việc mua sắm lớn: chờ 30 ngày rồi quyết.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "dien_trach_lom": {
+   "ten": "Mí trên lõm, nổi gân",
+   "bo_vi": "dien_trach",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "dien_trach": [
+     "lom_gan"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Mí trên lõm, nổi gân",
+   "noi_dung": "Mí trên lõm sâu hoặc nổi gân xanh thường gặp khi thiếu ngủ, mắt làm việc quá nhiều.",
+   "viec": "Nhìn xa 20 giây sau mỗi 20 phút màn hình; khám mắt định kỳ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Hỏa"
+  },
+  "an_duong_rong_sang": {
+   "ten": "Ấn Đường rộng, sáng",
+   "bo_vi": "an_duong",
+   "truong_phai": "tang_than_khi_sac",
+   "dieu_kien": {
+    "an_duong": [
+     "rong_sang"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tong_quan",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Ấn Đường rộng, sáng",
+   "noi_dung": "Ấn Đường rộng sáng là cung Mệnh thông: tinh thần đang thoáng, quyết việc dễ, người khác nhìn vào thấy tin được. Lúc này hợp mở việc mới.",
+   "viec": "Chốt một việc đã để treo lâu trong tuần này.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Ấn Đường hồng hoàng minh nhuận, cát khánh lập chí.",
+    "nguon": "thuy_kinh",
+    "y": "Ấn Đường sắc hồng vàng sáng nhuận, việc vui sắp đến (Thuỷ Kính Tập)."
+   }
+  },
+  "an_duong_hep": {
+   "ten": "Ấn Đường hẹp",
+   "bo_vi": "an_duong",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "an_duong": [
+     "hep"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi",
+    "suc_khoe"
+   ],
+   "tieu_de": "Ấn Đường hẹp",
+   "noi_dung": "Ấn Đường hẹp, hai mày sát: người nghĩ kỹ, cẩn trọng, nhưng dễ bí bách. Nội Kinh gắn vùng này với phổi — hay thở nông khi lo.",
+   "viec": "Thở ra dài gấp đôi hít vào, 10 lần, mỗi khi thấy nặng ngực.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Kim"
+  },
+  "an_duong_nep_doc": {
+   "ten": "Nếp dọc giữa hai mày",
+   "bo_vi": "an_duong",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "an_duong": [
+     "nep_doc"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Nếp dọc giữa hai mày",
+   "noi_dung": "'Huyền châm văn' — nếp dọc là dấu của người hay nhíu mày tập trung, cầu toàn, hay tự gánh. Đây là thói quen cơ mặt nhiều năm, tập thả lỏng thì nhạt đi.",
+   "viec": "Đặt nhắc mỗi giờ: thả lỏng vùng giữa hai mày, mỉm nhẹ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Ấn Đường huyền châm văn kiến, đa ưu tư cố chấp.",
+    "nguon": "tam_tuong_thien",
+    "y": "Ấn Đường có nếp kim treo, nhiều lo nghĩ cố chấp (Tâm Tướng Thiên)."
+   }
+  },
+  "an_duong_toi": {
+   "ten": "Ấn Đường tối, xám",
+   "bo_vi": "an_duong",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "an_duong": [
+     "toi_xam"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe",
+    "tong_quan"
+   ],
+   "tieu_de": "Ấn Đường tối, xám",
+   "noi_dung": "Ấn Đường tối là dấu khí đang bế: mệt, ngủ kém, việc hay tắc. Sách xưa dặn lúc này đừng khởi việc lớn, nghỉ cho sắc sáng lại rồi làm.",
+   "viec": "Hoãn quyết định lớn 2 tuần; ngủ đủ rồi soi lại Ấn Đường.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Kim"
+  },
+  "an_duong_do": {
+   "ten": "Ấn Đường ửng đỏ",
+   "bo_vi": "an_duong",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "an_duong": [
+     "do_ung"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe",
+    "con_nguoi"
+   ],
+   "tieu_de": "Ấn Đường ửng đỏ",
+   "noi_dung": "Ấn Đường đỏ khô: nóng trong, dễ nổi cáu, dễ to tiếng. Sách khí sắc gọi là 'xích táo khí' — chuyện lời qua tiếng lại dễ xảy ra trong 1–2 tuần.",
+   "viec": "Tuần này tránh tranh luận qua tin nhắn; đo huyết áp nếu đỏ kèm đau đầu.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "thuy_kinh",
+    "y": null
+   },
+   "he": "Hỏa"
+  },
+  "than_dinh_an_duong_sang": {
+   "ten": "Mắt yên, Ấn Đường sáng",
+   "bo_vi": "an_duong",
+   "truong_phai": "tang_than_khi_sac",
+   "dieu_kien": {
+    "mat_than": [
+     "dinh_sang"
+    ],
+    "an_duong": [
+     "rong_sang"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tong_quan",
+    "con_nguoi"
+   ],
+   "tieu_de": "Mắt yên, Ấn Đường sáng",
+   "noi_dung": "Ánh mắt yên sáng cộng Ấn Đường sáng — sách xưa xếp 'nhất thần nhị khí' trên cả hình: tinh thần đang ở lúc minh mẫn nhất. Quyết định quan trọng hợp làm trong giai đoạn này.",
+   "viec": "Giữ 10 phút tĩnh mỗi sáng để giữ 'định lực' của ánh mắt.",
+   "uu_tien": 3,
+   "sach": {
+    "trich": "Nhất thân tinh thần, cụ hồ lưỡng mục.",
+    "nguon": "bang_giam",
+    "y": "Tinh thần cả người tụ ở hai mắt (Băng Giám)."
+   }
+  },
+  "mat_dai_hep": {
+   "ten": "Mắt dài, đuôi kéo dài",
+   "bo_vi": "mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "mat_hinh": [
+     "dai_hep"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Mắt dài, đuôi kéo dài",
+   "noi_dung": "Mắt dài hẹp: nhìn người tinh, kiên nhẫn, không dễ bị lừa. Sách xưa gọi nhóm này là 'mắt phượng' nếu đuôi hơi chếch và có thần.",
+   "viec": "Tin vào nhận xét đầu tiên của mình về một người, rồi kiểm chứng.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mat_tron_to": {
+   "ten": "Mắt tròn, to",
+   "bo_vi": "mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "mat_hinh": [
+     "tron_to"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Mắt tròn, to",
+   "noi_dung": "Mắt tròn to: thẳng thắn, cảm xúc lộ ra mặt, nhiệt tình. Dễ được quý, cũng dễ bị đọc.",
+   "viec": "Chuyện chưa chắc thì giữ trong lòng thêm một ngày.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mat_nho": {
+   "ten": "Mắt nhỏ",
+   "bo_vi": "mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "mat_hinh": [
+     "nho"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Mắt nhỏ",
+   "noi_dung": "Mắt nhỏ: kín đáo, nghĩ nhiều hơn nói, bền. Sách xưa xem mắt nhỏ mà có thần là người tính kỹ, giữ được của.",
+   "viec": "Chia sẻ một ý nghĩ với người tin cậy mỗi tuần.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mat_xech": {
+   "ten": "Đuôi mắt chếch lên",
+   "bo_vi": "mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "mat_hinh": [
+     "xech_len"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Đuôi mắt chếch lên",
+   "noi_dung": "Đuôi mắt chếch lên: tự tin, có chí tiến, ưa dẫn dắt. Điểm dễ vấp: tự ái cao, khó nhận mình sai.",
+   "viec": "Khi sai, nói 'tôi sai' trong vòng một ngày.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mat_cup": {
+   "ten": "Đuôi mắt cụp xuống",
+   "bo_vi": "mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "mat_hinh": [
+     "cup_xuong"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Đuôi mắt cụp xuống",
+   "noi_dung": "Đuôi mắt cụp: hiền, dễ thương người, hay nhường. Điểm dễ vấp: buồn lâu, giữ chuyện cũ.",
+   "viec": "Mỗi tối ghi một điều hôm nay đã ổn.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "than_dinh": {
+   "ten": "Ánh mắt yên, sáng",
+   "bo_vi": "mat",
+   "truong_phai": "tang_than_khi_sac",
+   "dieu_kien": {
+    "mat_than": [
+     "dinh_sang"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "con_nguoi",
+    "tong_quan"
+   ],
+   "tieu_de": "Ánh mắt yên, sáng",
+   "noi_dung": "'Thần tàng' — ánh mắt yên mà sáng: tinh thần vững, không dễ cuốn theo đám đông, nhìn thấu việc. Sách xưa xem đây là điều quý nhất trên mặt.",
+   "viec": "Giữ thói quen nhìn thẳng vào mắt người đối diện khi nói chuyện quan trọng.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Thần tàng tắc tĩnh nhi quang minh.",
+    "nguon": "bang_giam",
+    "y": "Thần giấu bên trong thì tĩnh mà sáng (Băng Giám)."
+   }
+  },
+  "than_mo": {
+   "ten": "Ánh mắt mờ, uể",
+   "bo_vi": "mat",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "mat_than": [
+     "mo_met"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe",
+    "con_nguoi"
+   ],
+   "tieu_de": "Ánh mắt mờ, uể",
+   "noi_dung": "Mắt mờ, nhiều tia đỏ là 'thần' đang mệt — dấu của ngủ thiếu, nhìn màn hình nhiều. Sách xưa dặn: thần mệt thì đừng quyết.",
+   "viec": "Ngủ đủ 3 đêm liền rồi mới quyết việc lớn; khám mắt nếu đỏ kéo dài.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Mộc"
+  },
+  "than_sac_gat": {
+   "ten": "Ánh mắt sắc, dễ gắt",
+   "bo_vi": "mat",
+   "truong_phai": "tang_than_khi_sac",
+   "dieu_kien": {
+    "mat_than": [
+     "sac_gat"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Ánh mắt sắc, dễ gắt",
+   "noi_dung": "'Thần lộ' — ánh mắt sắc gắt: ý chí mạnh, dám vượt lên, nhưng dễ làm người khác e dè và dễ căng thần kinh. Sách xưa khuyên 'tu tâm dưỡng tính dĩ hoá sát'.",
+   "viec": "Khi nói chuyện khó, hạ giọng một nấc và chớp mắt chậm.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Thần lộ tắc phù nhi hôn trọc.",
+    "nguon": "bang_giam",
+    "y": "Thần lộ ra ngoài thì nổi mà đục (Băng Giám)."
+   }
+  },
+  "than_dao": {
+   "ten": "Ánh mắt hay đảo",
+   "bo_vi": "mat",
+   "truong_phai": "tang_than_khi_sac",
+   "dieu_kien": {
+    "mat_than": [
+     "dao_nhanh"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Ánh mắt hay đảo",
+   "noi_dung": "Mắt khó giữ yên: nhanh ý, nhạy, nhưng tâm chưa định — hay đổi ý, hay sốt ruột. Luyện nhìn một điểm 1 phút mỗi ngày, sách xưa gọi là 'định thần'.",
+   "viec": "Nhìn một điểm 1 phút mỗi sáng, hai tuần liền.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "bang_giam",
+    "y": null
+   }
+  },
+  "tam_bach_duoi": {
+   "ten": "Lộ lòng trắng dưới",
+   "bo_vi": "mat",
+   "truong_phai": "tang_than_khi_sac",
+   "dieu_kien": {
+    "tam_bach": [
+     "duoi"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Lộ lòng trắng dưới",
+   "noi_dung": "'Hạ tam bạch': ý chí vượt lên mạnh, không chịu thua, nhưng dễ căng và hay nghi. Sách xưa dặn người này cần người bên cạnh nói thật.",
+   "viec": "Chọn một người được phép nói thẳng với bạn.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Thượng hạ tam bạch, tính cương quả cảm nhi đa nghi.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Mắt tam bạch: tính cứng, quả cảm mà hay nghi."
+   }
+  },
+  "tam_bach_tren": {
+   "ten": "Lộ lòng trắng trên",
+   "bo_vi": "mat",
+   "truong_phai": "tang_than_khi_sac",
+   "dieu_kien": {
+    "tam_bach": [
+     "tren"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Lộ lòng trắng trên",
+   "noi_dung": "'Thượng tam bạch': hay nhìn xuống, nghĩ nhiều, nội tâm nặng. Đời thường: để ý giấc ngủ và mức căng thẳng, vì mắt lộ trên thường đi với mệt.",
+   "viec": "Ngủ đủ, bớt đọc tin xấu trước giờ ngủ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "than_tuong_toan_bien",
+    "y": null
+   }
+  },
+  "le_duong_day": {
+   "ten": "Dưới mắt đầy, sắc tươi",
+   "bo_vi": "le_duong",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "le_duong": [
+     "day_tuoi"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tinh_cam_gia_dinh",
+    "suc_khoe"
+   ],
+   "tieu_de": "Dưới mắt đầy, sắc tươi",
+   "noi_dung": "Ngoạ tằm đầy, tươi: cung Tử Tức thuận — sức nuôi dưỡng tốt, có duyên với trẻ nhỏ và người ít tuổi hơn; cũng là dấu ngủ đủ.",
+   "viec": "Dành một buổi trong tuần cho người nhỏ tuổi hơn trong nhà.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Lệ Đường bình mãn như ngoạ tằm, tử tôn hiền quý.",
+    "nguon": "ma_y",
+    "y": "Dưới mắt đầy như tằm nằm, con cháu hiền quý (Ma Y)."
+   }
+  },
+  "le_duong_tham": {
+   "ten": "Quầng thâm, trũng dưới mắt",
+   "bo_vi": "le_duong",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "le_duong": [
+     "tham_quang"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Quầng thâm, trũng dưới mắt",
+   "noi_dung": "Quầng thâm kéo dài: Nội Kinh gắn vùng dưới mắt với thận và giấc ngủ — thường do ngủ muộn, lo lâu. Lời nhắc là nghỉ, không phải lời đoán.",
+   "viec": "Ngủ trước 23 giờ hai tuần; khám thận, tiết niệu định kỳ nếu không đổi.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Thủy"
+  },
+  "le_duong_bong": {
+   "ten": "Bọng dưới mắt buổi sáng",
+   "bo_vi": "le_duong",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "le_duong": [
+     "bong"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Bọng dưới mắt buổi sáng",
+   "noi_dung": "Bọng sưng nhẹ buổi sáng thường do ăn mặn, uống nước muộn, ngủ ít. Nội Kinh gắn với thận và chuyển hoá nước.",
+   "viec": "Bớt mặn, uống nước ban ngày thay vì tối; khám thận định kỳ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Thủy"
+  },
+  "ngu_vi_phang": {
+   "ten": "Đuôi mắt phẳng, sáng",
+   "bo_vi": "ngu_vi",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "ngu_vi": [
+     "phang_sang"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tinh_cam_gia_dinh"
+   ],
+   "tieu_de": "Đuôi mắt phẳng, sáng",
+   "noi_dung": "Gian Môn phẳng sáng: cung Phu Thê thuận — đời sống đôi lứa êm, ít chuyện ngầm.",
+   "viec": "Nói với người ấy một điều bạn biết ơn trong tuần này.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Gian Môn bình mãn quang nhuận, phu thê hoà hợp.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Đuôi mắt đầy sáng, vợ chồng hoà hợp."
+   }
+  },
+  "ngu_vi_nep": {
+   "ten": "Nhiều nếp chân chim sớm",
+   "bo_vi": "ngu_vi",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "ngu_vi": [
+     "nhieu_nep"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tinh_cam_gia_dinh",
+    "con_nguoi"
+   ],
+   "tieu_de": "Nhiều nếp chân chim sớm",
+   "noi_dung": "Nếp đuôi mắt đan chéo sớm: nhạy cảm, hay lo trong chuyện tình cảm, cười nhiều mà cũng nghĩ nhiều. Nếp cười là nếp đẹp; nếp lo thì tập buông.",
+   "viec": "Chuyện chưa xảy ra thì không bàn trước với người ấy.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "tam_tuong_thien",
+    "y": null
+   }
+  },
+  "ngu_vi_trung": {
+   "ten": "Đuôi mắt trũng, tối",
+   "bo_vi": "ngu_vi",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "ngu_vi": [
+     "trung_toi"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tinh_cam_gia_dinh",
+    "suc_khoe"
+   ],
+   "tieu_de": "Đuôi mắt trũng, tối",
+   "noi_dung": "Gian Môn trũng tối: sách xưa nói chuyện đôi lứa đang hao tâm; cũng hay gặp khi thiếu ngủ. Lời khuyên là nghỉ và nói chuyện thẳng, không phải lời đoán.",
+   "viec": "Hẹn một buổi nói chuyện không điện thoại với người ấy.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "than_tuong_toan_bien",
+    "y": null
+   }
+  },
+  "son_can_cao": {
+   "ten": "Sơn Căn cao, liền trán",
+   "bo_vi": "son_can",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "son_can": [
+     "cao_lien"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "suc_khoe",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Sơn Căn cao, liền trán",
+   "noi_dung": "Gốc mũi cao nối liền trán: sức bền tốt, giai đoạn 41 tuổi đi qua êm, việc giữa đời không bị gãy nhịp.",
+   "viec": "Duy trì một môn vận động từ giờ tới 45 tuổi.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Sơn Căn cao long, tật ách vô ưu.",
+    "nguon": "ma_y",
+    "y": "Gốc mũi cao đầy, cung Tật Ách không lo (Ma Y)."
+   }
+  },
+  "son_can_thap": {
+   "ten": "Sơn Căn thấp, gãy",
+   "bo_vi": "son_can",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "son_can": [
+     "thap_gay"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "cong_viec_tien",
+    "suc_khoe"
+   ],
+   "tieu_de": "Sơn Căn thấp, gãy",
+   "noi_dung": "Gốc mũi thấp: sách xưa nói khoảng 41 tuổi có một đoạn chuyển — việc, chỗ ở hay sức đổi nhịp. Đời thường: chuẩn bị tài chính và sức khoẻ cho giai đoạn 38–43.",
+   "viec": "Khám tổng quát ở tuổi 40 và để một khoản dự phòng 6 tháng chi tiêu.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "son_can_nep": {
+   "ten": "Nếp ngang ở gốc mũi",
+   "bo_vi": "son_can",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "son_can": [
+     "nep_ngang"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Nếp ngang ở gốc mũi",
+   "noi_dung": "Nếp ngang cắt Sơn Căn: Nội Kinh gắn vùng này với tim mạch và tiêu hoá — hay gặp ở người tự gánh nhiều, căng thẳng kéo dài. Lời nhắc là chăm, không phải lời đoán.",
+   "viec": "Vuốt ấm hai bên gốc mũi 30 lần mỗi sáng; khám tim mạch và tiêu hoá định kỳ quanh tuổi 40.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Tâm ứng vu Sơn Căn.",
+    "nguon": "noi_kinh",
+    "y": "Tim ứng ở Sơn Căn (Linh Khu, Ngũ Sắc)."
+   },
+   "he": "Hỏa"
+  },
+  "son_can_nep_an_duong_toi": {
+   "ten": "Gốc mũi có nếp, Ấn Đường tối",
+   "bo_vi": "son_can",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "son_can": [
+     "nep_ngang"
+    ],
+    "an_duong": [
+     "toi_xam"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Gốc mũi có nếp, Ấn Đường tối",
+   "noi_dung": "Hai dấu cùng lúc: cơ thể đang quá tải vì nghĩ nhiều và ngủ ít. Sách xưa khuyên nghỉ trước khi tính tiếp bất cứ việc gì.",
+   "viec": "Nghỉ hẳn 2 ngày không màn hình; sau đó đặt lịch khám tổng quát.",
+   "uu_tien": 2,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Hỏa"
+  },
+  "song_mui_thang": {
+   "ten": "Sống mũi thẳng, cao",
+   "bo_vi": "song_mui",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "song_mui": [
+     "thang_cao"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Sống mũi thẳng, cao",
+   "noi_dung": "Sống mũi thẳng cao: trụ giữa mặt vững — tự trọng, có chủ kiến, giai đoạn 44–45 ổn. Người này không thích bị sai vặt.",
+   "viec": "Nhận vai cầm trịch một việc nhỏ trong nhóm.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "song_mui_go": {
+   "ten": "Sống mũi gồ",
+   "bo_vi": "song_mui",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "song_mui": [
+     "go"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "cong_viec_tien",
+    "con_nguoi"
+   ],
+   "tieu_de": "Sống mũi gồ",
+   "noi_dung": "Sống mũi gồ: cá tính mạnh, hay 'đổi tay' giữa đường — thích tự xây theo cách mình. Hợp làm riêng hơn làm công.",
+   "viec": "Nếu đang làm công, giữ một dự án nhỏ của riêng mình.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "song_mui_thap": {
+   "ten": "Sống mũi thấp, ngắn",
+   "bo_vi": "song_mui",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "song_mui": [
+     "thap"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Sống mũi thấp, ngắn",
+   "noi_dung": "Sống mũi thấp: dễ nghe người, mềm, ít tranh. Sách xưa dặn người này chọn đồng đội kỹ, vì bạn hay theo đồng đội.",
+   "viec": "Chọn người làm cùng theo tính cách trước, rồi mới theo việc.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "song_mui_lech": {
+   "ten": "Sống mũi lệch",
+   "bo_vi": "song_mui",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "song_mui": [
+     "lech"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Sống mũi lệch",
+   "noi_dung": "Sống mũi lệch (bẩm sinh hoặc do va chạm): Nội Kinh gắn sống mũi với gan mật; đời thường chỉ cần để ý thở có thông hai bên không.",
+   "viec": "Khám tai mũi họng nếu một bên mũi hay nghẹt.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Mộc"
+  },
+  "chuan_dau_tron": {
+   "ten": "Đầu mũi tròn, đầy",
+   "bo_vi": "chuan_dau",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "chuan_dau": [
+     "tron_day"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Đầu mũi tròn, đầy",
+   "noi_dung": "Chuẩn Đầu tròn đầy là cung Tài Bạch tốt: biết giữ tiền, thực tế, đầu tư cẩn trọng. Tuổi 48 thường là mốc thu hoạch.",
+   "viec": "Tăng khoản để dành thêm 5% từ tháng này.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Chuẩn Đầu phong long, phú quý trung lương.",
+    "nguon": "ma_y",
+    "y": "Đầu mũi tròn đầy, giàu sang mà trung hậu (Ma Y)."
+   }
+  },
+  "chuan_dau_nhon": {
+   "ten": "Đầu mũi nhọn, mỏng",
+   "bo_vi": "chuan_dau",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "chuan_dau": [
+     "nhon_mong"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Đầu mũi nhọn, mỏng",
+   "noi_dung": "Đầu mũi nhọn mỏng: nhạy, tinh, nhưng tiền vào rồi ra nhanh; hay tiêu cho sở thích. Sách xưa dặn 'tiền không ở lâu' — vậy thì để nó ở nơi không rút được ngay.",
+   "viec": "Chuyển tiền để dành vào tài khoản không có thẻ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "chuan_dau_to": {
+   "ten": "Đầu mũi to, thô",
+   "bo_vi": "chuan_dau",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "chuan_dau": [
+     "to_tho"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Đầu mũi to, thô",
+   "noi_dung": "Đầu mũi to: kiếm được, ăn tiêu rộng, hào phóng với bạn. Giữ được hay không tuỳ cánh mũi.",
+   "viec": "Ghi chi tiêu một tháng để thấy tiền đi đâu.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "chuan_dau_do": {
+   "ten": "Đầu mũi ửng đỏ, bóng dầu",
+   "bo_vi": "chuan_dau",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "chuan_dau": [
+     "do_bong"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Đầu mũi ửng đỏ, bóng dầu",
+   "noi_dung": "Đầu mũi hay đỏ, bóng dầu: Nội Kinh gắn với tiêu hoá — thường do ăn cay nóng, rượu bia, ăn khuya. Sách tướng còn gọi là 'xích tỵ hao tài' — nghĩa đời thường: lúc nóng trong thì tiêu tiền cũng nóng.",
+   "viec": "Bớt rượu bia, đồ chiên 3 tuần; khám tiêu hoá, dạ dày nếu kéo dài.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Thổ"
+  },
+  "canh_mui_day": {
+   "ten": "Cánh mũi dày, kín",
+   "bo_vi": "canh_mui",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "canh_mui": [
+     "day_kin"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Cánh mũi dày, kín",
+   "noi_dung": "Lan Đài – Đình Uý dày, ôm kín: 'kho' tốt — tiền vào thì ở lại, biết để dành tự nhiên.",
+   "viec": "Giữ nguyên cách tiêu hiện tại; thêm một khoản cho người thân.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Lan Đài Đình Uý tương xứng, phú quý.",
+    "nguon": "ma_y",
+    "y": "Hai cánh mũi cân xứng, giàu sang (Ma Y)."
+   }
+  },
+  "canh_mui_mong": {
+   "ten": "Cánh mũi mỏng, lộ lỗ mũi",
+   "bo_vi": "canh_mui",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "canh_mui": [
+     "mong_lo"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Cánh mũi mỏng, lộ lỗ mũi",
+   "noi_dung": "Cánh mũi mỏng, lộ: hào phóng, khó giữ của, 'có là tiêu'. Không phải nghèo — là tiền chảy nhanh. Giải pháp là tạo chỗ giữ tự động.",
+   "viec": "Đặt chuyển tiền để dành tự động ngay ngày nhận lương.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "canh_mui_xoe": {
+   "ten": "Cánh mũi xoè rộng",
+   "bo_vi": "canh_mui",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "canh_mui": [
+     "xoe_rong"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Cánh mũi xoè rộng",
+   "noi_dung": "Cánh mũi xoè: sức sống mạnh, dám làm ăn lớn, thích mở rộng. Tiền vào theo đợt lớn, ra cũng đợt lớn.",
+   "viec": "Mỗi đợt tiền về, tách ngay một phần không đụng tới.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "tam_dinh_can_chuan_dau_day": {
+   "ten": "Mặt cân, mũi đầy, cánh kín",
+   "bo_vi": "chuan_dau",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tam_dinh": [
+     "can_doi"
+    ],
+    "chuan_dau": [
+     "tron_day"
+    ],
+    "canh_mui": [
+     "day_kin"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "cong_viec_tien",
+    "tong_quan"
+   ],
+   "tieu_de": "Mặt cân, mũi đầy, cánh kín",
+   "noi_dung": "Ba phần mặt cân, đầu mũi tròn, cánh mũi kín: sách xưa gọi đây là cấu trúc của người quản lý tiền bạc thực tế, vững qua từng giai đoạn. Bạn coi trọng cái thật hơn cái phô.",
+   "viec": "Chia sẻ nguồn lực đúng người để dòng tiền luôn lưu thông.",
+   "uu_tien": 3,
+   "sach": {
+    "trich": null,
+    "nguon": "seed_chu_du_an",
+    "y": null
+   }
+  },
+  "quyen_co_thit": {
+   "ten": "Gò má nhô, có thịt bao",
+   "bo_vi": "luong_quyen",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "luong_quyen": [
+     "cao_co_thit"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "cong_viec_tien",
+    "con_nguoi"
+   ],
+   "tieu_de": "Gò má nhô, có thịt bao",
+   "noi_dung": "Quyền cốt nổi mà có thịt bao: có sức ảnh hưởng, cầm được việc, được nể mà không bị ghét. Tuổi 46–47 thường là lúc nắm quyền thật.",
+   "viec": "Nhận trách nhiệm điều phối một việc trong 3 tháng tới.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Quyền cốt phong khởi nhi hữu nhục bao, chủ quyền.",
+    "nguon": "bang_giam",
+    "y": "Gò má nổi mà có thịt bọc, chủ về quyền (Băng Giám)."
+   }
+  },
+  "quyen_tro": {
+   "ten": "Gò má nhô, trơ xương",
+   "bo_vi": "luong_quyen",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "luong_quyen": [
+     "cao_tro"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Gò má nhô, trơ xương",
+   "noi_dung": "Gò má nhô trơ: muốn nắm quyền nhưng thiếu sự mềm — dễ bị xem là áp đặt. Sách xưa dặn 'quyền cao vô nhục' nên bồi bằng cách nghe.",
+   "viec": "Trong mỗi cuộc họp, để người khác nói trước 2 phút.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "bang_giam",
+    "y": null
+   }
+  },
+  "quyen_thap": {
+   "ten": "Gò má thấp, phẳng",
+   "bo_vi": "luong_quyen",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "luong_quyen": [
+     "thap_phang"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Gò má thấp, phẳng",
+   "noi_dung": "Gò má thấp: không ham quyền, hợp làm chuyên môn hơn làm quản lý; được việc, ít va. Nếu phải cầm việc, cầm bằng chuyên môn chứ không bằng uy.",
+   "viec": "Chọn vai 'người giỏi nhất về một việc' thay vì 'người đứng đầu'.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "quyen_lech": {
+   "ten": "Gò má bên cao bên thấp",
+   "bo_vi": "luong_quyen",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "luong_quyen": [
+     "lech"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Gò má bên cao bên thấp",
+   "noi_dung": "Gò má lệch: hay thay đổi cách làm giữa chừng, trong ngoài không giống nhau. Đời thường: nói rõ ý mình từ đầu để người khác khỏi đoán.",
+   "viec": "Nói mong muốn thật của mình trong câu đầu tiên.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "nhan_trung_sau": {
+   "ten": "Nhân Trung sâu, dài",
+   "bo_vi": "nhan_trung",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "nhan_trung": [
+     "sau_dai"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "suc_khoe",
+    "tinh_cam_gia_dinh"
+   ],
+   "tieu_de": "Nhân Trung sâu, dài",
+   "noi_dung": "Nhân Trung sâu dài, dưới rộng: sức sống bền, ý chí vững trước nghịch cảnh; sách xưa gắn với con cái thuận.",
+   "viec": "Giữ nhịp ngủ đều — đó là thứ nuôi sức bền này.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Nhân Trung thâm trường, thọ nguyên miên viễn.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Nhân Trung sâu dài, sức sống lâu bền (viết lại: không nói thọ số)."
+   }
+  },
+  "nhan_trung_nong": {
+   "ten": "Nhân Trung nông, mờ",
+   "bo_vi": "nhan_trung",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "nhan_trung": [
+     "nong_phang"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Nhân Trung nông, mờ",
+   "noi_dung": "Nhân Trung nông: Nội Kinh gắn vùng này với thận và sinh dục — lời nhắc là giữ sức, không thức khuya, không phải lời đoán về con cái.",
+   "viec": "Ngủ đủ; khám sức khoẻ sinh sản định kỳ nếu đang có kế hoạch.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Thủy"
+  },
+  "nhan_trung_ngan": {
+   "ten": "Nhân Trung ngắn",
+   "bo_vi": "nhan_trung",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "nhan_trung": [
+     "ngan"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Nhân Trung ngắn",
+   "noi_dung": "Nhân Trung ngắn: tính nhanh, nóng, dễ nói thẳng. Hợp người, hợp việc cần phản xạ.",
+   "viec": "Đếm đến ba trước khi trả lời chuyện làm bạn khó chịu.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "nhan_trung_lech": {
+   "ten": "Nhân Trung lệch",
+   "bo_vi": "nhan_trung",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "nhan_trung": [
+     "lech"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Nhân Trung lệch",
+   "noi_dung": "Nhân Trung lệch: hay đổi ý, lời nói lúc này lúc khác. Giữ lời là bài tập của người này.",
+   "viec": "Việc đã hứa thì ghi lại và làm đúng hạn.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "phap_lenh_ro": {
+   "ten": "Pháp Lệnh rõ, mở rộng",
+   "bo_vi": "phap_lenh",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "phap_lenh": [
+     "ro_mo"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "cong_viec_tien",
+    "con_nguoi"
+   ],
+   "tieu_de": "Pháp Lệnh rõ, mở rộng",
+   "noi_dung": "Rãnh cười rõ, mở rộng dần xuống: dấu của uy tín và nề nếp — người có kỷ luật, nói có người nghe, từ 56 tuổi càng được nể. Đây là nếp của nhiều năm làm việc nghiêm túc.",
+   "viec": "Nhận hướng dẫn một người trẻ hơn trong nghề.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Pháp Lệnh thâm trường khoan quảng, hậu vận khoan hoà đắc chúng.",
+    "nguon": "tam_tuong_thien",
+    "y": "Pháp Lệnh sâu dài rộng, hậu vận khoan hoà được lòng người."
+   }
+  },
+  "phap_lenh_mo": {
+   "ten": "Pháp Lệnh mờ",
+   "bo_vi": "phap_lenh",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "phap_lenh": [
+     "mo"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Pháp Lệnh mờ",
+   "noi_dung": "Rãnh cười chưa rõ: uy tín còn đang gây dựng, hoặc bạn làm việc bằng thân thiện hơn bằng uy. Không phải thiếu — là chưa tới lúc.",
+   "viec": "Giữ đúng một nguyên tắc trong 90 ngày để người khác thấy.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "phap_lenh_cham_mep": {
+   "ten": "Pháp Lệnh đâm vào mép",
+   "bo_vi": "phap_lenh",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "phap_lenh": [
+     "cham_mep"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi",
+    "suc_khoe"
+   ],
+   "tieu_de": "Pháp Lệnh đâm vào mép",
+   "noi_dung": "Rãnh cười chạy thẳng vào mép, sách xưa gọi 'đằng xà nhập khẩu' — nghĩa đời thường: hay nén cảm xúc, khoé miệng kéo xuống nhiều năm; cũng là dấu nhắc chăm ăn uống. Đổi thói quen biểu cảm thì rãnh mở ra.",
+   "viec": "Mỗi ngày cười thành tiếng ít nhất một lần; khám tiêu hoá định kỳ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "tam_tuong_thien",
+    "y": null
+   },
+   "he": "Thổ"
+  },
+  "phap_lenh_lech": {
+   "ten": "Pháp Lệnh hai bên không đều",
+   "bo_vi": "phap_lenh",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "phap_lenh": [
+     "lech"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Pháp Lệnh hai bên không đều",
+   "noi_dung": "Rãnh hai bên lệch: cười hay nhếch một bên, trong ngoài có lúc không khớp. Nhắc nhẹ: nói điều mình nghĩ sớm hơn.",
+   "viec": "Khi không thích, nói 'tôi không thích' thay vì cười cho qua.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "tam_tuong_thien",
+    "y": null
+   }
+  },
+  "huyen_cham_phap_lenh_ro_giong_tram": {
+   "ten": "Nếp nghĩ ở mày, rãnh cười rộng, giọng trầm",
+   "bo_vi": "phap_lenh",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "an_duong": [
+     "nep_doc"
+    ],
+    "phap_lenh": [
+     "ro_mo"
+    ],
+    "giong": [
+     "tram_vang"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "con_nguoi",
+    "loi_khuyen"
+   ],
+   "tieu_de": "Nếp nghĩ ở mày, rãnh cười rộng, giọng trầm",
+   "noi_dung": "Giữa hai mày có nếp tư duy, nhưng rãnh cười mở rộng và giọng trầm ấm: người nghiêm với việc mà rộng với người, càng trải nghiệm càng bao dung. Mới gặp thấy nghiêm, quen rồi thấy tin được.",
+   "viec": "Mỗi khi tập trung cao, thả lỏng giữa hai mày và mỉm nhẹ.",
+   "uu_tien": 3,
+   "sach": {
+    "trich": null,
+    "nguon": "seed_chu_du_an",
+    "y": null
+   }
+  },
+  "mieng_khoe_len": {
+   "ten": "Miệng rộng vừa, khoé hướng lên",
+   "bo_vi": "mieng",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "mieng": [
+     "rong_khoe_len"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "con_nguoi",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Miệng rộng vừa, khoé hướng lên",
+   "noi_dung": "Khoé miệng tự nhiên hướng lên — sách xưa gọi 'khẩu như giốc cung': ăn nói có duyên, giữ chữ tín, được lộc ăn nói. Đây cũng là nếp của người hay cười thật.",
+   "viec": "Nói lời cảm ơn thành tiếng với ba người trong ngày.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Khẩu như giốc cung, ngôn xuất hữu tín.",
+    "nguon": "ma_y",
+    "y": "Miệng như cánh cung, nói ra có tín (Ma Y)."
+   }
+  },
+  "mieng_nho_mong": {
+   "ten": "Miệng nhỏ, môi mỏng",
+   "bo_vi": "mieng",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "mieng": [
+     "nho_mong"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Miệng nhỏ, môi mỏng",
+   "noi_dung": "Miệng nhỏ môi mỏng: nói ít, chọn lời, giữ chuyện; hợp việc cần kín. Điểm dễ vấp: bị xem là lạnh.",
+   "viec": "Mỗi ngày khen một người một câu cụ thể.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mieng_khoe_cup": {
+   "ten": "Khoé miệng cụp xuống",
+   "bo_vi": "mieng",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "mieng": [
+     "khoe_cup"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi",
+    "tinh_cam_gia_dinh"
+   ],
+   "tieu_de": "Khoé miệng cụp xuống",
+   "noi_dung": "Khoé miệng cụp: nếp của người hay nén, hay thất vọng ngầm; nhìn thì buồn dù lòng không buồn. Là thói quen cơ mặt — tập nâng khoé miệng thì mặt và người cùng sáng.",
+   "viec": "Trước gương mỗi sáng, nâng khoé miệng 10 giây, 3 lần.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "tam_tuong_thien",
+    "y": null
+   }
+  },
+  "moi_day": {
+   "ten": "Môi dày, đầy",
+   "bo_vi": "mieng",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "mieng": [
+     "moi_day"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi",
+    "tinh_cam_gia_dinh"
+   ],
+   "tieu_de": "Môi dày, đầy",
+   "noi_dung": "Môi dày: trọng tình, ấm, hay lo cho người; ăn uống ngon miệng. Điểm dễ vấp: cả nể.",
+   "viec": "Mỗi tuần từ chối một việc không phải của mình.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "mieng_lech": {
+   "ten": "Miệng lệch, khép không kín",
+   "bo_vi": "mieng",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "mieng": [
+     "lech"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Miệng lệch, khép không kín",
+   "noi_dung": "Miệng lệch hoặc khép không kín: sách xưa dặn giữ lời; Nội Kinh gắn môi miệng với tiêu hoá và thở (thở miệng khi ngủ).",
+   "viec": "Khám răng hàm mặt và tai mũi họng nếu ngủ hay há miệng.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Thổ"
+  },
+  "moi_hong": {
+   "ten": "Môi hồng, mịn",
+   "bo_vi": "mieng",
+   "truong_phai": "tang_than_khi_sac",
+   "dieu_kien": {
+    "moi_sac": [
+     "hong_nhuan"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Môi hồng, mịn",
+   "noi_dung": "Môi hồng mịn là dấu khí huyết đủ, tiêu hoá tốt.",
+   "viec": "Giữ bữa ăn đều.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   }
+  },
+  "moi_nhat": {
+   "ten": "Môi nhạt, khô",
+   "bo_vi": "mieng",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "moi_sac": [
+     "nhat_kho"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Môi nhạt, khô",
+   "noi_dung": "Môi nhạt khô: thiếu nước, thiếu máu nhẹ hoặc ăn thiếu; Nội Kinh gắn môi với tỳ vị.",
+   "viec": "Uống đủ nước, ăn đủ bữa; kiểm tra máu định kỳ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Thổ"
+  },
+  "moi_tham": {
+   "ten": "Môi thâm, tím",
+   "bo_vi": "mieng",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "moi_sac": [
+     "tham_tim"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Môi thâm, tím",
+   "noi_dung": "Môi thâm tím: Nội Kinh gắn với tuần hoàn kém hoặc lạnh trong; cũng gặp ở người hút thuốc.",
+   "viec": "Giữ ấm, bớt thuốc lá; khám tim mạch nếu môi tím kèm mệt khi leo cầu thang.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Hỏa"
+  },
+  "cam_tron_day": {
+   "ten": "Cằm tròn, đầy, hơi đưa ra",
+   "bo_vi": "dia_cac",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "cam": [
+     "tron_day"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tinh_cam_gia_dinh",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Cằm tròn, đầy, hơi đưa ra",
+   "noi_dung": "Địa Các tròn đầy 'triều củng': hậu vận an, có người dưới tin cậy, về già có chỗ ở ổn. Người này được việc nhờ bền hơn nhờ nhanh.",
+   "viec": "Mua hoặc giữ một chỗ ở lâu dài thay vì đổi liên tục.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Địa Các phương viên triều củng, vãn vận an khang.",
+    "nguon": "ma_y",
+    "y": "Cằm vuông tròn chầu lên, hậu vận an khang (Ma Y)."
+   }
+  },
+  "cam_nhon_lem": {
+   "ten": "Cằm nhọn hoặc lẹm",
+   "bo_vi": "dia_cac",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "cam": [
+     "nhon_lem"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tinh_cam_gia_dinh",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Cằm nhọn hoặc lẹm",
+   "noi_dung": "Cằm nhọn lẹm: nhanh, nhạy, ưa đổi, nhưng hậu vận cần tự chuẩn bị. Sách xưa dặn 'địa các bạc' thì tích luỹ sớm.",
+   "viec": "Để dành cho tuổi già từ bây giờ, dù mỗi tháng rất ít.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "cam_vuong": {
+   "ten": "Cằm vuông, rộng",
+   "bo_vi": "dia_cac",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "cam": [
+     "vuong_rong"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Cằm vuông, rộng",
+   "noi_dung": "Cằm vuông: bền, chịu khó, quyết rồi làm tới cùng; cứng với bản thân. Hợp việc dài hơi.",
+   "viec": "Mỗi tháng tự thưởng một điều nhỏ khi xong việc.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "cam_che": {
+   "ten": "Cằm chẻ đôi",
+   "bo_vi": "dia_cac",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "cam": [
+     "che_doi"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Cằm chẻ đôi",
+   "noi_dung": "Cằm chẻ: sống bằng cảm xúc, nghệ sĩ tính, hay thích hai việc cùng lúc. Dân gian xem là có duyên.",
+   "viec": "Chọn một việc làm chính, một việc làm cho vui.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "dan_gian_vn",
+    "y": null
+   }
+  },
+  "ham_day": {
+   "ten": "Quai hàm đầy, vững",
+   "bo_vi": "ham",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "ham": [
+     "day_vung"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tinh_cam_gia_dinh",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Quai hàm đầy, vững",
+   "noi_dung": "Nô Bộc đầy vững: người dưới, cộng sự tin cậy; sức chịu đựng tốt, tuổi 72–75 vững.",
+   "viec": "Nói lời ghi nhận với người giúp việc cho bạn trong tuần này.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "ham_hep": {
+   "ten": "Quai hàm hẹp, gầy",
+   "bo_vi": "ham",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "ham": [
+     "hep_gay"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tinh_cam_gia_dinh"
+   ],
+   "tieu_de": "Quai hàm hẹp, gầy",
+   "noi_dung": "Hàm hẹp: khó giữ người dưới lâu, hay phải tự làm. Đời thường: chọn ít người nhưng đúng người.",
+   "viec": "Dành thời gian cho hai cộng sự quan trọng nhất.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "ham_banh": {
+   "ten": "Quai hàm bành rộng",
+   "bo_vi": "ham",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "ham": [
+     "banh"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Quai hàm bành rộng",
+   "noi_dung": "'Tai cốt' nổi nhìn sau thấy: sức bền và sức chịu đựng rất cao, ý chí mạnh; sách xưa dặn người này đừng cậy sức mà quên nghe.",
+   "viec": "Hỏi ý người khác trước khi quyết việc chung.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "tai_cao_day": {
+   "ten": "Tai cao, vành rõ, dái tai dày",
+   "bo_vi": "tai",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tai": [
+     "cao_day"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "tong_quan",
+    "suc_khoe"
+   ],
+   "tieu_de": "Tai cao, vành rõ, dái tai dày",
+   "noi_dung": "Tai cao ngang mày, vành rõ, dái tai dày: sức bền bẩm sinh tốt, tuổi thơ được chăm, trí nhớ bền. Nội Kinh gắn tai với thận.",
+   "viec": "Giữ nhịp ngủ — vốn bẩm sinh tốt vẫn cần giữ.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Nhĩ cao quá mi, luân quách phân minh, thông tuệ.",
+    "nguon": "ma_y",
+    "y": "Tai cao hơn mày, vành ngoài trong rõ, thông tuệ (viết lại: không nói trường thọ)."
+   }
+  },
+  "tai_mong_lat": {
+   "ten": "Tai mỏng, vành lật",
+   "bo_vi": "tai",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tai": [
+     "mong_lat"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Tai mỏng, vành lật",
+   "noi_dung": "Tai mỏng vành lật: tuổi thơ phải tự lo nhiều, tính độc lập, ưa làm theo ý mình; sách xưa không xem là xấu, chỉ dặn giữ sức.",
+   "viec": "Ngủ đủ; không nhận thêm việc khi đang mệt.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "tai_nho_thap": {
+   "ten": "Tai nhỏ, thấp",
+   "bo_vi": "tai",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "tai": [
+     "nho_thap"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Tai nhỏ, thấp",
+   "noi_dung": "Tai nhỏ thấp: thực tế, không ảo tưởng, càng lớn tuổi càng khá. Giai đoạn 1–14 có thể lận đận nhưng không ảnh hưởng về sau.",
+   "viec": "Nhìn vào ba năm gần nhất để thấy mình đang đi lên.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": null
+   }
+  },
+  "tai_dai_nep": {
+   "ten": "Dái tai có nếp gấp chéo",
+   "bo_vi": "tai",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "tai": [
+     "dai_nep"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Dái tai có nếp gấp chéo",
+   "noi_dung": "Nếp gấp chéo ở dái tai: y học hiện đại cũng để ý dấu này ở người lớn tuổi về tim mạch. Lời nhắc là khám, không phải lời đoán.",
+   "viec": "Khám tim mạch, đo huyết áp và mỡ máu định kỳ hằng năm.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Hỏa"
+  },
+  "nhan_trung_nong_tai_nep": {
+   "ten": "Nhân Trung mờ, dái tai có nếp",
+   "bo_vi": "nhan_trung",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "nhan_trung": [
+     "nong_phang"
+    ],
+    "tai": [
+     "dai_nep"
+    ]
+   },
+   "muc": "can_chu_dong",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Nhân Trung mờ, dái tai có nếp",
+   "noi_dung": "Hai dấu cùng lúc nhắc chăm tim mạch và sức bền: không phải để lo, mà để đặt lịch khám và vận động đều.",
+   "viec": "Đi bộ nhanh 30 phút mỗi ngày; khám tim mạch trong tháng này.",
+   "uu_tien": 2,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Hỏa"
+  },
+  "giong_tram": {
+   "ten": "Giọng trầm, ấm, vang",
+   "bo_vi": "mieng",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "giong": [
+     "tram_vang"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "con_nguoi",
+    "loi_khuyen"
+   ],
+   "tieu_de": "Giọng trầm, ấm, vang",
+   "noi_dung": "'Thanh xuất Đan Điền' — giọng vang từ bụng, nói lâu không hụt: nội lực dày, được tin, hợp nói trước đám đông.",
+   "viec": "Dùng giọng này để nói điều khó thay vì nhắn tin.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Thanh âm hồng lượng xuất tự Đan Điền.",
+    "nguon": "bang_giam",
+    "y": "Tiếng nói vang sáng phát từ Đan Điền (Băng Giám)."
+   }
+  },
+  "giong_cao_nhanh": {
+   "ten": "Giọng cao, nhanh",
+   "bo_vi": "mieng",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "giong": [
+     "cao_nhanh"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Giọng cao, nhanh",
+   "noi_dung": "Giọng cao nhanh: nhiệt tình, nghĩ nhanh, nhưng dễ mệt người nghe và dễ lỡ lời. Thanh tướng gọi là 'cấp sắc'.",
+   "viec": "Hạ tốc độ nói bằng cách thở ra trước mỗi câu.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "bang_giam",
+    "y": null
+   }
+  },
+  "giong_nho_yeu": {
+   "ten": "Giọng nhỏ, hay hụt hơi",
+   "bo_vi": "mieng",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "giong": [
+     "nho_yeu"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi",
+    "suc_khoe"
+   ],
+   "tieu_de": "Giọng nhỏ, hay hụt hơi",
+   "noi_dung": "Giọng nhỏ, hụt hơi: khí chưa đủ — thường do thở nông, ít vận động, hoặc thiếu tự tin lâu ngày. Luyện thở là luyện cả giọng lẫn tinh thần.",
+   "viec": "Đọc to một đoạn văn 5 phút mỗi ngày; khám hô hấp nếu hụt hơi khi nói ngắn.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "bang_giam",
+    "y": null
+   },
+   "he": "Kim"
+  },
+  "giong_khan": {
+   "ten": "Giọng khàn",
+   "bo_vi": "mieng",
+   "truong_phai": "y_tuong",
+   "dieu_kien": {
+    "giong": [
+     "khan"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "suc_khoe"
+   ],
+   "tieu_de": "Giọng khàn",
+   "noi_dung": "Giọng khàn kéo dài: dùng giọng quá sức hoặc họng khô. Lời nhắc là nghỉ giọng và khám.",
+   "viec": "Uống ấm, bớt nói to; khám tai mũi họng nếu khàn quá 3 tuần.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "noi_kinh",
+    "y": null
+   },
+   "he": "Kim"
+  },
+  "net_de_gan": {
+   "ten": "Mặt nghỉ vẫn dễ gần",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "net_mat": [
+     "de_gan"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "con_nguoi",
+    "loi_khuyen"
+   ],
+   "tieu_de": "Mặt nghỉ vẫn dễ gần",
+   "noi_dung": "Không cười mà vẫn ấm — 'tâm từ tắc mạo hoà': nếp mặt của người hay nghĩ tốt cho người khác. Đây là thứ hút quý nhân mà không cần cố.",
+   "viec": "Giữ: mỗi ngày nói một lời động viên.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Tâm từ tắc mạo hoà.",
+    "nguon": "tam_tuong_thien",
+    "y": "Lòng từ thì mặt hoà (Tâm Tướng Thiên)."
+   }
+  },
+  "net_nghiem": {
+   "ten": "Mặt nghỉ nghiêm, khó đoán",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "net_mat": [
+     "nghiem"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Mặt nghỉ nghiêm, khó đoán",
+   "noi_dung": "Mặt nghiêm: được nể, ít bị làm phiền, nhưng người mới ngại bắt chuyện. Thói quen cơ mặt — thả lỏng hàm là đổi được.",
+   "viec": "Chào trước khi người khác chào bạn, ba lần mỗi ngày.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "tam_tuong_thien",
+    "y": null
+   }
+  },
+  "net_buon": {
+   "ten": "Mặt nghỉ buồn hoặc mệt",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "net_mat": [
+     "buon_met"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi",
+    "suc_khoe"
+   ],
+   "tieu_de": "Mặt nghỉ buồn hoặc mệt",
+   "noi_dung": "Mặt nghỉ buồn mệt: cơ mặt đang giữ nếp của một giai đoạn nặng. Sách tâm tướng nói 'tướng tuỳ tâm diệt' — nghỉ đủ và có việc vui, nếp này mờ dần.",
+   "viec": "Mỗi ngày 15 phút cho một việc làm bạn thật sự thích.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "tam_tuong_thien",
+    "y": null
+   }
+  },
+  "dang_vung": {
+   "ten": "Dáng vững, thẳng, chậm rãi",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "dang": [
+     "vung_thang"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "con_nguoi",
+    "loi_khuyen"
+   ],
+   "tieu_de": "Dáng vững, thẳng, chậm rãi",
+   "noi_dung": "'Hành toạ tĩnh trọng': đi đứng vững, chậm là người có nội lực, được giao việc lớn. Động tướng xem đây là dấu quý.",
+   "viec": "Giữ: bước vào phòng chậm hơn một nhịp, nhìn hết mọi người.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": "Hành như thuỷ lưu, toạ như sơn trọng.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Đi như nước chảy, ngồi như núi vững."
+   }
+  },
+  "dang_hap_tap": {
+   "ten": "Dáng nhanh, hấp tấp",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "dang": [
+     "nhanh_hap_tap"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Dáng nhanh, hấp tấp",
+   "noi_dung": "Đi đứng hấp tấp: việc nhiều, lòng vội; sách xưa dặn 'tâm vội thì việc đổ'. Tập chậm bước là tập chậm nghĩ.",
+   "viec": "Đi bộ chậm 10 phút mỗi ngày, không điện thoại.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "than_tuong_toan_bien",
+    "y": null
+   }
+  },
+  "dang_khom": {
+   "ten": "Dáng khom, rụt",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "dang": [
+     "khom_rut"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi",
+    "suc_khoe"
+   ],
+   "tieu_de": "Dáng khom, rụt",
+   "noi_dung": "Dáng khom rụt: tự tin thấp hoặc mệt lâu ngày; cũng ảnh hưởng tới thở và cột sống.",
+   "viec": "Ngửa vai, mở ngực 1 phút mỗi giờ ngồi; tập lưng 3 lần mỗi tuần.",
+   "uu_tien": 1,
+   "sach": {
+    "trich": null,
+    "nguon": "than_tuong_toan_bien",
+    "y": null
+   },
+   "he": "Kim"
+  }
+ },
+ "chuong": {
+  "tong_quan": {
+   "tieu_de": "Gương mặt bạn nói gì",
+   "cau_hoi": "Nhìn tổng thể, nét trội của bạn là gì?",
+   "mo_ta": "Ba phần mặt, dáng mặt theo năm hành, xương thịt, sắc tổng. Đọc miễn phí."
+  },
+  "con_nguoi": {
+   "tieu_de": "Tính cách và cách bạn đối diện",
+   "cau_hoi": "Ánh mắt, lông mày, miệng, giọng nói kể điều gì về bạn?",
+   "mo_ta": "Thần mắt, mày, miệng, nét mặt lúc nghỉ, giọng và dáng — phần sách xưa xem là 'thần' và 'tâm tướng'."
+  },
+  "cong_viec_tien": {
+   "tieu_de": "Công việc và tiền bạc",
+   "cau_hoi": "Trán, mũi, gò má, cằm nói gì về đường làm ăn?",
+   "mo_ta": "Cung Quan Lộc (trán, Pháp Lệnh), Tài Bạch (mũi), Quyền (gò má), Điền Trạch, hậu vận (cằm)."
+  },
+  "tinh_cam_gia_dinh": {
+   "tieu_de": "Tình cảm và gia đình",
+   "cau_hoi": "Đuôi mắt, dưới mắt, hai bên trán, lông mày nói gì?",
+   "mo_ta": "Cung Phu Thê (đuôi mắt), Tử Tức (dưới mắt, Nhân Trung), Phụ Mẫu (hai bên trán), Huynh Đệ (mày), Nô Bộc (hàm)."
+  },
+  "suc_khoe": {
+   "tieu_de": "Sức khoẻ và nhịp sinh hoạt",
+   "cau_hoi": "Sắc da từng vùng nhắc bạn chăm gì?",
+   "mo_ta": "Y tướng theo Nội Kinh: mỗi vùng mặt gắn một hệ cơ quan — chỉ lời phòng ngừa và đi khám, không nói bệnh."
+  },
+  "nam_nay": {
+   "tieu_de": "Năm nay nhìn vào đâu",
+   "cau_hoi": "Tuổi này sách xưa xem ở vùng nào trên mặt?",
+   "mo_ta": "100 vị trí lưu niên: mỗi tuổi một vùng. Năm nay và ba năm tới nhìn vào đâu, bạn đã quan sát vùng đó ra sao."
+  },
+  "tuong_va_la_so": {
+   "tieu_de": "Tướng và lá số",
+   "cau_hoi": "Dáng mặt có hợp với hành lá số Bát tự cần không?",
+   "mo_ta": "Ngũ hình của gương mặt đặt cạnh hành nên bù của Bát tự (hai cách): hậu thiên có đang bù tiên thiên không."
+  },
+  "loi_khuyen": {
+   "tieu_de": "Tướng tuỳ tâm sinh: việc nên làm",
+   "cau_hoi": "Thói quen nào đang viết lên mặt bạn?",
+   "mo_ta": "Những việc 0 đồng gom từ các chương: thói quen cơ mặt, giấc ngủ, cách nói — tướng đổi khi thói quen đổi."
+  }
+ },
+ "thu_tu_chuong": [
+  "tong_quan",
+  "con_nguoi",
+  "cong_viec_tien",
+  "tinh_cam_gia_dinh",
+  "suc_khoe",
+  "nam_nay",
+  "tuong_va_la_so",
+  "loi_khuyen"
+ ],
+ "mau": {
+  "mo_dau": "Bài đọc này dựng từ điều BẠN tự quan sát trong gương ({so} nét), ghép với cách đọc của sách tướng xưa. Nó nói về xu hướng và thói quen, không nói trước điều gì sẽ xảy ra; đúng hay chưa, bạn là người chấm.",
+  "thieu": "Bạn chưa trả lời câu nào về {ten} — mở phần Khảo sát để bổ sung, chương này sẽ đầy hơn.",
+  "khong_dau_hieu": "Những nét bạn chọn ở vùng này đều ở mức trung tính — sách xưa không có gì đặc biệt để nói, và đó thường là dấu hiệu tốt.",
+  "muc_chuong": {
+   "thuan": "Nhiều nét ở vùng này thuận.",
+   "can_bang": "Vùng này có nét thuận, có nét nên để ý — cân bằng.",
+   "can_chu_dong": "Vùng này có vài nét nên chủ động chăm sóc."
+  },
+  "suc_khoe_mo": "Y tướng không đoán bệnh. Nội Kinh gắn từng vùng mặt với một hệ cơ quan; sắc da đổi thường là nhịp sinh hoạt đổi. Dưới đây chỉ là lời nhắc chăm sóc và đi khám.",
+  "suc_khoe_mien_tru": "Những lời trên là gợi ý phòng ngừa theo sách xưa, không thay cho lời bác sĩ. Có triệu chứng thì đi khám, không chờ xem tướng.",
+  "nam_nay": "Tuổi {tuoi} (tuổi mụ), sách lưu niên xem ở {ten} — vùng {vung}{ben}. Bạn tự quan sát vùng này: {quan_sat}.",
+  "nam_nay_khong_quan_sat": "Tuổi {tuoi} (tuổi mụ), sách lưu niên xem ở {ten} — vùng {vung}{ben}. Bạn chưa trả lời câu nào về vùng này; mở Khảo sát để bổ sung.",
+  "nam_toi": "{nam} (tuổi {tuoi}): {ten} — {vung}.",
+  "luu_nien_giai_thich": "Sách xưa chia mặt thành 100 vị trí, mỗi tuổi một vị, đi từ tai (1–14) lên trán, xuống mũi, miệng rồi cằm (71–75), sau đó vòng quanh mặt theo 12 chi (76–99). Đây là CÁCH NHÌN của sách tướng, không phải dự báo: vùng của tuổi nào đầy, sáng thì tuổi ấy nhẹ nhàng; vùng có nếp, tối thì tuổi ấy nên chủ động hơn.",
+  "nam_nay_muc": {
+   "thuan": "Vùng của năm nay bạn thấy thuận — năm nên đẩy việc.",
+   "can_bang": "Vùng của năm nay có nét thuận, có nét nên để ý — năm đi đều.",
+   "can_chu_dong": "Vùng của năm nay bạn thấy có nét nên chăm — năm nên đi chậm và chăm sức."
+  },
+  "la_so_hop": "Dáng mặt của bạn mang hành {hinh}; lá số Bát tự theo cách {cach} cần bù hành {can}. {quan_he}",
+  "la_so_sinh": "Hành của dáng mặt sinh ra hành cần bù — sách xưa gọi là hậu thiên nuôi tiên thiên: thuận.",
+  "la_so_trung": "Hành của dáng mặt chính là hành cần bù — sách xưa gọi là hậu thiên đã bù tiên thiên: rất thuận.",
+  "la_so_khac": "Hành của dáng mặt kìm hành cần bù — không có gì phải lo; chỉ là dáng sống tự nhiên của bạn và điều lá số cần đang kéo hai hướng, nên bù bằng thói quen (màu, nghề, nhịp sống) hơn là bằng dáng.",
+  "la_so_bi_khac": "Hành cần bù kìm hành dáng mặt — nghĩa đời thường: điều lá số cần sẽ 'uốn' nếp tự nhiên của bạn; làm từ từ.",
+  "la_so_trung_tinh": "Hai hành không sinh không kìm nhau trực tiếp: bù theo lá số không đụng tới nếp tự nhiên của bạn.",
+  "la_so_pha": "Dáng mặt bạn không nghiêng hẳn về một hành (hình pha) — sách xưa dặn xem theo nét trội; với lá số, cứ bù hành lá số cần, dáng mặt không cản.",
+  "la_so_thieu": "Chương này cần ngày giờ sinh (Bát tự) — thêm giờ sinh vào hồ sơ để so dáng mặt với hành lá số cần.",
+  "loi_khuyen_mo": "'Hữu tâm vô tướng, tướng tự tâm sinh' — có lòng mà chưa có tướng, tướng sẽ theo lòng mà sinh. Mọi nếp trên mặt là thói quen nhiều năm; đổi thói quen, mặt đổi theo. Dưới đây là việc 0 đồng gom từ các chương.",
+  "ket": "Tướng pháp xưa nói về xu hướng, không nói trước điều gì sẽ xảy ra; và tướng của người tự quan sát bao giờ cũng thật hơn tướng người khác xem. Bạn hãy soi lại sau ba tháng — nếp nào mờ đi là bạn đã đổi được một thói quen.",
+  "cum_doi_thuong": "nói bằng lời thường",
+  "nhan_ben": {
+   "trai": " (bên trái)",
+   "phai": " (bên phải)",
+   "giua": ""
+  },
+  "nhan_gioi_ben": "Sách xưa dặn nam xem bên trái trước, nữ xem bên phải trước.",
+  "hoi": {
+   "chao": "Hỏi về một vùng trên mặt bạn (trán, mày, mắt, mũi, miệng, cằm, tai, gò má, nhân trung, nốt ruồi…) hoặc về cách xem tướng. Tướng là của chính bạn — mình không xem tướng người khác.",
+   "nguoi_khac": "Mình không đọc tướng người khác (sếp, nhân viên, đối tác, người yêu) — nhìn mặt mà xét người là bất công với họ, và sách tướng xưa cũng dặn 'tướng tuỳ tâm sinh', phải sống cùng mới biết. Nếu bạn muốn, hãy tự quan sát gương mặt của chính mình.",
+   "tuyen_dung": "Mình không giúp chọn nhân viên, đối tác hay bạn đời theo tướng mạo — phân biệt theo ngoại hình là điều không nên và nhiều nơi cấm. Hãy đánh giá người qua việc họ làm.",
+   "khong_hieu": "Mình chưa nhận ra bạn hỏi về vùng nào trên mặt. Bạn thử hỏi cụ thể: 'Ấn Đường rộng nghĩa là gì?', 'Nốt ruồi ở cằm?', 'Năm nay tuổi 35 xem ở đâu?'.",
+   "chua_khao_sat": "Bạn chưa làm Khảo sát nên mình chỉ nói được nghĩa chung của vùng này theo sách; làm Khảo sát để có lời đọc riêng.",
+   "da_khao_sat": "Theo điều bạn đã tự quan sát:",
+   "mo_ta_bo_vi": "{ten} ({vi_tri}): {nghia}",
+   "cach_quan_sat": "Cách tự quan sát: {huong_dan}",
+   "khong_doan_benh": "Mình không đoán bệnh qua mặt. Sách xưa gắn vùng này với {he}; nếu bạn đang có triệu chứng, đi khám là việc nên làm trước."
+  }
+ },
+ "tu_khoa": {
+  "bo_vi": {
+   "an_duong": [
+    "an duong",
+    "giua hai may",
+    "giua hai long may",
+    "giua hai chan may"
+   ],
+   "thien_dinh": [
+    "tran",
+    "thien dinh",
+    "trung chinh",
+    "tu khong",
+    "thien trung"
+   ],
+   "nhat_nguyet_giac": [
+    "nhat giac",
+    "nguyet giac",
+    "hai ben tran",
+    "goc tran"
+   ],
+   "thien_thuong": [
+    "thien thuong",
+    "dich ma",
+    "thai duong"
+   ],
+   "long_may": [
+    "long may",
+    "chan may",
+    "may rau",
+    "may ram",
+    "may thua",
+    "may dam",
+    "cap may"
+   ],
+   "dien_trach": [
+    "dien trach",
+    "mi tren",
+    "mi mat tren",
+    "mat may"
+   ],
+   "mat": [
+    "doi mat",
+    "anh mat",
+    "mat to",
+    "mat nho",
+    "mat dai",
+    "tam bach",
+    "con mat",
+    "mat mot mi",
+    "mat hai mi",
+    "long trang",
+    "trong den"
+   ],
+   "ngu_vi": [
+    "duoi mat",
+    "ngu vi",
+    "gian mon",
+    "chan chim",
+    "phu the"
+   ],
+   "le_duong": [
+    "duoi mat",
+    "bong mat",
+    "quang tham",
+    "ngoa tam",
+    "le duong",
+    "quang mat"
+   ],
+   "son_can": [
+    "son can",
+    "goc mui",
+    "giua hai mat"
+   ],
+   "song_mui": [
+    "mui",
+    "song mui",
+    "mui go",
+    "mui cao",
+    "mui thap",
+    "mui lech",
+    "nien thuong",
+    "tho thuong"
+   ],
+   "chuan_dau": [
+    "dau mui",
+    "chop mui",
+    "chuan dau",
+    "mui to",
+    "mui nho"
+   ],
+   "canh_mui": [
+    "canh mui",
+    "lo mui",
+    "lan dai",
+    "dinh uy"
+   ],
+   "luong_quyen": [
+    "go ma",
+    "luong quyen",
+    "quyen cot",
+    "xuong go ma"
+   ],
+   "nhan_trung": [
+    "nhan trung"
+   ],
+   "phap_lenh": [
+    "phap lenh",
+    "ranh cuoi",
+    "ranh mui mieng",
+    "nep cuoi"
+   ],
+   "mieng": [
+    "mieng",
+    "moi",
+    "khoe mieng",
+    "ham rang",
+    "rang",
+    "giong noi",
+    "giong"
+   ],
+   "thua_tuong": [
+    "thua tuong"
+   ],
+   "dia_cac": [
+    "cam",
+    "dia cac",
+    "cam che",
+    "cam nhon",
+    "cam lem",
+    "cam vuong"
+   ],
+   "ham": [
+    "quai ham",
+    "ham banh",
+    "xuong ham",
+    "no boc"
+   ],
+   "tai": [
+    "cai tai",
+    "doi tai",
+    "hai tai",
+    "tai cua toi",
+    "tai toi",
+    "dai tai",
+    "vanh tai",
+    "lo tai",
+    "tai to",
+    "tai nho",
+    "tai cao",
+    "tai thap",
+    "tai mong"
+   ],
+   "khuon_mat": [
+    "khuon mat",
+    "dang mat",
+    "mat vuong",
+    "mat tron",
+    "mat dai",
+    "ngu hinh",
+    "tam dinh",
+    "hinh kim",
+    "hinh moc",
+    "hinh thuy",
+    "hinh hoa",
+    "hinh tho"
+   ]
+  },
+  "cung": {
+   "menh": [
+    "menh"
+   ],
+   "tai_bach": [
+    "tai bach"
+   ],
+   "huynh_de": [
+    "huynh de"
+   ],
+   "dien_trach": [
+    "dien trach"
+   ],
+   "tu_tuc": [
+    "tu tuc"
+   ],
+   "no_boc": [
+    "no boc"
+   ],
+   "phu_the": [
+    "phu the"
+   ],
+   "tat_ach": [
+    "tat ach"
+   ],
+   "thien_di": [
+    "thien di"
+   ],
+   "quan_loc": [
+    "quan loc"
+   ],
+   "phuc_duc": [
+    "phuc duc"
+   ],
+   "phu_mau": [
+    "phu mau"
+   ],
+   "quyen": [
+    "quyen (go ma)"
+   ],
+   "tuong_mao": [
+    "tuong mao"
+   ]
+  },
+  "not_ruoi": {
+   "tran": [
+    "tran"
+   ],
+   "an_duong": [
+    "an duong",
+    "giua hai may",
+    "giua may"
+   ],
+   "long_may": [
+    "long may",
+    "chan may",
+    "trong may"
+   ],
+   "duoi_mat": [
+    "duoi mat",
+    "le"
+   ],
+   "duoi_mat_duoi": [
+    "duoi mat",
+    "khoe mat"
+   ],
+   "mui": [
+    "mui",
+    "song mui",
+    "dau mui"
+   ],
+   "canh_mui": [
+    "canh mui"
+   ],
+   "moi": [
+    "moi",
+    "mieng",
+    "mep"
+   ],
+   "cam": [
+    "cam"
+   ],
+   "go_ma": [
+    "go ma",
+    "ma"
+   ],
+   "tai": [
+    "tai"
+   ],
+   "co": [
+    "co"
+   ]
+  },
+  "nguoi_khac": [
+   "sep",
+   "nhan vien",
+   "doi tac",
+   "nguoi yeu",
+   "ban trai",
+   "ban gai",
+   "chong toi",
+   "vo toi",
+   "con toi",
+   "anh ay",
+   "co ay",
+   "ong ay",
+   "ba ay",
+   "nguoi do",
+   "nguoi nay",
+   "nguoi kia",
+   "ho co",
+   "tuong cua anh",
+   "tuong cua co",
+   "tuong cua chi",
+   "tuong cua em",
+   "nhin mat nguoi",
+   "xem mat nguoi",
+   "xem tuong cho"
+  ],
+  "tuyen_dung": [
+   "tuyen",
+   "phong van",
+   "chon nhan vien",
+   "chon doi tac",
+   "chon vo",
+   "chon chong",
+   "nen lay",
+   "co nen yeu",
+   "hop tac voi"
+  ],
+  "phau_thuat": [
+   "phau thuat",
+   "tham my",
+   "sua mui",
+   "nang mui",
+   "don cam",
+   "got cam",
+   "cat mi",
+   "nhan mi",
+   "tiem",
+   "xam"
+  ]
+ },
+ "cum_cam": [
+  "hình khắc",
+  "khắc phu",
+  "khắc thê",
+  "khắc chồng",
+  "khắc vợ",
+  "sát phu",
+  "sát thê",
+  "yểu",
+  "đoản mệnh",
+  "trường thọ",
+  "sống lâu",
+  "chết",
+  "tai hoạ",
+  "tai ương",
+  "xui xẻo",
+  "vận đen",
+  "đại hung",
+  "hung tướng",
+  "tướng xấu",
+  "tướng nghèo",
+  "nghèo hèn",
+  "bần tiện",
+  "dâm",
+  "lẳng lơ",
+  "bạc phận",
+  "số khổ",
+  "số phận",
+  "định mệnh",
+  "chắc chắn",
+  "bạn sẽ",
+  "không thể tránh",
+  "phá sản",
+  "ly hôn",
+  "tai nạn",
+  "ung thư",
+  "đột quỵ",
+  "bệnh tim",
+  "tiểu đường",
+  "suy thận",
+  "vô sinh",
+  "hiếm muộn",
+  "vật phẩm",
+  "bùa",
+  "giải hạn",
+  "phẫu thuật để",
+  "sửa tướng",
+  "năng lượng vũ trụ",
+  "hành trình",
+  "khám phá bản thân",
+  "đồng hành",
+  "bứt phá",
+  "toả sáng",
+  "tâm hồn",
+  "sâu thẳm",
+  "vũ trụ",
+  "tần số rung động",
+  "hãy nhớ rằng",
+  "điều quan trọng là",
+  "phiên bản tốt nhất"
+ ]
+}

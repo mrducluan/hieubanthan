@@ -21,9 +21,11 @@ const sangThe = (t: TheTho): TheLap => ({ duong: t.duong, ten: t.ten, mo_ta: t.m
 
 const MANG_TRU: Record<string, MangBlog> = {
   "/than-so": "than_so", "/hop-doi": "hop_doi", "/tu-vi": "tu_vi", "/bat-tu": "bat_tu", "/kinh-dich": "kinh_dich", "/phong-thuy": "phong_thuy",
+  "/nhan-tuong": "tu_vi",   // NT-1: chưa có mảng blog riêng — bài liên quan tạm theo Tử vi (cùng gốc tướng mệnh)
 };
 const HINH_TRU: Record<string, KieuMang> = {
   "/than-so": "than-so", "/hop-doi": "than-so", "/tu-vi": "tu-vi", "/bat-tu": "bat-tu", "/kinh-dich": "kinh-dich", "/phong-thuy": "phong-thuy",
+  "/nhan-tuong": "nhan-tuong",
 };
 
 /** Thẻ công cụ của chính trang trụ (dùng ở thư viện /kien-thuc: silo ít cụm → mời mở công cụ của mảng). */

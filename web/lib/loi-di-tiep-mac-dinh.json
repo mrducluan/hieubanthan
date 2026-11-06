@@ -39,6 +39,14 @@
       { "duong": "/xem-sao-han", "ten": "Sao hạn theo tuổi", "nhan": "cong_cu", "hinh": "phong-thuy",
         "mo_ta": "Năm nay bạn gặp sao nào theo tục xếp theo tuổi — đọc bằng lời thường và việc nên làm, không cúng sao." }
     ] },
+    { "tru": "/nhan-tuong", "the": [
+      { "duong": "/bat-tu", "ten": "Bát tự: hành bạn cần bù", "nhan": "cong_cu", "hinh": "bat-tu",
+        "mo_ta": "Dáng mặt mang một hành; Bát tự cho biết lá số bạn cần bù hành nào — chương “Tướng và lá số” ghép hai bên." },
+      { "duong": "/tu-vi/cung", "ten": "12 cung Tử vi", "nhan": "kien_thuc", "hinh": "tu-vi",
+        "mo_ta": "12 cung trên lá số và 12 cung trên gương mặt cùng gọi tên các mảng đời: Mệnh, Tài Bạch, Phu Thê, Tật Ách…" },
+      { "duong": "/hom-nay", "ten": "Hôm nay của bạn", "nhan": "cong_cu", "hinh": "than-so",
+        "mo_ta": "Mỗi ngày một trang mới từ ngày sinh — ghé lại để soi xem việc 0 đồng đã đổi nếp mặt chưa." }
+    ] },
     { "tru": "chung", "the": [
       { "duong": "/kien-thuc", "ten": "Thư viện kiến thức", "nhan": "thu_vien", "hinh": "tu-vi",
         "mo_ta": "Hơn 600 trang tra cứu: ý nghĩa con số, chính tinh ở từng cung, 64 quẻ, thập thần, tuổi hợp hướng." },

@@ -110,6 +110,8 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   co_anh: "number",     // UI-PT2 P6: 1 = có chọn ảnh góc nhà (chỉ trên máy)
   so_anh: "number",     // PT-V2: số ảnh gửi máy đọc (1–3) — không bao giờ là ảnh hay tên tệp
   so_dau_hieu: "number", // PT-V2: số dấu hiệu máy gợi ý
+  // NT-1: Nhân tướng học — chỉ MÃ: số câu đã trả lời, lựa chọn tam đình máy đo, ngũ hình, số gợi ý từ ảnh (không chữ người dùng)
+  lua_chon: "string", ngu_hinh: "string", so_goi_y: "number",
   da_bat: "number",     // PT-V2: 1 = máy đọc ảnh đang bật, 0 = tắt / lỗi
   ma: "string",         // PT-V2: mã dấu hiệu người dùng xác nhận (xa_ngang…), chỉ mã
   con_dung: "number",   // SAO-V: trang nhận quà — 1 = link quà còn dùng được, 0 = đã nhận / hết hạn / không có

@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import {
   ArrowRight, BookOpen, CalendarCheck, CalendarDays, CalendarRange, Check, Compass, DoorOpen, HeartHandshake, Home, Hourglass,
-  ListOrdered, MessageCircleQuestion, MoonStar, Navigation, Repeat, Sparkles, Sun, UserRound, type LucideIcon,
+  Layers, ListOrdered, MessageCircleQuestion, MoonStar, Navigation, Repeat, ScanFace, Sparkles, Sun, UserRound, type LucideIcon,
 } from "lucide-react";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 // Biểu tượng theo vị trí: câu băn khoăn (HOI_HH) và công cụ lịch & tuổi (lichHH) — đích + chữ ở lib/huyen-hoc.ts / bảng chữ.
-const ICON_HOI: LucideIcon[] = [UserRound, HeartHandshake, Sparkles, MessageCircleQuestion, Home, CalendarCheck];
+const ICON_HOI: LucideIcon[] = [UserRound, HeartHandshake, Sparkles, Layers, MessageCircleQuestion, Home, ScanFace, CalendarCheck];
 const ICON_LICH: LucideIcon[] = [Sun, CalendarCheck, Home, DoorOpen, Sparkles, Compass, Navigation, CalendarDays, Repeat, Hourglass, CalendarRange, HeartHandshake];
 const CACH: LucideIcon[] = [ListOrdered, BookOpen, MoonStar];   // SO_CACH_HH lớp
 
@@ -76,14 +76,14 @@ export default async function HuyenHoc() {
       )} />
     {/* JSON-LD đứng NGOÀI lưới space-y (thẻ <script> là phần tử con → đẩy đầu trang xuống thêm một khoảng). */}
     <div className="space-y-16 md:space-y-24">
-      {/* Đầu trang: chữ + hai nút bên trái, hình năm mảng bên phải (≥ lg). Điện thoại: chữ → nút → hình nhỏ. */}
+      {/* Đầu trang: chữ + hai nút bên trái, hình sáu mảng bên phải (≥ lg). Điện thoại: chữ → nút → hình nhỏ. */}
       <section className="relative grid items-center gap-8 lg:grid-cols-[1.25fr_1fr] lg:gap-10" data-testid="hero-huyen-hoc">
         <div>
           <p className="eyebrow flex items-center gap-2"><Sparkles className="size-3.5 shrink-0 text-gold" aria-hidden /> {c("dau.nhan_tren")}</p>
           <h1 className="mt-3 text-4xl leading-[1.1] sm:text-5xl lg:text-[3.4rem]">
             {nd.dau.h1 && nd.dau.h1 !== MD.h1
               ? <ChuNhan chu={nd.dau.h1} lopNhan="text-gradient-gold italic" />
-              : <><span className="text-gradient-gold italic">Huyền học</span> — năm cách nhìn lại mình</>}
+              : <><span className="text-gradient-gold italic">Huyền học</span> — sáu cách nhìn lại mình</>}
           </h1>
           <LoiDanCms nd={nd} className="mt-4 max-w-xl text-base leading-relaxed text-fg-muted sm:text-lg">{MD.loi_dan}</LoiDanCms>
           <ul className="mt-5 hidden flex-wrap gap-2 text-sm text-fg-muted sm:flex" aria-label="Điểm khác biệt">
@@ -110,7 +110,7 @@ export default async function HuyenHoc() {
       {/* Chọn theo câu hỏi: người mới không cần biết tên môn, chỉ cần biết mình đang băn khoăn gì. */}
       <section aria-labelledby="ban-can-gi" className="scroll-mt-24">
         <TieuDeMuc id="ban-can-gi" nho={c("hoi.nho")} lon={c("hoi.lon")} />
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="chon-theo-cau-hoi">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4" data-testid="chon-theo-cau-hoi">
           {HOI_HH.map((href, i) => { const Icon = ICON_HOI[i]!; return (
             <li key={i}>
               <Link href={href} className="glass group flex h-full items-center gap-4 rounded-2xl p-4 hover:border-gold/50 sm:p-5">

@@ -61,6 +61,7 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Bát tự (Tứ trụ)](${urlDayDu("/bat-tu")}): tứ trụ, ngũ hành vượng suy, thập thần, cách cục, đại vận.`,
     `- [Kinh Dịch](${urlDayDu("/kinh-dich")}): gieo quẻ cho một câu hỏi cụ thể — quẻ chủ, hào động, quẻ biến.`,
     `- [Phong thuỷ nhà](${urlDayDu("/phong-thuy")}): mệnh quái Bát trạch, hướng tốt/xấu, khảo sát bố cục nhà, đo hướng bằng la bàn điện thoại.`,
+    `- [Nhân tướng học](${urlDayDu("/nhan-tuong")}): tự soi gương trả lời 31 câu (Tam đình, Ngũ quan, 12 cung, khí sắc, cốt nhục, giọng, dáng) → bài đọc 8 chương, tuổi lưu niên theo 100 vị trí; không cần ảnh, không xem tướng người khác; bộ vị tra cứu tại ${urlDayDu("/nhan-tuong/bo-vi")}.`,
     `- [Xem tuổi làm nhà, cưới hỏi](${urlDayDu("/xem-tuoi-lam-nha")}): tuổi mụ có phạm Kim lâu, Hoang ốc, Tam tai không, năm thuận gần nhất; trang theo năm sinh dạng ${urlDayDu(`/xem-tuoi-lam-nha/${nam}/tuoi-1990`)}, bảng mọi tuổi một năm dạng ${urlDayDu(`/xem-tuoi-lam-nha/${nam}`)}.`,
     `- [Hướng xấu theo năm](${urlDayDu("/phong-thuy/huong-xau-nam")}): Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc + bàn phi tinh 9 cung (dạng ${urlDayDu(`/phong-thuy/huong-xau-nam/${nam}`)}).`,
     `- [Sao hạn theo tuổi](${urlDayDu("/xem-sao-han")}): sao Cửu Diệu của năm theo tuổi mụ và giới tính, lời đời thường + việc nên làm, không hướng dẫn cúng sao (bảng mọi tuổi dạng ${urlDayDu(`/xem-sao-han/${nam}`)}).`,

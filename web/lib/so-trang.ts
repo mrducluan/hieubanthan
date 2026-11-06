@@ -17,7 +17,7 @@ import { CHU_TRANG_CHU, HINH_TRANG_CHU } from "@/lib/chu/trang-chu";
 import { CHU_HUYEN_HOC, CHU_KIEN_THUC, HINH_HUYEN_HOC } from "@/lib/chu/trang-tinh";
 import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM, CHU_NAM, CHU_NAM_SINH_CON, CHU_NAM_CUOI_HOI, CHU_NAM_TUOI } from "@/lib/chu/trang-con";
 import {
-  CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_SAO_HAN, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
+  CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_SAO_HAN, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_NHAN_TUONG, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
   CHU_XEM_NGAY, CHU_XONG_DAT, CHU_THOI_GIAN_TOI,
 } from "@/lib/chu/cong-cu";
 
@@ -183,6 +183,23 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     ],
     lien_ket: [{ href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào (1960–2005)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ phong thuỷ" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
   } },
+  // NT-1: Nhân tướng học — tự quan sát gương mặt trong gương, không cần ảnh.
+  { duong: "/nhan-tuong", nhom: "cong_cu", ten: "Nhân tướng học", o: O_CONG_CU, mac_dinh: { chu: CHU_NHAN_TUONG,
+    tieu_de_seo: "Xem tướng mặt online: tự soi gương theo Tam đình, Ngũ quan, 12 cung",
+    mo_ta_seo: "Nhân tướng học tự quan sát: trả lời 31 câu về trán, mày, mắt, mũi, miệng, cằm trong gương — bài đọc 8 chương theo Ma Y, Băng Giám, Nội Kinh: tính cách, công việc, sức khoẻ, tuổi lưu niên. Không cần gửi ảnh.",
+    doan: [
+      "Gương mặt kể gì về bạn? Đứng trước gương, trả lời 31 câu ngắn theo sáu bước (tổng thể, trán và mày, mắt, mũi và gò má, miệng cằm tai, giọng và dáng) — trang ghép điều bạn thấy với cách đọc của sách tướng xưa thành bài đọc tám chương: dáng mặt theo năm hành, tính cách, công việc và tiền bạc, tình cảm, sức khoẻ, năm nay nhìn vào đâu, tướng và lá số, việc nên làm.",
+      "Không cần gửi ảnh: mọi câu trả lời nằm trên máy bạn. Phần ‘Y tướng’ chỉ nói hệ cơ quan sách xưa gắn với từng vùng và việc đi khám, không đoán bệnh. Không điểm số, không ‘tướng xấu’, không xem tướng người khác.",
+      "Tướng tuỳ tâm sinh: nếp mặt là thói quen nhiều năm — mỗi chương đều có việc 0 đồng để đổi thói quen, soi lại sau ba tháng.",
+    ],
+    hoi_dap: [
+      { hoi: "Có cần chụp ảnh không?", dap: "Không. Bạn tự soi gương và chọn lựa chọn mô tả đúng nhất; câu trả lời chỉ lưu trên máy bạn. Nếu muốn, bạn chấm 4 điểm trên ảnh của mình ngay trên trình duyệt để đo ba đình — ảnh không rời máy." },
+      { hoi: "Xem tướng có chính xác không?", dap: "Tướng pháp nói về xu hướng và thói quen, không nói trước điều gì sẽ xảy ra. Mỗi hộp có nút ‘Đúng với mình / Chưa đúng’ để bạn tự chấm; nét nào sách xưa gọi là ‘cần lưu ý’ đều kèm việc nên làm." },
+      { hoi: "Có xem tướng cho người khác được không?", dap: "Không. Nhìn mặt mà xét người là bất công với họ; trang chỉ đọc tướng của chính người tự quan sát và không giúp chọn nhân viên, đối tác hay bạn đời theo tướng." },
+      { hoi: "Phần sức khoẻ có đoán bệnh không?", dap: "Không. Nội Kinh gắn từng vùng mặt với một hệ cơ quan; trang chỉ nhắc chăm sóc và đi khám định kỳ, luôn kèm câu không thay lời bác sĩ." },
+    ],
+    lien_ket: [{ href: "/nhan-tuong/bo-vi", ten: "Bộ vị gương mặt" }, { href: "/bat-tu", ten: "Bát tự (hành cần bù)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
+  } },
   // HL-1 / TDG-1: công cụ hoàng lịch + tuổi — giới thiệu + hỏi đáp mặc định ở app/*/noi-dung.ts.
   tuNd(ND_XEM_NGAY, "Xem ngày tốt hôm nay: hoàng đạo, giờ tốt, việc nên làm", CHU_XEM_NGAY),
   tuNd(ND_LAM_NHA, "Xem tuổi làm nhà, cưới hỏi: Kim lâu, Hoang ốc, Tam tai", CHU_LAM_NHA),
@@ -223,11 +240,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   } },
   // Hub Huyền học (trước 2026-10-27 là /kham-pha "Khám phá" — 308 về đây, lib/chuyen-huong.json).
   { duong: "/huyen-hoc", nhom: "tinh", ten: "Huyền học", o: O_TINH, mac_dinh: { chu: CHU_HUYEN_HOC, hinh: HINH_HUYEN_HOC,
-    tieu_de_seo: "Huyền học online: Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, thần số",
-    mo_ta_seo: "Huyền học phương Đông và thần số học trong một hồ sơ: lá số Tử vi, Bát tự, gieo quẻ Kinh Dịch, phong thuỷ nhà ở. Tính minh bạch, có nguồn, miễn phí.",
-    h1: "Huyền học — năm cách nhìn lại mình",
+    tieu_de_seo: "Huyền học online: Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, thần số",
+    mo_ta_seo: "Huyền học phương Đông và thần số học trong một hồ sơ: lá số Tử vi, Bát tự, gieo quẻ Kinh Dịch, phong thuỷ nhà ở, nhân tướng tự soi gương. Tính minh bạch, có nguồn, miễn phí.",
+    h1: "Huyền học — sáu cách nhìn lại mình",
     // AIO: câu đầu định nghĩa thẳng "huyền học là gì" (≤ 45 chữ) để máy tìm kiếm / AI trích nguyên câu.
-    loi_dan: "Huyền học là những hệ thống người xưa dùng để đọc nhịp của con người và thời gian — qua con số, ngày giờ sinh, quẻ dịch và nơi ở. Thần số học là cửa vào nhanh nhất; Tử vi, Bát tự, Kinh Dịch, Phong thuỷ đi sâu hơn. Cả năm dùng chung một hồ sơ, tính từng bước, có nguồn sách.",
+    loi_dan: "Huyền học là những hệ thống người xưa dùng để đọc nhịp của con người và thời gian — qua con số, ngày giờ sinh, quẻ dịch, nơi ở và gương mặt. Thần số học là cửa vào nhanh nhất; Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng đi sâu hơn. Cả sáu dùng chung một hồ sơ, tính từng bước, có nguồn sách.",
   } },
   // NAM-1 (2026-10-30): mục lục năm + mục lục lịch âm (trước 404).
   { duong: "/nam", nhom: "tinh", ten: "Xem theo năm", o: O_TINH, mac_dinh: {
@@ -309,14 +326,14 @@ export const TEP_KB_THEO_LOAI: Record<LoaiTrang, string[]> = {
   cap_so: ["thanso_cap_so.json", "thanso_quan_he.json"], nghe: ["thanso_chan_dung.json", "thanso_linh_vuc.json"],
   tinh_yeu: ["thanso_chan_dung.json", "thanso_linh_vuc.json"], nam_ca_nhan: ["thanso_depth.json"], no_nghiep: ["thanso_chi_so_phu.json"],
   so_kep: ["thanso_chaldean.json"], dau_hieu: ["phongthuy_kb.json", "phongthuy_do_thi.json"],
-  co_thu: ["tuvi_co_thu.json", "tuvi_cach_cuc.json"],
+  co_thu: ["tuvi_co_thu.json", "tuvi_cach_cuc.json"], bo_vi: ["nhan_tuong_kb.json"],
 };
 /** Trang mẫu của từng loại (để CMS xem trước chữ KB của cụm). */
 const VI_DU: Record<LoaiTrang, string> = {
   so: "so-1", que: "que-1-can", sao: "sao-tu-vi", cung: "cung-menh", thap_than: "ty-kien", nhat_chu: "nhat-chu-giap",
   cap_so: "so-chu-dao-1-va-1", nghe: "so-1-hop-nghe-gi", tinh_yeu: "so-1-trong-tinh-yeu", nam_ca_nhan: "nam-ca-nhan-1",
   no_nghiep: "no-nghiep-13", sao_cung: "tu-vi-cung-menh", hoa_cung: "hoa-loc-cung-menh", menh_nam: "sinh-nam-1950-menh-gi",
-  so_kep: "so-kep-10", dau_hieu: "duong-dam-thang-vao-nha", co_thu: "cot-tuy-phu",
+  so_kep: "so-kep-10", dau_hieu: "duong-dam-thang-vao-nha", co_thu: "cot-tuy-phu", bo_vi: "an-duong",
 };
 
 /** ND-7 đợt 2: mọi cụm (trừ hồ sơ chuyên gia) cho đặt MỘT ảnh chia sẻ dùng chung — thay ảnh /og tự vẽ theo tiêu đề. */

@@ -139,7 +139,9 @@ test("EN-5.1 chọn ngày cho cả nhà: cưới hỏi 4 người, Kim lâu cô 
   await expect(gt).toContainText("không dùng để xếp hay bỏ ngày nào");
   await expect(gt).toContainText("Hiệp Kỷ Biện Phương Thư");
   await kq.getByText("Theo từng tháng").click();
-  await expect(page.getByTestId("thang-nhieu").locator("> li")).toHaveCount(12);
+  // Cửa sổ = 12 × 30 ngày tính từ max(ngày trang, hôm nay): bắt đầu giữa tháng thì chạm 13 ô tháng (12 tháng + một tháng lẻ).
+  await expect.poll(async () => page.getByTestId("thang-nhieu").locator("> li").count()).toBeGreaterThanOrEqual(12);
+  expect(await page.getByTestId("thang-nhieu").locator("> li").count()).toBeLessThanOrEqual(13);
   await expect(page.getByTestId("thang-nhieu")).toContainText("Kim lâu");
   const luu = await page.evaluate(() => JSON.stringify(window.localStorage));
   expect(luu).not.toContain("1997");

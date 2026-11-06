@@ -21,5 +21,5 @@ def test_ma_mau_khong_doi():
 
 def test_moi_mang_deu_co_ma():
     g = json.loads((GOLDEN / "ma_mau_doi_song.json").read_text(encoding="utf-8"))
-    for mang in ("tuvi", "battu", "thanso", "phongthuy", "kinhdich", "thoi_gian"):
+    for mang in ("tuvi", "battu", "thanso", "phongthuy", "kinhdich", "thoi_gian", "nhantuong"):
         assert len(g[mang]) >= 5, mang

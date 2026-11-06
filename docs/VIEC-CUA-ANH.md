@@ -5,6 +5,22 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4z. Nhân tướng học — mảng mới (NT-1, 2026-11-06) — sau khi merge (deploy ENGINE trước web)
+
+Mảng thứ sáu: `/nhan-tuong` (tự soi gương 31 câu → bài đọc 8 chương, không ảnh) + cụm `/nhan-tuong/bo-vi` (25 trang). Thiết kế + 3 phương án UI: `docs/NANG-CAP-NHAN-TUONG.md`.
+- [ ] **Deploy engine trước web** (route mới `/v1/nhan-tuong/*`, loại trang `bo_vi`; web cũ không gọi gì mới).
+- [ ] (10 phút) Mở `/nhan-tuong` bằng điện thoại, soi gương trả lời thật 31 câu → đọc bài; bấm "Đúng với mình / Chưa đúng" vài hộp.
+  Phiếu đi qua đúng bảng 0017 (mã `ds.nhantuong.*`), không cần migration mới.
+- [ ] **CMS → Giao diện website → Menu đầu trang**: mục "Huyền học" thêm menu con `/nhan-tuong` "Nhân tướng học" ngay sau Phong thuỷ,
+  bỏ "Từ điển thuật ngữ" khỏi menu này (giới hạn 12 mục con; từ điển vẫn ở chân trang, hub và mọi trang công cụ). Code mặc định đã
+  đổi; CMS đang giữ menu riêng thì phải sửa tay. Chữ dùng chung → "Đồng bộ ngay" để có nhóm "Thanh mảng · Nhân tướng".
+- [ ] **Quyết định**: có bật "máy gợi ý từ ảnh gương mặt" không? Mặc định TẮT (env engine `NHAN_TUONG_DOC_ANH=1` mới bật). Ảnh gương mặt là
+  **dữ liệu sinh trắc** (Luật 91/2025) — em đã viết Chính sách riêng tư (mục `#anh-mat`, hiệu lực 06/11/2026) cho CẢ hai trạng thái;
+  khuyên hỏi luật sư trước khi bật (hồ sơ đánh giá tác động `docs/ho-so-dlcn/` cần thêm mục dữ liệu sinh trắc).
+- [ ] (Chuyên gia, dần dần) KB `nhan_tuong_kb.json` là nháp ban biên tập viết lại từ cổ thư công cộng (123 nét, 100 vị lưu niên, ngũ hình,
+  khí sắc, nốt ruồi) — chưa đối chiếu nguyên bản khắc in (`can_doi_chieu`). Đọc duyệt dần qua Phòng duyệt / Kho tri thức.
+- [ ] Search Console → Kiểm tra URL `https://hieuban.com/nhan-tuong` và `/nhan-tuong/bo-vi/an-duong` → Yêu cầu lập chỉ mục; Sitemaps gửi lại.
+
 ### 4y. 862 URL "Đã phát hiện – chưa lập chỉ mục" (audit 2026-11-05, `docs/AUDIT-INDEX-2026-11.md`)
 
 Không có lỗi kỹ thuật — Google chưa tải các trang (xếp hàng). Q-I1 + Q-I2 em đã làm (đợi deploy). Việc của anh:

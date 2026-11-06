@@ -20,13 +20,18 @@ const MANG: [string, string, string, string, [string, string, string], string, s
   ["kinh_dich", "Kinh Dịch", "Đang phân vân một việc?",
     "Gieo một quẻ cho đúng một câu hỏi: việc đang thuận hay cần đổi cách, tuần này nên làm gì. Có nguyên văn Chu Dịch và lời giải thích dễ hiểu.",
     ["Gieo 3 đồng xu hoặc Mai Hoa", "64 quẻ, 384 hào có nguồn", "Ba cách đọc một quẻ"], "Chỉ cần một câu hỏi", "Gieo một quẻ"],
+  ["nhan_tuong", "Nhân tướng học", "Gương mặt mình kể gì về mình?",
+    "Tự soi gương, trả lời 31 câu về trán, mày, mắt, mũi, miệng, cằm — sách tướng xưa đọc ra tính cách, việc, tiền, sức khoẻ, tuổi lưu niên. Không cần gửi ảnh.",
+    ["Bản đồ gương mặt tô theo từng vùng", "Năm nay sách xem ở vùng nào", "Việc 0 đồng đổi nếp mặt"], "Chỉ cần một tấm gương", "Soi gương mặt của bạn"],
 ];
 const HOI: [string, string][] = [
   ["Mình là người thế nào?", "Thần số học"],
   ["Hai người hoà ở đâu, va ở đâu?", "Hợp đôi"],
   ["Năm nay mình nên để ý mảng nào?", "Tử vi"],
+  ["Mình mạnh hành gì, cần bù hành gì?", "Bát tự"],
   ["Có nên nhận việc này không?", "Kinh Dịch"],
   ["Nhà này có hợp mình không?", "Phong thuỷ"],
+  ["Gương mặt mình kể gì về mình?", "Nhân tướng học"],
   ["Ngày nào làm việc lớn cho thuận?", "Xem ngày tốt"],
 ];
 const LICH: [string, string][] = [
@@ -51,11 +56,12 @@ const SO_SANH: [string, string, string, string, string][] = [
   ["bat_tu", "Bát tự", "Ngày giờ sinh theo tiết khí", "Ngũ hành mạnh – yếu, đại vận 10 năm", "Tử Bình Chân Thuyên"],
   ["phong_thuy", "Phong thuỷ", "Năm sinh, giới tính, hướng nhà", "Hướng hợp, đặt phòng, tháng nên sửa", "Bát trạch, Huyền Không phi tinh"],
   ["kinh_dich", "Kinh Dịch", "Một câu hỏi và lúc gieo", "Một việc cụ thể đang phân vân", "Chu Dịch: quái từ, hào từ, Thoán truyện"],
+  ["nhan_tuong", "Nhân tướng học", "Điều bạn tự thấy trong gương (31 câu)", "Tính cách, nếp thói quen, vùng mặt nên chăm, tuổi lưu niên", "Ma Y Thần Tướng, Băng Giám, Nội Kinh"],
 ];
 const HOI_DAP: [string, string][] = [
-  ["Huyền học là gì?", "Là tên gọi chung cho các hệ thống người xưa dùng để đọc nhịp của con người và thời gian: qua con số (thần số học), ngày giờ sinh (Tử vi, Bát tự), quẻ dịch (Kinh Dịch) và nơi ở (Phong thuỷ). Ở đây chúng là nội dung văn hoá để tham khảo và tự soi, không phải lời tiên đoán."],
+  ["Huyền học là gì?", "Là tên gọi chung cho các hệ thống người xưa dùng để đọc nhịp của con người và thời gian: qua con số (thần số học), ngày giờ sinh (Tử vi, Bát tự), quẻ dịch (Kinh Dịch), nơi ở (Phong thuỷ) và gương mặt (Nhân tướng học). Ở đây chúng là nội dung văn hoá để tham khảo và tự soi, không phải lời tiên đoán."],
   ["Huyền học có phải mê tín không?", "Tuỳ cách dùng. Hiểu Bản Thân không dùng huyền học để phán hay doạ: phép tính hiện từng bước, nghĩa có ghi nguồn, mọi lời đọc kèm mặt tối và câu hỏi tự soi. Trang không trả lời chuyện bệnh tật, sống chết, xổ số và không bán vật phẩm hoá giải."],
-  ["Nên bắt đầu từ mảng nào?", "Mới làm quen thì bắt đầu từ thần số học: chỉ cần tên và ngày sinh, nửa phút có kết quả. Biết giờ sinh thì đi tiếp Tử vi hoặc Bát tự. Đang phân vân một việc cụ thể thì gieo một quẻ Kinh Dịch; lo chuyện nhà cửa thì xem Phong thuỷ."],
+  ["Nên bắt đầu từ mảng nào?", "Mới làm quen thì bắt đầu từ thần số học: chỉ cần tên và ngày sinh, nửa phút có kết quả. Biết giờ sinh thì đi tiếp Tử vi hoặc Bát tự. Đang phân vân một việc cụ thể thì gieo một quẻ Kinh Dịch; lo chuyện nhà cửa thì xem Phong thuỷ; chỉ có một tấm gương thì tự soi theo Nhân tướng học."],
   ["Thần số học có thuộc huyền học không?", "Thần số học có gốc phương Tây (Pythagoras, Chaldea); Tử vi, Bát tự, Kinh Dịch, Phong thuỷ là huyền học phương Đông. Ở Việt Nam người ta hay gọi chung là huyền học. Trang để thần số làm cửa vào vì cần nhập ít nhất."],
   ["Thông tin của tôi có bị lưu không?", "Hồ sơ lưu trên máy bạn; máy chủ tính xong là bỏ. Ngày sinh chỉ lưu trên máy chủ khi bạn tự chọn: lưu hồ sơ vào tài khoản, bật nhắc việc (chỉ ngày, tháng sinh) hoặc gửi kèm hồ sơ khi hỏi chuyên gia (xoá 30 ngày sau khi trả lời). Bài luận chỉ lưu khi bạn bấm Lưu hoặc bật Tự lưu."],
   ["Có mất phí không?", "Mọi phép tính, lá số và thư viện kiến thức đều miễn phí. Phần có phí chỉ áp dụng khi được bật: bản luận giải đầy đủ nhiều chương và câu hỏi vượt lượt (dùng Sao — điểm trong trang), Hội viên năm và Hỏi chuyên gia (trả bằng tiền). Trang luôn nói rõ trước khi trừ."],
@@ -64,11 +70,11 @@ const HOI_DAP: [string, string][] = [
 // Bảng chữ trang hub /huyen-hoc (trước 2026-10-27 là /kham-pha — khoá cũ giữ nguyên tên để chữ đã sửa ở CMS không mất).
 export const CHU_HUYEN_HOC = {
   "dau.nhan_tren": { nhom: "Đầu trang", nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Huyền học phương Đông · thần số học", toi_da: 60 },
-  ...Object.fromEntries((["Miễn phí mọi phép tính", "Một hồ sơ cho cả năm mảng", "Nói cả điểm mạnh lẫn điểm yếu"]).map((m, i) =>
+  ...Object.fromEntries((["Miễn phí mọi phép tính", "Một hồ sơ cho cả sáu mảng", "Nói cả điểm mạnh lẫn điểm yếu"]).map((m, i) =>
     [`dau.chip_${i + 1}`, { nhom: "Đầu trang", nhan: `Chip ${i + 1} dưới lời dẫn`, mac_dinh: m, toi_da: 40 }])),
   "dau.nut_chinh": { nhom: "Đầu trang", nhan: "Nút chính (mở /than-so)", mac_dinh: "Bắt đầu với con số của bạn", toi_da: 40 },
   "dau.nut_phu": { nhom: "Đầu trang", nhan: "Nút phụ (cuộn tới mục chọn theo câu hỏi)", mac_dinh: "Chọn theo câu hỏi", toi_da: 40 },
-  "ho_so.chao": { nhom: "Đầu trang", nhan: "Dòng hồ sơ ({ten} = tên gọi, {n} = số mảng xem ngay được)", mac_dinh: "Với hồ sơ hiện có, {ten} xem ngay được {n}/5 mảng", toi_da: 80 },
+  "ho_so.chao": { nhom: "Đầu trang", nhan: "Dòng hồ sơ ({ten} = tên gọi, {n} = số mảng xem ngay được)", mac_dinh: "Với hồ sơ hiện có, {ten} xem ngay được {n}/6 mảng", toi_da: 80 },
   "ho_so.thieu": { nhom: "Đầu trang", nhan: "Dòng nhắc khi hồ sơ còn thiếu ({thieu} = trường còn thiếu, {mang} = mảng chưa mở)", mac_dinh: "Thêm {thieu} để mở {mang}", toi_da: 100 },
   "ho_so.san_sang": { nhom: THE, nhan: "Chip khi hồ sơ đã đủ cho mảng", mac_dinh: "Sẵn sàng", toi_da: 30 },
   "ho_so.can_them": { nhom: THE, nhan: "Chip khi hồ sơ còn thiếu cho mảng ({thieu} = trường còn thiếu)", mac_dinh: "Thiếu {thieu}", toi_da: 40 },
@@ -80,7 +86,7 @@ export const CHU_HUYEN_HOC = {
     [`hoi.den_${i + 1}`, { nhom: "Chọn theo câu hỏi", nhan: `Câu ${i + 1} — tên công cụ`, mac_dinh: den, toi_da: 30 }],
   ])),
 
-  "mang.nho": { nhom: THE, nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Năm hệ thống, một hồ sơ", toi_da: 60 },
+  "mang.nho": { nhom: THE, nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Sáu hệ thống, một hồ sơ", toi_da: 60 },
   "mang.lon": { nhom: THE, nhan: "Tiêu đề mục", mac_dinh: "Mỗi mảng trả lời một kiểu câu hỏi", toi_da: 80 },
   ...Object.fromEntries(MANG.flatMap(([k, ten, hoi, mo, nhan, can, nut]) => [
     [`the.${k}_ten`, { nhom: THE, nhan: `${ten} — tên`, mac_dinh: ten, toi_da: 40 }],
@@ -100,7 +106,7 @@ export const CHU_HUYEN_HOC = {
   ])),
 
   "so_sanh.nho": { nhom: "Bảng so sánh", nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Khác nhau thế nào", toi_da: 60 },
-  "so_sanh.lon": { nhom: "Bảng so sánh", nhan: "Tiêu đề mục", mac_dinh: "Năm hệ thống, năm kiểu câu hỏi", toi_da: 80 },
+  "so_sanh.lon": { nhom: "Bảng so sánh", nhan: "Tiêu đề mục", mac_dinh: "Sáu hệ thống, sáu kiểu câu hỏi", toi_da: 80 },
   "so_sanh.cot_1": { nhom: "Bảng so sánh", nhan: "Tên cột 1", mac_dinh: "Hệ thống", toi_da: 30 },
   "so_sanh.cot_2": { nhom: "Bảng so sánh", nhan: "Tên cột 2", mac_dinh: "Dựa vào", toi_da: 30 },
   "so_sanh.cot_3": { nhom: "Bảng so sánh", nhan: "Tên cột 3", mac_dinh: "Trả lời tốt nhất", toi_da: 30 },

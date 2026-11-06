@@ -17,7 +17,8 @@
     "menh-tuoi": "/bat-tu/menh-theo-nam",
     "kinh-dich": "/kinh-dich/que",
     "dau-hieu": "/phong-thuy/dau-hieu",
-    "co-thu": "/tu-vi/co-thu"
+    "co-thu": "/tu-vi/co-thu",
+    "bo-vi": "/nhan-tuong/bo-vi"
   },
   "trang": [
     ["/la-so-mau", "/tu-vi/la-so-mau"],
