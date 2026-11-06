@@ -28,7 +28,7 @@ export function CuaVao() {
   );
 }
 
-const LOI_TAT = [["/hom-nay", "Hôm nay", CalendarHeart], ["/nhan-tuong", "Xem Tướng", ScanFace], ["/phong-thuy", "Xem Phong Thuỷ", Compass], ["/tu-vi", "Tử vi", Orbit]] as const;
+const LOI_TAT = [["/hom-nay", "Hôm nay", CalendarHeart], ["/nhan-tuong", "Xem Tướng", ScanFace], ["/phong-thuy", "Phong Thuỷ", Compass], ["/tu-vi", "Tử vi", Orbit]] as const;
 
 // Người quay lại (khâu QUAY LẠI → MỜI): con số của chính họ hôm nay + một câu tự soi (engine tính, NHIP-1), chia sẻ thẻ
 // ngày có ảnh, "Xem hợp với ai" dẫn thẳng tới /hop-doi để nhập ngày sinh người ấy (không biết ngày sinh thì gửi lời mời
