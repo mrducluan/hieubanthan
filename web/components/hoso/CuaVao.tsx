@@ -3,7 +3,7 @@ import Link from "@/components/khung/Lien";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { ArrowRight, CalendarHeart, Heart, HeartHandshake, Hash, Orbit } from "lucide-react";
+import { ArrowRight, CalendarHeart, Compass, HeartHandshake, Orbit, ScanFace } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NhapHoSo } from "./NhapHoSo";
 import { NutChiaSeNgay } from "@/components/chia-se/NutChiaSeNgay";
@@ -28,7 +28,7 @@ export function CuaVao() {
   );
 }
 
-const LOI_TAT = [["/hom-nay", "Hôm nay", CalendarHeart], ["/than-so", "Thần số", Hash], ["/hop-doi", "Hợp đôi", Heart], ["/tu-vi", "Tử vi", Orbit]] as const;
+const LOI_TAT = [["/hom-nay", "Hôm nay", CalendarHeart], ["/nhan-tuong", "Xem Tướng", ScanFace], ["/phong-thuy", "Xem Phong Thuỷ", Compass], ["/tu-vi", "Tử vi", Orbit]] as const;
 
 // Người quay lại (khâu QUAY LẠI → MỜI): con số của chính họ hôm nay + một câu tự soi (engine tính, NHIP-1), chia sẻ thẻ
 // ngày có ảnh, "Xem hợp với ai" dẫn thẳng tới /hop-doi để nhập ngày sinh người ấy (không biết ngày sinh thì gửi lời mời
