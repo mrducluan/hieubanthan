@@ -88,6 +88,14 @@ class DoAnhInput(BaseModel):
     cam: _Diem
 
 
+class _Nghieng(BaseModel):
+    """ANH-4: một ảnh nghiêng (tuỳ chọn) — điểm người dùng chấm trên đường viền mặt, không ảnh."""
+    model_config = ConfigDict(extra="forbid")
+    goc: Literal["nghieng_trai", "nghieng_phai"]
+    diem: dict[str, _Diem] = Field(min_length=4, max_length=20)
+    ti_le: float = Field(ge=0.2, le=5)
+
+
 class DoMatInput(BaseModel):
     """ANH-2: điểm mốc NGƯỜI DÙNG TỰ CHẤM trên ảnh của chính mình (toạ độ 0..1, KHÔNG ảnh) + tỉ lệ rộng/cao của ảnh. Điểm mốc
     gương mặt vẫn là dữ liệu nhạy cảm → lượt gọi mang `dong_y: true` như lượt gửi ảnh. Không lưu."""
@@ -95,6 +103,14 @@ class DoMatInput(BaseModel):
     diem: dict[str, _Diem] = Field(min_length=4, max_length=30)
     ti_le: float = Field(ge=0.2, le=5)
     dong_y: bool
+    nghieng: list[_Nghieng] = Field(default_factory=list, max_length=2)
+
+    @field_validator("nghieng")
+    @classmethod
+    def _ng(cls, v):
+        if len({n.goc for n in v}) != len(v):
+            raise ValueError("mỗi bên tối đa một ảnh nghiêng")
+        return v
 
     @field_validator("dong_y")
     @classmethod
@@ -182,7 +198,8 @@ def api_do_anh(inp: DoAnhInput) -> dict:
 @router.post("/do-mat")
 def api_do_mat(inp: DoMatInput) -> dict:
     try:
-        kq = calc_do.do_mat({k: v.model_dump() for k, v in inp.diem.items()}, inp.ti_le)
+        kq = calc_do.do_mat({k: v.model_dump() for k, v in inp.diem.items()}, inp.ti_le,
+                            [{"goc": n.goc, "ti_le": n.ti_le, "diem": {k: v.model_dump() for k, v in n.diem.items()}} for n in inp.nghieng])
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     return {"engine_version": ENGINE_VERSION, "pham_vi": "nhan_tuong_do_mat", "can_xac_nhan": True, **kq}

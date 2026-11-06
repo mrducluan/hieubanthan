@@ -5668,7 +5668,9 @@
    "vien": "Đường viền mặt",
    "mat_may": "Mắt và mày",
    "mui_mieng": "Mũi và miệng",
-   "tai": "Tai (không bắt buộc)"
+   "tai": "Tai (không bắt buộc)",
+   "nghieng_tren": "Trán và gốc mũi (ảnh nghiêng)",
+   "nghieng_duoi": "Mũi và cằm (ảnh nghiêng)"
   },
   "diem": [
    {
@@ -5866,8 +5868,107 @@
    "song_mui": "Chân mũi lệch khỏi đường giữa hai khoé mắt {lech_mui} lần khoảng giữa hai mắt.",
    "tai": "Đỉnh tai {dinh_tai} so với đầu mày; dái tai {dai_tai} so với chân mũi (sách xưa: tai cao ngang mày, dái tai tới chân mũi là tai tốt).",
    "canh_bao_quay": "Mặt trong ảnh hơi quay sang một bên — phần đo hai bên trái phải (lệch mũi, lệch miệng) đã bỏ qua; nên dùng ảnh nhìn thẳng.",
-   "canh_bao_nghieng": "Đầu trong ảnh hơi nghiêng ({goc}°) — hệ thống đã xoay lại theo đường hai đuôi mắt trước khi đo."
+   "canh_bao_nghieng": "Đầu trong ảnh hơi nghiêng ({goc}°) — hệ thống đã xoay lại theo đường hai đuôi mắt trước khi đo.",
+   "tran": "Nhìn nghiêng, giữa trán nhô khỏi đường nối chân tóc – đầu mày {tran_cong} lần chiều cao trán (thường khoảng 0,05: cong nhẹ).",
+   "son_can": "Góc giữa trán và sống mũi ở gốc mũi là {goc_son_can}° (thường 115–135°; góc lớn = gốc mũi cao, liền với trán).",
+   "song_mui_nghieng": "Sống mũi gồ khỏi đường thẳng gốc mũi – đầu mũi {gu_mui} lần chiều dài; đầu mũi nhô {nho_mui} lần chiều dài mũi (thường khoảng 0,3).",
+   "cam_nghieng": "Góc lồi của mặt (Ấn Đường – chân mũi – cằm) là {loi_mat}° (thường 8–16°; lớn hơn = cằm lùi vào).",
+   "tai_nghieng": "Nhìn nghiêng: đỉnh tai {dinh_tai} so với đầu mày; dái tai {dai_tai} so với chân mũi (sách xưa: tai cao ngang mày, dái tai tới chân mũi là tai tốt).",
+   "canh_bao_hai_nghieng": "Hai ảnh nghiêng cho kết quả khác nhau ở: {cau} — chưa gợi ý những nét này; chấm lại cho khớp hoặc chỉ dùng một ảnh."
   },
-  "_ghi_chu_nguong": "ANH-3 (2026-11-06): 'mép trán ngang đuôi mày' đo theo viền mặt ≈ 0,95–1,0 bề ngang gò má, hàm ≈ 0,75–0,80 (số đo nhân trắc phổ biến) → hiệu trán − hàm trung bình ~0,19; 'trên rộng dưới nhọn' cần ≥ 0,26 (trước 0,18 bắt nhầm mặt trung bình). Mọi ngưỡng vẫn chờ chuyên gia duyệt."
+  "_ghi_chu_nguong": "ANH-3 (2026-11-06): 'mép trán ngang đuôi mày' đo theo viền mặt ≈ 0,95–1,0 bề ngang gò má, hàm ≈ 0,75–0,80 (số đo nhân trắc phổ biến) → hiệu trán − hàm trung bình ~0,19; 'trên rộng dưới nhọn' cần ≥ 0,26 (trước 0,18 bắt nhầm mặt trung bình). Mọi ngưỡng vẫn chờ chuyên gia duyệt.",
+  "diem_nghieng": [
+   {
+    "ma": "chan_toc",
+    "ten": "Chân tóc",
+    "nhom": "nghieng_tren",
+    "mo": "Chỗ tóc bắt đầu mọc trên đường viền trán.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "giua_tran",
+    "ten": "Giữa trán",
+    "nhom": "nghieng_tren",
+    "mo": "Điểm trên đường viền trán, khoảng giữa chân tóc và đầu mày.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "an_duong",
+    "ten": "Chỗ nhô giữa hai mày",
+    "nhom": "nghieng_tren",
+    "mo": "Điểm nhô ra nhất trên đường viền, ngang đầu lông mày.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "son_can",
+    "ten": "Gốc mũi (Sơn Căn)",
+    "nhom": "nghieng_tren",
+    "mo": "Chỗ lõm sâu nhất giữa trán và sống mũi, ngang mắt.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "song_mui",
+    "ten": "Giữa sống mũi",
+    "nhom": "nghieng_duoi",
+    "mo": "Điểm cao nhất ở khoảng giữa sống mũi (chỗ gồ nếu có).",
+    "bat_buoc": true
+   },
+   {
+    "ma": "dau_mui",
+    "ten": "Đầu mũi",
+    "nhom": "nghieng_duoi",
+    "mo": "Điểm nhô ra xa nhất của mũi.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "chan_mui",
+    "ten": "Chân mũi",
+    "nhom": "nghieng_duoi",
+    "mo": "Chỗ dưới mũi gặp môi trên.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "cam_truoc",
+    "ten": "Điểm nhô của cằm",
+    "nhom": "nghieng_duoi",
+    "mo": "Điểm nhô ra trước nhất của cằm.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "cam",
+    "ten": "Đáy cằm",
+    "nhom": "nghieng_duoi",
+    "mo": "Điểm thấp nhất của cằm.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "dinh_tai",
+    "ten": "Đỉnh tai",
+    "nhom": "tai",
+    "mo": "Điểm cao nhất của vành tai.",
+    "bat_buoc": false
+   },
+   {
+    "ma": "dai_tai",
+    "ten": "Đáy dái tai",
+    "nhom": "tai",
+    "mo": "Điểm thấp nhất của dái tai.",
+    "bat_buoc": false
+   }
+  ],
+  "nguong_nghieng": {
+   "_ghi_chu": "ANH-4 (2026-11-06): ngưỡng trên đường viền ảnh nghiêng, theo số đo nhân trắc phổ biến (góc trán–mũi thường 115–135°, góc lồi mặt Ấn Đường–chân mũi–cằm thường 8–16°, đầu mũi nhô ~0,3 chiều dài mũi). Chờ chuyên gia duyệt.",
+   "tran_go": 0.1,
+   "tran_det": 0.02,
+   "son_can_cao": 142,
+   "son_can_thap": 115,
+   "mui_gu": 0.05,
+   "mui_thap": 0.24,
+   "mui_cao": 0.4,
+   "mui_thang": 0.03,
+   "cam_lem": 20,
+   "tai_lech_cao": 0.03,
+   "mat_duoi_son_can": 0.03
+  }
  }
 }
