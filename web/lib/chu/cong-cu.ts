@@ -158,6 +158,23 @@ export const CHU_HAN_NAM = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Phong thuỷ theo năm", toi_da: 60 },
 });
 // NAM-2 — "Thời gian tới của bạn".
+// CD-1: chữ khối "Mời lập lá số" của /chan-dung (cần giờ + giới tính + nơi sinh như Tử vi / Bát tự).
+const MOI_CHAN_DUNG: MoiLap = {
+  chip: ["Ba cách nhìn, một con người", "Không cộng điểm, không xếp hạng", "Chương đầu đọc ngay"],
+  nhan_tren: "Khoảng một phút",
+  tieu_de: "Lập lá số để thấy *ba cách nhìn* có cùng thấy một điều về bạn",
+  tieu_de_thieu: "Còn {so} thông tin nữa là ghép được ba cách nhìn: {thieu}",
+  cau_phu: "Tử vi và Bát tự cần giờ sinh, giới tính, nơi sinh. Khảo sát gương mặt (trang Nhân tướng học) là cách nhìn thứ ba — có hay chưa đều đọc được.",
+  nut: "Xem chân dung tổng hợp",
+  tran_an: "Không nhớ giờ sinh? Chọn “Không biết giờ” ở ô “Giờ sinh này”; trang ghi rõ phần nào đọc theo giờ tạm.",
+  nhan_tieu_de: "Bạn nhận được",
+  ghi_chu_nhan: "Ma trận và các mảng ba cách cùng thấy miễn phí; các chương sau có thể cần Sao.",
+  nhan: ["Ma trận *mảng đời × cách nhìn*: việc, tiền, tình cảm, gia đình, sức khoẻ, năm nay", "Mảng nào ba cách *cùng thấy*, mảng nào nhìn khác nhau và vì sao", "Hộp nguyên gốc của từng môn để bạn tự chấm đúng hay chưa", "Hành lá số cần so với dáng mặt, và việc nên làm gom từ ba cách"],
+  minh_hoa: "Minh hoạ. Ma trận thật hiện ngay sau khi bạn nhập.",
+  chua_san_sang: "Chưa muốn nhập? Xem từng môn trước ở trang Tử vi, Bát tự, Nhân tướng học.",
+};
+export const CHU_CHAN_DUNG = gopBang(mangHuyenHoc(false, "Tử vi · Bát tự · Nhân tướng"), moiLap(MOI_CHAN_DUNG), {});
+
 export const CHU_THOI_GIAN_TOI = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Thần số · Tử vi · Bát tự · tập quán", toi_da: 60 },
 });

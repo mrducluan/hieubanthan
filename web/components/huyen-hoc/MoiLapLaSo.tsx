@@ -13,7 +13,7 @@ import { ghi } from "@/lib/do-luong";
 import type { HoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
 
-type MoDun = "tuvi" | "battu";
+type MoDun = "tuvi" | "battu" | "chan_dung";
 
 /** Còn thiếu gì để lập lá số (hồ sơ thần số chỉ có tên + ngày sinh). */
 function conThieu(h: HoSo | null): string[] {
@@ -49,7 +49,7 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
 
   // Tên khối cố định (không trỏ vào h2): tiêu đề động "…còn thiếu: nơi sinh" sẽ trùng nhãn ô "Nơi sinh" của form.
   return (
-    <section aria-label={moDun === "tuvi" ? "Lập lá số Tử vi" : "Xem tứ trụ Bát tự"} data-testid="moi-lap-la-so"
+    <section aria-label={moDun === "tuvi" ? "Lập lá số Tử vi" : moDun === "battu" ? "Xem tứ trụ Bát tự" : "Xem chân dung tổng hợp"} data-testid="moi-lap-la-so"
       className="relative overflow-hidden rounded-3xl border border-gold/45 bg-gradient-to-br from-gold/[0.09] via-surface/70 to-bg/40 p-5 shadow-[0_0_60px_-24px_rgb(var(--gold)/0.55)] sm:p-8">
       <div className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-gold/10 blur-3xl" aria-hidden />
       <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,27rem)] lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-6">
@@ -84,7 +84,7 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
             </div>
           )}
           <figure className="hidden sm:block">
-            {moDun === "tuvi" ? <MinhHoaTuVi /> : <MinhHoaBatTu />}
+            {moDun === "tuvi" ? <MinhHoaTuVi /> : moDun === "battu" ? <MinhHoaBatTu /> : <MinhHoaBaCach />}
             <figcaption className="mt-1.5 text-xs text-fg-faint">{c("moi.minh_hoa")}</figcaption>
           </figure>
           <p className="flex items-start gap-1.5 text-xs text-fg-faint">
@@ -94,6 +94,25 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
         </div>
       </div>
     </section>
+  );
+}
+
+// CD-1: ma trận mảng × cách nhìn (3 cột, 4 dòng), ô "cùng thấy" sáng — hình tĩnh, không phải của ai.
+function MinhHoaBaCach() {
+  const cot = ["Tử vi", "Bát tự", "Nhân tướng"], dong = ["Công việc", "Tiền bạc", "Tình cảm", "Sức khoẻ"];
+  const o = [[1, 1, 1], [1, 2, 1], [2, 2, 2], [1, 3, 2]];   // 1 thuận · 2 cân bằng · 3 lưu ý (minh hoạ)
+  const mau = ["", "fill-jade/25 stroke-jade/70", "fill-gold/15 stroke-gold/60", "fill-fg-faint/15 stroke-fg-faint"];
+  return (
+    <svg viewBox="0 0 240 150" className="w-full max-w-sm" aria-hidden>
+      {cot.map((t, i) => <text key={t} x={92 + i * 48} y={14} textAnchor="middle" className="fill-fg-muted text-[8.5px]">{t}</text>)}
+      {dong.map((t, r) => (
+        <g key={t}>
+          <text x={4} y={38 + r * 30} className="fill-fg text-[9px]">{t}</text>
+          {o[r]!.map((v, i) => <rect key={i} x={72 + i * 48} y={24 + r * 30} width={40} height={20} rx={10} className={mau[v]} strokeWidth={0.8} />)}
+          {new Set(o[r]).size === 1 && <text x={230} y={38 + r * 30} textAnchor="end" className="fill-jade text-[8px]">cùng thấy</text>}
+        </g>
+      ))}
+    </svg>
   );
 }
 

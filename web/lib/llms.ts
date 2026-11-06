@@ -75,6 +75,7 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Tử vi năm ${nam} theo tuổi](${urlDayDu(`/nam/${nam}/tuoi-1990`)}): mỗi năm sinh 1960–2005 một trang (dạng ${urlDayDu(`/nam/${nam}/tuoi-{năm-sinh}`)}) — điều chung theo tuổi; phần riêng cần ngày giờ sinh ở ${urlDayDu("/thoi-gian-toi")}.`,
     `- [Sinh con năm ${nam}](${urlDayDu(`/nam/${nam}/sinh-con`)}) · [Cưới hỏi năm ${nam}](${urlDayDu(`/nam/${nam}/cuoi-hoi`)}) · [Tuổi xông đất Tết ${tet}](${urlDayDu(`/tuoi-xong-dat/${tet}`)}) · [Sao hạn ${nam}](${urlDayDu(`/xem-sao-han/${nam}`)}) · [Lịch âm ${nam}](${urlDayDu(`/lich-am/${nam}`)})`,
     `- [Thời gian tới của bạn](${urlDayDu("/thoi-gian-toi")}): 12 tháng tới theo ngày giờ sinh (thần số, Tử vi, Bát tự, con giáp, phong thuỷ) — cần nhập hồ sơ.`,
+    `- [Chân dung tổng hợp](${urlDayDu("/chan-dung")}): Tử vi, Bát tự và nhân tướng đặt cạnh nhau theo từng mảng đời (việc, tiền, tình cảm, gia đình, sức khoẻ, năm nay) — mảng nào ba cách cùng thấy; không điểm số; cần lá số.`,
     "",
     "## Trả lời nhanh theo câu hỏi hay gặp",
     "",

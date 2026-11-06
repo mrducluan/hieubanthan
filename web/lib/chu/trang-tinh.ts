@@ -98,6 +98,11 @@ export const CHU_HUYEN_HOC = {
   ])),
   "the.kien_thuc": { nhom: THE, nhan: "Nhãn dòng link kiến thức trong thẻ", mac_dinh: "Tra cứu", toi_da: 30 },
 
+  // CD-1: khối "Chân dung tổng hợp" (ba cách nhìn cùng một con người) giữa thẻ mảng và lịch & tuổi.
+  "chan_dung.nho": { nhom: "Chân dung tổng hợp", nhan: "Dòng nhỏ trên tiêu đề khối", mac_dinh: "Ghép ba môn, không cộng điểm", toi_da: 60 },
+  "chan_dung.lon": { nhom: "Chân dung tổng hợp", nhan: "Tiêu đề khối", mac_dinh: "Ba cách nhìn, một con người", toi_da: 80 },
+  "chan_dung.mo": { nhom: "Chân dung tổng hợp", nhan: "Lời dẫn", mac_dinh: "Tử vi nhìn hoàn cảnh quanh bạn, Bát tự nhìn sức của chính bạn, nhân tướng nhìn điều bạn đang thấy ở mình. Đặt ba cách cạnh nhau theo từng mảng đời: mảng nào cả ba cùng thấy, mảng nào nhìn khác nhau và vì sao.", toi_da: 300 },
+  "chan_dung.nut": { nhom: "Chân dung tổng hợp", nhan: "Chữ nút", mac_dinh: "Xem chân dung tổng hợp", toi_da: 40 },
   "lich.nho": { nhom: "Lịch & tuổi", nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Theo lịch và tuổi dân gian", toi_da: 60 },
   "lich.lon": { nhom: "Lịch & tuổi", nhan: "Tiêu đề mục", mac_dinh: "Chọn ngày, xem tuổi, tra lịch", toi_da: 80 },
   ...Object.fromEntries(LICH.flatMap(([ten, mo], i) => [

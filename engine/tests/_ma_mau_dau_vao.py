@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 from app.hoidap import kinhdich as kd
-from app.luangiai import ban_do_con_so, nhan_tuong, phongthuy_doi_song, thoi_gian_toi, toan_bo
+from app.luangiai import ban_do_con_so, chan_dung_tong_hop, nhan_tuong, phongthuy_doi_song, thoi_gian_toi, toan_bo
 
 GOLDEN = Path(__file__).resolve().parents[1] / "fixtures" / "golden"
 XEM = dt.date(2026, 11, 2)
@@ -32,7 +32,7 @@ def _ma(x, ra: set[str]) -> set[str]:
 
 
 def chup() -> dict[str, list[str]]:
-    ra: dict[str, set[str]] = {k: set() for k in ("tuvi", "battu", "thanso", "phongthuy", "kinhdich", "thoi_gian", "nhantuong")}
+    ra: dict[str, set[str]] = {k: set() for k in ("tuvi", "battu", "thanso", "phongthuy", "kinhdich", "thoi_gian", "nhantuong", "chan_dung")}
     la60 = json.loads((GOLDEN / "lasotuvi_60.json").read_text(encoding="utf-8"))
     la60 = la60.get("cases", la60) if isinstance(la60, dict) else la60
     for i, ca in enumerate(la60[:12]):
@@ -67,4 +67,10 @@ def chup() -> dict[str, list[str]]:
     for tl, ns, gt in ((TL_DAY, 1988, "nam"), (nua, 1975, "nu"), ({}, None, None), (nghich, 2001, "nu")):
         _ma(nhan_tuong.bao_cao(tl, nam_sinh=ns, gioi_tinh=gt, ngay_xem=XEM,
                                battu={"cach_1": {"hanh": ["Hỏa", "Thổ"]}, "cach_2": {"hanh": ["Kim"]}} if ns else None), ra["nhantuong"])
+    # CD-1: Chân dung tổng hợp — ba lá + bộ trả lời Nhân tướng đủ / trống (hộp mượn giữ mã gốc, chỉ mã ds.chan_dung.* là mới).
+    for (ngay, ti, gt, gio), tl in (((dt.date(1988, 10, 24), 4, "nam", 8), TL_DAY), ((dt.date(1975, 3, 9), 11, "nu", 22), nua),
+                                     ((dt.date(2001, 12, 31), 0, "nam", 0), {})):
+        tv = {"ngay": ngay, "ti": ti, "gioi_tinh": gt}
+        bt = {"lich": dt.datetime.combine(ngay, dt.time(gio, 30)), "gioi_tinh": gt, "gio_ty": "da_ty"}
+        _ma(chan_dung_tong_hop.lap(tv, bt, tl, XEM), ra["chan_dung"])
     return {k: sorted(v) for k, v in ra.items()}

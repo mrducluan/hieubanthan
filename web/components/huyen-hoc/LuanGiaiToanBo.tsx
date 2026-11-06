@@ -6,7 +6,7 @@
 // Báo cáo `phien_ban: "doi_song_1"` (Tử vi LG-ĐS + Bát tự BT-ĐS, docs/LUAN-GIAI-DOI-SONG.md) hiện bằng
 // components/luan-giai/BaoCaoDoiSong; báo cáo khác (Bản đồ con số thần số) giữ cách hiện cũ bên dưới.
 import Link from "@/components/khung/Lien";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { BookOpenText, Clock, Gift, LockKeyhole, Printer, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BaoLoi } from "@/components/khung/BaoLoi";
@@ -47,7 +47,8 @@ const DA_MO_BANG_SAO = new Set(["da_tru_sao", "da_mo_hom_nay"]);
 
 /** `than`: thân lời gọi khác `{ la_so }` (vd bản đồ con số gửi họ tên + ngày sinh); `moDun` cho đo lường; `tuMo`: tự tải
  *  bản xem trước (chương miễn phí + lời mời) ngay khi hiện, không chờ bấm. */
-export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false }: { duongDan: string; laSo: unknown; ten: string; than?: unknown; moDun?: string; tuMo?: boolean }) {
+export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false, dau }: { duongDan: string; laSo: unknown; ten: string; than?: unknown; moDun?: string; tuMo?: boolean;
+  /** CD-1: khối vẽ TRÊN báo cáo từ chính dữ liệu báo cáo (vd ma trận mảng × cách nhìn). */ dau?: (bc: BaoCao) => ReactNode }) {
   const [bc, setBc] = useState<BaoCao | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
@@ -155,8 +156,9 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
     const coAi = bc.chuong.some((c) => !c.khoa && c.van_ai);
     // KC-1: một khuôn cho mọi mảng — Tử vi, Bát tự, Bản đồ con số cùng component; chỉ Tử vi lưu bài (LG-ĐS).
     const tenLuu = { tuvi: "Luận giải Tử vi", battu: "Luận giải Bát tự", thanso: "Bản đồ con số" }[bc.mo_dun] ?? "Luận giải";
-    return (
-      <BaoCaoDoiSongView bc={bc} ten={ten} goc={goc} nhan={bc.mo_dun === "thanso" ? "Bản đồ con số" : "Luận giải toàn bộ"} chuongQua={chuongQua}
+    return (<>
+      {dau?.(bc)}
+      <BaoCaoDoiSongView bc={bc} ten={ten} goc={goc} nhan={bc.mo_dun === "thanso" ? "Bản đồ con số" : bc.mo_dun === "chan_dung" ? "Chân dung tổng hợp" : "Luận giải toàn bộ"} chuongQua={chuongQua}
         hanhDong={<>
           {coAi && (
             <Button variant="ghost" size="sm" aria-pressed={goc} onClick={() => setGoc((v) => !v)}>
@@ -174,7 +176,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false 
           </div>
         ) : tang}
       />
-    );
+    </>);
   }
   return (
     <article className="glass rounded-2xl p-5 sm:p-8 print:bg-white print:text-black" data-testid="luan-giai-toan-bo">
