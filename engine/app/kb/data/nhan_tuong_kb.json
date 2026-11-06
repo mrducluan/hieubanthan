@@ -5660,5 +5660,213 @@
   "hãy nhớ rằng",
   "điều quan trọng là",
   "phiên bản tốt nhất"
- ]
+ ],
+ "do_anh": {
+  "_ghi_chu": "ANH-2 (2026-11-06) — đo gương mặt trên ảnh KHÔNG dùng AI: người dùng tự chấm điểm mốc trên ảnh của chính mình (ảnh không rời máy), web chỉ gửi toạ độ chuẩn hoá 0..1 + tỉ lệ rộng/cao của ảnh; CALC calc/nhan_tuong_do.py xoay theo đường hai đuôi mắt rồi tính tỉ lệ theo phép 'tam đình ngũ nhãn' (三庭五眼: mặt chia ba phần bằng nhau theo chiều dọc, chiều ngang rộng bằng năm lần chiều dài mắt). Ngưỡng là ngưỡng biên tập (can_doi_chieu), mọi kết quả chỉ là GỢI Ý — người dùng xác nhận mới vào khảo sát. Không đo sắc da, nếp, độ dày thịt, ánh mắt: ảnh không đủ tin.",
+  "nguon": "than_tuong_toan_bien",
+  "nhom": {
+   "vien": "Đường viền mặt",
+   "mat_may": "Mắt và mày",
+   "mui_mieng": "Mũi và miệng",
+   "tai": "Tai (không bắt buộc)"
+  },
+  "diem": [
+   {
+    "ma": "chan_toc",
+    "ten": "Chân tóc giữa trán",
+    "nhom": "vien",
+    "mo": "Chỗ tóc bắt đầu mọc, ngay giữa trán. Tóc mái che thì ước chỗ chân tóc.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "thai_trai",
+    "ten": "Mép trán bên trái ảnh",
+    "nhom": "vien",
+    "mo": "Mép ngoài của trán, ngang đuôi lông mày.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "thai_phai",
+    "ten": "Mép trán bên phải ảnh",
+    "nhom": "vien",
+    "mo": "Mép ngoài của trán, ngang đuôi lông mày.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "ma_trai",
+    "ten": "Gò má rộng nhất, bên trái ảnh",
+    "nhom": "vien",
+    "mo": "Chỗ mặt rộng nhất ngang gò má.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "ma_phai",
+    "ten": "Gò má rộng nhất, bên phải ảnh",
+    "nhom": "vien",
+    "mo": "Chỗ mặt rộng nhất ngang gò má.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "ham_trai",
+    "ten": "Góc quai hàm bên trái ảnh",
+    "nhom": "vien",
+    "mo": "Chỗ đường hàm gập từ dọc sang ngang, dưới dái tai.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "ham_phai",
+    "ten": "Góc quai hàm bên phải ảnh",
+    "nhom": "vien",
+    "mo": "Chỗ đường hàm gập từ dọc sang ngang, dưới dái tai.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "cam",
+    "ten": "Điểm thấp nhất của cằm",
+    "nhom": "vien",
+    "mo": "Đáy cằm, ngay giữa.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "may_trai",
+    "ten": "Đầu lông mày bên trái ảnh",
+    "nhom": "mat_may",
+    "mo": "Đầu mày phía gần mũi.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "may_phai",
+    "ten": "Đầu lông mày bên phải ảnh",
+    "nhom": "mat_may",
+    "mo": "Đầu mày phía gần mũi.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "mat_ngoai_trai",
+    "ten": "Đuôi mắt bên trái ảnh",
+    "nhom": "mat_may",
+    "mo": "Góc ngoài của mắt, chỗ hai mí gặp nhau.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "mat_trong_trai",
+    "ten": "Khoé mắt trong bên trái ảnh",
+    "nhom": "mat_may",
+    "mo": "Góc trong của mắt, gần sống mũi.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "mat_trong_phai",
+    "ten": "Khoé mắt trong bên phải ảnh",
+    "nhom": "mat_may",
+    "mo": "Góc trong của mắt, gần sống mũi.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "mat_ngoai_phai",
+    "ten": "Đuôi mắt bên phải ảnh",
+    "nhom": "mat_may",
+    "mo": "Góc ngoài của mắt, chỗ hai mí gặp nhau.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "chan_mui",
+    "ten": "Chân mũi",
+    "nhom": "mui_mieng",
+    "mo": "Chỗ mũi gặp môi trên, ngay giữa.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "canh_mui_trai",
+    "ten": "Mép cánh mũi bên trái ảnh",
+    "nhom": "mui_mieng",
+    "mo": "Mép ngoài cùng của cánh mũi.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "canh_mui_phai",
+    "ten": "Mép cánh mũi bên phải ảnh",
+    "nhom": "mui_mieng",
+    "mo": "Mép ngoài cùng của cánh mũi.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "mep_trai",
+    "ten": "Khoé miệng bên trái ảnh",
+    "nhom": "mui_mieng",
+    "mo": "Góc miệng khi môi khép tự nhiên.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "giua_moi",
+    "ten": "Giữa hai môi",
+    "nhom": "mui_mieng",
+    "mo": "Điểm giữa đường hai môi khép lại.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "mep_phai",
+    "ten": "Khoé miệng bên phải ảnh",
+    "nhom": "mui_mieng",
+    "mo": "Góc miệng khi môi khép tự nhiên.",
+    "bat_buoc": true
+   },
+   {
+    "ma": "dinh_tai",
+    "ten": "Đỉnh tai (một bên)",
+    "nhom": "tai",
+    "mo": "Điểm cao nhất của vành tai thấy được.",
+    "bat_buoc": false
+   },
+   {
+    "ma": "dai_tai",
+    "ten": "Đáy dái tai (cùng bên)",
+    "nhom": "tai",
+    "mo": "Điểm thấp nhất của dái tai, cùng bên với đỉnh tai.",
+    "bat_buoc": false
+   }
+  ],
+  "nguong": {
+   "dai_cao_rong": 1.5,
+   "tron_cao_rong": 1.3,
+   "vuong_ham_ma": 0.88,
+   "tren_rong_duoi_nhon": 0.18,
+   "tren_hep_duoi_rong": 0.08,
+   "may_giao": 0.55,
+   "may_hep": 0.8,
+   "may_rong": 1.25,
+   "mat_xech": 0.16,
+   "mat_cup": -0.03,
+   "mat_nho": 0.185,
+   "mui_xoe": 1.3,
+   "khoe_len": 0.04,
+   "khoe_cup": -0.04,
+   "mieng_nho": 1.25,
+   "mieng_lech": 0.08,
+   "nhan_trung_ngan": 0.26,
+   "ham_banh": 0.95,
+   "ham_hep": 0.72,
+   "mui_lech": 0.18,
+   "quay_toi_da": 0.04,
+   "quay_canh_bao": 0.06,
+   "tai_lech_cao": 0.03
+  },
+  "loi": {
+   "khuon_mat": "Mặt cao bằng {cao_rong} lần bề ngang gò má; trán rộng bằng {tran_ma}, quai hàm bằng {ham_ma} bề ngang gò má.",
+   "tam_dinh": "Ba phần trán – giữa – cằm chiếm {thuong}% – {trung}% – {ha}% chiều dài mặt (chuẩn sách: mỗi phần khoảng một phần ba).",
+   "long_may": "Khoảng giữa hai đầu mày bằng {may_khoe} lần khoảng giữa hai khoé mắt trong (sách xưa: Ấn Đường rộng khoảng hai ngón tay).",
+   "an_duong": "Khoảng giữa hai đầu mày bằng {may_khoe} lần khoảng giữa hai khoé mắt trong. Độ sáng, nếp nhăn vùng này bạn tự xem thêm.",
+   "mat_hinh_nghieng": "Đuôi mắt cao hơn khoé trong {nghieng_mat} lần chiều dài mắt (dương = chếch lên, âm = cụp xuống).",
+   "mat_hinh_nho": "Mắt dài bằng {mat_mat} bề ngang gò má (chuẩn 'ngũ nhãn': khoảng 0,2 — mặt ngang bằng năm mắt).",
+   "canh_mui": "Cánh mũi rộng bằng {mui_khoe} lần khoảng giữa hai khoé mắt trong (chuẩn: gần bằng nhau). Độ dày cánh mũi bạn tự xem thêm.",
+   "mieng": "Miệng rộng bằng {mieng_mui} lần cánh mũi; khoé miệng cao hơn giữa môi {khoe_mieng} lần bề rộng miệng.",
+   "mieng_lech": "Hai khoé miệng chênh nhau {lech_mieng} lần bề rộng miệng (đã chỉnh theo độ nghiêng của đầu).",
+   "nhan_trung": "Từ chân mũi tới giữa môi bằng {nhan_trung} phần ba dưới của mặt (thường khoảng một phần ba).",
+   "ham": "Quai hàm rộng bằng {ham_ma} bề ngang gò má.",
+   "song_mui": "Chân mũi lệch khỏi đường giữa hai khoé mắt {lech_mui} lần khoảng giữa hai mắt.",
+   "tai": "Đỉnh tai {dinh_tai} so với đầu mày; dái tai {dai_tai} so với chân mũi (sách xưa: tai cao ngang mày, dái tai tới chân mũi là tai tốt).",
+   "canh_bao_quay": "Mặt trong ảnh hơi quay sang một bên — phần đo hai bên trái phải (lệch mũi, lệch miệng) đã bỏ qua; nên dùng ảnh nhìn thẳng.",
+   "canh_bao_nghieng": "Đầu trong ảnh hơi nghiêng ({goc}°) — hệ thống đã xoay lại theo đường hai đuôi mắt trước khi đo."
+  }
+ }
 }

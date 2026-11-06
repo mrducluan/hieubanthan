@@ -13,7 +13,12 @@
 - [ ] Menu Huyền học đã đủ 12 mục con — muốn `/chan-dung` vào menu thì chọn một mục nhường chỗ (CMS → Menu đầu trang); hiện vào từ hub `/huyen-hoc`, `/ban-than`, sổ trang, sitemap.
 - [ ] Search Console → Kiểm tra URL `https://hieuban.com/chan-dung` → Yêu cầu lập chỉ mục.
 
-**Bật "Tải ảnh chân dung" (ANH-1, `docs/ANH-CHAN-DUNG.md`) — chỉ sau khi anh quyết pháp lý ở mục 4z:** khối tải ảnh đã nằm sẵn đầu trang
+**"Tải ảnh chân dung — hệ thống tự đo" (ANH-2) chạy ngay sau khi deploy, không cần biến môi trường, không AI:** ảnh không rời
+máy, người dùng chấm 20 điểm, engine đo theo "tam đình ngũ nhãn". Việc của anh: (10 phút) mở `/nhan-tuong` trên điện thoại,
+chọn một ảnh chụp thẳng của chính anh, chấm thử 20 điểm, xem gợi ý có hợp không; ngưỡng ở `engine/app/kb/data/nhan_tuong_kb.json`
+mục `do_anh.nguong` (biên tập, cần người rành tướng pháp duyệt dần).
+
+**Bật thêm "Cho máy AI xem" (ANH-1, tuỳ chọn) — anh đã có ý kiến luật sư, làm khi muốn gợi ý thêm sắc da, nếp, ánh mắt:** khối tải ảnh đã nằm sẵn đầu trang
 `/nhan-tuong` ở trạng thái "đang chờ bật"; thoả thuận riêng (bản `am1`) hỏi người dùng ngay chỗ tải ảnh, máy chủ từ chối lượt thiếu đồng ý.
 - [ ] Hỏi luật sư 3 điểm: hợp đồng xử lý dữ liệu với nhà cung cấp AI thị giác (qua OpenRouter → máy chủ ngoài VN), hồ sơ đánh giá tác động
   thêm mục sinh trắc (`docs/ho-so-dlcn/`), thông báo chuyển dữ liệu ra nước ngoài. Xong thì làm các bước dưới.
