@@ -197,3 +197,41 @@ export function veAnhTomTat({ tieuDe, y, mang, duong }: { tieuDe: string; y: str
     chanTrang(duong),
   ]));
 }
+
+/** Ảnh "Lộ trình bài viết": các phần chính (tiêu đề H2) thành lưới thẻ đánh số nối nhau. Tối đa 6 phần. PNG 1600×900. */
+export function veAnhLoTrinh({ tieuDe, muc, mang, duong }: { tieuDe: string; muc: string[]; mang: MangAnh; duong?: string | null }): Promise<Buffer> {
+  const ds = muc.slice(0, 6).map((s) => catChu(s, 46));
+  return veAnh(khung([
+    h("div", { key: "chinh", style: { display: "flex", flexDirection: "column", flex: 1 } },
+      h("div", { style: { display: "flex", fontSize: 26, letterSpacing: 6, color: MAU_SANG.vang, textTransform: "uppercase" } },
+        `Lộ trình bài viết · ${TEN_MANG[mang]}`),
+      h("div", { style: { display: "flex", fontFamily: "Serif", fontSize: 46, lineHeight: 1.15, marginTop: 14 } }, catChu(tieuDe, 90)),
+      h("div", { style: { display: "flex", flexWrap: "wrap", marginTop: 30, width: 1440 } },
+        ...ds.map((s, i) => h("div", { key: `m${i}`, style: { display: "flex", alignItems: "center", width: 690, height: 112, marginRight: 20, marginBottom: 20,
+          padding: "0 26px", borderRadius: 22, background: "#fffdf6", border: `2px solid ${MAU_SANG.khung}` } },
+        h("div", { style: { display: "flex", width: 54, height: 54, borderRadius: 27, background: i % 2 ? MAU_SANG.tim : MAU_SANG.vang,
+          color: MAU_SANG.nen1, fontSize: 28, alignItems: "center", justifyContent: "center", marginRight: 22, flexShrink: 0 } }, String(i + 1)),
+        h("div", { style: { display: "flex", flex: 1, fontSize: 31, lineHeight: 1.25, color: MAU_SANG.muc } }, s)))),
+    ),
+    chanTrang(duong),
+  ]));
+}
+
+/** Ảnh "Câu hỏi thường gặp": tối đa 3 câu hỏi của bài trong thẻ có dấu "?" (câu trả lời nằm ở bài). PNG 1600×900. */
+export function veAnhCauHoi({ tieuDe, hoi, mang, duong }: { tieuDe: string; hoi: string[]; mang: MangAnh; duong?: string | null }): Promise<Buffer> {
+  const ds = hoi.slice(0, 3).map((s) => catChu(s, 96));
+  return veAnh(khung([
+    h("div", { key: "chinh", style: { display: "flex", flexDirection: "column", flex: 1 } },
+      h("div", { style: { display: "flex", fontSize: 26, letterSpacing: 6, color: MAU_SANG.vang, textTransform: "uppercase" } },
+        `Câu hỏi thường gặp · ${TEN_MANG[mang]}`),
+      h("div", { style: { display: "flex", fontFamily: "Serif", fontSize: 46, lineHeight: 1.15, marginTop: 14 } }, catChu(tieuDe, 90)),
+      h("div", { style: { display: "flex", flexDirection: "column", marginTop: 34, width: 1400 } },
+        ...ds.map((s, i) => h("div", { key: `q${i}`, style: { display: "flex", alignItems: "center", marginBottom: 22, padding: "20px 28px",
+          borderRadius: 22, background: "#fffdf6", border: `2px solid ${MAU_SANG.khung}` } },
+        h("div", { style: { display: "flex", width: 60, height: 60, borderRadius: 30, background: MAU_SANG.tim, color: MAU_SANG.nen1,
+          fontSize: 36, alignItems: "center", justifyContent: "center", marginRight: 26, flexShrink: 0 } }, "?"),
+        h("div", { style: { display: "flex", flex: 1, fontSize: 34, lineHeight: 1.3, color: MAU_SANG.muc } }, s)))),
+    ),
+    chanTrang(duong),
+  ]));
+}
