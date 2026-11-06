@@ -18,6 +18,7 @@ export const TRU_LOI_DI_TIEP = [
   { label: "Bát tự (/bat-tu)", value: "/bat-tu" },
   { label: "Kinh Dịch (/kinh-dich)", value: "/kinh-dich" },
   { label: "Phong thuỷ (/phong-thuy)", value: "/phong-thuy" },
+  { label: "Nhân tướng học (/nhan-tuong)", value: "/nhan-tuong" },
   { label: "Chung — mọi trang (thư viện, Hôm nay…)", value: "chung" },
 ];
 export const NHAN_THE = [
@@ -26,7 +27,7 @@ export const NHAN_THE = [
 export const HINH_THE = [
   { label: "Thần số (vòng số)", value: "than-so" }, { label: "Tử vi (12 cung)", value: "tu-vi" },
   { label: "Bát tự (tứ trụ)", value: "bat-tu" }, { label: "Kinh Dịch (quẻ)", value: "kinh-dich" },
-  { label: "Phong thuỷ (bát quái)", value: "phong-thuy" },
+  { label: "Phong thuỷ (bát quái)", value: "phong-thuy" }, { label: "Nhân tướng (gương mặt)", value: "nhan-tuong" },
 ];
 
 /** Một thẻ lối đi tiếp — dùng chung cho global này và ô "Lối đi tiếp" của từng URL (Trang website). */

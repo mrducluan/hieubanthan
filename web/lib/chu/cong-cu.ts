@@ -83,6 +83,19 @@ export const CHU_TU_VI = gopBang(mangHuyenHoc(true, "Tử vi 12 cung · Âm lị
 export const CHU_BAT_TU = gopBang(mangHuyenHoc(true, "Bát tự tứ trụ · Ngũ hành"), moiLap(MOI_BAT_TU));
 export const CHU_PHONG_THUY = mangHuyenHoc(true, "Hướng nhà · bố trí · Bát trạch");
 export const CHU_KINH_DICH = mangHuyenHoc(false, "Gieo quẻ · 64 quẻ · lời hào");
+export const CHU_NHAN_TUONG = gopBang(mangHuyenHoc(true, "Tự soi gương · Tam đình · Ngũ quan"), {
+  "dau.chip_1": { nhom: DAU, nhan: "Chip lợi ích 1", mac_dinh: "Không cần gửi ảnh", toi_da: 40 },
+  "dau.chip_2": { nhom: DAU, nhan: "Chip lợi ích 2", mac_dinh: "31 câu, khoảng 5 phút", toi_da: 40 },
+  "dau.chip_3": { nhom: DAU, nhan: "Chip lợi ích 3", mac_dinh: "Bạn tự chấm đúng hay chưa", toi_da: 40 },
+  "khao_sat.nho": { nhom: "Khảo sát", nhan: "Mục khảo sát — dòng nhỏ", mac_dinh: "Soi gương sáu bước", toi_da: 60 },
+  "khao_sat.lon": { nhom: "Khảo sát", nhan: "Mục khảo sát — tiêu đề", mac_dinh: "Bạn thấy gì trong gương?", toi_da: 120 },
+  "ban_do.nho": { nhom: "Bản đồ mặt", nhan: "Mục bản đồ — dòng nhỏ", mac_dinh: "Bản đồ gương mặt", toi_da: 60 },
+  "ban_do.lon": { nhom: "Bản đồ mặt", nhan: "Mục bản đồ — tiêu đề", mac_dinh: "Mỗi vùng mặt nói về một mảng đời", toi_da: 120 },
+  "bai_doc.nho": { nhom: "Bài đọc", nhan: "Mục bài đọc — dòng nhỏ", mac_dinh: "Bài đọc tám chương", toi_da: 60 },
+  "bai_doc.lon": { nhom: "Bài đọc", nhan: "Mục bài đọc — tiêu đề", mac_dinh: "Gương mặt của bạn", toi_da: 120 },
+  "hoi.nho": { nhom: "Hỏi đáp", nhan: "Mục hỏi — dòng nhỏ", mac_dinh: "Hỏi đáp chuyên sâu", toi_da: 60 },
+  "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề", mac_dinh: "Hỏi về một vùng trên mặt bạn", toi_da: 120 },
+});
 
 export const CHU_THAN_SO = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề (chưa có hồ sơ)", mac_dinh: "Thần số học", toi_da: 60 },

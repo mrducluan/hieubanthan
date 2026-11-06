@@ -50,6 +50,7 @@ from app.tuvi_api import router as tuvi_router
 from app.tuvi_v2_api import router as tuvi_v2_router
 from app.nhung_api import router as nhung_router
 from app.goi_y_cheo_api import router as goi_y_cheo_router
+from app.nhan_tuong_api import router as nhan_tuong_router  # NT-1
 
 giam_sat.khoi_tao()   # Sentry — chỉ bật khi có SENTRY_DSN, không gửi dữ liệu cá nhân
 
@@ -64,7 +65,7 @@ if os.environ.get("RENDER") and not os.environ.get("ENGINE_API_KEY"):
 
 # SEC-2: trần kích thước thân yêu cầu (uvicorn đọc hết thân trước khi pydantic kiểm). Ảnh nhà ≤ 4 MB; kiểm định quản
 # trị ≤ 200 mục × 2 × 20 KB; còn lại (phiếu kiểm chứng ≤ 5000 dòng…) dưới 2 MB.
-_TRAN_THAN = {"/v1/phongthuy/doc-anh": 6_000_000, "/v1/quan-tri/kiem-dinh": 9_000_000}
+_TRAN_THAN = {"/v1/phongthuy/doc-anh": 6_000_000, "/v1/nhan-tuong/doc-anh": 2_500_000, "/v1/quan-tri/kiem-dinh": 9_000_000}
 _TRAN_THAN_MAC_DINH = 2_000_000
 
 @contextlib.asynccontextmanager
@@ -166,6 +167,7 @@ app.include_router(quan_tri_router)
 app.include_router(nhung_router)
 app.include_router(goi_y_cheo_router)
 app.include_router(thoi_gian_toi_router)
+app.include_router(nhan_tuong_router)
 
 
 # --------------------------------------------------------------------------- #

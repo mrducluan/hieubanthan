@@ -54,6 +54,12 @@ export const THANH_MANG: readonly ThanhMang[] = [
     { ma: "so_kep", duong: cum("so-kep"), nhan: "Số kép", dem: "so-kep" },
     { ma: "no_nghiep", duong: cum("no-nghiep"), nhan: "Nợ nghiệp", dem: "no-nghiep" },
   ] },
+  // NT-1: Nhân tướng học — công cụ tự quan sát + cụm bộ vị gương mặt.
+  { tru: "/nhan-tuong", ma: "nhantuong", ten: "Nhân tướng", muc: [
+    { ma: "cong_cu", duong: "/nhan-tuong", nhan: "Gương mặt của tôi" },
+    { ma: "bo_vi", duong: cum("bo-vi"), nhan: "Bộ vị gương mặt", dem: "bo-vi" },
+    { ma: "hoi", duong: "/nhan-tuong#hoi-dap", nhan: "Hỏi về một vùng" },
+  ] },
   // "Số trong tình yêu" nằm dưới /than-so (silo) nhưng thuộc ý định hợp đôi → thanh Hợp đôi trỏ cùng cụm.
   { tru: "/hop-doi", ma: "hopdoi", ten: "Hợp đôi", muc: [
     { ma: "cong_cu", duong: "/hop-doi", nhan: "Xem hợp đôi" },

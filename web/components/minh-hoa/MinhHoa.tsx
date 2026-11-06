@@ -3,6 +3,7 @@
 // ở mọi kích thước, không tải ảnh ngoài (hợp CSP), có <title> + aria-label cho trình đọc màn hình và máy tìm kiếm.
 import type { ReactNode } from "react";
 import { duongQr, maHoaQr, type MaQr } from "@/lib/qr";
+import { BanDoMat } from "@/components/nhan-tuong/BanDoMat";
 import { GOC_QR, TEN_MIEN } from "@/lib/the-chia-se";
 
 export type MinhHoaDuLieu =
@@ -16,7 +17,9 @@ export type MinhHoaDuLieu =
   | { kieu: "menh"; hanh: string; nap_am: string; han: string; can_chi: string }
   | { kieu: "thap_than"; ten: string; quan_he: "dong_hanh" | "ta_sinh" | "ta_khac" | "khac_ta" | "sinh_ta"; cung_am_duong: boolean }
   | { kieu: "nhat_chu"; can: string; hanh: string; duong: boolean }
-  | { kieu: "dau_hieu"; nhom: "ngoai_canh" | "hinh_nha" | "trong_nha"; phong: string[]; veto: boolean; tot: boolean; ten: string };
+  | { kieu: "dau_hieu"; nhom: "ngoai_canh" | "hinh_nha" | "trong_nha"; phong: string[]; veto: boolean; tot: boolean; ten: string }
+  // NT-1: bộ vị gương mặt — vùng sáng trên bản đồ mặt (components/nhan-tuong/BanDoMat, vẽ tĩnh)
+  | { kieu: "bo_vi"; vung: string; ten: string; cung: string | null };
 
 // Màu ngũ hành theo token giao diện (KB ghi cả "Hoả/Hỏa", "Thuỷ/Thủy").
 // Lớp Tailwind viết đủ (không ghép chuỗi) để trình biên dịch CSS thấy được.
@@ -307,6 +310,13 @@ function HinhDauHieu({ nhom, phong, veto, tot, ten }: { nhom: string; phong: str
 }
 
 /** `gon`: chỉ hình, không khung figure / dải QR — khi hình nằm trong một khung khác (khối hình của câu trả lời hỏi đáp). */
+function HinhBoVi({ vung, ten, cung }: { vung: string; ten: string; cung: string | null }) {
+  return (
+    <BanDoMat tinh sang={[vung]} nhan={{ [vung]: ten }} chuThich
+      ghiChu={<span>{ten}{cung ? ` — cung ${cung}` : ""} (vùng sáng trên gương mặt giản lược)</span>} className="mx-auto max-w-md" />
+  );
+}
+
 export function MinhHoa({ mh, duong, gon = false }: { mh?: MinhHoaDuLieu | null; duong?: string; gon?: boolean }) {
   if (!mh) return null;
   const hinh = (() => {
@@ -322,6 +332,7 @@ export function MinhHoa({ mh, duong, gon = false }: { mh?: MinhHoaDuLieu | null;
       case "thap_than": return <HinhThapThan {...mh} />;
       case "nhat_chu": return <HinhNhatChu {...mh} />;
       case "dau_hieu": return <HinhDauHieu {...mh} />;
+      case "bo_vi": return <HinhBoVi {...mh} />;
       default: return null;
     }
   })();

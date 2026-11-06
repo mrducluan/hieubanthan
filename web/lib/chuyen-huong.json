@@ -17,12 +17,22 @@
     "menh-tuoi": "/bat-tu/menh-theo-nam",
     "kinh-dich": "/kinh-dich/que",
     "dau-hieu": "/phong-thuy/dau-hieu",
-    "co-thu": "/tu-vi/co-thu"
+    "co-thu": "/tu-vi/co-thu",
+    "bo-vi": "/nhan-tuong/bo-vi"
   },
   "trang": [
-    ["/la-so-mau", "/tu-vi/la-so-mau"],
-    ["/huong-xau-nam", "/phong-thuy/huong-xau-nam"],
-    ["/kham-pha", "/huyen-hoc"]
+    [
+      "/la-so-mau",
+      "/tu-vi/la-so-mau"
+    ],
+    [
+      "/huong-xau-nam",
+      "/phong-thuy/huong-xau-nam"
+    ],
+    [
+      "/kham-pha",
+      "/huyen-hoc"
+    ]
   ],
   "tuoi_huong": "/phong-thuy/huong-hop-tuoi"
 }

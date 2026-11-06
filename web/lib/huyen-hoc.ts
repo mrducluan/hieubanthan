@@ -3,7 +3,7 @@
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 import type { MangAnh } from "@/lib/seo";
 
-export type KhoaMangHH = "than_so" | "tu_vi" | "bat_tu" | "phong_thuy" | "kinh_dich";
+export type KhoaMangHH = "than_so" | "tu_vi" | "bat_tu" | "phong_thuy" | "kinh_dich" | "nhan_tuong";
 export type MangHH = { khoa: KhoaMangHH; href: string; kieu: KieuMang; mang: MangAnh; han: string; lop: string };
 
 // Thứ tự = thứ tự đọc: thần số (cửa vào) → hai lá số → nhà → một việc. Lưới 6 cột: hai thẻ lớn rồi ba thẻ.
@@ -12,7 +12,9 @@ export const MANG_HH: MangHH[] = [
   { khoa: "tu_vi", href: "/tu-vi", kieu: "tu-vi", mang: "tu-vi", han: "紫微", lop: "lg:col-span-3" },
   { khoa: "bat_tu", href: "/bat-tu", kieu: "bat-tu", mang: "bat-tu", han: "八字", lop: "lg:col-span-2" },
   { khoa: "phong_thuy", href: "/phong-thuy", kieu: "phong-thuy", mang: "phong-thuy", han: "風水", lop: "lg:col-span-2" },
-  { khoa: "kinh_dich", href: "/kinh-dich", kieu: "kinh-dich", mang: "kinh-dich", han: "易經", lop: "md:col-span-2 lg:col-span-2" },
+  { khoa: "kinh_dich", href: "/kinh-dich", kieu: "kinh-dich", mang: "kinh-dich", han: "易經", lop: "lg:col-span-2" },
+  // NT-1 (2026-11-06): mảng thứ sáu — tự quan sát gương mặt; lưới 6 cột: 3+3 / 2+2+2 / 6 (thẻ cuối trải ngang).
+  { khoa: "nhan_tuong", href: "/nhan-tuong", kieu: "nhan-tuong", mang: "nhan-tuong", han: "相", lop: "md:col-span-2 lg:col-span-6" },
 ];
 
 /** Đích của 6 câu "Bạn đang băn khoăn điều gì?" (chữ: hoi.cau_n / hoi.den_n). */
@@ -31,4 +33,5 @@ export const SO_CACH_HH = 3;
 /** Lối tra cứu thêm cho mảng ít cụm kiến thức (chân thẻ không trơ một chip). Chỉ trang có thật trong site. */
 export const TRA_CUU_THEM: Partial<Record<KhoaMangHH, { duong: string; ten: string; khoa: null }[]>> = {
   kinh_dich: [{ duong: "/hom-nay", ten: "Quẻ đầu ngày", khoa: null }, { duong: "/tu-dien", ten: "Từ điển thuật ngữ", khoa: null }],
+  nhan_tuong: [{ duong: "/tu-dien", ten: "Từ điển thuật ngữ", khoa: null }],
 };

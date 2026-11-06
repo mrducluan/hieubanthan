@@ -81,7 +81,7 @@ export function HinhBauTroi({ className }: { className?: string }) {
   );
 }
 
-export type KieuMang = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thuy";
+export type KieuMang = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thuy" | "nhan-tuong";
 
 /** Hình nhỏ cho thẻ từng mảng (thay icon chung chung). */
 export function HinhMang({ kieu, className }: { kieu: KieuMang; className?: string }) {
@@ -100,6 +100,19 @@ export function HoaTietMang({ kieu }: { kieu: KieuMang }) {
     {kieu === "bat-tu" && <TruNho />}
     {kieu === "phong-thuy" && <BatQuaiNho />}
     {kieu === "than-so" && <SoNho />}
+    {kieu === "nhan-tuong" && <MatNho />}
+  </>;
+}
+
+function MatNho() {    // NT-1: gương mặt giản lược — khung mặt, ba vạch tam đình, mắt mũi miệng (không phải mặt ai)
+  return <>
+    <path d="M60,6 C40,6 28,24 28,42 C28,60 44,76 60,76 C76,76 92,60 92,42 C92,24 80,6 60,6 Z" className="fill-none stroke-gold/70" strokeWidth={1.4} />
+    <path d="M30,30 H90 M30,48 H90" className="stroke-jade/50" strokeWidth={1} strokeDasharray="2 3" />
+    <path d="M42,36 Q48,32 54,36 M66,36 Q72,32 78,36" className="fill-none stroke-gold" strokeWidth={1.6} strokeLinecap="round" />
+    <circle cx={48} cy={38.5} r={1.6} className="fill-gold" /><circle cx={72} cy={38.5} r={1.6} className="fill-gold" />
+    <path d="M60,40 L57,52 Q60,54 63,52 Z" className="fill-none stroke-gold/80" strokeWidth={1.2} strokeLinejoin="round" />
+    <path d="M51,62 Q60,67 69,62" className="fill-none stroke-cinnabar/80" strokeWidth={1.8} strokeLinecap="round" />
+    <path d="M28,40 Q22,42 26,50 M92,40 Q98,42 94,50" className="fill-none stroke-gold/50" strokeWidth={1.2} />
   </>;
 }
 

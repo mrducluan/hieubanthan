@@ -28,6 +28,7 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/than-so", "Thần số học"), mo_ta: "Bốn số cốt lõi, Bản đồ con số, năm cá nhân" },
     { ...lk("/hom-nay", "Hôm nay của bạn"), mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { ...lk("/xem-ngay-tot", "Xem ngày tốt"), mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
+    { ...lk("/nhan-tuong", "Nhân tướng học"), mo_ta: "Tự soi gương 31 câu, bài đọc 8 chương, không cần ảnh" },
   ] },
   { ...lk("/hop-doi", "Hợp đôi"), bieu_tuong: "trai_tim", di_dong: true, con: [
     { ...lk("/hop-doi", "Hợp đôi thần số"), mo_ta: "Hai con số chủ đạo, không chấm điểm" },

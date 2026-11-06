@@ -9,6 +9,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/than-so", ten: "Thần số học", mo_ta: "Bốn số cốt lõi, Bản đồ con số, năm cá nhân" },
     { href: "/hom-nay", ten: "Hôm nay của bạn", mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { href: "/xem-ngay-tot", ten: "Xem ngày tốt", mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
+    { href: "/nhan-tuong", ten: "Nhân tướng học", mo_ta: "Tự soi gương 31 câu, bài đọc 8 chương, không cần ảnh" },
   ] },
   { href: "/hop-doi", ten: "Hợp đôi", bieu_tuong: "trai_tim", di_dong: true, con: [
     { href: "/hop-doi", ten: "Hợp đôi thần số", mo_ta: "Hai con số chủ đạo, không chấm điểm" },

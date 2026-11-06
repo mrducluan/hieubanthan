@@ -28,7 +28,7 @@ CAP_NHAT = "2026-10-07"
 INDEX_NHAP_AI = True
 
 LOAI = ("so", "que", "sao", "cung", "thap_than", "nhat_chu", "cap_so", "nghe", "tinh_yeu", "nam_ca_nhan", "no_nghiep",
-        "sao_cung", "hoa_cung", "menh_nam", "so_kep", "dau_hieu", "co_thu")
+        "sao_cung", "hoa_cung", "menh_nam", "so_kep", "dau_hieu", "co_thu", "bo_vi")
 _SO = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33")
 _SO_GOC = {"11": "2", "22": "4", "33": "6"}
 _LINH_VUC_QUE = {"cong_viec": "Công việc", "tinh_cam": "Tình cảm", "gia_dinh": "Gia đình",
@@ -389,7 +389,9 @@ from app.kb import trang_phongthuy as _tpt  # noqa: E402 — Y5: dấu hiệu nh
 _TRANG.update(_tpt.TRANG)
 from app.kb import trang_co_thu as _tct  # noqa: E402 — TV-CTP: cổ thư Tử vi /tu-vi/co-thu (Đẩu Số Cốt Tuỷ Phú)
 _TRANG.update(_tct.TRANG)
-_TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN, **_tpt.TEN_NGAN, **_tct.TEN_NGAN}
+from app.kb import trang_nhan_tuong as _tnt  # noqa: E402 — NT-1: bộ vị gương mặt /nhan-tuong/bo-vi
+_TRANG.update(_tnt.TRANG)
+_TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN, **_tpt.TEN_NGAN, **_tct.TEN_NGAN, **_tnt.TEN_NGAN}
 from app.kb import bo_sung as _bs  # noqa: E402 — SEO-M: nội dung bổ sung trang mỏng (KB bo_sung_<loai>.json)
 _TRANG = {k: (ds, _bs.boc(dung)) for k, (ds, dung) in _TRANG.items()}
 
