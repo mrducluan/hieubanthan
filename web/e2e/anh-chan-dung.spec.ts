@@ -92,6 +92,42 @@ test("đo trên ảnh: điểm sai thứ tự → lời báo đúng điểm củ
   await expect(page.getByTestId("do-goi-y")).toContainText("Dài, hẹp, thanh", { timeout: 20_000 });
 });
 
+// ANH-4: ảnh nghiêng (quay sang phải) — 9 điểm trên đường viền; giữa trán nhô rõ → "trán gồ" (cùng mẫu engine test_nhan_tuong_nghieng).
+const NGHIENG: [number, number][] = [[0.50, 0.15], [0.56, 0.24], [0.55, 0.33], [0.538, 0.37], [0.575, 0.43], [0.62, 0.50], [0.575, 0.53], [0.565, 0.68], [0.53, 0.72]];
+
+test("ảnh nghiêng (tuỳ chọn): chấm 9 điểm đường viền → gửi kèm lượt đo → gợi ý trán gồ; thiếu điểm thì không gửi", async ({ page }) => {
+  await napHoSo(page);
+  await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm1", luc: "2026-11-06T01:00:00Z" })));
+  const than: Record<string, unknown>[] = [];
+  page.on("request", (q) => { if (q.url().includes("/api/nhan-tuong/do-mat")) than.push(q.postDataJSON()); });
+  await page.goto("/nhan-tuong");
+  await page.getByTestId("do-input").setInputFiles(TEP);
+  await chamDu(page);
+  await page.getByTestId("do-nghieng").locator("summary").click();
+  await page.getByTestId("ng-input-nghieng_phai").setInputFiles({ ...TEP, name: "nghieng.png" });
+  const k = page.getByTestId("ng-khung-nghieng_phai");
+  await expect(k.locator("img")).toBeVisible();
+  await k.scrollIntoViewIfNeeded();
+  const b = (await k.boundingBox())!;
+  for (const [x, y] of NGHIENG.slice(0, 8)) await page.mouse.click(b.x + x * b.width, b.y + y * b.height);
+  await expect(page.getByTestId("ng-con-nghieng_phai")).toHaveText("Còn 1 điểm");
+  await page.getByTestId("do-tinh").click();
+  await expect(page.getByTestId("do-goi-y")).toBeVisible({ timeout: 20_000 });
+  expect(than[0]).not.toHaveProperty("nghieng");                                      // chưa đủ điểm → không gửi ảnh nghiêng
+  await k.scrollIntoViewIfNeeded();
+  const b2 = (await k.boundingBox())!;
+  await page.mouse.click(b2.x + NGHIENG[8]![0] * b2.width, b2.y + NGHIENG[8]![1] * b2.height);
+  await expect(page.getByTestId("ng-con-nghieng_phai")).toHaveText("Đã đủ điểm");
+  await expect(page.getByTestId("do-kem-nghieng")).toContainText("Kèm 1 ảnh nghiêng");
+  await page.getByTestId("do-tinh").click();
+  await expect(page.getByTestId("do-goi-y")).toContainText("Gồ, hai góc nhô", { timeout: 20_000 });
+  const t = than[1] as { nghieng: { goc: string; diem: object; ti_le: number }[] };
+  expect(t.nghieng).toHaveLength(1);
+  expect(t.nghieng[0]!.goc).toBe("nghieng_phai");
+  expect(Object.keys(t.nghieng[0]!.diem)).toHaveLength(9);
+  expect(JSON.stringify(t)).not.toContain("base64");
+});
+
 test("AI bật (giả lập): khối AI gập, thoả thuận riêng am1; thân gửi có dong_y + góc; xác nhận → khảo sát", async ({ page }) => {
   await napHoSo(page);
   await page.route("**/api/nhan-tuong/cau-hinh", (q) => q.fulfill({ json: { doc_anh: true } }));

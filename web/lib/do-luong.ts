@@ -113,6 +113,7 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   // NT-1: Nhân tướng học — chỉ MÃ: số câu đã trả lời, lựa chọn tam đình máy đo, ngũ hình, số gợi ý từ ảnh (không chữ người dùng)
   lua_chon: "string", ngu_hinh: "string", so_goi_y: "number",
   so_diem: "number",    // ANH-2: số điểm mốc người dùng đã chấm khi đo trên ảnh (chỉ con số, không toạ độ)
+  so_anh_nghieng: "number",  // ANH-4: số ảnh nghiêng kèm lượt đo (0–2)
   da_bat: "number",     // PT-V2: 1 = máy đọc ảnh đang bật, 0 = tắt / lỗi
   ma: "string",         // PT-V2: mã dấu hiệu người dùng xác nhận (xa_ngang…), chỉ mã
   con_dung: "number",   // SAO-V: trang nhận quà — 1 = link quà còn dùng được, 0 = đã nhận / hết hạn / không có

@@ -92,8 +92,14 @@ def _d(a: tuple[float, float], b: tuple[float, float]) -> float:
     return math.hypot(a[0] - b[0], a[1] - b[1])
 
 
-def do_mat(diem: dict, ti_le: float) -> dict:
-    """→ {goi_y: [{cau, lua_chon, do, nguon}], so_do: {...}, canh_bao: [...]}. Sai / thiếu điểm → ValueError (lời tiếng Việt)."""
+def do_mat(diem: dict, ti_le: float, nghieng: list[dict] | None = None) -> dict:
+    """→ {goi_y: [{cau, lua_chon, do, nguon, anh}], so_do: {...}, canh_bao: [...]}. Sai / thiếu điểm → ValueError (lời tiếng
+    Việt). `nghieng` (ANH-4, tuỳ chọn, ≤ 2): [{goc: nghieng_trai|nghieng_phai, diem, ti_le}] — xem `_ghep_nghieng`."""
+    kq = _do_thang(diem, ti_le)
+    return _ghep_nghieng(kq, nghieng or [])
+
+
+def _do_thang(diem: dict, ti_le: float) -> dict:
     cfg = kb.do_anh()
     ng, loi = cfg["nguong"], cfg["loi"]
     p, goc = _chuan(diem, ti_le)
@@ -195,4 +201,184 @@ def do_mat(diem: dict, ti_le: float) -> dict:
         canh_bao.append(loi["canh_bao_nghieng"].format(goc=_so(abs(goc)).rstrip("0").rstrip(",")))
     if sd["quay"] > ng["quay_canh_bao"] or quay_ngang:
         canh_bao.append(loi["canh_bao_quay"])
-    return {"goi_y": [{"cau": c, "lua_chon": l, "do": t, "nguon": nguon} for c, l, t in goi], "so_do": sd, "canh_bao": canh_bao}
+    return {"goi_y": [{"cau": c, "lua_chon": l, "do": t, "nguon": nguon, "anh": "thang"} for c, l, t in goi], "so_do": sd,
+            "canh_bao": canh_bao}
+
+
+# ------------------------------------------------------------------ ANH-4: ảnh nghiêng
+CAU_DO_NGHIENG: dict[str, tuple[str, ...]] = {
+    "tran": ("go_loi", "lom_giua"),
+    "son_can": ("cao_lien", "thap_gay"),
+    "song_mui": ("go", "thap", "thang_cao"),
+    "cam": ("nhon_lem",),
+    "tai": ("cao_day", "nho_thap"),
+}
+# Thứ tự từ trên xuống theo trục mặt (đầu mũi xét riêng: nằm giữa gốc mũi và cằm).
+_DOC_NGHIENG = ("chan_toc", "giua_tran", "an_duong", "son_can", "song_mui", "chan_mui", "cam_truoc", "cam")
+_TEN_GOC = {"nghieng_trai": "Ảnh nghiêng trái", "nghieng_phai": "Ảnh nghiêng phải"}
+
+P = tuple[float, float]
+
+
+def _tru(a: P, b: P) -> P:
+    return (a[0] - b[0], a[1] - b[1])
+
+
+def _cham(a: P, b: P) -> float:
+    return a[0] * b[0] + a[1] * b[1]
+
+
+def _goc(a: P, o: P, b: P) -> float:
+    v1, v2 = _tru(a, o), _tru(b, o)
+    c = _cham(v1, v2) / (math.hypot(*v1) * math.hypot(*v2))
+    return math.degrees(math.acos(max(-1.0, min(1.0, c))))
+
+
+def _ten_ng(ma: str) -> str:
+    return next((p["ten"] for p in kb.do_anh().get("diem_nghieng", []) if p["ma"] == ma), ma)
+
+
+def do_nghieng(diem: dict, ti_le: float) -> dict:
+    """Ảnh nghiêng (≈ 90°): điểm người dùng chấm trên ĐƯỜNG VIỀN mặt → {goi_y, so_do, canh_bao}. Chỉ dùng góc và tỉ lệ
+    khoảng cách theo trục mặt (chân tóc → đáy cằm) → không phụ thuộc mặt quay trái / phải, đầu ngửa / cúi, khung ảnh."""
+    cfg = kb.do_anh()
+    ng, loi = cfg["nguong_nghieng"], cfg["loi"]
+    ds = cfg["diem_nghieng"]
+    la = sorted(set(diem) - {p["ma"] for p in ds})
+    if la:
+        raise ValueError(f"Điểm không có trong danh sách ảnh nghiêng: {', '.join(la)}")
+    thieu = [p for p in ds if p["bat_buoc"] and p["ma"] not in diem]
+    if thieu:
+        raise ValueError("Thiếu điểm: " + ", ".join(f"{p['ten']} ({p['ma']})" for p in thieu))
+    if not 0.2 <= ti_le <= 5:
+        raise ValueError("Tỉ lệ khung ảnh không hợp lệ")
+    p: dict[str, P] = {}
+    for ma, v in diem.items():
+        try:
+            x, y = float(v["x"]), float(v["y"])
+        except (KeyError, TypeError, ValueError) as e:
+            raise ValueError(f"Toạ độ điểm {ma} không hợp lệ") from e
+        if not (0 <= x <= 1 and 0 <= y <= 1):
+            raise ValueError(f"Toạ độ điểm {ma} nằm ngoài ảnh")
+        p[ma] = (x * ti_le, y)
+    r = lambda v: round(v, 3)  # noqa: E731
+
+    truc = _tru(p["chan_toc"], p["cam"])
+    H = math.hypot(*truc)
+    if H <= 0:
+        raise ValueError("Chân tóc và đáy cằm trùng nhau — chấm lại giúp mình.")
+    u = (truc[0] / H, truc[1] / H)                                    # hướng lên trên của mặt
+    f = (-u[1], u[0])
+
+    def ngang(q: P) -> float:                                        # khoảng ra trước so với trục chân tóc – cằm
+        return _cham(_tru(q, p["cam"]), f)
+
+    if sum(ngang(p[k]) for k in ("an_duong", "son_can", "dau_mui", "chan_mui", "cam_truoc")) < 0:
+        f = (-f[0], -f[1])
+    huong = "phai" if f[0] > 0 else "trai"
+
+    def cao(q: P) -> float:                                          # độ sâu từ chân tóc xuống, theo trục mặt
+        return -_cham(_tru(q, p["chan_toc"]), u)
+
+    for tren, duoi in zip(_DOC_NGHIENG, _DOC_NGHIENG[1:]):
+        if not cao(p[tren]) < cao(p[duoi]):
+            raise ValueError(f"Điểm “{_ten_ng(tren)}” phải nằm trên “{_ten_ng(duoi)}” — chấm lại giúp mình.")
+    if not cao(p["son_can"]) < cao(p["dau_mui"]) < cao(p["cam_truoc"]):
+        raise ValueError("Điểm “Đầu mũi” phải nằm giữa gốc mũi và cằm — chấm lại giúp mình.")
+
+    def lech(q: P, a: P, b: P) -> float:                             # q nhô ra trước khỏi đường a–b, theo chiều dài a–b
+        ab = _tru(b, a)
+        L2 = _cham(ab, ab)
+        t = _cham(_tru(q, a), ab) / L2
+        chieu = (a[0] + ab[0] * t, a[1] + ab[1] * t)
+        return _cham(_tru(q, chieu), f) / math.sqrt(L2)
+
+    nho = lech(p["dau_mui"], p["son_can"], p["chan_mui"])
+    if nho <= 0 or not all(ngang(p["dau_mui"]) > ngang(p[k]) for k in ("an_duong", "chan_mui", "cam_truoc", "song_mui")):
+        raise ValueError("Điểm “Đầu mũi” phải là chỗ nhô ra xa nhất phía trước mặt — kiểm lại ảnh có đúng là ảnh nghiêng không.")
+    co_tai = "dinh_tai" in p and "dai_tai" in p
+    if co_tai and not (ngang(p["dinh_tai"]) < ngang(p["son_can"]) and ngang(p["dai_tai"]) < ngang(p["son_can"])):
+        raise ValueError("Tai phải nằm phía sau gốc mũi trong ảnh nghiêng — chấm lại giúp mình.")
+
+    goc_lom = _goc(p["an_duong"], p["chan_mui"], p["cam_truoc"])
+    loi_mat = (180 - goc_lom) * (1 if lech(p["cam_truoc"], p["an_duong"], p["chan_mui"]) < 0 else -1)
+    sd = {"tran_cong": r(lech(p["giua_tran"], p["chan_toc"], p["an_duong"])),
+          "goc_son_can": round(_goc(p["an_duong"], p["son_can"], p["dau_mui"]), 1),
+          "gu_mui": r(lech(p["song_mui"], p["son_can"], p["dau_mui"])), "nho_mui": r(nho),
+          "loi_mat": round(loi_mat, 1), "huong": huong}
+    td = nt.tam_dinh_tu_diem({k: {"y": cao(p[m])} for k, m in
+                              (("chan_toc", "chan_toc"), ("an_duong", "an_duong"), ("chuan_dau", "chan_mui"), ("cam", "cam"))})
+    if td:
+        sd["tam_dinh"] = {k: round(td[k] * 100) for k in ("thuong", "trung", "ha")}
+
+    goi: list[tuple[str, str, str]] = []
+
+    def them(cau: str, lua: str, mau: str, **so):
+        goi.append((cau, lua, loi[mau].format(**{k: _so(v) if isinstance(v, float) else v for k, v in so.items()})))
+
+    if sd["tran_cong"] >= ng["tran_go"]:
+        them("tran", "go_loi", "tran", tran_cong=sd["tran_cong"])
+    elif sd["tran_cong"] <= ng["tran_det"]:
+        them("tran", "lom_giua", "tran", tran_cong=sd["tran_cong"])
+    gs = sd["goc_son_can"]
+    if gs >= ng["son_can_cao"]:
+        them("son_can", "cao_lien", "son_can", goc_son_can=str(round(gs)))
+    elif gs <= ng["son_can_thap"]:
+        them("son_can", "thap_gay", "son_can", goc_son_can=str(round(gs)))
+    gu, nm = sd["gu_mui"], sd["nho_mui"]
+    lua_mui = ("go" if gu >= ng["mui_gu"] else "thap" if nm <= ng["mui_thap"] else
+               "thang_cao" if nm >= ng["mui_cao"] and abs(gu) < ng["mui_thang"] else None)
+    if lua_mui:
+        them("song_mui", lua_mui, "song_mui_nghieng", gu_mui=gu, nho_mui=nm)
+    if sd["loi_mat"] >= ng["cam_lem"]:
+        them("cam", "nhon_lem", "cam_nghieng", loi_mat=str(round(sd["loi_mat"])))
+    if co_tai:
+        bien = ng["tai_lech_cao"] * H
+        may_y, mat_y = cao(p["an_duong"]), cao(p["son_can"]) + ng["mat_duoi_son_can"] * H
+        dinh, dai = cao(p["dinh_tai"]), cao(p["dai_tai"])
+        tren = "ngang hoặc cao hơn" if dinh <= may_y + bien else "thấp hơn"
+        duoi = "ngang hoặc thấp hơn" if dai >= cao(p["chan_mui"]) - bien else "cao hơn"
+        if dinh > mat_y:
+            them("tai", "nho_thap", "tai_nghieng", dinh_tai=tren, dai_tai=duoi)
+        elif dinh <= may_y + bien and dai >= cao(p["chan_mui"]) - bien:
+            them("tai", "cao_day", "tai_nghieng", dinh_tai=tren, dai_tai=duoi)
+    nguon = kb.ten_nguon(cfg.get("nguon"))
+    return {"goi_y": [{"cau": c, "lua_chon": l, "do": t, "nguon": nguon} for c, l, t in goi], "so_do": sd, "canh_bao": []}
+
+
+def _ghep_nghieng(kq: dict, nghieng: list[dict]) -> dict:
+    """Ghép ảnh nghiêng vào kết quả ảnh thẳng. Câu ảnh thẳng đã gợi ý → giữ ảnh thẳng (tai, …). Câu chỉ ảnh nghiêng đo được:
+    có hai ảnh nghiêng thì hai ảnh phải cùng gợi ý một lựa chọn mới dùng (một ảnh gợi ý, ảnh kia không / khác → bỏ, báo)."""
+    if not nghieng:
+        return kq
+    if len(nghieng) > 2 or len({n.get("goc") for n in nghieng}) != len(nghieng):
+        raise ValueError("Tối đa hai ảnh nghiêng, mỗi bên một ảnh")
+    ket = []
+    for n in nghieng:
+        goc = n.get("goc")
+        if goc not in _TEN_GOC:
+            raise ValueError("Góc ảnh nghiêng không hợp lệ")
+        try:
+            k = do_nghieng(n.get("diem") or {}, float(n.get("ti_le") or 0))
+        except ValueError as e:
+            raise ValueError(f"{_TEN_GOC[goc]}: {e}") from e
+        ket.append((goc, k))
+    co = {g["cau"] for g in kq["goi_y"]}
+    theo_cau: dict[str, list[tuple[str, dict]]] = {}
+    for goc, k in ket:
+        for g in k["goi_y"]:
+            theo_cau.setdefault(g["cau"], []).append((goc, g))
+    lech = []
+    for cau, ds in theo_cau.items():
+        if cau in co:
+            continue
+        if len(ds) != len(ket) or len({g["lua_chon"] for _, g in ds}) > 1:
+            lech.append(cau)
+            continue
+        goc, g = ds[0]
+        kq["goi_y"].append({**g, "anh": goc})
+    kq["so_do"]["nghieng"] = [{"goc": goc, **k["so_do"]} for goc, k in ket]
+    if lech:
+        ten = {m: c["hoi"].rstrip("?") for m, c in kb.cau_hoi_theo_ma().items()}
+        kq["canh_bao"].append(kb.do_anh()["loi"]["canh_bao_hai_nghieng"].format(cau=", ".join(ten.get(c, c) for c in sorted(lech))))
+    return kq

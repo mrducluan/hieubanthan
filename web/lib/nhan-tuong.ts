@@ -18,7 +18,7 @@ export interface DiemDo { ma: string; ten: string; nhom: string; mo: string; bat
 export interface KhaoSat {
   buoc: BuocKS[]; cau_hoi: CauHoi[]; bo_vi: Record<string, BoVi>; cung: Record<string, { ten: string; noi_ve: string; bo_vi: string[] }>;
   /** ANH-2: engine cũ chưa có → khối đo trên ảnh tự ẩn. */
-  diem_do?: { nhom: Record<string, string>; diem: DiemDo[] };
+  diem_do?: { nhom: Record<string, string>; diem: DiemDo[]; diem_nghieng?: DiemDo[] };
   truong_phai: Record<string, { ten: string; ngan: string; mo_ta: string }>;
   ngu_hinh: Record<string, { ten: string; hanh: string | null; dau_hieu: string }>;
 }

@@ -17,6 +17,7 @@ import type { KetQuaTim } from "@/lib/diem-moc-tu-dong";
 import { postJson } from "@/lib/goi-api";
 import type { DiemDo, KhaoSat, TraLoi } from "@/lib/nhan-tuong";
 import { cn } from "@/lib/utils";
+import { ChamNghieng, type AnhNghieng, type GocNghieng } from "./ChamNghieng";
 import { DanhSachGoiY, type GoiYNet } from "./DanhSachGoiY";
 
 type Diem = { x: number; y: number };
@@ -85,6 +86,14 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
   const [tim, setTim] = useState<TrangThaiTim>(null);
   const [canXem, setCanXem] = useState<string[]>([]);
   const [vungPhong, setVungPhong] = useState<Vung | null>(null);
+  const [nghieng, setNghieng] = useState<Partial<Record<GocNghieng, AnhNghieng>>>({});
+  const dsNghieng = useMemo(() => ks.diem_do?.diem_nghieng ?? [], [ks]);
+  const doiNghieng = useCallback((goc: GocNghieng, a: AnhNghieng | null) => {
+    setNghieng((n) => { const { [goc]: _cu, ...con } = n; return a ? { ...con, [goc]: a } : con; }); setKq(null);
+  }, []);
+  const nghiengDu = (Object.entries(nghieng) as [GocNghieng, AnhNghieng][])
+    .filter(([, a]) => a.tiLe && dsNghieng.every((p) => !p.bat_buoc || a.diem[p.ma]));
+  const nghiengThieu = Object.keys(nghieng).length - nghiengDu.length;
   const [phong, setPhong] = useState(true);
   const vung = phong && vungPhong && tiLe ? vungPhong : CA_ANH;
   const phongTo = vung !== CA_ANH;
@@ -188,9 +197,10 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
     if (!DONG_Y_DO_MAT.da()) DONG_Y_DO_MAT.ghi();
     setTinh(true); setLoi(null); setKq(null);
     try {
-      const r = await postJson<KqDo>("/api/nhan-tuong/do-mat", { diem, ti_le: Number(tiLe.toFixed(4)), dong_y: true });
+      const ng = nghiengDu.map(([goc, a]) => ({ goc, diem: a.diem, ti_le: Number(a.tiLe!.toFixed(4)) }));
+      const r = await postJson<KqDo>("/api/nhan-tuong/do-mat", { diem, ti_le: Number(tiLe.toFixed(4)), dong_y: true, ...(ng.length ? { nghieng: ng } : {}) });
       setKq(r);
-      ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat", so_goi_y: r.goi_y.length, so_diem: Object.keys(diem).length });
+      ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat", so_goi_y: r.goi_y.length, so_diem: Object.keys(diem).length, so_anh_nghieng: nghiengDu.length });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đo được lúc này."); } finally { setTinh(false); }
   };
 
@@ -282,10 +292,21 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
         </div>
       )}
 
+      {url && dsNghieng.length > 0 && (
+        <details className="rounded-2xl border border-line/70 bg-bg/40 p-4" data-testid="do-nghieng">
+          <summary className="cursor-pointer text-sm font-medium text-fg">Thêm ảnh nghiêng (không bắt buộc) — đo thêm trán, gốc mũi, sống mũi, cằm, tai</summary>
+          <p className="mt-2 text-xs leading-relaxed text-fg-muted">Ảnh thẳng không thấy độ nổi của mặt. Một ảnh chụp ngang mặt (quay hẳn 90°) cho hệ thống đo thêm trán gồ hay phẳng, gốc mũi cao hay thấp, sống mũi gồ / thấp, cằm lẹm, vị trí tai. Ảnh nghiêng cần bạn tự chấm 9 điểm trên đường viền (máy chỉ tự tìm được ở ảnh chính diện). Một bên là đủ; có cả hai bên thì hai ảnh phải cùng kết quả mới gợi ý. Ảnh cũng chỉ hiện trên máy bạn.</p>
+          <div className="mt-3 grid gap-3 lg:grid-cols-2">
+            <ChamNghieng goc="nghieng_trai" ten="Ảnh nghiêng trái" ds={dsNghieng} onDoi={(a) => doiNghieng("nghieng_trai", a)} />
+            <ChamNghieng goc="nghieng_phai" ten="Ảnh nghiêng phải" ds={dsNghieng} onDoi={(a) => doiNghieng("nghieng_phai", a)} />
+          </div>
+        </details>
+      )}
+
       <div className="rounded-2xl border border-line/70 bg-bg/70 p-4" data-testid="do-thoa-thuan">
         <p className="flex items-center gap-2 text-sm font-semibold text-fg"><ShieldCheck className="size-4 text-gold" aria-hidden /> Thoả thuận đo gương mặt (ảnh không rời máy)</p>
         <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">
-          Ảnh <b className="text-fg">không rời máy bạn</b>. Điểm mốc do máy bạn tự tìm ngay trong trình duyệt hoặc do bạn chấm. Chỉ toạ độ {batBuoc.length} điểm đó (và tỉ lệ khung ảnh) được gửi tới máy chủ tính toán của Hiểu Bản Thân <b className="text-fg">một lượt</b> để đo tỉ lệ theo sách tướng; không lưu, không chuyển cho bên thứ ba, không dùng để nhận ra bạn. Ảnh phải là của chính bạn, bạn đủ 18 tuổi.
+          Ảnh <b className="text-fg">không rời máy bạn</b>. Điểm mốc do máy bạn tự tìm ngay trong trình duyệt hoặc do bạn chấm. Chỉ toạ độ các điểm đó (ảnh chính diện, và ảnh nghiêng nếu bạn thêm) cùng tỉ lệ khung ảnh được gửi tới máy chủ tính toán của Hiểu Bản Thân <b className="text-fg">một lượt</b> để đo tỉ lệ theo sách tướng; không lưu, không chuyển cho bên thứ ba, không dùng để nhận ra bạn. Ảnh phải là của chính bạn, bạn đủ 18 tuổi.
           Rút thoả thuận ở đây hoặc ở <Link href="/tai-khoan#du-lieu-cua-toi" className="text-gold underline underline-offset-2">Dữ liệu của tôi</Link> · <Link href="/chinh-sach-rieng-tu#anh-mat" className="text-gold underline underline-offset-2">Chính sách riêng tư</Link>.
         </p>
         {dongY ? (
@@ -302,6 +323,8 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
         <div className="mt-3 flex flex-wrap items-center gap-2">
           <Button onClick={doNgay} disabled={!sanSang} data-testid="do-tinh"><Ruler aria-hidden /> {tinh ? "Đang đo…" : "Đo và gợi ý"}</Button>
           {url && !du && <span className="text-xs text-fg-faint">Còn {batBuoc.filter((m) => !diem[m]).length} điểm bắt buộc.</span>}
+          {nghiengDu.length > 0 && <span className="text-xs text-jade" data-testid="do-kem-nghieng">Kèm {nghiengDu.length} ảnh nghiêng.</span>}
+          {nghiengThieu > 0 && <span className="text-xs text-fg-faint">Ảnh nghiêng chưa chấm đủ sẽ không được tính.</span>}
         </div>
         {loi && <p className="mt-2 text-sm text-cinnabar" data-testid="do-loi">{loi}</p>}
       </div>

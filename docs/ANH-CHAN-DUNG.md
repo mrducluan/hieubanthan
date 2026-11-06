@@ -105,11 +105,23 @@ Cách làm:
 Kiểm: e2e `anh-tu-dong.spec.ts` (hàm thuần trên lưới / ảnh dựng tay; bộ đo thật trong Chromium trên ảnh chân dung mẫu công khai
 của MediaPipe — tải lúc chạy, không vào git — tự đặt 20 điểm → engine đo; không có yêu cầu ra ngoài), engine test ngưỡng mới.
 
-### Ảnh nghiêng trái / phải cho phép đo (chủ dự án hỏi 2026-11-06 — đề xuất, chưa làm)
+## 7. ANH-4 — ảnh nghiêng trái / phải cho phép đo (2026-11-06, chủ dự án duyệt)
 
-Ảnh thẳng không thấy độ "nổi" của mặt. Ảnh nghiêng (≈ 90°, thấy rõ đường viền) trả lời thêm được: `tran` (gồ lồi / lõm giữa),
-`nhat_nguyet_giac` (câu này vốn ghi "nhìn nghiêng"), `son_can` (gốc mũi cao liền / thấp), `song_mui` (thẳng cao / gồ / thấp),
-`cam` (nhọn lẹm), `tai` (vị trí đỉnh tai, dái tai so với mày và chân mũi). Lưới điểm mốc vẽ theo khuôn mặt chuẩn nên độ sâu ở ảnh
-thẳng chủ yếu là "đoán theo khuôn" — không dùng để kết luận; phải đo trên ĐƯỜNG VIỀN của ảnh nghiêng. Cần: CALC mới (đo góc,
-độ lồi trên đường viền), ngưỡng có nguồn, test; người dùng chấm ~7 điểm trên đường viền (máy đặt sẵn khi tìm được). Ảnh nghiêng
-luôn tuỳ chọn — không có vẫn đo ảnh thẳng như bây giờ.
+Ảnh thẳng không thấy độ "nổi" của mặt. Một ảnh chụp ngang mặt (≈ 90°) cho đo thêm 5 câu khảo sát trên **đường viền**:
+`tran` (gồ lồi / lõm-dẹt), `son_can` (cao liền / thấp gãy), `song_mui` (gồ / thấp / thẳng cao), `cam` (nhọn lẹm), `tai`.
+Lưới điểm mốc vẽ theo khuôn mặt chuẩn nên độ sâu ước từ ảnh thẳng chủ yếu là "đoán theo khuôn" — không dùng.
+
+- **Tuỳ chọn**: ảnh chính diện vẫn là ảnh chính; ảnh nghiêng gập trong khối "Thêm ảnh nghiêng (không bắt buộc)", một bên là đủ.
+- **Người dùng chấm 9 điểm** trên đường viền (chân tóc, giữa trán, chỗ nhô giữa hai mày, gốc mũi, giữa sống mũi, đầu mũi,
+  chân mũi, điểm nhô của cằm, đáy cằm) + 2 điểm tai tuỳ chọn, theo hình mẫu nhìn nghiêng. Chưa tự tìm: bộ tìm điểm mốc chỉ
+  chắc với ảnh chính diện, và em chưa có ảnh nghiêng thật để hiệu chỉnh — **cần vài ảnh nghiêng (có đồng ý) để làm bước tự tìm**.
+- **CALC `do_nghieng`** (`engine/app/calc/nhan_tuong_do.py`): trục mặt = chân tóc → đáy cằm; hướng "ra trước" tự suy (mặt quay
+  trái hay phải đều được); chỉ dùng **góc và tỉ lệ** → bất biến khi lật, ngửa / cúi, đổi khung. Số đo: độ cong trán (giữa trán
+  nhô khỏi dây chân tóc – đầu mày), góc trán–mũi ở gốc mũi, độ gồ sống mũi, độ nhô đầu mũi, góc lồi mặt (Ấn Đường – chân mũi –
+  cằm), vị trí tai theo trục mặt. Ngưỡng `do_anh.nguong_nghieng` theo số đo nhân trắc phổ biến (góc trán–mũi 115–135°, góc lồi
+  8–16°…) — **chờ chuyên gia duyệt**. Kiểm thứ tự điểm, đầu mũi phải nhô xa nhất, tai phải ở sau gốc mũi → sai thì báo đúng điểm.
+- **Ghép** (`do_mat(..., nghieng)`): câu ảnh thẳng đã gợi ý (tai) → giữ ảnh thẳng; câu chỉ ảnh nghiêng đo được: có hai ảnh thì
+  hai ảnh phải cùng lựa chọn mới gợi ý (khác / một ảnh không thấy → bỏ, có cảnh báo). Mỗi gợi ý ghi `anh` (thang / nghieng_*).
+- API: `POST /v1/nhan-tuong/do-mat` thêm `nghieng: [{goc, diem, ti_le}]` (≤ 2, mỗi bên một) — vẫn chỉ toạ độ, cùng thoả thuận `dm1`.
+- Kiểm: `engine/tests/test_nhan_tuong_nghieng.py` (mẫu dựng tay, từng ngưỡng, lật / xoay ±12° / khung 3:4, sai thứ tự, ghép hai ảnh,
+  API), e2e `anh-chan-dung.spec.ts` (chấm 9 điểm → gửi kèm → "trán gồ"; thiếu điểm thì không gửi).
