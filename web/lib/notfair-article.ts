@@ -37,7 +37,10 @@ export function sanitizeNotFairArticleHtml(html: string) {
     },
     // Mục lục NotFair chèn sẵn trong thân bài (nav.nf-toc) bỏ đi: web dựng mục lục riêng (cột phải dính, scroll-spy —
     // components/blog/MucLucBai.tsx) từ chính các H2/H3, không hiện hai mục lục.
-    exclusiveFilter: (f) => f.tag === "nav" && /\bnf-toc\b/.test(f.attribs.class ?? ""),
+    // BLOG-9 (chủ dự án 2026-11-06, thay phần "giữ nf-attribution" của BLOG-1): bỏ dòng ghi công "Authored with NotFair
+    // SEO" — bài hiện trên site đứng tên tác giả của site.
+    exclusiveFilter: (f) => (f.tag === "nav" && /\bnf-toc\b/.test(f.attribs.class ?? ""))
+      || (f.tag === "p" && (/\bnf-attribution\b/.test(f.attribs.class ?? "") || /^\s*authored with notfair( seo)?\.?\s*$/i.test(f.text ?? ""))),
     allowedSchemes: ["http", "https", "mailto"],
     allowedSchemesByTag: { img: ["https"] },
     transformTags: {
