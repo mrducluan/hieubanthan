@@ -87,3 +87,21 @@ test("tiêu đề SEO giữ vế đầu chứa từ khoá, cắt trước từ n
   assert.equal(tieuDeSeo("Hướng nhà hợp tuổi theo Bát trạch — cách tính cung phi từng bước và bảng tra đầy đủ"),
     "Hướng nhà hợp tuổi theo Bát trạch");
 });
+
+test("4 ảnh/bài: ảnh lộ trình + ảnh hỏi đáp chèn trước mục H2 giữa và H2 cuối, đúng thứ tự", () => {
+  const kq = chuanHoaBai(BAI, { anhBia: 11, anhTomTat: 12, anhPhu: [21, 22], slugDaDung: () => false });
+  const goc = (kq.data.noi_dung as { root: { children: { type: string; value?: unknown; tag?: string }[] } }).root.children;
+  const vt = (id: number) => goc.findIndex((k) => k.type === "upload" && k.value === id);
+  const h2 = goc.map((k, i) => (k.type === "heading" && k.tag === "h2" ? i : -1)).filter((i) => i >= 0);
+  assert.ok(vt(12) >= 0 && vt(21) >= 0 && vt(22) >= 0);
+  assert.ok(vt(12) < vt(21) && vt(21) < vt(22));
+  assert.equal(vt(22), h2[h2.length - 1]! - 1);          // ngay trước H2 cuối
+  assert.ok(vt(21) < h2[h2.length - 1]! && vt(21) > h2[0]!);
+  assert.ok(kq.thay_doi.some((t) => /lộ trình/i.test(t)) && kq.thay_doi.some((t) => /hỏi đáp|câu hỏi/i.test(t)));
+});
+
+test("không có anhPhu → thân bài như cũ (không chèn thêm ảnh)", () => {
+  const kq = chuanHoaBai(BAI, { anhBia: 11, anhTomTat: 12, slugDaDung: () => false });
+  const goc = (kq.data.noi_dung as { root: { children: { type: string }[] } }).root.children;
+  assert.equal(goc.filter((k) => k.type === "upload").length, 1);
+});

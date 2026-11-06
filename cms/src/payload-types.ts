@@ -657,7 +657,7 @@ export interface NoiDungTrang {
         ten: string;
         mo_ta: string;
         nhan: 'kien_thuc' | 'cong_cu' | 'thu_vien';
-        hinh: 'than-so' | 'tu-vi' | 'bat-tu' | 'kinh-dich' | 'phong-thuy';
+        hinh: 'than-so' | 'tu-vi' | 'bat-tu' | 'kinh-dich' | 'phong-thuy' | 'nhan-tuong';
         id?: string | null;
       }[]
     | null;
@@ -2865,14 +2865,14 @@ export interface LoiDiTiep {
   tu_xep?: boolean | null;
   nhom?:
     | {
-        tru: '/than-so' | '/hop-doi' | '/tu-vi' | '/bat-tu' | '/kinh-dich' | '/phong-thuy' | 'chung';
+        tru: '/than-so' | '/hop-doi' | '/tu-vi' | '/bat-tu' | '/kinh-dich' | '/phong-thuy' | '/nhan-tuong' | 'chung';
         the?:
           | {
               duong: string;
               ten: string;
               mo_ta: string;
               nhan: 'kien_thuc' | 'cong_cu' | 'thu_vien';
-              hinh: 'than-so' | 'tu-vi' | 'bat-tu' | 'kinh-dich' | 'phong-thuy';
+              hinh: 'than-so' | 'tu-vi' | 'bat-tu' | 'kinh-dich' | 'phong-thuy' | 'nhan-tuong';
               id?: string | null;
             }[]
           | null;

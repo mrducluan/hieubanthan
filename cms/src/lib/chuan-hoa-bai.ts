@@ -187,6 +187,8 @@ const nutAnh = (id: number | string): Nut => ({
 export type TuyChon = {
   /** id ảnh "Tóm tắt nhanh" đã tải lên → chèn sau đoạn mở đầu (null = không chèn). */
   anhTomTat?: number | string | null;
+  /** [id ảnh "Lộ trình bài viết", id ảnh "Câu hỏi thường gặp"] → chèn trước H2 giữa bài và trước H2 cuối (mỗi phần tử có thể thiếu). */
+  anhPhu?: (number | string | null | undefined)[];
   /** id ảnh bìa mới (nền sáng) → anh_bia + meta.image. */
   anhBia?: number | string | null;
   /** slug đã có ở bài khác → thêm hậu tố. */
@@ -304,6 +306,24 @@ export function chuanHoaBai(bai: BaiChuanHoa, tc: TuyChon = {}): KetQuaChuanHoa 
     khoi.splice(viTri >= 0 ? viTri + 1 : 0, 0, nutAnh(tc.anhTomTat));
     doiThan = true;
     thay.push(`Chèn ảnh "Tóm tắt nhanh" (${Math.min(5, muc.length)} ý, nền sáng) sau đoạn mở đầu.`);
+  }
+
+  // ---- ảnh "Lộ trình" (giữa bài) + ảnh "Câu hỏi thường gặp" (trước mục cuối) → đủ 4 ảnh/bài với bìa + tóm tắt
+  const [anhLoTrinh, anhHoiDap] = tc.anhPhu ?? [];
+  const chiSoH2 = () => khoi.map((k, i) => (k.type === "heading" && k.tag === "h2" ? i : -1)).filter((i) => i >= 0);
+  if (anhHoiDap != null) {
+    const h2 = chiSoH2();
+    const vt = h2.length >= 2 ? h2[h2.length - 1]! : khoi.length;
+    khoi.splice(vt, 0, nutAnh(anhHoiDap));
+    doiThan = true;
+    thay.push('Chèn ảnh "Câu hỏi thường gặp" (nền sáng) trước mục cuối bài.');
+  }
+  if (anhLoTrinh != null) {
+    const h2 = chiSoH2();
+    const vt = h2.length >= 3 ? h2[Math.floor(h2.length / 2)]! : Math.min(khoi.length, 2);
+    khoi.splice(vt, 0, nutAnh(anhLoTrinh));
+    doiThan = true;
+    thay.push('Chèn ảnh "Lộ trình bài viết" (các phần chính, nền sáng) vào giữa bài.');
   }
 
   // ---- liên kết nội bộ + lối tới công cụ
