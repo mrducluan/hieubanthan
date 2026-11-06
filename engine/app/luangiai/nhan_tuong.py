@@ -304,6 +304,14 @@ _TUOI = re.compile(r"(?<!\d)(?:tuoi|nam nay toi|toi)\s*(\d{1,3})\s*(?:tuoi)?(?!\
 _TUOI2 = re.compile(r"(\d{1,3})\s*tuoi")
 
 
+def _tuoi_mu_tu_ho_so(nam_sinh: dt.date | int | None, ngay_xem: dt.date | None) -> int | None:
+    """Tuổi mụ của người hỏi từ hồ sơ (không gõ số): năm âm đang xem − năm sinh âm + 1."""
+    if nam_sinh is None:
+        return None
+    ns_am = tdg_luan.nam_am_sinh(nam_sinh.year, nam_sinh.month, nam_sinh.day) if isinstance(nam_sinh, dt.date) else int(nam_sinh)
+    return tdg.tuoi_mu(ns_am, _nam_am(ngay_xem or config.hom_nay_vn()))
+
+
 def _khop_tu_khoa(t: str, bang: dict) -> str | None:
     """Khoá có từ khoá dài nhất xuất hiện trong câu (so câu đã bỏ dấu, có khoảng trắng hai đầu)."""
     tot, dai = None, 0
@@ -354,8 +362,9 @@ def hoi(cau: str, tra_loi: dict | None = None, *, nam_sinh: dt.date | int | None
         return kq
     # tuổi / năm nay → lưu niên
     m = _TUOI.search(t) or _TUOI2.search(t)
-    if m and chung.co(t, [r"xem o dau", r"nhin vao dau", r"luu nien", r"tuoi .{0,12}(xem|nhin|bo vi|vi tri)", r"nam nay"]):
-        tuoi = int(m.group(1))
+    hoi_luu_nien = chung.co(t, [r"xem o dau", r"nhin vao dau", r"luu nien", r"tuoi .{0,12}(xem|nhin|bo vi|vi tri)", r"nam nay"])
+    tuoi = int(m.group(1)) if m else _tuoi_mu_tu_ho_so(nam_sinh, ngay_xem) if hoi_luu_nien else None
+    if tuoi and hoi_luu_nien:
         ln = luu_nien_nam(tuoi, gioi_tinh, tl, khop)
         if ln:
             cau_tl = str(kb.mau("nam_nay" if ln["quan_sat"] else "nam_nay_khong_quan_sat")).format(
@@ -366,7 +375,9 @@ def hoi(cau: str, tra_loi: dict | None = None, *, nam_sinh: dt.date | int | None
             return kq
     # bộ vị / cung
     # Cung (tên riêng, dài) so trước bộ vị — "cung Tài Bạch" không được bắt thành "tai".
-    ma_cung = _khop_tu_khoa(t, kb.tu_khoa("cung")) if "cung" in t else None
+    # Chỉ khi câu có đúng chữ "cung" (so trên câu gốc còn dấu: "cũng" bỏ dấu cũng thành "cung").
+    co_cung = bool(re.search(r"(?<![a-zà-ỹ])cung(?![a-zà-ỹ])", goc.lower()))
+    ma_cung = _khop_tu_khoa(t, kb.tu_khoa("cung")) if co_cung else None
     ma_bv = (kb.cung()[ma_cung].get("bo_vi") or [None])[0] if ma_cung else _khop_tu_khoa(t, kb.tu_khoa("bo_vi"))
     sua = chung.co(t, [re.escape(k) for k in kb.tu_khoa("phau_thuat")])
     if sua and not ma_bv:

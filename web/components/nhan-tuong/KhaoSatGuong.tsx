@@ -23,7 +23,9 @@ export function KhaoSatGuong({ ks, traLoi, onXong, dangTai }: { ks: KhaoSat; tra
   const nhanVung = Object.fromEntries(Object.values(ks.bo_vi).map((b) => [b.vung, b.ten]));
 
   const chon = (cau: string, lua: string) => {
-    const moi = { ...tl, [cau]: tl[cau] === lua ? "khong_chac" : lua };
+    // Bấm lại chip đang chọn = bỏ câu trả lời (không ghi "khong_chac" — bước sẽ không bị đánh dấu xong).
+    const moi = { ...tl };
+    if (tl[cau] === lua) delete moi[cau]; else moi[cau] = lua;
     setTl(moi); luuTraLoi(moi); setCauSang(cau);
   };
   const xong = () => {

@@ -85,6 +85,7 @@ def cau_hoi() -> list[dict]:
     return _lay("cau_hoi") or []
 
 
+@lru_cache(maxsize=1)
 def cau_hoi_theo_ma() -> dict[str, dict]:
     return {c["ma"]: c for c in cau_hoi()}
 

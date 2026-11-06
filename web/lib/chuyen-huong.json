@@ -21,18 +21,9 @@
     "bo-vi": "/nhan-tuong/bo-vi"
   },
   "trang": [
-    [
-      "/la-so-mau",
-      "/tu-vi/la-so-mau"
-    ],
-    [
-      "/huong-xau-nam",
-      "/phong-thuy/huong-xau-nam"
-    ],
-    [
-      "/kham-pha",
-      "/huyen-hoc"
-    ]
+    ["/la-so-mau", "/tu-vi/la-so-mau"],
+    ["/huong-xau-nam", "/phong-thuy/huong-xau-nam"],
+    ["/kham-pha", "/huyen-hoc"]
   ],
   "tuoi_huong": "/phong-thuy/huong-hop-tuoi"
 }

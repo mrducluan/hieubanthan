@@ -93,7 +93,8 @@ def tam_dinh_tu_diem(diem: dict) -> dict | None:
     lech_max = round(max(abs(v) for v in lech), 4)
     if lech_max <= NGUONG_LECH_TAM_DINH:
         lua = "can_doi"
-    elif lech[i_max] >= -lech[i_min]:
+    elif lech[i_max] >= -lech[i_min] or i_min == 1:
+        # Phần giữa ngắn nhất: khảo sát không có "mũi ngắn" → gọi tên phần ngoài dài hơn (trán / cằm), không bao giờ "mui_dai".
         lua = ("tran_dai", "mui_dai", "cam_dai")[i_max]
     else:
         lua = ("tran_ngan", "mui_dai", "cam_ngan")[i_min]

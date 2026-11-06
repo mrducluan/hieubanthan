@@ -5,20 +5,15 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { themHocLuanGiai } from "@/lib/hoc-tuvi";
+import { LaSoVao } from "@/lib/la-so-vao";
 
 const MA = z.string().regex(/^[a-z0-9_]{2,40}$/);
-const LaSo = z.object({
-  birth_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), birth_time: z.string().regex(/^\d{2}:\d{2}$/), gender: z.enum(["nam", "nu"]),
-  noi_sinh: z.string().max(40).optional(), vung: z.enum(["north", "south"]).optional(), gio_mua_he: z.boolean().optional(),
-  utc_noi_sinh: z.number().min(-12).max(14).optional(), do_tin_gio: z.enum(["exact", "approx", "unknown"]).optional(),
-  gio_ty: z.enum(["da_ty", "sang_ngay"]).optional(),
-}).strict();
 const Input = z.object({
   tra_loi: z.record(MA, MA).refine((o) => Object.keys(o).length <= 60),
   ngay_sinh: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
   nam_sinh: z.number().int().min(1900).max(2100).optional(),
   gioi_tinh: z.enum(["nam", "nu"]).optional(),
-  la_so: LaSo.optional(),
+  la_so: LaSoVao.optional(),
 }).strict();
 
 export async function POST(req: Request) {

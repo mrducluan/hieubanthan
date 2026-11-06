@@ -112,6 +112,9 @@ def test_tam_dinh_tu_diem():
     assert r["lua_chon"] == "tran_dai"
     r = calc.tam_dinh_tu_diem({"chan_toc": p(0.0), "an_duong": p(0.36), "chuan_dau": p(0.72), "cam": p(0.92)})
     assert r["lua_chon"] == "cam_ngan"
+    # phần giữa ngắn nhất: không có "mũi ngắn" trong khảo sát → gọi tên phần ngoài dài hơn, KHÔNG BAO GIỜ "mui_dai"
+    r = calc.tam_dinh_tu_diem({"chan_toc": p(0.10), "an_duong": p(0.42), "chuan_dau": p(0.60), "cam": p(0.95)})
+    assert r["lua_chon"] == "cam_dai"
     assert calc.tam_dinh_tu_diem({"chan_toc": p(0.5), "an_duong": p(0.4), "chuan_dau": p(0.7), "cam": p(1.0)}) is None
 
 
@@ -204,6 +207,13 @@ def test_hoi_bo_vi_va_not_ruoi_va_luu_nien():
     assert "bệnh" not in r6["cau_tra_loi"].lower() or "không đoán bệnh" in r6["cau_tra_loi"] or "đi khám" in r6["cau_tra_loi"]
     r7 = nt.hoi("xyz abc")
     assert r7["xu_ly"] == "khong_hieu" and r7["hoi_tiep"]
+    # review: không gõ số → tuổi mụ từ hồ sơ (câu gợi ý của chính engine phải trả lời được)
+    r8 = nt.hoi("Năm nay tuổi của tôi xem ở đâu?", nam_sinh=1988, gioi_tinh="nam", ngay_xem=XEM)
+    assert r8["xu_ly"] == "luu_nien" and "tuổi mụ" in r8["cau_tra_loi"].lower()
+    assert nt.hoi("Năm nay tuổi của tôi xem ở đâu?")["xu_ly"] == "khong_hieu"      # không có hồ sơ → không đoán
+    # review: "cũng" (bỏ dấu = "cung") không được kéo sang nhánh 12 cung
+    r9 = nt.hoi("Sơn Căn thấp cũng ảnh hưởng mệnh không?")
+    assert r9["bo_vi"] == "son_can"
 
 
 def test_hoi_khong_xem_nguoi_khac_khong_tuyen_dung_khong_sua_tuong():
