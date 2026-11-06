@@ -12,6 +12,8 @@ const DIEM = [
   { ma: "chan_toc", nhan: "Chân tóc giữa trán" }, { ma: "an_duong", nhan: "Giữa hai đầu mày" },
   { ma: "chuan_dau", nhan: "Đầu mũi" }, { ma: "cam", nhan: "Điểm thấp nhất của cằm" },
 ] as const;
+/** Chỉ nhận URL `blob:` do trình duyệt cấp cho tệp trên máy — không bao giờ là chuỗi từ nơi khác (CodeQL: src ảnh). */
+const urlBlob = (f: File): string | null => { const u = URL.createObjectURL(f); return u.startsWith("blob:") ? u : null; };
 const NHAN_LUA: Record<string, string> = { can_doi: "ba phần cân nhau", tran_dai: "phần trán dài hơn", mui_dai: "phần giữa dài hơn", cam_dai: "phần cằm dài hơn", tran_ngan: "phần trán ngắn", cam_ngan: "phần cằm ngắn" };
 
 export function ChamDiemAnh({ onKetQua }: { onKetQua: (luaChon: string) => void }) {
@@ -27,7 +29,7 @@ export function ChamDiemAnh({ onKetQua }: { onKetQua: (luaChon: string) => void 
   const chonAnh = (f: File | undefined) => {
     if (!f || !f.type.startsWith("image/")) return;
     if (url) URL.revokeObjectURL(url);
-    setUrl(URL.createObjectURL(f)); setDiem([]); setKq(null); setLoi(null);
+    setUrl(urlBlob(f)); setDiem([]); setKq(null); setLoi(null);
   };
   const cham = (e: React.MouseEvent<HTMLImageElement>) => {
     if (diem.length >= 4) return;

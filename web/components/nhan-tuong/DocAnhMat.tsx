@@ -11,6 +11,8 @@ import { ghi } from "@/lib/do-luong";
 import type { KhaoSat } from "@/lib/nhan-tuong";
 
 interface Kq { da_bat: boolean; ly_do_tat: null | "chua_bat" | "het_luot" | "loi_dich_vu"; tra_loi: { cau: string; lua_chon: string; do_tin: number }[]; luu_y: string[]; can_xac_nhan: true }
+/** Chỉ nhận URL `blob:` do trình duyệt cấp cho tệp trên máy (CodeQL: src ảnh). */
+const urlBlob = (f: File): string | null => { const u = URL.createObjectURL(f); return u.startsWith("blob:") ? u : null; };
 const LOI: Record<string, string> = {
   chua_bat: "Máy gợi ý từ ảnh chưa bật trên bản này — bạn tự soi gương và chọn nhé.",
   het_luot: "Hôm nay máy gợi ý đã hết lượt — bạn tự chọn hoặc thử lại sau.",
@@ -54,7 +56,7 @@ export function DocAnhMat({ ks, daTraLoi, onDung }: { ks: KhaoSat; daTraLoi: Rec
         <label className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg">
           <ImagePlus className="size-3.5" aria-hidden /> {tep ? "Đổi ảnh" : "Chọn ảnh"}
           <input type="file" accept="image/*" className="sr-only" aria-label="Chọn một ảnh chân dung để máy gợi ý (không lưu)"
-            onChange={(e) => { const f = e.target.files?.[0]; if (f?.type.startsWith("image/")) { if (url) URL.revokeObjectURL(url); setTep(f); setUrl(URL.createObjectURL(f)); setKq(null); } e.target.value = ""; }} />
+            onChange={(e) => { const f = e.target.files?.[0]; if (f?.type.startsWith("image/")) { if (url) URL.revokeObjectURL(url); setTep(f); setUrl(urlBlob(f)); setKq(null); } e.target.value = ""; }} />
         </label>
         {url && (
           <span className="relative">
