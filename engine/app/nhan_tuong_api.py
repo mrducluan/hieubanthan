@@ -91,11 +91,33 @@ class _Anh(BaseModel):
     model_config = ConfigDict(extra="forbid")
     du_lieu: str = Field(min_length=16, max_length=1_600_000, pattern=r"^[A-Za-z0-9+/]+={0,2}$")
     loai: Literal["image/jpeg", "image/png", "image/webp"]
+    # ANH-1: góc chụp — ảnh đầu là chính diện (bắt buộc), thêm nghiêng trái / phải cho sống mũi, tai, cằm.
+    goc: Literal["thang", "nghieng_trai", "nghieng_phai"] | None = None
 
 
 class DocAnhMatInput(BaseModel):
+    """ANH-1: ảnh gương mặt là dữ liệu sinh trắc — lượt gọi PHẢI mang `dong_y: true` (người dùng tự tích thoả thuận trên web;
+    máy chủ từ chối lượt không có). Không lưu, không log ảnh."""
     model_config = ConfigDict(extra="forbid")
-    anh: list[_Anh] = Field(min_length=1, max_length=1)
+    anh: list[_Anh] = Field(min_length=1, max_length=3)
+    dong_y: bool
+
+    @field_validator("dong_y")
+    @classmethod
+    def _dy(cls, v):
+        if v is not True:
+            raise ValueError("cần đồng ý xử lý ảnh gương mặt")
+        return v
+
+    @field_validator("anh")
+    @classmethod
+    def _goc(cls, v):
+        goc = [a.goc for a in v if a.goc]
+        if len(goc) != len(set(goc)):
+            raise ValueError("mỗi góc chụp một ảnh")
+        if len(v) > 1 and "thang" not in goc and v[0].goc is not None:
+            raise ValueError("cần một ảnh chính diện")
+        return v
 
 
 def _battu(inp: LuanGiaiNTInput) -> dict | None:
@@ -143,7 +165,7 @@ def api_do_anh(inp: DoAnhInput) -> dict:
 @router.post("/doc-anh")
 def api_doc_anh(inp: DocAnhMatInput) -> dict:
     from app.narrative import doc_anh_mat  # noqa: PLC0415
-    r = doc_anh_mat.doc_anh({"anh": [{"du_lieu": a.du_lieu, "loai": a.loai} for a in inp.anh]})
+    r = doc_anh_mat.doc_anh({"anh": [{"du_lieu": a.du_lieu, "loai": a.loai, "goc": a.goc} for a in inp.anh]})
     return {"engine_version": ENGINE_VERSION, "pham_vi": "nhan_tuong_doc_anh", **r}
 
 

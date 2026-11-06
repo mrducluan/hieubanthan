@@ -33,8 +33,13 @@ và với mỗi câu trong DANH MỤC, chọn MỘT mã lựa chọn mô tả đ
 
 QUY TẮC:
 - CHỈ dùng đúng mã câu và mã lựa chọn trong danh mục. Không mô tả tự do, không nhận xét đẹp / xấu, không đoán tuổi, giới tính, \
-cảm xúc, sức khoẻ, không nói tướng số, không khuyên.
-- Trả về JSON THUẦN: {"tra_loi":[{"cau":"<mã câu>","lua_chon":"<mã lựa chọn>","do_tin":0.0}],"luu_y":["..."]}
+cảm xúc, sức khoẻ, không nói tướng số, không khuyên, không nhận ra người đó là ai.
+- Có thể có tới 3 ảnh của CÙNG một người: chính diện (bắt buộc), nghiêng trái, nghiêng phải. Ảnh nghiêng dùng cho sống mũi, \
+tai, cằm, gò má; câu về mắt, mày, Ấn Đường, miệng đọc ở ảnh chính diện.
+- Trả về JSON THUẦN: {"kiem_tra":{"thay_mat":true,"so_nguoi":1,"nhin_thang":true,"du_sang":true},\
+"tra_loi":[{"cau":"<mã câu>","lua_chon":"<mã lựa chọn>","do_tin":0.0}],"luu_y":["..."]}
+- "kiem_tra" nói về ảnh chính diện: có thấy gương mặt không, mấy người, có nhìn thẳng không, đủ sáng không. Không thấy đúng \
+MỘT gương mặt → "tra_loi" để [].
 - "luu_y": tối đa 3 câu ngắn về chất lượng ảnh (tối, nghiêng, che mặt, có nhiều người) nếu cần, không thì [].
 
 DANH MỤC (mã câu — câu hỏi — các mã lựa chọn: nhãn):
@@ -53,15 +58,39 @@ def _he_thong() -> str:
     return _HE_THONG.replace("{danh_muc}", "\n".join(dong))
 
 
+GOC = ("thang", "nghieng_trai", "nghieng_phai")
+TEN_GOC = {"thang": "chính diện", "nghieng_trai": "nghiêng trái", "nghieng_phai": "nghiêng phải"}
+SO_ANH_TOI_DA = 3
+
+
 def dung_prompt(yc: dict) -> list[dict]:
     noi_dung: list[dict] = [{"type": "text", "text": "Ảnh chân dung người gửi (chính họ). Hãy chọn lựa chọn cho các câu nhìn thấy được."}]
-    for a in yc["anh"]:
+    for i, a in enumerate(yc["anh"][:SO_ANH_TOI_DA]):
+        goc = a.get("goc") if a.get("goc") in GOC else ("thang" if i == 0 else None)
+        noi_dung.append({"type": "text", "text": f"Ảnh {i + 1}: {TEN_GOC[goc] if goc else 'góc khác'}."})
         noi_dung.append({"type": "image_url", "image_url": {"url": f"data:{a['loai']};base64,{a['du_lieu']}"}})
     return [{"role": "system", "content": _he_thong()}, {"role": "user", "content": noi_dung}]
 
 
+def _kiem_tra(x) -> dict:
+    """Kết quả kiểm ảnh của mô hình → bộ cờ tất định (thiếu = coi là ổn, trừ thấy mặt). Không giữ chữ tự do."""
+    x = x if isinstance(x, dict) else {}
+    try:
+        so = int(x.get("so_nguoi", 1))
+    except (TypeError, ValueError):
+        so = 1
+    return {"thay_mat": x.get("thay_mat", True) is not False, "so_nguoi": max(0, min(so, 9)),
+            "nhin_thang": x.get("nhin_thang", True) is not False, "du_sang": x.get("du_sang", True) is not False}
+
+
+LOI_KIEM_TRA = {"khong_mat": "Chưa thấy một gương mặt rõ trong ảnh chính diện — chọn ảnh chụp thẳng, đủ sáng, không che mặt.",
+                "nhieu_nguoi": "Ảnh có nhiều hơn một người — chỉ gửi ảnh của chính bạn, một mình trong khung.",
+                "nghieng": "Ảnh chính diện đang nghiêng — gợi ý có thể kém chính xác ở mắt, mày, miệng.",
+                "toi": "Ảnh hơi tối — gợi ý về sắc da, khí sắc có thể lệch."}
+
+
 def _tat(ly_do: str | None) -> dict:
-    return {"da_bat": ly_do is None, "ly_do_tat": ly_do, "tra_loi": [], "luu_y": [], "can_xac_nhan": True}
+    return {"da_bat": ly_do is None, "ly_do_tat": ly_do, "tra_loi": [], "luu_y": [], "can_xac_nhan": True, "kiem_tra": None}
 
 
 def da_bat() -> bool:
@@ -73,8 +102,20 @@ def hau_xu_ly(tho: dict) -> dict:
     if tho.get("tra_loi") is not None and not isinstance(tho["tra_loi"], list):
         raise ValueError("tra_loi_khong_phai_danh_sach")
     dm = {c["ma"]: {l["ma"] for l in c["lua_chon"] if l["ma"] != "khong_chac"} for c in danh_muc()}
+    kt = _kiem_tra(tho.get("kiem_tra"))
+    loi_kt = []
+    if not kt["thay_mat"]:
+        loi_kt.append(LOI_KIEM_TRA["khong_mat"])
+    elif kt["so_nguoi"] != 1:
+        loi_kt.append(LOI_KIEM_TRA["nhieu_nguoi"])
+    else:
+        if not kt["nhin_thang"]:
+            loi_kt.append(LOI_KIEM_TRA["nghieng"])
+        if not kt["du_sang"]:
+            loi_kt.append(LOI_KIEM_TRA["toi"])
+    dung_duoc = kt["thay_mat"] and kt["so_nguoi"] == 1
     ra: dict[str, dict] = {}
-    for x in tho.get("tra_loi") or []:
+    for x in (tho.get("tra_loi") or []) if dung_duoc else []:
         if not isinstance(x, dict):
             continue
         q, a = x.get("cau"), x.get("lua_chon")
@@ -85,14 +126,15 @@ def hau_xu_ly(tho: dict) -> dict:
             continue
         if q not in ra or tin > ra[q]["do_tin"]:
             ra[q] = {"cau": q, "lua_chon": a, "do_tin": tin}
-    luu_y = []
+    luu_y = list(loi_kt)            # lời kiểm ảnh là chữ CỐ ĐỊNH của hệ thống, đứng trước chữ mô hình đã lọc
     for x in tho.get("luu_y") or []:
         s = _loc_cau(x, 160)
-        if s:
+        if s and s not in luu_y:
             luu_y.append(s)
-        if len(luu_y) >= TOI_DA_LUU_Y:
+        if len(luu_y) >= TOI_DA_LUU_Y + len(loi_kt):
             break
-    return {"da_bat": True, "ly_do_tat": None, "tra_loi": sorted(ra.values(), key=lambda m: -m["do_tin"]), "luu_y": luu_y, "can_xac_nhan": True}
+    return {"da_bat": True, "ly_do_tat": None, "tra_loi": sorted(ra.values(), key=lambda m: -m["do_tin"]), "luu_y": luu_y,
+            "can_xac_nhan": True, "kiem_tra": kt}
 
 
 def doc_anh(yc: dict) -> dict:
@@ -108,7 +150,7 @@ def doc_anh(yc: dict) -> dict:
     try:
         with httpx.Client(timeout=45) as c:
             r = c.post(OPENROUTER_URL, headers={"Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}", "Content-Type": "application/json"},
-                       json={"model": model, "temperature": 0.1, "max_tokens": 900, "response_format": {"type": "json_object"},
+                       json={"model": model, "temperature": 0.1, "max_tokens": 1200, "response_format": {"type": "json_object"},
                              "messages": dung_prompt(yc)})
             r.raise_for_status()
             van = r.json()["choices"][0]["message"]["content"]
