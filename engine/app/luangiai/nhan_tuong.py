@@ -296,7 +296,9 @@ def khao_sat() -> dict:
     bv = {ma: {k: v for k, v in x.items() if k in ("ten", "han", "vi_tri", "vung", "cung", "nghia")} for ma, x in kb.bo_vi().items()}
     return {"buoc": kb.buoc(), "cau_hoi": kb.cau_hoi(), "bo_vi": bv, "cung": kb.cung(),
             "truong_phai": {k: {"ten": v["ten"], "ngan": v["ngan"], "mo_ta": v["mo_ta"]} for k, v in kb.truong_phai().items()},
-            "ngu_hinh": {k: {"ten": v["ten"], "hanh": v["hanh"], "dau_hieu": v["dau_hieu"]} for k, v in kb.ngu_hinh().items()}}
+            "ngu_hinh": {k: {"ten": v["ten"], "hanh": v["hanh"], "dau_hieu": v["dau_hieu"]} for k, v in kb.ngu_hinh().items()},
+            # ANH-2: danh sách điểm mốc để web vẽ bước chấm điểm (đo do CALC nhan_tuong_do làm, web không tính).
+            "diem_do": {k: kb.do_anh().get(k) for k in ("nhom", "diem")}}
 
 
 # ------------------------------------------------------------------ hỏi đáp

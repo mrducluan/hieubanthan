@@ -13,8 +13,12 @@ export interface LuaChon { ma: string; nhan: string }
 export interface CauHoi { ma: string; buoc: number; bo_vi: string; nhom: string; hoi: string; huong_dan: string; lua_chon: LuaChon[] }
 export interface BuocKS { so: number; ten: string; goi_y: string }
 export interface BoVi { ten: string; han?: string; vi_tri: string; vung: string; cung?: string; nghia: string }
+/** ANH-2: một điểm mốc để người dùng tự chấm trên ảnh (engine KB `do_anh`). */
+export interface DiemDo { ma: string; ten: string; nhom: string; mo: string; bat_buoc: boolean }
 export interface KhaoSat {
   buoc: BuocKS[]; cau_hoi: CauHoi[]; bo_vi: Record<string, BoVi>; cung: Record<string, { ten: string; noi_ve: string; bo_vi: string[] }>;
+  /** ANH-2: engine cũ chưa có → khối đo trên ảnh tự ẩn. */
+  diem_do?: { nhom: Record<string, string>; diem: DiemDo[] };
   truong_phai: Record<string, { ten: string; ngan: string; mo_ta: string }>;
   ngu_hinh: Record<string, { ten: string; hanh: string | null; dau_hieu: string }>;
 }

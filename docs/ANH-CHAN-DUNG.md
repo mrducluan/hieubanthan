@@ -42,3 +42,32 @@ Không làm: nhận dạng danh tính / so khớp khuôn mặt (khác mục đí
 ## 4. Việc của chủ dự án
 
 Mục 4aa `docs/VIEC-CUA-ANH.md`: bật `NHAN_TUONG_DOC_ANH=1` trên Render **sau** khi có ý kiến luật sư về dữ liệu sinh trắc (hợp đồng xử lý với nhà cung cấp AI, hồ sơ đánh giá tác động, chuyển dữ liệu ra nước ngoài); duyệt (hoặc không) dependency MediaPipe cho phương án A ở GĐ2.
+
+## 5. ANH-2 — hệ thống tự đo, không dùng AI (2026-11-06, cách chính)
+
+Chủ dự án hỏi: "nếu không cần công cụ AI có được không — người dùng tự tải ảnh lên, hệ thống hieuban tự luận giải". **Được**, với
+một giới hạn nói thẳng: nhận ra *vị trí* mắt, mũi, miệng một cách tự động bắt buộc phải có một mô hình học máy (ở máy chủ hoặc
+trên máy người dùng). Không dùng mô hình nào thì người dùng phải tự chấm điểm mốc — và đó là cách ANH-2 chọn.
+
+| | Tự chấm điểm + hệ thống đo (**chọn**) | Mô hình điểm mốc chạy trên máy (MediaPipe) | Thị giác máy tính cổ điển ở máy chủ (OpenCV/dlib) |
+|---|---|---|---|
+| Có "AI" không | Không | Có (mô hình học máy, chạy trong trình duyệt) | Có (Haar/HOG + mô hình 68 điểm) |
+| Ảnh đi đâu | Không rời máy; chỉ gửi toạ độ 20 điểm + tỉ lệ khung | Không rời máy | Lên máy chủ hieuban |
+| Phụ thuộc | Không | `@mediapipe/tasks-vision` + WASM + mở CSP | `opencv`, `dlib`; mô hình 68 điểm iBUG **chỉ cho phi thương mại** |
+| Độ đúng | Tuỳ người chấm (kéo chỉnh, nhích bằng phím); tỉ lệ có biên an toàn | Cao, tự động | Trung bình, kém với ảnh nghiêng / tối |
+| Kết | **Làm** | Để sau nếu cần tự động hoá (dùng chung CALC ANH-2: chỉ thay bước chấm) | Không làm (giấy phép + đưa ảnh lên máy chủ) |
+
+**Cách chạy**: ảnh hiện bằng `blob:` trên máy → người dùng chấm 20 điểm bắt buộc (đường viền mặt 8 · mắt mày 6 · mũi miệng 6)
++ 2 điểm tai tuỳ chọn theo hướng dẫn (hình mặt mẫu sáng đúng điểm đang chấm; chạm để đặt, kéo để chỉnh, mũi tên để nhích) →
+thoả thuận **`dm1`** (riêng với thoả thuận gửi ảnh cho AI `am1`: khác người nhận) → `POST /v1/nhan-tuong/do-mat` {diem, ti_le, dong_y}.
+CALC `calc/nhan_tuong_do.py` (test viết trước, 28 ca): đổi về cùng đơn vị theo tỉ lệ khung → xoay theo đường hai đuôi mắt →
+kiểm thứ tự điểm (báo đúng điểm sai bằng tiếng Việt) → tỉ lệ "tam đình ngũ nhãn" (ba đình, cao/ngang gò má, trán/gò má,
+hàm/gò má, mắt/ngang mặt, Ấn Đường/khoé mắt, cánh mũi/khoé mắt, miệng/cánh mũi, độ nghiêng đuôi mắt, khoé miệng, nhân trung,
+lệch mũi, tai so với mày và chân mũi) → gợi ý cho 11 câu khảo sát theo ngưỡng KB `nhan_tuong_kb.do_anh` (ngưỡng biên tập,
+`can_doi_chieu`). Mặt quay ngang → bỏ các phép đo hai bên + cảnh báo; đầu nghiêng → xoay lại + cảnh báo. Gợi ý → người dùng
+tích xác nhận → điền khảo sát → bài đọc của RULES có sẵn. **Không đo**: sắc da, nếp nhăn, độ dày thịt, ánh mắt, giọng, dáng
+(ảnh không đủ tin) — để Khảo sát hoặc tuỳ chọn máy AI (ANH-1, vẫn tắt mặc định, gập dưới phép đo).
+
+Kiểm: engine `tests/test_nhan_tuong_do.py` (mặt mẫu dựng tay, từng ngưỡng, bất biến khi xoay 10° và khung 3:4, mặt quay ngang,
+sai thứ tự, thiếu điểm, API 200/422); e2e `anh-chan-dung.spec.ts` chấm 20 điểm bằng chuột với **engine thật** → "mặt dài, trán
+dài" → xác nhận → khảo sát → bài đọc; sai thứ tự → lời engine → kéo sửa; thân gửi không có ảnh; hai thoả thuận tách riêng.

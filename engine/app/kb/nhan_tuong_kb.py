@@ -94,6 +94,11 @@ def dac_diem() -> dict:
     return _lay("dac_diem") or {}
 
 
+def do_anh() -> dict:
+    """ANH-2: điểm mốc + ngưỡng + lời của phép đo gương mặt trên ảnh (không AI)."""
+    return _lay("do_anh") or {}
+
+
 def chuong() -> dict:
     return _lay("chuong") or {}
 
