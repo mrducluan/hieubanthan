@@ -22,6 +22,7 @@
 | TuViMCP (© 2026 Manh Ha Nguyen) | Danh mục cách cục Tử vi để đối chiếu | MIT |
 | opencode-tianji 0.6.0 | Bản số hoá nguyên văn Chu Dịch (quái từ, hào từ) | MIT |
 | anko-ki-maya (Mahesh Koria) | Khung mục chân dung thần số (không chép nội dung) | MIT |
+| @mediapipe/tasks-vision 1.2.2 (Google) + mô hình Face Landmarker float16 v1 | ANH-3: tìm điểm mốc gương mặt NGAY TRÊN MÁY người dùng (WebAssembly, tự phục vụ ở `/mediapipe/`, `web/lib/diem-moc-tu-dong.ts`); chỉ ra toạ độ, phép đo vẫn ở engine | Apache-2.0 — chạy runtime trong trình duyệt. Thư viện có đoạn gửi số liệu hiệu năng về Google: CSP `connect-src` không mở tên miền đó → bị chặn, không gì rời máy |
 | aov.cc | Oracle đối chiếu lá số khi phát triển | Không chạy runtime |
 | Cổ thư (ctext.org) | Nguyên văn Kinh Dịch, Tử Vi Đẩu Số Toàn Thư, Tử Bình Chân Thuyên… | Phạm vi công cộng; ctext cấm cào tự động |
 | Wikisource 紫微斗數全書/全覽 (oldid 850734, bản đóng băng) | Nguyên văn Đẩu Số Cốt Tuỷ Phú (`kb/data/tuvi_co_thu.json`, `docs/CO-THU-COT-TUY-PHU.md`) | Văn bản đời Minh công cộng; lớp trang Wikisource CC BY-SA — chỉ dùng chữ của cổ văn |

@@ -33,7 +33,7 @@ async function lamMoiPhien(req: NextRequest): Promise<CookieMoi[]> {
 // next.config.mjs). Giữ: /api/quan-tri (làm mới phiên), .js (sw.js cần CSP của chính nó), .md (bản Markdown trang).
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon\\.ico|og(?:/|$)|api/(?!quan-tri)|.*\\.(?:png|jpe?g|gif|svg|ico|webp|avif|woff2?|ttf|otf|txt|xml|json|webmanifest|ics|pdf|map)$).*)",
+    "/((?!_next/static|_next/image|favicon\\.ico|mediapipe/|og(?:/|$)|api/(?!quan-tri)|.*\\.(?:png|jpe?g|gif|svg|ico|webp|avif|woff2?|ttf|otf|txt|xml|json|webmanifest|ics|pdf|map)$).*)",
   ],
 };
 

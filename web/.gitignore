@@ -6,3 +6,5 @@ next-env.d.ts
 # next dev tự sinh (hướng dẫn cho trợ lý AI) — không đưa vào repo
 AGENTS.md
 CLAUDE.md
+# ANH-3: bộ tìm điểm mốc gương mặt chép từ node_modules + mo-hinh/ lúc dev/build (scripts/chep-mediapipe.mjs)
+public/mediapipe/

@@ -1,0 +1,6 @@
+{
+  "_ghi_chu": "ANH-3: bộ tìm điểm mốc gương mặt chạy trên máy người dùng. scripts/chep-mediapipe.mjs chép wasm (từ node_modules) + mô hình (mo-hinh/) vào public/mediapipe/<phien_ban>/ trước dev/build. Nâng @mediapipe/tasks-vision → sửa phien_ban ở đây (script báo lỗi khi lệch).",
+  "phien_ban": "1.2.2",
+  "mo_hinh": "face_landmarker_f16_v1.task",
+  "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+}

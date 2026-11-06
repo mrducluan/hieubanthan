@@ -71,3 +71,45 @@ tích xác nhận → điền khảo sát → bài đọc của RULES có sẵn.
 Kiểm: engine `tests/test_nhan_tuong_do.py` (mặt mẫu dựng tay, từng ngưỡng, bất biến khi xoay 10° và khung 3:4, mặt quay ngang,
 sai thứ tự, thiếu điểm, API 200/422); e2e `anh-chan-dung.spec.ts` chấm 20 điểm bằng chuột với **engine thật** → "mặt dài, trán
 dài" → xác nhận → khảo sát → bài đọc; sai thứ tự → lời engine → kéo sửa; thân gửi không có ảnh; hai thoả thuận tách riêng.
+
+## 6. ANH-3 — máy TỰ TÌM điểm mốc trên ảnh (2026-11-06, chủ dự án duyệt dependency)
+
+Chủ dự án thử ANH-2 trên điện thoại: chấm 20 điểm bằng tay chậm, dễ lệch (điểm tai chấm vào mặt). Tìm vị trí mắt, mũi, miệng
+tự động bắt buộc phải có mô hình nhận dạng điểm mốc — không viết tay được. So sánh:
+
+| Phương án | Ảnh rời máy? | Chính xác | Chi phí |
+|---|---|---|---|
+| **A. Bộ tìm điểm mốc chạy trong trình duyệt (chọn)** — `@mediapipe/tasks-vision` (Apache-2.0), lưới 478 điểm | Không | Tốt với ảnh chính diện (≈ 0,1–0,5 giây/ảnh) | Dependency mới + ~7 MB nén tải lần đầu (cache 1 năm), CSP `'wasm-unsafe-eval'` |
+| B. Chấm 4 điểm + dò cạnh / vùng tối bằng tay viết | Không | Kém (ánh sáng, kính, râu) | Không dependency |
+| C. Mô hình ở máy chủ (OpenCV / dlib) | Có — ảnh sinh trắc lên máy chủ | Tốt | Mô hình 68 điểm phổ biến không cho dùng thương mại; trái "không lưu ảnh" về tinh thần |
+
+Cách làm:
+- `web/lib/diem-moc.ts` (hàm thuần): lưới → 19 điểm KB (viền mặt, mắt, mày, mũi, miệng; "mép trán ngang đuôi mày" = chỗ viền
+  mặt cắt độ cao đuôi mày, sau khi xoay theo đường hai đuôi mắt); trái / phải gán theo vị trí trên ảnh (ảnh lật gương vẫn đúng).
+  **Chân tóc** lưới không có → dò theo màu (lấy màu da trán, đi từ đỉnh trán của lưới lên theo trục mặt, dải đầu tiên hết giống
+  da là chân tóc); không chắc (ảnh cắt sát trán, tóc mái phủ) → để người dùng chấm. **Tai** không có trong lưới → người dùng chấm
+  nếu muốn (không bắt buộc).
+- `web/lib/diem-moc-tu-dong.ts`: nạp bộ đo khi người dùng chọn ảnh (import động), vẽ ảnh vào canvas ≤ 1280 px (đúng chiều EXIF),
+  0 mặt / > 1 mặt → báo, người dùng chấm tay. Chạy CPU (WebGL trên điện thoại cũ hay lỗi).
+- `DoMatTrenAnh`: chọn ảnh → "Đang tìm điểm mốc trên máy bạn…" → đặt sẵn chấm (chân tóc viền nét đứt = cần kiểm) → người dùng
+  kéo chấm lệch → đồng ý `dm1` → engine đo như ANH-2 (không đổi API). Nút "Tự tìm lại", "Chấm tay từ đầu".
+- Tự phục vụ: `scripts/chep-mediapipe.mjs` (predev / prebuild) chép wasm từ node_modules + mô hình `web/mo-hinh/` (kiểm SHA-256,
+  `lib/bo-do-mat.json`) vào `public/mediapipe/<phiên bản>/` (không vào git); proxy bỏ qua `/mediapipe/`; cache 1 năm.
+- **Số liệu hiệu năng của thư viện**: bản 1.2.2 tự gửi số liệu sử dụng về máy chủ của nhà phát triển (`odml.pa.googleapis.com`).
+  CSP `connect-src` không có tên miền đó → trình duyệt chặn; e2e kiểm không yêu cầu nào ra ngoài trong lúc đo. Thêm tên miền
+  Google vào `CSP_THEM_MIEN` thì phải xem lại điểm này.
+- Ngưỡng: "trên rộng dưới nhọn" 0,18 → **0,26** (đo theo viền mặt, trán ≈ 0,95–1,0 gò má, hàm ≈ 0,75–0,80 → mặt trung bình đã
+  lệch ~0,19). Mọi ngưỡng `do_anh.nguong` vẫn chờ chuyên gia duyệt; nên chụp **mặt tự nhiên, không cười** (cười làm miệng
+  "rộng khoé lên", mắt "nhỏ").
+
+Kiểm: e2e `anh-tu-dong.spec.ts` (hàm thuần trên lưới / ảnh dựng tay; bộ đo thật trong Chromium trên ảnh chân dung mẫu công khai
+của MediaPipe — tải lúc chạy, không vào git — tự đặt 20 điểm → engine đo; không có yêu cầu ra ngoài), engine test ngưỡng mới.
+
+### Ảnh nghiêng trái / phải cho phép đo (chủ dự án hỏi 2026-11-06 — đề xuất, chưa làm)
+
+Ảnh thẳng không thấy độ "nổi" của mặt. Ảnh nghiêng (≈ 90°, thấy rõ đường viền) trả lời thêm được: `tran` (gồ lồi / lõm giữa),
+`nhat_nguyet_giac` (câu này vốn ghi "nhìn nghiêng"), `son_can` (gốc mũi cao liền / thấp), `song_mui` (thẳng cao / gồ / thấp),
+`cam` (nhọn lẹm), `tai` (vị trí đỉnh tai, dái tai so với mày và chân mũi). Lưới điểm mốc vẽ theo khuôn mặt chuẩn nên độ sâu ở ảnh
+thẳng chủ yếu là "đoán theo khuôn" — không dùng để kết luận; phải đo trên ĐƯỜNG VIỀN của ảnh nghiêng. Cần: CALC mới (đo góc,
+độ lồi trên đường viền), ngưỡng có nguồn, test; người dùng chấm ~7 điểm trên đường viền (máy đặt sẵn khi tìm được). Ảnh nghiêng
+luôn tuỳ chọn — không có vẫn đo ảnh thẳng như bây giờ.

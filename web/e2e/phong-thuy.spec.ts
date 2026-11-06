@@ -366,7 +366,7 @@ test("DH-PC2: chọn trên ảnh vệ tinh (khung riêng, CSP riêng) — bấm 
   const o = page.getByTestId("do-huong");
   // CSP chung của trang KHÔNG có 'unsafe-eval'; khung có CSP riêng
   const cspTrang = (await page.request.get("/phong-thuy")).headers()["content-security-policy"] ?? "";
-  if (!/ws: /.test(cspTrang)) expect(cspTrang).not.toContain("unsafe-eval");   // next dev tự thêm 'unsafe-eval' cho trang
+  if (!/ws: /.test(cspTrang)) expect(cspTrang).not.toContain("'unsafe-eval'");   // next dev tự thêm 'unsafe-eval' cho trang ('wasm-unsafe-eval' của ANH-3 được phép)
   const k = await page.request.get("/khung/ve-tinh");
   expect(k.status()).toBe(200);
   expect(k.headers()["content-security-policy"]).toContain("'unsafe-eval'");

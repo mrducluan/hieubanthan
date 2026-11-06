@@ -5830,7 +5830,7 @@
    "dai_cao_rong": 1.5,
    "tron_cao_rong": 1.3,
    "vuong_ham_ma": 0.88,
-   "tren_rong_duoi_nhon": 0.18,
+   "tren_rong_duoi_nhon": 0.26,
    "tren_hep_duoi_rong": 0.08,
    "may_giao": 0.55,
    "may_hep": 0.8,
@@ -5867,6 +5867,7 @@
    "tai": "Đỉnh tai {dinh_tai} so với đầu mày; dái tai {dai_tai} so với chân mũi (sách xưa: tai cao ngang mày, dái tai tới chân mũi là tai tốt).",
    "canh_bao_quay": "Mặt trong ảnh hơi quay sang một bên — phần đo hai bên trái phải (lệch mũi, lệch miệng) đã bỏ qua; nên dùng ảnh nhìn thẳng.",
    "canh_bao_nghieng": "Đầu trong ảnh hơi nghiêng ({goc}°) — hệ thống đã xoay lại theo đường hai đuôi mắt trước khi đo."
-  }
+  },
+  "_ghi_chu_nguong": "ANH-3 (2026-11-06): 'mép trán ngang đuôi mày' đo theo viền mặt ≈ 0,95–1,0 bề ngang gò má, hàm ≈ 0,75–0,80 (số đo nhân trắc phổ biến) → hiệu trán − hàm trung bình ~0,19; 'trên rộng dưới nhọn' cần ≥ 0,26 (trước 0,18 bắt nhầm mặt trung bình). Mọi ngưỡng vẫn chờ chuyên gia duyệt."
  }
 }

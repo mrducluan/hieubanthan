@@ -35,6 +35,10 @@ const nextConfig = {
   // Header bảo mật cơ bản (tín hiệu tin cậy; không chặn tính năng nào đang dùng — la bàn cần cảm biến chuyển động).
   async headers() {
     return [{
+      // ANH-3: bộ tìm điểm mốc gương mặt (~7 MB nén) — đường dẫn mang số phiên bản nên cache lâu được.
+      source: "/mediapipe/:path*",
+      headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+    }, {
       source: "/:path*",
       headers: [
         { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },

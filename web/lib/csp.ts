@@ -4,6 +4,9 @@
 // các gói JS, GTM tải gtag). Script lạ chèn vào trang (XSS: <img onerror>, <script> không nonce) và script từ tên miền
 // lạ đều bị chặn. 'unsafe-inline' + https: chỉ là phương án lùi cho trình duyệt quá cũ (trình duyệt hiểu nonce bỏ qua chúng).
 // Dữ liệu (fetch/XHR/beacon) chỉ gửi được tới connect-src → chặn kiểu ăn cắp dữ liệu gửi ra máy chủ lạ.
+// 'wasm-unsafe-eval' (ANH-3): chỉ cho phép DỊCH WebAssembly (bộ tìm điểm mốc gương mặt chạy trên máy, tệp tự phục vụ ở
+// /mediapipe/) — không mở eval() của JavaScript. Bộ đó có sẵn đoạn gửi số liệu hiệu năng về nhà phát triển: connect-src không có
+// tên miền đó nên trình duyệt chặn, không gì rời máy (e2e/anh-tu-dong.spec.ts kiểm).
 // Style giữ 'unsafe-inline' (next/font, motion dùng style nội dòng; rủi ro thấp hơn script nhiều).
 
 /** Origin từ biến môi trường (bỏ qua giá trị rỗng/sai). */
@@ -30,7 +33,7 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
     ...(dev ? ["ws:", "http://localhost:*"] : [])];
   return [
     "default-src 'self'",
-    `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https: 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}`,
+    `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https: 'unsafe-inline' 'wasm-unsafe-eval'${dev ? " 'unsafe-eval'" : ""}`,
     `style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://fonts.googleapis.com`,
     // notfair.co: ảnh nằm trong thân bài blog NotFair (ảnh bìa đi qua /_next/image = 'self').
     // CMS: ảnh bài viết nằm ở CMS (CMS_URL) hoặc kho ảnh của CMS (CMS_ANH_URL, vd Supabase Storage công khai).
