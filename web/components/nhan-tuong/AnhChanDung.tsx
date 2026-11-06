@@ -25,7 +25,7 @@ export function AnhChanDung({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
         <p className="eyebrow text-gold">Từ ảnh của bạn · ảnh không rời máy</p>
         <h2 id="anh-chan-dung" className="mt-2 font-serif text-2xl leading-tight sm:text-3xl">Tải ảnh chân dung — <span className="text-gradient-gold">hệ thống tự đo</span>, bạn xác nhận</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-fg-muted sm:text-base">
-          Chọn một ảnh chụp thẳng, chấm 20 điểm theo hướng dẫn (khoảng hai phút). Hệ thống đo tỉ lệ ba đình, độ rộng trán, gò má, quai hàm, mắt, mũi, miệng theo phép &ldquo;tam đình ngũ nhãn&rdquo; của sách tướng, gợi ý câu trả lời cho khảo sát, bạn xác nhận rồi xem bài đọc. Không dùng AI, không chấm điểm, không lưu ảnh.
+          Chọn một ảnh chụp thẳng — máy bạn tự tìm 20 điểm mốc ngay trong trình duyệt (vài giây), bạn chỉ xem lại và kéo chấm nào lệch. Hệ thống đo tỉ lệ ba đình, độ rộng trán, gò má, quai hàm, mắt, mũi, miệng theo phép &ldquo;tam đình ngũ nhãn&rdquo; của sách tướng, gợi ý câu trả lời cho khảo sát, bạn xác nhận rồi xem bài đọc. Ảnh không gửi đi đâu, không chấm điểm, không lưu ảnh.
         </p>
         <div className="mt-5">{ks ? <DoMatTrenAnh ks={ks} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem} dangXem={dangXem} /> : null}</div>
         {bat && ks && (

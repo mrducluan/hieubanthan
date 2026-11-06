@@ -5,12 +5,15 @@
 // đường hai đuôi mắt, đo tỉ lệ "tam đình ngũ nhãn", gợi ý lựa chọn khảo sát → người dùng xác nhận → bài đọc. Web không tính
 // gì: hình hướng dẫn là hình tĩnh (khuôn mặt mẫu), không đo. Điểm mốc gương mặt vẫn là dữ liệu nhạy cảm → thoả thuận
 // `dm1` (không tích sẵn, rút được) trước khi gửi; không lưu ở đâu.
+// ANH-3: chọn ảnh xong, máy người dùng TỰ TÌM điểm mốc (lib/diem-moc-tu-dong — chạy trong trình duyệt, ảnh không đi đâu) và
+// đặt sẵn các chấm; người dùng chỉ xem lại, kéo chấm lệch. Không tìm được → chấm tay như cũ.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Check, ImagePlus, RotateCcw, Ruler, ShieldCheck, Undo2, X } from "lucide-react";
+import { Check, ImagePlus, Loader2, RotateCcw, Ruler, ScanFace, ShieldCheck, Undo2, X } from "lucide-react";
 import Link from "@/components/khung/Lien";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import { DONG_Y_DO_MAT, ngayDongYAnhMat } from "@/lib/dong-y-anh-mat";
+import type { KetQuaTim } from "@/lib/diem-moc-tu-dong";
 import { postJson } from "@/lib/goi-api";
 import type { DiemDo, KhaoSat, TraLoi } from "@/lib/nhan-tuong";
 import { cn } from "@/lib/utils";
@@ -27,6 +30,24 @@ const MAU: Record<string, [number, number]> = {
   mat_ngoai_phai: [67, 43], chan_mui: [50, 60], canh_mui_trai: [44, 58], canh_mui_phai: [56, 58], mep_trai: [41, 69], giua_moi: [50, 68],
   mep_phai: [59, 69], dinh_tai: [20, 38], dai_tai: [21, 60],
 };
+type TrangThaiTim = null | "dang" | KetQuaTim["trang_thai"];
+const LOI_TIM: Record<string, string> = {
+  khong_thay: "Máy chưa thấy rõ gương mặt trong ảnh — chọn ảnh chụp thẳng, đủ sáng, hoặc tự chấm theo hướng dẫn bên dưới.",
+  nhieu_mat: "Ảnh có nhiều hơn một gương mặt — chọn ảnh chỉ có bạn, hoặc tự chấm các điểm của chính bạn.",
+  loi: "Máy này chưa chạy được bộ tự tìm điểm (trình duyệt cũ hoặc thiếu bộ nhớ) — bạn tự chấm theo hướng dẫn bên dưới.",
+};
+/** Vùng ảnh đang hiện (toạ độ 0..1 của ảnh). Ảnh bán thân: sau khi máy tìm thấy mặt, phóng vào mặt để chấm không chồng nhau. */
+type Vung = { x: number; y: number; w: number; h: number };
+const CA_ANH: Vung = { x: 0, y: 0, w: 1, h: 1 };
+function vungMat(d: Record<string, Diem>): Vung | null {
+  const ds = Object.values(d);
+  if (ds.length < 4) return null;
+  const x0 = Math.min(...ds.map((p) => p.x)), x1 = Math.max(...ds.map((p) => p.x)), y0 = Math.min(...ds.map((p) => p.y)), y1 = Math.max(...ds.map((p) => p.y));
+  const bw = x1 - x0, bh = y1 - y0;
+  const v = { x: Math.max(0, x0 - bw * 0.45), y: Math.max(0, y0 - bh * 0.22), w: 0, h: 0 };
+  v.w = Math.min(1, x1 + bw * 0.45) - v.x; v.h = Math.min(1, y1 + bh * 0.12) - v.y;
+  return v.w * v.h > 0.8 ? null : v;                 // mặt đã chiếm gần hết ảnh → không cần phóng
+}
 const urlBlob = (f: File): string | null => { const u = URL.createObjectURL(f); return u.startsWith("blob:") ? u : null; };
 const so = (v: number) => v.toFixed(2).replace(".", ",");
 
@@ -61,7 +82,16 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
   const [tinh, setTinh] = useState(false);
   const [kq, setKq] = useState<KqDo | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
+  const [tim, setTim] = useState<TrangThaiTim>(null);
+  const [canXem, setCanXem] = useState<string[]>([]);
+  const [vungPhong, setVungPhong] = useState<Vung | null>(null);
+  const [phong, setPhong] = useState(true);
+  const vung = phong && vungPhong && tiLe ? vungPhong : CA_ANH;
+  const phongTo = vung !== CA_ANH;
+  const raKhung = (p: Diem) => ({ x: (p.x - vung.x) / vung.w, y: (p.y - vung.y) / vung.h });
   const khung = useRef<HTMLDivElement>(null);
+  const anhRef = useRef<HTMLImageElement>(null);
+  const luotTim = useRef(0);
   const urlRef = useRef<string | null>(null);
   urlRef.current = url;
   useEffect(() => () => { if (urlRef.current) URL.revokeObjectURL(urlRef.current); }, []);
@@ -72,13 +102,34 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
     const u = urlBlob(f);
     if (!u) return;
     if (url) URL.revokeObjectURL(url);
-    setUrl(u); setTiLe(null); setDiem({}); setKq(null); setLoi(null); setDang(dsDiem[0]?.ma ?? null);
+    luotTim.current++;
+    setUrl(u); setTiLe(null); setDiem({}); setKq(null); setLoi(null); setDang(dsDiem[0]?.ma ?? null); setTim(null); setCanXem([]); setVungPhong(null);
     ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat_chon_anh" });
+  };
+  // Tự tìm điểm mốc trên máy. Chấm người dùng đã đặt trong lúc chờ được GIỮ (không bị đè).
+  const tuTim = async (img: HTMLImageElement, deLai: boolean) => {
+    const luot = ++luotTim.current;
+    setTim("dang"); setKq(null);
+    const { timDiemMoc } = await import("@/lib/diem-moc-tu-dong");
+    const r = await timDiemMoc(img);
+    if (luot !== luotTim.current) return;
+    setTim(r.trang_thai);
+    if (r.trang_thai !== "xong") {
+      ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat_tu_tim", ket_qua: r.trang_thai });
+      return;
+    }
+    const xem = ["chan_toc", ...r.thieu].filter((m, i, a) => a.indexOf(m) === i);
+    setCanXem(xem);
+    setDiem((d) => (deLai ? { ...r.diem } : { ...r.diem, ...d }));
+    setVungPhong(vungMat(r.diem)); setPhong(true);
+    setDang(r.thieu[0] ?? null);
+    ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat_tu_tim", ket_qua: "xong", so_diem: Object.keys(r.diem).length });
   };
   const viTri = (e: { clientX: number; clientY: number }): Diem | null => {
     const r = khung.current?.getBoundingClientRect();
     if (!r || !r.width || !r.height) return null;
-    return { x: Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)), y: Math.min(1, Math.max(0, (e.clientY - r.top) / r.height)) };
+    const rx = (e.clientX - r.left) / r.width, ry = (e.clientY - r.top) / r.height;
+    return { x: Math.min(1, Math.max(0, vung.x + rx * vung.w)), y: Math.min(1, Math.max(0, vung.y + ry * vung.h)) };
   };
   // Điểm đang chọn chưa đặt → chạm là ĐẶT (chỉ bắt điểm cũ khi chạm gần như trúng nó, 8 px — cánh mũi chỉ cách chân mũi
   // ~16 px trên điện thoại); điểm đang chọn đã đặt → chạm trong 20 px là KÉO điểm gần nhất.
@@ -87,7 +138,8 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
     if (!r) return null;
     let tot: string | null = null, kc = dang && !diem[dang] ? 8 : 20;
     for (const [ma, p] of Object.entries(diem)) {
-      const d = Math.hypot(r.left + p.x * r.width - e.clientX, r.top + p.y * r.height - e.clientY);
+      const k = raKhung(p);
+      const d = Math.hypot(r.left + k.x * r.width - e.clientX, r.top + k.y * r.height - e.clientY);
       if (d < kc) { kc = d; tot = ma; }
     }
     return tot;
@@ -98,18 +150,19 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
     const p = viTri(e);
     if (!p || !dang) return;
     const moi = { ...diem, [dang]: p };
+    setCanXem((c) => c.filter((m) => m !== dang));
     setDiem(moi); setKq(null);
     setDang(tiepTheo(moi) ?? dang);
   };
   const di = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!keo) return;
     const p = viTri(e);
-    if (p) { setDiem((d) => ({ ...d, [keo]: p })); setKq(null); }
+    if (p) { setDiem((d) => ({ ...d, [keo]: p })); setKq(null); setCanXem((c) => c.filter((m) => m !== keo)); }
   };
   const len = () => setKeo(null);
   const nhich = (e: React.KeyboardEvent) => {
     if (!dang || !diem[dang]) return;
-    const b = e.shiftKey ? 0.02 : 0.004;
+    const b = (e.shiftKey ? 0.02 : 0.004) * vung.w;
     const d = { ArrowLeft: [-b, 0], ArrowRight: [b, 0], ArrowUp: [0, -b], ArrowDown: [0, b] }[e.key];
     if (!d) return;
     e.preventDefault();
@@ -148,7 +201,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
         <label className="flex min-h-40 cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-gold/50 bg-bg/40 p-5 text-center text-sm text-fg-muted hover:border-gold hover:text-fg">
           <ImagePlus className="size-7 text-gold" aria-hidden />
           <span className="font-medium text-fg">Chọn hoặc chụp một ảnh chính diện</span>
-          <span className="max-w-sm text-xs">Nhìn thẳng, đủ sáng, tóc không che trán và tai. Ảnh chỉ hiện trên máy bạn — không tải lên.</span>
+          <span className="max-w-sm text-xs">Nhìn thẳng, đủ sáng, mặt tự nhiên (không cười), tóc không che trán. Máy bạn tự tìm điểm mốc — ảnh chỉ hiện trên máy, không tải lên.</span>
           <input type="file" accept="image/*" capture="user" className="sr-only" data-testid="do-input" aria-label="Chọn ảnh chân dung (chỉ hiện trên máy)"
             onChange={(e) => { chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
         </label>
@@ -157,31 +210,50 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
           <div>
             {/* Điện thoại: thẻ hướng dẫn bên cạnh rơi xuống dưới ảnh → dòng này luôn nằm ngay trên chỗ chạm. */}
             <p className="mb-2 rounded-lg border border-gold/40 bg-gold/[0.06] px-3 py-2 text-sm lg:hidden" data-testid="do-dang-cham-dt" aria-hidden>
-              {thongTin
+              {tim === "dang" ? <span className="text-fg-muted">Máy bạn đang tự tìm điểm mốc…</span>
+                : thongTin
                 ? <><span className="text-xs text-fg-faint">Điểm {dsDiem.indexOf(thongTin) + 1}/{dsDiem.length}: </span><b className="text-fg">{thongTin.ten}</b><span className="block text-xs text-fg-muted">{thongTin.mo}</span></>
-                : <span className="text-jade">Đã chấm đủ điểm — kéo chấm nếu cần chỉnh.</span>}
+                : <span className="text-jade">{tim === "xong" ? "Máy đã đặt sẵn các chấm — kéo chấm nào lệch." : "Đã chấm đủ điểm — kéo chấm nếu cần chỉnh."}</span>}
             </p>
-            <div ref={khung} className={cn("relative mx-auto w-full max-w-xl select-none touch-none", dang ? "cursor-crosshair" : "")}
+            <div ref={khung} className={cn("relative mx-auto w-full max-w-xl select-none touch-none", phongTo && "overflow-hidden rounded-xl border border-line", dang ? "cursor-crosshair" : "")}
+              style={phongTo ? { aspectRatio: `${vung.w * tiLe!} / ${vung.h}` } : undefined}
               onPointerDown={xuong} onPointerMove={di} onPointerUp={len} onPointerCancel={len} data-testid="do-khung" tabIndex={0} onKeyDown={nhich}
               aria-label="Ảnh của bạn — chạm để đặt điểm đang chọn, kéo chấm để chỉnh, mũi tên để nhích">
               {/* eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng */}
-              <img src={url} alt="Ảnh bạn chọn (chỉ hiện trên máy)" draggable={false} className="block w-full rounded-xl border border-line"
-                onLoad={(e) => { const i = e.currentTarget; if (i.naturalWidth && i.naturalHeight) setTiLe(i.naturalWidth / i.naturalHeight); }} />
-              {dsDiem.map((p, i) => diem[p.ma] && (
-                <span key={p.ma} aria-hidden className={cn("pointer-events-none absolute grid size-5 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 text-[9px] font-semibold",
-                  p.ma === dang ? "border-gold bg-gold text-bg" : "border-jade bg-bg/70 text-jade")}
-                  style={{ left: `${diem[p.ma]!.x * 100}%`, top: `${diem[p.ma]!.y * 100}%` }}>{i + 1}</span>
-              ))}
+              <img ref={anhRef} src={url} alt="Ảnh bạn chọn (chỉ hiện trên máy)" draggable={false} className={cn("block", phongTo ? "absolute" : "w-full rounded-xl border border-line")}
+                style={phongTo ? { maxWidth: "none", width: `${100 / vung.w}%`, left: `${(-vung.x / vung.w) * 100}%`, top: `${(-vung.y / vung.h) * 100}%` } : undefined}
+                onLoad={(e) => { const i = e.currentTarget; if (i.naturalWidth && i.naturalHeight) { setTiLe(i.naturalWidth / i.naturalHeight); void tuTim(i, false); } }} />
+              {tim === "dang" && (
+                <div className="pointer-events-none absolute inset-0 grid place-items-center rounded-xl bg-bg/40" data-testid="do-dang-tim">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-bg/90 px-3 py-1.5 text-sm text-fg shadow"><Loader2 className="size-4 animate-spin text-gold" aria-hidden /> Đang tìm điểm mốc trên máy bạn…</span>
+                </div>
+              )}
+              {dsDiem.map((p, i) => { const k = diem[p.ma] && raKhung(diem[p.ma]!); return k && k.x >= 0 && k.x <= 1 && k.y >= 0 && k.y <= 1 && (
+                <span key={p.ma} aria-hidden className={cn("pointer-events-none absolute grid size-4 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-[1.5px] text-[8px] font-semibold",
+                  p.ma === dang ? "border-gold bg-gold text-bg" : canXem.includes(p.ma) ? "border-dashed border-gold bg-bg/80 text-gold" : "border-jade bg-bg/70 text-jade")}
+                  style={{ left: `${k.x * 100}%`, top: `${k.y * 100}%` }}>{i + 1}</span>
+              ); })}
             </div>
+            {tim === "xong" && (
+              <p className="mt-2 rounded-lg border border-jade/40 bg-jade/[0.06] px-3 py-2 text-xs leading-relaxed text-fg-muted" data-testid="do-tu-tim-xong" aria-live="polite">
+                <ScanFace className="mr-1 inline size-3.5 text-jade" aria-hidden />
+                Máy bạn đã tự đặt {Object.keys(diem).length} điểm (ảnh không gửi đi đâu). Xem lại từng chấm, kéo chấm nào lệch.
+                {canXem.includes("chan_toc") && <> <b className="text-gold">Chân tóc (điểm 1, viền nét đứt)</b> được dò theo màu tóc — kiểm kỹ, nhất là khi tóc mái hoặc hói.</>}
+                {" "}Tai không bắt buộc: bấm “Đỉnh tai” trong danh sách để chấm thêm.
+              </p>
+            )}
+            {tim && tim !== "dang" && tim !== "xong" && <p className="mt-2 text-xs text-gold" data-testid="do-tu-tim-loi" aria-live="polite">{LOI_TIM[tim]}</p>}
             <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
+              <Button size="sm" variant="ghost" onClick={() => { if (anhRef.current) void tuTim(anhRef.current, true); }} disabled={tim === "dang" || !tiLe} data-testid="do-tu-tim"><ScanFace aria-hidden /> Tự tìm lại</Button>
+              {vungPhong && <Button size="sm" variant="ghost" onClick={() => setPhong((v) => !v)} data-testid="do-phong">{phong ? "Xem cả ảnh" : "Phóng vào mặt"}</Button>}
               <Button size="sm" variant="ghost" onClick={boLuot} disabled={!daDat.size}><Undo2 aria-hidden /> Bỏ điểm vừa chấm</Button>
-              <Button size="sm" variant="ghost" onClick={() => { setDiem({}); setDang(dsDiem[0]?.ma ?? null); setKq(null); }} disabled={!daDat.size}><RotateCcw aria-hidden /> Chấm lại từ đầu</Button>
+              <Button size="sm" variant="ghost" onClick={() => { luotTim.current++; setDiem({}); setDang(dsDiem[0]?.ma ?? null); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }} disabled={!daDat.size}><RotateCcw aria-hidden /> Chấm tay từ đầu</Button>
               <label className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg">
                 <ImagePlus className="size-3.5" aria-hidden /> Đổi ảnh
                 <input type="file" accept="image/*" className="sr-only" onChange={(e) => { chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
               </label>
               <button type="button" aria-label="Bỏ ảnh" className="ml-auto inline-flex items-center gap-1 text-fg-faint hover:text-fg"
-                onClick={() => { if (url) URL.revokeObjectURL(url); setUrl(null); setDiem({}); setKq(null); }}><X className="size-3.5" aria-hidden /> Bỏ ảnh</button>
+                onClick={() => { luotTim.current++; if (url) URL.revokeObjectURL(url); setUrl(null); setDiem({}); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }}><X className="size-3.5" aria-hidden /> Bỏ ảnh</button>
             </div>
           </div>
           <aside className="space-y-3">
@@ -211,9 +283,9 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
       )}
 
       <div className="rounded-2xl border border-line/70 bg-bg/70 p-4" data-testid="do-thoa-thuan">
-        <p className="flex items-center gap-2 text-sm font-semibold text-fg"><ShieldCheck className="size-4 text-gold" aria-hidden /> Thoả thuận đo gương mặt (không dùng AI)</p>
+        <p className="flex items-center gap-2 text-sm font-semibold text-fg"><ShieldCheck className="size-4 text-gold" aria-hidden /> Thoả thuận đo gương mặt (ảnh không rời máy)</p>
         <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">
-          Ảnh <b className="text-fg">không rời máy bạn</b>. Chỉ toạ độ {batBuoc.length} điểm bạn chấm (và tỉ lệ khung ảnh) được gửi tới máy chủ tính toán của Hiểu Bản Thân <b className="text-fg">một lượt</b> để đo tỉ lệ theo sách tướng; không lưu, không chuyển cho bên thứ ba, không dùng để nhận ra bạn. Ảnh phải là của chính bạn, bạn đủ 18 tuổi.
+          Ảnh <b className="text-fg">không rời máy bạn</b>. Điểm mốc do máy bạn tự tìm ngay trong trình duyệt hoặc do bạn chấm. Chỉ toạ độ {batBuoc.length} điểm đó (và tỉ lệ khung ảnh) được gửi tới máy chủ tính toán của Hiểu Bản Thân <b className="text-fg">một lượt</b> để đo tỉ lệ theo sách tướng; không lưu, không chuyển cho bên thứ ba, không dùng để nhận ra bạn. Ảnh phải là của chính bạn, bạn đủ 18 tuổi.
           Rút thoả thuận ở đây hoặc ở <Link href="/tai-khoan#du-lieu-cua-toi" className="text-gold underline underline-offset-2">Dữ liệu của tôi</Link> · <Link href="/chinh-sach-rieng-tu#anh-mat" className="text-gold underline underline-offset-2">Chính sách riêng tư</Link>.
         </p>
         {dongY ? (
@@ -224,7 +296,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
         ) : (
           <label className="mt-2 flex items-start gap-2 text-sm text-fg">
             <input type="checkbox" className="mt-0.5 size-4 shrink-0 accent-[rgb(var(--gold))]" checked={tick} onChange={(e) => setTick(e.target.checked)} data-testid="do-dong-y" />
-            <span>Tôi đồng ý gửi toạ độ các điểm đã chấm trên ảnh của chính tôi để đo.</span>
+            <span>Tôi đồng ý gửi toạ độ các điểm mốc trên ảnh của chính tôi để đo.</span>
           </label>
         )}
         <div className="mt-3 flex flex-wrap items-center gap-2">

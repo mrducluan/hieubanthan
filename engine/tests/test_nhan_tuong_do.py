@@ -151,3 +151,10 @@ def test_api_do_mat():
     # khảo sát trả danh sách điểm cho web vẽ
     ks = client.get("/v1/nhan-tuong/khao-sat").json()
     assert [p["ma"] for p in ks["diem_do"]["diem"]][:3] == ["chan_toc", "thai_trai", "thai_phai"] and ks["diem_do"]["nhom"]
+
+
+def test_mat_trung_binh_theo_vien_khong_bat_nham_tren_rong():
+    """ANH-3: mép trán đo theo viền mặt (máy tự tìm) ≈ 0,97 gò má, hàm ≈ 0,78 — mặt trung bình, không phải "trên rộng dưới nhọn"."""
+    d = {**mau(), "thai_trai": (0.306, 0.37), "thai_phai": (0.694, 0.37), "ham_trai": (0.344, 0.66), "ham_phai": (0.656, 0.66)}
+    kq = goi(d)
+    assert "khuon_mat" not in kq or kq["khuon_mat"] != "tren_rong_duoi_nhon"
