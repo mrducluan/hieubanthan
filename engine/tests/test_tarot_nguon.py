@@ -13,6 +13,7 @@ from app.kb import tarot_kb as kb
 NGUON = Path(__file__).resolve().parents[1] / "fixtures" / "nguon"
 WAITE = json.loads((NGUON / "tarot_waite_1910.json").read_text(encoding="utf-8"))
 BOOK_T = json.loads((NGUON / "tarot_book_t.json").read_text(encoding="utf-8"))
+MATHERS = json.loads((NGUON / "tarot_mathers_1888.json").read_text(encoding="utf-8"))   # 5/6 chương sacred-texts, chủ dự án lưu PDF
 
 
 def _chuan(s: str) -> str:
@@ -44,11 +45,26 @@ def test_moi_trich_la_nguyen_van_cua_nguon(ma):
             b = BOOK_T[ma]
             assert tr["ten"] == b["ten"], ma
             assert _chuan(tr["nguyen_van"]) in _chuan(b["mo_ta"]), (ma, tr["nguyen_van"][:60])
+        elif tr["sach"] == "mathers_1888":
+            m = MATHERS[ma]
+            assert tr["nguyen_van"] == f"{m['ten_en']}.--{m['y_xuoi']}" and tr["nguyen_van_nguoc"] == m["y_nguoc"], ma
+            if tr.get("bieu_tuong"):
+                assert tr["bieu_tuong"] == m["bieu_tuong"], ma
         else:
             raise AssertionError(f"{ma}: nguồn trích lạ {tr['sach']} — chỉ nguồn đã có fixture nguyên văn")
-    # lá có trong Book T thì phải có trích Book T (36 lá số + 16 hoàng gia)
+    # lá có trong Book T thì phải có trích Book T (36 lá số + 16 hoàng gia); Mathers 1888 có đủ 78 lá
     if ma in BOOK_T:
         assert any(tr["sach"] == "book_t" for tr in trich), ma
+    assert any(tr["sach"] == "mathers_1888" for tr in trich), ma
+
+
+def test_mathers_du_78_la_va_thu_tu_marseille():
+    assert sum(1 for m in calc.BO_BAI if m in MATHERS) == 78
+    assert all(MATHERS[m]["y_xuoi"] and MATHERS[m]["y_nguoc"] for m in calc.BO_BAI)
+    assert MATHERS["dai_11"]["so_mathers"] == 8 and MATHERS["dai_8"]["so_mathers"] == 11     # Mathers: 8 = Justice, 11 = Strength
+    assert sorted(MATHERS[m]["so_mathers"] for m in calc.BO_BAI) == list(range(78))
+    assert all(MATHERS[f"dai_{i}"].get("bieu_tuong") for i in range(22))
+    assert "Folly (0)" in MATHERS["_cau_22_key"]
 
 
 def test_ten_book_t_khop_nguon():
@@ -122,5 +138,5 @@ def test_phuong_phap_celtic_co_trong_waite():
 
 def test_kb_ghi_doi_chieu():
     dc = kb._d()["doi_chieu"]
-    assert set(dc) >= {"waite_1910", "book_t"}
+    assert set(dc) >= {"waite_1910", "book_t", "mathers_1888"}
     assert all((NGUON / Path(v["tep"]).name).exists() for v in dc.values())

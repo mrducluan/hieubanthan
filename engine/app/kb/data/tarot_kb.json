@@ -5,7 +5,7 @@
  "school_id": "tarot_tong_hop",
  "trang_thai": "nhap_ai",
  "can_doi_chieu": true,
- "luu_y": "Hướng nhìn nhân vật đọc theo bản Marseille Conver — một số lá các bản in khác nhau; decan theo Book T với mốc ngày phổ biến (lệch ±1 ngày tuỳ năm). Lớp Waite và Book T đã đối chiếu nguyên văn (xem doi_chieu, test test_tarot_nguon.py); lớp Marseille, Thoth (Crowley), B.O.T.A. vẫn là tóm ý chờ đối chiếu.",
+ "luu_y": "Hướng nhìn nhân vật đọc theo bản Marseille Conver — một số lá các bản in khác nhau; decan theo Book T với mốc ngày phổ biến (lệch ±1 ngày tuỳ năm). Lớp Waite, Book T và Mathers 1888 đã đối chiếu nguyên văn (xem doi_chieu, test test_tarot_nguon.py); lớp Marseille, Thoth (Crowley), B.O.T.A. vẫn là tóm ý chờ đối chiếu.",
  "nguon": {
   "waite_1910": "The Pictorial Key to the Tarot (A. E. Waite, 1910)",
   "book_t": "Book T — The Tarot (Golden Dawn, khoảng 1888–1896)",
@@ -864,6 +864,13 @@
      "nguyen_van": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
      "nguyen_van_nguoc": "Negligence, absence, distribution, carelessness, apathy, nullity, vanity.",
      "nghia": "Waite ghi: khờ dại, quá đà, bồng bột; ngược: lơ đễnh, thờ ơ, trống rỗng — ở đây đọc là bắt đầu khi chưa biết, và mặt tối là liều."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Foolish Man.--Folly, Expiation, Wavering",
+     "nguyen_van_nguoc": "Hesitation, Instability, Trouble arising herefrom",
+     "nghia": "Mathers: khờ, chuộc lỗi, dao động; ngược: do dự, bất ổn và rắc rối từ đó.",
+     "bieu_tuong": "It signifies Folly, Expiation."
     }
    ]
   },
@@ -931,6 +938,13 @@
      "nguyen_van": "Skill, diplomacy, address, subtlety; sickness, pain, loss, disaster, snares of enemies; self-confidence, will; the Querent, if male.",
      "nguyen_van_nguoc": "Physician, Magus, mental disease, disgrace, disquiet.",
      "nghia": "Waite ghi: khéo léo, ngoại giao, ý chí, tự tin; cũng có mặt bệnh tật, mất mát, bẫy; ngược: thầy thuốc, pháp sư, bất an, mất danh dự."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Juggler.--Will, Will-Power, Dexterity",
+     "nguyen_van_nguoc": "Will applied to evil ends, Weakness of Will, Cunning, Knavishness",
+     "nghia": "Mathers: ý chí, sức mạnh ý chí, khéo tay; ngược: ý chí dùng vào việc xấu, yếu ý chí, ranh mãnh.",
+     "bieu_tuong": "He symbolises Will."
     }
    ]
   },
@@ -998,6 +1012,13 @@
      "nguyen_van": "Secrets, mystery, the future as yet unrevealed; the woman who interests the Querent, if male; the Querent herself, if female; silence, tenacity; mystery, wisdom, science.",
      "nguyen_van_nguoc": "Passion, moral or physical ardor, conceit, surface knowledge.",
      "nghia": "Waite ghi: bí mật, điều chưa lộ, im lặng, trí tuệ; người phụ nữ khiến người hỏi để ý; ngược: đam mê, kiêu, hiểu bề mặt."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The High Priestess.--Science, Wisdom, Knowledge, Education",
+     "nguyen_van_nguoc": "Conceit, Ignorance, Unskilfulness, Superficial Knowledge",
+     "nghia": "Mathers: khoa học, trí tuệ, tri thức, học vấn; ngược: tự phụ, thiếu hiểu biết, vụng, biết hời hợt.",
+     "bieu_tuong": "She represents Science, Wisdom, or Knowledge."
     }
    ]
   },
@@ -1065,6 +1086,13 @@
      "nguyen_van": "Fruitfulness, action, initiative, length of days; the unknown, clandestine; also difficulty, doubt, ignorance.",
      "nguyen_van_nguoc": "Light, truth, the unravelling of involved matters, public rejoicings; according to another reading, vacillation.",
      "nghia": "Waite ghi: sinh sôi, hành động, khởi xướng, sống lâu; cũng là điều chưa rõ; ngược: ánh sáng, sự thật, gỡ rối, hoặc do dự."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Empress.--Action, Plan, Undertaking Movement in a matter, Initiative",
+     "nguyen_van_nguoc": "Inaction, Frittering away of power, Want of Concentration Vacillation",
+     "nghia": "Mathers: hành động, kế hoạch, khởi sự, chủ động; ngược: không làm, phí sức, thiếu tập trung, do dự.",
+     "bieu_tuong": "She is the Symbol of Action, the result of the union of Science and Will."
     }
    ]
   },
@@ -1132,6 +1160,13 @@
      "nguyen_van": "Stability, power, protection, realization; a great person; aid, reason, conviction; also authority and will.",
      "nguyen_van_nguoc": "Benevolence, compassion, credit; also confusion to enemies, obstruction, immaturity.",
      "nghia": "Waite ghi: ổn định, quyền lực, che chở, thành hình; người lớn, lý trí; ngược: nhân từ, uy tín; hoặc cản trở, non nớt."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Emperor.--Realisation, Effect, Development",
+     "nguyen_van_nguoc": "Stoppage, Check, Immature, Unripe",
+     "nghia": "Mathers: thành hình, hiệu quả, phát triển; ngược: ngưng trệ, bị chặn, non, chưa chín.",
+     "bieu_tuong": "He represents Realisation."
     }
    ]
   },
@@ -1199,6 +1234,13 @@
      "nguyen_van": "Marriage, alliance, captivity, servitude; by another account, mercy and goodness; inspiration; the man to whom the Querent has recourse.",
      "nguyen_van_nguoc": "Society, good understanding, concord, over-kindness, weakness.",
      "nghia": "Waite ghi: hôn nhân, liên minh, cũng là ràng buộc; lòng nhân; người mà người hỏi tìm đến; ngược: xã giao, hoà thuận, quá tốt bụng, yếu."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Hierophant or Pope.--Mercy, Beneficence Kindness, Goodness",
+     "nguyen_van_nguoc": "Over-kindness, weakness, Foolish exercise of generosity",
+     "nghia": "Mathers: lòng nhân, làm ơn, tử tế, tốt lành; ngược: quá tốt bụng, yếu, rộng rãi khờ khạo.",
+     "bieu_tuong": "He is the symbol of Mercy and Beneficence."
     }
    ]
   },
@@ -1266,6 +1308,13 @@
      "nguyen_van": "Attraction, love, beauty, trials overcome.",
      "nguyen_van_nguoc": "Failure, foolish designs.",
      "nghia": "Waite ghi: sức hút, tình yêu, cái đẹp, thử thách vượt qua; ngược: thất bại, dự định khờ; hôn nhân trắc trở."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Lovers.--Wise Dispositions, Proof, Trials Surmounted",
+     "nguyen_van_nguoc": "Unwise Plans, Failure when put to the test",
+     "nghia": "Mathers: sắp xếp khôn ngoan, thử thách vượt qua; ngược: kế hoạch dại, thất bại khi bị thử.",
+     "bieu_tuong": "It is usually considered to mean Proof or Trial; but I am inclined to suggest Wise Disposition as its signification."
     }
    ]
   },
@@ -1333,6 +1382,13 @@
      "nguyen_van": "Succor, providence; also war, triumph, presumption, vengeance, trouble.",
      "nguyen_van_nguoc": "Riot, quarrel, dispute, litigation, defeat.",
      "nghia": "Waite ghi: cứu giúp, thiên ý; cũng là tranh đấu, thắng trận, kiêu, trả đũa, rắc rối; ngược: cãi vã, kiện tụng, thua."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Chariot.--Triumph, Victory, Overcoming obstacles",
+     "nguyen_van_nguoc": "Overthrown, Conquered by Obstacles at the last moment",
+     "nghia": "Mathers: khải hoàn, thắng, vượt trở ngại; ngược: bị lật đổ, thua trở ngại ở phút cuối.",
+     "bieu_tuong": "It represents Triumph, and Victory of Justice and Judgment."
     }
    ]
   },
@@ -1400,6 +1456,13 @@
      "nguyen_van": "Power, energy, action, courage, magnanimity; also complete success and honors.",
      "nguyen_van_nguoc": "Despotism, abuse of power, weakness, discord, sometimes even disgrace.",
      "nghia": "Waite ghi: sức mạnh, nghị lực, can đảm, rộng lượng, thành công trọn; ngược: lạm quyền, yếu, bất hoà, mất mặt."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Strength, or Fortitude.--Power, Might, Force, Strength, Fortitude",
+     "nguyen_van_nguoc": "Abuse of Power, Overbearingness, Want of Fortitude",
+     "nghia": "Mathers (lá số 11): quyền lực, sức mạnh, nghị lực; ngược: lạm quyền, lấn át, thiếu nghị lực.",
+     "bieu_tuong": "She represents Strength."
     }
    ]
   },
@@ -1467,6 +1530,13 @@
      "nguyen_van": "Prudence, circumspection; also and especially treason, dissimulation, roguery, corruption.",
      "nguyen_van_nguoc": "Concealment, disguise, policy, fear, unreasoned caution.",
      "nghia": "Waite ghi: thận trọng, dè dặt; nhưng cũng là giấu mặt, giả dạng, gian; ngược: che giấu, sợ, thận trọng vô cớ."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Hermit.--Prudence, Caution, Deliberation",
+     "nguyen_van_nguoc": "Over-prudence, Timorousness, Fear",
+     "nghia": "Mathers: thận trọng, cẩn trọng, cân nhắc; ngược: thận trọng quá, nhút nhát, sợ.",
+     "bieu_tuong": "He is Prudence."
     }
    ]
   },
@@ -1534,6 +1604,13 @@
      "nguyen_van": "Destiny, fortune, success, elevation, luck, felicity.",
      "nguyen_van_nguoc": "Increase, abundance, superfluity.",
      "nghia": "Waite ghi: vận mệnh, may mắn, thành công, thăng tiến; ngược: tăng thêm, dư dả, thừa thãi."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Wheel of Fortune.--Good Fortune, Success, Unexpected Luck",
+     "nguyen_van_nguoc": "Ill-Fortune, Failure, Unexpected Ill-Luck",
+     "nghia": "Mathers: may mắn, thành công, vận may bất ngờ; ngược: không may, thất bại, rủi bất ngờ.",
+     "bieu_tuong": "It symbolises Fortune, good or bad."
     }
    ]
   },
@@ -1601,6 +1678,13 @@
      "nguyen_van": "Equity, rightness, probity, executive; triumph of the deserving side in law.",
      "nguyen_van_nguoc": "Law in all its departments, legal complications, bigotry, bias, excessive severity.",
      "nghia": "Waite ghi: công bằng, lẽ phải, chính trực; bên xứng đáng thắng kiện; ngược: luật lệ rối, thiên vị, quá khắt khe."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Themis, or Justice.--Equilibrium, Balance, Justice",
+     "nguyen_van_nguoc": "Bigotry, Want of Balance, Abuse of Justice, Over-severity, Inequality, Bias",
+     "nghia": "Mathers (lá số 8, Themis): cân bằng, công bằng, công lý; ngược: cố chấp, mất cân bằng, quá khắt khe, thiên vị.",
+     "bieu_tuong": "She symbolises Equilibrium and Justice."
     }
    ]
   },
@@ -1668,6 +1752,13 @@
      "nguyen_van": "Wisdom, circumspection, discernment, trials, sacrifice, intuition, divination, prophecy.",
      "nguyen_van_nguoc": "Selfishness, the crowd, body politic.",
      "nghia": "Waite ghi: khôn ngoan, thử thách, hy sinh, trực giác; ngược: ích kỷ, chạy theo đám đông."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Hanged Man.--Self-sacrifice, Sacrifice, Devotion, Bound",
+     "nguyen_van_nguoc": "Selfishness, Unbound, Partial sacrifice",
+     "nghia": "Mathers: tự hy sinh, tận tụy, bị buộc; ngược: ích kỷ, không ràng buộc, hy sinh nửa vời.",
+     "bieu_tuong": "He symbolises Sacrifice."
     }
    ]
   },
@@ -1735,6 +1826,13 @@
      "nguyen_van": "End, mortality, destruction, corruption; also, for a man, the loss of a benefactor; for a woman, many contrarieties; for a maid, failure of marriage projects.",
      "nguyen_van_nguoc": "Inertia, sleep, lethargy, petrifaction, somnambulism; hope destroyed.",
      "nghia": "Waite ghi: kết thúc, điều hết hạn, hư hoại; mất người đỡ đầu, nhiều trái ý; ngược: ì, ngủ quên, hy vọng tan."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Death.--Death, Change, Transformation, Alteration for the worse",
+     "nguyen_van_nguoc": "Death just escaped, Partial change, Alteration for the better",
+     "nghia": "Mathers: kết thúc, đổi thay, biến hình, đổi theo chiều xấu; ngược: vừa thoát hiểm, đổi một phần, đổi theo chiều tốt.",
+     "bieu_tuong": "He signifies Transformation, or Change."
     }
    ]
   },
@@ -1802,6 +1900,13 @@
      "nguyen_van": "Economy, moderation, frugality, management, accommodation.",
      "nguyen_van_nguoc": "Things connected with churches, religions, sects, the priesthood, sometimes even the priest who will marry the Querent; also disunion, unfortunate combinations, competing interests.",
      "nghia": "Waite ghi: tiết kiệm, điều độ, biết sắp xếp, dung hoà; ngược: chuyện liên quan nhà thờ, giáo phái; chia rẽ, lợi ích xung đột."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Temperance.--Combination, Conformation, Uniting",
+     "nguyen_van_nguoc": "Ill-advised combinations, Disunion, Clashing interests, &c.",
+     "nghia": "Mathers: kết hợp, hợp nhất, hoà vào nhau; ngược: kết hợp sai, chia rẽ, lợi ích va nhau.",
+     "bieu_tuong": "She represents Combination."
     }
    ]
   },
@@ -1869,6 +1974,13 @@
      "nguyen_van": "Ravage, violence, vehemence, extraordinary efforts, force, fatality; that which is predestined but is not for this reason evil.",
      "nguyen_van_nguoc": "Evil fatality, weakness, pettiness, blindness.",
      "nghia": "Waite ghi: tàn phá, bạo lực, sức ép, điều như không tự chọn — không vì thế mà là ác; ngược: phần không tự chọn hoá xấu, yếu, nhỏ nhen, mù quáng."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Devil.--Fatality for Good",
+     "nguyen_van_nguoc": "Fatality for Evil",
+     "nghia": "Mathers: điều như đã định sẵn theo chiều tốt; ngược: theo chiều xấu.",
+     "bieu_tuong": "He is the image of Fate or Fatality, good or evil."
     }
    ]
   },
@@ -1936,6 +2048,13 @@
      "nguyen_van": "Misery, distress, indigence, adversity, calamity, disgrace, deception, ruin. It is a card in particular of unforeseen catastrophe.",
      "nguyen_van_nguoc": "According to one account, the same in a lesser degree; also oppression, imprisonment, tyranny.",
      "nghia": "Waite ghi: khổ, túng, tai ương, mất mặt, lừa dối, đổ vỡ — lá của tai biến không lường; ngược: như vậy nhưng nhẹ hơn; áp bức, giam cầm."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Lightning-struck Tower.--Ruin, Disruption, Over-throw, Loss, Bankruptcy",
+     "nguyen_van_nguoc": "These in a more or less partial degree",
+     "nghia": "Mathers: đổ nát, đứt gãy, lật nhào, mất, phá sản; ngược: những điều ấy ở mức nhẹ hơn.",
+     "bieu_tuong": "It shows Ruin, Disruption."
     }
    ]
   },
@@ -2003,6 +2122,13 @@
      "nguyen_van": "Loss, theft, privation, abandonment; another reading says--hope and bright prospects.",
      "nguyen_van_nguoc": "Arrogance, haughtiness, impotence.",
      "nghia": "Waite ghi: mất, bị lấy, thiếu thốn, bị bỏ; cách đọc khác: hy vọng, triển vọng sáng; ngược: kiêu căng, bất lực."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Star.--Hope, Expectation, Bright promises",
+     "nguyen_van_nguoc": "Hopes not fulfilled, Expectations disappointed or fulfilled in a minor degree",
+     "nghia": "Mathers: hy vọng, mong đợi, hứa hẹn sáng; ngược: hy vọng không thành, mong đợi thất vọng hoặc chỉ thành một phần.",
+     "bieu_tuong": "She is the star of Hope."
     }
    ]
   },
@@ -2070,6 +2196,13 @@
      "nguyen_van": "Hidden enemies, danger, calumny, darkness, terror, deception, occult forces, error.",
      "nguyen_van_nguoc": "Instability, inconstancy, silence, lesser degrees of deception and error.",
      "nghia": "Waite ghi: kẻ thù giấu mặt, nguy hiểm, vu khống, tối tăm, sợ hãi, lừa dối, sai lầm; ngược: bất ổn, thiếu kiên định, lừa dối nhẹ hơn."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Moon.--Twilight, Deception, Error",
+     "nguyen_van_nguoc": "Fluctuation, slight Deceptions, Trifling Mistakes",
+     "nghia": "Mathers: chạng vạng, lừa dối, sai lầm; ngược: dao động, lừa nhẹ, lỗi nhỏ.",
+     "bieu_tuong": "It symbolises Twilight, Deception, and Error."
     }
    ]
   },
@@ -2137,6 +2270,13 @@
      "nguyen_van": "Material happiness, fortunate marriage, contentment.",
      "nguyen_van_nguoc": "The same in a lesser sense.",
      "nghia": "Waite ghi: hạnh phúc vật chất, hôn nhân may mắn, hài lòng; ngược: như vậy nhưng nhẹ hơn."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Sun.--Happiness, Content, Joy",
+     "nguyen_van_nguoc": "These in a minor degree",
+     "nghia": "Mathers: hạnh phúc, hài lòng, vui; ngược: những điều ấy ở mức nhỏ hơn.",
+     "bieu_tuong": "It signifies Earthly Happiness."
     }
    ]
   },
@@ -2204,6 +2344,13 @@
      "nguyen_van": "Change of position, renewal, outcome. Another account specifies total loss through lawsuit.",
      "nguyen_van_nguoc": "Weakness, pusillanimity, simplicity; also deliberation, decision, sentence.",
      "nghia": "Waite ghi: đổi vị trí, đổi mới, kết quả; có sách ghi mất trắng vì kiện; ngược: yếu, nhát, giản đơn; cân nhắc, phán quyết."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Last Judgment.--Renewal, Result, Determination of a Matter",
+     "nguyen_van_nguoc": "Postponement of Result, Delay, Matter re-opened later",
+     "nghia": "Mathers: đổi mới, kết quả, việc được định đoạt; ngược: kết quả bị hoãn, chậm, việc mở lại sau.",
+     "bieu_tuong": "It signifies Renewal, Result."
     }
    ]
   },
@@ -2271,6 +2418,13 @@
      "nguyen_van": "Assured success, recompense, voyage, route, emigration, flight, change of place.",
      "nguyen_van_nguoc": "Inertia, fixity, stagnation, permanence.",
      "nghia": "Waite ghi: thành công chắc, phần thưởng, chuyến đi, di cư, đổi chỗ; ngược: ì, cố định, trì trệ."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "The Universe.--Completion, Good Reward",
+     "nguyen_van_nguoc": "Evil Reward, or Recompense",
+     "nghia": "Mathers (Vũ trụ): hoàn thành, phần thưởng tốt; ngược: phần thưởng xấu, hoặc trả giá.",
+     "bieu_tuong": "It represents Completion, Reward."
     }
    ]
   },
@@ -2334,6 +2488,12 @@
      "nguyen_van": "Creation, invention, enterprise, the powers which result in these; principle, beginning, source; birth, family, origin, and in a sense the virility which is behind them; the starting point of enterprises; according to another account, money, fortune, inheritance.",
      "nguyen_van_nguoc": "Fall, decadence, ruin, perdition, to perish; also a certain clouded joy.",
      "nghia": "Waite ghi: sáng tạo, khởi sự, nguồn gốc, gia đình; điểm bắt đầu của việc; ngược: sa sút, đổ, niềm vui bị che."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Ace of Sceptres.--Birth, Commencement, Beginning, Origin, Source",
+     "nguyen_van_nguoc": "Persecution, Pursuits Voilence, Vexation, Cruelty, Tyranny",
+     "nghia": "Mathers: sinh ra, khởi đầu, nguồn gốc; ngược: bị truy đuổi, bạo lực, phiền nhiễu, tàn nhẫn, chuyên quyền."
     }
    ]
   },
@@ -2407,6 +2567,12 @@
      "ten": "The Lord of Dominion",
      "nguyen_van": "Strength, domination, harmony of rule and of justice.",
      "nghia": "Book T: sức mạnh, thống trị, sự hài hoà của quyền cai quản và công lý."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Deuce of Sceptres.--Riches, Fortune, Opulence, Magnificence, Grandeur",
+     "nguyen_van_nguoc": "Surprise, Astonishment, Event, Extraordinary Occurrence",
+     "nghia": "Mathers: giàu có, may mắn, sung túc, huy hoàng; ngược: bất ngờ, kinh ngạc, biến cố lạ."
     }
    ]
   },
@@ -2480,6 +2646,12 @@
      "ten": "The Lord of Established Strength",
      "nguyen_van": "Pride, nobility, wealth, power, conceit.",
      "nghia": "Book T: kiêu hãnh, cao quý, giàu, quyền lực, tự phụ."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Three of Sceptres.--Enterprise, Undertaking, Commerce, Trade, Negotiation",
+     "nguyen_van_nguoc": "Hope, Desire, Attempt, Wish",
+     "nghia": "Mathers: khởi nghiệp, kinh doanh, buôn bán, thương lượng; ngược: hy vọng, ước muốn, thử."
     }
    ]
   },
@@ -2553,6 +2725,12 @@
      "ten": "The Lord of Perfected Work",
      "nguyen_van": "Reasoning faculty, conclusions drawn from previous knowledge.",
      "nghia": "Book T: năng lực lý luận, kết luận rút từ điều đã biết; mặt tối là vội và thiếu chắc."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Four of Sceptres.--Society, Union, Association, Concord, Harmony",
+     "nguyen_van_nguoc": "Prosperity, Success, Happiness, Advantage",
+     "nghia": "Mathers: xã hội, kết hợp, hiệp hội, hoà thuận; ngược: thịnh vượng, thành công, hạnh phúc, lợi."
     }
    ]
   },
@@ -2626,6 +2804,12 @@
      "ten": "The Lord of Strife",
      "nguyen_van": "Violent strife and boldness, rashness, cruelty, violence, lust, desire, prodigality and generosity; depending on whether the card is well or ill dignified.",
      "nghia": "Book T: tranh đấu dữ dội và táo bạo; liều, tàn, ham muốn, hoang phí hay rộng rãi — tuỳ lá được tiếp sức hay bị kìm."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Five of Sceptres.--Gold, Opulence, Gain, Heritage, Riches, Fortune, Money",
+     "nguyen_van_nguoc": "Legal proceedings, Judgment, Law, Lawyer, Tribunal",
+     "nghia": "Mathers: vàng, sung túc, lợi, thừa kế, của cải, tiền; ngược: kiện tụng, phán xét, luật, luật sư, toà."
     }
    ]
   },
@@ -2699,6 +2883,12 @@
      "ten": "The Lord of Victory",
      "nguyen_van": "Victory after strife: Love: pleasure gained by labour: carefulness, sociability and avoiding of strife, yet victory therein: also insolence, and pride of riches and success, etc.",
      "nghia": "Book T: thắng sau tranh đấu; niềm vui nhờ lao động; cũng có xấc xược, kiêu vì giàu và thành công."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Six of Sceptres.--Attempt, Hope, Desire, Wish, Expectation",
+     "nguyen_van_nguoc": "Infidelity, Treachery, Disloyalty, Perfidy",
+     "nghia": "Mathers: thử, hy vọng, ước muốn, mong đợi; ngược: bất trung, phản bội, bội tín."
     }
    ]
   },
@@ -2772,6 +2962,12 @@
      "ten": "The Lord of Valour",
      "nguyen_van": "Possible victory, depending on the energy and courage exercised; valour; opposition, obstacles and difficulties, yet courage to meet them; quarrelling, ignorance, pretence, and wrangling, and threatening; also victory in small and unimportant things: and influence upon subordinates.",
      "nghia": "Book T: có thể thắng tuỳ sức và can đảm bỏ ra; trở ngại nhưng có dũng để đối mặt; cũng là cãi cọ, giả vờ, thắng việc nhỏ."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Seven of Sceptres.--Success, Gain, Advantage, Profit, Victory",
+     "nguyen_van_nguoc": "Indecision, Doubt, Hesitation, Embarrassment, Anxiety",
+     "nghia": "Mathers: thành công, lợi, thắng; ngược: thiếu quyết đoán, nghi ngờ, do dự, lúng túng, lo."
     }
    ]
   },
@@ -2845,6 +3041,12 @@
      "ten": "The Lord of Swiftness",
      "nguyen_van": "Generous, subtle, eloquent, yet somewhat untrustworthy; rapacious, insolent, oppressive.",
      "nghia": "Book T: rộng rãi, tinh tế, hoạt ngôn nhưng hơi khó tin; tham, xấc, áp bức — tuỳ phẩm giá."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Eight of Sceptres.--Understanding, Observation, Direction",
+     "nguyen_van_nguoc": "Quarrels, Intestine disputes, Discord",
+     "nghia": "Mathers: hiểu, quan sát, định hướng; ngược: cãi vã, tranh chấp nội bộ, bất hoà."
     }
    ]
   },
@@ -2918,6 +3120,12 @@
      "ten": "The Lord of Great Strength",
      "nguyen_van": "Victory, preceded by apprehension and fear.",
      "nghia": "Book T: thắng, nhưng trước đó là e ngại và sợ; sức khoẻ tốt, hồi phục không đáng ngờ."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Nine of Sceptres.--Order, Discipline, Good Arrangement, Disposition",
+     "nguyen_van_nguoc": "Obstacles, Crosses, Delay, Displeasure",
+     "nghia": "Mathers: trật tự, kỷ luật, sắp xếp tốt; ngược: trở ngại, trái ý, chậm, bực."
     }
    ]
   },
@@ -2991,6 +3199,12 @@
      "ten": "The Lord of Oppression",
      "nguyen_van": "Ill-will, levity, lying, malice, slander, envy, obstinacy; swiftness in evil and deceit, if ill dignified.",
      "nghia": "Book T: ác ý, nông nổi, dối, vu khống, ghen, cố chấp khi bị kìm; rộng rãi, vô tư, hy sinh khi được tiếp sức."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Ten of Sceptres.--Confidence, Security, Honour, Good Faith",
+     "nguyen_van_nguoc": "Treachery, Subterfuge, Duplicity, Bar",
+     "nghia": "Mathers: tin cậy, an toàn, danh dự, thiện chí; ngược: phản bội, mưu mẹo, hai mặt."
     }
    ]
   },
@@ -3061,6 +3275,12 @@
      "ten": "The Princess of the Shining Flame; The Rose of the Palace of Fire",
      "nguyen_van": "If ill dignified, she is superficial, theatrical, cruel, unstable, domineering.",
      "nghia": "Book T (Công chúa Gậy): khi bị kìm — hời hợt, màu mè, tàn, bất ổn, lấn át."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Knave of Sceptres.--A Good Stranger, Good News, Pleasure, Satisfaction",
+     "nguyen_van_nguoc": "Ill News, Displeasure, Chagrin, Worry",
+     "nghia": "Mathers: người lạ tốt, tin vui, niềm vui, hài lòng; ngược: tin xấu, bực, phiền, lo."
     }
    ]
   },
@@ -3131,6 +3351,12 @@
      "ten": "The Prince of the Chariot of Fire",
      "nguyen_van": "If ill dignified --- cruel, intolerant, prejudiced and ill natured.",
      "nghia": "Book T (Hoàng tử Gậy = Hiệp sĩ Gậy RWS): khi bị kìm — tàn, không khoan dung, thành kiến, khó chịu."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Knight of Sceptres.--Departure, Separation, Disunion",
+     "nguyen_van_nguoc": "Rupture, Discord, Quarrel",
+     "nghia": "Mathers: ra đi, chia cách, chia rẽ; ngược: đứt gãy, bất hoà, cãi vã."
     }
    ]
   },
@@ -3201,6 +3427,12 @@
      "ten": "The Queen of the Thrones of Flame",
      "nguyen_van": "If ill dignified, obstinate, revengeful, domineering, tyrannical, and apt to turn against another without a cause.",
      "nghia": "Book T: khi bị kìm — cố chấp, thù dai, lấn át, chuyên quyền, trở mặt vô cớ."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Queen of Sceptres.--Woman living in the country, Lady of the Manor, Love of Money, Avarice, Usury",
+     "nguyen_van_nguoc": "A good a virtuous Woman, but strict and economical, Obstacles, Resistance, Opposition",
+     "nghia": "Mathers: người phụ nữ ở quê, bà chủ đất, yêu tiền, keo, cho vay lãi; ngược: người tốt, đức hạnh nhưng nghiêm và tiết kiệm; trở ngại, chống đối."
     }
    ]
   },
@@ -3271,6 +3503,12 @@
      "ten": "The Lord of the Flame and the Lightning; The King of the Spirits of Fire",
      "nguyen_van": "He is active --- generous --- fierce --- sudden --- impetuous.",
      "nghia": "Book T (Hiệp sĩ Gậy = Vua Gậy RWS): hoạt động, rộng rãi, dữ, bất ngờ, bốc; bị kìm thì ác ý, tàn, cố chấp."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "King of Sceptres.--Man living in the country, Country Gentleman, Knowledge, Education",
+     "nguyen_van_nguoc": "A naturally good but severe man, Counsel, Advice, Deliberation",
+     "nghia": "Mathers: người đàn ông ở quê, điền chủ, tri thức, học vấn; ngược: người tốt nhưng nghiêm, lời khuyên, cân nhắc."
     }
    ]
   },
@@ -3334,6 +3572,12 @@
      "nguyen_van": "House of the true heart, joy, content, abode, nourishment, abundance, fertility; Holy Table, felicity hereof.",
      "nguyen_van_nguoc": "House of the false heart, mutation, instability, revolution.",
      "nghia": "Waite ghi: ngôi nhà của trái tim thật, niềm vui, nuôi dưỡng, dồi dào; ngược: ngôi nhà của trái tim giả, đổi thay, bất ổn."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Ace of Cups.--Feasting, Banquet, Good Cheer",
+     "nguyen_van_nguoc": "Change, Novelty, Metamorphosis, Inconstancy",
+     "nghia": "Mathers: tiệc tùng, yến tiệc, vui vẻ; ngược: đổi thay, điều mới, biến hình, thất thường."
     }
    ]
   },
@@ -3407,6 +3651,12 @@
      "ten": "The Lord of Love",
      "nguyen_van": "Harmony, pleasure, mirth, subtlety: but if ill dignified --- folly, dissipation, waste, silly actions.",
      "nghia": "Book T: hài hoà, niềm vui, tinh tế; bị kìm thì khờ, phóng túng, hoang phí."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Deuce of Cups.--Love, Attachment, Friendship, Sincerity, Affection",
+     "nguyen_van_nguoc": "Crossed desires, Obstacles, Opposition, Hindrance",
+     "nghia": "Mathers: tình yêu, gắn bó, tình bạn, chân thành; ngược: ước muốn trái ngược, trở ngại, chống đối."
     }
    ]
   },
@@ -3480,6 +3730,12 @@
      "ten": "The Lord of Abundance",
      "nguyen_van": "Abundance, plenty, success, pleasure, sensuality, passive success, good luck and fortune; love, gladness, kindness, liberality.",
      "nghia": "Book T: dồi dào, thành công, niềm vui, may mắn; tình yêu, tử tế, rộng rãi."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Three of Cups.--Success, Triumph, Victory, Favourable issue",
+     "nguyen_van_nguoc": "Expedition of business, Quickness, Celerity, Vigilance",
+     "nghia": "Mathers: thành công, thắng, kết cục thuận; ngược: việc đi nhanh, mau lẹ, cảnh giác."
     }
    ]
   },
@@ -3553,6 +3809,12 @@
      "ten": "The Lord of Blended Pleasure",
      "nguyen_van": "Acquisition by contention: injustice sometimes; some drawbacks to pleasure implied.",
      "nghia": "Book T: có được nhờ tranh giành; đôi khi bất công; niềm vui có mặt trừ."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Four of Cups.--Ennui, Displeasure, Discontent, Dissatisfaction",
+     "nguyen_van_nguoc": "New Acquaintance, Conjecture, Sign, Presentiment",
+     "nghia": "Mathers: chán, bực, bất mãn; ngược: người quen mới, phỏng đoán, dấu hiệu, linh cảm."
     }
    ]
   },
@@ -3626,6 +3888,12 @@
      "ten": "The Lord of Loss in Pleasure",
      "nguyen_van": "Death, or end of pleasure: disappointment, sorrow and loss in those things from which pleasure is expected.",
      "nghia": "Book T: niềm vui đi tới hồi kết; thất vọng, buồn và mất ở chính chỗ mình trông đợi vui."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Five of Cups.--Union, Junction, Marriage, Inheritance",
+     "nguyen_van_nguoc": "Arrival, Return, News, Surprise, False projects",
+     "nghia": "Mathers: kết hợp, hôn nhân, thừa kế; ngược: tới nơi, trở về, tin tức, bất ngờ, dự án giả."
     }
    ]
   },
@@ -3699,6 +3967,12 @@
      "ten": "The Lord of Pleasure",
      "nguyen_van": "Sometimes thankless and presumptuous; sometimes amiable and patient.",
      "nghia": "Book T: lúc vô ơn và tự tiện, lúc dễ mến và kiên nhẫn — tuỳ phẩm giá."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Six of Cups.--The Past, passed by, Faded, Vanished, Disappeared",
+     "nguyen_van_nguoc": "The Future, that which is to come, Shortly, Soon",
+     "nghia": "Mathers: quá khứ, đã qua, phai, biến mất; ngược: tương lai, điều sắp tới, sớm thôi."
     }
    ]
   },
@@ -3772,6 +4046,12 @@
      "ten": "The Lord of Illusionary Success",
      "nguyen_van": "Often success gained, but not followed up.",
      "nghia": "Book T: thường là thành công có được mà không theo tới cùng."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Seven of Cups.--Idea, Sentiment, Reflection, Project",
+     "nguyen_van_nguoc": "Plan, Design, Resolution, Decision",
+     "nghia": "Mathers: ý tưởng, cảm nghĩ, suy ngẫm, dự án; ngược: kế hoạch, thiết kế, quyết tâm, quyết định."
     }
    ]
   },
@@ -3845,6 +4125,12 @@
      "ten": "The Lord of Abandoned Success",
      "nguyen_van": "Misery and repining without cause.",
      "nghia": "Book T: khổ và than phiền không lý do; chạy theo của cải; bất ổn."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Eight of Cups.--A fair Girl, Friendship, Attachment, Tenderness",
+     "nguyen_van_nguoc": "Gaiety, Feasting, Joy, Pleasure",
+     "nghia": "Mathers: cô gái sáng, tình bạn, gắn bó, dịu dàng; ngược: vui vẻ, tiệc tùng, niềm vui."
     }
    ]
   },
@@ -3918,6 +4204,12 @@
      "ten": "The Lord of Material Happiness",
      "nguyen_van": "A good and generous, but sometimes foolish nature.",
      "nghia": "Book T: bản tính tốt và rộng rãi, đôi khi khờ; cao thượng, không chịu ý tưởng nhỏ."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Nine of Cups.--Victory, Advantage, Success, Triumph, Difficulties surmounted",
+     "nguyen_van_nguoc": "Faults, Errors, Mistakes, Imperfections",
+     "nghia": "Mathers: thắng, lợi, thành công, vượt khó; ngược: lỗi, sai, thiếu sót."
     }
    ]
   },
@@ -3991,6 +4283,12 @@
      "ten": "The Lord of Perfected Success",
      "nguyen_van": "Pleasure, dissipation, debauchery, quietness, peacemaking.",
      "nghia": "Book T: niềm vui, yên tĩnh, làm hoà; mặt tối là phóng túng."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Ten of Cups.--The Town wherein one resides, Honour, Consideration, Esteem, Virtue, Glory, Reputation",
+     "nguyen_van_nguoc": "Combat, Strife, Opposition, Differences, Dispute",
+     "nghia": "Mathers: thị trấn nơi mình ở, danh dự, được trọng, đức hạnh, tiếng tốt; ngược: đấu đá, tranh chấp, bất đồng."
     }
    ]
   },
@@ -4061,6 +4359,12 @@
      "ten": "The Princess of the Waters; The Lotus of the Palace of the Floods",
      "nguyen_van": "When ill dignified she is selfish and luxurious.",
      "nghia": "Book T (Công chúa Cốc): khi bị kìm — ích kỷ và xa hoa."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Knave of Cups.--A fair Youth, Confidence, Probity, Discretion, Integrity",
+     "nguyen_van_nguoc": "A Flatterer, Deception, Artifice",
+     "nghia": "Mathers: thanh niên sáng, tin cậy, ngay thẳng, kín đáo; ngược: kẻ nịnh, lừa dối, mưu mẹo."
     }
    ]
   },
@@ -4131,6 +4435,12 @@
      "ten": "The Prince of the Chariot of the Waters",
      "nguyen_van": "If ill dignified, he is intensely evil and merciless.",
      "nghia": "Book T (Hoàng tử Cốc = Hiệp sĩ Cốc RWS): khi bị kìm — rất xấu và không khoan nhượng."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Knight of Cups.--Arrival, Approach, Advance",
+     "nguyen_van_nguoc": "Duplicity, Abuse of Confidence, Fraud, Cunning",
+     "nghia": "Mathers: tới nơi, đến gần, tiến lên; ngược: hai mặt, lạm dụng lòng tin, gian lận."
     }
    ]
   },
@@ -4201,6 +4511,12 @@
      "ten": "The Queen of the Thrones of the Waters",
      "nguyen_van": "Very much affected by other influences, and therefore more dependent upon dignity than most symbols.",
      "nghia": "Book T: chịu ảnh hưởng lá bên cạnh rất nhiều — phụ thuộc phẩm giá hơn hầu hết lá khác."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Queen of Cups.--A fair Woman, Success, Happiness, Advantage, Pleasure",
+     "nguyen_van_nguoc": "A Woman in good position, but intermeddling, and to be distrusted; Success, but with some attendant trouble",
+     "nghia": "Mathers: người phụ nữ sáng, thành công, hạnh phúc, lợi, vui; ngược: phụ nữ có vị thế nhưng hay xen vào, không đáng tin; thành công kèm rắc rối."
     }
    ]
   },
@@ -4271,6 +4587,12 @@
      "ten": "The Lord of the Waves and the Waters; The King of the Hosts of the Sea",
      "nguyen_van": "Ill dignified, he is sensual, idle and untruthful.",
      "nghia": "Book T (Hiệp sĩ Cốc = Vua Cốc RWS): khi bị kìm — ham khoái lạc, lười, không thật."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "King of Cups.--A fair Man, Goodness, Kindness, Liberality, Generosity",
+     "nguyen_van_nguoc": "A Man of good position, but shifty in his Dealings, Distrust, Doubt, Suspicion",
+     "nghia": "Mathers: người đàn ông sáng, tốt lành, tử tế, hào phóng; ngược: người có vị thế nhưng lắt léo; nghi ngờ, không tin."
     }
    ]
   },
@@ -4334,6 +4656,12 @@
      "nguyen_van": "Triumph, the excessive degree in everything, conquest, triumph of force. It is a card of great force, in love as well as in hatred.",
      "nguyen_van_nguoc": "The same, but the results are disastrous; another account says--conception--childbirth, augmentation, multiplicity.",
      "nghia": "Waite ghi: khải hoàn, mức quá đà trong mọi thứ, thắng bằng sức — sức mạnh lớn trong yêu cũng như ghét; ngược: như vậy nhưng kết cục tai hại; cũng là sinh nở."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Ace of Swords.--Triumph, Fecundity, Fertility, Prosperity",
+     "nguyen_van_nguoc": "Embarrassment, Foolish and Hopeless Love, Obstacle, Hindrance",
+     "nghia": "Mathers: khải hoàn, sinh sôi, thịnh vượng; ngược: lúng túng, tình yêu dại và vô vọng, trở ngại."
     }
    ]
   },
@@ -4407,6 +4735,12 @@
      "ten": "The Lord of Peace Restored",
      "nguyen_van": "Quarrel made up, yet still some tension in relations: actions sometimes selfish, sometimes unselfish.",
      "nghia": "Book T: cãi vã đã làm hoà nhưng quan hệ còn căng; hành động khi vị kỷ khi vị tha."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Deuce of Swords.--Friendship, Valour, Firmness, Courage",
+     "nguyen_van_nguoc": "False Friends, Treachery, Lies",
+     "nghia": "Mathers: tình bạn, dũng cảm, vững vàng; ngược: bạn giả, phản bội, dối trá."
     }
    ]
   },
@@ -4480,6 +4814,12 @@
      "ten": "The Lord of Sorrow",
      "nguyen_van": "Disruption, interruption, separation, quarrelling; sowing of discord and strife, mischief-making, sorrow and tears; yet mirth in Platonic pleasures; singing, faithfulness in promises, honesty in money transactions, selfish and dissipated, yet sometimes generous: deceitful in words and repetitions; the whole according to dignity.",
      "nghia": "Book T: đứt gãy, chia cách, cãi vã, gieo bất hoà, buồn và nước mắt; nhưng cũng giữ lời hứa, thật thà về tiền."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Three of Swords.--A Nun, Separation, Removal, Rupture, Quarrel",
+     "nguyen_van_nguoc": "Error, Confusion, Misrule, Disorder",
+     "nghia": "Mathers: nữ tu, chia cách, dời đi, đứt gãy, cãi vã; ngược: sai lầm, rối, lộn xộn."
     }
    ]
   },
@@ -4553,6 +4893,12 @@
      "ten": "The Lord of Rest from Strife",
      "nguyen_van": "Quietness, rest, ease and plenty, yet after struggle.",
      "nghia": "Book T: yên tĩnh, nghỉ, dễ chịu và đủ đầy — nhưng sau một cuộc vật lộn."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Four of Swords.--Solitude, Retreat, Abandonment, Solitary, Hermit",
+     "nguyen_van_nguoc": "Economy, Precaution, Regulation of Expenditure",
+     "nghia": "Mathers: cô độc, rút lui, bỏ lại, ẩn sĩ; ngược: tiết kiệm, đề phòng, chi tiêu có kỷ luật."
     }
    ]
   },
@@ -4626,6 +4972,12 @@
      "ten": "The Lord of Defeat",
      "nguyen_van": "Cruel, yet cowardly, thankless and unreliable.",
      "nghia": "Book T: tàn nhẫn mà hèn, vô ơn, không đáng tin; nhanh trí, nhanh miệng."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Five of Swords.--Mourning, Sadness, Affliction",
+     "nguyen_van_nguoc": "Losses Trouble (same signification, whether reversed or not.)",
+     "nghia": "Mathers: tang, buồn, khổ; ngược: mất mát, rắc rối (xuôi ngược như nhau)."
     }
    ]
   },
@@ -4699,6 +5051,12 @@
      "ten": "The Lord of Earned Success",
      "nguyen_van": "Success after anxiety and trouble; self-esteem, beauty, conceit, but sometimes modesty therewith; dominance, patience, labour, etc.",
      "nghia": "Book T: thành công sau lo lắng và rắc rối; tự trọng, cũng có tự phụ; kiên nhẫn, lao động."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Six of Swords.--Envoy, Messenger, Voyage, Travel",
+     "nguyen_van_nguoc": "Declaration, Love proposed, Revelation, Surprise",
+     "nghia": "Mathers: sứ giả, người đưa tin, chuyến đi; ngược: tuyên bố, tỏ tình, hé lộ, bất ngờ."
     }
    ]
   },
@@ -4772,6 +5130,12 @@
      "ten": "The Lord of Unstable Effort",
      "nguyen_van": "Inclined to betray confidences, not always intentionally.",
      "nghia": "Book T: hay làm lộ điều được tin cậy, không hẳn cố ý; dao động, không đáng tin."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Seven of Swords.--Hope, Confidence, Desire, Attempt, Wish",
+     "nguyen_van_nguoc": "Wise Advice, Good Counsel, Wisdom, Prudence, Circumspection",
+     "nghia": "Mathers: hy vọng, tự tin, ước muốn, thử; ngược: lời khuyên khôn ngoan, cố vấn tốt, thận trọng."
     }
    ]
   },
@@ -4845,6 +5209,12 @@
      "ten": "The Lord of Shortened Force",
      "nguyen_van": "Patience in detail of study; great care in some things, counterbalanced by equal disorder in others.",
      "nghia": "Book T: kiên nhẫn với chi tiết; rất kỹ ở việc này nhưng rối ngang ở việc khác."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Eight of Swords.--Sickness, Calumny, Criticism, Blame",
+     "nguyen_van_nguoc": "Treachery in the Past, Event, Accident, Remarkable Incident",
+     "nghia": "Mathers: ốm, vu khống, chỉ trích, trách; ngược: phản bội trong quá khứ, biến cố, sự cố đáng nhớ."
     }
    ]
   },
@@ -4918,6 +5288,12 @@
      "ten": "The Lord of Despair and Cruelty",
      "nguyen_van": "Burden, oppression, labour, subtlety and craft, dishonesty, lying and slander.",
      "nghia": "Book T: gánh nặng, áp bức, lao khổ, mưu mẹo, dối và vu khống; nhưng cũng vâng lời, trung thành, kiên nhẫn."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Nine of Swords.--An Ecclesiastic, a Priest, Conscience. Probity, Good Faith, Integrity",
+     "nguyen_van_nguoc": "Wise distrust, Suspicion, Fear, Doubt, Shady character",
+     "nghia": "Mathers: tu sĩ, lương tâm, ngay thẳng, thiện chí; ngược: nghi ngờ có lý, sợ, không chắc, người mờ ám."
     }
    ]
   },
@@ -4991,6 +5367,12 @@
      "ten": "The Lord of Ruin",
      "nguyen_van": "Disdain, insolence and impertinence, yet mirth and jollity therewith.",
      "nghia": "Book T: khinh, xấc, hỗn — mà vẫn vui nhộn; người phá đám, nói nhiều; vẫn khéo và hoạt ngôn."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Ten of Swords.--Tears, Affliction, Grief, Sorrow",
+     "nguyen_van_nguoc": "Passing Success, Momentary Advantage",
+     "nghia": "Mathers: nước mắt, khổ, buồn; ngược: thành công thoáng qua, lợi nhất thời."
     }
    ]
   },
@@ -5061,6 +5443,12 @@
      "ten": "The Princess of the Rushing Winds; The Lotus of the Palace of Air",
      "nguyen_van": "If ill dignified, she is frivolous and cunning.",
      "nghia": "Book T (Công chúa Kiếm): khi bị kìm — phù phiếm và ranh mãnh."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Knave of Swords.--A Spy, Overlooking, Authority",
+     "nguyen_van_nguoc": "That which is unforeseen, Vigilance, Support",
+     "nghia": "Mathers: kẻ do thám, giám sát, quyền; ngược: điều bất ngờ, cảnh giác, chỗ dựa."
     }
    ]
   },
@@ -5131,6 +5519,12 @@
      "ten": "The Prince of the Chariot of the Winds",
      "nguyen_van": "If ill dignified: harsh, malicious, plotting; obstinate, yet hesitating; unreliable.",
      "nghia": "Book T (Hoàng tử Kiếm = Hiệp sĩ Kiếm RWS): khi bị kìm — khắc nghiệt, ác ý, mưu mô; cố chấp mà do dự."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Knight of Swords.--A Soldier, a man whose profession is arms, Skilfulness, Capacity, Address, Promptitude",
+     "nguyen_van_nguoc": "A conceited fool, Ingenuousness, Simplicity",
+     "nghia": "Mathers: người lính, nhà binh, khéo, có năng lực, nhanh nhẹn; ngược: kẻ tự phụ, ngây ngô, giản đơn."
     }
    ]
   },
@@ -5201,6 +5595,12 @@
      "ten": "The Queen of the Thrones of Air",
      "nguyen_van": "If ill dignified, cruel, sly, deceitful, unreliable, though with a good exterior.",
      "nghia": "Book T: khi bị kìm — tàn, ranh, lừa, không đáng tin dù bề ngoài tốt."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Queen of Swords.--Widowhood, Loss, Privation, Absence, Separation",
+     "nguyen_van_nguoc": "A Bad Woman, ill-tempered and bigoted, Riches and Discord, Abundance together with Worry, Joy with Grief",
+     "nghia": "Mathers: goá, mất, thiếu thốn, vắng, chia cách; ngược: người phụ nữ xấu tính, cố chấp; giàu mà bất hoà, vui lẫn buồn."
     }
    ]
   },
@@ -5271,6 +5671,12 @@
      "ten": "The Lord of the Winds and the Breezes; he King of the Spirits of Air",
      "nguyen_van": "Also to overvalue small things, unless well dignified.",
      "nghia": "Book T (Hiệp sĩ Kiếm = Vua Kiếm RWS): dễ xem trọng việc nhỏ quá mức nếu không được tiếp sức."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "King of Swords.--A Lawyer, a Man of Law, Power, Command, Superiority, Authority",
+     "nguyen_van_nguoc": "A Wicked Man, Chagrin, Worry, Grief, Fear, Disturbance",
+     "nghia": "Mathers: luật sư, người của luật, quyền lực, mệnh lệnh, uy quyền; ngược: người xấu, bực, lo, buồn, sợ, xáo trộn."
     }
    ]
   },
@@ -5334,6 +5740,12 @@
      "nguyen_van": "Perfect contentment, felicity, ecstasy; also speedy intelligence; gold.",
      "nguyen_van_nguoc": "The evil side of wealth, bad intelligence; also great riches.",
      "nghia": "Waite ghi: hài lòng trọn vẹn, hạnh phúc, ngây ngất; tin nhanh; vàng; ngược: mặt xấu của giàu có; vẫn là thịnh vượng, nhưng có lợi hay không tuỳ chiều lá."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Ace of Pentacles.--Perfect Contentment, Felicity, Prosperity, Triumph",
+     "nguyen_van_nguoc": "Purse of Gold, Money, Gain, Help, Profit, Riches",
+     "nghia": "Mathers: hài lòng trọn vẹn, hạnh phúc, thịnh vượng, khải hoàn; ngược: túi vàng, tiền, lợi, giúp đỡ, của cải."
     }
    ]
   },
@@ -5407,6 +5819,12 @@
      "ten": "The Lord of Harmonious Change",
      "nguyen_van": "Kind, yet wavering and inconsistent.",
      "nghia": "Book T: tử tế nhưng dao động, thiếu nhất quán; thuận trong đi lại; hay cãi."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Deuce of Pentacles.--Embarrassment, Worry, Difficulties",
+     "nguyen_van_nguoc": "Letter, Missive, Epistle, Message",
+     "nghia": "Mathers: lúng túng, lo, khó khăn; ngược: thư, tin nhắn, thông điệp."
     }
    ]
   },
@@ -5480,6 +5898,12 @@
      "ten": "The Lord of Material Works",
      "nguyen_van": "Commencement of matters to be established later.",
      "nghia": "Book T: khởi đầu của việc sẽ được lập về sau; hẹp hòi; nhạy về lợi."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Three of Pentacles.--Nobility, Elevation, Dignity, Rank, Power",
+     "nguyen_van_nguoc": "Children, Sons, Daughters, Youths, Commencement",
+     "nghia": "Mathers: quý tộc, thăng tiến, phẩm giá, địa vị, quyền; ngược: con cái, người trẻ, khởi đầu."
     }
    ]
   },
@@ -5553,6 +5977,12 @@
      "ten": "The Lord of Earthly Power",
      "nguyen_van": "Prejudicial, covetous, suspicious, careful and orderly, but discontented.",
      "nghia": "Book T: thành kiến, tham, nghi ngờ, cẩn thận và ngăn nắp nhưng không hài lòng; ít sáng tạo."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Four of Pentacles.--Pleasure, Gaiety, Enjoyment, Satisfaction",
+     "nguyen_van_nguoc": "Obstacles, Hindrances",
+     "nghia": "Mathers: niềm vui, vui vẻ, hưởng thụ, hài lòng; ngược: trở ngại, cản trở."
     }
    ]
   },
@@ -5626,6 +6056,12 @@
      "ten": "THE LORD OF MATERIAL TROUBLE",
      "nguyen_van": "Labour, toil, land cultivation; building, knowledge and acuteness of earthly things, poverty, carefulness, kindness; sometimes money regained after severe toil and labour.",
      "nghia": "Book T: lao động, cày cuốc, xây dựng; nghèo, cẩn thận, tử tế; đôi khi lấy lại tiền sau khổ nhọc."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Five of Pentacles.--Lover or Mistress, Love, Sweetness, Affection, Pure and Chaste Love",
+     "nguyen_van_nguoc": "Disgraceful Love, Imprudence, License, Profligacy",
+     "nghia": "Mathers: người yêu, tình yêu, dịu ngọt, tình trong sáng; ngược: tình yêu đáng xấu hổ, thiếu thận trọng, phóng túng."
     }
    ]
   },
@@ -5699,6 +6135,12 @@
      "ten": "The Lord of Material Success",
      "nguyen_van": "Power, influence, rank, nobility, rule over the people.",
      "nghia": "Book T: quyền lực, ảnh hưởng, địa vị; may mắn, rộng rãi và công bằng; bị kìm thì kiêu vì tiền."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Six of Pentacles.--Presents, Gifts, Gratification",
+     "nguyen_van_nguoc": "Ambition, Desire, Passion, Aim, Longing",
+     "nghia": "Mathers: quà tặng, sự hài lòng; ngược: tham vọng, ham muốn, đam mê, mục tiêu, khao khát."
     }
    ]
   },
@@ -5772,6 +6214,12 @@
      "ten": "The Lord of Success Unfulfilled",
      "nguyen_van": "Disappointment, misery, slavery, necessity and baseness.",
      "nghia": "Book T: thất vọng, khổ, nô lệ, túng; người cày đất mà thua lỗ; lợi nhỏ lẻ không ra quả."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Seven of Pentacles.--Money, Finance, Treasure, Gain, Profit",
+     "nguyen_van_nguoc": "Disturbance, Worry, Anxiety, Melancholy",
+     "nghia": "Mathers: tiền, tài chính, kho báu, lợi; ngược: xáo trộn, lo, bất an, u sầu."
     }
    ]
   },
@@ -5845,6 +6293,12 @@
      "ten": "The Lord of Prudence",
      "nguyen_van": "Over-careful in small things at the expense of great: \"Penny wise and pound foolish\": gain of ready money in small sums; mean; avaricious; industrious; cultivation of land; hoarding, lacking in enterprise.",
      "nghia": "Book T: quá kỹ việc nhỏ mà hỏng việc lớn; tiền lẻ từng món; keo; chăm chỉ; tích trữ, thiếu chí làm ăn."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Eight of Pentacles.--A dark Girl, Beauty, Candour, Chastity, Innocence, Modesty",
+     "nguyen_van_nguoc": "Flattery, Usury, Hypocrisy, Shifty",
+     "nghia": "Mathers: cô gái tóc sẫm, đẹp, thật thà, trong sáng, khiêm tốn; ngược: nịnh, cho vay lãi, đạo đức giả, lắt léo."
     }
    ]
   },
@@ -5918,6 +6372,12 @@
      "ten": "The Lord of Material Gain",
      "nguyen_van": "Complete realization of material gain, good, riches; inheritance; covetous; treasuring of goods; and sometimes theft and knavery.",
      "nghia": "Book T: lợi vật chất thành hình trọn; của cải, thừa kế; tham; đôi khi trộm cắp, gian — tuỳ phẩm giá."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Nine of Pentacles.--Discretion, Circumspection, Prudence, Discernment",
+     "nguyen_van_nguoc": "Deceit, Bad faith, Artifices, Deception",
+     "nghia": "Mathers: kín đáo, thận trọng, sáng suốt; ngược: lừa, bội tín, mưu mẹo."
     }
    ]
   },
@@ -5991,6 +6451,12 @@
      "ten": "The Lord of Wealth",
      "nguyen_van": "Old age, slothfulness; great wealth, yet sometimes loss in part; heaviness; dullness of mind, yet clever and prosperous in money transactions.",
      "nghia": "Book T: tuổi già, lười; của cải lớn mà đôi khi mất một phần; nặng nề, chậm trí nhưng khéo và phát về tiền."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Ten of Pentacles.--House, Dwelling, Habitation, Family",
+     "nguyen_van_nguoc": "Gambling, Dissipation, Robbery, Loss",
+     "nghia": "Mathers: nhà, nơi ở, gia đình; ngược: cờ bạc, phóng túng, trộm cắp, mất."
     }
    ]
   },
@@ -6061,6 +6527,12 @@
      "ten": "Princess of the Echoing Hills; Rose of the Palace of Earth",
      "nguyen_van": "If ill dignified she is wasteful and prodigal.",
      "nghia": "Book T (Công chúa Tiền): khi bị kìm — hoang phí."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Knave of Pentacles.--A dark Youth, Economy, Order, Rule, Management",
+     "nguyen_van_nguoc": "Prodigality, Profusion, Waste, Dissipation",
+     "nghia": "Mathers: thanh niên tóc sẫm, tiết kiệm, trật tự, quản lý; ngược: phung phí, hoang phí."
     }
    ]
   },
@@ -6131,6 +6603,12 @@
      "ten": "The Prince of the Chariot of Earth",
      "nguyen_van": "If ill dignified he is selfish, animal and material: stupid.",
      "nghia": "Book T (Hoàng tử Tiền = Hiệp sĩ Tiền RWS): khi bị kìm — ích kỷ, bản năng, thực dụng."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Knight of Pentacles.--A useful Man, Trustworthy, Wisdom, Economy, Order, Regulation",
+     "nguyen_van_nguoc": "A brave Man, but out of Employment, Idle, Unemployed, Negligent",
+     "nghia": "Mathers: người hữu ích, đáng tin, khôn ngoan, tiết kiệm, ngăn nắp; ngược: người dũng cảm nhưng thất nghiệp, nhàn rỗi, lơ là."
     }
    ]
   },
@@ -6201,6 +6679,12 @@
      "ten": "The Queen of the Thrones of Earth",
      "nguyen_van": "If ill dignified she is undecided, capricious, changeable, foolish.",
      "nghia": "Book T: khi bị kìm — thiếu quyết đoán, đỏng đảnh, hay đổi, khờ."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "Queen of Pentacles.--A dark Woman, a generous Woman, Liberality, Greatness of Soul, Generosity",
+     "nguyen_van_nguoc": "Certain Evil, a suspicious Woman, a Woman justly regarded with Suspicion, Doubt, Mistrust",
+     "nghia": "Mathers: người phụ nữ tóc sẫm, hào phóng, rộng lượng; ngược: điều xấu chắc, người phụ nữ đáng nghi, nghi ngờ, mất tin."
     }
    ]
   },
@@ -6271,6 +6755,12 @@
      "ten": "The Lord of the Wide and Fertile Land; The King of the Spirits of Earth",
      "nguyen_van": "Unless very well dignified he is heavy, dull, and material.",
      "nghia": "Book T (Hiệp sĩ Tiền = Vua Tiền RWS): nếu không được tiếp sức mạnh thì nặng nề, chậm, thực dụng."
+    },
+    {
+     "sach": "mathers_1888",
+     "nguyen_van": "King of Pentacles.--A dark Man, Victory, Bravery, Courage, Success",
+     "nguyen_van_nguoc": "An old and vicious Man, a Dangerous Man, Doubt, Fear, Peril, Danger",
+     "nghia": "Mathers: người đàn ông tóc sẫm, thắng, dũng cảm, thành công; ngược: người già xấu tính, nguy hiểm; nghi ngờ, sợ, hiểm."
     }
    ]
   }
@@ -10454,6 +10944,12 @@
    "tep": "fixtures/nguon/tarot_book_t.json",
    "ngay": "2026-11-07",
    "phu": "36 lá số + 16 hoàng gia (tên, nghĩa), luật phẩm giá, thứ tự decan"
+  },
+  "mathers_1888": {
+   "ban": "sacred-texts.com/book/the-tarot — 5/6 chương chủ dự án lưu PDF vào Drive \"Tarot nguon\" (thiếu Introduction)",
+   "tep": "fixtures/nguon/tarot_mathers_1888.json",
+   "ngay": "2026-11-07",
+   "phu": "nghĩa 78 lá xuôi/ngược (Meanings of the Cards), biểu tượng 22 Key, ghi chú Etteilla, 3 cách trải bài, lá đại diện"
   }
  }
 }

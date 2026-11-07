@@ -1,0 +1,519 @@
+{
+ "_nguon": {
+  "sach": "S. L. MacGregor Mathers, The Tarot: Its Occult Signification, Use in Fortune-Telling, and Method of Play (1888) — phạm vi công cộng",
+  "ban": "sacred-texts.com/book/the-tarot (5/6 chương: Symbolism of Each of the Keys, Meanings of the Cards, Methods of Divination, Tarot Game Play, Occult Significance; thiếu Introduction), chủ dự án lưu PDF 2026-11-07",
+  "thu_tu": "Mathers đánh số 8 = Justice, 11 = Strength (thứ tự Marseille); bộ Sceptres = Wands; Knave = Page; lá số 22–77 (R. = ngược)"
+ },
+ "dai_1": {
+  "so_mathers": 1,
+  "ten_en": "The Juggler",
+  "y_xuoi": "Will, Will-Power, Dexterity",
+  "y_nguoc": "Will applied to evil ends, Weakness of Will, Cunning, Knavishness",
+  "bieu_tuong": "He symbolises Will."
+ },
+ "dai_2": {
+  "so_mathers": 2,
+  "ten_en": "The High Priestess",
+  "y_xuoi": "Science, Wisdom, Knowledge, Education",
+  "y_nguoc": "Conceit, Ignorance, Unskilfulness, Superficial Knowledge",
+  "bieu_tuong": "She represents Science, Wisdom, or Knowledge."
+ },
+ "dai_3": {
+  "so_mathers": 3,
+  "ten_en": "The Empress",
+  "y_xuoi": "Action, Plan, Undertaking Movement in a matter, Initiative",
+  "y_nguoc": "Inaction, Frittering away of power, Want of Concentration Vacillation",
+  "bieu_tuong": "She is the Symbol of Action, the result of the union of Science and Will."
+ },
+ "dai_4": {
+  "so_mathers": 4,
+  "ten_en": "The Emperor",
+  "y_xuoi": "Realisation, Effect, Development",
+  "y_nguoc": "Stoppage, Check, Immature, Unripe",
+  "bieu_tuong": "He represents Realisation."
+ },
+ "dai_5": {
+  "so_mathers": 5,
+  "ten_en": "The Hierophant or Pope",
+  "y_xuoi": "Mercy, Beneficence Kindness, Goodness",
+  "y_nguoc": "Over-kindness, weakness, Foolish exercise of generosity",
+  "bieu_tuong": "He is the symbol of Mercy and Beneficence."
+ },
+ "dai_6": {
+  "so_mathers": 6,
+  "ten_en": "The Lovers",
+  "y_xuoi": "Wise Dispositions, Proof, Trials Surmounted",
+  "y_nguoc": "Unwise Plans, Failure when put to the test",
+  "bieu_tuong": "It is usually considered to mean Proof or Trial; but I am inclined to suggest Wise Disposition as its signification."
+ },
+ "dai_7": {
+  "so_mathers": 7,
+  "ten_en": "The Chariot",
+  "y_xuoi": "Triumph, Victory, Overcoming obstacles",
+  "y_nguoc": "Overthrown, Conquered by Obstacles at the last moment",
+  "bieu_tuong": "It represents Triumph, and Victory of Justice and Judgment."
+ },
+ "dai_11": {
+  "so_mathers": 8,
+  "ten_en": "Themis, or Justice",
+  "y_xuoi": "Equilibrium, Balance, Justice",
+  "y_nguoc": "Bigotry, Want of Balance, Abuse of Justice, Over-severity, Inequality, Bias",
+  "bieu_tuong": "She symbolises Equilibrium and Justice."
+ },
+ "dai_9": {
+  "so_mathers": 9,
+  "ten_en": "The Hermit",
+  "y_xuoi": "Prudence, Caution, Deliberation",
+  "y_nguoc": "Over-prudence, Timorousness, Fear",
+  "bieu_tuong": "He is Prudence."
+ },
+ "dai_10": {
+  "so_mathers": 10,
+  "ten_en": "The Wheel of Fortune",
+  "y_xuoi": "Good Fortune, Success, Unexpected Luck",
+  "y_nguoc": "Ill-Fortune, Failure, Unexpected Ill-Luck",
+  "bieu_tuong": "It symbolises Fortune, good or bad."
+ },
+ "dai_8": {
+  "so_mathers": 11,
+  "ten_en": "Strength, or Fortitude",
+  "y_xuoi": "Power, Might, Force, Strength, Fortitude",
+  "y_nguoc": "Abuse of Power, Overbearingness, Want of Fortitude",
+  "bieu_tuong": "She represents Strength."
+ },
+ "dai_12": {
+  "so_mathers": 12,
+  "ten_en": "The Hanged Man",
+  "y_xuoi": "Self-sacrifice, Sacrifice, Devotion, Bound",
+  "y_nguoc": "Selfishness, Unbound, Partial sacrifice",
+  "bieu_tuong": "He symbolises Sacrifice."
+ },
+ "dai_13": {
+  "so_mathers": 13,
+  "ten_en": "Death",
+  "y_xuoi": "Death, Change, Transformation, Alteration for the worse",
+  "y_nguoc": "Death just escaped, Partial change, Alteration for the better",
+  "bieu_tuong": "He signifies Transformation, or Change."
+ },
+ "dai_14": {
+  "so_mathers": 14,
+  "ten_en": "Temperance",
+  "y_xuoi": "Combination, Conformation, Uniting",
+  "y_nguoc": "Ill-advised combinations, Disunion, Clashing interests, &c.",
+  "bieu_tuong": "She represents Combination."
+ },
+ "dai_15": {
+  "so_mathers": 15,
+  "ten_en": "The Devil",
+  "y_xuoi": "Fatality for Good",
+  "y_nguoc": "Fatality for Evil",
+  "bieu_tuong": "He is the image of Fate or Fatality, good or evil."
+ },
+ "dai_16": {
+  "so_mathers": 16,
+  "ten_en": "The Lightning-struck Tower",
+  "y_xuoi": "Ruin, Disruption, Over-throw, Loss, Bankruptcy",
+  "y_nguoc": "These in a more or less partial degree",
+  "bieu_tuong": "It shows Ruin, Disruption."
+ },
+ "dai_17": {
+  "so_mathers": 17,
+  "ten_en": "The Star",
+  "y_xuoi": "Hope, Expectation, Bright promises",
+  "y_nguoc": "Hopes not fulfilled, Expectations disappointed or fulfilled in a minor degree",
+  "bieu_tuong": "She is the star of Hope."
+ },
+ "dai_18": {
+  "so_mathers": 18,
+  "ten_en": "The Moon",
+  "y_xuoi": "Twilight, Deception, Error",
+  "y_nguoc": "Fluctuation, slight Deceptions, Trifling Mistakes",
+  "bieu_tuong": "It symbolises Twilight, Deception, and Error."
+ },
+ "dai_19": {
+  "so_mathers": 19,
+  "ten_en": "The Sun",
+  "y_xuoi": "Happiness, Content, Joy",
+  "y_nguoc": "These in a minor degree",
+  "bieu_tuong": "It signifies Earthly Happiness."
+ },
+ "dai_20": {
+  "so_mathers": 20,
+  "ten_en": "The Last Judgment",
+  "y_xuoi": "Renewal, Result, Determination of a Matter",
+  "y_nguoc": "Postponement of Result, Delay, Matter re-opened later",
+  "bieu_tuong": "It signifies Renewal, Result."
+ },
+ "dai_0": {
+  "so_mathers": 0,
+  "ten_en": "The Foolish Man",
+  "y_xuoi": "Folly, Expiation, Wavering",
+  "y_nguoc": "Hesitation, Instability, Trouble arising herefrom",
+  "bieu_tuong": "It signifies Folly, Expiation."
+ },
+ "dai_21": {
+  "so_mathers": 21,
+  "ten_en": "The Universe",
+  "y_xuoi": "Completion, Good Reward",
+  "y_nguoc": "Evil Reward, or Recompense",
+  "bieu_tuong": "It represents Completion, Reward."
+ },
+ "gay_vua": {
+  "so_mathers": 22,
+  "ten_en": "King of Sceptres",
+  "y_xuoi": "Man living in the country, Country Gentleman, Knowledge, Education",
+  "y_nguoc": "A naturally good but severe man, Counsel, Advice, Deliberation"
+ },
+ "gay_hoang_hau": {
+  "so_mathers": 23,
+  "ten_en": "Queen of Sceptres",
+  "y_xuoi": "Woman living in the country, Lady of the Manor, Love of Money, Avarice, Usury",
+  "y_nguoc": "A good a virtuous Woman, but strict and economical, Obstacles, Resistance, Opposition"
+ },
+ "gay_hiep_si": {
+  "so_mathers": 24,
+  "ten_en": "Knight of Sceptres",
+  "y_xuoi": "Departure, Separation, Disunion",
+  "y_nguoc": "Rupture, Discord, Quarrel",
+  "etteilla": "This card is not to be read singly; it means the Departure of the card which follows it."
+ },
+ "gay_tieu_dong": {
+  "so_mathers": 25,
+  "ten_en": "Knave of Sceptres",
+  "y_xuoi": "A Good Stranger, Good News, Pleasure, Satisfaction",
+  "y_nguoc": "Ill News, Displeasure, Chagrin, Worry",
+  "etteilla": "R. Notice between what cards the News falls, which will show whence it comes, and of what nature it is."
+ },
+ "gay_10": {
+  "so_mathers": 26,
+  "ten_en": "Ten of Sceptres",
+  "y_xuoi": "Confidence, Security, Honour, Good Faith",
+  "y_nguoc": "Treachery, Subterfuge, Duplicity, Bar"
+ },
+ "gay_9": {
+  "so_mathers": 27,
+  "ten_en": "Nine of Sceptres",
+  "y_xuoi": "Order, Discipline, Good Arrangement, Disposition",
+  "y_nguoc": "Obstacles, Crosses, Delay, Displeasure"
+ },
+ "gay_8": {
+  "so_mathers": 28,
+  "ten_en": "Eight of Sceptres",
+  "y_xuoi": "Understanding, Observation, Direction",
+  "y_nguoc": "Quarrels, Intestine disputes, Discord"
+ },
+ "gay_7": {
+  "so_mathers": 29,
+  "ten_en": "Seven of Sceptres",
+  "y_xuoi": "Success, Gain, Advantage, Profit, Victory",
+  "y_nguoc": "Indecision, Doubt, Hesitation, Embarrassment, Anxiety"
+ },
+ "gay_6": {
+  "so_mathers": 30,
+  "ten_en": "Six of Sceptres",
+  "y_xuoi": "Attempt, Hope, Desire, Wish, Expectation",
+  "y_nguoc": "Infidelity, Treachery, Disloyalty, Perfidy"
+ },
+ "gay_5": {
+  "so_mathers": 31,
+  "ten_en": "Five of Sceptres",
+  "y_xuoi": "Gold, Opulence, Gain, Heritage, Riches, Fortune, Money",
+  "y_nguoc": "Legal proceedings, Judgment, Law, Lawyer, Tribunal"
+ },
+ "gay_4": {
+  "so_mathers": 32,
+  "ten_en": "Four of Sceptres",
+  "y_xuoi": "Society, Union, Association, Concord, Harmony",
+  "y_nguoc": "Prosperity, Success, Happiness, Advantage"
+ },
+ "gay_3": {
+  "so_mathers": 33,
+  "ten_en": "Three of Sceptres",
+  "y_xuoi": "Enterprise, Undertaking, Commerce, Trade, Negotiation",
+  "y_nguoc": "Hope, Desire, Attempt, Wish"
+ },
+ "gay_2": {
+  "so_mathers": 34,
+  "ten_en": "Deuce of Sceptres",
+  "y_xuoi": "Riches, Fortune, Opulence, Magnificence, Grandeur",
+  "y_nguoc": "Surprise, Astonishment, Event, Extraordinary Occurrence"
+ },
+ "gay_1": {
+  "so_mathers": 35,
+  "ten_en": "Ace of Sceptres",
+  "y_xuoi": "Birth, Commencement, Beginning, Origin, Source",
+  "y_nguoc": "Persecution, Pursuits Voilence, Vexation, Cruelty, Tyranny"
+ },
+ "coc_vua": {
+  "so_mathers": 36,
+  "ten_en": "King of Cups",
+  "y_xuoi": "A fair Man, Goodness, Kindness, Liberality, Generosity",
+  "y_nguoc": "A Man of good position, but shifty in his Dealings, Distrust, Doubt, Suspicion"
+ },
+ "coc_hoang_hau": {
+  "so_mathers": 37,
+  "ten_en": "Queen of Cups",
+  "y_xuoi": "A fair Woman, Success, Happiness, Advantage, Pleasure",
+  "y_nguoc": "A Woman in good position, but intermeddling, and to be distrusted; Success, but with some attendant trouble"
+ },
+ "coc_hiep_si": {
+  "so_mathers": 38,
+  "ten_en": "Knight of Cups",
+  "y_xuoi": "Arrival, Approach, Advance",
+  "y_nguoc": "Duplicity, Abuse of Confidence, Fraud, Cunning",
+  "etteilla": "This shows the arrival of the card which follows it, as 38, 54, the arrival of affliction or grief; 38, 39, the visit of a fair young man, etc."
+ },
+ "coc_tieu_dong": {
+  "so_mathers": 39,
+  "ten_en": "Knave of Cups",
+  "y_xuoi": "A fair Youth, Confidence, Probity, Discretion, Integrity",
+  "y_nguoc": "A Flatterer, Deception, Artifice"
+ },
+ "coc_10": {
+  "so_mathers": 40,
+  "ten_en": "Ten of Cups",
+  "y_xuoi": "The Town wherein one resides, Honour, Consideration, Esteem, Virtue, Glory, Reputation",
+  "y_nguoc": "Combat, Strife, Opposition, Differences, Dispute"
+ },
+ "coc_9": {
+  "so_mathers": 41,
+  "ten_en": "Nine of Cups",
+  "y_xuoi": "Victory, Advantage, Success, Triumph, Difficulties surmounted",
+  "y_nguoc": "Faults, Errors, Mistakes, Imperfections"
+ },
+ "coc_8": {
+  "so_mathers": 42,
+  "ten_en": "Eight of Cups",
+  "y_xuoi": "A fair Girl, Friendship, Attachment, Tenderness",
+  "y_nguoc": "Gaiety, Feasting, Joy, Pleasure"
+ },
+ "coc_7": {
+  "so_mathers": 43,
+  "ten_en": "Seven of Cups",
+  "y_xuoi": "Idea, Sentiment, Reflection, Project",
+  "y_nguoc": "Plan, Design, Resolution, Decision",
+  "etteilla": "Explains the card which follows; thus, 43, 30, 33, The idea of attempting some undertaking."
+ },
+ "coc_6": {
+  "so_mathers": 44,
+  "ten_en": "Six of Cups",
+  "y_xuoi": "The Past, passed by, Faded, Vanished, Disappeared",
+  "y_nguoc": "The Future, that which is to come, Shortly, Soon",
+  "etteilla": "Shows either that what precedes it is past, has occurred already; or if R., what is going to happen."
+ },
+ "coc_5": {
+  "so_mathers": 45,
+  "ten_en": "Five of Cups",
+  "y_xuoi": "Union, Junction, Marriage, Inheritance",
+  "y_nguoc": "Arrival, Return, News, Surprise, False projects"
+ },
+ "coc_4": {
+  "so_mathers": 46,
+  "ten_en": "Four of Cups",
+  "y_xuoi": "Ennui, Displeasure, Discontent, Dissatisfaction",
+  "y_nguoc": "New Acquaintance, Conjecture, Sign, Presentiment",
+  "etteilla": "The following cards might show what the displeasure or anxiety was about; the preceding cards, whence it originated."
+ },
+ "coc_3": {
+  "so_mathers": 47,
+  "ten_en": "Three of Cups",
+  "y_xuoi": "Success, Triumph, Victory, Favourable issue",
+  "y_nguoc": "Expedition of business, Quickness, Celerity, Vigilance"
+ },
+ "coc_2": {
+  "so_mathers": 48,
+  "ten_en": "Deuce of Cups",
+  "y_xuoi": "Love, Attachment, Friendship, Sincerity, Affection",
+  "y_nguoc": "Crossed desires, Obstacles, Opposition, Hindrance"
+ },
+ "coc_1": {
+  "so_mathers": 49,
+  "ten_en": "Ace of Cups",
+  "y_xuoi": "Feasting, Banquet, Good Cheer",
+  "y_nguoc": "Change, Novelty, Metamorphosis, Inconstancy"
+ },
+ "kiem_vua": {
+  "so_mathers": 50,
+  "ten_en": "King of Swords",
+  "y_xuoi": "A Lawyer, a Man of Law, Power, Command, Superiority, Authority",
+  "y_nguoc": "A Wicked Man, Chagrin, Worry, Grief, Fear, Disturbance"
+ },
+ "kiem_hoang_hau": {
+  "so_mathers": 51,
+  "ten_en": "Queen of Swords",
+  "y_xuoi": "Widowhood, Loss, Privation, Absence, Separation",
+  "y_nguoc": "A Bad Woman, ill-tempered and bigoted, Riches and Discord, Abundance together with Worry, Joy with Grief"
+ },
+ "kiem_hiep_si": {
+  "so_mathers": 52,
+  "ten_en": "Knight of Swords",
+  "y_xuoi": "A Soldier, a man whose profession is arms, Skilfulness, Capacity, Address, Promptitude",
+  "y_nguoc": "A conceited fool, Ingenuousness, Simplicity"
+ },
+ "kiem_tieu_dong": {
+  "so_mathers": 53,
+  "ten_en": "Knave of Swords",
+  "y_xuoi": "A Spy, Overlooking, Authority",
+  "y_nguoc": "That which is unforeseen, Vigilance, Support"
+ },
+ "kiem_10": {
+  "so_mathers": 54,
+  "ten_en": "Ten of Swords",
+  "y_xuoi": "Tears, Affliction, Grief, Sorrow",
+  "y_nguoc": "Passing Success, Momentary Advantage"
+ },
+ "kiem_9": {
+  "so_mathers": 55,
+  "ten_en": "Nine of Swords",
+  "y_xuoi": "An Ecclesiastic, a Priest, Conscience. Probity, Good Faith, Integrity",
+  "y_nguoc": "Wise distrust, Suspicion, Fear, Doubt, Shady character",
+  "etteilla": "R. The card following will show whom or what to distrust, &c."
+ },
+ "kiem_8": {
+  "so_mathers": 56,
+  "ten_en": "Eight of Swords",
+  "y_xuoi": "Sickness, Calumny, Criticism, Blame",
+  "y_nguoc": "Treachery in the Past, Event, Accident, Remarkable Incident",
+  "etteilla": "R. Shows Treachery or Deceit in the past, and will be explained by the neighbouring cards."
+ },
+ "kiem_7": {
+  "so_mathers": 57,
+  "ten_en": "Seven of Swords",
+  "y_xuoi": "Hope, Confidence, Desire, Attempt, Wish",
+  "y_nguoc": "Wise Advice, Good Counsel, Wisdom, Prudence, Circumspection",
+  "etteilla": "R. The cards which come next will show whether it will be good to follow the advice given or not."
+ },
+ "kiem_6": {
+  "so_mathers": 58,
+  "ten_en": "Six of Swords",
+  "y_xuoi": "Envoy, Messenger, Voyage, Travel",
+  "y_nguoc": "Declaration, Love proposed, Revelation, Surprise"
+ },
+ "kiem_5": {
+  "so_mathers": 59,
+  "ten_en": "Five of Swords",
+  "y_xuoi": "Mourning, Sadness, Affliction",
+  "y_nguoc": "Losses Trouble (same signification, whether reversed or not.)"
+ },
+ "kiem_4": {
+  "so_mathers": 60,
+  "ten_en": "Four of Swords",
+  "y_xuoi": "Solitude, Retreat, Abandonment, Solitary, Hermit",
+  "y_nguoc": "Economy, Precaution, Regulation of Expenditure",
+  "etteilla": "R. The cards near will show whether it is health or money that requires care."
+ },
+ "kiem_3": {
+  "so_mathers": 61,
+  "ten_en": "Three of Swords",
+  "y_xuoi": "A Nun, Separation, Removal, Rupture, Quarrel",
+  "y_nguoc": "Error, Confusion, Misrule, Disorder",
+  "etteilla": "R. May show simply that something is lost, or mislaid for a time."
+ },
+ "kiem_2": {
+  "so_mathers": 62,
+  "ten_en": "Deuce of Swords",
+  "y_xuoi": "Friendship, Valour, Firmness, Courage",
+  "y_nguoc": "False Friends, Treachery, Lies",
+  "etteilla": "R. If confirmed by the other cards may simply mean that the friends are not of much use to the inquirer in the matter under consideration."
+ },
+ "kiem_1": {
+  "so_mathers": 63,
+  "ten_en": "Ace of Swords",
+  "y_xuoi": "Triumph, Fecundity, Fertility, Prosperity",
+  "y_nguoc": "Embarrassment, Foolish and Hopeless Love, Obstacle, Hindrance"
+ },
+ "tien_vua": {
+  "so_mathers": 64,
+  "ten_en": "King of Pentacles",
+  "y_xuoi": "A dark Man, Victory, Bravery, Courage, Success",
+  "y_nguoc": "An old and vicious Man, a Dangerous Man, Doubt, Fear, Peril, Danger"
+ },
+ "tien_hoang_hau": {
+  "so_mathers": 65,
+  "ten_en": "Queen of Pentacles",
+  "y_xuoi": "A dark Woman, a generous Woman, Liberality, Greatness of Soul, Generosity",
+  "y_nguoc": "Certain Evil, a suspicious Woman, a Woman justly regarded with Suspicion, Doubt, Mistrust"
+ },
+ "tien_hiep_si": {
+  "so_mathers": 66,
+  "ten_en": "Knight of Pentacles",
+  "y_xuoi": "A useful Man, Trustworthy, Wisdom, Economy, Order, Regulation",
+  "y_nguoc": "A brave Man, but out of Employment, Idle, Unemployed, Negligent"
+ },
+ "tien_tieu_dong": {
+  "so_mathers": 67,
+  "ten_en": "Knave of Pentacles",
+  "y_xuoi": "A dark Youth, Economy, Order, Rule, Management",
+  "y_nguoc": "Prodigality, Profusion, Waste, Dissipation",
+  "etteilla": "R. Consult the following cards to see in what the person is prodigal."
+ },
+ "tien_10": {
+  "so_mathers": 68,
+  "ten_en": "Ten of Pentacles",
+  "y_xuoi": "House, Dwelling, Habitation, Family",
+  "y_nguoc": "Gambling, Dissipation, Robbery, Loss"
+ },
+ "tien_9": {
+  "so_mathers": 69,
+  "ten_en": "Nine of Pentacles",
+  "y_xuoi": "Discretion, Circumspection, Prudence, Discernment",
+  "y_nguoc": "Deceit, Bad faith, Artifices, Deception"
+ },
+ "tien_8": {
+  "so_mathers": 70,
+  "ten_en": "Eight of Pentacles",
+  "y_xuoi": "A dark Girl, Beauty, Candour, Chastity, Innocence, Modesty",
+  "y_nguoc": "Flattery, Usury, Hypocrisy, Shifty"
+ },
+ "tien_7": {
+  "so_mathers": 71,
+  "ten_en": "Seven of Pentacles",
+  "y_xuoi": "Money, Finance, Treasure, Gain, Profit",
+  "y_nguoc": "Disturbance, Worry, Anxiety, Melancholy",
+  "etteilla": "R. The next card will show the reason of the anxiety, and so on."
+ },
+ "tien_6": {
+  "so_mathers": 72,
+  "ten_en": "Six of Pentacles",
+  "y_xuoi": "Presents, Gifts, Gratification",
+  "y_nguoc": "Ambition, Desire, Passion, Aim, Longing"
+ },
+ "tien_5": {
+  "so_mathers": 73,
+  "ten_en": "Five of Pentacles",
+  "y_xuoi": "Lover or Mistress, Love, Sweetness, Affection, Pure and Chaste Love",
+  "y_nguoc": "Disgraceful Love, Imprudence, License, Profligacy",
+  "etteilla": "Shows simply that there is some one whom the person loves."
+ },
+ "tien_4": {
+  "so_mathers": 74,
+  "ten_en": "Four of Pentacles",
+  "y_xuoi": "Pleasure, Gaiety, Enjoyment, Satisfaction",
+  "y_nguoc": "Obstacles, Hindrances"
+ },
+ "tien_3": {
+  "so_mathers": 75,
+  "ten_en": "Three of Pentacles",
+  "y_xuoi": "Nobility, Elevation, Dignity, Rank, Power",
+  "y_nguoc": "Children, Sons, Daughters, Youths, Commencement"
+ },
+ "tien_2": {
+  "so_mathers": 76,
+  "ten_en": "Deuce of Pentacles",
+  "y_xuoi": "Embarrassment, Worry, Difficulties",
+  "y_nguoc": "Letter, Missive, Epistle, Message"
+ },
+ "tien_1": {
+  "so_mathers": 77,
+  "ten_en": "Ace of Pentacles",
+  "y_xuoi": "Perfect Contentment, Felicity, Prosperity, Triumph",
+  "y_nguoc": "Purse of Gold, Money, Gain, Help, Profit, Riches"
+ },
+ "_cau_22_key": "The Human Will (1) enlightened by Science (2) and manifested by Action (3) should find its Realisation (4) in deeds of Mercy and Beneficence (5). The Wise Disposition (6) of this will give him Victory (7) through Equilibrium (8) and Prudence (9), over the fluctuations of Fortune (10). Fortitude (11), sanctified by Sacrifice of Self (12), will triumph over Death itself (13), and thus a Wise Combination (14) will enable him to defy Fate (15). In each Misfortune (16) he will see the Star of Hope (17) shine through the twilight of Deception (18); and ultimate Happiness (19) will be the Result (20). Folly (0), on the other hand, will bring about an evil Reward (21).",
+ "_dai_dien": "The Court-Cards, and especially the Kings and Queens, may be taken to represent persons; in this case their additional meaning should not be read. The Swords represent very dark people; Pentacles, those not so dark; Cups, rather fair people; Wands or Sceptres, those much fairer, and so on. Many Wands together might signify feasting, many Cups lovemaking, Swords quarrelling and trouble, Coins or Pentacles money.",
+ "_phuong_phap": [
+  "FIRST METHOD: chia 78 lá thành hai đống A (26) và B (52) theo nhịp 2–1, rồi B → C (17) + D (35), D → E (11) + F (24, bỏ); đọc A, C, E xếp hình móng ngựa từ phải sang trái, rồi ghép lá 1 với 26, 2 với 25…",
+  "SECOND METHOD: rút Vua/Hoàng hậu làm lá đại diện, lấy mỗi lá thứ bảy cho đủ 21 lá, xếp 3 hàng 7 lá bên trái lá đại diện, đọc từ phải sang trái rồi ghép 1–21, 2–20…",
+  "THIRD METHOD: 66 lá xếp thành tam giác trong vòm, lá đại diện ở giữa; 1–11 và 34–44 là quá khứ, 23–33 và 56–66 hiện tại, 12–22 và 45–55 tương lai."
+ ]
+}
