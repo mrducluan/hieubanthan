@@ -68,13 +68,19 @@ def _suc(diem: int) -> str:
     return "tiep_suc" if diem >= 1 else "bi_kim" if diem <= -1 else "binh"
 
 
-def suc_la(giua: str, trai: str | None, phai: str | None) -> dict:
-    """Sức của lá giữa theo hai lá kề: {suc, diem, triet_tieu, chi_tiet[(bên, quan hệ)]}."""
-    ben = [(t, n) for t, n in (("trai", trai), ("phai", phai)) if n]
-    chi_tiet = [(t, pham_gia(giua, n)) for t, n in ben]
-    triet = len(ben) == 2 and pham_gia(ben[0][1], ben[1][1]) == "xung"
+def suc_ke(giua: str, ke: list[tuple[str, str]]) -> dict:
+    """Sức của một lá theo các lá kề [(nhãn, nguyên tố)]: {suc, diem, triet_tieu, chi_tiet[(nhãn, quan hệ)]}.
+    Book T: lá giữa một HÀNG ba lá có hai lá kề xung NHAU → chúng triệt tiêu, lá giữa đọc nguyên nghĩa; vị trí có nhiều lá kề
+    (Celtic Cross) thì cộng dồn quan hệ với từng lá kề. MỘT nơi giữ luật — `suc_la` và `phan_tich` đều gọi qua đây."""
+    chi_tiet = [(t, pham_gia(giua, n)) for t, n in ke]
+    triet = len(ke) == 2 and pham_gia(ke[0][1], ke[1][1]) == "xung"
     diem = 0 if triet else sum(_DIEM[q] for _, q in chi_tiet)
     return {"suc": _suc(diem), "diem": diem, "triet_tieu": triet, "chi_tiet": chi_tiet}
+
+
+def suc_la(giua: str, trai: str | None, phai: str | None) -> dict:
+    """Sức của lá giữa theo hai lá kề trái / phải (hàng ba lá)."""
+    return suc_ke(giua, [(t, n) for t, n in (("trai", trai), ("phai", phai)) if n])
 
 
 # ------------------------------------------------------------------ trải bài
@@ -126,15 +132,7 @@ def phan_tich(trai_bai: str, la: list[dict]) -> dict:
     for i, x in enumerate(ds):
         l = _la(x["id"])
         nt = l["nguyen_to"]
-        hx = [_la(ds[j]["id"])["nguyen_to"] for j in hang_xom[i]]
-        # Book T: lá giữa một HÀNG ba lá có hai lá kề xung NHAU → chúng triệt tiêu, lá giữa đọc nguyên nghĩa. Vị trí có
-        # nhiều lá kề (Celtic Cross) thì cộng dồn quan hệ với từng lá kề.
-        if len(hx) == 2 and pham_gia(hx[0], hx[1]) == "xung":
-            s = {"suc": "binh", "diem": 0, "triet_tieu": True, "chi_tiet": [(f"vi_tri_{j}", pham_gia(nt, _la(ds[j]['id'])['nguyen_to'])) for j in hang_xom[i]]}
-        else:
-            diem = sum(_DIEM[pham_gia(nt, h)] for h in hx)
-            s = {"suc": _suc(diem), "diem": diem, "triet_tieu": False,
-                 "chi_tiet": [(f"vi_tri_{j}", pham_gia(nt, _la(ds[j]['id'])['nguyen_to'])) for j in hang_xom[i]]}
+        s = suc_ke(nt, [(f"vi_tri_{j}", _la(ds[j]["id"])["nguyen_to"]) for j in hang_xom[i]])
         vi_tri.append({"vi_tri": i, "ma": tb["vi_tri"][i]["ma"], "ten": tb["vi_tri"][i]["ten"], "id": x["id"], "nguoc": x["nguoc"],
                        "nguyen_to": nt, "loai": l["loai"], "so": l["so"], "suc": s, "ke": hang_xom[i]})
     ke_can = [{"a": a, "b": b, "quan_he": pham_gia(_la(ds[a]["id"])["nguyen_to"], _la(ds[b]["id"])["nguyen_to"])} for a, b in ke]
@@ -224,13 +222,11 @@ def la_ngay(ngay: dt.date, ngay_sinh: dt.date | None = None) -> dict:
 
 
 def dai_dien(tuoi: int | None, gioi_tinh: str | None, ngu_hinh: str | None = None, bo: str | None = None, dang: str | None = None) -> dict | None:
-    """Lá hoàng gia 'đóng vai' người hỏi. Bộ: ngũ hình gương mặt (Nhân tướng) → bộ; không có → `bo` người chọn; cấp: tuổi ×
-    giới tính (< 30: Hiệp sĩ / Tiểu đồng; ≥ 30: Vua / Hoàng hậu); không giới tính → theo dáng nhanh (Hiệp sĩ) / chậm (Tiểu đồng),
-    không rõ → Hoàng hậu nếu ≥ 30 (lực chín, hướng vào) hoặc Tiểu đồng. Thiếu cả tuổi lẫn bộ → None."""
+    """Lá hoàng gia 'đóng vai' người hỏi. Bộ: ngũ hình gương mặt (Nhân tướng) → bộ; không có → `bo` người chọn; không suy
+    được bộ → None (tuổi một mình không đủ). Cấp: tuổi × giới tính (< 30 hoặc chưa biết tuổi: Hiệp sĩ / Tiểu đồng; ≥ 30: Vua /
+    Hoàng hậu); không giới tính → theo dáng nhanh (Hiệp sĩ / Vua) hay chậm, không rõ (Tiểu đồng / Hoàng hậu)."""
     dd = kb.dai_dien()
     bo_chon = dd.get("hinh_bo", {}).get(ngu_hinh or "") or (bo if bo in _BO else None)
-    if tuoi is None and bo_chon is None:
-        return None
     if bo_chon is None:
         return None
     lon = tuoi is not None and tuoi >= int(dd.get("cap", {}).get("tuoi_lon", 30))

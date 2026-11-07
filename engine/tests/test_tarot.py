@@ -329,3 +329,21 @@ def test_trang_la_bai():
     r = client.get("/v1/kb/trang/la_bai/thap")
     assert r.status_code == 200
     assert "nhap_ai" not in r.json().get("nguon", []) and "seed" not in r.text.lower()
+
+
+def test_hoi_ten_la_co_so_thang_vi_tri():
+    """'Lá 3 Cốc' là lá Ba Cốc dù đang có trải bài (không phải lá thứ 3); 'lá thứ 2' vẫn là vị trí."""
+    from app.luangiai import tarot as tr
+    ds = [{"id": "gay_1", "nguoc": False}, {"id": "dai_16", "nguoc": False}, {"id": "coc_9", "nguoc": True}]
+    k = tr.hoi("Lá 3 Cốc ngược trong tình cảm?", trai_bai="ba_la_loi_khuyen", la=ds)
+    assert k["xu_ly"] == "nghia_la" and k["la"] == "coc_3" and k["nguoc"] is True
+    k = tr.hoi("lá thứ 2 nghĩa gì", trai_bai="ba_la_loi_khuyen", la=ds)
+    assert k["xu_ly"] == "vi_tri" and k["la"] == "dai_16" and k["vi_tri"] == 1
+
+
+def test_suc_ke_mot_luat_cho_phan_tich():
+    from app.calc import tarot as calc
+    assert calc.suc_ke("hoa", [("a", "hoa"), ("b", "khi")])["suc"] == "tiep_suc"
+    assert calc.suc_ke("hoa", [("a", "khi"), ("b", "dat")])["triet_tieu"] is True
+    assert calc.suc_ke("hoa", [])["suc"] == "binh"
+

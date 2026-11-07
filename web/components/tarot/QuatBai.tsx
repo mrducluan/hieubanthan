@@ -90,7 +90,7 @@ export function QuatBai({ thuTu, daRut, onRut, conLai, className }: {
     <div ref={ref} className={cn("relative select-none overflow-hidden rounded-2xl", className)} style={{ height: chieuCao, touchAction: "pan-y" }}
       data-testid="quat-bai" role="listbox" aria-label={`Quạt bài ${n} lá úp — còn rút ${conLai} lá`} tabIndex={0} onKeyDown={phim}
       onPointerDown={batDauKeo} onPointerMove={dangKeo} onPointerUp={thaKeo} onPointerCancel={thaKeo} onPointerLeave={thaKeo}>
-      <div className="absolute left-1/2 top-full" style={{ transform: `translateX(-50%) translateY(${-hLa - (dienThoai ? 18 : 30)}px) rotate(${xoay}deg)`, transformOrigin: `0 ${-(banKinh - hLa)}px`.replace("0 ", "50% "), transition: keo.current || giam ? "none" : "transform 120ms ease-out" }}>
+      <div className="absolute left-1/2 top-full" style={{ transform: `translateX(-50%) translateY(${-hLa - (dienThoai ? 18 : 30)}px) rotate(${xoay}deg)`, transformOrigin: `50% ${-(banKinh - hLa)}px`, transition: keo.current || giam ? "none" : "transform 120ms ease-out" }}>
         {thuTu.map((ma, i) => {
           if (daRut.includes(i)) return null;
           const g = -goc / 2 + i * buoc;

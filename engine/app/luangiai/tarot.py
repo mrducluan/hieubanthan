@@ -296,7 +296,7 @@ def _chuong_viec(pt: dict, tb: dict) -> dict:
                           ma=kh.ma_mau(MO_DUN, "viec", l["id"], "n" if v["nguoc"] else "x"), phai="tdm", la=_tom_la(l, v["nguoc"])))
         if len(hop) >= 3:
             break
-    return kh.chuong("viec_nen_lam", c["tieu_de"], [str(kb.mau("viec_mo"))], hop=hop[:4] if len(hop) >= 2 else hop, cau_hoi=c["cau_hoi"],
+    return kh.chuong("viec_nen_lam", c["tieu_de"], [str(kb.mau("viec_mo"))], hop=hop, cau_hoi=c["cau_hoi"],
                      cau_tu_soi="Trong các việc trên, việc nào bạn làm được ngay tối nay?")
 
 
@@ -459,10 +459,12 @@ def hoi(cau: str, *, trai_bai: str | None = None, la: list[dict] | None = None, 
             ds = calc.chuan_la(la, len(tb["vi_tri"]))
         except ValueError:
             ds = None
-    # lá ở một vị trí của trải bài vừa rút
-    if tb and ds:
-        m = _LA_THU.search(t)
-        vt_ma = next((v for k, v in _VI_TRI_TU.items() if k in t), None)
+    # Tên lá tìm TRƯỚC (bỏ tên lá khỏi câu): "lá 3 Cốc" là lá Ba Cốc, không phải "lá thứ 3" của trải bài.
+    ma_la, con = _tim_la(t)
+    # lá ở một vị trí của trải bài vừa rút (chỉ khi câu không gọi tên một lá)
+    if tb and ds and not ma_la:
+        m = _LA_THU.search(con)
+        vt_ma = next((v for k, v in _VI_TRI_TU.items() if k in con), None)
         i = None
         if m and 1 <= int(m.group(1)) <= len(ds):
             i = int(m.group(1)) - 1
@@ -477,7 +479,6 @@ def hoi(cau: str, *, trai_bai: str | None = None, la: list[dict] | None = None, 
             kq.update(_tra_loi_la(l, ds[i]["nguoc"], linh_vuc, tb["vi_tri"][i]))
             kq["vi_tri"] = i
             return kq
-    ma_la, con = _tim_la(t)
     if ma_la:
         l = _la(ma_la)
         nguoc = bool(_NGUOC.search(con))

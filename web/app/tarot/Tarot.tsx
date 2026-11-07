@@ -74,7 +74,8 @@ export function Tarot() {
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa xáo được."); } finally { setDang(false); }
   };
   const rut = (i: number) => {
-    setDaRut((d) => (d.length >= soLa || d.includes(i) ? d : [...d, i]));
+    if (daRut.length >= soLa || daRut.includes(i)) return;          // bấm đúp / đã đủ lá → bỏ qua, không đo
+    setDaRut([...daRut, i]);
     ghi("chart_interacted", { mo_dun: "tarot", kind: "rut", so: daRut.length + 1 });
   };
   const latLa = (i: number) => setLat((l) => { const m = Array.from({ length: soLa }, (_, k) => l[k] ?? false); m[i] = true; return m; });
@@ -93,8 +94,9 @@ export function Tarot() {
       const d = await postJson<Bc>("/api/tarot/doc-bai", body);
       setBc(d); setBuoc("doc");
       if (!ds) {
-        const tt = d.da_tinh.vi_tri[d.da_tinh.trai_bai === "celtic" || d.da_tinh.trai_bai === "nam_la" ? 0 : Math.min(1, laGui.length - 1)];
-        luuTraiBai({ trai_bai: maGui, la: laGui, cau: cauCu ?? cau, chu_de: chuDeCu ?? chuDe, tom_tat: tt ? `${tt.ten_la}${tt.nguoc ? " (ngược)" : ""}` : d.da_tinh.ten_trai_bai });
+        // Tâm điểm = hộp cốt lõi đầu tiên engine trả (hop của vị trí trọng tâm theo KB) — web không tự chọn vị trí.
+        const tt = d.cot_loi[0]?.la;
+        luuTraiBai({ trai_bai: maGui, la: laGui, cau: cauCu ?? cau, chu_de: chuDeCu ?? chuDe, tom_tat: tt ? `${tt.ten}${tt.nguoc ? " (ngược)" : ""}` : d.da_tinh.ten_trai_bai });
         docLichSu();
       }
       ghi("chart_interacted", { mo_dun: "tarot", kind: "doc_bai", trai_bai: maGui, an_chinh: d.da_tinh.an_chinh.so, xem_lai: Boolean(ds) });

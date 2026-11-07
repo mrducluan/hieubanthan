@@ -35,7 +35,7 @@ export interface HopTarot extends Hop {
 }
 export interface ChuongTarot extends ChuongDoiSongMo { hop?: HopTarot[]; thieu?: string | null }
 export interface BaoCaoTarot extends BaoCaoDoiSong {
-  ten: string; thieu: string[]; chuong: ChuongTarot[]; cau_hoi: null; chu_de: string | null; linh_vuc: string | null;
+  ten: string; thieu: string[]; chuong: ChuongTarot[]; /** hộp cốt lõi đầu tiên = hộp của vị trí trọng tâm (engine chọn theo KB) */ cot_loi: HopTarot[]; cau_hoi: null; chu_de: string | null; linh_vuc: string | null;
   da_tinh: {
     trai_bai: MaTraiBai; ten_trai_bai: string;
     vi_tri: { vi_tri: number; ma: string; ten: string; id: string; nguoc: boolean; nguyen_to: NguyenTo; loai: LoaiLa; so: number; ten_la: string; suc: { suc: SucLa; diem: number; triet_tieu: boolean }; ke: number[] }[];
