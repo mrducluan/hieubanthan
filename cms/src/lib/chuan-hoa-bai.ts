@@ -9,7 +9,7 @@
 //  · Liên kết nội bộ + lối tới công cụ của mảng khi bài thiếu (đoạn cuối bài, lời mời không doạ).
 // Ảnh (bìa nền sáng, ảnh "Tóm tắt nhanh") do chuan-hoa-notfair.ts vẽ + tải lên; ở đây chỉ báo cần gì và chèn nút ảnh.
 import { boDau, docLexical, slugViet } from "../kiem-dinh/kiem-dinh.ts";
-import { htmlSangKhoi, type NutLexical } from "./html-lexical.ts";
+import { htmlSangKhoi, LA_GHI_CONG, type NutLexical } from "./html-lexical.ts";
 
 export type MangCms = "than_so" | "tu_vi" | "bat_tu" | "kinh_dich" | "phong_thuy" | "chung";
 
@@ -202,6 +202,11 @@ export function chuanHoaBai(bai: BaiChuanHoa, tc: TuyChon = {}): KetQuaChuanHoa 
   const goc = (bai.noi_dung && typeof bai.noi_dung === "object" ? (bai.noi_dung as { root?: Nut }).root : null) ?? null;
   let khoi: Nut[] = Array.isArray(goc?.children) ? [...goc!.children] : [];
   let doiThan = false;
+
+  // ---- BLOG-9: bỏ dòng ghi công "Authored with NotFair SEO" (bài nhập trước khi có luật này)
+  const soKhoiTruoc = khoi.length;
+  khoi = khoi.filter((k) => !(k.type === "paragraph" && LA_GHI_CONG.test(chuoi(chuNut(k)))));
+  if (khoi.length < soKhoiTruoc) { doiThan = true; thay.push(`Bỏ dòng ghi công "Authored with NotFair SEO" cuối bài.`); }
 
   // ---- kiểu bỏ dấu trong thân bài (trước khi đọc đoạn văn để sapo/trả lời nhanh dùng chữ đã thống nhất)
   let soNutDoi = 0;

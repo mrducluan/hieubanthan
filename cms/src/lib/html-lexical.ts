@@ -84,6 +84,8 @@ const phanTu = (type: string, children: NutLexical[], them: Record<string, unkno
 const doan = (children: NutLexical[]) => phanTu("paragraph", children, { textFormat: 0, textStyle: "" });
 
 const laPhan = (n: NutHtml): n is Phan => "ten" in n;
+/** Dòng ghi công NotFair cuối bài (BLOG-9). Dùng chung cho bước chuẩn hoá bài đã nhập. */
+export const LA_GHI_CONG = /^authored with notfair( seo)?\.?$/i;
 const coLop = (n: Phan, lop: string) => (n.thuocTinh.class ?? "").split(/\s+/).includes(lop);
 
 /** Link giữ được: http(s), mailto, đường dẫn trong site. Còn lại (javascript:, neo #…, data:) → chỉ giữ chữ. */
@@ -204,7 +206,8 @@ function cacKhoi(nodes: NutHtml[], ngu: Ngu): (NutLexical | ChoAnh)[] {
         break;
       }
       case "p": {
-        if (coLop(n, "nf-toc-title")) break;
+        // BLOG-9 (chủ dự án 2026-11-06): bỏ dòng ghi công "Authored with NotFair SEO" — bài đứng tên tác giả của site.
+        if (coLop(n, "nf-toc-title") || coLop(n, "nf-attribution") || LA_GHI_CONG.test(chuThuan(n.con).trim())) break;
         const nd = gon(noiDong(n.con, ngu));
         if (nd.length) kq.push(doan(nd));
         break;

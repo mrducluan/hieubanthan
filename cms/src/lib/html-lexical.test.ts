@@ -30,11 +30,18 @@ test("giải mã thực thể + đọc thuộc tính có dấu nháy", () => {
 test("cấu trúc khối: h1→h2, bỏ mục lục/script/form, giữ thứ tự", () => {
   const k = htmlSangKhoi(MAU);
   assert.deepEqual(loai(k), ["heading", "heading", "paragraph", "list", "list", "heading", "quote", "table", "__anh",
-    "paragraph", "__anh", "horizontalrule", "paragraph"]);
+    "paragraph", "__anh", "horizontalrule"]);
   assert.equal((k[0] as NutLexical).tag, "h2");
   assert.equal(chuCua(k[1] as NutLexical), "Phần A & B");
   assert.doesNotMatch(JSON.stringify(k), /alert|Mục lục|p\{\}/);
-  assert.equal(chuCua(k[12] as NutLexical), "Bài trao đổi qua NotFair.");
+  // BLOG-9: dòng ghi công (p.nf-attribution hoặc chữ "Authored with NotFair SEO") bỏ khi nhập.
+  assert.doesNotMatch(JSON.stringify(k), /trao đổi qua NotFair/);
+});
+
+test("BLOG-9: bỏ dòng \"Authored with NotFair SEO\" dù không có lớp nf-attribution", () => {
+  const k = htmlSangKhoi(`<p>Đoạn thật.</p><p>Authored with <a href="https://notfair.co">NotFair SEO</a></p>`);
+  assert.equal(k.length, 1);
+  assert.equal(chuCua(k[0] as NutLexical), "Đoạn thật.");
 });
 
 test("nội dòng: định dạng cộng dồn, link chỉ http(s)/mailto/nội bộ", () => {

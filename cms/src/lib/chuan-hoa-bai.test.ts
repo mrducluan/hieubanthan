@@ -105,3 +105,17 @@ test("không có anhPhu → thân bài như cũ (không chèn thêm ảnh)", () 
   const goc = (kq.data.noi_dung as { root: { children: { type: string }[] } }).root.children;
   assert.equal(goc.filter((k) => k.type === "upload").length, 1);
 });
+
+test("BLOG-9: chuẩn hoá bỏ dòng ghi công NotFair cuối bài đã nhập, chạy lại không đổi thêm", () => {
+  const goc = BAI.noi_dung as { root: { children: unknown[] } };
+  const ghiCong = { type: "paragraph", version: 1, children: [
+    { type: "text", version: 1, text: "Authored with " },
+    { type: "link", version: 3, fields: { url: "https://notfair.co" }, children: [{ type: "text", version: 1, text: "NotFair SEO" }] }] };
+  const bai = { ...BAI, noi_dung: { root: { ...goc.root, children: [...goc.root.children, ghiCong] } } };
+  const kq = chuanHoaBai(bai, { slugDaDung: () => false });
+  const than = JSON.stringify((kq.data as Record<string, any>).noi_dung);
+  assert.doesNotMatch(than, /Authored with/);
+  assert.ok(kq.thay_doi.some((t) => t.includes("Authored with NotFair SEO")), kq.thay_doi.join("\n"));
+  const lan2 = chuanHoaBai({ ...bai, ...(kq.data as object) }, { slugDaDung: () => false });
+  assert.ok(!lan2.thay_doi.some((t) => t.includes("Authored with")));
+});

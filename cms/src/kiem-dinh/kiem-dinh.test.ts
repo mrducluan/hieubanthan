@@ -182,6 +182,15 @@ test("Nội dung: vùng cấm, liên hệ, tên nội bộ là LỖI CHẶN xu�
   assert.ok(kiemDinhBai(b).loi_chan.some((m) => m.ma === "vung_cam"), "quét cả hỏi đáp");
 });
 
+test("cụm cấm khớp trọn từ: \"ung thư\" không khớp \"cung thường\", \"dùng thường\"", () => {
+  const b = baiTot();
+  b.noi_dung = goc(doan(chu("Các cung thường được dùng để đặt câu hỏi; bản giải thích dễ dùng thường chỉ rõ thuật ngữ.")));
+  assert.ok(!kiemDinhBai(b).loi_chan.some((m) => m.ma === "ten_benh"), "không chặn oan");
+  const c = baiTot();
+  c.noi_dung = goc(doan(chu("Đừng nói Ung thư, ung-thư hay \"ung thư\" khi luận lá số.")));
+  assert.ok(kiemDinhBai(c).loi_chan.some((m) => m.ma === "ten_benh"), "vẫn chặn đúng");
+});
+
 test("SK-1 sức khoẻ: tên bệnh / lời đoán ốm chặn; hệ cơ quan + đi khám + năm nên chú ý được phép", () => {
   for (const [cau, maLoi] of [["Người tuổi này dễ bị ung thư phổi.", "ten_benh"],
     ["Năm 2028 bạn sẽ ốm nặng.", "vung_cam"], ["Dễ cao huyết áp về già.", "ten_benh"]] as [string, string][]) {

@@ -213,9 +213,11 @@ const LIEN_HE_CHU = /\b\d[\d .]{8,}\d\b|[\w.+-]+@[\w-]+\.[\w.]+|\bzalo\b|\bhotli
 const CONG_CU = /^(https?:\/\/(www\.)?hieuban\.com)?\/(than-so|tu-vi|bat-tu|kinh-dich|phong-thuy|hop-doi|hom-nay)(\/|$|\?)/;
 const CAU_HOI = /\?\s*$|là gì|thế nào|như nào|tại sao|vì sao|bao nhiêu|có nên|ở đâu|khi nào|ra sao|có phải/i;
 
+// Khớp TRỌN TỪ: "ung thư" không được khớp "cung thường", "dùng thường" (2026-11-06: hai bài bị chặn oan).
+const thoatRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const timCum = (van: string, ds: string[]) => {
   const v = chuanCum(van);
-  return ds.filter((c) => v.includes(chuanCum(c)));
+  return ds.filter((c) => new RegExp(`(?<![\\p{L}\\p{N}])${thoatRe(chuanCum(c))}(?![\\p{L}\\p{N}])`, "u").test(v));
 };
 
 // ------------------------------------------------------------------ kiểm định
