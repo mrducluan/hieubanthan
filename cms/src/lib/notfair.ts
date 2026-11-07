@@ -4,6 +4,9 @@
 import type { Payload, PayloadRequest } from "payload";
 import { htmlSangKhoi, linkNgoai, thayAnh, type ChoAnh } from "./html-lexical";
 import { cauHinhGoi, nguonNotFair } from "./notfair-nguon";
+
+/** Nguồn ghi trên ảnh tải từ bài NotFair. BLOG-9: chuẩn hoá thay ảnh BÌA mang nguồn này (chữ in sẵn trong ảnh hay sai dấu). */
+export const NGUON_ANH_NOTFAIR = "Ảnh đi kèm bài trao đổi NotFair";
 export { cauHinhGoi, nguonNotFair, type NguonNotFair } from "./notfair-nguon";
 
 export type BaiNotFair = {
@@ -81,7 +84,7 @@ async function taoAnh(payload: Payload, req: PayloadRequest, phien: PhienAnh, sr
     // KHÔNG truyền `req`: ảnh tạo trong giao dịch RIÊNG — lỗi kho làm Payload huỷ giao dịch, nếu dùng chung thì mất cả bài.
     const m = await payload.create({
       collection: "media", user: req.user, overrideAccess: Boolean(phien.heThong), file: f,
-      data: { alt: alt.slice(0, 160), chu_thich: chuThich.slice(0, 200) || undefined, nguon_anh: "Ảnh đi kèm bài trao đổi NotFair" },
+      data: { alt: alt.slice(0, 160), chu_thich: chuThich.slice(0, 200) || undefined, nguon_anh: NGUON_ANH_NOTFAIR },
     });
     return m.id;
   } catch (e) {
