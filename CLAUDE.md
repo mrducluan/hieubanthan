@@ -85,6 +85,7 @@ web/             Next.js 16 App Router, TS strict, Tailwind + shadcn/ui — ch�
 cms/             Payload CMS 3 (Next 16) — bài viết /blog + công tắc nội dung; web chỉ ĐỌC qua REST (docs/KIEN-TRUC-CMS.md)
 supabase/        Migration, mỗi file .sql có file .down.sql đi kèm
 .claude/skills/  thanso-kb, thanso-tu-cai-thien (thần số) · huyenhoc-kb, huyenhoc-tu-cai-thien (4 mảng Huyền học)
+                 grill-me → grilling (phỏng vấn chốt kế hoạch theo cây quyết định, MIT mattpocock/skills)
 ```
 
 ## Ranh giới giữa các tầng
