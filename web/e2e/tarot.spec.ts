@@ -57,11 +57,18 @@ test("nhấn giữ xáo bài (hạt giống từ cử chỉ) → quạt hiện; 
   await page.getByTestId("trai-bai-mot_la").click();
   await page.getByTestId("nut-bat-dau").click();
   const nut = page.getByTestId("nut-giu-xao");
-  await nut.hover();                         // chờ khối Xáo bài dựng xong và trang cuộn tới nó ổn định (hover tự chờ "stable")
+  await nut.hover();                         // chờ khối Xáo bài dựng xong (hover tự chờ "stable")
+  // Sau "Xáo bài" trang cuộn mượt tới bàn (50 ms sau) → trên máy CI chậm nút còn trôi khi chuột ấn xuống, pointerdown rơi cạnh nút.
+  // Chờ nút đứng yên 300 ms rồi mới nhấn giữ; giữ ~1,5 s (ngưỡng tối thiểu 0,8 s).
+  await expect.poll(async () => {
+    const a = await nut.boundingBox(); await page.waitForTimeout(300); const b = await nut.boundingBox();
+    return a && b && Math.abs(a.y - b.y) < 1 && Math.abs(a.x - b.x) < 1 ? "yen" : "dang_cuon";
+  }, { timeout: 10_000 }).toBe("yen");
+  await expect(nut).toBeEnabled();
   const hop = await nut.boundingBox();
   await page.mouse.move(hop!.x + 10, hop!.y + 10);
   await page.mouse.down();
-  for (let i = 0; i < 12; i++) { await page.mouse.move(hop!.x + 10 + i * 3, hop!.y + 10 + (i % 3)); await page.waitForTimeout(90); }
+  for (let i = 0; i < 16; i++) { await page.mouse.move(hop!.x + 10 + i * 3, hop!.y + 10 + (i % 3)); await page.waitForTimeout(90); }
   await page.mouse.up();
   await expect(page.getByTestId("quat-bai")).toBeVisible({ timeout: 15_000 });
   await page.getByTestId("quat-bai").locator('[data-chi-so="10"]').dispatchEvent("click");   // lá chồng mép (xem test trên)
