@@ -72,7 +72,7 @@ Engine `tests/test_tarot.py` (18 ca: KB đủ 78 / 36 decan không trùng / sạ
 
 ## 6. Việc của chủ dự án
 
-Ghi ở `docs/VIEC-CUA-ANH.md` mục TR-1: deploy engine trước web; menu Huyền học đã 12 mục — muốn `/tarot` vào menu thì chọn một mục nhường chỗ (CMS); Search Console yêu cầu lập chỉ mục `/tarot`, `/tarot/la-bai/thap`; (khi mở mạng) đối chiếu nguyên văn Waite / Book T; quyết có bật diễn đạt AI cho bài đọc tarot (hiện bản mẫu tất định, như Nhân tướng).
+Ghi ở `docs/VIEC-CUA-ANH.md` mục TR-1: deploy engine trước web; menu Huyền học: "Xem Tarot" thay "64 quẻ Kinh Dịch" + "Thư viện kiến thức" (chủ dự án chốt 2026-11-07, migration CMS `tr_1_menu_tarot`); Search Console yêu cầu lập chỉ mục `/tarot`, `/tarot/la-bai/thap`; (khi mở mạng) đối chiếu nguyên văn Waite / Book T; quyết có bật diễn đạt AI cho bài đọc tarot (hiện bản mẫu tất định, như Nhân tướng).
 
 ## 7. Đối chiếu nguyên văn (TR-1b, 2026-11-07)
 

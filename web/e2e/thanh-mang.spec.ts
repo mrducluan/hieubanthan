@@ -6,7 +6,7 @@ import { THANH_MANG, khoaChu, mucDangXem, thanhCua } from "../lib/thanh-mang";
 import { duongDanCongCu, duongDanCum } from "../lib/duong-dan";
 import { CUM_CO_MUC_LUC, maChu, mucLucCum } from "../lib/nhom-cum";
 import { CHU_CHUNG } from "../lib/chu/chung";
-import { MENU_DAU_TRANG } from "../lib/menu-dau-trang";
+import { MENU_DAU_TRANG, dangOMuc } from "../lib/menu-dau-trang";
 import CHUYEN from "../lib/chuyen-huong.json";
 import { napHoSo } from "./_hoso";
 
@@ -109,9 +109,12 @@ test("mục lục cụm trên dữ liệu engine thật: đủ bài, đúng số
 
 test("menu Huyền học: 3 cụm kiến thức lớn thay 3 công cụ đã có bản theo năm ở menu Năm", () => {
   const hh = MENU_DAU_TRANG.find((m) => m.href === "/huyen-hoc")!.con.map((c) => c.href);
-  expect(hh).toHaveLength(12);
-  for (const h of ["/tu-vi/sao-o-cung", "/kinh-dich/que", "/bat-tu/menh-theo-nam"]) expect(hh).toContain(h);
-  for (const h of ["/tuoi-xong-dat", "/xem-sao-han", "/phong-thuy/huong-xau-nam"]) expect(hh).not.toContain(h);
+  expect(hh).toHaveLength(11);
+  for (const h of ["/tu-vi/sao-o-cung", "/bat-tu/menh-theo-nam", "/tarot"]) expect(hh).toContain(h);
+  // TR-1 menu: Tarot vào menu, "64 quẻ Kinh Dịch" + "Thư viện kiến thức" rời menu (vẫn làm sáng mục cha Huyền học).
+  for (const h of ["/tuoi-xong-dat", "/xem-sao-han", "/phong-thuy/huong-xau-nam", "/kinh-dich/que", "/kien-thuc"]) expect(hh).not.toContain(h);
+  const huyenHoc = MENU_DAU_TRANG.find((m) => m.href === "/huyen-hoc")!;
+  for (const d of ["/tarot", "/tarot/la-bai/thap", "/kinh-dich/que/can", "/kien-thuc"]) expect(dangOMuc(d, huyenHoc), d).toBe(true);
   const nam = MENU_DAU_TRANG.find((m) => m.href === "/nam/{nam}")!.con.map((c) => c.href);
   for (const h of ["/tuoi-xong-dat/{nam}", "/xem-sao-han/{nam}", "/phong-thuy/huong-xau-nam/{nam}"]) expect(nam).toContain(h);
 });
@@ -268,8 +271,9 @@ test("menu đầu trang: bảng Huyền học có 3 cụm mới", async ({ page 
   await choHydrate(page, '[data-testid="menu-dau-trang"] button');
   await page.getByTestId("menu-dau-trang").getByRole("button", { name: /Huyền học/ }).click();
   const menu = page.getByTestId("menu-dau-trang");
-  for (const t of ["Sao ở từng cung Tử vi", "64 quẻ Kinh Dịch", "Sinh năm nào mệnh gì"]) await expect(menu.getByRole("link", { name: new RegExp(t) })).toBeVisible();
-  await expect(menu.getByRole("link", { name: /Tuổi xông đất/ })).toHaveCount(0);
+  for (const t of ["Sao ở từng cung Tử vi", "Sinh năm nào mệnh gì", "Xem Tarot"]) await expect(menu.getByRole("link", { name: new RegExp(t) })).toBeVisible();
+  await expect(menu.getByRole("link", { name: /Xem Tarot/ })).toHaveAttribute("href", "/tarot");
+  for (const t of [/Tuổi xông đất/, /64 quẻ Kinh Dịch/, /Thư viện kiến thức/]) await expect(menu.getByRole("link", { name: t })).toHaveCount(0);
 });
 
 test("xem ngày tốt: lối vào ngày tốt theo việc tháng này + tháng sau (12 link, có số ngày)", async ({ page }) => {
