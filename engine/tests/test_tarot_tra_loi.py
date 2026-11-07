@@ -193,3 +193,59 @@ def test_api_hieu_cau_va_doc_bai():
     r = client.post("/v1/tarot/doc-bai", json={"trai_bai": "hai_lua_chon", "la": [{"id": m} for m in calc.BO_BAI[:5]], "cau_hoi": CAU_ANH}).json()
     assert r["chuong"][0]["ma"] == "tra_loi" and r["hieu_cau"]["viec"] == "doi_viec"
     assert "hai_lua_chon" in client.get("/v1/tarot/bo-bai").json()["trai_bai"]
+
+
+# ------------------------------------------------------------------ TR-3: trải bài "Khi nào" · thẻ chia sẻ · AI diễn đạt
+def test_trai_bai_khi_nao_doc_nhip_thoi_gian():
+    assert tc.hieu_cau("Khi nào tôi có việc mới?")["goi_y_trai_bai"] == "khi_nao"
+    bc = tr.bao_cao("khi_nao", [{"id": "coc_3"}, {"id": "dai_19"}, {"id": "gay_hiep_si"}], cau_hoi="Khi nào tôi có việc mới?", ngay_xem=XEM)
+    c = bc["chuong"][0]
+    td = [h for h in c["hop"] if h["loai"] == "thoi_diem"]
+    # Hiệp sĩ Gậy (Book T "King" của Lửa) cai 20° Bọ Cạp → 20° Nhân Mã
+    assert len(td) == 1 and td[0]["tu"] == "12/11/2026" and td[0]["den"] == "11/12/2026" and "không phải ngày dự báo" in td[0]["noi_dung"]
+    assert any(h.get("vi_tri", {}).get("ma") == "can_xong" for h in c["hop"])
+    # lá nhịp không có khoảng ngày (Át, Mặt Trời theo hành tinh) → nói rõ nhịp của bộ, không bịa ngày
+    bc = tr.bao_cao("khi_nao", [{"id": "coc_3"}, {"id": "dai_19"}, {"id": "gay_1"}], ngay_xem=XEM)
+    td = [h for h in bc["chuong"][0]["hop"] if h["loai"] == "thoi_diem"][0]
+    assert "tu" not in td and "không gắn với một khoảng ngày" in td["noi_dung"]
+    assert kh.kiem_giong_van(bc) == []
+
+
+def test_the_tra_loi_chi_ma_danh_muc():
+    r = client.post("/v1/tarot/the", json={"trai_bai": "ba_la_thoi_gian", "la": CA_ANH, "y_dinh": "quyet_dinh", "viec": "doi_viec"}).json()
+    assert (r["tieu_de"], r["nghieng"], r["nhan_viec"]) == ("Chưa nên vội", "cho", "đổi sang công việc mới")
+    assert [x["ten"] for x in r["la"]] == ["6 Tiền", "Pháp Sư", "Hiệp sĩ Kiếm"] and r["la"][0]["nguoc"] is True
+    # khớp đúng câu trả lời của bài đọc
+    assert r["cau_dau"] == _bc()["chuong"][0]["tom_tat"]
+    for sai in ({"y_dinh": "bua"}, {"y_dinh": "quyet_dinh", "viec": "khong_co"}):
+        assert client.post("/v1/tarot/the", json={"trai_bai": "ba_la_thoi_gian", "la": CA_ANH, **sai}).status_code == 422
+    assert client.post("/v1/tarot/the", json={"trai_bai": "ba_la_thoi_gian", "la": CA_ANH, "y_dinh": "quyet_dinh", "cau_hoi": "x"}).status_code == 422
+
+
+def test_ai_chi_dien_dat_chuong_tra_loi(monkeypatch):
+    from app.narrative import luan_giai_van as lgv
+    bc = _bc()
+    goi = {}
+
+    def gia(tieu_de, doan, mo_dun):
+        goi["vao"] = json.dumps([tieu_de, doan], ensure_ascii=False)
+        return "Chưa nên vội với chuyện đổi sang công việc mới. Hiệp sĩ Kiếm ngược ở vị trí Sắp tới nhắc bạn chậm lại, hỏi ý một người khác trước khi chốt."
+    monkeypatch.setattr(lgv, "_goi_llm", gia)
+    # không khoá → bản mẫu, không gọi AI
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    assert tr.dien_dat_tra_loi(bc)["dien_dat"] == "mau" and "vao" not in goi
+    monkeypatch.setenv("OPENROUTER_API_KEY", "khoa-gia")
+    kq = tr.dien_dat_tra_loi(bc)
+    c = kq["chuong"][0]
+    assert kq["dien_dat"] == "tra_loi" and c["van_ai"].startswith("Chưa nên vội") and c["hop"] == bc["chuong"][0]["hop"]
+    assert all("van_ai" not in x for x in kq["chuong"][1:])               # chỉ chương trả lời
+    assert CAU_ANH not in goi["vao"]                                       # câu người dùng gõ không vào lời nhắc AI
+    # AI thêm con số / ý ngoài nguồn → bộ kiểm chặn, giữ bản mẫu
+    monkeypatch.setattr(lgv, "_goi_llm", lambda *a: "Chưa nên vội. Trong 3 tháng tới bạn sẽ được thăng chức 2 lần.")
+    assert tr.dien_dat_tra_loi(bc)["dien_dat"] == "mau"
+    # route: chỉ diễn đạt khi có câu hỏi và không bị chặn
+    monkeypatch.setattr(lgv, "_goi_llm", gia)
+    r = client.post("/v1/tarot/doc-bai", json={"trai_bai": "ba_la_thoi_gian", "la": CA_ANH, "cau_hoi": CAU_ANH, "dien_dat": True}).json()
+    assert r["dien_dat"] == "tra_loi"
+    r = client.post("/v1/tarot/doc-bai", json={"trai_bai": "ba_la_thoi_gian", "la": CA_ANH, "dien_dat": True}).json()
+    assert r.get("dien_dat") is None

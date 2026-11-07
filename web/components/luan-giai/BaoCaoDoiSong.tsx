@@ -124,8 +124,10 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
             <p className="eyebrow">{nhan}</p>
             {bc.dien_dat && bc.dien_dat !== "mau" && (
               <p className="mt-1 text-xs text-fg-faint" data-testid="dien-dat-ai">
-                Diễn đạt tự động từ dữ liệu đã tính · mỗi chương đã kiểm: không thêm sao, cung, con số hay lời phán ngoài dữ liệu
-                {bc.dien_dat === "tron" && " (chương nào không đạt kiểm tra giữ bản gốc)"}.
+                {bc.dien_dat === "tra_loi"
+                  ? "Phần trả lời câu hỏi được diễn đạt tự động từ chính các lá đã đọc · đã kiểm: không thêm lá, con số hay lời phán ngoài dữ liệu; các chương khác là bản gốc."
+                  : <>Diễn đạt tự động từ dữ liệu đã tính · mỗi chương đã kiểm: không thêm sao, cung, con số hay lời phán ngoài dữ liệu
+                    {bc.dien_dat === "tron" && " (chương nào không đạt kiểm tra giữ bản gốc)"}.</>}
               </p>
             )}
             <h2 className="mt-1 text-3xl">Luận giải {ten}</h2>

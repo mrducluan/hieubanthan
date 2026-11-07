@@ -9,6 +9,9 @@ import { useChu } from "@/components/cms/DauCms";
 import { DauMang } from "@/components/huyen-hoc/KhungMang";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
+import { HoiSau30Ngay } from "@/components/khung/HoiSau30Ngay";
+import { NutChiaSeTarot } from "@/components/tarot/NutChiaSeTarot";
+import { ghiNhanDung } from "@/lib/kiem-chung-sau";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { Button } from "@/components/ui/button";
@@ -33,7 +36,7 @@ const GOI_Y = [
   { nhom: "Nghĩa lá", cau: ["Lá Tháp nghĩa là gì?", "Ba Cốc ngược trong tình cảm?", "Hoàng hậu Kiếm nói về gì?"] },
   { nhom: "Cách đọc", cau: ["Lá ngược nghĩa là gì?", "Phẩm giá nguyên tố là gì?", "Celtic Cross là trải bài gì?"] },
 ];
-const THU_TU_TB: MaTraiBai[] = ["mot_la", "ba_la_loi_khuyen", "ba_la_thoi_gian", "hai_lua_chon", "nam_la", "celtic"];
+const THU_TU_TB: MaTraiBai[] = ["mot_la", "ba_la_loi_khuyen", "ba_la_thoi_gian", "hai_lua_chon", "khi_nao", "nam_la", "celtic"];
 
 export function Tarot() {
   const c = useChu();
@@ -107,7 +110,7 @@ export function Tarot() {
     try {
       const tl = docTraLoi();
       const body = {
-        trai_bai: maGui, la: laGui, ...(cauCu ?? cau ? { cau_hoi: (cauCu ?? cau).trim().slice(0, 500) } : {}), ...((chuDeCu ?? chuDe) ? { chu_de: chuDeCu ?? chuDe } : {}),
+        trai_bai: maGui, la: laGui, ...(cauCu ?? cau ? { cau_hoi: (cauCu ?? cau).trim().slice(0, 500), dien_dat: true } : {}), ...((chuDeCu ?? chuDe) ? { chu_de: chuDeCu ?? chuDe } : {}),
         ...(hoSo?.nam && hoSo.thang && hoSo.ngay && hoSo.am == null ? { ngay_sinh: `${hoSo.nam}-${String(hoSo.thang).padStart(2, "0")}-${String(hoSo.ngay).padStart(2, "0")}` } : hoSo?.nam ? { nam_sinh: hoSo.nam } : {}),
         ...(hoSo?.gioi_tinh ? { gioi_tinh: hoSo.gioi_tinh } : {}), ...(Object.keys(tl).length ? { tra_loi_nhan_tuong: tl } : {}),
       };
@@ -118,6 +121,14 @@ export function Tarot() {
         const tt = d.cot_loi[0]?.la;
         luuTraiBai({ trai_bai: maGui, la: laGui, cau: cauCu ?? cau, chu_de: chuDeCu ?? chuDe, tom_tat: tt ? `${tt.ten}${tt.nguoc ? " (ngược)" : ""}` : d.da_tinh.ten_trai_bai });
         docLichSu();
+        // TR-3: câu hỏi "có nên / có thành / khi nào…" → máy nhớ MÃ hộp trả lời (không câu hỏi, không lá) để ≥ 30 ngày sau hỏi
+        // "việc đó ra sao?" (phiếu kiem_chung_sau 0022, cùng khung Q7 như quẻ Kinh Dịch).
+        const yd = d.hieu_cau?.y_dinh;
+        const h0 = d.chuong.find((x) => x.ma === "tra_loi")?.hop?.[0];
+        if (yd && ["quyet_dinh", "lua_chon", "ket_qua", "thoi_diem", "cach_lam"].includes(yd) && h0?.ma_mau && h0.phai) {
+          ghiNhanDung({ loai: "doi_song", mau: h0.ma_mau, phai: h0.phai, mo_dun: "tarot", loai_hoi: "tarot",
+            nhan: `${h0.tieu_de}${d.hieu_cau?.nhan_viec ? ` — ${d.hieu_cau.nhan_viec}` : ""}`.slice(0, 80) });
+        }
       }
       ghi("chart_interacted", { mo_dun: "tarot", kind: "doc_bai", trai_bai: maGui, an_chinh: d.da_tinh.an_chinh.so, xem_lai: Boolean(ds), y_dinh: d.hieu_cau?.y_dinh ?? "khong", nghieng: d.hieu_cau?.nghieng?.nghieng ?? "khong" });
       setTimeout(() => refDoc.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
@@ -176,8 +187,8 @@ export function Tarot() {
             ))}
           </div>
           <p className="mt-4 text-sm text-fg-muted">Trải bài</p>
-          <div className="mt-1 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6" role="radiogroup" aria-label="Trải bài">
-            {THU_TU_TB.map((ma) => { const t = bo.trai_bai[ma]; return (
+          <div className="mt-1 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7" role="radiogroup" aria-label="Trải bài">
+            {THU_TU_TB.filter((ma) => bo.trai_bai[ma]).map((ma) => { const t = bo.trai_bai[ma]; return (
               <button key={ma} type="button" role="radio" aria-checked={maTb === ma} disabled={buoc !== "hoi"} onClick={() => setMaTb(ma)} data-testid={`trai-bai-${ma}`}
                 className={cn("rounded-xl border p-3 text-left text-sm transition-colors", maTb === ma ? "border-gold bg-gold/10" : "border-line hover:border-gold/40")}>
                 <span className="block font-medium text-fg">{t.ngan}</span>
@@ -220,10 +231,18 @@ export function Tarot() {
         <section ref={refDoc} aria-labelledby="bai-doc" id="bai-doc" className="mx-auto mb-10 max-w-5xl scroll-mt-24">
           <TieuDeMuc id="bai-doc" nho={c("bai_doc.nho")} lon={c("bai_doc.lon")} />
           <BaoCaoTarot bc={bc} tb={bo.trai_bai[bc.da_tinh.trai_bai] ?? tb} boLa={bo.la} ten={hoSo?.ho_ten?.trim() ? hoSo.ho_ten : "bạn"} cau={cau.trim() || null} />
-          <div className="mt-6 flex flex-wrap gap-3"><Button variant="secondary" onClick={lamLai} data-testid="nut-trai-bai-moi"><RotateCcw aria-hidden /> Trải bài mới</Button></div>
+          <div className="mt-6 flex flex-wrap items-start gap-3">
+            <Button variant="secondary" onClick={lamLai} data-testid="nut-trai-bai-moi"><RotateCcw aria-hidden /> Trải bài mới</Button>
+            {bc.hieu_cau && bc.hieu_cau.co_cau && !bc.hieu_cau.chan && (
+              <NutChiaSeTarot traiBai={bc.da_tinh.trai_bai} la={bc.da_tinh.vi_tri.map((v) => ({ id: v.id, nguoc: v.nguoc }))}
+                yDinh={bc.hieu_cau.y_dinh} viec={bc.hieu_cau.viec} linhVuc={bc.hieu_cau.linh_vuc} />
+            )}
+          </div>
           <div className="mt-6"><CuoiBaiDoc moDun="tarot" cauHoi="Bài đọc này có lá nào nói đúng chuyện bạn đang gặp?" /></div>
         </section>
       )}
+
+      <div className="mx-auto mb-8 max-w-5xl empty:hidden"><HoiSau30Ngay homNay={new Date(Date.now() + 7 * 3600_000).toISOString().slice(0, 10)} moDun="tarot" /></div>
 
       {lichSu && lichSu.length > 0 && <div className="mx-auto mb-10 max-w-5xl"><LichSuTarot ds={lichSu} bo={bo} onXemLai={xemLai} onDoi={docLichSu} /></div>}
 

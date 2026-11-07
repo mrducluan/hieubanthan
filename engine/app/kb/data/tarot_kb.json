@@ -8538,6 +8538,82 @@
      2
     ]
    }
+  },
+  "khi_nao": {
+   "ten": "Ba lá: Khi nào",
+   "ngan": "3 lá",
+   "mo_ta": "Cho câu hỏi 'khi nào': điều cần xong trước, dấu hiệu cho biết đã tới lúc, và lá nhịp thời gian (decan / vùng hoàng đạo theo Book T) — nhịp gợi ý, không phải ngày dự báo.",
+   "vi_tri": [
+    {
+     "ma": "can_xong",
+     "ten": "Điều cần xong trước",
+     "hoi": "Việc phải làm xong thì mới tới lúc",
+     "x": 0.2,
+     "y": 0.5
+    },
+    {
+     "ma": "dau_hieu",
+     "ten": "Dấu hiệu đã tới lúc",
+     "hoi": "Điều bạn sẽ thấy khi thời điểm chín",
+     "x": 0.5,
+     "y": 0.5
+    },
+    {
+     "ma": "nhip",
+     "ten": "Lá nhịp thời gian",
+     "hoi": "Khoảng thời gian gợi ý theo lá (decan, mùa trong năm, nhịp của bộ)",
+     "x": 0.8,
+     "y": 0.5
+    }
+   ],
+   "ke_can": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "truc": [
+    {
+     "ten": "Chuẩn bị → dấu hiệu → nhịp",
+     "vi_tri": [
+      0,
+      1,
+      2
+     ]
+    }
+   ],
+   "truc_nhin": [
+    0,
+    1,
+    2
+   ],
+   "thoi_diem": [
+    2,
+    1
+   ],
+   "loi_khuyen": [
+    0
+   ],
+   "trong_tam": 2,
+   "vai_tra_loi": {
+    "chinh": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "dieu_kien": 0,
+    "khuyen": 0,
+    "ket": 2
+   }
   }
  },
  "chu_de": {
@@ -8856,7 +8932,8 @@
    "truoc_khi": "Trước khi quyết: {ds}",
    "an_toan": "Câu bạn gõ có điều nặng lòng — lá bài không phải chỗ để trả lời chuyện này. Nếu bạn đang nghĩ tới việc làm hại bản thân, hãy gọi ngay cho người thân hoặc đường dây hỗ trợ; ở Việt Nam có thể gọi 115 khi khẩn cấp. Các lá bên dưới vẫn hiện để bạn xem, nhưng phần trả lời này dừng ở đây.",
    "tu_choi": "Câu này nằm ngoài điều tarot ở đây trả lời (số, ngày mất, chẩn đoán bệnh, chọn người theo lá bài). Các lá bên dưới vẫn đọc được như một lời nhắc nhìn lại chính mình.",
-   "chua_rut": "Câu này cần lá bài của chính bạn mới trả lời được: gõ câu vào ô Câu hỏi ở trên, chọn trải bài '{ten}', xáo và tự rút lá. Bài đọc sẽ mở bằng phần 'Câu trả lời cho câu hỏi của bạn' — nghiêng về đâu, vì sao, điều cần gỡ trước và 3 việc nên làm."
+   "chua_rut": "Câu này cần lá bài của chính bạn mới trả lời được: gõ câu vào ô Câu hỏi ở trên, chọn trải bài '{ten}', xáo và tự rút lá. Bài đọc sẽ mở bằng phần 'Câu trả lời cho câu hỏi của bạn' — nghiêng về đâu, vì sao, điều cần gỡ trước và 3 việc nên làm.",
+   "thoi_diem_khong_cua_so": "Lá {la} ở vị trí {vi_tri} không gắn với một khoảng ngày cụ thể (theo Book T) — nhịp của nó là {nhip}. Đừng chờ một ngày; làm xong việc ở vị trí 'Điều cần xong trước' là tới lúc."
   }
  },
  "tu_khoa": {
@@ -8925,6 +9002,11 @@
     "2 lua chon",
     "a hay b",
     "hai con duong"
+   ],
+   "khi_nao": [
+    "trai bai khi nao",
+    "3 la khi nao",
+    "ba la khi nao"
    ]
   },
   "nguoi_khac": [

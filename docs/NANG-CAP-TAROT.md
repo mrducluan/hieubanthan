@@ -129,6 +129,15 @@ dev 95,8 % · holdout 83,3 %. Sàn trong test: dev ≥ 97 % / 92 %, holdout ≥ 
 **Nội dung mới (nháp ban biên tập, chờ chuyên gia duyệt)**: `linh_vuc_nguoc` (312 câu), `tra_loi` x/n (156), `nghieng` x/n,
 `viec_truoc_khi_quyet` theo 22 loại việc, mẫu `mau.tra_loi`. Mã kiểm chứng: thêm 15 mã `ds.tarot.tra_loi.*`, không mất mã cũ.
 
-**Ý tưởng tiếp (chờ duyệt)**: (1) bật diễn đạt AI cho chương trả lời (gói ngữ cảnh = lớp A, cùng `kiem_ai`); (2) "hỏi lại sau 30
-ngày" (Q7) riêng cho câu "có nên" — đo tỉ lệ người thấy lời nghiêng đúng, hạ hộp theo luật HỌC; (3) thẻ chia sẻ "Câu trả lời của
-lá bài" (chỉ mã lá + nghiêng, không câu hỏi); (4) trải bài "Khi nào" theo decan cho câu thời điểm.
+**Ý tưởng tiếp**: chủ dự án duyệt cả 4 → đã làm ở TR-3 (mục 9).
+
+## 9. TR-3 — bốn ý tưởng sau TR-2 (chủ dự án duyệt 2026-11-07)
+
+| # | Ý tưởng | Làm thế nào | Khâu / đo |
+|---|---|---|---|
+| 1 | **AI diễn đạt chương trả lời** | `tarot.dien_dat_tra_loi`: AI chỉ viết lại CHƯƠNG "Câu trả lời" thành đoạn liền mạch; nguồn = chính các hộp của chương (lớp A tất định) + đoạn chương — **không câu người dùng gõ** (test khoá), không ngày sinh. Đi qua `luan_giai_van._mot_chuong` → `ai_goi.goi_chat` (RL-1, nhớ theo băm) + bộ kiểm chung `kiem_ai` (số lạ, thuật ngữ lạ, cụm cấm, câu ý mới, độ dài). Thiếu khoá / hết lượt / không qua kiểm → bản mẫu. Chỉ khi có câu hỏi và không bị bộ chặn an toàn; web gửi `dien_dat: true`, đầu bài ghi "Phần trả lời câu hỏi được diễn đạt tự động…". Các chương khác không gọi AI. | QUAY LẠI · `che_do_van` |
+| 2 | **Hỏi lại sau 30 ngày** | Đọc bài xong với câu "có nên / A hay B / có thành / khi nào / làm sao" → máy người dùng nhớ MÃ hộp trả lời `ds.tarot.tra_loi.<ý định>.<nghiêng>` + phái + nhãn "Chưa nên vội — đổi sang công việc mới" (không câu hỏi, không lá) vào hàng Q7 (`loai_hoi: tarot`); ≥ 30 ngày sau Hôm nay và `/tarot` hỏi "Bạn có làm theo hướng lá bài nghiêng về không? · Việc đó giờ ra sao?" → phiếu `kiem_chung_sau` (0022, không migration mới). Xem lại trải bài cũ không ghi lại. | QUAY LẠI + HỌC · `feedback_submitted{sau_30, loai_hoi: tarot}` |
+| 3 | **Thẻ "Câu trả lời của lá bài"** | Mã HMAC miền `tarot|` (`kyMaTarot`): máy chủ gọi `/v1/tarot/the` (chỉ MÃ ý định / loại việc / lĩnh vực theo danh mục + lá đã rút; mã lạ → 422) để đọc lại nghiêng + tên lá + vị trí rồi ký — client không tự khai. Trang `/the/tarot/[mã]` (noindex) vẽ lại các lá bằng SVG của site + lời mời "Rút bài cho việc của bạn" `?tu=ta.`; ảnh `/og/tarot` 1200×630 + dọc 1080×1350, QR + hieuban.com. | MỜI · `share_created{tarot}` → `share_clicked{ta}` → `referral_signup` |
+| 4 | **Trải bài "Khi nào"** (3 lá) | Điều cần xong trước · Dấu hiệu đã tới lúc · Lá nhịp thời gian. Câu "khi nào / bao giờ / bao lâu" gợi trải bài này. Hộp nhịp: lá kết cục trước, không có khoảng ngày thì lá trả lời kế tiếp; khoảng theo decan (lá 2–10, ~10 ngày), vùng 30° Book T (Hiệp sĩ / Hoàng hậu / Vua, ~1 tháng), cung của ẩn chính; không có (Át, Tiểu đồng, ẩn chính theo hành tinh) → nói rõ "không gắn khoảng ngày", không bịa ngày. Trải bài này luôn đọc như câu thời điểm. | QUAY LẠI |
+
+Kèm: web bỏ qua trải bài engine chưa có (deploy lệch — bản web mới đọc bộ bài cũ không còn vỡ trang). Engine 9.383 test + e2e Tarot / Kinh Dịch / Hôm nay 30/30.

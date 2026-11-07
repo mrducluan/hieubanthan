@@ -75,7 +75,7 @@ _THU_TU = ("thoi_diem", "ly_do", "cach_lam", "co_nen", "nguoi_khac_dau", "lua_ch
 
 # Việc đang hỏi — danh mục cố định (mã, nhãn hiển thị, lĩnh vực, mẫu). Mẫu dài khớp trước.
 VIEC: list[tuple[str, str, str, list[str]]] = [
-    ("doi_viec", "đổi sang công việc mới", "cong_viec", [r"(doi|chuyen|thay doi|thay) (sang )?(cong viec|viec|cho lam|cong ty|nghe)", r"cong viec moi", r"nhay viec", r"(sang|qua) (cong ty|cho) (moi|khac)", r"tim viec (moi|khac)"]),
+    ("doi_viec", "đổi sang công việc mới", "cong_viec", [r"(doi|chuyen|thay doi|thay) (sang )?(cong viec|viec|cho lam|cong ty|nghe)", r"cong viec moi", r"nhay viec", r"(sang|qua) (cong ty|cho) (moi|khac)", r"tim viec (moi|khac)", r"co viec( lam)? moi", r"tim duoc viec"]),
     ("nghi_viec", "nghỉ việc hiện tại", "cong_viec", [r"nghi (viec|lam)", r"xin nghi", r"bo (viec|cong ty|nghe)", r"nop don (nghi|thoi viec)", r"thoi viec"]),
     ("nhan_viec", "nhận lời mời làm việc", "cong_viec", [r"(duoc|co duoc) nhan( vao lam)?", r"nhan vao lam", r"(ky|len) chinh thuc", r"qua thu viec", r"nhan (loi moi|offer|viec|cong viec|vi tri)", r"offer", r"loi moi (lam viec|cong viec)"]),
     ("phong_van", "buổi phỏng vấn / ứng tuyển", "cong_viec", [r"phong van", r"ung tuyen", r"nop (ho so|cv|don)", r"xin viec"]),
@@ -137,7 +137,7 @@ LUA_CHON_NHAN: list[tuple[str, str, str, str]] = [
 ]
 
 GOI_Y_TRAI_BAI = {"lua_chon": "hai_lua_chon", "quyet_dinh": "hai_lua_chon", "cach_lam": "ba_la_loi_khuyen", "ly_do": "nam_la",
-                  "ket_qua": "ba_la_thoi_gian", "thoi_diem": "ba_la_thoi_gian", "hieu_minh": "mot_la", "nguoi_khac": "ba_la_loi_khuyen",
+                  "ket_qua": "ba_la_thoi_gian", "thoi_diem": "khi_nao", "hieu_minh": "mot_la", "nguoi_khac": "ba_la_loi_khuyen",
                   "tong_quat": "ba_la_loi_khuyen"}
 
 

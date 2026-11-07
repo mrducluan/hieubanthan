@@ -10,7 +10,8 @@
 - [ ] **Deploy engine trước web** (route mới `/v1/tarot/hieu-cau`, trải bài `hai_lua_chon`, trường `hieu_cau` trong bài đọc; web cũ bỏ qua trường mới).
 - [ ] (5 phút) Mở `/tarot`, gõ lại "Tôi có nên thay đổi công việc mới không?" → thấy dòng "Mình hiểu đây là câu hỏi 'có nên'…", bấm "Dùng trải bài này" (Hai lựa chọn), rút bài → chương 1 "Câu trả lời cho câu hỏi của bạn". Lá ngược có nhãn NGƯỢC.
 - [ ] (Chuyên gia, dần dần) Duyệt 78 dòng `nghieng` (lá nào nghiêng có / có điều kiện / chưa nên vội, xuôi và ngược) + 312 câu nghĩa ngược theo lĩnh vực trong `tarot_kb.json` — nháp ban biên tập, ba chỗ agent ghi cần xem: 8 Cốc xuôi (có điều kiện), 4 Gậy ngược (tiến), Ác Quỷ ngược (tiến).
-- [ ] (Quyết định) 4 ý tưởng tiếp ở `docs/NANG-CAP-TAROT.md` mục 8 (diễn đạt AI cho chương trả lời, hỏi lại sau 30 ngày, thẻ chia sẻ, trải bài "Khi nào").
+- [x] (Quyết định) 4 ý tưởng tiếp ở `docs/NANG-CAP-TAROT.md` mục 8 — anh duyệt 07/11, đã làm ở TR-3 (mục 9).
+- [ ] **TR-3 — deploy engine trước web** (route mới `/v1/tarot/the`, trải bài `khi_nao`, `dien_dat` ở `/v1/tarot/doc-bai`). Kiểm: `/tarot` gõ "Khi nào tôi có việc mới?" → gợi "Ba lá: Khi nào"; đọc bài có câu hỏi → bấm "Chia sẻ câu trả lời" → mở link thẻ. Diễn đạt AI chỉ chạy khi engine có `OPENROUTER_API_KEY` (đã có cho Tử vi) — đầu bài hiện dòng "Phần trả lời câu hỏi được diễn đạt tự động…".
 
 ### 4ab. Tarot (TR-1, 2026-11-07) — sau khi merge (deploy ENGINE trước web)
 

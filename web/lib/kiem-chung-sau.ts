@@ -12,7 +12,8 @@ const Ghi = z.object({
   nhan: z.string().max(80), mo_dun: z.string().max(20), ngay: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   da_hoi: z.boolean().optional(),
   /** KD-2d (P9): "que" = quẻ đã gieo (hỏi "việc đó ra sao?") thay vì hộp đã bấm Đúng. */
-  loai_hoi: z.enum(["hop", "que"]).optional(),
+  /** TR-3: "tarot" = câu trả lời của lá bài cho một câu "có nên / có thành / khi nào" — hỏi "việc đó ra sao?". */
+  loai_hoi: z.enum(["hop", "que", "tarot"]).optional(),
 });
 export type GhiNhan = z.infer<typeof Ghi>;
 
