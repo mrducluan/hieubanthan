@@ -20,6 +20,8 @@ import { taoSlug } from "../lib/slug";
 import { linkXemTruoc, webUrl } from "../lib/web";
 import { coKhoaNotFair, dsNotFair, nguonNotFair, nhapBaiNotFair } from "../lib/notfair";
 import { chuanHoaMotBai, chuanHoaTatCaNotFair, dsBaiNotFairCms } from "../lib/chuan-hoa-notfair";
+import { tuDongNotFair } from "../lib/tu-dong-notfair";
+import { dungBiMatChung } from "../lib/bi-mat-chung";
 
 export const MANG = [
   { label: "Thần số học", value: "than_so" },
@@ -179,6 +181,18 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
         if (!slug || slug.length > 200) return Response.json({ loi: "Thiếu đường dẫn bài." }, { status: 422 });
         try {
           return Response.json({ ok: true, ...(await nhapBaiNotFair(req.payload, req, slug)) });
+        } catch (e) {
+          return Response.json({ loi: (e as Error).message }, { status: 502 });
+        }
+      },
+    },
+    {
+      // BLOG-9d: cron ngày của web (bí mật chung CMS_WEBHOOK_SECRET) → nhập + chuẩn hoá bài NotFair MỚI thành nháp.
+      path: "/tu-dong-notfair", method: "post",
+      handler: async (req) => {
+        if (!dungBiMatChung(req.headers.get("x-cms-bi-mat"))) return Response.json({ loi: "Không có quyền" }, { status: 401 });
+        try {
+          return Response.json({ ok: true, ...(await tuDongNotFair(req.payload, req)) });
         } catch (e) {
           return Response.json({ loi: (e as Error).message }, { status: 502 });
         }

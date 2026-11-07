@@ -25,8 +25,9 @@ export async function baiBlog(slug: string): Promise<SeoPost | null> {
   return goc ? getSeoPost(goc.slug).catch(() => null) : null;
 }
 
-/** Danh sách cho /blog, sitemap: bài CMS + bài NotFair (bài CMS thắng khi trùng slug). */
+/** Danh sách cho /blog, sitemap, RSS: bài CMS + bài NotFair (bài CMS thắng khi trùng slug). BLOG-9d: CMS đang có bài →
+ *  CHỈ bài CMS (bài NotFair chưa được nhập + duyệt không lên danh sách); CMS chưa nối / lỗi → giữ bài NotFair như cũ. */
 export async function dsBaiTongHop() {
   const [cms, nf] = await Promise.all([dsBaiCms(), dsBaiBlog()]);
-  return gopBaiBlog(cms.map(tuCms), nf);
+  return gopBaiBlog(cms.map(tuCms), nf, { chiBanCms: cms.length > 0 });
 }

@@ -88,6 +88,26 @@ function soAnhThanBai(nd: unknown): { so: number; ids: (number | string)[] } {
   return { so: ids.length, ids };
 }
 
+/** BLOG-9c: bỏ các nút ảnh (upload) mà ảnh có nguồn NotFair khỏi `bai.noi_dung` (sửa tại chỗ). Trả số ảnh đã bỏ. */
+async function boAnhNotFair(payload: Payload, bai: DocBai): Promise<number> {
+  const than = soAnhThanBai(bai.noi_dung);
+  if (!than.ids.length) return 0;
+  const nf = await payload.find({ collection: "media", overrideAccess: true, depth: 0, limit: than.ids.length, pagination: false,
+    where: { and: [{ id: { in: than.ids } }, { nguon_anh: { equals: NGUON_ANH_NOTFAIR } }] } });
+  const bo = new Set(nf.docs.map((d) => String(d.id)));
+  if (!bo.size) return 0;
+  let dem = 0;
+  type Nut = { type?: string; value?: unknown; children?: Nut[] };
+  const loc = (ds: Nut[]): Nut[] => ds.flatMap((n) => {
+    if (n.type === "upload") { const i = idCua(n.value); if (i != null && bo.has(String(i))) { dem++; return []; } }
+    return [n.children ? { ...n, children: loc(n.children) } : n];
+  });
+  const goc = (bai.noi_dung as { root?: Nut } | null)?.root;
+  if (!goc?.children) return 0;
+  bai.noi_dung = { ...(bai.noi_dung as object), root: { ...goc, children: loc(goc.children) } } as never;
+  return dem;
+}
+
 /** Chuẩn hoá một bài (đọc bản nháp mới nhất). `ghi`: false = AUDIT — chỉ báo sẽ đổi gì + điểm dự kiến, không vẽ ảnh,
  *  không ghi gì. `ve`: false = không vẽ/tải ảnh (test). */
 export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | undefined, id: number | string,
@@ -95,6 +115,9 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
   const bai = await payload.findByID({ collection: "bai-viet", id, draft: true, depth: 0, overrideAccess: true, req }) as unknown as DocBai;
   const tieuDe = String(bai.tieu_de ?? "");
   const truoc = kiemDinhBai(bai as never).diem;
+  // BLOG-9c: ảnh THÂN BÀI tải từ NotFair (sơ đồ "key concepts"… có chữ in sẵn, hay sai dấu) → bỏ khỏi thân bài; ảnh CMS
+  // vẽ (Tóm tắt nhanh, Lộ trình, Câu hỏi) được bù ở dưới vì đếm ảnh chạy trên thân bài ĐÃ bỏ. Ảnh vẫn giữ trong Thư viện.
+  const boAnhNf = await boAnhNotFair(payload, bai);
   const kho = { loi: null as string | null };
 
   const thu = chuanHoaBai(bai, { slugDaDung: () => false });
@@ -167,6 +190,10 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
       if (!trung.totalDocs) break;
       kq.data.slug = `${goc.slice(0, 72)}-${n}`;
     }
+  }
+  if (boAnhNf) {
+    if (kq.data.noi_dung === undefined) kq.data.noi_dung = bai.noi_dung;
+    kq.thay_doi.unshift(`${ghi ? "Bỏ" : "Sẽ bỏ"} ${boAnhNf} ảnh NotFair trong thân bài (chữ in trong ảnh hay sai dấu) — ảnh vẫn trong Thư viện ảnh.`);
   }
   if (kho.loi) kq.thay_doi.push(`Chưa tải được ảnh minh hoạ (kho ảnh: ${kho.loi}) — bấm lại "Chuẩn hoá SEO" sau khi sửa kho.`);
   if (!ghi) kq.thay_doi = [...kq.thay_doi.filter((t) => !/ảnh bìa mới|Chèn ảnh "/.test(t)), ...duKien];

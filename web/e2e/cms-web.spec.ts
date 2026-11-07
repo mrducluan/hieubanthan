@@ -92,6 +92,8 @@ test("BLOG-7: bài NotFair hiện ở đường dẫn không dấu; bài CMS đ�
     { slug: "chua-đoi", title: "Chưa nhập", published_at: "2026-10-09" },
   ] as never;
   expect(gopBaiBlog(cms, nf).map((b) => `${b.slug}:${b.nguon}`)).toEqual(["chua-doi:notfair", "da-doi:cms"]);
+  // BLOG-9d: CMS có bài → bài NotFair chưa nhập / chưa duyệt không lên danh sách.
+  expect(gopBaiBlog(cms, nf, { chiBanCms: true }).map((b) => `${b.slug}:${b.nguon}`)).toEqual(["da-doi:cms"]);
 });
 
 test("slug có dấu (bài NotFair): giải mã params một lần, link mã hoá phần trăm", () => {

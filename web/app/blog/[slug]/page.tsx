@@ -18,7 +18,7 @@ import { DoKhoiCuoi } from "@/components/khung/DoKhoiCuoi";
 import { theLapBlog } from "@/lib/the-lap";
 import { MANG_HINH } from "@/app/og/hinh";
 import { boLap } from "@/lib/the-lap-cms";
-import { anhCms, baiCms, baiLienQuan, tinhNangCms } from "@/lib/cms";
+import { anhCms, baiCms, baiLienQuan, coCms, tinhNangCms } from "@/lib/cms";
 import { ganIdMucLuc } from "@/lib/muc-luc";
 import { sanitizeNotFairArticleHtml } from "@/lib/notfair-article";
 import { duocXemNhap } from "@/lib/noi-dung-trang";
@@ -81,6 +81,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: tieuDeSeo(p.title),
     description: moTa,
     alternates: { canonical: duong },
+    // BLOG-9d: bản NotFair thô (chưa có bản CMS đã duyệt) vẫn mở được ở URL (đối tác kiểm link) nhưng không index.
+    ...(coCms() ? { robots: { index: false, follow: true } } : {}),
     ...(p.tags.length ? { keywords: p.tags } : {}),
     openGraph: {
       type: "article", title: p.title, description: moTa, url: duong, locale: "vi_VN", siteName: TEN_SITE,
