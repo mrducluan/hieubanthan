@@ -872,7 +872,21 @@
      "nghia": "Mathers: khờ, chuộc lỗi, dao động; ngược: do dự, bất ổn và rắc rối từ đó.",
      "bieu_tuong": "It signifies Folly, Expiation."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Đang đứng mãi ở ngưỡng cửa, hoặc lao vào quá nhanh khi chưa biết nhau; hẹn thêm một buổi gặp bình thường để nhìn rõ hơn.",
+    "cong_viec": "Việc mới đang bị hoãn vì sợ, hoặc nhảy vào khi chưa tìm hiểu; viết ra ba điều mình chưa biết về việc này rồi đi hỏi.",
+    "tien_bac": "Dễ chi theo hứng hoặc ôm tiền mà không dám làm gì; đặt một hạn mức nhỏ cho khoản thử, chạm mức thì dừng.",
+    "suc_khoe": "Nhịp sống thất thường, dễ bất cẩn khi vội; ngủ đúng giờ vài hôm và đi chậm lại một nhịp khi ra đường."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: nên bắt đầu, miễn là bước đầu nhỏ và bạn chấp nhận chưa biết hết. Kiểm lại một điều: nếu sai, mình có lùi lại được không?",
+    "n": "Có thể, nếu bạn tách được sợ hãi khỏi liều lĩnh. Trước khi quyết, hỏi một người đã làm việc này và tự đặt mức thử tối đa."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "dai_1": {
    "id": "dai_1",
@@ -946,7 +960,21 @@
      "nghia": "Mathers: ý chí, sức mạnh ý chí, khéo tay; ngược: ý chí dùng vào việc xấu, yếu ý chí, ranh mãnh.",
      "bieu_tuong": "He symbolises Will."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Lời nói đang đi trước việc làm, có thể ở cả hai phía; thử giữ trọn một lời hứa nhỏ trong tuần này rồi mới hứa tiếp.",
+    "cong_viec": "Có kỹ năng mà dàn trải hoặc chỉ để trình diễn; chọn một việc, làm tới bản nộp được trước khi nhận thêm.",
+    "tien_bac": "Cẩn thận lời mời kiếm tiền nhanh nghe quá trơn; không chuyển khoản nào khi chưa có giấy tờ và chưa hỏi người thứ hai.",
+    "suc_khoe": "Đầu óc chạy nhiều mà thân ít vận động; đặt nhắc đứng dậy mỗi giờ, giảm màn hình trước khi ngủ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: bạn đã có đủ thứ cần để làm. Điều kiện là chọn đúng một việc và bắt tay ngay, không chờ thêm công cụ.",
+    "n": "Chưa nên vội: kiểm xem đề nghị này có minh bạch không, và bạn thật sự muốn làm hay chỉ muốn được nhìn là đang làm."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "dai_2": {
    "id": "dai_2",
@@ -1020,7 +1048,21 @@
      "nghia": "Mathers: khoa học, trí tuệ, tri thức, học vấn; ngược: tự phụ, thiếu hiểu biết, vụng, biết hời hợt.",
      "bieu_tuong": "She represents Science, Wisdom, or Knowledge."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Có chuyện chưa nói, hoặc bạn đang lờ đi cảm giác của mình; chọn lúc yên, hỏi thẳng một câu và nghe cho hết.",
+    "cong_viec": "Đang quyết theo bề mặt, có dữ kiện bị khuất; xin đủ tài liệu rồi đọc lại một lượt trước khi trả lời.",
+    "tien_bac": "Có điều khoản hoặc khoản phí bị giấu kỹ; đọc phần chữ nhỏ và hỏi lại bằng văn bản trước khi ký.",
+    "suc_khoe": "Bạn đang lờ đi tín hiệu nhỏ của cơ thể như mệt kéo dài, ngủ chập chờn; ghi lại vài ngày và đi khám định kỳ."
+   },
+   "tra_loi": {
+    "x": "Có thể, khi bạn đã biết đủ: lá này bảo còn điều chưa lộ. Hỏi thêm, chờ vài ngày, và để ý cảm giác đầu tiên của chính mình.",
+    "n": "Chưa nên vội: có chuyện đang bị giấu, hoặc bạn đang không muốn biết. Tìm cho ra điều mình né trước khi gật đầu."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "cho"
+   }
   },
   "dai_3": {
    "id": "dai_3",
@@ -1094,7 +1136,21 @@
      "nghia": "Mathers: hành động, kế hoạch, khởi sự, chủ động; ngược: không làm, phí sức, thiếu tập trung, do dự.",
      "bieu_tuong": "She is the Symbol of Action, the result of the union of Science and Will."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Bạn đang cho nhiều hơn sức mình, hoặc mối quan hệ thiếu chăm chút; nói ra một điều bạn cần và nhận lại một việc nhỏ.",
+    "cong_viec": "Dự án chững lại vì thiếu chăm, hoặc bạn ôm việc của người khác; trả lại một việc không phải của mình trong tuần này.",
+    "tien_bac": "Dễ chi cho người khác tới hụt quỹ của mình, hoặc mua để dỗ lòng; tách riêng một khoản cho bản thân trước.",
+    "suc_khoe": "Đang chăm mọi người mà quên mình: bữa ăn vội, ngủ thiếu; dành một bữa ngồi ăn yên mỗi ngày và ngủ sớm hơn."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: việc này có đất để lớn. Điều kiện là bạn chăm nó đều và kiên nhẫn chờ, không đòi kết quả ngay.",
+    "n": "Có, nếu bạn còn sức: kiểm xem mình nhận việc này vì muốn hay vì không nỡ từ chối. Đang cạn sức thì nên hoãn."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "dai_4": {
    "id": "dai_4",
@@ -1168,7 +1224,21 @@
      "nghia": "Mathers: thành hình, hiệu quả, phát triển; ngược: ngưng trệ, bị chặn, non, chưa chín.",
      "bieu_tuong": "He represents Realisation."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Một bên đang giữ quyền quyết hết, hoặc né phần gánh vác; thử để người kia quyết một việc chung trong tuần này.",
+    "cong_viec": "Quy trình cứng tới nghẹt, hoặc thiếu người cầm lái; chốt rõ ai quyết việc gì và viết ra cho cả nhóm cùng xem.",
+    "tien_bac": "Ngân sách hoặc bị siết quá tay, hoặc bỏ mặc; ngồi lại lập một bảng chi đơn giản và giữ quỹ dự phòng.",
+    "suc_khoe": "Căng thẳng vì muốn kiểm soát mọi thứ, vai gáy dễ mỏi; giao bớt một việc và nghỉ trọn một buổi trong tuần."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có, nếu có kế hoạch: lá này ủng hộ việc làm bài bản. Kiểm lại ba thứ: ngân sách, người chịu trách nhiệm, mốc thời gian.",
+    "n": "Nên đổi cách làm trước: kế hoạch đang thiếu khung hoặc bị siết quá chặt. Xem lại ai có quyền quyết và vì sao, rồi mới bước."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "dai_5": {
    "id": "dai_5",
@@ -1242,7 +1312,21 @@
      "nghia": "Mathers: lòng nhân, làm ơn, tử tế, tốt lành; ngược: quá tốt bụng, yếu, rộng rãi khờ khạo.",
      "bieu_tuong": "He is the symbol of Mercy and Beneficence."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Lệ gia đình hoặc kỳ vọng của người ngoài đang đè lên hai người; nói riêng với nhau điều mình thật sự muốn trước khi hỏi ý ai.",
+    "cong_viec": "Quy định cũ không còn hợp, hoặc bạn muốn làm khác khi chưa hiểu lệ; học kỹ cách cũ rồi đề xuất đổi bằng văn bản.",
+    "tien_bac": "Dễ nghe theo lời khuyên về tiền chỉ vì người nói có chức danh; đọc kỹ giấy tờ và hỏi thêm một nơi độc lập.",
+    "suc_khoe": "Nề nếp ăn ngủ đang lệch, hoặc giữ thói quen chỉ vì quen; đổi một thói quen nhỏ chưa lành và giữ lịch đi khám định kỳ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có, theo lối quen: lá này hợp với cách làm đã được nhiều người kiểm chứng. Hỏi ý một người có kinh nghiệm và làm đủ thủ tục.",
+    "n": "Có thể, khi bạn đã hiểu vì sao muốn làm khác lệ. Nếu chỉ để chống ai đó thì dừng lại nghĩ thêm; nếu đã hiểu, chuẩn bị lý lẽ rõ."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "dai_6": {
    "id": "dai_6",
@@ -1316,7 +1400,21 @@
      "nghia": "Mathers: sắp xếp khôn ngoan, thử thách vượt qua; ngược: kế hoạch dại, thất bại khi bị thử.",
      "bieu_tuong": "It is usually considered to mean Proof or Trial; but I am inclined to suggest Wise Disposition as its signification."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Hai người đang lệch nhịp mà chưa ai nói, hoặc bạn giữ vì ngại đổi; nói ra một điều bạn thấy chưa khớp, bằng giọng bình thường.",
+    "cong_viec": "Hợp tác lệch mục tiêu, hoặc bạn chọn hướng theo áp lực; viết ra điều mỗi bên muốn rồi đặt cạnh nhau để so.",
+    "tien_bac": "Tiền chung dễ vênh vì mỗi người tính một kiểu; đối chiếu sổ chi và thống nhất lại cách chia trên giấy.",
+    "suc_khoe": "Nhịp sinh hoạt bị kéo theo người khác, dễ thức khuya, ăn theo hứng; giữ lại giờ ngủ của riêng mình."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có, nếu điều này đúng với giá trị của bạn. Kiểm lại: bạn chọn vì muốn, không phải vì sợ mất lựa chọn kia.",
+    "n": "Chưa nên vội: lựa chọn đang bị sợ hãi hoặc cám dỗ dẫn. Chờ tới khi bạn nói được rõ vì sao chọn, và người liên quan cùng đồng ý."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "dai_7": {
    "id": "dai_7",
@@ -1390,7 +1488,21 @@
      "nghia": "Mathers: khải hoàn, thắng, vượt trở ngại; ngược: bị lật đổ, thua trở ngại ở phút cuối.",
      "bieu_tuong": "It represents Triumph, and Victory of Justice and Judgment."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Hai người kéo hai hướng, hoặc bạn cố giành phần thắng trong mọi chuyện; dừng một cuộc tranh luận, hỏi lại cả hai muốn đi đâu.",
+    "cong_viec": "Việc mất lái vì ôm nhiều mục tiêu hoặc ép quá sức; gạch bớt một mục tiêu, giữ lại cái cần nhất.",
+    "tien_bac": "Dễ chi mạnh tay để theo kịp người khác; hoãn khoản mua lớn ít nhất một tuần và đừng vay thêm.",
+    "suc_khoe": "Đang chạy quá tốc độ, ngủ ít, căng lưng cổ; lái xe chậm lại, bớt một việc mỗi ngày để có giờ nghỉ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này hợp với quyết tâm và hành động. Điều kiện là bạn chọn một hướng rõ và giữ tốc độ vừa sức.",
+    "n": "Chưa nên vội: bạn đang bị kéo về hai phía. Chốt điều mình thật sự muốn và bỏ bớt một mục tiêu trước khi tăng tốc."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "dai_8": {
    "id": "dai_8",
@@ -1464,7 +1576,21 @@
      "nghia": "Mathers (lá số 11): quyền lực, sức mạnh, nghị lực; ngược: lạm quyền, lấn át, thiếu nghị lực.",
      "bieu_tuong": "She represents Strength."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Nóng giận hoặc ghen đang nói thay bạn, hoặc bạn nhịn tới cạn; chờ bình tĩnh rồi nói ngắn điều mình cần.",
+    "cong_viec": "Đang gồng việc khó tới mệt, hoặc mất tự tin trước người khó; chia việc thành từng phần và xin hỗ trợ một phần.",
+    "tien_bac": "Dễ mua theo cảm xúc lúc mệt hoặc buồn; đặt luật chờ 24 giờ trước mỗi khoản không cần ngay.",
+    "suc_khoe": "Căng thẳng dồn lại, dễ ăn ngủ thất thường; tập thở chậm vài phút mỗi tối, đi khám định kỳ nếu mệt kéo dài."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: bạn đủ sức làm việc này, nếu đi bằng kiên nhẫn chứ không bằng ép. Kiểm lại: mình có giữ được bình tĩnh khi gặp trở ngại không?",
+    "n": "Có thể, khi bạn lấy lại được tự chủ. Đừng quyết lúc đang giận, sợ hay mệt; ngủ một đêm rồi xem lại."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "dai_9": {
    "id": "dai_9",
@@ -1538,7 +1664,21 @@
      "nghia": "Mathers: thận trọng, cẩn trọng, cân nhắc; ngược: thận trọng quá, nhút nhát, sợ.",
      "bieu_tuong": "He is Prudence."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Khoảng lặng đã thành xa cách, người kia khó tới gần bạn; nhắn một tin hỏi thăm hoặc hẹn một buổi gặp ngắn.",
+    "cong_viec": "Đang làm một mình quá lâu, ngại hỏi ý ai; mang việc đang làm tới một người tin cậy để nghe góp ý.",
+    "tien_bac": "Né nhìn sổ chi hoặc tự quyết mọi khoản mà không hỏi ai; xem lại các khoản tháng này cùng một người hiểu việc.",
+    "suc_khoe": "Ít ra ngoài, ít gặp người, nhịp ngủ dễ lệch; mỗi ngày ra ngoài trời một lúc và trò chuyện với một người."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: lá này bảo cần thêm thời gian suy nghĩ hoặc hỏi một người hiểu việc. Khi trong lòng đã rõ rồi hãy bước.",
+    "n": "Có thể, nếu bạn thôi trì hoãn dưới tên 'còn suy nghĩ'. Đặt một hạn quyết cụ thể và hỏi ý ít nhất một người."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "dai_10": {
    "id": "dai_10",
@@ -1612,7 +1752,21 @@
      "nghia": "Mathers: may mắn, thành công, vận may bất ngờ; ngược: không may, thất bại, rủi bất ngờ.",
      "bieu_tuong": "It symbolises Fortune, good or bad."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Chuyện cũ lặp lại, hoặc bạn níu một nhịp đã qua; nhìn xem lần này có gì khác rồi thử phản ứng theo cách khác.",
+    "cong_viec": "Cơ hội chậm tới, hoặc bạn đang cưỡng một thay đổi đã rõ; làm tốt phần việc hiện có và chuẩn bị hồ sơ cho lúc mở.",
+    "tien_bac": "Tiền đang ở nhịp xuống hoặc chững; đừng bán vội hay vay thêm để gỡ, giữ quỹ dự phòng và chờ.",
+    "suc_khoe": "Nhịp ăn ngủ đang quay về thói cũ chưa lành; ghi lại giờ ngủ một tuần để thấy chỗ cần chỉnh."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: hoàn cảnh đang thuận chiều. Nắm lúc này, nhưng chuẩn bị đường lui vì nhịp thuận có lúc qua.",
+    "n": "Chưa nên vội: thời điểm chưa thuận hoặc bạn đang lặp lại một lựa chọn cũ. Chờ hoàn cảnh rõ hơn và xem lần trước đã học được gì."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "dai_11": {
    "id": "dai_11",
@@ -1686,7 +1840,21 @@
      "nghia": "Mathers (lá số 8, Themis): cân bằng, công bằng, công lý; ngược: cố chấp, mất cân bằng, quá khắt khe, thiên vị.",
      "bieu_tuong": "She symbolises Equilibrium and Justice."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Có chỗ chưa sòng phẳng: một người cho mãi, một người nhận mãi; nói thẳng về phần việc và phần tiền của mỗi bên.",
+    "cong_viec": "Đánh giá thiếu công bằng, hoặc bạn đang đẩy lỗi sang chỗ khác; giữ lại bằng chứng và nhận phần sai của mình trước.",
+    "tien_bac": "Giấy tờ, hợp đồng hoặc khoản chia có chỗ lệch; đối chiếu lại từng dòng, việc lớn thì hỏi luật sư.",
+    "suc_khoe": "Làm và nghỉ đang mất cân, ngồi lâu nhiều; đứng dậy vận động mỗi giờ và giữ lịch đi khám định kỳ."
+   },
+   "tra_loi": {
+    "x": "Có, nếu mọi thứ rõ ràng: lá này ủng hộ quyết định công bằng, có giấy tờ. Kiểm lại hợp đồng và hỏi mình có chịu được hệ quả không.",
+    "n": "Chưa nên vội: còn chỗ chưa công bằng hoặc chưa minh bạch. Làm rõ trách nhiệm, đọc lại điều khoản; việc pháp lý thì hỏi luật sư."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "cho"
+   }
   },
   "dai_12": {
    "id": "dai_12",
@@ -1760,7 +1928,21 @@
      "nghia": "Mathers: tự hy sinh, tận tụy, bị buộc; ngược: ích kỷ, không ràng buộc, hy sinh nửa vời.",
      "bieu_tuong": "He symbolises Sacrifice."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Chờ đợi đã quá lâu, hoặc bạn nhường mãi để được thương; đặt cho mình một hạn và nói ra điều mình cần.",
+    "cong_viec": "Việc kẹt vì cứ chờ người khác; tự làm phần nằm trong tay mình và hỏi rõ mốc trả lời.",
+    "tien_bac": "Tiền đọng mà bạn không chịu cắt; chấp nhận bỏ một khoản nhỏ để giải phóng phần còn lại, đừng vay thêm để giữ.",
+    "suc_khoe": "Ngồi lâu, ít đổi tư thế, tinh thần ì; giãn người vài phút mỗi sáng và đi khám định kỳ."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: lá này bảo dừng lại, nhìn việc từ góc khác. Câu trả lời dễ hiện ra sau khi bạn chịu chờ thêm một chút.",
+    "n": "Có, nếu bạn thôi chờ ai đó quyết hộ: đặt hạn cho mình rồi chọn. Kiểm xem việc chờ thêm còn giúp gì không."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "dai_13": {
    "id": "dai_13",
@@ -1834,7 +2016,21 @@
      "nghia": "Mathers: kết thúc, đổi thay, biến hình, đổi theo chiều xấu; ngược: vừa thoát hiểm, đổi một phần, đổi theo chiều tốt.",
      "bieu_tuong": "He signifies Transformation, or Change."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Một chuyện đã hết mà còn níu, cả hai cùng mệt; viết ra điều bạn đang sợ mất, rồi bàn rõ bước tiếp theo.",
+    "cong_viec": "Việc cũ đã hết sức sống mà chưa dám buông; liệt kê việc cần bàn giao và đặt ngày khép lại.",
+    "tien_bac": "Còn giữ khoản lỗ hoặc thói chi cũ chỉ vì tiếc; cắt một khoản không còn dùng ngay trong tuần này.",
+    "suc_khoe": "Biết thói quen nào hao sức mà chưa bỏ được; bớt từng chút một và đi khám định kỳ để có số thật."
+   },
+   "tra_loi": {
+    "x": "Chưa nên mở việc mới: lá này ủng hộ khép lại điều đã hết hơn là bắt đầu ngay. Dọn xong phần cũ rồi mới bước tiếp.",
+    "n": "Có, nếu bạn chịu buông cái đã hết: thay đổi đang bị níu lại. Kiểm xem điều mình giữ còn ích gì không, rồi đặt ngày khép."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "dai_14": {
    "id": "dai_14",
@@ -1908,7 +2104,21 @@
      "nghia": "Mathers: kết hợp, hợp nhất, hoà vào nhau; ngược: kết hợp sai, chia rẽ, lợi ích va nhau.",
      "bieu_tuong": "She represents Combination."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Một bên nhường quá nhiều, hoặc hai người đẩy nhau tới cực; mỗi người lùi một bước ở một chuyện cụ thể.",
+    "cong_viec": "Làm dồn rồi buông, hoặc ghép hai việc không hợp; chia lại lịch thành phần đều mỗi ngày.",
+    "tien_bac": "Chi lúc quá tay, lúc quá chặt; đặt mức chi cố định mỗi tuần, khoản vượt thì để sang tuần sau.",
+    "suc_khoe": "Nhịp ăn ngủ thất thường, hay bù bằng ăn hoặc rượu; quay lại một giờ ngủ cố định và giảm dần thói bù."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có, nếu đi từ từ: lá này hợp với cách làm vừa phải, có điều chỉnh. Đừng dồn hết sức hay hết tiền vào một lần.",
+    "n": "Có thể, sau khi tìm lại nhịp vừa: đang có thứ bị làm quá tay hoặc ghép sai chỗ. Bớt phần quá đà rồi mới quyết."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "dai_15": {
    "id": "dai_15",
@@ -1982,7 +2192,21 @@
      "nghia": "Mathers: điều như đã định sẵn theo chiều tốt; ngược: theo chiều xấu.",
      "bieu_tuong": "He is the image of Fate or Fatality, good or evil."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Bạn bắt đầu thấy chỗ mình bị lệ thuộc trong quan hệ; giữ một ranh giới nhỏ đã nói ra và làm đúng như vậy.",
+    "cong_viec": "Đã thấy điều trói mình ở chỗ làm; ghi ra lựa chọn khác và chuẩn bị từng bước, chưa cần nghỉ ngang.",
+    "tien_bac": "Đang thoát dần khỏi nợ hoặc thói chi theo cảm xúc; lập lịch trả từng khoản và đừng vay thêm.",
+    "suc_khoe": "Một thói quen hao sức đang nới ra; giữ đà bằng việc nhỏ hằng ngày, cần hỗ trợ thì gặp bác sĩ."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: kiểm xem bạn muốn việc này thật, hay đang bị cám dỗ, sợ hãi hoặc thói quen kéo đi. Nếu thấy khó dừng lại, đó là lúc nên chậm.",
+    "n": "Nghiêng về có: lá này ủng hộ bước giúp bạn thoát khỏi điều trói mình. Điều kiện là đi từng bước và nhờ một người đáng tin cùng theo dõi."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "tien"
+   }
   },
   "dai_16": {
    "id": "dai_16",
@@ -2056,7 +2280,21 @@
      "nghia": "Mathers: đổ nát, đứt gãy, lật nhào, mất, phá sản; ngược: những điều ấy ở mức nhẹ hơn.",
      "bieu_tuong": "It shows Ruin, Disruption."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Có chuyện đáng nói ra đang bị nén để giữ yên; chọn lúc bình tĩnh nói một phần, đừng chờ nó tự bùng lên.",
+    "cong_viec": "Thay đổi lớn đang bị hoãn, hoặc vừa qua và cần dọn lại; sắp xếp hồ sơ, cập nhật lý lịch nghề, chưa ký gì vội.",
+    "tien_bac": "Kế hoạch tiền cũ đã lung lay mà vẫn cố giữ; xem lại bảo hiểm, quỹ dự phòng, đừng vay thêm để chống đỡ.",
+    "suc_khoe": "Căng thẳng dồn nén sau một biến động; ngủ bù có giờ giấc, gặp bác sĩ nếu hồi hộp hay mất ngủ kéo dài."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: lá này cho thấy nền móng đang có chỗ lung lay. Kiểm lại điểm yếu nhất của kế hoạch; nếu nó không đứng được, đừng xây tiếp.",
+    "n": "Có thể, nếu bạn chịu sửa chỗ hỏng thay vì chống đỡ. Nhìn thẳng điều đã lung lay, xử lý nó trước, rồi mới quyết việc mới."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "dai_17": {
    "id": "dai_17",
@@ -2130,7 +2368,21 @@
      "nghia": "Mathers: hy vọng, mong đợi, hứa hẹn sáng; ngược: hy vọng không thành, mong đợi thất vọng hoặc chỉ thành một phần.",
      "bieu_tuong": "She is the star of Hope."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Lòng tin còn mỏng, hoặc bạn đang mong điều chưa có cơ sở; nhìn vào việc người kia làm hơn là lời hứa.",
+    "cong_viec": "Mất hứng với mục tiêu xa, hoặc theo một kế hoạch đẹp mà thiếu bước cụ thể; đặt một mục tiêu nhỏ làm được trong tuần.",
+    "tien_bac": "Dễ đặt hy vọng vào khoản 'sắp về' chưa có giấy; chỉ tính tiền đã có trong tay khi lập chi tiêu.",
+    "suc_khoe": "Sức đang cạn mà vẫn cố tỏ ra ổn; giảm bớt việc, uống đủ nước, ngủ sớm vài hôm liền."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này cho thấy hướng đi có hy vọng thật. Đi chậm, giữ nhịp nhẹ và đừng hứa quá sớm với ai.",
+    "n": "Có, nếu hy vọng có cơ sở: kiểm xem bạn dựa vào dữ kiện hay chỉ mong cho được. Nghỉ cho lại sức trước khi quyết."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "dai_18": {
    "id": "dai_18",
@@ -2204,7 +2456,21 @@
      "nghia": "Mathers: chạng vạng, lừa dối, sai lầm; ngược: dao động, lừa nhẹ, lỗi nhỏ.",
      "bieu_tuong": "It symbolises Twilight, Deception, and Error."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Hiểu lầm đang được gỡ dần, điều chưa nói bắt đầu rõ; chọn lúc nói chuyện thẳng thắn và giữ giọng nhẹ.",
+    "cong_viec": "Thông tin rõ dần, tin đồn lắng xuống; ghi lại những gì đã xác nhận và chỉ quyết dựa trên đó.",
+    "tien_bac": "Khoản mờ trước đây đang hiện rõ; đối chiếu lại sao kê và hỏi ngay chỗ nào còn thắc mắc.",
+    "suc_khoe": "Giấc ngủ và tâm trạng dịu hơn; giữ nhịp ngủ đều, nếu lo âu còn kéo dài thì gặp bác sĩ."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: còn nhiều điều chưa rõ, dễ quyết theo nỗi sợ hoặc tưởng tượng. Kiểm tra thông tin bằng giấy tờ, chờ thêm rồi quyết.",
+    "n": "Có thể, khi bạn đã kiểm lại các điều còn mờ: sương đang tan dần. Xác nhận những dữ kiện then chốt rồi mới gật đầu."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "dai_19": {
    "id": "dai_19",
@@ -2278,7 +2544,21 @@
      "nghia": "Mathers: hạnh phúc, hài lòng, vui; ngược: những điều ấy ở mức nhỏ hơn.",
      "bieu_tuong": "It signifies Earthly Happiness."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Niềm vui có phần bề ngoài, hoặc hay khoe chuyện hai người; dành một buổi riêng không chụp ảnh, chỉ để nói chuyện.",
+    "cong_viec": "Thành tích có nhưng dễ tự mãn hoặc ôm hết công; nhắc tên người đã giúp và giữ chất lượng phần việc tiếp theo.",
+    "tien_bac": "Thu nhập ổn nhưng tiêu hào phóng quá tay; để riêng một phần mỗi lần có tiền về.",
+    "suc_khoe": "Dễ làm quá sức khi đang hứng; nghỉ giữa giờ, che nắng khi ra ngoài, giữ giờ ngủ sớm."
+   },
+   "tra_loi": {
+    "x": "Nghiêng rõ về có: lá này cho thấy việc sáng sủa và thuận. Vẫn nên làm đủ bước và chia công với người đã giúp.",
+    "n": "Có, nhưng đừng đánh giá quá cao: kiểm xem kế hoạch có dựa trên hứng khởi nhất thời không. Hạ kỳ vọng một nấc rồi làm."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "dai_20": {
    "id": "dai_20",
@@ -2352,7 +2632,21 @@
      "nghia": "Mathers: đổi mới, kết quả, việc được định đoạt; ngược: kết quả bị hoãn, chậm, việc mở lại sau.",
      "bieu_tuong": "It signifies Renewal, Result."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Bạn trách mình hoặc người kia quá nặng về chuyện cũ; viết ra điều đã học được, rồi quyết có cần nói lại không.",
+    "cong_viec": "Biết mình cần đổi hướng mà chưa dám, hoặc tự chê tới mức đứng yên; làm một bước thử nhỏ như hỏi thăm một nơi mới.",
+    "tien_bac": "Khoản cũ chưa giải quyết đang bị né; liệt kê nợ và việc còn dang dở, xử lý dứt điểm khoản nhỏ nhất trước.",
+    "suc_khoe": "Tự trách nhiều làm ngủ kém; nghỉ ngơi đúng giờ, và đi khám tổng quát nếu đã hoãn lâu."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này ủng hộ một quyết định đã chín sau khi nhìn lại. Kiểm xem bạn quyết vì đã hiểu bài học cũ, không phải vì vội.",
+    "n": "Chưa nên vội: bạn đang tự phán xét nặng hoặc còn né một việc cũ. Giải quyết điều còn dang dở rồi mới quyết việc mới."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "dai_21": {
    "id": "dai_21",
@@ -2426,7 +2720,21 @@
      "nghia": "Mathers (Vũ trụ): hoàn thành, phần thưởng tốt; ngược: phần thưởng xấu, hoặc trả giá.",
      "bieu_tuong": "It represents Completion, Reward."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Mối quan hệ gần tới bước mới nhưng còn một chuyện chưa bàn xong; gọi tên chuyện đó và hẹn ngày nói cho trọn.",
+    "cong_viec": "Dự án kéo dài vì thiếu khâu cuối hoặc ngại bàn giao; liệt kê phần còn thiếu và chốt hạn hoàn thành.",
+    "tien_bac": "Còn khoản chưa chốt sổ hoặc việc dang dở làm tiền đọng; xử lý dứt một khoản trước khi mở khoản mới.",
+    "suc_khoe": "Một thói quen tốt bỏ dở giữa chừng; quay lại làm đều phần nhỏ nhất, giữ lịch khám định kỳ hằng năm."
+   },
+   "tra_loi": {
+    "x": "Có, nghiêng rõ về có: việc này đã đủ điều kiện để hoàn thành. Chốt lại các bước cuối và giữ cam kết tới khi xong.",
+    "n": "Có, nếu bạn tìm ra mảnh còn thiếu: kiểm xem còn khâu nào chưa xong hay ai chưa đồng ý. Hoàn tất phần đó rồi mới chốt."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "gay_1": {
    "id": "gay_1",
@@ -2495,7 +2803,21 @@
      "nguyen_van_nguoc": "Persecution, Pursuits Voilence, Vexation, Cruelty, Tyranny",
      "nghia": "Mathers: sinh ra, khởi đầu, nguồn gốc; ngược: bị truy đuổi, bạo lực, phiền nhiễu, tàn nhẫn, chuyên quyền."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Hứng yêu có mà nguội nhanh, hẹn rồi lại thôi; chọn một buổi gặp cụ thể và giữ đúng hẹn đó.",
+    "cong_viec": "Ý tưởng nằm mãi trong sổ; chọn việc nhỏ nhất làm được trong hôm nay rồi làm luôn.",
+    "tien_bac": "Muốn bỏ tiền cho việc mới nhưng chưa rõ dùng vào đâu; giữ tiền lại tới khi có kế hoạch một trang.",
+    "suc_khoe": "Hứng tập rồi bỏ; đặt mục tiêu nhỏ, mười lăm phút mỗi ngày, ngủ đủ trước khi tăng sức."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá mở đầu, hợp bắt tay vào khi còn hứng. Điều cần xem: bạn có đủ sức để làm tiếp sau tuần đầu không.",
+    "n": "Chưa nên vội: hứng đang có mà chưa thành việc. Thử làm một bước nhỏ trước; nếu bước đó trôi chảy thì hãy tính tiếp."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "gay_2": {
    "id": "gay_2",
@@ -2574,7 +2896,21 @@
      "nguyen_van_nguoc": "Surprise, Astonishment, Event, Extraordinary Occurrence",
      "nghia": "Mathers: giàu có, may mắn, sung túc, huy hoàng; ngược: bất ngờ, kinh ngạc, biến cố lạ."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Hai người nói về tương lai nhiều mà chưa làm gì; chọn một việc chung làm trong tháng này.",
+    "cong_viec": "Kế hoạch đổi hướng mãi chưa chốt; đặt hạn quyết định, ghi rõ điều bạn đang chờ thêm.",
+    "tien_bac": "Sợ rời chỗ an toàn nên tiền đứng yên; tính thử phương án nhỏ, giữ quỹ dự phòng như cũ.",
+    "suc_khoe": "Muốn đổi nếp sống mà cứ hẹn mai; thay một thói quen nhỏ trước, như đi ngủ sớm hơn nửa giờ."
+   },
+   "tra_loi": {
+    "x": "Có, nếu đã có kế hoạch rõ: lá hai gậy cho thấy bạn đứng ở ngưỡng chọn. Viết ra được đi về đâu, mất gì nếu ở lại, rồi hãy quyết.",
+    "n": "Chưa nên vội: bạn đang ngại bước hơn là thiếu điều kiện. Hỏi kỹ mình đang chờ gì; nếu không gọi tên được thì chưa phải lúc."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "cho"
+   }
   },
   "gay_3": {
    "id": "gay_3",
@@ -2653,7 +2989,21 @@
      "nguyen_van_nguoc": "Hope, Desire, Attempt, Wish",
      "nghia": "Mathers: khởi nghiệp, kinh doanh, buôn bán, thương lượng; ngược: hy vọng, ước muốn, thử."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Chờ tin lâu, hoặc chuyện yêu xa lệch kế hoạch; hỏi thẳng một lần thay vì đoán, rồi tự lo nhịp sống của mình.",
+    "cong_viec": "Kết quả đã gửi đi về chậm, đối tác trễ hẹn; nhắc lại bằng văn bản và chuẩn bị phương án thứ hai.",
+    "tien_bac": "Khoản tiền chờ về đang chậm; đừng chi trước số chưa nhận, kiểm lại giấy tờ, hạn thanh toán.",
+    "suc_khoe": "Kế hoạch dài hạn bị bỏ lửng; đặt lại một lịch khám, lịch tập cụ thể cho quý này."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá cho thấy việc đã gieo đang trên đường sinh kết quả. Điều cần xem: bạn có kiên nhẫn chờ đủ lâu, không rút sớm.",
+    "n": "Chưa nên vội: kết quả đang chậm, tầm nhìn bị che. Kiểm lại những gì đã gửi đi trước khi đặt thêm việc mới."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "gay_4": {
    "id": "gay_4",
@@ -2732,7 +3082,21 @@
      "nguyen_van_nguoc": "Prosperity, Success, Happiness, Advantage",
      "nghia": "Mathers: xã hội, kết hợp, hiệp hội, hoà thuận; ngược: thịnh vượng, thành công, hạnh phúc, lợi."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Có mốc vui nhưng lòng chưa yên; nói ra điều còn vướng trước khi tính tiếp chuyện chung nhà.",
+    "cong_viec": "Xong một giai đoạn mà chưa thấy vui; dành một buổi ghi nhận việc đã làm cùng đội.",
+    "tien_bac": "Lễ nhỏ hơn dự tính vẫn ổn; giữ hạn mức chi, đừng vay thêm để làm cho to.",
+    "suc_khoe": "Ổn mà chưa thật nghỉ; cho mình một ngày không việc, ngủ bù, ăn bữa nhà."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của mốc vui, nền ổn. Điều cần xem: việc này có hợp với người cùng sống không.",
+    "n": "Vẫn nghiêng về có, chỉ là vui nhỏ hơn mong. Điều cần xem: bạn đã cho mình nghỉ chưa, hay đang làm cho xong."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "tien"
+   }
   },
   "gay_5": {
    "id": "gay_5",
@@ -2811,7 +3175,21 @@
      "nguyen_van_nguoc": "Legal proceedings, Judgment, Law, Lawyer, Tribunal",
      "nghia": "Mathers: vàng, sung túc, lợi, thừa kế, của cải, tiền; ngược: kiện tụng, phán xét, luật, luật sư, toà."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Cãi vặt bắt đầu dịu, hoặc hai người tránh nói để khỏi va; chọn lúc bình tĩnh nói một chuyện, không gộp nhiều chuyện.",
+    "cong_viec": "Tranh cãi trong đội lắng xuống, hoặc mọi người mệt nên im; mời người điều phối chốt việc thay vì kéo dài.",
+    "tien_bac": "Chuyện chia tiền, thương lượng giá đã bớt căng; ghi lại điều đã thống nhất bằng văn bản.",
+    "suc_khoe": "Mệt vì căng thẳng kéo dài; giảm việc gây ồn, đi bộ thư giãn, giữ giờ ngủ."
+   },
+   "tra_loi": {
+    "x": "Có, nếu bạn chịu được cạnh tranh: lá cho thấy nhiều người cùng tranh. Điều cần xem: có luật chơi rõ và có người phân xử không.",
+    "n": "Có thể, khi va chạm đã dịu. Điều cần xem: bạn hoà vì đã nói xong, hay chỉ vì mệt mà nhịn."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "dieu_kien"
+   }
   },
   "gay_6": {
    "id": "gay_6",
@@ -2890,7 +3268,21 @@
      "nguyen_van_nguoc": "Infidelity, Treachery, Disloyalty, Perfidy",
      "nghia": "Mathers: thử, hy vọng, ước muốn, mong đợi; ngược: bất trung, phản bội, bội tín."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Chuyện vui chưa được công khai, hoặc bạn cần người kia khen mới yên; tự ghi nhận mình trước, nói điều bạn mong.",
+    "cong_viec": "Làm tốt mà chưa ai công nhận; gửi bản tóm tắt kết quả cho người cần biết, đừng chờ được nhắc.",
+    "tien_bac": "Thưởng chưa về hoặc ít hơn mong; chưa tiêu trước khoản chưa nhận, kiểm lại cam kết.",
+    "suc_khoe": "Tự tin quá nên bỏ bữa, thức khuya; giữ nhịp ăn ngủ như lúc chưa bận."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của thắng lợi và được công nhận. Điều cần xem: bạn làm vì việc ấy đáng, hay vì muốn được thấy.",
+    "n": "Có, nếu bớt vội khoe: thắng còn tạm. Kiểm lại người ủng hộ thật và việc còn dang dở trước khi bước tiếp."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "gay_7": {
    "id": "gay_7",
@@ -2969,7 +3361,21 @@
      "nguyen_van_nguoc": "Indecision, Doubt, Hesitation, Embarrassment, Anxiety",
      "nghia": "Mathers: thành công, lợi, thắng; ngược: thiếu quyết đoán, nghi ngờ, do dự, lúng túng, lo."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Mệt vì phải bênh mối quan hệ trước nhiều người; hỏi mình còn muốn giữ không, rồi nói rõ với người kia.",
+    "cong_viec": "Phòng thủ lâu nên kiệt, muốn bỏ ngang; chọn một trận đáng giữ, buông những tranh luận nhỏ.",
+    "tien_bac": "Nhiều đòi hỏi khiến bạn muốn buông hết; liệt kê khoản thật cần giữ, nói không với phần còn lại.",
+    "suc_khoe": "Căng lâu ngày, vai cổ mỏi; nghỉ thật một buổi, giảm việc gánh hộ người khác."
+   },
+   "tra_loi": {
+    "x": "Có, nếu bạn sẵn sàng đứng vững: lá cho thấy bạn đang giữ thế cao. Điều cần xem: việc này có đáng để bảo vệ trước nhiều phía không.",
+    "n": "Chưa nên vội: bạn đang kiệt vì phòng thủ. Nghỉ lấy lại sức và xem điều mình giữ còn đáng không, rồi mới quyết."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "cho"
+   }
   },
   "gay_8": {
    "id": "gay_8",
@@ -3048,7 +3454,21 @@
      "nguyen_van_nguoc": "Quarrels, Intestine disputes, Discord",
      "nghia": "Mathers: hiểu, quan sát, định hướng; ngược: cãi vã, tranh chấp nội bộ, bất hoà."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Tin nhắn chậm, hẹn bị lùi, hoặc vội nói rồi hiểu lầm; chờ một nhịp, nói lại cho rõ một lần.",
+    "cong_viec": "Việc tắc, email chưa trả lời, hoặc vội mà sai; dừng lại kiểm từng bước trước khi gửi tiếp.",
+    "tien_bac": "Tiền chuyển chậm, hoặc vội chuyển nhầm; kiểm lại số tài khoản, đừng chuyển lúc đang gấp.",
+    "suc_khoe": "Nhịp sống lệch vì vội rồi khựng; đặt lại giờ ăn, giờ ngủ cố định trong tuần này."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: việc đang chạy nhanh, cửa mở. Điều cần xem: bạn đủ thông tin chưa, vì nhanh mà thiếu dễ phải làm lại.",
+    "n": "Chưa nên vội: đang có cản, hoặc bạn vội mà sai. Xem mình chậm vì vướng thật hay vì chưa muốn, gỡ chỗ đó trước."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "gay_9": {
    "id": "gay_9",
@@ -3127,7 +3547,21 @@
      "nguyen_van_nguoc": "Obstacles, Crosses, Delay, Displeasure",
      "nghia": "Mathers: trật tự, kỷ luật, sắp xếp tốt; ngược: trở ngại, trái ý, chậm, bực."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Phòng thủ tới mức thấy ai cũng đáng ngờ; kể cho một người tin được nỗi lo của bạn, thay vì giữ hết.",
+    "cong_viec": "Cạn sức ở đoạn cuối, nghi cả đồng đội; xin hỗ trợ một phần việc, nghỉ ngắn rồi làm tiếp.",
+    "tien_bac": "Giữ tiền chặt vì lo, hoặc mệt nên muốn buông kế hoạch; giữ quỹ dự phòng, hoãn khoản chi lớn.",
+    "suc_khoe": "Sức gần cạn; ngủ trước khi cố thêm, giảm việc trong tuần, đi khám định kỳ nếu mệt kéo dài."
+   },
+   "tra_loi": {
+    "x": "Có, nếu còn sức đi nốt: lá cho thấy bạn đã gần về đích. Điều cần xem: bạn có đủ nghỉ để làm tiếp mà không quá tải.",
+    "n": "Chưa nên vội: bạn đang cạn sức và cố thủ. Lấy lại sức, nhờ người giúp, rồi xem việc còn đáng làm tiếp không."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "cho"
+   }
   },
   "gay_10": {
    "id": "gay_10",
@@ -3206,7 +3640,21 @@
      "nguyen_van_nguoc": "Treachery, Subterfuge, Duplicity, Bar",
      "nghia": "Mathers: tin cậy, an toàn, danh dự, thiện chí; ngược: phản bội, mưu mẹo, hai mặt."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Bắt đầu chia bớt việc nhà, việc chung; nói rõ phần nào bạn cần người kia nhận.",
+    "cong_viec": "Đã giao bớt được việc, hoặc gánh quá nên đổ; liệt kê việc của người khác và trả lại đúng chỗ.",
+    "tien_bac": "Trách nhiệm tiền bạc bắt đầu nhẹ; sắp lại thứ tự trả, đừng vay thêm để gánh hộ.",
+    "suc_khoe": "Đang buông bớt gánh; cho mình nghỉ thật, ngủ đủ, giãn cơ nhẹ mỗi tối."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội nhận thêm: bạn đang gánh quá nhiều. Có thể làm, nếu bỏ bớt hoặc giao lại hai việc trước.",
+    "n": "Có, nếu bạn thật sự đặt bớt gánh: lá ngược cho thấy sức nặng đang nhẹ dần. Điều cần xem: việc mới có chất thêm lên vai không."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "gay_tieu_dong": {
    "id": "gay_tieu_dong",
@@ -3282,7 +3730,21 @@
      "nguyen_van_nguoc": "Ill News, Displeasure, Chagrin, Worry",
      "nghia": "Mathers: người lạ tốt, tin vui, niềm vui, hài lòng; ngược: tin xấu, bực, phiền, lo."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Tin nhắn đến chậm, hoặc hứng thích người mới rồi nguội; đợi thêm một chút trước khi hứa hẹn.",
+    "cong_viec": "Thử nhiều việc mà bỏ dở; chọn một việc học tới nơi, nhờ một người kèm.",
+    "tien_bac": "Tin tiền vui nhưng chưa chắc về; chi theo hứng dễ hụt, ghi lại mọi khoản trong tuần.",
+    "suc_khoe": "Tập môn mới rồi bỏ ngang; giữ một môn đều đặn, khởi động kỹ trước khi tập."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của tin mới và lời mời. Điều cần xem: có người dày dạn kèm bạn lúc đầu không.",
+    "n": "Chưa nên vội: hứng còn bồng bột, tin tốt chưa tới. Đợi thêm thông tin, thử nhỏ trước khi cam kết."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "gay_hiep_si": {
    "id": "gay_hiep_si",
@@ -3293,7 +3755,7 @@
    "bo": "gay",
    "nguyen_to": "hoa",
    "chiem_tinh": null,
-   "thoth_ten": "Prince of the Chariot of Fire",
+   "thoth_ten": "Lord of the Flame and the Lightning; King of the Spirits of Fire",
    "tdm_ten": "Cavalier de Bâton",
    "huong_nhin": 1,
    "sac_thai": "trung",
@@ -3323,8 +3785,8 @@
      "loi": "Waite: kỵ sĩ lao qua sa mạc — 'ra đi, vắng mặt, đổi chỗ ở'."
     },
     "thoth": {
-     "ten": "Prince of the Chariot of Fire",
-     "loi": "Prince of the Chariot of Fire — Khí của Lửa: lửa có gió; mặt tối là bạo và thiếu bền."
+     "ten": "Lord of the Flame and the Lightning; King of the Spirits of Fire",
+     "loi": "Lord of the Flame and the Lightning — Lửa của Lửa: thuần lửa; mặt tối là bạo và đốt người xung quanh."
     },
     "tdm": {
      "ten": "Cavalier de Bâton",
@@ -3336,8 +3798,8 @@
    },
    "viec": "Làm việc gấp nhất trong danh sách ngay sáng mai, rồi dừng để xem bạn đã làm đúng việc chưa.",
    "cau_tu_soi": "Bạn đang chạy tới đâu — và ai đang chạy theo bạn?",
-   "nguyen_to_phu": "khi",
-   "ten_nguyen_to_phu": "Khí của Lửa",
+   "nguyen_to_phu": "hoa",
+   "ten_nguyen_to_phu": "Lửa của Lửa",
    "nhan_vat": "Người hành động nhanh, nhiệt, hay dịch chuyển; thiếu kiên nhẫn.",
    "trich": [
     {
@@ -3348,9 +3810,9 @@
     },
     {
      "sach": "book_t",
-     "ten": "The Prince of the Chariot of Fire",
-     "nguyen_van": "If ill dignified --- cruel, intolerant, prejudiced and ill natured.",
-     "nghia": "Book T (Hoàng tử Gậy = Hiệp sĩ Gậy RWS): khi bị kìm — tàn, không khoan dung, thành kiến, khó chịu."
+     "ten": "The Lord of the Flame and the Lightning; The King of the Spirits of Fire",
+     "nguyen_van": "He is active --- generous --- fierce --- sudden --- impetuous.",
+     "nghia": "Book T (Vua Gậy — người cưỡi ngựa, ứng Hiệp sĩ Gậy của Waite): hoạt động, rộng rãi, dữ, bất ngờ, bốc; bị kìm thì ác ý, tàn, cố chấp."
     },
     {
      "sach": "mathers_1888",
@@ -3358,7 +3820,25 @@
      "nguyen_van_nguoc": "Rupture, Discord, Quarrel",
      "nghia": "Mathers: ra đi, chia cách, chia rẽ; ngược: đứt gãy, bất hoà, cãi vã."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "bo_cap",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Tình cảm nóng vội, đến nhanh rồi dừng; nói rõ bạn muốn gì trước khi tính bước xa hơn.",
+    "cong_viec": "Đổi việc theo hứng, bỏ dự án giữa chừng; viết ra lý do đổi và việc còn dở trước khi đi.",
+    "tien_bac": "Mua theo hứng, chi cho chuyến đi gấp; đặt hạn mức, chờ một ngày trước khoản lớn.",
+    "suc_khoe": "Vội nên dễ quá sức; chậm lại khi lái xe, khởi động kỹ, ngủ đủ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của bước đi nhanh, đổi chỗ, lên đường. Điều cần xem: có người giữ nhịp cùng bạn để không bỏ dở.",
+    "n": "Chưa nên vội: bạn đang lao tới vì không chịu đứng yên. Nghĩ xong mình muốn tới đâu và việc còn dở rồi mới đi."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "gay_hoang_hau": {
    "id": "gay_hoang_hau",
@@ -3434,7 +3914,25 @@
      "nguyen_van_nguoc": "A good a virtuous Woman, but strict and economical, Obstacles, Resistance, Opposition",
      "nghia": "Mathers: người phụ nữ ở quê, bà chủ đất, yêu tiền, keo, cho vay lãi; ngược: người tốt, đức hạnh nhưng nghiêm và tiết kiệm; trở ngại, chống đối."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "song_ngu",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Ghen hoặc khó tính lên, hoặc bạn thu mình; nói điều bạn lo bằng câu ngắn, bớt kiểm tra người kia.",
+    "cong_viec": "Ôm việc của cả đội, hoặc mất tự tin khi trình bày; giao lại một việc, chuẩn bị kỹ ý chính.",
+    "tien_bac": "Chi để chứng tỏ, hoặc lo mà giữ chặt; xem khoản chi gần nhất vì cần hay vì muốn được nhìn.",
+    "suc_khoe": "Nóng trong người khi căng; giảm cà phê buổi chiều, đi bộ, ngủ đúng giờ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của người tự tin, ấm, làm chủ việc. Điều cần xem: bạn có đủ người cùng làm, không ôm hết.",
+    "n": "Có, nếu bạn làm chủ chứ không kiểm soát: lá ngược hay đi cùng ghen hoặc mất tự tin. Xem lý do bạn muốn làm việc này trước."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "gay_vua": {
    "id": "gay_vua",
@@ -3445,7 +3943,7 @@
    "bo": "gay",
    "nguyen_to": "hoa",
    "chiem_tinh": null,
-   "thoth_ten": "Lord of the Flame and the Lightning; King of the Spirits of Fire",
+   "thoth_ten": "Prince of the Chariot of Fire",
    "tdm_ten": "Roi de Bâton",
    "huong_nhin": -1,
    "sac_thai": "sang",
@@ -3475,8 +3973,8 @@
      "loi": "Waite: vua lửa 'thành thật, nóng, nhanh, cao thượng'."
     },
     "thoth": {
-     "ten": "Lord of the Flame and the Lightning; King of the Spirits of Fire",
-     "loi": "Lord of the Flame and the Lightning — Lửa của Lửa: thuần lửa; mặt tối là bạo và đốt người xung quanh."
+     "ten": "Prince of the Chariot of Fire",
+     "loi": "Prince of the Chariot of Fire — Khí của Lửa: lửa có gió; mặt tối là bạo và thiếu bền."
     },
     "tdm": {
      "ten": "Roi de Bâton",
@@ -3488,8 +3986,8 @@
    },
    "viec": "Chốt MỘT quyết định đã bàn hơn hai tuần; thông báo cho người liên quan bằng ba câu.",
    "cau_tu_soi": "Bạn đang dẫn ai — và bạn có hỏi họ muốn đi đâu không?",
-   "nguyen_to_phu": "hoa",
-   "ten_nguyen_to_phu": "Lửa của Lửa",
+   "nguyen_to_phu": "khi",
+   "ten_nguyen_to_phu": "Khí của Lửa",
    "nhan_vat": "Người dẫn dắt quyết đoán, có tầm nhìn; khi căng thành độc đoán.",
    "trich": [
     {
@@ -3500,9 +3998,9 @@
     },
     {
      "sach": "book_t",
-     "ten": "The Lord of the Flame and the Lightning; The King of the Spirits of Fire",
-     "nguyen_van": "He is active --- generous --- fierce --- sudden --- impetuous.",
-     "nghia": "Book T (Hiệp sĩ Gậy = Vua Gậy RWS): hoạt động, rộng rãi, dữ, bất ngờ, bốc; bị kìm thì ác ý, tàn, cố chấp."
+     "ten": "The Prince of the Chariot of Fire",
+     "nguyen_van": "If ill dignified --- cruel, intolerant, prejudiced and ill natured.",
+     "nghia": "Book T (Hoàng tử Gậy — người trên cỗ xe, ứng Vua Gậy của Waite): khi bị kìm — tàn, không khoan dung, thành kiến, khó chịu."
     },
     {
      "sach": "mathers_1888",
@@ -3510,7 +4008,25 @@
      "nguyen_van_nguoc": "A naturally good but severe man, Counsel, Advice, Deliberation",
      "nghia": "Mathers: người đàn ông ở quê, điền chủ, tri thức, học vấn; ngược: người tốt nhưng nghiêm, lời khuyên, cân nhắc."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "cu_giai",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Muốn mọi việc theo ý mình; hỏi người kia nghĩ gì trước, rồi mới nói ý bạn.",
+    "cong_viec": "Ép đội theo kỳ vọng quá cao; hạ mục tiêu về mức làm được, nghe ý kiến trước khi chốt.",
+    "tien_bac": "Quyết tiền theo cái tôi; hỏi ý một người am hiểu, kiểm lại số, đừng vay thêm vì tự tin.",
+    "suc_khoe": "Nóng nảy, căng thẳng kéo dài; tập thở chậm, ngủ đủ, đi khám định kỳ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của người dẫn dắt, dám quyết. Điều cần xem: bạn đã nghe đủ người liên quan chưa.",
+    "n": "Nên đổi cách làm trước: lá ngược cho thấy ép hơn là dẫn. Có thể làm, nếu bạn hạ kỳ vọng và nghe ý người cùng làm."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "coc_1": {
    "id": "coc_1",
@@ -3579,7 +4095,21 @@
      "nguyen_van_nguoc": "Change, Novelty, Metamorphosis, Inconstancy",
      "nghia": "Mathers: tiệc tùng, yến tiệc, vui vẻ; ngược: đổi thay, điều mới, biến hình, thất thường."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Khó mở lòng, cảm xúc bị nén; viết ra điều bạn muốn nói, rồi chọn một câu để nói thật.",
+    "cong_viec": "Làm mà không thấy vui, cạn hứng; tìm lại một phần việc bạn từng thích, làm nó trước.",
+    "tien_bac": "Chi để lấp cảm giác trống; ghi lại khoản chi khi buồn, hoãn mua tới hôm sau.",
+    "suc_khoe": "Cảm xúc dồn nén làm mệt người; ngủ đủ, uống đủ nước, nói chuyện với người bạn tin."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của khởi đầu từ trái tim. Điều cần xem: bạn có thật lòng muốn việc này hay chỉ vì người khác.",
+    "n": "Chưa nên vội: lòng bạn đang khép hoặc cạn. Để cảm xúc lắng, gọi tên điều mình muốn rồi mới quyết."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "coc_2": {
    "id": "coc_2",
@@ -3658,7 +4188,21 @@
      "nguyen_van_nguoc": "Crossed desires, Obstacles, Opposition, Hindrance",
      "nghia": "Mathers: tình yêu, gắn bó, tình bạn, chân thành; ngược: ước muốn trái ngược, trở ngại, chống đối."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Một bên cho nhiều hơn, hiểu lầm vặt; mỗi người nói một điều mình cần, nghe hết rồi mới đáp.",
+    "cong_viec": "Hợp tác lệch nhịp, việc dồn một phía; rà lại phần việc từng người, ghi rõ bằng văn bản.",
+    "tien_bac": "Tiền chung chưa rõ ai giữ gì; ngồi lại chia rõ khoản góp, khoản chi.",
+    "suc_khoe": "Nhịp sống lệch theo người kia; giữ giờ ngủ, bữa ăn hợp với mình."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của hai bên cùng chiều. Điều cần xem: người cùng làm có thật sự đồng ý hay chỉ gật cho xong.",
+    "n": "Có, nếu cân lại được: lá ngược cho thấy một bên đang lệch. Nói rõ điều mỗi người cho và nhận trước khi đi tiếp."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "coc_3": {
    "id": "coc_3",
@@ -3737,7 +4281,21 @@
      "nguyen_van_nguoc": "Expedition of business, Quickness, Celerity, Vigilance",
      "nghia": "Mathers: thành công, thắng, kết cục thuận; ngược: việc đi nhanh, mau lẹ, cảnh giác."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Vui đông người mà thấy lạc, hoặc có người thứ ba xen vào; dành thời gian riêng hai người, nói rõ ranh giới.",
+    "cong_viec": "Tụ tập nhiều mà việc chậm, hoặc thấy mình lạc trong đội; chọn một người hợp ý để làm cặp.",
+    "tien_bac": "Chi tiệc tùng quá tay; đặt hạn mức cho các buổi gặp, góp chung thì ghi lại.",
+    "suc_khoe": "Tiệc nhiều làm lệch nhịp ngủ, ăn; bớt một buổi, ngủ sớm, uống nước nhiều hơn."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của niềm vui chung, có bạn bè ủng hộ. Điều cần xem: những người quanh bạn có cùng mong việc này không.",
+    "n": "Có, nếu bớt đám đông: lá ngược cho thấy vui quá đà hoặc bị kéo theo. Hỏi ý mình riêng, ngoài lời người khác."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "coc_4": {
    "id": "coc_4",
@@ -3816,7 +4374,21 @@
      "nguyen_van_nguoc": "New Acquaintance, Conjecture, Sign, Presentiment",
      "nghia": "Mathers: chán, bực, bất mãn; ngược: người quen mới, phỏng đoán, dấu hiệu, linh cảm."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Tỉnh ra sau đợt chán, nhận ra cố gắng của người kia; nói một lời cảm ơn cụ thể.",
+    "cong_viec": "Bắt đầu thấy cơ hội trước mặt; nhận một việc mới thử trong một tháng trước khi bàn đổi chỗ.",
+    "tien_bac": "Nhìn lại thấy tiền đủ hơn mình nghĩ; viết ra khoản đang có, chọn một mục tiêu nhỏ.",
+    "suc_khoe": "Bớt uể oải; ra ngoài trời mỗi ngày, giữ giờ ngủ, chán lâu thì nói với bác sĩ."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: bạn đang chán nên dễ gạt bỏ, hoặc nhận chỉ để đổi gió. Nhìn kỹ lời mời trước mặt rồi hãy trả lời.",
+    "n": "Nghiêng về có: lá ngược là lúc tỉnh ra và nhận cốc mới. Điều cần xem: bạn đã đọc kỹ điều kiện của lời mời chưa."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "tien"
+   }
   },
   "coc_5": {
    "id": "coc_5",
@@ -3895,7 +4467,21 @@
      "nguyen_van_nguoc": "Arrival, Return, News, Surprise, False projects",
      "nghia": "Mathers: kết hợp, hôn nhân, thừa kế; ngược: tới nơi, trở về, tin tức, bất ngờ, dự án giả."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Bắt đầu thôi tiếc, nhìn vào điều còn lại; gặp lại người thân, kể cho họ nghe chuyện đã qua.",
+    "cong_viec": "Đã chấp nhận dự án hỏng, nhặt phần còn dùng được; ghi ba bài học rồi bắt đầu việc nhỏ.",
+    "tien_bac": "Ngừng nhìn khoản đã mất; kiểm lại tài sản còn, không gỡ bằng liều, giữ quỹ dự phòng.",
+    "suc_khoe": "Nhịp sống bắt đầu trở lại; ăn ngủ đều, đi bộ ngoài trời, buồn kéo dài thì gặp bác sĩ."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: bạn đang nhìn vào cái mất. Để nỗi tiếc lắng xuống, kể ra cái còn lại, rồi mới quyết việc mới.",
+    "n": "Có thể, nếu bạn đã thôi nhìn lại: lá ngược là lúc qua cầu. Điều cần xem: bạn quyết vì muốn đi tiếp, hay để quên nhanh."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "coc_6": {
    "id": "coc_6",
@@ -3974,7 +4560,21 @@
      "nguyen_van_nguoc": "The Future, that which is to come, Shortly, Soon",
      "nghia": "Mathers: quá khứ, đã qua, phai, biến mất; ngược: tương lai, điều sắp tới, sớm thôi."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Kẹt trong chuyện cũ, người cũ quay lại không đúng lúc; so người trước mặt với hiện tại, không với hồi xưa.",
+    "cong_viec": "Cứ nhắc cách làm cũ; giữ phần còn đúng, thử một cách làm mới trong tuần.",
+    "tien_bac": "Chi theo kỷ niệm, hoặc trông vào khoản gia đình cho; lập ngân sách theo thu nhập hiện tại.",
+    "suc_khoe": "Giữ nếp cũ không còn hợp; đổi một thói quen ngủ hoặc ăn cho hợp tuổi bây giờ."
+   },
+   "tra_loi": {
+    "x": "Có, nếu việc này hợp với bạn hôm nay chứ không vì nhớ: lá của kỷ niệm ấm. Điều cần xem: bạn có đang tô hồng chuyện cũ không.",
+    "n": "Chưa nên vội: bạn đang nhìn bằng mắt của ngày xưa. Xem việc này ở hiện tại, với con người bạn bây giờ, rồi hãy quyết."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "cho"
+   }
   },
   "coc_7": {
    "id": "coc_7",
@@ -4053,7 +4653,21 @@
      "nguyen_van_nguoc": "Plan, Design, Resolution, Decision",
      "nghia": "Mathers: ý tưởng, cảm nghĩ, suy ngẫm, dự án; ngược: kế hoạch, thiết kế, quyết tâm, quyết định."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Tỉnh khỏi những hình dung về người kia; nhìn việc người ấy làm, chọn một điều thật để nói.",
+    "cong_viec": "Đã chọn được một hướng trong nhiều ý; làm thử ba mươi ngày, bỏ các ý còn lại khỏi danh sách.",
+    "tien_bac": "Nhận ra lời chào tiền dễ là mây; giữ tiền, chỉ làm theo con số đã kiểm.",
+    "suc_khoe": "Bỏ bớt cách tập, cách ăn thử lung tung; giữ một nếp đơn giản, ngủ đúng giờ."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: trước mặt nhiều lựa chọn, nhiều cái chỉ là mong. Kiểm thật từng cái rồi chọn một.",
+    "n": "Nghiêng về có: lá ngược là lúc tỉnh mộng, chọn được việc thật. Điều cần xem: lựa chọn có số liệu chứ đừng chỉ có hứa hẹn."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "tien"
+   }
   },
   "coc_8": {
    "id": "coc_8",
@@ -4132,7 +4746,21 @@
      "nguyen_van_nguoc": "Gaiety, Feasting, Joy, Pleasure",
      "nghia": "Mathers: cô gái sáng, tình bạn, gắn bó, dịu dàng; ngược: vui vẻ, tiệc tùng, niềm vui."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Sợ rời dù đã cạn, hoặc đi để khỏi nói chuyện; hỏi mình đang tìm gì, nói thật trước khi lùi.",
+    "cong_viec": "Muốn bỏ việc để trốn áp lực, hoặc sợ đi nên ở mãi; viết ra điều bạn tìm ở chỗ mới.",
+    "tien_bac": "Ở lại vì sợ mất lương, hoặc đi mà chưa có dự phòng; tính đủ ba tháng chi tiêu trước.",
+    "suc_khoe": "Chạy khỏi mệt bằng cách bận thêm; nghỉ ngắn tại chỗ, ngủ đủ rồi mới tính đi xa."
+   },
+   "tra_loi": {
+    "x": "Có, nếu là rời cái đã cạn để tìm cái sâu hơn: lá nghiêng về bước đi. Điều cần xem: bạn đã chuẩn bị đủ, không đi tay trắng.",
+    "n": "Chưa nên vội: bạn đang sợ bỏ, hoặc muốn đi để trốn. Gọi tên điều mình tìm; chưa gọi được thì chưa nên quyết."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "cho"
+   }
   },
   "coc_9": {
    "id": "coc_9",
@@ -4211,7 +4839,21 @@
      "nguyen_van_nguoc": "Faults, Errors, Mistakes, Imperfections",
      "nghia": "Mathers: thắng, lợi, thành công, vượt khó; ngược: lỗi, sai, thiếu sót."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Có đủ mà vẫn thấy thiếu, hoặc tự mãn quên chăm; làm một việc nhỏ cho người kia trong tuần.",
+    "cong_viec": "Hài lòng quá nên chững, hoặc muốn thêm mãi; đặt một mục tiêu vừa sức cho quý tới.",
+    "tien_bac": "Muốn chi thêm dù đã đủ; hoãn khoản mua lớn một tuần, để dành phần thưởng vừa về.",
+    "suc_khoe": "Ăn uống quá đà khi vui; giảm một bữa nhậu, tập nhẹ đều, giữ giờ ngủ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của điều ước thành, hài lòng. Điều cần xem: việc này cho bạn thứ bạn cần, hay chỉ thêm cái đã có.",
+    "n": "Có thể, nếu không phải vì tham thêm: lá ngược là no mà rỗng. Xem mình muốn việc này vì thiếu thật hay vì chưa thấy đủ."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "coc_10": {
    "id": "coc_10",
@@ -4290,7 +4932,21 @@
      "nguyen_van_nguoc": "Combat, Strife, Opposition, Differences, Dispute",
      "nghia": "Mathers: thị trấn nơi mình ở, danh dự, được trọng, đức hạnh, tiếng tốt; ngược: đấu đá, tranh chấp, bất đồng."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Nhà lục đục, vui bề ngoài; hỏi riêng từng người trong nhà đang cần gì, nghe trước khi góp ý.",
+    "cong_viec": "Việc kéo bạn khỏi bữa cơm nhà; đặt giờ về cố định hai ngày mỗi tuần.",
+    "tien_bac": "Kỳ vọng gia đình đè lên tiền bạc; nói rõ khoản bạn lo được, đừng vay thêm để giữ mặt.",
+    "suc_khoe": "Căng thẳng trong nhà làm mất ngủ; tìm góc yên cho riêng mình, đưa người lớn tuổi đi khám định kỳ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của nhà yên, hạnh phúc chung. Điều cần xem: người trong nhà có cùng mong việc này không.",
+    "n": "Có, nếu nhà đã nói chuyện với nhau: lá ngược cho thấy vui bề ngoài. Hỏi ý từng người trước khi quyết."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "coc_tieu_dong": {
    "id": "coc_tieu_dong",
@@ -4366,7 +5022,21 @@
      "nguyen_van_nguoc": "A Flatterer, Deception, Artifice",
      "nghia": "Mathers: thanh niên sáng, tin cậy, ngay thẳng, kín đáo; ngược: kẻ nịnh, lừa dối, mưu mẹo."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Mơ về người kia nhiều hơn biết thật; gặp nói chuyện vài lần trước khi gửi hy vọng lớn.",
+    "cong_viec": "Ý sáng tạo nhiều mà chưa ra sản phẩm; làm một bản nháp nhỏ, gửi một người góp ý.",
+    "tien_bac": "Tin tiền đến muộn, hoặc mua vì cảm xúc; chờ tiền về mới chi, ghi khoản chi khi buồn.",
+    "suc_khoe": "Nhạy cảm, mệt theo tâm trạng; ghi nhật ký vài dòng, uống đủ nước, ngủ sớm."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của lời mời nhẹ, tin vui nhỏ. Điều cần xem: bạn có kiểm cảm giác này bằng việc thật không.",
+    "n": "Chưa nên vội: lá ngược cho thấy bạn đang tưởng tượng nhiều hơn biết. Đợi thêm tin, kiểm thực tế trước khi bước."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "coc_hiep_si": {
    "id": "coc_hiep_si",
@@ -4377,7 +5047,7 @@
    "bo": "coc",
    "nguyen_to": "thuy",
    "chiem_tinh": null,
-   "thoth_ten": "Prince of the Chariot of the Waters",
+   "thoth_ten": "Lord of the Waves and the Waters; King of the Hosts of the Sea",
    "tdm_ten": "Cavalier de Coupe",
    "huong_nhin": 1,
    "sac_thai": "sang",
@@ -4407,8 +5077,8 @@
      "loi": "Waite: kỵ sĩ cầm cốc — 'đến gần, lời mời, đề nghị'."
     },
     "thoth": {
-     "ten": "Prince of the Chariot of the Waters",
-     "loi": "Prince of the Chariot of the Waters — Khí của Nước: tình có lời; mặt tối là giả dối ngọt."
+     "ten": "Lord of the Waves and the Waters; King of the Hosts of the Sea",
+     "loi": "Lord of the Waves and the Waters — Lửa của Nước: tình có sức; mặt tối là lạnh và thao túng."
     },
     "tdm": {
      "ten": "Cavalier de Coupe",
@@ -4420,8 +5090,8 @@
    },
    "viec": "Đưa một lời mời cụ thể (ngày, giờ, việc) tới người bạn quý trong 72 giờ.",
    "cau_tu_soi": "Lời đẹp nào bạn đã nói mà chưa làm?",
-   "nguyen_to_phu": "khi",
-   "ten_nguyen_to_phu": "Khí của Nước",
+   "nguyen_to_phu": "hoa",
+   "ten_nguyen_to_phu": "Lửa của Nước",
    "nhan_vat": "Người lãng mạn, đề nghị bằng tim; khi lệch thành hứa suông.",
    "trich": [
     {
@@ -4432,9 +5102,9 @@
     },
     {
      "sach": "book_t",
-     "ten": "The Prince of the Chariot of the Waters",
-     "nguyen_van": "If ill dignified, he is intensely evil and merciless.",
-     "nghia": "Book T (Hoàng tử Cốc = Hiệp sĩ Cốc RWS): khi bị kìm — rất xấu và không khoan nhượng."
+     "ten": "The Lord of the Waves and the Waters; The King of the Hosts of the Sea",
+     "nguyen_van": "Ill dignified, he is sensual, idle and untruthful.",
+     "nghia": "Book T (Vua Cốc — người cưỡi ngựa, ứng Hiệp sĩ Cốc của Waite): khi bị kìm — ham khoái lạc, lười, không thật."
     },
     {
      "sach": "mathers_1888",
@@ -4442,7 +5112,25 @@
      "nguyen_van_nguoc": "Duplicity, Abuse of Confidence, Fraud, Cunning",
      "nghia": "Mathers: tới nơi, đến gần, tiến lên; ngược: hai mặt, lạm dụng lòng tin, gian lận."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "bao_binh",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Lời đẹp mà chưa có việc đi kèm; xem người kia giữ hẹn thế nào trong vài tuần.",
+    "cong_viec": "Đề nghị hấp dẫn mà điều khoản mờ; đòi văn bản rõ trước khi nhận lời.",
+    "tien_bac": "Lời hứa tiền từ quan hệ; chưa có giấy thì chưa tính, không cho vay vì cảm tình.",
+    "suc_khoe": "Sống theo hứng, ăn ngủ lệch; giữ nếp đơn giản, đi bộ gần nước, ngủ đúng giờ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của lời mời, đề nghị đến gần. Điều cần xem: lời mời có điều kiện cụ thể chứ đừng chỉ có lời đẹp.",
+    "n": "Chưa nên vội: lá ngược hay đi cùng lời hứa suông. Xin văn bản hoặc chờ việc làm thật trước khi đồng ý."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "coc_hoang_hau": {
    "id": "coc_hoang_hau",
@@ -4518,7 +5206,25 @@
      "nguyen_van_nguoc": "A Woman in good position, but intermeddling, and to be distrusted; Success, but with some attendant trouble",
      "nghia": "Mathers: người phụ nữ sáng, thành công, hạnh phúc, lợi, vui; ngược: phụ nữ có vị thế nhưng hay xen vào, không đáng tin; thành công kèm rắc rối."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "song_tu",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Lo cho người kia tới quên mình; đặt một ranh giới nhỏ, giữ một buổi mỗi tuần cho riêng bạn.",
+    "cong_viec": "Gánh cảm xúc của cả đội; lắng nghe có giới hạn, chuyển việc khó cho đúng người.",
+    "tien_bac": "Chi cho người thân quá tay; tách một phần tiền cho mình trước, phần còn lại mới cho.",
+    "suc_khoe": "Ngập trong chuyện người khác nên mệt; ngủ đủ, bớt nghe tin buồn, đi dạo một mình."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của người thấu cảm, biết lắng nghe. Điều cần xem: việc này có giữ được sức của bạn mà vẫn lo được cho người khác.",
+    "n": "Có, nếu giữ được ranh giới: lá ngược cho thấy bạn đang gánh thay chăm. Xem việc này là của mình hay của người khác trước."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "coc_vua": {
    "id": "coc_vua",
@@ -4529,7 +5235,7 @@
    "bo": "coc",
    "nguyen_to": "thuy",
    "chiem_tinh": null,
-   "thoth_ten": "Lord of the Waves and the Waters; King of the Hosts of the Sea",
+   "thoth_ten": "Prince of the Chariot of the Waters",
    "tdm_ten": "Roi de Coupe",
    "huong_nhin": -1,
    "sac_thai": "trung",
@@ -4559,8 +5265,8 @@
      "loi": "Waite: vua giữa biển — 'người công bằng, nghệ thuật, khoa học, sẵn lòng giúp'."
     },
     "thoth": {
-     "ten": "Lord of the Waves and the Waters; King of the Hosts of the Sea",
-     "loi": "Lord of the Waves and the Waters — Lửa của Nước: tình có sức; mặt tối là lạnh và thao túng."
+     "ten": "Prince of the Chariot of the Waters",
+     "loi": "Prince of the Chariot of the Waters — Khí của Nước: tình có lời; mặt tối là giả dối ngọt."
     },
     "tdm": {
      "ten": "Roi de Coupe",
@@ -4572,8 +5278,8 @@
    },
    "viec": "Nói với một người về một điều bạn đã giữ trong lòng hơn một tháng.",
    "cau_tu_soi": "Bạn đang nén cái gì dưới vẻ bình tĩnh?",
-   "nguyen_to_phu": "hoa",
-   "ten_nguyen_to_phu": "Lửa của Nước",
+   "nguyen_to_phu": "khi",
+   "ten_nguyen_to_phu": "Khí của Nước",
    "nhan_vat": "Người điềm tĩnh, bao dung, cố vấn; khi lệch thành đè nén hoặc thao túng.",
    "trich": [
     {
@@ -4584,9 +5290,9 @@
     },
     {
      "sach": "book_t",
-     "ten": "The Lord of the Waves and the Waters; The King of the Hosts of the Sea",
-     "nguyen_van": "Ill dignified, he is sensual, idle and untruthful.",
-     "nghia": "Book T (Hiệp sĩ Cốc = Vua Cốc RWS): khi bị kìm — ham khoái lạc, lười, không thật."
+     "ten": "The Prince of the Chariot of the Waters",
+     "nguyen_van": "If ill dignified, he is intensely evil and merciless.",
+     "nghia": "Book T (Hoàng tử Cốc — người trên cỗ xe, ứng Vua Cốc của Waite): khi bị kìm — rất xấu và không khoan nhượng."
     },
     {
      "sach": "mathers_1888",
@@ -4594,7 +5300,25 @@
      "nguyen_van_nguoc": "A Man of good position, but shifty in his Dealings, Distrust, Doubt, Suspicion",
      "nghia": "Mathers: người đàn ông sáng, tốt lành, tử tế, hào phóng; ngược: người có vị thế nhưng lắt léo; nghi ngờ, không tin."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "thien_binh",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Nén cảm xúc hoặc dùng im lặng để giữ thế; nói ra một điều đang giữ trong lòng, bằng giọng bình thường.",
+    "cong_viec": "Giữ mặt bình tĩnh mà trong căng; ghi lại việc khiến bạn khó chịu và bàn với người liên quan.",
+    "tien_bac": "Cho vay vì nể, hoặc giấu chuyện tiền; đưa mọi khoản vay cho mượn ra giấy tờ rõ.",
+    "suc_khoe": "Nén cảm xúc bằng ăn uống, thức khuya; tìm cách xả lành như đi bộ, viết, đi khám định kỳ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá của người điềm tĩnh, cân nhắc kỹ. Điều cần xem: bạn quyết bằng lý lẫn lòng, không nén điều chưa ổn.",
+    "n": "Chưa nên vội: lá ngược cho thấy cảm xúc đang bị nén hoặc bị dùng để ép. Nói ra điều còn vướng trước khi quyết."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "kiem_1": {
    "id": "kiem_1",
@@ -4663,7 +5387,21 @@
      "nguyen_van_nguoc": "Embarrassment, Foolish and Hopeless Love, Obstacle, Hindrance",
      "nghia": "Mathers: khải hoàn, sinh sôi, thịnh vượng; ngược: lúng túng, tình yêu dại và vô vọng, trở ngại."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Lời nói ra sắc mà chưa rõ ý, dễ làm đau nhau. Trước khi nói chuyện lớn, viết ra điều mình thật sự muốn nói trong một câu.",
+    "cong_viec": "Ý tưởng còn rối, dễ cãi để thắng hơn là để rõ. Tách vấn đề thành ba gạch đầu dòng rồi mới trình bày.",
+    "tien_bac": "Quyết định tiền đang vội hoặc dựa trên thông tin sai. Đọc lại điều khoản, hỏi thêm một người, chưa ký vội.",
+    "suc_khoe": "Đầu óc quá tải, nghĩ nhiều mà không ra ý. Ghi việc ra giấy trước giờ ngủ, tắt màn hình sớm hơn nửa tiếng."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này ủng hộ một quyết định rõ ràng. Điều kiện là bạn nói được lý do trong một câu và chịu nói thật với người liên quan.",
+    "n": "Chưa nên quyết khi đầu còn rối: lý lẽ đang sắc mà chưa sáng. Kiểm lại thông tin, đợi tới khi bạn giải thích được mà không gắt."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "kiem_2": {
    "id": "kiem_2",
@@ -4742,7 +5480,21 @@
      "nguyen_van_nguoc": "False Friends, Treachery, Lies",
      "nghia": "Mathers: tình bạn, dũng cảm, vững vàng; ngược: bạn giả, phản bội, dối trá."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Chuyện né lâu nay buộc phải nói ra. Chọn một lúc bình tĩnh, nói điều mình thấy bằng câu ngắn, không đổ lỗi.",
+    "cong_viec": "Hết đường hoãn: quyết định phải đưa ra, điều giấu dễ lộ. Gom thông tin còn thiếu trong vài ngày rồi chọn.",
+    "tien_bac": "Khoản tiền để treo lâu giờ cần xử lý. Kê hai phương án với số thật, chọn cái ít rủi ro hơn, đừng vay thêm để kéo dài.",
+    "suc_khoe": "Căng cứng vì nén lâu bắt đầu đòi xả. Nói ra một nỗi lo với người tin, ngủ đúng giờ vài hôm liền."
+   },
+   "tra_loi": {
+    "x": "Chưa nên quyết ngay: bạn đang bịt mắt, tránh nhìn một phía của chuyện. Gỡ khăn trước — thu thông tin còn thiếu và tự đặt một ngày chọn.",
+    "n": "Có thể làm, với điều kiện bạn nhìn thẳng điều mình sợ. Lá ngược đẩy bạn tới chỗ phải chọn; chọn bằng thông tin, không phải vì bị dồn."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "kiem_3": {
    "id": "kiem_3",
@@ -4821,7 +5573,21 @@
      "nguyen_van_nguoc": "Error, Confusion, Misrule, Disorder",
      "nghia": "Mathers: nữ tu, chia cách, dời đi, đứt gãy, cãi vã; ngược: sai lầm, rối, lộn xộn."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Vết đau trong quan hệ bắt đầu dịu, hoặc đang bị giữ quá lâu. Nói ra điều từng làm mình đau, với người kia hoặc bạn thân.",
+    "cong_viec": "Sau lời phê bình hay mất mát, bạn đang gượng dậy. Lấy phần đúng làm bài học, bỏ phần làm mình nhỏ đi, rồi làm tiếp.",
+    "tien_bac": "Khoản mất trước đây còn làm bạn chùn tay. Kê lại số thật, khép sổ cũ, giữ quỹ dự phòng trước khi tính khoản mới.",
+    "suc_khoe": "Nỗi buồn lắng xuống, nhịp ngủ dần về. Cho mình đi bộ, ăn đúng bữa; buồn kéo dài thì tìm người chuyên môn để nói chuyện."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: lúc này lòng đang đau, quyết định dễ là phản ứng với vết thương. Đợi qua cơn, nói chuyện với người tin rồi hẵng chọn.",
+    "n": "Có thể, nếu bạn đã nhìn thẳng vết thương cũ. Lá ngược cho thấy đang lành; tiến được khi bạn không mang cơn đau vào quyết định mới."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "kiem_4": {
    "id": "kiem_4",
@@ -4900,7 +5666,21 @@
      "nguyen_van_nguoc": "Economy, Precaution, Regulation of Expenditure",
      "nghia": "Mathers: cô độc, rút lui, bỏ lại, ẩn sĩ; ngược: tiết kiệm, đề phòng, chi tiêu có kỷ luật."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Đã đủ bình tĩnh để nói lại chuyện cũ, hoặc đang cố gồng không chịu lùi. Hẹn một buổi nói chuyện lúc cả hai không mệt.",
+    "cong_viec": "Nghỉ xong, quay lại việc; hoặc làm liền không nghỉ tới cạn sức. Lên lịch quay lại từ việc nhỏ, giữ một ngày nghỉ trong tuần.",
+    "tien_bac": "Thời gian để tiền yên đã đủ, có thể xem lại kế hoạch. Đi từ khoản nhỏ, đừng dồn mọi thứ vào một lần.",
+    "suc_khoe": "Cơ thể đòi nghỉ mà bạn chưa cho. Ngủ bù có giờ giấc, bớt việc buổi tối; mệt kéo dài nhiều tuần thì đi khám."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: lá này bảo nghỉ trước, quyết sau. Cho mình vài ngày yên rồi xem lại; quyết lúc kiệt sức dễ chọn sai.",
+    "n": "Có, nếu bạn đã nghỉ đủ. Lá ngược là lúc quay lại; kiểm xem mình hồi sức thật, hay đang làm tiếp để khỏi phải dừng."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "kiem_5": {
    "id": "kiem_5",
@@ -4979,7 +5759,21 @@
      "nguyen_van_nguoc": "Losses Trouble (same signification, whether reversed or not.)",
      "nghia": "Mathers: tang, buồn, khổ; ngược: mất mát, rắc rối (xuôi ngược như nhau)."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Cuộc cãi bắt đầu hạ nhiệt, có chỗ để làm lành. Nhận phần lỗi của mình trước, nói một câu xin lỗi không kèm chữ 'nhưng'.",
+    "cong_viec": "Bạn có thể rút khỏi cuộc tranh hơn thua ở chỗ làm. Nói thẳng điều mình cần, bỏ những trận không đáng.",
+    "tien_bac": "Khoản tranh chấp có thể khép lại nếu chịu nhường một ít. Ghi rõ thoả thuận bằng giấy, đừng đòi cho bằng được.",
+    "suc_khoe": "Căng thẳng vì va chạm dịu dần. Xả bằng vận động nhẹ, ngủ đủ, tránh lướt lại các tin nhắn gây bực."
+   },
+   "tra_loi": {
+    "x": "Chưa nên làm: thắng việc này có thể khiến bạn mất người hoặc mất uy tín. Hỏi mình được gì nếu thắng; nếu chỉ là thắng thua, dừng lại.",
+    "n": "Có thể, nếu bạn buông được chuyện hơn thua. Lá ngược mở đường làm lành; tiến khi đã nói rõ với người liên quan và không còn để bụng."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "kiem_6": {
    "id": "kiem_6",
@@ -5058,7 +5852,21 @@
      "nguyen_van_nguoc": "Declaration, Love proposed, Revelation, Surprise",
      "nghia": "Mathers: sứ giả, người đưa tin, chuyến đi; ngược: tuyên bố, tỏ tình, hé lộ, bất ngờ."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Muốn rời chuyện cũ nhưng vẫn mang nó theo. Viết ra điều mình chưa buông, nói với bạn thân trước khi bắt đầu mối mới.",
+    "cong_viec": "Chuyển việc chưa xong, hoặc chỗ mới vẫn mang thói quen cũ. Liệt kê điều không muốn lặp lại, xem chỗ mới có khác không.",
+    "tien_bac": "Chuyển tiền chưa thông, phí phát sinh hơn dự tính. Kiểm lại từng khoản, giữ quỹ dự phòng trước khi đổi chỗ.",
+    "suc_khoe": "Đổi chỗ mà chưa đổi nếp, mệt vẫn đi theo. Giữ giờ ngủ cố định khi chuyển, cho mình vài ngày làm quen."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này nói chuyện rời một đoạn khó sang chỗ êm hơn. Đi chậm, có kế hoạch, và nhờ người đáng tin đi cùng một đoạn.",
+    "n": "Có thể đi, nhưng đặt gánh cũ xuống trước. Kiểm xem điều khiến bạn muốn rời có theo bạn sang chỗ mới không; nếu có, đổi cách làm trước."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "kiem_7": {
    "id": "kiem_7",
@@ -5137,7 +5945,21 @@
      "nguyen_van_nguoc": "Wise Advice, Good Counsel, Wisdom, Prudence, Circumspection",
      "nghia": "Mathers: hy vọng, tự tin, ước muốn, thử; ngược: lời khuyên khôn ngoan, cố vấn tốt, thận trọng."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Chuyện giấu dễ bị lộ, hoặc bạn muốn nói thật. Nói thẳng điều mình đang né, trước khi người kia tự phát hiện.",
+    "cong_viec": "Mẹo lách ở chỗ làm không còn hiệu quả. Ghi công rõ ràng, trao đổi thẳng với người liên quan thay vì làm lén.",
+    "tien_bac": "Khoản tiền không minh bạch dễ lộ ra. Đối chiếu sổ sách, khai đủ, rút khỏi giao dịch nào phải giấu người khác.",
+    "suc_khoe": "Thói quen giấu giếm với cơ thể bị lộ dần. Thôi né việc chăm mình, đặt lịch đi khám định kỳ đã hoãn."
+   },
+   "tra_loi": {
+    "x": "Chưa nên làm: lá này nói tới cách làm lén, đi tắt. Nếu việc phải giấu ai đó mới thành, xem lại; làm khi bạn nói được công khai.",
+    "n": "Có thể, nếu bạn đặt mọi thứ lên bàn trước. Lá ngược là lúc thôi mưu mẹo; tiến được khi người liên quan đã biết rõ."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "kiem_8": {
    "id": "kiem_8",
@@ -5216,7 +6038,21 @@
      "nguyen_van_nguoc": "Treachery in the Past, Event, Accident, Remarkable Incident",
      "nghia": "Mathers: ốm, vu khống, chỉ trích, trách; ngược: phản bội trong quá khứ, biến cố, sự cố đáng nhớ."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Bắt đầu thấy mình không kẹt như đã tưởng. Thử một bước nhỏ: nói một nhu cầu thật, xem chuyện gì đổi.",
+    "cong_viec": "Dây trói ở chỗ làm lỏng ra, bạn thấy lối ra. Gửi một đề xuất, hỏi một cơ hội, đừng chờ ai cởi giúp.",
+    "tien_bac": "Bảng nợ không đáng sợ như trong đầu. Kê từng khoản, gọi hỏi điều chỉnh lịch trả, đừng vay thêm để che.",
+    "suc_khoe": "Cảm giác nghẹt dịu đi khi bạn cử động. Đi bộ mỗi ngày, tập thở chậm; lo vẫn kéo dài thì gặp người chuyên môn."
+   },
+   "tra_loi": {
+    "x": "Chưa nên quyết lúc này: bạn đang thấy mình bị trói, mà nhiều dây là do sợ. Thử một bước nhỏ trước để xem đường thật có hẹp như nghĩ không.",
+    "n": "Nghiêng về có: lá ngược là lúc cởi trói, bước ra. Điều kiện duy nhất là bạn làm bước đầu thật, đừng dừng ở nghĩ."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "tien"
+   }
   },
   "kiem_9": {
    "id": "kiem_9",
@@ -5295,7 +6131,21 @@
      "nguyen_van_nguoc": "Wise distrust, Suspicion, Fear, Doubt, Shady character",
      "nghia": "Mathers: tu sĩ, lương tâm, ngay thẳng, thiện chí; ngược: nghi ngờ có lý, sợ, không chắc, người mờ ám."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Nỗi lo về quan hệ bớt nặng khi nói ra. Hỏi thẳng điều mình sợ, vào ban ngày, thay vì đoán một mình lúc khuya.",
+    "cong_viec": "Sợ hãi về công việc lớn hơn thực tế. Kê việc ra giấy buổi sáng, đánh dấu cái nào có bằng chứng, cái nào chỉ là lo.",
+    "tien_bac": "Lo tiền dịu đi khi nhìn số thật. Kê thu chi một tháng, hỏi người biết; chia khoản lớn thành bước nhỏ.",
+    "suc_khoe": "Giấc ngủ dần về khi đầu nhẹ hơn. Giữ giờ ngủ cố định, bớt màn hình buổi tối; lo kéo dài thì gặp người chuyên môn."
+   },
+   "tra_loi": {
+    "x": "Chưa nên quyết khi đang lo nặng: nỗi sợ làm mọi lựa chọn trông tệ hơn. Đợi sáng ra, kê bằng chứng thật, hỏi một người tỉnh táo.",
+    "n": "Có thể, khi nỗi lo đã lắng. Lá ngược cho thấy bạn đang sáng ra; tiến được nếu quyết dựa trên số liệu, không dựa trên cơn lo đêm."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "kiem_10": {
    "id": "kiem_10",
@@ -5374,7 +6224,21 @@
      "nguyen_van_nguoc": "Passing Success, Momentary Advantage",
      "nghia": "Mathers: nước mắt, khổ, buồn; ngược: thành công thoáng qua, lợi nhất thời."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Đoạn đau nhất đã qua, bạn đang đứng dậy. Đừng quay lại vội; chăm mình trước, rồi mới nghĩ tới chuyện mới.",
+    "cong_viec": "Sau cú ngã, bạn có thể làm lại theo cách khác. Ghi ba bài học, bắt đầu từ một việc nhỏ chắc tay.",
+    "tien_bac": "Đáy tiền bạc đã chạm, giờ là lúc dựng lại. Lập kế hoạch trả từng khoản, giữ quỹ dự phòng nhỏ, không gỡ bằng liều.",
+    "suc_khoe": "Sức đang hồi lại sau giai đoạn kiệt. Nghỉ có lịch, ăn ngủ đều; còn mệt nhiều thì đi khám định kỳ."
+   },
+   "tra_loi": {
+    "x": "Chưa nên làm: lá này nói tới một đoạn kết, không phải lúc mở đầu. Để việc cũ khép hẳn, nghỉ lấy sức rồi mới tính bước mới.",
+    "n": "Có thể bắt đầu lại, nếu bạn đi từ bước nhỏ. Lá ngược là điều tệ nhất đã qua; tiến được khi bạn không lặp lại đúng cách cũ."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "kiem_tieu_dong": {
    "id": "kiem_tieu_dong",
@@ -5450,7 +6314,21 @@
      "nguyen_van_nguoc": "That which is unforeseen, Vigilance, Support",
      "nghia": "Mathers: kẻ do thám, giám sát, quyền; ngược: điều bất ngờ, cảnh giác, chỗ dựa."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Dò xét, soi tin nhắn hay nghe chuyện qua người khác làm quan hệ mỏng đi. Hỏi thẳng một câu, rồi tin vào câu trả lời bạn nghe.",
+    "cong_viec": "Tin đồn ở chỗ làm, lời nói trước nghĩ sau. Kiểm nguồn trước khi chuyển tiếp, giữ câu chuyện riêng cho riêng mình.",
+    "tien_bac": "Tin tiền nghe qua người khác chưa có nguồn. Đừng xuống tiền theo lời truyền tai; tự kiểm, hỏi nơi chính thức.",
+    "suc_khoe": "Nghĩ nhiều, ngủ ít, đầu luôn bật. Tắt thông báo buổi tối, tập thở chậm vài phút trước giờ ngủ."
+   },
+   "tra_loi": {
+    "x": "Có thể, nhưng hỏi thêm trước đã: lá này là người tò mò, nhanh nhạy, thông tin còn mỏng. Kiểm nguồn, hỏi người trong cuộc rồi mới quyết.",
+    "n": "Chưa nên quyết: thông tin đang lẫn tin vịt, lời đồn. Tìm nguồn chính thức; nếu chỉ dựa vào chuyện nghe kể, chờ thêm."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "cho"
+   }
   },
   "kiem_hiep_si": {
    "id": "kiem_hiep_si",
@@ -5461,7 +6339,7 @@
    "bo": "kiem",
    "nguyen_to": "khi",
    "chiem_tinh": null,
-   "thoth_ten": "Prince of the Chariot of the Winds",
+   "thoth_ten": "Lord of the Winds and the Breezes; King of the Spirits of Air",
    "tdm_ten": "Cavalier de Épée",
    "huong_nhin": -1,
    "sac_thai": "trung",
@@ -5491,8 +6369,8 @@
      "loi": "Waite: kỵ sĩ 'lao như gió' — kỹ năng, dũng, giận, chiến tranh."
     },
     "thoth": {
-     "ten": "Prince of the Chariot of the Winds",
-     "loi": "Prince of the Chariot of the Winds — Khí của Khí: thuần trí; mặt tối là cắt không nhìn."
+     "ten": "Lord of the Winds and the Breezes; King of the Spirits of Air",
+     "loi": "Lord of the Winds and the Breezes — Lửa của Khí: trí có lửa; mặt tối là bạo bằng lời."
     },
     "tdm": {
      "ten": "Cavalier de Épée",
@@ -5504,8 +6382,8 @@
    },
    "viec": "Trước cuộc tranh luận gần nhất: viết ba lý của bạn, rồi viết ba lý của người kia.",
    "cau_tu_soi": "Bạn đang phi về phía ai với thanh kiếm?",
-   "nguyen_to_phu": "khi",
-   "ten_nguyen_to_phu": "Khí của Khí",
+   "nguyen_to_phu": "hoa",
+   "ten_nguyen_to_phu": "Lửa của Khí",
    "nhan_vat": "Người quyết liệt, nhanh, sắc; khi lệch thành gắt và bất chấp.",
    "trich": [
     {
@@ -5516,9 +6394,9 @@
     },
     {
      "sach": "book_t",
-     "ten": "The Prince of the Chariot of the Winds",
-     "nguyen_van": "If ill dignified: harsh, malicious, plotting; obstinate, yet hesitating; unreliable.",
-     "nghia": "Book T (Hoàng tử Kiếm = Hiệp sĩ Kiếm RWS): khi bị kìm — khắc nghiệt, ác ý, mưu mô; cố chấp mà do dự."
+     "ten": "The Lord of the Winds and the Breezes; he King of the Spirits of Air",
+     "nguyen_van": "Also to overvalue small things, unless well dignified.",
+     "nghia": "Book T (Vua Kiếm — người cưỡi ngựa, ứng Hiệp sĩ Kiếm của Waite): dễ xem trọng việc nhỏ quá mức nếu không được tiếp sức."
     },
     {
      "sach": "mathers_1888",
@@ -5526,7 +6404,25 @@
      "nguyen_van_nguoc": "A conceited fool, Ingenuousness, Simplicity",
      "nghia": "Mathers: người lính, nhà binh, khéo, có năng lực, nhanh nhẹn; ngược: kẻ tự phụ, ngây ngô, giản đơn."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "kim_nguu",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Lời nói nhanh và gắt dễ làm vỡ chuyện nhỏ thành lớn. Dừng mười giây trước khi trả lời; nói điều cần, bỏ điều để thắng.",
+    "cong_viec": "Lao vào việc bất chấp, đẩy người khác ra. Chậm lại, hỏi đội một câu trước khi chốt.",
+    "tien_bac": "Quyết tiền nhanh mà thiếu cân nhắc dễ hớ. Ngủ qua một đêm trước khi ký, kiểm lại số và điều khoản.",
+    "suc_khoe": "Nhịp sống quá gấp, đầu căng như dây đàn. Giảm cà phê, ngủ đủ, đi chậm khi lái xe."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có, và nhanh: lá này là lúc hành động dứt khoát. Đi tới, nhưng kiểm lại một lần trước khi ký, và đừng đạp lên người cùng làm.",
+    "n": "Chưa nên vội: lá ngược là lao đi bất chấp. Chậm lại, hỏi ý một người khác, xem mình đang theo lý lẽ hay đang theo cơn nóng."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "kiem_hoang_hau": {
    "id": "kiem_hoang_hau",
@@ -5602,7 +6498,25 @@
      "nguyen_van_nguoc": "A Bad Woman, ill-tempered and bigoted, Riches and Discord, Abundance together with Worry, Joy with Grief",
      "nghia": "Mathers: goá, mất, thiếu thốn, vắng, chia cách; ngược: người phụ nữ xấu tính, cố chấp; giàu mà bất hoà, vui lẫn buồn."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "xu_nu",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Bức tường bạn dựng lên đang giữ mọi người ở xa. Chọn một người tin, kể một điều thật, không cần lý lẽ kèm theo.",
+    "cong_viec": "Thẳng tới mức cay, góp ý thành chỉ trích. Khen một điều trước, góp một điều sau; nói về việc, không nói về người.",
+    "tien_bac": "Cắt chi quá tay khiến mình và người nhà ngột. Giữ khoản cần cho niềm vui nhỏ, rà lại phần cắt có hợp lý không.",
+    "suc_khoe": "Giữ cảm xúc trong lòng làm cơ thể căng. Viết nhật ký mười phút mỗi tối, ngủ đúng giờ, gặp bạn bè."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này hợp quyết định bằng đầu tỉnh, có ranh giới rõ. Nên làm khi bạn đã xét thông tin đủ và không để cảm xúc nhất thời dẫn đường.",
+    "n": "Chưa nên quyết lúc đang đóng cửa với mọi người: lá ngược là lạnh, cay. Nghe thêm một người bạn tin, xem lựa chọn có làm mình cô lập không."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "kiem_vua": {
    "id": "kiem_vua",
@@ -5613,7 +6527,7 @@
    "bo": "kiem",
    "nguyen_to": "khi",
    "chiem_tinh": null,
-   "thoth_ten": "Lord of the Winds and the Breezes; King of the Spirits of Air",
+   "thoth_ten": "Prince of the Chariot of the Winds",
    "tdm_ten": "Roi de Épée",
    "huong_nhin": 0,
    "sac_thai": "trung",
@@ -5643,8 +6557,8 @@
      "loi": "Waite: vua ngồi phán — 'quyền lực, lệnh, uy, luật'."
     },
     "thoth": {
-     "ten": "Lord of the Winds and the Breezes; King of the Spirits of Air",
-     "loi": "Lord of the Winds and the Breezes — Lửa của Khí: trí có lửa; mặt tối là bạo bằng lời."
+     "ten": "Prince of the Chariot of the Winds",
+     "loi": "Prince of the Chariot of the Winds — Khí của Khí: thuần trí; mặt tối là cắt không nhìn."
     },
     "tdm": {
      "ten": "Roi de Épée",
@@ -5656,8 +6570,8 @@
    },
    "viec": "Viết một nguyên tắc rõ cho chuyện này (một dòng) và áp dụng nó công bằng với chính mình trước.",
    "cau_tu_soi": "Bạn đang xử ai bằng luật mà không hỏi họ?",
-   "nguyen_to_phu": "hoa",
-   "ten_nguyen_to_phu": "Lửa của Khí",
+   "nguyen_to_phu": "khi",
+   "ten_nguyen_to_phu": "Khí của Khí",
    "nhan_vat": "Người phân xử bằng lý, uy nghiêm; khi lệch thành lạnh và áp đặt.",
    "trich": [
     {
@@ -5668,9 +6582,9 @@
     },
     {
      "sach": "book_t",
-     "ten": "The Lord of the Winds and the Breezes; he King of the Spirits of Air",
-     "nguyen_van": "Also to overvalue small things, unless well dignified.",
-     "nghia": "Book T (Hiệp sĩ Kiếm = Vua Kiếm RWS): dễ xem trọng việc nhỏ quá mức nếu không được tiếp sức."
+     "ten": "The Prince of the Chariot of the Winds",
+     "nguyen_van": "If ill dignified: harsh, malicious, plotting; obstinate, yet hesitating; unreliable.",
+     "nghia": "Book T (Hoàng tử Kiếm — người trên cỗ xe, ứng Vua Kiếm của Waite): khi bị kìm — khắc nghiệt, ác ý, mưu mô; cố chấp mà do dự."
     },
     {
      "sach": "mathers_1888",
@@ -5678,7 +6592,25 @@
      "nguyen_van_nguoc": "A Wicked Man, Chagrin, Worry, Grief, Fear, Disturbance",
      "nghia": "Mathers: luật sư, người của luật, quyền lực, mệnh lệnh, uy quyền; ngược: người xấu, bực, lo, buồn, sợ, xáo trộn."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "ma_ket",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Lý lẽ bị dùng để ép người kia phải nghe. Hỏi người kia cảm thấy thế nào trước khi chứng minh ai đúng.",
+    "cong_viec": "Quyền được dùng cứng nhắc, nghe thì ít, ra lệnh thì nhiều. Mời người dưới góp một ý và thật sự cân nhắc nó.",
+    "tien_bac": "Nguyên tắc tiền bị dùng để giữ quyền trên người khác. Minh bạch số, hỏi luật sư hoặc người chuyên môn khi có hợp đồng lớn.",
+    "suc_khoe": "Gồng cứng, lý trí kéo mãi không nghỉ. Giãn cơ cổ vai mỗi giờ, ngủ đủ, bớt làm việc buổi tối."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này đứng về phía quyết định có nguyên tắc, có số liệu. Làm khi bạn đã đọc kỹ giấy tờ và có thể giải thích công bằng với mọi người.",
+    "n": "Chưa nên làm: lá ngược là dùng lý hay quyền để ép. Kiểm xem quyết định này có công bằng với người bị ảnh hưởng không; hỏi người chuyên môn."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "tien_1": {
    "id": "tien_1",
@@ -5747,7 +6679,21 @@
      "nguyen_van_nguoc": "Purse of Gold, Money, Gain, Help, Profit, Riches",
      "nghia": "Mathers: hài lòng trọn vẹn, hạnh phúc, thịnh vượng, khải hoàn; ngược: túi vàng, tiền, lợi, giúp đỡ, của cải."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Có cơ hội gần nhau mà chưa chịu gieo. Làm một việc nhỏ thật trong tuần này, thay cho lời hứa lớn.",
+    "cong_viec": "Cơ hội việc trôi qua vì chần chừ hoặc đòi quá nhiều. Trả lời lời mời còn treo, bắt đầu từ phần việc nhỏ nhất.",
+    "tien_bac": "Tiền mới vào dễ tiêu ngay, chưa kịp gieo. Tách một phần cố định vào quỹ dự phòng trước khi chi.",
+    "suc_khoe": "Nếp lành định bắt đầu cứ lùi mãi. Chọn một thói quen nhỏ nhất, làm ngay hôm nay, mười phút thôi."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này là một khởi đầu có nền, chạm được. Nhận lấy, bắt đầu từ bước nhỏ, và chắc rằng bạn có thời gian chăm nó.",
+    "n": "Có thể, nếu bạn không để lỡ thêm. Lá ngược nói cơ hội dễ trôi hoặc bị chờ quá lâu; làm bước đầu sớm, đừng đòi kết quả ngay."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "tien_2": {
    "id": "tien_2",
@@ -5826,7 +6772,21 @@
      "nguyen_van_nguoc": "Letter, Missive, Epistle, Message",
      "nghia": "Mathers: lúng túng, lo, khó khăn; ngược: thư, tin nhắn, thông điệp."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Lo quá nhiều việc, người thương bị đẩy xuống cuối. Dành một buổi trong tuần chỉ cho hai người, tắt điện thoại.",
+    "cong_viec": "Nhận quá tay, bóng bắt đầu rơi. Bỏ hoặc hoãn một việc, báo sớm cho người liên quan thay vì để trễ.",
+    "tien_bac": "Xoay tiền chỗ này đắp chỗ kia tới mất cân. Kê dòng tiền ra giấy, đừng vay thêm để lấp, ưu tiên khoản sát hạn.",
+    "suc_khoe": "Nhịp sống loạn vì ôm nhiều thứ. Giữ cố định bữa ăn và giờ ngủ, bớt một cam kết trong tuần."
+   },
+   "tra_loi": {
+    "x": "Có thể làm cả hai, nếu bạn xếp được lịch. Lá này là cân hai việc; tiến khi đã biết mỗi việc chiếm bao nhiêu giờ và không nhận thêm.",
+    "n": "Chưa nên nhận thêm: lá ngược là quá tải, rớt bóng. Gỡ bớt một việc đang ôm trước, rồi mới xem có sức cho việc mới không."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "cho"
+   }
   },
   "tien_3": {
    "id": "tien_3",
@@ -5905,7 +6865,21 @@
      "nguyen_van_nguoc": "Children, Sons, Daughters, Youths, Commencement",
      "nghia": "Mathers: quý tộc, thăng tiến, phẩm giá, địa vị, quyền; ngược: con cái, người trẻ, khởi đầu."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Hai người làm mỗi người một kiểu, không ai nghe ai. Ngồi lại bàn một việc chung, chia rõ ai làm phần nào.",
+    "cong_viec": "Nhóm thiếu phối hợp, làm cẩu thả cho xong. Họp ngắn chốt lại bản kế hoạch chung, ghi rõ hạn của từng người.",
+    "tien_bac": "Tiền bỏ vào việc chung mà thiếu thoả thuận rõ. Ghi giấy tờ phần góp của từng người trước khi bỏ thêm.",
+    "suc_khoe": "Tập luyện thiếu kế hoạch, làm theo hứng. Hỏi người hướng dẫn có chuyên môn, đi khám định kỳ để có số liệu."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này hợp việc làm cùng người khác, có tay nghề, có kế hoạch. Tiến khi mỗi người biết phần mình và có người được nghe ý kiến.",
+    "n": "Có thể, nếu sửa được cách phối hợp. Lá ngược là thiếu bản vẽ chung; chốt kế hoạch, chia việc rõ rồi mới bắt tay."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "tien_4": {
    "id": "tien_4",
@@ -5984,7 +6958,21 @@
      "nguyen_van_nguoc": "Obstacles, Hindrances",
      "nghia": "Mathers: niềm vui, vui vẻ, hưởng thụ, hài lòng; ngược: trở ngại, cản trở."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Giữ người quá chặt, hoặc bắt đầu chịu nới tay. Hỏi người kia cần chỗ riêng thế nào, và cho thật.",
+    "cong_viec": "Bám ghế, ngại đổi, hoặc bắt đầu chịu thử cái mới. Nhận một việc ngoài vùng quen, nhỏ thôi.",
+    "tien_bac": "Giữ tiền tới mức căng với người nhà, hoặc chi buông quá đà. Đặt một mức chi rõ cho mỗi tháng, giữ quỹ dự phòng.",
+    "suc_khoe": "Người gồng lâu bắt đầu muốn thả. Giãn cơ mỗi sáng, nghỉ đúng giờ, cho phép mình chậm một chút."
+   },
+   "tra_loi": {
+    "x": "Có thể, nếu bạn dám nới tay. Lá này là giữ chặt điều đang có; việc mới chỉ thành khi bạn chịu chia ra một phần thời gian hay tiền cho nó.",
+    "n": "Có thể, khi bạn buông đúng chỗ. Lá ngược là bắt đầu thả, hoặc giữ tới mất người; kiểm xem mình buông vì đã nghĩ kỹ hay vì quá mỏi."
+   },
+   "nghieng": {
+    "x": "dieu_kien",
+    "n": "dieu_kien"
+   }
   },
   "tien_5": {
    "id": "tien_5",
@@ -6063,7 +7051,21 @@
      "nguyen_van_nguoc": "Disgraceful Love, Imprudence, License, Profligacy",
      "nghia": "Mathers: người yêu, tình yêu, dịu ngọt, tình trong sáng; ngược: tình yêu đáng xấu hổ, thiếu thận trọng, phóng túng."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Giai đoạn thấy mình lẻ loi đang qua dần. Nói rõ điều mình cần, và nhận khi có người đưa tay.",
+    "cong_viec": "Có người sẵn lòng giúp nếu bạn mở lời. Gửi lời nhờ giới thiệu việc, nhận việc tạm trong lúc tìm.",
+    "tien_bac": "Đoạn túng đang lùi nếu bạn chịu hỏi hỗ trợ. Kê nợ thật, nói chuyện lịch trả với chủ nợ, đừng vay thêm để che.",
+    "suc_khoe": "Sức đang hồi khi bạn chăm mình trở lại. Ăn đủ bữa, ngủ đủ giấc, đi khám định kỳ đã hoãn."
+   },
+   "tra_loi": {
+    "x": "Chưa nên làm lúc này: lá này là đoạn thiếu thốn, sức đang mỏng. Lo phần nền trước — tiền ăn, chỗ ở, người giúp — rồi mới tính việc mới.",
+    "n": "Có thể, nếu bạn chịu gõ cửa. Lá ngược là được giúp, qua đoạn khó; tiến khi đã nhờ đúng người và có chỗ dựa tối thiểu."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "tien_6": {
    "id": "tien_6",
@@ -6142,7 +7144,21 @@
      "nguyen_van_nguoc": "Ambition, Desire, Passion, Aim, Longing",
      "nghia": "Mathers: quà tặng, sự hài lòng; ngược: tham vọng, ham muốn, đam mê, mục tiêu, khao khát."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Cho đi mà kèm điều kiện, hoặc nhận rồi thấy nợ. Nói rõ mình cho vì muốn, không cần trả, hoặc từ chối nhẹ nhàng.",
+    "cong_viec": "Hỗ trợ, thưởng phạt chia không đều, có người thấy thiệt. Xin tiêu chí rõ ràng, chia công minh bạch.",
+    "tien_bac": "Cho vay, cho mượn làm quan hệ căng. Ghi giấy rõ ràng, chỉ cho mượn khoản mình mất được, giữ quỹ dự phòng.",
+    "suc_khoe": "Cho người khác nhiều tới cạn phần mình. Chừa giờ nghỉ riêng, nhận giúp đỡ khi cần mà không thấy nợ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này là cho – nhận đúng mức, có người sẵn lòng hỗ trợ. Tiến khi điều kiện hai bên rõ, không ai phải mang ơn nặng.",
+    "n": "Có thể, nhưng xem lại cán cân trước. Lá ngược là cho để giữ quyền, hoặc nhận mà mang nợ; làm khi điều kiện được nói rõ bằng lời."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "tien_7": {
    "id": "tien_7",
@@ -6221,7 +7237,21 @@
      "nguyen_van_nguoc": "Disturbance, Worry, Anxiety, Melancholy",
      "nghia": "Mathers: tiền, tài chính, kho báu, lợi; ngược: xáo trộn, lo, bất an, u sầu."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Sốt ruột muốn quan hệ đi nhanh, hoặc bỏ cuộc trước khi hiểu nhau. Nhìn lại đã nuôi những gì, chọn tiếp tục hay dừng cho rõ.",
+    "cong_viec": "Bỏ dở trước khi việc chín, hoặc dồn sức nhầm chỗ. Xem lại chỉ số ba tháng, giữ phần đang lên, cắt phần không ra gì.",
+    "tien_bac": "Sốt ruột rút tiền sớm hoặc đổ thêm vào chỗ không rõ. Kiểm lại số, đừng vay thêm để dồn, giữ quỹ dự phòng.",
+    "suc_khoe": "Bỏ thói quen tốt vì chưa thấy kết quả. Giữ thêm một tháng, ghi lại thay đổi nhỏ, đi khám định kỳ để có số."
+   },
+   "tra_loi": {
+    "x": "Chưa nên vội: lá này là lúc đứng nhìn vườn, mùa chưa tới. Kiên nhẫn có hạn — đặt một mốc để xem lại số, rồi mới quyết làm tiếp hay đổi.",
+    "n": "Nên đổi cách làm trước: lá ngược là sốt ruột hoặc dồn sức nhầm chỗ. Xem lại chỗ đang bỏ công; làm tiếp ở chỗ có kết quả."
+   },
+   "nghieng": {
+    "x": "cho",
+    "n": "dieu_kien"
+   }
   },
   "tien_8": {
    "id": "tien_8",
@@ -6300,7 +7330,21 @@
      "nguyen_van_nguoc": "Flattery, Usury, Hypocrisy, Shifty",
      "nghia": "Mathers: cô gái tóc sẫm, đẹp, thật thà, trong sáng, khiêm tốn; ngược: nịnh, cho vay lãi, đạo đức giả, lắt léo."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Chăm nhau qua loa cho có, hoặc đòi hoàn hảo tới mệt. Làm một việc nhỏ cho người kia mỗi ngày, không cần đẹp.",
+    "cong_viec": "Làm lặp tới chán, hoặc cầu toàn mãi không xong. Đặt hạn nộp, học thêm một kỹ năng mới để đổi nhịp.",
+    "tien_bac": "Thu nhập từ tay nghề chững lại vì làm cho có. Kiểm lại giá công, dành thời gian học thêm nghề, giữ khoản tiết kiệm đều.",
+    "suc_khoe": "Tập luyện thành nhàm, dễ bỏ. Đổi bài tập, giữ giờ ngủ đều; thói quen nhỏ vẫn hơn đợt lớn bỏ dở."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này đứng về phía việc làm chăm, học nghề, tiến từng ngày. Tiến khi bạn sẵn sàng bỏ công đều, không mong kết quả ngay.",
+    "n": "Có thể, nếu bạn đổi nhịp làm. Lá ngược là làm cho có hoặc cầu toàn không xong; đặt hạn rõ, xem mình đang luyện hay chỉ đang lặp."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "tien_9": {
    "id": "tien_9",
@@ -6379,7 +7423,21 @@
      "nguyen_van_nguoc": "Deceit, Bad faith, Artifices, Deception",
      "nghia": "Mathers: kín đáo, thận trọng, sáng suốt; ngược: lừa, bội tín, mưu mẹo."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Đủ đầy mà thấy một mình, hoặc dựa dẫm vào người kia. Mời một người vào đời mình thật sự, kể cả chuyện chưa đẹp.",
+    "cong_viec": "Thành quả cá nhân nhưng thiếu người chia sẻ, hoặc phụ thuộc một nguồn. Kết nối lại đồng nghiệp, mở thêm một kênh việc.",
+    "tien_bac": "Phụ thuộc tiền của người khác, hoặc chi để khoe. Tự lập một khoản riêng, kiểm lại chi tiêu cho hình ảnh.",
+    "suc_khoe": "Chăm chút bề ngoài mà quên nhịp sống. Giữ giờ ngủ, ra ngoài gặp người, đi khám định kỳ đúng hẹn."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này là tự đủ, thành quả do chính mình làm ra. Tiến khi bạn làm bằng sức mình và vẫn giữ được nếp sống đang có.",
+    "n": "Có thể, nếu bạn không dựa hẳn vào ai. Lá ngược là phụ thuộc hoặc đủ mà cô; xem việc này có giữ bạn tự chủ không trước khi gật."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "tien_10": {
    "id": "tien_10",
@@ -6458,7 +7516,21 @@
      "nguyen_van_nguoc": "Gambling, Dissipation, Robbery, Loss",
      "nghia": "Mathers: nhà, nơi ở, gia đình; ngược: cờ bạc, phóng túng, trộm cắp, mất."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Áp lực gia đình, kỳ vọng dòng họ đè lên chuyện hai người. Nói rõ với người nhà điều hai bạn tự quyết.",
+    "cong_viec": "Việc gia đình, nghề truyền đời thành gánh nặng. Tách rõ phần trách nhiệm, nói điều mình muốn làm khác.",
+    "tien_bac": "Chuyện của chung trong nhà dễ sinh tranh. Ghi giấy tờ rõ, hỏi người chuyên môn trước khi chia, đừng hứa miệng.",
+    "suc_khoe": "Nếp sống cả nhà kéo bạn mệt theo. Đổi một thói quen ăn ngủ chung, rủ cả nhà đi khám định kỳ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này là nền lâu dài, gia đình đứng sau. Tiến khi việc này có lợi cho cả nhà về lâu dài và giấy tờ đã rõ.",
+    "n": "Có thể, nhưng làm rõ chuyện trong nhà trước. Lá ngược là tranh của hoặc gánh kỳ vọng; tiến khi bạn đã nói chuyện với người nhà."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "tien_tieu_dong": {
    "id": "tien_tieu_dong",
@@ -6534,7 +7606,21 @@
      "nguyen_van_nguoc": "Prodigality, Profusion, Waste, Dissipation",
      "nghia": "Mathers: thanh niên tóc sẫm, tiết kiệm, trật tự, quản lý; ngược: phung phí, hoang phí."
     }
-   ]
+   ],
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Mơ về một mối quan hệ mà chưa làm gì. Gửi một lời hỏi thăm thật, hẹn một buổi gặp cụ thể.",
+    "cong_viec": "Học dở dang, ngại việc nhỏ. Quay lại khoá học đang bỏ, làm xong một bài trước khi tính tiếp.",
+    "tien_bac": "Mơ tiền nhanh, bỏ qua việc tích dần. Bắt đầu một khoản tiết kiệm nhỏ cố định, tránh lời mời làm giàu nhanh.",
+    "suc_khoe": "Biết nếp lành mà lười làm. Đi bộ mười lăm phút sau bữa tối, đặt báo thức giờ ngủ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này là bắt đầu thực tế, học từ việc nhỏ. Tiến khi bạn chịu học dần, làm kỹ từng phần, không mong kết quả lớn ngay.",
+    "n": "Chưa nên vội: lá ngược là mơ kết quả mà chưa chịu học. Làm xong một bước chuẩn bị cụ thể trước, rồi mới quyết."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "tien_hiep_si": {
    "id": "tien_hiep_si",
@@ -6545,7 +7631,7 @@
    "bo": "tien",
    "nguyen_to": "dat",
    "chiem_tinh": null,
-   "thoth_ten": "Prince of the Chariot of Earth",
+   "thoth_ten": "Lord of the Wide and Fertile Land; King of the Spirits of Earth",
    "tdm_ten": "Cavalier de Denier",
    "huong_nhin": 1,
    "sac_thai": "trung",
@@ -6575,8 +7661,8 @@
      "loi": "Waite: kỵ sĩ ngựa đứng — 'tiện ích, phục vụ, trách nhiệm'."
     },
     "thoth": {
-     "ten": "Prince of the Chariot of Earth",
-     "loi": "Prince of the Chariot of Earth — Khí của Đất: đất có ý; mặt tối là máy móc."
+     "ten": "Lord of the Wide and Fertile Land; King of the Spirits of Earth",
+     "loi": "Lord of the Wide and Fertile Land — Lửa của Đất: đất có lửa; mặt tối là tham và chậm đổi."
     },
     "tdm": {
      "ten": "Cavalier de Denier",
@@ -6588,8 +7674,8 @@
    },
    "viec": "Làm xong MỘT việc dở dang hơn một tháng; không mở việc mới cho tới khi xong.",
    "cau_tu_soi": "Việc nào bạn bền với nó nhất — và việc nào bạn kẹt với nó?",
-   "nguyen_to_phu": "khi",
-   "ten_nguyen_to_phu": "Khí của Đất",
+   "nguyen_to_phu": "hoa",
+   "ten_nguyen_to_phu": "Lửa của Đất",
    "nhan_vat": "Người bền bỉ, đáng tin, chậm chắc; khi lệch thành ì và nhàm.",
    "trich": [
     {
@@ -6600,9 +7686,9 @@
     },
     {
      "sach": "book_t",
-     "ten": "The Prince of the Chariot of Earth",
-     "nguyen_van": "If ill dignified he is selfish, animal and material: stupid.",
-     "nghia": "Book T (Hoàng tử Tiền = Hiệp sĩ Tiền RWS): khi bị kìm — ích kỷ, bản năng, thực dụng."
+     "ten": "The Lord of the Wide and Fertile Land; The King of the Spirits of Earth",
+     "nguyen_van": "Unless very well dignified he is heavy, dull, and material.",
+     "nghia": "Book T (Vua Tiền — người cưỡi ngựa, ứng Hiệp sĩ Tiền của Waite): nếu không được tiếp sức mạnh thì nặng nề, chậm, thực dụng."
     },
     {
      "sach": "mathers_1888",
@@ -6610,7 +7696,25 @@
      "nguyen_van_nguoc": "A brave Man, but out of Employment, Idle, Unemployed, Negligent",
      "nghia": "Mathers: người hữu ích, đáng tin, khôn ngoan, tiết kiệm, ngăn nắp; ngược: người dũng cảm nhưng thất nghiệp, nhàn rỗi, lơ là."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "su_tu",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Quan hệ đều tới nhàm, không ai muốn đổi. Rủ người kia làm một việc mới cùng nhau trong tháng này.",
+    "cong_viec": "Ì vì quen việc, ngại thử cách mới. Đề xuất một cải tiến nhỏ, đổi một bước trong quy trình.",
+    "tien_bac": "Giữ tiền theo nếp cũ mà không xem lại. Rà lại các khoản cố định, cắt khoản không còn cần.",
+    "suc_khoe": "Ngồi lâu, ít vận động, nếp thành trì trệ. Đứng dậy mỗi giờ, thêm một buổi đi bộ trong tuần."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có, nhưng đi chậm: lá này là làm đều, chắc tay. Tiến khi bạn có kế hoạch từng bước và chấp nhận kết quả đến dần.",
+    "n": "Chưa nên quyết: lá ngược là ì, bám cách cũ. Xem mình muốn việc này hay chỉ đang ngại đổi; thử một thay đổi nhỏ trước."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "cho"
+   }
   },
   "tien_hoang_hau": {
    "id": "tien_hoang_hau",
@@ -6686,7 +7790,25 @@
      "nguyen_van_nguoc": "Certain Evil, a suspicious Woman, a Woman justly regarded with Suspicion, Doubt, Mistrust",
      "nghia": "Mathers: người phụ nữ tóc sẫm, hào phóng, rộng lượng; ngược: điều xấu chắc, người phụ nữ đáng nghi, nghi ngờ, mất tin."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "nhan_ma",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Lo cho người kia tới quên mình, hoặc chỉ chăm bằng đồ vật. Nói ra điều mình cần, nhận lại sự chăm sóc.",
+    "cong_viec": "Ôm hết việc vận hành, mệt mà không ai thấy. Giao bớt một phần, xin hỗ trợ trước khi quá tải.",
+    "tien_bac": "Chi hết cho người khác, phần mình trống. Để riêng một khoản cho mình mỗi tháng, giữ quỹ dự phòng.",
+    "suc_khoe": "Chăm cả nhà mà bỏ nhịp của mình. Đặt một khung nghỉ riêng mỗi ngày, ngủ đủ, đi khám định kỳ."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này là chăm lo thực tế, quản việc khéo. Tiến khi việc này giữ được nếp nhà và bạn vẫn còn sức cho chính mình.",
+    "n": "Có thể, nếu bạn không ôm hết một mình. Lá ngược là lo cho mọi người tới quên mình; tiến khi đã có người chia việc."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   },
   "tien_vua": {
    "id": "tien_vua",
@@ -6697,7 +7819,7 @@
    "bo": "tien",
    "nguyen_to": "dat",
    "chiem_tinh": null,
-   "thoth_ten": "Lord of the Wide and Fertile Land; King of the Spirits of Earth",
+   "thoth_ten": "Prince of the Chariot of Earth",
    "tdm_ten": "Roi de Denier",
    "huong_nhin": -1,
    "sac_thai": "sang",
@@ -6727,8 +7849,8 @@
      "loi": "Waite: vua giữa vườn nho — 'dũng cảm, khả năng, thành công trong kinh doanh'."
     },
     "thoth": {
-     "ten": "Lord of the Wide and Fertile Land; King of the Spirits of Earth",
-     "loi": "Lord of the Wide and Fertile Land — Lửa của Đất: đất có lửa; mặt tối là tham và chậm đổi."
+     "ten": "Prince of the Chariot of Earth",
+     "loi": "Prince of the Chariot of Earth — Khí của Đất: đất có ý; mặt tối là máy móc."
     },
     "tdm": {
      "ten": "Roi de Denier",
@@ -6740,8 +7862,8 @@
    },
    "viec": "Dùng kinh nghiệm hoặc tiền để giúp một người bắt đầu (một buổi hướng dẫn, một khoản nhỏ) trong tuần.",
    "cau_tu_soi": "Bạn đang 'làm vua' ở đâu, và có ai được hưởng vườn nho của bạn không?",
-   "nguyen_to_phu": "hoa",
-   "ten_nguyen_to_phu": "Lửa của Đất",
+   "nguyen_to_phu": "khi",
+   "ten_nguyen_to_phu": "Khí của Đất",
    "nhan_vat": "Người thành đạt, ổn định, bảo trợ; khi lệch thành tham và cứng.",
    "trich": [
     {
@@ -6752,9 +7874,9 @@
     },
     {
      "sach": "book_t",
-     "ten": "The Lord of the Wide and Fertile Land; The King of the Spirits of Earth",
-     "nguyen_van": "Unless very well dignified he is heavy, dull, and material.",
-     "nghia": "Book T (Hiệp sĩ Tiền = Vua Tiền RWS): nếu không được tiếp sức mạnh thì nặng nề, chậm, thực dụng."
+     "ten": "The Prince of the Chariot of Earth",
+     "nguyen_van": "If ill dignified he is selfish, animal and material: stupid.",
+     "nghia": "Book T (Hoàng tử Tiền — người trên cỗ xe, ứng Vua Tiền của Waite): khi bị kìm — ích kỷ, bản năng, thực dụng."
     },
     {
      "sach": "mathers_1888",
@@ -6762,7 +7884,25 @@
      "nguyen_van_nguoc": "An old and vicious Man, a Dangerous Man, Doubt, Fear, Peril, Danger",
      "nghia": "Mathers: người đàn ông tóc sẫm, thắng, dũng cảm, thành công; ngược: người già xấu tính, nguy hiểm; nghi ngờ, sợ, hiểm."
     }
-   ]
+   ],
+   "vung_book_t": {
+    "tu_cung": "bach_duong",
+    "do": 20
+   },
+   "linh_vuc_nguoc": {
+    "tinh_cam": "Dùng tiền hay sự chu cấp để giữ người. Hỏi người kia muốn gì ngoài vật chất, và lắng nghe.",
+    "cong_viec": "Cứng nhắc, chỉ nhìn lợi, không nghe người trẻ. Mời một ý kiến khác và cân nhắc thật.",
+    "tien_bac": "Tham thêm khi đã đủ, hoặc dùng tiền để kiểm soát. Kiểm lại vì sao muốn thêm, giữ quỹ dự phòng, đừng vay thêm để mở rộng.",
+    "suc_khoe": "Sống dư mà ít vận động. Đi lại nhiều hơn, ăn vừa đủ, đi khám định kỳ đúng hẹn."
+   },
+   "tra_loi": {
+    "x": "Nghiêng về có: lá này là nền tiền vững, người đủ kinh nghiệm cầm trịch. Tiến khi kế hoạch có số rõ, có phương án dự phòng.",
+    "n": "Có thể, nếu động cơ sạch. Lá ngược là tham hoặc dùng tiền giữ người; kiểm xem việc này bạn làm cho ai, có trói ai không."
+   },
+   "nghieng": {
+    "x": "tien",
+    "n": "dieu_kien"
+   }
   }
  },
  "trai_bai": {
@@ -6790,7 +7930,18 @@
    "loi_khuyen": [
     0
    ],
-   "trong_tam": 0
+   "trong_tam": 0,
+   "vai_tra_loi": {
+    "chinh": [
+     [
+      0,
+      1
+     ]
+    ],
+    "dieu_kien": null,
+    "khuyen": 0,
+    "ket": 0
+   }
   },
   "ba_la_thoi_gian": {
    "ten": "Ba lá: Quá khứ – Hiện tại – Sắp tới",
@@ -6850,7 +8001,22 @@
    "loi_khuyen": [
     2
    ],
-   "trong_tam": 1
+   "trong_tam": 1,
+   "vai_tra_loi": {
+    "chinh": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "dieu_kien": 0,
+    "khuyen": 2,
+    "ket": 2
+   }
   },
   "ba_la_loi_khuyen": {
    "ten": "Ba lá: Tình huống – Điều cản – Lời khuyên",
@@ -6910,7 +8076,22 @@
    "loi_khuyen": [
     2
    ],
-   "trong_tam": 0
+   "trong_tam": 0,
+   "vai_tra_loi": {
+    "chinh": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "dieu_kien": 1,
+    "khuyen": 2,
+    "ket": 2
+   }
   },
   "nam_la": {
    "ten": "Năm lá chữ thập",
@@ -7016,7 +8197,26 @@
    "loi_khuyen": [
     3
    ],
-   "trong_tam": 0
+   "trong_tam": 0,
+   "vai_tra_loi": {
+    "chinh": [
+     [
+      0,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "dieu_kien": 1,
+    "khuyen": 3,
+    "ket": 4
+   }
   },
   "celtic": {
    "ten": "Celtic Cross (10 lá)",
@@ -7208,7 +8408,136 @@
     4,
     9
    ],
-   "trong_tam": 0
+   "trong_tam": 0,
+   "vai_tra_loi": {
+    "chinh": [
+     [
+      0,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      9,
+      2
+     ]
+    ],
+    "dieu_kien": 1,
+    "khuyen": 4,
+    "ket": 9
+   }
+  },
+  "hai_lua_chon": {
+   "ten": "Năm lá: Hai lựa chọn",
+   "ngan": "5 lá",
+   "mo_ta": "Cho câu hỏi 'có nên' hoặc 'A hay B': bạn lúc này, hai con đường đặt cạnh nhau, điều chưa thấy và lời khuyên để chọn đỡ tiếc.",
+   "vi_tri": [
+    {
+     "ma": "ban",
+     "ten": "Bạn lúc này",
+     "hoi": "Bạn đang đứng ở đâu trước lựa chọn",
+     "x": 0.5,
+     "y": 0.82
+    },
+    {
+     "ma": "lua_chon_1",
+     "ten": "Đường A",
+     "hoi": "Điều dễ tới nếu chọn đường thứ nhất (thường là giữ như hiện tại)",
+     "x": 0.17,
+     "y": 0.5
+    },
+    {
+     "ma": "lua_chon_2",
+     "ten": "Đường B",
+     "hoi": "Điều dễ tới nếu chọn đường thứ hai (thường là thay đổi)",
+     "x": 0.83,
+     "y": 0.5
+    },
+    {
+     "ma": "chua_thay",
+     "ten": "Điều bạn chưa thấy",
+     "hoi": "Điều cần biết trước khi chọn",
+     "x": 0.5,
+     "y": 0.18
+    },
+    {
+     "ma": "loi_khuyen",
+     "ten": "Lời khuyên",
+     "hoi": "Cách chọn cho đỡ tiếc",
+     "x": 0.5,
+     "y": 0.5
+    }
+   ],
+   "ke_can": [
+    [
+     0,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "truc": [
+    {
+     "ten": "Đường A – lời khuyên – đường B",
+     "vi_tri": [
+      1,
+      4,
+      2
+     ]
+    },
+    {
+     "ten": "Bạn – lời khuyên – điều chưa thấy",
+     "vi_tri": [
+      0,
+      4,
+      3
+     ]
+    }
+   ],
+   "truc_nhin": [
+    1,
+    4,
+    2
+   ],
+   "thoi_diem": [
+    1,
+    2
+   ],
+   "loi_khuyen": [
+    4
+   ],
+   "trong_tam": 0,
+   "vai_tra_loi": {
+    "chinh": [
+     [
+      0,
+      1
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "dieu_kien": 3,
+    "khuyen": 4,
+    "ket": 4,
+    "hai_duong": [
+     1,
+     2
+    ]
+   }
   }
  },
  "chu_de": {
@@ -7361,9 +8690,15 @@
    "tieu_de": "Tướng và lá bài",
    "cau_hoi": "Lá hoàng gia nào đang 'đóng vai' bạn?",
    "mo_ta": "Lá đại diện chọn từ dáng mặt bạn tự quan sát (Nhân tướng) và tuổi, giới tính — chỉ cho chính bạn."
+  },
+  "tra_loi": {
+   "tieu_de": "Câu trả lời cho câu hỏi của bạn",
+   "cau_hoi": "Trải bài nghiêng về đâu với điều bạn hỏi?",
+   "mo_ta": "Đọc các lá ở vị trí trả lời (hiện tại, kết cục, lời khuyên) theo đúng câu bạn hỏi."
   }
  },
  "thu_tu_chuong": [
+  "tra_loi",
   "tong_quan",
   "tung_la",
   "dong_chay",
@@ -7398,14 +8733,17 @@
    "tiep_suc": "Lá bên cạnh tiếp sức cho lá này — mặt sáng của nó dễ hiện ra.",
    "bi_kim": "Lá bên cạnh kìm lá này — tính chất của nó biểu hiện yếu hơn hoặc lệch đi; nên chủ động hơn thay vì chờ.",
    "binh": "Lá bên cạnh không đẩy cũng không cản — lá này giữ đúng nghĩa của nó.",
-   "triet_tieu": "Hai lá hai bên xung nhau nên triệt tiêu nhau — lá này đứng một mình, đọc đúng nghĩa gốc."
+   "triet_tieu": "Hai lá hai bên xung nhau nên triệt tiêu nhau — lá này đứng một mình, đọc đúng nghĩa gốc.",
+   "tiep_suc_nguoc": "Lá bên cạnh làm tính chất ngược của lá này rõ thêm — chỗ lệch dễ lộ ra, nên để ý sớm.",
+   "bi_kim_nguoc": "Lá bên cạnh làm nhẹ bớt mặt ngược của lá này — chỗ vướng có thể không nặng như bạn lo."
   },
   "huong_nhin": {
    "toi": "Nhân vật trên lá {ten} nhìn sang {den} — bạn đang hướng về {y}.",
    "ve": "Nhân vật trên lá {ten} quay về {den} — bạn đang còn nhìn về {y}; chuyện sắp tới sẽ tới từ phía bạn không nhìn.",
    "thang": "Nhân vật trên lá {ten} nhìn thẳng — bạn đang đối diện chuyện này, không né.",
    "ngoai": "Nhân vật trên lá {ten} nhìn ra ngoài trải bài — có điều ngoài câu hỏi đang kéo bạn.",
-   "doi_dau": "Lá {a} và lá {b} nhìn vào nhau — hai lực đang gặp nhau ở đây, cần một cuộc nói chuyện thẳng."
+   "doi_dau": "Lá {a} và lá {b} nhìn vào nhau — hai lực đang gặp nhau ở đây, cần một cuộc nói chuyện thẳng.",
+   "lat": "Lá đang ngược nên nhân vật quay mặt về phía ngược lại với hình gốc."
   },
   "thoi_diem_mo": "Nhịp thời gian ở đây là GỢI Ý theo cách Golden Dawn gắn lá bài với 36 decan hoàng đạo và nhịp của từng bộ — không phải ngày dự báo. Dùng nó để chọn lúc làm việc, không phải để chờ.",
   "thoi_diem_decan": "Lá {ten} gắn với decan {decan} của cung {cung} ({tu}–{den}); nhịp của bộ {bo}: {nhip}. {trong}",
@@ -7437,6 +8775,88 @@
    "dai_dien": "Lá đại diện (significator) là lá hoàng gia được chọn để 'đóng vai' người hỏi. Waite chọn theo tuổi và dáng vẻ; ở đây chọn từ dáng mặt bạn tự quan sát và tuổi — chỉ cho chính bạn.",
    "celtic": "Celtic Cross là trải bài 10 lá Waite ghi lại năm 1910: chữ thập sáu lá (tâm điểm, điều cản, gốc rễ, vừa qua, điều hướng tới, sắp tới) và cây cột bốn lá (bạn, quanh bạn, hy vọng – nỗi lo, khả năng diễn ra).",
    "tarot_la_gi": "Tarot là bộ 78 lá bài có từ Ý thế kỷ 15, sang thế kỷ 18–19 được dùng để soi một câu hỏi. Ở đây tarot là cách nhìn lại một việc qua hình ảnh và bốn trường phái có sách — không phải lời đoán trước, không thay bác sĩ, luật sư hay quyết định của bạn."
+  },
+  "tra_loi": {
+   "nghieng": {
+    "quyet_dinh": {
+     "tien": "Nghiêng về CÓ — {viec} đang có lực đỡ, miễn bạn làm theo điều kiện ở dưới.",
+     "dieu_kien": "Chưa hẳn có, chưa hẳn không — {viec} được nếu bạn gỡ trước một điều.",
+     "cho": "Chưa nên vội — với {viec}, trải bài khuyên làm rõ vài điều rồi mới quyết."
+    },
+    "ket_qua": {
+     "tien": "Nghiêng về thuận — {viec} có đà đi lên nếu giữ cách làm hiện tại.",
+     "dieu_kien": "Còn tuỳ — {viec} có thể đi tốt, nhưng đang vướng một điểm cần xử lý.",
+     "cho": "Đang vướng — {viec} chưa có đà; nên đổi cách làm trước khi mong kết quả."
+    },
+    "lua_chon": {
+     "tien": "Đường B đang có lực đỡ hơn — nếu chọn nó, nhớ điều cần gỡ ở dưới.",
+     "dieu_kien": "Hai đường gần ngang nhau — điều quyết định nằm ở cách bạn đi, không ở đường nào.",
+     "cho": "Đường A đang yên hơn lúc này — chưa phải lúc đổi, trừ khi gỡ được điều ở dưới."
+    },
+    "thoi_diem": {
+     "tien": "Nhịp đang mở — {viec} hợp làm sớm, trong khoảng nhịp gợi ý ở dưới.",
+     "dieu_kien": "Chưa chín hẳn — chuẩn bị xong điều kiện ở dưới rồi mới tới lúc.",
+     "cho": "Chưa phải lúc — nên để qua nhịp gợi ý ở dưới, dùng thời gian này để chuẩn bị."
+    },
+    "cach_lam": {
+     "tien": "Bạn đang đi đúng hướng — làm tiếp, thêm đúng một việc ở dưới.",
+     "dieu_kien": "Cách làm cần chỉnh một chỗ — gỡ điều ở dưới trước, phần còn lại tự trôi.",
+     "cho": "Cách làm hiện tại đang cản bạn — nên dừng lại, đổi hướng theo lời khuyên ở dưới."
+    },
+    "ly_do": {
+     "tien": "Gốc chuyện không nằm ở năng lực của bạn — nó nằm ở điều ở dưới, và gỡ được.",
+     "dieu_kien": "Gốc chuyện là một thói quen lặp lại — nhìn ra rồi thì đổi được.",
+     "cho": "Gốc chuyện nằm ở điều cũ chưa khép lại — khép nó trước rồi chuyện mới đổi."
+    },
+    "hieu_minh": {
+     "tien": "Lúc này bạn mạnh nhất ở điều lá chính nói — dồn sức vào đó.",
+     "dieu_kien": "Bạn có đủ, nhưng đang dùng lệch một chỗ — chỉnh chỗ đó trước.",
+     "cho": "Bạn đang mệt hơn mình nghĩ — việc đầu tiên là lấy lại sức, không phải cố thêm."
+    },
+    "tong_quat": {
+     "tien": "Nhìn chung các lá đang thuận — chỗ nên dồn sức là lá chính ở dưới.",
+     "dieu_kien": "Nhìn chung có thuận có vướng — đọc lá chính và điều cần gỡ ở dưới.",
+     "cho": "Nhìn chung các lá khuyên đi chậm — làm rõ điều ở dưới trước khi làm thêm."
+    }
+   },
+   "tieu_de": {
+    "tien": "Nghiêng về có",
+    "dieu_kien": "Có điều kiện",
+    "cho": "Chưa nên vội"
+   },
+   "tieu_de_ket_qua": {
+    "tien": "Nghiêng về thuận",
+    "dieu_kien": "Còn tuỳ cách làm",
+    "cho": "Đang vướng"
+   },
+   "viec_mac_dinh": "việc bạn đang hỏi",
+   "khong_cau": "Bạn chưa gõ câu hỏi, nên phần này đọc theo chủ đề bạn chọn. Lần sau gõ một câu cụ thể (vd 'Tôi có nên đổi việc không?') — bài đọc sẽ trả lời đúng câu đó.",
+   "quyet_cua_ban": "Lá bài cho bạn hướng nghiêng và điều kiện; quyết định vẫn là của bạn — nhất là với việc lớn như tiền bạc, công việc, hôn nhân.",
+   "nguoi_khac": "Câu hỏi của bạn nói về lòng một người khác — tarot ở đây không đọc được người khác. Phần trả lời dưới đây đọc phía bạn: bạn đang ở đâu trong chuyện này và việc gì bạn làm được.",
+   "lua_chon_khong_tach": "Trải bài này không tách riêng hai con đường, nên phần dưới đọc như câu 'có nên thay đổi không'. Muốn đặt hai đường cạnh nhau, rút lại bằng trải bài 'Hai lựa chọn'.",
+   "goi_y_trai_bai": "Câu hỏi kiểu này đọc rõ nhất bằng trải bài '{ten}'.",
+   "vi_sao": "{vi_tri} — {la}: {loi}",
+   "dieu_kien": "Điều cần gỡ trước ({vi_tri} — {la}): {loi}",
+   "hai_duong": "{ten_duong} — {la}: {loi}",
+   "so_sanh": {
+    "a": "Đường A đang yên hơn đường B lúc này.",
+    "b": "Đường B đang có lực đỡ hơn đường A.",
+    "ngang": "Hai đường nghiêng gần như nhau — chọn theo điều bạn chịu được nếu nó không như ý."
+   },
+   "tieu_de_lua_chon": {
+    "tien": "Đường B nghiêng hơn",
+    "dieu_kien": "Hai đường gần ngang nhau",
+    "cho": "Đường A nghiêng hơn"
+   },
+   "hai_duong_nhan": "Đường A là {a}; đường B là {b}.",
+   "hai_duong_mac_dinh": "Đường A là giữ như hiện tại; đường B là thay đổi.",
+   "chua_ro_cau": "Mình chưa nhận ra câu bạn hỏi thuộc kiểu 'có nên', 'khi nào' hay 'làm sao', nên phần này đọc chung theo các lá trả lời.",
+   "thoi_diem": "Nhịp gợi ý (không phải ngày dự báo): lá {la} ở vị trí {vi_tri} ứng {khoang}. {trong}",
+   "suc_khoe": "Đây là lời nhắc nhịp sống, không thay lời bác sĩ; có dấu hiệu bất thường thì đi khám.",
+   "truoc_khi": "Trước khi quyết: {ds}",
+   "an_toan": "Câu bạn gõ có điều nặng lòng — lá bài không phải chỗ để trả lời chuyện này. Nếu bạn đang nghĩ tới việc làm hại bản thân, hãy gọi ngay cho người thân hoặc đường dây hỗ trợ; ở Việt Nam có thể gọi 115 khi khẩn cấp. Các lá bên dưới vẫn hiện để bạn xem, nhưng phần trả lời này dừng ở đây.",
+   "tu_choi": "Câu này nằm ngoài điều tarot ở đây trả lời (số, ngày mất, chẩn đoán bệnh, chọn người theo lá bài). Các lá bên dưới vẫn đọc được như một lời nhắc nhìn lại chính mình.",
+   "chua_rut": "Câu này cần lá bài của chính bạn mới trả lời được: gõ câu vào ô Câu hỏi ở trên, chọn trải bài '{ten}', xáo và tự rút lá. Bài đọc sẽ mở bằng phần 'Câu trả lời cho câu hỏi của bạn' — nghiêng về đâu, vì sao, điều cần gỡ trước và 3 việc nên làm."
   }
  },
  "tu_khoa": {
@@ -7499,6 +8919,12 @@
    "mot_la": [
     "1 la",
     "mot la"
+   ],
+   "hai_lua_chon": [
+    "hai lua chon",
+    "2 lua chon",
+    "a hay b",
+    "hai con duong"
    ]
   },
   "nguoi_khac": [
@@ -10950,6 +12376,146 @@
    "tep": "fixtures/nguon/tarot_mathers_1888.json",
    "ngay": "2026-11-07",
    "phu": "nghĩa 78 lá xuôi/ngược (Meanings of the Cards), biểu tượng 22 Key, ghi chú Etteilla, 3 cách trải bài, lá đại diện"
+  }
+ },
+ "_tr2_hoang_gia": true,
+ "viec_truoc_khi_quyet": {
+  "doi_viec": [
+   "Có thư mời / hợp đồng mới rõ ràng trên giấy trước khi nộp đơn nghỉ.",
+   "Viết ra 3 lý do muốn đi và 3 lý do muốn ở — đọc lại sau 2 ngày.",
+   "Để sẵn quỹ đủ 3–6 tháng chi tiêu trước khi đổi."
+  ],
+  "nghi_viec": [
+   "Biết rõ mình sẽ làm gì trong 3 tháng đầu sau khi nghỉ.",
+   "Bàn giao gọn, giữ quan hệ tốt với chỗ cũ.",
+   "Để sẵn quỹ đủ 3–6 tháng chi tiêu."
+  ],
+  "nhan_viec": [
+   "Hỏi rõ lương, việc cụ thể, người quản lý trực tiếp trước khi nhận.",
+   "Hỏi một người đang hoặc từng làm ở đó.",
+   "So cả mức sống thật (đi lại, giờ làm) bên cạnh con số lương."
+  ],
+  "phong_van": [
+   "Tập trả lời 3 câu khó nhất bạn sợ bị hỏi.",
+   "Tìm hiểu kỹ công ty và vị trí trước buổi gặp.",
+   "Chuẩn bị 2 câu hỏi ngược lại cho bên tuyển."
+  ],
+  "thang_chuc": [
+   "Ghi lại 3 việc bạn đã làm được có số liệu.",
+   "Hẹn sếp nói chuyện riêng thay vì nói lúc vội.",
+   "Nói rõ mức bạn mong và việc bạn sẵn sàng nhận thêm."
+  ],
+  "khoi_nghiep": [
+   "Thử bán nhỏ trước, đo khách thật rồi mới bỏ vốn lớn.",
+   "Tính trước số tiền bạn chịu mất được mà không ảnh hưởng gia đình.",
+   "Hỏi một người đã làm cùng ngành."
+  ],
+  "hop_tac": [
+   "Ghi thoả thuận ra giấy: ai góp gì, ai quyết gì, chia thế nào.",
+   "Thử làm chung một việc nhỏ trước.",
+   "Hỏi người từng làm việc với đối tác."
+  ],
+  "du_an": [
+   "Chia dự án thành bước nhỏ, làm bước đầu trong tuần này.",
+   "Nói rõ với người liên quan điều bạn cần.",
+   "Đặt mốc kiểm lại sau 2 tuần."
+  ],
+  "hoc_thi": [
+   "Lập lịch ôn theo ngày, không dồn cuối.",
+   "Làm đề thật có bấm giờ.",
+   "Ngủ đủ những ngày sát thi."
+  ],
+  "dau_tu": [
+   "Chỉ dùng tiền bạn chịu mất được.",
+   "Hiểu rõ mình đang bỏ tiền vào cái gì trước khi bỏ.",
+   "Không vay để đầu tư. Đây không phải lời khuyên đầu tư."
+  ],
+  "vay_no": [
+   "Viết ra tổng nợ, lãi, ngày trả — nhìn hết một lần.",
+   "Không vay mới để trả nợ cũ khi chưa có kế hoạch.",
+   "Nói chuyện thẳng với người cho vay về lịch trả."
+  ],
+  "mua_ban": [
+   "Kiểm giấy tờ pháp lý kỹ, hỏi người có chuyên môn.",
+   "Tính cả chi phí phát sinh ngoài giá mua.",
+   "Không xuống tiền khi đang bị giục."
+  ],
+  "tiet_kiem": [
+   "Tách một khoản cố định ngay ngày nhận lương.",
+   "Ghi chi tiêu 2 tuần để thấy tiền đi đâu.",
+   "Giữ quỹ dự phòng trước khi nghĩ tới việc khác."
+  ],
+  "to_tinh": [
+   "Chọn lúc riêng tư, không vội.",
+   "Nói điều bạn cảm thấy, không đòi câu trả lời ngay.",
+   "Chuẩn bị tinh thần cho cả hai khả năng."
+  ],
+  "quay_lai": [
+   "Viết ra vì sao lần trước dừng lại — điều đó đã đổi chưa.",
+   "Nói chuyện thẳng một lần, không đoán.",
+   "Tự hỏi mình nhớ người ấy hay nhớ cảm giác cũ."
+  ],
+  "chia_tay": [
+   "Nói chuyện thẳng một lần trước khi quyết.",
+   "Hỏi ý kiến một người bạn tin, không phải nhiều người.",
+   "Nếu có chuyện bạo lực hay an toàn, tìm người giúp ngay."
+  ],
+  "ket_hon": [
+   "Nói rõ với nhau về tiền, nơi ở, con cái.",
+   "Gặp gia đình hai bên đủ lâu.",
+   "Đừng quyết khi đang bị giục."
+  ],
+  "hen_ho": [
+   "Mở lòng gặp người mới qua việc bạn thích làm.",
+   "Đi chậm, quan sát cách người kia đối xử khi mọi chuyện không vui.",
+   "Giữ nhịp sống riêng của mình."
+  ],
+  "gia_dinh": [
+   "Chọn lúc mọi người bình tĩnh để nói chuyện.",
+   "Nói điều mình cần, không trách quá khứ.",
+   "Nhờ một người cả nhà tin làm cầu nối nếu căng."
+  ],
+  "chuyen_nha": [
+   "Tới xem chỗ mới vào nhiều giờ khác nhau.",
+   "Tính đủ chi phí chuyển và tháng đầu.",
+   "Hỏi hàng xóm về khu ở."
+  ],
+  "di_xa": [
+   "Có việc / chỗ ở rõ ràng ở nơi mới trước khi đi.",
+   "Giữ quỹ đủ cho chuyến về nếu không như ý.",
+   "Hỏi người đã đi trước, chọn kênh hợp pháp."
+  ],
+  "suc_khoe": [
+   "Ngủ đủ và đều giờ 7 ngày liền.",
+   "Đi khám định kỳ nếu đã lâu chưa khám.",
+   "Bớt một việc ra khỏi lịch tuần này. Lá bài không thay lời bác sĩ."
+  ],
+  "_linh_vuc": {
+   "cong_viec": [
+    "Viết ra điều bạn muốn có sau 1 năm nữa.",
+    "Hỏi một người đi trước trong nghề.",
+    "Làm bước đầu tiên trong tuần này."
+   ],
+   "tien_bac": [
+    "Viết ra số tiền vào – ra tháng này.",
+    "Giữ quỹ dự phòng trước khi chi lớn.",
+    "Không quyết chuyện tiền khi đang vội."
+   ],
+   "tinh_cam": [
+    "Nói chuyện thẳng một lần, không đoán.",
+    "Nhìn vào việc người kia làm, hơn là lời nói.",
+    "Giữ một phần thời gian cho chính mình."
+   ],
+   "suc_khoe": [
+    "Ngủ đủ, đều giờ.",
+    "Đi khám định kỳ.",
+    "Bớt một việc khỏi lịch tuần này."
+   ],
+   "_chung": [
+    "Viết ra điều bạn thật sự muốn.",
+    "Hỏi một người bạn tin.",
+    "Làm một bước nhỏ trong 72 giờ."
+   ]
   }
  }
 }

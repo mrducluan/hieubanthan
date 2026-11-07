@@ -8,7 +8,7 @@ import { themHocLuanGiai } from "@/lib/hoc-tuvi";
 const MA = z.string().regex(/^[a-z0-9_]{2,40}$/);
 const La = z.object({ id: z.string().regex(/^[a-z]{3,4}_[a-z0-9_]{1,12}$/), nguoc: z.boolean().optional() }).strict();
 const Input = z.object({
-  trai_bai: z.enum(["mot_la", "ba_la_thoi_gian", "ba_la_loi_khuyen", "nam_la", "celtic"]),
+  trai_bai: z.enum(["mot_la", "ba_la_thoi_gian", "ba_la_loi_khuyen", "nam_la", "celtic", "hai_lua_chon"]),
   la: z.array(La).min(1).max(10),
   cau_hoi: z.string().trim().max(500).optional(),
   chu_de: z.string().regex(/^[a-z_]{2,30}$/).optional(),

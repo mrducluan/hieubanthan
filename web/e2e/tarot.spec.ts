@@ -13,6 +13,9 @@ test("trang công cụ: H1 máy chủ, xáo bằng máy → rút 3 lá → lật
   await expect(page.getByTestId("buoc-hoi")).toBeVisible();
   await expect(page.getByTestId("la-ngay")).toBeVisible();
   await page.getByTestId("o-cau-hoi").fill("Tôi có nên nhận lời hợp tác với đối tác mới không?");
+  // TR-2: engine nhận ra kiểu câu hỏi + gợi trải bài hợp (không trả lại câu đã gõ)
+  await expect(page.getByTestId("goi-y-cau-hoi")).toContainText("câu hỏi 'có nên'", { timeout: 10_000 });
+  await expect(page.getByTestId("goi-y-cau-hoi")).toContainText("hợp tác với người khác");
   await page.getByTestId("chu-de-cong_viec").click();
   await page.getByTestId("trai-bai-ba_la_loi_khuyen").click();
   await page.getByTestId("nut-bat-dau").click();
@@ -35,6 +38,11 @@ test("trang công cụ: H1 máy chủ, xáo bằng máy → rút 3 lá → lật
   await page.getByTestId("nut-doc-bai").click();
   const bc = page.getByTestId("bao-cao-tarot");
   await expect(bc).toBeVisible({ timeout: 20_000 });
+  // TR-2: bài đọc mở bằng câu trả lời cho đúng câu hỏi, câu hỏi hiện lại từ máy người dùng
+  await expect(bc.getByTestId("cau-hoi-da-hoi")).toContainText("hợp tác với đối tác mới");
+  await expect(page.locator("#lg-tra_loi")).toContainText("Câu trả lời cho câu hỏi của bạn");
+  await expect(page.locator("#lg-tra_loi")).toContainText(/Nghiêng về có|Có điều kiện|Chưa nên vội/);
+  await expect(page.locator("#lg-tra_loi")).toContainText("Trước khi quyết, làm 3 việc");
   await expect(bc).toContainText("Từng vị trí nói gì");
   await expect(bc).toContainText("Việc nên làm trong 72 giờ");
   await expect(bc.getByTestId("chip-muc").first()).toBeVisible();
@@ -100,4 +108,34 @@ test("cụm 78 lá, trang con, .md, sitemap, thanh mảng, hub bảy mảng", as
   expect(hub).toContain("bảy cách nhìn lại mình");
   const trang = await (await request.get("/tarot")).text();
   expect(trang).toContain("Trải bài của tôi");
+});
+
+test("TR-2: câu 'A hay B' → gợi trải bài Hai lựa chọn; lá ngược có nhãn NGƯỢC, chữ trên lá không lộn ngược", async ({ page }) => {
+  // lịch sử trên máy có một trải bài 3 lá với 6 Tiền + Hiệp sĩ Kiếm ngược (ca chủ dự án báo) → Xem lại
+  await page.addInitScript(() => {
+    localStorage.setItem("hbt.tarot.v1", JSON.stringify([{ id: "e2e1", luc: new Date().toISOString(), trai_bai: "ba_la_thoi_gian",
+      la: [{ id: "tien_6", nguoc: true }, { id: "dai_1", nguoc: false }, { id: "kiem_hiep_si", nguoc: true }],
+      cau: "Tôi có nên thay đổi công việc mới không?", chu_de: "cong_viec", tom_tat: "Pháp Sư" }]));
+  });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/tarot");
+  await page.getByTestId("o-cau-hoi").fill("Nên ở lại công ty cũ hay chuyển sang công ty mới?");
+  const gy = page.getByTestId("goi-y-cau-hoi");
+  await expect(gy).toContainText("chọn giữa hai đường", { timeout: 10_000 });
+  await gy.getByTestId("nut-dung-goi-y").click();
+  await expect(page.getByTestId("trai-bai-hai_lua_chon")).toHaveAttribute("aria-checked", "true");
+  await expect(page.getByTestId("chu-de-cong_viec")).toHaveAttribute("aria-checked", "true");
+  // Xem lại trải bài cũ
+  await page.getByTestId("nut-xem-lai").first().click();
+  const bc = page.getByTestId("bao-cao-tarot");
+  await expect(bc).toBeVisible({ timeout: 20_000 });
+  await expect(page.locator("#lg-tra_loi")).toContainText("Chưa nên vội");
+  await expect(page.locator("#lg-tra_loi")).toContainText("Hiệp sĩ Kiếm (ngược)");
+  const ban = bc.getByTestId("ban-trai-bai");
+  await expect(ban.getByTestId("nhan-nguoc")).toHaveCount(2);
+  await expect(ban.locator('svg[data-nguoc="1"]')).toHaveCount(2);
+  await expect(ban).toContainText("· ngược");
+  // mặt trước không còn xoay nguyên lá 180° (chữ "6" không thành "9")
+  const kieu = await ban.locator('[data-testid="la-bai"]').first().evaluate((el) => Array.from(el.querySelectorAll("div")).map((d) => d.style.transform).join("|"));
+  expect(kieu).not.toContain("rotate(180deg)");
 });

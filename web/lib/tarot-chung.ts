@@ -5,7 +5,7 @@ import type { BaoCaoDoiSong, ChuongDoiSongMo, Hop, Muc } from "@/components/luan
 export type BoTarot = "gay" | "coc" | "kiem" | "tien";
 export type NguyenTo = "hoa" | "thuy" | "khi" | "dat";
 export type LoaiLa = "an_chinh" | "so" | "hoang_gia";
-export type MaTraiBai = "mot_la" | "ba_la_thoi_gian" | "ba_la_loi_khuyen" | "nam_la" | "celtic";
+export type MaTraiBai = "mot_la" | "ba_la_thoi_gian" | "ba_la_loi_khuyen" | "nam_la" | "celtic" | "hai_lua_chon";
 export type QuanHeNguyenTo = "manh" | "hop" | "trung" | "xung";
 export type SucLa = "tiep_suc" | "binh" | "bi_kim";
 
@@ -31,11 +31,19 @@ export interface LaRut { id: string; nguoc: boolean }
 export interface HopTarot extends Hop {
   la?: LaGon; vi_tri?: { so: number; ma: string; ten: string; hoi: string }; suc?: SucLa; tu_khoa?: string[]; cau_tu_soi?: string;
   quan_he?: QuanHeNguyenTo; cap?: [number, number]; vi_tri_nhin?: number; toi?: number | null; huong?: -1 | 0 | 1;
-  loai_nhip?: string; dang_trong?: boolean | null; ngu_hinh?: string | null;
+  loai_nhip?: string; dang_trong?: boolean | null; ngu_hinh?: string | null; nghieng?: NghiengTraLoi;
 }
-export interface ChuongTarot extends ChuongDoiSongMo { hop?: HopTarot[]; thieu?: string | null }
+export type NghiengTraLoi = "tien" | "dieu_kien" | "cho";
+export type YDinhTarot = "quyet_dinh" | "lua_chon" | "ket_qua" | "thoi_diem" | "cach_lam" | "ly_do" | "nguoi_khac" | "hieu_minh" | "tong_quat";
+/** TR-2: engine hiểu câu hỏi — chỉ mã + nhãn danh mục, không trả lại chữ người dùng gõ. */
+export interface HieuCau {
+  y_dinh: YDinhTarot; linh_vuc: string | null; chu_de: string | null; viec: string | null; nhan_viec: string | null; lua_chon: [string, string] | null;
+  goi_y_trai_bai: MaTraiBai; co_cau: boolean; chan: "an_toan" | "tu_choi" | "dan_huong" | null; ten_y_dinh?: string; ten_goi_y?: string; loi?: string | null;
+  nghieng?: { nghieng: NghiengTraLoi; diem: number } | null;
+}
+export interface ChuongTarot extends ChuongDoiSongMo { hop?: HopTarot[]; thieu?: string | null; nghieng?: NghiengTraLoi; chan?: string }
 export interface BaoCaoTarot extends BaoCaoDoiSong {
-  ten: string; thieu: string[]; chuong: ChuongTarot[]; /** hộp cốt lõi đầu tiên = hộp của vị trí trọng tâm (engine chọn theo KB) */ cot_loi: HopTarot[]; cau_hoi: null; chu_de: string | null; linh_vuc: string | null;
+  ten: string; thieu: string[]; chuong: ChuongTarot[]; /** hộp cốt lõi đầu tiên = hộp của vị trí trọng tâm (engine chọn theo KB) */ cot_loi: HopTarot[]; cau_hoi: null; chu_de: string | null; linh_vuc: string | null; hieu_cau?: HieuCau;
   da_tinh: {
     trai_bai: MaTraiBai; ten_trai_bai: string;
     vi_tri: { vi_tri: number; ma: string; ten: string; id: string; nguoc: boolean; nguyen_to: NguyenTo; loai: LoaiLa; so: number; ten_la: string; suc: { suc: SucLa; diem: number; triet_tieu: boolean }; ke: number[] }[];
@@ -43,7 +51,7 @@ export interface BaoCaoTarot extends BaoCaoDoiSong {
     nguyen_to: { dem: Record<NguyenTo, number>; troi: NguyenTo | null; thieu: NguyenTo[] };
     an_chinh: { so: number; tong: number; ti_le: number; muc: "nhieu" | "vua" | "it" };
     so_hoc: { day: number[]; xu_huong: string };
-    huong_nhin: { vi_tri: number; huong: -1 | 0 | 1; toi: number | null; tren_truc: boolean }[];
+    huong_nhin: { vi_tri: number; huong: -1 | 0 | 1; toi: number | null; tren_truc: boolean; lat?: boolean }[];
     ngay_xem: string;
   };
 }
@@ -62,7 +70,8 @@ export const TEN_SUC: Record<SucLa, string> = { tiep_suc: "được tiếp sức
 export const TEN_QUAN_HE: Record<QuanHeNguyenTo, string> = { manh: "cùng nguyên tố", hop: "hợp nhau", trung: "trung tính", xung: "xung nhau" };
 export const MA_LA = /^[a-z]{3,4}_[a-z0-9_]{1,12}$/;
 export const TRAI_BAI_MAC_DINH: MaTraiBai = "ba_la_loi_khuyen";
-export const SO_LA: Record<MaTraiBai, number> = { mot_la: 1, ba_la_thoi_gian: 3, ba_la_loi_khuyen: 3, nam_la: 5, celtic: 10 };
+export const SO_LA: Record<MaTraiBai, number> = { mot_la: 1, ba_la_thoi_gian: 3, ba_la_loi_khuyen: 3, nam_la: 5, celtic: 10, hai_lua_chon: 5 };
+export const MA_TRAI_BAI = Object.keys(SO_LA) as MaTraiBai[];
 export const laMaTraiBai = (s: string | null | undefined): s is MaTraiBai => Boolean(s) && s! in SO_LA;
 export const mucCuaSuc = (s: SucLa): Muc => (s === "tiep_suc" ? "thuan" : s === "bi_kim" ? "can_chu_dong" : "can_bang");
 
