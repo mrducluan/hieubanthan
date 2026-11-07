@@ -2,7 +2,7 @@
 // Chỉ VẼ theo tham số công khai (mảng, hướng tốt, số, hào) — không có dữ liệu cá nhân, không tự suy ra kiến thức.
 // Satori (next/og) vẽ <svg> thành ảnh nhưng không có font cho <text> trong svg → nhãn chữ đặt bằng <div> tuyệt đối.
 
-export const MANG_HINH = ["than-so", "tu-vi", "bat-tu", "kinh-dich", "phong-thuy", "nhan-tuong", "lich"] as const;
+export const MANG_HINH = ["than-so", "tu-vi", "bat-tu", "kinh-dich", "phong-thuy", "nhan-tuong", "tarot", "lich"] as const;
 export type MangHinh = (typeof MANG_HINH)[number];
 
 const VANG = "#e9c46a", NGOC = "#5fc4a5", CHU = "#e07a5f", MO = "rgba(236,235,247,0.55)", VIEN = "rgba(233,196,106,0.35)";
@@ -129,7 +129,21 @@ export function HinhMang({ mang, tot, so, hao }: { mang: MangHinh; tot: string[]
   if (mang === "bat-tu") return <BonTru />;
   if (mang === "lich") return <Lich />;
   if (mang === "nhan-tuong") return <GuongMat />;
+  if (mang === "tarot") return <BaLaBai />;
   return <VongSo so={so} />;
+}
+
+/** TR-1: ba lá bài xoè quạt, lá giữa ngửa có ngôi sao (hình trang trí, không phải tranh của bộ bài nào). */
+function BaLaBai() {
+  return (
+    <svg width={260} height={260} viewBox="0 0 120 120">
+      <rect x={20} y={28} width={40} height={64} rx={5} transform="rotate(-18 40 60)" fill="#141230" stroke="#E9C46A" strokeWidth={1.8} />
+      <rect x={60} y={28} width={40} height={64} rx={5} transform="rotate(18 80 60)" fill="#141230" stroke="#E9C46A" strokeWidth={1.8} />
+      <rect x={40} y={20} width={40} height={66} rx={5} fill="#f3ead6" stroke="#E9C46A" strokeWidth={2.2} />
+      <path d="M60,34 L63.5,44 L74,44.5 L66,51 L68.5,61 L60,55.5 L51.5,61 L54,51 L46,44.5 L56.5,44 Z" fill="#E9C46A" />
+      <path d="M50,70 H70 M53,76 H67" stroke="#2a2140" strokeWidth={1.6} strokeLinecap="round" />
+    </svg>
+  );
 }
 
 /** NT-1: gương mặt giản lược với ba vạch tam đình (hình trang trí, không phải mặt ai). */
@@ -148,5 +162,5 @@ function GuongMat() {
 }
 
 export const NHAN_MANG: Record<MangHinh, string> = {
-  "than-so": "Thần số học", "tu-vi": "Tử vi", "bat-tu": "Bát tự", "kinh-dich": "Kinh Dịch", "phong-thuy": "Phong thuỷ", "nhan-tuong": "Nhân tướng học", lich: "Lịch âm · ngày tốt",
+  "than-so": "Thần số học", "tu-vi": "Tử vi", "bat-tu": "Bát tự", "kinh-dich": "Kinh Dịch", "phong-thuy": "Phong thuỷ", "nhan-tuong": "Nhân tướng học", tarot: "Tarot", lich: "Lịch âm · ngày tốt",
 };

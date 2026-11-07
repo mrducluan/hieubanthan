@@ -19,7 +19,7 @@ import { CHU_HUYEN_HOC, CHU_KIEN_THUC, HINH_HUYEN_HOC } from "@/lib/chu/trang-ti
 import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM, CHU_NAM, CHU_NAM_SINH_CON, CHU_NAM_CUOI_HOI, CHU_NAM_TUOI } from "@/lib/chu/trang-con";
 import {
   CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_SAO_HAN, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_NHAN_TUONG, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
-  CHU_XEM_NGAY, CHU_XONG_DAT, CHU_THOI_GIAN_TOI, CHU_CHAN_DUNG,
+  CHU_XEM_NGAY, CHU_XONG_DAT, CHU_THOI_GIAN_TOI, CHU_CHAN_DUNG, CHU_TAROT,
 } from "@/lib/chu/cong-cu";
 
 export type NhomTrang = "cong_cu" | "tinh" | "phap_ly" | "chu_de" | "kien_thuc" | "tuoi" | "la_so_mau" | "blog_khung" | "cong_cu_con";
@@ -201,6 +201,23 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     ],
     lien_ket: [{ href: "/nhan-tuong/bo-vi", ten: "Bộ vị gương mặt" }, { href: "/bat-tu", ten: "Bát tự (hành cần bù)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
   } },
+  // TR-1: Tarot — tự xáo, rút, lật; bốn trường phái có sách; không phán.
+  { duong: "/tarot", nhom: "cong_cu", ten: "Tarot", o: O_CONG_CU, mac_dinh: { chu: CHU_TAROT,
+    tieu_de_seo: "Xem Tarot online: tự rút bài, ý nghĩa 78 lá theo 4 trường phái",
+    mo_ta_seo: "Trải bài Tarot online: nhấn giữ xáo bài, tự rút từ quạt 78 lá, lật từng lá. Bài đọc ghép Waite, Golden Dawn (Thoth), Marseille, B.O.T.A.: từng vị trí, phẩm giá nguyên tố, nhịp thời gian gợi ý, việc nên làm. Ý nghĩa 78 lá xuôi và ngược.",
+    doan: [
+      "Tarot ở đây là cách nhìn lại một việc qua hình ảnh: bạn đặt câu hỏi, nhấn giữ để xáo (nhịp tay bạn thành hạt giống xáo bài), tự rút lá từ quạt 78 lá úp rồi lật từng lá. Bài đọc bảy chương ghép bốn trường phái có sách — Waite (chuyện gì đang diễn ra), Golden Dawn và Thoth (phẩm giá nguyên tố giữa các lá, decan hoàng đạo), Marseille (hướng nhìn của nhân vật, việc để làm), B.O.T.A. (lá soi nếp nghĩ nào của bạn).",
+      "Năm kiểu trải bài: một lá, ba lá (quá khứ – hiện tại – sắp tới, hoặc tình huống – điều cản – lời khuyên), năm lá chữ thập, Celtic Cross mười lá. Có hồ sơ Nhân tướng (bạn tự soi gương) thì chương “Tướng và lá bài” chọn lá đại diện cho chính bạn.",
+      "Không phán điều gì sẽ xảy ra, không điểm số, không đọc người khác, không bán vật phẩm. Nhịp thời gian chỉ là gợi ý để chọn lúc làm. Mỗi hộp có nút “Đúng với mình / Chưa đúng” để bạn tự chấm.",
+    ],
+    hoi_dap: [
+      { hoi: "Tarot có đúng không?", dap: "Tarot không nói trước tương lai. Nó đặt tên cho điều đang có để bạn nhìn rõ hơn, bằng bốn cách đọc có sách; đúng hay chưa, bạn là người chấm ở từng hộp." },
+      { hoi: "Lá ngược nghĩa là gì?", dap: "Lá rút ra bị lộn đầu. Theo lối Waite, lá ngược là tính chất của lá đang bị chặn, yếu đi hoặc hướng vào trong — không phải dấu hiệu xấu. Marseille và Thoth không dùng lá ngược mà đọc bằng lá bên cạnh; bạn chọn dùng hay không khi xáo." },
+      { hoi: "Máy có chọn lá theo câu hỏi không?", dap: "Không. Máy chỉ xáo (theo hạt giống từ nhịp tay bạn, hoặc ngẫu nhiên thật); lá nào vào vị trí nào là do chính bạn rút từ quạt. Câu hỏi chỉ dùng để bài đọc nói đúng chuyện, không lưu trên máy chủ." },
+      { hoi: "Có xem cho người khác được không?", dap: "Không. Lá bài không nói được người khác đang nghĩ gì hay làm gì; hỏi theo hướng “tôi nên làm gì với chuyện này” thì trải bài trả lời được." },
+    ],
+    lien_ket: [{ href: "/tarot/la-bai", ten: "Ý nghĩa 78 lá bài" }, { href: "/kinh-dich", ten: "Kinh Dịch (gieo quẻ cho một việc)" }, { href: "/nhan-tuong", ten: "Nhân tướng học (lá đại diện)" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
+  } },
   // HL-1 / TDG-1: công cụ hoàng lịch + tuổi — giới thiệu + hỏi đáp mặc định ở app/*/noi-dung.ts.
   tuNd(ND_XEM_NGAY, "Xem ngày tốt hôm nay: hoàng đạo, giờ tốt, việc nên làm", CHU_XEM_NGAY),
   tuNd(ND_LAM_NHA, "Xem tuổi làm nhà, cưới hỏi: Kim lâu, Hoang ốc, Tam tai", CHU_LAM_NHA),
@@ -328,14 +345,14 @@ export const TEP_KB_THEO_LOAI: Record<LoaiTrang, string[]> = {
   cap_so: ["thanso_cap_so.json", "thanso_quan_he.json"], nghe: ["thanso_chan_dung.json", "thanso_linh_vuc.json"],
   tinh_yeu: ["thanso_chan_dung.json", "thanso_linh_vuc.json"], nam_ca_nhan: ["thanso_depth.json"], no_nghiep: ["thanso_chi_so_phu.json"],
   so_kep: ["thanso_chaldean.json"], dau_hieu: ["phongthuy_kb.json", "phongthuy_do_thi.json"],
-  co_thu: ["tuvi_co_thu.json", "tuvi_cach_cuc.json"], bo_vi: ["nhan_tuong_kb.json"],
+  co_thu: ["tuvi_co_thu.json", "tuvi_cach_cuc.json"], bo_vi: ["nhan_tuong_kb.json"], la_bai: ["tarot_kb.json"],
 };
 /** Trang mẫu của từng loại (để CMS xem trước chữ KB của cụm). */
 const VI_DU: Record<LoaiTrang, string> = {
   so: "so-1", que: "que-1-can", sao: "sao-tu-vi", cung: "cung-menh", thap_than: "ty-kien", nhat_chu: "nhat-chu-giap",
   cap_so: "so-chu-dao-1-va-1", nghe: "so-1-hop-nghe-gi", tinh_yeu: "so-1-trong-tinh-yeu", nam_ca_nhan: "nam-ca-nhan-1",
   no_nghiep: "no-nghiep-13", sao_cung: "tu-vi-cung-menh", hoa_cung: "hoa-loc-cung-menh", menh_nam: "sinh-nam-1950-menh-gi",
-  so_kep: "so-kep-10", dau_hieu: "duong-dam-thang-vao-nha", co_thu: "cot-tuy-phu", bo_vi: "an-duong",
+  so_kep: "so-kep-10", dau_hieu: "duong-dam-thang-vao-nha", co_thu: "cot-tuy-phu", bo_vi: "an-duong", la_bai: "thap",
 };
 
 /** ND-7 đợt 2: mọi cụm (trừ hồ sơ chuyên gia) cho đặt MỘT ảnh chia sẻ dùng chung — thay ảnh /og tự vẽ theo tiêu đề. */

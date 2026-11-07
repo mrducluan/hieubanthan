@@ -7,7 +7,7 @@ import { Check, CircleDashed, UserRound } from "lucide-react";
 import { tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 import type { KhoaMangHH } from "@/lib/huyen-hoc";
 
-const TEN_MANG: Record<KhoaMangHH, string> = { than_so: "Thần số học", tu_vi: "Tử vi", bat_tu: "Bát tự", phong_thuy: "Phong thuỷ", kinh_dich: "Kinh Dịch", nhan_tuong: "Nhân tướng học" };
+const TEN_MANG: Record<KhoaMangHH, string> = { than_so: "Thần số học", tu_vi: "Tử vi", bat_tu: "Bát tự", phong_thuy: "Phong thuỷ", kinh_dich: "Kinh Dịch", nhan_tuong: "Nhân tướng học", tarot: "Tarot" };
 const KHOA = Object.keys(TEN_MANG) as KhoaMangHH[];
 
 /** Trường hồ sơ còn thiếu để mở mảng này (Tử vi, Bát tự cần giờ + giới tính + nơi sinh; Phong thuỷ cần giới tính). */

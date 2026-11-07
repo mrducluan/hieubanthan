@@ -14,6 +14,7 @@ const NUT: { kieu: KieuMang; ten: string; href: string }[] = [
   { kieu: "phong-thuy", ten: "Phong thuỷ", href: "/phong-thuy" },
   { kieu: "kinh-dich", ten: "Kinh Dịch", href: "/kinh-dich" },
   { kieu: "nhan-tuong", ten: "Nhân tướng", href: "/nhan-tuong" },
+  { kieu: "tarot", ten: "Tarot", href: "/tarot" },   // TR-1: mảng thứ bảy — hình bảy cánh {7/3}
 ];
 
 // Sao rải cố định (server và client vẽ giống nhau).
@@ -24,15 +25,15 @@ const SAO: [number, number, number][] = [
 
 export function HinhNguMang({ className }: { className?: string }) {
   const cx = 200, cy = 196, r = 138;
-  const nut = NUT.map((n, i) => ({ ...n, p: tron(cx, cy, r, -Math.PI / 2 + (2 * Math.PI * i) / 6) }));
-  // Hình sáu cánh: hai tam giác lồng nhau (0 → 2 → 4 → 0 và 1 → 3 → 5 → 1) — một nét liền để chạy hiệu ứng vẽ nét.
+  const nut = NUT.map((n, i) => ({ ...n, p: tron(cx, cy, r, -Math.PI / 2 + (2 * Math.PI * i) / NUT.length) }));
+  // Hình bảy cánh {7/3}: 0 → 3 → 6 → 2 → 5 → 1 → 4 → 0 — một nét liền để chạy hiệu ứng vẽ nét (TR-1 thêm mảng thứ bảy).
   const diem = (k: number) => `${nut[k]!.p[0].toFixed(1)},${nut[k]!.p[1].toFixed(1)}`;
-  const sao = `M${diem(0)} L${diem(2)} L${diem(4)} Z M${diem(1)} L${diem(3)} L${diem(5)} Z`;
+  const sao = `M${diem(0)} L${diem(3)} L${diem(6)} L${diem(2)} L${diem(5)} L${diem(1)} L${diem(4)} Z`;
   const vach = Array.from({ length: 40 }, (_, k) => tron(cx, cy, r + 40, (k * Math.PI) / 20));
   return (
     <svg viewBox="0 0 400 400" data-testid="hinh-ngu-mang" aria-labelledby="nm-tieu-de"
       className={cn("h-auto w-full overflow-visible", className)}>
-      <title id="nm-tieu-de">Sáu mảng huyền học xếp quanh Thái cực: thần số, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch, Nhân tướng</title>
+      <title id="nm-tieu-de">Bảy mảng huyền học xếp quanh Thái cực: thần số, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch, Nhân tướng, Tarot</title>
       <defs>
         <radialGradient id="nm-tinh-van" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="rgb(var(--moon))" stopOpacity="0.22" />

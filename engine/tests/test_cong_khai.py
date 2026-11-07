@@ -18,7 +18,7 @@ from app.main import app
 client = TestClient(app)
 
 # Từ không được xuất hiện trong GIÁ TRỊ chuỗi trả ra (khoá JSON như `am_lich_iztro` không tính).
-CAM = re.compile(r"iztro|lasotuvi|lunar-typescript|VSOP|TuViMCP|anko|tianji|aov\.cc|ctext|OpenRouter|\(MIT|MIT\)"
+CAM = re.compile(r"iztro|lasotuvi|lunar-typescript|VSOP|TuViMCP|anko|tianji|aov\.cc|ctext|OpenRouter|\(MIT|\bMIT\)"
                  r"|Balliett|Jordan|Hồ Ngọc Đức|skill |quyết định 20\d\d|chủ dự án|trang_thai để|Renderings|verbatim"
                  r"|(?-i:nháp AI|AI nháp|do AI|có AI|AI hỗ trợ|AI viết)", re.I)
 

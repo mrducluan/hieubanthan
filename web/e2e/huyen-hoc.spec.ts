@@ -50,7 +50,7 @@ test("chip 'cần gì' đổi theo hồ sơ trên máy: thiếu giờ sinh → T
   const { gio: _g, noi_sinh: _n, ...thieu } = HO_SO_MAU;
   await napHoSo(page, thieu);
   await page.goto("/huyen-hoc");
-  await expect(page.getByTestId("dong-ho-so")).toContainText("4/6");
+  await expect(page.getByTestId("dong-ho-so")).toContainText("5/7");
   await expect(page.getByTestId("the-mang-tu_vi").getByTestId("chip-can")).toHaveAttribute("data-du", "0");
   await expect(page.getByTestId("the-mang-than_so").getByTestId("chip-can")).toHaveAttribute("data-du", "1");
   await expect(page.getByTestId("the-mang-phong_thuy").getByTestId("chip-can")).toContainText("Sẵn sàng");
@@ -81,6 +81,6 @@ test("AIO: /huyen-hoc.md cùng nội dung trang (canonical về HTML), /kham-pha
   const trang = ld.find((n: { "@type": string }) => n["@type"] === "CollectionPage");
   expect(trang.publisher["@id"]).toMatch(/#to-chuc$/);
   expect(trang.encoding.contentUrl).toMatch(/\/huyen-hoc\.md$/);
-  expect(trang.mainEntity.itemListElement.length).toBe(19);   // + Xem sao hạn (MT-ĐS) + Thời gian tới, Xem theo năm, Cưới năm (NAM-1/2) + Nhân tướng học (NT-1) + Chân dung tổng hợp (CD-1)
+  expect(trang.mainEntity.itemListElement.length).toBe(20);   // + Xem sao hạn (MT-ĐS) + Thời gian tới, Xem theo năm, Cưới năm (NAM-1/2) + Nhân tướng học (NT-1) + Chân dung tổng hợp (CD-1) + Tarot (TR-1)
   expect(ld.find((n: { "@type": string }) => n["@type"] === "FAQPage").mainEntity.length).toBe(6);
 });

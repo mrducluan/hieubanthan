@@ -39,6 +39,7 @@ export const THUC_THE = {
   "kinh-dich": { name: "Kinh Dịch", alternateName: "I Ching", sameAs: ["https://en.wikipedia.org/wiki/I_Ching", "https://vi.wikipedia.org/wiki/Kinh_D%E1%BB%8Bch"] },
   "phong-thuy": { name: "Phong thuỷ", alternateName: "Feng shui", sameAs: ["https://en.wikipedia.org/wiki/Feng_shui", "https://vi.wikipedia.org/wiki/Phong_th%E1%BB%A7y"] },
   "nhan-tuong": { name: "Nhân tướng học", alternateName: "Chinese physiognomy", sameAs: ["https://en.wikipedia.org/wiki/Physiognomy", "https://vi.wikipedia.org/wiki/Nh%C3%A2n_t%C6%B0%E1%BB%9Bng_h%E1%BB%8Dc"] },
+  tarot: { name: "Tarot", alternateName: "Tarot card reading", sameAs: ["https://en.wikipedia.org/wiki/Tarot", "https://vi.wikipedia.org/wiki/Tarot"] },
   lich: { name: "Âm lịch", alternateName: "Chinese calendar", sameAs: ["https://en.wikipedia.org/wiki/Chinese_calendar"] },
 } as const satisfies Record<MangAnh, { name: string; alternateName: string; sameAs: readonly string[] }>;
 
@@ -165,7 +166,7 @@ export function catMoTa(s: string, toiDa = 160): string {
 }
 
 /** SEO-K: ảnh đại diện bài 1200×630 có hình theo mảng (la bàn, 12 cung, quẻ, tứ trụ, vòng số, lịch) — /og vẽ. */
-export type MangAnh = "than-so" | "tu-vi" | "bat-tu" | "kinh-dich" | "phong-thuy" | "nhan-tuong" | "lich";
+export type MangAnh = "than-so" | "tu-vi" | "bat-tu" | "kinh-dich" | "phong-thuy" | "nhan-tuong" | "tarot" | "lich";
 export function anhBai(o: { tieuDe: string; mang?: MangAnh | null; nhan?: string; tot?: string[]; so?: string | number; hao?: number[] }): string {
   const q = new URLSearchParams({ tieu_de: o.tieuDe });
   if (o.mang) {
@@ -183,7 +184,7 @@ export function mangTheoDuong(duong: string): MangAnh | null {
   const d = duong.split("/")[1] ?? "";
   if (d === "hop-doi" || d === "than-so" || d === "hom-nay") return "than-so";
   if (d === "xem-ngay-tot" || d === "xem-tuoi-lam-nha" || d === "tuoi-xong-dat" || d === "xem-sao-han" || d === "lich-am" || d === "doi-lich-am-duong" || d === "nam" || d === "thoi-gian-toi") return "lich";
-  return (["tu-vi", "bat-tu", "kinh-dich", "phong-thuy", "nhan-tuong"] as const).find((m) => m === d) ?? null;
+  return (["tu-vi", "bat-tu", "kinh-dich", "phong-thuy", "nhan-tuong", "tarot"] as const).find((m) => m === d) ?? null;
 }
 
 /** ImageObject đủ kích thước + chú thích (Google Discover/ảnh tìm kiếm cần ảnh ≥ 1200 px rộng). */

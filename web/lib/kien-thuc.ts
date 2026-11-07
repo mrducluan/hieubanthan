@@ -8,7 +8,7 @@ import CHUYEN from "@/lib/chuyen-huong.json";
 import { CHU_DE_THEO_LOAI as CHU_DE_THEO_LOAI_GOC } from "@/lib/duong-silo";
 
 export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu"
-  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu" | "co_thu" | "bo_vi";
+  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu" | "co_thu" | "bo_vi" | "la_bai";
 
 type ChuDe = { loai: LoaiTrang; ten: string; mo_ta: string; mang: string };
 /** Khoá = mã chủ đề (giữ nguyên làm mã nội bộ: CMS, hình, llms); `duong` = URL cụm theo silo mảng (lib/chuyen-huong.json). */
@@ -54,6 +54,9 @@ const CHU_DE_GOC: Record<string, ChuDe> = {
   // NT-1: bộ vị gương mặt — một trang cho mỗi vùng của khảo sát tự quan sát (engine kb/trang_nhan_tuong.py)
   "bo-vi": { loai: "bo_vi", ten: "Bộ vị gương mặt", mang: "/nhan-tuong",
     mo_ta: "25 vùng trên gương mặt theo tướng pháp xưa (Ấn Đường, Sơn Căn, Pháp Lệnh, Địa Các…): nói về gì, các nét hay gặp, tuổi lưu niên, cách tự quan sát trong gương." },
+  // TR-1: 78 lá bài Tarot — một trang mỗi lá (engine kb/trang_tarot.py)
+  "la-bai": { loai: "la_bai", ten: "Ý nghĩa 78 lá bài Tarot", mang: "/tarot",
+    mo_ta: "78 lá Tarot: 22 ẩn chính và 56 ẩn phụ (Gậy, Cốc, Kiếm, Tiền) — ý nghĩa xuôi, ngược, theo tình cảm, công việc, tiền bạc; bốn trường phái Waite, Golden Dawn, Marseille, B.O.T.A.; decan và nhịp thời gian." },
   "co-thu": { loai: "co_thu", ten: "Cổ thư Tử vi", mang: "/tu-vi",
     mo_ta: "Phú Tử vi trong Tử Vi Đẩu Số Toàn Thư đọc từng câu: nguyên văn chữ Hán, phiên âm Hán Việt, nghĩa đời thường và câu nào ứng với lá số khi nào." },
 };
@@ -74,7 +77,7 @@ export const khoaTheoDuong = (duong: string): string | null =>
 /** Các cụm kiến thức thuộc một trang trụ (theo thứ tự khai báo). */
 export const cumCuaTru = (tru: string) => Object.entries(CHU_DE).filter(([, c]) => truCua(c.duong) === tru);
 /** Thứ tự silo trên thư viện + khối "Kiến thức {mảng}" ở trang công cụ. */
-export const THU_TU_TRU = ["/than-so", "/hop-doi", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong"] as const;
+export const THU_TU_TRU = ["/than-so", "/hop-doi", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot"] as const;
 export type CumHienThi = { duong: string; ten: string; mo_ta: string; khoa: string | null; hinh: KieuMang };
 /** Cụm không dựng từ CHU_DE (lá số mẫu, trang tuổi phong thuỷ) nhưng thuộc silo của mảng. */
 const CUM_PHU: Record<string, CumHienThi[]> = {
@@ -99,7 +102,7 @@ export function dsCumTru(tru: string): CumHienThi[] {
 export const HINH_CHU_DE: Record<string, KieuMang> = {
   "than-so": "than-so", "kinh-dich": "kinh-dich", "tu-vi": "tu-vi", "cung-tu-vi": "tu-vi", "thap-than": "bat-tu", "nhat-chu": "bat-tu",
   "hop-so": "than-so", "nghe-nghiep": "than-so", "tinh-yeu": "than-so", "nam-ca-nhan": "than-so", "no-nghiep": "than-so", "so-kep": "than-so",
-  "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu", "dau-hieu": "phong-thuy", "co-thu": "tu-vi", "bo-vi": "nhan-tuong",
+  "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu", "dau-hieu": "phong-thuy", "co-thu": "tu-vi", "bo-vi": "nhan-tuong", "la-bai": "tarot",
 };
 export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = CHU_DE_THEO_LOAI_GOC;
 

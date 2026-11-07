@@ -3,7 +3,7 @@
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 import type { MangAnh } from "@/lib/seo";
 
-export type KhoaMangHH = "than_so" | "tu_vi" | "bat_tu" | "phong_thuy" | "kinh_dich" | "nhan_tuong";
+export type KhoaMangHH = "than_so" | "tu_vi" | "bat_tu" | "phong_thuy" | "kinh_dich" | "nhan_tuong" | "tarot";
 export type MangHH = { khoa: KhoaMangHH; href: string; kieu: KieuMang; mang: MangAnh; han: string; lop: string };
 
 // Thứ tự = thứ tự đọc: thần số (cửa vào) → hai lá số → nhà → một việc → gương mặt. Lưới 6 cột: ba thẻ một hàng.
@@ -15,6 +15,8 @@ export const MANG_HH: MangHH[] = [
   { khoa: "kinh_dich", href: "/kinh-dich", kieu: "kinh-dich", mang: "kinh-dich", han: "易經", lop: "lg:col-span-2" },
   // NT-1 (2026-11-06): mảng thứ sáu — tự quan sát gương mặt; lưới 6 cột: 2+2+2 / 2+2+2 (sáu thẻ đều nhau).
   { khoa: "nhan_tuong", href: "/nhan-tuong", kieu: "nhan-tuong", mang: "nhan-tuong", han: "相", lop: "lg:col-span-2" },
+  // TR-1 (2026-11-07): mảng thứ bảy — Tarot phương Tây; thẻ lẻ cuối lưới 6 cột đặt giữa (col-start-3).
+  { khoa: "tarot", href: "/tarot", kieu: "tarot", mang: "tarot", han: "牌", lop: "lg:col-span-2 lg:col-start-3" },
 ];
 
 /** Đích của 6 câu "Bạn đang băn khoăn điều gì?" (chữ: hoi.cau_n / hoi.den_n). */
@@ -34,4 +36,5 @@ export const SO_CACH_HH = 3;
 export const TRA_CUU_THEM: Partial<Record<KhoaMangHH, { duong: string; ten: string; khoa: null }[]>> = {
   kinh_dich: [{ duong: "/hom-nay", ten: "Quẻ đầu ngày", khoa: null }, { duong: "/tu-dien", ten: "Từ điển thuật ngữ", khoa: null }],
   nhan_tuong: [{ duong: "/tu-dien", ten: "Từ điển thuật ngữ", khoa: null }],
+  tarot: [{ duong: "/kinh-dich", ten: "Gieo quẻ Kinh Dịch", khoa: null }],
 };

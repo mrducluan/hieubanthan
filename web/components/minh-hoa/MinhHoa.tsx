@@ -4,6 +4,8 @@
 import type { ReactNode } from "react";
 import { duongQr, maHoaQr, type MaQr } from "@/lib/qr";
 import { BanDoMat } from "@/components/nhan-tuong/BanDoMat";
+import { MatTruoc } from "@/components/tarot/LaBai";
+import type { BoTarot, LoaiLa, NguyenTo } from "@/lib/tarot-chung";
 import { GOC_QR, TEN_MIEN } from "@/lib/the-chia-se";
 
 export type MinhHoaDuLieu =
@@ -19,7 +21,9 @@ export type MinhHoaDuLieu =
   | { kieu: "nhat_chu"; can: string; hanh: string; duong: boolean }
   | { kieu: "dau_hieu"; nhom: "ngoai_canh" | "hinh_nha" | "trong_nha"; phong: string[]; veto: boolean; tot: boolean; ten: string }
   // NT-1: bộ vị gương mặt — vùng sáng trên bản đồ mặt (components/nhan-tuong/BanDoMat, vẽ tĩnh)
-  | { kieu: "bo_vi"; vung: string; ten: string; cung: string | null };
+  | { kieu: "bo_vi"; vung: string; ten: string; cung: string | null }
+  // TR-1: một lá bài Tarot (components/tarot/LaBai, vẽ tĩnh mặt trước)
+  | { kieu: "la_bai"; id: string; ten: string; en: string; so: number; bo: BoTarot | null; loai: LoaiLa; nguyen_to: NguyenTo };
 
 // Màu ngũ hành theo token giao diện (KB ghi cả "Hoả/Hỏa", "Thuỷ/Thủy").
 // Lớp Tailwind viết đủ (không ghép chuỗi) để trình biên dịch CSS thấy được.
@@ -317,6 +321,15 @@ function HinhBoVi({ vung, ten, cung }: { vung: string; ten: string; cung: string
   );
 }
 
+function HinhLaBai(mh: { id: string; ten: string; en: string; so: number; bo: BoTarot | null; loai: LoaiLa; nguyen_to: NguyenTo }) {
+  return (
+    <figure className="mx-auto w-[168px]">
+      <MatTruoc la={{ id: mh.id, ten: mh.ten, en: mh.en, so: mh.so, bo: mh.bo, loai: mh.loai, nguyen_to: mh.nguyen_to }} w={168} />
+      <figcaption className="mt-2 text-center text-xs text-fg-faint">{mh.ten} ({mh.en}) — hình ký hiệu giản lược, không phải tranh của bộ bài nào</figcaption>
+    </figure>
+  );
+}
+
 export function MinhHoa({ mh, duong, gon = false }: { mh?: MinhHoaDuLieu | null; duong?: string; gon?: boolean }) {
   if (!mh) return null;
   const hinh = (() => {
@@ -333,6 +346,7 @@ export function MinhHoa({ mh, duong, gon = false }: { mh?: MinhHoaDuLieu | null;
       case "nhat_chu": return <HinhNhatChu {...mh} />;
       case "dau_hieu": return <HinhDauHieu {...mh} />;
       case "bo_vi": return <HinhBoVi {...mh} />;
+      case "la_bai": return <HinhLaBai {...mh} />;
       default: return null;
     }
   })();
