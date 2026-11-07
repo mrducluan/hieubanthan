@@ -5,6 +5,13 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4ac. Tarot trả lời đúng câu hỏi (TR-2, 2026-11-07) — deploy ENGINE trước web
+
+- [ ] **Deploy engine trước web** (route mới `/v1/tarot/hieu-cau`, trải bài `hai_lua_chon`, trường `hieu_cau` trong bài đọc; web cũ bỏ qua trường mới).
+- [ ] (5 phút) Mở `/tarot`, gõ lại "Tôi có nên thay đổi công việc mới không?" → thấy dòng "Mình hiểu đây là câu hỏi 'có nên'…", bấm "Dùng trải bài này" (Hai lựa chọn), rút bài → chương 1 "Câu trả lời cho câu hỏi của bạn". Lá ngược có nhãn NGƯỢC.
+- [ ] (Chuyên gia, dần dần) Duyệt 78 dòng `nghieng` (lá nào nghiêng có / có điều kiện / chưa nên vội, xuôi và ngược) + 312 câu nghĩa ngược theo lĩnh vực trong `tarot_kb.json` — nháp ban biên tập, ba chỗ agent ghi cần xem: 8 Cốc xuôi (có điều kiện), 4 Gậy ngược (tiến), Ác Quỷ ngược (tiến).
+- [ ] (Quyết định) 4 ý tưởng tiếp ở `docs/NANG-CAP-TAROT.md` mục 8 (diễn đạt AI cho chương trả lời, hỏi lại sau 30 ngày, thẻ chia sẻ, trải bài "Khi nào").
+
 ### 4ab. Tarot (TR-1, 2026-11-07) — sau khi merge (deploy ENGINE trước web)
 
 `/tarot`: nhấn giữ xáo (hạt giống từ nhịp tay, băm trên máy), tự rút từ quạt 78 lá, lật từng lá → bài đọc 7 chương ghép 4 trường phái (Waite · Golden Dawn/Thoth · Marseille · B.O.T.A.); 78 trang `/tarot/la-bai/{lá}`; lá của ngày. Đánh giá seed Drive + 3 phương án UI: `docs/NANG-CAP-TAROT.md`.

@@ -4,6 +4,7 @@
   GET  /bo-bai     78 lá rút gọn + bộ, nguyên tố, trải bài, chủ đề, trường phái — web vẽ bộ bài
   POST /xao-bai    thứ tự 78 lá + cờ ngược (hạt giống từ cử chỉ người dùng → tất định; trống → CSPRNG)
   POST /doc-bai    bài đọc "Trải bài của bạn" (khuôn doi_song_1) từ lá NGƯỜI DÙNG đã rút
+  POST /hieu-cau   ý định của câu hỏi + trải bài gợi ý (TR-2; không trả lại câu hỏi)
   POST /hoi        hỏi đáp tất định (nghĩa lá, vị trí trong trải bài vừa rút, trải bài, khái niệm)
   GET|POST /la-ngay  lá của ngày (chung) / lá riêng theo ngày sinh (POST, không lưu)
 """
@@ -71,6 +72,12 @@ class HoiInput(BaseModel):
     la: list[_La] | None = Field(default=None, max_length=10)
 
 
+class HieuCauInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    cau_hoi: str = Field(default="", max_length=500)
+    chu_de: str | None = Field(default=None, max_length=30, pattern=r"^[a-z_]+$")
+
+
 class LaNgayInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
     ngay: _dt.date | None = None
@@ -104,6 +111,12 @@ def api_doc_bai(inp: DocBaiInput) -> dict:
 def api_hoi(inp: HoiInput) -> dict:
     kq = tr.hoi(inp.cau_hoi, trai_bai=inp.trai_bai, la=[l.model_dump() for l in inp.la] if inp.la else None)
     return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_hoi", **kq}
+
+
+@router.post("/hieu-cau")
+def api_hieu_cau(inp: HieuCauInput) -> dict:
+    """TR-2: ý định + lĩnh vực + trải bài hợp câu hỏi (chỉ mã / nhãn danh mục; câu hỏi không lưu, không trả lại)."""
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_hieu_cau", **tr.hieu_cau_cong_khai(inp.cau_hoi, inp.chu_de)}
 
 
 @router.get("/la-ngay")

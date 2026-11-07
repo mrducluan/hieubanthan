@@ -59,7 +59,7 @@ export function BanTraiBai({ tb, la, lat, onLat, boLa, pt, chon, onChon, classNa
             </div>
             {!gon && (
               <p className="relative mt-1 w-[170%] -translate-x-[20.6%] truncate text-center text-fg-muted" style={{ fontSize: `clamp(9px, ${(12 / W) * 100}cqw, 12px)`, transform: t.xoay ? `translateX(-20.6%) rotate(${-t.xoay}deg)` : undefined }}>
-                <span className="font-medium text-fg">{i + 1}.</span> {v.ten}
+                <span className="font-medium text-fg">{i + 1}.</span> {v.ten}{lr?.nguoc && lat[i] ? <span className="text-[#f0b35c]"> · ngược</span> : null}
               </p>
             )}
           </div>
