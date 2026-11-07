@@ -129,7 +129,7 @@ export interface BaoCaoDoiSong {
   phai?: string;
   trang_thai: string;
   ket: string;
-  dien_dat?: "ai" | "tron" | "mau";
+  dien_dat?: "ai" | "tron" | "mau" | "tra_loi";
   so_khoa?: number;
   cot_loi?: Hop[];
   thoi_gian_bieu?: MocDaiHan[];

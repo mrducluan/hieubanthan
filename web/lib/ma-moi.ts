@@ -409,3 +409,51 @@ export function docMaHoi(ma: string, homNay = new Date()): NoiDungMaHoi | null {
     return null;
   }
 }
+
+// ---------------------------------------------------------------- TR-3: thẻ "Câu trả lời của lá bài"
+// Mã riêng miền "tarot|". Chỉ mang: tên hiển thị (tuỳ chọn), mã trải bài, các lá đã rút (mã lá, ngược/xuôi, tên lá, tên vị
+// trí — engine đọc lại rồi máy chủ ký), ý định (mã danh mục), nhãn câu trả lời ("Chưa nên vội"…), câu nghiêng engine dựng,
+// nhãn loại việc theo DANH MỤC engine ("đổi sang công việc mới"). KHÔNG câu hỏi người dùng gõ, KHÔNG ngày sinh, KHÔNG lời đọc
+// từng lá.
+export const NoiDungMaTarot = z.object({
+  v: z.literal(1),
+  t: z.string().trim().max(24),
+  b: z.string().regex(/^[a-z_]{3,30}$/),
+  l: z.array(z.tuple([z.string().regex(/^[a-z]{3,4}_[a-z0-9_]{1,12}$/), z.boolean(), z.string().trim().min(1).max(24), z.string().trim().min(1).max(40)])).min(1).max(10),
+  y: z.string().regex(/^[a-z_]{3,20}$/),
+  n: z.enum(["tien", "dieu_kien", "cho"]),
+  h: z.string().trim().min(1).max(40),
+  c: z.string().trim().min(1).max(200),
+  w: z.string().trim().max(60).nullable(),
+  d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});
+export type NoiDungMaTarot = z.infer<typeof NoiDungMaTarot>;
+
+const kyTarot = (than: string) => b64u(createHmac("sha256", khoa()).update(`tarot|${than}`).digest()).slice(0, 16);
+
+/** Gói: [1, t, b, [[id, 0|1, tên, vị trí]…], y, n, h, c, w|"", số ngày từ 1/1/2026]. */
+export function kyMaTarot(nd: Omit<NoiDungMaTarot, "v" | "d">, homNay = new Date()): string {
+  const x = NoiDungMaTarot.parse({ ...nd, v: 1, d: homNay.toISOString().slice(0, 10) });
+  const goi = [1, x.t, x.b, x.l.map(([id, ng, ten, vt]) => [id, ng ? 1 : 0, ten, vt]), x.y, x.n, x.h, x.c, x.w ?? "",
+    Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
+  return `${than}.${kyTarot(than)}`;
+}
+
+export function docMaTarot(ma: string, homNay = new Date()): NoiDungMaTarot | null {
+  const [than, chu_ky] = ma.split(".");
+  if (!than || !chu_ky || ma.length > 2000) return null;
+  const a = Buffer.from(chu_ky), b = Buffer.from(kyTarot(than));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown[];
+    if (!Array.isArray(g) || g.length !== 10 || !Array.isArray(g[3])) return null;
+    const nd = NoiDungMaTarot.parse({
+      v: g[0], t: g[1], b: g[2], l: (g[3] as unknown[][]).map((x) => [x[0], x[1] === 1, x[2], x[3]]), y: g[4], n: g[5], h: g[6], c: g[7],
+      w: g[8] || null, d: new Date(NGAY_GOC + Number(g[9]) * 86_400_000).toISOString().slice(0, 10),
+    });
+    return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
+  } catch {
+    return null;
+  }
+}

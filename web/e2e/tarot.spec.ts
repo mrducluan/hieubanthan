@@ -43,6 +43,12 @@ test("trang công cụ: H1 máy chủ, xáo bằng máy → rút 3 lá → lật
   await expect(page.locator("#lg-tra_loi")).toContainText("Câu trả lời cho câu hỏi của bạn");
   await expect(page.locator("#lg-tra_loi")).toContainText(/Nghiêng về có|Có điều kiện|Chưa nên vội/);
   await expect(page.locator("#lg-tra_loi")).toContainText("Trước khi quyết, làm 3 việc");
+  // TR-3: câu "có nên" → máy nhớ MÃ hộp trả lời để hỏi lại sau 30 ngày (không câu hỏi, không lá)
+  const kc = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.kc_sau.v1") ?? "[]") as { mo_dun: string; loai_hoi?: string; mau: string; nhan: string }[]);
+  const tk = kc.find((x) => x.mo_dun === "tarot");
+  expect(tk?.loai_hoi).toBe("tarot");
+  expect(tk?.mau).toMatch(/^ds\.tarot\.tra_loi\.quyet_dinh\./);
+  expect(JSON.stringify(kc)).not.toContain("đối tác mới");
   await expect(bc).toContainText("Từng vị trí nói gì");
   await expect(bc).toContainText("Việc nên làm trong 72 giờ");
   await expect(bc.getByTestId("chip-muc").first()).toBeVisible();
@@ -138,4 +144,39 @@ test("TR-2: câu 'A hay B' → gợi trải bài Hai lựa chọn; lá ngược 
   // mặt trước không còn xoay nguyên lá 180° (chữ "6" không thành "9")
   const kieu = await ban.locator('[data-testid="la-bai"]').first().evaluate((el) => Array.from(el.querySelectorAll("div")).map((d) => d.style.transform).join("|"));
   expect(kieu).not.toContain("rotate(180deg)");
+});
+
+test("TR-3: thẻ 'Câu trả lời của lá bài' — mã ký không mang câu hỏi; ảnh có QR; trải bài Khi nào", async ({ page, request }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem("hbt.tarot.v1", JSON.stringify([{ id: "e2e3", luc: new Date().toISOString(), trai_bai: "ba_la_thoi_gian",
+      la: [{ id: "tien_6", nguoc: true }, { id: "dai_1", nguoc: false }, { id: "kiem_hiep_si", nguoc: true }],
+      cau: "Tôi có nên thay đổi công việc mới không?", chu_de: "cong_viec", tom_tat: "Pháp Sư" }]));
+  });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/tarot");
+  await expect(page.getByTestId("trai-bai-khi_nao")).toBeVisible();
+  await page.getByTestId("o-cau-hoi").fill("Khi nào tôi có việc mới?");
+  await expect(page.getByTestId("goi-y-cau-hoi")).toContainText("Ba lá: Khi nào", { timeout: 10_000 });
+  await page.getByTestId("o-cau-hoi").fill("");
+  await page.getByTestId("nut-xem-lai").first().click();
+  await expect(page.getByTestId("bao-cao-tarot")).toBeVisible({ timeout: 20_000 });
+  await page.getByTestId("mo-chia-se-tarot").click();
+  await page.getByTestId("tao-the-tarot").click();
+  const link = await page.getByTestId("link-the-tarot").inputValue({ timeout: 15_000 });
+  expect(link).toMatch(/\/the\/tarot\/[^?]+\?tu=ta\./);
+  const ma = decodeURIComponent(new URL(link).pathname.split("/").pop()!);
+  const than = Buffer.from(ma.split(".")[0]!, "base64url").toString("utf8");
+  expect(than).not.toContain("thay đổi công việc mới không");          // câu người dùng gõ không có trong mã
+  expect(than).toContain("đổi sang công việc mới");                    // nhãn loại việc theo danh mục
+  await page.goto(new URL(link).pathname + new URL(link).search);
+  await expect(page.getByTestId("the-tarot-nghieng")).toHaveText("Chưa nên vội");
+  await expect(page.getByTestId("the-tarot")).toContainText("Sắp tới · ngược");
+  await expect(page.getByTestId("the-tarot-moi")).toHaveAttribute("href", /\/tarot\?tu=ta\./);
+  for (const k of ["", "&khung=doc"]) {
+    const anh = await request.get(`/og/tarot?ma=${encodeURIComponent(ma)}${k}`);
+    expect(anh.status()).toBe(200);
+    expect(anh.headers()["content-type"]).toContain("image/png");
+  }
+  expect((await request.get("/og/tarot")).status()).toBe(200);
+  expect((await request.get(`/the/tarot/${ma.slice(0, -2)}xx`)).status()).toBe(200);   // mã sai chữ ký → trang "không còn hiệu lực"
 });

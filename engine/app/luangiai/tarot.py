@@ -416,6 +416,8 @@ def tra_loi_cau(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date) -> dict:
     vai = _vai(tb)
     lv = hc.get("linh_vuc")
     yd = {"nguoi_khac": "cach_lam"}.get(hc["y_dinh"], hc["y_dinh"])
+    if tb_ma(tb) == "khi_nao" and yd in ("tong_quat", "ket_qua", "hieu_minh"):
+        yd = "thoi_diem"                    # trải bài "Khi nào" luôn đọc như câu hỏi thời điểm
     hai = vai.get("hai_duong")
     if yd == "lua_chon" and not hai:
         yd = "quyet_dinh"
@@ -467,21 +469,28 @@ def tra_loi_cau(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date) -> dict:
             da.add(i)
     dk = vai.get("dieu_kien")
     if dk is not None and dk not in da:
-        h = hop_vi_tri(dk, nhan=f"Điều cần gỡ trước ({vt[dk]['ten']})")
+        h = hop_vi_tri(dk, nhan=vt[dk]["ten"] if "trước" in vt[dk]["ten"] else f"Điều cần gỡ trước ({vt[dk]['ten']})")
         hop.append(h)
         da.add(dk)
     if yd == "thoi_diem":
-        i = vai["ket"]
+        # Lá kết cục trước; không có khoảng ngày (Át, Tiểu đồng, ẩn chính theo hành tinh) thì lá trả lời kế tiếp có khoảng.
+        ung = [vai["ket"], *[i for i, _w in sorted(vai["chinh"], key=lambda x: -x[1]) if i != vai["ket"]]]
+        chon = next((i for i in ung if calc.khoang_thoi_gian(V[i]["id"], ngay_xem).get("tu")), None)
+        i = chon if chon is not None else vai["ket"]
         l = _la(V[i]["id"])
         k = calc.khoang_thoi_gian(l["id"], ngay_xem)
         if k.get("tu"):
             trong = "Bạn đang ở trong khoảng này." if k["dang_trong"] else f"Còn khoảng {k['sau_ngay']} ngày nữa tới."
             khoang = f"khoảng {_ngay_ngan(k['tu'])} tới {_ngay_ngan(k['den'])}"
+            loi = str(M["thoi_diem"]).format(la=l["ten"], vi_tri=vt[i]["ten"], khoang=khoang, trong=trong).strip()
         else:
-            trong, khoang = "", f"nhịp {k['nhip']}"
-        hop.append(kh.hop("thoi_diem", f"Nhịp gợi ý: {khoang}", str(M["thoi_diem"]).format(la=l["ten"], vi_tri=vt[i]["ten"], khoang=khoang, trong=trong).strip(),
+            khoang = f"nhịp {k['nhip']}"
+            loi = str(M["thoi_diem_khong_cua_so"]).format(la=l["ten"], vi_tri=vt[i]["ten"], nhip=k["nhip"])
+        hop.append(kh.hop("thoi_diem", f"Nhịp gợi ý: {khoang}", loi,
                           tu=_ngay(k.get("tu")), den=_ngay(k.get("den")), muc=_MUC_NG[n], phai="thoth", ma=kh.ma_mau(MO_DUN, "tra_loi", "thoi_diem", l["id"]),
-                          can_cu=["Book T (Golden Dawn) gắn lá số với decan, lá hoàng gia với vùng 30° hoàng đạo; đây là nhịp gợi ý, không phải ngày dự báo."]))
+                          la=_tom_la(l, V[i]["nguoc"]), loai_nhip=k["loai"],
+                          can_cu=["Book T (Golden Dawn) gắn lá số 2–10 với decan (~10 ngày), Hiệp sĩ / Hoàng hậu / Vua với vùng 30° hoàng đạo (~1 tháng), "
+                                  "ẩn chính với cung hoặc hành tinh; đây là nhịp gợi ý để chọn lúc làm, không phải ngày dự báo."]))
     kq, _tlk, lvk = _lv_cua(V[vai["khuyen"]], lv)
     hop.append(kh.hop("loi_khuyen", "Trước khi quyết, làm 3 việc" if yd in ("quyet_dinh", "lua_chon") else "Làm 3 việc trong tuần này",
                       " · ".join(f"{k + 1}) {x}" for k, x in enumerate(ds_truoc[:3])),
@@ -540,6 +549,50 @@ def hieu_cau_cong_khai(cau: str | None, chu_de: str | None = None) -> dict:
         loi = str(kb.mau("tra_loi", "nguoi_khac"))
     return {**{k: hc[k] for k in ("y_dinh", "linh_vuc", "chu_de", "viec", "nhan_viec", "lua_chon", "co_cau")}, "chan": chan, "ten_y_dinh": ten_yd,
             "goi_y_trai_bai": goi, "ten_goi_y": kb.trai_bai()[goi]["ten"], "loi": loi}
+
+
+def the_tra_loi(trai_bai: str, la: list[dict], *, y_dinh: str, viec: str | None = None, linh_vuc: str | None = None,
+                ngay_xem: dt.date | None = None) -> dict:
+    """TR-3: dữ kiện thẻ chia sẻ "Câu trả lời của lá bài" — máy chủ web đọc lại ở đây rồi mới ký mã (client không tự khai
+    nghiêng / tên lá). Đầu vào chỉ là MÃ (ý định, loại việc, lĩnh vực theo danh mục) + lá đã rút; không câu hỏi."""
+    from app.luangiai import tarot_cau_hoi as tc  # noqa: PLC0415
+    tb = {**kb.trai_bai()[trai_bai], "_ma": trai_bai} if trai_bai in kb.trai_bai() else None
+    if not tb:
+        raise ValueError(f"Không có trải bài {trai_bai}")
+    if y_dinh not in tc.Y_DINH:
+        raise ValueError("Ý định không có trong danh mục")
+    ds_viec = {ma: (nhan, lv) for ma, nhan, lv, _ in tc.VIEC}
+    if viec is not None and viec not in ds_viec:
+        raise ValueError("Việc không có trong danh mục")
+    if linh_vuc is not None and linh_vuc not in _TEN_LV:
+        raise ValueError("Lĩnh vực không có trong danh mục")
+    nhan = ds_viec[viec][0] if viec else None
+    hc = {"y_dinh": y_dinh, "linh_vuc": linh_vuc or (ds_viec[viec][1] if viec else None), "chu_de": None, "viec": viec, "nhan_viec": nhan,
+          "lua_chon": None, "goi_y_trai_bai": tc.GOI_Y_TRAI_BAI[y_dinh], "co_cau": True, "ro": True}
+    pt = calc.phan_tich(trai_bai, la)
+    tl = tra_loi_cau(pt, tb, hc, ngay_xem or config.hom_nay_vn())
+    vt = tb["vi_tri"]
+    return {"trai_bai": trai_bai, "ten_trai_bai": tb["ten"], "tieu_de": tl["tieu_de"], "nghieng": tl["nghieng"]["nghieng"],
+            "cau_dau": tl["cau_dau"], "nhan_viec": nhan, "y_dinh": y_dinh, "la_chinh": tl["la_chinh"],
+            "la": [{"id": v["id"], "nguoc": v["nguoc"], "ten": _la(v["id"])["ten"], "vi_tri": vt[v["vi_tri"]]["ten"]} for v in pt["vi_tri"]]}
+
+
+def dien_dat_tra_loi(bc: dict) -> dict:
+    """TR-3 (NARRATIVE): AI chỉ diễn đạt LẠI chương "Câu trả lời" thành một đoạn liền mạch. Nguồn = chính các hộp của chương
+    (lớp A, tất định) — không câu hỏi người dùng gõ, không ngày sinh. Qua bộ kiểm chung `kiem_ai` (số, thuật ngữ, cụm cấm,
+    câu ý mới, độ dài); hỏng / thiếu khoá / hết lượt → giữ bản mẫu. Các chương khác không gọi AI."""
+    import os  # noqa: PLC0415
+    c = next((x for x in bc["chuong"] if x["ma"] == "tra_loi"), None)
+    if not c or not c.get("hop") or not os.environ.get("OPENROUTER_API_KEY"):
+        return {**bc, "dien_dat": "mau"}
+    from app.narrative import luan_giai_van as lgv  # noqa: PLC0415
+    nguon = [f"{h['tieu_de']}: {h['noi_dung']}" + (f" Nên: {h['huong_xu_ly']}" if h.get("huong_xu_ly") else "") for h in c["hop"]]
+    nguon += [d for d in c["doan"] if d]
+    kq = lgv._mot_chuong({**c, "doan": nguon}, "Tarot")
+    if kq.get("che_do") != "llm":
+        return {**bc, "dien_dat": "mau"}
+    chuong = [({**x, "van_ai": kq["van_ai"], "che_do": "llm"} if x is c else x) for x in bc["chuong"]]
+    return {**bc, "chuong": chuong, "dien_dat": "tra_loi"}
 
 
 # ------------------------------------------------------------------ báo cáo

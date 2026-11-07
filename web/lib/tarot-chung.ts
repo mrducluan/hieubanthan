@@ -5,7 +5,7 @@ import type { BaoCaoDoiSong, ChuongDoiSongMo, Hop, Muc } from "@/components/luan
 export type BoTarot = "gay" | "coc" | "kiem" | "tien";
 export type NguyenTo = "hoa" | "thuy" | "khi" | "dat";
 export type LoaiLa = "an_chinh" | "so" | "hoang_gia";
-export type MaTraiBai = "mot_la" | "ba_la_thoi_gian" | "ba_la_loi_khuyen" | "nam_la" | "celtic" | "hai_lua_chon";
+export type MaTraiBai = "mot_la" | "ba_la_thoi_gian" | "ba_la_loi_khuyen" | "nam_la" | "celtic" | "hai_lua_chon" | "khi_nao";
 export type QuanHeNguyenTo = "manh" | "hop" | "trung" | "xung";
 export type SucLa = "tiep_suc" | "binh" | "bi_kim";
 
@@ -70,7 +70,7 @@ export const TEN_SUC: Record<SucLa, string> = { tiep_suc: "được tiếp sức
 export const TEN_QUAN_HE: Record<QuanHeNguyenTo, string> = { manh: "cùng nguyên tố", hop: "hợp nhau", trung: "trung tính", xung: "xung nhau" };
 export const MA_LA = /^[a-z]{3,4}_[a-z0-9_]{1,12}$/;
 export const TRAI_BAI_MAC_DINH: MaTraiBai = "ba_la_loi_khuyen";
-export const SO_LA: Record<MaTraiBai, number> = { mot_la: 1, ba_la_thoi_gian: 3, ba_la_loi_khuyen: 3, nam_la: 5, celtic: 10, hai_lua_chon: 5 };
+export const SO_LA: Record<MaTraiBai, number> = { mot_la: 1, ba_la_thoi_gian: 3, ba_la_loi_khuyen: 3, nam_la: 5, celtic: 10, hai_lua_chon: 5, khi_nao: 3 };
 export const MA_TRAI_BAI = Object.keys(SO_LA) as MaTraiBai[];
 export const laMaTraiBai = (s: string | null | undefined): s is MaTraiBai => Boolean(s) && s! in SO_LA;
 export const mucCuaSuc = (s: SucLa): Muc => (s === "tiep_suc" ? "thuan" : s === "bi_kim" ? "can_chu_dong" : "can_bang");
@@ -83,3 +83,15 @@ export function soLaMa(n: number): string {
   for (const [v, s] of b) while (x >= v) { r += s; x -= v; }
   return r;
 }
+
+/** TR-3: dựng `LaGon` đủ để VẼ một lá từ mã lá + tên (trang nhận thẻ chia sẻ không gọi engine). Chỉ đọc mã (bộ, số), không tính. */
+export function laGonTuMa(id: string, ten: string): LaGon {
+  const CAP: Record<string, number> = { tieu_dong: 11, hiep_si: 12, hoang_hau: 13, vua: 14 };
+  const NT: Record<BoTarot, NguyenTo> = { gay: "hoa", coc: "thuy", kiem: "khi", tien: "dat" };
+  if (id.startsWith("dai_")) return { id, ten, en: "", so: Number(id.slice(4)) || 0, bo: null, nguyen_to: "khi", loai: "an_chinh" };
+  const [bo, ...phan] = id.split("_") as [BoTarot, ...string[]];
+  const duoi = phan.join("_");
+  const cap = CAP[duoi];
+  return { id, ten, en: "", so: cap ?? (Number(duoi) || 1), bo, nguyen_to: NT[bo] ?? "khi", loai: cap ? "hoang_gia" : "so" };
+}
+export const TEN_NGHIENG: Record<"tien" | "dieu_kien" | "cho", string> = { tien: "Nghiêng về có", dieu_kien: "Có điều kiện", cho: "Chưa nên vội" };
