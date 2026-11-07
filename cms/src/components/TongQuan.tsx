@@ -23,6 +23,14 @@ export async function TongQuan({ payload, user }: { payload: Payload; user?: Typ
     collection: "bai-viet", ...q, limit: 200, depth: 0, pagination: false,
     select: { diem_kiem_dinh: true },
   });
+  // BLOG-9e: bài NotFair cron tự nhập (BLOG-9d) nằm ở nháp, không ai báo → nêu ở đây cho Chủ biên. Bài đã gộp vào bài
+  // khác (BLOG-9, "da_duyet" + nháp) không tính.
+  const nf = ctv ? null : await payload.find({
+    collection: "bai-viet", ...q, draft: true, limit: 8, depth: 0, sort: "-createdAt",
+    where: { and: [{ nguon_goc: { equals: "notfair" } }, { _status: { equals: "draft" } },
+      { trang_thai_duyet: { not_equals: "da_duyet" } }] },
+    select: { tieu_de: true, diem_kiem_dinh: true, _status: true, slug: true },
+  });
   const diem = tb.docs.map((d) => (d as Bai).diem_kiem_dinh).filter((d): d is number => typeof d === "number");
   const trungBinh = diem.length ? Math.round(diem.reduce((a, b) => a + b, 0) / diem.length) : null;
 
@@ -60,6 +68,20 @@ export async function TongQuan({ payload, user }: { payload: Payload; user?: Typ
           <span className="hbt-tq-so">+</span><span>Viết bài mới</span>
         </a>
       </div>
+      {nf && nf.docs.length > 0 && (
+        <div className="hbt-tq-can-sua" data-testid="tq-notfair-moi">
+          <p><b>Bài NotFair mới chờ anh/chị đọc</b> ({nf.totalDocs}) — máy đã nhập, chuẩn hoá SEO, thay ảnh; đọc rồi bấm <b>Xuất bản</b>.
+            Trước khi xuất bản, bài không hiện trên web.</p>
+          <ul>
+            {(nf.docs as Bai[]).map((b) => (
+              <li key={b.id}>
+                <a href={`/admin/collections/bai-viet/${b.id}`}>{b.tieu_de || "(chưa có tiêu đề)"}</a>
+                <span> — {typeof b.diem_kiem_dinh === "number" ? `${b.diem_kiem_dinh}/100` : "chưa chấm"}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {thap.docs.length > 0 && (
         <div className="hbt-tq-can-sua">
           <p><b>Nên sửa trước</b> (điểm kiểm định dưới 70):</p>
