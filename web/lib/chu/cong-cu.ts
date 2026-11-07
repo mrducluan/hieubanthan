@@ -97,6 +97,20 @@ export const CHU_NHAN_TUONG = gopBang(mangHuyenHoc(true, "Tự soi gương · Ta
   "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề", mac_dinh: "Hỏi về một vùng trên mặt bạn", toi_da: 120 },
 });
 
+// TR-1: Tarot — năm bước (hỏi · xáo · rút · lật · đọc), lá của ngày, bài đọc 7 chương, hỏi đáp nghĩa lá.
+export const CHU_TAROT = gopBang(mangHuyenHoc(true, "Tarot · 4 trường phái · 78 lá"), {
+  "dau.chip_1": { nhom: DAU, nhan: "Chip lợi ích 1", mac_dinh: "Tự xáo, tự rút, tự lật", toi_da: 40 },
+  "dau.chip_2": { nhom: DAU, nhan: "Chip lợi ích 2", mac_dinh: "Bốn trường phái có sách", toi_da: 40 },
+  "dau.chip_3": { nhom: DAU, nhan: "Chip lợi ích 3", mac_dinh: "Không phán, bạn tự chấm", toi_da: 40 },
+  "la_ngay.tieu_de": { nhom: "Lá của ngày", nhan: "Dòng nhỏ khối lá của ngày", mac_dinh: "Lá của ngày", toi_da: 60 },
+  "hoi_bai.nho": { nhom: "Trải bài", nhan: "Bước 1 — dòng nhỏ", mac_dinh: "Bước 1", toi_da: 60 },
+  "hoi_bai.lon": { nhom: "Trải bài", nhan: "Bước 1 — tiêu đề", mac_dinh: "Bạn đang hỏi chuyện gì?", toi_da: 120 },
+  "bai_doc.nho": { nhom: "Bài đọc", nhan: "Mục bài đọc — dòng nhỏ", mac_dinh: "Bài đọc bảy chương", toi_da: 60 },
+  "bai_doc.lon": { nhom: "Bài đọc", nhan: "Mục bài đọc — tiêu đề", mac_dinh: "Trải bài của bạn", toi_da: 120 },
+  "hoi.nho": { nhom: "Hỏi đáp", nhan: "Mục hỏi — dòng nhỏ", mac_dinh: "Hỏi đáp chuyên sâu", toi_da: 60 },
+  "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề", mac_dinh: "Hỏi về một lá, một trải bài", toi_da: 120 },
+});
+
 export const CHU_THAN_SO = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề (chưa có hồ sơ)", mac_dinh: "Thần số học", toi_da: 60 },
   "dau.dang_tai": { nhom: DAU, nhan: "Tiêu đề lúc đang tải", mac_dinh: "Thần số học theo họ tên và ngày sinh", toi_da: 120 },

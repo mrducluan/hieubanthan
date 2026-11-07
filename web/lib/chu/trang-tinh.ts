@@ -23,6 +23,9 @@ const MANG: [string, string, string, string, [string, string, string], string, s
   ["nhan_tuong", "Nhân tướng học", "Gương mặt mình kể gì về mình?",
     "Tự soi gương, trả lời 31 câu về trán, mày, mắt, mũi, miệng, cằm — sách tướng xưa đọc ra tính cách, việc, tiền, sức khoẻ, tuổi lưu niên. Không cần gửi ảnh.",
     ["Bản đồ gương mặt tô theo từng vùng", "Năm nay sách xem ở vùng nào", "Việc 0 đồng đổi nếp mặt"], "Chỉ cần một tấm gương", "Soi gương mặt của bạn"],
+  ["tarot", "Tarot", "Một việc đang bí, lá bài nói gì?",
+    "Nhấn giữ xáo bài, tự rút từ quạt 78 lá, lật từng lá. Bốn trường phái có sách — Waite, Golden Dawn, Marseille, B.O.T.A. — cùng đọc một trải bài.",
+    ["Năm kiểu trải bài, có Celtic Cross", "Đường nối lá hợp – xung ngay trên bàn", "Việc nên làm trong 72 giờ"], "Chỉ cần một câu hỏi", "Rút bài của bạn"],
 ];
 const HOI: [string, string][] = [
   ["Mình là người thế nào?", "Thần số học"],
@@ -57,6 +60,7 @@ const SO_SANH: [string, string, string, string, string][] = [
   ["phong_thuy", "Phong thuỷ", "Năm sinh, giới tính, hướng nhà", "Hướng hợp, đặt phòng, tháng nên sửa", "Bát trạch, Huyền Không phi tinh"],
   ["kinh_dich", "Kinh Dịch", "Một câu hỏi và lúc gieo", "Một việc cụ thể đang phân vân", "Chu Dịch: quái từ, hào từ, Thoán truyện"],
   ["nhan_tuong", "Nhân tướng học", "Điều bạn tự thấy trong gương (31 câu)", "Tính cách, nếp thói quen, vùng mặt nên chăm, tuổi lưu niên", "Ma Y Thần Tướng, Băng Giám, Nội Kinh"],
+  ["tarot", "Tarot", "Một câu hỏi, lá bạn tự rút", "Một việc cụ thể: chuyện gì đang có, dòng chảy, việc nên làm", "Waite 1910, Book T (Golden Dawn), Marseille, B.O.T.A."],
 ];
 const HOI_DAP: [string, string][] = [
   ["Huyền học là gì?", "Là tên gọi chung cho các hệ thống người xưa dùng để đọc nhịp của con người và thời gian: qua con số (thần số học), ngày giờ sinh (Tử vi, Bát tự), quẻ dịch (Kinh Dịch), nơi ở (Phong thuỷ) và gương mặt (Nhân tướng học). Ở đây chúng là nội dung văn hoá để tham khảo và tự soi, không phải lời tiên đoán."],
@@ -70,11 +74,11 @@ const HOI_DAP: [string, string][] = [
 // Bảng chữ trang hub /huyen-hoc (trước 2026-10-27 là /kham-pha — khoá cũ giữ nguyên tên để chữ đã sửa ở CMS không mất).
 export const CHU_HUYEN_HOC = {
   "dau.nhan_tren": { nhom: "Đầu trang", nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Huyền học phương Đông · thần số học", toi_da: 60 },
-  ...Object.fromEntries((["Miễn phí mọi phép tính", "Một hồ sơ cho cả sáu mảng", "Nói cả điểm mạnh lẫn điểm yếu"]).map((m, i) =>
+  ...Object.fromEntries((["Miễn phí mọi phép tính", "Một hồ sơ cho cả bảy mảng", "Nói cả điểm mạnh lẫn điểm yếu"]).map((m, i) =>
     [`dau.chip_${i + 1}`, { nhom: "Đầu trang", nhan: `Chip ${i + 1} dưới lời dẫn`, mac_dinh: m, toi_da: 40 }])),
   "dau.nut_chinh": { nhom: "Đầu trang", nhan: "Nút chính (mở /than-so)", mac_dinh: "Bắt đầu với con số của bạn", toi_da: 40 },
   "dau.nut_phu": { nhom: "Đầu trang", nhan: "Nút phụ (cuộn tới mục chọn theo câu hỏi)", mac_dinh: "Chọn theo câu hỏi", toi_da: 40 },
-  "ho_so.chao": { nhom: "Đầu trang", nhan: "Dòng hồ sơ ({ten} = tên gọi, {n} = số mảng xem ngay được)", mac_dinh: "Với hồ sơ hiện có, {ten} xem ngay được {n}/6 mảng", toi_da: 80 },
+  "ho_so.chao": { nhom: "Đầu trang", nhan: "Dòng hồ sơ ({ten} = tên gọi, {n} = số mảng xem ngay được)", mac_dinh: "Với hồ sơ hiện có, {ten} xem ngay được {n}/7 mảng", toi_da: 80 },
   "ho_so.thieu": { nhom: "Đầu trang", nhan: "Dòng nhắc khi hồ sơ còn thiếu ({thieu} = trường còn thiếu, {mang} = mảng chưa mở)", mac_dinh: "Thêm {thieu} để mở {mang}", toi_da: 100 },
   "ho_so.san_sang": { nhom: THE, nhan: "Chip khi hồ sơ đã đủ cho mảng", mac_dinh: "Sẵn sàng", toi_da: 30 },
   "ho_so.can_them": { nhom: THE, nhan: "Chip khi hồ sơ còn thiếu cho mảng ({thieu} = trường còn thiếu)", mac_dinh: "Thiếu {thieu}", toi_da: 40 },
@@ -86,7 +90,7 @@ export const CHU_HUYEN_HOC = {
     [`hoi.den_${i + 1}`, { nhom: "Chọn theo câu hỏi", nhan: `Câu ${i + 1} — tên công cụ`, mac_dinh: den, toi_da: 30 }],
   ])),
 
-  "mang.nho": { nhom: THE, nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Sáu hệ thống, một hồ sơ", toi_da: 60 },
+  "mang.nho": { nhom: THE, nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Bảy hệ thống, một hồ sơ", toi_da: 60 },
   "mang.lon": { nhom: THE, nhan: "Tiêu đề mục", mac_dinh: "Mỗi mảng trả lời một kiểu câu hỏi", toi_da: 80 },
   ...Object.fromEntries(MANG.flatMap(([k, ten, hoi, mo, nhan, can, nut]) => [
     [`the.${k}_ten`, { nhom: THE, nhan: `${ten} — tên`, mac_dinh: ten, toi_da: 40 }],
@@ -111,7 +115,7 @@ export const CHU_HUYEN_HOC = {
   ])),
 
   "so_sanh.nho": { nhom: "Bảng so sánh", nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Khác nhau thế nào", toi_da: 60 },
-  "so_sanh.lon": { nhom: "Bảng so sánh", nhan: "Tiêu đề mục", mac_dinh: "Sáu hệ thống, sáu kiểu câu hỏi", toi_da: 80 },
+  "so_sanh.lon": { nhom: "Bảng so sánh", nhan: "Tiêu đề mục", mac_dinh: "Bảy hệ thống, bảy kiểu câu hỏi", toi_da: 80 },
   "so_sanh.cot_1": { nhom: "Bảng so sánh", nhan: "Tên cột 1", mac_dinh: "Hệ thống", toi_da: 30 },
   "so_sanh.cot_2": { nhom: "Bảng so sánh", nhan: "Tên cột 2", mac_dinh: "Dựa vào", toi_da: 30 },
   "so_sanh.cot_3": { nhom: "Bảng so sánh", nhan: "Tên cột 3", mac_dinh: "Trả lời tốt nhất", toi_da: 30 },

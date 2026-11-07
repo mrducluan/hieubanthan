@@ -58,7 +58,7 @@ test("thanh mảng: mọi đường dẫn nằm trong silo đã khai (không lin
     expect(new Set(t.muc.map((m) => m.ma)).size).toBe(t.muc.length);
     for (const m of t.muc.slice(1)) {
       const p = m.duong.split(/[?#]/)[0]!;
-      const hopLe = cum.has(p) || ["/tu-vi/la-so-mau", "/phong-thuy/huong-xau-nam", CHUYEN.tuoi_huong, "/tu-vi", "/kinh-dich", "/nhan-tuong"].includes(p);
+      const hopLe = cum.has(p) || ["/tu-vi/la-so-mau", "/phong-thuy/huong-xau-nam", CHUYEN.tuoi_huong, "/tu-vi", "/kinh-dich", "/nhan-tuong", "/tarot"].includes(p);
       expect(hopLe, `${t.ma}.${m.ma} → ${m.duong}`).toBe(true);
     }
   }

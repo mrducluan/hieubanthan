@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 from app.hoidap import kinhdich as kd
-from app.luangiai import ban_do_con_so, chan_dung_tong_hop, nhan_tuong, phongthuy_doi_song, thoi_gian_toi, toan_bo
+from app.luangiai import ban_do_con_so, chan_dung_tong_hop, nhan_tuong, phongthuy_doi_song, tarot, thoi_gian_toi, toan_bo
 
 GOLDEN = Path(__file__).resolve().parents[1] / "fixtures" / "golden"
 XEM = dt.date(2026, 11, 2)
@@ -32,7 +32,7 @@ def _ma(x, ra: set[str]) -> set[str]:
 
 
 def chup() -> dict[str, list[str]]:
-    ra: dict[str, set[str]] = {k: set() for k in ("tuvi", "battu", "thanso", "phongthuy", "kinhdich", "thoi_gian", "nhantuong", "chan_dung")}
+    ra: dict[str, set[str]] = {k: set() for k in ("tuvi", "battu", "thanso", "phongthuy", "kinhdich", "thoi_gian", "nhantuong", "chan_dung", "tarot")}
     la60 = json.loads((GOLDEN / "lasotuvi_60.json").read_text(encoding="utf-8"))
     la60 = la60.get("cases", la60) if isinstance(la60, dict) else la60
     for i, ca in enumerate(la60[:12]):
@@ -73,4 +73,10 @@ def chup() -> dict[str, list[str]]:
         tv = {"ngay": ngay, "ti": ti, "gioi_tinh": gt}
         bt = {"lich": dt.datetime.combine(ngay, dt.time(gio, 30)), "gioi_tinh": gt, "gio_ty": "da_ty"}
         _ma(chan_dung_tong_hop.lap(tv, bt, tl, XEM), ra["chan_dung"])
+    # TR-1: Tarot — ba trải bài cố định (Celtic 10 lá, 3 lá, 1 lá) × có / không khảo sát Nhân tướng.
+    from tests.test_tarot import BA_LA, CELTIC  # noqa: PLC0415
+    _ma(tarot.bao_cao("celtic", CELTIC, chu_de="cong_viec", ngay_xem=XEM, nam_sinh=1988, gioi_tinh="nam", tra_loi_nhan_tuong=TL_DAY), ra["tarot"])
+    _ma(tarot.bao_cao("ba_la_thoi_gian", BA_LA, ngay_xem=XEM), ra["tarot"])
+    _ma(tarot.bao_cao("mot_la", [{"id": "dai_13"}], chu_de="tinh_cam", ngay_xem=XEM), ra["tarot"])
+    _ma(tarot.bao_cao("nam_la", [{"id": "gay_2", "nguoc": True}, {"id": "gay_5"}, {"id": "dai_19"}, {"id": "coc_2"}, {"id": "tien_4"}], chu_de="tien_bac", ngay_xem=XEM), ra["tarot"])
     return {k: sorted(v) for k, v in ra.items()}

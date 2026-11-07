@@ -81,7 +81,7 @@ export function HinhBauTroi({ className }: { className?: string }) {
   );
 }
 
-export type KieuMang = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thuy" | "nhan-tuong";
+export type KieuMang = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thuy" | "nhan-tuong" | "tarot";
 
 /** Hình nhỏ cho thẻ từng mảng (thay icon chung chung). */
 export function HinhMang({ kieu, className }: { kieu: KieuMang; className?: string }) {
@@ -101,6 +101,17 @@ export function HoaTietMang({ kieu }: { kieu: KieuMang }) {
     {kieu === "phong-thuy" && <BatQuaiNho />}
     {kieu === "than-so" && <SoNho />}
     {kieu === "nhan-tuong" && <MatNho />}
+    {kieu === "tarot" && <LaNho />}
+  </>;
+}
+
+function LaNho() {    // TR-1: ba lá bài xoè quạt, lá giữa ngửa có ngôi sao (không phải tranh của bộ bài nào)
+  return <>
+    <rect x={30} y={18} width={30} height={48} rx={4} transform="rotate(-16 45 60)" className="fill-bg stroke-gold/60" strokeWidth={1.4} />
+    <rect x={60} y={18} width={30} height={48} rx={4} transform="rotate(16 75 60)" className="fill-bg stroke-gold/60" strokeWidth={1.4} />
+    <rect x={45} y={12} width={30} height={50} rx={4} className="fill-surface-2 stroke-gold" strokeWidth={1.6} />
+    <path d="M60,22 L62.5,29 L70,29.5 L64,34 L66,41 L60,37 L54,41 L56,34 L50,29.5 L57.5,29 Z" className="fill-gold" />
+    <path d="M52,50 H68 M54,55 H66" className="stroke-moon/70" strokeWidth={1.2} strokeLinecap="round" />
   </>;
 }
 

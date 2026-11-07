@@ -38,7 +38,7 @@ export function laTrangKienThuc(duong: string): boolean {
 export const CHU_DE_THEO_LOAI = {
   so: "than-so", que: "kinh-dich", sao: "tu-vi", cung: "cung-tu-vi", thap_than: "thap-than", nhat_chu: "nhat-chu",
   cap_so: "hop-so", nghe: "nghe-nghiep", tinh_yeu: "tinh-yeu", nam_ca_nhan: "nam-ca-nhan", no_nghiep: "no-nghiep", so_kep: "so-kep",
-  sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi", dau_hieu: "dau-hieu", co_thu: "co-thu", bo_vi: "bo-vi",
+  sao_cung: "sao-cung", hoa_cung: "tu-hoa", menh_nam: "menh-tuoi", dau_hieu: "dau-hieu", co_thu: "co-thu", bo_vi: "bo-vi", la_bai: "la-bai",
 } as const;
 
 /** Đường dẫn trang kiến thức theo (loại, slug) — dùng được ở trình duyệt (khối hình trong hỏi đáp trỏ sang trang). */
@@ -51,5 +51,5 @@ export function duongTrangKb(loai: string, slug: string): string | null {
 /** Trang công cụ = trang trụ (pillar) của silo; tên hiện ở breadcrumb và khối "Kiến thức {mảng}". Dùng được ở trình duyệt. */
 export const TEN_MANG_SILO: Record<string, string> = {
   "/than-so": "Thần số học", "/hop-doi": "Hợp đôi", "/tu-vi": "Tử vi", "/bat-tu": "Bát tự", "/kinh-dich": "Kinh Dịch", "/phong-thuy": "Phong thuỷ",
-  "/nhan-tuong": "Nhân tướng học",
+  "/nhan-tuong": "Nhân tướng học", "/tarot": "Tarot",
 };

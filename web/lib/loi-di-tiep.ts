@@ -3,7 +3,7 @@
 // Web LỌC LẠI mọi thẻ từ CMS: đường dẫn trong site, chữ thuần cắt độ dài, chip / hình thuộc danh mục cố định.
 import MAC_DINH from "@/lib/loi-di-tiep-mac-dinh.json";
 
-export type KieuHinh = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thuy" | "nhan-tuong";
+export type KieuHinh = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thuy" | "nhan-tuong" | "tarot";
 export type MaNhan = "kien_thuc" | "cong_cu" | "thu_vien";
 export type TheTho = { duong: string; ten: string; mo_ta: string; nhan: MaNhan; hinh: KieuHinh };
 export type CauHinhLoiDi = {
@@ -12,7 +12,7 @@ export type CauHinhLoiDi = {
 };
 
 export const NHAN: Record<MaNhan, "Kiến thức" | "Công cụ" | "Thư viện"> = { kien_thuc: "Kiến thức", cong_cu: "Công cụ", thu_vien: "Thư viện" };
-const HINH = new Set<KieuHinh>(["than-so", "tu-vi", "kinh-dich", "bat-tu", "phong-thuy", "nhan-tuong"]);
+const HINH = new Set<KieuHinh>(["than-so", "tu-vi", "kinh-dich", "bat-tu", "phong-thuy", "nhan-tuong", "tarot"]);
 const TRONG_SITE = /^\/(?![/\\])[^\s\\<>"']*$/;
 const chu = (v: unknown, n: number) => (typeof v === "string" ? v.replace(/\s+/g, " ").trim().slice(0, n) : "");
 

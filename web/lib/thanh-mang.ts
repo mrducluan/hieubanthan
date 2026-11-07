@@ -60,6 +60,12 @@ export const THANH_MANG: readonly ThanhMang[] = [
     { ma: "bo_vi", duong: cum("bo-vi"), nhan: "Bộ vị gương mặt", dem: "bo-vi" },
     { ma: "hoi", duong: "/nhan-tuong#hoi-dap", nhan: "Hỏi về một vùng" },
   ] },
+  // TR-1: Tarot — công cụ trải bài + cụm 78 lá.
+  { tru: "/tarot", ma: "tarot", ten: "Tarot", muc: [
+    { ma: "cong_cu", duong: "/tarot", nhan: "Trải bài của tôi" },
+    { ma: "la_bai", duong: cum("la-bai"), nhan: "78 lá bài", dem: "la-bai" },
+    { ma: "hoi", duong: "/tarot#hoi-dap", nhan: "Hỏi về một lá" },
+  ] },
   // "Số trong tình yêu" nằm dưới /than-so (silo) nhưng thuộc ý định hợp đôi → thanh Hợp đôi trỏ cùng cụm.
   { tru: "/hop-doi", ma: "hopdoi", ten: "Hợp đôi", muc: [
     { ma: "cong_cu", duong: "/hop-doi", nhan: "Xem hợp đôi" },

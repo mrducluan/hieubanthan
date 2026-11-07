@@ -83,7 +83,7 @@ export default async function HuyenHoc() {
           <h1 className="mt-3 text-4xl leading-[1.1] sm:text-5xl lg:text-[3.4rem]">
             {nd.dau.h1 && nd.dau.h1 !== MD.h1
               ? <ChuNhan chu={nd.dau.h1} lopNhan="text-gradient-gold italic" />
-              : <><span className="text-gradient-gold italic">Huyền học</span> — sáu cách nhìn lại mình</>}
+              : <><span className="text-gradient-gold italic">Huyền học</span> — bảy cách nhìn lại mình</>}
           </h1>
           <LoiDanCms nd={nd} className="mt-4 max-w-xl text-base leading-relaxed text-fg-muted sm:text-lg">{MD.loi_dan}</LoiDanCms>
           <ul className="mt-5 hidden flex-wrap gap-2 text-sm text-fg-muted sm:flex" aria-label="Điểm khác biệt">

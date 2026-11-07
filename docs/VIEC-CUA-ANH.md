@@ -5,6 +5,19 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4ab. Tarot (TR-1, 2026-11-07) — sau khi merge (deploy ENGINE trước web)
+
+`/tarot`: nhấn giữ xáo (hạt giống từ nhịp tay, băm trên máy), tự rút từ quạt 78 lá, lật từng lá → bài đọc 7 chương ghép 4 trường phái (Waite · Golden Dawn/Thoth · Marseille · B.O.T.A.); 78 trang `/tarot/la-bai/{lá}`; lá của ngày. Đánh giá seed Drive + 3 phương án UI: `docs/NANG-CAP-TAROT.md`.
+- [ ] **Deploy engine trước web** (route mới `/v1/tarot/*`, loại trang `la_bai`; web cũ không gọi gì mới). Kiểm: Render "Deploy live" rồi mở `https://hieuban.com/tarot`, rút thử một trải bài 3 lá.
+- [ ] (5 phút) Rút thử trải bài Celtic Cross với một câu hỏi thật của anh; xem đường nối vàng/hổ phách trên bàn và chương "Nhịp thời gian" có đọc "gợi ý" (không ngày dự báo) không; bấm "Đúng với mình" vài hộp → phiếu về mã `ds.tarot.*` (qua 0017, không migration).
+- [ ] **Menu Huyền học đã đủ 12 mục con** — muốn `/tarot` vào menu thì chọn một mục nhường chỗ (CMS → Giao diện website → Menu đầu trang); hiện vào từ hub `/huyen-hoc` (thẻ thứ bảy), thanh mảng, sổ trang, sitemap, llms.txt.
+- [ ] Search Console → Kiểm tra URL `https://hieuban.com/tarot`, `https://hieuban.com/tarot/la-bai/thap`, `https://hieuban.com/tarot/la-bai` → Yêu cầu lập chỉ mục; Sitemaps gửi lại (`sitemap-cum-la-bai.xml` mới).
+- [ ] (Quyết định) Bài đọc tarot hiện là bản mẫu tất định (như Nhân tướng). Muốn bật diễn đạt AI (như Tử vi / Bát tự qua `luan_giai_van`) thì báo em nối — cùng bộ kiểm `kiem_ai`, cùng hạn mức RL-1.
+- [x] (TR-1b) Mở mạng sách: môi trường cloud `hieubanthan` (anh đã duyệt 2026-11-07) mở sacred-texts / archive.org / gutenberg / hermetic / wikisource / ctext → đã đối chiếu nguyên văn **Waite 1910** (78 lá) + **Book T** (52 lá, luật phẩm giá, decan); sửa 10 tên Book T, 7 lời Waite, luật phẩm giá. Chi tiết `docs/NANG-CAP-TAROT.md` mục 7.
+- [x] (TR-1c) **Mathers 1888** — anh lưu 5/6 chương từ sacred-texts vào Drive "Tarot nguon" (2026-11-07); em đã trích 78 lá xuôi/ngược + biểu tượng 22 Key vào KB, test khoá nguyên văn. Chương Introduction thiếu không cần (lịch sử + mô tả bộ bài).
+- [ ] (Chuyên gia, dần dần) Lớp Marseille (hướng nhìn nhân vật −1/0/+1), Thoth (Crowley 1944, không PD) và B.O.T.A. vẫn là tóm ý ban biên tập (`can_doi_chieu`); Papus 1896 + Case 1922 đã tải được, em trích tiếp ở đợt sau. Cần một người rành tarot duyệt hai lớp này.
+- [ ] (Tuỳ chọn) Thẻ chia sẻ "Trải bài của tôi" (mã HMAC chỉ mang mã lá + trải bài, không câu hỏi) + ảnh `/og/tarot` — em làm khi anh duyệt (khâu MỜI, như thẻ Quẻ của tôi).
+
 ### 4aa. Chân dung tổng hợp (CD-1, 2026-11-06) — sau khi merge (deploy ENGINE trước web)
 
 `/chan-dung`: Tử vi · Bát tự · Nhân tướng đặt cạnh nhau theo 6 mảng đời (ma trận + hộp "cùng thấy / nhìn khác nhau", mượn nguyên hộp từng môn). Thiết kế + 3 phương án: `docs/CHAN-DUNG-TONG-HOP.md`.
