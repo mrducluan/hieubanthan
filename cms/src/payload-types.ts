@@ -280,7 +280,7 @@ export interface BaiViet {
   ghi_chu_kiem_dinh?: string | null;
   slug_cu?: string[] | null;
   /**
-   * Bài trao đổi: giữ nguyên các link của đối tác và dòng ghi nguồn cuối bài. Đường dẫn không đổi.
+   * Bài trao đổi: giữ nguyên các link của đối tác. Dòng ghi công "Authored with NotFair SEO" tự bỏ khi nhập / chuẩn hoá (BLOG-9).
    */
   nguon_goc?: ('cms' | 'notfair') | null;
   notfair_lien_ket?: string[] | null;
@@ -657,7 +657,7 @@ export interface NoiDungTrang {
         ten: string;
         mo_ta: string;
         nhan: 'kien_thuc' | 'cong_cu' | 'thu_vien';
-        hinh: 'than-so' | 'tu-vi' | 'bat-tu' | 'kinh-dich' | 'phong-thuy' | 'nhan-tuong';
+        hinh: 'than-so' | 'tu-vi' | 'bat-tu' | 'kinh-dich' | 'phong-thuy' | 'nhan-tuong' | 'tarot';
         id?: string | null;
       }[]
     | null;
@@ -2865,14 +2865,23 @@ export interface LoiDiTiep {
   tu_xep?: boolean | null;
   nhom?:
     | {
-        tru: '/than-so' | '/hop-doi' | '/tu-vi' | '/bat-tu' | '/kinh-dich' | '/phong-thuy' | '/nhan-tuong' | 'chung';
+        tru:
+          | '/than-so'
+          | '/hop-doi'
+          | '/tu-vi'
+          | '/bat-tu'
+          | '/kinh-dich'
+          | '/phong-thuy'
+          | '/nhan-tuong'
+          | '/tarot'
+          | 'chung';
         the?:
           | {
               duong: string;
               ten: string;
               mo_ta: string;
               nhan: 'kien_thuc' | 'cong_cu' | 'thu_vien';
-              hinh: 'than-so' | 'tu-vi' | 'bat-tu' | 'kinh-dich' | 'phong-thuy' | 'nhan-tuong';
+              hinh: 'than-so' | 'tu-vi' | 'bat-tu' | 'kinh-dich' | 'phong-thuy' | 'nhan-tuong' | 'tarot';
               id?: string | null;
             }[]
           | null;
