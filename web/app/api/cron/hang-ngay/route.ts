@@ -17,5 +17,7 @@ export async function GET(req: Request) {
   const hoi_vien = await capSaoHoiVien(dv);   // SAO-HV: Sao tháng cho hội viên chưa mở trang trong tháng
   // BLOG-9d: chạy CUỐI, dùng thời gian còn lại (trần hàm 60 giây) — nhập + chuẩn hoá bài NotFair mới thành nháp.
   const blog = await tuDongNotFairCms(55_000 - (Date.now() - bat));
+  // BLOG-9e: ghi kết quả nhập bài ra log Vercel (chỉ slug + điểm / lý do bỏ qua — không bí mật, không dữ liệu người dùng).
+  console.log("[cron hang-ngay] blog", JSON.stringify(blog));
   return NextResponse.json({ nhac, don: don.ket_qua, hoi_vien, blog }, { status: don.ok ? 200 : 502 });
 }
