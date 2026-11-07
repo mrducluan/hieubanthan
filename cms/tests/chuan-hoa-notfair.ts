@@ -109,6 +109,41 @@ try {
   assert.equal((await chuanHoaMotBai(payload, undefined, bai2.id, { ghi: false })).thay_doi.filter((t) => /ảnh bìa/.test(t)).length, 0,
     "bìa đã vẽ lại thì không thay nữa");
   console.log("  ✓ BLOG-9: bìa NotFair (chữ in trong ảnh) được vẽ lại, chạy lại không thay nữa");
+
+  // BLOG-9c: ảnh THÂN BÀI tải từ NotFair (chữ in sẵn) bị bỏ khỏi thân bài; ảnh vẫn còn trong Thư viện; chạy lại không đổi.
+  const anhNf = await payload.create({ collection: "media", overrideAccess: true,
+    file: { data: sang, mimetype: "image/png", name: `${dau}-than-nf.png`, size: sang.length },
+    data: { alt: "sơ đồ key concepts", nguon_anh: NGUON_ANH_NOTFAIR } as never });
+  xoa.push({ collection: "media", id: anhNf.id });
+  const khoi = htmlSangKhoi(HTML);
+  khoi.splice(2, 0, { type: "upload", version: 3, relationTo: "media", value: anhNf.id, fields: null, format: "" } as never);
+  const bai3 = await payload.create({
+    collection: "bai-viet", overrideAccess: true, draft: false, context: { giuSlugGoc: true, boQuaKiemDinh: true, boQuaLamMoi: true },
+    data: {
+      _status: "published", tieu_de: "Xem thần số học năm cá nhân: đọc nhịp chín năm cho người mới", slug: `${dau}-than-anh`,
+      generateSlug: false, mang: "chung", noi_dung: { root: { type: "root", direction: "ltr", format: "", indent: 0, version: 1, children: khoi } },
+      the: ["thần số học"], nguon_goc: "notfair", publishedAt: "2026-09-01T00:00:00.000Z",
+    } as never,
+  });
+  xoa.push({ collection: "bai-viet", id: bai3.id });
+  const au3 = await chuanHoaMotBai(payload, undefined, bai3.id, { ghi: false });
+  assert.ok(au3.thay_doi.some((t) => /Sẽ bỏ 1 ảnh NotFair/.test(t)), au3.thay_doi.join(" | "));
+  await chuanHoaMotBai(payload, undefined, bai3.id);
+  const nhap3 = await payload.findByID({ collection: "bai-viet", id: bai3.id, draft: true, depth: 0, overrideAccess: true }) as any;
+  const ids3 = (nhap3.noi_dung.root.children as any[]).filter((n) => n.type === "upload").map((n) => String(n.value?.id ?? n.value));
+  assert.ok(!ids3.includes(String(anhNf.id)), "ảnh NotFair đã ra khỏi thân bài");
+  assert.ok(ids3.length >= 2, `bù ảnh CMS vẽ: ${ids3.length}`);
+  ids3.forEach((i) => xoa.push({ collection: "media", id: i }));
+  if (nhap3.anh_bia) xoa.push({ collection: "media", id: nhap3.anh_bia });
+  assert.ok(await payload.findByID({ collection: "media", id: anhNf.id, overrideAccess: true }), "ảnh vẫn trong Thư viện");
+  assert.ok(!(await chuanHoaMotBai(payload, undefined, bai3.id, { ghi: false })).thay_doi.some((t) => /ảnh NotFair/.test(t)), "chạy lại không bỏ thêm");
+  console.log("  ✓ BLOG-9c: ảnh thân bài NotFair bị bỏ, ảnh CMS vẽ bù vào, chạy lại không đổi");
+
+  // BLOG-9d: chưa có nguồn NotFair → tự nhập không làm gì, không lỗi.
+  const { tuDongNotFair } = await import("../src/lib/tu-dong-notfair");
+  const td = await tuDongNotFair(payload, undefined as never);
+  assert.equal(td.co_nguon, false);
+  console.log("  ✓ BLOG-9d: tự nhập bỏ qua khi chưa có nguồn NotFair");
 } finally {
   for (const x of xoa.reverse()) await payload.delete({ collection: x.collection, id: x.id, overrideAccess: true }).catch(() => {});
 }

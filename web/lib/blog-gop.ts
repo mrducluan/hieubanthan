@@ -17,7 +17,10 @@ export const tuCms = (b: BaiCmsTomTat): BaiBlog => ({
   noindex: Boolean(b.noindex), slugCu: b.slug_cu ?? [], loai: b.loai_bai ?? "bai_viet", mang: b.mang ?? null, chuyenMuc: cacChuyenMuc(b),
 });
 
-export function gopBaiBlog(rieng: BaiBlog[], notfair: SeoPostSummary[]): BaiBlog[] {
+/** `chiBanCms` (BLOG-9d): bỏ hẳn bài NotFair chưa có bản CMS đã xuất bản — bản thô (ảnh NotFair có chữ sai dấu, chưa
+ *  audit, chưa chữ ký) không vào danh sách / sitemap / RSS; CMS tự nhập + chuẩn hoá hằng ngày, Chủ biên duyệt rồi mới lên. */
+export function gopBaiBlog(rieng: BaiBlog[], notfair: SeoPostSummary[], { chiBanCms = false } = {}): BaiBlog[] {
+  if (chiBanCms) return [...rieng].sort((a, b) => (b.ngay ?? "").localeCompare(a.ngay ?? ""));
   // BLOG-7: bài NotFair hiện ở đường dẫn CHUẨN (không dấu); bài CMS cùng slug, hoặc đã nhập rồi đổi slug (slug cũ trong
   // slug_cu), thắng — không hiện hai lần.
   const co = new Set(rieng.flatMap((b) => [b.slug, ...(b.slugCu ?? [])]));
