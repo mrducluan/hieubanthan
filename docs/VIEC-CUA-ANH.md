@@ -5,6 +5,15 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4ac. Mở rộng quốc tế (QTE-1, 2026-11-07) — kế hoạch `docs/KE-HOACH-QUOC-TE.md`
+
+Giai đoạn 0 (tuần 1–2) người Việt ở nước ngoài → tiếng Anh `/en/` (tuần 3–8) → thu tiền quốc tế tháng 3 → phồn thể (nếu đạt mốc tuần 8).
+- [ ] Nối Search Console + GA4 của hieuban.com vào NotFair (hiện NotFair chỉ nối site nha khoa), hoặc gửi CSV "Quốc gia" 3 tháng gần nhất — để xếp nước ưu tiên
+- [ ] Cho phép `trends.google.com` trong cài đặt mạng môi trường, hoặc nối Google Ads Keyword Planner vào NotFair — để kiểm mốc từ khoá tuần 2 (≥ 20.000 lượt/tháng)
+- [ ] **Tuần 1**: nộp hồ sơ cổng thanh toán quốc tế — kiểm Paddle / Lemon Squeezy có nhận doanh nghiệp Việt Nam + có cấm ngành "bói toán / chiêm tinh" không; dự phòng Polar / Dodo → PayPal → pháp nhân Singapore + Stripe
+- [ ] Tìm 1 người bản xứ nói tiếng Anh am hiểu Bát tự / phong thuỷ để duyệt nội dung (ngân sách 300–500 USD/tháng)
+- [ ] Luật sư xem Chính sách riêng tư + Điều khoản tiếng Anh **trước tuần 9** (trước khi bật thu tiền)
+
 ### 4ab. Tarot (TR-1, 2026-11-07) — sau khi merge (deploy ENGINE trước web)
 
 `/tarot`: nhấn giữ xáo (hạt giống từ nhịp tay, băm trên máy), tự rút từ quạt 78 lá, lật từng lá → bài đọc 7 chương ghép 4 trường phái (Waite · Golden Dawn/Thoth · Marseille · B.O.T.A.); 78 trang `/tarot/la-bai/{lá}`; lá của ngày. Đánh giá seed Drive + 3 phương án UI: `docs/NANG-CAP-TAROT.md`.
