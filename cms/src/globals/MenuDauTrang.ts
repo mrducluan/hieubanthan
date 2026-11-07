@@ -40,14 +40,14 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/kinh-dich", "Kinh Dịch"), mo_ta: "Gieo 3 đồng xu, quẻ đầu ngày, lời hào" },
     { ...lk("/phong-thuy", "Phong thuỷ"), mo_ta: "La bàn đo hướng, khảo sát nhà, bố trí" },
     { ...lk("/nhan-tuong", "Nhân tướng học"), mo_ta: "Tự soi gương 31 câu, bài đọc 8 chương, không cần ảnh" },
+    // TR-1 menu: Tarot vào menu; 64 quẻ + Thư viện kiến thức nhường chỗ (migration tr_1_menu_tarot).
+    { ...lk("/tarot", "Xem Tarot"), mo_ta: "Xáo bài, rút lá, 5 trải bài, 78 lá có nguồn" },
     { ...lk("/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"), mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
-    // TM-1: ba công cụ có bản theo năm ở menu "Năm" nhường chỗ cho 3 cụm kiến thức lớn (migration tm_1_menu_huyen_hoc).
+    // TM-1: ba công cụ có bản theo năm ở menu "Năm" nhường chỗ cho cụm kiến thức lớn (migration tm_1_menu_huyen_hoc).
     { ...lk("/tu-vi/sao-o-cung", "Sao ở từng cung Tử vi"), mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
-    { ...lk("/kinh-dich/que", "64 quẻ Kinh Dịch"), mo_ta: "Ý nghĩa từng quẻ, lời hào, cách hiểu đơn giản" },
     { ...lk("/bat-tu/menh-theo-nam", "Sinh năm nào mệnh gì"), mo_ta: "Can chi, nạp âm, màu hợp, tuổi hợp 1950–2027" },
     { ...lk("/phong-thuy/huong-hop-tuoi", "Hướng nhà hợp tuổi"), mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
     { ...lk("/phong-thuy/dau-hieu", "Dấu hiệu trong nhà"), mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
-    { ...lk("/kien-thuc", "Thư viện kiến thức"), mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
   ] },
   // NAM-1/NAM-2: "{nam}" được web thay bằng năm đang mời xem (gõ {nam} trong chữ / đường dẫn của mục bất kỳ).
   { ...lk("/nam/{nam}", "Năm {nam}"), bieu_tuong: "lich", di_dong: true, con: [

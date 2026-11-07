@@ -23,15 +23,16 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     // NT-1 (chủ dự án chốt 2026-11-06): Nhân tướng học nằm trong quy hoạch Huyền học; Từ điển nhường chỗ (≤ 12 mục con),
     // vẫn có ở chân trang, hub Huyền học và mọi trang công cụ.
     { href: "/nhan-tuong", ten: "Nhân tướng học", mo_ta: "Tự soi gương 31 câu, bài đọc 8 chương, không cần ảnh" },
+    // TR-1 menu (chủ dự án chốt 2026-11-07): Tarot vào menu; "64 quẻ Kinh Dịch" + "Thư viện kiến thức" nhường chỗ
+    // (vẫn ở thanh mảng Kinh Dịch, hub Huyền học, chân trang) — giữ ≤ 12 mục con.
+    { href: "/tarot", ten: "Xem Tarot", mo_ta: "Xáo bài, rút lá, 5 trải bài, 78 lá có nguồn" },
     { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi", mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     // TM-1 (chủ dự án duyệt 2026-11-03): 3 công cụ đã có bản theo năm ở menu "Năm" (hướng xấu, xông đất, sao hạn) nhường
-    // chỗ cho 3 cụm kiến thức lớn nhất chưa có lối vào menu. Ba công cụ vẫn ở menu Năm, hub Huyền học, chân trang.
+    // chỗ cho cụm kiến thức lớn chưa có lối vào menu. Ba công cụ vẫn ở menu Năm, hub Huyền học, chân trang.
     { href: "/tu-vi/sao-o-cung", ten: "Sao ở từng cung Tử vi", mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
-    { href: "/kinh-dich/que", ten: "64 quẻ Kinh Dịch", mo_ta: "Ý nghĩa từng quẻ, lời hào, cách hiểu đơn giản" },
     { href: "/bat-tu/menh-theo-nam", ten: "Sinh năm nào mệnh gì", mo_ta: "Can chi, nạp âm, màu hợp, tuổi hợp 1950–2027" },
     { href: "/phong-thuy/huong-hop-tuoi", ten: "Hướng nhà hợp tuổi", mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
     { href: "/phong-thuy/dau-hieu", ten: "Dấu hiệu trong nhà", mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
-    { href: "/kien-thuc", ten: "Thư viện kiến thức", mo_ta: "Nghĩa sao, quẻ, con số — tra cứu miễn phí" },
   ] },
   // NAM-1/NAM-2 (2026-10-30): menu lớn theo năm — {nam} thay bằng năm engine chọn (năm tới khi Tết sau còn ≤ 120 ngày,
   // không thì năm âm đang đi) lúc dựng trang → không phải sửa tay mỗi năm (`thayNamMenu`).
@@ -57,7 +58,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
 
 /** TM-1: trang thuộc một mục cha nhưng không có dòng menu con riêng (vd /xem-sao-han, /tuoi-xong-dat — menu con của chúng
  *  nằm ở "Năm" dưới dạng /…/{nam}, nhưng trang gốc là công cụ của hub Huyền học). Chỉ dùng để làm sáng mục cha. */
-const THUOC_THEM: Record<string, string[]> = { "/tai-khoan": ["/dang-nhap"], "/huyen-hoc": ["/xem-sao-han", "/tuoi-xong-dat", "/tarot"] };   // TR-1: /tarot chưa vào menu (Huyền học đã 12 mục) → vẫn sáng mục cha
+const THUOC_THEM: Record<string, string[]> = { "/tai-khoan": ["/dang-nhap"], "/huyen-hoc": ["/xem-sao-han", "/tuoi-xong-dat", "/kien-thuc", "/kinh-dich/que"] };   // TR-1 menu: thư viện + 64 quẻ rời menu nhưng vẫn thuộc Huyền học
 const duongCua = (m: Pick<MucMenu, "href" | "con">) => [m.href, ...m.con.map((c) => c.href), ...(THUOC_THEM[m.href] ?? [])];
 
 /** Đang ở mục này: trùng đường dẫn mục cha hoặc một menu con (vd /tu-vi/... → "Huyền học"); /tai-khoan gồm cả /dang-nhap. */
