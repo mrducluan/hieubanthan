@@ -1,7 +1,7 @@
 // BLOG-7 — chạy chuẩn hoá SEO cho mọi bài nguồn NotFair trong CMS (nút "Chuẩn hoá SEO bài NotFair" + migration dữ liệu).
 // Luôn ghi thành BẢN NHÁP mới (bản đang xuất bản không đổi cho tới khi Chủ biên bấm Xuất bản), trạng thái "Gửi duyệt",
 // kèm danh sách thay đổi ở "Ghi chú của Chủ biên". Ảnh: ảnh bìa nền sáng khi bài chưa có bìa hoặc bìa quá tối (độ sáng
-// trung bình < 0,42 — ảnh tối chìm vào nền Đêm sao của site); ảnh "Tóm tắt nhanh" khi thân bài < 2 ảnh và có ≥ 3 mục H2.
+// trung bình < 0,42 — ảnh tối chìm vào nền Đêm sao của site) hoặc bìa là ảnh NotFair (BLOG-9: chữ in sẵn hay sai dấu); ảnh "Tóm tắt nhanh" khi thân bài < 2 ảnh và có ≥ 3 mục H2.
 // Ảnh cũ vẫn nằm trong Thư viện ảnh (không xoá). Lỗi một bài không chặn bài khác.
 // Thao tác trên bài đi cùng `req` (migration: cùng giao dịch với bài vừa nhập); ảnh tạo trong giao dịch riêng.
 import { readFile } from "node:fs/promises";
@@ -10,6 +10,7 @@ import type { Payload, PayloadRequest } from "payload";
 import { kiemDinhBai } from "../kiem-dinh/kiem-dinh";
 import { veAnhBia, veAnhCauHoi, veAnhLoTrinh, veAnhTomTat, type MangAnh } from "./anh-minh-hoa";
 import { chuanHoaBai, type BaiChuanHoa } from "./chuan-hoa-bai";
+import { NGUON_ANH_NOTFAIR } from "./notfair";
 
 export const NGUON_ANH_BLOG7 = "Ban biên tập Hiểu Bản Thân vẽ minh hoạ (BLOG-7, nền sáng)";
 const NGUONG_TOI = 0.42;
@@ -30,6 +31,14 @@ export type KetQuaBai = {
 
 const idCua = (v: unknown): number | string | null =>
   typeof v === "number" || typeof v === "string" ? v : v && typeof v === "object" && "id" in v ? (v as { id: number | string }).id : null;
+
+/** Ảnh bìa tải từ NotFair? (BLOG-9: chữ tiếng Việt in sẵn trong ảnh hay sai dấu — sửa chữ không được, phải vẽ lại.) */
+async function laBiaNotFair(payload: Payload, id: number | string): Promise<boolean> {
+  try {
+    const m = await payload.findByID({ collection: "media", id, depth: 0, overrideAccess: true }) as { nguon_anh?: string | null };
+    return m.nguon_anh === NGUON_ANH_NOTFAIR;
+  } catch { return false; }
+}
 
 /** Độ sáng trung bình 0–1 của ảnh (sharp, đã có trong CMS). Không đọc được → null (coi như không tối). */
 async function doSang(payload: Payload, id: number | string): Promise<number | null> {
@@ -99,7 +108,8 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
   if (ve || !ghi) {
     const bia = idCua(bai.anh_bia);
     const sang = bia != null ? await doSang(payload, bia) : null;
-    const canBia = bia == null || (sang != null && sang < NGUONG_TOI);
+    const biaNotFair = bia != null && await laBiaNotFair(payload, bia);
+    const canBia = bia == null || biaNotFair || (sang != null && sang < NGUONG_TOI);
     const than = soAnhThanBai(bai.noi_dung);
     let daCoTomTat = false, daCoLoTrinh = false, daCoHoiDap = false;
     if (than.ids.length) {
@@ -117,6 +127,7 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
     if (!ghi) {
       // Audit: chỗ giữ id để chấm điểm dự kiến; lời báo ghi rõ "sẽ".
       if (canBia) { anhBia = "du-kien"; duKien.push(bia == null ? "Sẽ vẽ ảnh bìa nền sáng (bài chưa có ảnh bìa)."
+        : biaNotFair ? "Sẽ thay ảnh bìa NotFair (chữ in trong ảnh) bằng ảnh bìa nền sáng, chữ đúng dấu."
         : `Sẽ thay ảnh bìa tối (độ sáng ${Math.round((sang ?? 0) * 100)}%) bằng ảnh bìa nền sáng.`); }
       if (canTomTat) { anhTomTat = "du-kien"; duKien.push(`Sẽ vẽ + chèn ảnh "Tóm tắt nhanh" (${Math.min(5, thu.muc.length)} ý).`); }
       if (canLoTrinh) { anhLoTrinh = "du-kien"; duKien.push(`Sẽ vẽ + chèn ảnh "Lộ trình bài viết" (${Math.min(6, thu.muc.length)} phần).`); }

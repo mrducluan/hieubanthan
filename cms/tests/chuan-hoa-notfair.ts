@@ -7,6 +7,7 @@ import sharp from "sharp";
 import config from "../src/payload.config";
 import { htmlSangKhoi } from "../src/lib/html-lexical";
 import { chuanHoaMotBai, dsBaiNotFairCms, NGUON_ANH_BLOG7 } from "../src/lib/chuan-hoa-notfair";
+import { NGUON_ANH_NOTFAIR } from "../src/lib/notfair";
 
 const payload = await getPayload({ config });
 const dau = `bl7${Date.now().toString(36)}`;
@@ -81,6 +82,33 @@ try {
   const cu = await payload.find({ collection: "bai-viet", where: { slug_cu: { in: [SLUG_CU] } }, depth: 0, overrideAccess: false });
   assert.equal((cu.docs[0] as any)?.slug, `${dau}-cach-tinh-va-doc-ho-so-than-so-hoc`, "khách tra slug cũ ra slug mới");
   console.log("  ✓ chuẩn hoá bài NotFair (nháp, slug_cu, ảnh sáng, idempotent, xuất bản → 308)");
+
+  // BLOG-9: bìa NotFair SÁNG (không tối) vẫn bị thay — chữ in sẵn trong ảnh NotFair hay sai dấu.
+  const sang = await sharp({ create: { width: 320, height: 180, channels: 3, background: "#f6f1e4" } }).png().toBuffer();
+  const biaNf = await payload.create({ collection: "media", overrideAccess: true,
+    file: { data: sang, mimetype: "image/png", name: `${dau}-nf.png`, size: sang.length },
+    data: { alt: "bìa notfair", nguon_anh: NGUON_ANH_NOTFAIR } as never });
+  xoa.push({ collection: "media", id: biaNf.id });
+  const bai2 = await payload.create({
+    collection: "bai-viet", overrideAccess: true, draft: false, context: { giuSlugGoc: true, boQuaKiemDinh: true, boQuaLamMoi: true },
+    data: {
+      _status: "published", tieu_de: "Xem tài lộc qua thần số học: đọc gợi ý thành việc làm", slug: `${dau}-tai-loc`,
+      generateSlug: false, anh_bia: biaNf.id, mang: "chung",
+      noi_dung: { root: { type: "root", direction: "ltr", format: "", indent: 0, version: 1, children: htmlSangKhoi(HTML) } },
+      the: ["thần số học"], nguon_goc: "notfair", publishedAt: "2026-09-01T00:00:00.000Z",
+    } as never,
+  });
+  xoa.push({ collection: "bai-viet", id: bai2.id });
+  const au2 = await chuanHoaMotBai(payload, undefined, bai2.id, { ghi: false });
+  assert.ok(au2.thay_doi.some((t) => /Sẽ thay ảnh bìa NotFair/.test(t)), au2.thay_doi.join(" | "));
+  await chuanHoaMotBai(payload, undefined, bai2.id);
+  const nhap2 = await payload.findByID({ collection: "bai-viet", id: bai2.id, draft: true, depth: 1, overrideAccess: true }) as any;
+  assert.equal(nhap2.anh_bia.nguon_anh, NGUON_ANH_BLOG7, "bìa NotFair được vẽ lại");
+  xoa.push({ collection: "media", id: nhap2.anh_bia.id });
+  for (const n of nhap2.noi_dung.root.children as any[]) if (n.type === "upload") xoa.push({ collection: "media", id: n.value.id ?? n.value });
+  assert.equal((await chuanHoaMotBai(payload, undefined, bai2.id, { ghi: false })).thay_doi.filter((t) => /ảnh bìa/.test(t)).length, 0,
+    "bìa đã vẽ lại thì không thay nữa");
+  console.log("  ✓ BLOG-9: bìa NotFair (chữ in trong ảnh) được vẽ lại, chạy lại không thay nữa");
 } finally {
   for (const x of xoa.reverse()) await payload.delete({ collection: x.collection, id: x.id, overrideAccess: true }).catch(() => {});
 }
