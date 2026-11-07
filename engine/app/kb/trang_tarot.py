@@ -79,9 +79,13 @@ def trang_la_bai(ma: str, slug: str) -> dict:
         muc.append({"tieu_de": "Lá hoàng gia: nguyên tố kép và nhịp",
                     "doan": f"Golden Dawn đọc {ten} là {l['ten_nguyen_to_phu']} ({l['thoth_ten']}); Marseille gọi là {l['tdm_ten']}. Là người: {l.get('nhan_vat') or ''} "
                             f"Là tình huống: {l['y_xuoi'].split('. ')[0]}. Nhịp theo bộ {bo['ten']}: {bo['nhip']}."})
+    # TR-1b: trích dẫn đã đối chiếu nguyên văn (Waite 1910 qua Gutenberg #43548; Book T) — xem kb["doi_chieu"], test_tarot_nguon.py.
     trich_dan = []
-    if l.get("trich"):
-        trich_dan.append({"sach": kb.ten_nguon(l["trich"]["sach"]), "nguyen_van": l["trich"]["nguyen_van"], "nghia": l["trich"]["nghia"]})
+    for tr in l.get("trich") or []:
+        nv = tr["nguyen_van"] + (f" Reversed: {tr['nguyen_van_nguoc']}" if tr.get("nguyen_van_nguoc") else "")
+        if tr.get("ten"):
+            nv = f"{tr['ten']}. {nv}"
+        trich_dan.append({"sach": kb.ten_nguon(tr["sach"]), "nguyen_van": nv, "nghia": tr["nghia"]})
     muc.append({"tieu_de": "Sách xưa nói gì", "doan": f"Waite (1910): {l['truong_phai']['rws']['loi']} Book T: {l['truong_phai']['thoth']['loi']}",
                 **({"trich_dan": trich_dan} if trich_dan else {})})
     muc.append({"tieu_de": "Việc nên làm khi rút được lá này", "danh_sach": [f"Việc 0 đồng: {l['viec']}", f"Câu tự soi: {l['cau_tu_soi']}"]})

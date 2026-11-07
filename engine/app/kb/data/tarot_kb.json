@@ -5,7 +5,7 @@
  "school_id": "tarot_tong_hop",
  "trang_thai": "nhap_ai",
  "can_doi_chieu": true,
- "luu_y": "Hướng nhìn nhân vật đọc theo bản Marseille Conver — một số lá các bản in khác nhau; decan theo Book T với mốc ngày phổ biến (lệch ±1 ngày tuỳ năm).",
+ "luu_y": "Hướng nhìn nhân vật đọc theo bản Marseille Conver — một số lá các bản in khác nhau; decan theo Book T với mốc ngày phổ biến (lệch ±1 ngày tuỳ năm). Lớp Waite và Book T đã đối chiếu nguyên văn (xem doi_chieu, test test_tarot_nguon.py); lớp Marseille, Thoth (Crowley), B.O.T.A. vẫn là tóm ý chờ đối chiếu.",
  "nguon": {
   "waite_1910": "The Pictorial Key to the Tarot (A. E. Waite, 1910)",
   "book_t": "Book T — The Tarot (Golden Dawn, khoảng 1888–1896)",
@@ -118,6 +118,14 @@
     "khi"
    ],
    [
+    "hoa",
+    "dat"
+   ],
+   [
+    "thuy",
+    "khi"
+   ],
+   [
     "thuy",
     "dat"
    ]
@@ -142,7 +150,8 @@
    "tiep_suc": "được tiếp sức",
    "binh": "giữ nguyên sức",
    "bi_kim": "bị kìm"
-  }
+  },
+  "nguon": "Book T, mục Of the Dignities: Kiếm nghịch Tiền, Gậy nghịch Cốc; Kiếm hợp Cốc và Gậy; Gậy hợp Kiếm và Tiền; lá kẹp giữa hai lá nghịch nhau thì ít bị ảnh hưởng."
  },
  "cung_hoang_dao": {
   "bach_duong": {
@@ -849,11 +858,14 @@
    },
    "viec": "Làm MỘT việc nhỏ của điều bạn vẫn hoãn vì 'chưa đủ chuẩn bị' — hôm nay, trong 30 phút.",
    "cau_tu_soi": "Lần gần nhất bạn bắt đầu một việc mà không biết kết quả — nó đã dạy bạn gì?",
-   "trich": {
-    "sach": "waite_1910",
-    "nguyen_van": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
-    "nghia": "Nghĩa bói Waite ghi cho lá xuôi: sự khờ, bồng bột, quá đà — ở đây đọc là 'bắt đầu khi chưa biết'."
-   }
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
+     "nguyen_van_nguoc": "Negligence, absence, distribution, carelessness, apathy, nullity, vanity.",
+     "nghia": "Waite ghi: khờ dại, quá đà, bồng bột; ngược: lơ đễnh, thờ ơ, trống rỗng — ở đây đọc là bắt đầu khi chưa biết, và mặt tối là liều."
+    }
+   ]
   },
   "dai_1": {
    "id": "dai_1",
@@ -897,7 +909,7 @@
    },
    "truong_phai": {
     "rws": {
-     "loi": "Waite: 'như trên, dưới cũng vậy' — người cầm gậy nối trời với đất; nghĩa bói: kỹ năng, ngoại giao, ý chí; ngược: thầy lang vườn, kẻ lừa."
+     "loi": "Waite: 'như trên, dưới cũng vậy' — người cầm gậy nối trời với đất; nghĩa bói: kỹ năng, ngoại giao, ý chí, tự tin; ngược: thầy thuốc, pháp sư, bất an, mất danh dự."
     },
     "thoth": {
      "ten": "The Magus",
@@ -912,7 +924,15 @@
     }
    },
    "viec": "Viết ra bốn thứ bạn đang có (sức, tiền, người quen, thời gian) cho việc này — rồi dùng một thứ ngay hôm nay.",
-   "cau_tu_soi": "Việc nào bạn đã 'biết cách' từ lâu mà vẫn chưa làm?"
+   "cau_tu_soi": "Việc nào bạn đã 'biết cách' từ lâu mà vẫn chưa làm?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Skill, diplomacy, address, subtlety; sickness, pain, loss, disaster, snares of enemies; self-confidence, will; the Querent, if male.",
+     "nguyen_van_nguoc": "Physician, Magus, mental disease, disgrace, disquiet.",
+     "nghia": "Waite ghi: khéo léo, ngoại giao, ý chí, tự tin; cũng có mặt bệnh tật, mất mát, bẫy; ngược: thầy thuốc, pháp sư, bất an, mất danh dự."
+    }
+   ]
   },
   "dai_2": {
    "id": "dai_2",
@@ -971,7 +991,15 @@
     }
    },
    "viec": "Hoãn quyết định 48 giờ; trong lúc đó viết ra điều bạn 'cảm thấy' về việc này mà chưa dám nói.",
-   "cau_tu_soi": "Điều gì bạn đã biết về chuyện này từ lâu mà vẫn chờ người khác nói ra?"
+   "cau_tu_soi": "Điều gì bạn đã biết về chuyện này từ lâu mà vẫn chờ người khác nói ra?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Secrets, mystery, the future as yet unrevealed; the woman who interests the Querent, if male; the Querent herself, if female; silence, tenacity; mystery, wisdom, science.",
+     "nguyen_van_nguoc": "Passion, moral or physical ardor, conceit, surface knowledge.",
+     "nghia": "Waite ghi: bí mật, điều chưa lộ, im lặng, trí tuệ; người phụ nữ khiến người hỏi để ý; ngược: đam mê, kiêu, hiểu bề mặt."
+    }
+   ]
   },
   "dai_3": {
    "id": "dai_3",
@@ -1015,7 +1043,7 @@
    },
    "truong_phai": {
     "rws": {
-     "loi": "Waite: 'cánh cửa của khu vườn', người mẹ của vạn vật; nghĩa bói: sinh sôi, hành động, sáng tạo, điều chưa rõ sẽ sáng; ngược: lãng phí, chần chừ."
+     "loi": "Waite: 'cánh cửa của khu vườn', người mẹ của vạn vật; nghĩa bói: sinh sôi, hành động, khởi xướng; ngược: sự thật sáng tỏ, việc rối được gỡ, hoặc do dự."
     },
     "thoth": {
      "ten": "The Empress",
@@ -1030,7 +1058,15 @@
     }
    },
    "viec": "Nấu một bữa tử tế cho mình, hoặc tưới cây, dọn góc bàn — một việc chăm sóc có thật, 20 phút.",
-   "cau_tu_soi": "Bạn đang nuôi điều gì — và điều đó có đang nuôi lại bạn không?"
+   "cau_tu_soi": "Bạn đang nuôi điều gì — và điều đó có đang nuôi lại bạn không?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Fruitfulness, action, initiative, length of days; the unknown, clandestine; also difficulty, doubt, ignorance.",
+     "nguyen_van_nguoc": "Light, truth, the unravelling of involved matters, public rejoicings; according to another reading, vacillation.",
+     "nghia": "Waite ghi: sinh sôi, hành động, khởi xướng, sống lâu; cũng là điều chưa rõ; ngược: ánh sáng, sự thật, gỡ rối, hoặc do dự."
+    }
+   ]
   },
   "dai_4": {
    "id": "dai_4",
@@ -1074,7 +1110,7 @@
    },
    "truong_phai": {
     "rws": {
-     "loi": "Waite: 'cha của vạn vật', ngồi trên đá, nắm quyền và lý; nghĩa bói: ổn định, quyền lực, người che chở; ngược: nhân từ quá mức, thiếu khung."
+     "loi": "Waite: 'cha của vạn vật', ngồi trên đá, nắm quyền và lý; nghĩa bói: ổn định, quyền lực, người che chở; ngược: nhân từ, uy tín; hoặc cản trở, non nớt."
     },
     "thoth": {
      "ten": "The Emperor",
@@ -1089,7 +1125,15 @@
     }
    },
    "viec": "Viết một 'luật' ba dòng cho việc này (ai – việc – hạn) và dán lên chỗ nhìn thấy mỗi sáng.",
-   "cau_tu_soi": "Ở đâu bạn đang 'làm vua' mà thật ra chỉ đang sợ mất kiểm soát?"
+   "cau_tu_soi": "Ở đâu bạn đang 'làm vua' mà thật ra chỉ đang sợ mất kiểm soát?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Stability, power, protection, realization; a great person; aid, reason, conviction; also authority and will.",
+     "nguyen_van_nguoc": "Benevolence, compassion, credit; also confusion to enemies, obstruction, immaturity.",
+     "nghia": "Waite ghi: ổn định, quyền lực, che chở, thành hình; người lớn, lý trí; ngược: nhân từ, uy tín; hoặc cản trở, non nớt."
+    }
+   ]
   },
   "dai_5": {
    "id": "dai_5",
@@ -1133,7 +1177,7 @@
    },
    "truong_phai": {
     "rws": {
-     "loi": "Waite: 'người dẫn vào điều đã được truyền', ngồi giữa hai cột của đền; nghĩa bói: hôn nhân, liên minh, lòng tin, người thầy; ngược: xã hội quá tốt bụng, yếu đuối."
+     "loi": "Waite: 'người dẫn vào điều đã được truyền', ngồi giữa hai cột của đền; nghĩa bói: hôn nhân, liên minh, cũng là ràng buộc; lòng nhân; người thầy; ngược: xã giao, quá tốt bụng, yếu."
     },
     "thoth": {
      "ten": "The Hierophant",
@@ -1148,7 +1192,15 @@
     }
    },
    "viec": "Gọi hoặc nhắn cho một người có kinh nghiệm về việc này, hỏi đúng một câu cụ thể.",
-   "cau_tu_soi": "Lệ nào trong nhà bạn đang giữ chỉ vì 'xưa nay vẫn thế'?"
+   "cau_tu_soi": "Lệ nào trong nhà bạn đang giữ chỉ vì 'xưa nay vẫn thế'?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Marriage, alliance, captivity, servitude; by another account, mercy and goodness; inspiration; the man to whom the Querent has recourse.",
+     "nguyen_van_nguoc": "Society, good understanding, concord, over-kindness, weakness.",
+     "nghia": "Waite ghi: hôn nhân, liên minh, cũng là ràng buộc; lòng nhân; người mà người hỏi tìm đến; ngược: xã giao, hoà thuận, quá tốt bụng, yếu."
+    }
+   ]
   },
   "dai_6": {
    "id": "dai_6",
@@ -1207,7 +1259,15 @@
     }
    },
    "viec": "Nói với người liên quan MỘT câu thật mà bạn đã giữ hơn hai tuần.",
-   "cau_tu_soi": "Nếu không ai nhìn, bạn chọn gì?"
+   "cau_tu_soi": "Nếu không ai nhìn, bạn chọn gì?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Attraction, love, beauty, trials overcome.",
+     "nguyen_van_nguoc": "Failure, foolish designs.",
+     "nghia": "Waite ghi: sức hút, tình yêu, cái đẹp, thử thách vượt qua; ngược: thất bại, dự định khờ; hôn nhân trắc trở."
+    }
+   ]
   },
   "dai_7": {
    "id": "dai_7",
@@ -1251,7 +1311,7 @@
    },
    "truong_phai": {
     "rws": {
-     "loi": "Waite: chiến binh thắng ở bên ngoài, chưa thắng ở bên trong — 'cuộc chinh phục của tâm trí'; nghĩa bói: giúp đỡ, chiến thắng, vượt qua."
+     "loi": "Waite: chiến binh thắng ở bên ngoài, chưa thắng ở bên trong — 'cuộc chinh phục của tâm trí'; nghĩa bói: cứu giúp, thiên ý, thắng trận; cũng là kiêu, tranh đấu; ngược: cãi vã, kiện tụng, thua."
     },
     "thoth": {
      "ten": "The Chariot",
@@ -1266,7 +1326,15 @@
     }
    },
    "viec": "Chọn một việc đang dang dở và đẩy nó qua một mốc rõ trong ba ngày — rồi dừng, không mở việc mới.",
-   "cau_tu_soi": "Bạn đang thắng ở chuyện nào mà vẫn thấy chưa yên?"
+   "cau_tu_soi": "Bạn đang thắng ở chuyện nào mà vẫn thấy chưa yên?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Succor, providence; also war, triumph, presumption, vengeance, trouble.",
+     "nguyen_van_nguoc": "Riot, quarrel, dispute, litigation, defeat.",
+     "nghia": "Waite ghi: cứu giúp, thiên ý; cũng là tranh đấu, thắng trận, kiêu, trả đũa, rắc rối; ngược: cãi vã, kiện tụng, thua."
+    }
+   ]
   },
   "dai_8": {
    "id": "dai_8",
@@ -1325,7 +1393,15 @@
     }
    },
    "viec": "Khi một cơn nóng hoặc một cơn thèm nổi lên trong ba ngày tới, đếm 10 hơi thở rồi mới làm.",
-   "cau_tu_soi": "Con 'sư tử' nào trong bạn đang được bạn dịu dàng với nó, và con nào đang bị bạn đè?"
+   "cau_tu_soi": "Con 'sư tử' nào trong bạn đang được bạn dịu dàng với nó, và con nào đang bị bạn đè?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Power, energy, action, courage, magnanimity; also complete success and honors.",
+     "nguyen_van_nguoc": "Despotism, abuse of power, weakness, discord, sometimes even disgrace.",
+     "nghia": "Waite ghi: sức mạnh, nghị lực, can đảm, rộng lượng, thành công trọn; ngược: lạm quyền, yếu, bất hoà, mất mặt."
+    }
+   ]
   },
   "dai_9": {
    "id": "dai_9",
@@ -1369,7 +1445,7 @@
    },
    "truong_phai": {
     "rws": {
-     "loi": "Waite: ngọn đèn 'nơi tôi ở, các ngươi cũng có thể tới'; nghĩa bói: khôn ngoan, thận trọng, lời khuyên đúng, cũng là sự cô độc."
+     "loi": "Waite: ngọn đèn 'nơi tôi ở, các ngươi cũng có thể tới'; nghĩa bói: thận trọng, dè dặt — Waite còn ghi cả giấu mặt, giả dạng; ngược: che giấu, sợ, thận trọng vô cớ."
     },
     "thoth": {
      "ten": "The Hermit",
@@ -1384,7 +1460,15 @@
     }
    },
    "viec": "Một buổi tối không màn hình: viết ra ba điều bạn đã học từ chuyện này tới giờ.",
-   "cau_tu_soi": "Khi nào lần cuối bạn ngồi yên 30 phút không làm gì?"
+   "cau_tu_soi": "Khi nào lần cuối bạn ngồi yên 30 phút không làm gì?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Prudence, circumspection; also and especially treason, dissimulation, roguery, corruption.",
+     "nguyen_van_nguoc": "Concealment, disguise, policy, fear, unreasoned caution.",
+     "nghia": "Waite ghi: thận trọng, dè dặt; nhưng cũng là giấu mặt, giả dạng, gian; ngược: che giấu, sợ, thận trọng vô cớ."
+    }
+   ]
   },
   "dai_10": {
    "id": "dai_10",
@@ -1443,7 +1527,15 @@
     }
    },
    "viec": "Liệt kê ba việc trong chuyện này KHÔNG nằm trong tay bạn, gạch khỏi danh sách lo; giữ việc nằm trong tay.",
-   "cau_tu_soi": "Bạn đã từng thấy chuyện này 'xoay' lần nào trước đây chưa — lần đó kết thúc thế nào?"
+   "cau_tu_soi": "Bạn đã từng thấy chuyện này 'xoay' lần nào trước đây chưa — lần đó kết thúc thế nào?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Destiny, fortune, success, elevation, luck, felicity.",
+     "nguyen_van_nguoc": "Increase, abundance, superfluity.",
+     "nghia": "Waite ghi: vận mệnh, may mắn, thành công, thăng tiến; ngược: tăng thêm, dư dả, thừa thãi."
+    }
+   ]
   },
   "dai_11": {
    "id": "dai_11",
@@ -1502,7 +1594,15 @@
     }
    },
    "viec": "Viết hai cột cho chuyện này: phần của tôi – phần của người kia. Sửa một chỗ lệch trong 72 giờ.",
-   "cau_tu_soi": "Bạn đang đòi công bằng ở chỗ nào, và đang hưởng không công bằng ở chỗ nào?"
+   "cau_tu_soi": "Bạn đang đòi công bằng ở chỗ nào, và đang hưởng không công bằng ở chỗ nào?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Equity, rightness, probity, executive; triumph of the deserving side in law.",
+     "nguyen_van_nguoc": "Law in all its departments, legal complications, bigotry, bias, excessive severity.",
+     "nghia": "Waite ghi: công bằng, lẽ phải, chính trực; bên xứng đáng thắng kiện; ngược: luật lệ rối, thiên vị, quá khắt khe."
+    }
+   ]
   },
   "dai_12": {
    "id": "dai_12",
@@ -1561,7 +1661,15 @@
     }
    },
    "viec": "Chọn một việc đang cố mà không nhúc nhích — tạm dừng nó 7 ngày, ghi lại điều bạn thấy khi không cố.",
-   "cau_tu_soi": "Điều gì bạn đang 'hy sinh' mà thật ra không ai yêu cầu?"
+   "cau_tu_soi": "Điều gì bạn đang 'hy sinh' mà thật ra không ai yêu cầu?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Wisdom, circumspection, discernment, trials, sacrifice, intuition, divination, prophecy.",
+     "nguyen_van_nguoc": "Selfishness, the crowd, body politic.",
+     "nghia": "Waite ghi: khôn ngoan, thử thách, hy sinh, trực giác; ngược: ích kỷ, chạy theo đám đông."
+    }
+   ]
   },
   "dai_13": {
    "id": "dai_13",
@@ -1620,7 +1728,15 @@
     }
    },
    "viec": "Bỏ hẳn MỘT thứ đã hết dùng (một thói quen, một đồ vật, một cuộc hẹn lặp) trong 72 giờ.",
-   "cau_tu_soi": "Điều gì trong chuyện này đã kết thúc từ lâu mà bạn chưa cho phép nó kết thúc?"
+   "cau_tu_soi": "Điều gì trong chuyện này đã kết thúc từ lâu mà bạn chưa cho phép nó kết thúc?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "End, mortality, destruction, corruption; also, for a man, the loss of a benefactor; for a woman, many contrarieties; for a maid, failure of marriage projects.",
+     "nguyen_van_nguoc": "Inertia, sleep, lethargy, petrifaction, somnambulism; hope destroyed.",
+     "nghia": "Waite ghi: kết thúc, điều hết hạn, hư hoại; mất người đỡ đầu, nhiều trái ý; ngược: ì, ngủ quên, hy vọng tan."
+    }
+   ]
   },
   "dai_14": {
    "id": "dai_14",
@@ -1679,7 +1795,15 @@
     }
    },
    "viec": "Chọn một thứ đang 'quá' (giờ làm, cà phê, nhắn tin) — giảm 20% trong ba ngày và ghi cảm giác.",
-   "cau_tu_soi": "Bạn đang rót quá nhiều vào cốc nào, và cốc nào đang cạn?"
+   "cau_tu_soi": "Bạn đang rót quá nhiều vào cốc nào, và cốc nào đang cạn?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Economy, moderation, frugality, management, accommodation.",
+     "nguyen_van_nguoc": "Things connected with churches, religions, sects, the priesthood, sometimes even the priest who will marry the Querent; also disunion, unfortunate combinations, competing interests.",
+     "nghia": "Waite ghi: tiết kiệm, điều độ, biết sắp xếp, dung hoà; ngược: chuyện liên quan nhà thờ, giáo phái; chia rẽ, lợi ích xung đột."
+    }
+   ]
   },
   "dai_15": {
    "id": "dai_15",
@@ -1723,7 +1847,7 @@
    },
    "truong_phai": {
     "rws": {
-     "loi": "Waite: 'kẻ nô lệ của vật chất', xích lỏng quanh cổ hai người; nghĩa bói: bạo lực, sức ép, mù quáng; ngược: yếu đi, mù quáng vơi."
+     "loi": "Waite: 'kẻ nô lệ của vật chất', xích lỏng quanh cổ hai người; nghĩa bói: bạo lực, sức ép, điều như không tự chọn (Waite nói rõ: không vì thế mà ác); ngược: yếu, nhỏ nhen, mù quáng."
     },
     "thoth": {
      "ten": "The Devil",
@@ -1738,7 +1862,15 @@
     }
    },
    "viec": "Viết tên MỘT thói quen hoặc người đang 'giữ' bạn; làm một việc nhỏ nới nó ra (một ngày không, một lần nói không).",
-   "cau_tu_soi": "Sợi xích nào bạn đang gọi là 'thoải mái'?"
+   "cau_tu_soi": "Sợi xích nào bạn đang gọi là 'thoải mái'?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Ravage, violence, vehemence, extraordinary efforts, force, fatality; that which is predestined but is not for this reason evil.",
+     "nguyen_van_nguoc": "Evil fatality, weakness, pettiness, blindness.",
+     "nghia": "Waite ghi: tàn phá, bạo lực, sức ép, điều như không tự chọn — không vì thế mà là ác; ngược: phần không tự chọn hoá xấu, yếu, nhỏ nhen, mù quáng."
+    }
+   ]
   },
   "dai_16": {
    "id": "dai_16",
@@ -1798,11 +1930,14 @@
    },
    "viec": "Trong 72 giờ: không quyết định lớn; gọi một người tin được, kể chuyện vừa vỡ bằng ba câu; ngủ đủ.",
    "cau_tu_soi": "Cái 'tháp' nào của bạn được xây bằng điều bạn vẫn biết là không thật?",
-   "trich": {
-    "sach": "waite_1910",
-    "nguyen_van": "Misery, distress, indigence, adversity, calamity, disgrace, deception, ruin.",
-    "nghia": "Nghĩa bói Waite ghi: khổ, mất, đổ vỡ, lừa dối lộ ra — ở đây đọc là 'cái giả sụp để cái thật hiện'."
-   }
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Misery, distress, indigence, adversity, calamity, disgrace, deception, ruin. It is a card in particular of unforeseen catastrophe.",
+     "nguyen_van_nguoc": "According to one account, the same in a lesser degree; also oppression, imprisonment, tyranny.",
+     "nghia": "Waite ghi: khổ, túng, tai ương, mất mặt, lừa dối, đổ vỡ — lá của tai biến không lường; ngược: như vậy nhưng nhẹ hơn; áp bức, giam cầm."
+    }
+   ]
   },
   "dai_17": {
    "id": "dai_17",
@@ -1861,7 +1996,15 @@
     }
    },
    "viec": "Mỗi tối trong ba ngày, viết một điều hôm nay đã ổn — dù nhỏ. Uống nước trước khi ngủ.",
-   "cau_tu_soi": "Ngôi sao nào bạn đã thôi nhìn từ khi mệt?"
+   "cau_tu_soi": "Ngôi sao nào bạn đã thôi nhìn từ khi mệt?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Loss, theft, privation, abandonment; another reading says--hope and bright prospects.",
+     "nguyen_van_nguoc": "Arrogance, haughtiness, impotence.",
+     "nghia": "Waite ghi: mất, bị lấy, thiếu thốn, bị bỏ; cách đọc khác: hy vọng, triển vọng sáng; ngược: kiêu căng, bất lực."
+    }
+   ]
   },
   "dai_18": {
    "id": "dai_18",
@@ -1920,7 +2063,15 @@
     }
    },
    "viec": "Viết nỗi sợ lớn nhất về chuyện này thành một câu; bên cạnh ghi bằng chứng CÓ và KHÔNG. Chưa làm gì khác.",
-   "cau_tu_soi": "Bạn đang thấy, hay đang tưởng tượng?"
+   "cau_tu_soi": "Bạn đang thấy, hay đang tưởng tượng?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Hidden enemies, danger, calumny, darkness, terror, deception, occult forces, error.",
+     "nguyen_van_nguoc": "Instability, inconstancy, silence, lesser degrees of deception and error.",
+     "nghia": "Waite ghi: kẻ thù giấu mặt, nguy hiểm, vu khống, tối tăm, sợ hãi, lừa dối, sai lầm; ngược: bất ổn, thiếu kiên định, lừa dối nhẹ hơn."
+    }
+   ]
   },
   "dai_19": {
    "id": "dai_19",
@@ -1979,7 +2130,15 @@
     }
    },
    "viec": "Khoe (đúng nghĩa) một việc bạn vừa làm xong với một người — và cảm ơn một người đã giúp.",
-   "cau_tu_soi": "Bạn đang giấu niềm vui nào vì sợ bị cho là khoe?"
+   "cau_tu_soi": "Bạn đang giấu niềm vui nào vì sợ bị cho là khoe?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Material happiness, fortunate marriage, contentment.",
+     "nguyen_van_nguoc": "The same in a lesser sense.",
+     "nghia": "Waite ghi: hạnh phúc vật chất, hôn nhân may mắn, hài lòng; ngược: như vậy nhưng nhẹ hơn."
+    }
+   ]
   },
   "dai_20": {
    "id": "dai_20",
@@ -2038,7 +2197,15 @@
     }
    },
    "viec": "Viết thư ba dòng tha thứ (cho người hoặc cho mình) về chuyện này — gửi hay không tuỳ bạn.",
-   "cau_tu_soi": "Tiếng gọi nào bạn đã nghe nhiều lần mà cứ bảo 'để sau'?"
+   "cau_tu_soi": "Tiếng gọi nào bạn đã nghe nhiều lần mà cứ bảo 'để sau'?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Change of position, renewal, outcome. Another account specifies total loss through lawsuit.",
+     "nguyen_van_nguoc": "Weakness, pusillanimity, simplicity; also deliberation, decision, sentence.",
+     "nghia": "Waite ghi: đổi vị trí, đổi mới, kết quả; có sách ghi mất trắng vì kiện; ngược: yếu, nhát, giản đơn; cân nhắc, phán quyết."
+    }
+   ]
   },
   "dai_21": {
    "id": "dai_21",
@@ -2097,7 +2264,15 @@
     }
    },
    "viec": "Viết ra việc này đã 'xong' ở điểm nào; gửi lời cảm ơn hoặc bàn giao một thứ trong 72 giờ.",
-   "cau_tu_soi": "Điều gì bạn đã hoàn thành rồi mà chưa cho phép mình ăn mừng?"
+   "cau_tu_soi": "Điều gì bạn đã hoàn thành rồi mà chưa cho phép mình ăn mừng?",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Assured success, recompense, voyage, route, emigration, flight, change of place.",
+     "nguyen_van_nguoc": "Inertia, fixity, stagnation, permanence.",
+     "nghia": "Waite ghi: thành công chắc, phần thưởng, chuyến đi, di cư, đổi chỗ; ngược: ì, cố định, trì trệ."
+    }
+   ]
   },
   "gay_1": {
    "id": "gay_1",
@@ -2152,7 +2327,15 @@
    "viec": "Làm bước đầu tiên của ý mới trong 24 giờ — dù chỉ là mở một tệp và đặt tên.",
    "cau_tu_soi": "Ý nào đang nhen trong bạn mà bạn chưa dám nói ra?",
    "sephirah": 1,
-   "decan": null
+   "decan": null,
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Creation, invention, enterprise, the powers which result in these; principle, beginning, source; birth, family, origin, and in a sense the virility which is behind them; the starting point of enterprises; according to another account, money, fortune, inheritance.",
+     "nguyen_van_nguoc": "Fall, decadence, ruin, perdition, to perish; also a certain clouded joy.",
+     "nghia": "Waite ghi: sáng tạo, khởi sự, nguồn gốc, gia đình; điểm bắt đầu của việc; ngược: sa sút, đổ, niềm vui bị che."
+    }
+   ]
   },
   "gay_2": {
    "id": "gay_2",
@@ -2211,7 +2394,21 @@
     "cung": "bach_duong",
     "so": 1,
     "hanh_tinh": "hoa_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Between the alternative readings there is no marriage possible; on the one hand, riches, fortune, magnificence; on the other, physical suffering, disease, chagrin, sadness, mortification.",
+     "nguyen_van_nguoc": "Surprise, wonder, enchantment, emotion, trouble, fear.",
+     "nghia": "Waite ghi: hai cách đọc trái nhau — giàu có, huy hoàng; hoặc đau, buồn, chán; hình: chủ nhân nhìn lãnh địa cầm quả cầu; ngược: bất ngờ, mê hoặc, sợ."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Dominion",
+     "nguyen_van": "Strength, domination, harmony of rule and of justice.",
+     "nghia": "Book T: sức mạnh, thống trị, sự hài hoà của quyền cai quản và công lý."
+    }
+   ]
   },
   "gay_3": {
    "id": "gay_3",
@@ -2270,7 +2467,21 @@
     "cung": "bach_duong",
     "so": 2,
     "hanh_tinh": "mat_troi"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "He symbolizes established strength, enterprise, effort, trade, commerce, discovery; those are his ships, bearing his merchandise, which are sailing over the sea.",
+     "nguyen_van_nguoc": "The end of troubles, suspension or cessation of adversity, toil and disappointment.",
+     "nghia": "Waite ghi: sức mạnh đã lập, kinh doanh, buôn bán, khám phá; hợp tác có lợi; ngược: hết rắc rối, ngừng vất vả."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Established Strength",
+     "nguyen_van": "Pride, nobility, wealth, power, conceit.",
+     "nghia": "Book T: kiêu hãnh, cao quý, giàu, quyền lực, tự phụ."
+    }
+   ]
   },
   "gay_4": {
    "id": "gay_4",
@@ -2329,7 +2540,21 @@
     "cung": "bach_duong",
     "so": 3,
     "hanh_tinh": "kim_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "They are for once almost on the surface--country life, haven of refuge, a species of domestic harvest-home, repose, concord, harmony, prosperity, peace, and the perfected work of these.",
+     "nguyen_van_nguoc": "The meaning remains unaltered; it is prosperity, increase, felicity, beauty, embellishment.",
+     "nghia": "Waite ghi: đời sống thôn quê, nơi nương náu, mùa gặt trong nhà, nghỉ ngơi, hoà hợp, thịnh vượng; ngược: nghĩa không đổi — thịnh vượng, tăng thêm."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Perfected Work",
+     "nguyen_van": "Reasoning faculty, conclusions drawn from previous knowledge.",
+     "nghia": "Book T: năng lực lý luận, kết luận rút từ điều đã biết; mặt tối là vội và thiếu chắc."
+    }
+   ]
   },
   "gay_5": {
    "id": "gay_5",
@@ -2388,7 +2613,21 @@
     "cung": "su_tu",
     "so": 1,
     "hanh_tinh": "tho_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Imitation, as, for example, sham fight, but also the strenuous competition and struggle of the search after riches and fortune. In this sense it connects with the battle of life.",
+     "nguyen_van_nguoc": "Litigation, disputes, trickery, contradiction.",
+     "nghia": "Waite ghi: đấu giả vờ, cạnh tranh gay gắt, cuộc tranh đấu của đời sống; có sách gọi là lá của vàng, lợi; ngược: kiện tụng, tranh cãi, mưu mẹo."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Strife",
+     "nguyen_van": "Violent strife and boldness, rashness, cruelty, violence, lust, desire, prodigality and generosity; depending on whether the card is well or ill dignified.",
+     "nghia": "Book T: tranh đấu dữ dội và táo bạo; liều, tàn, ham muốn, hoang phí hay rộng rãi — tuỳ lá được tiếp sức hay bị kìm."
+    }
+   ]
   },
   "gay_6": {
    "id": "gay_6",
@@ -2447,7 +2686,21 @@
     "cung": "su_tu",
     "so": 2,
     "hanh_tinh": "moc_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "The card has been so designed that it can cover several significations; on the surface, it is a victor triumphing, but it is also great news, such as might be carried in state by the King's courier; it is expectation crowned with its own desire, the crown of hope, and so forth.",
+     "nguyen_van_nguoc": "Apprehension, fear, as of a victorious enemy at the gate; treachery, disloyalty, as of gates being opened to the enemy; also indefinite delay.",
+     "nghia": "Waite ghi: người thắng trận, tin lớn, hy vọng được đội vương miện; ngược: e sợ kẻ thù trước cổng, phản bội, trì hoãn."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Victory",
+     "nguyen_van": "Victory after strife: Love: pleasure gained by labour: carefulness, sociability and avoiding of strife, yet victory therein: also insolence, and pride of riches and success, etc.",
+     "nghia": "Book T: thắng sau tranh đấu; niềm vui nhờ lao động; cũng có xấc xược, kiêu vì giàu và thành công."
+    }
+   ]
   },
   "gay_7": {
    "id": "gay_7",
@@ -2506,7 +2759,21 @@
     "cung": "su_tu",
     "so": 3,
     "hanh_tinh": "hoa_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "It is a card of valor, for, on the surface, six are attacking one, who has, however, the vantage position. On the intellectual plane, it signifies discussion, wordy strife; in business--negotiations, war of trade, barter, competition.",
+     "nguyen_van_nguoc": "Perplexity, embarrassments, anxiety.",
+     "nghia": "Waite ghi: can đảm — sáu đánh một mà người ấy giữ thế cao; tranh luận, cạnh tranh buôn bán; lá của thành công; ngược: bối rối, lo, do dự."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Valour",
+     "nguyen_van": "Possible victory, depending on the energy and courage exercised; valour; opposition, obstacles and difficulties, yet courage to meet them; quarrelling, ignorance, pretence, and wrangling, and threatening; also victory in small and unimportant things: and influence upon subordinates.",
+     "nghia": "Book T: có thể thắng tuỳ sức và can đảm bỏ ra; trở ngại nhưng có dũng để đối mặt; cũng là cãi cọ, giả vờ, thắng việc nhỏ."
+    }
+   ]
   },
   "gay_8": {
    "id": "gay_8",
@@ -2565,7 +2832,21 @@
     "cung": "nhan_ma",
     "so": 1,
     "hanh_tinh": "thuy_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Activity in undertakings, the path of such activity, swiftness, as that of an express messenger; great haste, great hope, speed towards an end which promises assured felicity; generally, that which is on the move; also the arrows of love.",
+     "nguyen_van_nguoc": "Arrows of jealousy, internal dispute, stingings of conscience, quarrels; and domestic disputes for persons who are married.",
+     "nghia": "Waite ghi: hoạt động nhanh như người đưa tin, vội vàng, hy vọng lớn; mũi tên tình yêu; ngược: ghen tuông, cãi vã trong nhà."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Swiftness",
+     "nguyen_van": "Generous, subtle, eloquent, yet somewhat untrustworthy; rapacious, insolent, oppressive.",
+     "nghia": "Book T: rộng rãi, tinh tế, hoạt ngôn nhưng hơi khó tin; tham, xấc, áp bức — tuỳ phẩm giá."
+    }
+   ]
   },
   "gay_9": {
    "id": "gay_9",
@@ -2624,7 +2905,21 @@
     "cung": "nhan_ma",
     "so": 2,
     "hanh_tinh": "mat_trang"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "The card signifies strength in opposition. If attacked, the person will meet an onslaught boldly; and his build shows that he may prove a formidable antagonist.",
+     "nguyen_van_nguoc": "Obstacles, adversity, calamity.",
+     "nghia": "Waite ghi: sức mạnh khi bị chống; nếu bị tấn công sẽ đối mặt dũng cảm; kèm trì hoãn, hoãn lại; ngược: trở ngại, nghịch cảnh."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Great Strength",
+     "nguyen_van": "Victory, preceded by apprehension and fear.",
+     "nghia": "Book T: thắng, nhưng trước đó là e ngại và sợ; sức khoẻ tốt, hồi phục không đáng ngờ."
+    }
+   ]
   },
   "gay_10": {
    "id": "gay_10",
@@ -2683,7 +2978,21 @@
     "cung": "nhan_ma",
     "so": 3,
     "hanh_tinh": "tho_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "A card of many significances, and some of the readings cannot be harmonized. I set aside that which connects it with honor and good faith.",
+     "nguyen_van_nguoc": "Contrarieties, difficulties, intrigues, and their analogies.",
+     "nghia": "Waite ghi: nghĩa chính là bị đè nặng, nhưng cũng là may mắn, lợi — rồi bị chính những thứ ấy đè; giả dạng; ngược: trái ý, khó khăn, mưu mô."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Oppression",
+     "nguyen_van": "Ill-will, levity, lying, malice, slander, envy, obstinacy; swiftness in evil and deceit, if ill dignified.",
+     "nghia": "Book T: ác ý, nông nổi, dối, vu khống, ghen, cố chấp khi bị kìm; rộng rãi, vô tư, hy sinh khi được tiếp sức."
+    }
+   ]
   },
   "gay_tieu_dong": {
    "id": "gay_tieu_dong",
@@ -2694,7 +3003,7 @@
    "bo": "gay",
    "nguyen_to": "hoa",
    "chiem_tinh": null,
-   "thoth_ten": "Princess of the Shining Flame",
+   "thoth_ten": "Princess of the Shining Flame; Rose of the Palace of Fire",
    "tdm_ten": "Valet de Bâton",
    "huong_nhin": 1,
    "sac_thai": "sang",
@@ -2724,7 +3033,7 @@
      "loi": "Waite: người trẻ 'đang tuyên bố' — sứ giả, tin tức, người trẻ trung thực."
     },
     "thoth": {
-     "ten": "Princess of the Shining Flame",
+     "ten": "Princess of the Shining Flame; Rose of the Palace of Fire",
      "loi": "Princess of the Shining Flame — Đất của Lửa: lửa thành việc nhỏ; mặt tối là nông nổi."
     },
     "tdm": {
@@ -2739,7 +3048,21 @@
    "cau_tu_soi": "Bạn đang hứng với cái gì — và có giữ được 21 ngày không?",
    "nguyen_to_phu": "dat",
    "ten_nguyen_to_phu": "Đất của Lửa",
-   "nhan_vat": "Người trẻ nhiệt tình, hay bắt đầu, dễ chán; mang tin và ý mới."
+   "nhan_vat": "Người trẻ nhiệt tình, hay bắt đầu, dễ chán; mang tin và ý mới.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Dark young man, faithful, a lover, an envoy, a postman. Beside a man, he will bear favorable testimony concerning him.",
+     "nguyen_van_nguoc": "Anecdotes, announcements, evil news.",
+     "nghia": "Waite ghi: thanh niên tóc sẫm, trung thành, người đưa tin; tin trong gia đình; ngược: tin xấu, do dự, bất ổn."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Princess of the Shining Flame; The Rose of the Palace of Fire",
+     "nguyen_van": "If ill dignified, she is superficial, theatrical, cruel, unstable, domineering.",
+     "nghia": "Book T (Công chúa Gậy): khi bị kìm — hời hợt, màu mè, tàn, bất ổn, lấn át."
+    }
+   ]
   },
   "gay_hiep_si": {
    "id": "gay_hiep_si",
@@ -2795,7 +3118,21 @@
    "cau_tu_soi": "Bạn đang chạy tới đâu — và ai đang chạy theo bạn?",
    "nguyen_to_phu": "khi",
    "ten_nguyen_to_phu": "Khí của Lửa",
-   "nhan_vat": "Người hành động nhanh, nhiệt, hay dịch chuyển; thiếu kiên nhẫn."
+   "nhan_vat": "Người hành động nhanh, nhiệt, hay dịch chuyển; thiếu kiên nhẫn.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Departure, absence, flight, emigration. A dark young man, friendly.",
+     "nguyen_van_nguoc": "Rupture, division, interruption, discord.",
+     "nghia": "Waite ghi: ra đi, vắng mặt, di cư; người trẻ thân thiện; đổi chỗ ở; ngược: đứt gãy, chia rẽ, gián đoạn."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Prince of the Chariot of Fire",
+     "nguyen_van": "If ill dignified --- cruel, intolerant, prejudiced and ill natured.",
+     "nghia": "Book T (Hoàng tử Gậy = Hiệp sĩ Gậy RWS): khi bị kìm — tàn, không khoan dung, thành kiến, khó chịu."
+    }
+   ]
   },
   "gay_hoang_hau": {
    "id": "gay_hoang_hau",
@@ -2851,7 +3188,21 @@
    "cau_tu_soi": "Khi nào bạn thấy mình ấm nhất với người khác?",
    "nguyen_to_phu": "thuy",
    "ten_nguyen_to_phu": "Nước của Lửa",
-   "nhan_vat": "Người ấm, tự tin, có sức hút; hay ghen khi mất tự tin."
+   "nhan_vat": "Người ấm, tự tin, có sức hút; hay ghen khi mất tự tin.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "A dark woman, country-woman, friendly, chaste, loving, honorable. If the card beside her signifies a man, she is well disposed towards him; if a woman, she is interested in the Querent.",
+     "nguyen_van_nguoc": "Good, economical, obliging, serviceable.",
+     "nghia": "Waite ghi: người phụ nữ thôn quê thân thiện, yêu thương, đáng trọng; yêu tiền, thành công trong kinh doanh; ngược: tốt, tiết kiệm; hoặc ghen, lừa dối tuỳ lá bên cạnh."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Queen of the Thrones of Flame",
+     "nguyen_van": "If ill dignified, obstinate, revengeful, domineering, tyrannical, and apt to turn against another without a cause.",
+     "nghia": "Book T: khi bị kìm — cố chấp, thù dai, lấn át, chuyên quyền, trở mặt vô cớ."
+    }
+   ]
   },
   "gay_vua": {
    "id": "gay_vua",
@@ -2862,7 +3213,7 @@
    "bo": "gay",
    "nguyen_to": "hoa",
    "chiem_tinh": null,
-   "thoth_ten": "Lord of the Flame and Lightning",
+   "thoth_ten": "Lord of the Flame and the Lightning; King of the Spirits of Fire",
    "tdm_ten": "Roi de Bâton",
    "huong_nhin": -1,
    "sac_thai": "sang",
@@ -2892,8 +3243,8 @@
      "loi": "Waite: vua lửa 'thành thật, nóng, nhanh, cao thượng'."
     },
     "thoth": {
-     "ten": "Lord of the Flame and Lightning",
-     "loi": "Lord of the Flame and Lightning — Lửa của Lửa: thuần lửa; mặt tối là bạo và đốt người xung quanh."
+     "ten": "Lord of the Flame and the Lightning; King of the Spirits of Fire",
+     "loi": "Lord of the Flame and the Lightning — Lửa của Lửa: thuần lửa; mặt tối là bạo và đốt người xung quanh."
     },
     "tdm": {
      "ten": "Roi de Bâton",
@@ -2907,7 +3258,21 @@
    "cau_tu_soi": "Bạn đang dẫn ai — và bạn có hỏi họ muốn đi đâu không?",
    "nguyen_to_phu": "hoa",
    "ten_nguyen_to_phu": "Lửa của Lửa",
-   "nhan_vat": "Người dẫn dắt quyết đoán, có tầm nhìn; khi căng thành độc đoán."
+   "nhan_vat": "Người dẫn dắt quyết đoán, có tầm nhìn; khi căng thành độc đoán.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Dark man, friendly, countryman, generally married, honest and conscientious. The card always signifies honesty, and may mean news concerning an unexpected heritage to fall in before very long.",
+     "nguyen_van_nguoc": "Good, but severe; austere, yet tolerant.",
+     "nghia": "Waite ghi: người đàn ông thân thiện, có gia đình, thật thà, tận tâm; luôn là lá của sự thật thà, có thể là thừa kế bất ngờ; ngược: tốt nhưng nghiêm khắc."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of the Flame and the Lightning; The King of the Spirits of Fire",
+     "nguyen_van": "He is active --- generous --- fierce --- sudden --- impetuous.",
+     "nghia": "Book T (Hiệp sĩ Gậy = Vua Gậy RWS): hoạt động, rộng rãi, dữ, bất ngờ, bốc; bị kìm thì ác ý, tàn, cố chấp."
+    }
+   ]
   },
   "coc_1": {
    "id": "coc_1",
@@ -2962,7 +3327,15 @@
    "viec": "Nói hoặc nhắn một câu thật lòng cho một người bạn quý — hôm nay.",
    "cau_tu_soi": "Trái tim bạn đang đầy điều gì?",
    "sephirah": 1,
-   "decan": null
+   "decan": null,
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "House of the true heart, joy, content, abode, nourishment, abundance, fertility; Holy Table, felicity hereof.",
+     "nguyen_van_nguoc": "House of the false heart, mutation, instability, revolution.",
+     "nghia": "Waite ghi: ngôi nhà của trái tim thật, niềm vui, nuôi dưỡng, dồi dào; ngược: ngôi nhà của trái tim giả, đổi thay, bất ổn."
+    }
+   ]
   },
   "coc_2": {
    "id": "coc_2",
@@ -3021,7 +3394,21 @@
     "cung": "cu_giai",
     "so": 1,
     "hanh_tinh": "kim_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Love, passion, friendship, affinity, union, concord, sympathy, the inter-relation of the sexes, and--as a suggestion apart from all offices of divination--that desire which is not in Nature, but by which Nature is sanctified.",
+     "nguyen_van_nguoc": "",
+     "nghia": "Waite ghi: tình yêu, đam mê, tình bạn, hoà hợp, sự gắn kết của hai giới; nghĩa thêm: thuận trong vui chơi, kinh doanh, tình yêu."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Love",
+     "nguyen_van": "Harmony, pleasure, mirth, subtlety: but if ill dignified --- folly, dissipation, waste, silly actions.",
+     "nghia": "Book T: hài hoà, niềm vui, tinh tế; bị kìm thì khờ, phóng túng, hoang phí."
+    }
+   ]
   },
   "coc_3": {
    "id": "coc_3",
@@ -3080,7 +3467,21 @@
     "cung": "cu_giai",
     "so": 2,
     "hanh_tinh": "thuy_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "The conclusion of any matter in plenty, perfection and merriment; happy issue, victory, fulfilment, solace, healing.",
+     "nguyen_van_nguoc": "Expedition, dispatch, achievement, end.",
+     "nghia": "Waite ghi: kết thúc trọn vẹn, thắng, hoàn thành, an ủi, chữa lành; ngược: nhanh gọn, kết thúc; cũng là quá đà trong khoái lạc."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Abundance",
+     "nguyen_van": "Abundance, plenty, success, pleasure, sensuality, passive success, good luck and fortune; love, gladness, kindness, liberality.",
+     "nghia": "Book T: dồi dào, thành công, niềm vui, may mắn; tình yêu, tử tế, rộng rãi."
+    }
+   ]
   },
   "coc_4": {
    "id": "coc_4",
@@ -3139,7 +3540,21 @@
     "cung": "cu_giai",
     "so": 3,
     "hanh_tinh": "mat_trang"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Weariness, disgust, aversion, imaginary vexations, as if the wine of this world had caused satiety only; another wine, as if a fairy gift, is now offered the wastrel, but he sees no consolation therein. This is also a card of blended pleasure.",
+     "nguyen_van_nguoc": "Novelty, presage, new instruction, new relations.",
+     "nghia": "Waite ghi: mệt mỏi, chán, phiền muộn tưởng tượng — rượu đời làm no; ngược: điều mới, điềm báo, chỉ dẫn mới, quan hệ mới."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Blended Pleasure",
+     "nguyen_van": "Acquisition by contention: injustice sometimes; some drawbacks to pleasure implied.",
+     "nghia": "Book T: có được nhờ tranh giành; đôi khi bất công; niềm vui có mặt trừ."
+    }
+   ]
   },
   "coc_5": {
    "id": "coc_5",
@@ -3198,7 +3613,21 @@
     "cung": "bo_cap",
     "so": 1,
     "hanh_tinh": "hoa_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "It is a card of loss, but something remains over; three have been taken, but two are left; it is a card of inheritance, patrimony, transmission, but not corresponding to expectations; with some interpreters it is a card of marriage, but not without bitterness or frustration.",
+     "nguyen_van_nguoc": "News, alliances, affinity, consanguinity, ancestry, return, false projects.",
+     "nghia": "Waite ghi: mất nhưng còn lại — ba đổ, hai còn; thừa kế không như mong; ngược: tin tức, liên minh, họ hàng, trở về."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Loss in Pleasure",
+     "nguyen_van": "Death, or end of pleasure: disappointment, sorrow and loss in those things from which pleasure is expected.",
+     "nghia": "Book T: niềm vui đi tới hồi kết; thất vọng, buồn và mất ở chính chỗ mình trông đợi vui."
+    }
+   ]
   },
   "coc_6": {
    "id": "coc_6",
@@ -3257,7 +3686,21 @@
     "cung": "bo_cap",
     "so": 2,
     "hanh_tinh": "mat_troi"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "A card of the past and of memories, looking back, as--for example--on childhood; happiness, enjoyment, but coming rather from the past; things that have vanished.",
+     "nguyen_van_nguoc": "The future, renewal, that which will come to pass presently.",
+     "nghia": "Waite ghi: quá khứ, kỷ niệm, hạnh phúc đã qua; cách đọc khác: quan hệ mới, môi trường mới; ngược: tương lai, đổi mới."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Pleasure",
+     "nguyen_van": "Sometimes thankless and presumptuous; sometimes amiable and patient.",
+     "nghia": "Book T: lúc vô ơn và tự tiện, lúc dễ mến và kiên nhẫn — tuỳ phẩm giá."
+    }
+   ]
   },
   "coc_7": {
    "id": "coc_7",
@@ -3316,7 +3759,21 @@
     "cung": "bo_cap",
     "so": 3,
     "hanh_tinh": "kim_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Fairy favors, images of reflection, sentiment, imagination, things seen in the glass of contemplation; some attainment in these degrees, but nothing permanent or substantial is suggested.",
+     "nguyen_van_nguoc": "Desire, will, determination, project.",
+     "nghia": "Waite ghi: ơn của tiên, hình trong gương, tưởng tượng; chút thành tựu nhưng không bền; ngược: ước muốn, ý chí, dự án."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Illusionary Success",
+     "nguyen_van": "Often success gained, but not followed up.",
+     "nghia": "Book T: thường là thành công có được mà không theo tới cùng."
+    }
+   ]
   },
   "coc_8": {
    "id": "coc_8",
@@ -3375,7 +3832,21 @@
     "cung": "song_ngu",
     "so": 1,
     "hanh_tinh": "tho_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "The card speaks for itself on the surface, but other readings are entirely antithetical--giving joy, mildness, timidity, honor, modesty.",
+     "nguyen_van_nguoc": "Great joy, happiness, feasting.",
+     "nghia": "Waite ghi: việc đang xuống dốc, hoặc điều tưởng quan trọng hoá ra nhỏ; cách đọc khác: vui, khiêm tốn; ngược: niềm vui lớn, tiệc tùng."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Abandoned Success",
+     "nguyen_van": "Misery and repining without cause.",
+     "nghia": "Book T: khổ và than phiền không lý do; chạy theo của cải; bất ổn."
+    }
+   ]
   },
   "coc_9": {
    "id": "coc_9",
@@ -3434,7 +3905,21 @@
     "cung": "song_ngu",
     "so": 2,
     "hanh_tinh": "moc_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Concord, contentment, physical _bien-être_; also victory, success, advantage; satisfaction for the Querent or person for whom the consultation is made.",
+     "nguyen_van_nguoc": "Truth, loyalty, liberty; but the readings vary and include mistakes, imperfections, etc.",
+     "nghia": "Waite ghi: hoà thuận, hài lòng, khoẻ khoắn; thắng, thành công; ngược: sự thật, trung thành, tự do; cũng có sai sót."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Material Happiness",
+     "nguyen_van": "A good and generous, but sometimes foolish nature.",
+     "nghia": "Book T: bản tính tốt và rộng rãi, đôi khi khờ; cao thượng, không chịu ý tưởng nhỏ."
+    }
+   ]
   },
   "coc_10": {
    "id": "coc_10",
@@ -3445,7 +3930,7 @@
    "bo": "coc",
    "nguyen_to": "thuy",
    "chiem_tinh": null,
-   "thoth_ten": "Perpetual Success",
+   "thoth_ten": "Perfected Success",
    "tdm_ten": "Dix de Coupe",
    "huong_nhin": null,
    "sac_thai": "sang",
@@ -3475,8 +3960,8 @@
      "loi": "Waite: cầu vồng mười cốc — 'hạnh phúc, nhà, niềm vui trọn vẹn của trái tim'."
     },
     "thoth": {
-     "ten": "Perpetual Success",
-     "loi": "Perpetual Success — Sao Hoả ở Song Ngư decan 3: trọn vẹn; mặt tối là bề ngoài hạnh phúc."
+     "ten": "Perfected Success",
+     "loi": "Perfected Success — Sao Hoả ở Song Ngư decan 3: trọn vẹn; mặt tối là bề ngoài hạnh phúc."
     },
     "tdm": {
      "ten": "Dix de Coupe",
@@ -3493,7 +3978,21 @@
     "cung": "song_ngu",
     "so": 3,
     "hanh_tinh": "hoa_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Contentment, repose of the entire heart; the perfection of that state; also perfection of human love and friendship; if with several picture-cards, a person who is taking charge of the Querent's interests; also the town, village or country inhabited by the Querent.",
+     "nguyen_van_nguoc": "Repose of the false heart, indignation, violence.",
+     "nghia": "Waite ghi: hài lòng, trái tim nghỉ yên; tình yêu và tình bạn trọn vẹn; quê nhà; ngược: trái tim giả nghỉ, phẫn nộ, bạo lực."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Perfected Success",
+     "nguyen_van": "Pleasure, dissipation, debauchery, quietness, peacemaking.",
+     "nghia": "Book T: niềm vui, yên tĩnh, làm hoà; mặt tối là phóng túng."
+    }
+   ]
   },
   "coc_tieu_dong": {
    "id": "coc_tieu_dong",
@@ -3504,7 +4003,7 @@
    "bo": "coc",
    "nguyen_to": "thuy",
    "chiem_tinh": null,
-   "thoth_ten": "Princess of the Waters",
+   "thoth_ten": "Princess of the Waters; Lotus of the Palace of the Floods",
    "tdm_ten": "Valet de Coupe",
    "huong_nhin": 0,
    "sac_thai": "sang",
@@ -3534,7 +4033,7 @@
      "loi": "Waite: thanh niên nhìn cá trong cốc — 'người trẻ học hành, tin tức, suy ngẫm'."
     },
     "thoth": {
-     "ten": "Princess of the Waters",
+     "ten": "Princess of the Waters; Lotus of the Palace of the Floods",
      "loi": "Princess of the Waters — Đất của Nước: cảm xúc thành hình; mặt tối là mộng mị."
     },
     "tdm": {
@@ -3549,7 +4048,21 @@
    "cau_tu_soi": "Con cá nào vừa nhô lên trong cốc của bạn?",
    "nguyen_to_phu": "dat",
    "ten_nguyen_to_phu": "Đất của Nước",
-   "nhan_vat": "Người trẻ mơ mộng, nhạy cảm, hay mang tin tình cảm."
+   "nhan_vat": "Người trẻ mơ mộng, nhạy cảm, hay mang tin tình cảm.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Fair young man, one impelled to render service and with whom the Querent will be connected; a studious youth; news, message; application, reflection, meditation; also these things directed to business.",
+     "nguyen_van_nguoc": "Taste, inclination, attachment, seduction, deception, artifice.",
+     "nghia": "Waite ghi: thanh niên sẵn lòng giúp; người học hành; tin, suy ngẫm; ngược: sở thích, quyến rũ, lừa dối, mưu mẹo."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Princess of the Waters; The Lotus of the Palace of the Floods",
+     "nguyen_van": "When ill dignified she is selfish and luxurious.",
+     "nghia": "Book T (Công chúa Cốc): khi bị kìm — ích kỷ và xa hoa."
+    }
+   ]
   },
   "coc_hiep_si": {
    "id": "coc_hiep_si",
@@ -3605,7 +4118,21 @@
    "cau_tu_soi": "Lời đẹp nào bạn đã nói mà chưa làm?",
    "nguyen_to_phu": "khi",
    "ten_nguyen_to_phu": "Khí của Nước",
-   "nhan_vat": "Người lãng mạn, đề nghị bằng tim; khi lệch thành hứa suông."
+   "nhan_vat": "Người lãng mạn, đề nghị bằng tim; khi lệch thành hứa suông.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Arrival, approach--sometimes that of a messenger; advances, proposition, demeanor, invitation, incitement.",
+     "nguyen_van_nguoc": "Trickery, artifice, subtlety, swindling, duplicity, fraud.",
+     "nghia": "Waite ghi: sự đến gần, người đưa tin; đề nghị, lời mời; ngược: mưu mẹo, lừa đảo, hai mặt."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Prince of the Chariot of the Waters",
+     "nguyen_van": "If ill dignified, he is intensely evil and merciless.",
+     "nghia": "Book T (Hoàng tử Cốc = Hiệp sĩ Cốc RWS): khi bị kìm — rất xấu và không khoan nhượng."
+    }
+   ]
   },
   "coc_hoang_hau": {
    "id": "coc_hoang_hau",
@@ -3661,7 +4188,21 @@
    "cau_tu_soi": "Bạn có đang gánh cảm xúc của ai không phải của mình?",
    "nguyen_to_phu": "thuy",
    "ten_nguyen_to_phu": "Nước của Nước",
-   "nhan_vat": "Người thấu cảm, dịu dàng, chăm sóc; khi lệch thành lo lắng và lệ thuộc."
+   "nhan_vat": "Người thấu cảm, dịu dàng, chăm sóc; khi lệch thành lo lắng và lệ thuộc.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Good, fair woman; honest, devoted woman, who will do service to the Querent; loving intelligence, and hence the gift of vision; success, happiness, pleasure; also wisdom, virtue; a perfect spouse and a good mother.",
+     "nguyen_van_nguoc": "The accounts vary; good woman; otherwise, distinguished woman but one not to be trusted; perverse woman; vice, dishonor, depravity.",
+     "nghia": "Waite ghi: người phụ nữ tốt, tận tụy; trí tuệ yêu thương nên có tài nhìn thấy; thành công, hạnh phúc; ngược: tuỳ sách — người tốt, hoặc không đáng tin."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Queen of the Thrones of the Waters",
+     "nguyen_van": "Very much affected by other influences, and therefore more dependent upon dignity than most symbols.",
+     "nghia": "Book T: chịu ảnh hưởng lá bên cạnh rất nhiều — phụ thuộc phẩm giá hơn hầu hết lá khác."
+    }
+   ]
   },
   "coc_vua": {
    "id": "coc_vua",
@@ -3672,7 +4213,7 @@
    "bo": "coc",
    "nguyen_to": "thuy",
    "chiem_tinh": null,
-   "thoth_ten": "Lord of the Waves and the Waters",
+   "thoth_ten": "Lord of the Waves and the Waters; King of the Hosts of the Sea",
    "tdm_ten": "Roi de Coupe",
    "huong_nhin": -1,
    "sac_thai": "trung",
@@ -3702,7 +4243,7 @@
      "loi": "Waite: vua giữa biển — 'người công bằng, nghệ thuật, khoa học, sẵn lòng giúp'."
     },
     "thoth": {
-     "ten": "Lord of the Waves and the Waters",
+     "ten": "Lord of the Waves and the Waters; King of the Hosts of the Sea",
      "loi": "Lord of the Waves and the Waters — Lửa của Nước: tình có sức; mặt tối là lạnh và thao túng."
     },
     "tdm": {
@@ -3717,7 +4258,21 @@
    "cau_tu_soi": "Bạn đang nén cái gì dưới vẻ bình tĩnh?",
    "nguyen_to_phu": "hoa",
    "ten_nguyen_to_phu": "Lửa của Nước",
-   "nhan_vat": "Người điềm tĩnh, bao dung, cố vấn; khi lệch thành đè nén hoặc thao túng."
+   "nhan_vat": "Người điềm tĩnh, bao dung, cố vấn; khi lệch thành đè nén hoặc thao túng.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Fair man, man of business, law, or divinity; responsible, disposed to oblige the Querent; also equity, art and science, including those who profess science, law and art; creative intelligence.",
+     "nguyen_van_nguoc": "Dishonest, double-dealing man; roguery, exaction, injustice, vice, scandal, pillage, considerable loss.",
+     "nghia": "Waite ghi: người của kinh doanh, luật hay đạo; có trách nhiệm, sẵn giúp; công bằng, nghệ thuật, khoa học; ngược: hai mặt, bất công, tai tiếng, mất lớn."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of the Waves and the Waters; The King of the Hosts of the Sea",
+     "nguyen_van": "Ill dignified, he is sensual, idle and untruthful.",
+     "nghia": "Book T (Hiệp sĩ Cốc = Vua Cốc RWS): khi bị kìm — ham khoái lạc, lười, không thật."
+    }
+   ]
   },
   "kiem_1": {
    "id": "kiem_1",
@@ -3772,7 +4327,15 @@
    "viec": "Viết MỘT câu về điều bạn đã quyết trong chuyện này; đọc to; gửi cho người liên quan nếu cần.",
    "cau_tu_soi": "Điều gì bạn đã thấy rõ mà chưa dám nói thành câu?",
    "sephirah": 1,
-   "decan": null
+   "decan": null,
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Triumph, the excessive degree in everything, conquest, triumph of force. It is a card of great force, in love as well as in hatred.",
+     "nguyen_van_nguoc": "The same, but the results are disastrous; another account says--conception--childbirth, augmentation, multiplicity.",
+     "nghia": "Waite ghi: khải hoàn, mức quá đà trong mọi thứ, thắng bằng sức — sức mạnh lớn trong yêu cũng như ghét; ngược: như vậy nhưng kết cục tai hại; cũng là sinh nở."
+    }
+   ]
   },
   "kiem_2": {
    "id": "kiem_2",
@@ -3831,7 +4394,21 @@
     "cung": "thien_binh",
     "so": 1,
     "hanh_tinh": "mat_trang"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Conformity and the equipoise which it suggests, courage, friendship, concord in a state of arms; another reading gives tenderness, affection, intimacy.",
+     "nguyen_van_nguoc": "Imposture, falsehood, duplicity, disloyalty.",
+     "nghia": "Waite ghi: thuận theo và cân bằng, can đảm, tình bạn, hoà thuận trong thế cầm vũ khí; ngược: giả mạo, dối trá, hai lòng."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Peace Restored",
+     "nguyen_van": "Quarrel made up, yet still some tension in relations: actions sometimes selfish, sometimes unselfish.",
+     "nghia": "Book T: cãi vã đã làm hoà nhưng quan hệ còn căng; hành động khi vị kỷ khi vị tha."
+    }
+   ]
   },
   "kiem_3": {
    "id": "kiem_3",
@@ -3890,7 +4467,21 @@
     "cung": "thien_binh",
     "so": 2,
     "hanh_tinh": "tho_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Removal, absence, delay, division, rupture, dispersion, and all that the design signifies naturally, being too simple and obvious to call for specific enumeration.",
+     "nguyen_van_nguoc": "Mental alienation, error, loss, distraction, disorder, confusion.",
+     "nghia": "Waite ghi: dời đi, vắng mặt, trì hoãn, chia cắt, đứt gãy, tản mác — như hình vẽ; ngược: rối trí, sai lầm, mất, hỗn loạn."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Sorrow",
+     "nguyen_van": "Disruption, interruption, separation, quarrelling; sowing of discord and strife, mischief-making, sorrow and tears; yet mirth in Platonic pleasures; singing, faithfulness in promises, honesty in money transactions, selfish and dissipated, yet sometimes generous: deceitful in words and repetitions; the whole according to dignity.",
+     "nghia": "Book T: đứt gãy, chia cách, cãi vã, gieo bất hoà, buồn và nước mắt; nhưng cũng giữ lời hứa, thật thà về tiền."
+    }
+   ]
   },
   "kiem_4": {
    "id": "kiem_4",
@@ -3949,7 +4540,21 @@
     "cung": "thien_binh",
     "so": 3,
     "hanh_tinh": "moc_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Vigilance, retreat, solitude, hermit's repose, exile, tomb and coffin. It is these last that have suggested the design.",
+     "nguyen_van_nguoc": "Wise administration, circumspection, economy, avarice, precaution, testament.",
+     "nghia": "Waite ghi: cảnh giác, rút lui, cô độc, nghỉ của ẩn sĩ, lưu đày; ngược: quản lý khôn ngoan, thận trọng, tiết kiệm, di chúc."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Rest from Strife",
+     "nguyen_van": "Quietness, rest, ease and plenty, yet after struggle.",
+     "nghia": "Book T: yên tĩnh, nghỉ, dễ chịu và đủ đầy — nhưng sau một cuộc vật lộn."
+    }
+   ]
   },
   "kiem_5": {
    "id": "kiem_5",
@@ -4008,7 +4613,21 @@
     "cung": "bao_binh",
     "so": 1,
     "hanh_tinh": "kim_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Degradation, destruction, revocation, infamy, dishonor, loss, with the variants and analogues of these.",
+     "nguyen_van_nguoc": "The same; burial and obsequies.",
+     "nghia": "Waite ghi: sa sút, phá huỷ, mất mặt, mất; ngược: như vậy; chôn cất, tang lễ."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Defeat",
+     "nguyen_van": "Cruel, yet cowardly, thankless and unreliable.",
+     "nghia": "Book T: tàn nhẫn mà hèn, vô ơn, không đáng tin; nhanh trí, nhanh miệng."
+    }
+   ]
   },
   "kiem_6": {
    "id": "kiem_6",
@@ -4067,7 +4686,21 @@
     "cung": "bao_binh",
     "so": 2,
     "hanh_tinh": "thuy_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Journey by water, route, way, envoy, commissionary, expedient.",
+     "nguyen_van_nguoc": "Declaration, confession, publicity; one account says that it is a proposal of love.",
+     "nghia": "Waite ghi: chuyến đi bằng đường nước, lối đi, người được uỷ thác, cách xoay xở; ngược: tuyên bố, thú nhận, công khai; lời tỏ tình."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Earned Success",
+     "nguyen_van": "Success after anxiety and trouble; self-esteem, beauty, conceit, but sometimes modesty therewith; dominance, patience, labour, etc.",
+     "nghia": "Book T: thành công sau lo lắng và rắc rối; tự trọng, cũng có tự phụ; kiên nhẫn, lao động."
+    }
+   ]
   },
   "kiem_7": {
    "id": "kiem_7",
@@ -4126,7 +4759,21 @@
     "cung": "bao_binh",
     "so": 3,
     "hanh_tinh": "mat_trang"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Design, attempt, wish, hope, confidence; also quarrelling, a plan that may fail, annoyance. The design is uncertain in its import, because the significations are widely at variance with each other.",
+     "nguyen_van_nguoc": "Good advice, counsel, instruction, slander, babbling.",
+     "nghia": "Waite ghi: dự định, nỗ lực, ước, hy vọng, tự tin; cũng là cãi vã, kế hoạch có thể hỏng; ngược: lời khuyên tốt, chỉ dạy, nói xấu."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Unstable Effort",
+     "nguyen_van": "Inclined to betray confidences, not always intentionally.",
+     "nghia": "Book T: hay làm lộ điều được tin cậy, không hẳn cố ý; dao động, không đáng tin."
+    }
+   ]
   },
   "kiem_8": {
    "id": "kiem_8",
@@ -4185,7 +4832,21 @@
     "cung": "song_tu",
     "so": 1,
     "hanh_tinh": "moc_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Bad news, violent chagrin, crisis, censure, power in trammels, conflict, calumny; also sickness.",
+     "nguyen_van_nguoc": "Disquiet, difficulty, opposition, accident, treachery; what is unforeseen; fatality.",
+     "nghia": "Waite ghi: tin xấu, buồn dữ dội, khủng hoảng, bị chỉ trích, quyền bị trói, xung đột, vu khống; ngược: bất an, khó khăn, tai nạn, phản bội."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Shortened Force",
+     "nguyen_van": "Patience in detail of study; great care in some things, counterbalanced by equal disorder in others.",
+     "nghia": "Book T: kiên nhẫn với chi tiết; rất kỹ ở việc này nhưng rối ngang ở việc khác."
+    }
+   ]
   },
   "kiem_9": {
    "id": "kiem_9",
@@ -4244,7 +4905,21 @@
     "cung": "song_tu",
     "so": 2,
     "hanh_tinh": "hoa_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Death, failure, miscarriage, delay, deception, disappointment, despair.",
+     "nguyen_van_nguoc": "Imprisonment, suspicion, doubt, reasonable fear, shame.",
+     "nghia": "Waite ghi: thất bại, sẩy việc, trì hoãn, lừa dối, thất vọng, tuyệt vọng; ngược: giam cầm, nghi ngờ, sợ có lý, xấu hổ."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Despair and Cruelty",
+     "nguyen_van": "Burden, oppression, labour, subtlety and craft, dishonesty, lying and slander.",
+     "nghia": "Book T: gánh nặng, áp bức, lao khổ, mưu mẹo, dối và vu khống; nhưng cũng vâng lời, trung thành, kiên nhẫn."
+    }
+   ]
   },
   "kiem_10": {
    "id": "kiem_10",
@@ -4303,7 +4978,21 @@
     "cung": "song_tu",
     "so": 3,
     "hanh_tinh": "mat_troi"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Whatsoever is intimated by the design; also pain, affliction, tears, sadness, desolation. It is not especially a card of violent death.",
+     "nguyen_van_nguoc": "Advantage, profit, success, favor, but none of these are permanent; also power and authority.",
+     "nghia": "Waite ghi: đau, khổ, nước mắt, buồn, hoang tàn — và nói rõ đây không phải lá về cái kết bạo lực; ngược: lợi, thành công, ân huệ nhưng không bền."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Ruin",
+     "nguyen_van": "Disdain, insolence and impertinence, yet mirth and jollity therewith.",
+     "nghia": "Book T: khinh, xấc, hỗn — mà vẫn vui nhộn; người phá đám, nói nhiều; vẫn khéo và hoạt ngôn."
+    }
+   ]
   },
   "kiem_tieu_dong": {
    "id": "kiem_tieu_dong",
@@ -4314,7 +5003,7 @@
    "bo": "kiem",
    "nguyen_to": "khi",
    "chiem_tinh": null,
-   "thoth_ten": "Princess of the Rushing Winds",
+   "thoth_ten": "Princess of the Rushing Winds; Lotus of the Palace of Air",
    "tdm_ten": "Valet de Épée",
    "huong_nhin": 1,
    "sac_thai": "trung",
@@ -4344,7 +5033,7 @@
      "loi": "Waite: người trẻ cầm kiếm — 'cảnh giác, dò xét, bí mật, canh chừng'."
     },
     "thoth": {
-     "ten": "Princess of the Rushing Winds",
+     "ten": "Princess of the Rushing Winds; Lotus of the Palace of Air",
      "loi": "Princess of the Rushing Winds — Đất của Khí: trí thành việc; mặt tối là lắm chuyện."
     },
     "tdm": {
@@ -4359,7 +5048,21 @@
    "cau_tu_soi": "Bạn đang canh chừng ai — và vì sao?",
    "nguyen_to_phu": "dat",
    "ten_nguyen_to_phu": "Đất của Khí",
-   "nhan_vat": "Người trẻ tinh nhanh, tò mò, cảnh giác; khi lệch thành soi mói."
+   "nhan_vat": "Người trẻ tinh nhanh, tò mò, cảnh giác; khi lệch thành soi mói.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Authority, overseeing, secret service, vigilance, spying, examination, and the qualities thereto belonging.",
+     "nguyen_van_nguoc": "More evil side of these qualities; what is unforeseen, unprepared state; sickness is also intimated.",
+     "nghia": "Waite ghi: quyền giám sát, canh chừng, dò xét, kiểm tra; ngược: mặt xấu của các tính ấy; điều bất ngờ, chưa chuẩn bị."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Princess of the Rushing Winds; The Lotus of the Palace of Air",
+     "nguyen_van": "If ill dignified, she is frivolous and cunning.",
+     "nghia": "Book T (Công chúa Kiếm): khi bị kìm — phù phiếm và ranh mãnh."
+    }
+   ]
   },
   "kiem_hiep_si": {
    "id": "kiem_hiep_si",
@@ -4415,7 +5118,21 @@
    "cau_tu_soi": "Bạn đang phi về phía ai với thanh kiếm?",
    "nguyen_to_phu": "khi",
    "ten_nguyen_to_phu": "Khí của Khí",
-   "nhan_vat": "Người quyết liệt, nhanh, sắc; khi lệch thành gắt và bất chấp."
+   "nhan_vat": "Người quyết liệt, nhanh, sắc; khi lệch thành gắt và bất chấp.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Skill, bravery, capacity, defense, address, enmity, wrath, war, destruction, opposition, resistance, ruin. There is therefore a sense in which the card signifies death, but it carries this meaning only in its proximity to other cards of fatality.",
+     "nguyen_van_nguoc": "Imprudence, incapacity, extravagance.",
+     "nghia": "Waite ghi: kỹ năng, dũng cảm, phòng vệ; cũng là thù địch, giận, chiến tranh, phá huỷ; ngược: thiếu thận trọng, bất tài, phung phí."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Prince of the Chariot of the Winds",
+     "nguyen_van": "If ill dignified: harsh, malicious, plotting; obstinate, yet hesitating; unreliable.",
+     "nghia": "Book T (Hoàng tử Kiếm = Hiệp sĩ Kiếm RWS): khi bị kìm — khắc nghiệt, ác ý, mưu mô; cố chấp mà do dự."
+    }
+   ]
   },
   "kiem_hoang_hau": {
    "id": "kiem_hoang_hau",
@@ -4471,7 +5188,21 @@
    "cau_tu_soi": "Bạn đang 'rõ ràng' với ai mà thật ra là lạnh?",
    "nguyen_to_phu": "thuy",
    "ten_nguyen_to_phu": "Nước của Khí",
-   "nhan_vat": "Người từng trải, độc lập, nói rõ; khi lệch thành cay nghiệt."
+   "nhan_vat": "Người từng trải, độc lập, nói rõ; khi lệch thành cay nghiệt.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Widowhood, female sadness and embarrassment, absence, sterility, mourning, privation, separation.",
+     "nguyen_van_nguoc": "Malice, bigotry, artifice, prudery, bale, deceit.",
+     "nghia": "Waite ghi: goá bụa, nỗi buồn của người phụ nữ, vắng mặt, tang, thiếu thốn, chia cách; ngược: ác ý, cố chấp, mưu mẹo, lừa dối."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Queen of the Thrones of Air",
+     "nguyen_van": "If ill dignified, cruel, sly, deceitful, unreliable, though with a good exterior.",
+     "nghia": "Book T: khi bị kìm — tàn, ranh, lừa, không đáng tin dù bề ngoài tốt."
+    }
+   ]
   },
   "kiem_vua": {
    "id": "kiem_vua",
@@ -4482,7 +5213,7 @@
    "bo": "kiem",
    "nguyen_to": "khi",
    "chiem_tinh": null,
-   "thoth_ten": "Lord of the Winds and Breezes",
+   "thoth_ten": "Lord of the Winds and the Breezes; King of the Spirits of Air",
    "tdm_ten": "Roi de Épée",
    "huong_nhin": 0,
    "sac_thai": "trung",
@@ -4512,8 +5243,8 @@
      "loi": "Waite: vua ngồi phán — 'quyền lực, lệnh, uy, luật'."
     },
     "thoth": {
-     "ten": "Lord of the Winds and Breezes",
-     "loi": "Lord of the Winds and Breezes — Lửa của Khí: trí có lửa; mặt tối là bạo bằng lời."
+     "ten": "Lord of the Winds and the Breezes; King of the Spirits of Air",
+     "loi": "Lord of the Winds and the Breezes — Lửa của Khí: trí có lửa; mặt tối là bạo bằng lời."
     },
     "tdm": {
      "ten": "Roi de Épée",
@@ -4527,7 +5258,21 @@
    "cau_tu_soi": "Bạn đang xử ai bằng luật mà không hỏi họ?",
    "nguyen_to_phu": "hoa",
    "ten_nguyen_to_phu": "Lửa của Khí",
-   "nhan_vat": "Người phân xử bằng lý, uy nghiêm; khi lệch thành lạnh và áp đặt."
+   "nhan_vat": "Người phân xử bằng lý, uy nghiêm; khi lệch thành lạnh và áp đặt.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Whatsoever arises out of the idea of judgment and all its connections--power, command, authority, militant intelligence, law, offices of the crown, and so forth.",
+     "nguyen_van_nguoc": "Cruelty, perversity, barbarity, perfidy, evil intention.",
+     "nghia": "Waite ghi: mọi thứ từ ý niệm phán xét — quyền lực, mệnh lệnh, trí tuệ chiến đấu, luật; ngược: tàn nhẫn, đồi bại, ý đồ xấu."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of the Winds and the Breezes; he King of the Spirits of Air",
+     "nguyen_van": "Also to overvalue small things, unless well dignified.",
+     "nghia": "Book T (Hiệp sĩ Kiếm = Vua Kiếm RWS): dễ xem trọng việc nhỏ quá mức nếu không được tiếp sức."
+    }
+   ]
   },
   "tien_1": {
    "id": "tien_1",
@@ -4582,7 +5327,15 @@
    "viec": "Bắt đầu MỘT việc sờ được cho chuyện này (mở tài khoản, viết đơn, dọn góc làm) trong 24 giờ.",
    "cau_tu_soi": "Hạt giống nào bạn đã có trong tay mà chưa gieo?",
    "sephirah": 1,
-   "decan": null
+   "decan": null,
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Perfect contentment, felicity, ecstasy; also speedy intelligence; gold.",
+     "nguyen_van_nguoc": "The evil side of wealth, bad intelligence; also great riches.",
+     "nghia": "Waite ghi: hài lòng trọn vẹn, hạnh phúc, ngây ngất; tin nhanh; vàng; ngược: mặt xấu của giàu có; vẫn là thịnh vượng, nhưng có lợi hay không tuỳ chiều lá."
+    }
+   ]
   },
   "tien_2": {
    "id": "tien_2",
@@ -4641,7 +5394,21 @@
     "cung": "ma_ket",
     "so": 1,
     "hanh_tinh": "moc_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "On the one hand it is represented as a card of gaiety, recreation and its connections, which is the subject of the design; but it is read also as news and messages in writing, as obstacles, agitation, trouble, embroilment.",
+     "nguyen_van_nguoc": "Enforced gaiety, simulated enjoyment, literal sense, handwriting, composition, letters of exchange.",
+     "nghia": "Waite ghi: vui vẻ, giải trí; cũng là tin và thư từ, trở ngại, xáo động; ngược: vui gượng, giả vui; chữ viết, thư tín."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Harmonious Change",
+     "nguyen_van": "Kind, yet wavering and inconsistent.",
+     "nghia": "Book T: tử tế nhưng dao động, thiếu nhất quán; thuận trong đi lại; hay cãi."
+    }
+   ]
   },
   "tien_3": {
    "id": "tien_3",
@@ -4700,7 +5467,21 @@
     "cung": "ma_ket",
     "so": 2,
     "hanh_tinh": "hoa_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "_Métier_, trade, skilled labor; usually, however, regarded as a card of nobility, aristocracy, renown, glory.",
+     "nguyen_van_nguoc": "Mediocrity, in work and otherwise, puerility, pettiness, weakness.",
+     "nghia": "Waite ghi: nghề, buôn bán, tay nghề; thường đọc là quý tộc, danh tiếng, vinh quang; ngược: tầm thường, trẻ con, nhỏ nhen, yếu."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Material Works",
+     "nguyen_van": "Commencement of matters to be established later.",
+     "nghia": "Book T: khởi đầu của việc sẽ được lập về sau; hẹp hòi; nhạy về lợi."
+    }
+   ]
   },
   "tien_4": {
    "id": "tien_4",
@@ -4759,7 +5540,21 @@
     "cung": "ma_ket",
     "so": 3,
     "hanh_tinh": "mat_troi"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "The surety of possessions, cleaving to that which one has, gift, legacy, inheritance.",
+     "nguyen_van_nguoc": "Suspense, delay, opposition",
+     "nghia": "Waite ghi: sự chắc của sở hữu, bám vào cái mình có, quà, di sản, thừa kế; ngược: lơ lửng, trì hoãn, chống đối."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Earthly Power",
+     "nguyen_van": "Prejudicial, covetous, suspicious, careful and orderly, but discontented.",
+     "nghia": "Book T: thành kiến, tham, nghi ngờ, cẩn thận và ngăn nắp nhưng không hài lòng; ít sáng tạo."
+    }
+   ]
   },
   "tien_5": {
    "id": "tien_5",
@@ -4818,7 +5613,21 @@
     "cung": "kim_nguu",
     "so": 1,
     "hanh_tinh": "thuy_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "The card foretells material trouble above all, whether in the form illustrated--that is, destitution--or otherwise. For some cartomancists, it is a card of love and lovers--wife, husband, friend, mistress; also concordance, affinities.",
+     "nguyen_van_nguoc": "Disorder, chaos, ruin, discord, profligacy.",
+     "nghia": "Waite ghi: trên hết là khó khăn vật chất, túng thiếu; có sách đọc là tình yêu, đôi lứa; ngược: hỗn loạn, đổ vỡ, bất hoà, phóng đãng."
+    },
+    {
+     "sach": "book_t",
+     "ten": "THE LORD OF MATERIAL TROUBLE",
+     "nguyen_van": "Labour, toil, land cultivation; building, knowledge and acuteness of earthly things, poverty, carefulness, kindness; sometimes money regained after severe toil and labour.",
+     "nghia": "Book T: lao động, cày cuốc, xây dựng; nghèo, cẩn thận, tử tế; đôi khi lấy lại tiền sau khổ nhọc."
+    }
+   ]
   },
   "tien_6": {
    "id": "tien_6",
@@ -4877,7 +5686,21 @@
     "cung": "kim_nguu",
     "so": 2,
     "hanh_tinh": "mat_trang"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Presents, gifts, gratification; another account says attention, vigilance; now is the accepted time, present prosperity, etc.",
+     "nguyen_van_nguoc": "Desire, cupidity, envy, jealousy, illusion.",
+     "nghia": "Waite ghi: quà tặng, sự hài lòng; chú ý, cảnh giác; lúc này là lúc thuận, thịnh vượng hiện tại; ngược: ham muốn, tham, ghen, ảo tưởng."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Material Success",
+     "nguyen_van": "Power, influence, rank, nobility, rule over the people.",
+     "nghia": "Book T: quyền lực, ảnh hưởng, địa vị; may mắn, rộng rãi và công bằng; bị kìm thì kiêu vì tiền."
+    }
+   ]
   },
   "tien_7": {
    "id": "tien_7",
@@ -4936,7 +5759,21 @@
     "cung": "kim_nguu",
     "so": 3,
     "hanh_tinh": "tho_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "These are exceedingly contradictory; in the main, it is a card of money, business, barter; but one reading gives altercation, quarrel--and another innocence, ingenuity, purgation.",
+     "nguyen_van_nguoc": "Cause for anxiety regarding money which it may be proposed to lend.",
+     "nghia": "Waite ghi: rất trái ngược — chủ yếu là lá của tiền, kinh doanh, trao đổi; có sách ghi cãi vã; ngược: lo về khoản tiền định cho vay."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Success Unfulfilled",
+     "nguyen_van": "Disappointment, misery, slavery, necessity and baseness.",
+     "nghia": "Book T: thất vọng, khổ, nô lệ, túng; người cày đất mà thua lỗ; lợi nhỏ lẻ không ra quả."
+    }
+   ]
   },
   "tien_8": {
    "id": "tien_8",
@@ -4995,7 +5832,21 @@
     "cung": "xu_nu",
     "so": 1,
     "hanh_tinh": "mat_troi"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Work, employment, commission, craftsmanship, skill in craft and business, perhaps in the preparatory stage.",
+     "nguyen_van_nguoc": "Voided ambition, vanity, cupidity, exaction, usury.",
+     "nghia": "Waite ghi: công việc, nghề thủ công, tay nghề trong nghề và kinh doanh, có thể ở giai đoạn chuẩn bị; ngược: tham vọng rỗng, tham, cho vay nặng lãi."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Prudence",
+     "nguyen_van": "Over-careful in small things at the expense of great: \"Penny wise and pound foolish\": gain of ready money in small sums; mean; avaricious; industrious; cultivation of land; hoarding, lacking in enterprise.",
+     "nghia": "Book T: quá kỹ việc nhỏ mà hỏng việc lớn; tiền lẻ từng món; keo; chăm chỉ; tích trữ, thiếu chí làm ăn."
+    }
+   ]
   },
   "tien_9": {
    "id": "tien_9",
@@ -5054,7 +5905,21 @@
     "cung": "xu_nu",
     "so": 2,
     "hanh_tinh": "kim_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Prudence, safety, success, accomplishment, certitude, discernment.",
+     "nguyen_van_nguoc": "Roguery, deception, voided project, bad faith.",
+     "nghia": "Waite ghi: thận trọng, an toàn, thành công, hoàn thành, vững trong nhận định; ngược: gian, lừa, dự án đổ, bội tín."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Material Gain",
+     "nguyen_van": "Complete realization of material gain, good, riches; inheritance; covetous; treasuring of goods; and sometimes theft and knavery.",
+     "nghia": "Book T: lợi vật chất thành hình trọn; của cải, thừa kế; tham; đôi khi trộm cắp, gian — tuỳ phẩm giá."
+    }
+   ]
   },
   "tien_10": {
    "id": "tien_10",
@@ -5113,7 +5978,21 @@
     "cung": "xu_nu",
     "so": 3,
     "hanh_tinh": "thuy_tinh"
-   }
+   },
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Gain, riches; family matters, archives, extraction, the abode of a family.",
+     "nguyen_van_nguoc": "Chance, fatality, loss, robbery, games of hazard; sometimes gift, dowry, pension.",
+     "nghia": "Waite ghi: lợi, của cải; việc gia đình, gia phả, dòng dõi, nhà của một gia đình; ngược: may rủi, mất, trộm, cờ bạc; đôi khi quà, của hồi môn."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of Wealth",
+     "nguyen_van": "Old age, slothfulness; great wealth, yet sometimes loss in part; heaviness; dullness of mind, yet clever and prosperous in money transactions.",
+     "nghia": "Book T: tuổi già, lười; của cải lớn mà đôi khi mất một phần; nặng nề, chậm trí nhưng khéo và phát về tiền."
+    }
+   ]
   },
   "tien_tieu_dong": {
    "id": "tien_tieu_dong",
@@ -5124,7 +6003,7 @@
    "bo": "tien",
    "nguyen_to": "dat",
    "chiem_tinh": null,
-   "thoth_ten": "Princess of the Echoing Hills",
+   "thoth_ten": "Princess of the Echoing Hills; Rose of the Palace of Earth",
    "tdm_ten": "Valet de Denier",
    "huong_nhin": 0,
    "sac_thai": "sang",
@@ -5154,7 +6033,7 @@
      "loi": "Waite: người trẻ nhìn đồng tiền — 'ứng dụng, học, suy ngẫm, tin tức'."
     },
     "thoth": {
-     "ten": "Princess of the Echoing Hills",
+     "ten": "Princess of the Echoing Hills; Rose of the Palace of Earth",
      "loi": "Princess of the Echoing Hills — Đất của Đất: thuần đất; mặt tối là chậm thành lười."
     },
     "tdm": {
@@ -5169,7 +6048,21 @@
    "cau_tu_soi": "Bạn đang cầm đồng tiền nào trong tay mà chưa nhìn kỹ?",
    "nguyen_to_phu": "dat",
    "ten_nguyen_to_phu": "Đất của Đất",
-   "nhan_vat": "Người trẻ chăm chỉ, thực tế, ham học; khi lệch thành chậm chạp."
+   "nhan_vat": "Người trẻ chăm chỉ, thực tế, ham học; khi lệch thành chậm chạp.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Application, study, scholarship, reflection; another reading says news, messages and the bringer thereof; also rule, management.",
+     "nguyen_van_nguoc": "Prodigality, dissipation, liberality, luxury, unfavorable news.",
+     "nghia": "Waite ghi: chăm chỉ, học hành, suy ngẫm; cách đọc khác: tin tức và người mang tin; quản lý; ngược: phung phí, xa hoa, tin không hay."
+    },
+    {
+     "sach": "book_t",
+     "ten": "Princess of the Echoing Hills; Rose of the Palace of Earth",
+     "nguyen_van": "If ill dignified she is wasteful and prodigal.",
+     "nghia": "Book T (Công chúa Tiền): khi bị kìm — hoang phí."
+    }
+   ]
   },
   "tien_hiep_si": {
    "id": "tien_hiep_si",
@@ -5225,7 +6118,21 @@
    "cau_tu_soi": "Việc nào bạn bền với nó nhất — và việc nào bạn kẹt với nó?",
    "nguyen_to_phu": "khi",
    "ten_nguyen_to_phu": "Khí của Đất",
-   "nhan_vat": "Người bền bỉ, đáng tin, chậm chắc; khi lệch thành ì và nhàm."
+   "nhan_vat": "Người bền bỉ, đáng tin, chậm chắc; khi lệch thành ì và nhàm.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Utility, serviceableness, interest, responsibility, rectitude--all on the normal and external plane.",
+     "nguyen_van_nguoc": "Inertia, idleness, repose of that kind, stagnation; also placidity, discouragement, carelessness.",
+     "nghia": "Waite ghi: hữu ích, tận tụy, trách nhiệm, ngay thẳng — trên bình diện đời thường; ngược: ì, lười, trì trệ; cũng là bình thản, chán nản."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Prince of the Chariot of Earth",
+     "nguyen_van": "If ill dignified he is selfish, animal and material: stupid.",
+     "nghia": "Book T (Hoàng tử Tiền = Hiệp sĩ Tiền RWS): khi bị kìm — ích kỷ, bản năng, thực dụng."
+    }
+   ]
   },
   "tien_hoang_hau": {
    "id": "tien_hoang_hau",
@@ -5281,7 +6188,21 @@
    "cau_tu_soi": "Bạn chăm ai nhiều nhất — và ai chăm bạn?",
    "nguyen_to_phu": "thuy",
    "ten_nguyen_to_phu": "Nước của Đất",
-   "nhan_vat": "Người chăm lo thực tế, ấm, làm chủ nhà; khi lệch thành bận và quên mình."
+   "nhan_vat": "Người chăm lo thực tế, ấm, làm chủ nhà; khi lệch thành bận và quên mình.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Opulence, generosity, magnificence, security, liberty.",
+     "nguyen_van_nguoc": "Evil, suspicion, suspense, fear, mistrust.",
+     "nghia": "Waite ghi: sung túc, hào phóng, lộng lẫy, an toàn, tự do; ngược: xấu, nghi ngờ, lơ lửng, sợ, mất tin."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Queen of the Thrones of Earth",
+     "nguyen_van": "If ill dignified she is undecided, capricious, changeable, foolish.",
+     "nghia": "Book T: khi bị kìm — thiếu quyết đoán, đỏng đảnh, hay đổi, khờ."
+    }
+   ]
   },
   "tien_vua": {
    "id": "tien_vua",
@@ -5292,7 +6213,7 @@
    "bo": "tien",
    "nguyen_to": "dat",
    "chiem_tinh": null,
-   "thoth_ten": "Lord of the Wide and Fertile Land",
+   "thoth_ten": "Lord of the Wide and Fertile Land; King of the Spirits of Earth",
    "tdm_ten": "Roi de Denier",
    "huong_nhin": -1,
    "sac_thai": "sang",
@@ -5322,7 +6243,7 @@
      "loi": "Waite: vua giữa vườn nho — 'dũng cảm, khả năng, thành công trong kinh doanh'."
     },
     "thoth": {
-     "ten": "Lord of the Wide and Fertile Land",
+     "ten": "Lord of the Wide and Fertile Land; King of the Spirits of Earth",
      "loi": "Lord of the Wide and Fertile Land — Lửa của Đất: đất có lửa; mặt tối là tham và chậm đổi."
     },
     "tdm": {
@@ -5337,7 +6258,21 @@
    "cau_tu_soi": "Bạn đang 'làm vua' ở đâu, và có ai được hưởng vườn nho của bạn không?",
    "nguyen_to_phu": "hoa",
    "ten_nguyen_to_phu": "Lửa của Đất",
-   "nhan_vat": "Người thành đạt, ổn định, bảo trợ; khi lệch thành tham và cứng."
+   "nhan_vat": "Người thành đạt, ổn định, bảo trợ; khi lệch thành tham và cứng.",
+   "trich": [
+    {
+     "sach": "waite_1910",
+     "nguyen_van": "Valor, intelligence, business, mathematical gifts, and success in these paths.",
+     "nguyen_van_nguoc": "Vice, weakness, perversity, peril.",
+     "nghia": "Waite ghi: dũng, trí, kinh doanh, năng khiếu toán và thành công trên các đường ấy; ngược: thói xấu, yếu, đồi bại, nguy hiểm."
+    },
+    {
+     "sach": "book_t",
+     "ten": "The Lord of the Wide and Fertile Land; The King of the Spirits of Earth",
+     "nguyen_van": "Unless very well dignified he is heavy, dull, and material.",
+     "nghia": "Book T (Hiệp sĩ Tiền = Vua Tiền RWS): nếu không được tiếp sức mạnh thì nặng nề, chậm, thực dụng."
+    }
+   ]
   }
  },
  "trai_bai": {
@@ -6007,7 +6942,7 @@
   "khai_niem": {
    "la_nguoc": "Lá ngược (reversed) là lá rút ra bị lộn đầu. Theo lối Waite, lá ngược nghĩa là tính chất của lá đang bị chặn, yếu đi, hướng vào trong hoặc đang qua đi — không phải dấu hiệu xấu. Lối Marseille và Thoth không dùng lá ngược mà đọc bằng lá bên cạnh. Ở đây bạn chọn dùng hay không khi xáo bài.",
    "an_chinh": "22 lá ẩn chính (Major Arcana, 0 Chàng Khờ → XXI Thế Giới) nói về những chặng lớn và lực ngoài tầm sắp xếp; 56 lá ẩn phụ (Minor Arcana, bốn bộ Gậy – Cốc – Kiếm – Tiền) nói về việc hằng ngày.",
-   "pham_gia": "Phẩm giá nguyên tố (elemental dignities, Golden Dawn): mỗi lá mang một nguyên tố; hai lá cạnh nhau cùng nguyên tố thì mạnh lên, Lửa–Khí và Nước–Đất hợp nhau, Lửa–Nước và Khí–Đất xung nhau. Đây là cách đọc 'lá bên cạnh' thay cho lá ngược.",
+   "pham_gia": "Phẩm giá nguyên tố (elemental dignities, Golden Dawn): mỗi lá mang một nguyên tố; hai lá cạnh nhau cùng nguyên tố thì mạnh lên, Lửa hợp Khí và Đất, Nước hợp Khí và Đất, Lửa–Nước và Khí–Đất xung nhau. Đây là cách đọc 'lá bên cạnh' thay cho lá ngược.",
    "decan": "Decan là một phần ba của một cung hoàng đạo (10 độ, khoảng 10 ngày). Golden Dawn gắn 36 lá số 2–10 với 36 decan — ở đây dùng làm nhịp gợi ý thời gian, không phải ngày dự báo.",
    "dai_dien": "Lá đại diện (significator) là lá hoàng gia được chọn để 'đóng vai' người hỏi. Waite chọn theo tuổi và dáng vẻ; ở đây chọn từ dáng mặt bạn tự quan sát và tuổi — chỉ cho chính bạn.",
    "celtic": "Celtic Cross là trải bài 10 lá Waite ghi lại năm 1910: chữ thập sáu lá (tâm điểm, điều cản, gốc rễ, vừa qua, điều hướng tới, sắp tới) và cây cột bốn lá (bạn, quanh bạn, hy vọng – nỗi lo, khả năng diễn ra).",
@@ -9505,6 +10440,20 @@
    "tieu_dong": "dưới 30 tuổi, đang học và nhận → Tiểu đồng",
    "vua": "từ 30 tuổi, nam → Vua (lực của bộ đã chín, hướng ra điều khiển)",
    "hoang_hau": "từ 30 tuổi, nữ → Hoàng hậu (lực của bộ đã chín, hướng vào nuôi giữ)"
+  }
+ },
+ "doi_chieu": {
+  "waite_1910": {
+   "ban": "Project Gutenberg #43548 — The Illustrated Key to the Tarot (de Laurence 1918, in lại nguyên văn Waite 1910)",
+   "tep": "fixtures/nguon/tarot_waite_1910.json",
+   "ngay": "2026-11-07",
+   "phu": "nghĩa bói 78 lá xuôi/ngược (§3, Part II), nghĩa thêm §4, phương pháp Celtic"
+  },
+  "book_t": {
+   "ban": "archive.org \"book-t-the-tarot\" — bản chép Golden Dawn (OCR), đối chiếu tên lá + luật phẩm giá với kho mã MIT độc lập",
+   "tep": "fixtures/nguon/tarot_book_t.json",
+   "ngay": "2026-11-07",
+   "phu": "36 lá số + 16 hoàng gia (tên, nghĩa), luật phẩm giá, thứ tự decan"
   }
  }
 }

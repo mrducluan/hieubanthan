@@ -2,8 +2,8 @@
 """TR-1 — Tarot, tầng CALC. Hàm thuần, tất định (trừ `xao(None)` dùng CSPRNG như gieo quẻ Kinh Dịch):
 
 - bộ bài 78 lá (`BO_BAI`), xáo theo hạt giống (blake2b → Fisher–Yates) hoặc `secrets`;
-- phẩm giá nguyên tố theo Book T (Golden Dawn): cùng nguyên tố mạnh thêm, Lửa–Khí / Nước–Đất hợp, Lửa–Nước / Khí–Đất xung,
-  còn lại trung tính; hai lá hai bên xung NHAU → lá giữa không bị ảnh hưởng;
+- phẩm giá nguyên tố theo Book T (Golden Dawn, nguyên văn "Of the Dignities"): cùng nguyên tố mạnh thêm, Lửa–Nước / Khí–Đất xung, các cặp còn lại hợp,
+  (lá thiếu nguyên tố → trung tính); hai lá hai bên xung NHAU → lá giữa không bị ảnh hưởng;
 - phân tích một trải bài (kề cận theo KB, sức từng lá, nguyên tố trội / thiếu, tỉ lệ ẩn chính, nhịp số 1–10, hướng nhìn);
 - decan Book T → khoảng ngày dương lịch (mốc phổ biến), nhịp theo bộ / hành tinh — NHỊP GỢI Ý, không phải dự báo;
 - lá ngày (băm ngày [+ ngày sinh]), lá đại diện (ngũ hình Nhân tướng × tuổi × giới tính).
