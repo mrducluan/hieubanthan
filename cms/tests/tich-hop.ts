@@ -789,7 +789,8 @@ await ca("BLOG-3 nhập bài NotFair: nháp cùng slug, ảnh vào Thư viện �
     assert.match(html, /<a href="https:\/\/doi-tac\.vn\/bai"[^>]*>đối tác<\/a>/);
     assert.match(html, /<figure><img [^>]*alt="Sơ đồ"[^>]*><figcaption>Hình 1<\/figcaption><\/figure>/);
     assert.match(html, /<ul[ >]/);
-    assert.match(html, /Bài trao đổi qua NotFair\./);
+    // BLOG-9: dòng ghi công NotFair (p.nf-attribution) bỏ khi nhập — bài đứng tên tác giả của site.
+    assert.doesNotMatch(html, /Bài trao đổi qua NotFair/);
     const up = ((d.noi_dung as { root: { children: { type: string; value: unknown }[] } }).root.children).filter((c) => c.type === "upload");
     assert.equal(up.length, 1);
     tao.push({ collection: "media", id: (up[0]!.value as { id: number }).id ?? up[0]!.value as number });
