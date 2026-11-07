@@ -450,7 +450,7 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
       name: "nguon_goc", label: "Nguồn bài", type: "select", defaultValue: "cms", access: { read: truongNoiBo, update: () => false },
       options: [{ label: "Viết trong CMS", value: "cms" }, { label: "Nhập từ NotFair (bài trao đổi)", value: "notfair" }],
       admin: { position: "sidebar", readOnly: true, condition: (d) => d?.nguon_goc === "notfair",
-        description: "Bài trao đổi: giữ nguyên các link của đối tác và dòng ghi nguồn cuối bài. Đường dẫn không đổi." },
+        description: "Bài trao đổi: giữ nguyên các link của đối tác. Dòng ghi công \"Authored with NotFair SEO\" tự bỏ khi nhập / chuẩn hoá (BLOG-9)." },
     },
     // Link ra ngoài của bản NotFair gốc — kiểm định cảnh báo khi bị xoá (BLOG-3). Ghi lúc nhập, không sửa tay.
     { name: "notfair_lien_ket", type: "text", hasMany: true, access: { read: truongNoiBo, update: () => false },
