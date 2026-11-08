@@ -154,3 +154,11 @@ Ba điểm QTE-1 còn để ngỏ, đề xuất ở PR UI-BLOG (`docs/UI-BLOG-VA
    (Menu, Chân trang, Chữ dùng chung, Trang website) → Payload `localization`. Làm ở tuần 3–4 cùng khung `/en`, migration Payload
    có up/down, thử trên Postgres thật trước. Nút "Tạo bản tiếng Anh" trong trình viết bài tạo NHÁP (không tự xuất bản).
 3. **Thêm cụm "Chinese zodiac 2027 / Year of the Fire Goat"** (Tết 6/2/2027) vào lượt kiểm từ khoá tuần 2.
+
+## 12. Tiến độ
+
+| Tuần | Trạng thái | Ghi chú |
+|---|---|---|
+| 1 | **Đã làm (2026-11-08)** | Nơi sinh nước ngoài chọn nước + thành phố → máy tự tính múi giờ chuẩn + giờ mùa hè (IANA); Hôm nay / nhịp theo nơi đang sống. Nhắc việc Web Push theo nơi ở: cần cột mới (migration) — để sau. |
+| 2 | **Đã làm (2026-11-08)** — phần trang | `/tet-o-nuoc-ngoai` + Mỹ, Nhật, Úc, Canada. **Kiểm mốc từ khoá** (≥ 20.000 lượt/tháng, gồm "Chinese zodiac 2027") vẫn chờ anh nối Keyword Planner / mở trends.google.com (mục 9). |
+| 3–8 | Chưa làm | Xem mục 13 khi bắt đầu. |
