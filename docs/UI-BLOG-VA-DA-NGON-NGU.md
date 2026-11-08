@@ -105,7 +105,6 @@ từ khoá tiếng Anh, ảnh dùng chung (ảnh có chữ vẽ lại bản Anh)
 bài mới, **không bao giờ tự xuất bản** (như BLOG-9d). Chỉ chuyển ngữ bài thuộc 4 mảng QTE-1 và có nhu cầu tìm kiếm tiếng Anh.
 Engine: phép tính không cần dịch; phần lời (KB, RULES, an toàn) đi qua `*_en.json` + tham số `ngon_ngu` như QTE-1.
 
-## 5. Còn chờ chủ dự án
-1. Merge PR #230 (QTE-1) trước, rồi PR này (đã bỏ tệp trùng tên).
-2. Duyệt hướng 4.2 (LLM qua OpenRouter) và 4.3 (lai B + A, migration Payload ở tuần 3–4).
-3. Có thêm "Chinese zodiac 2027" vào lượt kiểm từ khoá tuần 2 không.
+## 5. Chủ dự án đã duyệt (2026-11-08)
+Merge QTE-1 (PR #230) trước; duyệt 4.2 (LLM qua OpenRouter) + 4.3 (CMS lai); thêm "Chinese zodiac 2027" vào kiểm từ khoá tuần 2.
+Ghi ở `docs/KE-HOACH-QUOC-TE.md` mục 11 (QTE-1b), kèm phần QT-0 đã làm.

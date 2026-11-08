@@ -68,7 +68,7 @@ Mỗi mảng tiếng Anh gồm: công cụ lập lá số, trang kiến thức, 
 | Tuần | Việc em làm (code) | Việc của anh |
 |---|---|---|
 | **1** | Giai đoạn 0 · người Việt ở nước ngoài: (a) form hồ sơ chọn **nước + thành phố**, máy tự tính múi giờ + giờ mùa hè theo ngày sinh (zoneinfo của Python + Intl của trình duyệt, không thư viện mới; golden test trước); (c) Hôm nay + nhắc việc theo múi giờ nơi đang sống | Nối Search Console + GA4 hieuban.com vào NotFair (hoặc gửi CSV quốc gia). Mở `trends.google.com` hoặc nối Keyword Planner. **Nộp hồ sơ cổng thanh toán** (mục 6). Tìm người duyệt bản xứ |
-| **2** | (b) Trang SEO tiếng Việt theo nước: Mỹ, Nhật, Úc, Canada (giờ giao thừa, ngày Tết theo giờ địa phương, tuổi xông đất). **Kiểm mốc từ khoá**: nhóm bazi / zi wei / kua / i ching ≥ 20.000 lượt/tháng ở 6 nước nói tiếng Anh, dưới mốc thì dừng tiếng Anh, hỏi lại anh | Gửi bản pháp lý cho luật sư |
+| **2** | (b) Trang SEO tiếng Việt theo nước: Mỹ, Nhật, Úc, Canada (giờ giao thừa, ngày Tết theo giờ địa phương, tuổi xông đất). **Kiểm mốc từ khoá**: nhóm bazi / zi wei / kua / i ching (+ cụm mùa Tết "Chinese zodiac 2027 / Year of the Fire Goat" — QTE-1b) ≥ 20.000 lượt/tháng ở 6 nước nói tiếng Anh, dưới mốc thì dừng tiếng Anh, hỏi lại anh | Gửi bản pháp lý cho luật sư |
 | **3–4** | Khung đa ngôn ngữ tự làm: nhóm route `/en/…` với slug tiếng Anh, bảng chữ `lib/chu` có bản `en`, hreflang, sitemap `/en`, `lang` theo trang. Engine thêm tham số `ngon_ngu`, đọc `*_en.json`, bộ lọc BM-1 + `cum_cam` tiếng Anh có test (không đổi phép tính, không tăng `ENGINE_VERSION`). **Bát tự tiếng Anh** (BaZi calculator + trang kiến thức). Chính sách riêng tư + Điều khoản tiếng Anh. Mặc định lịch Trung Quốc ở `/en` | Người duyệt bản xứ đọc các trang Bát tự đầu tiên |
 | **5** | Tử vi tiếng Anh (Zi Wei Dou Shu chart) | |
 | **6** | Phong thuỷ tiếng Anh (kua number, flying stars) | |
@@ -133,3 +133,24 @@ Nghiên cứu ngày 2026-11-07, chưa có số lượt tìm kiếm đã kiểm c
 - Đối thủ: Statista/AppMagic (Nebula, Co–Star); Outlook Business, Inc42 (Astrotalk); Seoulz, Asiae (saju Hàn); Yano Research (Nhật 99,7 tỉ ¥); Bnext (click108).
 - Người Việt ở nước ngoài: Pew, ABS 2021, Bộ Tư pháp Nhật 12/2025.
 - Pháp lý: ASA, Apple 4.3(b), chính sách Google Ads.
+
+## 11. Bổ sung QTE-1b (chủ dự án duyệt 2026-11-08)
+
+Ba điểm QTE-1 còn để ngỏ, đề xuất ở PR UI-BLOG (`docs/UI-BLOG-VA-DA-NGON-NGU.md` mục 4), chủ dự án duyệt cả ba:
+
+1. **Máy chuyển ngữ = LLM qua OpenRouter** (nhà cung cấp đã duyệt), chạy lúc SOẠN, hai lượt (chuyển ngữ cho người bản xứ →
+   biên tập viên bản xứ đọc lại) + **bộ kiểm luật cố định** + người bản xứ duyệt. Không Google Translate / DeepL ở bước chính
+   (DeepL chỉ để so sánh khi cần); không dịch lúc người dùng đọc.
+   - **Đã làm (QT-0, chưa hiện gì cho người dùng):**
+     - `engine/app/kb/data/thuat_ngu_en.json` — 219 thuật ngữ cố định của 4 mảng (Bát tự, Tử vi, Phong thuỷ, Kinh Dịch), mỗi mục
+       trỏ `tu_dien.json` theo `ma`; `cum_cam_en` (guaranteed, accurate prediction, doomed, cursed, you will die, tên bệnh, lottery,
+       lời khuyên mua bán cổ phiếu, vật phẩm giải hạn).
+     - `engine/app/chuyen_ngu/kiem.py` — chặn: biến `{x}` lệch, con số mất/thêm, thuật ngữ ≥ 2 âm tiết không dùng tên trong bảng,
+       cụm cấm, thiếu câu "not medical advice" khi nguồn có, còn chữ có dấu, độ dài bất thường.
+     - `engine/app/chuyen_ngu/quy_trinh.py` + `engine/scripts/chuyen_ngu.py` — dịch một tệp KB theo lô 40 chuỗi → bản phủ
+       `<tên>.en.json` (`_trang_thai: nhap_may`), chuỗi lỗi không ghi, liệt kê ở `<tên>.en.loi.json`. Env `CHUYEN_NGU_MODEL`.
+     - Test `engine/tests/test_chuyen_ngu.py` (13 ca, máy AI giả).
+2. **CMS hướng lai**: Bài viết + Chuyên mục → mỗi ngôn ngữ một bài, nối `ban_goc` (migration nhỏ, chỉ thêm cột); global giao diện
+   (Menu, Chân trang, Chữ dùng chung, Trang website) → Payload `localization`. Làm ở tuần 3–4 cùng khung `/en`, migration Payload
+   có up/down, thử trên Postgres thật trước. Nút "Tạo bản tiếng Anh" trong trình viết bài tạo NHÁP (không tự xuất bản).
+3. **Thêm cụm "Chinese zodiac 2027 / Year of the Fire Goat"** (Tết 6/2/2027) vào lượt kiểm từ khoá tuần 2.

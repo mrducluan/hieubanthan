@@ -13,6 +13,7 @@ Giai đoạn 0 (tuần 1–2) người Việt ở nước ngoài → tiếng Anh
 - [ ] **Tuần 1**: nộp hồ sơ cổng thanh toán quốc tế — kiểm Paddle / Lemon Squeezy có nhận doanh nghiệp Việt Nam + có cấm ngành "bói toán / chiêm tinh" không; dự phòng Polar / Dodo → PayPal → pháp nhân Singapore + Stripe
 - [ ] Tìm 1 người bản xứ nói tiếng Anh am hiểu Bát tự / phong thuỷ để duyệt nội dung (ngân sách 300–500 USD/tháng)
 - [ ] Luật sư xem Chính sách riêng tư + Điều khoản tiếng Anh **trước tuần 9** (trước khi bật thu tiền)
+- [ ] (QT-0, 10 phút, tốn ít token) Thử máy chuyển ngữ: `cd engine && OPENROUTER_API_KEY=… PYTHONPATH=. python scripts/chuyen_ngu.py app/kb/data/tu_dien.json --mang bat_tu --thu 20` → xem `tu_dien.en.json` + `tu_dien.en.loi.json`, gửi em nhận xét giọng văn; muốn đổi mô hình thì đặt `CHUYEN_NGU_MODEL`
 
 ### 4ae. Kinh Dịch V3 — trả lời theo việc + UI hỏi quẻ (KD-V3, 2026-11-08) — deploy ENGINE trước web
 
