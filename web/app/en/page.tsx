@@ -36,8 +36,18 @@ export default function Page() {
           <h2 className="mt-2 text-2xl">The 14 major stars</h2>
           <p className="mt-2 text-sm text-fg-muted">From Zi Wei (Emperor) to Po Jun (Breaker): nature, strengths and blind spots.</p>
         </Link>
+        <Link href="/en/feng-shui/kua-number" className="glass block rounded-2xl p-6 hover:border-gold/50">
+          <p className="eyebrow">Feng Shui · Eight Mansions</p>
+          <h2 className="mt-2 text-2xl">Kua number calculator</h2>
+          <p className="mt-2 text-sm text-fg-muted">Your Kua number, East or West group, and what each of your eight directions is best used for.</p>
+        </Link>
+        <Link href="/en/i-ching" className="glass block rounded-2xl p-6 hover:border-gold/50">
+          <p className="eyebrow">I Ching · Book of Changes</p>
+          <h2 className="mt-2 text-2xl">Cast an I Ching hexagram</h2>
+          <p className="mt-2 text-sm text-fg-muted">Your primary and changing hexagrams in plain English. Your question never leaves your device.</p>
+        </Link>
       </div>
-      <p className="mt-8 text-sm text-fg-faint">Coming next in English: Feng Shui Kua number and Flying Stars, I Ching hexagrams.</p>
+      <p className="mt-8 text-sm text-fg-faint">Coming next in English: Feng Shui Flying Stars.</p>
     </div>
   );
 }

@@ -163,6 +163,7 @@ Ba điểm QTE-1 còn để ngỏ, đề xuất ở PR UI-BLOG (`docs/UI-BLOG-VA
 | 2 | **Đã làm (2026-11-08)** — phần trang | `/tet-o-nuoc-ngoai` + Mỹ, Nhật, Úc, Canada. **Kiểm mốc từ khoá** (≥ 20.000 lượt/tháng, gồm "Chinese zodiac 2027") vẫn chờ anh nối Keyword Planner / mở trends.google.com (mục 9). |
 | 3–4 | **Đã làm (2026-11-08)** | Khung `/en` tự làm (lang, khung Anh, hreflang theo bảng cặp), BaZi calculator, 10 trang Day Master, privacy/terms bản ngắn. Còn: Ten Gods 10 trang, bài đọc đời sống Bát tự tiếng Anh (12 chương — cần chuyển ngữ KB lớn bằng máy, chờ anh chạy thử chất lượng QT-0), CMS hướng lai. |
 | 5 | **Đã làm (2026-11-08)** | Zi Wei Dou Shu chart (lưới 12 cung), 14 trang chính tinh. Còn: bài đọc đời sống Tử vi tiếng Anh (12 chương), sao ở cung (168 trang). |
-| 6–7 | Chưa làm | Phong thuỷ (tuần 6: Kua number + 8 hướng, Flying Stars), Kinh Dịch (tuần 7: gieo quẻ + 64 quẻ — lời kinh có bản dịch Legge 1882 phạm vi công cộng) — cùng khuôn. |
+| 6 | **Đã làm (2026-11-08)** — phần Kua | Kua number calculator + bảng 8 Kua. Còn: Flying Stars (phi tinh) tiếng Anh. |
+| 7 | **Đã làm (2026-11-08)** | Gieo quẻ (câu hỏi không gửi lên), 64 trang quẻ — lời viết lại đời thường. Còn: lời hào (384) tiếng Anh; có thể trích bản dịch Legge 1882 (phạm vi công cộng) khi đối chiếu được nguyên văn. |
 | 6–8 | **Chặn** | Thanh toán quốc tế: chờ anh nộp hồ sơ cổng (mục 6, 9) — chưa có cổng thì không viết tích hợp. |
 | 8 | Chưa tới | Đo cần số liệu thật sau khi deploy ≥ 4 tuần. |

@@ -76,6 +76,19 @@ CANH_BAO_DO = {
 }
 
 
+@router.post("/menh-quai-en")
+def api_menh_quai_en(inp: SinhInput) -> dict:
+    """QTE-1 tuần 6 — Kua number cho trang tiếng Anh: CÙNG phép tính `/menh-quai`, nhãn tiếng Anh (chuyen_ngu.phongthuy_en)."""
+    from app.chuyen_ngu import phongthuy_en  # noqa: PLC0415
+    return {"engine_version": ENGINE_VERSION, **phongthuy_en.menh_quai(api_menh_quai(inp), inp.birth_date)}
+
+
+@router.get("/en/kua-table")
+def api_kua_table_en() -> dict:
+    from app.chuyen_ngu import phongthuy_en  # noqa: PLC0415
+    return {"kua": phongthuy_en.bang_kua()}
+
+
 @router.post("/do-huong")
 def api_do_huong(inp: DoHuongInput) -> dict:
     """Đổi độ la bàn → hướng/sơn/toạ/trạch (+ du niên hướng đó với người xem). La bàn điện thoại chịu

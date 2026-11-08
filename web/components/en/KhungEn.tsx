@@ -7,6 +7,8 @@ const MENU: [string, string][] = [
   ["/en/bazi-calculator", "BaZi calculator"],
   ["/en/bazi/day-master", "Day Masters"],
   ["/en/zi-wei-dou-shu-chart", "Zi Wei chart"],
+  ["/en/feng-shui/kua-number", "Kua number"],
+  ["/en/i-ching", "I Ching"],
 ];
 
 export function DauTrangEn() {

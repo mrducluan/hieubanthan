@@ -36,3 +36,10 @@ export const dayMaster = (slug: string) => lay<DayMaster>(`/v1/battu/en/day-mast
 export interface Star { slug: string; vi: string; name: string; han: string; element: string; nature: string; strengths: string; watch_out: string; question: string }
 export const stars = () => lay<{ stars: Star[] }>("/v1/tuvi/en/stars");
 export const star = (slug: string) => lay<Star>(`/v1/tuvi/en/star/${encodeURIComponent(slug)}`);
+
+export interface KuaRow { kua: number; trigram: string; han: string; group: string; best_directions: string[] }
+export const kuaTable = () => lay<{ kua: KuaRow[] }>("/v1/phongthuy/en/kua-table");
+
+export interface Hexagram { number: number; slug: string; name: string; pinyin: string; han: string; meaning: string; advice: string }
+export const hexagrams = () => lay<{ hexagrams: Hexagram[] }>("/v1/kinhdich/en/hexagrams");
+export const hexagram = (slug: string) => lay<Hexagram>(`/v1/kinhdich/en/hexagram/${encodeURIComponent(slug)}`);
