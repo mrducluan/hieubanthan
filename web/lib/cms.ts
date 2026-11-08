@@ -10,7 +10,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 export const TAG_CMS = "cms";
 
 export type AnhCms = {
-  url: string; alt: string; width?: number | null; height?: number | null;
+  url: string; alt: string; width?: number | null; height?: number | null; nguon_anh?: string | null;
   sizes?: Record<string, { url?: string | null; width?: number | null; height?: number | null } | undefined>;
 };
 export type NguoiCms = { id: number; ten: string; slug?: string | null; chuc_danh?: string | null; trang_ho_so?: string | null;
@@ -205,7 +205,9 @@ export function soKhop(a: string | null | undefined, b: string | null | undefine
 
 export const anhCms = (a: AnhCms | null | undefined, co: "og" | "vua" | "nho" = "vua") =>
   a && typeof a === "object" && a.url ? { src: a.sizes?.[co]?.url || a.url, w: a.sizes?.[co]?.width || a.width || 1200,
-    h: a.sizes?.[co]?.height || a.height || 675, alt: a.alt || "" } : null;
+    h: a.sizes?.[co]?.height || a.height || 675, alt: a.alt || "",
+    // UI-BLOG: ảnh ban biên tập VẼ (BLOG-6/7) đã in sẵn tiêu đề + QR → thẻ danh sách dùng hình mảng thay vì lặp tiêu đề hai lần.
+    coChu: Boolean(a.nguon_anh?.startsWith("Ban biên tập Hiểu Bản Thân vẽ minh hoạ")) } : null;
 
 /** Thời gian đọc ước tính (200 chữ/phút) từ HTML. */
 export function phutDoc(html: string | null | undefined): number {

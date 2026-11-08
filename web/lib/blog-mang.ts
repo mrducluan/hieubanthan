@@ -125,3 +125,27 @@ export function baiCungMang<T extends { slug: string; tieuDe: string; moTa?: str
   const cung = khac.filter((b) => mangCuaBai({ mang: b.mang, tieuDe: b.tieuDe, slug: b.slug, moTa: b.moTa }) === mang);
   return [...cung, ...khac.filter((b) => !cung.includes(b))].slice(0, soLuong);
 }
+
+// ---------------------------------------------------------------- UI-BLOG: nhóm bài theo mảng Huyền học
+// /blog xếp bài thành "kệ" theo mảng; mỗi mảng có trang thật /blog/mang/{slug} (CollectionPage, sitemap) — URL không dấu,
+// cùng tên silo công cụ để người đọc và Google hiểu đây là cụm bài của mảng đó.
+export const SLUG_MANG_BLOG: Record<MangBlog, string> = {
+  than_so: "than-so-hoc", tu_vi: "tu-vi", bat_tu: "bat-tu", kinh_dich: "kinh-dich", phong_thuy: "phong-thuy",
+  hop_doi: "hop-doi", xem_ngay: "xem-ngay-tot", chung: "hieu-ban-than",
+};
+/** Thứ tự kệ trên /blog: mảng Huyền học trước, "chung" cuối. */
+export const THU_TU_MANG_BLOG: MangBlog[] = ["than_so", "tu_vi", "bat_tu", "kinh_dich", "phong_thuy", "hop_doi", "xem_ngay", "chung"];
+
+export const duongMangBlog = (m: MangBlog) => `/blog/mang/${SLUG_MANG_BLOG[m]}`;
+export const mangTuSlug = (slug: string): MangBlog | null =>
+  (Object.entries(SLUG_MANG_BLOG).find(([, s]) => s === slug)?.[0] as MangBlog | undefined) ?? null;
+
+/** Gom bài theo mảng (giữ thứ tự bài đầu vào), chỉ mảng có bài, theo THU_TU_MANG_BLOG. */
+export function nhomTheoMang<T extends { slug: string; tieuDe: string; moTa?: string | null; mang?: string | null }>(ds: T[]): { mang: MangBlog; bai: T[] }[] {
+  const m = new Map<MangBlog, T[]>();
+  for (const b of ds) {
+    const k = mangCuaBai({ mang: b.mang, tieuDe: b.tieuDe, slug: b.slug, moTa: b.moTa });
+    m.set(k, [...(m.get(k) ?? []), b]);
+  }
+  return THU_TU_MANG_BLOG.filter((k) => m.has(k)).map((k) => ({ mang: k, bai: m.get(k)! }));
+}

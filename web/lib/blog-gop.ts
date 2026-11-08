@@ -4,7 +4,7 @@ import { anhCms, cacChuyenMuc, type BaiCmsTomTat, type ChuyenMucCms, type LoaiBa
 
 export type BaiBlog = {
   slug: string; tieuDe: string; moTa: string | null; ngay: string | null; capNhat: string | null;
-  anh: { src: string; w: number; h: number; alt: string } | null; phut: number | null; nguon: "cms" | "notfair";
+  anh: { src: string; w: number; h: number; alt: string; /** ảnh có chữ in sẵn (bìa vẽ / NotFair) */ coChu?: boolean } | null; phut: number | null; nguon: "cms" | "notfair";
   noindex?: boolean;
   /** Bài CMS: đường dẫn cũ (đã đổi) → bài NotFair cùng đường dẫn cũ không hiện trùng trong danh sách. */
   slugCu?: string[];
@@ -26,7 +26,7 @@ export function gopBaiBlog(rieng: BaiBlog[], notfair: SeoPostSummary[], { chiBan
   const co = new Set(rieng.flatMap((b) => [b.slug, ...(b.slugCu ?? [])]));
   const nf: BaiBlog[] = notfair.filter((p) => !co.has(p.slug) && !co.has(slugChuan(p.slug))).map((p) => ({
     slug: slugChuan(p.slug), tieuDe: p.title, moTa: p.meta_description ?? null, ngay: p.published_at ?? null, capNhat: p.published_at ?? null,
-    anh: p.image_url ? { src: p.image_url, w: 1600, h: 900, alt: p.title } : null, phut: p.reading_time_minutes ?? null, nguon: "notfair",
+    anh: p.image_url ? { src: p.image_url, w: 1600, h: 900, alt: p.title, coChu: true } : null, phut: p.reading_time_minutes ?? null, nguon: "notfair",
   }));
   return [...rieng, ...nf].sort((a, b) => (b.ngay ?? "").localeCompare(a.ngay ?? ""));
 }
