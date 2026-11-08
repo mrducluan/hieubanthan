@@ -3,6 +3,8 @@ import type { MetadataRoute } from "next";
 import { CHU_DE, dsCungPhi, dsLaSoMau, duongTrang, duongTuoi, mucLuc } from "@/lib/kien-thuc";
 import { dsBaiTongHop, duongBlog } from "@/lib/blog";
 import { duongMangBlog, nhomTheoMang } from "@/lib/blog-mang";
+import { duongTetNuoc, NUOC_TET } from "@/lib/tet-nuoc-ngoai";
+import { CHINH_TINH_CAP, duongDayMaster, duongHexagram, duongStar, NHAT_CHU_CAP, QUE_CAP } from "@/lib/ngon-ngu";
 import { urlDayDu } from "@/lib/seo";
 import { daHetHan, dsTrangDichCms } from "@/lib/cms";
 import { duongTrangSo, soTrang } from "@/lib/phan-trang";
@@ -14,7 +16,7 @@ import { NAM_SINH_SEO, duongHanNam, duongLamNha, duongLamNhaNam, duongSaoHanNam,
 export const revalidate = 21600;
 
 const TINH: [string, number][] = [
-  ["/", 1], ["/kien-thuc", 0.9], ["/tu-dien", 0.8], ["/tu-vi/la-so-mau", 0.8], ["/blog", 0.6], ["/huyen-hoc", 0.8], ["/than-so", 0.8], ["/hom-nay", 0.7], ["/xem-ngay-tot", 0.9], ["/xem-tuoi-lam-nha", 0.8], ["/tuoi-xong-dat", 0.8], ["/xem-sao-han", 0.7], ["/phong-thuy/huong-xau-nam", 0.8], ["/hop-doi", 0.8],
+  ["/", 1], ["/kien-thuc", 0.9], ["/tu-dien", 0.8], ["/tu-vi/la-so-mau", 0.8], ["/blog", 0.6], ["/huyen-hoc", 0.8], ["/than-so", 0.8], ["/hom-nay", 0.7], ["/xem-ngay-tot", 0.9], ["/xem-tuoi-lam-nha", 0.8], ["/tuoi-xong-dat", 0.8], ["/xem-sao-han", 0.7], ["/tet-o-nuoc-ngoai", 0.6], ["/phong-thuy/huong-xau-nam", 0.8], ["/hop-doi", 0.8],
   ["/tu-vi", 0.7], ["/bat-tu", 0.7], ["/kinh-dich", 0.7], ["/phong-thuy", 0.7], ["/nhan-tuong", 0.7], ["/tarot", 0.7],
   ["/doi-lich-am-duong", 0.7], ["/nam", 0.8], ["/lich-am", 0.6], ["/thoi-gian-toi", 0.8], ["/chan-dung", 0.8], ["/gioi-thieu", 0.5], ["/tac-gia", 0.4], ["/tac-gia/duc-luan", 0.6], ["/lien-he", 0.4], ["/chinh-sach-rieng-tu", 0.3], ["/dieu-khoan", 0.3], ["/mien-tru-trach-nhiem", 0.3],
 ];
@@ -84,6 +86,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }),
     // UI-BLOG: chuyên đề theo mảng Huyền học (chỉ mảng có bài).
     ...nhomTheoMang(blog.filter((p) => !p.noindex)).map((g) => ({ url: urlDayDu(duongMangBlog(g.mang)), changeFrequency: "weekly" as const, priority: 0.5 })),
+    // QTE-1 tuần 3–4: trang tiếng Anh (chưa sửa ở CMS — hướng lai QTE-1b làm sau).
+    ...["/en", "/en/bazi-calculator", "/en/bazi/day-master", ...NHAT_CHU_CAP.map(([, en]) => duongDayMaster(en)),
+      "/en/zi-wei-dou-shu-chart", "/en/zi-wei/stars", "/en/feng-shui/kua-number", "/en/i-ching", "/en/i-ching/hexagrams", ...QUE_CAP.map(([, en]) => duongHexagram(en)), ...CHINH_TINH_CAP.map(([, en]) => duongStar(en)), "/en/privacy", "/en/terms"]
+      .map((d) => ({ url: urlDayDu(d), changeFrequency: "monthly" as const, priority: d.includes("calculator") || d.includes("chart") || d.includes("kua") || d === "/en/i-ching" || d === "/en" ? 0.8 : 0.5 })),
+    // QTE-1 tuần 2: Tết ở nước ngoài từng nước (URL không mang năm, trang tự sang Tết năm sau).
+    ...NUOC_TET.map((s) => ({ url: urlDayDu(duongTetNuoc(s)), changeFrequency: "monthly" as const, priority: 0.6 })),
     // SEO-K: /blog/trang/2…n (trang 1 = /blog nằm trong TINH).
     ...Array.from({ length: soTrang(blog.length) - 1 }, (_, i) => ({ url: urlDayDu(duongTrangSo("/blog", i + 2)), changeFrequency: "weekly" as const, priority: 0.3 })),
   ];

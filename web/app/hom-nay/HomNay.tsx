@@ -154,7 +154,7 @@ export function HomNay() {
     if (!hoSo) return Promise.reject(new Error("Chưa có hồ sơ"));
     return fetch("/api/thanso/hom-nay", {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam,
+      body: JSON.stringify({ ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam, ...(hoSo.noi_o ? { mui_gio_noi_o: hoSo.noi_o } : {}),
         ...(yDinh.length ? { y_dinh: yDinh } : {}), ...(cau.trim() ? { du_dinh: cau.trim().slice(0, 200) } : {}) }),
     }).then(async (r) => {
       const j = await r.json().catch(() => ({}));

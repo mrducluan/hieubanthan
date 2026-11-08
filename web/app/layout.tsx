@@ -26,6 +26,7 @@ import { DaiXemNhap } from "@/components/cms/DaiXemNhap";
 import { ChuChung } from "@/components/cms/ChuChung";
 import { chuChungCms } from "@/lib/cms";
 import { dangXemNhap } from "@/lib/noi-dung-trang";
+import { ChanTrangEn, DauTrangEn } from "@/components/en/KhungEn";
 
 // Display: Newsreader — serif, chữ số đẹp cho con số lớn. Body: Be Vietnam Pro — thiết kế cho tiếng Việt.
 // PERF-1: tách nghiêng ra bản riêng KHÔNG preload — bản nghiêng (64 KB) chỉ dùng ở vài câu trích, trước đây
@@ -84,7 +85,30 @@ async function XemNhap() {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   // CSP-2: nonce của lượt tải (proxy.ts) — đọc header cũng khiến mọi trang render động, bắt buộc để nonce khớp từng lượt.
-  const [nonce, chuChung] = await Promise.all([(async () => (await headers()).get("x-nonce") ?? undefined)(), chuChungCms()]);
+  const h = await headers();
+  const nonce = h.get("x-nonce") ?? undefined;
+  // QTE-1 tuần 3–4: proxy gắn x-ngon-ngu theo đường dẫn ("/en/…" → en). Trang Anh dùng khung riêng, không tải chữ CMS Việt.
+  if (h.get("x-ngon-ngu") === "en") {
+    return (
+      <html lang="en" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
+        <body>
+          <GtmNoScript />
+          <JsonLd data={goiLd(ldToChuc(), ldWebsite(), ldUngDung())} />
+          <div className="star-field" aria-hidden />
+          <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">
+            Skip to content
+          </a>
+          <DauTrangEn />
+          <main id="noi-dung" className="container pb-12 pt-6 md:pb-16 md:pt-10">{children}</main>
+          <ChanTrangEn />
+          <GiamSat />
+          <GhiVaoTrang />
+          <DoLuongGoogle nonce={nonce} />
+        </body>
+      </html>
+    );
+  }
+  const chuChung = await chuChungCms();
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
       <body>

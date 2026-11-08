@@ -1,5 +1,6 @@
 // PL-1 — Điều khoản sử dụng. Khớp quyết định đã chốt: Sao là credit nội bộ (không đổi tiền, không chuyển nhượng,
 // thưởng mời + hoa hồng giới thiệu một tầng — SAO-V 0025), nội dung do ban biên tập biên soạn (BM-1: không gắn nhãn AI trên bài), không phán bệnh/sống chết/xổ số.
+import { hreflang } from "@/lib/ngon-ngu";
 import type { Metadata } from "next";
 import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang, ngayHienThi } from "@/lib/noi-dung-trang";
@@ -11,7 +12,7 @@ import { HOAN_TIEN_HOI_VIEN } from "@/lib/thanh-toan/hoi-vien";
 const META: Metadata = {
   title: "Điều khoản sử dụng",
   description: "Điều khoản sử dụng Hiểu Bản Thân: tính chất dịch vụ tham khảo văn hoá, tài khoản, Sao, nội dung, sở hữu trí tuệ và giới hạn trách nhiệm.",
-  alternates: { canonical: "/dieu-khoan" },
+  alternates: { canonical: "/dieu-khoan", languages: hreflang("/dieu-khoan") },
 };
 
 const DUONG = "/dieu-khoan";

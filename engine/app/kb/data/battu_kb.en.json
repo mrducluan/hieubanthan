@@ -1,0 +1,18 @@
+{
+ "_nguon": "Bản phủ tiếng Anh của battu_kb.json (QTE-1 tuần 3–4) — chỉ mục nhat_chu, cùng khoá. Chuyển ngữ máy theo bảng thuật ngữ thuat_ngu_en.json, đã qua bộ kiểm app/chuyen_ngu/kiem.py; chờ người bản xứ duyệt.",
+ "source_id": "battu_kb_v1",
+ "school_id": "tu_binh",
+ "_trang_thai": "nhap_may",
+ "nhat_chu": {
+  "Giáp": {"slug": "jia-wood", "hinh_tuong": "a great tree", "tinh_chat": "direct, purposeful, reaching upward and sheltering others", "diem_manh": "steady, a natural leader", "mat_toi": "rigid, slow to bend, may snap under pressure", "cau_tu_soi": "Are you trying to stand tall where it would be wiser to bend?"},
+  "Ất": {"slug": "yi-wood", "hinh_tuong": "flowers, grass and climbing vines", "tinh_chat": "gentle, tactful, adaptable, good at finding support", "diem_manh": "flexible, perceptive, quietly persistent", "mat_toi": "can lean on others too much, plays it safe", "cau_tu_soi": "Who are you leaning on — and do you still need to?"},
+  "Bính": {"slug": "bing-fire", "hinh_tuong": "the sun", "tinh_chat": "warm, generous, likes to shine and to be open", "diem_manh": "spreads energy, big-hearted", "mat_toi": "showy, impatient, finds secrets hard to keep", "cau_tu_soi": "Who are you shining for — and do you keep some warmth for yourself?"},
+  "Đinh": {"slug": "ding-fire", "hinh_tuong": "a candle or lamp", "tinh_chat": "warm, thoughtful, attentive, a light in dark places", "diem_manh": "focused, lights the way for others", "mat_toi": "prone to worry, sways with emotion", "cau_tu_soi": "What keeps your flame fed?"},
+  "Mậu": {"slug": "wu-earth", "hinh_tuong": "a mountain or a dam", "tinh_chat": "solid, trustworthy, calm, accepting", "diem_manh": "stable, carries responsibility, keeps their word", "mat_toi": "slow, set in their ways, resists change", "cau_tu_soi": "What are you holding on to only out of habit?"},
+  "Kỷ": {"slug": "ji-earth", "hinh_tuong": "garden soil", "tinh_chat": "hard-working, modest, nurturing, practical", "diem_manh": "thorough, accepting, good at helping things grow", "mat_toi": "worries a lot, takes on too much, hesitates", "cau_tu_soi": "You nurture others — who nurtures you?"},
+  "Canh": {"slug": "geng-metal", "hinh_tuong": "raw metal or a blade", "tinh_chat": "decisive, loyal, straight-talking, action-oriented", "diem_manh": "brave, decisive, handles pressure", "mat_toi": "hard-edged, words can cut", "cau_tu_soi": "Is your honesty hurting the people you love?"},
+  "Tân": {"slug": "xin-metal", "hinh_tuong": "polished jewellery", "tinh_chat": "refined, cares about presentation, sensitive, a perfectionist", "diem_manh": "good taste, high standards, self-respect", "mat_toi": "easily hurt, picky, proud", "cau_tu_soi": "Which of your standards is wearing you out?"},
+  "Nhâm": {"slug": "ren-water", "hinh_tuong": "a great river or the sea", "tinh_chat": "clever, free-spirited, loves freedom and movement", "diem_manh": "broad vision, flexible, open-minded", "mat_toi": "hard to rein in, can drift, low staying power", "cau_tu_soi": "Where are you flowing to — or are you just spilling over?"},
+  "Quý": {"slug": "gui-water", "hinh_tuong": "rain and dew", "tinh_chat": "deep, intuitive, private, gentle", "diem_manh": "perceptive, patient, sinks in deeply", "mat_toi": "overthinks, can turn pessimistic, closes off", "cau_tu_soi": "What do you sense but have not yet dared to say?"}
+ }
+}

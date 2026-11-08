@@ -40,6 +40,9 @@ test("hồ sơ cũ thiếu nơi sinh: hỏi bổ sung đúng lúc → sinh ở n
   const noi = page.getByLabel("Nơi sinh");
   await expect(noi.locator("option", { hasText: "Hà Nội" })).toHaveCount(1);
   await noi.selectOption("nuoc_ngoai");
+  // QTE-1 tuần 1: nước + thành phố là cách chính; "tự chọn" vẫn mở hai ô tay như trước.
+  await expect(page.getByLabel("Nước nơi sinh")).toBeEnabled();
+  await page.getByLabel("Nước nơi sinh").selectOption("tu_chon");
   await page.getByLabel(/giờ mùa hè/).check();
   await page.getByRole("button", { name: "Lập lá số của tôi" }).click();
   const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
@@ -262,6 +265,8 @@ test("EN-6 BI-3: chọn sinh ở nước ngoài thì có ô múi giờ nơi sinh
   await napHoSo(page, cu);
   await page.goto("/tu-vi");
   await page.getByLabel("Nơi sinh").selectOption("nuoc_ngoai");
+  await expect(page.getByLabel("Nước nơi sinh")).toBeEnabled();
+  await page.getByLabel("Nước nơi sinh").selectOption("tu_chon");
   const mg = page.getByLabel("Múi giờ chuẩn nơi sinh");
   await expect(mg).toHaveValue("");
   await mg.selectOption("-5");

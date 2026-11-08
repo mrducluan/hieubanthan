@@ -5,6 +5,7 @@
 // hieuban.com, giữ nguyên đường dẫn — tránh Google index hai bản trùng nhau. Preview deploy (VERCEL_ENV=preview)
 // và chạy máy không bị ảnh hưởng.
 // QT-0: riêng /quan-tri (+ /api/quan-tri) — làm mới phiên Supabase (Server Component không ghi được cookie) + header noindex.
+import { ngonNguCuaDuong } from "@/lib/ngon-ngu";
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { SITE_CHINH } from "@/lib/seo";
@@ -52,6 +53,7 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   const csp = taoCsp(nonce);
   const dau = new Headers(req.headers);   // chép SAU khi làm mới phiên → cookie mới đi kèm request
   dau.set("x-nonce", nonce);
+  dau.set("x-ngon-ngu", ngonNguCuaDuong(pathname));   // QTE-1: layout đặt <html lang> + khung đầu/chân trang theo ngôn ngữ
   dau.set("content-security-policy", csp);
   const res = NextResponse.next({ request: { headers: dau } });
   res.headers.set("content-security-policy", csp);

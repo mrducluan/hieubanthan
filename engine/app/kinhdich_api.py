@@ -84,6 +84,38 @@ def api_khoi_que(inp: KhoiQueInput) -> dict:
     }
 
 
+class GieoEnInput(BaseModel):
+    """QTE-1 tuần 7 — gieo quẻ cho trang tiếng Anh. KHÔNG có trường câu hỏi: người dùng giữ câu hỏi trong đầu (extra=forbid)."""
+    model_config = ConfigDict(extra="forbid")
+    gia_tri_hao: list[int] | None = Field(default=None, min_length=6, max_length=6)
+
+
+@router.post("/gieo-en")
+def api_gieo_en(inp: GieoEnInput) -> dict:
+    from app.chuyen_ngu import kinhdich_en  # noqa: PLC0415
+    vals = inp.gia_tri_hao if inp.gia_tri_hao is not None else kinhdich.gieo("thi")
+    try:
+        q = kinhdich.khoi_que(vals)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)) from e
+    return {"engine_version": ENGINE_VERSION, **kinhdich_en.que(list(vals), q)}
+
+
+@router.get("/en/hexagrams")
+def api_hexagrams_en() -> dict:
+    from app.chuyen_ngu import kinhdich_en  # noqa: PLC0415
+    return {"hexagrams": kinhdich_en.hexagrams()}
+
+
+@router.get("/en/hexagram/{slug}")
+def api_hexagram_en(slug: str) -> dict:
+    from app.chuyen_ngu import kinhdich_en  # noqa: PLC0415
+    d = kinhdich_en.hexagram(slug)
+    if d is None:
+        raise HTTPException(404, detail="Unknown hexagram")
+    return d
+
+
 # Cùng mẫu với Tử vi (`tuvi_api._MaMau`): web gửi bảng tỉ lệ chung mọi mảng; mã không khớp hộp nào thì không có tác dụng.
 _MaMau = Annotated[str, StringConstraints(pattern=r"^[a-z0-9_.+-]{3,60}$")]
 

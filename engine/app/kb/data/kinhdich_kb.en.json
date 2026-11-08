@@ -1,0 +1,456 @@
+{
+ "_nguon": "Bản phủ tiếng Anh của kinhdich_kb.json (QTE-1 tuần 7) — tên quẻ theo cách gọi phổ biến trong sách tiếng Anh, ý chính + lời khuyên viết lại đời thường (nháp ban biên tập, không chép bản dịch có bản quyền). Chờ người bản xứ duyệt.",
+ "source_id": "kinhdich_kb_v1",
+ "school_id": "nghia_ly",
+ "_trang_thai": "nhap_may",
+ "que": {
+  "1": {
+   "pinyin": "Qian",
+   "ten_en": "The Creative",
+   "han": "乾",
+   "y_chinh": "Strong, steady creative force; things move when you stay true and keep going.",
+   "loi_khuyen": "Take the lead and keep at it, but match your pace to the moment."
+  },
+  "2": {
+   "pinyin": "Kun",
+   "ten_en": "The Receptive",
+   "han": "坤",
+   "y_chinh": "Yielding strength: support, patience and receptivity carry the day.",
+   "loi_khuyen": "Follow a good lead and build quietly; steadiness is your strength now."
+  },
+  "3": {
+   "pinyin": "Zhun",
+   "ten_en": "Difficulty at the Beginning",
+   "han": "屯",
+   "y_chinh": "A messy start full of potential; things are sprouting but not yet in order.",
+   "loi_khuyen": "Get help, sort things out step by step, and do not force a big move yet."
+  },
+  "4": {
+   "pinyin": "Meng",
+   "ten_en": "Youthful Folly",
+   "han": "蒙",
+   "y_chinh": "Inexperience: the answer comes from learning, not from guessing.",
+   "loi_khuyen": "Ask a good teacher, ask once, and listen with an open mind."
+  },
+  "5": {
+   "pinyin": "Xu",
+   "ten_en": "Waiting",
+   "han": "需",
+   "y_chinh": "The right time has not come; patience with confidence is wiser than rushing.",
+   "loi_khuyen": "Prepare, eat and rest well, and act when conditions are ready."
+  },
+  "6": {
+   "pinyin": "Song",
+   "ten_en": "Conflict",
+   "han": "訟",
+   "y_chinh": "A dispute where both sides feel right; pushing to the end costs everyone.",
+   "loi_khuyen": "Look for a fair middle point or a neutral third party; avoid escalating."
+  },
+  "7": {
+   "pinyin": "Shi",
+   "ten_en": "The Army",
+   "han": "師",
+   "y_chinh": "Organised effort under clear leadership and discipline.",
+   "loi_khuyen": "Set rules, choose an experienced lead, and act with a clear purpose."
+  },
+  "8": {
+   "pinyin": "Bi",
+   "ten_en": "Holding Together",
+   "han": "比",
+   "y_chinh": "Joining with others; the bond works when it is sincere and timely.",
+   "loi_khuyen": "Choose your allies, commit honestly, and do not wait too long to join."
+  },
+  "9": {
+   "pinyin": "Xiao Chu",
+   "ten_en": "Small Taming",
+   "han": "小畜",
+   "y_chinh": "Small restraints slow big plans; gentle influence works better than force.",
+   "loi_khuyen": "Make small, steady progress and refine the details."
+  },
+  "10": {
+   "pinyin": "Lu",
+   "ten_en": "Treading",
+   "han": "履",
+   "y_chinh": "Walking carefully near something powerful; good manners keep you safe.",
+   "loi_khuyen": "Be courteous and mindful of your step in delicate situations."
+  },
+  "11": {
+   "pinyin": "Tai",
+   "ten_en": "Peace",
+   "han": "泰",
+   "y_chinh": "Heaven and earth in harmony: a good time when efforts flow and people cooperate.",
+   "loi_khuyen": "Use the good period to build and share, and remember it will change."
+  },
+  "12": {
+   "pinyin": "Pi",
+   "ten_en": "Standstill",
+   "han": "否",
+   "y_chinh": "Things are blocked and communication breaks down.",
+   "loi_khuyen": "Keep your integrity, keep a low profile, and wait for the opening."
+  },
+  "13": {
+   "pinyin": "Tong Ren",
+   "ten_en": "Fellowship",
+   "han": "同人",
+   "y_chinh": "People coming together around a shared aim in the open.",
+   "loi_khuyen": "Work with others on common ground and keep things transparent."
+  },
+  "14": {
+   "pinyin": "Da You",
+   "ten_en": "Great Possession",
+   "han": "大有",
+   "y_chinh": "Abundance and success that call for generosity and humility.",
+   "loi_khuyen": "Share what you have and keep a modest attitude."
+  },
+  "15": {
+   "pinyin": "Qian",
+   "ten_en": "Modesty",
+   "han": "謙",
+   "y_chinh": "Quiet confidence and humility bring lasting respect.",
+   "loi_khuyen": "Do good work without boasting, and balance out excess."
+  },
+  "16": {
+   "pinyin": "Yu",
+   "ten_en": "Enthusiasm",
+   "han": "豫",
+   "y_chinh": "Energy and willingness that can move people when well prepared.",
+   "loi_khuyen": "Inspire others, but make sure the plan is ready before you rally them."
+  },
+  "17": {
+   "pinyin": "Sui",
+   "ten_en": "Following",
+   "han": "隨",
+   "y_chinh": "Adapting to the times and following what is right.",
+   "loi_khuyen": "Let go of stubbornness and follow a worthy lead or a good change."
+  },
+  "18": {
+   "pinyin": "Gu",
+   "ten_en": "Work on the Decayed",
+   "han": "蠱",
+   "y_chinh": "Something neglected needs repair; the damage can be fixed.",
+   "loi_khuyen": "Look at the root cause, plan carefully, then fix it."
+  },
+  "19": {
+   "pinyin": "Lin",
+   "ten_en": "Approach",
+   "han": "臨",
+   "y_chinh": "Good things are drawing near; a time to engage and guide.",
+   "loi_khuyen": "Step forward warmly, while remembering the good season will pass."
+  },
+  "20": {
+   "pinyin": "Guan",
+   "ten_en": "Contemplation",
+   "han": "觀",
+   "y_chinh": "Step back and observe, and be an example others can see.",
+   "loi_khuyen": "Watch, reflect and act on what you see; lead by example."
+  },
+  "21": {
+   "pinyin": "Shi He",
+   "ten_en": "Biting Through",
+   "han": "噬嗑",
+   "y_chinh": "An obstacle must be dealt with firmly and fairly.",
+   "loi_khuyen": "Address the problem directly, with clear and just rules."
+  },
+  "22": {
+   "pinyin": "Bi",
+   "ten_en": "Grace",
+   "han": "賁",
+   "y_chinh": "Beauty and form; nice on the surface, but substance still matters.",
+   "loi_khuyen": "Enjoy elegance, but do not decide big things on looks alone."
+  },
+  "23": {
+   "pinyin": "Bo",
+   "ten_en": "Splitting Apart",
+   "han": "剝",
+   "y_chinh": "Things are wearing away; not a time for bold moves.",
+   "loi_khuyen": "Protect the foundation, stay quiet, and let the cycle turn."
+  },
+  "24": {
+   "pinyin": "Fu",
+   "ten_en": "Return",
+   "han": "復",
+   "y_chinh": "A turning point: after the low comes renewal.",
+   "loi_khuyen": "Go back to basics and rebuild slowly; small steps count."
+  },
+  "25": {
+   "pinyin": "Wu Wang",
+   "ten_en": "Innocence",
+   "han": "無妄",
+   "y_chinh": "Acting sincerely without hidden motives; the unexpected can still happen.",
+   "loi_khuyen": "Be genuine, avoid scheming, and accept what you cannot control."
+  },
+  "26": {
+   "pinyin": "Da Chu",
+   "ten_en": "Great Taming",
+   "han": "大畜",
+   "y_chinh": "Gathering and holding great strength; a time to study and build reserves.",
+   "loi_khuyen": "Learn from the past, save your energy, then put it to use."
+  },
+  "27": {
+   "pinyin": "Yi",
+   "ten_en": "Nourishment",
+   "han": "頤",
+   "y_chinh": "What you feed yourself and others shapes what grows.",
+   "loi_khuyen": "Watch what you take in, in body, mind and words, and nourish wisely."
+  },
+  "28": {
+   "pinyin": "Da Guo",
+   "ten_en": "Great Exceeding",
+   "han": "大過",
+   "y_chinh": "A load too heavy for its support; something must change.",
+   "loi_khuyen": "Act decisively to lighten the load or strengthen the base."
+  },
+  "29": {
+   "pinyin": "Kan",
+   "ten_en": "The Abysmal (Water)",
+   "han": "坎",
+   "y_chinh": "Repeated danger or difficulty; water keeps flowing through it.",
+   "loi_khuyen": "Stay sincere and keep moving; skill comes from facing the hard part."
+  },
+  "30": {
+   "pinyin": "Li",
+   "ten_en": "The Clinging (Fire)",
+   "han": "離",
+   "y_chinh": "Clarity and light that depend on what they cling to.",
+   "loi_khuyen": "Attach yourself to what is right, and keep your clarity."
+  },
+  "31": {
+   "pinyin": "Xian",
+   "ten_en": "Influence",
+   "han": "咸",
+   "y_chinh": "Mutual attraction and response; a time for openness.",
+   "loi_khuyen": "Be receptive and sincere; relationships can begin well now."
+  },
+  "32": {
+   "pinyin": "Heng",
+   "ten_en": "Duration",
+   "han": "恆",
+   "y_chinh": "Lasting commitment and consistency.",
+   "loi_khuyen": "Keep your direction and keep going; endurance wins."
+  },
+  "33": {
+   "pinyin": "Dun",
+   "ten_en": "Retreat",
+   "han": "遯",
+   "y_chinh": "Withdrawing at the right time is a strength, not a loss.",
+   "loi_khuyen": "Step back from a losing situation with dignity."
+  },
+  "34": {
+   "pinyin": "Da Zhuang",
+   "ten_en": "Great Power",
+   "han": "大壯",
+   "y_chinh": "Strong momentum; power needs restraint to stay right.",
+   "loi_khuyen": "Use your strength for what is right, and do not push blindly."
+  },
+  "35": {
+   "pinyin": "Jin",
+   "ten_en": "Progress",
+   "han": "晉",
+   "y_chinh": "Rising like the sun: recognition and advancement.",
+   "loi_khuyen": "Move forward openly and let your good work be seen."
+  },
+  "36": {
+   "pinyin": "Ming Yi",
+   "ten_en": "Darkening of the Light",
+   "han": "明夷",
+   "y_chinh": "Hard times when brightness must be hidden.",
+   "loi_khuyen": "Keep your integrity inside and stay low-key until it passes."
+  },
+  "37": {
+   "pinyin": "Jia Ren",
+   "ten_en": "The Family",
+   "han": "家人",
+   "y_chinh": "Order and care within the household or team.",
+   "loi_khuyen": "Set clear roles and lead the people close to you by example."
+  },
+  "38": {
+   "pinyin": "Kui",
+   "ten_en": "Opposition",
+   "han": "睽",
+   "y_chinh": "Differences pull people apart; small things can still work.",
+   "loi_khuyen": "Accept differences and seek small points of agreement."
+  },
+  "39": {
+   "pinyin": "Jian",
+   "ten_en": "Obstruction",
+   "han": "蹇",
+   "y_chinh": "Obstacles ahead; going straight at them will not work.",
+   "loi_khuyen": "Pause, look for help, and go around rather than through."
+  },
+  "40": {
+   "pinyin": "Xie",
+   "ten_en": "Deliverance",
+   "han": "解",
+   "y_chinh": "Tension is easing; the knot comes loose.",
+   "loi_khuyen": "Clear up what remains, forgive, and move on quickly."
+  },
+  "41": {
+   "pinyin": "Sun",
+   "ten_en": "Decrease",
+   "han": "損",
+   "y_chinh": "Cutting back on something now brings gain later.",
+   "loi_khuyen": "Simplify, spend less, and give where it matters."
+  },
+  "42": {
+   "pinyin": "Yi",
+   "ten_en": "Increase",
+   "han": "益",
+   "y_chinh": "A time of gain and growth that benefits everyone.",
+   "loi_khuyen": "Act and help others while the wind is in your favour."
+  },
+  "43": {
+   "pinyin": "Guai",
+   "ten_en": "Breakthrough",
+   "han": "夬",
+   "y_chinh": "A decisive push to remove what is wrong.",
+   "loi_khuyen": "State the truth openly and firmly, without violence."
+  },
+  "44": {
+   "pinyin": "Gou",
+   "ten_en": "Coming to Meet",
+   "han": "姤",
+   "y_chinh": "An unexpected encounter or influence appears.",
+   "loi_khuyen": "Be careful with what comes easily; do not let it take over."
+  },
+  "45": {
+   "pinyin": "Cui",
+   "ten_en": "Gathering Together",
+   "han": "萃",
+   "y_chinh": "People come together around a shared centre.",
+   "loi_khuyen": "Gather your people, prepare well, and stay alert to risks."
+  },
+  "46": {
+   "pinyin": "Sheng",
+   "ten_en": "Pushing Upward",
+   "han": "升",
+   "y_chinh": "Steady growth like a tree rising from the ground.",
+   "loi_khuyen": "Keep climbing step by step and seek guidance."
+  },
+  "47": {
+   "pinyin": "Kun",
+   "ten_en": "Oppression",
+   "han": "困",
+   "y_chinh": "Being exhausted or hemmed in; words carry little weight.",
+   "loi_khuyen": "Hold to your inner strength and let actions speak."
+  },
+  "48": {
+   "pinyin": "Jing",
+   "ten_en": "The Well",
+   "han": "井",
+   "y_chinh": "A deep source that serves everyone if it is cared for.",
+   "loi_khuyen": "Tend your resources and skills; keep the well clean."
+  },
+  "49": {
+   "pinyin": "Ge",
+   "ten_en": "Revolution",
+   "han": "革",
+   "y_chinh": "Real change whose time has come.",
+   "loi_khuyen": "Change when the moment is ripe and the reasons are clear."
+  },
+  "50": {
+   "pinyin": "Ding",
+   "ten_en": "The Cauldron",
+   "han": "鼎",
+   "y_chinh": "Transformation and nourishment; refining something new.",
+   "loi_khuyen": "Build on solid foundations and cultivate what is worth keeping."
+  },
+  "51": {
+   "pinyin": "Zhen",
+   "ten_en": "The Arousing (Thunder)",
+   "han": "震",
+   "y_chinh": "A shock that wakes you up.",
+   "loi_khuyen": "Stay calm in the shock and learn from it."
+  },
+  "52": {
+   "pinyin": "Gen",
+   "ten_en": "Keeping Still (Mountain)",
+   "han": "艮",
+   "y_chinh": "Stillness and knowing when to stop.",
+   "loi_khuyen": "Pause, quiet the mind, and do not move just to be moving."
+  },
+  "53": {
+   "pinyin": "Jian",
+   "ten_en": "Development",
+   "han": "漸",
+   "y_chinh": "Gradual progress like a tree growing on a mountain.",
+   "loi_khuyen": "Advance step by step; slow and steady builds lasting results."
+  },
+  "54": {
+   "pinyin": "Gui Mei",
+   "ten_en": "The Marrying Maiden",
+   "han": "歸妹",
+   "y_chinh": "Entering a situation where you are not in control.",
+   "loi_khuyen": "Know your position and act carefully and appropriately."
+  },
+  "55": {
+   "pinyin": "Feng",
+   "ten_en": "Abundance",
+   "han": "豐",
+   "y_chinh": "A peak of fullness and clarity, which does not last.",
+   "loi_khuyen": "Make the most of the high point without over-reaching."
+  },
+  "56": {
+   "pinyin": "Lu",
+   "ten_en": "The Wanderer",
+   "han": "旅",
+   "y_chinh": "Being a traveller or newcomer away from home.",
+   "loi_khuyen": "Be modest, careful and polite in unfamiliar places."
+  },
+  "57": {
+   "pinyin": "Xun",
+   "ten_en": "The Gentle (Wind)",
+   "han": "巽",
+   "y_chinh": "Gentle, penetrating influence that works over time.",
+   "loi_khuyen": "Persuade gently and keep at it, like the wind."
+  },
+  "58": {
+   "pinyin": "Dui",
+   "ten_en": "The Joyous (Lake)",
+   "han": "兌",
+   "y_chinh": "Joy, openness and pleasant exchange.",
+   "loi_khuyen": "Share joy sincerely and keep it grounded."
+  },
+  "59": {
+   "pinyin": "Huan",
+   "ten_en": "Dispersion",
+   "han": "渙",
+   "y_chinh": "Scattering what is stuck; dissolving barriers.",
+   "loi_khuyen": "Let go of rigidity and bring people back together."
+  },
+  "60": {
+   "pinyin": "Jie",
+   "ten_en": "Limitation",
+   "han": "節",
+   "y_chinh": "Healthy limits that give shape and freedom.",
+   "loi_khuyen": "Set sensible limits, but not so strict they break."
+  },
+  "61": {
+   "pinyin": "Zhong Fu",
+   "ten_en": "Inner Truth",
+   "han": "中孚",
+   "y_chinh": "Sincerity that reaches even the hardest hearts.",
+   "loi_khuyen": "Be genuine and trustworthy; it moves people."
+  },
+  "62": {
+   "pinyin": "Xiao Guo",
+   "ten_en": "Small Exceeding",
+   "han": "小過",
+   "y_chinh": "A time for small, careful things, not big leaps.",
+   "loi_khuyen": "Pay attention to details and stay humble."
+  },
+  "63": {
+   "pinyin": "Ji Ji",
+   "ten_en": "After Completion",
+   "han": "既濟",
+   "y_chinh": "Things are in order, but order needs care to last.",
+   "loi_khuyen": "Stay watchful after success; maintain what works."
+  },
+  "64": {
+   "pinyin": "Wei Ji",
+   "ten_en": "Before Completion",
+   "han": "未濟",
+   "y_chinh": "Nearly there, but not finished yet.",
+   "loi_khuyen": "Finish carefully; the last step needs the most attention."
+  }
+ }
+}

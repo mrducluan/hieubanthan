@@ -2,6 +2,7 @@
 // Cấu trúc GEO: tiêu đề = câu hỏi người ta tìm · đoạn "trả lời nhanh" đứng đầu · mục có tiêu đề · hỏi đáp · nguồn ·
 // ngày cập nhật · nhãn đã thẩm định (BM-1: bài chưa duyệt không gắn nhãn) · liên kết nội bộ. Schema: Article + FAQPage + BreadcrumbList.
 // EEAT-1: dòng tác giả / chủ biên / thẩm định + Person; trang đã thẩm định có WebPage.reviewedBy + lastReviewed.
+import { hreflang } from "@/lib/ngon-ngu";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -57,7 +58,7 @@ async function metaGoc(params: Thamso): Promise<Metadata> {
   return {
     title: tieuDeSeo(t.tieu_de),
     description: catMoTa(t.mo_ta),
-    alternates: { canonical: duong, types: { "text/markdown": `${duong}.md` } },
+    alternates: { canonical: duong, types: { "text/markdown": `${duong}.md` }, ...(hreflang(duong) ? { languages: hreflang(duong) } : {}) },   // QTE-1
     robots: { index: t.index, follow: true },
     openGraph: {
       type: "article", title: t.tieu_de, description: t.mo_ta, url: duong, locale: "vi_VN", siteName: TEN_SITE,
