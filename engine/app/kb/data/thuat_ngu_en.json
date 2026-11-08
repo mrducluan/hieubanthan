@@ -1,0 +1,1339 @@
+{
+ "_nguon": "Bảng thuật ngữ Việt → Anh cố định cho chuyển ngữ (QT-0, KE-HOACH-QUOC-TE mục 11). Mỗi mục trỏ về `tu_dien.json` theo `ma`; tên tiếng Anh theo cách gọi phổ biến trong sách tiếng Anh (pinyin + nghĩa). Máy chuyển ngữ BẮT BUỘC dùng đúng tên này; đổi tên = sửa tệp này qua PR.",
+ "source_id": "thuat_ngu_en_v1",
+ "school_id": "chung",
+ "trang_thai": "nhap",
+ "can_doi_chieu": true,
+ "muc": [
+  {
+   "ma": "la_so_tu_vi",
+   "vi": "Lá số Tử vi",
+   "en": "Zi Wei Dou Shu chart",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "cung",
+   "vi": "Cung",
+   "en": "palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "cung_menh",
+   "vi": "Cung Mệnh",
+   "en": "Life Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "cung_than",
+   "vi": "Cung Thân",
+   "en": "Body Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "huynh_de",
+   "vi": "Huynh Đệ",
+   "en": "Siblings Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "phu_the",
+   "vi": "Phu Thê",
+   "en": "Spouse Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tu_nu",
+   "vi": "Tử Nữ",
+   "en": "Children Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tai_bach",
+   "vi": "Tài Bạch",
+   "en": "Wealth Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tat_ach",
+   "vi": "Tật Ách",
+   "en": "Health Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_di",
+   "vi": "Thiên Di",
+   "en": "Travel Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "no_boc",
+   "vi": "Nô Bộc",
+   "en": "Friends Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "quan_loc",
+   "vi": "Quan Lộc",
+   "en": "Career Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "dien_trach",
+   "vi": "Điền Trạch",
+   "en": "Property Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "phuc_duc",
+   "vi": "Phúc Đức",
+   "en": "Fortune Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "phu_mau",
+   "vi": "Phụ Mẫu",
+   "en": "Parents Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tam_phuong_tu_chinh",
+   "vi": "Tam phương tứ chính",
+   "en": "three-sided-four-cornered palaces",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "chinh_tinh",
+   "vi": "Chính tinh",
+   "en": "major star",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "phu_tinh",
+   "vi": "Phụ tinh",
+   "en": "minor star",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "vo_chinh_dieu",
+   "vi": "Vô chính diệu",
+   "en": "empty palace (no major star)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "cuc",
+   "vi": "Cục",
+   "en": "Element Bureau",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "menh_chu",
+   "vi": "Mệnh chủ",
+   "en": "Life Master star",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "than_chu",
+   "vi": "Thân chủ",
+   "en": "Body Master star",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "nap_am",
+   "vi": "Nạp âm",
+   "en": "Na Yin (sound element)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "am_duong_nam_nu",
+   "vi": "Âm dương nam nữ",
+   "en": "yin/yang male/female",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "lai_nhan_cung",
+   "vi": "Lai nhân cung",
+   "en": "Origin Palace",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "do_sang_sao",
+   "vi": "Độ sáng sao",
+   "en": "star brightness",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "mieu",
+   "vi": "Miếu",
+   "en": "Temple (brightest)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "vuong",
+   "vi": "Vượng",
+   "en": "Prosperous",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "dac",
+   "vi": "Đắc",
+   "en": "Favourable",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "binh",
+   "vi": "Bình",
+   "en": "Neutral",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "ham",
+   "vi": "Hãm",
+   "en": "Fallen (dim)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "nam_phai",
+   "vi": "Nam phái",
+   "en": "Southern (Vietnamese) school",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "trung_chau",
+   "vi": "Trung Châu",
+   "en": "Zhong Zhou school",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tu_hoa",
+   "vi": "Tứ hoá",
+   "en": "Four Transformations",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "hoa_loc",
+   "vi": "Hoá Lộc",
+   "en": "Hua Lu (Prosperity transformation)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "hoa_quyen",
+   "vi": "Hoá Quyền",
+   "en": "Hua Quan (Power transformation)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "hoa_khoa",
+   "vi": "Hoá Khoa",
+   "en": "Hua Ke (Fame transformation)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "hoa_ky",
+   "vi": "Hoá Kỵ",
+   "en": "Hua Ji (Obstacle transformation)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tuan",
+   "vi": "Tuần",
+   "en": "Xun Void",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "triet",
+   "vi": "Triệt",
+   "en": "Jie Void",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "cach_cuc",
+   "vi": "Cách cục",
+   "en": "chart pattern",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "pha_cach",
+   "vi": "Phá cách",
+   "en": "broken pattern",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "luc_sat",
+   "vi": "Lục sát",
+   "en": "Six Malefic stars",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "luc_cat",
+   "vi": "Lục cát",
+   "en": "Six Auspicious stars",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "dai_han",
+   "vi": "Đại hạn",
+   "en": "Major Period (10-year luck)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tieu_han",
+   "vi": "Tiểu hạn",
+   "en": "Minor Period",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "luu_nien",
+   "vi": "Lưu niên",
+   "en": "annual flow",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tuoi_mu",
+   "vi": "Tuổi mụ",
+   "en": "East Asian age (counted from birth as 1)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "gio_ty_muon",
+   "vi": "Giờ Tý muộn",
+   "en": "late Zi hour (23:00-23:59)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thang_nhuan",
+   "vi": "Tháng nhuận",
+   "en": "leap month",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tu_vi",
+   "vi": "Tử Vi",
+   "en": "Zi Wei (Emperor)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_co",
+   "vi": "Thiên Cơ",
+   "en": "Tian Ji (Strategist)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thai_duong",
+   "vi": "Thái Dương",
+   "en": "Tai Yang (Sun)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "vu_khuc",
+   "vi": "Vũ Khúc",
+   "en": "Wu Qu (General)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_dong",
+   "vi": "Thiên Đồng",
+   "en": "Tian Tong (Harmonizer)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "liem_trinh",
+   "vi": "Liêm Trinh",
+   "en": "Lian Zhen (Upright)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_phu",
+   "vi": "Thiên Phủ",
+   "en": "Tian Fu (Treasurer)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thai_am",
+   "vi": "Thái Âm",
+   "en": "Tai Yin (Moon)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tham_lang",
+   "vi": "Tham Lang",
+   "en": "Tan Lang (Desire)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "cu_mon",
+   "vi": "Cự Môn",
+   "en": "Ju Men (Great Gate)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_tuong",
+   "vi": "Thiên Tướng",
+   "en": "Tian Xiang (Minister)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_luong",
+   "vi": "Thiên Lương",
+   "en": "Tian Liang (Elder)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "that_sat",
+   "vi": "Thất Sát",
+   "en": "Qi Sha (Seven Killings)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "pha_quan",
+   "vi": "Phá Quân",
+   "en": "Po Jun (Breaker)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "ta_phu",
+   "vi": "Tả Phù",
+   "en": "Zuo Fu (Left Assistant)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "huu_bat",
+   "vi": "Hữu Bật",
+   "en": "You Bi (Right Assistant)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "van_xuong",
+   "vi": "Văn Xương",
+   "en": "Wen Chang (Literary Star)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "van_khuc",
+   "vi": "Văn Khúc",
+   "en": "Wen Qu (Arts Star)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_khoi",
+   "vi": "Thiên Khôi",
+   "en": "Tian Kui (Noble Helper)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_viet",
+   "vi": "Thiên Việt",
+   "en": "Tian Yue (Noble Helper)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "loc_ton",
+   "vi": "Lộc Tồn",
+   "en": "Lu Cun (Wealth Keeper)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_ma",
+   "vi": "Thiên Mã",
+   "en": "Tian Ma (Sky Horse)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "kinh_duong",
+   "vi": "Kình Dương",
+   "en": "Qing Yang (Goat Blade)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "da_la",
+   "vi": "Đà La",
+   "en": "Tuo Luo (Spinning Top)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "hoa_tinh",
+   "vi": "Hỏa Tinh",
+   "en": "Huo Xing (Fire Star)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "linh_tinh",
+   "vi": "Linh Tinh",
+   "en": "Ling Xing (Bell Star)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "dia_khong",
+   "vi": "Địa Không",
+   "en": "Di Kong (Earth Void)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "dia_kiep",
+   "vi": "Địa Kiếp",
+   "en": "Di Jie (Earth Robbery)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "hong_loan",
+   "vi": "Hồng Loan",
+   "en": "Hong Luan (Red Phoenix)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_hy",
+   "vi": "Thiên Hỷ",
+   "en": "Tian Xi (Sky Joy)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "dao_hoa",
+   "vi": "Đào Hoa",
+   "en": "Tao Hua (Peach Blossom)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_hinh",
+   "vi": "Thiên Hình",
+   "en": "Tian Xing (Sky Punishment)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_dieu",
+   "vi": "Thiên Diêu",
+   "en": "Tian Yao (Sky Charm)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_khoc",
+   "vi": "Thiên Khốc",
+   "en": "Tian Ku (Sky Weeping)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_hu",
+   "vi": "Thiên Hư",
+   "en": "Tian Xu (Sky Void)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "dai_hao",
+   "vi": "Đại Hao",
+   "en": "Da Hao (Great Consumer)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tieu_hao",
+   "vi": "Tiểu Hao",
+   "en": "Xiao Hao (Small Consumer)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tam_thai",
+   "vi": "Tam Thai",
+   "en": "San Tai (Three Terraces)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "bat_toa",
+   "vi": "Bát Tọa",
+   "en": "Ba Zuo (Eight Seats)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "an_quang",
+   "vi": "Ân Quang",
+   "en": "En Guang (Grace Light)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thien_quy",
+   "vi": "Thiên Quý",
+   "en": "Tian Gui (Sky Noble)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "long_tri",
+   "vi": "Long Trì",
+   "en": "Long Chi (Dragon Pool)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "phung_cac",
+   "vi": "Phụng Các",
+   "en": "Feng Ge (Phoenix Pavilion)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "co_than",
+   "vi": "Cô Thần",
+   "en": "Gu Chen (Lonely Star)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "qua_tu",
+   "vi": "Quả Tú",
+   "en": "Gua Su (Solitary Star)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "truong_sinh",
+   "vi": "Trường Sinh",
+   "en": "Chang Sheng (Twelve Life Stages)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "thai_tue",
+   "vi": "Thái Tuế",
+   "en": "Tai Sui (Grand Duke)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "bac_sy",
+   "vi": "Bác Sỹ",
+   "en": "Bo Shi (Scholar)",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "tu_phu_vu_tuong",
+   "vi": "Tử Phủ Vũ Tướng",
+   "en": "Zi-Fu-Wu-Xiang group",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "sat_pha_tham",
+   "vi": "Sát Phá Tham",
+   "en": "Sha-Po-Lang group",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "co_nguyet_dong_luong",
+   "vi": "Cơ Nguyệt Đồng Lương",
+   "en": "Ji-Yue-Tong-Liang group",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "cu_nhat",
+   "vi": "Cự Nhật",
+   "en": "Ju-Ri (Great Gate + Sun) pair",
+   "mang": "tu_vi"
+  },
+  {
+   "ma": "bat_tu",
+   "vi": "Bát tự",
+   "en": "BaZi (Four Pillars of Destiny)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "tru",
+   "vi": "Trụ",
+   "en": "pillar",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "thien_can",
+   "vi": "Thiên can",
+   "en": "Heavenly Stem",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "dia_chi",
+   "vi": "Địa chi",
+   "en": "Earthly Branch",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "nhat_chu",
+   "vi": "Nhật chủ",
+   "en": "Day Master",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "ngu_hanh",
+   "vi": "Ngũ hành",
+   "en": "Five Elements",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "tuong_sinh",
+   "vi": "Tương sinh",
+   "en": "producing cycle",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "tuong_khac",
+   "vi": "Tương khắc",
+   "en": "controlling cycle",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "tang_can",
+   "vi": "Tàng can",
+   "en": "hidden stems",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "thau",
+   "vi": "Thấu",
+   "en": "revealed (stem)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "nguyet_lenh",
+   "vi": "Nguyệt lệnh",
+   "en": "month commander",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "thap_than",
+   "vi": "Thập thần",
+   "en": "Ten Gods",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "ty_kien",
+   "vi": "Tỷ Kiên",
+   "en": "Friend (Bi Jian)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "kiep_tai",
+   "vi": "Kiếp Tài",
+   "en": "Rob Wealth",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "thuc_than",
+   "vi": "Thực Thần",
+   "en": "Eating God",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "thuong_quan",
+   "vi": "Thương Quan",
+   "en": "Hurting Officer",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "chinh_tai",
+   "vi": "Chính Tài",
+   "en": "Direct Wealth",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "thien_tai",
+   "vi": "Thiên Tài",
+   "en": "Indirect Wealth",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "chinh_quan",
+   "vi": "Chính Quan",
+   "en": "Direct Officer",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "that_sat_battu",
+   "vi": "Thất Sát",
+   "en": "Seven Killings",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "chinh_an",
+   "vi": "Chính Ấn",
+   "en": "Direct Resource",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "thien_an",
+   "vi": "Thiên Ấn",
+   "en": "Indirect Resource",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "than_vuong",
+   "vi": "Thân vượng",
+   "en": "strong Day Master",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "than_nhuoc",
+   "vi": "Thân nhược",
+   "en": "weak Day Master",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "dung_than",
+   "vi": "Dụng thần",
+   "en": "Useful God (favourable element)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "phu_uc",
+   "vi": "Phù ức",
+   "en": "support-and-restrain method",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "dieu_hau",
+   "vi": "Điều hậu",
+   "en": "climate-adjusting method",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "hy_than",
+   "vi": "Hỷ thần",
+   "en": "Joy God",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "ky_than",
+   "vi": "Kỵ thần",
+   "en": "Taboo God",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "dai_van",
+   "vi": "Đại vận",
+   "en": "Luck Pillar (10-year luck)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "khong_vong",
+   "vi": "Không vong",
+   "en": "Void (Kong Wang)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "than_sat",
+   "vi": "Thần sát",
+   "en": "Symbolic Stars (Shen Sha)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "thien_at_quy_nhan",
+   "vi": "Thiên Ất Quý Nhân",
+   "en": "Heavenly Noble (Tian Yi Gui Ren)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "dich_ma",
+   "vi": "Dịch Mã",
+   "en": "Travelling Horse",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "duong_nhan",
+   "vi": "Dương Nhận",
+   "en": "Goat Blade (Yang Ren)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "kien_loc",
+   "vi": "Kiến Lộc",
+   "en": "Establishing Prosperity (Jian Lu)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "luc_hop",
+   "vi": "Lục hợp",
+   "en": "Six Harmonies",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "luc_xung",
+   "vi": "Lục xung",
+   "en": "Six Clashes",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "tam_hop",
+   "vi": "Tam hợp",
+   "en": "Three Harmonies",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "hinh",
+   "vi": "Hình",
+   "en": "Punishment",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "tiet_khi",
+   "vi": "Tiết khí",
+   "en": "solar term",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "lap_xuan",
+   "vi": "Lập xuân",
+   "en": "Start of Spring (Li Chun)",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "cung_thong_bao_giam",
+   "vi": "Cùng Thông Bảo Giám",
+   "en": "Qiong Tong Bao Jian",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "tu_binh_chan_thuyen",
+   "vi": "Tử Bình Chân Thuyên",
+   "en": "Zi Ping Zhen Quan",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "que",
+   "vi": "Quẻ",
+   "en": "hexagram",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "hao",
+   "vi": "Hào",
+   "en": "line",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "hao_duong",
+   "vi": "Hào dương",
+   "en": "yang line",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "hao_am",
+   "vi": "Hào âm",
+   "en": "yin line",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "hao_dong",
+   "vi": "Hào động",
+   "en": "changing line",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "que_ban",
+   "vi": "Quẻ bản",
+   "en": "primary hexagram",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "que_bien",
+   "vi": "Quẻ biến",
+   "en": "changed hexagram",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "que_ho",
+   "vi": "Quẻ hỗ",
+   "en": "nuclear hexagram",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "bat_quai",
+   "vi": "Bát quái",
+   "en": "Eight Trigrams (Bagua)",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "thuong_quai",
+   "vi": "Thượng quái",
+   "en": "upper trigram",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "ha_quai",
+   "vi": "Hạ quái",
+   "en": "lower trigram",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "quai_tu",
+   "vi": "Quái từ",
+   "en": "Judgment",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "hao_tu",
+   "vi": "Hào từ",
+   "en": "line statement",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "thoan_truyen",
+   "vi": "Thoán truyện",
+   "en": "Commentary on the Judgment (Tuan Zhuan)",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "dai_tuong",
+   "vi": "Đại Tượng",
+   "en": "Great Image",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "nguyen_hanh_loi_trinh",
+   "vi": "Nguyên hanh lợi trinh",
+   "en": "origin, success, benefit, steadfastness",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "hoi",
+   "vi": "Hối",
+   "en": "regret",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "lan",
+   "vi": "Lận",
+   "en": "humiliation",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "cat",
+   "vi": "Cát",
+   "en": "good fortune",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "hung",
+   "vi": "Hung",
+   "en": "misfortune",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "vo_cuu",
+   "vi": "Vô cữu",
+   "en": "no blame",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "nghia_ly",
+   "vi": "Nghĩa Lý",
+   "en": "meaning-and-principle reading",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "luc_hao",
+   "vi": "Lục Hào",
+   "en": "Six Lines (Na Jia) divination",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "mai_hoa_dich_so",
+   "vi": "Mai Hoa Dịch Số",
+   "en": "Plum Blossom numerology",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "the",
+   "vi": "Thế",
+   "en": "Self line (Shi)",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "ung",
+   "vi": "Ứng",
+   "en": "Response line (Ying)",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "luc_than",
+   "vi": "Lục thân",
+   "en": "Six Relations",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "dung_than_luc_hao",
+   "vi": "Dụng thần",
+   "en": "Use God line",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "nguyet_kien",
+   "vi": "Nguyệt kiến",
+   "en": "month branch",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "nhat_than",
+   "vi": "Nhật thần",
+   "en": "day branch",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "gieo_que",
+   "vi": "Gieo quẻ",
+   "en": "casting a hexagram",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "menh_quai",
+   "vi": "Mệnh quái",
+   "en": "Kua number",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "dong_tu_menh",
+   "vi": "Đông tứ mệnh",
+   "en": "East group",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "tay_tu_menh",
+   "vi": "Tây tứ mệnh",
+   "en": "West group",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "bat_trach",
+   "vi": "Bát trạch",
+   "en": "Eight Mansions",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "du_nien",
+   "vi": "Du niên",
+   "en": "Eight Mansions star",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "sinh_khi",
+   "vi": "Sinh Khí",
+   "en": "Sheng Qi (Life Generating)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "thien_y",
+   "vi": "Thiên Y",
+   "en": "Tian Yi (Heavenly Doctor)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "dien_nien",
+   "vi": "Diên Niên",
+   "en": "Yan Nian (Longevity)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "phuc_vi",
+   "vi": "Phục Vị",
+   "en": "Fu Wei (Stability)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "tuyet_menh",
+   "vi": "Tuyệt Mệnh",
+   "en": "Jue Ming (Total Loss)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "ngu_quy",
+   "vi": "Ngũ Quỷ",
+   "en": "Wu Gui (Five Ghosts)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "luc_sat_phongthuy",
+   "vi": "Lục Sát",
+   "en": "Liu Sha (Six Killings)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "hoa_hai",
+   "vi": "Hoạ Hại",
+   "en": "Huo Hai (Mishap)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "toa",
+   "vi": "Toạ",
+   "en": "sitting direction",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "huong",
+   "vi": "Hướng",
+   "en": "facing direction",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "24_son",
+   "vi": "24 sơn",
+   "en": "24 Mountains",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "huyen_khong",
+   "vi": "Huyền Không",
+   "en": "Xuan Kong (Flying Stars)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "van",
+   "vi": "Vận",
+   "en": "Period",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "cuu_tinh",
+   "vi": "Cửu tinh",
+   "en": "Nine Stars",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "van_tinh",
+   "vi": "Vận tinh",
+   "en": "Period star",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "son_tinh",
+   "vi": "Sơn tinh",
+   "en": "Mountain star",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "huong_tinh",
+   "vi": "Hướng tinh",
+   "en": "Facing star",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "ha_quai_ban",
+   "vi": "Hạ quái bàn",
+   "en": "base chart",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "the_quai",
+   "vi": "Thế quái",
+   "en": "replacement chart",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "vuong_son_vuong_huong",
+   "vi": "Vượng sơn vượng hướng",
+   "en": "Prosperous Mountain, Prosperous Facing",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "thuong_son_ha_thuy",
+   "vi": "Thượng sơn hạ thuỷ",
+   "en": "Reversed (Up the Mountain, Down the Water)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "song_tinh_dao_huong",
+   "vi": "Song tinh đáo hướng",
+   "en": "Double Stars at Facing",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "song_tinh_dao_toa",
+   "vi": "Song tinh đáo toạ",
+   "en": "Double Stars at Sitting",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "phuc_ngam",
+   "vi": "Phục ngâm",
+   "en": "Fu Yin (Hidden Chant)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "phan_ngam",
+   "vi": "Phản ngâm",
+   "en": "Fan Yin (Reverse Chant)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "luu_nien_phi_tinh",
+   "vi": "Lưu niên phi tinh",
+   "en": "annual flying stars",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "khong_vong_phong_thuy",
+   "vi": "Không vong",
+   "en": "void line (Kong Wang)",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "tai_tinh",
+   "vi": "Tài tinh",
+   "en": "Wealth star",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "quan_tinh",
+   "vi": "Quan tinh",
+   "en": "Officer star",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "an_tinh",
+   "vi": "Ấn tinh",
+   "en": "Resource star",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "khoi_van",
+   "vi": "Khởi vận",
+   "en": "start of luck",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "luu_nien_bt",
+   "vi": "Lưu niên",
+   "en": "annual pillar",
+   "mang": "bat_tu"
+  },
+  {
+   "ma": "huyen_khong_pt",
+   "vi": "Huyền Không phi tinh",
+   "en": "Xuan Kong Flying Stars",
+   "mang": "phong_thuy"
+  },
+  {
+   "ma": "nap_giap",
+   "vi": "Nạp giáp",
+   "en": "Na Jia",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "thac_quai",
+   "vi": "Thác quái",
+   "en": "opposite hexagram",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "tong_quai",
+   "vi": "Tổng quái",
+   "en": "inverted hexagram",
+   "mang": "kinh_dich"
+  },
+  {
+   "ma": "bat_cung",
+   "vi": "Bát cung",
+   "en": "Eight Palaces",
+   "mang": "kinh_dich"
+  }
+ ],
+ "cum_cam_en": [
+  "\\bguarantee(d|s)?\\b",
+  "\\b100\\s?% (accurate|certain)\\b",
+  "\\baccurate (prediction|reading|forecast)s?\\b",
+  "\\bdoom(ed)?\\b",
+  "\\bcursed?\\b",
+  "\\byou will die\\b",
+  "\\b(year|date) of (your )?death\\b",
+  "\\bwill (definitely|certainly)\\b",
+  "\\byou will (get|become|fall) (sick|ill)\\b",
+  "\\b(cancer|diabetes|tumou?r|stroke)\\b",
+  "\\blottery numbers?\\b",
+  "\\b(buy|sell) (this|these) (stock|shares|coin)s?\\b",
+  "\\b(lucky charm|amulet|talisman)s? (to|will) (fix|cure|remove)\\b"
+ ],
+ "_cum_cam_en": "Cụm cấm trong bản tiếng Anh (tương đương cum_cam tiếng Việt + mục pháp lý QTE-1: không 'accurate/guaranteed', không phán bệnh/chết, không lời khuyên đầu tư, không vật phẩm giải hạn). Regex, không phân biệt hoa thường."
+}

@@ -2,6 +2,7 @@
 import type { MetadataRoute } from "next";
 import { CHU_DE, dsCungPhi, dsLaSoMau, duongTrang, duongTuoi, mucLuc } from "@/lib/kien-thuc";
 import { dsBaiTongHop, duongBlog } from "@/lib/blog";
+import { duongMangBlog, nhomTheoMang } from "@/lib/blog-mang";
 import { urlDayDu } from "@/lib/seo";
 import { daHetHan, dsTrangDichCms } from "@/lib/cms";
 import { duongTrangSo, soTrang } from "@/lib/phan-trang";
@@ -81,6 +82,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: urlDayDu(duongTrangSo(`/blog/chuyen-muc/${encodeURIComponent(slug)}`, i + 1)), changeFrequency: "weekly" as const, priority: i ? 0.3 : 0.5,
       }));
     }),
+    // UI-BLOG: chuyên đề theo mảng Huyền học (chỉ mảng có bài).
+    ...nhomTheoMang(blog.filter((p) => !p.noindex)).map((g) => ({ url: urlDayDu(duongMangBlog(g.mang)), changeFrequency: "weekly" as const, priority: 0.5 })),
     // SEO-K: /blog/trang/2…n (trang 1 = /blog nằm trong TINH).
     ...Array.from({ length: soTrang(blog.length) - 1 }, (_, i) => ({ url: urlDayDu(duongTrangSo("/blog", i + 2)), changeFrequency: "weekly" as const, priority: 0.3 })),
   ];

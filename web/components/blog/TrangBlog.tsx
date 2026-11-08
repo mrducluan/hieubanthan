@@ -5,7 +5,8 @@ import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { ChipChuyenMuc, chuyenMucCoBai, LuoiBai } from "@/components/blog/LuoiBai";
+import { ChipChuyenMuc, chuyenMucCoBai, DanhSachGon, LuoiBai, LuoiChuDe, ThanhMangBlog } from "@/components/blog/LuoiBai";
+import { nhomTheoMang } from "@/lib/blog-mang";
 import { PhanTrang } from "@/components/blog/PhanTrang";
 import { dsBaiTongHop, duongBlog } from "@/lib/blog";
 import { goiLd, ldDuongDan, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
@@ -34,6 +35,14 @@ export async function TrangBlog({ n }: { n: number }) {
   if (n > tong) notFound();
   const ds = catTrang(tatCa, n);
   const duong = duongTrangSo(DUONG, n);
+  // Trang 1: 7 bài mới nhất (1 nổi bật + 6) → "Đọc theo chủ đề" (mỗi môn một ô: số bài + ≤ 3 tiêu đề CHƯA hiện phía trên,
+  // mỗi bài chỉ một link trên trang) → danh sách gọn những bài của trang chưa có link nào phía trên.
+  const nhom = nhomTheoMang(tatCa);
+  const dau = ds.slice(0, 7);
+  const daHien = new Set(dau.map((b) => b.slug));
+  const ke = nhom.map((g) => ({ mang: g.mang, tong: g.bai.length, bai: g.bai.filter((b) => !daHien.has(b.slug)).slice(0, 3) }));
+  for (const k of ke) for (const b of k.bai) daHien.add(b.slug);
+  const con = ds.filter((b) => !daHien.has(b.slug));
   return (
     <div className="mx-auto max-w-5xl">
       <JsonLd data={goiLd(
@@ -49,11 +58,19 @@ export async function TrangBlog({ n }: { n: number }) {
       <h1 className="mt-2 text-4xl sm:text-5xl">{n > 1 ? `Blog — trang ${n}` : (nd.dau.h1 ?? "Blog")}</h1>
       {n === 1 && <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{MO_TA}</LoiDanCms>}
       {n === 1 && <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />}
+      {/* UI-BLOG: chủ đề Huyền học (luôn có, tính từ bài) trước; chuyên mục CMS (nếu ban biên tập đặt) là lớp lọc thứ hai. */}
+      <ThanhMangBlog ds={nhom.map((g) => ({ mang: g.mang, so: g.bai.length }))} tong={tatCa.length} />
       <ChipChuyenMuc ds={chuyenMucCoBai(tatCa)} />
 
       {ds.length === 0 ? (
         <p className="glass mt-8 rounded-2xl p-6 text-fg-muted">Chưa có bài viết. Trong lúc chờ, mời bạn đọc <Link href="/kien-thuc" className="text-gold underline underline-offset-4">thư viện kiến thức</Link>.</p>
-      ) : <LuoiBai ds={ds} noiBat={n === 1} />}
+      ) : n > 1 ? <LuoiBai ds={ds} noiBat={false} /> : (
+        <>
+          <LuoiBai ds={dau} />
+          <LuoiChuDe ds={ke} />
+          {con.length > 0 && <DanhSachGon ds={con} tieuDe="Các bài khác" />}
+        </>
+      )}
       <PhanTrang goc={DUONG} n={n} tong={tong} />
       {n === 1 && <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-12" />}
       {n === 1 && <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-12" />}
