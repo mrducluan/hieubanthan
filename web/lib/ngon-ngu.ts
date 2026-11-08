@@ -15,12 +15,23 @@ export const NHAT_CHU_CAP: readonly [string, string][] = [
 ];
 export const duongDayMaster = (slugEn: string) => `/en/bazi/day-master/${slugEn}`;
 
+// 14 chính tinh: slug trang Việt (/tu-vi/chinh-tinh/sao-{x}) ↔ slug trang Anh (engine chuyen_ngu/tuvi_en).
+export const CHINH_TINH_CAP: readonly [string, string][] = [
+  ["tu-vi", "zi-wei"], ["thien-co", "tian-ji"], ["thai-duong", "tai-yang"], ["vu-khuc", "wu-qu"], ["thien-dong", "tian-tong"],
+  ["liem-trinh", "lian-zhen"], ["thien-phu", "tian-fu"], ["thai-am", "tai-yin"], ["tham-lang", "tan-lang"], ["cu-mon", "ju-men"],
+  ["thien-tuong", "tian-xiang"], ["thien-luong", "tian-liang"], ["that-sat", "qi-sha"], ["pha-quan", "po-jun"],
+];
+export const duongStar = (slugEn: string) => `/en/zi-wei/stars/${slugEn}`;
+
 /** Cặp trang Việt ↔ Anh đã dịch. Thêm trang dịch mới = thêm một dòng ở đây. */
 export const CAP: readonly [string, string][] = [
   ["/", "/en"],
   ["/bat-tu", "/en/bazi-calculator"],
   ["/bat-tu/nhat-chu", "/en/bazi/day-master"],
   ...NHAT_CHU_CAP.map(([vi, en]) => [`/bat-tu/nhat-chu/nhat-chu-${vi}`, duongDayMaster(en)] as [string, string]),
+  ["/tu-vi", "/en/zi-wei-dou-shu-chart"],
+  ["/tu-vi/chinh-tinh", "/en/zi-wei/stars"],
+  ...CHINH_TINH_CAP.map(([vi, en]) => [`/tu-vi/chinh-tinh/sao-${vi}`, duongStar(en)] as [string, string]),
   ["/chinh-sach-rieng-tu", "/en/privacy"],
   ["/dieu-khoan", "/en/terms"],
 ];

@@ -26,8 +26,18 @@ export default function Page() {
           <h2 className="mt-2 text-2xl">The 10 Day Masters</h2>
           <p className="mt-2 text-sm text-fg-muted">What each Heavenly Stem says about your nature, strengths and blind spots.</p>
         </Link>
+        <Link href="/en/zi-wei-dou-shu-chart" className="glass block rounded-2xl p-6 hover:border-gold/50">
+          <p className="eyebrow">Zi Wei Dou Shu · Purple Star</p>
+          <h2 className="mt-2 text-2xl">Zi Wei Dou Shu chart</h2>
+          <p className="mt-2 text-sm text-fg-muted">12 palaces, 14 major stars with brightness, the Four Transformations and 10-year Major Periods.</p>
+        </Link>
+        <Link href="/en/zi-wei/stars" className="glass block rounded-2xl p-6 hover:border-gold/50">
+          <p className="eyebrow">Library</p>
+          <h2 className="mt-2 text-2xl">The 14 major stars</h2>
+          <p className="mt-2 text-sm text-fg-muted">From Zi Wei (Emperor) to Po Jun (Breaker): nature, strengths and blind spots.</p>
+        </Link>
       </div>
-      <p className="mt-8 text-sm text-fg-faint">Coming next in English: Zi Wei Dou Shu chart, Feng Shui Kua number and Flying Stars, I Ching hexagrams.</p>
+      <p className="mt-8 text-sm text-fg-faint">Coming next in English: Feng Shui Kua number and Flying Stars, I Ching hexagrams.</p>
     </div>
   );
 }

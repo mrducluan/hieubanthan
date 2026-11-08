@@ -4,7 +4,7 @@ import { CHU_DE, dsCungPhi, dsLaSoMau, duongTrang, duongTuoi, mucLuc } from "@/l
 import { dsBaiTongHop, duongBlog } from "@/lib/blog";
 import { duongMangBlog, nhomTheoMang } from "@/lib/blog-mang";
 import { duongTetNuoc, NUOC_TET } from "@/lib/tet-nuoc-ngoai";
-import { duongDayMaster, NHAT_CHU_CAP } from "@/lib/ngon-ngu";
+import { CHINH_TINH_CAP, duongDayMaster, duongStar, NHAT_CHU_CAP } from "@/lib/ngon-ngu";
 import { urlDayDu } from "@/lib/seo";
 import { daHetHan, dsTrangDichCms } from "@/lib/cms";
 import { duongTrangSo, soTrang } from "@/lib/phan-trang";
@@ -87,8 +87,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // UI-BLOG: chuyên đề theo mảng Huyền học (chỉ mảng có bài).
     ...nhomTheoMang(blog.filter((p) => !p.noindex)).map((g) => ({ url: urlDayDu(duongMangBlog(g.mang)), changeFrequency: "weekly" as const, priority: 0.5 })),
     // QTE-1 tuần 3–4: trang tiếng Anh (chưa sửa ở CMS — hướng lai QTE-1b làm sau).
-    ...["/en", "/en/bazi-calculator", "/en/bazi/day-master", ...NHAT_CHU_CAP.map(([, en]) => duongDayMaster(en)), "/en/privacy", "/en/terms"]
-      .map((d) => ({ url: urlDayDu(d), changeFrequency: "monthly" as const, priority: d.includes("calculator") || d === "/en" ? 0.8 : 0.5 })),
+    ...["/en", "/en/bazi-calculator", "/en/bazi/day-master", ...NHAT_CHU_CAP.map(([, en]) => duongDayMaster(en)),
+      "/en/zi-wei-dou-shu-chart", "/en/zi-wei/stars", ...CHINH_TINH_CAP.map(([, en]) => duongStar(en)), "/en/privacy", "/en/terms"]
+      .map((d) => ({ url: urlDayDu(d), changeFrequency: "monthly" as const, priority: d.includes("calculator") || d.includes("chart") || d === "/en" ? 0.8 : 0.5 })),
     // QTE-1 tuần 2: Tết ở nước ngoài từng nước (URL không mang năm, trang tự sang Tết năm sau).
     ...NUOC_TET.map((s) => ({ url: urlDayDu(duongTetNuoc(s)), changeFrequency: "monthly" as const, priority: 0.6 })),
     // SEO-K: /blog/trang/2…n (trang 1 = /blog nằm trong TINH).

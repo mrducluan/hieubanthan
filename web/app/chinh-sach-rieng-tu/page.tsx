@@ -3,6 +3,7 @@
 // Sửa cách xử lý dữ liệu ở đâu → sửa trang này + NGAY_HIEU_LUC trong lib/van-hanh.ts.
 // BM-1 (chủ dự án 2026-10-09): ghi NHÓM nhà cung cấp, không ghi tên dịch vụ hạ tầng / tên khoá lưu trữ nội bộ; danh sách
 // cụ thể cung cấp khi người dùng hỏi (giữ trong docs/BAO-MAT.md). Google Analytics giữ tên vì liên quan hộp hỏi cookie.
+import { hreflang } from "@/lib/ngon-ngu";
 import type { Metadata } from "next";
 import { gopMucCms, LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang, ngayHienThi } from "@/lib/noi-dung-trang";
@@ -13,7 +14,7 @@ import { DANG_CAP_NHAT, vanHanh } from "@/lib/van-hanh";
 const META: Metadata = {
   title: "Chính sách quyền riêng tư",
   description: "Hiểu Bản Thân thu gì, lưu ở đâu, bao lâu, gửi cho ai và bạn có quyền gì với dữ liệu cá nhân của mình — theo Luật Bảo vệ dữ liệu cá nhân 2025.",
-  alternates: { canonical: "/chinh-sach-rieng-tu" },
+  alternates: { canonical: "/chinh-sach-rieng-tu", languages: hreflang("/chinh-sach-rieng-tu") },
 };
 
 const DUONG = "/chinh-sach-rieng-tu";

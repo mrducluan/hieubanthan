@@ -32,3 +32,7 @@ async function lay<T>(duong: string): Promise<T | null | "khong_co"> {
 
 export const dayMasters = () => lay<{ day_masters: DayMaster[] }>("/v1/battu/en/day-masters");
 export const dayMaster = (slug: string) => lay<DayMaster>(`/v1/battu/en/day-master/${encodeURIComponent(slug)}`);
+
+export interface Star { slug: string; vi: string; name: string; han: string; element: string; nature: string; strengths: string; watch_out: string; question: string }
+export const stars = () => lay<{ stars: Star[] }>("/v1/tuvi/en/stars");
+export const star = (slug: string) => lay<Star>(`/v1/tuvi/en/star/${encodeURIComponent(slug)}`);

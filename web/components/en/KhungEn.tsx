@@ -6,6 +6,7 @@ import { Logo } from "@/components/khung/Logo";
 const MENU: [string, string][] = [
   ["/en/bazi-calculator", "BaZi calculator"],
   ["/en/bazi/day-master", "Day Masters"],
+  ["/en/zi-wei-dou-shu-chart", "Zi Wei chart"],
 ];
 
 export function DauTrangEn() {

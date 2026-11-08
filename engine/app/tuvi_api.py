@@ -421,6 +421,28 @@ class VanHanInput(BaseModel):
     ngay_xem: _dt.date | None = None
 
 
+@router.post("/an-sao-en")
+def api_an_sao_en(inp: TuanTrietInput) -> dict:
+    """QTE-1 tuần 5 — lá số Tử vi cho trang tiếng Anh: CÙNG lá số `/an-sao`, nhãn tiếng Anh (chuyen_ngu.tuvi_en)."""
+    from app.chuyen_ngu import tuvi_en  # noqa: PLC0415
+    return {"engine_version": ENGINE_VERSION, **tuvi_en.la_so(api_an_sao(inp))}
+
+
+@router.get("/en/stars")
+def api_stars_en() -> dict:
+    from app.chuyen_ngu import tuvi_en  # noqa: PLC0415
+    return {"stars": tuvi_en.stars()}
+
+
+@router.get("/en/star/{slug}")
+def api_star_en(slug: str) -> dict:
+    from app.chuyen_ngu import tuvi_en  # noqa: PLC0415
+    d = tuvi_en.star(slug)
+    if d is None:
+        raise HTTPException(404, detail="Unknown star")
+    return d
+
+
 @router.post("/van-han")
 def api_van_han(inp: VanHanInput) -> dict:
     dv = _DauVao(inp.la_so)

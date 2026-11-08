@@ -1,3 +1,4 @@
+import { hreflang } from "@/lib/ngon-ngu";
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
@@ -27,7 +28,7 @@ const MO_TA_CHU = "Thần số học và huyền học phương Đông (Tử vi,
 const META: Metadata = {
   title: { absolute: TIEU_DE_CHU },
   description: MO_TA_CHU,
-  alternates: { canonical: "/", types: { "text/markdown": "/index.md" } },
+  alternates: { canonical: "/", languages: hreflang("/"), types: { "text/markdown": "/index.md" } },
   // openGraph/twitter của trang thay hẳn bản ở layout (không gộp) → khai đủ trường.
   openGraph: { type: "website", locale: "vi_VN", siteName: TEN_SITE, url: "/", title: TIEU_DE_CHU, description: MO_TA_CHU, images: [{ url: "/og", width: 1200, height: 630, alt: TIEU_DE_CHU }] },
   twitter: { card: "summary_large_image", title: TIEU_DE_CHU, description: MO_TA_CHU, images: ["/og"] },
