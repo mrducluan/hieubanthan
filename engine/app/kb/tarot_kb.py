@@ -120,3 +120,8 @@ def cum_cam() -> list[str]:
 
 def dai_dien() -> dict:
     return _lay("dai_dien") or {}
+
+
+def viec_truoc_khi_quyet() -> dict:
+    """TR-2: việc nên làm trước khi quyết, theo loại việc đang hỏi (+ `_linh_vuc` dự phòng)."""
+    return _d().get("viec_truoc_khi_quyet", {"_linh_vuc": {"_chung": []}})

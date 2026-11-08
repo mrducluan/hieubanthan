@@ -4,6 +4,8 @@
   GET  /bo-bai     78 lá rút gọn + bộ, nguyên tố, trải bài, chủ đề, trường phái — web vẽ bộ bài
   POST /xao-bai    thứ tự 78 lá + cờ ngược (hạt giống từ cử chỉ người dùng → tất định; trống → CSPRNG)
   POST /doc-bai    bài đọc "Trải bài của bạn" (khuôn doi_song_1) từ lá NGƯỜI DÙNG đã rút
+  POST /hieu-cau   ý định của câu hỏi + trải bài gợi ý (TR-2; không trả lại câu hỏi)
+  POST /the        dữ kiện thẻ chia sẻ "Câu trả lời của lá bài" (TR-3; mã danh mục + lá, không câu hỏi)
   POST /hoi        hỏi đáp tất định (nghĩa lá, vị trí trong trải bài vừa rút, trải bài, khái niệm)
   GET|POST /la-ngay  lá của ngày (chung) / lá riêng theo ngày sinh (POST, không lưu)
 """
@@ -53,6 +55,8 @@ class DocBaiInput(BaseModel):
     bo_dai_dien: Literal["gay", "coc", "kiem", "tien"] | None = None
     trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)
     ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
+    # TR-3: AI diễn đạt lại CHƯƠNG TRẢ LỜI (chỉ chương đó; có khoá OpenRouter + còn lượt RL-1, không thì bản mẫu)
+    dien_dat: bool = False
 
     @field_validator("tra_loi_nhan_tuong")
     @classmethod
@@ -69,6 +73,21 @@ class HoiInput(BaseModel):
     cau_hoi: str = Field(min_length=2, max_length=500)
     trai_bai: str | None = Field(default=None, pattern=r"^[a-z_]{3,30}$")
     la: list[_La] | None = Field(default=None, max_length=10)
+
+
+class HieuCauInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    cau_hoi: str = Field(default="", max_length=500)
+    chu_de: str | None = Field(default=None, max_length=30, pattern=r"^[a-z_]+$")
+
+
+class TheInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    trai_bai: str = Field(pattern=r"^[a-z_]{3,30}$")
+    la: list[_La] = Field(min_length=1, max_length=10)
+    y_dinh: str = Field(pattern=r"^[a-z_]{3,20}$")
+    viec: str | None = Field(default=None, pattern=r"^[a-z_]{3,20}$")
+    linh_vuc: Literal["tinh_cam", "cong_viec", "tien_bac", "suc_khoe"] | None = None
 
 
 class LaNgayInput(BaseModel):
@@ -97,6 +116,8 @@ def api_doc_bai(inp: DocBaiInput) -> dict:
                         bo_dai_dien=inp.bo_dai_dien, trong_so={k: v.model_dump() for k, v in (inp.trong_so or {}).items()} or None, ca_nhan=inp.ca_nhan)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
+    if inp.dien_dat and bc.get("hieu_cau", {}).get("co_cau") and not bc["hieu_cau"].get("chan"):
+        bc = tr.dien_dat_tra_loi(bc)
     return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_doi_song", **bc}
 
 
@@ -104,6 +125,24 @@ def api_doc_bai(inp: DocBaiInput) -> dict:
 def api_hoi(inp: HoiInput) -> dict:
     kq = tr.hoi(inp.cau_hoi, trai_bai=inp.trai_bai, la=[l.model_dump() for l in inp.la] if inp.la else None)
     return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_hoi", **kq}
+
+
+@router.post("/hieu-cau")
+def api_hieu_cau(inp: HieuCauInput) -> dict:
+    """TR-2: ý định + lĩnh vực + trải bài hợp câu hỏi (chỉ mã / nhãn danh mục; câu hỏi không lưu, không trả lại)."""
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_hieu_cau", **tr.hieu_cau_cong_khai(inp.cau_hoi, inp.chu_de)}
+
+
+@router.post("/the")
+def api_the(inp: TheInput) -> dict:
+    """TR-3: dữ kiện thẻ "Câu trả lời của lá bài" (máy chủ web ký mã từ đây; chỉ mã danh mục + lá, không câu hỏi)."""
+    if inp.trai_bai not in kb.trai_bai():
+        raise HTTPException(422, detail="Không có trải bài này.")
+    try:
+        kq = tr.the_tra_loi(inp.trai_bai, [l.model_dump() for l in inp.la], y_dinh=inp.y_dinh, viec=inp.viec, linh_vuc=inp.linh_vuc)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e))
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_the", **kq}
 
 
 @router.get("/la-ngay")

@@ -16,6 +16,16 @@ BOOK_T = json.loads((NGUON / "tarot_book_t.json").read_text(encoding="utf-8"))
 MATHERS = json.loads((NGUON / "tarot_mathers_1888.json").read_text(encoding="utf-8"))   # 5/6 chương sacred-texts, chủ dự án lưu PDF
 
 
+# Book T đặt tên hoàng gia khác Waite: "King" cưỡi ngựa = Hiệp sĩ (Knight) của Waite, "Prince" trên cỗ xe = Vua (King),
+# "Princess" = Tiểu đồng (Page). Bản chép giữ trường `la_rws` → tra lá Book T theo tên Waite, không theo khoá.
+_BT_THEO_RWS = {v["la_rws"].replace("Knave", "Page"): v for k, v in BOOK_T.items() if isinstance(v, dict) and v.get("la_rws")}
+
+
+def _book_t(ma: str) -> dict | None:
+    l = kb.mot_la(ma)
+    return _BT_THEO_RWS.get(l["en"]) if l["loai"] == "hoang_gia" else BOOK_T.get(ma)
+
+
 def _chuan(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
@@ -42,7 +52,7 @@ def test_moi_trich_la_nguyen_van_cua_nguon(ma):
             if tr.get("nguyen_van_nguoc"):
                 assert _chuan(tr["nguyen_van_nguoc"]) in _chuan(w.get("y_nguoc", "")), (ma, "ngược")
         elif tr["sach"] == "book_t":
-            b = BOOK_T[ma]
+            b = _book_t(ma)
             assert tr["ten"] == b["ten"], ma
             assert _chuan(tr["nguyen_van"]) in _chuan(b["mo_ta"]), (ma, tr["nguyen_van"][:60])
         elif tr["sach"] == "mathers_1888":
@@ -53,7 +63,7 @@ def test_moi_trich_la_nguyen_van_cua_nguon(ma):
         else:
             raise AssertionError(f"{ma}: nguồn trích lạ {tr['sach']} — chỉ nguồn đã có fixture nguyên văn")
     # lá có trong Book T thì phải có trích Book T (36 lá số + 16 hoàng gia); Mathers 1888 có đủ 78 lá
-    if ma in BOOK_T:
+    if _book_t(ma):
         assert any(tr["sach"] == "book_t" for tr in trich), ma
     assert any(tr["sach"] == "mathers_1888" for tr in trich), ma
 
@@ -69,9 +79,10 @@ def test_mathers_du_78_la_va_thu_tu_marseille():
 
 def test_ten_book_t_khop_nguon():
     for ma in calc.BO_BAI:
-        if ma not in BOOK_T:
+        b = _book_t(ma)
+        if not b:
             continue
-        ten = BOOK_T[ma]["ten"]
+        ten = b["ten"]
         la = kb.mot_la(ma)
         if ma.split("_")[1].isdigit():        # lá số: tên Thoth = tên Book T bỏ "The Lord of"
             mong = re.sub(r"^THE LORD OF ", "", re.sub(r"^The Lord of ", "", ten), flags=re.I)
@@ -140,3 +151,15 @@ def test_kb_ghi_doi_chieu():
     dc = kb._d()["doi_chieu"]
     assert set(dc) >= {"waite_1910", "book_t", "mathers_1888"}
     assert all((NGUON / Path(v["tep"]).name).exists() for v in dc.values())
+
+
+@pytest.mark.parametrize("ma", [m for m in calc.BO_BAI if kb.mot_la(m)["loai"] == "hoang_gia" and kb.mot_la(m).get("vung_book_t")])
+def test_vung_hoang_dao_hoang_gia_khop_book_t(ma):
+    """TR-2: 12 lá hoàng gia (trừ Tiểu đồng) cai từ 20° một cung tới 20° cung sau — tên hai cung phải có trong nguyên văn."""
+    l = kb.mot_la(ma)
+    v = l["vung_book_t"]
+    ds = list(kb.cung_hoang_dao())
+    a = kb.cung_hoang_dao()[v["tu_cung"]]["en"]
+    b = kb.cung_hoang_dao()[ds[(ds.index(v["tu_cung"]) + 1) % 12]]["en"]
+    mo_ta = _book_t(ma)["mo_ta"]
+    assert a in mo_ta and b in mo_ta and v["do"] == 20, (ma, a, b)

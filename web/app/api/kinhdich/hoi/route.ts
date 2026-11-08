@@ -23,6 +23,8 @@ const Input = z.object({
   phuong_mai_hoa: z.enum(["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]).optional(),
   /** UI-KD "Xem lại": giờ GIEO (giờ Việt Nam, không múi) để Lục Hào đọc theo ngày gieo, không theo ngày xem. */
   thoi_diem: z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/).optional(),
+  /** KD-V3 hướng C: AI diễn đạt riêng phần trả lời (engine kiểm; thiếu khoá → bản mẫu). */
+  dien_dat: z.boolean().optional(),
 }).strict();
 
 // SAO-2: hạn mức câu miễn phí / trừ Sao khi vượt (lib/cua-sao.ts, tắt mặc định).

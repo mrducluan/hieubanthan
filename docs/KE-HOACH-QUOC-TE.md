@@ -117,7 +117,7 @@ Mỗi mảng đưa lên ngay khi xong, không chờ 4–6 tuần như bản trư
 - Người bản xứ am hiểu Bát tự / phong thuỷ đứng tên "Editor / Reviewer", chỉ ở những trang người đó đã duyệt.
 - Trang chưa duyệt ghi "Hieuban editorial team".
 
-## 9. Việc của chủ dự án (chép sang `docs/VIEC-CUA-ANH.md` mục 4ac)
+## 9. Việc của chủ dự án (chép sang `docs/VIEC-CUA-ANH.md` mục 4af)
 
 1. Nối Search Console + GA4 của hieuban.com vào NotFair, hoặc gửi CSV quốc gia của 3 tháng gần nhất.
 2. Cho phép `trends.google.com` trong cài đặt mạng của môi trường, hoặc nối Google Ads Keyword Planner vào NotFair.

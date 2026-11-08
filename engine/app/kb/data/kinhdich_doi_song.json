@@ -88,7 +88,10 @@
         "thang tien",
         "duoc chon",
         "lam quan ly",
-        "lam truong"
+        "lam truong",
+        "cat nhac",
+        "de cu",
+        "len lam"
       ],
       "hanh_dong": {
         "thuan": [
@@ -165,7 +168,12 @@
         "chung von",
         "lien ket voi",
         "hop tac voi",
-        "ky voi"
+        "ky voi",
+        "gop von voi",
+        "hun von",
+        "lam chung voi",
+        "cung lam voi",
+        "ru nhau"
       ],
       "hanh_dong": {
         "thuan": [
@@ -204,7 +212,15 @@
         "doi lai tien",
         "lay lai tien",
         "vay tien",
-        "tien cho muon"
+        "tien cho muon",
+        "doi duoc",
+        "doi lai",
+        "no tien",
+        "no toi",
+        "khoan no",
+        "con no",
+        "tra lai tien",
+        "thieu tien toi"
       ],
       "hanh_dong": {
         "thuan": [
@@ -240,7 +256,11 @@
         "mua manh dat",
         "xuong tien mua",
         "coc nha",
-        "dat coc"
+        "dat coc",
+        "mua duoc nha",
+        "mua duoc can",
+        "co nha rieng",
+        "tau nha"
       ],
       "hanh_dong": {
         "thuan": [
@@ -472,8 +492,6 @@
         "ket hon",
         "hon nhan",
         "dam cuoi",
-        "ly than",
-        "ly hon",
         "ve chung",
         "ra mat",
         "vo chong"
@@ -498,6 +516,54 @@
       "cau_tiep": [
         "Hai chúng tôi nên bàn chuyện gì trước?",
         "Làm sao để hai gia đình hiểu nhau?"
+      ]
+    },
+    "hon_nhan_tt": {
+      "ten": "Vợ chồng lục đục, ly thân",
+      "dung_than": "Ứng",
+      "linh_vuc": "tinh_cam",
+      "hoi_dung_than": true,
+      "tu_khoa": [
+        "ly than",
+        "ly hon",
+        "cai nhau",
+        "luc duc",
+        "ngoai tinh",
+        "han gan",
+        "chien tranh lanh",
+        "mau thuan vo chong",
+        "bo chong",
+        "bo vo",
+        "quay ve voi chong",
+        "quay ve voi vo",
+        "giu gia dinh",
+        "cuu van",
+        "vo chong toi",
+        "chong toi co",
+        "vo toi co",
+        "nguoi thu ba",
+        "co bo"
+      ],
+      "hanh_dong": {
+        "thuan": [
+          "Hẹn một buổi nói chuyện không có con cái, không điện thoại.",
+          "Nói điều mình cần, không kể tội.",
+          "Chốt một việc nhỏ hai người cùng làm trong tuần này."
+        ],
+        "can_bang": [
+          "Viết ra điều còn giữ được và điều đã mất giữa hai người.",
+          "Hỏi một người lớn tuổi hai bên cùng tin.",
+          "Chưa nhắc tới chuyện tách ra khi đang giận."
+        ],
+        "can_chu_dong": [
+          "Giữ an toàn cho mình và con trước mọi thứ.",
+          "Tách nhau một thời gian ngắn có hẹn ngày gặp lại.",
+          "Ghi lại chuyện tiền bạc, giấy tờ chung cho rõ."
+        ]
+      },
+      "cau_tiep": [
+        "Hai chúng tôi nên bắt đầu nói chuyện từ đâu?",
+        "Người kia còn muốn giữ gia đình không?"
       ]
     },
     "gia_dinh": {
@@ -594,7 +660,12 @@
         "nam vien",
         "dieu tri",
         "hoi phuc",
-        "dau om"
+        "dau om",
+        "mo lan",
+        "ca mo",
+        "di mo",
+        "nhap vien",
+        "benh"
       ],
       "hanh_dong": {
         "thuan": [
@@ -914,6 +985,64 @@
         "Làm sao để hai gia đình hiểu nhau?"
       ],
       "goc": "hon_nhan"
+    },
+    "hon_nhan_tt_nu": {
+      "ten": "Vợ chồng lục đục, ly thân (người kia là nữ)",
+      "dung_than": "Thê Tài",
+      "linh_vuc": "tinh_cam",
+      "goc": "hon_nhan_tt",
+      "hoi_dung_than": false,
+      "tu_khoa": [],
+      "hanh_dong": {
+        "thuan": [
+          "Hẹn một buổi nói chuyện không có con cái, không điện thoại.",
+          "Nói điều mình cần, không kể tội.",
+          "Chốt một việc nhỏ hai người cùng làm trong tuần này."
+        ],
+        "can_bang": [
+          "Viết ra điều còn giữ được và điều đã mất giữa hai người.",
+          "Hỏi một người lớn tuổi hai bên cùng tin.",
+          "Chưa nhắc tới chuyện tách ra khi đang giận."
+        ],
+        "can_chu_dong": [
+          "Giữ an toàn cho mình và con trước mọi thứ.",
+          "Tách nhau một thời gian ngắn có hẹn ngày gặp lại.",
+          "Ghi lại chuyện tiền bạc, giấy tờ chung cho rõ."
+        ]
+      },
+      "cau_tiep": [
+        "Hai chúng tôi nên bắt đầu nói chuyện từ đâu?",
+        "Người kia còn muốn giữ gia đình không?"
+      ]
+    },
+    "hon_nhan_tt_nam": {
+      "ten": "Vợ chồng lục đục, ly thân (người kia là nam)",
+      "dung_than": "Quan Quỷ",
+      "linh_vuc": "tinh_cam",
+      "goc": "hon_nhan_tt",
+      "hoi_dung_than": false,
+      "tu_khoa": [],
+      "hanh_dong": {
+        "thuan": [
+          "Hẹn một buổi nói chuyện không có con cái, không điện thoại.",
+          "Nói điều mình cần, không kể tội.",
+          "Chốt một việc nhỏ hai người cùng làm trong tuần này."
+        ],
+        "can_bang": [
+          "Viết ra điều còn giữ được và điều đã mất giữa hai người.",
+          "Hỏi một người lớn tuổi hai bên cùng tin.",
+          "Chưa nhắc tới chuyện tách ra khi đang giận."
+        ],
+        "can_chu_dong": [
+          "Giữ an toàn cho mình và con trước mọi thứ.",
+          "Tách nhau một thời gian ngắn có hẹn ngày gặp lại.",
+          "Ghi lại chuyện tiền bạc, giấy tờ chung cho rõ."
+        ]
+      },
+      "cau_tiep": [
+        "Hai chúng tôi nên bắt đầu nói chuyện từ đâu?",
+        "Người kia còn muốn giữ gia đình không?"
+      ]
     }
   },
   "luc_thu": {

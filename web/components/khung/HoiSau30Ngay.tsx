@@ -18,7 +18,8 @@ export function HoiSau30Ngay({ homNay, moDun }: { homNay: string; moDun?: string
   const [xong, setXong] = useState(false);
   useEffect(() => { setG(denHanHoi(homNay, moDun)); }, [homNay, moDun]);
   if (!g) return null;
-  const laQue = g.loai_hoi === "que";
+  const laQue = g.loai_hoi === "que" || g.loai_hoi === "tarot";
+  const laTarot = g.loai_hoi === "tarot";
   const dsDaLam = laQue ? DA_LAM_QUE : DA_LAM, dsThay = laQue ? THAY_QUE : THAY;
   const tra = (thay: (typeof THAY)[number][0]) => {
     if (!daLam) return;
@@ -28,13 +29,13 @@ export function HoiSau30Ngay({ homNay, moDun }: { homNay: string; moDun?: string
   };
   return (
     <section aria-labelledby="hoi-sau-30" className="glass space-y-2 rounded-2xl p-5" data-testid="hoi-sau-30">
-      <h2 id="hoi-sau-30" className="flex items-center gap-2 text-xl"><History className="size-5 text-gold" aria-hidden /> {laQue ? `${g.sau_ngay} ngày trước bạn gieo quẻ này` : `${g.sau_ngay} ngày trước bạn thấy đúng điều này`}</h2>
+      <h2 id="hoi-sau-30" className="flex items-center gap-2 text-xl"><History className="size-5 text-gold" aria-hidden /> {laTarot ? `${g.sau_ngay} ngày trước bạn hỏi lá bài` : laQue ? `${g.sau_ngay} ngày trước bạn gieo quẻ này` : `${g.sau_ngay} ngày trước bạn thấy đúng điều này`}</h2>
       <p className="text-sm text-fg">“{g.nhan}”</p>
       {xong ? (
         <p className="flex items-center gap-2 text-sm text-jade" role="status"><CheckCircle2 className="size-4" aria-hidden /> Cảm ơn bạn — chỉ hai lựa chọn này được ghi lại, không kèm gì khác.</p>
       ) : (
         <>
-          <p className="text-sm text-fg-muted">{laQue ? "Bạn có làm theo hướng quẻ gợi không?" : "Bạn đã làm theo chưa?"}</p>
+          <p className="text-sm text-fg-muted">{laTarot ? "Bạn có làm theo hướng lá bài nghiêng về không?" : laQue ? "Bạn có làm theo hướng quẻ gợi không?" : "Bạn đã làm theo chưa?"}</p>
           <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Đã làm theo chưa">
             {dsDaLam.map(([m, t]) => (
               <button key={m} type="button" role="radio" aria-checked={daLam === m} onClick={() => setDaLam(m)}
@@ -54,7 +55,7 @@ export function HoiSau30Ngay({ homNay, moDun }: { homNay: string; moDun?: string
           <button type="button" onClick={() => { boQuaHoi(g.mau); setG(null); }} className="text-xs text-fg-faint underline-offset-4 hover:underline">Không hỏi lại điều này</button>
         </>
       )}
-      <p className="text-xs text-fg-faint">{laQue ? "Câu trả lời giúp xem lại lời quẻ nào thật sự ứng. Chỉ ghi mã lời đọc và hai lựa chọn — không câu hỏi, không sáu hào, không tên." : "Câu trả lời giúp xem lại lời khuyên nào thật sự có ích. Chỉ ghi mã hộp và hai lựa chọn — không tên, không nhà, không ngày sinh."}</p>
+      <p className="text-xs text-fg-faint">{laTarot ? "Câu trả lời giúp xem lại lời nghiêng nào của lá bài thật sự đúng. Chỉ ghi mã lời đọc và hai lựa chọn — không câu hỏi, không lá đã rút, không tên." : laQue ? "Câu trả lời giúp xem lại lời quẻ nào thật sự ứng. Chỉ ghi mã lời đọc và hai lựa chọn — không câu hỏi, không sáu hào, không tên." : "Câu trả lời giúp xem lại lời khuyên nào thật sự có ích. Chỉ ghi mã hộp và hai lựa chọn — không tên, không nhà, không ngày sinh."}</p>
     </section>
   );
 }

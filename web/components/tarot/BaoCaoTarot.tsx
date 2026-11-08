@@ -9,7 +9,8 @@ import { BaoCaoDoiSongView } from "@/components/luan-giai/BaoCaoDoiSong";
 import { BanTraiBai } from "./BanTraiBai";
 import { MAU_NGUYEN_TO, TEN_NGUYEN_TO, TEN_SUC, type BaoCaoTarot as Bc, type LaBoBai, type TraiBai } from "@/lib/tarot-chung";
 
-export function BaoCaoTarot({ bc, tb, boLa, ten, chanTrang }: { bc: Bc; tb: TraiBai; boLa: Record<string, LaBoBai>; ten: string; chanTrang?: React.ReactNode }) {
+export function BaoCaoTarot({ bc, tb, boLa, ten, chanTrang, cau }: { bc: Bc; tb: TraiBai; boLa: Record<string, LaBoBai>; ten: string; chanTrang?: React.ReactNode;
+  /** Câu hỏi người dùng gõ — chỉ có trên máy (engine không trả lại); hiện lại để bài đọc đứng cạnh đúng câu hỏi. */ cau?: string | null }) {
   const [chon, setChon] = useState<number | null>(null);
   const vt = bc.da_tinh.vi_tri;
   const bam = (i: number) => {
@@ -19,6 +20,11 @@ export function BaoCaoTarot({ bc, tb, boLa, ten, chanTrang }: { bc: Bc; tb: Trai
   const nt = bc.da_tinh.nguyen_to;
   return (
     <div data-testid="bao-cao-tarot">
+      {cau && (
+        <p className="mb-3 rounded-xl border border-line/60 bg-bg/40 px-4 py-2.5 text-sm text-fg-muted" data-testid="cau-hoi-da-hoi">
+          Bạn hỏi: <span className="text-fg">“{cau}”</span>
+        </p>
+      )}
       <div className="glass mb-8 rounded-2xl p-4 sm:p-6">
         <BanTraiBai tb={tb} la={vt.map((v) => ({ id: v.id, nguoc: v.nguoc }))} lat={vt.map(() => true)} boLa={boLa} pt={bc.da_tinh} chon={chon} onChon={bam} />
         <div className="mt-4 grid gap-3 text-sm sm:grid-cols-[1fr_auto] sm:items-start">
@@ -30,7 +36,7 @@ export function BaoCaoTarot({ bc, tb, boLa, ten, chanTrang }: { bc: Bc; tb: Trai
               ))}
               {nt.troi && <span className="text-fg">· trội {TEN_NGUYEN_TO[nt.troi]}</span>}
             </p>
-            <p className="mt-2 text-xs text-fg-faint">Đường vàng liền: hai lá hợp nhau · đường hổ phách đứt: hai lá xung nhau · mũi tên: hướng nhìn của nhân vật trên lá (Marseille). Chấm dưới lá: {TEN_SUC.tiep_suc} / {TEN_SUC.bi_kim}. Bấm một lá để tới hộp của nó.</p>
+            <p className="mt-2 text-xs text-fg-faint">Đường vàng liền: hai lá hợp nhau · đường hổ phách đứt: hai lá xung nhau · mũi tên: hướng nhìn của nhân vật trên lá (Marseille). Chấm dưới lá: {TEN_SUC.tiep_suc} / {TEN_SUC.bi_kim}. Nhãn <b className="text-[#f0b35c]">NGƯỢC</b>: lá rút ngược — đọc nghĩa ngược (năng lượng của lá bị chặn hoặc quay vào trong), không phải điềm xấu. Bấm một lá để tới hộp của nó.</p>
           </div>
           {chon !== null && vt[chon] && (
             <p className="rounded-lg border border-line/60 bg-bg/40 px-3 py-2 text-sm" data-testid="la-dang-chon">
@@ -39,7 +45,7 @@ export function BaoCaoTarot({ bc, tb, boLa, ten, chanTrang }: { bc: Bc; tb: Trai
           )}
         </div>
       </div>
-      <BaoCaoDoiSongView bc={bc} ten={ten} nhan="Trải bài của bạn"
+      <BaoCaoDoiSongView bc={bc} ten={ten} nhan="Trải bài của bạn" moSan={["cau_chuyen"]}
         hanhDong={<Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> In / lưu PDF</Button>} chanTrang={chanTrang} />
     </div>
   );

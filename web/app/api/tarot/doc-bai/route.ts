@@ -8,7 +8,7 @@ import { themHocLuanGiai } from "@/lib/hoc-tuvi";
 const MA = z.string().regex(/^[a-z0-9_]{2,40}$/);
 const La = z.object({ id: z.string().regex(/^[a-z]{3,4}_[a-z0-9_]{1,12}$/), nguoc: z.boolean().optional() }).strict();
 const Input = z.object({
-  trai_bai: z.enum(["mot_la", "ba_la_thoi_gian", "ba_la_loi_khuyen", "nam_la", "celtic"]),
+  trai_bai: z.enum(["mot_la", "ba_la_thoi_gian", "ba_la_loi_khuyen", "nam_la", "celtic", "hai_lua_chon", "khi_nao"]),
   la: z.array(La).min(1).max(10),
   cau_hoi: z.string().trim().max(500).optional(),
   chu_de: z.string().regex(/^[a-z_]{2,30}$/).optional(),
@@ -17,6 +17,8 @@ const Input = z.object({
   gioi_tinh: z.enum(["nam", "nu"]).optional(),
   tra_loi_nhan_tuong: z.record(MA, MA).refine((o) => Object.keys(o).length <= 60).optional(),
   bo_dai_dien: z.enum(["gay", "coc", "kiem", "tien"]).optional(),
+  // TR-3: AI diễn đạt lại chương "Câu trả lời" (engine kiểm; không khoá / hết lượt → bản mẫu). Câu hỏi KHÔNG vào lời nhắc AI.
+  dien_dat: z.boolean().optional(),
 }).strict();
 
 export async function POST(req: Request) {

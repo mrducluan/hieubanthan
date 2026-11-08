@@ -152,6 +152,8 @@ def phan_tich(trai_bai: str, la: list[dict]) -> dict:
         h = _la(v["id"])["huong_nhin"]
         if h is None:
             continue
+        if v["nguoc"]:
+            h = -h          # lá ngược: hình xoay 180°, nhân vật quay mặt về phía ngược lại so với hình gốc
         truc = list(tb.get("truc_nhin") or [])
         tren_truc = v["vi_tri"] in truc
         toi = None
@@ -159,7 +161,7 @@ def phan_tich(trai_bai: str, la: list[dict]) -> dict:
             # Trục nhìn (Marseille) = trục thời gian của trải bài: quay trái = về lá đứng trước (quá khứ), nhìn phải = tới lá sau.
             j = truc.index(v["vi_tri"]) + h
             toi = truc[j] if 0 <= j < len(truc) else None
-        huong_nhin.append({"vi_tri": v["vi_tri"], "huong": h, "toi": toi, "tren_truc": tren_truc})
+        huong_nhin.append({"vi_tri": v["vi_tri"], "huong": h, "toi": toi, "tren_truc": tren_truc, "lat": v["nguoc"] and h != 0})
     return {"trai_bai": trai_bai, "vi_tri": vi_tri, "ke_can": ke_can,
             "nguyen_to": {"dem": dem, "troi": troi, "thieu": thieu},
             "an_chinh": {"so": so_an, "tong": tong, "ti_le": round(ti_le, 2), "muc": muc_an},
@@ -191,14 +193,23 @@ def _cua_so(tu: list[int], den: list[int], ngay: dt.date) -> tuple[dt.date, dt.d
 
 
 def khoang_thoi_gian(ma: str, ngay_xem: dt.date) -> dict:
-    """Nhịp gợi ý của một lá: decan (lá 2–10) → cửa sổ ~10 ngày; ẩn chính theo cung → cả cung; theo hành tinh → chỉ nhịp;
-    Át / hoàng gia → nhịp của bộ."""
+    """Nhịp gợi ý của một lá: decan (lá 2–10) → cửa sổ ~10 ngày; Hiệp sĩ / Hoàng hậu / Vua → vùng 30° Book T (20° cung này
+    tới 20° cung sau, ~1 tháng); ẩn chính theo cung → cả cung; theo hành tinh → chỉ nhịp; Át / Tiểu đồng → nhịp của bộ."""
     l = _la(ma)
     d = decan(ma)
     bo = kb.bo().get(l["bo"] or "") or {}
     if d:
         a, b, trong = _cua_so(d["tu"], d["den"], ngay_xem)
         return {"loai": "decan", "cung": d["cung"], "so": d["so"], "hanh_tinh": d["hanh_tinh"], "tu": a, "den": b, "dang_trong": trong,
+                "nhip": bo.get("nhip", ""), "sau_ngay": (a - ngay_xem).days if not trong else 0}
+    vg = l.get("vung_book_t")
+    if vg:
+        # Book T: lá hoàng gia cai từ 20° cung này tới 20° cung sau = decan 3 của cung này + decan 1–2 của cung sau.
+        ds = list(kb.cung_hoang_dao())
+        c1 = kb.cung_hoang_dao()[vg["tu_cung"]]
+        c2 = kb.cung_hoang_dao()[ds[(ds.index(vg["tu_cung"]) + 1) % 12]]
+        a, b, trong = _cua_so(list(c1["decan"][2][0]), list(c2["decan"][1][1]), ngay_xem)
+        return {"loai": "hoang_gia", "cung": vg["tu_cung"], "cung_sau": ds[(ds.index(vg["tu_cung"]) + 1) % 12], "tu": a, "den": b, "dang_trong": trong,
                 "nhip": bo.get("nhip", ""), "sau_ngay": (a - ngay_xem).days if not trong else 0}
     ct = l.get("chiem_tinh") or {}
     if ct.get("loai") == "cung":
@@ -211,6 +222,26 @@ def khoang_thoi_gian(ma: str, ngay_xem: dt.date) -> dict:
     if l["bo"]:
         return {"loai": "bo", "bo": l["bo"], "tu": None, "den": None, "dang_trong": None, "nhip": bo.get("nhip", ""), "sau_ngay": None}
     return {"loai": "nguyen_to", "tu": None, "den": None, "dang_trong": None, "nhip": "không có nhịp riêng — theo nhịp của các lá bên cạnh", "sau_ngay": None}
+
+
+# ------------------------------------------------------------------ nghiêng của câu trả lời
+_NGHIENG = {"tien": 1, "dieu_kien": 0, "cho": -1}
+NGUONG_NGHIENG = 0.34
+
+
+def nghieng_la(ma: str, nguoc: bool) -> str:
+    """tien | dieu_kien | cho — lá (xuôi / ngược) nghiêng về đâu với câu 'có nên / có thành không' (KB `nghieng`, theo lối
+    đọc có / không phổ biến của Waite)."""
+    return _la(ma)["nghieng"]["n" if nguoc else "x"]
+
+
+def nghieng_tong(ds: list[tuple[str, float, str]]) -> dict:
+    """[(nghiêng của lá, trọng số vị trí, sức của lá)] → {nghieng, diem}. Lá được tiếp sức nặng thêm 1/4, bị kìm nhẹ đi 1/4
+    (Book T: phẩm giá làm lá mạnh / yếu lên, không đổi chiều). Trung bình có trọng số ≥ +0,34 → tien, ≤ −0,34 → cho."""
+    tong_w = sum(w for _, w, _ in ds) or 1
+    diem = sum(_NGHIENG[n] * w * (1.25 if s == "tiep_suc" else 0.75 if s == "bi_kim" else 1) for n, w, s in ds) / tong_w
+    diem = round(diem, 3)
+    return {"nghieng": "tien" if diem >= NGUONG_NGHIENG else "cho" if diem <= -NGUONG_NGHIENG else "dieu_kien", "diem": diem}
 
 
 # ------------------------------------------------------------------ lá ngày, lá đại diện

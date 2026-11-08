@@ -100,6 +100,7 @@ export interface ChuongDoiSongMo {
   ma: string; tieu_de: string; khoa?: false;
   cau_hoi?: string; muc?: Muc; nhan_muc?: string; tom_tat?: string;
   hop?: Hop[]; doan: string[]; can_cu?: string[]; cau_tu_soi?: string;
+  /** TR-4: lời kể (đoạn) đứng trước các hộp. */ doan_truoc?: boolean;
   /** EN-2 mục 5: lời theo tuổi + hoàn cảnh (dòng "Với bạn lúc này", ngoài danh sách hộp — không tranh trần 6 hộp). */
   loi_hoan_canh?: Hop;
   /** TV-YBS: khung gập "Góc nhìn khác" (ý riêng trường phái — tham khảo), ngoài danh sách hộp. */
@@ -129,7 +130,7 @@ export interface BaoCaoDoiSong {
   phai?: string;
   trang_thai: string;
   ket: string;
-  dien_dat?: "ai" | "tron" | "mau";
+  dien_dat?: "ai" | "tron" | "mau" | "tra_loi";
   so_khoa?: number;
   cot_loi?: Hop[];
   thoi_gian_bieu?: MocDaiHan[];

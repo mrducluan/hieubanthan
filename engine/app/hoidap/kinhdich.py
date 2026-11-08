@@ -471,9 +471,15 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
                                                               "linh_vuc")}, "muc": [], "can_them": ["lam_ro"],
                              "mau": lr["cau_hoi"], "luu_y": None})
             return _ket_som(pl, goi, lr["cau_hoi"], can_lam_ro=lr, lich=lich)
-        # dụng thần theo chủ đề khi phân loại chỉ rơi về hào Ứng, hoặc khi người dùng chọn chủ đề rõ
-        if pl["truong_phai"] == "luc_hao" and cd.get("dung_than") and (chu_de or pl["dung_than"] in (None, "Ứng")):
-            pl["dung_than"] = cd["dung_than"]
+        # KD-V3: dụng thần theo VIỆC + VAI (Tăng San Bốc Dịch) — khoản tiền → Thê Tài dù người nợ là bạn thân; con thi →
+        # hào bài thi (Phụ Mẫu), con là hào phụ. Chủ đề người dùng tự chọn (chip, kể cả biến thể nữ / nam) đi qua cùng bảng.
+        if pl["truong_phai"] == "luc_hao":
+            from app.luangiai import kinhdich_tra_loi as ktl  # noqa: PLC0415
+            hc = ktl.hieu_cau(pl["cau_chuan_hoa"], cau_hoi, ma_cd)
+            pl["_hieu_cau"] = hc                     # doc_que dùng lại (khoá "_" không vào gói phân loại trả ra)
+            dt_viec = ktl.dung_than(hc)
+            if chu_de or ma_cd != "khac" or pl["dung_than"] in (None, "Ứng"):
+                pl["dung_than"] = dt_viec.get("chinh") or cd.get("dung_than") or pl["dung_than"]
         if gia_tri_hao is not None:
             vals, nguon = list(gia_tri_hao), "gieo tay (người dùng nhập)"
         elif pl["truong_phai"] == "mai_hoa" and cach_ra_que == "mai_hoa_so":

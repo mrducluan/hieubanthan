@@ -90,3 +90,102 @@ Mạng của phiên chặn mọi host sách (DNS) kể cả tầng WebFetch → 
 Test `engine/tests/test_tarot_nguon.py` khoá: mọi câu `trich` trong KB là chuỗi con nguyên văn của fixture (78 Waite + 52 Book T + 78 Mathers); tên Book T khớp; bảng 36 decan = vòng Chaldea từ Hoả tinh ở Bạch Dương decan 1, lá số = 2 + 3 × (thứ tự cung trong nhóm nguyên tố) + decan (đối chiếu độc lập với kho mã MIT `hampshirecottage-ai/ootk-thoth-engine`, chỉ đọc mã — không chép); luật phẩm giá đúng câu Book T.
 
 **Sửa theo nguồn:** 10 tên Book T (`coc_10` "Perpetual" → "Perfected Success"; tên hoàng gia lấy đủ hai vế), 7 lời Waite ẩn chính (Pháp Sư ngược, Hoàng Hậu ngược, Hoàng Đế, Giáo Hoàng, Cỗ Xe, Ẩn Sĩ, Ác Quỷ), và **luật phẩm giá**: Book T viết "Swords are friendly with Cups and Wands; Wands are friendly with Swords and Pentacles" — tức mỗi nguyên tố hợp với HAI nguyên tố không đối nghịch; bản đầu ghi Lửa–Đất, Nước–Khí là trung tính (sai). Golden `tarot.json` và mã kiểm chứng `ds.tarot.dong_chay.*` đổi có chủ đích (chưa có phiếu nào trên production).
+
+## 8. TR-2 — trả lời đúng câu hỏi (2026-11-07)
+
+**Ca chủ dự án báo**: "Tôi có nên thay đổi công việc mới không?", trải 3 lá Quá khứ – Hiện tại – Sắp tới = 6 Tiền ngược · Pháp Sư ·
+Hiệp sĩ Kiếm ngược → bài đọc chung chung, không trả lời; hai lá xoay ngược làm "6" trông thành "9". Audit tìm ra:
+
+| # | Lỗ hổng | Sửa |
+|---|---|---|
+| 1 | Câu hỏi chỉ dùng để đoán lĩnh vực; không có lớp nhận ra "có nên / khi nào / A hay B / làm sao / vì sao" | RULES `luangiai/tarot_cau_hoi.py` (9 ý định + 22 loại việc + lĩnh vực + hai lựa chọn), chương mới **"Câu trả lời cho câu hỏi của bạn"** đứng đầu |
+| 2 | Lá ngược in nghĩa lĩnh vực của lá XUÔI ("6 Tiền ngược… Trong công việc: thưởng, tăng lương, sếp công bằng") | KB `linh_vuc_nguoc` 78 lá × 4 lĩnh vực |
+| 3 | Mức hộp = sức lá bên cạnh → Hiệp sĩ Kiếm NGƯỢC được chip "Thuận" | Mức theo **nghiêng** của lá (KB `nghieng` x/n, lối có–không Waite); sức chỉ làm nặng/nhẹ ¼ |
+| 4 | "Lá bên cạnh tiếp sức — mặt sáng dễ hiện" cho cả lá ngược; hộp dòng chảy "lá này bị kìm" không nói lá nào, ngược hộp lá giữa | Lời riêng cho lá ngược; dòng chảy nêu đúng lá, nói lá giữa triệt tiêu |
+| 5 | Lá hoàng gia ghép ngược Book T: "King" cưỡi ngựa của Golden Dawn = **Hiệp sĩ** Waite (trường `la_rws` của chính bản Book T) — KB gán cho Vua | Đổi lớp Thoth / Book T / nguyên tố phụ giữa Hiệp sĩ ↔ Vua (4 bộ); test tra Book T theo `la_rws` |
+| 6 | Nhịp thời gian lá hoàng gia chỉ "ngày tới tuần" | Vùng 30° Book T (20° cung này → 20° cung sau, nguyên văn trong bản chép; test kiểm tên hai cung) |
+| 7 | Hướng nhìn không lật khi lá ngược | Lá ngược → nhân vật quay mặt ngược lại (`lat`) |
+| 8 | Câu hỏi không qua bộ chặn an toàn ở bài đọc | `_chan` dùng MỘT bộ chặn chung; khủng hoảng → lời hỗ trợ, không nghiêng |
+| 9 | Hiện lá ngược bằng xoay cả lá → số, tên lộn ngược | Chỉ xoay HÌNH, chữ giữ chiều đọc, nhãn **NGƯỢC** + "· ngược" dưới lá |
+
+**Ba cách tiếp cận đã cân**: (A, **chọn**) lớp hiểu câu hỏi tất định + vai trò vị trí theo trải bài + nghiêng từng lá có trọng số;
+(B) đếm lá xuôi/ngược kiểu "yes/no tarot" — nhanh nhưng phán, bỏ vị trí và lĩnh vực; (C) để LLM viết câu trả lời — trái
+tầng NARRATIVE (không được thêm dữ kiện), tốn hạn mức, vẫn cần lớp A làm gói ngữ cảnh. A làm nền; bật diễn đạt AI sau vẫn dùng A.
+
+**Cách tính nghiêng** (`calc.nghieng_tong`): mỗi trải bài có `vai_tra_loi` trong KB (vị trí trả lời + trọng số, vị trí điều
+kiện, lời khuyên, kết cục). Lá "tiến" +1, "có điều kiện" 0, "chưa nên vội" −1; lá được tiếp sức ×1,25, bị kìm ×0,75; trung bình
+≥ +0,34 → nghiêng có, ≤ −0,34 → chưa nên vội. Hai lựa chọn: đường B − đường A, chênh ≥ 0,5 mới nói đường nào nghiêng hơn.
+Ca của anh: (Pháp Sư +1 ×1 + Hiệp sĩ Kiếm ngược −1 ×2 ×1,25) / 3 = −0,5 → **Chưa nên vội**, kèm "có hợp đồng mới trên giấy
+trước khi nộp đơn nghỉ · viết 3 lý do đi / ở · quỹ 3–6 tháng".
+
+**Trải bài mới "Hai lựa chọn"** (5 lá: bạn lúc này · đường A giữ như cũ · đường B thay đổi · điều chưa thấy · lời khuyên) — web
+gợi ý khi gõ câu "có nên" / "A hay B" (`/v1/tarot/hieu-cau`, chỉ trả mã + nhãn danh mục, không trả lại câu).
+
+**Bộ câu hỏi**: `fixtures/cau_hoi/tarot_y_dinh_dev.jsonl` (260 câu, agent viết độc lập — dùng để chỉnh luật) và
+`tarot_y_dinh_holdout.jsonl` (150 câu, agent khác viết, **đóng băng**, chỉ xem tổng). Ý định: dev 99,2 % · holdout 83,3 % → 89,3 %
+(sửa lỗi tổng quát "liệu … có … không" bị xếp thành "có nên", câu dạng hỏi không khớp mẫu thì vẫn đọc như câu hỏi); lĩnh vực:
+dev 95,8 % · holdout 83,3 %. Sàn trong test: dev ≥ 97 % / 92 %, holdout ≥ 87 % / 80 %.
+
+**Nội dung mới (nháp ban biên tập, chờ chuyên gia duyệt)**: `linh_vuc_nguoc` (312 câu), `tra_loi` x/n (156), `nghieng` x/n,
+`viec_truoc_khi_quyet` theo 22 loại việc, mẫu `mau.tra_loi`. Mã kiểm chứng: thêm 15 mã `ds.tarot.tra_loi.*`, không mất mã cũ.
+
+**Ý tưởng tiếp**: chủ dự án duyệt cả 4 → đã làm ở TR-3 (mục 9).
+
+## 9. TR-3 — bốn ý tưởng sau TR-2 (chủ dự án duyệt 2026-11-07)
+
+| # | Ý tưởng | Làm thế nào | Khâu / đo |
+|---|---|---|---|
+| 1 | **AI diễn đạt chương trả lời** | `tarot.dien_dat_tra_loi`: AI chỉ viết lại CHƯƠNG "Câu trả lời" thành đoạn liền mạch; nguồn = chính các hộp của chương (lớp A tất định) + đoạn chương — **không câu người dùng gõ** (test khoá), không ngày sinh. Đi qua `luan_giai_van._mot_chuong` → `ai_goi.goi_chat` (RL-1, nhớ theo băm) + bộ kiểm chung `kiem_ai` (số lạ, thuật ngữ lạ, cụm cấm, câu ý mới, độ dài). Thiếu khoá / hết lượt / không qua kiểm → bản mẫu. Chỉ khi có câu hỏi và không bị bộ chặn an toàn; web gửi `dien_dat: true`, đầu bài ghi "Phần trả lời câu hỏi được diễn đạt tự động…". Các chương khác không gọi AI. | QUAY LẠI · `che_do_van` |
+| 2 | **Hỏi lại sau 30 ngày** | Đọc bài xong với câu "có nên / A hay B / có thành / khi nào / làm sao" → máy người dùng nhớ MÃ hộp trả lời `ds.tarot.tra_loi.<ý định>.<nghiêng>` + phái + nhãn "Chưa nên vội — đổi sang công việc mới" (không câu hỏi, không lá) vào hàng Q7 (`loai_hoi: tarot`); ≥ 30 ngày sau Hôm nay và `/tarot` hỏi "Bạn có làm theo hướng lá bài nghiêng về không? · Việc đó giờ ra sao?" → phiếu `kiem_chung_sau` (0022, không migration mới). Xem lại trải bài cũ không ghi lại. | QUAY LẠI + HỌC · `feedback_submitted{sau_30, loai_hoi: tarot}` |
+| 3 | **Thẻ "Câu trả lời của lá bài"** | Mã HMAC miền `tarot|` (`kyMaTarot`): máy chủ gọi `/v1/tarot/the` (chỉ MÃ ý định / loại việc / lĩnh vực theo danh mục + lá đã rút; mã lạ → 422) để đọc lại nghiêng + tên lá + vị trí rồi ký — client không tự khai. Trang `/the/tarot/[mã]` (noindex) vẽ lại các lá bằng SVG của site + lời mời "Rút bài cho việc của bạn" `?tu=ta.`; ảnh `/og/tarot` 1200×630 + dọc 1080×1350, QR + hieuban.com. | MỜI · `share_created{tarot}` → `share_clicked{ta}` → `referral_signup` |
+| 4 | **Trải bài "Khi nào"** (3 lá) | Điều cần xong trước · Dấu hiệu đã tới lúc · Lá nhịp thời gian. Câu "khi nào / bao giờ / bao lâu" gợi trải bài này. Hộp nhịp: lá kết cục trước, không có khoảng ngày thì lá trả lời kế tiếp; khoảng theo decan (lá 2–10, ~10 ngày), vùng 30° Book T (Hiệp sĩ / Hoàng hậu / Vua, ~1 tháng), cung của ẩn chính; không có (Át, Tiểu đồng, ẩn chính theo hành tinh) → nói rõ "không gắn khoảng ngày", không bịa ngày. Trải bài này luôn đọc như câu thời điểm. | QUAY LẠI |
+
+Kèm: web bỏ qua trải bài engine chưa có (deploy lệch — bản web mới đọc bộ bài cũ không còn vỡ trang). Engine 9.383 test + e2e Tarot / Kinh Dịch / Hôm nay 30/30.
+
+## 10. TR-4 — bài đọc bám câu hỏi từ đầu tới cuối (chủ dự án giao 2026-11-08)
+
+Sau TR-3, chương 1 đã trả lời đúng câu hỏi, nhưng từ chương 2 bài đọc quay về lời chung: "Nguyên tố trội: Khí", "Việc nên
+làm: trước cuộc tranh luận gần nhất…" cho câu hỏi đổi việc; nhiều thuật ngữ (decan, 20° Kim Ngưu, phẩm giá nguyên tố,
+"triệt tiêu") ở chữ hiển thị; một ý lặp hai lần; hai lá "đẩy nhau mạnh lên" được gọi là "chỗ chảy dễ" dù một lá đang ngược.
+
+**Ba cách tiếp cận đã cân** (tiêu chí: người đọc thấy đúng mình, hiểu ngay, muốn đọc hết):
+
+| | Cách | Được | Mất | Kết luận |
+|---|---|---|---|---|
+| A | AI diễn đạt cả bài | Văn liền mạch | Nguồn vẫn là lời chung → AI chỉ làm lời chung trơn hơn; mỗi bài nhiều lượt AI (hạn mức RL-1, chi phí); bộ kiểm `kiem_ai` loại nhiều chương → bài nửa AI nửa mẫu; trái tinh thần "AI chỉ diễn đạt" khi phải "nối" ý | Loại |
+| B | **Bài đọc kể theo câu hỏi, tất định** | Mọi chương gắn với điều được hỏi bằng nghĩa có sẵn của lá trong đúng lĩnh vực; lời thường; không tốn lượt AI; kiểm chứng được từng hộp | Cần thêm KB việc theo lĩnh vực (624 câu nháp) | **Chọn** |
+| C | Cá nhân hoá theo ngày sinh ("lá bản mệnh") | Cảm giác "của riêng tôi" | Công thức hiện đại không có trong sách phạm vi công cộng; lệch khỏi câu hỏi; CLAUDE.md đã từ chối lấy số từ ngày sinh khi không có nguồn (P8) | Loại |
+
+**Đã làm (cách B):**
+1. **Chương mới "Câu chuyện các lá kể"** (`luangiai/tarot._chuong_cau_chuyen`, ngay sau "Câu trả lời", web mở sẵn): kể các lá
+   theo thứ tự trên bàn bằng nghĩa của lá TRONG lĩnh vực được hỏi, đúng chiều xuôi / ngược (Celtic Cross chỉ kể 5 vị trí
+   cốt truyện `trai_bai.celtic.cau_chuyen`); một **câu nối** theo nghiêng lá đầu → lá cuối (9 mẫu, `mau.cau_chuyen.noi`;
+   trải bài Hai lựa chọn theo phép so đường B − A dùng chung với câu trả lời — `_so_hai_duong`); **Điểm tựa** (lá "tiến"
+   nặng nhất) và **Chỗ cần canh** (lá "chưa nên vội" nặng nhất), mỗi hộp kèm câu tự hỏi của CHÍNH lá (lá ngược dùng câu
+   "Hỏi mình" của nghĩa ngược) + việc theo lĩnh vực. Không có lá "tiến" thì không bịa điểm tựa. Câu nối vào "Điều quan
+   trọng nhất". Câu bị bộ chặn an toàn → không có chương này. Mã `ds.tarot.cau_chuyen.<trải bài>.noi.<đầu>_<cuối>` /
+   `.tua.<lá>.<chiều>` / `.canh.<lá>.<chiều>` (chỉ thêm mã, không mất mã cũ).
+2. **Việc nên làm trong 72 giờ theo lĩnh vực**: KB `la.<id>.viec_lv.{x,n}.{tinh_cam,cong_viec,tien_bac,suc_khoe}` (624 câu,
+   nháp ban biên tập, mỗi câu một việc làm được trong 3 ngày, đúng nghĩa lá trong lĩnh vực và chiều lá; tiền bạc không
+   khuyên mua bán / đầu tư; sức khoẻ không tên bệnh). Có lĩnh vực → dùng `viec_lv` (mã thêm đuôi lĩnh vực); không có →
+   việc chung như cũ.
+3. **Lời thường**: chữ hiển thị không còn decan / độ hoàng đạo / Golden Dawn / Book T / phẩm giá / Marseille / Thoth /
+   B.O.T.A. / "triệt tiêu" — tất cả ở "Vì sao nói vậy" (test quét 5 trải bài × xuôi / ngược). Dòng chảy: "kéo hai hướng /
+   đẩy nhau mạnh lên / đỡ nhau"; hai lá cùng sức mà một lá đang lệch → "mặt lệch cũng được đẩy theo, dựa vào lá kia để kéo
+   về" (không còn gọi là chỗ chảy dễ). Nhịp thời gian: "Lá X đi theo nhịp ngày tới tuần. Trong năm, khoảng 11/05–10/06 là
+   lúc chuyện kiểu này dễ rõ nhất." Bỏ đoạn lặp ý "ẩn chính".
+4. **Nghiêng đã xét lại theo Waite 1910** (3 chỗ agent ghi cần xem ở TR-2): Ác Quỷ ngược → **có điều kiện** (Waite: "Evil
+   fatality, weakness, pettiness, blindness"; lối hiện đại đọc là nới xích → giữa hai cách là "được, nếu đi từng bước");
+   4 Gậy ngược giữ **tiến** (Waite: "The meaning remains unaltered"); 8 Cốc xuôi giữ **có điều kiện** (Waite: "the decline
+   of a matter"). Test khoá theo nguyên văn fixture.
+
+5. **Web**: chương kể chuyện mở sẵn (`BaoCaoDoiSongView moSan`) và đặt lời kể TRƯỚC các hộp (cờ chương `doan_truoc`).
+6. **Sửa kèm**: hỏi đáp Tarot "lá X ngược trong công việc" trả nghĩa XUÔI của lĩnh vực — nay đọc `linh_vuc_nguoc` như bài đọc,
+   "Việc nên làm" theo `viec_lv`.
+
+**Mã kiểm chứng**: thêm `ds.tarot.cau_chuyen.*` và `ds.tarot.viec.<lá>.<chiều>.<lĩnh vực>`. Mã `ds.tarot.viec.<lá>.<chiều>`
+(không đuôi) chỉ còn ở bài không có lĩnh vực — bài có lĩnh vực đổi sang mã có đuôi **có chủ đích**: chữ trong hộp đã khác,
+phiếu cũ không nên gắn vào câu mới (golden sinh lại, 7 mã mẫu đổi).
+
+AI vẫn chỉ diễn đạt chương "Câu trả lời" (TR-3). Không migration, không dependency, không đổi phép tính → không tăng
+`ENGINE_VERSION`; **deploy engine trước web** (web cũ hiện chương mới như mọi chương khác; web mới mở sẵn nó).
