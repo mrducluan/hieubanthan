@@ -1,0 +1,50 @@
+{"cau": "Tôi có nên nhận lời làm quản lý không?", "kieu": "co_nen", "vai": "toi", "chu_de": "thang_tien", "dung_than": "Quan Quỷ"}
+{"cau": "Có nên chuyển việc trong năm nay?", "kieu": "co_nen", "vai": "toi", "chu_de": "chuyen_viec", "dung_than": "Quan Quỷ"}
+{"cau": "Tôi có nên chủ động nói chuyện lại với bạn cũ?", "kieu": "co_nen", "vai": "ban_be", "chu_de": "ban_be", "dung_than": "Huynh Đệ"}
+{"cau": "Vợ chồng tôi dạo này hay cãi nhau, có nên ly thân một thời gian không?", "kieu": "co_nen", "vai": "vo_chong", "chu_de": "hon_nhan_tt", "dung_than": "Ứng"}
+{"cau": "Con tôi năm nay thi đại học có đậu trường mong muốn không?", "kieu": "ket_qua", "vai": "con", "chu_de": "thi_cu", "dung_than": "Phụ Mẫu"}
+{"cau": "Tôi đang bị bạn thân nợ 50 triệu, có đòi được không?", "kieu": "ket_qua", "vai": "ban_be", "chu_de": "tien_no", "dung_than": "Thê Tài"}
+{"cau": "Anh ấy có thật lòng với tôi không?", "kieu": "nguoi_kia", "vai": "nguoi_yeu", "chu_de": "tinh_cam_nam", "dung_than": "Quan Quỷ"}
+{"cau": "Người yêu cũ có quay lại với tôi không?", "kieu": "nguoi_kia", "vai": "nguoi_yeu", "chu_de": "tinh_cam", "dung_than": "Ứng"}
+{"cau": "Khi nào tôi tìm được việc mới?", "kieu": "khi_nao", "vai": "toi", "chu_de": "chuyen_viec", "dung_than": "Quan Quỷ"}
+{"cau": "Tôi nên làm gì để được sếp cất nhắc?", "kieu": "cach_lam", "vai": "sep", "chu_de": "thang_tien", "dung_than": "Quan Quỷ"}
+{"cau": "Mở quán cà phê lúc này có ổn không?", "kieu": "co_nen", "vai": "toi", "chu_de": "kinh_doanh", "dung_than": "Thê Tài"}
+{"cau": "Hợp tác với đối tác này có lợi không?", "kieu": "ket_qua", "vai": "doi_tac", "chu_de": "hop_tac", "dung_than": "Ứng"}
+{"cau": "Đối tác có đang giấu tôi điều gì không?", "kieu": "nguoi_kia", "vai": "doi_tac", "chu_de": "hop_tac", "dung_than": "Ứng"}
+{"cau": "Căn nhà đang xem có nên xuống tiền mua không?", "kieu": "co_nen", "vai": "toi", "chu_de": "mua_nha", "dung_than": "Phụ Mẫu"}
+{"cau": "Bán mảnh đất này năm nay có được giá không?", "kieu": "ket_qua", "vai": "toi", "chu_de": "ban_nha", "dung_than": "Thê Tài"}
+{"cau": "Có nên đổi xe mới trong năm nay?", "kieu": "co_nen", "vai": "toi", "chu_de": "xe_co", "dung_than": "Phụ Mẫu"}
+{"cau": "Kỳ thi chứng chỉ tháng 12 này tôi có qua không?", "kieu": "ket_qua", "vai": "toi", "chu_de": "thi_cu", "dung_than": "Phụ Mẫu"}
+{"cau": "Hồ sơ visa của tôi có được duyệt không?", "kieu": "ket_qua", "vai": "toi", "chu_de": "giay_to", "dung_than": "Phụ Mẫu"}
+{"cau": "Bao giờ sổ đỏ nhà tôi mới làm xong?", "kieu": "khi_nao", "vai": "toi", "chu_de": "giay_to", "dung_than": "Phụ Mẫu"}
+{"cau": "Cô ấy còn thương tôi không?", "kieu": "nguoi_kia", "vai": "nguoi_yeu", "chu_de": "tinh_cam_nu", "dung_than": "Thê Tài"}
+{"cau": "Có nên cưới vào cuối năm nay không?", "kieu": "co_nen", "vai": "toi", "chu_de": "hon_nhan", "dung_than": "Ứng"}
+{"cau": "Chồng tôi có còn muốn giữ gia đình không?", "kieu": "nguoi_kia", "vai": "vo_chong", "chu_de": "hon_nhan_tt_nam", "dung_than": "Quan Quỷ"}
+{"cau": "Bố mẹ tôi có nên bán nhà về quê không?", "kieu": "co_nen", "vai": "cha_me", "chu_de": "ban_nha", "dung_than": "Thê Tài"}
+{"cau": "Mẹ tôi mổ lần này có ổn không?", "kieu": "ket_qua", "vai": "cha_me", "chu_de": "suc_khoe", "dung_than": "Phụ Mẫu"}
+{"cau": "Con tôi dạo này có ổn không?", "kieu": "ket_qua", "vai": "con", "chu_de": "con_cai", "dung_than": "Tử Tôn"}
+{"cau": "Tôi có nên đi làm xa nhà một thời gian không?", "kieu": "co_nen", "vai": "toi", "chu_de": "di_xa", "dung_than": "Thế"}
+{"cau": "Chiếc nhẫn tôi đánh rơi hôm qua có tìm lại được không?", "kieu": "ket_qua", "vai": "toi", "chu_de": "mat_do", "dung_than": "Thê Tài"}
+{"cau": "Vụ kiện đòi lại tiền cọc có thắng không?", "kieu": "ket_qua", "vai": "toi", "chu_de": "tranh_chap", "dung_than": "Quan Quỷ"}
+{"cau": "Tôi nên nói thế nào để bạn thân trả nợ?", "kieu": "cach_lam", "vai": "ban_be", "chu_de": "tien_no", "dung_than": "Thê Tài"}
+{"cau": "Khi nào thì chuyện tình cảm của tôi mới ổn?", "kieu": "khi_nao", "vai": "toi", "chu_de": "tinh_cam", "dung_than": "Ứng"}
+{"cau": "Sếp có định đề bạt tôi không?", "kieu": "nguoi_kia", "vai": "sep", "chu_de": "thang_tien", "dung_than": "Quan Quỷ"}
+{"cau": "Góp vốn với bạn mở xưởng có nên không?", "kieu": "co_nen", "vai": "doi_tac", "chu_de": "hop_tac", "dung_than": "Ứng"}
+{"cau": "Đầu tư vào mã cổ phiếu này có lời không?", "kieu": "ket_qua", "vai": "toi", "chu_de": "kinh_doanh", "dung_than": "Thê Tài"}
+{"cau": "Tôi nên bắt đầu việc kinh doanh online từ đâu?", "kieu": "cach_lam", "vai": "toi", "chu_de": "kinh_doanh", "dung_than": "Thê Tài"}
+{"cau": "Có nên cho con đi du học năm sau không?", "kieu": "co_nen", "vai": "con", "chu_de": "thi_cu", "dung_than": "Phụ Mẫu"}
+{"cau": "Xin việc ở công ty nước ngoài có được nhận không?", "kieu": "ket_qua", "vai": "toi", "chu_de": "chuyen_viec", "dung_than": "Quan Quỷ"}
+{"cau": "Người ấy có ý gì với tôi không?", "kieu": "nguoi_kia", "vai": "nguoi_yeu", "chu_de": "tinh_cam", "dung_than": "Ứng"}
+{"cau": "Tôi nên ứng xử thế nào với đồng nghiệp hay ganh tị?", "kieu": "cach_lam", "vai": "ban_be", "chu_de": "ban_be", "dung_than": "Huynh Đệ"}
+{"cau": "Chuyển nhà sang quận khác có thuận không?", "kieu": "co_nen", "vai": "toi", "chu_de": "di_xa", "dung_than": "Thế"}
+{"cau": "Hợp đồng thuê mặt bằng tháng sau ký có thuận không?", "kieu": "ket_qua", "vai": "toi", "chu_de": "giay_to", "dung_than": "Phụ Mẫu"}
+{"cau": "Tôi có nên rút khỏi dự án này không?", "kieu": "co_nen", "vai": "toi", "chu_de": "khac", "dung_than": "Ứng"}
+{"cau": "Xin một quẻ cho việc đi phỏng vấn ngày mai.", "kieu": "co_nen", "vai": "toi", "chu_de": "thang_tien", "dung_than": "Quan Quỷ"}
+{"cau": "Khoản tiền cho vay có lấy lại được không?", "kieu": "ket_qua", "vai": "toi", "chu_de": "tien_no", "dung_than": "Thê Tài"}
+{"cau": "Em gái tôi mang thai lần này có thuận không?", "kieu": "ket_qua", "vai": "toi", "chu_de": "con_cai", "dung_than": "Tử Tôn"}
+{"cau": "Thế của việc tôi đang làm hiện giờ ra sao?", "kieu": "tong_quat", "vai": "toi", "chu_de": "khac", "dung_than": "Ứng"}
+{"cau": "Bố tôi có nên về hưu sớm không?", "kieu": "co_nen", "vai": "cha_me", "chu_de": "gia_dinh", "dung_than": "Phụ Mẫu"}
+{"cau": "Người kia có giữ lời hứa với tôi không?", "kieu": "nguoi_kia", "vai": "nguoi_yeu", "chu_de": "tinh_cam", "dung_than": "Ứng"}
+{"cau": "Khi nào tôi mua được nhà?", "kieu": "khi_nao", "vai": "toi", "chu_de": "mua_nha", "dung_than": "Phụ Mẫu"}
+{"cau": "Làm sao để hàn gắn với chồng sau lần cãi nhau lớn?", "kieu": "cach_lam", "vai": "vo_chong", "chu_de": "hon_nhan_tt_nam", "dung_than": "Quan Quỷ"}
+{"cau": "Năm nay có nên khởi nghiệp không?", "kieu": "co_nen", "vai": "toi", "chu_de": "kinh_doanh", "dung_than": "Thê Tài"}

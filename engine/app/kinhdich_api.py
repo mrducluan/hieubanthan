@@ -115,6 +115,8 @@ class HoiKDInput(BaseModel):
     # HỌC-ĐS: trọng số công khai + phiếu cá nhân theo mã hộp đọc quẻ (ds.kinhdich.*) — chỉ hạ / xếp lại hộp.
     trong_so: dict[_MaMau, PhieuInput] | None = Field(default=None, max_length=5000)
     ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
+    # KD-V3 hướng C: AI diễn đạt riêng phần trả lời (nguồn = lớp tất định, không câu người dùng); thiếu khoá → bản mẫu.
+    dien_dat: bool = False
 
 
 @router.post("/hoi")
@@ -136,6 +138,9 @@ def api_hoi(inp: HoiKDInput, background: BackgroundTasks) -> dict:
     if (inp.trong_so or inp.ca_nhan) and kq.get("doc_que"):
         from app.luangiai import doi_song_khuon as kh  # noqa: PLC0415
         kh.ap_hoc(kq["doc_que"], {k: v.model_dump() for k, v in (inp.trong_so or {}).items()}, inp.ca_nhan)
+    if inp.dien_dat and kq.get("doc_que") and kq.get("que") and (kq.get("phan_loai") or {}).get("xu_ly") not in hoidap_kd.chung.DAC_BIET:
+        from app.luangiai import kinhdich_tra_loi as ktl  # noqa: PLC0415
+        kq["doc_que"] = ktl.dien_dat(kq["doc_que"])
     background.add_task(nhat_ky.ghi_huyenhoc, "kinhdich", inp.cau_hoi, kq, False)
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "kinhdich")}
 
@@ -169,3 +174,32 @@ def api_chu_de() -> dict:
     """KD-ĐS: danh mục chủ đề (chip) — mã, tên, dụng thần Lục Hào tương ứng."""
     from app.luangiai import kinhdich_doi_song as kd_ds  # noqa: PLC0415
     return {"engine_version": ENGINE_VERSION, "chu_de": kd_ds.danh_sach_chu_de()}
+
+
+class HieuCauInput(BaseModel):
+    """KD-V3: hiểu câu hỏi TRƯỚC khi gieo (web gợi chủ đề + kiểu câu). Không gieo, không lưu, không ghi nhật ký."""
+    model_config = ConfigDict(extra="forbid")
+
+    cau_hoi: str = Field(min_length=3, max_length=500)
+
+
+@router.post("/hieu-cau")
+def api_hieu_cau(inp: HieuCauInput) -> dict:
+    """Kiểu câu (có nên · có thành · người kia · khi nào · cách làm · thế của việc), vai, chủ đề gợi ý (mã + tên), dụng thần
+    theo việc, và câu làm rõ (nếu câu còn mơ hồ) — chỉ mã + nhãn danh mục cố định; không trả lại câu người dùng gõ."""
+    from app.luangiai import kinhdich_doi_song as kd_ds, kinhdich_tra_loi as ktl  # noqa: PLC0415
+    pl = hoidap_kd.phan_loai(inp.cau_hoi.strip())
+    if pl["xu_ly"] in hoidap_kd.chung.DAC_BIET or pl["loai"] in ("ky_thuat", "doc_que_da_co"):
+        return {"engine_version": ENGINE_VERSION, "gieo": False, "loai": pl["loai"], "xu_ly": pl["xu_ly"], "chu_de": None,
+                "kieu": None, "vai": None, "can_lam_ro": None}
+    t = pl["cau_chuan_hoa"]
+    ma = kd_ds.chu_de_tu_cau(t)
+    hc = ktl.hieu_cau(t, inp.cau_hoi, ma)
+    dt_ = ktl.dung_than(hc)
+    cd = kd_ds.kb.chu_de(ma) or {}
+    lr = kd_ds.can_lam_ro(t, None, pl["truong_phai"])
+    return {"engine_version": ENGINE_VERSION, "gieo": True, "loai": pl["loai"], "xu_ly": pl["xu_ly"], "truong_phai": pl["truong_phai"],
+            "chu_de": ({"ma": ma, "ten": cd.get("ten", "Việc khác")} if ma != "khac" else None),
+            "kieu": hc["kieu"], "kieu_ten": ktl.kb.kieu_cau(hc["kieu"]).get("ten"), "vai": hc["vai"],
+            "dung_than": dt_.get("chinh"), "ten_dung_than": dt_.get("ten"),
+            "can_lam_ro": ({"ma": lr["ma"], "cau_hoi": lr["cau_hoi"], "lua_chon": lr["lua_chon"]} if lr else None)}

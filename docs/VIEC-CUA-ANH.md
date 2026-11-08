@@ -5,6 +5,31 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4af. Mở rộng quốc tế (QTE-1, 2026-11-07) — kế hoạch `docs/KE-HOACH-QUOC-TE.md`
+
+Giai đoạn 0 (tuần 1–2) người Việt ở nước ngoài → tiếng Anh `/en/` (tuần 3–8) → thu tiền quốc tế tháng 3 → phồn thể (nếu đạt mốc tuần 8).
+- [ ] Nối Search Console + GA4 của hieuban.com vào NotFair (hiện NotFair chỉ nối site nha khoa), hoặc gửi CSV "Quốc gia" 3 tháng gần nhất — để xếp nước ưu tiên
+- [ ] Cho phép `trends.google.com` trong cài đặt mạng môi trường, hoặc nối Google Ads Keyword Planner vào NotFair — để kiểm mốc từ khoá tuần 2 (≥ 20.000 lượt/tháng)
+- [ ] **Tuần 1**: nộp hồ sơ cổng thanh toán quốc tế — kiểm Paddle / Lemon Squeezy có nhận doanh nghiệp Việt Nam + có cấm ngành "bói toán / chiêm tinh" không; dự phòng Polar / Dodo → PayPal → pháp nhân Singapore + Stripe
+- [ ] Tìm 1 người bản xứ nói tiếng Anh am hiểu Bát tự / phong thuỷ để duyệt nội dung (ngân sách 300–500 USD/tháng)
+- [ ] Luật sư xem Chính sách riêng tư + Điều khoản tiếng Anh **trước tuần 9** (trước khi bật thu tiền)
+
+### 4ae. Kinh Dịch V3 — trả lời theo việc + UI hỏi quẻ (KD-V3, 2026-11-08) — deploy ENGINE trước web
+
+- [ ] **Deploy engine trước web** (route mới `/v1/kinhdich/hieu-cau`, trường `tra_loi` + hộp "Phía người kia" / "Điều cần gỡ trước"
+  trong `doc_que`; web cũ bỏ qua trường mới, web mới gặp engine cũ thì dòng "tự nhận chủ đề" không hiện, chip vẫn chọn tay).
+- [ ] (5 phút) Mở `/kinh-dich`, bấm câu gợi ý "Tôi có nên nhận lời làm quản lý không?" → câu nằm trong ô, chưa gửi; dòng
+  "Câu hỏi dạng có nên · Bạn đang hỏi về Thăng tiến…" hiện sau ~1 giây; gửi → bài đọc có câu đầu nêu nghiêng + lý do riêng,
+  nhãn "Lời hào làm chủ: …". Thử "Con tôi năm nay thi đại học có đậu không?" → chủ đề Thi cử, hộp "Phía con bạn".
+- [ ] (Chuyên gia, dần dần) Duyệt 384 nhãn xu hướng hào trong `engine/app/kb/data/kinhdich_tra_loi.json` (`hao_xu_huong`,
+  8 nhãn) và 108 câu lời khuôn — nháp ban biên tập; đổi nhãn không đổi mức / mã kiểm chứng cũ. Bảng đối chiếu + số đo:
+  `docs/NANG-CAP-KINH-DICH-V3.md`.
+- [ ] **Hướng C đã nối** (AI diễn đạt riêng phần trả lời quẻ, chỉ chạy khi engine có `OPENROUTER_API_KEY` — đã có cho Tử vi).
+  Chọn mô hình: chạy `OPENROUTER_API_KEY=… PYTHONPATH=. .venv/bin/python engine/scripts/so_mo_hinh_kd.py` (12 câu × 3 quẻ,
+  ~7 mô hình, vài phút, tốn ít token) → đặt env engine trên Render `KD_DIEN_DAT_MODEL=<mô hình thắng>` (gợi ý: Claude Haiku 4.5
+  nếu qua kiểm ≥ 10/12; bảng cân nhắc ở `docs/NANG-CAP-KINH-DICH-V3.md` mục 5). Chưa đặt → dùng `OPENROUTER_MODEL` hiện có.
+- [ ] (5 phút, sau deploy) Hỏi một câu ở `/kinh-dich` → dưới quẻ thấy đoạn lời liền mạch + dòng "Phần trả lời được diễn đạt tự
+  động…"; không thấy nghĩa là engine chưa có khoá / mô hình trả bản không qua kiểm (bản mẫu — vẫn đúng).
 ### 4ad. Tarot bài đọc bám câu hỏi (TR-4, 2026-11-08) — deploy ENGINE trước web
 
 - [ ] **Deploy engine trước web** (chương mới `cau_chuyen`, KB `viec_lv`; web cũ vẫn hiện chương mới như các chương khác).

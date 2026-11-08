@@ -101,7 +101,7 @@ CAU_MANG = [
     ("battu", "Tôi có phải kiểu người làm ra tiền nhưng khó giữ không?", r"giữ tiền.*tiền bạc.*ở mức"),
     ("phongthuy", "Giường ngủ kê ngay dưới xà ngang có nên chuyển chỗ không?", r"^Giường, bàn dưới xà ngang: đây là nhóm nên xử lý trước"),
     ("phongthuy", "Nhà hướng Đông Nam có hợp với tôi không?", r"hướng Đông Nam.*mệnh quái"),
-    ("kinhdich", "Có nên góp vốn với người bạn cũ mở xưởng may không?", r"nghiêng về mức"),
+    ("kinhdich", "Có nên góp vốn với người bạn cũ mở xưởng may không?", r"Quẻ \S+ — (quẻ nghiêng về|làm được|chưa nên)"),   # KD-V3: câu đầu = nghiêng theo kiểu câu
 ]
 
 

@@ -17,6 +17,7 @@ from app.calc import kinhdich_maihoa as mh
 from app.calc.kinhdich_vendor import TRI_NGU_HANH
 from app.hoidap import chung
 from app.kb import kinhdich_doi_song_kb as kb
+from app.kb import kinhdich_tra_loi_kb as kbt
 from app.luangiai import doi_song_khuon as kh
 from app.kb import kinhdich_kb as kbq
 
@@ -26,8 +27,11 @@ QUAN_HE_TEN = {"dung_sinh_the": "hoàn cảnh đỡ bạn", "the_khac_dung": "b�
                "ty_hoa": "hai bên ngang nhau, thuận theo nhịp", "the_sinh_dung": "bạn phải bỏ ra nhiều",
                "dung_khac_the": "hoàn cảnh đang ép bạn"}
 # Hoà điểm: người cụ thể trước (như thứ tự chọn dụng thần: người → tiền → giấy tờ → công danh → khác).
-_UU_TIEN = ["con_cai", "gia_dinh", "hon_nhan", "tinh_cam", "ban_be", "mua_nha", "ban_nha", "tien_no", "mat_do", "kinh_doanh",
-            "hop_tac", "thang_tien", "chuyen_viec", "tranh_chap", "thi_cu", "giay_to", "xe_co", "suc_khoe", "di_xa"]
+_UU_TIEN = ["con_cai", "gia_dinh", "hon_nhan_tt", "hon_nhan", "tinh_cam", "ban_be", "mua_nha", "ban_nha", "tranh_chap", "tien_no",
+            "mat_do", "hop_tac", "kinh_doanh", "thang_tien", "chuyen_viec", "thi_cu", "giay_to", "xe_co", "suc_khoe", "di_xa"]
+# KD-V3: chủ đề chỉ nói về NGƯỜI (con, bố mẹ, bạn) — câu có cả VIỆC thì việc là chủ đề ("con tôi thi có đậu" là chuyện thi
+# cử, con là vai; "bố mẹ tôi có nên bán nhà về quê" là chuyện bán nhà). Chỉ có người, không có việc → vẫn là chủ đề người.
+_CHU_DE_NGUOI = ("con_cai", "gia_dinh", "ban_be")
 
 
 # EN-3c: "cuối" và "cưới" cùng bỏ dấu thành "cuoi" — "cuối năm / tháng / tuần / cùng" không phải chuyện cưới.
@@ -49,9 +53,21 @@ def chu_de_tu_cau(t: str) -> str:
     diem = _diem_chu_de(t)
     if not diem:
         return "khac"
+    viec = {m: n for m, n in diem.items() if m not in _CHU_DE_NGUOI}
+    if viec and len(viec) < len(diem):
+        diem = viec
+    if "tranh_chap" in diem and re.search(r"(?<!\w)(vu kien|khoi kien|kien (toa|tung|ra toa|doi|cong ty|nguoi)|thang kien|thua kien|ra toa|toa an|di kien)(?!\w)", t):
+        return "tranh_chap"                  # "vụ kiện đòi lại tiền cọc": việc chính là vụ kiện, tiền là cái được đòi
     tot = max(diem.values())
     ung = [m for m in diem if diem[m] == tot]
-    return next((m for m in _UU_TIEN if m in ung), ung[0])
+    ma = next((m for m in _UU_TIEN if m in ung), ung[0])
+    # KD-V3: người kia là chồng / vợ thì giới đã rõ → chọn luôn biến thể (dụng thần Quan Quỷ / Thê Tài), không hỏi lại
+    if (kb.chu_de(ma) or {}).get("hoi_dung_than"):
+        if re.search(r"(?<!vo )(?<!\w)(chong|ong xa|anh ay|cau ay|ban trai)(?!\w)", t) and kb.chu_de(f"{ma}_nam"):
+            return f"{ma}_nam"
+        if re.search(r"(?<!\w)(vo (toi|minh|em)|ba xa|co ay|ban gai)(?!\w)", t) and kb.chu_de(f"{ma}_nu"):
+            return f"{ma}_nu"
+    return ma
 
 
 def _goc(ma: str) -> str:
@@ -282,7 +298,11 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     qv = kbq.que_van(ban["so_king_wen"]) or {}
     chu = gn["nghia_ly"]["loi_chu"]
     ten_viec = cd["ten"].split(" (")[0].lower()
-    ket_luan = f"Về việc {ten_viec}: {kb.muc(muc).get('ket_luan', '')}".strip()
+    # KD-V3: câu trả lời theo việc (kiểu câu × nghiêng + lý do riêng của lần gieo) thay câu kết luận chung của mức.
+    from app.luangiai import kinhdich_tra_loi as ktl  # noqa: PLC0415
+    tl = ktl.tra_loi(que, pl, goi, gn, muc, pt=luc_hao, chu_de=ma, cau_goc=pl.get("cau_goc"))
+    ket_luan = (f"Về việc {ten_viec}: {tl['cau_dau']}" if tl.get("cau_dau")
+                else f"Về việc {ten_viec}: {kb.muc(muc).get('ket_luan', '')}").strip()
 
     # ---- hộp nổi bật
     hop = [_hop("cot_loi", f"Quẻ {ban['ten']} — {kb.nhan_muc(muc)}", ket_luan)]
@@ -293,16 +313,29 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     hdg = hieu_don_gian(ban["so_king_wen"])
     canh, bai = _tach_hdg(hdg)
     if muc == "thuan":
-        nd = bai or _nom_na(hdg) or gn["nghia_ly"]["tom_tat"]
+        # KD-V3: đọc theo Lục Hào / Mai Hoa thì "điểm có lợi" là thế của việc lúc hỏi (lý do riêng), không phải bài học chung
+        nd = (tl["ly_do"][0].upper() + tl["ly_do"][1:] + ".") if chinh != "nghia_ly" and tl.get("ly_do") \
+            else (bai or _nom_na(hdg) or gn["nghia_ly"]["tom_tat"])
         hop.append(_hop("diem_manh", "Điểm đang có lợi", nd))
     elif manh:
         hop.append(_hop("diem_manh", "Điểm đang có lợi", kb.mau("luc_do") or ""))
+    if tl.get("nguoi_kia"):
+        nk = tl["nguoi_kia"]
+        tieu_de = f"Phía {nk['nguoi']}" if tl.get("vai") != "toi" and nk.get("nguoi") else kbt.mau("tieu_de_nguoi_kia")
+        loai_nk = {"co": "diem_manh", "chua": "luu_y", "chua_voi": "luu_y"}.get(tl["nghieng"], "loi_khuyen")
+        hop.append({**_hop(loai_nk, tieu_de, nk["loi"] + ".", (tl.get("nen") or "").capitalize() if loai_nk == "luu_y" else None),
+                    "_ma": ("nguoi_kia", nk["ma"].replace(".", "_"))})
     tranh = (cd.get("hanh_dong") or {}).get("can_chu_dong") or []
     luu_y = q.get("mat_toi", "")
+    if tl.get("vap"):                            # KD-V3: chỗ dễ vấp theo xu hướng của hào làm chủ, rồi mới tới mặt tối của quẻ
+        luu_y = (tl["vap"][0].upper() + tl["vap"][1:] + ". " + luu_y).strip()
     if ma == "suc_khoe":
         luu_y = (luu_y + " " + (kb.mau("suc_khoe") or "")).strip()
     if luu_y:
         hop.append(_hop("luu_y", "Điều dễ vấp", luu_y, tranh[0] if tranh else None))
+    for g in tl.get("can_go") or []:
+        hop.append({**_hop("luu_y", kbt.mau("tieu_de_can_go"), g["loi"] + ".", (tl.get("nen") or "").capitalize() or None),
+                    "_ma": ("can_go", g["ma"])})
     lk = q.get("loi_khuyen", "")
     if lv and q.get("linh_vuc", {}).get(lv):
         lk = (lk + " " + q["linh_vuc"][lv]).strip()
@@ -323,6 +356,10 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
 
     # HỌC-ĐS: mã kiểm chứng tất định ds.kinhdich.<chủ đề>.<loại hộp>.q<quẻ>.<mức> (chỉ dữ kiện đã tính, không chữ người dùng)
     for h in hop:
+        if h.get("_ma"):                         # KD-V3: hộp mới — mã theo loại hộp mới + khoá cấu trúc, mã hộp cũ không đổi
+            loai_m, khoa = h.pop("_ma")
+            h["ma_mau"] = kh.ma_mau("kinhdich", ma, loai_m, f"q{ban['so_king_wen']}", khoa)
+            continue
         h["ma_mau"] = kh.ma_mau("kinhdich", ma, h.pop("_loai_ma", h["loai"]), f"q{ban['so_king_wen']}", muc)
 
     # ---- đoạn đời thường
@@ -341,6 +378,8 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
         doan.append(f"Nhìn theo thể–dụng: {gn['mai_hoa']['tom_tat']}.")
     if gn["luc_hao"] and gn["luc_hao"].get("dung_than") and chinh != "luc_hao" and gn["luc_hao"]["ly_do"]:
         doan.append(f"Nhìn theo hào đại diện cho việc: {gn['luc_hao']['ly_do'][0]}.")
+    if tl.get("khac_chieu"):                     # KD-V3: hai cách đọc khác chiều → nói rõ, không chọn bên
+        doan.append(kbt.mau("hai_cach_khac"))
 
     # ---- ba nhóm việc theo chủ đề, nhóm đúng mức đứng đầu
     thu_tu = [muc] + [m for m in kb.MUC if m != muc]
@@ -362,6 +401,11 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
             "hop": hop, "doan": doan, "hanh_dong": hanh_dong, "can_cu": can_cu, "cau_tu_soi": q.get("cau_tu_soi"),
             "loi_kinh": loi_kinh, "goc_nhin": gn, "ung_ky": ung_ky, "cau_lien_quan": cau[:3],
             "chu_de": {"ma": ma, "ten": cd["ten"], "dung_than": cd.get("dung_than")},
+            # KD-V3: gói trả lời theo việc (kiểu câu, vai, nghiêng theo từng phái, lý do, người kia, điều cần gỡ) — web hiện
+            # ở đầu bài đọc; không lặp hộp (hộp đã nằm trong `hop`).
+            "tra_loi": {k: tl.get(k) for k in ("kieu", "vai", "viec", "nhan_viec", "nghieng", "nhan_nghieng", "nghieng_phai",
+                                                "khac_chieu", "tag", "nhan_tag", "nguon_tag", "ly_do", "cau_dau", "nen",
+                                                "dung_than", "nguoi_kia", "can_go")},
             "y_dinh_chung": _y_dinh_chung(ma), "goi_mo": _goi_mo(ma),
             "mot_que_mot_viec": kb.mau("mot_que_mot_viec"), **kb.meta()}
 

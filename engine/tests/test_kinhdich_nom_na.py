@@ -52,7 +52,9 @@ def test_hao_khong_trung_nhau():
 def test_tra_loi_co_noi_nom_na_cho_hao_dong():
     # 1 hào động (Càn sơ cửu) → lời chủ là hào đó, kèm nôm na
     kq = hd.tra_loi("Tôi có nên đổi việc lúc này không?", gia_tri_hao=[9, 7, 7, 7, 7, 7])
-    assert "Hiểu đơn giản: " + kb.hao(1, 1)["nom_na"] in kq["cau_tra_loi"]
+    # KD-V3: nôm na của hào làm chủ đi vào CÂU ĐẦU ("lời hào làm chủ ví như…"), dòng "Hiểu đơn giản:" lặp lại bị bỏ
+    nn = kb.hao(1, 1)["nom_na"].rstrip(".")
+    assert nn in kq["cau_tra_loi"] or (nn[0].lower() + nn[1:]) in kq["cau_tra_loi"]
     assert "Hiểu đơn giản: " + kb.que_van(1)["nom_na"].split("Hiểu đơn giản: ")[1] in kq["cau_tra_loi"]
 
 

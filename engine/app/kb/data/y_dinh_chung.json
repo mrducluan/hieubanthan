@@ -162,7 +162,10 @@
           "tinh_cam_nu",
           "tinh_cam_nam",
           "hon_nhan_nu",
-          "hon_nhan_nam"
+          "hon_nhan_nam",
+          "hon_nhan_tt",
+          "hon_nhan_tt_nu",
+          "hon_nhan_tt_nam"
         ],
         "tuvi": [],
         "tuvi_cung": "Phu Thê",
