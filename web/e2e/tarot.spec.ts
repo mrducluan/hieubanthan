@@ -137,6 +137,15 @@ test("TR-2: câu 'A hay B' → gợi trải bài Hai lựa chọn; lá ngược 
   await expect(bc).toBeVisible({ timeout: 20_000 });
   await expect(page.locator("#lg-tra_loi")).toContainText("Chưa nên vội");
   await expect(page.locator("#lg-tra_loi")).toContainText("Hiệp sĩ Kiếm (ngược)");
+  // TR-4: chương "Câu chuyện các lá kể" mở sẵn ngay sau câu trả lời, kể từng lá bằng nghĩa trong chuyện đổi việc
+  const chuyen = page.getByTestId("lg-chuong-cau_chuyen");
+  await expect(chuyen).toHaveAttribute("data-mo", "1");
+  await expect(chuyen).toContainText("Câu chuyện các lá kể");
+  await expect(chuyen).toContainText("với chuyện đổi sang công việc mới");
+  await expect(chuyen).toContainText("Quá khứ — 6 Tiền (ngược)");
+  await expect(chuyen).toContainText("Điểm tựa ở Hiện tại: Pháp Sư");
+  await expect(chuyen).toContainText("Chỗ cần canh ở Sắp tới: Hiệp sĩ Kiếm (ngược)");
+  for (const tu of ["decan", "Golden Dawn", "Book T", "Phẩm giá"]) await expect(chuyen).not.toContainText(tu, { useInnerText: true });
   const ban = bc.getByTestId("ban-trai-bai");
   await expect(ban.getByTestId("nhan-nguoc")).toHaveCount(2);
   await expect(ban.locator('svg[data-nguoc="1"]')).toHaveCount(2);

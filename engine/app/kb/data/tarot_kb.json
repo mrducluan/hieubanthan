@@ -2201,11 +2201,11 @@
    },
    "tra_loi": {
     "x": "Chưa nên vội: kiểm xem bạn muốn việc này thật, hay đang bị cám dỗ, sợ hãi hoặc thói quen kéo đi. Nếu thấy khó dừng lại, đó là lúc nên chậm.",
-    "n": "Nghiêng về có: lá này ủng hộ bước giúp bạn thoát khỏi điều trói mình. Điều kiện là đi từng bước và nhờ một người đáng tin cùng theo dõi."
+    "n": "Được, nếu đi từng bước: lá này cho thấy bạn đã bắt đầu nhìn ra điều trói mình, nhưng sách cũ còn đọc nó là chỗ yếu lòng, dễ quay lại thói cũ. Làm khi đã có kế hoạch nhỏ và một người đáng tin cùng theo dõi."
    },
    "nghieng": {
     "x": "cho",
-    "n": "tien"
+    "n": "dieu_kien"
    }
   },
   "dai_16": {
@@ -8427,7 +8427,14 @@
     "dieu_kien": 1,
     "khuyen": 4,
     "ket": 9
-   }
+   },
+   "cau_chuyen": [
+    3,
+    0,
+    1,
+    5,
+    9
+   ]
   },
   "hai_lua_chon": {
    "ten": "Năm lá: Hai lựa chọn",
@@ -8735,32 +8742,32 @@
   "tong_quan": {
    "tieu_de": "Trải bài nói gì",
    "cau_hoi": "Nhìn cả bàn bài, điều gì nổi lên trước?",
-   "mo_ta": "Nguyên tố trội, số lá ẩn chính, nhịp số — bức tranh chung trước khi đọc từng lá."
+   "mo_ta": "Chuyện lớn hay việc thường ngày, các lá nghiêng về phần nào của đời sống, các con số đi lên hay đi xuống — bức tranh chung trước khi đọc từng lá."
   },
   "tung_la": {
    "tieu_de": "Từng vị trí nói gì",
    "cau_hoi": "Mỗi lá ở mỗi chỗ đang kể chuyện gì?",
-   "mo_ta": "Mỗi vị trí một hộp: lá, xuôi hay ngược, được tiếp sức hay bị kìm bởi lá bên cạnh, bốn trường phái ở 'Vì sao nói vậy'."
+   "mo_ta": "Mỗi vị trí một hộp: lá gì, xuôi hay ngược, lá bên cạnh đỡ hay cản nó. Bốn cách đọc có sách nằm ở 'Vì sao nói vậy'."
   },
   "dong_chay": {
    "tieu_de": "Dòng chảy giữa các lá",
    "cau_hoi": "Các lá đang đẩy nhau hay cản nhau?",
-   "mo_ta": "Phẩm giá nguyên tố (Golden Dawn), hướng nhìn (Marseille), nhịp số 1–10."
+   "mo_ta": "Lá nào đỡ lá nào, lá nào kéo lá nào theo hướng khác, và nhân vật trên lá đang nhìn về đâu."
   },
   "ben_trong": {
    "tieu_de": "Điều bên trong",
    "cau_hoi": "Lá nào đang soi nếp nghĩ của chính bạn?",
-   "mo_ta": "Lớp tâm lý (B.O.T.A., Thoth): mặt tối và câu hỏi tự soi của các lá trọng tâm."
+   "mo_ta": "Mỗi lá trọng tâm soi một nếp nghĩ của chính bạn, kèm một câu để tự hỏi."
   },
   "thoi_diem": {
    "tieu_de": "Nhịp thời gian (gợi ý)",
    "cau_hoi": "Chuyện này đi theo nhịp ngày, tuần hay tháng?",
-   "mo_ta": "Decan hoàng đạo của lá 'sắp tới' và nhịp của bộ — là nhịp gợi ý, không phải ngày dự báo."
+   "mo_ta": "Chuyện này thường đi theo nhịp ngày, tuần hay tháng, và lúc nào trong năm nó dễ rõ nhất — nhịp gợi ý, không phải ngày dự báo."
   },
   "viec_nen_lam": {
    "tieu_de": "Việc nên làm trong 72 giờ",
    "cau_hoi": "Nếu chỉ làm một việc, bạn làm gì?",
-   "mo_ta": "Hai tới ba việc cụ thể lấy từ lá lời khuyên và lá trọng tâm (lối Marseille: lá bài là việc để làm)."
+   "mo_ta": "Hai tới ba việc cụ thể, làm được trong ba ngày, lấy từ chính các lá bạn rút."
   },
   "tuong_va_la": {
    "tieu_de": "Tướng và lá bài",
@@ -8771,10 +8778,16 @@
    "tieu_de": "Câu trả lời cho câu hỏi của bạn",
    "cau_hoi": "Trải bài nghiêng về đâu với điều bạn hỏi?",
    "mo_ta": "Đọc các lá ở vị trí trả lời (hiện tại, kết cục, lời khuyên) theo đúng câu bạn hỏi."
+  },
+  "cau_chuyen": {
+   "tieu_de": "Câu chuyện các lá kể",
+   "cau_hoi": "Các lá nối với nhau thành câu chuyện gì cho việc bạn hỏi?",
+   "mo_ta": "Đọc các lá theo thứ tự trên bàn như một câu chuyện liền mạch, bằng nghĩa của từng lá trong đúng chuyện bạn hỏi; rồi chỉ ra chỗ dựa và chỗ cần canh."
   }
  },
  "thu_tu_chuong": [
   "tra_loi",
+  "cau_chuyen",
   "tong_quan",
   "tung_la",
   "dong_chay",
@@ -8809,7 +8822,7 @@
    "tiep_suc": "Lá bên cạnh tiếp sức cho lá này — mặt sáng của nó dễ hiện ra.",
    "bi_kim": "Lá bên cạnh kìm lá này — tính chất của nó biểu hiện yếu hơn hoặc lệch đi; nên chủ động hơn thay vì chờ.",
    "binh": "Lá bên cạnh không đẩy cũng không cản — lá này giữ đúng nghĩa của nó.",
-   "triet_tieu": "Hai lá hai bên xung nhau nên triệt tiêu nhau — lá này đứng một mình, đọc đúng nghĩa gốc.",
+   "triet_tieu": "Hai lá hai bên kéo nhau theo hai hướng nên không lá nào cản được lá này — nó giữ đúng nghĩa của nó.",
    "tiep_suc_nguoc": "Lá bên cạnh làm tính chất ngược của lá này rõ thêm — chỗ lệch dễ lộ ra, nên để ý sớm.",
    "bi_kim_nguoc": "Lá bên cạnh làm nhẹ bớt mặt ngược của lá này — chỗ vướng có thể không nặng như bạn lo."
   },
@@ -8821,16 +8834,16 @@
    "doi_dau": "Lá {a} và lá {b} nhìn vào nhau — hai lực đang gặp nhau ở đây, cần một cuộc nói chuyện thẳng.",
    "lat": "Lá đang ngược nên nhân vật quay mặt về phía ngược lại với hình gốc."
   },
-  "thoi_diem_mo": "Nhịp thời gian ở đây là GỢI Ý theo cách Golden Dawn gắn lá bài với 36 decan hoàng đạo và nhịp của từng bộ — không phải ngày dự báo. Dùng nó để chọn lúc làm việc, không phải để chờ.",
-  "thoi_diem_decan": "Lá {ten} gắn với decan {decan} của cung {cung} ({tu}–{den}); nhịp của bộ {bo}: {nhip}. {trong}",
-  "thoi_diem_cung": "Lá {ten} gắn với cung {cung} ({tu}–{den}); nhịp gợi ý: {nhip}. {trong}",
+  "thoi_diem_mo": "Nhịp ở đây là GỢI Ý — mỗi bộ bài có một nhịp quen (ngày, tuần hay tháng), mỗi lá có một khoảng trong năm theo cách sách xưa gắn lá bài với mùa. Không phải ngày dự báo: dùng nó để chọn lúc làm, không phải để ngồi chờ.",
+  "thoi_diem_decan": "Lá {ten} đi theo nhịp {nhip}. Trong năm, khoảng {tu}–{den} là lúc chuyện kiểu này dễ rõ nhất. {trong}",
+  "thoi_diem_cung": "Lá {ten} ứng với mùa {cung} ({tu}–{den}); nhịp gợi ý: {nhip}. {trong}",
   "thoi_diem_hanh_tinh": "Lá {ten} gắn với {hanh_tinh}: {nhip}.",
   "thoi_diem_bo": "Lá {ten} thuộc bộ {bo}: {nhip}.",
   "dang_trong": "Bạn đang ở trong khoảng này — nếu định làm, làm ngay.",
   "sap_toi": "Khoảng này tới sau {ngay} ngày — trước đó là lúc chuẩn bị.",
-  "cua_so_xa": "Mốc decan năm nay còn xa ({ngay} ngày) — lấy nhịp của bộ làm chính; mốc ấy là lúc trong năm chuyện này rõ nhất.",
-  "viec_mo": "Lối Marseille: lá bài không phải lời đoán trước mà là việc để làm. Dưới đây là hai tới ba việc cụ thể, làm được trong ba ngày, lấy từ chính các lá bạn rút.",
-  "ben_trong_mo": "Lớp này đọc theo B.O.T.A. và Thoth: mỗi lá là một nếp nghĩ của chính bạn đang hiện ra. Không ai phán bạn ở đây — bạn tự nhìn và tự chấm.",
+  "cua_so_xa": "Khoảng ấy còn xa ({ngay} ngày) — trước mắt lấy nhịp {nhip} làm chính.",
+  "viec_mo": "Lá bài không phải lời đoán trước mà là việc để làm. Dưới đây là hai tới ba việc cụ thể, làm được trong ba ngày, lấy từ chính các lá bạn rút.",
+  "ben_trong_mo": "Ở lớp này, mỗi lá là một nếp nghĩ của chính bạn đang hiện ra. Không ai phán bạn ở đây — bạn tự nhìn, tự hỏi và tự chấm.",
   "dai_dien_mo": "Lá đại diện (significator) là lá hoàng gia 'đóng vai' bạn trong trải bài. Ở đây chọn từ dáng mặt bạn tự quan sát (Nhân tướng) và tuổi, giới tính — chỉ cho chính bạn, không chọn cho ai khác.",
   "dai_dien_thieu": "Chương này cần năm sinh, giới tính và dáng mặt từ Khảo sát Nhân tướng (bạn tự soi gương). Chưa có thì bỏ qua — bài đọc không thiếu gì.",
   "dai_dien_loi": "Dáng mặt {hinh} ứng với bộ {bo} ({nguyen_to}); {tuoi_gioi} → lá {ten}. {la_loi}",
@@ -8934,6 +8947,68 @@
    "tu_choi": "Câu này nằm ngoài điều tarot ở đây trả lời (số, ngày mất, chẩn đoán bệnh, chọn người theo lá bài). Các lá bên dưới vẫn đọc được như một lời nhắc nhìn lại chính mình.",
    "chua_rut": "Câu này cần lá bài của chính bạn mới trả lời được: gõ câu vào ô Câu hỏi ở trên, chọn trải bài '{ten}', xáo và tự rút lá. Bài đọc sẽ mở bằng phần 'Câu trả lời cho câu hỏi của bạn' — nghiêng về đâu, vì sao, điều cần gỡ trước và 3 việc nên làm.",
    "thoi_diem_khong_cua_so": "Lá {la} ở vị trí {vi_tri} không gắn với một khoảng ngày cụ thể (theo Book T) — nhịp của nó là {nhip}. Đừng chờ một ngày; làm xong việc ở vị trí 'Điều cần xong trước' là tới lúc."
+  },
+  "viec_mo_cau": "Lá bài không phải lời đoán trước mà là việc để làm. Dưới đây là hai tới ba việc cho {viec}, làm được trong ba ngày, lấy từ chính các lá bạn rút.",
+  "thoi_diem_hoang_gia": "Lá {ten} đi theo nhịp {nhip}. Trong năm, khoảng {tu}–{den} là lúc chuyện kiểu này dễ rõ nhất. {trong}",
+  "cau_chuyen": {
+   "mo": "Kể các lá theo thứ tự trên bàn, với {viec}:",
+   "mo_chung": "Kể các lá theo thứ tự trên bàn:",
+   "viec_chung": "điều bạn đang hỏi",
+   "noi": {
+    "tien_tien": {
+     "tieu_de": "Đang đi đúng nhịp",
+     "loi": "Với {viec}, điều đã có đang nâng đỡ điều sắp tới — cứ giữ nhịp, làm tiếp từng bước, đừng tự dừng giữa chừng."
+    },
+    "tien_dieu_kien": {
+     "tieu_de": "Khởi đầu thuận, đoạn sau cần điều kiện",
+     "loi": "Với {viec}, phần đầu đang thuận, nhưng đoạn sau chỉ trọn khi bạn làm rõ vài điều — đừng để đà cũ làm mình chủ quan."
+    },
+    "tien_cho": {
+     "tieu_de": "Đang có đà, nhưng hướng này dễ vấp",
+     "loi": "Với {viec}, bạn đang có đà, nhưng nếu giữ nguyên cách làm thì dễ vấp ở bước sau — dùng cái đang thuận để sửa cách làm trước khi tiến."
+    },
+    "dieu_kien_tien": {
+     "tieu_de": "Làm rõ điều kiện xong thì đường thông",
+     "loi": "Với {viec}, câu chuyện đi từ chỗ còn phải cân nhắc tới chỗ mở ra — gỡ xong điều đang lệch thì đoạn sau thuận hơn bạn nghĩ."
+    },
+    "dieu_kien_dieu_kien": {
+     "tieu_de": "Mọi thứ xoay quanh điều kiện",
+     "loi": "Với {viec}, cả câu chuyện xoay quanh điều kiện — thành hay không nằm ở chỗ bạn làm rõ được bao nhiêu, không nằm ở may rủi."
+    },
+    "dieu_kien_cho": {
+     "tieu_de": "Từ chỗ còn lệch tới một bước dễ vội",
+     "loi": "Với {viec}, câu chuyện đi từ một chỗ còn lệch tới một bước dễ làm vội — gỡ chỗ lệch trước, rồi mới tiến, để cơn nóng không quyết thay bạn."
+    },
+    "cho_tien": {
+     "tieu_de": "Đi từ vướng tới mở",
+     "loi": "Với {viec}, chỗ khó nằm ở phía sau; đoạn tới nhẹ hơn nếu bạn mang theo bài học từ chỗ vướng vừa qua."
+    },
+    "cho_dieu_kien": {
+     "tieu_de": "Ra khỏi chỗ vướng, chưa thông hẳn",
+     "loi": "Với {viec}, bạn đang ra khỏi chỗ vướng nhưng đường chưa thông hẳn — đi từng bước nhỏ, mỗi bước có điều kiện rõ."
+    },
+    "cho_cho": {
+     "tieu_de": "Cả đoạn đường khuyên chậm lại",
+     "loi": "Với {viec}, cả đoạn đường đều khuyên chậm lại — chưa phải lúc đẩy mạnh; dồn sức vào việc gỡ những điều đang vướng trước."
+    }
+   },
+   "hai_duong": {
+    "tien": {
+     "tieu_de": "Đường thay đổi có nhiều lá đỡ hơn",
+     "loi": "Đặt hai đường cạnh nhau, đường B có nhiều lá đỡ hơn với {viec} — nhưng đọc kỹ 'Điều bạn chưa thấy' trước khi bước."
+    },
+    "dieu_kien": {
+     "tieu_de": "Hai đường gần ngang nhau",
+     "loi": "Đặt hai đường cạnh nhau, chúng gần ngang nhau với {viec} — điều quyết định nằm ở lá 'Điều bạn chưa thấy' và cách bạn làm, không ở việc chọn đường nào."
+    },
+    "cho": {
+     "tieu_de": "Đường giữ như cũ có nhiều lá đỡ hơn",
+     "loi": "Đặt hai đường cạnh nhau, đường A có nhiều lá đỡ hơn với {viec} — nếu vẫn muốn đổi, làm rõ 'Điều bạn chưa thấy' trước."
+    }
+   },
+   "tua": "Dựa vào đây: {tu_khoa}. Câu nên tự hỏi: {hoi}",
+   "canh": "Chỗ này dễ làm bạn trượt: {tu_khoa}. Câu nên tự hỏi: {hoi}",
+   "chuyen_cua_ban": "chuyện của bạn"
   }
  },
  "tu_khoa": {

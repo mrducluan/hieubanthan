@@ -141,3 +141,43 @@ dev 95,8 % · holdout 83,3 %. Sàn trong test: dev ≥ 97 % / 92 %, holdout ≥ 
 | 4 | **Trải bài "Khi nào"** (3 lá) | Điều cần xong trước · Dấu hiệu đã tới lúc · Lá nhịp thời gian. Câu "khi nào / bao giờ / bao lâu" gợi trải bài này. Hộp nhịp: lá kết cục trước, không có khoảng ngày thì lá trả lời kế tiếp; khoảng theo decan (lá 2–10, ~10 ngày), vùng 30° Book T (Hiệp sĩ / Hoàng hậu / Vua, ~1 tháng), cung của ẩn chính; không có (Át, Tiểu đồng, ẩn chính theo hành tinh) → nói rõ "không gắn khoảng ngày", không bịa ngày. Trải bài này luôn đọc như câu thời điểm. | QUAY LẠI |
 
 Kèm: web bỏ qua trải bài engine chưa có (deploy lệch — bản web mới đọc bộ bài cũ không còn vỡ trang). Engine 9.383 test + e2e Tarot / Kinh Dịch / Hôm nay 30/30.
+
+## 10. TR-4 — bài đọc bám câu hỏi từ đầu tới cuối (chủ dự án giao 2026-11-08)
+
+Sau TR-3, chương 1 đã trả lời đúng câu hỏi, nhưng từ chương 2 bài đọc quay về lời chung: "Nguyên tố trội: Khí", "Việc nên
+làm: trước cuộc tranh luận gần nhất…" cho câu hỏi đổi việc; nhiều thuật ngữ (decan, 20° Kim Ngưu, phẩm giá nguyên tố,
+"triệt tiêu") ở chữ hiển thị; một ý lặp hai lần; hai lá "đẩy nhau mạnh lên" được gọi là "chỗ chảy dễ" dù một lá đang ngược.
+
+**Ba cách tiếp cận đã cân** (tiêu chí: người đọc thấy đúng mình, hiểu ngay, muốn đọc hết):
+
+| | Cách | Được | Mất | Kết luận |
+|---|---|---|---|---|
+| A | AI diễn đạt cả bài | Văn liền mạch | Nguồn vẫn là lời chung → AI chỉ làm lời chung trơn hơn; mỗi bài nhiều lượt AI (hạn mức RL-1, chi phí); bộ kiểm `kiem_ai` loại nhiều chương → bài nửa AI nửa mẫu; trái tinh thần "AI chỉ diễn đạt" khi phải "nối" ý | Loại |
+| B | **Bài đọc kể theo câu hỏi, tất định** | Mọi chương gắn với điều được hỏi bằng nghĩa có sẵn của lá trong đúng lĩnh vực; lời thường; không tốn lượt AI; kiểm chứng được từng hộp | Cần thêm KB việc theo lĩnh vực (624 câu nháp) | **Chọn** |
+| C | Cá nhân hoá theo ngày sinh ("lá bản mệnh") | Cảm giác "của riêng tôi" | Công thức hiện đại không có trong sách phạm vi công cộng; lệch khỏi câu hỏi; CLAUDE.md đã từ chối lấy số từ ngày sinh khi không có nguồn (P8) | Loại |
+
+**Đã làm (cách B):**
+1. **Chương mới "Câu chuyện các lá kể"** (`luangiai/tarot._chuong_cau_chuyen`, ngay sau "Câu trả lời", web mở sẵn): kể các lá
+   theo thứ tự trên bàn bằng nghĩa của lá TRONG lĩnh vực được hỏi, đúng chiều xuôi / ngược (Celtic Cross chỉ kể 5 vị trí
+   cốt truyện `trai_bai.celtic.cau_chuyen`); một **câu nối** theo nghiêng lá đầu → lá cuối (9 mẫu, `mau.cau_chuyen.noi`;
+   trải bài Hai lựa chọn theo phép so đường B − A dùng chung với câu trả lời — `_so_hai_duong`); **Điểm tựa** (lá "tiến"
+   nặng nhất) và **Chỗ cần canh** (lá "chưa nên vội" nặng nhất), mỗi hộp kèm câu tự hỏi của CHÍNH lá (lá ngược dùng câu
+   "Hỏi mình" của nghĩa ngược) + việc theo lĩnh vực. Không có lá "tiến" thì không bịa điểm tựa. Câu nối vào "Điều quan
+   trọng nhất". Câu bị bộ chặn an toàn → không có chương này. Mã `ds.tarot.cau_chuyen.<trải bài>.noi.<đầu>_<cuối>` /
+   `.tua.<lá>.<chiều>` / `.canh.<lá>.<chiều>` (chỉ thêm mã, không mất mã cũ).
+2. **Việc nên làm trong 72 giờ theo lĩnh vực**: KB `la.<id>.viec_lv.{x,n}.{tinh_cam,cong_viec,tien_bac,suc_khoe}` (624 câu,
+   nháp ban biên tập, mỗi câu một việc làm được trong 3 ngày, đúng nghĩa lá trong lĩnh vực và chiều lá; tiền bạc không
+   khuyên mua bán / đầu tư; sức khoẻ không tên bệnh). Có lĩnh vực → dùng `viec_lv` (mã thêm đuôi lĩnh vực); không có →
+   việc chung như cũ.
+3. **Lời thường**: chữ hiển thị không còn decan / độ hoàng đạo / Golden Dawn / Book T / phẩm giá / Marseille / Thoth /
+   B.O.T.A. / "triệt tiêu" — tất cả ở "Vì sao nói vậy" (test quét 5 trải bài × xuôi / ngược). Dòng chảy: "kéo hai hướng /
+   đẩy nhau mạnh lên / đỡ nhau"; hai lá cùng sức mà một lá đang lệch → "mặt lệch cũng được đẩy theo, dựa vào lá kia để kéo
+   về" (không còn gọi là chỗ chảy dễ). Nhịp thời gian: "Lá X đi theo nhịp ngày tới tuần. Trong năm, khoảng 11/05–10/06 là
+   lúc chuyện kiểu này dễ rõ nhất." Bỏ đoạn lặp ý "ẩn chính".
+4. **Nghiêng đã xét lại theo Waite 1910** (3 chỗ agent ghi cần xem ở TR-2): Ác Quỷ ngược → **có điều kiện** (Waite: "Evil
+   fatality, weakness, pettiness, blindness"; lối hiện đại đọc là nới xích → giữa hai cách là "được, nếu đi từng bước");
+   4 Gậy ngược giữ **tiến** (Waite: "The meaning remains unaltered"); 8 Cốc xuôi giữ **có điều kiện** (Waite: "the decline
+   of a matter"). Test khoá theo nguyên văn fixture.
+
+AI vẫn chỉ diễn đạt chương "Câu trả lời" (TR-3). Không migration, không dependency, không đổi phép tính → không tăng
+`ENGINE_VERSION`; **deploy engine trước web** (web cũ hiện chương mới như mọi chương khác; web mới mở sẵn nó).

@@ -45,7 +45,7 @@ export function BaoCaoTarot({ bc, tb, boLa, ten, chanTrang, cau }: { bc: Bc; tb:
           )}
         </div>
       </div>
-      <BaoCaoDoiSongView bc={bc} ten={ten} nhan="Trải bài của bạn"
+      <BaoCaoDoiSongView bc={bc} ten={ten} nhan="Trải bài của bạn" moSan={["cau_chuyen"]}
         hanhDong={<Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> In / lưu PDF</Button>} chanTrang={chanTrang} />
     </div>
   );

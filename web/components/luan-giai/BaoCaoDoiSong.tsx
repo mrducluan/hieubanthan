@@ -36,11 +36,12 @@ export function ChipMuc({ muc, nhan, className }: { muc?: Muc; nhan?: string; cl
   );
 }
 
-export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan = "Luận giải toàn bộ", chuongQua }: {
+export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan = "Luận giải toàn bộ", chuongQua, moSan }: {
   bc: BaoCaoDoiSong; ten: string; /** hiện bản dữ liệu gốc thay bản diễn đạt AI */ goc?: boolean;
   hanhDong?: ReactNode; phanKhoa?: ReactNode; chanTrang?: ReactNode; /** tắt dòng kiểm chứng (vd bài đã lưu cũ) */ kiemChung?: boolean;
   /** Nhãn nhỏ trên tiêu đề (KC-1: mỗi mảng một tên gói). */ nhan?: string;
   /** SAO-V: mã chương bạn bè tặng — ghi "Chương này là quà của một người bạn". */ chuongQua?: string;
+  /** TR-4: chương mở sẵn ngoài chương 1 (vd Tarot "Câu chuyện các lá kể" — đọc liền với câu trả lời). */ moSan?: string[];
 }) {
   const tyLe = useTyLe(kiemChung ? maMauBaoCao(bc) : []);
   const cotLoi = (bc.cot_loi ?? []).filter((h) => !h.dang_xem_lai);
@@ -56,10 +57,10 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
   // Trục 1: chương 1 mở, chương sau GẬP sẵn (chỉ hiển thị — chương khoá SAO-2 vẫn không có đoạn văn nào xuống trình
   // duyệt). Chương quà (SAO-V) cũng mở sẵn. Đổi báo cáo (người khác, phái khác) → về trạng thái đầu.
   const khoaBai = bc.chuong.map((c) => c.ma).join(",") + "|" + (bc.cot_loi?.[0]?.ma_mau ?? "");
-  const [mo, setMo] = useState<Set<string>>(() => new Set([dau, chuongQua].filter((x): x is string => Boolean(x))));
+  const [mo, setMo] = useState<Set<string>>(() => new Set([dau, chuongQua, ...(moSan ?? [])].filter((x): x is string => Boolean(x))));
   const [daCuoi, setDaCuoi] = useState(false);
   useEffect(() => {
-    setMo(new Set([dau, chuongQua].filter((x): x is string => Boolean(x))));
+    setMo(new Set([dau, chuongQua, ...(moSan ?? [])].filter((x): x is string => Boolean(x))));
     setDaCuoi(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ khi đổi bài
   }, [khoaBai]);
