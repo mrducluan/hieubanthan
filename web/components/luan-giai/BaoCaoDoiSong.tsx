@@ -36,11 +36,12 @@ export function ChipMuc({ muc, nhan, className }: { muc?: Muc; nhan?: string; cl
   );
 }
 
-export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan = "Luận giải toàn bộ", chuongQua }: {
+export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan = "Luận giải toàn bộ", chuongQua, moSan }: {
   bc: BaoCaoDoiSong; ten: string; /** hiện bản dữ liệu gốc thay bản diễn đạt AI */ goc?: boolean;
   hanhDong?: ReactNode; phanKhoa?: ReactNode; chanTrang?: ReactNode; /** tắt dòng kiểm chứng (vd bài đã lưu cũ) */ kiemChung?: boolean;
   /** Nhãn nhỏ trên tiêu đề (KC-1: mỗi mảng một tên gói). */ nhan?: string;
   /** SAO-V: mã chương bạn bè tặng — ghi "Chương này là quà của một người bạn". */ chuongQua?: string;
+  /** TR-4: chương mở sẵn ngoài chương 1 (vd Tarot "Câu chuyện các lá kể" — đọc liền với câu trả lời). */ moSan?: string[];
 }) {
   const tyLe = useTyLe(kiemChung ? maMauBaoCao(bc) : []);
   const cotLoi = (bc.cot_loi ?? []).filter((h) => !h.dang_xem_lai);
@@ -56,10 +57,10 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
   // Trục 1: chương 1 mở, chương sau GẬP sẵn (chỉ hiển thị — chương khoá SAO-2 vẫn không có đoạn văn nào xuống trình
   // duyệt). Chương quà (SAO-V) cũng mở sẵn. Đổi báo cáo (người khác, phái khác) → về trạng thái đầu.
   const khoaBai = bc.chuong.map((c) => c.ma).join(",") + "|" + (bc.cot_loi?.[0]?.ma_mau ?? "");
-  const [mo, setMo] = useState<Set<string>>(() => new Set([dau, chuongQua].filter((x): x is string => Boolean(x))));
+  const [mo, setMo] = useState<Set<string>>(() => new Set([dau, chuongQua, ...(moSan ?? [])].filter((x): x is string => Boolean(x))));
   const [daCuoi, setDaCuoi] = useState(false);
   useEffect(() => {
-    setMo(new Set([dau, chuongQua].filter((x): x is string => Boolean(x))));
+    setMo(new Set([dau, chuongQua, ...(moSan ?? [])].filter((x): x is string => Boolean(x))));
     setDaCuoi(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ khi đổi bài
   }, [khoaBai]);
@@ -236,6 +237,15 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
   const thamChieuDs = hopHien.filter((h) => thamChieu(h));
   // engine đặt câu tóm tắt làm đoạn đầu (cho lời mời SAO-2 + diễn đạt AI) — đã hiện to ở đầu chương, không lặp lại.
   const doan = c.doan.filter((d) => d !== c.tom_tat);
+  // TR-4: chương kể chuyện (Tarot "Câu chuyện các lá kể") đặt lời kể TRƯỚC các hộp — đọc chuyện rồi mới tới điểm tựa / chỗ cần canh.
+  const khoiDoan = (doan.length > 0 || c.van_ai) ? (
+    <div className="prose-vn mt-4 space-y-3 text-[0.97rem] leading-relaxed text-fg-muted" data-testid="lg-doan">
+      {c.van_ai && !goc
+        ? doanCoThuatNgu(c.van_ai.replace(/\n\s*\n/g, "\n\n"), c.thuat_ngu)
+        : doanCoThuatNgu(doan.join("\n\n"), c.thuat_ngu,
+          (d) => (d.startsWith("Câu hỏi để tự soi") ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""))}
+    </div>
+  ) : null;
   const idThan = useId();
   const cuoiRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -270,6 +280,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
         </button>
       )}
       <div id={idThan} className={cn(!mo && "hidden print:block")}>
+        {c.doan_truoc && khoiDoan}
         {c.than_do && <ThanhThan than={c.than_do} />}
         {c.bieu_do && <BieuDoNguHanh bd={c.bieu_do} haiCach={c.hai_cach} />}
         {thoiGian && thoiGian.length > 0 && <DaiVanHaiCach ds={thoiGian} />}
@@ -298,14 +309,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
             })}
           </div>
         )}
-        {(doan.length > 0 || c.van_ai) && (
-          <div className="prose-vn mt-4 space-y-3 text-[0.97rem] leading-relaxed text-fg-muted">
-            {c.van_ai && !goc
-              ? doanCoThuatNgu(c.van_ai.replace(/\n\s*\n/g, "\n\n"), c.thuat_ngu)
-              : doanCoThuatNgu(doan.join("\n\n"), c.thuat_ngu,
-                (d) => (d.startsWith("Câu hỏi để tự soi") ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""))}
-          </div>
-        )}
+        {!c.doan_truoc && khoiDoan}
         {c.mien_tru && !c.doan.some((d) => d.includes(c.mien_tru!)) && (
           <p className="mt-4 rounded-xl border border-line/70 px-4 py-2.5 text-sm text-fg-muted" data-testid="mien-tru">{c.mien_tru}</p>
         )}
