@@ -35,12 +35,13 @@ export async function TrangBlog({ n }: { n: number }) {
   if (n > tong) notFound();
   const ds = catTrang(tatCa, n);
   const duong = duongTrangSo(DUONG, n);
-  // Trang 1: 7 bài mới nhất (1 nổi bật + 6) → "Đọc theo chủ đề" (mỗi mảng ≤ 3 tiêu đề mới nhất — mục lục theo môn, có thể
-  // trùng bài phía trên) → danh sách gọn những bài của trang chưa có link nào phía trên.
+  // Trang 1: 7 bài mới nhất (1 nổi bật + 6) → "Đọc theo chủ đề" (mỗi môn một ô: số bài + ≤ 3 tiêu đề CHƯA hiện phía trên,
+  // mỗi bài chỉ một link trên trang) → danh sách gọn những bài của trang chưa có link nào phía trên.
   const nhom = nhomTheoMang(tatCa);
   const dau = ds.slice(0, 7);
-  const ke = nhom.map((g) => ({ mang: g.mang, tong: g.bai.length, bai: g.bai.slice(0, 3) }));
-  const daHien = new Set([...dau, ...ke.flatMap((k) => k.bai)].map((b) => b.slug));
+  const daHien = new Set(dau.map((b) => b.slug));
+  const ke = nhom.map((g) => ({ mang: g.mang, tong: g.bai.length, bai: g.bai.filter((b) => !daHien.has(b.slug)).slice(0, 3) }));
+  for (const k of ke) for (const b of k.bai) daHien.add(b.slug);
   const con = ds.filter((b) => !daHien.has(b.slug));
   return (
     <div className="mx-auto max-w-5xl">

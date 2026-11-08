@@ -123,11 +123,13 @@ export function LuoiChuDe({ ds }: { ds: { mang: MangBlog; bai: BaiBlog[]; tong: 
                   <p className="text-xs text-fg-faint">{tong} bài viết</p>
                 </div>
               </div>
-              <ul className="mt-4 flex-1 divide-y divide-line/50 text-sm" aria-labelledby={id}>
-                {bai.map((p) => (
-                  <li key={p.slug} className="py-2.5"><Link href={duongBlog(p.slug)} className="line-clamp-2 text-fg hover:text-gold">{p.tieuDe}</Link></li>
-                ))}
-              </ul>
+              {bai.length ? (
+                <ul className="mt-4 flex-1 divide-y divide-line/50 text-sm" aria-labelledby={id}>
+                  {bai.map((p) => (
+                    <li key={p.slug} className="py-2.5"><Link href={duongBlog(p.slug)} className="line-clamp-2 text-fg hover:text-gold">{p.tieuDe}</Link></li>
+                  ))}
+                </ul>
+              ) : <p className="mt-4 flex-1 text-sm text-fg-muted">Bài mới nhất của môn này ở ngay phía trên.</p>}
               <div className="mt-4 flex flex-wrap gap-2 text-sm">
                 <Link href={duongMangBlog(mang)} className="inline-flex min-h-10 items-center gap-1 rounded-full border border-gold/50 px-4 text-gold hover:bg-gold/10">
                   Chuyên đề {tt.ten} <ArrowRight className="size-4" aria-hidden />

@@ -9,7 +9,9 @@ test("/blog có thanh chủ đề + lưới Đọc theo chủ đề, mỗi ô d�
   await expect(thanh.getByRole("link", { name: /Hiểu bản thân/ })).toHaveAttribute("href", "/blog/mang/hieu-ban-than");
   const ke = page.getByTestId("ke-mang");
   await expect(ke).toHaveCount(2);
-  await expect(page.locator('[data-testid="ke-mang"][data-mang="than_so"]').getByRole("link", { name: "Thần số học là gì? Cách đọc 4 con số" })).toBeVisible();
+  // Mỗi bài chỉ MỘT link trên trang: bài đã ở khối mới nhất không lặp trong ô chủ đề.
+  await expect(page.locator('a[href="/blog/than-so-hoc-la-gi"]')).toHaveCount(1);
+  await expect(page.locator('[data-testid="ke-mang"][data-mang="than_so"]').getByRole("link", { name: /Chuyên đề Thần số học/ })).toBeVisible();
   // Không trang nào có hai H1; bài nổi bật đứng đầu.
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(page.getByTestId("bai-noi-bat")).toHaveCount(1);
