@@ -476,6 +476,7 @@ def tra_loi(cau_hoi: str, che_do: str = "tu_dong", gia_tri_hao: list[int] | None
         if pl["truong_phai"] == "luc_hao":
             from app.luangiai import kinhdich_tra_loi as ktl  # noqa: PLC0415
             hc = ktl.hieu_cau(pl["cau_chuan_hoa"], cau_hoi, ma_cd)
+            pl["_hieu_cau"] = hc                     # doc_que dùng lại (khoá "_" không vào gói phân loại trả ra)
             dt_viec = ktl.dung_than(hc)
             if chu_de or ma_cd != "khac" or pl["dung_than"] in (None, "Ứng"):
                 pl["dung_than"] = dt_viec.get("chinh") or cd.get("dung_than") or pl["dung_than"]

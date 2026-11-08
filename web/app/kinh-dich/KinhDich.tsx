@@ -129,13 +129,15 @@ export function KinhDich() {
         .catch(() => { /* không gợi — người dùng vẫn chọn chip */ });
     }, 500);
   };
+  useEffect(() => () => { if (henHieu.current) clearTimeout(henHieu.current); cauDangGo.current = ""; }, []);   // rời trang: huỷ hẹn, bỏ kết quả về muộn
   const chonChuDe = (ma: string | null) => { chuDeChon.current = ma; veLai((n) => n + 1); };
   // Tên hiển thị của mã chủ đề — chip chỉ có chủ đề gốc; biến thể (người kia là nữ / nam) lấy tên từ engine hiểu câu hoặc
   // nhãn nút làm rõ đã bấm (nhớ lại theo mã, không gọi thêm).
   const tenMa = useRef<Record<string, string>>({});
   if (tuNhan?.chu_de) tenMa.current[tuNhan.chu_de.ma] = tuNhan.chu_de.ten;
   for (const l of tuNhan?.can_lam_ro?.lua_chon ?? []) {
-    const goc = chuDe.find((c) => l.ma.startsWith(c.ma + "_") || l.ma === c.ma);
+    // gốc dài nhất thắng: "hon_nhan_tt_nam" thuộc "hon_nhan_tt", không phải "hon_nhan"
+    const goc = chuDe.filter((c) => l.ma.startsWith(c.ma + "_") || l.ma === c.ma).sort((a, b) => b.ma.length - a.ma.length)[0];
     if (goc) tenMa.current[l.ma] = l.ma === goc.ma ? goc.ten : `${goc.ten} (${l.nhan.toLowerCase()})`;
   }
   const tenCua = (ma: string) => chuDe.find((c) => c.ma === ma)?.ten ?? tenMa.current[ma] ?? ma;
@@ -167,7 +169,10 @@ export function KinhDich() {
     const so = soMH.map((x) => Number(x));
     if (cachGui === "mai_hoa_so" && !so.every((x) => Number.isInteger(x) && x >= 1 && x <= 9999)) return { loi: "Mai Hoa theo số: nhập hai số nguyên từ 1 đến 9999 (số bạn tự chọn, vd số nhà, số đồ vật đếm được)." };
     const nhac = !laXemLai && daHoiGanDay(cau);
-    const ma = laXemLai ? (laXemLai.chu_de?.ma ?? null) : (chuDeChon.current ?? tuNhan?.chu_de?.ma ?? null); chuDeChon.current = null; setTuNhan(null);
+    // Chủ đề gửi kèm: chip chọn tay, hoặc chủ đề tự nhận KHI câu không còn gì phải làm rõ (gửi chủ đề = engine bỏ bước làm rõ;
+    // câu mơ hồ mà người dùng chưa chọn thì để engine hỏi lại như cũ).
+    const tuNhanMa = tuNhan && !tuNhan.can_lam_ro ? (tuNhan.chu_de?.ma ?? null) : null;
+    const ma = laXemLai ? (laXemLai.chu_de?.ma ?? null) : (chuDeChon.current ?? tuNhanMa); chuDeChon.current = null; setTuNhan(null);
     const giu: { d: Res | null } = { d: null };   // phản hồi thô (hoiMang chỉ trả bản chuẩn hoá)
     const lucGieo = new Date();
     setDang(true);
@@ -305,7 +310,8 @@ export function KinhDich() {
               {chuDe.length > 0 && (
                 <div className="sm:col-span-2" data-testid="chip-chu-de" aria-label="Chủ đề câu hỏi">
                   <p className="mb-1.5 text-xs text-fg-muted" data-testid="tu-nhan" aria-live="polite">
-                    {tuNhan && !tuNhan.gieo ? "Câu này là câu kiến thức — trả lời không cần gieo quẻ." : (
+                    {tuNhan && !tuNhan.gieo ? (tuNhan.loai === "ky_thuat" || tuNhan.loai === "doc_que_da_co"
+                      ? "Câu này là câu kiến thức — trả lời không cần gieo quẻ." : "Câu này được trả lời trực tiếp, không gieo quẻ.") : (
                       <>
                         {tuNhan?.kieu_ten ? <>Câu hỏi dạng <b className="text-fg">{tuNhan.kieu_ten}</b> · </> : null}
                         {chuDeHien ? <>Bạn đang hỏi về <b className="text-gold">{tenCua(chuDeHien)}</b>{chuDeChon.current ? "" : " (tự nhận — bấm chip để đổi)"}</>

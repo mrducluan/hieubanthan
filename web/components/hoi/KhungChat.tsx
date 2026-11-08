@@ -181,7 +181,6 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
     const c = q.trim();
     if (c.length < 3 || dang) return;
     setCau("");
-    onCauDoi?.("");
     setTin((t) => [...t, { id: ++soId.current, ai: "ban", van: c }]);
     setDang(true);
     ghi("advisor_question_started", { mo_dun: moDun });
@@ -193,6 +192,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
       setTin((t) => [...t, { id: ++soId.current, ai: "he", loi: cc("hoi.loi_ket_noi") }]);
     } finally {
       setDang(false);
+      onCauDoi?.("");          // sau khi gửi xong (trang đã đọc chủ đề tự nhận lúc gửi) mới xoá dòng gợi ý
     }
   }
 

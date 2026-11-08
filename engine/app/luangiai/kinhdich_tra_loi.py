@@ -28,10 +28,10 @@ MUC_TU_NGHIENG = {"co": "thuan", "dieu_kien": "can_bang", "chua_voi": "can_chu_d
 _TAG_TU_MUC = {"thuan": "tien", "can_bang": "giu", "can_chu_dong": "than_trong"}
 
 _NGUOI_KIA = [r"nguoi (ay|do|kia|yeu)", r"anh ay", r"co ay", r"cau ay", r"ban ay", r"crush", r"doi tac", r"\bsep\b",
-              r"(chong|vo) (toi|em|minh)", r"ban than", r"ben kia", r"ho\b", r"nguoi ta"]
+              r"(chong|vo) (toi|em|minh)", r"ban than", r"ben kia", r"\bho (co|dang|se|con|that|van)\b", r"nguoi ta"]
 _HOI_LONG = [r"co (that long|thuong|yeu|thich|nghi|quay lai|quan tam|tin|con thuong|con yeu|y dinh|tha thu|doi y|giu loi)",
              r"co (dang )?(giau|lua|choi xau|noi doi|phan boi|qua mat)", r"co (con )?muon (giu|quay|o lai|tiep tuc|chia tay|bo)",
-             r"co (dinh|tinh|y dinh|ke hoach)", r"con muon", r"co (dang )?(hieu|nghe|de y|nho) (toi|minh|em)",
+             r"co (dinh|y dinh|ke hoach)(?! (thuc|chat))", r"con muon", r"co (dang )?(hieu|nghe|de y|nho) (toi|minh|em)",
              r"nghi gi", r"(nghi|cam thay|thay) (the nao|sao) ve", r"dang nghi", r"(con )?(thuong|yeu|nho) (toi|minh|em)",
              r"co y gi", r"that long", r"co dang tin", r"co lua", r"co phan boi", r"co giu loi", r"thai do"]
 _CACH_LAM = [r"nen lam (gi|the nao|sao|nhu the nao)", r"lam sao", r"lam the nao", r"cach nao", r"nen ung xu", r"nen noi",
@@ -288,7 +288,8 @@ def tra_loi(que: dict, pl: dict, goi: dict, gn: dict, muc: str, *, pt: dict | No
             cau_goc: str | None = None) -> dict:
     """Gói "trả lời theo việc" cho một quẻ đã ra. `gn` = góc nhìn ba phái (đã có mức), `muc` = mức chung theo phái chính."""
     t = pl.get("cau_chuan_hoa") or ""
-    hc = hieu_cau(t, cau_goc, chu_de)
+    hc0 = pl.get("_hieu_cau")                          # hoidap đã hiểu câu cùng chủ đề → dùng lại, không chạy lần hai
+    hc = hc0 if hc0 and hc0.get("ma_chu_de") == chu_de else hieu_cau(t, cau_goc, chu_de)
     dt = dung_than(hc)
     chinh = gn.get("chinh") or "nghia_ly"
     tag, nguon_tag = tag_hao_chu(que, goi)
