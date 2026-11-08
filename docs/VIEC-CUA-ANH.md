@@ -18,6 +18,9 @@ Giai đoạn 0 (tuần 1–2) người Việt ở nước ngoài → tiếng Anh
 - [ ] **Tuần 1–2 (QTE-1, 2026-11-08) — deploy ENGINE trước web** (ảnh Docker mới cài `tzdata`; bước build tự kiểm múi giờ — build hỏng thì Render giữ bản cũ).
 - [ ] (5 phút, sau deploy) Mở form hồ sơ → Nơi sinh "Sinh ở nước ngoài" → Hoa Kỳ → California, ngày 15/07/1990 10:00 → thấy dòng "Máy đã tính… UTC−8… đang dùng giờ mùa hè". Mở `/tet-o-nuoc-ngoai/my` → bảng giờ giao thừa Việt Nam theo từng vùng.
 - [ ] (Search Console) Gửi `/tet-o-nuoc-ngoai` + 4 trang nước vào "Kiểm tra URL → Yêu cầu lập chỉ mục" trước giữa tháng 1/2027 (Tết 6/2/2027).
+- [ ] **Tuần 3–4 (QTE-1, 2026-11-08) — deploy ENGINE trước web.** Kiểm sau deploy: mở `hieuban.com/en/bazi-calculator`, nhập 15/07/1990 10:00, Nam, United States → California → thấy bốn trụ + Day Master Xin Metal. View source `/bat-tu` thấy `hrefLang="en"`.
+- [ ] (Search Console) Gửi `https://hieuban.com/en` + `/en/bazi-calculator` vào "Kiểm tra URL → Yêu cầu lập chỉ mục"; theo dõi báo cáo theo thư mục `/en/` (Hiệu quả → Trang → lọc `/en/`).
+- [ ] Người duyệt bản xứ (mục 4 của 4af) đọc 10 trang Day Master + trang BaZi calculator — sửa câu chữ nào thì gửi em, em sửa `battu_kb.en.json` và đổi `_trang_thai` → `da_duyet`.
 
 ### 4ae. Kinh Dịch V3 — trả lời theo việc + UI hỏi quẻ (KD-V3, 2026-11-08) — deploy ENGINE trước web
 

@@ -4,9 +4,10 @@ import { NextResponse } from "next/server";
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
-export async function GET(): Promise<NextResponse> {
+export async function GET(req: Request): Promise<NextResponse> {
+  const en = new URL(req.url).searchParams.get("ngon_ngu") === "en";   // QTE-1 tuần 3–4: tên tiếng Anh cho trang /en
   try {
-    const r = await fetch(`${ENGINE_URL}/v1/dia-ly/nuoc-ngoai`, {
+    const r = await fetch(`${ENGINE_URL}/v1/dia-ly/nuoc-ngoai${en ? "?ngon_ngu=en" : ""}`, {
       headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
       next: { revalidate: 86_400 },
     });

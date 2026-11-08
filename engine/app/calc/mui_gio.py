@@ -83,8 +83,37 @@ _NUOC: tuple[tuple[str, str, tuple[tuple[str, str], ...]], ...] = (
 
 _HOP_LE = {z for _, _, tp in _NUOC for _, z in tp}
 
+# QTE-1 tuần 3–4: tên tiếng Anh cho trang /en (cùng mã nước, cùng thứ tự thành phố).
+_TEN_NUOC_EN = {
+    "us": "United States", "ca": "Canada", "au": "Australia", "nz": "New Zealand", "jp": "Japan", "kr": "South Korea",
+    "tw": "Taiwan", "cn": "China", "hk": "Hong Kong", "sg": "Singapore", "my": "Malaysia", "th": "Thailand",
+    "kh": "Cambodia", "la": "Laos", "ph": "Philippines", "id": "Indonesia", "ae": "United Arab Emirates", "fr": "France",
+    "de": "Germany", "gb": "United Kingdom", "cz": "Czech Republic", "pl": "Poland", "nl": "Netherlands", "be": "Belgium",
+    "ch": "Switzerland", "it": "Italy", "es": "Spain", "se": "Sweden", "no": "Norway", "dk": "Denmark", "fi": "Finland",
+    "hu": "Hungary", "sk": "Slovakia", "bg": "Bulgaria", "ua": "Ukraine", "ru": "Russia",
+}
+_THANH_PHO_EN = {
+    "us": ("California (Los Angeles, Orange County, San Jose, San Francisco, San Diego)", "Washington, Oregon (Seattle, Portland)",
+           "Nevada (Las Vegas)", "Texas (Houston, Dallas, Austin, San Antonio)",
+           "Illinois, Minnesota, Louisiana, Oklahoma (Chicago, New Orleans…)", "Colorado, Utah (Denver, Salt Lake City)",
+           "Arizona (Phoenix — no daylight saving)", "New York, New Jersey, Pennsylvania, Massachusetts",
+           "Virginia, Maryland, Washington D.C., North Carolina", "Georgia, Florida (Atlanta, Orlando, Miami)",
+           "Michigan, Ohio (Detroit, Columbus)", "Hawaii (Honolulu)", "Alaska (Anchorage)"),
+    "ca": ("Ontario (Toronto, Ottawa)", "Quebec (Montreal)", "British Columbia (Vancouver)", "Alberta (Calgary, Edmonton)",
+           "Manitoba (Winnipeg)", "Nova Scotia (Halifax)"),
+    "au": ("New South Wales, ACT (Sydney, Canberra)", "Victoria (Melbourne)", "Queensland (Brisbane — no daylight saving)",
+           "South Australia (Adelaide)", "Western Australia (Perth)", "Northern Territory (Darwin)", "Tasmania (Hobart)"),
+    "nz": ("Auckland, Wellington",), "es": ("Mainland",), "id": ("Jakarta (west)",), "ae": ("Dubai, Abu Dhabi",),
+    "ua": ("Kyiv, Kharkiv, Odesa",), "ru": ("Moscow, St Petersburg", "Novosibirsk", "Vladivostok"), "hk": ("Hong Kong",),
+    "sg": ("Singapore",), "cn": ("Nationwide (Beijing time)",), "tw": ("Island-wide",),
+}
 
-def danh_muc() -> list[dict]:
+
+def danh_muc(ngon_ngu: str = "vi") -> list[dict]:
+    if ngon_ngu == "en":
+        return [{"ma": ma, "ten": _TEN_NUOC_EN[ma], "thanh_pho": [
+            {"ten": (_THANH_PHO_EN.get(ma) or ("Nationwide",) * len(tp))[i], "mui_gio": z} for i, (_, z) in enumerate(tp)]}
+            for ma, _, tp in _NUOC]
     return [{"ma": ma, "ten": ten, "thanh_pho": [{"ten": t, "mui_gio": z} for t, z in tp]} for ma, ten, tp in _NUOC]
 
 

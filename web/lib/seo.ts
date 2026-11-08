@@ -1,7 +1,10 @@
 // Hằng + dựng JSON-LD dùng chung (schema.org). Chỉ định dạng dữ liệu — không tính gì.
+import { hreflang, LOCALE_OG, ngonNguCuaDuong } from "@/lib/ngon-ngu";
 import { vanHanh } from "@/lib/van-hanh";
 
 export const TEN_SITE = "Hiểu Bản Thân";
+/** QTE-1: thương hiệu ở bản tiếng Anh ("Hieu Ban" không có dấu, đọc được). */
+export const TEN_SITE_EN = "Hieuban";
 export const MO_TA_SITE =
   "Khám phá bản thân qua thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ) — tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Tham khảo văn hoá, không phải dự báo.";
 
@@ -199,8 +202,9 @@ export function metaTrang({ tieuDe, moTa, duong, md, anh: anhRieng }: { tieuDe: 
   return {
     title: tieuDeSeo(tieuDe),
     description: d,
-    alternates: { canonical: duong, ...(md ? { types: { "text/markdown": md } } : {}) },
-    openGraph: { type: "website" as const, title: tieuDe, description: d, url: duong, locale: "vi_VN", siteName: TEN_SITE,
+    alternates: { canonical: duong, ...(md ? { types: { "text/markdown": md } } : {}), ...(hreflang(duong) ? { languages: hreflang(duong) } : {}) },
+    openGraph: { type: "website" as const, title: tieuDe, description: d, url: duong, locale: LOCALE_OG[ngonNguCuaDuong(duong)],
+      siteName: ngonNguCuaDuong(duong) === "en" ? TEN_SITE_EN : TEN_SITE,
       images: [{ url: anh, width: 1200, height: 630, alt: tieuDe }] },
     twitter: { card: "summary_large_image" as const, title: tieuDe, description: d, images: [anh] },
   };

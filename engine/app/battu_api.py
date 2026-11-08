@@ -74,6 +74,29 @@ class LuuNienBTInput(BaseModel):
     nam_xem: int = Field(ge=1900, le=2100)
 
 
+@router.post("/la-so-en")
+def api_la_so_en(inp: TuanTrietInput) -> dict:
+    """QTE-1 tuần 3–4 — lá số Bát tự cho trang tiếng Anh: CÙNG phép tính `/la-so`, nhãn tiếng Anh (chuyen_ngu.battu_en)."""
+    from app.chuyen_ngu import battu_en  # noqa: PLC0415
+    return {"engine_version": ENGINE_VERSION, **battu_en.la_so(api_la_so(inp))}
+
+
+@router.get("/en/day-masters")
+def api_day_masters_en() -> dict:
+    """QTE-1 tuần 3–4 — 10 Day Master cho trang tiếng Anh (KB battu_kb.en.json, nháp máy)."""
+    from app.chuyen_ngu import battu_en  # noqa: PLC0415
+    return {"day_masters": battu_en.day_masters()}
+
+
+@router.get("/en/day-master/{slug}")
+def api_day_master_en(slug: str) -> dict:
+    from app.chuyen_ngu import battu_en  # noqa: PLC0415
+    d = battu_en.day_master(slug)
+    if d is None:
+        raise HTTPException(404, detail="Unknown Day Master")
+    return d
+
+
 @router.post("/luu-nien")
 def api_luu_nien(inp: LuuNienBTInput) -> dict:
     sinh, _ = _sinh(inp.la_so)

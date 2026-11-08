@@ -91,3 +91,12 @@ def test_api_hom_nay_theo_noi_o():
     assert r2.status_code == 200 and "ngay_ca_nhan" in str(r2.json())
     assert client.post("/v1/thanso/hom-nay", json={**base, "mui_gio_noi_o": "Mars/X"}).status_code == 422
     assert r1
+
+
+def test_danh_muc_tieng_anh_cung_khung():
+    vi, en = mui_gio.danh_muc(), mui_gio.danh_muc("en")
+    assert [n["ma"] for n in vi] == [n["ma"] for n in en]
+    for a, b in zip(vi, en):
+        assert [t["mui_gio"] for t in a["thanh_pho"]] == [t["mui_gio"] for t in b["thanh_pho"]]
+        assert b["ten"].isascii() and all(t["ten"].replace("—", "-").replace("…", "...").isascii() for t in b["thanh_pho"])
+    assert client.get("/v1/dia-ly/nuoc-ngoai", params={"ngon_ngu": "en"}).json()["nuoc"][0]["ten"] == "United States"

@@ -38,27 +38,31 @@ export interface KetQuaMuiGio {
   doi_gio: "khong_ton_tai" | "lap_lai" | null; can_xem_lai: boolean;
 }
 
-let boNhoNuoc: Promise<NuocNgoai[]> | null = null;
+const boNhoNuoc = new Map<string, Promise<NuocNgoai[]>>();
 
-function taiNuoc(): Promise<NuocNgoai[]> {
-  boNhoNuoc ??= fetch("/api/dia-ly/nuoc-ngoai")
-    .then(async (r) => {
-      if (!r.ok) throw new Error("Chưa tải được danh sách nước.");
-      return ((await r.json()) as { nuoc: NuocNgoai[] }).nuoc;
-    })
-    .catch((e: unknown) => { boNhoNuoc = null; throw e; });
-  return boNhoNuoc;
+function taiNuoc(ngonNgu: "vi" | "en"): Promise<NuocNgoai[]> {
+  let p = boNhoNuoc.get(ngonNgu);
+  if (!p) {
+    p = fetch(`/api/dia-ly/nuoc-ngoai${ngonNgu === "en" ? "?ngon_ngu=en" : ""}`)
+      .then(async (r) => {
+        if (!r.ok) throw new Error("Chưa tải được danh sách nước.");
+        return ((await r.json()) as { nuoc: NuocNgoai[] }).nuoc;
+      })
+      .catch((e: unknown) => { boNhoNuoc.delete(ngonNgu); throw e; });
+    boNhoNuoc.set(ngonNgu, p);
+  }
+  return p;
 }
 
-/** Danh mục nước + thành phố; `bat` = false thì chưa tải (form chưa chọn "nước ngoài"). */
-export function useDanhSachNuoc(bat: boolean): NuocNgoai[] | null {
+/** Danh mục nước + thành phố; `bat` = false thì chưa tải (form chưa chọn "nước ngoài"). `en` = tên tiếng Anh (trang /en). */
+export function useDanhSachNuoc(bat: boolean, ngonNgu: "vi" | "en" = "vi"): NuocNgoai[] | null {
   const [ds, setDs] = useState<NuocNgoai[] | null>(null);
   useEffect(() => {
     if (!bat) return;
     let huy = false;
-    taiNuoc().then((d) => { if (!huy) setDs(d); }).catch(() => { /* lỗi: form vẫn cho tự chọn UTC như trước */ });
+    taiNuoc(ngonNgu).then((d) => { if (!huy) setDs(d); }).catch(() => { /* lỗi: form vẫn cho tự chọn UTC như trước */ });
     return () => { huy = true; };
-  }, [bat]);
+  }, [bat, ngonNgu]);
   return ds;
 }
 

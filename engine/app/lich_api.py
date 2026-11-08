@@ -29,9 +29,9 @@ def api_tinh() -> dict:
 
 
 @router.get("/v1/dia-ly/nuoc-ngoai")
-def api_nuoc_ngoai() -> dict:
-    """QTE-1 tuần 1 — danh mục nước + thành phố (múi giờ IANA) cho form hồ sơ người Việt ở nước ngoài."""
-    return {"nuoc": mui_gio.danh_muc()}
+def api_nuoc_ngoai(ngon_ngu: Literal["vi", "en"] = "vi") -> dict:
+    """QTE-1 tuần 1 — danh mục nước + thành phố (múi giờ IANA) cho form hồ sơ; `ngon_ngu=en` cho trang /en."""
+    return {"nuoc": mui_gio.danh_muc(ngon_ngu)}
 
 
 @router.get("/v1/dia-ly/mui-gio")

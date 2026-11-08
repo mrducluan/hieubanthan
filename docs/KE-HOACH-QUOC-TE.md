@@ -161,4 +161,7 @@ Ba điểm QTE-1 còn để ngỏ, đề xuất ở PR UI-BLOG (`docs/UI-BLOG-VA
 |---|---|---|
 | 1 | **Đã làm (2026-11-08)** | Nơi sinh nước ngoài chọn nước + thành phố → máy tự tính múi giờ chuẩn + giờ mùa hè (IANA); Hôm nay / nhịp theo nơi đang sống. Nhắc việc Web Push theo nơi ở: cần cột mới (migration) — để sau. |
 | 2 | **Đã làm (2026-11-08)** — phần trang | `/tet-o-nuoc-ngoai` + Mỹ, Nhật, Úc, Canada. **Kiểm mốc từ khoá** (≥ 20.000 lượt/tháng, gồm "Chinese zodiac 2027") vẫn chờ anh nối Keyword Planner / mở trends.google.com (mục 9). |
-| 3–8 | Chưa làm | Xem mục 13 khi bắt đầu. |
+| 3–4 | **Đã làm (2026-11-08)** | Khung `/en` tự làm (lang, khung Anh, hreflang theo bảng cặp), BaZi calculator, 10 trang Day Master, privacy/terms bản ngắn. Còn: Ten Gods 10 trang, bài đọc đời sống Bát tự tiếng Anh (12 chương — cần chuyển ngữ KB lớn bằng máy, chờ anh chạy thử chất lượng QT-0), CMS hướng lai. |
+| 5–7 | Chưa làm | Tử vi (tuần 5), Phong thuỷ (tuần 6), Kinh Dịch (tuần 7) — cùng khuôn tuần 3–4: route `…-en` đổi nhãn + KB `.en.json` + trang `/en/…` + cặp hreflang. |
+| 6–8 | **Chặn** | Thanh toán quốc tế: chờ anh nộp hồ sơ cổng (mục 6, 9) — chưa có cổng thì không viết tích hợp. |
+| 8 | Chưa tới | Đo cần số liệu thật sau khi deploy ≥ 4 tuần. |
