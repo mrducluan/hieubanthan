@@ -16,7 +16,7 @@ import { ND_CHAN_DUNG } from "@/app/chan-dung/noi-dung";
 import type { BangChu, BangHinh } from "@/lib/chu-trang";
 import { CHU_TRANG_CHU, HINH_TRANG_CHU } from "@/lib/chu/trang-chu";
 import { CHU_HUYEN_HOC, CHU_KIEN_THUC, HINH_HUYEN_HOC } from "@/lib/chu/trang-tinh";
-import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM, CHU_NAM, CHU_NAM_SINH_CON, CHU_NAM_CUOI_HOI, CHU_NAM_TUOI } from "@/lib/chu/trang-con";
+import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM, CHU_NAM, CHU_NAM_SINH_CON, CHU_NAM_CUOI_HOI, CHU_NAM_TUOI, CHU_TET_NUOC } from "@/lib/chu/trang-con";
 import {
   CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_SAO_HAN, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_NHAN_TUONG, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
   CHU_XEM_NGAY, CHU_XONG_DAT, CHU_THOI_GIAN_TOI, CHU_CHAN_DUNG, CHU_TAROT,
@@ -271,6 +271,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Tra từng năm âm lịch: can chi, mệnh nạp âm, ngày Tết, tuổi Tam tai, năm tuổi, sao hạn, tuổi làm nhà, cưới hỏi, xông đất, sinh con — và xem 3 tháng, 12 tháng tới của riêng bạn.",
     loi_dan: "Mỗi năm âm lịch một trang: năm con gì, Tết ngày nào, tuổi nào Tam tai, xung năm — kèm mọi bảng tra theo tuổi của năm đó.",
   } },
+  { duong: "/tet-o-nuoc-ngoai", nhom: "tinh", ten: "Tết ở nước ngoài", o: O_TINH, mac_dinh: {                       // QTE-1 tuần 2
+    tieu_de_seo: "Tết ở nước ngoài: ngày Tết, giờ giao thừa Việt Nam theo giờ địa phương", h1: "Tết ở nước ngoài",
+    mo_ta_seo: "Người Việt ở Mỹ, Nhật, Úc, Canada: Tết Nguyên đán năm nay rơi vào ngày nào, giao thừa Việt Nam là mấy giờ ở nơi bạn sống, lịch Việt và lịch Trung Quốc có lệch nhau không.",
+    loi_dan: "Chọn nơi bạn đang sống để xem ngày Tết, giờ giao thừa Việt Nam quy ra giờ địa phương, và năm nào lịch Việt khác lịch Trung Quốc.",
+  } },
   { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm",
     mo_ta_seo: "Lịch âm Việt Nam từng năm: ngày Tết, năm có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu. Kèm công cụ đổi ngày âm dương.",
@@ -401,6 +406,8 @@ const MAU_CUM_GOC: readonly MauCumTrang[] = [
     bien: ["nam", "can_chi"], chu: CHU_NAM_CUOI_HOI },                                                   // NAM-1
   { mau_duong: "/nam/{nam}/tuoi-{nam_sinh}", nhom: "cong_cu_con", ten: "Năm · Tử vi năm theo tuổi", o: O_CUM, nguon_kb: null,
     bien: ["nam", "nam_sinh", "can_chi", "can_chi_nam"], chu: CHU_NAM_TUOI },                            // NAM-3
+  { mau_duong: "/tet-o-nuoc-ngoai/{nuoc}", nhom: "cong_cu_con", ten: "Tết ở nước ngoài · từng nước", o: O_CUM, nguon_kb: null,
+    bien: ["nuoc", "ten", "nam", "can_chi"], chu: CHU_TET_NUOC },                                        // QTE-1 tuần 2
   { mau_duong: "/lich-am/{nam}", nhom: "cong_cu_con", ten: "Lịch âm · từng năm", o: O_CUM, nguon_kb: null,
     bien: ["nam", "can_chi"], chu: CHU_LICH_AM_NAM },
   { mau_duong: "/phong-thuy/huong-xau-nam/{nam}", nhom: "cong_cu_con", ten: "Hướng xấu theo năm · từng năm", o: O_CUM, nguon_kb: null,

@@ -106,6 +106,15 @@ export const CHU_LICH_AM_NAM = {
   "cuoi.link": { nhom: C, nhan: "Chữ link công cụ", mac_dinh: "công cụ đổi lịch âm dương", toi_da: 60 },
 } as const satisfies BangChu;
 
+// QTE-1 tuần 2 — "Tết ở nước ngoài" từng nước. Biến: {ten} (tên nước), {nam}, {can_chi}.
+export const CHU_TET_NUOC = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi})", mac_dinh: "Người Việt ở {ten} · Tết {can_chi}", toi_da: 80 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({ten}, {nam})", mac_dinh: "Tết {nam} ở {ten}: ngày Tết, giờ giao thừa Việt Nam theo giờ địa phương", toi_da: 120 },
+  "gio.tieu_de": { nhom: "Bảng", nhan: "Tiêu đề bảng giờ", mac_dinh: "Giao thừa Việt Nam là mấy giờ ở {ten}", toi_da: 100 },
+  "cuoi.chu": { nhom: C, nhan: "Chữ trước link", mac_dinh: "Tuổi nào hợp xông đất Tết {nam}:", toi_da: 160 },
+  "cuoi.link": { nhom: C, nhan: "Chữ link", mac_dinh: "bảng tuổi xông đất", toi_da: 60 },
+} as const satisfies BangChu;
+
 // NAM-1 (2026-10-30) — trang trụ "Năm {năm}" + hai trang con. Biến: {nam}, {can_chi}.
 export const CHU_NAM = {
   "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi})", mac_dinh: "Năm {can_chi} · lịch, tuổi, tập quán", toi_da: 80 },

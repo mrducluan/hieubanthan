@@ -1,0 +1,23 @@
+{
+ "_nguon": "QTE-1 tuần 2 — lời trang \"Tết ở nước ngoài\" (người Việt ở Mỹ, Nhật, Úc, Canada). Câu khung có biến {x}; mọi con số (ngày Tết, giờ quy đổi) do engine tính từ âm lịch Việt Nam (Hồ Ngọc Đức, UTC+7) và cơ sở dữ liệu múi giờ IANA. Nháp ban biên tập.",
+ "source_id": "tet_nuoc_ngoai_v1",
+ "school_id": "lich_viet",
+ "trang_thai": "nhap",
+ "nuoc": {
+  "my": {"ma": "us", "ten": "Mỹ", "ten_day_du": "Hoa Kỳ", "cong_dong": "Cộng đồng người Việt ở Mỹ đông nhất ngoài Việt Nam, tập trung ở California, Texas, Washington, Virginia… Chợ Tết, hội hoa xuân thường tổ chức vào cuối tuần gần Tết."},
+  "nhat-ban": {"ma": "jp", "ten": "Nhật Bản", "ten_day_du": "Nhật Bản", "cong_dong": "Nhật Bản đón năm mới theo dương lịch (1/1), không nghỉ Tết âm lịch; người Việt ở Nhật thường đón giao thừa cùng nhau vào tối gần nhất hoặc gọi về nhà đúng giờ giao thừa Việt Nam."},
+  "uc": {"ma": "au", "ten": "Úc", "ten_day_du": "Úc (Australia)", "cong_dong": "Tết rơi vào mùa hè ở Úc. Hội chợ Tết của cộng đồng người Việt ở Sydney, Melbourne thường kéo dài cả cuối tuần gần Tết."},
+  "canada": {"ma": "ca", "ten": "Canada", "ten_day_du": "Canada", "cong_dong": "Tết rơi vào giữa mùa đông ở Canada; cộng đồng người Việt ở Toronto, Montréal, Vancouver, Calgary thường tổ chức hội Tết trong nhà vào cuối tuần gần Tết."}
+ },
+ "tra_loi_nhanh": "Tết Nguyên đán {nam} (năm {can_chi}) theo âm lịch Việt Nam rơi vào {thu_tet} {ngay_tet}. Ở {ten}, giao thừa Việt Nam (0 giờ mùng 1) là {gio_vn_tom_tat} giờ địa phương — giờ nhiều gia đình gọi điện về nhà. Đón giao thừa tại chỗ thì vào 0 giờ đêm {dem_giao_thua} theo giờ nơi bạn ở.",
+ "lich_khac": "Năm {nam}, lịch Trung Quốc (tính theo giờ Bắc Kinh) có mùng 1 Tết là {ngay_tet_trung}, khác lịch Việt Nam một ngày. Hội Tết của cộng đồng người Hoa ở {ten} có thể theo ngày này; lá số, ngày tốt trên Hiểu Bản Thân mặc định theo lịch Việt.",
+ "lich_giong": "Năm {nam}, lịch Việt Nam và lịch Trung Quốc cùng ngày mùng 1 Tết, nên hội Tết của người Việt và người Hoa ở {ten} trùng ngày.",
+ "xong_dat": "Tuổi xông đất không đổi theo nơi ở: xét theo năm {can_chi} và tuổi gia chủ, ở {ten} hay ở Việt Nam đều như nhau.",
+ "hoang_dao": "Giờ hoàng đạo ngày mùng 1 tính theo giờ đồng hồ nơi bạn đang ở (các canh giờ Tý, Sửu… ứng với giờ địa phương), không quy theo giờ Việt Nam.",
+ "hoi_dap": [
+  {"hoi": "Tết {nam} ở {ten} là ngày nào?", "dap": "Mùng 1 Tết {nam} (năm {can_chi}) theo âm lịch Việt Nam là {thu_tet} {ngay_tet}. Ngày này không đổi theo nước bạn ở; chỉ giờ giao thừa Việt Nam quy ra giờ địa phương là khác."},
+  {"hoi": "Giao thừa ở Việt Nam là mấy giờ ở {ten}?", "dap": "0 giờ mùng 1 Tết giờ Việt Nam ứng với {gio_vn_tom_tat} giờ địa phương. Muốn chúc Tết gia đình ở Việt Nam đúng lúc giao thừa thì gọi vào giờ này."},
+  {"hoi": "Đón giao thừa ở {ten} vào lúc nào?", "dap": "Phần lớn gia đình người Việt ở {ten} đón giao thừa vào 0 giờ đêm {dem_giao_thua} theo giờ nơi mình ở, cúng giao thừa và chúc Tết như ở nhà. Một số gia đình đón thêm lần nữa đúng giờ giao thừa Việt Nam để gọi điện về."},
+  {"hoi": "Xem tuổi xông đất Tết {nam} ở {ten} có khác ở Việt Nam không?", "dap": "Không khác. Tuổi xông đất xét theo can chi năm {can_chi} và tuổi gia chủ, không theo nơi ở. Xem bảng tuổi hợp ở trang tuổi xông đất Tết {nam}."}
+ ]
+}

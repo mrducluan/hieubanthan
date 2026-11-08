@@ -17,6 +17,7 @@ from app import config
 from app.calc import dia_ly, lunar, mui_gio
 from app.config import Region
 from app.luangiai import lich_nam as _lich_nam
+from app.luangiai import tet_nuoc_ngoai as _tet_nn
 
 router = APIRouter(tags=["lich"])
 
@@ -42,6 +43,22 @@ def api_mui_gio(mui_gio_ten: Annotated[str, Query(alias="mui_gio", max_length=40
         return mui_gio.tinh(mui_gio_ten, ngay, gio)
     except ValueError as e:
         raise HTTPException(422, detail=str(e)) from e
+
+
+@router.get("/v1/tet-nuoc-ngoai")
+def api_tet_nuoc_ngoai_ds() -> dict:
+    """QTE-1 tuần 2 — danh sách nước có trang "Tết ở nước ngoài" + năm Tết sắp tới."""
+    return {"nuoc": _tet_nn.danh_sach(), "nam": _tet_nn.nam_tet_sap_toi(config.hom_nay_vn())}
+
+
+@router.get("/v1/tet-nuoc-ngoai/{slug}")
+def api_tet_nuoc_ngoai(slug: Annotated[str, FPath(max_length=20)],
+                       nam: Annotated[int | None, Query(ge=1901, le=2099)] = None) -> dict:
+    """QTE-1 tuần 2 — Tết ở một nước: ngày Tết (lịch Việt / Trung), giờ giao thừa Việt Nam quy ra giờ địa phương."""
+    try:
+        return _tet_nn.tet(slug, nam or _tet_nn.nam_tet_sap_toi(config.hom_nay_vn()))
+    except KeyError as e:
+        raise HTTPException(404, detail="Chưa có trang cho nước này") from e
 
 
 class DoiLichInput(BaseModel):
