@@ -179,5 +179,13 @@ làm: trước cuộc tranh luận gần nhất…" cho câu hỏi đổi việc
    4 Gậy ngược giữ **tiến** (Waite: "The meaning remains unaltered"); 8 Cốc xuôi giữ **có điều kiện** (Waite: "the decline
    of a matter"). Test khoá theo nguyên văn fixture.
 
+5. **Web**: chương kể chuyện mở sẵn (`BaoCaoDoiSongView moSan`) và đặt lời kể TRƯỚC các hộp (cờ chương `doan_truoc`).
+6. **Sửa kèm**: hỏi đáp Tarot "lá X ngược trong công việc" trả nghĩa XUÔI của lĩnh vực — nay đọc `linh_vuc_nguoc` như bài đọc,
+   "Việc nên làm" theo `viec_lv`.
+
+**Mã kiểm chứng**: thêm `ds.tarot.cau_chuyen.*` và `ds.tarot.viec.<lá>.<chiều>.<lĩnh vực>`. Mã `ds.tarot.viec.<lá>.<chiều>`
+(không đuôi) chỉ còn ở bài không có lĩnh vực — bài có lĩnh vực đổi sang mã có đuôi **có chủ đích**: chữ trong hộp đã khác,
+phiếu cũ không nên gắn vào câu mới (golden sinh lại, 7 mã mẫu đổi).
+
 AI vẫn chỉ diễn đạt chương "Câu trả lời" (TR-3). Không migration, không dependency, không đổi phép tính → không tăng
 `ENGINE_VERSION`; **deploy engine trước web** (web cũ hiện chương mới như mọi chương khác; web mới mở sẵn nó).

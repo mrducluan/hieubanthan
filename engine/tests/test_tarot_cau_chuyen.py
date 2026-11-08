@@ -45,8 +45,10 @@ def _chu_hien(c: dict) -> list[str]:
 
 # ------------------------------------------------------------------ chương "Câu chuyện các lá kể"
 def test_cau_chuyen_dung_sau_cau_tra_loi():
-    ma = [c["ma"] for c in _bc()["chuong"]]
+    bc = _bc()
+    ma = [c["ma"] for c in bc["chuong"]]
     assert ma[:2] == ["tra_loi", "cau_chuyen"]
+    assert _ch(bc, "cau_chuyen")["doan_truoc"] is True    # web đặt lời kể trước các hộp
 
 
 def test_cau_chuyen_ke_dung_thu_tu_va_nghia_trong_linh_vuc():

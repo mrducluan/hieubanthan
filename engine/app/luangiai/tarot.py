@@ -610,7 +610,7 @@ def _chuong_cau_chuyen(pt: dict, tb: dict, hc: dict) -> dict:
                           ma=kh.ma_mau(MO_DUN, "cau_chuyen", khoa, l["id"], chieu), muc=_MUC_NG[ng[i]], phai="rws",
                           la=_tom_la(l, nguoc), vi_tri={"so": i, "ma": vt[i]["ma"], "ten": vt[i]["ten"], "hoi": vt[i]["hoi"]}))
     return kh.chuong("cau_chuyen", c["tieu_de"], doan, hop=hop, muc=muc, tom_tat=str(mau["tieu_de"]) + ".", cau_hoi=c["cau_hoi"],
-                     cau_tu_soi="Đọc lại câu chuyện: đoạn nào giống đời bạn nhất lúc này?")
+                     cau_tu_soi="Đọc lại câu chuyện: đoạn nào giống đời bạn nhất lúc này?", doan_truoc=True)
 
 
 def _chuong_tra_loi(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date, chan: str | None) -> dict:

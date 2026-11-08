@@ -145,6 +145,10 @@ test("TR-2: câu 'A hay B' → gợi trải bài Hai lựa chọn; lá ngược 
   await expect(chuyen).toContainText("Quá khứ — 6 Tiền (ngược)");
   await expect(chuyen).toContainText("Điểm tựa ở Hiện tại: Pháp Sư");
   await expect(chuyen).toContainText("Chỗ cần canh ở Sắp tới: Hiệp sĩ Kiếm (ngược)");
+  // lời kể đứng TRƯỚC các hộp (đọc chuyện rồi mới tới điểm tựa / chỗ cần canh)
+  const yDoan = (await chuyen.getByTestId("lg-doan").boundingBox())!.y;
+  const yHop = (await chuyen.getByText("Điểm tựa ở Hiện tại").boundingBox())!.y;
+  expect(yDoan).toBeLessThan(yHop);
   for (const tu of ["decan", "Golden Dawn", "Book T", "Phẩm giá"]) await expect(chuyen).not.toContainText(tu, { useInnerText: true });
   const ban = bc.getByTestId("ban-trai-bai");
   await expect(ban.getByTestId("nhan-nguoc")).toHaveCount(2);
