@@ -72,6 +72,10 @@ function nhanThoiDiem(iso?: string): string | null {
   return m ? `${m[4]}:${m[5]} ngày ${m[3]}/${m[2]}` : null;
 }
 
+interface HieuCau {
+  gieo: boolean; loai?: string | null; chu_de?: { ma: string; ten: string } | null; kieu?: string | null; kieu_ten?: string | null;
+  vai?: string | null; ten_dung_than?: string | null; can_lam_ro?: { ma: string; cau_hoi: string; lua_chon: { ma: string; nhan: string }[] } | null;
+}
 const GOI_Y = [
   { nhom: "Công việc", cau: ["Tôi có nên nhận lời làm quản lý không?", "Có nên chuyển việc trong năm nay?"] },
   { nhom: "Quan hệ", cau: ["Tôi có nên chủ động nói chuyện lại với bạn cũ?"] },
@@ -107,6 +111,38 @@ export function KinhDich() {
   const [phuongMH, setPhuongMH] = useState("Đông");
   const [chuDe, setChuDe] = useState<{ ma: string; ten: string }[]>([]);
   const chuDeChon = useRef<string | null>(null);
+  // KD-V3: engine hiểu câu TRƯỚC khi gieo (debounce 500 ms, ≥ 8 ký tự): chủ đề gợi ý + kiểu câu + câu làm rõ. Chỉ mã / nhãn
+  // danh mục cố định đi về; người dùng vẫn đổi được bằng chip (chip đã chọn tay thắng gợi ý).
+  const [tuNhan, setTuNhan] = useState<HieuCau | null>(null);
+  const [, veLai] = useState(0);
+  const henHieu = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cauDangGo = useRef("");
+  const cauDoi = (c: string) => {
+    cauDangGo.current = c;
+    if (henHieu.current) clearTimeout(henHieu.current);
+    const t = c.trim();
+    if (t.length < 8) { setTuNhan(null); return; }
+    henHieu.current = setTimeout(() => {
+      fetch("/api/kinhdich/hieu-cau", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ cau_hoi: t.slice(0, 500) }) })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d: HieuCau | null) => { if (cauDangGo.current.trim() === t && d) { setTuNhan(d); ghi("chart_interacted", { mo_dun: "kinhdich", kind: "hieu_cau", kieu: d.kieu ?? "khong", co_chu_de: Boolean(d.chu_de) }); } })
+        .catch(() => { /* không gợi — người dùng vẫn chọn chip */ });
+    }, 500);
+  };
+  useEffect(() => () => { if (henHieu.current) clearTimeout(henHieu.current); cauDangGo.current = ""; }, []);   // rời trang: huỷ hẹn, bỏ kết quả về muộn
+  const chonChuDe = (ma: string | null) => { chuDeChon.current = ma; veLai((n) => n + 1); };
+  // Tên hiển thị của mã chủ đề — chip chỉ có chủ đề gốc; biến thể (người kia là nữ / nam) lấy tên từ engine hiểu câu hoặc
+  // nhãn nút làm rõ đã bấm (nhớ lại theo mã, không gọi thêm).
+  const tenMa = useRef<Record<string, string>>({});
+  if (tuNhan?.chu_de) tenMa.current[tuNhan.chu_de.ma] = tuNhan.chu_de.ten;
+  for (const l of tuNhan?.can_lam_ro?.lua_chon ?? []) {
+    // gốc dài nhất thắng: "hon_nhan_tt_nam" thuộc "hon_nhan_tt", không phải "hon_nhan"
+    const goc = chuDe.filter((c) => l.ma.startsWith(c.ma + "_") || l.ma === c.ma).sort((a, b) => b.ma.length - a.ma.length)[0];
+    if (goc) tenMa.current[l.ma] = l.ma === goc.ma ? goc.ten : `${goc.ten} (${l.nhan.toLowerCase()})`;
+  }
+  const tenCua = (ma: string) => chuDe.find((c) => c.ma === ma)?.ten ?? tenMa.current[ma] ?? ma;
+  /** Chủ đề đang hiển thị = chip người dùng chọn tay, không có thì chủ đề engine tự nhận từ câu đang gõ. */
+  const chuDeHien = chuDeChon.current ?? tuNhan?.chu_de?.ma ?? null;
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
   // UI-KD 4: lịch sử quẻ trên máy; "Xem lại" = gọi lại engine với đúng 6 giá trị cũ (gieo_tay), không gieo lại, không lưu thêm.
   const xemLai = useRef<QueDaLuu | null>(null);
@@ -133,7 +169,10 @@ export function KinhDich() {
     const so = soMH.map((x) => Number(x));
     if (cachGui === "mai_hoa_so" && !so.every((x) => Number.isInteger(x) && x >= 1 && x <= 9999)) return { loi: "Mai Hoa theo số: nhập hai số nguyên từ 1 đến 9999 (số bạn tự chọn, vd số nhà, số đồ vật đếm được)." };
     const nhac = !laXemLai && daHoiGanDay(cau);
-    const ma = laXemLai ? (laXemLai.chu_de?.ma ?? null) : chuDeChon.current; chuDeChon.current = null;
+    // Chủ đề gửi kèm: chip chọn tay, hoặc chủ đề tự nhận KHI câu không còn gì phải làm rõ (gửi chủ đề = engine bỏ bước làm rõ;
+    // câu mơ hồ mà người dùng chưa chọn thì để engine hỏi lại như cũ).
+    const tuNhanMa = tuNhan && !tuNhan.can_lam_ro ? (tuNhan.chu_de?.ma ?? null) : null;
+    const ma = laXemLai ? (laXemLai.chu_de?.ma ?? null) : (chuDeChon.current ?? tuNhanMa); chuDeChon.current = null; setTuNhan(null);
     const giu: { d: Res | null } = { d: null };   // phản hồi thô (hoiMang chỉ trả bản chuẩn hoá)
     const lucGieo = new Date();
     setDang(true);
@@ -144,7 +183,8 @@ export function KinhDich() {
         { cau_hoi: cau, che_do: laXemLai ? laXemLai.che_do : cheDo, cach_ra_que: cachGui, ...(cachGui === "gieo_tay" ? { gia_tri_hao: vals } : {}),
           ...(cachGui === "mai_hoa" && lichMH === "trung" ? { lich: lichMH } : {}),
           ...(cachGui === "mai_hoa_so" ? { so_mai_hoa: so } : {}), ...(cachGui === "mai_hoa_phuong" ? { phuong_mai_hoa: phuongMH } : {}),
-          ...(ma ? { chu_de: ma } : {}), ...(laXemLai && gioVietNam(laXemLai.luc) ? { thoi_diem: gioVietNam(laXemLai.luc) } : {}) },
+          ...(ma ? { chu_de: ma } : {}), ...(laXemLai && gioVietNam(laXemLai.luc) ? { thoi_diem: gioVietNam(laXemLai.luc) } : {}),
+          dien_dat: true },
         (d) => { giu.d = d; if (d.doc_que?.y_dinh_chung) setMaYDinh(d.doc_que.y_dinh_chung); return null; },
         ["khong_gieo_lai"],
       );
@@ -172,7 +212,9 @@ export function KinhDich() {
     // Có quẻ: lời chính = kết luận đời thường (bản theo sách gập trong DocQue); quẻ + lời hiện sau nghi thức lật xu (may_gieo).
     const que = d.que, dq = d.doc_que ?? null;
     const giaTri = giaTriTuQue(que);
-    const van = dq ? dq.ket_luan : kq.van;
+    // KD-V3 hướng C: có bản AI diễn đạt (đã qua bộ kiểm engine) thì làm lời chính; kết luận tất định vẫn ở hộp đầu của DocQue.
+    const vanAi = dq?.dien_dat === "tra_loi" ? dq.tra_loi?.van_ai : undefined;
+    const van = dq ? (vanAi ?? dq.ket_luan) : kq.van;
     const nghiThuc = !laXemLai && cachGui === "may_gieo" && !!giaTri;
     if (!laXemLai) {
       ghiDaHoi(cau);
@@ -193,7 +235,8 @@ export function KinhDich() {
     const idDq = `dq-${Date.now()}`;
     const hao = kq.trucQuan?.some((k) => k.kieu === "hao") ? kq.trucQuan.filter((k) => k.kieu === "hao") : undefined;
     const phu = (
-      <KetQuaQue giaTri={giaTri} nghiThuc={nghiThuc} cach={cachGui} van={van} thuatNgu={kq.thuatNgu} canCu={kq.canCu} ghiChu={kq.ghiChu} canhBao={kq.canhBao}
+      <KetQuaQue giaTri={giaTri} nghiThuc={nghiThuc} cach={cachGui} van={van} thuatNgu={kq.thuatNgu} canCu={kq.canCu}
+        ghiChu={vanAi ? "Phần trả lời được diễn đạt tự động từ lời đọc quẻ có nguồn; hộp bên dưới là bản gốc để đối chiếu." : kq.ghiChu} canhBao={kq.canhBao}
         trucQuan={hao}
         onHien={() => { batDauDoc("kinhdich"); setCoQue(true); }}>
         <div className="glass rounded-2xl p-4" data-testid="que">
@@ -254,21 +297,45 @@ export function KinhDich() {
       <div className="mx-auto max-w-3xl space-y-4">
         <KhungChat
             moDun="kinhdich"
-          loiChao="Tĩnh tâm một chút, rồi viết câu hỏi về một việc cụ thể — càng rõ việc, quẻ càng dễ soi."
+          loiChao="Tĩnh tâm một chút, rồi viết câu hỏi về một việc cụ thể — càng rõ việc, quẻ càng dễ soi. Bấm một câu gợi ý thì câu đó điền vào ô, bạn sửa rồi gửi."
           goiY={GOI_Y}
           nhanO="Câu hỏi Kinh Dịch"
-          goiYO="Có nên nhận lời làm quản lý không?"
+          goiYO="Viết câu hỏi của bạn, ví dụ: Có nên nhận lời làm quản lý không?"
           cauNgoai={cauNgoai}
-          dieuKhien={
+          chipDienSan
+          onCauDoi={cauDoi}
+          dieuKhienDuoi={
             <div className="grid gap-2 sm:grid-cols-2">
+              {/* KD-V3: chủ đề — engine tự nhận từ câu đang gõ (dòng "Mình hiểu…"), hàng chip MỘT dòng cuộn ngang để đổi; chip chọn tay thắng. */}
               {chuDe.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 sm:col-span-2" data-testid="chip-chu-de" aria-label="Chủ đề câu hỏi">
-                  <span className="self-center text-xs text-fg-faint">Bạn đang hỏi về:</span>
-                  {chuDe.map((c) => (
-                    <button key={c.ma} type="button" aria-pressed={chuDeChon.current === c.ma}
-                      onClick={() => { chuDeChon.current = chuDeChon.current === c.ma ? null : c.ma; setChuDe((x) => [...x]); ghi("pain_point_clicked", { mo_dun: "kinhdich", ma: c.ma }); }}
-                      className={cn("rounded-full border px-2.5 py-0.5 text-xs", chuDeChon.current === c.ma ? "border-gold/70 text-gold" : "border-line text-fg-muted hover:text-fg")}>{c.ten}</button>
-                  ))}
+                <div className="min-w-0 max-w-full sm:col-span-2" data-testid="chip-chu-de" aria-label="Chủ đề câu hỏi">
+                  {/* min-w-0: ô lưới không được nở theo hàng chip cuộn ngang (điện thoại tràn 900px khi thiếu) */}
+                  <p className="mb-1.5 text-xs text-fg-muted" data-testid="tu-nhan" aria-live="polite">
+                    {tuNhan && !tuNhan.gieo ? (tuNhan.loai === "ky_thuat" || tuNhan.loai === "doc_que_da_co"
+                      ? "Câu này là câu kiến thức — trả lời không cần gieo quẻ." : "Câu này được trả lời trực tiếp, không gieo quẻ.") : (
+                      <>
+                        {tuNhan?.kieu_ten ? <>Câu hỏi dạng <b className="text-fg">{tuNhan.kieu_ten}</b> · </> : null}
+                        {chuDeHien ? <>Bạn đang hỏi về <b className="text-gold">{tenCua(chuDeHien)}</b>{chuDeChon.current ? "" : " (tự nhận — bấm chip để đổi)"}</>
+                          : "Bạn đang hỏi về: chọn một chủ đề để quẻ chọn đúng hào đại diện (hoặc để máy tự nhận khi bạn gõ)."}
+                      </>
+                    )}
+                  </p>
+                  {tuNhan?.can_lam_ro && !chuDeChon.current && (
+                    <div className="mb-2 flex flex-wrap items-center gap-1.5" data-testid="lam-ro-truoc">
+                      <span className="text-xs text-fg-muted">{tuNhan.can_lam_ro.cau_hoi}</span>
+                      {tuNhan.can_lam_ro.lua_chon.map((l) => (
+                        <button key={l.ma} type="button" onClick={() => { chonChuDe(l.ma); ghi("pain_point_clicked", { mo_dun: "kinhdich", ma: l.ma }); }}
+                          className="rounded-full border border-gold/60 px-2.5 py-0.5 text-xs text-gold hover:bg-gold/10">{l.nhan}</button>
+                      ))}
+                    </div>
+                  )}
+                  <div className="-mx-1 flex w-[calc(100%+0.5rem)] gap-1.5 overflow-x-auto px-1 pb-1 [mask-image:linear-gradient(to_right,black_92%,transparent)] [scrollbar-width:none]">
+                    {[...chuDe].sort((a, b) => (a.ma === chuDeHien ? -1 : b.ma === chuDeHien ? 1 : 0)).map((c) => (
+                      <button key={c.ma} type="button" aria-pressed={chuDeHien === c.ma}
+                        onClick={() => { chonChuDe(chuDeChon.current === c.ma ? null : c.ma); ghi("pain_point_clicked", { mo_dun: "kinhdich", ma: c.ma }); }}
+                        className={cn("shrink-0 rounded-full border px-2.5 py-1 text-xs", chuDeHien === c.ma ? "border-gold/70 bg-gold/10 text-gold" : "border-line text-fg-muted hover:text-fg")}>{c.ten}</button>
+                    ))}
+                  </div>
                 </div>
               )}
               <Select aria-label="Chế độ" value={cheDo} onChange={(e) => { setCheDo(e.target.value); danhDauChonTay(); }} className="h-10 text-sm">
