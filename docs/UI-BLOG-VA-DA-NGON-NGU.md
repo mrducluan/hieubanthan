@@ -52,36 +52,60 @@ và từ chuyên đề sang công cụ (`cross_cta_*` sẵn có ở trang bài).
 - `/blog/mang/{than-so-hoc|tu-vi|bat-tu|kinh-dich|phong-thuy|hop-doi|xem-ngay-tot|hieu-ban-than}` + sitemap.
 - E2E `e2e-cms/blog-mang.spec.ts`.
 
-## 4. Kế hoạch đa ngôn ngữ (I18N) — CHỜ CHỦ DỰ ÁN CHỐT (mục 5)
+## 4. Đa ngôn ngữ — đối chiếu kế hoạch QTE-1 (`docs/KE-HOACH-QUOC-TE.md`, PR #230)
 
-### Nguyên tắc
-1. **URL thư mục con** `hieuban.com/en/…`; tiếng Việt **giữ nguyên URL hiện tại** (không thêm `/vi`) để không đổi ~1.000 URL đang index.
-2. Mỗi trang dịch có `hreflang` vi-VN / en / `x-default`, sitemap theo ngôn ngữ, `inLanguage`, `og:locale`, `llms.txt` theo ngôn ngữ.
-3. **Không tự chuyển ngôn ngữ theo IP** (bot Google ở Mỹ sẽ không thấy bản Việt); chỉ gợi ý một dải "Read in English".
-4. Trang **chưa dịch xong thì không index** bản ngôn ngữ đó (không để trang nửa Việt nửa Anh).
-5. CALC không đổi (con số không có ngôn ngữ); chỉ lớp KB/RULES lời và NARRATIVE đổi theo ngôn ngữ.
-6. Dịch máy chỉ tạo **nháp**, người duyệt qua PR — như quy tắc KB hiện nay. Không dịch máy chữ người dùng lúc chạy.
+QTE-1 (chốt qua `/grill-me` 2026-11-07) là kế hoạch gốc; mục này **không thay** nó, chỉ (a) đối chiếu phần UI-BLOG làm hôm nay và
+(b) chốt ba chỗ QTE-1 còn để ngỏ: máy chuyển ngữ, cách CMS lưu bản dịch, cách blog tiếng Việt có bản tiếng Anh.
 
-### Công cụ — so sánh và đề xuất
-| Lớp | Lựa chọn | Đánh giá | Đề xuất |
+### 4.1 Đối chiếu
+| QTE-1 đã chốt | UI-BLOG / đề xuất hôm nay | Khớp? |
+|---|---|---|
+| Thư mục con `/en/`, `/zh-hant/`, hreflang | Giữ. Tiếng Việt không thêm `/vi` | ✅ |
+| Tự làm đa ngôn ngữ, không `next-intl`; bảng chữ `lib/chu` có bản `en` | Giữ; ngày/số dùng `Intl` | ✅ |
+| Tiếng Anh: Bát tự → Tử vi → Phong thuỷ → Kinh Dịch; **không** Tarot/Thần số/hỏi đáp | Giữ (bản nháp đầu của em đề xuất Thần số + Tarot trước — **bỏ**, theo QTE-1) | ✅ |
+| KB dịch máy vào `*_en.json`, nháp, người bản xứ duyệt; LLM không dịch lúc trả lời | Giữ; thêm máy chuyển ngữ + bộ kiểm (4.2) | ✅ bổ sung |
+| CMS — chưa chốt | Hướng lai (4.3) | ➕ mới |
+| Blog tiếng Anh — chưa chốt | Nút "Tạo bản tiếng Anh" tạo NHÁP nối bài gốc (4.4) | ➕ mới |
+| `/blog/mang/{slug}` (hôm nay) | Bản Anh dùng slug Anh: `/en/blog/bazi`, `/en/blog/zi-wei`, `/en/blog/feng-shui`, `/en/blog/i-ching` — `SLUG_MANG_BLOG` thêm chiều ngôn ngữ khi tới tuần 3–4 | ✅ chuẩn bị sẵn |
+| Mốc từ khoá tuần 2 (≥ 20.000 lượt/tháng) | Thêm đề xuất: cụm "Chinese zodiac 2027 / Year of the Fire Goat" (Tết 6/2/2027) là mùa tìm kiếm lớn, hợp với Bát tự — đưa vào lượt kiểm từ khoá tuần 2 | ➕ gợi ý |
+
+### 4.2 Máy chuyển ngữ → **LLM chuyển ngữ có bảng thuật ngữ + máy tự kiểm + người bản xứ duyệt**
+| Lựa chọn | Đánh giá |
+|---|---|
+| Google Translation (NMT) | Đúng nghĩa nhưng văn "dịch", thuật ngữ hay lệch |
+| DeepL API (có tiếng Việt từ 06/2025) | Văn trôi; thêm nhà cung cấp + phí; dùng làm bản so sánh khi cần |
+| **LLM mạnh qua OpenRouter** (nhà cung cấp đã duyệt) | **Chọn**: viết lại cho người bản xứ (transcreation), theo được bảng thuật ngữ + giọng "không phán"; chỉ chạy lúc soạn, không chạy khi người dùng đọc |
+| Dịch lúc chạy | Không làm (không kiểm được, tốn mỗi lượt, Google không index tốt) |
+
+Quy trình một kịch bản (`engine/scripts/dich_kb.py`, dùng chung KB, chữ giao diện, bài blog):
+1. Bảng thuật ngữ cố định `thuat_ngu_en.json` dựng từ `tu_dien.json`: Bát tự → BaZi (Four Pillars), nhật chủ → Day Master, dụng thần →
+   Useful God, Tử vi → Zi Wei Dou Shu, cung Mệnh → Life Palace, Kinh Dịch → I Ching, quẻ → hexagram, Phong thuỷ → Feng Shui, cung phi → Kua number, phi tinh → Flying Stars…
+2. Quy tắc giọng tiếng Anh + `banned_phrases` (doom, curse, guaranteed, accurate, you will die…) — tương đương `cum_cam`, khớp mục pháp lý QTE-1.
+3. LLM chuyển ngữ theo lô JSON (khoá giữ nguyên) → LLM thứ hai đọc như người bản xứ.
+4. Máy tự kiểm, chặn: biến `{x}` + số giữ nguyên, đúng thuật ngữ, cụm cấm, độ dài, sức khoẻ có "not medical advice".
+5. PR nháp → người bản xứ duyệt (đúng ngân sách 300–500 USD/tháng của QTE-1).
+
+Skill dùng khi làm: `anthropic-skills:internationalization-engineer`, `anthropic-skills:language-translator`, `anthropic-skills:keyword-research`,
+`marketing:seo-audit`, nội bộ `huyenhoc-kb`. Tham khảo Lingo.dev (CLI i18n dùng LLM, có hướng dẫn Payload) — chưa cần thêm vào repo.
+
+### 4.3 CMS lưu bản dịch → **hướng lai**
+Migration đa ngôn ngữ để CMS biết "bài này có bản tiếng Anh nào, URL nào, đã duyệt chưa" → web hiện đúng ngôn ngữ, gắn hreflang nối hai bản
+(Google hiểu là một bài cho hai thị trường, không coi là trùng lặp), ban biên tập sửa từng bản riêng.
+
+| | A. Bản địa hoá theo trường (Payload `localization`) | B. Mỗi ngôn ngữ một bài, nối quan hệ | C. CMS riêng |
 |---|---|---|---|
-| Front end (chữ giao diện) | **next-intl** (MIT) · Paraglide JS (inlang, MIT, biên dịch sẵn, gói nhỏ nhất) · react-i18next · Lingui | next-intl hợp App Router + middleware nhất; Paraglide nhẹ nhất nhưng đổi cách viết mọi chuỗi | **Không thêm thư viện ở GĐ1**: site đã có **bảng chữ có khoá** (`lib/chu/*.ts`, ND-7) = danh mục thông điệp sẵn → thêm chiều ngôn ngữ cho `taoChu`/`useChu`; ngày/số/số nhiều dùng `Intl` có sẵn. Chỉ xin duyệt next-intl nếu cần ICU phức tạp. |
-| Định tuyến | thư mục `app/[lang]` · **proxy rewrite** | Dời mọi route vào `[lang]` = refactor ~300 tệp | **`proxy.ts` rewrite** `/en/x` → `/x` + header `x-ngon-ngu: en` (layout đã render động vì nonce CSP); `Lien` tự gắn tiền tố |
-| CMS | **Payload localization có sẵn** (`localization: { locales, defaultLocale: 'vi', fallback: true }`, trường `localized: true`) | Không thêm gói; cần migration Payload (bảng `_locales`) | Bật cho Bài viết, Chuyên mục, Trang website, Menu, Chữ dùng chung |
-| Engine / KB | tệp phủ `kb/data/<tên>.en.json` cùng khoá + `trang_thai` | Git vẫn là nguồn; thiếu bản dịch → rơi về vi + cờ | Engine nhận `ngon_ngu`; KB `tu_dien.json` thành **bảng thuật ngữ** cố định (Tử vi → Zi Wei Dou Shu, Bát tự → BaZi, Kinh Dịch → I Ching, Thần số → Numerology, Phong thuỷ → Feng Shui, Nhân tướng → Face reading) |
-| Dịch máy | LLM qua OpenRouter (đã duyệt nhà cung cấp) · DeepL API (thêm nhà cung cấp + chi phí) · Google Translate | LLM theo được bảng thuật ngữ + giọng "không phán", DeepL đều tay hơn với văn thường | Kịch bản `scripts/dich_kb.py`: dịch theo lô → kiểm tự động (giữ biến `{x}`, đúng thuật ngữ, `cum_cam` từng ngôn ngữ, độ dài) → PR nháp |
-| Lời AI hỏi đáp | lời nhắc theo ngôn ngữ | bộ kiểm `kiem_ai` cần danh sách cấm theo ngôn ngữ | GĐ3 |
+| Migration | Lớn (bảng `_locales`, mọi hook/kiểm định phải biết ngôn ngữ; trạng thái xuất bản theo ngôn ngữ ở Payload v3 còn là cờ thử nghiệm `localizeStatus`) | Nhỏ: thêm `ngon_ngu` + `ban_goc` | Không, nhưng gấp đôi vận hành |
+| Hợp với | Nội dung cùng khung: Menu, Chân trang, Chữ dùng chung, Trang website | **Bài chuyển ngữ**: bản Anh khác từ khoá, slug, ví dụ, xuất bản độc lập | — |
 
-### Lộ trình
-- **I18N-0** (nền, không đổi gì người dùng thấy): cấu hình ngôn ngữ một nguồn, `taoChu(lang)`, `Intl` cho ngày/số, `inLanguage`/hreflang lấy từ cấu hình.
-- **I18N-1**: proxy rewrite `/en`, `Lien` gắn tiền tố, nút chọn ngôn ngữ, Payload localization (migration), bản Anh cho khung trang + Blog.
-- **I18N-2**: engine `ngon_ngu` + KB tiếng Anh cho Thần số + Tarot (hai môn quen với thị trường quốc tế nhất) + trang kiến thức tương ứng.
-- **I18N-3**: hỏi đáp/luận giải tiếng Anh, an toàn (khủng hoảng, từ chối) bằng tiếng Anh, chính sách riêng tư/điều khoản bản Anh (cần luật sư).
-- **I18N-4**: Tử vi, Bát tự, Kinh Dịch, Phong thuỷ; thanh toán quốc tế (payOS chỉ VND).
+**Chọn: B cho Bài viết + Chuyên mục, A cho các global giao diện.** Cần chủ dự án duyệt migration Payload (up/down) khi tới tuần 3–4.
 
-## 5. Câu hỏi cho chủ dự án
-1. **Ngôn ngữ và thị trường đầu tiên**: tiếng Anh cho người Việt ở nước ngoài + người nước ngoài quan tâm phương Đông? Hay tiếng Trung phồn thể / Hàn / Nhật?
-2. **URL**: đồng ý `hieuban.com/en/` (khuyên dùng) hay tên miền riêng?
-3. **Môn mở trước**: Thần số + Tarot (đề xuất) hay cả bảy môn?
-4. **Dịch máy**: dùng OpenRouter có sẵn (không thêm nhà cung cấp) hay thêm DeepL? Ai duyệt bản tiếng Anh?
-5. Duyệt **migration Payload localization** (I18N-1) và — nếu cần — dependency `next-intl`.
+### 4.4 Blog tiếng Việt → tiếng Anh
+Được, theo cách an toàn: nút **"Tạo bản tiếng Anh"** trong trình viết bài → quy trình 4.2 → bài `en` **NHÁP** nối bài gốc, slug theo
+từ khoá tiếng Anh, ảnh dùng chung (ảnh có chữ vẽ lại bản Anh) → kiểm định tiếng Anh → người duyệt xuất bản. Cron có thể tạo nháp cho
+bài mới, **không bao giờ tự xuất bản** (như BLOG-9d). Chỉ chuyển ngữ bài thuộc 4 mảng QTE-1 và có nhu cầu tìm kiếm tiếng Anh.
+Engine: phép tính không cần dịch; phần lời (KB, RULES, an toàn) đi qua `*_en.json` + tham số `ngon_ngu` như QTE-1.
+
+## 5. Còn chờ chủ dự án
+1. Merge PR #230 (QTE-1) trước, rồi PR này (đã bỏ tệp trùng tên).
+2. Duyệt hướng 4.2 (LLM qua OpenRouter) và 4.3 (lai B + A, migration Payload ở tuần 3–4).
+3. Có thêm "Chinese zodiac 2027" vào lượt kiểm từ khoá tuần 2 không.
