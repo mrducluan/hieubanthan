@@ -886,6 +886,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nhắn rủ người ấy đi một buổi cà phê nhẹ nhàng, chưa bàn chuyện xa hơn tuần sau.",
+     "cong_viec": "Hỏi một người từng làm việc này đúng một câu bạn lo nhất, trước khi nhận lời.",
+     "tien_bac": "Giới hạn khoản thử ở mức mất cũng không sao, ghi con số ra giấy trước khi chi.",
+     "suc_khoe": "Đi bộ 20 phút trên một con đường mới, mang giày vừa chân và cất điện thoại khi qua đường."
+    },
+    "n": {
+     "tinh_cam": "Viết ra điều bạn đang chờ ở người ấy, rồi hẹn một buổi gặp bình thường thay vì đoán tiếp.",
+     "cong_viec": "Ghi ba điều bạn chưa biết về việc mới và gửi câu hỏi cho người phụ trách trong hôm nay.",
+     "tien_bac": "Hoãn mọi khoản chi theo hứng 48 giờ, chỉ giữ khoản thử nhỏ đã định sẵn mức dừng.",
+     "suc_khoe": "Đặt báo thức đi ngủ cùng một giờ ba tối liền và rời nhà sớm hơn 10 phút để khỏi vội."
+    }
    }
   },
   "dai_1": {
@@ -974,6 +988,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Làm ngay một việc nhỏ bạn từng hứa với người ấy, trước khi nói thêm lời hay nào.",
+     "cong_viec": "Chọn một dự án, viết dàn ý trình bày một trang và hẹn người quyết để nói trong tuần.",
+     "tien_bac": "Định giá một việc bạn làm giỏi và gửi báo giá ấy cho một người đang cần.",
+     "suc_khoe": "Hẹn giờ cứ 50 phút đứng dậy nghỉ mắt, xoay cổ tay vài vòng trong suốt ngày làm việc."
+    },
+    "n": {
+     "tinh_cam": "Giữ trọn một lời hứa nhỏ tuần này và chưa hứa thêm điều gì cho tới khi làm xong.",
+     "cong_viec": "Gạch bớt các việc đang làm dở, chỉ giữ một việc và làm tới bản nộp được trong 72 giờ.",
+     "tien_bac": "Từ chối mọi lời mời kiếm tiền nhanh trong tuần, hỏi một người thứ hai trước khi chuyển khoản.",
+     "suc_khoe": "Tắt màn hình trước giờ ngủ 45 phút và đi bộ quanh nhà mỗi khi họp xong."
+    }
    }
   },
   "dai_2": {
@@ -1062,6 +1090,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Kể cho người ấy một điều nhỏ về bạn mà họ chưa biết, chọn lúc yên và không vội.",
+     "cong_viec": "Lập danh sách câu còn chưa có lời đáp về việc này và hỏi đủ trước khi trả lời có hay không.",
+     "tien_bac": "Đọc lại phần chữ nhỏ của hợp đồng hay khoản phí đang có, đánh dấu chỗ chưa hiểu.",
+     "suc_khoe": "Ghi giờ ngủ và mức mệt mỗi sáng trong ba ngày, đọc lại xem cơ thể đang nhắc điều gì."
+    },
+    "n": {
+     "tinh_cam": "Chọn một tối yên, hỏi thẳng người ấy một câu bạn đang giữ trong lòng rồi nghe cho hết.",
+     "cong_viec": "Xin đủ tài liệu gốc cho quyết định đang chờ và đọc lại một lượt trước khi trả lời.",
+     "tien_bac": "Nhắn bên bán ghi rõ mọi khoản phí bằng văn bản, chưa ký cho tới khi nhận được.",
+     "suc_khoe": "Hẹn lịch đi khám định kỳ trong tuần này, mang theo ghi chép về giấc ngủ và mệt mỏi."
+    }
    }
   },
   "dai_3": {
@@ -1150,6 +1192,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nấu một bữa cho hai người và hỏi người ấy muốn được chăm theo cách nào, thay vì tự đoán.",
+     "cong_viec": "Hoàn thiện một sản phẩm đang dở cho khách và từ chối một việc nhận thêm chỉ vì nể.",
+     "tien_bac": "Ghi lại khoản mua gần nhất để dỗ lòng, rồi chuyển đúng số đó vào khoản để dành dài hạn.",
+     "suc_khoe": "Ăn một bữa có nhiều rau, ra nắng sáng 15 phút và lên giường sớm hơn thường lệ tối nay."
+    },
+    "n": {
+     "tinh_cam": "Nhờ người ấy giúp một việc bạn cần tuần này và để họ làm theo cách của họ.",
+     "cong_viec": "Trả lại cho đúng người một việc không thuộc phần mình, báo bằng tin nhắn rõ ràng hôm nay.",
+     "tien_bac": "Tách riêng một khoản cho bản thân ngay khi nhận lương, rồi mới tính phần chi cho người khác.",
+     "suc_khoe": "Ngồi ăn một bữa không làm việc, không điện thoại mỗi ngày trong ba ngày tới."
+    }
    }
   },
   "dai_4": {
@@ -1238,6 +1294,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nhường người ấy quyết một việc nhỏ trong nhà tuần này và không sửa lại cách họ làm.",
+     "cong_viec": "Viết quy trình một trang cho việc hay lặp lại và hỏi đội chỗ nào còn khó làm theo.",
+     "tien_bac": "Lập bảng chi tháng này với ba mục cố định, đặt mức cho từng mục và dán ở chỗ dễ thấy.",
+     "suc_khoe": "Giữ giờ dậy cố định cả cuối tuần và thả lỏng vai, hàm vài phút mỗi khi xong một việc."
+    },
+    "n": {
+     "tinh_cam": "Hỏi người ấy muốn tự lo việc nào trong nhà, rồi giao hẳn việc đó cho họ trong tuần.",
+     "cong_viec": "Ghi rõ ai quyết việc gì trong nhóm và gửi bảng phân việc ấy cho mọi người cùng xem.",
+     "tien_bac": "Mở sổ chi tháng trước, nới mục bị siết quá tay và giữ nguyên quỹ dự phòng.",
+     "suc_khoe": "Giao bớt một việc nhà hoặc việc làm cho người khác và nghỉ trọn một buổi cuối tuần."
+    }
    }
   },
   "dai_5": {
@@ -1326,6 +1396,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Ngồi cùng người ấy, mỗi người viết ba điều coi là nếp nhà quan trọng rồi so với nhau.",
+     "cong_viec": "Hẹn gặp một người đi trước trong nghề để hỏi cách làm chuẩn trước khi đề xuất đổi.",
+     "tien_bac": "Gọi ngân hàng đang dùng xin bản điều khoản bằng văn bản, đọc lại trước khi gia hạn gì.",
+     "suc_khoe": "Xem lại ngày khám định kỳ gần nhất và đặt lịch nếu đã quá một năm chưa đi."
+    },
+    "n": {
+     "tinh_cam": "Nói riêng với người ấy điều hai bạn thật sự muốn trước khi hỏi ý kiến gia đình hai bên.",
+     "cong_viec": "Tìm hiểu lý do của quy định cũ, rồi viết đề xuất đổi một trang gửi người phụ trách.",
+     "tien_bac": "Hỏi thêm một nơi độc lập về lời khuyên tiền bạc vừa nghe, đối chiếu trên giấy trước khi làm.",
+     "suc_khoe": "Chọn một thói quen ăn ngủ chỉ giữ vì quen, đổi nó trong ba ngày và ghi lại cảm giác."
+    }
    }
   },
   "dai_6": {
@@ -1414,6 +1498,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Viết ra ba điều bạn coi trọng nhất trong tình cảm, rồi nói một điều chưa nói với người ấy.",
+     "cong_viec": "Ngồi bàn với bên hợp tác, mỗi bên nêu ý về hai hướng, và tự tay bạn chốt lựa chọn.",
+     "tien_bac": "Đề nghị người cùng góp tiền ký vào một tờ ghi rõ khoản lớn nào cần cả hai đồng ý.",
+     "suc_khoe": "Rủ một người đi bộ cùng buổi tối, giữ hơi thở đều và thả lỏng hai tay khi ngồi lâu."
+    },
+    "n": {
+     "tinh_cam": "Mở lời về một chỗ bạn thấy chưa khớp, bằng giọng bình thường, lúc cả hai đều rảnh.",
+     "cong_viec": "Viết mục tiêu của mỗi bên ra hai cột, đặt cạnh nhau rồi hẹn họp ngắn để so chỗ lệch.",
+     "tien_bac": "Đối chiếu sổ chi hai người tháng này và ghi cách chia mới lên giấy cho cả hai giữ.",
+     "suc_khoe": "Giữ giờ ngủ của riêng bạn ba tối liền, kể cả khi người kia còn thức."
+    }
    }
   },
   "dai_7": {
@@ -1502,6 +1600,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Hỏi người ấy muốn đi đâu cùng nhau năm nay, và để họ chọn việc làm trước.",
+     "cong_viec": "Chốt một mốc giao việc trong tuần, ghi các bước theo thứ tự và giữ tốc độ vừa sức.",
+     "tien_bac": "Chọn một mục tiêu tiền duy nhất cho quý này, ghi số cần có và gác các mục khác lại.",
+     "suc_khoe": "Lái chậm hơn một nấc trong tuần, dừng nghỉ giãn lưng cổ sau mỗi chặng đường dài."
+    },
+    "n": {
+     "tinh_cam": "Dừng một cuộc tranh luận đang dở, hỏi lại cả hai thật sự muốn đi về đâu.",
+     "cong_viec": "Gạch một mục tiêu đang chạy song song, báo người liên quan và dồn sức vào cái còn lại.",
+     "tien_bac": "Hoãn khoản mua lớn ít nhất một tuần, không vay thêm chỉ để theo kịp người quen.",
+     "suc_khoe": "Bớt một việc mỗi ngày trong tuần này để có 30 phút nằm nghỉ, giãn lưng cổ."
+    }
    }
   },
   "dai_8": {
@@ -1590,6 +1702,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Chờ cơn nóng nguội hẳn, rồi nói với người ấy một câu ngắn về điều bạn cần.",
+     "cong_viec": "Gọi lại vị khách khó, nghe hết họ nói, ghi một điều bạn làm được ngay trong 72 giờ.",
+     "tien_bac": "Xoá ứng dụng mua sắm khỏi màn hình chính trong tuần này để bớt thèm mua.",
+     "suc_khoe": "Tập nhẹ 20 phút mỗi ngày trong ba ngày, đếm hơi thở chậm khi thấy mình nóng giận."
+    },
+    "n": {
+     "tinh_cam": "Đợi tới khi bình tĩnh, nói đúng một câu về điều bạn cần, rồi để người ấy trả lời.",
+     "cong_viec": "Chia việc khó thành ba phần nhỏ, nhờ một đồng nghiệp gánh giúp một phần trong tuần.",
+     "tien_bac": "Áp luật chờ 24 giờ cho mọi khoản không cần ngay, nhất là lúc đang mệt hoặc buồn.",
+     "suc_khoe": "Thở chậm 5 phút mỗi tối trước khi ngủ, đặt lịch khám định kỳ nếu mệt đã kéo dài."
+    }
    }
   },
   "dai_9": {
@@ -1678,6 +1804,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Báo trước với người ấy bạn cần một buổi tối riêng mỗi tuần và hẹn lại giờ gặp sau đó.",
+     "cong_viec": "Dành hai giờ không họp để đọc sâu một tài liệu, rồi hẹn hỏi một người có kinh nghiệm.",
+     "tien_bac": "Rà lại các khoản trừ tự động tháng này, huỷ khoản bạn không còn dùng tới.",
+     "suc_khoe": "Tản bộ chậm 20 phút sau bữa tối, tránh chỗ ồn và lên giường trước 11 giờ."
+    },
+    "n": {
+     "tinh_cam": "Nhắn một tin hỏi thăm người ấy hôm nay và hẹn một buổi gặp ngắn trong tuần.",
+     "cong_viec": "Mang bản nháp việc đang làm tới một người bạn tin, xin họ góp đúng hai ý.",
+     "tien_bac": "Ngồi xem lại các khoản tháng này cùng một người hiểu việc, hỏi họ chỗ nào nên sửa.",
+     "suc_khoe": "Ra ngoài trời ít nhất 15 phút mỗi ngày và trò chuyện trực tiếp với một người."
+    }
    }
   },
   "dai_10": {
@@ -1766,6 +1906,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nhận lời một buổi gặp mới tuần này và đi với kỳ vọng nhẹ, chưa tính chuyện xa.",
+     "cong_viec": "Gửi hồ sơ hoặc đề xuất cho cơ hội vừa tới trong 72 giờ, kèm một phương án dự phòng.",
+     "tien_bac": "Chuyển một phần thu nhập tháng này vào quỹ dự phòng để không phải bán vội lúc giá xuống.",
+     "suc_khoe": "Ghi giờ ngủ và bữa ăn mỗi ngày trong tuần đổi mùa, xem nhịp nào đang lệch."
+    },
+    "n": {
+     "tinh_cam": "Nhớ lại lần trước chuyện này diễn ra thế nào, rồi chọn một cách phản ứng khác lần này.",
+     "cong_viec": "Cập nhật hồ sơ nghề và làm thật tốt phần việc hiện có để sẵn sàng khi cửa mở.",
+     "tien_bac": "Giữ nguyên các khoản đang có, không bán vội, không vay thêm để gỡ trong tháng này.",
+     "suc_khoe": "Ghi giờ ngủ trong bảy ngày và chọn một thói cũ cần chỉnh, như thức khuya cuối tuần."
+    }
    }
   },
   "dai_11": {
@@ -1854,6 +2008,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Ngồi cùng người ấy liệt kê ai đang lo khoản nào, việc nào, rồi ghi lại cho rõ.",
+     "cong_viec": "Soạn đầy đủ lý do cho quyết định sắp đưa ra và gửi bản tóm tắt cho người liên quan.",
+     "tien_bac": "Soát lại hợp đồng hay giấy tờ thuế đang có, việc lớn thì hẹn hỏi luật sư trong tuần.",
+     "suc_khoe": "Đứng dậy vận động 5 phút mỗi giờ ngồi và kiểm lại lần khám định kỳ gần nhất."
+    },
+    "n": {
+     "tinh_cam": "Nói thẳng với người ấy về phần việc và phần tiền mỗi bên, đề xuất một cách chia mới.",
+     "cong_viec": "Lưu email, tin nhắn làm bằng chứng và nhận trước phần sai của mình ở cuộc họp tới.",
+     "tien_bac": "Đối chiếu từng dòng giấy tờ chia tiền, đánh dấu chỗ lệch và hỏi lại bằng văn bản.",
+     "suc_khoe": "Đặt nhắc đứng dậy mỗi giờ, cân lại giờ làm và giờ nghỉ cho bằng nhau trong tuần."
+    }
    }
   },
   "dai_12": {
@@ -1942,6 +2110,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Tự đặt một mốc ngày chờ, ghi ra giấy, và không thúc ép người ấy trước mốc đó.",
+     "cong_viec": "Dùng thời gian chờ duyệt để viết lại kế hoạch từ góc nhìn của khách hàng.",
+     "tien_bac": "Chấp nhận bỏ một khoản nhỏ đang treo để tháo phần còn lại, ghi rõ lý do vào sổ.",
+     "suc_khoe": "Nằm giãn người 10 phút mỗi tối, gác chân lên cao và giữ lịch khám định kỳ đúng hẹn."
+    },
+    "n": {
+     "tinh_cam": "Liệt kê điều bạn đã nhường lâu nay, chọn một điều để nói với người ấy trong tuần.",
+     "cong_viec": "Làm xong phần việc nằm trong tay mình và hỏi rõ ngày người kia trả lời.",
+     "tien_bac": "Cắt khoản tiền đọng nhỏ nhất ngay tuần này, không vay thêm để giữ phần còn lại.",
+     "suc_khoe": "Giãn người 5 phút sau khi thức dậy và đổi tư thế ngồi sau mỗi 45 phút."
+    }
    }
   },
   "dai_13": {
@@ -2030,6 +2212,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Cất đi một món đồ gợi lại chuyện cũ, cho mình một buổi được buồn rồi đi ngủ sớm.",
+     "cong_viec": "Liệt kê việc cần bàn giao của dự án cũ và hoàn tất từng việc trước khi nhận việc mới.",
+     "tien_bac": "Đóng một tài khoản hay thẻ không còn dùng và cắt một khoản lỗ đang để mặc.",
+     "suc_khoe": "Chọn thói quen hao sức nhất, bỏ nó trong ba ngày và đặt lịch đi khám định kỳ."
+    },
+    "n": {
+     "tinh_cam": "Viết ra điều bạn sợ mất nếu buông, rồi bàn với người ấy bước tiếp theo cho rõ.",
+     "cong_viec": "Đặt một ngày khép việc cũ, báo cho người liên quan và lập danh sách bàn giao.",
+     "tien_bac": "Cắt một khoản chi cũ bạn chỉ còn giữ vì tiếc, ngay trong tuần này.",
+     "suc_khoe": "Giảm một nửa thói quen hao sức trong tuần đầu và mở kết quả khám định kỳ ra đọc lại."
+    }
    }
   },
   "dai_14": {
@@ -2118,6 +2314,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Tìm một chuyện hai người khác ý, mỗi người nhường một phần nhỏ và ghi lại cách làm.",
+     "cong_viec": "Ngồi giữa hai bên đang khác ý, để mỗi bên nói một lượt rồi tóm lại điểm cả hai cùng nhận.",
+     "tien_bac": "Chia thu nhập tháng này thành ba phần: chi, để dành, dự phòng, ghi tỉ lệ ra giấy.",
+     "suc_khoe": "Ăn đúng ba bữa, ngủ cùng giờ và đi bộ đều 20 phút mỗi ngày trong tuần này."
+    },
+    "n": {
+     "tinh_cam": "Chọn một chuyện cụ thể, đề nghị mỗi người lùi một bước và thử cách mới trong một tuần.",
+     "cong_viec": "Chia lại khối việc dồn cuối tuần thành phần nhỏ đều mỗi ngày, bắt đầu từ sáng mai.",
+     "tien_bac": "Đặt mức chi cố định mỗi tuần, khoản nào vượt thì ghi sang tuần sau.",
+     "suc_khoe": "Quay lại một giờ ngủ cố định và thay một lần ăn bù buổi tối bằng cốc nước ấm."
+    }
    }
   },
   "dai_15": {
@@ -2201,11 +2411,25 @@
    },
    "tra_loi": {
     "x": "Chưa nên vội: kiểm xem bạn muốn việc này thật, hay đang bị cám dỗ, sợ hãi hoặc thói quen kéo đi. Nếu thấy khó dừng lại, đó là lúc nên chậm.",
-    "n": "Nghiêng về có: lá này ủng hộ bước giúp bạn thoát khỏi điều trói mình. Điều kiện là đi từng bước và nhờ một người đáng tin cùng theo dõi."
+    "n": "Được, nếu đi từng bước: lá này cho thấy bạn đã bắt đầu nhìn ra điều trói mình, nhưng sách cũ còn đọc nó là chỗ yếu lòng, dễ quay lại thói cũ. Làm khi đã có kế hoạch nhỏ và một người đáng tin cùng theo dõi."
    },
    "nghieng": {
     "x": "cho",
-    "n": "tien"
+    "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nói với người ấy một ranh giới rõ, như giờ nào bạn cần ở một mình, rồi làm đúng như vậy.",
+     "cong_viec": "Viết ra lý do thật khiến bạn còn ở chỗ làm này và từ chối một món lợi nhỏ mà sai.",
+     "tien_bac": "Dừng một thói chi bạn biết là để bù cảm giác và đọc lại lãi suất khoản đang vay.",
+     "suc_khoe": "Đặt giờ tắt màn hình buổi tối, để điện thoại ngoài phòng ngủ trong ba đêm."
+    },
+    "n": {
+     "tinh_cam": "Giữ một ranh giới nhỏ đã nói ra trong cả tuần này, kể cả khi thấy khó.",
+     "cong_viec": "Ghi ra hai lựa chọn khác cho công việc và làm bước chuẩn bị đầu tiên cho một lựa chọn.",
+     "tien_bac": "Lập lịch trả từng khoản nợ theo hạn và không mở thêm khoản vay nào trong tháng.",
+     "suc_khoe": "Giữ một việc nhỏ lành mỗi ngày để thay thói cũ, cần hỗ trợ thì hẹn gặp bác sĩ."
+    }
    }
   },
   "dai_16": {
@@ -2294,6 +2518,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Đợi qua cơn nóng một đêm, rồi nói với người ấy điều bạn vừa thấy rõ, không kết luận vội.",
+     "cong_viec": "Lưu lại hồ sơ, email quan trọng và không ký giấy tờ nào trong 48 giờ sau cú sốc.",
+     "tien_bac": "Kiểm lại hợp đồng bảo hiểm và quỹ dự phòng tuần này, gác mọi khoản chi mạo hiểm.",
+     "suc_khoe": "Đi khám ngay nếu có dấu hiệu lạ đột ngột; còn lại ngủ sớm và bớt cà phê vài hôm."
+    },
+    "n": {
+     "tinh_cam": "Chọn một lúc bình tĩnh nói ra một phần chuyện đang nén, trước khi nó tự bùng lên.",
+     "cong_viec": "Sắp lại hồ sơ cá nhân, cập nhật lý lịch nghề và chưa ký gì trong tuần này.",
+     "tien_bac": "Xem lại kế hoạch tiền đã lung lay, gạch phần không còn đúng và không vay thêm để chống.",
+     "suc_khoe": "Ngủ bù theo giờ cố định ba đêm, hẹn gặp bác sĩ nếu hồi hộp hay mất ngủ còn kéo dài."
+    }
    }
   },
   "dai_17": {
@@ -2382,6 +2620,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Làm một việc nhỏ cho thấy bạn tin người ấy hôm nay, và chưa hứa điều gì lớn.",
+     "cong_viec": "Viết một dòng về hướng xa của công việc và chọn một bước nhẹ làm được trong tuần.",
+     "tien_bac": "Trả thêm một khoản nhỏ cho món nợ gần xong nhất và ghi mục tiêu để dành năm tới.",
+     "suc_khoe": "Uống đủ nước theo bình đã đánh dấu, ngủ trước 11 giờ và đi dạo nhẹ buổi tối."
+    },
+    "n": {
+     "tinh_cam": "Ghi lại những việc người ấy đã làm trong tháng, so với lời họ hứa trước khi tin thêm.",
+     "cong_viec": "Đặt một mục tiêu nhỏ làm xong trong tuần, gắn với kế hoạch lớn đang dở.",
+     "tien_bac": "Lập chi tiêu chỉ dựa trên tiền đã về tài khoản, gạch mọi khoản 'sắp có' khỏi bảng.",
+     "suc_khoe": "Bớt một việc khỏi lịch tuần này và ngủ sớm ba tối liền thay vì gồng tỏ ra ổn."
+    }
    }
   },
   "dai_18": {
@@ -2470,6 +2722,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Hỏi thẳng người ấy một câu về điều đang làm bạn suy diễn, thay vì đoán qua tin nhắn.",
+     "cong_viec": "Lưu lại mọi thông tin nghe được ở chỗ làm kèm nguồn, chưa quyết gì tới khi có xác nhận.",
+     "tien_bac": "Kiểm lại người nhận và lý do của từng khoản chuyển chưa rõ trước khi bấm gửi.",
+     "suc_khoe": "Ghi giấc ngủ và tâm trạng mỗi sáng hai tuần; nếu lo âu kéo dài thì hẹn gặp bác sĩ."
+    },
+    "n": {
+     "tinh_cam": "Chọn một buổi chiều rảnh nói chuyện thẳng thắn với người ấy, giữ giọng nhẹ và câu ngắn.",
+     "cong_viec": "Liệt kê những gì đã được xác nhận về việc này và chỉ quyết dựa trên danh sách đó.",
+     "tien_bac": "Đối chiếu sao kê ba tháng gần nhất, gọi hỏi ngay khoản nào bạn còn thắc mắc.",
+     "suc_khoe": "Ngủ cùng giờ cả tuần, bớt đọc tin trước khi ngủ và gặp bác sĩ nếu còn lo âu lâu."
+    }
    }
   },
   "dai_19": {
@@ -2558,6 +2824,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Rủ người ấy một buổi đi chơi ban ngày và kể cho người thân một tin vui của hai người.",
+     "cong_viec": "Trình bày kết quả dự án ở cuộc họp tới và nhắc tên từng người đã góp sức.",
+     "tien_bac": "Chia khoản thu tăng thêm làm hai: một nửa để dành trước, một nửa mới tính chi.",
+     "suc_khoe": "Ra nắng sớm 15 phút, đội mũ khi trời gắt và lên giường trước 11 giờ tối."
+    },
+    "n": {
+     "tinh_cam": "Dành một buổi riêng không chụp ảnh, không đăng gì, chỉ để hai người nói chuyện.",
+     "cong_viec": "Gửi lời cảm ơn có tên cho người đã giúp và rà lại chất lượng phần việc tiếp theo.",
+     "tien_bac": "Trích riêng một phần cố định mỗi lần có tiền về trước khi chi cho bất cứ thứ gì.",
+     "suc_khoe": "Đặt giờ nghỉ giữa buổi làm, che nắng khi ra ngoài và tắt đèn ngủ sớm tối nay."
+    }
    }
   },
   "dai_20": {
@@ -2646,6 +2926,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Tự hỏi mình đã học được gì từ chuyện cũ, rồi quyết có cần nói lời làm lành hay không.",
+     "cong_viec": "Tổng kết một năm làm việc trên một trang, đánh dấu việc muốn làm tiếp và việc muốn bỏ.",
+     "tien_bac": "Gom giấy tờ của khoản cũ còn treo, gọi hỏi tiến độ xử lý trong tuần này.",
+     "suc_khoe": "Gọi đặt lịch khám tổng quát nếu đã hoãn lâu, rồi đổi một nếp nhỏ sau khi có kết quả."
+    },
+    "n": {
+     "tinh_cam": "Ghi ba điều đã học từ chuyện cũ và thôi tự trách mỗi khi nhớ lại nó trong tuần này.",
+     "cong_viec": "Gọi hỏi thăm một nơi làm mới hoặc một người trong ngành bạn muốn chuyển sang.",
+     "tien_bac": "Liệt kê mọi khoản nợ và việc dang dở, trả dứt khoản nhỏ nhất trong 72 giờ.",
+     "suc_khoe": "Lên giường đúng giờ ba tối liền và gọi đặt lịch khám tổng quát bạn đã hoãn."
+    }
    }
   },
   "dai_21": {
@@ -2734,6 +3028,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Bàn với người ấy một bước mới cho hai người, như chuyến đi xa, và ghi lại ngày dự kiến.",
+     "cong_viec": "Chốt bản bàn giao dự án, gửi người nhận và xin nghỉ một ngày sau khi xong.",
+     "tien_bac": "Khoá sổ khoản cũ đã xong, ghi tổng thu chi rồi mới lập kế hoạch cho phần tiếp theo.",
+     "suc_khoe": "Chuẩn bị đồ cho chuyến đi đổi gió sắp tới và chốt lịch khám định kỳ năm nay."
+    },
+    "n": {
+     "tinh_cam": "Gọi tên chuyện còn chưa bàn xong giữa hai người và hẹn ngày cụ thể để nói cho trọn.",
+     "cong_viec": "Liệt kê phần còn thiếu của dự án và chốt hạn hoàn thành với người duyệt.",
+     "tien_bac": "Xử lý dứt một khoản còn treo trước khi mở bất kỳ khoản mới nào trong tháng.",
+     "suc_khoe": "Quay lại làm phần nhỏ nhất của thói quen tốt đã bỏ dở, mỗi ngày 10 phút."
+    }
    }
   },
   "gay_1": {
@@ -2817,6 +3125,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nhắn người ấy một lời mời gặp cụ thể, có ngày giờ, ngay khi còn thấy hứng.",
+     "cong_viec": "Ghi ý tưởng mới lên một trang và làm bước đầu tiên của nó trong 24 giờ tới.",
+     "tien_bac": "Dành một khoản nhỏ có trần rõ cho việc mới, phần còn lại để yên trong quỹ.",
+     "suc_khoe": "Bắt đầu buổi tập đầu tiên chỉ 15 phút, dừng khi còn sức để mai muốn tập tiếp."
+    },
+    "n": {
+     "tinh_cam": "Chốt một buổi hẹn có ngày giờ rõ trong tuần và giữ đúng hẹn đó dù bận.",
+     "cong_viec": "Mở sổ ý tưởng, chọn việc nhỏ nhất làm được trong hôm nay và làm luôn trước bữa tối.",
+     "tien_bac": "Giữ tiền lại cho tới khi viết xong kế hoạch một trang cho việc mới muốn bỏ vốn.",
+     "suc_khoe": "Đặt mục tiêu 15 phút vận động mỗi ngày, đánh dấu lên lịch và ngủ đủ trước khi tăng."
+    }
    }
   },
   "gay_2": {
@@ -2910,6 +3232,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Chia sẻ với người ấy một kế hoạch bạn đang nghĩ cho hai người, thay vì giữ trong đầu.",
+     "cong_viec": "Viết lý do đi và lý do ở ra hai cột, rồi đặt một ngày chốt quyết định.",
+     "tien_bac": "Tính thử phương án mở rộng với số thật, chỉ dùng phần tiền nằm ngoài quỹ dự phòng.",
+     "suc_khoe": "Lên kế hoạch tập ba tháng trên giấy và chọn một chuyến đổi gió ngắn cuối tháng."
+    },
+    "n": {
+     "tinh_cam": "Chọn một việc nhỏ hai người cùng làm trong tháng này, như học nấu một món mới.",
+     "cong_viec": "Đặt hạn quyết định trong tuần và ghi rõ bạn còn chờ thêm thông tin gì.",
+     "tien_bac": "Thử một phương án nhỏ với khoản tiền mất được, quỹ dự phòng giữ nguyên như cũ.",
+     "suc_khoe": "Đi ngủ sớm hơn nửa giờ từ tối nay, giữ trong bảy ngày rồi mới tính đổi thêm."
+    }
    }
   },
   "gay_3": {
@@ -3003,6 +3339,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Hẹn một cuộc gọi video cố định mỗi tuần với người ở xa, hoặc nhận lời gặp một người mới.",
+     "cong_viec": "Gửi thư chào hợp tác cho một bên ngoài khu vực bạn đang làm, kèm bản giới thiệu ngắn.",
+     "tien_bac": "Liệt kê các khoản đang chờ về kèm ngày dự kiến và chưa rút khoản nào trước hạn.",
+     "suc_khoe": "Lên lịch khám định kỳ cho quý này và đi bộ ngoài trời, nhìn ra xa 10 phút mỗi chiều."
+    },
+    "n": {
+     "tinh_cam": "Hỏi thẳng người ấy một lần về kế hoạch gặp nhau, rồi lo nhịp sống của mình trong lúc chờ.",
+     "cong_viec": "Nhắc lại đối tác bằng email có hạn trả lời rõ và soạn sẵn một phương án thứ hai.",
+     "tien_bac": "Gạch khỏi kế hoạch chi mọi số chưa nhận, kiểm lại hạn thanh toán trên giấy tờ.",
+     "suc_khoe": "Ghi một lịch khám và một lịch tập cụ thể cho quý này lên điện thoại ngay hôm nay."
+    }
    }
   },
   "gay_4": {
@@ -3096,6 +3446,20 @@
    "nghieng": {
     "x": "tien",
     "n": "tien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Bàn với người ấy một mốc vui sắp tới, như ra mắt gia đình, và chọn ngày cụ thể.",
+     "cong_viec": "Tổ chức một buổi ăn nhẹ cảm ơn đội sau khi xong giai đoạn, rồi ghi việc cho bước sau.",
+     "tien_bac": "Đặt hạn mức cho khoản lễ hay khoản cho nhà, ghi từng mục chi trước khi bắt đầu mua.",
+     "suc_khoe": "Về ăn một bữa cơm với người thân tuần này và giữ giờ ngủ như ngày thường sau đó."
+    },
+    "n": {
+     "tinh_cam": "Nói ra một điều còn vướng trong lòng trước khi tính tiếp chuyện về ở cùng nhà.",
+     "cong_viec": "Dành một buổi cùng đội điểm lại việc đã làm được, mỗi người kể một điều đáng nhớ.",
+     "tien_bac": "Giữ đúng hạn mức chi cho lễ, cắt bớt phần trang trí và không vay thêm để làm to.",
+     "suc_khoe": "Cho mình một ngày không làm việc, ngủ bù có giờ và ăn bữa cơm nhà."
+    }
    }
   },
   "gay_5": {
@@ -3189,6 +3553,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Đặt cùng người ấy một luật nhỏ khi cãi: mỗi người nói hết một lượt, không ai ngắt lời.",
+     "cong_viec": "Đề nghị một người điều phối cuộc họp, gom ý kiến của từng người vào một bảng.",
+     "tien_bac": "Hoãn mọi quyết định chia tiền, trả giá tới khi các bên đã bình tĩnh, ít nhất một ngày.",
+     "suc_khoe": "Chạy hoặc đạp xe 20 phút để xả căng, rồi ngồi chỗ yên, bỏ tai nghe một lúc."
+    },
+    "n": {
+     "tinh_cam": "Bàn đúng một chuyện với người ấy lúc cả hai bình tĩnh, không gộp chuyện khác vào.",
+     "cong_viec": "Mời người điều phối chốt việc còn treo ở cuộc họp tới, ghi rõ ai làm phần nào.",
+     "tien_bac": "Ghi bằng văn bản điều đã thống nhất về chia tiền, giá cả, gửi các bên xác nhận.",
+     "suc_khoe": "Đi bộ thư giãn 20 phút mỗi chiều và bớt những việc gây ồn trước giờ ngủ."
+    }
    }
   },
   "gay_6": {
@@ -3282,6 +3660,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Kể cho người ấy niềm vui của bạn và hỏi họ thấy thế nào, để cả hai cùng được vui.",
+     "cong_viec": "Cập nhật kết quả vừa đạt vào hồ sơ nghề và gửi đơn hoặc đề xuất bạn đang nhắm tới.",
+     "tien_bac": "Chuyển phần lớn khoản thưởng vào quỹ để dành trước, chỉ giữ lại một phần nhỏ để tiêu.",
+     "suc_khoe": "Giữ đủ ba bữa và giờ ngủ trong tuần bận rộn, đặt nhắc ăn trưa trên điện thoại."
+    },
+    "n": {
+     "tinh_cam": "Ghi ba điều bạn đã làm tốt trong tình cảm, rồi nói một điều bạn mong người ấy thấy.",
+     "cong_viec": "Gửi bản tóm tắt kết quả việc vừa xong cho người cần biết, không chờ được hỏi.",
+     "tien_bac": "Không chi trước khoản thưởng chưa nhận, kiểm lại cam kết thưởng trên giấy tờ.",
+     "suc_khoe": "Ăn đúng bữa và tắt máy trước 11 giờ dù đang cao hứng làm việc."
+    }
    }
   },
   "gay_7": {
@@ -3375,6 +3767,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Từ chối nghe thêm lời bàn ra tán vào về hai người, nói rõ với người ngoài một lần.",
+     "cong_viec": "Chọn trận đáng giữ nhất ở chỗ làm, chuẩn bị số liệu bảo vệ nó, bỏ qua va chạm nhỏ.",
+     "tien_bac": "Nói 'không' với một khoản chi bị đòi mà bạn không thấy cần, ngay trong tuần này.",
+     "suc_khoe": "Giãn vai cổ 5 phút mỗi trưa và đặt giấc ngủ lên trước việc của người khác."
+    },
+    "n": {
+     "tinh_cam": "Tự hỏi mình còn muốn giữ mối quan hệ không, viết câu trả lời rồi nói rõ với người ấy.",
+     "cong_viec": "Buông hai cuộc tranh luận nhỏ trong tuần, dồn sức cho một việc thật sự quan trọng.",
+     "tien_bac": "Liệt kê khoản thật cần giữ, từ chối gọn phần còn lại khi có người hỏi xin.",
+     "suc_khoe": "Nghỉ thật một buổi trong tuần và trả lại một việc bạn đang gánh hộ người khác."
+    }
    }
   },
   "gay_8": {
@@ -3468,6 +3874,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Trả lời tin nhắn của người ấy bằng điều bạn thật sự nghĩ, không vội hứa thêm.",
+     "cong_viec": "Xếp email và việc gấp theo thứ tự hạn, xử lý từ trên xuống, mỗi lần một việc.",
+     "tien_bac": "Kiểm số tài khoản và số tiền hai lần trước mỗi lần bấm chuyển trong tuần này.",
+     "suc_khoe": "Mang theo bữa phụ khi phải đi lại nhiều và đặt nhắc ăn trưa đúng giờ."
+    },
+    "n": {
+     "tinh_cam": "Đợi một nhịp rồi nói lại cho rõ điều đã nói vội, bằng một tin nhắn ngắn hoặc gặp mặt.",
+     "cong_viec": "Dừng lại kiểm từng bước của việc đang tắc trước khi gửi tiếp, ghi chỗ còn thiếu.",
+     "tien_bac": "Chỉ chuyển tiền lúc đầu óc thong thả, đọc lại tên người nhận trước khi xác nhận.",
+     "suc_khoe": "Ghi giờ ăn, giờ ngủ cố định cho tuần này lên lịch và giữ đúng ít nhất năm ngày."
+    }
    }
   },
   "gay_9": {
@@ -3561,6 +3981,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Kể cho người ấy một chút về điều từng làm bạn tổn thương, mỗi lần một ít, không ép mình.",
+     "cong_viec": "Ghi ra phần việc cuối còn lại, nghỉ ngắn một buổi rồi làm tiếp phần nhỏ nhất.",
+     "tien_bac": "Giữ nguyên quỹ dự phòng và hoàn tất bước cuối của kế hoạch tiền đang làm dở.",
+     "suc_khoe": "Đặt một buổi nghỉ trọn trong tuần; chỗ đau cũ kéo dài thì đi khám, không cố chịu."
+    },
+    "n": {
+     "tinh_cam": "Kể nỗi lo của bạn cho một người tin được, thay vì giữ một mình và nghi mọi người.",
+     "cong_viec": "Xin một đồng nghiệp gánh giúp một phần việc cuối, rồi nghỉ ngắn trước khi làm tiếp.",
+     "tien_bac": "Hoãn mọi khoản chi lớn trong tháng và giữ quỹ dự phòng đúng mức đã đặt.",
+     "suc_khoe": "Đi ngủ trước khi cố thêm, bớt việc trong tuần và hẹn khám định kỳ nếu mệt kéo dài."
+    }
    }
   },
   "gay_10": {
@@ -3654,6 +4088,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Đề nghị người ấy nhận một việc bạn đang mệt nhất, nói rõ vì sao bạn cần được đỡ.",
+     "cong_viec": "Giao bớt hai việc trong tuần cho người phù hợp, gửi kèm hướng dẫn ngắn.",
+     "tien_bac": "Xếp các khoản phải trả theo thứ tự ưu tiên, trả khoản sát hạn nhất trước.",
+     "suc_khoe": "Nghỉ trọn một ngày, nằm giãn lưng; đau vai lưng kéo dài thì đi khám, không cố thêm."
+    },
+    "n": {
+     "tinh_cam": "Nói rõ với người ấy phần việc nhà nào bạn cần họ nhận từ tuần này.",
+     "cong_viec": "Liệt kê những việc vốn của người khác và gửi trả lại cho đúng người trong hai ngày.",
+     "tien_bac": "Sắp lại thứ tự trả nợ và không vay thêm để gánh hộ ai trong tháng này.",
+     "suc_khoe": "Giãn cơ nhẹ 10 phút mỗi tối và ngủ đủ bảy tiếng ba đêm liền."
+    }
    }
   },
   "gay_tieu_dong": {
@@ -3744,6 +4192,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Gửi một lời mời vui, nhẹ nhàng cho người bạn đang để ý, chưa cần nghiêm túc vội.",
+     "cong_viec": "Gửi một đề xuất táo bạo cho người hướng dẫn và nhờ họ góp ý trước khi trình.",
+     "tien_bac": "Ghi khoản tiền nhỏ vừa có vào sổ và đợi một ngày trước khi quyết dùng nó.",
+     "suc_khoe": "Thử một môn mới tuần này, khởi động kỹ 10 phút trước khi vào tập."
+    },
+    "n": {
+     "tinh_cam": "Đợi thêm một tuần rồi mới hứa hẹn gì với người mới, giữ trò chuyện nhẹ nhàng.",
+     "cong_viec": "Chọn một việc đang học dở, nhờ một người kèm và học tới hết phần đầu.",
+     "tien_bac": "Theo dõi mọi khoản chi trong tuần, chưa tiêu số tiền được hứa mà chưa về.",
+     "suc_khoe": "Giữ một môn tập đều ba buổi tuần này và khởi động kỹ trước mỗi buổi."
+    }
    }
   },
   "gay_hiep_si": {
@@ -3838,6 +4300,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Trao đổi rõ với người ấy bạn mong gì ở mối quan hệ, trước khi rủ nhau đi chơi xa.",
+     "cong_viec": "Lập danh sách việc cho chuyến công tác hay dự án gấp, nhờ một người giữ nhịp tiến độ.",
+     "tien_bac": "Đặt ngân sách cho chuyến đi sắp tới và để riêng một khoản dự phòng phát sinh.",
+     "suc_khoe": "Khởi động kỹ trước khi vận động mạnh và lái chậm lại một nấc khi đang vội."
+    },
+    "n": {
+     "tinh_cam": "Viết ra điều bạn muốn ở người ấy trước khi tính bước xa hơn, rồi nói điều đó ra.",
+     "cong_viec": "Viết lý do muốn đổi việc và danh sách việc còn dở, bàn giao xong rồi hẵng đi.",
+     "tien_bac": "Chờ một ngày trước mọi khoản lớn và đặt hạn mức cho chi tiêu đi lại.",
+     "suc_khoe": "Ngủ đủ bảy tiếng trước ngày đi xa và chạy xe dưới tốc độ quen thuộc một nấc."
+    }
    }
   },
   "gay_hoang_hau": {
@@ -3932,6 +4408,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Chủ động hẹn người ấy một buổi bạn thích, đến đúng giờ và không hỏi dồn chuyện cũ.",
+     "cong_viec": "Dẫn một buổi họp ngắn, mời mỗi người tự nhận việc thay vì bạn ôm hết.",
+     "tien_bac": "Đặt mức chi cho làm đẹp, mua sắm tháng này và ghi lại khoản nào vượt.",
+     "suc_khoe": "Ăn chậm, ăn nhẹ trong các buổi gặp gỡ và giữ giờ ngủ cố định cả tuần."
+    },
+    "n": {
+     "tinh_cam": "Nói điều bạn lo với người ấy bằng một câu ngắn, và bớt kiểm tra điện thoại của họ.",
+     "cong_viec": "Giao lại một việc cho người trong đội và chuẩn bị ba ý chính trước buổi trình bày.",
+     "tien_bac": "Xem lại khoản chi gần nhất là vì cần hay vì muốn được nhìn, ghi kết quả ra giấy.",
+     "suc_khoe": "Bỏ cà phê buổi chiều ba ngày, đi bộ sau giờ làm và ngủ đúng giờ."
+    }
    }
   },
   "gay_vua": {
@@ -4026,6 +4516,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Để người ấy nói trọn ý trong một chuyện nhà, bạn chỉ hỏi lại cho rõ rồi mới góp lời.",
+     "cong_viec": "Họp nghe ý đội trước khi chốt quyết định lớn, ghi lại ít nhất hai ý khác với bạn.",
+     "tien_bac": "Đưa kế hoạch kinh doanh cho một người am hiểu soát trước khi bỏ thêm vốn.",
+     "suc_khoe": "Ngủ đủ dù đang nhiều việc và đi khám định kỳ đúng hẹn, nhất là khi hay nóng giận."
+    },
+    "n": {
+     "tinh_cam": "Hỏi người ấy nghĩ gì về chuyện đang bàn trước, rồi mới nói ý của bạn.",
+     "cong_viec": "Hạ mục tiêu của đội về mức làm được và mời mỗi người góp một ý trước khi chốt.",
+     "tien_bac": "Kiểm lại số liệu cùng một người am hiểu, không vay thêm chỉ vì thấy mình chắc ăn.",
+     "suc_khoe": "Tập thở chậm 5 phút khi thấy nóng nảy, ngủ đủ và giữ lịch khám định kỳ."
+    }
    }
   },
   "coc_1": {
@@ -4109,6 +4613,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nói một lời thương rõ ràng với người ấy hôm nay, hoặc chủ động làm lành một chuyện nhỏ.",
+     "cong_viec": "Dành một giờ làm phần việc bạn thật sự thích nhất trước khi mở hộp thư.",
+     "tien_bac": "Ghi lại khoản thu đến từ việc mình thích và để riêng một phần nhỏ để giúp người khác.",
+     "suc_khoe": "Uống đủ nước theo từng mốc giờ trong ngày và lên giường đúng giờ tối nay."
+    },
+    "n": {
+     "tinh_cam": "Viết ra điều bạn muốn nói với người ấy, chọn một câu thật nhất và nói nó trong tuần.",
+     "cong_viec": "Tìm lại một phần việc bạn từng thích và làm phần đó đầu tiên mỗi sáng tuần này.",
+     "tien_bac": "Hoãn mọi món mua lúc đang buồn tới hôm sau, rồi xem mình còn muốn mua không.",
+     "suc_khoe": "Gọi trò chuyện với một người bạn tin tối nay, uống đủ nước và ngủ sớm."
+    }
    }
   },
   "coc_2": {
@@ -4202,6 +4720,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Hẹn người ấy một buổi chỉ hai người, nói ra một điều bạn quý ở họ.",
+     "cong_viec": "Gặp người hợp ý trong nghề để bàn một việc nhỏ hai bên cùng làm, ghi lại thoả thuận.",
+     "tien_bac": "Ngồi cùng người kia ghi rõ ai góp bao nhiêu, ai chi khoản nào trong tháng.",
+     "suc_khoe": "Rủ người thương đi bộ cùng, nhưng giữ khẩu phần ăn hợp với sức của riêng bạn."
+    },
+    "n": {
+     "tinh_cam": "Đề nghị mỗi người nói một điều mình cần, bạn nghe trọn rồi mới đáp, ngay tối nay.",
+     "cong_viec": "Rà lại phần việc từng người trong hợp tác và ghi rõ bằng văn bản gửi cả hai bên.",
+     "tien_bac": "Lập bảng ai giữ khoản nào, ai chi khoản nào trong quỹ hai người và cùng ký xác nhận.",
+     "suc_khoe": "Giữ giờ ngủ và bữa ăn hợp với bạn, kể cả khi người kia sống theo nhịp khác."
+    }
    }
   },
   "coc_3": {
@@ -4295,6 +4827,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Rủ bạn bè một buổi gặp vui và giới thiệu người ấy với một hai người thân quen.",
+     "cong_viec": "Tổ chức một buổi ăn mừng nhỏ cho thành quả của đội và cảm ơn từng người.",
+     "tien_bac": "Đặt mức góp cho buổi tụ họp sắp tới và ghi rõ ai đã đóng.",
+     "suc_khoe": "Uống nước xen giữa các món trong tiệc và đi ngủ trước nửa đêm sau buổi vui."
+    },
+    "n": {
+     "tinh_cam": "Dành một buổi riêng hai người trong tuần và nói rõ ranh giới với người thứ ba.",
+     "cong_viec": "Chọn một người hợp ý trong đội để làm cặp cho việc đang chậm, hẹn lịch làm cùng.",
+     "tien_bac": "Đặt trần chi cho các buổi gặp tháng này và ghi lại từng lần góp tiền.",
+     "suc_khoe": "Bỏ bớt một buổi tiệc trong tuần, ngủ sớm và uống thêm nước ngày hôm sau."
+    }
    }
   },
   "coc_4": {
@@ -4388,6 +4934,20 @@
    "nghieng": {
     "x": "cho",
     "n": "tien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Ghi ra ba việc người ấy đã làm cho bạn tuần qua mà bạn chưa để ý.",
+     "cong_viec": "Liệt kê ba cơ hội nhỏ ngay ở chỗ làm hiện tại trước khi tính chuyện đổi việc.",
+     "tien_bac": "Viết ra mức 'đủ' của bạn cho tháng này, so với số đang có trước khi muốn thêm.",
+     "suc_khoe": "Ra ngoài trời 15 phút mỗi ngày; chán kéo dài nhiều tuần thì nói với bác sĩ."
+    },
+    "n": {
+     "tinh_cam": "Cảm ơn người ấy bằng một câu cụ thể về một việc họ đã làm cho bạn tuần này.",
+     "cong_viec": "Nhận thử một việc mới trong một tháng trước khi bàn chuyện đổi chỗ làm.",
+     "tien_bac": "Viết ra các khoản đang có và chọn một mục tiêu để dành nhỏ cho quý này.",
+     "suc_khoe": "Ra ngoài trời đi bộ mỗi ngày, giữ giờ ngủ; còn chán lâu thì hẹn gặp bác sĩ."
+    }
    }
   },
   "coc_5": {
@@ -4481,6 +5041,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Cho mình một buổi được buồn, rồi ghi ra hai điều vẫn còn tốt trong đời sống tình cảm.",
+     "cong_viec": "Viết ba bài học từ dự án hỏng và liệt kê những gì vẫn còn dùng được.",
+     "tien_bac": "Ghi khoản đã mất cùng bài học vào sổ, không bỏ tiền vào đâu để gỡ trong tháng này.",
+     "suc_khoe": "Ăn đủ ba bữa dù không thèm, ngủ đúng giờ; buồn kéo dài nhiều tuần thì gặp bác sĩ."
+    },
+    "n": {
+     "tinh_cam": "Hẹn gặp một người thân và kể cho họ nghe chuyện đã qua, rồi để nó lắng lại.",
+     "cong_viec": "Bắt đầu một việc nhỏ từ phần còn dùng được của dự án cũ trong tuần này.",
+     "tien_bac": "Rà lại tài sản còn lại, giữ quỹ dự phòng và không bỏ tiền vào đâu để gỡ vội.",
+     "suc_khoe": "Đi bộ ngoài trời 20 phút mỗi ngày và ăn đều bữa để nhịp sống quay về."
+    }
    }
   },
   "coc_6": {
@@ -4574,6 +5148,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nhắc với người ấy một kỷ niệm đẹp, rồi hỏi họ điều họ thích ở hai người lúc này.",
+     "cong_viec": "Liên lạc lại một đồng nghiệp cũ để hỏi thăm và xin một lời góp ý cho việc hiện tại.",
+     "tien_bac": "Ghi rõ khoản tiền gia đình cho hay để lại vào sổ, kèm giấy tờ nếu có.",
+     "suc_khoe": "Ngủ đủ, ra nắng và chơi một trò vận động bạn từng thích hồi nhỏ trong tuần."
+    },
+    "n": {
+     "tinh_cam": "Nhìn người ấy như họ hiện giờ, ghi ra hai điểm khác với hồi xưa trước khi quyết.",
+     "cong_viec": "Giữ phần cách làm cũ còn đúng và thử một cách làm mới cho một việc trong tuần.",
+     "tien_bac": "Lập ngân sách tháng chỉ dựa vào thu nhập hiện tại, không tính khoản gia đình cho.",
+     "suc_khoe": "Đổi một thói quen ngủ hoặc ăn đã có từ lâu cho hợp với sức của bạn bây giờ."
+    }
    }
   },
   "coc_7": {
@@ -4667,6 +5255,20 @@
    "nghieng": {
     "x": "cho",
     "n": "tien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Ghi ra điều bạn biết thật về người ấy, tách khỏi điều bạn đang tưởng tượng.",
+     "cong_viec": "Chọn một trong các ý tưởng đang bay và đặt kế hoạch thử nó trong 30 ngày.",
+     "tien_bac": "Kiểm tra pháp nhân và giấy phép của lời mời kiếm tiền dễ trước khi tin hay chuyển tiền.",
+     "suc_khoe": "Sống theo một nếp đơn giản ba ngày tới, đặt nhắc ăn và ngủ đúng giờ."
+    },
+    "n": {
+     "tinh_cam": "Chọn một điều thật về người ấy để nói hoặc hỏi, dựa trên việc họ đã làm.",
+     "cong_viec": "Xoá các ý còn lại khỏi danh sách, chỉ giữ hướng đã chọn và làm bước đầu tuần này.",
+     "tien_bac": "Giữ tiền đứng yên, chỉ làm theo con số bạn đã tự kiểm trên giấy.",
+     "suc_khoe": "Bỏ bớt các cách ăn, cách tập đang thử lung tung, giữ một nếp và ngủ đúng giờ."
+    }
    }
   },
   "coc_8": {
@@ -4760,6 +5362,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Viết ra điều bạn không còn tìm thấy trong mối quan hệ, rồi nói điều đó với người ấy.",
+     "cong_viec": "Tính đủ chi phí sống ba tháng và viết kế hoạch rời việc trước khi nộp đơn.",
+     "tien_bac": "Cộng chi tiêu ba tháng và để đủ số đó trong quỹ dự phòng trước khi bỏ nguồn thu cũ.",
+     "suc_khoe": "Đi đổi gió một ngày cuối tuần và ngủ đủ giấc trước chuyến đi."
+    },
+    "n": {
+     "tinh_cam": "Tự hỏi bạn đang tìm gì, viết câu trả lời rồi nói thật với người ấy trước khi lùi.",
+     "cong_viec": "Viết ra điều bạn tìm ở chỗ làm mới, so xem là để đến hay chỉ để chạy khỏi áp lực.",
+     "tien_bac": "Tính đủ ba tháng chi tiêu trên giấy trước khi quyết ở lại hay rời nguồn thu.",
+     "suc_khoe": "Nghỉ ngắn ngay tại chỗ bằng một buổi chiều không lịch, ngủ đủ rồi mới tính đi xa."
+    }
    }
   },
   "coc_9": {
@@ -4853,6 +5469,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Làm một việc nhỏ chăm người ấy tuần này, kể cả khi mọi thứ đang êm.",
+     "cong_viec": "Đặt một mục tiêu mới vừa sức cho quý tới để không ngồi yên quá lâu.",
+     "tien_bac": "Chia khoản thưởng vừa về: một phần nhỏ để tận hưởng, phần còn lại để dành.",
+     "suc_khoe": "Ăn vừa no, tập nhẹ đều ba buổi tuần này và giữ giờ ngủ."
+    },
+    "n": {
+     "tinh_cam": "Đếm ba điều bạn đã có trong tình cảm trước khi đòi thêm, rồi cảm ơn người ấy một điều.",
+     "cong_viec": "Ghi một mục tiêu vừa sức cho quý tới, đủ để không chững mà cũng không đòi thêm mãi.",
+     "tien_bac": "Hoãn khoản mua lớn một tuần và để dành phần thưởng vừa về ngay hôm nay.",
+     "suc_khoe": "Bớt một bữa nhậu trong tuần, tập nhẹ đều và giữ giờ ngủ cố định."
+    }
    }
   },
   "coc_10": {
@@ -4946,6 +5576,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Hẹn một bữa cơm cả nhà cuối tuần, hỏi thăm từng người một câu.",
+     "cong_viec": "Đặt giờ về nhà cố định trong tuần và báo đội để cân lại việc với nhà.",
+     "tien_bac": "Lập quỹ cho việc nhà sắp tới, ghi rõ ai góp và chi vào việc gì.",
+     "suc_khoe": "Ăn cơm nhà nhiều bữa hơn tuần này và đặt lịch đưa người lớn tuổi đi khám định kỳ."
+    },
+    "n": {
+     "tinh_cam": "Hỏi riêng từng người trong nhà đang cần gì, nghe hết rồi mới góp ý.",
+     "cong_viec": "Đặt hai buổi tối mỗi tuần về ăn cơm nhà và giữ đúng lịch đó.",
+     "tien_bac": "Nói rõ với gia đình khoản bạn lo được, không vay thêm để giữ thể diện.",
+     "suc_khoe": "Tìm một góc yên cho riêng mình mỗi tối và đặt lịch khám định kỳ cho người lớn trong nhà."
+    }
    }
   },
   "coc_tieu_dong": {
@@ -5036,6 +5680,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Gửi một tin nhắn ngọt nhẹ cho người bạn để ý, nói điều bạn thích ở họ.",
+     "cong_viec": "Đăng ký một buổi học thử về nghề bạn thích và ghi ý sáng tạo vừa đến vào sổ.",
+     "tien_bac": "Chờ một ngày trước khi quyết tiêu khoản tiền nhỏ vừa về, ghi nó vào sổ trước.",
+     "suc_khoe": "Viết vài dòng về cảm xúc trong ngày trước khi ngủ và uống đủ nước."
+    },
+    "n": {
+     "tinh_cam": "Gặp nói chuyện với người ấy vài lần nữa trước khi đặt hy vọng lớn.",
+     "cong_viec": "Làm một bản nháp nhỏ từ ý tưởng đang có và gửi một người góp ý.",
+     "tien_bac": "Chờ tiền về tài khoản rồi mới chi, ghi lại khoản chi lúc tâm trạng xuống.",
+     "suc_khoe": "Ghi nhật ký ba dòng mỗi tối, uống đủ nước và ngủ sớm ba đêm."
+    }
    }
   },
   "coc_hiep_si": {
@@ -5130,6 +5788,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Bày tỏ với người ấy điều bạn cảm thấy bằng lời rõ ràng, chọn lúc riêng và không vội.",
+     "cong_viec": "Xin bản điều khoản viết cho lời đề nghị hợp tác vừa nhận và đọc kỹ trước khi đáp.",
+     "tien_bac": "Chưa tính khoản tiền được hứa qua quan hệ vào kế hoạch cho tới khi có giấy.",
+     "suc_khoe": "Đi dạo gần hồ hay bờ sông 20 phút và ăn chậm khi tâm trạng đang thay đổi."
+    },
+    "n": {
+     "tinh_cam": "Ghi lại người ấy giữ hẹn ra sao trong vài tuần, xem việc làm có theo lời nói không.",
+     "cong_viec": "Đòi văn bản rõ các điều khoản trước khi nhận lời đề nghị đang hấp dẫn.",
+     "tien_bac": "Từ chối cho vay chỉ vì cảm tình và chưa tính khoản hứa hẹn nào tới khi có giấy.",
+     "suc_khoe": "Chọn một nếp sinh hoạt đơn giản cho tuần này, đi dạo gần nước và ngủ đúng giờ."
+    }
    }
   },
   "coc_hoang_hau": {
@@ -5224,6 +5896,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Lắng nghe người ấy trọn một buổi, rồi dành một giờ riêng cho việc của chính bạn.",
+     "cong_viec": "Mở một buổi nghe ý từng người trong đội, ghi lại và phản hồi trong tuần.",
+     "tien_bac": "Để riêng một phần tiền cho mình trước khi chi cho người thân tháng này.",
+     "suc_khoe": "Tìm một chỗ yên 20 phút mỗi ngày, uống đủ nước và ghi tâm trạng vào lịch."
+    },
+    "n": {
+     "tinh_cam": "Giữ một buổi mỗi tuần chỉ cho riêng bạn và báo trước cho người ấy biết.",
+     "cong_viec": "Đặt giới hạn giờ nghe chuyện của đồng nghiệp và chuyển việc khó cho đúng người.",
+     "tien_bac": "Tách phần tiền của mình trước, phần còn lại mới dùng để cho người thân.",
+     "suc_khoe": "Bớt nghe tin buồn trước giờ ngủ và đi dạo một mình 20 phút mỗi chiều."
+    }
    }
   },
   "coc_vua": {
@@ -5318,6 +6004,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Mở lòng với người ấy về một điều bạn đang nén, bằng giọng bình thường, tối nay hoặc mai.",
+     "cong_viec": "Ghi lại điều đang làm bạn khó chịu ở chỗ làm và chọn một người để bàn thẳng.",
+     "tien_bac": "Ghi giấy rõ cho khoản tiền bạn cho người quen vay, kèm ngày trả.",
+     "suc_khoe": "Ăn vừa phải khi đang căng, đi bộ sau bữa tối và giữ lịch khám định kỳ."
+    },
+    "n": {
+     "tinh_cam": "Nói ra một điều bạn đang dùng im lặng để giữ, thay vì để người ấy tự đoán.",
+     "cong_viec": "Hẹn người liên quan bàn về việc đang khiến bạn căng, mang theo ghi chép cụ thể.",
+     "tien_bac": "Đưa mọi khoản cho vay, cho mượn ra giấy tờ rõ và nói thật chuyện tiền với người nhà.",
+     "suc_khoe": "Thay ăn đêm bằng đi bộ hoặc viết vài dòng, ngủ trước 11 giờ và đi khám định kỳ."
+    }
    }
   },
   "kiem_1": {
@@ -5401,6 +6101,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Gói điều cần nói thật vào một câu rõ ràng, bỏ chữ sắc, rồi nói với người ấy hôm nay.",
+     "cong_viec": "Viết lập luận cho quyết định đang chờ trên một trang, nêu lý do chính trước tiên.",
+     "tien_bac": "Cắt một khoản chi thừa ngay hôm nay và đọc kỹ điều khoản của khoản sắp ký.",
+     "suc_khoe": "Mở cửa sổ thở sâu 5 phút buổi sáng và ghi những lo nghĩ ra giấy trước giờ ngủ."
+    },
+    "n": {
+     "tinh_cam": "Tóm điều bạn thật sự muốn nói trong một câu trước khi mở lời về chuyện lớn.",
+     "cong_viec": "Tách vấn đề thành ba gạch đầu dòng trên giấy rồi mới mang ra trình bày với đội.",
+     "tien_bac": "Hỏi thêm một người hiểu việc về thông tin vừa nhận, chưa ký hay chuyển gì trong 48 giờ.",
+     "suc_khoe": "Tắt màn hình sớm hơn nửa tiếng và ghi việc ngày mai ra giấy trước khi đi ngủ."
+    }
    }
   },
   "kiem_2": {
@@ -5494,6 +6208,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Mở lời với người ấy về chuyện hai bạn đang né, hẹn trước một ngày cụ thể để nói.",
+     "cong_viec": "Ghi một ngày chốt quyết định lên lịch và gom đủ thông tin cần có trước ngày đó.",
+     "tien_bac": "Đặt hạn cuối cho quyết định tiền đang treo, ghi hai phương án kèm số thật.",
+     "suc_khoe": "Thả lỏng vai và thở ra dài vài lần mỗi giờ; lâu chưa kiểm mắt thì đặt lịch khám."
+    },
+    "n": {
+     "tinh_cam": "Tìm một lúc bình tĩnh, kể điều bạn thấy bằng câu ngắn, không kèm lời đổ lỗi.",
+     "cong_viec": "Gom thông tin còn thiếu trong ba ngày và chọn một hướng, báo người liên quan.",
+     "tien_bac": "Kê hai phương án với số thật cho khoản đang treo, chọn cái ít rủi ro hơn trong tuần.",
+     "suc_khoe": "Kể một nỗi lo với người bạn tin và ngủ đúng giờ ba hôm liền."
+    }
    }
   },
   "kiem_3": {
@@ -5587,6 +6315,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Cho mình buồn trọn một buổi, rồi gọi một người bạn thân để kể thay vì tự trách.",
+     "cong_viec": "Đọc lại lời phê bình, gạch dưới phần đúng để sửa và bỏ phần không công bằng.",
+     "tien_bac": "Khép khoản đã mất vì người khác bằng một dòng bài học, không chi gì để gỡ lại.",
+     "suc_khoe": "Kể với một người tin nỗi buồn đang đè nặng; nặng và kéo dài thì hẹn gặp bác sĩ."
+    },
+    "n": {
+     "tinh_cam": "Kể ra điều từng làm bạn đau với người ấy hoặc bạn thân, trong một cuộc nói chuyện yên.",
+     "cong_viec": "Lấy một ý đúng từ lời phê bình làm bài học và quay lại làm phần việc tiếp theo.",
+     "tien_bac": "Khép sổ khoản mất cũ với con số thật, giữ quỹ dự phòng trước khi tính khoản mới.",
+     "suc_khoe": "Vận động 20 phút và ăn đúng bữa mỗi ngày; buồn kéo dài thì tìm người chuyên môn nói chuyện."
+    }
    }
   },
   "kiem_4": {
@@ -5680,6 +6422,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Báo người ấy bạn cần một ngày yên để nghỉ và hẹn lại giờ nói chuyện khi đã khoẻ.",
+     "cong_viec": "Xin nghỉ một hai ngày hoặc tạm dừng việc phụ, hồi sức rồi mới quyết việc lớn.",
+     "tien_bac": "Ngừng mọi giao dịch mới trong tuần, chỉ trả các khoản đã tới hạn.",
+     "suc_khoe": "Ngủ trưa 20 phút và nằm giãn người buổi tối; mệt nhiều tuần thì đi khám thay vì cố."
+    },
+    "n": {
+     "tinh_cam": "Hẹn một buổi nói lại chuyện cũ vào lúc cả hai không mệt, như sáng cuối tuần.",
+     "cong_viec": "Lên lịch quay lại việc từ phần nhỏ nhất và giữ một ngày nghỉ trọn trong tuần.",
+     "tien_bac": "Mở lại kế hoạch tiền, bắt đầu từ một khoản nhỏ thay vì dồn mọi thứ một lần.",
+     "suc_khoe": "Bớt việc buổi tối, ngủ bù theo giờ cố định; mệt kéo dài nhiều tuần thì đi khám."
+    }
    }
   },
   "kiem_5": {
@@ -5773,6 +6529,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Xin lỗi trước về phần bạn đã nặng lời, bằng một câu ngắn và không thanh minh thêm.",
+     "cong_viec": "Rút khỏi một cuộc đua không công bằng ở chỗ làm, ghi lại điều mình làm được thật.",
+     "tien_bac": "Từ chối một khoản lợi mà bạn phải giấu người khác mới nhận được.",
+     "suc_khoe": "Xả căng bằng 20 phút vận động, thả lỏng hàm cổ và ngủ đủ tối nay."
+    },
+    "n": {
+     "tinh_cam": "Nhận phần lỗi của mình trước, nói một câu xin lỗi không kèm chữ 'nhưng'.",
+     "cong_viec": "Nêu thẳng điều bạn cần với người liên quan và bỏ qua hai cuộc hơn thua nhỏ tuần này.",
+     "tien_bac": "Nhường một phần nhỏ trong khoản tranh chấp và ghi thoả thuận ra giấy có chữ ký.",
+     "suc_khoe": "Ngừng đọc lại tin nhắn gây bực, vận động nhẹ và ngủ đúng giờ ba tối."
+    }
    }
   },
   "kiem_6": {
@@ -5866,6 +6636,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nhờ một người bạn ở bên bạn qua tuần khó này, chưa vội mở lòng với người mới.",
+     "cong_viec": "Lập kế hoạch chuyển việc theo từng tuần, có ngày bàn giao và ngày bắt đầu rõ.",
+     "tien_bac": "Chuyển khoản tiền sang chỗ an toàn hơn, ghi rõ phí phải trả trước khi làm.",
+     "suc_khoe": "Đổi gió một buổi ngoài trời và ghi tâm trạng mỗi tối trong tuần chuyển chỗ ở."
+    },
+    "n": {
+     "tinh_cam": "Kể với bạn thân điều bạn chưa buông, trước khi bắt đầu một mối quan hệ mới.",
+     "cong_viec": "Liệt kê điều bạn không muốn lặp lại ở chỗ làm mới và kiểm xem chỗ ấy có khác không.",
+     "tien_bac": "Kiểm lại từng khoản phí phát sinh khi chuyển tiền, giữ quỹ dự phòng trước khi đổi chỗ.",
+     "suc_khoe": "Giữ giờ ngủ cố định trong tuần chuyển chỗ và cho mình vài ngày làm quen."
+    }
    }
   },
   "kiem_7": {
@@ -5959,6 +6743,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Thôi xem trộm điện thoại hay giấu chuyện nhỏ, kể thật với người ấy một điều đang giữ.",
+     "cong_viec": "Ghi rõ ai nghĩ ra ý tưởng trong biên bản họp và làm thẳng mọi việc tuần này.",
+     "tien_bac": "Kiểm lại hợp đồng và người trung gian của giao dịch đang làm, hỏi rõ mọi khoản phí.",
+     "suc_khoe": "Đặt lại lịch khám định kỳ đã né và thôi giấu thói quen hao sức với người thân."
+    },
+    "n": {
+     "tinh_cam": "Kể thẳng điều bạn đang né với người ấy, trước khi họ tự phát hiện ra.",
+     "cong_viec": "Trao đổi trực tiếp với người liên quan thay vì làm lén, ghi công rõ cho từng người.",
+     "tien_bac": "Đối chiếu sổ sách, khai đủ và rút khỏi giao dịch nào phải giấu người khác.",
+     "suc_khoe": "Gọi đặt lịch khám định kỳ đã hoãn và kể thật với người thân về thói quen của mình."
+    }
    }
   },
   "kiem_8": {
@@ -6052,6 +6850,20 @@
    "nghieng": {
     "x": "cho",
     "n": "tien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Thử một bước nhỏ khác thường ngày trong quan hệ, như nói rõ một mong muốn của bạn.",
+     "cong_viec": "Kê ra mọi thứ đang bó bạn ở chỗ làm và đánh dấu dây nào là do mình tự buộc.",
+     "tien_bac": "Làm bảng kê nợ thật với số tiền và hạn, rồi hẹn một buổi hỏi người tư vấn.",
+     "suc_khoe": "Đi bộ 15 phút khi thấy nghẹt, thở chậm; lo kéo dài thì gặp bác sĩ, không tự chịu."
+    },
+    "n": {
+     "tinh_cam": "Thử nói một nhu cầu thật với người ấy hôm nay và xem điều gì thay đổi.",
+     "cong_viec": "Gửi một đề xuất hoặc hỏi một cơ hội mới ở chỗ làm, đừng chờ ai mở đường giúp.",
+     "tien_bac": "Kê từng khoản nợ, gọi hỏi điều chỉnh lịch trả và không vay thêm để che.",
+     "suc_khoe": "Tập thở chậm và đi bộ mỗi ngày; lo vẫn kéo dài thì gặp người chuyên môn."
+    }
    }
   },
   "kiem_9": {
@@ -6145,6 +6957,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Gác mọi quyết định về tình cảm lúc nửa đêm, sáng mai kể nỗi lo với người ấy.",
+     "cong_viec": "Kê việc đang lo ra giấy vào sáng mai và chia mỗi việc thành một bước nhỏ.",
+     "tien_bac": "Kê thu chi thật của tháng ra giấy để thấy con số, thay vì lo trong đầu.",
+     "suc_khoe": "Tắt màn hình trước giờ ngủ; mất ngủ, lo âu hơn hai tuần thì hẹn gặp bác sĩ."
+    },
+    "n": {
+     "tinh_cam": "Hỏi thẳng điều bạn sợ vào ban ngày, thay vì đoán một mình lúc khuya.",
+     "cong_viec": "Đánh dấu nỗi lo nào có bằng chứng, nỗi lo nào chỉ trong đầu, sáng mai trước giờ làm.",
+     "tien_bac": "Chia khoản lớn đang lo thành từng bước nhỏ và hỏi một người hiểu việc.",
+     "suc_khoe": "Lên giường cùng một giờ cả tuần; lo kéo dài thì gặp người chuyên môn."
+    }
    }
   },
   "kiem_10": {
@@ -6238,6 +7064,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Để mình buồn cho trọn, chưa liên lạc lại vội; nhờ một người thân ở bên vài hôm.",
+     "cong_viec": "Nghỉ một ngày sau cú vấp, rồi viết ba bài học và một cách làm khác cho lần sau.",
+     "tien_bac": "Rà lại mọi khoản đang có và hẹn hỏi một người tư vấn tài chính độc lập.",
+     "suc_khoe": "Huỷ bớt lịch tuần này để nghỉ dài; có dấu hiệu cơ thể nặng thì đi khám ngay."
+    },
+    "n": {
+     "tinh_cam": "Chăm mình trước bằng ngủ đủ, ăn đủ một tuần rồi mới nghĩ tới chuyện mới.",
+     "cong_viec": "Bắt đầu lại từ một việc nhỏ chắc tay trong tuần, ghi ba bài học dán cạnh bàn.",
+     "tien_bac": "Lập kế hoạch trả từng khoản và để riêng một quỹ dự phòng nhỏ, dù chỉ vài trăm nghìn.",
+     "suc_khoe": "Nghỉ có lịch, ăn ngủ đều; còn mệt nhiều thì đặt lịch khám định kỳ."
+    }
    }
   },
   "kiem_tieu_dong": {
@@ -6328,6 +7168,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Hỏi thẳng người ấy điều bạn muốn biết, thay vì dò ý qua tin nhắn bóng gió.",
+     "cong_viec": "Kiểm nguồn một tin nghe ở công ty trước khi chuyển tiếp cho ai.",
+     "tien_bac": "Tra lại nguồn của tin về tiền vừa nghe trên trang chính thức trước khi làm gì.",
+     "suc_khoe": "Thở sâu chậm 3 phút mỗi lần thấy căng và đi ngủ sớm hơn nửa giờ."
+    },
+    "n": {
+     "tinh_cam": "Thôi soi tin nhắn hay nghe chuyện qua người khác, hỏi một câu rồi tin câu trả lời.",
+     "cong_viec": "Giữ chuyện riêng của đồng nghiệp cho riêng mình, không chuyển tiếp tin chưa rõ nguồn.",
+     "tien_bac": "Không xuống tiền theo lời truyền tai, gọi hỏi nơi chính thức trước đã.",
+     "suc_khoe": "Tắt thông báo điện thoại sau 9 giờ tối và tập thở chậm trước khi ngủ."
+    }
    }
   },
   "kiem_hiep_si": {
@@ -6422,6 +7276,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Đếm chậm tới mười trước khi đáp lại người ấy trong lúc đang tranh luận.",
+     "cong_viec": "Đẩy ý của bạn bằng số liệu, rồi hỏi người phản đối họ cần gì để cùng làm.",
+     "tien_bac": "Soát lại từng con số một lần trước khi ký giấy tờ tiền bạc tuần này.",
+     "suc_khoe": "Ngủ đủ bảy tiếng, lái xe chậm lại và giữ lịch khám định kỳ đúng hẹn."
+    },
+    "n": {
+     "tinh_cam": "Dừng mười giây trước khi trả lời, nói điều cần và bỏ câu chỉ để thắng.",
+     "cong_viec": "Hỏi đội một câu trước khi chốt việc, chậm lại một nhịp ở quyết định tiếp theo.",
+     "tien_bac": "Ngủ qua một đêm trước khi ký khoản tiền nào, kiểm lại số và điều khoản.",
+     "suc_khoe": "Giảm một cốc cà phê mỗi ngày, ngủ đủ và lái xe chậm trong tuần này."
+    }
    }
   },
   "kiem_hoang_hau": {
@@ -6516,6 +7384,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nhường người ấy ở một chuyện nhỏ không cần thắng, và nói thêm một lời ấm.",
+     "cong_viec": "Đưa ra quyết định dựa trên số liệu, viết lý do rõ ràng để đội hiểu.",
+     "tien_bac": "Cắt các khoản chi thừa trong tháng và hẹn gặp người tư vấn tài chính nếu cần.",
+     "suc_khoe": "Giữ ấm cơ thể, ngủ đúng giờ và kể cảm xúc trong ngày với một người tin."
+    },
+    "n": {
+     "tinh_cam": "Kể cho một người tin một điều thật về bạn, không cần lý lẽ đi kèm.",
+     "cong_viec": "Khen một điều trước, góp một điều sau, và nói về việc chứ không về người.",
+     "tien_bac": "Giữ lại khoản nhỏ cho niềm vui trong nhà và rà xem phần cắt có hợp lý không.",
+     "suc_khoe": "Viết nhật ký 10 phút mỗi tối, ngủ đúng giờ và hẹn gặp bạn bè cuối tuần."
+    }
    }
   },
   "kiem_vua": {
@@ -6610,6 +7492,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Để người ấy kể cảm nhận trước, rồi mới đưa lý lẽ của bạn trong chuyện đang bàn.",
+     "cong_viec": "Soát hồ sơ pháp lý đang có, chuyện kiện tụng thì hẹn hỏi luật sư thật.",
+     "tien_bac": "Ghi nguyên tắc chi tiêu của bạn thành ba dòng và áp đúng vào khoản sắp chi.",
+     "suc_khoe": "Đặt nhắc giãn cổ lưng mỗi giờ ngồi và thả lỏng vai trước khi ngủ."
+    },
+    "n": {
+     "tinh_cam": "Nghe trọn cảm nhận của người ấy về chuyện đang căng, không dùng lý lẽ để ép họ.",
+     "cong_viec": "Mời người dưới góp một ý trong cuộc họp tới và thật sự cân nhắc ý đó.",
+     "tien_bac": "Minh bạch các con số với người liên quan và hỏi luật sư trước hợp đồng lớn.",
+     "suc_khoe": "Giãn cơ cổ vai mỗi giờ, ngủ đủ và ngừng làm việc sau 9 giờ tối."
+    }
    }
   },
   "tien_1": {
@@ -6693,6 +7589,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Làm một việc thật cho người ấy tuần này, như đưa đón hay nấu bữa, thay cho lời hứa.",
+     "cong_viec": "Nhận cơ hội việc vừa tới và làm xong bước nhỏ đầu tiên trong 72 giờ.",
+     "tien_bac": "Mở một khoản tiết kiệm riêng và chuyển vào đó một số nhỏ cố định mỗi tuần.",
+     "suc_khoe": "Bắt đầu một thói quen lành nhỏ hôm nay, như ngủ cùng giờ hoặc đi bộ sau bữa tối."
+    },
+    "n": {
+     "tinh_cam": "Gieo một việc nhỏ mỗi ngày cho mối quan hệ trong tuần này, như hỏi thăm buổi trưa.",
+     "cong_viec": "Trả lời lời mời việc đang treo trong hôm nay và nhận làm từ phần nhỏ nhất.",
+     "tien_bac": "Tách một phần cố định vào quỹ dự phòng ngay khi tiền về, trước mọi khoản chi.",
+     "suc_khoe": "Làm ngay thói quen lành nhỏ nhất bạn vẫn hoãn, 10 phút trong hôm nay."
+    }
    }
   },
   "tien_2": {
@@ -6786,6 +7696,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Ghi lên lịch các buổi dành cho người ấy như một cuộc hẹn, không để việc lấn vào.",
+     "cong_viec": "Xếp lịch hai việc song song cho tuần tới và từ chối mọi việc nhận thêm.",
+     "tien_bac": "Ghi sổ từng khoản ra vào của cả hai nguồn thu tuần này để thấy dòng tiền.",
+     "suc_khoe": "Giữ cố định giờ ăn và giờ ngủ làm trục, dù lịch làm việc thay đổi."
+    },
+    "n": {
+     "tinh_cam": "Dành một buổi trong tuần chỉ cho hai người, tắt điện thoại suốt buổi đó.",
+     "cong_viec": "Hoãn một việc đang ôm và báo sớm cho người liên quan thay vì để trễ hạn.",
+     "tien_bac": "Kê dòng tiền ra giấy, trả khoản sát hạn trước và không vay thêm để lấp.",
+     "suc_khoe": "Bớt một cam kết trong tuần và giữ cố định bữa ăn, giờ ngủ."
+    }
    }
   },
   "tien_3": {
@@ -6879,6 +7803,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Lên kế hoạch một việc nhỏ hai người cùng xây, như sắp lại góc nhà, mỗi người một phần.",
+     "cong_viec": "Đối chiếu tiến độ với kế hoạch nhóm và xin một người giỏi nghề nhận xét tay nghề bạn.",
+     "tien_bac": "Dành một khoản nhỏ cho khoá học nâng tay nghề và ghi rõ thu nhập bạn mong thêm.",
+     "suc_khoe": "Hẹn một huấn luyện viên hoặc đi khám để có kế hoạch chăm cơ thể rõ ràng."
+    },
+    "n": {
+     "tinh_cam": "Đề nghị một buổi bàn lại cách làm của hai người, nghe nhau trước khi ai làm tiếp.",
+     "cong_viec": "Họp ngắn chốt lại bản kế hoạch nhóm, ghi rõ hạn của từng người.",
+     "tien_bac": "Ghi giấy tờ phần góp của từng người trong việc làm ăn trước khi bỏ thêm tiền.",
+     "suc_khoe": "Hỏi người hướng dẫn có chuyên môn về bài tập và đi khám định kỳ để có số liệu."
+    }
    }
   },
   "tien_4": {
@@ -6972,6 +7910,20 @@
    "nghieng": {
     "x": "dieu_kien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Cho người ấy một buổi tự do không hỏi han, và nói rõ là bạn ổn với điều đó.",
+     "cong_viec": "Nhận thử một việc nhỏ ngoài phần quen, để đầu óc mở ra một chút.",
+     "tien_bac": "Chia một phần nhỏ của khoản để dành cho một việc mới có kế hoạch, phần lớn giữ nguyên.",
+     "suc_khoe": "Giãn cơ 10 phút mỗi sáng, thở chậm và cho phép mình nghỉ trọn một buổi."
+    },
+    "n": {
+     "tinh_cam": "Lắng nghe người ấy nói họ cần bao nhiêu chỗ riêng, rồi cho đúng chừng đó.",
+     "cong_viec": "Đăng ký một việc ngoài vùng quen ở chỗ làm, nhỏ thôi, trong tháng này.",
+     "tien_bac": "Đặt một mức chi rõ cho mỗi tháng và nói với người nhà để bớt căng.",
+     "suc_khoe": "Giãn cơ mỗi sáng, nghỉ đúng giờ và cho phép mình chậm lại một chút."
+    }
    }
   },
   "tien_5": {
@@ -7065,6 +8017,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Kể với người ấy bạn đang thấy lẻ loi ở chỗ nào và nói một điều bạn cần.",
+     "cong_viec": "Nhắn ba người quen hỏi việc, nhận việc tạm trong lúc tìm chỗ ổn hơn.",
+     "tien_bac": "Kê thật mọi khoản nợ và chi phí, gọi hỏi chủ nợ về lịch trả trước hạn.",
+     "suc_khoe": "Ăn đủ bữa trước đã, rồi đặt lịch khám bằng thẻ bảo hiểm y tế bạn đang có."
+    },
+    "n": {
+     "tinh_cam": "Nhận lời khi có người đưa tay giúp tuần này và nói rõ điều bạn cần.",
+     "cong_viec": "Gửi lời nhờ giới thiệu việc tới hai người quen trong hôm nay.",
+     "tien_bac": "Gọi nói chuyện lịch trả với chủ nợ, không vay thêm để che khoản cũ.",
+     "suc_khoe": "Ăn đủ ba bữa, ngủ đủ giấc và gọi đặt lại lịch khám định kỳ đã hoãn."
+    }
    }
   },
   "tien_6": {
@@ -7158,6 +8124,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Ghi nhận một việc người ấy đã cho bạn tuần qua và đáp lại bằng một việc tương xứng.",
+     "cong_viec": "Xin buổi gặp sếp để bàn về thưởng hoặc tăng lương, mang theo kết quả cụ thể.",
+     "tien_bac": "Đặt mức cho đi tháng này, như một khoản giúp người hay trả một món nợ nhỏ.",
+     "suc_khoe": "Nhận lời giúp của bác sĩ hay người tập cùng và để ra phần nghỉ đủ cho mình."
+    },
+    "n": {
+     "tinh_cam": "Nói rõ bạn cho vì muốn chứ không cần trả, hoặc từ chối nhẹ nhàng nếu không muốn.",
+     "cong_viec": "Xin tiêu chí thưởng phạt rõ bằng văn bản và đề nghị chia công minh bạch.",
+     "tien_bac": "Chỉ cho mượn khoản bạn mất được, ghi giấy rõ và giữ quỹ dự phòng.",
+     "suc_khoe": "Chừa một giờ nghỉ riêng mỗi ngày và nhận giúp đỡ khi cần mà không thấy nợ."
+    }
    }
   },
   "tien_7": {
@@ -7251,6 +8231,20 @@
    "nghieng": {
     "x": "cho",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Nhìn lại những gì hai người đã vun trong ba tháng, ghi ra trước khi tính bước tiếp.",
+     "cong_viec": "Xem lại chỉ số của dự án dài, đặt mốc đánh giá lại sau một tháng nữa.",
+     "tien_bac": "Xem lại khoản để dành dài hạn với số thật, không rút sớm, không đổ thêm theo cảm giác.",
+     "suc_khoe": "Ghi lại thói quen sức khoẻ đang giữ và đặt mốc tự đánh giá sau ba tháng."
+    },
+    "n": {
+     "tinh_cam": "Ngồi tự hỏi bạn đã vun gì cho mối quan hệ, rồi chọn tiếp tục hay dừng cho rõ.",
+     "cong_viec": "Xem số liệu ba tháng, giữ phần đang lên và cắt một phần không ra kết quả.",
+     "tien_bac": "Kiểm lại số của khoản dài hạn, không vay thêm để dồn vào và giữ quỹ dự phòng.",
+     "suc_khoe": "Giữ thói quen tốt thêm một tháng, ghi lại thay đổi nhỏ và đi khám định kỳ."
+    }
    }
   },
   "tien_8": {
@@ -7344,6 +8338,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Làm một việc nhỏ đều đặn cho người ấy mỗi ngày tuần này, như pha cốc trà buổi sáng.",
+     "cong_viec": "Dành 30 phút mỗi ngày luyện một kỹ năng chi tiết của nghề và ghi lại tiến bộ.",
+     "tien_bac": "Cài chuyển tự động một khoản tiết kiệm cố định vào ngày nhận lương.",
+     "suc_khoe": "Tập 15 phút cùng một giờ mỗi ngày và ăn đúng bữa, thay cho đợt tập dồn."
+    },
+    "n": {
+     "tinh_cam": "Bỏ chuẩn hoàn hảo, làm một việc nhỏ cho người ấy mỗi ngày dù không đẹp.",
+     "cong_viec": "Đặt hạn nộp cho việc đang cầu toàn và đăng ký học thêm một kỹ năng mới.",
+     "tien_bac": "So giá công của bạn với mặt bằng nghề và giữ khoản tiết kiệm đều đặn.",
+     "suc_khoe": "Đổi sang một bài tập mới để khỏi nhàm và giữ giờ ngủ đều."
+    }
    }
   },
   "tien_9": {
@@ -7437,6 +8445,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Mời người ấy vào một góc đời của bạn, như một sở thích riêng, trong cuối tuần này.",
+     "cong_viec": "Chia sẻ kinh nghiệm làm việc của bạn trong một buổi nói chuyện ngắn với người mới.",
+     "tien_bac": "Đặt mức cho khoản tận hưởng tháng này và chuyển phần còn lại vào quỹ an toàn.",
+     "suc_khoe": "Duy trì nếp ăn ngủ đang tốt và ăn đơn giản hơn vài bữa trong tuần."
+    },
+    "n": {
+     "tinh_cam": "Kể cho người ấy một chuyện chưa đẹp của bạn, để họ được vào đời bạn thật sự.",
+     "cong_viec": "Gặp lại một đồng nghiệp cũ và mở thêm một kênh việc trong tháng này.",
+     "tien_bac": "Lập một khoản riêng do bạn tự lo và soát lại các khoản chi chỉ để giữ hình ảnh.",
+     "suc_khoe": "Ra ngoài gặp một người bạn tuần này, giữ giờ ngủ và đi khám định kỳ đúng hẹn."
+    }
    }
   },
   "tien_10": {
@@ -7530,6 +8552,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Bàn cùng người ấy về kỳ vọng của hai bên gia đình, ghi điều hai bạn tự quyết.",
+     "cong_viec": "Ghi rõ vai trò của bạn trong việc gia đình hay nghề nhà, kèm kế hoạch năm năm.",
+     "tien_bac": "Gom giấy tờ nhà đất, tài sản gia đình và đề nghị anh em ghi rõ phần của từng người.",
+     "suc_khoe": "Gom lịch khám định kỳ cả nhà vào một ngày và bớt một món ăn nặng trong bữa cơm gia đình."
+    },
+    "n": {
+     "tinh_cam": "Thống nhất với người ấy một điều hai bạn tự quyết, rồi báo cho người nhà một lần.",
+     "cong_viec": "Tách rõ phần trách nhiệm của bạn trong việc nhà, nói điều bạn muốn làm khác.",
+     "tien_bac": "Hỏi người có chuyên môn trước khi chia tài sản trong nhà, mọi thoả thuận ghi giấy.",
+     "suc_khoe": "Đổi một thói quen ăn ngủ của cả nhà và rủ mọi người đi khám định kỳ."
+    }
    }
   },
   "tien_tieu_dong": {
@@ -7620,6 +8656,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Làm một cử chỉ nhỏ thật cho người ấy, như hỏi xem hôm nay họ cần gì.",
+     "cong_viec": "Nhận một việc nhỏ và làm thật kỹ, rồi xin người hướng dẫn nhận xét.",
+     "tien_bac": "Đọc một bài cơ bản về quản lý tiền và bắt đầu để dành một số nhỏ mỗi ngày.",
+     "suc_khoe": "Thêm 15 phút đi bộ sau bữa tối và ghi lại cơ thể phản ứng thế nào trong ba ngày."
+    },
+    "n": {
+     "tinh_cam": "Gửi một lời hỏi thăm thật và hẹn một buổi gặp cụ thể trong tuần.",
+     "cong_viec": "Quay lại khoá học đang bỏ và làm xong một bài trong tuần này.",
+     "tien_bac": "Từ chối lời mời làm giàu nhanh và cài một khoản để dành nhỏ cố định.",
+     "suc_khoe": "Đặt báo thức giờ đi ngủ và đi bộ 15 phút sau bữa tối từ hôm nay."
+    }
    }
   },
   "tien_hiep_si": {
@@ -7714,6 +8764,20 @@
    "nghieng": {
     "x": "tien",
     "n": "cho"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Tạo một bất ngờ nhỏ cho người ấy trong tuần, như đổi chỗ hẹn quen thuộc.",
+     "cong_viec": "Thử một cải tiến nhỏ cho việc vận hành hằng ngày trong một tuần và đo kết quả.",
+     "tien_bac": "Xem lại khoản tích luỹ, chuyển phần đang nằm yên quá mức sang mục tiêu có kế hoạch.",
+     "suc_khoe": "Đứng dậy đi lại mỗi giờ ngồi và thêm một buổi đi bộ dài cuối tuần."
+    },
+    "n": {
+     "tinh_cam": "Rủ người ấy làm một việc mới cùng nhau trong tháng này, như học một môn.",
+     "cong_viec": "Đề xuất đổi một bước trong quy trình đang làm theo thói quen.",
+     "tien_bac": "Rà các khoản trả cố định hằng tháng và cắt khoản không còn cần.",
+     "suc_khoe": "Đặt nhắc đứng dậy mỗi giờ và thêm một buổi đi bộ trong tuần."
+    }
    }
   },
   "tien_hoang_hau": {
@@ -7808,6 +8872,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Khen người ấy thành lời một điều bạn quý, bên cạnh những việc bạn vẫn làm cho họ.",
+     "cong_viec": "Sắp lại quy trình vận hành một việc để đội làm ổn mà không cần bạn đứng cạnh.",
+     "tien_bac": "Để riêng một khoản cho bản thân trong ngân sách nhà tháng này.",
+     "suc_khoe": "Lên lịch nghỉ cố định giữa việc nhà và việc làm, ít nhất một giờ mỗi ngày."
+    },
+    "n": {
+     "tinh_cam": "Nói ra điều bạn cần được chăm và nhận lại sự chăm sóc khi người ấy đưa.",
+     "cong_viec": "Giao bớt một phần việc vận hành và xin hỗ trợ trước khi quá tải.",
+     "tien_bac": "Chuyển trước một khoản nhỏ vào quỹ dự phòng của riêng bạn rồi mới chi cho cả nhà.",
+     "suc_khoe": "Dành riêng 30 phút nghỉ cho mình mỗi chiều, ngủ đủ và đi khám định kỳ."
+    }
    }
   },
   "tien_vua": {
@@ -7902,6 +8980,20 @@
    "nghieng": {
     "x": "tien",
     "n": "dieu_kien"
+   },
+   "viec_lv": {
+    "x": {
+     "tinh_cam": "Thêm một chút lãng mạn vào tuần, như một bữa tối bất ngờ hay mảnh giấy nhắn.",
+     "cong_viec": "Mời một người trẻ trong đội góp ý cho kế hoạch dài hạn trước khi quyết.",
+     "tien_bac": "Rà danh mục tài sản cùng người tư vấn độc lập và dành một phần cho người thân.",
+     "suc_khoe": "Dời bữa tối sớm hơn, đi bộ thêm sau đó và giữ lịch khám định kỳ đúng hẹn."
+    },
+    "n": {
+     "tinh_cam": "Hỏi người ấy muốn gì ngoài vật chất và lắng nghe trọn câu trả lời.",
+     "cong_viec": "Mời một ý kiến khác hẳn mình trong cuộc họp tới và cân nhắc nó thật sự.",
+     "tien_bac": "Viết ra vì sao bạn muốn thêm khi đã đủ, giữ quỹ dự phòng và không vay để mở rộng.",
+     "suc_khoe": "Đi lại nhiều hơn trong ngày, ăn vừa đủ và đặt lịch khám định kỳ đúng hẹn."
+    }
    }
   }
  },
@@ -8427,7 +9519,14 @@
     "dieu_kien": 1,
     "khuyen": 4,
     "ket": 9
-   }
+   },
+   "cau_chuyen": [
+    3,
+    0,
+    1,
+    5,
+    9
+   ]
   },
   "hai_lua_chon": {
    "ten": "Năm lá: Hai lựa chọn",
@@ -8735,32 +9834,32 @@
   "tong_quan": {
    "tieu_de": "Trải bài nói gì",
    "cau_hoi": "Nhìn cả bàn bài, điều gì nổi lên trước?",
-   "mo_ta": "Nguyên tố trội, số lá ẩn chính, nhịp số — bức tranh chung trước khi đọc từng lá."
+   "mo_ta": "Chuyện lớn hay việc thường ngày, các lá nghiêng về phần nào của đời sống, các con số đi lên hay đi xuống — bức tranh chung trước khi đọc từng lá."
   },
   "tung_la": {
    "tieu_de": "Từng vị trí nói gì",
    "cau_hoi": "Mỗi lá ở mỗi chỗ đang kể chuyện gì?",
-   "mo_ta": "Mỗi vị trí một hộp: lá, xuôi hay ngược, được tiếp sức hay bị kìm bởi lá bên cạnh, bốn trường phái ở 'Vì sao nói vậy'."
+   "mo_ta": "Mỗi vị trí một hộp: lá gì, xuôi hay ngược, lá bên cạnh đỡ hay cản nó. Bốn cách đọc có sách nằm ở 'Vì sao nói vậy'."
   },
   "dong_chay": {
    "tieu_de": "Dòng chảy giữa các lá",
    "cau_hoi": "Các lá đang đẩy nhau hay cản nhau?",
-   "mo_ta": "Phẩm giá nguyên tố (Golden Dawn), hướng nhìn (Marseille), nhịp số 1–10."
+   "mo_ta": "Lá nào đỡ lá nào, lá nào kéo lá nào theo hướng khác, và nhân vật trên lá đang nhìn về đâu."
   },
   "ben_trong": {
    "tieu_de": "Điều bên trong",
    "cau_hoi": "Lá nào đang soi nếp nghĩ của chính bạn?",
-   "mo_ta": "Lớp tâm lý (B.O.T.A., Thoth): mặt tối và câu hỏi tự soi của các lá trọng tâm."
+   "mo_ta": "Mỗi lá trọng tâm soi một nếp nghĩ của chính bạn, kèm một câu để tự hỏi."
   },
   "thoi_diem": {
    "tieu_de": "Nhịp thời gian (gợi ý)",
    "cau_hoi": "Chuyện này đi theo nhịp ngày, tuần hay tháng?",
-   "mo_ta": "Decan hoàng đạo của lá 'sắp tới' và nhịp của bộ — là nhịp gợi ý, không phải ngày dự báo."
+   "mo_ta": "Chuyện này thường đi theo nhịp ngày, tuần hay tháng, và lúc nào trong năm nó dễ rõ nhất — nhịp gợi ý, không phải ngày dự báo."
   },
   "viec_nen_lam": {
    "tieu_de": "Việc nên làm trong 72 giờ",
    "cau_hoi": "Nếu chỉ làm một việc, bạn làm gì?",
-   "mo_ta": "Hai tới ba việc cụ thể lấy từ lá lời khuyên và lá trọng tâm (lối Marseille: lá bài là việc để làm)."
+   "mo_ta": "Hai tới ba việc cụ thể, làm được trong ba ngày, lấy từ chính các lá bạn rút."
   },
   "tuong_va_la": {
    "tieu_de": "Tướng và lá bài",
@@ -8771,10 +9870,16 @@
    "tieu_de": "Câu trả lời cho câu hỏi của bạn",
    "cau_hoi": "Trải bài nghiêng về đâu với điều bạn hỏi?",
    "mo_ta": "Đọc các lá ở vị trí trả lời (hiện tại, kết cục, lời khuyên) theo đúng câu bạn hỏi."
+  },
+  "cau_chuyen": {
+   "tieu_de": "Câu chuyện các lá kể",
+   "cau_hoi": "Các lá nối với nhau thành câu chuyện gì cho việc bạn hỏi?",
+   "mo_ta": "Đọc các lá theo thứ tự trên bàn như một câu chuyện liền mạch, bằng nghĩa của từng lá trong đúng chuyện bạn hỏi; rồi chỉ ra chỗ dựa và chỗ cần canh."
   }
  },
  "thu_tu_chuong": [
   "tra_loi",
+  "cau_chuyen",
   "tong_quan",
   "tung_la",
   "dong_chay",
@@ -8809,7 +9914,7 @@
    "tiep_suc": "Lá bên cạnh tiếp sức cho lá này — mặt sáng của nó dễ hiện ra.",
    "bi_kim": "Lá bên cạnh kìm lá này — tính chất của nó biểu hiện yếu hơn hoặc lệch đi; nên chủ động hơn thay vì chờ.",
    "binh": "Lá bên cạnh không đẩy cũng không cản — lá này giữ đúng nghĩa của nó.",
-   "triet_tieu": "Hai lá hai bên xung nhau nên triệt tiêu nhau — lá này đứng một mình, đọc đúng nghĩa gốc.",
+   "triet_tieu": "Hai lá hai bên kéo nhau theo hai hướng nên không lá nào cản được lá này — nó giữ đúng nghĩa của nó.",
    "tiep_suc_nguoc": "Lá bên cạnh làm tính chất ngược của lá này rõ thêm — chỗ lệch dễ lộ ra, nên để ý sớm.",
    "bi_kim_nguoc": "Lá bên cạnh làm nhẹ bớt mặt ngược của lá này — chỗ vướng có thể không nặng như bạn lo."
   },
@@ -8821,16 +9926,16 @@
    "doi_dau": "Lá {a} và lá {b} nhìn vào nhau — hai lực đang gặp nhau ở đây, cần một cuộc nói chuyện thẳng.",
    "lat": "Lá đang ngược nên nhân vật quay mặt về phía ngược lại với hình gốc."
   },
-  "thoi_diem_mo": "Nhịp thời gian ở đây là GỢI Ý theo cách Golden Dawn gắn lá bài với 36 decan hoàng đạo và nhịp của từng bộ — không phải ngày dự báo. Dùng nó để chọn lúc làm việc, không phải để chờ.",
-  "thoi_diem_decan": "Lá {ten} gắn với decan {decan} của cung {cung} ({tu}–{den}); nhịp của bộ {bo}: {nhip}. {trong}",
-  "thoi_diem_cung": "Lá {ten} gắn với cung {cung} ({tu}–{den}); nhịp gợi ý: {nhip}. {trong}",
+  "thoi_diem_mo": "Nhịp ở đây là GỢI Ý — mỗi bộ bài có một nhịp quen (ngày, tuần hay tháng), mỗi lá có một khoảng trong năm theo cách sách xưa gắn lá bài với mùa. Không phải ngày dự báo: dùng nó để chọn lúc làm, không phải để ngồi chờ.",
+  "thoi_diem_decan": "Lá {ten} đi theo nhịp {nhip}. Trong năm, khoảng {tu}–{den} là lúc chuyện kiểu này dễ rõ nhất. {trong}",
+  "thoi_diem_cung": "Lá {ten} ứng với mùa {cung} ({tu}–{den}); nhịp gợi ý: {nhip}. {trong}",
   "thoi_diem_hanh_tinh": "Lá {ten} gắn với {hanh_tinh}: {nhip}.",
   "thoi_diem_bo": "Lá {ten} thuộc bộ {bo}: {nhip}.",
   "dang_trong": "Bạn đang ở trong khoảng này — nếu định làm, làm ngay.",
   "sap_toi": "Khoảng này tới sau {ngay} ngày — trước đó là lúc chuẩn bị.",
-  "cua_so_xa": "Mốc decan năm nay còn xa ({ngay} ngày) — lấy nhịp của bộ làm chính; mốc ấy là lúc trong năm chuyện này rõ nhất.",
-  "viec_mo": "Lối Marseille: lá bài không phải lời đoán trước mà là việc để làm. Dưới đây là hai tới ba việc cụ thể, làm được trong ba ngày, lấy từ chính các lá bạn rút.",
-  "ben_trong_mo": "Lớp này đọc theo B.O.T.A. và Thoth: mỗi lá là một nếp nghĩ của chính bạn đang hiện ra. Không ai phán bạn ở đây — bạn tự nhìn và tự chấm.",
+  "cua_so_xa": "Khoảng ấy còn xa ({ngay} ngày) — trước mắt lấy nhịp {nhip} làm chính.",
+  "viec_mo": "Lá bài không phải lời đoán trước mà là việc để làm. Dưới đây là hai tới ba việc cụ thể, làm được trong ba ngày, lấy từ chính các lá bạn rút.",
+  "ben_trong_mo": "Ở lớp này, mỗi lá là một nếp nghĩ của chính bạn đang hiện ra. Không ai phán bạn ở đây — bạn tự nhìn, tự hỏi và tự chấm.",
   "dai_dien_mo": "Lá đại diện (significator) là lá hoàng gia 'đóng vai' bạn trong trải bài. Ở đây chọn từ dáng mặt bạn tự quan sát (Nhân tướng) và tuổi, giới tính — chỉ cho chính bạn, không chọn cho ai khác.",
   "dai_dien_thieu": "Chương này cần năm sinh, giới tính và dáng mặt từ Khảo sát Nhân tướng (bạn tự soi gương). Chưa có thì bỏ qua — bài đọc không thiếu gì.",
   "dai_dien_loi": "Dáng mặt {hinh} ứng với bộ {bo} ({nguyen_to}); {tuoi_gioi} → lá {ten}. {la_loi}",
@@ -8934,6 +10039,82 @@
    "tu_choi": "Câu này nằm ngoài điều tarot ở đây trả lời (số, ngày mất, chẩn đoán bệnh, chọn người theo lá bài). Các lá bên dưới vẫn đọc được như một lời nhắc nhìn lại chính mình.",
    "chua_rut": "Câu này cần lá bài của chính bạn mới trả lời được: gõ câu vào ô Câu hỏi ở trên, chọn trải bài '{ten}', xáo và tự rút lá. Bài đọc sẽ mở bằng phần 'Câu trả lời cho câu hỏi của bạn' — nghiêng về đâu, vì sao, điều cần gỡ trước và 3 việc nên làm.",
    "thoi_diem_khong_cua_so": "Lá {la} ở vị trí {vi_tri} không gắn với một khoảng ngày cụ thể (theo Book T) — nhịp của nó là {nhip}. Đừng chờ một ngày; làm xong việc ở vị trí 'Điều cần xong trước' là tới lúc."
+  },
+  "viec_mo_cau": "Lá bài không phải lời đoán trước mà là việc để làm. Dưới đây là hai tới ba việc cho {viec}, làm được trong ba ngày, lấy từ chính các lá bạn rút.",
+  "thoi_diem_hoang_gia": "Lá {ten} đi theo nhịp {nhip}. Trong năm, khoảng {tu}–{den} là lúc chuyện kiểu này dễ rõ nhất. {trong}",
+  "cau_chuyen": {
+   "mo": "Kể các lá theo thứ tự trên bàn, với {viec}:",
+   "mo_chung": "Kể các lá theo thứ tự trên bàn:",
+   "viec_chung": "điều bạn đang hỏi",
+   "noi": {
+    "tien_tien": {
+     "tieu_de": "Đang đi đúng nhịp",
+     "loi": "Với {viec}, điều đã có đang nâng đỡ điều sắp tới — cứ giữ nhịp, làm tiếp từng bước, đừng tự dừng giữa chừng."
+    },
+    "tien_dieu_kien": {
+     "tieu_de": "Khởi đầu thuận, đoạn sau cần điều kiện",
+     "loi": "Với {viec}, phần đầu đang thuận, nhưng đoạn sau chỉ trọn khi bạn làm rõ vài điều — đừng để đà cũ làm mình chủ quan."
+    },
+    "tien_cho": {
+     "tieu_de": "Đang có đà, nhưng hướng này dễ vấp",
+     "loi": "Với {viec}, bạn đang có đà, nhưng nếu giữ nguyên cách làm thì dễ vấp ở bước sau — dùng cái đang thuận để sửa cách làm trước khi tiến."
+    },
+    "dieu_kien_tien": {
+     "tieu_de": "Làm rõ điều kiện xong thì đường thông",
+     "loi": "Với {viec}, câu chuyện đi từ chỗ còn phải cân nhắc tới chỗ mở ra — gỡ xong điều đang lệch thì đoạn sau thuận hơn bạn nghĩ."
+    },
+    "dieu_kien_dieu_kien": {
+     "tieu_de": "Mọi thứ xoay quanh điều kiện",
+     "loi": "Với {viec}, cả câu chuyện xoay quanh điều kiện — thành hay không nằm ở chỗ bạn làm rõ được bao nhiêu, không nằm ở may rủi."
+    },
+    "dieu_kien_cho": {
+     "tieu_de": "Từ chỗ còn lệch tới một bước dễ vội",
+     "loi": "Với {viec}, câu chuyện đi từ một chỗ còn lệch tới một bước dễ làm vội — gỡ chỗ lệch trước, rồi mới tiến, để cơn nóng không quyết thay bạn."
+    },
+    "cho_tien": {
+     "tieu_de": "Đi từ vướng tới mở",
+     "loi": "Với {viec}, chỗ khó nằm ở phía sau; đoạn tới nhẹ hơn nếu bạn mang theo bài học từ chỗ vướng vừa qua."
+    },
+    "cho_dieu_kien": {
+     "tieu_de": "Ra khỏi chỗ vướng, chưa thông hẳn",
+     "loi": "Với {viec}, bạn đang ra khỏi chỗ vướng nhưng đường chưa thông hẳn — đi từng bước nhỏ, mỗi bước có điều kiện rõ."
+    },
+    "cho_cho": {
+     "tieu_de": "Cả đoạn đường khuyên chậm lại",
+     "loi": "Với {viec}, cả đoạn đường đều khuyên chậm lại — chưa phải lúc đẩy mạnh; dồn sức vào việc gỡ những điều đang vướng trước."
+    }
+   },
+   "hai_duong": {
+    "tien": {
+     "tieu_de": "Đường thay đổi có nhiều lá đỡ hơn",
+     "loi": "Đặt hai đường cạnh nhau, đường B có nhiều lá đỡ hơn với {viec} — nhưng đọc kỹ 'Điều bạn chưa thấy' trước khi bước."
+    },
+    "dieu_kien": {
+     "tieu_de": "Hai đường gần ngang nhau",
+     "loi": "Đặt hai đường cạnh nhau, chúng gần ngang nhau với {viec} — điều quyết định nằm ở lá 'Điều bạn chưa thấy' và cách bạn làm, không ở việc chọn đường nào."
+    },
+    "cho": {
+     "tieu_de": "Đường giữ như cũ có nhiều lá đỡ hơn",
+     "loi": "Đặt hai đường cạnh nhau, đường A có nhiều lá đỡ hơn với {viec} — nếu vẫn muốn đổi, làm rõ 'Điều bạn chưa thấy' trước."
+    }
+   },
+   "tua": "Dựa vào đây: {tu_khoa}. Câu nên tự hỏi: {hoi}",
+   "canh": "Chỗ này dễ làm bạn trượt: {tu_khoa}. Câu nên tự hỏi: {hoi}",
+   "chuyen_cua_ban": "chuyện của bạn",
+   "mot_la": {
+    "tien": {
+     "tieu_de": "Một lá, nghiêng về có",
+     "loi": "Với {viec}, lá duy nhất bạn rút đang đỡ bạn — dồn sức vào đúng điều lá này nói, làm từng bước."
+    },
+    "dieu_kien": {
+     "tieu_de": "Một lá, được nếu có điều kiện",
+     "loi": "Với {viec}, lá duy nhất bạn rút cho thấy việc được khi bạn làm rõ điều lá này nhắc — làm rõ trước, rồi mới tiến."
+    },
+    "cho": {
+     "tieu_de": "Một lá, khuyên chậm lại",
+     "loi": "Với {viec}, lá duy nhất bạn rút khuyên chậm lại — gỡ điều lá này chỉ ra trước khi làm thêm."
+    }
+   }
   }
  },
  "tu_khoa": {
