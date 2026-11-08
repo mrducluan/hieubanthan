@@ -1,0 +1,199 @@
+{
+ "_nguon": "QTE-2 giai đoạn 0 (2026-11-08) — nước + thành phố người Việt hay sinh sống (QTE-1 mục 2: Mỹ, Nhật, Pháp, Úc, Hàn, Canada, Đài Loan, Đức…) và các nước lớn; `zone` là mã IANA — lệch giờ / giờ mùa hè do tzdata quyết định theo ngày. Thành phố không có → web cho chọn mã vùng IANA (Intl.supportedValuesOf). Thứ tự = ưu tiên hiển thị.",
+ "nuoc": [
+  {"ma": "us", "ten": "Hoa Kỳ (Mỹ)", "ten_en": "United States", "thanh_pho": [
+   {"ma": "us-los_angeles", "ten": "Los Angeles / Orange County (California)", "ten_en": "Los Angeles, CA", "zone": "America/Los_Angeles"},
+   {"ma": "us-san_jose", "ten": "San Jose / San Francisco (California)", "ten_en": "San Jose, CA", "zone": "America/Los_Angeles"},
+   {"ma": "us-san_diego", "ten": "San Diego (California)", "ten_en": "San Diego, CA", "zone": "America/Los_Angeles"},
+   {"ma": "us-sacramento", "ten": "Sacramento (California)", "ten_en": "Sacramento, CA", "zone": "America/Los_Angeles"},
+   {"ma": "us-seattle", "ten": "Seattle (Washington)", "ten_en": "Seattle, WA", "zone": "America/Los_Angeles"},
+   {"ma": "us-portland", "ten": "Portland (Oregon)", "ten_en": "Portland, OR", "zone": "America/Los_Angeles"},
+   {"ma": "us-las_vegas", "ten": "Las Vegas (Nevada)", "ten_en": "Las Vegas, NV", "zone": "America/Los_Angeles"},
+   {"ma": "us-phoenix", "ten": "Phoenix (Arizona — không giờ mùa hè)", "ten_en": "Phoenix, AZ", "zone": "America/Phoenix"},
+   {"ma": "us-denver", "ten": "Denver (Colorado)", "ten_en": "Denver, CO", "zone": "America/Denver"},
+   {"ma": "us-salt_lake_city", "ten": "Salt Lake City (Utah)", "ten_en": "Salt Lake City, UT", "zone": "America/Denver"},
+   {"ma": "us-houston", "ten": "Houston (Texas)", "ten_en": "Houston, TX", "zone": "America/Chicago"},
+   {"ma": "us-dallas", "ten": "Dallas – Fort Worth (Texas)", "ten_en": "Dallas, TX", "zone": "America/Chicago"},
+   {"ma": "us-austin", "ten": "Austin / San Antonio (Texas)", "ten_en": "Austin, TX", "zone": "America/Chicago"},
+   {"ma": "us-chicago", "ten": "Chicago (Illinois)", "ten_en": "Chicago, IL", "zone": "America/Chicago"},
+   {"ma": "us-minneapolis", "ten": "Minneapolis (Minnesota)", "ten_en": "Minneapolis, MN", "zone": "America/Chicago"},
+   {"ma": "us-new_orleans", "ten": "New Orleans (Louisiana)", "ten_en": "New Orleans, LA", "zone": "America/Chicago"},
+   {"ma": "us-oklahoma_city", "ten": "Oklahoma City (Oklahoma)", "ten_en": "Oklahoma City, OK", "zone": "America/Chicago"},
+   {"ma": "us-kansas_city", "ten": "Kansas City (Missouri)", "ten_en": "Kansas City, MO", "zone": "America/Chicago"},
+   {"ma": "us-new_york", "ten": "New York (New York)", "ten_en": "New York, NY", "zone": "America/New_York"},
+   {"ma": "us-boston", "ten": "Boston (Massachusetts)", "ten_en": "Boston, MA", "zone": "America/New_York"},
+   {"ma": "us-philadelphia", "ten": "Philadelphia (Pennsylvania)", "ten_en": "Philadelphia, PA", "zone": "America/New_York"},
+   {"ma": "us-washington", "ten": "Washington DC / Virginia / Maryland", "ten_en": "Washington, DC", "zone": "America/New_York"},
+   {"ma": "us-atlanta", "ten": "Atlanta (Georgia)", "ten_en": "Atlanta, GA", "zone": "America/New_York"},
+   {"ma": "us-orlando", "ten": "Orlando / Tampa (Florida)", "ten_en": "Orlando, FL", "zone": "America/New_York"},
+   {"ma": "us-miami", "ten": "Miami (Florida)", "ten_en": "Miami, FL", "zone": "America/New_York"},
+   {"ma": "us-charlotte", "ten": "Charlotte / Raleigh (North Carolina)", "ten_en": "Charlotte, NC", "zone": "America/New_York"},
+   {"ma": "us-detroit", "ten": "Detroit (Michigan)", "ten_en": "Detroit, MI", "zone": "America/Detroit"},
+   {"ma": "us-honolulu", "ten": "Honolulu (Hawaii)", "ten_en": "Honolulu, HI", "zone": "Pacific/Honolulu"},
+   {"ma": "us-anchorage", "ten": "Anchorage (Alaska)", "ten_en": "Anchorage, AK", "zone": "America/Anchorage"}
+  ]},
+  {"ma": "jp", "ten": "Nhật Bản", "ten_en": "Japan", "thanh_pho": [
+   {"ma": "jp-tokyo", "ten": "Tokyo / Saitama / Chiba / Kanagawa", "ten_en": "Tokyo", "zone": "Asia/Tokyo"},
+   {"ma": "jp-osaka", "ten": "Osaka / Kyoto / Kobe", "ten_en": "Osaka", "zone": "Asia/Tokyo"},
+   {"ma": "jp-nagoya", "ten": "Nagoya (Aichi)", "ten_en": "Nagoya", "zone": "Asia/Tokyo"},
+   {"ma": "jp-fukuoka", "ten": "Fukuoka", "ten_en": "Fukuoka", "zone": "Asia/Tokyo"},
+   {"ma": "jp-sapporo", "ten": "Sapporo (Hokkaido)", "ten_en": "Sapporo", "zone": "Asia/Tokyo"},
+   {"ma": "jp-khac", "ten": "Nơi khác ở Nhật Bản", "ten_en": "Elsewhere in Japan", "zone": "Asia/Tokyo"}
+  ]},
+  {"ma": "kr", "ten": "Hàn Quốc", "ten_en": "South Korea", "thanh_pho": [
+   {"ma": "kr-seoul", "ten": "Seoul / Incheon / Gyeonggi", "ten_en": "Seoul", "zone": "Asia/Seoul"},
+   {"ma": "kr-busan", "ten": "Busan / Daegu", "ten_en": "Busan", "zone": "Asia/Seoul"},
+   {"ma": "kr-khac", "ten": "Nơi khác ở Hàn Quốc", "ten_en": "Elsewhere in South Korea", "zone": "Asia/Seoul"}
+  ]},
+  {"ma": "tw", "ten": "Đài Loan", "ten_en": "Taiwan", "thanh_pho": [
+   {"ma": "tw-taipei", "ten": "Đài Bắc (Taipei) / Tân Bắc / Đào Viên", "ten_en": "Taipei", "zone": "Asia/Taipei"},
+   {"ma": "tw-taichung", "ten": "Đài Trung (Taichung)", "ten_en": "Taichung", "zone": "Asia/Taipei"},
+   {"ma": "tw-kaohsiung", "ten": "Cao Hùng (Kaohsiung) / Đài Nam", "ten_en": "Kaohsiung", "zone": "Asia/Taipei"}
+  ]},
+  {"ma": "au", "ten": "Úc", "ten_en": "Australia", "thanh_pho": [
+   {"ma": "au-sydney", "ten": "Sydney (New South Wales)", "ten_en": "Sydney", "zone": "Australia/Sydney"},
+   {"ma": "au-melbourne", "ten": "Melbourne (Victoria)", "ten_en": "Melbourne", "zone": "Australia/Melbourne"},
+   {"ma": "au-brisbane", "ten": "Brisbane (Queensland — không giờ mùa hè)", "ten_en": "Brisbane", "zone": "Australia/Brisbane"},
+   {"ma": "au-perth", "ten": "Perth (Western Australia)", "ten_en": "Perth", "zone": "Australia/Perth"},
+   {"ma": "au-adelaide", "ten": "Adelaide (South Australia)", "ten_en": "Adelaide", "zone": "Australia/Adelaide"},
+   {"ma": "au-canberra", "ten": "Canberra (ACT)", "ten_en": "Canberra", "zone": "Australia/Sydney"},
+   {"ma": "au-darwin", "ten": "Darwin (Northern Territory)", "ten_en": "Darwin", "zone": "Australia/Darwin"},
+   {"ma": "au-hobart", "ten": "Hobart (Tasmania)", "ten_en": "Hobart", "zone": "Australia/Hobart"}
+  ]},
+  {"ma": "ca", "ten": "Canada", "ten_en": "Canada", "thanh_pho": [
+   {"ma": "ca-toronto", "ten": "Toronto / Mississauga (Ontario)", "ten_en": "Toronto", "zone": "America/Toronto"},
+   {"ma": "ca-ottawa", "ten": "Ottawa (Ontario)", "ten_en": "Ottawa", "zone": "America/Toronto"},
+   {"ma": "ca-montreal", "ten": "Montréal (Québec)", "ten_en": "Montreal", "zone": "America/Toronto"},
+   {"ma": "ca-vancouver", "ten": "Vancouver (British Columbia)", "ten_en": "Vancouver", "zone": "America/Vancouver"},
+   {"ma": "ca-calgary", "ten": "Calgary / Edmonton (Alberta)", "ten_en": "Calgary", "zone": "America/Edmonton"},
+   {"ma": "ca-winnipeg", "ten": "Winnipeg (Manitoba)", "ten_en": "Winnipeg", "zone": "America/Winnipeg"},
+   {"ma": "ca-regina", "ten": "Regina / Saskatoon (Saskatchewan)", "ten_en": "Regina", "zone": "America/Regina"},
+   {"ma": "ca-halifax", "ten": "Halifax (Nova Scotia)", "ten_en": "Halifax", "zone": "America/Halifax"}
+  ]},
+  {"ma": "fr", "ten": "Pháp", "ten_en": "France", "thanh_pho": [
+   {"ma": "fr-paris", "ten": "Paris / Île-de-France", "ten_en": "Paris", "zone": "Europe/Paris"},
+   {"ma": "fr-lyon", "ten": "Lyon", "ten_en": "Lyon", "zone": "Europe/Paris"},
+   {"ma": "fr-marseille", "ten": "Marseille / Nice", "ten_en": "Marseille", "zone": "Europe/Paris"},
+   {"ma": "fr-toulouse", "ten": "Toulouse / Bordeaux", "ten_en": "Toulouse", "zone": "Europe/Paris"},
+   {"ma": "fr-khac", "ten": "Nơi khác ở Pháp (chính quốc)", "ten_en": "Elsewhere in France", "zone": "Europe/Paris"}
+  ]},
+  {"ma": "de", "ten": "Đức", "ten_en": "Germany", "thanh_pho": [
+   {"ma": "de-berlin", "ten": "Berlin", "ten_en": "Berlin", "zone": "Europe/Berlin"},
+   {"ma": "de-munich", "ten": "München (Munich)", "ten_en": "Munich", "zone": "Europe/Berlin"},
+   {"ma": "de-frankfurt", "ten": "Frankfurt", "ten_en": "Frankfurt", "zone": "Europe/Berlin"},
+   {"ma": "de-hamburg", "ten": "Hamburg", "ten_en": "Hamburg", "zone": "Europe/Berlin"},
+   {"ma": "de-leipzig", "ten": "Leipzig / Dresden / Chemnitz", "ten_en": "Leipzig", "zone": "Europe/Berlin"},
+   {"ma": "de-khac", "ten": "Nơi khác ở Đức", "ten_en": "Elsewhere in Germany", "zone": "Europe/Berlin"}
+  ]},
+  {"ma": "cz", "ten": "Séc (Czech)", "ten_en": "Czechia", "thanh_pho": [
+   {"ma": "cz-prague", "ten": "Praha (Prague)", "ten_en": "Prague", "zone": "Europe/Prague"},
+   {"ma": "cz-khac", "ten": "Nơi khác ở Séc", "ten_en": "Elsewhere in Czechia", "zone": "Europe/Prague"}
+  ]},
+  {"ma": "pl", "ten": "Ba Lan", "ten_en": "Poland", "thanh_pho": [
+   {"ma": "pl-warsaw", "ten": "Warszawa (Warsaw)", "ten_en": "Warsaw", "zone": "Europe/Warsaw"},
+   {"ma": "pl-khac", "ten": "Nơi khác ở Ba Lan", "ten_en": "Elsewhere in Poland", "zone": "Europe/Warsaw"}
+  ]},
+  {"ma": "ru", "ten": "Nga", "ten_en": "Russia", "thanh_pho": [
+   {"ma": "ru-moscow", "ten": "Moskva (Moscow)", "ten_en": "Moscow", "zone": "Europe/Moscow"},
+   {"ma": "ru-saint_petersburg", "ten": "Sankt-Peterburg", "ten_en": "Saint Petersburg", "zone": "Europe/Moscow"},
+   {"ma": "ru-yekaterinburg", "ten": "Yekaterinburg", "ten_en": "Yekaterinburg", "zone": "Asia/Yekaterinburg"},
+   {"ma": "ru-novosibirsk", "ten": "Novosibirsk", "ten_en": "Novosibirsk", "zone": "Asia/Novosibirsk"},
+   {"ma": "ru-vladivostok", "ten": "Vladivostok", "ten_en": "Vladivostok", "zone": "Asia/Vladivostok"}
+  ]},
+  {"ma": "gb", "ten": "Anh", "ten_en": "United Kingdom", "thanh_pho": [
+   {"ma": "gb-london", "ten": "London", "ten_en": "London", "zone": "Europe/London"},
+   {"ma": "gb-birmingham", "ten": "Birmingham / Manchester", "ten_en": "Birmingham", "zone": "Europe/London"},
+   {"ma": "gb-khac", "ten": "Nơi khác ở Anh, Scotland, Wales, Bắc Ireland", "ten_en": "Elsewhere in the UK", "zone": "Europe/London"}
+  ]},
+  {"ma": "sg", "ten": "Singapore", "ten_en": "Singapore", "thanh_pho": [
+   {"ma": "sg-singapore", "ten": "Singapore", "ten_en": "Singapore", "zone": "Asia/Singapore"}
+  ]},
+  {"ma": "my", "ten": "Malaysia", "ten_en": "Malaysia", "thanh_pho": [
+   {"ma": "my-kuala_lumpur", "ten": "Kuala Lumpur / Selangor / Johor", "ten_en": "Kuala Lumpur", "zone": "Asia/Kuala_Lumpur"},
+   {"ma": "my-penang", "ten": "Penang", "ten_en": "Penang", "zone": "Asia/Kuala_Lumpur"},
+   {"ma": "my-kuching", "ten": "Kuching / Kota Kinabalu (Đông Malaysia)", "ten_en": "Kuching", "zone": "Asia/Kuching"}
+  ]},
+  {"ma": "th", "ten": "Thái Lan", "ten_en": "Thailand", "thanh_pho": [
+   {"ma": "th-bangkok", "ten": "Bangkok", "ten_en": "Bangkok", "zone": "Asia/Bangkok"},
+   {"ma": "th-khac", "ten": "Nơi khác ở Thái Lan", "ten_en": "Elsewhere in Thailand", "zone": "Asia/Bangkok"}
+  ]},
+  {"ma": "la", "ten": "Lào", "ten_en": "Laos", "thanh_pho": [
+   {"ma": "la-vientiane", "ten": "Viêng Chăn (Vientiane)", "ten_en": "Vientiane", "zone": "Asia/Vientiane"},
+   {"ma": "la-khac", "ten": "Nơi khác ở Lào", "ten_en": "Elsewhere in Laos", "zone": "Asia/Vientiane"}
+  ]},
+  {"ma": "kh", "ten": "Campuchia", "ten_en": "Cambodia", "thanh_pho": [
+   {"ma": "kh-phnom_penh", "ten": "Phnom Penh", "ten_en": "Phnom Penh", "zone": "Asia/Phnom_Penh"},
+   {"ma": "kh-khac", "ten": "Nơi khác ở Campuchia", "ten_en": "Elsewhere in Cambodia", "zone": "Asia/Phnom_Penh"}
+  ]},
+  {"ma": "cn", "ten": "Trung Quốc", "ten_en": "China", "thanh_pho": [
+   {"ma": "cn-beijing", "ten": "Bắc Kinh (Beijing)", "ten_en": "Beijing", "zone": "Asia/Shanghai"},
+   {"ma": "cn-shanghai", "ten": "Thượng Hải (Shanghai)", "ten_en": "Shanghai", "zone": "Asia/Shanghai"},
+   {"ma": "cn-guangzhou", "ten": "Quảng Châu / Thâm Quyến (Guangdong)", "ten_en": "Guangzhou", "zone": "Asia/Shanghai"},
+   {"ma": "cn-nanning", "ten": "Nam Ninh (Quảng Tây) / Côn Minh (Vân Nam)", "ten_en": "Nanning", "zone": "Asia/Shanghai"},
+   {"ma": "cn-urumqi", "ten": "Ürümqi (Tân Cương — giờ địa phương)", "ten_en": "Urumqi", "zone": "Asia/Urumqi"},
+   {"ma": "cn-khac", "ten": "Nơi khác ở Trung Quốc", "ten_en": "Elsewhere in China", "zone": "Asia/Shanghai"}
+  ]},
+  {"ma": "hk", "ten": "Hồng Kông", "ten_en": "Hong Kong", "thanh_pho": [{"ma": "hk-hong_kong", "ten": "Hồng Kông", "ten_en": "Hong Kong", "zone": "Asia/Hong_Kong"}]},
+  {"ma": "mo", "ten": "Ma Cao", "ten_en": "Macau", "thanh_pho": [{"ma": "mo-macau", "ten": "Ma Cao", "ten_en": "Macau", "zone": "Asia/Macau"}]},
+  {"ma": "ph", "ten": "Philippines", "ten_en": "Philippines", "thanh_pho": [
+   {"ma": "ph-manila", "ten": "Manila", "ten_en": "Manila", "zone": "Asia/Manila"},
+   {"ma": "ph-khac", "ten": "Nơi khác ở Philippines", "ten_en": "Elsewhere in the Philippines", "zone": "Asia/Manila"}
+  ]},
+  {"ma": "id", "ten": "Indonesia", "ten_en": "Indonesia", "thanh_pho": [
+   {"ma": "id-jakarta", "ten": "Jakarta / Java / Sumatra (WIB)", "ten_en": "Jakarta", "zone": "Asia/Jakarta"},
+   {"ma": "id-bali", "ten": "Bali / Makassar (WITA)", "ten_en": "Bali", "zone": "Asia/Makassar"},
+   {"ma": "id-jayapura", "ten": "Papua (WIT)", "ten_en": "Jayapura", "zone": "Asia/Jayapura"}
+  ]},
+  {"ma": "mm", "ten": "Myanmar", "ten_en": "Myanmar", "thanh_pho": [{"ma": "mm-yangon", "ten": "Yangon", "ten_en": "Yangon", "zone": "Asia/Yangon"}]},
+  {"ma": "in", "ten": "Ấn Độ", "ten_en": "India", "thanh_pho": [
+   {"ma": "in-delhi", "ten": "New Delhi", "ten_en": "New Delhi", "zone": "Asia/Kolkata"},
+   {"ma": "in-mumbai", "ten": "Mumbai / Bangalore / Chennai", "ten_en": "Mumbai", "zone": "Asia/Kolkata"}
+  ]},
+  {"ma": "np", "ten": "Nepal", "ten_en": "Nepal", "thanh_pho": [{"ma": "np-kathmandu", "ten": "Kathmandu", "ten_en": "Kathmandu", "zone": "Asia/Kathmandu"}]},
+  {"ma": "ae", "ten": "UAE", "ten_en": "United Arab Emirates", "thanh_pho": [{"ma": "ae-dubai", "ten": "Dubai / Abu Dhabi", "ten_en": "Dubai", "zone": "Asia/Dubai"}]},
+  {"ma": "qa", "ten": "Qatar", "ten_en": "Qatar", "thanh_pho": [{"ma": "qa-doha", "ten": "Doha", "ten_en": "Doha", "zone": "Asia/Qatar"}]},
+  {"ma": "sa", "ten": "Ả Rập Xê Út", "ten_en": "Saudi Arabia", "thanh_pho": [{"ma": "sa-riyadh", "ten": "Riyadh / Jeddah", "ten_en": "Riyadh", "zone": "Asia/Riyadh"}]},
+  {"ma": "il", "ten": "Israel", "ten_en": "Israel", "thanh_pho": [{"ma": "il-tel_aviv", "ten": "Tel Aviv / Jerusalem", "ten_en": "Tel Aviv", "zone": "Asia/Jerusalem"}]},
+  {"ma": "tr", "ten": "Thổ Nhĩ Kỳ", "ten_en": "Türkiye", "thanh_pho": [{"ma": "tr-istanbul", "ten": "Istanbul / Ankara", "ten_en": "Istanbul", "zone": "Europe/Istanbul"}]},
+  {"ma": "kz", "ten": "Kazakhstan", "ten_en": "Kazakhstan", "thanh_pho": [{"ma": "kz-almaty", "ten": "Almaty / Astana", "ten_en": "Almaty", "zone": "Asia/Almaty"}]},
+  {"ma": "ua", "ten": "Ukraina", "ten_en": "Ukraine", "thanh_pho": [
+   {"ma": "ua-kyiv", "ten": "Kyiv", "ten_en": "Kyiv", "zone": "Europe/Kyiv"},
+   {"ma": "ua-kharkiv", "ten": "Kharkiv / Odesa", "ten_en": "Kharkiv", "zone": "Europe/Kyiv"}
+  ]},
+  {"ma": "by", "ten": "Belarus", "ten_en": "Belarus", "thanh_pho": [{"ma": "by-minsk", "ten": "Minsk", "ten_en": "Minsk", "zone": "Europe/Minsk"}]},
+  {"ma": "nl", "ten": "Hà Lan", "ten_en": "Netherlands", "thanh_pho": [{"ma": "nl-amsterdam", "ten": "Amsterdam / Rotterdam", "ten_en": "Amsterdam", "zone": "Europe/Amsterdam"}]},
+  {"ma": "be", "ten": "Bỉ", "ten_en": "Belgium", "thanh_pho": [{"ma": "be-brussels", "ten": "Brussels", "ten_en": "Brussels", "zone": "Europe/Brussels"}]},
+  {"ma": "ch", "ten": "Thuỵ Sĩ", "ten_en": "Switzerland", "thanh_pho": [{"ma": "ch-zurich", "ten": "Zürich / Genève", "ten_en": "Zurich", "zone": "Europe/Zurich"}]},
+  {"ma": "at", "ten": "Áo", "ten_en": "Austria", "thanh_pho": [{"ma": "at-vienna", "ten": "Wien (Vienna)", "ten_en": "Vienna", "zone": "Europe/Vienna"}]},
+  {"ma": "it", "ten": "Ý", "ten_en": "Italy", "thanh_pho": [{"ma": "it-rome", "ten": "Roma / Milano", "ten_en": "Rome", "zone": "Europe/Rome"}]},
+  {"ma": "es", "ten": "Tây Ban Nha", "ten_en": "Spain", "thanh_pho": [{"ma": "es-madrid", "ten": "Madrid / Barcelona", "ten_en": "Madrid", "zone": "Europe/Madrid"}]},
+  {"ma": "pt", "ten": "Bồ Đào Nha", "ten_en": "Portugal", "thanh_pho": [{"ma": "pt-lisbon", "ten": "Lisboa (Lisbon)", "ten_en": "Lisbon", "zone": "Europe/Lisbon"}]},
+  {"ma": "ie", "ten": "Ireland", "ten_en": "Ireland", "thanh_pho": [{"ma": "ie-dublin", "ten": "Dublin", "ten_en": "Dublin", "zone": "Europe/Dublin"}]},
+  {"ma": "se", "ten": "Thuỵ Điển", "ten_en": "Sweden", "thanh_pho": [{"ma": "se-stockholm", "ten": "Stockholm", "ten_en": "Stockholm", "zone": "Europe/Stockholm"}]},
+  {"ma": "no", "ten": "Na Uy", "ten_en": "Norway", "thanh_pho": [{"ma": "no-oslo", "ten": "Oslo", "ten_en": "Oslo", "zone": "Europe/Oslo"}]},
+  {"ma": "dk", "ten": "Đan Mạch", "ten_en": "Denmark", "thanh_pho": [{"ma": "dk-copenhagen", "ten": "København (Copenhagen)", "ten_en": "Copenhagen", "zone": "Europe/Copenhagen"}]},
+  {"ma": "fi", "ten": "Phần Lan", "ten_en": "Finland", "thanh_pho": [{"ma": "fi-helsinki", "ten": "Helsinki", "ten_en": "Helsinki", "zone": "Europe/Helsinki"}]},
+  {"ma": "hu", "ten": "Hungary", "ten_en": "Hungary", "thanh_pho": [{"ma": "hu-budapest", "ten": "Budapest", "ten_en": "Budapest", "zone": "Europe/Budapest"}]},
+  {"ma": "sk", "ten": "Slovakia", "ten_en": "Slovakia", "thanh_pho": [{"ma": "sk-bratislava", "ten": "Bratislava", "ten_en": "Bratislava", "zone": "Europe/Bratislava"}]},
+  {"ma": "ro", "ten": "Romania", "ten_en": "Romania", "thanh_pho": [{"ma": "ro-bucharest", "ten": "București (Bucharest)", "ten_en": "Bucharest", "zone": "Europe/Bucharest"}]},
+  {"ma": "bg", "ten": "Bulgaria", "ten_en": "Bulgaria", "thanh_pho": [{"ma": "bg-sofia", "ten": "Sofia", "ten_en": "Sofia", "zone": "Europe/Sofia"}]},
+  {"ma": "gr", "ten": "Hy Lạp", "ten_en": "Greece", "thanh_pho": [{"ma": "gr-athens", "ten": "Athens", "ten_en": "Athens", "zone": "Europe/Athens"}]},
+  {"ma": "nz", "ten": "New Zealand", "ten_en": "New Zealand", "thanh_pho": [
+   {"ma": "nz-auckland", "ten": "Auckland / Wellington / Christchurch", "ten_en": "Auckland", "zone": "Pacific/Auckland"}
+  ]},
+  {"ma": "mx", "ten": "Mexico", "ten_en": "Mexico", "thanh_pho": [{"ma": "mx-mexico_city", "ten": "Ciudad de México", "ten_en": "Mexico City", "zone": "America/Mexico_City"}]},
+  {"ma": "cu", "ten": "Cuba", "ten_en": "Cuba", "thanh_pho": [{"ma": "cu-havana", "ten": "La Habana (Havana)", "ten_en": "Havana", "zone": "America/Havana"}]},
+  {"ma": "br", "ten": "Brazil", "ten_en": "Brazil", "thanh_pho": [
+   {"ma": "br-sao_paulo", "ten": "São Paulo / Rio de Janeiro", "ten_en": "Sao Paulo", "zone": "America/Sao_Paulo"},
+   {"ma": "br-manaus", "ten": "Manaus (Amazonas)", "ten_en": "Manaus", "zone": "America/Manaus"}
+  ]},
+  {"ma": "ar", "ten": "Argentina", "ten_en": "Argentina", "thanh_pho": [{"ma": "ar-buenos_aires", "ten": "Buenos Aires", "ten_en": "Buenos Aires", "zone": "America/Argentina/Buenos_Aires"}]},
+  {"ma": "cl", "ten": "Chile", "ten_en": "Chile", "thanh_pho": [{"ma": "cl-santiago", "ten": "Santiago", "ten_en": "Santiago", "zone": "America/Santiago"}]},
+  {"ma": "za", "ten": "Nam Phi", "ten_en": "South Africa", "thanh_pho": [{"ma": "za-johannesburg", "ten": "Johannesburg / Cape Town", "ten_en": "Johannesburg", "zone": "Africa/Johannesburg"}]},
+  {"ma": "eg", "ten": "Ai Cập", "ten_en": "Egypt", "thanh_pho": [{"ma": "eg-cairo", "ten": "Cairo", "ten_en": "Cairo", "zone": "Africa/Cairo"}]},
+  {"ma": "ao", "ten": "Angola", "ten_en": "Angola", "thanh_pho": [{"ma": "ao-luanda", "ten": "Luanda", "ten_en": "Luanda", "zone": "Africa/Luanda"}]},
+  {"ma": "mz", "ten": "Mozambique", "ten_en": "Mozambique", "thanh_pho": [{"ma": "mz-maputo", "ten": "Maputo", "ten_en": "Maputo", "zone": "Africa/Maputo"}]},
+  {"ma": "dz", "ten": "Algeria", "ten_en": "Algeria", "thanh_pho": [{"ma": "dz-algiers", "ten": "Alger (Algiers)", "ten_en": "Algiers", "zone": "Africa/Algiers"}]},
+  {"ma": "ng", "ten": "Nigeria", "ten_en": "Nigeria", "thanh_pho": [{"ma": "ng-lagos", "ten": "Lagos", "ten_en": "Lagos", "zone": "Africa/Lagos"}]}
+ ]
+}

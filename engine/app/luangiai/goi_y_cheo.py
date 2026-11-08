@@ -20,7 +20,6 @@ hồ sơ, cùng ngày, một mảng không lặp đúng câu ở hai trang khác
 from __future__ import annotations
 
 import datetime as dt
-import json
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
@@ -30,6 +29,7 @@ from fastapi import HTTPException
 from app.calc import battu, lunar, phongthuy as pt, thanso, thanso_mo_rong as mr
 from app.kb import battu_kb, store, thanso_v2, tuvi_doi_song_kb as kb_tv
 from app.luangiai import cung_sao_menh
+from app.kb import nap
 
 # Trang công cụ có khối "Đọc tiếp" (mã mảng ở web = khoá này).
 MANG_TRANG = ("than_so", "tu_vi", "bat_tu", "phong_thuy", "kinh_dich", "hop_doi", "hom_nay", "xem_ngay",
@@ -61,22 +61,22 @@ class HoSo:
         return bool(self.gio) and self.do_tin_gio != "unknown"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _kb() -> dict:
-    return json.loads((_F / "goi_y_cheo_kb.json").read_text(encoding="utf-8"))
+    return nap.doc("goi_y_cheo_kb.json")
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _chan_dung() -> dict:
-    return json.loads((_F / "thanso_chan_dung.json").read_text(encoding="utf-8"))["so"]
+    return nap.doc("thanso_chan_dung.json")["so"]
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _que_hao() -> dict:
-    return json.loads((_F / "kinhdich_hao.json").read_text(encoding="utf-8"))["que"]
+    return nap.doc("kinhdich_hao.json")["que"]
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _cum_cam() -> tuple[str, ...]:
     return tuple(kb_tv.cum_cam())
 

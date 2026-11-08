@@ -6,11 +6,10 @@ chương luận giải để web gạch chân và dựng khung "Giải nghĩa th
 """
 from __future__ import annotations
 
-import json
 import re
 import unicodedata
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "tu_dien.json"
 TOI_DA = 12
@@ -28,9 +27,9 @@ def _chuan(s: str) -> str:
     return _RE_DOI.sub(lambda m: _DOI[m.group(0).lower()] if m.group(0).islower() else m.group(0)[0] + _DOI[m.group(0).lower()][1], s)
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
-    return json.loads(_F.read_text(encoding="utf-8"))
+    return nap.doc(_F.name)
 
 
 def meta() -> dict:
@@ -42,7 +41,7 @@ def tat_ca(mo_dun: str | None = None) -> list[dict]:
     return [m for m in _d()["muc"] if mo_dun is None or m["mo_dun"] == mo_dun]
 
 
-@lru_cache(maxsize=8)
+@nap.nho
 def _mau(mo_dun: str) -> list[tuple[re.Pattern, dict]]:
     ds = []
     for m in tat_ca(mo_dun):

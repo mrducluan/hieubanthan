@@ -1,4 +1,5 @@
-"""QT-0 — chuyển ngữ một tệp KB sang tiếng Anh (bản phủ `<tên>.en.json`, NHÁP máy). Chạy lúc soạn, không chạy runtime.
+"""QT-0 — chuyển ngữ một tệp KB sang tiếng Anh (bản phủ `data/en/<tên>.json`, NHÁP máy — `kb/nap.doc` tự gộp khi lượt gọi
+là tiếng Anh, QTE-2). Chạy lúc soạn, không chạy runtime.
 
     OPENROUTER_API_KEY=… PYTHONPATH=. python scripts/chuyen_ngu.py app/kb/data/tu_dien.json --mang bat_tu --thu 20
 
@@ -39,8 +40,10 @@ def main() -> None:
         return goi_chat(messages, mo_hinh=mo_hinh, nho=False, tru_luot=False, het_gio=120, **kw)
 
     kq = quy_trinh.chuyen(d, goi=goi, mang=a.mang)
-    ra = Path(a.ra) if a.ra else nguon.with_suffix(".en.json")
+    ra = Path(a.ra) if a.ra else nguon.parent / "en" / nguon.name
+    ra.parent.mkdir(parents=True, exist_ok=True)
     ra.write_text(json.dumps(kq["ban_en"], ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    # Danh sách lỗi để cạnh tệp ra (không vào git — .gitignore), người duyệt xem rồi sửa tay.
     ra.with_suffix(".loi.json").write_text(json.dumps(kq["loi"], ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"{kq['so']['qua']}/{kq['so']['tong']} chuỗi qua kiểm → {ra}")
     for k, l in list(kq["loi"].items())[:30]:

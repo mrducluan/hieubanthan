@@ -5,17 +5,16 @@ phụ tinh, chủ đề hạn, giải thích, mẫu). Nguồn: app/kb/data/tuvi_
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "tuvi_kb.json"
 SOURCE_ID, SCHOOL_ID = "tuvi_vn", "nam_phai"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
-    return json.loads(_F.read_text(encoding="utf-8"))
+    return nap.doc(_F.name)
 
 
 def meta() -> dict:
@@ -111,9 +110,9 @@ def luu_y(ma: str) -> str | None:
 _F_CC = Path(__file__).parent / "data" / "tuvi_cach_cuc.json"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _cc() -> dict:
-    return json.loads(_F_CC.read_text(encoding="utf-8"))
+    return nap.doc(_F_CC.name)
 
 
 def cach_cuc(ma: str) -> dict | None:

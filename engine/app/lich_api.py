@@ -14,7 +14,7 @@ from fastapi import APIRouter, HTTPException, Path as FPath
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
-from app.calc import dia_ly, lunar
+from app.calc import dia_ly, lunar, mui_gio
 from app.config import Region
 from app.luangiai import lich_nam as _lich_nam
 
@@ -25,6 +25,32 @@ router = APIRouter(tags=["lich"])
 def api_tinh() -> dict:
     return {"tinh": [{k: t[k] for k in ("ma", "ten", "vung")} for t in dia_ly.danh_sach()],
             "nuoc_ngoai": dia_ly.NUOC_NGOAI}
+
+
+@router.get("/v1/dia-ly/mui-gio")
+def api_mui_gio() -> dict:
+    """QTE-2 giai đoạn 0 — nước + thành phố cho người sinh ở nước ngoài (web hiện hai ô chọn; mã thành phố / mã vùng IANA
+    gửi lại qua `mui_gio` của lá số). Danh sách tĩnh, web cache 1 ngày."""
+    return {"nuoc": mui_gio.danh_sach()}
+
+
+class MuiGioInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    mui_gio: str = Field(min_length=2, max_length=64, description="Mã thành phố (us-san_jose) hoặc mã vùng IANA")
+    ngay: _dt.date = Field(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))
+    gio: str = Field(pattern=r"^\d{2}:\d{2}$")
+
+
+@router.post("/v1/dia-ly/mui-gio/tai")
+def api_mui_gio_tai(inp: MuiGioInput) -> dict:
+    """Múi giờ chuẩn + giờ mùa hè tại đúng ngày giờ (để form hồ sơ hiện dòng xác nhận; lá số tự tính lại, không tin web)."""
+    g, ph = int(inp.gio[:2]), int(inp.gio[3:])
+    if g > 23 or ph > 59:
+        raise HTTPException(422, detail="Giờ không hợp lệ")
+    try:
+        return mui_gio.tai(inp.mui_gio, inp.ngay.year, inp.ngay.month, inp.ngay.day, g, ph)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e))
 
 
 class DoiLichInput(BaseModel):

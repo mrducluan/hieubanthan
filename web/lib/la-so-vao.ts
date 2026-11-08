@@ -11,6 +11,8 @@ export const LaSoVao = z.object({
   gio_mua_he: z.boolean().optional(),
   /** EN-6 BI-3: múi giờ chuẩn nơi sinh (chỉ khi sinh ở nước ngoài) — Bát tự so mốc tiết khí. */
   utc_noi_sinh: z.number().min(-12).max(14).multipleOf(0.25).optional(),
+  /** QTE-2: mã thành phố / mã vùng IANA nơi sinh (chỉ nước ngoài) — engine tự suy múi giờ + giờ mùa hè. */
+  mui_gio: z.string().regex(/^[A-Za-z][A-Za-z0-9_+\-\/]{1,63}$/).optional(),
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).optional(),
   /** TV-PHAI — chỉ Tử vi: vị trí Hoả/Linh (lối Việt / Trung Châu), nửa sau tháng nhuận (tháng sau / như tháng chính). */
   hoa_linh: z.enum(["viet", "trung"]).optional(),

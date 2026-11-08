@@ -3,18 +3,17 @@
 sang mảng khác cùng một nỗi băn khoăn. Chỉ TRA, tất định."""
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "y_dinh_chung.json"
 MO_DUN = ("kinhdich", "tuvi", "thanso", "battu", "phongthuy", "hom_nay")
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
     try:
-        return json.loads(_F.read_text(encoding="utf-8"))
+        return nap.doc(_F.name)
     except (OSError, ValueError):
         return {"y_dinh": {}, "ten_mo_dun": {}}
 

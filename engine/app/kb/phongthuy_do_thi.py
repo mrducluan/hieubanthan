@@ -7,19 +7,18 @@ Chỉ TRA, không sinh nghĩa. Cạnh sao ↔ sao (sinh / khắc) lấy từ ng�
 """
 from __future__ import annotations
 
-import json
 from collections import deque
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "phongthuy_do_thi.json"
 LOAI_NUT = ("y_dinh", "phong", "dau_hieu", "sao")
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
     try:
-        return json.loads(_F.read_text(encoding="utf-8"))
+        return nap.doc(_F.name)
     except (OSError, ValueError):
         return {}
 
@@ -31,7 +30,7 @@ def _sao_sinh_khac() -> tuple[dict[int, int], dict[int, int]]:
     return sinh, khac
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def canh() -> list[tuple[str, str, str]]:
     """Mọi cạnh có hướng (từ, loại, tới); nút ghi dạng `loai:ma` (vd `sao:5`, `dau_hieu:xa_ngang`)."""
     d = _d()

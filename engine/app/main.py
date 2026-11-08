@@ -23,6 +23,7 @@ from app import config, giam_sat, gioi_han
 from app.cong_khai import PhanHoiCongKhai
 from app.kb import tu_dien
 from app.calc import thanso, timebase
+from app import ngon_ngu
 from app.kb import store as kb_store
 from app.kb import trang as kb_trang
 from app.kb import tham_dinh as kb_tham_dinh
@@ -149,9 +150,13 @@ async def require_engine_key(request: Request, call_next):
             phan.append(khuc)
         request._body = b"".join(phan)          # Starlette phát lại thân đã đọc cho route phía sau
     tok = ngan_sach.NGUOI_GOI.set(ai)
+    # QTE-2: ngôn ngữ của lượt gọi — header `x-ngon-ngu` (web gửi) thắng query `?ngon_ngu=`; lạ → "vi". Chỉ lớp CHỮ
+    # (kb.nap, kb.ten, lời RULES) đọc; phép tính không đổi theo ngôn ngữ.
+    tok_nn = ngon_ngu.HIEN_TAI.set(ngon_ngu.chuan(request.headers.get("x-ngon-ngu") or request.query_params.get("ngon_ngu")))
     try:
         return await call_next(request)
     finally:
+        ngon_ngu.HIEN_TAI.reset(tok_nn)
         ngan_sach.NGUOI_GOI.reset(tok)
 
 

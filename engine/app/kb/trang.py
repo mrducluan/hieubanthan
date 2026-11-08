@@ -10,14 +10,13 @@ SEO-K (2026-10-21, chủ dự án duyệt nới): nháp có phần riêng < 20 %
 """
 from __future__ import annotations
 
-import json
 import unicodedata
-from functools import lru_cache
 from pathlib import Path
 
 from app.kb import do_rieng as _dr
 from app.kb import ngay_cap_nhat as _ncn
 from app.kb import tham_dinh as _td
+from app.kb import nap
 
 _DATA = Path(__file__).parent / "data"
 
@@ -35,7 +34,7 @@ _LINH_VUC_QUE = {"cong_viec": "Công việc", "tinh_cam": "Tình cảm", "gia_di
                  "tien_bac": "Tiền bạc", "hoc_hanh": "Học hành"}
 
 
-@lru_cache(maxsize=8192)
+@nap.nho
 def _slug(s: str) -> str:
     """EN-1 HT-2: hàm thuần, được gọi ~80.000 lần cho một mục lục → nhớ kết quả."""
     s = unicodedata.normalize("NFD", s.replace("Đ", "D").replace("đ", "d"))
@@ -50,9 +49,9 @@ def _cat(s: str, n: int = 158) -> str:
     return s[: s.rfind(" ", 0, n - 1)].rstrip(",;:—-") + "…"
 
 
-@lru_cache(maxsize=None)
+@nap.nho
 def _doc(ten: str) -> dict:
-    return json.loads((_DATA / ten).read_text("utf-8"))
+    return nap.doc(ten)
 
 
 def _cau(s: str) -> str:
@@ -399,7 +398,7 @@ _TRANG = {k: (ds, _bs.boc(dung)) for k, (ds, dung) in _TRANG.items()}
 
 
 # ---- API công khai của module -------------------------------------------------
-@lru_cache(maxsize=None)
+@nap.nho
 def _ten_ngan(loai: str, slug: str) -> str:
     """Tên ngắn của một trang (cho link liên quan). EN-1 HT-2: nhớ kết quả — mỗi link trước đây dựng lại cả danh sách
     slug của loại trang (O(n²), mục lục 564 trang mất ~1,35 s). Dữ liệu KB tĩnh trong một bản deploy."""

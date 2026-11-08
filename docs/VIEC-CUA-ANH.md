@@ -5,6 +5,18 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4ag. Đánh giá kiến trúc đa ngôn ngữ + giai đoạn 0 tuần 1 (QTE-2, 2026-11-08) — deploy ENGINE trước web
+
+- [ ] **Đọc + quyết** `docs/DANH-GIA-KIEN-TRUC-DA-NGON-NGU.md` mục 4.3: lời bài đọc tiếng Anh dựng từ mã hộp + mẫu câu tiếng Anh
+      (không dịch từng chuỗi Python, không để AI dịch lúc trả lời). Đồng ý thì tuần 3–4 em làm chương 1 Bát tự + Tử vi theo cách này.
+- [ ] **Deploy engine trước web** (route mới `/v1/dia-ly/mui-gio`, `/v1/dia-ly/mui-gio/tai`, trường `mui_gio` ở lá số). Kiểm sau deploy:
+      Render → Events "Deploy live"; mở `https://hieuban.com/tu-vi`, sửa hồ sơ → Nơi sinh "Sinh ở nước ngoài" → thấy hai ô **Nước** /
+      **Thành phố**; chọn Hoa Kỳ → San Jose → dòng "Lúc sinh nơi đó dùng UTC−8…" hiện ra.
+- [ ] (Quyết định) Migration **0034** thêm cột `ho_so.mui_gio text` (có `.down.sql`) để đồng bộ thành phố nơi sinh lên tài khoản —
+      hiện chỉ lưu trên máy, tài khoản vẫn mang `utc_noi_sinh` cũ. Em viết khi anh gật.
+- [ ] (5 phút) Người quen ở nước ngoài mở `/hom-nay` buổi tối giờ địa phương → thẻ ghi đúng ngày hôm đó (không nhảy sang ngày mai
+      theo giờ Việt Nam). Các khối phụ của Hôm nay (hoàng lịch, quẻ ngày…) vẫn theo giờ Việt Nam — tuần 2.
+
 ### 4af. Mở rộng quốc tế (QTE-1, 2026-11-07) — kế hoạch `docs/KE-HOACH-QUOC-TE.md`
 
 Giai đoạn 0 (tuần 1–2) người Việt ở nước ngoài → tiếng Anh `/en/` (tuần 3–8) → thu tiền quốc tế tháng 3 → phồn thể (nếu đạt mốc tuần 8).
@@ -13,7 +25,7 @@ Giai đoạn 0 (tuần 1–2) người Việt ở nước ngoài → tiếng Anh
 - [ ] **Tuần 1**: nộp hồ sơ cổng thanh toán quốc tế — kiểm Paddle / Lemon Squeezy có nhận doanh nghiệp Việt Nam + có cấm ngành "bói toán / chiêm tinh" không; dự phòng Polar / Dodo → PayPal → pháp nhân Singapore + Stripe
 - [ ] Tìm 1 người bản xứ nói tiếng Anh am hiểu Bát tự / phong thuỷ để duyệt nội dung (ngân sách 300–500 USD/tháng)
 - [ ] Luật sư xem Chính sách riêng tư + Điều khoản tiếng Anh **trước tuần 9** (trước khi bật thu tiền)
-- [ ] (QT-0, 10 phút, tốn ít token) Thử máy chuyển ngữ: `cd engine && OPENROUTER_API_KEY=… PYTHONPATH=. python scripts/chuyen_ngu.py app/kb/data/tu_dien.json --mang bat_tu --thu 20` → xem `tu_dien.en.json` + `tu_dien.en.loi.json`, gửi em nhận xét giọng văn; muốn đổi mô hình thì đặt `CHUYEN_NGU_MODEL`
+- [ ] (QT-0, 10 phút, tốn ít token) Thử máy chuyển ngữ: `cd engine && OPENROUTER_API_KEY=… PYTHONPATH=. python scripts/chuyen_ngu.py app/kb/data/tu_dien.json --mang bat_tu --thu 20` → xem `app/kb/data/en/tu_dien.json` + `…/en/tu_dien.loi.json`, gửi em nhận xét giọng văn; muốn đổi mô hình thì đặt `CHUYEN_NGU_MODEL`
 
 ### 4ae. Kinh Dịch V3 — trả lời theo việc + UI hỏi quẻ (KD-V3, 2026-11-08) — deploy ENGINE trước web
 

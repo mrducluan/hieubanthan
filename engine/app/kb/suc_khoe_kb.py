@@ -4,10 +4,9 @@ nên chú ý sức khoẻ", lời đáp câu hỏi nêu tên bệnh, cụm cấm
 `source_id` + `school_id` ở gốc tệp và từng mục). Chỉ TRA, không sinh nghĩa."""
 from __future__ import annotations
 
-import json
 import re
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "suc_khoe_kb.json"
 MIEN_TRU_MAC_DINH = ("Đây là lời nhắc phòng ngừa theo sách xưa, không phải lời đoán và không thay lời bác sĩ — có dấu "
@@ -16,10 +15,10 @@ MIEN_TRU_MAC_DINH = ("Đây là lời nhắc phòng ngừa theo sách xưa, khô
 _HANH = {"Hoả": "Hỏa", "Thuỷ": "Thủy"}
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
     try:
-        d = json.loads(_F.read_text(encoding="utf-8"))
+        d = nap.doc(_F.name)
     except (OSError, ValueError):
         return {}
     return d if isinstance(d, dict) else {}

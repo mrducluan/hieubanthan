@@ -27,7 +27,7 @@ router = APIRouter(prefix="/v1/battu", tags=["battu"])
 def _sinh(inp: TuanTrietInput) -> tuple[dict, list[dict]]:
     dv = _DauVao(inp)
     flags = [f for f in dv.flags if f["loai"] != "tet_edge"]   # bát tự đổi năm tại Lập xuân, không tại Tết
-    if dv.nuoc_ngoai and inp.utc_noi_sinh is None:
+    if dv.nuoc_ngoai and dv.utc_noi_sinh is None:
         flags.append({"loai": "mui_gio_nuoc_ngoai", "chi_tiet": (
             "Chưa khai múi giờ nơi sinh: Bát tự đang so mốc giao tiết theo giờ Việt Nam. Người sinh sát ngày giao tiết "
             "(đầu tháng dương lịch) có thể lệch trụ tháng, trụ năm — khai múi giờ nơi sinh trong hồ sơ để tính đúng.")})

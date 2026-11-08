@@ -11,13 +11,12 @@ Chương 1 (ma trận + điều các cách cùng thấy) miễn phí; các chư�
 from __future__ import annotations
 
 import datetime as dt
-import json
-from functools import lru_cache
 from pathlib import Path
 
 from app import config
 from app.calc import lunar
 from app.luangiai import doi_song_khuon as kh
+from app.kb import nap
 
 MO_DUN = "chan_dung"
 PHAI_BA_MON = "tuvi_battu_nhantuong"
@@ -45,9 +44,9 @@ _KB = Path(__file__).parents[1] / "kb" / "data" / "chan_dung_kb.json"
 _TZ = config.TZ_LICH_AM["viet"]
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def kb() -> dict:
-    return json.loads(_KB.read_text("utf-8"))
+    return nap.doc(_KB.name)
 
 
 def _ten(mon: str) -> str:

@@ -8,18 +8,17 @@ không chấm điểm, không gợi ý ai giống ai.
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
 
 from app.calc import tuvi_sao_menh as sm
+from app.kb import nap
 
 _F = Path(__file__).resolve().parents[1] / "kb" / "data" / "tuvi_cung_sao_menh_kb.json"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _kb() -> dict:
-    return json.loads(_F.read_text(encoding="utf-8"))
+    return nap.doc(_F.name)
 
 
 NGUONG_PHO_BIEN: float = _kb()["nguong_pho_bien"]
