@@ -308,7 +308,8 @@ export function KinhDich() {
             <div className="grid gap-2 sm:grid-cols-2">
               {/* KD-V3: chủ đề — engine tự nhận từ câu đang gõ (dòng "Mình hiểu…"), hàng chip MỘT dòng cuộn ngang để đổi; chip chọn tay thắng. */}
               {chuDe.length > 0 && (
-                <div className="sm:col-span-2" data-testid="chip-chu-de" aria-label="Chủ đề câu hỏi">
+                <div className="min-w-0 max-w-full sm:col-span-2" data-testid="chip-chu-de" aria-label="Chủ đề câu hỏi">
+                  {/* min-w-0: ô lưới không được nở theo hàng chip cuộn ngang (điện thoại tràn 900px khi thiếu) */}
                   <p className="mb-1.5 text-xs text-fg-muted" data-testid="tu-nhan" aria-live="polite">
                     {tuNhan && !tuNhan.gieo ? (tuNhan.loai === "ky_thuat" || tuNhan.loai === "doc_que_da_co"
                       ? "Câu này là câu kiến thức — trả lời không cần gieo quẻ." : "Câu này được trả lời trực tiếp, không gieo quẻ.") : (
@@ -328,7 +329,7 @@ export function KinhDich() {
                       ))}
                     </div>
                   )}
-                  <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1 [mask-image:linear-gradient(to_right,black_92%,transparent)] [scrollbar-width:none]">
+                  <div className="-mx-1 flex w-[calc(100%+0.5rem)] gap-1.5 overflow-x-auto px-1 pb-1 [mask-image:linear-gradient(to_right,black_92%,transparent)] [scrollbar-width:none]">
                     {[...chuDe].sort((a, b) => (a.ma === chuDeHien ? -1 : b.ma === chuDeHien ? 1 : 0)).map((c) => (
                       <button key={c.ma} type="button" aria-pressed={chuDeHien === c.ma}
                         onClick={() => { chonChuDe(chuDeChon.current === c.ma ? null : c.ma); ghi("pain_point_clicked", { mo_dun: "kinhdich", ma: c.ma }); }}
