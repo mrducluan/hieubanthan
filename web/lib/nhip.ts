@@ -15,20 +15,21 @@ export interface Nhip {
 }
 
 const boNho = new Map<string, Nhip>();
-const khoaNgay = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
+// Khoá bộ nhớ theo ngày ở nơi đang sống (QTE-1) — chỉ để biết qua ngày mới cần gọi lại; ngày tính do engine.
+const khoaNgay = (noiO?: string) => new Intl.DateTimeFormat("en-CA", { timeZone: noiO || "Asia/Ho_Chi_Minh" }).format(new Date());
 
 /** "Ngày cá nhân 6: hợp dành cho gia đình…" → "Hợp dành cho gia đình…". */
 export const boTienToNgay = (s: string) => { const t = s.replace(/^Ngày cá nhân \d+:\s*/, ""); return t.charAt(0).toUpperCase() + t.slice(1); };
 
 export function useNhip(h: HoSo | null | undefined): Nhip | null {
-  const khoa = h ? `${h.ngay}-${h.thang}-${h.nam}|${khoaNgay()}` : "";
+  const khoa = h ? `${h.ngay}-${h.thang}-${h.nam}|${h.noi_o ?? ""}|${khoaNgay(h.noi_o)}` : "";
   const [kq, setKq] = useState<Nhip | null>(boNho.get(khoa) ?? null);
   useEffect(() => {
     if (!h) { setKq(null); return; }
     const co = boNho.get(khoa);
     if (co) { setKq(co); return; }
     let huy = false;
-    postJson<Nhip>("/api/thanso/nhip", { ngay: h.ngay, thang: h.thang, nam: h.nam })
+    postJson<Nhip>("/api/thanso/nhip", { ngay: h.ngay, thang: h.thang, nam: h.nam, ...(h.noi_o ? { mui_gio_noi_o: h.noi_o } : {}) })
       .then((d) => { boNho.set(khoa, d); if (!huy) setKq(d); })
       .catch(() => { /* lỗi mạng: khối nhịp tự ẩn, phần còn lại của trang vẫn dùng được */ });
     return () => { huy = true; };

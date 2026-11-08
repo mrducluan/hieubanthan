@@ -10,11 +10,11 @@ from __future__ import annotations
 import datetime as _dt
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, HTTPException, Path as FPath
+from fastapi import APIRouter, HTTPException, Path as FPath, Query
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
-from app.calc import dia_ly, lunar
+from app.calc import dia_ly, lunar, mui_gio
 from app.config import Region
 from app.luangiai import lich_nam as _lich_nam
 
@@ -25,6 +25,23 @@ router = APIRouter(tags=["lich"])
 def api_tinh() -> dict:
     return {"tinh": [{k: t[k] for k in ("ma", "ten", "vung")} for t in dia_ly.danh_sach()],
             "nuoc_ngoai": dia_ly.NUOC_NGOAI}
+
+
+@router.get("/v1/dia-ly/nuoc-ngoai")
+def api_nuoc_ngoai() -> dict:
+    """QTE-1 tuần 1 — danh mục nước + thành phố (múi giờ IANA) cho form hồ sơ người Việt ở nước ngoài."""
+    return {"nuoc": mui_gio.danh_muc()}
+
+
+@router.get("/v1/dia-ly/mui-gio")
+def api_mui_gio(mui_gio_ten: Annotated[str, Query(alias="mui_gio", max_length=40)],
+                ngay: Annotated[_dt.date, Query(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))],
+                gio: Annotated[str, Query(pattern=r"^\d{2}:\d{2}$")]) -> dict:
+    """QTE-1 tuần 1 — thành phố nơi sinh + ngày giờ sinh → múi giờ chuẩn + có giờ mùa hè không (form tự điền)."""
+    try:
+        return mui_gio.tinh(mui_gio_ten, ngay, gio)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)) from e
 
 
 class DoiLichInput(BaseModel):

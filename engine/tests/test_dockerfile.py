@@ -131,3 +131,9 @@ def test_requirements_tro_toi_constraints():
     """Review T4: `-c constraints.txt` nằm trong requirements.txt → mọi lệnh `pip install -r requirements.txt` (và
     Dependabot) đi cùng tệp ràng buộc; PR Dependabot nâng cả hai tệp, không đỏ CI vì lệch."""
     assert "-c constraints.txt" in (ENGINE / "requirements.txt").read_text(encoding="utf-8").splitlines()
+
+
+def test_anh_co_du_lieu_mui_gio():
+    """QTE-1 tuần 1: `app/calc/mui_gio.py` cần dữ liệu múi giờ IANA → Dockerfile cài `tzdata` + bước build tự kiểm."""
+    d = DOCKERFILE.read_text(encoding="utf-8")
+    assert "tzdata" in d and "mui_gio.tinh(" in d

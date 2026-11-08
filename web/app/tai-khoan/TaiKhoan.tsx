@@ -139,7 +139,10 @@ export function TaiKhoan({ emailDuLieu = null, dichVu = { hoiVien: false, chuyen
                         // EN-2 mục 5: tình trạng chỉ lưu trên máy (không đồng bộ tài khoản) → giữ lựa chọn của máy này, CHỈ
                         // khi hồ sơ tài khoản là cùng một người (review T2: không mang sang người khác).
                         const cungNguoi = hoSo && hoSo.ho_ten === h.ho_ten && hoSo.ngay === h.ngay && hoSo.thang === h.thang && hoSo.nam === h.nam;
-                        luuHoSo({ ...h, ...giu, ...(cungNguoi && hoSo.tinh_trang ? { tinh_trang: hoSo.tinh_trang } : {}) });
+                        // QTE-1 tuần 1: thành phố nơi sinh + nơi đang sống chỉ lưu trên máy → giữ khi cùng một người.
+                        luuHoSo({ ...h, ...giu, ...(cungNguoi && hoSo.tinh_trang ? { tinh_trang: hoSo.tinh_trang } : {}),
+                          ...(cungNguoi && hoSo.noi_sinh === h.noi_sinh && hoSo.mui_gio_sinh ? { mui_gio_sinh: hoSo.mui_gio_sinh } : {}),
+                          ...(cungNguoi && hoSo.noi_o ? { noi_o: hoSo.noi_o } : {}) });
                       }}>Dùng bản trong tài khoản</Button>
                     </div>
                   </div>

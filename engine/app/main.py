@@ -594,11 +594,21 @@ class ChuKyInput(BaseModel):
         return v
 
 
+def _ngay_noi_o(ten: str | None) -> _dt.date:
+    """QTE-1 tuần 1 — "hôm nay" ở nơi người dùng đang sống (múi giờ trong danh mục nước ngoài); trống = giờ Việt Nam."""
+    from app.calc import mui_gio  # noqa: PLC0415
+    try:
+        return mui_gio.hom_nay(ten)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)) from e
+
+
 class HomNayInput(BaseModel):
     ngay: int = Field(ge=1, le=31)
     thang: int = Field(ge=1, le=12)
     nam: int = Field(ge=1900, le=2100)
     ngay_xem: _dt.date | None = None     # trống = hôm nay theo giờ Việt Nam
+    mui_gio_noi_o: str | None = Field(default=None, max_length=40)   # QTE-1: hôm nay theo nơi đang sống (IANA)
     y_dinh: list[str] = Field(default_factory=list, max_length=11)   # HN-2: mã ý định chọn sẵn
     du_dinh: str | None = Field(default=None, max_length=200)        # HN-2: câu gõ tay — chỉ nhận diện, không lưu
 
@@ -610,7 +620,7 @@ def api_hom_nay(inp: HomNayInput) -> dict:
         _dt.date(inp.nam, inp.thang, inp.ngay)
     except ValueError:
         raise HTTPException(422, detail="Ngày không tồn tại")
-    ngay_xem = inp.ngay_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
+    ngay_xem = inp.ngay_xem or _ngay_noi_o(inp.mui_gio_noi_o)
     return {"engine_version": ENGINE_VERSION, **hom_nay.the_hom_nay(inp.ngay, inp.thang, inp.nam, ngay_xem,
                                                                           inp.y_dinh, inp.du_dinh)}
 
@@ -620,6 +630,7 @@ class NhipInput(BaseModel):
     thang: int = Field(ge=1, le=12)
     nam: int = Field(ge=1900, le=2100)
     ngay_xem: _dt.date | None = None     # trống = hôm nay theo giờ Việt Nam
+    mui_gio_noi_o: str | None = Field(default=None, max_length=40)   # QTE-1: hôm nay theo nơi đang sống (IANA)
 
 
 @app.post("/v1/thanso/nhip")
@@ -629,7 +640,7 @@ def api_nhip(inp: NhipInput) -> dict:
         _dt.date(inp.nam, inp.thang, inp.ngay)
     except ValueError:
         raise HTTPException(422, detail="Ngày không tồn tại")
-    ngay_xem = inp.ngay_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
+    ngay_xem = inp.ngay_xem or _ngay_noi_o(inp.mui_gio_noi_o)
     return {"engine_version": ENGINE_VERSION, **nhip.nhip_ca_nhan(inp.ngay, inp.thang, inp.nam, ngay_xem)}
 
 

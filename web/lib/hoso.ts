@@ -23,6 +23,11 @@ export const HoSo = z.object({
   gio_mua_he: z.boolean().optional(),
   /** EN-6 BI-3: múi giờ CHUẨN nơi sinh (UTC±, không tính giờ mùa hè) — chỉ khi sinh ở nước ngoài. */
   utc_noi_sinh: z.number().min(-12).max(14).multipleOf(0.25).optional(),
+  /** QTE-1 tuần 1: thành phố nơi sinh ở nước ngoài (múi giờ IANA, vd "America/Los_Angeles") — máy tự tính `utc_noi_sinh` +
+   *  `gio_mua_he` từ đây. CHỈ lưu trên máy (tài khoản giữ hai trường đã tính, không cần cột mới). */
+  mui_gio_sinh: z.string().regex(/^[A-Za-z]+\/[A-Za-z_]+$/).max(40).optional(),
+  /** QTE-1 tuần 1: nơi đang sống ở nước ngoài (IANA) — "Hôm nay", nhịp ngày tính theo ngày ở đó. Trống = Việt Nam. */
+  noi_o: z.string().regex(/^[A-Za-z]+\/[A-Za-z_]+$/).max(40).optional(),
   /** TV-V2: "unknown" = không biết giờ → `gio` là giờ đại diện 12:00 chỉ để an tạm lá số; Tử vi mở khối định giờ 12 canh. */
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).optional(),
   /** EN-2 mục 5: tình trạng NGƯỜI DÙNG TỰ CHỌN (không suy đoán) — chỉ để chọn lời ở chương tình yêu / gia đình. CHỈ lưu

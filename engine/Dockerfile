@@ -21,6 +21,10 @@ COPY --from=ziwei /usr/local/bin/node /usr/local/bin/node
 
 WORKDIR /app
 
+# QTE-1 tuần 1: dữ liệu múi giờ IANA (lịch sử giờ mùa hè từng nước) cho `app/calc/mui_gio.py` — gói hệ điều hành, không
+# phải thư viện Python. Ảnh slim không chắc có sẵn → cài tường minh; bước kiểm dưới đây hỏng nếu thiếu.
+RUN apt-get update && apt-get install -y --no-install-recommends tzdata && rm -rf /var/lib/apt/lists/*
+
 # Cài phụ thuộc trước (tận dụng cache Docker khi code đổi mà deps không đổi).
 COPY requirements.txt constraints.txt ./
 RUN pip install --no-cache-dir -r requirements.txt -c constraints.txt
@@ -33,6 +37,8 @@ RUN node -e "console.log('iztro', require('/app/ziwei/node_modules/iztro/package
 # Kiểm tra lúc build: an sao THẬT qua cả hai đường Python dùng (mỗi lượt một tiến trình + tiến trình chạy sẵn). Hỏng →
 # build hỏng → Render giữ bản đang chạy thay vì đưa lên bản mà mọi trang Tử vi đều lỗi.
 RUN python -c "from app.calc import tuvi_an_sao; tuvi_an_sao.tu_kiem()"
+# Kiểm tra lúc build: dữ liệu múi giờ có và đúng (Los Angeles 15/07/1990 10:00 → UTC−8, đang giờ mùa hè).
+RUN python -c "import datetime as d; from app.calc import mui_gio; k = mui_gio.tinh('America/Los_Angeles', d.date(1990, 7, 15), '10:00'); assert k['utc_chuan'] == -8 and k['gio_mua_he'], k"
 
 # Host cấp cổng qua biến $PORT (Render/Railway). Mặc định 8000 cho chạy tay.
 ENV PORT=8000

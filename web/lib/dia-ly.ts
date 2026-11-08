@@ -29,3 +29,45 @@ export function useDanhSachTinh(): { tinh: Tinh[] | null; loi: string | null; th
   }, [lan]);
   return { tinh, loi, thuLai: () => setLan((n) => n + 1) };
 }
+
+// ---------------------------------------------------------------- QTE-1 tuần 1: người Việt ở nước ngoài
+export interface ThanhPho { ten: string; mui_gio: string }
+export interface NuocNgoai { ma: string; ten: string; thanh_pho: ThanhPho[] }
+export interface KetQuaMuiGio {
+  mui_gio: string; utc_chuan: number; utc_dong_ho: number; gio_mua_he: boolean; chenh_mua_he: number;
+  doi_gio: "khong_ton_tai" | "lap_lai" | null; can_xem_lai: boolean;
+}
+
+let boNhoNuoc: Promise<NuocNgoai[]> | null = null;
+
+function taiNuoc(): Promise<NuocNgoai[]> {
+  boNhoNuoc ??= fetch("/api/dia-ly/nuoc-ngoai")
+    .then(async (r) => {
+      if (!r.ok) throw new Error("Chưa tải được danh sách nước.");
+      return ((await r.json()) as { nuoc: NuocNgoai[] }).nuoc;
+    })
+    .catch((e: unknown) => { boNhoNuoc = null; throw e; });
+  return boNhoNuoc;
+}
+
+/** Danh mục nước + thành phố; `bat` = false thì chưa tải (form chưa chọn "nước ngoài"). */
+export function useDanhSachNuoc(bat: boolean): NuocNgoai[] | null {
+  const [ds, setDs] = useState<NuocNgoai[] | null>(null);
+  useEffect(() => {
+    if (!bat) return;
+    let huy = false;
+    taiNuoc().then((d) => { if (!huy) setDs(d); }).catch(() => { /* lỗi: form vẫn cho tự chọn UTC như trước */ });
+    return () => { huy = true; };
+  }, [bat]);
+  return ds;
+}
+
+/** Nước chứa múi giờ này (để form hiện lại đúng nước khi mở hồ sơ cũ). */
+export const nuocCuaMuiGio = (ds: NuocNgoai[] | null, mg: string | undefined) =>
+  mg && ds ? ds.find((n) => n.thanh_pho.some((t) => t.mui_gio === mg))?.ma ?? "" : "";
+
+/** "+7", "−8", "+5:30" — chỉ để hiển thị con số engine trả. */
+export const tenUtc = (h: number) => {
+  const dau = h < 0 ? "−" : "+", a = Math.abs(h), gio = Math.floor(a), phut = Math.round((a - gio) * 60);
+  return `UTC${dau}${gio}${phut ? `:${String(phut).padStart(2, "0")}` : ""}`;
+};
