@@ -5,6 +5,19 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4ad. Kinh Dịch V3 — trả lời theo việc + UI hỏi quẻ (KD-V3, 2026-11-08) — deploy ENGINE trước web
+
+- [ ] **Deploy engine trước web** (route mới `/v1/kinhdich/hieu-cau`, trường `tra_loi` + hộp "Phía người kia" / "Điều cần gỡ trước"
+  trong `doc_que`; web cũ bỏ qua trường mới, web mới gặp engine cũ thì dòng "tự nhận chủ đề" không hiện, chip vẫn chọn tay).
+- [ ] (5 phút) Mở `/kinh-dich`, bấm câu gợi ý "Tôi có nên nhận lời làm quản lý không?" → câu nằm trong ô, chưa gửi; dòng
+  "Câu hỏi dạng có nên · Bạn đang hỏi về Thăng tiến…" hiện sau ~1 giây; gửi → bài đọc có câu đầu nêu nghiêng + lý do riêng,
+  nhãn "Lời hào làm chủ: …". Thử "Con tôi năm nay thi đại học có đậu không?" → chủ đề Thi cử, hộp "Phía con bạn".
+- [ ] (Chuyên gia, dần dần) Duyệt 384 nhãn xu hướng hào trong `engine/app/kb/data/kinhdich_tra_loi.json` (`hao_xu_huong`,
+  8 nhãn) và 108 câu lời khuôn — nháp ban biên tập; đổi nhãn không đổi mức / mã kiểm chứng cũ. Bảng đối chiếu + số đo:
+  `docs/NANG-CAP-KINH-DICH-V3.md`.
+- [ ] (Quyết định) Có bật AI diễn đạt riêng chương "Câu trả lời" của quẻ (như Tarot TR-3) không? Em đề xuất chờ xem lớp mới
+  đúng hướng (tỉ lệ "Đúng với mình" mã `ds.kinhdich.*.nguoi_kia.*`) rồi mới nối.
+
 ### 4ac. Tarot trả lời đúng câu hỏi (TR-2, 2026-11-07) — deploy ENGINE trước web
 
 - [ ] **Deploy engine trước web** (route mới `/v1/tarot/hieu-cau`, trải bài `hai_lua_chon`, trường `hieu_cau` trong bài đọc; web cũ bỏ qua trường mới).

@@ -38,6 +38,9 @@ export interface DocQueKq {
   mot_que_mot_viec?: string;
   /** KC-3: mã ý định chung + gợi mở sang mảng khác. */
   y_dinh_chung?: string | null; goi_mo?: GoiMo | null;
+  /** KD-V3: gói trả lời theo việc (engine): kiểu câu, vai, nghiêng, xu hướng hào làm chủ, dụng thần theo việc. Chỉ hiển thị. */
+  tra_loi?: { kieu?: string; vai?: string; nghieng?: string; nhan_nghieng?: string; nhan_tag?: string | null; nguon_tag?: string | null;
+    khac_chieu?: string[]; dung_than?: { chinh?: string; ten?: string } } | null;
 }
 
 /** "Tuất" → "tuat" (mã nhắc chỉ a-z). */
@@ -82,6 +85,11 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
       <div className="flex flex-wrap items-center gap-2">
         <ChipMuc muc={dq.muc} nhan={dq.nhan_muc} />
         <span className="text-xs text-fg-faint">Chủ đề: {dq.chu_de.ten} · đọc chính theo {TEN_PHAI[gn.chinh] ?? gn.chinh}</span>
+        {dq.tra_loi?.nhan_tag && (
+          <span className="rounded-full border border-line/70 px-2 py-0.5 text-xs text-fg-muted" data-testid="xu-huong-hao" title={dq.tra_loi.nguon_tag ? `Lời làm chủ: ${dq.tra_loi.nguon_tag}` : undefined}>
+            Lời hào làm chủ: {dq.tra_loi.nhan_tag}
+          </span>
+        )}
       </div>
       {!anKetLuan && <p className="text-lg leading-relaxed text-fg" data-testid="ket-luan">{dq.ket_luan}</p>}
       {dq.hop.length > 0 && (

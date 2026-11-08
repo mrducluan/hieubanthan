@@ -58,11 +58,18 @@ interface Props {
   /** Tên mảng cho đo lường (không gửi nội dung câu hỏi). */
   moDun: string;
   className?: string;
+  /** KD-V3 (UI Kinh Dịch): bấm câu gợi ý chỉ ĐIỀN vào ô (không gửi) — người dùng đọc lại, chọn chủ đề / cách gieo rồi tự bấm gửi. */
+  chipDienSan?: boolean;
+  /** KD-V3: điều khiển đặt DƯỚI ô nhập (chủ đề tự nhận, cách gieo…) — ô nhập đứng ngay sau lời chào / câu gợi ý. */
+  dieuKhienDuoi?: ReactNode;
+  /** KD-V3: báo chữ đang gõ cho trang (đã bỏ ngắt; trang tự debounce) — chỉ dùng để engine gợi chủ đề, không lưu. */
+  onCauDoi?: (cau: string) => void;
 }
 
 // Mỗi mảng một khung chat (chủ dự án chốt): lịch sử trong phiên, gợi ý câu hỏi, không lưu phía server
 // ngoài nhật ký ẩn danh đã lọc (0004/0005).
-export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi của bạn", goiYO, cauNgoai, cauDienSan, moDun, className }: Props) {
+export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi của bạn", goiYO, cauNgoai, cauDienSan, moDun, className,
+                            chipDienSan = false, dieuKhienDuoi, onCauDoi }: Props) {
   const cc = useChuChung();
   const [tin, setTin] = useState<Tin[]>([]);
   const [cau, setCau] = useState("");
@@ -161,10 +168,20 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chạy khi vừa trả lời xong
   }, [dang]);
 
+  /** Bấm câu gợi ý: điền vào ô + đưa con trỏ vào (chipDienSan) hoặc hỏi luôn. */
+  function chonGoiY(c: string) {
+    if (!chipDienSan) { void hoi(c); return; }
+    setCau(c);
+    onCauDoi?.(c);
+    ghi("chart_interacted", { mo_dun: moDun, kind: "goi_y_dien_san" });
+    requestAnimationFrame(() => oNhap.current?.focus({ preventScroll: true }));
+  }
+
   async function hoi(q: string) {
     const c = q.trim();
     if (c.length < 3 || dang) return;
     setCau("");
+    onCauDoi?.("");
     setTin((t) => [...t, { id: ++soId.current, ai: "ban", van: c }]);
     setDang(true);
     ghi("advisor_question_started", { mo_dun: moDun });
@@ -242,7 +259,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
         )}
         <div className="-mx-1 mb-3 flex gap-2 overflow-x-auto px-1 pb-1 [mask-image:linear-gradient(to_right,black_88%,transparent)] [scrollbar-width:none]" aria-label="Câu hỏi gợi ý">
           {goiY.flatMap((g) => g.cau.map((c) => (
-            <button key={c} type="button" disabled={dang} onClick={() => hoi(c)} title={g.nhom}
+            <button key={c} type="button" disabled={dang} onClick={() => chonGoiY(c)} title={g.nhom}
               className="min-h-10 shrink-0 rounded-full border border-line bg-surface-2/60 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg active:scale-[0.97] disabled:opacity-50">
               {c}
             </button>
@@ -251,13 +268,14 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
         {dieuKhien && <div className="mb-3">{dieuKhien}</div>}
         <form className="flex items-end gap-2" onSubmit={(e) => { e.preventDefault(); void hoi(cau); }}>
           <Textarea ref={oNhap} rows={1} value={cau} maxLength={400} aria-label={nhanO} placeholder={goiYO ?? cc("hoi.o_nhap")}
-            onChange={(e) => setCau(e.target.value)}
+            onChange={(e) => { setCau(e.target.value); onCauDoi?.(e.target.value); }}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void hoi(cau); } }}
             className="max-h-40 min-h-[4.5rem] [field-sizing:content] sm:min-h-12" />
           <Button type="submit" size="icon" className="shrink-0" disabled={dang || cau.trim().length < 3} aria-label="Gửi câu hỏi">
             <Send aria-hidden />
           </Button>
         </form>
+        {dieuKhienDuoi && <div className="mt-3">{dieuKhienDuoi}</div>}
       </div>
     </div>
   );

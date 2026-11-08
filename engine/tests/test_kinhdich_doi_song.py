@@ -30,7 +30,8 @@ def _chuan(c: str) -> str:
     ("Có đòi được món nợ này không?", "tien_no"),
     ("Nên mua căn hộ này không?", "mua_nha"),
     ("Người ấy có quay lại với tôi không?", "tinh_cam"),
-    ("Con tôi có đậu kỳ thi này không?", "con_cai"),
+    ("Con tôi có đậu kỳ thi này không?", "thi_cu"),            # KD-V3: việc = thi cử, con là VAI (hào phụ)
+    ("Con tôi dạo này có ổn không?", "con_cai"),
     ("Tôi có nên mở quán cà phê không?", "kinh_doanh"),
     ("Hôm nay trời đẹp quá.", "khac"),
 ])

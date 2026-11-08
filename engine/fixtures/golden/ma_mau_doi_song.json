@@ -987,6 +987,8 @@
 "ds.phongthuy.viec_nen_lam.cot_loi.neu_chi_lam_mot_viec"
 ],
 "kinhdich": [
+"ds.kinhdich.chuyen_viec.can_go.q1.ky_than_dong",
+"ds.kinhdich.chuyen_viec.can_go.q1.nhap_mo",
 "ds.kinhdich.chuyen_viec.cot_loi.q1.can_bang",
 "ds.kinhdich.chuyen_viec.cot_loi.q10.thuan",
 "ds.kinhdich.chuyen_viec.cot_loi.q52.thuan",

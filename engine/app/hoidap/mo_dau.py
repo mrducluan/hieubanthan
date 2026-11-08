@@ -749,9 +749,22 @@ def que_mo(dq: dict | None, t: str, raw: str | None = None, moc: str | None = No
     ten = next((h["tieu_de"].split(" — ")[0] for h in dq.get("hop") or [] if h.get("loai") == "cot_loi"), "Quẻ")
     hdg = kd.hieu_don_gian(so) if so else None
     viec = next((x["viec"][0] for x in dq.get("hanh_dong") or [] if x.get("muc") == dq["muc"] and x.get("viec")), "")
-    phan = [f"{thuong(ten)} nghiêng về mức {dq['nhan_muc'].lower()}", kl]
-    if hdg:
-        phan.append("Hiểu đơn giản: " + hdg)
+    tl = dq.get("tra_loi") or {}
+    if tl.get("cau_dau"):
+        # KD-V3: câu đầu = nghiêng theo kiểu câu + lý do riêng của lần gieo; rồi phía người kia, điều cần gỡ, việc nên làm
+        phan = [f"{thuong(ten)} — {thuong(tl['cau_dau'].rstrip('.'))}"]
+        if tl.get("nguoi_kia") and tl["kieu"] != "nguoi_kia":
+            nk = tl["nguoi_kia"]
+            ai = f"Phía {nk['nguoi']}" if tl.get("vai") != "toi" and nk.get("nguoi") else "Phía người kia"
+            phan.append(f"{ai}: " + thuong(nk["loi"].rstrip(".")))
+        if tl.get("can_go"):
+            phan.append("Điều cần gỡ trước: " + thuong(tl["can_go"][0]["loi"].rstrip(".")))
+        if viec and tl.get("vai") == "con":
+            viec = "cùng con, " + thuong(viec)
+    else:
+        phan = [f"{thuong(ten)} nghiêng về mức {dq['nhan_muc'].lower()}", kl]
+        if hdg:
+            phan.append("Hiểu đơn giản: " + hdg)
     if viec:
         phan.append("Việc nên làm: " + thuong(viec))
     if moc:
