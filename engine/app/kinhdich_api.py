@@ -115,6 +115,8 @@ class HoiKDInput(BaseModel):
     # HỌC-ĐS: trọng số công khai + phiếu cá nhân theo mã hộp đọc quẻ (ds.kinhdich.*) — chỉ hạ / xếp lại hộp.
     trong_so: dict[_MaMau, PhieuInput] | None = Field(default=None, max_length=5000)
     ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
+    # KD-V3 hướng C: AI diễn đạt riêng phần trả lời (nguồn = lớp tất định, không câu người dùng); thiếu khoá → bản mẫu.
+    dien_dat: bool = False
 
 
 @router.post("/hoi")
@@ -136,6 +138,9 @@ def api_hoi(inp: HoiKDInput, background: BackgroundTasks) -> dict:
     if (inp.trong_so or inp.ca_nhan) and kq.get("doc_que"):
         from app.luangiai import doi_song_khuon as kh  # noqa: PLC0415
         kh.ap_hoc(kq["doc_que"], {k: v.model_dump() for k, v in (inp.trong_so or {}).items()}, inp.ca_nhan)
+    if inp.dien_dat and kq.get("doc_que") and kq.get("que") and (kq.get("phan_loai") or {}).get("xu_ly") not in hoidap_kd.chung.DAC_BIET:
+        from app.luangiai import kinhdich_tra_loi as ktl  # noqa: PLC0415
+        kq["doc_que"] = ktl.dien_dat(kq["doc_que"])
     background.add_task(nhat_ky.ghi_huyenhoc, "kinhdich", inp.cau_hoi, kq, False)
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "kinhdich")}
 

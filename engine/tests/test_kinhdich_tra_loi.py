@@ -166,3 +166,43 @@ def test_chu_de_moi_hon_nhan_tt():
     assert ds.chu_de_tu_cau(chung.chuan_hoa("Chồng tôi ngoại tình, có nên tha thứ không?")) == "hon_nhan_tt_nam"
     assert ds.chu_de_tu_cau(chung.chuan_hoa("Vợ chồng tôi hay cãi nhau, có nên ly thân không?")) == "hon_nhan_tt"
     assert ds.chu_de_tu_cau(chung.chuan_hoa("Có nên cưới vào cuối năm nay không?")) == "hon_nhan"
+
+
+# ----------------------------------------------------------------------------- hướng C — AI diễn đạt phần trả lời
+def test_dien_dat_khong_khoa_giu_mau(monkeypatch):
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    kq = _doc("Con tôi năm nay thi đại học có đậu không?")
+    assert ktl.dien_dat(kq["doc_que"])["dien_dat"] == "mau"
+
+
+def test_dien_dat_qua_kiem_va_khong_lo_cau_nguoi_dung(monkeypatch):
+    from app.narrative import ai_goi
+    monkeypatch.setenv("OPENROUTER_API_KEY", "x")
+    goi: list = []
+    la = "zyxw bún bò huế của tôi ở phố Hàng Mã"
+    kq = kd.tra_loi(f"Có nên mở {la} không?", gia_tri_hao=KY_TE_H3, thoi_diem=THOI, cach_ra_que="gieo_tay")
+    dq = kq["doc_que"]
+    nguon = "\n".join(ktl.nguon_dien_dat(dq))
+    assert "zyxw" not in nguon and "Hàng Mã" not in nguon                       # câu người dùng không vào lời nhắc
+
+    def gia(messages, **k):
+        goi.append(messages)
+        return nguon.split("\n")[0] + " " + " ".join(nguon.split("\n")[1:3])    # bản AI chỉ dùng ý có sẵn
+    monkeypatch.setattr(ai_goi, "goi_chat", gia)
+    ra = ktl.dien_dat(dq)
+    assert ra["dien_dat"] == "tra_loi" and ra["tra_loi"]["van_ai"]
+    assert "zyxw" not in json.dumps(goi, ensure_ascii=False) and "Kinh Dịch" in goi[0][0]["content"]
+    # bản AI thêm con số / cụm doạ → bộ kiểm chặn, giữ bản mẫu
+    monkeypatch.setattr(ai_goi, "goi_chat", lambda m, **k: "Bạn sẽ chắc chắn thành công trong 3 tháng tới.")
+    ra2 = ktl.dien_dat(dq)
+    assert ra2["dien_dat"] == "mau" and ra2.get("dien_dat_loi")
+    assert "van_ai" not in (ra2.get("tra_loi") or {})
+    monkeypatch.setattr(ai_goi, "goi_chat", lambda m, **k: (_ for _ in ()).throw(RuntimeError("mạng")))
+    assert ktl.dien_dat(dq)["dien_dat"] == "mau"
+
+
+def test_api_hoi_dien_dat_co_truong(monkeypatch):
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    r = client.post("/v1/kinhdich/hoi", json={"cau_hoi": "Có nên mua căn hộ đang xem không?", "cach_ra_que": "gieo_tay",
+                                              "gia_tri_hao": KY_TE_H3, "dien_dat": True})
+    assert r.status_code == 200 and r.json()["doc_que"]["dien_dat"] == "mau"

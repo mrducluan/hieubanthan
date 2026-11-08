@@ -88,10 +88,41 @@ chủ đề = chip chọn tay ?? chủ đề engine tự nhận; câu người �
 câu kiến thức → báo "không cần gieo quẻ". `DocQue` thêm nhãn "Lời hào làm chủ: {xu hướng}". Khung chat các mảng khác giữ
 hành vi cũ (chip hỏi luôn). E2E mới `e2e/kinh-dich-v3.spec.ts`.
 
-## 5. Chưa làm / chờ chủ dự án
+## 5. Hướng C — AI diễn đạt phần trả lời (chủ dự án duyệt 2026-11-08, làm sau B)
+
+Cách làm (đúng khuôn Tarot TR-3, tầng NARRATIVE): `kinhdich_tra_loi.dien_dat(dq)` — nguồn đưa cho AI = **chính lớp A đã
+dựng** (câu kết luận, hộp Phía người kia / Điều cần gỡ / Điều dễ vấp / Cách làm cho đúng, việc nên làm, câu "quẻ không
+quyết thay bạn"); **không có câu người dùng gõ, không ngày sinh** (test khoá). Lời nhắc riêng cho Kinh Dịch: người đọc Dịch
+điềm đạm, câu đầu phải nêu đúng chiều nghiêng, không "quẻ tốt/xấu", không "sẽ thành/thất bại". Bản AI qua
+`luan_giai_van.kiem_tra_chuong` (số lạ, thuật ngữ lạ, cụm cấm, câu ý mới, dài > 1,5 lần) — hỏng / thiếu khoá / hết lượt RL-1
+→ bản mẫu; `goi_chat` nhớ theo mã băm nên xem lại không tốn lượt. API `POST /v1/kinhdich/hoi` cờ `dien_dat`; web gửi khi có
+câu hỏi, hiện bản AI làm lời chính + ghi chú "diễn đạt tự động… hộp bên dưới là bản gốc để đối chiếu"; hộp, mã kiểm chứng,
+"Vì sao nói vậy" vẫn là bản tất định.
+
+### Chọn mô hình nào
+
+Việc này là **viết lại có ràng buộc** (không thêm ý, giữ chiều nghiêng, tiếng Việt tự nhiên, 4–7 câu) — không cần suy luận
+sâu, cần bám lệnh và văn Việt mượt, chi phí thấp vì mỗi lượt hỏi là một lời gọi. Tiêu chí đo (script
+`engine/scripts/so_mo_hinh_kd.py`, chạy bằng khoá thật của anh): tỉ lệ qua bộ kiểm, giữ đúng chiều nghiêng, độ dài/nguồn,
+giây/câu, giá. Đề xuất theo kinh nghiệm chung (chưa đo bằng khoá — anh chạy script rồi chốt):
+
+| Mô hình (tên OpenRouter) | Vì sao cân nhắc | Rủi ro |
+|---|---|---|
+| `anthropic/claude-haiku-4.5` | bám ràng buộc tốt, rẻ, nhanh; tiếng Việt ổn | đôi khi quá ngắn / khô |
+| `anthropic/claude-sonnet-4.5` | văn Việt tự nhiên nhất, ít thêm ý | đắt hơn 3–5 lần Haiku |
+| `google/gemini-2.5-flash` | rất rẻ, nhanh, tiếng Việt tốt (đã dùng cho đọc ảnh) | hay thêm câu động viên → bộ kiểm chặn, rơi về bản mẫu nhiều hơn |
+| `openai/gpt-4.1-mini` | rẻ, ổn định | văn hơi "dịch", thỉnh thoảng thêm số |
+| `deepseek/deepseek-chat-v3.1`, `qwen/qwen3-235b-a22b` | rẻ nhất | tiếng Việt kém tự nhiên, dễ sai dấu |
+
+Cách đặt: env engine `KD_DIEN_DAT_MODEL` (riêng cho Kinh Dịch; trống → `OPENROUTER_MODEL` → mặc định chung). Mặc định chung
+hiện là `anthropic/claude-3.5-sonnet` (cũ) — EN-4 đã ghi việc chọn mô hình mặc định mới là của chủ dự án. Khuyến nghị: chạy
+script với 12 câu × 3 quẻ, chọn mô hình có **qua kiểm ≥ 10/12 và đúng chiều 12/12** rẻ nhất; nếu hoà, ưu tiên Claude Haiku
+4.5 (bám lệnh) rồi Gemini 2.5 Flash (giá).
+
+## 6. Chưa làm / chờ chủ dự án
 
 - 384 nhãn xu hướng hào + 108 câu lời mới là nháp ban biên tập — cần người rành Dịch duyệt (`kinhdich_tra_loi.json`, trường
   `hao_xu_huong`); đổi nhãn không đổi mức / mã cũ, chỉ đổi câu đầu.
-- Hướng C (AI diễn đạt riêng chương trả lời như Tarot TR-3) chỉ nên làm sau khi anh thấy lớp B đúng hướng.
+- Hướng C đã nối (mục 5); việc còn lại là chọn mô hình bằng script + khoá thật và đặt `KD_DIEN_DAT_MODEL`.
 - Deploy **engine trước web** (route `/v1/kinhdich/hieu-cau`, trường `tra_loi`; web cũ bỏ qua trường mới; web mới gặp engine
   cũ → dòng tự nhận không hiện, chip vẫn chọn tay được).

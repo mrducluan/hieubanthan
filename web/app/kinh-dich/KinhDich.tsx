@@ -178,7 +178,8 @@ export function KinhDich() {
         { cau_hoi: cau, che_do: laXemLai ? laXemLai.che_do : cheDo, cach_ra_que: cachGui, ...(cachGui === "gieo_tay" ? { gia_tri_hao: vals } : {}),
           ...(cachGui === "mai_hoa" && lichMH === "trung" ? { lich: lichMH } : {}),
           ...(cachGui === "mai_hoa_so" ? { so_mai_hoa: so } : {}), ...(cachGui === "mai_hoa_phuong" ? { phuong_mai_hoa: phuongMH } : {}),
-          ...(ma ? { chu_de: ma } : {}), ...(laXemLai && gioVietNam(laXemLai.luc) ? { thoi_diem: gioVietNam(laXemLai.luc) } : {}) },
+          ...(ma ? { chu_de: ma } : {}), ...(laXemLai && gioVietNam(laXemLai.luc) ? { thoi_diem: gioVietNam(laXemLai.luc) } : {}),
+          dien_dat: true },
         (d) => { giu.d = d; if (d.doc_que?.y_dinh_chung) setMaYDinh(d.doc_que.y_dinh_chung); return null; },
         ["khong_gieo_lai"],
       );
@@ -206,7 +207,9 @@ export function KinhDich() {
     // Có quẻ: lời chính = kết luận đời thường (bản theo sách gập trong DocQue); quẻ + lời hiện sau nghi thức lật xu (may_gieo).
     const que = d.que, dq = d.doc_que ?? null;
     const giaTri = giaTriTuQue(que);
-    const van = dq ? dq.ket_luan : kq.van;
+    // KD-V3 hướng C: có bản AI diễn đạt (đã qua bộ kiểm engine) thì làm lời chính; kết luận tất định vẫn ở hộp đầu của DocQue.
+    const vanAi = dq?.dien_dat === "tra_loi" ? dq.tra_loi?.van_ai : undefined;
+    const van = dq ? (vanAi ?? dq.ket_luan) : kq.van;
     const nghiThuc = !laXemLai && cachGui === "may_gieo" && !!giaTri;
     if (!laXemLai) {
       ghiDaHoi(cau);
@@ -227,7 +230,8 @@ export function KinhDich() {
     const idDq = `dq-${Date.now()}`;
     const hao = kq.trucQuan?.some((k) => k.kieu === "hao") ? kq.trucQuan.filter((k) => k.kieu === "hao") : undefined;
     const phu = (
-      <KetQuaQue giaTri={giaTri} nghiThuc={nghiThuc} cach={cachGui} van={van} thuatNgu={kq.thuatNgu} canCu={kq.canCu} ghiChu={kq.ghiChu} canhBao={kq.canhBao}
+      <KetQuaQue giaTri={giaTri} nghiThuc={nghiThuc} cach={cachGui} van={van} thuatNgu={kq.thuatNgu} canCu={kq.canCu}
+        ghiChu={vanAi ? "Phần trả lời được diễn đạt tự động từ lời đọc quẻ có nguồn; hộp bên dưới là bản gốc để đối chiếu." : kq.ghiChu} canhBao={kq.canhBao}
         trucQuan={hao}
         onHien={() => { batDauDoc("kinhdich"); setCoQue(true); }}>
         <div className="glass rounded-2xl p-4" data-testid="que">

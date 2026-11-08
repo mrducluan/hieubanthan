@@ -319,3 +319,68 @@ def tra_loi(que: dict, pl: dict, goi: dict, gn: dict, muc: str, *, pt: dict | No
             "tag": tag, "nguon_tag": nguon_tag, "nhan_tag": xh.get("nhan"), "nghieng": n, "nhan_nghieng": kb.nghieng(n)["nhan"],
             "nghieng_phai": ng, "khac_chieu": khac, "ly_do": ly_do, "cau_dau": cau_dau, "nguoi_kia": nk, "can_go": go,
             "vap": xh.get("vap"), "nen": xh.get("nen"), **kb.meta()}
+
+
+# ----------------------------------------------------------------------------- 5. AI diễn đạt (hướng C — chỉ phần trả lời)
+_SYSTEM_DIEN_DAT = """Bạn là người đọc Kinh Dịch lâu năm, nói chuyện điềm đạm, KHÔNG phải thầy bói. Bạn nhận các ghi chú \
+mà hệ thống đã rút từ quẻ cho MỘT việc được hỏi (đã nêu chủ đề; không có câu hỏi gốc, không có ngày sinh). Hãy viết lại \
+thành MỘT đoạn liền mạch 4–7 câu, xưng "bạn", câu ngắn, giọng đời thường.
+
+THỨ TỰ: câu đầu nói ngay quẻ nghiêng về đâu cho việc đó (đúng như ghi chú: nên / có điều kiện / chưa nên vội / chưa nên \
+lúc này); rồi lý do bằng hình ảnh hào trong ghi chú; rồi phía người kia (nếu có); rồi điều cần gỡ trước; cuối cùng một \
+việc nên làm. Kết bằng ý "quẻ không quyết thay bạn" nếu ghi chú có câu đó.
+
+RÀNG BUỘC TUYỆT ĐỐI:
+- CHỈ dùng ý có trong ghi chú. Không thêm con số, ngày, tên quẻ, tên hào, thuật ngữ, sự kiện, dự đoán hay lời khuyên \
+nào không có trong đó. Không đổi chiều nghiêng (không biến "chưa nên vội" thành "nên").
+- Không nói "quẻ xấu", "quẻ tốt", "hung", "cát", "sẽ thành", "sẽ thất bại", "chắc chắn", "định mệnh", "số phận".
+- KHÔNG dùng các cụm sau: {cum_cam}.
+- Không chào hỏi, không tiêu đề, không gạch đầu dòng, không kết luận chung chung ngoài ghi chú."""
+
+
+def nguon_dien_dat(dq: dict) -> list[str]:
+    """Ghi chú đưa cho AI = chính lớp A đã dựng (kết luận, hộp trả lời, việc nên làm) — KHÔNG có câu người dùng gõ."""
+    tl = dq.get("tra_loi") or {}
+    ra = [dq.get("ket_luan") or ""]
+    for h in dq.get("hop") or []:
+        if h.get("loai") in ("thoi_diem", "cot_loi"):          # cot_loi = chính câu kết luận (đã ở dòng đầu)
+            continue
+        s = f"{h['tieu_de']}: {h['noi_dung']}"
+        if h.get("huong_xu_ly") and h["loai"] == "luu_y":
+            s += f" Nên: {h['huong_xu_ly']}"
+        ra.append(s)
+    hd = next((x for x in dq.get("hanh_dong") or [] if x.get("muc") == dq.get("muc")), None)
+    if hd and hd.get("viec"):
+        ra.append("Việc nên làm: " + " ".join(hd["viec"][:2]))
+    if tl.get("khac_chieu"):
+        ra.append(kb.mau("hai_cach_khac"))
+    ra.append(kb.mau("khong_quyet"))
+    return [s for s in ra if s]
+
+
+def dien_dat(dq: dict, mo_hinh: str | None = None) -> dict:
+    """KD-V3 hướng C (tầng NARRATIVE): AI diễn đạt LẠI chỉ phần trả lời (nguồn = lớp A tất định), qua bộ kiểm chung
+    `luan_giai_van.kiem_tra_chuong` (số, thuật ngữ lạ, cụm cấm, câu ý mới, độ dài) — hỏng / thiếu khoá / hết lượt → giữ bản
+    mẫu. Mô hình: `KD_DIEN_DAT_MODEL` → `OPENROUTER_MODEL` → mặc định chung. Các phần khác của bài đọc không gọi AI."""
+    import os  # noqa: PLC0415
+    if not dq or not dq.get("tra_loi") or not os.environ.get("OPENROUTER_API_KEY"):
+        return {**dq, "dien_dat": "mau"} if dq else dq
+    from app.narrative import ai_goi, luan_giai_van as lgv  # noqa: PLC0415
+    from app.narrative.ngan_sach import mo_ta_loi  # noqa: PLC0415
+    nguon = nguon_dien_dat(dq)
+    nguon_van = "\n".join(nguon)
+    if len(nguon_van) < lgv.CHUONG_NGAN:
+        return {**dq, "dien_dat": "mau"}
+    mo_hinh = mo_hinh or os.environ.get("KD_DIEN_DAT_MODEL") or None
+    try:
+        van = ai_goi.goi_chat(
+            [{"role": "system", "content": _SYSTEM_DIEN_DAT.format(cum_cam="; ".join(f'"{c}"' for c in lgv._cum_cam()))},
+             {"role": "user", "content": "\n".join(f"- {s}" for s in nguon)}],
+            nhiet_do=0.3, max_tokens=max(250, min(900, len(nguon_van) * 3 // 4)), mo_hinh=mo_hinh, het_gio=40,
+            kiem=lambda v: lgv.kiem_tra_chuong(v.strip(), nguon_van)).strip()
+        loi = lgv.kiem_tra_chuong(van, nguon_van)
+    except Exception as e:  # noqa: BLE001 — AI lỗi không làm vỡ bài đọc
+        return {**dq, "dien_dat": "mau", "dien_dat_loi": [f"llm lỗi: {mo_ta_loi(e)}"]}
+    if loi or not van:
+        return {**dq, "dien_dat": "mau", "dien_dat_loi": loi}
+    return {**dq, "dien_dat": "tra_loi", "tra_loi": {**dq["tra_loi"], "van_ai": van}}

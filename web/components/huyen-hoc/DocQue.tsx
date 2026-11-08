@@ -40,7 +40,9 @@ export interface DocQueKq {
   y_dinh_chung?: string | null; goi_mo?: GoiMo | null;
   /** KD-V3: gói trả lời theo việc (engine): kiểu câu, vai, nghiêng, xu hướng hào làm chủ, dụng thần theo việc. Chỉ hiển thị. */
   tra_loi?: { kieu?: string; vai?: string; nghieng?: string; nhan_nghieng?: string; nhan_tag?: string | null; nguon_tag?: string | null;
-    khac_chieu?: string[]; dung_than?: { chinh?: string; ten?: string } } | null;
+    khac_chieu?: string[]; dung_than?: { chinh?: string; ten?: string }; van_ai?: string } | null;
+  /** KD-V3 hướng C: "tra_loi" = phần trả lời có bản AI diễn đạt (`tra_loi.van_ai`, đã qua bộ kiểm engine); "mau" = bản mẫu. */
+  dien_dat?: "tra_loi" | "mau";
 }
 
 /** "Tuất" → "tuat" (mã nhắc chỉ a-z). */

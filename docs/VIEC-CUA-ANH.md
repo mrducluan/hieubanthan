@@ -15,8 +15,12 @@
 - [ ] (Chuyên gia, dần dần) Duyệt 384 nhãn xu hướng hào trong `engine/app/kb/data/kinhdich_tra_loi.json` (`hao_xu_huong`,
   8 nhãn) và 108 câu lời khuôn — nháp ban biên tập; đổi nhãn không đổi mức / mã kiểm chứng cũ. Bảng đối chiếu + số đo:
   `docs/NANG-CAP-KINH-DICH-V3.md`.
-- [ ] (Quyết định) Có bật AI diễn đạt riêng chương "Câu trả lời" của quẻ (như Tarot TR-3) không? Em đề xuất chờ xem lớp mới
-  đúng hướng (tỉ lệ "Đúng với mình" mã `ds.kinhdich.*.nguoi_kia.*`) rồi mới nối.
+- [ ] **Hướng C đã nối** (AI diễn đạt riêng phần trả lời quẻ, chỉ chạy khi engine có `OPENROUTER_API_KEY` — đã có cho Tử vi).
+  Chọn mô hình: chạy `OPENROUTER_API_KEY=… PYTHONPATH=. .venv/bin/python engine/scripts/so_mo_hinh_kd.py` (12 câu × 3 quẻ,
+  ~7 mô hình, vài phút, tốn ít token) → đặt env engine trên Render `KD_DIEN_DAT_MODEL=<mô hình thắng>` (gợi ý: Claude Haiku 4.5
+  nếu qua kiểm ≥ 10/12; bảng cân nhắc ở `docs/NANG-CAP-KINH-DICH-V3.md` mục 5). Chưa đặt → dùng `OPENROUTER_MODEL` hiện có.
+- [ ] (5 phút, sau deploy) Hỏi một câu ở `/kinh-dich` → dưới quẻ thấy đoạn lời liền mạch + dòng "Phần trả lời được diễn đạt tự
+  động…"; không thấy nghĩa là engine chưa có khoá / mô hình trả bản không qua kiểm (bản mẫu — vẫn đúng).
 
 ### 4ac. Tarot trả lời đúng câu hỏi (TR-2, 2026-11-07) — deploy ENGINE trước web
 
