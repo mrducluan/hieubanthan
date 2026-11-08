@@ -189,3 +189,10 @@ def test_hoi_la_nguoc_trong_linh_vuc_doc_nghia_nguoc():
     assert l["linh_vuc_nguoc"]["cong_viec"] in kq["cau_tra_loi"]
     assert l["linh_vuc"]["cong_viec"] not in kq["cau_tra_loi"]
     assert l["viec_lv"]["n"]["cong_viec"] in kq["cau_tra_loi"]
+
+
+def test_mot_la_khong_dung_cau_noi_hai_dau():
+    c = _ch(_bc([{"id": "dai_1", "nguoc": False}], tb="mot_la"), "cau_chuyen")
+    noi = c["hop"][0]
+    assert noi["ma_mau"] == "ds.tarot.cau_chuyen.mot_la.noi.mot_tien"
+    assert "lá duy nhất" in noi["noi_dung"]

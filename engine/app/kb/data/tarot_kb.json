@@ -10100,7 +10100,21 @@
    },
    "tua": "Dựa vào đây: {tu_khoa}. Câu nên tự hỏi: {hoi}",
    "canh": "Chỗ này dễ làm bạn trượt: {tu_khoa}. Câu nên tự hỏi: {hoi}",
-   "chuyen_cua_ban": "chuyện của bạn"
+   "chuyen_cua_ban": "chuyện của bạn",
+   "mot_la": {
+    "tien": {
+     "tieu_de": "Một lá, nghiêng về có",
+     "loi": "Với {viec}, lá duy nhất bạn rút đang đỡ bạn — dồn sức vào đúng điều lá này nói, làm từng bước."
+    },
+    "dieu_kien": {
+     "tieu_de": "Một lá, được nếu có điều kiện",
+     "loi": "Với {viec}, lá duy nhất bạn rút cho thấy việc được khi bạn làm rõ điều lá này nhắc — làm rõ trước, rồi mới tiến."
+    },
+    "cho": {
+     "tieu_de": "Một lá, khuyên chậm lại",
+     "loi": "Với {viec}, lá duy nhất bạn rút khuyên chậm lại — gỡ điều lá này chỉ ra trước khi làm thêm."
+    }
+   }
   }
  },
  "tu_khoa": {

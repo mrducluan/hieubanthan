@@ -580,6 +580,9 @@ def _chuong_cau_chuyen(pt: dict, tb: dict, hc: dict) -> dict:
     if hai:
         n = _so_hai_duong(V, hai)["nghieng"]
         mau, ma_noi, muc = M["hai_duong"][n], f"hai_duong_{n}", _MUC_NG[n]
+    elif len(thu_tu) == 1:
+        n = ng[thu_tu[0]]
+        mau, ma_noi, muc = M["mot_la"][n], f"mot_{n}", _MUC_NG[n]
     else:
         dau, cuoi = ng[thu_tu[0]], ng[thu_tu[-1]]
         mau, ma_noi, muc = M["noi"][f"{dau}_{cuoi}"], f"{dau}_{cuoi}", _MUC_NG[cuoi]
