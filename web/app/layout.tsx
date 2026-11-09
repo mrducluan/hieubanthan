@@ -106,12 +106,15 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     );
   }
   const chuChung = await chuChungCms();
-  // HTT-1: trình duyệt ưu tiên tiếng Anh (thẻ đầu của Accept-Language) và chưa tắt dải → mời đọc bản /en (không chuyển hướng).
-  // Chỉ ở trang CÓ bản Anh (BAN_TIENG_ANH) — không hiện ở trang quản trị / thẻ chia sẻ / trang không có bản dịch.
-  const uuTien = (hd.get("accept-language") ?? "").split(",")[0]?.trim().toLowerCase() ?? "";
+  // HTT-1: trình duyệt ưu tiên tiếng Anh (thẻ đầu của Accept-Language), KHÔNG kê tiếng Việt ở bất kỳ vị trí nào (người Việt
+  // dùng Chrome tiếng Anh thường vẫn có "vi" trong danh sách → đọc được bản Việt, không mời) và chưa tắt dải → mời đọc bản /en
+  // (không chuyển hướng). Chỉ ở trang CÓ bản Anh (BAN_TIENG_ANH) — không hiện ở trang quản trị / thẻ chia sẻ / trang không có bản dịch.
+  const ngonNguTrinhDuyet = (hd.get("accept-language") ?? "").toLowerCase();
+  const uuTien = ngonNguTrinhDuyet.split(",")[0]?.trim() ?? "";
+  const coTiengViet = /(^|,)\s*vi(-[a-z]{2})?\s*(;|,|$)/.test(ngonNguTrinhDuyet);
   const duongDangMo = (hd.get("x-duong-dan") ?? "").replace(/\/+$/, "") || "/";
   const hrefEn = BAN_TIENG_ANH[duongDangMo];
-  const goiYEn = Boolean(hrefEn) && uuTien.startsWith("en") && !(await cookies()).get("hbt-goi-y-en");
+  const goiYEn = Boolean(hrefEn) && uuTien.startsWith("en") && !coTiengViet && !(await cookies()).get("hbt-goi-y-en");
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
       <body>

@@ -108,7 +108,9 @@ test("bát tự: công tắc Giờ sinh gửi gio_sinh cho engine", async ({ pag
   await expect(tp.getByTestId("phai-dang-dung")).toContainText("Giờ mặt trời thực");
 });
 
-test("dải gợi ý tiếng Anh: chỉ khi trình duyệt ưu tiên tiếng Anh, tắt được, không chuyển hướng", async ({ request, browser }) => {
+test("dải gợi ý tiếng Anh: chỉ khi trình duyệt ưu tiên tiếng Anh và không kê tiếng Việt, tắt được, không chuyển hướng", async ({ playwright, baseURL, browser }) => {
+  // Ngữ cảnh riêng: storageState mặc định của e2e đã đặt cookie tắt dải (để bố cục các test khác không bị đẩy xuống).
+  const request = await playwright.request.newContext({ baseURL: baseURL!, storageState: { cookies: [], origins: [] } });
   const vi = await request.get("/than-so");
   expect(vi.status()).toBe(200);
   expect(await vi.text()).not.toContain("goi-y-tieng-anh");
@@ -117,8 +119,15 @@ test("dải gợi ý tiếng Anh: chỉ khi trình duyệt ưu tiên tiếng Anh
   expect(await en.text()).toContain("goi-y-tieng-anh");
   const tat = await request.get("/than-so", { headers: { "accept-language": "en-US,en;q=0.9", cookie: "hbt-goi-y-en=1" } });
   expect(await tat.text()).not.toContain("goi-y-tieng-anh");
+  // Người Việt dùng trình duyệt tiếng Anh nhưng có kê "vi" → đọc được bản Việt → không mời.
+  const coVi = await request.get("/than-so", { headers: { "accept-language": "en-US,en;q=0.9,vi;q=0.8" } });
+  expect(await coVi.text()).not.toContain("goi-y-tieng-anh");
+  // Trang không có bản Anh → không có dải.
+  const khong = await request.get("/tu-vi", { headers: { "accept-language": "en-US,en;q=0.9" } });
+  expect(await khong.text()).not.toContain("goi-y-tieng-anh");
+  await request.dispose();
   // Trình duyệt: link trỏ đúng bản Anh của trang, bấm X thì đặt cookie và dải biến mất.
-  const ctx = await browser.newContext({ locale: "en-US", extraHTTPHeaders: { "accept-language": "en-US,en;q=0.9" } });
+  const ctx = await browser.newContext({ locale: "en-US", extraHTTPHeaders: { "accept-language": "en-US,en;q=0.9" }, storageState: { cookies: [], origins: [] } });
   const page = await ctx.newPage();
   await page.goto("/than-so");
   const dai = page.getByTestId("goi-y-tieng-anh");

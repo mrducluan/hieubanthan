@@ -144,7 +144,7 @@ test("kiểm chứng: tỉ lệ công khai ≥ 30 phiếu, dưới 30 chỉ hỏ
   await cot.nth(2).getByRole("button", { name: "Đúng với mình" }).click();
   await expect(cot.nth(2).getByRole("status")).toContainText("Cảm ơn");
   await expect.poll(() => goi.kiemChung!.length).toBe(1);
-  expect(goi.kiemChung![0]!.postDataJSON()).toEqual({ loai: "doi_song", mau: COT[2], phai: "nam_phai_viet", ket_qua: "dung" });
+  expect(goi.kiemChung![0]!.postDataJSON()).toEqual({ loai: "doi_song", mau: COT[2], phai: "nam_phai_viet", ket_qua: "dung", ngon_ngu: "vi" });
   // Bấm thẻ đủ số: cảm ơn + vẫn hiện tỉ lệ.
   await cot.nth(0).getByRole("button", { name: "Chưa đúng" }).click();
   await expect(cot.nth(0).getByRole("status")).toContainText("Cảm ơn");

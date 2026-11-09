@@ -50,7 +50,7 @@ test("trang chủ + blog có tiêu đề chứa từ khoá; WebSite có keywords
 test("trang kiến thức: ảnh đại diện theo mảng, about có sameAs Wikipedia, Article đủ E-E-A-T", async ({ request }) => {
   const html = await (await request.get("/tu-vi/sao-o-cung/tu-vi-cung-menh")).text();
   expect(html).toMatch(/og:image" content="[^"]*mang=tu-vi/);
-  expect(html).toContain('"sameAs":["https://en.wikipedia.org/wiki/Ziwei_doushu"]');
+  expect(html).toContain('"sameAs":["https://en.wikipedia.org/wiki/Ziwei_doushu","https://www.wikidata.org/wiki/Q1056680"]');
   expect(html).toContain('"@type":"ImageObject"');
   expect(html).not.toContain('"creativeWorkStatus":"Draft"');
   const anh = await request.get("/og?tieu_de=Th%E1%BB%AD&mang=phong-thuy&tot=B%E1%BA%AFc,Nam");

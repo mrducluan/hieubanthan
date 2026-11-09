@@ -1,6 +1,7 @@
 "use client";
 // HTT-1 — dải gợi ý bản tiếng Anh (thay "tự chuyển hướng theo Accept-Language / Geo-IP" của tài liệu Drive: Google khuyên không
-// tự chuyển hướng, bot Mỹ sẽ không bao giờ thấy bản Việt). Máy chủ chỉ quyết "trình duyệt ưu tiên tiếng Anh và chưa tắt dải";
+// tự chuyển hướng, bot Mỹ sẽ không bao giờ thấy bản Việt). Máy chủ chỉ quyết "trình duyệt ưu tiên tiếng Anh, không kê tiếng Việt
+// ở bất kỳ vị trí nào trong Accept-Language, và chưa tắt dải";
 // máy chủ chọn link đích theo đường dẫn đang mở (bảng trang có bản Anh, header x-duong-dan) nên dải có ngay trong HTML;
 // tắt = cookie 180 ngày. Không chuyển hướng.
 import { useState } from "react";
