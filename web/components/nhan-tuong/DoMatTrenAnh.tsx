@@ -12,6 +12,7 @@ import { Check, ImagePlus, Loader2, RotateCcw, Ruler, ScanFace, ShieldCheck, Und
 import Link from "@/components/khung/Lien";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
+import { urlAnhSach } from "@/lib/anh-tren-may";
 import { DONG_Y_DO_MAT, ngayDongYAnhMat } from "@/lib/dong-y-anh-mat";
 import type { KetQuaTim } from "@/lib/diem-moc-tu-dong";
 import { postJson } from "@/lib/goi-api";
@@ -50,7 +51,6 @@ function vungMat(d: Record<string, Diem>): Vung | null {
   v.w = Math.min(1, x1 + bw * 0.45) - v.x; v.h = Math.min(1, y1 + bh * 0.12) - v.y;
   return v.w * v.h > 0.8 ? null : v;                 // mặt đã chiếm gần hết ảnh → không cần phóng
 }
-const urlBlob = (f: File): string | null => { const u = URL.createObjectURL(f); return u.startsWith("blob:") ? u : null; };
 const so = (v: number) => v.toFixed(2).replace(".", ",");
 
 function HinhMau({ dang, da }: { dang: string | null; da: Set<string> }) {
@@ -112,11 +112,12 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
   useEffect(() => () => { if (urlRef.current) URL.revokeObjectURL(urlRef.current); }, []);
 
   const tiepTheo = useCallback((d: Record<string, Diem>) => dsDiem.find((p) => !d[p.ma])?.ma ?? null, [dsDiem]);
-  const chonAnh = (f: File | undefined) => {
+  const chonAnh = async (f: File | undefined) => {
     if (!f || !f.type.startsWith("image/")) return;
-    const u = urlBlob(f);
+    const u = await urlAnhSach(f);
     if (!u) return;
-    if (url) URL.revokeObjectURL(url);
+    if (urlRef.current) URL.revokeObjectURL(urlRef.current);
+    urlRef.current = u;
     luotTim.current++;
     setUrl(u); setTiLe(null); setDiem({}); setKq(null); setLoi(null); setDang(dsDiem[0]?.ma ?? null); setTim(null); setCanXem([]); setVungPhong(null);
     ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat_chon_anh" });
@@ -212,7 +213,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
 
   const xongQuet = (k: KetQuaQuet) => {
     setQuet(false);
-    if (k.thang) chonAnh(k.thang);
+    if (k.thang) void chonAnh(k.thang);
     setNghiengQuet({ ...(k.trai ? { nghieng_trai: k.trai } : {}), ...(k.phai ? { nghieng_phai: k.phai } : {}) });
   };
   const coNghiengQuet = Boolean(nghiengQuet.nghieng_trai || nghiengQuet.nghieng_phai);
@@ -228,7 +229,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
             <span className="font-medium text-fg">Chọn hoặc chụp một ảnh chính diện</span>
             <span className="max-w-sm text-xs">Nhìn thẳng, đủ sáng, mặt tự nhiên (không cười), tóc không che trán. Máy bạn tự tìm điểm mốc — ảnh chỉ hiện trên máy, không tải lên.</span>
             <input type="file" accept="image/*" capture="user" className="sr-only" data-testid="do-input" aria-label="Chọn ảnh chân dung (chỉ hiện trên máy)"
-              onChange={(e) => { chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
+              onChange={(e) => { void chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
           </label>
           <div className="flex flex-wrap items-center justify-center gap-2">
             <Button onClick={moQuet} data-testid="quet-mo"><ScanFace aria-hidden /> Quét 3 góc như Face ID</Button>
@@ -281,7 +282,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
               <Button size="sm" variant="ghost" onClick={moQuet} data-testid="quet-lai"><ScanFace aria-hidden /> Quét lại 3 góc</Button>
               <label className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg">
                 <ImagePlus className="size-3.5" aria-hidden /> Đổi ảnh
-                <input type="file" accept="image/*" className="sr-only" onChange={(e) => { chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
+                <input type="file" accept="image/*" className="sr-only" onChange={(e) => { void chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
               </label>
               <button type="button" aria-label="Bỏ ảnh" className="ml-auto inline-flex items-center gap-1 text-fg-faint hover:text-fg"
                 onClick={() => { luotTim.current++; if (url) URL.revokeObjectURL(url); setUrl(null); setDiem({}); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }}><X className="size-3.5" aria-hidden /> Bỏ ảnh</button>
