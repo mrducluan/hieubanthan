@@ -12,12 +12,14 @@ import { Check, ImagePlus, Loader2, RotateCcw, Ruler, ScanFace, ShieldCheck, Und
 import Link from "@/components/khung/Lien";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
+import { urlAnhSach } from "@/lib/anh-tren-may";
 import { DONG_Y_DO_MAT, ngayDongYAnhMat } from "@/lib/dong-y-anh-mat";
 import type { KetQuaTim } from "@/lib/diem-moc-tu-dong";
 import { postJson } from "@/lib/goi-api";
 import type { DiemDo, KhaoSat, TraLoi } from "@/lib/nhan-tuong";
 import { cn } from "@/lib/utils";
 import { ChamNghieng, type AnhNghieng, type GocNghieng } from "./ChamNghieng";
+import { QuetBaGoc, type KetQuaQuet } from "./QuetBaGoc";
 import { DanhSachGoiY, type GoiYNet } from "./DanhSachGoiY";
 
 type Diem = { x: number; y: number };
@@ -49,7 +51,6 @@ function vungMat(d: Record<string, Diem>): Vung | null {
   v.w = Math.min(1, x1 + bw * 0.45) - v.x; v.h = Math.min(1, y1 + bh * 0.12) - v.y;
   return v.w * v.h > 0.8 ? null : v;                 // mặt đã chiếm gần hết ảnh → không cần phóng
 }
-const urlBlob = (f: File): string | null => { const u = URL.createObjectURL(f); return u.startsWith("blob:") ? u : null; };
 const so = (v: number) => v.toFixed(2).replace(".", ",");
 
 function HinhMau({ dang, da }: { dang: string | null; da: Set<string> }) {
@@ -95,6 +96,11 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
     .filter(([, a]) => a.tiLe && dsNghieng.every((p) => !p.bat_buoc || a.diem[p.ma]));
   const nghiengThieu = Object.keys(nghieng).length - nghiengDu.length;
   const [phong, setPhong] = useState(true);
+  // QBG-1: "Quét 3 góc như Face ID" — ảnh thẳng vào khung chấm điểm, ảnh nghiêng nạp sẵn vào khung chấm đường viền.
+  const [quet, setQuet] = useState(false);
+  const [nghiengQuet, setNghiengQuet] = useState<Partial<Record<GocNghieng, File>>>({});
+  const moQuet = () => { setQuet(true); ghi("chart_interacted", { mo_dun: "nhantuong", kind: "quet_mo" }); };
+  const dongQuet = useCallback(() => setQuet(false), []);
   const vung = phong && vungPhong && tiLe ? vungPhong : CA_ANH;
   const phongTo = vung !== CA_ANH;
   const raKhung = (p: Diem) => ({ x: (p.x - vung.x) / vung.w, y: (p.y - vung.y) / vung.h });
@@ -106,11 +112,12 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
   useEffect(() => () => { if (urlRef.current) URL.revokeObjectURL(urlRef.current); }, []);
 
   const tiepTheo = useCallback((d: Record<string, Diem>) => dsDiem.find((p) => !d[p.ma])?.ma ?? null, [dsDiem]);
-  const chonAnh = (f: File | undefined) => {
+  const chonAnh = async (f: File | undefined) => {
     if (!f || !f.type.startsWith("image/")) return;
-    const u = urlBlob(f);
+    const u = await urlAnhSach(f);
     if (!u) return;
-    if (url) URL.revokeObjectURL(url);
+    if (urlRef.current) URL.revokeObjectURL(urlRef.current);
+    urlRef.current = u;
     luotTim.current++;
     setUrl(u); setTiLe(null); setDiem({}); setKq(null); setLoi(null); setDang(dsDiem[0]?.ma ?? null); setTim(null); setCanXem([]); setVungPhong(null);
     ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat_chon_anh" });
@@ -204,17 +211,31 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đo được lúc này."); } finally { setTinh(false); }
   };
 
+  const xongQuet = (k: KetQuaQuet) => {
+    setQuet(false);
+    if (k.thang) void chonAnh(k.thang);
+    setNghiengQuet({ ...(k.trai ? { nghieng_trai: k.trai } : {}), ...(k.phai ? { nghieng_phai: k.phai } : {}) });
+  };
+  const coNghiengQuet = Boolean(nghiengQuet.nghieng_trai || nghiengQuet.nghieng_phai);
+
   if (!dsDiem.length) return null;
   return (
     <div className="space-y-4" data-testid="do-mat">
+      {quet && <QuetBaGoc onXong={xongQuet} onDong={dongQuet} />}
       {!url ? (
-        <label className="flex min-h-40 cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-gold/50 bg-bg/40 p-5 text-center text-sm text-fg-muted hover:border-gold hover:text-fg">
-          <ImagePlus className="size-7 text-gold" aria-hidden />
-          <span className="font-medium text-fg">Chọn hoặc chụp một ảnh chính diện</span>
-          <span className="max-w-sm text-xs">Nhìn thẳng, đủ sáng, mặt tự nhiên (không cười), tóc không che trán. Máy bạn tự tìm điểm mốc — ảnh chỉ hiện trên máy, không tải lên.</span>
-          <input type="file" accept="image/*" capture="user" className="sr-only" data-testid="do-input" aria-label="Chọn ảnh chân dung (chỉ hiện trên máy)"
-            onChange={(e) => { chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
-        </label>
+        <div className="space-y-3">
+          <label className="flex min-h-40 cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-gold/50 bg-bg/40 p-5 text-center text-sm text-fg-muted hover:border-gold hover:text-fg">
+            <ImagePlus className="size-7 text-gold" aria-hidden />
+            <span className="font-medium text-fg">Chọn hoặc chụp một ảnh chính diện</span>
+            <span className="max-w-sm text-xs">Nhìn thẳng, đủ sáng, mặt tự nhiên (không cười), tóc không che trán. Máy bạn tự tìm điểm mốc — ảnh chỉ hiện trên máy, không tải lên.</span>
+            <input type="file" accept="image/*" capture="user" className="sr-only" data-testid="do-input" aria-label="Chọn ảnh chân dung (chỉ hiện trên máy)"
+              onChange={(e) => { void chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
+          </label>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <Button onClick={moQuet} data-testid="quet-mo"><ScanFace aria-hidden /> Quét 3 góc như Face ID</Button>
+            <span className="text-xs text-fg-faint">Máy tự chụp khi bạn nhìn thẳng, rồi quay từ từ sang trái, sang phải.</span>
+          </div>
+        </div>
       ) : (
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_15rem]">
           <div>
@@ -258,9 +279,10 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
               {vungPhong && <Button size="sm" variant="ghost" onClick={() => setPhong((v) => !v)} data-testid="do-phong">{phong ? "Xem cả ảnh" : "Phóng vào mặt"}</Button>}
               <Button size="sm" variant="ghost" onClick={boLuot} disabled={!daDat.size}><Undo2 aria-hidden /> Bỏ điểm vừa chấm</Button>
               <Button size="sm" variant="ghost" onClick={() => { luotTim.current++; setDiem({}); setDang(dsDiem[0]?.ma ?? null); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }} disabled={!daDat.size}><RotateCcw aria-hidden /> Chấm tay từ đầu</Button>
+              <Button size="sm" variant="ghost" onClick={moQuet} data-testid="quet-lai"><ScanFace aria-hidden /> Quét lại 3 góc</Button>
               <label className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg">
                 <ImagePlus className="size-3.5" aria-hidden /> Đổi ảnh
-                <input type="file" accept="image/*" className="sr-only" onChange={(e) => { chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
+                <input type="file" accept="image/*" className="sr-only" onChange={(e) => { void chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
               </label>
               <button type="button" aria-label="Bỏ ảnh" className="ml-auto inline-flex items-center gap-1 text-fg-faint hover:text-fg"
                 onClick={() => { luotTim.current++; if (url) URL.revokeObjectURL(url); setUrl(null); setDiem({}); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }}><X className="size-3.5" aria-hidden /> Bỏ ảnh</button>
@@ -293,12 +315,12 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
       )}
 
       {url && dsNghieng.length > 0 && (
-        <details className="rounded-2xl border border-line/70 bg-bg/40 p-4" data-testid="do-nghieng">
+        <details key={coNghiengQuet ? "quet" : "tay"} open={coNghiengQuet || undefined} className="rounded-2xl border border-line/70 bg-bg/40 p-4" data-testid="do-nghieng">
           <summary className="cursor-pointer text-sm font-medium text-fg">Thêm ảnh nghiêng (không bắt buộc) — đo thêm trán, gốc mũi, sống mũi, cằm, tai</summary>
-          <p className="mt-2 text-xs leading-relaxed text-fg-muted">Ảnh thẳng không thấy độ nổi của mặt. Một ảnh chụp ngang mặt (quay hẳn 90°) cho hệ thống đo thêm trán gồ hay phẳng, gốc mũi cao hay thấp, sống mũi gồ / thấp, cằm lẹm, vị trí tai. Ảnh nghiêng cần bạn tự chấm 9 điểm trên đường viền (máy chỉ tự tìm được ở ảnh chính diện). Một bên là đủ; có cả hai bên thì hai ảnh phải cùng kết quả mới gợi ý. Ảnh cũng chỉ hiện trên máy bạn.</p>
+          <p className="mt-2 text-xs leading-relaxed text-fg-muted">Ảnh thẳng không thấy độ nổi của mặt. Một ảnh chụp ngang mặt (quay hẳn 90°) cho hệ thống đo thêm trán gồ hay phẳng, gốc mũi cao hay thấp, sống mũi gồ / thấp, cằm lẹm, vị trí tai. {coNghiengQuet && <b className="text-fg">Ảnh nghiêng vừa quét đã nạp sẵn bên dưới. </b>}Ảnh nghiêng cần bạn tự chấm 9 điểm trên đường viền (máy chỉ tự tìm được ở ảnh chính diện). Một bên là đủ; có cả hai bên thì hai ảnh phải cùng kết quả mới gợi ý. Ảnh cũng chỉ hiện trên máy bạn.</p>
           <div className="mt-3 grid gap-3 lg:grid-cols-2">
-            <ChamNghieng goc="nghieng_trai" ten="Ảnh nghiêng trái" ds={dsNghieng} onDoi={(a) => doiNghieng("nghieng_trai", a)} />
-            <ChamNghieng goc="nghieng_phai" ten="Ảnh nghiêng phải" ds={dsNghieng} onDoi={(a) => doiNghieng("nghieng_phai", a)} />
+            <ChamNghieng goc="nghieng_trai" ten="Ảnh nghiêng trái" ds={dsNghieng} onDoi={(a) => doiNghieng("nghieng_trai", a)} anhBanDau={nghiengQuet.nghieng_trai} />
+            <ChamNghieng goc="nghieng_phai" ten="Ảnh nghiêng phải" ds={dsNghieng} onDoi={(a) => doiNghieng("nghieng_phai", a)} anhBanDau={nghiengQuet.nghieng_phai} />
           </div>
         </details>
       )}

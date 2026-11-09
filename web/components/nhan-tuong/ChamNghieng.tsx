@@ -6,6 +6,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ImagePlus, RotateCcw, Undo2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { urlAnhSach } from "@/lib/anh-tren-may";
 import { ghi } from "@/lib/do-luong";
 import type { DiemDo } from "@/lib/nhan-tuong";
 import { cn } from "@/lib/utils";
@@ -34,8 +35,10 @@ function HinhNghieng({ dang, da, lat }: { dang: string | null; da: Set<string>; 
   );
 }
 
-export function ChamNghieng({ goc, ten, ds, onDoi }: {
+export function ChamNghieng({ goc, ten, ds, onDoi, anhBanDau }: {
   goc: GocNghieng; ten: string; ds: DiemDo[]; onDoi: (a: AnhNghieng | null) => void;
+  /** QBG-1: ảnh nghiêng vừa chụp bằng "Quét 3 góc" — nạp sẵn để người dùng chấm đường viền. */
+  anhBanDau?: File | null;
 }) {
   const [url, setUrl] = useState<string | null>(null);
   const [tiLe, setTiLe] = useState<number | null>(null);
@@ -50,15 +53,19 @@ export function ChamNghieng({ goc, ten, ds, onDoi }: {
   doiRef.current = onDoi;
   useEffect(() => { doiRef.current(url ? { diem, tiLe } : null); }, [url, diem, tiLe]);
 
+  const chonRef = useRef<(f: File | undefined) => Promise<void> | void>(() => undefined);
+  useEffect(() => { if (anhBanDau) void chonRef.current(anhBanDau); }, [anhBanDau]);
   const tiep = (d: Record<string, Diem>) => ds.find((p) => !d[p.ma])?.ma ?? null;
-  const chon = (f: File | undefined) => {
+  const chon = async (f: File | undefined) => {
     if (!f || !f.type.startsWith("image/")) return;
-    const u = URL.createObjectURL(f);
-    if (!u.startsWith("blob:")) return;
-    if (url) URL.revokeObjectURL(url);
+    const u = await urlAnhSach(f);
+    if (!u) return;
+    if (urlRef.current) URL.revokeObjectURL(urlRef.current);
+    urlRef.current = u;
     setUrl(u); setTiLe(null); setDiem({}); setDang(ds[0]?.ma ?? null);
     ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_nghieng_chon_anh" });
   };
+  chonRef.current = chon;
   const viTri = (e: { clientX: number; clientY: number }): Diem | null => {
     const r = khung.current?.getBoundingClientRect();
     if (!r || !r.width || !r.height) return null;
@@ -100,7 +107,7 @@ export function ChamNghieng({ goc, ten, ds, onDoi }: {
         <span className="font-medium text-fg">{ten}</span>
         <span>Quay hẳn sang một bên (thấy rõ đường viền trán, mũi, cằm), tóc vén khỏi trán và tai.</span>
         <input type="file" accept="image/*" className="sr-only" data-testid={`ng-input-${goc}`} aria-label={`Chọn ảnh ${ten.toLowerCase()} (chỉ hiện trên máy)`}
-          onChange={(e) => { chon(e.target.files?.[0]); e.target.value = ""; }} />
+          onChange={(e) => { void chon(e.target.files?.[0]); e.target.value = ""; }} />
       </label>
     );
   }
