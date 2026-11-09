@@ -133,7 +133,7 @@ test("/en: OG tiếng Anh, BreadcrumbList + Article có ngày, hreflang tới tr
   expect(sm).toMatch(/<loc>http:\/\/localhost:3000\/en\/tarot\/cards\/the-tower<\/loc><lastmod>\d{4}-\d{2}-\d{2}<\/lastmod><xhtml:link rel="alternate" hreflang="en"[^>]*\/><xhtml:link rel="alternate" hreflang="vi" href="http:\/\/localhost:3000\/tarot\/la-bai\/thap"\/><xhtml:link rel="alternate" hreflang="x-default"/);
   expect(sm).toMatch(/\/en\/numerology\/life-path\/22<\/loc><lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   const llms = await (await request.get("/llms.txt")).text();
-  expect(llms).toContain("## English edition (/en)");
+  expect(llms).toContain("## English (/en)");
   expect(llms).toContain("http://localhost:3000/en/tarot/cards");
   // trang vào: Organization tiếng Anh + FAQ + nội dung đủ dày
   const home = await (await request.get("/en")).text();
