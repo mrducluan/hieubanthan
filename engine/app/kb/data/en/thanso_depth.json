@@ -1,0 +1,183 @@
+{
+ "_trang_thai": "bien_tap",
+ "dinh_cao": {
+  "1": {
+   "chu_de": "A stage of standing on your own",
+   "y_nghia": "The central lesson is standing on your own feet, deciding for yourself, opening the way. Opportunities tend to come when you dare to lead instead of waiting.",
+   "bong_toi": "Loneliness, imposing on others, or the opposite — avoiding having to take responsibility yourself.",
+   "phan_chung": "In this stage, do you truly decide for yourself, or do you still lean on others to decide for you?"
+  },
+  "2": {
+   "chu_de": "A stage of cooperation and patience",
+   "y_nghia": "Things come through relationships and through waiting for the right moment. The lesson is to coordinate, listen and build trust — not to force the pace.",
+   "bong_toi": "Dependence, fading into the background, avoiding friction to the point of losing your own voice.",
+   "phan_chung": "Do you keep your own view when you have to get along with others?"
+  },
+  "3": {
+   "chu_de": "A stage of creativity and expression",
+   "y_nghia": "The energy of expression, communication and joy. A good time to speak up, make things and connect.",
+   "bong_toi": "Scattered, shallow, talking more than doing, spreading your energy over too many things.",
+   "phan_chung": "Do you see a creative project through, or drop it as soon as the excitement is gone?"
+  },
+  "4": {
+   "chu_de": "A stage of building foundations and discipline",
+   "y_nghia": "A time for steady work, building systems and accumulating. Results come from persistence, not from chance.",
+   "bong_toi": "Constrained, rigid, grinding away and forgetting to ask what it is for.",
+   "phan_chung": "Are you building a foundation for your own goals, or just keeping busy for its own sake?"
+  },
+  "5": {
+   "chu_de": "A stage of change and freedom",
+   "y_nghia": "Change, new opportunities, wider experience. The lesson is to adapt flexibly while still keeping your direction.",
+   "bong_toi": "Instability, letting go of discipline, changing course so often that nothing gets deep enough.",
+   "phan_chung": "Have you stayed with any choice long enough to see how it turns out?"
+  },
+  "6": {
+   "chu_de": "A stage of responsibility and caring",
+   "y_nghia": "The focus is family, commitment and looking after others. Work and love are often tied to duty.",
+   "bong_toi": "Taking on too much, control dressed up as concern, self-sacrifice that turns into resentment.",
+   "phan_chung": "Do you let the people you care for decide their own affairs, or do you step in too much?"
+  },
+  "7": {
+   "chu_de": "A stage of inner life and depth",
+   "y_nghia": "A time for learning, reflection and turning inward. Quality over quantity; understanding over rushing.",
+   "bong_toi": "Isolation, doubt that hardens into refusing to trust, analysing instead of living.",
+   "phan_chung": "Do you use time alone to understand yourself, or to hide from other people?"
+  },
+  "8": {
+   "chu_de": "A stage of career and material matters",
+   "y_nghia": "The energy of power, organization and finances. A time to reap if you have sown well — and to learn to use resources responsibly.",
+   "bong_toi": "Measuring everything by results, confusing worth with price, finding it hard to stop.",
+   "phan_chung": "Is there anything you do in this stage without weighing what you get out of it?"
+  },
+  "9": {
+   "chu_de": "A stage of giving and completion",
+   "y_nghia": "Closing a chapter, letting go of what is finished, giving generously. The lesson is to end things well so a new beginning can open.",
+   "bong_toi": "Rescuing others to avoid looking inward, expecting much and ending up disappointed, clinging to what is already over.",
+   "phan_chung": "Can you let go of what is finished without a lingering sense of regret?"
+  },
+  "11": {
+   "chu_de": "A stage of intuition and inspiration",
+   "y_nghia": "High sensitivity, strong intuition, the ability to inspire others. The challenge is to stay steady under pressure.",
+   "bong_toi": "Background anxiety, ideals pushed too far, burning out easily from stress.",
+   "phan_chung": "How many times has your intuition been right in this stage — are you keeping track so you actually know?"
+  },
+  "22": {
+   "chu_de": "A stage of building on a large scale",
+   "y_nghia": "The ability to turn a vision into a real system and leave a lasting mark. Ambition needs a practical foundation to hold it up.",
+   "bong_toi": "Taking on too much, postponing endlessly because it feels 'not big enough yet', self-imposed pressure.",
+   "phan_chung": "Have you finished anything small and concrete recently?"
+  }
+ },
+ "thu_thach": {
+  "0": {
+   "mo_ta": "Choosing your own lesson",
+   "y_nghia": "Challenge 0 does not point to one particular lesson: this stage has no ready-made mold, and you choose what you want to work on — which is both a freedom and a challenge.",
+   "cach_vuot": "Read your other challenges to see what deserves priority; set yourself one concrete thing to practice instead of waiting for circumstances to choose for you."
+  },
+  "1": {
+   "mo_ta": "Learning confidence without imposing",
+   "y_nghia": "The lesson is to dare to stand apart and decide for yourself without overpowering others — and to get past the fear of being overshadowed.",
+   "cach_vuot": "Take the lead on one small thing each week, and practice handing over decisions when it is not necessary to hold them."
+  },
+  "2": {
+   "mo_ta": "Learning sensitivity without losing yourself",
+   "y_nghia": "The difficulty lies in paying too much attention to other people's feelings, avoiding conflict to the point of losing your own voice.",
+   "cach_vuot": "Practice saying 'no' plainly and briefly, without a long explanation."
+  },
+  "3": {
+   "mo_ta": "Learning to express yourself honestly",
+   "y_nghia": "The challenge is doubting your own creative ability, or scattering yourself by talking a lot without doing.",
+   "cach_vuot": "Pick ONE creative project and take it to the finish, even after the excitement is gone."
+  },
+  "4": {
+   "mo_ta": "Learning flexible discipline",
+   "y_nghia": "The difficulty lies in rigidity, resisting change, or shying away from steady, persistent work.",
+   "cach_vuot": "Break big tasks into small steps with deadlines; allow yourself to revise the plan when needed."
+  },
+  "5": {
+   "mo_ta": "Learning freedom with responsibility",
+   "y_nghia": "The challenge is impulsiveness, lack of staying power, changing course as soon as things get hard.",
+   "cach_vuot": "Commit to one thing for long enough to see its long-term results."
+  },
+  "6": {
+   "mo_ta": "Learning to love without controlling",
+   "y_nghia": "The difficulty lies in taking on too much responsibility and controlling loved ones in the name of concern.",
+   "cach_vuot": "Let others handle their own affairs; tell the difference between helping and interfering."
+  },
+  "7": {
+   "mo_ta": "Learning to trust and open up",
+   "y_nghia": "The challenge is doubt, isolation, using analysis to avoid feelings and people.",
+   "cach_vuot": "Share one true thing with someone you trust, instead of analysing it alone."
+  },
+  "8": {
+   "mo_ta": "Learning to balance the material and the inner life",
+   "y_nghia": "The difficulty lies in a fixation on power and money, measuring people's worth by results.",
+   "cach_vuot": "Do one meaningful thing without weighing what you gain; practice stopping at the right time."
+  }
+ },
+ "nam_ca_nhan": {
+  "1": {
+   "chu_de": "Year of beginnings",
+   "y_nghia": "Planting seeds, new decisions, laying the foundation for the 9-year cycle. An energy of independence and initiative.",
+   "nen": "Start new things, set long-term goals.",
+   "tranh": "Hesitating, waiting for others to decide.",
+   "hay_gap": "Starting something new, changing jobs, moving home, a decision to stand on your own, a new relationship."
+  },
+  "2": {
+   "chu_de": "Year of nurturing",
+   "y_nghia": "Patience, building relationships, waiting for the right time. Things tend to move slowly and come through other people.",
+   "nen": "Cooperate, nurture what was planted in year 1.",
+   "tranh": "Forcing the pace, being impatient for results.",
+   "hay_gap": "Cooperation, marriage or deeper commitment, waiting for results, matters that call for patience and tact."
+  },
+  "3": {
+   "chu_de": "Year of expression",
+   "y_nghia": "Creativity, communication, social life, joy. Opportunities tend to open through connection and expression.",
+   "nen": "Speak up, make things, widen your network.",
+   "tranh": "Scattering, spreading your energy over too many things.",
+   "hay_gap": "Widening your social circle, learning new skills, creative work, good news in the family or among friends."
+  },
+  "4": {
+   "chu_de": "Year of work",
+   "y_nghia": "Building foundations, discipline, steady accumulation. Not a showy year but a year of hard work.",
+   "nen": "Consolidate, build systems, work steadily.",
+   "tranh": "Abandoning the foundation to chase something new.",
+   "hay_gap": "Hard work, building foundations, buying major assets, home repairs, looking after physical health."
+  },
+  "5": {
+   "chu_de": "Year of change",
+   "y_nghia": "Change, freedom, unexpected opportunities. A fast pace, with many options opening up.",
+   "nen": "Stay flexible, welcome opportunities, try new things.",
+   "tranh": "Letting go of discipline, losing focus, deciding in haste.",
+   "hay_gap": "Big and unexpected changes: moving, travelling far, a change of career direction, meeting many new people."
+  },
+  "6": {
+   "chu_de": "Year of responsibility",
+   "y_nghia": "Family, commitment, caring for others. The focus shifts to home and duty.",
+   "nen": "Commit, take care of others, steady your relationships.",
+   "tranh": "Taking on so much that you burn out, controlling loved ones.",
+   "hay_gap": "Family matters: weddings, children, caring for parents, taking on more responsibility for loved ones."
+  },
+  "7": {
+   "chu_de": "Year of inner life",
+   "y_nghia": "Learning, reflection, inner rest. A year of quality over quantity.",
+   "nen": "Study deeply, rest, look back.",
+   "tranh": "Forcing yourself to socialize, or isolating yourself completely.",
+   "hay_gap": "Looking back at yourself, deep study, rest, a period of slowing down or of questioning what you believe."
+  },
+  "8": {
+   "chu_de": "Year of harvest",
+   "y_nghia": "Career, finances, power. If you have sown well, this tends to be a year of reaping — pressure included.",
+   "nen": "Push your career forward, manage your resources.",
+   "tranh": "Letting money or power crowd out your values, overworking.",
+   "hay_gap": "Money and career: promotions, business, investments, decisions about authority."
+  },
+  "9": {
+   "chu_de": "Year of completion",
+   "y_nghia": "Closing the cycle, letting go, clearing the ground for a new beginning. A year for ending things well.",
+   "nen": "Finish what is unfinished, let go of what is done, give.",
+   "tranh": "Launching big new ventures, clinging to what is already over.",
+   "hay_gap": "Closing things: the end of a job, a relationship or a phase; clearing out, letting go, preparing for a new cycle."
+  }
+ }
+}

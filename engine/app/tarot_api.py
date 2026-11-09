@@ -145,6 +145,21 @@ def api_the(inp: TheInput) -> dict:
     return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_the", **kq}
 
 
+@router.get("/la/{ma}")
+def api_la(ma: str) -> dict:
+    """QTE — một lá cho trang kiến thức theo ngôn ngữ lượt gọi (chữ hiển thị + nguyên văn công cộng; không nhãn nội bộ)."""
+    l = kb.mot_la(ma)
+    if not l:
+        raise HTTPException(404, detail="Không có lá này.")
+    trich = [{"sach": kb.ten_nguon(t.get("sach")), "nguyen_van": t.get("nguyen_van"), "nguyen_van_nguoc": t.get("nguyen_van_nguoc")}
+             for t in l.get("trich") or [] if t.get("sach") in ("waite_1910", "mathers_1888", "book_t") and t.get("nguyen_van")]
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_la",
+            "la": {k: l.get(k) for k in ("id", "ten", "en", "so", "loai", "bo", "nguyen_to", "huong_nhin", "tu_khoa", "tu_khoa_nguoc", "hinh_anh",
+                                         "y_xuoi", "y_nguoc", "linh_vuc", "linh_vuc_nguoc", "viec", "cau_tu_soi", "tra_loi", "nhan_vat", "ten_nguyen_to_phu", "thoth_ten", "tdm_ten")},
+            "chiem_tinh": (l.get("chiem_tinh") or {}).get("ten"), "decan": l.get("decan"), "trich": trich,
+            "bo": kb.bo().get(l.get("bo") or ""), "nguyen_to": kb.nguyen_to().get(l["nguyen_to"]), "thu_tu": list(calc.BO_BAI)}
+
+
 @router.get("/la-ngay")
 def api_la_ngay(ngay: _dt.date | None = None) -> dict:
     return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_la_ngay", **tr.la_ngay(ngay)}

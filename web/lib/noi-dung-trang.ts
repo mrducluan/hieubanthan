@@ -242,9 +242,14 @@ export const gioiThieuTu = (nd: NoiDungTrang) => ({
 });
 
 /** Metadata mặc định từ sổ trang (tiêu đề + mô tả SEO đang chạy trong code) — trang dựng meta gốc từ đây. */
+/** QTE: trang tiếng Việt có bản tiếng Anh tương ứng (hreflang hai chiều; bản Việt là x-default). */
+export const BAN_TIENG_ANH: Record<string, string> = { "/than-so": "/en/numerology", "/tarot": "/en/tarot", "/tarot/la-bai": "/en/tarot/cards", "/": "/en" };
+
 export function metaMacDinh(duong: string): Metadata {
   const m = mucSoTrang(duong)?.mac_dinh ?? {};
-  return metaTrang({ tieuDe: m.tieu_de_seo ?? "", moTa: m.mo_ta_seo ?? "", duong });
+  const meta = metaTrang({ tieuDe: m.tieu_de_seo ?? "", moTa: m.mo_ta_seo ?? "", duong });
+  const en = BAN_TIENG_ANH[duong];
+  return en ? { ...meta, alternates: { ...meta.alternates, languages: { vi: duong, en, "x-default": duong } } } : meta;
 }
 
 const mdChu = (v: unknown) => (typeof v === "string" ? v.trim() : "");

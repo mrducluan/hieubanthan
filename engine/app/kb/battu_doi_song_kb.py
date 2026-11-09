@@ -7,11 +7,10 @@ Danh sách cụm "giọng AI" dùng CHUNG với Tử vi (`tuvi_doi_song_kb.cum_c
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
 
 from app.kb import tuvi_doi_song_kb as _tv
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "battu_doi_song_kb.json"
 SOURCE_ID, SCHOOL_ID = "tu_binh_chan_thuyen", "tu_binh"
@@ -20,10 +19,10 @@ THAN_MAC_DINH = {"manh": "Sức tự thân: mạnh", "yeu": "Sức tự thân: c
 CHUNG_SUC_KHOE = _tv.CHUNG_SUC_KHOE
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _doc() -> dict:
     try:
-        d = json.loads(_F.read_text(encoding="utf-8"))
+        d = nap.doc(_F.name)
     except (OSError, ValueError):
         return {}
     return d if isinstance(d, dict) else {}

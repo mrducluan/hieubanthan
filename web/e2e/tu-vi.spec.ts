@@ -40,6 +40,8 @@ test("hồ sơ cũ thiếu nơi sinh: hỏi bổ sung đúng lúc → sinh ở n
   const noi = page.getByLabel("Nơi sinh");
   await expect(noi.locator("option", { hasText: "Hà Nội" })).toHaveCount(1);
   await noi.selectOption("nuoc_ngoai");
+  // QTE-2: khai tay nằm trong mục gập (mặc định chọn nước + thành phố)
+  await page.getByText("Không thấy thành phố? Khai tay múi giờ và giờ mùa hè").click();
   await page.getByLabel(/giờ mùa hè/).check();
   await page.getByRole("button", { name: "Lập lá số của tôi" }).click();
   const laSo = page.getByRole("group", { name: /Lá số Tử vi/ });
@@ -257,11 +259,12 @@ test("TV-LN: lưu nguyệt theo phái — tháng Giêng 2026 ở Phu Thê (Đẩ
   await expect(ans).toContainText("Theo phái Tháng Giêng tại cung lưu niên, Mệnh của tháng rơi vào cung Tật Ách (Ngọ)");
 });
 
-test("EN-6 BI-3: chọn sinh ở nước ngoài thì có ô múi giờ nơi sinh, lưu vào hồ sơ trên máy", async ({ page }) => {
+test("EN-6 BI-3: khai tay múi giờ nơi sinh (mục gập) vẫn lưu vào hồ sơ trên máy", async ({ page }) => {
   const { noi_sinh: _bo, ...cu } = HO_SO_MAU;
   await napHoSo(page, cu);
   await page.goto("/tu-vi");
   await page.getByLabel("Nơi sinh").selectOption("nuoc_ngoai");
+  await page.getByText("Không thấy thành phố? Khai tay múi giờ và giờ mùa hè").click();
   const mg = page.getByLabel("Múi giờ chuẩn nơi sinh");
   await expect(mg).toHaveValue("");
   await mg.selectOption("-5");
@@ -269,6 +272,28 @@ test("EN-6 BI-3: chọn sinh ở nước ngoài thì có ô múi giờ nơi sinh
   await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
   const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1")!));
   expect(h.utc_noi_sinh).toBe(-5);
+  expect(h.mui_gio).toBeUndefined();
+});
+
+test("QTE-2 giai đoạn 0: sinh ở nước ngoài → chọn nước + thành phố, engine tự suy giờ mùa hè, hồ sơ lưu mã thành phố", async ({ page }) => {
+  const { noi_sinh: _bo, ...cu } = HO_SO_MAU;   // 17/05/1990 12:30 — Los Angeles đang giờ mùa hè (PDT)
+  await napHoSo(page, cu);
+  await page.goto("/tu-vi");
+  await page.getByLabel("Nơi sinh").selectOption("nuoc_ngoai");
+  const nuoc = page.getByLabel("Nước nơi sinh");
+  await expect(nuoc.locator("option", { hasText: "Hoa Kỳ" })).toHaveCount(1);
+  await nuoc.selectOption("us");
+  await page.getByLabel("Thành phố / vùng").selectOption("us-san_jose");
+  // dòng xác nhận do engine tra tzdata: UTC−8, đang giờ mùa hè
+  await expect(page.getByTestId("xac-nhan-mui-gio")).toContainText("UTC−8");
+  await expect(page.getByTestId("xac-nhan-mui-gio")).toContainText("đang giờ mùa hè");
+  await page.getByRole("button", { name: "Lập lá số của tôi" }).click();
+  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
+  await expect(page.getByText(/Đã trừ 1 giờ mùa hè: giờ chuẩn địa phương 11:30/)).toBeVisible();
+  const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1")!));
+  expect(h.mui_gio).toBe("us-san_jose");
+  expect(h.noi_sinh).toBe("nuoc_ngoai");
+  expect(h.utc_noi_sinh).toBeUndefined();   // không khai tay → engine tự suy từ thành phố
 });
 
 test("TV-ZW Cùng sao Mệnh: một dòng tỉ lệ dưới lá số, thuật ngữ trong \"Vì sao nói vậy\", đo chỉ mã", async ({ page }) => {

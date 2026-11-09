@@ -23,6 +23,10 @@ export const HoSo = z.object({
   gio_mua_he: z.boolean().optional(),
   /** EN-6 BI-3: múi giờ CHUẨN nơi sinh (UTC±, không tính giờ mùa hè) — chỉ khi sinh ở nước ngoài. */
   utc_noi_sinh: z.number().min(-12).max(14).multipleOf(0.25).optional(),
+  /** QTE-2 giai đoạn 0: mã thành phố ("us-san_jose", GET /api/dia-ly/mui-gio) hoặc mã vùng IANA ("America/Los_Angeles") —
+   *  chỉ khi sinh ở nước ngoài; engine tự suy múi giờ chuẩn + giờ mùa hè đúng ngày giờ sinh, thắng hai ô khai tay. Chỉ lưu trên
+   *  máy (cột tài khoản chờ migration). */
+  mui_gio: z.string().regex(/^[A-Za-z][A-Za-z0-9_+\-\/]{1,63}$/).optional(),
   /** TV-V2: "unknown" = không biết giờ → `gio` là giờ đại diện 12:00 chỉ để an tạm lá số; Tử vi mở khối định giờ 12 canh. */
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).optional(),
   /** EN-2 mục 5: tình trạng NGƯỜI DÙNG TỰ CHỌN (không suy đoán) — chỉ để chọn lời ở chương tình yêu / gia đình. CHỈ lưu
@@ -154,7 +158,7 @@ export const NUOC_NGOAI = "nuoc_ngoai";
 /** Đầu vào lá số (Tử vi / Bát tự) từ hồ sơ — null nếu thiếu giờ sinh, giới tính hoặc nơi sinh. */
 export function laSoTuHoSo(h: HoSo | null | undefined): {
   birth_date: string; birth_time: string; gender: "nam" | "nu"; noi_sinh: string;
-  vung?: "north" | "south"; gio_mua_he?: boolean; utc_noi_sinh?: number; do_tin_gio?: "exact" | "approx" | "unknown";
+  vung?: "north" | "south"; gio_mua_he?: boolean; utc_noi_sinh?: number; mui_gio?: string; do_tin_gio?: "exact" | "approx" | "unknown";
 } | null {
   if (!h?.gio || !h.gioi_tinh || !h.noi_sinh) return null;
   const nuocNgoai = h.noi_sinh === NUOC_NGOAI;
@@ -164,6 +168,7 @@ export function laSoTuHoSo(h: HoSo | null | undefined): {
     ...(!nuocNgoai && h.vung && ngaySinhIso(h) < "1975-06-13" ? { vung: h.vung } : {}),
     ...(nuocNgoai && h.gio_mua_he ? { gio_mua_he: true } : {}),
     ...(nuocNgoai && typeof h.utc_noi_sinh === "number" ? { utc_noi_sinh: h.utc_noi_sinh } : {}),
+    ...(nuocNgoai && h.mui_gio ? { mui_gio: h.mui_gio } : {}),
     ...(h.do_tin_gio ? { do_tin_gio: h.do_tin_gio } : {}),
   };
 }

@@ -9,11 +9,18 @@ import { cn } from "@/lib/utils";
 
 const GOC_QUAT = { lon: 150, nho: 118 };     // độ mở của vòng cung (máy tính / điện thoại)
 
-export function QuatBai({ thuTu, daRut, onRut, conLai, className }: {
+export const CHU_QUAT_VI = {
+  quat: (n: number, con: number) => `Quạt bài ${n} lá úp — còn rút ${con} lá`, la_up: (i: number) => `Lá úp thứ ${i}`,
+  du: "Đã rút đủ — lật bài phía trên.", huong_dan: (con: number) => `Chạm hoặc bấm một lá để rút · còn ${con} lá · kéo ngang để xoay quạt`,
+};
+export type ChuQuat = typeof CHU_QUAT_VI;
+
+export function QuatBai({ thuTu, daRut, onRut, conLai, className, chu = CHU_QUAT_VI }: {
   /** 78 mã lá theo thứ tự engine xáo. */ thuTu: string[];
   /** chỉ số (trong thuTu) đã rút. */ daRut: number[];
   onRut: (chiSo: number) => void;
   /** số lá còn phải rút (0 → khoá quạt). */ conLai: number; className?: string;
+  /** QTE: chữ theo ngôn ngữ. */ chu?: ChuQuat;
 }) {
   const giam = Boolean(useReducedMotion());
   const ref = useRef<HTMLDivElement>(null);
@@ -88,7 +95,7 @@ export function QuatBai({ thuTu, daRut, onRut, conLai, className }: {
 
   return (
     <div ref={ref} className={cn("relative select-none overflow-hidden rounded-2xl", className)} style={{ height: chieuCao, touchAction: "pan-y" }}
-      data-testid="quat-bai" role="listbox" aria-label={`Quạt bài ${n} lá úp — còn rút ${conLai} lá`} tabIndex={0} onKeyDown={phim}
+      data-testid="quat-bai" role="listbox" aria-label={chu.quat(n, conLai)} tabIndex={0} onKeyDown={phim}
       onPointerDown={batDauKeo} onPointerMove={dangKeo} onPointerUp={thaKeo} onPointerCancel={thaKeo} onPointerLeave={thaKeo}>
       <div className="absolute left-1/2 top-full" style={{ transform: `translateX(-50%) translateY(${-hLa - (dienThoai ? 18 : 30)}px) rotate(${xoay}deg)`, transformOrigin: `50% ${-(banKinh - hLa)}px`, transition: keo.current || giam ? "none" : "transform 120ms ease-out" }}>
         {thuTu.map((ma, i) => {
@@ -96,7 +103,7 @@ export function QuatBai({ thuTu, daRut, onRut, conLai, className }: {
           const g = -goc / 2 + i * buoc;
           const nho = chon === i;
           return (
-            <div key={ma} role="option" aria-selected={nho} aria-label={`Lá úp thứ ${i + 1}`} data-testid="la-quat" data-chi-so={i}
+            <div key={ma} role="option" aria-selected={nho} aria-label={chu.la_up(i + 1)} data-testid="la-quat" data-chi-so={i}
               className={cn("absolute left-0 top-0 rounded-[7px] shadow-card", !khoa && "cursor-pointer", !giam && "transition-transform duration-200 ease-out", nho && "z-20")}
               style={{ width: wLa, height: hLa, marginLeft: -wLa / 2, transformOrigin: `50% ${banKinh}px`,
                 transform: `rotate(${g}deg) translateY(${nho ? -26 : 0}px)` }}
@@ -109,7 +116,7 @@ export function QuatBai({ thuTu, daRut, onRut, conLai, className }: {
         })}
       </div>
       <p className="pointer-events-none absolute inset-x-0 top-2 text-center text-xs text-fg-faint">
-        {khoa ? "Đã rút đủ — lật bài phía trên." : `Chạm hoặc bấm một lá để rút · còn ${conLai} lá · kéo ngang để xoay quạt`}
+        {khoa ? chu.du : chu.huong_dan(conLai)}
       </p>
     </div>
   );

@@ -11,8 +11,15 @@ from __future__ import annotations
 
 import re
 
+from app.kb.loi import L
+
 PHIEN_BAN = "doi_song_1"
 NHAN_MUC = {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần lưu ý"}
+
+
+def nhan_muc(muc: str | None) -> str | None:
+    """Nhãn mức theo ngôn ngữ của lượt gọi (QTE-2)."""
+    return L(f"muc.{muc}", NHAN_MUC[muc]) if muc in NHAN_MUC else None
 LOAI_HOP = ("cot_loi", "diem_manh", "luu_y", "loi_khuyen", "thoi_diem")
 _MA = re.compile(r"[^a-z0-9_+-]")
 
@@ -30,7 +37,7 @@ def hop(loai: str, tieu_de: str, noi_dung: str, *, huong_xu_ly: str | None = Non
     assert loai in LOAI_HOP, loai
     h = {"loai": loai, "tieu_de": tieu_de.strip(), "noi_dung": " ".join(noi_dung.split())}
     if loai == "luu_y":
-        h["huong_xu_ly"] = (huong_xu_ly or "Chậm lại một nhịp, hỏi thêm một người có kinh nghiệm trước khi quyết.").strip()
+        h["huong_xu_ly"] = (huong_xu_ly or L("hop.huong_mac_dinh", "Chậm lại một nhịp, hỏi thêm một người có kinh nghiệm trước khi quyết.")).strip()
     elif huong_xu_ly:
         h["huong_xu_ly"] = huong_xu_ly.strip()
     if can_cu:
@@ -47,7 +54,7 @@ def chuong(ma: str, tieu_de: str, doan: list[str], *, hop: list[dict] | None = N
            tom_tat: str | None = None, can_cu: list[str] | None = None, cau_tu_soi: str | None = None, **them) -> dict:
     c = {"ma": ma, "tieu_de": tieu_de, "hop": hop or [], "doan": doan, "can_cu": can_cu or []}
     # Khoá trống không ghi (báo cáo cũ của thần số kiểm "None" không lọt ra lời văn); web coi thiếu = None.
-    for k, v in (("muc", muc), ("nhan_muc", NHAN_MUC.get(muc) if muc else None), ("tom_tat", tom_tat), ("cau_tu_soi", cau_tu_soi)):
+    for k, v in (("muc", muc), ("nhan_muc", nhan_muc(muc) if muc else None), ("tom_tat", tom_tat), ("cau_tu_soi", cau_tu_soi)):
         if v is not None:
             c[k] = v
     c.update(them)

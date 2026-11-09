@@ -23,6 +23,7 @@ from app import config, giam_sat, gioi_han
 from app.cong_khai import PhanHoiCongKhai
 from app.kb import tu_dien
 from app.calc import thanso, timebase
+from app import ngon_ngu
 from app.kb import store as kb_store
 from app.kb import trang as kb_trang
 from app.kb import tham_dinh as kb_tham_dinh
@@ -149,9 +150,13 @@ async def require_engine_key(request: Request, call_next):
             phan.append(khuc)
         request._body = b"".join(phan)          # Starlette phát lại thân đã đọc cho route phía sau
     tok = ngan_sach.NGUOI_GOI.set(ai)
+    # QTE-2: ngôn ngữ của lượt gọi — header `x-ngon-ngu` (web gửi) thắng query `?ngon_ngu=`; lạ → "vi". Chỉ lớp CHỮ
+    # (kb.nap, kb.ten, lời RULES) đọc; phép tính không đổi theo ngôn ngữ.
+    tok_nn = ngon_ngu.HIEN_TAI.set(ngon_ngu.chuan(request.headers.get("x-ngon-ngu") or request.query_params.get("ngon_ngu")))
     try:
         return await call_next(request)
     finally:
+        ngon_ngu.HIEN_TAI.reset(tok_nn)
         ngan_sach.NGUOI_GOI.reset(tok)
 
 
@@ -477,10 +482,35 @@ def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
         kia = inp.nguoi_kia.model_dump()
     nguoi = {"ho_ten": inp.ho_ten, "ngay": inp.ngay, "thang": inp.thang, "nam": inp.nam,
              "quy_uoc": inp.quy_uoc_duong_doi}
+    if not ngon_ngu.la_viet():
+        # QTE: tiếng Anh → bản hỏi đáp gọn tất định (KB có bản phủ); từ điển / câu liên quan là chữ Việt nên để trống.
+        from app.luangiai import hoi_en  # noqa: PLC0415
+        kq = hoi_en.tra_loi(inp.cau_hoi.strip(), nguoi, inp.ngay_xem)
+        background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
+        return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": [], "cau_lien_quan": []}
     kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem, phai=inp.phai)
     background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "thanso"),
             "cau_lien_quan": noi_dau.lien_quan(inp.cau_hoi.strip())}
+
+
+@app.get("/v1/thanso/so/{so}")
+def api_so(so: int) -> dict:
+    """QTE — một con số (1–9, 11, 22, 33) cho trang kiến thức theo ngôn ngữ lượt gọi: nghĩa + chân dung 4 mặt + số × lĩnh vực
+    + năm cá nhân (số 1–9). Chỉ tra KB, không nhận dữ liệu cá nhân."""
+    from app.kb import thanso_v2 as kb2  # noqa: PLC0415
+    if so not in (1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33):
+        raise HTTPException(404, detail="Không có số này")
+    m = luangiai_thanso._nghia_cua(so)
+    if not m:
+        raise HTTPException(404, detail="Chưa có nghĩa cho số này")
+    cd = kb2.chan_dung(so) or {}
+    return {"engine_version": ENGINE_VERSION, "so": so, "nghia": m, "chan_dung": {k: cd.get(k) for k in ("tong_quan", "tinh_cam", "cong_viec", "bien_co")},
+            "ten_mat": kb2.ten_mat_chan_dung(),
+            "linh_vuc": {lv: kb2.nghia_linh_vuc(so, lv) for lv in ("ban_than", "tinh_yeu", "gia_dinh", "su_nghiep", "tai_chinh", "suc_khoe")},
+            "ten_linh_vuc": {lv: kb2.ten_linh_vuc(lv) for lv in ("ban_than", "tinh_yeu", "gia_dinh", "su_nghiep", "tai_chinh", "suc_khoe")},
+            "nam_ca_nhan": kb_store.nghia_nam_ca_nhan(so) if so <= 9 else None,
+            "vi_tri": {v: kb_store.khung_vi_tri(v) for v in luangiai_thanso.VI_TRI_THU_TU}}
 
 
 class NoiDauInput(ThanSoInput):

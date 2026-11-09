@@ -6,16 +6,16 @@ None / rỗng; RULES rơi về câu mặc định ngắn, không vỡ. Chỉ TRA
 from __future__ import annotations
 
 import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "tuvi_hai_nguoi_kb.json"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _doc() -> dict:
     try:
-        d = json.loads(_F.read_text(encoding="utf-8"))
+        d = nap.doc(_F.name)
     except (OSError, ValueError):
         return {}
     return d if isinstance(d, dict) else {}

@@ -4,17 +4,16 @@ Nguồn: app/kb/data/phongthuy_kb.json (nháp AI, `can_doi_chieu`; mục dân gi
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "phongthuy_kb.json"
 SOURCE_ID, SCHOOL_ID = "duong_trach_tam_yeu", "bat_trach"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
-    return json.loads(_F.read_text(encoding="utf-8"))
+    return nap.doc(_F.name)
 
 
 def meta() -> dict:
@@ -88,9 +87,9 @@ def luu_y(ma: str) -> str | None:
 _F_HK = Path(__file__).parent / "data" / "phongthuy_huyen_khong.json"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def huyen_khong() -> dict:
-    return json.loads(_F_HK.read_text(encoding="utf-8"))
+    return nap.doc(_F_HK.name)
 
 
 def bo_cuc() -> dict:

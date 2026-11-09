@@ -6,9 +6,8 @@ Chỉ TRA, không sinh nghĩa. Tệp / khoá / ô chưa có → hàm trả None 
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "tuvi_doi_song_kb.json"
 SOURCE_ID, SCHOOL_ID = "tuvi_vn", "nam_phai_viet"
@@ -17,10 +16,10 @@ CHUNG_SUC_KHOE = ("Đây là gợi ý chăm sóc theo sách xưa, không thay l�
                   "khám.")
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
     try:
-        d = json.loads(_F.read_text(encoding="utf-8"))
+        d = nap.doc(_F.name)
     except (OSError, ValueError):
         return {}
     return d if isinstance(d, dict) else {}
@@ -175,7 +174,7 @@ _NGOAI_LE_TRUOC = {"khắc": ("nghiêm", "khoảnh", "điêu", "chạm", "tạc"
                    "cúng": ("ấm",)}       # CY-1: "ấm cúng" (nhà ấm cúng) không phải chuyện cúng bái
 
 
-@lru_cache(maxsize=512)
+@nap.nho
 def _mau_cum(cum: str):
     import re
     sau, truoc = _NGOAI_LE.get(cum), _NGOAI_LE_TRUOC.get(cum)

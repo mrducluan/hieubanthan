@@ -20,6 +20,10 @@ from typing import TypedDict
 
 import httpx
 
+from app import ngon_ngu
+from app.kb import nap
+from app.kb.loi import L
+
 _DIR = Path(__file__).parent / "data"
 _MEANINGS_FILE = _DIR / "thanso_meanings.json"
 _DEPTH_FILE = _DIR / "thanso_depth.json"
@@ -43,8 +47,9 @@ class SoMeaning(TypedDict):
 # Nguồn: file
 # --------------------------------------------------------------------------- #
 def _from_files() -> dict:
-    m = json.loads(_MEANINGS_FILE.read_text(encoding="utf-8"))
-    d = json.loads(_DEPTH_FILE.read_text(encoding="utf-8"))
+    # QTE-2: đọc qua `nap.doc` → có lớp phủ ngôn ngữ (`data/en/thanso_*.json`) khi lượt gọi không phải tiếng Việt.
+    m = nap.doc(_MEANINGS_FILE.name)
+    d = nap.doc(_DEPTH_FILE.name)
     return {
         "sources": m["sources"],
         "schools": m["schools"],
@@ -127,8 +132,16 @@ def _from_supabase(url: str, key: str) -> dict:
     }
 
 
+@nap.nho
+def _tu_tep_theo_ngon_ngu() -> dict:
+    return _from_files()
+
+
 def _load() -> dict:
     global _cache, _cache_at
+    # QTE-2: bản ngôn ngữ khác chỉ có ở TỆP (Supabase chỉ giữ bản tiếng Việt) — nhớ theo ngôn ngữ qua `nap.nho`.
+    if not ngon_ngu.la_viet():
+        return _tu_tep_theo_ngon_ngu()
     url = os.environ.get("SUPABASE_URL")
     key = os.environ.get("SUPABASE_ANON_KEY")
 
@@ -189,7 +202,7 @@ def nghia_nam_ca_nhan(so: int) -> dict | None:
 
 
 def trich_nguon_depth() -> str:
-    return "Dòng Balliett → Jordan"
+    return L("thanso.nguon_depth", "Dòng Balliett → Jordan")
 
 
 # --------------------------------------------------------------------------- #

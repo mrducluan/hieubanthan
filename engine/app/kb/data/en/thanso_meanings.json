@@ -1,0 +1,95 @@
+{
+ "_trang_thai": "bien_tap",
+ "sources": [
+  {
+   "ten": "Balliett → Jordan line",
+   "mo_ta": "Modern Pythagorean numerology, United States 1905-1965 (L. Dow Balliett, Juno Jordan).",
+   "luu_y": "Descriptions differ from author to author — there is no single standard version. Use them as themes to reflect on, not as facts."
+  }
+ ],
+ "schools": [
+  {
+   "ten": "Pythagorean (Vietnamese edition, compiled by the project owner)"
+  }
+ ],
+ "so_meanings": {
+  "1": {
+   "tu_khoa": "Beginnings, independence, leadership",
+   "mat_toi": "Imposing, hard to work with, afraid of being overshadowed",
+   "phan_chung": "How many times have you handed over a decision on purpose without feeling uneasy about it?"
+  },
+  "2": {
+   "tu_khoa": "Cooperation, sensitivity, peacemaking",
+   "mat_toi": "Avoids conflict until things fester",
+   "phan_chung": "When did you last say a plain \"no\" without a long explanation?"
+  },
+  "3": {
+   "tu_khoa": "Expression, creativity, communication",
+   "mat_toi": "Scattered, quits halfway, talks more than acts",
+   "phan_chung": "Is there a project you saw through to the end even after the excitement was gone?"
+  },
+  "4": {
+   "tu_khoa": "Foundations, discipline, building",
+   "mat_toi": "Rigid, afraid of change, grinds away without asking what for",
+   "phan_chung": "When did you last tear down a system you had built yourself?"
+  },
+  "5": {
+   "tu_khoa": "Freedom, change, experience",
+   "mat_toi": "Impulsive, lacks staying power, changes course as soon as it gets hard",
+   "phan_chung": "Have you stayed anywhere long enough to see the long-term results of what you did?"
+  },
+  "6": {
+   "tu_khoa": "Responsibility, caring, family",
+   "mat_toi": "Control dressed up as concern, self-sacrifice that turns into resentment",
+   "phan_chung": "Do you let others handle their own affairs without stepping in?"
+  },
+  "7": {
+   "tu_khoa": "Analysis, depth, independent thinking",
+   "mat_toi": "Distant, doubt that hardens into refusing to trust, analysis instead of action",
+   "phan_chung": "When did you last decide without enough data, and feel fine about it?"
+  },
+  "8": {
+   "tu_khoa": "Power, organization, material matters",
+   "mat_toi": "Measures people by results, struggles to rest, confuses worth with price",
+   "phan_chung": "Is there anything you do without weighing what you get out of it?"
+  },
+  "9": {
+   "tu_khoa": "Tolerance, ideals, giving",
+   "mat_toi": "Rescues others to avoid looking inward, expects much and ends up disappointed",
+   "phan_chung": "Can you accept help without feeling that you owe something?"
+  },
+  "11": {
+   "tu_khoa": "Intuition, perception, inspiring others",
+   "mat_toi": "Background anxiety, ideals pushed too far, burns out easily",
+   "phan_chung": "Has your intuition ever been wrong, and did you write it down?"
+  },
+  "22": {
+   "tu_khoa": "Building on a large scale, turning vision into systems",
+   "mat_toi": "Takes on too much, postpones because it is \"not big enough yet\"",
+   "phan_chung": "What small thing have you actually finished recently?"
+  },
+  "33": {
+   "tu_khoa": "Leading through service",
+   "mat_toi": "Dissolves the self into the role",
+   "phan_chung": "What do you want just for yourself, unrelated to anyone else?"
+  }
+ },
+ "vi_tri": {
+  "duong_doi": {
+   "ten": "Life Path",
+   "khung": "the main thread of your whole life — your direction and central lesson"
+  },
+  "su_menh": {
+   "ten": "Expression",
+   "khung": "the goal to cultivate, what you are working toward"
+  },
+  "linh_hon": {
+   "ten": "Soul Urge",
+   "khung": "your inner drive, what you truly want"
+  },
+  "nhan_cach": {
+   "ten": "Personality",
+   "khung": "the outer impression others get before they understand you"
+  }
+ }
+}

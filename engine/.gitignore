@@ -1,1 +1,3 @@
 bao-cao-llm-55/
+# QT-0: danh sách chuỗi dịch lỗi cạnh bản phủ — chỉ cho người duyệt xem, không vào git
+app/kb/data/*/*.loi.json

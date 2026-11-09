@@ -53,8 +53,12 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   const dau = new Headers(req.headers);   // chép SAU khi làm mới phiên → cookie mới đi kèm request
   dau.set("x-nonce", nonce);
   dau.set("content-security-policy", csp);
+  // QTE: bản tiếng Anh ở /en — layout đọc `x-ngon-ngu` để dựng khung tiếng Anh; route API chuyển tiếp header này tới engine.
+  const tiengAnh = pathname === "/en" || pathname.startsWith("/en/");
+  dau.set("x-ngon-ngu", tiengAnh ? "en" : "vi");
   const res = NextResponse.next({ request: { headers: dau } });
   res.headers.set("content-security-policy", csp);
+  if (tiengAnh) res.headers.set("content-language", "en");
   cookieMoi.forEach((c) => res.cookies.set(c.name, c.value, c.options));
   if (quanTri) {
     res.headers.set("x-robots-tag", "noindex, nofollow");

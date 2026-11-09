@@ -6,9 +6,8 @@ kiểu câu hỏi, dụng thần theo việc + vai, lời Thế–Ứng cho "ng�
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "kinhdich_tra_loi.json"
 NGHIENG = ("co", "dieu_kien", "chua_voi", "chua")
@@ -16,10 +15,10 @@ XU_HUONG = ("tien", "tien_giu", "giu", "hop_tac", "cho", "than_trong", "lui", "k
 KIEU_CAU = ("co_nen", "ket_qua", "nguoi_kia", "khi_nao", "cach_lam", "tong_quat")
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
     try:
-        d = json.loads(_F.read_text(encoding="utf-8"))
+        d = nap.doc(_F.name)
     except (OSError, ValueError):
         return {}
     return d if isinstance(d, dict) else {}

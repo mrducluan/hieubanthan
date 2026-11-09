@@ -2,19 +2,18 @@
 """Tầng KB — báo cáo Phong thuỷ "Nhà của bạn" (PT-ĐS). Chỉ TRA; thiếu khoá → None / rỗng."""
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "phongthuy_doi_song.json"
 MUC = ("thuan", "can_bang", "can_chu_dong")
 NHAN_MAC_DINH = {"thuan": "Thuận lợi", "can_bang": "Cân bằng", "can_chu_dong": "Cần lưu ý"}
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
     try:
-        d = json.loads(_F.read_text(encoding="utf-8"))
+        d = nap.doc(_F.name)
     except (OSError, ValueError):
         return {}
     return d if isinstance(d, dict) else {}

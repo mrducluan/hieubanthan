@@ -37,7 +37,7 @@ export default function robots(): MetadataRoute.Robots {
     ],
     // SEO-K: sitemap riêng cho trang ngày tốt (≈ 400 URL, đổi hằng ngày).
     // SEO-M: chỉ mục sitemap theo cụm kiến thức — Search Console báo chỉ mục theo từng cụm.
-    sitemap: [`${siteUrl()}/sitemap.xml`, `${siteUrl()}/sitemap-ngay.xml`, `${siteUrl()}/sitemap-cum.xml`],
+    sitemap: [`${siteUrl()}/sitemap.xml`, `${siteUrl()}/sitemap-ngay.xml`, `${siteUrl()}/sitemap-cum.xml`, `${siteUrl()}/sitemap-en.xml`],
     host: siteUrl(),
   };
 }

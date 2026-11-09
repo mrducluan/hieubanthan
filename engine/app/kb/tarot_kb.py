@@ -2,9 +2,8 @@
 """Tầng KB — Tarot (TR-1). Chỉ TRA `tarot_kb.json`; thiếu khoá → None / rỗng. Không sinh nghĩa mới."""
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "tarot_kb.json"
 # Tên hiển thị của nguồn (BM-1: sách / trường phái, không nêu nơi lưu hay nhãn nội bộ).
@@ -18,10 +17,10 @@ TEN_NGUON = {
 TEN_NGUYEN_TO = {"hoa": "Lửa", "thuy": "Nước", "khi": "Khí", "dat": "Đất"}
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
     try:
-        d = json.loads(_F.read_text(encoding="utf-8"))
+        d = nap.doc(_F.name)
     except (OSError, ValueError):
         return {}
     return d if isinstance(d, dict) else {}

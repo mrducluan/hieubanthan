@@ -134,6 +134,13 @@ const boTienTo = (s: string) => { const t = s.replace(/^Ngày cá nhân \d+:\s*/
 const thu = (iso: string) => new Intl.DateTimeFormat("vi-VN", { weekday: "long", day: "numeric", month: "numeric", year: "numeric", timeZone: "UTC" })
   .format(new Date(`${iso}T00:00:00Z`));
 
+
+/** Ngày hôm nay theo múi giờ của máy người dùng (YYYY-MM-DD); máy không có Intl hợp lệ → giờ Việt Nam. */
+function ngayMay(): string {
+  try { return new Intl.DateTimeFormat("en-CA", { year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date()); }
+  catch { return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date()); }
+}
+
 export function HomNay() {
   const hoSo = useHoSo();
   const c = useChu();
@@ -154,7 +161,8 @@ export function HomNay() {
     if (!hoSo) return Promise.reject(new Error("Chưa có hồ sơ"));
     return fetch("/api/thanso/hom-nay", {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam,
+      // QTE-2 giai đoạn 0: "hôm nay" theo đồng hồ máy người dùng (ở Mỹ 20:00 vẫn là hôm nay, dù Việt Nam đã sang ngày mai).
+      body: JSON.stringify({ ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam, ngay_xem: ngayMay(),
         ...(yDinh.length ? { y_dinh: yDinh } : {}), ...(cau.trim() ? { du_dinh: cau.trim().slice(0, 200) } : {}) }),
     }).then(async (r) => {
       const j = await r.json().catch(() => ({}));
@@ -188,8 +196,7 @@ export function HomNay() {
   useEffect(() => {
     if (!hoSo) return;
     let huy = false;
-    const homNayVn = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
-    const daNho = docYDinh(homNayVn);
+    const daNho = docYDinh(ngayMay());
     // KC-3: link gợi mở từ mảng khác mang ?y_dinh= (mã trong 11 ý định) → chọn sẵn.
     const q = new URLSearchParams(location.search).get("y_dinh");
     const hopLe = q && ["cong_viec", "gap_go", "hoc_tap", "tinh_cam", "gia_dinh", "chi_tieu", "van_dong", "bat_dau", "di_chuyen", "nghi_ngoi", "sang_tao"].includes(q) ? q : null;

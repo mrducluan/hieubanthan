@@ -148,9 +148,50 @@ Ba điểm QTE-1 còn để ngỏ, đề xuất ở PR UI-BLOG (`docs/UI-BLOG-VA
      - `engine/app/chuyen_ngu/kiem.py` — chặn: biến `{x}` lệch, con số mất/thêm, thuật ngữ ≥ 2 âm tiết không dùng tên trong bảng,
        cụm cấm, thiếu câu "not medical advice" khi nguồn có, còn chữ có dấu, độ dài bất thường.
      - `engine/app/chuyen_ngu/quy_trinh.py` + `engine/scripts/chuyen_ngu.py` — dịch một tệp KB theo lô 40 chuỗi → bản phủ
-       `<tên>.en.json` (`_trang_thai: nhap_may`), chuỗi lỗi không ghi, liệt kê ở `<tên>.en.loi.json`. Env `CHUYEN_NGU_MODEL`.
+       `kb/data/en/<tên>.json` (`_trang_thai: nhap_may`; QTE-2 đổi chỗ từ `<tên>.en.json`), chuỗi lỗi không ghi, liệt kê ở
+       `kb/data/en/<tên>.loi.json` (không vào git). Env `CHUYEN_NGU_MODEL`.
      - Test `engine/tests/test_chuyen_ngu.py` (13 ca, máy AI giả).
 2. **CMS hướng lai**: Bài viết + Chuyên mục → mỗi ngôn ngữ một bài, nối `ban_goc` (migration nhỏ, chỉ thêm cột); global giao diện
    (Menu, Chân trang, Chữ dùng chung, Trang website) → Payload `localization`. Làm ở tuần 3–4 cùng khung `/en`, migration Payload
    có up/down, thử trên Postgres thật trước. Nút "Tạo bản tiếng Anh" trong trình viết bài tạo NHÁP (không tự xuất bản).
 3. **Thêm cụm "Chinese zodiac 2027 / Year of the Fire Goat"** (Tết 6/2/2027) vào lượt kiểm từ khoá tuần 2.
+
+## 12. QTE-2 — đánh giá lại kiến trúc trước khi làm tiếp (2026-11-08)
+
+Chủ dự án yêu cầu đánh giá tổng thể plan / engine / hạ tầng cho đa ngôn ngữ. Kết quả + số đo: `docs/DANH-GIA-KIEN-TRUC-DA-NGON-NGU.md`.
+Tóm tắt điều chỉnh so với mục 5:
+
+- **Mục 5 "engine thêm `ngon_ngu`, đọc `*_en.json`" là chưa đủ**: lời luận nằm trong mã Python (≈ 5.100 dòng chuỗi tiếng Việt ở
+  RULES). Kiến trúc chốt: **dữ kiện tất định — lời theo ngôn ngữ**: ngữ cảnh ngôn ngữ của lượt gọi (`app/ngon_ngu.py`) + lớp phủ KB
+  `kb/data/<ngôn ngữ>/` (`kb/nap`) + bảng tên riêng (`kb/ten`, pinyin — **không** dùng en-US của iztro) + lời bài đọc dựng từ
+  `ma_mau` / dữ kiện bằng mẫu câu tiếng Anh (mục 4.3 của tài liệu đánh giá, **chờ duyệt**); không gettext từng chuỗi Python.
+- **Thứ tự trong mỗi mảng**: công cụ lập lá số → trang kiến thức → thẻ chia sẻ → bài đọc đời sống (bài đọc cần lớp lời, đi sau).
+- **Web**: cây `app/en/…` riêng, root layout đọc ngôn ngữ từ header do `proxy.ts` đặt; bảng chữ `lib/chu` thêm chiều ngôn ngữ; bảng
+  ánh xạ đường dẫn vi ↔ en cho hreflang. Không `next-intl`, không dời 103 trang.
+- **Đã làm (QTE-2a)**: ngữ cảnh ngôn ngữ + lớp phủ KB (22 module KB + 6 RULES chuyển sang `nap`), bảng tên 341 mục, **giai đoạn 0
+  tuần 1 (a)**: múi giờ nơi sinh theo nước + thành phố (`calc/mui_gio`, 62 nước / 146 thành phố, zoneinfo), form hồ sơ chọn nước →
+  thành phố, Hôm nay theo đồng hồ máy người dùng. Không đổi phép tính, không tăng `ENGINE_VERSION`.
+
+## 13. QTE-3 — bản tiếng Anh đầu tiên: Tarot · Thần số · hỏi đáp (2026-11-09)
+
+Chủ dự án quyết (2026-11-08): "Làm Tarot/Thần số/hỏi đáp tiếng Anh đi em rồi merge" — **đảo** điều loại trừ ở mục 3 (bản tiếng Anh
+"không tarot, thần số, hỏi đáp"). Lý do ghi nhận: hai mảng này không cần lịch Trung Quốc / giờ sinh, kho KB đã là nguồn phương Tây
+(Waite, Book T, Pythagoras) nên bản tiếng Anh gần nguyên gốc hơn các mảng phương Đông, và có sẵn khung hỏi đáp tất định. Thứ tự
+Bát tự → Tử vi → phong thuỷ → Kinh Dịch của mục 3 vẫn giữ cho các tuần sau.
+
+Đã làm (chi tiết ở `CLAUDE.md` dòng QTE-3):
+
+- Engine: mẫu câu theo ngôn ngữ (`kb/loi.py` + `kb/data/en/loi_khuon.json`), bản phủ KB tiếng Anh cho Tarot (78 lá) và Thần số
+  (nghĩa số, chiều sâu, chân dung, 6 lĩnh vực, chỉ số phụ, biểu đồ), an toàn tiếng Anh trong MỘT bộ chặn, hỏi đáp Thần số gọn tất
+  định (`hoi_en`), hỏi đáp Tarot nhận câu tiếng Anh, hai route kiến thức. Test chấp nhận: đầu ra tiếng Anh không còn một ký tự Việt.
+- Web: `/en`, `/en/numerology`, `/en/numerology/life-path/{n}`, `/en/tarot`, `/en/tarot/cards/{slug}`, `/en/privacy`, `/en/terms`;
+  `sitemap-en.xml`; hreflang hai chiều; khung tiếng Anh riêng (không CMS / Sao).
+
+Chưa làm / chờ quyết:
+
+- **Người bản xứ duyệt** toàn bộ `kb/data/en/*.json` (`_trang_thai: bien_tap` → `da_duyet`); đặc biệt câu sức khoẻ, tiền bạc.
+- Hỏi đáp Thần số tiếng Anh là bản **gọn** (10 kiểu câu); bản đầy đủ (ma trận nỗi đau, hợp đôi, Chaldea, tổng hợp) chưa chuyển.
+- Thẻ chia sẻ, lịch sử rút bài, kiểm chứng "Đúng với mình", Sao: chưa có ở `/en` (đọc miễn phí, không lưu).
+- Pháp lý: `/en/privacy`, `/en/terms` là tóm tắt — luật sư xem trước tuần 9 như mục 7; bản ràng buộc vẫn tiếng Việt.
+- Search Console: thêm `sitemap-en.xml`; theo dõi hiển thị / nhấp `/en/*` làm cột mốc tuần 8 (mục 6).
+

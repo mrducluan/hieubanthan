@@ -281,9 +281,65 @@ def _khop(k: str, c: str | None, cd: str, kd: str, co_dau: bool) -> bool:
     return bool(_dung_dau(c).search(cd))
 
 
+
+# ------------------------------------------------------------------ QTE-2: câu hỏi TIẾNG ANH (bản /en)
+# So trên câu đã thường hoá, bỏ dấu (`kd`) với ranh giới từ; từ tiếng Anh không trùng chữ Việt không dấu nào đáng kể.
+_I = r"(i|i m|im|i am|me|myself|my life)"
+KHUNG_HOANG_EN: list[str] = [
+    r"kill myself", r"killing myself", r"end(ing)? (my|it all|everything|my life)", r"take my (own )?life", r"(commit|committing|attempt(ed|ing)?) suicide",
+    r"suicid(e|al)", r"want(ing)? to die", r"wish(ing)? i (was|were) dead", r"better off dead", r"(don t|dont|do not) want to (live|wake up|be here|exist)( anymore)?",
+    r"(no|not any) (reason|point) (to|in) (live|living|go on|going on)", r"hurt(ing)? myself", r"self harm", r"cut(ting)? myself",
+    r"i am a burden", r"i m a burden", r"im a burden", r"everyone would be better (off )?without me", r"(ending|end) things",
+    r"(he|she|they|my (husband|wife|partner|boyfriend|girlfriend|father|mother|dad|mom|mum)) (hits|hit|beats|beat|is beating|abuses|abused|raped|is hurting|strangled|threatens to kill) me",
+    r"(i was|i m being|i am being|being) (raped|abused|molested|assaulted)", r"(i|we) (am|are) (being )?(abused|assaulted)",
+    r"overdos(e|ed|ing)", r"(i|i m|im) (so )?(depressed|suicidal)(?! (people|person|friend|book))",
+]
+# (mẫu, loại từ chối) — chẩn đoán bệnh / sống chết / bỏ thuốc / thai nhi / xổ số / tuyển người
+TU_CHOI_EN: list[tuple[str, str]] = [
+    (r"(do|will|am|could|might) i (have|get|develop) (cancer|a tumou?r|diabetes|hiv|aids|dementia|alzheimer|a stroke|a heart attack|covid)", "suc_khoe_the_chat"),
+    (r"(is it|is this|could it be|do i have) (cancer|a tumou?r|benign|malignant|diabetes|depression|adhd|autism|bipolar|schizophrenia)", "suc_khoe_the_chat"),
+    (r"(diagnos(e|is|ed)|prognosis|chemo(therapy)?|radiation therapy|surgery|operation|dialysis)(?! (room|date|of the|book))", "suc_khoe_the_chat"),
+    (r"(stop|quit|skip|come off|go off) (taking )?(my )?(meds|medication|medicine|pills|antidepressants|insulin|chemo)", "suc_khoe_the_chat"),
+    (r"(should|can) i (stop|quit) (my )?(treatment|therapy|medication)", "suc_khoe_the_chat"),
+    (r"(when|how long) (will|do|am) i (going to )?(die|live|have left)", "du_doan_cu_the"), (r"how long (do|will) i live", "du_doan_cu_the"),
+    (r"(am i|will i|is .{1,30}) going to die", "du_doan_cu_the"), (r"(my|the) (baby|fetus|foetus|unborn)( is| will| has)? (healthy|sick|disabled|ok|normal|down syndrome)", "suc_khoe_the_chat"),
+    (r"(will|am|could) i (get|be|fall) pregnant", "suc_khoe_the_chat"), (r"(gender|sex) of (my|the) (baby|child)(?! name)", "suc_khoe_the_chat"),
+    (r"(lottery|lotto|powerball|mega ?millions|jackpot|winning|lucky|betting|roulette|slot machine) numbers?", "may_rui"), (r"(numbers?|which number) (to|should i) (bet|play|pick)", "may_rui"),
+    (r"(win|winning) (the )?(lottery|lotto|jackpot|bet|casino)", "may_rui"), (r"(stock|crypto|coin|bitcoin|share) (price|will go|to buy|should i buy|pump)", "may_rui"),
+    (r"(which|what) (candidate|applicant|employee|person) (should i|to) (hire|fire|promote)", "ngoai_pham_vi"), (r"(hire|fire) (him|her|them|this (person|candidate|employee))", "ngoai_pham_vi"),
+]
+_CAP_CUU_EN = re.compile(r"(?<!\w)(chest pain|can t breathe|cant breathe|cannot breathe|trouble breathing|passed out|passing out|fainted|unconscious|seizure|stroke symptoms|"
+                         r"slurred speech|numb (arm|face)|bleeding (heavily|won t stop|wont stop)|overdosed|swallowed pills)(?!\w)")
+_EN_NGUOI_THAN = re.compile(r"(?<!\w)(my (mother|mom|mum|father|dad|husband|wife|partner|son|daughter|child|kid|brother|sister|grandma|grandpa|friend))"
+                            r".{0,40}(cancer|sick|ill|disease|tumou?r|surgery|hospital|health|dying)(?!\w)")
+
+
+def _en(kd: str, ds) -> bool:
+    return any(re.search(r"(?<!\w)(?:" + m + r")(?!\w)", kd) for m in ds)
+
+
+def khung_hoang_en(raw: str) -> bool:
+    return _en(_hai_ban(raw)[1], KHUNG_HOANG_EN)
+
+
+def tu_choi_en(raw: str) -> str | None:
+    kd = _hai_ban(raw)[1]
+    if _CAP_CUU_EN.search(kd):
+        return "suc_khoe_the_chat"
+    for m, loai in TU_CHOI_EN:
+        if re.search(r"(?<!\w)(?:" + m + r")(?!\w)", kd):
+            return loai
+    if _EN_NGUOI_THAN.search(kd):
+        return "suc_khoe_the_chat"
+    return None
+
+
+def cap_cuu_en(raw: str) -> bool:
+    return bool(_CAP_CUU_EN.search(_hai_ban(raw)[1]))
+
 def khung_hoang(raw: str) -> bool:
     cd, kd, co_dau = _hai_ban(raw)
-    return any(_khop(k, c, cd, kd, co_dau) for k, c in KHUNG_HOANG)
+    return any(_khop(k, c, cd, kd, co_dau) for k, c in KHUNG_HOANG) or khung_hoang_en(raw)
 
 
 # ------------------------------------------------------------------ SK-1: triệu chứng cấp (kiểm TRƯỚC mọi luật từ chối)
@@ -348,7 +404,7 @@ _HOI_SK_NGUOI = re.compile(
 
 def cap_cuu(raw: str) -> bool:
     cd, kd, co_dau = _hai_ban(raw)
-    return any(_khop(k, c, cd, kd, co_dau) for k, c in _CAP_CUU)
+    return any(_khop(k, c, cd, kd, co_dau) for k, c in _CAP_CUU) or cap_cuu_en(raw)
 
 
 def hoi_benh(raw: str) -> bool:
@@ -359,7 +415,8 @@ def hoi_benh(raw: str) -> bool:
 
 def nguoi_than(raw: str) -> bool:
     """Câu nói về sức khoẻ của người thân / người khác (người đó đứng trước chữ sức khoẻ, bệnh, bộ phận…)."""
-    return bool(_NGUOI_THAN.search(_hai_ban(raw)[1]))
+    kd = _hai_ban(raw)[1]
+    return bool(_NGUOI_THAN.search(kd)) or bool(_EN_NGUOI_THAN.search(kd))
 
 
 def tu_choi(raw: str) -> str | None:
@@ -373,7 +430,7 @@ def tu_choi(raw: str) -> str | None:
             return loai
     if hoi_benh(raw) or _HOI_SK_NGUOI.search(kd):
         return "suc_khoe_the_chat"
-    return None
+    return tu_choi_en(raw)
 
 
 # ------------------------------------------------------------------ SK-1: câu từ chối thuộc nhóm sức khoẻ

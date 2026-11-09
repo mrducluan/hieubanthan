@@ -37,9 +37,15 @@ test("có hồ sơ: thẻ khớp số engine, có câu tự soi, ngày mai, chu�
   await expect(page.getByTestId("chuoi-ngay")).toContainText("Ngày đầu tiên");
 });
 
-test("API từ chối đầu vào lạ / ngày không tồn tại", async ({ request }) => {
+test("API từ chối đầu vào lạ / ngày không tồn tại; nhận ngày hôm nay theo múi giờ máy người dùng (QTE-2)", async ({ request }) => {
   expect((await request.post("/api/thanso/hom-nay", { data: { ngay: 17, thang: 5, nam: 1990, ngay_xem: "2020-01-01" } })).status()).toBe(422);
+  expect((await request.post("/api/thanso/hom-nay", { data: { ngay: 17, thang: 5, nam: 1990, la: 1 } })).status()).toBe(422);
   expect((await request.post("/api/thanso/hom-nay", { data: { ngay: 31, thang: 2, nam: 1990 } })).status()).toBe(422);
+  // người ở múi giờ đi trước / đi sau Việt Nam: "hôm nay" của họ có thể là ngày mai / hôm qua theo UTC → vẫn nhận
+  const mai = new Date(Date.now() + 86_400_000).toISOString().slice(0, 10);
+  const r = await request.post("/api/thanso/hom-nay", { data: { ngay: 17, thang: 5, nam: 1990, ngay_xem: mai } });
+  expect(r.status()).toBe(200);
+  expect((await r.json()).ngay_xem).toBe(mai);
 });
 
 test("Bản thân có lối vào Hôm nay", async ({ page }) => {

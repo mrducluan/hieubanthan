@@ -13,9 +13,8 @@ Trang thuộc chuyên gia tự viết (loại "so") → mục bổ sung gắn `b
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 THU_MUC = Path(__file__).resolve().parent / "data"
 LOAI = ("thap_than", "nhat_chu", "nam_ca_nhan", "no_nghiep", "tinh_yeu", "nghe", "so", "so_kep", "cap_so", "hoa_cung",
@@ -24,10 +23,10 @@ LOAI = ("thap_than", "nhat_chu", "nam_ca_nhan", "no_nghiep", "tinh_yeu", "nghe",
 LOAI_TAC_GIA = ("so",)
 
 
-@lru_cache(maxsize=None)
+@nap.nho
 def doc(loai: str) -> dict | None:
     p = THU_MUC / f"bo_sung_{loai}.json"
-    return json.loads(p.read_text("utf-8")) if p.exists() else None
+    return nap.doc(p.name) if p.exists() else None
 
 
 def _nguon(td: dict) -> str:

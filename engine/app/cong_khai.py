@@ -17,6 +17,8 @@ import re
 
 from fastapi.responses import JSONResponse
 
+from app import ngon_ngu
+
 _TS = "Thần số học Pythagoras — Hiểu Bản Thân biên soạn từ các sách thần số phổ biến"
 _TUVI_KHUNG = ("An sao theo khung Tử Vi Đẩu Số; chính tinh và tứ hoá đã đối chiếu nhiều nguồn, "
                "một số phụ tinh lối Việt còn khác nhau giữa các sách.")
@@ -98,7 +100,25 @@ QUY_TAC: list[tuple[re.Pattern[str], str]] = [(re.compile(m), t) for m, t in [
 ]
 
 
+# QTE: bản tiếng Anh — cùng quy tắc BM-1 nhưng chữ thay là tiếng Anh; chạy TRƯỚC bảng tiếng Việt (bảng Việt vẫn chạy sau
+# để cụm nội bộ còn sót — tên thư viện, nhãn nháp — không lọt).
+QUY_TAC_EN: list[tuple[re.Pattern[str], str]] = [(re.compile(m), t) for m, t in [
+    (r"Reference compilation \(editorial draft, 2026\) following the Balliett[–-]Jordan tradition and common numerology books",
+     "Pythagorean numerology — compiled by the editorial team from common numerology books"),
+    (r"(?:the )?Balliett ?[–→-] ?Jordan line of modern Pythagorean numerology \(USA 1905[–-]1965\)", "modern Pythagorean numerology"),
+    (r"(?:the )?Balliett ?[–→-] ?Jordan line \(modern Pythagorean numerology, USA 1905[–-]1965\)", "modern Pythagorean numerology"),
+    (r"(?:the )?Balliett ?[–→-] ?Jordan line", "modern Pythagorean numerology"),
+    (r"(?:the )?Balliett ?[–→-] ?Jordan tradition", "modern Pythagorean numerology"),
+    (r"Balliett ?[–→-] ?Jordan", "modern Pythagorean numerology"),
+    (r"Pythagorean \(Vietnamese edition, compiled by the project owner\)", "Pythagorean numerology"),
+    (r"Modern Pythagorean numerology, United States 1905-1965 \(L\. Dow Balliett, Juno Jordan\)\.", "Modern Pythagorean numerology."),
+]]
+
+
 def loc(van_ban: str) -> str:
+    if not ngon_ngu.la_viet():
+        for mau, thay in QUY_TAC_EN:
+            van_ban = mau.sub(thay, van_ban)
     for mau, thay in QUY_TAC:
         van_ban = mau.sub(thay, van_ban)
     return van_ban

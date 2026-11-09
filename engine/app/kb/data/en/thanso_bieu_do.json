@@ -1,0 +1,156 @@
+{
+ "_trang_thai": "bien_tap",
+ "o_so": {
+  "1": {
+   "y_nghia": "Self-expression, saying what you think.",
+   "thieu": "May find it hard to put feelings into words; others have to guess.",
+   "mot": "Moderate expression; sometimes hard to voice deeper things.",
+   "hai": "Balanced expression; can speak both reason and feeling.",
+   "ba_tro_len": "Talks a lot; may dominate, or withdraw when not heard; worth practising listening."
+  },
+  "2": {
+   "y_nghia": "Intuition, sensitivity to other people's feelings.",
+   "thieu": "May unintentionally overlook the feelings of people around you.",
+   "mot": "Moderately sensitive; can read the room.",
+   "hai": "Good intuition; tends to sense what others are thinking.",
+   "ba_tro_len": "Very sensitive; easily hurt, easily swept up in other people's emotions."
+  },
+  "3": {
+   "y_nghia": "Thinking, memory, imagination.",
+   "thieu": "May forget short-term tasks; taking notes helps.",
+   "mot": "Thinks well, enjoys learning.",
+   "hai": "Quick thinker, full of ideas, sometimes far from reality.",
+   "ba_tro_len": "Lives a lot inside the head; prone to overthinking."
+  },
+  "4": {
+   "y_nghia": "Practicality, order, working with the hands.",
+   "thieu": "May lack patience for detail and organising.",
+   "mot": "Practical-minded, gets things done neatly.",
+   "hai": "Very practical, good at organising, can be rigid.",
+   "ba_tro_len": "Heavy on material things and rules; finds it hard to be flexible."
+  },
+  "5": {
+   "y_nghia": "Emotion, freedom, drive (the centre cell).",
+   "thieu": "May lack motivation and find it hard to show affection; worth finding what excites you.",
+   "mot": "Emotionally balanced, motivated.",
+   "hai": "Lots of energy, forceful, sometimes impulsive.",
+   "ba_tro_len": "Strong emotions, quick temper; needs an outlet for all that energy."
+  },
+  "6": {
+   "y_nghia": "Creativity, responsibility for family, the home.",
+   "thieu": "May feel little attachment to home, or not yet have found a place to belong.",
+   "mot": "Loves family, has a creative streak.",
+   "hai": "Cares a great deal for family; prone to worry.",
+   "ba_tro_len": "Prone to anxiety; may control loved ones out of worry."
+  },
+  "7": {
+   "y_nghia": "Learning through experience, including loss.",
+   "thieu": "May repeat old lessons because they have not yet sunk in.",
+   "mot": "Learns from their own experience.",
+   "hai": "Goes through many ups and downs and grows through them.",
+   "ba_tro_len": "Life brings many hard lessons; worth taking good care of your inner life."
+  },
+  "8": {
+   "y_nghia": "Independence, finesse in handling things.",
+   "thieu": "May lack patience for detail; needs someone to help.",
+   "mot": "Thorough, takes responsibility for their own work.",
+   "hai": "Refined, independent, likes to do things themselves.",
+   "ba_tro_len": "Prone to perfectionism; uncomfortable when things do not go their way."
+  },
+  "9": {
+   "y_nghia": "Ideals, ambition, responsibility to the community.",
+   "thieu": "(Rare — anyone born in the 1900s always has a 9.) May lack outward-looking motivation.",
+   "mot": "Has ideals, wants to do something useful.",
+   "hai": "Clear ambition; tends to set high standards for others.",
+   "ba_tro_len": "Very high ideals; prone to criticising, hard to satisfy."
+  }
+ },
+ "mui_ten_du": {
+  "1-2-3": {
+   "ten": "Arrow of Planning",
+   "y_nghia": "Tends to plan and organise before acting.",
+   "mat_toi": "May dislike surprises and feel irritated when others do not follow the plan."
+  },
+  "4-5-6": {
+   "ten": "Arrow of Willpower",
+   "y_nghia": "Described as strong-willed: once decided, it gets done.",
+   "mat_toi": "May be stubborn and find it hard to take advice."
+  },
+  "7-8-9": {
+   "ten": "Arrow of Activity",
+   "y_nghia": "Likes to get on with things, learns by doing.",
+   "mat_toi": "May get restless when made to wait; acts first, thinks later."
+  },
+  "3-6-9": {
+   "ten": "Arrow of Intellect",
+   "y_nghia": "Thinks well, good memory, enjoys learning.",
+   "mat_toi": "May look down on people who are slow to understand; lives a lot inside the head."
+  },
+  "2-5-8": {
+   "ten": "Arrow of Emotion",
+   "y_nghia": "Emotionally balanced, understands people, easily wins goodwill.",
+   "mat_toi": "May carry other people's emotions."
+  },
+  "1-4-7": {
+   "ten": "Arrow of Practicality",
+   "y_nghia": "Handy, practical, good at concrete tasks.",
+   "mat_toi": "May place too much weight on material things and shy away from the abstract."
+  },
+  "1-5-9": {
+   "ten": "Arrow of Determination",
+   "y_nghia": "Described as steadfast, pursuing goals to the end.",
+   "mat_toi": "May be obstinate and ignore the signs that it is time to stop."
+  },
+  "3-5-7": {
+   "ten": "Arrow of Spirituality",
+   "y_nghia": "Perceptive, with inner depth, often searching for meaning.",
+   "mat_toi": "May be vague and detached from reality."
+  }
+ },
+ "mui_ten_trong": {
+  "1-2-3": {
+   "ten": "Empty arrow of Planning",
+   "y_nghia": "Tends to act on impulse and plan little.",
+   "goi_y": "Try planning one week and see what changes."
+  },
+  "4-5-6": {
+   "ten": "Empty arrow of Willpower (Frustration)",
+   "y_nghia": "Easily disappointed when things do not go as hoped; frustration builds up inside.",
+   "goi_y": "Find a healthy way to let feelings out; set smaller expectations for each step."
+  },
+  "7-8-9": {
+   "ten": "Empty arrow of Activity (Passivity)",
+   "y_nghia": "Tends to hesitate before starting, waiting for perfect conditions.",
+   "goi_y": "Start with the smallest thing you can do right now in 5 minutes."
+  },
+  "3-6-9": {
+   "ten": "Empty arrow of Intellect (Short-term memory)",
+   "y_nghia": "Tends to forget small tasks; needs a system for remembering.",
+   "goi_y": "Use lists and reminders; learn with spaced repetition."
+  },
+  "2-5-8": {
+   "ten": "Empty arrow of Emotion (Sensitivity)",
+   "y_nghia": "Tends to be sensitive and easily hurt, finding it hard to express feelings.",
+   "goi_y": "Practise naming your feelings; share them with someone you trust."
+  },
+  "1-4-7": {
+   "ten": "Empty arrow of Practicality",
+   "y_nghia": "Tends to feel awkward with hands-on, practical tasks.",
+   "goi_y": "Learn one small practical skill each quarter (cooking, repairs)."
+  },
+  "1-5-9": {
+   "ten": "Empty arrow of Determination (Procrastination)",
+   "y_nghia": "Tends to procrastinate; finds it hard to start and hard to follow through.",
+   "goi_y": "Break tasks into small pieces and set deadlines that someone else knows about."
+  },
+  "3-5-7": {
+   "ten": "Empty arrow of Spirituality (Scepticism)",
+   "y_nghia": "Tends to be sceptical, needing proof before believing.",
+   "goi_y": "Keep a healthy scepticism, but try trusting one small thing and watch what happens."
+  }
+ },
+ "source": {
+  "ten": "Reference compilation (editorial draft, 2026) following the Balliett–Jordan tradition and common numerology books",
+  "luu_y": "Draft shown by decision of the project owner (2026-09-30); a status column allows gradual review. A cultural reference, not a forecast."
+ }
+}

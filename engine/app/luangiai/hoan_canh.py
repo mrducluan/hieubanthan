@@ -18,11 +18,10 @@ from __future__ import annotations
 
 import datetime as dt
 import itertools
-import json
-from functools import lru_cache
 from pathlib import Path
 
 from app.luangiai import doi_song_khuon as kh
+from app.kb import nap
 
 CHUONG = ("su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "suc_khoe")
 CHUONG_THEO_TINH_TRANG = ("tinh_cam", "gia_dinh")
@@ -35,9 +34,9 @@ BAC_SI = "Đây là lời nhắc chăm sóc, không thay lời bác sĩ."
 _KB = Path(__file__).resolve().parents[1] / "kb" / "data" / "hoan_canh_kb.json"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _kb() -> dict:
-    return json.loads(_KB.read_text(encoding="utf-8"))
+    return nap.doc(_KB.name)
 
 
 def meta() -> dict:

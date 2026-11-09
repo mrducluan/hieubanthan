@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import re
 
+from app import ngon_ngu
 from app.kb import tarot_kb as kb
 
 Y_DINH = ("nguoi_khac", "lua_chon", "thoi_diem", "cach_lam", "ly_do", "quyet_dinh", "ket_qua", "hieu_minh", "tong_quat")
@@ -117,7 +118,7 @@ _RX_LV = {k: re.compile(rf"(?<![a-z])({v})(?![a-z])") for k, v in _LV_TU.items()
 def linh_vuc(t: str) -> str | None:
     t = re.sub(r"\b(bai hoc|moi viec|moi thu|co the nao)\b", " ", t)
     tot, diem = None, (0, 0)
-    for lv, r in _RX_LV.items():
+    for lv, r in (_RX_LV_EN if _la_tieng_anh() else _RX_LV).items():
         ds = [m for m in r.finditer(t)]
         if ds:
             d = (len(ds), -ds[0].start())
@@ -140,6 +141,72 @@ GOI_Y_TRAI_BAI = {"lua_chon": "hai_lua_chon", "quyet_dinh": "hai_lua_chon", "cac
                   "ket_qua": "ba_la_thoi_gian", "thoi_diem": "khi_nao", "hieu_minh": "mot_la", "nguoi_khac": "ba_la_loi_khuyen",
                   "tong_quat": "ba_la_loi_khuyen"}
 
+# ------------------------------------------------------------------ QTE-2: câu hỏi TIẾNG ANH (bản /en) — cùng danh mục ý định / việc / lĩnh vực
+_HE = r"(he|she|they|him|her|them|my (ex|partner|boyfriend|girlfriend|husband|wife|boss|crush|friend|coworker|colleague|manager|client|landlord|mother|father|mom|dad|parents|family|team))"
+_MAU_EN: dict[str, list[str]] = {
+    "thoi_diem": [r"\b(when|how long|how soon|by when|what (month|year|time|day)|timing|timeline|how many (months|weeks|days|years))\b"],
+    "ly_do": [r"\b(why|what is the reason|what s the reason|reason)\b"],
+    "cach_lam": [r"\bhow (do|can|should|could|might|would) (i|we)\b", r"\bhow to\b", r"\bwhat (should|can|could|do) (i|we) do\b", r"\b(best|right) way to\b", r"\bwhere (do|should) i (start|begin)\b"],
+    "nguoi_khac_dau": [rf"^ (does|do|is|will|has|did|would|can|could) {_HE}\b"],
+    "lua_chon": [r"\b(should|do) (i|we) .{1,60}\bor\b", r"\b(choose|choosing|pick|decide|deciding|torn) between\b", r"\bwhich (one|option|job|path|offer|city|choice|way)\b", r"\b(option|plan) (a|1|one)\b.*\b(option|plan) (b|2|two)\b", r"\bstay or (go|leave|move)\b", r"\b\w+ (or|vs|versus) \w+\?"],
+    "quyet_dinh": [r"\bshould (i|we)\b", r"\bis it (a good idea|wise|smart|right|time|worth it|the right time) to\b", r"\bis (now|this) (a good|the right) time\b", r"\bdo i (take|accept|go|move|quit|leave|say yes)\b", r"\bgood idea\b"],
+    "nguoi_khac": [rf"\b{_HE} .{{0,20}}\b(love|loves|like|likes|miss|misses|think|thinks|feel|feels|want|wants|cheat|cheating|lying|lie|come back|coming back|care|cares|interested|serious|faithful|forgive|regret|trust)\b",
+                   rf"\bhow (does|do) {_HE} (feel|think)\b", rf"\bwhat (does|do) {_HE} (think|feel|want)\b", r"\bdoes (he|she) (still )?(love|like|miss|want) me\b"],
+    "hieu_minh": [r"\b(what (do|am) i (need|really want|missing|holding on to|afraid of|not seeing)|my (strength|strengths|weakness|weaknesses|blind spot|purpose|lesson|energy|pattern)|who am i|what (blocks|is blocking|holds|is holding) me|about myself|what (do|should) i (learn|know) about (myself|me)|what is my)\b",
+                  r"\bwhat (card|energy|message) .{0,20}(for me|today|right now)\b", r"\bwhat (do|should) i (focus on|let go of)\b"],
+    "ket_qua": [r"\bwill (i|it|this|my|the|we|things)\b", r"\b(what will happen|how will .{1,40} (go|turn out|end|work out)|outcome|chances|likely|succeed|successful)\b", r"\bam i going to\b", r"\bcan i (get|win|pass|succeed|make it|afford)\b", r"\b(is|are) .{1,40} going to (work|happen|last)\b", r"\bwhat (does|is) the future\b", r"\b(this|next) (week|month|year)\b"],
+}
+_MAU_EN["co_nen"] = [r"\bshould (i|we)\b"]
+_RX_EN = {k: [re.compile(p) for p in v] for k, v in _MAU_EN.items()}
+VIEC_EN: list[tuple[str, str, str, list[str]]] = [
+    ("doi_viec", "changing jobs", "cong_viec", [r"(change|changing|switch|switching|new) (jobs?|careers?|company|companies|employer)", r"job (change|hunt|search)", r"find(ing)? (a )?(new )?job", r"career change"]),
+    ("nghi_viec", "leaving your current job", "cong_viec", [r"quit(ting)? (my )?job", r"resign(ing|ation)?", r"leave (my )?(job|company)", r"hand in my notice", r"walk away from (my )?job"]),
+    ("nhan_viec", "accepting a job offer", "cong_viec", [r"(accept|take|taking|accepting) (the|this|a) (job )?offer", r"job offer", r"offer letter", r"get the job", r"(get|got) hired"]),
+    ("phong_van", "an interview or application", "cong_viec", [r"interview", r"apply(ing)? for", r"application", r"(send|sent|submit) my (cv|resume)"]),
+    ("thang_chuc", "a promotion or raise", "cong_viec", [r"promotion", r"promoted", r"(pay )?raise", r"salary (increase|bump|negotiation)", r"ask for more money"]),
+    ("khoi_nghiep", "starting your own business", "cong_viec", [r"start(ing)? (my own |a )?(business|company|shop|startup|side hustle)", r"go(ing)? freelance", r"self employed", r"my own business", r"open(ing)? a (shop|cafe|store|studio)"]),
+    ("hop_tac", "a partnership", "cong_viec", [r"partner(ship)? with", r"business partner", r"co founder", r"collaborat(e|ion|ing) with", r"joint venture", r"team up with"]),
+    ("du_an", "a project", "cong_viec", [r"project", r"contract", r"deal", r"launch", r"proposal", r"pitch"]),
+    ("hoc_thi", "studies or an exam", "cong_viec", [r"exam", r"test(s)?\b(?! result)", r"study(ing)?", r"degree", r"master s", r"phd", r"course", r"certification", r"university|college|school", r"scholarship", r"study abroad"]),
+    ("dau_tu", "an investment", "tien_bac", [r"invest(ing|ment)?", r"stocks?", r"shares", r"crypto", r"bitcoin", r"real estate", r"property investment", r"portfolio"]),
+    ("vay_no", "a loan or debt", "tien_bac", [r"loan", r"debt", r"mortgage", r"borrow(ing)?", r"lend(ing)?", r"credit card", r"pay off"]),
+    ("mua_ban", "buying or selling something big", "tien_bac", [r"buy(ing)? (a )?(house|home|car|apartment|flat|condo)", r"sell(ing)? (my |the )?(house|home|car|apartment|flat)", r"put (an )?offer on", r"down payment"]),
+    ("tiet_kiem", "saving and keeping money", "tien_bac", [r"sav(e|ing|ings)", r"budget(ing)?", r"spending", r"emergency fund", r"keep my money"]),
+    ("to_tinh", "telling someone how you feel", "tinh_cam", [r"confess", r"tell (him|her|them) (how i feel|i love|i like)", r"ask (him|her|them) out", r"make a move", r"express my feelings"]),
+    ("quay_lai", "getting back with an ex", "tinh_cam", [r"get(ting)? back (together|with)", r"my ex", r"reconcil(e|iation)", r"second chance", r"rekindle"]),
+    ("chia_tay", "ending a relationship", "tinh_cam", [r"break(ing)? up", r"breakup", r"end (this|the|my) relationship", r"leave (him|her|them)", r"divorce", r"separate", r"let (him|her|them) go", r"walk away from (him|her)"]),
+    ("ket_hon", "moving toward marriage", "tinh_cam", [r"marr(y|iage|ied)", r"propos(e|al)", r"engag(ed|ement)", r"wedding", r"move in together"]),
+    ("hen_ho", "starting a relationship", "tinh_cam", [r"dat(e|ing)", r"find(ing)? (love|someone|a partner)", r"meet someone", r"new relationship", r"single", r"fall(ing)? in love", r"soulmate"]),
+    ("gia_dinh", "family matters", "tinh_cam", [r"family", r"my (mother|father|mom|dad|parents|son|daughter|kids?|children|brother|sister|in laws)", r"forgive", r"having (a )?(baby|kids|children)", r"get(ting)? pregnant", r"parenting"]),
+    ("chuyen_nha", "moving house", "tien_bac", [r"mov(e|ing) (house|out|to a new (place|home|apartment))", r"relocat(e|ing|ion)", r"new (apartment|flat|place to live)", r"rent(ing)? (a )?(place|apartment|flat)"]),
+    ("di_xa", "moving far away or travelling", None, [r"visa", r"travel(ling|ing)?", r"trip", r"abroad", r"emigrat(e|ing|ion)", r"immigrat(e|ing|ion)", r"move (to|back to) (another|a different|a new) (country|city|state)", r"mov(e|ing) (overseas|abroad|to [a-z]+)", r"go(ing)? back home"]),
+    ("suc_khoe", "your energy and health", "suc_khoe", [r"health", r"energy", r"burn ?out", r"exhausted", r"tired", r"sleep", r"insomnia", r"stress(ed)?", r"anxiety", r"anxious", r"work ?out", r"exercise", r"diet", r"rest", r"well ?being"]),
+]
+_RX_VIEC_EN = [(ma, nhan, lv, [re.compile(rf"(?<![a-z]){p}(?![a-z])") for p in ps]) for ma, nhan, lv, ps in VIEC_EN]
+_LV_TU_EN = {
+    "tinh_cam": r"love|relationship|romance|romantic|partner|boyfriend|girlfriend|husband|wife|ex|crush|dating|date|marriage|married|wedding|divorce|breakup|break up|soulmate|single|family|parents|kids|children|friend|friendship|trust|cheating|affair|heart",
+    "cong_viec": r"job|work|career|boss|coworker|colleague|company|business|startup|promotion|interview|offer|project|client|contract|study|studies|exam|degree|school|university|freelance|salary|team|manager|launch",
+    "tien_bac": r"money|finances?|financial|invest(ment|ing)?|stocks?|crypto|debt|loan|mortgage|savings?|budget|house|home|apartment|rent|buy|sell|income|pay|afford|wealth|rich|cash|property|car",
+    "suc_khoe": r"health|healthy|energy|tired|exhausted|burnout|sleep|insomnia|stress|stressed|anxiety|anxious|depressed|mood|body|exercise|gym|diet|weight|rest|doctor|sick|illness|wellbeing|mental",
+}
+_RX_LV_EN = {k: re.compile(rf"(?<![a-z])({v})(?![a-z])") for k, v in _LV_TU_EN.items()}
+LUA_CHON_NHAN_EN: list[tuple[str, str, str, str]] = [
+    (r"stay|keep|remain|current|old job|same", r"leave|go|move|quit|change|switch|new job|new company", "staying / keeping things as they are", "changing / moving on to something new"),
+    (r"employ(ed|ee|ment)|my job|corporate|work for", r"business|freelance|self employed|my own|start up|startup", "staying employed", "working for myself"),
+    (r"study|studies|school|degree|master|phd|university", r"work|job|career|money", "continuing to study", "going to work"),
+    (r"stay|keep|remain|work on it|try again", r"break up|leave|end it|let go|move on|divorce", "staying in the relationship", "ending it"),
+    (r"buy|purchase", r"wait|rent|hold off|later", "buying now", "waiting"),
+    (r"stay (home|here|put)|my (home )?country|home", r"abroad|overseas|another (country|city)|move away|emigrate", "staying where you are", "going far away"),
+]
+
+
+def _la_tieng_anh() -> bool:
+    return ngon_ngu.hien_tai() == "en"
+
+
+def _rx_y_dinh() -> dict:
+    return _RX_EN if _la_tieng_anh() else _RX
+
 
 def _chuan(cau: str) -> str:
     from app.luangiai.hoi import chuan_hoa_cau  # noqa: PLC0415
@@ -155,14 +222,21 @@ def y_dinh_ro(t: str) -> tuple[str, bool]:
     """(ý định, khớp mẫu rõ hay chỉ đoán theo dạng câu)."""
     if not t.strip():
         return "tong_quat", False
+    RX = _rx_y_dinh()
     for ma in _THU_TU:
-        if any(r.search(t) for r in _RX[ma]):
+        if any(r.search(t) for r in RX[ma]):
             if ma == "co_nen":
                 # "có nên A hay B" vẫn là hai lựa chọn
-                return ("lua_chon" if any(r.search(t) for r in _RX["lua_chon"]) else "quyet_dinh"), True
+                return ("lua_chon" if any(r.search(t) for r in RX["lua_chon"]) else "quyet_dinh"), True
             return ("nguoi_khac" if ma == "nguoi_khac_dau" else ma), True
     # Không khớp mẫu nào: câu có dạng hỏi thì vẫn đọc như câu hỏi (không rơi về "chung chung").
     tu = t.split()
+    if _la_tieng_anh():
+        if re.search(r"^ (is|are|am|do|does|did|can|could|would|has|have) ", t) or t.strip().endswith("?"):
+            return "ket_qua", False
+        if re.search(r"\b(i|me|my|myself)\b", t) and re.search(r"\b(what|which|where|who)\b", t):
+            return "hieu_minh", False
+        return ("ket_qua", False) if len(tu) >= 5 else ("tong_quat", False)
     if re.search(r"\b(khong|ko|k|chua|chang|nhi|ha)\s*(a|vay|nhi|day)?\s*$", t):
         return "ket_qua", False
     if re.search(rf"\b{_TOI}\b", t) and re.search(r"\b(gi|nao|dau|sao|ai)\b", t):
@@ -175,7 +249,7 @@ def y_dinh_ro(t: str) -> tuple[str, bool]:
 def viec(t: str) -> tuple[str | None, str | None, str | None]:
     """(mã việc, nhãn, lĩnh vực) — việc khớp mẫu dài nhất."""
     tot, dai = (None, None, None), 0
-    for ma, nhan, lv, rxs in _RX_VIEC:
+    for ma, nhan, lv, rxs in (_RX_VIEC_EN if _la_tieng_anh() else _RX_VIEC):
         for r in rxs:
             m = r.search(t)
             if m and len(m.group(0)) > dai:
@@ -185,11 +259,11 @@ def viec(t: str) -> tuple[str | None, str | None, str | None]:
 
 def lua_chon(t: str) -> list[str] | None:
     """Nhãn hai phương án [đường A, đường B] nếu câu khớp một cặp trong danh mục (A = giữ như cũ, B = thay đổi)."""
-    m = re.search(r"(.{0,60})\b(?:hay|hoac|voi|va)\b(.{0,60})", t)
+    m = re.search(r"(.{0,60})\b(?:or|vs|versus)\b(.{0,60})" if _la_tieng_anh() else r"(.{0,60})\b(?:hay|hoac|voi|va)\b(.{0,60})", t)
     if not m:
         return None
     a, b = m.group(1), m.group(2)
-    for pa, pb, na, nb in LUA_CHON_NHAN:
+    for pa, pb, na, nb in (LUA_CHON_NHAN_EN if _la_tieng_anh() else LUA_CHON_NHAN):
         if re.search(rf"\b({pa})\b", a) and re.search(rf"\b({pb})\b", b):
             return [na, nb]
         if re.search(rf"\b({pb})\b", a) and re.search(rf"\b({pa})\b", b):

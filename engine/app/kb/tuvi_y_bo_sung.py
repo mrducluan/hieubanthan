@@ -5,16 +5,15 @@
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 TEP = Path(__file__).parent / "data" / "tuvi_y_bo_sung.json"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _kb() -> dict:
-    return json.loads(TEP.read_text(encoding="utf-8"))
+    return nap.doc(TEP.name)
 
 
 def tat_ca() -> list[dict]:

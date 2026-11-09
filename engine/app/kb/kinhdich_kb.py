@@ -5,16 +5,15 @@ Nguồn: app/kb/data/kinhdich_kb.json (nháp AI, `can_doi_chieu`). Không có �
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "kinhdich_kb.json"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
-    return json.loads(_F.read_text(encoding="utf-8"))
+    return nap.doc(_F.name)
 
 
 def meta() -> dict:
@@ -62,9 +61,9 @@ def luu_y(ma: str) -> str | None:
 _F_HAO = Path(__file__).parent / "data" / "kinhdich_hao.json"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _h() -> dict:
-    return json.loads(_F_HAO.read_text(encoding="utf-8"))
+    return nap.doc(_F_HAO.name)
 
 
 def _meta_hao() -> dict:

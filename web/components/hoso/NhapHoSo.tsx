@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { GIO_DAI_DIEN_KHONG_BIET, luuHoSo, moTaAm, ngayHopLe, NUOC_NGOAI, type HoSo } from "@/lib/hoso";
 import { postJson } from "@/lib/goi-api";
 import { useDanhSachTinh } from "@/lib/dia-ly";
+import { cacVungIana, nhanUtc, useDanhSachNuoc, vungMay, type KetQuaMuiGio } from "@/lib/mui-gio";
 import { ghi, layMaMoi, quenMaMoi } from "@/lib/do-luong";
 import { ghiDongY, thuHoiDongY, useDongYDuLieu } from "@/lib/dong-y-du-lieu";
 import { cn } from "@/lib/utils";
@@ -36,6 +37,9 @@ interface KetQuaDoi {
   /** TP-LICH: cách đọc âm lịch Việt Nam của ngày dương đó (luôn có, kể cả khi nhập theo lịch Trung Quốc). */
   am_viet?: { ngay: number; thang: number; nam: number; nhuan: boolean };
 }
+
+/** QTE-2: giá trị ô "Nước" khi thành phố không có trong danh sách → chọn mã vùng IANA. */
+const KHAC = "khac";
 
 // EN-6 BI-3: múi giờ chuẩn hay gặp (giờ mùa hè đã có ô riêng) — giá trị là số giờ lệch UTC.
 const MUI_GIO: [string, string][] = [
@@ -90,6 +94,10 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const [noiSinh, setNoiSinh] = useState<string>(macDinh?.noi_sinh ?? "");
   const [gioMuaHe, setGioMuaHe] = useState(Boolean(macDinh?.gio_mua_he));
   const [utcNoiSinh, setUtcNoiSinh] = useState(typeof macDinh?.utc_noi_sinh === "number" ? String(macDinh.utc_noi_sinh) : "");
+  // QTE-2 giai đoạn 0: nước + thành phố nơi sinh (mã thành phố "us-san_jose" hoặc mã vùng IANA khi chọn "Khác").
+  const [muiGio, setMuiGio] = useState<string>(macDinh?.mui_gio ?? "");
+  const [nuoc, setNuoc] = useState<string>(macDinh?.mui_gio ? (macDinh.mui_gio.includes("/") ? KHAC : macDinh.mui_gio.slice(0, 2)) : "");
+  const [kqMuiGio, setKqMuiGio] = useState<KetQuaMuiGio | null>(null);
   const [vung, setVung] = useState<string>(macDinh?.vung ?? "");
   // EN-2 mục 5: tình trạng tự chọn (chỉ trên máy). Giữ giá trị cũ cả khi ô không hiện ở trang đang mở.
   const [tinhTrang, setTinhTrang] = useState<string>(macDinh?.tinh_trang ?? "");
@@ -101,6 +109,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const thangRef = useRef<HTMLInputElement>(null);
   const namRef = useRef<HTMLInputElement>(null);
   const { tinh, loi: loiTinh, thuLai: taiLaiTinh } = useDanhSachTinh();
+  const { nuoc: dsNuoc, loi: loiNuoc, thuLai: taiLaiNuoc } = useDanhSachNuoc(noiSinh === NUOC_NGOAI);
 
   const d = Number(ngay), m = Number(thang), y = Number(nam);
   const duSo = d > 0 && m > 0 && nam.length === 4 && y >= 1900;
@@ -124,6 +133,23 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
     }, 300);
     return () => { huy = true; clearTimeout(t); };
   }, [khoaDoi, coDongY]);
+
+  // Dòng xác nhận múi giờ lúc sinh (engine tra tzdata) — chỉ sau khi đã đồng ý gửi ngày giờ sinh đi tính; không lưu gì.
+  const isoChoMuiGio = lich === "duong" && coTheDoi ? `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}` : doi?.duong
+    ? `${doi.duong.nam}-${String(doi.duong.thang).padStart(2, "0")}-${String(doi.duong.ngay).padStart(2, "0")}` : null;
+  const khoaMuiGio = noiSinh === NUOC_NGOAI && muiGio && isoChoMuiGio && /^\d{2}:\d{2}$/.test(gio) && coDongY
+    ? JSON.stringify({ mui_gio: muiGio, ngay: isoChoMuiGio, gio }) : null;
+  useEffect(() => {
+    setKqMuiGio(null);
+    if (!khoaMuiGio) return;
+    let huy = false;
+    const t = setTimeout(() => {
+      postJson<KetQuaMuiGio>("/api/dia-ly/mui-gio/tai", JSON.parse(khoaMuiGio))
+        .then((r) => { if (!huy) setKqMuiGio(r); })
+        .catch(() => { /* chỉ là dòng xác nhận; engine tự tính lại khi lập lá số */ });
+    }, 300);
+    return () => { huy = true; clearTimeout(t); };
+  }, [khoaMuiGio]);
 
   const duong = lich === "duong" ? (coTheDoi ? { ngay: d, thang: m, nam: y } : null) : doi?.duong ?? null;
   const isoDuong = duong ? `${duong.nam}-${String(duong.thang).padStart(2, "0")}-${String(duong.ngay).padStart(2, "0")}` : null;
@@ -167,6 +193,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
       ...(noiSinh ? { noi_sinh: noiSinh } : {}),
       ...(nuocNgoai && gioMuaHe ? { gio_mua_he: true } : {}),
       ...(nuocNgoai && utcNoiSinh !== "" ? { utc_noi_sinh: Number(utcNoiSinh) } : {}),
+      ...(nuocNgoai && muiGio ? { mui_gio: muiGio } : {}),
       ...(canVung && (vung === "north" || vung === "south") ? { vung } : {}),
       ...((tinhTrang === "doc_than" || tinhTrang === "co_doi") && du18(dg.nam, dg.thang, dg.ngay) ? { tinh_trang: tinhTrang } : {}),
       ...(macDinh?.tao_luc ? { tao_luc: macDinh.tao_luc } : {}),
@@ -322,19 +349,66 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
               </div>
             )}
             {noiSinh === NUOC_NGOAI && (
-              <label className="flex items-start gap-2 text-sm text-fg-muted sm:col-span-2">
-                <input type="checkbox" checked={gioMuaHe} onChange={(e) => setGioMuaHe(e.target.checked)} className="mt-0.5 size-4 accent-[rgb(var(--gold))]" />
-                <span>Lúc sinh, nơi đó đang dùng <b className="text-fg">giờ mùa hè</b> (vd Mỹ, châu Âu, Úc thường từ tháng 3–4 đến 10–11). Không chắc thì để trống.</span>
-              </label>
-            )}
-            {noiSinh === NUOC_NGOAI && (
-              <div className="space-y-2 sm:col-span-2">
-                <Label htmlFor="utc-noi-sinh">Múi giờ chuẩn nơi sinh</Label>
-                <Select id="utc-noi-sinh" value={utcNoiSinh} onChange={(e) => setUtcNoiSinh(e.target.value)}>
-                  <option value="">Không rõ</option>
-                  {MUI_GIO.map(([v, ten]) => <option key={v} value={v}>{ten}</option>)}
-                </Select>
-                <p className="text-xs text-fg-faint">Chọn múi giờ chuẩn, giờ mùa hè đã có ô riêng ở trên. Bát tự đổi tháng, đổi năm đúng lúc giao tiết — người sinh sát đầu tháng dương lịch cần múi giờ nơi sinh để tính đúng.</p>
+              <div className="space-y-2 sm:col-span-2" data-testid="noi-sinh-nuoc-ngoai">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="nuoc-sinh">Nước nơi sinh</Label>
+                    <Select id="nuoc-sinh" value={nuoc} onChange={(e) => { setNuoc(e.target.value); setMuiGio(""); }}
+                      disabled={!dsNuoc && !loiNuoc}>
+                      <option value="">{dsNuoc ? "— Chọn nước —" : "Đang tải…"}</option>
+                      {dsNuoc?.map((n) => <option key={n.ma} value={n.ma}>{n.ten}</option>)}
+                      <option value={KHAC}>Nước khác / không thấy thành phố</option>
+                    </Select>
+                    {loiNuoc && <button type="button" onClick={taiLaiNuoc} className="text-xs text-cinnabar underline">{loiNuoc} Thử lại</button>}
+                  </div>
+                  {nuoc && nuoc !== KHAC && (
+                    <div className="space-y-2">
+                      <Label htmlFor="thanh-pho-sinh">Thành phố / vùng</Label>
+                      <Select id="thanh-pho-sinh" value={muiGio} onChange={(e) => setMuiGio(e.target.value)}>
+                        <option value="">— Chọn thành phố —</option>
+                        {dsNuoc?.find((n) => n.ma === nuoc)?.thanh_pho.map((t) => <option key={t.ma} value={t.ma}>{t.ten}</option>)}
+                      </Select>
+                    </div>
+                  )}
+                  {nuoc === KHAC && (
+                    <div className="space-y-2">
+                      <Label htmlFor="vung-iana">Múi giờ nơi sinh</Label>
+                      <Select id="vung-iana" value={muiGio} onChange={(e) => setMuiGio(e.target.value)}>
+                        <option value="">— Chọn múi giờ —</option>
+                        {/* múi giờ của máy đang dùng lên đầu cho dễ chọn — KHÔNG tự điền: nơi sinh có thể khác nơi đang ở */}
+                        {vungMay() && <option value={vungMay()!}>{vungMay()!.replace(/_/g, " ")} (máy bạn đang dùng)</option>}
+                        {cacVungIana().filter((z) => z !== vungMay()).map((z) => <option key={z} value={z}>{z.replace(/_/g, " ")}</option>)}
+                      </Select>
+                    </div>
+                  )}
+                </div>
+                {kqMuiGio && (
+                  <p className="text-xs text-fg-muted" data-testid="xac-nhan-mui-gio">
+                    Lúc sinh nơi đó dùng <b className="text-fg">{nhanUtc(kqMuiGio.utc_chuan)}</b>
+                    {kqMuiGio.gio_mua_he ? ", đang giờ mùa hè (lá số tự trừ 1 giờ)" : ", không giờ mùa hè"}
+                    {kqMuiGio.lam_tron ? " — giờ địa phương lẻ phút, đã làm tròn" : ""}
+                    {kqMuiGio.gio_mo_ho ? " — giờ này rơi đúng lúc đổi giờ, kết quả có thể lệch 1 giờ" : ""}.
+                  </p>
+                )}
+                <p className="text-xs text-fg-faint">
+                  Chọn đúng thành phố là đủ: múi giờ và giờ mùa hè lúc sinh tự tính theo lịch sử nơi đó. Bát tự đổi tháng, đổi năm đúng
+                  lúc giao tiết nên người sinh sát đầu tháng dương lịch cần múi giờ chính xác.
+                </p>
+                <details className="text-sm">
+                  <summary className="cursor-pointer text-xs text-fg-muted underline">Không thấy thành phố? Khai tay múi giờ và giờ mùa hè</summary>
+                  <div className="mt-2 space-y-2">
+                    <label className="flex items-start gap-2 text-sm text-fg-muted">
+                      <input type="checkbox" checked={gioMuaHe} onChange={(e) => setGioMuaHe(e.target.checked)} className="mt-0.5 size-4 accent-[rgb(var(--gold))]" />
+                      <span>Lúc sinh, nơi đó đang dùng <b className="text-fg">giờ mùa hè</b> (vd Mỹ, châu Âu, Úc thường từ tháng 3–4 đến 10–11). Không chắc thì để trống.</span>
+                    </label>
+                    <Label htmlFor="utc-noi-sinh">Múi giờ chuẩn nơi sinh</Label>
+                    <Select id="utc-noi-sinh" value={utcNoiSinh} onChange={(e) => setUtcNoiSinh(e.target.value)}>
+                      <option value="">Không rõ</option>
+                      {MUI_GIO.map(([v, ten]) => <option key={v} value={v}>{ten}</option>)}
+                    </Select>
+                    <p className="text-xs text-fg-faint">Chỉ dùng khi chưa chọn thành phố ở trên (đã chọn thành phố thì hai ô này không được dùng).</p>
+                  </div>
+                </details>
               </div>
             )}
             {canVung && (

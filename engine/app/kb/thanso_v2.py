@@ -7,9 +7,8 @@ Nguyên tắc như store.py: không có mục trong KB → trả None, tầng tr
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _DIR = Path(__file__).parent / "data"
 
@@ -30,9 +29,9 @@ FILES = {
 }
 
 
-@lru_cache(maxsize=None)
+@nap.nho
 def _doc(ten: str) -> dict:
-    return json.loads((_DIR / FILES[ten]).read_text(encoding="utf-8"))
+    return nap.doc(FILES[ten])
 
 
 def _meta(ten: str) -> dict:

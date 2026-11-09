@@ -15,6 +15,7 @@ import hashlib
 import secrets
 
 from app.kb import tarot_kb as kb
+from app.kb.loi import L  # QTE: chỉ cho vài chuỗi HIỂN THỊ (nhịp, lý do lá đại diện); phép tính không đổi
 
 _BO = ("gay", "coc", "kiem", "tien")
 _CAP = ("tieu_dong", "hiep_si", "hoang_hau", "vua")
@@ -215,13 +216,13 @@ def khoang_thoi_gian(ma: str, ngay_xem: dt.date) -> dict:
     if ct.get("loai") == "cung":
         c = kb.cung_hoang_dao()[ct["ma"]]
         a, b, trong = _cua_so(c["tu"], c["den"], ngay_xem)
-        return {"loai": "cung", "cung": ct["ma"], "tu": a, "den": b, "dang_trong": trong, "nhip": "vài tuần tới một tháng", "sau_ngay": (a - ngay_xem).days if not trong else 0}
+        return {"loai": "cung", "cung": ct["ma"], "tu": a, "den": b, "dang_trong": trong, "nhip": L("tarot.nhip.cung", "vài tuần tới một tháng"), "sau_ngay": (a - ngay_xem).days if not trong else 0}
     if ct.get("loai") == "hanh_tinh":
         h = kb.hanh_tinh().get(ct["ma"]) or {}
         return {"loai": "hanh_tinh", "hanh_tinh": ct["ma"], "tu": None, "den": None, "dang_trong": None, "nhip": h.get("nhip", ""), "sau_ngay": None}
     if l["bo"]:
         return {"loai": "bo", "bo": l["bo"], "tu": None, "den": None, "dang_trong": None, "nhip": bo.get("nhip", ""), "sau_ngay": None}
-    return {"loai": "nguyen_to", "tu": None, "den": None, "dang_trong": None, "nhip": "không có nhịp riêng — theo nhịp của các lá bên cạnh", "sau_ngay": None}
+    return {"loai": "nguyen_to", "tu": None, "den": None, "dang_trong": None, "nhip": L("tarot.nhip.khong_rieng", "không có nhịp riêng — theo nhịp của các lá bên cạnh"), "sau_ngay": None}
 
 
 # ------------------------------------------------------------------ nghiêng của câu trả lời
@@ -267,6 +268,6 @@ def dai_dien(tuoi: int | None, gioi_tinh: str | None, ngu_hinh: str | None = Non
         cap = "hoang_hau" if lon else "tieu_dong"
     else:
         cap = ("hoang_hau" if lon else "tieu_dong") if dang != "nhanh_hap_tap" else ("vua" if lon else "hiep_si")
-    ly_do = [dd.get("loi_hinh", {}).get(ngu_hinh or "", "") if ngu_hinh else f"Bộ {kb.bo()[bo_chon]['ten']} do bạn chọn",
+    ly_do = [dd.get("loi_hinh", {}).get(ngu_hinh or "", "") if ngu_hinh else L("tarot.dai_dien.bo_tu_chon", "Bộ {bo} do bạn chọn", bo=kb.bo()[bo_chon]['ten']),
              dd.get("loi_cap", {}).get(cap, "")]
     return {"id": f"{bo_chon}_{cap}", "bo": bo_chon, "cap": cap, "ly_do": " · ".join(x for x in ly_do if x)}

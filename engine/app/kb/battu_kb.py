@@ -4,17 +4,16 @@ mẫu). Nguồn: app/kb/data/battu_kb.json (nháp AI, `can_doi_chieu`). Không c
 """
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "battu_kb.json"
 SOURCE_ID, SCHOOL_ID = "tu_binh_chan_thuyen", "tu_binh"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _d() -> dict:
-    return json.loads(_F.read_text(encoding="utf-8"))
+    return nap.doc(_F.name)
 
 
 def meta() -> dict:
@@ -82,9 +81,9 @@ def luu_y(ma: str) -> str | None:
 _F_DH = Path(__file__).parent / "data" / "battu_dieu_hau.json"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _dh() -> dict:
-    return json.loads(_F_DH.read_text(encoding="utf-8"))
+    return nap.doc(_F_DH.name)
 
 
 def dieu_hau(can: str, chi_thang: str) -> dict | None:

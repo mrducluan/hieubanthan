@@ -19,7 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 from app import config
 from app.kb import tu_dien
-from app.calc import can_chi, dia_ly, lunar, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao, tuvi_thai_tue_vn
+from app.calc import can_chi, dia_ly, lunar, mui_gio, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao, tuvi_thai_tue_vn
 from app.calc import tuvi_luu_nguyet as calc_luu_nguyet
 from app.hoidap import tuvi as hoidap_tv
 from app.luangiai import tuvi_luu_nguyet as luan_luu_nguyet
@@ -59,6 +59,9 @@ class TuanTrietInput(BaseModel):
     # EN-6 BI-3: múi giờ CHUẨN nơi sinh (UTC±, không tính giờ mùa hè) — chỉ khi sinh ở nước ngoài; Bát tự dùng để so
     # mốc tiết khí. Bỏ trống → như cũ (coi giờ địa phương theo UTC+7) và Bát tự gắn cờ nhắc khai.
     utc_noi_sinh: float | None = Field(default=None, ge=-12, le=14, multiple_of=0.25)
+    # QTE-2 giai đoạn 0: mã thành phố (GET /v1/dia-ly/mui-gio, vd "us-san_jose") hoặc mã vùng IANA ("America/Los_Angeles")
+    # — chỉ khi sinh ở nước ngoài; engine tự suy `utc_noi_sinh` + `gio_mua_he` đúng ngày giờ sinh (tzdata), THẮNG hai ô khai tay.
+    mui_gio: str | None = Field(default=None, min_length=2, max_length=64)
     truong_phai: Literal["npl", "vvt"] | None = None
     che_do: Literal["hep", "tam_hop", "tptc"] | None = None
     do_tin_gio: HourConfidence = HourConfidence.EXACT
@@ -95,6 +98,16 @@ class _DauVao:
                 raise HTTPException(422, detail="Nơi sinh không có trong danh sách tỉnh/thành")
         if inp.gio_mua_he and not nuoc_ngoai:
             raise HTTPException(422, detail="Giờ mùa hè chỉ áp dụng khi sinh ở nước ngoài")
+        if inp.mui_gio and not nuoc_ngoai:
+            raise HTTPException(422, detail="Múi giờ nơi sinh chỉ áp dụng khi sinh ở nước ngoài")
+        # QTE-2: thành phố / vùng IANA → múi giờ chuẩn + giờ mùa hè tại ngày giờ sinh (thắng khai tay); không có → khai tay.
+        self.gio_mua_he, self.utc_noi_sinh, self.mui_gio = inp.gio_mua_he, inp.utc_noi_sinh, None
+        if inp.mui_gio and nuoc_ngoai:
+            try:
+                mg = mui_gio.tai(inp.mui_gio, inp.birth_date.year, inp.birth_date.month, inp.birth_date.day, gio, phut)
+            except ValueError as e:
+                raise HTTPException(422, detail=str(e))
+            self.gio_mua_he, self.utc_noi_sinh, self.mui_gio = mg["gio_mua_he"], mg["utc_chuan"], mg
         vung_khai = None if nuoc_ngoai else inp.vung
         if tinh and tinh["vung"]:
             if vung_khai and vung_khai.value != tinh["vung"]:
@@ -126,7 +139,7 @@ class _DauVao:
         clock_dt = _dt.datetime(duong_goc.year, duong_goc.month, duong_goc.day, gio, phut)
         if nuoc_ngoai:
             # config.ABROAD_LOCAL_TIME: giữ giờ địa phương, chỉ bỏ giờ mùa hè.
-            if inp.gio_mua_he:
+            if self.gio_mua_he:
                 clock_dt -= _dt.timedelta(hours=1)
             tb = timebase.CalendarTime(calendar_dt=clock_dt, clock_offset=None, tz_disputed=False)
         else:
@@ -139,7 +152,7 @@ class _DauVao:
             tb = timebase.to_calendar_time(clock_dt, vung)
         ngay_kinh_tuyen = tb.calendar_dt.date()
         self.nuoc_ngoai, self.tinh = nuoc_ngoai, tinh
-        self.utc_lich = inp.utc_noi_sinh if nuoc_ngoai and inp.utc_noi_sinh is not None else config.CALENDAR_MERIDIAN_TZ
+        self.utc_lich = self.utc_noi_sinh if nuoc_ngoai and self.utc_noi_sinh is not None else config.CALENDAR_MERIDIAN_TZ
 
         # ---- 2. Lịch âm + can chi năm ------------------------------------
         # Âm lịch VIỆT NAM (không phải lịch Trung Quốc của iztro — LS60). Miền Nam 1960–1975 dùng lịch
@@ -182,9 +195,17 @@ class _DauVao:
             flags.append({"loai": "sinh_nuoc_ngoai", "chi_tiet": (
                 "Sinh ở nước ngoài: lá số lập theo giờ địa phương nơi sinh, không quy "
                 "đổi về giờ Việt Nam.")})
-            if inp.gio_mua_he:
+            if self.gio_mua_he:
                 flags.append({"loai": "gio_mua_he", "chi_tiet": (
                     f"Đã trừ 1 giờ mùa hè: giờ chuẩn địa phương {tb.calendar_dt.strftime('%H:%M')}.")})
+            # QTE-2: múi giờ suy từ thành phố — nhắc hai trường hợp tzdata không chắc giờ đồng hồ.
+            if self.mui_gio and self.mui_gio.get("gio_mo_ho"):
+                flags.append({"loai": "gio_doi_mui", "chi_tiet": (
+                    "Giờ sinh rơi đúng lúc nơi đó đổi giờ (giờ mùa hè bắt đầu / kết thúc): đồng hồ lúc đó có thể lệch 1 giờ "
+                    "so với lá số đang lập. Nếu biết chắc giờ chuẩn, khai tay ở mục \"Không thấy thành phố\".")})
+            if self.mui_gio and self.mui_gio.get("lam_tron"):
+                flags.append({"loai": "mui_gio_lam_tron", "chi_tiet": (
+                    "Thời đó nơi sinh dùng giờ địa phương lẻ phút; đã làm tròn về múi giờ gần nhất để so mốc giao tiết.")})
         al = self.am_lap
         if al[3] and al[0] > 15:
             flags.append({"loai": "thang_nhuan", "chi_tiet": (

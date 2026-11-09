@@ -33,6 +33,9 @@ RUN node -e "console.log('iztro', require('/app/ziwei/node_modules/iztro/package
 # Kiểm tra lúc build: an sao THẬT qua cả hai đường Python dùng (mỗi lượt một tiến trình + tiến trình chạy sẵn). Hỏng →
 # build hỏng → Render giữ bản đang chạy thay vì đưa lên bản mà mọi trang Tử vi đều lỗi.
 RUN python -c "from app.calc import tuvi_an_sao; tuvi_an_sao.tu_kiem()"
+# QTE-2: múi giờ nơi sinh nước ngoài tra bằng zoneinfo → ảnh phải có tzdata (python:*-slim có gói tzdata của Debian;
+# đổi ảnh nền mà thiếu thì build hỏng ở đây thay vì mọi lượt lá số nước ngoài 422).
+RUN python -c "from zoneinfo import ZoneInfo; ZoneInfo('America/Los_Angeles'); ZoneInfo('Europe/Moscow')"
 
 # Host cấp cổng qua biến $PORT (Render/Railway). Mặc định 8000 cho chạy tay.
 ENV PORT=8000

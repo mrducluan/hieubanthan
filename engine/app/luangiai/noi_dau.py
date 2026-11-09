@@ -11,19 +11,18 @@ hỏi đáp `/v1/thanso/hoi` — test khoá mọi câu chuẩn định tuyến �
 from __future__ import annotations
 
 import datetime as dt
-import json
-from functools import lru_cache
 from pathlib import Path
 
 from app.calc import thanso_mo_rong as mr
 from app.luangiai import hoi
+from app.kb import nap
 
 _KB = Path(__file__).parents[1] / "kb" / "data" / "thanso_noi_dau.json"
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def _kb() -> dict:
-    return json.loads(_KB.read_text(encoding="utf-8"))
+    return nap.doc(_KB.name)
 
 
 def _dinh_cao_hien(cs: dict) -> int:

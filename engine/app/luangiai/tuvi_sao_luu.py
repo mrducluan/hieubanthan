@@ -4,9 +4,8 @@
 lưu niên > tiểu hạn giữ nguyên) — chỉ nói thêm mảng nào năm nay có Lộc, có va chạm, có chậm, có chuyển động."""
 from __future__ import annotations
 
-import json
-from functools import lru_cache
 from pathlib import Path
+from app.kb import nap
 
 CUNG_CHU_Y = ("Mệnh", "Tài Bạch", "Quan Lộc", "Phu Thê", "Điền Trạch")      # = tuvi_doi_song.CUNG_VAN_HAN
 _THU_TU = ("thai_tue", "loc", "kinh", "da", "ma", "khoi_viet", "xuong_khuc", "tang_mon", "bach_ho")
@@ -33,10 +32,9 @@ def ma_hoi(cau_chuan_hoa: str, cau_goc: str | None = None) -> list[str]:
     return sorted(set(ra), key=_THU_TU.index)
 
 
-@lru_cache(maxsize=1)
+@nap.nho
 def KB() -> dict:  # noqa: N802
-    return json.loads((Path(__file__).resolve().parent.parent / "kb" / "data" / "tuvi_sao_luu_kb.json")
-                      .read_text(encoding="utf-8"))
+    return nap.doc("tuvi_sao_luu_kb.json")
 
 
 def _vi_tri(sl: dict) -> dict[str, list[str]]:
