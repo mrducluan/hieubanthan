@@ -2,9 +2,9 @@
  "_ghi_chu": "SEO-L4 — ngày đăng / sửa thật của từng trang kiến thức. KHÔNG sửa tay: chạy `python scripts/ngay_cap_nhat.py` sau khi sửa KB hoặc mã dựng trang.",
  "trang": {
   "bo_vi/an-duong": {
-   "bam": "91375c90ddcd4074",
+   "bam": "ebeb8f8fe167beb7",
    "dang": "2026-11-06",
-   "sua": "2026-11-06"
+   "sua": "2026-11-09"
   },
   "bo_vi/chuan-dau": {
    "bam": "a7388129c7d26f93",
@@ -22,14 +22,14 @@
    "sua": "2026-11-06"
   },
   "bo_vi/khuon-mat-tong-the": {
-   "bam": "d146e4c49a9d5ba3",
+   "bam": "b0f26025b6759950",
    "dang": "2026-11-06",
-   "sua": "2026-11-06"
+   "sua": "2026-11-09"
   },
   "bo_vi/lan-dai": {
-   "bam": "d43faa778bb8ce55",
+   "bam": "a3d2b7f5eb767b58",
    "dang": "2026-11-06",
-   "sua": "2026-11-06"
+   "sua": "2026-11-09"
   },
   "bo_vi/le-duong": {
    "bam": "abcce03daa596542",
@@ -47,14 +47,14 @@
    "sua": "2026-11-06"
   },
   "bo_vi/mat": {
-   "bam": "33886051f437eb9e",
+   "bam": "b032e595f7240bad",
    "dang": "2026-11-06",
-   "sua": "2026-11-06"
+   "sua": "2026-11-09"
   },
   "bo_vi/mieng": {
-   "bam": "d9287cbd716ec3b3",
+   "bam": "dc456ce761e7eab4",
    "dang": "2026-11-06",
-   "sua": "2026-11-06"
+   "sua": "2026-11-09"
   },
   "bo_vi/ngu-vi": {
    "bam": "b896849eedbccb9b",
@@ -62,9 +62,9 @@
    "sua": "2026-11-06"
   },
   "bo_vi/nhan-trung": {
-   "bam": "0dbdbec547283a8c",
+   "bam": "172f151bdf3c48cc",
    "dang": "2026-11-06",
-   "sua": "2026-11-06"
+   "sua": "2026-11-09"
   },
   "bo_vi/nhat-giac": {
    "bam": "b5b2a9dae7697665",
@@ -77,9 +77,9 @@
    "sua": "2026-11-06"
   },
   "bo_vi/no-boc": {
-   "bam": "fa930e3bf34ccdc6",
+   "bam": "65d3d126ce164c5d",
    "dang": "2026-11-06",
-   "sua": "2026-11-06"
+   "sua": "2026-11-09"
   },
   "bo_vi/phap-lenh": {
    "bam": "6fb92950fa3c62b1",

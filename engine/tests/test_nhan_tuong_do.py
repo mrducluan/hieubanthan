@@ -31,9 +31,14 @@ def mau() -> dict[str, tuple[float, float]]:
     }
 
 
+def lech(goi_y: list[dict]) -> dict[str, str]:
+    """Chỉ các nét LỆCH khỏi khoảng thường (NT-2: nét "vừa" cũng có câu trả lời, cờ `vua` — xem test_nhan_tuong_do_vua)."""
+    return {g["cau"]: g["lua_chon"] for g in goi_y if not g.get("vua")}
+
+
 def goi(d: dict, ti_le: float = 1.0) -> dict[str, str]:
     kq = do.do_mat({k: {"x": v[0], "y": v[1]} for k, v in d.items()}, ti_le)
-    return {g["cau"]: g["lua_chon"] for g in kq["goi_y"]}
+    return lech(kq["goi_y"])
 
 
 def test_kb_diem_khop():
@@ -48,12 +53,12 @@ def test_kb_diem_khop():
 
 def test_mat_mau_chi_ba_dinh_can_doi():
     kq = do.do_mat({k: {"x": v[0], "y": v[1]} for k, v in mau().items()}, 1.0)
-    assert {g["cau"]: g["lua_chon"] for g in kq["goi_y"]} == {"tam_dinh": "can_doi"}
+    assert lech(kq["goi_y"]) == {"tam_dinh": "can_doi"}
     sd = kq["so_do"]
     assert sd["tam_dinh"] == {"thuong": 33, "trung": 33, "ha": 33}
     assert sd["cao_rong"] == pytest.approx(1.425, abs=0.01) and sd["mat_mat"] == pytest.approx(0.21, abs=0.005)
     assert sd["may_khoe"] == pytest.approx(1.19, abs=0.01) and kq["canh_bao"] == []
-    g = kq["goi_y"][0]
+    g = next(x for x in kq["goi_y"] if x["cau"] == "tam_dinh")
     assert "33%" in g["do"] and g["nguon"]
 
 
@@ -96,7 +101,7 @@ def test_bat_bien_khi_xoay_va_doi_khung():
     d = {**mau(), "chan_toc": (0.5, 0.10)}
     goc = goi(d)
     xoay = do.do_mat({k: {"x": v[0], "y": v[1]} for k, v in _xoay(d, 10).items()}, 1.0)
-    assert {g["cau"]: g["lua_chon"] for g in xoay["goi_y"]} == goc
+    assert lech(xoay["goi_y"]) == goc
     assert any("nghiêng" in c for c in xoay["canh_bao"])
     # khung 3:4 (rộng = 0,75 cao): toạ độ thật dời vào giữa rồi chia cho bề rộng
     hep = {k: ((x - 0.125) / 0.75, y) for k, (x, y) in d.items()}
@@ -140,7 +145,7 @@ def test_api_do_mat():
     r = client.post("/v1/nhan-tuong/do-mat", json={"diem": diem, "ti_le": 1.0, "dong_y": True})
     assert r.status_code == 200, r.text
     d = r.json()
-    assert {g["cau"]: g["lua_chon"] for g in d["goi_y"]} == {"tam_dinh": "tran_dai", "khuon_mat": "dai"}
+    assert lech(d["goi_y"]) == {"tam_dinh": "tran_dai", "khuon_mat": "dai"}
     assert d["can_xac_nhan"] is True and d["pham_vi"] == "nhan_tuong_do_mat"
     assert client.post("/v1/nhan-tuong/do-mat", json={"diem": diem, "ti_le": 1.0}).status_code == 422      # thiếu đồng ý
     assert client.post("/v1/nhan-tuong/do-mat", json={"diem": diem, "ti_le": 9, "dong_y": True}).status_code == 422
