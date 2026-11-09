@@ -157,3 +157,29 @@ export function sangXam(rgba: ArrayLike<number>): Uint8ClampedArray {
   for (let i = 0, j = 0; j < ra.length; i += 4, j++) ra[j] = 0.299 * rgba[i]! + 0.587 * rgba[i + 1]! + 0.114 * rgba[i + 2]!;
   return ra;
 }
+
+/** Khung bao của một lưới (toạ độ 0..1). */
+function khungBao(l: P[]) {
+  let x0 = 1, x1 = 0, y0 = 1, y1 = 0;
+  for (const p of l) { if (p.x < x0) x0 = p.x; if (p.x > x1) x1 = p.x; if (p.y < y0) y0 = p.y; if (p.y > y1) y1 = p.y; }
+  return { x0, x1, y0, y1, r: Math.max(0, x1 - x0), c: Math.max(0, y1 - y0) };
+}
+
+/** Chọn mặt chính trong các lưới bộ đo trả về. Chế độ VIDEO đôi khi trả HAI bản trùng của cùng một mặt (bám theo + dò mới)
+ *  → lưới chồng lên nhau là một mặt. Mặt thứ hai nhỏ hẳn (người đi ngang phía sau, ảnh treo tường) không tính.
+ *  Trả lưới mặt lớn nhất + số mặt THẬT. */
+export function chonMat<T extends P>(ds: T[][]): { luoi: T[] | null; soMat: number } {
+  if (!ds.length) return { luoi: null, soMat: 0 };
+  const bao = ds.map((l) => ({ l, b: khungBao(l) })).sort((a, b) => b.b.r * b.b.c - a.b.r * a.b.c);
+  const chinh = bao[0]!;
+  let soMat = 1;
+  for (const k of bao.slice(1)) {
+    const ngang = Math.max(0, Math.min(chinh.b.x1, k.b.x1) - Math.max(chinh.b.x0, k.b.x0));
+    const doc = Math.max(0, Math.min(chinh.b.y1, k.b.y1) - Math.max(chinh.b.y0, k.b.y0));
+    const chong = (ngang * doc) / Math.max(1e-9, k.b.r * k.b.c);   // phần mặt phụ nằm trong mặt chính
+    if (chong > 0.3) continue;                                   // bản trùng của cùng một mặt
+    if (k.b.r < chinh.b.r * 0.6) continue;                       // mặt nhỏ hẳn phía sau
+    soMat++;
+  }
+  return { luoi: chinh.l, soMat };
+}

@@ -7,7 +7,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Camera, Check, ChevronsLeft, ChevronsRight, Loader2, RefreshCcw, SkipForward, X } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
-import { CAC_BUOC, LOI_KHUNG, NGUONG, TEN_BUOC, danhGia, gocMat, matDauDoQuayHan, sangVaNet, sangXam, theoKhungHien, tienDo, type Buoc, type GocMat, type LoiKhung } from "@/lib/quet-mat";
+import { CAC_BUOC, LOI_KHUNG, NGUONG, TEN_BUOC, chonMat, danhGia, gocMat, matDauDoQuayHan, sangVaNet, sangXam, theoKhungHien, tienDo, type Buoc, type GocMat, type LoiKhung } from "@/lib/quet-mat";
 import type { BoDoVideo } from "@/lib/quet-mat-bo-do";
 import { cn } from "@/lib/utils";
 
@@ -116,6 +116,8 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
   }, [onDong]);
 
   const datLai = () => { const s = st.current; s.giuTu = 0; s.netTot = -1; setDem(null); };
+  /** Sang bước mới: xoá vòng tiến độ + lời nhắc của bước trước (tránh chớp "đủ" xanh nhầm). */
+  const sangBuoc = () => { datLai(); st.current.yawMax = 0; st.current.matTu = 0; setTd(0); setNhac(null); setBuocIdx((i) => i + 1); };
 
   // ----- chụp + sang bước -----
   const chupXong = useCallback(async (c: HTMLCanvasElement, cachChup: "tu_dong" | "tay") => {
@@ -129,8 +131,7 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
     setAnhNho((a) => ({ ...a, [b]: URL.createObjectURL(tep) }));
     setKq((k) => ({ ...k, [b]: tep }));
     ghi("chart_interacted", { mo_dun: "nhantuong", kind: "quet_chup", buoc: b, cach: cachChup });
-    s.yawMax = 0; s.matTu = 0;
-    setBuocIdx((i) => i + 1);
+    sangBuoc();
   }, []);
 
   const chupTay = () => {
@@ -139,7 +140,7 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
     const c = document.createElement("canvas");
     if (veKhung(v, c)) void chupXong(c, "tay");
   };
-  const boQua = () => { datLai(); st.current.yawMax = 0; setBuocIdx((i) => i + 1); };
+  const boQua = sangBuoc;
 
   // xong hết bước → trả kết quả
   useEffect(() => {
@@ -167,7 +168,8 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
       let ds: { x: number; y: number; z: number }[][] = [];
       try { ds = bd.detectForVideo(v, now).faceLandmarks; } catch { return; }
       const w = v.videoWidth, h = v.videoHeight;
-      const g0: GocMat | null = ds.length === 1 ? gocMat(ds[0]!, w, h) : null;
+      const { luoi, soMat } = chonMat(ds);
+      const g0: GocMat | null = luoi && soMat === 1 ? gocMat(luoi, w, h) : null;
       const g = g0 && theoKhungHien(g0, w, h, v.clientWidth, v.clientHeight);
       if (g && s.buoc !== "thang") s.yawMax = Math.max(s.yawMax, g.yaw * (s.buoc === "trai" ? 1 : -1));
 
@@ -184,7 +186,7 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
         sang = r.sang; net = r.net;
       }
 
-      let dg = danhGia(g, s.buoc, ds.length, sang);
+      let dg = danhGia(g, s.buoc, soMat, sang);
       // bước nghiêng: quay quá góc bộ đo còn bám được (mất dấu) sau khi đã quay đúng chiều → vẫn chụp
       if (!dg.ok && ds.length === 0 && matDauDoQuayHan(s.yawMax, s.buoc)) {
         s.matTu ||= now;
@@ -210,7 +212,8 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
   const guong = mat === "user";
   const muiTenTrai = (buoc === "trai") === guong;     // camera trước lật gương: người quay trái → mặt trên màn hình quay sang trái
   const dangLam = buocIdx < CAC_BUOC.length;
-  const loiNhac = nhac ? LOI_KHUNG[nhac] : null;
+  const loiNhac = !nhac ? null
+    : nhac === "quay_them" && buoc !== "thang" ? `Quay thêm sang ${buoc === "trai" ? "trái" : "phải"} chút nữa` : LOI_KHUNG[nhac];
   const xanh = td >= 1 && !loiNhac;
 
   return (
@@ -220,56 +223,53 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
         className="absolute inset-0 size-full object-cover" style={guong ? { transform: "scaleX(-1)" } : undefined} />
       <div className={cn("pointer-events-none absolute inset-0 bg-white transition-opacity duration-200", chop ? "opacity-60" : "opacity-0")} aria-hidden />
 
-      {/* đầu: tiêu đề, trạng thái, hướng dẫn */}
-      <div className="relative z-10 bg-gradient-to-b from-black/75 to-transparent px-4 pb-8 pt-[max(1rem,env(safe-area-inset-top))]">
-        <div className="flex items-start gap-3">
-          <div className="min-w-0 flex-1">
-            <p id="quet-tieu-de" className="text-lg font-semibold">Quét khuôn mặt</p>
-            <p className="mt-1 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-xs" data-testid="quet-trang-thai" aria-live="polite">
-              {trangThai === "mo_camera" ? <><Loader2 className="size-3 animate-spin" aria-hidden /> Đang mở camera…</>
-                : trangThai === "cho_bo_do" ? <><Loader2 className="size-3 animate-spin" aria-hidden /> Đang chuẩn bị bộ đo trên máy bạn…</>
-                : trangThai === "tay" ? "Bấm nút chụp khi đúng góc"
-                : trangThai === "loi" ? "Chưa mở được camera"
-                : dem ? <><span className="size-1.5 rounded-full bg-emerald-400" /> Giữ yên — sắp chụp</>
-                : <><span className={cn("size-1.5 rounded-full", loiNhac ? "bg-amber-300" : "bg-emerald-400")} /> {loiNhac ? "Đang canh góc" : "Đã thấy khuôn mặt"}</>}
-            </p>
-          </div>
+      {/* đầu: một hàng tiêu đề + trạng thái + đóng; dưới là MỘT dòng hướng dẫn — chừa tối đa chỗ cho khung mặt */}
+      <div className="relative z-10 bg-gradient-to-b from-black/80 via-black/40 to-transparent px-4 pb-6 pt-[max(0.75rem,env(safe-area-inset-top))]">
+        <div className="flex items-center gap-2">
+          <p id="quet-tieu-de" className="shrink-0 text-base font-semibold">Quét khuôn mặt</p>
+          <p className="inline-flex min-w-0 items-center gap-1.5 truncate rounded-full bg-white/15 px-2.5 py-0.5 text-xs" data-testid="quet-trang-thai" aria-live="polite">
+            {trangThai === "mo_camera" ? <><Loader2 className="size-3 shrink-0 animate-spin" aria-hidden /> Đang mở camera…</>
+              : trangThai === "cho_bo_do" ? <><Loader2 className="size-3 shrink-0 animate-spin" aria-hidden /> Đang chuẩn bị…</>
+              : trangThai === "tay" ? "Bấm nút chụp khi đúng góc"
+              : trangThai === "loi" ? "Chưa mở được camera"
+              : dem ? <><span className="size-1.5 shrink-0 rounded-full bg-emerald-400" /> Giữ yên — sắp chụp</>
+              : <><span className={cn("size-1.5 shrink-0 rounded-full", loiNhac ? "bg-amber-300" : "bg-emerald-400")} /> {loiNhac ? "Đang canh góc" : "Đã thấy khuôn mặt"}</>}
+          </p>
           <button ref={dongRef} type="button" onClick={onDong} aria-label="Đóng quét khuôn mặt" data-testid="quet-dong"
-            className="grid size-10 shrink-0 place-items-center rounded-full bg-white/15 hover:bg-white/25"><X className="size-5" aria-hidden /></button>
+            className="ml-auto grid size-10 shrink-0 place-items-center rounded-full bg-white/15 hover:bg-white/25"><X className="size-5" aria-hidden /></button>
         </div>
         {dangLam && trangThai !== "loi" && (
-          <p className="mt-3 text-center text-base font-medium" aria-live="polite" data-testid="quet-huong-dan">
-            <b>{TEN_BUOC[buoc]}</b> <span className="text-white/80">· {trangThai === "dang_quet" && loiNhac ? loiNhac : HUONG_DAN[buoc]}</span>
+          <p className="mt-3 text-center text-[15px] leading-snug" aria-live="polite" data-testid="quet-huong-dan">
+            <b className={cn(loiNhac && trangThai === "dang_quet" ? "text-amber-200" : "text-white")}>{trangThai === "dang_quet" && loiNhac ? loiNhac : HUONG_DAN[buoc]}</b>
           </p>
         )}
-        <p className="mt-1 text-center text-[11px] text-white/60">Camera chỉ chạy trên máy bạn — không ghi hình, không gửi ảnh đi.</p>
       </div>
 
-      {/* giữa: khung oval + vòng vạch tiến độ */}
-      <div className="relative z-0 flex flex-1 items-center justify-center">
+      {/* giữa: khung oval + vòng vạch tiến độ — chiếm gần hết bề ngang điện thoại */}
+      <div className="relative z-0 flex min-h-0 flex-1 items-center justify-center">
         {trangThai === "loi" ? (
           <div className="mx-6 max-w-sm rounded-2xl bg-white/10 p-5 text-center text-sm" data-testid="quet-loi">
             <p>{loi}</p>
             <button type="button" onClick={onDong} className="mt-4 rounded-full bg-white px-4 py-2 text-sm font-medium text-black">Quay lại chọn ảnh</button>
           </div>
         ) : (
-          <div className="relative aspect-[3/4] w-[min(72vw,46vh)]">
-            <div className="absolute inset-[9%] rounded-[50%] shadow-[0_0_0_200vmax_rgba(0,0,0,0.5)]" aria-hidden />
+          <div className="relative aspect-[3/4] w-[min(86vw,58vh)]" data-testid="quet-khung">
+            <div className="absolute inset-[7%] rounded-[50%] shadow-[0_0_0_200vmax_rgba(0,0,0,0.55)]" aria-hidden />
             <svg viewBox="0 0 300 400" className="absolute inset-0 size-full" aria-hidden>
               {Array.from({ length: SO_VACH }, (_, i) => {
                 const a = (i / SO_VACH) * Math.PI * 2 - Math.PI / 2;
-                const rx = 128, ry = 172, d = 14;
+                const rx = 134, ry = 180, d = 12;
                 const x1 = 150 + Math.cos(a) * rx, y1 = 200 + Math.sin(a) * ry;
                 const x2 = 150 + Math.cos(a) * (rx + d), y2 = 200 + Math.sin(a) * (ry + d);
                 const sang = i / SO_VACH < td;
                 return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={3.5} strokeLinecap="round"
-                  className={cn("transition-colors duration-150", sang ? (xanh ? "stroke-emerald-400" : "stroke-amber-300") : "stroke-white/35")} />;
+                  className={cn("transition-colors duration-150", sang ? (xanh ? "stroke-emerald-400" : "stroke-amber-300") : "stroke-white/30")} />;
               })}
             </svg>
             {dem && <span className="absolute inset-0 grid place-items-center text-7xl font-light text-white/90 drop-shadow" data-testid="quet-dem">{dem}</span>}
             {dangLam && buoc !== "thang" && !dem && (
               <span className={cn("absolute top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-white/85 text-black shadow animate-pulse motion-reduce:animate-none",
-                muiTenTrai ? "-left-2" : "-right-2")} aria-hidden>
+                muiTenTrai ? "left-0" : "right-0")} aria-hidden>
                 {muiTenTrai ? <ChevronsLeft className="size-7" /> : <ChevronsRight className="size-7" />}
               </span>
             )}
@@ -277,31 +277,33 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
         )}
       </div>
 
-      {/* chân: các bước, đổi camera, nút chụp, bỏ qua */}
-      <div className="relative z-10 bg-gradient-to-t from-black/80 to-transparent px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-8">
-        <div className="mx-auto flex max-w-md items-center gap-2">
-          <ol className="flex flex-1 gap-1.5" aria-label="Các góc cần quét">
-            {CAC_BUOC.map((b, i) => (
-              <li key={b} aria-current={i === buocIdx ? "step" : undefined} data-testid={`quet-buoc-${b}`} data-xong={kq[b] ? "1" : "0"}
-                className={cn("relative flex h-12 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-full px-2 text-center text-[11px] leading-tight",
-                  i === buocIdx ? "bg-white text-black" : kq[b] ? "bg-emerald-500/30 text-white" : "bg-white/15 text-white/80")}>
-                {anhNho[b] && <img src={anhNho[b]} alt="" className="absolute inset-0 size-full object-cover opacity-35" style={guong ? { transform: "scaleX(-1)" } : undefined} />}
-                <span className="relative">{kq[b] && <Check className="mx-auto size-3.5" aria-hidden />}{TEN_BUOC[b]}</span>
-              </li>
-            ))}
-          </ol>
+      {/* chân: hàng 3 bước (đủ rộng, không xuống dòng) → hàng nút: đổi camera · chụp · bỏ qua */}
+      <div className="relative z-10 bg-gradient-to-t from-black/85 via-black/50 to-transparent px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-6">
+        <ol className="mx-auto grid max-w-md grid-cols-3 gap-1.5" aria-label="Các góc cần quét">
+          {CAC_BUOC.map((b, i) => (
+            <li key={b} aria-current={i === buocIdx ? "step" : undefined} data-testid={`quet-buoc-${b}`} data-xong={kq[b] ? "1" : "0"}
+              className={cn("relative flex h-9 items-center justify-center gap-1 overflow-hidden whitespace-nowrap rounded-full px-2 text-xs font-medium",
+                i === buocIdx ? "bg-white text-black" : kq[b] ? "bg-emerald-500/35 text-white" : "bg-white/15 text-white/75")}>
+              {anhNho[b] && <img src={anhNho[b]} alt="" className="absolute inset-0 size-full object-cover opacity-30" style={guong ? { transform: "scaleX(-1)" } : undefined} />}
+              {kq[b] && <Check className="relative size-3.5 shrink-0" aria-hidden />}
+              <span className="relative">{TEN_BUOC[b]}</span>
+            </li>
+          ))}
+        </ol>
+        <div className="mx-auto mt-3 grid max-w-md grid-cols-[1fr_auto_1fr] items-center">
           <button type="button" onClick={() => setMat((m) => (m === "user" ? "environment" : "user"))} aria-label="Đổi camera trước / sau"
-            className="grid size-11 shrink-0 place-items-center rounded-full bg-white/15 hover:bg-white/25" disabled={trangThai === "loi"}><RefreshCcw className="size-5" aria-hidden /></button>
+            className="grid size-11 place-items-center justify-self-start rounded-full bg-white/15 hover:bg-white/25 disabled:opacity-40" disabled={trangThai === "loi"}><RefreshCcw className="size-5" aria-hidden /></button>
           <button type="button" onClick={chupTay} aria-label={`Chụp ${TEN_BUOC[buoc].toLowerCase()} ngay`} data-testid="quet-chup"
             disabled={!dangLam || trangThai === "loi" || trangThai === "mo_camera"}
-            className="grid size-16 shrink-0 place-items-center rounded-full border-4 border-white/70 bg-white text-black disabled:opacity-40"><Camera className="size-6" aria-hidden /></button>
+            className="grid size-[4.25rem] place-items-center rounded-full border-4 border-white/60 bg-white text-black disabled:opacity-40"><Camera className="size-7" aria-hidden /></button>
+          {dangLam && buoc !== "thang" && trangThai !== "loi" ? (
+            <button type="button" onClick={boQua} data-testid="quet-bo-qua" aria-label="Bỏ qua góc này (ảnh nghiêng không bắt buộc)"
+              className="flex items-center gap-1 justify-self-end rounded-full bg-white/15 px-3 py-2 text-xs hover:bg-white/25">
+              <SkipForward className="size-3.5" aria-hidden /> Bỏ qua
+            </button>
+          ) : <span />}
         </div>
-        {dangLam && buoc !== "thang" && trangThai !== "loi" && (
-          <button type="button" onClick={boQua} data-testid="quet-bo-qua"
-            className="mx-auto mt-2 flex items-center gap-1 text-xs text-white/75 underline-offset-2 hover:underline">
-            <SkipForward className="size-3.5" aria-hidden /> Bỏ qua góc này (ảnh nghiêng không bắt buộc)
-          </button>
-        )}
+        <p className="mt-2 text-center text-[10px] text-white/55">Camera chỉ chạy trên máy bạn — không ghi hình, không gửi ảnh đi.</p>
       </div>
     </div>
   );

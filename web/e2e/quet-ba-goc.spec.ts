@@ -4,7 +4,7 @@
 //     không mặt → bấm nút chụp ba lần → ảnh thẳng vào khung chấm điểm, hai ảnh nghiêng nạp sẵn; từ chối camera → lời báo;
 //     camera chiếu ảnh chân dung mẫu công khai (khi tải được) → máy TỰ CHỤP ảnh thẳng. Không yêu cầu nào ra máy chủ ngoài.
 import { test, expect, type Page } from "@playwright/test";
-import { NGUONG, danhGia, gocMat, matDauDoQuayHan, sangVaNet, theoKhungHien, tienDo } from "../lib/quet-mat";
+import { NGUONG, chonMat, danhGia, gocMat, matDauDoQuayHan, sangVaNet, theoKhungHien, tienDo } from "../lib/quet-mat";
 import { napHoSo } from "./_hoso";
 
 /** Lưới giả: đầu hình trụ tâm (0,5; 0,5), bán kính 0,2 (khung vuông), quay `yaw` độ (> 0 = người quay sang trái). */
@@ -66,6 +66,16 @@ test.describe("lib/quet-mat (hàm thuần)", () => {
     expect(matDauDoQuayHan(45, "thang")).toBe(false);
   });
 
+  test("chọn mặt: bản trùng của cùng một mặt (chế độ VIDEO) và mặt nhỏ phía sau không tính là hai mặt", () => {
+    const a = luoi(0), trung = luoi(0, { cx: 0.52 }), nho = luoi(0, { r: 0.08, cx: 0.85, cy: 0.2 });
+    expect(chonMat([]).soMat).toBe(0);
+    expect(chonMat([a, trung])).toEqual({ luoi: a, soMat: 1 });
+    expect(chonMat([nho, a]).soMat).toBe(1);
+    expect(chonMat([nho, a]).luoi).toBe(a);
+    const xa = luoi(0, { r: 0.18, cx: 0.25 }), xa2 = luoi(0, { r: 0.18, cx: 0.75 });
+    expect(chonMat([xa, xa2]).soMat).toBe(2);
+  });
+
   test("độ sáng + độ nét: ảnh phẳng không nét, ảnh caro nét", () => {
     const w = 32, phang = new Uint8ClampedArray(w * w).fill(120), caro = new Uint8ClampedArray(w * w);
     for (let y = 0; y < w; y++) for (let x = 0; x < w; x++) caro[y * w + x] = (x + y) % 2 ? 200 : 40;
@@ -123,7 +133,7 @@ test.describe("trình duyệt thật + camera giả", () => {
     await expect(hop).toBeVisible();
     await expect(page.getByTestId("quet-chup")).toBeEnabled({ timeout: 30_000 });
     // không có mặt trong khung → không tự chụp, nhắc đưa mặt vào khung
-    await expect(page.getByTestId("quet-huong-dan")).toContainText(/Nhìn thẳng/);
+    await expect(page.getByTestId("quet-huong-dan")).toContainText("Đưa khuôn mặt vào khung");
     for (const b of ["thang", "trai", "phai"]) {
       await expect(page.getByTestId(`quet-buoc-${b}`)).toHaveAttribute("aria-current", "step");
       await page.getByTestId("quet-chup").click();
