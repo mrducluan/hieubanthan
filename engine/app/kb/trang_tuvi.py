@@ -16,6 +16,7 @@ import re
 from app.calc import tuvi_do_sang_vn as ds_vn
 from app.calc import tuvi_vi_tri as vt
 from app.calc.tuvi_luu_nguyet import TU_HOA
+from app.kb import nap
 
 _HOA = ("Lộc", "Quyền", "Khoa", "Kỵ")
 _SANG = ("Miếu", "Vượng", "Đắc")
@@ -173,8 +174,10 @@ def noi_y_bo_sung() -> dict[str, list[tuple[str, object]]]:
     return {m["id"]: n for m in _ybs() if (n := _noi_mot(m))}
 
 
+@nap.nho
 def y_cho_trang(loai: str, k) -> list[dict]:
-    """Ý bổ sung của một trang (≤ 3 ý mỗi nhóm hiển thị, theo thứ tự KB)."""
+    """Ý bổ sung của một trang (≤ 3 ý mỗi nhóm hiển thị, theo thứ tự KB). Nhớ theo (loại, khoá): mục lục KB gọi cho ~670 trang,
+    mỗi lần duyệt 171 ý × mọi trang (`_noi_mot`) — lần gọi thứ hai của `trang.danh_sach()` từng mất 0,3–0,5 s (CI đỏ 2026-11-09)."""
     ra = {"hop": [], "goc_nhin_khac": []}
     for m in _ybs():
         if (loai, k) in _noi_mot(m) and len(ra[m["hien_thi"]]) < _TOI_DA_Y:
