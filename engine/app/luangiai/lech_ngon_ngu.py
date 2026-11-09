@@ -51,26 +51,33 @@ def quet(dong: list[dict], *, goc: str = GOC, toi_thieu: int = TOI_THIEU, delta:
         theo[mau][nn] = (a + dung, b + chua)
     lech: list[dict] = []
     so_ma_so = so_cap_du = 0
+
+    def _so(mau: str, nn: str, d: int, c: int, moc: str, dg: int, cg: int) -> None:
+        nonlocal so_ma_so, so_cap_du
+        so_ma_so += 1
+        n, n_goc = d + c, dg + cg
+        if n_goc < toi_thieu or n < toi_thieu:
+            return
+        so_cap_du += 1
+        z, p = z_hai_ti_le(dg, n_goc, d, n)
+        dl = dg / n_goc - d / n
+        if dl > delta and z >= z_nguong:
+            lech.append({"mau": mau, "ngon_ngu": nn, "so_voi": moc, "n_goc": n_goc, "ti_le_goc": round(dg / n_goc, 3), "n": n,
+                         "ti_le": round(d / n, 3), "delta": round(dl, 3), "z": z, "p": p,
+                         "de_xuat": f"Bản {nn} của mã này được {round(d / n * 100)}% thấy đúng so với {round(dg / n_goc * 100)}% ở bản {moc} "
+                                    f"(n = {n} / {n_goc}, Z = {z}). Người duyệt xem lại lời bản {nn} (kb/data/{nn}/) — máy không tự sửa."})
+
     for mau, nnd in theo.items():
-        if goc not in nnd:
-            continue
-        dg, cg = nnd[goc]
-        n_goc = dg + cg
+        if goc in nnd:
+            dg, cg = nnd[goc]
+            for nn, (d, c) in nnd.items():
+                if nn != goc:
+                    _so(mau, nn, d, c, goc, dg, cg)
+        # Ý7: biến thể thị trường ("en-us") so thêm với bản gốc của chính ngôn ngữ đó ("en") — A/B bản phủ.
         for nn, (d, c) in nnd.items():
-            if nn == goc:
-                continue
-            so_ma_so += 1
-            n = d + c
-            if n_goc < toi_thieu or n < toi_thieu:
-                continue
-            so_cap_du += 1
-            z, p = z_hai_ti_le(dg, n_goc, d, n)
-            dl = dg / n_goc - d / n
-            if dl > delta and z >= z_nguong:
-                lech.append({"mau": mau, "ngon_ngu": nn, "n_goc": n_goc, "ti_le_goc": round(dg / n_goc, 3), "n": n,
-                             "ti_le": round(d / n, 3), "delta": round(dl, 3), "z": z, "p": p,
-                             "de_xuat": f"Bản {nn} của mã này được {round(d / n * 100)}% thấy đúng so với {round(dg / n_goc * 100)}% ở bản gốc "
-                                        f"(n = {n} / {n_goc}, Z = {z}). Người duyệt xem lại lời bản {nn} (kb/data/{nn}/) — máy không tự sửa."})
+            cha = nn.split("-")[0]
+            if "-" in nn and cha != goc and cha in nnd:
+                _so(mau, nn, d, c, cha, *nnd[cha])
     lech.sort(key=lambda x: (-x["delta"], x["mau"], x["ngon_ngu"]))
     return {"lech": lech, "so_ma_so": so_ma_so, "so_cap_du": so_cap_du,
             "nguong": {"goc": goc, "toi_thieu": toi_thieu, "delta": delta, "z": z_nguong}}

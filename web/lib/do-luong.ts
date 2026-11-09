@@ -93,6 +93,9 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   mang: "string",       // BLOG-4: mã mảng của bài blog (than_so, phong_thuy…) kèm reading_completed{mo_dun=blog}
   tu: "string",         // CTA-1: mã trang đặt khối gợi chéo (tu_vi, than_so…) — không phải ?tu= của link mời
   den: "string",        // CTA-1: mã mảng đích của thẻ được bấm
+  thanh_pho: "string",  // Ý6: MÃ thành phố nơi sinh (us-san_jose) khi form gợi ý công tắc — không phải dữ liệu định danh, không ngày sinh
+  cong_tac: "number",   // Ý6: số công tắc được gợi ý (1 | 2)
+  nuoc_ngoai: "boolean", // Ý3: profile_created có nơi sinh nước ngoài (chỉ cờ)
   ca_nhan: "number",    // CTA-1: 1 = thẻ có luận giải nhỏ cá nhân hoá, 0 = câu chung
   so_chuong: "number",  // CTA-1: số chương còn khoá khi bấm nút Sao
   dung: "number",       // CTA-1: trò đoán số — 1 đúng, 0 sai

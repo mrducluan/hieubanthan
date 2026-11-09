@@ -7,6 +7,8 @@ tinh, Sephirah, Hebrew — bảng thật cho lá số 2–10), trích sách (Wai
 Không điểm số, không sinh nghĩa mới."""
 from __future__ import annotations
 
+import re
+
 from app.calc import tarot as calc
 from app.kb import tarot_kb as kb
 
@@ -34,6 +36,11 @@ def _tieu_de(l: dict) -> str:
 
 def _ngay(tu: list[int], den: list[int]) -> str:
     return f"{tu[1]}/{tu[0]}–{den[1]}/{den[0]}"
+
+
+def slug_en(en: str) -> str:
+    """Slug URL bản tiếng Anh của lá ("The Fool" → "the-fool") — cùng luật với `web/lib/en/engine.ts slugLa`."""
+    return re.sub(r"^-|-$", "", re.sub(r"[^a-z0-9]+", "-", en.lower()))
 
 
 def trang_la_bai(ma: str, slug: str) -> dict:
@@ -96,6 +103,7 @@ def trang_la_bai(ma: str, slug: str) -> dict:
     lien_quan = _lien_quan(ma)
     mo_ta = t._cat(f"{ten} ({l['en']}): {', '.join(l['tu_khoa'])}; ngược: {', '.join(l['tu_khoa_nguoc'][:2])}. Ý nghĩa trong tình cảm, công việc, tiền bạc theo Waite, Golden Dawn, Marseille, B.O.T.A.")
     return {"loai": "la_bai", "slug": slug, "tieu_de": _tieu_de(l), "mo_ta": mo_ta, "tra_loi_nhanh": tra_loi_nhanh, "muc": muc, "hoi_dap": hoi_dap,
+            "ban_en": f"/en/tarot/cards/{slug_en(l['en'])}",
             "lien_quan": lien_quan, "y_chinh": [f"{ten}: {', '.join(l['tu_khoa'][:3])}", f"Ngược: {', '.join(l['tu_khoa_nguoc'][:2])}", f"Việc nên làm: {l['viec'][:90]}"],
             "minh_hoa": {"kieu": "la_bai", "id": ma, "ten": ten, "en": l["en"], "so": l["so"], "bo": l["bo"], "loai": l["loai"], "nguyen_to": l["nguyen_to"]},
             "trang_thai": kb.meta()["trang_thai"], "nguon": [kb.ten_nguon(k) for k in ("waite_1910", "book_t", "tdm_conver")]}

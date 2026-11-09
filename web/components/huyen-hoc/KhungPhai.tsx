@@ -49,7 +49,7 @@ export function KhungPhai({ moTa, children, testId, tomTat, nhac, tieuDe = "Trư
 
   if (!tomTat) {
     return (
-      <section aria-label={tieuDe} className="rounded-2xl border border-line/70 bg-surface/40 px-4 py-3 sm:px-5" data-testid={testId}>
+      <section id={testId} aria-label={tieuDe} className="scroll-mt-28 rounded-2xl border border-line/70 bg-surface/40 px-4 py-3 sm:px-5" data-testid={testId}>
         <h2 className="flex items-center gap-2 text-base font-semibold">
           <Layers className="size-4 text-gold" aria-hidden /> {tieuDe}
         </h2>
@@ -60,8 +60,8 @@ export function KhungPhai({ moTa, children, testId, tomTat, nhac, tieuDe = "Trư
   }
 
   return (
-    <section aria-labelledby={`${id}-td`} data-testid={testId} data-mo={mo ? "1" : "0"}
-      className={cn("rounded-2xl border bg-surface/40 transition-colors", mo ? "border-gold/40" : "border-line/70")}>
+    <section id={testId} aria-labelledby={`${id}-td`} data-testid={testId} data-mo={mo ? "1" : "0"}
+      className={cn("scroll-mt-28 rounded-2xl border bg-surface/40 transition-colors", mo ? "border-gold/40" : "border-line/70")}>
       <button type="button" onClick={() => datMo(!mo)} aria-expanded={mo} aria-controls={vungId} data-testid={`${testId}-mo`}
         className="flex w-full items-start gap-3 rounded-2xl px-4 py-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:px-5">
         <Layers className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />

@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import Lien from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { engineEn } from "@/lib/en/engine";
-import { metaEn } from "@/lib/en/seo";
-import { urlDayDu } from "@/lib/seo";
+import { ldBaiEn, ldDuongDanEn, metaEn, tieuDeVua } from "@/lib/en/seo";
 
 export const revalidate = 21600;
 const SO = new Set(["1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33"]);
@@ -14,6 +13,7 @@ interface TrangSo {
   chan_dung: Record<string, Record<string, unknown> | null>; ten_mat: Record<string, string>;
   linh_vuc: Record<string, { xu_huong: string; mat_toi: string; goi_y: string; cau_tu_soi?: string } | null>; ten_linh_vuc: Record<string, string>;
   nam_ca_nhan: { chu_de: string; y_nghia: string; nen: string; tranh: string; hay_gap?: string } | null;
+  ngay_dang?: string; cap_nhat?: string;
 }
 async function lay(n: string) {
   if (!SO.has(n)) return null;
@@ -25,10 +25,12 @@ export async function generateStaticParams() { return [...SO].map((n) => ({ n })
 export async function generateMetadata({ params }: { params: Promise<{ n: string }> }): Promise<Metadata> {
   const { n } = await params;
   const d = await lay(n).catch(() => null);
-  return metaEn({ title: `Life Path ${n} meaning: ${d?.nghia.tu_khoa ?? "numerology"}`,
+  return metaEn({ title: tieuDeVua([`Life Path ${n} meaning: ${d?.nghia.tu_khoa ?? "numerology"}`, `Life Path ${n}: ${d?.nghia.tu_khoa ?? "numerology"}`, `Life Path ${n} meaning in numerology`]),
     description: d ? `Life Path ${n} — ${d.nghia.tu_khoa}. Shadow side: ${d.nghia.mat_toi}. How it tends to show up in love, work and money, with a counter-question to test it.` : `Meaning of Life Path ${n} in Pythagorean numerology.`,
-    path: `/en/numerology/life-path/${n}`, vi: "/than-so/y-nghia-so" });
+    path: `/en/numerology/life-path/${n}`, vi: `/than-so/y-nghia-so/so-${n}`, ngayDang: d?.ngay_dang, capNhat: d?.cap_nhat });
 }
+/** Hai trang Life Path kề bên để link chéo (1 → 2, 9; 11 → 2, 22; …). */
+const KE_BEN: Record<string, number[]> = { "1": [2, 9], "2": [1, 3], "3": [2, 4], "4": [3, 5], "5": [4, 6], "6": [5, 7], "7": [6, 8], "8": [7, 9], "9": [8, 1], "11": [2, 22], "22": [4, 11], "33": [6, 22] };
 const MAT_TRUONG: Record<string, [string, string][]> = {
   tong_quan: [["chan_dung", "Portrait"], ["dong_luc", "What drives them"], ["khi_cang_thang", "Under stress"], ["huong_lon", "Big direction"]],
   tinh_cam: [["cach_yeu", "How they love"], ["can_duoc", "What they need"], ["diem_mu", "Blind spot"], ["hop_kieu_nguoi", "Who suits them"], ["hon_nhan", "In marriage"]],
@@ -43,8 +45,9 @@ export default async function Page({ params }: { params: Promise<{ n: string }> 
   const tq = d.chan_dung.tong_quan as Record<string, unknown> | null;
   return (
     <article className="mx-auto max-w-4xl">
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "Article", headline: `Life Path ${n}: ${d.nghia.tu_khoa}`, inLanguage: "en", url: urlDayDu(`/en/numerology/life-path/${n}`),
-        author: { "@type": "Organization", name: "Hieu Ban Than editorial team" }, publisher: { "@type": "Organization", name: "Hieu Ban Than" }, image: urlDayDu("/og") }} />
+      <JsonLd data={ldBaiEn({ tieuDe: `Life Path ${n}: ${d.nghia.tu_khoa}`, duong: `/en/numerology/life-path/${n}`, moTa: `Life Path ${n} — ${d.nghia.tu_khoa}. Shadow side: ${d.nghia.mat_toi}`,
+        ngayDang: d.ngay_dang, capNhat: d.cap_nhat, about: ["Numerology", `Life Path ${n}`] })} />
+      <JsonLd data={ldDuongDanEn([{ ten: "Numerology", duong: "/en/numerology" }, { ten: "Life Path numbers", duong: "/en/numerology/life-path" }, { ten: `Life Path ${n}`, duong: `/en/numerology/life-path/${n}` }])} />
       <nav className="mb-4 text-sm text-fg-muted" aria-label="Breadcrumb"><Lien href="/en" className="hover:text-fg">English</Lien> › <Lien href="/en/numerology" className="hover:text-fg">Numerology</Lien> › <Lien href="/en/numerology/life-path" className="hover:text-fg">Life Path numbers</Lien> › {n}</nav>
       <header className="mb-6"><p className="eyebrow">Life Path {d.nghia.so_cai ? "· master number" : ""}</p><h1 className="mt-1 font-serif text-4xl sm:text-5xl">Life Path {n}: {d.nghia.tu_khoa}</h1></header>
       <section className="glass rounded-2xl p-5" data-testid="tra-loi-nhanh-en">
@@ -84,7 +87,16 @@ export default async function Page({ params }: { params: Promise<{ n: string }> 
           <p className="mt-1 text-sm text-fg-muted"><span className="text-fg-faint">Good to do: </span>{d.nam_ca_nhan.nen} <span className="text-fg-faint">Better to avoid: </span>{d.nam_ca_nhan.tranh}</p>
         </section>
       )}
-      <p className="mt-8 text-sm text-fg-muted">Source: {d.nghia.trich_nguon}. Tendencies described in the tradition — a cultural reference, not a forecast. <Lien href="/en/numerology" className="text-gold hover:underline">Calculate your own numbers</Lien>.</p>
+      <section className="mt-8 glass rounded-2xl p-5" data-testid="doc-tiep-en">
+        <h2 className="text-lg">Keep reading</h2>
+        <ul className="mt-2 grid gap-2 text-sm sm:grid-cols-2">
+          <li><Lien href="/en/numerology" className="text-gold hover:underline">Calculate your own numbers</Lien> — Life Path, Expression, Soul Urge, Personality from your name and date of birth.</li>
+          <li><Lien href="/en/numerology/life-path" className="text-gold hover:underline">All Life Path numbers</Lien> — compare {n} with the numbers around it.</li>
+          {KE_BEN[n]?.map((k) => <li key={k}><Lien href={`/en/numerology/life-path/${k}`} className="text-gold hover:underline">Life Path {k}</Lien> — {k === 11 || k === 22 || k === 33 ? "a master number that reduces to" : "the neighbouring number"}{k === 11 ? " 2" : k === 22 ? " 4" : k === 33 ? " 6" : ""}.</li>)}
+          <li><Lien href="/en/tarot" className="text-gold hover:underline">Ask the cards</Lien> — a second way to look at one concrete question.</li>
+        </ul>
+      </section>
+      <p className="mt-6 text-sm text-fg-muted">Source: {d.nghia.trich_nguon}. Tendencies described in the tradition — a cultural reference, not a forecast.</p>
     </article>
   );
 }

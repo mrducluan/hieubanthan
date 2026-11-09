@@ -58,7 +58,9 @@ test("giao thoa + kiểm chứng tiếng Anh trên bài đọc Tarot /en", async
   const phieu = page.waitForRequest((r) => r.url().endsWith("/api/kiem-chung") && r.method() === "POST");
   await nut.nth(0).click();
   const than = JSON.parse((await phieu).postData() ?? "{}");
-  expect(than).toMatchObject({ loai: "doi_song", ngon_ngu: "en" });
+  // Ý7: trình duyệt Playwright gửi Accept-Language en-US → biến thể "en-us" (có bản phủ); trình duyệt en-GB → "en".
+  expect(than).toMatchObject({ loai: "doi_song" });
+  expect(String(than.ngon_ngu)).toMatch(/^en(-us)?$/);
   expect(String(than.mau)).toMatch(/^ds\.tarot\./);
   await expect(bc.getByText("Saved").first()).toBeVisible();
   // Lớp 2 tiếng Anh: thêm hai mã hai môn → hộp "Where the readings meet", không chữ Việt.

@@ -18,16 +18,26 @@ TEP = "loi_khuon.json"
 _NHO: dict[str, dict] = {}
 
 
+def _doc_bang(nn: str) -> dict:
+    p = nap.duong(TEP, nn)
+    d: Any = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    return {k: v for k, v in d.items() if not k.startswith("_")} if isinstance(d, dict) else {}
+
+
 def bang(ngon_ngu_: str | None = None) -> dict:
-    """Bảng mẫu câu của một ngôn ngữ (rỗng với tiếng Việt / chưa có tệp)."""
+    """Bảng mẫu câu của một ngôn ngữ (rỗng với tiếng Việt / chưa có tệp). Ý7: khi lượt gọi có biến thể thị trường
+    ("en-us"), bảng = bản ngôn ngữ chồng thêm bản biến thể (vài chuỗi khác chính tả / cách nói)."""
     nn = ngon_ngu_ or ngon_ngu.hien_tai()
     if nn == ngon_ngu.MAC_DINH:
         return {}
+    bt = None if ngon_ngu_ else ngon_ngu.bien_the()
     if nn not in _NHO:
-        p = nap.duong(TEP, nn)
-        d: Any = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
-        _NHO[nn] = {k: v for k, v in d.items() if not k.startswith("_")} if isinstance(d, dict) else {}
-    return _NHO[nn]
+        _NHO[nn] = _doc_bang(nn)
+    if not bt:
+        return _NHO[nn]
+    if bt not in _NHO:
+        _NHO[bt] = {**_NHO[nn], **_doc_bang(bt)}
+    return _NHO[bt]
 
 
 def co(ma: str, ngon_ngu_: str | None = None) -> bool:

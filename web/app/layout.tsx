@@ -27,7 +27,8 @@ import "./globals.css";
 import { DaiXemNhap } from "@/components/cms/DaiXemNhap";
 import { ChuChung } from "@/components/cms/ChuChung";
 import { chuChungCms } from "@/lib/cms";
-import { BAN_TIENG_ANH, dangXemNhap } from "@/lib/noi-dung-trang";
+import { banTiengAnh, dangXemNhap } from "@/lib/noi-dung-trang";
+import { LA_MA_EN, langHtml } from "@/lib/ngon-ngu";
 
 // Display: Newsreader — serif, chữ số đẹp cho con số lớn. Body: Be Vietnam Pro — thiết kế cho tiếng Việt.
 // PERF-1: tách nghiêng ra bản riêng KHÔNG preload — bản nghiêng (64 KB) chỉ dùng ở vài câu trích, trước đây
@@ -89,12 +90,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const hd = await headers();
   const nonce = hd.get("x-nonce") ?? undefined;
   // QTE: /en → khung tiếng Anh gọn (không CMS, không Sao, không menu Huyền học); đo lường + giám sát giữ như bản Việt.
-  if (hd.get("x-ngon-ngu") === "en") {
+  const maNn = hd.get("x-ngon-ngu") ?? "vi";
+  if (LA_MA_EN.test(maNn)) {
     return (
-      <html lang="en" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
+      <html lang={langHtml(maNn)} className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
         <body>
           <GtmNoScript />
-          <JsonLd data={goiLd(ldToChuc(), ldWebsite())} />
+          <JsonLd data={goiLd(ldToChuc("en"), ldWebsite("en"))} />
           <div className="star-field" aria-hidden />
           <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">Skip to content</a>
           <KhungEn>{children}</KhungEn>
@@ -108,12 +110,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const chuChung = await chuChungCms();
   // HTT-1: trình duyệt ưu tiên tiếng Anh (thẻ đầu của Accept-Language), KHÔNG kê tiếng Việt ở bất kỳ vị trí nào (người Việt
   // dùng Chrome tiếng Anh thường vẫn có "vi" trong danh sách → đọc được bản Việt, không mời) và chưa tắt dải → mời đọc bản /en
-  // (không chuyển hướng). Chỉ ở trang CÓ bản Anh (BAN_TIENG_ANH) — không hiện ở trang quản trị / thẻ chia sẻ / trang không có bản dịch.
+  // (không chuyển hướng). Chỉ ở trang CÓ bản Anh (banTiengAnh) — không hiện ở trang quản trị / thẻ chia sẻ / trang không có bản dịch.
   const ngonNguTrinhDuyet = (hd.get("accept-language") ?? "").toLowerCase();
   const uuTien = ngonNguTrinhDuyet.split(",")[0]?.trim() ?? "";
   const coTiengViet = /(^|,)\s*vi(-[a-z]{2})?\s*(;|,|$)/.test(ngonNguTrinhDuyet);
   const duongDangMo = (hd.get("x-duong-dan") ?? "").replace(/\/+$/, "") || "/";
-  const hrefEn = BAN_TIENG_ANH[duongDangMo];
+  const hrefEn = banTiengAnh(duongDangMo);
   const goiYEn = Boolean(hrefEn) && uuTien.startsWith("en") && !coTiengViet && !(await cookies()).get("hbt-goi-y-en");
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>

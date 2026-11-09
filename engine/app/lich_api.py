@@ -30,8 +30,9 @@ def api_tinh() -> dict:
 @router.get("/v1/dia-ly/mui-gio")
 def api_mui_gio() -> dict:
     """QTE-2 giai đoạn 0 — nước + thành phố cho người sinh ở nước ngoài (web hiện hai ô chọn; mã thành phố / mã vùng IANA
-    gửi lại qua `mui_gio` của lá số). Danh sách tĩnh, web cache 1 ngày."""
-    return {"nuoc": mui_gio.danh_sach()}
+    gửi lại qua `mui_gio` của lá số). Danh sách tĩnh, web cache 1 ngày. Ý6: kèm cờ `canh_bao_mat_troi` /
+    `nam_ban_cau_kha_dung` từng thành phố để form gợi ý công tắc Trường phái (web không tự tính)."""
+    return {"nuoc": mui_gio.danh_sach_day_du(config.hom_nay_vn().year)}
 
 
 class MuiGioInput(BaseModel):

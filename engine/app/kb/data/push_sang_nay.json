@@ -33,7 +33,16 @@
     "lap_xuan_duong": "/phong-thuy/huong-xau-nam",
     "tet_tieu_de": "Năm mới {can_chi} — chúc bạn an vui",
     "tet_noi_dung": "Xem tuổi hợp xông đất và nhịp năm cá nhân của bạn trong năm mới.",
-    "tet_duong": "/tuoi-xong-dat"
+    "tet_duong": "/tuoi-xong-dat",
+    "thang_hai_cung_tieu_de": "Tháng {thang}: Tử vi và Bát tự cùng thấy {nhan}",
+    "thang_hai_cung_noi_dung": "Hai lá số độc lập cùng thấy tháng này {nhan}. {tom}. Một việc nên làm: {viec}.",
+    "thang_hai_khac_tieu_de": "Tháng {thang}: hai lá số nhìn hai mặt",
+    "thang_hai_khac_noi_dung": "Tử vi ({mat_tv}) thấy tháng này {tv}; Bát tự ({mat_bt}) thấy {bt}. Hai cách không cãi nhau — mỗi cách nhìn một mặt. Việc nên làm: {viec}.",
+    "thang_hai_viec_mac_dinh": {
+      "can_chu_dong": "Việc lớn trong tháng chia nhỏ, có dự phòng; phần thuận dành cho việc đã chuẩn bị kỹ",
+      "can_bang": "Giữ nhịp đều làm nền; chỉ thêm một việc mới đã chuẩn bị sẵn",
+      "thuan": "Chọn việc quan trọng nhất của tháng và làm sớm"
+    }
   },
   "hoi_hom_qua": {
     "cau": "Hôm qua gợi ý cho việc {ten}: {nhip}. Với bạn có đúng vậy không?",

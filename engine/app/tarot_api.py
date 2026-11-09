@@ -153,7 +153,10 @@ def api_la(ma: str) -> dict:
         raise HTTPException(404, detail="Không có lá này.")
     trich = [{"sach": kb.ten_nguon(t.get("sach")), "nguyen_van": t.get("nguyen_van"), "nguyen_van_nguoc": t.get("nguyen_van_nguoc")}
              for t in l.get("trich") or [] if t.get("sach") in ("waite_1910", "mathers_1888", "book_t") and t.get("nguyen_van")]
-    return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_la",
+    from app.kb import ngay_cap_nhat as _ncn  # noqa: PLC0415
+    from app.kb.trang_tarot import slug_en  # noqa: PLC0415
+    dang, sua = _ncn.ngay("en_la_bai", slug_en(l["en"]), _ncn.CAP_NHAT_EN)
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_la", "ngay_dang": dang, "cap_nhat": sua,
             "la": {k: l.get(k) for k in ("id", "ten", "en", "so", "loai", "bo", "nguyen_to", "huong_nhin", "tu_khoa", "tu_khoa_nguoc", "hinh_anh",
                                          "y_xuoi", "y_nguoc", "linh_vuc", "linh_vuc_nguoc", "viec", "cau_tu_soi", "tra_loi", "nhan_vat", "ten_nguyen_to_phu", "thoth_ten", "tdm_ten")},
             "chiem_tinh": (l.get("chiem_tinh") or {}).get("ten"), "decan": l.get("decan"), "trich": trich,

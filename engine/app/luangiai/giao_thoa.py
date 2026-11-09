@@ -186,15 +186,18 @@ def dien_dat(kq: dict) -> dict:
     bản chính, luôn hiện trước) thành một đoạn liền mạch — nguồn = tóm tắt + từng hộp, không mã, không câu người dùng, không lá
     số. Qua bộ kiểm chung `kiem_ai` (số, thuật ngữ lạ, cụm cấm, câu ý mới, độ dài); nhớ theo mã băm nguồn (ai_goi) nên cùng tổ
     hợp hộp không tốn lượt lần hai. Chỉ bản tiếng Việt (bộ kiểm + lời nhắc là tiếng Việt); thiếu khoá / hết lượt / không qua
-    kiểm → `dien_dat = "mau"`, không có `van_ai`. Web bật bằng cài đặt `giao_thoa.dien_dat` (mặc định tắt)."""
+    kiểm → `dien_dat = "mau"`, không có `van_ai`. Web bật bằng cài đặt `giao_thoa.dien_dat` (mặc định tắt).
+    H5-en (2026-11-09): bản tiếng Anh đi cùng đường — lời nhắc + bộ kiểm tiếng Anh chọn theo ngôn ngữ lượt gọi (`kiem_ai`,
+    `luan_giai_van._SYSTEM_EN`); tiêu đề lấy từ bản phủ KB."""
     import os  # noqa: PLC0415
 
     from app import ngon_ngu  # noqa: PLC0415
-    if not kq.get("hop") or not ngon_ngu.la_viet() or not os.environ.get("OPENROUTER_API_KEY"):
+    if not kq.get("hop") or ngon_ngu.hien_tai() not in ("vi", "en") or not os.environ.get("OPENROUTER_API_KEY"):
         return {**kq, "dien_dat": "mau"}
     from app.narrative import luan_giai_van as lgv  # noqa: PLC0415
     doan = [x for x in [kq.get("tom_tat", "")] if x]
-    doan += [f"{h['tieu_de']}: {h['noi_dung']}" + (f" Nên: {h['huong_xu_ly']}" if h.get("huong_xu_ly") else "") for h in kq["hop"]]
+    nen = "Try: " if not ngon_ngu.la_viet() else "Nên: "
+    doan += [f"{h['tieu_de']}: {h['noi_dung']}" + (f" {nen}{h['huong_xu_ly']}" if h.get("huong_xu_ly") else "") for h in kq["hop"]]
     c = lgv._mot_chuong({"ma": MO_DUN, "tieu_de": kb()["mau"].get("tieu_de_dien_dat", "Điểm giao thoa từ điều bạn đã xác nhận"),
                          "doan": doan}, "giao_thoa")
     if c.get("che_do") != "llm" or not c.get("van_ai"):

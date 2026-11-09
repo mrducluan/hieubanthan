@@ -58,7 +58,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
 
 /** TM-1: trang thuộc một mục cha nhưng không có dòng menu con riêng (vd /xem-sao-han, /tuoi-xong-dat — menu con của chúng
  *  nằm ở "Năm" dưới dạng /…/{nam}, nhưng trang gốc là công cụ của hub Huyền học). Chỉ dùng để làm sáng mục cha. */
-const THUOC_THEM: Record<string, string[]> = { "/tai-khoan": ["/dang-nhap"], "/huyen-hoc": ["/xem-sao-han", "/tuoi-xong-dat", "/kien-thuc", "/kinh-dich/que"] };   // TR-1 menu: thư viện + 64 quẻ rời menu nhưng vẫn thuộc Huyền học
+const THUOC_THEM: Record<string, string[]> = { "/tai-khoan": ["/dang-nhap"], "/huyen-hoc": ["/xem-sao-han", "/tuoi-xong-dat", "/kien-thuc", "/kinh-dich/que", "/sinh-o-nuoc-ngoai"] };   // TR-1 menu: thư viện + 64 quẻ rời menu nhưng vẫn thuộc Huyền học
 const duongCua = (m: Pick<MucMenu, "href" | "con">) => [m.href, ...m.con.map((c) => c.href), ...(THUOC_THEM[m.href] ?? [])];
 
 /** Đang ở mục này: trùng đường dẫn mục cha hoặc một menu con (vd /tu-vi/... → "Huyền học"); /tai-khoan gồm cả /dang-nhap. */

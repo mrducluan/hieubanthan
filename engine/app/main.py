@@ -55,6 +55,7 @@ from app.nhan_tuong_api import router as nhan_tuong_router  # NT-1
 from app.chan_dung_api import router as chan_dung_router
 from app.tarot_api import router as tarot_router  # noqa: E402 — TR-1: Tarot /v1/tarot/*
 from app.giao_thoa_api import router as giao_thoa_router  # HTT-1
+from app.sinh_nuoc_ngoai_api import router as sinh_nuoc_ngoai_router  # Ý3
 
 giam_sat.khoi_tao()   # Sentry — chỉ bật khi có SENTRY_DSN, không gửi dữ liệu cá nhân
 
@@ -153,10 +154,13 @@ async def require_engine_key(request: Request, call_next):
     tok = ngan_sach.NGUOI_GOI.set(ai)
     # QTE-2: ngôn ngữ của lượt gọi — header `x-ngon-ngu` (web gửi) thắng query `?ngon_ngu=`; lạ → "vi". Chỉ lớp CHỮ
     # (kb.nap, kb.ten, lời RULES) đọc; phép tính không đổi theo ngôn ngữ.
-    tok_nn = ngon_ngu.HIEN_TAI.set(ngon_ngu.chuan(request.headers.get("x-ngon-ngu") or request.query_params.get("ngon_ngu")))
+    _nn_tho = request.headers.get("x-ngon-ngu") or request.query_params.get("ngon_ngu")
+    tok_nn = ngon_ngu.HIEN_TAI.set(ngon_ngu.chuan(_nn_tho))
+    tok_bt = ngon_ngu.BIEN_THE.set(ngon_ngu.bien_the_cua(_nn_tho))   # Ý7: biến thể thị trường (en-us…) nếu có bản phủ
     try:
         return await call_next(request)
     finally:
+        ngon_ngu.BIEN_THE.reset(tok_bt)
         ngon_ngu.HIEN_TAI.reset(tok_nn)
         ngan_sach.NGUOI_GOI.reset(tok)
 
@@ -179,6 +183,7 @@ app.include_router(nhan_tuong_router)
 app.include_router(chan_dung_router)
 app.include_router(tarot_router)
 app.include_router(giao_thoa_router)
+app.include_router(sinh_nuoc_ngoai_router)
 
 
 # --------------------------------------------------------------------------- #
@@ -507,7 +512,10 @@ def api_so(so: int) -> dict:
     if not m:
         raise HTTPException(404, detail="Chưa có nghĩa cho số này")
     cd = kb2.chan_dung(so) or {}
-    return {"engine_version": ENGINE_VERSION, "so": so, "nghia": m, "chan_dung": {k: cd.get(k) for k in ("tong_quan", "tinh_cam", "cong_viec", "bien_co")},
+    from app.kb import ngay_cap_nhat as _ncn  # noqa: PLC0415
+    dang, sua = _ncn.ngay("en_so", str(so), _ncn.CAP_NHAT_EN)
+    return {"engine_version": ENGINE_VERSION, "so": so, "ngay_dang": dang, "cap_nhat": sua, "nghia": m,
+            "chan_dung": {k: cd.get(k) for k in ("tong_quan", "tinh_cam", "cong_viec", "bien_co")},
             "ten_mat": kb2.ten_mat_chan_dung(),
             "linh_vuc": {lv: kb2.nghia_linh_vuc(so, lv) for lv in ("ban_than", "tinh_yeu", "gia_dinh", "su_nghiep", "tai_chinh", "suc_khoe")},
             "ten_linh_vuc": {lv: kb2.ten_linh_vuc(lv) for lv in ("ban_than", "tinh_yeu", "gia_dinh", "su_nghiep", "tai_chinh", "suc_khoe")},

@@ -11,7 +11,7 @@ export async function GET(req: Request): Promise<NextResponse> {
     // Khoá đệm theo bản build (như /api/nhan-tuong/khao-sat): bản web mới phải thấy ngay phản hồi mới của engine.
     const ban = process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 12) ?? "dev";
     const nn = dauNgonNgu(req);
-    const r = await fetch(`${ENGINE_URL}/v1/tarot/bo-bai?b=${ban}${nn["x-ngon-ngu"] ? "&ngon_ngu=en" : ""}`,
+    const r = await fetch(`${ENGINE_URL}/v1/tarot/bo-bai?b=${ban}${nn["x-ngon-ngu"] ? `&ngon_ngu=${nn["x-ngon-ngu"]}` : ""}`,
       { headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn }, next: { revalidate: 21_600 } });
     if (!r.ok) return NextResponse.json({ error: "Chưa tải được bộ bài." }, { status: 502 });
     return NextResponse.json(await r.json(), { headers: { "cache-control": "public, max-age=3600, s-maxage=21600", vary: "x-ngon-ngu" } });

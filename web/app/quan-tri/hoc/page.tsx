@@ -69,10 +69,12 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
     p.sb.rpc("ty_le_kiem_chung_ngon_ngu", { p_toi_thieu: 30 }),      // HTT-1 (migration 0034)
   ]);
   const lech = await lechNgonNgu(nn.error ? null : (nn.data as DongNgonNgu[]));
+  const dongThuan = await docDongThuan();
   const khungTuvi = (<>
     <KhungTuvi d={tv.error ? null : (tv.data as HocTuvi)} ttVec={ttVec} tt={tt} />
     <KhungDeXuat d={dx.error ? null : (dx.data as HocDeXuat)} ttDx={ttDx} tt={tt} ttVec={ttVec} />
     <KhungLechNgonNgu d={lech} />
+    <KhungDongThuan d={dongThuan} />
   </>);
   if (error) {
     return (
@@ -133,7 +135,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
 // HTT-1 — lệch tỉ lệ "Đúng với mình" theo ngôn ngữ: web đọc số từ Supabase (0034) rồi đưa engine tính z-test (engine không chạm
 // DB); kết quả là hàng đợi cho NGƯỜI DUYỆT xem lại bản chuyển ngữ — máy không tự sửa lời.
 interface DongNgonNgu { mau: string; ngon_ngu: string; dung: number; chua_dung: number }
-interface MaLech { mau: string; ngon_ngu: string; n_goc: number; ti_le_goc: number; n: number; ti_le: number; delta: number; z: number; p: number; de_xuat: string }
+interface MaLech { mau: string; ngon_ngu: string; so_voi?: string; n_goc: number; ti_le_goc: number; n: number; ti_le: number; delta: number; z: number; p: number; de_xuat: string }
 interface KetQuaLech { lech: MaLech[]; so_ma_so: number; so_cap_du: number; nguong: { toi_thieu: number; delta: number; z: number } }
 
 async function lechNgonNgu(dong: DongNgonNgu[] | null): Promise<KetQuaLech | null | "chua_bat"> {
@@ -152,7 +154,7 @@ function KhungLechNgonNgu({ d }: { d: KetQuaLech | null | "chua_bat" }) {
       <h2 className="text-xl">Lệch theo ngôn ngữ — bản dịch có được thấy đúng như bản Việt?</h2>
       <p className="mt-1 text-sm text-fg-muted">
         Cùng một mã hộp, so tỉ lệ "Đúng với mình" ở bản tiếng Anh với bản Việt (kiểm định hai tỉ lệ, một phía: cần ≥ 100 phiếu mỗi bên,
-        lệch hơn 15 điểm và Z ≥ 1,96). Mã lệch = NGƯỜI DUYỆT xem lại lời ở <code>kb/data/en/</code>; máy không tự viết lại — nút "Soạn lại nháp" chỉ gọi máy chuyển ngữ
+        lệch hơn 15 điểm và Z ≥ 1,96); biến thể thị trường (en-us) còn được so với chính bản en (A/B bản phủ, Ý7). Mã lệch = NGƯỜI DUYỆT xem lại lời ở <code>kb/data/en/</code>; máy không tự viết lại — nút "Soạn lại nháp" chỉ gọi máy chuyển ngữ
         soạn bản nháp cho đúng cụm KB của mã, người duyệt chọn chuỗi rồi mở PR (HTT-2 H6).
       </p>
       {d === "chua_bat" ? (
@@ -165,14 +167,14 @@ function KhungLechNgonNgu({ d }: { d: KetQuaLech | null | "chua_bat" }) {
           {d.lech.length > 0 && (
             <div className="mt-3 overflow-x-auto">
               <table className="w-full text-sm">
-                <thead><tr className="text-left text-xs text-fg-muted"><th className="py-1 pr-3">Mã</th><th className="py-1 pr-3">Ngôn ngữ</th><th className="py-1 pr-3">Bản Việt</th><th className="py-1 pr-3">Bản dịch</th><th className="py-1 pr-3">Lệch</th><th className="py-1">Z</th></tr></thead>
+                <thead><tr className="text-left text-xs text-fg-muted"><th className="py-1 pr-3">Mã</th><th className="py-1 pr-3">Bản</th><th className="py-1 pr-3">So với</th><th className="py-1 pr-3">Bản dịch</th><th className="py-1 pr-3">Lệch</th><th className="py-1">Z</th></tr></thead>
                 <tbody>
                   {d.lech.map((x) => (
-                    <tr key={`${x.mau}|${x.ngon_ngu}`} className="border-t border-line/50 align-top" data-testid="ma-lech">
+                    <tr key={`${x.mau}|${x.ngon_ngu}|${x.so_voi ?? "vi"}`} className="border-t border-line/50 align-top" data-testid="ma-lech">
                       <td className="py-1.5 pr-3"><span className="font-mono text-xs">{x.mau}</span><br /><span className="text-xs text-fg-muted">{nhanMau("doi_song", x.mau)}</span>
                         <SoanLaiLech ma={x.mau} ngonNgu={x.ngon_ngu} /></td>
                       <td className="py-1.5 pr-3">{x.ngon_ngu}</td>
-                      <td className="py-1.5 pr-3">{Math.round(x.ti_le_goc * 100)}% / {x.n_goc}</td>
+                      <td className="py-1.5 pr-3">{x.so_voi ?? "vi"}: {Math.round(x.ti_le_goc * 100)}% / {x.n_goc}</td>
                       <td className="py-1.5 pr-3">{Math.round(x.ti_le * 100)}% / {x.n}</td>
                       <td className="py-1.5 pr-3 text-gold">−{Math.round(x.delta * 100)} điểm</td>
                       <td className="py-1.5">{x.z}</td>
@@ -343,5 +345,60 @@ function KhungDeXuat({ d, ttDx, tt, ttVec }: { d: HocDeXuat | null; ttDx: string
         </>
       )}
     </section>
+  );
+}
+
+
+// ---------------------------------------------------------------- Ý4: thước "đồng thuận liên môn" (Tử vi–Bát tự cùng mức theo mảng trên lá số mẫu)
+interface ThongKeMang { ten: string; n: number; cung: number; ti_le_cung: number | null; ngau_nhien: number | null; kappa: number | null; nhan: string }
+interface DongThuan { co: boolean; ngay?: string; n?: number; nguon_la?: string; nguong: { kappa_thap: number; kappa_cao: number; n_toi_thieu: number }; mang: Record<string, ThongKeMang> }
+const NHAN_KAPPA: Record<string, [string, string]> = {
+  gan_ngau_nhien: ["Gần ngẫu nhiên", "text-gold"], trung_it: ["Trùng ít", "text-fg"], trung_dang_ke: ["Trùng đáng kể", "text-jade"], chua_du: ["Chưa đủ mẫu", "text-fg-faint"],
+};
+
+async function docDongThuan(): Promise<DongThuan | null> {
+  const kq = await goiEngineDaKiem({}, "/v1/quan-tri/dong-thuan",
+    process.env.ENGINE_QUAN_TRI_KEY ? { "x-quan-tri-key": process.env.ENGINE_QUAN_TRI_KEY } : {}).catch(() => null);
+  return kq && kq.ok ? (kq.body as DongThuan) : null;
+}
+
+function KhungDongThuan({ d }: { d: DongThuan | null }) {
+  const pt = (x: number | null) => (x == null ? "—" : `${Math.round(x * 100)}%`);
+  return (
+    <Card data-testid="qt-dong-thuan">
+      <h2 className="text-xl">Đồng thuận liên môn — Tử vi và Bát tự có hay cùng mức không?</h2>
+      <p className="mt-1 text-sm text-fg-muted">
+        Trên lá số mẫu (không phải thống kê người dùng), mỗi mảng đời của Chân dung tổng hợp: tỉ lệ hai lá số cùng mức, kỳ vọng nếu hai bên độc lập
+        (Σ p·q theo phân bố biên) và Cohen&apos;s kappa. Mảng <b className="text-fg">gần ngẫu nhiên</b> (kappa &lt; {d?.nguong.kappa_thap ?? 0.1}) → hộp
+        &quot;nhìn khác nhau&quot; tự thêm câu &quot;hai lá số hiếm khi trùng ở mảng này&quot;; mảng trùng đáng kể là cơ sở đặt ngưỡng hộp &quot;cùng thấy&quot;.
+        Sinh lại bằng <code>engine/scripts/dong_thuan_lien_mon.py</code> sau mỗi lần đổi luật chấm mức.
+      </p>
+      {!d ? (
+        <p role="alert" className="mt-2 text-sm text-cinnabar">Engine chưa trả kết quả — thử tải lại.</p>
+      ) : !d.co ? (
+        <p role="alert" className="mt-2 text-sm text-cinnabar">Chưa có tệp thống kê (chạy script trong engine rồi commit).</p>
+      ) : (
+        <>
+          <p className="mt-2 text-sm text-fg-muted">{d.n} lá số mẫu · sinh ngày {d.ngay}</p>
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead><tr className="text-left text-xs text-fg-muted"><th className="py-1 pr-3">Mảng</th><th className="py-1 pr-3 text-right">n</th><th className="py-1 pr-3 text-right">Cùng mức</th><th className="py-1 pr-3 text-right">Ngẫu nhiên</th><th className="py-1 pr-3 text-right">Kappa</th><th className="py-1">Đọc</th></tr></thead>
+              <tbody>
+                {Object.entries(d.mang).map(([ma, t]) => {
+                  const [nhan, mau] = NHAN_KAPPA[t.nhan] ?? [t.nhan, "text-fg"];
+                  return (
+                    <tr key={ma} className="border-t border-line/50" data-testid="dong-thuan-mang">
+                      <td className="py-1.5 pr-3">{t.ten}</td><td className="py-1.5 pr-3 text-right">{t.n}</td>
+                      <td className="py-1.5 pr-3 text-right">{pt(t.ti_le_cung)}</td><td className="py-1.5 pr-3 text-right">{pt(t.ngau_nhien)}</td>
+                      <td className="py-1.5 pr-3 text-right">{t.kappa == null ? "—" : t.kappa.toFixed(2)}</td><td className={`py-1.5 ${mau}`}>{nhan}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+    </Card>
   );
 }

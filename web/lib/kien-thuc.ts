@@ -128,6 +128,8 @@ export interface TrangKienThuc {
   trang_thai: string; index: boolean; cap_nhat: string;
   /** SEO-L4: ngày đăng thật (sổ băm nội dung engine); `cap_nhat` = ngày sửa nội dung gần nhất. */
   ngay_dang?: string;
+  /** QTE: đường dẫn bản tiếng Anh tương đương (hreflang), engine trả cho lá bài Tarot + ý nghĩa số. */
+  ban_en?: string;
   /** EEAT-1: mã chuyên gia (tra hồ sơ ở lib/chuyen-gia.ts). tac_gia chỉ có khi chuyên gia tự viết; tham_dinh chỉ khi đã duyệt. */
   chu_bien: string; tac_gia: string | null; tham_dinh: { nguoi: string; ngay: string } | null;
   /** GN-1: lời chính chuyên gia viết (2–4 câu kinh nghiệm), chỉ có trên trang người đó đã thẩm định / tự viết. */

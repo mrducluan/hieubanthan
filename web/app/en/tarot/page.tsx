@@ -2,12 +2,12 @@
 import type { Metadata } from "next";
 import Lien from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { metaEn } from "@/lib/en/seo";
+import { ldDuongDanEn, metaEn } from "@/lib/en/seo";
 import { urlDayDu } from "@/lib/seo";
 import { TarotEn } from "./TarotEn";
 
 export const metadata: Metadata = metaEn({
-  title: "Free tarot reading that answers your question — shuffle and draw your own cards",
+  title: "Free tarot reading: draw your own cards, get a straight answer",
   description: "Type a question, shuffle with your own hand, draw from a fan of 78 cards and flip them. The reading opens with the answer — leaning yes, with a condition or not yet — then each position, how the cards support or block each other, timing hints and three things to do. Waite, Golden Dawn and Marseille sources, no predictions.",
   path: "/en/tarot", vi: "/tarot",
 });
@@ -22,6 +22,7 @@ const HOI_DAP = [
 export default function Page() {
   return (
     <div className="mx-auto max-w-5xl">
+      <JsonLd data={ldDuongDanEn([{ ten: "Tarot", duong: "/en/tarot" }])} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", inLanguage: "en", mainEntity: HOI_DAP.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", name: "Tarot reading (English)", url: urlDayDu("/en/tarot"), applicationCategory: "LifestyleApplication", inLanguage: "en", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } }} />
       <header className="mb-8 max-w-3xl">
@@ -33,7 +34,7 @@ export default function Page() {
       <section className="mt-12 max-w-3xl" aria-labelledby="faq">
         <h2 id="faq" className="text-2xl">Questions people ask</h2>
         <dl className="mt-4 space-y-4">{HOI_DAP.map(([q, a]) => <div key={q}><dt className="font-medium text-fg">{q}</dt><dd className="mt-1 text-fg-muted">{a}</dd></div>)}</dl>
-        <p className="mt-6 text-sm text-fg-muted">Reference: <Lien href="/en/tarot/cards" className="text-gold hover:underline">meaning of all 78 cards</Lien>. The Vietnamese tool is at <Lien href="/tarot" hrefLang="vi" className="text-gold hover:underline">/tarot</Lien>.</p>
+        <p className="mt-6 text-sm text-fg-muted">Reference: <Lien href="/en/tarot/cards" className="text-gold hover:underline">meaning of all 78 cards</Lien> (start with <Lien href="/en/tarot/cards/the-fool" className="text-gold hover:underline">The Fool</Lien> or <Lien href="/en/tarot/cards/the-tower" className="text-gold hover:underline">The Tower</Lien>). Want the longer view instead of one question? <Lien href="/en/numerology" className="text-gold hover:underline">Your numbers</Lien>. The Vietnamese tool is at <Lien href="/tarot" hrefLang="vi" className="text-gold hover:underline">/tarot</Lien>.</p>
       </section>
     </div>
   );

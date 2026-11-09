@@ -119,7 +119,7 @@ export async function dongBoThietBi(userId: string, doiMoi = false): Promise<boo
 }
 
 // ---------------------------------------------------------------- KC-4 GĐ2: tuỳ chọn nhận thêm (push_tuy_chon, 0020)
-export type MocLichChon = "thang_ca_nhan" | "giao_tiet" | "lap_xuan_tet";
+export type MocLichChon = "thang_ca_nhan" | "giao_tiet" | "lap_xuan_tet" | "thang_hai_la_so";   // thang_hai_la_so: Ý1, migration 0035
 export interface TuyChonPush { sang_nay: boolean; moc_lich: MocLichChon[] }
 export const TUY_CHON_RONG: TuyChonPush = { sang_nay: false, moc_lich: [] };   // không tích sẵn
 

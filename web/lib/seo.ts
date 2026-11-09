@@ -69,19 +69,24 @@ export function ldTrangWeb(o: { duong: string; ten: string; tomTat?: string; abo
   };
 }
 
-export function ldToChuc() {
+export const MO_TA_SITE_EN =
+  "Numerology and tarot readings in plain English, plus Vietnamese astrology, Four Pillars, I Ching and feng shui in Vietnamese — transparent calculation, sourced interpretations, questions to reflect on. A cultural reference, not a prediction.";
+
+export function ldToChuc(ngonNgu: "vi" | "en" = "vi") {
   const vh = vanHanh();
+  const en = ngonNgu === "en";
   return {
     "@type": "Organization",
     "@id": `${siteUrl()}/#to-chuc`,
-    name: TEN_SITE,
+    name: en ? "Hieu Ban Than" : TEN_SITE,
+    ...(en ? { alternateName: TEN_SITE } : {}),
     ...(vh.chuSoHuu ? { legalName: vh.chuSoHuu } : {}),
     url: siteUrl(),
     logo: { "@type": "ImageObject", url: urlDayDu("/thuong-hieu/avatar-512.png"), width: 512, height: 512 },
-    description: MO_TA_SITE,
+    description: en ? MO_TA_SITE_EN : MO_TA_SITE,
     ...(vh.email ? {
       email: vh.email,
-      contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: vh.email, availableLanguage: ["vi"] },
+      contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: vh.email, availableLanguage: ["vi", "en"] },
     } : {}),
     ...(vh.diaChi ? { address: vh.diaChi } : {}),
     ...(vh.mangXaHoi.length ? { sameAs: vh.mangXaHoi.map((m) => m.url) } : {}),
@@ -91,12 +96,12 @@ export function ldToChuc() {
       ...(["than-so", "tu-vi", "bat-tu", "kinh-dich", "phong-thuy", "lich"] as const).map((m) => ldThucThe(m)),
       "Thần số học Pythagoras", "Thần số học Chaldea", "Phong thuỷ Bát trạch", "Huyền Không phi tinh", "Xem ngày tốt", "Tuổi làm nhà",
     ],
-    slogan: "Con số nói gì về bạn",
-    areaServed: "VN",
+    slogan: en ? "What your numbers say about you" : "Con số nói gì về bạn",
+    areaServed: en ? ["VN", "US", "GB", "AU", "CA", "SG"] : "VN",
   };
 }
 
-export function ldWebsite() {
+export function ldWebsite(ngonNgu: "vi" | "en" = "vi") {
   return {
     "@type": "WebSite",
     "@id": `${siteUrl()}/#website`,
@@ -104,8 +109,9 @@ export function ldWebsite() {
     alternateName: ["hieuban.com", "Hieu Ban Than"],
     keywords: TU_KHOA_SITE.join(", "),
     url: siteUrl(),
-    inLanguage: "vi-VN",
-    description: MO_TA_SITE,
+    // QTE: site có hai bản ngôn ngữ; trang /en khai cả hai (bản Việt là chính).
+    inLanguage: ngonNgu === "en" ? ["vi-VN", "en"] : "vi-VN",
+    description: ngonNgu === "en" ? MO_TA_SITE_EN : MO_TA_SITE,
     publisher: { "@id": `${siteUrl()}/#to-chuc` },
   };
 }

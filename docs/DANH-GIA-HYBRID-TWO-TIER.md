@@ -114,16 +114,18 @@ H2 xong từ HTT-1; **H3 không làm** (BGE-M3 ~2 GB dependency, cosine liên ng
 
 **Còn thiếu / ranh giới đã biết**
 
-- H5 chưa có cho bản Anh: cần bộ kiểm đầu ra AI tiếng Anh (cụm cấm `cum_cam_en` đã có trong `thuat_ngu_en.json`, chưa nối vào
-  `kiem_ai`) + lời nhắc tiếng Anh — làm khi /en có người dùng thật.
+- ~~H5 chưa có cho bản Anh~~ → **đã làm (HTT-3, mục 9)**: `kiem_ai.kiem` chọn danh mục tiếng Anh theo ngôn ngữ lượt gọi
+  (`cum_cam_en` KB + giọng phán + từ y tế + vật phẩm + số viết bằng chữ + câu ý mới), lời nhắc `_SYSTEM_EN`, `giao_thoa.dien_dat`
+  mở cho `en`; web gửi `dien_dat` theo công tắc chung (vẫn mặc định tắt).
 - H6 chỉ suy được cụm cho Tarot + Giao thoa (đúng hai nơi /en đang có phiếu). Khi Thần số /en có nút kiểm chứng → thêm
   `ds.thanso.*` vào `nguon_cua_ma`. Chưa có e2e cho nút (cần Supabase + token GitHub) — kiểm bằng test engine + typecheck; chuỗi
   thật `e2e-that/quan-tri-that` chưa phủ.
-- Trang Kho tri thức `/quan-tri/tri-thuc/[tệp]` chưa mở được tệp `en/…` (URL một đoạn); sửa tay bản phủ vẫn qua H6 hoặc PR thường.
+- ~~Trang Kho tri thức chưa mở được tệp `en/…`~~ → **đã làm (HTT-3)**: route `/quan-tri/tri-thuc/[...tep]`, danh sách liệt kê cả
+  thư mục bản phủ (`en/`, `en-us/`) với tên dễ đọc.
 - H1 chỉ Bát tự (Tử vi không có lớp điều hậu). Lời "Nhà của bạn" không phụ thuộc mùa nên không cần cờ.
 - Migration 0034 (H4) vẫn chờ anh chạy; chưa chạy thì khung "Lệch theo ngôn ngữ" báo "chưa đọc được" và nút H6 không có mã để soạn.
 
-**Đề xuất ý tưởng để hieuban hoàn hảo hơn** (đối chiếu vòng tăng trưởng; chờ anh chọn)
+**Đề xuất ý tưởng để hieuban hoàn hảo hơn** (đối chiếu vòng tăng trưởng) — **chủ dự án duyệt làm cả Ý1–Ý7 (2026-11-09), xem mục 9**
 
 | # | Ý tưởng | Khâu · đo | Cần gì |
 |---|---|---|---|
@@ -134,3 +136,47 @@ H2 xong từ HTT-1; **H3 không làm** (BGE-M3 ~2 GB dependency, cosine liên ng
 | Ý5 | **Kiểm chứng sau 30 ngày cho hộp giao thoa**: mã `ds.giao_thoa.*` vào hàng Q7 `kiem_chung_sau` như Tarot / quẻ → biết điểm giao thoa có đúng về lâu dài không. | HỌC · `feedback_submitted{sau_30, loai_hoi: giao_thoa}` | không migration (0022 sẵn) |
 | Ý6 | **Gợi ý công tắc ngay trong form hồ sơ**: chọn thành phố xa kinh tuyến múi giờ (Madrid, Urumqi) hoặc Nam bán cầu → dòng "Bạn sinh ở Sydney: lá số có thêm hai cách xem — giờ mặt trời thực, mùa nơi sinh" dẫn tới khung Trường phái. Tính năng HTT-1/HTT-2 mới có người dùng tới. | THU HÚT → công cụ · `chart_interacted{phai_gio_sinh\|phai_dieu_hau}` | không migration |
 | Ý7 | **A/B bản phủ theo thị trường** (HTT-2 đã ghi): `en-au` / `en-us` chỉ khác vài mẫu câu, đo bằng chính `lech_ngon_ngu` (cột `ngon_ngu` đã nhận `en-us`). | THU HÚT tiếng Anh · tỉ lệ "Resonates" theo bản phủ | khi /en có ≥ 100 phiếu / mã |
+
+## 9. HTT-3 — Ý1–Ý7 + QC SEO/GEO bản `/en` + hạ tầng (2026-11-09, chủ dự án: "ý 1 đến ý 7 làm luôn; mục tiêu /en hoạt động, QC SEO/GEO, hạ tầng, e2e")
+
+### 9.1 Bảy ý tưởng đã làm
+
+| # | Làm gì | Ở đâu | Ranh giới |
+|---|---|---|---|
+| Ý1 | **Push đầu tháng "Tử vi và Bát tự cùng thấy …"** — mốc mới `thang_hai_la_so` trong `push_tuy_chon.moc_lich` (**migration 0035**, chờ anh chạy sau 0034); ngày 1 dương cron đọc LÁ SỐ (ngày giờ nơi sinh, giới tính — không tên) trong `ho_so` của chính người đã tự tích, gọi `POST /v1/push/thang-hai-la-so` (≤ 200 lá/lượt) → `luangiai/thang_hai_la_so.py` ghép ĐÚNG hộp tháng của Thời gian tới (`gop_thang`: Tử vi tháng âm + Bát tự tháng tiết chứa ngày 15): cùng mức → câu "cùng thấy" + việc nên làm của hộp; khác mức → "hai lá số nhìn hai mặt" (lời `nhat_quan`), việc theo mức dè dặt hơn; thiếu giờ sinh → không báo. Thứ tự mốc: tự đánh dấu > mốc lịch (mốc này trước "tháng cá nhân") > sáng nay; vẫn ≤ 1 thông báo/thiết bị/ngày. Ô tích mới ở "Bật nhắc" (không tích sẵn, ghi rõ máy chủ đọc hồ sơ mỗi đầu tháng); Chính sách riêng tư f4, hiệu lực **09/11/2026**. | `luangiai/thang_hai_la_so.py`, `push_api.py`, `0035_push_thang_hai_la_so.sql` (+down, `thu_push_0035.sql`, `da_chay_chua`), `lib/push-thang.ts`, `lib/cron.ts`, `lib/web-push.ts`, `BatNhacPush.tsx`, `test_push_thang_hai_la_so.py` | Không dự báo, không doạ; engine không biết ai là ai, không lưu. Chưa chạy 0035 → ô tích không ghi được, cron bỏ qua. |
+| Ý2 | **Chương "Điều bạn đã xác nhận"** trong Chân dung tổng hợp (`da_xac_nhan`, sau "Năm nay", mở bằng Sao): từ phiếu `ca_nhan` của CHÍNH người xem (web đọc RLS, ≤ 500 mã) qua `giao_thoa.lap` → tóm tắt + hộp giữ mã `ds.giao_thoa.*` + phái `giao_thoa_1` (phiếu về đúng hộp, 0017); < 2 phiếu Đúng hoặc khách → chỉ lời mời, không hộp; mã trùng hộp đã dùng trong bài thì bỏ. Golden mã kiểm chứng chỉ **thêm 3 mã** nhóm `chan_dung`. | `luangiai/chan_dung_tong_hop.py`, `chan_dung_kb.json`, `test_chan_dung_da_xac_nhan.py`, e2e `chan-dung.spec.ts` | Không tính lại, không đổi mức môn nào. |
+| Ý3 | **Cụm trang "Sinh ở nước ngoài"** `/sinh-o-nuoc-ngoai` + 15 trang nước (us au ca de jp kr tw fr cz gb pl ru th la kh): mọi số **engine tính** từ `calc/mui_gio` + zoneinfo + `calc/lunar` — múi giờ chuẩn năm xem, mốc đổi giờ mùa hè (quét tzdata, không chép bảng), lịch sử giờ mùa hè 1975–2015 + năm xem, lệch giờ mặt trời trung bình theo kinh độ (≥ 30 phút → công tắc "Giờ mặt trời thực"), Nam bán cầu ngoài chí tuyến → công tắc "Mùa nơi sinh" (một hằng `CHI_TUYEN_NAM` với `battu_api`), ngày lịch âm Việt–Trung lệch + Tết hai lịch. Lời ở KB `sinh_nuoc_ngoai_kb.json` (biên tập). Sổ trang + mẫu cụm + sitemap + `.md` + llms; link từ form hồ sơ, hub Huyền học (Tử vi / Bát tự "tra cứu thêm"). | `luangiai/sinh_nuoc_ngoai.py`, `sinh_nuoc_ngoai_api.py` (`GET /v1/sinh-nuoc-ngoai[/{ma}]`), `web/app/sinh-o-nuoc-ngoai/`, `lib/sinh-nuoc-ngoai.ts`, `test_sinh_nuoc_ngoai.py` (12), e2e `sinh-nuoc-ngoai.spec.ts` | Chỉ nước có trong bảng múi giờ; WebPage + Breadcrumb + FAQPage; không ảnh riêng (ảnh `anhBai`). |
+| Ý4 | **Thước "đồng thuận liên môn"** — `scripts/dong_thuan_lien_mon.py` trên 1.000 lá mẫu → `kb/data/dong_thuan_thong_ke.json` (n, cùng mức, kỳ vọng ngẫu nhiên Σp·q, Cohen's kappa, nhãn); `GET|POST /v1/quan-tri/dong-thuan` + khung "Đồng thuận liên môn" ở `/quan-tri/hoc`. **Kết quả**: 6 mảng cùng mức 29–39 % = đúng kỳ vọng ngẫu nhiên (kappa −0,03…0,04) → mức Tử vi và Bát tự độc lập trên lá mẫu; hộp "nhìn khác nhau" nay kèm câu "hai lá số hiếm khi trùng ở mảng này" + căn cứ thống kê khi kappa < 0,1 (chỉ lời + căn cứ; mức / mã / việc không đổi). | `luangiai/dong_thuan_thong_ke.py`, `quan_tri_api.py`, `api/quan-tri/hoc/dong-thuan`, `test_dong_thuan_thong_ke.py`, `docs/CHAN-DUNG-TONG-HOP.md` mục 6 | Thống kê lá số mẫu, KHÔNG phải dân số. Chờ người duyệt: lời hộp `cung.*` ("cùng chỉ về một hướng") nói quá so với số; ngưỡng "cùng thấy" nên thêm điều kiện ngoài trùng nhãn. |
+| Ý5 | **Kiểm chứng sau 30 ngày cho hộp giao thoa**: bấm "Đúng với mình" ở hộp `ds.giao_thoa.*` (mọi mức) → máy nhớ mã vào hàng Q7 (`loai_hoi: giao_thoa`), Hôm nay hỏi lại bằng lời riêng ("điểm chung ấy còn đúng không?" / "có giúp sắp việc không?") → phiếu `kiem_chung_sau` (0022). | `lib/kiem-chung-sau.ts`, `GiaoThoa.tsx`, `HoiSau30Ngay.tsx`, e2e `htt2-y1-y5.spec.ts` | Không migration; chỉ mã + hai mức. |
+| Ý6 | **Gợi ý công tắc trong form hồ sơ**: `/v1/dia-ly/mui-gio` trả cờ từng thành phố (`utc_chuan`, `lech_mat_troi_phut`, `canh_bao_mat_troi`, `nam_ban_cau_kha_dung` — engine tính); chọn Sydney / Madrid… → dòng "Bạn sinh ở X: lá số có thêm … cách xem" dẫn tới khung Trường phái (`KhungPhai` có `id` neo) + trang nước Ý3; thành phố thường → link "Sinh ở nước này thì nhập thế nào?". Đo `chart_interacted{kind: goi_y_cong_tac_hien\|goi_y_cong_tac_bam}` chỉ mã; `profile_created{nuoc_ngoai}`. | `calc/mui_gio.py`, `lich_api.py`, `NhapHoSo.tsx`, `KhungPhai.tsx` | Web không tự tính. |
+| Ý7 | **A/B bản phủ theo thị trường**: `ngon_ngu.BIEN_THE` ("en-us") chồng lên "en" (chỉ khi có thư mục `kb/data/en-us/`), `nap.doc` + `loi.bang` đọc vi → en → en-us, khoá nhớ kèm biến thể; proxy đặt `x-ngon-ngu` theo Accept-Language (`maNgonNguEn`), `<html lang="en-US">`, `content-language` + `Vary: Accept-Language`; client (`postEn`, phiếu `KiemChung`, giao thoa) gửi biến thể của trang; API nhận `^(vi\|en(-[a-z]{2})?)$`; `lech_ngon_ngu.quet` so biến thể với **cả** bản vi lẫn bản en (cột `so_voi`). Bản phủ mẫu `en-us/loi_khuon.json` (chính tả Mỹ: "Favorable"). | `ngon_ngu.py`, `kb/nap.py`, `kb/loi.py`, `lech_ngon_ngu.py`, `lib/ngon-ngu.ts`, `proxy.ts`, `layout.tsx`, `KiemChung.tsx`, `api/kiem-chung`, `test_htt2_y7_bien_the.py` | Biến thể là lớp mỏng (vài chuỗi), không thêm khoá mới; thiếu thư mục → bản en gốc. |
+
+### 9.2 QC SEO/GEO bản `/en` (bộ rà `kiem-tra-seo.mjs` nay quét cả `sitemap-en.xml`, `--chi-en` rà nhanh)
+
+Trước: 54 lỗi (chữ Việt lọt vì hình lá dùng tên Việt khi tra hreflang — lỗi em tự gây ở bước đầu, đã sửa), 266 cảnh báo (title 64/97 trang > 70, description 93/97 > 170, 93 trang ≤ 1–2 link nội bộ, 15 trang thiếu x-default, trang vào mỏng 209 chữ, mục lục Life Path không H2, Article thiếu ngày). Đã sửa:
+
+- **hreflang hai chiều tới trang TƯƠNG ĐƯƠNG**: lá bài `/en/tarot/cards/<slug>` ↔ `/tarot/la-bai/<slug Việt>` (không trỏ mục lục), Life Path ↔ `/than-so/y-nghia-so/so-N`; engine trả `ban_en` cho trang kiến thức Việt (`trang_tarot`, `_trang_so`) → `metaKienThuc` khai `languages`; `sitemap-en.xml` khai `hreflang` en/vi/x-default + `lastmod` thật.
+- **Ngày đăng / sửa thật** cho trang Anh: sổ `ngay_cap_nhat.json` thêm 90 khoá `en_la_bai/*`, `en_so/*` (băm gói route `/v1/tarot/la`, `/v1/thanso/so`), route trả `ngay_dang` / `cap_nhat` → OG `article:*` + JSON-LD `Article` đủ author/publisher/image(kích thước)/ngày.
+- **OG tiếng Anh** `/og?lang=en&tieu_de=…` (cùng khung trang sách, chữ + QR "Scan to read more"); **404 tiếng Anh** (`app/en/not-found.tsx` + catch-all `[...khac]`, noindex); **BreadcrumbList** + `CollectionPage/ItemList` + `FAQPage` trang vào; **Organization/WebSite** trên `/en` tiếng Anh (`ldToChuc("en")`, `inLanguage` cả hai, `availableLanguage` vi + en, `areaServed` 6 nước); **llms.txt** mục "English edition (/en)".
+- Title ≤ 70 (`tieuDeVua` chuỗi ứng viên), description ≤ 160 (`catMoTaEn` ở `metaEn`), khối "Keep reading" ≥ 4 link nội bộ ở mọi trang kiến thức, trang vào thêm "How a reading is built" + "Who this is for" (+ FAQ), mục lục Life Path thêm cách tính (ví dụ 24/10/1988 → 6 / 33) + số cái.
+- Dải "Read it in English" nay cũng cho `/than-so/y-nghia-so/so-N`, `/chinh-sach-rieng-tu`, `/dieu-khoan` (`banTiengAnh`).
+
+Sau sửa (dev): 97 URL `/en`, 0 lỗi; TTFB p50 124 ms · p90 247 ms; TB 532 chữ / 6 H2 mỗi trang. Chưa làm: ảnh OG theo từng lá bài (hiện khung chung), bản `.md` cho `/en` (bot AI đọc HTML; cân nhắc khi llms.txt có số), `Google-Extended` đã mở từ AUD-Q6.
+
+### 9.3 Hạ tầng cho `/en` — đủ chưa?
+
+| Mục | Hiện trạng | Kết luận |
+|---|---|---|
+| Vùng máy chủ | Vercel hàm `sin1` + engine Render Singapore; trang `/en` render động mỗi lượt (CSP nonce) | **Giữ** theo QTE-1 mục 5 ("chỉ xét vùng thêm khi người dùng ngoài châu Á > 30 %"). Người Mỹ chịu ~180–220 ms RTT tới Singapore cộng TTFB ~120–250 ms → vẫn dưới 1,5 s của bot trả lời. Khi cần: `export const preferredRegion` cho riêng `app/en/**` (engine vẫn ở SG — chỉ hợp với trang kiến thức có cache, không hợp công cụ gọi engine mỗi lượt). |
+| Cache | Trang kiến thức `/en` đọc engine qua `engineEn` (fetch cache 6 giờ, khoá theo bản build `b=<sha>` → deploy mới không dính cache cũ); `/api/tarot/bo-bai`, `la-ngay` cache theo ngôn ngữ (`Vary: x-ngon-ngu`); sitemap-en 6 giờ | Đủ cho giai đoạn 0–1. HTML chưa cache được (Q-I3, đụng CSP-2) — đo trên production rồi quyết chung với bản Việt. |
+| Hạn mức / an toàn | `/en` dùng chung RL-1 (lượt AI), `gioi_han.py` 120/phút, một bộ chặn an toàn (tiếng Anh có bộ câu riêng) | Đủ; chưa có lượt AI thật trên `/en` (chỉ H5-en khi bật công tắc). |
+| Đo lường | PostHog + GA4 như bản Việt, `landing_viewed` / `reading_started{ngon_ngu}`; phiếu "Resonates" mang ngôn ngữ + biến thể | Thiếu Search Console riêng cho thư mục `/en` → anh thêm property URL-prefix `https://hieuban.com/en/` (việc của anh). |
+| Sự cố | Engine lỗi → trang kiến thức `/en` ném lỗi (5xx), công cụ báo câu tiếng Anh chung; sitemap-en rỗng phần lá khi engine bận | Chấp nhận (như bản Việt SEO-L3). |
+
+### 9.4 Chưa làm / chờ anh
+
+- Migration **0035** (Ý1) chờ chạy sau 0034; bật rồi tự tích mốc "Đầu tháng" ở Hôm nay → Bật nhắc; kiểm log cron ngày 1/12 có `thang_hai_la_so ≥ 1`.
+- Người duyệt sửa lời hộp "cùng thấy" của Chân dung tổng hợp theo số Ý4 (`docs/CHAN-DUNG-TONG-HOP.md` mục 6).
+- Search Console property cho `/en/`; sau 8 tuần đọc khung "Lệch theo ngôn ngữ" (cần 0034) để quyết bản phủ `en-us` có khác gì không.
+- Ý tưởng tiếp (chưa làm, chờ chọn): Ý8 bản `.md` cho `/en` + `/en/llms.txt` riêng khi bot AI tiếng Anh có lượt; Ý9 ảnh OG riêng từng lá bài (vẽ SVG lá vào khung `/og`); Ý10 `/en/i-ching` (Kinh Dịch tiếng Anh — hào từ đã có bản Legge công cộng) là mảng tiếp theo theo QTE-1 thứ tự Bát tự → Tử vi; em đề xuất đảo: **Kinh Dịch trước** vì nguồn công cộng tiếng Anh sẵn (Legge 1882), ít tên riêng Hán Việt hơn Tử vi.
+

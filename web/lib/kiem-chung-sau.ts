@@ -13,7 +13,8 @@ const Ghi = z.object({
   da_hoi: z.boolean().optional(),
   /** KD-2d (P9): "que" = quẻ đã gieo (hỏi "việc đó ra sao?") thay vì hộp đã bấm Đúng. */
   /** TR-3: "tarot" = câu trả lời của lá bài cho một câu "có nên / có thành / khi nào" — hỏi "việc đó ra sao?". */
-  loai_hoi: z.enum(["hop", "que", "tarot"]).optional(),
+  /** Ý5 (HTT-2 mục 8): "giao_thoa" = hộp điểm giao thoa (mã ds.giao_thoa.*) — hỏi "điểm chung ấy có còn đúng về lâu dài không?". */
+  loai_hoi: z.enum(["hop", "que", "tarot", "giao_thoa"]).optional(),
 });
 export type GhiNhan = z.infer<typeof Ghi>;
 
@@ -33,7 +34,9 @@ export function ghiNhanDung(g: Omit<GhiNhan, "ngay" | "da_hoi">): void {
   if (typeof window === "undefined") return;
   const ds = doc();
   if (ds.some((x) => x.mau === g.mau)) return;
-  const k = Ghi.safeParse({ ...g, ngay: homNayIso(), da_hoi: false });
+  // Ý5: mã giao thoa luôn hỏi lại theo lời riêng của điểm giao thoa (một nguồn — dù nơi gọi có truyền loai_hoi hay không).
+  const loai_hoi = g.mau.startsWith("ds.giao_thoa.") ? "giao_thoa" : g.loai_hoi;
+  const k = Ghi.safeParse({ ...g, loai_hoi, ngay: homNayIso(), da_hoi: false });
   if (k.success) ghiXuong([...ds, k.data]);
 }
 /** Hộp đến hạn hỏi lại (≥ 30 ngày, chưa hỏi) — cũ nhất trước; null khi chưa có. */
