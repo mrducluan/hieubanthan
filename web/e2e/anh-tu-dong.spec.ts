@@ -98,4 +98,21 @@ test.describe("trình duyệt thật + bộ đo thật", () => {
     // bộ đo tự phục vụ + số liệu hiệu năng của nó bị CSP chặn → không có yêu cầu nào tới máy chủ ngoài
     expect(ngoai.filter((o) => !o.includes("posthog") && !o.includes("google-analytics") && !o.includes("googletagmanager"))).toEqual([]);
   });
+
+  test("NT-2: đã đồng ý đo → chọn ảnh là máy tự đặt điểm + tự đo; một nút điền và xem bài đọc; không chương nào báo trống vì thiếu số đo", async ({ page }) => {
+    test.skip(!anh, "không tải được ảnh mẫu công khai (mạng CI)");
+    test.setTimeout(120_000);
+    await napHoSo(page);
+    await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm1", luc: "2026-11-06T01:00:00Z" })));
+    await page.goto("/nhan-tuong");
+    await page.getByTestId("do-input").setInputFiles({ name: "chan-dung.jpg", mimeType: "image/jpeg", buffer: anh! });
+    const gy = page.getByTestId("do-goi-y");
+    await expect(gy).toBeVisible({ timeout: 90_000 });                                  // không bấm "Đo" — máy tự đo
+    await expect(page.getByTestId("do-tinh")).toHaveText(/Đo lại/);
+    await page.getByTestId("do-dung-xem").click();
+    const bc = page.getByTestId("bao-cao-nhan-tuong");
+    await expect(bc).toBeVisible({ timeout: 20_000 });
+    await expect(bc).not.toContainText("Bạn chưa trả lời câu nào về Chuẩn Đầu");
+    await expect(bc).not.toContainText("Bạn chưa trả lời câu nào về Lông mày");
+  });
 });

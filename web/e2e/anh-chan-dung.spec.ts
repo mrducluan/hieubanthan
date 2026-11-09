@@ -52,7 +52,9 @@ test("đo trên ảnh (engine thật, không AI): chấm 20 điểm → gợi ý
   await nut.click();
   const gy = page.getByTestId("do-goi-y");
   await expect(gy).toBeVisible({ timeout: 20_000 });
-  await expect(gy).toContainText("Hệ thống đo được 2 nét");
+  await expect(gy).toContainText("(2 nổi bật)");                                    // NT-2: nét "vừa" cũng có câu trả lời
+  await expect(page.getByTestId("goi-y-vua")).toContainText("Rộng vừa");
+  await expect(page.getByTestId("goi-y-con-lai")).toBeVisible();
   await expect(gy).toContainText("Dài, hẹp, thanh");
   await expect(gy).toContainText("Phần trán dài rõ");
   await expect(page.getByTestId("do-so-do")).toContainText("Cao / ngang gò má: 1,63");
@@ -64,8 +66,9 @@ test("đo trên ảnh (engine thật, không AI): chấm 20 điểm → gợi ý
   expect(JSON.stringify(t)).not.toContain("base64");
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.dong_y_do_mat.v1") ?? "null")?.phien_ban)).toBe("dm1");
   await page.getByTestId("do-dung").click();
-  await expect(page.getByTestId("do-da-dung")).toContainText("Đã điền 2 nét");
-  await expect(page.getByTestId("so-cau-da-tra-loi")).toHaveText("2");
+  const soDien = (await page.getByTestId("do-da-dung").textContent())?.match(/Đã điền (\d+) nét/)?.[1];
+  expect(Number(soDien)).toBeGreaterThan(5);
+  await expect(page.getByTestId("so-cau-da-tra-loi")).toHaveText(soDien!);
   await expect(page.getByTestId("cau-khuon_mat").getByRole("button", { name: "Dài, hẹp, thanh" })).toHaveAttribute("aria-pressed", "true");
   await page.getByTestId("do-xem-bai-doc").click();
   await expect(page.getByTestId("bao-cao-nhan-tuong")).toBeVisible({ timeout: 20_000 });

@@ -1382,6 +1382,10 @@
      "nhan": "Dày, chắc, hàm rộng, thịt chắc"
     },
     {
+     "ma": "can_doi",
+     "nhan": "Cân đối, không trội hẳn kiểu nào"
+    },
+    {
      "ma": "khong_chac",
      "nhan": "Không chắc / bỏ qua"
     }
@@ -1656,6 +1660,10 @@
      "nhan": "Ửng đỏ"
     },
     {
+     "ma": "vua",
+     "nhan": "Rộng vừa (khoảng hai ngón tay)"
+    },
+    {
      "ma": "khong_chac",
      "nhan": "Không chắc / bỏ qua"
     }
@@ -1688,6 +1696,10 @@
     {
      "ma": "cup_xuong",
      "nhan": "Đuôi mắt cụp xuống"
+    },
+    {
+     "ma": "vua",
+     "nhan": "Dài vừa, đuôi mắt gần ngang"
     },
     {
      "ma": "khong_chac",
@@ -1910,6 +1922,10 @@
      "nhan": "Xoè rộng"
     },
     {
+     "ma": "vua",
+     "nhan": "Rộng vừa, cân với khoảng giữa hai mắt"
+    },
+    {
      "ma": "khong_chac",
      "nhan": "Không chắc / bỏ qua"
     }
@@ -1968,6 +1984,10 @@
     {
      "ma": "lech",
      "nhan": "Lệch"
+    },
+    {
+     "ma": "vua",
+     "nhan": "Dài vừa"
     },
     {
      "ma": "khong_chac",
@@ -2032,6 +2052,10 @@
     {
      "ma": "lech",
      "nhan": "Lệch, khép không kín"
+    },
+    {
+     "ma": "vua",
+     "nhan": "Rộng vừa, khoé gần ngang"
     },
     {
      "ma": "khong_chac",
@@ -2114,6 +2138,10 @@
     {
      "ma": "banh",
      "nhan": "Bành rộng, nhìn sau thấy rõ"
+    },
+    {
+     "ma": "vua",
+     "nhan": "Rộng vừa với gò má"
     },
     {
      "ma": "khong_chac",
@@ -5186,6 +5214,170 @@
     "y": null
    },
    "he": "Kim"
+  },
+  "mat_can_doi": {
+   "ten": "Dáng mặt cân đối",
+   "bo_vi": "khuon_mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "khuon_mat": [
+     "can_doi"
+    ]
+   },
+   "muc": null,
+   "chuong": [
+    "tong_quan"
+   ],
+   "tieu_de": "Dáng mặt cân đối, không trội hẳn kiểu nào",
+   "noi_dung": "Chiều dài, bề ngang trán, gò má và quai hàm của bạn nằm trong khoảng thường — không nghiêng hẳn về vuông, dài hay tròn. Sách xưa khi gặp mặt như vậy thì xem tiếp các nét khác (sắc, xương thịt, giọng, dáng) để định hành, không vội xếp loại.",
+   "viec": "Trả lời thêm hai câu về xương thịt và giọng nói ở phần Khảo sát để dáng mặt theo năm hành rõ hơn.",
+   "uu_tien": 2,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": "Ngũ hình xem tổng thể: hình, sắc, thanh, khí cùng xét, không lấy một nét mà định."
+   }
+  },
+  "an_duong_vua": {
+   "ten": "Ấn Đường rộng vừa",
+   "bo_vi": "an_duong",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "an_duong": [
+     "vua"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Ấn Đường rộng vừa",
+   "noi_dung": "Khoảng giữa hai đầu mày rộng cỡ khoảng giữa hai khoé mắt — đúng mức sách xưa coi là thông. Người như vậy thường không quá khép kín, cũng không quá dễ dãi; độ sáng hay tối của vùng này mới nói nhiều về giai đoạn hiện tại.",
+   "viec": "Soi gương buổi sáng một tuần: vùng giữa hai mày sáng hay xỉn đi những hôm bạn ngủ ít.",
+   "uu_tien": 2,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": "Ấn Đường rộng khoảng hai ngón tay là chuẩn (Ma Y)."
+   }
+  },
+  "mat_vua": {
+   "ten": "Mắt dài vừa, đuôi gần ngang",
+   "bo_vi": "mat",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "mat_hinh": [
+     "vua"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi"
+   ],
+   "tieu_de": "Mắt dài vừa, đuôi gần ngang",
+   "noi_dung": "Mắt dài khoảng một phần năm bề ngang mặt, đuôi không chếch lên cũng không cụp xuống — đúng phép \"ngũ nhãn\". Sách xưa xem mắt chủ yếu ở thần (ánh nhìn yên hay đảo), phần đó ảnh không đo được.",
+   "viec": "Trả lời câu \"ánh mắt\" ở phần Khảo sát: nhìn thẳng vào gương 5 giây rồi chọn.",
+   "uu_tien": 2,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": "Mặt ngang bằng năm mắt là cân (phép tam đình ngũ nhãn)."
+   }
+  },
+  "canh_mui_vua": {
+   "ten": "Cánh mũi rộng vừa",
+   "bo_vi": "canh_mui",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "canh_mui": [
+     "vua"
+    ]
+   },
+   "muc": "thuan",
+   "chuong": [
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Cánh mũi rộng vừa, cân với hai mắt",
+   "noi_dung": "Hai cánh mũi rộng xấp xỉ khoảng giữa hai khoé mắt — sách xưa gọi Lan Đài, Đình Uý \"tương xứng\". Đời thường: tiền vào ra có chừng mực, không quá chặt cũng không quá tay. Độ dày cánh mũi (giữ tiền) bạn tự xem thêm.",
+   "viec": "Ghi lại ba khoản chi lớn nhất tháng này, xem khoản nào bạn muốn giữ lại.",
+   "uu_tien": 2,
+   "sach": {
+    "trich": "Lan Đài Đình Uý tương xứng, phú quý.",
+    "nguon": "ma_y",
+    "y": "Hai cánh mũi cân xứng là nét thuận về tiền (Ma Y)."
+   }
+  },
+  "mieng_vua": {
+   "ten": "Miệng rộng vừa, khoé gần ngang",
+   "bo_vi": "mieng",
+   "truong_phai": "tam_tuong",
+   "dieu_kien": {
+    "mieng": [
+     "vua"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "con_nguoi",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Miệng rộng vừa, khoé gần ngang",
+   "noi_dung": "Miệng rộng hơn cánh mũi ở mức thường, hai khoé gần ngang. Sách xưa đọc miệng theo nếp: khoé hay cong lên khi nói là người giữ lời và ăn nói có duyên — phần này đổi theo thói quen cười nói của bạn.",
+   "viec": "Để ý một tuần: khi nói chuyện, khoé miệng bạn hay hướng lên hay mím lại.",
+   "uu_tien": 2,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": "Miệng là Xuất Nạp quan: vuông vức, khoé hướng lên là thuận (Ma Y)."
+   }
+  },
+  "nhan_trung_vua": {
+   "ten": "Nhân Trung dài vừa",
+   "bo_vi": "nhan_trung",
+   "truong_phai": "tam_dinh_ngu_quan",
+   "dieu_kien": {
+    "nhan_trung": [
+     "vua"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tinh_cam_gia_dinh",
+    "suc_khoe"
+   ],
+   "tieu_de": "Nhân Trung dài vừa",
+   "noi_dung": "Rãnh từ chân mũi tới môi trên dài khoảng một phần ba phần dưới của mặt — mức thường. Sách xưa còn xem rãnh sâu hay nông, thẳng hay lệch; ảnh thẳng không thấy độ sâu nên bạn tự soi thêm dưới ánh sáng chiếu nghiêng.",
+   "viec": "Giữ nhịp ngủ đều trong tuần này — sách xưa gắn vùng này với sức bền.",
+   "uu_tien": 2,
+   "sach": {
+    "trich": null,
+    "nguon": "than_tuong_toan_bien",
+    "y": "Nhân Trung xem dài ngắn, sâu nông, thẳng lệch (Thần Tướng Toàn Biên)."
+   }
+  },
+  "ham_vua": {
+   "ten": "Quai hàm rộng vừa",
+   "bo_vi": "ham",
+   "truong_phai": "cot_phap_nhuc_phap",
+   "dieu_kien": {
+    "ham": [
+     "vua"
+    ]
+   },
+   "muc": "can_bang",
+   "chuong": [
+    "tinh_cam_gia_dinh",
+    "cong_viec_tien"
+   ],
+   "tieu_de": "Quai hàm rộng vừa với gò má",
+   "noi_dung": "Quai hàm hẹp hơn gò má ở mức thường, không bành, không gầy. Sách xưa gọi vùng này là Nô Bộc — người giúp việc, cộng sự: độ đầy thịt ở đây mới nói rõ, phần đó bạn tự sờ thử.",
+   "viec": "Nghĩ tới hai người đang giúp bạn nhiều nhất và nói một lời cảm ơn cụ thể.",
+   "uu_tien": 2,
+   "sach": {
+    "trich": null,
+    "nguon": "ma_y",
+    "y": "Hàm (Nô Bộc) đầy vững thì người dưới tin cậy (Ma Y)."
+   }
   }
  },
  "chuong": {
@@ -5242,7 +5434,7 @@
  ],
  "mau": {
   "mo_dau": "Bài đọc này dựng từ điều BẠN tự quan sát trong gương ({so} nét), ghép với cách đọc của sách tướng xưa. Nó nói về xu hướng và thói quen, không nói trước điều gì sẽ xảy ra; đúng hay chưa, bạn là người chấm.",
-  "thieu": "Bạn chưa trả lời câu nào về {ten} — mở phần Khảo sát để bổ sung, chương này sẽ đầy hơn.",
+  "thieu": "Bạn chưa trả lời câu nào về {ten} — phần này ảnh chưa đo được (độ đầy thịt, sắc, nếp, độ cao nhìn nghiêng), mở phần Khảo sát tự soi gương để bổ sung, chương này sẽ đầy hơn.",
   "khong_dau_hieu": "Những nét bạn chọn ở vùng này đều ở mức trung tính — sách xưa không có gì đặc biệt để nói, và đó thường là dấu hiệu tốt.",
   "muc_chuong": {
    "thuan": "Nhiều nét ở vùng này thuận.",
@@ -5851,7 +6043,10 @@
    "mui_lech": 0.18,
    "quay_toi_da": 0.04,
    "quay_canh_bao": 0.06,
-   "tai_lech_cao": 0.03
+   "tai_lech_cao": 0.03,
+   "tran_hep": 0.86,
+   "mui_hep": 0.8,
+   "nhan_trung_dai": 0.42
   },
   "loi": {
    "khuon_mat": "Mặt cao bằng {cao_rong} lần bề ngang gò má; trán rộng bằng {tran_ma}, quai hàm bằng {ham_ma} bề ngang gò má.",
@@ -5874,7 +6069,8 @@
    "song_mui_nghieng": "Sống mũi gồ khỏi đường thẳng gốc mũi – đầu mũi {gu_mui} lần chiều dài; đầu mũi nhô {nho_mui} lần chiều dài mũi (thường khoảng 0,3).",
    "cam_nghieng": "Góc lồi của mặt (Ấn Đường – chân mũi – cằm) là {loi_mat}° (thường 8–16°; lớn hơn = cằm lùi vào).",
    "tai_nghieng": "Nhìn nghiêng: đỉnh tai {dinh_tai} so với đầu mày; dái tai {dai_tai} so với chân mũi (sách xưa: tai cao ngang mày, dái tai tới chân mũi là tai tốt).",
-   "canh_bao_hai_nghieng": "Hai ảnh nghiêng cho kết quả khác nhau ở: {cau} — chưa gợi ý những nét này; chấm lại cho khớp hoặc chỉ dùng một ảnh."
+   "canh_bao_hai_nghieng": "Hai ảnh nghiêng cho kết quả khác nhau ở: {cau} — chưa gợi ý những nét này; chấm lại cho khớp hoặc chỉ dùng một ảnh.",
+   "tran_thang": "Trán (ngang đuôi mày) rộng bằng {tran_ma} bề ngang gò má; phần trán chiếm {thuong}% chiều dài mặt. Độ đầy, gồ hay lõm cần ảnh nghiêng."
   },
   "_ghi_chu_nguong": "ANH-3 (2026-11-06): 'mép trán ngang đuôi mày' đo theo viền mặt ≈ 0,95–1,0 bề ngang gò má, hàm ≈ 0,75–0,80 (số đo nhân trắc phổ biến) → hiệu trán − hàm trung bình ~0,19; 'trên rộng dưới nhọn' cần ≥ 0,26 (trước 0,18 bắt nhầm mặt trung bình). Mọi ngưỡng vẫn chờ chuyên gia duyệt.",
   "diem_nghieng": [

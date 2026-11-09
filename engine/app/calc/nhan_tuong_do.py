@@ -18,16 +18,19 @@ from app.calc import nhan_tuong as nt
 from app.kb import nhan_tuong_kb as kb
 
 # Câu khảo sát đo được từ hình học + các lựa chọn hàm này có thể gợi ý.
+# NT-2: nét nằm trong khoảng thường → lựa chọn "vừa" (`vua` / `can_doi`, cờ `vua: True`) — ảnh đo được thì trả lời luôn,
+# không bỏ trống chỉ vì mặt cân đối. Câu cần độ sâu / sắc / nếp (cao rộng đầy, dày kín…) KHÔNG đoán từ ảnh thẳng.
 CAU_DO: dict[str, tuple[str, ...]] = {
-    "khuon_mat": ("vuong", "dai", "tron", "tren_hep_duoi_rong", "tren_rong_duoi_nhon"),
+    "khuon_mat": ("vuong", "dai", "tron", "tren_hep_duoi_rong", "tren_rong_duoi_nhon", "can_doi"),
     "tam_dinh": ("can_doi", "tran_dai", "mui_dai", "cam_dai", "tran_ngan", "cam_ngan"),
+    "tran": ("hep_thap",),
     "long_may": ("giao_nhau",),
-    "an_duong": ("hep", "rong_sang"),
-    "mat_hinh": ("xech_len", "cup_xuong", "nho"),
-    "canh_mui": ("xoe_rong",),
-    "mieng": ("rong_khoe_len", "khoe_cup", "nho_mong", "lech"),
-    "nhan_trung": ("ngan",),
-    "ham": ("banh", "hep_gay"),
+    "an_duong": ("hep", "rong_sang", "vua"),
+    "mat_hinh": ("xech_len", "cup_xuong", "nho", "vua"),
+    "canh_mui": ("xoe_rong", "vua"),
+    "mieng": ("rong_khoe_len", "khoe_cup", "nho_mong", "lech", "vua"),
+    "nhan_trung": ("ngan", "vua"),
+    "ham": ("banh", "hep_gay", "vua"),
     "song_mui": ("lech",),
     "tai": ("cao_day", "nho_thap"),
 }
@@ -146,10 +149,11 @@ def _do_thang(diem: dict, ti_le: float) -> dict:
           "dai" if cr >= ng["dai_cao_rong"] else
           "vuong" if hm >= ng["vuong_ham_ma"] else
           "tron" if cr <= ng["tron_cao_rong"] else None)
-    if km:
-        them("khuon_mat", km, "khuon_mat", cao_rong=cr, tran_ma=tm, ham_ma=hm)
+    them("khuon_mat", km or "can_doi", "khuon_mat", cao_rong=cr, tran_ma=tm, ham_ma=hm)
     if td:
         them("tam_dinh", td["lua_chon"], "tam_dinh", **sd["tam_dinh"])
+    if tm < ng["tran_hep"] or (td and td["thuong"] < 0.29):
+        them("tran", "hep_thap", "tran_thang", tran_ma=tm, thuong=round(td["thuong"] * 100) if td else "?")
     mk = sd["may_khoe"]
     if mk < ng["may_giao"]:
         them("long_may", "giao_nhau", "long_may", may_khoe=mk)
@@ -157,6 +161,8 @@ def _do_thang(diem: dict, ti_le: float) -> dict:
         them("an_duong", "hep", "an_duong", may_khoe=mk)
     elif mk >= ng["may_rong"]:
         them("an_duong", "rong_sang", "an_duong", may_khoe=mk)
+    else:
+        them("an_duong", "vua", "an_duong", may_khoe=mk)
     nm, mm = sd["nghieng_mat"], sd["mat_mat"]
     if nm >= ng["mat_xech"]:
         them("mat_hinh", "xech_len", "mat_hinh_nghieng", nghieng_mat=nm)
@@ -164,8 +170,12 @@ def _do_thang(diem: dict, ti_le: float) -> dict:
         them("mat_hinh", "cup_xuong", "mat_hinh_nghieng", nghieng_mat=nm)
     elif mm < ng["mat_nho"]:
         them("mat_hinh", "nho", "mat_hinh_nho", mat_mat=mm)
+    else:
+        them("mat_hinh", "vua", "mat_hinh_nho", mat_mat=mm)
     if sd["mui_khoe"] >= ng["mui_xoe"]:
         them("canh_mui", "xoe_rong", "canh_mui", mui_khoe=sd["mui_khoe"])
+    elif sd["mui_khoe"] >= ng["mui_hep"]:                    # hẹp hơn: khảo sát không có lựa chọn "hẹp" → không đoán
+        them("canh_mui", "vua", "canh_mui", mui_khoe=sd["mui_khoe"])
     quay_ngang = sd["quay"] > ng["quay_toi_da"]
     km_, mn = sd["khoe_mieng"], sd["mieng_mui"]
     if not quay_ngang and sd["lech_mieng"] >= ng["mieng_lech"]:
@@ -176,12 +186,18 @@ def _do_thang(diem: dict, ti_le: float) -> dict:
         them("mieng", "rong_khoe_len", "mieng", mieng_mui=mn, khoe_mieng=km_)
     elif mn < ng["mieng_nho"]:
         them("mieng", "nho_mong", "mieng", mieng_mui=mn, khoe_mieng=km_)
+    else:
+        them("mieng", "vua", "mieng", mieng_mui=mn, khoe_mieng=km_)
     if sd["nhan_trung"] < ng["nhan_trung_ngan"]:
         them("nhan_trung", "ngan", "nhan_trung", nhan_trung=sd["nhan_trung"])
+    elif sd["nhan_trung"] < ng["nhan_trung_dai"]:            # dài hơn: sâu hay nông ảnh thẳng không thấy → không đoán
+        them("nhan_trung", "vua", "nhan_trung", nhan_trung=sd["nhan_trung"])
     if hm >= ng["ham_banh"]:
         them("ham", "banh", "ham", ham_ma=hm)
     elif hm <= ng["ham_hep"]:
         them("ham", "hep_gay", "ham", ham_ma=hm)
+    else:
+        them("ham", "vua", "ham", ham_ma=hm)
     if not quay_ngang and sd["lech_mui"] >= ng["mui_lech"]:
         them("song_mui", "lech", "song_mui", lech_mui=sd["lech_mui"])
     if "dinh_tai" in p and "dai_tai" in p:
@@ -201,8 +217,18 @@ def _do_thang(diem: dict, ti_le: float) -> dict:
         canh_bao.append(loi["canh_bao_nghieng"].format(goc=_so(abs(goc)).rstrip("0").rstrip(",")))
     if sd["quay"] > ng["quay_canh_bao"] or quay_ngang:
         canh_bao.append(loi["canh_bao_quay"])
-    return {"goi_y": [{"cau": c, "lua_chon": l, "do": t, "nguon": nguon, "anh": "thang"} for c, l, t in goi], "so_do": sd,
-            "canh_bao": canh_bao}
+    vua = lambda c, l: l in _VUA and c != "tam_dinh"  # noqa: E731
+    # Mặt quay ngang: bề ngang hai bên co giãn khác nhau → không kết luận "vừa" (chỉ giữ nét lệch rõ như trước).
+    return {"goi_y": [{"cau": c, "lua_chon": l, "do": t, "nguon": nguon, "anh": "thang", **({"vua": True} if vua(c, l) else {})}
+                      for c, l, t in goi if not (quay_ngang and vua(c, l))], "so_do": sd, "canh_bao": canh_bao}
+
+
+_VUA = ("vua", "can_doi")
+
+
+def _uu_tien_nghieng(g: dict) -> bool:
+    """Câu ảnh thẳng chỉ ra "vừa" (hoặc trán hẹp đo theo bề ngang) → ảnh nghiêng (thấy độ sâu) được thay nếu đo ra nét rõ."""
+    return bool(g.get("vua")) or g["cau"] == "tran"
 
 
 # ------------------------------------------------------------------ ANH-4: ảnh nghiêng
@@ -363,7 +389,7 @@ def _ghep_nghieng(kq: dict, nghieng: list[dict]) -> dict:
         except ValueError as e:
             raise ValueError(f"{_TEN_GOC[goc]}: {e}") from e
         ket.append((goc, k))
-    co = {g["cau"] for g in kq["goi_y"]}
+    co = {g["cau"] for g in kq["goi_y"] if not _uu_tien_nghieng(g)}
     theo_cau: dict[str, list[tuple[str, dict]]] = {}
     for goc, k in ket:
         for g in k["goi_y"]:
@@ -376,6 +402,7 @@ def _ghep_nghieng(kq: dict, nghieng: list[dict]) -> dict:
             lech.append(cau)
             continue
         goc, g = ds[0]
+        kq["goi_y"] = [x for x in kq["goi_y"] if x["cau"] != cau]
         kq["goi_y"].append({**g, "anh": goc})
     kq["so_do"]["nghieng"] = [{"goc": goc, **k["so_do"]} for goc, k in ket]
     if lech:
