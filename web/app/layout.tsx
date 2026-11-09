@@ -8,6 +8,7 @@ import { ThuongVe } from "@/components/sao/ThuongVe";
 import { DangKyApp } from "@/components/khung/DangKyApp";
 import { GhiVaoTrang } from "@/components/khung/GhiVaoTrang";
 import { ChanTrang, KhungChanTrang } from "@/components/khung/ChanTrang";
+import { KhungEn } from "@/components/en/KhungEn";
 import { COT_CHAN_TRANG } from "@/lib/menu-chan-trang";
 import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { ThanhMang } from "@/components/khung/ThanhMang";
@@ -84,7 +85,26 @@ async function XemNhap() {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   // CSP-2: nonce của lượt tải (proxy.ts) — đọc header cũng khiến mọi trang render động, bắt buộc để nonce khớp từng lượt.
-  const [nonce, chuChung] = await Promise.all([(async () => (await headers()).get("x-nonce") ?? undefined)(), chuChungCms()]);
+  const hd = await headers();
+  const nonce = hd.get("x-nonce") ?? undefined;
+  // QTE: /en → khung tiếng Anh gọn (không CMS, không Sao, không menu Huyền học); đo lường + giám sát giữ như bản Việt.
+  if (hd.get("x-ngon-ngu") === "en") {
+    return (
+      <html lang="en" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
+        <body>
+          <GtmNoScript />
+          <JsonLd data={goiLd(ldToChuc(), ldWebsite())} />
+          <div className="star-field" aria-hidden />
+          <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">Skip to content</a>
+          <KhungEn>{children}</KhungEn>
+          <GiamSat />
+          <GhiVaoTrang />
+          <DoLuongGoogle nonce={nonce} />
+        </body>
+      </html>
+    );
+  }
+  const chuChung = await chuChungCms();
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
       <body>

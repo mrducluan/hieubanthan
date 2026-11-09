@@ -9,8 +9,11 @@ thay, chuỗi nào chưa dịch giữ tiếng Việt (web gắn nhãn theo `tran
 
 Quy tắc gộp (khớp bản phủ `quy_trinh.chuyen` sinh ra):
 - dict ∘ dict → gộp từng khoá; khoá chỉ có ở bản phủ (vd `_trang_thai`) không đưa vào (bản phủ không thêm dữ kiện);
-- list ∘ list → gộp theo chỉ số (bản phủ ngắn hơn thì phần còn lại giữ gốc); phần tử `{}` ở bản phủ = chưa dịch;
-- str ∘ str không rỗng → lấy bản phủ; mọi kiểu khác (số, bool, None) → giữ gốc (bản phủ không được đổi số liệu).
+  bản phủ ghi `null` cho một khoá → khoá đó BỎ khỏi kết quả (QTE-2: để bản dịch tắt một trường chưa dịch — mã gọi
+  phải có đường rơi về, vd lá Tarot không có `viec_lv` thì dùng `viec`);
+- list ∘ list → gộp theo chỉ số (bản phủ ngắn hơn thì phần còn lại giữ gốc); phần tử `{}` ở bản phủ = chưa dịch; danh sách
+  CHUỖI mà bản phủ dài hơn → nối thêm phần dư (từ khoá tiếng Anh có thể nhiều hơn);
+- str ∘ str không rỗng → lấy bản phủ; mọi kiểu khác (số, bool) → giữ gốc (bản phủ không được đổi số liệu).
 """
 from __future__ import annotations
 
@@ -38,11 +41,17 @@ def gop(goc: Any, phu: Any) -> Any:
     if isinstance(goc, dict):
         if not isinstance(phu, dict):
             return json.loads(json.dumps(goc))
-        return {k: gop(v, phu[k]) if k in phu else json.loads(json.dumps(v)) for k, v in goc.items()}
+        return {k: (gop(v, phu[k]) if k in phu else json.loads(json.dumps(v))) for k, v in goc.items()
+                if not (k in phu and phu[k] is None)}
     if isinstance(goc, list):
         if not isinstance(phu, list):
             return json.loads(json.dumps(goc))
-        return [gop(v, phu[i]) if i < len(phu) else json.loads(json.dumps(v)) for i, v in enumerate(goc)]
+        ra = [gop(v, phu[i]) if i < len(phu) else json.loads(json.dumps(v)) for i, v in enumerate(goc)]
+        # danh sách CHUỖI (từ khoá, bí danh) ở bản phủ dài hơn gốc → nối thêm (ngôn ngữ khác có thể cần nhiều từ khoá hơn)
+        them = phu[len(goc):]
+        if them and all(isinstance(x, str) and x.strip() for x in them) and all(isinstance(x, str) for x in goc):
+            ra += list(them)
+        return ra
     if isinstance(goc, str) and isinstance(phu, str) and phu.strip():
         return phu
     return goc

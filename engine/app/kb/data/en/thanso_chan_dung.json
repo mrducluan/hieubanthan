@@ -1,0 +1,555 @@
+{
+ "_trang_thai": "bien_tap",
+ "mat": {
+  "tong_quan": "Overview",
+  "tinh_cam": "Love",
+  "cong_viec": "Work & money",
+  "bien_co": "Turning points"
+ },
+ "so": {
+  "1": {
+   "tong_quan": {
+    "chan_dung": "People with Life Path 1 are often described as trailblazers: standing in front of an empty space, they see a place to begin rather than a risk. They learn by doing it themselves, stumbling, and getting back up — and they rarely wait for permission.",
+    "dong_luc": "Deciding for yourself and seeing your own mark on the work you do.",
+    "diem_manh": [
+     "Decide fast and own the decision",
+     "Get things started while others are still discussing",
+     "Stay the course once a goal is chosen"
+    ],
+    "diem_mu": [
+     "Hear feedback as a challenge, so react before hearing it all",
+     "See asking for help as weakness, so carry everything until you burn out",
+     "Let the people beside you 'shrink' without noticing"
+    ],
+    "khi_cang_thang": "Tightening control: doing everything yourself, deciding alone, speaking shorter and harder than usual.",
+    "huong_lon": "From 'I can do it alone' to 'I can lead others to do it with me' — real strength is letting other people grow too."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves through action: protecting, providing, coming up with a plan. Likes to take the lead from the first date to the decision to commit.",
+    "can_duoc": "Respect for their decisions, recognition of their effort, and some room of their own without being called distant.",
+    "diem_mu": "Tends to decide for both people; treats the partner's feelings as 'a problem to solve' rather than something to listen to.",
+    "hop_kieu_nguoi": "Someone with their own opinions, steady enough to say 'no' to them and still stay.",
+    "dau_hieu_lech": "When the partner says less and less about what they want and only 'whatever you like' is left — that is a sign the 1 is taking over.",
+    "hon_nhan": "Usually takes the role of the pillar and makes most of the big decisions; needs to practise discussing before deciding, especially about money and where to live."
+   },
+   "cong_viec": {
+    "the_manh": "Initiating, leading, working independently, handling the pressure of decisions.",
+    "moi_truong": "A place where they are given authority, measured by results, with little waiting for approval.",
+    "vai_tro": "Project starter, team lead, self-employed business owner.",
+    "nghe": [
+     "Starting a business, running your own venture",
+     "Project management",
+     "Sales, market development",
+     "Engineering or architecture designing new solutions",
+     "Sport, coaching"
+    ],
+    "cai_bay": "Starts a lot, hands over little; finds it hard to work under someone they do not respect.",
+    "tien_bac": "Willing to back their own ideas; can spend big because they trust their own judgement — have a rule or a person who pushes back before any large spend."
+   },
+   "bien_co": {
+    "kieu_bien_co": "The turning points people with this number tend to recall are moments of having to stand alone: leaving home early, losing a support, being pushed into the decision-maker's seat before feeling ready.",
+    "bai_hoc": "Independence does not mean isolation.",
+    "cach_di_qua": "When life puts you in a spot where you have to decide, decide — but tell at least one person you trust before you act."
+   }
+  },
+  "2": {
+   "tong_quan": {
+    "chan_dung": "Life Path 2 is often described as the person who senses the mood in a room before anyone says a word. They are the glue of the group: mediating, connecting, keeping everyone able to sit at the same table.",
+    "dong_luc": "Being in warm, give-and-take relationships and being needed by others.",
+    "diem_manh": [
+     "Listen deeply, read other people's feelings",
+     "Work well with others, build lasting teamwork",
+     "Patient, comfortable with a slow pace"
+    ],
+    "diem_mu": [
+     "Avoid conflict until a small issue becomes a big one",
+     "Say 'yes' when you mean 'no'",
+     "Measure your own worth by other people's reactions"
+    ],
+    "khi_cang_thang": "Withdrawing, going quiet, blaming yourself; holding on to hurt without saying it.",
+    "huong_lon": "From 'keep the peace at any cost' to 'tell the truth kindly' — real harmony needs your voice too."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves through attention: remembering small details, tending to feelings, staying quietly close.",
+    "can_duoc": "To be sure they are loved — through words, presence and consistency.",
+    "diem_mu": "Tends to dissolve into the other person and forget what they want; gets angry without saying so, then hurts quietly.",
+    "hop_kieu_nguoi": "Someone warm who speaks plainly and asks how they are without needing to be read.",
+    "dau_hieu_lech": "When the 2 starts saying 'never mind' and stops telling their own stories — the distance is growing.",
+    "hon_nhan": "Values closeness and a peaceful home; needs to practise setting boundaries with both families."
+   },
+   "cong_viec": {
+    "the_manh": "Coordinating, supporting, soft negotiation, customer care, careful detailed work.",
+    "moi_truong": "A harmonious team with a clear leader, where quiet contributions are recognised.",
+    "vai_tro": "Right hand, coordinator, the person who connects the parties.",
+    "nghe": [
+     "Human resources, counselling",
+     "Diplomacy, negotiation",
+     "Executive assistant",
+     "Customer care",
+     "Music or the arts where finesse matters"
+    ],
+    "cai_bay": "Does a lot but does not speak up to claim their share; gets handed 'nameless' tasks beyond their capacity.",
+    "tien_bac": "Careful and drawn to safety; tends to lend money out of politeness — set a clear limit before helping anyone."
+   },
+   "bien_co": {
+    "kieu_bien_co": "Turning points often come through relationships: a break-up, a betrayal of trust, or a person arriving at the right moment who changes the direction.",
+    "bai_hoc": "Sensitivity is a gift when it comes with boundaries.",
+    "cach_di_qua": "When a relationship is shaking, ask 'what do I need?' before asking 'what does the other person think?'."
+   }
+  },
+  "3": {
+   "tong_quan": {
+    "chan_dung": "Life Path 3 is often described as the bringer of joy and words: a captivating storyteller, quick with ideas, someone who brightens a room. Under the carefree surface there is usually a sensitive soul prone to self-doubt.",
+    "dong_luc": "Expressing themselves and having what they create welcomed by others.",
+    "diem_manh": [
+     "Express, persuade, inspire",
+     "Creative, full of ideas",
+     "Upbeat, easy to connect with"
+    ],
+    "diem_mu": [
+     "Start many things, finish few once the excitement fades",
+     "Use a joke to dodge serious conversations",
+     "Scatter your energy across too many things"
+    ],
+    "khi_cang_thang": "Talking more, forcing cheerfulness — or the opposite, going completely quiet and criticising themselves.",
+    "huong_lon": "From 'many ideas' to 'one finished piece of work' — discipline is what turns talent into value."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves through joy, words and small surprises; wants a relationship with laughter in it.",
+    "can_duoc": "To be praised, to be heard, and to be themselves without being called 'childish'.",
+    "diem_mu": "Dodges hard conversations by changing the subject; gets bored when the relationship settles into routine.",
+    "hop_kieu_nguoi": "Someone who enjoys their humour but is steady enough to bring them back to what matters when needed.",
+    "dau_hieu_lech": "When the 3 only jokes and no longer shares anything heartfelt — they are avoiding something.",
+    "hon_nhan": "Brings a cheerful atmosphere into the home; needs clearly agreed responsibilities so chores and money do not drift."
+   },
+   "cong_viec": {
+    "the_manh": "Communicating, writing, presenting, creating content, working with people.",
+    "moi_truong": "Lively, with room for new ideas, not too heavy on process.",
+    "vai_tro": "Communicator, idea person, the face of the team.",
+    "nghe": [
+     "Media, marketing, content creation",
+     "Writing, journalism, screenwriting",
+     "Teaching, training",
+     "Performing arts, design",
+     "Consultative sales"
+    ],
+    "cai_bay": "Holds too many half-finished projects; gets bored with repetitive work even when it is needed to succeed.",
+    "tien_bac": "Spends on impulse and is generous with friends; benefits from an automatic system (save first, spend after)."
+   },
+   "bien_co": {
+    "kieu_bien_co": "Turning points often come when they are forced to choose a single direction, or after a time when their talent was undervalued and they had to prove themselves.",
+    "bai_hoc": "Talent needs one place to pour itself into fully.",
+    "cach_di_qua": "Pick one thing, set a public deadline, and finish it before opening anything new."
+   }
+  },
+  "4": {
+   "tong_quan": {
+    "chan_dung": "Life Path 4 is often described as the foundation builder: disciplined, dependable, moving one solid step at a time. They are not loud, but when they say 'yes' the job gets done.",
+    "dong_luc": "Stability, order and the feeling of building something that lasts.",
+    "diem_manh": [
+     "Hard-working, persistent, keep your word",
+     "Systematic, careful with detail",
+     "Practical, aware of risks"
+    ],
+    "diem_mu": [
+     "Rigid when plans change",
+     "Struggle to accept ways of working different from your own",
+     "Overwork because rest feels like laziness"
+    ],
+    "khi_cang_thang": "Clinging to rules, getting picky and grumbling; taking on more work instead of saying they are tired.",
+    "huong_lon": "From 'by the book' to 'flexible yet solid' — a good foundation is one that can take change."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves through steady presence: keeping promises, handling practical matters, building shared plans.",
+    "can_duoc": "Loyalty, consistency and a sense of safety — no big surprises.",
+    "diem_mu": "Shows affection in a dry way; thinks 'doing for' is enough and forgets 'saying to'.",
+    "hop_kieu_nguoi": "Someone who values stability but brings a little extra warmth and lightness.",
+    "dau_hieu_lech": "When the relationship is only schedules and duties, with no time left to enjoy together.",
+    "hon_nhan": "A solid pillar in finances and household order; needs to deliberately make time for romance as a 'task to do'."
+   },
+   "cong_viec": {
+    "the_manh": "Organising, operating, precise work, managing processes and numbers.",
+    "moi_truong": "Clear structure, measurable goals, being trusted with long-term responsibility.",
+    "vai_tro": "Operator, quality keeper, middle manager.",
+    "nghe": [
+     "Accounting, auditing, finance",
+     "Engineering, construction",
+     "Operations management, supply chain",
+     "Programming, data analysis",
+     "Law, administration"
+    ],
+    "cai_bay": "Does assigned work well but hesitates to take on new work with no clear method; can be left behind when the industry changes.",
+    "tien_bac": "Saves and builds up steadily; needs to allow themselves to spend on experiences and learning new things."
+   },
+   "bien_co": {
+    "kieu_bien_co": "Turning points tend to be moments when the foundation shakes: losing a stable job, a policy change, a long-term plan that has to be rebuilt from scratch.",
+    "bai_hoc": "Real safety comes from the ability to adapt, not from everything standing still.",
+    "cach_di_qua": "When a plan collapses, break the rebuild into the smallest steps you can do this week."
+   }
+  },
+  "5": {
+   "tong_quan": {
+    "chan_dung": "Life Path 5 is often described as a person of freedom and experience: curious, keen to travel, keen to try, drawn to a life with movement in it. They learn by living many lives in one.",
+    "dong_luc": "Freedom to choose and the feeling that their life is moving.",
+    "diem_manh": [
+     "Adapt quickly to new situations",
+     "Flexible, persuasive communicator",
+     "Willing to try, willing to change"
+    ],
+    "diem_mu": [
+     "Find long-term commitment hard",
+     "Act on impulse when bored",
+     "Get drawn into things that give a strong rush"
+    ],
+    "khi_cang_thang": "Wanting to leave, change jobs, change places — running from the feeling of being trapped.",
+    "huong_lon": "From 'freedom from every tie' to 'freedom to choose what is worth committing to' — commitment in the right place is also a kind of freedom."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves through shared experiences: going places, trying new things, interesting conversations.",
+    "can_duoc": "Personal space, trust, and a relationship that is not monotonous.",
+    "diem_mu": "Gets bored when things settle; mistakes safety for dullness.",
+    "hop_kieu_nguoi": "Someone independent with a rich life of their own who does not hold on too tight.",
+    "dau_hieu_lech": "When the 5 starts looking for new thrills outside the relationship — the need for freshness should be voiced before it is too late.",
+    "hon_nhan": "Needs a marriage with 'windows': each person has their own space and the two take regular trips together."
+   },
+   "cong_viec": {
+    "the_manh": "Sales, communication, negotiation, handling situations, multitasking.",
+    "moi_truong": "Constant change, lots of travel, meeting new people, control over their own time.",
+    "vai_tro": "Market opener, crisis handler, cross-industry connector.",
+    "nghe": [
+     "Travel, hospitality, aviation",
+     "Sales, business development",
+     "Journalism, media",
+     "Events, entertainment",
+     "Freelancing, online business"
+    ],
+    "cai_bay": "Jumps jobs as soon as the novelty wears off, so finds it hard to build depth and position.",
+    "tien_bac": "Earns fast, spends fast; easily tempted by 'get rich quick' offers — keep an amount you never touch."
+   },
+   "bien_co": {
+    "kieu_bien_co": "A 5's life tends to have many turning points: moving home, changing careers, sudden decisions — sometimes chosen, sometimes pushed by circumstances.",
+    "bai_hoc": "Change is only worth something when you learn from it.",
+    "cach_di_qua": "Before each big change, write down: 'am I running towards something, or away from something?'."
+   }
+  },
+  "6": {
+   "tong_quan": {
+    "chan_dung": "Life Path 6 is often described as the person of responsibility and care: family, friends and community turn to them when in need. They have an eye for beauty and a longing to make everything around them harmonious.",
+    "dong_luc": "Being loved, being needed, and seeing that everyone they look after is all right.",
+    "diem_manh": [
+     "Devoted, responsible",
+     "Warm, caring",
+     "Good taste, able to create a pleasant space"
+    ],
+    "diem_mu": [
+     "Worry and decide on other people's behalf",
+     "Sacrifice, then expect it to be repaid",
+     "Perfectionist, struggle to accept imperfection"
+    ],
+    "khi_cang_thang": "Anxious, controlling, reminding people constantly; feeling like the only one carrying everything.",
+    "huong_lon": "From 'caring for everyone' to 'caring for yourself as well' — a burnt-out person cannot care for anyone for long."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves through looking after: cooking, reminding, running the home, looking towards a shared future.",
+    "can_duoc": "Recognition, appreciation for what they do, and a warm home.",
+    "diem_mu": "Tends to turn love into duty and management; finds it hard to accept a partner who thinks differently.",
+    "hop_kieu_nguoi": "Someone who says thank you, takes responsibility and shares the housework.",
+    "dau_hieu_lech": "When the 6 starts keeping score or feels 'treated like the help' — speak up before resentment sets in.",
+    "hon_nhan": "Usually makes family the centre of their life; needs to keep a part of life outside the role of spouse or parent."
+   },
+   "cong_viec": {
+    "the_manh": "Caring, educating, advising, aesthetics, building community.",
+    "moi_truong": "Humane values, good relationships, seeing that they are being useful.",
+    "vai_tro": "Adviser, keeper of the team culture, the one who looks after the team.",
+    "nghe": [
+     "Education, early childhood",
+     "Healthcare, caregiving, nursing",
+     "Counselling, social work",
+     "Interior design, fashion, beauty",
+     "Food, restaurants"
+    ],
+    "cai_bay": "Carries other people's work, finds it hard to refuse; does a lot but hesitates to ask for what they are owed.",
+    "tien_bac": "Spends a lot on family and loved ones; needs a fund of their own for themselves and for later life."
+   },
+   "bien_co": {
+    "kieu_bien_co": "Turning points are often tied to family: getting married, having children, caring for parents, or a moment of choosing between responsibility and a personal dream.",
+    "bai_hoc": "Loving does not mean carrying everything.",
+    "cach_di_qua": "When the family load piles up, split the tasks by name — and put your own name on the list of people to be cared for."
+   }
+  },
+  "7": {
+   "tong_quan": {
+    "chan_dung": "Life Path 7 is often described as the truth-seeker: likes to dig deep, asks 'why', needs time alone to think. They may seem distant, but inside is a rich world.",
+    "dong_luc": "Understanding things at the root and finding the real meaning behind the surface.",
+    "diem_manh": [
+     "Sharp analysis, independent thinking",
+     "Good intuition, notice what others miss",
+     "Deep focus, strong expertise"
+    ],
+    "diem_mu": [
+     "Closed off, find it hard to share feelings",
+     "Sceptical, slow to trust people",
+     "Think too much and do too little"
+    ],
+    "khi_cang_thang": "Pulling inward, long silences, turning sarcastic or cold.",
+    "huong_lon": "From 'understanding alone' to 'sharing what you understand' — wisdom has value when someone receives it."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves slowly and deeply; shows it through honest conversation rather than sweet words.",
+    "can_duoc": "Respect for their quiet, and a person who understands without needing much explanation.",
+    "diem_mu": "Finds it hard to open up and leaves the partner guessing; tends to retreat when asked for a lot of emotion.",
+    "hop_kieu_nguoi": "Someone deep who respects privacy and is patient enough to wait for them to open up.",
+    "dau_hieu_lech": "When the 7 increasingly lives in parallel — present but not sharing.",
+    "hon_nhan": "Needs a marriage with personal space; should schedule regular talks so the two do not become strangers."
+   },
+   "cong_viec": {
+    "the_manh": "Research, analysis, deep expertise, solving complex problems.",
+    "moi_truong": "Quiet, quality-focused, with time to think and few pointless meetings.",
+    "vai_tro": "Specialist, researcher, strategic adviser.",
+    "nghe": [
+     "Scientific research, academia",
+     "Technology, data analysis",
+     "Medicine, pharmacy, specialised engineering",
+     "Psychology, philosophy",
+     "Specialist writing, editing"
+    ],
+    "cai_bay": "Good but unknown because they hesitate to put themselves forward; perfectionism can slow progress.",
+    "tien_bac": "Careful, commits money only after understanding it well; sometimes downplays money because it seems less important than knowledge."
+   },
+   "bien_co": {
+    "kieu_bien_co": "Turning points usually come from within: a crisis of belief, losing something that seemed certain, forcing them to find meaning again.",
+    "bai_hoc": "Some questions have no answer, only a way of living with them.",
+    "cach_di_qua": "When things fall apart, give yourself quiet time — but set a date to come back and reconnect with people."
+   }
+  },
+  "8": {
+   "tong_quan": {
+    "chan_dung": "Life Path 8 is often described as the person of achievement and practical power: spotting opportunities, organising resources, wanting measurable results. They carry authority, and life tends to test them through money and power themselves.",
+    "dong_luc": "Concrete success, recognition and financial independence.",
+    "diem_manh": [
+     "Business vision, seize opportunities",
+     "Manage resources, make big decisions",
+     "Strong nerve, handle pressure well"
+    ],
+    "diem_mu": [
+     "Measure worth by achievement, including your own",
+     "Too hard-edged, rarely show vulnerability",
+     "Get swallowed by work and neglect relationships"
+    ],
+    "khi_cang_thang": "Tight control, short temper, working even harder to regain the feeling of being in charge.",
+    "huong_lon": "From 'power to have' to 'power to give' — success lasts when it lifts other people."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves through protecting and providing: securing material life, building a solid future.",
+    "can_duoc": "Respect, trust in their ability, and a partner who shares that ambition.",
+    "diem_mu": "Tends to treat money and gifts as a substitute for words of love; finds it hard to say 'I need you'.",
+    "hop_kieu_nguoi": "Someone confident with a career of their own who is not overshadowed by a strong personality.",
+    "dau_hieu_lech": "When every conversation is only about work and money — or when there is a fight over who decides.",
+    "hon_nhan": "Usually builds a solid material base; needs a clear agreement on shared and separate finances from the start."
+   },
+   "cong_viec": {
+    "the_manh": "Business, management, finance, major negotiations, building organisations.",
+    "moi_truong": "Room to advance, rewards tied to results, a scale big enough to make full use of them.",
+    "vai_tro": "Executive, business owner, investment decision-maker.",
+    "nghe": [
+     "Business management",
+     "Finance, banking, investment",
+     "Real estate",
+     "Business law",
+     "Senior management"
+    ],
+    "cai_bay": "Overreaches when confident; putting results above people wears the team out.",
+    "tien_bac": "Able to earn and manage large sums; an 8's life often has financial ups and downs — keep a reserve fund and someone who pushes back."
+   },
+   "bien_co": {
+    "kieu_bien_co": "Turning points tend to revolve around money, status and authority: a major promotion, a business failure, a dispute, or a time of starting again from zero.",
+    "bai_hoc": "A person's worth is not on the balance sheet.",
+    "cach_di_qua": "When you fail, separate 'the thing failed' from 'I failed' — then count what is still there: skills, relationships, health."
+   }
+  },
+  "9": {
+   "tong_quan": {
+    "chan_dung": "Life Path 9 is often described as a person of broad vision and generosity: caring about things bigger than themselves, quick to empathise, full of ideals. Their life tends to include moments of letting go to turn a new page.",
+    "dong_luc": "Doing something meaningful for other people and for the world.",
+    "diem_manh": [
+     "Generous, deeply empathetic",
+     "Broad vision, think of the many",
+     "Artistic flair and the ability to inspire"
+    ],
+    "diem_mu": [
+     "Idealise people, then feel let down",
+     "Give until you forget yourself",
+     "Struggle to let go of the past even while saying you have"
+    ],
+    "khi_cang_thang": "Distant, sad, feeling misunderstood; sometimes withdrawing from everything.",
+    "huong_lon": "From 'saving the world' to 'serving within your limits' — kindness also needs to know when enough is enough."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves generously and romantically, ready to forgive and to sacrifice.",
+    "can_duoc": "To have their ideals understood and to be loved in their fragile parts too.",
+    "diem_mu": "Tends to love the image they imagine more than the real person; carries sadness without saying it.",
+    "hop_kieu_nguoi": "Someone with depth and clear values who can gently bring them back to everyday life.",
+    "dau_hieu_lech": "When the 9 starts 'giving' to the whole world and forgets the person beside them, or quietly prepares to leave.",
+    "hon_nhan": "A generous partner; needs to pay attention to everyday matters (money, the home) that they tend to treat as small."
+   },
+   "cong_viec": {
+    "the_manh": "Inspiring, teaching, the arts, social work, seeing the big picture.",
+    "moi_truong": "A clear mission, impact on many people, doing what they believe in.",
+    "vai_tro": "The one who lights the fire, adviser, representative of shared values.",
+    "nghe": [
+     "Education, training",
+     "Non-profit organisations, social work",
+     "Arts, literature, film",
+     "Healthcare, healing",
+     "Diplomacy, international relations"
+    ],
+    "cai_bay": "Works for the ideal and forgets living conditions; prone to burnout or disillusionment.",
+    "tien_bac": "Does not put much weight on money and gives easily; needs to learn that having money means more ability to help."
+   },
+   "bien_co": {
+    "kieu_bien_co": "A 9's life has many closings: ending a relationship, leaving a place, closing a chapter — each one a lesson in letting go.",
+    "bai_hoc": "An ending is part of the cycle, not a failure.",
+    "cach_di_qua": "When a chapter closes, do a small ritual to say goodbye — then look towards the new one."
+   }
+  },
+  "11": {
+   "tong_quan": {
+    "chan_dung": "11 is a master number, often described as an intensified 2: very sharp intuition, the ability to inspire, but also a high level of nervous tension. They see things others have not yet seen, and life asks them to learn to live with that sensitivity.",
+    "dong_luc": "Bringing light, meaning or faith to other people.",
+    "diem_manh": [
+     "Intuitive, feel things deeply",
+     "Inspiring, a spiritual pull",
+     "Creative mind and vision"
+    ],
+    "diem_mu": [
+     "Anxious, tense, easily overwhelmed by emotion",
+     "Expect very much of yourself, then torment yourself",
+     "Find it hard to bring ideas down to earth"
+    ],
+    "khi_cang_thang": "Restless, sleepless, strong emotional swings; at times doubting themselves completely.",
+    "huong_lon": "From 'feeling everything' to 'choosing what to feel' — sensitivity needs tending like a fine instrument."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves deeply, bonding soul to soul; hopes for a relationship with meaning beyond the everyday.",
+    "can_duoc": "To be understood without being called 'too sensitive', and to feel emotionally safe.",
+    "diem_mu": "Idealises the partner; easily hurt by small details and reads too much into things.",
+    "hop_kieu_nguoi": "Someone calm and steady who helps them 'touch the ground' without putting out their ideals.",
+    "dau_hieu_lech": "When the 11 goes silent for long stretches or their feelings swing unpredictably — they are overloaded.",
+    "hon_nhan": "Needs a regular family rhythm to keep their nerves balanced; shared routines that help them relax are a good idea."
+   },
+   "cong_viec": {
+    "the_manh": "Inspiring, advising, creating, work that calls for intuition and vision.",
+    "moi_truong": "Rich in meaning, free of harsh conflict, respectful of creativity.",
+    "vai_tro": "Spiritual guide, creator, healer.",
+    "nghe": [
+     "Counselling, psychotherapy",
+     "Arts, music, design",
+     "Teaching, public speaking",
+     "Mission-driven media",
+     "Creative research"
+    ],
+    "cai_bay": "Plenty of vision but hard to execute; burns out quickly in a fiercely competitive setting.",
+    "tien_bac": "Not good with the details of money; needs a person or a tool to manage it regularly."
+   },
+   "bien_co": {
+    "kieu_bien_co": "Turning points are often 'awakenings': an experience that completely changes how they see life, usually following a period of great strain.",
+    "bai_hoc": "Sensitivity is a gift when there is solid ground to stand on.",
+    "cach_di_qua": "In shaky times, keep simple bodily routines (sleep, walking, regular meals) as an anchor."
+   }
+  },
+  "22": {
+   "tong_quan": {
+    "chan_dung": "22 is a master number, often called 'the master builder' — like a 4 carrying the vision of an 11: wanting to turn big ideas into real structures. The pressure they put on themselves is usually very high.",
+    "dong_luc": "Building something of lasting value for many people.",
+    "diem_manh": [
+     "Big vision paired with a practical mind",
+     "Organise and manage large-scale projects",
+     "Steadfast, able to bear long-term pressure"
+    ],
+    "diem_mu": [
+     "The pressure to do 'something big' makes it hard to start",
+     "Controlling, taking on too much",
+     "Sacrifice personal life for work"
+    ],
+    "khi_cang_thang": "Frozen by expectations that are too high, or working like a machine and growing distant from everyone.",
+    "huong_lon": "From 'I must build something great' to 'lay one good brick at a time' — a great structure is the sum of ordinary days."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves through building: securing the foundation, long-term plans, steady protection.",
+    "can_duoc": "A partner who understands the size of their goals and shares the load.",
+    "diem_mu": "Puts work first; shows little affection and assumes the partner 'just knows'.",
+    "hop_kieu_nguoi": "Someone patient with a life of their own who can pull them back to the small moments.",
+    "dau_hieu_lech": "When important family occasions keep being 'put off' because of work.",
+    "hon_nhan": "A major pillar; needs to learn to rest and be fully present in family moments."
+   },
+   "cong_viec": {
+    "the_manh": "Managing large projects, designing systems, building organisations, strategic planning.",
+    "moi_truong": "Wide influence, long-running projects, being given resources.",
+    "vai_tro": "Systems architect, founder, planner.",
+    "nghe": [
+     "Architecture, urban planning, construction",
+     "Running large organisations",
+     "Systems engineering",
+     "Public policy",
+     "Social enterprise"
+    ],
+    "cai_bay": "Plans that are too big for the resources at hand; finds it hard to trust and delegate.",
+    "tien_bac": "Able to create great value; should go slow and steady and avoid putting all the capital into one project."
+   },
+   "bien_co": {
+    "kieu_bien_co": "Turning points tend to be moments of being given (or taking on) a big responsibility beyond their years, or an unfinished project that has to be rebuilt.",
+    "bai_hoc": "A big vision needs big patience.",
+    "cach_di_qua": "Break the big goal into 90-day milestones; celebrate each small one so you do not burn out."
+   }
+  },
+  "33": {
+   "tong_quan": {
+    "chan_dung": "33 is a rare master number, often described as an intensified 6: great compassion, a wish to lift up and heal others. They lead by serving — people follow because they feel genuinely cared for.",
+    "dong_luc": "Seeing other people grow and heal thanks to their support.",
+    "diem_manh": [
+     "Great compassion, patience",
+     "Able to support, teach, heal",
+     "A strong sense of responsibility to the community"
+    ],
+    "diem_mu": [
+     "Carry other people's pain as if it were your own",
+     "Sacrifice to the point of forgetting to care for yourself",
+     "Set moral expectations too high for yourself and others"
+    ],
+    "khi_cang_thang": "Quiet exhaustion, feeling responsible for everyone's happiness.",
+    "huong_lon": "From 'saving everyone' to 'helping people stand on their own' — wise service is service with limits."
+   },
+   "tinh_cam": {
+    "cach_yeu": "Loves wholeheartedly and forgivingly, wanting to lift up the person they love.",
+    "can_duoc": "To be cared for in return, and to feel they do not always have to be the strong one.",
+    "diem_mu": "Tends to love in order to 'rescue' someone; endures too much instead of setting limits.",
+    "hop_kieu_nguoi": "Someone mature who can look after themselves and knows how to care for them back.",
+    "dau_hieu_lech": "When the 33 only gives and no longer receives, and starts to feel tired of their own compassion.",
+    "hon_nhan": "The emotional anchor of the whole family; needs responsibilities shared evenly and to accept help."
+   },
+   "cong_viec": {
+    "the_manh": "Education, care, counselling, community leadership, healing arts.",
+    "moi_truong": "Humane values, where devotion is valued and fairly paid.",
+    "vai_tro": "Teacher, community leader, healer.",
+    "nghe": [
+     "Education, training",
+     "Healthcare, nursing, therapy",
+     "Social work, non-profit",
+     "Counselling, coaching",
+     "Healing arts"
+    ],
+    "cai_bay": "Works for free, burns out from kindness; hesitates to talk about money.",
+    "tien_bac": "Often uses money to help others; needs a safety fund of their own before helping."
+   },
+   "bien_co": {
+    "kieu_bien_co": "Turning points are usually times of carrying others: a loved one unwell, family hardship, or a burnout that forces them to learn to accept help.",
+    "bai_hoc": "To care for others in the long run, care for yourself first.",
+    "cach_di_qua": "When the load piles up, write down which tasks are truly yours — and hand back the ones that are not."
+   }
+  }
+ },
+ "source": {
+  "ten": "Reference compilation (editorial draft, 2026) following the Balliett–Jordan tradition and common numerology books",
+  "luu_y": "Draft shown by decision of the project owner (2026-09-30); a status column allows gradual review. A cultural reference, not a forecast."
+ }
+}

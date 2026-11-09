@@ -12,7 +12,15 @@ import { cn } from "@/lib/utils";
 
 const GIU_TOI_THIEU = 800;
 
-export function XaoBai({ onXong, dang, nguoc, onNguoc }: { onXong: (hatGiong: string | null) => void; dang: boolean; nguoc: boolean; onNguoc: (v: boolean) => void }) {
+export const CHU_XAO_VI = {
+  buoc: "Bước 2", tieu_de: "Nhấn giữ để xáo bài",
+  mo_ta: "Giữ nút ít nhất một giây, trong lúc giữ cứ rê nhẹ ngón tay hoặc chuột. Nhịp tay của bạn thành hạt giống xáo bài — chỉ một chuỗi băm rời máy, không phải toạ độ.",
+  nguoc: "Dùng lá ngược (lối Waite). Bỏ chọn → đọc theo lá bên cạnh (lối Marseille / Thoth).",
+  dang: "Đang xáo…", giu: "Giữ… rê nhẹ tay", nhan: "Nhấn giữ để xáo", may: "Để máy xáo",
+};
+export type ChuXao = typeof CHU_XAO_VI;
+
+export function XaoBai({ onXong, dang, nguoc, onNguoc, chu = CHU_XAO_VI }: { onXong: (hatGiong: string | null) => void; dang: boolean; nguoc: boolean; onNguoc: (v: boolean) => void; /** QTE: chữ theo ngôn ngữ. */ chu?: ChuXao }) {
   const giam = Boolean(useReducedMotion());
   const [giu, setGiu] = useState(false);
   const [tien, setTien] = useState(0);
@@ -51,12 +59,12 @@ export function XaoBai({ onXong, dang, nguoc, onNguoc }: { onXong: (hatGiong: st
     <div className="glass rounded-2xl p-5 sm:p-6" data-testid="xao-bai">
       <div className="grid gap-5 sm:grid-cols-[1fr_auto] sm:items-center">
         <div>
-          <p className="eyebrow">Bước 2</p>
-          <h3 className="mt-1 text-xl">Nhấn giữ để xáo bài</h3>
-          <p className="mt-1 text-sm text-fg-muted">Giữ nút ít nhất một giây, trong lúc giữ cứ rê nhẹ ngón tay hoặc chuột. Nhịp tay của bạn thành hạt giống xáo bài — chỉ một chuỗi băm rời máy, không phải toạ độ.</p>
+          <p className="eyebrow">{chu.buoc}</p>
+          <h3 className="mt-1 text-xl">{chu.tieu_de}</h3>
+          <p className="mt-1 text-sm text-fg-muted">{chu.mo_ta}</p>
           <label className="mt-3 flex cursor-pointer items-center gap-2 text-sm text-fg">
             <input type="checkbox" checked={nguoc} onChange={(e) => onNguoc(e.target.checked)} className="size-4 accent-[rgb(var(--gold))]" data-testid="o-la-nguoc" />
-            Dùng lá ngược (lối Waite). Bỏ chọn → đọc theo lá bên cạnh (lối Marseille / Thoth).
+            {chu.nguoc}
           </label>
         </div>
         <div className="flex flex-col items-center gap-3">
@@ -75,9 +83,9 @@ export function XaoBai({ onXong, dang, nguoc, onNguoc }: { onXong: (hatGiong: st
             className={cn("relative inline-flex min-h-12 select-none items-center gap-2 overflow-hidden rounded-full border border-gold/60 bg-gold/15 px-6 py-3 text-sm font-medium text-fg outline-none focus-visible:ring-2 focus-visible:ring-gold",
               giu && "nhan-sang")} style={{ touchAction: "none" }}>
             <span className="absolute inset-y-0 left-0 bg-gold/25" style={{ width: `${tien * 100}%`, transition: "width 80ms linear" }} aria-hidden />
-            <Hand className="relative size-4" aria-hidden /><span className="relative">{dang ? "Đang xáo…" : giu ? "Giữ… rê nhẹ tay" : "Nhấn giữ để xáo"}</span>
+            <Hand className="relative size-4" aria-hidden /><span className="relative">{dang ? chu.dang : giu ? chu.giu : chu.nhan}</span>
           </button>
-          <Button variant="ghost" size="sm" onClick={() => onXong(null)} disabled={dang} data-testid="nut-may-xao"><Shuffle aria-hidden /> Để máy xáo</Button>
+          <Button variant="ghost" size="sm" onClick={() => onXong(null)} disabled={dang} data-testid="nut-may-xao"><Shuffle aria-hidden /> {chu.may}</Button>
         </div>
       </div>
     </div>

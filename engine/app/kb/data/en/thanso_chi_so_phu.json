@@ -1,0 +1,169 @@
+{
+ "_trang_thai": "bien_tap",
+ "ngay_sinh": {
+  "1": "People born on the 1st are often described as independent and keen to lead.",
+  "2": "Born on the 2nd: sensitive, good at cooperating, needs to feel appreciated.",
+  "3": "Born on the 3rd: expressive, with a gift for speaking, writing or the arts.",
+  "4": "Born on the 4th: hard-working, orderly, reliable.",
+  "5": "Born on the 5th: flexible, enjoys new experiences, adapts easily.",
+  "6": "Born on the 6th: caring, responsible, loves beauty and family.",
+  "7": "Born on the 7th: likes to dig deep into things, needs time alone.",
+  "8": "Born on the 8th: organised, with a head for business, likes clear results.",
+  "9": "Born on the 9th: tolerant, idealistic, empathises easily.",
+  "10": "Born on the 10th: independent like the 1 but more flexible, finds it easy to start over.",
+  "11": "Born on the 11th: sharp intuition, able to inspire others, prone to stress.",
+  "12": "Born on the 12th: creative, charming, likes to express themselves.",
+  "13": "Born on the 13th: hard-working, needs persistence; seen as a day that carries a lesson about discipline.",
+  "14": "Born on the 14th: loves freedom and change; seen as a day that carries a lesson about moderation.",
+  "15": "Born on the 15th: warm, family-oriented, magnetic.",
+  "16": "Born on the 16th: deep inner life, perceptive; seen as a day that carries a lesson about the ego.",
+  "17": "Born on the 17th: ambitious, with business sense and independence.",
+  "18": "Born on the 18th: idealistic, humane, with leadership ability.",
+  "19": "Born on the 19th: strongly independent; seen as a day that carries a lesson about asking others for help.",
+  "20": "Born on the 20th: refined, cooperates well, sensitive.",
+  "21": "Born on the 21st: cheerful, communicates well, enjoys socialising.",
+  "22": "Born on the 22nd: practical, with a vision for building something big.",
+  "23": "Born on the 23rd: flexible, communicates well, likes what is new.",
+  "24": "Born on the 24th: devoted, family-oriented, needs stability.",
+  "25": "Born on the 25th: deep, intuitive, likes to analyse.",
+  "26": "Born on the 26th: a natural manager, likes organising and results.",
+  "27": "Born on the 27th: tolerant, with a gentle style of leadership.",
+  "28": "Born on the 28th: independent, confident, likes to lead.",
+  "29": "Born on the 29th: intuition as sharp as the 11, strong emotions.",
+  "30": "Born on the 30th: creative, communicates well, optimistic.",
+  "31": "Born on the 31st: practical, hard-working, organised."
+ },
+ "thai_do": {
+  "1": "Attitude number 1: others tend to see you as confident and proactive — sometimes overpowering.",
+  "2": "Attitude number 2: others see you as gentle and approachable — sometimes timid.",
+  "3": "Attitude number 3: cheerful, open, easy to strike up a conversation with — sometimes not serious enough.",
+  "4": "Attitude number 4: serious, reliable — sometimes hard to get close to.",
+  "5": "Attitude number 5: energetic, magnetic — sometimes inconsistent.",
+  "6": "Attitude number 6: warm, responsible — sometimes worries and nags.",
+  "7": "Attitude number 7: calm, reserved — sometimes cold.",
+  "8": "Attitude number 8: strong, with authority — sometimes rigid.",
+  "9": "Attitude number 9: tolerant, generous — sometimes distant.",
+  "11": "Attitude number 11: sensitive, inspiring — sometimes tense.",
+  "22": "Attitude number 22: steady, with vision — sometimes weighed down."
+ },
+ "truong_thanh": {
+  "1": "Maturity number 1: later in life you tend to lean towards independence and making more of your own decisions.",
+  "2": "Maturity number 2: later in life you come to value relationships, cooperation and harmony.",
+  "3": "Maturity number 3: later in life you become more open, creative and expressive.",
+  "4": "Maturity number 4: later in life you lean towards stability and building solid foundations.",
+  "5": "Maturity number 5: later in life you need freedom, new experiences and change.",
+  "6": "Maturity number 6: later in life you lean towards family, responsibility and caring for others.",
+  "7": "Maturity number 7: later in life you turn inward, seeking depth and understanding.",
+  "8": "Maturity number 8: later in life you lean towards achievement, standing and finances.",
+  "9": "Maturity number 9: later in life you lean towards contribution, giving and meaning.",
+  "11": "Maturity number 11: later in life you lean towards inspiring others and the inner life.",
+  "22": "Maturity number 22: later in life you lean towards building something big and lasting for many people.",
+  "33": "Maturity number 33: later in life you lean towards supporting, healing and serving others."
+ },
+ "thang_ca_nhan": {
+  "1": {
+   "chu_de": "A month for starting",
+   "nen": "Good for starting small things and setting goals for the month.",
+   "tranh": "Hesitating for too long."
+  },
+  "2": {
+   "chu_de": "A month for patience",
+   "nen": "Good for cooperating, listening and tending to relationships.",
+   "tranh": "Forcing the pace, confrontation."
+  },
+  "3": {
+   "chu_de": "A month for expression",
+   "nen": "Good for socialising, creating and presenting ideas.",
+   "tranh": "Overspending and overpromising."
+  },
+  "4": {
+   "chu_de": "A month for building foundations",
+   "nen": "Good for detailed work, getting organised and finishing paperwork.",
+   "tranh": "Taking shortcuts."
+  },
+  "5": {
+   "chu_de": "A month for change",
+   "nen": "Good for trying something new, travelling and expanding.",
+   "tranh": "Impulsive decisions."
+  },
+  "6": {
+   "chu_de": "A month for family",
+   "nen": "Good for caring for loved ones, the home and responsibilities.",
+   "tranh": "Taking on other people's tasks."
+  },
+  "7": {
+   "chu_de": "A month for quiet",
+   "nen": "Good for resting, studying and reflecting.",
+   "tranh": "Forcing yourself to socialise too much."
+  },
+  "8": {
+   "chu_de": "A month for results",
+   "nen": "Good for handling finances, work and negotiations.",
+   "tranh": "Working non-stop and forgetting to rest."
+  },
+  "9": {
+   "chu_de": "A month for closing",
+   "nen": "Good for clearing out, finishing unfinished business and giving.",
+   "tranh": "Starting big commitments."
+  }
+ },
+ "ngay_ca_nhan": {
+  "1": "Personal Day 1: suits starting, sending, taking the lead.",
+  "2": "Personal Day 2: suits listening, coordinating, going gently.",
+  "3": "Personal Day 3: suits meeting people, presenting, creating.",
+  "4": "Personal Day 4: suits detailed work, clearing the backlog.",
+  "5": "Personal Day 5: suits change, getting around, trying something new.",
+  "6": "Personal Day 6: suits time for family and caring for others.",
+  "7": "Personal Day 7: suits resting, reading, thinking.",
+  "8": "Personal Day 8: suits discussing work, money, practical decisions.",
+  "9": "Personal Day 9: suits finishing, letting go, giving."
+ },
+ "ngay_ca_nhan_tu_soi": {
+  "1": "Is there something you have been putting off today where the first step alone would be enough?",
+  "2": "Who could you listen to a little more closely today instead of rushing to answer?",
+  "3": "Is there something you want to say or share that you have been holding back for a while?",
+  "4": "Which small task, if finished today, would clear your head for the whole week?",
+  "5": "Which small habit could you try doing differently today?",
+  "6": "Which loved one would be glad to hear from you today?",
+  "7": "What half-finished thought could use a short moment of quiet?",
+  "8": "Which practical decision do you already have enough information to settle?",
+  "9": "What should you close or let go of a little to make room for something new?"
+ },
+ "no_nghiep": {
+  "13": {
+   "ten": "Karmic Debt 13 (13/4)",
+   "y_nghia": "In the numerology tradition, 13 is linked to a lesson about discipline and persistence: a pull towards shortcuts, and discouragement when things take a long time.",
+   "goi_y": "Pick one long-term task and work on it a little every day; this is a lesson about habits, not something imposed on you."
+  },
+  "14": {
+   "ten": "Karmic Debt 14 (14/5)",
+   "y_nghia": "14 is linked to a lesson about moderation and freedom with responsibility: a tendency to overindulge and lose a sense of measure.",
+   "goi_y": "Set clear limits on the things you tend to overdo (spending, eating, screen time)."
+  },
+  "16": {
+   "ten": "Karmic Debt 16 (16/7)",
+   "y_nghia": "16 is linked to a lesson about the ego: when you are too sure you are right, you may have to rebuild what you built — and the rebuilt version is usually sturdier.",
+   "goi_y": "Actively ask a trusted person for honest feedback every quarter."
+  },
+  "19": {
+   "ten": "Karmic Debt 19 (19/1)",
+   "y_nghia": "19 is linked to a lesson about independence and asking for help: a tendency to carry everything alone and find it hard to accept support.",
+   "goi_y": "Practise asking for help with one small thing each week."
+  }
+ },
+ "bai_hoc_nghiep": {
+  "1": "Name missing the number 1: a lesson about confidence, daring to stand up and say what you want.",
+  "2": "Name missing the number 2: a lesson about patience, cooperation and noticing other people's feelings.",
+  "3": "Name missing the number 3: a lesson about expressing yourself and easing up on self-criticism.",
+  "4": "Name missing the number 4: a lesson about discipline and working systematically.",
+  "5": "Name missing the number 5: a lesson about adapting, daring to change and daring to try things.",
+  "6": "Name missing the number 6: a lesson about responsibility in family and relationships.",
+  "7": "Name missing the number 7: a lesson about going deeper and trusting your own understanding.",
+  "8": "Name missing the number 8: a lesson about managing money and authority.",
+  "9": "Name missing the number 9: a lesson about tolerance and seeing beyond your own interests."
+ },
+ "source": {
+  "ten": "Reference compilation (editorial draft, 2026) following the Balliett–Jordan tradition and common numerology books",
+  "luu_y": "Draft shown by decision of the project owner (2026-09-30); a status column allows gradual review. A cultural reference, not a forecast."
+ }
+}

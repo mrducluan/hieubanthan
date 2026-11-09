@@ -29,7 +29,13 @@ export function loiEngine(status: number, body: unknown): { error: string; statu
  *  `x-forwarded-for` do Vercel đặt, người dùng không tự giả được. */
 export function dauNguoiGoi(req: Request): Record<string, string> {
   const ip = req.headers.get("x-real-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  return ip ? { "x-nguoi-goi": ip.slice(0, 64) } : {};
+  return { ...(ip ? { "x-nguoi-goi": ip.slice(0, 64) } : {}), ...dauNgonNgu(req) };
+}
+
+/** QTE: ngôn ngữ của lượt gọi (trang /en gửi `x-ngon-ngu: en`) → chuyển tiếp nguyên header tới engine; giá trị lạ bỏ qua. */
+export function dauNgonNgu(req: Request): Record<string, string> {
+  const nn = req.headers.get("x-ngon-ngu");
+  return nn === "en" ? { "x-ngon-ngu": "en" } : {};
 }
 
 /** Gọi engine với dữ liệu ĐÃ kiểm (dùng chung cho goiEngine và các route cần xử lý thêm, vd trừ Sao). */

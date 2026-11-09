@@ -16,6 +16,7 @@ import collections
 import datetime
 import itertools
 import unicodedata
+from app.kb.loi import L  # QTE: chỉ nhãn HIỂN THỊ trong vết tính; phép tính không đổi
 
 MASTER: frozenset[int] = frozenset({11, 22, 33})
 NGUYEN_AM: frozenset[str] = frozenset("AEIOU")   # Y là điểm tranh cãi
@@ -143,7 +144,7 @@ def _vet(so_hang: list[dict]) -> dict:
     cong = " + ".join(str(x["so"]) for x in so_hang) or "0"
     duoi = " → ".join(str(n) for n in rg)
     if len(rg) == 1 and rg[0] in MASTER:
-        duoi += " (số cái, giữ nguyên)"
+        duoi += L("thanso.vet.so_cai", " (số cái, giữ nguyên)")
     return {"so_hang": so_hang, "tong": tong, "rut_gon": rg, "ket_qua": rg[-1],
             "dien_giai": f"{cong} = {duoi}"}
 
@@ -165,7 +166,7 @@ def vet_tinh(ten: str, d: int, m: int, y: int, quy_uoc: QuyUocDuongDoi = "tong_h
             ten_vet["su_menh"].append(muc)
             ten_vet["linh_hon" if la_na else "nhan_cach"].append(muc)
     dd = ([{"ky_tu": c, "so": int(c)} for c in f"{d}{m}{y}"] if quy_uoc == "tong_het" else
-          [{"ky_tu": f"{nhan} {n}", "so": rut_gon(n)} for nhan, n in (("Ngày", d), ("Tháng", m), ("Năm", y))])
+          [{"ky_tu": f"{nhan} {n}", "so": rut_gon(n)} for nhan, n in ((L("thanso.vet.ngay", "Ngày"), d), (L("thanso.vet.thang", "Tháng"), m), (L("thanso.vet.nam", "Năm"), y))])
     return {"duong_doi": _vet(dd), **{k: _vet(v) for k, v in ten_vet.items()}}
 
 
@@ -294,7 +295,7 @@ def so_nguoi_trung_chu_ky() -> dict[str, str]:
     Chỉ nói điều suy ra từ phép tính — không ước tính số người trên thế giới (TS-V3c)."""
     return {
         "ty_le": "1/366",
-        "y_nghia": (
+        "y_nghia": L("thanso.chu_ky.trung",
             "Chuỗi năm cá nhân chỉ phụ thuộc ngày và tháng sinh: ai cùng ngày, cùng tháng sinh với bạn "
             "thì có chuỗi năm cá nhân y hệt, không lệch năm nào."
         ),

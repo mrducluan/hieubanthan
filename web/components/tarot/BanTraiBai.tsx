@@ -7,11 +7,13 @@ import { LaBai } from "./LaBai";
 import type { BaoCaoTarot, LaBoBai, LaRut, TraiBai } from "@/lib/tarot-chung";
 import { cn } from "@/lib/utils";
 
-export function BanTraiBai({ tb, la, lat, onLat, boLa, pt, chon, onChon, className, gon = false }: {
+export function BanTraiBai({ tb, la, lat, onLat, boLa, pt, chon, onChon, className, gon = false, chu }: {
   tb: TraiBai; la: (LaRut | null)[]; lat: boolean[]; onLat?: (i: number) => void; boLa: Record<string, LaBoBai>;
   /** Có bài đọc → vẽ đường phẩm giá + hướng nhìn. */ pt?: BaoCaoTarot["da_tinh"] | null;
   chon?: number | null; onChon?: (i: number) => void; className?: string; gon?: boolean;
+  /** QTE: chữ theo ngôn ngữ (mặc định tiếng Việt). */ chu?: { nguoc: string; up: string; nhan_nguoc: string; nguoc_nhan: string };
 }) {
+  const c = chu ?? { nguoc: " (ngược)", up: "Lá bài úp", nhan_nguoc: "NGƯỢC", nguoc_nhan: " · ngược" };
   // Khung bàn theo số lá: chiều cao đủ cho lá ở hàng trên / dưới cùng (toạ độ KB 0,12–0,88) + nhãn dưới lá, không cắt mép.
   const n = tb.vi_tri.length;
   const { W, H, wLa } = n === 10 ? { W: 1100, H: 840, wLa: 100 } : n === 5 ? { W: 760, H: 720, wLa: 110 } : n === 1 ? { W: 760, H: 300, wLa: 150 } : { W: 760, H: 300, wLa: 130 };
@@ -49,7 +51,7 @@ export function BanTraiBai({ tb, la, lat, onLat, boLa, pt, chon, onChon, classNa
               {!lr && <div className="absolute inset-0 rounded-[9px] border border-dashed border-gold/40 bg-bg/30" />}
               {lr && lb && (
                 <div className={cn("absolute inset-0 rounded-[9px]", chon === i && "ring-2 ring-gold")}>
-                  <LaBai la={lb} lat={lat[i] ?? false} nguoc={lr.nguoc} onClick={lat[i] ? (onChon ? () => onChon(i) : undefined) : onLat ? () => onLat(i) : undefined} sang={!lat[i]} className="h-full" />
+                  <LaBai la={lb} lat={lat[i] ?? false} nguoc={lr.nguoc} onClick={lat[i] ? (onChon ? () => onChon(i) : undefined) : onLat ? () => onLat(i) : undefined} sang={!lat[i]} className="h-full" chu={c} />
                 </div>
               )}
               {/* chấm sức của lá (engine chấm): lục = được tiếp sức, hổ phách = bị kìm, xám = giữ nguyên — không đỏ, không điểm */}
@@ -59,7 +61,7 @@ export function BanTraiBai({ tb, la, lat, onLat, boLa, pt, chon, onChon, classNa
             </div>
             {!gon && (
               <p className="relative mt-1 w-[170%] -translate-x-[20.6%] truncate text-center text-fg-muted" style={{ fontSize: `clamp(9px, ${(12 / W) * 100}cqw, 12px)`, transform: t.xoay ? `translateX(-20.6%) rotate(${-t.xoay}deg)` : undefined }}>
-                <span className="font-medium text-fg">{i + 1}.</span> {v.ten}{lr?.nguoc && lat[i] ? <span className="text-[#f0b35c]"> · ngược</span> : null}
+                <span className="font-medium text-fg">{i + 1}.</span> {v.ten}{lr?.nguoc && lat[i] ? <span className="text-[#f0b35c]">{c.nguoc_nhan}</span> : null}
               </p>
             )}
           </div>

@@ -171,3 +171,27 @@ Tóm tắt điều chỉnh so với mục 5:
 - **Đã làm (QTE-2a)**: ngữ cảnh ngôn ngữ + lớp phủ KB (22 module KB + 6 RULES chuyển sang `nap`), bảng tên 341 mục, **giai đoạn 0
   tuần 1 (a)**: múi giờ nơi sinh theo nước + thành phố (`calc/mui_gio`, 62 nước / 146 thành phố, zoneinfo), form hồ sơ chọn nước →
   thành phố, Hôm nay theo đồng hồ máy người dùng. Không đổi phép tính, không tăng `ENGINE_VERSION`.
+
+## 13. QTE-3 — bản tiếng Anh đầu tiên: Tarot · Thần số · hỏi đáp (2026-11-09)
+
+Chủ dự án quyết (2026-11-08): "Làm Tarot/Thần số/hỏi đáp tiếng Anh đi em rồi merge" — **đảo** điều loại trừ ở mục 3 (bản tiếng Anh
+"không tarot, thần số, hỏi đáp"). Lý do ghi nhận: hai mảng này không cần lịch Trung Quốc / giờ sinh, kho KB đã là nguồn phương Tây
+(Waite, Book T, Pythagoras) nên bản tiếng Anh gần nguyên gốc hơn các mảng phương Đông, và có sẵn khung hỏi đáp tất định. Thứ tự
+Bát tự → Tử vi → phong thuỷ → Kinh Dịch của mục 3 vẫn giữ cho các tuần sau.
+
+Đã làm (chi tiết ở `CLAUDE.md` dòng QTE-3):
+
+- Engine: mẫu câu theo ngôn ngữ (`kb/loi.py` + `kb/data/en/loi_khuon.json`), bản phủ KB tiếng Anh cho Tarot (78 lá) và Thần số
+  (nghĩa số, chiều sâu, chân dung, 6 lĩnh vực, chỉ số phụ, biểu đồ), an toàn tiếng Anh trong MỘT bộ chặn, hỏi đáp Thần số gọn tất
+  định (`hoi_en`), hỏi đáp Tarot nhận câu tiếng Anh, hai route kiến thức. Test chấp nhận: đầu ra tiếng Anh không còn một ký tự Việt.
+- Web: `/en`, `/en/numerology`, `/en/numerology/life-path/{n}`, `/en/tarot`, `/en/tarot/cards/{slug}`, `/en/privacy`, `/en/terms`;
+  `sitemap-en.xml`; hreflang hai chiều; khung tiếng Anh riêng (không CMS / Sao).
+
+Chưa làm / chờ quyết:
+
+- **Người bản xứ duyệt** toàn bộ `kb/data/en/*.json` (`_trang_thai: bien_tap` → `da_duyet`); đặc biệt câu sức khoẻ, tiền bạc.
+- Hỏi đáp Thần số tiếng Anh là bản **gọn** (10 kiểu câu); bản đầy đủ (ma trận nỗi đau, hợp đôi, Chaldea, tổng hợp) chưa chuyển.
+- Thẻ chia sẻ, lịch sử rút bài, kiểm chứng "Đúng với mình", Sao: chưa có ở `/en` (đọc miễn phí, không lưu).
+- Pháp lý: `/en/privacy`, `/en/terms` là tóm tắt — luật sư xem trước tuần 9 như mục 7; bản ràng buộc vẫn tiếng Việt.
+- Search Console: thêm `sitemap-en.xml`; theo dõi hiển thị / nhấp `/en/*` làm cột mốc tuần 8 (mục 6).
+

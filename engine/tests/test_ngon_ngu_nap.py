@@ -64,13 +64,16 @@ def test_middleware_doc_header_va_query(monkeypatch):
 
 # ---------------------------------------------------------------- lớp phủ ----------------------------------------
 def test_gop_theo_quy_tac():
-    goc = {"a": "Xin chào", "so": 3, "b": {"c": "Tên", "d": ["x", "y", "z"], "e": None}, "ds": [{"t": "một"}, {"t": "hai"}]}
-    phu = {"a": "Hello", "so": 99, "b": {"c": "Name", "d": ["ex", ""], "them": "no"}, "ds": [{}, {"t": "two"}], "_trang_thai": "nhap_may"}
+    goc = {"a": "Xin chào", "so": 3, "b": {"c": "Tên", "d": ["x", "y", "z"], "e": None}, "ds": [{"t": "một"}, {"t": "hai"}], "bo": {"x": 1}}
+    phu = {"a": "Hello", "so": 99, "b": {"c": "Name", "d": ["ex", ""], "them": "no"}, "ds": [{}, {"t": "two"}], "_trang_thai": "nhap_may", "bo": None}
     ra = nap.gop(goc, phu)
+    # `bo: null` ở bản phủ → khoá bỏ hẳn (bản dịch tắt một trường chưa dịch); `e: None` ở gốc giữ nguyên
     assert ra == {"a": "Hello", "so": 3, "b": {"c": "Name", "d": ["ex", "y", "z"], "e": None}, "ds": [{"t": "một"}, {"t": "two"}]}
     assert goc["a"] == "Xin chào" and goc["b"]["d"] == ["x", "y", "z"]          # không sửa đối số
     assert nap.gop(goc, None) == goc and nap.gop(goc, None) is not goc            # luôn là bản sao
     assert nap.gop("vi", 5) == "vi" and nap.gop(["a"], {"0": "b"}) == ["a"]
+    assert nap.gop(["a", "b"], ["x", "y", "z", "w"]) == ["x", "y", "z", "w"]      # danh sách chuỗi dài hơn → nối thêm
+    assert nap.gop([{"t": "a"}], [{"t": "x"}, {"t": "y"}]) == [{"t": "x"}]           # danh sách dict không nối
 
 
 def test_khong_co_ban_phu_thi_y_het_tep_goc():
@@ -125,7 +128,7 @@ def test_tang_kb_khong_con_lru_cache_hay_doc_json_tay():
     """Mọi module tầng KB sinh CHỮ phải nhớ qua `nap.nho` và đọc tệp qua `nap.doc` — lru_cache / read_text riêng sẽ
     đóng băng ngôn ngữ đầu tiên vào bộ nhớ. Ngoại lệ: sổ hệ thống không có chữ hiển thị (`tham_dinh`, `ngay_cap_nhat`,
     `do_rieng`, `store` thần số Supabase, chính `nap`)."""
-    ngoai_le = {"nap.py", "tham_dinh.py", "ngay_cap_nhat.py", "do_rieng.py", "store.py", "__init__.py"}
+    ngoai_le = {"nap.py", "loi.py", "tham_dinh.py", "ngay_cap_nhat.py", "do_rieng.py", "store.py", "__init__.py"}
     vi_pham = []
     for p in sorted(KB.glob("*.py")):
         if p.name in ngoai_le:

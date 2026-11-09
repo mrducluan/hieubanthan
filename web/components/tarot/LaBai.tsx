@@ -72,12 +72,12 @@ function VuongMien({ cap, mau }: { cap: number; mau: string }) {
 
 /** Mặt trước. `nguoc` (TR-2): chỉ HÌNH xoay 180° — số, tên giữ chiều đọc được (lá 6 xoay ngược trông như số 9) — và có
  *  nhãn "NGƯỢC" ở góc, để người mới nhìn là biết lá rút ngược. */
-export function MatTruoc({ la, w, nguoc = false }: { la: LaGon; w?: number; nguoc?: boolean }) {
+export function MatTruoc({ la, w, nguoc = false, nhanNguoc = "NGƯỢC" }: { la: LaGon; w?: number; nguoc?: boolean; /** QTE: chữ nhãn góc lá ngược (bản Anh: "REVERSED"). */ nhanNguoc?: string }) {
   const mau = MAU_NGUYEN_TO[la.nguyen_to].hex;
   const h = w ? w * TI_LE : undefined;
   const nhan = la.loai === "an_chinh" ? soLaMa(la.so) : la.loai === "so" ? (la.so === 1 ? "A" : String(la.so)) : ({ 11: "P", 12: "Kn", 13: "Q", 14: "K" } as Record<number, string>)[la.so] ?? "";
   return (
-    <svg viewBox="0 0 120 200" width={w ?? "100%"} height={h ?? "100%"} role="img" aria-label={`${la.ten} (${la.en})${nguoc ? " — lá ngược" : ""}`} className="block select-none" data-nguoc={nguoc ? 1 : 0}>
+    <svg viewBox="0 0 120 200" width={w ?? "100%"} height={h ?? "100%"} role="img" aria-label={`${la.ten} (${la.en})${nguoc ? ` — ${nhanNguoc.toLowerCase()}` : ""}`} className="block select-none" data-nguoc={nguoc ? 1 : 0}>
       <defs>
         <linearGradient id={`vang-${la.id}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#fff2c8" /><stop offset="0.5" stopColor={VANG} /><stop offset="1" stopColor="#b9892f" /></linearGradient>
       </defs>
@@ -95,7 +95,7 @@ export function MatTruoc({ la, w, nguoc = false }: { la: LaGon; w?: number; nguo
       {nguoc && (
         <g data-testid="nhan-nguoc">
           <rect x={72} y={14} width={38} height={14} rx={7} fill="#b9772f" />
-          <text x={91} y={24.2} textAnchor="middle" fontSize={7.4} fontWeight={700} fill="#fff8e6" fontFamily="system-ui, sans-serif" letterSpacing={0.4}>NGƯỢC</text>
+          <text x={91} y={24.2} textAnchor="middle" fontSize={7.4} fontWeight={700} fill="#fff8e6" fontFamily="system-ui, sans-serif" letterSpacing={0.4}>{nhanNguoc}</text>
         </g>
       )}
       <text x={60} y={176} textAnchor="middle" fontSize={la.ten.length > 14 ? 8.5 : 10} fontWeight={600} fill={MUC} fontFamily="Georgia, serif">{la.ten}</text>
@@ -127,18 +127,20 @@ export function MatSau({ w, sang = false }: { w?: number; sang?: boolean }) {
 
 /** Lá bài có thể lật (CSS 3D): `lat` = đang ngửa; `nguoc` xoay HÌNH mặt trước 180° (chữ giữ chiều đọc, có nhãn NGƯỢC). Component thuần, không trạng thái.
  *  `w` = bề rộng px; bỏ trống → co giãn theo khung cha (giữ tỉ lệ 120:200). */
-export function LaBai({ la, lat, nguoc = false, w, className, sang = false, onClick, nhan, tatHieuUng = false }: {
+export function LaBai({ la, lat, nguoc = false, w, className, sang = false, onClick, nhan, tatHieuUng = false, chu }: {
   la: LaGon | null; lat: boolean; nguoc?: boolean; w?: number; className?: string; sang?: boolean; onClick?: () => void; nhan?: string; tatHieuUng?: boolean;
+  /** QTE: chữ theo ngôn ngữ (mặc định tiếng Việt). */ chu?: { nguoc: string; up: string; nhan_nguoc: string };
 }) {
   const Tag = onClick ? "button" : "div";
+  const c = chu ?? { nguoc: " (ngược)", up: "Lá bài úp", nhan_nguoc: "NGƯỢC" };
   return (
-    <Tag type={onClick ? "button" : undefined} onClick={onClick} aria-label={nhan ?? (la && lat ? `${la.ten}${nguoc ? " (ngược)" : ""}` : "Lá bài úp")}
+    <Tag type={onClick ? "button" : undefined} onClick={onClick} aria-label={nhan ?? (la && lat ? `${la.ten}${nguoc ? c.nguoc : ""}` : c.up)}
       className={cn("relative block rounded-[9px] shadow-card outline-none focus-visible:ring-2 focus-visible:ring-gold", onClick && "cursor-pointer", !w && "w-full", className)}
       style={{ width: w, height: w ? w * TI_LE : undefined, aspectRatio: w ? undefined : "120 / 200", perspective: 900 }} data-testid="la-bai" data-lat={lat ? 1 : 0} data-id={la?.id}>
       <div className="relative size-full" style={{ transformStyle: "preserve-3d", transform: lat ? "rotateY(180deg)" : "rotateY(0deg)", transition: tatHieuUng ? "none" : "transform 650ms cubic-bezier(.45,0,.25,1)" }}>
         <div className="absolute inset-0 overflow-hidden rounded-[9px]" style={{ backfaceVisibility: "hidden" }}><MatSau w={w} sang={sang} /></div>
         <div className="absolute inset-0 overflow-hidden rounded-[9px]" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
-          {la && <MatTruoc la={la} w={w} nguoc={nguoc} />}
+          {la && <MatTruoc la={la} w={w} nguoc={nguoc} nhanNguoc={c.nhan_nguoc} />}
         </div>
       </div>
     </Tag>

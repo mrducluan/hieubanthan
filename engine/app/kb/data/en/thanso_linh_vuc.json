@@ -1,0 +1,478 @@
+{
+ "_trang_thai": "bien_tap",
+ "linh_vuc": {
+  "ban_than": "Self",
+  "tinh_yeu": "Love",
+  "gia_dinh": "Family",
+  "con_cai": "Parenting",
+  "tre_em": "Child's character",
+  "su_nghiep": "Career",
+  "tai_chinh": "Money",
+  "hoc_tap": "Study",
+  "suc_khoe": "Mental well-being",
+  "ban_be_xa_hoi": "Friends & social life",
+  "cuoc_song": "Everyday life"
+ },
+ "noi_dung": {
+  "1": {
+   "ban_than": {
+    "xu_huong": "People with number 1 are often described as self-directed: they like to open the way and get restless when they have to wait for someone's permission.",
+    "mat_toi": "Independence can slide into isolation; feedback can feel like a challenge.",
+    "goi_y": "Try handing one small task fully to someone else and not stepping in until it is done.",
+    "cau_tu_soi": "When was the last time you changed your mind because of someone else's feedback?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 1 tends to take the lead, set the pace, and needs their personal space respected.",
+    "mat_toi": "Can decide for both people and treat the partner's needs as something to 'handle'.",
+    "goi_y": "Ask your partner 'what would you like?' before offering your own plan.",
+    "cau_tu_soi": "In your most recent relationship, who gave way more often?"
+   },
+   "gia_dinh": {
+    "xu_huong": "In the family, number 1 often takes the trailblazer role: leaving home early, becoming independent early, or being the one who decides the big things.",
+    "mat_toi": "Can clash with elders by refusing to follow old ways.",
+    "goi_y": "Pick one household matter and let someone else do it their way, even if you think it is not the best way.",
+    "cau_tu_soi": "Are you using your independence to avoid hard conversations at home?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 1 tends to suit an initiating role: starting new projects, leading a small team, working with real decision-making power.",
+    "mat_toi": "Gets bored with repetitive work; struggles under a micromanaging boss.",
+    "goi_y": "When choosing a job, ask clearly how much autonomy you will have; for number 1, that matters as much as the pay.",
+    "cau_tu_soi": "Did you leave your last job because of the work, or because you could not make your own decisions?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 1 tends to prefer earning it and managing it alone, and dislikes depending on anyone financially.",
+    "mat_toi": "Can commit to a big expense on the excitement of a fresh start without planning a way back.",
+    "goi_y": "Set a 48-hour rule for any expense above a limit you choose yourself.",
+    "cau_tu_soi": "On your last big money decision, did anyone push back before you paid?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 1 tends to pour energy into goals and forget to rest until worn out.",
+    "mat_toi": "Stress easily turns into irritability and a wish to carry everything alone.",
+    "goi_y": "Treat rest as a scheduled goal, not a reward for finishing work.",
+    "cau_tu_soi": "How many hours this week did you truly rest (no phone, no work)?"
+   }
+  },
+  "2": {
+   "ban_than": {
+    "xu_huong": "Number 2 is often described as perceptive, able to read the room, and putting harmony first.",
+    "mat_toi": "Can swallow their own opinion to keep the peace, then build up quiet hurt.",
+    "goi_y": "Practice saying one 'I see it differently' each week, on something small.",
+    "cau_tu_soi": "When was the last time you said a plain 'no' without a long explanation?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 2 tends to be devoted, remembers small details, and needs to feel close.",
+    "mat_toi": "Can lose themselves in the relationship; fear of being left can lead to giving in too much.",
+    "goi_y": "Keep one habit of your own (friends, a hobby) that does not depend on your partner.",
+    "cau_tu_soi": "If your partner left, what would still be yours?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 2 is often the peacemaker, the one who keeps the home warm.",
+    "mat_toi": "Can carry the whole family's feelings, stand between two sides, and burn out.",
+    "goi_y": "When two relatives are at odds, encourage them to talk directly instead of through you.",
+    "cau_tu_soi": "Who are you acting as a bridge for, and do they really need you to?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 2 tends to do well in coordinating and supporting roles, customer care, and connecting teams.",
+    "mat_toi": "Does a lot without asking for credit; avoids roles that involve friction.",
+    "goi_y": "Write down your contributions each week so you have evidence at review time.",
+    "cau_tu_soi": "Does your manager know specifically what you did this quarter?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 2 tends to be careful, builds savings gradually, and puts safety first.",
+    "mat_toi": "Can lend to relatives because saying no feels awkward.",
+    "goi_y": "Set a yearly limit for lending and helping out; beyond it, answer 'let me think about it'.",
+    "cau_tu_soi": "The last time you lent money, did you agree because you wanted to or because you felt awkward?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 2 tends to absorb the stress of people around them.",
+    "mat_toi": "Gets tired from emotions more than from work.",
+    "goi_y": "After heavy meetings, take 15 minutes alone before doing anything else.",
+    "cau_tu_soi": "Is today's tiredness yours, or are you carrying it for someone else?"
+   }
+  },
+  "3": {
+   "ban_than": {
+    "xu_huong": "Number 3 is often described as full of ideas, a charming talker, with a need to express themselves.",
+    "mat_toi": "Can scatter, start more than they finish, and use cheerfulness to avoid deeper things.",
+    "goi_y": "Pick one project and see it through before opening a new one.",
+    "cau_tu_soi": "Is there any project you have seen through even after the excitement faded?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 3 tends to be romantic and fun, and likes praise and attention.",
+    "mat_toi": "Can get bored once the novelty wears off; avoids serious conversations.",
+    "goi_y": "Create 'new things' inside the relationship (shared experiences) instead of looking for them in a new person.",
+    "cau_tu_soi": "Are you bored with your partner, or with the familiar stage of every relationship?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 3 is often the one who brings laughter and lightens the family mood.",
+    "mat_toi": "Can joke past things that need to be said plainly.",
+    "goi_y": "When something is going on at home, try saying one serious sentence before making a joke.",
+    "cau_tu_soi": "What is something at home you are still laughing off?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 3 tends to suit work that involves expression: writing, speaking, design, communications, sales, teaching.",
+    "mat_toi": "Can drop out when the work moves into the detailed, dull stage.",
+    "goi_y": "Pair up with someone who is good at finishing; you bring the ideas, they bring it home.",
+    "cau_tu_soi": "In the past year, how many of your ideas became something real?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 3 tends to be generous, spending on experiences and on other people.",
+    "mat_toi": "Can spend on impulse and finds it hard to track spending.",
+    "goi_y": "Automatically move part of your income into savings on payday.",
+    "cau_tu_soi": "Last month, how much did you spend on things you do not remember buying?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 3 tends to recharge through socializing and creating.",
+    "mat_toi": "Can hide sadness behind a cheerful face; stays up late when inspired.",
+    "goi_y": "Have one person you can be honest with, without having to act cheerful.",
+    "cau_tu_soi": "When was the last time you let someone see you sad?"
+   }
+  },
+  "4": {
+   "ban_than": {
+    "xu_huong": "Number 4 is often described as steady and principled, preferring to work to a plan.",
+    "mat_toi": "Can be rigid and anxious when things change suddenly.",
+    "goi_y": "Each month, try one small, deliberate change in your routine.",
+    "cau_tu_soi": "When was the last time you took apart a system you had built yourself?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 4 tends to be loyal and shows affection through actions more than words.",
+    "mat_toi": "Can seem dry, treating romance as unnecessary; slow to open up.",
+    "goi_y": "Say out loud one thing you appreciate about your partner each week.",
+    "cau_tu_soi": "Does your partner know you love them, or do they only see you working?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 4 is often the pillar who handles the practical side: the home, paperwork, plans.",
+    "mat_toi": "Can be strict and set so many rules that relatives feel suffocated.",
+    "goi_y": "Ask your family which rules they think are no longer needed.",
+    "cau_tu_soi": "Which rule at home exists out of habit rather than for a reason?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 4 tends to do well in work that needs systems: engineering, accounting, operations, project management, construction.",
+    "mat_toi": "Can work hard without asking where the work leads; reluctant to change direction.",
+    "goi_y": "Each quarter ask yourself: does this job still serve my long-term goals?",
+    "cau_tu_soi": "Are you doing the right thing well, or doing the wrong thing well?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 4 tends to save, plan, and prefer tangible assets.",
+    "mat_toi": "Can be too cautious, missing chances out of fear of risk; finds it hard to spend on themselves.",
+    "goi_y": "Set aside a small fixed amount for personal enjoyment, no reason needed.",
+    "cau_tu_soi": "What are you saving for, and when will it be 'enough'?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 4 tends to keep steady habits and can bear pressure over a long time.",
+    "mat_toi": "Can take on too much and push past their limits out of duty; tension builds up in body and mind.",
+    "goi_y": "Schedule exercise as a non-negotiable item in your weekly plan.",
+    "cau_tu_soi": "How many times did your body ask you to rest before you listened?"
+   }
+  },
+  "5": {
+   "ban_than": {
+    "xu_huong": "Number 5 is often described as freedom-loving, drawn to new experiences, and quick to adapt.",
+    "mat_toi": "Can be impulsive, walking away at the first difficulty; afraid of being tied down.",
+    "goi_y": "Before leaving something, stay one more cycle (a month, a project) and then decide.",
+    "cau_tu_soi": "Have you stayed anywhere long enough to see the long-term results of what you did?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 5 tends to be magnetic and adventurous, and needs a sense of freshness.",
+    "mat_toi": "Can shy away from commitment and get bored once the relationship settles into a rhythm.",
+    "goi_y": "Tell your partner clearly how much space you need instead of disappearing.",
+    "cau_tu_soi": "Do you need freedom from your partner, or from the fear of being held back?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 5 is often the one who travels far and brings new stories home.",
+    "mat_toi": "Can be absent when the family needs them; sees duty as a burden.",
+    "goi_y": "Choose one fixed family occasion you always show up for (a weekly meal, a family anniversary).",
+    "cau_tu_soi": "What can your family count on you for?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 5 tends to suit varied work with movement and contact: sales, travel, communications, starting a business.",
+    "mat_toi": "Can hop between jobs constantly; a resume with many beginnings and few results.",
+    "goi_y": "Look for a role with variety built in (new projects) instead of changing companies.",
+    "cau_tu_soi": "In your last job change, what were you running toward, or were you only running from something?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 5 tends to earn fast and spend fast, and likes new opportunities.",
+    "mat_toi": "Can take risks because everyone else is, putting money in on a whim.",
+    "goi_y": "Use only a small share, decided in advance, for anything you are 'just trying out'.",
+    "cau_tu_soi": "On your last risky move, did you understand it before putting money in?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 5 tends to need movement and change to feel alive.",
+    "mat_toi": "Can fall into irregular routines; seeks stimulation to escape boredom.",
+    "goi_y": "Choose a sport with plenty of variety (climbing, dancing, swimming) so you can keep it up.",
+    "cau_tu_soi": "Are you looking for joy, or for something so you do not have to sit still with yourself?"
+   }
+  },
+  "6": {
+   "ban_than": {
+    "xu_huong": "Number 6 is often described as responsible and caring, valuing family and beauty.",
+    "mat_toi": "Can control under the cover of caring, and sacrifice and then resent.",
+    "goi_y": "Ask 'do you need my help?' before helping.",
+    "cau_tu_soi": "Do you let others handle their own matters without stepping in?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 6 tends to be attentive, wants to build a home, and is willing to give a lot.",
+    "mat_toi": "Protecting can become controlling; expects the partner to give back in the same way they give.",
+    "goi_y": "Ask your partner what makes them feel loved, instead of guessing.",
+    "cau_tu_soi": "Do you give because your partner needs it, or because you need to be needed?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 6 is often the one who looks after the whole family, carrying the load for parents and siblings.",
+    "mat_toi": "Can take on everything, then burn out and blame others for not caring.",
+    "goi_y": "Divide household tasks clearly, and accept that others will not do them quite like you.",
+    "cau_tu_soi": "What are you doing for a relative that they could do themselves?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 6 tends to suit caregiving, education, healthcare, counseling, service, and designing spaces.",
+    "mat_toi": "Can take on too much of other people's work and finds it hard to ask for what is owed.",
+    "goi_y": "Set clear limits on hours and scope with your boss and your clients.",
+    "cau_tu_soi": "Do you take on extra work because it was assigned, or because you could not bear to say no?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 6 tends to spend on family and relatives before themselves.",
+    "mat_toi": "Can carry the whole family's finances and forget their own fund.",
+    "goi_y": "Set up a fund for yourself before spending on others.",
+    "cau_tu_soi": "If you stopped carrying the load, who at home would stand on their own?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 6 tends to feel well when loved ones are fine, and can run down from worrying about others.",
+    "mat_toi": "Can neglect themselves; stress comes from responsibility.",
+    "goi_y": "Put one act of caring for yourself on the calendar, the way you would for someone else.",
+    "cau_tu_soi": "Who takes care of you when you are tired?"
+   }
+  },
+  "7": {
+   "ban_than": {
+    "xu_huong": "Number 7 is often described as deep and analytical, needing time alone.",
+    "mat_toi": "Can be distant and skeptical, analyzing instead of acting.",
+    "goi_y": "Set a deadline for thinking; when it passes, choose the best option you have.",
+    "cau_tu_soi": "When was the last time you decided without enough data, and were fine with it?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 7 tends to be selective, needs a meeting of minds, and needs quiet space.",
+    "mat_toi": "Can close off and make the partner feel pushed away; finds it hard to talk about feelings.",
+    "goi_y": "When you need to be alone, say in advance 'I need some quiet for a while, I am not angry'.",
+    "cau_tu_soi": "Does your partner understand your silence, or are they guessing?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 7 is often the 'different' one in the family, living inwardly and sharing little.",
+    "mat_toi": "Can come across as cold and distant to relatives.",
+    "goi_y": "Share one thing you are thinking about with one family member each week.",
+    "cau_tu_soi": "What does your family know about your inner world?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 7 tends to suit deep, specialized work: research, data analysis, engineering, law, writing, expert roles.",
+    "mat_toi": "Can be a perfectionist, reluctant to present, and let others take the credit.",
+    "goi_y": "Practice presenting results early, even when they are not perfect.",
+    "cau_tu_soi": "Has anyone heard your best idea of the year yet?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 7 tends to weigh things carefully and likes to research before deciding.",
+    "mat_toi": "Can analyze forever without acting; doubts every piece of advice.",
+    "goi_y": "Choose one simple rule (for example, automatic saving) and start right away.",
+    "cau_tu_soi": "Have you researched enough, or are you using research to put things off?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 7 tends to need quiet to recover, and the mind tires easily.",
+    "mat_toi": "Can lose sleep from overthinking and withdraw when sad.",
+    "goi_y": "Keep a regular hands-on activity so the mind can rest.",
+    "cau_tu_soi": "When you are sad, who do you turn to, or do you turn only to your own thoughts?"
+   }
+  },
+  "8": {
+   "ban_than": {
+    "xu_huong": "Number 8 is often described as ambitious and practical, able to organize and manage resources.",
+    "mat_toi": "Can measure self-worth by achievements, money, and power; finds it hard to admit weakness.",
+    "goi_y": "Each week, do one thing that is not for a result.",
+    "cau_tu_soi": "If you lost your title and your income, where would you still see your own worth?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 8 tends to protect and provide, wanting the partner to want for nothing.",
+    "mat_toi": "Can treat providing as enough love; finds it hard to be gentle, and tends to 'manage' the partner.",
+    "goi_y": "Spend time fully present, no phone, no talk about work.",
+    "cau_tu_soi": "Does your partner need your money, or need you?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 8 is often the one who provides and makes the big decisions at home.",
+    "mat_toi": "Can be domineering, using money to have the final say.",
+    "goi_y": "Let relatives decide the matters that fall within their own share.",
+    "cau_tu_soi": "Does your family listen to you because they agree, or because you pay the bills?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 8 tends to suit management, business, finance, executive roles, and real estate.",
+    "mat_toi": "Can get swallowed by work, sacrificing health and family for the goal.",
+    "goi_y": "Set non-financial goals alongside (health, relationships) and track them like KPIs.",
+    "cau_tu_soi": "Is the success you are chasing your own, or other people's expectations?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 8 tends to spot opportunities, is willing to take chances, and builds assets.",
+    "mat_toi": "Can bet big and borrow to leverage; everything gets measured in money.",
+    "goi_y": "Always have a worst-case plan and a safety cushion before any big decision.",
+    "cau_tu_soi": "If this deal fails, how much could you bear?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 8 tends to have stamina and can take heavy pressure.",
+    "mat_toi": "Can push through and ignore the body's signals until it gives out.",
+    "goi_y": "Book regular check-ups and real time off, and put them in the calendar ahead of time.",
+    "cau_tu_soi": "When was the last time you took leave without opening your email?"
+   }
+  },
+  "9": {
+   "ban_than": {
+    "xu_huong": "Number 9 is often described as tolerant and idealistic, thinking of the community.",
+    "mat_toi": "Can take on everyone else's business and drop their own; finds it hard to close old chapters.",
+    "goi_y": "Choose one big cause to give yourself to, and say no to the rest.",
+    "cau_tu_soi": "Do you help others because they need it, or so you do not have to look at your own affairs?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 9 tends to be generous and romantic, loving in an idealistic way.",
+    "mat_toi": "Can love the image more than the real person; finds it hard to end a relationship that is over.",
+    "goi_y": "List the real things (not hopes) you know about your partner.",
+    "cau_tu_soi": "Do you love your partner, or the person you hope they will become?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 9 is often the big-hearted one, looking after extended family and outsiders.",
+    "mat_toi": "Can care more for outsiders than for people at home.",
+    "goi_y": "Give time to your closest relatives before charity work.",
+    "cau_tu_soi": "Do the people at home feel you give them as much as you give outsiders?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 9 tends to suit socially meaningful work: education, healthcare, the arts, non-profits, diplomacy.",
+    "mat_toi": "Can work for the ideal and forget about income; finds it hard to leave an organization that no longer fits.",
+    "goi_y": "Work out the minimum income you need before accepting a 'meaningful' job.",
+    "cau_tu_soi": "Is your dedication being rewarded enough for you to keep going long term?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 9 tends to be generous, gives easily, and holds on to little.",
+    "mat_toi": "Can give beyond their means and build too little for themselves.",
+    "goi_y": "Keep a giving fund and a personal fund separate, and do not use one to cover the other.",
+    "cau_tu_soi": "Are you helping others with money you need yourself?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 9 tends to be sensitive to other people's pain.",
+    "mat_toi": "Can burn out from empathy, carrying sadness for others.",
+    "goi_y": "Limit negative news; have a ritual to 'close the day'.",
+    "cau_tu_soi": "Does today's sadness come from your own life, or from a screen?"
+   }
+  },
+  "11": {
+   "ban_than": {
+    "xu_huong": "Number 11 is often described as an intensified 2: sharp intuition, high ideals, easily inspiring others.",
+    "mat_toi": "Can be highly strung, set oversized expectations, and swing between confidence and self-doubt.",
+    "goi_y": "Test your intuition on small things with measurable results before trusting it on big ones.",
+    "cau_tu_soi": "How often is your intuition right, and do you also record the times it was wrong?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 11 tends to seek a soul connection and is very sensitive to the partner's feelings.",
+    "mat_toi": "Can idealize and then be disillusioned; feels insecure when not understood.",
+    "goi_y": "Say what you feel instead of waiting for your partner to guess.",
+    "cau_tu_soi": "Are you demanding that your partner understand you, or have you helped them to?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 11 is often the one who senses the family mood most clearly.",
+    "mat_toi": "Can get pulled into relatives' emotions and find it hard to separate.",
+    "goi_y": "Practice telling apart 'what I feel' from 'what others feel'.",
+    "cau_tu_soi": "Which feeling you are carrying belongs to the family, not to you?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 11 tends to suit inspiring work: teaching, counseling, the arts, healing work, communications.",
+    "mat_toi": "Can have plenty of vision but little planning; burns out from emotional work.",
+    "goi_y": "Team up with someone good at execution; set your own limit on counseling sessions per week.",
+    "cau_tu_soi": "Does your vision have a concrete next step yet?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 11 tends to care little for material things and puts meaning first.",
+    "mat_toi": "Can neglect money matters until they become a problem.",
+    "goi_y": "Schedule a monthly money review as a must-do.",
+    "cau_tu_soi": "Do you avoid money because you do not need it, or because it worries you?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 11 tends to be highly sensitive and quick to feel stressed.",
+    "mat_toi": "Can lose sleep, worry a lot, and get overloaded by noise and stimulation.",
+    "goi_y": "Breathe slowly, cut back on coffee, and have some quiet space every day.",
+    "cau_tu_soi": "How many minutes of real quiet did you have this week?"
+   }
+  },
+  "22": {
+   "ban_than": {
+    "xu_huong": "Number 22 is often described as an intensified 4: a big vision and the ability to make it real through systems.",
+    "mat_toi": "Can feel pressure to do something great; disappointed in themselves when life is just 'ordinary'.",
+    "goi_y": "Break the vision into measurable 90-day steps.",
+    "cau_tu_soi": "Are you building something big, or waiting for the conditions to be right before you start?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 22 tends to be serious, building the relationship like a foundation meant to last.",
+    "mat_toi": "Can put work or mission above the partner.",
+    "goi_y": "Set a fixed time for the two of you as a commitment that does not move.",
+    "cau_tu_soi": "Does your partner have a place in your big plan?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 22 is often the pillar, the one who builds the family's long-term foundation.",
+    "mat_toi": "Can be strict, treating the family like a project to be managed.",
+    "goi_y": "Let the family have times with no goal at all.",
+    "cau_tu_soi": "Does your family need a manager, or someone who is simply there?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 22 tends to suit building large systems: architecture, engineering, running organizations, policy, large-scale start-ups.",
+    "mat_toi": "Can take on too much and struggle to delegate; perfectionism slows progress.",
+    "goi_y": "Build a team and processes so the big work does not depend on you alone.",
+    "cau_tu_soi": "If you took a month off, would your work keep running?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 22 tends to think long term and is good at building lasting assets.",
+    "mat_toi": "Can pour everything into one big project.",
+    "goi_y": "Spread your risk; keep personal finances separate from the project.",
+    "cau_tu_soi": "If your biggest project stopped, would your family be all right?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 22 tends to bear heavy pressure over long periods.",
+    "mat_toi": "Can burn out from carrying responsibility that is too big.",
+    "goi_y": "Plan your rest the way you plan a project.",
+    "cau_tu_soi": "Does your plan have an item called 'rest'?"
+   }
+  },
+  "33": {
+   "ban_than": {
+    "xu_huong": "Number 33 is often described as an intensified 6: great compassion, a wish to lift up and heal others.",
+    "mat_toi": "Can carry the pain of the whole world and sacrifice to the point of forgetting themselves; can see themselves as 'the chosen one'.",
+    "goi_y": "Help others within your own limits; care for yourself as you would for a friend who needs help.",
+    "cau_tu_soi": "How much longer can you help others if no one helps you?"
+   },
+   "tinh_yeu": {
+    "xu_huong": "In love, number 33 tends to love wholeheartedly, wanting to lift up and transform the person they love.",
+    "mat_toi": "Can love in order to 'rescue' someone; puts up with too much.",
+    "goi_y": "Tell the difference between loving someone and fixing them.",
+    "cau_tu_soi": "Are you loving your partner, or trying to save them?"
+   },
+   "gia_dinh": {
+    "xu_huong": "Number 33 is often the emotional anchor, the one the whole family turns to.",
+    "mat_toi": "Can become the person responsible for everyone's happiness.",
+    "goi_y": "Say clearly what you can do and what you cannot.",
+    "cau_tu_soi": "Whose happiness at home are you carrying as if it were your job?"
+   },
+   "su_nghiep": {
+    "xu_huong": "Number 33 tends to suit large-scale caring and supporting work: education, healthcare, social work, healing arts.",
+    "mat_toi": "Can work for free and burn out from kindness.",
+    "goi_y": "Put a price on your effort; being paid does not make you any less good.",
+    "cau_tu_soi": "Do you feel awkward talking about money when your work is helping people?"
+   },
+   "tai_chinh": {
+    "xu_huong": "With money, number 33 tends to use it to help relatives and the community.",
+    "mat_toi": "Can give until they go without.",
+    "goi_y": "Keep a safety fund for yourself before helping others.",
+    "cau_tu_soi": "If you fell on hard times, who would help you the way you have helped them?"
+   },
+   "suc_khoe": {
+    "xu_huong": "Number 33 tends to be tireless in serving others and easily forgets themselves.",
+    "mat_toi": "Can burn out from caring for others; stress builds quietly.",
+    "goi_y": "Ask for help before you are overloaded.",
+    "cau_tu_soi": "When was the last time you asked someone for help?"
+   }
+  }
+ },
+ "source": {
+  "ten": "Reference compilation (editorial draft, 2026) following the Balliett–Jordan tradition and common numerology books",
+  "luu_y": "Draft shown by decision of the project owner (2026-09-30); a status column allows gradual review. A cultural reference, not a forecast."
+ }
+}

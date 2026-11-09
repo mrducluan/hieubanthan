@@ -5,6 +5,20 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4ah. Bản tiếng Anh `/en` — Tarot · Thần số · hỏi đáp (QTE-3, 2026-11-09) — deploy ENGINE trước web
+
+- [ ] **Deploy engine trước web** (route mới `GET /v1/thanso/so/{n}`, `GET /v1/tarot/la/{id}`, header `x-ngon-ngu`). Kiểm sau deploy:
+      mở `https://hieuban.com/en/tarot` → lá của ngày hiện tiếng Anh; `/en/tarot/cards/the-fool` có "Pictorial Key"; `/en/numerology`
+      nhập tên + ngày → bốn số tiếng Anh. Bản Việt `/tarot`, `/than-so` không đổi.
+- [ ] **Search Console**: thêm sitemap `https://hieuban.com/sitemap-en.xml`; sau 2–4 tuần xem hiển thị / nhấp của `/en/*` theo nước
+      (Mỹ, Anh, Úc, Canada, Singapore…) — cột mốc tuần 8 của `docs/KE-HOACH-QUOC-TE.md` mục 6.
+- [ ] **Người bản xứ duyệt** chữ tiếng Anh (`engine/app/kb/data/en/*.json`, `_trang_thai: bien_tap`): ưu tiên 78 lá Tarot (câu sức khoẻ,
+      tiền bạc) và chân dung 12 số. Duyệt xong đổi `_trang_thai` → `da_duyet` qua PR.
+- [ ] (Quyết định) Có để AI **chuyển ngữ** các KB còn lại (Bát tự, Tử vi) bằng `scripts/chuyen_ngu.py` (cần khoá OpenRouter) rồi người
+      bản xứ duyệt, hay tiếp tục ban biên tập viết tay như đợt này?
+- [ ] Luật sư đọc `/en/privacy`, `/en/terms` (tóm tắt, bản ràng buộc là tiếng Việt) trước khi quảng bá ra thị trường tiếng Anh (mục 7
+      kế hoạch quốc tế).
+
 ### 4ag. Đánh giá kiến trúc đa ngôn ngữ + giai đoạn 0 tuần 1 (QTE-2, 2026-11-08) — deploy ENGINE trước web
 
 - [ ] **Đọc + quyết** `docs/DANH-GIA-KIEN-TRUC-DA-NGON-NGU.md` mục 4.3: lời bài đọc tiếng Anh dựng từ mã hộp + mẫu câu tiếng Anh
