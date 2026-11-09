@@ -5,6 +5,20 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
 
+### 4ai. Hybrid Two-Tier → HTT-1 (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md`) — deploy ENGINE trước web
+
+- [ ] **Chạy migration 0034** (`supabase/migrations/0034_kiem_chung_ngon_ngu.sql`, sau 0033): phiếu "Đúng với mình" mang ngôn ngữ
+  trang; chưa chạy thì phiếu vẫn ghi như cũ, chỉ chưa có khung "Lệch theo ngôn ngữ" ở `/quan-tri/hoc`.
+- [ ] **Quyết H1**: cờ "Nam bán cầu" cho Bát tự theo cách điều hậu (chỉ lớp nóng – lạnh theo mùa thực tế, trụ không đổi, mặc định
+  tắt). Em khuyên: chỉ làm nếu có nhu cầu từ người Việt ở Úc / NZ.
+- [ ] **Quyết H5 / H6** (HTT-2): AI diễn đạt lại hộp "Điểm giao thoa" qua `kiem_ai`; nút "Soạn lại nháp → PR" cho mã lệch theo
+  ngôn ngữ. Cả hai chờ số phiếu thật (≥ 30 trên hộp giao thoa; ≥ 100 phiếu /en mỗi mã).
+- [ ] Người bản xứ duyệt `engine/app/kb/data/en/giao_thoa_kb.json` (`_trang_thai: bien_tap`) cùng đợt với các tệp `en/` khác.
+- [ ] Đã kiểm 8 QID Wikidata qua API (5 QID trong tài liệu Drive sai thực thể) — không cần anh làm gì; nếu anh muốn thêm thực thể
+  khác (vd Chaldea, Lạc Thư) thì báo em tra.
+- [ ] Sau deploy: thử `/tu-vi` → "Hiển thị" → khung Trường phái → "Giờ sinh: Theo mặt trời thực" với hồ sơ sinh ở tỉnh xa kinh tuyến
+  105° (Điện Biên, Cà Mau) hoặc thành phố nước ngoài → lá số an lại, chip "Giờ mặt trời thực".
+
 ### 4ah. Bản tiếng Anh `/en` — Tarot · Thần số · hỏi đáp (QTE-3, 2026-11-09) — deploy ENGINE trước web
 
 - [ ] **Deploy engine trước web** (route mới `GET /v1/thanso/so/{n}`, `GET /v1/tarot/la/{id}`, header `x-ngon-ngu`). Kiểm sau deploy:

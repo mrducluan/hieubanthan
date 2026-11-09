@@ -28,6 +28,8 @@ const CHIP_LUU_NGUYET: Record<PhaiLuuNguyet, string> = {
 };
 
 type Viet = "viet" | "trung";
+/** HTT-1 — giờ sinh: đồng hồ (mặc định, như phần lớn sách Việt) hay giờ mặt trời thực tại kinh độ nơi sinh. */
+export type GioSinh = "dong_ho" | "mat_troi";
 /** TV-NHUAN3 — cách tính tháng nhuận (engine `tuvi_an_sao.THANG_NHUAN`). */
 export type ThangNhuan = "thang_sau" | "thang_chinh" | "ca_thang_sau";
 type TN = ThangNhuan;
@@ -41,6 +43,8 @@ export function TruongPhai(p: {
   lich: Viet; setLich: (v: Viet) => void; lichKhac: boolean;
   phaiDoSang: PhaiDoSang; setPhaiDoSang: (v: PhaiDoSang) => void;
   hoaLinh: Viet; setHoaLinh: (v: Viet) => void;
+  /** HTT-1: giờ sinh theo đồng hồ / mặt trời thực; `coKinhDo` = nơi sinh có kinh độ (tỉnh Việt Nam hoặc thành phố trong danh sách). */
+  gioSinh?: GioSinh; setGioSinh?: (v: GioSinh) => void; coKinhDo?: boolean;
   thangNhuan: TN; setThangNhuan: (v: TN) => void; coNhuan: boolean;
   luuNguyet: PhaiLuuNguyet; setLuuNguyet: (v: PhaiLuuNguyet) => void;
   /** Giữ trạng thái mở ở trang cha: lá số tạm biến mất mỗi lần engine an lại → khung không tự đóng khi vừa bấm. */
@@ -50,6 +54,7 @@ export function TruongPhai(p: {
     { nhan: p.lich === "viet" ? "Lịch Việt" : "Lịch Trung Quốc", khac: p.lich !== "viet" },
     { nhan: p.phaiDoSang === "nam" ? "Độ sáng Nam phái" : "Độ sáng phái Trung", khac: p.phaiDoSang !== "nam" },
     { nhan: p.hoaLinh === "viet" ? "Hoả Linh lối Việt" : "Hoả Linh Trung Châu", khac: p.hoaLinh !== "viet" },
+    ...(p.setGioSinh ? [{ nhan: p.gioSinh === "mat_troi" ? "Giờ mặt trời thực" : "Giờ đồng hồ", khac: p.gioSinh === "mat_troi" }] : []),
     { nhan: CHIP_LUU_NGUYET[p.luuNguyet], khac: p.luuNguyet !== "dau_quan_thai_tue" },
     ...(p.coNhuan ? [{ nhan: CHIP_NHUAN[p.thangNhuan], khac: p.thangNhuan !== "thang_sau" }] : []),
   ];
@@ -63,6 +68,7 @@ export function TruongPhai(p: {
     if (p.lich !== "viet") p.setLich("viet");
     if (p.phaiDoSang !== "nam") p.setPhaiDoSang("nam");
     if (p.hoaLinh !== "viet") p.setHoaLinh("viet");
+    if (p.gioSinh === "mat_troi") p.setGioSinh?.("dong_ho");
     if (p.luuNguyet !== "dau_quan_thai_tue") p.setLuuNguyet("dau_quan_thai_tue");
     if (p.thangNhuan !== "thang_sau") p.setThangNhuan("thang_sau");
   };
@@ -85,6 +91,13 @@ export function TruongPhai(p: {
       <DongPhai ten="Hoả Tinh, Linh Tinh" nhan="Cách an Hoả Tinh, Linh Tinh" giaTri={p.hoaLinh} doi={p.setHoaLinh}
         luaChon={[["viet", "Lối Việt"], ["trung", "Trung Châu"]]}
         goiY="Sách Việt đổi chiều an theo âm dương nam nữ; phái Trung Châu an cố định — có thể đổi cả cách cục (vd Hoả Tham ↔ Linh Tham)." />
+      {p.setGioSinh && (
+        <DongPhai testId="chon-gio-sinh" ten="Giờ sinh" nhan="Cách lấy giờ sinh" giaTri={p.gioSinh ?? "dong_ho"} doi={p.setGioSinh}
+          luaChon={[["dong_ho", "Theo đồng hồ"], ["mat_troi", "Theo mặt trời thực"]]}
+          goiY={p.coKinhDo
+            ? "Giờ đồng hồ là giờ hành chính của múi giờ; giờ mặt trời thực lệch theo kinh độ nơi sinh (4 phút mỗi độ) và theo mùa (tới ±16 phút). Sách Việt thường lập theo đồng hồ; một số thầy Trung Quốc lập theo mặt trời. Sinh gần ranh giới canh giờ thì hai cách ra lá khác — xem cả hai."
+            : "Cần nơi sinh có kinh độ (tỉnh Việt Nam, hoặc chọn đúng thành phố khi sinh ở nước ngoài) mới tính được giờ mặt trời thực — sửa ở hồ sơ."} />
+      )}
       <DongKhung ten="Hạn tháng (lưu nguyệt)"
         goiY="Các phái khác nhau ở cung khởi tháng Giêng — cùng một tháng có thể rơi vào cung khác. Lá số gốc không đổi; chỉ đổi cung của từng tháng ở khung Lưu nguyệt và câu trả lời về tháng.">
         <select aria-label="Phái tính lưu nguyệt" value={p.luuNguyet} onChange={(e) => p.setLuuNguyet(e.target.value as PhaiLuuNguyet)}

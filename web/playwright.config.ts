@@ -53,7 +53,9 @@ export default defineConfig({
     trace: "retain-on-failure",
     contextOptions: { reducedMotion: "reduce" },
     // Hộp hỏi cookie đã trả lời "từ chối" → không che nút ở các test khác; test riêng tự xoá để thử hộp hỏi.
-    storageState: { cookies: [], origins: [{ origin: `http://localhost:${WEB_PORT}`, localStorage: [{ name: "hbt.dong-y-cookie.v1", value: "tu_choi" }] }] },
+    // HTT-1: trình duyệt Playwright gửi Accept-Language en-US → dải "Read it in English" sẽ hiện và đẩy bố cục xuống ~30px;
+    // cookie tắt dải đặt sẵn (test dải tự tạo ngữ cảnh riêng trong e2e/htt1.spec.ts).
+    storageState: { cookies: [{ name: "hbt-goi-y-en", value: "1", domain: "localhost", path: "/", expires: -1, httpOnly: false, secure: false, sameSite: "Lax" }], origins: [{ origin: `http://localhost:${WEB_PORT}`, localStorage: [{ name: "hbt.dong-y-cookie.v1", value: "tu_choi" }] }] },
   },
   projects: [
     {

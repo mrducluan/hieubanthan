@@ -54,9 +54,12 @@ export function BatTu() {
   const hoSo = useHoSo();
   const c = useChu();
   const [gioTy, setGioTy] = useState<"da_ty" | "sang_ngay">("da_ty");
+  // HTT-1: giờ sinh theo đồng hồ (mặc định) hay mặt trời thực tại kinh độ nơi sinh — engine lập lại tứ trụ.
+  const [gioSinh, setGioSinh] = useState<"dong_ho" | "mat_troi">("dong_ho");
   const goc = laSoTuHoSo(hoSo);
+  const coKinhDo = !!goc?.noi_sinh && (goc.noi_sinh !== "nuoc_ngoai" || /^[a-z]{2}-(?!khac$)[a-z0-9_]+$/.test(goc.mui_gio ?? ""));
   // TP-LICH: lựa chọn giờ Tý đi theo mọi lời gọi (tứ trụ, lưu niên, hỏi đáp, luận giải) — engine tính lại.
-  const laSo = goc ? { ...goc, ...(gioTy === "sang_ngay" ? { gio_ty: gioTy } : {}) } : null;
+  const laSo = goc ? { ...goc, ...(gioTy === "sang_ngay" ? { gio_ty: gioTy } : {}), ...(gioSinh === "mat_troi" ? { gio_sinh: gioSinh } : {}) } : null;
   const { data: ls, loi, thuLai } = usePost<LaSoBatTu>("/api/battu/la-so", laSo);
   const [namXem, setNamXem] = useState(namNayVN);
   const { data: ln } = usePost<LuuNienBatTu>("/api/battu/luu-nien", laSo ? { la_so: laSo, nam_xem: namXem } : null);
@@ -86,6 +89,7 @@ export function BatTu() {
   // TP-GON: khung trường phái đóng chỉ còn chip lựa chọn đang dùng; nhắc riêng khi sinh 23:00–23:59 (hai phái ra trụ ngày khác).
   const phaiDangDung: PhaiDangDung[] = [
     { nhan: gioTy === "da_ty" ? "Giờ Tý: giữ ngày" : "Giờ Tý: đổi ngày lúc 23:00", khac: gioTy !== "da_ty" },
+    { nhan: gioSinh === "mat_troi" ? "Giờ mặt trời thực" : "Giờ đồng hồ", khac: gioSinh === "mat_troi" },
     { nhan: "Năm, tháng theo tiết khí" },
   ];
   return (
@@ -147,6 +151,12 @@ export function BatTu() {
               goiY={sinhGioTy
                 ? "Bạn sinh trong giờ Tý đầu: hai phái ra TRỤ NGÀY khác nhau (nhật chủ đổi), trụ giờ như nhau."
                 : "Bạn không sinh 23:00–23:59 nên hai phái cho cùng một tứ trụ."} />
+            <DongPhai testId="chon-gio-sinh-bat-tu" ten="Giờ sinh" nhan="Cách lấy giờ sinh" giaTri={gioSinh}
+              doi={(v) => { setGioSinh(v); ghi("chart_interacted", { mo_dun: "battu", kind: "phai_gio_sinh", gio_sinh: v }); }}
+              luaChon={[["dong_ho", "Theo đồng hồ"], ["mat_troi", "Theo mặt trời thực"]]}
+              goiY={coKinhDo
+                ? "Giờ mặt trời thực lệch theo kinh độ nơi sinh (4 phút mỗi độ) và theo mùa (tới ±16 phút); sinh gần ranh giới canh giờ thì trụ giờ đổi. Sách Việt thường lập theo đồng hồ."
+                : "Cần nơi sinh có kinh độ (tỉnh Việt Nam, hoặc chọn đúng thành phố khi sinh ở nước ngoài) — sửa ở hồ sơ."} />
             <DongGhiChu ten="Âm lịch">
               Bát tự tính theo tiết khí (vị trí Mặt Trời), không theo ngày âm — chọn lịch Việt hay Trung Quốc không làm đổi tứ trụ.
               Năm đổi tại Lập xuân, tháng đổi tại tiết.

@@ -56,6 +56,7 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   // QTE: bản tiếng Anh ở /en — layout đọc `x-ngon-ngu` để dựng khung tiếng Anh; route API chuyển tiếp header này tới engine.
   const tiengAnh = pathname === "/en" || pathname.startsWith("/en/");
   dau.set("x-ngon-ngu", tiengAnh ? "en" : "vi");
+  dau.set("x-duong-dan", pathname);   // HTT-1: layout biết trang đang mở (dải gợi ý bản tiếng Anh chỉ ở trang có bản Anh)
   const res = NextResponse.next({ request: { headers: dau } });
   res.headers.set("content-security-policy", csp);
   if (tiengAnh) res.headers.set("content-language", "en");

@@ -79,6 +79,20 @@ class TuanTrietInput(BaseModel):
     gio_ty: Literal["da_ty", "sang_ngay"] = "da_ty"
     # EN-2 mục 5: tình trạng NGƯỜI DÙNG TỰ CHỌN (không suy đoán), chỉ để chọn lời ở chương tình yêu / gia đình; không lưu.
     tinh_trang: Literal["doc_than", "co_doi"] | None = None
+    # HTT-1 (chủ dự án hỏi "làm được không" 2026-11-09): giờ sinh theo đồng hồ (mặc định, như sách Việt) hay theo GIỜ MẶT
+    # TRỜI THỰC tại kinh độ nơi sinh (tỉnh Việt Nam / thành phố nước ngoài) — một công tắc "trường phái", người dùng chọn.
+    # Cần kinh độ: không có (nước ngoài chỉ khai múi giờ / mục "khác") → 422. Mặc định không đổi → không tăng ENGINE_VERSION.
+    gio_sinh: Literal["dong_ho", "mat_troi"] = "dong_ho"
+
+
+def _dich_mat_troi(clock_dt: _dt.datetime, lech_h: float, kinh_do: float) -> tuple[_dt.datetime, int]:
+    """HTT-1: thời điểm trong khung UTC+`lech_h` (giờ chuẩn địa phương hoặc kinh tuyến lịch 105°Đ — KHÔNG kể giờ mùa hè) → giờ
+    mặt trời thực tại `kinh_do` cùng khung; trả (giờ mới, số phút đã dịch). Một bộ tính: `timebase.gio_mat_troi_thuc_utc`."""
+    utc = clock_dt - _dt.timedelta(hours=lech_h)
+    mt = timebase.gio_mat_troi_thuc_utc(utc, kinh_do)
+    # Giờ mặt trời thực = UTC + 4 phút/độ + E; đồng hồ = UTC + lech_h → độ lệch so với ĐỒNG HỒ là hiệu hai thứ.
+    phut = round((mt - utc).total_seconds() / 60 - lech_h * 60)
+    return clock_dt + _dt.timedelta(minutes=phut), phut
 
 
 class _DauVao:
@@ -137,6 +151,15 @@ class _DauVao:
 
         # ---- 2. Múi giờ lịch sử (hoặc giờ địa phương nếu sinh ở nước ngoài) -
         clock_dt = _dt.datetime(duong_goc.year, duong_goc.month, duong_goc.day, gio, phut)
+        # HTT-1: kinh độ nơi sinh (tỉnh Việt Nam hoặc thành phố nước ngoài trong danh sách) — chỉ để cảnh báo / công tắc
+        # "giờ sinh theo mặt trời thực". Khai múi giờ IANA hay mục "khác" → không có kinh độ.
+        self.thanh_pho = mui_gio.thanh_pho(inp.mui_gio) if (nuoc_ngoai and inp.mui_gio) else None
+        self.kinh_do = (tinh["kinh_do"] if tinh else None) if not nuoc_ngoai else (self.thanh_pho or {}).get("kinh_do")
+        self.ten_noi = (tinh["ten"] if tinh else None) if not nuoc_ngoai else (self.thanh_pho or {}).get("ten_en") or (self.thanh_pho or {}).get("ten")
+        self.doi_mat_troi: int | None = None   # phút đã dịch khi gio_sinh = "mat_troi" (so với giờ chuẩn của khung lịch)
+        self.gio_chuan_truoc: _dt.datetime | None = None
+        if inp.gio_sinh == "mat_troi" and self.kinh_do is None:
+            raise HTTPException(422, detail="Giờ sinh theo mặt trời thực cần nơi sinh có kinh độ (tỉnh Việt Nam hoặc thành phố trong danh sách)")
         if nuoc_ngoai:
             # config.ABROAD_LOCAL_TIME: giữ giờ địa phương, chỉ bỏ giờ mùa hè.
             if self.gio_mua_he:
@@ -150,9 +173,15 @@ class _DauVao:
                     "ngày can chi."))
             vung = vung_khai or Region.NORTH   # sau 1975 hai vùng cùng UTC+7, chọn gì cũng vậy
             tb = timebase.to_calendar_time(clock_dt, vung)
-        ngay_kinh_tuyen = tb.calendar_dt.date()
         self.nuoc_ngoai, self.tinh = nuoc_ngoai, tinh
         self.utc_lich = self.utc_noi_sinh if nuoc_ngoai and self.utc_noi_sinh is not None else config.CALENDAR_MERIDIAN_TZ
+        # HTT-1: dịch sang giờ mặt trời thực SAU khi đã về khung lịch (giờ chuẩn địa phương / kinh tuyến 105°Đ) — làm trước thì
+        # bước trừ giờ mùa hè / đổi UTC+8 → UTC+7 bên trên chạy lần nữa lên giờ đã dịch (review 2026-11-09).
+        if inp.gio_sinh == "mat_troi":
+            self.gio_chuan_truoc = tb.calendar_dt
+            moi, self.doi_mat_troi = _dich_mat_troi(tb.calendar_dt, self.utc_lich, self.kinh_do)
+            tb = timebase.CalendarTime(calendar_dt=moi, clock_offset=tb.clock_offset, tz_disputed=tb.tz_disputed)
+        ngay_kinh_tuyen = tb.calendar_dt.date()
 
         # ---- 2. Lịch âm + can chi năm ------------------------------------
         # Âm lịch VIỆT NAM (không phải lịch Trung Quốc của iztro — LS60). Miền Nam 1960–1975 dùng lịch
@@ -227,14 +256,22 @@ class _DauVao:
             flags.append({"loai": "lich_am_mien_nam", "chi_tiet": (
                 "Ngày âm đổi theo lịch miền Nam thời 1960–1975 (tính theo UTC+8): "
                 f"ứng với dương lịch {self.duong_goc.strftime('%d/%m/%Y')}.")})
-        if self.tinh:
-            mt = timebase.gio_mat_troi_thuc(tb.calendar_dt, self.tinh["kinh_do"])
+        if self.doi_mat_troi is not None and self.gio_chuan_truoc is not None:
+            flags.append({"loai": "gio_sinh_mat_troi", "chi_tiet": (
+                f"Lá số lập theo GIỜ MẶT TRỜI THỰC ở {self.ten_noi} (bạn chọn): {tb.calendar_dt.strftime('%H:%M')} "
+                f"({'+' if self.doi_mat_troi >= 0 else '−'}{abs(self.doi_mat_troi)} phút so với giờ chuẩn {self.gio_chuan_truoc.strftime('%H:%M')}, "
+                f"theo kinh độ và phương trình thời gian), giờ {_CHI[timebase.chi_gio(tb.calendar_dt)]}. Phần lớn sách Việt lập theo giờ "
+                "đồng hồ — đổi lại ở khung Trường phái.")})
+        elif self.kinh_do is not None:
+            # Khung của tb.calendar_dt: trong nước = kinh tuyến lịch 105°Đ; nước ngoài = giờ chuẩn địa phương (UTC + utc_lich).
+            # HTT-1: cảnh báo cho cả thành phố nước ngoài; cùng một phép tính với công tắc (_dich_mat_troi, VSOP87).
+            mt, _ = _dich_mat_troi(tb.calendar_dt, self.utc_lich, self.kinh_do)
             if timebase.chi_gio(mt) != timebase.chi_gio(tb.calendar_dt):
                 flags.append({"loai": "gio_mat_troi", "chi_tiet": (
-                    f"Theo giờ mặt trời thực ở {self.tinh['ten']} ({mt.strftime('%H:%M')}), bạn "
+                    f"Theo giờ mặt trời thực ở {self.ten_noi} ({mt.strftime('%H:%M')}), bạn "
                     f"thuộc giờ {_CHI[timebase.chi_gio(mt)]} thay vì giờ "
                     f"{_CHI[timebase.chi_gio(tb.calendar_dt)]}. Lá số vẫn lập theo giờ đồng hồ "
-                    "như phần lớn sách Việt; nếu thấy không khớp, hãy xem thêm lá số giờ kia.")})
+                    "như phần lớn sách Việt; nếu thấy không khớp, hãy xem thêm lá số giờ kia (chọn \"Giờ mặt trời thực\" ở khung Trường phái).")})
         if tb.clock_offset is not None and tb.clock_offset != config.CALENDAR_MERIDIAN_TZ:
             flags.append({"loai": "tz_adjusted", "chi_tiet": (
                 f"Đồng hồ nơi sinh chạy UTC+{tb.clock_offset:g}; đã quy đổi về kinh "

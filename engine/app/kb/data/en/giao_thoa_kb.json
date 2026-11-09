@@ -1,0 +1,146 @@
+{
+ "_trang_thai": "bien_tap",
+ "_nguon": "HTT-1 — English overlay for giao_thoa_kb.json (editorial draft, awaiting native-speaker review). Only strings; keys and slots unchanged.",
+ "mon": {
+  "tuvi": {
+   "ten": "Zi Wei",
+   "mat": "looks at the circumstances around you: work, money, home, people"
+  },
+  "battu": {
+   "ten": "BaZi",
+   "mat": "looks at your own strength: which elements run high or low"
+  },
+  "nhantuong": {
+   "ten": "Face reading",
+   "mat": "looks at what you see in yourself right now: features, colour, posture"
+  },
+  "thanso": {
+   "ten": "Numerology",
+   "mat": "looks at the rhythm of the numbers in your name and birth date"
+  },
+  "tarot": {
+   "ten": "Tarot",
+   "mat": "looks at the question you brought through the cards you drew"
+  },
+  "phongthuy": {
+   "ten": "Feng shui",
+   "mat": "looks at the home and the directions you live with"
+  },
+  "kinhdich": {
+   "ten": "I Ching",
+   "mat": "looks at the timing of the matter you asked about"
+  },
+  "chan_dung": {
+   "ten": "Composite portrait",
+   "mat": "puts three readings side by side, area by area"
+  },
+  "tgt": {
+   "ten": "Months ahead",
+   "mat": "looks at the rhythm of the coming months"
+  }
+ },
+ "mang": {
+  "con_nguoi": {
+   "ten": "Who you are",
+   "ngan": "your character"
+  },
+  "cong_viec": {
+   "ten": "Work",
+   "ngan": "work"
+  },
+  "tien_bac": {
+   "ten": "Money",
+   "ngan": "money"
+  },
+  "tinh_cam": {
+   "ten": "Love",
+   "ngan": "love"
+  },
+  "gia_dinh": {
+   "ten": "Family",
+   "ngan": "family"
+  },
+  "suc_khoe": {
+   "ten": "Health",
+   "ngan": "health"
+  },
+  "quan_he": {
+   "ten": "Friends and the outside world",
+   "ngan": "your wider circle"
+  },
+  "nha_cua": {
+   "ten": "Home",
+   "ngan": "home"
+  },
+  "nam_nay": {
+   "ten": "This year",
+   "ngan": "this year"
+  },
+  "giai_doan": {
+   "ten": "Life stages",
+   "ngan": "this stage of life"
+  },
+  "cau_hoi": {
+   "ten": "The question you brought",
+   "ngan": "your question"
+  }
+ },
+ "muc": {
+  "thuan": "favourable",
+  "can_bang": "steady",
+  "can_chu_dong": "take care"
+ },
+ "mau": {
+  "cung_mang": {
+   "thuan": {
+    "tieu_de": "{mang}: {noi} both ring true — and both read it as favourable",
+    "noi_dung": "You marked \"resonates with me\" in {so} different readings about {ngan}, and all {so} see this area as a place where you already have momentum. When independent readings agree and you nod too, that is a solid place to start.",
+    "huong_xu_ly": "Pick one thing about {ngan} you have weighed for a while and start it this month; set part of the gains aside rather than pouring everything back in."
+   },
+   "can_bang": {
+    "tieu_de": "{mang}: {noi} both ring true — a steady rhythm, no big push",
+    "noi_dung": "The {so} readings you agreed with see neither a big push nor a big stumble in {ngan}. The result comes from steady work more than from timing.",
+    "huong_xu_ly": "Set one small quarterly marker for {ngan} and keep to it; try new things small before scaling."
+   },
+   "can_chu_dong": {
+    "tieu_de": "{mang}: {noi} both ring true — and both say go slowly",
+    "noi_dung": "You agreed with {so} readings about {ngan}, and all {so} ask for more care than usual here. This is a reminder to plan carefully, not a bad omen.",
+    "huong_xu_ly": "Break big {ngan} decisions into steps with a fallback; check paperwork and money twice before signing."
+   },
+   "hon_hop": {
+    "tieu_de": "{mang}: {noi} both ring true — each sees a different side",
+    "noi_dung": "You agreed with {so} readings about {ngan}, but they do not sit at the same level: {ds}. They are not contradicting each other — each looks at one side of the same matter.",
+    "huong_xu_ly": "Use the cautious side as your safety frame, and the favourable side for what you have prepared well."
+   },
+   "khong_ro": {
+    "tieu_de": "{mang}: {noi} both ring true",
+    "noi_dung": "You marked \"resonates with me\" in {so} different readings about {ngan}. When independent readings touch the same spot and you nod too, that spot deserves a closer look.",
+    "huong_xu_ly": "Read those two boxes side by side and write down one small thing you want to do differently about {ngan}."
+   }
+  },
+  "cung_mon": {
+   "thuan": {
+    "tieu_de": "In {mon}, everything you nodded to leans favourable",
+    "noi_dung": "In {mon} you agreed with {ds} — and those boxes all sit at the favourable level. The common thread: these are the areas where you have momentum.",
+    "huong_xu_ly": "Put your energy into one of them rather than spreading thin; write down one concrete step for this month."
+   },
+   "can_chu_dong": {
+    "tieu_de": "In {mon}, everything you nodded to asks you to slow down",
+    "noi_dung": "In {mon} you agreed with {ds} — and those boxes all sit at the take-care level. The common thread: these are the areas asking for more of your attention.",
+    "huong_xu_ly": "Choose the heaviest one and write down one small step you can take this week; keep the others steady, do not open new fronts."
+   }
+  },
+  "lech": {
+   "tieu_de": "{mang}: something does not quite fit",
+   "noi_dung": "In {ngan}, {noi_dung_dung} rang true for you but {noi_dung_sai} did not. We will not repeat a trait you have said no to; the mismatch is noted for the editors to review that wording.",
+   "huong_xu_ly": "Keep what rang true as your anchor; let the rest go — a reading does not have to be right about everything."
+  },
+  "tom_tat": "From the {so} boxes you confirmed ({ds_mon}), the readings meet on: {ds_mang}.",
+  "tom_tat_khong_gap": "From the {so} boxes you confirmed ({ds_mon}), no area is yet named by two readings at once — each box stands on its own.",
+  "khong_du": "Mark \"resonates with me\" on at least two boxes to see where the readings meet.",
+  "cau_tu_soi": "Of the things you just agreed with, which did you already know — and which could you only admit once someone else said it?",
+  "hop_dem": "{mon} ({n} boxes)",
+  "can_cu": "Built from the boxes you marked \"resonates with me\": {ds}. Only the levels those boxes already carried are compared; nothing is recomputed and no reading's level is changed.",
+  "tom_tat_cung_mon": "From the {so} boxes you confirmed ({ds_mon}), no area is named by two readings at once, but within one reading they lean the same way — see the box below."
+ }
+}

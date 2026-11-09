@@ -1,8 +1,9 @@
 """Bộ kiểm bản chuyển ngữ Việt → Anh — luật cố định, không AI. Trả danh sách lỗi {ma, chi_tiet}; rỗng = qua.
 
 Mã lỗi: bien (biến {x} lệch) · so (con số mất / thêm) · thuat_ngu (thuật ngữ ≥ 2 âm tiết không dùng tên trong bảng) ·
-cum_cam (cụm cấm tiếng Anh) · suc_khoe (nguồn có câu "không thay lời bác sĩ" mà bản Anh không có) · con_tieng_viet
-(còn chữ có dấu) · do_dai (dài/ngắn bất thường so với nguồn).
+dich_sat (HTT-1: dùng cách dịch sát / sai nghĩa đã cấm của thuật ngữ, vd Vô chính diệu → "empty destiny") ·
+cum_cam (cụm cấm tiếng Anh, gồm nhóm "giọng AI" và nhóm định mệnh) · suc_khoe (nguồn có câu "không thay lời bác sĩ" mà
+bản Anh không có) · con_tieng_viet (còn chữ có dấu) · do_dai (dài/ngắn bất thường so với nguồn).
 """
 from __future__ import annotations
 
@@ -46,6 +47,13 @@ def kiem(nguon_vi: str, ban_en: str, *, mang: list[str] | None = None) -> list[d
     for ten, cach in can.items():
         if not any(_co_cum(en, c) for c in cach):
             loi.append({"ma": "thuat_ngu", "chi_tiet": f"{ten} → cần một trong {cach}"})
+    # HTT-1: thuật ngữ có trong nguồn (mọi độ dài) mà bản Anh dùng cách dịch sát / sai nghĩa đã cấm → `dich_sat`.
+    for m in thuat_ngu.muc(mang):
+        cam = thuat_ngu.cam_en(m)
+        if cam and _co_cum(vi, _nfc(m["vi"])):
+            dinh = [c for c in cam if _co_cum(en, c)]
+            if dinh:
+                loi.append({"ma": "dich_sat", "chi_tiet": f"{m['vi']}: không dùng {dinh} (dùng {m['en']})"})
     for p in thuat_ngu.cum_cam():
         if p.search(en):
             loi.append({"ma": "cum_cam", "chi_tiet": p.pattern})

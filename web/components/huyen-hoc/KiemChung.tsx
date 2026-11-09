@@ -19,16 +19,21 @@ const KHOA = (k: string) => `hbt.mot-lan.kiem-chung.${k}`;
 
 export type LoaiKiemChungWeb = LoaiKiemChung;
 
-function guiMayChu(loai: string, mau: string, phai: string, ket_qua: KetQuaKiemChung) {
+function guiMayChu(loai: string, mau: string, phai: string, ket_qua: KetQuaKiemChung, ngon_ngu: "vi" | "en") {
   try {
+    // HTT-1: phiếu mang ngôn ngữ của trang (migration 0034) — DB chưa chạy 0034 thì route tự gọi hàm cũ.
     void fetch("/api/kiem-chung", {
-      method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ loai, mau, phai, ket_qua }),
+      method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ loai, mau, phai, ket_qua, ngon_ngu }),
     }).catch(() => { /* im lặng */ });
   } catch { /* im lặng */ }
 }
 
-export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, theoDoi }: {
+/** HTT-1: chữ của nút theo ngôn ngữ (bản Anh không có CMS "Chữ dùng chung"). */
+export interface NhanKiemChung { hoi: string; dung: string; chua_dung: string; da_ghi: string }
+
+export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, theoDoi, ngonNgu = "vi", nhan }: {
   loai: LoaiKiemChungWeb; mau: string; phai: string; /** định danh thẻ trong phiên (mặc định = mã mẫu) */ khoa?: string; cauHoi?: string;
+  /** HTT-1: ngôn ngữ trang (ghi kèm phiếu) + chữ nút khi không có CMS (bản /en). */ ngonNgu?: "vi" | "en"; nhan?: NhanKiemChung;
   /** Số phiếu công khai tải về (route tỉ lệ). */ tyLe?: TyLe;
   /** Số engine gắn sẵn vào hộp — ưu tiên hơn `tyLe`. */ tyLeEngine?: { ty_le_dung?: number; so_phieu?: number };
   /** Q7: nhãn hộp đáng hỏi lại sau 30 ngày (hộp Nên để ý / Lời khuyên) — bấm "Đúng với mình" thì máy nhớ để Hôm nay hỏi lại. */
@@ -48,10 +53,14 @@ export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, the
   const bam = (kq: KetQuaKiemChung) => {
     if (da) return;
     setDa(true);
-    try { window.dispatchEvent(new CustomEvent("hbt-kiem-chung", { detail: k })); } catch { /* bỏ qua */ }
+    try {
+      window.dispatchEvent(new CustomEvent("hbt-kiem-chung", { detail: k }));
+      // HTT-1: lớp giao thoa nghe mã + kết quả (không chữ) để ghép "điểm giao thoa" khi đủ 2 hộp Đúng.
+      window.dispatchEvent(new CustomEvent("hbt-phieu", { detail: { loai, mau, phai, ket_qua: kq } }));
+    } catch { /* bỏ qua */ }
     if (lanDauTrongPhien(`kiem-chung.${k}`)) {
-      ghi("tuvi_kiem_chung", { loai, mau, ket_qua: kq, phai });
-      guiMayChu(loai, mau, phai, kq);
+      ghi("tuvi_kiem_chung", { loai, mau, ket_qua: kq, phai, ngon_ngu: ngonNgu });
+      guiMayChu(loai, mau, phai, kq, ngonNgu);
       if (kq === "dung" && theoDoi && (loai === "doi_song" || loai === "hai_nguoi")) {
         ghiNhanDung({ loai, mau, phai, nhan: theoDoi.slice(0, 80), mo_dun: mau.split(".")[1] ?? "" });
       }
@@ -63,8 +72,13 @@ export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, the
   if (xemNguoiThan) return null;
   const dongTyLe = tl && (
     <p className="text-fg-muted" data-testid="ty-le-dung">
-      <b className="text-sm text-fg">{tl.phanTram}%</b> trong {tl.tong} người có cùng điểm này thấy đúng
-      <span className="block text-[0.7rem] text-fg-faint">số người tự bấm, không phải kiểm định khoa học</span>
+      {ngonNgu === "en" ? (
+        <><b className="text-sm text-fg">{tl.phanTram}%</b> of {tl.tong} people with this same point found it true
+          <span className="block text-[0.7rem] text-fg-faint">self-reported clicks, not a scientific test</span></>
+      ) : (
+        <><b className="text-sm text-fg">{tl.phanTram}%</b> trong {tl.tong} người có cùng điểm này thấy đúng
+          <span className="block text-[0.7rem] text-fg-faint">số người tự bấm, không phải kiểm định khoa học</span></>
+      )}
     </p>
   );
   return (
@@ -79,18 +93,18 @@ export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, the
           </motion.span>
           <motion.span className="font-semibold text-jade" initial={giam ? false : { opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }}
             transition={{ duration: giam ? 0 : 0.22, delay: giam ? 0 : 0.08 }}>
-            {c("kiem_chung.da_ghi")}
+            {nhan?.da_ghi ?? c("kiem_chung.da_ghi")}
           </motion.span>
-          <span className="sr-only"> — {c("kiem_chung.cam_on")}</span>
+          {!nhan && <span className="sr-only"> — {c("kiem_chung.cam_on")}</span>}
         </p>
       ) : (
         <div className="print:hidden">
-          <p className="text-fg-muted">{cauHoi ?? c("kiem_chung.hoi")}</p>
+          <p className="text-fg-muted">{cauHoi ?? nhan?.hoi ?? c("kiem_chung.hoi")}</p>
           <div className="mt-1.5 grid grid-cols-2 gap-2">
-            {([["dung", c("kiem_chung.dung")], ["chua_dung", c("kiem_chung.chua_dung")]] as const).map(([gt, nhan]) => (
+            {([["dung", nhan?.dung ?? c("kiem_chung.dung")], ["chua_dung", nhan?.chua_dung ?? c("kiem_chung.chua_dung")]] as const).map(([gt, chuNut]) => (
               <button key={gt} type="button" onClick={() => bam(gt)}
                 className="min-h-11 min-w-0 rounded-full border border-line px-2 text-[0.8125rem] leading-tight text-fg-muted transition-colors hover:border-gold/60 hover:text-fg active:bg-surface">
-                {nhan}
+                {chuNut}
               </button>
             ))}
           </div>
