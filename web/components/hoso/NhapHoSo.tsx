@@ -151,6 +151,17 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
     return () => { huy = true; clearTimeout(t); };
   }, [khoaMuiGio]);
 
+  // Ý6: thành phố đã chọn mang cờ engine tính (`canh_bao_mat_troi`, `nam_ban_cau_kha_dung`) → một dòng gợi ý công tắc Trường
+  // phái + link trang nước (Ý3). Web không tính gì; engine cũ không có cờ → không gợi ý. Đo chỉ mã (một lần mỗi thành phố).
+  const tpChon = noiSinh === NUOC_NGOAI && nuoc && nuoc !== KHAC ? dsNuoc?.find((n) => n.ma === nuoc)?.thanh_pho.find((t) => t.ma === muiGio) ?? null : null;
+  const goiYCongTac = tpChon && (tpChon.canh_bao_mat_troi || tpChon.nam_ban_cau_kha_dung)
+    ? [tpChon.canh_bao_mat_troi ? "giờ mặt trời thực" : null, tpChon.nam_ban_cau_kha_dung ? "mùa nơi sinh" : null].filter((x): x is string => Boolean(x)) : [];
+  const goiYDaGhi = useRef<string | null>(null);
+  useEffect(() => {
+    if (!tpChon || !goiYCongTac.length || goiYDaGhi.current === tpChon.ma) return;
+    goiYDaGhi.current = tpChon.ma;
+    ghi("chart_interacted", { kind: "goi_y_cong_tac_hien", thanh_pho: tpChon.ma, cong_tac: goiYCongTac.length });
+  }, [tpChon, goiYCongTac.length]);
   const duong = lich === "duong" ? (coTheDoi ? { ngay: d, thang: m, nam: y } : null) : doi?.duong ?? null;
   const isoDuong = duong ? `${duong.nam}-${String(duong.thang).padStart(2, "0")}-${String(duong.ngay).padStart(2, "0")}` : null;
   const truoc1975 = isoDuong ? isoDuong < "1975-06-13" : false;
@@ -200,7 +211,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
     });
     if (!macDinh) {
       // reading_started ghi khi kết quả hiện ra ở từng mảng (lib/do-luong batDauDoc), không ghi ở đây.
-      ghi("profile_created", { kind: "may" });
+      ghi("profile_created", { kind: "may", nuoc_ngoai: nuocNgoai });
       const ma = layMaMoi();
       if (ma) { ghi("referral_signup", { ma_moi: ma }); quenMaMoi(); }
     }
@@ -389,6 +400,18 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                     {kqMuiGio.lam_tron ? " — giờ địa phương lẻ phút, đã làm tròn" : ""}
                     {kqMuiGio.gio_mo_ho ? " — giờ này rơi đúng lúc đổi giờ, kết quả có thể lệch 1 giờ" : ""}.
                   </p>
+                )}
+                {tpChon && goiYCongTac.length > 0 && (
+                  <p className="rounded-lg border border-gold/30 bg-gold/5 px-3 py-2 text-xs text-fg-muted" data-testid="goi-y-cong-tac">
+                    Bạn sinh ở <b className="text-fg">{tpChon.ten.split(" (")[0]}</b>: lá số có thêm {goiYCongTac.length === 2 ? "hai" : "một"} cách xem — {goiYCongTac.join(", ")}.
+                    Bật trong khung Trường phái của{" "}
+                    <Link href="/bat-tu#truong-phai-bat-tu" className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "bat_tu" })}>Bát tự</Link>
+                    {tpChon.canh_bao_mat_troi && <> · <Link href="/tu-vi#truong-phai" className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "tu_vi" })}>Tử vi</Link></>}.
+                    {" "}<Link href={`/sinh-o-nuoc-ngoai/${nuoc}`} className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "trang_nuoc" })}>Người sinh ở nước này cần biết gì?</Link>
+                  </p>
+                )}
+                {!goiYCongTac.length && nuoc && nuoc !== KHAC && (
+                  <p className="text-xs text-fg-faint"><Link href={`/sinh-o-nuoc-ngoai/${nuoc}`} className="underline hover:text-fg">Sinh ở nước này thì nhập thế nào?</Link></p>
                 )}
                 <p className="text-xs text-fg-faint">
                   Chọn đúng thành phố là đủ: múi giờ và giờ mùa hè lúc sinh tự tính theo lịch sử nơi đó. Bát tự đổi tháng, đổi năm đúng

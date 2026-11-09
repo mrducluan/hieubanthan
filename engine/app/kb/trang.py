@@ -120,6 +120,8 @@ def _trang_so(so: str) -> dict:
     lien = [f"so-{x}" for x in (_SO[i - 1] if i else None, _SO[i + 1] if i + 1 < len(_SO) else None, _SO_GOC.get(so)) if x]
     return {
         "loai": "so", "slug": f"so-{so}",
+        # QTE: bản tiếng Anh tương ứng (hreflang hai chiều; web chỉ đọc).
+        "ban_en": f"/en/numerology/life-path/{so}",
         "tieu_de": f"Số {so} trong thần số học: {m['tu_khoa'].lower()}",
         "mo_ta": _cat(f"Số {so} thần số học: {m['tu_khoa'].lower()}. Mặt tối: {m['mat_toi'].lower()}. "
                       "Kèm câu hỏi tự soi, năm cá nhân và cách tính."),

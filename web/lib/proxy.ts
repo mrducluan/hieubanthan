@@ -1,5 +1,6 @@
 // Proxy mỏng web → engine cho route handler: giữ ENGINE key phía server, không tự tính gì.
 import { NextResponse } from "next/server";
+import { LA_MA_EN } from "@/lib/ngon-ngu";
 import type { ZodTypeAny } from "zod";
 import { baoLoi } from "@/lib/giam-sat";
 
@@ -34,8 +35,8 @@ export function dauNguoiGoi(req: Request): Record<string, string> {
 
 /** QTE: ngôn ngữ của lượt gọi (trang /en gửi `x-ngon-ngu: en`) → chuyển tiếp nguyên header tới engine; giá trị lạ bỏ qua. */
 export function dauNgonNgu(req: Request): Record<string, string> {
-  const nn = req.headers.get("x-ngon-ngu");
-  return nn === "en" ? { "x-ngon-ngu": "en" } : {};
+  const nn = (req.headers.get("x-ngon-ngu") ?? "").toLowerCase();
+  return LA_MA_EN.test(nn) ? { "x-ngon-ngu": nn } : {};
 }
 
 /** Gọi engine với dữ liệu ĐÃ kiểm (dùng chung cho goiEngine và các route cần xử lý thêm, vd trừ Sao). */

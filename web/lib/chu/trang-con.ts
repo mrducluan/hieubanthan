@@ -147,3 +147,14 @@ export const CHU_NAM_TUOI = {
     mac_dinh: "Nhập ngày giờ sinh để xem năm {nam} của riêng bạn: 3 tháng tới, 12 tháng tới, Lộc – Kỵ của năm rơi vào mảng đời nào trên lá số." },
   "ca_nhan.nut": { nhom: "Của riêng bạn", nhan: "Chữ nút", mac_dinh: "Xem năm {nam} của tôi", toi_da: 40 },
 } as const satisfies BangChu;
+
+// Ý3 — "Sinh ở {ten}: lập lá số thế nào" (cụm trang người Việt sinh ở nước ngoài). Biến: {ten}, {nuoc}, {nam}.
+export const CHU_SINH_NN = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({ten} = tên nước)", mac_dinh: "Người Việt sinh ở {ten}", toi_da: 80 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({ten})", mac_dinh: "Sinh ở {ten}: lập lá số Tử vi, Bát tự thế nào cho đúng giờ?", toi_da: 120 },
+  "bang.tieu_de": { nhom: "Bảng thành phố", nhan: "Tiêu đề bảng múi giờ từng thành phố", mac_dinh: "Múi giờ và giờ mùa hè từng thành phố năm {nam}", toi_da: 120 },
+  "lich_su.tieu_de": { nhom: "Lịch sử giờ mùa hè", nhan: "Tiêu đề bảng lịch sử", mac_dinh: "Năm bạn sinh có giờ mùa hè không?", toi_da: 100 },
+  "lich_am.tieu_de": { nhom: "Lịch âm", nhan: "Tiêu đề khối lịch âm Việt – Trung", mac_dinh: "Ngày âm trong sổ gia đình theo lịch Việt hay lịch Trung Quốc?", toi_da: 120 },
+  "huong_dan.tieu_de": { nhom: "Hướng dẫn", nhan: "Tiêu đề khối hướng dẫn nhập", mac_dinh: "Nhập hồ sơ cho người sinh ở {ten}", toi_da: 100 },
+  "cuoi.nut": { nhom: C, nhan: "Chữ nút lập lá số", mac_dinh: "Lập lá số với nơi sinh {ten}", toi_da: 60 },
+} as const satisfies BangChu;

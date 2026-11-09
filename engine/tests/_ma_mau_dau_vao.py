@@ -73,6 +73,12 @@ def chup() -> dict[str, list[str]]:
         tv = {"ngay": ngay, "ti": ti, "gioi_tinh": gt}
         bt = {"lich": dt.datetime.combine(ngay, dt.time(gio, 30)), "gioi_tinh": gt, "gio_ty": "da_ty"}
         _ma(chan_dung_tong_hop.lap(tv, bt, tl, XEM), ra["chan_dung"])
+    # Ý2: chương "Điều bạn đã xác nhận" từ phiếu của chính người xem (mã giao thoa, phái giao_thoa_1) — chụp một bộ phiếu cố định.
+    PHIEU = {"ds.su_nghiep.thien_co.sang.thuan": "dung", "ds.bt.su_nghiep.chinh_quan.thuan.hien_tai": "dung",
+             "ds.bt.tien_bac.chinh_tai.can_chu_dong.hien_tai": "dung", "ds.tien_bac.vu_khuc.can_chu_dong": "dung",
+             "ds.tinh_cam.tham_lang.can_bang": "dung", "ds.bt.tinh_cam.thuc_than.can_bang.hien_tai": "chua_dung"}
+    _ma(chan_dung_tong_hop.lap({"ngay": dt.date(1988, 10, 24), "ti": 4, "gioi_tinh": "nam"},
+                               {"lich": dt.datetime(1988, 10, 24, 8, 30), "gioi_tinh": "nam", "gio_ty": "da_ty"}, TL_DAY, XEM, ca_nhan=PHIEU), ra["chan_dung"])
     # TR-1: Tarot — ba trải bài cố định (Celtic 10 lá, 3 lá, 1 lá) × có / không khảo sát Nhân tướng.
     from tests.test_tarot import BA_LA, CELTIC  # noqa: PLC0415
     _ma(tarot.bao_cao("celtic", CELTIC, chu_de="cong_viec", ngay_xem=XEM, nam_sinh=1988, gioi_tinh="nam", tra_loi_nhan_tuong=TL_DAY), ra["tarot"])

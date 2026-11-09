@@ -43,8 +43,14 @@ const urlsChinh = docLoc(sm);
 const rNgay = await lay(`${goc}/sitemap-ngay.xml`);
 const urlsNgay = rNgay.status === 200 ? docLoc(await rNgay.text()) : [];
 if (rNgay.status !== 200) loi.push(`/sitemap-ngay.xml: HTTP ${rNgay.status}`);
-const urls = [...urlsChinh, ...(process.argv.includes("--het-ngay") ? urlsNgay : urlsNgay.slice(0, 30))];
-console.log(`Sitemap: ${urlsChinh.length} URL + sitemap ngày ${urlsNgay.length} URL (quét ${urls.length - urlsChinh.length})`);
+// QTE: bản tiếng Anh có sitemap riêng (/sitemap-en.xml) — quét luôn (cùng luật kỹ thuật: title, description, canonical,
+// H1/H2, OG, JSON-LD, link nội bộ); `--chi-en` chỉ quét bản Anh (rà nhanh khi sửa /en), `--bo-en` bỏ qua.
+const rEn = process.argv.includes("--bo-en") ? null : await lay(`${goc}/sitemap-en.xml`);
+const urlsEn = rEn && rEn.status === 200 ? docLoc(await rEn.text()) : [];
+if (rEn && rEn.status !== 200) loi.push(`/sitemap-en.xml: HTTP ${rEn.status}`);
+const chiEn = process.argv.includes("--chi-en");
+const urls = chiEn ? urlsEn : [...urlsChinh, ...(process.argv.includes("--het-ngay") ? urlsNgay : urlsNgay.slice(0, 30)), ...urlsEn];
+console.log(`Sitemap: ${urlsChinh.length} URL + sitemap ngày ${urlsNgay.length} URL (quét ${chiEn ? 0 : Math.min(urlsNgay.length, process.argv.includes("--het-ngay") ? Infinity : 30)}) + sitemap-en ${urlsEn.length} URL${chiEn ? " (chỉ quét bản Anh)" : ""}`);
 const doTtfb = [];
 
 // URL trong sitemap mà robots.txt chặn (nhóm User-agent: *) — luật khớp dài nhất thắng, Allow thắng khi dài bằng nhau.
@@ -145,7 +151,17 @@ for (const url of urls) {
   const loaiLd = ld.map((m) => m[1].match(/"@type":"([^"]+)"/g)?.join(",")).join(",");
   if (ld.length <= 1 && !/BreadcrumbList/.test(loaiLd) && duong !== "/") ghi(canh, url, "thiếu BreadcrumbList");
   for (const img of html.match(/<img\b[^>]*>/g) ?? []) if (!/\balt="/.test(img)) ghi(loi, url, `ảnh thiếu alt: ${img.slice(0, 80)}`);
-  if (!/<html lang="vi"/.test(html)) ghi(loi, url, "thiếu lang=vi");
+  const laEn = duong === "/en" || duong.startsWith("/en/");
+  if (laEn ? !/<html lang="en"/.test(html) : !/<html lang="vi"/.test(html)) ghi(loi, url, laEn ? "thiếu lang=en" : "thiếu lang=vi");
+  // QTE: trang /en phải khai hreflang en + x-default (bản Việt) và không lọt chữ Việt có dấu vào nội dung chính (trừ nút "Tiếng Việt").
+  if (laEn) {
+    if (!/hreflang="en"/i.test(html)) ghi(loi, url, "trang /en thiếu hreflang=en");
+    if (!/hreflang="x-default"/i.test(html)) ghi(canh, url, "trang /en thiếu hreflang x-default");
+    const chuChinh = giaiMa(chinh.replace(/<[^>]+>/g, " ")).replace(/Tiếng Việt/g, "");
+    // Chỉ chữ cái RIÊNG của tiếng Việt (ă đ ê ô ơ ư + dấu hỏi / ngã / nặng) — é, â, ü của tên Pháp (Épée, Bâton) không tính.
+    const VIET = /[ăđơưảãạẻẽẹỉĩịỏõọủũụỷỹỵấầẩẫậắằẳẵặếềểễệốồổỗộớờởỡợứừửữự]/i;
+    if (VIET.test(chuChinh)) ghi(loi, url, `chữ Việt lọt vào nội dung tiếng Anh: "${chuChinh.match(/\S*[ăđơưảãạẻẽẹỉĩịỏõọủũụỷỹỵấầẩẫậắằẳẵặếềểễệốồổỗộớờởỡợứừửữự]\S*/i)?.[0]}"`);
+  }
   for (const m of html.matchAll(/<a [^>]*href="(\/[^"#?]*)/g)) linkNoiBo.add(m[1]);
   if (coBanMd(duong) && !/type="text\/markdown"/.test(html)) ghi(canh, url, "thiếu link alternate .md");
   if (i % 25 === 0) console.log(`  …${i}/${urls.length}`);

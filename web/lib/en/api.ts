@@ -1,14 +1,19 @@
 "use client";
 // QTE — gọi route handler của web từ các trang /en: luôn kèm `x-ngon-ngu: en` để route chuyển tiếp cho engine (engine phủ
 // KB tiếng Anh). Không gọi engine trực tiếp; lỗi trả câu tiếng Anh.
+import { maNgonNguTrang } from "@/lib/ngon-ngu";
+
+/** Mã ngôn ngữ gửi kèm: biến thể của trang đang mở ("en-us") hoặc "en" (Ý7). */
+const nn = () => { const m = maNgonNguTrang(); return m === "vi" ? "en" : m; };
+
 export async function postEn<T>(url: string, body: unknown): Promise<T> {
-  const r = await fetch(url, { method: "POST", headers: { "content-type": "application/json", "x-ngon-ngu": "en" }, body: JSON.stringify(body) });
+  const r = await fetch(url, { method: "POST", headers: { "content-type": "application/json", "x-ngon-ngu": nn() }, body: JSON.stringify(body) });
   const d = (await r.json().catch(() => ({}))) as T & { error?: string };
   if (!r.ok) throw new Error(loiEn(r.status, d.error));
   return d;
 }
 export async function getEn<T>(url: string): Promise<T> {
-  const r = await fetch(url, { headers: { "x-ngon-ngu": "en" } });
+  const r = await fetch(url, { headers: { "x-ngon-ngu": nn() } });
   const d = (await r.json().catch(() => ({}))) as T & { error?: string };
   if (!r.ok) throw new Error(loiEn(r.status, d.error));
   return d;

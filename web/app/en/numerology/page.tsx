@@ -2,12 +2,12 @@
 import type { Metadata } from "next";
 import Lien from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { metaEn } from "@/lib/en/seo";
+import { ldDuongDanEn, metaEn } from "@/lib/en/seo";
 import { urlDayDu } from "@/lib/seo";
 import { Numerology } from "./Numerology";
 
 export const metadata: Metadata = metaEn({
-  title: "Numerology reading: Life Path, Expression, Soul Urge, Personality — free",
+  title: "Free numerology reading: Life Path, Expression, Soul Urge, Personality",
   description: "Enter your name and date of birth. Get your four core numbers with their shadow side and a counter-question, a four-sided portrait you tick yourself, your personal year and month, and a question box. Pythagorean tradition, no sign-up.",
   path: "/en/numerology", vi: "/than-so",
 });
@@ -22,6 +22,7 @@ const HOI_DAP = [
 export default function Page() {
   return (
     <div className="mx-auto max-w-5xl">
+      <JsonLd data={ldDuongDanEn([{ ten: "Numerology", duong: "/en/numerology" }])} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", inLanguage: "en", mainEntity: HOI_DAP.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", name: "Numerology reading (English)", url: urlDayDu("/en/numerology"), applicationCategory: "LifestyleApplication", inLanguage: "en", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } }} />
       <header className="mb-8 max-w-3xl">
@@ -35,7 +36,7 @@ export default function Page() {
         <dl className="mt-4 space-y-4">
           {HOI_DAP.map(([q, a]) => <div key={q}><dt className="font-medium text-fg">{q}</dt><dd className="mt-1 text-fg-muted">{a}</dd></div>)}
         </dl>
-        <p className="mt-6 text-sm text-fg-muted">Reference: <Lien href="/en/numerology/life-path" className="text-gold hover:underline">meaning of each Life Path number</Lien>. The full Vietnamese tool is at <Lien href="/than-so" hrefLang="vi" className="text-gold hover:underline">/than-so</Lien>.</p>
+        <p className="mt-6 text-sm text-fg-muted">Reference: <Lien href="/en/numerology/life-path" className="text-gold hover:underline">meaning of each Life Path number</Lien> (for example <Lien href="/en/numerology/life-path/7" className="text-gold hover:underline">Life Path 7</Lien> or <Lien href="/en/numerology/life-path/22" className="text-gold hover:underline">22</Lien>). Prefer a question about one concrete decision? <Lien href="/en/tarot" className="text-gold hover:underline">Ask the cards</Lien>. The full Vietnamese tool is at <Lien href="/than-so" hrefLang="vi" className="text-gold hover:underline">/than-so</Lien>.</p>
       </section>
     </div>
   );

@@ -8,6 +8,8 @@ import { Sparkles } from "lucide-react";
 import { HopNoiBat } from "./HopNoiBat";
 import type { Hop } from "./kieu";
 import { ghi } from "@/lib/do-luong";
+import { ghiNhanDung } from "@/lib/kiem-chung-sau";
+import { maNgonNguTrang } from "@/lib/ngon-ngu";
 import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { cn } from "@/lib/utils";
 
@@ -30,15 +32,26 @@ export function GiaoThoa({ en = false, className }: { en?: boolean; className?: 
   const [kq, setKq] = useState<KetQua | null>(null);
   const [cho, setCho] = useState(false);
   const daDo = useRef(false);
+  const hopHienTai = useRef<Hop[]>([]);
+  useEffect(() => { hopHienTai.current = kq?.hop ?? []; }, [kq]);
   useEffect(() => {
     const nghe = (e: Event) => {
       const d = (e as CustomEvent<PhieuSuKien>).detail;
-      if (!d || d.loai !== "doi_song" || !d.mau || d.mau.startsWith("ds.giao_thoa.")) return;
+      if (!d || d.loai !== "doi_song" || !d.mau) return;
+      if (d.mau.startsWith("ds.giao_thoa.")) {
+        // Ý5: bấm "Đúng với mình" một hộp giao thoa (mọi mức, kể cả thuận) → máy nhớ MÃ + nhãn để Hôm nay hỏi lại sau 30 ngày
+        // (phiếu kiem_chung_sau 0022, chỉ mã + hai mức). Nghe ở đây vì HopNoiBat chỉ theo dõi hộp Nên để ý / Lời khuyên.
+        if (d.ket_qua === "dung") {
+          const h = hopHienTai.current.find((x) => x.ma_mau === d.mau);
+          ghiNhanDung({ loai: "doi_song", mau: d.mau, phai: d.phai, nhan: (h?.tieu_de ?? c.tieu_de).slice(0, 80), mo_dun: "giao_thoa", loai_hoi: "giao_thoa" });
+        }
+        return;
+      }
       setPhieu((p) => (p[d.mau] === d.ket_qua ? p : { ...p, [d.mau]: d.ket_qua }));
     };
     window.addEventListener("hbt-phieu", nghe);
     return () => window.removeEventListener("hbt-phieu", nghe);
-  }, []);
+  }, [c.tieu_de]);
   const soDung = Object.values(phieu).filter((v) => v === "dung").length;
   const khoa = Object.entries(phieu).sort().map(([m, k]) => `${m}:${k}`).join(",");
   useEffect(() => {
@@ -49,7 +62,7 @@ export function GiaoThoa({ en = false, className }: { en?: boolean; className?: 
       try {
         const r = await fetch("/api/giao-thoa", {
           method: "POST", headers: { "content-type": "application/json" }, signal: bo.signal,
-          body: JSON.stringify({ phieu: Object.entries(phieu).map(([ma, ket_qua]) => ({ ma, ket_qua })), ngon_ngu: en ? "en" : "vi" }),
+          body: JSON.stringify({ phieu: Object.entries(phieu).map(([ma, ket_qua]) => ({ ma, ket_qua })), ngon_ngu: en ? maNgonNguTrang() : "vi" }),
         });
         if (!r.ok) return;
         const d = (await r.json()) as KetQua;

@@ -22,4 +22,15 @@ export const TEN_TEP_KB: Record<string, string> = {
   "phongthuy_huyen_khong.json": "Phong thuỷ · Huyền Không",
   "tu_dien.json": "Từ điển thuật ngữ",
   "tham_dinh.json": "Sổ thẩm định chuyên gia",
+  // QTE / HTT-2: bản phủ tiếng Anh (kb/data/en/) + biến thể thị trường (kb/data/en-us/)
+  "en/tarot_kb.json": "Bản Anh · Tarot (78 lá, trải bài, mẫu câu)",
+  "en/loi_khuon.json": "Bản Anh · Mẫu câu theo ngôn ngữ (loi.L)",
+  "en/giao_thoa_kb.json": "Bản Anh · Điểm giao thoa",
+  "en/thanso_meanings.json": "Bản Anh · Thần số · Ý nghĩa 12 con số",
+  "en/thanso_depth.json": "Bản Anh · Thần số · Đỉnh cao, thử thách, năm cá nhân",
+  "en/thanso_linh_vuc.json": "Bản Anh · Thần số · Nghĩa theo lĩnh vực",
+  "en/thanso_chan_dung.json": "Bản Anh · Thần số · Chân dung 4 mặt",
+  "en/thanso_chi_so_phu.json": "Bản Anh · Thần số · Chỉ số phụ, nợ nghiệp",
+  "en/thanso_bieu_do.json": "Bản Anh · Thần số · Biểu đồ ngày sinh, mũi tên",
+  "en-us/loi_khuon.json": "Bản Anh (Mỹ) · Mẫu câu khác chính tả — A/B thị trường",
 };

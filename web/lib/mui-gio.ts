@@ -3,7 +3,8 @@
 // Web chỉ hiển thị và gửi lại MÃ (thành phố hoặc vùng IANA); múi giờ chuẩn / giờ mùa hè do engine suy từ tzdata.
 import { useEffect, useState } from "react";
 
-export interface ThanhPho { ma: string; ten: string; ten_en: string; zone: string }
+/** Ý6: cờ engine tính sẵn (`/v1/dia-ly/mui-gio`) để form gợi ý công tắc Trường phái — engine cũ không có → không gợi ý. */
+export interface ThanhPho { ma: string; ten: string; ten_en: string; zone: string; utc_chuan?: number; lech_mat_troi_phut?: number | null; canh_bao_mat_troi?: boolean; nam_ban_cau_kha_dung?: boolean }
 export interface Nuoc { ma: string; ten: string; ten_en: string; thanh_pho: ThanhPho[] }
 export interface KetQuaMuiGio { zone: string; utc_chuan: number; gio_mua_he: boolean; lech: number; lam_tron: boolean; gio_mo_ho: boolean }
 

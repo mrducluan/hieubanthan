@@ -57,7 +57,8 @@ async function metaGoc(params: Thamso): Promise<Metadata> {
   return {
     title: tieuDeSeo(t.tieu_de),
     description: catMoTa(t.mo_ta),
-    alternates: { canonical: duong, types: { "text/markdown": `${duong}.md` } },
+    // QTE: trang có bản tiếng Anh tương đương (engine trả `ban_en`) → hreflang hai chiều, bản Việt là x-default.
+    alternates: { canonical: duong, types: { "text/markdown": `${duong}.md` }, ...(t.ban_en ? { languages: { vi: duong, en: t.ban_en, "x-default": duong } } : {}) },
     robots: { index: t.index, follow: true },
     openGraph: {
       type: "article", title: t.tieu_de, description: t.mo_ta, url: duong, locale: "vi_VN", siteName: TEN_SITE,

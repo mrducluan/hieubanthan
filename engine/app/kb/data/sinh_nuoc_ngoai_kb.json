@@ -1,0 +1,54 @@
+{
+  "source_id": "hieubanthan_bien_soan_sinh_nuoc_ngoai_2026",
+  "school_id": "lich_phap_hien_dai",
+  "_trang_thai": "bien_tap",
+  "_ghi_chu": "Ý3 (2026-11-09) — lời đời thường cho cụm trang 'Sinh ở nước ngoài'. Mọi CON SỐ trên trang do engine tính (múi giờ, giờ mùa hè, kinh độ, lịch âm); KB chỉ giữ câu giải thích và mẫu câu có {biến}. Nguồn cách lập lá số cho người sinh xa quê: quy ước ABROAD_LOCAL_TIME (giờ địa phương), SOLAR_TIME_ADJUST=False (giờ mặt trời chỉ cảnh báo) trong engine/app/config.py; mùa Nam bán cầu là thuyết hiện đại, không có trong cổ thư (HTT-2 H1). Ban biên tập viết, chờ chuyên gia thẩm định.",
+  "mau": {
+    "tieu_de": "Sinh ở {ten}: lập lá số Tử vi, Bát tự thế nào cho đúng giờ?",
+    "nhan_tren": "Người Việt sinh ở {ten}",
+    "tom_tat_mo": "Giờ trên giấy khai sinh ở {ten} là giờ đồng hồ nơi đó. Lá số lấy đúng giờ ấy, rồi tự tra múi giờ và giờ mùa hè của thành phố tại ngày sinh — bạn không phải tự đổi.",
+    "mui_gio_mot": "{ten} dùng một múi giờ chuẩn ({utc}).",
+    "mui_gio_nhieu": "{ten} trải trên {so} múi giờ chuẩn ({ds}) — chọn đúng thành phố mới ra đúng giờ.",
+    "gio_mua_he_co": "Có giờ mùa hè: người sinh trong khoảng đó, đồng hồ chạy sớm một giờ so với giờ chuẩn; hệ thống tự trừ lại khi lập lá số, bạn vẫn nhập đúng giờ trên giấy tờ.",
+    "gio_mua_he_khong": "Không có giờ mùa hè trong năm {nam}: giờ trên giấy khai sinh là giờ chuẩn, không phải đổi gì.",
+    "gio_mua_he_mot_phan": "Có nơi dùng giờ mùa hè, có nơi không ({ds_co} có; {ds_khong} không) — chọn đúng thành phố là đủ.",
+    "mat_troi_canh_bao": "Ở {ds} đồng hồ lệch giờ mặt trời trung bình khoảng {phut} phút, có thể đổi canh giờ cho người sinh sát ranh giới giờ. Lá số vẫn lập theo giờ đồng hồ như sách Việt; muốn xem thêm, bật “Giờ mặt trời thực” ở khung Trường phái.",
+    "mat_troi_on": "Đồng hồ ở các thành phố này sát giờ mặt trời (lệch dưới nửa canh giờ) — ít khi đổi canh giờ.",
+    "nam_ban_cau": "{ten} ở Nam bán cầu: tháng Tỵ – Ngọ – Mùi (tháng 5–8) là mùa đông, tháng Hợi – Tý – Sửu là mùa hè. Bát tự có thêm công tắc “Mùa nơi sinh” để đọc lớp điều hậu theo mùa thực — một thuyết hiện đại, cổ thư không bàn, nên hệ thống để bạn chọn chứ không tự đổi.",
+    "lich_am_khong_lech": "Năm {nam}, âm lịch Việt Nam (giờ Hà Nội) và lịch Trung Quốc (giờ Bắc Kinh) không lệch ngày nào.",
+    "lich_am_lech": "Năm {nam}, âm lịch Việt Nam (giờ Hà Nội) và lịch Trung Quốc (giờ Bắc Kinh) lệch nhau {so} ngày: {ds}. Người sinh ở {ten} vẫn tính lá số theo giờ địa phương, nhưng ngày ÂM ghi trong giấy tờ hay sổ gia đình có thể theo lịch nào — hãy chọn đúng lịch ở form hồ sơ.",
+    "lich_am_tet": "Tết {nam}: lịch Việt ngày {tet_viet}, lịch Trung Quốc ngày {tet_trung}.",
+    "ket_noi_ket": "Nhập hồ sơ một lần: chọn “Sinh ở nước ngoài” → {ten} → thành phố. Mọi lá số (Tử vi, Bát tự, Thời gian tới) dùng chung hồ sơ đó."
+  },
+  "huong_dan": [
+    "Nhập đúng giờ ghi trên giấy khai sinh hoặc giấy ra viện — đó là giờ đồng hồ địa phương lúc sinh, không đổi sang giờ Việt Nam.",
+    "Chọn “Sinh ở nước ngoài”, rồi nước và thành phố: múi giờ chuẩn và giờ mùa hè tại ngày sinh được tra tự động theo lịch sử nơi đó, kể cả những năm quy tắc đổi giờ khác bây giờ.",
+    "Bát tự đổi tháng, đổi năm đúng lúc giao tiết (tính theo thời điểm thật), nên người sinh sát đầu tháng dương lịch cần múi giờ chính xác — chọn sai thành phố có thể lệch cả trụ tháng.",
+    "Ngày âm trong giấy tờ gia đình có thể ghi theo lịch Việt Nam hoặc lịch Trung Quốc; nếu chỉ nhớ ngày âm, chọn đúng lịch ở form để engine đổi ra ngày dương.",
+    "Sinh 23:00–23:59 giờ địa phương: Tử vi và Bát tự có quy ước giờ Tý khác nhau — lá số sẽ gắn cờ để bạn biết."
+  ],
+  "hoi_dap_mau": [
+    {"hoi": "Sinh ở {ten} thì nhập giờ Việt Nam hay giờ địa phương?", "dap": "Giờ địa phương trên giấy khai sinh. Hệ thống tra múi giờ của thành phố tại đúng ngày sinh; không đổi về giờ Việt Nam vì lá số lập theo bầu trời nơi bạn sinh ra."},
+    {"hoi": "Sinh đúng mùa có giờ mùa hè thì sao?", "dap": "{gio_mua_he}"},
+    {"hoi": "Vì sao phải chọn đúng thành phố chứ không chỉ chọn nước?", "dap": "{mui_gio}. Múi giờ và lịch sử đổi giờ của từng thành phố khác nhau; Bát tự lại đổi tháng theo thời điểm giao tiết nên lệch một giờ có thể đổi trụ."},
+    {"hoi": "Ngày âm trong sổ gia đình ghi theo lịch nào?", "dap": "{lich_am}"},
+    {"hoi": "Lá số có cần đổi theo giờ mặt trời không?", "dap": "{mat_troi}"}
+  ],
+  "nuoc": {
+    "us": "Mỹ có nhiều múi giờ, đổi giờ mùa hè hai lần mỗi năm (từ 2007 bắt đầu sớm hơn và kết thúc muộn hơn trước). Arizona, Hawaii không đổi giờ.",
+    "au": "Úc vừa nhiều múi giờ vừa chia nửa có giờ mùa hè (Sydney, Melbourne, Adelaide, Hobart) và nửa không (Brisbane, Perth, Darwin). Nam bán cầu: giờ mùa hè rơi vào tháng 10 tới tháng 4.",
+    "ca": "Canada đổi giờ mùa hè cùng lịch với Mỹ; Saskatchewan giữ giờ chuẩn quanh năm.",
+    "de": "Đức theo giờ Trung Âu, đổi giờ mùa hè từ 1980 (trước đó không). Người sinh thập niên 1970 tại Đức không có giờ mùa hè.",
+    "jp": "Nhật Bản dùng một múi giờ cho cả nước và không có giờ mùa hè từ 1952 — giờ trên giấy khai sinh là giờ chuẩn.",
+    "kr": "Hàn Quốc dùng một múi giờ; từng có giờ mùa hè hai năm 1987–1988 (Thế vận hội Seoul), người sinh hai năm đó cần để ý.",
+    "tw": "Đài Loan dùng giờ Bắc Kinh (UTC+8) nên ngày âm trong sổ gia đình thường theo lịch Trung Quốc; giờ mùa hè chỉ có trước 1980.",
+    "fr": "Pháp dùng giờ Trung Âu dù nằm gần kinh tuyến gốc, nên đồng hồ chạy sớm gần một giờ so với giờ mặt trời — người sinh sát ranh giới giờ nên xem thêm lá số giờ mặt trời thực.",
+    "cz": "Séc theo giờ Trung Âu, giờ mùa hè từ 1979.",
+    "gb": "Anh dùng giờ Greenwich; giờ mùa hè quanh năm 1968–1971 (thử nghiệm), từ đó đổi giờ hai lần mỗi năm.",
+    "pl": "Ba Lan theo giờ Trung Âu, giờ mùa hè từ 1977.",
+    "ru": "Nga đổi quy tắc nhiều lần: giờ mùa hè tới 2010, giữ giờ mùa hè quanh năm 2011–2014, rồi về giờ chuẩn từ 10/2014. Cùng một giờ trên giấy tờ có thể ứng với múi giờ khác nhau tuỳ năm sinh.",
+    "th": "Thái Lan cùng múi giờ với Việt Nam (UTC+7) và không có giờ mùa hè — lá số gần như không khác người sinh trong nước, chỉ khác kinh độ.",
+    "la": "Lào cùng múi giờ với Việt Nam (UTC+7), không có giờ mùa hè.",
+    "kh": "Campuchia cùng múi giờ với Việt Nam (UTC+7), không có giờ mùa hè."
+  }
+}

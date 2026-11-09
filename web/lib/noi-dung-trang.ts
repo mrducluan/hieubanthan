@@ -243,7 +243,15 @@ export const gioiThieuTu = (nd: NoiDungTrang) => ({
 
 /** Metadata mặc định từ sổ trang (tiêu đề + mô tả SEO đang chạy trong code) — trang dựng meta gốc từ đây. */
 /** QTE: trang tiếng Việt có bản tiếng Anh tương ứng (hreflang hai chiều; bản Việt là x-default). */
-export const BAN_TIENG_ANH: Record<string, string> = { "/than-so": "/en/numerology", "/tarot": "/en/tarot", "/tarot/la-bai": "/en/tarot/cards", "/": "/en" };
+export const BAN_TIENG_ANH: Record<string, string> = { "/than-so": "/en/numerology", "/tarot": "/en/tarot", "/tarot/la-bai": "/en/tarot/cards", "/": "/en",
+  "/than-so/y-nghia-so": "/en/numerology/life-path", "/chinh-sach-rieng-tu": "/en/privacy", "/dieu-khoan": "/en/terms" };
+/** Bản tiếng Anh của một đường dẫn Việt: bảng cố định + mẫu `/than-so/y-nghia-so/so-N` → `/en/numerology/life-path/N` (trang lá bài
+ *  cần tên tiếng Anh từ engine → trang tự khai qua `ban_en`, dải gợi ý không bao). */
+export function banTiengAnh(duong: string): string | undefined {
+  const m = duong.match(/^\/than-so\/y-nghia-so\/so-(\d{1,2})$/);
+  if (m && ["1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33"].includes(m[1]!)) return `/en/numerology/life-path/${m[1]}`;
+  return BAN_TIENG_ANH[duong];
+}
 
 export function metaMacDinh(duong: string): Metadata {
   const m = mucSoTrang(duong)?.mac_dinh ?? {};

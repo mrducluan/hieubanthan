@@ -86,8 +86,8 @@ test("sổ trang: không sót URL tĩnh của sitemap + mọi chủ đề; khôn
   const so = new Set(SO_TRANG.map((t) => t.duong));
   for (const d of [...tinh, "/phong-thuy/huong-hop-tuoi", ...Object.values(CHU_DE).map((c) => c.duong)]) expect(so.has(d), d).toBe(true);
   expect(so.size).toBe(SO_TRANG.length);
-  expect(SO_TRANG.length).toBeLessThanOrEqual(58);   // bản gọn (mục 8.1): không tạo sẵn tài liệu cho trang KB; +1 trang cụm dấu hiệu (Y5), +1 SAO-HV (/hoi-vien), +1 SAO-CG (/hoi-chuyen-gia), +1 /xem-sao-han (MT-ĐS), +3 /nam, /lich-am, /thoi-gian-toi (NAM-1/2), +1 cụm cổ thư Tử vi (TV-CTP), +2 /nhan-tuong + cụm bộ vị (NT-1), +1 /chan-dung (CD-1)
-  expect(MAU_CUM.length).toBe(Object.keys(CHU_DE).length + 17);  // + tuổi hợp hướng, lá số mẫu, 6 cụm trang con (ND-7), 4 cụm SEO-L, sao hạn theo năm (MT-ĐS), 3 cụm năm (NAM-1), Tử vi năm theo tuổi (NAM-3)
+  expect(SO_TRANG.length).toBeLessThanOrEqual(59);   // bản gọn (mục 8.1): không tạo sẵn tài liệu cho trang KB; +1 trang cụm dấu hiệu (Y5), +1 SAO-HV (/hoi-vien), +1 SAO-CG (/hoi-chuyen-gia), +1 /xem-sao-han (MT-ĐS), +3 /nam, /lich-am, /thoi-gian-toi (NAM-1/2), +1 cụm cổ thư Tử vi (TV-CTP), +2 /nhan-tuong + cụm bộ vị (NT-1), +1 /chan-dung (CD-1), +1 /sinh-o-nuoc-ngoai (Ý3)
+  expect(MAU_CUM.length).toBe(Object.keys(CHU_DE).length + 18);  // + tuổi hợp hướng, lá số mẫu, 6 cụm trang con (ND-7), 4 cụm SEO-L, sao hạn theo năm (MT-ĐS), 3 cụm năm (NAM-1), Tử vi năm theo tuổi (NAM-3), sinh ở nước ngoài theo nước (Ý3)
   expect(khopMauCum("/tu-vi/sao-o-cung/tu-vi-cung-menh")?.bien).toEqual({ slug: "tu-vi-cung-menh" });
   expect(khopMauCum("/phong-thuy/huong-hop-tuoi/cung-kham-bac")?.bien).toEqual({ slug: "cung-kham-bac" });   // AUD-Q2: theo cung phi
   expect(khopMauCum("/phong-thuy/huong-hop-tuoi")).toBeNull();
@@ -98,6 +98,8 @@ test("sổ trang: không sót URL tĩnh của sitemap + mọi chủ đề; khôn
   expect(khopMauCum("/xem-tuoi-lam-nha/2026/tuoi-1990")?.bien).toEqual({ nam: "2026", nam_sinh: "1990" });
   expect(khopMauCum("/tuoi-xong-dat/2027/tuoi-1985")?.bien).toEqual({ nam: "2027", nam_sinh: "1985" });
   expect(khopMauCum("/phong-thuy/huong-xau-nam/2026")?.bien).toEqual({ nam: "2026" });
+  expect(khopMauCum("/sinh-o-nuoc-ngoai/au")?.bien).toEqual({ nuoc: "au" });   // Ý3
+  expect(khopMauCum("/sinh-o-nuoc-ngoai")).toBeNull();
   expect(khopMauCum("/xem-ngay-tot/abc")?.mau.mau_duong).not.toBe("/xem-ngay-tot/{ngay}");
   for (const m of SO_TRANG) if (m.nhom === "phap_ly") expect(m.o.some((o) => o.startsWith("khoi")), m.duong).toBe(false);
 });

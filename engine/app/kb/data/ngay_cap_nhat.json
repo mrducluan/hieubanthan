@@ -531,6 +531,456 @@
    "dang": "2026-10-26",
    "sua": "2026-11-03"
   },
+  "en_la_bai/ace-of-cups": {
+   "bam": "ffe5d4459cc4e79e",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/ace-of-pentacles": {
+   "bam": "08f49ecf6fcd1558",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/ace-of-swords": {
+   "bam": "d9d107b489d9fdc6",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/ace-of-wands": {
+   "bam": "d388d7018e84a34a",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/death": {
+   "bam": "5b0092369aa567ed",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/eight-of-cups": {
+   "bam": "deabc6fa0f2c7ce3",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/eight-of-pentacles": {
+   "bam": "67fa4e0e087df589",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/eight-of-swords": {
+   "bam": "7cb07a0f1762e254",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/eight-of-wands": {
+   "bam": "bedef82f343dde9a",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/five-of-cups": {
+   "bam": "760c6924dc494e06",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/five-of-pentacles": {
+   "bam": "968d19c6ad6afd63",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/five-of-swords": {
+   "bam": "9ca270cc5bbe4941",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/five-of-wands": {
+   "bam": "03f54f7d71ecd7df",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/four-of-cups": {
+   "bam": "a978e5a0a68e8d77",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/four-of-pentacles": {
+   "bam": "5c189602812282df",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/four-of-swords": {
+   "bam": "359bc45096e036b1",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/four-of-wands": {
+   "bam": "f2e3ab5818071631",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/judgement": {
+   "bam": "05cea231991c8c9a",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/justice": {
+   "bam": "33ee49f40720838b",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/king-of-cups": {
+   "bam": "ee574117bc25f5e2",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/king-of-pentacles": {
+   "bam": "7b56369f742a815f",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/king-of-swords": {
+   "bam": "dc66fc81d51a7b79",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/king-of-wands": {
+   "bam": "5f891afee3d9450e",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/knight-of-cups": {
+   "bam": "de6edadd4b9520ae",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/knight-of-pentacles": {
+   "bam": "dedcfe4f3d9e1cf4",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/knight-of-swords": {
+   "bam": "8839933405e4fbe2",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/knight-of-wands": {
+   "bam": "d50b10c7c0dd7a9f",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/nine-of-cups": {
+   "bam": "c36056fac126912e",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/nine-of-pentacles": {
+   "bam": "ea1456657d6a3486",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/nine-of-swords": {
+   "bam": "a5e2c9bf236617ab",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/nine-of-wands": {
+   "bam": "c5a7b3d18f24e0e9",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/page-of-cups": {
+   "bam": "8715138e6ed38a21",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/page-of-pentacles": {
+   "bam": "1bb088726fd9d3fe",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/page-of-swords": {
+   "bam": "162e16736ee89b04",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/page-of-wands": {
+   "bam": "121b4ddae61fed47",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/queen-of-cups": {
+   "bam": "994ca6fe948dcaf5",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/queen-of-pentacles": {
+   "bam": "9b899ed042a4267f",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/queen-of-swords": {
+   "bam": "7235be7872452576",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/queen-of-wands": {
+   "bam": "8a3e666333061097",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/seven-of-cups": {
+   "bam": "f5ff449ab3dcc8cb",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/seven-of-pentacles": {
+   "bam": "7e478cc953269a96",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/seven-of-swords": {
+   "bam": "0539445a18874425",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/seven-of-wands": {
+   "bam": "fbab3d39f393deb3",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/six-of-cups": {
+   "bam": "2e12c1a832f5da57",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/six-of-pentacles": {
+   "bam": "87a32bae8189a395",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/six-of-swords": {
+   "bam": "29890e15290bceed",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/six-of-wands": {
+   "bam": "c4ae37547795a172",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/strength": {
+   "bam": "acc7301a49aa8aab",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/temperance": {
+   "bam": "536b58259b1fddbd",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/ten-of-cups": {
+   "bam": "bc95982a23b2712b",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/ten-of-pentacles": {
+   "bam": "3ca188cf326f6531",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/ten-of-swords": {
+   "bam": "6fc95eafc0a026fc",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/ten-of-wands": {
+   "bam": "6e826266b0e9b285",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-chariot": {
+   "bam": "4aec7dcbaf429e1d",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-devil": {
+   "bam": "b011f73fc9a049d5",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-emperor": {
+   "bam": "3adb0689f301fa2a",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-empress": {
+   "bam": "ef410c89e53edd08",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-fool": {
+   "bam": "a7122d0626f4fe93",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-hanged-man": {
+   "bam": "a13ffbb09e5b9ee4",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-hermit": {
+   "bam": "c4b932683857ffef",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-hierophant": {
+   "bam": "eef09ce0e57ca5fb",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-high-priestess": {
+   "bam": "92b30a45e07c27dc",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-lovers": {
+   "bam": "46c52c9bf856d136",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-magician": {
+   "bam": "af00a648bbffd791",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-moon": {
+   "bam": "3b0dc6d57f341764",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-star": {
+   "bam": "5e0eadb23f736395",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-sun": {
+   "bam": "beb9d5f808c08e0a",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-tower": {
+   "bam": "cdc4c7236767d7a5",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/the-world": {
+   "bam": "05b7c00c12cc7461",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/three-of-cups": {
+   "bam": "b9a0b0c04143ebf5",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/three-of-pentacles": {
+   "bam": "e22bac1316faeaa5",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/three-of-swords": {
+   "bam": "b1bf9048dbf09e47",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/three-of-wands": {
+   "bam": "081f4ce458a10789",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/two-of-cups": {
+   "bam": "fd0db46c83210081",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/two-of-pentacles": {
+   "bam": "0e573f1032424a3c",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/two-of-swords": {
+   "bam": "2fe89ace6c9b8eca",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/two-of-wands": {
+   "bam": "4fc26fa9bef3ee95",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_la_bai/wheel-of-fortune": {
+   "bam": "eebd8ffa5a82c473",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/1": {
+   "bam": "083c8f95ba47e10c",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/11": {
+   "bam": "05a132b68bcb8621",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/2": {
+   "bam": "96b9ea942bc66a89",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/22": {
+   "bam": "c573c070c3902110",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/3": {
+   "bam": "dc1178e21dd54f58",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/33": {
+   "bam": "60c2a858f3da8536",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/4": {
+   "bam": "86d0b6c0490430b4",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/5": {
+   "bam": "bce0ba7d5787cf1c",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/6": {
+   "bam": "ca39e236b2c4b866",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/7": {
+   "bam": "d8cdba6a3c57c2e0",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/8": {
+   "bam": "2f76075a69355cd2",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
+  "en_so/9": {
+   "bam": "a68dc462cb21aac0",
+   "dang": "2026-11-09",
+   "sua": "2026-11-09"
+  },
   "hoa_cung/hoa-khoa-cung-dien-trach": {
    "bam": "41873d2feed9f8b0",
    "dang": "2026-10-09",

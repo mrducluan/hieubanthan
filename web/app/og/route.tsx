@@ -140,7 +140,7 @@ function TheMoi({ nd, qr, W, H }: { nd: NoiDungMa; qr: string; W: number; H: num
 }
 
 /** Trang kiến thức / mặc định: trang sách mở dưới trời sao. */
-function TheKienThuc({ tieuDe, qr, W, H }: { tieuDe: string; qr: string; W: number; H: number }) {
+function TheKienThuc({ tieuDe, qr, W, H, en = false }: { tieuDe: string; qr: string; W: number; H: number; en?: boolean }) {
   const sao = saoRai(bam(tieuDe || "hbt"), 70, W, H);
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: `radial-gradient(circle at 50% 0%, #2a2350 0%, ${MAU.nen} 60%)`, color: MAU.chu, fontFamily: "Sans" }}>
@@ -156,14 +156,14 @@ function TheKienThuc({ tieuDe, qr, W, H }: { tieuDe: string; qr: string; W: numb
         <polyline points="520,282 600,320 690,276" fill="none" stroke={MAU.vang} strokeOpacity="0.5" strokeWidth="1.5" />
       </svg>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "absolute", top: 70, left: 100, width: W - 200 }}>
-        <div style={{ display: "flex", fontSize: 24, letterSpacing: 6, color: MAU.mo, textTransform: "uppercase" }}>{tieuDe ? "Thư viện kiến thức" : "Hiểu Bản Thân"}</div>
+        <div style={{ display: "flex", fontSize: 24, letterSpacing: 6, color: MAU.mo, textTransform: "uppercase" }}>{en ? (tieuDe ? "Hieu Ban Than · English" : "Hieu Ban Than") : tieuDe ? "Thư viện kiến thức" : "Hiểu Bản Thân"}</div>
         <div style={{ display: "flex", marginTop: 24, fontSize: tieuDe.length > 60 ? 50 : 60, fontFamily: "Serif", textAlign: "center", lineHeight: 1.2, justifyContent: "center" }}>
-          {tieuDe || "Bạn là số mấy?"}
+          {tieuDe || (en ? "Know yourself through numbers and cards" : "Bạn là số mấy?")}
         </div>
       </div>
       <div style={{ display: "flex", position: "absolute", top: H - 24 - 112, left: 40, width: W - 40 - 32, justifyContent: "space-between", alignItems: "flex-end" }}>
-        <div style={{ display: "flex", fontSize: 18, color: MAU.mo }}>Thần số học · Tử vi · Bát tự · Kinh Dịch · Phong thuỷ</div>
-        <ChanQr url={qr} canh={112} loiMoi="Quét để đọc tiếp" />
+        <div style={{ display: "flex", fontSize: 18, color: MAU.mo }}>{en ? "Numerology · Tarot · plain English, sourced books" : "Thần số học · Tử vi · Bát tự · Kinh Dịch · Phong thuỷ"}</div>
+        <ChanQr url={qr} canh={112} loiMoi={en ? "Scan to read more" : "Quét để đọc tiếp"} />
       </div>
     </div>
   );
@@ -222,7 +222,7 @@ export async function GET(req: Request) {
         so={(url.searchParams.get("so") ?? "").replace(/[^0-9]/g, "").slice(0, 2)}
         hao={(url.searchParams.get("hao") ?? "").replace(/[^01]/g, "").slice(0, 6).split("").map(Number)}
         qr={GOC_QR} W={co.width} H={co.height} />
-    ) : <TheKienThuc tieuDe={tieuDe} qr={GOC_QR} W={co.width} H={co.height} />;
+    ) : <TheKienThuc tieuDe={tieuDe} qr={url.searchParams.get("lang") === "en" ? `${GOC_QR}/en` : GOC_QR} W={co.width} H={co.height} en={url.searchParams.get("lang") === "en"} />;
   }
   return new ImageResponse(anh, { ...co, ...(fonts.length ? { fonts } : {}),
     ...(!nd ? { headers: { "cache-control": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400" } } : {}) });

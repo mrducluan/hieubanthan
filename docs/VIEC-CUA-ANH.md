@@ -3,7 +3,24 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
+> Cập nhật lần cuối: 2026-11-09 (HTT-3, mục 4aj).
+
+### 4aj. HTT-3 — Ý1–Ý7 + QC `/en` (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9) — deploy ENGINE trước web
+
+- [ ] **Chạy migration 0035** (`supabase/migrations/0035_push_thang_hai_la_so.sql`, sau 0034): mốc Web Push "Đầu tháng — hai lá số
+  cùng nói". Chưa chạy thì ô tích mới không ghi được (DB từ chối giá trị), cron bỏ qua mốc này.
+- [ ] Sau deploy + 0035: Hôm nay → Bật nhắc → tích "Đầu tháng: Tử vi và Bát tự cùng thấy gì" (cần lá số đủ giờ + giới tính + nơi sinh
+  trong tài khoản) → ngày 1/12 kiểm log Vercel cron `hang-ngay` có `thang_hai_la_so ≥ 1` và điện thoại nhận một thông báo.
+- [ ] **Search Console**: thêm property URL-prefix `https://hieuban.com/en/` (tách số bản Anh); gửi `https://hieuban.com/sitemap-en.xml`.
+- [ ] Sau deploy, kiểm nhanh `/en`: `https://hieuban.com/en/khong-co` ra trang 404 tiếng Anh; `view-source:/en/tarot/cards/the-fool`
+  có `hreflang="vi"` trỏ `/tarot/la-bai/chang-kho` và `og:image` chứa `lang=en`; mở với trình duyệt Mỹ (Accept-Language en-US) thấy
+  `<html lang="en-US">`.
+- [ ] Sau deploy: form hồ sơ chọn "Sinh ở nước ngoài → Úc → Sydney" thấy dòng gợi ý hai công tắc; trang
+  `https://hieuban.com/sinh-o-nuoc-ngoai/au` hiện bảng giờ mùa hè + lịch âm lệch.
+- [ ] Người duyệt (rành Tử vi + Bát tự) đọc `docs/CHAN-DUNG-TONG-HOP.md` mục 6: trên 1.000 lá mẫu hai lá số cùng mức đúng bằng ngẫu
+  nhiên → quyết sửa lời hộp "cùng thấy" và ngưỡng "cùng thấy" của Chân dung tổng hợp (em không tự sửa lời luận).
+- [ ] Chốt mảng tiếng Anh tiếp theo: em đề xuất Kinh Dịch (`/en/i-ching`, nguồn Legge 1882) trước Bát tự — khác thứ tự QTE-1 mục 2.
+- [ ] Sau 8 tuần có phiếu `/en`: xem `/quan-tri/hoc` → "Lệch theo ngôn ngữ" cột "So với" để biết bản phủ `en-us` có khác bản en không.
 
 ### 4ai. Hybrid Two-Tier → HTT-1 (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md`) — deploy ENGINE trước web
 
@@ -16,7 +33,7 @@
   (đã có từ QT-1). Nút "Soạn lại nháp" chỉ có việc khi khung "Lệch theo ngôn ngữ" có mã (cần 0034 + ≥ 100 phiếu /en mỗi mã).
 - [ ] Sau deploy: hồ sơ sinh ở **Sydney / Melbourne / Auckland** → `/bat-tu` → "Lá số chi tiết" → khung Trường phái có dòng
   "Mùa nơi sinh"; chọn "Mùa thực nơi sinh" thì hành điều hậu đổi (Thủy ↔ Hỏa), tứ trụ giữ nguyên. Hồ sơ Tokyo / Việt Nam không có dòng này.
-- [ ] Chọn ý tưởng tiếp theo trong `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 8 (Ý1–Ý7).
+- [x] ~~Chọn ý tưởng tiếp theo trong `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 8 (Ý1–Ý7)~~ — anh duyệt làm cả bảy 2026-11-09 (HTT-3, mục 4aj).
 - [ ] Người bản xứ duyệt `engine/app/kb/data/en/giao_thoa_kb.json` (`_trang_thai: bien_tap`) cùng đợt với các tệp `en/` khác.
 - [ ] Đã kiểm 8 QID Wikidata qua API (5 QID trong tài liệu Drive sai thực thể) — không cần anh làm gì; nếu anh muốn thêm thực thể
   khác (vd Chaldea, Lạc Thư) thì báo em tra.

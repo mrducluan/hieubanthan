@@ -212,3 +212,15 @@ quốc tế:
 - Còn chờ số liệu: biến thể A/B theo thị trường bằng
   bản phủ thứ hai + cờ PostHog.
 
+## 15. HTT-3 — bản `/en` được QC SEO/GEO + biến thể thị trường (2026-11-09)
+
+- `/en` đã qua bộ rà SEO (97 URL, 0 lỗi): hreflang hai chiều tới trang tương đương, ngày đăng/sửa thật, OG tiếng Anh, 404 tiếng
+  Anh, breadcrumb / Article / CollectionPage / FAQ JSON-LD, Organization tiếng Anh, llms.txt có mục English — chi tiết
+  `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9.2.
+- **Biến thể thị trường** (Ý7): `x-ngon-ngu = en-us` theo Accept-Language khi có bản phủ `kb/data/en-us/`; phiếu "Resonates" mang
+  biến thể; khung "Lệch theo ngôn ngữ" so en-us với cả vi lẫn en. Thêm thị trường = thêm thư mục bản phủ + mã vào `BIEN_THE_EN`.
+- Hạ tầng: giữ Singapore (mục 5); đo TTFB từ Mỹ trên production bằng PSI / workflow "Kiểm tra SEO" trước khi xét `preferredRegion`.
+- Việc của anh: Search Console property `https://hieuban.com/en/`; mốc tuần 8 đọc cả tỉ lệ "Resonates" theo biến thể.
+- Mảng tiếng Anh tiếp theo: đề xuất Kinh Dịch (`/en/i-ching`) trước Bát tự vì nguồn công cộng tiếng Anh (Legge 1882) sẵn, ít tên
+  riêng; cần anh chốt vì khác thứ tự mục 2.
+

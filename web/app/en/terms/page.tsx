@@ -1,13 +1,15 @@
 // QTE — điều khoản tóm tắt bằng tiếng Anh cho bản /en; bản ràng buộc là tiếng Việt (/dieu-khoan, /mien-tru-trach-nhiem).
 import type { Metadata } from "next";
 import Lien from "@/components/khung/Lien";
-import { metaEn } from "@/lib/en/seo";
+import { ldDuongDanEn, metaEn } from "@/lib/en/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = metaEn({ title: "Terms and disclaimer — Hieu Ban Than (English)", description: "Terms of use and disclaimer for the English numerology and tarot pages.", path: "/en/terms", vi: "/dieu-khoan" });
 
 export default function Page() {
   return (
     <article className="prose-vn mx-auto max-w-3xl">
+      <JsonLd data={ldDuongDanEn([{ ten: "Terms", duong: "/en/terms" }])} />
       <h1>Terms and disclaimer — English pages</h1>
       <p className="text-fg-muted">Summary for the English pages. The binding versions are the Vietnamese <Lien href="/dieu-khoan" hrefLang="vi" className="text-gold hover:underline">Terms</Lien> and <Lien href="/mien-tru-trach-nhiem" hrefLang="vi" className="text-gold hover:underline">Disclaimer</Lien>.</p>
       <h2>Nature of the content</h2>

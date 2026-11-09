@@ -8,14 +8,15 @@ import { CHI_XEM, coGithub, docTepKb, LoiGithub, NHANH_GOC, TEN_TEP, THU_MUC_KB,
 import { TEN_TEP_KB } from "@/lib/ten-tep-kb";
 import { BienTap } from "./BienTap";
 
-export async function generateMetadata({ params }: { params: Promise<{ tep: string }> }): Promise<Metadata> {
-  return { title: `Sửa ${(await params).tep}` };
+// HTT-2 (2026-11-09): đường dẫn nhiều đoạn — mở được cả bản phủ ngôn ngữ `en/<tệp>` (URL /quan-tri/tri-thuc/en/tarot_kb).
+export async function generateMetadata({ params }: { params: Promise<{ tep: string[] }> }): Promise<Metadata> {
+  return { title: `Sửa ${(await params).tep.join("/")}` };
 }
 
 export default async function Page({ params, searchParams }: {
-  params: Promise<{ tep: string }>; searchParams: Promise<{ tim?: string }>;
+  params: Promise<{ tep: string[] }>; searchParams: Promise<{ tim?: string }>;
 }) {
-  const ten = `${(await params).tep}.json`;
+  const ten = `${(await params).tep.join("/")}.json`;
   if (!TEN_TEP.test(ten)) notFound();
   const p = await congQuanTri();
   if (p.trang !== "ok") return <BaoCong trang={p.trang} email={"email" in p ? p.email : null} />;

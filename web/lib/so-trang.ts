@@ -16,7 +16,7 @@ import { ND_CHAN_DUNG } from "@/app/chan-dung/noi-dung";
 import type { BangChu, BangHinh } from "@/lib/chu-trang";
 import { CHU_TRANG_CHU, HINH_TRANG_CHU } from "@/lib/chu/trang-chu";
 import { CHU_HUYEN_HOC, CHU_KIEN_THUC, HINH_HUYEN_HOC } from "@/lib/chu/trang-tinh";
-import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM, CHU_NAM, CHU_NAM_SINH_CON, CHU_NAM_CUOI_HOI, CHU_NAM_TUOI } from "@/lib/chu/trang-con";
+import { CHU_HAN_NAM_CON, CHU_LAM_NHA_CON, CHU_LAM_NHA_NAM, CHU_LICH_AM_NAM, CHU_NGAY, CHU_THANG, CHU_VIEC_THANG, CHU_XONG_DAT_CON, CHU_XONG_DAT_NAM, CHU_SAO_HAN_NAM, CHU_NAM, CHU_NAM_SINH_CON, CHU_NAM_CUOI_HOI, CHU_NAM_TUOI, CHU_SINH_NN } from "@/lib/chu/trang-con";
 import {
   CHU_BAT_TU, CHU_DOI_LICH, CHU_HAN_NAM, CHU_SAO_HAN, CHU_HOM_NAY, CHU_HOP_DOI, CHU_KINH_DICH, CHU_LAM_NHA, CHU_NHAN_TUONG, CHU_PHONG_THUY, CHU_THAN_SO, CHU_TU_VI,
   CHU_XEM_NGAY, CHU_XONG_DAT, CHU_THOI_GIAN_TOI, CHU_CHAN_DUNG, CHU_TAROT,
@@ -276,6 +276,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Lịch âm Việt Nam từng năm: ngày Tết, năm có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu. Kèm công cụ đổi ngày âm dương.",
     loi_dan: "Tính theo giờ Hà Nội (thuật toán Hồ Ngọc Đức). Chọn một năm để xem Tết, tháng nhuận, mùng 1 và rằm từng tháng.",
   } },
+  { duong: "/sinh-o-nuoc-ngoai", nhom: "tinh", ten: "Sinh ở nước ngoài (mục lục)", o: O_TINH, mac_dinh: {       // Ý3
+    tieu_de_seo: "Sinh ở nước ngoài: lập lá số Tử vi, Bát tự theo giờ địa phương", h1: "Sinh ở nước ngoài, lập lá số thế nào?",
+    mo_ta_seo: "Người Việt sinh ở Mỹ, Úc, Canada, Đức, Nhật, Hàn, Đài Loan, Pháp, Séc, Anh, Ba Lan, Nga, Thái Lan, Lào, Campuchia: nhập giờ nào, múi giờ và giờ mùa hè tự tính ra sao, lịch âm Việt – Trung lệch ngày nào, khi nào nên xem thêm giờ mặt trời thực.",
+    loi_dan: "Giờ trên giấy khai sinh là giờ đồng hồ nơi sinh. Chọn đúng nước và thành phố, phần còn lại (múi giờ, giờ mùa hè tại ngày sinh) hệ thống tự tra theo lịch sử nơi đó.",
+  } },
   { duong: "/kien-thuc", nhom: "tinh", ten: "Thư viện kiến thức", o: O_TINH, mac_dinh: { chu: CHU_KIEN_THUC,
     tieu_de_seo: "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi, Bát tự",
     mo_ta_seo: "Ý nghĩa 12 con số thần số học, 64 quẻ Kinh Dịch, 14 chính tinh và 12 cung Tử vi, 10 thập thần, 10 nhật chủ Bát tự — có nguồn, có mặt tối, có câu tự soi.",
@@ -401,6 +406,8 @@ const MAU_CUM_GOC: readonly MauCumTrang[] = [
     bien: ["nam", "can_chi"], chu: CHU_NAM_CUOI_HOI },                                                   // NAM-1
   { mau_duong: "/nam/{nam}/tuoi-{nam_sinh}", nhom: "cong_cu_con", ten: "Năm · Tử vi năm theo tuổi", o: O_CUM, nguon_kb: null,
     bien: ["nam", "nam_sinh", "can_chi", "can_chi_nam"], chu: CHU_NAM_TUOI },                            // NAM-3
+  { mau_duong: "/sinh-o-nuoc-ngoai/{nuoc}", nhom: "cong_cu_con", ten: "Sinh ở nước ngoài · từng nước", o: O_CUM, nguon_kb: null,
+    bien: ["nuoc", "ten", "nam"], chu: CHU_SINH_NN },                                                   // Ý3
   { mau_duong: "/lich-am/{nam}", nhom: "cong_cu_con", ten: "Lịch âm · từng năm", o: O_CUM, nguon_kb: null,
     bien: ["nam", "can_chi"], chu: CHU_LICH_AM_NAM },
   { mau_duong: "/phong-thuy/huong-xau-nam/{nam}", nhom: "cong_cu_con", ten: "Hướng xấu theo năm · từng năm", o: O_CUM, nguon_kb: null,
@@ -439,6 +446,7 @@ export function viDuMau(mau: MauCumTrang, nay = new Date()): string {
   const ngay = `${nam}-${thang.padStart(2, "0")}-${String(vn.getUTCDate()).padStart(2, "0")}`;
   const gt: Record<string, string> = {
     nam: mau.nhom === "tuoi" ? "1990" : nam, thang, ngay, nam_sinh: "1990", gioi: "nam", viec: "cuoi-hoi", slug: mau.nguon_kb?.vi_du ?? "duc-luan",
+    nuoc: "us",   // Ý3: cụm "Sinh ở nước ngoài"
   };
   return mau.mau_duong.replace(/\{([a-z_]+)\}/g, (m, b: string) => gt[b] ?? m);
 }

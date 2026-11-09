@@ -3,7 +3,7 @@
     "source_id": "hbt_bien_tap_chan_dung_v1",
     "school_id": "lien_mon",
     "trang_thai": "nhap_ai",
-    "ghi_chu": "CD-1 — lời cho lớp 'Chân dung tổng hợp' (luangiai/chan_dung_tong_hop.py): ghép mức ba báo cáo đời sống (Tử vi · Bát tự · Nhân tướng) theo mảng đời. Chỉ ghép mức đã chấm; không điểm số, không phán môn nào đúng, không đổi mức môn nào."
+    "ghi_chu": "CD-1 — lời cho lớp 'Chân dung tổng hợp' (luangiai/chan_dung_tong_hop.py): ghép mức ba báo cáo đời sống (Tử vi · Bát tự · Nhân tướng) theo mảng đời. Chỉ ghép mức đã chấm; không điểm số, không phán môn nào đúng, không đổi mức môn nào. Ý2 (2026-11-09): chương 'da_xac_nhan' dựng từ phiếu của chính người xem qua luangiai/giao_thoa (mã ds.giao_thoa.*). Ý4: câu 'hiem_trung' chỉ thêm vào hộp 'khác nhau' khi kappa Tử vi–Bát tự của mảng < 0,1 trên lá số mẫu (kb/data/dong_thuan_thong_ke.json)."
   },
   "mon": {
     "tuvi": {"ten": "Tử vi", "mat": "nhìn hoàn cảnh quanh bạn: việc, tiền, nhà, người"},
@@ -39,6 +39,8 @@
     "tieu_de": "{mang}: các cách xem nhìn khác nhau",
     "noi_dung": "{mat}. Các cách không cãi nhau — mỗi cách nhìn một mặt của cùng một mảng, nên mức có thể khác. Lấy mặt dè dặt nhất làm khung an toàn, mặt thuận để quyết việc đã chuẩn bị kỹ.",
     "da_so": "Hai trong ba cách thấy {muc_da_so}; {mon_le} thấy {muc_le} — {mat_le}.",
+    "hiem_trung": "Trên lá số mẫu, Tử vi và Bát tự hiếm khi trùng mức ở mảng {ngan} ({ti_le}% trùng, gần mức ngẫu nhiên) — coi mỗi bên là một góc nhìn, không phải hai lời trái nhau.",
+    "can_cu_thong_ke": "Đồng thuận liên môn trên {n} lá số mẫu: Tử vi và Bát tự cùng mức ở mảng này {ti_le}% (kỳ vọng ngẫu nhiên {ngau_nhien}%, kappa {kappa}).",
     "huong_xu_ly": {
       "can_chu_dong": "Lấy mặt cần lưu ý làm khung: việc lớn về {ngan} chia nhỏ, có dự phòng; phần thuận dùng cho việc đã chuẩn bị kỹ.",
       "can_bang": "Giữ nhịp đều làm nền cho mảng {ngan}; phần thuận dành cho một việc đã sẵn, không ôm thêm nhiều việc mới.",
@@ -59,6 +61,7 @@
     "suc_khoe": {"tieu_de": "Sức khoẻ và nhịp sinh hoạt", "cau_hoi": "Hệ cơ quan nào ba cách cùng nhắc chăm, và năm nào nên đi khám sớm hơn?"},
     "nang_luong": {"tieu_de": "Hành lá số cần và dáng mặt", "cau_hoi": "Lá số đang thiếu hành gì, dáng mặt bạn mang hành gì — hai bên bù hay ngược nhau?"},
     "nam_nay": {"tieu_de": "Năm nay qua ba cách nhìn", "cau_hoi": "Năm nay hai lá số cùng thấy gì, và gương mặt bảo nhìn vào vùng nào?"},
+    "da_xac_nhan": {"tieu_de": "Điều bạn đã xác nhận — các cách xem gặp nhau ở đâu", "cau_hoi": "Từ những hộp bạn đã bấm \"Đúng với mình\", hai cách xem trở lên cùng chạm chỗ nào của đời bạn?"},
     "loi_khuyen": {"tieu_de": "Việc nên làm, gom từ ba cách", "cau_hoi": "Nếu chỉ làm ba việc trong 90 ngày tới, ba cách xem cùng khuyên việc gì?"}
   },
   "mau": {
@@ -69,6 +72,9 @@
     "nang_luong_mo": "Bát tự cho biết hành lá số đang thiếu (hai cách lấy dụng thần, luôn trình bày cả hai); nhân tướng xếp dáng mặt theo năm hành. Hai bên hợp nhau thì nhẹ; ngược nhau thì bù bằng thói quen, không bù bằng cách đổi gương mặt.",
     "nang_luong_thieu": "Chưa có khảo sát gương mặt — chương này cần biết dáng mặt bạn mang hành gì. Hiện chỉ có hành lá số cần theo hai cách của Bát tự.",
     "nam_nay_mo": "Năm nay nhìn theo ba cách: Tử vi đọc tứ hoá của năm vào các cung, Bát tự đọc hành của năm so với sức bạn, nhân tướng chỉ vùng mặt sách lưu niên xem ở tuổi này.",
+    "da_xac_nhan_mo": "Chương này dựng từ chính những hộp bạn đã bấm \"Đúng với mình\" ở các bài đọc (Tử vi, Bát tự, Nhân tướng, Bản đồ con số, Nhà của bạn…) khi đăng nhập — hệ thống chỉ so mảng đời và mức mà các hộp ấy đã mang, không tính lại, không đổi mức cách nào. Càng đọc và tự chấm, chương này càng nói riêng về bạn.",
+    "da_xac_nhan_khong_du": "Bạn chưa bấm \"Đúng với mình\" đủ hai hộp (hoặc chưa đăng nhập để phiếu được giữ lại). Đọc một bài trong ba cách xem, bấm vào hộp nào thấy đúng — lần mở sau, chương này sẽ cho biết các cách xem gặp nhau ở đâu.",
+    "da_xac_nhan_co_chua_dung": "Bạn cũng đã đánh dấu {so} hộp chưa đúng — hệ thống không lặp lại nét ấy; phần chưa khớp được ghi lại cho ban biên tập xem lời.",
     "loi_khuyen_mo": "Việc nên làm gom từ các hộp của ba cách, ưu tiên mảng nhiều cách cùng nhắc đi chậm, rồi tới mảng thuận để bạn tận dụng. Chọn một việc, làm trong 21 ngày.",
     "thieu_nhan_tuong": "Chưa có khảo sát gương mặt — làm Khảo sát ở trang Nhân tướng học (5 phút, không cần ảnh) để thêm cách nhìn thứ ba.",
     "muon_hop": "Theo {mon}"
@@ -81,6 +87,7 @@
     "suc_khoe": "Thói quen nào trong 30 ngày qua bạn biết đang làm mình hao sức?",
     "nang_luong": "Thói quen nào của bạn đang bù cho hành lá số nói là thiếu?",
     "nam_nay": "Việc lớn nhất năm nay của bạn rơi vào mảng nào — mảng ấy ba cách thấy sao?",
+    "da_xac_nhan": "Trong những điều bạn đã gật đầu, điều nào bạn đã biết từ lâu — và điều nào bạn chỉ dám nhận khi có người khác nói ra?",
     "loi_khuyen": "Trong các việc ở trên, việc nào bạn làm được ngay tuần này?"
   }
 }

@@ -102,3 +102,20 @@ def soan_lai_lech(vao: SoanLaiLechVao) -> dict:
         return soan_lai.soan_lai(vao.ma, vao.ngon_ngu, goi=goi)
     except Exception as e:  # noqa: BLE001 — lỗi mạng / JSON của máy chuyển ngữ → báo gọn, không lộ chi tiết nhà cung cấp
         raise HTTPException(502, detail=f"Máy chuyển ngữ chưa trả nháp ({type(e).__name__})") from e
+
+
+# ---------------------------------------------------------------- Ý4: thước "đồng thuận liên môn" cho người duyệt
+@router.api_route("/dong-thuan", methods=["GET", "POST"])
+def dong_thuan() -> dict:
+    """Bảng Tử vi–Bát tự cùng mức theo mảng trên lá số mẫu (`kb/data/dong_thuan_thong_ke.json`, sinh bằng
+    scripts/dong_thuan_lien_mon.py — engine chỉ đọc) + ngưỡng gợi ý cho người duyệt. Chưa có tệp → `co: false`."""
+    from app.luangiai import dong_thuan_thong_ke as dtk  # noqa: PLC0415
+    d = dtk.doc()
+    if not d:
+        return {"co": False, "nguong": dtk.NGUONG, "mang": {}}
+    return {"co": True, "nguong": dtk.NGUONG, "ngay": d.get("ngay"), "n": d.get("n"), "nguon_la": d.get("nguon_la"),
+            "mang": {m: {**t, "ten": CD_TEN_MANG.get(m, m)} for m, t in d["mang"].items()}}
+
+
+CD_TEN_MANG = {"cong_viec": "Công việc", "tien_bac": "Tiền bạc", "tinh_cam": "Tình cảm", "gia_dinh": "Gia đình",
+               "suc_khoe": "Sức khoẻ", "nam_nay": "Năm nay"}

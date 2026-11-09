@@ -6,6 +6,7 @@
 // và chạy máy không bị ảnh hưởng.
 // QT-0: riêng /quan-tri (+ /api/quan-tri) — làm mới phiên Supabase (Server Component không ghi được cookie) + header noindex.
 import { NextRequest, NextResponse } from "next/server";
+import { langHtml, maNgonNguEn } from "@/lib/ngon-ngu";
 import { createServerClient } from "@supabase/ssr";
 import { SITE_CHINH } from "@/lib/seo";
 import { taoCsp, taoNonce } from "@/lib/csp";
@@ -55,11 +56,13 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   dau.set("content-security-policy", csp);
   // QTE: bản tiếng Anh ở /en — layout đọc `x-ngon-ngu` để dựng khung tiếng Anh; route API chuyển tiếp header này tới engine.
   const tiengAnh = pathname === "/en" || pathname.startsWith("/en/");
-  dau.set("x-ngon-ngu", tiengAnh ? "en" : "vi");
+  // Ý7: biến thể thị trường (en-us) theo Accept-Language — chỉ khi engine có bản phủ; còn lại "en".
+  const maEn = tiengAnh ? maNgonNguEn(req.headers.get("accept-language")) : "vi";
+  dau.set("x-ngon-ngu", maEn);
   dau.set("x-duong-dan", pathname);   // HTT-1: layout biết trang đang mở (dải gợi ý bản tiếng Anh chỉ ở trang có bản Anh)
   const res = NextResponse.next({ request: { headers: dau } });
   res.headers.set("content-security-policy", csp);
-  if (tiengAnh) res.headers.set("content-language", "en");
+  if (tiengAnh) { res.headers.set("content-language", langHtml(maEn)); res.headers.append("vary", "Accept-Language"); }
   cookieMoi.forEach((c) => res.cookies.set(c.name, c.value, c.options));
   if (quanTri) {
     res.headers.set("x-robots-tag", "noindex, nofollow");

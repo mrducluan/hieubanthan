@@ -19,7 +19,7 @@ const Input = z.object({
   phai: z.string().regex(/^[a-z0-9_]{2,32}$/),
   ket_qua: z.enum(["dung", "chua_dung"]),
   /** HTT-1 (migration 0034): ngôn ngữ trang người bấm — so lệch bản dịch ở tầng HỌC. */
-  ngon_ngu: z.enum(["vi", "en"]).default("vi"),
+  ngon_ngu: z.string().regex(/^(vi|en(-[a-z]{2})?)$/).default("vi"),
 }).strict()
   .refine((d) => d.loai !== "doi_song" || MA_DOI_SONG.test(d.mau), { path: ["mau"] })
   .refine((d) => d.loai !== "hai_nguoi" || (MA_HAI_NGUOI.test(d.mau) && PHAI_HAI_NGUOI.test(d.phai)), { path: ["mau"] });

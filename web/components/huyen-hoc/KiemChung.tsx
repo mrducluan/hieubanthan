@@ -14,12 +14,17 @@ import type { KetQuaKiemChung, LoaiKiemChung } from "@/lib/kiem-chung";
 import { tyLeHien, type TyLe } from "@/lib/ty-le-kiem-chung";
 import { ghiNhanDung } from "@/lib/kiem-chung-sau";
 import { useXemNguoiThan } from "@/components/huyen-hoc/XemNguoiThan";
+import { maNgonNguTrang } from "@/lib/ngon-ngu";
 
 const KHOA = (k: string) => `hbt.mot-lan.kiem-chung.${k}`;
 
 export type LoaiKiemChungWeb = LoaiKiemChung;
 
-function guiMayChu(loai: string, mau: string, phai: string, ket_qua: KetQuaKiemChung, ngon_ngu: "vi" | "en") {
+/** Ý7: mã ngôn ngữ ghi vào phiếu + PostHog — trang /en có thể đang ở biến thể thị trường (en-us). */
+const maPhieu = (ngonNguTrang: "vi" | "en") => (ngonNguTrang === "en" ? maNgonNguTrang() : "vi");
+
+function guiMayChu(loai: string, mau: string, phai: string, ket_qua: KetQuaKiemChung, ngonNguTrang: "vi" | "en") {
+  const ngon_ngu = maPhieu(ngonNguTrang);
   try {
     // HTT-1: phiếu mang ngôn ngữ của trang (migration 0034) — DB chưa chạy 0034 thì route tự gọi hàm cũ.
     void fetch("/api/kiem-chung", {
@@ -59,7 +64,7 @@ export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, the
       window.dispatchEvent(new CustomEvent("hbt-phieu", { detail: { loai, mau, phai, ket_qua: kq } }));
     } catch { /* bỏ qua */ }
     if (lanDauTrongPhien(`kiem-chung.${k}`)) {
-      ghi("tuvi_kiem_chung", { loai, mau, ket_qua: kq, phai, ngon_ngu: ngonNgu });
+      ghi("tuvi_kiem_chung", { loai, mau, ket_qua: kq, phai, ngon_ngu: maPhieu(ngonNgu) });
       guiMayChu(loai, mau, phai, kq, ngonNgu);
       if (kq === "dung" && theoDoi && (loai === "doi_song" || loai === "hai_nguoi")) {
         ghiNhanDung({ loai, mau, phai, nhan: theoDoi.slice(0, 80), mo_dun: mau.split(".")[1] ?? "" });

@@ -1,0 +1,236 @@
+{
+ "_sinh_boi": "scripts/dong_thuan_lien_mon.py",
+ "_ghi_chu": "Ý4 — đồng thuận Tử vi–Bát tự theo mảng trên lá số mẫu (không phải thống kê dân số). Chỉ cho người duyệt; không đổi mức / mã hộp. Sinh lại: scripts/dong_thuan_lien_mon.py",
+ "ngay": "2026-11-09",
+ "n": 1000,
+ "nguon_la": "bo_la_mau_1000 (fixtures/golden, 1.000 đầu vào ngày · canh giờ · giới)",
+ "nguong": {
+  "kappa_thap": 0.1,
+  "kappa_cao": 0.4,
+  "n_toi_thieu": 200
+ },
+ "mang": {
+  "cong_viec": {
+   "n": 1000,
+   "cung": 372,
+   "ti_le_cung": 0.372,
+   "ngau_nhien": 0.381,
+   "kappa": -0.0145,
+   "bien": {
+    "tuvi": {
+     "thuan": 420,
+     "can_bang": 365,
+     "can_chu_dong": 215
+    },
+    "battu": {
+     "thuan": 487,
+     "can_bang": 441,
+     "can_chu_dong": 72
+    }
+   },
+   "bang": {
+    "thuan": {
+     "thuan": 204,
+     "can_bang": 190,
+     "can_chu_dong": 26
+    },
+    "can_bang": {
+     "thuan": 183,
+     "can_bang": 152,
+     "can_chu_dong": 30
+    },
+    "can_chu_dong": {
+     "thuan": 100,
+     "can_bang": 99,
+     "can_chu_dong": 16
+    }
+   },
+   "nhan": "gan_ngau_nhien"
+  },
+  "tien_bac": {
+   "n": 1000,
+   "cung": 391,
+   "ti_le_cung": 0.391,
+   "ngau_nhien": 0.395,
+   "kappa": -0.0066,
+   "bien": {
+    "tuvi": {
+     "thuan": 357,
+     "can_bang": 520,
+     "can_chu_dong": 123
+    },
+    "battu": {
+     "thuan": 258,
+     "can_bang": 533,
+     "can_chu_dong": 209
+    }
+   },
+   "bang": {
+    "thuan": {
+     "thuan": 92,
+     "can_bang": 189,
+     "can_chu_dong": 76
+    },
+    "can_bang": {
+     "thuan": 132,
+     "can_bang": 277,
+     "can_chu_dong": 111
+    },
+    "can_chu_dong": {
+     "thuan": 34,
+     "can_bang": 67,
+     "can_chu_dong": 22
+    }
+   },
+   "nhan": "gan_ngau_nhien"
+  },
+  "tinh_cam": {
+   "n": 1000,
+   "cung": 388,
+   "ti_le_cung": 0.388,
+   "ngau_nhien": 0.3611,
+   "kappa": 0.0422,
+   "bien": {
+    "tuvi": {
+     "thuan": 428,
+     "can_bang": 373,
+     "can_chu_dong": 199
+    },
+    "battu": {
+     "thuan": 406,
+     "can_bang": 397,
+     "can_chu_dong": 197
+    }
+   },
+   "bang": {
+    "thuan": {
+     "thuan": 190,
+     "can_bang": 163,
+     "can_chu_dong": 75
+    },
+    "can_bang": {
+     "thuan": 141,
+     "can_bang": 154,
+     "can_chu_dong": 78
+    },
+    "can_chu_dong": {
+     "thuan": 75,
+     "can_bang": 80,
+     "can_chu_dong": 44
+    }
+   },
+   "nhan": "gan_ngau_nhien"
+  },
+  "gia_dinh": {
+   "n": 1000,
+   "cung": 295,
+   "ti_le_cung": 0.295,
+   "ngau_nhien": 0.2965,
+   "kappa": -0.0021,
+   "bien": {
+    "tuvi": {
+     "thuan": 374,
+     "can_bang": 501,
+     "can_chu_dong": 125
+    },
+    "battu": {
+     "thuan": 124,
+     "can_bang": 374,
+     "can_chu_dong": 502
+    }
+   },
+   "bang": {
+    "thuan": {
+     "thuan": 43,
+     "can_bang": 143,
+     "can_chu_dong": 188
+    },
+    "can_bang": {
+     "thuan": 67,
+     "can_bang": 186,
+     "can_chu_dong": 248
+    },
+    "can_chu_dong": {
+     "thuan": 14,
+     "can_bang": 45,
+     "can_chu_dong": 66
+    }
+   },
+   "nhan": "gan_ngau_nhien"
+  },
+  "suc_khoe": {
+   "n": 1000,
+   "cung": 368,
+   "ti_le_cung": 0.368,
+   "ngau_nhien": 0.3739,
+   "kappa": -0.0093,
+   "bien": {
+    "tuvi": {
+     "thuan": 465,
+     "can_bang": 346,
+     "can_chu_dong": 189
+    },
+    "battu": {
+     "thuan": 428,
+     "can_bang": 425,
+     "can_chu_dong": 147
+    }
+   },
+   "bang": {
+    "thuan": {
+     "thuan": 195,
+     "can_bang": 196,
+     "can_chu_dong": 74
+    },
+    "can_bang": {
+     "thuan": 144,
+     "can_bang": 151,
+     "can_chu_dong": 51
+    },
+    "can_chu_dong": {
+     "thuan": 89,
+     "can_bang": 78,
+     "can_chu_dong": 22
+    }
+   },
+   "nhan": "gan_ngau_nhien"
+  },
+  "nam_nay": {
+   "n": 1000,
+   "cung": 330,
+   "ti_le_cung": 0.33,
+   "ngau_nhien": 0.3488,
+   "kappa": -0.0288,
+   "bien": {
+    "tuvi": {
+     "thuan": 436,
+     "can_bang": 358,
+     "can_chu_dong": 206
+    },
+    "battu": {
+     "thuan": 445,
+     "can_bang": 266,
+     "can_chu_dong": 289
+    }
+   },
+   "bang": {
+    "thuan": {
+     "thuan": 188,
+     "can_bang": 131,
+     "can_chu_dong": 117
+    },
+    "can_bang": {
+     "thuan": 162,
+     "can_bang": 83,
+     "can_chu_dong": 113
+    },
+    "can_chu_dong": {
+     "thuan": 95,
+     "can_bang": 52,
+     "can_chu_dong": 59
+    }
+   },
+   "nhan": "gan_ngau_nhien"
+  }
+ }
+}

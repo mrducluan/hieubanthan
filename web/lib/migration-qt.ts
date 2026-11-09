@@ -6,8 +6,8 @@
 type DauHieu = { bang: string; cot?: string } | { ham: string };
 export interface Migration { so: string; ten: string; dau: DauHieu }
 
-/** Migration có dấu hiệu nhìn thấy qua API (bảng / cột / hàm mới). Migration chỉ đổi ràng buộc (0015, 0021, 0023) không
- *  có ở đây — kiểm bằng da_chay_chua.sql. */
+/** Migration có dấu hiệu nhìn thấy qua API (bảng / cột / hàm mới). Migration chỉ đổi ràng buộc (0015, 0021, 0023, 0035 — mốc
+ *  push `thang_hai_la_so`) không có ở đây — kiểm bằng da_chay_chua.sql. */
 export const MIGRATION: readonly Migration[] = [
   { so: "0006", ten: "Hồ sơ tài khoản", dau: { bang: "ho_so" } },
   { so: "0007", ten: "Nơi sinh trong hồ sơ", dau: { bang: "ho_so", cot: "noi_sinh" } },

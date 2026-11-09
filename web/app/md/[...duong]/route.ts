@@ -7,9 +7,11 @@ import { CHU_HUYEN_HOC, SO_HOI_DAP_HUYEN_HOC } from "@/lib/chu/trang-tinh";
 import { mucSoTrang } from "@/lib/so-trang";
 import { boNhan, taoChu } from "@/lib/chu-trang";
 import { taoLlmsTxt } from "@/lib/llms";
+import { urlDayDu } from "@/lib/seo";
 import { baiCms, tinhNangCms } from "@/lib/cms";
 import { htmlSangMd, locHtmlCms } from "@/lib/cms-html";
 import { layDauNhieuTrang, layNoiDungTrang, mdKhoi } from "@/lib/noi-dung-trang";
+import { DUONG_SINH_NN, dmy, duongSinhNN, mucLucSinhNN, nuocSinhNN } from "@/lib/sinh-nuoc-ngoai";
 
 /** ND-5: chữ khối CMS (mẫu cụm + ghi đè) nối vào cuối bản Markdown — cùng nội dung với trang HTML. */
 async function voiKhoi(md: string, duong: string, bien: Record<string, string>) {
@@ -61,6 +63,29 @@ export async function GET(_req: Request, { params: thamSo }: { params: Promise<{
     const noi = mdHuyenHoc({ c: taoChu(CHU_HUYEN_HOC, nd.chu), h1: boNhan(nd.dau.h1 ?? md.h1!), loiDan: boNhan(nd.dau.loiDan ?? md.loi_dan!),
       nam, lich: lichHH(nam), soDap: SO_HOI_DAP_HUYEN_HOC, cum });
     return traMd(await voiKhoi(noi, "/huyen-hoc", {}), "/huyen-hoc");
+  }
+  // Ý3: /sinh-o-nuoc-ngoai(.md) + /sinh-o-nuoc-ngoai/{nước}(.md) — cùng dữ kiện engine với trang HTML.
+  if (p[0] === "sinh-o-nuoc-ngoai" && p.length <= 2) {
+    if (p.length === 1) {
+      const ds = await mucLucSinhNN();
+      const md = mucSoTrang(DUONG_SINH_NN)!.mac_dinh;
+      const noi = [`# ${md.h1}`, "", md.loi_dan ?? "", "", "## Chọn nước nơi bạn sinh", "",
+        ...ds.map((n) => `- [${n.ten}](${urlDayDu(duongSinhNN(n.ma))}): ${n.mui_gio.join(" · ")} · ${n.gio_mua_he ? "có giờ mùa hè" : "không giờ mùa hè"}${n.nam_ban_cau ? " · Nam bán cầu" : ""}`), ""].join("\n");
+      return traMd(await voiKhoi(noi, DUONG_SINH_NN, {}), DUONG_SINH_NN);
+    }
+    const d = /^[a-z]{2}$/.test(p[1]!) ? await nuocSinhNN(p[1]!) : null;
+    if (!d) return KHONG_CO();
+    const duong = duongSinhNN(d.ma);
+    const noi = [`# ${d.tieu_de}`, "", "## Trả lời nhanh", "", d.tra_loi_nhanh, "", ...(d.ghi_chu_nuoc ? [d.ghi_chu_nuoc, ""] : []),
+      `## Múi giờ và giờ mùa hè từng thành phố năm ${d.nam}`, "", "| Thành phố | Giờ chuẩn | Giờ mùa hè | Lệch giờ mặt trời |", "|---|---|---|---|",
+      ...d.thanh_pho.map((t) => `| ${t.ten} | ${t.nhan_utc} | ${t.gio_mua_he ? t.doi_gio.map((m) => `${dmy(m.ngay)} ${m.gio} → ${m.sang}`).join("; ") : "không"} | ${t.lech_mat_troi_phut === null ? "—" : `${t.lech_mat_troi_phut > 0 ? "+" : ""}${t.lech_mat_troi_phut} phút`} |`), "",
+      "## Năm bạn sinh có giờ mùa hè không?", "", `| Vùng giờ | ${d.nam_mau.join(" | ")} |`, `|---|${d.nam_mau.map(() => "---").join("|")}|`,
+      ...d.lich_su_gio_mua_he.map((z) => `| ${z.zone} | ${z.cac_nam.map((o) => (o.co ? `Có (${o.moc.join("; ")})` : "Không")).join(" | ")} |`), "",
+      "## Lịch âm Việt – Trung", "", `${d.cau.lich_am} ${d.cau.tet}`, "",
+      ...(d.cong_tac.gio_mat_troi || d.cong_tac.mua_noi_sinh ? ["## Hai cách xem thêm", "", ...(d.cong_tac.gio_mat_troi ? [`- Giờ mặt trời thực: ${d.cau.mat_troi}`] : []), ...(d.cong_tac.mua_noi_sinh ? [`- Mùa nơi sinh (Bát tự): ${d.cau.mua}`] : []), ""] : []),
+      "## Nhập hồ sơ", "", ...d.huong_dan.map((h) => `- ${h}`), "", d.cau.ket, "",
+      "## Câu hỏi thường gặp", "", ...d.hoi_dap.flatMap((h) => [`### ${h.hoi}`, "", h.dap, ""])].join("\n");
+    return traMd(await voiKhoi(noi, duong, { nuoc: d.ma, ten: d.ten, nam: String(d.nam) }), duong);
   }
   // QH-URL: cụm /{mảng}/{cụm}(.md) và trang /{mảng}/{cụm}/{trang}(.md)
   if (p.length < 2 || p.length > 3) return KHONG_CO();
