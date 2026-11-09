@@ -97,8 +97,10 @@ test("trường phái: Giờ sinh theo đồng hồ ↔ mặt trời thực — 
 test("bát tự: công tắc Giờ sinh gửi gio_sinh cho engine", async ({ page }) => {
   await napHoSo(page, { ...HO_SO_MAU, ngay: 10, thang: 1, nam: 2000, gio: "13:05", noi_sinh: "nuoc_ngoai", mui_gio: "es-madrid" });
   await page.goto("/bat-tu");
+  // Khung Trường phái chỉ hiện ổn định trong mục "Lá số chi tiết" (khi lá số chưa tải nó hiện tạm rồi gỡ → chờ tải xong rồi mở).
+  await page.getByTestId("bat-tu-chi-tiet-mo").click({ timeout: 20_000 });
   const tp = page.getByTestId("truong-phai-bat-tu");
-  await expect(tp).toBeVisible({ timeout: 15_000 });
+  await expect(tp).toBeVisible();
   await tp.getByTestId("truong-phai-bat-tu-mo").click();
   const req = page.waitForRequest((r) => r.url().endsWith("/api/battu/la-so") && (r.postData() ?? "").includes('"gio_sinh":"mat_troi"'));
   await tp.getByRole("tab", { name: "Theo mặt trời thực" }).click();
