@@ -79,7 +79,7 @@ function veKhung(t){
 }
 
 // ---- phụ đề lời đọc: chia cụm ~7 từ, chạy theo thời lượng cảnh ----
-function cumVo(vo){ const tu = vo.split(/\s+/); const cum=[]; let cur=[];
+function cumVo(vo){ const tu = vo.replace(/\[[^\]]*\]/g, " ").replace(/\.\.\./g, "…").trim().split(/\s+/); const cum=[]; let cur=[];
   tu.forEach(w => { cur.push(w); if(cur.length>=7 || /[.,?:!;]$/.test(w) && cur.length>=4){ cum.push(cur.join(" ")); cur=[]; } });
   if(cur.length){ if(cur.length < 3 && cum.length) cum[cum.length-1] += " " + cur.join(" "); else cum.push(cur.join(" ")); }
   return cum; }
@@ -319,7 +319,8 @@ window.ve = function(t){
     const vao = cl((t - (t0 - CHUYEN)) / CHUYEN), ra = cl(((t1 + CHUYEN) - t) / CHUYEN), a = Math.min(vao, ra);
     if(a<=0) return; x.save(); x.globalAlpha = a; veCanh(sc, cl((t-t0)/(t1-t0)), t); x.restore(); });
   const cur = LICH.find(l => t >= l.t0 && t < l.t1) || LICH[LICH.length-1];
-  vePhuDe(cur.sc, cl((t-cur.t0)/(cur.t1-cur.t0)));
+  const gd = cur.sc.giay ? cl((t-cur.t0-0.15)/cur.sc.giay) : cl((t-cur.t0)/(cur.t1-cur.t0));
+  vePhuDe(cur.sc, gd);
   x.font=font(26); x.fillStyle="rgba(244,241,232,0.55)"; x.textAlign="center"; x.fillText("hieuban.com", W/2, 1660); x.textAlign="left";
 };
 </script></body></html>

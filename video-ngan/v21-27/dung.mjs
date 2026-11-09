@@ -11,7 +11,9 @@ import { fileURLToPath } from "node:url";
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const [ra, ...thamSo] = process.argv.slice(2);
 const chiAnh = thamSo.includes("--anh");
-const chon = thamSo.filter(s => !s.startsWith("--"));
+const iG = thamSo.indexOf("--giong");
+const GIONG = iG >= 0 ? JSON.parse(fs.readFileSync(thamSo[iG + 1], "utf8")) : null;
+const chon = thamSo.filter((s, i) => !s.startsWith("--") && !(iG >= 0 && i === iG + 1));
 const FPS = 24;
 fs.mkdirSync(ra, { recursive: true });
 
@@ -35,7 +37,11 @@ await trang.goto("file://" + path.join(DIR, "khung.html"));
 
 const bang = [];
 for (const v of ds) {
-  v.canh.forEach(sc => { sc.thoi_luong = thoiLuong(sc); });
+  v.canh.forEach((sc, i) => {
+    const g = GIONG && GIONG[`${v.ma}-${i + 1}`];
+    if (g) { sc.giay = g.giay; sc.tep = g.tep; sc.thoi_luong = Math.round((g.giay + 0.55 + (sc.loai === "cta" ? 1.4 : 0)) * 100) / 100; }
+    else sc.thoi_luong = thoiLuong(sc);
+  });
   const tong = await trang.evaluate(([vv, lg]) => window.nap(vv, lg), [v, logo]);
   bang.push({ ma: v.ma, tong, canh: v.canh.map(s => [s.loai, s.thoi_luong]) });
   if (chiAnh) {
@@ -61,6 +67,15 @@ for (const v of ds) {
   const moc = []; let t0 = 0; v.canh.forEach(sc => { moc.push(t0.toFixed(2)); t0 += sc.thoi_luong; });
   const wav = path.join(ra, `${v.ma}.wav`);
   execFileSync("python3", [path.join(DIR, "am-thanh.py"), wav, tong.toFixed(2), v.ma, moc.join(",")], { stdio: "inherit" });
+  if (GIONG) {
+    // giọng từng cảnh đặt đúng mốc (+0,15 giây), nhạc nền hạ thấp; trộn rồi chuẩn hoá âm lượng
+    const vao = ["-i", hinh, "-i", wav]; const loc = []; let k = 2; let t1 = 0;
+    v.canh.forEach(sc => { if (sc.tep) { vao.push("-i", sc.tep); const ms = Math.round((t1 + 0.15) * 1000); loc.push(`[${k}:a]aresample=44100,adelay=${ms}|${ms}[g${k}]`); k++; } t1 += sc.thoi_luong; });
+    const nhan = Array.from({ length: k - 2 }, (_, j) => `[g${j + 2}]`).join("");
+    loc.push(`[1:a]aresample=44100,volume=0.35[nen]`, `${nhan}amix=inputs=${k - 2}:normalize=0[gi]`, `[gi][nen]amix=inputs=2:normalize=0,loudnorm=I=-15:TP=-1.5:LRA=11[a]`);
+    execFileSync("ffmpeg", ["-y", "-loglevel", "error", ...vao, "-filter_complex", loc.join(";"), "-map", "0:v", "-map", "[a]",
+      "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-t", tong.toFixed(2), "-movflags", "+faststart", path.join(ra, `${v.ma}.mp4`)]);
+  } else
   execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-i", hinh, "-i", wav, "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest",
     "-movflags", "+faststart", path.join(ra, `${v.ma}.mp4`)]);
   fs.rmSync(hinh); fs.rmSync(wav);
