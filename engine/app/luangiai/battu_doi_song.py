@@ -177,7 +177,8 @@ def _hop_kb(chuong: str, o: dict, ma: str, can_cu: list[str], trong: float, mac_
 def _la_so(sinh: dict) -> dict:
     """Tứ trụ đã tính (CALC) + giới tính (chỉ để chọn sao phối ngẫu / con cái, không tính lại gì)."""
     return {**bt_calc.la_so(sinh["lich"], sinh["gioi_tinh"], sinh.get("gio_ty", "da_ty"),
-                            sinh.get("utc_lich", config.CALENDAR_MERIDIAN_TZ)), "_gioi_tinh": sinh["gioi_tinh"]}
+                            sinh.get("utc_lich", config.CALENDAR_MERIDIAN_TZ), nam_ban_cau=bool(sinh.get("nam_ban_cau"))),
+            "_gioi_tinh": sinh["gioi_tinh"]}
 
 
 # ------------------------------------------------------------------ phân tích (đọc số đã tính, không tính lại)

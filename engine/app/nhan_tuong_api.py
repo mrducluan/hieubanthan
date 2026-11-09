@@ -161,7 +161,7 @@ def _battu(inp: LuanGiaiNTInput) -> dict | None:
     from app.luangiai import battu_doi_song  # noqa: PLC0415
     try:
         sinh, _ = _sinh(inp.la_so)
-        ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"], sinh["gio_ty"], sinh["utc_lich"])
+        ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"], sinh["gio_ty"], sinh["utc_lich"], nam_ban_cau=sinh["nam_ban_cau"])
         pt = battu_doi_song.phan_tich(ls)
         return {"cach_1": {"hanh": pt["cach_1"]["hanh"]}, "cach_2": {"hanh": pt["cach_2"]["hanh"]}}
     except Exception:  # noqa: BLE001 — lá số lỗi (kể cả 422 của _sinh) → chương Tướng và lá số ghi thiếu, không vỡ báo cáo

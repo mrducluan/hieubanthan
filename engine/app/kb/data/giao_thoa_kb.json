@@ -145,6 +145,7 @@
   "cau_tu_soi": "Trong những điều bạn vừa gật đầu, điều nào bạn đã biết từ lâu — và điều nào bạn chỉ dám nhận khi có người khác nói ra?",
   "hop_dem": "{mon} ({n} hộp)",
   "can_cu": "Ghép từ các hộp bạn đã bấm \"Đúng với mình\": {ds}. Chỉ so mức các hộp ấy đã mang; không tính lại, không đổi mức môn nào.",
-  "tom_tat_cung_mon": "Từ {so} hộp bạn xác nhận đúng ({ds_mon}), các hộp chưa chạm nhau giữa hai cách xem, nhưng trong cùng một cách xem chúng nghiêng về một hướng — xem hộp bên dưới."
+  "tom_tat_cung_mon": "Từ {so} hộp bạn xác nhận đúng ({ds_mon}), các hộp chưa chạm nhau giữa hai cách xem, nhưng trong cùng một cách xem chúng nghiêng về một hướng — xem hộp bên dưới.",
+  "tieu_de_dien_dat": "Điểm giao thoa từ điều bạn đã xác nhận"
  }
 }

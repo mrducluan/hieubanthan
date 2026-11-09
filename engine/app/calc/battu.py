@@ -84,14 +84,18 @@ GIO_TY = ("da_ty", "sang_ngay")
 
 
 def la_so(lich: dt.datetime, gioi_tinh: str, gio_ty: str = "da_ty",
-          utc_lich: float = config.CALENDAR_MERIDIAN_TZ) -> dict:
+          utc_lich: float = config.CALENDAR_MERIDIAN_TZ, nam_ban_cau: bool = False) -> dict:
     """`lich`: giờ sinh theo kinh tuyến lịch UTC+7 (đã quy đổi múi giờ lịch sử). EN-6 BI-3: sinh ở nước ngoài thì
     `lich` là giờ chuẩn địa phương và `utc_lich` = múi giờ chuẩn nơi sinh — chỉ dùng để so mốc tiết khí (năm, tháng,
     khởi vận); trụ ngày, trụ giờ vẫn theo ngày giờ địa phương (ABROAD_LOCAL_TIME).
 
     TP-LICH — `gio_ty` cho người sinh 23:00–23:59 (người dùng chọn): "da_ty" (mặc định, chính sách đã chốt: giữ trụ
     ngày hôm đó, trụ giờ = Tý của ngày sau) hoặc "sang_ngay" (phái đổi ngày lúc 23:00: trụ ngày = ngày hôm sau).
-    Trụ giờ hai phái như nhau; chỉ trụ ngày (nhật chủ) và mọi thứ suy ra từ nhật chủ đổi theo."""
+    Trụ giờ hai phái như nhau; chỉ trụ ngày (nhật chủ) và mọi thứ suy ra từ nhật chủ đổi theo.
+
+    HTT-2 H1 — `nam_ban_cau=True` (người dùng chọn, chỉ mở cho nơi sinh ngoài chí tuyến Nam): CHỈ lớp điều hậu của dụng thần
+    cách 1 đọc theo mùa thực nơi sinh (tháng Tỵ Ngọ Mùi là giữa đông → cần Hỏa; Hợi Tý Sửu là giữa hè → cần Thủy). Trụ,
+    cách cục, cách 2, đại vận không đổi — không đảo trụ tháng (không có cổ thư; thuyết hiện đại, ghi rõ trong lời)."""
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
     if gio_ty not in GIO_TY:
@@ -131,7 +135,7 @@ def la_so(lich: dt.datetime, gioi_tinh: str, gio_ty: str = "da_ty",
     }
     kq["ngu_hanh"] = _ngu_hanh(tru, tang)
     kq["than"] = _than(kq["nhat_chu"]["ngu_hanh"], kq["ngu_hanh"]["diem"], tru[1]["chi"])
-    kq["dung_than"] = _dung_than(kq)
+    kq["dung_than"] = _dung_than(kq, nam_ban_cau)
     kq["dai_van"] = _dai_van(lich, t_utc, t_truoc, t_sau, can_nam, gioi_tinh, can_thang, chi_thang)
     co = []
     gan = min(abs((t_utc - t_truoc).total_seconds()), abs((t_sau - t_utc).total_seconds())) / 3600
@@ -215,7 +219,7 @@ def cach_cuc_tbct(ls: dict) -> dict:
             "can_thau_khac": [{"can": x, "thap_than": thap_than(nc, x)} for x in lo if x != c]}
 
 
-def _dung_than(kq: dict) -> dict:
+def _dung_than(kq: dict, nam_ban_cau: bool = False) -> dict:
     nh, th = kq["nhat_chu"]["ngu_hanh"], kq["than"]["ket_luan"]
     if th == "nhược":
         phu = [_hanh_sinh(nh), nh]
@@ -224,12 +228,22 @@ def _dung_than(kq: dict) -> dict:
     else:
         phu = []
     chi_thang = kq["tru"][1]["chi"]
-    dieu = ["Thủy"] if chi_thang in ("Tỵ", "Ngọ", "Mùi") else ["Hỏa"] if chi_thang in ("Hợi", "Tý", "Sửu") else []
+    he, dong = chi_thang in ("Tỵ", "Ngọ", "Mùi"), chi_thang in ("Hợi", "Tý", "Sửu")
+    if nam_ban_cau:
+        # Mùa thực nơi sinh đảo so với lịch tiết khí (lịch theo Bắc bán cầu): tháng "hè" theo lịch là giữa đông.
+        dieu = ["Hỏa"] if he else ["Thủy"] if dong else []
+        dh = {"hanh": dieu, "nguon": "trich_thien_tuy", "thuyet": "nam_ban_cau",
+              "giai_thich": f"sinh tháng {chi_thang}, nơi sinh ở Nam bán cầu nên đang "
+                            + ("giữa mùa đông — cần Hỏa sưởi" if he else "giữa mùa hè — cần Thủy làm mát" if dong else "mùa ôn hoà")
+                            + " (điều hậu theo mùa thực nơi sinh — thuyết hiện đại, không có trong cổ thư)"}
+    else:
+        dieu = ["Thủy"] if he else ["Hỏa"] if dong else []
+        dh = {"hanh": dieu, "nguon": "trich_thien_tuy",
+              "giai_thich": f"sinh tháng {chi_thang}" + (" — cần điều hoà khí hậu" if dieu else " — khí hậu ôn hoà")}
     cc = cach_cuc_tbct(kq)
     return {
         "phu_uc": {"hanh": phu, "nguon": "trich_thien_tuy", "giai_thich": f"thân {th}"},
-        "dieu_hau": {"hanh": dieu, "nguon": "trich_thien_tuy",
-                     "giai_thich": f"sinh tháng {chi_thang}" + (" — cần điều hoà khí hậu" if dieu else " — khí hậu ôn hoà")},
+        "dieu_hau": dh,
         "cach_cuc": {"ten": TEN_CACH[cc["ma"]], "can": cc["can_lap_cach"], **cc, "nguon": "tu_binh_chan_thuyen"},
         "chon": None,
     }

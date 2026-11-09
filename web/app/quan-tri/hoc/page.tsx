@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
 import { CumGopY } from "./CumGopY";
+import { SoanLaiLech } from "./SoanLaiLech";
 import { DungKhoVec, DuyetDeXuat, DuyetVec } from "./HocTuvi";
 import { mangCuaMa, nhanMau, TEN_LOAI_KIEM_CHUNG, TEN_MANG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
 import { goiEngineDaKiem } from "@/lib/proxy";
@@ -151,7 +152,8 @@ function KhungLechNgonNgu({ d }: { d: KetQuaLech | null | "chua_bat" }) {
       <h2 className="text-xl">Lệch theo ngôn ngữ — bản dịch có được thấy đúng như bản Việt?</h2>
       <p className="mt-1 text-sm text-fg-muted">
         Cùng một mã hộp, so tỉ lệ "Đúng với mình" ở bản tiếng Anh với bản Việt (kiểm định hai tỉ lệ, một phía: cần ≥ 100 phiếu mỗi bên,
-        lệch hơn 15 điểm và Z ≥ 1,96). Mã lệch = NGƯỜI DUYỆT xem lại lời ở <code>kb/data/en/</code>; máy không tự viết lại.
+        lệch hơn 15 điểm và Z ≥ 1,96). Mã lệch = NGƯỜI DUYỆT xem lại lời ở <code>kb/data/en/</code>; máy không tự viết lại — nút "Soạn lại nháp" chỉ gọi máy chuyển ngữ
+        soạn bản nháp cho đúng cụm KB của mã, người duyệt chọn chuỗi rồi mở PR (HTT-2 H6).
       </p>
       {d === "chua_bat" ? (
         <p role="alert" className="mt-2 text-sm text-cinnabar">Chưa đọc được (chạy migration 0034 trên Supabase; phiếu bản /en mới mang ngôn ngữ).</p>
@@ -167,7 +169,8 @@ function KhungLechNgonNgu({ d }: { d: KetQuaLech | null | "chua_bat" }) {
                 <tbody>
                   {d.lech.map((x) => (
                     <tr key={`${x.mau}|${x.ngon_ngu}`} className="border-t border-line/50 align-top" data-testid="ma-lech">
-                      <td className="py-1.5 pr-3"><span className="font-mono text-xs">{x.mau}</span><br /><span className="text-xs text-fg-muted">{nhanMau("doi_song", x.mau)}</span></td>
+                      <td className="py-1.5 pr-3"><span className="font-mono text-xs">{x.mau}</span><br /><span className="text-xs text-fg-muted">{nhanMau("doi_song", x.mau)}</span>
+                        <SoanLaiLech ma={x.mau} ngonNgu={x.ngon_ngu} /></td>
                       <td className="py-1.5 pr-3">{x.ngon_ngu}</td>
                       <td className="py-1.5 pr-3">{Math.round(x.ti_le_goc * 100)}% / {x.n_goc}</td>
                       <td className="py-1.5 pr-3">{Math.round(x.ti_le * 100)}% / {x.n}</td>

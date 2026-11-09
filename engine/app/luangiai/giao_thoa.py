@@ -181,4 +181,25 @@ def lap(phieu: list[dict], *, ca_nhan: dict | None = None, trong_so: dict | None
     return ra
 
 
-__all__ = ["lap", "phan_tich_ma"]
+def dien_dat(kq: dict) -> dict:
+    """HTT-2 H5 (NARRATIVE, chủ dự án duyệt 2026-11-09): AI chỉ diễn đạt LẠI các hộp giao thoa đã ghép (lớp tất định ở trên là
+    bản chính, luôn hiện trước) thành một đoạn liền mạch — nguồn = tóm tắt + từng hộp, không mã, không câu người dùng, không lá
+    số. Qua bộ kiểm chung `kiem_ai` (số, thuật ngữ lạ, cụm cấm, câu ý mới, độ dài); nhớ theo mã băm nguồn (ai_goi) nên cùng tổ
+    hợp hộp không tốn lượt lần hai. Chỉ bản tiếng Việt (bộ kiểm + lời nhắc là tiếng Việt); thiếu khoá / hết lượt / không qua
+    kiểm → `dien_dat = "mau"`, không có `van_ai`. Web bật bằng cài đặt `giao_thoa.dien_dat` (mặc định tắt)."""
+    import os  # noqa: PLC0415
+
+    from app import ngon_ngu  # noqa: PLC0415
+    if not kq.get("hop") or not ngon_ngu.la_viet() or not os.environ.get("OPENROUTER_API_KEY"):
+        return {**kq, "dien_dat": "mau"}
+    from app.narrative import luan_giai_van as lgv  # noqa: PLC0415
+    doan = [x for x in [kq.get("tom_tat", "")] if x]
+    doan += [f"{h['tieu_de']}: {h['noi_dung']}" + (f" Nên: {h['huong_xu_ly']}" if h.get("huong_xu_ly") else "") for h in kq["hop"]]
+    c = lgv._mot_chuong({"ma": MO_DUN, "tieu_de": kb()["mau"].get("tieu_de_dien_dat", "Điểm giao thoa từ điều bạn đã xác nhận"),
+                         "doan": doan}, "giao_thoa")
+    if c.get("che_do") != "llm" or not c.get("van_ai"):
+        return {**kq, "dien_dat": "mau"}
+    return {**kq, "van_ai": c["van_ai"], "dien_dat": "ai"}
+
+
+__all__ = ["dien_dat", "lap", "phan_tich_ma"]

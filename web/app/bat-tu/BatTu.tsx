@@ -56,10 +56,13 @@ export function BatTu() {
   const [gioTy, setGioTy] = useState<"da_ty" | "sang_ngay">("da_ty");
   // HTT-1: giờ sinh theo đồng hồ (mặc định) hay mặt trời thực tại kinh độ nơi sinh — engine lập lại tứ trụ.
   const [gioSinh, setGioSinh] = useState<"dong_ho" | "mat_troi">("dong_ho");
+  // HTT-2 H1: điều hậu theo mùa thực nơi sinh — chỉ hiện khi engine báo nơi sinh ở ngoài chí tuyến Nam (Sydney, Auckland…).
+  const [dieuHau, setDieuHau] = useState<"bac_ban_cau" | "noi_sinh">("bac_ban_cau");
   const goc = laSoTuHoSo(hoSo);
   const coKinhDo = !!goc?.noi_sinh && (goc.noi_sinh !== "nuoc_ngoai" || /^[a-z]{2}-(?!khac$)[a-z0-9_]+$/.test(goc.mui_gio ?? ""));
   // TP-LICH: lựa chọn giờ Tý đi theo mọi lời gọi (tứ trụ, lưu niên, hỏi đáp, luận giải) — engine tính lại.
-  const laSo = goc ? { ...goc, ...(gioTy === "sang_ngay" ? { gio_ty: gioTy } : {}), ...(gioSinh === "mat_troi" ? { gio_sinh: gioSinh } : {}) } : null;
+  const laSo = goc ? { ...goc, ...(gioTy === "sang_ngay" ? { gio_ty: gioTy } : {}), ...(gioSinh === "mat_troi" ? { gio_sinh: gioSinh } : {}),
+    ...(dieuHau === "noi_sinh" ? { dieu_hau: dieuHau } : {}) } : null;
   const { data: ls, loi, thuLai } = usePost<LaSoBatTu>("/api/battu/la-so", laSo);
   const [namXem, setNamXem] = useState(namNayVN);
   const { data: ln } = usePost<LuuNienBatTu>("/api/battu/luu-nien", laSo ? { la_so: laSo, nam_xem: namXem } : null);
@@ -86,10 +89,12 @@ export function BatTu() {
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   const lnDung = ln && ln.nam === namXem ? ln : null;
   const sinhGioTy = (goc?.birth_time ?? "") >= "23:00";
+  const namBanCau = Boolean(ls?.tuy_chon?.nam_ban_cau_kha_dung) || dieuHau === "noi_sinh";
   // TP-GON: khung trường phái đóng chỉ còn chip lựa chọn đang dùng; nhắc riêng khi sinh 23:00–23:59 (hai phái ra trụ ngày khác).
   const phaiDangDung: PhaiDangDung[] = [
     { nhan: gioTy === "da_ty" ? "Giờ Tý: giữ ngày" : "Giờ Tý: đổi ngày lúc 23:00", khac: gioTy !== "da_ty" },
     { nhan: gioSinh === "mat_troi" ? "Giờ mặt trời thực" : "Giờ đồng hồ", khac: gioSinh === "mat_troi" },
+    ...(namBanCau ? [{ nhan: dieuHau === "noi_sinh" ? "Mùa theo nơi sinh (Nam bán cầu)" : "Mùa theo lịch tiết khí", khac: dieuHau === "noi_sinh" }] : []),
     { nhan: "Năm, tháng theo tiết khí" },
   ];
   return (
@@ -157,6 +162,13 @@ export function BatTu() {
               goiY={coKinhDo
                 ? "Giờ mặt trời thực lệch theo kinh độ nơi sinh (4 phút mỗi độ) và theo mùa (tới ±16 phút); sinh gần ranh giới canh giờ thì trụ giờ đổi. Sách Việt thường lập theo đồng hồ."
                 : "Cần nơi sinh có kinh độ (tỉnh Việt Nam, hoặc chọn đúng thành phố khi sinh ở nước ngoài) — sửa ở hồ sơ."} />
+            {namBanCau && (
+              <DongPhai testId="chon-dieu-hau-bat-tu" ten="Mùa nơi sinh" nhan="Điều hậu (hành cần bù về khí hậu) đọc theo" giaTri={dieuHau}
+                doi={(v) => { setDieuHau(v); ghi("chart_interacted", { mo_dun: "battu", kind: "phai_dieu_hau", dieu_hau: v }); }}
+                luaChon={[["bac_ban_cau", "Lịch tiết khí (Bắc bán cầu)"], ["noi_sinh", "Mùa thực nơi sinh (Nam bán cầu)"]]}
+                noiBat nhanNoiBat="Áp dụng với bạn"
+                goiY="Bạn sinh ở Nam bán cầu: tháng theo lịch tiết khí là mùa hè thì nơi bạn sinh đang giữa đông. Chọn mùa thực thì chỉ hành cần bù về khí hậu (cách 1) đổi; tứ trụ, cách cục và cách 2 giữ nguyên. Đây là thuyết hiện đại, không có trong cổ thư." />
+            )}
             <DongGhiChu ten="Âm lịch">
               Bát tự tính theo tiết khí (vị trí Mặt Trời), không theo ngày âm — chọn lịch Việt hay Trung Quốc không làm đổi tứ trụ.
               Năm đổi tại Lập xuân, tháng đổi tại tiết.

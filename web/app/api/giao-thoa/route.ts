@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { themHocLuanGiai } from "@/lib/hoc-tuvi";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
+import { layCauHinh } from "@/lib/cau-hinh";
 import { MA_DOI_SONG } from "@/lib/kiem-chung";
 
 const Input = z.object({
@@ -19,7 +20,9 @@ export async function POST(req: Request): Promise<NextResponse> {
   const p = Input.safeParse(await req.json().catch(() => null));
   if (!p.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
   const hoc = await themHocLuanGiai({ loai: "doi_song", tienTo: "ds." }).catch(() => ({}));
-  const kq = await goiEngineDaKiem({ phieu: p.data.phieu, ...hoc }, "/v1/giao-thoa",
+  // HTT-2 H5: công tắc quản trị (mặc định tắt) — AI chỉ diễn đạt lại hộp đã ghép, chỉ bản Việt (engine tự bỏ qua bản Anh).
+  const dienDat = p.data.ngon_ngu === "vi" && (await layCauHinh<boolean>("giao_thoa.dien_dat").catch(() => false));
+  const kq = await goiEngineDaKiem({ phieu: p.data.phieu, ...hoc, ...(dienDat ? { dien_dat: true } : {}) }, "/v1/giao-thoa",
     { ...dauNguoiGoi(req), "x-ngon-ngu": p.data.ngon_ngu });
   if (!kq.ok) return kq.res;
   return NextResponse.json(kq.body);

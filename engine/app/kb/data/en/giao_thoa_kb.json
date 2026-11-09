@@ -141,6 +141,7 @@
   "cau_tu_soi": "Of the things you just agreed with, which did you already know — and which could you only admit once someone else said it?",
   "hop_dem": "{mon} ({n} boxes)",
   "can_cu": "Built from the boxes you marked \"resonates with me\": {ds}. Only the levels those boxes already carried are compared; nothing is recomputed and no reading's level is changed.",
-  "tom_tat_cung_mon": "From the {so} boxes you confirmed ({ds_mon}), no area is named by two readings at once, but within one reading they lean the same way — see the box below."
+  "tom_tat_cung_mon": "From the {so} boxes you confirmed ({ds_mon}), no area is named by two readings at once, but within one reading they lean the same way — see the box below.",
+  "tieu_de_dien_dat": "Where the readings meet"
  }
 }
