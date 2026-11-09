@@ -42,6 +42,6 @@ reset role;
 do $$
 begin
     assert not has_function_privilege('anon', 'kiem_chung_ma_hop_le(text,text,text)', 'execute'), 'anon gọi hàm kiểm mã';
-    assert not has_function_privilege('anon', 'ghi_kiem_chung(text,uuid,text,text,text,text)', 'execute'), 'anon ghi phiếu';
+    assert not exists (select 1 from information_schema.routine_privileges where routine_schema = 'public' and routine_name = 'ghi_kiem_chung' and grantee = 'anon'), 'anon ghi phiếu';  -- 0034 đổi chữ ký hàm
 end $$;
 select 'kiểm chứng 2 người (0021): OK' t;

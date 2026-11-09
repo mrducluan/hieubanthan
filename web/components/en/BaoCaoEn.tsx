@@ -1,9 +1,15 @@
 "use client";
 // QTE — bản hiển thị tiếng Anh của báo cáo khuôn `doi_song_1` (Tarot /en): chương → đoạn → hộp (tiêu đề, nội dung, việc nên
-// làm, "Why we say this" gập). Không kiểm chứng / Sao / lưu bài (các vòng đó là bản Việt); engine đã dựng mọi chữ.
+// làm, "Why we say this" gập). Không Sao / lưu bài (các vòng đó là bản Việt); engine đã dựng mọi chữ.
+// HTT-1: thêm nút "Resonates with me / Not quite me" (cùng mã kiểm chứng, phiếu mang ngon_ngu = en — migration 0034) và lớp 2
+// "Where the readings meet" khi người đọc đã bấm ≥ 2 hộp.
 import { useState } from "react";
 import type { BaoCaoDoiSong, ChuongDoiSongMo, Hop, Muc } from "@/components/luan-giai/kieu";
+import { GiaoThoa } from "@/components/luan-giai/GiaoThoa";
+import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { cn } from "@/lib/utils";
+
+const NHAN_KC = { hoi: "Does this ring true for you?", dung: "Resonates with me", chua_dung: "Not quite me", da_ghi: "Saved" };
 
 const NHAN_MUC_EN: Record<Muc, string> = { thuan: "Favourable", can_bang: "Mixed", can_chu_dong: "Take care" };
 const MAU_MUC: Record<Muc, string> = { thuan: "bg-jade/15 text-jade", can_bang: "bg-bg-2 text-fg-muted", can_chu_dong: "bg-[#f0b35c]/15 text-[#f0b35c]" };
@@ -13,7 +19,7 @@ export function ChipMuc({ muc }: { muc?: Muc | null }) {
   return muc ? <span className={cn("rounded-full px-2 py-0.5 text-xs font-medium", MAU_MUC[muc])}>{NHAN_MUC_EN[muc]}</span> : null;
 }
 
-function HopEn({ h }: { h: Hop }) {
+function HopEn({ h, phai }: { h: Hop; phai: string }) {
   const [mo, setMo] = useState(false);
   if (h.dang_xem_lai) return null;
   return (
@@ -31,12 +37,14 @@ function HopEn({ h }: { h: Hop }) {
           {mo && <ul className="mt-1 list-disc space-y-1 pl-5 text-xs text-fg-faint">{h.can_cu.map((c, i) => <li key={i}>{c}</li>)}</ul>}
         </div>
       )}
+      {h.ma_mau && <KiemChung loai="doi_song" mau={h.ma_mau} phai={h.phai ?? phai} ngonNgu="en" nhan={NHAN_KC} tyLeEngine={h} />}
     </li>
   );
 }
 
 export function BaoCaoEn({ bc, moSan = [] }: { bc: BaoCaoDoiSong & { ten?: string; cot_loi?: Hop[] }; moSan?: string[] }) {
   const chuong = bc.chuong.filter((c): c is ChuongDoiSongMo => !c.khoa);
+  const phai = bc.phai ?? (bc.mo_dun === "thanso" ? "pitago" : bc.mo_dun === "tarot" ? "tarot_tong_hop" : "nam_phai_viet");
   const [mo, setMo] = useState<Set<string>>(() => new Set([chuong[0]?.ma ?? "", ...moSan]));
   const bat = (ma: string) => setMo((s) => { const n = new Set(s); n.has(ma) ? n.delete(ma) : n.add(ma); return n; });
   return (
@@ -44,7 +52,7 @@ export function BaoCaoEn({ bc, moSan = [] }: { bc: BaoCaoDoiSong & { ten?: strin
       {bc.cot_loi && bc.cot_loi.length > 0 && (
         <section className="glass mb-6 rounded-2xl p-5">
           <h3 className="text-lg">What matters most</h3>
-          <ul className="mt-3 space-y-3">{bc.cot_loi.slice(0, 3).map((h, i) => <HopEn key={i} h={h} />)}</ul>
+          <ul className="mt-3 space-y-3">{bc.cot_loi.slice(0, 3).map((h, i) => <HopEn key={i} h={h} phai={phai} />)}</ul>
         </section>
       )}
       <nav aria-label="Chapters" className="mb-4 flex flex-wrap gap-2 text-xs">
@@ -66,7 +74,7 @@ export function BaoCaoEn({ bc, moSan = [] }: { bc: BaoCaoDoiSong & { ten?: strin
               {dang && (
                 <div className="mt-3 space-y-3">
                   {c.doan_truoc && c.doan.map((d, i) => <p key={i} className="text-fg-muted">{d}</p>)}
-                  {c.hop && c.hop.length > 0 && <ul className="space-y-3">{c.hop.map((h, i) => <HopEn key={i} h={h} />)}</ul>}
+                  {c.hop && c.hop.length > 0 && <ul className="space-y-3">{c.hop.map((h, i) => <HopEn key={i} h={h} phai={phai} />)}</ul>}
                   {!c.doan_truoc && c.doan.map((d, i) => <p key={i} className="text-fg-muted">{d}</p>)}
                   {c.mien_tru && <p className="text-xs text-fg-faint">{c.mien_tru}</p>}
                   {c.cau_tu_soi && <p className="rounded-xl border border-gold/30 bg-gold/5 px-4 py-2 text-sm"><span className="text-fg-faint">Ask yourself: </span>{c.cau_tu_soi}</p>}
@@ -76,6 +84,7 @@ export function BaoCaoEn({ bc, moSan = [] }: { bc: BaoCaoDoiSong & { ten?: strin
           );
         })}
       </div>
+      <GiaoThoa en />
       {bc.ket && <p className="mt-6 text-sm text-fg-muted">{bc.ket}</p>}
     </div>
   );

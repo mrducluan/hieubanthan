@@ -69,9 +69,9 @@ export function mangCuaMa(loai: string, mau: string): string {
   if (loai !== "doi_song") return "tuvi";
   const m = mau.split(".")[1] ?? "";
   if (m === "bt") return "battu";
-  return ["phongthuy", "kinhdich", "thanso", "nhantuong", "chan_dung", "tarot"].includes(m) ? m : "tuvi";
+  return ["phongthuy", "kinhdich", "thanso", "nhantuong", "chan_dung", "tarot", "giao_thoa", "tgt"].includes(m) ? m : "tuvi";
 }
-export const TEN_MANG: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", phongthuy: "Phong thuỷ", kinhdich: "Kinh Dịch", thanso: "Thần số", nhantuong: "Nhân tướng", chan_dung: "Chân dung tổng hợp", tarot: "Tarot" };
+export const TEN_MANG: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", phongthuy: "Phong thuỷ", kinhdich: "Kinh Dịch", thanso: "Thần số", nhantuong: "Nhân tướng", chan_dung: "Chân dung tổng hợp", tarot: "Tarot", giao_thoa: "Điểm giao thoa (HTT-1)", tgt: "Thời gian tới" };
 export const TEN_CHUONG_BT: Record<string, string> = {
   tong_quan: "Con người bạn", ngu_hanh: "Năng lượng (ngũ hành)", cuoc_doi: "Các giai đoạn cuộc đời", su_nghiep: "Công việc",
   tien_bac: "Tiền bạc", tinh_cam: "Tình yêu & hôn nhân", gia_dinh: "Gia đình", hoc_tap: "Học & nghĩ",
@@ -108,6 +108,12 @@ export function nhanMau(loai: string, mau: string): string {
   if (loai === "hai_nguoi") {
     const [, tc, kieu, qh] = p;
     return ["2 người", TEN_TIEU_CHI_HN[tc ?? ""] ?? tc, (kieu ?? "").replace(/_/g, " "), TEN_QUAN_HE_HN[qh ?? ""] ?? qh].join(" · ");
+  }
+  if (loai === "doi_song" && p[1] === "giao_thoa") {
+    // HTT-1: ds.giao_thoa.<mảng|môn>.<mon|mang|lech>.<mức>.<n>
+    const [, , a, kieu, muc, n] = p;
+    const TEN_GT: Record<string, string> = { mon: "nhiều môn cùng nói", mang: "nhiều mảng cùng mức", lech: "chỗ chưa khớp", hon_hop: "mỗi cách một mặt", khong_ro: "chưa rõ mức" };
+    return ["Điểm giao thoa", (a ?? "").replace(/_/g, " "), TEN_GT[kieu ?? ""] ?? kieu, ...(muc ? [TEN_PHAN_DS[muc] ?? TEN_GT[muc] ?? muc] : []), ...(n ? [`${n} ${kieu === "mon" ? "môn" : "mảng"}`] : [])].join(" · ");
   }
   if (loai === "doi_song" && p[1] === "thanso") {
     const [, , ...con] = p;

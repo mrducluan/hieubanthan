@@ -18,6 +18,8 @@ const Input = z.object({
   mau: z.string().regex(/^[a-z0-9_.+-]{3,60}$/),
   phai: z.string().regex(/^[a-z0-9_]{2,32}$/),
   ket_qua: z.enum(["dung", "chua_dung"]),
+  /** HTT-1 (migration 0034): ngôn ngữ trang người bấm — so lệch bản dịch ở tầng HỌC. */
+  ngon_ngu: z.enum(["vi", "en"]).default("vi"),
 }).strict()
   .refine((d) => d.loai !== "doi_song" || MA_DOI_SONG.test(d.mau), { path: ["mau"] })
   .refine((d) => d.loai !== "hai_nguoi" || (MA_HAI_NGUOI.test(d.mau) && PHAI_HAI_NGUOI.test(d.phai)), { path: ["mau"] });
@@ -44,9 +46,10 @@ export async function POST(req: Request) {
     const khoa = khoaHoc(req, phien?.user.id ?? null);
     if (!khoa) return NextResponse.json({ ok: false, ly_do: "chua_bat" });
     const d = vao.data;
-    const { data, error } = await dv.rpc("ghi_kiem_chung", {
-      p_khoa: khoa, p_user_id: phien?.user.id ?? null, p_loai: d.loai, p_mau: d.mau, p_phai: d.phai, p_ket_qua: d.ket_qua,
-    });
+    const than = { p_khoa: khoa, p_user_id: phien?.user.id ?? null, p_loai: d.loai, p_mau: d.mau, p_phai: d.phai, p_ket_qua: d.ket_qua };
+    // HTT-1: gọi bản 7 tham số (0034); DB chưa chạy 0034 → PGRST202 (không thấy hàm khớp) → gọi lại bản 6 tham số của 0017.
+    let { data, error } = await dv.rpc("ghi_kiem_chung", { ...than, p_ngon_ngu: d.ngon_ngu });
+    if (error?.code === "PGRST202") ({ data, error } = await dv.rpc("ghi_kiem_chung", than));
     if (error) {
       // PGRST202 = chưa có hàm (chưa chạy 0017) → "chưa bật" như cũ; lỗi khác (vd vi phạm ràng buộc `loai` khi 0021
       // chưa chạy mà hàm cũ lại nhận) thì báo một lần.

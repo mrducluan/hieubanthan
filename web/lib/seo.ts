@@ -32,15 +32,17 @@ export function urlDayDu(duong: string): string {
 
 /** SEO-K (mục 7): thực thể chủ đề có liên kết Wikipedia (sameAs) — giúp Google/AI nối trang với đúng khái niệm.
  *  Chỉ ghi URL đã chắc chắn tồn tại; thêm mục mới phải mở thử link trước. */
+// HTT-1 (2026-11-09): thêm thực thể Wikidata — QID tra bằng API wbgetentities theo đúng trang Wikipedia đang dẫn (không
+// lấy QID trong tài liệu Drive: cả 5 mã đó trỏ sang làng, dụng cụ, máy bay). Tarot dùng "tarot card reading" (Q126645).
 export const THUC_THE = {
-  "than-so": { name: "Thần số học", alternateName: "Numerology", sameAs: ["https://en.wikipedia.org/wiki/Numerology"] },
-  "tu-vi": { name: "Tử vi Đẩu Số", alternateName: "Zi Wei Dou Shu", sameAs: ["https://en.wikipedia.org/wiki/Ziwei_doushu"] },
-  "bat-tu": { name: "Bát tự (Tứ trụ)", alternateName: "Four Pillars of Destiny", sameAs: ["https://en.wikipedia.org/wiki/Four_Pillars_of_Destiny"] },
-  "kinh-dich": { name: "Kinh Dịch", alternateName: "I Ching", sameAs: ["https://en.wikipedia.org/wiki/I_Ching", "https://vi.wikipedia.org/wiki/Kinh_D%E1%BB%8Bch"] },
-  "phong-thuy": { name: "Phong thuỷ", alternateName: "Feng shui", sameAs: ["https://en.wikipedia.org/wiki/Feng_shui", "https://vi.wikipedia.org/wiki/Phong_th%E1%BB%A7y"] },
-  "nhan-tuong": { name: "Nhân tướng học", alternateName: "Chinese physiognomy", sameAs: ["https://en.wikipedia.org/wiki/Physiognomy", "https://vi.wikipedia.org/wiki/Nh%C3%A2n_t%C6%B0%E1%BB%9Bng_h%E1%BB%8Dc"] },
-  tarot: { name: "Tarot", alternateName: "Tarot card reading", sameAs: ["https://en.wikipedia.org/wiki/Tarot", "https://vi.wikipedia.org/wiki/Tarot"] },
-  lich: { name: "Âm lịch", alternateName: "Chinese calendar", sameAs: ["https://en.wikipedia.org/wiki/Chinese_calendar"] },
+  "than-so": { name: "Thần số học", alternateName: "Numerology", sameAs: ["https://en.wikipedia.org/wiki/Numerology", "https://www.wikidata.org/wiki/Q140732"] },
+  "tu-vi": { name: "Tử vi Đẩu Số", alternateName: "Zi Wei Dou Shu", sameAs: ["https://en.wikipedia.org/wiki/Ziwei_doushu", "https://www.wikidata.org/wiki/Q1056680"] },
+  "bat-tu": { name: "Bát tự (Tứ trụ)", alternateName: "Four Pillars of Destiny", sameAs: ["https://en.wikipedia.org/wiki/Four_Pillars_of_Destiny", "https://www.wikidata.org/wiki/Q843288"] },
+  "kinh-dich": { name: "Kinh Dịch", alternateName: "I Ching", sameAs: ["https://en.wikipedia.org/wiki/I_Ching", "https://vi.wikipedia.org/wiki/Kinh_D%E1%BB%8Bch", "https://www.wikidata.org/wiki/Q181937"] },
+  "phong-thuy": { name: "Phong thuỷ", alternateName: "Feng shui", sameAs: ["https://en.wikipedia.org/wiki/Feng_shui", "https://vi.wikipedia.org/wiki/Phong_th%E1%BB%A7y", "https://www.wikidata.org/wiki/Q170537"] },
+  "nhan-tuong": { name: "Nhân tướng học", alternateName: "Chinese physiognomy", sameAs: ["https://en.wikipedia.org/wiki/Physiognomy", "https://vi.wikipedia.org/wiki/Nh%C3%A2n_t%C6%B0%E1%BB%9Bng_h%E1%BB%8Dc", "https://www.wikidata.org/wiki/Q841933"] },
+  tarot: { name: "Tarot", alternateName: "Tarot card reading", sameAs: ["https://en.wikipedia.org/wiki/Tarot", "https://vi.wikipedia.org/wiki/Tarot", "https://www.wikidata.org/wiki/Q126645"] },
+  lich: { name: "Âm lịch", alternateName: "Chinese calendar", sameAs: ["https://en.wikipedia.org/wiki/Chinese_calendar", "https://www.wikidata.org/wiki/Q134032"] },
 } as const satisfies Record<MangAnh, { name: string; alternateName: string; sameAs: readonly string[] }>;
 
 export function ldThucThe(mang: MangAnh | null | undefined, ten?: string) {

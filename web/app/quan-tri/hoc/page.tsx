@@ -9,7 +9,8 @@ import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
 import { CumGopY } from "./CumGopY";
 import { DungKhoVec, DuyetDeXuat, DuyetVec } from "./HocTuvi";
-import { mangCuaMa, TEN_LOAI_KIEM_CHUNG, TEN_MANG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
+import { mangCuaMa, nhanMau, TEN_LOAI_KIEM_CHUNG, TEN_MANG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
+import { goiEngineDaKiem } from "@/lib/proxy";
 
 export const metadata: Metadata = { title: "Học từ góp ý" };
 
@@ -60,14 +61,17 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
   const tt = TT.some(([k]) => k === sp.tt) ? sp.tt! : "cho_duyet";
   const ttVec = TT_VEC.some(([k]) => k === sp.vec) ? sp.vec! : "cho_duyet";
   const ttDx = TT_DX.some(([k]) => k === sp.dx) ? sp.dx! : "cho_duyet";
-  const [{ data, error }, tv, dx] = await Promise.all([
+  const [{ data, error }, tv, dx, nn] = await Promise.all([
     p.sb.rpc("qt_cum_bat_thuong", { p_trang_thai: tt }),
     p.sb.rpc("thong_ke_hoc_tuvi", { p_trang_thai: ttVec }),
     p.sb.rpc("thong_ke_de_xuat_luat", { p_trang_thai: ttDx }),
+    p.sb.rpc("ty_le_kiem_chung_ngon_ngu", { p_toi_thieu: 30 }),      // HTT-1 (migration 0034)
   ]);
+  const lech = await lechNgonNgu(nn.error ? null : (nn.data as DongNgonNgu[]));
   const khungTuvi = (<>
     <KhungTuvi d={tv.error ? null : (tv.data as HocTuvi)} ttVec={ttVec} tt={tt} />
     <KhungDeXuat d={dx.error ? null : (dx.data as HocDeXuat)} ttDx={ttDx} tt={tt} ttVec={ttVec} />
+    <KhungLechNgonNgu d={lech} />
   </>);
   if (error) {
     return (
@@ -122,6 +126,62 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
       )}
       {khungTuvi}
     </div>
+  );
+}
+
+// HTT-1 — lệch tỉ lệ "Đúng với mình" theo ngôn ngữ: web đọc số từ Supabase (0034) rồi đưa engine tính z-test (engine không chạm
+// DB); kết quả là hàng đợi cho NGƯỜI DUYỆT xem lại bản chuyển ngữ — máy không tự sửa lời.
+interface DongNgonNgu { mau: string; ngon_ngu: string; dung: number; chua_dung: number }
+interface MaLech { mau: string; ngon_ngu: string; n_goc: number; ti_le_goc: number; n: number; ti_le: number; delta: number; z: number; p: number; de_xuat: string }
+interface KetQuaLech { lech: MaLech[]; so_ma_so: number; so_cap_du: number; nguong: { toi_thieu: number; delta: number; z: number } }
+
+async function lechNgonNgu(dong: DongNgonNgu[] | null): Promise<KetQuaLech | null | "chua_bat"> {
+  if (!dong) return "chua_bat";
+  const nnKhac = new Set(dong.filter((d) => d.ngon_ngu !== "vi").map((d) => d.mau));
+  const gui = dong.filter((d) => nnKhac.has(d.mau));
+  if (!gui.length) return { lech: [], so_ma_so: 0, so_cap_du: 0, nguong: { toi_thieu: 100, delta: 0.15, z: 1.96 } };
+  const kq = await goiEngineDaKiem({ dong: gui.slice(0, 10_000) }, "/v1/quan-tri/lech-ngon-ngu",
+    process.env.ENGINE_QUAN_TRI_KEY ? { "x-quan-tri-key": process.env.ENGINE_QUAN_TRI_KEY } : {}).catch(() => null);
+  return kq && kq.ok ? (kq.body as KetQuaLech) : null;
+}
+
+function KhungLechNgonNgu({ d }: { d: KetQuaLech | null | "chua_bat" }) {
+  return (
+    <Card data-testid="qt-lech-ngon-ngu">
+      <h2 className="text-xl">Lệch theo ngôn ngữ — bản dịch có được thấy đúng như bản Việt?</h2>
+      <p className="mt-1 text-sm text-fg-muted">
+        Cùng một mã hộp, so tỉ lệ "Đúng với mình" ở bản tiếng Anh với bản Việt (kiểm định hai tỉ lệ, một phía: cần ≥ 100 phiếu mỗi bên,
+        lệch hơn 15 điểm và Z ≥ 1,96). Mã lệch = NGƯỜI DUYỆT xem lại lời ở <code>kb/data/en/</code>; máy không tự viết lại.
+      </p>
+      {d === "chua_bat" ? (
+        <p role="alert" className="mt-2 text-sm text-cinnabar">Chưa đọc được (chạy migration 0034 trên Supabase; phiếu bản /en mới mang ngôn ngữ).</p>
+      ) : d === null ? (
+        <p role="alert" className="mt-2 text-sm text-cinnabar">Engine chưa trả kết quả — thử tải lại.</p>
+      ) : (
+        <>
+          <p className="mt-2 text-sm text-fg-muted">{d.so_ma_so} mã có phiếu ở ngôn ngữ khác · {d.so_cap_du} cặp đủ mẫu · <b className="text-fg">{d.lech.length}</b> mã lệch.</p>
+          {d.lech.length > 0 && (
+            <div className="mt-3 overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead><tr className="text-left text-xs text-fg-muted"><th className="py-1 pr-3">Mã</th><th className="py-1 pr-3">Ngôn ngữ</th><th className="py-1 pr-3">Bản Việt</th><th className="py-1 pr-3">Bản dịch</th><th className="py-1 pr-3">Lệch</th><th className="py-1">Z</th></tr></thead>
+                <tbody>
+                  {d.lech.map((x) => (
+                    <tr key={`${x.mau}|${x.ngon_ngu}`} className="border-t border-line/50 align-top" data-testid="ma-lech">
+                      <td className="py-1.5 pr-3"><span className="font-mono text-xs">{x.mau}</span><br /><span className="text-xs text-fg-muted">{nhanMau("doi_song", x.mau)}</span></td>
+                      <td className="py-1.5 pr-3">{x.ngon_ngu}</td>
+                      <td className="py-1.5 pr-3">{Math.round(x.ti_le_goc * 100)}% / {x.n_goc}</td>
+                      <td className="py-1.5 pr-3">{Math.round(x.ti_le * 100)}% / {x.n}</td>
+                      <td className="py-1.5 pr-3 text-gold">−{Math.round(x.delta * 100)} điểm</td>
+                      <td className="py-1.5">{x.z}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
+      )}
+    </Card>
   );
 }
 

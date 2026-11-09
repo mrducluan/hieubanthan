@@ -55,3 +55,25 @@ def soan_nhap(vao: SoanNhapVao) -> dict:
 @router.post("/kiem-dinh")
 def kiem_dinh(vao: KiemDinhVao) -> dict:
     return {"ket_qua": [quan_tri_ai.kiem_dinh(m.moi, m.cu) for m in vao.muc]}
+
+
+# ---------------------------------------------------------------- HTT-1: lệch tỉ lệ "Đúng với mình" theo ngôn ngữ
+class DongTyLe(BaseModel):
+    mau: str = Field(pattern=r"^[a-z0-9_.+-]{3,60}$")
+    ngon_ngu: str = Field(pattern=r"^[a-z]{2}(-[a-z]{2,4})?$")
+    dung: int = Field(ge=0, le=100_000_000)
+    chua_dung: int = Field(ge=0, le=100_000_000)
+
+
+class LechNgonNguVao(BaseModel):
+    dong: list[DongTyLe] = Field(default_factory=list, max_length=10_000)
+    toi_thieu: int = Field(default=100, ge=10, le=100_000)
+    delta: float = Field(default=0.15, ge=0.01, le=0.9)
+
+
+@router.post("/lech-ngon-ngu")
+def lech_ngon_ngu(vao: LechNgonNguVao) -> dict:
+    """Web máy chủ đọc `ty_le_kiem_chung_ngon_ngu()` (migration 0034) rồi gửi số vào đây; engine chỉ tính (không chạm DB),
+    trả danh sách mã lệch cho NGƯỜI DUYỆT — không sửa gì."""
+    from app.luangiai import lech_ngon_ngu as ln  # noqa: PLC0415
+    return ln.quet([d.model_dump() for d in vao.dong], toi_thieu=vao.toi_thieu, delta=vao.delta)

@@ -66,19 +66,39 @@ def sat_bien_gio_ty(calendar_dt: datetime) -> bool:
     return calendar_dt.hour >= start or calendar_dt.hour < end
 
 
-def phuong_trinh_thoi_gian(d: date) -> float:
-    """Phương trình thời gian (phút): giờ mặt trời thực − giờ mặt trời trung bình.
+def phuong_trinh_thoi_gian_utc(t_utc: datetime) -> float:
+    """Phương trình thời gian (phút) tại thời điểm UTC (naive): giờ mặt trời thực − giờ mặt trời trung bình.
 
-    Công thức xấp xỉ chuẩn (sai ≤ ~1 phút) — đủ cho CẢNH BÁO, không dùng để an sao.
+    HTT-1: E = L0 − 0,0057183° − α (Meeus 28.3, bỏ số hạng Δψ·cos ε ≤ 1 giây) với L0 = kinh độ trung bình, α = xích kinh
+    biểu kiến tính từ kinh độ biểu kiến VSOP87 đang dùng cho tiết khí (`tietkhi`) — sai vài giây, thay công thức xấp xỉ
+    ~1 phút trước đây. Vẫn CHỈ để cảnh báo giờ mặt trời thực (SOLAR_TIME_ADJUST=False), không an sao.
     """
-    b = math.radians(360.0 / 365.0 * (d.timetuple().tm_yday - 81))
-    return 9.87 * math.sin(2 * b) - 7.53 * math.cos(b) - 1.5 * math.sin(b)
+    from app.calc import tietkhi  # noqa: PLC0415 — tránh vòng import (tietkhi là tầng CALC thuần)
+    jde = tietkhi._jd(t_utc) + tietkhi.delta_t(tietkhi._nam_thap_phan(t_utc)) / 86400
+    t = (jde - 2451545.0) / 36525
+    l0 = (280.46646 + 36000.76983 * t + 0.0003032 * t * t) % 360
+    lam = math.radians(tietkhi._kinh_do_jde(jde))
+    eps = math.radians(23.439291111 - (46.8150 * t + 0.00059 * t * t - 0.001813 * t ** 3) / 3600)
+    alpha = math.degrees(math.atan2(math.cos(eps) * math.sin(lam), math.cos(lam))) % 360
+    e_do = (l0 - 0.0057183 - alpha + 180) % 360 - 180
+    return round(e_do * 4, 3)
+
+
+def phuong_trinh_thoi_gian(d: date) -> float:
+    """Phương trình thời gian (phút) của một ngày — lấy tại trưa kinh tuyến lịch (12:00 UTC+7)."""
+    return phuong_trinh_thoi_gian_utc(datetime(d.year, d.month, d.day, 12) - timedelta(hours=config.CALENDAR_MERIDIAN_TZ))
 
 
 def gio_mat_troi_thuc(calendar_dt: datetime, kinh_do: float) -> datetime:
-    """Giờ mặt trời thực tại kinh độ `kinh_do` từ giờ kinh tuyến lịch (UTC+7, 105°Đ)."""
-    lech = (kinh_do - config.CALENDAR_MERIDIAN_TZ * 15.0) * 4.0 + phuong_trinh_thoi_gian(calendar_dt.date())
-    return calendar_dt + timedelta(minutes=lech)
+    """Giờ mặt trời thực tại kinh độ `kinh_do` từ giờ kinh tuyến lịch (UTC+7, 105°Đ) — vỏ mỏng của bản UTC bên dưới."""
+    # Giờ mặt trời thực là "giờ địa phương biểu kiến" — không có khung múi giờ để cộng lại.
+    return gio_mat_troi_thuc_utc(calendar_dt - timedelta(hours=config.CALENDAR_MERIDIAN_TZ), kinh_do)
+
+
+def gio_mat_troi_thuc_utc(t_utc: datetime, kinh_do: float) -> datetime:
+    """HTT-1: giờ mặt trời thực tại kinh độ `kinh_do` (độ Đông dương, Tây âm) từ thời điểm UTC — dùng cho người sinh ở
+    nước ngoài (đồng hồ địa phương → UTC qua tzdata rồi mới cộng 4 phút/độ + phương trình thời gian)."""
+    return t_utc + timedelta(minutes=kinh_do * 4.0 + phuong_trinh_thoi_gian_utc(t_utc))
 
 
 def chi_gio(dt: datetime) -> int:

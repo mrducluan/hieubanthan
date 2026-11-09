@@ -20,6 +20,7 @@ import { BieuDoNguHanh, DaiVanHaiCach, ThanhThan } from "./BieuDoBatTu";
 import { DongMuoiNam } from "./DongMuoiNam";
 import { SaoLuuNam } from "./SaoLuuNam";
 import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
+import { GiaoThoa } from "./GiaoThoa";
 import { ChuQua } from "./ChuQua";
 import { GocNhinKhac } from "./GocNhinKhac";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
@@ -203,6 +204,8 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
           </div>
           {doc.length > 1 && <CotChuong ds={dsMuc} dang={dang} onChon={(ma) => moChuong(ma, true)} moTatCa={moTatCa} />}
         </div>
+        {/* HTT-1: lớp 2 — ghép "điểm giao thoa" từ các hộp người đọc đã bấm "Đúng với mình" (≥ 2), tất định ở engine. */}
+        {kiemChung && <GiaoThoa />}
         <p className="mt-8 border-t border-line pt-4 text-sm text-fg-faint">{bc.ket}</p>
         {chanTrang}
       </article>

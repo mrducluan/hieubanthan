@@ -117,7 +117,13 @@
    "ma": "vo_chinh_dieu",
    "vi": "Vô chính diệu",
    "en": "empty palace (no major star)",
-   "mang": "tu_vi"
+   "mang": "tu_vi",
+   "cam_en": [
+    "empty destiny",
+    "empty fate",
+    "no destiny",
+    "no identity"
+   ]
   },
   {
    "ma": "cuc",
@@ -231,7 +237,12 @@
    "ma": "hoa_ky",
    "vi": "Hoá Kỵ",
    "en": "Hua Ji (Obstacle transformation)",
-   "mang": "tu_vi"
+   "mang": "tu_vi",
+   "cam_en": [
+    "jealousy star",
+    "envy star",
+    "taboo star"
+   ]
   },
   {
    "ma": "tuan",
@@ -261,7 +272,11 @@
    "ma": "luc_sat",
    "vi": "Lục sát",
    "en": "Six Malefic stars",
-   "mang": "tu_vi"
+   "mang": "tu_vi",
+   "cam_en": [
+    "six murders",
+    "six deaths"
+   ]
   },
   {
    "ma": "luc_cat",
@@ -381,7 +396,12 @@
    "ma": "that_sat",
    "vi": "Thất Sát",
    "en": "Qi Sha (Seven Killings)",
-   "mang": "tu_vi"
+   "mang": "tu_vi",
+   "cam_en": [
+    "seven murders",
+    "seven killers",
+    "seven deaths"
+   ]
   },
   {
    "ma": "pha_quan",
@@ -471,7 +491,11 @@
    "ma": "dia_kiep",
    "vi": "Địa Kiếp",
    "en": "Di Jie (Earth Robbery)",
-   "mang": "tu_vi"
+   "mang": "tu_vi",
+   "cam_en": [
+    "earth disaster",
+    "earth catastrophe"
+   ]
   },
   {
    "ma": "hong_loan",
@@ -495,7 +519,11 @@
    "ma": "thien_hinh",
    "vi": "Thiên Hình",
    "en": "Tian Xing (Sky Punishment)",
-   "mang": "tu_vi"
+   "mang": "tu_vi",
+   "cam_en": [
+    "sky torture",
+    "heavenly punishment of"
+   ]
   },
   {
    "ma": "thien_dieu",
@@ -699,7 +727,11 @@
    "ma": "kiep_tai",
    "vi": "Kiếp Tài",
    "en": "Rob Wealth",
-   "mang": "bat_tu"
+   "mang": "bat_tu",
+   "cam_en": [
+    "bankruptcy",
+    "robbery star"
+   ]
   },
   {
    "ma": "thuc_than",
@@ -735,7 +767,12 @@
    "ma": "that_sat_battu",
    "vi": "Thất Sát",
    "en": "Seven Killings",
-   "mang": "bat_tu"
+   "mang": "bat_tu",
+   "cam_en": [
+    "seven murders",
+    "seven killers",
+    "seven deaths"
+   ]
   },
   {
    "ma": "chinh_an",
@@ -789,7 +826,11 @@
    "ma": "ky_than",
    "vi": "Kỵ thần",
    "en": "Taboo God",
-   "mang": "bat_tu"
+   "mang": "bat_tu",
+   "cam_en": [
+    "evil god",
+    "demon"
+   ]
   },
   {
    "ma": "dai_van",
@@ -807,7 +848,11 @@
    "ma": "than_sat",
    "vi": "Thần sát",
    "en": "Symbolic Stars (Shen Sha)",
-   "mang": "bat_tu"
+   "mang": "bat_tu",
+   "cam_en": [
+    "evil spirits",
+    "demons"
+   ]
   },
   {
    "ma": "thien_at_quy_nhan",
@@ -999,7 +1044,12 @@
    "ma": "hung",
    "vi": "Hung",
    "en": "misfortune",
-   "mang": "kinh_dich"
+   "mang": "kinh_dich",
+   "cam_en": [
+    "disaster",
+    "catastrophe",
+    "doom"
+   ]
   },
   {
    "ma": "vo_cuu",
@@ -1125,13 +1175,23 @@
    "ma": "tuyet_menh",
    "vi": "Tuyệt Mệnh",
    "en": "Jue Ming (Total Loss)",
-   "mang": "phong_thuy"
+   "mang": "phong_thuy",
+   "cam_en": [
+    "death",
+    "end of life",
+    "life-ending",
+    "fatal"
+   ]
   },
   {
    "ma": "ngu_quy",
    "vi": "Ngũ Quỷ",
    "en": "Wu Gui (Five Ghosts)",
-   "mang": "phong_thuy"
+   "mang": "phong_thuy",
+   "cam_en": [
+    "five demons",
+    "five devils"
+   ]
   },
   {
    "ma": "luc_sat_phongthuy",
@@ -1143,7 +1203,11 @@
    "ma": "hoa_hai",
    "vi": "Hoạ Hại",
    "en": "Huo Hai (Mishap)",
-   "mang": "phong_thuy"
+   "mang": "phong_thuy",
+   "cam_en": [
+    "disaster",
+    "calamity"
+   ]
   },
   {
    "ma": "toa",
@@ -1333,7 +1397,24 @@
   "\\b(cancer|diabetes|tumou?r|stroke)\\b",
   "\\blottery numbers?\\b",
   "\\b(buy|sell) (this|these) (stock|shares|coin)s?\\b",
-  "\\b(lucky charm|amulet|talisman)s? (to|will) (fix|cure|remove)\\b"
+  "\\b(lucky charm|amulet|talisman)s? (to|will) (fix|cure|remove)\\b",
+  "\\bdelve(s|d)? into\\b",
+  "\\b(rich )?tapestry\\b",
+  "\\btestament to\\b",
+  "\\bbeacon of\\b",
+  "\\bsymphony of\\b",
+  "\\bunlock (your )?(true |full |hidden )?potential\\b",
+  "\\bin conclusion\\b",
+  "\\bnavigat(e|ing) the (complexities|landscape|intricacies)\\b",
+  "\\bembark on\\b",
+  "\\bgame[- ]changer\\b",
+  "\\bit is important to note\\b",
+  "\\b(destined|fated|doomed) (to|for)\\b",
+  "\\binevitabl(e|y)\\b",
+  "\\bbad omen\\b",
+  "\\bwill (inevitably|surely|undoubtedly)\\b",
+  "\\byour fate is\\b"
  ],
- "_cum_cam_en": "Cụm cấm trong bản tiếng Anh (tương đương cum_cam tiếng Việt + mục pháp lý QTE-1: không 'accurate/guaranteed', không phán bệnh/chết, không lời khuyên đầu tư, không vật phẩm giải hạn). Regex, không phân biệt hoa thường."
+ "_cum_cam_en": "Cụm cấm trong bản tiếng Anh (tương đương cum_cam tiếng Việt + mục pháp lý QTE-1: không 'accurate/guaranteed', không phán bệnh/chết, không lời khuyên đầu tư, không vật phẩm giải hạn). Regex, không phân biệt hoa thường. HTT-1 (2026-11-09): thêm nhóm 'giọng AI' tiếng Anh (delve, tapestry, testament, beacon…) và nhóm định mệnh (destined/fated/doomed to, inevitable, bad omen) — ý lấy từ anti_fatalism_guard của tài liệu Drive.",
+ "_cam_en": "HTT-1: `cam_en` = cách dịch sát / sai nghĩa của thuật ngữ mà bản tiếng Anh KHÔNG được dùng (bộ kiểm `dich_sat`). Tên chuẩn giữ theo cách cộng đồng Bát tự / Tử vi nói tiếng Anh vẫn gọi (Hurting Officer, Seven Killings, Eating God…)."
 }

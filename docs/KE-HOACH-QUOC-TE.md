@@ -195,3 +195,18 @@ Chưa làm / chờ quyết:
 - Pháp lý: `/en/privacy`, `/en/terms` là tóm tắt — luật sư xem trước tuần 9 như mục 7; bản ràng buộc vẫn tiếng Việt.
 - Search Console: thêm `sitemap-en.xml`; theo dõi hiển thị / nhấp `/en/*` làm cột mốc tuần 8 (mục 6).
 
+## 14. HTT-1 — đối chiếu bộ tài liệu "Hybrid Two-Tier 6 bước" (2026-11-09)
+
+Chủ dự án gửi bộ tài liệu Drive (PostgreSQL 17 + Apache AGE + pgvector, Morphological AST, pipeline 4 agent, Tier 2 SSE, Coolify,
+cron RLHF) và hỏi "làm được không / phương án tốt nhất". Đánh giá đầy đủ: `docs/DANH-GIA-HYBRID-TWO-TIER.md`. Tóm tắt cho kế hoạch
+quốc tế:
+
+- **Kiến trúc đa ngôn ngữ giữ như QTE-2** ("dữ kiện tất định — lời theo ngôn ngữ", bản phủ `kb/data/<ngôn ngữ>/`); không đưa lời
+  vào DB, không VPS riêng. Phần lấy được của Drive đã vào HTT-1: lớp "Điểm giao thoa" tất định (vi + en), máy chuyển ngữ có lượt
+  kiểm định + cấm dịch sát + cụm "giọng AI", thống kê lệch tỉ lệ "Đúng với mình" theo ngôn ngữ (migration 0034) cho người duyệt,
+  giờ mặt trời thực toàn cầu + công tắc trường phái, dải gợi ý bản tiếng Anh (không chuyển hướng), Wikidata `sameAs` đã kiểm.
+- **Bản `/en` có phiếu kiểm chứng** ("Resonates with me / Not quite me") từ HTT-1 → từ đây đo được bản dịch nào bản xứ không thấy
+  đúng (mục 3.5 của tài liệu) — đây là số liệu quyết định cho mốc tuần 8 (mục 6) bên cạnh Search Console.
+- HTT-2 (chờ số liệu): AI diễn đạt hộp giao thoa qua `kiem_ai`; "Soạn lại nháp → PR" cho mã lệch; biến thể A/B theo thị trường bằng
+  bản phủ thứ hai + cờ PostHog.
+

@@ -40,6 +40,11 @@ def cum_cam() -> list[re.Pattern]:
     return [re.compile(p, re.I) for p in bang().get("cum_cam_en", [])]
 
 
+def cam_en(m: dict) -> list[str]:
+    """HTT-1: cách dịch sát / sai nghĩa KHÔNG được dùng cho thuật ngữ `m` (trường `cam_en`, có thể thiếu)."""
+    return [x for x in m.get("cam_en", []) if isinstance(x, str) and x.strip()]
+
+
 def cho_loi_nhac(mang: list[str] | None = None) -> str:
     """Danh sách "vi → en" đưa vào lời nhắc máy chuyển ngữ."""
     return "\n".join(f"- {m['vi']} → {m['en']}" for m in muc(mang))

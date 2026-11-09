@@ -112,3 +112,66 @@ def test_loi_nhac_co_bang_thuat_ngu_va_khong_doan_ngoai():
     tin = quy_trinh.loi_nhac({"k": "Nhật chủ mạnh."}, mang=["bat_tu"], luot=1)
     he = tin[0]["content"]
     assert "Nhật chủ → Day Master" in he and "do not add" in he.lower()
+
+
+# ---------------------------------------------------------------- HTT-1: cấm dịch sát + cụm "giọng AI" + lượt kiểm định
+def test_dich_sat_bi_bat_va_ten_chuan_khong_bi_bat():
+    vi = "Mệnh Vô chính diệu: bạn dễ hoà theo môi trường."
+    assert "dich_sat" in _ma(kiem.kiem(vi, "An empty destiny: you blend into your surroundings."))
+    assert "dich_sat" not in _ma(kiem.kiem(vi, "An empty palace (no major star): you blend into your surroundings."))
+    vi2 = "Thương Quan lộ ở trụ tháng."
+    assert "dich_sat" not in _ma(kiem.kiem(vi2, "Hurting Officer shows in the month pillar."))   # tên chuẩn cộng đồng
+
+
+def test_cum_giong_ai_va_dinh_menh():
+    vi = "Năm 2027 nên dồn sức vào việc đã chuẩn bị."
+    assert "cum_cam" in _ma(kiem.kiem(vi, "In 2027, delve into the rich tapestry of what you prepared."))
+    assert "cum_cam" in _ma(kiem.kiem(vi, "You are destined to succeed in 2027 — it is inevitable."))
+    assert "cum_cam" not in _ma(kiem.kiem(vi, "In 2027, put your energy into what you have already prepared."))
+
+
+def _ai_gia_kiem_dinh(ban: dict[str, str], cham: dict[str, dict]):
+    """Máy AI giả: lượt 1–2 trả bản Anh theo `ban`; lượt kiểm định (nhận {"vi","en"}) trả điểm theo `cham` (khoá = bản Anh)."""
+    def goi(messages, **_):
+        nhan = json.loads(messages[-1]["content"].split("INPUT:\n", 1)[1])
+        if nhan and all(isinstance(v, dict) for v in nhan.values()):
+            return json.dumps({k: cham.get(v["en"], {"trung_thanh": 1, "tu_nhien": 1, "an_toan": True, "dich_nguoc": v["vi"]})
+                               for k, v in nhan.items()}, ensure_ascii=False)
+        return json.dumps({k: ban.get(v, ban.get(k, "")) for k, v in nhan.items()}, ensure_ascii=False)
+    return goi
+
+
+def test_luot_kiem_dinh_chan_chuoi_khong_dat():
+    d = {"source_id": "x", "school_id": "y", "muc": [
+        {"ma": "a", "de_hieu": "Nhật chủ mạnh; năm 2027 nên dồn sức vào {viec}."},
+        {"ma": "b", "de_hieu": "Nhật chủ yếu; nên nghỉ ngơi nhiều hơn."},
+        {"ma": "c", "de_hieu": "Nhật chủ vừa; 2 năm tới nên chú ý sức khoẻ, không thay lời bác sĩ."}]}
+    ban = {"Nhật chủ mạnh; năm 2027 nên dồn sức vào {viec}.": "Your Day Master is strong; in 2027, put your energy into {viec}.",
+           "Nhật chủ yếu; nên nghỉ ngơi nhiều hơn.": "Your Day Master is weak; rest more.",
+           "Nhật chủ vừa; 2 năm tới nên chú ý sức khoẻ, không thay lời bác sĩ.": "Your Day Master is balanced; mind your health over the next 2 years; this is not medical advice."}
+    cham = {"Your Day Master is weak; rest more.": {"trung_thanh": 0.6, "tu_nhien": 0.9, "an_toan": True, "ghi_chu": "mất ý 'nhiều hơn'"},
+            "Your Day Master is balanced; mind your health over the next 2 years; this is not medical advice.":
+                {"trung_thanh": 1, "tu_nhien": 1, "an_toan": True, "dich_nguoc": "Nhật chủ vừa; 3 năm tới nên chú ý sức khoẻ."}}
+    kq = quy_trinh.chuyen(d, goi=_ai_gia_kiem_dinh(ban, cham), mang=["bat_tu"])
+    muc = kq["ban_en"]["muc"]
+    assert muc[0]["de_hieu"].startswith("Your Day Master is strong") and len(muc) == 1   # mục 1, 2 không ghi gì
+    assert kq["loi"]["muc.1.de_hieu"][0]["ma"] == "kiem_dinh" and "mất ý" in kq["loi"]["muc.1.de_hieu"][0]["chi_tiet"]
+    assert "lệch số" in kq["loi"]["muc.2.de_hieu"][0]["chi_tiet"]
+    assert kq["so"] == {"tong": 3, "qua": 1, "kiem_dinh": "dat"}
+
+
+def test_luot_kiem_dinh_khong_doc_duoc_thi_khong_chan_nhung_bao():
+    d = {"source_id": "x", "school_id": "y", "muc": [{"ma": "a", "de_hieu": "Nhật chủ mạnh."}]}
+    kq = quy_trinh.chuyen(d, goi=_ai_gia({"Nhật chủ mạnh.": "Your Day Master is strong."}), mang=["bat_tu"])
+    assert kq["ban_en"]["muc"][0]["de_hieu"] == "Your Day Master is strong." and kq["so"]["kiem_dinh"] == "khong_doc_duoc"
+    kq2 = quy_trinh.chuyen(d, goi=_ai_gia({"Nhật chủ mạnh.": "Your Day Master is strong."}), mang=["bat_tu"], kiem_dinh=False)
+    assert kq2["so"]["kiem_dinh"] == "tat"
+
+
+def test_dich_nguoc_khong_bat_khi_nguon_viet_so_bang_chu():
+    # Nguồn "ba tháng" (chữ) → dịch ngược "3 tháng" (số) không phải lỗi (review 2026-11-09).
+    d = {"source_id": "x", "school_id": "y", "muc": [{"ma": "a", "de_hieu": "Ba tháng tới nên đi chậm."}]}
+    ban = {"Ba tháng tới nên đi chậm.": "Go slowly over the next three months."}
+    cham = {"Go slowly over the next three months.": {"trung_thanh": 1, "tu_nhien": 1, "an_toan": True, "dich_nguoc": "3 tháng tới nên đi chậm."}}
+    kq = quy_trinh.chuyen(d, goi=_ai_gia_kiem_dinh(ban, cham), mang=["bat_tu"])
+    assert kq["ban_en"]["muc"][0]["de_hieu"].startswith("Go slowly") and kq["loi"] == {}

@@ -1,0 +1,150 @@
+{
+ "_meta": {
+  "source_id": "hbt_bien_tap_giao_thoa_v1",
+  "school_id": "lien_mon",
+  "trang_thai": "nhap_ai",
+  "ghi_chu": "HTT-1 — lời cho lớp 'Điểm giao thoa từ điều bạn đã xác nhận' (luangiai/giao_thoa.py). Ý lấy từ Tier 2 của tài liệu Drive (Hybrid Two-Tier) nhưng làm TẤT ĐỊNH: chỉ ghép môn · mảng đời · mức suy từ MÃ hộp người dùng đã bấm 'Đúng với mình' / 'Chưa đúng' (mã do engine sinh, không câu chữ người dùng). Không điểm số, không phán môn nào đúng, không đổi mức môn nào, không lặp nét người dùng đã phủ nhận. Các khe: {mang} {ngan} {noi} {so} {mon} {ds} {muc}."
+ },
+ "mon": {
+  "tuvi": {
+   "ten": "Tử vi",
+   "mat": "nhìn hoàn cảnh quanh bạn: việc, tiền, nhà, người"
+  },
+  "battu": {
+   "ten": "Bát tự",
+   "mat": "nhìn sức của chính bạn: hành đang nhiều, hành đang thiếu"
+  },
+  "nhantuong": {
+   "ten": "Nhân tướng",
+   "mat": "nhìn điều bạn đang thấy ở mình bây giờ: nét mặt, sắc, dáng"
+  },
+  "thanso": {
+   "ten": "Thần số",
+   "mat": "nhìn nhịp con số của tên và ngày sinh"
+  },
+  "tarot": {
+   "ten": "Tarot",
+   "mat": "nhìn câu hỏi bạn đang mang qua các lá vừa rút"
+  },
+  "phongthuy": {
+   "ten": "Phong thuỷ",
+   "mat": "nhìn ngôi nhà và hướng bạn đang ở"
+  },
+  "kinhdich": {
+   "ten": "Kinh Dịch",
+   "mat": "nhìn thời điểm của việc bạn vừa hỏi"
+  },
+  "chan_dung": {
+   "ten": "Chân dung tổng hợp",
+   "mat": "ghép ba cách nhìn theo mảng đời"
+  },
+  "tgt": {
+   "ten": "Thời gian tới",
+   "mat": "nhìn nhịp các tháng sắp tới"
+  }
+ },
+ "mang": {
+  "con_nguoi": {
+   "ten": "Con người bạn",
+   "ngan": "tính cách"
+  },
+  "cong_viec": {
+   "ten": "Công việc",
+   "ngan": "việc"
+  },
+  "tien_bac": {
+   "ten": "Tiền bạc",
+   "ngan": "tiền"
+  },
+  "tinh_cam": {
+   "ten": "Tình cảm",
+   "ngan": "tình cảm"
+  },
+  "gia_dinh": {
+   "ten": "Gia đình",
+   "ngan": "gia đình"
+  },
+  "suc_khoe": {
+   "ten": "Sức khoẻ",
+   "ngan": "sức khoẻ"
+  },
+  "quan_he": {
+   "ten": "Bạn bè & bên ngoài",
+   "ngan": "quan hệ bên ngoài"
+  },
+  "nha_cua": {
+   "ten": "Nhà cửa",
+   "ngan": "nhà cửa"
+  },
+  "nam_nay": {
+   "ten": "Năm nay",
+   "ngan": "năm nay"
+  },
+  "giai_doan": {
+   "ten": "Các giai đoạn",
+   "ngan": "giai đoạn đời"
+  },
+  "cau_hoi": {
+   "ten": "Câu hỏi bạn đang mang",
+   "ngan": "câu hỏi"
+  }
+ },
+ "muc": {
+  "thuan": "thuận",
+  "can_bang": "nhịp đều",
+  "can_chu_dong": "cần chủ động"
+ },
+ "mau": {
+  "cung_mang": {
+   "thuan": {
+    "tieu_de": "{mang}: {noi} cùng nói trúng — và cùng thấy thuận",
+    "noi_dung": "Bạn đã bấm \"đúng với mình\" ở {so} cách xem khác nhau về {ngan}, và cả {so} cách cùng thấy mảng này đang có sẵn lực. Khi hai cách nhìn độc lập trùng nhau và bạn cũng gật đầu, đó là chỗ đáng tin để bắt đầu.",
+    "huong_xu_ly": "Chọn một việc về {ngan} bạn đã cân nhắc lâu và bắt đầu ngay tháng này; để riêng một phần thành quả, không dồn hết."
+   },
+   "can_bang": {
+    "tieu_de": "{mang}: {noi} cùng nói trúng — nhịp đều, không cú hích",
+    "noi_dung": "{so} cách xem mà bạn thấy đúng đều không thấy cú hích lớn hay chỗ vấp lớn ở {ngan}. Kết quả nằm ở nhịp làm đều tay hơn là ở thời điểm.",
+    "huong_xu_ly": "Đặt một mốc nhỏ về {ngan} theo quý và giữ đúng; việc mới thử nhỏ trước khi mở rộng."
+   },
+   "can_chu_dong": {
+    "tieu_de": "{mang}: {noi} cùng nói trúng — và cùng nhắc đi chậm",
+    "noi_dung": "Bạn thấy đúng ở {so} cách xem về {ngan}, và cả {so} cách cùng nhắc mảng này cần bạn chủ động hơn thường lệ. Đây là lời nhắc sắp việc cẩn thận, không phải điềm xấu.",
+    "huong_xu_ly": "Việc lớn về {ngan} chia nhỏ, có phương án dự phòng; giấy tờ, tiền bạc kiểm hai lần trước khi ký."
+   },
+   "hon_hop": {
+    "tieu_de": "{mang}: {noi} cùng nói trúng — mỗi cách một mặt",
+    "noi_dung": "Bạn thấy đúng ở {so} cách xem về {ngan}, nhưng các cách không cùng mức: {ds}. Chúng không cãi nhau — mỗi cách nhìn một mặt của cùng một chuyện.",
+    "huong_xu_ly": "Lấy mặt cần lưu ý làm khung an toàn, dùng mặt thuận cho việc đã chuẩn bị kỹ."
+   },
+   "khong_ro": {
+    "tieu_de": "{mang}: {noi} cùng nói trúng",
+    "noi_dung": "Bạn đã bấm \"đúng với mình\" ở {so} cách xem khác nhau về {ngan}. Khi hai cách nhìn độc lập cùng chạm một chỗ và bạn cũng gật đầu, chỗ ấy đáng để bạn nhìn kỹ hơn.",
+    "huong_xu_ly": "Đọc lại hai hộp ấy cạnh nhau và ghi ra một việc nhỏ bạn muốn làm khác đi về {ngan}."
+   }
+  },
+  "cung_mon": {
+   "thuan": {
+    "tieu_de": "Trong {mon}, những điều bạn gật đầu đều nghiêng về thuận",
+    "noi_dung": "Ở {mon}, bạn thấy đúng ở {ds} — và các hộp ấy cùng ở mức thuận. Điểm chung: đây là những mảng bạn đang có đà.",
+    "huong_xu_ly": "Dồn sức vào một mảng trong số đó thay vì dàn đều; ghi lại một việc cụ thể cho tháng này."
+   },
+   "can_chu_dong": {
+    "tieu_de": "Trong {mon}, những điều bạn gật đầu đều nhắc đi chậm",
+    "noi_dung": "Ở {mon}, bạn thấy đúng ở {ds} — và các hộp ấy cùng ở mức cần chủ động. Điểm chung: đây là những mảng bạn đang phải để tâm nhiều hơn.",
+    "huong_xu_ly": "Chọn mảng đang nặng nhất, viết ra một việc nhỏ làm được trong tuần; mảng còn lại giữ nhịp, chưa mở thêm."
+   }
+  },
+  "lech": {
+   "tieu_de": "{mang}: có chỗ chưa khớp",
+   "noi_dung": "Ở {ngan}, bạn thấy {noi_dung_dung} nói đúng nhưng {noi_dung_sai} thì chưa. Hệ thống không lặp lại nét bạn đã phủ nhận; phần chưa khớp được ghi lại để ban biên tập xem lại lời ấy.",
+   "huong_xu_ly": "Giữ lại điều bạn thấy đúng làm chỗ dựa; điều chưa đúng cứ để đó — một bài đọc không cần đúng hết."
+  },
+  "tom_tat": "Từ {so} hộp bạn xác nhận đúng ({ds_mon}), các cách xem gặp nhau ở: {ds_mang}.",
+  "tom_tat_khong_gap": "Từ {so} hộp bạn xác nhận đúng ({ds_mon}), chưa có mảng nào được hai cách xem cùng nói — mỗi hộp đứng riêng.",
+  "khong_du": "Bấm \"Đúng với mình\" ở ít nhất hai hộp để thấy các cách xem gặp nhau ở đâu.",
+  "cau_tu_soi": "Trong những điều bạn vừa gật đầu, điều nào bạn đã biết từ lâu — và điều nào bạn chỉ dám nhận khi có người khác nói ra?",
+  "hop_dem": "{mon} ({n} hộp)",
+  "can_cu": "Ghép từ các hộp bạn đã bấm \"Đúng với mình\": {ds}. Chỉ so mức các hộp ấy đã mang; không tính lại, không đổi mức môn nào.",
+  "tom_tat_cung_mon": "Từ {so} hộp bạn xác nhận đúng ({ds_mon}), các hộp chưa chạm nhau giữa hai cách xem, nhưng trong cùng một cách xem chúng nghiêng về một hướng — xem hộp bên dưới."
+ }
+}

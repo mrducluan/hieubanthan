@@ -48,3 +48,47 @@ def L(ma: str, vi: str, **slot) -> str:  # noqa: N802 — tên ngắn cố ý, �
 
 def xoa_nho() -> None:
     _NHO.clear()
+
+
+# ------------------------------------------------------------------ HTT-1: bộ hiện thực bề mặt (surface realizer) nhẹ
+# Ý lấy từ "MorphologicalASTAssembler" của tài liệu Drive: chỗ RULES ghép danh sách / mạo từ / viết hoa phải theo ngôn
+# ngữ, không nối chuỗi cứng " và ". Chỉ tiếng Việt + Anh (lộ trình QTE-1); ngôn ngữ khác rơi về cách nối tiếng Anh.
+_NOI = {"vi": (", ", " và "), "en": (", ", " and ")}
+
+
+def danh_sach(muc: list[str] | tuple[str, ...], *, ngon_ngu_: str | None = None) -> str:
+    """["A"] → "A"; ["A","B"] → "A và B" / "A and B"; ["A","B","C"] → "A, B và C" / "A, B and C". Rỗng → ""."""
+    ds = [str(x).strip() for x in muc if x is not None and str(x).strip()]
+    if not ds:
+        return ""
+    if len(ds) == 1:
+        return ds[0]
+    phay, va = _NOI.get(ngon_ngu_ or ngon_ngu.hien_tai(), _NOI["en"])
+    return phay.join(ds[:-1]) + va + ds[-1]
+
+
+_NGUYEN_AM = set("aeiou")
+# Chữ đầu phát âm nguyên âm / phụ âm khác mặt chữ (tiếng Anh): "an hour", "a one-card", "a university".
+_AN_DAC_BIET = ("hour", "honest", "heir", "honour", "honor")
+_A_DAC_BIET = ("one", "uni", "use", "user", "euro", "eu")
+
+
+def mao_tu(tu: str, *, ngon_ngu_: str | None = None) -> str:
+    """Tiếng Anh: "a"/"an" + từ ("an obstacle", "a reversed card", "an hour"); tiếng Việt: trả nguyên từ."""
+    nn = ngon_ngu_ or ngon_ngu.hien_tai()
+    t = (tu or "").strip()
+    if nn == "vi" or not t:
+        return t
+    tl = t.lower()
+    an = tl[0] in _NGUYEN_AM
+    if tl.startswith(_AN_DAC_BIET):
+        an = True
+    if tl.startswith(_A_DAC_BIET):
+        an = False
+    return ("an " if an else "a ") + t
+
+
+def hoa_dau(cau: str) -> str:
+    """Viết hoa chữ cái đầu câu, giữ nguyên phần còn lại (không như str.capitalize làm thường cả câu)."""
+    s = (cau or "").lstrip()
+    return s[:1].upper() + s[1:] if s else s

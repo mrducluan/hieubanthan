@@ -54,6 +54,7 @@ from app.goi_y_cheo_api import router as goi_y_cheo_router
 from app.nhan_tuong_api import router as nhan_tuong_router  # NT-1
 from app.chan_dung_api import router as chan_dung_router
 from app.tarot_api import router as tarot_router  # noqa: E402 — TR-1: Tarot /v1/tarot/*
+from app.giao_thoa_api import router as giao_thoa_router  # HTT-1
 
 giam_sat.khoi_tao()   # Sentry — chỉ bật khi có SENTRY_DSN, không gửi dữ liệu cá nhân
 
@@ -177,6 +178,7 @@ app.include_router(thoi_gian_toi_router)
 app.include_router(nhan_tuong_router)
 app.include_router(chan_dung_router)
 app.include_router(tarot_router)
+app.include_router(giao_thoa_router)
 
 
 # --------------------------------------------------------------------------- #
