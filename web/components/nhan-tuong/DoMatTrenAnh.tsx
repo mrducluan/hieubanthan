@@ -69,8 +69,8 @@ function HinhMau({ dang, da }: { dang: string | null; da: Set<string> }) {
   );
 }
 
-export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
-  ks: KhaoSat; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void; dangXem?: boolean;
+export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem }: {
+  ks: KhaoSat; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void; onDungVaXem?: (tl: TraLoi) => void; dangXem?: boolean;
 }) {
   const dsDiem: DiemDo[] = useMemo(() => ks.diem_do?.diem ?? [], [ks]);
   const batBuoc = useMemo(() => dsDiem.filter((d) => d.bat_buoc).map((d) => d.ma), [dsDiem]);
@@ -210,6 +210,12 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
       ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat", so_goi_y: r.goi_y.length, so_diem: Object.keys(diem).length, so_anh_nghieng: nghiengDu.length });
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đo được lúc này."); } finally { setTinh(false); }
   };
+  // NT-2: đã đồng ý đo từ trước + máy tự đặt đủ điểm bắt buộc → đo luôn một lần cho mỗi ảnh (người dùng kéo chỉnh rồi bấm
+  // "Đo lại" nếu cần). Chưa đồng ý thì vẫn chờ người dùng tích ô và bấm.
+  const daTuDo = useRef<string | null>(null);
+  useEffect(() => {
+    if (tim === "xong" && dongY && sanSang && url && !kq && daTuDo.current !== url) { daTuDo.current = url; void doNgay(); }
+  });
 
   const xongQuet = (k: KetQuaQuet) => {
     setQuet(false);
@@ -343,7 +349,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
           </label>
         )}
         <div className="mt-3 flex flex-wrap items-center gap-2">
-          <Button onClick={doNgay} disabled={!sanSang} data-testid="do-tinh"><Ruler aria-hidden /> {tinh ? "Đang đo…" : "Đo và gợi ý"}</Button>
+          <Button onClick={doNgay} disabled={!sanSang} data-testid="do-tinh"><Ruler aria-hidden /> {tinh ? "Đang đo…" : kq ? "Đo lại" : "Đo và gợi ý"}</Button>
           {url && !du && <span className="text-xs text-fg-faint">Còn {batBuoc.filter((m) => !diem[m]).length} điểm bắt buộc.</span>}
           {nghiengDu.length > 0 && <span className="text-xs text-jade" data-testid="do-kem-nghieng">Kèm {nghiengDu.length} ảnh nghiêng.</span>}
           {nghiengThieu > 0 && <span className="text-xs text-fg-faint">Ảnh nghiêng chưa chấm đủ sẽ không được tính.</span>}
@@ -366,7 +372,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, dangXem }: {
             {kq.canh_bao.map((c, i) => <p key={i} className="mt-2 text-xs text-gold">{c}</p>)}
             <p className="mt-2 text-xs text-fg-faint">Sắc da, nếp nhăn, độ dày thịt, ánh mắt, giọng nói ảnh không đo được — bạn trả lời ở phần Khảo sát.</p>
           </div>
-          <DanhSachGoiY key={JSON.stringify(kq.goi_y)} ks={ks} goiY={kq.goi_y} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem} dangXem={dangXem} nguon="do"
+          <DanhSachGoiY key={JSON.stringify(kq.goi_y)} ks={ks} goiY={kq.goi_y} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem} onDungVaXem={onDungVaXem} dangXem={dangXem} nguon="do"
             chuRong="Các tỉ lệ của bạn nằm trong khoảng cân đối nên hệ thống không gợi ý nét nào nổi bật — trả lời Khảo sát để có bài đọc." />
         </div>
       )}
