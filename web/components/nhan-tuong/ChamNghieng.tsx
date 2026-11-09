@@ -34,8 +34,10 @@ function HinhNghieng({ dang, da, lat }: { dang: string | null; da: Set<string>; 
   );
 }
 
-export function ChamNghieng({ goc, ten, ds, onDoi }: {
+export function ChamNghieng({ goc, ten, ds, onDoi, anhBanDau }: {
   goc: GocNghieng; ten: string; ds: DiemDo[]; onDoi: (a: AnhNghieng | null) => void;
+  /** QBG-1: ảnh nghiêng vừa chụp bằng "Quét 3 góc" — nạp sẵn để người dùng chấm đường viền. */
+  anhBanDau?: File | null;
 }) {
   const [url, setUrl] = useState<string | null>(null);
   const [tiLe, setTiLe] = useState<number | null>(null);
@@ -50,6 +52,8 @@ export function ChamNghieng({ goc, ten, ds, onDoi }: {
   doiRef.current = onDoi;
   useEffect(() => { doiRef.current(url ? { diem, tiLe } : null); }, [url, diem, tiLe]);
 
+  const chonRef = useRef<(f: File | undefined) => void>(() => undefined);
+  useEffect(() => { if (anhBanDau) chonRef.current(anhBanDau); }, [anhBanDau]);
   const tiep = (d: Record<string, Diem>) => ds.find((p) => !d[p.ma])?.ma ?? null;
   const chon = (f: File | undefined) => {
     if (!f || !f.type.startsWith("image/")) return;
@@ -59,6 +63,7 @@ export function ChamNghieng({ goc, ten, ds, onDoi }: {
     setUrl(u); setTiLe(null); setDiem({}); setDang(ds[0]?.ma ?? null);
     ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_nghieng_chon_anh" });
   };
+  chonRef.current = chon;
   const viTri = (e: { clientX: number; clientY: number }): Diem | null => {
     const r = khung.current?.getBoundingClientRect();
     if (!r || !r.width || !r.height) return null;
