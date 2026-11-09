@@ -8,11 +8,12 @@ test("khung /en: lang=en, hreflang hai chiều, không chữ Việt trong nội 
   const html = await (await request.get("/en")).text();
   expect(html).toContain('<html lang="en"');
   expect(html).toMatch(/hreflang="vi" href="http:\/\/localhost:3000\/?"/i);
-  expect(html.replace(/<script[\s\S]*?<\/script>/g, "")).not.toContain("Huyền học");   // chữ RSC của not-found gốc nằm trong <script>, không hiện
+  // không menu Huyền học của bản Việt (RSC của not-found gốc có chữ Việt nhưng không hiện — kiểm phần nhìn thấy bằng trình duyệt ở dưới)
   const vi = await (await request.get("/than-so")).text();
   expect(vi).toMatch(/hreflang="en" href="http:\/\/localhost:3000\/en\/numerology"/i);
   await page.goto("/en");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Know yourself");
+  expect(await page.locator("header nav").innerText()).not.toContain("Huyền học");
   const main = await page.locator("main").innerText();
   expect(main.replace(/Tiếng Việt/g, "")).not.toMatch(VI);
   const sm = await (await request.get("/sitemap-en.xml")).text();
@@ -82,11 +83,13 @@ test("tarot: câu hỏi tiếng Anh được hiểu → xáo máy → rút 3 lá
   expect(await luot.innerText()).not.toMatch(VI);
 });
 
-test("trang kiến thức tiếng Anh: Life Path 7, lá The Tower, 404 đúng", async ({ request }) => {
+test("trang kiến thức tiếng Anh: Life Path 7, lá The Tower, 404 đúng", async ({ page, request }) => {
   const lp = (await (await request.get("/en/numerology/life-path/7")).text()).replace(/<!-- -->/g, "");
   expect(lp).toMatch(/<h1[^>]*>Life Path 7/);
   expect(lp).toContain("Counter-question");
-  expect(lp.replace(/<script[\s\S]*?<\/script>/g, "")).not.toMatch(VI);
+  expect(lp).toMatch(/<title>Life Path 7[^<]*<\/title>/);   // tiêu đề tuyệt đối, không mang mẫu "· Hiểu Bản Thân"
+  await page.goto("/en/numerology/life-path/7");
+  expect(await page.locator("main").innerText()).not.toMatch(VI);
   const la = (await (await request.get("/en/tarot/cards/the-tower")).text()).replace(/<!-- -->/g, "");
   expect(la).toMatch(/<h1[^>]*>The Tower/);
   expect(la).toContain("Pictorial Key");
