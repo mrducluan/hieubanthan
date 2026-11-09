@@ -207,6 +207,8 @@ quốc tế:
   giờ mặt trời thực toàn cầu + công tắc trường phái, dải gợi ý bản tiếng Anh (không chuyển hướng), Wikidata `sameAs` đã kiểm.
 - **Bản `/en` có phiếu kiểm chứng** ("Resonates with me / Not quite me") từ HTT-1 → từ đây đo được bản dịch nào bản xứ không thấy
   đúng (mục 3.5 của tài liệu) — đây là số liệu quyết định cho mốc tuần 8 (mục 6) bên cạnh Search Console.
-- HTT-2 (chờ số liệu): AI diễn đạt hộp giao thoa qua `kiem_ai`; "Soạn lại nháp → PR" cho mã lệch; biến thể A/B theo thị trường bằng
+- **HTT-2 đã làm (2026-11-09)**: AI diễn đạt hộp giao thoa (công tắc quản trị, mặc định tắt, chỉ bản Việt); "Soạn lại nháp → PR"
+  cho mã lệch (Tarot + Giao thoa — hai nơi /en có phiếu); điều hậu Bát tự theo mùa thực cho người sinh ngoài chí tuyến Nam.
+- Còn chờ số liệu: biến thể A/B theo thị trường bằng
   bản phủ thứ hai + cờ PostHog.
 

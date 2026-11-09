@@ -77,3 +77,28 @@ def lech_ngon_ngu(vao: LechNgonNguVao) -> dict:
     trả danh sách mã lệch cho NGƯỜI DUYỆT — không sửa gì."""
     from app.luangiai import lech_ngon_ngu as ln  # noqa: PLC0415
     return ln.quet([d.model_dump() for d in vao.dong], toi_thieu=vao.toi_thieu, delta=vao.delta)
+
+
+class SoanLaiLechVao(BaseModel):
+    """HTT-2 H6 — soạn lại NHÁP bản dịch cho một mã hộp bị lệch theo ngôn ngữ (khung "Lệch theo ngôn ngữ" ở /quan-tri/hoc)."""
+    ma: str = Field(pattern=r"^ds\.[a-z0-9_]+(\.[a-z0-9_+-]+)+$", max_length=60)
+    ngon_ngu: Literal["en"] = "en"
+
+
+@router.post("/soan-lai-lech")
+def soan_lai_lech(vao: SoanLaiLechVao) -> dict:
+    """Suy cụm KB từ mã → máy chuyển ngữ QT-0 ba lượt chỉ trên cụm đó → nháp cho người duyệt mở PR (web, QT-1). Không ghi
+    KB, không trừ lượt AI của người dùng (quản trị). Thiếu khoá AI → 503."""
+    from app.chuyen_ngu import soan_lai  # noqa: PLC0415
+    from app.narrative.ai_goi import goi_chat  # noqa: PLC0415
+    if not os.environ.get("OPENROUTER_API_KEY"):
+        raise HTTPException(503, detail="Chưa cấu hình khoá AI cho máy chuyển ngữ")
+    mo_hinh = os.environ.get("CHUYEN_NGU_MODEL")
+
+    def goi(messages, **kw):
+        return goi_chat(messages, mo_hinh=mo_hinh, nho=False, tru_luot=False, het_gio=120, **kw)
+
+    try:
+        return soan_lai.soan_lai(vao.ma, vao.ngon_ngu, goi=goi)
+    except Exception as e:  # noqa: BLE001 — lỗi mạng / JSON của máy chuyển ngữ → báo gọn, không lộ chi tiết nhà cung cấp
+        raise HTTPException(502, detail=f"Máy chuyển ngữ chưa trả nháp ({type(e).__name__})") from e

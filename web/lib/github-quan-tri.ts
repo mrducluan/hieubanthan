@@ -7,7 +7,8 @@ export const NHANH_GOC = "main";
 export const TIEN_TO_NHANH = "quan-tri/";
 /** File sửa bằng công cụ riêng (sổ thẩm định: scripts/tham_dinh.py) — trang quản trị chỉ cho xem. */
 export const CHI_XEM = new Set(["tham_dinh.json"]);
-export const TEN_TEP = /^[a-z0-9_]+\.json$/;
+// HTT-2 H6: cả bản phủ tiếng Anh `en/<tên>.json` (soạn lại nháp cho mã lệch theo ngôn ngữ) — vẫn trong THU_MUC_KB.
+export const TEN_TEP = /^(en\/)?[a-z0-9_]+\.json$/;
 
 const repo = () => process.env.QUAN_TRI_GITHUB_REPO || "mrducluan/hieubanthan";
 export const coGithub = () => Boolean(process.env.QUAN_TRI_GITHUB_TOKEN);
@@ -68,7 +69,7 @@ export async function prQuanTriDangMo(): Promise<PrMo[]> {
 export async function moPrSuaKb(o: { ten: string; shaGoc: string; text: string; tieuDe: string; moTa: string }): Promise<PrMo> {
   const dau = await gh<{ object: { sha: string } }>(`/git/ref/heads/${NHANH_GOC}`);
   const tem = new Date().toISOString().replace(/\D/g, "").slice(0, 14);
-  const nhanh = `${TIEN_TO_NHANH}${o.ten.replace(/\.json$/, "").replace(/_/g, "-")}-${tem}`;
+  const nhanh = `${TIEN_TO_NHANH}${o.ten.replace(/\.json$/, "").replace(/[_/]/g, "-")}-${tem}`;
   await gh(`/git/refs`, { method: "POST", body: JSON.stringify({ ref: `refs/heads/${nhanh}`, sha: dau.object.sha }) });
   try {
     await gh(`/contents/${THU_MUC_KB}/${o.ten}`, {

@@ -84,12 +84,12 @@
 
 | # | Câu hỏi | Đề xuất của em |
 |---|---|---|
-| H1 | Cờ "Nam bán cầu" cho Bát tự: chỉ tác động lớp **điều hậu** (nóng – lạnh theo mùa thực tế nơi sinh), trụ không đổi, mặc định tắt, ghi "thuyết hiện đại" | Làm theo cách này nếu anh muốn phục vụ người Việt ở Úc / NZ; không đảo trụ tháng như Drive. |
+| H1 | Cờ "Nam bán cầu" cho Bát tự: chỉ tác động lớp **điều hậu** (nóng – lạnh theo mùa thực tế nơi sinh), trụ không đổi, mặc định tắt, ghi "thuyết hiện đại" | **Xong (HTT-2, anh duyệt 2026-11-09)**: `dieu_hau = bac_ban_cau \| noi_sinh`, chỉ mở cho nơi sinh ngoài chí tuyến Nam (vĩ độ ≤ −23,44° — vùng nhiệt đới không có mùa đảo), mục 7. |
 | H2 | ~~Wikidata~~ | **Xong** (QID kiểm qua API, mục 4). |
 | H3 | Duyệt dependency `FlagEmbedding` (BGE-M3) cho bộ kiểm chuyển ngữ offline? | **Không cần lúc này**; lượt kiểm định có điểm + dịch ngược so số đủ cho vài trăm chuỗi/tuần. |
 | H4 | Chạy migration 0034 (cột `ngon_ngu` phiếu kiểm chứng) sau 0033 | Không chạy thì phiếu vẫn ghi như cũ (web tự gọi hàm cũ), chỉ chưa có khung "Lệch theo ngôn ngữ". |
-| H5 | Cho AI diễn đạt lại hộp "Điểm giao thoa" (qua `kiem_ai`, cache theo tổ hợp mã)? | Để sau khi có ≥ 30 phiếu kiểm chứng trên hộp giao thoa; bản mẫu trước (HTT-2). |
-| H6 | HTT-2 "Soạn lại nháp → PR" cho mã lệch theo ngôn ngữ (máy chuyển ngữ 3 lượt + PR vào `kb/data/en/`, người merge) | Làm khi khung lệch có mã đầu tiên (cần ≥ 100 phiếu /en mỗi mã). |
+| H5 | Cho AI diễn đạt lại hộp "Điểm giao thoa" (qua `kiem_ai`, cache theo tổ hợp mã)? | **Xong (HTT-2)**: mã sẵn, **công tắc quản trị `giao_thoa.dien_dat` mặc định TẮT** — anh bật ở `/quan-tri/cai-dat` khi hộp giao thoa có ≥ 30 phiếu; chỉ bản Việt (mục 7). |
+| H6 | HTT-2 "Soạn lại nháp → PR" cho mã lệch theo ngôn ngữ (máy chuyển ngữ 3 lượt + PR vào `kb/data/en/`, người merge) | **Xong (HTT-2)**: nút "Soạn lại nháp" trên từng mã lệch ở `/quan-tri/hoc` → nháp theo cụm KB → chọn chuỗi → PR `quan-tri/…` (mục 7). Có tác dụng khi khung lệch có mã (≥ 100 phiếu /en mỗi mã). |
 
 ## 6. Trạng thái HTT-1 (2026-11-09)
 
@@ -98,3 +98,39 @@
 route `/v1/giao-thoa`, hộp có kiểm chứng, đọc cả `ca_nhan`), 3.5 (z-test engine + route quản trị + migration 0034 + khung
 `/quan-tri/hoc` + nút kiểm chứng tiếng Anh ở `/en`), dải gợi ý tiếng Anh, Wikidata `sameAs` đã kiểm. Việc của anh:
 `docs/VIEC-CUA-ANH.md` mục 4ai. Bước kế (HTT-2): H5, H6, biến thể A/B theo thị trường bằng bản phủ thứ hai.
+
+## 7. HTT-2 — H1 · H5 · H6 (2026-11-09, chủ dự án: "làm H1 đến H6 theo đề xuất của em")
+
+| # | Làm gì | Ở đâu | Ranh giới |
+|---|---|---|---|
+| H1 | **Điều hậu theo mùa thực nơi sinh** (Nam bán cầu). `TuanTrietInput.dieu_hau = bac_ban_cau` (mặc định) `\| noi_sinh`; `battu.la_so(…, nam_ban_cau)` chỉ đổi `dung_than.dieu_hau`: tháng Tỵ Ngọ Mùi → cần **Hỏa** (giữa đông), Hợi Tý Sửu → cần **Thủy**; `thuyet: nam_ban_cau` + lời "thuyết hiện đại, không có trong cổ thư". Chỉ mở khi nơi sinh có vĩ độ ≤ −23,44° (ngoài chí tuyến Nam: Sydney, Melbourne, Auckland, São Paulo, Johannesburg…; Jakarta / Darwin nhiệt đới → không mở); thiếu toạ độ → 422. Cờ `dieu_hau_nam_ban_cau`; `la-so` trả `tuy_chon.nam_ban_cau_kha_dung` → web chip "Mùa nơi sinh" trong khung Trường phái Bát tự (chỉ hiện khi khả dụng), đi theo mọi lời gọi (lá số, lưu niên, hỏi đáp, luận giải — cách 1 của báo cáo đổi hành điều hậu, căn cứ ghi rõ). | `calc/battu.py`, `battu_api.py`, `tuvi_api._DauVao.vi_do`, `BatTu.tsx`, `test_htt2_nam_ban_cau.py`, e2e `htt2.spec.ts` | Trụ, cách cục, cách 2, đại vận, Cùng Thông Bảo Giám không đổi; mặc định không đổi → không tăng `ENGINE_VERSION`. Không đảo trụ tháng như Drive. |
+| H5 | **AI diễn đạt lại hộp giao thoa** — `giao_thoa.dien_dat(kq)`: nguồn = tóm tắt + từng hộp đã ghép (không mã, không câu người dùng, không lá số), qua `luan_giai_van._mot_chuong` → `kiem_ai` (số, thuật ngữ lạ, cụm cấm, câu ý mới, độ dài); nhớ theo băm nguồn nên cùng tổ hợp hộp không tốn lượt lần hai. Route `/v1/giao-thoa` nhận `dien_dat`; web `/api/giao-thoa` chỉ gửi khi cài đặt **`giao_thoa.dien_dat` bật** (mặc định tắt, `/quan-tri/cai-dat` nhóm "Điểm giao thoa"); `GiaoThoa.tsx` hiện đoạn AI (testid `giao-thoa-van-ai`) **dưới tóm tắt, trên các hộp** — hộp tất định vẫn là bản chính. | `luangiai/giao_thoa.py`, `giao_thoa_api.py`, `cau-hinh.ts`, `api/giao-thoa/route.ts`, `GiaoThoa.tsx`, `test_htt2_giao_thoa_dien_dat.py` | **Chỉ bản Việt** (bộ kiểm + lời nhắc tiếng Việt); bản Anh giữ bản mẫu. Không qua kiểm / thiếu khoá / hết lượt → `dien_dat = mau`. |
+| H6 | **"Soạn lại nháp → PR"** — `chuyen_ngu/soan_lai.py`: `nguon_cua_ma` suy CỤM KB từ mã (Tarot: lá trong mã `la.<id>` hoặc chương `chuong.<ma>`; Giao thoa: `mau.cung_mang.<khoá>` + `mang.<mảng>`, `mau.cung_mon.<mức>` + `mon.<môn>`, `mau.lech`); `soan_lai` chạy `quy_trinh.chuyen` ba lượt CHỈ trên cụm (khung phẳng c0…cN — tránh khoá hệ thống bị bỏ), trả từng đường dẫn: chữ Việt · bản Anh đang dùng · nháp · lỗi bộ kiểm. Route `POST /v1/quan-tri/soan-lai-lech` (khoá quản trị, không trừ lượt người dùng, `CHUYEN_NGU_MODEL`). Web `/api/quan-tri/hoc/soan-lai` hai bước `nhap` / `pr` (cổng `congApi` + `SUA_KB`), PR qua đúng `moPrSuaKb` của QT-1 vào `kb/data/en/<tệp>` (`TEN_TEP` nay nhận `en/`), ghi `nhat_ky_quan_tri` `kb.soan_lai_lech`; `SoanLaiLech.tsx` trong bảng "Lệch theo ngôn ngữ" (chọn chuỗi, tên lá bài không soạn lại). | `chuyen_ngu/soan_lai.py`, `quan_tri_api.py`, `api/quan-tri/hoc/soan-lai/route.ts`, `quan-tri/hoc/SoanLaiLech.tsx`, `github-quan-tri.ts`, `test_htt2_soan_lai.py` | Máy không ghi KB, không tự bật; người bản xứ đọc rồi merge. Mã Tử vi / Bát tự / Phong thuỷ / Kinh Dịch chưa suy được cụm → web ghi "sửa tay trong Kho tri thức" (hai nơi /en đang có phiếu là Tarot + Giao thoa). |
+
+H2 xong từ HTT-1; **H3 không làm** (BGE-M3 ~2 GB dependency, cosine liên ngữ không bắt lỗi thêm/bớt lời khuyên — lượt kiểm định có
+điểm + dịch ngược đã bắt đúng loại lỗi); **H4 là việc của anh** (chạy 0034 trên Supabase).
+
+## 8. Rà việc còn thiếu + đề xuất tiếp (2026-11-09)
+
+**Còn thiếu / ranh giới đã biết**
+
+- H5 chưa có cho bản Anh: cần bộ kiểm đầu ra AI tiếng Anh (cụm cấm `cum_cam_en` đã có trong `thuat_ngu_en.json`, chưa nối vào
+  `kiem_ai`) + lời nhắc tiếng Anh — làm khi /en có người dùng thật.
+- H6 chỉ suy được cụm cho Tarot + Giao thoa (đúng hai nơi /en đang có phiếu). Khi Thần số /en có nút kiểm chứng → thêm
+  `ds.thanso.*` vào `nguon_cua_ma`. Chưa có e2e cho nút (cần Supabase + token GitHub) — kiểm bằng test engine + typecheck; chuỗi
+  thật `e2e-that/quan-tri-that` chưa phủ.
+- Trang Kho tri thức `/quan-tri/tri-thuc/[tệp]` chưa mở được tệp `en/…` (URL một đoạn); sửa tay bản phủ vẫn qua H6 hoặc PR thường.
+- H1 chỉ Bát tự (Tử vi không có lớp điều hậu). Lời "Nhà của bạn" không phụ thuộc mùa nên không cần cờ.
+- Migration 0034 (H4) vẫn chờ anh chạy; chưa chạy thì khung "Lệch theo ngôn ngữ" báo "chưa đọc được" và nút H6 không có mã để soạn.
+
+**Đề xuất ý tưởng để hieuban hoàn hảo hơn** (đối chiếu vòng tăng trưởng; chờ anh chọn)
+
+| # | Ý tưởng | Khâu · đo | Cần gì |
+|---|---|---|---|
+| Ý1 | **Thông báo "tháng này hai lá số cùng nói"**: đầu tháng, push nội dung tất định từ `nhat_quan` + `thoi_gian_lop` ("Tử vi và Bát tự cùng thấy công việc thuận tháng này — một việc nên làm"), mốc mới `thang_hai_la_so` trong `push_tuy_chon` (người dùng tự tích). | QUAY LẠI · `chart_interacted{push_mo}`, `reading_started{thoi_gian}` | migration nhỏ (nới CHECK `moc_lich`) |
+| Ý2 | **Chương "Điều bạn đã xác nhận" trong Chân dung tổng hợp**: báo cáo CD-1 đọc phiếu `ca_nhan` của chính người xem (RLS) → lớp giao thoa nằm trong báo cáo trả Sao, báo cáo cá nhân hơn theo thời gian dùng. | NẠP · `unlock_succeeded{chan_dung}`, phiếu `ds.giao_thoa.*` | không migration |
+| Ý3 | **Cụm trang "Sinh ở nước ngoài"** cho người Việt xa quê: một trang hướng dẫn + 12–15 trang nước đông người Việt (Mỹ, Úc, Canada, Đức, Nhật, Hàn, Đài Loan, Pháp, Séc, Anh, Ba Lan, Nga) với dữ kiện **engine tính**: múi giờ + lịch sử giờ mùa hè (tzdata), lệch giờ mặt trời trung bình từng thành phố, Nam bán cầu → công tắc mùa, lịch âm Việt/Trung lệch ngày nào trong năm. Cụ thể hoá "trang SEO Mỹ/Nhật/Úc/Canada" của QTE-1 giai đoạn 0; không mỏng vì mỗi trang có bảng số riêng. | THU HÚT · Search Console cụm mới, `profile_created{nuoc_ngoai}` | không migration |
+| Ý4 | **Thước "đồng thuận liên môn" cho người duyệt**: script đo trên 1.000 lá tỉ lệ Tử vi – Bát tự cùng mức theo từng mảng; mảng nào gần ngẫu nhiên thì lời "hai cách nhìn hai mặt" phải nói thật hơn, và là cơ sở đặt ngưỡng hộp "cùng thấy" (hiện = cùng mức). | nền móng chất lượng | script + khung `/quan-tri/hoc` |
+| Ý5 | **Kiểm chứng sau 30 ngày cho hộp giao thoa**: mã `ds.giao_thoa.*` vào hàng Q7 `kiem_chung_sau` như Tarot / quẻ → biết điểm giao thoa có đúng về lâu dài không. | HỌC · `feedback_submitted{sau_30, loai_hoi: giao_thoa}` | không migration (0022 sẵn) |
+| Ý6 | **Gợi ý công tắc ngay trong form hồ sơ**: chọn thành phố xa kinh tuyến múi giờ (Madrid, Urumqi) hoặc Nam bán cầu → dòng "Bạn sinh ở Sydney: lá số có thêm hai cách xem — giờ mặt trời thực, mùa nơi sinh" dẫn tới khung Trường phái. Tính năng HTT-1/HTT-2 mới có người dùng tới. | THU HÚT → công cụ · `chart_interacted{phai_gio_sinh\|phai_dieu_hau}` | không migration |
+| Ý7 | **A/B bản phủ theo thị trường** (HTT-2 đã ghi): `en-au` / `en-us` chỉ khác vài mẫu câu, đo bằng chính `lech_ngon_ngu` (cột `ngon_ngu` đã nhận `en-us`). | THU HÚT tiếng Anh · tỉ lệ "Resonates" theo bản phủ | khi /en có ≥ 100 phiếu / mã |

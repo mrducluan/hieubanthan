@@ -9,10 +9,14 @@
 
 - [ ] **Chạy migration 0034** (`supabase/migrations/0034_kiem_chung_ngon_ngu.sql`, sau 0033): phiếu "Đúng với mình" mang ngôn ngữ
   trang; chưa chạy thì phiếu vẫn ghi như cũ, chỉ chưa có khung "Lệch theo ngôn ngữ" ở `/quan-tri/hoc`.
-- [ ] **Quyết H1**: cờ "Nam bán cầu" cho Bát tự theo cách điều hậu (chỉ lớp nóng – lạnh theo mùa thực tế, trụ không đổi, mặc định
-  tắt). Em khuyên: chỉ làm nếu có nhu cầu từ người Việt ở Úc / NZ.
-- [ ] **Quyết H5 / H6** (HTT-2): AI diễn đạt lại hộp "Điểm giao thoa" qua `kiem_ai`; nút "Soạn lại nháp → PR" cho mã lệch theo
-  ngôn ngữ. Cả hai chờ số phiếu thật (≥ 30 trên hộp giao thoa; ≥ 100 phiếu /en mỗi mã).
+- [x] ~~Quyết H1 / H5 / H6~~ — anh duyệt 2026-11-09, đã làm trong HTT-2 (`docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 7).
+- [ ] **Bật công tắc "AI diễn đạt lại hộp giao thoa"** (`/quan-tri/cai-dat` → nhóm "Điểm giao thoa", mặc định tắt) khi hộp
+  `ds.giao_thoa.*` có ≥ 30 phiếu "Đúng với mình" (xem `/quan-tri/hoc`); chỉ bản Việt, tốn lượt AI.
+- [ ] **H6 cần khoá AI trên engine** (đã có `OPENROUTER_API_KEY`; tuỳ chọn `CHUYEN_NGU_MODEL`) + `QUAN_TRI_GITHUB_TOKEN` trên web
+  (đã có từ QT-1). Nút "Soạn lại nháp" chỉ có việc khi khung "Lệch theo ngôn ngữ" có mã (cần 0034 + ≥ 100 phiếu /en mỗi mã).
+- [ ] Sau deploy: hồ sơ sinh ở **Sydney / Melbourne / Auckland** → `/bat-tu` → "Lá số chi tiết" → khung Trường phái có dòng
+  "Mùa nơi sinh"; chọn "Mùa thực nơi sinh" thì hành điều hậu đổi (Thủy ↔ Hỏa), tứ trụ giữ nguyên. Hồ sơ Tokyo / Việt Nam không có dòng này.
+- [ ] Chọn ý tưởng tiếp theo trong `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 8 (Ý1–Ý7).
 - [ ] Người bản xứ duyệt `engine/app/kb/data/en/giao_thoa_kb.json` (`_trang_thai: bien_tap`) cùng đợt với các tệp `en/` khác.
 - [ ] Đã kiểm 8 QID Wikidata qua API (5 QID trong tài liệu Drive sai thực thể) — không cần anh làm gì; nếu anh muốn thêm thực thể
   khác (vd Chaldea, Lạc Thư) thì báo em tra.

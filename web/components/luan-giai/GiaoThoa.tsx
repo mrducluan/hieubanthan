@@ -13,7 +13,9 @@ import { cn } from "@/lib/utils";
 
 export interface PhieuSuKien { loai: string; mau: string; phai: string; ket_qua: "dung" | "chua_dung" }
 
-interface KetQua { du: boolean; so_dung: number; so_chua_dung: number; hop: Hop[]; tom_tat: string; cau_tu_soi: string; phai?: string }
+interface KetQua { du: boolean; so_dung: number; so_chua_dung: number; hop: Hop[]; tom_tat: string; cau_tu_soi: string; phai?: string;
+  /** HTT-2 H5 — đoạn AI diễn đạt lại đúng các hộp bên dưới (chỉ khi công tắc quản trị bật và qua bộ kiểm). */
+  van_ai?: string; dien_dat?: "ai" | "mau" }
 
 const CHU = {
   vi: { tieu_de: "Điểm giao thoa từ điều bạn đã xác nhận", dan: "Ghép từ những hộp bạn vừa bấm \"Đúng với mình\" — không tính lại, không đổi mức nào.",
@@ -73,6 +75,12 @@ export function GiaoThoa({ en = false, className }: { en?: boolean; className?: 
       <p className="mt-1 text-sm text-fg-muted">{c.dan}</p>
       {cho && hop.length === 0 && <p className="mt-3 animate-pulse text-sm text-fg-faint" role="status">{c.cho}</p>}
       {kq?.tom_tat && hop.length > 0 && <p className="mt-3 text-sm text-fg" data-testid="giao-thoa-tom-tat">{kq.tom_tat}</p>}
+      {kq?.van_ai && hop.length > 0 && (
+        <div className="mt-3 rounded-xl border border-line/60 bg-bg-2/50 p-3" data-testid="giao-thoa-van-ai">
+          <p className="whitespace-pre-line text-[15px] leading-relaxed text-fg">{kq.van_ai}</p>
+          <p className="mt-1.5 text-xs text-fg-faint">{en ? "Phrased automatically from the boxes below." : "Diễn đạt tự động từ các hộp bên dưới — không thêm dữ kiện."}</p>
+        </div>
+      )}
       {hop.length > 0 && (
         <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
           {hop.map((h) => en ? <HopGiaoThoaEn key={h.ma_mau ?? h.tieu_de} h={h} c={c} phai={kq?.phai ?? "giao_thoa_1"} />

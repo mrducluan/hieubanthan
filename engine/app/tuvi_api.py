@@ -83,6 +83,9 @@ class TuanTrietInput(BaseModel):
     # TRỜI THỰC tại kinh độ nơi sinh (tỉnh Việt Nam / thành phố nước ngoài) — một công tắc "trường phái", người dùng chọn.
     # Cần kinh độ: không có (nước ngoài chỉ khai múi giờ / mục "khác") → 422. Mặc định không đổi → không tăng ENGINE_VERSION.
     gio_sinh: Literal["dong_ho", "mat_troi"] = "dong_ho"
+    # HTT-2 H1 (chỉ Bát tự): lớp điều hậu đọc theo mùa thực nơi sinh — chỉ có tác dụng khi nơi sinh ở ngoài chí tuyến Nam
+    # (vĩ độ ≤ −23,44°: Sydney, Melbourne, Auckland, São Paulo, Johannesburg…); mặc định theo lịch tiết khí (Bắc bán cầu).
+    dieu_hau: Literal["bac_ban_cau", "noi_sinh"] = "bac_ban_cau"
 
 
 def _dich_mat_troi(clock_dt: _dt.datetime, lech_h: float, kinh_do: float) -> tuple[_dt.datetime, int]:
@@ -155,6 +158,9 @@ class _DauVao:
         # "giờ sinh theo mặt trời thực". Khai múi giờ IANA hay mục "khác" → không có kinh độ.
         self.thanh_pho = mui_gio.thanh_pho(inp.mui_gio) if (nuoc_ngoai and inp.mui_gio) else None
         self.kinh_do = (tinh["kinh_do"] if tinh else None) if not nuoc_ngoai else (self.thanh_pho or {}).get("kinh_do")
+        # Vĩ độ chỉ dùng cho công tắc điều hậu Nam bán cầu (HTT-2 H1): tỉnh Việt Nam nằm trọn phía Bắc chí tuyến (8°–23,4°N) → vĩ
+        # độ danh nghĩa 16° (không cần toạ độ từng tỉnh); thành phố nước ngoài lấy từ `mui_gio.json`.
+        self.vi_do = (16.0 if tinh else None) if not nuoc_ngoai else (self.thanh_pho or {}).get("vi_do")
         self.ten_noi = (tinh["ten"] if tinh else None) if not nuoc_ngoai else (self.thanh_pho or {}).get("ten_en") or (self.thanh_pho or {}).get("ten")
         self.doi_mat_troi: int | None = None   # phút đã dịch khi gio_sinh = "mat_troi" (so với giờ chuẩn của khung lịch)
         self.gio_chuan_truoc: _dt.datetime | None = None

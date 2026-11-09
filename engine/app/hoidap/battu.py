@@ -706,7 +706,7 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     ls = None
     if sinh and pl["loai"] in ("la_so", "van", "hop"):
         ls = bt.la_so(sinh["lich"], sinh["gioi_tinh"], sinh.get("gio_ty", "da_ty"),
-                      sinh.get("utc_lich", config.CALENDAR_MERIDIAN_TZ))
+                      sinh.get("utc_lich", config.CALENDAR_MERIDIAN_TZ), nam_ban_cau=bool(sinh.get("nam_ban_cau")))
     hien_tai = ngay_xem if not pl["nam_xem"] and nam_xem == chung.nam_xem_hh(None, ngay_xem, "")[0] else None
     goi = goi_bang_chung(pl, ls, sinh["gioi_tinh"] if sinh else None, nam_xem, hien_tai)
     bc_ds = None

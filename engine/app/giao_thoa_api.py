@@ -26,10 +26,15 @@ class GiaoThoaInput(BaseModel):
     phieu: list[PhieuVao] = Field(default_factory=list, max_length=200)
     ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
     trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)
+    # HTT-2 H5: web gửi true khi cài đặt quản trị `giao_thoa.dien_dat` bật — AI chỉ diễn đạt lại hộp đã ghép (bản tất định
+    # vẫn là bản chính); chỉ bản tiếng Việt.
+    dien_dat: bool = False
 
 
 @router.post("/v1/giao-thoa")
 def api_giao_thoa(inp: GiaoThoaInput) -> dict:
     kq = giao_thoa.lap([p.model_dump() for p in inp.phieu], ca_nhan=inp.ca_nhan,
                        trong_so={k: v.model_dump() for k, v in inp.trong_so.items()} if inp.trong_so else None)
+    if inp.dien_dat:
+        kq = giao_thoa.dien_dat(kq)
     return {"engine_version": ENGINE_VERSION, **kq}

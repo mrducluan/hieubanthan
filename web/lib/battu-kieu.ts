@@ -28,6 +28,8 @@ export interface LaSoBatTu {
     ds: { can: string; chi: string; tu_nam: number; den_nam: number; tu_tuoi_thuc: number }[];
   };
   co_canh_bao: { loai: string; chi_tiet: string }[];
+  /** HTT-2 H1 — engine ≥ bản này: lựa chọn điều hậu đang dùng + có mở được "theo mùa nơi sinh" không (ngoài chí tuyến Nam). */
+  tuy_chon?: { dieu_hau: "bac_ban_cau" | "noi_sinh"; nam_ban_cau_kha_dung: boolean };
   /** Trục 2 UX — câu lời thường về nhật chủ (KB đời sống) cho đầu trang; engine cũ không có → đầu trang chỉ còn nút. */
   loi_thuong?: { hinh_tuong: string | null; chan_dung: string | null; cau_tu_soi: string | null } | null;
   /** VZ-3 — có khi engine ≥ bản này. */
