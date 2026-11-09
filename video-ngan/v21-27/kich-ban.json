@@ -93,7 +93,7 @@
           "loai": "hoi",
           "chu": "Năm 2027 tiền bạc của tôi thế nào, có nên đầu tư không?",
           "phu": "Hỏi thử engine Tử vi",
-          "vo": "[cheerfully] Câu ai cũng hỏi dịp cuối năm: năm sau tiền bạc thế nào, có nên đầu tư không?"
+          "vo": "[cheerfully] Dịp cuối năm, ai cũng hỏi: năm sau tiền bạc thế nào, có nên đầu tư không?"
         },
         {
           "loai": "tinh",
@@ -104,7 +104,7 @@
             "Cung Tài Bạch có *Thiên Phủ*: kho giữ tiền"
           ],
           "nho": "Nhân vật minh hoạ",
-          "vo": "[enthusiastic] Hiểu Bản Thân an lá số theo âm lịch Việt Nam, rồi chồng ba lớp hạn: mười năm, năm Đinh Mùi, và nhịp phụ. [cheerfully] Cung tiền bạc có sao Thiên Phủ, cái kho giữ tiền."
+          "vo": "[enthusiastic] Hiểu Bản Thân an lá số theo âm lịch Việt Nam, rồi xếp thêm ba lớp hạn: mười năm, năm Đinh Mùi, và tiểu hạn. [cheerfully] Cung tiền bạc có sao Thiên Phủ, cái kho giữ tiền."
         },
         {
           "loai": "dap",
@@ -162,7 +162,7 @@
           "loai": "hoi",
           "chu": "Tôi hợp với nghề gì?",
           "phu": "Hỏi thử engine Bát tự",
-          "vo": "[curious] Mình đem câu tôi hợp nghề gì, hỏi phần Bát tự của Hiểu Bản Thân."
+          "vo": "[curious] Mình hỏi phần Bát tự của Hiểu Bản Thân: tôi hợp với nghề gì?"
         },
         {
           "loai": "tinh",
@@ -204,7 +204,7 @@
           "loai": "cta",
           "chu": "Bạn mạnh ở vai nào?",
           "phu": "Nhập ngày giờ sinh · chương đầu đọc miễn phí",
-          "vo": "[curious] Bạn mạnh ở vai nào? Tag đồng nghiệp hay nói để em làm nha! [excited] Vào hiểu bản chấm com, gạch chéo, bát tự. Chương đầu đọc miễn phí!"
+          "vo": "[curious] Bạn mạnh ở vai nào? Gửi cho đồng nghiệp hay nói để em làm nha! [excited] Vào hiểu bản chấm com, gạch chéo, bát tự. Chương đầu đọc miễn phí!"
         }
       ]
     },
@@ -225,7 +225,7 @@
           "loai": "hook",
           "chu": "Hỏi người cũ có quay lại không…",
           "phu": "Hào ra đúng mấy chữ: *bừng cháy, tắt lịm*.",
-          "vo": "[curious] Hỏi Kinh Dịch: người yêu cũ có quay lại không? [dramatic] Hào ra đúng mấy chữ... bừng cháy, tắt lịm."
+          "vo": "[curious] Hỏi Kinh Dịch: người yêu cũ có quay lại không? [dramatic] Câu trả lời chỉ có mấy chữ... bừng cháy, tắt lịm."
         },
         {
           "loai": "hoi",
@@ -250,13 +250,13 @@
             "Đột ngột mà đến, *bừng cháy*, *tắt lịm*, bị bỏ rơi",
             "Hiểu đơn giản: nổi lên quá nhanh thì cũng tắt nhanh"
           ],
-          "vo": "[mysterious] Lời hào Cửu Tứ: đột ngột mà đến, bừng cháy, tắt lịm. [warmly] Hiểu đơn giản: nổi lên quá nhanh, thì cũng tắt nhanh."
+          "vo": "[mysterious] Lời hào Cửu Tứ: đột ngột mà đến, bừng cháy, tắt lịm. [warmly] Hiểu đơn giản: bùng lên quá nhanh, thì cũng tắt nhanh."
         },
         {
           "loai": "ngo",
           "chu": "Nghiêng: *Chưa nên vội*",
           "phu": "Người ấy đang ở thế vững, và đang gây sức ép lên bạn",
-          "vo": "[softly] Quẻ nghiêng về: chưa nên vội. Người ấy đang ở thế vững, và đang gây sức ép lên bạn."
+          "vo": "[softly] Kết quả nghiêng về: chưa nên vội. Người ấy đang ở thế vững, và đang gây sức ép lên bạn."
         },
         {
           "loai": "viec",
@@ -386,7 +386,7 @@
             "Có *lộc ăn* · *khéo nói* · ưa ăn ngon",
             "Nhắc nhẹ: *giữ lời đã hứa*"
           ],
-          "vo": "[playfully] Dân gian xem là người có lộc ăn, khéo nói, ưa ăn ngon. [warmly] Kèm một lời nhắc nhẹ: giữ lời đã hứa."
+          "vo": "[playfully] Dân gian xem là người có lộc ăn, khéo nói, ưa ăn ngon. [warmly] Và một lời nhắc nhẹ: giữ lời đã hứa."
         },
         {
           "loai": "tinh2",
@@ -444,7 +444,7 @@
             "Lá *Sắp tới* được tính nặng *gấp đôi*"
           ],
           "nho": "Một lần rút minh hoạ",
-          "vo": "[cheerfully] Trải ba lá: quá khứ, hiện tại, sắp tới. [mysterious] Ra Tháp, năm Gậy, và tám Cốc, đều ngược. [enthusiastic] Hiểu Bản Thân cân từng lá, lá sắp tới tính nặng gấp đôi."
+          "vo": "[cheerfully] Mình rút ba lá: quá khứ, hiện tại, sắp tới. [mysterious] Được lá Tháp, năm Gậy, và tám Cốc, đều ngược. [enthusiastic] Hiểu Bản Thân cân từng lá, lá sắp tới tính nặng gấp đôi."
         },
         {
           "loai": "dap",
@@ -452,13 +452,13 @@
           "dong": [
             "Nó chỉ *đổi chiều* nghĩa của lá"
           ],
-          "vo": "[warmly] Lá ngược không phải điềm xấu đâu. Nó chỉ đổi chiều nghĩa của lá thôi."
+          "vo": "[warmly] Lá ngược không có nghĩa là xui đâu. Nó chỉ đổi chiều nghĩa của lá thôi."
         },
         {
           "loai": "ngo",
           "chu": "“Tôi *đi tìm*, hay *đi trốn*?”",
           "phu": "Nghiêng: Chưa nên vội · lá nặng nhất: 8 Cốc ngược",
-          "vo": "[softly] Bài nghiêng về: chưa nên vội. Lá nặng nhất là tám Cốc ngược, và nó hỏi bạn: [dramatic] tôi đi tìm... hay đi trốn?"
+          "vo": "[softly] Kết quả là: chưa nên vội. Lá nặng nhất là tám Cốc ngược, và nó hỏi bạn: [dramatic] tôi đi tìm... hay đi trốn?"
         },
         {
           "loai": "viec",

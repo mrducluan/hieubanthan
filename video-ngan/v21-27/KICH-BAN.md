@@ -24,21 +24,21 @@ Cập nhật 09/11/2026. Mỗi mảng một video dọc 9:16, dài 44–53 giây
 | 26 | Nhân tướng | Nốt ruồi quanh miệng: đoạn cuối mới là quan trọng nhất. | Nốt ruồi đổi màu, đổi cỡ, chảy nước → đi khám da liễu | hieuban.com/nhan-tuong |
 | 27 | Tarot | Rút 3 lá, ra cả 3 lá *ngược*. Đừng hoảng. | Lá ngược không phải điềm xấu; "Tôi đi tìm, hay đi trốn?" | hieuban.com/tarot |
 
-## Quy ước chung cho giọng đọc (voice)
+## Giọng đọc (đã lồng, bản hoàn chỉnh)
 
-- Giọng nữ trẻ hoặc nam trầm, **giọng Bắc chuẩn**, nhịp ~4 âm tiết/giây (thời lượng cảnh trong video nháp đã tính theo nhịp này).
-- Đọc **"hieuban chấm com"**, không đánh vần. "2027" đọc **"hai không hai bảy"**. "Thần số" không đọc "thần sổ".
-- Đọc rõ: **Hoá Kỵ** (hoá-kỵ), **Thiên Phủ**, **Nhâm** (nhâm, không "nhầm"), **Mậu**, **Thất Sát**, **Cửu Tứ**, **Diên Niên**,
-  **Xuất Nạp quan**, **Cốc** (trong "tám Cốc").
-- Dấu phẩy trong lời đọc là chỗ ngắt; dấu hai chấm ngắt dài hơn một nhịp.
-- Không đổi lời đọc thành "chắc chắn", "sẽ", "chính xác 100%"; không thêm "AI".
+- **ElevenLabs, giọng Hanh** (nữ, giọng Bắc, `pGapy9MNHCukzJtjavF0`), mô hình **eleven_v3**, stability 0.5: đúng giọng và
+  cài đặt các video Hiểu Bản Thân trước (lấy từ lịch sử tạo giọng của tài khoản). Lời có thẻ cảm xúc ([warmly], [curious]…)
+  như lô trước; đường dẫn đọc "hiểu bản chấm com, gạch chéo, …", số đọc thành chữ.
+- **Lời đọc bản cuối nằm ở `kich-ban.json` (trường `vo`)**. Cột "Lời đọc" trong các bảng dưới là bản viết đầu; bản thu đã
+  chỉnh câu chữ cho giọng đọc tròn tiếng (cùng ý, cùng dữ kiện engine) — xem mục "QC giọng đọc".
+- Thời lượng mỗi cảnh = độ dài giọng thật + 0,55 giây (cảnh CTA thêm 1,4 giây). Giọng vào sau mốc cảnh 0,15 giây, nhạc nền hạ
+  thấp, chuẩn hoá âm lượng −15 LUFS (mức hợp TikTok / Reels).
 
-## Cách dựng hình (bản nháp đã có) và b-roll
+## Cách dựng hình và b-roll
 
-Video nháp `v21.mp4 … v27.mp4` đã dựng xong bằng **hình động tạo sinh bằng code** (trời sao + tinh vân trôi, mỗi mảng một
+Video `v21.mp4 … v27.mp4` dựng bằng **hình động tạo sinh bằng code** (trời sao + tinh vân trôi, mỗi mảng một
 màu nhấn; hình minh hoạ vẽ theo đúng dữ liệu engine: vòng số 1–9, lá số 12 cung, tứ trụ, sáu hào, la bàn 8 hướng, gương mặt
-và bộ vị, ba lá bài lật ngược) + phụ đề + nhạc nền tự tổng hợp. **Chưa có giọng đọc**: lồng voice theo lời ở dưới, thời lượng
-từng cảnh đã khớp.
+và bộ vị, ba lá bài lật ngược) + phụ đề chạy theo giọng đọc + nhạc nền tự tổng hợp + giọng ElevenLabs.
 
 Muốn thay b-roll bằng **hình AI tạo sinh** (Veo / Kling / Midjourney…): prompt ở từng video, dùng làm **nền hoặc chèn 1–2 giây**,
 giữ nguyên lớp chữ và hình dữ liệu (lá số, quẻ, lá bài) vì đó là phần "engine tính" — không để AI vẽ lại con số hay quẻ.
@@ -249,6 +249,19 @@ bio). Gửi cho đứa bạn đang cầm offer 💼* · Shorts: **Có nên ngh�
 - **Hình:** đã duyệt ảnh mốc từng cảnh, sửa 6 lỗi bố cục (hình đè chữ ở cảnh mở, thẻ tràn xuống phụ đề, vệt sáng có mép cứng,
   đồng xu đè tên quẻ…). Chữ và hình chính nằm trong vùng an toàn (tránh cột nút bên phải và mép dưới của TikTok/Reels).
 
+## QC giọng đọc
+
+- Mỗi câu (49 câu) được **nghe lại bằng nhận dạng giọng ElevenLabs** (`scribe_v1`) và so với lời kịch bản theo từng âm tiết.
+- Câu đọc lộ thẻ cảm xúc thành tiếng (lần đầu gặp ở 2 câu: "[curious]" → "Cursor…") → tự tạo lại.
+- Câu khớp dưới 95 % → tạo thêm 2 bản, giữ bản rõ nhất. Chữ mà cả 3 bản đều lệch thanh thì đổi câu chữ, giữ nguyên ý:
+  "Câu ai cũng hỏi" → "Dịp cuối năm, ai cũng hỏi"; "nhịp phụ" → "tiểu hạn"; "chồng ba lớp hạn" → "xếp thêm ba lớp hạn";
+  "Quẻ / Bài nghiêng về" → "Kết quả nghiêng về / Kết quả là"; "Kèm một lời nhắc" → "Và một lời nhắc";
+  "Trải ba lá… Ra Tháp" → "Mình rút ba lá… Được lá Tháp"; "không phải điềm xấu" → "không có nghĩa là xui";
+  "nổi lên quá nhanh" → "bùng lên quá nhanh"; "Hào ra đúng mấy chữ" → "Câu trả lời chỉ có mấy chữ";
+  "Tag đồng nghiệp" → "Gửi cho đồng nghiệp".
+- Kết quả: 49/49 câu đạt; các câu điểm dưới 0,95 chỉ do bộ nhận dạng viết số thành chữ số ("2027", "24", "hieuban.com").
+- Video cuối cũng được nghe lại toàn bài để kiểm thứ tự câu và nhạc nền không lấn giọng.
+
 ## Gợi ý đăng
 
 - **Ngay:** 22 (Tử vi 2027 — đúng mùa cuối năm), 24 (người yêu cũ — hay được gửi cho bạn), 27 (nghỉ việc — cuối năm hay nhận offer).
@@ -260,9 +273,11 @@ bio). Gửi cho đứa bạn đang cầm offer 💼* · Shorts: **Có nên ngh�
 
 ```bash
 cd video-ngan/v21-27
-node dung.mjs ../xuat            # toàn bộ 7 video (≈ 15–20 phút)
+ELEVENLABS_API_KEY=… python3 giong.py ../giong      # tạo giọng + nghe lại (có sẵn thì bỏ qua)
+python3 chon_tot.py ../giong 0.95                     # câu chưa rõ: tạo thêm bản, giữ bản rõ nhất
+node dung.mjs ../xuat --giong ../giong/giong.json     # toàn bộ 7 video có giọng (≈ 15–20 phút)
 node dung.mjs ../xuat v24        # một video
 node dung.mjs ../duyet --anh     # chỉ xuất ảnh mốc từng cảnh để duyệt
 ```
 
-Cần: Node + Playwright (Chromium), ffmpeg, python3. Sửa lời / chữ ở `kich-ban.json`; hình ở `khung.html`; nhạc nền ở `am-thanh.py`.
+Cần: Node + Playwright (Chromium), ffmpeg, python3, khoá ElevenLabs (`ELEVENLABS_VOICE_ID` mặc định là giọng Hanh). Sửa lời / chữ ở `kich-ban.json`; hình ở `khung.html`; nhạc nền ở `am-thanh.py`.

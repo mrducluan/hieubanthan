@@ -13,7 +13,8 @@ GIONG = os.environ.get("ELEVENLABS_VOICE_ID", "pGapy9MNHCukzJtjavF0")
 KHOA = os.environ.get("ELEVENLABS_API_KEY", "proxy-injected")
 os.makedirs(ra, exist_ok=True)
 kb = json.load(open(os.path.join(DIR, "kich-ban.json"), encoding="utf-8"))
-bang = {}
+DS = os.path.join(ra, "giong.json")
+bang = json.load(open(DS, encoding="utf-8")) if os.path.exists(DS) else {}   # gộp, không ghi đè video không chạy
 CHO_PHEP = {"comment", "offer", "tarot", "com", "hieu", "ban", "hieuban", "thanso", "online", "tag", "nha", "than", "dich", "kinh", "thuy", "phong", "tuong", "nhan"}
 
 
@@ -50,6 +51,9 @@ for v in kb["video"]:
     for i, sc in enumerate(v["canh"], 1):
         bam = hashlib.sha1((GIONG + sc["vo"]).encode()).hexdigest()[:10]
         tep = os.path.join(ra, f"{v['ma']}-{i}-{bam}.mp3")
+        cu = bang.get(f"{v['ma']}-{i}")
+        if cu and cu["tep"].startswith(tep[:-4]) and os.path.exists(cu["tep"]):   # đã có (kể cả bản tốt nhất chon_tot chọn)
+            print(v["ma"], i, cu["giay"], "(có sẵn)"); continue
         if not os.path.exists(tep): tao(tep, sc["vo"])
         # QC: nghe lại bằng nhận dạng giọng; chữ Latin lạ (thẻ cảm xúc bị đọc thành tiếng) → tạo lại
         loi = kiem(tep, sc["vo"])
@@ -62,4 +66,4 @@ for v in kb["video"]:
         dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", tep]).decode())
         bang[f"{v['ma']}-{i}"] = {"tep": tep, "giay": round(dur, 2), "nghe_lai": NGHE.get(tep, "")}
         print(v["ma"], i, round(dur, 2))
-json.dump(bang, open(os.path.join(ra, "giong.json"), "w"), ensure_ascii=False, indent=1)
+json.dump(bang, open(DS, "w"), ensure_ascii=False, indent=1)
