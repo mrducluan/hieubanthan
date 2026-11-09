@@ -24,6 +24,8 @@ const DauVao = z.discriminatedUnion("viec", [
 /** "la.dai_0.y_xuoi" → ["la", "dai_0", "y_xuoi"]; "muc.3.de_hieu" → ["muc", 3, "de_hieu"] (chỉ số mảng thành số). */
 const duongTuChuoi = (d: string): DuongDan => d.split(".").map((k) => (/^\d+$/.test(k) ? Number(k) : k));
 const cat = (s: string, n = 160) => (s.length > n ? `${s.slice(0, n)}…` : s).replace(/\s+/g, " ");
+/** Ô bảng Markdown trong mô tả PR: thoát dấu gạch chéo ngược trước rồi mới tới dấu "|" (CodeQL: thoát không trọn). */
+const oBang = (s: string) => s.replace(/\\/g, "\\\\").replace(/\|/g, "\\|");
 
 export async function POST(req: Request) {
   const p = await congApi(req, SUA_KB);
@@ -54,7 +56,7 @@ export async function POST(req: Request) {
       `(ba lượt: chuyển ngữ → biên tập bản xứ → kiểm định có điểm + dịch ngược; bộ kiểm luật cố định). Người bản xứ đọc rồi mới merge.`,
       ghi_chu.trim() ? `\n> ${ghi_chu.trim().replace(/\n/g, "\n> ")}\n` : "",
       `\n| Chuỗi | Trước | Sau |\n|---|---|---|`,
-      ...muc.map((s) => `| \`${khoaDuong(s.duong).replace(/\|/g, "\\|")}\` | ${cat(s.cu).replace(/\|/g, "\\|")} | ${cat(s.moi).replace(/\|/g, "\\|")} |`),
+      ...muc.map((s) => `| \`${oBang(khoaDuong(s.duong))}\` | ${oBang(cat(s.cu))} | ${oBang(cat(s.moi))} |`),
       `\nChỉ đổi giá trị chuỗi đã có (định dạng file giữ nguyên). Merge khi CI xanh; Render tự triển khai.`,
     ].join("\n");
     const pr = await moPrSuaKb({ ten: tep, shaGoc: goc.sha, text: moi, tieuDe, moTa });
