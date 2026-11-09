@@ -3,7 +3,7 @@ import Link from "@/components/khung/Lien";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { ArrowRight, CalendarHeart, Compass, HeartHandshake, Orbit, ScanFace } from "lucide-react";
+import { ArrowRight, CalendarHeart, Compass, HeartHandshake, Hexagon, Layers, Orbit, ScanFace } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NhapHoSo } from "./NhapHoSo";
 import { NutChiaSeNgay } from "@/components/chia-se/NutChiaSeNgay";
@@ -28,7 +28,9 @@ export function CuaVao() {
   );
 }
 
-const LOI_TAT = [["/hom-nay", "Hôm nay", CalendarHeart], ["/nhan-tuong", "Xem Tướng", ScanFace], ["/phong-thuy", "Phong Thuỷ", Compass], ["/tu-vi", "Tử vi", Orbit]] as const;
+// Lối tắt: 6 ô, 2 cột điện thoại / 3 cột từ sm — cột trái trang chủ chỉ rộng ~30rem nên 4 cột làm chữ xuống dòng.
+const LOI_TAT = [["/hom-nay", "Hôm nay", CalendarHeart], ["/tu-vi", "Tử vi", Orbit], ["/nhan-tuong", "Xem tướng", ScanFace],
+  ["/phong-thuy", "Phong thuỷ", Compass], ["/tarot", "Tarot", Layers], ["/kinh-dich", "Kinh Dịch", Hexagon]] as const;
 
 // Người quay lại (khâu QUAY LẠI → MỜI): con số của chính họ hôm nay + một câu tự soi (engine tính, NHIP-1), chia sẻ thẻ
 // ngày có ảnh, "Xem hợp với ai" dẫn thẳng tới /hop-doi để nhập ngày sinh người ấy (không biết ngày sinh thì gửi lời mời
@@ -71,11 +73,11 @@ function ChaoLai({ hoSo }: { hoSo: HoSo }) {
         </Button>
       </div>
 
-      <ul className="mt-4 grid grid-cols-2 gap-2 border-t border-line/60 pt-4 text-sm sm:grid-cols-4">
+      <ul className="mt-4 grid grid-cols-2 gap-2 border-t border-line/60 pt-4 text-sm sm:grid-cols-3">
         {LOI_TAT.map(([href, ten, Icon]) => (
           <li key={href}>
-            <Link href={href} className="flex items-center justify-center gap-1.5 rounded-xl border border-line/70 bg-bg/30 px-2 py-2 text-fg-muted transition-colors hover:border-gold/50 hover:text-fg">
-              <Icon className="size-4 text-gold" aria-hidden />{ten}
+            <Link href={href} className="flex items-center justify-center gap-1.5 whitespace-nowrap rounded-xl border border-line/70 bg-bg/30 px-2 py-2 text-fg-muted transition-colors hover:border-gold/50 hover:text-fg">
+              <Icon className="size-4 shrink-0 text-gold" aria-hidden />{ten}
             </Link>
           </li>
         ))}

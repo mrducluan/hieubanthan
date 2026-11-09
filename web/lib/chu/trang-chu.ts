@@ -8,7 +8,7 @@ const CO_CHON = [
   { gia_tri: "nho", nhan: "Nhỏ" }, { gia_tri: "thuong", nhan: "Vừa" },
   { gia_tri: "lon", nhan: "Lớn" }, { gia_tri: "rat_lon", nhan: "Rất lớn" },
 ] as const;
-const D = "Đầu trang", DM = "Dòng điểm mù chạy", SS = "Vì sao xem ở đây", B = "Bảng so sánh", M = "Bốn mảng huyền học", R = "Ô riêng tư";
+const D = "Đầu trang", DM = "Dòng điểm mù chạy", SS = "Vì sao xem ở đây", B = "Bảng so sánh", M = "Các mảng huyền học", G = "Bài đọc ghép", R = "Ô riêng tư";
 
 const DIEM_MU: [number, string][] = [
   [2, "Nói “có” khi trong lòng muốn nói “không”."],
@@ -40,14 +40,25 @@ const HANG: [string, string, string][] = [
 
 const MANG: [string, string, string][] = [
   ["tu_vi", "Tử vi", "Lá số 12 cung, đại hạn, lưu niên"],
-  ["kinh_dich", "Kinh Dịch", "Gieo một quẻ cho một việc đang cân nhắc"],
   ["bat_tu", "Bát tự", "Tứ trụ, ngũ hành, đại vận"],
+  ["kinh_dich", "Kinh Dịch", "Gieo một quẻ cho một việc đang cân nhắc"],
   ["phong_thuy", "Phong thuỷ", "Mệnh quái, hướng nhà hợp tuổi"],
+  // NT-1, TR-1: hai mảng mới — không cần giờ sinh.
+  ["nhan_tuong", "Nhân tướng học", "Tự soi gương, đọc theo sách tướng xưa"],
+  ["tarot", "Tarot", "Tự xáo, tự rút lá cho một việc đang bí"],
+];
+
+// Bài đọc ghép nhiều mảng (CD-1, NAM-1/2): đặt cạnh nhau, không thay mảng nào. Mô tả phải đúng với trang đang chạy.
+const GHEP: [string, string, string, string][] = [
+  ["chan_dung", "/chan-dung", "Chân dung tổng hợp", "Tử vi, Bát tự và gương mặt cùng nhìn sáu mảng đời: chỗ nào cùng thấy, chỗ nào khác"],
+  ["thoi_gian", "/thoi-gian-toi", "Thời gian tới của bạn", "3 tháng và 12 tháng tới theo ngày sinh, mỗi tháng một việc nên làm"],
+  ["nam", "/nam", "Xem theo năm", "Năm con gì, Tam tai, tuổi làm nhà, cưới hỏi, sinh con"],
 ];
 
 export const SO_DIEM_MU = DIEM_MU.length;
 export const SO_HANG_SO_SANH = HANG.length;
 export const KHOA_MANG = MANG.map(([k]) => k);
+export const DS_GHEP = GHEP.map(([k, href]) => ({ khoa: k, href }));
 
 export const CHU_TRANG_CHU = {
   // TC-HOOK2 (2026-10-29): 3 người đọc thử chọn phương án "Năm nay của bạn" — lời ngắn, nói rõ nhận gì + năm nay.
@@ -88,13 +99,22 @@ export const CHU_TRANG_CHU = {
   "so_sanh.nut": { nhom: B, nhan: "Nút dưới bảng (mở /than-so)", mac_dinh: "Xem con số của bạn", toi_da: 40 },
 
   "mang.nho": { nhom: M, nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Khám phá sâu hơn", toi_da: 60 },
-  "mang.lon": { nhom: M, nhan: "Tiêu đề mục", mac_dinh: "Bốn mảng huyền học, một hồ sơ", toi_da: 120 },
+  "mang.lon": { nhom: M, nhan: "Tiêu đề mục", mac_dinh: "Sáu mảng huyền học, một hồ sơ", toi_da: 120 },
   "mang.mo_ta": { nhom: M, nhan: "Mô tả dưới tiêu đề", toi_da: 300,
-    mac_dinh: "Sau thần số, bạn có thể đi tiếp vào các hệ thống phương Đông — dùng luôn hồ sơ đã nhập, chỉ hỏi thêm giờ sinh khi cần." },
-  "mang.xem_tat_ca": { nhom: M, nhan: "Link dưới bốn thẻ (mở /huyen-hoc)", mac_dinh: "Xem cả năm mảng và công cụ lịch, tuổi", toi_da: 60 },
+    mac_dinh: "Sau thần số, bạn đi tiếp vào mảng mình tò mò — dùng luôn hồ sơ đã nhập. Tử vi, Bát tự cần thêm giờ sinh; xem tướng và Tarot thì không." },
+  "mang.xem_tat_ca": { nhom: M, nhan: "Link dưới các thẻ (mở /huyen-hoc)", mac_dinh: "Xem cả bảy mảng và công cụ lịch, tuổi", toi_da: 60 },
   ...Object.fromEntries(MANG.flatMap(([k, ten, mo]) => [
     [`mang.${k}_ten`, { nhom: M, nhan: `Thẻ ${ten} — tên`, mac_dinh: ten, toi_da: 30 }],
     [`mang.${k}_mo`, { nhom: M, nhan: `Thẻ ${ten} — mô tả`, mac_dinh: mo, toi_da: 80 }],
+  ])),
+
+  "ghep.nho": { nhom: G, nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Ghép lại cho rõ", toi_da: 60 },
+  "ghep.lon": { nhom: G, nhan: "Tiêu đề mục", mac_dinh: "Khi một cách nhìn chưa đủ", toi_da: 120 },
+  "ghep.mo_ta": { nhom: G, nhan: "Mô tả dưới tiêu đề", toi_da: 300,
+    mac_dinh: "Ba bài đọc đặt nhiều mảng cạnh nhau. Chỗ nhiều cách cùng thấy thì nói chắc hơn; chỗ khác nhau thì nói rõ là khác, không chọn hộ bạn." },
+  ...Object.fromEntries(GHEP.flatMap(([k, , ten, mo]) => [
+    [`ghep.${k}_ten`, { nhom: G, nhan: `Thẻ ${ten} — tên`, mac_dinh: ten, toi_da: 40 }],
+    [`ghep.${k}_mo`, { nhom: G, nhan: `Thẻ ${ten} — mô tả`, mac_dinh: mo, toi_da: 100 }],
   ])),
 
   "rieng_tu.dam": { nhom: R, nhan: "Phần in đậm", mac_dinh: "Riêng tư theo mặc định.", toi_da: 60 },
@@ -106,6 +126,6 @@ export const CHU_TRANG_CHU = {
 export const HINH_TRANG_CHU: BangHinh = {
   "hero.hinh": { nhom: "Đầu trang", nhan: "Hình lớn cạnh tiêu đề", goi_y: "Vuông, ≥ 1000×1000, nền tối hoặc trong suốt",
     mac_dinh: "Bầu trời số 1–9 vẽ bằng code, có chuyển động" },
-  ...Object.fromEntries(MANG.map(([k, ten]) => [`mang.${k}`, { nhom: "Bốn mảng huyền học", nhan: `Biểu tượng thẻ ${ten}`,
+  ...Object.fromEntries(MANG.map(([k, ten]) => [`mang.${k}`, { nhom: "Các mảng huyền học", nhan: `Biểu tượng thẻ ${ten}`,
     goi_y: "Vuông hoặc ngang 2:1, ≥ 256 px, nền trong suốt", mac_dinh: `Biểu tượng ${ten} vẽ bằng code` }])),
 };
