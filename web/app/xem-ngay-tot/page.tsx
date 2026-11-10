@@ -13,7 +13,7 @@ import { ND_XEM_NGAY } from "./noi-dung";
 import { CHU_XEM_NGAY } from "@/lib/chu/cong-cu";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return apDungSeo(metaTrang({ tieuDe: "Xem ngày tốt hôm nay: hoàng đạo, giờ tốt, việc nên làm", moTa: ND_XEM_NGAY.moTa, duong: "/xem-ngay-tot" }), await layNoiDungTrang(ND_XEM_NGAY.duong));
+  return apDungSeo(metaTrang({ tieuDe: "Xem ngày tốt hôm nay: lịch vạn niên, giờ hoàng đạo", moTa: ND_XEM_NGAY.moTa, duong: "/xem-ngay-tot" }), await layNoiDungTrang(ND_XEM_NGAY.duong));
 }
 
 export default async function Page() {

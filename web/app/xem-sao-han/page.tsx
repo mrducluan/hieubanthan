@@ -13,7 +13,7 @@ import { CHU_SAO_HAN } from "@/lib/chu/cong-cu";
 import { taoChu } from "@/lib/chu-trang";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return apDungSeo(metaTrang({ tieuDe: "Xem sao hạn năm nay theo tuổi: La Hầu, Kế Đô, Thái Bạch…", moTa: ND_SAO_HAN.moTa, duong: ND_SAO_HAN.duong }), await layNoiDungTrang(ND_SAO_HAN.duong));
+  return apDungSeo(metaTrang({ tieuDe: "Xem sao hạn theo tuổi: La Hầu, Kế Đô, Thái Bạch", moTa: ND_SAO_HAN.moTa, duong: ND_SAO_HAN.duong }), await layNoiDungTrang(ND_SAO_HAN.duong));
 }
 
 export default async function Page() {

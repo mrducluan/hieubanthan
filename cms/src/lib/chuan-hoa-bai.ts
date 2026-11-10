@@ -125,13 +125,14 @@ export function doanMang(van: string): MangCms {
 }
 
 /** Công cụ + trang kiến thức của từng mảng (đường dẫn silo QH-URL). */
+// SEO-N: chữ liên kết về trang công cụ = đúng cụm người ta tìm ("lá số tử vi trọn đời", "tra cứu thần số học"…).
 export const LOI_MANG: Record<MangCms, { cong_cu: string; ten_cong_cu: string; kien_thuc: string; ten_kien_thuc: string }> = {
-  than_so: { cong_cu: "/than-so", ten_cong_cu: "xem 4 con số cốt lõi của bạn", kien_thuc: "/than-so/y-nghia-so", ten_kien_thuc: "ý nghĩa từng con số" },
-  tu_vi: { cong_cu: "/tu-vi", ten_cong_cu: "lập lá số Tử vi của bạn", kien_thuc: "/tu-vi/chinh-tinh", ten_kien_thuc: "14 chính tinh" },
-  bat_tu: { cong_cu: "/bat-tu", ten_cong_cu: "xem tứ trụ Bát tự của bạn", kien_thuc: "/bat-tu/nhat-chu", ten_kien_thuc: "10 nhật chủ" },
-  kinh_dich: { cong_cu: "/kinh-dich", ten_cong_cu: "gieo một quẻ cho việc đang băn khoăn", kien_thuc: "/kinh-dich/que", ten_kien_thuc: "64 quẻ Kinh Dịch" },
+  than_so: { cong_cu: "/than-so", ten_cong_cu: "tra cứu thần số học của bạn", kien_thuc: "/than-so/y-nghia-so", ten_kien_thuc: "ý nghĩa từng con số" },
+  tu_vi: { cong_cu: "/tu-vi", ten_cong_cu: "lập lá số Tử vi trọn đời của bạn", kien_thuc: "/tu-vi/chinh-tinh", ten_kien_thuc: "14 chính tinh" },
+  bat_tu: { cong_cu: "/bat-tu", ten_cong_cu: "xem Bát tự (Tứ trụ) của bạn", kien_thuc: "/bat-tu/nhat-chu", ten_kien_thuc: "10 nhật chủ" },
+  kinh_dich: { cong_cu: "/kinh-dich", ten_cong_cu: "gieo quẻ Kinh Dịch cho việc đang băn khoăn", kien_thuc: "/kinh-dich/que", ten_kien_thuc: "64 quẻ Kinh Dịch" },
   phong_thuy: { cong_cu: "/phong-thuy", ten_cong_cu: "xem hướng nhà hợp tuổi bạn", kien_thuc: "/phong-thuy/huong-hop-tuoi", ten_kien_thuc: "hướng hợp từng tuổi" },
-  chung: { cong_cu: "/than-so", ten_cong_cu: "xem 4 con số cốt lõi của bạn", kien_thuc: "/kien-thuc", ten_kien_thuc: "thư viện kiến thức" },
+  chung: { cong_cu: "/than-so", ten_cong_cu: "tra cứu thần số học của bạn", kien_thuc: "/kien-thuc", ten_kien_thuc: "thư viện kiến thức" },
 };
 
 const CONG_CU = /^(https?:\/\/(www\.)?hieuban\.com)?\/(than-so|tu-vi|bat-tu|kinh-dich|phong-thuy|hop-doi|hom-nay)(\/|$|\?)/;

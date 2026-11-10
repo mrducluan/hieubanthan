@@ -102,7 +102,7 @@ export function KhungChanTrang({ cot, chu }: { cot: readonly CotChanTrang[]; chu
               <HeartHandshake className="size-3.5" aria-hidden /> {chu?.nhanUngHo ?? NHAN_UNG_HO_CHAN_TRANG}
             </Link>
           )}
-          <p>© {nam} Hiểu Bản Thân. Bảo lưu mọi quyền. <NutTuyChonCookie /></p>
+          <p>© {nam} Hiểu Bản Thân (hieuban.com). Bảo lưu mọi quyền. <NutTuyChonCookie /></p>
         </div>
       </div>
       </div>
