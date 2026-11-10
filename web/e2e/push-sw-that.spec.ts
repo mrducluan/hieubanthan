@@ -10,19 +10,16 @@ interface ThongBaoSw { title: string; body: string; tag: string; data: unknown }
 interface PhamViSw { registration: { getNotifications(): Promise<ThongBaoSw[]> }; dispatchEvent(e: Event): boolean }
 type TaoSuKien = new (loai: string, init: { notification: ThongBaoSw }) => Event;
 
-/** Đăng ký sw.js, chờ hoạt động, trả hàm đẩy một gói push (CDP ServiceWorker.deliverPushMessage). */
+/** Đăng ký sw.js, chờ hoạt động, trả hàm phát sự kiện `push` NGAY TRONG service worker của đúng ngữ cảnh trình duyệt này.
+ *  (Bản đầu dùng CDP ServiceWorker.deliverPushMessage theo registrationId: CDP liệt kê đăng ký của MỌI ngữ cảnh cùng origin
+ *  trong trình duyệt, nên khi chạy chung cả bộ có lúc gói đi nhầm sang đăng ký của test trước → thông báo không hiện.) */
 async function moSw(page: Page, context: BrowserContext) {
-  const cdp = await context.newCDPSession(page);
-  let regId = "";
-  cdp.on("ServiceWorker.workerRegistrationUpdated", (e: { registrations: { registrationId: string; scopeURL: string }[] }) => {
-    for (const r of e.registrations) if (r.scopeURL.startsWith(new URL(page.url()).origin)) regId = r.registrationId;
-  });
-  await cdp.send("ServiceWorker.enable");
   await page.evaluate(async () => { await navigator.serviceWorker.register("/sw.js"); await navigator.serviceWorker.ready; });
-  await expect.poll(() => regId).not.toBe("");
   const sw = context.serviceWorkers()[0] ?? await context.waitForEvent("serviceworker");
-  const day = (goi: unknown) => cdp.send("ServiceWorker.deliverPushMessage",
-    { origin: new URL(page.url()).origin, registrationId: regId, data: JSON.stringify(goi) });
+  const day = (goi: unknown) => sw.evaluate((chu) => {
+    const SuKien = (self as unknown as { PushEvent: new (loai: string, init: { data: string }) => Event }).PushEvent;
+    (self as unknown as PhamViSw).dispatchEvent(new SuKien("push", { data: chu }));
+  }, JSON.stringify(goi));
   const thongBao = () => sw.evaluate(async () => (await (self as unknown as PhamViSw).registration.getNotifications())
     .map((n) => ({ title: n.title, body: n.body, tag: n.tag, url: (n.data as { url?: string } | null)?.url ?? null })));
   const bam = () => sw.evaluate(async () => {
