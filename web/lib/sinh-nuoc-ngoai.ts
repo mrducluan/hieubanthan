@@ -1,6 +1,7 @@
 // Ý3 (2026-11-09) — cụm trang "Sinh ở nước ngoài" cho người Việt xa quê: engine `/v1/sinh-nuoc-ngoai[/{nước}]` tính hết
 // (múi giờ chuẩn, giờ mùa hè theo lịch sử nơi đó, lệch giờ mặt trời theo kinh độ, Nam bán cầu, ngày lịch âm Việt – Trung
 // lệch nhau) — web chỉ hiển thị. Chỉ dùng ở máy chủ (gọi engine, next/cache); form hồ sơ chỉ cần đường dẫn chữ nên không import.
+import { duongTheoLuot } from "@/lib/engine-ngon-ngu";
 import { unstable_noStore as noStore } from "next/cache";
 
 export const DUONG_SINH_NN = "/sinh-o-nuoc-ngoai";
@@ -35,8 +36,9 @@ const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
 async function lay<T>(duong: string): Promise<T | null> {
   try {
-    const r = await fetch(`${ENGINE_URL}${duong}`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    const nn = await duongTheoLuot(duong);
+    const r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: 60 * 60 * 24 }, signal: AbortSignal.timeout(15_000),
     });
     if (r.ok) return (await r.json()) as T;

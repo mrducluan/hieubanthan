@@ -1,6 +1,7 @@
 // NAM-1 (hướng A, chủ dự án duyệt 2026-10-30) — trang trụ "Năm {năm}" + "Sinh con năm {năm}" + "Cưới năm {năm}".
 // Engine tính hết (`/v1/nam/{nam}…`, chỉ ghép lịch âm Việt, can chi, nạp âm, Tam tai, Kim lâu, hạn năm) — web chỉ hiển thị.
 // URL `/nam/{năm}` (chủ dự án chốt): index năm âm hiện tại + năm sau như các cụm năm khác → tự trượt sau Tết.
+import { duongTheoLuot } from "@/lib/engine-ngon-ngu";
 import { unstable_noStore as noStore } from "next/cache";
 import type { HanNam, HoiDap, MetaKb } from "@/lib/tuoi-dan-gian";
 
@@ -32,8 +33,9 @@ const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
 async function lay<T>(duong: string): Promise<T | null> {
   try {
-    const r = await fetch(`${ENGINE_URL}${duong}`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    const nn = await duongTheoLuot(duong);
+    const r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: 60 * 60 * 24 }, signal: AbortSignal.timeout(15_000),
     });
     if (r.ok) return (await r.json()) as T;
@@ -81,8 +83,9 @@ export const dmy = (iso: string) => iso.split("-").reverse().join("/");
  *  dương; tháng 10–12 mời năm sau) — chỉ để chọn nhãn/đường dẫn mặc định, mọi dữ kiện năm vẫn do engine tính. */
 export async function namThoiGianToi(hanMs = 10_000): Promise<{ cac_nam: number[]; mac_dinh: number | null }> {
   try {
-    const r = await fetch(`${ENGINE_URL}/v1/thoi-gian-toi/nam`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    const nn = await duongTheoLuot("/v1/thoi-gian-toi/nam");
+    const r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: 60 * 60 }, signal: AbortSignal.timeout(hanMs),
     });
     if (r.ok) return (await r.json()) as { cac_nam: number[]; mac_dinh: number };

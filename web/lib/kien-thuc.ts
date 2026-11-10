@@ -1,6 +1,7 @@
 // Trang kiến thức (SEO-B): nội dung từ KB của engine, render phía server để máy tìm kiếm và AI đọc được.
 // Chỉ dùng ở Server Component / route handler. Web chỉ hiển thị — không tự viết nghĩa. Lỗi engine → trả null/[] (trang vẫn render, cache tự làm mới).
 
+import { duongTheoLuot } from "@/lib/engine-ngon-ngu";
 import { unstable_noStore as noStore } from "next/cache";
 import type { MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
@@ -156,8 +157,9 @@ const LAM_MOI = 60 * 60 * 6;   // 6 giờ
 
 async function lay<T>(duong: string): Promise<T | null> {
   try {
-    const r = await fetch(`${ENGINE_URL}${duong}`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    const nn = await duongTheoLuot(duong);
+    const r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: LAM_MOI },
       signal: AbortSignal.timeout(20_000),
     });
@@ -174,8 +176,9 @@ export class LoiEngine extends Error {}
 async function layTrangMot<T>(duong: string): Promise<T | null> {
   let r: Response;
   try {
-    r = await fetch(`${ENGINE_URL}${duong}`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    const nn = await duongTheoLuot(duong);
+    r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: LAM_MOI },
       signal: AbortSignal.timeout(20_000),
     });

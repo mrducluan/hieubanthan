@@ -104,3 +104,32 @@ test.describe("trên trình duyệt", () => {
     await expect(page.locator("[data-thanh-mang=tarot] [data-muc=la_bai]")).toHaveAttribute("href", "/tarot/la-bai");
   });
 });
+
+test.describe("hồ sơ chung giữa hai ngôn ngữ (việc 4)", () => {
+  test("hồ sơ cũ hbt.en.profile.v1 chuyển MỘT lần sang hồ sơ chung, bản Việt đọc được", async ({ page }) => {
+    await page.goto("/en/privacy");
+    await page.evaluate(() => {
+      localStorage.removeItem("hbt.hoso.v1");
+      localStorage.setItem("hbt.en.profile.v1", JSON.stringify({ name: "Mary O'Brien", nickname: "Mo", day: 7, month: 3, year: 1990, method: "tong_het" }));
+    });
+    await page.goto("/en/numerology");
+    await expect(page.getByTestId("dong-ho-so-en")).toContainText("Mary O'Brien");
+    const may = await page.evaluate(() => ({ cu: localStorage.getItem("hbt.en.profile.v1"), moi: JSON.parse(localStorage.getItem("hbt.hoso.v1") ?? "null"), dd: localStorage.getItem("hbt.thanso_dd") }));
+    expect(may.cu).toBeNull();
+    expect(may.moi).toMatchObject({ ho_ten: "Mary O'Brien", ten_khac: "Mo", ngay: 7, thang: 3, nam: 1990 });
+    expect(may.dd).toBe("tong_het");
+  });
+
+  test("hồ sơ chung có sẵn thắng hồ sơ cũ; hồ sơ nhập ở bản Việt hiện ở bản Anh", async ({ page }) => {
+    await page.goto("/en/privacy");
+    await page.evaluate(() => {
+      localStorage.setItem("hbt.hoso.v1", JSON.stringify({ v: 1, ho_ten: "Nguyen An", ngay: 24, thang: 10, nam: 1988, gio: "09:30", tao_luc: new Date().toISOString() }));
+      localStorage.setItem("hbt.en.profile.v1", JSON.stringify({ name: "Someone Else", day: 1, month: 1, year: 2000, method: "tung_phan" }));
+    });
+    await page.goto("/en/numerology");
+    await expect(page.getByTestId("dong-ho-so-en")).toContainText("Nguyen An");
+    const may = await page.evaluate(() => ({ cu: localStorage.getItem("hbt.en.profile.v1"), moi: JSON.parse(localStorage.getItem("hbt.hoso.v1") ?? "null") }));
+    expect(may.cu).toBeNull();
+    expect(may.moi).toMatchObject({ ho_ten: "Nguyen An", gio: "09:30" });   // trường bản Việt (giờ sinh) không mất
+  });
+});
