@@ -85,7 +85,7 @@ test("Hôm nay của hai người: chưa lưu ai → mời thêm; có người t
   await expect(muc.getByTestId("hai-nguoi-chia-se")).toContainText("Đã chép");
   const chu = await page.evaluate(() => navigator.clipboard.readText());
   expect(chu).toContain(`mình là ngày ${api.ban.so}, bạn là ngày ${api.nguoi_kia.so}`);
-  expect(chu).toMatch(/\/hom-nay\?tu=h2\.[a-z0-9]{10}/);
+  expect(chu).toMatch(/\/hom-nay\?tu=hd\.[a-f0-9]{10}/);
   expect(chu).not.toMatch(/Mai|1992|3\/11|Nguyễn/);
   // Engine không trả ngày sinh người kia; đầu vào lạ bị chặn.
   expect(JSON.stringify(api)).not.toMatch(/kia_ngay|1992/);
