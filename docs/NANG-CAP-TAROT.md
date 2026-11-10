@@ -189,3 +189,40 @@ phiếu cũ không nên gắn vào câu mới (golden sinh lại, 7 mã mẫu đ
 
 AI vẫn chỉ diễn đạt chương "Câu trả lời" (TR-3). Không migration, không dependency, không đổi phép tính → không tăng
 `ENGINE_VERSION`; **deploy engine trước web** (web cũ hiện chương mới như mọi chương khác; web mới mở sẵn nó).
+
+## 11. TR-5 — học flow đối thủ: tranh lá thật, hỏi dễ hơn, lật là thấy nghĩa (chủ dự án giao 2026-11-10)
+
+Chủ dự án gửi ảnh flow Tarot của meobeostudio.com (khung chat: chip chủ đề có sẵn câu hỏi → chọn trải bài → rút → hàng lá
+có tranh + vị trí → danh sách "Ý nghĩa các lá bài" từng lá có link xem đầy đủ → mở khoá luận giải AI).
+
+**Đánh giá**: phần hay của đối thủ là ba chỗ GIẢM MA SÁT và TĂNG CẢM XÚC — (1) không phải nghĩ ra câu hỏi (bấm chip là có câu),
+(2) lá có tranh Rider–Waite quen mắt, (3) rút xong thấy ngay nghĩa từng lá theo vị trí (miễn phí) trước khi tới bài luận.
+Phần mình hơn: bài đọc mở bằng câu trả lời cho đúng câu hỏi (TR-2…TR-4, tất định, miễn phí), không phán, không đọc hộ người
+khác. Chỗ mình thua trước TR-5: ô hỏi trống + 6 chủ đề + lưới 7 trải bài bắt người mới quyết ba việc; lá là ký hiệu trừu
+tượng; lật xong lá không nói gì cho tới khi bấm "Đọc bài"; nghĩa từng lá nằm ở chương thứ tư, gập sẵn.
+
+**Chủ dự án chốt** (hỏi 3 câu): tranh **Rider–Waite 1909 màu** · flow **dẫn từng bước trên trang** (không làm lại thành khung
+chat) · **chưa đụng Kinh Dịch** (làm Tarot trước, xem số đo).
+
+| # | Đã làm | Ở đâu |
+|---|---|---|
+| 1 | **Tranh lá thật**: 78 tranh Pamela Colman Smith in năm 1909 (tác giả mất 1951, Waite mất 1942 → hết bản quyền ở VN và Mỹ; KHÔNG dùng bản tô lại 1971 của U.S. Games), 360 px webp, 4,1 MB, tự lưu `web/public/tarot/rws/{mã lá}.webp` (không ảnh ngoài, hợp CSP). Lá ngược xoay cả tranh như lá thật + nhãn NGƯỢC giữ chiều đọc; tên Việt nằm dưới lá. **Thay** quyết định TR-1 "hình ký hiệu tự vẽ, không chép tranh bộ bài nào" và phần "chỉ xoay hình, chữ giữ chiều đọc" của TR-2 (tranh thật có tên tiếng Anh in sẵn nên xoay theo). Mọi nơi vẽ lá đều đồng bộ: 7 trải bài, lá của ngày, Ba lá hôm nay, 78 trang lá, trang nhận thẻ, bản `/en`, và ảnh thẻ chia sẻ `/og/tarot`, `/og/ba-la` (JPEG 240 px trong `web/assets/tarot` — bộ dựng ảnh không đọc webp). | `components/tarot/LaBai.tsx` (`MatTruoc`, `anhLa`) |
+| 2 | **Chip "chuyện hay hỏi" + câu mẫu** (12 chip × 2 câu, KB `goi_y_hoi`, engine trả trong `/v1/tarot/bo-bai`): bấm chip → hai câu mẫu → bấm là ĐIỀN vào ô (sửa được). Câu mẫu đều hỏi về việc của chính mình (không "người ấy nghĩ gì"); test engine khoá: không bị bộ chặn, engine nhận ra kiểu câu, đúng chủ đề. Bản tiếng Anh tắt bằng `null`. | `tarot_kb.json`, `test_tarot_tra_loi.py` |
+| 3 | **Máy tự chọn trải bài** theo câu hỏi (`hieu-cau` có sẵn từ TR-2 — trước chỉ gợi, phải bấm "Dùng"); nhãn "hợp câu bạn hỏi"; lưới 7 trải bài + 6 mảng dời vào "Đổi trải bài". Người dùng tự chọn thì máy không đè, có nút quay về gợi ý. | `app/tarot/Tarot.tsx` |
+| 4 | **Thanh 5 bước** (Hỏi · Xáo · Rút · Lật · Đọc); qua bước Hỏi thì khung hỏi thu thành một dòng "Bạn hỏi … · Trải bài …". | như trên |
+| 5 | **"Rút giúp tôi"**: lấy các lá trên cùng của bộ engine đã xáo (web không random) — Celtic Cross 10 lá không còn phải chạm 10 lần. | như trên |
+| 6 | **Lật lá nào, nghĩa lá đó hiện ngay** (tranh lớn, vị trí + câu hỏi của vị trí, tên lá, từ khoá ĐÚNG CHIỀU — bộ bài thêm `tu_khoa_nguoc`, link "Xem đầy đủ ý nghĩa lá"); lật đủ → **tự vào bài đọc** sau 1,5 giây. | `components/tarot/YNghiaLa.tsx` |
+| 7 | **"Ý nghĩa từng lá" trong bài đọc**: dải tranh các lá ngay dưới bàn bài, chạm một lá (hoặc lá trên bàn) → lời đọc của lá ở đúng vị trí (hộp chương "Từng vị trí" engine đã viết theo lĩnh vực được hỏi) + việc nhỏ nên làm + câu tự hỏi + link trang lá. Mở sẵn lá trọng tâm. Chú giải đường nối / chấm dời vào "Cách đọc bàn bài". | `BaoCaoTarot.tsx` |
+
+**Không lấy của đối thủ**: khoá bài luận sau tiền mặt + giá gạch đếm ngược (bài đọc của mình miễn phí, chương sâu theo SAO-2 khi
+bật), câu mẫu đọc hộ người khác ("người ấy có quay lại không"), linh vật, "x bạn mới ghé nhà mình".
+
+**Đo** (khâu THU HÚT → QUAY LẠI): `chart_interacted{mo_dun=tarot, kind=chon_nhom_hoi|goi_y_dien_san{nhom}|rut_giup|xem_nghia_la}`,
+tỉ lệ `bat_dau` → `doc_bai` (trước/sau), `reading_completed{mo_dun=tarot}`.
+
+**Kinh Dịch (chưa làm, chờ số Tarot)**: áp được (a) chip việc hay hỏi có câu mẫu dùng chung khuôn `goi_y_hoi`; (b) sau khi gieo
+hiện ngay thẻ "Quẻ của bạn nói gì" — quẻ chính · hào động · quẻ biến, mỗi thứ một dòng "Hiểu đơn giản" — trước bài đọc chi tiết;
+(c) thanh bước Hỏi · Gieo · Đọc.
+
+Không migration, không dependency, không đổi phép tính → không tăng `ENGINE_VERSION`; **deploy engine trước web** (web mới với
+engine cũ: hàng chip tự ẩn, từ khoá lá ngược lúc lật để trống — không vỡ trang).
