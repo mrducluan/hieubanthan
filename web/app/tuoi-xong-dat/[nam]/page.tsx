@@ -19,7 +19,7 @@ const dmy = (iso: string) => iso.split("-").reverse().join("/");
 async function metaGoc(p: P): Promise<Metadata> {
   const n = docNamBang((await p.params).nam);
   if (!n) return {};
-  const m = metaTrang({ tieuDe: `Tuổi xông đất Tết ${n} hợp gia chủ, tuổi nên tránh, giờ đẹp`,
+  const m = metaTrang({ tieuDe: `Tuổi xông đất Tết ${n} hợp gia chủ, giờ đẹp mùng 1`,
     moTa: `Tết ${n}: tuổi nào hợp xông đất cho gia chủ sinh 1960–2005, tuổi nên tránh (xung năm, Tam tai), giờ hoàng đạo và hướng xuất hành mùng 1.`,
     duong: duongXongDatNam(n), anh: `/og/xong-dat?nam=${n}` });
   const namAm = await namAmHienTai();

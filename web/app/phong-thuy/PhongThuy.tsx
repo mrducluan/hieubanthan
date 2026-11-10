@@ -60,7 +60,7 @@ export function PhongThuy() {
 
   useBatDauDoc("phongthuy", Boolean(mq));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Compass} ten="Phong thuỷ" mo_ta="Nhà bạn đang ở — hay căn định mua — có hợp bạn không, và nếu chỉ kê lại một món đồ thì kê gì? Nhập năm sinh, đo hướng cửa bằng điện thoại, trang đọc cho bạn bằng lời thường: bạn hợp phía nào, từng phòng nên đặt gì, tháng nào nên sửa. Phần sách vở (du niên, phi tinh) gập lại cho ai muốn mở. Không giới thiệu vật phẩm “hoá giải”." />;
+  const dau = <DauMang Icon={Compass} ten="Xem phong thuỷ: nhà này có hợp bạn không?" mo_ta="Nhà bạn đang ở — hay căn định mua — có hợp bạn không, và nếu chỉ kê lại một món đồ thì kê gì? Nhập năm sinh, đo hướng cửa bằng điện thoại, trang đọc cho bạn bằng lời thường: bạn hợp phía nào, từng phòng nên đặt gì, tháng nào nên sửa. Phần sách vở (du niên, phi tinh) gập lại cho ai muốn mở. Không giới thiệu vật phẩm “hoá giải”." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   return (
     <div>

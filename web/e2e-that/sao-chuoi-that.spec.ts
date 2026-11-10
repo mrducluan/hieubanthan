@@ -244,8 +244,9 @@ test("KV-THANG: nhật ký ghé theo tài khoản, tổng kết tháng trước 
   await expect(tk.getByTestId("tong-ket-cau")).toContainText("đủ 9 nhịp");
   await expect(tk).not.toContainText("Đếm trên máy này");
   // Lật lá → cùng dòng có la (diem_danh gọi lại trong ngày không cộng chuỗi).
-  await page.getByTestId("la-bai-up").click();
-  await expect(page.getByTestId("la-bai-noi-dung")).toBeVisible();
+  // BT-UI: "Ba lá của ngày" — lá Con số ghi vào nhật ký bằng mã cũ "viec" (lib/ba-la MA_NHAT_KY, không migration).
+  await page.getByTestId("ba-la-so").click();
+  await expect(page.getByTestId("ba-la-doc-so")).toBeVisible();
   await expect.poll(async () => (await dong())[0]?.la, { timeout: 15_000 }).toMatch(/^(viec|cau_hoi|gio)$/);
   // Bản thân: huy hiệu tài khoản du_9_nhip đạt (bản máy ẩn), tổng kết đọc bảng (không ghi lượt ghé mới).
   await page.goto("/ban-than");

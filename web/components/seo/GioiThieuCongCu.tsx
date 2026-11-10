@@ -32,7 +32,7 @@ export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [], 
         { "@type": "WebApplication", "@id": `${urlDayDu(duong)}#ung-dung`, name: ten, url: urlDayDu(duong), description: moTa,
           applicationCategory: "LifestyleApplication", operatingSystem: "Web", inLanguage: "vi-VN", isAccessibleForFree: true,
           offers: { "@type": "Offer", price: "0", priceCurrency: "VND" }, publisher: { "@id": `${siteUrl()}/#to-chuc` },
-          isPartOf: { "@id": `${siteUrl()}/#ung-dung` },
+          isPartOf: { "@id": `${siteUrl()}/#website` },
           potentialAction: { "@type": "UseAction", target: { "@type": "EntryPoint", urlTemplate: urlDayDu(duong), actionPlatform: ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"] } } },
         // QH-URL: công cụ nằm trong silo (vd /phong-thuy/huong-xau-nam) → cha là trang trụ; công cụ gốc → cha là hub Huyền học.
         // TM-1: trang thuộc 6 mảng — TrangCongCu đã phát BreadcrumbList cùng dải hiển thị (lib/duong-dan.ts) → không lặp.

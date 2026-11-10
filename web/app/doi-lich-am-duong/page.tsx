@@ -13,7 +13,7 @@ import { CHU_DOI_LICH } from "@/lib/chu/cong-cu";
 import { taoChu } from "@/lib/chu-trang";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const tieuDe = "Đổi lịch âm dương: ngày âm hôm nay, can chi, tháng nhuận";
+  const tieuDe = "Đổi lịch âm dương: ngày âm hôm nay, can chi";
   return apDungSeo(metaTrang({ tieuDe, moTa: ND_DOI_LICH.moTa, duong: ND_DOI_LICH.duong, anh: anhBai({ tieuDe: "Đổi lịch âm dương", mang: "lich" }) }),
     await layNoiDungTrang(ND_DOI_LICH.duong));
 }

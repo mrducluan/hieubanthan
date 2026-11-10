@@ -5,7 +5,7 @@ import { timingSafeEqual } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { baoLoi } from "@/lib/giam-sat";
 import { goiEngineDaKiem } from "@/lib/proxy";
-import { ghepThongBao, guiPush, homNayVn, khoaVapid, type DangKyPush, type GoiSangNay, type KetQuaGui, type NguoiNhan, type NhaTiet, type ThangHaiLaSo } from "@/lib/web-push";
+import { ghepThongBao, guiPush, laThuHai, homNayVn, khoaVapid, type DangKyPush, type GoiSangNay, type KetQuaGui, type NguoiNhan, type NhaTiet, type ThangHaiLaSo, type TuanCuaToiPush } from "@/lib/web-push";
 import { laSoTuHangHoSo, type HangLaSo } from "@/lib/push-thang";
 
 export function dungKhoaCron(req: Request): boolean {
@@ -49,6 +49,10 @@ export async function guiNhacNgay(dv: SupabaseClient): Promise<Record<string, un
   // (ngày giờ sinh, giới tính, nơi sinh / múi giờ — không tên) trong ho_so của chính họ, một lời gọi engine, không lưu thêm gì.
   let soThang = 0;
   if (ngay.endsWith("-01")) soThang = await ganThangHaiLaSo(dv, hang, ngay);
+  // 0036 "Tuần này của bạn": chỉ sáng thứ Hai, người đã tự tích mốc `tuan_cua_toi` → đọc NGÀY SINH (không tên, không giờ sinh)
+  // trong ho_so của chính họ, một lời gọi engine, không lưu thêm gì.
+  let soTuan = 0;
+  if (laThuHai(ngay)) soTuan = await ganTuanCuaToi(dv, hang, ngay);
   const dem: Record<KetQuaGui | "loi_ghi" | "khong_co_gi", number> = { ok: 0, het_han: 0, loi: 0, loi_ghi: 0, khong_co_gi: 0 };
   // Từng lô 10 người — đủ nhanh cho vài nghìn người trong 60 giây, không dồn hàng nghìn kết nối một lúc. Mỗi thiết bị
   // gửi xong ghi ngay kết quả; ghi hỏng (loi_ghi) → thiết bị còn trong hàng đợi, lần chạy lại gửi tiếp (≤ 1 / thiết bị / ngày).
@@ -64,7 +68,7 @@ export async function guiNhacNgay(dv: SupabaseClient): Promise<Record<string, un
       });
     }));
   }
-  return { ngay, nguoi: hang.length, sang_nay: Boolean(sn), nha_tiet: soNha, thang_hai_la_so: soThang, ...dem };
+  return { ngay, nguoi: hang.length, sang_nay: Boolean(sn), nha_tiet: soNha, thang_hai_la_so: soThang, tuan_cua_toi: soTuan, ...dem };
 }
 
 const COT_LA_SO_0033 = "user_id,ngay_sinh,gio_sinh,gioi_tinh,vung,noi_sinh,gio_mua_he,do_tin_gio,utc_noi_sinh";
@@ -95,6 +99,31 @@ async function ganThangHaiLaSo(dv: SupabaseClient, hang: Hang[], ngay: string): 
     const r = await goiEngineDaKiem({ ngay_xem: ngay, nguoi: lo.map((x) => ({ la_so: x.la_so })) }, "/v1/push/thang-hai-la-so");
     const kq = r.ok ? (r.body as { ket_qua?: (ThangHaiLaSo | null)[] }).ket_qua ?? [] : [];
     lo.forEach((x, j) => { x.h.thang_hai_la_so = kq[j] ?? null; if (kq[j]) gan += 1; });
+  }
+  return gan;
+}
+
+/** 0036: gắn `tuan_cua_toi` cho người nhận mốc sáng thứ Hai có ngày sinh trong tài khoản. Trả số người được gắn. Lỗi đọc /
+ *  engine cũ → 0 (các mốc khác vẫn gửi). Engine nhận ≤ 500 người một lượt, chỉ ngày sinh. */
+async function ganTuanCuaToi(dv: SupabaseClient, hang: Hang[], ngay: string): Promise<number> {
+  const can = hang.filter((h) => h.moc_lich?.includes("tuan_cua_toi"));
+  if (!can.length) return 0;
+  const sinh = new Map<string, string>();
+  for (let i = 0; i < can.length; i += 200) {
+    const { data, error } = await dv.from("ho_so").select("user_id,ngay_sinh").in("user_id", can.slice(i, i + 200).map((h) => h.user_id));
+    if (error) { baoLoi(new Error("cron_tuan_doc_ho_so"), { noi: "cron", duong: "/api/cron/hang-ngay" }); if (i === 0) return 0; break; }
+    for (const r of (data ?? []) as { user_id: string; ngay_sinh: string | null }[]) {
+      if (r.ngay_sinh && /^\d{4}-\d{2}-\d{2}$/.test(r.ngay_sinh)) sinh.set(r.user_id, r.ngay_sinh);
+    }
+  }
+  const ds = can.filter((h) => sinh.has(h.user_id));
+  let gan = 0;
+  for (let i = 0; i < ds.length; i += 500) {
+    const lo = ds.slice(i, i + 500);
+    const r = await goiEngineDaKiem({ ngay_xem: ngay, nguoi: lo.map((h) => ({ ngay_sinh: sinh.get(h.user_id) })) }, "/v1/push/tuan");
+    if (!r.ok) baoLoi(new Error("cron_tuan_engine"), { noi: "cron", duong: "/v1/push/tuan", ma: r.res.status });
+    const kq = r.ok ? (r.body as { ket_qua?: (TuanCuaToiPush | null)[] }).ket_qua ?? [] : [];
+    lo.forEach((h, j) => { h.tuan_cua_toi = kq[j] ?? null; if (kq[j]) gan += 1; });
   }
   return gan;
 }

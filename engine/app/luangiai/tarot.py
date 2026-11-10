@@ -827,7 +827,7 @@ def bao_cao(trai_bai: str, la: list[dict], *, cau_hoi: str | None = None, chu_de
 # ------------------------------------------------------------------ lá ngày, bộ bài
 def la_ngay(ngay: dt.date | None = None, ngay_sinh: dt.date | None = None) -> dict:
     ngay = ngay or config.hom_nay_vn()
-    x = calc.la_ngay(ngay, ngay_sinh)
+    x = calc.la_ngay(ngay, ngay_sinh, muoi=config.LA_NGAY_MUOI)
     l = _la(x["id"])
     return {"ngay": ngay.isoformat(), "rieng": x["rieng"],
             "la": {**_tom_la(l, False), "tu_khoa": _tu_khoa(l, False)[:3], "y_xuoi": l["y_xuoi"], "viec": l["viec"], "cau_tu_soi": l["cau_tu_soi"], "hinh_anh": l["hinh_anh"]},

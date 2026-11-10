@@ -9,7 +9,9 @@ export const TOI_DA_DONG = 400;
 export const MA_LA = ["viec", "cau_hoi", "gio"] as const;
 
 /** Một ngày ghé: n = yyyy-mm-dd (ngày xem engine trả, giờ VN), s = số ngày cá nhân 1–9, k = tháng cá nhân 1–9, l = lá đã lật. */
-export interface MucNhatKy { n: string; s: number; k?: number; l?: string }
+/** BT-UI đợt 2: t = lá Tarot riêng đã lật hôm đó, dạng "mã|tên" (vd "gay_1|Át Gậy") — CHỈ trên máy này, không lên máy chủ. */
+export interface MucNhatKy { n: string; s: number; k?: number; l?: string; t?: string }
+const MAU_TAROT = /^[a-z]{3,4}_[a-z0-9_]{1,12}\|[^|]{1,24}$/;
 interface Kho { h: string; ds: MucNhatKy[] }
 
 /** Băm hồ sơ (FNV-1a, chỉ để tách nhật ký giữa hai hồ sơ trên cùng máy — không gửi đi, không phải bảo mật). */
@@ -26,7 +28,8 @@ function hopLe(m: unknown): m is MucNhatKy {
   const x = m as Record<string, unknown>;
   return typeof x.n === "string" && NGAY.test(x.n) && typeof x.s === "number" && x.s >= 1 && x.s <= 9
     && (x.k === undefined || (typeof x.k === "number" && x.k >= 1 && x.k <= 9))
-    && (x.l === undefined || (typeof x.l === "string" && (MA_LA as readonly string[]).includes(x.l)));
+    && (x.l === undefined || (typeof x.l === "string" && (MA_LA as readonly string[]).includes(x.l)))
+    && (x.t === undefined || (typeof x.t === "string" && MAU_TAROT.test(x.t)));
 }
 
 function docKho(): Kho | null {
@@ -75,6 +78,13 @@ export function ghiLa(hoSo: Parameters<typeof maHoSo>[0], ngay: string, la: stri
   return capNhat(hoSo, ngay, (cu) => (cu ? { ...cu, l: la } : null));
 }
 
+/** BT-UI đợt 2: ghi lá Tarot riêng đã lật của ngày (chỉ khi ngày đó đã có dòng ghé) — để tổng kết tháng kể lại lá đã gặp. */
+export function ghiTarot(hoSo: Parameters<typeof maHoSo>[0], ngay: string, id: string, ten: string): MucNhatKy[] {
+  const t = `${id}|${ten.replace(/\|/g, " ").trim().slice(0, 24)}`;
+  if (!MAU_TAROT.test(t)) return docNhatKy(hoSo);
+  return capNhat(hoSo, ngay, (cu) => (cu ? { ...cu, t } : null));
+}
+
 /** Tháng trước của một ngày yyyy-mm-dd. */
 export function thangTruoc(ngay: string): { nam: number; thang: number } {
   const [y, m] = ngay.split("-").map(Number) as [number, number];
@@ -85,6 +95,19 @@ export function thangTruoc(ngay: string): { nam: number; thang: number } {
  *  (số ngày cá nhân 1–9 đã đi qua), đủ 9 nhịp chưa, tháng cá nhân (dòng gần nhất có k). */
 export interface ThongKeThang {
   nam: number; thang: number; so_ngay: number; ngay: number[]; so_la: number; so_khac: number; du_9: boolean; thang_ca_nhan: number | null;
+  /** Lá Tarot đã lật trong tháng (nhật ký MÁY): nhiều lần trước, bằng nhau thì lá gặp sớm hơn trước. */
+  tarot?: { id: string; ten: string; lan: number }[];
+}
+/** Đếm lá Tarot đã lật trong các dòng nhật ký (đã lọc theo tháng). */
+export function demTarot(ds: MucNhatKy[]): { id: string; ten: string; lan: number }[] {
+  const dem = new Map<string, { id: string; ten: string; lan: number; dau: number }>();
+  ds.forEach((m, i) => {
+    if (!m.t) return;
+    const [id, ten] = m.t.split("|") as [string, string];
+    const cu = dem.get(id);
+    if (cu) cu.lan += 1; else dem.set(id, { id, ten, lan: 1, dau: i });
+  });
+  return [...dem.values()].sort((a, b) => b.lan - a.lan || a.dau - b.dau).map(({ id, ten, lan }) => ({ id, ten, lan }));
 }
 export function thongKeThang(ds: MucNhatKy[], nam: number, thang: number): ThongKeThang {
   const tien = `${nam}-${String(thang).padStart(2, "0")}-`;
@@ -92,7 +115,7 @@ export function thongKeThang(ds: MucNhatKy[], nam: number, thang: number): Thong
   const ngay = [...new Set(trong.map((m) => Number(m.n.slice(8, 10))))].filter((d) => d >= 1 && d <= 31).sort((a, b) => a - b);
   const khac = new Set(trong.map((m) => m.s));
   const k = [...trong].reverse().find((m) => typeof m.k === "number")?.k ?? null;
-  return { nam, thang, so_ngay: ngay.length, ngay, so_la: trong.filter((m) => m.l).length, so_khac: khac.size, du_9: khac.size >= 9, thang_ca_nhan: k };
+  return { nam, thang, so_ngay: ngay.length, ngay, so_la: trong.filter((m) => m.l).length, so_khac: khac.size, du_9: khac.size >= 9, thang_ca_nhan: k, tarot: demTarot(trong) };
 }
 
 /** Tháng đầu tiên (yyyy-mm) trong nhật ký có đủ 9 nhịp — để cấp huy hiệu máy "du_9_nhip" một lần. null = chưa. */

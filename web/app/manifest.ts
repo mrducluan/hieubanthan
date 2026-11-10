@@ -25,6 +25,7 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
     shortcuts: [
       { name: "Hôm nay của bạn", short_name: "Hôm nay", url: "/hom-nay?tu=app", icons: [{ src: "/bieu-tuong/192", sizes: "192x192" }] },
+      { name: "Ba lá hôm nay", short_name: "Ba lá", url: "/hom-nay?tu=app#ba-la", icons: [{ src: "/bieu-tuong/192", sizes: "192x192" }] },
       { name: "Thần số học", short_name: "Thần số", url: "/than-so?tu=app", icons: [{ src: "/bieu-tuong/192", sizes: "192x192" }] },
       { name: "Xem ngày tốt", short_name: "Ngày tốt", url: "/xem-ngay-tot?tu=app", icons: [{ src: "/bieu-tuong/192", sizes: "192x192" }] },
     ],

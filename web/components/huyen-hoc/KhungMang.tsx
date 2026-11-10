@@ -5,7 +5,7 @@ import { Check, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { ChuNhan } from "@/components/cms/ChuNhan";
-import { LoiDan, useChu, useDauCms } from "@/components/cms/DauCms";
+import { LoiDan, TraLoiNhanhDau, useChu, useDauCms } from "@/components/cms/DauCms";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import type { HoSo } from "@/lib/hoso";
 
@@ -35,6 +35,7 @@ export function DauMang({ Icon, ten, mo_ta, chip, children }: { Icon: LucideIcon
       <p className="mt-3 inline-flex rounded-full border border-line px-3 py-1 text-xs text-fg-faint">
         {c("dau.nhan_duoi") || "Diễn giải từ kho tri thức Hiểu Bản Thân · tham khảo văn hoá"}
       </p>
+      <TraLoiNhanhDau />
       {children}
     </header>
     {d.khoiTren && <div className="mb-8">{d.khoiTren}</div>}

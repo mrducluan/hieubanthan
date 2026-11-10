@@ -132,6 +132,10 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   lap: "number",        // CTA-2: 1 = thẻ bù (lối đi tiếp), 0 = thẻ thật / cả khối
   thu_tu: "number",     // CTA-2: vị trí thẻ trong khối (1…)
   so_lap: "number",     // CTA-2: số thẻ bù trong khối lúc người dùng thấy
+  muc: "string",        // BT-UI: mã mục gập "Đọc thêm" ở Hôm nay (bat_tu, que…) / mã dòng "Đang dang dở" ở Bản thân
+  du_ba: "number",      // BT-UI: daily_card_flipped — 1 = lá thứ ba (đã lật đủ ba lá của ngày)
+  can_them: "string",   // BT-UI: ô "Bảy cách nhìn" còn thiếu gì trong hồ sơ (gio / gioi_tinh / noi_sinh)
+  so_san_sang: "number", // BT-UI: số môn (trong 5 môn tính từ ngày sinh) đã sẵn sàng khi khối hiện ra
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */

@@ -59,7 +59,7 @@ const han = Noto_Serif_TC({ weight: ["600"], subsets: ["latin"], variable: "--fo
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  title: { default: "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân", template: "%s · Hiểu Bản Thân" },
+  title: { default: "Hiểu Bản Thân — Thần số học và huyền học online miễn phí", template: "%s · Hiểu Bản Thân" },
   description: MO_TA_SITE,
   applicationName: TEN_SITE,
   category: "lifestyle",
@@ -123,7 +123,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body>
         <GtmNoScript />
         {goiYEn && hrefEn && <GoiYTiengAnh href={hrefEn} />}
-        <JsonLd data={goiLd(ldToChuc(), ldWebsite(), ldUngDung())} />
+        {/* SEO-N: WebApplication của cả site (url = trang chủ) chỉ phát ở trang chủ — phát mọi trang là bảo máy tìm kiếm
+            "ứng dụng Tử vi nằm ở trang chủ". Trang công cụ có WebApplication của riêng nó. */}
+        <JsonLd data={duongDangMo === "/" ? goiLd(ldToChuc(), ldWebsite(), ldUngDung()) : goiLd(ldToChuc(), ldWebsite())} />
         <div className="star-field" aria-hidden />
         <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">
           Bỏ qua điều hướng

@@ -142,7 +142,7 @@ export function Tarot() {
   };
 
   const dau = (
-    <DauMang Icon={Layers} ten="Tarot" chip
+    <DauMang Icon={Layers} ten="Xem Tarot: rút bài cho điều bạn đang hỏi" chip
       mo_ta="Đặt một câu hỏi, nhấn giữ để xáo, tự rút lá từ quạt 78 lá rồi lật từng lá. Bài đọc mở bằng câu trả lời cho đúng câu bạn hỏi — nghiêng về có, có điều kiện hay chưa nên vội, vì sao, điều cần gỡ trước và 3 việc nên làm — rồi mới tới từng vị trí, dòng chảy giữa các lá, nhịp thời gian gợi ý, ghép bốn trường phái có sách (Waite, Golden Dawn, Marseille, B.O.T.A.). Không phán, không điểm số, không đọc người khác." />
   );
   if (!bo && !loiBo) return <div>{dau}<KhungTai /></div>;

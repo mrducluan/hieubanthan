@@ -3,7 +3,39 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-09 (HTT-3, mục 4aj).
+> Cập nhật lần cuối: 2026-11-10 (BT-UI mục 4ak, SEO-N mục 4al).
+
+### 4ak. BT-UI — Bản thân, Hôm nay, Ba lá của ngày (2026-11-10, `docs/DE-XUAT-BAN-THAN-HOM-NAY.md`) — deploy ENGINE trước web
+
+- [ ] **Deploy engine trước web** (trường mới `ba_la` ở `/v1/thanso/hom-nay`, trang `ban_than` ở `/v1/goi-y-cheo`). Web lên trước thì
+  Hôm nay vẫn hiện Lá bài đầu ngày cũ và khối "Bảy cách nhìn" tự ẩn — không vỡ trang, tự đúng khi engine xong.
+- [ ] **Render → `hieubanthan-engine-sg` → Environment: thêm `LA_NGAY_MUOI`** = một chuỗi ngẫu nhiên ≥ 16 ký tự (vd lấy từ
+  trình tạo mật khẩu, 32 ký tự), giữ bí mật. Có biến này thì lá Tarot riêng mới hiện trên thẻ chia sẻ "Ba lá"; chưa đặt thì
+  thẻ vẽ lá Tarot úp (vẫn chia sẻ được, không lộ gì). Đặt xong mọi người đổi lá riêng một lần — nên đặt ngay lúc deploy.
+- [ ] (3 phút) `/hom-nay`: lật đủ ba lá → "Ba lá ghép lại" → "Chia sẻ ba lá" → mở link thẻ trên máy khác, "Tải ảnh" có QR.
+  Xem chip "Giờ tốt sắp tới" có đúng với giờ hiện tại không; mở thử một mục "Đọc thêm".
+- [ ] (2 phút) `/ban-than`: hai cột đầu trang cao bằng nhau; "Chia sẻ thẻ" trên thẻ hồ sơ hiện QR; khối "Bảy cách nhìn về bạn"
+  có đủ tám ô, ô thiếu dữ liệu bấm ra bảng Sửa hồ sơ.
+- [ ] (Tuỳ chọn) CMS → Trang website `/hom-nay` → "Chữ trên trang": tiêu đề khối mới "Ba lá của ngày" sửa được ở đó.
+- [ ] **Chạy migration 0036** (`supabase/migrations/0036_push_tuan_cua_toi.sql`, sau 0035): mốc Web Push "Sáng thứ Hai: tuần này
+  của bạn". Chưa chạy thì ô tích mới báo "Chưa lưu được", cron bỏ qua — không vỡ gì. Chạy xong: Hôm nay → Bật nhắc → tích
+  "Sáng thứ Hai: tuần này của bạn" (cần hồ sơ đã lưu vào tài khoản); thứ Hai kế tiếp xem log cron có `tuan_cua_toi ≥ 1`,
+  bấm thông báo phải mở Hôm nay đúng mục "Tuần này của bạn". Deploy engine trước web (route mới `/v1/push/tuan`).
+- [ ] (Đợt 2, sau deploy — engine trước web) `/hom-nay` → "Đọc thêm": mở "Tuần này của bạn" (bảy ô + ngày đáng để ý) và
+  "Hôm nay của hai người" (cần đã lưu một người thân ở `/tu-vi` → "Xem lá số 2 người"); `/ban-than`: bấm "Mặt sau: thẻ 5 mảnh ghép".
+- [ ] (Quyết định) Gửi "Tuần của tôi" qua thông báo sáng thứ Hai: cần migration mới thêm một mốc vào tuỳ chọn nhắc — báo em nếu
+  anh muốn làm.
+
+### 4al. SEO-N — trang dịch vụ đứng tên từ khoá + thương hiệu (2026-11-10, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md`)
+
+- [ ] **CMS → Trang website**: mở `/`, `/tu-vi`, `/bat-tu`, `/kinh-dich`… — nếu ô "Tiêu đề SEO" / H1 đã có chữ anh tự nhập thì chữ đó vẫn thắng mặc định mới; xoá trống (hoặc sửa theo bảng trong tài liệu) để dùng tiêu đề mới.
+- [ ] **Search Console → Kiểm tra URL** cho `https://hieuban.com/` và 7 trang dịch vụ (`/tu-vi`, `/bat-tu`, `/than-so`, `/kinh-dich`, `/phong-thuy`, `/nhan-tuong`, `/tarot`) → "Yêu cầu lập chỉ mục" sau khi deploy (để Google đọc tiêu đề mới sớm).
+- [ ] Sau 2–4 tuần: Hiệu suất → truy vấn chứa "tử vi" → tab Trang: `/tu-vi` phải nhận phần lớn hiển thị thay cho trang chủ. Gửi em file xuất nếu chưa đổi.
+- [x] 6 đề xuất SEO-N — mục 1–5 đã làm (SEO-N2, 10/11).
+- [ ] (Quyết định, 19–26/11) **Q-I3 cache HTML**: xem Thống kê thu thập → thời gian phản hồi trung bình; > 1.000 ms thì chọn cách A ở `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 4.3 (bỏ nonce riêng trang kiến thức), < 600 ms thì giữ nguyên.
+- [ ] **Liên kết ngoài**: bài trên fanpage / diễn đàn / bài khách trỏ thẳng `https://hieuban.com/tu-vi` (chữ "xem tử vi online", "lá số tử vi"), `/bat-tu`, `/than-so` — không trỏ hết về trang chủ.
+- [ ] Đặt env `MXH_FACEBOOK`, `MXH_YOUTUBE`… (Vercel, dự án web) cho các kênh thật → Google nối thương hiệu "hieuban" với site, dễ hiện sitelinks.
+- [ ] Sau 4 tuần: Search Console → Hiệu suất → Truy vấn, gửi em file xuất để đối chiếu bảng từ khoá (mục 4.1) với số thật.
 
 ### 4aj. HTT-3 — Ý1–Ý7 + QC `/en` (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9) — deploy ENGINE trước web
 
