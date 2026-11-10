@@ -91,10 +91,16 @@ function rapStream(html) {
   return html;
 }
 
+/** Bỏ khối <script> (trừ JSON-LD) tới khi không còn gì để bỏ — ảnh chụp để so, không phải bộ lọc an toàn. */
+function boScript(html) {
+  let s = html, truoc;
+  do { truoc = s; s = s.replace(/<script\b(?![^>]*application\/ld\+json)[^>]*>[\s\S]*?<\/script[^>]*>/gi, ""); } while (s !== truoc);
+  return s;
+}
+
 /** HTML máy chủ → bản chuẩn hoá (giữ chữ, thẻ, thuộc tính; bỏ thứ đổi theo lượt / bản build). */
 export function chuanHoa(html) {
-  return rapStream(html)
-    .replace(/<script\b(?![^>]*application\/ld\+json)[^>]*>[\s\S]*?<\/script[^>]*>/gi, "")
+  return boScript(rapStream(html))
     .replace(/\snonce="[^"]*"/g, "")
     .replace(/\/_next\/static\/[^"'\s)]+/g, "/_next/static/*")
     .replace(/([?&])dpl=[^"&'\s]+/g, "$1")
