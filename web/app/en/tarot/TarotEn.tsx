@@ -1,6 +1,6 @@
 "use client";
 // QTE — Tarot tiếng Anh phía trình duyệt: cùng năm bước và cùng component vẽ (XaoBai, QuatBai, BanTraiBai) của /tarot, chữ giao
-// diện tiếng Anh; bài đọc hiển thị bằng BaoCaoEn (khuôn doi_song_1 engine dựng). Mọi lượt gọi kèm header `x-ngon-ngu: en`.
+// diện tiếng Anh; bài đọc hiển thị bằng khung báo cáo CHUNG BaoCaoDoiSongView (chữ khung theo ngôn ngữ, lib/chu/bao-cao.ts). Mọi lượt gọi kèm header `x-ngon-ngu: en`.
 // Không lưu câu hỏi; lịch sử rút bài không lưu ở bản Anh (giữ gọn).
 import { useEffect, useMemo, useRef, useState } from "react";
 import { RotateCcw, Sparkles } from "lucide-react";
@@ -10,7 +10,7 @@ import { BanTraiBai } from "@/components/tarot/BanTraiBai";
 import { QuatBai } from "@/components/tarot/QuatBai";
 import { XaoBai } from "@/components/tarot/XaoBai";
 import { LaBai } from "@/components/tarot/LaBai";
-import { BaoCaoEn } from "@/components/en/BaoCaoEn";
+import { BaoCaoDoiSongView } from "@/components/luan-giai/BaoCaoDoiSong";
 import { HoiEn, type TraLoiEn } from "@/components/en/HoiEn";
 import { getEn, postEn } from "@/lib/en/api";
 import { useProfileEn } from "@/lib/en/hoso";
@@ -185,7 +185,7 @@ export function TarotEn() {
             <p className="mt-3 text-xs text-fg-faint">Solid gold line: two cards support each other · dashed amber line: they pull against each other · arrow: where the figure on the card is looking (Marseille). A REVERSED label means the card was drawn upside down — its quality is blocked or turned inward, not a bad sign.</p>
             {chon !== null && bc.da_tinh.vi_tri[chon] && <p className="mt-2 text-sm"><b className="text-fg">{bc.da_tinh.vi_tri[chon]!.ten_la}{bc.da_tinh.vi_tri[chon]!.nguoc ? " (reversed)" : ""}</b> — {bc.da_tinh.vi_tri[chon]!.ten}</p>}
           </div>
-          <BaoCaoEn bc={bc} moSan={["tra_loi", "cau_chuyen"]} />
+          <BaoCaoDoiSongView bc={bc} ten="tarot" nhan="Your spread" moSan={["tra_loi", "cau_chuyen"]} />
           <div className="mt-6 flex flex-wrap gap-3"><Button variant="secondary" onClick={lamLai} data-testid="nut-trai-bai-moi-en"><RotateCcw aria-hidden /> New spread</Button></div>
         </section>
       )}

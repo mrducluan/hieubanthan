@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Check } from "lucide-react";
 import { useChuChung } from "@/components/cms/ChuChung";
+import { useNgonNgu } from "@/components/khung/NgonNgu";
 import { ghi, lanDauTrongPhien } from "@/lib/do-luong";
 import type { KetQuaKiemChung, LoaiKiemChung } from "@/lib/kiem-chung";
 import { tyLeHien, type TyLe } from "@/lib/ty-le-kiem-chung";
@@ -36,7 +37,7 @@ function guiMayChu(loai: string, mau: string, phai: string, ket_qua: KetQuaKiemC
 /** HTT-1: chữ của nút theo ngôn ngữ (bản Anh không có CMS "Chữ dùng chung"). */
 export interface NhanKiemChung { hoi: string; dung: string; chua_dung: string; da_ghi: string }
 
-export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, theoDoi, ngonNgu = "vi", nhan }: {
+export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, theoDoi, ngonNgu: nnVao, nhan }: {
   loai: LoaiKiemChungWeb; mau: string; phai: string; /** định danh thẻ trong phiên (mặc định = mã mẫu) */ khoa?: string; cauHoi?: string;
   /** HTT-1: ngôn ngữ trang (ghi kèm phiếu) + chữ nút khi không có CMS (bản /en). */ ngonNgu?: "vi" | "en"; nhan?: NhanKiemChung;
   /** Số phiếu công khai tải về (route tỉ lệ). */ tyLe?: TyLe;
@@ -46,6 +47,9 @@ export function KiemChung({ loai, mau, phai, khoa, cauHoi, tyLe, tyLeEngine, the
 }) {
   const k = `${loai}.${khoa ?? mau}`;
   const c = useChuChung();
+  // EN-ALL: không truyền thì theo ngôn ngữ trang (khung báo cáo dùng chung ở bản Anh ghi phiếu `ngon_ngu = en`).
+  const nnTrang = useNgonNgu().ngonNgu;
+  const ngonNgu = nnVao ?? nnTrang;
   const [da, setDa] = useState(false);
   useEffect(() => {
     try { if (sessionStorage.getItem(KHOA(k))) setDa(true); } catch { /* chế độ riêng tư */ }

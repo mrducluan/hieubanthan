@@ -2,14 +2,14 @@
 
 > Thước đo tiến độ DUY NHẤT của `docs/PROMPT-EN-TOAN-BO.md`. Cập nhật sau mỗi commit đáng kể. Phiên bị ngắt: đọc tệp này +
 > `git log` rồi làm tiếp đúng chỗ.
-> Cập nhật lần cuối: 2026-11-10 (xong giai đoạn 0; giai đoạn 1 xong phần lõi).
+> Cập nhật lần cuối: 2026-11-10 (xong giai đoạn 0; giai đoạn 1 xong lõi + việc 1, 2, 4, 5, 6 và nửa đầu việc 3).
 
 ## 0. Trạng thái giai đoạn
 
 | GĐ | Việc | Trạng thái | Ghi chú |
 |---|---|---|---|
 | 0 | Kiểm kê + golden | **xong** (2026-11-10) | golden bản Việt 10.509 lượt gọi (chụp lại sau khi merge main #246–#249), ổn định 2 lần chạy liên tiếp; khung test 5.2 chạy |
-| 1 | Nền web (rewrite, catalog nhiều ngôn ngữ, khung đầy đủ) | **đang** — lõi xong (2026-11-10), còn 6 việc ở mục 3b | làm tiếp theo |
+| 1 | Nền web (rewrite, catalog nhiều ngôn ngữ, khung đầy đủ) | **đang** — còn nửa sau việc 3 (mục 3b) | khung báo cáo chung đã song ngữ; còn `HoiEn` → `KhungChat` + chuyển 7 URL sang hệ một-component |
 | 2 | Nền engine (tên riêng, `L()` cho khuôn chung, `slug_en`) | chưa | 9 nhóm route |
 | 3 | Bát tự | chưa | 5 nhóm route |
 | 4 | Tử vi | chưa | 12 |
@@ -71,15 +71,43 @@ tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2
 - `components/khung/NutDoiNgonNgu.tsx`: nút đổi ngôn ngữ về TRANG TƯƠNG ĐƯƠNG (lấy từ hreflang của trang khi có), giữ
   `?cach=` / `#neo`. Thương hiệu bản Anh đổi thành **Hieuban** (khung, tiêu đề, OG, schema `alternateName` giữ tên cũ).
 
+**Đã làm thêm (2026-11-10, phiên 2)** — e2e `web/e2e/en-khung.spec.ts`; chụp HTML trước/sau mỗi bước: **bản Việt lệch 0/74 trang**.
+- ✅ Việc 6 — `web/scripts/chup-html.mjs`: chụp HTML máy chủ 74 trang Việt (58 trang cố định + trang con đầu của 16 cụm) +
+  10 trang Anh; chuẩn hoá: bỏ script (giữ JSON-LD), nonce, mã chunk, `next-size-adjust`; **ráp khối stream Suspense về đúng
+  chỗ** (thứ tự gửi đổi theo lượt — không ráp thì 15/74 trang "lệch" giữa hai lượt chụp cùng bản build). Hai lượt liên tiếp
+  0 lệch. Ảnh chụp phụ thuộc ngày → chụp trước/sau cùng ngày, không lưu git (`--ra <thư mục>`, `--so <trước> <sau>`).
+- ✅ Việc 1 — khung đầy đủ tiếng Anh: `/en` dùng ĐÚNG `ThanhTren` + menu điện thoại, `ThanhMang` (+ số trang), `KhungChanTrang`,
+  `TabDuoi`, `HoiDongYCookie`. Chữ + lọc ở `web/lib/khung-en.ts`: `TEN_MENU_EN` (chữ Anh theo đường dẫn Việt của MỌI mục menu,
+  test bắt thiếu), `menuEn()` chỉ giữ mục có bản Anh đã mở (mục cha chưa mở còn một con → con lên làm mục trên cùng),
+  `cotChanTrangEn()` liệt kê sẵn cả trang chưa mở (mở ở bảng là tự hiện), `CHU_KHUNG` vi/en (bản Việt giữ đúng chữ cũ).
+  So khớp menu/thanh theo đường dẫn tương đương (`duongViDeSo`, `duongEnDeSo`, `useDuongVi`). Nút "Tiếng Việt" ở thanh trên +
+  chân trang. Không có ở bản Anh: chữ CMS (dải thông báo, menu CMS — GĐ 10), Sao/ví/hộp nạp (mục 6.1), mời cài app, nút ủng hộ.
+  `components/en/KhungEn.tsx` đã xoá.
+- ✅ Việc 2 — `CHU_CHUNG` 67 khoá + nhãn thanh mảng (`THANH_MANG[].en`, `muc[].en`) có chiều `en`; `useChuChung()` đọc theo
+  ngôn ngữ trang (layout bản Anh bọc `ChuChung chu={{}}` — chưa có CMS tiếng Anh).
+- ✅ Việc 4 — `lib/en/hoso.ts` thành lớp đổi tên trường trên hồ sơ chung `hbt.hoso.v1` + `hbt.thanso_dd`; `hbt.en.profile.v1`
+  chuyển MỘT lần (hồ sơ chung có sẵn thắng; khoá cũ chỉ xoá sau khi ghi xong; lỗi → giữ nguyên). "Clear" bản Anh = `xoaHoSo()`.
+  Đổi tên ở bản Anh giữ giờ / nơi sinh / giới tính đã nhập ở bản Việt (cùng ngày sinh).
+- ✅ Việc 5 — `lib/engine-ngon-ngu.ts`: 7 thư viện máy chủ gọi engine có đệm (`kien-thuc`, `nam`, `lich-am`, `hoang-lich`,
+  `tuoi-dan-gian`, `sinh-nuoc-ngoai`, `cau-chuan`) tự gắn `?ngon_ngu=` + header khi lượt tải là bản Anh (đọc header qua import
+  động — module có client dùng vẫn build được); 8 route GET có đệm nhận ngôn ngữ qua header HOẶC `?ngon_ngu=` (`engineTheoReq`,
+  CDN khoá theo URL → trình duyệt bản Anh nên gửi query) và trả `Vary: x-ngon-ngu`. Bản Việt giữ nguyên URL.
+- 🟡 Việc 3 (nửa đầu) — khung báo cáo CHUNG song ngữ: `lib/chu/bao-cao.ts` (59 khoá, `mac_dinh` = chữ Việt cũ từng ký tự)
+  + `components/luan-giai/chu-bao-cao.ts` (`useChuBaoCao`: chữ, nhãn mức, ngày theo `Intl`) cho `BaoCaoDoiSongView`,
+  `HopNoiBat`, `MucLucChuong`; `KiemChung` mặc định theo ngôn ngữ trang; `GiaoThoa` nhận `en`. `/en/tarot` dùng
+  `BaoCaoDoiSongView` → **`components/en/BaoCaoEn.tsx` đã xoá**. Nhãn mức bản Anh theo mục 4.2: Favourable / Balanced /
+  Needs care (bản cũ ghi "Mixed / Take care").
+
 **Còn lại của GĐ 1** (theo thứ tự nên làm):
-1. Khung ĐẦY ĐỦ tiếng Anh thay `KhungEn` (menu + menu con, thanh mảng, chân trang, cookie, đăng nhập, dải thông báo) — chữ
-   menu / chân trang / thanh mảng vào catalog có `en`, link qua `duongTheo`, chỉ hiện mục đã mở.
-2. Chiều `en` cho `CHU_CHUNG` (form hồ sơ, hỏi đáp, góp ý, kiểm chứng, chia sẻ) + `ChuChung` đọc theo ngôn ngữ.
-3. Chuyển 7 URL `/en` hiện có sang hệ một-component (xoá `app/en/**` từng trang khi trang Việt tương ứng đã đọc catalog),
-   gộp `components/en/BaoCaoEn.tsx`, `HoiEn.tsx` vào component chung rồi xoá.
-4. Hợp nhất hồ sơ `hbt.en.profile.v1` vào hồ sơ chung (đọc cũ một lần rồi chuyển).
-5. Rà khoá đệm `fetch` / `unstable_cache` có tên: thêm ngôn ngữ vào khoá + `?ngon_ngu=` trên URL engine.
-6. Chụp HTML máy chủ ~60 trang Việt trước/sau (mục 5.1 phần web) — làm TRƯỚC việc 1 vì việc 1 đụng layout bản Việt.
+1. `HoiEn` → `KhungChat` (+ `CauTraLoi`, `GopYCauTraLoi`, `ThuatNgu`, `TrucQuan`: ~1.100 dòng, nhiều chữ cứng) rồi xoá `HoiEn`.
+2. `DongMuoiNam`, `TangChuong`, `LuuBaiLuan`, `HopNoiBat.TEN_CHI_PHI` còn chữ Việt cứng (chỉ hiện ở Tử vi / Bát tự / Phong thuỷ /
+   khi có Sao — chưa mở ở bản Anh) → làm cùng GĐ 3–5.
+3. Chuyển 7 URL `/en` sang hệ một-component: `/en/tarot` (Tarot.tsx + 8 component tarot còn chữ Việt), `/en/numerology`
+   (`/than-so` rất lớn — làm cùng GĐ 7), trang lá / Life Path (trang KB — GĐ 2 `slug_en`), privacy/terms (GĐ 10). Thực tế mỗi
+   URL chỉ chuyển được khi trang Việt tương ứng đã đọc catalog → gộp vào giai đoạn của mảng đó; bảng `rieng` trong
+   `duong-en.json` bỏ cờ khi chuyển.
+4. Trình duyệt ở trang rewrite gọi route GET có đệm cần thêm `?ngon_ngu=` (helper client dùng `maNgonNguTrang()`) — làm khi mở
+   trang rewrite đầu tiên (GĐ 3 Bát tự).
 
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
@@ -170,3 +198,4 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
 - **2026-11-10 — GĐ 0**: đọc nền đa ngôn ngữ, kiểm kê, dựng golden bản Việt + khung test tiếng Anh, hỏi 4 câu quyết định.
 - **2026-11-10 — merge main #246–#249**: golden chỉ lệch `thanso.hom_nay` (main cố ý đổi) → chụp lại 10.509 lượt, thêm lượt gọi cho route mới (`/v1/thanso/tuan`, `/hom-nay-hai`, `/v1/push/tuan`); mục lục KB hết 500 ở bản Anh (mục 4.3 phần 500 đã sửa, chữ vẫn là GĐ 2); CI: golden không gửi `x-nguoi-goi`.
 - **2026-11-10 — GĐ 1 (lõi)**: bảng đường dẫn, rewrite / 308 trong proxy, ngữ cảnh ngôn ngữ, catalog có chiều `en`, định dạng `Intl`, nút đổi ngôn ngữ về trang tương đương, thương hiệu Hieuban.
+- **2026-11-10 — GĐ 1 (phiên 2)**: chụp HTML trang Việt (việc 6), khung đầy đủ tiếng Anh (việc 1), Chữ dùng chung `en` (việc 2), hồ sơ chung (việc 4), khoá đệm theo ngôn ngữ (việc 5), khung báo cáo chung song ngữ + xoá `BaoCaoEn` (nửa đầu việc 3). Bản Việt: HTML máy chủ 0/74 lệch.

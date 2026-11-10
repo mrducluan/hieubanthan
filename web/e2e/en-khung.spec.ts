@@ -9,6 +9,7 @@ import { MENU_DAU_TRANG } from "../lib/menu-dau-trang";
 import { TEN_MENU_EN, cotChanTrangEn, menuEn } from "../lib/khung-en";
 import { THANH_MANG } from "../lib/thanh-mang";
 import { CHU_CHUNG } from "../lib/chu/chung";
+import { CHU_BAO_CAO } from "../lib/chu/bao-cao";
 import { khoaThieuEn } from "../lib/chu-trang";
 import { banAnh } from "../lib/duong-en";
 
@@ -45,7 +46,8 @@ test.describe("catalog khung", () => {
       for (const m of t.muc) { expect(m.en, `${t.ma}.${m.ma}`).toBeTruthy(); expect(m.en).not.toMatch(VIET); }
     }
     expect(khoaThieuEn(CHU_CHUNG)).toEqual([]);
-    for (const [k, m] of Object.entries(CHU_CHUNG)) {
+    expect(khoaThieuEn(CHU_BAO_CAO)).toEqual([]);
+    for (const [k, m] of [...Object.entries(CHU_CHUNG), ...Object.entries(CHU_BAO_CAO)] as [string, { en?: string; toi_da?: number }][]) {
       if (!m.en) continue;
       expect(m.en, k).not.toMatch(VIET);
       expect(m.en.length, k).toBeLessThanOrEqual(m.toi_da ?? 300);

@@ -50,7 +50,7 @@ test("giao thoa + kiểm chứng tiếng Anh trên bài đọc Tarot /en", async
   for (const k of [5, 40, 70]) await quat.locator(`[data-chi-so="${k}"]`).dispatchEvent("click");
   await page.getByTestId("nut-lat-het-en").click();
   await page.getByTestId("nut-doc-bai-en").click();
-  const bc = page.getByTestId("bao-cao-en");
+  const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc).toBeVisible({ timeout: 20_000 });
   // Nút kiểm chứng tiếng Anh + phiếu mang ngon_ngu = en
   const nut = bc.getByRole("button", { name: "Resonates with me" });

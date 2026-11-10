@@ -69,9 +69,9 @@ test("tarot: câu hỏi tiếng Anh được hiểu → xáo máy → rút 3 lá
   await expect(page.getByTestId("quat-bai")).toHaveCount(0);
   await page.getByTestId("nut-lat-het-en").click();
   await page.getByTestId("nut-doc-bai-en").click();
-  const bc = page.getByTestId("bao-cao-en");
+  const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc).toBeVisible({ timeout: 20_000 });
-  await expect(page.getByTestId("chuong-en-tra_loi")).toBeVisible();
+  await expect(page.getByTestId("lg-chuong-tra_loi")).toBeVisible();
   const text = await bc.innerText();
   expect(text).not.toMatch(VI);
   expect(text).toMatch(/Leans|condition|Not yet|Stuck/);

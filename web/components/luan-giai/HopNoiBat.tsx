@@ -9,8 +9,10 @@ import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { doanCoThuatNgu, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 import type { BangTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
-import { NHAN_MUC, TEN_CHI_PHI, type HangLop, type Hop, type LoaiHop } from "./kieu";
+import { useChuBaoCao } from "./chu-bao-cao";
+import { TEN_CHI_PHI, type HangLop, type Hop, type LoaiHop } from "./kieu";
 
+/** Nhãn bản Việt (giữ để nơi khác dùng); hiển thị đọc theo ngôn ngữ qua `useChuBaoCao` (khoá loai.<loại>). */
 export const LOAI_HOP: Record<LoaiHop, { nhan: string; Icon: LucideIcon }> = {
   cot_loi: { nhan: "Điều quan trọng", Icon: Star },
   diem_manh: { nhan: "Điểm mạnh", Icon: Sprout },
@@ -53,13 +55,15 @@ export function ViSao({ canCu, thuatNgu, nho = false }: { canCu?: string[]; thua
 
 export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: ThuatNgu[]; className?: string }) {
   const { tyLe, phai, tat, loai = "doi_song" } = useContext(KiemChungBai);
-  const { nhan: nhanLoai, Icon } = LOAI_HOP[hop.loai] ?? LOAI_HOP.cot_loi;
-  const nhan = hop.nhan ?? nhanLoai;
+  const { c: chu, nhanMuc, ngay } = useChuBaoCao();
+  const loaiHop = LOAI_HOP[hop.loai] ? hop.loai : "cot_loi";
+  const { Icon } = LOAI_HOP[loaiHop];
+  const nhan = hop.nhan ?? chu(`loai.${loaiHop}`);
   const idTieuDe = useId();
-  const khoang = hop.tu && hop.den ? `${ngayDuong(hop.tu)} – ${ngayDuong(hop.den)} dương lịch`
-    : typeof hop.tu_tuoi === "number" && typeof hop.den_tuoi === "number" ? `${hop.tu_tuoi}–${hop.den_tuoi} tuổi`
+  const khoang = hop.tu && hop.den ? chu("ngay_duong", { tu: ngay(hop.tu), den: ngay(hop.den) })
+    : typeof hop.tu_tuoi === "number" && typeof hop.den_tuoi === "number" ? chu("tuoi_khoang", { tu: String(hop.tu_tuoi), den: String(hop.den_tuoi) })
     // CY-1 / SK-1: hộp "Năm nên chú ý … hơn" — hàng dưới nêu các năm (lời nhắc chủ động, không có chip mức)
-    : hop.cac_nam?.length ? `Năm ${hop.cac_nam.join(" · ")}` : null;
+    : hop.cac_nam?.length ? chu("nam_ds", { ds: hop.cac_nam.join(" · ") }) : null;
   return (
     <section role="note" aria-labelledby={idTieuDe} data-loai={hop.loai} data-testid="hop-noi-bat"
       data-chu-y={hop.chu_y?.join(" ") || undefined}
@@ -72,24 +76,24 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
         </p>
         {hop.loai === "thoi_diem" && hop.muc && (
           <span data-muc={hop.muc} data-testid="hop-muc"
-            className="chip-muc -mt-0.5 shrink-0 whitespace-nowrap rounded-full px-2 py-0.5 text-[0.7rem] font-semibold">{NHAN_MUC[hop.muc]}</span>
+            className="chip-muc -mt-0.5 shrink-0 whitespace-nowrap rounded-full px-2 py-0.5 text-[0.7rem] font-semibold">{nhanMuc[hop.muc]}</span>
         )}
       </div>
       <h4 id={idTieuDe} className="mt-1 font-sans text-[1.02rem] font-semibold leading-snug text-fg">
         {hop.tieu_de}
-        {hop.veto && <span className="ml-2 align-middle rounded-full border border-moon/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-moon" data-testid="hop-veto">Xử lý trước</span>}
+        {hop.veto && <span className="ml-2 align-middle rounded-full border border-moon/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-moon" data-testid="hop-veto">{chu("xu_ly_truoc")}</span>}
       </h4>
       {/* Trục 1: thân chỉ là ý thêm + việc nên làm (engine bỏ phần đã có ở tiêu đề) — có thể rỗng. */}
       {hop.noi_dung && <p className={cn("mt-1.5 text-[0.95rem] leading-relaxed", hop.lop?.length ? "font-medium text-fg" : "text-fg-muted")}
         data-testid={hop.lop?.length ? "hop-tom-lai" : undefined}>{hop.noi_dung}</p>}
       {hop.huong_xu_ly && !hop.noi_dung.includes(hop.huong_xu_ly) && (
-        <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg"><b className="hop-nhan font-semibold">Nên:</b> {hop.huong_xu_ly}</p>
+        <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg"><b className="hop-nhan font-semibold">{chu("nen")}</b> {hop.huong_xu_ly}</p>
       )}
       {hop.y_bo_sung?.noi_dung && (
         // TV-YBS: ý bổ sung gộp vào hộp (cùng nội dung) — một câu thêm sắc thái + một việc, chữ nhỏ hơn lời chính.
         <div className="mt-2 border-l-2 border-line/70 pl-3 text-sm leading-relaxed text-fg-muted" data-testid="hop-y-bo-sung">
           <p>{hop.y_bo_sung.noi_dung}</p>
-          {hop.y_bo_sung.viec && <p className="mt-1"><b className="hop-nhan font-semibold">Thử:</b> {hop.y_bo_sung.viec}</p>}
+          {hop.y_bo_sung.viec && <p className="mt-1"><b className="hop-nhan font-semibold">{chu("thu")}</b> {hop.y_bo_sung.viec}</p>}
         </div>
       )}
       {hop.lop && hop.lop.length > 0 && <CacLop lop={hop.lop} />}
@@ -129,11 +133,12 @@ function CacLop({ lop }: { lop: HangLop[] }) {
   // EN-2 (ND-8): mỗi tháng ~6 cách xem → mặc định gập (câu "Tóm lại" + việc nên làm đã đủ để lướt 12 tháng); in thì mở.
   const [mo, setMo] = useState(false);
   const id = useId();
+  const { c: chu } = useChuBaoCao();
   return (
     <div className="mt-2">
       <button type="button" aria-expanded={mo} aria-controls={id} onClick={() => setMo((v) => !v)} data-testid="hop-lop-mo"
         className="inline-flex min-h-9 items-center gap-1 rounded-full text-sm text-fg-muted underline-offset-4 hover:text-fg hover:underline print:hidden">
-        {mo ? "Thu gọn" : `Xem từng cách (${lop.length})`} <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
+        {mo ? chu("thu_gon") : chu("xem_tung_cach", { so: String(lop.length) })} <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
       </button>
       <div id={id} hidden={!mo} className="print:block">
         <CacLopDs lop={lop} />
@@ -143,6 +148,7 @@ function CacLop({ lop }: { lop: HangLop[] }) {
 }
 
 function CacLopDs({ lop }: { lop: HangLop[] }) {
+  const { nhanMuc } = useChuBaoCao();
   return (
     <dl className="mt-1 divide-y divide-line/60 border-t border-line/60" data-testid="hop-lop">
       {lop.map((r) => {
@@ -153,7 +159,7 @@ function CacLopDs({ lop }: { lop: HangLop[] }) {
               <span className="cham-muc inline-block size-2 shrink-0 rounded-full" data-muc={nghieng ?? "can_bang"} aria-hidden />
               <span>{r.nhan}</span>
               {r.tieu && <span className="font-medium normal-case tracking-normal text-fg-muted">· {r.tieu}</span>}
-              {r.muc && <span data-muc={r.muc} className="chip-muc rounded-full px-1.5 py-0 text-[0.65rem] normal-case tracking-normal">{NHAN_MUC[r.muc]}</span>}
+              {r.muc && <span data-muc={r.muc} className="chip-muc rounded-full px-1.5 py-0 text-[0.65rem] normal-case tracking-normal">{nhanMuc[r.muc]}</span>}
             </dt>
             <dd className="mt-1 text-sm leading-relaxed text-fg-muted">{r.loi}</dd>
           </div>
