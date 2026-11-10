@@ -8,13 +8,13 @@
 ### 4an. TR-5 — Tarot: tranh lá thật + flow hỏi mới (2026-11-10)
 
 - [ ] **Deploy engine trước web** (bộ bài thêm `goi_y_hoi`, `tu_khoa_nguoc`). Web lên trước thì hàng chip câu hỏi mẫu tự ẩn, không vỡ.
-- [ ] (3 phút) `/tarot` trên điện thoại: bấm chip "Nhảy việc" → câu mẫu → "Xáo bài · rút 5 lá" → "Rút giúp tôi" → lật một lá
+- [x] (3 phút) `/tarot` trên điện thoại: bấm chip "Nhảy việc" → câu mẫu → "Xáo bài · rút 5 lá" → "Rút giúp tôi" → lật một lá
   thấy nghĩa ngay → lật hết tự vào bài đọc; dải "Ý nghĩa từng lá" chạm được.
-- [ ] Đọc 24 câu hỏi mẫu (`engine/app/kb/data/tarot_kb.json` → `goi_y_hoi`, sửa được ở `/quan-tri` Kho tri thức) — đổi câu nào
+- [x] Đọc 24 câu hỏi mẫu (`engine/app/kb/data/tarot_kb.json` → `goi_y_hoi`, sửa được ở `/quan-tri` Kho tri thức) — đổi câu nào
   chưa hợp giọng anh muốn.
-- [ ] (Pháp lý, tuỳ chọn) Tranh lá là bản in 1909 đã hết bản quyền (ghi ở `docs/NGUON-MO.md`); nếu luật sư muốn chắc hơn, có
+- [x] (Pháp lý, tuỳ chọn) Tranh lá là bản in 1909 đã hết bản quyền (ghi ở `docs/NGUON-MO.md`); nếu luật sư muốn chắc hơn, có
   phương án dự phòng tranh nét đen trắng từ sách Waite 1910 — báo em đổi.
-- [ ] (Quyết định, sau 2 tuần có số) Áp cùng flow cho Kinh Dịch: chip việc hay hỏi + thẻ "Quẻ của bạn nói gì" ngay sau khi gieo
+- [x] (Quyết định, sau 2 tuần có số) Áp cùng flow cho Kinh Dịch: chip việc hay hỏi + thẻ "Quẻ của bạn nói gì" ngay sau khi gieo
   (`docs/NANG-CAP-TAROT.md` mục 11).
 
 ### 4am. BLOG-10 — bài NotFair mới tự xuất bản khi đạt điểm (2026-11-10)
@@ -44,7 +44,7 @@
 - [ ] (2 phút) `/ban-than`: hai cột đầu trang cao bằng nhau; "Chia sẻ thẻ" trên thẻ hồ sơ hiện QR; khối "Bảy cách nhìn về bạn"
   có đủ tám ô, ô thiếu dữ liệu bấm ra bảng Sửa hồ sơ.
 - [ ] (Tuỳ chọn) CMS → Trang website `/hom-nay` → "Chữ trên trang": tiêu đề khối mới "Ba lá của ngày" sửa được ở đó.
-- [ ] **Chạy migration 0036** (`supabase/migrations/0036_push_tuan_cua_toi.sql`, sau 0035): mốc Web Push "Sáng thứ Hai: tuần này
+- [x] **Chạy migration 0036** (`supabase/migrations/0036_push_tuan_cua_toi.sql`, sau 0035): mốc Web Push "Sáng thứ Hai: tuần này
   của bạn". Chưa chạy thì ô tích mới báo "Chưa lưu được", cron bỏ qua — không vỡ gì. Chạy xong: Hôm nay → Bật nhắc → tích
   "Sáng thứ Hai: tuần này của bạn" (cần hồ sơ đã lưu vào tài khoản); thứ Hai kế tiếp xem log cron có `tuan_cua_toi ≥ 1`,
   bấm thông báo phải mở Hôm nay đúng mục "Tuần này của bạn". Deploy engine trước web (route mới `/v1/push/tuan`).
@@ -66,7 +66,7 @@
 
 ### 4aj. HTT-3 — Ý1–Ý7 + QC `/en` (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9) — deploy ENGINE trước web
 
-- [ ] **Chạy migration 0035** (`supabase/migrations/0035_push_thang_hai_la_so.sql`, sau 0034): mốc Web Push "Đầu tháng — hai lá số
+- [x] **Chạy migration 0035** (`supabase/migrations/0035_push_thang_hai_la_so.sql`, sau 0034): mốc Web Push "Đầu tháng — hai lá số
   cùng nói". Chưa chạy thì ô tích mới không ghi được (DB từ chối giá trị), cron bỏ qua mốc này.
 - [ ] Sau deploy + 0035: Hôm nay → Bật nhắc → tích "Đầu tháng: Tử vi và Bát tự cùng thấy gì" (cần lá số đủ giờ + giới tính + nơi sinh
   trong tài khoản) → ngày 1/12 kiểm log Vercel cron `hang-ngay` có `thang_hai_la_so ≥ 1` và điện thoại nhận một thông báo.
@@ -83,7 +83,7 @@
 
 ### 4ai. Hybrid Two-Tier → HTT-1 (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md`) — deploy ENGINE trước web
 
-- [ ] **Chạy migration 0034** (`supabase/migrations/0034_kiem_chung_ngon_ngu.sql`, sau 0033): phiếu "Đúng với mình" mang ngôn ngữ
+- [x] **Chạy migration 0034** (`supabase/migrations/0034_kiem_chung_ngon_ngu.sql`, sau 0033): phiếu "Đúng với mình" mang ngôn ngữ
   trang; chưa chạy thì phiếu vẫn ghi như cũ, chỉ chưa có khung "Lệch theo ngôn ngữ" ở `/quan-tri/hoc`.
 - [x] ~~Quyết H1 / H5 / H6~~ — anh duyệt 2026-11-09, đã làm trong HTT-2 (`docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 7).
 - [ ] **Bật công tắc "AI diễn đạt lại hộp giao thoa"** (`/quan-tri/cai-dat` → nhóm "Điểm giao thoa", mặc định tắt) khi hộp
