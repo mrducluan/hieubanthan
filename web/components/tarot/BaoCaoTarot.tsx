@@ -7,16 +7,24 @@ import { Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BaoCaoDoiSongView } from "@/components/luan-giai/BaoCaoDoiSong";
 import { BanTraiBai } from "./BanTraiBai";
+import { YNghiaLa, type MucLa } from "./YNghiaLa";
+import { ghi } from "@/lib/do-luong";
 import { MAU_NGUYEN_TO, TEN_NGUYEN_TO, TEN_SUC, type BaoCaoTarot as Bc, type LaBoBai, type TraiBai } from "@/lib/tarot-chung";
 
 export function BaoCaoTarot({ bc, tb, boLa, ten, chanTrang, cau }: { bc: Bc; tb: TraiBai; boLa: Record<string, LaBoBai>; ten: string; chanTrang?: React.ReactNode;
   /** Câu hỏi người dùng gõ — chỉ có trên máy (engine không trả lại); hiện lại để bài đọc đứng cạnh đúng câu hỏi. */ cau?: string | null }) {
-  const [chon, setChon] = useState<number | null>(null);
   const vt = bc.da_tinh.vi_tri;
-  const bam = (i: number) => {
-    setChon(i);
-    document.getElementById("lg-tung_la")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  // TR-5: mở sẵn lá trọng tâm (hộp cốt lõi đầu tiên engine chọn) — người đọc thấy ngay nghĩa một lá, không phải bấm mới có.
+  const [chon, setChon] = useState<number | null>(bc.cot_loi[0]?.vi_tri?.so ?? 0);
+  const bam = (i: number) => { setChon(i); ghi("chart_interacted", { mo_dun: "tarot", kind: "xem_nghia_la", vi_tri: i + 1 }); };
+  // Nghĩa từng lá = hộp của chương "Từng vị trí" engine đã viết (đúng chiều, đúng lĩnh vực được hỏi); thiếu hộp → từ khoá bộ bài.
+  const hopViTri = new Map((bc.chuong.find((c) => c.ma === "tung_la")?.hop ?? []).filter((h) => h.vi_tri && h.la).map((h) => [h.vi_tri!.so, h]));
+  const muc: MucLa[] = vt.flatMap((v, i) => {
+    const h = hopViTri.get(i), lb = boLa[v.id];
+    if (!lb) return [];
+    return [{ so: i, viTri: v.ten, hoi: h?.vi_tri?.hoi ?? tb.vi_tri[i]?.hoi ?? "", la: lb, nguoc: v.nguoc, tuKhoa: h?.tu_khoa ?? (v.nguoc ? lb.tu_khoa_nguoc ?? [] : lb.tu_khoa),
+      noiDung: h?.noi_dung, viec: h?.huong_xu_ly ?? null, tuSoi: h?.cau_tu_soi ?? null }];
+  });
   const nt = bc.da_tinh.nguyen_to;
   return (
     <div data-testid="bao-cao-tarot">
@@ -36,14 +44,13 @@ export function BaoCaoTarot({ bc, tb, boLa, ten, chanTrang, cau }: { bc: Bc; tb:
               ))}
               {nt.troi && <span className="text-fg">· trội {TEN_NGUYEN_TO[nt.troi]}</span>}
             </p>
-            <p className="mt-2 text-xs text-fg-faint">Đường vàng liền: hai lá hợp nhau · đường hổ phách đứt: hai lá xung nhau · mũi tên: hướng nhìn của nhân vật trên lá (Marseille). Chấm dưới lá: {TEN_SUC.tiep_suc} / {TEN_SUC.bi_kim}. Nhãn <b className="text-[#f0b35c]">NGƯỢC</b>: lá rút ngược — đọc nghĩa ngược (năng lượng của lá bị chặn hoặc quay vào trong), không phải điềm xấu. Bấm một lá để tới hộp của nó.</p>
+            <details className="mt-2 text-xs text-fg-faint">
+              <summary className="cursor-pointer select-none hover:text-fg-muted">Cách đọc bàn bài</summary>
+              <p className="mt-1">Đường vàng liền: hai lá hợp nhau · đường hổ phách đứt: hai lá kéo hai hướng · mũi tên: hướng nhìn của nhân vật trên lá. Chấm dưới lá: {TEN_SUC.tiep_suc} / {TEN_SUC.bi_kim}. Nhãn <b className="text-[#f0b35c]">NGƯỢC</b>: lá rút ngược — đọc nghĩa ngược (năng lượng của lá bị chặn hoặc quay vào trong), không phải điềm xấu.</p>
+            </details>
           </div>
-          {chon !== null && vt[chon] && (
-            <p className="rounded-lg border border-line/60 bg-bg/40 px-3 py-2 text-sm" data-testid="la-dang-chon">
-              <b className="text-fg">{vt[chon].ten_la}{vt[chon].nguoc ? " (ngược)" : ""}</b> — {vt[chon].ten}, {TEN_SUC[vt[chon].suc.suc]}
-            </p>
-          )}
         </div>
+        <YNghiaLa muc={muc} chon={chon} onChon={bam} className="mt-5 border-t border-line/50 pt-4" ghiChu="Chạm một lá (hoặc lá trên bàn) để xem nghĩa của nó ở đúng vị trí này" />
       </div>
       <BaoCaoDoiSongView bc={bc} ten={ten} nhan="Trải bài của bạn" moSan={["cau_chuyen"]}
         hanhDong={<Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> In / lưu PDF</Button>} chanTrang={chanTrang} />

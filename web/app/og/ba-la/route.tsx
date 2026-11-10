@@ -3,7 +3,7 @@
 // Dữ liệu CHỈ từ mã đã ký (docMaBaLa): tên hiển thị, số ngày, tên quẻ, ngày xem, lá Tarot khi mã có mang — không có ngày sinh.
 import { ImageResponse } from "next/og";
 import { docMaBaLa, tuTuMa } from "@/lib/ma-moi";
-import { bam, ChanQr, CO_ANH, khungTuThamSo, MAU, napPhong, saoRai } from "@/lib/og-chung";
+import { anhLaOg, bam, ChanQr, CO_ANH, khungTuThamSo, MAU, napPhong, saoRai } from "@/lib/og-chung";
 import { GOC_QR, urlQr } from "@/lib/the-chia-se";
 
 export const runtime = "nodejs";
@@ -30,6 +30,8 @@ export async function GET(req: Request) {
     { nhan: "Lá Thời khắc", lon: null, ten: nd?.q ? `Quẻ ${nd.q}` : "Giờ tốt · quẻ ngày", xoay: 6, y: 18 },
   ];
 
+  // TR-5: lá Tarot riêng (chỉ khi mã có mang) vẽ bằng tranh lá thật; thiếu tệp → ngôi sao như cũ.
+  const tranh = nd?.l?.[0] ? await anhLaOg(nd.l[0]) : null;
   const hangLa = (
     <div style={{ display: "flex", gap: doc ? 26 : 22, justifyContent: "center", alignItems: "flex-start" }}>
       {la.map((l, i) => (
@@ -39,6 +41,9 @@ export async function GET(req: Request) {
           <div style={{ display: "flex", flex: 1, alignItems: "center", justifyContent: "center" }}>
             {l.lon ? (
               <div style={{ display: "flex", fontFamily: "Serif", fontSize: doc ? 150 : 104, color: MUC, lineHeight: 1 }}>{l.lon}</div>
+            ) : i === 0 && tranh ? (
+              // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+              <img src={tranh} width={Math.round(cao * 0.62 * 0.583)} height={Math.round(cao * 0.62)} style={{ objectFit: "cover", borderRadius: 6, border: `2px solid ${MAU.vang}` }} />
             ) : i === 0 ? (
               <svg width={rong * 0.46} height={rong * 0.46} viewBox="0 0 20 20"><path d="M10,0 L12.2,7.8 L20,10 L12.2,12.2 L10,20 L7.8,12.2 L0,10 L7.8,7.8 Z" fill={MUC} fillOpacity={0.85} /></svg>
             ) : (

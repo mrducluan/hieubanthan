@@ -3,7 +3,7 @@
 // Dữ liệu CHỈ từ mã đã ký (docMaTarot): tên hiển thị, lá + vị trí, nghiêng, nhãn loại việc — không câu hỏi, không ngày sinh.
 import { ImageResponse } from "next/og";
 import { docMaTarot, tuTuMa } from "@/lib/ma-moi";
-import { bam, ChanQr, CO_ANH, khungTuThamSo, MAU, napPhong, saoRai } from "@/lib/og-chung";
+import { anhLaOg, bam, ChanQr, CO_ANH, khungTuThamSo, MAU, napPhong, saoRai } from "@/lib/og-chung";
 import { GOC_QR, urlQr } from "@/lib/the-chia-se";
 
 export const runtime = "nodejs";
@@ -22,6 +22,7 @@ export async function GET(req: Request) {
   const sao = saoRai(bam(ma || "tarot"), doc ? 110 : 70, W, H);
   const la = (nd?.l ?? [["dai_0", false, "Chàng Khờ", "Lá cho câu hỏi"]]).slice(0, 5);
   const ten = nd?.t.trim() ? `Lá bài trả lời ${nd.t.trim()}` : "Lá bài trả lời tôi";
+  const tranh = await Promise.all(la.map(([id]) => anhLaOg(id)));   // TR-5: tranh lá thật; thiếu tệp → lá giấy như cũ
   const rong = doc ? Math.min(170, (W - 120) / la.length - 16) : Math.min(120, 560 / la.length - 14);
   const cao = rong * (200 / 120);
   const mauNg = nd ? MAU_NG[nd.n] : MAU.vang;
@@ -31,6 +32,13 @@ export async function GET(req: Request) {
     <div style={{ display: "flex", gap: 14, justifyContent: "center" }}>
       {la.map(([id, nguoc, tenLa, vt], i) => (
         <div key={`${id}${i}`} style={{ display: "flex", flexDirection: "column", alignItems: "center", width: rong }}>
+          {tranh[i] ? (
+            <div style={{ display: "flex", width: rong, height: cao, borderRadius: 12, border: `4px solid ${MAU.vang}`, background: MAU.giay, position: "relative", overflow: "hidden" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
+              <img src={tranh[i]!} width={rong - 8} height={cao - 8} style={{ objectFit: "cover", borderRadius: 8, ...(nguoc ? { transform: "rotate(180deg)" } : {}) }} />
+              {nguoc ? <div style={{ display: "flex", position: "absolute", top: 8, right: 8, background: "#b9772f", color: "#fff8e6", fontSize: doc ? 16 : 12, padding: "2px 8px", borderRadius: 10 }}>NGƯỢC</div> : null}
+            </div>
+          ) : (
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", width: rong, height: cao,
             borderRadius: 12, background: MAU.giay, border: `4px solid ${MAU.vang}`, padding: 10, position: "relative" }}>
             {nguoc ? <div style={{ display: "flex", position: "absolute", top: 8, right: 8, background: "#b9772f", color: "#fff8e6", fontSize: doc ? 16 : 12, padding: "2px 8px", borderRadius: 10 }}>NGƯỢC</div> : null}
@@ -40,7 +48,9 @@ export async function GET(req: Request) {
             </div>
             <div style={{ display: "flex", fontFamily: "Serif", fontSize: doc ? 22 : 16, color: "#2a2140", textAlign: "center", lineHeight: 1.1 }}>{tenLa}</div>
           </div>
-          <div style={{ display: "flex", marginTop: 8, fontSize: doc ? 18 : 13, color: MAU.mo2, textAlign: "center" }}>{vt}</div>
+          )}
+          <div style={{ display: "flex", marginTop: 8, fontFamily: "Serif", fontSize: doc ? 22 : 15, color: MAU.chu, textAlign: "center", lineHeight: 1.1 }}>{tenLa}</div>
+          <div style={{ display: "flex", marginTop: 4, fontSize: doc ? 18 : 13, color: MAU.mo2, textAlign: "center" }}>{vt}</div>
         </div>
       ))}
     </div>

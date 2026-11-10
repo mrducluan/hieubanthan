@@ -16,9 +16,14 @@ test("trang công cụ: H1 máy chủ, xáo bằng máy → rút 3 lá → lật
   // TR-2: engine nhận ra kiểu câu hỏi + gợi trải bài hợp (không trả lại câu đã gõ)
   await expect(page.getByTestId("goi-y-cau-hoi")).toContainText("câu hỏi 'có nên'", { timeout: 10_000 });
   await expect(page.getByTestId("goi-y-cau-hoi")).toContainText("hợp tác với người khác");
+  // TR-5: máy tự chọn trải bài hợp câu hỏi; muốn đổi thì mở "Đổi trải bài"
+  await expect(page.getByTestId("trai-bai-dang-chon")).toHaveAttribute("data-ma", "hai_lua_chon");
+  await page.getByTestId("nut-tuy-chinh").click();
   await page.getByTestId("chu-de-cong_viec").click();
   await page.getByTestId("trai-bai-ba_la_loi_khuyen").click();
+  await expect(page.getByTestId("trai-bai-dang-chon")).toHaveAttribute("data-ma", "ba_la_loi_khuyen");
   await page.getByTestId("nut-bat-dau").click();
+  await expect(page.getByTestId("buoc-hoi-gon")).toContainText("hợp tác với đối tác mới");
   await expect(page.getByTestId("xao-bai")).toBeVisible();
   await page.getByTestId("nut-may-xao").click();
   const quat = page.getByTestId("quat-bai");
@@ -33,11 +38,22 @@ test("trang công cụ: H1 máy chủ, xáo bằng máy → rút 3 lá → lật
   await expect(page.getByTestId("quat-bai")).toHaveCount(0);
   const ban = page.getByTestId("ban-trai-bai");
   await expect(ban.locator('[data-testid="la-bai"][data-lat="0"]')).toHaveCount(3);
+  // TR-5: lật lá nào, nghĩa lá đó (tranh + vị trí + từ khoá) hiện ngay; lá là tranh tự lưu trên site
+  await ban.locator('[data-testid="la-bai"]').first().click();
+  const nghia = page.getByTestId("nghia-la-dang-chon");
+  await expect(nghia).toContainText("Vị trí 1");
+  await expect(nghia.getByTestId("link-la-day-du")).toHaveAttribute("href", /^\/tarot\/la-bai\/[a-z0-9-]+$/);
+  const anh = nghia.locator("img");
+  await expect(anh).toHaveAttribute("src", /^\/tarot\/rws\/[a-z0-9_]+\.webp$/);
+  await expect.poll(() => anh.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth)).toBe(360);
   await page.getByTestId("nut-lat-het").click();
-  await expect(ban.locator('[data-testid="la-bai"][data-lat="1"]')).toHaveCount(3);
-  await page.getByTestId("nut-doc-bai").click();
+  // lật đủ → tự vào bài đọc (không cần bấm thêm)
   const bc = page.getByTestId("bao-cao-tarot");
   await expect(bc).toBeVisible({ timeout: 20_000 });
+  await expect(bc.getByTestId("y-nghia-la").getByTestId("the-la")).toHaveCount(3);
+  await expect(bc.getByTestId("nghia-la-dang-chon")).toContainText("Việc nhỏ nên làm");
+  await bc.getByTestId("the-la").first().click();
+  await expect(bc.getByTestId("nghia-la-dang-chon")).toContainText("Vị trí 1");
   // TR-2: bài đọc mở bằng câu trả lời cho đúng câu hỏi, câu hỏi hiện lại từ máy người dùng
   await expect(bc.getByTestId("cau-hoi-da-hoi")).toContainText("hợp tác với đối tác mới");
   await expect(page.locator("#lg-tra_loi")).toContainText("Câu trả lời cho câu hỏi của bạn");
@@ -68,6 +84,7 @@ test("trang công cụ: H1 máy chủ, xáo bằng máy → rút 3 lá → lật
 test("nhấn giữ xáo bài (hạt giống từ cử chỉ) → quạt hiện; lá của ngày lật được", async ({ page }) => {
   await page.goto("/tarot");
   await expect(page.getByTestId("buoc-hoi")).toBeVisible();
+  await page.getByTestId("nut-tuy-chinh").click();
   await page.getByTestId("trai-bai-mot_la").click();
   await page.getByTestId("nut-bat-dau").click();
   const nut = page.getByTestId("nut-giu-xao");
@@ -116,7 +133,7 @@ test("cụm 78 lá, trang con, .md, sitemap, thanh mảng, hub bảy mảng", as
   expect(trang).toContain("Trải bài của tôi");
 });
 
-test("TR-2: câu 'A hay B' → gợi trải bài Hai lựa chọn; lá ngược có nhãn NGƯỢC, chữ trên lá không lộn ngược", async ({ page }) => {
+test("TR-2: câu 'A hay B' → tự chọn trải bài Hai lựa chọn; lá ngược có nhãn NGƯỢC và tên lá đọc được", async ({ page }) => {
   // lịch sử trên máy có một trải bài 3 lá với 6 Tiền + Hiệp sĩ Kiếm ngược (ca chủ dự án báo) → Xem lại
   await page.addInitScript(() => {
     localStorage.setItem("hbt.tarot.v1", JSON.stringify([{ id: "e2e1", luc: new Date().toISOString(), trai_bai: "ba_la_thoi_gian",
@@ -128,6 +145,11 @@ test("TR-2: câu 'A hay B' → gợi trải bài Hai lựa chọn; lá ngược 
   await page.getByTestId("o-cau-hoi").fill("Nên ở lại công ty cũ hay chuyển sang công ty mới?");
   const gy = page.getByTestId("goi-y-cau-hoi");
   await expect(gy).toContainText("chọn giữa hai đường", { timeout: 10_000 });
+  // TR-5: trải bài hợp câu hỏi được chọn luôn; người dùng tự đổi thì có lối quay về gợi ý
+  await expect(page.getByTestId("nhan-tu-chon")).toBeVisible();
+  await page.getByTestId("nut-tuy-chinh").click();
+  await expect(page.getByTestId("trai-bai-hai_lua_chon")).toHaveAttribute("aria-checked", "true");
+  await page.getByTestId("trai-bai-celtic").click();
   await gy.getByTestId("nut-dung-goi-y").click();
   await expect(page.getByTestId("trai-bai-hai_lua_chon")).toHaveAttribute("aria-checked", "true");
   await expect(page.getByTestId("chu-de-cong_viec")).toHaveAttribute("aria-checked", "true");
@@ -152,11 +174,12 @@ test("TR-2: câu 'A hay B' → gợi trải bài Hai lựa chọn; lá ngược 
   for (const tu of ["decan", "Golden Dawn", "Book T", "Phẩm giá"]) await expect(chuyen).not.toContainText(tu, { useInnerText: true });
   const ban = bc.getByTestId("ban-trai-bai");
   await expect(ban.getByTestId("nhan-nguoc")).toHaveCount(2);
-  await expect(ban.locator('svg[data-nguoc="1"]')).toHaveCount(2);
+  await expect(ban.locator('[data-mat-truoc][data-nguoc="1"]')).toHaveCount(2);
   await expect(ban).toContainText("· ngược");
-  // mặt trước không còn xoay nguyên lá 180° (chữ "6" không thành "9")
-  const kieu = await ban.locator('[data-testid="la-bai"]').first().evaluate((el) => Array.from(el.querySelectorAll("div")).map((d) => d.style.transform).join("|"));
-  expect(kieu).not.toContain("rotate(180deg)");
+  // TR-5: tranh lá ngược xoay 180° như lá thật; nhãn NGƯỢC và tên lá dưới ô giữ chiều đọc
+  await expect(ban.locator('[data-mat-truoc="tien_6"] img')).toHaveAttribute("style", /rotate\(180deg\)/);
+  await expect(ban.locator('[data-mat-truoc="dai_1"] img')).not.toHaveAttribute("style", /rotate/);
+  await expect(ban.getByTestId("ten-la-tren-ban").first()).toContainText("6 Tiền");
 });
 
 test("TR-3: thẻ 'Câu trả lời của lá bài' — mã ký không mang câu hỏi; ảnh có QR; trải bài Khi nào", async ({ page, request }) => {
@@ -167,9 +190,10 @@ test("TR-3: thẻ 'Câu trả lời của lá bài' — mã ký không mang câu
   });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/tarot");
-  await expect(page.getByTestId("trai-bai-khi_nao")).toBeVisible();
   await page.getByTestId("o-cau-hoi").fill("Khi nào tôi có việc mới?");
-  await expect(page.getByTestId("goi-y-cau-hoi")).toContainText("Ba lá: Khi nào", { timeout: 10_000 });
+  await expect(page.getByTestId("trai-bai-dang-chon")).toContainText("Ba lá: Khi nào", { timeout: 10_000 });
+  await page.getByTestId("nut-tuy-chinh").click();
+  await expect(page.getByTestId("trai-bai-khi_nao")).toHaveAttribute("aria-checked", "true");
   await page.getByTestId("o-cau-hoi").fill("");
   await page.getByTestId("nut-xem-lai").first().click();
   await expect(page.getByTestId("bao-cao-tarot")).toBeVisible({ timeout: 20_000 });
@@ -192,4 +216,31 @@ test("TR-3: thẻ 'Câu trả lời của lá bài' — mã ký không mang câu
   }
   expect((await request.get("/og/tarot")).status()).toBe(200);
   expect((await request.get(`/the/tarot/${ma.slice(0, -2)}xx`)).status()).toBe(200);   // mã sai chữ ký → trang "không còn hiệu lực"
+});
+
+test("TR-5: chip chuyện hay hỏi điền câu mẫu → máy chọn trải bài → rút giúp → lật đủ tự vào bài đọc", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/tarot");
+  await expect(page.getByTestId("thanh-buoc").locator('[aria-current="step"]')).toContainText("Hỏi");
+  await page.getByTestId("nhom-hoi-nhay_viec").click();
+  const mau = page.getByTestId("cau-mau");
+  await expect(mau).toHaveCount(2);
+  const cau = (await mau.first().textContent())!;
+  await mau.first().click();
+  await expect(page.getByTestId("o-cau-hoi")).toHaveValue(cau);     // chỉ ĐIỀN — người dùng sửa được rồi mới xáo
+  await expect(page.getByTestId("trai-bai-dang-chon")).toHaveAttribute("data-ma", "hai_lua_chon", { timeout: 10_000 });
+  await expect(page.getByTestId("nut-bat-dau")).toContainText("rút 5 lá");
+  await page.getByTestId("nut-bat-dau").click();
+  await page.getByTestId("nut-may-xao").click();
+  await page.getByTestId("nut-rut-giup").click();
+  const ban = page.getByTestId("ban-trai-bai");
+  await expect(ban.locator('[data-testid="la-bai"][data-lat="0"]')).toHaveCount(5);
+  await page.getByTestId("nut-lat-het").click();
+  const bc = page.getByTestId("bao-cao-tarot");
+  await expect(bc).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByTestId("thanh-buoc").locator('[aria-current="step"]')).toContainText("Đọc");
+  await expect(bc.getByTestId("the-la")).toHaveCount(5);
+  await expect(page.locator("#lg-tra_loi")).toContainText(/đường|Đường/);
+  // điện thoại: không tràn ngang
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
 });

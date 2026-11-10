@@ -36,3 +36,9 @@
 Danh sách nhà cung cấp xử lý dữ liệu (trả lời khi người dùng yêu cầu theo Chính sách quyền riêng tư): Vercel (web,
 Singapore) · Render (engine, Singapore) · Supabase (DB + đăng nhập, Singapore) · OpenRouter (diễn đạt AI, Hoa Kỳ) ·
 PostHog (đo lường ẩn danh) · Google Tag Manager/Analytics · Sentry (báo lỗi).
+
+**Tranh 78 lá Tarot (TR-5, 2026-11-10)** — `web/public/tarot/rws/*.webp`: tranh bộ Rider–Waite in năm 1909 (Pamela Colman
+Smith vẽ, A. E. Waite chỉ đạo; phạm vi công cộng: VN đời tác giả + 50 năm, Mỹ in trước 1929). Bản quét lấy từ archive.org
+mục `rider-waite-small-jpeg` (Public Domain Mark 1.0), thu về 360 px, webp. **Không** dùng bản tô màu lại năm 1971 của
+U.S. Games Systems (còn bản quyền) hay bộ "Universal / Radiant Waite". Nếu có khiếu nại: đổi sang nét đen trắng trong sách
+*The Pictorial Key to the Tarot* (1910, Project Gutenberg #43548) — chỉ cần thay tệp ảnh, mã không đổi.

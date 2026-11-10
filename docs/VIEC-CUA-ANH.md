@@ -3,7 +3,19 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-10 (BT-UI mục 4ak, SEO-N mục 4al, BLOG-10 mục 4am).
+> Cập nhật lần cuối: 2026-11-10 (BT-UI mục 4ak, SEO-N mục 4al, BLOG-10 mục 4am, TR-5 mục 4an).
+
+### 4an. TR-5 — Tarot: tranh lá thật + flow hỏi mới (2026-11-10)
+
+- [ ] **Deploy engine trước web** (bộ bài thêm `goi_y_hoi`, `tu_khoa_nguoc`). Web lên trước thì hàng chip câu hỏi mẫu tự ẩn, không vỡ.
+- [ ] (3 phút) `/tarot` trên điện thoại: bấm chip "Nhảy việc" → câu mẫu → "Xáo bài · rút 5 lá" → "Rút giúp tôi" → lật một lá
+  thấy nghĩa ngay → lật hết tự vào bài đọc; dải "Ý nghĩa từng lá" chạm được.
+- [ ] Đọc 24 câu hỏi mẫu (`engine/app/kb/data/tarot_kb.json` → `goi_y_hoi`, sửa được ở `/quan-tri` Kho tri thức) — đổi câu nào
+  chưa hợp giọng anh muốn.
+- [ ] (Pháp lý, tuỳ chọn) Tranh lá là bản in 1909 đã hết bản quyền (ghi ở `docs/NGUON-MO.md`); nếu luật sư muốn chắc hơn, có
+  phương án dự phòng tranh nét đen trắng từ sách Waite 1910 — báo em đổi.
+- [ ] (Quyết định, sau 2 tuần có số) Áp cùng flow cho Kinh Dịch: chip việc hay hỏi + thẻ "Quẻ của bạn nói gì" ngay sau khi gieo
+  (`docs/NANG-CAP-TAROT.md` mục 11).
 
 ### 4am. BLOG-10 — bài NotFair mới tự xuất bản khi đạt điểm (2026-11-10)
 
