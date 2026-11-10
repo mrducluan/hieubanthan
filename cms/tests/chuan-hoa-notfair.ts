@@ -191,11 +191,54 @@ try {
   assert.equal(await banKhach(m2.slug), undefined);
   console.log("  ✓ BLOG-10: tự xuất bản khi đạt ngưỡng; điểm thấp / kho ảnh lỗi / trùng nội dung → giữ nháp");
 
-  // BLOG-9d: chưa có nguồn NotFair → tự nhập không làm gì, không lỗi.
-  const { tuDongNotFair } = await import("../src/lib/tu-dong-notfair");
-  const td = await tuDongNotFair(payload, undefined as never);
-  assert.equal(td.co_nguon, false);
-  console.log("  ✓ BLOG-9d: tự nhập bỏ qua khi chưa có nguồn NotFair");
+  // BLOG-10 migration / cron: nháp NotFair cũ (cron nhập trước BLOG-10, bìa NotFair, chưa chuẩn hoá) → chuẩn hoá + vẽ ảnh +
+  // nguồn từ link đã dẫn → xuất bản. Nháp từng xuất bản rồi bị Bỏ xuất bản, nháp "Cần sửa" → không đụng.
+  const { tuDongNotFair, DA_THU } = await import("../src/lib/tu-dong-notfair");
+  const HTML_CU = `<p>Bát tự là cách đọc tính cách và nhịp đời từ tám chữ can chi của năm, tháng, ngày, giờ sinh. Bài này hướng dẫn cách lập tứ trụ, đọc nhật chủ và ngũ hành để tự soi mình.</p>
+<h2>Tứ trụ gồm những gì?</h2><p>Bốn trụ năm, tháng, ngày, giờ, mỗi trụ một thiên can và một địa chi; trụ ngày là nhật chủ, đại diện cho chính người xem.</p>
+<h2>Đọc nhật chủ mạnh yếu thế nào?</h2><p>Xét tháng sinh có sinh trợ nhật chủ không, rồi đếm các can chi cùng hành hoặc sinh cho nhật chủ trong bốn trụ.</p>
+<h2>Ngũ hành thiếu có sao không?</h2><p>Thiếu một hành không phải điềm xấu; sách xưa xem cả cân bằng chung và mùa sinh, nguyên văn có ở <a href="https://ctext.org/book-of-changes">kho sách cổ</a>.</p>
+<h2>Nên bắt đầu tự học ra sao?</h2><p>Lập lá số của chính mình, ghi lại những năm đã qua và đối chiếu, xem thêm tổng quan ở <a href="https://www.britannica.com/topic/Yijing">Britannica</a>.</p>`;
+  const taoCu = async (duoi: string, them: Record<string, unknown> = {}, html = HTML_CU) => {
+    const b = await payload.create({
+      collection: "bai-viet", overrideAccess: true, draft: true, context: { giuSlugGoc: true, boQuaKiemDinh: true, boQuaLamMoi: true },
+      data: { tieu_de: `Bát tự là gì: cách lập tứ trụ và đọc nhật chủ cho người mới ${duoi}`, slug: `${dau}-bat-tu-${duoi}`,
+        generateSlug: false, mang: "bat_tu", the: ["bát tự", "tứ trụ"], nguon_goc: "notfair", anh_bia: biaNf.id,
+        publishedAt: "2026-11-08T00:00:00.000Z", ...them,
+        noi_dung: { root: { type: "root", direction: "ltr", format: "", indent: 0, version: 1,
+          children: htmlSangKhoi(html) } } } as never,
+    });
+    xoa.push({ collection: "bai-viet", id: b.id });
+    return b.id;
+  };
+  const cu1 = await taoCu("x");
+  const canSua = await taoCu("y", { trang_thai_duyet: "can_sua" }, "<p>Bài nháp Chủ biên đánh dấu cần sửa, chưa được lên web cho tới khi sửa xong.</p>");
+  const boXb = await taoCu("z", {}, "<p>Bài từng lên web rồi Chủ biên bỏ xuất bản, máy không được tự đưa lại lên web.</p>");
+  await payload.update({ collection: "bai-viet", id: boXb, overrideAccess: true, data: { _status: "published" } as never,
+    context: { boQuaKiemDinh: true, boQuaLamMoi: true } });
+  await payload.update({ collection: "bai-viet", id: boXb, overrideAccess: true, data: { _status: "draft" } as never,
+    context: { boQuaKiemDinh: true, boQuaLamMoi: true } });
+  const td = await tuDongNotFair(payload, undefined, { hanMs: 600_000, toiDa: 50, thuLai: true });
+  assert.equal(td.co_nguon, false, "chưa có nguồn NotFair: không nhập mới nhưng vẫn xử lý nháp đã có");
+  const r1 = td.moi.find((m) => String(m.id) === String(cu1));
+  assert.ok(r1?.xuat_ban, JSON.stringify(r1));
+  assert.ok(!td.moi.some((m) => [String(canSua), String(boXb)].includes(String(m.id))), "Cần sửa / từng Bỏ xuất bản: không đụng");
+  const n1 = await payload.findByID({ collection: "bai-viet", id: cu1, depth: 1, overrideAccess: true }) as any;
+  assert.equal(n1._status, "published");
+  assert.equal(n1.anh_bia.nguon_anh, NGUON_ANH_BLOG7, "bìa NotFair được vẽ lại trước khi lên web");
+  assert.equal(n1.nguon.length, 2, "nguồn từ link ctext + Britannica đã dẫn");
+  xoa.push({ collection: "media", id: n1.anh_bia.id });
+  for (const k of n1.noi_dung.root.children as any[]) if (k.type === "upload") xoa.push({ collection: "media", id: k.value?.id ?? k.value });
+  // Nháp trùng (m2) chưa đạt → ghi lý do một lần; cron (không thuLai) hôm sau bỏ qua, migration (thuLai) thử lại.
+  const g2 = await payload.findByID({ collection: "bai-viet", id: m2.id, draft: true, depth: 0, overrideAccess: true }) as any;
+  assert.ok(String(g2.ghi_chu_duyet).startsWith(DA_THU), g2.ghi_chu_duyet);
+  const cron = await tuDongNotFair(payload, undefined, { hanMs: 600_000, toiDa: 50 });
+  assert.ok(!cron.moi.some((m) => String(m.id) === String(m2.id)), "cron không thử lại nháp đã ghi lý do");
+  const thuLaiKq = await tuDongNotFair(payload, undefined, { hanMs: 600_000, toiDa: 50, thuLai: true });
+  assert.ok(thuLaiKq.moi.some((m) => String(m.id) === String(m2.id)));
+  const g3 = await payload.findByID({ collection: "bai-viet", id: m2.id, draft: true, depth: 0, overrideAccess: true }) as any;
+  assert.equal(String(g3.ghi_chu_duyet).split(DA_THU).length - 1, 1, "lý do ghi một lần, không chồng");
+  console.log("  ✓ BLOG-10 migration: nháp cũ chuẩn hoá + vẽ ảnh + nguồn → xuất bản; Cần sửa / Bỏ xuất bản không đụng; lý do ghi một lần");
 } finally {
   for (const x of xoa.reverse()) await payload.delete({ collection: x.collection, id: x.id, overrideAccess: true }).catch(() => {});
 }

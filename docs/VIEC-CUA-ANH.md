@@ -7,9 +7,12 @@
 
 ### 4am. BLOG-10 — bài NotFair mới tự xuất bản khi đạt điểm (2026-11-10)
 
-- [ ] **Bài "Quẻ Kinh Dịch Mai Hoa…" (NotFair đăng 19:36 ngày 10/11) lên /blog ngay**: CMS → Bài viết → bảng bài NotFair →
-  "Nhập vào CMS" → mở bài → "Chuẩn hoá SEO" → đọc → Xuất bản. Không làm thì cron 8:03 sáng 11/11 tự nhập + tự xuất bản nếu
-  đạt điểm ≥ 85 (sau khi CMS deploy bản này).
+- [ ] **Gộp nhánh + để Vercel deploy CMS**: migration `blog_10_xuat_ban_notfair` chạy lúc build — tự nhập mọi bài NotFair
+  còn thiếu (gồm "Quẻ Kinh Dịch Mai Hoa…" 10/11) + mọi nháp NotFair chưa từng xuất bản, vẽ ảnh mới, điền nguồn, xuất bản bài
+  ≥ 85 điểm. Xem kết quả: Vercel (dự án **CMS**) → Deployments → bản mới → Build Logs → tìm `BLOG-10:` (mỗi bài một dòng
+  "xuất bản (N điểm)" hoặc "giữ nháp: lý do").
+- [ ] Bài "giữ nháp" (nếu có): mở bài trong CMS, đọc "Ghi chú của Chủ biên" (dòng `BLOG-10: chưa tự xuất bản: …`), sửa rồi
+  bấm Xuất bản — hoặc gửi em tên bài để em sửa nội dung.
 - [ ] Sau 8:03 sáng: Vercel (dự án web) → Logs → tìm `[cron hang-ngay] blog` — mỗi bài có `xuat_ban: true` hoặc `ly_do`
   (điểm thấp, trùng nội dung, kho ảnh lỗi). Bài không tự lên vẫn nằm ở bảng điều khiển CMS "Bài NotFair mới chờ đọc".
 - [ ] Bài máy tự xuất bản vẫn ghi "Gửi duyệt": anh đọc lại khi rảnh, sửa rồi bấm Xuất bản là thành "Đã duyệt"; bài có vấn đề
