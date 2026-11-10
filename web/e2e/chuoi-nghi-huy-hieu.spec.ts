@@ -89,31 +89,33 @@ test("đã đăng nhập, hôm qua nghỉ: dòng 'chuỗi vẫn nối tiếp', �
   await expect(page.getByTestId("chuoi-nghi")).toHaveCount(0);
 });
 
-test("lá bài đầu ngày: úp → lật → một điều của hôm nay, nhớ trong ngày, không chữ cấm, chỉ đo mã", async ({ page }) => {
+test("ba lá của ngày (thay lá bài đầu ngày): úp → lật → điều của hôm nay, nhớ trong ngày, không chữ cấm, chỉ đo mã", async ({ page }) => {
   await moHomNay(page);
-  const la = page.getByTestId("la-bai");
+  const la = page.getByTestId("ba-la");
   await expect(la).toHaveAttribute("data-lat", "0");
-  await expect(la.getByTestId("la-bai-noi-dung")).toHaveCount(0);
-  await la.getByRole("button", { name: "Lật lá bài của hôm nay" }).click();
+  await expect(la.getByTestId("ba-la-doc-so")).toHaveCount(0);
+  await la.getByRole("button", { name: "Lật Lá Con số" }).click();
   await expect(la).toHaveAttribute("data-lat", "1");
-  const nd = la.getByTestId("la-bai-noi-dung");
+  const nd = la.getByTestId("ba-la-doc-so");
   await expect(nd).toBeVisible();
   expect((await nd.innerText()).trim().length).toBeGreaterThan(10);
   // Trục 2 UX: lá không lặp điều thẻ ngay phía trên đã in (câu tự soi, nghĩa ngày cá nhân).
-  expect(await page.getByTestId("the-hom-nay").innerText()).not.toContain((await la.getByTestId("la-bai-chu").innerText()).trim());
+  expect(await page.getByTestId("the-hom-nay").innerText()).not.toContain((await nd.locator("h3").innerText()).trim());
   expect(await la.innerText()).not.toMatch(TU_CAM);
   const sk = await suKien(page);
   const lat = sk.find((e) => e.su_kien === "daily_card_flipped");
   expect(lat).toBeTruthy();
+  expect(lat).toMatchObject({ kind: "so", thu_tu: 1 });
   expect(Object.keys(lat!)).not.toContain("chu");
-  expect(await page.evaluate(() => localStorage.getItem("hbt.la_bai.v1"))).toContain('"lat":true');
+  expect(await page.evaluate(() => localStorage.getItem("hbt.ba_la.v1"))).toContain('"lat":["so"]');
   // Mở lại trong ngày: vẫn đã lật, cùng nội dung
   const chu = await nd.innerText();
   await page.reload();
-  await expect(page.getByTestId("la-bai")).toHaveAttribute("data-lat", "1");
-  await expect(page.getByTestId("la-bai-noi-dung")).toBeVisible();
-  expect(await page.getByTestId("la-bai-noi-dung").innerText()).toBe(chu);   // so innerText với innerText (toHaveText đọc textContent, mất xuống dòng)
-  await expect(page.getByTestId("la-bai-chia-se")).toBeVisible();
+  await expect(page.getByTestId("ba-la")).toHaveAttribute("data-lat", "1");
+  await expect(page.getByTestId("ba-la-doc-so")).toBeVisible();
+  expect(await page.getByTestId("ba-la-doc-so").innerText()).toBe(chu);   // so innerText với innerText (toHaveText đọc textContent, mất xuống dòng)
+  // Chưa lật đủ ba thì chưa có khối ghép + nút chia sẻ (không khoá lá nào sau nút chia sẻ).
+  await expect(page.getByTestId("ba-la-chia-se")).toHaveCount(0);
 });
 
 test("hẹn với chính mình 7 ngày: đặt → tiến độ từ chuỗi → đạt → huy hiệu máy + chia sẻ; lỡ → hẹn lại, không mất gì", async ({ page }) => {

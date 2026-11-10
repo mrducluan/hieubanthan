@@ -61,7 +61,7 @@ class _HoSoInput(BaseModel):
 
 
 class GoiYCheoInput(_HoSoInput):
-    mang_hien_tai: Literal[gy.MANG_TRANG]  # type: ignore[valid-type]
+    mang_hien_tai: Literal[(*gy.MANG_TRANG, gy.TRANG_BAN_THAN)]  # type: ignore[valid-type]
 
 
 @router.post("/goi-y-cheo")

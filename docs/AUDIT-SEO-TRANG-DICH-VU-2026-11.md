@@ -89,7 +89,7 @@ kiểu là một, `TU_KHOA_SITE` đã có cả hai, không đổi chính tả si
    sang 2028 khi menu sang năm). Kèm "12 tháng tới theo lá số của bạn" (`/thoi-gian-toi`).
 3. **Liên kết về đúng trang dịch vụ bằng đúng từ khoá** — đoạn cuối CMS tự thêm vào bài (chuẩn hoá NotFair) giờ dùng "lập lá số Tử vi
    trọn đời của bạn", "tra cứu thần số học của bạn", "xem Bát tự (Tứ trụ) của bạn", "gieo quẻ Kinh Dịch…"; nút CTA chân bài blog đổi
-   tương ứng. Liên kết từ site NGOÀI (fanpage, diễn đàn, đối tác) vẫn là việc của anh — xem `VIEC-CUA-ANH.md` 4ak.
+   tương ứng. Liên kết từ site NGOÀI (fanpage, diễn đàn, đối tác) vẫn là việc của anh — xem `VIEC-CUA-ANH.md` 4al.
 4. **Thương hiệu "hieuban"** — Organization + WebSite thêm `alternateName` "Hieuban", "Hiểu Bản"; chân trang ghi "Hiểu Bản Thân
    (hieuban.com)". `sameAs` mạng xã hội vẫn chờ anh đặt env `MXH_*` (không bịa link).
 5. **Ảnh lá số mẫu** — `<img>` `/anh/la-so-tu-vi-mau.webp` (1024×1127, 94 KB, chụp từ lá số minh hoạ "Minh An" của

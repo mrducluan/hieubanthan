@@ -74,7 +74,8 @@ test("HN-2: chọn ý định + gõ câu → engine trả nhịp, cách làm, c�
   // Mở lại trong ngày: ý định đã chọn vẫn hiện kết quả
   await page.reload();
   await expect(page.getByTestId("y-dinh-ket-qua").locator("li")).toHaveCount(2);
-  await expect(page.getByRole("heading", { name: "Câu hỏi nổi bật hôm nay" })).toBeVisible();
+  // BT-UI: câu hỏi nổi bật + phái Chaldea nằm ở tầng "Đọc thêm" (mục gập, tiêu đề luôn hiện).
+  await expect(page.getByTestId("cau-hoi-noi-bat").locator("summary")).toContainText("Câu hỏi nổi bật hôm nay");
   await expect(page.getByTestId("ngay-chaldea")).toContainText("Theo phái Chaldea");
 });
 
@@ -125,6 +126,7 @@ test("Q7: hộp đã bấm 'Đúng với mình' 35 ngày trước → Hôm nay h
 test("KD-2c (P8) Quẻ ngày của riêng bạn: hai số tự chọn → quẻ Mai Hoa theo số khớp engine, nhớ trên máy theo ngày, link đọc kỹ điền sẵn hai số", async ({ page, request }) => {
   await napHoSo(page);
   await page.goto("/hom-nay");
+  await page.getByTestId("que-ngay").locator("summary").click();   // BT-UI: quẻ nằm trong mục gập "Đọc thêm"
   const q = page.getByTestId("que-rieng");
   await expect(q).toContainText("Quẻ ngày của riêng bạn");
   await q.getByLabel("Số thứ nhất của bạn").fill("7");
