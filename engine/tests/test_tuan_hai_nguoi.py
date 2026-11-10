@@ -215,9 +215,10 @@ def test_push_tuan_chi_thu_hai_va_cung_nguon_voi_muc_tuan():
             assert p and p["duong"] == "/hom-nay#tuan-nay" and p["tieu_de"] == "Tuần này của bạn"
             assert p["noi_dung"].startswith(t["tom_tat"]) and len(p["noi_dung"]) <= 220
             assert not re.search(r"\{[a-z_]+\}", p["noi_dung"])
-            if t["noi_bat"]:
+            neu = [x for x in t["noi_bat"] if x["loai"] != "cham"]
+            if neu:
                 co_ngay += 1
-                assert any(x["tieu_de"] in p["noi_dung"] for x in t["noi_bat"])
+                assert any(x["tieu_de"] in p["noi_dung"] for x in neu)
                 tot = [x for x in t["noi_bat"] if x["loai"] in ("thuan", "hop_tuoi")]
                 if tot:                                   # có ngày tích cực thì thông báo nêu ngày đó, không nêu "ngày nên đi chậm"
                     assert tot[0]["tieu_de"] in p["noi_dung"]
@@ -268,8 +269,11 @@ def test_tuan_nhieu_lop_cung_nguon_voi_trang_hom_nay_va_trang_ngay():
         c = hl._calc(d)  # noqa: SLF001
         assert n["viec_tot"] == [v["ten"] for v in hl._viec_lon(c) if v["danh_gia"] == "tot"]  # noqa: SLF001
         assert [g["chi"] for g in n["gio_tot"]] == [g["chi"] for g in hl.ngay_xem(d)["gio_hoang_dao"]]
-        assert lop["tuoi"]["muc"] == ("cham" if n["tuoi"] == "xung" else "thuan" if n["tuoi"] in ("tam_hop", "luc_hop") else "binh")
-        assert bool(n["viec_luu_y"]) == bool(n["viec_tot"] and n["tuoi"] == "xung")   # ngày xung tuổi: việc sách lịch ghi kèm lời nhắc
+        assert lop["tuoi"]["muc"] == ("cham" if n["tuoi"] == "xung" else "thuan" if n["tuoi"] in ("tam_hop", "luc_hop")
+                                      else None if n["tuoi"] in ("hai", "trung") else "binh")
+        kieng = bool(c["ky_dan_gian"])
+        # ngày xung tuổi / ngày kiêng dân gian: việc sách lịch ghi luôn kèm lời nhắc
+        assert bool(n["viec_luu_y"]) == bool(n["viec_tot"] and (n["tuoi"] == "xung" or kieng))
         assert n["tom"] and not re.search(r"\{[a-z_]+\}|điểm", n["tom"])
         # ngày lịch khuyên hoãn / xung tuổi không bao giờ được gọi là "thuận"
         if lop["lich"]["muc"] == "cham" or n["tuoi"] == "xung":
@@ -280,6 +284,7 @@ def test_tuan_nhieu_lop_cung_nguon_voi_trang_hom_nay_va_trang_ngay():
         for iso in v["ngay"]:
             n = next(x for x in t["ngay"] if x["ngay"] == iso)
             assert v["ten"] in n["viec_tot"] and n["tuoi"] != "xung"
+            assert not hl._calc(dt.date.fromisoformat(iso))["ky_dan_gian"]  # noqa: SLF001
     # Phong thuỷ tháng: có giới tính → có góc hợp theo mệnh quái; không có → vẫn có lời chung + lời mời bổ sung
     assert t["phong_thuy"]["loi"] and t["phong_thuy"]["can_cu"]
     assert th.tuan(15, 6, 1995, xem)["phong_thuy"]["loi"]
@@ -299,3 +304,46 @@ def test_tuan_moc_trong_tuan():
     m = next(x for x in t["moc"] if x["loai"] == "thang_ca_nhan")
     assert m["ngay"] == "2026-12-01" and "Tháng cá nhân" in m["nhan"]
     assert all(x["ngay"] >= t["tu"] and x["ngay"] <= t["den"] for x in t["moc"])
+
+
+def test_tuan_khong_tu_noi_nguoc_minh():
+    """Rà soát độc lập (PR #249): một định nghĩa "ngày thuận" cho nhịp, dòng nổi bật, câu tuần; ngày hại / trùng tuổi và
+    ngày kiêng dân gian không được gọi thuận, không được nêu "hợp việc X" mà thiếu lời nhắc."""
+    import datetime as dt
+
+    from app.luangiai import hoang_lich as hl
+    from app.luangiai import tuan_hai_nguoi as th
+
+    thay = {"hai": 0, "trung": 0, "kieng_viec": 0, "tcn": 0, "push_cham": 0}
+    for ns in ((15, 6, 1995), (29, 2, 2000), (20, 1, 1990), (3, 11, 1988), (1, 1, 1930), (7, 7, 2020)):
+        for i in range(70):
+            hai = dt.date(2026, 1, 5) + dt.timedelta(weeks=i)
+            t = th.tuan(*ns, hai)
+            nb = {x["ngay"]: x["loai"] for x in t["noi_bat"]}
+            con = [n for n in t["ngay"] if not n["da_qua"]]
+            for n in t["ngay"]:
+                c = hl._calc(dt.date.fromisoformat(n["ngay"]))  # noqa: SLF001
+                if n["tuoi"] in ("hai", "trung"):
+                    thay[n["tuoi"]] += 1
+                    assert n["nhip"] in ("binh", "cham") and "bình thường theo cả lịch lẫn tuổi" not in n["tom"], n   # chậm khi lịch khuyên hoãn
+                    assert nb.get(n["ngay"]) not in ("thuan", "hop_tuoi", "mo_dau"), (n, nb)
+                if c["ky_dan_gian"]:
+                    assert "Sách lịch ghi hợp" not in n["tom"], n
+                    thay["kieng_viec"] += bool(n["viec_tot"])
+                if nb.get(n["ngay"]) == "thuan":
+                    assert n["nhip"] in ("thuan", "kha"), n
+                    # còn ngày nhịp "thuận" trong tuần thì dòng "thuận nhất" phải là một ngày nhịp thuận
+                    assert n["nhip"] == "thuan" or not any(x["nhip"] == "thuan" for x in con), (n, t["tom_tat"])
+                if n["nhip"] == "thuan" and not n["da_qua"]:
+                    assert "thuan" in nb.values() and "không có ngày nào" not in t["tom_tat"], t["tom_tat"]
+            for m in t["moc"]:
+                assert m["nhan"][0].isupper() and "hôm nay" not in (m["nhan"] + m["cau"]).lower() and "chúc bạn" not in m["nhan"], m
+                if m["loai"] == "thang_ca_nhan":
+                    thay["tcn"] += 1
+                    assert len(m["cau"]) > 10, m
+                if m["loai"] == "giao_tiet":
+                    assert m["nhan"] == "Lập xuân" or m["nhan"].split()[2][0].isupper(), m   # tên tiết giữ chữ hoa đầu
+            p = th.push_tuan(*ns, hai)
+            assert "ngày nên đi chậm" not in p["noi_dung"] and len(p["noi_dung"]) <= 190, p
+    assert all(thay[k] > 0 for k in ("hai", "trung", "kieng_viec", "tcn")), thay
+    assert set(th.tuan(15, 6, 1995, dt.date(2026, 11, 10))["nhan"]) >= {"gioi_thieu", "nhip", "muc", "ghi_chu"}

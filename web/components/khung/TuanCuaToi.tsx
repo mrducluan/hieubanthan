@@ -26,6 +26,8 @@ interface Tuan {
   moc?: { loai: string; ngay: string; thu: string; nhan: string; cau: string }[];
   phong_thuy?: { ten: string; loi: string; can_cu: string; thieu_gioi_tinh: boolean; duong: string };
   tuoi?: string | null;
+  // Chữ gắn với nghĩa do engine soạn (tên nhịp, tên mức, câu dẫn, ghi chú); engine cũ → dùng bản dự phòng bên dưới.
+  nhan?: { gioi_thieu?: string; nhip?: Partial<Record<Nhip, string>>; muc?: Partial<Record<"thuan" | "binh" | "cham", string>>; ghi_chu?: string };
 }
 
 const MAU_NB: Record<DongNoiBat["loai"], string> = {
@@ -59,8 +61,8 @@ export function TuanCuaToi({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
       body: JSON.stringify({ ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam, ngay_xem: ngay,
         ...(hoSo.gioi_tinh === "nam" || hoSo.gioi_tinh === "nu" ? { gioi_tinh: hoSo.gioi_tinh } : {}) }) })
       .then((r) => (r.ok ? (r.json() as Promise<Tuan>) : null))
-      .then((j) => { if (!huy && j && Array.isArray(j.ngay) && j.ngay.length === 7) setT(j); else if (!huy) setT(null); })
-      .catch(() => { if (!huy) setT(null); });   // lỗi → ẩn khu, không để tuần của hồ sơ / ngày trước
+      .then((j) => { if (huy) return; setChon(null); setT(j && Array.isArray(j.ngay) && j.ngay.length === 7 ? j : null); })
+      .catch(() => { if (!huy) { setChon(null); setT(null); } });   // lỗi → ẩn khu, không để tuần của hồ sơ / ngày trước
     return () => { huy = true; };
   }, [hoSo.ngay, hoSo.thang, hoSo.nam, hoSo.gioi_tinh, ngay]);
   // Mở từ thông báo sáng thứ Hai (/hom-nay#tuan-nay): khu vẽ SAU khi tải nên tự cuộn tới khi có dữ liệu.
@@ -78,6 +80,16 @@ export function TuanCuaToi({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
     if (cuon) bang.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
   };
   const nhieuLop = Boolean(dangChon.lop?.length);
+  const tenNhip = (k: Nhip) => t.nhan?.nhip?.[k] ?? NHIP[k].ten;
+  const tenMuc = (k: "thuan" | "binh" | "cham") => t.nhan?.muc?.[k] ?? MUC[k].ten;
+  // Bàn phím trong hàng ngày (tablist): ← → Home End đổi ngày và dời tiêu điểm; chỉ ngày đang chọn nằm trong thứ tự Tab.
+  const phim = (e: React.KeyboardEvent<HTMLButtonElement>, i: number) => {
+    const j = e.key === "ArrowRight" ? (i + 1) % 7 : e.key === "ArrowLeft" ? (i + 6) % 7 : e.key === "Home" ? 0 : e.key === "End" ? 6 : -1;
+    if (j < 0) return;
+    e.preventDefault();
+    chonNgay(t.ngay[j]!.ngay, "phim");
+    (e.currentTarget.parentElement?.children[j] as HTMLElement | undefined)?.focus();
+  };
   const mocTheoNgay = new Set((t.moc ?? []).map((m) => m.ngay));
 
   return (
@@ -88,21 +100,22 @@ export function TuanCuaToi({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
           <h2 id="tuan-nay-td" className="text-xl">Tuần này của bạn</h2>
           <span className="text-sm tabular-nums text-fg-muted">{dm(t.tu)} – {dm(t.den)}{t.tuoi ? ` · tuổi ${t.tuoi}` : ""}</span>
         </div>
-        <p className="text-sm text-fg-muted">{nhieuLop ? "Bảy ngày tới qua năm cách xem. Bấm một ngày để đọc ngày ấy theo từng môn." : null} {t.tom_tat}</p>
+        <p className="text-sm text-fg-muted">{nhieuLop && t.nhan?.gioi_thieu ? `${t.nhan.gioi_thieu} ` : null}{t.tom_tat}</p>
       </header>
 
       <div className={cn("grid gap-4", nhieuLop && "lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]")}>
         <div className="min-w-0 space-y-3">
-          <div role="tablist" aria-label="Bảy ngày của tuần" className="grid grid-cols-7 gap-1.5" data-testid="tuan-luoi">
+          <div role={nhieuLop ? "tablist" : "list"} aria-label="Bảy ngày của tuần" className="grid grid-cols-7 gap-1.5" data-testid="tuan-luoi">
             {t.ngay.map((n, i) => {
               const dang = n.ngay === dangChon.ngay;
               const nh = n.nhip ? NHIP[n.nhip] : null;
               return (
-                <button key={n.ngay} type="button" role="tab" aria-selected={dang} aria-controls="tuan-bang" data-ngay={n.ngay}
-                  data-hom-nay={n.hom_nay ? 1 : 0} data-nhip={n.nhip ?? ""} onClick={() => chonNgay(n.ngay, "luoi")}
+                <button key={n.ngay} type="button" id={`tuan-tab-${i}`} data-ngay={n.ngay} disabled={!nhieuLop}
+                  {...(nhieuLop ? { role: "tab", "aria-selected": dang, "aria-controls": "tuan-bang", tabIndex: dang ? 0 : -1 } : { role: "listitem" })}
+                  data-hom-nay={n.hom_nay ? 1 : 0} data-nhip={n.nhip ?? ""} onClick={() => chonNgay(n.ngay, "luoi")} onKeyDown={(e) => phim(e, i)}
                   title={`${n.thu} ${dm(n.ngay)} — ngày cá nhân ${n.so}: ${n.chu_de}`}
                   className={cn("vung-cham relative rounded-xl border px-0.5 py-2 text-center outline-none transition-colors focus-visible:ring-2 focus-visible:ring-gold",
-                    dang ? "border-gold bg-gold/10" : "border-line/60 hover:border-gold/50", n.da_qua && !dang && "opacity-55")}>
+                    dang ? "border-gold bg-gold/10" : "border-line/60 enabled:hover:border-gold/50", n.da_qua && !dang && "opacity-55")}>
                   <span className={cn("block text-[0.7rem]", n.hom_nay ? "font-medium text-gold" : "text-fg-muted")}>
                     {n.hom_nay ? <><span className="sm:hidden">{THU_NGAN[i]}</span><span className="hidden sm:inline">Hôm nay</span></> : THU_NGAN[i]}</span>
                   <span className="block font-serif text-xl leading-tight text-gold">{n.so}</span>
@@ -112,7 +125,7 @@ export function TuanCuaToi({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
                       : <span className={cn("size-1.5 rounded-full", n.dep ? "bg-jade" : n.hoang_dao ? "bg-gold/70" : "bg-transparent")} />}
                     {mocTheoNgay.has(n.ngay) && <span className="size-1.5 rotate-45 bg-gold" />}
                   </span>
-                  <span className="sr-only">{nh ? `${nh.ten}. ` : ""}{n.tuoi_ten && n.tuoi ? `${n.tuoi_ten} với tuổi bạn.` : ""}</span>
+                  <span className="sr-only">{n.nhip ? `${tenNhip(n.nhip)}. ` : ""}{n.tuoi_ten && n.tuoi ? `${n.tuoi_ten} với tuổi bạn.` : ""}</span>
                 </button>
               );
             })}
@@ -120,18 +133,18 @@ export function TuanCuaToi({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
           {nhieuLop && (
             <p className="flex flex-wrap gap-x-3 gap-y-1 text-[0.7rem] text-fg-faint" aria-hidden>
               {(Object.keys(NHIP) as Nhip[]).map((k) => (
-                <span key={k}><i className={cn("mr-1 inline-block size-2 rounded-full align-middle", NHIP[k].cham)} />{NHIP[k].ten.toLowerCase()}</span>
+                <span key={k}><i className={cn("mr-1 inline-block size-2 rounded-full align-middle", NHIP[k].cham)} />{tenNhip(k).toLowerCase()}</span>
               ))}
               <span><i className="mr-1 inline-block size-1.5 rotate-45 bg-gold align-middle" />có mốc lịch</span>
             </p>
           )}
 
           {nhieuLop && (
-            <div ref={bang} id="tuan-bang" role="tabpanel" aria-live="polite" data-testid="tuan-bang" data-ngay={dangChon.ngay}
+            <div ref={bang} id="tuan-bang" role="tabpanel" aria-labelledby={`tuan-tab-${t.ngay.indexOf(dangChon)}`} data-testid="tuan-bang" data-ngay={dangChon.ngay}
               className="scroll-mt-28 space-y-3 rounded-xl border border-line/70 bg-bg/40 p-3 sm:p-4">
               <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                 <h3 className="font-serif text-lg">{dangChon.thu} {dm(dangChon.ngay)}{dangChon.am ? <span className="ml-2 text-xs font-sans text-fg-faint">âm lịch {dangChon.am}</span> : null}</h3>
-                {dangChon.nhip && <span className={cn("text-sm font-medium", NHIP[dangChon.nhip].chu)} data-testid="tuan-nhip">{NHIP[dangChon.nhip].ten}</span>}
+                {dangChon.nhip && <span className={cn("text-sm font-medium", NHIP[dangChon.nhip].chu)} data-testid="tuan-nhip">{tenNhip(dangChon.nhip)}</span>}
               </div>
               {dangChon.tom && <p className="text-sm">{dangChon.tom}</p>}
               <ul className="divide-y divide-line/50" data-testid="tuan-lop">
@@ -141,7 +154,7 @@ export function TuanCuaToi({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
                     <span className="min-w-0">
                       <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
                         <b className="font-medium text-fg">{l.nhan}</b>
-                        {l.muc && <span className={cn("rounded-full border px-2 py-px text-[0.7rem]", MUC[l.muc].lop)}>{MUC[l.muc].ten}</span>}
+                        {l.muc && <span className={cn("rounded-full border px-2 py-px text-[0.7rem]", MUC[l.muc].lop)}>{tenMuc(l.muc)}</span>}
                       </span>
                       <span className="mt-0.5 block text-sm text-fg-muted">{l.cau}
                         {l.duong && l.mon === "kinh_dich" && <> <Link href={l.duong} className="whitespace-nowrap text-gold hover:underline">Đọc quẻ</Link></>}</span>
@@ -232,8 +245,8 @@ export function TuanCuaToi({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
           </ul>
         </div>
       )}
-      <p className="text-xs text-fg-faint">{t.luu_y} Tử vi và Bát tự theo giờ sinh đọc theo tháng, không theo từng ngày —{" "}
-        <Link href="/thoi-gian-toi" className="text-gold hover:underline">xem tháng này ở Thời gian tới</Link>.</p>
+      <p className="text-xs text-fg-faint">{t.luu_y}{t.nhan?.ghi_chu ? <> {t.nhan.ghi_chu}{" "}
+        <Link href="/thoi-gian-toi" className="text-gold hover:underline">Xem tháng này ở Thời gian tới</Link>.</> : null}</p>
     </section>
   );
 }

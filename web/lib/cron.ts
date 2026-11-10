@@ -111,7 +111,7 @@ async function ganTuanCuaToi(dv: SupabaseClient, hang: Hang[], ngay: string): Pr
   const sinh = new Map<string, string>();
   for (let i = 0; i < can.length; i += 200) {
     const { data, error } = await dv.from("ho_so").select("user_id,ngay_sinh").in("user_id", can.slice(i, i + 200).map((h) => h.user_id));
-    if (error) { if (i === 0) return 0; break; }
+    if (error) { baoLoi(new Error("cron_tuan_doc_ho_so"), { noi: "cron", duong: "/api/cron/hang-ngay" }); if (i === 0) return 0; break; }
     for (const r of (data ?? []) as { user_id: string; ngay_sinh: string | null }[]) {
       if (r.ngay_sinh && /^\d{4}-\d{2}-\d{2}$/.test(r.ngay_sinh)) sinh.set(r.user_id, r.ngay_sinh);
     }
@@ -121,6 +121,7 @@ async function ganTuanCuaToi(dv: SupabaseClient, hang: Hang[], ngay: string): Pr
   for (let i = 0; i < ds.length; i += 500) {
     const lo = ds.slice(i, i + 500);
     const r = await goiEngineDaKiem({ ngay_xem: ngay, nguoi: lo.map((h) => ({ ngay_sinh: sinh.get(h.user_id) })) }, "/v1/push/tuan");
+    if (!r.ok) baoLoi(new Error("cron_tuan_engine"), { noi: "cron", duong: "/v1/push/tuan", ma: r.res.status });
     const kq = r.ok ? (r.body as { ket_qua?: (TuanCuaToiPush | null)[] }).ket_qua ?? [] : [];
     lo.forEach((h, j) => { h.tuan_cua_toi = kq[j] ?? null; if (kq[j]) gan += 1; });
   }

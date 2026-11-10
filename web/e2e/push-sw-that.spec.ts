@@ -40,10 +40,13 @@ test("sw.js thật: thông báo sáng thứ Hai hiện đúng chữ, bấm vào 
   await page.goto("/hom-nay");
   await expect(page.getByTestId("the-hom-nay")).toBeVisible();
   const { day, thongBao, bam } = await moSw(page, context);
-  await day({ title: "Tuần này của bạn", body: "Từ nay tới Chủ Nhật có 1 ngày lịch ghi đẹp. Đáng để ý nhất: Thứ Ba 17/11 — ngày thuận nhất tuần.",
-    url: "/hom-nay#tuan-nay", tag: "nhac-2026-11-16" });
-  await expect.poll(thongBao).toEqual([expect.objectContaining({ title: "Tuần này của bạn", tag: "nhac-2026-11-16", url: "/hom-nay#tuan-nay",
-    body: expect.stringContaining("ngày thuận nhất tuần") })]);
+  // Đẩy lại nếu service worker vừa đăng ký chưa kịp nhận gói đầu (cùng tag nên vẫn chỉ MỘT thông báo).
+  await expect(async () => {
+    await day({ title: "Tuần này của bạn", body: "Từ nay tới Chủ Nhật có 1 ngày vừa đẹp theo lịch vừa không vướng tuổi bạn. Đáng để ý nhất: Thứ Ba 17/11 — ngày thuận nhất tuần.",
+      url: "/hom-nay#tuan-nay", tag: "nhac-2026-11-16" });
+    await expect.poll(thongBao, { timeout: 3000 }).toEqual([expect.objectContaining({ title: "Tuần này của bạn", tag: "nhac-2026-11-16", url: "/hom-nay#tuan-nay",
+      body: expect.stringContaining("ngày thuận nhất tuần") })]);
+  }).toPass({ timeout: 20_000 });
   await bam();
   await expect(page).toHaveURL(/\/hom-nay\?tu=push#tuan-nay$/);
   const muc = page.getByTestId("tuan-cua-toi");
@@ -56,8 +59,10 @@ test("sw.js thật: gói lạ (đường dẫn ngoài site, thiếu chữ) → v
   await napHoSo(page);
   await page.goto("/hom-nay");
   const { day, thongBao, bam } = await moSw(page, context);
-  await day({ title: "", url: "https://example.com/x", tag: "nhac-x" });
-  await expect.poll(thongBao).toEqual([expect.objectContaining({ title: "Hiểu Bản Thân", body: "Mốc bạn đã đánh dấu cho hôm nay." })]);
+  await expect(async () => {
+    await day({ title: "", url: "https://example.com/x", tag: "nhac-x" });
+    await expect.poll(thongBao, { timeout: 3000 }).toEqual([expect.objectContaining({ title: "Hiểu Bản Thân", body: "Mốc bạn đã đánh dấu cho hôm nay." })]);
+  }).toPass({ timeout: 20_000 });
   expect((await thongBao())[0]!.url).toMatch(/^\//);                       // không bao giờ giữ link ngoài site
   await day({ title: "Mốc thứ hai", body: "x", url: "/kinh-dich", tag: "nhac-x" });
   await expect.poll(async () => (await thongBao()).map((n) => n.title)).toEqual(["Mốc thứ hai"]);   // ≤ 1 thông báo / ngày trên máy

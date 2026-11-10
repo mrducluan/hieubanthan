@@ -73,9 +73,18 @@ test("Tuần này của bạn: khu riêng trước \"Đọc thêm\", bảy ngày
   await o.nth(6).click();
   await expect(o.nth(6)).toHaveAttribute("aria-selected", "true");
   await kiem(cuoi);
-  await o.nth(0).focus();
-  await page.keyboard.press("Enter");
+  // Bàn phím: chỉ ngày đang chọn nằm trong thứ tự Tab; → sang ngày kế (vòng về đầu), Home về thứ Hai.
+  await expect(o.nth(6)).toHaveAttribute("tabindex", "0");
+  await expect(o.nth(0)).toHaveAttribute("tabindex", "-1");
+  await o.nth(6).focus();
+  await page.keyboard.press("ArrowRight");
   await kiem(api.ngay[0]!);
+  await expect(o.nth(0)).toBeFocused();
+  await page.keyboard.press("ArrowRight");
+  await kiem(api.ngay[1]!);
+  await page.keyboard.press("Home");
+  await kiem(api.ngay[0]!);
+  await expect(bang).toHaveAttribute("aria-labelledby", "tuan-tab-0");
   // Tuần này hợp việc gì: đúng danh sách engine, bấm ngày → bảng nhảy tới ngày đó.
   if (api.viec_tuan.length) {
     const v = muc.getByTestId("tuan-viec");

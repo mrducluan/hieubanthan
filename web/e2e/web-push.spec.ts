@@ -178,7 +178,7 @@ test("GĐ2: một thông báo/ngày — mốc tự đánh dấu > mốc lịch �
   expect(ghepThongBao({ ...N, tuan_cua_toi: TUAN }, KHONG_MOC, "2026-11-16")).toBeNull();                 // chưa tích
   expect(ghepThongBao({ ...N, moc_lich: ["tuan_cua_toi"] }, KHONG_MOC, "2026-11-16")).toBeNull();          // chưa có hồ sơ / không phải thứ Hai
   expect(ghepThongBao({ ...N, moc_lich: ["tuan_cua_toi"], tuan_cua_toi: TUAN, sang_nay: true, ngay_sinh: "12-05" }, KHONG_MOC, "2026-11-16")?.body)
-    .toBe(`${TUAN.noi_dung} · Ngày cá nhân 6: Câu tự soi 6?`);
+    .toBe(TUAN.noi_dung);   // dòng tuần đã dài — không nối "Ngày cá nhân …" (tránh bị cắt giữa câu ở 200 ký tự)
   expect(ghepThongBao({ ...N, moc_lich: ["giao_tiet", "tuan_cua_toi"], tuan_cua_toi: TUAN }, SN, "2026-03-09")?.title)
     .toBe("Hôm nay giao tiết Kinh trập · +1 mốc");
   expect(ghepThongBao({ ...N, nhac: [{ nhan: "Ứng kỳ quẻ Càn", duong: "/kinh-dich" }], moc_lich: ["tuan_cua_toi"], tuan_cua_toi: TUAN }, KHONG_MOC, "2026-11-16")?.title)

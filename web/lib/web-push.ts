@@ -164,7 +164,9 @@ export function ghepThongBao(n: NguoiNhan, sn: GoiSangNay | null, ngay: string) 
     const nha = m.nhom?.includes("giao_tiet") && n.nha_tiet ? n.nha_tiet : null;
     const lapXuan = Boolean(m.nhom?.includes("lap_xuan_tet"));
     const than = nha ? (lapXuan ? `${m.noi_dung} ${nha.noi_dung}` : nha.noi_dung) : m.noi_dung;
-    return { title: moc.length > 1 ? `${m.tieu_de} · +${moc.length - 1} mốc` : m.tieu_de, body: kem(than),
+    // Dòng tuần đã dài (~150 ký tự) — không nối thêm "Ngày cá nhân …" (sw.js cắt thân 200 ký tự, sẽ đứt giữa câu).
+    const body = m.nhom?.includes("tuan_cua_toi") ? than : kem(than);
+    return { title: moc.length > 1 ? `${m.tieu_de} · +${moc.length - 1} mốc` : m.tieu_de, body,
       url: duongTrongSite(nha && !lapXuan ? nha.duong : m.duong) ?? NEO_THE, tag: `nhac-${ngay}`, ...hoi };
   }
   if (sang) return { title: sang.tieu_de, body: sang.noi_dung, url: NEO_THE, tag: `nhac-${ngay}`, ...hoi };

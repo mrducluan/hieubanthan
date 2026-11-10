@@ -207,5 +207,9 @@ trong tuần"** (giao tiết, Lập xuân, Tết, mùng 1, rằm, tháng cá nh�
   còn lại Bình thường. Trên 1.092 ngày mẫu: bình thường 56 %, khá thuận 29 %, nên đi chậm 10 %, thuận 4 %, hai chiều 2 %.
 - "Chậm" của lịch chỉ khi sách khuyên hoãn mọi việc; ngày kiêng dân gian là ngày bình thường có lời nhắc (gọi cả nhóm này
   là chậm thì 40 % số ngày mang nhãn chậm — nhãn mất nghĩa và thành doạ).
-- Ngày xung tuổi vẫn hiện việc sách lịch ghi hợp (khớp trang ngày) nhưng kèm lời nhắc, và không vào "Tuần này hợp việc gì".
+- Ngày xung tuổi và ngày dân gian thường kiêng vẫn hiện việc sách lịch ghi hợp (khớp trang ngày) nhưng kèm lời nhắc, và
+  không vào "Tuần này hợp việc gì".
+- Sau rà soát độc lập: MỘT định nghĩa "ngày thuận" cho nhịp, dòng "thuận nhất tuần" và câu tóm tắt tuần (lịch ghi đẹp + có
+  việc lớn trang ngày gọi là tốt + tuổi không xung, không hại, không trùng); ngày lục hại / trùng tuổi không mang chip mức và
+  không bao giờ là ngày thuận; thông báo sáng thứ Hai không mở đầu bằng "ngày nên đi chậm".
 
