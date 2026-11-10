@@ -325,7 +325,7 @@ function HinhLaBai(mh: { id: string; ten: string; en: string; so: number; bo: Bo
   return (
     <figure className="mx-auto w-[168px]">
       <MatTruoc la={{ id: mh.id, ten: mh.ten, en: mh.en, so: mh.so, bo: mh.bo, loai: mh.loai, nguyen_to: mh.nguyen_to }} w={168} />
-      <figcaption className="mt-2 text-center text-xs text-fg-faint">{mh.ten} ({mh.en}) — hình ký hiệu giản lược, không phải tranh của bộ bài nào</figcaption>
+      <figcaption className="mt-2 text-center text-xs text-fg-faint">{mh.ten} ({mh.en}) — tranh bộ Rider–Waite in năm 1909</figcaption>
     </figure>
   );
 }

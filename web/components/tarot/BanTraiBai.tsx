@@ -16,7 +16,7 @@ export function BanTraiBai({ tb, la, lat, onLat, boLa, pt, chon, onChon, classNa
   const c = chu ?? { nguoc: " (ngược)", up: "Lá bài úp", nhan_nguoc: "NGƯỢC", nguoc_nhan: " · ngược" };
   // Khung bàn theo số lá: chiều cao đủ cho lá ở hàng trên / dưới cùng (toạ độ KB 0,12–0,88) + nhãn dưới lá, không cắt mép.
   const n = tb.vi_tri.length;
-  const { W, H, wLa } = n === 10 ? { W: 1100, H: 840, wLa: 100 } : n === 5 ? { W: 760, H: 720, wLa: 110 } : n === 1 ? { W: 760, H: 300, wLa: 150 } : { W: 760, H: 300, wLa: 130 };
+  const { W, H, wLa } = n === 10 ? { W: 1100, H: 880, wLa: 100 } : n === 5 ? { W: 760, H: 760, wLa: 110 } : n === 1 ? { W: 760, H: 330, wLa: 150 } : { W: 760, H: 320, wLa: 130 };
   const toa = useMemo(() => tb.vi_tri.map((v) => ({ x: v.x * W, y: v.y * H, xoay: v.xoay ?? 0 })), [tb, W, H]);
   const duong = pt ? pt.ke_can.filter((k) => k.quan_he !== "trung") : [];
   const nhin = pt ? pt.huong_nhin.filter((h) => h.huong !== 0 && h.toi !== null && h.tren_truc) : [];
@@ -60,8 +60,10 @@ export function BanTraiBai({ tb, la, lat, onLat, boLa, pt, chon, onChon, classNa
               )}
             </div>
             {!gon && (
-              <p className="relative mt-1 w-[170%] -translate-x-[20.6%] truncate text-center text-fg-muted" style={{ fontSize: `clamp(9px, ${(12 / W) * 100}cqw, 12px)`, transform: t.xoay ? `translateX(-20.6%) rotate(${-t.xoay}deg)` : undefined }}>
-                <span className="font-medium text-fg">{i + 1}.</span> {v.ten}{lr?.nguoc && lat[i] ? <span className="text-[#f0b35c]">{c.nguoc_nhan}</span> : null}
+              <p className="relative mt-1 w-[190%] -translate-x-[23.7%] text-center leading-tight text-fg-muted" style={{ fontSize: `clamp(9px, ${(12 / W) * 100}cqw, 12px)`, transform: t.xoay ? `translateX(-23.7%) rotate(${-t.xoay}deg)` : undefined }}>
+                <span className="block truncate"><span className="font-medium text-fg">{i + 1}.</span> {v.ten}</span>
+                {/* TR-5: tranh không in tên Việt → tên lá nằm ngay dưới vị trí khi đã lật */}
+                {lr && lb && lat[i] && !t.xoay && <span className="block truncate text-fg" data-testid="ten-la-tren-ban">{lb.ten}{lr.nguoc ? <span className="text-[#f0b35c]">{c.nguoc_nhan}</span> : null}</span>}
               </p>
             )}
           </div>

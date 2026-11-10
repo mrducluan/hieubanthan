@@ -13780,5 +13780,115 @@
     "Làm một bước nhỏ trong 72 giờ."
    ]
   }
- }
+ },
+ "goi_y_hoi": [
+  {
+   "ma": "crush",
+   "ten": "Crush",
+   "chu_de": "tinh_cam",
+   "cau": [
+    "Tôi có nên chủ động bày tỏ với người tôi đang thích không?",
+    "Tôi cần hiểu điều gì ở chính mình trước khi tiến tới với người ấy?"
+   ]
+  },
+  {
+   "ma": "dang_yeu",
+   "ten": "Đang yêu",
+   "chu_de": "tinh_cam",
+   "cau": [
+    "Mối quan hệ hiện tại của tôi đang cần điều gì nhất?",
+    "Tôi có nên tính chuyện lâu dài với người yêu hiện tại không?"
+   ]
+  },
+  {
+   "ma": "nguoi_cu",
+   "ten": "Người cũ",
+   "chu_de": "tinh_cam",
+   "cau": [
+    "Tôi nên quay lại với người cũ hay khép lại để đi tiếp?",
+    "Tôi cần làm gì để thật sự buông được chuyện cũ?"
+   ]
+  },
+  {
+   "ma": "doc_than",
+   "ten": "Đang độc thân",
+   "chu_de": "tinh_cam",
+   "cau": [
+    "Khi nào tôi sẵn sàng cho một mối quan hệ mới?",
+    "Tôi nên thay đổi điều gì để mở lòng với tình yêu?"
+   ]
+  },
+  {
+   "ma": "cong_viec",
+   "ten": "Công việc",
+   "chu_de": "cong_viec",
+   "cau": [
+    "Công việc hiện tại của tôi có đang đi đúng hướng không?",
+    "Tôi nên tập trung vào điều gì để tiến lên trong công việc?"
+   ]
+  },
+  {
+   "ma": "nhay_viec",
+   "ten": "Nhảy việc",
+   "chu_de": "cong_viec",
+   "cau": [
+    "Tôi nên ở lại công ty hiện tại hay chuyển sang chỗ mới?",
+    "Tôi có nên nộp đơn nghỉ việc trong ba tháng tới không?"
+   ]
+  },
+  {
+   "ma": "kinh_doanh",
+   "ten": "Kinh doanh",
+   "chu_de": "cong_viec",
+   "cau": [
+    "Tôi có nên bắt đầu kế hoạch kinh doanh đang ấp ủ không?",
+    "Tôi cần chuẩn bị điều gì trước khi mở cửa hàng?"
+   ]
+  },
+  {
+   "ma": "thi_cu",
+   "ten": "Học và thi",
+   "chu_de": "cong_viec",
+   "cau": [
+    "Tôi cần chú ý điều gì để làm tốt kỳ thi sắp tới?",
+    "Tôi nên chọn ngành mình thích hay ngành gia đình muốn?"
+   ]
+  },
+  {
+   "ma": "tien_bac",
+   "ten": "Tiền bạc",
+   "chu_de": "tien_bac",
+   "cau": [
+    "Tôi nên làm gì để tiền bạc ổn định hơn trong ba tháng tới?",
+    "Tôi có nên chi khoản tiền lớn này lúc này không?"
+   ]
+  },
+  {
+   "ma": "gia_dinh",
+   "ten": "Gia đình",
+   "chu_de": "gia_dinh",
+   "cau": [
+    "Tôi nên làm gì để không khí trong nhà dịu lại?",
+    "Tôi có nên nói thẳng chuyện này với bố mẹ không?"
+   ]
+  },
+  {
+   "ma": "quyet_dinh",
+   "ten": "Quyết định lớn",
+   "chu_de": null,
+   "cau": [
+    "Tôi nên tiếp tục hay dừng việc đang làm tôi phân vân?",
+    "Bây giờ đã đúng lúc để tôi bắt đầu việc này chưa?"
+   ]
+  },
+  {
+   "ma": "ban_than",
+   "ten": "Bản thân",
+   "chu_de": "ban_than",
+   "cau": [
+    "Điều gì đang cản tôi tiến lên lúc này?",
+    "Tôi cần buông điều gì để nhẹ lòng hơn?"
+   ]
+  }
+ ]
 }
