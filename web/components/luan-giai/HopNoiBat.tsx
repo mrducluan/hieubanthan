@@ -104,7 +104,7 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
         <ul className="mt-2 space-y-1 text-sm" data-testid="hop-viec">
           {hop.viec.map((v) => (
             <li key={v.lam} className="flex gap-2">
-              <span className="chip-chi-phi shrink-0 rounded-full border border-line px-2 text-[0.7rem] font-semibold uppercase tracking-wide text-fg-faint" data-chi-phi={v.chi_phi}>{TEN_CHI_PHI[v.chi_phi]}</span>
+              <span className="chip-chi-phi shrink-0 rounded-full border border-line px-2 text-[0.7rem] font-semibold uppercase tracking-wide text-fg-faint" data-chi-phi={v.chi_phi}>{chu(`chi_phi.${v.chi_phi}`) || TEN_CHI_PHI[v.chi_phi]}</span>
               <span className="text-fg-muted">{v.lam}</span>
             </li>
           ))}

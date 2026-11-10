@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { useNgonNgu } from "@/components/khung/NgonNgu";
 import { taoChu } from "@/lib/chu-trang";
 import { CHU_BAO_CAO } from "@/lib/chu/bao-cao";
+import { CHU_HOI_DAP } from "@/lib/chu/hoi-dap";
 import { dinhNgay } from "@/lib/dinh-dang";
 import type { Muc } from "./kieu";
 
@@ -20,4 +21,10 @@ export function useChuBaoCao() {
     };
     return { c, nhanMuc, ngay, en: ngonNgu === "en" };
   }, [ngonNgu, ma]);
+}
+
+/** Chữ khung hỏi đáp (lib/chu/hoi-dap.ts) theo ngôn ngữ trang. */
+export function useChuHoiDap() {
+  const { ngonNgu } = useNgonNgu();
+  return useMemo(() => ({ c: taoChu(CHU_HOI_DAP, null, ngonNgu), en: ngonNgu === "en" }), [ngonNgu]);
 }

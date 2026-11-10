@@ -40,14 +40,18 @@ test("numerology: form → bài đọc tiếng Anh → tích thẻ → hỏi đ�
   for (let i = 0; i < 4; i++) await o.nth(i).check();
   await expect(page.getByTestId("so-en-duong_doi").getByTestId("ket-qua-tick")).toContainText("fits you");
   // hỏi đáp
-  await page.getByTestId("goi-y-en").first().click();
-  const luot = page.getByTestId("luot-hoi-en").first();
+  // EN-ALL GĐ 1: khung hỏi đáp CHUNG (KhungChat) với chữ khung tiếng Anh — không còn HoiEn riêng.
+  await page.getByLabel("Suggested questions").getByRole("button").first().click();
+  const luot = page.getByTestId("cau-tra-loi").first();
   await expect(luot).toBeVisible({ timeout: 15_000 });
   expect(await luot.innerText()).not.toMatch(VI);
-  await page.getByTestId("o-hoi-en").fill("What is my personal year about this year?");
-  await page.getByTestId("nut-hoi-en").click();
-  await expect(page.getByTestId("luot-hoi-en").nth(1)).toContainText(/personal year/i, { timeout: 15_000 });
+  await expect(page.getByTestId("cau-hoi-ban").first()).toContainText("You asked");
+  await page.getByRole("textbox", { name: "Your question", exact: true }).fill("What is my personal year about this year?");
+  await page.getByRole("button", { name: "Send question" }).click();
+  await expect(page.getByTestId("cau-tra-loi").nth(1)).toContainText(/personal year/i, { timeout: 15_000 });
+  await expect(page.getByTestId("hanh-dong-tra-loi")).toHaveCount(0);   // Lưu / thẻ chia sẻ chưa có ở bản Anh
   // xoá hồ sơ trên máy → về form
+  page.once("dialog", (d) => { expect(d.message()).toContain("Vietnamese site"); void d.accept(); });   // hồ sơ dùng chung → hỏi lại
   await page.getByTestId("nut-xoa-en").click();
   await expect(page.getByTestId("form-en")).toBeVisible();
 });
@@ -76,9 +80,9 @@ test("tarot: câu hỏi tiếng Anh được hiểu → xáo máy → rút 3 lá
   expect(text).not.toMatch(VI);
   expect(text).toMatch(/Leans|condition|Not yet|Stuck/);
   // hỏi về lá vừa rút
-  await page.getByTestId("o-hoi-en").fill("What does the advice card mean?");
-  await page.getByTestId("nut-hoi-en").click();
-  const luot = page.getByTestId("luot-hoi-en").first();
+  await page.getByRole("textbox", { name: "Your question", exact: true }).fill("What does the advice card mean?");
+  await page.getByRole("button", { name: "Send question" }).click();
+  const luot = page.getByTestId("cau-tra-loi").first();
   await expect(luot).toBeVisible({ timeout: 15_000 });
   expect(await luot.innerText()).not.toMatch(VI);
 });

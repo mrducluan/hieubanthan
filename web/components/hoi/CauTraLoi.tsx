@@ -22,6 +22,7 @@ import { KIEU_BIET, TrucQuan, type CoCauChuan, type KhoiTrucQuan } from "@/compo
 import { banDoKhop, useChieuSang, VungChieuSang } from "@/components/hoi/ChieuSang";
 import type { KetQuaHoi } from "@/components/hoi/KhungChat";
 import { useXemNguoiThan } from "@/components/huyen-hoc/XemNguoiThan";
+import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 
 interface Props {
   t: KetQuaHoi;
@@ -42,6 +43,7 @@ export function CauTraLoi(p: Props) {
 
 function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
   const { chieu } = useChieuSang();
+  const hd = useChuHoiDap();
   const theo = banDoKhop(t.trucQuan);
   const coHinh = !!t.trucQuan?.some((k) => KIEU_BIET.has(k.kieu));
   const tiep = (t.hoiTiep ?? []).filter((c) => !daHoi.includes(c));
@@ -67,7 +69,7 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
           } : undefined)}
         </div>
       )}
-      {t.van && theo.size > 0 && <p className="text-xs text-fg-faint">Chữ gạch xanh: bấm để xem trên hình.</p>}
+      {t.van && theo.size > 0 && <p className="text-xs text-fg-faint">{hd.c("chu_xanh")}</p>}
       {t.van && <ViSao canCu={t.canCu} thuatNgu={t.thuatNgu} />}
       <KhungGiaiNghia ds={t.thuatNgu} />
       {t.canhBao?.map((c) => (
@@ -75,7 +77,8 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
       ))}
       {t.ghiChu && <p className="text-xs text-fg-faint">{t.ghiChu}</p>}
       {t.ghiLuot && <p className="text-xs text-gold" data-testid="ghi-luot">{t.ghiLuot}</p>}
-      {t.van && !t.loi && (
+      {/* EN-ALL: Lưu (tài khoản) và thẻ chia sẻ câu trả lời chưa có bản Anh (GĐ 9) → ẩn ở bản Anh. */}
+      {t.van && !t.loi && !hd.en && (
         <div className="flex flex-wrap items-start gap-2" data-testid="hanh-dong-tra-loi">
           <NutLuu t={t} cauHoi={cauHoi} moDun={moDun} />
           <NutChiaSe ds={t.trucQuan} moDun={moDun} maMoi={maMoi ?? null} />
@@ -83,7 +86,7 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
       )}
       {tiep.length > 0 && (
         <div data-testid="hoi-tiep-chung">
-          <p className="text-xs text-fg-muted">Hỏi tiếp</p>
+          <p className="text-xs text-fg-muted">{hd.c("hoi_tiep")}</p>
           <div className="mt-1.5 flex flex-wrap gap-2">
             {tiep.map((c) => (
               <button key={c} type="button" disabled={dang} onClick={() => { ghi("chart_interacted", { mo_dun: moDun, kind: "hoi_tiep" }); hoi(c); }}

@@ -12,8 +12,9 @@ export async function postEn<T>(url: string, body: unknown): Promise<T> {
   if (!r.ok) throw new Error(loiEn(r.status, d.error));
   return d;
 }
+/** GET có thể bị CDN đệm (`cache-control: public`) → ngôn ngữ đi trong URL (`?ngon_ngu=`), không chỉ trong header. */
 export async function getEn<T>(url: string): Promise<T> {
-  const r = await fetch(url, { headers: { "x-ngon-ngu": nn() } });
+  const r = await fetch(`${url}${url.includes("?") ? "&" : "?"}ngon_ngu=${nn()}`, { headers: { "x-ngon-ngu": nn() } });
   const d = (await r.json().catch(() => ({}))) as T & { error?: string };
   if (!r.ok) throw new Error(loiEn(r.status, d.error));
   return d;
@@ -25,3 +26,6 @@ export function loiEn(status: number, _vi?: string): string {
   if (status === 503) return "The calculation service is being updated. Please try again in a few minutes.";
   return "We could not reach the calculation service. Please try again shortly.";
 }
+
+/** Lời đáp hỏi đáp của engine (bản Anh): Numerology `/api/thanso/hoi`, Tarot `/api/tarot/hoi`. */
+export interface TraLoiEn { cau_tra_loi: string; can_cu?: string[]; hoi_tiep?: string[]; xu_ly?: string; phan_loai?: { xu_ly?: string } }

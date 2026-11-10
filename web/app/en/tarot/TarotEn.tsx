@@ -11,13 +11,17 @@ import { QuatBai } from "@/components/tarot/QuatBai";
 import { XaoBai } from "@/components/tarot/XaoBai";
 import { LaBai } from "@/components/tarot/LaBai";
 import { BaoCaoDoiSongView } from "@/components/luan-giai/BaoCaoDoiSong";
-import { HoiEn, type TraLoiEn } from "@/components/en/HoiEn";
+import { KhungChat, type KetQuaHoi } from "@/components/hoi/KhungChat";
+import type { TraLoiEn } from "@/lib/en/api";
 import { getEn, postEn } from "@/lib/en/api";
 import { useProfileEn } from "@/lib/en/hoso";
 import { ghi } from "@/lib/do-luong";
 import { SO_LA, laMaTraiBai, type BaoCaoTarot as Bc, type BoBai, type HieuCau, type LaNgay, type LaRut, type MaTraiBai } from "@/lib/tarot-chung";
 import { cn } from "@/lib/utils";
 
+/** EN-ALL: lời đáp engine (bản Anh) → dạng khung hỏi đáp chung. */
+const sangKetQua = (d: TraLoiEn): KetQuaHoi => ({ van: d.cau_tra_loi, canCu: d.can_cu, hoiTiep: d.hoi_tiep });
+const CHU_THICH_HOI = "Answers are assembled from a sourced knowledge base, not written by an AI, and are not predictions. Your question is sent only to compute the answer and is not stored with your name.";
 type Buoc = "hoi" | "xao" | "rut" | "lat" | "doc";
 const THU_TU_TB: MaTraiBai[] = ["mot_la", "ba_la_loi_khuyen", "ba_la_thoi_gian", "hai_lua_chon", "khi_nao", "nam_la", "celtic"];
 export const CHU_LA_EN = { nguoc: " (reversed)", up: "Face-down card", nhan_nguoc: "REVERSED", nguoc_nhan: " · reversed" };
@@ -192,8 +196,9 @@ export function TarotEn() {
 
       <section aria-labelledby="hoi-dap" className="scroll-mt-24">
         <header className="mb-4"><p className="eyebrow">Ask</p><h2 id="hoi-dap" className="mt-1 text-2xl sm:text-3xl">About a card, a spread or a concept</h2></header>
-        <HoiEn moDun="tarot" goiY={GOI_Y_HOI} loiChao={bc ? "Ask about a card in the spread you just drew (“what does the outcome card mean”) or about any card — upright, reversed, in love, work or money." : "Ask what a card means (upright, reversed, in love, work or money), what a spread is, or a concept. I do not read other people and do not predict events."}
-          gui={(q) => postEn<TraLoiEn>("/api/tarot/hoi", { cau_hoi: q, ...(bc ? { trai_bai: bc.da_tinh.trai_bai, la: bc.da_tinh.vi_tri.map((v) => ({ id: v.id, nguoc: v.nguoc })) } : {}) })} />
+        <KhungChat moDun="tarot" goiY={[{ nhom: "Suggestions", cau: GOI_Y_HOI }]} loiChao={bc ? "Ask about a card in the spread you just drew (“what does the outcome card mean”) or about any card — upright, reversed, in love, work or money." : "Ask what a card means (upright, reversed, in love, work or money), what a spread is, or a concept. I do not read other people and do not predict events."}
+          gui={(q) => postEn<TraLoiEn>("/api/tarot/hoi", { cau_hoi: q, ...(bc ? { trai_bai: bc.da_tinh.trai_bai, la: bc.da_tinh.vi_tri.map((v) => ({ id: v.id, nguoc: v.nguoc })) } : {}) }).then(sangKetQua)} />
+        <p className="mt-3 text-xs text-fg-faint">{CHU_THICH_HOI}</p>
       </section>
     </div>
   );

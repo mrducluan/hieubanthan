@@ -6,38 +6,49 @@
 // Hồ sơ cũ của bản Anh (`hbt.en.profile.v1`, QTE-3): đọc MỘT lần rồi chuyển sang hồ sơ chung — chỉ xoá khoá cũ sau khi đã
 // ghi xong hồ sơ chung; máy đã có hồ sơ chung thì hồ sơ chung thắng (khoá cũ bỏ đi, không ghi đè người dùng bản Việt).
 // Vẫn chỉ trên máy; "Clear" ở bản Anh = xoá hồ sơ trên máy như nút xoá của bản Việt.
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { HoSo, KHOA_HO_SO, luuHoSo, useHoSo, xoaHoSo, capNhatHoSo, hoTenList } from "@/lib/hoso";
 import { docQuyUocDD, ghiQuyUocDD, useQuyUocDD, type QuyUocDD } from "@/lib/quy-uoc-dd";
+
+const KHOA_QUY_UOC = "hbt.thanso_dd";   // cùng khoá với lib/quy-uoc-dd.ts
 
 /** Khoá hồ sơ cũ của bản Anh (QTE-3) — chỉ còn để chuyển một lần. */
 export const KHOA_CU = "hbt.en.profile.v1";
 export interface ProfileEn { name: string; nickname?: string; day: number; month: number; year: number; method: QuyUocDD }
 
-/** Chuyển hồ sơ cũ `hbt.en.profile.v1` → hồ sơ chung. Gọi được nhiều lần (chạy thật một lần). Trả true khi vừa chuyển. */
+/** Chuyển hồ sơ cũ `hbt.en.profile.v1` → hồ sơ chung. Gọi được nhiều lần (chạy thật một lần). Trả true khi vừa chuyển.
+ *  Chỉ xoá khoá cũ khi hồ sơ chung ĐÃ nằm trong localStorage (luuHoSo nuốt lỗi ghi — bộ nhớ đầy / chế độ riêng tư — nên
+ *  đọc lại để chắc), hoặc khi hồ sơ cũ hỏng không chuyển được. */
 export function chuyenHoSoCu(): boolean {
   try {
     const raw = localStorage.getItem(KHOA_CU);
     if (!raw) return false;
     const x = JSON.parse(raw) as Partial<ProfileEn> | null;
-    const daCo = HoSo.safeParse(JSON.parse(localStorage.getItem(KHOA_HO_SO) ?? "null")).success;
+    const daCo = () => HoSo.safeParse(JSON.parse(localStorage.getItem(KHOA_HO_SO) ?? "null")).success;
+    const hopLe = x && typeof x.name === "string" && x.name.trim() && Number.isInteger(x.day) && Number.isInteger(x.month) && Number.isInteger(x.year);
+    // Cách tính Đường đời: máy chưa chọn bao giờ → lấy lựa chọn của bản Anh (kể cả khi hồ sơ chung đã có).
+    let coQuyUoc = true;
+    try { coQuyUoc = localStorage.getItem(KHOA_QUY_UOC) !== null; } catch { /* bỏ qua */ }
+    if (hopLe && !coQuyUoc && (x.method === "tong_het" || x.method === "tung_phan")) ghiQuyUocDD(x.method);
     let chuyen = false;
-    if (!daCo && x && typeof x.name === "string" && x.name.trim() && Number.isInteger(x.day) && Number.isInteger(x.month) && Number.isInteger(x.year)) {
-      luuHoSo({ ho_ten: x.name.trim().slice(0, 80), ...(x.nickname?.trim() ? { ten_khac: x.nickname.trim().slice(0, 80) } : {}),
+    if (!daCo() && hopLe) {
+      luuHoSo({ ho_ten: x.name!.trim().slice(0, 80), ...(x.nickname?.trim() ? { ten_khac: x.nickname.trim().slice(0, 80) } : {}),
         ngay: x.day!, thang: x.month!, nam: x.year! });
-      if (x.method === "tong_het" || x.method === "tung_phan") ghiQuyUocDD(x.method);
+      if (!daCo()) return false;   // ghi không xuống được → giữ khoá cũ, lần sau thử lại
       chuyen = true;
     }
-    localStorage.removeItem(KHOA_CU);   // đã chuyển xong (hoặc hồ sơ chung đã có / hồ sơ cũ hỏng) → bỏ khoá cũ
+    localStorage.removeItem(KHOA_CU);
     return chuyen;
   } catch {
-    return false;   // luuHoSo ném (dữ liệu cũ không hợp lệ) hoặc storage bị chặn → giữ nguyên khoá cũ, không mất dữ liệu
+    return false;   // dữ liệu cũ không hợp lệ cho hồ sơ chung (luuHoSo ném) / storage bị chặn → giữ nguyên khoá cũ
   }
 }
 
+// Chuyển ngay khi module nạp ở trình duyệt (trước lần render đầu) → trang không lóe form "chưa có hồ sơ" rồi mới hiện hồ sơ.
+if (typeof window !== "undefined") chuyenHoSoCu();
+
 /** Hồ sơ chung đọc theo tên trường bản Anh. `undefined` lúc chưa đọc (SSR), `null` khi chưa có. */
 export function useProfileEn(): [ProfileEn | null | undefined, (p: ProfileEn | null) => void] {
-  useEffect(() => { chuyenHoSoCu(); }, []);
   const h = useHoSo();
   const method = useQuyUocDD();
   // Một đối tượng ổn định mỗi lần hồ sơ / cách tính đổi (trang dùng làm phụ thuộc của lời gọi engine).

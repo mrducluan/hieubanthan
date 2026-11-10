@@ -66,5 +66,8 @@ export const CHU_BAO_CAO = {
   "ds_chuong": { nhom: K, nhan: "Nhãn danh sách chương", mac_dinh: "Danh sách chương", en: "Chapter list" },
   "cac_chuong": { nhom: K, nhan: "Nhãn cột chương (máy tính)", mac_dinh: "Các chương", en: "Chapters" },
   "mo_het": { nhom: K, nhan: "Nút mở hết (cột chương)", mac_dinh: "Mở hết", en: "Open all" },
+  "chi_phi.khong_ton": { nhom: K, nhan: "Chip chi phí: 0 đồng", mac_dinh: "0 đồng", en: "No cost" },
+  "chi_phi.it_tien": { nhom: K, nhan: "Chip chi phí: ít tiền", mac_dinh: "Ít tiền", en: "Low cost" },
+  "chi_phi.sua_chua": { nhom: K, nhan: "Chip chi phí: sửa chữa", mac_dinh: "Sửa chữa", en: "Repair work" },
   "cau_tu_soi_dau": { nhom: K, nhan: "Đầu đoạn câu tự soi do engine viết (để tô màu)", mac_dinh: "Câu hỏi để tự soi", en: "A question to reflect on" },
 } as const satisfies BangChu;

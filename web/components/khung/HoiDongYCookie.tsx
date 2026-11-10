@@ -10,7 +10,9 @@ import { coGoogle, docLuaChon, ghiLuaChon, hoiLai, HOI_DONG_Y, SU_KIEN, type Lua
 
 export function HoiDongYCookie() {
   const [hien, setHien] = useState(false);
-  const k = CHU_KHUNG[useNgonNgu().ngonNgu];
+  const { ngonNgu } = useNgonNgu();
+  const en = ngonNgu === "en";
+  const k = CHU_KHUNG[ngonNgu];
   const d = useDuong();
   useEffect(() => {
     if (!coGoogle()) return;
@@ -27,7 +29,7 @@ export function HoiDongYCookie() {
         <Cookie className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
         <p className="text-sm leading-relaxed text-fg-muted">
           {k.cookie_loi}{" "}
-          <Link href={d("/chinh-sach-rieng-tu#trinh-duyet")} className="text-gold underline">{k.cookie_chi_tiet}</Link>
+          <Link href={en ? d("/chinh-sach-rieng-tu") : "/chinh-sach-rieng-tu#trinh-duyet"} className="text-gold underline">{k.cookie_chi_tiet}</Link>
         </p>
       </div>
       <div className="mt-3 flex justify-end gap-2">

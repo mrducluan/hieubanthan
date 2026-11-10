@@ -6,6 +6,8 @@ import Link from "@/components/khung/Lien";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useDuong } from "@/components/khung/NgonNgu";
+import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 
 export interface ThuatNgu {
   ma: string;
@@ -19,6 +21,8 @@ export interface ThuatNgu {
 
 function The({ t, children }: { t: ThuatNgu; children: ReactNode }) {
   const [mo, setMo] = useState(false);
+  const hd = useChuHoiDap();
+  const d = useDuong();
   const goc = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     if (!mo) return;
@@ -39,8 +43,8 @@ function The({ t, children }: { t: ThuatNgu; children: ReactNode }) {
         <span role="tooltip" className="absolute left-0 top-full z-30 mt-1.5 block w-72 max-w-[80vw] rounded-xl border border-line bg-surface p-3 text-left text-sm font-normal not-italic text-fg shadow-card">
           <span className="block font-semibold text-gold">{t.ten}{t.han && <span className="ml-1.5 font-normal text-fg-faint" style={{ fontFamily: "var(--font-han), serif" }}>{t.han}</span>}</span>
           <span className="mt-1 block leading-relaxed">{t.de_hieu}</span>
-          {t.vi_du && <span className="mt-1 block text-fg-muted">Ví dụ: {t.vi_du}</span>}
-          <Link href={`/tu-dien#${t.ma}`} className="mt-1.5 block text-xs text-gold underline">Xem trong Từ điển</Link>
+          {t.vi_du && <span className="mt-1 block text-fg-muted">{`${hd.c("vi_du")} `}{t.vi_du}</span>}
+          <Link href={d(`/tu-dien#${t.ma}`)} className="mt-1.5 block text-xs text-gold underline">{hd.c("xem_tu_dien")}</Link>
         </span>
       )}
     </span>
@@ -86,12 +90,15 @@ export function doanCoThuatNgu(van: string, ds: ThuatNgu[] | undefined, lopDoan?
 
 /** Khung "Giải nghĩa thuật ngữ" cuối câu trả lời / chương. */
 export function KhungGiaiNghia({ ds, moSan = false }: { ds: ThuatNgu[] | undefined; moSan?: boolean }) {
+  const hd = useChuHoiDap();
+  const d = useDuong();
   if (!ds?.length) return null;
   return (
     <details open={moSan} className="group rounded-xl border border-line/70 bg-bg/30 px-4 py-2.5 text-sm" data-testid="giai-nghia">
       <summary className="flex cursor-pointer list-none items-center gap-2 text-fg-muted marker:hidden hover:text-fg">
         <BookOpen className="size-4 text-gold" aria-hidden />
-        Giải nghĩa thuật ngữ ({ds.length}) <span className="text-xs text-fg-faint group-open:hidden">· bấm để mở</span>
+        {hd.en ? <>{hd.c("giai_nghia", { so: String(ds.length) })} <span className="text-xs text-fg-faint group-open:hidden">{hd.c("bam_mo")}</span></>
+          : <>Giải nghĩa thuật ngữ ({ds.length}) <span className="text-xs text-fg-faint group-open:hidden">· bấm để mở</span></>}
       </summary>
       <dl className="mt-2.5 space-y-2.5">
         {ds.map((t) => (
@@ -100,8 +107,8 @@ export function KhungGiaiNghia({ ds, moSan = false }: { ds: ThuatNgu[] | undefin
               {t.ten}{t.han && <span className="ml-1.5 font-normal text-fg-faint" style={{ fontFamily: "var(--font-han), serif" }}>{t.han}</span>}
             </dt>
             <dd className="leading-relaxed text-fg-muted">
-              {t.de_hieu}{t.vi_du && <> <span className="text-fg-faint">Ví dụ: {t.vi_du}</span></>}
-              {" "}<Link href={`/tu-dien#${t.ma}`} className="text-xs text-gold underline">Từ điển</Link>
+              {t.de_hieu}{t.vi_du && <> <span className="text-fg-faint">{`${hd.c("vi_du")} `}{t.vi_du}</span></>}
+              {" "}<Link href={d(`/tu-dien#${t.ma}`)} className="text-xs text-gold underline">{hd.c("tu_dien")}</Link>
             </dd>
           </div>
         ))}
