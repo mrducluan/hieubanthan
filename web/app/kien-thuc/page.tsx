@@ -22,7 +22,7 @@ export const revalidate = 21600;
 
 const MO_TA = "Ý nghĩa 12 con số thần số học, 64 quẻ Kinh Dịch, 14 chính tinh và 12 cung Tử vi, 10 thập thần, 10 nhật chủ Bát tự — có nguồn, có mặt tối, có câu tự soi.";
 const META: Metadata = {
-  title: { absolute: "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi, Bát tự" },
+  title: "Thư viện kiến thức huyền học và thần số học",
   description: MO_TA,
   alternates: { canonical: "/kien-thuc", types: { "text/markdown": "/kien-thuc.md" } },
   openGraph: { title: "Thư viện kiến thức", description: MO_TA, url: "/kien-thuc", images: ["/og?tieu_de=Th%C6%B0%20vi%E1%BB%87n%20ki%E1%BA%BFn%20th%E1%BB%A9c"] },

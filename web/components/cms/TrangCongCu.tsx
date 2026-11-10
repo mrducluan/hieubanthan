@@ -18,6 +18,7 @@ import { goiLd, ldDuongDan } from "@/lib/seo";
 import { duongDanCongCu } from "@/lib/duong-dan";
 import { thanhCua } from "@/lib/thanh-mang";
 import { boLap } from "@/lib/the-lap-cms";
+import { namTuoiSeo } from "@/lib/nam";
 
 export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
   /** Mảng cho "Bài viết liên quan" (không có → không hiện khối này). */ duong: string; mang?: string; truoc?: ReactNode; sau?: ReactNode; children: ReactNode;
@@ -31,6 +32,10 @@ export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
   const bang = mucSoTrang(duong)?.mac_dinh.chu ?? {}, c = taoChu(bang, nd.chu);
   // TM-1: trang thuộc 6 mảng có breadcrumb thật (Trang chủ › Huyền học › {mảng}); thanh mảng nằm ở layout.
   const ten = nd.ten ?? mucSoTrang(duong)?.ten ?? "";
+  // SEO-N: "Trả lời nhanh" dưới H1; `{nam}` trong link = năm trang theo tuổi đang index (chỉ gọi khi cần).
+  const tl = mucSoTrang(duong)?.mac_dinh.tra_loi_nhanh ?? null;
+  const namTl = tl?.lien_ket?.some((l) => l.href.includes("{nam}") || l.ten.includes("{nam}")) ? String(await namTuoiSeo()) : "";
+  const traLoi = tl ? { ...tl, lien_ket: tl.lien_ket?.map((l) => ({ href: l.href.replaceAll("{nam}", namTl), ten: l.ten.replaceAll("{nam}", namTl) })) } : null;
   return (
     <>
       {/* Một nguồn: dải hiển thị và BreadcrumbList JSON-LD cùng mảng (GioiThieuCongCu bỏ breadcrumb cho 6 trụ). */}
@@ -39,7 +44,7 @@ export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
         <DuongDan ds={duongDanCongCu(duong, ten)} className="-mt-2 mb-5 md:-mt-4" />
       </>}
       {truoc}
-      <DauCms h1={nd.dau.h1} loiDan={nd.dau.loiDan} kieuChu={nd.dau.kieuChu} bang={bang} chu={locChu(bang, nd.chu)}
+      <DauCms h1={nd.dau.h1} loiDan={nd.dau.loiDan} kieuChu={nd.dau.kieuChu} bang={bang} chu={locChu(bang, nd.chu)} traLoi={traLoi}
         khoiTren={nd.khoi.tren.length ? <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" /> : null}>
         {children}
       </DauCms>

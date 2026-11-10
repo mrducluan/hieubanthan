@@ -23,7 +23,7 @@ const MENH_TOI = 2027;   // cụm "Sinh năm X mệnh gì" có tới năm này (
 async function metaGoc(p: P): Promise<Metadata> {
   const n = docNamBang((await p.params).nam);
   if (!n) return {};
-  const m = metaTrang({ tieuDe: `Năm ${n} là năm con gì, mệnh gì? Tết, Tam tai, tuổi xung`,
+  const m = metaTrang({ tieuDe: `Năm ${n} là năm con gì, mệnh gì? Tết, Tam tai`,
     moTa: `Năm ${n} theo âm lịch Việt Nam: can chi, mệnh nạp âm, ngày Tết, tháng nhuận, tuổi Tam tai, năm tuổi, tuổi xung, mốc lễ trong năm và lối tra sao hạn, tuổi làm nhà, xông đất, cưới hỏi.`,
     duong: duongNam(n), anh: anhBai({ tieuDe: `Năm ${n}`, mang: "lich" }) });
   return namIndex(n, await namAmHienTai()) ? m : { ...m, robots: { index: false, follow: true } };
