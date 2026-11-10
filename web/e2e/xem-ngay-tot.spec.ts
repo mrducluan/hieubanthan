@@ -95,7 +95,7 @@ test("Hôm nay: có hoàng lịch theo tuổi + quẻ đầu ngày", async ({ pa
   // HN-3: nút nhỏ "Giờ hoàng đạo" mở vòng 12 canh giờ tại chỗ; chip quẻ ngày nhảy tới khung quẻ
   const chip = page.getByTestId("chip-hom-nay");
   await expect(page.getByTestId("gio-hoang-dao")).toHaveCount(0);
-  await chip.getByRole("button", { name: "Giờ hoàng đạo" }).click();
+  await chip.getByTestId("chip-gio").click();   // BT-UI: nút ghi luôn giờ tốt sắp tới ("Giờ tốt sắp tới: Ngọ 11:00–12:59")
   await expect(page.getByTestId("gio-hoang-dao").locator("li")).toHaveCount(6);
   await expect(page.getByTestId("gio-hoang-dao").getByTestId("vong-gio")).toBeVisible();
   // 23:00–23:59 giờ VN đã là giờ Tý của ngày mai → vòng hôm nay cố ý không đánh dấu kim (VongGio.canhGioHienTai)
@@ -103,6 +103,7 @@ test("Hôm nay: có hoàng lịch theo tuổi + quẻ đầu ngày", async ({ pa
   await expect(page.getByTestId("kim-gio")).toHaveCount(gioVn === 23 ? 0 : 1);
   await chip.getByRole("link", { name: /Quẻ ngày/ }).click();
   await expect(page).toHaveURL(/#que-ngay$/);
+  await expect(page.getByTestId("que-ngay")).toHaveAttribute("open", "");   // BT-UI: bấm chip → mục gập quẻ tự mở
 });
 
 test("Kinh Dịch: ?cach=mai_hoa mở sẵn cách khởi Mai Hoa (link từ Hôm nay)", async ({ page }) => {

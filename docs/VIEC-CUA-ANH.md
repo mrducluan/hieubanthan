@@ -3,7 +3,21 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-09 (HTT-3, mục 4aj).
+> Cập nhật lần cuối: 2026-11-10 (BT-UI, mục 4ak).
+
+### 4ak. BT-UI — Bản thân, Hôm nay, Ba lá của ngày (2026-11-10, `docs/DE-XUAT-BAN-THAN-HOM-NAY.md`) — deploy ENGINE trước web
+
+- [ ] **Deploy engine trước web** (trường mới `ba_la` ở `/v1/thanso/hom-nay`, trang `ban_than` ở `/v1/goi-y-cheo`). Web lên trước thì
+  Hôm nay vẫn hiện Lá bài đầu ngày cũ và khối "Bảy cách nhìn" tự ẩn — không vỡ trang, tự đúng khi engine xong.
+- [ ] **Render → `hieubanthan-engine-sg` → Environment: thêm `LA_NGAY_MUOI`** = một chuỗi ngẫu nhiên ≥ 16 ký tự (vd lấy từ
+  trình tạo mật khẩu, 32 ký tự), giữ bí mật. Có biến này thì lá Tarot riêng mới hiện trên thẻ chia sẻ "Ba lá"; chưa đặt thì
+  thẻ vẽ lá Tarot úp (vẫn chia sẻ được, không lộ gì). Đặt xong mọi người đổi lá riêng một lần — nên đặt ngay lúc deploy.
+- [ ] (3 phút) `/hom-nay`: lật đủ ba lá → "Ba lá ghép lại" → "Chia sẻ ba lá" → mở link thẻ trên máy khác, "Tải ảnh" có QR.
+  Xem chip "Giờ tốt sắp tới" có đúng với giờ hiện tại không; mở thử một mục "Đọc thêm".
+- [ ] (2 phút) `/ban-than`: hai cột đầu trang cao bằng nhau; "Chia sẻ thẻ" trên thẻ hồ sơ hiện QR; khối "Bảy cách nhìn về bạn"
+  có đủ tám ô, ô thiếu dữ liệu bấm ra bảng Sửa hồ sơ.
+- [ ] (Tuỳ chọn) CMS → Trang website `/hom-nay` → "Chữ trên trang": tiêu đề khối mới "Ba lá của ngày" sửa được ở đó.
+- [ ] (Tuỳ chọn) Chọn ý tưởng thêm ở mục 5 của file đề xuất: Hôm nay của hai người · thẻ hồ sơ hai mặt · lối tắt app · Tuần của tôi.
 
 ### 4aj. HTT-3 — Ý1–Ý7 + QC `/en` (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9) — deploy ENGINE trước web
 
