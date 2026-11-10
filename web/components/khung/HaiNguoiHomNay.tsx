@@ -24,7 +24,7 @@ export function HaiNguoiHomNay({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
   const ds = useNguoiThan();
   const [chon, setChon] = useState<string | null>(null);
   const [kq, setKq] = useState<KetQua | null>(null);
-  const [loi, setLoi] = useState(false);
+  const [loi, setLoi] = useState<"tam" | "ngay" | null>(null);
   const [daChep, setDaChep] = useState(false);
   const [chepTay, setChepTay] = useState<string | null>(null);
   const nguoi: NguoiThan | undefined = ds?.find((x) => x.id === chon);
@@ -32,22 +32,24 @@ export function HaiNguoiHomNay({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
   useEffect(() => {
     if (!nguoi) { setKq(null); return; }
     let huy = false;
-    setLoi(false);
+    setLoi(null);
+    setKq(null);                                   // đổi người → không để kết quả của người trước nằm dưới tên người mới
     fetch("/api/thanso/hom-nay-hai", { method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({ ngay: hoSo.ngay, thang: hoSo.thang, kia_ngay: nguoi.ngay, kia_thang: nguoi.thang, quan_he: nguoi.quan_he, ngay_xem: ngay,
-        ...(nguoi.lich_nhap === "am" ? { kia_lich: "am", kia_nam: nguoi.nam, ...(nguoi.am_nhuan ? { kia_nhuan: true } : {}) } : {}) }) })
-      .then((r) => (r.ok ? (r.json() as Promise<KetQua>) : Promise.reject(new Error("x"))))
+        ...(nguoi.lich_nhap === "am" ? { kia_lich: "am", kia_nam: nguoi.nam, ...(nguoi.am_nhuan ? { kia_nhuan: true } : {}),
+          ...(nguoi.vung ? { kia_vung: nguoi.vung } : {}), ...(nguoi.lich_am ? { kia_lich_am: nguoi.lich_am } : {}) } : {}) }) })
+      .then((r) => (r.ok ? (r.json() as Promise<KetQua>) : Promise.reject(new Error(r.status === 422 ? "ngay" : "tam"))))
       .then((j) => { if (!huy) { setKq(j); ghi("chart_interacted", { kind: "hai_nguoi_hom_nay", muc: j.kieu }); } })
-      .catch(() => { if (!huy) { setKq(null); setLoi(true); } });
+      .catch((e: unknown) => { if (!huy) { setKq(null); setLoi(e instanceof Error && e.message === "ngay" ? "ngay" : "tam"); } });
     return () => { huy = true; };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- nguoi suy từ chon + ds
-  }, [chon, ngay, hoSo.ngay, hoSo.thang]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- nguoi suy từ chon + ds; `nguoi?.id` đổi khi người đang chọn bị xoá
+  }, [chon, nguoi?.id, ngay, hoSo.ngay, hoSo.thang]);
 
   if (ds === undefined) return null;
 
   async function chiaSe() {
     if (!kq) return;
-    const tu = `h2.${maNgauNhien(10)}`;
+    const tu = `hd.${maNgauNhien(10)}`;   // hai chữ cái + 10 hex — đúng mẫu GhiVaoTrang nhận (có chữ số thì phễu mời không đếm)
     ghi("share_created", { kind: "hai_nguoi_hom_nay", ma_moi: tu });
     const { url } = await taoLinkNgay(hoSo, tu);
     const chu = `Hôm nay mình là ngày ${kq.ban.so}, bạn là ngày ${kq.nguoi_kia.so}. ${kq.viec_cung} Xem ngày của bạn:`;
@@ -75,7 +77,9 @@ export function HaiNguoiHomNay({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
               </button>
             ))}
           </div>
-          {loi && <p role="alert" className="text-sm text-fg-muted">Chưa tính được lúc này. Bạn thử lại sau ít phút nhé.</p>}
+          {loi && <p role="alert" className="text-sm text-fg-muted">{loi === "ngay"
+            ? "Ngày sinh đã lưu của người này không có trong lịch (vd ngày 30 của tháng thiếu). Bạn sửa lại ngày sinh ở trang Tử vi nhé."
+            : "Chưa tính được lúc này. Bạn thử lại sau ít phút nhé."}</p>}
           {kq && (
             <div className="space-y-3" data-testid="hai-nguoi-kq" data-kieu={kq.kieu} aria-live="polite">
               <div className="grid grid-cols-2 gap-3">

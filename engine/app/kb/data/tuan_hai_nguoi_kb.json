@@ -1,5 +1,5 @@
 {
-  "_nguon": "Nháp ban biên tập (BT-UI đợt 2, 2026-11-10): câu khung cho \"Tuần này của bạn\" và \"Hôm nay của hai người\". Mỗi câu chỉ gọi tên dữ kiện đã tính (ngày cá nhân, ngày hoàng đạo, quan hệ chi ngày với chi tuổi) — không thêm nghĩa mới, không dự báo, không chấm điểm.",
+  "_nguon": "Nháp ban biên tập (BT-UI đợt 2, 2026-11-10): câu khung cho \"Tuần này của bạn\" và \"Hôm nay của hai người\". Mỗi câu chỉ gọi tên dữ kiện đã tính (ngày cá nhân, ngày hoàng đạo, quan hệ chi ngày với chi tuổi) — không dự báo, không chấm điểm. Riêng cách chia ngày cá nhân thành nhóm \"hướng ra ngoài\" (1, 3, 5, 8) và \"hướng vào trong\" (2, 4, 6, 7, 9) là diễn giải của ban biên tập, chưa có nguồn sách — chờ chuyên gia duyệt.",
   "source_id": "nhap_ai_2026",
   "school_id": "da_mang",
   "trang_thai": "nhap_ai",

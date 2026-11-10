@@ -684,6 +684,8 @@ class HomNayHaiInput(BaseModel):
     kia_nam: int | None = Field(default=None, ge=1900, le=2100)
     kia_lich: Literal["duong", "am"] = "duong"
     kia_nhuan: bool = False
+    kia_vung: Literal["north", "south"] | None = None      # chỉ để đổi ngày âm theo đúng lịch lá số của người đó
+    kia_lich_am: Literal["viet", "trung"] | None = None
     quan_he: str | None = Field(default=None, pattern=r"^[a-z_]{2,20}$")
     ngay_xem: _dt.date | None = None
 
@@ -695,7 +697,8 @@ def api_hom_nay_hai(inp: HomNayHaiInput) -> dict:
     try:
         _dt.date(2000, inp.thang, inp.ngay)
         kq = tuan_hai_nguoi.hai_nguoi(inp.ngay, inp.thang, inp.kia_ngay, inp.kia_thang, inp.ngay_xem or config.hom_nay_vn(),
-                                      quan_he=inp.quan_he, kia_lich=inp.kia_lich, kia_nam=inp.kia_nam, kia_nhuan=inp.kia_nhuan)
+                                      quan_he=inp.quan_he, kia_lich=inp.kia_lich, kia_nam=inp.kia_nam, kia_nhuan=inp.kia_nhuan,
+                                      kia_vung=inp.kia_vung, kia_lich_am=inp.kia_lich_am)
     except ValueError:
         raise HTTPException(422, detail="Ngày sinh không hợp lệ")
     return {"engine_version": ENGINE_VERSION, **kq}

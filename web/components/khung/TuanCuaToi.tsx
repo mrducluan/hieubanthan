@@ -26,8 +26,8 @@ export function TuanCuaToi({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
     fetch("/api/thanso/tuan", { method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({ ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam, ngay_xem: ngay }) })
       .then((r) => (r.ok ? (r.json() as Promise<Tuan>) : null))
-      .then((j) => { if (!huy && j && Array.isArray(j.ngay) && j.ngay.length === 7) setT(j); })
-      .catch(() => null);
+      .then((j) => { if (!huy && j && Array.isArray(j.ngay) && j.ngay.length === 7) setT(j); else if (!huy) setT(null); })
+      .catch(() => { if (!huy) setT(null); });   // lỗi → ẩn mục, không để tuần của hồ sơ / ngày trước
     return () => { huy = true; };
   }, [hoSo.ngay, hoSo.thang, hoSo.nam, ngay]);
   if (!t) return null;   // engine cũ / lỗi mạng → mục tự ẩn

@@ -12,6 +12,8 @@ const Input = z.object({
   kia_nam: z.number().int().min(1900).max(2100).optional(),
   kia_lich: z.enum(["duong", "am"]).optional(),
   kia_nhuan: z.boolean().optional(),
+  kia_vung: z.enum(["north", "south"]).optional(),
+  kia_lich_am: z.enum(["viet", "trung"]).optional(),
   quan_he: z.string().regex(/^[a-z_]{2,20}$/).optional(),
   ngay_xem: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine((s) => Math.abs(Date.parse(`${s}T00:00:00Z`) - Date.now()) <= 2 * 86_400_000,
     "ngay_xem phải là hôm nay theo một múi giờ nào đó").optional(),

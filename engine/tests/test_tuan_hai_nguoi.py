@@ -151,3 +151,48 @@ def test_api_tuan_va_hai_nguoi():
     assert r.status_code == 200 and r.json()["kieu"] in ("cung_so", "cung_ra", "cung_vao", "lech")
     assert c.post("/v1/thanso/hom-nay-hai", json={"ngay": 17, "thang": 5, "kia_ngay": 31, "kia_thang": 2}).status_code == 422
     assert c.post("/v1/thanso/hom-nay-hai", json={"ngay": 17, "thang": 5, "kia_ngay": 3, "kia_thang": 11, "ten": "x"}).status_code == 422
+
+
+# ---------------------------------------------------------------- sau rà soát độc lập (PR #248)
+def test_ngay_noi_bat_khong_noi_nguoc_trang_ngay():
+    """Quét 60 tuần × 3 tuổi: ngày "thuận" phải có ít nhất một việc lớn trang ngày gọi là tốt; ngày "hợp tuổi" phải hoàng đạo;
+    cả hai và ngày "mở đầu" không rơi vào ngày sách lịch khuyên hoãn mọi việc / chỉ làm việc ở mục Nên."""
+    import datetime as dt
+
+    from app.luangiai import hoang_lich as hl
+    from app.luangiai import tuan_hai_nguoi as th
+
+    dem = 0
+    for ns in ((15, 6, 1995), (3, 11, 1988), (28, 2, 2001)):
+        for i in range(60):
+            kq = th.tuan(*ns, dt.date(2026, 11, 9) + dt.timedelta(weeks=i))
+            for nb in kq["noi_bat"]:
+                c = hl._calc(dt.date.fromisoformat(nb["ngay"]))  # noqa: SLF001
+                hoan = "诸事不宜" in c["ky"] or "馀事勿取" in c["nghi"]
+                if nb["loai"] == "thuan":
+                    dem += 1
+                    assert any(v["danh_gia"] == "tot" for v in hl._viec_lon(c)), nb  # noqa: SLF001
+                if nb["loai"] == "hop_tuoi":
+                    assert c["hoang_dao"], nb
+                if nb["loai"] in ("thuan", "hop_tuoi", "mo_dau"):
+                    assert not hoan, nb
+                if nb["loai"] in ("hop_tuoi", "mo_dau"):
+                    assert not c["ky_dan_gian"], nb
+            assert all(set(n) >= {"ngay", "so", "dep"} and "hoan" not in n and "viec_tot" not in n for n in kq["ngay"])
+    assert dem > 20                                     # luật mới không làm mất hẳn dòng "thuận"
+
+
+def test_nguoi_kia_am_lich_theo_dung_lich_la_so():
+    """Mùng 1 Tết Mậu Thân 1968: lịch miền Nam (UTC+8) và lịch Trung Quốc là 30/1, lịch Việt UTC+7 là 29/1 → ngày cá nhân lệch 1."""
+    import datetime as dt
+
+    from app.luangiai import tuan_hai_nguoi as th
+
+    xem = dt.date(2026, 11, 10)
+    goc = th.hai_nguoi(1, 1, 1, 1, xem, kia_lich="am", kia_nam=1968)["nguoi_kia"]["so"]
+    nam = th.hai_nguoi(1, 1, 1, 1, xem, kia_lich="am", kia_nam=1968, kia_vung="south")["nguoi_kia"]["so"]
+    trung = th.hai_nguoi(1, 1, 1, 1, xem, kia_lich="am", kia_nam=1968, kia_lich_am="trung")["nguoi_kia"]["so"]
+    bac = th.hai_nguoi(1, 1, 1, 1, xem, kia_lich="am", kia_nam=1968, kia_vung="north")["nguoi_kia"]["so"]
+    assert goc == bac and nam == trung and nam == goc % 9 + 1
+    # Miền Nam ngoài 1960–1975 vẫn theo lịch Việt UTC+7.
+    assert th.hai_nguoi(1, 1, 1, 1, xem, kia_lich="am", kia_nam=1985, kia_vung="south") == th.hai_nguoi(1, 1, 1, 1, xem, kia_lich="am", kia_nam=1985)
