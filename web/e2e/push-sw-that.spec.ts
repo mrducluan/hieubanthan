@@ -6,16 +6,31 @@ import { test, expect, type BrowserContext, type Page } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 
 // Kiểu tối thiểu của phạm vi service worker (tsconfig của web không nạp lib "webworker").
-interface ThongBaoSw { title: string; body: string; tag: string; data: unknown }
-interface PhamViSw { registration: { getNotifications(): Promise<ThongBaoSw[]> }; dispatchEvent(e: Event): boolean }
-type TaoSuKien = new (loai: string, init: { notification: ThongBaoSw }) => Event;
+interface ThongBaoSw { title: string; body: string; tag: string; data: unknown; close(): void }
+interface DangKySw {
+  showNotification(title: string, o?: { body?: string; tag?: string; data?: unknown }): Promise<void>;
+  getNotifications(): Promise<ThongBaoSw[]>;
+}
+interface PhamViSw { registration: DangKySw; dispatchEvent(e: Event): boolean }
 
-/** Đăng ký sw.js, chờ hoạt động, trả hàm phát sự kiện `push` NGAY TRONG service worker của đúng ngữ cảnh trình duyệt này.
- *  (Bản đầu dùng CDP ServiceWorker.deliverPushMessage theo registrationId: CDP liệt kê đăng ký của MỌI ngữ cảnh cùng origin
- *  trong trình duyệt, nên khi chạy chung cả bộ có lúc gói đi nhầm sang đăng ký của test trước → thông báo không hiện.) */
+/** Đăng ký sw.js, chờ hoạt động, trả hàm phát sự kiện `push` / `notificationclick` NGAY TRONG service worker của đúng ngữ
+ *  cảnh trình duyệt này — mã chạy là public/sw.js thật.
+ *  Kho thông báo: bản Chromium "headless shell" (CI dùng) KHÔNG có kho thông báo của hệ điều hành — showNotification chạy
+ *  xong nhưng getNotifications luôn rỗng (bản Chromium đầy đủ thì có). Nên test thay hai hàm đó của registration bằng một
+ *  kho nhỏ theo tag (cùng tag thì thay nhau, như trình duyệt): điều được kiểm là sw.js GỌI showNotification với chữ / tag /
+ *  đường dẫn nào và xử lý cú bấm ra sao, không phải kho thông báo của trình duyệt. */
 async function moSw(page: Page, context: BrowserContext) {
   await page.evaluate(async () => { await navigator.serviceWorker.register("/sw.js"); await navigator.serviceWorker.ready; });
   const sw = context.serviceWorkers()[0] ?? await context.waitForEvent("serviceworker");
+  await sw.evaluate(() => {
+    const dk = (self as unknown as PhamViSw).registration;
+    const kho = new Map<string, ThongBaoSw>();
+    dk.showNotification = async (title, o = {}) => {
+      const tag = o.tag ?? "";
+      kho.set(tag, { title, body: o.body ?? "", tag, data: o.data ?? null, close: () => { kho.delete(tag); } });
+    };
+    dk.getNotifications = async () => [...kho.values()];
+  });
   const day = (goi: unknown) => sw.evaluate((chu) => {
     const SuKien = (self as unknown as { PushEvent: new (loai: string, init: { data: string }) => Event }).PushEvent;
     (self as unknown as PhamViSw).dispatchEvent(new SuKien("push", { data: chu }));
@@ -25,8 +40,12 @@ async function moSw(page: Page, context: BrowserContext) {
   const bam = () => sw.evaluate(async () => {
     const g = self as unknown as PhamViSw;
     const [n] = await g.registration.getNotifications();
-    const SuKien = (self as unknown as { NotificationEvent: TaoSuKien }).NotificationEvent;
-    g.dispatchEvent(new SuKien("notificationclick", { notification: n! }));
+    // NotificationEvent chỉ nhận Notification thật của trình duyệt → dùng ExtendableEvent (có waitUntil) mang thông báo của kho.
+    const SuKien = (self as unknown as { ExtendableEvent: new (loai: string) => Event }).ExtendableEvent;
+    const e = new SuKien("notificationclick");
+    Object.defineProperty(e, "notification", { value: n });
+    Object.defineProperty(e, "action", { value: "" });
+    g.dispatchEvent(e);
   });
   return { day, thongBao, bam };
 }
