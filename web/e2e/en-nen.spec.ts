@@ -150,17 +150,22 @@ test.describe("catalog chữ có chiều tiếng Anh", () => {
 });
 
 test.describe("trên trình duyệt", () => {
-  test("thương hiệu bản Anh là Hieuban; nút đổi ngôn ngữ về trang tương đương", async ({ page }) => {
+  test("thương hiệu bản Anh là Hieuban; nút đổi ngôn ngữ (đầu + chân trang) về trang tương đương", async ({ page }) => {
+    const nut = async (href: string) => {
+      const ds = page.getByTestId("doi-tieng-viet");
+      await expect(ds).toHaveCount(2);                     // thanh trên + chân trang
+      for (const n of await ds.all()) await expect(n).toHaveAttribute("href", href);
+    };
     await page.goto("/en/numerology");
     await expect(page.getByRole("banner")).toContainText("Hieuban");
     await expect(page.locator("body")).not.toContainText("Hieu Ban Than");
-    await expect(page.getByTestId("doi-tieng-viet")).toHaveAttribute("href", "/than-so");
+    await nut("/than-so");
     await page.goto("/en/numerology/life-path/7");
-    await expect(page.getByTestId("doi-tieng-viet")).toHaveAttribute("href", "/than-so/y-nghia-so/so-7");
+    await nut("/than-so/y-nghia-so/so-7");
     await page.goto("/en/tarot/cards/the-fool");
-    await expect(page.getByTestId("doi-tieng-viet")).toHaveAttribute("href", "/tarot/la-bai/chang-kho");   // lấy từ hreflang của trang
+    await nut("/tarot/la-bai/chang-kho");   // lấy từ hreflang của trang
     await page.goto("/en");
-    await expect(page.getByTestId("doi-tieng-viet")).toHaveAttribute("href", "/");
+    await nut("/");
   });
 
   test("URL Anh của trang CHƯA mở: 404 tiếng Anh, không rewrite sang chữ Việt, không chuyển hướng", async ({ page }) => {

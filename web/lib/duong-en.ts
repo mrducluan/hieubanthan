@@ -117,3 +117,24 @@ export function banVietCuaTrang(duongEn: string): string {
   if (p.startsWith("/en/tarot/cards/")) return "/tarot/la-bai";
   return banViet(p + sau) ?? "/";
 }
+
+/** Đường dẫn Việt "tương đương" của trang đang mở, CHỈ để so khớp (mục menu nào sáng, thanh mảng nào hiện): trang Việt →
+ *  nguyên; trang Anh → bản Việt theo bảng, kể cả trang con của mục `la` ("/en/tarot/cards/the-fool" → "/tarot/la-bai/the-fool"
+ *  — đuôi là slug Anh, chỉ cần tiền tố đúng). Không suy được → "/". */
+export function duongViDeSo(duong: string): string {
+  const [p] = tachDuong(duong);
+  if (!laDuongEn(p)) return p;
+  const m = p.match(/^\/en\/numerology\/life-path\/(\d{1,2})$/);
+  if (m) return `/than-so/y-nghia-so/so-${m[1]}`;
+  const vi = banViet(p);
+  if (vi) return tachDuong(vi)[0];
+  // Trang con của mục `la` (bảng chỉ khớp đúng đường dẫn): tìm mục dài nhất là tiền tố rồi nối đuôi.
+  const cap = [...CAP_DUONG].sort((a, b) => DAI_TRUOC(a.en, b.en)).find((c) => c.en !== "/en" && p.startsWith(c.en + "/"));
+  return cap ? cap.vi + p.slice(cap.en.length) : "/";
+}
+
+/** Đường dẫn ANH tương đương của trang đang mở — để so khớp menu bản Anh (mục menu đã là URL Anh). */
+export function duongEnDeSo(duong: string): string {
+  const [p] = tachDuong(duong);
+  return laDuongEn(p) ? p : banAnh(p) ?? p;
+}

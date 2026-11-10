@@ -8,8 +8,10 @@ import { HopThoaiSao } from "@/components/sao/HopThoaiSao";
 import { ThuongVe } from "@/components/sao/ThuongVe";
 import { DangKyApp } from "@/components/khung/DangKyApp";
 import { GhiVaoTrang } from "@/components/khung/GhiVaoTrang";
-import { ChanTrang, KhungChanTrang } from "@/components/khung/ChanTrang";
-import { KhungEn } from "@/components/en/KhungEn";
+import { ChanTrang, ChanTrangEn, KhungChanTrang } from "@/components/khung/ChanTrang";
+import { menuEn } from "@/lib/khung-en";
+import { MENU_DAU_TRANG } from "@/lib/menu-dau-trang";
+import { banVietCuaTrang } from "@/lib/duong-en";
 import { COT_CHAN_TRANG } from "@/lib/menu-chan-trang";
 import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { ThanhMang } from "@/components/khung/ThanhMang";
@@ -90,9 +92,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   // CSP-2: nonce của lượt tải (proxy.ts) — đọc header cũng khiến mọi trang render động, bắt buộc để nonce khớp từng lượt.
   const hd = await headers();
   const nonce = hd.get("x-nonce") ?? undefined;
-  // QTE: /en → khung tiếng Anh gọn (không CMS, không Sao, không menu Huyền học); đo lường + giám sát giữ như bản Việt.
+  // EN-ALL GĐ 1: /en → CÙNG khung với bản Việt (menu + menu con, thanh mảng, chân trang, hộp cookie, tab dưới) với chữ
+  // tiếng Anh (lib/khung-en.ts) và chỉ các mục đã có bản Anh. Chưa có ở bản Anh: chữ CMS (dải thông báo, menu CMS — chờ
+  // localization ở GĐ 10), Sao / ví / hộp nạp (mục 6.1: chưa có cổng thanh toán quốc tế), mời cài app (manifest bản Việt).
   const maNn = hd.get("x-ngon-ngu") ?? "vi";
   if (LA_MA_EN.test(maNn)) {
+    const menu = menuEn(MENU_DAU_TRANG);
     return (
       <html lang={langHtml(maNn)} className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
         <body>
@@ -100,7 +105,17 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <JsonLd data={goiLd(ldToChuc("en"), ldWebsite("en"))} />
           <div className="star-field" aria-hidden />
           <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">Skip to content</a>
-          <NgonNguProvider ngonNgu="en" ma={maNn}><KhungEn duong={hd.get("x-duong-hien-thi") ?? "/en"}>{children}</KhungEn></NgonNguProvider>
+          <NgonNguProvider ngonNgu="en" ma={maNn}>
+            <ChuChung chu={{}}>
+              <ThanhTren muc={menu} />
+              <Suspense fallback={<ThanhMang />}><ThanhMangDem /></Suspense>
+              <main id="noi-dung" className="container pb-12 pt-6 md:pb-16 md:pt-10" lang="en">{children}</main>
+              <ChanTrangEn banViet={banVietCuaTrang(hd.get("x-duong-hien-thi") ?? "/en")} />
+              <TabDuoi muc={menu} />
+              <HoiDongYCookie />
+            </ChuChung>
+          </NgonNguProvider>
+          <GhiGioiThieu />
           <GiamSat />
           <GhiVaoTrang />
           <DoLuongGoogle nonce={nonce} />

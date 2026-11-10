@@ -4,6 +4,7 @@
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { taoChu, type ChuCms } from "@/lib/chu-trang";
 import { CHU_CHUNG } from "@/lib/chu/chung";
+import { useNgonNgu } from "@/components/khung/NgonNgu";
 
 const Ctx = createContext<ChuCms>({});
 
@@ -11,7 +12,9 @@ export function ChuChung({ chu, children }: { chu: ChuCms; children: ReactNode }
   return <Ctx.Provider value={chu}>{children}</Ctx.Provider>;
 }
 
+/** EN-ALL: đọc theo ngôn ngữ của trang (bản Anh đọc chiều `en` của bảng — không bao giờ rơi về chữ Việt). */
 export function useChuChung() {
   const chu = useContext(Ctx);
-  return useMemo(() => taoChu(CHU_CHUNG, chu), [chu]);
+  const { ngonNgu } = useNgonNgu();
+  return useMemo(() => taoChu(CHU_CHUNG, chu, ngonNgu), [chu, ngonNgu]);
 }
