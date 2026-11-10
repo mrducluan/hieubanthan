@@ -83,11 +83,13 @@ tự báo "đã sạch — xoá khỏi CHUA_XONG".
 
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
-1. **Engine không tất định giữa các tiến trình**: vài danh sách trong đầu ra dựng từ `set` (vd tên sao lưu trong hỏi đáp Tử vi,
-   vài mục Kinh Dịch) → thứ tự đổi theo hạt băm chuỗi (87/10.425 lượt lệch giữa hai tiến trình). Có sẵn từ trước, không thuộc
-   việc này → golden chạy với `PYTHONHASHSEED=0`. Nên sửa riêng (sắp xếp danh sách trước khi trả).
-2. **Lỗi 500 có sẵn**: `POST /v1/thanso/hoi` với câu `tsq00170` (nhắc người khác, không có ngày) → `IndexError` ở
-   `luangiai/hoi.py` (`pl["ngay_nhac"][0]`). Golden chụp nguyên mã 500 (hiện trạng); sửa riêng.
+1. ~~**Engine không tất định giữa các tiến trình**~~ — **ĐÃ SỬA**: hai chỗ lặp qua `set` rồi đưa ra đầu ra — `kb/tu_dien._mau`
+   (thứ tự `thuat_ngu[].khop` ở hỏi đáp / luận giải) và `du_nien_y` của `/v1/phongthuy/menh-quai` (thứ tự KHOÁ); thêm một chỗ
+   tiềm ẩn ở `hoang_lich._ly_do`. Không quy tắc ổn định nào tái tạo được thứ tự của hạt băm 0 → golden sinh lại 166 dòng băm
+   (chỉ đổi thứ tự, nội dung giữ nguyên). Test `tests/test_tat_dinh_hat_bam.py` (hai tiến trình con, hai hạt băm).
+2. ~~**Lỗi 500 có sẵn**~~ — **ĐÃ SỬA**: `POST /v1/thanso/hoi` câu `tsq00170` (chọn ngày sinh cho con, không có ngày của bé) nay
+   trả 200, luận theo con số người hỏi như câu cùng loại `tsq00169`; golden đổi đúng dòng `hoi.thanso.tsq00170`.
+   Test `tests/test_thanso_hoi_sinh_con.py`.
 3. **`GET /v1/kb/trang` trả 500 khi `x-ngon-ngu: en`** (và 78 trang kiến thức lệch mã HTTP giữa vi / en) — sửa ở GĐ 2.
 4. **Khung dữ kiện đang lệch giữa vi và en** ở 5 nhóm route chưa giải thích: `kb.trang` (24), `goi_y_cheo` (7),
    `thanso.ban_do` (3), `chan_dung` (1), `thoi_gian_toi` (3) → `KHUNG_CHUA_XONG`. Lệch CỐ Ý đã biết: `tarot.doc_bai` (QTE-3 tắt
