@@ -3,7 +3,16 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-09 (HTT-3, mục 4aj).
+> Cập nhật lần cuối: 2026-11-10 (BT-UI, mục 4ak).
+
+### 4ak. BT-UI — Bản thân, Hôm nay, Lá bài đầu ngày (2026-11-10, `docs/DE-XUAT-BAN-THAN-HOM-NAY.md`)
+
+- [ ] (2 phút, sau deploy) Mở `/ban-than`: hai cột đầu trang cao bằng nhau; bấm "Chia sẻ thẻ" trên thẻ → thấy mã QR, thử quét
+  bằng điện thoại khác và bấm "Tải ảnh".
+- [ ] **Duyệt** mục 3 "Ba lá của ngày" (Tarot riêng · Con số · Thời khắc + thẻ chia sẻ ba lá) thay Lá bài đầu ngày.
+- [ ] **Duyệt** mục 4 trang Hôm nay ba tầng (10 giây · việc của tôi · đọc thêm gập).
+- [ ] **Duyệt** mục 2 trang Bản thân "Bảy cách nhìn về bạn" + "Đang dang dở".
+- [ ] (Tuỳ chọn) Chọn ý tưởng thêm ở mục 5: Hôm nay của hai người · thẻ hồ sơ hai mặt · lối tắt app · Tuần của tôi.
 
 ### 4aj. HTT-3 — Ý1–Ý7 + QC `/en` (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9) — deploy ENGINE trước web
 

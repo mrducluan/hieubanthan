@@ -5,13 +5,14 @@
 import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { useRouter } from "next/navigation";
-import { ArrowRight, BookOpen, CalendarCheck, Compass, HeartHandshake, History, Layers, MessageCircle, Pencil, Share2 } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarCheck, CalendarRange, Compass, HeartHandshake, History, Layers, MessageCircle, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { Card } from "@/components/ui/card";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
+import { ChiaSeTheHoSo } from "@/components/chia-se/ChiaSeTheHoSo";
 import { TheDanhTinh } from "@/components/than-so/TheDanhTinh";
 import { NhipHienTai } from "@/components/than-so/NhipHienTai";
 import { NhipCaNhan } from "@/components/than-so/NhipCaNhan";
@@ -75,30 +76,47 @@ export function BanThan() {
 
   return (
     <div className="space-y-12">
-      <section aria-labelledby="muc-chao" className="mx-auto grid max-w-4xl items-start gap-6 md:grid-cols-[1.1fr_1fr]">
-        <div>
-          <p className="eyebrow">Bản thân</p>
-          <h1 id="muc-chao" className="mt-2 text-4xl">Chào {tenGoi(hoSo)}</h1>
-          <p className="mt-2 text-fg-muted">Nhịp của bạn hôm nay, tháng này và năm nay — mỗi lần quay lại có điều mới để đặt trọng tâm.</p>
-          <div className="mt-5"><TheDanhTinh kq={kq} tenHienThi={hoSo.ho_ten} /></div>
-        </div>
-        <div className="space-y-3 md:pt-16">
-          <Link href="/than-so" className="glass group flex items-center justify-between gap-3 rounded-2xl p-5 hover:border-gold/50" data-testid="mo-bai-doc">
-            <span>
-              <span className="flex items-center gap-2 font-serif text-lg"><BookOpen className="size-5 text-gold" aria-hidden /> Bài đọc đầy đủ</span>
-              <span className="mt-1 block text-sm text-fg-muted">Ý nghĩa và kiểm chứng từng số, chân dung bốn mặt, dải đời, biểu đồ ngày sinh, hỏi đáp</span>
-            </span>
-            <ArrowRight className="size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1" aria-hidden />
-          </Link>
-          <div className="flex flex-wrap gap-2 pt-1">
-            <Button asChild><Link href="/hop-doi"><HeartHandshake aria-hidden /> Xem hợp đôi</Link></Button>
-            <Button variant="secondary" asChild><Link href="/chan-dung"><Layers aria-hidden /> Chân dung tổng hợp</Link></Button>
-            <Button variant="secondary" asChild><Link href="/chia-se"><Share2 aria-hidden /> Chia sẻ thẻ</Link></Button>
-            <Button variant="ghost" onClick={() => setSuaMo(true)}><Pencil aria-hidden /> Sửa hồ sơ</Button>
+      {/* BT-UI: lời chào trải hết bề ngang; dưới là hai cột CAO BẰNG NHAU — thẻ danh tính (chia sẻ + QR ngay trên thẻ) và
+          cột lối đi (bài đọc, bốn ô việc hay làm, huy hiệu) tự giãn cho kín, không còn khoảng trống hai đầu. */}
+      <section aria-labelledby="muc-chao">
+        <p className="eyebrow">Bản thân</p>
+        <h1 id="muc-chao" className="mt-2 text-4xl">Chào {tenGoi(hoSo)}</h1>
+        <p className="mt-2 max-w-2xl text-fg-muted">Nhịp của bạn hôm nay, tháng này và năm nay — mỗi lần quay lại có điều mới để đặt trọng tâm.</p>
+        <div className="mt-6 grid gap-4 lg:grid-cols-2 lg:items-stretch">
+          <TheDanhTinh kq={kq} tenHienThi={hoSo.ho_ten} className="h-full"
+            chan={<ChiaSeTheHoSo hoSo={hoSo} soDuongDoi={kq.cac_vi_tri[0]?.gia_tri} />} />
+          <div className="flex flex-col gap-3" data-testid="ban-than-loi-di">
+            <Link href="/than-so" className="glass group flex items-center justify-between gap-3 rounded-2xl p-5 hover:border-gold/50" data-testid="mo-bai-doc">
+              <span>
+                <span className="flex items-center gap-2 font-serif text-lg"><BookOpen className="size-5 text-gold" aria-hidden /> Bài đọc đầy đủ</span>
+                <span className="mt-1 block text-sm text-fg-muted">Ý nghĩa và kiểm chứng từng số, chân dung bốn mặt, dải đời, biểu đồ ngày sinh, hỏi đáp</span>
+              </span>
+              <ArrowRight className="size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1" aria-hidden />
+            </Link>
+            <div className="grid flex-1 grid-cols-2 gap-3 [grid-auto-rows:1fr]">
+              {[
+                { href: "/hop-doi", Icon: HeartHandshake, ten: "Xem hợp đôi", mo: "Bạn và người ấy hợp nhau ở đâu", noi: true },
+                { href: "/chan-dung", Icon: Layers, ten: "Chân dung tổng hợp", mo: "Tử vi, Bát tự, Nhân tướng cùng nhìn bạn" },
+                { href: "/thoi-gian-toi", Icon: CalendarRange, ten: "Thời gian tới", mo: "Ba tháng tới và cả năm của riêng bạn" },
+              ].map(({ href, Icon, ten, mo, noi }) => (
+                <Link key={href} href={href}
+                  className={`group flex flex-col justify-center rounded-2xl border p-4 transition-colors ${noi ? "border-gold/50 bg-gold/10 hover:border-gold" : "glass hover:border-gold/50"}`}>
+                  <span className="flex items-center gap-2 font-medium text-fg"><Icon className="size-5 shrink-0 text-gold" aria-hidden /> {ten}</span>
+                  <span className="mt-1 text-sm text-fg-muted">{mo}</span>
+                </Link>
+              ))}
+              <button type="button" onClick={() => setSuaMo(true)} data-testid="sua-ho-so"
+                className="glass flex flex-col justify-center rounded-2xl p-4 text-left transition-colors hover:border-gold/50">
+                <span className="flex items-center gap-2 font-medium text-fg"><Pencil className="size-5 shrink-0 text-gold" aria-hidden /> Sửa hồ sơ</span>
+                <span className="mt-1 text-sm text-fg-muted">Tên, ngày giờ sinh, nơi sinh</span>
+              </button>
+            </div>
+            {/* Trục 2 UX: một dòng huy hiệu gần đầu trang (mục đầy đủ ở cuối trang). KV-THANG: hạng hội viên (riêng tư) cạnh đó. */}
+            <div className="flex flex-wrap gap-2 empty:hidden">
+              <TomTatHuyHieu taiBanThan />
+              <DongHoiVien />
+            </div>
           </div>
-          {/* Trục 2 UX: một dòng huy hiệu gần đầu trang (mục đầy đủ ở cuối trang). KV-THANG: hạng hội viên (riêng tư) cạnh đó. */}
-          <TomTatHuyHieu taiBanThan className="mt-1" />
-          <DongHoiVien />
         </div>
       </section>
 
