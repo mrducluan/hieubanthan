@@ -10,6 +10,8 @@ const Input = z.object({
   // Hôm nay theo đồng hồ máy người dùng (như /api/thanso/hom-nay) — chỉ nhận ngày cách hôm nay ≤ 2 ngày.
   ngay_xem: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine((s) => Math.abs(Date.parse(`${s}T00:00:00Z`) - Date.now()) <= 2 * 86_400_000,
     "ngay_xem phải là hôm nay theo một múi giờ nào đó").optional(),
+  // Chỉ để engine biết mệnh quái cho dòng "Phong thuỷ tháng này" (không bắt buộc).
+  gioi_tinh: z.enum(["nam", "nu"]).optional(),
 }).strict();
 
 export function POST(req: Request) {

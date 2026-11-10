@@ -178,7 +178,7 @@ def test_ngay_noi_bat_khong_noi_nguoc_trang_ngay():
                     assert not hoan, nb
                 if nb["loai"] in ("hop_tuoi", "mo_dau"):
                     assert not c["ky_dan_gian"], nb
-            assert all(set(n) >= {"ngay", "so", "dep"} and "hoan" not in n and "viec_tot" not in n for n in kq["ngay"])
+            assert all(set(n) >= {"ngay", "so", "dep"} and "hoan" not in n and "co_viec_tot" not in n for n in kq["ngay"])
     assert dem > 20                                     # luật mới không làm mất hẳn dòng "thuận"
 
 
@@ -241,3 +241,61 @@ def test_api_push_tuan():
     r2 = c.post("/v1/push/tuan", json={"ngay_xem": "2026-11-17", "nguoi": [{"ngay_sinh": "1995-06-15"}]})
     assert r2.json()["ket_qua"] == [None]
     assert c.post("/v1/push/tuan", json={"ngay_xem": "2026-11-16", "nguoi": [{"ngay_sinh": "1995-06-15", "ten": "A"}]}).status_code == 422
+
+
+# ---------------------------------------------------------------- TUAN-V2: tuần nhiều lớp (mỗi môn một dòng cho từng ngày)
+def test_tuan_nhieu_lop_cung_nguon_voi_trang_hom_nay_va_trang_ngay():
+    import datetime as dt
+    import re
+
+    from app.luangiai import hoang_lich as hl
+    from app.luangiai import hom_nay
+    from app.luangiai import tuan_hai_nguoi as th
+
+    xem = dt.date(2026, 11, 10)
+    t = th.tuan(15, 6, 1995, xem, gioi_tinh="nu")
+    assert [x["mon"] for x in t["ngay"][0]["lop"]] == ["than_so", "lich", "tuoi", "bat_tu", "kinh_dich"]
+    for n in t["ngay"]:
+        d = dt.date.fromisoformat(n["ngay"])
+        lop = {x["mon"]: x for x in n["lop"]}
+        assert all(x["nhan"] and x["cau"] and x["muc"] in ("thuan", "binh", "cham", None) for x in n["lop"])
+        # Bát tự + quẻ ngày: đúng hàm của trang Hôm nay (một nguồn)
+        bt = hom_nay._nhip_bat_tu(15, 6, 1995, d)  # noqa: SLF001
+        assert bt["thap_than"] in lop["bat_tu"]["nhan"]
+        q = hom_nay._que_ngay(d)  # noqa: SLF001
+        assert q["ten"] in lop["kinh_dich"]["nhan"] and lop["kinh_dich"]["duong"] == q["duong"]
+        # Việc hợp + giờ tốt: đúng luật trang ngày
+        c = hl._calc(d)  # noqa: SLF001
+        assert n["viec_tot"] == [v["ten"] for v in hl._viec_lon(c) if v["danh_gia"] == "tot"]  # noqa: SLF001
+        assert [g["chi"] for g in n["gio_tot"]] == [g["chi"] for g in hl.ngay_xem(d)["gio_hoang_dao"]]
+        assert lop["tuoi"]["muc"] == ("cham" if n["tuoi"] == "xung" else "thuan" if n["tuoi"] in ("tam_hop", "luc_hop") else "binh")
+        assert bool(n["viec_luu_y"]) == bool(n["viec_tot"] and n["tuoi"] == "xung")   # ngày xung tuổi: việc sách lịch ghi kèm lời nhắc
+        assert n["tom"] and not re.search(r"\{[a-z_]+\}|điểm", n["tom"])
+        # ngày lịch khuyên hoãn / xung tuổi không bao giờ được gọi là "thuận"
+        if lop["lich"]["muc"] == "cham" or n["tuoi"] == "xung":
+            assert n["nhip"] != "thuan"
+    # Theo việc: chỉ ngày CÒN LẠI, việc "tốt" theo trang ngày, không xung tuổi
+    for v in t["viec_tuan"]:
+        assert v["ngay"] and all(x >= xem.isoformat() for x in v["ngay"])
+        for iso in v["ngay"]:
+            n = next(x for x in t["ngay"] if x["ngay"] == iso)
+            assert v["ten"] in n["viec_tot"] and n["tuoi"] != "xung"
+    # Phong thuỷ tháng: có giới tính → có góc hợp theo mệnh quái; không có → vẫn có lời chung + lời mời bổ sung
+    assert t["phong_thuy"]["loi"] and t["phong_thuy"]["can_cu"]
+    assert th.tuan(15, 6, 1995, xem)["phong_thuy"]["loi"]
+    blob = str(t)
+    assert "1995" not in blob.replace("2026", "") and not re.search(r"sẽ (gặp|bị|mất)|đại hung|xui", blob)
+
+
+def test_tuan_moc_trong_tuan():
+    import datetime as dt
+
+    from app.luangiai import tuan_hai_nguoi as th
+
+    # Tuần 15–21/2/2027: Tết Đinh Mùi (mùng 1 tháng Giêng = 6/2/2027 → tuần sau có rằm tháng Giêng 20/2)
+    ma = {m["loai"] for i in range(60) for m in th.tuan(15, 6, 1995, dt.date(2026, 11, 9) + dt.timedelta(weeks=i))["moc"]}
+    assert {"mung_1", "ram", "giao_tiet", "thang_ca_nhan"} <= ma
+    t = th.tuan(15, 6, 1995, dt.date(2026, 11, 30))                       # tuần có ngày 1/12
+    m = next(x for x in t["moc"] if x["loai"] == "thang_ca_nhan")
+    assert m["ngay"] == "2026-12-01" and "Tháng cá nhân" in m["nhan"]
+    assert all(x["ngay"] >= t["tu"] and x["ngay"] <= t["den"] for x in t["moc"])

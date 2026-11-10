@@ -42,7 +42,61 @@
       "tieu_de": "Tuần này của bạn",
       "co_ngay": "{tom_tat} Đáng để ý nhất: {ngay}.",
       "khong_ngay": "{tom_tat} Mở để xem nhịp bảy ngày của bạn."
-    }
+    },
+    "lop": {
+      "than_so": {
+        "ten": "Thần số",
+        "nhan": "Ngày cá nhân {so}"
+      },
+      "lich": {
+        "ten": "Lịch cổ truyền",
+        "nhan_hd": "Ngày hoàng đạo · trực {truc}",
+        "nhan_hac": "Ngày hắc đạo · trực {truc}",
+        "dep": "Lịch ghi ngày đẹp — hợp {hop}.",
+        "binh": "Trực {truc} hợp {hop}.",
+        "hoan": "Sách lịch khuyên để việc lớn sang ngày khác; việc thường ngày cứ làm như mọi hôm.",
+        "kieng": "Dân gian thường tránh việc lớn vì là ngày {ky}; việc thường ngày cứ làm như mọi hôm.",
+        "nen": "Trực {truc}: sách lịch chỉ khuyên làm các việc ghi ở mục Nên của ngày; việc lớn khác để ngày khác."
+      },
+      "tuoi": {
+        "ten": "Tuổi của bạn",
+        "nhan": "{ten} với tuổi {can_chi}",
+        "binh_nhan": "Không xung, không hợp với tuổi {can_chi}",
+        "cau": "Theo lịch cổ truyền, đây là {nghia}."
+      },
+      "bat_tu": {
+        "ten": "Bát tự",
+        "nhan": "Ngày {thap_than} ({can_chi})"
+      },
+      "kinh_dich": {
+        "ten": "Kinh Dịch",
+        "nhan": "Quẻ đầu ngày: {ten}"
+      }
+    },
+    "tom": {
+      "thuan": "Lịch và tuổi cùng thuận — ngày đáng đặt việc đã chuẩn bị.",
+      "thuan_viec": "Lịch và tuổi cùng thuận — sách lịch ghi hợp {viec}.",
+      "kha": "Một trong hai cách xem (lịch, tuổi) thuận, cách còn lại bình thường.",
+      "kha_viec": "Sách lịch ghi hợp {viec}; các cách xem còn lại bình thường.",
+      "binh": "Ngày bình thường theo cả lịch lẫn tuổi — hợp việc quen tay.",
+      "lech": "Lịch và tuổi nói hai chiều — việc nhỏ cứ làm, việc lớn chọn ngày khác.",
+      "cham": "Ngày nên đi chậm: việc lớn dời được thì dời, việc thường ngày cứ làm như mọi hôm."
+    },
+    "moc": {
+      "mung_1": "Mùng 1 tháng {thang} âm lịch",
+      "ram": "Rằm tháng {thang} âm lịch",
+      "thang_ca_nhan": "Tháng cá nhân {so} bắt đầu",
+      "thang_ca_nhan_cau": "{nghia}"
+    },
+    "viec_tuan": {
+      "tieu_de": "Tuần này hợp việc gì",
+      "luu_y": "Theo sách lịch, đã bỏ ngày xung tuổi bạn; chưa xét tuổi người cùng làm."
+    },
+    "phong_thuy": {
+      "ten": "Phong thuỷ tháng này",
+      "giao_tiet": "Từ {dm} sang tháng {chi} theo tiết khí — sao tháng đổi vị trí."
+    },
+    "viec_xung": "Sách lịch ghi chung cho mọi người; ngày này xung tuổi bạn nên việc lớn của riêng bạn nên chọn ngày khác."
   },
   "hai_nguoi": {
     "nhom_ra": [

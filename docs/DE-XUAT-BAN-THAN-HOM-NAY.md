@@ -167,3 +167,45 @@ Engine: một hàm RULES mới ghép ba lá từ dữ liệu đã có (`luangiai
 3. Trang Bản thân "Bảy cách nhìn" (mục 2).
 
 Mỗi bước một PR, deploy engine trước web.
+
+## 6. TUAN-V2 — "Tuần này của bạn" nhiều lớp (2026-11-10, anh yêu cầu sau khi xem bản đợt 2)
+
+Anh báo hai điều: (1) khu tuần nằm dưới tiêu đề "Đọc thêm về hôm nay" là sai chỗ; (2) thông tin tuần nghèo, chỉ có ngày cá
+nhân + lịch + tuổi trong khi hệ thống có nhiều môn.
+
+### 6.1 Môn nào nói được gì theo TỪNG NGÀY (rà engine)
+
+| Môn | Có phép tính theo ngày? | Đưa vào tuần |
+|---|---|---|
+| Thần số | Ngày cá nhân | Có — chủ đề của ngày |
+| Lịch cổ truyền | Hoàng đạo, trực, nghi / kỵ, 6 việc lớn, giờ hoàng đạo | Có — mức của ngày, việc sách lịch ghi hợp, giờ tốt |
+| Tuổi (con giáp) | Chi ngày ↔ chi tuổi | Có — hợp / xung |
+| Bát tự | Lưu nhật: thập thần can ngày × nhật chủ (không cần giờ sinh) | Có — chủ đề của ngày |
+| Kinh Dịch | Quẻ đầu ngày (Mai Hoa, giờ Tý) | Có — quẻ + ý chính, link trang quẻ |
+| Phong thuỷ | Không có sao bay theo ngày; có sao THÁNG × hướng hợp mệnh quái | Có — một khối "Phong thuỷ tháng này" cho cả tuần |
+| Tử vi | Lưu nhật chưa chốt phái; đọc theo THÁNG, cần giờ sinh | Không theo ngày — dẫn sang Thời gian tới |
+| Tarot | Lá của ngày | Không — báo trước bảy lá làm mất việc lật Ba lá mỗi sáng |
+| Nhân tướng | Lưu niên theo NĂM | Không |
+
+Thêm hai khối cấp tuần: **"Tuần này hợp việc gì"** (6 việc lớn × ngày còn lại sách lịch ghi tốt, bỏ ngày xung tuổi) và **"Mốc
+trong tuần"** (giao tiết, Lập xuân, Tết, mùng 1, rằm, tháng cá nhân mới).
+
+### 6.2 Ba cách trình bày
+
+| | Cách | Được | Mất |
+|---|---|---|---|
+| A | **Bảy ngày + bảng ngày nhiều môn** — bấm một ngày, đọc ngày ấy qua từng môn; cột bên là việc / mốc / phong thuỷ | Nhìn cả tuần trong một hàng, đọc sâu một ngày không rời trang; điện thoại không cần bảng ngang | Phải bấm mới thấy ngày khác |
+| B | Bảy thẻ xếp dọc, mỗi thẻ đủ mọi môn | Không cần bấm | Rất dài (≈ 7 màn hình điện thoại), khó so các ngày |
+| C | Chọn việc trước ("tôi định ký hợp đồng") → máy chỉ ngày | Trả lời thẳng một nhu cầu | Mất cái nhìn cả tuần; người chưa có việc cụ thể không biết bấm gì |
+
+**Chọn A, mượn phần hay nhất của C** (khối "Tuần này hợp việc gì", bấm ngày là bảng nhảy tới ngày đó).
+
+### 6.3 Luật (engine `luangiai/tuan_hai_nguoi.py`, không điểm số)
+
+- Chỉ hai lớp có mức: lịch và tuổi. Thần số, Bát tự, Kinh Dịch là chủ đề của ngày, không tốt không xấu.
+- Nhịp của ngày: cả hai thuận → Thuận · một thuận → Khá thuận · một thuận một chậm → Hai chiều · có lớp chậm → Nên đi chậm ·
+  còn lại Bình thường. Trên 1.092 ngày mẫu: bình thường 56 %, khá thuận 29 %, nên đi chậm 10 %, thuận 4 %, hai chiều 2 %.
+- "Chậm" của lịch chỉ khi sách khuyên hoãn mọi việc; ngày kiêng dân gian là ngày bình thường có lời nhắc (gọi cả nhóm này
+  là chậm thì 40 % số ngày mang nhãn chậm — nhãn mất nghĩa và thành doạ).
+- Ngày xung tuổi vẫn hiện việc sách lịch ghi hợp (khớp trang ngày) nhưng kèm lời nhắc, và không vào "Tuần này hợp việc gì".
+

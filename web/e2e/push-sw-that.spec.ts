@@ -1,5 +1,5 @@
 // BT-UI đợt 3 — chạy SERVICE WORKER THẬT (public/sw.js) trong trình duyệt: đẩy một thông báo vào sw.js như máy chủ push sẽ
-// đẩy → thông báo hiện đúng chữ → bấm thông báo → trang mở đúng mục (mốc "Tuần này của bạn": /hom-nay#tuan-nay, mục tự mở).
+// đẩy → thông báo hiện đúng chữ → bấm thông báo → trang mở đúng mục (mốc "Tuần này của bạn": /hom-nay#tuan-nay, khu tự cuộn tới).
 // Phần mã hoá RFC 8291 + chọn thông báo có ở web-push.spec.ts; ở đây là khâu cuối trên máy người dùng. Và nút cài app
 // (Android / máy tính: beforeinstallprompt) — bản iPhone có ở web-push.spec.ts.
 import { test, expect, type BrowserContext, type Page } from "@playwright/test";
@@ -34,7 +34,7 @@ async function moSw(page: Page, context: BrowserContext) {
   return { day, thongBao, bam };
 }
 
-test("sw.js thật: thông báo sáng thứ Hai hiện đúng chữ, bấm vào mở Hôm nay đúng mục Tuần này của bạn (mục tự mở)", async ({ page, context, baseURL }) => {
+test("sw.js thật: thông báo sáng thứ Hai hiện đúng chữ, bấm vào mở Hôm nay đúng mục Tuần này của bạn (trang tự cuộn tới khu tuần)", async ({ page, context, baseURL }) => {
   await context.grantPermissions(["notifications"], { origin: baseURL });
   await napHoSo(page);
   await page.goto("/hom-nay");
@@ -47,8 +47,7 @@ test("sw.js thật: thông báo sáng thứ Hai hiện đúng chữ, bấm vào 
   await bam();
   await expect(page).toHaveURL(/\/hom-nay\?tu=push#tuan-nay$/);
   const muc = page.getByTestId("tuan-cua-toi");
-  await expect(muc).toHaveAttribute("open", "");
-  await expect(muc.getByTestId("tuan-luoi").locator("li")).toHaveCount(7);
+  await expect(muc.getByTestId("tuan-luoi").getByRole("tab")).toHaveCount(7);
   await expect(muc).toBeInViewport();
 });
 
