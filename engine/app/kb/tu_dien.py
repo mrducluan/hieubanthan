@@ -47,7 +47,9 @@ def _mau(mo_dun: str) -> list[tuple[re.Pattern, dict]]:
     for m in tat_ca(mo_dun):
         if not m["tu_dong"]:
             continue
-        for f in {m["ten"], *m["bien_the"]}:
+        # KHÔNG lặp qua `set`: thứ tự set của chuỗi đổi theo hạt băm tiến trình (PYTHONHASHSEED) → thứ tự mẫu cùng độ dài,
+        # rồi thứ tự `khop` trong đầu ra, khác nhau giữa hai tiến trình. Tên chính trước, biến thể theo thứ tự trong KB.
+        for f in dict.fromkeys([m["ten"], *m["bien_the"]]):
             if len(f) < 3 or f in _BO_BIEN_THE or f.isdigit():
                 continue
             co = re.IGNORECASE if len(f) >= 6 else 0          # tên ngắn: phân biệt hoa thường (tránh "mệnh" thường)

@@ -145,7 +145,7 @@ def _ly_do(c: dict, v: dict) -> list[str]:
         ra.append("sách lịch ghi việc này trong mục Kiêng")
     if c["truc"] in v["tranh_truc"]:
         ra.append(f"trực {KB['truc'][c['truc']]['ten']} — sách lịch khuyên tránh việc này")
-    for k in set(c["ky_dan_gian"]) & set(v["tranh_dan_gian"]):
+    for k in (k for k in c["ky_dan_gian"] if k in v["tranh_dan_gian"]):    # theo thứ tự của ngày — không lặp qua set
         ra.append(f"ngày {KB['ky_dan_gian'][k]['ten']} — dân gian thường tránh")
     if "诸事不宜" in c["ky"]:
         ra.append("sách lịch khuyên hoãn mọi việc lớn trong ngày này")
