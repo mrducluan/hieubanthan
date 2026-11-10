@@ -3,7 +3,19 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-10 (BT-UI mục 4ak, SEO-N mục 4al).
+> Cập nhật lần cuối: 2026-11-10 (BT-UI mục 4ak, SEO-N mục 4al, BLOG-10 mục 4am).
+
+### 4am. BLOG-10 — bài NotFair mới tự xuất bản khi đạt điểm (2026-11-10)
+
+- [ ] **Bài "Quẻ Kinh Dịch Mai Hoa…" (NotFair đăng 19:36 ngày 10/11) lên /blog ngay**: CMS → Bài viết → bảng bài NotFair →
+  "Nhập vào CMS" → mở bài → "Chuẩn hoá SEO" → đọc → Xuất bản. Không làm thì cron 8:03 sáng 11/11 tự nhập + tự xuất bản nếu
+  đạt điểm ≥ 85 (sau khi CMS deploy bản này).
+- [ ] Sau 8:03 sáng: Vercel (dự án web) → Logs → tìm `[cron hang-ngay] blog` — mỗi bài có `xuat_ban: true` hoặc `ly_do`
+  (điểm thấp, trùng nội dung, kho ảnh lỗi). Bài không tự lên vẫn nằm ở bảng điều khiển CMS "Bài NotFair mới chờ đọc".
+- [ ] Bài máy tự xuất bản vẫn ghi "Gửi duyệt": anh đọc lại khi rảnh, sửa rồi bấm Xuất bản là thành "Đã duyệt"; bài có vấn đề
+  thì Bỏ xuất bản.
+- [ ] (Tuỳ chọn) Env dự án **CMS**: `NOTFAIR_TU_XUAT_BAN_DIEM` (mặc định 85, 50–100) để nới / siết ngưỡng;
+  `NOTFAIR_TU_XUAT_BAN=0` để quay về chỉ nhập nháp như trước.
 
 ### 4ak. BT-UI — Bản thân, Hôm nay, Ba lá của ngày (2026-11-10, `docs/DE-XUAT-BAN-THAN-HOM-NAY.md`) — deploy ENGINE trước web
 

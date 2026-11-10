@@ -139,6 +139,58 @@ try {
   assert.ok(!(await chuanHoaMotBai(payload, undefined, bai3.id, { ghi: false })).thay_doi.some((t) => /ảnh NotFair/.test(t)), "chạy lại không bỏ thêm");
   console.log("  ✓ BLOG-9c: ảnh thân bài NotFair bị bỏ, ảnh CMS vẽ bù vào, chạy lại không đổi");
 
+  // BLOG-10: bài NotFair mới (chỉ có nháp, như cron vừa nhập) → chuẩn hoá → máy tự xuất bản khi đạt ngưỡng; không đạt
+  // (điểm thấp, kho ảnh lỗi, trùng nội dung) → giữ nháp. Bài tự xuất bản vẫn "Gửi duyệt" để Chủ biên đọc lại.
+  const { tuXuatBanNeuDat, nguongTuXuatBan } = await import("../src/lib/tu-dong-notfair");
+  assert.equal(nguongTuXuatBan({}), 85);
+  assert.equal(nguongTuXuatBan({ NOTFAIR_TU_XUAT_BAN_DIEM: "70" }), 70);
+  assert.equal(nguongTuXuatBan({ NOTFAIR_TU_XUAT_BAN_DIEM: "10" }), 50, "kẹp ≥ 50");
+  assert.equal(nguongTuXuatBan({ NOTFAIR_TU_XUAT_BAN: "0" }), null, "tắt được");
+  const HTML_MOI = `<p>Mai Hoa Dịch Số là cách lập quẻ từ thời điểm hoặc con số bắt gặp, rồi đọc quẻ chủ, quẻ hỗ và quẻ biến để xem diễn biến một việc. Bài này đi từng bước để bạn tự lập được.</p>
+<h2>Mai Hoa Dịch Số là gì?</h2><p>Đây là phép bói của Thiệu Khang Tiết, dùng năm, tháng, ngày, giờ âm lịch chia cho tám để ra quẻ thượng, quẻ hạ và hào động.</p>
+<h2>Lập quẻ theo thời điểm thế nào?</h2><p>Cộng số năm, tháng, ngày chia tám lấy dư ra quẻ trên; cộng thêm giờ chia tám ra quẻ dưới; tổng chia sáu ra hào động.</p>
+<h2>Đọc thể dụng ra sao?</h2><p>Quẻ không có hào động là thể, quẻ có hào động là dụng; dụng sinh thể là thuận, thể khắc dụng là việc còn trong tầm tay.</p>
+<h2>Nên tự soi điều gì?</h2><p>Ghi lại câu hỏi, ngày giờ lập quẻ và điều xảy ra sau đó; đối chiếu sau một tháng để biết cách đọc của mình đúng tới đâu.</p>`;
+  const taoNhap = async (duoi: string, html: string) => {
+    const b = await payload.create({
+      collection: "bai-viet", overrideAccess: true, draft: true, context: { giuSlugGoc: true, boQuaKiemDinh: true, boQuaLamMoi: true },
+      data: { tieu_de: `Quẻ Mai Hoa: cách lập quẻ theo thời điểm và đọc thể dụng ${duoi}`, slug: `${dau}-mai-hoa-${duoi}`,
+        generateSlug: false, mang: "kinh_dich", the: ["kinh dịch", "mai hoa"], nguon_goc: "notfair",
+        noi_dung: { root: { type: "root", direction: "ltr", format: "", indent: 0, version: 1, children: htmlSangKhoi(html) } } } as never,
+    });
+    xoa.push({ collection: "bai-viet", id: b.id });
+    const c = await chuanHoaMotBai(payload, undefined, b.id);
+    const n = await payload.findByID({ collection: "bai-viet", id: b.id, draft: true, depth: 0, overrideAccess: true }) as any;
+    if (n.anh_bia) xoa.push({ collection: "media", id: n.anh_bia });
+    for (const k of n.noi_dung.root.children as any[]) if (k.type === "upload") xoa.push({ collection: "media", id: k.value?.id ?? k.value });
+    return { id: b.id, c, slug: n.slug as string };
+  };
+  const banKhach = async (slug: string) => (await payload.find({ collection: "bai-viet", where: { slug: { equals: slug } },
+    depth: 0, overrideAccess: false })).docs[0] as any;
+  const m1 = await taoNhap("a", HTML_MOI);
+  console.log(`  BLOG-10: điểm sau chuẩn hoá ${m1.c.diem_sau}`);
+  assert.ok(m1.c.diem_sau >= 50 && m1.c.diem_sau < 100, `điểm ${m1.c.diem_sau}`);
+  assert.deepEqual(await tuXuatBanNeuDat(payload, undefined, m1.id, m1.c, m1.c.diem_sau + 1),
+    { xuat_ban: false, ly_do: `điểm ${m1.c.diem_sau} < ${m1.c.diem_sau + 1}` }, "dưới ngưỡng → giữ nháp");
+  assert.equal((await tuXuatBanNeuDat(payload, undefined, m1.id, { kho_loi: "403" }, 50)).xuat_ban, false, "kho ảnh lỗi → giữ nháp");
+  assert.equal(await banKhach(m1.slug), undefined, "chưa đạt → khách chưa thấy");
+  const xb = await tuXuatBanNeuDat(payload, undefined, m1.id, m1.c, Math.min(m1.c.diem_sau, 100));
+  assert.equal(xb.xuat_ban, true, xb.ly_do);
+  const pub = await banKhach(m1.slug);
+  assert.ok(pub, "đạt → bản xuất bản khách đọc được (web hiện ở /blog)");
+  assert.ok(pub.publishedAt, "có ngày xuất bản");
+  const noiBo = await payload.findByID({ collection: "bai-viet", id: m1.id, depth: 0, overrideAccess: true }) as any;
+  assert.equal(noiBo._status, "published");
+  assert.equal(noiBo.trang_thai_duyet, "cho_duyet", "máy xuất bản ≠ Chủ biên duyệt");
+  assert.match(noiBo.ghi_chu_duyet, /BLOG-10: máy tự xuất bản/);
+  // Bài thứ hai cùng nội dung → trùng ≥ 50 % → không tự xuất bản (Chủ biên gộp).
+  const m2 = await taoNhap("b", HTML_MOI);
+  const xb2 = await tuXuatBanNeuDat(payload, undefined, m2.id, m2.c, 50);
+  assert.equal(xb2.xuat_ban, false);
+  assert.match(xb2.ly_do ?? "", /trùng/);
+  assert.equal(await banKhach(m2.slug), undefined);
+  console.log("  ✓ BLOG-10: tự xuất bản khi đạt ngưỡng; điểm thấp / kho ảnh lỗi / trùng nội dung → giữ nháp");
+
   // BLOG-9d: chưa có nguồn NotFair → tự nhập không làm gì, không lỗi.
   const { tuDongNotFair } = await import("../src/lib/tu-dong-notfair");
   const td = await tuDongNotFair(payload, undefined as never);
