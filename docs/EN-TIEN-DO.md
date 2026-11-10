@@ -8,7 +8,7 @@
 
 | GĐ | Việc | Trạng thái | Ghi chú |
 |---|---|---|---|
-| 0 | Kiểm kê + golden | **xong** (2026-11-10) | golden bản Việt 10.425 lượt gọi, ổn định 2 lần chạy liên tiếp; khung test 5.2 chạy |
+| 0 | Kiểm kê + golden | **xong** (2026-11-10) | golden bản Việt 10.509 lượt gọi (chụp lại sau khi merge main #246–#249), ổn định 2 lần chạy liên tiếp; khung test 5.2 chạy |
 | 1 | Nền web (rewrite, catalog nhiều ngôn ngữ, khung đầy đủ) | **đang** — lõi xong (2026-11-10), còn 6 việc ở mục 3b | làm tiếp theo |
 | 2 | Nền engine (tên riêng, `L()` cho khuôn chung, `slug_en`) | chưa | 9 nhóm route |
 | 3 | Bát tự | chưa | 5 nhóm route |
@@ -22,7 +22,7 @@
 | 11 | QC tổng | chưa | |
 
 Số nhóm route = số khoá còn trong `CHUA_XONG` của `engine/tests/test_dau_ra_en.py` (hiện **90**). Làm xong route nào, test
-tự báo "đã sạch — xoá khỏi CHUA_XONG".
+tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2026-11-10) thêm 4 nhóm: `thanso.tuan`, `thanso.hom_nay_hai` (GĐ 7), `push.tuan` (GĐ 9), `kb.chuyen_gia` (GĐ 10) → **94**.
 
 ## 1. Quyết định của chủ dự án (hỏi một lần, 2026-11-10)
 
@@ -164,4 +164,5 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
 ## 7. Nhật ký
 
 - **2026-11-10 — GĐ 0**: đọc nền đa ngôn ngữ, kiểm kê, dựng golden bản Việt + khung test tiếng Anh, hỏi 4 câu quyết định.
+- **2026-11-10 — merge main #246–#249**: golden chỉ lệch `thanso.hom_nay` (main cố ý đổi) → chụp lại 10.509 lượt, thêm lượt gọi cho route mới (`/v1/thanso/tuan`, `/hom-nay-hai`, `/v1/push/tuan`); mục lục KB hết 500 ở bản Anh (mục 4.3 phần 500 đã sửa, chữ vẫn là GĐ 2); CI: golden không gửi `x-nguoi-goi`.
 - **2026-11-10 — GĐ 1 (lõi)**: bảng đường dẫn, rewrite / 308 trong proxy, ngữ cảnh ngôn ngữ, catalog có chiều `en`, định dạng `Intl`, nút đổi ngôn ngữ về trang tương đương, thương hiệu Hieuban.

@@ -35,7 +35,7 @@ CHUA_XONG: dict[str, int] = {
     "thanso.ba_goc_nhin": 7, "thanso.ban_do": 7, "thanso.cap_so": 7, "thanso.chaldea": 7, "thanso.chu_ky": 7, "thanso.do_nhay": 7,
     "thanso.doi_chieu_nam": 7, "thanso.hom_nay": 7, "thanso.hop_doi": 7, "thanso.luan_giai": 7, "thanso.ngu_canh": 7,
     "thanso.nhip": 7, "thanso.noi_dau": 7, "thanso.the_ngay": 7, "thanso.tong_hop": 7,
-    "tarot.the": 7, "goi_y_cheo": 7, "ban_do_5_mang": 7,
+    "tarot.the": 7, "goi_y_cheo": 7, "ban_do_5_mang": 7, "thanso.tuan": 7, "thanso.hom_nay_hai": 7,
     # GĐ 8 — nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới
     "lich": 8, "lich.chon_ngay": 8, "lich.doi": 8, "lich.nam": 8, "lich.ngay": 8, "lich.ngay_tot": 8,
     "lich.thang": 8, "lich.thang_post": 8, "lich.viec_thang": 8, "nam": 8, "nam.cuoi_hoi": 8, "nam.sinh_con": 8, "nam.tuoi": 8,
@@ -43,7 +43,9 @@ CHUA_XONG: dict[str, int] = {
     "tuoi.xong_dat_nam": 8, "nhan_tuong": 8, "nhan_tuong.hoi": 8, "nhan_tuong.luan_giai": 8, "chan_dung": 8,
     "thoi_gian_toi": 8, "sinh_nuoc_ngoai": 8,
     # GĐ 9 — Web Push theo ngôn ngữ
-    "push": 9, "push.sang_nay": 9, "push.thang_hai_la_so": 9,
+    "push": 9, "push.sang_nay": 9, "push.thang_hai_la_so": 9, "push.tuan": 9,
+    # GĐ 10 — tác giả / EEAT tiếng Anh
+    "kb.chuyen_gia": 10,
 }
 # Route mà khung dữ kiện vi ↔ en CỐ Ý khác (đầu vào là CHỮ theo ngôn ngữ, hoặc quyết định đã ghi):
 KHUNG_BO_QUA = {

@@ -239,6 +239,11 @@ def luot_goi(client=None) -> list[Luot]:
         p(f"thanso.nhip.{k}", "/v1/thanso/nhip", {**d, "ngay_xem": XEM})
         p(f"thanso.hom_nay.{k}", "/v1/thanso/hom-nay", {**d, "ngay_xem": XEM, "y_dinh": ["cong_viec", "tinh_cam"][: i % 3]})
         p(f"thanso.chu_ky.{k}", "/v1/thanso/chu-ky", {**d, "tu_nam": 2024, "den_nam": 2030})
+        # BT-UI đợt 2–3 (main #248–#249): tuần này của bạn, hôm nay của hai người
+        p(f"thanso.tuan.{k}", "/v1/thanso/tuan", {**d, "ngay_xem": XEM, "gioi_tinh": ls["gender"]})
+        kia0 = _dmy(HO_SO[(i + 7) % len(HO_SO)])
+        p(f"thanso.hom_nay_hai.{k}", "/v1/thanso/hom-nay-hai", {"ngay": d["ngay"], "thang": d["thang"], "kia_ngay": kia0["ngay"], "kia_thang": kia0["thang"],
+                                                                 "kia_nam": kia0["nam"], "ngay_xem": XEM})
         p(f"thanso.doi_chieu_nam.{k}", "/v1/thanso/doi-chieu-nam", {**d, "cac_nam": [2015, 2020, 2024]})
         kia = HO_SO[(i + 7) % len(HO_SO)]
         qh = ("nguoi_yeu", "ban_be", "dong_nghiep", "sep", "gia_dinh")[i % 5]
@@ -354,6 +359,10 @@ def luot_goi(client=None) -> list[Luot]:
         p(f"phongthuy.thang_nay.{nx}.{toa or do}", "/v1/phongthuy/thang-nay", {"huong_do": do, "huong": None if do is not None else "Nam", "toa": toa, "nam_xay": nx, "ngay_xem": XEM})
     p("phongthuy.doc_anh.tat", "/v1/phongthuy/doc-anh", {"anh": [{"du_lieu": "AAAA", "loai": "image/jpeg"}]})
     p("push.sang_nay", "/v1/push/sang-nay", {"ngay_xem": "2026-12-01", "ngay_sinh": ["24-10", "17-05", "29-02"], "nha": [{"huong_do": 180.0}, {"huong": "Đông"}]})
+    g("kb.chuyen_gia.duc_luan", "/v1/kb/chuyen-gia/duc-luan")
+    for ngay_push in ("2026-11-09", "2026-11-10"):     # thứ Hai (có nội dung) và thứ Ba (null)
+        p(f"push.tuan.{ngay_push}", "/v1/push/tuan", {"ngay_xem": ngay_push, "nguoi": [{"ngay_sinh": "1988-10-24"}, {"ngay_sinh": "1990-05-17"}]})
+    p("nhan_tuong.doc_anh.tat", "/v1/nhan-tuong/doc-anh", {"anh": [{"du_lieu": "AAAA", "loai": "image/jpeg", "goc": "thang"}], "dong_y": True})
     p("push.sang_nay.tet", "/v1/push/sang-nay", {"ngay_xem": "2027-02-06", "ngay_sinh": ["01-01"], "nha": []})
 
     # ---- Kinh Dịch
