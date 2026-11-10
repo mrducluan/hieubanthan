@@ -462,7 +462,7 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
             # SK-1 (2026-11-04): năm đích nằm trong "Năm nên chú ý sức khoẻ hơn" của chương Sức khoẻ (cùng hàm báo cáo)
             from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
             sk = next((x for x in _chuong_cua(bc, "suc_khoe")["hop"]
-                       if x.get("tieu_de") == skn.TIEU_DE_HOP and nam in (x.get("cac_nam") or [])), None)
+                       if x.get("tieu_de") == skn.tieu_de_hop() and nam in (x.get("cac_nam") or [])), None)
             if sk:
                 hop3.append(_gan(sk, nguon))
             # CY-1: năm đích nằm trong "Năm nên chú ý {mảng} hơn" của các chương mảng đời (cùng hàm báo cáo)

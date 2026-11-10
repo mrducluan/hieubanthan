@@ -156,7 +156,8 @@ def _tt(x: str) -> str:
 
 
 def _nhom_t(g: str) -> str:
-    return _ten.ten("nhom_thap_than", g)
+    """Tên ngắn của nhóm thập thần ("Tỷ Kiếp" → "Companions") — bản Việt nguyên chữ."""
+    return L(f"bt_ds.nhom.{slug(g)}", g)
 
 
 def _than_t(kl: str) -> str:
@@ -1031,38 +1032,46 @@ def _chuong_ngu_hanh(pt: dict, cm: dict, hoc: tuple, da_dung: set[str]) -> dict:
              ky=L("bt_ds.nh.cu_cach_ky", f"; kỵ {nhom_ky}", ds=ky_t) if nhom_ky else "")]
     ma_h = lambda ds: "+".join(slug(h) for h in ds) or "khong"  # noqa: E731
     if h1 and set(h1) == set(h2):
-        cand.append(_hop("loi_khuyen", f"Hai cách cùng gợi ý: {', '.join(h1)}",
-                         f"Cả hai cách đọc (cân sức mạnh và theo tháng sinh) cùng gợi ý thêm {', '.join(h1)}. "
+        cand.append(_hop("loi_khuyen", L("bt_ds.nh.hai_cach_td", f"Hai cách cùng gợi ý: {', '.join(h1)}", ds=_ds_hanh(h1)),
+                         L("bt_ds.nh.hai_cach_nd", f"Cả hai cách đọc (cân sức mạnh và theo tháng sinh) cùng gợi ý thêm {', '.join(h1)}. ",
+                           ds=_ds_hanh(h1))
                          + _goi_y_hanh(h1), cu1 + cu2, _mm("ngu_hanh", "hai_cach", ma_h(h1), "khuyen"), 2.0))
     else:
-        mua = " và mùa sinh" if pt["dieu"] else ""
-        nd1 = (f"Cách đọc thứ nhất cân sức mạnh của bạn{mua}: nên bù {', '.join(h1)}. " + _goi_y_hanh(h1) if h1 else
-               "Cách đọc thứ nhất thấy sức của bạn đã khá cân, chưa cần bù hành nào rõ.")
-        cand.append(_hop("loi_khuyen", f"Cách 1 — cân sức: {', '.join(h1) or 'đã khá cân'}", nd1, cu1,
+        mua = L("bt_ds.nh.mua", " và mùa sinh") if pt["dieu"] else ""
+        nd1 = (L("bt_ds.nh.cach1_nd", f"Cách đọc thứ nhất cân sức mạnh của bạn{mua}: nên bù {', '.join(h1)}. ", mua=mua,
+                 ds=_ds_hanh(h1)) + _goi_y_hanh(h1) if h1 else
+               L("bt_ds.nh.cach1_can", "Cách đọc thứ nhất thấy sức của bạn đã khá cân, chưa cần bù hành nào rõ."))
+        cand.append(_hop("loi_khuyen", L("bt_ds.nh.cach1_td", f"Cách 1 — cân sức: {', '.join(h1) or 'đã khá cân'}",
+                                         ds=_ds_hanh(h1) or L("bt_ds.nh.da_kha_can", "đã khá cân")), nd1, cu1,
                          _mm("ngu_hanh", "cach1", ma_h(h1), "khuyen"), 2.0))
-        nd2 = (f"Cách đọc thứ hai dựa vào tháng sinh: nên dựa vào {', '.join(h2)}. "
+        nd2 = (L("bt_ds.nh.cach2_nd", f"Cách đọc thứ hai dựa vào tháng sinh: nên dựa vào {', '.join(h2)}. ", ds=_ds_hanh(h2))
                + _goi_y_hanh([h for h in h2 if h not in h1] or h2) if h2 else
-               "Cách đọc thứ hai chưa có gợi ý riêng cho tháng sinh của bạn.")
-        cand.append(_hop("loi_khuyen", f"Cách 2 — theo tháng sinh: {', '.join(h2) or 'chưa rõ'}", nd2, cu2,
+               L("bt_ds.nh.cach2_chua", "Cách đọc thứ hai chưa có gợi ý riêng cho tháng sinh của bạn."))
+        cand.append(_hop("loi_khuyen", L("bt_ds.nh.cach2_td", f"Cách 2 — theo tháng sinh: {', '.join(h2) or 'chưa rõ'}",
+                                         ds=_ds_hanh(h2) or L("bt_ds.nh.chua_ro", "chưa rõ")), nd2, cu2,
                          _mm("ngu_hanh", "cach2", ma_h(h2), "khuyen"), 1.9))
     x = cm["ngu_hanh"]
     hop, xem_lai = _chon("ngu_hanh", cand, hoc, da_dung, x["muc"], [cu_diem])
     tom = _tom("ngu_hanh", x["muc"])
     khac = ("" if not h1 or set(h1) == set(h2) else
-            " Hai cách ở đây gợi ý khác nhau — hãy thử từng cách trong vài tuần và giữ cách bạn thấy hợp.")
+            L("bt_ds.nh.khac", " Hai cách ở đây gợi ý khác nhau — hãy thử từng cách trong vài tuần và giữ cách bạn thấy hợp."))
     doan = [tom, _cau_muc_mang(x),
-            "Có hai cách đọc phần năng lượng cần thêm, đến từ hai trường phái; hệ thống không chọn thay bạn." + khac,
-            battu_kb.luu_y("ung_dung") or "Màu, hướng, nghề theo ngũ hành là cách ứng dụng dân gian, dùng để tham khảo."]
+            L("bt_ds.nh.hai_truong_phai", "Có hai cách đọc phần năng lượng cần thêm, đến từ hai trường phái; hệ thống không chọn thay bạn.")
+            + khac,
+            battu_kb.luu_y("ung_dung") or L("bt_ds.nh.ung_dung", "Màu, hướng, nghề theo ngũ hành là cách ứng dụng dân gian, dùng để tham khảo.")]
     bd = {"hanh": [{"hanh": h, "diem": pt["diem"][h], "ty_le": round(tl[h], 3), "nhom": kb.nhom(g) or g,
                     "trang_thai": "thieu" if pt["diem"][h] == 0 else "thua" if tl[h] >= NGUONG_DAM else "vua",
                     "cach_1": h in h1, "cach_2": h in h2}
                    for h in THU_TU_HANH for g in [next(g for g in NHOM if pt["nhom_hanh"][g] == h)]],
           "nhat_chu": ls["nhat_chu"]["ngu_hanh"]}
-    hai_cach = {"cach_1": {"ten": "Cân sức mạnh của bạn", "hanh": h1}, "cach_2": {"ten": "Theo tháng sinh", "hanh": h2,
-                                                                                 "ma": pt["cach_2"]["ma"]},
+    hai_cach = {"cach_1": {"ten": L("bt_ds.nh.ten_cach_1", "Cân sức mạnh của bạn"), "hanh": h1},
+                "cach_2": {"ten": L("bt_ds.nh.ten_cach_2", "Theo tháng sinh"), "hanh": h2, "ma": pt["cach_2"]["ma"]},
                 "chon": None}
-    can_cu = [cu_diem, f"Thân {ls['than']['ket_luan']}: tỉ lệ trợ lực {ls['than']['ti_le']:g} — {THANG_DIEM['mo_ta']}",
-              *cu1, *cu2, *x["can_cu"], "Hai cách lấy dụng thần trình bày song song, hệ thống không tự chọn.",
+    can_cu = [cu_diem, L("bt_ds.nh.cu_than", f"Thân {ls['than']['ket_luan']}: tỉ lệ trợ lực {ls['than']['ti_le']:g} — {THANG_DIEM['mo_ta']}",
+                         than=_hoa_dau(_than_t(ls["than"]["ket_luan"])), ti=f"{ls['than']['ti_le']:g}",
+                         mo_ta=L("battu.thang_diem", THANG_DIEM["mo_ta"])),
+              *cu1, *cu2, *x["can_cu"],
+              L("bt_ds.nh.song_song", "Hai cách lấy dụng thần trình bày song song, hệ thống không tự chọn."),
               *xem_lai]
     return _chuong("ngu_hanh", x["muc"], tom, hop, doan, can_cu, kb.cau_tu_soi("ngu_hanh"), bieu_do=bd,
                    hai_cach=hai_cach, **_hai_cach_muc(x))
@@ -1096,16 +1105,17 @@ _VAN_TC_MAC_DINH = {
 
 def _ngay_vn(iso: str) -> str:
     d = dt.date.fromisoformat(iso)
-    return f"{d.day}/{d.month}/{d.year}"
+    return f"{d.day}/{d.month}/{d.year}" if ngon_ngu.la_viet() else _d_en(d, nam=True)
 
 
 def _thang_nam(iso: str) -> str:
     d = dt.date.fromisoformat(iso)
-    return f"{d.month}/{d.year}"
+    return f"{d.month}/{d.year}" if ngon_ngu.la_viet() else f"{_THANG_EN[d.month - 1]} {d.year}"
 
 
 def _khoang_ngay(g: dict) -> str:
-    return f"từ {_ngay_vn(g['tu_ngay'])} đến {_ngay_vn(g['den_ngay'])}"
+    return L("bt_ds.khoang_ngay", f"từ {_ngay_vn(g['tu_ngay'])} đến {_ngay_vn(g['den_ngay'])}", tu=_ngay_vn(g["tu_ngay"]),
+             den=_ngay_vn(g["den_ngay"]))
 
 
 def _so_nam_tu(tu_ngay: str, ngay_xem: dt.date) -> int:
@@ -1122,7 +1132,8 @@ def _sap_doi_van(tgb: list[dict], vt: dict, ngay_xem: dt.date) -> str:
     bd = dt.date.fromisoformat(tgb[k]["tu_ngay"])
     if not (ngay_xem < bd <= ngay_xem + dt.timedelta(days=366)):
         return ""
-    return f"Từ ngày {_ngay_vn(tgb[k]['tu_ngay'])}, bạn sang giai đoạn mười năm mới, xoay quanh {tgb[k]['chu_de']}."
+    return L("bt_ds.sap_doi_van", f"Từ ngày {_ngay_vn(tgb[k]['tu_ngay'])}, bạn sang giai đoạn mười năm mới, xoay quanh {tgb[k]['chu_de']}.",
+             ngay=_ngay_vn(tgb[k]["tu_ngay"]), chu_de=tgb[k]["chu_de"])
 
 
 def van_tham_chieu(tgb: list[dict], ngay_xem: dt.date) -> dict:
@@ -1140,7 +1151,7 @@ def van_tham_chieu(tgb: list[dict], ngay_xem: dt.date) -> dict:
 def _cau_van(vt: dict, khoa: str, g: dict, **bien) -> str:
     """Câu KB theo trạng thái vận (thiếu → câu mặc định trong mã), điền biến của vận tham chiếu `g`."""
     o = kb.van_tham_chieu(vt["trang_thai"]) or {}
-    mau = o.get(khoa) or _VAN_TC_MAC_DINH[vt["trang_thai"]][khoa]
+    mau = o.get(khoa) or L(f"bt_ds.van_tc.{vt['trang_thai']}.{khoa}", _VAN_TC_MAC_DINH[vt["trang_thai"]][khoa])
     if not mau:
         return ""
     return mau.format(**{"chu_de": g["chu_de"], "tu_tuoi": g["tu_tuoi"], "den_tuoi": g["den_tuoi"],
@@ -1151,12 +1162,15 @@ def _chuong_cuoc_doi(tgb: list[dict], nam_xem: int, hoc: tuple, vt: dict) -> dic
     cand = []
 
     def cau(g: dict) -> str:
-        return f"Từ {g['tu_tuoi']} đến {g['den_tuoi']} tuổi ({_thang_nam(g['tu_ngay'])}–{_thang_nam(g['den_ngay'])}): " \
-               f"{g['chu_de']}."
+        return L("bt_ds.cd.cau", f"Từ {g['tu_tuoi']} đến {g['den_tuoi']} tuổi ({_thang_nam(g['tu_ngay'])}–{_thang_nam(g['den_ngay'])}): "
+                 f"{g['chu_de']}.", tu_tuoi=g["tu_tuoi"], den_tuoi=g["den_tuoi"], tu=_thang_nam(g["tu_ngay"]),
+                 den=_thang_nam(g["den_ngay"]), chu_de=g["chu_de"])
 
     def cu(g: dict) -> list[str]:
-        return [f"Đại vận {g['cung']} ({g['thap_than']}), {_khoang_ngay(g)}; "
-                f"cách 1: {kb.nhan_muc(g['muc_cach_1']).lower()}, cách 2: {kb.nhan_muc(g['muc_cach_2']).lower()}"]
+        return [L("bt_ds.cd.cu", f"Đại vận {g['cung']} ({g['thap_than']}), {_khoang_ngay(g)}; "
+                  f"cách 1: {kb.nhan_muc(g['muc_cach_1']).lower()}, cách 2: {kb.nhan_muc(g['muc_cach_2']).lower()}",
+                  cung=g["cung"], tt=_tt(g["thap_than"]), khoang=_khoang_ngay(g), muc_1=kb.nhan_muc(g["muc_cach_1"]).lower(),
+                  muc_2=kb.nhan_muc(g["muc_cach_2"]).lower())]
 
     def ma(g: dict, vai: str) -> str:
         return _mm("cuoc_doi", slug(g["thap_than"]), g["muc"], vai)
@@ -1180,30 +1194,34 @@ def _chuong_cuoc_doi(tgb: list[dict], nam_xem: int, hoc: tuple, vt: dict) -> dic
     thuan = next((g for g in sap if g["muc"] == "thuan"), None)
     chu_dong = next((g for g in sap if g["muc"] == "can_chu_dong"), None)
     if thuan:
-        cand.append(_hop("diem_manh", "Giai đoạn nên tận dụng", f"{cau(thuan)} {thuan['mot_cau']}", cu(thuan),
+        cand.append(_hop("diem_manh", L("bt_ds.cd.tan_dung", "Giai đoạn nên tận dụng"), f"{cau(thuan)} {thuan['mot_cau']}", cu(thuan),
                          ma(thuan, "manh"), 2.0, tu_tuoi=thuan["tu_tuoi"], den_tuoi=thuan["den_tuoi"]))
     if chu_dong:
         k = _van_kb(chu_dong["thap_than"])
-        cand.append(_hop("luu_y", "Giai đoạn nên chuẩn bị trước",
-                         f"{cau(chu_dong)} {k['de_vap'] or 'Việc thường cần nhiều sức hơn bạn tính.'}", cu(chu_dong),
+        cand.append(_hop("luu_y", L("bt_ds.cd.chuan_bi", "Giai đoạn nên chuẩn bị trước"),
+                         f"{cau(chu_dong)} {k['de_vap'] or L('bt_ds.cd.nhieu_suc', 'Việc thường cần nhiều sức hơn bạn tính.')}",
+                         cu(chu_dong),
                          ma(chu_dong, "vap"), 2.0, huong=k["nen_chu_dong"], tu_tuoi=chu_dong["tu_tuoi"],
                          den_tuoi=chu_dong["den_tuoi"]))
     hop, xem_lai = _ap_hoc(cand, *hoc)
     muc = g0["muc"]
     tom = _cau_van(vt, "cuoc_doi_tom", g0, so_van=so_van)
     dem = {m: sum(g["muc"] == m for g in tgb) for m in ("thuan", "can_bang", "can_chu_dong")}
-    phan = [f"{n} giai đoạn {kb.nhan_muc(m).lower()}" for m, n in dem.items() if n]
+    phan = [L("bt_ds.cd.phan_mot" if n == 1 else "bt_ds.cd.phan", f"{n} giai đoạn {kb.nhan_muc(m).lower()}", n=n,
+              muc=kb.nhan_muc(m).lower()) for m, n in dem.items() if n]
     n_khac = sum(g["hai_cach_khac"] for g in tgb)
-    doan = [tom, f"Trên dòng thời gian của bạn có {', '.join(phan)}."
-            + (" Giai đoạn cần lưu ý không phải lúc kém may — chỉ là lúc nên chuẩn bị trước nhiều hơn."
+    doan = [tom, L("bt_ds.cd.dong", f"Trên dòng thời gian của bạn có {', '.join(phan)}.", ds=danh_sach(phan))
+            + (L("bt_ds.cd.khong_kem_may", " Giai đoạn cần lưu ý không phải lúc kém may — chỉ là lúc nên chuẩn bị trước nhiều hơn.")
                if dem["can_chu_dong"] else ""),
-            (f"Có {n_khac} giai đoạn mà hai cách đọc cho kết quả khác nhau; ở những giai đoạn đó, đối chiếu với điều "
-             "bạn thực sự trải qua để chọn cách hợp với mình." if n_khac else
-             "Ở mọi giai đoạn, hai cách đọc cho cùng một kết quả.")]
-    can_cu = [f"{g['tu_tuoi']}–{g['den_tuoi']} tuổi: đại vận {g['cung']} ({g['thap_than']})" for g in tgb]
-    can_cu += ["Tuổi tính theo năm khởi vận (tuổi tròn); mỗi đại vận mười năm",
-               "Mức mỗi đại vận: can 1 điểm, chi 2 điểm theo hành cần thêm / nên bớt của từng cách", *xem_lai]
-    can_cu.append(f"Đại vận tham chiếu lúc xem: {g0['cung']} ({vt['trang_thai']})")
+            (L("bt_ds.cd.khac", f"Có {n_khac} giai đoạn mà hai cách đọc cho kết quả khác nhau; ở những giai đoạn đó, đối chiếu với điều "
+               "bạn thực sự trải qua để chọn cách hợp với mình.", n=n_khac) if n_khac else
+             L("bt_ds.cd.giong", "Ở mọi giai đoạn, hai cách đọc cho cùng một kết quả."))]
+    can_cu = [L("bt_ds.cd.cu_van", f"{g['tu_tuoi']}–{g['den_tuoi']} tuổi: đại vận {g['cung']} ({g['thap_than']})",
+                tu_tuoi=g["tu_tuoi"], den_tuoi=g["den_tuoi"], cung=g["cung"], tt=_tt(g["thap_than"])) for g in tgb]
+    can_cu += [L("bt_ds.cd.tuoi", "Tuổi tính theo năm khởi vận (tuổi tròn); mỗi đại vận mười năm"),
+               L("bt_ds.cd.muc_van", "Mức mỗi đại vận: can 1 điểm, chi 2 điểm theo hành cần thêm / nên bớt của từng cách"), *xem_lai]
+    can_cu.append(L("bt_ds.cd.van_tc", f"Đại vận tham chiếu lúc xem: {g0['cung']} ({vt['trang_thai']})", cung=g0["cung"],
+                    tt=L(f"bt_ds.vt.{vt['trang_thai']}", vt["trang_thai"])))
     return _chuong("cuoc_doi", muc, tom, hop, doan, can_cu, kb.cau_tu_soi("cuoc_doi"), van_tham_chieu=dict(vt))
 
 
@@ -1213,9 +1231,10 @@ def _chuong_tinh_cam(cm: dict, pt: dict, hoc: tuple, da_dung: set[str]) -> dict:
     tt = ls["thap_than_chi"][2][0]
     o = kb.phoi_ngau(tt)
     them = []
-    cu = f"Chi ngày {ls['tru'][2]['chi']} (cung phối ngẫu), bản khí {ls['tang_can'][2][0]} là {tt}"
+    cu = L("bt_ds.tc.cu", f"Chi ngày {ls['tru'][2]['chi']} (cung phối ngẫu), bản khí {ls['tang_can'][2][0]} là {tt}",
+           chi=_ten.ten("chi", ls["tru"][2]["chi"]), can=_ten.ten("can", ls["tang_can"][2][0]), tt=_tt(tt))
     if o and o.get("y"):
-        them.append(_hop_kb("tinh_cam", o, f"phoi.{slug(tt)}", [cu], 1.7, "Kiểu gắn bó của bạn"))
+        them.append(_hop_kb("tinh_cam", o, f"phoi.{slug(tt)}", [cu], 1.7, L("bt_ds.tc.md", "Kiểu gắn bó của bạn")))
     ten = "Cô Thần" if pt["gioi_tinh"] == "nam" else "Quả Tú"
     h = _hop_than_sat("tinh_cam", ten, pt)
     if h:
@@ -1228,8 +1247,9 @@ def _chuong_su_nghiep(cm: dict, pt: dict, hoc: tuple, da_dung: set[str]) -> dict
     k = kb.cach(cc["ma"]) or {}
     them = []
     if k.get("nghe"):
-        them.append(_hop("loi_khuyen", "Kiểu việc hợp với bạn", k["nghe"],
-                         [f"Cách cục {cc['ten']} (Tử Bình Chân Thuyên)"], _mm("su_nghiep", "nghe", cc["ma"], "khuyen"),
+        them.append(_hop("loi_khuyen", L("bt_ds.sn.nghe_td", "Kiểu việc hợp với bạn"), k["nghe"],
+                         [L("bt_ds.sn.nghe_cu", f"Cách cục {cc['ten']} (Tử Bình Chân Thuyên)", cach=_ten.ten("cach_cuc_bt", cc["ten"]))],
+                         _mm("su_nghiep", "nghe", cc["ma"], "khuyen"),
                          1.0))
     return _chuong_mang("su_nghiep", cm, pt, hoc, da_dung, them)
 
@@ -1239,7 +1259,7 @@ def _kham_them(loi: str, hanh: str) -> str:
     he = skn.kb.he_hanh(hanh)
     if not he or he["kham"] in loi:
         return loi
-    return f"{loi.rstrip('.')}; nên {he['kham']} định kỳ."
+    return L("bt_ds.sk.kham_them", f"{loi.rstrip('.')}; nên {he['kham']} định kỳ.", loi=loi.rstrip("."), kham=he["kham"])
 
 
 def _chuong_suc_khoe(pt: dict, cm: dict, hoc: tuple, dong: list[dict] | None = None) -> dict:
@@ -1249,26 +1269,33 @@ def _chuong_suc_khoe(pt: dict, cm: dict, hoc: tuple, dong: list[dict] | None = N
     lon = max(THU_TU_HANH, key=lambda h: (tl[h], -THU_TU_HANH.index(h)))
     if tl[lon] >= NGUONG_DAM:
         k = kb.hanh(lon)
-        nd = (f"Sách xưa gắn {lon} với {_hai_phan(k['co_the'])} — nên chăm sóc phòng ngừa." if k.get("co_the") else "")
-        nd = f"{nd} {k.get('nhip_thua') or ''}".strip() or "Bạn nên để ý nhịp nghỉ của mình."
-        cand.append(_hop("luu_y", "Phần cơ thể nên chăm sóc", nd, [f"{lon} chiếm {_pct(tl[lon])} điểm ngũ hành (thừa)"],
+        nd = (L("bt_ds.sk.thua_nd", f"Sách xưa gắn {lon} với {_hai_phan(k['co_the'])} — nên chăm sóc phòng ngừa.", hanh=_hanh(lon),
+                co_the=_hai_phan(k["co_the"])) if k.get("co_the") else "")
+        nd = f"{nd} {k.get('nhip_thua') or ''}".strip() or L("bt_ds.sk.nhip_nghi", "Bạn nên để ý nhịp nghỉ của mình.")
+        cand.append(_hop("luu_y", L("bt_ds.sk.thua_td", "Phần cơ thể nên chăm sóc"), nd,
+                         [L("bt_ds.sk.thua_cu", f"{lon} chiếm {_pct(tl[lon])} điểm ngũ hành (thừa)", hanh=_hanh(lon), pct=_pct(tl[lon]))],
                          _mm("suc_khoe", "thua", slug(lon), "vap"), 2.0,
-                         huong=_kham_them(k.get("loi_khuyen_sk") or _SK_MAC_DINH, lon)))
+                         huong=_kham_them(k.get("loi_khuyen_sk") or L("bt_ds.sk_mac_dinh", _SK_MAC_DINH), lon)))
     for i, h in enumerate([h for h in THU_TU_HANH if pt["diem"][h] == 0][:2]):
         k = kb.hanh(h)
-        nd = (f"Phần sách xưa gắn với {h} là {_hai_phan(k['co_the'])} — nên chăm sóc phòng ngừa." if k.get("co_the") else "")
-        nd = f"{nd} {k.get('nhip_thieu') or ''} {_kham_them(k.get('loi_khuyen_sk') or _SK_MAC_DINH, h)}".strip()
-        cand.append(_hop("loi_khuyen", f"Phần nên bù thêm: {h}", nd, [f"{h}: 0 điểm (thiếu)"],
+        nd = (L("bt_ds.sk.thieu_nd", f"Phần sách xưa gắn với {h} là {_hai_phan(k['co_the'])} — nên chăm sóc phòng ngừa.",
+                hanh=_hanh(h), co_the=_hai_phan(k["co_the"])) if k.get("co_the") else "")
+        nd = f"{nd} {k.get('nhip_thieu') or ''} {_kham_them(k.get('loi_khuyen_sk') or L('bt_ds.sk_mac_dinh', _SK_MAC_DINH), h)}".strip()
+        cand.append(_hop("loi_khuyen", L("bt_ds.sk.thieu_td", f"Phần nên bù thêm: {h}", hanh=_hanh(h)), nd,
+                         [L("bt_ds.sk.thieu_cu", f"{h}: 0 điểm (thiếu)", hanh=_hanh(h))],
                          _mm("suc_khoe", "thieu", slug(h), "khuyen"), 1.8 - 0.01 * i))
     o = kb.suc_khoe_than(pt["than"]) or {}
-    cand.append(_hop("loi_khuyen", "Nhịp sức của riêng bạn",
-                     f"{o.get('y') or 'Bạn nên để ý nhịp nghỉ của mình.'} {o.get('loi_khuyen') or _SK_MAC_DINH}",
-                     [f"Thân {pt['ls']['than']['ket_luan']} (tỉ lệ trợ lực {pt['ls']['than']['ti_le']:g})"],
+    cand.append(_hop("loi_khuyen", L("bt_ds.sk.nhip_td", "Nhịp sức của riêng bạn"),
+                     f"{o.get('y') or L('bt_ds.sk.nhip_nghi', 'Bạn nên để ý nhịp nghỉ của mình.')} "
+                     f"{o.get('loi_khuyen') or L('bt_ds.sk_mac_dinh', _SK_MAC_DINH)}",
+                     [L("bt_ds.sk.than_cu", f"Thân {pt['ls']['than']['ket_luan']} (tỉ lệ trợ lực {pt['ls']['than']['ti_le']:g})",
+                        than=_hoa_dau(_than_t(pt["ls"]["than"]["ket_luan"])), ti=f"{pt['ls']['than']['ti_le']:g}")],
                      _mm("suc_khoe", "than", pt["than"], "khuyen"), 1.5))
     if len(cand) < 2:
-        cand.append(_hop("loi_khuyen", "Nếp sinh hoạt nên giữ",
-                         f"{kb.suc_khoe_can_doi() or 'Năm hành của bạn khá cân.'} {_SK_MAC_DINH}",
-                         ["Không hành nào thiếu hẳn hay vượt 30%"], _mm("suc_khoe", "can_doi", "khuyen"), 1.0))
+        cand.append(_hop("loi_khuyen", L("bt_ds.sk.nep_td", "Nếp sinh hoạt nên giữ"),
+                         f"{kb.suc_khoe_can_doi() or L('bt_ds.sk.kha_can', 'Năm hành của bạn khá cân.')} "
+                         f"{L('bt_ds.sk_mac_dinh', _SK_MAC_DINH)}",
+                         [L("bt_ds.sk.can_doi_cu", "Không hành nào thiếu hẳn hay vượt 30%")], _mm("suc_khoe", "can_doi", "khuyen"), 1.0))
     # SK-1 (2026-11-04): năm đè lên hành yếu nhất / dồn thêm hành thừa — hộp đọc thêm, không đổi mức chương.
     if dong:
         ds_nam = skn.battu_nam(tl, {g["nam"]: g["muc"] for g in dong}, dong[0]["nam"], len(dong), NGUONG_DAM)
@@ -1278,10 +1305,10 @@ def _chuong_suc_khoe(pt: dict, cm: dict, hoc: tuple, dong: list[dict] | None = N
     hop, xem_lai = _ap_hoc(cand, *hoc)
     chung = kb.suc_khoe_chung()
     tom = _tom("suc_khoe", x["muc"])
-    doan = [tom, "Các gợi ý dưới đây xoay quanh nếp ăn ngủ, vận động và khám định kỳ — làm đều mỗi ngày quan "
-                 "trọng hơn làm nhiều một lúc.", chung]
+    doan = [tom, L("bt_ds.sk.doan", "Các gợi ý dưới đây xoay quanh nếp ăn ngủ, vận động và khám định kỳ — làm đều mỗi ngày quan "
+                   "trọng hơn làm nhiều một lúc."), chung]
     can_cu = [*(c for h in hop for c in h["can_cu"]),
-              "Mức chương này theo độ lệch ngũ hành: thiếu ≥ 2 hành hoặc một hành ≥ 45% là cần lưu ý",
+              L("bt_ds.sk.muc_cu", "Mức chương này theo độ lệch ngũ hành: thiếu ≥ 2 hành hoặc một hành ≥ 45% là cần lưu ý"),
               battu_kb.luu_y("suc_khoe"), *xem_lai]
     return _chuong("suc_khoe", x["muc"], tom, hop, doan, can_cu, kb.cau_tu_soi("suc_khoe"), mien_tru=chung)
 
@@ -1300,61 +1327,73 @@ def _chuong_nam_nay(pt: dict, tgb: list[dict], ngay_xem: dt.date, hoc: tuple, vt
     cau_muc = _cau_van(vt, "nam_nay_muc", g, **bien)
     nd = _cau_van(vt, "nam_nay_hop", g, **bien)
     if cau_muc:                                  # vận đã qua: không nói mức, không so hai cách
-        nd += f" {cau_muc}" + _cau_hai_cach(g["muc_cach_1"], g["muc_cach_2"], "cả mười năm")
+        nd += f" {cau_muc}" + _cau_hai_cach(g["muc_cach_1"], g["muc_cach_2"], L("bt_ds.hai_cach.cho_muoi_nam", "cả mười năm"))
     sap_doi = _sap_doi_van(tgb, vt, ngay_xem)
     if sap_doi:
         nd += f" {sap_doi}"
     tieu = _cau_van(vt, "nam_nay_tieu_de", g, **bien)
-    can_cu.append(f"Đại vận {g['cung']} ({g['thap_than']}), {_khoang_ngay(g)} — {tt_van}")
+    can_cu.append(L("bt_ds.nn.cu_van", f"Đại vận {g['cung']} ({g['thap_than']}), {_khoang_ngay(g)} — {tt_van}", cung=g["cung"],
+                    tt=_tt(g["thap_than"]), khoang=_khoang_ngay(g), trang_thai=L(f"bt_ds.vt.{tt_van}", tt_van)))
     ma_van = (_mm("nam_nay", "van", slug(g["thap_than"]), "da_qua") if tt_van == "da_qua_van_cuoi" else
               _mm("nam_nay", "van", slug(g["thap_than"]), g["muc"]))
-    cand.append(_hop("thoi_diem", tieu if len(tieu) <= 60 else _VAN_TC_MAC_DINH[tt_van]["cuoc_doi_dau"], nd,
+    cand.append(_hop("thoi_diem", tieu if len(tieu) <= 60 else L(f"bt_ds.van_tc.{tt_van}.cuoc_doi_dau",
+                                                                    _VAN_TC_MAC_DINH[tt_van]["cuoc_doi_dau"]), nd,
                      can_cu[-1:], ma_van, 3.0, **({"muc": g["muc"]} if cau_muc else {})))
     m1, m2, muc_n = muc_hai_cach(pt, ln["can"], ln["chi"])
     k = _van_kb(ln["thap_than"])
     # Câu của năm dùng câu ngắn theo tháng/năm (KB `thang`), KHÔNG chép câu "nên làm" của giai đoạn mười năm (chương
     # Các giai đoạn đã dùng) — hai chương không lặp câu.
-    goi_nam = kb.thang(ln["thap_than"]) or "hợp dồn sức cho việc chính"
-    cu_n = f"Lưu niên {nam} {ln['can']} {ln['chi']} ({ln['thap_than']}); cách 1: {kb.nhan_muc(m1).lower()}, cách 2: " \
-           f"{kb.nhan_muc(m2).lower()}"
+    goi_nam = kb.thang(ln["thap_than"]) or L("bt_ds.nn.goi_nam", "hợp dồn sức cho việc chính")
+    cu_n = L("bt_ds.nn.cu_nam", f"Lưu niên {nam} {ln['can']} {ln['chi']} ({ln['thap_than']}); cách 1: {kb.nhan_muc(m1).lower()}, cách 2: "
+             f"{kb.nhan_muc(m2).lower()}", nam=nam, cc=_cc(ln["can"], ln["chi"]), tt=_tt(ln["thap_than"]),
+             muc_1=kb.nhan_muc(m1).lower(), muc_2=kb.nhan_muc(m2).lower())
     can_cu.append(cu_n)
-    cand.append(_hop("thoi_diem", "Năm nay",
-                     f"Năm nay việc hay xoay quanh {k['chu_de']}; với bạn, năm ở mức {kb.nhan_muc(muc_n).lower()}. "
-                     f"Cả năm {goi_nam}.{_cau_hai_cach(m1, m2, 'năm nay')}",
+    cand.append(_hop("thoi_diem", L("bt_ds.nn.nam_nay_td", "Năm nay"),
+                     L("bt_ds.nn.nam_nay_nd", f"Năm nay việc hay xoay quanh {k['chu_de']}; với bạn, năm ở mức {kb.nhan_muc(muc_n).lower()}. "
+                       f"Cả năm {goi_nam}.", chu_de=k["chu_de"], muc=kb.nhan_muc(muc_n).lower(), goi=goi_nam)
+                     + _cau_hai_cach(m1, m2, L("bt_ds.hai_cach.cho_nam_nay", "năm nay")),
                      [cu_n], _mm("nam_nay", "nam", slug(ln["thap_than"]), muc_n), 2.9, muc=muc_n))
     qh = [q for q in ln["quan_he"] if 2 in q["tru"] and not q["loai"].startswith("can ")]
-    can_cu += [q["mo_ta"] for q in ln["quan_he"]]
+    can_cu += [_mo_ta(q) for q in ln["quan_he"]]
     loai_qh = ("xung" if any(q["loai"] in _XUNG for q in qh) else "hinh" if any(q["loai"] in _HINH for q in qh)
                else "hop" if any(q["loai"] in _HOP for q in qh) else None)
     if loai_qh:
         o = kb.nam_quan_he(loai_qh) or {}
         if o.get("y"):
             cand.append(_hop("diem_manh" if loai_qh == "hop" else "luu_y",
-                             o.get("tieu_de") or _tieu_de(o["y"], "Điều riêng của năm nay"),
+                             o.get("tieu_de") or _tieu_de(o["y"], L("bt_ds.nn.rieng_md", "Điều riêng của năm nay")),
                              o["y"] if loai_qh != "hop" else f"{o['y']} {o.get('loi_khuyen') or ''}".strip(),
-                             [q["mo_ta"] for q in qh], _mm("nam_nay", "nam", loai_qh), 2.5, huong=o.get("loi_khuyen")))
+                             [_mo_ta(q) for q in qh], _mm("nam_nay", "nam", loai_qh), 2.5, huong=o.get("loi_khuyen")))
     thang_cau = []
     for i, t in enumerate(ba_thang_tiet(pt, ngay_xem), 1):
         a, b, m = muc_thang(pt, t["can"], t["chi"])
-        goi = (f"tháng xoay quanh {_van_kb(t['thap_than'])['chu_de']}" if t["thap_than"] == ln["thap_than"]
-               else kb.thang(t["thap_than"]) or "hợp làm việc chính, giữ nhịp đều")
-        ten = f"Từ {t['tu'].day}/{t['tu'].month} đến {t['den'].day}/{t['den'].month}"
-        cu_t = f"Lưu nguyệt (tháng theo tiết) {t['can']} {t['chi']} ({t['thap_than']}), từ {t['tu'].isoformat()}"
+        goi = (L("bt_ds.nn.thang_xoay", f"tháng xoay quanh {_van_kb(t['thap_than'])['chu_de']}",
+                 chu_de=_van_kb(t["thap_than"])["chu_de"]) if t["thap_than"] == ln["thap_than"]
+               else kb.thang(t["thap_than"]) or L("bt_ds.nn.thang_md", "hợp làm việc chính, giữ nhịp đều"))
+        ten = L("bt_ds.nn.thang_ten", f"Từ {t['tu'].day}/{t['tu'].month} đến {t['den'].day}/{t['den'].month}",
+                tu=_d_en(t["tu"]), den=_d_en(t["den"]))
+        cu_t = L("bt_ds.nn.cu_thang", f"Lưu nguyệt (tháng theo tiết) {t['can']} {t['chi']} ({t['thap_than']}), từ {t['tu'].isoformat()}",
+                 cc=_cc(t["can"], t["chi"]), tt=_tt(t["thap_than"]), tu=t["tu"].isoformat())
         can_cu.append(cu_t)
-        cand.append(_hop("thoi_diem", ten, f"{_hoa_dau(goi)}.{_cau_hai_cach(a, b, 'tháng này')}", [cu_t],
-                         _mm("nam_nay", f"thang{i}", slug(t["thap_than"]), m), 2.0 - 0.1 * i, muc=m,
+        cand.append(_hop("thoi_diem", ten, f"{_hoa_dau(goi)}.{_cau_hai_cach(a, b, L('bt_ds.hai_cach.cho_thang', 'tháng này'))}",
+                         [cu_t], _mm("nam_nay", f"thang{i}", slug(t["thap_than"]), m), 2.0 - 0.1 * i, muc=m,
                          tu=t["tu"].isoformat(), den=t["den"].isoformat()))
-        thang_cau.append(f"{ten[0].lower()}{ten[1:]} {kb.nhan_muc(m).lower()}")
+        thang_cau.append(L("bt_ds.nn.thang_cau", f"{ten[0].lower()}{ten[1:]} {kb.nhan_muc(m).lower()}", ten=ten,
+                           muc=kb.nhan_muc(m).lower()))
     hop, xem_lai = _ap_hoc(_sap(cand), *hoc)
     tom = _cau_van(vt, "nam_nay_tom", g, **bien)
     if tt_van == "dang_di":
-        tom += (f"; năm nay thêm chuyện {k['chu_de']}" if k["chu_de"] != g["chu_de"] else "") + "."
+        tom += (L("bt_ds.nn.tom_them", f"; năm nay thêm chuyện {k['chu_de']}", chu_de=k["chu_de"])
+                if k["chu_de"] != g["chu_de"] else "") + "."
     else:
-        tom += f"; năm nay xoay quanh {k['chu_de']}."
-    doan = [tom, (f"Ba tháng tới (tính theo tiết): {'; '.join(thang_cau)}." if thang_cau else ""),
-            ("Khi các lớp nói khác nhau, ưu tiên mười năm trước, rồi đến năm, rồi mới đến tháng." if tt_van == "dang_di"
-             else "Khi năm và tháng nói khác nhau, ưu tiên năm trước, rồi mới đến tháng.")]
-    can_cu += ["Ưu tiên: đại vận > lưu niên > lưu nguyệt", "Năm tính từ Lập xuân, tháng tính từ ngày giao tiết",
+        tom += L("bt_ds.nn.tom_xoay", f"; năm nay xoay quanh {k['chu_de']}.", chu_de=k["chu_de"])
+    doan = [tom, (L("bt_ds.nn.ba_thang", f"Ba tháng tới (tính theo tiết): {'; '.join(thang_cau)}.", ds="; ".join(thang_cau))
+                  if thang_cau else ""),
+            (L("bt_ds.nn.uu_tien_3", "Khi các lớp nói khác nhau, ưu tiên mười năm trước, rồi đến năm, rồi mới đến tháng.")
+             if tt_van == "dang_di"
+             else L("bt_ds.nn.uu_tien_2", "Khi năm và tháng nói khác nhau, ưu tiên năm trước, rồi mới đến tháng."))]
+    can_cu += [L("bt_ds.uu_tien", "Ưu tiên: đại vận > lưu niên > lưu nguyệt"),
+               L("bt_ds.nn.lap_xuan", "Năm tính từ Lập xuân, tháng tính từ ngày giao tiết"),
                *xem_lai]
     # Ưu tiên đại vận > lưu niên: chưa khởi vận / đã qua vận cuối thì lớp cao nhất đang có là năm.
     muc_ch = g["muc"] if tt_van == "dang_di" else muc_n
@@ -1414,38 +1453,53 @@ def dong_muoi_nam(pt: dict, tgb: list[dict], nam0: int, nam_sinh: int, vt: dict 
         if muc == "can_chu_dong":
             o = _loi_bt(tt, "can", gd)
             mang = o.get("mang")
-            y = o.get("y") or f"việc quanh {_van_kb(tt)['chu_de']} dễ vướng hơn thường lệ."
+            y = o.get("y") or L("bt_ds.vh.y_can", f"việc quanh {_van_kb(tt)['chu_de']} dễ vướng hơn thường lệ.",
+                                chu_de=_van_kb(tt)["chu_de"])
             nen_tranh, nen_lam = o.get("tranh"), o.get("lam")
         elif muc == "thuan":
             o = _loi_bt(tt, "thuan", gd)
             mang = o.get("mang")
-            y = o.get("y") or f"việc quanh {_van_kb(tt)['chu_de']} dễ thuận."
+            y = o.get("y") or L("bt_ds.vh.y_thuan", f"việc quanh {_van_kb(tt)['chu_de']} dễ thuận.", chu_de=_van_kb(tt)["chu_de"])
             nen_lam = o.get("lam")
         else:
-            y = f"nhịp khá đều; việc hay xoay quanh {_van_kb(tt)['chu_de']}."
+            y = L("bt_ds.vh.y_deu", f"nhịp khá đều; việc hay xoay quanh {_van_kb(tt)['chu_de']}.", chu_de=_van_kb(tt)["chu_de"])
         nhan = o.get("nhan") if muc != "can_bang" else None
-        y = f"Năm {nam}, {_thuong_dau(y)}" + _cau_hai_cach(m1, m2, f"năm {nam}")
-        cu = [f"Năm {nam} {ln['can']} {ln['chi']} (tính từ Lập xuân, {ln['thap_than']}); cách 1: "
-              f"{kb.nhan_muc(m1).lower()}, cách 2: {kb.nhan_muc(m2).lower()} → {kb.nhan_muc(muc)}"]
+        y = L("bt_ds.vh.y", f"Năm {nam}, {_thuong_dau(y)}", nam=nam, y=_thuong_dau(y)) \
+            + _cau_hai_cach(m1, m2, L("bt_ds.hai_cach.cho_nam", f"năm {nam}", nam=nam))
+        cu = [L("bt_ds.vh.cu_nam", f"Năm {nam} {ln['can']} {ln['chi']} (tính từ Lập xuân, {ln['thap_than']}); cách 1: "
+                f"{kb.nhan_muc(m1).lower()}, cách 2: {kb.nhan_muc(m2).lower()} → {kb.nhan_muc(muc)}", nam=nam,
+                cc=_cc(ln["can"], ln["chi"]), tt=_tt(ln["thap_than"]), muc_1=kb.nhan_muc(m1).lower(),
+                muc_2=kb.nhan_muc(m2).lower(), muc=kb.nhan_muc(muc))]
         if g_dv:
-            cu.append(f"Năm {nam} nằm trong đại vận {g_dv['cung']} ({kb.nhan_muc(g_dv['muc']).lower()})")
+            cu.append(L("bt_ds.vh.cu_van", f"Năm {nam} nằm trong đại vận {g_dv['cung']} ({kb.nhan_muc(g_dv['muc']).lower()})",
+                        nam=nam, cung=g_dv["cung"], muc=kb.nhan_muc(g_dv["muc"]).lower()))
         if doi:
-            cu.append(f"Ngày {_ngay_vn(doi['tu_ngay'])} sang đại vận {doi['cung']}")
-        cu += [f"Năm {nam}: {q['mo_ta']}" for q in q_ngay]
+            cu.append(L("bt_ds.vh.cu_doi", f"Ngày {_ngay_vn(doi['tu_ngay'])} sang đại vận {doi['cung']}",
+                        ngay=_ngay_vn(doi["tu_ngay"]), cung=doi["cung"]))
+        cu += [L("bt_ds.vh.cu_qh", f"Năm {nam}: {q['mo_ta']}", nam=nam, mo_ta=_mo_ta(q)) for q in q_ngay]
         dg = [x for x in co if x in dsc.CO_DAN_GIAN]
         if dg:
-            cu.append(f"Chi trụ năm {chi_sinh}, chi năm {ln['chi']}: " + ", ".join(dsc.NHAN_CO[x] for x in dg)
-                      + " (tập quán dân gian, không đổi mức)")
+            cu.append(L("bt_ds.vh.cu_dan_gian", f"Chi trụ năm {chi_sinh}, chi năm {ln['chi']}: " + ", ".join(dsc.NHAN_CO[x] for x in dg)
+                        + " (tập quán dân gian, không đổi mức)", chi_sinh=_ten.ten("chi", chi_sinh),
+                        chi=_ten.ten("chi", ln["chi"]), ds=", ".join(dsc.nhan_co(x) for x in dg)))
         ra.append({"nam": nam, "tuoi": tuoi, "muc": muc, "nhan_muc": kb.nhan_muc(muc), "muc_cach_1": m1, "muc_cach_2": m2,
                    "hai_cach_khac": m1 != m2, "hien_tai": k == 0,
                    "co": [dsc.co_ra(x, kb.van_han_loi("co", x)) for x in co],
                    # MT-ĐS B3: tuổi mụ theo NĂM ÂM LỊCH VIỆT (như /xem-sao-han và Tử vi), không theo năm dương
-                   "sao_han": dsc.sao_han_nam(nam - (nam_sinh_am or nam_sinh) + 1, ls.get("_gioi_tinh")),
+                   "sao_han": _sao_han_hien(dsc.sao_han_nam(nam - (nam_sinh_am or nam_sinh) + 1, ls.get("_gioi_tinh"))),
                    "mang": mang, "y": y, "nen_tranh": nen_tranh, "nen_lam": nen_lam, "can_cu": cu,
                    "_tt": tt, "_gd": gd, "_k": k, "_diem": _SO_MUC[m1] + _SO_MUC[m2], "_nhan": nhan})
     for g in ra:
         g["_hop"] = _hop_nam(g)
     return ra
+
+
+def _sao_han_hien(x: dict | None) -> dict | None:
+    """Tên sao hạn Cửu Diệu + Bát hạn (tục lệ, CALC trả tên Việt) theo ngôn ngữ — chỉ để hiện, không phải mã."""
+    if not x or ngon_ngu.la_viet():
+        return x
+    return {**x, "sao": L(f"bt_ds.sao_han.{slug(x['sao'])}", x["sao"]),
+            "han": L(f"bt_ds.bat_han.{slug(x['han'])}", x["han"]) if x.get("han") else x.get("han")}
 
 
 def _hop_nam(g: dict) -> list[dict]:
@@ -1454,15 +1508,19 @@ def _hop_nam(g: dict) -> list[dict]:
     gd = "nho" if g["_gd"] == "nho" else g["_gd"]
     if g["muc"] == "can_chu_dong":
         o = _loi_bt(g["_tt"], "can", g["_gd"])
-        nd = g["y"] + (f" Nên tránh: {_thuong_dau(g['nen_tranh'])}." if g["nen_tranh"] else "")
-        ra.append(_hop("luu_y", f"Năm {nam}: {o.get('nhan') or 'nên đi chậm'}", nd, g["can_cu"][:2],
+        nd = g["y"] + (L("bt_ds.vh.nen_tranh", f" Nên tránh: {_thuong_dau(g['nen_tranh'])}.", y=_thuong_dau(g["nen_tranh"]))
+                       if g["nen_tranh"] else "")
+        ra.append(_hop("luu_y", L("bt_ds.vh.td_can", f"Năm {nam}: {o.get('nhan') or 'nên đi chậm'}", nam=nam,
+                                  nhan=o.get("nhan") or L("bt_ds.vh.di_cham", "nên đi chậm")), nd, g["can_cu"][:2],
                        _mm("van_han", slug(TT_NHOM[g["_tt"]]) if gd == "nho" else tt, "can", gd), 3.0 - 0.01 * k,
-                       huong=f"Nên làm: {_thuong_dau(g['nen_lam'])}." if g["nen_lam"] else None, _vai="can", nam=nam,
-                       muc=g["muc"]))
+                       huong=L("bt_ds.vh.nen_lam", f"Nên làm: {_thuong_dau(g['nen_lam'])}.", y=_thuong_dau(g["nen_lam"]))
+                       if g["nen_lam"] else None, _vai="can", nam=nam, muc=g["muc"]))
     elif g["muc"] == "thuan":
         o = _loi_bt(g["_tt"], "thuan", g["_gd"])
-        nd = g["y"] + (f" Nên làm: {_thuong_dau(g['nen_lam'])}." if g["nen_lam"] else "")
-        ra.append(_hop("diem_manh", f"Năm {nam}: {o.get('nhan') or 'năm thuận'}", nd, g["can_cu"][:2],
+        nd = g["y"] + (L("bt_ds.vh.nen_lam_cau", f" Nên làm: {_thuong_dau(g['nen_lam'])}.", y=_thuong_dau(g["nen_lam"]))
+                       if g["nen_lam"] else "")
+        ra.append(_hop("diem_manh", L("bt_ds.vh.td_thuan", f"Năm {nam}: {o.get('nhan') or 'năm thuận'}", nam=nam,
+                                      nhan=o.get("nhan") or L("bt_ds.vh.nam_thuan", "năm thuận")), nd, g["can_cu"][:2],
                        _mm("van_han", slug(TT_NHOM[g["_tt"]]) if gd == "nho" else tt, "thuan", "nho" if gd == "nho" else ""),
                        2.5 - 0.01 * k, _vai="thuan",
                        nam=nam, muc=g["muc"]))
@@ -1482,14 +1540,16 @@ def muoi_hai_thang(pt: dict, ngay_xem: dt.date) -> list[dict]:
              else kb.van_han_loi("thap_than", t["thap_than"])) or {}
         ra.append({"tu": t["tu"].isoformat(), "den": t["den"].isoformat(), "muc": m, "nhan_muc": kb.nhan_muc(m),
                    "hai_cach_khac": a != b, "mang": o.get("mang") or _van_kb(t["thap_than"])["chu_de"],
-                   "_cu": f"Tháng tiết {t['can']} {t['chi']} ({t['thap_than']}) từ {t['tu'].isoformat()}: cách 1 "
-                          f"{kb.nhan_muc(a).lower()}, cách 2 {kb.nhan_muc(b).lower()}"})
+                   "_cu": L("bt_ds.vh.cu_thang", f"Tháng tiết {t['can']} {t['chi']} ({t['thap_than']}) từ {t['tu'].isoformat()}: cách 1 "
+                            f"{kb.nhan_muc(a).lower()}, cách 2 {kb.nhan_muc(b).lower()}", cc=_cc(t["can"], t["chi"]),
+                            tt=_tt(t["thap_than"]), tu=t["tu"].isoformat(), muc_1=kb.nhan_muc(a).lower(),
+                            muc_2=kb.nhan_muc(b).lower())})
     return ra
 
 
 def _ngay(iso: str) -> str:
     d = dt.date.fromisoformat(iso)
-    return f"{d.day}/{d.month}"
+    return f"{d.day}/{d.month}" if ngon_ngu.la_viet() else _d_en(d)
 
 
 def _hop_du_phong(dong: list[dict], hop: list[dict]) -> list[dict]:
@@ -1501,16 +1561,18 @@ def _hop_du_phong(dong: list[dict], hop: list[dict]) -> list[dict]:
     if con:
         g = min(con, key=lambda x: (x["_diem"], x["nam"]))
         o = _loi_bt(g["_tt"], "can", g["_gd"])
-        ra.append(_hop("luu_y", f"Năm {g['nam']}: năm nên giữ nhịp hơn cả", g["y"], g["can_cu"][:1],
-                       _mm("van_han", "giu_nhip", slug(g["_tt"])), 1.1, nam=g["nam"], muc=g["muc"],
-                       huong=f"Nên làm: {_thuong_dau(o['lam'])}." if o.get("lam") else None))
+        ra.append(_hop("luu_y", L("bt_ds.vh.td_giu_nhip", f"Năm {g['nam']}: năm nên giữ nhịp hơn cả", nam=g["nam"]), g["y"],
+                       g["can_cu"][:1], _mm("van_han", "giu_nhip", slug(g["_tt"])), 1.1, nam=g["nam"], muc=g["muc"],
+                       huong=L("bt_ds.vh.nen_lam", f"Nên làm: {_thuong_dau(o['lam'])}.", y=_thuong_dau(o["lam"]))
+                       if o.get("lam") else None))
         da.add(g["nam"])
     con = [g for g in dong if g["nam"] not in da]
     if con and len(hop) + len(ra) < 2:
         g = max(con, key=lambda x: (x["_diem"], -x["nam"]))
         o = _loi_bt(g["_tt"], "thuan", g["_gd"])
-        ra.append(_hop("diem_manh", f"Năm {g['nam']}: năm đáng dồn sức nhất",
-                       g["y"] + (f" Nên làm: {_thuong_dau(o['lam'])}." if o.get("lam") else ""), g["can_cu"][:1],
+        ra.append(_hop("diem_manh", L("bt_ds.vh.td_don_suc", f"Năm {g['nam']}: năm đáng dồn sức nhất", nam=g["nam"]),
+                       g["y"] + (L("bt_ds.vh.nen_lam_cau", f" Nên làm: {_thuong_dau(o['lam'])}.", y=_thuong_dau(o["lam"]))
+                                 if o.get("lam") else ""), g["can_cu"][:1],
                        _mm("van_han", "don_suc", slug(g["_tt"])), 1.0, nam=g["nam"], muc=g["muc"]))
     return ra
 
@@ -1522,12 +1584,16 @@ def _chuong_van_han(dong: list[dict], thang: list[dict], hoc: tuple) -> dict:
     if cham or thuan_t:
         nd = []
         if cham:
-            nd.append("Tháng nên đi chậm: " + "; ".join(f"từ {_ngay(t['tu'])} đến {_ngay(t['den'])} ({t['mang']})"
-                                                        for t in cham[:4]) + ".")
+            nd.append(L("bt_ds.vh.thang_cham", "Tháng nên đi chậm: " + "; ".join(f"từ {_ngay(t['tu'])} đến {_ngay(t['den'])} ({t['mang']})"
+                                                                              for t in cham[:4]) + ".",
+                        ds="; ".join(L("bt_ds.vh.khoang_mang", f"từ {_ngay(t['tu'])} đến {_ngay(t['den'])} ({t['mang']})",
+                                       tu=_ngay(t["tu"]), den=_ngay(t["den"]), mang=t["mang"]) for t in cham[:4])))
         if thuan_t:
-            nd.append("Tháng thuận để bắt đầu việc mới: " + "; ".join(
-                f"từ {_ngay(t['tu'])} đến {_ngay(t['den'])}" for t in thuan_t[:3]) + ".")
-        them.append(_hop("thoi_diem", "Mười hai tháng tới", " ".join(nd), [t["_cu"] for t in thang],
+            nd.append(L("bt_ds.vh.thang_thuan", "Tháng thuận để bắt đầu việc mới: " + "; ".join(
+                f"từ {_ngay(t['tu'])} đến {_ngay(t['den'])}" for t in thuan_t[:3]) + ".",
+                ds="; ".join(L("bt_ds.vh.khoang", f"từ {_ngay(t['tu'])} đến {_ngay(t['den'])}", tu=_ngay(t["tu"]),
+                               den=_ngay(t["den"])) for t in thuan_t[:3])))
+        them.append(_hop("thoi_diem", L("bt_ds.vh.muoi_hai_thang", "Mười hai tháng tới"), " ".join(nd), [t["_cu"] for t in thang],
                          _mm("van_han", "thang", "cham" if cham else "thuan"), 2.25))
     hop, xem_lai = dsc.chon_hop_van_han(dong, hoc, them)
     hop += _hop_du_phong(dong, hop)
@@ -1535,35 +1601,42 @@ def _chuong_van_han(dong: list[dict], thang: list[dict], hoc: tuple) -> dict:
     can = [g for g in dong if g["muc"] == "can_chu_dong"]
     if thuan:
         g = thuan[0]
-        tom = f"Trong mười năm tới, năm thuận gần nhất là {g['nam']}: {g['_nhan'] or 'hợp để dồn sức'}."
+        tom = L("bt_ds.vh.tom_thuan", f"Trong mười năm tới, năm thuận gần nhất là {g['nam']}: {g['_nhan'] or 'hợp để dồn sức'}.",
+                nam=g["nam"], nhan=g["_nhan"] or L("bt_ds.vh.don_suc", "hợp để dồn sức"))
     else:
         g = max(dong, key=lambda x: (x["_diem"], -x["nam"]))
-        tom = f"Mười năm tới của bạn không có năm nào vượt hẳn; năm đáng dồn sức nhất là {g['nam']}."
+        tom = L("bt_ds.vh.tom_deu", f"Mười năm tới của bạn không có năm nào vượt hẳn; năm đáng dồn sức nhất là {g['nam']}.",
+                nam=g["nam"])
     if can:
-        cau_cham = "Những năm nên đi chậm: " + ", ".join(f"{g['nam']} ({g['mang'] or 'việc chính'})" for g in can[:4]) + "."
+        cau_cham = L("bt_ds.vh.cau_cham", "Những năm nên đi chậm: " + ", ".join(f"{g['nam']} ({g['mang'] or 'việc chính'})"
+                                                                               for g in can[:4]) + ".",
+                     ds=", ".join(f"{g['nam']} ({g['mang'] or L('bt_ds.vh.viec_chinh', 'việc chính')})" for g in can[:4]))
     else:
         g = min(dong, key=lambda x: (x["_diem"], x["nam"]))
-        cau_cham = f"Không có năm nào phải đi chậm hẳn; năm nên giữ nhịp hơn cả là {g['nam']}."
+        cau_cham = L("bt_ds.vh.khong_cham", f"Không có năm nào phải đi chậm hẳn; năm nên giữ nhịp hơn cả là {g['nam']}.",
+                     nam=g["nam"])
     co = [(g["nam"], c["nhan"]) for g in dong for c in g["co"] if c["ma"] in ("nam_tuoi", "xung_tuoi")]
-    dg = (f"Theo tập quán dân gian, {' và '.join(f'{n} là {t}' for n, t in co)} của bạn; xem như lời nhắc giữ nếp, "
-          "không phải điềm báo." if co else "")
+    dg = (L("bt_ds.vh.dan_gian", f"Theo tập quán dân gian, {' và '.join(f'{n} là {t}' for n, t in co)} của bạn; xem như lời nhắc giữ nếp, "
+            "không phải điềm báo.", ds=danh_sach([L("bt_ds.vh.nam_la", f"{n} là {t}", nam=n, nhan=t) for n, t in co]))
+          if co else "")
     xn = [g["nam"] for g in dong if any(c["ma"] == "xung_ngay" for c in g["co"])]
     if xn:
-        dg += (f" {' và '.join(map(str, xn))} dễ có xáo trộn về chỗ ở hoặc chuyện của người gần nhất; thay đổi nào cũng "
-               "nên bàn trước với người trong nhà.")
+        dg += L("bt_ds.vh.xung_ngay", f" {' và '.join(map(str, xn))} dễ có xáo trộn về chỗ ở hoặc chuyện của người gần nhất; thay đổi nào cũng "
+                "nên bàn trước với người trong nhà.", ds=danh_sach([str(n) for n in xn]))
     n_khac = sum(g["hai_cach_khac"] for g in dong)
-    khac = (f"Có {n_khac} năm hai cách đọc cho kết quả khác nhau; ở những năm đó, thử nhỏ trước khi làm lớn."
+    khac = (L("bt_ds.vh.khac_mot" if n_khac == 1 else "bt_ds.vh.khac",
+              f"Có {n_khac} năm hai cách đọc cho kết quả khác nhau; ở những năm đó, thử nhỏ trước khi làm lớn.", n=n_khac)
             if n_khac else "")
-    can_cu = ["Ưu tiên: đại vận > lưu niên > lưu nguyệt",
-              "Mức mỗi năm / tháng: can 1 điểm, chi 2 điểm theo hành cần thêm (+) / nên bớt (−) của từng cách; ≥ 1 thuận, "
-              "≤ −1 cần lưu ý; hai cách gộp như đại vận (ngược nhau → cân bằng, nói rõ)",
+    can_cu = [L("bt_ds.uu_tien", "Ưu tiên: đại vận > lưu niên > lưu nguyệt"),
+              L("bt_ds.vh.cu_muc", "Mức mỗi năm / tháng: can 1 điểm, chi 2 điểm theo hành cần thêm (+) / nên bớt (−) của từng cách; ≥ 1 thuận, "
+                "≤ −1 cần lưu ý; hai cách gộp như đại vận (ngược nhau → cân bằng, nói rõ)"),
               *(c for g in dong for c in g["can_cu"]), *xem_lai,
-              "Năm tuổi, xung tuổi, va tuổi, tam tai: tập quán dân gian theo chi trụ năm, không đổi mức của năm",
-              "Năm tính từ Lập xuân, tháng tính từ ngày giao tiết (giờ Việt Nam)"]
+              L("bt_ds.vh.cu_dan_gian_chung", "Năm tuổi, xung tuổi, va tuổi, tam tai: tập quán dân gian theo chi trụ năm, không đổi mức của năm"),
+              L("bt_ds.vh.cu_lap_xuan", "Năm tính từ Lập xuân, tháng tính từ ngày giao tiết (giờ Việt Nam)")]
     dong_ra = [{k: v for k, v in g.items() if not k.startswith("_")} for g in dong]
     thang_ra = [{k: v for k, v in t.items() if not k.startswith("_")} for t in thang]
     return _chuong("van_han", None, tom, hop, [tom, cau_cham, dg, khac], can_cu,
-                   "Năm nào trong mười năm tới bạn muốn dành cho việc lớn nhất, và năm nào nên giữ sức?",
+                   L("bt_ds.vh.soi", "Năm nào trong mười năm tới bạn muốn dành cho việc lớn nhất, và năm nào nên giữ sức?"),
                    dong_nam=dong_ra, thang_toi=thang_ra)
 
 
@@ -1583,31 +1656,35 @@ def _chuong_loi_khuyen(ds_chuong: list[dict], muc: str, hoc: tuple) -> dict:
                     continue
                 ra.append(h)
                 mang.add(h["_ch"])
-        return ra
+        # EN-ALL: bỏ hộp trùng "hướng xử lý" (so theo CHỮ) — chọn theo đúng quyết định bản Việt
+        chi_so = kh.quyet(("bt_ds.loi_khuyen.ba", loai), [next(i for i, x in enumerate(nguon) if x is h) for h in ra])
+        return [nguon[i] for i in chi_so if i < len(nguon)]
 
     manh, vap = ba("diem_manh"), ba("luu_y")
     viec = list(dict.fromkeys([h["huong_xu_ly"] for h in vap] or
                               [h.get("loi_khuyen") for h in manh if h.get("loi_khuyen")]))[:3]
     cand = []
     if manh:
-        cand.append(_hop("diem_manh", "Ba điểm mạnh nên dùng", " ".join(_cau_dau(h["noi_dung"]) for h in manh),
+        cand.append(_hop("diem_manh", L("bt_ds.lk.ba_manh", "Ba điểm mạnh nên dùng"), " ".join(_cau_dau(h["noi_dung"]) for h in manh),
                          [c for h in manh for c in h["can_cu"][:1]], _mm("loi_khuyen", "ba", "manh"), 3.0))
     if vap:
-        cand.append(_hop("luu_y", "Ba điều nên để ý", " ".join(_cau_dau(h["noi_dung"]) for h in vap),
+        cand.append(_hop("luu_y", L("bt_ds.lk.ba_vap", "Ba điều nên để ý"), " ".join(_cau_dau(h["noi_dung"]) for h in vap),
                          [c for h in vap for c in h["can_cu"][:1]], _mm("loi_khuyen", "ba", "vap"), 2.9,
-                         huong="Nên gỡ từng điều theo ba việc ngay dưới." if viec else None))
+                         huong=L("bt_ds.lk.go", "Nên gỡ từng điều theo ba việc ngay dưới.") if viec else None))
     if viec:
-        cand.append(_hop("loi_khuyen", "Ba việc nên làm", " ".join(viec), [], _mm("loi_khuyen", "ba", "khuyen"), 2.8))
+        cand.append(_hop("loi_khuyen", L("bt_ds.lk.ba_viec", "Ba việc nên làm"), " ".join(viec), [],
+                         _mm("loi_khuyen", "ba", "khuyen"), 2.8))
     if len(cand) < 2:
-        cand.append(_hop("loi_khuyen", "Một việc nhỏ mỗi ngày",
-                         "Nên chọn một thói quen nhỏ hợp với điểm mạnh của bạn và làm đều trong ba mươi ngày.", [],
+        cand.append(_hop("loi_khuyen", L("bt_ds.lk.mot_viec_td", "Một việc nhỏ mỗi ngày"),
+                         L("bt_ds.lk.mot_viec_nd", "Nên chọn một thói quen nhỏ hợp với điểm mạnh của bạn và làm đều trong ba mươi ngày."), [],
                          _mm("loi_khuyen", "mot_viec", "khuyen"), 1.0))
     hop, xem_lai = _ap_hoc(cand, *hoc)
-    tom = "Gom lại từ các chương trên: đây là điều bạn nên dùng, nên để ý và nên làm."
-    dau = ("chính thói quen của bạn" if vap[0]["_ch"] == "tong_quan" else f"chuyện {TEN_MANG.get(vap[0]['_ch'], '')}") \
+    tom = L("bt_ds.lk.tom", "Gom lại từ các chương trên: đây là điều bạn nên dùng, nên để ý và nên làm.")
+    dau = (L("bt_ds.lk.dau_thoi_quen", "chính thói quen của bạn") if vap[0]["_ch"] == "tong_quan"
+           else L("bt_ds.lk.dau_chuyen", f"chuyện {TEN_MANG.get(vap[0]['_ch'], '')}", mang=_ten_mang(vap[0]["_ch"]))) \
         if vap else ""
-    doan = [tom, (f"Nếu tuần này chỉ làm được một việc, hãy bắt đầu từ {dau} — việc nhỏ làm đều có ích hơn kế hoạch "
-                  "lớn bỏ dở." if dau else "")]
+    doan = [tom, (L("bt_ds.lk.mot_viec", f"Nếu tuần này chỉ làm được một việc, hãy bắt đầu từ {dau} — việc nhỏ làm đều có ích hơn kế hoạch "
+                    "lớn bỏ dở.", dau=dau) if dau else "")]
     return _chuong("loi_khuyen", muc, tom, hop, doan, [c for h in hop for c in h["can_cu"]] + xem_lai,
                    kb.cau_tu_soi("loi_khuyen"))
 

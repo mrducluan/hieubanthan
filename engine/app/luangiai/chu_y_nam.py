@@ -22,6 +22,7 @@ from __future__ import annotations
 import re
 
 from app.kb import chu_y_kb as kb
+from app.kb import ten as _ten
 from app.kb.loi import L, danh_sach
 
 SO_NAM = 10
@@ -207,7 +208,7 @@ def battu_nam(ls: dict, dong: list[dict], mang: str) -> list[dict]:
         ly = None
         if g.get("_tt") in (o.get("thap_than") or []):
             ly = (re.sub(r"[^a-z0-9]+", "_", _khong_dau(g["_tt"])).strip("_"),
-                  o["ly"].format(tt=g["_tt"], chi=ln["chi"]))
+                  o["ly"].format(tt=_tt_bt(g["_tt"]), chi=_ten.ten("chi", ln["chi"])))
         elif o.get("quan_he"):
             tru = _TRU[o["quan_he"]]
             loai = _XUNG if o["quan_he"] in ("nam", "ngay_xung", "thang_gio") else _XUNG | _HINH
@@ -215,20 +216,37 @@ def battu_nam(ls: dict, dong: list[dict], mang: str) -> list[dict]:
                       and any(i in q["tru"] for i in tru)), None)
             if q:
                 ly = ("xung_" + o["quan_he"] if q["loai"] in _XUNG else "hinh_" + o["quan_he"],
-                      o["ly"].format(tt=g.get("_tt"), chi=ln["chi"]) + f" ({q['mo_ta']})")
+                      o["ly"].format(tt=_tt_bt(g.get("_tt")), chi=_ten.ten("chi", ln["chi"])) + f" ({_mo_ta_bt(q)})")
         if not ly:
             continue
-        dau = f"Năm {g['nam']} ({ln['can']} {ln['chi']}, tính từ Lập xuân): "
+        dau = L("bt_ds.cyn.dau", f"Năm {g['nam']} ({ln['can']} {ln['chi']}, tính từ Lập xuân): ", nam=g["nam"],
+                cc=f"{_ten.ten('can', ln['can'])} {_ten.ten('chi', ln['chi'])}")
         cu = [f"{dau}{ly[1]}",
-              f"{dau}hai cách lấy dụng thần đều không thấy năm này thuận (cách 1: {_nhan(g.get('muc_cach_1'))}, "
-              f"cách 2: {_nhan(g.get('muc_cach_2'))})"]
+              L("bt_ds.cyn.hai_cach", f"{dau}hai cách lấy dụng thần đều không thấy năm này thuận (cách 1: {_nhan(g.get('muc_cach_1'))}, "
+                f"cách 2: {_nhan(g.get('muc_cach_2'))})", dau=dau, muc_1=_nhan(g.get("muc_cach_1")),
+                muc_2=_nhan(g.get("muc_cach_2")))]
         ra.append({"nam": g["nam"], "tuoi": g.get("tuoi"), "ly_do": [ly[0]], "can_cu": cu,
                    "hien_tai": bool(g.get("hien_tai")), "mang": mang})
     return ra
 
 
 def _nhan(m: str | None) -> str:
-    return {"thuan": "thuận lợi", "can_bang": "cân bằng", "can_chu_dong": "cần lưu ý"}.get(m or "", "cân bằng")
+    vi = {"thuan": "thuận lợi", "can_bang": "cân bằng", "can_chu_dong": "cần lưu ý"}.get(m or "", "cân bằng")
+    return L(f"bt_ds.cyn.muc.{m if m in ('thuan', 'can_bang', 'can_chu_dong') else 'can_bang'}", vi)
+
+
+def _tt_bt(tt: str | None) -> str | None:
+    """Tên thập thần theo ngôn ngữ (bản Việt nguyên chữ)."""
+    return _ten.ten("thap_than", tt) if tt else tt
+
+
+def _mo_ta_bt(q: dict) -> str:
+    """Mô tả quan hệ CALC: bản Việt nguyên chữ, ngôn ngữ khác dựng lại từ mã."""
+    from app import ngon_ngu  # noqa: PLC0415
+    if ngon_ngu.la_viet():
+        return q["mo_ta"]
+    from app.luangiai import battu_hien  # noqa: PLC0415
+    return battu_hien.mo_ta_quan_he(q)
 
 
 def _khong_dau(s: str) -> str:
@@ -358,7 +376,7 @@ def ap(chuong_ds: list[dict], mon: str, tinh, ma_fn, hop_fn, hoc: tuple = (None,
         if dg:
             h["ty_le_dung"], h["so_phieu"] = dg[0], dg[1]
             if dg[2]:
-                c.setdefault("can_cu", []).append(f"Đang xem lại: {h['tieu_de']}")
+                c.setdefault("can_cu", []).append(L("hop.dang_xem_lai_dong", f"Đang xem lại: {h['tieu_de']}", tieu_de=h["tieu_de"]))
                 continue
         h["_ch"] = c["ma"]
         hop = c.setdefault("hop", [])

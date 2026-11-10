@@ -101,6 +101,7 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "than.ket_luan": "than_vuong", "cach_cuc.ten": "cach_cuc_bt", "cach_cuc_tbct.ten": "cach_cuc_bt",
     "can_lap_cach": "can", "chi_thang": "chi", "khong_vong.ngay": "chi", "khong_vong.nam": "chi", "tu_toa": "truong_sinh",
     "ngu_hanh.nhieu_nhat": "hanh", "ngu_hanh.thieu": "hanh", "nhat_chu.ngu_hanh": "hanh", "nhat_chu.can": "can",
+    "bieu_do.nhat_chu": "hanh",
     # dict có khoá là mã VÀ giá trị là mã (nhóm khoá, nhóm giá trị)
     "bang_hanh.can": ("can", "hanh"), "bang_hanh.chi": ("chi", "hanh"), "vai_tro_hanh": ("hanh", "nhom_thap_than"),
 }

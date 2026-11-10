@@ -689,7 +689,7 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
     if ds and ds.get("chuong") == "suc_khoe":
         # SK-1 (2026-11-04): năm nên chú ý sức khoẻ (hộp của chương, cùng hàm báo cáo) nói ngay ở đoạn mở đầu.
         from app.luangiai import suc_khoe_nam as _skn  # noqa: PLC0415
-        hn = next((h for h in ds.get("hop") or [] if h.get("tieu_de") == _skn.TIEU_DE_HOP), None)
+        hn = next((h for h in ds.get("hop") or [] if h.get("tieu_de") == _skn.tieu_de_hop()), None)
         if hn:
             phan.append(hn["noi_dung"].replace(_skn.mien_tru(), "").strip())
     cy = next((m for m in muc if m.get("ma") == "chu_y_nam" and m.get("lo_ro") and m.get("cau_nam")), None)
