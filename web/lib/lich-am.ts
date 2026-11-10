@@ -5,14 +5,31 @@ export interface ThangAm { thang: number; nhuan: boolean; mung_mot: string; so_n
 export interface LichNam {
   nam: number; can_chi: string; tet: string; tet_sau: string; thang_nhuan: number | null; thang: ThangAm[];
   tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; cach_tinh: string;
+  /** SEO-O: ngày lễ âm lịch của năm + số ngày năm âm (engine cũ: không có). */
+  le?: LeAm[]; so_ngay?: number;
+}
+export interface LeAm { ma: string; ten: string; am: string; duong: string; thu: string }
+export interface TetNam { nam: number; can_chi: string; con_giap: string; tet: string; thang_nhuan: number | null; so_ngay: number }
+
+/** SEO-O: bảng Tết nhiều năm (≤ 30 năm) cho mục lục /lich-am. Engine cũ → null (trang giữ bản cũ). */
+export async function cacNamLich(tu: number, den: number): Promise<TetNam[] | null> {
+  try {
+    const r = await fetch(`${ENGINE_URL}/v1/lich/cac-nam?tu=${tu}&den=${den}`, {
+      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+      next: { revalidate: 60 * 60 * 24 * 7 }, signal: AbortSignal.timeout(15_000),
+    });
+    if (r.ok) return (await r.json()) as TetNam[];
+  } catch { /* engine cũ / bận */ }
+  return null;
 }
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
+// SEO-O: "?b=le" đổi khoá bộ nhớ đệm fetch (đệm 7 ngày, giữ qua deploy) để trang nhận ngay trường `le` mới.
 export async function lichNamCongKhai(nam: number): Promise<LichNam | null> {
   try {
-    const r = await fetch(`${ENGINE_URL}/v1/lich/nam/${nam}`, {
+    const r = await fetch(`${ENGINE_URL}/v1/lich/nam/${nam}?b=le`, {
       headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
       next: { revalidate: 60 * 60 * 24 * 7 }, signal: AbortSignal.timeout(15_000),
     });

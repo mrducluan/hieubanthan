@@ -1,5 +1,6 @@
 // TDG-1 — trang "Tuổi {năm sinh} làm nhà năm {năm} được không" (engine dựng nội dung). Index: năm âm hiện tại + năm sau,
 // năm sinh 1960–2005; ngoài cửa sổ vẫn xem được, noindex.
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -55,6 +56,8 @@ export default async function Page(p: P) {
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
       <div className="mb-6"><TraLoiNhanh chu={d.tra_loi_nhanh} /></div>
       <KetQuaLamNha d={d} trangTuoi />
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="lam_nha_tuoi" nam={x.n} ns={x.ns} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-6 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/xem-tuoi-lam-nha" className="text-gold underline">{c("cuoi.link", bien)}</Link> ·{" "}
         <Link href={duongLamNha(x.n + 1, x.ns)} className="text-gold underline">{c("cuoi.nam_sau", bien)}</Link></p>

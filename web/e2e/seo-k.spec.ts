@@ -134,3 +134,25 @@ test("robots: chặn GoogleOther, Googlebot vẫn được vào", async ({ reque
   expect(nhom).toMatch(/Disallow: \/\s*$/m);
   expect(rb).not.toMatch(/User-Agent: Googlebot/i);       // Googlebot theo nhóm "*" (mở)
 });
+
+// SEO-O — trang năm / lịch & tuổi có ảnh tóm tắt thật (<img> + alt khớp chữ trong ảnh), lịch âm có bảng lễ + bảng Tết.
+test("SEO-O: ảnh tóm tắt có alt, route ảnh trả PNG, lịch âm có bảng lễ và bảng Tết", async ({ page, request }) => {
+  for (const u of ["/nam/2027", "/xem-tuoi-lam-nha/2027", "/tuoi-xong-dat", "/xem-sao-han", "/lich-am/2027"]) {
+    await page.goto(u);
+    const img = page.getByTestId("anh-tom-tat").locator("img");
+    await expect(img).toHaveCount(1);
+    const alt = (await img.getAttribute("alt")) ?? "";
+    expect(alt.length).toBeGreaterThan(60);
+    expect(alt).not.toMatch(/[?!]\./);
+    const src = (await img.getAttribute("src")) ?? "";
+    expect(src).toMatch(/^\/og\/tom-tat\?kieu=/);
+    const r = await request.get(src);
+    expect(r.status()).toBe(200);
+    expect(r.headers()["content-type"]).toContain("image/png");
+  }
+  const lich = await (await request.get("/lich-am/2027")).text();
+  expect(lich).toContain('data-testid="bang-le"');
+  expect(lich).toContain("Trung thu");
+  const muc = await (await request.get("/lich-am")).text();
+  expect(muc).toContain('data-testid="bang-tet"');
+});

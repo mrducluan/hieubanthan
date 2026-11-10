@@ -1,6 +1,7 @@
 // NAM-1 (hướng A, chủ dự án duyệt 2026-10-30) — trang trụ "Năm {năm}": năm con gì, mệnh gì, Tết, Tam tai, 12 con giáp,
 // mốc lễ, hạn năm + lối sang mọi trang tra theo tuổi của năm đó và "Năm {năm} của riêng bạn" (/thoi-gian-toi).
 // Engine dựng toàn bộ dữ kiện (`/v1/nam/{nam}`); web chỉ hiển thị. Index năm âm hiện tại + năm sau.
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -170,6 +171,8 @@ export default async function Page(p: P) {
           <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
         ))}</dl>
       </section>
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="nam" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       {/* AUD-Q5 (chủ dự án 2026-11-03): câu "tập quán, không phải tiên đoán" ĐƯỢC trích — AI trích lời tục lệ phải kèm câu rào này. */}
       <p className="mt-8 text-sm text-fg-muted" data-testid="luu-y-tap-quan">{d.luu_y}</p>

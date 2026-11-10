@@ -1,5 +1,6 @@
 // MT-ĐS B3 — "Sao hạn năm {năm}": MỘT trang cho mọi tuổi sinh 1960–2005, hai giới (không trang theo tuổi — bảng chu kỳ
 // 9 lặp lại, tránh nội dung mỏng). Lời từng sao từ KB; câu cố định + hỏi đáp (có cần cúng không → GHPGVN 2019).
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -98,6 +99,8 @@ export default async function Page(p: P) {
           {d.hoi_dap.map((h) => <details key={h.hoi} className="glass rounded-xl p-4"><summary className="cursor-pointer font-medium">{h.hoi}</summary><p className="mt-2 text-sm leading-relaxed text-fg-muted">{h.dap}</p></details>)}
         </div>
       </section>
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="sao_han" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-6 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/xem-sao-han" className="text-gold underline">{c("cuoi.link", bien)}</Link>. {d.cach_tinh} {d.luu_y}</p>
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-6" />

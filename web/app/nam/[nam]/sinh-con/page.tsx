@@ -1,6 +1,7 @@
 // NAM-1 — "Sinh con năm {năm} hợp tuổi bố mẹ nào?": tuổi bố/mẹ (tuổi mụ 22–52) × tuổi con theo địa chi (nhóm hợp / bình
 // thường / dân gian hay nhắc cân nhắc — không điểm số) + quan hệ nạp âm để đọc thêm. Engine `/v1/nam/{nam}/sinh-con`.
 // Ranh giới: sức khoẻ của mẹ + lời bác sĩ đi trước con giáp; không khuyên chọn ngày sinh mổ theo tuổi.
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -91,6 +92,8 @@ export default async function Page(p: P) {
           <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
         ))}</dl>
       </section>
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="sinh_con" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-8 text-sm text-fg-muted">Xem mọi tra cứu khác của năm này: <Link href={duongNam(n)} className="text-gold underline">Năm {n} {d.con.can_chi}</Link>. <span data-testid="luu-y-tap-quan">{d.luu_y}</span></p>
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
