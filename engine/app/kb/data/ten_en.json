@@ -185,6 +185,9 @@
    "Quan Sát": {"en": "Officer and Killings"}, "Ấn": {"en": "Resource"}, "Tỷ Kiếp": {"en": "Companions (Friend and Rob Wealth)"},
    "Tài": {"en": "Wealth"}, "Thực Thương": {"en": "Output (Eating God and Hurting Officer)"}
   },
+  "sach": {
+   "Tam Mệnh Thông Hội": {"en": "San Ming Tong Hui", "han": "三命通會"}
+  },
   "nap_am": {
    "Hải Trung Kim": {"en": "Sea Metal", "han": "海中金"}, "Lô Trung Hỏa": {"en": "Furnace Fire", "han": "炉中火"}, "Đại Lâm Mộc": {"en": "Great Forest Wood", "han": "大林木"},
    "Lộ Bàng Thổ": {"en": "Roadside Earth", "han": "路旁土"}, "Kiếm Phong Kim": {"en": "Sword Edge Metal", "han": "剑锋金"}, "Sơn Đầu Hỏa": {"en": "Mountain Top Fire", "han": "山头火"},

@@ -103,7 +103,6 @@ def la_so(kq: dict) -> dict:
         s["y"] = L(f"battu.than_sat.y.{_ma(s['ten'])}", s["y"])
         s["cach_khac"] = L(f"battu.than_sat.cach_khac.{_ma(s['ten'])}", s["cach_khac"])
         s["goc"] = _goc(s["goc"])
-        s["phai"] = L(f"battu.sach.{_ma(s['phai'])}", s["phai"])
     for k in ("than_sat_nguon", "than_sat_tham_khao_nguon"):
         if mr.get(k):
             mr[k] = L(f"battu.nguon.{k}", mr[k])

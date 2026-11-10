@@ -23,7 +23,7 @@ NHOM: dict[str, tuple[tuple[str, str], ...]] = {
     "thap_than": (("battu", "thap_than"),), "battu_khai_niem": (("battu", "khai_niem"),),
     "nap_am": (("battu", "nap_am"),), "than_sat": (("battu", "than_sat"),), "cat_hung": (("battu", "cat_hung"),),
     "quan_he": (("battu", "quan_he"),), "than_vuong": (("battu", "than_vuong"),), "cach_cuc_bt": (("battu", "cach_cuc"),),
-    "nhom_thap_than": (("battu", "nhom_thap_than"),),
+    "nhom_thap_than": (("battu", "nhom_thap_than"),), "sach_battu": (("battu", "sach"),),
     "quai": (("phongthuy", "quai"), ("kinhdich", "bat_quai")), "du_nien": (("phongthuy", "du_nien"),),
     "huong": (("phongthuy", "huong"),), "sao_bay": (("phongthuy", "sao_bay"),),
     "que": (("kinhdich", "que_64"),), "hao": (("kinhdich", "hao"),), "kinhdich_khai_niem": (("kinhdich", "khai_niem"),),
@@ -97,6 +97,7 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     # Bát tự (GĐ 3)
     "than_sat.ten": "than_sat", "than_sat.loai": "cat_hung", "than_sat_tham_khao.ten": "than_sat",
     "than_sat_tham_khao.nhom": "than_sat", "than_sat_tham_khao.loai": "cat_hung", "quan_he.loai": "quan_he",
+    "than_sat_tham_khao.phai": "sach_battu",
     "than.ket_luan": "than_vuong", "cach_cuc.ten": "cach_cuc_bt", "cach_cuc_tbct.ten": "cach_cuc_bt",
     "can_lap_cach": "can", "chi_thang": "chi", "khong_vong.ngay": "chi", "khong_vong.nam": "chi", "tu_toa": "truong_sinh",
     "ngu_hanh.nhieu_nhat": "hanh", "ngu_hanh.thieu": "hanh", "nhat_chu.ngu_hanh": "hanh", "nhat_chu.can": "can",

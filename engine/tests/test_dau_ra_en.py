@@ -64,7 +64,7 @@ KHUNG_BO_QUA = {
     "tarot.doc_bai",     # QTE-3: bản phủ tắt `truong_phai` / `viec_lv` (null) → ít hộp hơn; khôi phục ở GĐ 7
 }
 # Khung lệch CHƯA giải thích — phải sửa ở giai đoạn ghi kèm (ngôn ngữ không được đổi dữ kiện).
-KHUNG_CHUA_XONG: dict[str, int] = {"kb.trang.la_bai": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7, "goi_y_cheo": 7, "thanso.ban_do": 7, "chan_dung": 8, "thoi_gian_toi": 8}
+KHUNG_CHUA_XONG: dict[str, int] = {"kb.trang.la_bai": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7, "goi_y_cheo": 7}
 
 
 @pytest.fixture(scope="module")
