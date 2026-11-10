@@ -82,3 +82,15 @@ def dung(ngon_ngu: str | None):
     finally:
         BIEN_THE.reset(tok_bt)
         HIEN_TAI.reset(tok)
+
+
+def theo_viet(fn):
+    """Decorator: chạy hàm ở ngữ cảnh tiếng Việt bất kể lượt gọi (khoá / slug / mã phải ổn định giữa các ngôn ngữ)."""
+    from functools import wraps
+
+    @wraps(fn)
+    def boc(*a, **kw):
+        with dung(MAC_DINH):
+            return fn(*a, **kw)
+    return boc
+

@@ -1,0 +1,1530 @@
+{
+ "_trang_thai": "bien_tap",
+ "source": {
+  "tu_binh_chan_thuyen": "Zi Ping Zhen Quan (Shen Xiaozhan, Qing dynasty)",
+  "trich_thien_tuy": "Di Tian Sui (commentary attributed to Liu Bowen)",
+  "uyen_hai_tu_binh": "Yuan Hai Zi Ping (Xu Dasheng, Song dynasty)",
+  "tam_menh_thong_hoi": "San Ming Tong Hui (Wan Minying, Ming dynasty)"
+ },
+ "van_han": {
+  "thap_than": {
+   "Tỷ Kiên": {
+    "mang": "friends, people on your level",
+    "can": {
+     "nhan": "keep work and friendship apart",
+     "tre": {
+      "y": "You get pulled into your friends' plans easily and find it hard to say no to people on your level.",
+      "tranh": "pooling money before agreeing who does what, taking the blame for the whole group",
+      "lam": "for every shared task, write down each person's part before you start"
+     },
+     "lon": {
+      "y": "People on your level can become quiet rivals: chasing the same spot, the same client, the same money.",
+      "tranh": "going into business with someone only because you feel obliged, arguing in public with colleagues at your level",
+      "lam": "keep one sum of your own out of any shared pot, and settle questions of who gets what on paper"
+     }
+    },
+    "thuan": {
+     "nhan": "good for working with peers",
+     "y": "Friends who share your goals have your back; group work comes together more easily.",
+     "lam": "invite one trusted friend into a small project, and split the parts clearly from day one"
+    }
+   },
+   "Kiếp Tài": {
+    "mang": "shared money, competition",
+    "can": {
+     "nhan": "keep your money from being split",
+     "tre": {
+      "y": "Money slips out through friends: treating people, lending, being talked into big nights out.",
+      "tranh": "lending to friends when you are short yourself, investing because someone online told you to",
+      "lam": "set a monthly limit for spending on friends, and keep a polite reason ready for saying no"
+     },
+     "lon": {
+      "y": "Someone may compete with you or want a share of money you thought was already safe.",
+      "tranh": "signing as guarantor for someone else, putting all your capital into one deal just to beat a rival",
+      "lam": "spread your money across a few places, and get both signatures on every money agreement"
+     }
+    },
+    "thuan": {
+     "nhan": "good for daring moves",
+     "y": "You have the nerve and people on your side; where there is competition, you can win your share.",
+     "lam": "take on a task that needs drive, but decide in advance the most you are willing to lose"
+    }
+   },
+   "Thực Thần": {
+    "mang": "skills, wellbeing, children",
+    "can": {
+     "nhan": "do not let easy turn into lazy",
+     "tre": {
+      "y": "You drift easily into fun, late nights, and doing just enough work.",
+      "tranh": "spending a lot on eating and going out, dropping a course you already paid for",
+      "lam": "keep one hour a day for building your skills, and be asleep before midnight"
+     },
+     "lon": {
+      "y": "Life slows down and new things feel like a chore; your children or meals at home take up a lot of your attention.",
+      "tranh": "eating irregularly around parties, doing all your child's tasks instead of letting them try",
+      "lam": "keep regular mealtimes, and give your child one clear household job each week"
+     }
+    },
+    "thuan": {
+     "nhan": "good for making things",
+     "y": "People pay for your skills; work done with your own hands pays off.",
+     "lam": "finish one complete piece of work and hand it to someone to try out"
+    }
+   },
+   "Thương Quan": {
+    "mang": "words, paperwork, bosses",
+    "can": {
+     "nhan": "mind your words with those above you",
+     "tre": {
+      "y": "You may speak too bluntly, argue with seniors, and lose a chance because of it.",
+      "tranh": "posting angry messages about your workplace, quitting right after one piece of criticism",
+      "lam": "write down what you want to say, wait one night, then send it"
+     },
+     "lon": {
+      "y": "Paperwork, contracts and things you said can be picked apart; things with your boss feel tenser.",
+      "tranh": "making important promises only by word of mouth, signing legal papers before someone who knows them has read them",
+      "lam": "put every agreement in writing and keep a copy"
+     }
+    },
+    "thuan": {
+     "nhan": "good for new ideas and speaking up",
+     "y": "Your new ideas get heard; persuading, presenting and writing go well.",
+     "lam": "present an idea you have been holding for a long time to someone who can decide"
+    }
+   },
+   "Thiên Tài": {
+    "mang": "business money, income outside your salary",
+    "can": {
+     "nhan": "do not chase fast money",
+     "tre": {
+      "y": "Fast-money chances show up often, but most are bait or more than you can handle.",
+      "tranh": "borrowing to invest, joining schemes that promise high returns, leaving your main job for short-term deals",
+      "lam": "try new opportunities only with spare money, and set your stop point in advance"
+     },
+     "lon": {
+      "y": "Business money moves in and out in large amounts; one rushed decision can take a whole year to repair.",
+      "tranh": "expanding a business on borrowed money, taking investment from someone you just met",
+      "lam": "plan your cash flow by quarter, and ask an outsider's view before any large sum"
+     }
+    },
+    "thuan": {
+     "nhan": "good for adding a new income stream",
+     "y": "Income comes from outside your main work, and good business contacts are easier to meet.",
+     "lam": "take on one extra job that suits you, and put the profit into a long-term fund"
+    }
+   },
+   "Chính Tài": {
+    "mang": "salary, savings, home life",
+    "can": {
+     "nhan": "hold on tight to your steady income",
+     "tre": {
+      "y": "Income is steady, but household spending or shared money with a partner can turn into a problem.",
+      "tranh": "buying something big on a long instalment plan, pooling money with a partner before talking it through",
+      "lam": "make a monthly spending sheet, and keep your own account separate from the shared one"
+     },
+     "lon": {
+      "y": "Savings get drawn down for family matters, your spouse's needs or relatives.",
+      "tranh": "emptying your savings for something that is not urgent, lending to relatives with no date for repayment",
+      "lam": "keep one savings pot you never touch, and talk to your family before every large expense"
+     }
+    },
+    "thuan": {
+     "nhan": "good for saving",
+     "y": "Money comes in steadily and stays; a good time for long-range things like a home, education or insurance.",
+     "lam": "raise your monthly savings and finish one savings goal you already set"
+    }
+   },
+   "Thất Sát": {
+    "mang": "pressure, urgent tasks, difficult people",
+    "can": {
+     "nhan": "heavy pressure, protect your energy",
+     "tre": {
+      "y": "Urgent tasks, demanding people and pressure pile up; you may get heated and act rashly.",
+      "tranh": "taking on many urgent jobs at once, confronting people with more power than you head-on",
+      "lam": "break urgent work into small pieces, and ask someone experienced to show you the way"
+     },
+     "lon": {
+      "y": "Responsibility weighs heavy; a big task may arrive before you are ready.",
+      "tranh": "carrying everything alone, making big decisions while tired",
+      "lam": "hand some work to people you trust, protect your sleep, and keep up regular health check-ups"
+     }
+    },
+    "thuan": {
+     "nhan": "good for taking on hard work",
+     "y": "Hard work arrives just when you are strong enough; get through it and you earn your place.",
+     "lam": "take on a hard task others avoid, and plan it week by week"
+    }
+   },
+   "Chính Quan": {
+    "mang": "work, position, rules",
+    "can": {
+     "nhan": "go slower at work",
+     "tre": {
+      "y": "Your workplace has many rules, and you may feel boxed in and judged harshly.",
+      "tranh": "breaking rules to go faster, changing jobs after a single warning",
+      "lam": "ask for the evaluation criteria at the start of the year and deliver each small task on time"
+     },
+     "lon": {
+      "y": "Your position draws scrutiny; permits, procedures and regulations tend to be slow.",
+      "tranh": "cutting corners on procedures, starting big work before the permits are done",
+      "lam": "complete the paperwork before you begin, and keep clear records of your work"
+     }
+    },
+    "thuan": {
+     "nhan": "good for moving up in your field",
+     "y": "You are more likely to be recognised, given a clearer role, or promoted.",
+     "lam": "take on more responsibility in your own field and ask for your position to be reviewed"
+    }
+   },
+   "Thiên Ấn": {
+    "mang": "learning, thinking, inner life",
+    "can": {
+     "nhan": "do not keep your thoughts to yourself",
+     "tre": {
+      "y": "You may withdraw, think more than you act, and drop unusual subjects halfway.",
+      "tranh": "signing up for many courses at once, cutting yourself off when something upsets you",
+      "lam": "choose one subject and see it through, and meet a close friend every week"
+     },
+     "lon": {
+      "y": "You worry ahead, doubt things and find it hard to trust; work slows because you hesitate.",
+      "tranh": "holding a worry inside for too long, believing gossip instead of checking",
+      "lam": "write the worry down with one thing you can do right away, and talk to someone you trust"
+     }
+    },
+    "thuan": {
+     "nhan": "good for deep study",
+     "y": "Your mind is clear, new things sink in fast, and you find your own way of doing things.",
+     "lam": "study a specialised subject in depth, or get a certificate you have wanted for a long time"
+    }
+   },
+   "Chính Ấn": {
+    "mang": "paperwork, home, people who protect you",
+    "can": {
+     "nhan": "paperwork and home matters go slow",
+     "tre": {
+      "y": "You may lean on family and be slow to decide for yourself; school paperwork can get stuck.",
+      "tranh": "letting others decide your big matters, handing in applications at the last minute",
+      "lam": "read and submit your own papers, at least one week before the deadline"
+     },
+     "lon": {
+      "y": "Your home, property papers or the health of older relatives need a lot of your care.",
+      "tranh": "buying or selling property before the papers are clear, leaving your parents' matters until the last minute",
+      "lam": "go over your property papers and your parents' check-up schedule at the start of the year"
+     }
+    },
+    "thuan": {
+     "nhan": "good for paperwork and home matters",
+     "y": "Someone has your back; paperwork, qualifications and home matters go smoothly.",
+     "lam": "finish a home or qualification process that has been left half done"
+    }
+   }
+  },
+  "nho": {
+   "can": {
+    "nhan": "your child should take it slow",
+    "Tỷ Kiếp": {
+     "nhan": "your child may clash with peers",
+     "mang": "your child's friendships",
+     "y": "Your child may compete with classmates or with brothers and sisters at home.",
+     "tranh": "comparing your child with their siblings, settling a quarrel before hearing both sides",
+     "lam": "give each child their own task and praise each one separately; hear your child out before you advise"
+    },
+    "Ấn": {
+     "nhan": "your child needs to do things themselves",
+     "mang": "your child's studies and independence",
+     "y": "Your child may rely on adults and avoid doing homework or looking after their own things.",
+     "tranh": "doing your child's homework, tidying all their things for them",
+     "lam": "let your child pack their own bag and set their own study time; adults only check at the weekend"
+    },
+    "Thực Thương": {
+     "nhan": "your child may speak bluntly or talk back",
+     "mang": "your child's words and manners",
+     "y": "Your child may talk back to teachers or parents, or say things that hurt a friend.",
+     "tranh": "punishing your child in front of others, making them be quiet without explaining why",
+     "lam": "teach your child one phrase to use instead of talking back, and praise them when they speak gently"
+    },
+    "Tài": {
+     "nhan": "your child learns to look after things and money",
+     "mang": "your child's belongings and pocket money",
+     "y": "Your child may lose things, spend pocket money fast, or lend to friends who do not pay back.",
+     "tranh": "replacing things straight away every time they are lost, giving money without asking what it is for",
+     "lam": "give your child a fixed amount each week and keep a spending notebook together"
+    },
+    "Quan Sát": {
+     "nhan": "your child is under pressure and needs support",
+     "mang": "your child's school pressure",
+     "y": "Your child may feel the pressure of exams and rules, and fear letting adults down.",
+     "tranh": "adding more extra classes, scolding your child over one low mark",
+     "lam": "protect your child's sleep, and ask what worries them most at school"
+    }
+   },
+   "thuan": {
+    "nhan": "a good year for your child",
+    "Tỷ Kiếp": {
+     "nhan": "a year your child makes good friends",
+     "mang": "your child's friendships",
+     "y": "Your child is likely to make good close friends and learn a lot from group work.",
+     "lam": "let your child join a club or team they like"
+    },
+    "Ấn": {
+     "nhan": "a year your child takes in their studies",
+     "mang": "your child's studies",
+     "y": "Your child takes in more of their studies and gets more attention from teachers.",
+     "lam": "let your child take an extra class in the subject they ask about most"
+    },
+    "Thực Thương": {
+     "nhan": "a year your child is handy and full of ideas",
+     "mang": "your child's talents",
+     "y": "Your child has many ideas and may make things that surprise the adults.",
+     "lam": "let your child try drawing, music or crafts, and display what they make"
+    },
+    "Tài": {
+     "nhan": "good for teaching your child about money",
+     "mang": "your child's pocket money",
+     "y": "Your child understands money more easily and learns to save.",
+     "lam": "pick one thing your child wants to buy and save up for it together"
+    },
+    "Quan Sát": {
+     "nhan": "a year your child can take on a role",
+     "mang": "your child's routines and responsibilities",
+     "y": "Your child is more likely to be trusted with tasks and to carry them through.",
+     "lam": "let your child take a role in class or a fixed job at home"
+    }
+   }
+  },
+  "co": {
+   "nam_tuoi": {
+    "nhan": "your zodiac year",
+    "y": "Folk custom says that in your zodiac year you should keep to your routines and not pile many big things into the same year.",
+    "tranh": "starting many big things at once",
+    "lam": "pick the one biggest task and do it carefully, and have a routine health check-up early in the year"
+   },
+   "xung_tuoi": {
+    "nhan": "a year that clashes with your zodiac sign",
+    "y": "Folk custom sees a year that clashes with your zodiac sign as a year of change: moving, changing jobs, travelling far.",
+    "tranh": "changing many things at the same time",
+    "lam": "change one thing at a time, and keep one familiar routine to lean on"
+   },
+   "va_tuoi": {
+    "nhan": "a year that rubs against your zodiac sign",
+    "y": "Folk custom sees this as a year of small run-ins with the people around you."
+   },
+   "tam_tai": {
+    "nhan": "a Three Calamities (Tam Tai) year",
+    "y": "By custom, during the three Tam Tai years in a row, big plans deserve more careful thought.",
+    "tranh": "rushing to start building, marry or open a shop just because you found a good date, without being ready",
+    "lam": "make a money plan covering all three years, and talk big plans through with your family"
+   },
+   "xung_ngay": {
+    "nhan": "your home and closest people may be unsettled",
+    "y": "Your home or the person closest to you (spouse, partner) may go through changes.",
+    "tranh": "moving house or deciding big things as a couple in a hurry",
+    "lam": "talk every change of home through with your family first, and keep the habit of having dinner together"
+   },
+   "hinh_ngay": {
+    "nhan": "small clashes with people close to you",
+    "y": "Small clashes with people close to you may keep repeating."
+   }
+  }
+ },
+ "muc": {
+  "thuan": "Favourable",
+  "can_bang": "Balanced",
+  "can_chu_dong": "Needs care"
+ },
+ "than": {
+  "manh": "Your own strength: strong, stands on its own",
+  "yeu": "Your own strength: needs more support",
+  "can_bang": "Your own strength: balanced"
+ },
+ "nhom": {
+  "Tỷ Kiếp": "standing on your own, people on your level",
+  "Ấn": "support from others, learning",
+  "Thực Thương": "self-expression, craft",
+  "Tài": "money, results you can hold on to",
+  "Quan Sát": "rules, pressure, responsibility"
+ },
+ "nhat_chu": {
+  "Giáp": {
+   "hinh_tuong": "a tall tree",
+   "chan_dung": "You are like a tall tree: upright, reaching higher, and often sheltering others. You do your best work when you have a long-term goal to hold on to.",
+   "cau_tu_soi": "Where are you trying to stand straight when you would do better to bend a little?",
+   "manh": {
+    "manh": "You can stand on your own and rarely need a push to get going.",
+    "de_vap": "Once you decide, you find it hard to take advice, stiff as a tree that will not bend.",
+    "loi_khuyen": "Pick one person you trust to challenge your thinking before you settle anything big."
+   },
+   "yeu": {
+    "manh": "You know how to lean on good teachers and good teams to grow, and you do not mind starting over.",
+    "de_vap": "When pressure piles up, you can lose direction and drop long plans halfway.",
+    "loi_khuyen": "Break big goals into three-month stages, and find a mentor for the first stage."
+   },
+   "can_bang": {
+    "manh": "You have drive and also know when to step back, so you rarely break down halfway.",
+    "de_vap": "You often take on caring for others and forget your own share.",
+    "loi_khuyen": "Keep a fixed block of time each week for your own things."
+   }
+  },
+  "Ất": {
+   "hinh_tuong": "a climbing vine, grass and flowers",
+   "chan_dung": "You are like a climbing vine, or grass and flowers: soft but tough, holding on to something solid so you can spread out. You are good at finding your way and good with people.",
+   "cau_tu_soi": "Who or what are you holding on to, and is that support still solid?",
+   "manh": {
+    "manh": "You are persistent; pushed back, you find another way forward.",
+    "de_vap": "You may try to please several sides at once and tangle up your own work.",
+    "loi_khuyen": "Say \"let me think about it\" instead of saying yes straight away."
+   },
+   "yeu": {
+    "manh": "You are good at finding help and know how to ask without making anyone uncomfortable.",
+    "de_vap": "Without someone to lean on, you may hesitate and wait for others to decide for you.",
+    "loi_khuyen": "Practise making small daily decisions yourself to get used to being in charge."
+   },
+   "can_bang": {
+    "manh": "You are gentle but principled, so many people trust you.",
+    "de_vap": "You tend to keep discomfort inside until it wears you out.",
+    "loi_khuyen": "Say what you do not like early, while it is still small."
+   }
+  },
+  "Bính": {
+   "hinh_tuong": "the sun",
+   "chan_dung": "You are like the sun: bright, warm, happy to be seen, and good at drawing people into shared work. Wherever you are, the mood lifts.",
+   "cau_tu_soi": "Who are you keeping warm, and are you keeping some of that warmth for yourself?",
+   "manh": {
+    "manh": "You are enthusiastic and willing to stand up in front of a crowd.",
+    "de_vap": "You may talk loud and move fast, then run out of breath halfway.",
+    "loi_khuyen": "Take on fewer tasks but see them through before you take on more."
+   },
+   "yeu": {
+    "manh": "You are warm, a good listener, and you understand how others feel.",
+    "de_vap": "You tire when you have to stay cheerful and lively nonstop without rest.",
+    "loi_khuyen": "Put quiet days after busy social stretches."
+   },
+   "can_bang": {
+    "manh": "You can spread enthusiasm and still know when to stop.",
+    "de_vap": "You feel hurt when nobody mentions the effort you put in.",
+    "loi_khuyen": "Note down what you achieved each month yourself, instead of waiting for praise."
+   }
+  },
+  "Đinh": {
+   "hinh_tuong": "a lamp",
+   "chan_dung": "You are like a lamp: not dazzling, but lighting up what is close by. You are perceptive, notice details, and long remember what others did for you.",
+   "cau_tu_soi": "What are you worrying about alone that you could share with someone you trust?",
+   "manh": {
+    "manh": "You focus well; whatever you do, you do thoroughly.",
+    "de_vap": "You keep thoughts to yourself, and thinking too much turns into worry.",
+    "loi_khuyen": "Write down what worries you, break it into pieces and deal with them one by one."
+   },
+   "yeu": {
+    "manh": "You are sensitive to how others feel and know how to comfort them.",
+    "de_vap": "You can be swayed by praise and criticism around you.",
+    "loi_khuyen": "Choose two or three people you trust to ask for advice, and listen less to the crowd."
+   },
+   "can_bang": {
+    "manh": "You are thoughtful and make people feel cared for.",
+    "de_vap": "You avoid conflict, so sometimes you stay silent too long.",
+    "loi_khuyen": "State what you want in one short sentence instead of waiting for others to guess."
+   }
+  },
+  "Mậu": {
+   "hinh_tuong": "a mountain",
+   "chan_dung": "You are like a mountain: steady, slow to change, the place people come to when they need support. You keep your word and like things in order.",
+   "cau_tu_soi": "What are you keeping the same only out of habit, not because it is still right?",
+   "manh": {
+    "manh": "You can handle heavy work, and the more urgent it is, the calmer you get.",
+    "de_vap": "You find it hard to change your mind and may stick to old ways after they stop working.",
+    "loi_khuyen": "Try one new way of doing something each quarter, even on a small task."
+   },
+   "yeu": {
+    "manh": "You are careful and rarely promise what you cannot do.",
+    "de_vap": "You may hesitate to start, waiting until you are sure, and miss the chance.",
+    "loi_khuyen": "Set a deadline for weighing things up; past it, try the idea on a small scale."
+   },
+   "can_bang": {
+    "manh": "You are reliable, steady in your work, rarely up and down.",
+    "de_vap": "You often carry other people's work because you find it hard to refuse.",
+    "loi_khuyen": "Practise saying no to one task outside your own share each week."
+   }
+  },
+  "Kỷ": {
+   "hinh_tuong": "garden soil",
+   "chan_dung": "You are like garden soil: able to nourish many things, patient and practical. You are good at caring, organising, and turning small things into useful ones.",
+   "cau_tu_soi": "How many people are you looking after, and who is looking after you?",
+   "manh": {
+    "manh": "You are steady, plan ahead, and know how to save bit by bit.",
+    "de_vap": "You take on too much and want to handle everything yourself.",
+    "loi_khuyen": "Hand off some tasks and accept that others will do them their own way."
+   },
+   "yeu": {
+    "manh": "You adapt easily and find your place wherever you are.",
+    "de_vap": "You may let others take your share and avoid asking for what you are owed.",
+    "loi_khuyen": "Write down the agreement about effort and money from the very start."
+   },
+   "can_bang": {
+    "manh": "You are thorough and remember what the whole family or team needs.",
+    "de_vap": "You often worry in advance about things that have not happened.",
+    "loi_khuyen": "Separate what needs handling today from what you only need to note down for later."
+   }
+  },
+  "Canh": {
+   "hinh_tuong": "a steel bar",
+   "chan_dung": "You are like a steel bar: straight, strong, and you do what you say. You like things clear and dislike beating around the bush.",
+   "cau_tu_soi": "The last time you spoke bluntly, what did the other person actually hear?",
+   "manh": {
+    "manh": "You decide fast and take responsibility for your decisions.",
+    "de_vap": "You can be so blunt that you hurt people.",
+    "loi_khuyen": "Pause three seconds before giving feedback and ask yourself what the other person needs to hear."
+   },
+   "yeu": {
+    "manh": "You have clear principles and know what you will not accept.",
+    "de_vap": "When pushed, you may harden and then let go of both the task and the people.",
+    "loi_khuyen": "Choose a place with clear leadership to build more staying power."
+   },
+   "can_bang": {
+    "manh": "You are direct but still know how to say things so others can hear them.",
+    "de_vap": "You tend to expect a lot from the people close to you.",
+    "loi_khuyen": "Praise what others did well before saying what needs fixing."
+   }
+  },
+  "Tân": {
+   "hinh_tuong": "a polished piece of jewellery",
+   "chan_dung": "You are like a polished piece of jewellery: refined, clean, with your own taste. You care about how things look and about doing them properly.",
+   "cau_tu_soi": "Where are you demanding perfection when good enough would do?",
+   "manh": {
+    "manh": "You have an eye for beauty and high standards in your work.",
+    "de_vap": "You get annoyed by anything less than perfect, including in yourself.",
+    "loi_khuyen": "Set a good-enough bar for everyday tasks and keep the high bar for what matters."
+   },
+   "yeu": {
+    "manh": "You are sensitive and sharp, and notice what others miss.",
+    "de_vap": "You feel hurt by criticism and lose the will to keep going.",
+    "loi_khuyen": "Separate criticism of the work from criticism of you as a person."
+   },
+   "can_bang": {
+    "manh": "You are tactful and know how to be discreet with people.",
+    "de_vap": "You avoid showing weak spots, so you rarely ask for help.",
+    "loi_khuyen": "Ask for help early with things you are not yet good at."
+   }
+  },
+  "Nhâm": {
+   "hinh_tuong": "a great river",
+   "chan_dung": "You are like a great river: always flowing, full of ideas, fond of going far and trying new things. You pick things up fast and cope well with change.",
+   "cau_tu_soi": "What have you opened that you have not yet closed?",
+   "manh": {
+    "manh": "You have plenty of energy, and when blocked you find another route right away.",
+    "de_vap": "You may drift, opening many things and struggling to close them.",
+    "loi_khuyen": "Choose one main task for each stage and fully close the old one before opening a new one."
+   },
+   "yeu": {
+    "manh": "You are flexible, read people quickly and fit into new places easily.",
+    "de_vap": "You get swept up in other people's business and spend energy where it does not belong.",
+    "loi_khuyen": "Keep a few fixed habits in your day as banks for your river."
+   },
+   "can_bang": {
+    "manh": "You are clever, see far ahead and still stay on top of the task at hand.",
+    "de_vap": "You keep your plans to yourself, so people close to you struggle to keep up.",
+    "loi_khuyen": "Share your plans early with the people working with you so they can prepare."
+   }
+  },
+  "Quý": {
+   "hinh_tuong": "an underground spring",
+   "chan_dung": "You are like an underground spring, or a light rain: quiet but soaking in deep. You are perceptive, imaginative, and understand people through what they leave unsaid.",
+   "cau_tu_soi": "What are you feeling that you have not yet said out loud?",
+   "manh": {
+    "manh": "You are patient and work quietly toward lasting results.",
+    "de_vap": "You sink into your own thoughts and share little.",
+    "loi_khuyen": "Set a weekly chat with someone close to say what is on your mind."
+   },
+   "yeu": {
+    "manh": "You are sensitive and full of compassion.",
+    "de_vap": "You tire from carrying other people's feelings.",
+    "loi_khuyen": "Keep a time when your phone is off and you are alone with yourself."
+   },
+   "can_bang": {
+    "manh": "You are deep yet gentle, good at untangling delicate matters.",
+    "de_vap": "You often doubt your ability even after doing well.",
+    "loi_khuyen": "Keep a list of things you have achieved to look at when you lose heart."
+   }
+  }
+ },
+ "noi_bat": {
+  "Tỷ Kiên": {
+   "y": "You are independent, like doing things your own way and want to be treated as an equal.",
+   "de_vap": "You avoid asking for help and taking orders, and may end up carrying the work alone.",
+   "loi_khuyen": "Choose work where you can decide for yourself, and learn to ask the right person for help."
+  },
+  "Kiếp Tài": {
+   "y": "You dare to compete and move fast when you see a chance.",
+   "de_vap": "You may take risks, spend on impulse and compare yourself with people at your level.",
+   "loi_khuyen": "Set a maximum amount of money for each quick decision."
+  },
+  "Thực Thần": {
+   "y": "You are easy-going, know how to enjoy life, and make things people can use, eat or look at.",
+   "de_vap": "You may be satisfied too soon and avoid hard work that drags on.",
+   "loi_khuyen": "Set one goal a little beyond your reach each year so you do not slow down."
+  },
+  "Thương Quan": {
+   "y": "You are creative, speak well and spot what does not make sense very quickly.",
+   "de_vap": "You criticise easily and may break rules you think are pointless.",
+   "loi_khuyen": "Every time you point out a fault, offer a way to fix it."
+  },
+  "Thiên Tài": {
+   "y": "You are quick to see opportunities, generous, and used to a wide circle of contacts.",
+   "de_vap": "You may spend freely and use the next income to cover the last expense.",
+   "loi_khuyen": "Open a separate account for money that must not be touched."
+  },
+  "Chính Tài": {
+   "y": "You are practical, hard-working, and value trust and stability.",
+   "de_vap": "You may be too tight with money and miss things worth investing in.",
+   "loi_khuyen": "Set aside a small fixed share for learning or new experiences."
+  },
+  "Thất Sát": {
+   "y": "You are bold, handle pressure well, and the harder it gets the more you want to win.",
+   "de_vap": "You can be quick-tempered and push yourself and others too hard.",
+   "loi_khuyen": "Have a regular way to burn off energy, like running or badminton."
+  },
+  "Chính Quan": {
+   "y": "You are proper, follow the rules, and older people trust you with tasks.",
+   "de_vap": "You worry about what others think of you and avoid doing things differently from the crowd.",
+   "loi_khuyen": "Ask yourself what you want before asking what others expect of you."
+  },
+  "Thiên Ấn": {
+   "y": "You have your own way of thinking, like the new and unusual, and like digging deep into a narrow field.",
+   "de_vap": "You may withdraw, be suspicious, and drop things once the interest fades.",
+   "loi_khuyen": "Tie your personal interests to a concrete piece of work so you have something to finish."
+  },
+  "Chính Ấn": {
+   "y": "You love learning, are kind, and think of others.",
+   "de_vap": "You tend to wait for instructions and hesitate to take the lead.",
+   "loi_khuyen": "Each year, take on one task you have to own from start to finish."
+  }
+ },
+ "cach": {
+  "chinh_quan": {
+   "ten": "someone who keeps to the rules",
+   "y": "Your birth month gives you a neat, proper manner, a sense of hierarchy, and a fit for well-ordered places.",
+   "de_vap": "You tire quickly in messy places where nobody takes responsibility.",
+   "loi_khuyen": "When you join a new group, ask right away who decides what.",
+   "nghe": "Suits work in organisations with a clear hierarchy: administration, banking, education, operations management."
+  },
+  "that_sat": {
+   "ten": "someone who takes on hard work",
+   "y": "Your birth month gives you the strength to handle pressure and the spirit to charge ahead when things are urgent.",
+   "de_vap": "You may take on more than you can carry and get impatient with people slower than you.",
+   "loi_khuyen": "Pick the battles worth fighting, and leave small things for others.",
+   "nghe": "Suits work with challenges and competition: field engineering, opening new markets, security, sport, incident response."
+  },
+  "chinh_tai": {
+   "ten": "a steady businessperson",
+   "y": "Your birth month gives you a practical mind, a good hand with money, and a habit of keeping promises.",
+   "de_vap": "You may be too cautious and let chances slip by.",
+   "loi_khuyen": "Set aside a small sum to try new chances, and keep the rest as before.",
+   "nghe": "Suits management, accounting, finance, trading essential goods, supply chain operations."
+  },
+  "thien_tai": {
+   "ten": "someone quick to spot opportunities",
+   "y": "Your birth month gives you an eye for opportunity and a talent for networking and moving money around.",
+   "de_vap": "You may chase many things at once; money comes in fast and goes out just as fast.",
+   "loi_khuyen": "Choose at most two opportunities a year and follow them through.",
+   "nghe": "Suits business, sales, brokerage, disciplined investing, work with outside partners."
+  },
+  "chinh_an": {
+   "ten": "someone who loves learning and gets support",
+   "y": "Your birth month gives you a love of knowledge, and people ahead of you often help you.",
+   "de_vap": "You may get used to being looked after and be slow to step up.",
+   "loi_khuyen": "Take on one hard task yourself without asking anyone first.",
+   "nghe": "Suits education, research, medicine and pharmacy, law, writing, work that needs qualifications and a good name."
+  },
+  "thien_an": {
+   "ten": "someone with an original way of thinking",
+   "y": "Your birth month gives you good intuition and interest in fields few people touch.",
+   "de_vap": "You get bored by repetitive work and may drop it before it is done.",
+   "loi_khuyen": "Set a clear finish point for each personal project you are following.",
+   "nghe": "Suits specialist work, unusual technical fields, psychology, design, technology, independent research."
+  },
+  "thuc_than": {
+   "ten": "someone talented who likes an easy pace",
+   "y": "Your birth month gives you skilful hands, a way with words, and a knack for enjoying life.",
+   "de_vap": "You may avoid pressure and stay too long in work that is well within your comfort zone.",
+   "loi_khuyen": "Take on one task with a clear deadline each quarter to keep your rhythm.",
+   "nghe": "Suits food, the arts, teaching children, services, digital content, handmade products."
+  },
+  "thuong_quan": {
+   "ten": "someone creative who likes doing things differently",
+   "y": "Your birth month gives you a sharp mind, a gift for speaking and presenting, and a liking for doing things differently.",
+   "de_vap": "You may clash with bosses and with people who enforce the rules.",
+   "loi_khuyen": "Choose places that judge you by results rather than by seniority.",
+   "nghe": "Suits content creation, media, litigation, design, start-ups, the performing arts."
+  },
+  "kien_loc": {
+   "ten": "someone independent from an early age",
+   "y": "Your birth month gives you self-reliance: whatever you want, you usually make it happen yourself.",
+   "de_vap": "You may carry everything alone and rarely rely on systems or other people.",
+   "loi_khuyen": "Build a small trusted team instead of doing everything yourself.",
+   "nghe": "Suits self-directed work, independent professions, managing your own area, a small business you run."
+  },
+  "duong_nhan": {
+   "ten": "someone decisive",
+   "y": "Your birth month gives you strong drive, quick decisions and the nerve to face opposition.",
+   "de_vap": "You may be hasty and act more forcefully than needed.",
+   "loi_khuyen": "Look for a place with clear discipline so that strength has the right outlet.",
+   "nghe": "Suits work that needs decisiveness and discipline: the military, police, surgery, heavy engineering, sport."
+  },
+  "nguyet_kiep": {
+   "ten": "someone who grows through competition",
+   "y": "Your birth month gives you a spirit that refuses to lose; the more rivals, the harder you try.",
+   "de_vap": "You may fight for your share and spend money to come out ahead of others.",
+   "loi_khuyen": "Make last year's you the rival, not the person next to you.",
+   "nghe": "Suits sales with targets, sport, start-ups, places with clear competition."
+  }
+ },
+ "hanh": {
+  "Kim": {
+   "ten": "clarity, discipline, decisiveness",
+   "thua": "Too much Metal can make you rigid, judging right and wrong sharply even in matters of the heart.",
+   "thua_loi_khuyen": "Practise adding one caring question before each comment you make.",
+   "thieu": "With little Metal, you may lack decisiveness, find it hard to say no and hard to cut what is not needed.",
+   "thieu_loi_khuyen": "Make a to-do list each morning and firmly cross out the things you will not do.",
+   "mau": "white, silver, grey",
+   "huong": "West, Northwest",
+   "nghe": "finance, engineering, machinery, law, quality control",
+   "thoi_quen": "tidying your desk, making to-do lists, deep breathing in the morning",
+   "co_the": "lungs, skin, airways",
+   "nhip_thua": "You tend to tense up and hold stress in your body; your neck and shoulders tire easily.",
+   "nhip_thieu": "You run short of breath during long stretches of work.",
+   "loi_khuyen_sk": "Practise breathing exercises, walk in fresh air, and keep your throat warm when the seasons change.",
+   "tieu_de_thua": "Lots of Metal: can be rigid",
+   "tieu_de_thieu": "Little Metal: hard to be decisive"
+  },
+  "Mộc": {
+   "ten": "growth, flexibility, kindness",
+   "thua": "Too much Wood can make you take on too many plans and cling to your own ideas.",
+   "thua_loi_khuyen": "Choose three main plans for each year and put the rest on a waiting list.",
+   "thieu": "With little Wood, you may hesitate to start, avoid change and lack long-range plans.",
+   "thieu_loi_khuyen": "Write a one-year plan on a single page and review it every month.",
+   "mau": "green, moss green",
+   "huong": "East, Southeast",
+   "nghe": "education, publishing, plants and farming, design, caring for people",
+   "thoi_quen": "looking after a potted plant, walking in the park, reading a few pages every evening",
+   "co_the": "liver, eyes, tendons and muscles",
+   "nhip_thua": "You get irritable when blocked and often stay up late to get things finished.",
+   "nhip_thieu": "You can feel stiff from too little stretching.",
+   "loi_khuyen_sk": "Be asleep before 23h, stretch every day, and rest your eyes after each hour of screen time.",
+   "tieu_de_thua": "Lots of Wood: takes on too much",
+   "tieu_de_thieu": "Little Wood: hesitant to start"
+  },
+  "Thủy": {
+   "ten": "the mind, flexibility, the ability to adapt",
+   "thua": "Too much Water can make you overthink, worry ahead and feel your moods swing.",
+   "thua_loi_khuyen": "Set a time to stop thinking: write the worry on paper and leave it until morning.",
+   "thieu": "With little Water, you may be rigid and slow to soften when things change.",
+   "thieu_loi_khuyen": "Practise coming up with two options for each task instead of one.",
+   "mau": "black, dark blue",
+   "huong": "North",
+   "nghe": "transport, travel, media, trade, information technology",
+   "thoi_quen": "drinking enough water, sleeping enough, keeping quiet time, swimming",
+   "co_the": "kidneys, ears, bones and joints",
+   "nhip_thua": "You often lose sleep because your thoughts keep going round in circles.",
+   "nhip_thieu": "You forget to drink water when you are busy.",
+   "loi_khuyen_sk": "Drink enough water, keep your back and feet warm, and sleep enough at a fixed time.",
+   "tieu_de_thua": "Lots of Water: overthinks",
+   "tieu_de_thieu": "Little Water: hard to soften"
+  },
+  "Hỏa": {
+   "ten": "enthusiasm, presence, joy",
+   "thua": "Too much Fire can make you hasty, speaking faster than you think and unable to sit still.",
+   "thua_loi_khuyen": "Practise sitting still for a few minutes before answering anything urgent.",
+   "thieu": "With little Fire, you may lack enthusiasm and hold back from showing yourself.",
+   "thieu_loi_khuyen": "Do one thing you enjoy each week and tell someone about it.",
+   "mau": "red, orange, pink, purple",
+   "huong": "South",
+   "nghe": "media, entertainment, food, energy, work in front of an audience",
+   "thoi_quen": "morning sunlight, exercise that makes you sweat, cheerful time with friends",
+   "co_the": "heart and sleep",
+   "nhip_thua": "You tend to stay up late and drink a lot of coffee to keep going.",
+   "nhip_thieu": "Your hands and feet get cold, and you feel sluggish in the cold season.",
+   "loi_khuyen_sk": "Keep a steady rhythm of work and rest, cut back on stimulants in the evening, and exercise moderately every day.",
+   "tieu_de_thua": "Lots of Fire: can be hasty",
+   "tieu_de_thieu": "Little Fire: low on enthusiasm"
+  },
+  "Thổ": {
+   "ten": "steadiness, trustworthiness, the ability to gather and keep",
+   "thua": "Too much Earth can make you sluggish, slow to change and weighed down by worries.",
+   "thua_loi_khuyen": "Change one small habit each month so you do not get stuck.",
+   "thieu": "With little Earth, you may lack something to lean on, and plans tend to break off.",
+   "thieu_loi_khuyen": "Keep a fixed daily routine as the frame for everything else.",
+   "mau": "yellow, brown, earth tones",
+   "huong": "Northeast, Southwest",
+   "nghe": "real estate, construction, agriculture, warehouse management, administration, insurance",
+   "thoi_quen": "eating at regular times, gardening, walking barefoot on grass",
+   "co_the": "stomach and digestion",
+   "nhip_thua": "You tend to eat irregularly when stressed.",
+   "nhip_thieu": "You skip meals and eat in a rush when busy.",
+   "loi_khuyen_sk": "Eat on time, chew slowly, cut back on late-night eating, and take a gentle walk after meals.",
+   "tieu_de_thua": "Lots of Earth: sluggish, slow to change",
+   "tieu_de_thieu": "Little Earth: lacks a steady base"
+  }
+ },
+ "than_sat": {
+  "Thiên Ất Quý Nhân": {
+   "tieu_de": "Help tends to arrive at the right moment",
+   "y": "In hard times, you often meet someone who helps at just the right moment: a teacher, a boss, or a friend of a friend.",
+   "loi_khuyen": "Stay in touch with people who have helped you, and help others when you can."
+  },
+  "Văn Xương": {
+   "tieu_de": "Good with words and presenting",
+   "y": "You pick up reading and writing quickly, and you write and present clearly.",
+   "loi_khuyen": "Use your writing strength to record what you know, as a base for teaching or sharing."
+  },
+  "Thái Cực Quý Nhân": {
+   "tieu_de": "Likes to ask why",
+   "y": "You like to ask why, and often look into the philosophy and meaning behind things.",
+   "loi_khuyen": "Pick one subject to study systematically instead of reading here and there."
+  },
+  "Hoa Cái": {
+   "tieu_de": "Works best alone",
+   "y": "You learn and work best on your own, with a gift for art or reflection.",
+   "loi_khuyen": "Keep a quiet corner just for work that needs focus."
+  },
+  "Dịch Mã": {
+   "tieu_de": "Suited to travel and moving around",
+   "y": "You suit travel, changing places, and work that involves moving around or living in several places.",
+   "loi_khuyen": "Choose work that lets you get around instead of sitting in one place too long."
+  },
+  "Tướng Tinh": {
+   "tieu_de": "Natural authority when leading a group",
+   "y": "When you step up to lead a group, you have authority and others follow you easily.",
+   "loi_khuyen": "Take a lead role on small tasks first to practise leading people."
+  },
+  "Đào Hoa": {
+   "tieu_de": "Natural charm",
+   "y": "You have a natural charm and people notice you when you talk with them.",
+   "loi_khuyen": "Keep a sense of measure and be clear about your boundaries once you have a partner."
+  },
+  "Hồng Diễm": {
+   "tieu_de": "Graceful and emotional",
+   "y": "You are graceful and full of feeling in matters of love.",
+   "loi_khuyen": "Give a relationship time for you to understand each other instead of deciding on first feelings."
+  },
+  "Vong Thần": {
+   "tieu_de": "Can get caught up in gossip",
+   "y": "You can get pulled into gossip, or overthink the angles in your relationships.",
+   "loi_khuyen": "Avoid talking about people who are not there, and speak directly when there is a misunderstanding."
+  },
+  "Kiếp Sát": {
+   "tieu_de": "Can lose out to sudden events",
+   "y": "You may lose money or energy to sudden events caused by other people.",
+   "loi_khuyen": "Sign clear paperwork and keep an emergency fund."
+  },
+  "Khôi Cương": {
+   "tieu_de": "Strong-willed and outspoken",
+   "y": "You are strong-willed and outspoken, and once you decide you rarely change your mind.",
+   "loi_khuyen": "Choose softer words when talking with family."
+  },
+  "Dương Nhận": {
+   "tieu_de": "Reacts strongly when your pride is hurt",
+   "y": "When your pride is hurt, you can react strongly and fast.",
+   "loi_khuyen": "Wait one night before answering a message that annoys you."
+  },
+  "Cô Thần": {
+   "tieu_de": "Used to looking after yourself, sometimes lonely",
+   "y": "You are used to looking after yourself, and sometimes feel alone even among family.",
+   "loi_khuyen": "Take the lead in setting up small, regular get-togethers with family."
+  },
+  "Quả Tú": {
+   "tieu_de": "Independent, slow to open up",
+   "y": "You are independent, used to managing on your own, and sometimes slow to open up.",
+   "loi_khuyen": "Tell the people close to you what is going on with you, even the small things."
+  },
+  "Lộc Thần": {
+   "tieu_de": "Able to look after yourself",
+   "y": "You have a base of self-reliance: even from a small start, you can look after yourself.",
+   "loi_khuyen": "Invest in your skills; they are your most lasting source of income."
+  },
+  "Kim Dư": {
+   "tieu_de": "Often gets a helping hand",
+   "y": "You often get a helping hand in your relationships, especially from people who are well off.",
+   "loi_khuyen": "Value that help and return it so the relationship lasts."
+  },
+  "Thiên Đức": {
+   "tieu_de": "Hard times usually have a way out",
+   "y": "Hard situations usually have a way out for you, especially when you treat the people around you kindly.",
+   "loi_khuyen": "Keep a habit of small, regular good deeds."
+  },
+  "Nguyệt Đức": {
+   "tieu_de": "Hard times usually have a way out",
+   "y": "Hard situations usually have a way out for you, especially when you treat the people around you kindly.",
+   "loi_khuyen": "Keep a habit of small, regular good deeds."
+  }
+ },
+ "tinh_huong": {
+  "su_nghiep": {
+   "quan_an": {
+    "tieu_de": "Rising through trust and a will to learn",
+    "y": "You move up because people trust you with work and because you keep learning to deserve your role. Qualifications, certificates and mentors are your levers.",
+    "loi_khuyen": "Choose a place with a clear path to promotion, and invest in a certificate that counts in your field."
+   },
+   "tai_sinh_quan": {
+    "tieu_de": "Concrete results open the way to a role",
+    "y": "The money-making results you deliver often open the way to a higher position. People respect you because you bring in real work.",
+    "loi_khuyen": "Keep a record of your results in numbers to use when you talk about promotion or a raise."
+   },
+   "quan_ro": {
+    "tieu_de": "Suited to places with clear rules and roles",
+    "y": "You suit places with rules, ranks and clear roles. Given a responsibility, you see it through.",
+    "loi_khuyen": "Choose an organisation with clear processes, and tell your manager early what you want to achieve."
+   },
+   "quan_nang": {
+    "tieu_de": "Responsibility can outweigh your strength",
+    "y": "Work pressure and responsibility can weigh more than you can carry right now. You often take on extra because you find it hard to say no to those above you.",
+    "loi_khuyen": "Ask about the scope of a task before you accept it, and ask for more people or time when you are overloaded."
+   },
+   "thuong_kien_quan": {
+    "tieu_de": "Prone to friction with your boss",
+    "y": "You often find your boss's way of doing things unreasonable and say so directly. You may be right, but the way you say it costs you.",
+    "loi_khuyen": "Give feedback in private, in a short written note, with an alternative included."
+   },
+   "tu_lam": {
+    "tieu_de": "Suited to earning from your own skills",
+    "y": "You are better suited to earning from your own skills or expertise, or working for yourself, than to climbing the ladder in a big organisation.",
+    "loi_khuyen": "Build a product or service under your own name, however small, and grow it step by step."
+   },
+   "thieu_khung": {
+    "tieu_de": "Without someone setting goals, you drift",
+    "y": "When nobody sets goals for you, you drift with whatever is in front of you and change direction many times.",
+    "loi_khuyen": "Set your own quarterly goals and find someone in your field to report progress to."
+   },
+   "sat_lo": {
+    "tieu_de": "Willing to take on hard, urgent work",
+    "y": "You dare to take on hard, urgent work that others avoid. Pressure makes you sharper.",
+    "loi_khuyen": "Take roles with a clear challenge, a deadline, and the authority to decide."
+   },
+   "chinh_quan_lo": {
+    "tieu_de": "Careful and true to your word",
+    "y": "You work carefully, keep your word, and people in charge trust you.",
+    "loi_khuyen": "Keep the habit of short reports delivered on time: your reputation grows from there."
+   }
+  },
+  "tien_bac": {
+   "tai_ganh_duoc": {
+    "tieu_de": "Able to earn and manage money",
+    "y": "You are strong enough to hold on to money: you can earn it and manage it. The more responsibility you take for money, the better you do.",
+    "loi_khuyen": "Set yearly goals for your assets and track them in a simple sheet."
+   },
+   "tai_nang_than_yeu": {
+    "tieu_de": "Plenty of money comes, but carrying it is tiring",
+    "y": "Money and chances to earn come fairly often, but carrying them can wear you out. Juggling many sources at once can leave you drained.",
+    "loi_khuyen": "Choose a few solid sources of income, and ask someone good with numbers to help manage the rest."
+   },
+   "tai_vua": {
+    "tieu_de": "Money comes at a manageable level",
+    "y": "Money comes to you at a manageable level: enough to take care of things, not so much that it becomes a burden.",
+    "loi_khuyen": "Keep saving at a steady pace and avoid borrowing to expand too fast."
+   },
+   "thuc_sinh_tai": {
+    "tieu_de": "Earning from your own skills",
+    "y": "You earn best from your own skills, ideas or products you make yourself.",
+    "loi_khuyen": "Price your effort fairly, and do not work for free for too long."
+   },
+   "kiep_tai": {
+    "tieu_de": "Money slips out through friends and siblings",
+    "y": "Your money easily goes out through friends and siblings: lending, pooling, sharing, or spending to save face.",
+    "loi_khuyen": "Only lend what you can accept losing, and put it in writing when you pool money."
+   },
+   "tai_vang": {
+    "tieu_de": "Money does not come looking for you",
+    "y": "Money does not come looking for you on its own; spending drifts with whatever you need right now.",
+    "loi_khuyen": "Set up an automatic transfer to savings on payday, before you spend."
+   },
+   "chinh_tai_lo": {
+    "tieu_de": "Suited to steady income and slow, solid saving",
+    "y": "You suit steady income: a salary, long-term contracts, savings that grow slowly but surely.",
+    "loi_khuyen": "Save according to a long plan, and turn down get-rich-quick offers."
+   },
+   "thien_tai_lo": {
+    "tieu_de": "Money comes from many sources",
+    "y": "You are quick to spot opportunities; money can come from many places, such as side work, trading or referrals.",
+    "loi_khuyen": "Keep one sum of your own that you never put into risky investments."
+   }
+  },
+  "tinh_cam": {
+   "nam.sao_ro": {
+    "tieu_de": "Suited to a practical partner who builds a home with you",
+    "y": "Partnership has a clear place in your life. You suit someone practical who looks after things and shares the running of the home with you.",
+    "loi_khuyen": "Talk openly with your partner about money and shared plans early on."
+   },
+   "nu.sao_ro": {
+    "tieu_de": "You value someone responsible who keeps their word",
+    "y": "Partnership has a clear place in your life. You value someone responsible, driven, and true to their word.",
+    "loi_khuyen": "Watch how the other person keeps small promises before you trust the big ones."
+   },
+   "nam.sao_nang": {
+    "tieu_de": "You may carry too much in love",
+    "y": "In love, you may carry a lot: providing, going along with what the other wants, getting tired without saying so.",
+    "loi_khuyen": "Be clear about each person's share, and keep rest time for yourself."
+   },
+   "nu.sao_nang": {
+    "tieu_de": "You may feel pressure from the other person",
+    "y": "In love, you may feel pressure from the other person: high expectations, a lot of control.",
+    "loi_khuyen": "Set boundaries from the start: what you decide alone and what you decide together."
+   },
+   "nam.sao_vang": {
+    "tieu_de": "Love rarely turns up on its own",
+    "y": "Love rarely turns up on its own; you are busy with work and pay little attention to romance.",
+    "loi_khuyen": "Keep regular time for meeting people instead of waiting for the right occasion to open up."
+   },
+   "nu.sao_vang": {
+    "tieu_de": "Used to managing alone, so others hesitate to come close",
+    "y": "You are used to managing on your own and rarely wait for anyone to protect you, so others sometimes hesitate to come close.",
+    "loi_khuyen": "Let others help you with a few small things; that opens the door to love."
+   },
+   "nu.quan_sat_lan": {
+    "tieu_de": "Torn between two kinds of people",
+    "y": "You may feel torn between two kinds of people: one steady, one with a strong personality.",
+    "loi_khuyen": "Write down the three things you need most in a partner and check against them when you have to choose."
+   },
+   "nam.tranh": {
+    "tieu_de": "Outsiders tend to get involved in your relationship",
+    "y": "Friends and outsiders tend to get involved in the private life of the two of you, sometimes leading to comparison.",
+    "loi_khuyen": "Keep the private matters of the two of you between the two of you."
+   },
+   "chi_ngay_xung": {
+    "tieu_de": "Your rhythms as a couple may drift apart",
+    "y": "Your rhythms as a couple may drift apart: one wants to go, one wants to stay, plans keep changing.",
+    "loi_khuyen": "Leave personal space for each of you, and give notice of big changes like moving house or changing jobs."
+   },
+   "chi_ngay_hinh": {
+    "tieu_de": "You may make things hard for each other with words",
+    "y": "The two of you often make things hard for each other with words, especially when tired.",
+    "loi_khuyen": "Agree on one rule together: when tempers rise, pause and talk again an hour later."
+   },
+   "chi_ngay_hop": {
+    "tieu_de": "Able to build a lasting bond",
+    "y": "You bond easily and keep your feelings for a long time. With someone by your side, you are far steadier.",
+    "loi_khuyen": "Keep the small habits you share, like dinner together or a call at the end of the day."
+   }
+  },
+  "gia_dinh": {
+   "an_ro": {
+    "tieu_de": "Support from your mother and older relatives",
+    "y": "Your mother or older relatives are your support; in hard times you still have a place to come back to.",
+    "loi_khuyen": "Make regular time for those who looked after you, even when you are busy."
+   },
+   "an_nang": {
+    "tieu_de": "Well looked after, so slow to decide for yourself",
+    "y": "You are looked after a lot, so sometimes you hesitate to decide for yourself or let older relatives decide for you.",
+    "loi_khuyen": "Thank them for their care, then say clearly which things you want to decide yourself."
+   },
+   "an_vang": {
+    "tieu_de": "Looking after yourself from early on",
+    "y": "You had to look after yourself early, with less protection than many others.",
+    "loi_khuyen": "Allow yourself to accept help: being independent does not mean doing everything alone."
+   },
+   "tai_pha_an": {
+    "tieu_de": "Earning money eats into family time",
+    "y": "Money and work often eat into the time you have for family and for learning.",
+    "loi_khuyen": "Keep one fixed block each week for family, and do no work during it."
+   },
+   "nam_thang_xung": {
+    "tieu_de": "Some upheaval in your roots",
+    "y": "Your family background has some upheaval: moving homes, leaving home early, or living differently from your parents.",
+    "loi_khuyen": "Stay in touch with your family in a way that suits you; it does not have to look like everyone else's."
+   },
+   "nam_thang_hop": {
+    "tieu_de": "A family with close-knit ways",
+    "y": "Your family has close-knit ways, and you carry many good habits from your parents.",
+    "loi_khuyen": "Pass those family ways on to the next generation."
+   },
+   "anh_em_do": {
+    "tieu_de": "Your siblings are a support",
+    "y": "Your siblings and close friends are real support when you need it.",
+    "loi_khuyen": "Keep your word and share fairly so the bond lasts."
+   },
+   "anh_em_tranh": {
+    "tieu_de": "Siblings may compare and compete",
+    "y": "Siblings may compare who gets more and who gets less, especially over money and caring for your parents.",
+    "loi_khuyen": "Agree on how family tasks and money are split, in black and white."
+   },
+   "anh_em_it": {
+    "tieu_de": "Close friends take the place of siblings",
+    "y": "You rely little on your siblings; close friends usually fill that role.",
+    "loi_khuyen": "Keep a few long friendships as if they were family."
+   },
+   "con_ro": {
+    "tieu_de": "Children are a big motivation",
+    "y": "Children have a clear place in your life; they are a big motivation for you to keep trying.",
+    "loi_khuyen": "Tell your children about the times you got through hard things, not just about your successes."
+   },
+   "con_vang": {
+    "tieu_de": "Plan for children early",
+    "y": "Having and raising children usually needs you to plan your time and energy ahead.",
+    "loi_khuyen": "Plan early for the years with children, both for work and for money."
+   },
+   "con_vang_lon": {
+    "tieu_de": "Independent children need steady contact",
+    "y": "Your children tend to become independent early and rarely ask you for help; the bond stays strong through regular check-ins.",
+    "loi_khuyen": "Set regular times to call your children and grandchildren, rather than waiting for a reason to get in touch."
+   },
+   "gio_ngay_xung": {
+    "tieu_de": "Your children may be unlike you",
+    "y": "Your children, or young people you guide, may have a different temperament and want to go their own way.",
+    "loi_khuyen": "Ask what your child thinks before giving advice, and let them choose for themselves in small things."
+   },
+   "gio_ngay_hop": {
+    "tieu_de": "Close to children and young people",
+    "y": "You get on well with children and young people; you talk easily and they listen.",
+    "loi_khuyen": "Make time to play with your children; that is when they learn the most from you."
+   }
+  },
+  "hoc_tap": {
+   "an_hoc": {
+    "tieu_de": "Learns deeply, needs to understand the roots",
+    "y": "You learn in depth and need to understand the roots before you feel ready to act.",
+    "loi_khuyen": "Choose foundational books and well-structured courses over quick tricks."
+   },
+   "thuc_than_hoc": {
+    "tieu_de": "Learns by doing",
+    "y": "You learn by doing: trying, tasting, making it yourself is what makes it stick.",
+    "loi_khuyen": "Turn each lesson into a small piece of work, like a dish, a piece of writing or a short video."
+   },
+   "thuong_quan_hoc": {
+    "tieu_de": "Learns fast, dislikes rote learning",
+    "y": "You learn fast, ask challenging questions, and dislike learning by heart.",
+    "loi_khuyen": "Learn through projects with clear results, and teach others to check yourself."
+   },
+   "thien_an_hoc": {
+    "tieu_de": "Understands by intuition first",
+    "y": "You have your own way of thinking and often understand by intuition before you can explain it.",
+    "loi_khuyen": "Jot down ideas as they come, then check them against the facts."
+   },
+   "kieu_doat_thuc": {
+    "tieu_de": "Thinks so carefully that good ideas get dropped",
+    "y": "You think things through so carefully that you often set your own ideas aside before trying them.",
+    "loi_khuyen": "Give each idea a small trial for one week before you judge it."
+   },
+   "hoc_mong": {
+    "tieu_de": "Learns best through real experience",
+    "y": "You learn best through real experience; long stretches of theory wear you down.",
+    "loi_khuyen": "Choose short courses with real practice and someone to guide you."
+   },
+   "nen_mong": {
+    "tieu_de": "Gaps in the basics",
+    "y": "You talk and act faster than you learn the basics, so sometimes there are gaps in the foundations.",
+    "loi_khuyen": "Go back over the basics every time you move up a level."
+   }
+  },
+  "quan_he": {
+   "ban_do": {
+    "tieu_de": "Peers back you up",
+    "y": "Friends and colleagues at your level often back you up when needed; working in a group takes you further.",
+    "loi_khuyen": "Choose a small group with shared goals and meet regularly."
+   },
+   "ban_tranh": {
+    "tieu_de": "Rivalry with peers comes easily",
+    "y": "With people at your level, things easily turn into competition: who is better, who gets more.",
+    "loi_khuyen": "Work together on big things, and compare yourself only with who you were last year."
+   },
+   "ban_it": {
+    "tieu_de": "Used to doing it yourself, rarely asks for help",
+    "y": "You are used to doing things yourself and rarely ask your peers for help.",
+    "loi_khuyen": "Try one small joint project to see what teamwork can do for you."
+   },
+   "ban_vua": {
+    "tieu_de": "Balanced ties with peers",
+    "y": "You keep a moderate balance with peers: you have people to work with, and rarely fight anyone for a share.",
+    "loi_khuyen": "Invite someone a little more skilled than you into shared work so you both grow."
+   },
+   "ap_luc_ngoai": {
+    "tieu_de": "Feels pressure from people with power",
+    "y": "You easily feel pressure from people with power: bosses, big clients, older people.",
+    "loi_khuyen": "Put agreements in writing, and ask again when a request is unclear."
+   }
+  }
+ },
+ "phoi_ngau": {
+  "Tỷ Kiên": {
+   "tieu_de": "Close like two equal friends",
+   "y": "You suit a relationship like two equal friends: working together, deciding together.",
+   "loi_khuyen": "Split housework and money matters clearly so nobody feels short-changed."
+  },
+  "Kiếp Tài": {
+   "tieu_de": "Prone to competing over who is ahead",
+   "y": "You and your partner may compete over who is right and who comes out ahead.",
+   "loi_khuyen": "Praise each other more, and avoid comparing who contributes more."
+  },
+  "Thực Thần": {
+   "tieu_de": "Wants a comfortable home",
+   "y": "You want a comfortable home with good food and happy conversation, and you like to spoil the person you love.",
+   "loi_khuyen": "Keep some time for yourself so you do not run dry from pleasing others."
+  },
+  "Thương Quan": {
+   "tieu_de": "High expectations of your partner",
+   "y": "You expect a lot from your partner and can be critical when disappointed.",
+   "loi_khuyen": "Say what you need instead of what your partner did wrong."
+  },
+  "Thiên Tài": {
+   "tieu_de": "Generous, likes to surprise your partner",
+   "y": "You are generous and like to surprise your partner; the relationship has plenty of joy.",
+   "loi_khuyen": "Keep the everyday steadiness alongside the surprises."
+  },
+  "Chính Tài": {
+   "tieu_de": "Faithful, values stability",
+   "y": "You are faithful, value stability, and take care of your life together.",
+   "loi_khuyen": "Try something new together now and then so things do not go flat."
+  },
+  "Thất Sát": {
+   "tieu_de": "Lots of love, lots of friction",
+   "y": "Your relationships carry strong emotions: a lot of love and a lot of friction.",
+   "loi_khuyen": "Learn to argue without insults, and make up the same day."
+  },
+  "Chính Quan": {
+   "tieu_de": "Serious, wants clear commitment",
+   "y": "You are serious about love and want a clear relationship with commitment.",
+   "loi_khuyen": "Let your partner see your soft side alongside your proper one."
+  },
+  "Thiên Ấn": {
+   "tieu_de": "Needs a lot of personal space",
+   "y": "You need a lot of personal space in a relationship, which can make your partner feel distant.",
+   "loi_khuyen": "Say in advance when you need time alone so your partner does not misread it."
+  },
+  "Chính Ấn": {
+   "tieu_de": "Looks for care and understanding",
+   "y": "You look for care and understanding in your partner, and look after them like family.",
+   "loi_khuyen": "Let both of you grow, rather than one person taking care of everything for the other."
+  }
+ },
+ "suc_khoe": {
+  "than": {
+   "manh": {
+    "y": "Your stamina is fairly good, but you often push too hard because you trust your strength.",
+    "loi_khuyen": "Rest on a schedule; do not wait until you are tired."
+   },
+   "yeu": {
+    "y": "You tire when you take on many things at once, and you recover more slowly than you think.",
+    "loi_khuyen": "Sleep enough, break big tasks into small parts, and take short breaks between them."
+   },
+   "can_bang": {
+    "y": "Your energy does not swing much; you recover fairly quickly after a good night's sleep.",
+    "loi_khuyen": "Move gently every day and have a health check-up every year."
+   }
+  },
+  "can_doi": "The five elements in your chart are fairly balanced, with none clearly lopsided.",
+  "chung": "These are care suggestions based on old books, not a replacement for a doctor's advice. If you notice anything unusual, see a doctor."
+ },
+ "van": {
+  "Tỷ Kiên": {
+   "chu_de": "independence, doing things your own way, friends on your level",
+   "nen_thuan": "Good for stepping up on your own, starting your own work, and bringing in like-minded people.",
+   "de_vap": "Many people may want a share, and money goes out through friends.",
+   "nen_chu_dong": "Keep your own money separate and sign clear agreements when working with others."
+  },
+  "Kiếp Tài": {
+   "chu_de": "competition, risk-taking to win, money moving in and out fast",
+   "nen_thuan": "Good for testing yourself in competitive settings and winning a bigger share of work.",
+   "de_vap": "Money can drain away through quick decisions.",
+   "nen_chu_dong": "Set spending limits and avoid pooling money until things are clear."
+  },
+  "Thực Thần": {
+   "chu_de": "making things, enjoying life, children, craft",
+   "nen_thuan": "Good for sharpening your skills, making things, caring for your children, and living at an easier pace.",
+   "de_vap": "You may slide into fun and slow down.",
+   "nen_chu_dong": "Set clear goals for each year."
+  },
+  "Thương Quan": {
+   "chu_de": "creativity, self-expression, breaking old moulds",
+   "nen_thuan": "Good for doing new things, launching products, and building your own voice.",
+   "de_vap": "Friction with bosses and rules comes easily.",
+   "nen_chu_dong": "Give feedback tactfully and keep paperwork clear."
+  },
+  "Thiên Tài": {
+   "chu_de": "business chances, networking, money from many sources",
+   "nen_thuan": "Good for widening your business contacts and trying new income streams.",
+   "de_vap": "You may spend freely and invest on a whim.",
+   "nen_chu_dong": "Keep an emergency fund before starting anything new."
+  },
+  "Chính Tài": {
+   "chu_de": "steady income, saving, home and marriage",
+   "nen_thuan": "Good for saving, buying assets, and settling family life.",
+   "de_vap": "Money may tie you down; you work hard but keep little.",
+   "nen_chu_dong": "Set a monthly budget and stick to it."
+  },
+  "Thất Sát": {
+   "chu_de": "pressure, challenges, big things arriving fast",
+   "nen_thuan": "Good for taking on hard roles and moving into positions that need nerve.",
+   "de_vap": "Overload and friction with people in power come easily.",
+   "nen_chu_dong": "Look after your health and take on only what is truly needed."
+  },
+  "Chính Quan": {
+   "chu_de": "position, reputation, responsibility, rules",
+   "nen_thuan": "Good for promotion, taking on a title, and building your reputation.",
+   "de_vap": "Rules and expectations can tie you down.",
+   "nen_chu_dong": "Be clear about what you can and cannot accept."
+  },
+  "Thiên Ấn": {
+   "chu_de": "unusual learning, deep expertise, time to look inward",
+   "nen_thuan": "Good for learning a new trade, research, or changing your field.",
+   "de_vap": "You may withdraw, doubt things and leave them unfinished.",
+   "nen_chu_dong": "Find a study partner to keep your pace."
+  },
+  "Chính Ấn": {
+   "chu_de": "study, qualifications, support from others, home and paperwork",
+   "nen_thuan": "Good for further study, certificate exams, and asking those ahead of you to show the way.",
+   "de_vap": "You may lean on others and be slow to decide.",
+   "nen_chu_dong": "Own one task yourself from start to finish."
+  }
+ },
+ "thang": {
+  "Tỷ Kiên": "good for working on your own and meeting like-minded people",
+  "Kiếp Tài": "good for friendly competition, but keep a tight hold on your wallet",
+  "Thực Thần": "good for making things, resting, and looking after your children",
+  "Thương Quan": "good for presenting new ideas; be careful how you speak to those above you",
+  "Thiên Tài": "good for meeting partners and trying new sources of income",
+  "Chính Tài": "good for sorting out your finances, paying off debt, and saving",
+  "Thất Sát": "urgent work piles up; do the most important thing first",
+  "Chính Quan": "good for submitting applications, asking for approval, and working with your boss",
+  "Thiên Ấn": "good for learning something new and rethinking your plans",
+  "Chính Ấn": "good for further study, asking someone experienced for advice, and handling paperwork"
+ },
+ "van_tham_chieu": {
+  "dang_di": {
+   "cuoc_doi_tom": "You are in the {tu_tuoi}–{den_tuoi} stage of life, which revolves around {chu_de}.",
+   "cuoc_doi_dau": "The stage you are in now",
+   "cuoc_doi_sau": "The next stage",
+   "nam_nay_tieu_de": "These ten years: {chu_de}",
+   "nam_nay_hop": "These ten years revolve around {chu_de}; this year is year {so_nam} of the stage.",
+   "nam_nay_muc": "For you, the whole stage is {muc}.",
+   "nam_nay_tom": "These ten years revolve around {chu_de}"
+  },
+  "chua_khoi": {
+   "cuoc_doi_tom": "Your first ten-year stage starts around age {tu_tuoi} and revolves around {chu_de}.",
+   "cuoc_doi_dau": "The first ten-year stage",
+   "cuoc_doi_sau": "The next stage",
+   "nam_nay_tieu_de": "The first ten years, from {nam_tu}",
+   "nam_nay_hop": "Your first ten-year stage has not begun yet: it starts in {nam_tu} and revolves around {chu_de}. Until then, read your rhythm year by year and month by month below.",
+   "nam_nay_muc": "For you, that stage is {muc}.",
+   "nam_nay_tom": "Your first ten-year stage opens in {nam_tu} and revolves around {chu_de}"
+  },
+  "da_qua_van_cuoi": {
+   "cuoc_doi_tom": "You have passed through all {so_van} ten-year stages in your chart; the most recent one (ages {tu_tuoi}–{den_tuoi}) revolved around {chu_de}.",
+   "cuoc_doi_dau": "The most recent ten-year stage",
+   "cuoc_doi_sau": "The stage before that",
+   "nam_nay_tieu_de": "After {so_van} ten-year stages",
+   "nam_nay_hop": "You have passed through all {so_van} ten-year stages in your chart; the most recent one ({nam_tu}–{nam_den}) revolved around {chu_de}. From here, read your rhythm year by year and month by month below.",
+   "nam_nay_tom": "You have passed through all {so_van} ten-year stages in your chart, so your rhythm now is read year by year"
+  }
+ },
+ "nam_quan_he": {
+  "xung": {
+   "tieu_de": "A year of change in things close to you",
+   "y": "A year of change in things close to you: your home, your daily work or your love life.",
+   "loi_khuyen": "Plan big changes ahead, and do not decide many big things at once."
+  },
+  "hop": {
+   "tieu_de": "A year for new bonds",
+   "y": "A year that favours new bonds: partnerships, new acquaintances, family growing closer.",
+   "loi_khuyen": "Reach out first to the person you want to be closer to."
+  },
+  "hinh": {
+   "tieu_de": "A year of self-made pressure",
+   "y": "A year when you may put pressure on yourself and aim for too much perfection.",
+   "loi_khuyen": "Lower your expectations and pick three main things for the whole year."
+  }
+ },
+ "tom_tat": {
+  "tong_quan": {
+   "thuan": "You have plenty of inner support already; know where you are strong and you move fast.",
+   "can_bang": "You have clear strengths and a few weak spots; understand both and choosing your path gets easier.",
+   "can_chu_dong": "You need to rebalance yourself more than most; in return, you get to know yourself early and well."
+  },
+  "ngu_hanh": {
+   "thuan": "Your energy is fairly balanced; what you need more of is already in your chart.",
+   "can_bang": "Your energy leans to one side; adding the right missing part makes life easier.",
+   "can_chu_dong": "Your energy is clearly lopsided; make up for what is missing through your daily routines."
+  },
+  "su_nghiep": {
+   "thuan": "Work is an area where you get results easily if you choose the right setting.",
+   "can_bang": "Your work has support, but results depend a lot on where you choose to work and how you work.",
+   "can_chu_dong": "Work rarely runs smoothly on its own; choose your setting carefully and set your own structure."
+  },
+  "tien_bac": {
+   "thuan": "Money is an area you have a grip on: earning it and keeping it are both within reach.",
+   "can_bang": "Money flows in and out fairly evenly; how much you keep depends on your spending habits.",
+   "can_chu_dong": "Money needs more of your attention; a clear way of managing it cuts the losses."
+  },
+  "tinh_cam": {
+   "thuan": "Love has a good foundation; you bond for the long term once you meet the right person.",
+   "can_bang": "Your love life has its sweet moments and its bumps; understanding each other's rhythm makes it much smoother.",
+   "can_chu_dong": "Love needs you to speak clearly and nurture it; left to chance, your rhythms drift apart."
+  },
+  "gia_dinh": {
+   "thuan": "Family is your support; you receive a lot and give a lot back.",
+   "can_bang": "Family has close parts and distant parts; everyone has their own ways, so a little tact keeps things calm.",
+   "can_chu_dong": "Family matters ask you to look after yourself early and keep clear boundaries."
+  },
+  "hoc_tap": {
+   "thuan": "You learn fast and know how to turn what you learn into action.",
+   "can_bang": "You learn well when you learn your own way; the wrong way quickly discourages you.",
+   "can_chu_dong": "Learning needs a clear path and someone to guide you; figuring it out alone tends to stall halfway."
+  },
+  "suc_khoe": {
+   "thuan": "Your energy is fairly steady; keep your routines and you keep your strength.",
+   "can_bang": "Your energy goes up and down, depending a lot on how you eat and sleep.",
+   "can_chu_dong": "You wear out faster than you think; rest before you get tired."
+  },
+  "quan_he": {
+   "thuan": "People around you often help; you go further by working with others.",
+   "can_bang": "Out in the world, some people help and some get in the way; choosing your people is worth the effort.",
+   "can_chu_dong": "Your outside environment can wear you out; choose the people you work with carefully and keep boundaries."
+  }
+ },
+ "cau_tu_soi": {
+  "ngu_hanh": "When do you feel full of energy, when do you feel drained, and what are you doing at those times?",
+  "cuoc_doi": "Looking back over the past ten years, what do you want to keep and what do you want to drop in the next ten?",
+  "su_nghiep": "Which work makes you lose track of time, and which leaves you drained when it is done?",
+  "tien_bac": "The last time you spent money and felt it was worth it, what was it for?",
+  "tinh_cam": "What do you need your partner to do for you to feel loved, and have you said it out loud?",
+  "gia_dinh": "Which family ways do you want to keep, and which do you want to do differently?",
+  "hoc_tap": "The last thing you learned quickly, what way of learning made that happen?",
+  "suc_khoe": "Which small habit, done every day, would help your health the most?",
+  "quan_he": "Who leaves you stronger after every meeting, and when did you last see them?",
+  "nam_nay": "If you could finish only one thing this year, what would you choose?",
+  "loi_khuyen": "Of the three things worth doing, which one can you start this very week?"
+ },
+ "doi_chieu": {
+  "cach_1": {
+   "ten": "The balance method",
+   "mo_ta": "Looks at your own strength and the climate of your birth month, then fills the gap: more {hanh} suits you."
+  },
+  "cach_2": {
+   "ten": "The birth-month method",
+   "mo_ta": "Looks at the character pattern your birth month creates, then picks the element that feeds it: more {hanh} suits you."
+  },
+  "hoi_nam": "Looking back at {nam} (when you were {tuoi}), overall it was a year that felt…",
+  "hoi_van": "Looking back at ages {tu_tuoi}–{den_tuoi} (from {tu} to {den}), overall that stretch felt…",
+  "lua_chon": {
+   "thuan": "Fairly smooth",
+   "can_bang": "Ordinary",
+   "can_chu_dong": "Fairly hard",
+   "khong_nho": "I do not remember"
+  },
+  "ket_luan": {
+   "cach_1": "The years you described match the balance method more clearly. When the two readings differ, you can lean on this one more.",
+   "cach_2": "The years you described match the birth-month method more clearly. When the two readings differ, you can lean on this one more.",
+   "nghieng_1": "Leaning slightly toward the balance method, but not clearly yet. Answering a few more years will make it firmer.",
+   "nghieng_2": "Leaning slightly toward the birth-month method, but not clearly yet. Answering a few more years will make it firmer.",
+   "chua_ro": "Both methods match the years you described equally well. Keep reading both; where they agree is the firmest ground."
+  },
+  "ly_do": {
+   "it_nam_qua": "You have only a few past years to compare against, so there is no need to choose a method yet.",
+   "hai_cach_trung": "For the years already behind you, your two readings say almost the same thing, so there is no need to choose yet."
+  }
+ },
+ "luu_y_mang": {
+  "_ranh_gioi": {
+   "tien_bac": "This is not financial advice; for any loan, investment or purchase, work it out with real numbers.",
+   "cong_viec": "Whether you get promoted also depends on your workplace; the Four Pillars only show when you are more likely to be noticed.",
+   "tinh_cam": "The Four Pillars do not count marriages or say who leaves whom; they only show where the two of you tend to clash.",
+   "con_cai": "Whether you have children, how many, boys or girls, is a matter for your body and your doctor; the Four Pillars cannot tell.",
+   "di_lai": "The Four Pillars do not say whether anything will happen on the road; nobody can tell that from a birth date. They only show when to slow down. Follow road safety rules.",
+   "giay_to": "Winning or losing, right or wrong, depends on the documents and your lawyer; talk to a qualified professional before you sign or sue.",
+   "suc_khoe": "This part is about your daily rhythm and does not replace a doctor's advice; regular check-ups are still worth doing."
+  },
+  "tien_bac": {
+   "thuan": {
+    "luu_y": "Money comes in fairly steadily; the weak spot is spending on momentum while things go well.",
+    "viec": "Set aside a sum you will not touch before spending the rest."
+   },
+   "can_bang": {
+    "luu_y": "Money comes in and goes out evenly but leaves little spare; how much you keep depends on your spending habits.",
+    "viec": "Write down every expense for one month to see where money leaks."
+   },
+   "can_chu_dong": {
+    "luu_y": "Money drains through haste or through not wanting to say no; surprise expenses tend to come right after you have spent a lot.",
+    "viec": "Money matters with other people always go on paper, even with people you know; wait three days before deciding on a large sum."
+   }
+  },
+  "cong_viec": {
+   "thuan": {
+    "luu_y": "Work is going well and more may be handed to you; the thing to watch is taking on a lot and running out of steam.",
+    "viec": "Pick one task where people will see the result, and finish it before taking on more."
+   },
+   "can_bang": {
+    "luu_y": "Work moves steadily, but recognition comes more slowly than you hope.",
+    "viec": "Send a short written summary of every task given to you verbally, and be clear about the part you did."
+   },
+   "can_chu_dong": {
+    "luu_y": "Work may bring pressure from above or a change of role midway.",
+    "viec": "Hold on to your main work, and be clear about what you are taking on before you start."
+   }
+  },
+  "tinh_cam": {
+   "thuan": {
+    "luu_y": "Love is calm; the weak spot is taking that calm for granted.",
+    "viec": "Once a week, have a conversation with your phones put away."
+   },
+   "can_bang": {
+    "luu_y": "Your love life has its sweet moments and its bumps; understanding each other's rhythm makes it much smoother.",
+    "viec": "When things get tense, each of you says one thing you need, without bringing up old issues."
+   },
+   "can_chu_dong": {
+    "luu_y": "You may misunderstand each other over things left unsaid, or over who decides the big things.",
+    "viec": "State one specific wish instead of waiting for the other person to guess."
+   }
+  },
+  "con_cai": {
+   "thuan": {
+    "luu_y": "You are close to your children and have good routines; the weak spot is expecting more than your child can give.",
+    "viec": "Each day, ask your child one question about something they like, not about their marks."
+   },
+   "can_bang": {
+    "luu_y": "You look after your children well, but may be stricter than you think.",
+    "viec": "Praise your child for one specific thing each week."
+   },
+   "can_chu_dong": {
+    "luu_y": "Your children's matters may weigh on you: school, where they live, or the gap between generations.",
+    "viec": "Keep one session a week just for listening to your child, without correcting."
+   }
+  },
+  "di_lai": {
+   "thuan": {
+    "luu_y": "Going out and travelling go well; the thing to watch is getting careless when everything runs smoothly.",
+    "viec": "For long trips, set off early and carry copies of important documents."
+   },
+   "can_bang": {
+    "luu_y": "Travel is normal, though plans often change or small hitches happen on the way.",
+    "viec": "Plan your trips early, and do not drive when you are already tired."
+   },
+   "can_chu_dong": {
+    "luu_y": "This is a time to go slower: you tend to rush and do many things at once.",
+    "viec": "Set off early, do not drive when tired, and check your safety gear before using it."
+   }
+  },
+  "giay_to": {
+   "thuan": {
+    "luu_y": "Papers and contracts usually go smoothly; the weak spot is signing because you know the person.",
+    "viec": "Read everything before you sign, even with family."
+   },
+   "can_bang": {
+    "luu_y": "Papers and contracts move steadily but need you to check them yourself; do not hand them over to anyone entirely.",
+    "viec": "Keep copies of every signed document in one place."
+   },
+   "can_chu_dong": {
+    "luu_y": "Papers, contracts and dealings with outsiders may get stuck more than usual.",
+    "viec": "Every loan and every agreement goes on paper; do not put things in your name for others, and do not sign on anyone's behalf."
+   }
+  },
+  "suc_khoe": {
+   "thuan": {
+    "luu_y": "Your energy is steady; the weak spot is working a lot and forgetting to rest when you feel well.",
+    "viec": "Keep one full day off each week, and have a routine check-up early in the year."
+   },
+   "can_bang": {
+    "luu_y": "Your energy rises and falls with your work rhythm; lack of sleep drains you fastest.",
+    "viec": "Be asleep before 23h on at least five nights a week."
+   },
+   "can_chu_dong": {
+    "luu_y": "You tire more easily than you think and tend to keep worries inside.",
+    "viec": "Have regular health check-ups, and each month share one worry with someone close."
+   }
+  }
+ }
+}

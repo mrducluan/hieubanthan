@@ -10,6 +10,8 @@ Web khoá dòng của chương chưa mở (SAO-2) như hộp "Điều quan trọ
 """
 from __future__ import annotations
 
+from app.luangiai import doi_song_khuon as kh
+
 import re
 
 MANG = [
@@ -106,6 +108,10 @@ def dung(bc_chuong: list[dict], mo_dun: str, muc_cung: dict[str, str] | None = N
             if ma == "con_cai":
                 muc = (muc_mang or {}).get("gia_dinh") or muc
         h = _chon_hop(c, tu_khoa, da_dung)
+        # EN-ALL: hộp chọn theo từ khoá TIẾNG VIỆT → bản dịch lấy đúng hộp bản Việt đã chọn (theo mã kiểm chứng)
+        m_vi = kh.quyet(("luu_y_mang", mo_dun, ma), h.get("ma_mau") if h else None)
+        if kh.dang_theo():
+            h = next((x for x in (c or {}).get("hop") or [] if m_vi and x.get("ma_mau") == m_vi), None)
         o = (kb.get(ma) or {}).get(muc) or _MAC_DINH          # KB thiếu ô vẫn chạy (test_kb_thieu_o_van_chay)
         if h:
             da_dung.add(h.get("ma_mau") or h.get("tieu_de"))

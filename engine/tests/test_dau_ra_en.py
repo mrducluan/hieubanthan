@@ -19,9 +19,18 @@ from tests import _dau_ra as dr
 # route → giai đoạn sẽ làm (mục 6 của docs/PROMPT-EN-TOAN-BO.md)
 CHUA_XONG: dict[str, int] = {
     # GĐ 2 — nền engine (tên riêng, khuôn dùng chung, danh mục)
-    "dia_ly": 2, "tu_dien": 2, "y_dinh": 2, "y_dinh.goi_mo": 2, "hoi": 2, "giao_thoa": 2, "timebase": 2, "kb": 2, "kb.trang": 2,   # `kb`: mục lục /v1/kb/trang trả 500 khi en (lỗi có sẵn)
+    # GĐ 2 xong (2026-11-10): dia_ly, tu_dien, y_dinh, y_dinh.goi_mo, hoi (câu chuẩn), giao_thoa, timebase.
+    # Trang kiến thức theo LOẠI (`kb.trang.<loai>`) — chuyển thể cùng giai đoạn của mảng. `kb` = mục lục /v1/kb/trang
+    # (+ /v1/kb/status): sạch khi MỌI loại sạch → GĐ 11.
+    "kb": 11,
+    "kb.trang.thap_than": 3, "kb.trang.nhat_chu": 3, "kb.trang.menh_nam": 3,
+    "kb.trang.sao": 4, "kb.trang.cung": 4, "kb.trang.sao_cung": 4, "kb.trang.hoa_cung": 4, "kb.trang.co_thu": 4,
+    "kb.trang.dau_hieu": 5, "kb.trang.que": 6,
+    "kb.trang.so": 7, "kb.trang.so_kep": 7, "kb.trang.cap_so": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7,
+    "kb.trang.nam_ca_nhan": 7, "kb.trang.no_nghiep": 7, "kb.trang.la_bai": 7,
+    "kb.trang.bo_vi": 8,
     # GĐ 3 — Bát tự
-    "battu.la_so": 3, "battu.luan_giai": 3, "battu.luu_nien": 3, "battu.doi_chieu_cach": 3, "hoi.battu": 3,
+    "battu.luan_giai": 3, "hoi.battu": 3,   # xong: battu.la_so, battu.luu_nien, battu.doi_chieu_cach
     # GĐ 4 — Tử vi
     "tuvi": 4, "tuvi.an_sao": 4, "tuvi.tuan_triet": 4, "tuvi.luan_giai": 4, "tuvi.van_han": 4, "tuvi.luu_nguyet": 4,
     "tuvi.nhip_3_thang": 4, "tuvi.phi_hoa": 4, "tuvi.hop_tham": 4, "tuvi.dinh_gio": 4, "tuvi.la_so_mau": 4, "hoi.tuvi": 4,
@@ -33,7 +42,7 @@ CHUA_XONG: dict[str, int] = {
     "kinhdich": 6, "kinhdich.hieu_cau": 6, "kinhdich.hoi": 6, "kinhdich.khoi_que": 6, "kinhdich.que_rieng": 6, "hoi.kinhdich": 6,
     # GĐ 7 — Thần số + Tarot đầy đủ
     "thanso.ba_goc_nhin": 7, "thanso.ban_do": 7, "thanso.cap_so": 7, "thanso.chaldea": 7, "thanso.chu_ky": 7, "thanso.do_nhay": 7,
-    "thanso.doi_chieu_nam": 7, "thanso.hom_nay": 7, "thanso.hop_doi": 7, "thanso.luan_giai": 7, "thanso.ngu_canh": 7,
+    "thanso.doi_chieu_nam": 7, "thanso.hom_nay": 7, "thanso.hop_doi": 7, "thanso.ngu_canh": 7,
     "thanso.nhip": 7, "thanso.noi_dau": 7, "thanso.the_ngay": 7, "thanso.tong_hop": 7,
     "tarot.the": 7, "goi_y_cheo": 7, "ban_do_5_mang": 7, "thanso.tuan": 7, "thanso.hom_nay_hai": 7,
     # GĐ 8 — nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới
@@ -55,7 +64,7 @@ KHUNG_BO_QUA = {
     "tarot.doc_bai",     # QTE-3: bản phủ tắt `truong_phai` / `viec_lv` (null) → ít hộp hơn; khôi phục ở GĐ 7
 }
 # Khung lệch CHƯA giải thích — phải sửa ở giai đoạn ghi kèm (ngôn ngữ không được đổi dữ kiện).
-KHUNG_CHUA_XONG: dict[str, int] = {"kb.trang": 2, "goi_y_cheo": 7, "thanso.ban_do": 7, "chan_dung": 8, "thoi_gian_toi": 8}
+KHUNG_CHUA_XONG: dict[str, int] = {"kb.trang.la_bai": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7, "goi_y_cheo": 7, "thanso.ban_do": 7, "chan_dung": 8, "thoi_gian_toi": 8}
 
 
 @pytest.fixture(scope="module")

@@ -1521,6 +1521,7 @@ def dong_nam_cua(sinh: dict, ngay_xem: dt.date, ls: dict | None = None) -> list[
     return dong_muoi_nam(pt, tgb, nam0, d0.year, vt, nam_sinh_am)
 
 
+@kh.vi_quyet_dinh
 def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
         ca_nhan: dict | None = None, ls: dict | None = None) -> dict:
     """`sinh` = {"lich": datetime giờ lịch UTC+7, "gioi_tinh": "nam"|"nu", "gio_ty"?}. → báo cáo `doi_song_1` (chưa có

@@ -7,6 +7,8 @@ tinh, Sephirah, Hebrew — bảng thật cho lá số 2–10), trích sách (Wai
 Không điểm số, không sinh nghĩa mới."""
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import re
 
 from app.calc import tarot as calc
@@ -23,6 +25,7 @@ def _t():
     return trang
 
 
+@ngon_ngu.theo_viet
 def ds_la_bai() -> list[tuple[str, str]]:
     t = _t()
     return [(ma, t._slug(kb.la()[ma]["ten"])) for ma in calc.BO_BAI]

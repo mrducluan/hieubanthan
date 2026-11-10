@@ -7,6 +7,8 @@ quan sát (câu khảo sát), nốt ruồi ở vùng này (nếu có). Không đ
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 from app.kb import nhan_tuong_kb as kb
 
 DUONG_CONG_CU = "/nhan-tuong"
@@ -20,6 +22,7 @@ def _t():
     return trang
 
 
+@ngon_ngu.theo_viet
 def ds_bo_vi() -> list[tuple[str, str]]:
     return [(ma, _t()._slug(x["ten"].split(" (")[0].split(" – ")[0])) for ma, x in kb.bo_vi().items()]
 

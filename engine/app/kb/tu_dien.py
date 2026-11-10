@@ -9,6 +9,7 @@ from __future__ import annotations
 import re
 import unicodedata
 from pathlib import Path
+from app import ngon_ngu
 from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "tu_dien.json"
@@ -29,7 +30,15 @@ def _chuan(s: str) -> str:
 
 @nap.nho
 def _d() -> dict:
-    return nap.doc(_F.name)
+    d = nap.doc(_F.name)
+    # EN-ALL: biến thể tên là danh sách CỦA RIÊNG mỗi ngôn ngữ (dùng để nhận diện thuật ngữ trong chữ ngôn ngữ đó) — bản
+    # phủ thay HẲN danh sách, không trộn biến thể tiếng Việt vào (nap.gop gộp danh sách theo vị trí).
+    nn = ngon_ngu.hien_tai()
+    if nn != ngon_ngu.MAC_DINH and nap.co_ban_phu(_F.name, nn):
+        phu = {m.get("ma"): m for m in (nap._doc_tho(nap.duong(_F.name, nn)).get("muc") or []) if isinstance(m, dict)}
+        d = {**d, "muc": [{**m, "bien_the": list(phu[m["ma"]]["bien_the"])} if isinstance((phu.get(m["ma"]) or {}).get("bien_the"), list) else m
+                          for m in d["muc"]]}
+    return d
 
 
 def meta() -> dict:

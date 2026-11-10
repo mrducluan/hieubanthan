@@ -22,6 +22,7 @@ from __future__ import annotations
 import re
 
 from app.kb import chu_y_kb as kb
+from app.kb.loi import L, danh_sach
 
 SO_NAM = 10
 TOI_DA_NAM = 3
@@ -36,8 +37,7 @@ _TRU = {"nam": (0,), "thang_gio": (1, 3), "ngay": (2,), "ngay_xung": (2,)}
 
 # ------------------------------------------------------------------ câu
 def _noi(ds: list) -> str:
-    ds = [str(x) for x in ds]
-    return ds[0] if len(ds) == 1 else ", ".join(ds[:-1]) + f" và {ds[-1]}"
+    return danh_sach([str(x) for x in ds])       # bản Việt: "A, B và C" như cũ; bản Anh: "A, B and C"
 
 
 def cau_mang(mang: str, ds: list[dict], toi_da: int = TOI_DA_NAM, viec: str | None = None) -> str:
@@ -45,7 +45,7 @@ def cau_mang(mang: str, ds: list[dict], toi_da: int = TOI_DA_NAM, viec: str | No
     `viec` = việc ngắn dùng chung cho mọi năm (hộp nhiều mảng) — năm đang đi không tách câu riêng."""
     ds = ds[:toi_da]
     if viec is not None:
-        nam = _noi([x["nam"] for x in ds]) + (" (năm đang đi)" if len(ds) == 1 and ds[0].get("hien_tai") else "")
+        nam = _noi([x["nam"] for x in ds]) + (L("chu_y.nam_dang_di", " (năm đang đi)") if len(ds) == 1 and ds[0].get("hien_tai") else "")
         return kb.mau("nam").format(nam=nam, mang=kb.ten(mang), viec=viec)
     nay = [x["nam"] for x in ds if x.get("hien_tai")]
     sau = [x["nam"] for x in ds if not x.get("hien_tai")]
@@ -58,7 +58,7 @@ def cau_mang(mang: str, ds: list[dict], toi_da: int = TOI_DA_NAM, viec: str | No
 
 
 def tieu_de(cac_mang: list[str]) -> str:
-    return kb.mau("tieu_de").format(mang=", ".join(kb.ten(m) for m in cac_mang))
+    return kb.mau("tieu_de").format(mang=", ".join(kb.ten(m) for m in cac_mang))   # danh sách mảng: dấu phẩy ở cả hai ngôn ngữ
 
 
 def kiem(van: str) -> list[str]:

@@ -867,7 +867,9 @@ def _y(x: dict, ch: str, phai: str | None = None) -> dict | None:
     # làm tiêu đề → lời một câu thì tiêu đề = câu đó, thân = việc nên làm (không lặp ở `huong_xu_ly`).
     tieu, than = kh.tach_tieu_de(tieu, loi)
     huong = viec_hien(m)
-    if len(_chuan_td(than).split()) < 4 or _chuan_td(than) == _chuan_td(tieu):
+    # EN-ALL: quyết định dựa trên chữ (thân quá ngắn / trùng tiêu đề) lấy theo bản Việt → khung bản dịch không lệch
+    if kh.quyet(("y_bs_than_ngan", ch, m["id"], lop, x.get("nam")),
+                len(_chuan_td(than).split()) < 4 or _chuan_td(than) == _chuan_td(tieu)):
         than, huong = huong, None
     y = {"tieu_de": tieu, "noi_dung": than, "huong_xu_ly": huong,
          "can_cu": [_can_cu(m, lop, x["cung"], x["nam"], x["nc"].get("than"))], "ma_mau": ma_mau(ch, m["id"]), **them}

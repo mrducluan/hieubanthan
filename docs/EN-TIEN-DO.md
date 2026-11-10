@@ -2,15 +2,15 @@
 
 > Thước đo tiến độ DUY NHẤT của `docs/PROMPT-EN-TOAN-BO.md`. Cập nhật sau mỗi commit đáng kể. Phiên bị ngắt: đọc tệp này +
 > `git log` rồi làm tiếp đúng chỗ.
-> Cập nhật lần cuối: 2026-11-10 (xong giai đoạn 0; giai đoạn 1 xong lõi + việc 1, 2, 4, 5, 6 và nửa đầu việc 3).
+> Cập nhật lần cuối: 2026-11-10 (xong GĐ 0, GĐ 1 — PR #251; GĐ 2 nền engine: danh mục, slug Anh, khuôn chung).
 
 ## 0. Trạng thái giai đoạn
 
 | GĐ | Việc | Trạng thái | Ghi chú |
 |---|---|---|---|
 | 0 | Kiểm kê + golden | **xong** (2026-11-10) | golden bản Việt 10.509 lượt gọi (chụp lại sau khi merge main #246–#249), ổn định 2 lần chạy liên tiếp; khung test 5.2 chạy |
-| 1 | Nền web (rewrite, catalog nhiều ngôn ngữ, khung đầy đủ) | **đang** — còn nửa sau việc 3 (mục 3b) | khung báo cáo chung đã song ngữ; còn `HoiEn` → `KhungChat` + chuyển 7 URL sang hệ một-component |
-| 2 | Nền engine (tên riêng, `L()` cho khuôn chung, `slug_en`) | chưa | 9 nhóm route |
+| 1 | Nền web (rewrite, catalog nhiều ngôn ngữ, khung đầy đủ) | **xong** (PR #251) | khung, catalog, báo cáo + hỏi đáp chung song ngữ; 7 URL `/en` cũ chuyển hệ một-component trong giai đoạn từng mảng (mục 3b) |
+| 2 | Nền engine (tên riêng, `L()` cho khuôn chung, `slug_en`) | **xong phần nền** (mục 3c) | 7 nhóm route danh mục sạch; khuôn chuyên mảng (`truc_quan`, `mo_dau`, căn cứ `chu_y_nam`/`suc_khoe_nam`/`luu_y_mang`) làm cùng mảng |
 | 3 | Bát tự | chưa | 5 nhóm route |
 | 4 | Tử vi | chưa | 12 |
 | 5 | Phong thuỷ | chưa | 11 |
@@ -109,6 +109,63 @@ tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2
 4. Trình duyệt ở trang rewrite gọi route GET có đệm cần thêm `?ngon_ngu=` (helper client dùng `maNgonNguTrang()`) — làm khi mở
    trang rewrite đầu tiên (GĐ 3 Bát tự).
 
+## 3c. Giai đoạn 2 — nền engine (2026-11-10)
+
+- ✅ **Thước đo**: `kb.trang` tách theo LOẠI (`kb.trang.<loai>`, `tests/_dau_ra.khoa_route`) — mỗi loại trang kiến thức
+  chuyển thể cùng giai đoạn của mảng (GĐ 3 thập thần / nhật chủ / mệnh theo năm · GĐ 4 sao, cung, sao ở cung, tứ hoá, cổ thư ·
+  GĐ 5 dấu hiệu · GĐ 6 quẻ · GĐ 7 thần số + lá bài · GĐ 8 bộ vị); mục lục `kb` sạch khi mọi loại sạch (GĐ 11). Trường chỉ
+  bản Anh mang (`slug_en`, `duong_en`) không tính vào khung dữ kiện; danh sách biến thể tên (`bien_the`) được khác số phần tử.
+  Bộ soát chữ thay chữ người gọi gửi vào bằng một từ giả (bỏ hẳn từng tạo "rác ghép chuỗi" giả ở `giao_thoa`).
+- ✅ **7 nhóm route danh mục sạch tiếng Anh** (xoá khỏi `CHUA_XONG`): `dia_ly` (63 tỉnh — `ten_en.json` mục `dia_ly.tinh`;
+  nước / thành phố dùng `ten_en` có sẵn), `tu_dien` (234 thuật ngữ — `kb/data/en/tu_dien.json`, tên theo `thuat_ngu_en.json`;
+  biến thể tên bản Anh THAY HẲN danh sách Việt để nhận diện thuật ngữ trong chữ Anh), `y_dinh` + `y_dinh.goi_mo` (11 ý định +
+  link gợi mở — `en/y_dinh_chung.json`; đường dẫn vẫn là URL Việt, web đổi qua `duongTheo`), `hoi` (24 câu hỏi chuẩn —
+  `truc_quan.cau_hien` ở ĐẦU RA, logic so khớp vẫn chữ Việt), `giao_thoa`, `timebase` (cờ cảnh báo qua `L`).
+- ✅ **Slug tiếng Anh của 668 trang kiến thức** — `kb/slug_en.py` (tất định từ `ten_en.json`; dấu hiệu nhà / bộ vị / cổ thư:
+  bảng soạn tay `kb/data/slug_en.json`), golden `fixtures/golden/slug_en.json` + `tests/test_slug_en.py` (duy nhất, a–z0–9-,
+  ổn định, không phụ thuộc ngôn ngữ). Bản Anh: `/v1/kb/trang/<loai>/<slug>` nhận cả slug Anh lẫn slug Việt, trang + mọi link
+  tới trang kiến thức khác mang `slug_en`, mục lục có `slug_en`; bản Việt không mang trường này (golden giữ nguyên).
+  Ví dụ: `zi-wei-in-life-palace`, `hua-lu-in-wealth-palace`, `1-qian`, `jia-yang-wood`, `born-1988`, `life-path-7`, `1-and-5`.
+  **Sửa lỗi có sẵn**: lá bài bản Anh 404 với slug Việt (danh sách slug dựng từ tên đã phủ tiếng Anh) — mọi hàm dựng danh sách
+  (khoá, slug Việt) nay chạy ở ngữ cảnh tiếng Việt (`ngon_ngu.theo_viet`).
+- ✅ **Khuôn dùng chung**: `doi_song_khuon` (nhãn mức "Needs care" theo mục 4.2, cắt / sắp tiêu đề theo từ nối tiếng Anh khi
+  chữ là tiếng Anh, "Under review"), `doi_song_chung` (tiêu đề hộp theo ngữ pháp Anh, `nhan_co()` cho cờ tập quán, gộp năm),
+  `nhat_quan` (đọc KB qua `nap` — có bản phủ), `hoan_canh`, `chu_y_nam` (câu năm + "this year"). Bản phủ KB: `nhat_quan_kb`,
+  `hoan_canh_kb`, `chu_y_kb`, `suc_khoe_kb`. Mẫu câu tách theo cụm: `kb/data/en/loi/*.json` (gộp với `loi_khuon.json`, mã trùng
+  giữa tệp = lỗi). Test `tests/test_en_khuon.py`: mọi mã `L("…")` hằng trong mã có chữ Anh + slot khớp; hàm khuôn ra chữ Anh sạch.
+- ✅ **Trường MÃ tên riêng** (chốt rủi ro mục 4.5): giá trị mã giữ chữ Việt (web dùng làm khoá); bản Anh tự kèm
+  `ten_hien` = {nhóm: {mã: tên Anh}} cho MỌI mã có trong phản hồi — gắn ở lớp phản hồi chung `cong_khai.PhanHoiCongKhai`
+  (bản Việt không có trường này). Danh sách trường mã TƯỜNG MINH ở `kb/ten.KHOA_MA` (khoá đơn `can`, `chi`, `ngu_hanh`,
+  `thap_than`… hoặc khoá "cha.con" như `nap_am.ten`; dict có khoá là mã như `diem: {"Kim": 3}`). Bộ soát chữ cho phép mã ở
+  đúng các trường đó **chỉ khi** `ten_hien` của phản hồi có tên hiển thị cho chính mã ấy. Bảng tên thêm: 63 tỉnh, 30 nạp âm,
+  "Nhật chủ" (Day Master). Web: hiển thị mã qua `ten_hien` — làm cùng trang từng mảng (GĐ 3 trở đi).
+- ✅ **"Bản Việt quyết, bản dịch theo"** (`doi_song_khuon.quyet` / `vi_quyet_dinh`): vài bước RULES quyết định CẤU TRÚC
+  dựa trên CHỮ (bỏ đoạn chép lại hộp ở `gon_bao_cao`, chọn hộp theo từ khoá tiếng Việt ở `luu_y_mang`, thân ý bổ sung Tử vi
+  quá ngắn) — ở bản Anh, `lap` của Tử vi + Bát tự chạy bản Việt trước, ghi các quyết định theo khoá ổn định (mã chương, chỉ
+  số đoạn, mã kiểm chứng) rồi lượt bản Anh làm theo. Khung dữ kiện bài đọc Bát tự + Tử vi bản Anh trùng bản Việt 80/80
+  (trước: lệch 58/80 khi chữ đổi). `phut_doc` (số phút đọc) được phép khác — đếm theo chữ của ngôn ngữ.
+- Ghi nhận cho GĐ 3 (Bát tự): CALC `battu_mo_rong` trả CÂU tiếng Việt (thần sát `y` / `goc` / `cach_khac`, quan hệ `mo_ta`,
+  cung thân `giai_thich`) → cần lớp hiển thị RULES theo ngôn ngữ ở route (CALC không đọc ngôn ngữ); `tu_toa` viết "Mộc Dục"
+  còn bảng tên ghi "Mục Dục" (cần bí danh); `bang_hanh.can.<can>` = dict mã → hành (giá trị cũng là mã); `quan_he.loai` là MÃ
+  web dùng (`KIEU_QH[q.loai]`, `startsWith("can ")`).
+- Làm cùng mảng (vì chữ là của mảng, không phải khuôn): `truc_quan` (khối hình hỏi đáp từng mảng), `hoidap/mo_dau` (đoạn mở
+  đầu hỏi đáp), dòng căn cứ của `chu_y_nam` / `suc_khoe_nam` / `luu_y_mang` (tên sao, cung, hành), cụm từ khoá tiếng Anh của
+  `an_toan` cho hỏi đáp từng mảng.
+
+## 3d. Giai đoạn 3 — Bát tự (đang, 2026-11-10)
+
+- ✅ `battu.la_so`, `battu.luu_nien`, `battu.doi_chieu_cach` sạch tiếng Anh: lớp hiển thị `luangiai/battu_hien.py` (CALC
+  không đọc ngôn ngữ — câu thần sát / gốc tra / quan hệ can chi / cung thân / dụng thần / cờ CALC dựng lại từ mã);
+  cờ hồ sơ dùng chung Tử vi + Bát tự (`tuvi_api._DauVao._co`) qua `L()` (`kb/data/en/loi/co.json`); bảng tên thêm thần
+  sát, cát/hung, quan hệ, thân vượng/nhược, cách cục, nhóm thập thần, nạp âm; bản phủ KB `en/battu_kb.json`,
+  `en/battu_doi_song_kb.json` (909 chuỗi), `en/hoan_canh_kb.json`, `en/chu_y_kb.json`, `en/suc_khoe_kb.json`.
+- 🟡 `battu.luan_giai`: KB đã phủ; còn chữ trong mã `battu_doi_song.py` (~480 chuỗi) — đang chuyển qua `L()`.
+- 🟡 Hỏi đáp Bát tự tiếng Anh (5.3): bộ câu viết độc lập `fixtures/cau_hoi/en/battu_dev.jsonl` (260) +
+  `battu_holdout.jsonl` (160, đóng băng); bộ chấm `engine/scripts/cham_en.py`. **Mốc trước khi làm**: định tuyến dev 15 % /
+  holdout 16 %, an toàn 6/12 · 2/12, mốc thời gian 16/72 · 13/44, câu trả lời còn chữ Việt 259/260 → cần bộ hiểu câu tiếng
+  Anh + lời đáp theo ngôn ngữ (mục tiêu: định tuyến ≥ 90 %, an toàn 100 %, mốc ≥ 90 %).
+- Chưa: web `/en/bazi` (mở rewrite, hiển thị `ten_hien`, khung Trường phái, cụm thập thần / nhật chủ / mệnh theo năm), thẻ chia sẻ.
+
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
 1. ~~**Engine không tất định giữa các tiến trình**~~ — **ĐÃ SỬA**: hai chỗ lặp qua `set` rồi đưa ra đầu ra — `kb/tu_dien._mau`
@@ -199,3 +256,5 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
 - **2026-11-10 — merge main #246–#249**: golden chỉ lệch `thanso.hom_nay` (main cố ý đổi) → chụp lại 10.509 lượt, thêm lượt gọi cho route mới (`/v1/thanso/tuan`, `/hom-nay-hai`, `/v1/push/tuan`); mục lục KB hết 500 ở bản Anh (mục 4.3 phần 500 đã sửa, chữ vẫn là GĐ 2); CI: golden không gửi `x-nguoi-goi`.
 - **2026-11-10 — GĐ 1 (lõi)**: bảng đường dẫn, rewrite / 308 trong proxy, ngữ cảnh ngôn ngữ, catalog có chiều `en`, định dạng `Intl`, nút đổi ngôn ngữ về trang tương đương, thương hiệu Hieuban.
 - **2026-11-10 — GĐ 1 (phiên 2)**: chụp HTML trang Việt (việc 6), khung đầy đủ tiếng Anh (việc 1), Chữ dùng chung `en` (việc 2), hồ sơ chung (việc 4), khoá đệm theo ngôn ngữ (việc 5), khung báo cáo chung song ngữ + xoá `BaoCaoEn` (nửa đầu việc 3). Bản Việt: HTML máy chủ 0/74 lệch.
+- **2026-11-10 — GĐ 1 (phiên 3)**: khung hỏi đáp chung song ngữ (xoá `HoiEn`), sửa theo review, CodeQL; PR #251 (GĐ 0–1).
+- **2026-11-10 — GĐ 2**: thước đo theo loại trang, 7 nhóm route danh mục sạch, slug Anh 668 trang (+ sửa 404 lá bài), khuôn chung song ngữ (mục 3c).

@@ -547,29 +547,55 @@ def _chuoi_vao(than: Any, ra: set[str]) -> set[str]:
     return ra
 
 
+def _nhom_gia_tri(khoa: str, cha: str, ong: str) -> str | None:
+    from app.kb import ten  # noqa: PLC0415
+    return ten.nhom_ma(khoa, cha, ong)
+
+
+def _nhom_khoa(cha: str, ong: str) -> str | None:
+    from app.kb import ten  # noqa: PLC0415
+    return ten.nhom_khoa(cha, ong)
+
+
+def _co_ten(nhom: str | None, gia_tri: str) -> bool:
+    from app.kb import ten  # noqa: PLC0415
+    return bool(nhom) and ten.muc(nhom, gia_tri) is not None
+
+
 def loi_en(du_lieu: Any, than: Any = None, toi_da: int = 8) -> list[str]:
     """Danh sách lỗi của MỘT phản hồi tiếng Anh: chữ Việt còn sót, `{slot}` chưa thay, rác ghép chuỗi. Chuỗi người gọi
     gửi vào (tên, câu hỏi) được bỏ khỏi chữ trước khi soát — engine được phép nhắc lại tên người dùng."""
     vao = sorted(_chuoi_vao(than, set()), key=len, reverse=True)
     ra: list[str] = []
 
-    def di(x: Any, duong: str, khoa: str) -> None:
+    def di(x: Any, duong: str, khoa: str, cha: str = "", ong: str = "") -> None:
         if len(ra) >= toi_da:
             return
         if isinstance(x, dict):
             for k, v in x.items():
-                if k in KHOA_DUOC_PHEP:
+                if k in KHOA_DUOC_PHEP or (k == "ten_hien" and duong == "$"):
                     continue
                 if isinstance(k, str) and _VIET.search(k):
-                    ra.append(f"{duong}: khoá tiếng Việt «{k}»")
-                di(v, f"{duong}.{k}", k)
+                    nk = _nhom_khoa(khoa, cha)
+                    if _co_ten(nk, k) and k in (th.get(nk) or {}):
+                        pass        # dict theo MÃ tên riêng (kb/ten.KHOA_MA), tên hiển thị có ở ten_hien
+                    else:
+                        ra.append(f"{duong}: khoá tiếng Việt «{k}»")
+                di(v, f"{duong}.{k}", k, khoa, cha)
         elif isinstance(x, list):
             for i, v in enumerate(x):
-                di(v, f"{duong}[{i}]", khoa)
+                di(v, f"{duong}[{i}]", khoa, cha, ong)
         elif isinstance(x, str):
+            ng = _nhom_gia_tri(khoa, cha, ong)
+            if _co_ten(ng, x):
+                # MÃ tên riêng (giữ chữ Việt làm khoá; bản Anh hiển thị qua `ten_hien`) — kb/ten.KHOA_MA. Phản hồi PHẢI
+                # kèm tên hiển thị của chính mã này, không thì web không có chữ Anh để hiện.
+                if x not in (th.get(ng) or {}):
+                    ra.append(f"{duong}: mã «{x}» thiếu trong ten_hien")
+                return
             s = x
             for v in vao:
-                s = s.replace(v, "")
+                s = s.replace(v, "X")   # chữ người gọi gửi vào → một từ giả (bỏ hẳn sẽ để lại dấu câu đôi giả)
             s = _NGHIENG.sub("", s)
             m = _VIET.search(s)
             if m:
@@ -579,8 +605,17 @@ def loi_en(du_lieu: Any, than: Any = None, toi_da: int = 8) -> list[str]:
             elif khoa not in ("ma", "ma_mau", "slug", "duong", "id", "url") and len(s) > 20 and (r := _RAC.search(s)):
                 ra.append(f"{duong}: rác ghép chuỗi «{s[max(0, r.start() - 20):r.start() + 20]}»")
 
+    th = du_lieu.get("ten_hien") if isinstance(du_lieu, dict) and isinstance(du_lieu.get("ten_hien"), dict) else {}
     di(du_lieu, "$", "")
     return ra
+
+
+# Trường CHỈ có ở bản Anh (đường dẫn tiếng Anh của chính trang) — không phải dữ kiện, bản Việt không mang để golden giữ nguyên.
+KHOA_CHI_EN = {"slug_en", "duong_en", "ten_hien"}
+# Trường SUY TỪ CHỮ (không phải dữ kiện): thuật ngữ nhận diện trong lời văn — chữ khác ngôn ngữ thì danh sách khác.
+KHOA_THEO_CHU = {"thuat_ngu", "phut_doc"}   # phut_doc = số phút đọc, đếm theo chữ của ngôn ngữ
+# Danh sách CHỮ mà số phần tử được phép khác theo ngôn ngữ (biến thể tên để nhận diện thuật ngữ trong chữ ngôn ngữ đó).
+DS_CHU_TU_DO = {"bien_the"}
 
 
 def khung(x: Any, duong: str = "$", ra: list[str] | None = None) -> list[str]:
@@ -589,8 +624,13 @@ def khung(x: Any, duong: str = "$", ra: list[str] | None = None) -> list[str]:
     ra = [] if ra is None else ra
     if isinstance(x, dict):
         for k in sorted(x):
+            if k in KHOA_CHI_EN or k in KHOA_THEO_CHU:
+                continue
             khung(x[k], f"{duong}.{k}", ra)
     elif isinstance(x, list):
+        if duong.rsplit(".", 1)[-1] in DS_CHU_TU_DO and all(isinstance(v, str) for v in x):
+            ra.append(f"{duong}#*")
+            return ra
         ra.append(f"{duong}#{len(x)}")
         for i, v in enumerate(x):
             khung(v, f"{duong}[{i}]", ra)
@@ -605,6 +645,8 @@ def khung(x: Any, duong: str = "$", ra: list[str] | None = None) -> list[str]:
 def khoa_route(ma: str) -> str:
     """Nhóm báo cáo / xfail của lượt gọi: hai đoạn đầu của mã ("thanso.luan_giai", "hoi.tuvi", "kb.trang")."""
     a = ma.split(".")
+    if a[:2] == ["kb", "trang"] and len(a) >= 4:
+        return f"kb.trang.{a[2]}"   # trang kiến thức tách theo LOẠI — mỗi loại chuyển thể ở giai đoạn của mảng đó
     if len(a) < 3 or _re.fullmatch(r"hs\d+|\d+", a[1]):
         return a[0]
     return ".".join(a[:2])

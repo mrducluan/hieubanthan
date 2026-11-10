@@ -110,9 +110,9 @@ def ap_hoc(bc: dict, trong_so: dict | None, ca_nhan: dict | None) -> dict:
                 h["ty_le_dung"], h["so_phieu"] = dg[0], dg[1]
                 if dg[2]:
                     xem_lai.add(m)
-                    dong = f"Đang xem lại: {h['tieu_de']}"
+                    dong = L("hop.dang_xem_lai_dong", f"Đang xem lại: {h['tieu_de']}", tieu_de=h["tieu_de"])
                     cc = g.setdefault("can_cu", [])
-                    cc.append({"tieu_de": "Đang xem lại", "noi_dung": h["noi_dung"]} if (cc and isinstance(cc[0], dict)) else dong)
+                    cc.append({"tieu_de": L("hop.dang_xem_lai", "Đang xem lại"), "noi_dung": h["noi_dung"]} if (cc and isinstance(cc[0], dict)) else dong)
                     continue
             (cuoi if m and ca_nhan.get(m) == "chua_dung" else giu).append(h)
         g["hop"] = giu + cuoi
@@ -148,6 +148,16 @@ _TU_NOI_RE = re.compile(r"^(?:\S+\s+){0,2}?(?=(?:%s)\s)" % "|".join(_TU_NOI), re
 _RANH_GIOI = re.compile(r"^\s*[,;:.!?…—–(]")
 # Từ nối mở đầu thân sau khi bỏ tiêu đề: "và" bỏ hẳn; "nên" (= vì thế) dễ đọc thành lời khuyên → "Vì vậy".
 _DOI_TU_NOI = {"và": "", "nên": "Vì vậy "}
+# EN-ALL GĐ 2: chữ bản Anh cũng là câu KB (đã phủ) — cắt / sắp theo từ nối TIẾNG ANH. Bản Việt dùng đúng hằng cũ.
+_TU_NOI_EN = ("especially", "while", "because", "though", "unless", "since", "which", "where", "when", "then", "but", "and",
+              "or", "so", "as", "to")
+_TU_NOI_RE_EN = re.compile(r"^(?:\S+\s+){0,2}?(?=(?:%s)\s)" % "|".join(_TU_NOI_EN), re.IGNORECASE)
+_DOI_TU_NOI_EN = {"and": "", "so": "So "}
+
+
+def _tu_noi() -> tuple[tuple[str, ...], re.Pattern, dict[str, str]]:
+    from app import ngon_ngu  # noqa: PLC0415
+    return (_TU_NOI, _TU_NOI_RE, _DOI_TU_NOI) if ngon_ngu.la_viet() else (_TU_NOI_EN, _TU_NOI_RE_EN, _DOI_TU_NOI_EN)
 
 
 def than_khong_lap_tieu_de(tieu_de: str, noi_dung: str) -> str:
@@ -158,6 +168,7 @@ def than_khong_lap_tieu_de(tieu_de: str, noi_dung: str) -> str:
     n = " ".join((noi_dung or "").split())
     if len(t) < 4 or not n.lower().startswith(t.lower()):
         return n
+    tu_noi, tu_noi_re, doi_tu_noi = _tu_noi()
     con = n[len(t):]
     if con and con[0].isalnum():                       # tiêu đề dừng giữa một từ ("Bạn lo" ↔ "Bạn lo lắng")
         return n
@@ -172,16 +183,16 @@ def than_khong_lap_tieu_de(tieu_de: str, noi_dung: str) -> str:
             if k and tu[k - 1][-1] in ",;:":
                 con = sau
                 break
-            if _TU_NOI_RE.match(sau) and _TU_NOI_RE.match(sau).end() == 0:
+            if tu_noi_re.match(sau) and tu_noi_re.match(sau).end() == 0:
                 con = sau
                 break
         else:
             return n
     con = con.strip()
-    for w in () if het_cau else _TU_NOI:            # câu mới (sau dấu chấm) giữ nguyên chữ đầu, vd "Nên khen…"
+    for w in () if het_cau else tu_noi:            # câu mới (sau dấu chấm) giữ nguyên chữ đầu, vd "Nên khen…"
         if con.lower().startswith(w + " "):
-            if w in _DOI_TU_NOI:
-                con = _DOI_TU_NOI[w] + con[len(w) + 1:]
+            if w in doi_tu_noi:
+                con = doi_tu_noi[w] + con[len(w) + 1:]
             break
     con = con.strip()
     return con[:1].upper() + con[1:]
@@ -210,7 +221,8 @@ def tach_tieu_de(tieu_de: str, noi_dung: str) -> tuple[str, str]:
     sau_td = dau[len(t):].lstrip()
     if len(t.split()) >= 3 and sau_td[:1] in (";", ":", "—", "–"):
         con = than_khong_lap_tieu_de(t, n)
-        if not _TU_NOI_RE.match(con.lower()) or _TU_NOI_RE.match(con.lower()).end() != 0:
+        tu_noi_re = _tu_noi()[1]
+        if not tu_noi_re.match(con.lower()) or tu_noi_re.match(con.lower()).end() != 0:
             return t, con
     # Mẩu còn lại mở bằng từ nối (cắt sẽ ra mẩu câu): thử vế đầu tới dấu ";" / ":" làm tiêu đề; không được thì tiêu
     # đề = trọn câu (≤ 130); quá dài thì giữ trọn câu trong thân (lặp vài chữ tiêu đề còn hơn mẩu câu).
@@ -258,6 +270,57 @@ def tieu_de_khong_trung(hop: list[dict]) -> dict[tuple[str, str], str]:
                 t = _thuong_khong_dau_cau(moi)
         da.add(t)
     return doi
+
+
+# ------------------------------------------------------------------ EN-ALL: "bản Việt quyết, bản dịch theo"
+# Vài bước RULES quyết định CẤU TRÚC dựa trên CHỮ (bỏ đoạn chép lại hộp, chọn hộp theo từ khoá tiếng Việt). Ở ngôn ngữ
+# khác, chữ khác thì quyết định khác → khung dữ kiện lệch bản Việt. Cách làm: hàm dựng báo cáo (`lap`) bọc bằng
+# `vi_quyet_dinh` — ở bản Anh chạy bản Việt trước, GHI các quyết định đó (theo khoá ổn định: mã chương, chỉ số đoạn,
+# mã kiểm chứng), rồi lượt bản Anh LÀM THEO. Bản Việt không đổi (không qua nhánh này).
+import contextvars as _cv
+from functools import wraps as _wraps
+
+_QUYET: _cv.ContextVar[tuple[str, dict] | None] = _cv.ContextVar("doi_song_quyet", default=None)
+
+
+def quyet(khoa: tuple, mac_dinh):
+    """Trong lượt ghi: lưu `mac_dinh` (quyết định bản Việt) rồi trả nó. Trong lượt theo: trả quyết định đã ghi (thiếu →
+    `mac_dinh`). Ngoài hai lượt: trả `mac_dinh`."""
+    q = _QUYET.get()
+    if not q:
+        return mac_dinh
+    che_do, d = q
+    if che_do == "ghi":
+        d[khoa] = mac_dinh
+        return mac_dinh
+    return d.get(khoa, mac_dinh)
+
+
+def dang_theo() -> bool:
+    q = _QUYET.get()
+    return bool(q) and q[0] == "theo"
+
+
+def vi_quyet_dinh(fn):
+    """Bọc hàm dựng báo cáo: bản ngôn ngữ khác chạy bản Việt (ghi quyết định) rồi chạy lại theo đúng quyết định đó."""
+    @_wraps(fn)
+    def boc(*a, **kw):
+        from app import ngon_ngu  # noqa: PLC0415
+        if ngon_ngu.la_viet() or _QUYET.get() is not None:
+            return fn(*a, **kw)
+        d: dict = {}
+        tok = _QUYET.set(("ghi", d))
+        try:
+            with ngon_ngu.dung(ngon_ngu.MAC_DINH):
+                fn(*a, **kw)
+        finally:
+            _QUYET.reset(tok)
+        tok = _QUYET.set(("theo", d))
+        try:
+            return fn(*a, **kw)
+        finally:
+            _QUYET.reset(tok)
+    return boc
 
 
 def gon_bao_cao(bc: dict, gon_doan: bool = True) -> dict:
@@ -322,10 +385,10 @@ def gon_bao_cao(bc: dict, gon_doan: bool = True) -> dict:
             tieu_de = [_thuong_khong_dau_cau(h["tieu_de"]) for h in hop if len(h.get("tieu_de", "")) >= 12]
             cau_hop = [_thuong_khong_dau_cau(x) for h in hop for x in _cau_cua(h.get("noi_dung", "")) if len(x) >= 25]
             moi = [doan[0]]
-            for d in doan[1:]:
+            for i, d in enumerate(doan[1:]):
                 giu = [x for x in _cau_cua(d) if not any(k in _thuong_khong_dau_cau(x) for k in (*tieu_de, *cau_hop))]
-                if giu:
-                    moi.append(" ".join(giu))
+                if quyet(("doan", c.get("ma"), i), bool(giu)):       # EN-ALL: đoạn giữ / bỏ theo bản Việt
+                    moi.append(" ".join(giu) if giu else d)
             c["doan"] = moi
     return bc
 

@@ -18,12 +18,15 @@ from app.calc import dia_ly, lunar, mui_gio
 from app.config import Region
 from app.luangiai import lich_nam as _lich_nam
 
+from app import ngon_ngu  # noqa: E402
+
 router = APIRouter(tags=["lich"])
 
 
 @router.get("/v1/dia-ly/tinh")
 def api_tinh() -> dict:
-    return {"tinh": [{k: t[k] for k in ("ma", "ten", "vung")} for t in dia_ly.danh_sach()],
+    from app.kb import ten as _ten  # noqa: PLC0415 — EN-ALL: tên tỉnh theo ngôn ngữ (bản Việt trả nguyên)
+    return {"tinh": [{"ma": t["ma"], "ten": _ten.ten("tinh", t["ten"]), "vung": t["vung"]} for t in dia_ly.danh_sach()],
             "nuoc_ngoai": dia_ly.NUOC_NGOAI}
 
 
@@ -32,7 +35,12 @@ def api_mui_gio() -> dict:
     """QTE-2 giai đoạn 0 — nước + thành phố cho người sinh ở nước ngoài (web hiện hai ô chọn; mã thành phố / mã vùng IANA
     gửi lại qua `mui_gio` của lá số). Danh sách tĩnh, web cache 1 ngày. Ý6: kèm cờ `canh_bao_mat_troi` /
     `nam_ban_cau_kha_dung` từng thành phố để form gợi ý công tắc Trường phái (web không tự tính)."""
-    return {"nuoc": mui_gio.danh_sach_day_du(config.hom_nay_vn().year)}
+    ds = mui_gio.danh_sach_day_du(config.hom_nay_vn().year)
+    if ngon_ngu.hien_tai() != ngon_ngu.MAC_DINH:
+        # EN-ALL: CALC giữ tên Việt + `ten_en` đã soạn sẵn; lớp hiển thị chọn chữ theo ngôn ngữ (mã, toạ độ, cờ không đổi).
+        ds = [{**n, "ten": n.get("ten_en") or n["ten"],
+               "thanh_pho": [{**t, "ten": t.get("ten_en") or t["ten"]} for t in n["thanh_pho"]]} for n in ds]
+    return {"nuoc": ds}
 
 
 class MuiGioInput(BaseModel):
