@@ -102,6 +102,8 @@ tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2
    tường minh — không nới chung.
 6. Bộ kiểm chữ Việt bỏ qua tên lá Marseille tiếng Pháp (`tdm_ten`) và từ nước ngoài in nghiêng trong trích dẫn Waite.
 
+> Cập nhật 2026-11-10: mục 1 và 2 ở trên đã được sửa ở [mrducluan/hieubanthan#250](https://github.com/mrducluan/hieubanthan/pull/250), gộp thẳng vào nhánh này; golden đã cập nhật theo (166 dòng băm đổi thứ tự, 1 dòng hết mã 500), so lại 0/10.509 lệch. Bộ chụp vẫn đặt `PYTHONHASHSEED=0` cho chắc.
+
 ## 5. Bảng kiểm kê trang (Việt → Anh)
 
 Trạng thái: `xong` · `đang` · `chưa` · `không` (không làm + lý do). "Đã có (cũ)" = trang `/en` viết riêng từ QTE-3, sẽ chuyển
