@@ -42,6 +42,14 @@ export function locChu(bang: BangChu, cms: unknown): Record<string, string> {
   return ra;
 }
 
+/** Bỏ thẻ HTML tới khi không còn gì để bỏ ("<scr<script>ipt>" không ghép lại thành thẻ), rồi bỏ nốt dấu "<" lẻ. Chữ ở đây
+ *  vốn được React thoát ký tự khi hiển thị — đây là lớp lọc thứ hai. */
+function boThe(v: string): string {
+  let s = v, truoc: string;
+  do { truoc = s; s = s.replace(/<[^>]*>/g, ""); } while (s !== truoc);
+  return s.replace(/</g, "");
+}
+
 /** Như `locChu` nhưng so với chữ mặc định tiếng Anh (chữ CMS bản Anh). */
 function locChuEn(bang: BangChu, cms: unknown): Record<string, string> {
   if (!cms || typeof cms !== "object" || Array.isArray(cms)) return {};
@@ -49,7 +57,7 @@ function locChuEn(bang: BangChu, cms: unknown): Record<string, string> {
   for (const [k, v] of Object.entries(cms as Record<string, unknown>)) {
     const muc = bang[k];
     if (!muc || muc.lua_chon || !KHOA.test(k) || typeof v !== "string") continue;
-    const s = v.replace(/<[^>]*>/g, "").replace(/[ \t]+/g, " ").replace(/\s*\n\s*/g, " ").trim().slice(0, muc.toi_da ?? TOI_DA_CHU).trim();
+    const s = boThe(v).replace(/[ \t]+/g, " ").replace(/\s*\n\s*/g, " ").trim().slice(0, muc.toi_da ?? TOI_DA_CHU).trim();
     if (s && s !== muc.en) ra[k] = s;
   }
   return ra;

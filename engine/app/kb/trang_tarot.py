@@ -56,10 +56,13 @@ def trang_la_bai(ma: str, slug: str) -> dict:
            {"tieu_de": "Hình trên lá (bộ Waite 1909)", "doan": l["hinh_anh"]},
            {"tieu_de": "Xuôi và ngược", "danh_sach": [f"Xuôi: {l['y_xuoi']}", f"Ngược: {l['y_nguoc']}"]},
            {"tieu_de": "Theo từng chuyện", "danh_sach": [f"{TEN_LV[k]}: {l['linh_vuc'][k]}" + (" Lời nhắc nhịp sống, không thay lời bác sĩ." if k == "suc_khoe" else "") for k in TEN_LV]},
-           {"tieu_de": "Bốn trường phái đọc lá này thế nào",
-            "doan": "Cùng một lá, bốn trường phái hỏi bốn câu khác nhau — ở Hiểu Bản Thân cả bốn cùng góp vào một bài đọc.",
-            "bang": {"cot": ["Trường phái", "Câu hỏi của phái", "Cách đọc lá này"],
-                     "dong": [[TEN_PHAI[k], kb.truong_phai()[k]["hoi"], l["truong_phai"][k]["loi"]] for k in ("rws", "thoth", "tdm", "bota")]}}]
+           # EN-ALL: bản phủ ngôn ngữ có thể tắt `truong_phai` (null, QTE-3) → bỏ mục này thay vì ném KeyError (mục lục KB
+           # gọi bằng tiếng Anh từng trả 500). Bản Việt luôn có trường này → đầu ra không đổi.
+           *([{"tieu_de": "Bốn trường phái đọc lá này thế nào",
+               "doan": "Cùng một lá, bốn trường phái hỏi bốn câu khác nhau — ở Hiểu Bản Thân cả bốn cùng góp vào một bài đọc.",
+               "bang": {"cot": ["Trường phái", "Câu hỏi của phái", "Cách đọc lá này"],
+                        "dong": [[TEN_PHAI[k], kb.truong_phai()[k]["hoi"], l["truong_phai"][k]["loi"]] for k in ("rws", "thoth", "tdm", "bota")]}}]
+             if l.get("truong_phai") else [])]
     # chiêm tinh & nhịp
     if l["loai"] == "an_chinh":
         ct = l["chiem_tinh"]
@@ -93,8 +96,11 @@ def trang_la_bai(ma: str, slug: str) -> dict:
         if tr.get("ten"):
             nv = f"{tr['ten']}. {nv}"
         trich_dan.append({"sach": kb.ten_nguon(tr["sach"]), "nguyen_van": nv, "nghia": tr["nghia"]})
-    muc.append({"tieu_de": "Sách xưa nói gì", "doan": f"Waite (1910): {l['truong_phai']['rws']['loi']} Book T: {l['truong_phai']['thoth']['loi']}",
-                **({"trich_dan": trich_dan} if trich_dan else {})})
+    if l.get("truong_phai") or trich_dan:
+        tp = l.get("truong_phai")
+        muc.append({"tieu_de": "Sách xưa nói gì",
+                    **({"doan": f"Waite (1910): {tp['rws']['loi']} Book T: {tp['thoth']['loi']}"} if tp else {}),
+                    **({"trich_dan": trich_dan} if trich_dan else {})})
     muc.append({"tieu_de": "Việc nên làm khi rút được lá này", "danh_sach": [f"Việc 0 đồng: {l['viec']}", f"Câu tự soi: {l['cau_tu_soi']}"]})
     hoi_dap = [{"hoi": f"{ten} ngược nghĩa là gì?", "dap": l["y_nguoc"]},
                {"hoi": f"{ten} trong tình cảm nói gì?", "dap": l["linh_vuc"]["tinh_cam"]},

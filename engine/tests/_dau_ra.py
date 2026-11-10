@@ -482,7 +482,9 @@ def luot_goi(client=None) -> list[Luot]:
 # ------------------------------------------------------------------ chạy + băm
 def goi(client, luot: Luot, ngon_ngu: str = "vi") -> tuple[int, bytes]:
     _, pt, duong, than = luot
-    dau = {"x-ngon-ngu": ngon_ngu, "x-nguoi-goi": "golden"}
+    # Không gửi `x-nguoi-goi`: hạn mức 120 lượt/phút tính theo người gọi (app/gioi_han.py) — khi chạy cùng cả bộ test, bộ đếm
+    # đã dựng sẵn với mức mặc định nên hàng nghìn lượt liên tiếp sẽ nhận 429.
+    dau = {"x-ngon-ngu": ngon_ngu}
     r = client.get(duong, headers=dau) if pt == "GET" else client.post(duong, json=than, headers=dau)
     return r.status_code, r.content
 
