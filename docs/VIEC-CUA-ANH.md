@@ -17,7 +17,10 @@
 - [ ] (2 phút) `/ban-than`: hai cột đầu trang cao bằng nhau; "Chia sẻ thẻ" trên thẻ hồ sơ hiện QR; khối "Bảy cách nhìn về bạn"
   có đủ tám ô, ô thiếu dữ liệu bấm ra bảng Sửa hồ sơ.
 - [ ] (Tuỳ chọn) CMS → Trang website `/hom-nay` → "Chữ trên trang": tiêu đề khối mới "Ba lá của ngày" sửa được ở đó.
-- [ ] (Tuỳ chọn) Chọn ý tưởng thêm ở mục 5 của file đề xuất: Hôm nay của hai người · thẻ hồ sơ hai mặt · lối tắt app · Tuần của tôi.
+- [ ] (Đợt 2, sau deploy — engine trước web) `/hom-nay` → "Đọc thêm": mở "Tuần này của bạn" (bảy ô + ngày đáng để ý) và
+  "Hôm nay của hai người" (cần đã lưu một người thân ở `/tu-vi` → "Xem lá số 2 người"); `/ban-than`: bấm "Mặt sau: thẻ 5 mảnh ghép".
+- [ ] (Quyết định) Gửi "Tuần của tôi" qua thông báo sáng thứ Hai: cần migration mới thêm một mốc vào tuỳ chọn nhắc — báo em nếu
+  anh muốn làm.
 
 ### 4al. SEO-N — trang dịch vụ đứng tên từ khoá + thương hiệu (2026-11-10, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md`)
 

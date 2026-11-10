@@ -655,6 +655,55 @@ def api_hom_nay(inp: HomNayInput) -> dict:
                                                                           inp.y_dinh, inp.du_dinh)}
 
 
+class TuanInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ngay: int = Field(ge=1, le=31)
+    thang: int = Field(ge=1, le=12)
+    nam: int = Field(ge=1900, le=2100)
+    ngay_xem: _dt.date | None = None     # trống = hôm nay theo giờ Việt Nam
+
+
+@app.post("/v1/thanso/tuan")
+def api_tuan(inp: TuanInput) -> dict:
+    """BT-UI đợt 2 — "Tuần này của bạn": bảy ngày + tối đa ba ngày đáng để ý (ngày cá nhân × hoàng lịch theo tuổi)."""
+    from app.luangiai import tuan_hai_nguoi  # noqa: PLC0415
+    try:
+        _dt.date(inp.nam, inp.thang, inp.ngay)
+    except ValueError:
+        raise HTTPException(422, detail="Ngày không tồn tại")
+    return {"engine_version": ENGINE_VERSION, **tuan_hai_nguoi.tuan(inp.ngay, inp.thang, inp.nam, inp.ngay_xem or config.hom_nay_vn())}
+
+
+class HomNayHaiInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ngay: int = Field(ge=1, le=31)
+    thang: int = Field(ge=1, le=12)
+    # Người thứ hai: chỉ ngày + tháng sinh; năm chỉ cần khi nhập âm lịch (để đổi sang dương). Không tên, không lưu.
+    kia_ngay: int = Field(ge=1, le=31)
+    kia_thang: int = Field(ge=1, le=12)
+    kia_nam: int | None = Field(default=None, ge=1900, le=2100)
+    kia_lich: Literal["duong", "am"] = "duong"
+    kia_nhuan: bool = False
+    kia_vung: Literal["north", "south"] | None = None      # chỉ để đổi ngày âm theo đúng lịch lá số của người đó
+    kia_lich_am: Literal["viet", "trung"] | None = None
+    quan_he: str | None = Field(default=None, pattern=r"^[a-z_]{2,20}$")
+    ngay_xem: _dt.date | None = None
+
+
+@app.post("/v1/thanso/hom-nay-hai")
+def api_hom_nay_hai(inp: HomNayHaiInput) -> dict:
+    """BT-UI đợt 2 — "Hôm nay của hai người": ngày cá nhân của hai người + một việc nên làm cùng (không chấm điểm)."""
+    from app.luangiai import tuan_hai_nguoi  # noqa: PLC0415
+    try:
+        _dt.date(2000, inp.thang, inp.ngay)
+        kq = tuan_hai_nguoi.hai_nguoi(inp.ngay, inp.thang, inp.kia_ngay, inp.kia_thang, inp.ngay_xem or config.hom_nay_vn(),
+                                      quan_he=inp.quan_he, kia_lich=inp.kia_lich, kia_nam=inp.kia_nam, kia_nhuan=inp.kia_nhuan,
+                                      kia_vung=inp.kia_vung, kia_lich_am=inp.kia_lich_am)
+    except ValueError:
+        raise HTTPException(422, detail="Ngày sinh không hợp lệ")
+    return {"engine_version": ENGINE_VERSION, **kq}
+
+
 class NhipInput(BaseModel):
     ngay: int = Field(ge=1, le=31)
     thang: int = Field(ge=1, le=12)

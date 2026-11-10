@@ -18,7 +18,7 @@ import { tenGoi, type HoSo } from "@/lib/hoso";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { useMaCuaToi } from "@/lib/sao";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
-import { docNhatKy, ghiLa, thongKeThang } from "@/lib/nhat-ky-ngay";
+import { docNhatKy, ghiLa, ghiTarot, thongKeThang } from "@/lib/nhat-ky-ngay";
 import { duongMoi } from "@/lib/duong-silo";
 import { baLaDaLat, chuConPhut, gioSapToi, MA_NHAT_KY, nhoBaLa, phutCuaNgay, TEN_BA_LA, THU_TU_BA_LA, type BaLa, type MaBaLa } from "@/lib/ba-la";
 
@@ -76,6 +76,7 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
     ghi("daily_card_flipped", { kind: ma, thu_tu: moi.length, ...(moi.length === THU_TU_BA_LA.length ? { du_ba: 1 } : {}) });
     // KV-THANG: ngày có lật lá vào nhật ký tháng (máy; tài khoản qua diem_danh 0032 — gọi lại trong ngày không cộng chuỗi).
     setSoNgayLat(thongKeThang(ghiLa(hoSo, ngay, MA_NHAT_KY[ma]), ...thangCua(ngay)).so_la);
+    if (ma === "tarot") ghiTarot(hoSo, ngay, tarot.id, tarot.ten);   // chỉ trên máy: tổng kết tháng kể lại lá đã gặp
     if (coTaiKhoan()) void fetch("/api/sao/chuoi", { method: "POST", cache: "no-store", headers: { "content-type": "application/json" }, body: JSON.stringify({ la: MA_NHAT_KY[ma] }) }).catch(() => null);
     // Điện thoại: lời đọc nằm dưới hàng lá → lật xong cuộn nhẹ tới nếu chưa nằm trong màn hình.
     window.setTimeout(() => {
