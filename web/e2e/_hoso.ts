@@ -27,3 +27,14 @@ export async function hoi(page: Page, cau: string) {
   await page.getByRole("button", { name: "Gửi câu hỏi" }).click();
   return page.getByTestId("cau-tra-loi").last();
 }
+
+/** KD-V4: phái đọc + cách ra quẻ nằm trong "Tuỳ chỉnh" (gập) — mở ra rồi trả ô chọn "Cách ra quẻ". */
+export async function cachRaQue(page: Page) {
+  const o = page.getByLabel("Cách ra quẻ");
+  if (!(await o.isVisible().catch(() => false))) await page.getByTestId("nut-tuy-chinh-kd").click();
+  return o;
+}
+/** KD-V4: hàng chip chủ đề gập sau nút "Đổi / Chọn chủ đề" — mở ra nếu đang gập. */
+export async function moChuDe(page: Page) {
+  if (!(await page.getByTestId("hang-chu-de").isVisible().catch(() => false))) await page.getByTestId("nut-doi-chu-de").click();
+}

@@ -1,6 +1,6 @@
 // TP-LICH — chọn âm lịch (Việt/Trung) và trường phái ở mọi mảng: người dùng bấm, engine tính lại, trang hiện rõ.
 import { test, expect } from "@playwright/test";
-import { HO_SO_MAU, hoi, napDongY, napHoSo } from "./_hoso";
+import { HO_SO_MAU, hoi, napDongY, napHoSo, cachRaQue } from "./_hoso";
 
 test("Bát tự: sinh 23:30 → đổi 'Đổi ngày lúc 23:00' ra trụ ngày hôm sau (nhật chủ Nhâm → Quý)", async ({ page }) => {
   await napHoSo(page, { ...HO_SO_MAU, gio: "23:30" });
@@ -38,7 +38,7 @@ test("Phong thuỷ: sinh 01/02/1985 → ba mốc đầu năm cho mệnh quái kh
 
 test("Kinh Dịch Mai Hoa: chọn âm lịch, quẻ ghi rõ lấy theo lịch nào", async ({ page }) => {
   await page.goto("/kinh-dich");
-  await page.getByLabel("Cách ra quẻ").selectOption("mai_hoa");
+  await (await cachRaQue(page)).selectOption("mai_hoa");
   const lich = page.getByLabel("Âm lịch cho Mai Hoa");
   await expect(lich).toBeVisible();
   await hoi(page, "Tôi có nên nhận lời làm quản lý không?");

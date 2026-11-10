@@ -2,21 +2,31 @@
 // chip tự sáng), chip chọn tay thắng; câu người ấy chưa rõ giới → hỏi làm rõ NGAY dưới ô trước khi gieo; bài đọc có hộp
 // "Phía …" và nhãn xu hướng hào làm chủ. Engine thật (gieo tay để tất định).
 import { test, expect } from "@playwright/test";
-import { hoi } from "./_hoso";
+import { hoi, cachRaQue, moChuDe } from "./_hoso";
 
 test("câu gợi ý điền vào ô, chưa gửi; gõ câu → chủ đề tự nhận; chip chọn tay thắng", async ({ page }) => {
   await page.goto("/kinh-dich");
   const o = page.getByRole("textbox", { name: /Câu hỏi/ });
-  await page.getByLabel("Câu hỏi gợi ý").getByRole("button").first().click();
-  await expect(o).toHaveValue("Tôi có nên nhận lời làm quản lý không?");
+  // KD-V4: chip "việc hay hỏi" → hai câu mẫu → bấm câu là ĐIỀN vào ô (không gửi); máy nói lại nó hiểu câu hỏi về việc gì
+  await expect(page.getByTestId("thanh-buoc-kd").locator('[aria-current="step"]')).toContainText("Hỏi");
+  await page.getByTestId("chip-hoi").getByRole("button").first().click();
+  const mau = page.getByTestId("cau-mau");
+  await expect(mau).toHaveCount(2);
+  const cauMau = (await mau.first().textContent())!;
+  await mau.first().click();
+  await expect(o).toHaveValue(cauMau);
   await expect(page.getByTestId("cau-hoi-ban")).toHaveCount(0);                      // không tự gửi
+  await expect(page.getByTestId("tu-nhan")).toContainText("Mình hiểu bạn hỏi về", { timeout: 15_000 });
+  await o.fill("Tôi có nên nhận lời làm quản lý không?");
   const tn = page.getByTestId("tu-nhan");
   await expect(tn).toContainText("Thăng tiến, phỏng vấn, đề bạt", { timeout: 15_000 });
   await expect(tn).toContainText("có nên");
+  await moChuDe(page);
   await expect(page.getByTestId("chip-chu-de").getByRole("button", { name: "Thăng tiến, phỏng vấn, đề bạt" })).toHaveAttribute("aria-pressed", "true");
   await o.fill("Con tôi năm nay thi đại học có đậu không?");
   await expect(tn).toContainText("Thi cử, học hành", { timeout: 15_000 });
   await expect(tn).toContainText("có thành không");
+  await moChuDe(page);
   await page.getByTestId("chip-chu-de").getByRole("button", { name: "Con cái" }).click();
   await expect(tn).toContainText("Con cái");
   await expect(tn).not.toContainText("tự nhận");
@@ -30,7 +40,7 @@ test("người ấy chưa rõ giới → hỏi làm rõ trước khi gieo; anh �
   await expect(lr).toBeVisible({ timeout: 15_000 });
   await lr.getByRole("button", { name: "Người ấy là nam" }).click();
   await expect(page.getByTestId("tu-nhan")).toContainText("người ấy là nam");
-  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await (await cachRaQue(page)).selectOption("gieo_tay");
   await page.getByLabel("Sáu hào tự gieo").fill("7 8 9 8 7 8");
   const ans = await hoi(page, "Anh ấy có thật lòng với tôi không?");
   const dq = ans.getByTestId("doc-que");

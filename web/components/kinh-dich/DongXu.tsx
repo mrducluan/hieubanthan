@@ -124,7 +124,7 @@ export function GieoDongXu({ giaTri, onXong }: {
     <div className="glass rounded-2xl p-4" data-testid="gieo-dong-xu" data-da-lat={daLat}>
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <p className="font-serif text-lg text-fg">Gieo ba đồng xu</p>
-        <p className="text-xs text-fg-faint">Quẻ đã được gieo xong trên máy tính toán — bạn lật từng lần để xem, từ hào 1 (dưới) lên hào 6 (trên).</p>
+        <p className="text-xs text-fg-faint">Mỗi lần gieo cho ra một vạch, dựng từ dưới lên trên. Sáu lần tung đã được máy chủ gieo ngẫu nhiên cho câu này — bạn lật từng lần để xem.</p>
       </div>
       <ol className="mt-3 space-y-2" aria-label="Sáu lần gieo, hào 6 ở trên cùng">
         {[6, 5, 4, 3, 2, 1].map((hao) => {

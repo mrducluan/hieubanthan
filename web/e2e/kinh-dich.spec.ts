@@ -1,11 +1,11 @@
 // Kinh Dịch (HH-1 + KD-ĐS): gieo tay để kết quả tất định; không cần hồ sơ. Lời đọc hai tầng: đời thường hiện ngay,
 // lời kinh / ba cách đọc / bản theo sách gập lại.
 import { test, expect } from "@playwright/test";
-import { hoi } from "./_hoso";
+import { hoi, cachRaQue, moChuDe } from "./_hoso";
 
 test("gieo tay: quẻ Lý biến Đoài — lời đời thường trước, bản theo sách gập", async ({ page }) => {
   await page.goto("/kinh-dich");
-  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await (await cachRaQue(page)).selectOption("gieo_tay");
   await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
   const ans = await hoi(page, "Tôi có nên nhận lời làm quản lý không?");
   const dq = ans.getByTestId("doc-que");
@@ -33,7 +33,7 @@ test("gieo tay: quẻ Lý biến Đoài — lời đời thường trước, b�
 
 test("HỌC-ĐS: hộp đọc quẻ có nút kiểm chứng — chỉ mã ds.kinhdich.* + cách đọc chính đi lên", async ({ page }) => {
   await page.goto("/kinh-dich");
-  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await (await cachRaQue(page)).selectOption("gieo_tay");
   await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
   const ans = await hoi(page, "Tôi có nên chuyển việc sang công ty mới không?");
   const dq = ans.getByTestId("doc-que");
@@ -64,7 +64,7 @@ test("máy gieo: nghi thức lật xu hiện trước (chưa lộ quẻ); bỏ q
 
 test("không hào động: lời chủ là quái từ, kèm Thoán truyện dịch nghĩa", async ({ page }) => {
   await page.goto("/kinh-dich");
-  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await (await cachRaQue(page)).selectOption("gieo_tay");
   await page.getByLabel("Sáu hào tự gieo").fill("7 7 7 7 7 7");
   const ans = await hoi(page, "Tôi có nên nhận lời làm quản lý không?");
   const dq = ans.getByTestId("doc-que");
@@ -86,13 +86,13 @@ test("câu mơ hồ (mua hay bán) → hỏi lại trước khi gieo; chọn xon
 
 test("Mai Hoa theo hai số tự chọn và theo phương vị — cùng đầu vào ra cùng quẻ", async ({ page }) => {
   await page.goto("/kinh-dich");
-  await page.getByLabel("Cách ra quẻ").selectOption("mai_hoa_so");
+  await (await cachRaQue(page)).selectOption("mai_hoa_so");
   await page.getByLabel("Số thứ nhất").fill("3");
   await page.getByLabel("Số thứ hai").fill("5");
   const ans = await hoi(page, "Chiều nay đi gặp đối tác có thuận không?");
   await expect(ans.getByTestId("mai-hoa-so")).toContainText("3 và 5");
   await expect(ans.getByTestId("que")).toContainText("Phái đọc: Mai Hoa");
-  await page.getByLabel("Cách ra quẻ").selectOption("mai_hoa_phuong");
+  await (await cachRaQue(page)).selectOption("mai_hoa_phuong");
   await page.getByLabel("Phương vị").selectOption("Tây Nam");
   const ans2 = await hoi(page, "Người khách đến từ phía đó có hợp làm ăn không?");
   await expect(ans2.getByTestId("mai-hoa-phuong")).toContainText("phương Tây Nam");
@@ -100,8 +100,9 @@ test("Mai Hoa theo hai số tự chọn và theo phương vị — cùng đầu 
 
 test("chip chủ đề: chọn trước khi hỏi → bài đọc theo đúng chủ đề", async ({ page }) => {
   await page.goto("/kinh-dich");
+  await moChuDe(page);
   await page.getByTestId("chip-chu-de").getByRole("button", { name: "Mở quán, kinh doanh, đầu tư" }).click();
-  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await (await cachRaQue(page)).selectOption("gieo_tay");
   await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
   const ans = await hoi(page, "Việc này có thành không?");
   await expect(ans).toContainText("Về việc mở quán, kinh doanh, đầu tư");
@@ -109,8 +110,9 @@ test("chip chủ đề: chọn trước khi hỏi → bài đọc theo đúng ch
 
 test("KC-3/4/5: ứng kỳ có nút nhắc (lưu máy, hiện ở Hôm nay), gợi mở chéo, CTA cuối bài, ?chu_de= chọn sẵn chip", async ({ page }) => {
   await page.goto("/kinh-dich?chu_de=kinh_doanh");
+  await moChuDe(page);
   await expect(page.getByTestId("chip-chu-de").getByRole("button", { name: "Mở quán, kinh doanh, đầu tư" })).toHaveAttribute("aria-pressed", "true");
-  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await (await cachRaQue(page)).selectOption("gieo_tay");
   await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
   const ans = await hoi(page, "Việc này có thành không?");
   const dq = ans.getByTestId("doc-que");
@@ -185,7 +187,7 @@ test("tự gieo bằng đồng xu / kiểu hào: quẻ dựng dần, thân gửi
   const than: Record<string, unknown>[] = [];
   await epQue(page, [], (b) => than.push(b));
   await page.goto("/kinh-dich");
-  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await (await cachRaQue(page)).selectOption("gieo_tay");
   const ch = page.getByTestId("chon-hao");
   await expect(ch).toBeVisible();
   // lần 1: bấm một đồng ngửa → 7 (Dương); lần 2: kiểu hào Dương; lần 3: hai đồng ngửa → 8 (Âm)
@@ -265,7 +267,7 @@ test("lịch sử quẻ trên máy: lưu sau khi gieo (≤ 200 ký tự câu h�
 
 test("thẻ Quẻ của tôi: mã ký chỉ có 6 hào + tên quẻ + chủ đề (không câu hỏi), trang nhận + ảnh PNG, mã sửa bị chặn", async ({ page, request }) => {
   await page.goto("/kinh-dich");
-  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await (await cachRaQue(page)).selectOption("gieo_tay");
   await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
   const ans = await hoi(page, "Tôi có nên nhận lời làm quản lý không?");
   await expect(ans.getByTestId("que")).toBeVisible();
@@ -332,7 +334,7 @@ test("P7 lắc điện thoại: bật nghe lắc → mỗi cú lắc là một l
 
 test("P9 hỏi lại sau 30 ngày: gieo xong máy nhớ MÃ hộp (không câu hỏi); 35 ngày sau trang Kinh Dịch hỏi 'việc đó ra sao?' và gửi phiếu chỉ mã", async ({ page }) => {
   await page.goto("/kinh-dich");
-  await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+  await (await cachRaQue(page)).selectOption("gieo_tay");
   await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
   await hoi(page, "Tôi có nên nhận lời làm quản lý ở công ty ABC không?");
   await expect.poll(() => page.evaluate(() => (JSON.parse(localStorage.getItem("hbt.kc_sau.v1") ?? "[]") as unknown[]).length)).toBe(1);

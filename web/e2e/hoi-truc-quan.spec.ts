@@ -1,6 +1,6 @@
 // HD-CS — khung "Hỏi đáp chuyên sâu": câu trả lời trọn chiều ngang trên điện thoại + khối hình engine dựng (truc_quan).
 import { expect, test } from "@playwright/test";
-import { hoi, napHoSo } from "./_hoso";
+import { hoi, napHoSo, cachRaQue } from "./_hoso";
 
 test.describe("điện thoại 375px", () => {
   test.use({ viewport: { width: 375, height: 812 } });
@@ -101,7 +101,7 @@ test.describe("đợt 3 — điện thoại", () => {
 
   test("Kinh Dịch: quẻ bản bấm được từng hào, hào động có lời giải thích dễ hiểu", async ({ page }) => {
     await page.goto("/kinh-dich");
-    await page.getByLabel("Cách ra quẻ").selectOption("gieo_tay");
+    await (await cachRaQue(page)).selectOption("gieo_tay");
     await page.getByLabel("Sáu hào tự gieo").fill("7 7 8 7 7 9");
     const ans = await hoi(page, "Tôi có nên nhận lời làm quản lý không?");
     const hao = ans.locator('figure[data-kieu="hao"]');
