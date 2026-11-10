@@ -3,7 +3,14 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-09 (HTT-3, mục 4aj).
+> Cập nhật lần cuối: 2026-11-10 (SEO-N, mục 4ak).
+
+### 4ak. SEO-N — trang dịch vụ đứng tên từ khoá + thương hiệu (2026-11-10, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md`)
+
+- [ ] **CMS → Trang website**: mở `/`, `/tu-vi`, `/bat-tu`, `/kinh-dich`… — nếu ô "Tiêu đề SEO" / H1 đã có chữ anh tự nhập thì chữ đó vẫn thắng mặc định mới; xoá trống (hoặc sửa theo bảng trong tài liệu) để dùng tiêu đề mới.
+- [ ] **Search Console → Kiểm tra URL** cho `https://hieuban.com/` và 7 trang dịch vụ (`/tu-vi`, `/bat-tu`, `/than-so`, `/kinh-dich`, `/phong-thuy`, `/nhan-tuong`, `/tarot`) → "Yêu cầu lập chỉ mục" sau khi deploy (để Google đọc tiêu đề mới sớm).
+- [ ] Sau 2–4 tuần: Hiệu suất → truy vấn chứa "tử vi" → tab Trang: `/tu-vi` phải nhận phần lớn hiển thị thay cho trang chủ. Gửi em file xuất nếu chưa đổi.
+- [ ] (Quyết định) Chọn trong 6 đề xuất mục 4 của tài liệu (trả lời nhanh trên trang dịch vụ, ảnh lá số mẫu, liên kết ngoài về đúng trang, `MXH_*`…).
 
 ### 4aj. HTT-3 — Ý1–Ý7 + QC `/en` (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9) — deploy ENGINE trước web
 

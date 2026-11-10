@@ -17,7 +17,7 @@ type P = { params: Promise<{ nam: string }> };
 async function metaGoc(p: P): Promise<Metadata> {
   const n = docNamBang((await p.params).nam);
   if (!n) return {};
-  const m = metaTrang({ tieuDe: `Tuổi nào làm nhà năm ${n}? Bảng Kim lâu, Hoang ốc, Tam tai`,
+  const m = metaTrang({ tieuDe: `Tuổi nào làm nhà năm ${n}? Kim lâu, Hoang ốc, Tam tai`,
     moTa: `Năm ${n}: tuổi sinh 1960–2005 nào làm nhà, cưới hỏi được, tuổi nào phạm Kim lâu, Hoang ốc, Tam tai — tính theo tuổi mụ âm lịch.`,
     duong: duongLamNhaNam(n), anh: anhBai({ tieuDe: `Tuổi nào làm nhà năm ${n}?`, mang: "lich" }) });
   const namAm = await namAmHienTai();

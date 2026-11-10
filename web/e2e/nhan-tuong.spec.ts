@@ -5,7 +5,7 @@ import { napHoSo } from "./_hoso";
 
 test("trang công cụ: H1 máy chủ, bản đồ mặt, khảo sát → bài đọc, hỏi đáp theo bộ vị", async ({ page, request }) => {
   const html = await (await request.get("/nhan-tuong")).text();
-  expect(html).toMatch(/<h1[^>]*>[^<]*Nhân tướng học/);
+  expect(html).toMatch(/<h1[^>]*>[^<]*Xem tướng mặt/);
   expect(html).toContain('data-testid="ban-do-mat"');
   await napHoSo(page, { ho_ten: "Nguyễn Văn An", ngay: 24, thang: 10, nam: 1988, gioi_tinh: "nam" });
   await page.goto("/nhan-tuong");

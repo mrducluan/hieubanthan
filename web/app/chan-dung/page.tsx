@@ -11,7 +11,7 @@ import { ND_CHAN_DUNG } from "./noi-dung";
 import { ChanDung } from "./ChanDung";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return apDungSeo(metaTrang({ tieuDe: "Chân dung tổng hợp: Tử vi, Bát tự và nhân tướng cùng nhìn bạn", moTa: ND_CHAN_DUNG.moTa,
+  return apDungSeo(metaTrang({ tieuDe: "Chân dung tổng hợp: Tử vi, Bát tự, nhân tướng", moTa: ND_CHAN_DUNG.moTa,
     duong: ND_CHAN_DUNG.duong }), await layNoiDungTrang(ND_CHAN_DUNG.duong));
 }
 

@@ -137,6 +137,9 @@ export function ldUngDung() {
       "Xem ngày tốt: hoàng lịch, giờ hoàng đạo, ngày kiêng; xem tuổi làm nhà, tuổi xông đất",
       "Hợp đôi theo thần số (không chấm điểm hợp khắc)",
     ],
+    // SEO-N: nối ứng dụng của site với từng trang dịch vụ (mỗi trang có WebApplication riêng, @id = <url>#ung-dung).
+    hasPart: ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/hop-doi"]
+      .map((d) => ({ "@id": `${urlDayDu(d)}#ung-dung` })),
     publisher: { "@id": `${siteUrl()}/#to-chuc` },
   };
 }
@@ -163,7 +166,8 @@ export function goiLd(...nut: object[]) {
 export function tieuDeSeo(t: string): string | { absolute: string } {
   // SEO-M: tiêu đề nguồn ngoài (bài NotFair, CMS) dài > 70 ký tự → cắt ở ranh giới từ (rà site thật 2026-10-23).
   if (t.length > 70) return { absolute: catMoTa(t, 68) };
-  return t.length > 52 ? { absolute: t } : t;
+  // SEO-N: hậu tố " · Hiểu Bản Thân" dài 16 ký tự → tiêu đề ≤ 54 vẫn vừa 70 và mang thương hiệu (trước: 52).
+  return t.length > 54 ? { absolute: t } : t;
 }
 
 /** Mô tả meta ≤ 160 ký tự, cắt ở ranh giới từ. */

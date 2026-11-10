@@ -70,6 +70,12 @@ async function metaGoc(params: Thamso): Promise<Metadata> {
 
 /** Trang kiến thức một mục KB (QH-URL: /{mảng}/{cụm}/{trang}); route của từng mảng chỉ đổi đường dẫn → khoá chủ đề. */
 /** Lời mời cuối trang theo loại trang — câu hỏi người đọc chỉ trả lời được bằng dữ liệu của chính mình. */
+// SEO-N: chữ nút mời theo trang dịch vụ đích.
+const NUT_CONG_CU: Record<string, string> = {
+  "/tu-vi": "Lập lá số Tử vi của tôi", "/bat-tu": "Lập lá số Bát tự của tôi", "/than-so": "Tính thần số học của tôi",
+  "/hop-doi": "Xem hợp đôi của tôi", "/kinh-dich": "Gieo quẻ Kinh Dịch", "/phong-thuy": "Xem phong thuỷ nhà tôi",
+  "/nhan-tuong": "Xem tướng mặt của tôi", "/tarot": "Rút bài Tarot của tôi",
+};
 const LOI_MOI: Partial<Record<string, string>> = {
   sao_cung: "Trên lá số của bạn, sao này nằm ở cung nào, sáng hay hãm, năm nào được hoá? Nhập ngày giờ sinh để xem — có từng bước an sao.",
   sao: "Trên lá số của bạn, sao này nằm ở cung nào, sáng hay hãm? Nhập ngày giờ sinh để xem — có từng bước an sao.",
@@ -259,7 +265,8 @@ export async function TrangKienThucView(params: Thamso) {
       <aside className="glass mt-10 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center" data-nosnippet="">
         <BookOpen className="size-6 shrink-0 text-gold" aria-hidden />
         <p className="flex-1 text-fg-muted">{LOI_MOI[t.loai] ?? <>Đọc chung chung chỉ là điểm bắt đầu. Xem con số, lá số của <b className="text-fg">chính bạn</b> — có từng bước tính để tự kiểm.</>}</p>
-        <Button asChild><Link href={cd.mang}>Xem của tôi <ArrowRight aria-hidden /></Link></Button>
+        {/* SEO-N: chữ liên kết nói rõ công cụ (≈ 600 trang kiến thức trỏ về trang dịch vụ bằng đúng từ khoá của nó). */}
+        <Button asChild><Link href={cd.mang}>{NUT_CONG_CU[cd.mang] ?? "Xem của tôi"} <ArrowRight aria-hidden /></Link></Button>
       </aside>
 
       {(t.lien_quan.length > 0 || (t.lien_ket_ngoai?.length ?? 0) > 0) && (
