@@ -37,7 +37,12 @@
       "xung": ", một ngày xung tuổi bạn",
       "khong_xung": ""
     },
-    "luu_y": "Nhịp tuần ghép từ ngày cá nhân và lịch cổ truyền — để tham khảo khi xếp việc, không phải dự báo."
+    "luu_y": "Nhịp tuần ghép từ ngày cá nhân và lịch cổ truyền — để tham khảo khi xếp việc, không phải dự báo.",
+    "push": {
+      "tieu_de": "Tuần này của bạn",
+      "co_ngay": "{tom_tat} Đáng để ý nhất: {ngay}.",
+      "khong_ngay": "{tom_tat} Mở để xem nhịp bảy ngày của bạn."
+    }
   },
   "hai_nguoi": {
     "nhom_ra": [

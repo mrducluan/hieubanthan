@@ -196,3 +196,48 @@ def test_nguoi_kia_am_lich_theo_dung_lich_la_so():
     assert goc == bac and nam == trung and nam == goc % 9 + 1
     # Miền Nam ngoài 1960–1975 vẫn theo lịch Việt UTC+7.
     assert th.hai_nguoi(1, 1, 1, 1, xem, kia_lich="am", kia_nam=1985, kia_vung="south") == th.hai_nguoi(1, 1, 1, 1, xem, kia_lich="am", kia_nam=1985)
+
+
+# ---------------------------------------------------------------- BT-UI đợt 3: thông báo sáng thứ Hai (mốc tuan_cua_toi)
+def test_push_tuan_chi_thu_hai_va_cung_nguon_voi_muc_tuan():
+    import datetime as dt
+    import re
+
+    from app.luangiai import tuan_hai_nguoi as th
+
+    assert th.push_tuan(15, 6, 1995, dt.date(2026, 11, 10)) is None          # thứ Ba
+    co_ngay = khong_ngay = 0
+    for i in range(40):
+        hai = dt.date(2026, 11, 9) + dt.timedelta(weeks=i)
+        for ns in ((15, 6, 1995), (3, 11, 1988)):
+            p = th.push_tuan(*ns, hai)
+            t = th.tuan(*ns, hai)
+            assert p and p["duong"] == "/hom-nay#tuan-nay" and p["tieu_de"] == "Tuần này của bạn"
+            assert p["noi_dung"].startswith(t["tom_tat"]) and len(p["noi_dung"]) <= 220
+            assert not re.search(r"\{[a-z_]+\}", p["noi_dung"])
+            if t["noi_bat"]:
+                co_ngay += 1
+                assert any(x["tieu_de"] in p["noi_dung"] for x in t["noi_bat"])
+                tot = [x for x in t["noi_bat"] if x["loai"] in ("thuan", "hop_tuoi")]
+                if tot:                                   # có ngày tích cực thì thông báo nêu ngày đó, không nêu "ngày nên đi chậm"
+                    assert tot[0]["tieu_de"] in p["noi_dung"]
+            else:
+                khong_ngay += 1
+            assert not re.search(r"\d{4}|sinh", p["noi_dung"])               # không mang năm / ngày sinh
+    assert co_ngay > 10
+
+
+def test_api_push_tuan():
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    c = TestClient(app)
+    r = c.post("/v1/push/tuan", json={"ngay_xem": "2026-11-16", "nguoi": [{"ngay_sinh": "1995-06-15"}, {"ngay_sinh": "1850-01-01"}]})
+    assert r.status_code == 200
+    kq = r.json()["ket_qua"]
+    assert kq[0]["duong"] == "/hom-nay#tuan-nay" and kq[1] is None
+    assert "1995" not in r.text.replace('"ngay_xem"', "")
+    r2 = c.post("/v1/push/tuan", json={"ngay_xem": "2026-11-17", "nguoi": [{"ngay_sinh": "1995-06-15"}]})
+    assert r2.json()["ket_qua"] == [None]
+    assert c.post("/v1/push/tuan", json={"ngay_xem": "2026-11-16", "nguoi": [{"ngay_sinh": "1995-06-15", "ten": "A"}]}).status_code == 422

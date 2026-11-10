@@ -117,6 +117,9 @@ const MOC: { ma: MocLichChon; chu: string }[] = [
   // Ý1 (0035): đầu tháng, một dòng dựng từ CHÍNH lá số trong tài khoản (cần giờ sinh + giới tính + nơi sinh) — máy chủ đọc lá
   // số đã lưu mỗi ngày 1, không ghi thêm gì; người dùng tự tích, bỏ tích là thôi.
   { ma: "thang_hai_la_so", chu: "Đầu tháng: Tử vi và Bát tự cùng nói gì về tháng này (cần lá số Tử vi + Bát tự đã lưu vào tài khoản — mỗi ngày 1, máy chủ đọc ngày giờ sinh, giới tính, nơi sinh trong hồ sơ của bạn để dựng một dòng, không ghi thêm gì)" },
+  // 0036: sáng thứ Hai, một dòng "Tuần này của bạn" — máy chủ đọc NGÀY SINH (đủ năm, để biết tuổi hợp / xung từng ngày) trong
+  // hồ sơ đã lưu, không tên, không giờ sinh, không ghi thêm gì.
+  { ma: "tuan_cua_toi", chu: "Sáng thứ Hai: tuần này của bạn — ngày thuận, ngày nên đi chậm (cần hồ sơ đã lưu vào tài khoản — mỗi thứ Hai, máy chủ đọc ngày sinh trong hồ sơ của bạn để dựng một dòng, không ghi thêm gì)" },
 ];
 
 /** GĐ2: người dùng tự tích nhận thêm (không tích sẵn). Vẫn tối đa một thông báo mỗi ngày — gộp vào một. */

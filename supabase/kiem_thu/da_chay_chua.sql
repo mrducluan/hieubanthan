@@ -50,6 +50,9 @@ select * from (values
                                              and column_name = 'ngon_ngu')),
   ('0035 mốc push đầu tháng hai lá số', exists (select 1 from pg_constraint
                                            where conname = 'push_tuy_chon_moc_lich_check'
-                                             and pg_get_constraintdef(oid) like '%thang_hai_la_so%'))
+                                             and pg_get_constraintdef(oid) like '%thang_hai_la_so%')),
+  ('0036 mốc push sáng thứ Hai tuần của tôi', exists (select 1 from pg_constraint
+                                           where conname = 'push_tuy_chon_moc_lich_check'
+                                             and pg_get_constraintdef(oid) like '%tuan_cua_toi%'))
 ) as t(migration, da_chay)
 order by 1;

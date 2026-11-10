@@ -104,6 +104,26 @@ def tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict:
             "luu_y": k["luu_y"], **_meta()}
 
 
+DUONG_TUAN = "/hom-nay#tuan-nay"
+
+
+def push_tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict | None:
+    """Một dòng thông báo sáng THỨ HAI (mốc Web Push `tuan_cua_toi`, migration 0036): câu tóm tắt tuần + ngày đáng để ý
+    đầu tiên — đúng dữ liệu của mục "Tuần này của bạn" (một nguồn). Không phải thứ Hai → None. Không dự báo, không doạ."""
+    if ngay_xem.weekday() != 0:
+        return None
+    t = tuan(ngay, thang, nam, ngay_xem)
+    k = _kb()["tuan"]["push"]
+    nb = t["noi_bat"]
+    # Ưu tiên dòng tích cực (thuận / hợp tuổi) rồi tới dòng sớm nhất — thông báo không mở đầu bằng "ngày nên đi chậm".
+    chon = next((x for x in nb if x["loai"] in ("thuan", "hop_tuoi")), nb[0] if nb else None)
+    if chon:
+        noi_dung = k["co_ngay"].format(tom_tat=t["tom_tat"], ngay=chon["tieu_de"])
+    else:
+        noi_dung = k["khong_ngay"].format(tom_tat=t["tom_tat"])
+    return {"tieu_de": k["tieu_de"], "noi_dung": noi_dung, "duong": DUONG_TUAN}
+
+
 # ------------------------------------------------------------------ hai người
 def kieu_cap(a: int, b: int) -> str:
     """Bốn kiểu nhịp của hai ngày cá nhân: cùng số · cùng hướng ra · cùng hướng vào · lệch nhịp (đối xứng a ↔ b)."""

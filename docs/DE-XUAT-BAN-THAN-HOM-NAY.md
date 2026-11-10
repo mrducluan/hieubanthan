@@ -155,8 +155,8 @@ Engine: một hàm RULES mới ghép ba lá từ dữ liệu đã có (`luangiai
 3. **Lối tắt app** "Ba lá hôm nay" (`/hom-nay?tu=app#ba-la`) trong manifest.
 4. **"Tuần này của bạn"** (mục gập đầu "Đọc thêm" ở Hôm nay, mở sẵn vào thứ Hai): bảy ngày (số ngày cá nhân, ngày lịch ghi
    đẹp, hợp / xung tuổi) + tối đa ba ngày đáng để ý còn lại trong tuần (thuận nhất · hợp tuổi · nên đi chậm · mở đầu · khép lại).
-   **Chưa làm**: gửi "Tuần của tôi" qua thông báo sáng thứ Hai — cần thêm một mốc vào bảng tuỳ chọn nhắc (migration mới), chờ
-   anh duyệt.
+   **Đợt 3 (2026-11-10, anh duyệt)**: gửi qua thông báo sáng thứ Hai — mốc `tuan_cua_toi` (migration 0036, người dùng tự
+   tích ở Bật nhắc), engine `/v1/push/tuan`, bấm thông báo mở đúng mục này.
 5. **Lá Tarot trong tổng kết tháng**: lật lá Tarot thì nhật ký trên máy ghi mã + tên lá; tổng kết tháng kể "Lá Tarot bạn gặp
    nhiều nhất: … (N lần)" khi có lá lặp lại, không thì kể tên tối đa ba lá. Mã lá chỉ nằm trên máy (máy chủ không giữ).
 

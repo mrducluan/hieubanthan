@@ -129,7 +129,7 @@ test("Hôm nay: chưa bật Web Push trên máy chủ → không có nút; có k
 });
 
 // ---------------------------------------------------------------- KC-4 GĐ2
-import { ghepThongBao, type GoiSangNay } from "../lib/web-push";
+import { ghepThongBao, laThuHai, type GoiSangNay } from "../lib/web-push";
 import { nenMoi } from "../components/khung/MoiCaiApp";
 
 const SN: GoiSangNay = {
@@ -170,6 +170,21 @@ test("GĐ2: một thông báo/ngày — mốc tự đánh dấu > mốc lịch �
     .toMatchObject({ title: "Hôm nay Lập xuân", body: `Năm mới theo tiết khí bắt đầu từ hôm nay. ${NHA.noi_dung}`, url: "/phong-thuy/huong-xau-nam" });
   // có nhà nhưng không chọn nhận mốc giao tiết → không gửi
   expect(ghepThongBao({ ...N, nha_tiet: NHA }, SN, "2026-03-05")).toBeNull();
+  // 0036: sáng thứ Hai "Tuần này của bạn" — chỉ khi người đó tích mốc VÀ cron gắn được dòng; đứng sau mốc hiếm hơn
+  const TUAN = { tieu_de: "Tuần này của bạn", noi_dung: "Từ nay tới Chủ Nhật có 1 ngày lịch ghi đẹp.", duong: "/hom-nay#tuan-nay" };
+  const KHONG_MOC: GoiSangNay = { ...SN, moc_lich: [] };
+  expect(ghepThongBao({ ...N, moc_lich: ["tuan_cua_toi"], tuan_cua_toi: TUAN }, KHONG_MOC, "2026-11-16"))
+    .toMatchObject({ title: "Tuần này của bạn", body: TUAN.noi_dung, url: "/hom-nay#tuan-nay" });
+  expect(ghepThongBao({ ...N, tuan_cua_toi: TUAN }, KHONG_MOC, "2026-11-16")).toBeNull();                 // chưa tích
+  expect(ghepThongBao({ ...N, moc_lich: ["tuan_cua_toi"] }, KHONG_MOC, "2026-11-16")).toBeNull();          // chưa có hồ sơ / không phải thứ Hai
+  expect(ghepThongBao({ ...N, moc_lich: ["tuan_cua_toi"], tuan_cua_toi: TUAN, sang_nay: true, ngay_sinh: "12-05" }, KHONG_MOC, "2026-11-16")?.body)
+    .toBe(`${TUAN.noi_dung} · Ngày cá nhân 6: Câu tự soi 6?`);
+  expect(ghepThongBao({ ...N, moc_lich: ["giao_tiet", "tuan_cua_toi"], tuan_cua_toi: TUAN }, SN, "2026-03-09")?.title)
+    .toBe("Hôm nay giao tiết Kinh trập · +1 mốc");
+  expect(ghepThongBao({ ...N, nhac: [{ nhan: "Ứng kỳ quẻ Càn", duong: "/kinh-dich" }], moc_lich: ["tuan_cua_toi"], tuan_cua_toi: TUAN }, KHONG_MOC, "2026-11-16")?.title)
+    .toBe("Ứng kỳ quẻ Càn");
+  expect(laThuHai("2026-11-16")).toBe(true);
+  expect(laThuHai("2026-11-17")).toBe(false);
   // engine lỗi (sn = null) → chỉ còn mốc tự đánh dấu
   expect(ghepThongBao({ ...N, sang_nay: true, ngay_sinh: "12-05", moc_lich: ["giao_tiet"] }, null, "2026-03-05")).toBeNull();
 });

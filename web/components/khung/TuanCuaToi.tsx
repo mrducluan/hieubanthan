@@ -33,7 +33,7 @@ export function TuanCuaToi({ hoSo, ngay }: { hoSo: HoSo; ngay: string }) {
   if (!t) return null;   // engine cũ / lỗi mạng → mục tự ẩn
   const thuHai = t.ngay[0]?.hom_nay ?? false;
   return (
-    <MucGap ma="tuan" testId="tuan-cua-toi" moSan={thuHai} tieuDe="Tuần này của bạn" phu={<>{dm(t.tu)} – {dm(t.den)}</>} tomTat={t.tom_tat}>
+    <MucGap id="tuan-nay" ma="tuan" testId="tuan-cua-toi" moSan={thuHai} tieuDe="Tuần này của bạn" phu={<>{dm(t.tu)} – {dm(t.den)}</>} tomTat={t.tom_tat}>
       <p className="text-sm">{t.tom_tat}</p>
       <ol className="grid grid-cols-7 gap-1.5" aria-label="Bảy ngày của tuần" data-testid="tuan-luoi">
         {t.ngay.map((n, i) => (
