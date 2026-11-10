@@ -7,6 +7,8 @@
 export type MucChu = {
   /** Mô tả cho người sửa (vd "Chip 1 dưới lời dẫn"). */ nhan: string;
   mac_dinh: string;
+  /** EN-ALL: chữ mặc định TIẾNG ANH của cùng khoá (viết từ nghĩa, không dịch sát). Bảng đã mở bản Anh thì MỌI khoá phải
+   *  có (e2e/en-nen.spec.ts) — thiếu thì trang Anh hiện chuỗi rỗng + cảnh báo, không bao giờ rơi về chữ Việt. */ en?: string;
   /** Giới hạn ký tự (mặc định 300). */ toi_da?: number;
   /** Nhóm hiển thị trong CMS (vd "Đầu trang", "Bảng so sánh"). */ nhom?: string;
   /** Mục chọn (vd cỡ chữ): CMS hiện danh sách chọn thay ô gõ; web chỉ nhận đúng các giá trị này. `mac_dinh` là một trong số đó. */
@@ -40,12 +42,36 @@ export function locChu(bang: BangChu, cms: unknown): Record<string, string> {
   return ra;
 }
 
+/** Như `locChu` nhưng so với chữ mặc định tiếng Anh (chữ CMS bản Anh). */
+function locChuEn(bang: BangChu, cms: unknown): Record<string, string> {
+  if (!cms || typeof cms !== "object" || Array.isArray(cms)) return {};
+  const ra: Record<string, string> = {};
+  for (const [k, v] of Object.entries(cms as Record<string, unknown>)) {
+    const muc = bang[k];
+    if (!muc || muc.lua_chon || !KHOA.test(k) || typeof v !== "string") continue;
+    const s = v.replace(/<[^>]*>/g, "").replace(/[ \t]+/g, " ").replace(/\s*\n\s*/g, " ").trim().slice(0, muc.toi_da ?? TOI_DA_CHU).trim();
+    if (s && s !== muc.en) ra[k] = s;
+  }
+  return ra;
+}
+
+/** Khoá của bảng CHƯA có chữ tiếng Anh (test dùng để chặn mở bản Anh khi còn thiếu). */
+export const khoaThieuEn = (bang: BangChu): string[] => Object.keys(bang).filter((k) => !bang[k]!.lua_chon && !bang[k]!.en?.trim());
+
 /** Thay {bien} bằng giá trị; biến không có giữ nguyên chữ. */
 export const thayBienChu = (s: string, bien: Record<string, string> = {}) =>
   s.replace(/\{([a-z_]+)\}/g, (m, k: string) => (Object.hasOwn(bien, k) ? bien[k]! : m));
 
 /** Hàm đọc chữ của một trang: `c("hero.chip_1")` → chữ CMS hoặc mặc định. Khoá lạ → chuỗi rỗng (bảng là nguồn duy nhất). */
-export function taoChu<B extends BangChu>(bang: B, cms?: ChuCms | null) {
+export function taoChu<B extends BangChu>(bang: B, cms?: ChuCms | null, ngonNgu: "vi" | "en" = "vi") {
+  if (ngonNgu === "en") {
+    // EN-ALL: bản Anh đọc `en` của bảng (chữ CMS tiếng Anh truyền qua `cms` khi CMS có localization — GĐ 10). Không rơi về chữ Việt.
+    const daEn = locChuEn(bang, cms);
+    return (k: (keyof B & string) | (string & {}), bien?: Record<string, string>): string => {
+      if (bang[k]?.en === undefined && process.env.NODE_ENV !== "production") console.warn(`[chu-trang] khoá chưa có chữ tiếng Anh: ${k}`);
+      return thayBienChu(daEn[k] ?? bang[k]?.en ?? "", bien);
+    };
+  }
   const da = locChu(bang, cms);
   // Khoá sinh theo vòng lặp (vd `diem_mu.cau_${i}`) không suy được kiểu literal → nhận cả string; khoá sai thì chuỗi rỗng
   // (e2e/chu-trang.spec.ts kiểm mọi khoá trang dùng đều có trong bảng).

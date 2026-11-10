@@ -29,6 +29,7 @@ import { ChuChung } from "@/components/cms/ChuChung";
 import { chuChungCms } from "@/lib/cms";
 import { banTiengAnh, dangXemNhap } from "@/lib/noi-dung-trang";
 import { LA_MA_EN, langHtml } from "@/lib/ngon-ngu";
+import { NgonNguProvider } from "@/components/khung/NgonNgu";
 
 // Display: Newsreader — serif, chữ số đẹp cho con số lớn. Body: Be Vietnam Pro — thiết kế cho tiếng Việt.
 // PERF-1: tách nghiêng ra bản riêng KHÔNG preload — bản nghiêng (64 KB) chỉ dùng ở vài câu trích, trước đây
@@ -99,7 +100,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <JsonLd data={goiLd(ldToChuc("en"), ldWebsite("en"))} />
           <div className="star-field" aria-hidden />
           <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">Skip to content</a>
-          <KhungEn>{children}</KhungEn>
+          <NgonNguProvider ngonNgu="en" ma={maNn}><KhungEn duong={hd.get("x-duong-hien-thi") ?? "/en"}>{children}</KhungEn></NgonNguProvider>
           <GiamSat />
           <GhiVaoTrang />
           <DoLuongGoogle nonce={nonce} />

@@ -2,14 +2,14 @@
 
 > Thước đo tiến độ DUY NHẤT của `docs/PROMPT-EN-TOAN-BO.md`. Cập nhật sau mỗi commit đáng kể. Phiên bị ngắt: đọc tệp này +
 > `git log` rồi làm tiếp đúng chỗ.
-> Cập nhật lần cuối: 2026-11-10 (xong giai đoạn 0).
+> Cập nhật lần cuối: 2026-11-10 (xong giai đoạn 0; giai đoạn 1 xong phần lõi).
 
 ## 0. Trạng thái giai đoạn
 
 | GĐ | Việc | Trạng thái | Ghi chú |
 |---|---|---|---|
 | 0 | Kiểm kê + golden | **xong** (2026-11-10) | golden bản Việt 10.425 lượt gọi, ổn định 2 lần chạy liên tiếp; khung test 5.2 chạy |
-| 1 | Nền web (rewrite, catalog nhiều ngôn ngữ, khung đầy đủ) | chưa | làm tiếp theo |
+| 1 | Nền web (rewrite, catalog nhiều ngôn ngữ, khung đầy đủ) | **đang** — lõi xong (2026-11-10), còn 6 việc ở mục 3b | làm tiếp theo |
 | 2 | Nền engine (tên riêng, `L()` cho khuôn chung, `slug_en`) | chưa | 9 nhóm route |
 | 3 | Bát tự | chưa | 5 nhóm route |
 | 4 | Tử vi | chưa | 12 |
@@ -56,6 +56,30 @@ tự báo "đã sạch — xoá khỏi CHUA_XONG".
 - `tests/test_dau_ra_en.py` — cùng lượt gọi với `x-ngon-ngu: en`: 0 chữ Việt, 0 `{slot}`, 0 rác ghép chuỗi; khung dữ kiện
   (đường dẫn, kiểu, số, `ma_mau`, mức) giống bản Việt. Danh sách `CHUA_XONG` / `KHUNG_CHUA_XONG` theo giai đoạn.
 - Chưa dựng (làm ở GĐ 1): chụp HTML máy chủ ~60 trang Việt trước/sau; e2e `en-*.spec.ts`.
+
+## 3b. Giai đoạn 1 — nền web
+
+**Đã có** (e2e `web/e2e/en-nen.spec.ts`, 13 ca; `en.spec.ts` cũ + 51 ca liên quan vẫn xanh; build production qua):
+- `web/lib/duong-en.json` + `lib/duong-en.ts` — MỘT bảng cặp đường dẫn Việt ↔ Anh (58 tiền tố, cờ `mo` / `rieng` / `la`),
+  `duongTheo(lang, duongVi, duoi?)`, `banAnh`, `banViet`, `capHreflang`, `dichRewrite`, `suaDuongLac`, `khongCoBanAnh`.
+  Trang chưa mở: URL Anh trả 404 tiếng Anh (không lộ trang Việt trong khung Anh).
+- `proxy.ts`: URL Anh đã mở không có trang riêng → `rewrite` sang trang Việt + header `x-ngon-ngu`, `x-duong-hien-thi`;
+  `/en/<slug-việt>` gõ lạc / slug đã đổi → 308 một bước. Matcher không đổi (không sinh thêm lượt chạy proxy).
+- `lib/ngon-ngu-may-chu.ts` (`ngonNguMayChu()`), `components/khung/NgonNgu.tsx` (`NgonNguProvider`, `useNgonNgu`, `useDuong`).
+- `lib/chu-trang.ts`: `MucChu.en`, `taoChu(bang, cms, "en")` không bao giờ rơi về chữ Việt, `khoaThieuEn(bang)`.
+- `lib/dinh-dang.ts`: ngày / khoảng ngày / giờ (en = Anh–Anh 24 giờ, en-us = Mỹ 12 giờ), số, %, tiền, danh sách, số thứ tự, số nhiều.
+- `components/khung/NutDoiNgonNgu.tsx`: nút đổi ngôn ngữ về TRANG TƯƠNG ĐƯƠNG (lấy từ hreflang của trang khi có), giữ
+  `?cach=` / `#neo`. Thương hiệu bản Anh đổi thành **Hieuban** (khung, tiêu đề, OG, schema `alternateName` giữ tên cũ).
+
+**Còn lại của GĐ 1** (theo thứ tự nên làm):
+1. Khung ĐẦY ĐỦ tiếng Anh thay `KhungEn` (menu + menu con, thanh mảng, chân trang, cookie, đăng nhập, dải thông báo) — chữ
+   menu / chân trang / thanh mảng vào catalog có `en`, link qua `duongTheo`, chỉ hiện mục đã mở.
+2. Chiều `en` cho `CHU_CHUNG` (form hồ sơ, hỏi đáp, góp ý, kiểm chứng, chia sẻ) + `ChuChung` đọc theo ngôn ngữ.
+3. Chuyển 7 URL `/en` hiện có sang hệ một-component (xoá `app/en/**` từng trang khi trang Việt tương ứng đã đọc catalog),
+   gộp `components/en/BaoCaoEn.tsx`, `HoiEn.tsx` vào component chung rồi xoá.
+4. Hợp nhất hồ sơ `hbt.en.profile.v1` vào hồ sơ chung (đọc cũ một lần rồi chuyển).
+5. Rà khoá đệm `fetch` / `unstable_cache` có tên: thêm ngôn ngữ vào khoá + `?ngon_ngu=` trên URL engine.
+6. Chụp HTML máy chủ ~60 trang Việt trước/sau (mục 5.1 phần web) — làm TRƯỚC việc 1 vì việc 1 đụng layout bản Việt.
 
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
@@ -140,3 +164,4 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
 ## 7. Nhật ký
 
 - **2026-11-10 — GĐ 0**: đọc nền đa ngôn ngữ, kiểm kê, dựng golden bản Việt + khung test tiếng Anh, hỏi 4 câu quyết định.
+- **2026-11-10 — GĐ 1 (lõi)**: bảng đường dẫn, rewrite / 308 trong proxy, ngữ cảnh ngôn ngữ, catalog có chiều `en`, định dạng `Intl`, nút đổi ngôn ngữ về trang tương đương, thương hiệu Hieuban.

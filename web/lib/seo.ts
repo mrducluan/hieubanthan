@@ -78,8 +78,8 @@ export function ldToChuc(ngonNgu: "vi" | "en" = "vi") {
   return {
     "@type": "Organization",
     "@id": `${siteUrl()}/#to-chuc`,
-    name: en ? "Hieu Ban Than" : TEN_SITE,
-    ...(en ? { alternateName: TEN_SITE } : {}),
+    name: en ? "Hieuban" : TEN_SITE,   // EN-ALL (chủ dự án chốt 2026-11-10): thương hiệu bản Anh là "Hieuban"
+    ...(en ? { alternateName: [TEN_SITE, "Hieu Ban Than"] } : {}),
     ...(vh.chuSoHuu ? { legalName: vh.chuSoHuu } : {}),
     url: siteUrl(),
     logo: { "@type": "ImageObject", url: urlDayDu("/thuong-hieu/avatar-512.png"), width: 512, height: 512 },
