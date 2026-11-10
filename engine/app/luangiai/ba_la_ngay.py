@@ -11,6 +11,7 @@ from __future__ import annotations
 import datetime as dt
 import re
 
+from app import config
 from app.calc import tarot as calc_tarot
 from app.kb import tarot_kb
 
@@ -32,7 +33,7 @@ def _phut(khung: str) -> tuple[int, int]:
 def _la_tarot(ngay_sinh: dt.date, ngay_xem: dt.date) -> dict:
     from app.kb import trang_tarot  # noqa: PLC0415 — tránh vòng import lúc nạp KB trang
     from app.luangiai import tarot as tr  # noqa: PLC0415
-    x = calc_tarot.la_ngay(ngay_xem, ngay_sinh)
+    x = calc_tarot.la_ngay(ngay_xem, ngay_sinh, muoi=config.LA_NGAY_MUOI)
     l = tarot_kb.la()[x["id"]]
     slug = dict(trang_tarot.ds_la_bai()).get(l["id"])
     return {**tr._tom_la(l, False), "tu_khoa": tr._tu_khoa(l, False)[:3], "y": l["y_xuoi"], "viec": l["viec"],
@@ -53,6 +54,9 @@ def lap(ngay: int, thang: int, nam: int, ngay_xem: dt.date, *, ngay_ca_nhan: dic
         "thoi_khac": {"gio": gio, "hoang_dao": bool(hoang_lich.get("hoang_dao")),
                       "nen": list(hoang_lich.get("nghi") or [])[:2], "kieng": list(hoang_lich.get("ky") or [])[:1],
                       "que": {"so": q["so"], "ten": q["ten"], "y": q.get("y_chinh"), "duong": q.get("duong")} if q else None},
+        # Riêng tư: lá Tarot riêng chỉ được lên thẻ chia sẻ / lời nhắn soạn sẵn khi phép băm có muối bí mật (config.LA_NGAY_MUOI);
+        # không muối thì lá + ngày xem đủ để quét ngược ngày sinh → web phải giấu lá trên thẻ.
+        "chia_se_tarot": bool(config.LA_NGAY_MUOI),
         "cau_cua_ngay": tom_lai,
         "cach_chon": CACH_CHON,
     }

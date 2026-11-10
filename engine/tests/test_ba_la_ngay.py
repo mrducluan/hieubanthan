@@ -124,3 +124,40 @@ def test_api_goi_y_cheo_nhan_trang_ban_than():
     from app.main import app
     r = TestClient(app).post("/v1/goi-y-cheo", json={"mang_hien_tai": "ban_than", "ngay": 17, "thang": 5, "nam": 1990, "ho_ten": ["Nguyễn Đức Luân"]})
     assert r.status_code == 200 and len(r.json()["the"]) == 8
+
+
+# ---------------------------------------------------------------- riêng tư: lá Tarot riêng không được suy ngược ra ngày sinh
+def test_la_rieng_co_muoi_thi_khac_va_van_tat_dinh():
+    """Lá riêng = băm(ngày xem, ngày sinh): công thức công khai → ai biết lá + ngày xem quét được ngày sinh. Có muối bí mật
+    (env LA_NGAY_MUOI) thì không quét được. Không muối → hành vi cũ (golden không đổi)."""
+    ns = dt.date(1990, 5, 17)
+    goc = [calc_tarot.la_ngay(NGAY + dt.timedelta(days=i), ns)["id"] for i in range(40)]
+    co = [calc_tarot.la_ngay(NGAY + dt.timedelta(days=i), ns, muoi="m" * 32)["id"] for i in range(40)]
+    assert co == [calc_tarot.la_ngay(NGAY + dt.timedelta(days=i), ns, muoi="m" * 32)["id"] for i in range(40)]
+    assert co != goc and co != [calc_tarot.la_ngay(NGAY + dt.timedelta(days=i), ns, muoi="n" * 32)["id"] for i in range(40)]
+    # Lá CHUNG của ngày (không ngày sinh) không dính muối: mọi người, mọi máy chủ cùng một lá.
+    assert calc_tarot.la_ngay(NGAY, None, muoi="m" * 32) == calc_tarot.la_ngay(NGAY)
+
+
+def test_co_chia_se_tarot_chi_bat_khi_co_muoi(monkeypatch):
+    """Không muối → `chia_se_tarot` False: web KHÔNG được đưa lá Tarot lên thẻ chia sẻ / lời nhắn soạn sẵn."""
+    from app import config
+    from app.luangiai import tarot as tr
+    monkeypatch.setattr(config, "LA_NGAY_MUOI", None)
+    a = _bl()["ba_la"]
+    assert a["chia_se_tarot"] is False
+    assert a["tarot"]["id"] == calc_tarot.la_ngay(NGAY, dt.date(1990, 5, 17))["id"]
+    monkeypatch.setattr(config, "LA_NGAY_MUOI", "x" * 32)
+    b = _bl()["ba_la"]
+    assert b["chia_se_tarot"] is True
+    assert b["tarot"]["id"] == calc_tarot.la_ngay(NGAY, dt.date(1990, 5, 17), muoi="x" * 32)["id"]
+    # /v1/tarot/la-ngay (ô Tarot ở Bản thân, khối Lá của ngày ở /tarot) phải ra CÙNG lá với ba lá của Hôm nay.
+    assert tr.la_ngay(NGAY, dt.date(1990, 5, 17))["la"]["id"] == b["tarot"]["id"]
+
+
+def test_muoi_ngan_bi_bo_qua(monkeypatch):
+    from app import config
+    monkeypatch.setenv("LA_NGAY_MUOI", "ngan")
+    assert config.doc_muoi_la_ngay() is None
+    monkeypatch.setenv("LA_NGAY_MUOI", "d" * 16)
+    assert config.doc_muoi_la_ngay() == "d" * 16

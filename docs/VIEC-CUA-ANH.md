@@ -9,6 +9,9 @@
 
 - [ ] **Deploy engine trước web** (trường mới `ba_la` ở `/v1/thanso/hom-nay`, trang `ban_than` ở `/v1/goi-y-cheo`). Web lên trước thì
   Hôm nay vẫn hiện Lá bài đầu ngày cũ và khối "Bảy cách nhìn" tự ẩn — không vỡ trang, tự đúng khi engine xong.
+- [ ] **Render → `hieubanthan-engine-sg` → Environment: thêm `LA_NGAY_MUOI`** = một chuỗi ngẫu nhiên ≥ 16 ký tự (vd lấy từ
+  trình tạo mật khẩu, 32 ký tự), giữ bí mật. Có biến này thì lá Tarot riêng mới hiện trên thẻ chia sẻ "Ba lá"; chưa đặt thì
+  thẻ vẽ lá Tarot úp (vẫn chia sẻ được, không lộ gì). Đặt xong mọi người đổi lá riêng một lần — nên đặt ngay lúc deploy.
 - [ ] (3 phút) `/hom-nay`: lật đủ ba lá → "Ba lá ghép lại" → "Chia sẻ ba lá" → mở link thẻ trên máy khác, "Tải ảnh" có QR.
   Xem chip "Giờ tốt sắp tới" có đúng với giờ hiện tại không; mở thử một mục "Đọc thêm".
 - [ ] (2 phút) `/ban-than`: hai cột đầu trang cao bằng nhau; "Chia sẻ thẻ" trên thẻ hồ sơ hiện QR; khối "Bảy cách nhìn về bạn"

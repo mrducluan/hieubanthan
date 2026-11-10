@@ -34,7 +34,7 @@ export function HoiHomQua({ homNay, tieuDe, cau, camOn }: { homNay: string; tieu
       ) : (
         <>
           <p className="text-sm">{luc === "toi_nay"
-            ? `Sáng nay bạn chọn việc ${dau.ten.toLowerCase()} — gợi ý “${NHIP[dau.nhip] ?? ""}” có đúng với ngày của bạn không?`
+            ? `Hôm nay bạn chọn việc ${dau.ten.toLowerCase()} — gợi ý “${NHIP[dau.nhip] ?? ""}” có đúng với ngày của bạn không?`
             : cau({ ten: dau.ten.toLowerCase(), nhip: NHIP[dau.nhip] ?? "" })}</p>
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={() => tra("dung")} className="rounded-full border border-jade/50 px-3 py-1 text-sm text-jade hover:bg-jade/10">Đúng với mình</button>

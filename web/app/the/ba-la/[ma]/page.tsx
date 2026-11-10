@@ -1,4 +1,4 @@
-// BT-UI — trang nhận thẻ "Ba lá của {tên} hôm nay": lá Tarot (vẽ lại bằng hình SVG của site), số ngày cá nhân, tên quẻ đầu
+// BT-UI — trang nhận thẻ "Ba lá của {tên}": lá Tarot (vẽ lại bằng hình SVG của site; mã không mang lá thì vẽ lá úp), số ngày cá nhân, tên quẻ đầu
 // ngày — từ mã đã ký (không ngày sinh, không lời đọc) + lời mời "Lật ba lá của bạn" về /hom-nay, mang ?tu=bl.<…> để đo
 // referral_signup như các thẻ khác. Không index.
 import type { Metadata } from "next";
@@ -10,7 +10,7 @@ import { QuaNguoiNhan } from "@/components/sao/QuaNguoiNhan";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/khung/Logo";
 import { GhiTu } from "@/components/khung/GhiMoThe";
-import { MatTruoc } from "@/components/tarot/LaBai";
+import { MatSau, MatTruoc } from "@/components/tarot/LaBai";
 
 interface Props { params: Promise<{ ma: string }> }
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { ma } = await params;
   const nd = docMaBaLa(ma);
   if (!nd) return { title: "Ba lá của ngày", robots: { index: false } };
-  const title = `Ba lá của ${nd.t} hôm nay: ${nd.l[1]} · ngày ${nd.n} — còn bạn?`;
+  const title = `Ba lá của ${nd.t} ngày ${dm(nd.d)}: ${nd.l ? `${nd.l[1]} · ` : ""}ngày cá nhân ${nd.n} — còn bạn?`;
   const anh = [`/og/ba-la?ma=${encodeURIComponent(ma)}`];
   return {
     title,
@@ -51,11 +51,14 @@ export default async function Page({ params }: Props) {
       <div className="rounded-2xl p-[1px]" style={{ background: "linear-gradient(140deg, rgb(var(--gold) / 0.7), rgb(var(--moon) / 0.45) 55%, rgb(var(--jade) / 0.35))" }}>
         <div className="rounded-2xl bg-surface px-5 py-8">
           <Logo className="mx-auto h-8 w-auto" />
-          <p className="eyebrow mt-4">Ba lá của ngày · {dm(nd.d)}</p>
-          <h1 className="mt-2 font-serif text-3xl">Ba lá của {nd.t} hôm nay</h1>
+          <p className="eyebrow mt-4">Ba lá của ngày</p>
+          <h1 className="mt-2 font-serif text-3xl">Ba lá của {nd.t} ngày {dm(nd.d)}</h1>
           <div className="mx-auto mt-6 grid max-w-sm grid-cols-3 gap-3">
             <figure className="space-y-1.5">
-              <div className="overflow-hidden rounded-[9px] shadow-card" style={{ aspectRatio: "120 / 200" }}><MatTruoc la={laGonTuMa(nd.l[0], nd.l[1])} /></div>
+              {/* Mã không mang lá (lá riêng chưa được phép lên thẻ) → vẽ lá úp: chỉ người lật mới thấy lá của mình. */}
+              <div className="overflow-hidden rounded-[9px] shadow-card" style={{ aspectRatio: "120 / 200" }} data-testid="the-ba-la-tarot" data-up={nd.l ? 0 : 1}>
+                {nd.l ? <MatTruoc la={laGonTuMa(nd.l[0], nd.l[1])} /> : <MatSau />}
+              </div>
               <figcaption className="text-xs text-fg-muted">Lá Tarot</figcaption>
             </figure>
             <figure className="space-y-1.5">
@@ -70,7 +73,7 @@ export default async function Page({ params }: Props) {
               <div className={khung} style={{ aspectRatio: "120 / 200" }}>
                 <span className="text-[0.6rem] uppercase tracking-widest opacity-70">Quẻ đầu ngày</span>
                 <span className="font-serif text-lg leading-tight">{nd.q ?? "Giờ tốt"}</span>
-                <span className="text-[0.65rem] opacity-70">giờ tốt sắp tới</span>
+                <span className="text-[0.65rem] opacity-70">giờ tốt trong ngày</span>
               </div>
               <figcaption className="text-xs text-fg-muted">Lá Thời khắc</figcaption>
             </figure>

@@ -20,7 +20,7 @@ import { ChuoiNgay } from "@/components/khung/ChuoiNgay";
 import { LaBaiDauNgay } from "@/components/khung/LaBaiDauNgay";
 import { BaLaNgay } from "@/components/khung/BaLaNgay";
 import { MucGap } from "@/components/khung/MucGap";
-import { gioSapToi, type BaLa } from "@/lib/ba-la";
+import { gioSapToi, phutCuaNgay, type BaLa } from "@/lib/ba-la";
 import { HenChinhMinh } from "@/components/khung/HenChinhMinh";
 import type { TrangThaiChuoi } from "@/lib/chuoi-ngay";
 import { nhoYDinhHomNay } from "@/lib/hom-qua";
@@ -162,12 +162,14 @@ export function HomNay() {
   const [moGio, setMoGio] = useState(false);
   // BT-UI: phút trong ngày theo đồng hồ máy (chỉ đọc ở trình duyệt, cập nhật mỗi phút) → chip "Giờ tốt sắp tới".
   const [phut, setPhut] = useState<number | null>(null);
+  const ngayThe = the?.ngay_xem;
   useEffect(() => {
-    const doc = () => { const d = new Date(); setPhut(d.getHours() * 60 + d.getMinutes()); };
+    if (!ngayThe) return;
+    const doc = () => setPhut(phutCuaNgay(ngayThe));   // trang mở qua nửa đêm → null (không gán giờ tốt hôm qua cho hôm nay)
     doc();
     const h = window.setInterval(doc, 60_000);
     return () => window.clearInterval(h);
-  }, []);
+  }, [ngayThe]);
 
   /** Gọi engine; `yDinh`/`cau` rỗng = thẻ cơ bản. Ý định đã nhớ của hôm nay được gửi kèm ngay lần đầu. */
   function taiThe(yDinh: string[], cau: string) {

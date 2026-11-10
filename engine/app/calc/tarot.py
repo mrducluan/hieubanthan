@@ -246,10 +246,13 @@ def nghieng_tong(ds: list[tuple[str, float, str]]) -> dict:
 
 
 # ------------------------------------------------------------------ lá ngày, lá đại diện
-def la_ngay(ngay: dt.date, ngay_sinh: dt.date | None = None) -> dict:
-    """Lá của ngày: băm ngày (chung mọi người) hoặc ngày + ngày sinh (riêng). Luôn xuôi (không doạ đầu ngày)."""
+def la_ngay(ngay: dt.date, ngay_sinh: dt.date | None = None, muoi: str | None = None) -> dict:
+    """Lá của ngày: băm ngày (chung mọi người) hoặc ngày + ngày sinh (riêng). Luôn xuôi (không doạ đầu ngày).
+    `muoi` (bí mật máy chủ, chỉ áp cho lá RIÊNG): làm khoá của phép băm để người ngoài không quét ngược được ngày sinh
+    từ lá + ngày xem; không có → băm trần như trước."""
     khoa = f"tarot|{ngay.isoformat()}" + (f"|{ngay_sinh.isoformat()}" if ngay_sinh else "")
-    h = hashlib.blake2b(khoa.encode("utf-8"), digest_size=8).digest()
+    kh = muoi.encode("utf-8")[:64] if (muoi and ngay_sinh) else b""
+    h = hashlib.blake2b(khoa.encode("utf-8"), digest_size=8, key=kh).digest()
     return {"id": BO_BAI[int.from_bytes(h, "big") % 78], "nguoc": False, "rieng": ngay_sinh is not None}
 
 

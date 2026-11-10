@@ -17,7 +17,7 @@ import { duongQr, maHoaQr, type MaQr } from "@/lib/qr";
 import { GOC_QR } from "@/lib/the-chia-se";
 
 export function ChiaSeTheHoSo({ hoSo, soDuongDoi }: { hoSo: HoSo; soDuongDoi?: number }) {
-  const [da, setDa] = useState<{ ma: string; link: string } | null>(null);
+  const [da, setDa] = useState<{ ma: string } | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
@@ -26,11 +26,18 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi }: { hoSo: HoSo; soDuongDoi?: n
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
   const loiNhan = `Con số đường đời của ${tenGoi(hoSo)}${soDuongDoi ? ` là ${soDuongDoi}` : ""}. Còn bạn?`;
 
+  // Link dựng lúc DÙNG (không nhớ sẵn): mã mời ?gt= về muộn sau lần bấm đầu vẫn được gắn — bạn tạo tài khoản → cả hai nhận Sao.
+  const linkThe = (ma: string) => {
+    const u = new URL(`/the/${ma}`, window.location.origin);
+    if (maCuaToi) u.searchParams.set("gt", maCuaToi);
+    return u.toString();
+  };
+  const link = da ? linkThe(da.ma) : null;
   // Link thẻ dài quá sức chứa QR (phiên bản 10) → QR về trang chủ; link gửi / chép vẫn là link thẻ.
   const qr = useMemo<MaQr | null>(() => {
-    if (!da) return null;
-    try { return maHoaQr(da.link); } catch { try { return maHoaQr(`${GOC_QR}/`); } catch { return null; } }
-  }, [da]);
+    if (!link) return null;
+    try { return maHoaQr(link); } catch { try { return maHoaQr(`${GOC_QR}/`); } catch { return null; } }
+  }, [link]);
 
   function baoChep(kq: string) {
     setChepTay(kq === "khong_duoc");
@@ -44,10 +51,8 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi }: { hoSo: HoSo; soDuongDoi?: n
         ten_hien_thi: tenGoi(hoSo), ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam,
         quy_uoc_duong_doi: docQuyUocDD(),
       });
-      const u = new URL(`/the/${ma}`, window.location.origin);
-      if (maCuaToi) u.searchParams.set("gt", maCuaToi);   // bạn tạo tài khoản → cả hai nhận Sao (như /chia-se)
-      const link = u.toString();
-      setDa({ ma, link });
+      setDa({ ma });
+      const link = linkThe(ma);
       ghi("share_created", { kind: "card", ma_moi: maMoiTuToken(ma), co_ma: Boolean(maCuaToi), nguon: "ban_than" });
       // Điện thoại: mở luôn hộp chia sẻ của máy; máy tính: khung QR + nút hiện ra là đủ (không tự chép).
       if (typeof navigator.share === "function") {
@@ -60,7 +65,7 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi }: { hoSo: HoSo; soDuongDoi?: n
     }
   }
 
-  if (!da) {
+  if (!da || !link) {
     return (
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2" data-testid="chia-se-the-ho-so">
         <p className="min-w-0 flex-1 text-xs text-fg-faint">Thẻ chỉ có tên và bốn con số — không có ngày sinh.</p>
@@ -87,10 +92,10 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi }: { hoSo: HoSo; soDuongDoi?: n
           <p className="flex items-center gap-1.5 text-sm text-fg"><QrCode className="size-4 shrink-0 text-gold" aria-hidden /> Đưa bạn bè quét để xem thẻ</p>
           <p className="text-xs text-fg-muted">Bạn ấy thấy bốn con số của bạn và tự xem số của mình. Link hết hạn sau 90 ngày.</p>
           <div className="flex flex-wrap gap-2">
-            <Button size="sm" onClick={() => void guiHoacChep({ title: "Hiểu Bản Thân", text: loiNhan, url: da.link }).then(baoChep)} data-testid="gui-the-ho-so">
+            <Button size="sm" onClick={() => void guiHoacChep({ title: "Hiểu Bản Thân", text: loiNhan, url: link }).then(baoChep)} data-testid="gui-the-ho-so">
               <Send aria-hidden /> Gửi link
             </Button>
-            <Button size="sm" variant="secondary" onClick={() => void chepLink(da.link).then(baoChep)} data-testid="chep-the-ho-so">
+            <Button size="sm" variant="secondary" onClick={() => void chepLink(link).then(baoChep)} data-testid="chep-the-ho-so">
               {daChep ? <Check aria-hidden /> : <Copy aria-hidden />}{daChep ? "Đã chép" : "Chép link"}
             </Button>
             <Button size="sm" variant="secondary" asChild>
@@ -102,7 +107,7 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi }: { hoSo: HoSo; soDuongDoi?: n
           </div>
         </div>
       </div>
-      {chepTay && <ChepTay url={da.link} />}
+      {chepTay && <ChepTay url={link} />}
       <p className="text-xs text-fg-faint">
         Ảnh tải về có sẵn mã QR, hợp đăng story. <Link href="/chia-se" className="text-gold hover:underline">Đổi tên hiển thị trên thẻ</Link>
       </p>

@@ -13,6 +13,9 @@ Ngày 10/11/2026. Trạng thái: **mục 1, 2, 3, 4 đã làm** (chủ dự án 
   Khối "Nhịp hiện tại" giữ nguyên (đã gọn từ QH-BT). Ba ô lối tắt cuối trang thành một hàng link.
 - **Buổi tối**: "Hôm nay thế nào?" chỉ hỏi khi ý định được chọn trước 16 giờ và đồng hồ máy đã qua 18 giờ.
 - Engine cũ chưa trả `ba_la` (deploy lệch) → web tự giữ Lá bài đầu ngày một lá như trước.
+- **Riêng tư (rà soát độc lập trước khi merge)**: lá Tarot riêng được chọn bằng phép băm công khai từ ngày xem + ngày sinh, nên
+  đưa lá lên thẻ thì hai, ba thẻ là đủ dò ra ngày sinh. Đã sửa: lá riêng chỉ lên thẻ và lời nhắn soạn sẵn khi máy chủ engine
+  có khoá bí mật `LA_NGAY_MUOI`; chưa đặt thì thẻ vẽ lá Tarot úp (con số và quẻ vẫn hiện).
 
 ## 1. Đã làm trong đợt này (không cần duyệt thêm)
 

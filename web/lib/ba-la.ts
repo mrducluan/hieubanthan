@@ -13,6 +13,8 @@ export interface BaLa {
   tarot: LaGon & { tu_khoa: string[]; y: string; viec: string; cau_tu_soi: string; duong: string | null };
   so: { so: number; nghia: string; viec: { ma: string; ten: string; nhan: string | null; cach_lam: string; tu_soi: string | null } | null; cau_hoi: string | null };
   thoi_khac: { gio: GioTot[]; hoang_dao: boolean; nen: string[]; kieng: string[]; que: { so: number; ten: string; y: string | null; duong: string | null } | null };
+  /** Lá Tarot riêng có được lên thẻ chia sẻ / lời nhắn soạn sẵn không (engine: phép băm có muối bí mật). Thiếu = không. */
+  chia_se_tarot?: boolean;
   cau_cua_ngay: string;
   cach_chon: string;
 }
@@ -30,6 +32,18 @@ export function gioSapToi(gio: GioTot[], phut: number): { gio: GioTot; dang: boo
 export function chuConPhut(p: number): string {
   const h = Math.floor(p / 60), m = p % 60;
   return h > 0 ? `${h} giờ${m ? ` ${m} phút` : ""}` : `${m} phút`;
+}
+
+/** Ngày hôm nay theo đồng hồ máy (yyyy-mm-dd) — cùng cách trang Hôm nay xin thẻ. */
+export function ngayMayIso(): string {
+  try { return new Intl.DateTimeFormat("en-CA", { year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date()); }
+  catch { return new Date().toISOString().slice(0, 10); }
+}
+/** Phút trong ngày theo đồng hồ máy; trang mở qua nửa đêm (ngày máy ≠ ngày của thẻ) → null: không gán giờ tốt hôm qua cho hôm nay. */
+export function phutCuaNgay(ngayThe: string): number | null {
+  if (ngayMayIso() !== ngayThe) return null;
+  const d = new Date();
+  return d.getHours() * 60 + d.getMinutes();
 }
 
 export const KHOA_BA_LA = "hbt.ba_la.v1";

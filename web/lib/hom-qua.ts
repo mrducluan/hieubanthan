@@ -39,7 +39,13 @@ export const ghiYDinh = (v: YDinhNgay) => lam("readwrite", (s) => s.put(v, KHOA)
 export function nhoYDinhHomNay(ngay: string, soNgay: number, ds: { ma: string; ten: string; nhip: string }[]) {
   const sach = ds.filter((x) => MA.test(x.ma) && NHIP.test(x.nhip)).slice(0, 3).map((x) => ({ ma: x.ma, ten: x.ten.slice(0, 40), nhip: x.nhip }));
   if (!sach.length) return Promise.resolve(undefined);
-  return ghiYDinh({ ngay, so_ngay: soNgay, ds: sach, da_hoi: false, da_tra_loi: null, gio: new Date().getHours() });
+  // Xem lại cùng các ý định trong ngày (vd sau khi đã trả lời "Hôm nay thế nào?") → giữ câu trả lời + giờ chọn ban đầu,
+  // để sáng mai không hỏi lại và không đếm đôi.
+  return docYDinh().then((cu) => {
+    const giong = cu && cu.ngay === ngay && cu.ds.map((x) => x.ma).join(",") === sach.map((x) => x.ma).join(",");
+    return ghiYDinh(giong ? { ...cu, so_ngay: soNgay, ds: sach }
+      : { ngay, so_ngay: soNgay, ds: sach, da_hoi: false, da_tra_loi: null, gio: new Date().getHours() });
+  });
 }
 
 /** Ngày hôm qua theo giờ VN (yyyy-mm-dd), từ ngày hôm nay yyyy-mm-dd. */

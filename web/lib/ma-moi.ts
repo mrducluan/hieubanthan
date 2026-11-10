@@ -459,12 +459,14 @@ export function docMaTarot(ma: string, homNay = new Date()): NoiDungMaTarot | nu
 }
 
 // ---------------------------------------------------------------- BT-UI: thẻ "Ba lá của tôi hôm nay"
-// Mã riêng miền "bala|". Chỉ mang: tên hiển thị, lá Tarot của ngày (mã + tên — engine chọn, máy chủ ký), số ngày cá nhân,
-// tên quẻ đầu ngày (chung mọi người) và ngày xem. KHÔNG ngày sinh, không họ tên, không lời đọc.
+// Mã riêng miền "bala|". Chỉ mang: tên hiển thị, số ngày cá nhân, tên quẻ đầu ngày (chung mọi người), ngày xem và — CHỈ khi
+// engine báo `chia_se_tarot` (phép băm lá riêng có muối bí mật, config.LA_NGAY_MUOI) — lá Tarot của ngày (mã + tên). Không
+// muối thì lá + ngày xem đủ để quét ngược ngày sinh (công thức băm công khai) → `l` = null, thẻ vẽ lá Tarot úp.
+// KHÔNG ngày sinh, không họ tên, không lời đọc.
 export const NoiDungMaBaLa = z.object({
   v: z.literal(1),
   t: z.string().trim().min(1).max(40),
-  l: z.tuple([z.string().regex(/^[a-z]{3,4}_[a-z0-9_]{1,12}$/), z.string().trim().min(1).max(24)]),
+  l: z.tuple([z.string().regex(/^[a-z]{3,4}_[a-z0-9_]{1,12}$/), z.string().trim().min(1).max(24)]).nullable(),
   n: z.number().int().min(1).max(9),
   q: z.string().trim().max(40).nullable(),
   d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -473,10 +475,10 @@ export type NoiDungMaBaLa = z.infer<typeof NoiDungMaBaLa>;
 
 const kyBaLa = (than: string) => b64u(createHmac("sha256", khoa()).update(`bala|${than}`).digest()).slice(0, 16);
 
-/** Gói: [1, t, mã lá, tên lá, n, q|"", số ngày (ngày xem) từ 1/1/2026]. */
+/** Gói: [1, t, mã lá|"", tên lá|"", n, q|"", số ngày (ngày xem) từ 1/1/2026]. */
 export function kyMaBaLa(nd: Omit<NoiDungMaBaLa, "v">): string {
   const x = NoiDungMaBaLa.parse({ ...nd, v: 1 });
-  const goi = [1, x.t, x.l[0], x.l[1], x.n, x.q ?? "", Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  const goi = [1, x.t, x.l?.[0] ?? "", x.l?.[1] ?? "", x.n, x.q ?? "", Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
   const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
   return `${than}.${kyBaLa(than)}`;
 }
@@ -489,7 +491,7 @@ export function docMaBaLa(ma: string, homNay = new Date()): NoiDungMaBaLa | null
   try {
     const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown[];
     if (!Array.isArray(g) || g.length !== 7) return null;
-    const nd = NoiDungMaBaLa.parse({ v: g[0], t: g[1], l: [g[2], g[3]], n: g[4], q: g[5] || null,
+    const nd = NoiDungMaBaLa.parse({ v: g[0], t: g[1], l: g[2] ? [g[2], g[3]] : null, n: g[4], q: g[5] || null,
       d: new Date(NGAY_GOC + Number(g[6]) * 86_400_000).toISOString().slice(0, 10) });
     return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
   } catch {

@@ -1,6 +1,6 @@
 // GET /og/ba-la?ma=…[&khung=doc] — BT-UI: ảnh thẻ "Ba lá của {tên} hôm nay". Concept: ba lá bài giấy ngà xoè nhẹ trên trời
 // đêm — lá Tarot (tên lá), lá Con số (số ngày cá nhân lớn), lá Thời khắc (đồng hồ + tên quẻ đầu ngày); QR + hieuban.com. 1200×630 · 1080×1350.
-// Dữ liệu CHỈ từ mã đã ký (docMaBaLa): tên hiển thị, lá Tarot, số ngày, tên quẻ, ngày xem — không có ngày sinh.
+// Dữ liệu CHỈ từ mã đã ký (docMaBaLa): tên hiển thị, số ngày, tên quẻ, ngày xem, lá Tarot khi mã có mang — không có ngày sinh.
 import { ImageResponse } from "next/og";
 import { docMaBaLa, tuTuMa } from "@/lib/ma-moi";
 import { bam, ChanQr, CO_ANH, khungTuThamSo, MAU, napPhong, saoRai } from "@/lib/og-chung";
@@ -25,7 +25,7 @@ export async function GET(req: Request) {
   const cao = Math.round(rong * (200 / 120));
   const abs = (top: number, left: number, width: number) => ({ display: "flex", position: "absolute" as const, top, left, width });
   const la = [
-    { nhan: "Lá Tarot", lon: null as string | null, ten: nd?.l[1] ?? "Lá của bạn", xoay: -6, y: 18 },
+    { nhan: "Lá Tarot", lon: null as string | null, ten: nd?.l?.[1] ?? "Lật mới thấy", xoay: -6, y: 18 },
     { nhan: "Lá Con số", lon: nd ? String(nd.n) : "?", ten: "Ngày cá nhân", xoay: 0, y: 0 },
     { nhan: "Lá Thời khắc", lon: null, ten: nd?.q ? `Quẻ ${nd.q}` : "Giờ tốt · quẻ ngày", xoay: 6, y: 18 },
   ];
@@ -63,8 +63,8 @@ export async function GET(req: Request) {
           {sao.map(([x, y, r, o], i) => <circle key={i} cx={x} cy={y} r={r} fill={MAU.chu} fillOpacity={o} />)}
         </svg>
         <div style={{ ...abs(doc ? 90 : 40, 0, W), flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-          <div style={{ display: "flex", fontSize: doc ? 26 : 17, letterSpacing: 6, color: MAU.mo, textTransform: "uppercase" }}>Ba lá của ngày{ngay ? ` · ${ngay}` : ""}</div>
-          <div style={{ display: "flex", fontFamily: "Serif", fontSize: doc ? 64 : 44, marginTop: 8 }}>{nd ? `Ba lá của ${nd.t} hôm nay` : "Ba lá của bạn hôm nay"}</div>
+          <div style={{ display: "flex", fontSize: doc ? 26 : 17, letterSpacing: 6, color: MAU.mo, textTransform: "uppercase" }}>Ba lá của ngày</div>
+          <div style={{ display: "flex", fontFamily: "Serif", fontSize: doc ? 64 : 44, marginTop: 8 }}>{nd ? `Ba lá của ${nd.t} ngày ${ngay}` : "Ba lá của bạn hôm nay"}</div>
           <div style={{ display: "flex", fontSize: doc ? 30 : 22, marginTop: 8, color: MAU.vang }}>Còn ba lá của bạn là gì?</div>
         </div>
         <div style={{ ...abs(doc ? 380 : 200, 0, W), justifyContent: "center" }}>{hangLa}</div>

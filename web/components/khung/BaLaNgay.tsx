@@ -20,10 +20,9 @@ import { useMaCuaToi } from "@/lib/sao";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 import { docNhatKy, ghiLa, thongKeThang } from "@/lib/nhat-ky-ngay";
 import { duongMoi } from "@/lib/duong-silo";
-import { baLaDaLat, chuConPhut, gioSapToi, MA_NHAT_KY, nhoBaLa, TEN_BA_LA, THU_TU_BA_LA, type BaLa, type MaBaLa } from "@/lib/ba-la";
+import { baLaDaLat, chuConPhut, gioSapToi, MA_NHAT_KY, nhoBaLa, phutCuaNgay, TEN_BA_LA, THU_TU_BA_LA, type BaLa, type MaBaLa } from "@/lib/ba-la";
 
 const thangCua = (iso: string): [number, number] => [Number(iso.slice(0, 4)), Number(iso.slice(5, 7))];
-const phutBayGio = () => { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); };
 const GIAY = "bg-[#f3ead6] text-[#2a2140]";
 
 /** Mặt ngửa của hai lá không phải Tarot — cùng khổ, cùng nền giấy ngà với lá Tarot. */
@@ -43,7 +42,7 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
   const [xem, setXem] = useState<MaBaLa | null>(null);      // lá đang đọc
   const [phut, setPhut] = useState<number | null>(null);    // đồng hồ máy (chỉ đọc ở trình duyệt)
   const [soNgayLat, setSoNgayLat] = useState(0);
-  const [the, setThe] = useState<{ ma: string; tu: string; link: string } | null>(null);
+  const [the, setThe] = useState<{ ma: string; tu: string } | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [daChep, setDaChep] = useState(false);
@@ -56,9 +55,9 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
     const d = baLaDaLat(ngay);
     setLat(d);
     setXem(d[d.length - 1] ?? null);
-    setPhut(phutBayGio());
+    setPhut(phutCuaNgay(ngay));
     setSoNgayLat(thongKeThang(docNhatKy(hoSo), ...thangCua(ngay)).so_la);
-    const h = window.setInterval(() => setPhut(phutBayGio()), 60_000);
+    const h = window.setInterval(() => setPhut(phutCuaNgay(ngay)), 60_000);
     return () => window.clearInterval(h);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- hoSo đổi thì trang dựng lại
   }, [ngay]);
@@ -92,7 +91,15 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
     setChepTay(kq === "khong_duoc");
     if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2500); }
   };
-  const loiNhan = `Ba lá của mình hôm nay: ${tarot.ten} · ngày ${so.so}${tk.que ? ` · quẻ ${tk.que.ten}` : ""}. Còn ba lá của bạn?`;
+  // Riêng tư: tên lá Tarot riêng chỉ vào lời nhắn soạn sẵn khi engine cho phép (lá băm có muối) — như trên thẻ.
+  const loiNhan = `Ba lá của mình hôm nay: ${baLa.chia_se_tarot ? `${tarot.ten} · ` : ""}ngày ${so.so}${tk.que ? ` · quẻ ${tk.que.ten}` : ""}. Còn ba lá của bạn?`;
+  // Link dựng lúc GỬI (không nhớ sẵn): mã mời ?gt= về muộn sau lần bấm đầu vẫn được gắn.
+  const linkThe = (t: { ma: string; tu: string }) => {
+    const u = new URL(`/the/ba-la/${t.ma}`, window.location.origin);
+    u.searchParams.set("tu", t.tu);
+    if (maCuaToi) u.searchParams.set("gt", maCuaToi);
+    return u.toString();
+  };
   async function chiaSe() {
     setDang(true); setLoi(null);
     try {
@@ -100,14 +107,12 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
       if (!t) {
         const { ma, tu } = await postJson<{ ma: string; tu: string }>("/api/chia-se/ba-la",
           { ten_hien_thi: tenGoi(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam, ngay_xem: ngay });
-        const u = new URL(`/the/ba-la/${ma}`, window.location.origin);
-        u.searchParams.set("tu", tu);
-        if (maCuaToi) u.searchParams.set("gt", maCuaToi);
-        t = { ma, tu, link: u.toString() };
+        t = { ma, tu };
         setThe(t);
         ghi("share_created", { kind: "ba_la", ma_moi: tu, co_ma: Boolean(maCuaToi) });
       }
-      baoChep(await guiHoacChep({ title: "Ba lá của ngày", text: loiNhan, url: t.link }, `${loiNhan} ${t.link}`));
+      const link = linkThe(t);
+      baoChep(await guiHoacChep({ title: "Ba lá của ngày", text: loiNhan, url: link }, `${loiNhan} ${link}`));
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Chưa tạo được thẻ.");
     } finally {
@@ -220,7 +225,7 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
             </Button>
             {the && (
               <>
-                <Button size="sm" variant="secondary" onClick={() => void chepLink(the.link).then(baoChep)}><Copy aria-hidden /> Chép link</Button>
+                <Button size="sm" variant="secondary" onClick={() => void chepLink(linkThe(the)).then(baoChep)}><Copy aria-hidden /> Chép link</Button>
                 <Button size="sm" variant="secondary" asChild>
                   <a href={`/og/ba-la?ma=${encodeURIComponent(the.ma)}&khung=doc`} download="ba-la-hom-nay.png" data-testid="ba-la-tai-anh"
                     onClick={() => ghi("share_created", { kind: "ba_la_anh", ma_moi: the.tu })}><Download aria-hidden /> Tải ảnh</a>
@@ -229,8 +234,10 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
             )}
           </div>
           {loi && <p role="alert" className="mt-2 text-sm text-cinnabar">{loi}</p>}
-          {chepTay && the && <ChepTay url={the.link} className="mt-2" />}
-          <p className="mt-2 text-xs text-fg-faint">Thẻ chia sẻ chỉ có tên hiển thị, ba lá và ngày xem — không có ngày sinh.</p>
+          {chepTay && the && <ChepTay url={linkThe(the)} className="mt-2" />}
+          <p className="mt-2 text-xs text-fg-faint">{baLa.chia_se_tarot
+            ? "Thẻ chia sẻ chỉ có tên hiển thị, ba lá và ngày xem — không có ngày sinh."
+            : "Thẻ chia sẻ có tên hiển thị, con số và quẻ của ngày; lá Tarot riêng của bạn nằm úp trên thẻ. Không có ngày sinh."}</p>
         </div>
       )}
       <p className="mt-3 text-xs text-fg-faint">

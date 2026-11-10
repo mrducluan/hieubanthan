@@ -1,5 +1,6 @@
 // POST /api/chia-se/ba-la — BT-UI: mã có KÝ cho thẻ "Ba lá của {tên} hôm nay". Máy chủ tự gọi engine lấy ba lá của đúng
-// ngày xem (client không tự khai lá / số được); mã chỉ mang tên hiển thị + lá Tarot + số ngày + tên quẻ + ngày xem.
+// ngày xem (client không tự khai lá / số được); mã chỉ mang tên hiển thị + số ngày + tên quẻ + ngày xem, và lá Tarot CHỈ khi
+// engine báo `chia_se_tarot` (lá riêng băm có muối bí mật — không muối thì lá + ngày xem quét ngược được ngày sinh).
 // Không mang họ tên, ngày sinh.
 import { NextResponse } from "next/server";
 import { z } from "zod";
@@ -18,7 +19,7 @@ const Input = z.object({
 
 interface HomNayEngine {
   ngay_xem: string;
-  ba_la?: { tarot: { id: string; ten: string }; so: { so: number }; thoi_khac: { que: { ten: string } | null } };
+  ba_la?: { chia_se_tarot?: boolean; tarot: { id: string; ten: string }; so: { so: number }; thoi_khac: { que: { ten: string } | null } };
 }
 
 export async function POST(req: Request): Promise<NextResponse> {
@@ -34,7 +35,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   const d = r.body as HomNayEngine;
   if (!d.ba_la) return NextResponse.json({ error: "Chưa tạo được thẻ lúc này. Bạn thử lại sau ít phút nhé." }, { status: 503 });
   try {
-    const ma = kyMaBaLa({ t: ten_hien_thi, l: [d.ba_la.tarot.id, d.ba_la.tarot.ten.slice(0, 24)], n: d.ba_la.so.so,
+    const ma = kyMaBaLa({ t: ten_hien_thi, l: d.ba_la.chia_se_tarot === true ? [d.ba_la.tarot.id, d.ba_la.tarot.ten.slice(0, 24)] : null, n: d.ba_la.so.so,
       q: d.ba_la.thoi_khac.que?.ten.slice(0, 40) ?? null, d: d.ngay_xem });
     return NextResponse.json({ ma, tu: tuTuMa("bl", ma), ngay: d.ngay_xem });
   } catch (e) {

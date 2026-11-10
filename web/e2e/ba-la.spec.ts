@@ -31,6 +31,10 @@ test("mã thẻ Ba lá: ký / đọc lại, sửa một ký tự bị chặn, h�
   expect(docMaBaLa(ma, new Date("2027-03-01T00:00:00Z"))).toBeNull();
   expect(Buffer.from(ma.split(".")[0]!, "base64url").toString("utf8")).not.toMatch(/1990|17\/5|"17"/);
   expect(() => kyMaBaLa({ ...nd, n: 10 })).toThrow();
+  // Lá Tarot riêng chưa được phép lên thẻ (engine chưa có muối) → mã không mang lá, đọc lại ra l = null.
+  const kin = kyMaBaLa({ ...nd, l: null });
+  expect(docMaBaLa(kin, new Date("2026-11-11T00:00:00Z"))).toEqual({ v: 1, ...nd, l: null });
+  expect(Buffer.from(kin.split(".")[0]!, "base64url").toString("utf8")).not.toMatch(/gay_1|Át Gậy/);
 });
 
 test("Ba lá của ngày: lật từng lá → lời engine, đủ ba hiện 'Ba lá ghép lại'; máy nhớ; đo daily_card_flipped", async ({ page, request }) => {
@@ -102,6 +106,13 @@ test("Chia sẻ ba lá → mã ký không ngày sinh → trang nhận + ảnh PN
   const goi = Buffer.from(ma.split(".")[0]!, "base64url").toString("utf8");
   expect(goi).toContain("Luân");
   expect(goi).not.toMatch(/1990|Nguyễn/);
+  // Riêng tư: engine e2e không có muối bí mật (LA_NGAY_MUOI) → lá Tarot riêng KHÔNG được vào mã (lá + ngày xem quét ngược
+  // được ngày sinh vì công thức băm công khai); thẻ vẽ lá úp, lời nhắn soạn sẵn không nêu tên lá.
+  const hn = (await (await request.post("/api/thanso/hom-nay", { data: { ngay: 17, thang: 5, nam: 1990, ngay_xem: await ngayMay(page) } })).json()) as { ba_la: BaLa };
+  expect(hn.ba_la.chia_se_tarot).toBe(false);
+  expect(goi).not.toContain(hn.ba_la.tarot.id);
+  expect(goi).not.toContain(hn.ba_la.tarot.ten);
+  expect(await page.evaluate(() => navigator.clipboard.readText())).not.toContain(hn.ba_la.tarot.ten);
   const tao = (await suKien(page)).find((e) => e.su_kien === "share_created" && e.kind === "ba_la");
   expect(String(tao?.ma_moi)).toMatch(/^bl\.[a-f0-9]{10}$/);
   for (const k of ["", "&khung=doc"]) {
@@ -114,7 +125,9 @@ test("Chia sẻ ba lá → mã ký không ngày sinh → trang nhận + ảnh PN
   const khach = await (await browser.newContext()).newPage();
   await khach.goto(`/the/ba-la/${ma}?tu=${tao!.ma_moi}`);
   const the = khach.getByTestId("the-ba-la");
-  await expect(the).toContainText("Ba lá của Luân hôm nay");
+  await expect(the).toContainText("Ba lá của Luân ngày");
+  await expect(khach.getByTestId("the-ba-la-tarot")).toHaveAttribute("data-up", "1");
+  await expect(the).not.toContainText(hn.ba_la.tarot.ten);
   await expect(khach.getByTestId("the-ba-la-moi")).toHaveAttribute("href", `/hom-nay?tu=${tao!.ma_moi}#ba-la`);
   expect(await khach.locator('meta[name="robots"]').getAttribute("content")).toContain("noindex");
   expect(await khach.content()).toContain(`/og/ba-la?ma=${ma}`);
@@ -183,4 +196,34 @@ test("Buổi tối: ý định chọn từ sớm của hôm nay được hỏi '
   expect(nenHoi({ ...y, da_tra_loi: "dung" as const }, "2026-11-11", 8)).toBeNull();
   expect(nenHoi(y, "2026-11-12", 8)).toBeNull();
   expect(nenHoi(null, "2026-11-10", 20)).toBeNull();
+});
+
+test("phutCuaNgay: trang mở qua nửa đêm (ngày máy khác ngày của thẻ) → không gán giờ tốt", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/hom-nay");
+  await expect(page.getByTestId("chip-gio")).toBeVisible();
+  const { phutCuaNgay, ngayMayIso } = await import("../lib/ba-la");
+  expect(phutCuaNgay("2000-01-01")).toBeNull();
+  expect(phutCuaNgay(ngayMayIso())).not.toBeNull();
+});
+
+test("mục gập có tiêu đề h3; bấm lại chip 'Quẻ ngày' sau khi gập vẫn mở lại; vào bằng #que-ngay cuộn tới đúng mục quẻ", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await napHoSo(page);
+  await page.goto("/hom-nay");
+  const que = page.getByTestId("que-ngay");
+  await expect(que.locator("summary h3")).toContainText("Quẻ đầu ngày");
+  const chip = page.getByTestId("chip-hom-nay").getByRole("link", { name: /Quẻ ngày/ });
+  await chip.click();
+  await expect(que).toHaveAttribute("open", "");
+  await que.locator("summary").click();
+  await expect(que).not.toHaveAttribute("open", "");
+  await chip.click();                                   // hash không đổi → không có hashchange, vẫn phải mở
+  await expect(que).toHaveAttribute("open", "");
+  await page.goto("/hom-nay#que-ngay");
+  await expect(que).toHaveAttribute("open", "");
+  await page.waitForTimeout(900);
+  const top = await que.evaluate((e) => e.getBoundingClientRect().top);
+  expect(top).toBeGreaterThanOrEqual(0);
+  expect(top).toBeLessThan(260);                         // dừng ở mục quẻ, không phải ở tiêu đề "Đọc thêm" phía trên
 });
