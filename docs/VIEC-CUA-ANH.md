@@ -5,14 +5,16 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-11-10 (BT-UI, mục 4ak).
 
-### 4ak. BT-UI — Bản thân, Hôm nay, Lá bài đầu ngày (2026-11-10, `docs/DE-XUAT-BAN-THAN-HOM-NAY.md`)
+### 4ak. BT-UI — Bản thân, Hôm nay, Ba lá của ngày (2026-11-10, `docs/DE-XUAT-BAN-THAN-HOM-NAY.md`) — deploy ENGINE trước web
 
-- [ ] (2 phút, sau deploy) Mở `/ban-than`: hai cột đầu trang cao bằng nhau; bấm "Chia sẻ thẻ" trên thẻ → thấy mã QR, thử quét
-  bằng điện thoại khác và bấm "Tải ảnh".
-- [ ] **Duyệt** mục 3 "Ba lá của ngày" (Tarot riêng · Con số · Thời khắc + thẻ chia sẻ ba lá) thay Lá bài đầu ngày.
-- [ ] **Duyệt** mục 4 trang Hôm nay ba tầng (10 giây · việc của tôi · đọc thêm gập).
-- [ ] **Duyệt** mục 2 trang Bản thân "Bảy cách nhìn về bạn" + "Đang dang dở".
-- [ ] (Tuỳ chọn) Chọn ý tưởng thêm ở mục 5: Hôm nay của hai người · thẻ hồ sơ hai mặt · lối tắt app · Tuần của tôi.
+- [ ] **Deploy engine trước web** (trường mới `ba_la` ở `/v1/thanso/hom-nay`, trang `ban_than` ở `/v1/goi-y-cheo`). Web lên trước thì
+  Hôm nay vẫn hiện Lá bài đầu ngày cũ và khối "Bảy cách nhìn" tự ẩn — không vỡ trang, tự đúng khi engine xong.
+- [ ] (3 phút) `/hom-nay`: lật đủ ba lá → "Ba lá ghép lại" → "Chia sẻ ba lá" → mở link thẻ trên máy khác, "Tải ảnh" có QR.
+  Xem chip "Giờ tốt sắp tới" có đúng với giờ hiện tại không; mở thử một mục "Đọc thêm".
+- [ ] (2 phút) `/ban-than`: hai cột đầu trang cao bằng nhau; "Chia sẻ thẻ" trên thẻ hồ sơ hiện QR; khối "Bảy cách nhìn về bạn"
+  có đủ tám ô, ô thiếu dữ liệu bấm ra bảng Sửa hồ sơ.
+- [ ] (Tuỳ chọn) CMS → Trang website `/hom-nay` → "Chữ trên trang": tiêu đề khối mới "Ba lá của ngày" sửa được ở đó.
+- [ ] (Tuỳ chọn) Chọn ý tưởng thêm ở mục 5 của file đề xuất: Hôm nay của hai người · thẻ hồ sơ hai mặt · lối tắt app · Tuần của tôi.
 
 ### 4aj. HTT-3 — Ý1–Ý7 + QC `/en` (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9) — deploy ENGINE trước web
 

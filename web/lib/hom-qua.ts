@@ -6,7 +6,9 @@
 // Kho IndexedDB "hbt" / bảng "kv" / khoá "y_dinh" — sw.js dùng ĐÚNG tên này.
 
 export interface YDinhNgay { ngay: string; so_ngay: number; ds: { ma: string; ten: string; nhip: string }[];
-  da_hoi?: boolean; da_tra_loi?: "dung" | "chua_dung" | null }
+  da_hoi?: boolean; da_tra_loi?: "dung" | "chua_dung" | null;
+  /** BT-UI: giờ (0–23, đồng hồ máy) lúc chọn ý định — để buổi tối cùng ngày hỏi "Hôm nay thế nào?" chỉ khi đã chọn từ sớm. */
+  gio?: number }
 
 const DB = "hbt", BANG = "kv", KHOA = "y_dinh";
 const MA = /^[a-z_]{2,30}$/, NHIP = /^(thuan|trung_tinh|can_nhac)$/;
@@ -37,7 +39,7 @@ export const ghiYDinh = (v: YDinhNgay) => lam("readwrite", (s) => s.put(v, KHOA)
 export function nhoYDinhHomNay(ngay: string, soNgay: number, ds: { ma: string; ten: string; nhip: string }[]) {
   const sach = ds.filter((x) => MA.test(x.ma) && NHIP.test(x.nhip)).slice(0, 3).map((x) => ({ ma: x.ma, ten: x.ten.slice(0, 40), nhip: x.nhip }));
   if (!sach.length) return Promise.resolve(undefined);
-  return ghiYDinh({ ngay, so_ngay: soNgay, ds: sach, da_hoi: false, da_tra_loi: null });
+  return ghiYDinh({ ngay, so_ngay: soNgay, ds: sach, da_hoi: false, da_tra_loi: null, gio: new Date().getHours() });
 }
 
 /** Ngày hôm qua theo giờ VN (yyyy-mm-dd), từ ngày hôm nay yyyy-mm-dd. */
@@ -54,4 +56,14 @@ export async function traLoiHomQua(y: YDinhNgay, kq: "dung" | "chua_dung"): Prom
     method: "POST", headers: { "content-type": "application/json" },
     body: JSON.stringify({ loai: "doi_song", mau: maHomQua(y), phai: "pitago", ket_qua: kq }),
   }).catch(() => null);
+}
+
+/** BT-UI: giờ bắt đầu hỏi "Hôm nay thế nào?" ngay trong ngày, và ý định phải được chọn trước giờ này ít nhất 2 tiếng. */
+export const GIO_HOI_TOI = 18;
+/** Ý định đã nhớ có nên hỏi lúc này không: của hôm qua (sáng hôm sau), hoặc của chính hôm nay khi đã tối. */
+export function nenHoi(v: YDinhNgay | null, homNay: string, gioMay: number): "hom_qua" | "toi_nay" | null {
+  if (!v || v.da_tra_loi || !v.ds.length) return null;
+  if (v.ngay === homQuaCua(homNay)) return "hom_qua";
+  if (v.ngay === homNay && gioMay >= GIO_HOI_TOI && typeof v.gio === "number" && v.gio <= GIO_HOI_TOI - 2) return "toi_nay";
+  return null;
 }

@@ -1,11 +1,12 @@
 "use client";
+// BT-UI (2026-11-10): thêm "Bảy cách nhìn về bạn" (mỗi môn một câu riêng + còn thiếu gì), "Đang dang dở", "Điều bạn đã xác nhận".
 // QH-BT — /ban-than là TRANG CỦA TÔI để quay lại mỗi ngày (khâu QUAY LẠI + MỜI): danh tính gọn, nhịp hôm nay → năm,
 // tóm tắt Bản đồ con số (chương nào còn khoá), ký ức, nhiệm vụ Sao, lối tắt. KHÔNG lặp bài đọc — bốn thẻ số, chân dung,
 // chiều sâu, hỏi đáp nằm ở /than-so (cửa vào + bài đọc). Người chưa có hồ sơ nhập ở đây rồi sang /than-so xem hé lộ.
 import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { useRouter } from "next/navigation";
-import { ArrowRight, BookOpen, CalendarCheck, CalendarRange, Compass, HeartHandshake, History, Layers, MessageCircle, Pencil } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarCheck, CalendarRange, Compass, HeartHandshake, History, MessageCircle, Pencil, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { Card } from "@/components/ui/card";
@@ -13,6 +14,9 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { ChiaSeTheHoSo } from "@/components/chia-se/ChiaSeTheHoSo";
+import { BayCachNhin } from "@/components/ban-than/BayCachNhin";
+import { DangDangDo } from "@/components/ban-than/DangDangDo";
+import { DieuDaXacNhan } from "@/components/ban-than/DieuDaXacNhan";
 import { TheDanhTinh } from "@/components/than-so/TheDanhTinh";
 import { NhipHienTai } from "@/components/than-so/NhipHienTai";
 import { NhipCaNhan } from "@/components/than-so/NhipCaNhan";
@@ -96,7 +100,7 @@ export function BanThan() {
             <div className="grid flex-1 grid-cols-2 gap-3 [grid-auto-rows:1fr]">
               {[
                 { href: "/hop-doi", Icon: HeartHandshake, ten: "Xem hợp đôi", mo: "Bạn và người ấy hợp nhau ở đâu", noi: true },
-                { href: "/chan-dung", Icon: Layers, ten: "Chân dung tổng hợp", mo: "Tử vi, Bát tự, Nhân tướng cùng nhìn bạn" },
+                { href: "/hom-nay", Icon: Sun, ten: "Hôm nay của bạn", mo: "Thẻ ngày và ba lá của riêng bạn" },
                 { href: "/thoi-gian-toi", Icon: CalendarRange, ten: "Thời gian tới", mo: "Ba tháng tới và cả năm của riêng bạn" },
               ].map(({ href, Icon, ten, mo, noi }) => (
                 <Link key={href} href={href}
@@ -120,6 +124,10 @@ export function BanThan() {
         </div>
       </section>
 
+      {/* BT-UI: bảy môn, mỗi môn một câu riêng + còn thiếu gì; rồi việc đang dang dở trên máy này. */}
+      <BayCachNhin hoSo={hoSo} quyUoc={quyUoc} onSua={() => setSuaMo(true)} />
+      <DangDangDo />
+
       <section aria-labelledby="muc-nhip">
         <TieuDeMuc id="muc-nhip" nho="Nhịp hiện tại" lon="Giai đoạn này của bạn"
           mo_ta="Chủ đề của ngày, tháng và năm cá nhân — không phải dự báo sự kiện, mà là gợi ý để bạn đặt trọng tâm." />
@@ -140,6 +148,8 @@ export function BanThan() {
 
       <BanDoTomTat hoSo={hoSo} quyUoc={quyUoc} />
 
+      <DieuDaXacNhan />
+
       {kyUc.dangNhap && kyUc.ds.length > 0 && (
         <Link href="/than-so#hoi" className="glass flex items-center justify-between gap-3 rounded-2xl p-5 hover:border-gold/50" data-testid="ban-than-ky-uc">
           <span className="flex items-center gap-3">
@@ -157,29 +167,18 @@ export function BanThan() {
       {/* SAO-3: Lưu hồ sơ · Hỏi 3 câu · Mời 1 bạn → nhận Sao (tự ẩn khi chưa bật tài khoản / công tắc tắt với khách). */}
       <NhiemVuSao />
 
-      <section aria-labelledby="muc-tiep" className="grid gap-3 sm:grid-cols-3">
-        <h2 id="muc-tiep" className="sr-only">Đi tiếp</h2>
-        {[
-          { href: "/than-so#hoi", Icon: MessageCircle, ten: "Hỏi điều bạn băn khoăn", mo: "Nghề nghiệp, tình cảm, giai đoạn này nên tập trung gì" },
-          { href: "/xem-ngay-tot", Icon: CalendarCheck, ten: "Xem ngày tốt", mo: "Hoàng đạo, giờ tốt, việc nên làm — tìm ngày đẹp cho việc sắp tới" },
-          { href: "/huyen-hoc", Icon: Compass, ten: "Huyền học", mo: "Tử vi, Kinh Dịch, Bát tự, Phong thuỷ — dùng luôn hồ sơ này" },
-        ].map(({ href, Icon, ten, mo }) => (
-          <Link key={href} href={href} className="glass group rounded-2xl p-5 transition-colors hover:border-gold/50">
-            <Icon className="size-5 text-gold" aria-hidden />
-            <p className="mt-3 font-serif text-lg">{ten}</p>
-            <p className="mt-1 text-sm text-fg-muted">{mo}</p>
-            <ArrowRight className="mt-3 size-4 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden />
-          </Link>
-        ))}
+      {/* Lối phụ (các môn đã có ô riêng ở "Bảy cách nhìn"): hỏi đáp, ngày tốt, bài đã lưu. */}
+      <nav aria-label="Đi tiếp" className="flex flex-wrap gap-x-5 gap-y-2 text-sm" data-testid="ban-than-loi-phu">
+        <Link href="/than-so#hoi" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline"><MessageCircle className="size-4" aria-hidden /> Hỏi điều bạn băn khoăn</Link>
+        <Link href="/xem-ngay-tot" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline"><CalendarCheck className="size-4" aria-hidden /> Xem ngày tốt</Link>
+        <Link href="/huyen-hoc" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline"><Compass className="size-4" aria-hidden /> Tất cả công cụ Huyền học</Link>
         {/* Chưa bật tài khoản thì trang bài đã lưu chỉ báo "chưa mở" → không hiện link (ngõ cụt). */}
         {coTaiKhoan() && (
-          <p className="text-sm sm:col-span-3">
-            <Link href="/ban-than/bai-da-luu" className="text-fg-muted underline-offset-4 hover:text-gold hover:underline" data-testid="lien-ket-bai-da-luu">
-              Bài luận đã lưu trong tài khoản →
-            </Link>
-          </p>
+          <Link href="/ban-than/bai-da-luu" className="text-fg-muted underline-offset-4 hover:text-gold hover:underline" data-testid="lien-ket-bai-da-luu">
+            Bài luận đã lưu trong tài khoản →
+          </Link>
         )}
-      </section>
+      </nav>
 
       <Sheet open={suaMo} onOpenChange={setSuaMo}>
         <SheetContent title="Sửa hồ sơ" description="Thay đổi được lưu trên máy của bạn.">

@@ -256,8 +256,16 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
     cac_y_dinh = [] if ho_tro else _y_dinh(so_ngay, list(y_dinh or []) + nhan_dien)
     so_pq = mr.ngay_pho_quat(y, m, d)
     hl = _hoang_lich(ngay_xem, ngay, thang, nam, [x["ma"] for x in cac_y_dinh] or list(y_dinh or []))
+    tom_lai = _tom_lai(so_ngay, nghia_thang, hl)
+    viec_nho = _viec_nho(so_ngay, ngay, thang, nam, ngay_xem)
+    cau_hoi_them = _cau_hoi_them(so_ngay, ngay_xem)
+    que = _que_ngay(ngay_xem)
+    from app.luangiai import ba_la_ngay  # noqa: PLC0415
     return {
-        "tom_lai": _tom_lai(so_ngay, nghia_thang, hl),
+        "tom_lai": tom_lai,
+        # BT-UI: "Ba lá của ngày" (Tarot riêng · Con số · Thời khắc) — chỉ ghép dữ liệu đã tính, không đổi theo ý định.
+        "ba_la": ba_la_ngay.lap(ngay, thang, nam, ngay_xem, ngay_ca_nhan=_ngay(so_ngay), viec_nho=viec_nho,
+                                cau_hoi_them=cau_hoi_them, hoang_lich=hl, que_ngay=que, tom_lai=tom_lai),
         "ngay_xem": ngay_xem.isoformat(),
         "am_lich": {
             "ngay": ad, "thang": am, "nam": ay, "nhuan": bool(nhuan),
@@ -278,12 +286,12 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
         "danh_sach_y_dinh": thanso_v2.y_dinh_hom_nay(),
         "cau_hoi_noi_bat": _cau_hoi_noi_bat(so_ngay, ngay_xem),
         # Trục 2 UX: nguyên liệu Lá bài đầu ngày — chuỗi KB có sẵn mà trang chưa in (không lặp thẻ phía trên).
-        "cau_hoi_them": _cau_hoi_them(so_ngay, ngay_xem),
-        "viec_nho": _viec_nho(so_ngay, ngay, thang, nam, ngay_xem),
+        "cau_hoi_them": cau_hoi_them,
+        "viec_nho": viec_nho,
         "ngay_pho_quat": {"so": so_pq, "nghia": thanso_v2.ngay_pho_quat(so_pq)},
         "chaldea": thanso_chaldean.ngay_chaldea(ngay, d),
         "hoang_lich": hl,
-        "que_ngay": _que_ngay(ngay_xem),
+        "que_ngay": que,
         "nhip_bat_tu": _nhip_bat_tu(ngay, thang, nam, ngay_xem),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],

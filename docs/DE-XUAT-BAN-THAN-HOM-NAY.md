@@ -1,6 +1,18 @@
 # Đề xuất: trang Bản thân, trang Hôm nay và "Lá bài đầu ngày" (BT-UI)
 
-Ngày 10/11/2026. Trạng thái: **mục 1 đã làm**; mục 2, 3, 4 **chờ chủ dự án duyệt**.
+Ngày 10/11/2026. Trạng thái: **mục 1, 2, 3, 4 đã làm** (chủ dự án duyệt cả ba hướng em chọn, 10/11/2026); mục 5 chờ chọn.
+
+## 0. Đã làm so với đề xuất — chỗ khác
+
+- **Ba lá**: lật đủ ba hiện khối **"Ba lá ghép lại"** (Mang theo · Việc nhỏ · Thời điểm) thay cho "Câu của ngày" — câu ghép
+  `tom_lai` đã là câu chính của thẻ ngày ngay bên cạnh, hiện lần hai là lặp. Lá Con số không in lại nghĩa ngày cá nhân
+  (thẻ ngày đã in) mà in việc nhỏ + câu hỏi riêng.
+- **Nhật ký tháng**: không thêm migration — ba lá ghi vào ba mã lá cũ (`MA_NHAT_KY`), tổng kết tháng đếm "ngày có lật lá".
+  Dòng "lá Tarot gặp nhiều nhất" chưa làm (cần lưu mã lá theo ngày).
+- **Bản thân**: tám ô = bảy môn + ô "Chân dung tổng hợp" (kín lưới 4 × 2). Ô Tarot không lộ lá khi chưa lật ở Hôm nay.
+  Khối "Nhịp hiện tại" giữ nguyên (đã gọn từ QH-BT). Ba ô lối tắt cuối trang thành một hàng link.
+- **Buổi tối**: "Hôm nay thế nào?" chỉ hỏi khi ý định được chọn trước 16 giờ và đồng hồ máy đã qua 18 giờ.
+- Engine cũ chưa trả `ba_la` (deploy lệch) → web tự giữ Lá bài đầu ngày một lá như trước.
 
 ## 1. Đã làm trong đợt này (không cần duyệt thêm)
 

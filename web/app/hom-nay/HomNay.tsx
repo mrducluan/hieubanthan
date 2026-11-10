@@ -18,13 +18,16 @@ import { QueRieng } from "@/components/kinh-dich/QueRieng";
 import { MoiCaiApp } from "@/components/khung/MoiCaiApp";
 import { ChuoiNgay } from "@/components/khung/ChuoiNgay";
 import { LaBaiDauNgay } from "@/components/khung/LaBaiDauNgay";
+import { BaLaNgay } from "@/components/khung/BaLaNgay";
+import { MucGap } from "@/components/khung/MucGap";
+import { gioSapToi, type BaLa } from "@/lib/ba-la";
 import { HenChinhMinh } from "@/components/khung/HenChinhMinh";
 import type { TrangThaiChuoi } from "@/lib/chuoi-ngay";
 import { nhoYDinhHomNay } from "@/lib/hom-qua";
 import { useEffect, useRef, useState } from "react";
 import Link from "@/components/khung/Lien";
 import {
-  BookOpen, Briefcase, CalendarDays, CalendarHeart, Clock, Hexagon, Coffee, Dumbbell, Globe2, Handshake, Heart, Home, LifeBuoy, MessageCircleQuestion,
+  ArrowDown, BookOpen, Briefcase, CalendarDays, CalendarHeart, Clock, Hexagon, Coffee, Dumbbell, Globe2, Handshake, Heart, Home, LifeBuoy,
   MoonStar, Palette, Plane, Rocket, Share2, Sparkles, Sunrise, Wallet, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,6 +49,8 @@ interface NgayCN { so: number; nghia: string; tu_soi: string }
 interface TheHomNay {
   /** EN-2 (P2-15): một câu ghép ngày cá nhân + tháng + lịch (engine dựng; engine cũ không có thì không hiện). */
   tom_lai?: string;
+  /** BT-UI: "Ba lá của ngày" (engine mới; engine cũ không có → giữ Lá bài đầu ngày một lá). */
+  ba_la?: BaLa;
   ngay_xem: string;
   am_lich: { ngay: number; thang: number; nam: number; nhuan: boolean; can_chi_ngay: string; can_chi_thang: string; can_chi_nam: string };
   ngay_ca_nhan: NgayCN;
@@ -155,6 +160,14 @@ export function HomNay() {
   const [duDinh, setDuDinh] = useState("");
   const [dangXem, setDangXem] = useState(false);
   const [moGio, setMoGio] = useState(false);
+  // BT-UI: phút trong ngày theo đồng hồ máy (chỉ đọc ở trình duyệt, cập nhật mỗi phút) → chip "Giờ tốt sắp tới".
+  const [phut, setPhut] = useState<number | null>(null);
+  useEffect(() => {
+    const doc = () => { const d = new Date(); setPhut(d.getHours() * 60 + d.getMinutes()); };
+    doc();
+    const h = window.setInterval(doc, 60_000);
+    return () => window.clearInterval(h);
+  }, []);
 
   /** Gọi engine; `yDinh`/`cau` rỗng = thẻ cơ bản. Ý định đã nhớ của hôm nay được gửi kèm ngay lần đầu. */
   function taiThe(yDinh: string[], cau: string) {
@@ -233,6 +246,7 @@ export function HomNay() {
   }
 
   useBatDauDoc("hom_nay", Boolean(the));
+  const sapToi = the?.ba_la && phut !== null ? gioSapToi(the.ba_la.thoi_khac.gio, phut) : null;
   const tieuDe = <TieuDeTrang nho={c("dau.nhan_tren")} lon="Hôm nay của bạn" />;
   if (hoSo === undefined) return <div className="mx-auto max-w-xl">{tieuDe}<KhungTai /></div>;
   if (hoSo === null) {
@@ -252,21 +266,24 @@ export function HomNay() {
       {loi && <Card><p role="alert" className="text-sm text-cinnabar">{loi}</p></Card>}
       {!the && !loi && <KhungTai />}
       {the && (
-        /* UI-HN: điện thoại một cột (thứ tự theo order-*); máy tính lưới 12 cột — hàng ngày + thẻ hôm nay trải hết,
-           dưới là cột chính 7/12 (ý định, quẻ, nhịp tháng/năm…) và cột bên 5/12 (tổng kết, lá bài, hoàng lịch, nhắc…). */
-        <div className="flex flex-col gap-4 lg:grid lg:grid-cols-12 lg:items-start lg:gap-5" data-testid="hom-nay-luoi">
-          <div className="order-1 space-y-4 lg:order-1 lg:col-span-12">
+        /* BT-UI — ba tầng (docs/DE-XUAT-BAN-THAN-HOM-NAY.md mục 4), thứ tự DOM = thứ tự đọc trên điện thoại:
+           Tầng 1 "trong 10 giây": dòng ngày + giờ tốt sắp tới → thẻ ngày (câu ghép là câu chính) + Ba lá của ngày.
+           Tầng 2 "việc của tôi hôm nay": ý định (cột chính) + nhịp ghé, hỏi lại, nhắc, nhà (cột bên).
+           Tầng 3 "đọc thêm": mục gập, mỗi mục hiện sẵn một câu tóm tắt. */
+        <div className="space-y-5" data-testid="hom-nay-luoi">
+          <div className="space-y-4" data-tang="1">
           <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-fg-muted">
             <span className="inline-flex items-center gap-1.5 capitalize"><CalendarDays className="size-4" aria-hidden />{thu(the.ngay_xem)}</span>
             <span className="inline-flex items-center gap-1.5"><MoonStar className="size-4" aria-hidden />
               Âm lịch {the.am_lich.ngay}/{the.am_lich.thang}{the.am_lich.nhuan ? " (nhuận)" : ""} · ngày {the.am_lich.can_chi_ngay}, tháng {the.am_lich.can_chi_thang}, năm {the.am_lich.can_chi_nam}</span>
           </p>
-          {/* HN-3 (chủ dự án dặn: nút nhỏ) — giờ hoàng đạo mở/đóng tại chỗ · quẻ ngày · xem ngày tốt */}
+          {/* HN-3 (nút nhỏ) + BT-UI: nút giờ nói luôn giờ hoàng đạo SẮP TỚI (web chỉ chọn trong danh sách engine theo đồng hồ máy). */}
           {the.hoang_lich && (
             <div className="flex flex-wrap items-center gap-2" data-testid="chip-hom-nay">
-              <button type="button" aria-expanded={moGio} aria-controls="gio-hoang-dao" onClick={() => setMoGio((v) => !v)}
-                className={`vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3.5 py-2 text-[0.8125rem] transition-colors ${moGio ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
-                <Clock className="size-4" aria-hidden />Giờ hoàng đạo
+              <button type="button" aria-expanded={moGio} aria-controls="gio-hoang-dao" onClick={() => setMoGio((v) => !v)} data-testid="chip-gio"
+                className={`vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3.5 py-2 text-[0.8125rem] transition-colors ${moGio || sapToi ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
+                <Clock className="size-4" aria-hidden />
+                {sapToi ? <>{sapToi.dang ? "Đang giờ tốt" : "Giờ tốt sắp tới"}: <b className="font-semibold">{sapToi.gio.chi}</b> {sapToi.gio.khung}</> : "Giờ hoàng đạo"}
               </button>
               {the.que_ngay && (
                 <a href="#que-ngay" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-[0.8125rem] text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
@@ -292,10 +309,14 @@ export function HomNay() {
               </div>
             </div>
           )}
+
           </div>
 
-          <Card id="the-hom-nay" data-neo className="order-2 scroll-mt-24 lg:order-2 lg:col-span-12 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,21rem)] lg:gap-8" data-testid="the-hom-nay">
-            <div className="space-y-4">
+          {/* Hai cột độc lập ở máy tính (cột nào dài cột ấy, không để khoảng trống khi lật lá); điện thoại: `contents` +
+              order → thẻ ngày · ba lá · ý định · nhịp ghé / hỏi lại / nhắc · ngày mai. */}
+          <div className="flex flex-col gap-5 lg:grid lg:grid-cols-12 lg:items-start">
+          <div className="contents lg:col-span-7 lg:flex lg:flex-col lg:gap-5" data-testid="cot-chinh">
+          <Card id="the-hom-nay" data-neo className="order-1 scroll-mt-24 space-y-4" data-testid="the-hom-nay">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-sm text-fg-muted">{tenGoi(hoSo)}, hôm nay là</p>
@@ -303,72 +324,25 @@ export function HomNay() {
               </div>
               <span className="grid size-16 shrink-0 place-items-center rounded-2xl bg-gold/15 font-serif text-4xl text-gold" aria-hidden>{the.ngay_ca_nhan.so}</span>
             </div>
-            <p className="text-lg">{boTienTo(the.ngay_ca_nhan.nghia)}</p>
-            {the.tom_lai && (
-              <p className="rounded-xl border-l-2 border-gold/60 bg-gold/5 px-4 py-3 text-[0.95rem] leading-relaxed text-fg" data-testid="hom-nay-tom-lai">
-                {the.tom_lai}
-              </p>
-            )}
+            {/* Câu ghép (ngày cá nhân + tháng + lịch) là câu chính; engine cũ chưa có thì hiện nghĩa ngày như trước. */}
+            {the.tom_lai
+              ? <p className="text-lg leading-relaxed" data-testid="hom-nay-tom-lai">{the.tom_lai}</p>
+              : <p className="text-lg">{boTienTo(the.ngay_ca_nhan.nghia)}</p>}
             <div className="rounded-xl border border-moon/30 bg-moon/5 p-4">
               <p className="text-xs uppercase tracking-wider text-moon">Câu hỏi tự soi</p>
               <p className="mt-1">{the.ngay_ca_nhan.tu_soi}</p>
             </div>
             <SoNoiBatNgay hoSo={hoSo} />
-            </div>
-            <aside className="mt-4 space-y-4 border-t border-line/60 pt-4 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0" data-testid="the-hom-nay-ben">
-              {chuoi !== null && <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} onTrangThai={setTtChuoi}
-                so={the.ngay_ca_nhan.so} hoSo={hoSo}
-                ngayGheMay={thongKeThang(docNhatKy(hoSo), Number(the.ngay_xem.slice(0, 4)), Number(the.ngay_xem.slice(5, 7))).ngay} />}
+            <div className="flex flex-wrap items-center gap-2 border-t border-line/60 pt-4">
               <Button size="sm" variant="secondary" className="min-h-10" onClick={() => void chiaSe()} data-testid="chia-se-the-hom-nay"><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ thẻ hôm nay"}</Button>
+              <a href="#y-dinh" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full px-3 text-sm text-gold hover:underline">Hôm nay bạn định làm gì? <ArrowDown className="size-4" aria-hidden /></a>
+            </div>
             {chepTay && <ChepTay url={chepTay} />}
-            {/* SAO-HH: hẹn 7/30 ngày — chờ /api/sao/chuoi trả lời để lấy đúng nguồn chuỗi (tài khoản hay máy). */}
-            {chuoi !== null && ttChuoi !== null && (
-              <HenChinhMinh hoSo={hoSo} ngay={the.ngay_xem} tieuDe={c("hen.tieu_de")}
-                chuoi={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.chuoi : chuoi.so}
-                nguon={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? "tai_khoan" : "may"} />
-            )}
-            </aside>
           </Card>
 
-          {/* Cột bên (≥ lg): tổng kết tháng, lá bài, hoàng lịch, hỏi lại, nhắc, nhà. Điện thoại: `contents` → các khối xếp theo order-*. */}
-          <div className="contents lg:order-4 lg:col-span-5 lg:flex lg:flex-col lg:gap-5" data-testid="cot-ben">
-          {/* KV-THANG: tổng kết tháng trước (≥ 3 ngày ghé, đóng được) + lối sang "12 tháng tới"; số máy chủ khi đã đăng nhập (0032). */}
-          <div className="order-[3] empty:hidden lg:order-[6]"><TongKetThang hoSo={hoSo} homNay={the.ngay_xem} noi="hom_nay" thangNay={the.thang_ca_nhan}
-            mayChu={ttChuoi === null ? undefined : ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.thang_truoc ?? null : null} /></div>
-
-          <div className="order-[4] empty:hidden lg:order-[3]"><LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} /></div>
-
-          <div className="order-[5] empty:hidden lg:order-[4]">{the.hoang_lich && (
-            <section aria-labelledby="hl-hom-nay" className="glass space-y-3 rounded-2xl p-5" data-testid="hoang-lich-hom-nay">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 id="hl-hom-nay" className="text-xl">{c("hoang_lich.tieu_de")}</h2>
-                <span className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold ${the.hoang_lich.hoang_dao ? "border-gold/50 text-gold" : "border-moon/40 text-moon"}`}>
-                  {the.hoang_lich.hoang_dao ? "Hoàng đạo" : "Hắc đạo"} · {the.hoang_lich.than}</span>
-              </div>
-              <p className="text-sm">Trực <b>{the.hoang_lich.truc}</b> ({the.hoang_lich.truc_y}) · xung tuổi {the.hoang_lich.xung_tuoi}
-                {the.hoang_lich.ky_dan_gian.length > 0 && ` · ${the.hoang_lich.ky_dan_gian.join(", ")}`}</p>
-              {the.hoang_lich.tuoi && <p className="text-sm" data-testid="hl-tuoi">Tuổi bạn ({the.hoang_lich.tuoi.can_chi}): <b>{the.hoang_lich.tuoi.quan_he.ten}</b> — {the.hoang_lich.tuoi.quan_he.nghia}.</p>}
-              {the.hoang_lich.nghi.length > 0 && <p className="text-sm"><span className="text-jade">Nên:</span> {the.hoang_lich.nghi.join(", ")}</p>}
-              {the.hoang_lich.ky.length > 0 && <p className="text-sm"><span className="text-cinnabar">Kiêng:</span> {the.hoang_lich.ky.join(", ")}</p>}
-              <p className="text-sm"><Link href="/xem-ngay-tot" className="text-gold hover:underline">Xem đủ giờ tốt, hướng xuất hành, tìm ngày đẹp →</Link>
-                {the.hoang_lich.ngay_tot_gan && <span className="text-fg-muted"> · Ngày đẹp gần nhất: {dmy(the.hoang_lich.ngay_tot_gan.ngay)}</span>}</p>
-            </section>
-          )}</div>
-
-          <div className="order-[6] empty:hidden"><HoiHomQua homNay={the.ngay_xem} tieuDe={c("hom_qua.tieu_de")} cau={(b) => c("hom_qua.cau", b)} camOn={c("hom_qua.cam_on")} /></div>
-          <div className="order-[7] empty:hidden"><HoiSau30Ngay homNay={the.ngay_xem} /></div>
-          <div className="order-[8] empty:hidden"><NhacHomNay homNay={the.ngay_xem} /></div>
-          <div className="order-[9] empty:hidden"><MoiCaiApp noi="hom_nay" /></div>
-          <div className="order-[10] empty:hidden"><ThangNayNha /></div>
-          <div className="order-[11] empty:hidden"><ViecTuanNha /></div>
-          </div>
-
-          {/* Cột chính (≥ lg): ý định hôm nay, nhịp Bát tự, quẻ, câu hỏi nổi bật, tháng/năm, ngày mai, góp ý. */}
-          <div className="contents lg:order-3 lg:col-span-7 lg:flex lg:flex-col lg:gap-5" data-testid="cot-chinh">
-
-          <div className="order-[12] empty:hidden"><section aria-labelledby="y-dinh" className="glass space-y-4 rounded-2xl p-5" data-testid="y-dinh">
+          <section id="y-dinh" aria-labelledby="y-dinh-h" className="order-3 glass scroll-mt-24 space-y-4 rounded-2xl p-5" data-testid="y-dinh">
             <div>
-              <h2 id="y-dinh" className="text-xl">{c("y_dinh.tieu_de")}</h2>
+              <h2 id="y-dinh-h" className="text-xl">{c("y_dinh.tieu_de")}</h2>
               <p className="mt-1 text-sm text-fg-muted">Chọn tối đa {TOI_DA_Y_DINH} việc hoặc gõ ngắn — xem việc đó hợp nhịp ngày {the.ngay_ca_nhan.so} thế nào và nên làm theo cách nào.</p>
             </div>
             <div className="flex flex-wrap gap-2" role="group" aria-label="Ý định hôm nay">
@@ -428,87 +402,131 @@ export function HomNay() {
             {!the.ho_tro && duDinh === "" && chon.length > 0 && the.y_dinh_hom_nay.length === 0 && (
               <p className="text-sm text-fg-muted">Bấm “Xem nhịp hôm nay” để xem các việc đã chọn.</p>
             )}
-          </section></div>
+          </section>
 
-          <div className="order-[13] empty:hidden">{the.nhip_bat_tu && (
-            <section aria-labelledby="nhip-bat-tu" className="glass space-y-2 rounded-2xl p-5" data-testid="nhip-bat-tu">
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h2 id="nhip-bat-tu" className="text-xl">Nhịp Bát tự: ngày {the.nhip_bat_tu.thap_than}</h2>
-                <span className="text-xs text-fg-muted">nhật chủ {the.nhip_bat_tu.nhat_chu} · ngày {the.nhip_bat_tu.can_chi_ngay}</span>
-              </div>
-              {the.nhip_bat_tu.y_nghia && <p className="text-sm">{the.nhip_bat_tu.y_nghia}</p>}
-              {the.nhip_bat_tu.tinh_cach && <p className="text-sm"><span className="text-jade">Năng lượng gợi ý:</span> {the.nhip_bat_tu.tinh_cach}</p>}
-              {the.nhip_bat_tu.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {the.nhip_bat_tu.cau_tu_soi}</p>}
-              <p className="text-xs text-fg-faint">{the.nhip_bat_tu.cach_tinh} <Link href="/bat-tu" className="text-gold hover:underline">Xem lá Bát tự đầy đủ</Link></p>
-            </section>
-          )}</div>
-
-          <div className="order-[14] empty:hidden">{the.que_ngay && (
-            <section id="que-ngay" aria-labelledby="que-ngay-h" className="glass scroll-mt-24 space-y-2 rounded-2xl p-5" data-testid="que-ngay">
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h2 id="que-ngay-h" className="text-xl">Quẻ đầu ngày: {the.que_ngay.ten}</h2>
-                <span className="text-xs text-fg-muted">quẻ {the.que_ngay.so} · hào {the.que_ngay.hao_dong} động{the.que_ngay.bien ? ` → ${the.que_ngay.bien.ten}` : ""}</span>
-              </div>
-              {the.que_ngay.y_chinh && <p className="text-sm">{the.que_ngay.y_chinh}</p>}
-              {the.que_ngay.loi_khuyen && <p className="text-sm"><span className="text-jade">Gợi ý:</span> {the.que_ngay.loi_khuyen}</p>}
-              {the.que_ngay.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {the.que_ngay.cau_tu_soi}</p>}
-              <QueRieng homNay={the.ngay_xem} />
-              <p className="text-xs text-fg-faint">{the.que_ngay.cach_khoi} Mọi người cùng một quẻ trong ngày.{" "}
-                {the.que_ngay.duong && <Link href={duongMoi(the.que_ngay.duong)} className="text-gold hover:underline">Đọc quẻ {the.que_ngay.ten}</Link>}{" "}
-                · <Link href="/kinh-dich?cach=mai_hoa" className="text-gold hover:underline">Gieo quẻ Mai Hoa theo giờ này</Link></p>
-            </section>
-          )}</div>
-
-          <div className="order-[15] empty:hidden">{the.cau_hoi_noi_bat.length > 0 && (
-            <section aria-labelledby="noi-bat" className="rounded-2xl border border-line/70 p-5">
-              <h2 id="noi-bat" className="inline-flex items-center gap-2 text-lg"><MessageCircleQuestion className="size-5 text-moon" aria-hidden />{c("noi_bat.tieu_de")}</h2>
-              <ul className="mt-3 space-y-2 text-sm">{the.cau_hoi_noi_bat.map((c) => <li key={c} className="border-l-2 border-moon/50 pl-3">{c}</li>)}</ul>
-            </section>
-          )}</div>
-
-          
-
-          <div className="order-[17] empty:hidden"><div className="grid gap-3 sm:grid-cols-2">
-            {[{ nhan: `Tháng ${the.thang_ca_nhan.thang}`, ...the.thang_ca_nhan }, { nhan: `Năm ${the.nam_ca_nhan.nam}`, ...the.nam_ca_nhan }].map((x) => x.chu_de && (
-              <article key={x.nhan} className="glass rounded-2xl p-4">
-                <div className="flex items-center justify-between text-sm text-fg-muted"><span>{x.nhan}</span>
-                  <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {x.so}</span></div>
-                <h3 className="mt-2 text-lg">{x.chu_de}</h3>
-                {x.nen && <p className="mt-1 text-sm"><span className="text-jade">Hợp để:</span> {x.nen}</p>}
-                {x.tranh && <p className="mt-1 text-sm"><span className="text-cinnabar">Để ý:</span> {x.tranh}</p>}
-              </article>
-            ))}
-          </div></div>
-
-          <div className="order-[18] empty:hidden"><Card className="flex items-start gap-3">
+          <Card className="order-5 flex items-start gap-3" data-testid="ngay-mai">
             <Sunrise className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
             <p className="text-sm"><span className="text-fg-muted">Ngày mai — Ngày cá nhân {the.ngay_mai.so}:</span>{" "}
-              {boTienTo(the.ngay_mai.nghia)} <span className="text-fg-muted">Mở lại vào ngày mai để xem câu hỏi mới.</span></p>
-          </Card></div>
-          <div className="order-[16] empty:hidden"><div className="grid gap-3 sm:grid-cols-2">
-            {the.ngay_pho_quat.nghia && (
-              <article className="glass rounded-2xl p-5" data-testid="ngay-pho-quat">
-                <div className="flex items-center justify-between text-sm text-fg-muted"><span className="inline-flex items-center gap-1.5"><Globe2 className="size-4" aria-hidden />Ngày chung của mọi người</span>
-                  <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {the.ngay_pho_quat.so}</span></div>
-                <p className="mt-2 text-sm">{the.ngay_pho_quat.nghia}</p>
-              </article>
-            )}
-            <article className="glass rounded-2xl p-5" data-testid="ngay-chaldea">
-              <div className="flex items-center justify-between text-sm text-fg-muted"><span>Theo phái Chaldea</span>
-                <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {the.chaldea.so}{the.chaldea.kep ? ` · kép ${the.chaldea.kep}` : ""}</span></div>
-              {the.chaldea.nghia_kep ? <p className="mt-2 text-sm"><b>{the.chaldea.nghia_kep.bieu_tuong}</b> — {the.chaldea.nghia_kep.xu_huong}</p>
-                : the.chaldea.nghia_goc && <p className="mt-2 text-sm"><b>{the.chaldea.nghia_goc.ten}</b> ({the.chaldea.nghia_goc.hanh_tinh})</p>}
-              <p className="mt-1 text-xs text-fg-muted">{the.chaldea.cong_huong
-                ? `Trùng số ngày sinh của bạn (${the.chaldea.so_ngay_sinh}) — phái này gọi là ngày cộng hưởng.`
-                : `Số ngày sinh của bạn theo Chaldea là ${the.chaldea.so_ngay_sinh}.`} <Link href="/than-so" className="text-gold hover:underline">Xem bài đọc Chaldea</Link></p>
-            </article>
-          </div></div>
+              {boTienTo(the.ngay_mai.nghia)} <span className="text-fg-muted">Mở lại vào ngày mai để lật ba lá mới.</span></p>
+          </Card>
           </div>
 
-          {/* Hàng cuối (≥ lg): góp ý + lối đi tiếp trải hết bề ngang để ba thẻ đủ rộng. */}
-          <div className="order-[19] empty:hidden lg:order-5 lg:col-span-12"><CuoiBaiDoc moDun="hom_nay" cauHoi="Thẻ hôm nay có giúp bạn định hướng ngày của mình?" /></div>
+          {/* Cột bên: ba lá của ngày, rồi nhịp ghé, hỏi lại, nhắc, nhà — khối nào không có gì để hiện thì tự ẩn. */}
+          <div className="contents lg:col-span-5 lg:flex lg:flex-col lg:gap-5" data-testid="cot-ben">
+            <div className="order-2 empty:hidden">
+              {the.ba_la
+                ? <BaLaNgay baLa={the.ba_la} ngay={the.ngay_xem} hoSo={hoSo} tieuDe={c("ba_la.tieu_de")} />
+                /* Engine cũ (deploy lệch) chưa trả ba_la → giữ lá bài đầu ngày một lá như trước. */
+                : <LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} />}
+            </div>
+            <div className="order-4 flex flex-col gap-5 empty:hidden">
+            <div className="empty:hidden"><HoiHomQua homNay={the.ngay_xem} tieuDe={c("hom_qua.tieu_de")} cau={(b) => c("hom_qua.cau", b)} camOn={c("hom_qua.cam_on")} /></div>
+            <div className="empty:hidden"><HoiSau30Ngay homNay={the.ngay_xem} /></div>
+            {chuoi !== null && (
+              <section aria-label="Nhịp ghé của bạn" className="glass space-y-4 rounded-2xl p-5" data-testid="the-hom-nay-ben">
+                <ChuoiNgay chuoiMay={chuoi.so} batDauLaiMay={chuoi.batDauLai} ngay={the.ngay_xem} onTrangThai={setTtChuoi}
+                  so={the.ngay_ca_nhan.so} hoSo={hoSo}
+                  ngayGheMay={thongKeThang(docNhatKy(hoSo), Number(the.ngay_xem.slice(0, 4)), Number(the.ngay_xem.slice(5, 7))).ngay} />
+                {/* SAO-HH: hẹn 7/30 ngày — chờ /api/sao/chuoi trả lời để lấy đúng nguồn chuỗi (tài khoản hay máy). */}
+                {ttChuoi !== null && (
+                  <HenChinhMinh hoSo={hoSo} ngay={the.ngay_xem} tieuDe={c("hen.tieu_de")}
+                    chuoi={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.chuoi : chuoi.so}
+                    nguon={ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? "tai_khoan" : "may"} />
+                )}
+              </section>
+            )}
+            {/* KV-THANG: tổng kết tháng trước (≥ 3 ngày ghé, đóng được) + lối sang "12 tháng tới"; số máy chủ khi đã đăng nhập (0032). */}
+            <div className="empty:hidden"><TongKetThang hoSo={hoSo} homNay={the.ngay_xem} noi="hom_nay" thangNay={the.thang_ca_nhan}
+              mayChu={ttChuoi === null ? undefined : ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.thang_truoc ?? null : null} /></div>
+            <div className="empty:hidden"><NhacHomNay homNay={the.ngay_xem} /></div>
+            <div className="empty:hidden"><ThangNayNha /></div>
+            <div className="empty:hidden"><ViecTuanNha /></div>
+            <div className="empty:hidden"><MoiCaiApp noi="hom_nay" /></div>
+            </div>
+          </div>
+          </div>
 
-          <div className="order-[20] empty:hidden lg:order-6 lg:col-span-12"><p className="text-xs text-fg-faint">{the.luu_y}</p></div>
+          {/* Tầng 3 — đọc thêm: từng môn nói gì về hôm nay. Gập sẵn, mỗi mục một câu tóm tắt. */}
+          <section aria-labelledby="doc-them" className="space-y-3" data-tang="3" data-testid="doc-them">
+            <div>
+              <h2 id="doc-them" className="text-xl">Đọc thêm về hôm nay</h2>
+              <p className="mt-1 text-sm text-fg-muted">Mỗi môn nhìn ngày này một cách. Bấm mục bạn quan tâm để mở.</p>
+            </div>
+            <div className="grid gap-3 lg:grid-cols-2 lg:items-start">
+            {the.nhip_bat_tu && (
+              <MucGap ma="bat_tu" testId="nhip-bat-tu" tieuDe={<>Nhịp Bát tự: ngày {the.nhip_bat_tu.thap_than}</>} tomTat={the.nhip_bat_tu.y_nghia}
+                phu={<>nhật chủ {the.nhip_bat_tu.nhat_chu} · ngày {the.nhip_bat_tu.can_chi_ngay}</>}>
+                {the.nhip_bat_tu.y_nghia && <p className="text-sm">{the.nhip_bat_tu.y_nghia}</p>}
+                {the.nhip_bat_tu.tinh_cach && <p className="text-sm"><span className="text-jade">Năng lượng gợi ý:</span> {the.nhip_bat_tu.tinh_cach}</p>}
+                {the.nhip_bat_tu.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {the.nhip_bat_tu.cau_tu_soi}</p>}
+                <p className="text-xs text-fg-faint">{the.nhip_bat_tu.cach_tinh} <Link href="/bat-tu" className="text-gold hover:underline">Xem lá Bát tự đầy đủ</Link></p>
+              </MucGap>
+            )}
+            {the.que_ngay && (
+              <MucGap id="que-ngay" ma="que" testId="que-ngay" tieuDe={<>Quẻ đầu ngày: {the.que_ngay.ten}</>} tomTat={the.que_ngay.y_chinh}
+                phu={<>quẻ {the.que_ngay.so} · hào {the.que_ngay.hao_dong} động{the.que_ngay.bien ? ` → ${the.que_ngay.bien.ten}` : ""}</>}>
+                {the.que_ngay.y_chinh && <p className="text-sm">{the.que_ngay.y_chinh}</p>}
+                {the.que_ngay.loi_khuyen && <p className="text-sm"><span className="text-jade">Gợi ý:</span> {the.que_ngay.loi_khuyen}</p>}
+                {the.que_ngay.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {the.que_ngay.cau_tu_soi}</p>}
+                <QueRieng homNay={the.ngay_xem} />
+                <p className="text-xs text-fg-faint">{the.que_ngay.cach_khoi} Mọi người cùng một quẻ trong ngày.{" "}
+                  {the.que_ngay.duong && <Link href={duongMoi(the.que_ngay.duong)} className="text-gold hover:underline">Đọc quẻ {the.que_ngay.ten}</Link>}{" "}
+                  · <Link href="/kinh-dich?cach=mai_hoa" className="text-gold hover:underline">Gieo quẻ Mai Hoa theo giờ này</Link></p>
+              </MucGap>
+            )}
+            {the.hoang_lich && (
+              <MucGap ma="hoang_lich" testId="hoang-lich-hom-nay" tieuDe={c("hoang_lich.tieu_de")}
+                phu={<>{the.hoang_lich.hoang_dao ? "Hoàng đạo" : "Hắc đạo"} · {the.hoang_lich.than}</>}
+                tomTat={the.hoang_lich.nghi.length > 0 ? <>Nên: {the.hoang_lich.nghi.slice(0, 3).join(", ")}</> : <>Trực {the.hoang_lich.truc} ({the.hoang_lich.truc_y})</>}>
+                <p className="text-sm">Trực <b>{the.hoang_lich.truc}</b> ({the.hoang_lich.truc_y}) · xung tuổi {the.hoang_lich.xung_tuoi}
+                  {the.hoang_lich.ky_dan_gian.length > 0 && ` · ${the.hoang_lich.ky_dan_gian.join(", ")}`}</p>
+                {the.hoang_lich.tuoi && <p className="text-sm" data-testid="hl-tuoi">Tuổi bạn ({the.hoang_lich.tuoi.can_chi}): <b>{the.hoang_lich.tuoi.quan_he.ten}</b> — {the.hoang_lich.tuoi.quan_he.nghia}.</p>}
+                {the.hoang_lich.nghi.length > 0 && <p className="text-sm"><span className="text-jade">Nên:</span> {the.hoang_lich.nghi.join(", ")}</p>}
+                {the.hoang_lich.ky.length > 0 && <p className="text-sm"><span className="text-cinnabar">Kiêng:</span> {the.hoang_lich.ky.join(", ")}</p>}
+                <p className="text-sm"><Link href="/xem-ngay-tot" className="text-gold hover:underline">Xem đủ giờ tốt, hướng xuất hành, tìm ngày đẹp →</Link>
+                  {the.hoang_lich.ngay_tot_gan && <span className="text-fg-muted"> · Ngày đẹp gần nhất: {dmy(the.hoang_lich.ngay_tot_gan.ngay)}</span>}</p>
+              </MucGap>
+            )}
+            {(the.thang_ca_nhan.chu_de || the.nam_ca_nhan.chu_de) && (
+              <MucGap ma="thang_nam" testId="thang-nam" tieuDe={<>Tháng {the.thang_ca_nhan.thang} và năm {the.nam_ca_nhan.nam} của bạn</>}
+                tomTat={<>{the.thang_ca_nhan.chu_de}{the.thang_ca_nhan.chu_de && the.nam_ca_nhan.chu_de ? " · " : ""}{the.nam_ca_nhan.chu_de}</>}>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {[{ nhan: `Tháng ${the.thang_ca_nhan.thang}`, ...the.thang_ca_nhan }, { nhan: `Năm ${the.nam_ca_nhan.nam}`, ...the.nam_ca_nhan }].map((x) => x.chu_de && (
+                    <article key={x.nhan} className="rounded-xl border border-line/70 bg-bg/40 p-4">
+                      <div className="flex items-center justify-between text-sm text-fg-muted"><span>{x.nhan}</span>
+                        <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">số {x.so}</span></div>
+                      <h3 className="mt-2 text-lg">{x.chu_de}</h3>
+                      {x.nen && <p className="mt-1 text-sm"><span className="text-jade">Hợp để:</span> {x.nen}</p>}
+                      {x.tranh && <p className="mt-1 text-sm"><span className="text-cinnabar">Để ý:</span> {x.tranh}</p>}
+                    </article>
+                  ))}
+                </div>
+                <p className="text-xs"><Link href="/thoi-gian-toi" className="text-gold hover:underline">Xem ba tháng tới và cả năm của bạn →</Link></p>
+              </MucGap>
+            )}
+            {the.cau_hoi_noi_bat.length > 0 && (
+              <MucGap ma="cau_hoi" testId="cau-hoi-noi-bat" tieuDe={c("noi_bat.tieu_de")} tomTat={the.cau_hoi_noi_bat[0]}>
+                <ul className="space-y-2 text-sm">{the.cau_hoi_noi_bat.map((x) => <li key={x} className="border-l-2 border-moon/50 pl-3">{x}</li>)}</ul>
+              </MucGap>
+            )}
+            <MucGap ma="phai_khac" testId="ngay-chaldea" tieuDe="Ngày chung và phái Chaldea"
+              phu={<>ngày chung số {the.ngay_pho_quat.so} · Chaldea số {the.chaldea.so}{the.chaldea.kep ? ` (kép ${the.chaldea.kep})` : ""}</>}
+              tomTat={the.ngay_pho_quat.nghia ?? "Hai cách tính khác cho cùng ngày này."}>
+              {the.ngay_pho_quat.nghia && (
+                <p className="text-sm" data-testid="ngay-pho-quat"><span className="inline-flex items-center gap-1.5 text-fg-muted"><Globe2 className="size-4" aria-hidden />Ngày chung của mọi người (số {the.ngay_pho_quat.so}):</span> {the.ngay_pho_quat.nghia}</p>
+              )}
+              <p className="text-sm"><span className="text-fg-muted">Theo phái Chaldea (số {the.chaldea.so}{the.chaldea.kep ? ` · kép ${the.chaldea.kep}` : ""}):</span>{" "}
+                {the.chaldea.nghia_kep ? <><b>{the.chaldea.nghia_kep.bieu_tuong}</b> — {the.chaldea.nghia_kep.xu_huong}</>
+                  : the.chaldea.nghia_goc && <><b>{the.chaldea.nghia_goc.ten}</b> ({the.chaldea.nghia_goc.hanh_tinh})</>}</p>
+              <p className="text-xs text-fg-muted">{the.chaldea.cong_huong
+                ? `Trùng số ngày sinh của bạn (${the.chaldea.so_ngay_sinh}) — phái này gọi là ngày cộng hưởng.`
+                : `Số ngày sinh của bạn theo Chaldea là ${the.chaldea.so_ngay_sinh}.`} <Link href="/than-so" className="text-gold hover:underline">Xem bài đọc Chaldea</Link></p>
+            </MucGap>
+            </div>
+          </section>
+
+          <CuoiBaiDoc moDun="hom_nay" cauHoi="Thẻ hôm nay có giúp bạn định hướng ngày của mình?" />
+          <p className="text-xs text-fg-faint">{the.luu_y}</p>
         </div>
       )}
     </div>

@@ -88,9 +88,9 @@ test("nhật ký trên máy: Hôm nay ghi ngày + số; lật lá ghi lá; hồ 
   await expect(lich).toHaveAttribute("data-so-ngay", "1");
   await expect(lich.locator("[data-ghe]")).toHaveText(String(Number(hom.slice(8, 10))));
   // Lật lá → nhật ký có lá + dòng "Lá đầu tiên của tháng này."
-  await page.getByTestId("la-bai-up").click();
-  await expect(page.getByTestId("la-bai-noi-dung")).toBeVisible();
-  await expect(page.getByTestId("la-bai-thang")).toHaveText("Lá đầu tiên của tháng này.");
+  await page.getByTestId("ba-la-so").click();
+  await expect(page.getByTestId("ba-la-doc-so")).toBeVisible();
+  await expect(page.getByTestId("ba-la-thang")).toContainText("Ngày đầu tiên bạn lật lá trong tháng này.");
   await expect.poll(async () => (await doc())!.dong!.l).toMatch(/^(viec|cau_hoi|gio)$/);
   // Hồ sơ khác trên cùng máy (trang mới — không có init script ghi đè hồ sơ) → nhật ký của người trước không hiện (băm khác), tạo nhật ký mới
   const mai = { ...HO_SO_MAU, ho_ten: "Trần Thị Mai", ngay: 3, thang: 3, nam: 1988 };
@@ -110,7 +110,7 @@ test("nhật ký trên máy: Hôm nay ghi ngày + số; lật lá ghi lá; hồ 
   await p2.getByRole("button", { name: "Xoá khỏi máy" }).click();
   await p2.getByRole("dialog").getByRole("button", { name: "Xoá", exact: true }).click();
   await expect(p2.getByTestId("ho-so-may")).toContainText("Tạo hồ sơ");
-  await expect.poll(() => p2.evaluate(() => ["hbt.nhat_ky.v1", "hbt.hom_nay", "hbt.la_bai.v1", "hbt.hen.v1", "hbt.huy_hieu_may.v1"].filter((k) => localStorage.getItem(k) !== null))).toEqual([]);
+  await expect.poll(() => p2.evaluate(() => ["hbt.nhat_ky.v1", "hbt.hom_nay", "hbt.la_bai.v1", "hbt.ba_la.v1", "hbt.hen.v1", "hbt.huy_hieu_may.v1"].filter((k) => localStorage.getItem(k) !== null))).toEqual([]);
 });
 
 test("tổng kết tháng trước: dưới 3 ngày không hiện; đủ → lịch + câu kể + lối '12 tháng tới' + đóng được; huy hiệu Đủ 9 nhịp máy", async ({ page }) => {
