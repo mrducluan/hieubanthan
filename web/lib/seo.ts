@@ -79,7 +79,7 @@ export function ldToChuc(ngonNgu: "vi" | "en" = "vi") {
     "@type": "Organization",
     "@id": `${siteUrl()}/#to-chuc`,
     name: en ? "Hieu Ban Than" : TEN_SITE,
-    ...(en ? { alternateName: TEN_SITE } : {}),
+    alternateName: en ? [TEN_SITE, "hieuban.com", "Hieuban"] : ["hieuban.com", "Hieuban", "Hieu Ban Than"],
     ...(vh.chuSoHuu ? { legalName: vh.chuSoHuu } : {}),
     url: siteUrl(),
     logo: { "@type": "ImageObject", url: urlDayDu("/thuong-hieu/avatar-512.png"), width: 512, height: 512 },
@@ -106,7 +106,8 @@ export function ldWebsite(ngonNgu: "vi" | "en" = "vi") {
     "@type": "WebSite",
     "@id": `${siteUrl()}/#website`,
     name: TEN_SITE,
-    alternateName: ["hieuban.com", "Hieu Ban Than"],
+    // SEO-N: người dùng gõ "hieuban" (không dấu, liền) → khai đủ biến thể để Google nối tên miền với thương hiệu.
+    alternateName: ["hieuban.com", "Hieuban", "Hieu Ban Than", "Hiểu Bản"],
     keywords: TU_KHOA_SITE.join(", "),
     url: siteUrl(),
     // QTE: site có hai bản ngôn ngữ; trang /en khai cả hai (bản Việt là chính).

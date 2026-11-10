@@ -57,7 +57,63 @@ tab Trang: tỉ lệ hiển thị + nhấp của trang dịch vụ so với tran
 
 Chữ CMS đã xuất bản ở "Trang website" vẫn thắng mặc định trong code. Không engine, không migration, không dependency.
 
-## 4. Đề xuất tiếp (chờ anh chọn)
+## 4. Đợt 2 (SEO-N2, anh duyệt "làm mục 1 → 6", 2026-11-10)
+
+### 4.1 Rà từ khoá
+
+Không có công cụ đo lượng tìm (Google gợi ý, Trends, Keyword Planner đều bị chặn mạng trong phiên). Em dựa vào: tiêu đề các trang
+đang xếp hạng cho từng cụm (tìm web 10/11), cách người dùng gõ trong kho câu hỏi hỏi đáp, và hiểu biết thị trường. **Cần đối chiếu lại bằng
+Search Console → Hiệu suất → Truy vấn sau 4 tuần** — số thật thắng mọi phỏng đoán.
+
+| Trang | Cụm chính người ta gõ | Cụm phụ | Tiêu đề chốt |
+|---|---|---|---|
+| `/tu-vi` | xem tử vi, lá số tử vi | lá số tử vi trọn đời, lập lá số tử vi miễn phí | Xem Tử vi online: lập lá số Tử vi trọn đời miễn phí |
+| `/bat-tu` | xem bát tự, tứ trụ | lá số bát tự, mệnh thiếu hành gì, ngũ hành | Xem Bát tự online: lá số Tứ trụ, ngũ hành thiếu gì |
+| `/than-so` | thần số học, tra cứu thần số học | số chủ đạo, thần số học theo ngày sinh | Tra cứu thần số học online: số chủ đạo theo ngày sinh |
+| `/kinh-dich` | gieo quẻ, gieo quẻ kinh dịch | xin quẻ, 64 quẻ | Gieo quẻ Kinh Dịch online miễn phí: xin quẻ hỏi việc |
+| `/phong-thuy` | xem hướng nhà hợp tuổi | phong thủy nhà ở, hướng nhà theo tuổi | Xem hướng nhà hợp tuổi: phong thuỷ nhà ở online |
+| `/nhan-tuong` | xem tướng mặt | nhân tướng học khuôn mặt | Xem tướng mặt online: nhân tướng học khuôn mặt |
+| `/tarot` | xem tarot, rút bài tarot | ý nghĩa lá bài tarot | Xem Tarot online miễn phí: rút bài, ý nghĩa 78 lá |
+| `/hop-doi` | xem hợp đôi, hợp tuổi vợ chồng | thần số học hợp đôi | Xem hợp đôi theo ngày sinh: thần số học hai người |
+| `/xem-ngay-tot` | xem ngày tốt, lịch vạn niên | giờ hoàng đạo, ngày hoàng đạo | Xem ngày tốt hôm nay: lịch vạn niên, giờ hoàng đạo |
+
+Mô tả meta 6 trang chính viết lại quanh đúng cụm trên (≤ 160 ký tự). Site viết "thuỷ"; người dùng gõ "thủy" nhiều hơn — Google coi hai
+kiểu là một, `TU_KHOA_SITE` đã có cả hai, không đổi chính tả site. "Bói" không đưa vào tiêu đề (trái tinh thần "tham khảo, không phán").
+
+### 4.2 Sáu mục
+
+1. **Trả lời nhanh dưới H1** — 8 trang dịch vụ có một câu hỏi + trả lời 54–65 chữ (`tra_loi_nhanh` trong `lib/so-trang.ts`) trong
+   `<details>` ngay dưới H1: chữ có trong HTML máy chủ cho Google / bot AI, gập lại để form nhập vẫn ở màn đầu. Mỗi câu kèm 1–3 link
+   xuống cụm kiến thức.
+2. **`/tu-vi` → "Tử vi năm {năm} theo tuổi"** — link trong khối Trả lời nhanh, năm = năm trang theo tuổi đang index (`namTuoiSeo`, tự
+   sang 2028 khi menu sang năm). Kèm "12 tháng tới theo lá số của bạn" (`/thoi-gian-toi`).
+3. **Liên kết về đúng trang dịch vụ bằng đúng từ khoá** — đoạn cuối CMS tự thêm vào bài (chuẩn hoá NotFair) giờ dùng "lập lá số Tử vi
+   trọn đời của bạn", "tra cứu thần số học của bạn", "xem Bát tự (Tứ trụ) của bạn", "gieo quẻ Kinh Dịch…"; nút CTA chân bài blog đổi
+   tương ứng. Liên kết từ site NGOÀI (fanpage, diễn đàn, đối tác) vẫn là việc của anh — xem `VIEC-CUA-ANH.md` 4ak.
+4. **Thương hiệu "hieuban"** — Organization + WebSite thêm `alternateName` "Hieuban", "Hiểu Bản"; chân trang ghi "Hiểu Bản Thân
+   (hieuban.com)". `sameAs` mạng xã hội vẫn chờ anh đặt env `MXH_*` (không bịa link).
+5. **Ảnh lá số mẫu** — `<img>` `/anh/la-so-tu-vi-mau.webp` (1024×1127, 94 KB, chụp từ lá số minh hoạ "Minh An" của
+   `/tu-vi/la-so-mau/tu-phu-dong-cung`, không phải người thật) + alt "Lá số Tử vi mẫu 12 cung…", chú thích, `ImageObject`, mục
+   "Lá số Tử vi trông thế nào?" cuối `/tu-vi`. Đổi giao diện lá số thì chụp lại.
+6. **Cache HTML (Q-I3) — CHƯA làm, cần anh chọn** (xem 4.3).
+
+### 4.3 Vì sao mục 6 chưa làm
+
+Trang nhanh hơn chỉ đến từ việc **dựng sẵn HTML và cache ở CDN**. Nhưng toàn site đang dùng CSP-2: mỗi lượt xem một mã `nonce` mới để
+chặn script lạ (XSS). Trang dựng sẵn thì không có nonce riêng từng lượt, nên muốn cache phải chọn một trong:
+
+| Cách | Lợi | Đánh đổi |
+|---|---|---|
+| A. Trang kiến thức dùng CSP `'unsafe-inline'` cho script (bỏ nonce) | Phản hồi ~0,5 s → < 0,2 s cho ~600 trang | Lớp chặn XSS yếu đi trên 600 trang (đảo một phần CSP-2) |
+| B. Tách root layout cho trang kiến thức + CSP theo hash | Giữ CSP chặt | Phải dời ~600 trang vào nhóm route mới; script nội dòng của Next đổi theo trang nên hash khó giữ — việc lớn, rủi ro vỡ đo lường GTM |
+| C. Giữ nguyên, đo trước | Không rủi ro | Google vẫn tải ~0,5–0,6 s/trang |
+
+Đo 10/11 (site thật, bot Googlebot, đã ấm): `/tu-vi` 0,51 s, trang sao ở cung 0,57–0,79 s, quẻ 0,64–0,98 s, trang ngày 0,60–0,80 s
+(robots.txt 0,17 s = phần mạng). Em đề nghị **C tới mốc anh hẹn 19–26/11** (xem Thống kê thu thập: nếu "Thời gian phản hồi trung bình"
+> 1.000 ms thì làm A cho riêng trang kiến thức; nếu < 600 ms thì không cần).
+
+## 5. Đề xuất cũ (đã làm ở mục 4)
+
 
 1. **Trang ý định "xem tử vi {năm}" / "tử vi trọn đời"**: `/nam/2027/tuoi-*` đã có; thêm một đoạn + link nổi bật từ `/tu-vi` sang "Tử vi năm 2027
    theo tuổi" (mùa Tết là đỉnh tìm kiếm của chữ "tử vi").

@@ -42,7 +42,7 @@ test("robots khai 2 sitemap; sitemap ngày đúng cửa sổ; /blog/trang/1 → 
 test("trang chủ + blog có tiêu đề chứa từ khoá; WebSite có keywords", async ({ request }) => {
   const html = await (await request.get("/")).text();
   expect(html).toContain("<title>Hiểu Bản Thân — Thần số học và huyền học online miễn phí</title>");
-  expect(html).toContain('"alternateName":["hieuban.com","Hieu Ban Than"]');
+  expect(html).toContain('"alternateName":["hieuban.com","Hieuban","Hieu Ban Than","Hiểu Bản"]');
   const blog = await (await request.get("/blog")).text();
   expect(blog).toMatch(/<title>Blog thần số học, Tử vi, phong thuỷ, Kinh Dịch/);
 });
@@ -55,7 +55,7 @@ test("SEO-N: trang dịch vụ có từ khoá + thương hiệu trong tiêu đ�
   expect(tieuDeChu).toContain("Hiểu Bản Thân");
   expect(tieuDeChu).not.toMatch(/Tử vi|Bát tự/);
   expect(chu).toMatch(/"@type":"WebApplication","@id":"[^"]*\/#ung-dung"/);
-  for (const [duong, tu] of [["/tu-vi", "Xem Tử vi"], ["/bat-tu", "Xem Bát tự"], ["/kinh-dich", "Gieo quẻ Kinh Dịch"], ["/phong-thuy", "Xem phong thuỷ"], ["/than-so", "Thần số học online"]] as const) {
+  for (const [duong, tu] of [["/tu-vi", "Xem Tử vi"], ["/bat-tu", "Xem Bát tự"], ["/kinh-dich", "Gieo quẻ Kinh Dịch"], ["/phong-thuy", "Xem hướng nhà hợp tuổi"], ["/than-so", "Tra cứu thần số học"]] as const) {
     const html = await (await request.get(duong)).text();
     const t = /<title>([^<]*)<\/title>/.exec(html)?.[1] ?? "";
     expect(t.startsWith(tu), `${duong}: ${t}`).toBe(true);
@@ -81,6 +81,20 @@ test("SEO-N: mọi trang dịch vụ / trang trụ mang thương hiệu trong ti
     const html = await (await request.get(duong)).text();
     expect(/<h1[^>]*>([\s\S]*?)<\/h1>/.exec(html)?.[1] ?? "", duong).toContain(tu);
   }
+});
+
+test("SEO-N: trang dịch vụ có 'Trả lời nhanh' dưới H1 (HTML máy chủ); /tu-vi có ảnh lá số mẫu + link Tử vi năm theo tuổi", async ({ request }) => {
+  for (const duong of ["/tu-vi", "/bat-tu", "/than-so", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/hop-doi"]) {
+    const html = await (await request.get(duong)).text();
+    const h1 = html.indexOf("<h1"), tl = html.indexOf('data-testid="tra-loi-nhanh-dau"');
+    expect(tl, duong).toBeGreaterThan(h1);
+    expect(h1, duong).toBeGreaterThan(0);
+  }
+  const tv = await (await request.get("/tu-vi")).text();
+  expect(tv).toMatch(/<img[^>]+src="\/anh\/la-so-tu-vi-mau\.webp"[^>]+alt="Lá số Tử vi mẫu/);
+  expect(tv).toMatch(/href="\/nam\/20\d\d#theo-tuoi"/);
+  expect(tv).not.toMatch(/href="[^"]*\{nam\}/);
+  expect((await request.get("/anh/la-so-tu-vi-mau.webp")).status()).toBe(200);
 });
 
 test("trang kiến thức: ảnh đại diện theo mảng, about có sameAs Wikipedia, Article đủ E-E-A-T", async ({ request }) => {

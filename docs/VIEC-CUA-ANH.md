@@ -10,7 +10,11 @@
 - [ ] **CMS → Trang website**: mở `/`, `/tu-vi`, `/bat-tu`, `/kinh-dich`… — nếu ô "Tiêu đề SEO" / H1 đã có chữ anh tự nhập thì chữ đó vẫn thắng mặc định mới; xoá trống (hoặc sửa theo bảng trong tài liệu) để dùng tiêu đề mới.
 - [ ] **Search Console → Kiểm tra URL** cho `https://hieuban.com/` và 7 trang dịch vụ (`/tu-vi`, `/bat-tu`, `/than-so`, `/kinh-dich`, `/phong-thuy`, `/nhan-tuong`, `/tarot`) → "Yêu cầu lập chỉ mục" sau khi deploy (để Google đọc tiêu đề mới sớm).
 - [ ] Sau 2–4 tuần: Hiệu suất → truy vấn chứa "tử vi" → tab Trang: `/tu-vi` phải nhận phần lớn hiển thị thay cho trang chủ. Gửi em file xuất nếu chưa đổi.
-- [ ] (Quyết định) Chọn trong 6 đề xuất mục 4 của tài liệu (trả lời nhanh trên trang dịch vụ, ảnh lá số mẫu, liên kết ngoài về đúng trang, `MXH_*`…).
+- [x] 6 đề xuất SEO-N — mục 1–5 đã làm (SEO-N2, 10/11).
+- [ ] (Quyết định, 19–26/11) **Q-I3 cache HTML**: xem Thống kê thu thập → thời gian phản hồi trung bình; > 1.000 ms thì chọn cách A ở `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 4.3 (bỏ nonce riêng trang kiến thức), < 600 ms thì giữ nguyên.
+- [ ] **Liên kết ngoài**: bài trên fanpage / diễn đàn / bài khách trỏ thẳng `https://hieuban.com/tu-vi` (chữ "xem tử vi online", "lá số tử vi"), `/bat-tu`, `/than-so` — không trỏ hết về trang chủ.
+- [ ] Đặt env `MXH_FACEBOOK`, `MXH_YOUTUBE`… (Vercel, dự án web) cho các kênh thật → Google nối thương hiệu "hieuban" với site, dễ hiện sitelinks.
+- [ ] Sau 4 tuần: Search Console → Hiệu suất → Truy vấn, gửi em file xuất để đối chiếu bảng từ khoá (mục 4.1) với số thật.
 
 ### 4aj. HTT-3 — Ý1–Ý7 + QC `/en` (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9) — deploy ENGINE trước web
 

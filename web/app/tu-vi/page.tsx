@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
+import { AnhLaSoMau } from "./AnhLaSoMau";
 import { TuVi } from "./TuVi";
 
 const DUONG = "/tu-vi";
@@ -11,5 +12,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Page() {
-  return <TrangCongCu duong={DUONG} mang="tu_vi"><TuVi /></TrangCongCu>;
+  return <TrangCongCu duong={DUONG} mang="tu_vi" sau={<AnhLaSoMau />}><TuVi /></TrangCongCu>;
 }
