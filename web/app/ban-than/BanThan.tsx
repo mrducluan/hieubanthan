@@ -14,6 +14,7 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import { ChiaSeTheHoSo } from "@/components/chia-se/ChiaSeTheHoSo";
+import { KhungTheBanDo } from "@/components/chia-se/NutTheBanDo";
 import { BayCachNhin } from "@/components/ban-than/BayCachNhin";
 import { DangDangDo } from "@/components/ban-than/DangDangDo";
 import { DieuDaXacNhan } from "@/components/ban-than/DieuDaXacNhan";
@@ -50,6 +51,7 @@ export function BanThan() {
   const hoSo = useHoSo();
   const router = useRouter();
   const [suaMo, setSuaMo] = useState(false);
+  const [matSau, setMatSau] = useState(false);   // thẻ hai mặt: mặt sau = thẻ "5 mảnh ghép"
   const { kq, loi, thuLai } = useBaiDoc(hoSo);
   const quyUoc = useQuyUocDD();
   const kyUc = useKyUc();
@@ -88,7 +90,7 @@ export function BanThan() {
         <p className="mt-2 max-w-2xl text-fg-muted">Nhịp của bạn hôm nay, tháng này và năm nay — mỗi lần quay lại có điều mới để đặt trọng tâm.</p>
         <div className="mt-6 grid gap-4 lg:grid-cols-2 lg:items-stretch">
           <TheDanhTinh kq={kq} tenHienThi={hoSo.ho_ten} className="h-full"
-            chan={<ChiaSeTheHoSo hoSo={hoSo} soDuongDoi={kq.cac_vi_tri[0]?.gia_tri} />} />
+            chan={<ChiaSeTheHoSo hoSo={hoSo} soDuongDoi={kq.cac_vi_tri[0]?.gia_tri} matSauMo={matSau} onMatSau={() => setMatSau(true)} />} />
           <div className="flex flex-col gap-3" data-testid="ban-than-loi-di">
             <Link href="/than-so" className="glass group flex items-center justify-between gap-3 rounded-2xl p-5 hover:border-gold/50" data-testid="mo-bai-doc">
               <span>
@@ -122,6 +124,8 @@ export function BanThan() {
             </div>
           </div>
         </div>
+        {/* Mặt sau của thẻ: "5 mảnh ghép làm nên tôi" — khung tạo thẻ trải hết bề ngang để thẻ không bị bó trong cột hẹp. */}
+        {matSau && <div className="mt-4" data-testid="khung-mat-sau"><KhungTheBanDo hoSo={hoSo} tu="ban_than" /></div>}
       </section>
 
       {/* BT-UI: bảy môn, mỗi môn một câu riêng + còn thiếu gì; rồi việc đang dang dở trên máy này. */}

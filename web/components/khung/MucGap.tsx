@@ -7,7 +7,8 @@ import { ChevronDown } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 
-export function MucGap({ id, ma, tieuDe, tomTat, phu, children, testId, className }: {
+export function MucGap({ id, ma, tieuDe, tomTat, phu, children, testId, className, moSan = false }: {
+  /** `moSan`: mở sẵn lúc vẽ lần đầu (vd "Tuần này" vào sáng thứ Hai). */ moSan?: boolean;
   id?: string; ma: string; tieuDe: React.ReactNode; tomTat?: React.ReactNode; phu?: React.ReactNode; children: React.ReactNode; testId?: string; className?: string;
 }) {
   const el = useRef<HTMLDetailsElement>(null);
@@ -30,7 +31,7 @@ export function MucGap({ id, ma, tieuDe, tomTat, phu, children, testId, classNam
     return () => { window.removeEventListener("hashchange", xet); document.removeEventListener("click", bam); };
   }, [id]);
   return (
-    <details ref={el} id={id} data-neo data-testid={testId} data-muc-gap={ma}
+    <details ref={el} id={id} open={moSan || undefined} data-neo data-testid={testId} data-muc-gap={ma}
       className={cn("group glass scroll-mt-24 rounded-2xl open:border-gold/40", className)}
       onToggle={(e) => { if (e.currentTarget.open && !daGhi.current) { daGhi.current = true; ghi("chart_interacted", { kind: "hom_nay_mo", muc: ma }); } }}>
       <summary className="vung-cham flex cursor-pointer list-none items-start justify-between gap-3 rounded-2xl p-4 outline-none focus-visible:ring-2 focus-visible:ring-gold sm:p-5 [&::-webkit-details-marker]:hidden">

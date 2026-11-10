@@ -144,14 +144,21 @@ Engine: một hàm RULES mới ghép ba lá từ dữ liệu đã có (`luangiai
 Đo: `daily_intent_set` (kỳ vọng tăng khi lên cao), `reading_completed{mo_dun=hom_nay}`, lượt mở từng mục gập
 `chart_interacted{kind=hom_nay_mo, muc}` để biết mục nào đáng đưa lên.
 
-## 5. Ý tưởng thêm (chưa xếp lịch, anh chọn nếu thích)
+## 5. Ý tưởng thêm — đã làm (đợt 2, 10/11/2026)
 
-1. **"Hôm nay của hai người"**: chọn một người thân đã lưu trên máy → một thẻ ghép ngày cá nhân của hai người + một việc nên
-   làm cùng nhau; gửi cho người đó. Lan truyền tự nhiên nhất vì có người nhận cụ thể. Cần rà riêng tư (tên người thứ hai
-   không lên thẻ, như thẻ "Điểm hai người").
-2. **Thẻ hồ sơ hai mặt**: mặt sau là "Bản đồ 5 mảng" (đã có mã + ảnh), người dùng chọn chia sẻ mặt nào.
-3. **Lối tắt màn hình chính** cho app đã cài: "Ba lá hôm nay" mở thẳng khối lá bài.
-4. **Tuần của tôi** (thứ Hai): ba ngày đáng để ý trong tuần theo ngày cá nhân + hoàng lịch theo tuổi — gửi qua mốc nhắc sẵn có.
+1. **"Hôm nay của hai người"** (mục gập ở Hôm nay): chọn một người thân đã lưu trên máy → ngày cá nhân của hai người, bốn kiểu
+   nhịp (cùng số · cùng hướng ra · cùng hướng vào · lệch nhịp), một việc nên làm cùng, câu tự soi. Không chấm điểm. Engine
+   chỉ nhận ngày + tháng sinh của người kia (năm chỉ khi nhập âm lịch), không tên, không lưu. "Gửi cho người ấy" dùng thẻ
+   ngày sẵn có của chính người gửi + lời nhắn hai con số (không làm loại thẻ mới — thẻ mang số của người thứ hai cần rà riêng).
+2. **Thẻ hồ sơ hai mặt** (Bản thân): nút "Mặt sau: thẻ 5 mảnh ghép làm nên tôi" ngay trên thẻ → mở khung tạo thẻ Bản đồ 5 mảng
+   (đã có từ CTA-1) dưới hai cột.
+3. **Lối tắt app** "Ba lá hôm nay" (`/hom-nay?tu=app#ba-la`) trong manifest.
+4. **"Tuần này của bạn"** (mục gập đầu "Đọc thêm" ở Hôm nay, mở sẵn vào thứ Hai): bảy ngày (số ngày cá nhân, ngày lịch ghi
+   đẹp, hợp / xung tuổi) + tối đa ba ngày đáng để ý còn lại trong tuần (thuận nhất · hợp tuổi · nên đi chậm · mở đầu · khép lại).
+   **Chưa làm**: gửi "Tuần của tôi" qua thông báo sáng thứ Hai — cần thêm một mốc vào bảng tuỳ chọn nhắc (migration mới), chờ
+   anh duyệt.
+5. **Lá Tarot trong tổng kết tháng**: lật lá Tarot thì nhật ký trên máy ghi mã + tên lá; tổng kết tháng kể "Lá Tarot bạn gặp
+   nhiều nhất: … (N lần)" khi có lá lặp lại, không thì kể tên tối đa ba lá. Mã lá chỉ nằm trên máy (máy chủ không giữ).
 
 ## 6. Thứ tự đề xuất
 

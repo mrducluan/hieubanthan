@@ -4,7 +4,7 @@
 // (ảnh /og đã có QR + hieuban.com — TCS-1). Đổi tên hiển thị trên thẻ vẫn ở /chia-se.
 import { useMemo, useState } from "react";
 import Link from "@/components/khung/Lien";
-import { Check, Copy, Download, QrCode, Send, Share2 } from "lucide-react";
+import { Check, Copy, Download, Layers, QrCode, Send, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
 import { hoTenList, tenGoi, type HoSo } from "@/lib/hoso";
@@ -16,7 +16,8 @@ import { useMaCuaToi } from "@/lib/sao";
 import { duongQr, maHoaQr, type MaQr } from "@/lib/qr";
 import { GOC_QR } from "@/lib/the-chia-se";
 
-export function ChiaSeTheHoSo({ hoSo, soDuongDoi }: { hoSo: HoSo; soDuongDoi?: number }) {
+/** `onMatSau`: mở "mặt sau" của thẻ — thẻ 5 mảnh ghép (Tử vi, Bát tự, Phong thuỷ… cùng một người), khung tạo thẻ nằm dưới hai cột. */
+export function ChiaSeTheHoSo({ hoSo, soDuongDoi, onMatSau, matSauMo = false }: { hoSo: HoSo; soDuongDoi?: number; onMatSau?: () => void; matSauMo?: boolean }) {
   const [da, setDa] = useState<{ ma: string } | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
@@ -65,6 +66,13 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi }: { hoSo: HoSo; soDuongDoi?: n
     }
   }
 
+  // Thẻ hai mặt: mặt này là bốn con số; mặt sau là "5 mảnh ghép" (mỗi môn một mảnh) — cùng một người, hai cách khoe.
+  const matSau = onMatSau && (
+    <button type="button" onClick={() => { ghi("chart_interacted", { kind: "the_mat_sau" }); onMatSau(); }} aria-expanded={matSauMo} data-testid="the-mat-sau"
+      className="vung-cham inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-full border border-moon/40 px-3 py-2 text-sm text-moon transition-colors hover:border-moon hover:text-fg">
+      <Layers className="size-4" aria-hidden /> {matSauMo ? "Thẻ 5 mảnh ghép đang mở bên dưới" : "Mặt sau: thẻ 5 mảnh ghép làm nên tôi"}
+    </button>
+  );
   if (!da || !link) {
     return (
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2" data-testid="chia-se-the-ho-so">
@@ -73,6 +81,7 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi }: { hoSo: HoSo; soDuongDoi?: n
           <Share2 aria-hidden /> {dang ? "Đang tạo…" : "Chia sẻ thẻ"}
         </Button>
         {loi && <p role="alert" className="w-full text-sm text-cinnabar">{loi}</p>}
+        {matSau}
       </div>
     );
   }
@@ -108,6 +117,7 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi }: { hoSo: HoSo; soDuongDoi?: n
         </div>
       </div>
       {chepTay && <ChepTay url={link} />}
+      {matSau}
       <p className="text-xs text-fg-faint">
         Ảnh tải về có sẵn mã QR, hợp đăng story. <Link href="/chia-se" className="text-gold hover:underline">Đổi tên hiển thị trên thẻ</Link>
       </p>

@@ -1,0 +1,77 @@
+{
+  "_nguon": "Nháp ban biên tập (BT-UI đợt 2, 2026-11-10): câu khung cho \"Tuần này của bạn\" và \"Hôm nay của hai người\". Mỗi câu chỉ gọi tên dữ kiện đã tính (ngày cá nhân, ngày hoàng đạo, quan hệ chi ngày với chi tuổi) — không thêm nghĩa mới, không dự báo, không chấm điểm.",
+  "source_id": "nhap_ai_2026",
+  "school_id": "da_mang",
+  "trang_thai": "nhap_ai",
+  "nguon": "Thần số học Pythagoras (ngày cá nhân) · lịch vạn niên dân gian Việt (ngày hoàng đạo, tuổi xung hợp)",
+  "tuan": {
+    "noi_bat": {
+      "thuan": {
+        "tieu_de": "{thu} {dm} — ngày thuận nhất tuần",
+        "cau": "Lịch ghi đây là ngày đẹp{hop}. Có việc đã chuẩn bị sẵn thì đặt vào ngày này."
+      },
+      "hop_tuoi": {
+        "tieu_de": "{thu} {dm} — ngày hợp tuổi bạn",
+        "cau": "Theo lịch cổ truyền, đây là {nghia}. Việc cần người khác cùng làm thì hẹn vào ngày này."
+      },
+      "cham": {
+        "tieu_de": "{thu} {dm} — ngày nên đi chậm",
+        "cau": "Theo lịch cổ truyền, ngày này xung với tuổi bạn. Việc lớn dời được thì dời sang ngày khác; việc thường ngày cứ làm như mọi hôm."
+      },
+      "mo_dau": {
+        "tieu_de": "{thu} {dm} — ngày mở đầu",
+        "cau": "Ngày cá nhân 1: hợp bắt đầu một việc nhỏ bạn đã nghĩ tới từ lâu."
+      },
+      "khep": {
+        "tieu_de": "{thu} {dm} — ngày khép lại",
+        "cau": "Ngày cá nhân 9: hợp dọn dẹp, trả lời cho xong những việc còn dở trước khi sang vòng mới."
+      }
+    },
+    "hop": {
+      "tam_hop": " và tam hợp với tuổi bạn",
+      "luc_hop": " và lục hợp với tuổi bạn"
+    },
+    "tom_tat": {
+      "co_dep": "Từ nay tới Chủ Nhật có {so} ngày lịch ghi đẹp{xung}.",
+      "khong_dep": "Từ nay tới Chủ Nhật lịch không ghi ngày đẹp nổi bật{xung} — tuần hợp làm việc quen tay.",
+      "xung": ", một ngày xung tuổi bạn",
+      "khong_xung": ""
+    },
+    "luu_y": "Nhịp tuần ghép từ ngày cá nhân và lịch cổ truyền — để tham khảo khi xếp việc, không phải dự báo."
+  },
+  "hai_nguoi": {
+    "nhom_ra": [
+      1,
+      3,
+      5,
+      8
+    ],
+    "kieu": {
+      "cung_so": {
+        "tieu_de": "Hôm nay hai bạn cùng một nhịp",
+        "cau": "Cả hai cùng ở ngày cá nhân {a}. Dễ hiểu ý nhau, nhưng cũng dễ cùng muốn một thứ một lúc.",
+        "viec_cung": "Chọn một việc cả hai đều đang muốn làm rồi làm chung, thay vì mỗi người một đầu.",
+        "cau_tu_soi": "Hôm nay hai bạn đang cùng muốn điều gì mà chưa ai nói ra?"
+      },
+      "cung_ra": {
+        "tieu_de": "Hôm nay cả hai đều muốn làm, muốn nói",
+        "cau": "Bạn ở ngày {a}, người ấy ở ngày {b} — cả hai đều đang hướng ra ngoài. Nhiều năng lượng, và cũng dễ ai cũng muốn nói trước.",
+        "viec_cung": "Hẹn trước: mỗi người nói xong ý của mình rồi mới tới người kia. Việc chung thì chia rõ ai làm phần nào.",
+        "cau_tu_soi": "Trong chuyện hôm nay, bạn đã nghe hết ý người ấy chưa?"
+      },
+      "cung_vao": {
+        "tieu_de": "Hôm nay cả hai đều cần chậm lại",
+        "cau": "Bạn ở ngày {a}, người ấy ở ngày {b} — cả hai đều đang hướng vào trong. Hợp ở cạnh nhau mà không cần nói nhiều.",
+        "viec_cung": "Một bữa cơm nhà hoặc một việc nhỏ làm cùng, không bàn chuyện lớn. Chuyện cần quyết thì để hôm khác.",
+        "cau_tu_soi": "Hôm nay điều gì chỉ cần ngồi cạnh nhau là đủ?"
+      },
+      "lech": {
+        "tieu_de": "Hôm nay hai bạn lệch nhịp một chút",
+        "cau": "Bạn ở ngày {a}, người ấy ở ngày {b} — một người muốn làm, muốn nói; một người cần yên. Lệch nhịp là chuyện thường, không phải ai sai.",
+        "viec_cung": "Người đang nhiều năng lượng hỏi trước một câu \"hôm nay bạn cần gì?\". Người cần yên nói rõ mình cần bao lâu.",
+        "cau_tu_soi": "Hôm nay bạn là người muốn nói hay người cần yên?"
+      }
+    },
+    "luu_y": "Ghép từ ngày cá nhân của hai người để tự soi — không xếp hạng hai người, không dự báo."
+  }
+}

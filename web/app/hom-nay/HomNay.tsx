@@ -20,6 +20,8 @@ import { ChuoiNgay } from "@/components/khung/ChuoiNgay";
 import { LaBaiDauNgay } from "@/components/khung/LaBaiDauNgay";
 import { BaLaNgay } from "@/components/khung/BaLaNgay";
 import { MucGap } from "@/components/khung/MucGap";
+import { TuanCuaToi } from "@/components/khung/TuanCuaToi";
+import { HaiNguoiHomNay } from "@/components/khung/HaiNguoiHomNay";
 import { gioSapToi, phutCuaNgay, type BaLa } from "@/lib/ba-la";
 import { HenChinhMinh } from "@/components/khung/HenChinhMinh";
 import type { TrangThaiChuoi } from "@/lib/chuoi-ngay";
@@ -454,7 +456,11 @@ export function HomNay() {
               <h2 id="doc-them" className="text-xl">Đọc thêm về hôm nay</h2>
               <p className="mt-1 text-sm text-fg-muted">Mỗi môn nhìn ngày này một cách. Bấm mục bạn quan tâm để mở.</p>
             </div>
-            <div className="grid gap-3 lg:grid-cols-2 lg:items-start">
+            {/* BT-UI đợt 2: tuần này (mở sẵn vào thứ Hai) trải hết bề ngang; các mục còn lại xếp HAI CỘT độc lập
+                (columns — mở một mục dài không để khoảng trống ở cột bên cạnh). */}
+            <TuanCuaToi hoSo={hoSo} ngay={the.ngay_xem} />
+            <div className="gap-3 space-y-3 lg:columns-2 [&>*]:break-inside-avoid">
+            <HaiNguoiHomNay hoSo={hoSo} ngay={the.ngay_xem} />
             {the.nhip_bat_tu && (
               <MucGap ma="bat_tu" testId="nhip-bat-tu" tieuDe={<>Nhịp Bát tự: ngày {the.nhip_bat_tu.thap_than}</>} tomTat={the.nhip_bat_tu.y_nghia}
                 phu={<>nhật chủ {the.nhip_bat_tu.nhat_chu} · ngày {the.nhip_bat_tu.can_chi_ngay}</>}>
