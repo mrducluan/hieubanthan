@@ -94,7 +94,7 @@ function rapStream(html) {
 /** HTML máy chủ → bản chuẩn hoá (giữ chữ, thẻ, thuộc tính; bỏ thứ đổi theo lượt / bản build). */
 export function chuanHoa(html) {
   return rapStream(html)
-    .replace(/<script\b(?![^>]*application\/ld\+json)[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<script\b(?![^>]*application\/ld\+json)[^>]*>[\s\S]*?<\/script[^>]*>/gi, "")
     .replace(/\snonce="[^"]*"/g, "")
     .replace(/\/_next\/static\/[^"'\s)]+/g, "/_next/static/*")
     .replace(/([?&])dpl=[^"&'\s]+/g, "$1")
