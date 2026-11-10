@@ -14,7 +14,7 @@ import { TimTuDien } from "./TimTuDien";
 export const revalidate = 21600;
 
 const META: Metadata = {
-  title: { absolute: "Từ điển thuật ngữ Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Thần số" },
+  title: "Từ điển thuật ngữ Tử vi, Bát tự, Kinh Dịch, Phong thuỷ",
   description: "Hơn 200 thuật ngữ huyền học giải nghĩa bằng ngôn ngữ đời thường: cung Mệnh, Hoá Kỵ, nhật chủ, dụng thần, hào động, quẻ biến, sơn tinh, hướng tinh, số đường đời…",
   alternates: { canonical: "/tu-dien", types: { "text/markdown": "/tu-dien.md" } },
 };

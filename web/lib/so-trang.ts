@@ -36,6 +36,9 @@ export type MacDinhTrang = {
   chu?: BangChu;
   /** ND-7 đợt 2 "Hình trên trang": chỗ đặt hình thay được bằng ảnh thư viện CMS. */
   hinh?: BangHinh;
+  /** SEO-N (GEO): một câu hỏi + câu trả lời 40–60 chữ ngay dưới H1 trang công cụ (trong <details>, HTML máy chủ).
+   *  `{nam}` trong link = năm của trang theo tuổi đang index (`namTuoiSeo`). */
+  tra_loi_nhanh?: { hoi: string; dap: string; lien_ket?: { href: string; ten: string }[] };
 };
 export type MucSoTrang = { duong: string; nhom: NhomTrang; ten: string; o: readonly OTrang[]; mac_dinh: MacDinhTrang };
 
@@ -69,9 +72,9 @@ const tuNd = (nd: NoiDungCongCu, tieu_de_seo: string, chu: BangChu): MucSoTrang 
 
 export const SO_TRANG: readonly MucSoTrang[] = [
   // ---------------- A · trang công cụ (hằng ND trong app/<mảng>/page.tsx)
-  { duong: "/than-so", nhom: "cong_cu", ten: "Thần số học", o: O_CONG_CU, mac_dinh: { chu: CHU_THAN_SO,
-    tieu_de_seo: "Thần số học Pythagoras: tính số chủ đạo theo họ tên và ngày sinh",
-    mo_ta_seo: "Thần số học Pythagoras theo họ tên và ngày sinh: 4 con số cốt lõi có cách tính từng bước, dải đời, năm và tháng cá nhân, biểu đồ ngày sinh, hỏi đáp có nguồn.",
+  { duong: "/than-so", nhom: "cong_cu", ten: "Thần số học", o: O_CONG_CU, mac_dinh: { tra_loi_nhanh: {"hoi": "Tra cứu thần số học ở đây được gì?", "dap": "Nhập họ tên và ngày sinh, bạn có số chủ đạo (đường đời), số sứ mệnh, linh hồn, nhân cách, biểu đồ ngày sinh và năm cá nhân, mỗi số kèm cách tính từng bước để tự kiểm. Có hai cách cộng đường đời và hai trường phái Pitago, Chaldea. Miễn phí, không cần tài khoản.", "lien_ket": [{"href": "/than-so/y-nghia-so", "ten": "Ý nghĩa các con số"}, {"href": "/than-so/nam-ca-nhan", "ten": "Năm cá nhân 1–9"}]}, chu: CHU_THAN_SO,
+    tieu_de_seo: "Tra cứu thần số học online: số chủ đạo theo ngày sinh",
+    mo_ta_seo: "Tra cứu thần số học miễn phí theo họ tên và ngày sinh: số chủ đạo, sứ mệnh, linh hồn, nhân cách có cách tính từng bước, năm cá nhân, biểu đồ ngày sinh.",
     doan: [
       "Nhập họ tên khai sinh và ngày sinh (dương lịch, hoặc âm lịch để hệ thống đổi giúp). Máy tính ra số đường đời, số sứ mệnh, số linh hồn, số nhân cách — mỗi con số hiện rõ từng bước cộng rút gọn, giữ số cái 11, 22, 33.",
       "Mỗi con số có ba phần: diễn giải từ kho tri thức có ghi nguồn (kèm mặt tối, không chỉ lời hay), phần kiểm chứng để bạn tích những nét đúng với mình, và cách tính từng bước để tự kiểm lại. Ngoài bốn số cốt lõi còn có dải đời (đỉnh cao, thử thách), năm và tháng cá nhân, biểu đồ ngày sinh và mũi tên, nợ nghiệp.",
@@ -86,7 +89,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     lien_ket: [{ href: "/than-so/y-nghia-so", ten: "Ý nghĩa 12 con số" }, { href: "/than-so/nghe-nghiep", ten: "Số chủ đạo hợp nghề gì" }, { href: "/than-so/nam-ca-nhan", ten: "Năm cá nhân 1–9" }, { href: "/than-so/no-nghiep", ten: "Nợ nghiệp" }, { href: "/than-so/so-kep", ten: "Số kép Chaldea" }, { href: "/hop-doi", ten: "Hợp đôi" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
   } },
   { duong: "/hom-nay", nhom: "cong_cu", ten: "Hôm nay của bạn", o: O_CONG_CU, mac_dinh: { chu: CHU_HOM_NAY,
-    tieu_de_seo: "Hôm nay của bạn: ngày cá nhân, âm lịch và câu hỏi tự soi",
+    tieu_de_seo: "Hôm nay của bạn: ngày cá nhân, âm lịch, câu tự soi",
     mo_ta_seo: "Mỗi ngày một thẻ theo thần số học: ngày, tháng, năm cá nhân của riêng bạn, ngày âm lịch và can chi hôm nay, một câu hỏi để tự soi.",
     doan: [
       "Ngày cá nhân tính từ ngày và tháng sinh của bạn cộng với ngày đang xem, rút gọn về 1–9. Mỗi con số gợi một chủ đề cho ngày: bắt đầu, lắng nghe, gặp gỡ, sắp xếp, thay đổi, chăm sóc, suy ngẫm, quyết định, khép lại.",
@@ -100,9 +103,9 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     ],
     lien_ket: [{ href: "/ban-than", ten: "Bản thân" }, { href: "/than-so/nam-ca-nhan", ten: "Năm cá nhân 1–9" }, { href: "/than-so", ten: "Thần số học" }, { href: "/hop-doi", ten: "Hợp đôi" }],
   } },
-  { duong: "/hop-doi", nhom: "cong_cu", ten: "Hợp đôi", o: O_CONG_CU, mac_dinh: { chu: CHU_HOP_DOI,
-    tieu_de_seo: "Hợp đôi thần số học: hai người hoà và va ở đâu",
-    mo_ta_seo: "So hợp đôi theo thần số học cho người yêu, bạn bè, đồng nghiệp, sếp, người thân: con số hai người hoà ở đâu, va ở đâu, việc nên cùng làm. Không chấm điểm hợp hay khắc.",
+  { duong: "/hop-doi", nhom: "cong_cu", ten: "Hợp đôi", o: O_CONG_CU, mac_dinh: { tra_loi_nhanh: {"hoi": "Xem hợp đôi theo ngày sinh ở đây thế nào?", "dap": "Chọn người ấy là người yêu, bạn bè, đồng nghiệp, sếp hay người thân, rồi nhập ngày sinh. Thần số so số chủ đạo và các cặp số theo tên, nói chỗ hai người dễ hoà, chỗ dễ va và việc nên cùng làm, không chấm điểm hợp hay khắc. Muốn điểm tham khảo theo Tử vi thì dùng mục Xem lá số 2 người.", "lien_ket": [{"href": "/tu-vi#hop-tham", "ten": "Xem lá số 2 người (Tử vi)"}, {"href": "/hop-doi/cap-so", "ten": "Số chủ đạo nào hợp nhau"}]}, chu: CHU_HOP_DOI,
+    tieu_de_seo: "Xem hợp đôi theo ngày sinh: thần số học hai người",
+    mo_ta_seo: "Xem hợp đôi theo ngày sinh bằng thần số học cho người yêu, vợ chồng, bạn bè, đồng nghiệp: hai người hoà ở đâu, va ở đâu, việc nên cùng làm. Miễn phí.",
     doan: [
       "Chọn người ấy là ai với bạn — người yêu, bạn bè, đồng nghiệp, sếp hay người thân — rồi nhập ngày sinh (tên không bắt buộc). Hệ thống so cặp số đường đời và các cặp số theo tên, đọc theo đúng loại quan hệ đó, kèm nhịp năm cá nhân của hai người.",
       "Thần số không chấm điểm “hợp” hay “khắc”: hai con số nào cũng có chỗ dễ hoà và chỗ dễ va. Bạn có thể gửi link mời để người ấy tự nhập ngày sinh của họ — link chỉ chứa tên hiển thị và con số, không chứa ngày sinh.",
@@ -114,9 +117,9 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     ],
     lien_ket: [{ href: "/than-so", ten: "Thần số học của bạn" }, { href: "/hop-doi/cap-so", ten: "Số chủ đạo nào hợp nhau" }, { href: "/than-so/tinh-yeu", ten: "Số chủ đạo trong tình yêu" }, { href: "/than-so/y-nghia-so", ten: "Ý nghĩa 12 con số" }],
   } },
-  { duong: "/tu-vi", nhom: "cong_cu", ten: "Tử vi", o: O_CONG_CU, mac_dinh: { chu: CHU_TU_VI,
-    tieu_de_seo: "Lập lá số Tử vi online: 12 cung, đại hạn, lưu niên, lưu nguyệt",
-    mo_ta_seo: "Lập lá số Tử vi 12 cung theo giờ, ngày, nơi sinh (âm lịch Việt Nam, múi giờ lịch sử). Đại hạn, lưu niên, tiểu hạn, lưu nguyệt theo phái, hỏi đáp theo cung.",
+  { duong: "/tu-vi", nhom: "cong_cu", ten: "Tử vi", o: O_CONG_CU, mac_dinh: { tra_loi_nhanh: {"hoi": "Xem Tử vi online ở đây được gì?", "dap": "Nhập ngày giờ sinh, giới tính và nơi sinh, bạn có ngay lá số Tử vi 12 cung tính theo âm lịch Việt Nam, kèm bài đọc trọn đời theo từng mảng: tính cách, công việc, tiền bạc, tình cảm, sức khoẻ, các giai đoạn 10 năm, năm nay và 3 tháng tới. Lá số và chương đầu miễn phí, không cần tài khoản.", "lien_ket": [{"href": "/nam/{nam}#theo-tuoi", "ten": "Tử vi năm {nam} theo tuổi"}, {"href": "/thoi-gian-toi", "ten": "12 tháng tới theo lá số của bạn"}, {"href": "/tu-vi/la-so-mau", "ten": "Cách đọc lá số Tử vi"}]}, chu: CHU_TU_VI,
+    tieu_de_seo: "Xem Tử vi online: lập lá số Tử vi trọn đời miễn phí",
+    mo_ta_seo: "Lập lá số Tử vi trọn đời miễn phí theo giờ, ngày, nơi sinh (âm lịch Việt Nam): 12 cung, đại hạn 10 năm, năm nay, 3 tháng tới, bài đọc bằng lời thường.",
     doan: [
       "Bạn nhập ngày giờ sinh, giới tính và nơi sinh (63 tỉnh thành hoặc nước ngoài). Lá số 12 cung hiện ngay, tính theo âm lịch Việt Nam, có xử lý giờ lịch sử trước năm 1975; sinh ở nước ngoài thì lập theo giờ nơi sinh. Chạm vào cung nào cũng thấy các sao trong cung, độ sáng của sao và lối đọc kỹ từng sao.",
       "Dưới lá số là bài đọc từng mảng đời bằng lời thường: con người bạn, các giai đoạn cuộc đời, công việc, tiền bạc, tình yêu, gia đình, sức khoẻ, bạn bè, nhà cửa, mảng nào kéo mảng nào, năm nay và 3 tháng tới, mười năm tới, lời khuyên. Chương đầu đọc ngay; các chương sau có thể cần Sao. Mỗi mảng có mức Thuận lợi, Cân bằng hoặc Cần lưu ý, kèm việc nên làm. Thuật ngữ gom ở mục “Vì sao nói vậy” cho ai muốn đối chiếu sách.",
@@ -134,9 +137,9 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     ],
     lien_ket: [{ href: "/tu-vi/chinh-tinh", ten: "14 chính tinh" }, { href: "/tu-vi/cung", ten: "12 cung" }, { href: "/tu-vi/la-so-mau", ten: "Lá số mẫu đọc từng bước" }],
   } },
-  { duong: "/bat-tu", nhom: "cong_cu", ten: "Bát tự", o: O_CONG_CU, mac_dinh: { chu: CHU_BAT_TU,
-    tieu_de_seo: "Bát tự Tứ trụ: lập lá số theo giờ sinh, ngũ hành, dụng thần",
-    mo_ta_seo: "Bát tự tứ trụ theo tiết khí: thiên can, địa chi, thập thần, ngũ hành chấm điểm công bố, cách cục Tử Bình Chân Thuyên, dụng thần trình bày hai cách, đại vận 10 năm.",
+  { duong: "/bat-tu", nhom: "cong_cu", ten: "Bát tự", o: O_CONG_CU, mac_dinh: { tra_loi_nhanh: {"hoi": "Xem Bát tự (Tứ trụ) online ở đây được gì?", "dap": "Từ giờ, ngày, tháng, năm sinh, hệ thống lập bốn trụ theo tiết khí, chấm sức năm hành Kim, Mộc, Thuỷ, Hoả, Thổ để thấy hành nào nhiều, hành nào thiếu, nêu dụng thần theo hai cách, đại vận 10 năm, rồi đọc từng mảng đời bằng lời thường. Lá số và chương đầu miễn phí.", "lien_ket": [{"href": "/bat-tu/menh-theo-nam", "ten": "Sinh năm nào mệnh gì"}, {"href": "/bat-tu/thap-than", "ten": "10 thập thần là gì"}]}, chu: CHU_BAT_TU,
+    tieu_de_seo: "Xem Bát tự online: lá số Tứ trụ, ngũ hành thiếu gì",
+    mo_ta_seo: "Xem Bát tự (Tứ trụ) miễn phí theo giờ sinh: mệnh thiếu hành gì, ngũ hành chấm điểm công khai, thập thần, dụng thần hai cách, đại vận 10 năm, bài đọc lời thường.",
     doan: [
       "Bạn từng được bảo mình thiếu Thuỷ nên đặt cái này, đeo cái kia? Trước khi bù, cần biết thật sự mình thiếu gì. Trang lập bốn trụ từ ngày giờ sinh, chấm năm hành theo thang điểm ghi rõ, rồi cho bạn xem hành nào dư, hành nào hụt và sức của chính bạn đang mạnh hay yếu. Thiếu một hành chưa hẳn là phải bù đúng hành đó.",
       "Hay bị nhầm nhất: “mệnh” theo năm sinh (như Hải Trung Kim, Lư Trung Hoả) khác với hành của bạn trong Bát tự. Bát tự lấy hành từ can của ngày sinh, nên hai người cùng tuổi vẫn có thể mang hai hành khác nhau. Bảng chi tiết vẫn ghi mệnh theo năm để bạn đối chiếu với điều đã nghe.",
@@ -154,9 +157,9 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     ],
     lien_ket: [{ href: "/bat-tu/thap-than", ten: "10 thập thần" }, { href: "/bat-tu/nhat-chu", ten: "10 nhật chủ" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
   } },
-  { duong: "/kinh-dich", nhom: "cong_cu", ten: "Kinh Dịch", o: O_CONG_CU, mac_dinh: { chu: CHU_KINH_DICH,
-    tieu_de_seo: "Gieo quẻ Kinh Dịch online: 64 quẻ, 384 hào, lời quẻ có nguồn",
-    mo_ta_seo: "Gieo quẻ Kinh Dịch cho một câu hỏi cụ thể: máy gieo, Mai Hoa theo giờ hoặc tự gieo đồng xu. Đọc theo Nghĩa Lý, Lục Hào, Mai Hoa, có trích Chu Dịch và lời giải thích dễ hiểu.",
+  { duong: "/kinh-dich", nhom: "cong_cu", ten: "Kinh Dịch", o: O_CONG_CU, mac_dinh: { tra_loi_nhanh: {"hoi": "Gieo quẻ Kinh Dịch online ở đây thế nào?", "dap": "Gõ điều bạn đang phân vân rồi gieo ba đồng xu sáu lần. Hệ thống lập quẻ chủ, hào động và quẻ biến trong 64 quẻ, 384 hào, rồi trả lời đúng việc bạn hỏi bằng lời thường, kèm nguyên văn lời quẻ. Quẻ là gợi ý để cân nhắc, không quyết thay bạn.", "lien_ket": [{"href": "/kinh-dich/que", "ten": "Ý nghĩa 64 quẻ Kinh Dịch"}]}, chu: CHU_KINH_DICH,
+    tieu_de_seo: "Gieo quẻ Kinh Dịch online miễn phí: xin quẻ hỏi việc",
+    mo_ta_seo: "Gieo quẻ Kinh Dịch online miễn phí, xin quẻ cho một việc cụ thể: gieo đồng xu hoặc Mai Hoa theo giờ, 64 quẻ, 384 hào, trả lời đúng việc bạn hỏi.",
     doan: [
       "Đang phân vân một việc — nhận lời mời, dọn nhà, mở quán, nói chuyện lại với một người? Gieo một quẻ, nhận câu trả lời ngắn bằng lời thường: việc đang thuận hay cần đổi cách, và nên làm gì trong tuần này. Quẻ do máy gieo ngẫu nhiên, theo giờ, theo số hay phương vị (Mai Hoa), hoặc bạn tự gieo ba đồng xu — không bước nào tự chọn quẻ thay bạn.",
       "Lời đọc gồm quẻ chủ, hào động, quẻ biến; trích nguyên văn Chu Dịch (quái từ, hào từ, Thoán truyện) kèm dịch nghĩa và lời giải thích dễ hiểu. Mỗi lời đọc có mặt tối và câu hỏi tự soi.",
@@ -169,9 +172,9 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     ],
     lien_ket: [{ href: "/kinh-dich/que", ten: "64 quẻ Kinh Dịch" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
   } },
-  { duong: "/phong-thuy", nhom: "cong_cu", ten: "Phong thuỷ", o: O_CONG_CU, mac_dinh: { chu: CHU_PHONG_THUY,
-    tieu_de_seo: "Phong thuỷ Bát trạch: mệnh quái, hướng nhà hợp tuổi, bố cục nhà",
-    mo_ta_seo: "Phong thuỷ Bát trạch: mệnh quái theo năm sinh và giới tính, tám hướng du niên, cửa – chủ – bếp, Huyền Không phi tinh, đo hướng bằng la bàn điện thoại, khảo sát bố cục nhà.",
+  { duong: "/phong-thuy", nhom: "cong_cu", ten: "Phong thuỷ", o: O_CONG_CU, mac_dinh: { tra_loi_nhanh: {"hoi": "Xem hướng nhà hợp tuổi ở đây thế nào?", "dap": "Nhập năm sinh và giới tính để biết cung phi, bốn hướng tốt và bốn hướng nên tránh theo Bát trạch. Đo hướng cửa bằng la bàn điện thoại hoặc trên bản đồ, rồi khảo sát từng phòng để biết chỗ hợp, chỗ nên điều chỉnh, kèm việc làm được ngay không tốn tiền. Dùng được cho nhà phố và chung cư.", "lien_ket": [{"href": "/phong-thuy/huong-hop-tuoi", "ten": "Bảng tuổi nào hợp hướng nào"}, {"href": "/xem-tuoi-lam-nha", "ten": "Xem tuổi làm nhà"}]}, chu: CHU_PHONG_THUY,
+    tieu_de_seo: "Xem hướng nhà hợp tuổi: phong thuỷ nhà ở online",
+    mo_ta_seo: "Xem hướng nhà hợp tuổi theo năm sinh và giới tính (Bát trạch): 4 hướng tốt, 4 hướng xấu, đo hướng cửa bằng la bàn điện thoại, phong thuỷ từng phòng.",
     doan: [
       "Nhà bạn đang ở — hay căn định mua — có hợp bạn không, và nếu chỉ kê lại một món đồ thì kê gì? Nhập năm sinh, đo hướng cửa bằng điện thoại, trang đọc cho bạn bằng lời thường: bạn hợp phía nào, từng phòng nên đặt gì, tháng nào nên sửa. Phần sách vở (du niên, phi tinh) gập lại cho ai muốn mở.",
       "Bạn có thể đo hướng nhà bằng la bàn điện thoại hoặc nhập độ, xem bàn Huyền Không phi tinh theo vận, và khai bố cục nhà (phòng nào ở phương nào, 18 dấu hiệu quan sát được) để nhận nhận xét gắn với từng mục kho tri thức.",
@@ -185,8 +188,8 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     lien_ket: [{ href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào (1960–2005)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ phong thuỷ" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
   } },
   // NT-1: Nhân tướng học — tự quan sát gương mặt trong gương, không cần ảnh.
-  { duong: "/nhan-tuong", nhom: "cong_cu", ten: "Nhân tướng học", o: O_CONG_CU, mac_dinh: { chu: CHU_NHAN_TUONG,
-    tieu_de_seo: "Xem tướng mặt online: tự soi gương theo Tam đình, Ngũ quan, 12 cung",
+  { duong: "/nhan-tuong", nhom: "cong_cu", ten: "Nhân tướng học", o: O_CONG_CU, mac_dinh: { tra_loi_nhanh: {"hoi": "Xem tướng mặt online ở đây thế nào?", "dap": "Bạn tự soi gương theo 6 bước, hoặc chọn ảnh để máy đặt điểm mốc ngay trên điện thoại (ảnh không gửi đi), rồi trả lời vài câu về trán, mắt, mũi, miệng, cằm. Bài đọc theo Tam đình, Ngũ quan và 12 cung tướng mặt của sách xưa, bằng lời thường. Chỉ xem tướng chính mình.", "lien_ket": [{"href": "/nhan-tuong/bo-vi", "ten": "Các bộ vị trên gương mặt"}]}, chu: CHU_NHAN_TUONG,
+    tieu_de_seo: "Xem tướng mặt online: nhân tướng học khuôn mặt",
     mo_ta_seo: "Nhân tướng học tự quan sát: trả lời 31 câu về trán, mày, mắt, mũi, miệng, cằm trong gương — bài đọc 8 chương theo Ma Y, Băng Giám, Nội Kinh: tính cách, công việc, sức khoẻ, tuổi lưu niên. Không cần gửi ảnh.",
     doan: [
       "Gương mặt kể gì về bạn? Đứng trước gương, trả lời 31 câu ngắn theo sáu bước (tổng thể, trán và mày, mắt, mũi và gò má, miệng cằm tai, giọng và dáng) — trang ghép điều bạn thấy với cách đọc của sách tướng xưa thành bài đọc tám chương: dáng mặt theo năm hành, tính cách, công việc và tiền bạc, tình cảm, sức khoẻ, năm nay nhìn vào đâu, tướng và lá số, việc nên làm.",
@@ -202,8 +205,8 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     lien_ket: [{ href: "/nhan-tuong/bo-vi", ten: "Bộ vị gương mặt" }, { href: "/bat-tu", ten: "Bát tự (hành cần bù)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
   } },
   // TR-1: Tarot — tự xáo, rút, lật; bốn trường phái có sách; không phán.
-  { duong: "/tarot", nhom: "cong_cu", ten: "Tarot", o: O_CONG_CU, mac_dinh: { chu: CHU_TAROT,
-    tieu_de_seo: "Xem Tarot online: tự rút bài, ý nghĩa 78 lá theo 4 trường phái",
+  { duong: "/tarot", nhom: "cong_cu", ten: "Tarot", o: O_CONG_CU, mac_dinh: { tra_loi_nhanh: {"hoi": "Xem Tarot online ở đây thế nào?", "dap": "Gõ câu hỏi, chọn trải bài (một lá, ba lá, Hai lựa chọn, Khi nào…), xáo rồi tự rút từ 78 lá. Bài đọc trả lời đúng câu bạn hỏi, kể các lá theo thứ tự, nói lá xuôi hay ngược và việc nên làm trong 72 giờ. Tarot là tấm gương để suy nghĩ, không phải lời dự báo.", "lien_ket": [{"href": "/tarot/la-bai", "ten": "Ý nghĩa 78 lá bài Tarot"}]}, chu: CHU_TAROT,
+    tieu_de_seo: "Xem Tarot online miễn phí: rút bài, ý nghĩa 78 lá",
     mo_ta_seo: "Trải bài Tarot online: nhấn giữ xáo bài, tự rút từ quạt 78 lá, lật từng lá. Bài đọc ghép Waite, Golden Dawn (Thoth), Marseille, B.O.T.A.: từng vị trí, phẩm giá nguyên tố, nhịp thời gian gợi ý, việc nên làm. Ý nghĩa 78 lá xuôi và ngược.",
     doan: [
       "Tarot ở đây là cách nhìn lại một việc qua hình ảnh: bạn đặt câu hỏi, nhấn giữ để xáo (nhịp tay bạn thành hạt giống xáo bài), tự rút lá từ quạt 78 lá úp rồi lật từng lá. Bài đọc tám chương mở bằng phần trả lời đúng câu bạn hỏi (nghiêng về có, có điều kiện hay chưa nên vội — vì sao, điều cần gỡ trước, 3 việc nên làm), rồi ghép bốn trường phái có sách — Waite (chuyện gì đang diễn ra), Golden Dawn và Thoth (phẩm giá nguyên tố giữa các lá, decan hoàng đạo), Marseille (hướng nhìn của nhân vật, việc để làm), B.O.T.A. (lá soi nếp nghĩ nào của bạn).",
@@ -219,14 +222,14 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     lien_ket: [{ href: "/tarot/la-bai", ten: "Ý nghĩa 78 lá bài" }, { href: "/kinh-dich", ten: "Kinh Dịch (gieo quẻ cho một việc)" }, { href: "/nhan-tuong", ten: "Nhân tướng học (lá đại diện)" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
   } },
   // HL-1 / TDG-1: công cụ hoàng lịch + tuổi — giới thiệu + hỏi đáp mặc định ở app/*/noi-dung.ts.
-  tuNd(ND_XEM_NGAY, "Xem ngày tốt hôm nay: hoàng đạo, giờ tốt, việc nên làm", CHU_XEM_NGAY),
+  tuNd(ND_XEM_NGAY, "Xem ngày tốt hôm nay: lịch vạn niên, giờ hoàng đạo", CHU_XEM_NGAY),
   tuNd(ND_LAM_NHA, "Xem tuổi làm nhà, cưới hỏi: Kim lâu, Hoang ốc, Tam tai", CHU_LAM_NHA),
   tuNd(ND_XONG_DAT, "Xem tuổi xông đất đầu năm hợp gia chủ, giờ đẹp mùng 1", CHU_XONG_DAT),
   tuNd(ND_HAN_NAM, "Hướng xấu theo năm: Thái Tuế, Tam Sát, Ngũ Hoàng", CHU_HAN_NAM),
-  tuNd(ND_SAO_HAN, "Xem sao hạn năm nay theo tuổi: La Hầu, Kế Đô, Thái Bạch…", CHU_SAO_HAN),   // MT-ĐS B3
-  tuNd(ND_DOI_LICH, "Đổi lịch âm dương: ngày âm hôm nay, can chi, tháng nhuận", CHU_DOI_LICH),   // SEO-L5
+  tuNd(ND_SAO_HAN, "Xem sao hạn theo tuổi: La Hầu, Kế Đô, Thái Bạch", CHU_SAO_HAN),   // MT-ĐS B3
+  tuNd(ND_DOI_LICH, "Đổi lịch âm dương: ngày âm hôm nay, can chi", CHU_DOI_LICH),   // SEO-L5
   tuNd(ND_THOI_GIAN_TOI, "3 tháng tới, 12 tháng tới và năm tới của bạn", CHU_THOI_GIAN_TOI),   // NAM-2
-  tuNd(ND_CHAN_DUNG, "Chân dung tổng hợp: Tử vi, Bát tự và nhân tướng cùng nhìn bạn", CHU_CHAN_DUNG),   // CD-1
+  tuNd(ND_CHAN_DUNG, "Chân dung tổng hợp: Tử vi, Bát tự, nhân tướng", CHU_CHAN_DUNG),   // CD-1
   { duong: "/ban-than", nhom: "cong_cu", ten: "Hồ sơ bản thân", o: ["seo", "khoi_duoi", "khoi_cuoi"], mac_dinh: {
     tieu_de_seo: "Hồ sơ bản thân",
     mo_ta_seo: "Trang của bạn: bốn con số chủ đạo, nhịp ngày – tháng – năm cá nhân, bản đồ con số và lối tắt sang hợp đôi, huyền học.",
@@ -252,14 +255,14 @@ export const SO_TRANG: readonly MucSoTrang[] = [
 
   // ---------------- B · trang tĩnh / giới thiệu
   { duong: "/", nhom: "tinh", ten: "Trang chủ", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân", h1: "Bạn là số mấy?",
+    tieu_de_seo: "Hiểu Bản Thân — Thần số học và huyền học online miễn phí", h1: "Bạn là số mấy?",
     loi_dan: "Nhập tên và ngày sinh. 30 giây sau bạn biết mình mạnh ở đâu, hay vấp ở đâu, và *năm nay nên dồn sức vào việc gì*.",
     chu: CHU_TRANG_CHU, hinh: HINH_TRANG_CHU,
     mo_ta_seo: "Thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot: tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.",
   } },
   // Hub Huyền học (trước 2026-10-27 là /kham-pha "Khám phá" — 308 về đây, lib/chuyen-huong.json).
   { duong: "/huyen-hoc", nhom: "tinh", ten: "Huyền học", o: O_TINH, mac_dinh: { chu: CHU_HUYEN_HOC, hinh: HINH_HUYEN_HOC,
-    tieu_de_seo: "Huyền học online: Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot",
+    tieu_de_seo: "Huyền học là gì? Bảy môn huyền học xem online miễn phí",
     mo_ta_seo: "Huyền học và thần số học trong một hồ sơ: lá số Tử vi, Bát tự, quẻ Kinh Dịch, phong thuỷ nhà ở, nhân tướng, Tarot. Tính minh bạch, có nguồn, miễn phí.",
     h1: "Huyền học — bảy cách nhìn lại mình",
     // AIO: câu đầu định nghĩa thẳng "huyền học là gì" (≤ 45 chữ) để máy tìm kiếm / AI trích nguyên câu.
@@ -267,7 +270,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   } },
   // NAM-1 (2026-10-30): mục lục năm + mục lục lịch âm (trước 404).
   { duong: "/nam", nhom: "tinh", ten: "Xem theo năm", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Xem theo năm: năm con gì, Tết, Tam tai, tuổi làm nhà, xông đất", h1: "Xem theo năm",
+    tieu_de_seo: "Xem theo năm: năm con gì, Tam tai, làm nhà, xông đất", h1: "Xem theo năm",
     mo_ta_seo: "Tra từng năm âm lịch: can chi, mệnh nạp âm, ngày Tết, tuổi Tam tai, năm tuổi, sao hạn, tuổi làm nhà, cưới hỏi, xông đất, sinh con — và xem 3 tháng, 12 tháng tới của riêng bạn.",
     loi_dan: "Mỗi năm âm lịch một trang: năm con gì, Tết ngày nào, tuổi nào Tam tai, xung năm — kèm mọi bảng tra theo tuổi của năm đó.",
   } },
@@ -277,12 +280,12 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     loi_dan: "Tính theo giờ Hà Nội (thuật toán Hồ Ngọc Đức). Chọn một năm để xem Tết, tháng nhuận, mùng 1 và rằm từng tháng.",
   } },
   { duong: "/sinh-o-nuoc-ngoai", nhom: "tinh", ten: "Sinh ở nước ngoài (mục lục)", o: O_TINH, mac_dinh: {       // Ý3
-    tieu_de_seo: "Sinh ở nước ngoài: lập lá số Tử vi, Bát tự theo giờ địa phương", h1: "Sinh ở nước ngoài, lập lá số thế nào?",
+    tieu_de_seo: "Sinh ở nước ngoài: lập lá số Tử vi, Bát tự thế nào?", h1: "Sinh ở nước ngoài, lập lá số thế nào?",
     mo_ta_seo: "Người Việt sinh ở Mỹ, Úc, Canada, Đức, Nhật, Hàn, Đài Loan, Pháp, Séc, Anh, Ba Lan, Nga, Thái Lan, Lào, Campuchia: nhập giờ nào, múi giờ và giờ mùa hè tự tính ra sao, lịch âm Việt – Trung lệch ngày nào, khi nào nên xem thêm giờ mặt trời thực.",
     loi_dan: "Giờ trên giấy khai sinh là giờ đồng hồ nơi sinh. Chọn đúng nước và thành phố, phần còn lại (múi giờ, giờ mùa hè tại ngày sinh) hệ thống tự tra theo lịch sử nơi đó.",
   } },
   { duong: "/kien-thuc", nhom: "tinh", ten: "Thư viện kiến thức", o: O_TINH, mac_dinh: { chu: CHU_KIEN_THUC,
-    tieu_de_seo: "Thư viện kiến thức thần số học, Kinh Dịch, Tử vi, Bát tự",
+    tieu_de_seo: "Thư viện kiến thức huyền học và thần số học",
     mo_ta_seo: "Ý nghĩa 12 con số thần số học, 64 quẻ Kinh Dịch, 14 chính tinh và 12 cung Tử vi, 10 thập thần, 10 nhật chủ Bát tự — có nguồn, có mặt tối, có câu tự soi.",
     h1: "Thư viện kiến thức",
     loi_dan: "Ý nghĩa 12 con số thần số học, 64 quẻ Kinh Dịch, 14 chính tinh và 12 cung Tử vi, 10 thập thần, 10 nhật chủ Bát tự — có nguồn, có mặt tối, có câu tự soi.",
@@ -292,7 +295,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "6 lá số Tử vi minh hoạ được đọc từng bước: Mệnh–Thân, chính tinh, độ sáng, tam phương tứ chính, cách cục, tứ hoá, đại hạn, lưu niên — kèm giải nghĩa thuật ngữ.",
   } },
   { duong: "/tu-dien", nhom: "tinh", ten: "Từ điển thuật ngữ", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Từ điển thuật ngữ Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Thần số", h1: "Từ điển thuật ngữ — nói cho dễ hiểu",
+    tieu_de_seo: "Từ điển thuật ngữ Tử vi, Bát tự, Kinh Dịch, Phong thuỷ", h1: "Từ điển thuật ngữ — nói cho dễ hiểu",
     mo_ta_seo: "Hơn 200 thuật ngữ huyền học giải nghĩa bằng ngôn ngữ đời thường: cung Mệnh, Hoá Kỵ, nhật chủ, dụng thần, hào động, quẻ biến, sơn tinh, hướng tinh, số đường đời…",
   } },
   { duong: "/phong-thuy/huong-hop-tuoi", nhom: "tinh", ten: "Hướng hợp tuổi", o: O_TINH, mac_dinh: {

@@ -35,7 +35,7 @@ export const TEN_KIND_THE: Record<string, string> = {
   xong_dat: "Xông đất theo năm", tai_anh: "Ảnh lá số tải về", ms: "Chụp màn hình (QR ở dải chân)",
   huy_hieu: "Huy hiệu", huy_hieu_anh: "Huy hiệu (ảnh)", hoi: "Câu trả lời hỏi đáp", hoi_anh: "Câu trả lời hỏi đáp (ảnh)",
   thang: "Tháng của tôi", thang_anh: "Tháng của tôi (ảnh)",
-  chuoi_moc: "Chuỗi chạm mốc", la_bai: "Lá bài đầu ngày", hen_chinh_minh: "Hẹn với chính mình",
+  chuoi_moc: "Chuỗi chạm mốc", la_bai: "Lá bài đầu ngày", ba_la: "Ba lá của ngày", ba_la_anh: "Ba lá của ngày (ảnh)", hen_chinh_minh: "Hẹn với chính mình",
 };
 export const TEN_CO_MA: Record<CoMa, string> = { co: "có mã giới thiệu", khong: "không mã giới thiệu", khong_ro: "không rõ" };
 

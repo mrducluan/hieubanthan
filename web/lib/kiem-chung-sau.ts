@@ -27,6 +27,8 @@ function doc(): GhiNhan[] {
 function ghiXuong(ds: GhiNhan[]) {
   try { localStorage.setItem(KHOA_KC_SAU, JSON.stringify(ds.slice(-TOI_DA))); } catch { /* riêng tư */ }
 }
+/** BT-UI: mã các hộp người dùng đã bấm "Đúng với mình" còn nhớ trên máy (chỉ mã) — cho khối "Điều bạn đã xác nhận". */
+export function maDaXacNhan(): string[] { return [...new Set(doc().filter((x) => x.loai === "doi_song").map((x) => x.mau))]; }
 const homNayIso = () => new Date(Date.now() + 7 * 3600_000).toISOString().slice(0, 10);   // ngày theo giờ VN
 
 /** Người dùng bấm "Đúng với mình" một hộp đáng theo dõi (Nên để ý / Lời khuyên) → nhớ trên máy để hỏi lại sau 30 ngày. */

@@ -94,7 +94,8 @@ test("Xem lá số 2 người → Chia sẻ thẻ điểm → trang nhận → l
   await expect(khach.getByTestId("the-hai-diem")).toHaveAttribute("data-diem", diem!);
   await expect(khach.getByTestId("the-hai")).toContainText("Luân");
   await expect(khach.getByTestId("the-hai")).toContainText("Người yêu");
-  expect((await suKien(khach)).filter((e) => e.su_kien === "share_clicked" && e.ma_moi === tu)).toHaveLength(1);
+  // Sự kiện ghi trong effect sau khi hydrate → chờ (bản dev hydrate chậm hơn bản build; đọc ngay là chạy đua).
+  await expect.poll(async () => (await suKien(khach)).filter((e) => e.su_kien === "share_clicked" && e.ma_moi === tu).length).toBe(1);
   expect(await khach.evaluate(() => localStorage.getItem("hbt.ma_moi"))).toContain(tu);
   expect(await khach.getByTestId("the-hai-moi").getAttribute("href")).toBe(`/tu-vi?tu=${tu}#hop-tham`);
   await khach.close();

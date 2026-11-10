@@ -6,6 +6,8 @@ import type { HoSo } from "@/lib/hoso";
 export const MANG_TRANG = ["than_so", "tu_vi", "bat_tu", "phong_thuy", "kinh_dich", "hop_doi", "hom_nay", "xem_ngay",
   "tuoi_lam_nha", "tuoi_xong_dat"] as const;
 export type MangTrang = (typeof MANG_TRANG)[number];
+/** BT-UI: trang Bản thân ("Bảy cách nhìn về bạn") — engine trả thẻ của MỌI mảng theo thứ tự cố định (không phải một MangTrang). */
+export const TRANG_BAN_THAN = "ban_than" as const;
 
 /** Mã mô-đun của khối "Cuối bài đọc" (đo lường Gate) → mã trang của khối gợi chéo. */
 export const MANG_TU_MO_DUN: Record<string, MangTrang> = {
@@ -42,7 +44,7 @@ export const GoiYCheo = z.object({
 export type GoiYCheo = z.infer<typeof GoiYCheo>;
 
 /** Thân yêu cầu từ hồ sơ trên máy (chưa có hồ sơ → chỉ mã trang: engine trả câu chung mời nhập). */
-export function yeuCauGoiY(mang: MangTrang, hs: HoSo | null, quyUoc: "tong_het" | "tung_phan"): Record<string, unknown> {
+export function yeuCauGoiY(mang: MangTrang | typeof TRANG_BAN_THAN, hs: HoSo | null, quyUoc: "tong_het" | "tung_phan"): Record<string, unknown> {
   if (!hs) return { mang_hien_tai: mang };
   return {
     mang_hien_tai: mang, ngay: hs.ngay, thang: hs.thang, nam: hs.nam, ho_ten: hs.ten_khac ? [hs.ho_ten, hs.ten_khac] : [hs.ho_ten],

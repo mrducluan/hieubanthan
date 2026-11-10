@@ -4,13 +4,14 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
-import { MANG_TRANG } from "@/lib/goi-y-cheo";
+import { MANG_TRANG, TRANG_BAN_THAN, type MangTrang } from "@/lib/goi-y-cheo";
 import { dangThuSao, giaLuanGiaiSao } from "@/lib/luan-giai-sao";
 import { mangLuanGiai } from "@/lib/luan-giai-mang";
 import { coUngHo } from "@/lib/ung-ho";
 
 const Input = z.object({
-  mang_hien_tai: z.enum(MANG_TRANG),
+  // BT-UI: "ban_than" = trang Bản thân xin thẻ của mọi mảng (thứ tự cố định).
+  mang_hien_tai: z.enum([...MANG_TRANG, TRANG_BAN_THAN]),
   ngay: z.number().int().min(1).max(31).optional(),
   thang: z.number().int().min(1).max(12).optional(),
   nam: z.number().int().min(1900).max(2100).optional(),
@@ -31,7 +32,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   const [kq, thu, gia] = await Promise.all([
     goiEngineDaKiem(p.data, "/v1/goi-y-cheo", dauNguoiGoi(req)),
     // Nút Sao của khối này mời đọc báo cáo của chính trang (Thần số / Tử vi / Bát tự); trang khác dẫn sang /tu-vi.
-    dangThuSao(mangLuanGiai(p.data.mang_hien_tai) ?? "tuvi").catch(() => false),
+    dangThuSao((p.data.mang_hien_tai === TRANG_BAN_THAN ? null : mangLuanGiai(p.data.mang_hien_tai as MangTrang)) ?? "tuvi").catch(() => false),
     giaLuanGiaiSao().catch(() => 10),
   ]);
   if (!kq.ok) return kq.res;

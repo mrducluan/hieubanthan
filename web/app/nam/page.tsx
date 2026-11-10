@@ -11,7 +11,7 @@ import { duongNam, namCongKhai, dmy } from "@/lib/nam";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 const DUONG = "/nam";
-const MAC = { tieuDe: "Xem theo năm: năm con gì, Tết, Tam tai, tuổi làm nhà, xông đất",
+const MAC = { tieuDe: "Xem theo năm: năm con gì, Tam tai, làm nhà, xông đất",
   moTa: "Tra từng năm âm lịch: can chi, mệnh nạp âm, ngày Tết, tuổi Tam tai, năm tuổi, sao hạn, tuổi làm nhà, cưới hỏi, xông đất, sinh con — và xem 3 tháng, 12 tháng tới của riêng bạn." };
 
 const HOI_DAP = [
