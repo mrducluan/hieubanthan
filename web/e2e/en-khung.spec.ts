@@ -80,7 +80,7 @@ test.describe("trên trình duyệt", () => {
     await expect(thanh).toBeVisible();
     await expect(thanh.locator("[data-muc=la_bai]")).toHaveAttribute("aria-current", /page|location/);
     await expect(thanh.locator("[data-muc=la_bai]")).toHaveAttribute("href", "/en/tarot/cards");
-    await expect(page.getByTestId("chan-trang")).toContainText("All rights reserved");
+    await expect(page.getByRole("contentinfo")).toContainText("All rights reserved");
     expect(await chuKhung(page)).not.toMatch(VIET);
     for (const h of await linkKhung(page)) expect(h, h).toMatch(/^\/en(\/|$|#)/);
     for (const h of await linkKhung(page)) expect(banAnh(h) ?? h).toBeTruthy();
@@ -103,7 +103,7 @@ test.describe("trên trình duyệt", () => {
   test("bản Việt giữ khung cũ: chữ Việt, không có nút đổi ngôn ngữ trong khung", async ({ page }) => {
     await page.goto("/tarot");
     await expect(page.getByRole("banner")).toContainText("Hiểu Bản Thân");
-    await expect(page.getByTestId("chan-trang")).toContainText("Bảo lưu mọi quyền");
+    await expect(page.getByRole("contentinfo")).toContainText("Bảo lưu mọi quyền");
     await expect(page.locator("[data-thanh-dau] [data-testid=doi-tieng-viet], [data-testid=chan-trang] [data-testid=doi-tieng-viet]")).toHaveCount(0);
     await expect(page.locator("[data-thanh-mang=tarot] [data-muc=la_bai]")).toHaveAttribute("href", "/tarot/la-bai");
   });
