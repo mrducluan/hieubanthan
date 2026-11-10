@@ -20,6 +20,8 @@ Sắc thái: chinh (nổi bật) · hop (hợp) · trung (bình thường) · nh
 nằm trong nhãn: chúng ở "Vì sao nói vậy"."""
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import functools
 import re
 
@@ -118,7 +120,7 @@ def _muc_mang(goi: dict) -> dict | None:
             "muc": [{"nhan": ten[:1].upper() + ten[1:], "vi_tri": _VT_MUC[m["muc"]], "giai_thich": m.get("tom_tat") or ""}]}
 
 
-@functools.lru_cache(maxsize=512)
+@ngon_ngu.lru(maxsize=512)
 def _hinh_trang(loai: str, slug: str) -> dict | None:
     from app.kb import trang      # noqa: PLC0415 — trang.py nạp nhiều KB; chỉ cần khi câu hỏi là kiến thức chung
     t = trang.lay(loai, slug)
@@ -608,7 +610,7 @@ def cau_chuan_tat_ca() -> dict[str, list[str]]:
             "phongthuy": [cau_hien(c) for c in HOI_PT.values()], "thanso": [cau_hien(c) for c in HOI_TS.values()]}
 
 
-@functools.lru_cache(maxsize=1)
+@ngon_ngu.lru(maxsize=1)
 def _ma_cau() -> dict[str, str]:
     """Câu chuẩn tiếng Việt → mã mẫu câu ổn định (`hoi_chuan.<mảng>.<khoá>`). Logic so khớp bên trên vẫn dùng chữ Việt."""
     ra: dict[str, str] = {}

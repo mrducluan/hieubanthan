@@ -23,3 +23,15 @@ def test_dau_ra_tieng_viet_khong_doi():
     r = subprocess.run([sys.executable, str(GOC / "scripts" / "chup_dau_ra.py"), "--so"], cwd=GOC, env=env,
                        capture_output=True, text=True, timeout=1500)
     assert r.returncode == 0, "Đầu ra tiếng Việt đã đổi so với golden:\n" + r.stdout[-4000:] + r.stderr[-1500:]
+
+
+@pytest.mark.skipif(os.environ.get("DAU_RA_BO_QUA") == "1", reason="DAU_RA_BO_QUA=1")
+def test_dau_ra_tieng_viet_khong_doi_khi_xen_ke_tieng_anh():
+    """Một tiến trình phục vụ CẢ HAI ngôn ngữ: gọi bản Anh trước rồi bản Việt (mẫu 1/4 lượt gọi) — bản Việt vẫn trùng
+    golden. Bắt bộ nhớ đệm có chữ mà khoá không kèm ngôn ngữ (lỗi review GĐ 2: `_LAP_CACHE`, `la_so_mau._doc`)."""
+    env = {**os.environ, "PYTHONHASHSEED": "0", "PYTHONPATH": str(GOC)}
+    env.pop("OPENROUTER_API_KEY", None)
+    r = subprocess.run([sys.executable, str(GOC / "scripts" / "chup_dau_ra.py"), "--so", "--xen-ke", "4"], cwd=GOC, env=env,
+                       capture_output=True, text=True, timeout=1500)
+    assert r.returncode == 0, "Bản Việt đổi khi có lượt bản Anh trước trong cùng tiến trình:\n" + r.stdout[-4000:] + r.stderr[-1500:]
+

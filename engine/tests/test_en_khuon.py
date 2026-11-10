@@ -32,6 +32,19 @@ def test_moi_ma_L_co_tieng_anh():
     assert not thieu, f"Mã L() chưa có chữ tiếng Anh (kb/data/en/loi_khuon.json hoặc en/loi/*.json): {thieu[:20]}"
 
 
+def test_ma_loi_khong_trung_giua_tep():
+    import json as _j
+    from app.kb import nap
+    thu_muc = nap.duong(loi.THU_MUC, "en")
+    da: dict[str, str] = {k: "loi_khuon.json" for k in _j.loads(nap.duong(loi.TEP, "en").read_text("utf-8")) if not k.startswith("_")}
+    for p in sorted(thu_muc.glob("*.json")):
+        for k in _j.loads(p.read_text("utf-8")):
+            if k.startswith("_"):
+                continue
+            assert k not in da, f"mã {k} có ở cả {da[k]} và {p.name}"
+            da[k] = p.name
+
+
 def test_mau_tieng_anh_sach_va_slot_khop():
     b = loi.bang("en")
     for ma, s in b.items():

@@ -5,6 +5,8 @@ không doạ. Tuổi người xem theo NĂM ÂM LỊCH VIỆT (mốc Tết) — 
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import datetime as dt
 import json
 from functools import lru_cache
@@ -101,7 +103,7 @@ def _danh_gia_viec(c: dict, viec: dict) -> str:
     return "binh"
 
 
-@lru_cache(maxsize=2048)
+@ngon_ngu.lru(maxsize=2048)
 def _calc(d: dt.date) -> dict:
     return hl.ngay(d)
 

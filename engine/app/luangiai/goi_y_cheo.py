@@ -19,6 +19,8 @@ hồ sơ, cùng ngày, một mảng không lặp đúng câu ở hai trang khác
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import datetime as dt
 from dataclasses import dataclass, field
 from functools import lru_cache
@@ -113,7 +115,7 @@ def _dau_vao_la_so(h: HoSo):
     return _DauVao(inp)
 
 
-@lru_cache(maxsize=256)
+@ngon_ngu.lru(maxsize=256)
 def _sao_menh(h: HoSo) -> dict | str:
     """→ {"sao": [...], "do_sang": str|None, "muon": bool} hoặc mã thiếu ("gio" | "noi_sinh")."""
     if not h.co_gio:
@@ -134,7 +136,7 @@ def _sao_menh(h: HoSo) -> dict | str:
     return {"sao": sao, "do_sang": tuvi_do_sang_vn.do_sang(sao[0], p["earthlyBranch"]) if sao else None, "muon": muon}
 
 
-@lru_cache(maxsize=256)
+@ngon_ngu.lru(maxsize=256)
 def _bat_tu(h: HoSo) -> dict:
     """→ {"can", "hanh", "than": "vượng"|"nhược"|"trung hoà"|None, "thieu": None|"gio"|"noi_sinh"}."""
     if h.co_gio:

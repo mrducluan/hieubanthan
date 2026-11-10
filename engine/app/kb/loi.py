@@ -9,6 +9,7 @@ bản xứ duyệt) và nằm trong git như KB. Mã kiểm chứng (`ma_mau`) K
 from __future__ import annotations
 
 import json
+import logging
 from typing import Any
 
 from app import ngon_ngu
@@ -34,9 +35,9 @@ def _doc_bang(nn: str) -> dict:
         for p in sorted(thu_muc.glob("*.json")):
             d = _doc_mot(p)
             trung = sorted(set(d) & set(ra))
-            if trung:
-                raise ValueError(f"loi: mã trùng giữa {p.name} và tệp khác: {trung[:5]}")
-            ra.update(d)
+            if trung:   # không làm sập mọi route bản dịch — giữ bản đầu, báo log; test `test_en_khuon` bắt trùng
+                logging.getLogger(__name__).warning("loi: mã trùng giữa %s và tệp khác: %s", p.name, trung[:5])
+            ra.update({k: v for k, v in d.items() if k not in ra})
     return ra
 
 

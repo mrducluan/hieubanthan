@@ -8,6 +8,8 @@ CALC có sẵn, không LLM, không ghi tay):
 Lời giải thích đời thường ở KB `sinh_nuoc_ngoai_kb.json`; mẫu câu có {biến} do dữ kiện điền."""
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import datetime as dt
 from functools import lru_cache
 from zoneinfo import ZoneInfo
@@ -43,7 +45,7 @@ def _dmy(d: dt.date) -> str:
     return f"{d.day:02d}/{d.month:02d}/{d.year}"
 
 
-@lru_cache(maxsize=512)
+@ngon_ngu.lru(maxsize=512)
 def doi_gio(zone: str, nam: int) -> tuple[dict, ...]:
     """Các mốc đổi giờ trong năm dương `nam` của vùng: [{ngay, gio, sang}] — `gio` là giờ ĐỒNG HỒ lúc đổi theo nếp cũ
     (Mỹ "02:00" cả hai chiều, Sydney vào mùa hè 02:00 / ra 03:00), `sang` = "mùa hè" | "giờ chuẩn". Quét từng ngày theo
@@ -101,7 +103,7 @@ def _lich_su(zones: list[str], nam: int) -> list[dict]:
     return ra
 
 
-@lru_cache(maxsize=16)
+@ngon_ngu.lru(maxsize=16)
 def lich_am_lech(nam: int) -> dict:
     """Ngày dương trong năm `nam` mà âm lịch Việt (UTC+7) và lịch Trung Quốc (UTC+8) cho ngày âm khác nhau, + Tết hai lịch."""
     tz_v, tz_t = config.TZ_LICH_AM["viet"], config.TZ_LICH_AM["trung"]
@@ -131,7 +133,7 @@ def muc_luc(nam: int | None = None) -> list[dict]:
     return list(_muc_luc(nam or config.hom_nay_vn().year))
 
 
-@lru_cache(maxsize=8)
+@ngon_ngu.lru(maxsize=8)
 def _muc_luc(nam: int) -> tuple[dict, ...]:
     ra = []
     for ma in MA_NUOC:

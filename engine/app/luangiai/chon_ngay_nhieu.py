@@ -14,6 +14,8 @@ RULES tất định, chỉ ghép CALC/KB có sẵn (một bộ tính):
 Không lưu gì: năm sinh chỉ đi qua lượt gọi."""
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import datetime as dt
 from functools import lru_cache
 
@@ -43,7 +45,7 @@ def _ten_chi(z: str) -> str:
     return lunar.CHI[hl.ZHI.index(z)]
 
 
-@lru_cache(maxsize=1024)
+@ngon_ngu.lru(maxsize=1024)
 def _nam_am(d: dt.date) -> int:
     return L._calc(d)["am"]["nam"]
 

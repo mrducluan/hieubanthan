@@ -66,9 +66,10 @@ def gan_ma_mau(c: dict, mo_dun: str, *tien_to: str) -> dict:
     `ds.<mảng>.<chương|tiền tố>.<loại hộp>.<tiêu đề rút gọn>`; trùng trong cùng nhóm thì thêm `+2`, `+3`…"""
     da: dict[str, int] = {}
     goc = tien_to or (c.get("ma"),)
-    for h in c.get("hop", []):
+    for i, h in enumerate(c.get("hop", [])):
         if not h.get("ma_mau"):
-            h["ma_mau"] = ma_mau(mo_dun, *goc, h["loai"], h["tieu_de"])
+            # mã dựng từ TIÊU ĐỀ → bản dịch lấy đúng mã bản Việt (mã kiểm chứng không đổi theo ngôn ngữ)
+            h["ma_mau"] = quyet(("ma_mau", mo_dun, *map(str, goc), i), ma_mau(mo_dun, *goc, h["loai"], h["tieu_de"]))
         n = da.get(h["ma_mau"], 0) + 1
         da[h["ma_mau"]] = n
         if n > 1:

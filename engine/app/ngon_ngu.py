@@ -94,3 +94,22 @@ def theo_viet(fn):
             return fn(*a, **kw)
     return boc
 
+
+def lru(maxsize: int | None = 128):
+    """`functools.lru_cache` có khoá kèm ngôn ngữ + biến thể của lượt gọi (EN-ALL): kết quả có CHỮ theo ngôn ngữ không
+    được rò từ lượt bản Anh sang lượt bản Việt trong cùng tiến trình."""
+    from functools import lru_cache, wraps
+
+    def deco(fn):
+        @lru_cache(maxsize=maxsize)
+        def trong(_nn, _bt, *a, **kw):
+            return fn(*a, **kw)
+
+        @wraps(fn)
+        def boc(*a, **kw):
+            return trong(hien_tai(), bien_the(), *a, **kw)
+        boc.cache_clear = trong.cache_clear  # type: ignore[attr-defined]
+        boc.cache_info = trong.cache_info    # type: ignore[attr-defined]
+        return boc
+    return deco
+

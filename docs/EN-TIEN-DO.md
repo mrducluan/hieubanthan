@@ -159,7 +159,15 @@ tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2
   cờ hồ sơ dùng chung Tử vi + Bát tự (`tuvi_api._DauVao._co`) qua `L()` (`kb/data/en/loi/co.json`); bảng tên thêm thần
   sát, cát/hung, quan hệ, thân vượng/nhược, cách cục, nhóm thập thần, nạp âm; bản phủ KB `en/battu_kb.json`,
   `en/battu_doi_song_kb.json` (909 chuỗi), `en/hoan_canh_kb.json`, `en/chu_y_kb.json`, `en/suc_khoe_kb.json`.
-- 🟡 `battu.luan_giai`: KB đã phủ; còn chữ trong mã `battu_doi_song.py` (~480 chuỗi) — đang chuyển qua `L()`.
+- ✅ `battu.luan_giai` sạch tiếng Anh: ~285 chuỗi trong `battu_doi_song.py` / `chu_y_nam` / `suc_khoe_nam` / `luu_y_mang`
+  / `toan_bo` qua `L()` (`kb/data/en/loi/battu_doi_song.json`); chữ Việt ở bản Anh 16.588 → 0 trên 40 lượt gọi golden; khung = bản Việt.
+- ✅ **Review độc lập GĐ 2 (2026-11-10) — sửa hết mức Cao + Vừa**: (Cao) bộ nhớ đệm có chữ mà khoá không kèm ngôn ngữ làm lượt
+  bản Anh RÒ sang bản Việt trong cùng tiến trình (`hoidap/tuvi._LAP_CACHE`, `la_so_mau._doc`) → khoá kèm ngôn ngữ; mọi
+  `lru_cache` của tầng RULES có chữ đổi sang `ngon_ngu.lru(...)`; `kb/do_rieng.ty_le` (luật index) luôn đo trên chữ Việt.
+  Test mới `test_dau_ra_tieng_viet_khong_doi_khi_xen_ke_tieng_anh` (gọi bản Anh trước rồi bản Việt, mẫu 1/4: 2.585 lượt, lệch 0).
+  (Vừa) mã `loi` trùng giữa tệp không còn làm 500 (log + test bắt); slug Anh thiếu tên chỉ bỏ trang đó (test bắt thiếu);
+  mã kiểm chứng dựng từ tiêu đề (`gan_ma_mau`, Phong thuỷ) lấy theo bản Việt. Còn ghi nhận (Thấp): `L()` hai cách gọi,
+  `lap` bản Anh chạy hai lượt, vài câu cờ ("0 day(s)", mức độ tin giờ thô).
 - 🟡 Hỏi đáp Bát tự tiếng Anh (5.3): bộ câu viết độc lập `fixtures/cau_hoi/en/battu_dev.jsonl` (260) +
   `battu_holdout.jsonl` (160, đóng băng); bộ chấm `engine/scripts/cham_en.py`. **Mốc trước khi làm**: định tuyến dev 15 % /
   holdout 16 %, an toàn 6/12 · 2/12, mốc thời gian 16/72 · 13/44, câu trả lời còn chữ Việt 259/260 → cần bộ hiểu câu tiếng

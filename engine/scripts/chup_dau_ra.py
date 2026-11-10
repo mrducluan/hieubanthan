@@ -34,8 +34,9 @@ def _la_mau(ma: str) -> bool:
     return int(hashlib.md5(ma.encode()).hexdigest()[:4], 16) % 20 == 0
 
 
-def chay(ngon_ngu: str = "vi", loc: str | None = None):
-    """→ (băm theo mã, mẫu nguyên văn, mã HTTP theo mã)."""
+def chay(ngon_ngu: str = "vi", loc: str | None = None, xen_ke: int = 0):
+    """→ (băm theo mã, mẫu nguyên văn, mã HTTP theo mã). `xen_ke` = N > 0: chỉ lấy mẫu 1/N lượt gọi, mỗi lượt gọi bản Anh
+    TRƯỚC rồi mới gọi bản Việt trong cùng tiến trình — bắt bộ nhớ đệm không tách theo ngôn ngữ (lượt Anh rò sang Việt)."""
     c = dr.may_khach()
     with dr.dong_bang():
         luot = dr.luot_goi(c)
@@ -46,6 +47,10 @@ def chay(ngon_ngu: str = "vi", loc: str | None = None):
             ma = lg[0]
             if loc and not ma.startswith(loc):
                 continue
+            if xen_ke:
+                if int(hashlib.md5(ma.encode()).hexdigest()[:6], 16) % xen_ke:
+                    continue
+                dr.goi(c, lg, "en")
             st, nd = dr.goi(c, lg, ngon_ngu)
             bam[ma] = dr.bam(st, nd)
             http[ma] = st
@@ -81,6 +86,7 @@ def main() -> int:
     ap.add_argument("--xem")
     ap.add_argument("--thong-ke", action="store_true")
     ap.add_argument("--ngon-ngu", default="vi")
+    ap.add_argument("--xen-ke", type=int, default=0, help="lấy mẫu 1/N, gọi bản Anh trước mỗi lượt bản Việt")
     a = ap.parse_args()
     if a.xem:
         c = dr.may_khach()
@@ -94,7 +100,7 @@ def main() -> int:
         print("không có lượt gọi này", file=sys.stderr)
         return 2
     t0 = time.time()
-    bam, mau, http = chay(a.ngon_ngu)
+    bam, mau, http = chay(a.ngon_ngu, xen_ke=a.xen_ke)
     print(f"{len(bam)} lượt gọi, {time.time() - t0:.0f} giây", file=sys.stderr)
     if a.thong_ke:
         tk: dict[str, collections.Counter] = collections.defaultdict(collections.Counter)
@@ -108,6 +114,8 @@ def main() -> int:
         return 0
     if a.so:
         cu = doc_golden()
+        if a.xen_ke:
+            cu = {m: v for m, v in cu.items() if m in bam}
         lech = [m for m in sorted(set(cu) | set(bam)) if cu.get(m) != bam.get(m)]
         print(f"lệch {len(lech)}/{len(cu)}")
         for m in lech[:50]:

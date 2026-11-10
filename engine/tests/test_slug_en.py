@@ -20,7 +20,7 @@ def _bang() -> dict:
 
 def test_du_va_duy_nhat():
     for loai, b in _bang().items():
-        assert b, loai
+        assert len(b) == len(se._cap_loai(loai)), f"{loai}: có trang chưa có slug tiếng Anh (thiếu tên ở ten_en.json / slug_en.json)"
         v = list(b.values())
         assert len(set(v)) == len(v), (loai, sorted({x for x in v if v.count(x) > 1}))
         for s in v:

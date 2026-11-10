@@ -8,6 +8,7 @@ CỐ ĐỊNH: test khoá duy nhất + ổn định (`tests/test_slug_en.py`, gol
 """
 from __future__ import annotations
 
+import logging
 import re
 import unicodedata
 
@@ -96,8 +97,14 @@ _NHO: dict[str, dict[str, str]] = {}
 def bang(loai: str) -> dict[str, str]:
     """{slug Việt: slug Anh} của một loại trang (nhớ trong tiến trình; không phụ thuộc ngôn ngữ lượt gọi)."""
     if loai not in _NHO:
+        b: dict[str, str] = {}
         with ngon_ngu.dung("vi"):
-            _NHO[loai] = {s: tinh(loai, k) for k, s in _cap_loai(loai)}
+            for k, s in _cap_loai(loai):
+                try:
+                    b[s] = tinh(loai, k)
+                except KeyError:       # mục KB mới chưa có tên Anh: trang đó chưa có slug Anh, các trang khác vẫn chạy
+                    logging.getLogger(__name__).warning("slug_en: thiếu tên tiếng Anh cho %s/%s", loai, s)
+        _NHO[loai] = b
     return _NHO[loai]
 
 

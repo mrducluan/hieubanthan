@@ -890,8 +890,9 @@ def _lap_doi_song(sinh: dict, ngay_xem: dt.date, ls: dict, vh: dict | None) -> d
     """Báo cáo đời sống cho hỏi đáp: nhớ 64 lượt gần nhất theo (hồ sơ, ngày xem) — người dùng hỏi nhiều câu liên tiếp
     không dựng lại 12 chương; `vh` đã tính ở tra_loi (câu hạn, cùng ngày xem) thì không gọi lại iztro."""
     from app.luangiai import tuvi_doi_song as tds  # noqa: PLC0415 — tránh vòng import
+    from app import ngon_ngu  # noqa: PLC0415 — EN-ALL: khoá đệm kèm ngôn ngữ (báo cáo có chữ theo ngôn ngữ)
     k = (sinh["ngay"], sinh["ti"], sinh["gioi_tinh"], sinh.get("tz_lich"), sinh.get("hoa_linh"), sinh.get("thang_nhuan"),
-         sinh.get("lich"), sinh.get("luu_nguyet"), ngay_xem)
+         sinh.get("lich"), sinh.get("luu_nguyet"), ngay_xem, ngon_ngu.hien_tai(), ngon_ngu.bien_the())
     if k in _LAP_CACHE:
         return _LAP_CACHE[k]
     bc = tds.lap(sinh, ngay_xem, ls=ls, vh=vh if vh and vh.get("ngay_xem") == ngay_xem.isoformat() else None)
