@@ -17,6 +17,10 @@
 - [ ] (2 phút) `/ban-than`: hai cột đầu trang cao bằng nhau; "Chia sẻ thẻ" trên thẻ hồ sơ hiện QR; khối "Bảy cách nhìn về bạn"
   có đủ tám ô, ô thiếu dữ liệu bấm ra bảng Sửa hồ sơ.
 - [ ] (Tuỳ chọn) CMS → Trang website `/hom-nay` → "Chữ trên trang": tiêu đề khối mới "Ba lá của ngày" sửa được ở đó.
+- [ ] **Chạy migration 0036** (`supabase/migrations/0036_push_tuan_cua_toi.sql`, sau 0035): mốc Web Push "Sáng thứ Hai: tuần này
+  của bạn". Chưa chạy thì ô tích mới báo "Chưa lưu được", cron bỏ qua — không vỡ gì. Chạy xong: Hôm nay → Bật nhắc → tích
+  "Sáng thứ Hai: tuần này của bạn" (cần hồ sơ đã lưu vào tài khoản); thứ Hai kế tiếp xem log cron có `tuan_cua_toi ≥ 1`,
+  bấm thông báo phải mở Hôm nay đúng mục "Tuần này của bạn". Deploy engine trước web (route mới `/v1/push/tuan`).
 - [ ] (Đợt 2, sau deploy — engine trước web) `/hom-nay` → "Đọc thêm": mở "Tuần này của bạn" (bảy ô + ngày đáng để ý) và
   "Hôm nay của hai người" (cần đã lưu một người thân ở `/tu-vi` → "Xem lá số 2 người"); `/ban-than`: bấm "Mặt sau: thẻ 5 mảnh ghép".
 - [ ] (Quyết định) Gửi "Tuần của tôi" qua thông báo sáng thứ Hai: cần migration mới thêm một mốc vào tuỳ chọn nhắc — báo em nếu

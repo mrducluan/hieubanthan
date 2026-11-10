@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 from app.calc import tuvi_an_sao
 from app.config import ENGINE_VERSION, HourConfidence
-from app.luangiai import thang_hai_la_so
+from app.luangiai import thang_hai_la_so, tuan_hai_nguoi
 from app.luangiai.sang_nay import goi_sang_nay
 from app.tuvi_api import TuanTrietInput, _DauVao
 
@@ -70,4 +70,31 @@ def api_thang_hai_la_so(inp: ThangHaiLaSoInput) -> dict:
             ra.append(thang_hai_la_so.lap(ls.birth_date, inp.ngay_xem, ls.gender, tv_sinh, bt_sinh))
         except (HTTPException, ValueError, tuvi_an_sao.AnSaoLoi):
             ra.append(None)                           # một lá lỗi không làm hỏng cả lượt cron
+    return {"engine_version": ENGINE_VERSION, "ngay_xem": inp.ngay_xem.isoformat(), "ket_qua": ra}
+
+
+# ---------------------------------------------------------------- BT-UI đợt 3: sáng thứ Hai "Tuần này của bạn"
+class NguoiTuan(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ngay_sinh: dt.date
+
+
+class TuanPushInput(BaseModel):
+    """Cron web gửi NGÀY SINH dương lịch (không tên, không giờ sinh, không user_id) của những người đã TỰ TÍCH nhận mốc
+    `tuan_cua_toi` (migration 0036). Tối đa 500 người một lượt; engine không lưu."""
+    model_config = ConfigDict(extra="forbid")
+    ngay_xem: dt.date
+    nguoi: list[NguoiTuan] = Field(default_factory=list, max_length=500)
+
+
+@router.post("/tuan")
+def api_push_tuan(inp: TuanPushInput) -> dict:
+    """`ket_qua[i]` theo đúng thứ tự `nguoi` — None khi `ngay_xem` không phải thứ Hai hoặc ngày sinh ngoài khoảng tính được."""
+    ra: list[dict | None] = []
+    for ng in inp.nguoi:
+        d = ng.ngay_sinh
+        try:
+            ra.append(tuan_hai_nguoi.push_tuan(d.day, d.month, d.year, inp.ngay_xem) if 1900 <= d.year <= 2100 else None)
+        except ValueError:
+            ra.append(None)                           # một người lỗi không làm hỏng cả lượt cron
     return {"engine_version": ENGINE_VERSION, "ngay_xem": inp.ngay_xem.isoformat(), "ket_qua": ra}

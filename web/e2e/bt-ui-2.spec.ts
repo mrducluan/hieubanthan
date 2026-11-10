@@ -32,31 +32,83 @@ test("lật lá Tarot → nhật ký máy ghi mã|tên lá (chỉ trên máy); t
   expect(typeof docNhatKy).toBe("function");
 });
 
-test("Tuần này của bạn: bảy ô khớp engine, hôm nay được đánh dấu, ≤ 3 ngày đáng để ý có link sang trang ngày; mở sẵn vào thứ Hai", async ({ page, request }) => {
+test("Tuần này của bạn: khu riêng trước \"Đọc thêm\", bảy ngày khớp engine, bấm một ngày → đủ năm môn + việc hợp + giờ tốt; tuần hợp việc gì, phong thuỷ tháng", async ({ page, request }) => {
   await napHoSo(page);
   await page.goto("/hom-nay");
   const muc = page.getByTestId("tuan-cua-toi");
   await expect(muc).toBeVisible();
   const ngay = await ngayMay(page);
+  type Lop = { mon: string; nhan: string; cau: string };
+  type Ngay = { ngay: string; so: number; hom_nay: boolean; da_qua: boolean; nhip: string; tom: string; lop: Lop[]; viec_tot: string[]; gio_tot: { chi: string }[] };
   const api = (await (await request.post("/api/thanso/tuan", { data: { ngay: HO_SO_MAU.ngay, thang: HO_SO_MAU.thang, nam: HO_SO_MAU.nam, ngay_xem: ngay } })).json()) as
-    { ngay: { ngay: string; so: number; hom_nay: boolean }[]; noi_bat: { ngay: string; tieu_de: string }[]; tom_tat: string };
+    { ngay: Ngay[]; noi_bat: { ngay: string; tieu_de: string }[]; tom_tat: string; viec_tuan: { ten: string; ngay: string[] }[]; phong_thuy: { loi: string } };
   expect(api.ngay).toHaveLength(7);
-  const thuHai = api.ngay[0]!.hom_nay;
-  if (thuHai) await expect(muc).toHaveAttribute("open", ""); else { await expect(muc).not.toHaveAttribute("open", ""); await muc.locator("summary").click(); }
+  // Khu riêng: KHÔNG nằm trong "Đọc thêm về hôm nay", và đứng trước nó.
+  await expect(page.getByTestId("doc-them").getByTestId("tuan-cua-toi")).toHaveCount(0);
+  expect(await muc.evaluate((e) => Boolean(e.compareDocumentPosition(document.querySelector('[data-testid="doc-them"]')!) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
+  await expect(muc.getByRole("heading", { level: 2, name: "Tuần này của bạn" })).toBeVisible();
   await expect(muc).toContainText(api.tom_tat);
-  const o = muc.getByTestId("tuan-luoi").locator("li");
+  const o = muc.getByTestId("tuan-luoi").getByRole("tab");
   await expect(o).toHaveCount(7);
   await expect(muc.locator('[data-hom-nay="1"]')).toHaveCount(1);
-  for (let i = 0; i < 7; i++) await expect(o.nth(i)).toContainText(String(api.ngay[i]!.so));
+  for (let i = 0; i < 7; i++) { await expect(o.nth(i)).toContainText(String(api.ngay[i]!.so)); await expect(o.nth(i)).toHaveAttribute("data-nhip", api.ngay[i]!.nhip); }
+  // Mặc định đang chọn hôm nay: bảng ngày có đủ năm môn theo đúng chữ engine.
+  const homNay = api.ngay.find((n) => n.hom_nay)!;
+  const bang = muc.getByTestId("tuan-bang");
+  await expect(bang).toHaveAttribute("data-ngay", homNay.ngay);
+  const kiem = async (n: Ngay) => {
+    await expect(bang).toHaveAttribute("data-ngay", n.ngay);
+    await expect(bang).toContainText(n.tom);
+    const lop = bang.getByTestId("tuan-lop").locator("li");
+    await expect(lop).toHaveCount(n.lop.length);
+    expect(n.lop.map((l) => l.mon)).toEqual(["than_so", "lich", "tuoi", "bat_tu", "kinh_dich"]);
+    for (const l of n.lop) { await expect(bang.locator(`[data-mon="${l.mon}"]`)).toContainText(l.nhan); await expect(bang.locator(`[data-mon="${l.mon}"]`)).toContainText(l.cau); }
+    if (n.viec_tot.length) await expect(bang.getByTestId("tuan-viec-ngay")).toContainText(n.viec_tot[0]!); else await expect(bang.getByTestId("tuan-viec-ngay")).toHaveCount(0);
+    await expect(bang.getByTestId("tuan-gio").locator("span.rounded-full")).toHaveCount(n.gio_tot.length);
+    await expect(bang.getByRole("link", { name: /Xem kỹ ngày/ })).toHaveAttribute("href", `/xem-ngay-tot/${n.ngay}`);
+  };
+  await kiem(homNay);
+  // Bấm ngày khác (ngày cuối tuần) → bảng đổi theo; bàn phím cũng chọn được.
+  const cuoi = api.ngay[6]!;
+  await o.nth(6).click();
+  await expect(o.nth(6)).toHaveAttribute("aria-selected", "true");
+  await kiem(cuoi);
+  // Bàn phím: chỉ ngày đang chọn nằm trong thứ tự Tab; → sang ngày kế (vòng về đầu), Home về thứ Hai.
+  await expect(o.nth(6)).toHaveAttribute("tabindex", "0");
+  await expect(o.nth(0)).toHaveAttribute("tabindex", "-1");
+  await o.nth(6).focus();
+  await page.keyboard.press("ArrowRight");
+  await kiem(api.ngay[0]!);
+  await expect(o.nth(0)).toBeFocused();
+  await page.keyboard.press("ArrowRight");
+  await kiem(api.ngay[1]!);
+  await page.keyboard.press("Home");
+  await kiem(api.ngay[0]!);
+  await expect(bang).toHaveAttribute("aria-labelledby", "tuan-tab-0");
+  // Tuần này hợp việc gì: đúng danh sách engine, bấm ngày → bảng nhảy tới ngày đó.
+  if (api.viec_tuan.length) {
+    const v = muc.getByTestId("tuan-viec");
+    await expect(v.locator("li")).toHaveCount(api.viec_tuan.length);
+    await expect(v).toContainText(api.viec_tuan[0]!.ten);
+    await v.locator("li").first().getByRole("button").first().click();
+    await expect(bang).toHaveAttribute("data-ngay", api.viec_tuan[0]!.ngay[0]!);
+  } else await expect(muc.getByTestId("tuan-viec")).toHaveCount(0);
+  await expect(muc.getByTestId("tuan-phong-thuy")).toContainText(api.phong_thuy.loi.slice(0, 40));
+  // Ngày đáng để ý: ≤ 3, bấm → bảng nhảy tới ngày đó.
   const nb = muc.getByTestId("tuan-noi-bat").locator("li");
   await expect(nb).toHaveCount(api.noi_bat.length);
   expect(api.noi_bat.length).toBeLessThanOrEqual(3);
   if (api.noi_bat[0]) {
     await expect(nb.first()).toContainText(api.noi_bat[0].tieu_de);
-    await expect(nb.first().getByRole("link")).toHaveAttribute("href", `/xem-ngay-tot/${api.noi_bat[0].ngay}`);
+    await nb.first().getByRole("button").click();
+    await expect(bang).toHaveAttribute("data-ngay", api.noi_bat[0].ngay);
   }
+  // Không tràn ngang ở điện thoại
+  await page.setViewportSize({ width: 360, height: 780 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
   // API chặn đầu vào lạ
   expect((await request.post("/api/thanso/tuan", { data: { ngay: 17, thang: 5, nam: 1990, ngay_xem: "2020-01-01" } })).status()).toBe(422);
+  expect((await request.post("/api/thanso/tuan", { data: { ngay: 17, thang: 5, nam: 1990, gioi_tinh: "khac" } })).status()).toBe(422);
 });
 
 test("Hôm nay của hai người: chưa lưu ai → mời thêm; có người thân → hai con số khớp engine, việc nên làm cùng, lời nhắn không tên / ngày sinh", async ({ page, request }) => {

@@ -99,8 +99,8 @@ export function goiThongBao(nhac: { nhan: string; duong: string | null }[], ngay
 }
 
 // ---------------------------------------------------------------- KC-4 GĐ2: sáng nay + mốc lịch (engine /v1/push/sang-nay)
-export type NhomMoc = "thang_ca_nhan" | "giao_tiet" | "lap_xuan_tet" | "thang_hai_la_so";
-export const NHOM_MOC: NhomMoc[] = ["thang_ca_nhan", "giao_tiet", "lap_xuan_tet", "thang_hai_la_so"];
+export type NhomMoc = "thang_ca_nhan" | "giao_tiet" | "lap_xuan_tet" | "thang_hai_la_so" | "tuan_cua_toi";
+export const NHOM_MOC: NhomMoc[] = ["thang_ca_nhan", "giao_tiet", "lap_xuan_tet", "thang_hai_la_so", "tuan_cua_toi"];
 export interface MocLich { ma: string; nhom: string[]; tieu_de: string; noi_dung: string; duong: string }
 export interface SangNayNgay {
   so_ngay: number; tieu_de: string; noi_dung: string;
@@ -113,11 +113,20 @@ export interface NhaTiet { noi_dung: string; duong: string }
 /** Ý1 (0035): dòng đầu tháng "Tử vi và Bát tự cùng thấy …" — engine dựng từ đúng hộp tháng của Thời gian tới cho lá số
  *  trong tài khoản của người đã tự tích mốc `thang_hai_la_so`; chỉ chữ + đường dẫn trong site. */
 export interface ThangHaiLaSo { tieu_de: string; noi_dung: string; duong: string; cung: boolean }
+/** BT-UI đợt 3 (0036): dòng sáng thứ Hai "Tuần này của bạn" — engine dựng từ đúng dữ liệu mục tuần trên Hôm nay cho ngày
+ *  sinh trong tài khoản của người đã tự tích mốc `tuan_cua_toi`; chỉ chữ + đường dẫn trong site. */
+export interface TuanCuaToiPush { tieu_de: string; noi_dung: string; duong: string }
 export interface NguoiNhan {
   nhac: { nhan: string; duong: string | null }[];
   sang_nay: boolean; moc_lich: string[]; ngay_sinh: string | null;
   nha_tiet?: NhaTiet | null;
   thang_hai_la_so?: ThangHaiLaSo | null;
+  tuan_cua_toi?: TuanCuaToiPush | null;
+}
+
+/** Thứ Hai theo lịch (chuỗi ngày giờ VN `yyyy-mm-dd`) — chỉ để biết có nên hỏi engine; engine tự kiểm lại. */
+export function laThuHai(ngay: string): boolean {
+  return new Date(`${ngay}T00:00:00Z`).getUTCDay() === 1;
 }
 
 /** MỘT thông báo / ngày cho một người: mốc tự đánh dấu > mốc lịch đã chọn > sáng nay. Không có gì → null (không gửi).
@@ -143,6 +152,11 @@ export function ghepThongBao(n: NguoiNhan, sn: GoiSangNay | null, ngay: string) 
   if (chon.has("thang_ca_nhan") && rieng?.thang_moi) {
     moc.push({ tieu_de: rieng.thang_moi.tieu_de, noi_dung: rieng.thang_moi.noi_dung, duong: NEO_THE });
   }
+  // 0036: "Tuần này của bạn" (thứ Hai) đứng SAU mọi mốc hiếm hơn — trùng ngày giao tiết / đầu tháng thì thành "+1 mốc".
+  if (chon.has("tuan_cua_toi") && n.tuan_cua_toi) {
+    const t = n.tuan_cua_toi;
+    moc.push({ tieu_de: t.tieu_de, noi_dung: t.noi_dung, duong: t.duong, nhom: ["tuan_cua_toi"] });
+  }
   if (moc.length) {
     const m = moc[0]!;
     // Y3: ngày giao tiết + có hướng nhà → thay lời mời chung bằng việc cụ thể phía cửa nhà mình trong tháng tiết mới.
@@ -150,7 +164,9 @@ export function ghepThongBao(n: NguoiNhan, sn: GoiSangNay | null, ngay: string) 
     const nha = m.nhom?.includes("giao_tiet") && n.nha_tiet ? n.nha_tiet : null;
     const lapXuan = Boolean(m.nhom?.includes("lap_xuan_tet"));
     const than = nha ? (lapXuan ? `${m.noi_dung} ${nha.noi_dung}` : nha.noi_dung) : m.noi_dung;
-    return { title: moc.length > 1 ? `${m.tieu_de} · +${moc.length - 1} mốc` : m.tieu_de, body: kem(than),
+    // Dòng tuần đã dài (~150 ký tự) — không nối thêm "Ngày cá nhân …" (sw.js cắt thân 200 ký tự, sẽ đứt giữa câu).
+    const body = m.nhom?.includes("tuan_cua_toi") ? than : kem(than);
+    return { title: moc.length > 1 ? `${m.tieu_de} · +${moc.length - 1} mốc` : m.tieu_de, body,
       url: duongTrongSite(nha && !lapXuan ? nha.duong : m.duong) ?? NEO_THE, tag: `nhac-${ngay}`, ...hoi };
   }
   if (sang) return { title: sang.tieu_de, body: sang.noi_dung, url: NEO_THE, tag: `nhac-${ngay}`, ...hoi };

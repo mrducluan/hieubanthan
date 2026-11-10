@@ -155,8 +155,8 @@ Engine: một hàm RULES mới ghép ba lá từ dữ liệu đã có (`luangiai
 3. **Lối tắt app** "Ba lá hôm nay" (`/hom-nay?tu=app#ba-la`) trong manifest.
 4. **"Tuần này của bạn"** (mục gập đầu "Đọc thêm" ở Hôm nay, mở sẵn vào thứ Hai): bảy ngày (số ngày cá nhân, ngày lịch ghi
    đẹp, hợp / xung tuổi) + tối đa ba ngày đáng để ý còn lại trong tuần (thuận nhất · hợp tuổi · nên đi chậm · mở đầu · khép lại).
-   **Chưa làm**: gửi "Tuần của tôi" qua thông báo sáng thứ Hai — cần thêm một mốc vào bảng tuỳ chọn nhắc (migration mới), chờ
-   anh duyệt.
+   **Đợt 3 (2026-11-10, anh duyệt)**: gửi qua thông báo sáng thứ Hai — mốc `tuan_cua_toi` (migration 0036, người dùng tự
+   tích ở Bật nhắc), engine `/v1/push/tuan`, bấm thông báo mở đúng mục này.
 5. **Lá Tarot trong tổng kết tháng**: lật lá Tarot thì nhật ký trên máy ghi mã + tên lá; tổng kết tháng kể "Lá Tarot bạn gặp
    nhiều nhất: … (N lần)" khi có lá lặp lại, không thì kể tên tối đa ba lá. Mã lá chỉ nằm trên máy (máy chủ không giữ).
 
@@ -167,3 +167,49 @@ Engine: một hàm RULES mới ghép ba lá từ dữ liệu đã có (`luangiai
 3. Trang Bản thân "Bảy cách nhìn" (mục 2).
 
 Mỗi bước một PR, deploy engine trước web.
+
+## 6. TUAN-V2 — "Tuần này của bạn" nhiều lớp (2026-11-10, anh yêu cầu sau khi xem bản đợt 2)
+
+Anh báo hai điều: (1) khu tuần nằm dưới tiêu đề "Đọc thêm về hôm nay" là sai chỗ; (2) thông tin tuần nghèo, chỉ có ngày cá
+nhân + lịch + tuổi trong khi hệ thống có nhiều môn.
+
+### 6.1 Môn nào nói được gì theo TỪNG NGÀY (rà engine)
+
+| Môn | Có phép tính theo ngày? | Đưa vào tuần |
+|---|---|---|
+| Thần số | Ngày cá nhân | Có — chủ đề của ngày |
+| Lịch cổ truyền | Hoàng đạo, trực, nghi / kỵ, 6 việc lớn, giờ hoàng đạo | Có — mức của ngày, việc sách lịch ghi hợp, giờ tốt |
+| Tuổi (con giáp) | Chi ngày ↔ chi tuổi | Có — hợp / xung |
+| Bát tự | Lưu nhật: thập thần can ngày × nhật chủ (không cần giờ sinh) | Có — chủ đề của ngày |
+| Kinh Dịch | Quẻ đầu ngày (Mai Hoa, giờ Tý) | Có — quẻ + ý chính, link trang quẻ |
+| Phong thuỷ | Không có sao bay theo ngày; có sao THÁNG × hướng hợp mệnh quái | Có — một khối "Phong thuỷ tháng này" cho cả tuần |
+| Tử vi | Lưu nhật chưa chốt phái; đọc theo THÁNG, cần giờ sinh | Không theo ngày — dẫn sang Thời gian tới |
+| Tarot | Lá của ngày | Không — báo trước bảy lá làm mất việc lật Ba lá mỗi sáng |
+| Nhân tướng | Lưu niên theo NĂM | Không |
+
+Thêm hai khối cấp tuần: **"Tuần này hợp việc gì"** (6 việc lớn × ngày còn lại sách lịch ghi tốt, bỏ ngày xung tuổi) và **"Mốc
+trong tuần"** (giao tiết, Lập xuân, Tết, mùng 1, rằm, tháng cá nhân mới).
+
+### 6.2 Ba cách trình bày
+
+| | Cách | Được | Mất |
+|---|---|---|---|
+| A | **Bảy ngày + bảng ngày nhiều môn** — bấm một ngày, đọc ngày ấy qua từng môn; cột bên là việc / mốc / phong thuỷ | Nhìn cả tuần trong một hàng, đọc sâu một ngày không rời trang; điện thoại không cần bảng ngang | Phải bấm mới thấy ngày khác |
+| B | Bảy thẻ xếp dọc, mỗi thẻ đủ mọi môn | Không cần bấm | Rất dài (≈ 7 màn hình điện thoại), khó so các ngày |
+| C | Chọn việc trước ("tôi định ký hợp đồng") → máy chỉ ngày | Trả lời thẳng một nhu cầu | Mất cái nhìn cả tuần; người chưa có việc cụ thể không biết bấm gì |
+
+**Chọn A, mượn phần hay nhất của C** (khối "Tuần này hợp việc gì", bấm ngày là bảng nhảy tới ngày đó).
+
+### 6.3 Luật (engine `luangiai/tuan_hai_nguoi.py`, không điểm số)
+
+- Chỉ hai lớp có mức: lịch và tuổi. Thần số, Bát tự, Kinh Dịch là chủ đề của ngày, không tốt không xấu.
+- Nhịp của ngày: cả hai thuận → Thuận · một thuận → Khá thuận · một thuận một chậm → Hai chiều · có lớp chậm → Nên đi chậm ·
+  còn lại Bình thường. Trên 1.092 ngày mẫu: bình thường 56 %, khá thuận 29 %, nên đi chậm 10 %, thuận 4 %, hai chiều 2 %.
+- "Chậm" của lịch chỉ khi sách khuyên hoãn mọi việc; ngày kiêng dân gian là ngày bình thường có lời nhắc (gọi cả nhóm này
+  là chậm thì 40 % số ngày mang nhãn chậm — nhãn mất nghĩa và thành doạ).
+- Ngày xung tuổi và ngày dân gian thường kiêng vẫn hiện việc sách lịch ghi hợp (khớp trang ngày) nhưng kèm lời nhắc, và
+  không vào "Tuần này hợp việc gì".
+- Sau rà soát độc lập: MỘT định nghĩa "ngày thuận" cho nhịp, dòng "thuận nhất tuần" và câu tóm tắt tuần (lịch ghi đẹp + có
+  việc lớn trang ngày gọi là tốt + tuổi không xung, không hại, không trùng); ngày lục hại / trùng tuổi không mang chip mức và
+  không bao giờ là ngày thuận; thông báo sáng thứ Hai không mở đầu bằng "ngày nên đi chậm".
+

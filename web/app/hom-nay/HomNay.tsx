@@ -450,15 +450,16 @@ export function HomNay() {
           </div>
           </div>
 
+          {/* TUAN-V2 — tuần này: khu riêng, đứng TRƯỚC "Đọc thêm về hôm nay" (không phải chuyện của riêng hôm nay). */}
+          <TuanCuaToi hoSo={hoSo} ngay={the.ngay_xem} />
+
           {/* Tầng 3 — đọc thêm: từng môn nói gì về hôm nay. Gập sẵn, mỗi mục một câu tóm tắt. */}
           <section aria-labelledby="doc-them" className="space-y-3" data-tang="3" data-testid="doc-them">
             <div>
               <h2 id="doc-them" className="text-xl">Đọc thêm về hôm nay</h2>
               <p className="mt-1 text-sm text-fg-muted">Mỗi môn nhìn ngày này một cách. Bấm mục bạn quan tâm để mở.</p>
             </div>
-            {/* BT-UI đợt 2: tuần này (mở sẵn vào thứ Hai) trải hết bề ngang; các mục còn lại xếp HAI CỘT độc lập
-                (columns — mở một mục dài không để khoảng trống ở cột bên cạnh). */}
-            <TuanCuaToi hoSo={hoSo} ngay={the.ngay_xem} />
+            {/* Các mục xếp HAI CỘT độc lập (columns — mở một mục dài không để khoảng trống ở cột bên cạnh). */}
             <div className="gap-3 space-y-3 lg:columns-2 [&>*]:break-inside-avoid">
             <HaiNguoiHomNay hoSo={hoSo} ngay={the.ngay_xem} />
             {the.nhip_bat_tu && (

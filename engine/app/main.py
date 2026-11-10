@@ -661,6 +661,7 @@ class TuanInput(BaseModel):
     thang: int = Field(ge=1, le=12)
     nam: int = Field(ge=1900, le=2100)
     ngay_xem: _dt.date | None = None     # trống = hôm nay theo giờ Việt Nam
+    gioi_tinh: Literal["nam", "nu"] | None = None   # chỉ để biết mệnh quái cho dòng phong thuỷ tháng (không bắt buộc)
 
 
 @app.post("/v1/thanso/tuan")
@@ -671,7 +672,7 @@ def api_tuan(inp: TuanInput) -> dict:
         _dt.date(inp.nam, inp.thang, inp.ngay)
     except ValueError:
         raise HTTPException(422, detail="Ngày không tồn tại")
-    return {"engine_version": ENGINE_VERSION, **tuan_hai_nguoi.tuan(inp.ngay, inp.thang, inp.nam, inp.ngay_xem or config.hom_nay_vn())}
+    return {"engine_version": ENGINE_VERSION, **tuan_hai_nguoi.tuan(inp.ngay, inp.thang, inp.nam, inp.ngay_xem or config.hom_nay_vn(), inp.gioi_tinh)}
 
 
 class HomNayHaiInput(BaseModel):
