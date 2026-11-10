@@ -26,6 +26,8 @@ export type KetQuaBai = {
   con_lai: string[];
   /** false = chỉ audit (xem trước), chưa ghi gì vào bài. */
   da_ghi: boolean;
+  /** Kho ảnh lỗi khi vẽ ảnh bìa / minh hoạ (bìa NotFair có chữ sai dấu có thể còn nguyên) — BLOG-10 không tự xuất bản. */
+  kho_loi?: string;
   loi?: string;
 };
 
@@ -200,7 +202,7 @@ export async function chuanHoaMotBai(payload: Payload, req: PayloadRequest | und
   const sau = kiemDinhBai({ ...bai, ...kq.data } as never);
   const con_lai = sau.muc.filter((m) => m.muc_do !== "dat").map((m) => m.thong_diep);
   const ketQua = { id, slug: String(kq.data.slug ?? bai.slug ?? ""), tieu_de: tieuDe, thay_doi: kq.thay_doi, diem_truoc: truoc,
-    diem_sau: kq.thay_doi.length ? sau.diem : truoc, con_lai, da_ghi: false };
+    diem_sau: kq.thay_doi.length ? sau.diem : truoc, con_lai, da_ghi: false, ...(kho.loi ? { kho_loi: kho.loi } : {}) };
   if (!kq.thay_doi.length || !ghi) return ketQua;
 
   const ghiChu = [`BLOG-7 chuẩn hoá SEO (${new Date().toISOString().slice(0, 10)}) — điểm kiểm định ${truoc} → ${sau.diem}. `

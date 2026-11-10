@@ -119,3 +119,20 @@ test("BLOG-9: chuẩn hoá bỏ dòng ghi công NotFair cuối bài đã nhập,
   const lan2 = chuanHoaBai({ ...bai, ...(kq.data as object) }, { slugDaDung: () => false });
   assert.ok(!lan2.thay_doi.some((t) => t.includes("Authored with")));
 });
+
+test("BLOG-10: nguồn tham khảo lấy từ link tới trang uy tín có sẵn trong bài, bỏ link đối tác / nội bộ", () => {
+  const html = `<p>Tượng quẻ được bàn trong <a href="https://plato.stanford.edu/entries/chinese-change/">bài về Kinh Dịch</a>, `
+    + `nguyên văn ở <a href="https://ctext.org/book-of-changes">ctext.org</a> và <a href="https://www.britannica.com/topic/Yijing">Britannica</a>; `
+    + `xem thêm <a href="https://doi-tac.example/bai">đối tác</a>, <a href="https://hieuban.com/kinh-dich">gieo quẻ</a>, `
+    + `<a href="https://ctext.org/book-of-changes/">trùng link</a>.</p>`;
+  const kq = chuanHoaBai({ ...BAI, noi_dung: lex(HTML + html) });
+  assert.deepEqual(kq.data.nguon, [
+    { ten: "bài về Kinh Dịch — Stanford Encyclopedia of Philosophy", url: "https://plato.stanford.edu/entries/chinese-change/" },
+    { ten: "Chinese Text Project (ctext.org)", url: "https://ctext.org/book-of-changes" },
+    { ten: "Encyclopaedia Britannica", url: "https://www.britannica.com/topic/Yijing" },
+  ]);
+  assert.ok(kq.thay_doi.some((t) => /Nguồn tham khảo: 3 nguồn/.test(t)));
+  // Đã có nguồn biên tập ghi → không đè; bài không có link uy tín → không bịa nguồn.
+  assert.equal(chuanHoaBai({ ...BAI, noi_dung: lex(HTML + html), nguon: [{ ten: "Chu Dịch" }] }).data.nguon, undefined);
+  assert.equal(chuanHoaBai(BAI).data.nguon, undefined);
+});

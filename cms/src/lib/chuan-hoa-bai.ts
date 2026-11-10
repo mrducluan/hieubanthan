@@ -18,6 +18,7 @@ export type BaiChuanHoa = {
   noi_dung?: unknown; meta?: { title?: string | null; description?: string | null; image?: unknown } | null;
   anh_bia?: unknown; hoi_dap?: { cau_hoi?: string | null; tra_loi?: string | null }[] | null;
   tu_khoa_chinh?: string | null; tu_khoa_phu?: string[] | null; the?: string[] | null; mang?: string | null; loai_bai?: string | null;
+  nguon?: { ten?: string | null; url?: string | null }[] | null; notfair_lien_ket?: string[] | null;
 };
 
 export type KetQuaChuanHoa = {
@@ -142,6 +143,41 @@ const LA_HUONG_DAN = /^(cách|hướng dẫn|làm sao|làm thế nào)\b|\b(các
 // ------------------------------------------------------------------ Lexical
 
 type Nut = NutLexical & { children?: Nut[]; text?: string; tag?: string };
+
+/** Trang tham khảo uy tín (bách khoa, đại học, kho sách cổ / phạm vi công cộng). Chỉ link tới các trang này trong thân
+ *  bài mới được đưa vào "Nguồn tham khảo" — không lấy link đối tác trao đổi, link quảng cáo hay link nội bộ. */
+const NGUON_UY_TIN = /(^|\.)(britannica\.com|wikipedia\.org|wikisource\.org|ctext\.org|gutenberg\.org|archive\.org|sacred-texts\.com|jstor\.org|stanford\.edu|[a-z0-9-]+\.edu|[a-z0-9-]+\.gov|[a-z0-9-]+\.gov\.vn|[a-z0-9-]+\.edu\.vn)$/;
+const TEN_NGUON: [RegExp, string][] = [
+  [/plato\.stanford\.edu$/, "Stanford Encyclopedia of Philosophy"], [/britannica\.com$/, "Encyclopaedia Britannica"],
+  [/ctext\.org$/, "Chinese Text Project (ctext.org)"], [/wikipedia\.org$/, "Wikipedia"], [/wikisource\.org$/, "Wikisource"],
+  [/gutenberg\.org$/, "Project Gutenberg"], [/archive\.org$/, "Internet Archive"],
+];
+
+/** BLOG-10: nguồn tham khảo từ link tới trang uy tín CÓ SẴN trong thân bài (không bịa nguồn). Tên = chữ gắn link khi đủ
+ *  nghĩa, kèm tên trang; ≤ 6 nguồn, không trùng link. */
+export function nguonTuThanBai(khoi: Nut[], boQua: string[] = []): { ten: string; url: string }[] {
+  const bo = new Set(boQua.map((u) => u.replace(/\/+$/, "")));
+  const kq: { ten: string; url: string }[] = [];
+  const duyet = (n: Nut) => {
+    const url = (n as { fields?: { url?: unknown } }).fields?.url;
+    if ((n.type === "link" || n.type === "autolink") && typeof url === "string" && /^https:\/\//.test(url)) {
+      let host = "";
+      try { host = new URL(url).hostname.replace(/^www\./, ""); } catch { /* bỏ */ }
+      const sach = url.replace(/\/+$/, "");
+      if (host && NGUON_UY_TIN.test(host) && !bo.has(sach) && !kq.some((k) => k.url.replace(/\/+$/, "") === sach)) {
+        const trang = TEN_NGUON.find(([r]) => r.test(host))?.[1] ?? host;
+        const chu = chuoi(chuNut(n));
+        // Chữ gắn link chỉ là tên trang / tên miền ("Britannica", "ctext.org") → chỉ ghi tên trang.
+        const trung = boDau(trang).includes(boDau(chu)) || boDau(chu).includes(boDau(host));
+        const ten = chu.length >= 4 && !/^https?:/i.test(chu) && !trung ? `${chu} — ${trang}` : trang;
+        kq.push({ ten: ten.slice(0, 200), url });
+      }
+    }
+    (n.children ?? []).forEach(duyet);
+  };
+  khoi.forEach(duyet);
+  return kq.slice(0, 6);
+}
 
 const chuNut = (n: Nut): string =>
   n.type === "text" ? String(n.text ?? "") : n.type === "linebreak" ? " " : (n.children ?? []).map(chuNut).join("");
@@ -304,6 +340,12 @@ export function chuanHoaBai(bai: BaiChuanHoa, tc: TuyChon = {}): KetQuaChuanHoa 
       data.hoi_dap = [...coSan.map((h) => ({ cau_hoi: chuoi(h.cau_hoi), tra_loi: chuoi(h.tra_loi) })), ...them];
       thay.push(`Hỏi đáp: thêm ${them.length} câu từ các mục dạng câu hỏi trong bài (FAQPage).`);
     }
+  }
+
+  // ---- BLOG-10: nguồn tham khảo (GEO) — chỉ khi trống, lấy từ link tới trang uy tín có sẵn trong bài
+  if (!(bai.nguon ?? []).some((n) => chuoi(n?.ten))) {
+    const ng = nguonTuThanBai(khoi, bai.notfair_lien_ket ?? []);
+    if (ng.length) { data.nguon = ng; thay.push(`Nguồn tham khảo: ${ng.length} nguồn từ link tài liệu đã dẫn trong bài.`); }
   }
 
   // ---- ảnh "Tóm tắt nhanh" sau đoạn mở đầu

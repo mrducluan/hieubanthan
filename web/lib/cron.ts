@@ -188,7 +188,8 @@ export async function donDuLieuHoc(dv: SupabaseClient): Promise<{ ok: boolean; k
   return { ok: true, ket_qua: { ...(ts as object | null ?? {}), tuvi: tv, nhac_viec: nv, kiem_chung_sau: ks, de_xuat_luat: gx, qua_tang: qt, chuyen_gia: { qua_han: cgQh, don: cgDon } } };
 }
 
-/** BLOG-9d: nhờ CMS nhập + chuẩn hoá bài NotFair MỚI thành nháp (CMS làm, web chỉ gọi). Chưa nối CMS → bỏ qua. Có trần
+/** BLOG-9d: nhờ CMS nhập + chuẩn hoá bài NotFair MỚI (CMS làm, web chỉ gọi); BLOG-10: bài đạt điểm kiểm định thì CMS
+ *  tự xuất bản, không đạt thì thành nháp chờ Chủ biên. Chưa nối CMS → bỏ qua. Có trần
  *  thời gian để cron ngày (60 giây) không bị cắt; bài còn lại để ngày sau. Lỗi không làm hỏng các việc khác của cron. */
 export async function tuDongNotFairCms(conMs: number): Promise<Record<string, unknown>> {
   const goc = (process.env.CMS_URL || "").replace(/\/+$/, ""), bi = process.env.CMS_WEBHOOK_SECRET;
@@ -198,8 +199,10 @@ export async function tuDongNotFairCms(conMs: number): Promise<Record<string, un
     const r = await fetch(`${goc}/api/bai-viet/tu-dong-notfair`, {
       method: "POST", headers: { "x-cms-bi-mat": bi }, signal: AbortSignal.timeout(Math.min(conMs - 5_000, 40_000)),
     });
-    const d = await r.json().catch(() => ({})) as { moi?: { slug: string; diem: number; loi?: string }[]; con_lai?: number; loi?: string };
-    return { trang_thai: r.status, moi: d.moi?.map((m) => ({ slug: m.slug, diem: m.diem, ...(m.loi ? { loi: m.loi } : {}) })) ?? [],
+    const d = await r.json().catch(() => ({})) as { moi?: { slug: string; diem: number; xuat_ban?: boolean; ly_do?: string; loi?: string }[];
+      con_lai?: number; loi?: string };
+    return { trang_thai: r.status, moi: d.moi?.map((m) => ({ slug: m.slug, diem: m.diem, xuat_ban: Boolean(m.xuat_ban),
+      ...(m.ly_do ? { ly_do: m.ly_do } : {}), ...(m.loi ? { loi: m.loi } : {}) })) ?? [],
       con_lai: d.con_lai ?? null, ...(d.loi ? { loi: d.loi } : {}) };
   } catch (e) {
     return { loi: String((e as Error)?.name ?? e) };
