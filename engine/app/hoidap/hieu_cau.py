@@ -201,6 +201,9 @@ def hoi_lai(mo_dun: str) -> dict | None:
     if mo_dun == "battu":
         ds = [L("hoi.hl.battu.nghe", ds[0]), L("hoi.hl.battu.tien", ds[1]), L("hoi.hl.battu.hon_nhan", ds[2]),
               L("hoi.hl.battu.dai_van", ds[3])]
+    elif mo_dun == "tuvi":
+        ds = [L("hoi.hl.tuvi.cong_viec", ds[0]), L("hoi.hl.tuvi.tien", ds[1]), L("hoi.hl.tuvi.tinh_duyen", ds[2]),
+              L("hoi.hl.tuvi.nam_nay", ds[3])]
     return {"cau": L("hoi.hl.cau", "Bạn muốn hỏi cụ thể về chuyện nào? Chọn một câu để có lời đáp đúng hơn:"), "chon": ds}
 
 

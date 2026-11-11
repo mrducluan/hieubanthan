@@ -22,6 +22,7 @@ export const TEN_QUAN_HE: Record<MaQuanHe, string> = {
 /** Câu cam kết lưu trữ — lời hứa về hệ thống (như "Chữ dùng chung" quy định: câu cam kết dữ liệu giữ trong code, đổi bằng PR
  *  cùng Chính sách quyền riêng tư). */
 export const CAM_KET_NGUOI_THAN = "Chỉ lưu trên máy này, không gửi lên tài khoản. Xoá bất cứ lúc nào.";
+export const CAM_KET_NGUOI_THAN_EN = "Stored only on this device, never sent to an account. Delete it any time.";
 
 const Dau = z.object({
   /** Tên gọi / biệt danh tuỳ chọn — để người dùng tự nhận ra ("Mẹ", "Bé Na"); không cần họ tên đầy đủ. */

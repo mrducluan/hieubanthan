@@ -677,24 +677,29 @@ def _ngay_vn(iso: str) -> str:
 
 
 def _ten_thang_am(x: dict) -> str:
-    ten = {1: " (tháng Giêng)", 12: " (tháng Chạp)"}.get(x["thang"], "") if not x.get("nhuan") else ""
-    return f"tháng {x['thang']}{' nhuận' if x.get('nhuan') else ''} âm{ten}"
+    ten = ({1: L("hoi.md.tv.gieng", " (tháng Giêng)"), 12: L("hoi.md.tv.chap", " (tháng Chạp)")}.get(x["thang"], "")
+           if not x.get("nhuan") else "")
+    return L("hoi.md.tv.thang_am", "tháng {n}{nhuan} âm{ten}", n=x["thang"],
+             nhuan=L("hoi.tv.nhuan", " nhuận") if x.get("nhuan") else "", ten=ten)
 
 
 def _thang_cau(muc: list[dict]) -> tuple[str | None, str, str]:
     """Tử vi: (mốc, câu nhịp tháng, việc) từ mục lưu nguyệt (một tháng được hỏi) hoặc nhịp 3 tháng tới."""
+    from app.kb import ten as _ten  # noqa: PLC0415
     ln = next((m for m in muc if m.get("loai") == "luu_nguyet" and m.get("thang")), None)
     if ln:
         ket = (ln.get("xu_huong") or {}).get("ket")
-        moc = f"{_ten_thang_am(ln)} (từ {_ngay_vn(ln['tu'])} đến {_ngay_vn(ln['den'])} dương lịch)"
-        return moc, (f"trên lá số, nhịp riêng của tháng này nghiêng về {ket}" if ket else ""), ""
+        moc = L("hoi.md.tv.moc_thang", "{ten} (từ {tu} đến {den} dương lịch)", ten=_ten_thang_am(ln), tu=_ngay_vn(ln["tu"]),
+                den=_ngay_vn(ln["den"]))
+        return moc, (L("hoi.md.tv.nhip_thang", "trên lá số, nhịp riêng của tháng này nghiêng về {ket}",
+                       ket=_ten.ten("xu_huong_tuvi", ket)) if ket else ""), ""
     nh = next((m for m in muc if m.get("loai") == "nhip_3_thang" and m.get("thang")), None)
     if nh:
         ds = "; ".join(f"{_ten_thang_am(x)} — {x['nhan_muc'].lower()} ({thuong(bo_dau_cham(x['tieu_de_thang']))})"
                        for x in nh["thang"])
         can = next((x for x in nh["thang"] if x.get("muc") == "can_than"), None)
         viec = cau(can["goi_y"]) if can else ""
-        return f"trong {nh['so_thang']} tháng tới", f"trên lá số, {ds}", viec
+        return L("hoi.md.moc_thang", "trong {n} tháng tới", n=nh["so_thang"]), L("hoi.md.tv.tren_la_so", "trên lá số, {ds}", ds=ds), viec
     return None, "", ""
 
 

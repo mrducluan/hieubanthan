@@ -48,7 +48,7 @@ test.describe("catalog /en/bazi", () => {
 
 test.describe("catalog cụm kiến thức /en/bazi/*", () => {
   test("mọi cụm kiến thức mở bản Anh qua rewrite có chữ máy chủ tiếng Anh (title ≤ 70, description ≤ 160)", () => {
-    const mo = CAP_DUONG.filter((x) => x.mo && !x.rieng && khoaTheoDuong(x.vi));
+    const mo = CAP_DUONG.filter((x) => x.mo && !x.rieng && khoaTheoDuong(x.vi) && x.en.startsWith("/en/bazi"));
     expect(mo.map((x) => x.en).sort()).toEqual(["/en/bazi/day-masters", "/en/bazi/element-by-birth-year", "/en/bazi/ten-gods"]);
     for (const c of mo) {
       const t = CUM_EN[c.vi];

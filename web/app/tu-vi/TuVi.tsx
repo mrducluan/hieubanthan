@@ -256,7 +256,7 @@ export function TuVi() {
             )}
             {/* Lá số: điện thoại mặc định thu vừa màn hình, "Phóng to" để đọc chữ rõ rồi vuốt (Trục 1 — KhungLaSo) */}
             <KhungLaSo chon={chiChon} chan={<ChanLaSo giaoDien={giaoDien} tieuDe={ct("chan.tieu_de")} duong={d("/tu-vi")} />}>
-              <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={nt ? tenHien(nt) : hoSo?.ho_ten} gioSinh={nt ? gioHienThi(nt) : gioHienThi(hoSo)}
+              <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={nt ? (en ? nt.ten_goi || `${ct(`qh.${nt.quan_he}`)} · ${nt.nam}` : tenHien(nt)) : hoSo?.ho_ten} gioSinh={nt ? gioHienThi(nt) : gioHienThi(hoSo)}
                 chon={chiChon} phaiDoSang={phaiDoSang} onChon={(c) => {
                   setChon(c); ghi("chart_interacted", { mo_dun: "tuvi", kind: "chon_cung" });
                   // Điện thoại: chi tiết cung nằm dưới lá số, ngoài tầm mắt → cuộn tới.

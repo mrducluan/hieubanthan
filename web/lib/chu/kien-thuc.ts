@@ -33,6 +33,9 @@ export const CHU_KIEN_THUC = {
   "moi.nhat_chu": { nhom: M, nhan: "Lời mời — trang nhật chủ", mac_dinh: "Nhật chủ của bạn là can nào, thân mạnh hay yếu? Nhập ngày giờ sinh để lập tứ trụ.", en: "Which stem is your Day Master, and does your chart run strong or weak? Enter your birth date and time to set up your Four Pillars." },
   "moi.menh_nam": { nhom: M, nhan: "Lời mời — trang mệnh theo năm", mac_dinh: "Ngoài mệnh theo năm sinh, ngũ hành trong tứ trụ của bạn thiếu đủ thế nào? Nhập ngày giờ sinh để xem.", en: "Beyond your birth-year element, how are the five elements balanced in your own Four Pillars? Enter your birth date and time to see." },
   "moi.nut_bat_tu": { nhom: M, nhan: "Nút mời — Bát tự", mac_dinh: "Lập lá số Bát tự của tôi", en: "Set up my BaZi chart" },
+  "bai.khi": { nhom: "Bài", nhan: "Trích dẫn cổ thư — nhãn trước điều kiện trên lá số", mac_dinh: "Câu này nói về lá số khi", en: "Applies to charts with" },
+  "bai.chu_thich": { nhom: "Bài", nhan: "Trích dẫn cổ thư — nhãn chú thích chữ", mac_dinh: "Chú thích: ", en: "Note: " },
+  "moi.nut_tu_vi": { nhom: M, nhan: "Nút mời — Tử vi", mac_dinh: "Lập lá số Tử vi của tôi", en: "Set up my Zi Wei chart" },
   "moi.nut_chung": { nhom: M, nhan: "Nút mời mặc định", mac_dinh: "Xem của tôi", en: "See mine" },
 
   // ---------------------------------------------------------------- mục lục cụm dài (DanhSachCum + BoLocCum)
@@ -82,4 +85,10 @@ export const CHU_KIEN_THUC = {
   "mh.nhat_chu": { nhom: H, nhan: "Nhật chủ — chú thích hình ({can}, {hanh}, {ad})", mac_dinh: "Nhật chủ {can} — hành {hanh} {ad} trong vòng ngũ hành", en: "Day Master {can} — {ad} {hanh} in the five-element cycle" },
   "mh.nhat_chu_giua": { nhom: H, nhan: "Nhật chủ — chữ giữa vòng ({hanh}, {ad})", mac_dinh: "{hanh} {ad}", en: "{ad} {hanh}" },
   "mh.menh": { nhom: H, nhan: "Mệnh năm — chú thích hình ({can_chi}, {nap_am}, {han}, {hanh})", mac_dinh: "Tuổi {can_chi}, mệnh {nap_am} ({han}) — hành {hanh} trong vòng ngũ hành", en: "{can_chi} year, Na Yin {nap_am} ({han}) — {hanh} in the five-element cycle" },
+  "mh.sao": { nhom: H, nhan: "Sao Tử vi — chú thích hình ({ten}, {han}, {hanh})", mac_dinh: "Sao {ten} ({han}), hành {hanh}", en: "{ten} ({han}), {hanh} element" },
+  "mh.sao_duoi": { nhom: H, nhan: "Sao Tử vi — chữ dưới hình ({ten}, {hanh})", mac_dinh: "{ten} · {hanh}", en: "{ten} · {hanh}" },
+  "mh.cung": { nhom: H, nhan: "Cung Tử vi — chú thích hình ({cung})", mac_dinh: "Cung {cung} — vị trí trong vòng 12 cung Tử vi", en: "The {cung} — its place in the ring of 12 palaces" },
+  "mh.sao_cung": { nhom: H, nhan: "Sao ở cung — chú thích hình ({ten}, {han}, {cung})", mac_dinh: "Sao {ten} ({han}) ở cung {cung} — vòng 12 cung Tử vi", en: "{ten} ({han}) in the {cung} — the ring of 12 palaces" },
+  "mh.hoa_cung": { nhom: H, nhan: "Hoá ở cung — chú thích hình ({hoa}, {han}, {cung})", mac_dinh: "Hoá {hoa} ({han}) ở cung {cung} — vòng 12 cung Tử vi", en: "Hua {hoa} ({han}) in the {cung} — the ring of 12 palaces" },
+  "mh.hoa_nho": { nhom: H, nhan: "Hoá ở cung — chữ nhỏ giữa vòng ({hoa})", mac_dinh: "Hoá {hoa}", en: "Hua {hoa}" },
 } as const satisfies BangChu;

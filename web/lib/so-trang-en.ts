@@ -52,7 +52,7 @@ export const CUM_EN: Readonly<Record<string, CumEn>> = {
   "/tu-vi/sao-o-cung": {
     ten: "Main star in each palace", h1: "Each main star in each of the 12 palaces",
     tieu_de_seo: "Zi Wei Dou Shu: each main star in each of the 12 palaces · Hieuban",
-    mo_ta: "168 pages, one for each of the 14 main stars in each of the 12 palaces: meaning, brightness by branch, stars that share or face the palace, and the Four Transformations.",
+    mo_ta: "One page for each of the 14 main stars in each of the 12 palaces: meaning, brightness by branch, the stars that share or face it, and its transformations.",
     tra_loi: "The same star reads differently depending on the palace it sits in: Zi Wei in the Life Palace speaks about how you lead your own life, in the Career Palace about how you work. This section has {so} pages, one for each of the 14 main stars in each of the 12 palaces, with the brightness by branch, the stars that sit with it or face it, and which birth years transform it.",
   },
   "/tu-vi/tu-hoa": {
@@ -113,7 +113,7 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
   "/tu-vi": {
     ten: "Zi Wei Dou Shu",
     tieu_de_seo: "Free Zi Wei Dou Shu chart: 12 palaces and your reading · Hieuban",
-    mo_ta_seo: "Free Zi Wei Dou Shu (Purple Star Astrology) chart from your birth date, time and place: 12 palaces, 10-year periods, this year, the next 3 months, in plain words.",
+    mo_ta_seo: "Free Zi Wei Dou Shu (Purple Star Astrology) chart from your birth date, time and place: 12 palaces, 10-year periods, this year and the next 3 months.",
     tra_loi_nhanh: {
       hoi: "What does this Zi Wei Dou Shu calculator give you?",
       dap: "Enter your birth date, time, sex and birthplace and you get a 12-palace Zi Wei Dou Shu chart set up by the Vietnamese lunar calendar, with a life reading area by area: character, work, money, love, health, your 10-year periods, this year and the next three months. The chart and the full reading are free, with no account needed.",

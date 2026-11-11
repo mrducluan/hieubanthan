@@ -152,6 +152,10 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "ban_vao_nguoi_kia.sao": "sao", "menh_nguoi_kia_vao_ban.hoa": "hoa", "menh_nguoi_kia_vao_ban.sao": "sao",
     # EN-ALL GĐ 4 (agent B) — bài đọc Tử vi: dòng thời gian đại hạn, sao lưu năm
     "thoi_gian_bieu.cung": "cung", "muc.cung": "cung", "muc.cac_cung": "cung",
+    # EN-ALL GĐ 4 (agent E) — hỏi đáp Tử vi: cung câu hỏi đọc (web hiện "Cung xem"), bàn 12 cung của khối hình (chi cung hỏi,
+    # sao chính từng ô, đường bay tứ hoá giữa hai chi)
+    "phan_loai.cung": "cung", "muc.sao": "sao", "chi_hoi": "chi", "bay.tu": "chi", "bay.den": "chi", "bay.hoa": "hoa",
+    "hinh.hoa": "hoa",
 }
 
 

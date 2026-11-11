@@ -235,9 +235,10 @@ def _nhan_tuvi(pl: dict) -> set[str]:
     if loai in _TV_KIEN_THUC:
         return {"kien_thuc"}
     if loai == "la_so":
-        return tu_cung | {"cung", "sao", "khac"}
+        return tu_cung | {"cung", "sao", "khac"} | ({"tu_hoa"} if pl.get("hoa") or "tu hoa" in (pl.get("cau_chuan_hoa") or "") else set())
     if loai == "han":
-        return tu_cung | {"luu_nien", "dai_han", "tu_hoa"} | ({"luu_nguyet"} if pl.get("hoi_thang") else set())
+        return tu_cung | {"luu_nien", "dai_han", "tu_hoa"} | ({"luu_nguyet"} if pl.get("hoi_thang") or pl.get("y_dinh") in (
+            "ba_thang_toi", "chon_thoi_diem") else set())
     return {"phi_hoa": {"tu_hoa"}, "vi_tri_sao": {"sao", "tu_hoa", "cung"}, "cach_cuc_la_so": {"cach_cuc"},
             "sat_tinh_la_so": {"sao", "tinh_cach"}, "hop_hon": {"hop", "tinh_cam"}, "hop_lam_an": {"hop", "su_nghiep"},
             "nguoi_khac": {"hop", "gia_dinh"}, "la_so_con": {"gia_dinh"}, "sinh_con_tuoi": {"gia_dinh"}}.get(loai, set()) | tu_cung
@@ -261,7 +262,7 @@ def cham_tuvi(holdout: bool = False, in_sai: bool = False) -> dict:
                         headers={"x-ngon-ngu": "en"})
             r = rr.json() if rr.status_code == 200 else {}
             dem["loi_500"] += rr.status_code >= 500
-            pl = r.get("phan_loai") or _phan_loai("tuvi", q["cau_hoi"])
+            pl = _phan_loai("tuvi", q["cau_hoi"])          # phân loại đầy đủ (phản hồi chỉ mang bản gọn)
             xl, loai = pl.get("xu_ly"), q["loai"]
             tong[loai] += 1
             if loai == "khung_hoang":

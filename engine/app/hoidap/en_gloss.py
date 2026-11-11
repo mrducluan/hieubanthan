@@ -401,6 +401,8 @@ _KIEN_THUC_MOC = re.compile(r"\b(this|next|last) (year|month|week)\b|\b(19|20)\d
 
 def tu_dien_kien_thuc(cau: str, mang: str = "battu") -> list[str]:
     """Mã từ điển cho câu kiến thức thuần tiếng Anh (Bát tự) mà bộ phân loại chưa nhận ra; không phải câu kiến thức → []."""
+    if mang == "tuvi":
+        return _tu_dien_tuvi(cau)
     if mang != "battu":
         return []
     t = chuan(cau)
@@ -416,9 +418,330 @@ def tu_dien_kien_thuc(cau: str, mang: str = "battu") -> list[str]:
     return ma[:2]
 
 
+# ================================================================== EN-ALL GĐ 4 — Tử vi
+# Tên cung / sao / tứ hoá / khái niệm tiếng Anh (pinyin, tên dịch thường gặp) → cụm không dấu mà `hoidap/tuvi.phan_loai`
+# nhận ("career palace" → "cung quan loc", "hua ji" → "hoa ky"). Thứ tự: cụm dài trước.
+_TV_CUNG: list[tuple[str, str]] = [
+    (r"body palace|shen gong|shen palace", "cung than"),
+    (r"(?:life|ming|destiny|self|soul) (?:palace|gong)|ming gong|life house", "cung menh"),
+    (r"(?:siblings?|brothers?|sisters?|brothers and sisters|xiong di) (?:palace|gong)|xiong di gong", "cung huynh de"),
+    (r"(?:spouse|marriage|partner|husband and wife|relationship|romance|fu qi|love) (?:palace|gong)|fu qi gong|fu qi", "cung phu the"),
+    (r"(?:children s?|children|kids?|zi nu|offspring|child) (?:palace|gong)|zi nu gong|zi nu", "cung tu nu"),
+    (r"(?:wealth|money|finance|cai bo|cai bai|treasury) (?:palace|gong)|cai bo gong|cai bo|cai bai", "cung tai bach"),
+    (r"(?:health|illness|sickness|ji e|disease) (?:palace|gong)|ji e gong|ji e", "cung tat ach"),
+    (r"(?:travel|travelling|traveling|migration|moving|qian yi|transfer|movement) (?:palace|gong)|qian yi gong|qian yi", "cung thien di"),
+    (r"(?:friends?|servants?|subordinates?|staff|nu pu|jiao you|friends and staff|social) (?:palace|gong)|jiao you gong|"
+     r"nu pu gong|jiao you|nu pu", "cung no boc"),
+    (r"(?:career|official|officials|guan lu|work|job|career and official) (?:palace|gong)|guan lu gong|guan lu", "cung quan loc"),
+    (r"(?:property|home|house|tian zhai|real estate|estate|field and house) (?:palace|gong)|tian zhai gong|tian zhai", "cung dien trach"),
+    (r"(?:fortune|virtue|fu de|happiness|blessings?|spirit|spiritual|mental|fortune virtue|fortune and virtue) (?:palace|gong)|"
+     r"fu de gong|fu de|fortune virtue", "cung phuc duc"),
+    (r"(?:parents?|fu mu) (?:palace|gong)|fu mu gong|fu mu", "cung phu mau"),
+]
+_TV_SAO: list[tuple[str, str]] = [
+    (r"zi ?wei(?= (?:star|in|is|sits|at|and)\b)|(?:have|got|has) zi ?wei\b|emperor star|purple star (?:in|is)", "sao tu vi"),
+    (r"tian ji", "thien co"), (r"tai yang|sun star", "thai duong"), (r"wu qu", "vu khuc"), (r"tian tong", "thien dong"),
+    (r"lian zhen", "liem trinh"), (r"tian fu", "thien phu"), (r"tai yin|moon star", "thai am"), (r"tan lang", "tham lang"),
+    (r"ju men", "cu mon"), (r"tian xiang", "thien tuong"), (r"tian liang", "thien luong"),
+    (r"qi sha|seven killings?(?: star)?", "that sat"), (r"po jun", "pha quan"),
+    (r"wen chang", "van xuong"), (r"wen qu", "van khuc"), (r"zuo fu", "ta phu"), (r"you bi", "huu bat"),
+    (r"tian kui", "thien khoi"), (r"tian yue", "thien viet"), (r"lu cun", "loc ton"), (r"tian ma|sky horse|heavenly horse", "thien ma"),
+    (r"qing yang|kình dương", "kinh duong"), (r"tuo luo", "da la"), (r"huo xing|fire star", "hoa tinh"), (r"ling xing|bell star", "linh tinh"),
+    (r"di kong", "dia khong"), (r"di jie", "dia kiep"), (r"hong luan|red phoenix", "hong loan"), (r"tian xi", "thien hy"),
+    (r"peach blossom(?: star)?", "dao hoa"),
+]
+_TV_HOA: list[tuple[str, str]] = [
+    (r"hua lu|lu transformation|transformation of (?:wealth|prosperity)|wealth transformation", "hoa loc"),
+    (r"hua quan|quan transformation|power transformation|transformation of power", "hoa quyen"),
+    (r"hua ke|ke transformation|fame transformation|transformation of fame", "hoa khoa"),
+    (r"hua ji|ji transformation|transformation of (?:obstacle|obstacles|jealousy)|obstacle transformation", "hoa ky"),
+]
+_TV_KHAI_NIEM: list[tuple[str, str]] = [
+    (r"four transformations|4 transformations|si hua|sihua|transformations", "tu hoa"),
+    (r"flying stars?|fei xing|flying hua|flying transformations?|self transform\w*|zi hua|self hua", "phi hoa"),
+    (r"(?:five )?elements? bureau|bureau of (?:the )?five elements|wu xing ju|element bureau|bureau", "ngu hanh cuc"),
+    (r"tuan|triet|void stars?|emptiness stars?", "tuan triet"),
+    (r"(?:no|without) (?:any )?(?:major|main) stars?|empty (?:life )?palace|palace is empty|empty", "vo chinh dieu"),
+    (r"malefic|sha stars?|bad stars?|unlucky stars?|six malefics?|killing stars?", "sat tinh"),
+    (r"(?:fallen|weak|dim|dark|fall) (?:position|state)|is fallen|in a fallen|brightness|temple|bright|exalted", "do sang"),
+    (r"(?:14|fourteen) (?:main|major) stars|how many (?:main|major) stars|main stars|major stars", "14 chinh tinh"),
+    (r"(?:have|has|got) (?:any|a|the) (?:special |rare |famous )?(?:\w+ ){0,4}?pattern|special pattern|"
+     r"structures?|ge ju|anything rare|rare (?:chart|pattern)|sha po lang|ji yue tong liang|zi fu", "cach cuc"),
+    (r"san fang|three directions|four directions|triad", "tam phuong"),
+]
+_TV_HAN: list[tuple[str, str]] = [
+    (r"da ?xian|(?:10|ten) ?year (?:luck )?(?:period|cycle|palace|phase|luck)|decade(?:s)?(?: luck)?(?: period)?|"
+     r"major (?:period|cycle)|luck (?:period|cycle|pillar)s?|my (?:20s|30s|40s|50s|60s)|(?:twenties|thirties|forties|fifties|sixties)|"
+     r"current (?:period|phase|cycle)|this period|next period|phase of my life|period of my life", "dai han"),
+    (r"liu nian|annual (?:chart|palace|stars?|luck)|yearly (?:chart|palace|luck)|year ahead|tai sui|clash year|year of the", "luu nien"),
+    (r"xiao xian|minor (?:yearly )?limit", "tieu han"),
+    (r"liu yue|monthly chart|month by month|which months?|what months?|best months?|worst months?|any month|(?:\d+(?:st|nd|rd|th)?|first|1st) lunar month", "luu nguyet"),
+]
+_TV_KIEN_THUC: list[tuple[str, str]] = [
+    (r"\b(?:accurate|accuracy|scientific|science|legit|reliable|real)\b", "co chinh xac"),
+    (r"\b(?:invent\w*|history|origin|who created|where does .{0,20} come from)\b", "tu vi la gi"),
+    (r"\bbazi\b|\bfour pillars\b|\bdifferent from\b|\bdifference\b|\bcompared? (?:to|with)\b", "khac bat tu"),
+    (r"\bbirth (?:hour|time)\b|\bwhy .{0,20}\bhour\b", "khong ro gio"),
+    (r"\bvietnamese\b.{0,40}\bchinese\b|\bchinese\b.{0,40}\bvietnamese\b|\bschools?\b|\bnorthern\b|\bsouthern\b", "nam phai bac phai"),
+]
+
+
+def _tv_thay(t: str, bang: list[tuple[str, str]]) -> list[str]:
+    ra = []
+    for mau, vn in bang:
+        if re.search(r"\b(?:" + mau + r")\b", t) and vn not in ra:
+            ra.append(vn)
+    return ra
+
+
+_TV_CHU_DE = {"suc_khoe": "suc khoe", "an_toan": "tai nan", "con_gia_dinh": "con cai", "ngu_hanh": "cung menh",
+              "gia_dinh_manh": "bo me", "hoc_hanh": "hoc hanh", "sinh_con": "nen sinh con nam nao", "con_cai": "con cai",
+              "tinh_cam": "tinh duyen", "tien_bac": "tien bac", "ban_than_manh": "cung menh", "tinh_cam_nhe": "tinh duyen",
+              "su_nghiep": "cong viec", "di_xa": "di xa", "phap_ly": "kien tung", "quan_he": "ban be", "hau_van": "hau van",
+              "tinh_cam_nguoi": "tinh duyen"}
+_TV_NHA = (r"(?:buy|buying|bought|own|owning|sell|selling|sold|renovat\w*|rent|renting|move|moving|build|building) (?:a |an |my |our |the |"
+           r"new |first )*(?:house|home|flat|apartment|condo|property|properties|land|kitchen)|inherit\w* (?:a |the |some )?(?:property|house|land|home)|"
+           r"move house|moving house|real estate|property|properties|landlord|own a home|home loan|mortgage|"
+           r"my (?:house|home|flat|apartment|condo|land)")
+_TV_DI = (r"move (?:abroad|overseas|countries|to (?:another|a new|a different) (?:city|country)|to [a-z]+)|moving to [a-z]+|living overseas|"
+          r"overseas|abroad|emigrat\w*|relocat\w*|transfer to|trip|travel\w*|far from (?:home|where)|away from home|visa")
+_TV_GIA: list[tuple[str, str]] = [
+    (r"siblings?|brothers?|sisters?", "anh chi em"), (r"in laws?|mother in law|father in law", "me chong"),
+    (r"parents?|mother|mom|mum|father|dad|family", "cha me"),
+]
+
+
+def _tuvi(cau: str, t: str) -> str:
+    ra: list[str] = []
+    ca_nhan = bool(_CA_NHAN.search(t)) or bool(re.search(r"\b(?:we|our|us)\b", t)) or bool(re.search(
+        r"\b(?:should|good (?:month|time|year|day|idea) (?:to|for)|good for \w+ing|ok to|okay to|is it (?:a )?(?:good|bad|ok|okay))\b", t))
+    # tên sao / cung không được đọc thành tháng ("po jun" ≠ June, "may") — mốc thời gian xét trên câu đã bỏ tên riêng
+    t_moc = t
+    for mau, _vn in _TV_CUNG + _TV_SAO + _TV_HOA:
+        t_moc = re.sub(r"\b(?:" + mau + r")\b", " ", t_moc)
+    t_moc = " ".join(t_moc.split())
+    cung = _tv_thay(t, _TV_CUNG)
+    sao = _tv_thay(t, _TV_SAO)
+    hoa = _tv_thay(t, _TV_HOA)
+    kn = _tv_thay(t, _TV_KHAI_NIEM)
+    han = _tv_thay(t, _TV_HAN)
+    hoi = _HOI.search(t) or re.search(r"\bmeaning\b|\bwhat about\b|\bwho\b", t)
+    # 1. câu KIẾN THỨC (không "my / me / I"): khái niệm → cụm giải thích KB; sao / cung / hoá → "… la gi"; còn lại → cụm
+    #    kiến thức chung + câu gốc (từ điển thuật ngữ bản tiếng Anh nhận "Hua Ji", "Life Palace"…)
+    if not ca_nhan and hoi and not _ve_nguoi_khac(t) and not _hop_nhau(t):
+        kt = [vn for mau, vn in _TV_KIEN_THUC if re.search(mau, t)]
+        if kn and "do sang" in kn:
+            kt.append("mieu vuong la gi")
+        elif kn and "sat tinh" in kn:
+            kt.append("luc sat tinh la gi")
+        elif kn:
+            kt += [f"{x} la gi" for x in kn]
+        if re.search(r"\b(?:da ?xian|10 ?year (?:luck )?period|decade)\b", t):
+            kt.append("dai han la gi")
+        if re.search(r"\b(?:liu nian|annual chart|yearly chart)\b", t):
+            kt.append("luu nien la gi")
+        if re.search(r"\b(?:liu yue|monthly chart)\b", t):
+            kt.append("luu nguyet")
+        ten = cung + sao + hoa
+        if (sao or hoa) and cung and not kt:          # "Hua Ji in the spouse palace" → sao / hoá × cung (KB)
+            return " ".join(sao + hoa) + " o " + cung[0] + " y nghia"
+        if ten and not kt:
+            kt = [f"{x} la gi" for x in ten]
+        if not kt and re.search(r"\b(?:zi ?wei|purple star|zwds|ziwei|dou shu)\b", t):
+            kt.append("tu vi la gi" if not re.search(r"\bpalaces?\b", t) else "cac cung la gi")
+        if not kt and re.search(r"\bpalaces?\b", t):
+            kt.append("12 cung la gi")
+        if not kt and re.search(r"\bstars?\b", t):
+            kt.append("chinh tinh la gi")
+        if kt:
+            return " ".join(dict.fromkeys(kt)) + " " + cau
+    # 2. loại câu: hợp nhau / người khác / con
+    dong_nghiep = bool(re.search(r"\b(?:team|teammates?|coworkers?|co workers?|colleagues?)\b", t))
+    hop = (not dong_nghiep and _hop_nhau(t)) or (re.search(r"\b(?:what|which) (?:birth )?(?:year|zodiac|sign|animal)s? .{0,20}(?:partner|husband|wife|"
+                                     r"spouse|boyfriend|girlfriend)\b|\b(?:partner|husband|wife) .{0,20}suits? me\b|"
+                                     r"\bclash\b.{0,40}\b(?:guy|girl|boyfriend|girlfriend|partner|husband|wife)\b|"
+                                     r"\b(?:guy|girl|boyfriend|girlfriend|partner|husband|wife)\b.{0,40}\bclash\b|"
+                                     r"\bboth .{0,15}years?\b.{0,30}\b(?:match|good)\b", t) and "toi va nguoi yeu hop nhau")
+    if hop == "hop lam an" or (hop and re.search(r"\bbusiness partner\b", t)):
+        return "xem tuoi lam an hop tac cua toi"
+    if hop and hop != "gia dinh":
+        ra.append("toi va nguoi yeu hop nhau")
+    elif not hop:
+        nk = _ve_nguoi_khac(t)
+        if re.search(r"\b(?:his|her|their)\b (?:\w+ ){0,2}(?:dob|birth ?days?|bday|birth dates?)\b|\b(?:coworker|colleague|boss|"
+                     r"friend|neighbou?r|husband|wife|boyfriend|girlfriend|mother|mom|mum|father|dad|sister|brother) s (?:\w+ )?(?:chart|birth chart|"
+                     r"zi wei|purple star)\b", t):
+            nk = nk or "chong toi co"
+        if nk and nk.startswith("con "):
+            return "lap la so cho con toi " + " ".join(_moc(t))
+        if nk:
+            ai = nk.split(" toi")[0]
+            return f"xem tu vi cho {ai} toi"
+    # 3. ý định đời sống hay gặp (luật từ khoá của bản Việt)
+    if re.search(r"\b(?:quit|resign\w*|leave|change|switch)\b (?:\w+ ){0,2}(?:job|jobs|work|company|career|field)\b|\bstay or (?:go|leave)\b|"
+                 r"\bstay in .{0,30} or (?:switch|move|change)\b|\bnew job\b|\bjob offer\b|\bsomething new\b", t):
+        ra.append("doi viec")
+    if re.search(r"\b(?:next|coming) (?:\d+|few|couple of|two|three|several) months\b|\bnext quarter\b", t):
+        ra.append("3 thang toi")
+    if re.search(r"\bwhole chart\b|\bchart overall\b|\boverall chart\b|\bin a few sentences\b|\bentire chart\b|\bmy chart\b.{0,15}\boverall\b", t):
+        ra.append("tong quan la so")
+    elif re.search(r"\boverall\b|\bbig picture\b|\bin general\b|\bsummari[sz]e\b|\bgood and bad\b|\bwhat (?:does|will) .{0,15}look like\b|"
+                 r"\bhow s .{0,15}looking\b|\bhow is .{0,15}looking\b|\bfocus on\b", t):
+        ra.append("tong quan nam nay" if not han else "tong quan")
+    # 4. tên cung / sao / hoá / khái niệm nêu trong câu
+    ra += cung + sao + hoa
+    if "phi hoa" in kn:
+        ra.append("phi hoa")
+    if "tu hoa" in kn and not hoa:
+        ra.append("tu hoa")
+    if "vo chinh dieu" in kn:
+        ra.append("menh vo chinh dieu" if not cung or cung == ["cung menh"] else "vo chinh dieu")
+    if "sat tinh" in kn and ca_nhan:
+        ra.append("sat tinh chieu menh")
+    if "cach cuc" in kn and ca_nhan:
+        ra.append("cach cuc")
+    if re.search(r"\bwhere (?:is|are|does|do)\b|\bwhich palace\b|\bwhat palace\b|\bland(?:s)? in\b", t) and (sao or hoa):
+        ra.append("o cung nao")
+    # 5. chủ đề đời sống (khi câu chưa nêu cung) — Tử vi đọc bạn bè / đồng nghiệp ở Nô Bộc, sức khoẻ ở Tật Ách, tính cách ở Mệnh
+    if not cung and re.search(r"\b(?:coworkers?|co workers?|colleagues?|team|teammates?|best mate|mates?|helpful people|helpers?|"
+                              r"people use me|use me|back me up|stab me|backstab\w*|friendships?|friends?|benefactors?|noble people)\b", t):
+        ra.append("ban be")
+    elif not cung and re.search(r"\b(?:health|healthy|check ?ups?|medical|doctors?|body systems?|energy|exhausted|sleep\w*|"
+                                r"stress\w*|injur\w*|knee|back pain|fitness|back to running)\b", t) \
+            and not re.search(r"\b(?:accidents?|crash|road|driving)\b", t):
+        ra.append("suc khoe")
+    elif not cung and not re.search(r"\b(?:job|jobs|work|career|business|boss)\b", t) and re.search(r"\b(?:personality|traits?|who am i|kind of person|what kind of person|weakness\w*|strengths?|"
+                                r"emotional|temper|stubborn|perfectionist|bored|leader type|deep down|who i am|cold at first|"
+                                r"overanaly\w*|come across)\b", t):
+        ra.append("cung menh")
+    elif not cung and re.search(r"\b(?:(?:start|open|go into|run|do|doing)\b.{0,25}\bbusiness with|business partners?|partner(?:ing)? "
+                                r"with|go in(?:to)? (?:business )?with|invest(?:ing)? with)\b", t):
+        ra.append("hop tac lam an")
+    elif not cung:
+        if re.search(r"\b(?:contracts?|sign(?:ing)? (?:a |the )?(?:deal|lease|agreement)|paperwork)\b", t):
+            ra.append("ky hop dong")
+        elif re.search(r"\b(?:" + _TV_NHA + r")\b", t):
+            ra.append("nha cua")
+        elif re.search(r"\b(?:" + _TV_DI + r")\b", t):
+            ra.append("di xa")
+        else:
+            cd = _chu_de(cau)
+            if cd:
+                ma = cd[0]
+                if ma in ("gia_dinh", "gia_dinh_manh"):
+                    ra.append(next((vn for mau, vn in _TV_GIA if re.search(r"\b(?:" + mau + r")\b", t)), "cha me"))
+                elif ma == "ngu_hanh" and not re.search(r"\b(?:colou?rs?|wear|elements?|crystals?|bracelets?)\b", t):
+                    pass
+                else:
+                    ra.append(_TV_CHU_DE.get(ma, ""))
+            elif re.search(r"\b(?:who am i|kind of person|personality|traits?|weakness\w*|strengths?|emotional|temper|stubborn|"
+                           r"cold|bored|perfectionist|leader type|deep down|who i am|lazy|shy)\b", t):
+                ra.append("cung menh")
+            elif re.search(r"\b(?:happy|happiness|peace of mind|spiritual\w*|inner peace|contentment)\b", t):
+                ra.append("phuc duc")
+            elif re.search(r"\b(?:success\w*|achieve\w*|ambitions?|reputation|fame|famous)\b", t):
+                ra.append("cong viec")
+            elif re.search(r"\b(?:team|coworkers?|colleagues?|people use me|helpful people|back me up|mates?)\b", t):
+                ra.append("ban be")
+            elif re.search(r"\b(?:kids|children|baby)\b", t):
+                ra.append("con cai")
+    # 6. mốc thời gian + vận
+    ra += [x for x in han if x != "luu nien" or not re.search(r"\byear of the\b", t)]
+    # tên tháng tiếng Anh ("December", "in March") là tháng DƯƠNG lịch — Tử vi tự đổi sang tháng âm (ngày 15 của tháng đó)
+    hn = _hom_nay()
+    moc = [re.sub(r"^luu nguyet thang (\d+)$", lambda x: f"luu nguyet thang {x.group(1)} duong nam "
+                  f"{hn.year if int(x.group(1)) >= hn.month else hn.year + 1}", v) for v in _moc(t_moc)]
+    moc = [re.sub(r"^luu nguyet thang (\d+) nam", r"luu nguyet thang \1 duong nam", v) for v in moc] \
+        + [v for m_, v in _CHUNG if re.search(m_, t_moc)]
+    if any(v.startswith("luu nguyet thang") for v in moc):
+        ra = [x for x in ra if x not in ("tong quan nam nay", "tong quan")]
+    for n in re.findall(r"\b(1[0-2]|[1-9])(?:st|nd|rd|th)? lunar month\b", t_moc):
+        moc.append(f"thang {n} am")
+    for y in re.findall(r"\b(20\d\d)\b", t):            # năm nêu rõ (không phải năm sinh) mà `_moc` bỏ vì đứng gần "born"
+        if f"nam {y}" not in moc and not re.search(rf"\b(?:born|birth|since)(?: in)? {y}\b|\b{y} (?:born|baby)\b", t):
+            moc.append(f"nam {y}")
+    if re.search(r"\b(?:a|this) good year\b|\bgood year to\b", t) and not any(v.startswith("nam ") for v in moc):
+        moc.append("nam nay")
+    ra += [{"dai van": "dai han"}.get(v, v) for v in moc]
+    if re.search(r"\bbest (?:decade|period)\b|\b(?:which|what) (?:decade|period)\b|\bnext (?:decade|10 ?years?)\b", t):
+        ra.append("dai han")
+    if re.search(r"\b(?:which|what) (?:of my )?palaces?\b.{0,20}\b(?:strongest|best|weakest)\b", t):
+        ra.append("tong quan la so")
+    if ca_nhan:
+        ra.append("cua toi")
+    return " ".join(dict.fromkeys(x for x in ra if x))
+
+
+# GĐ 4: câu kiến thức Tử vi tiếng Anh → mã từ điển (`kb/tu_dien.json`, mảng tuvi) theo NGHĨA. Câu có "my / me / I", mốc
+# thời gian, người khác → không phải câu kiến thức (đọc lá số).
+_TV_TU_DIEN: list[tuple[str, str]] = [
+    (r"(?:life|ming) palace.{0,40}body palace|body palace.{0,40}(?:life|ming) palace", "cung_than"),
+    (r"(?:annual|yearly).{0,30}(?:monthly)|monthly.{0,30}(?:annual|yearly)", "luu_nien"),
+    (r"(?:life|ming|destiny|self) palace|ming gong", "cung_menh"), (r"body palace|shen gong", "cung_than"),
+    (r"siblings? palace|xiong di", "huynh_de"), (r"spouse palace|marriage palace|fu qi", "phu_the"),
+    (r"children s? palace|children palace|zi nu", "tu_nu"), (r"wealth palace|cai bo|cai bai", "tai_bach"),
+    (r"health palace|ji e", "tat_ach"), (r"(?:travel|migration|moving) palace|qian yi", "thien_di"),
+    (r"(?:friends?|servants?|subordinates?) palace|nu pu|jiao you", "no_boc"),
+    (r"(?:career|official|officials) palace|guan lu", "quan_loc"), (r"(?:property|home|house) palace|tian zhai", "dien_trach"),
+    (r"(?:fortune|virtue|happiness|blessings?) palace|fu de", "phuc_duc"), (r"parents? palace|fu mu", "phu_mau"),
+    (r"hua lu", "hoa_loc"), (r"hua quan", "hoa_quyen"), (r"hua ke", "hoa_khoa"), (r"hua ji", "hoa_ky"),
+    (r"four transformations|si hua|sihua|transformations", "tu_hoa"),
+    (r"flying stars?|fei xing|flying", "lai_nhan_cung"),
+    (r"zi ?wei(?= star)|emperor star", "tu_vi"), (r"tian ji", "thien_co"), (r"tai yang|sun star", "thai_duong"),
+    (r"wu qu", "vu_khuc"), (r"tian tong", "thien_dong"), (r"lian zhen", "liem_trinh"), (r"tian fu", "thien_phu"),
+    (r"tai yin|moon star", "thai_am"), (r"tan lang", "tham_lang"), (r"ju men", "cu_mon"), (r"tian xiang", "thien_tuong"),
+    (r"tian liang", "thien_luong"), (r"qi sha|seven killings?", "that_sat"), (r"po jun", "pha_quan"),
+    (r"zuo fu", "ta_phu"), (r"you bi", "huu_bat"), (r"wen chang", "van_xuong"), (r"wen qu", "van_khuc"),
+    (r"tian kui", "thien_khoi"), (r"tian yue", "thien_viet"), (r"lu cun", "loc_ton"), (r"tian ma|sky horse", "thien_ma"),
+    (r"qing yang", "kinh_duong"), (r"tuo luo", "da_la"), (r"huo xing", "hoa_tinh"), (r"ling xing", "linh_tinh"),
+    (r"di kong", "dia_khong"), (r"di jie", "dia_kiep"), (r"hong luan|red phoenix", "hong_loan"), (r"tian xi\b", "thien_hy"),
+    (r"six (?:lucky|auspicious) stars|lucky stars", "luc_cat"), (r"six (?:malefic|unlucky|killing|sha) stars|malefic stars|sha stars", "luc_sat"),
+    (r"bureau|wu xing ju", "cuc"), (r"tuan", "tuan"), (r"triet|void stars?", "triet"),
+    (r"(?:no|without) (?:major|main) stars|empty palace", "vo_chinh_dieu"),
+    (r"temple|bright\w*|exalted", "do_sang_sao"), (r"fallen|weak position", "ham"),
+    (r"patterns?|structures?|ge ju", "cach_cuc"), (r"(?:main|major) stars|14 stars|fourteen stars", "chinh_tinh"),
+    (r"minor stars|secondary stars|auxiliary stars", "phu_tinh"),
+    (r"da ?xian|(?:10|ten) ?year (?:luck )?period|decade", "dai_han"), (r"xiao xian|minor limit", "tieu_han"),
+    (r"liu nian|annual (?:chart|luck|palace)|yearly chart", "luu_nien"),
+    (r"san fang|three directions|triad", "tam_phuong_tu_chinh"),
+    (r"(?:12|twelve) palaces|the palaces|a palace|palaces", "cung"),
+    (r"vietnamese.{0,40}chinese|chinese.{0,40}vietnamese|southern school|northern school|schools?", "nam_phai"),
+    (r"zi ?wei|purple star|zwds|ziwei|dou shu", "la_so_tu_vi"),
+]
+_TV_KIEN_THUC_HOI = re.compile(r"\bwhat (is|are|does|do|s)\b|\bwhats\b|\bmeaning\b|\bmean\b|\bexplain\b|\bdefine\b|\bdefinition\b|"
+                               r"\btell me about (the |a |an )?(?!my\b)|\bwhat .{0,20}\b(represent|represents|stand for|stands for|symboli[sz]e|used for)\b|"
+                               r"\bis .{1,30} (?:always )?(?:a )?(?:bad|good|lucky|unlucky|evil|malefic) star\b|\bhow many\b|\bwho (invented|created)\b|"
+                               r"\bdifference\b|\bhow is .{0,40} different\b|\bwhy (does|do|is) .{0,30}\b(need|matter|differ)|\bwhy .{0,40}\bdiffer\b|"
+                               r"\bis .{0,30}(scientific|accurate|real|legit)\b|\bwhat (?:is|are) the\b")
+
+
+def _tu_dien_tuvi(cau: str) -> list[str]:
+    t = chuan(cau)
+    if _CA_NHAN.search(t) or not _TV_KIEN_THUC_HOI.search(t) or _KIEN_THUC_MOC.search(t) or _ve_nguoi_khac(t) or _hop_nhau(t):
+        return []
+    if re.search(r"\b(should|will|good (month|year|time|day)|good idea|for me)\b", t):
+        return []
+    ma: list[str] = []
+    for mau, m in _TV_TU_DIEN:
+        if re.search(r"\b(?:" + mau + r")\b", t) and m not in ma:
+            ma.append(m)
+    if any(re.search(r"\b(?:" + mau + r")\b", t) for mau, _ in _TV_CUNG) and \
+            any(re.search(r"\b(?:" + mau + r")\b", t) for mau, _ in _TV_SAO + _TV_HOA) and not re.search(r"\bbody palace\b", t):
+        return []
+    if "cung_than" in ma and "cung_menh" in ma:
+        ma.remove("cung_menh")
+    if len(ma) > 1 and "la_so_tu_vi" in ma:
+        ma.remove("la_so_tu_vi")
+    if len(ma) > 1 and "cung" in ma:
+        ma.remove("cung")
+    return ma[:2]
+
+
 def gloss(cau: str, mang: str) -> str:
     """Câu tiếng Anh → cụm từ khoá tiếng Việt không dấu cho `phan_loai` của mảng. Không khớp gì → chuỗi rỗng."""
     t = chuan(cau)
     if mang == "battu":
         return _battu(cau, t)
+    if mang == "tuvi":
+        return _tuvi(cau, t)
     return ""

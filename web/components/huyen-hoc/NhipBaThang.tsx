@@ -20,6 +20,10 @@ import { maNhip } from "@/lib/kiem-chung";
 import { useTyLe, type BangTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 import { ChanQr } from "@/components/khung/ChanQr";
+import { useChuTuVi } from "@/components/huyen-hoc/chu-tu-vi";
+import { TenHienProvider } from "@/components/khung/TenHien";
+
+type ChuNB = ReturnType<typeof useChuTuVi>["c"];
 
 type Thang = Nhip3ThangOutputT["thang"][number];
 type Muc = Thang["muc"];
@@ -33,17 +37,17 @@ const DIEM_SANG = "111 211 181";      // cùng màu hộp "Điểm sáng" (.hop-
 const DE_Y = "245 170 80";            // cùng màu hộp "Nên để ý" (.hop-nb luu_y) — hổ phách, không đỏ
 
 const ngan = (iso: string) => { const [, m, d] = iso.split("-"); return `${Number(d)}/${Number(m)}`; };
-const tenThang = (t: Thang) => t.nhan_thang ?? `Tháng ${t.thang}${t.nhuan ? " nhuận" : ""}`;
+const tenThang = (t: Thang, c: ChuNB) => t.nhan_thang ?? `${c("nb.thang", { thang: String(t.thang) })}${t.nhuan ? c("nb.nhuan") : ""}`;
 // Nhãn ngắn (trục biểu đồ, tâm vòng cung): hai nửa tháng nhuận phải khác nhau ("6N·đầu" / "6N·sau" — nửa sau tính
 // như tháng sau, can chi theo tháng sau); tháng thường giữ "Tháng 9".
-const nhanNgan = (t: Thang) =>
-  t.nhuan ? `${t.thang}N${t.phan === "nua_dau" ? "·đầu" : t.phan === "nua_sau" ? "·sau" : ""}` : `Tháng ${t.thang}`;
+const nhanNgan = (t: Thang, c: ChuNB) =>
+  t.nhuan ? c("nb.nhan_nhuan", { thang: String(t.thang), phan: t.phan === "nua_dau" ? c("nb.dau") : t.phan === "nua_sau" ? c("nb.sau") : "" }) : c("nb.thang", { thang: String(t.thang) });
 const idThe = (goc: string, i: number) => `${goc}-thang-${i}`;
 
 /** Engine cũ (trước NHIP-2) chưa có hộp: dựng một hộp "Nên làm" từ gợi ý để thẻ vẫn đọc được. */
-function hopCua(t: Thang): HopThangT[] {
+function hopCua(t: Thang, c: ChuNB): HopThangT[] {
   if (t.hop?.length) return t.hop;
-  return t.goi_y ? [{ loai: "loi_khuyen", nhan: "Nên làm", tieu_de: "Gợi ý cho tháng", noi_dung: t.goi_y, can_cu: [] }] : [];
+  return t.goi_y ? [{ loai: "loi_khuyen", nhan: c("nb.nen_lam"), tieu_de: c("nb.goi_y"), noi_dung: t.goi_y, can_cu: [] }] : [];
 }
 
 export function NhipBaThang({ laSo, onChonCungTen, onHoi }: {
@@ -52,7 +56,7 @@ export function NhipBaThang({ laSo, onChonCungTen, onHoi }: {
   const { data: d, loi, thuLai } = usePost<Nhip3ThangOutputT>("/api/tuvi/nhip-3-thang", { la_so: laSo });
   if (loi) return <BaoLoi loi={loi} thuLai={thuLai} />;
   if (!d) return <KhungTai dong={3} />;
-  return <NhipBaThangXem d={d} onChonCungTen={onChonCungTen} onHoi={onHoi} />;
+  return <TenHienProvider ten={[(d as { ten_hien?: Record<string, Record<string, string>> }).ten_hien]}><NhipBaThangXem d={d} onChonCungTen={onChonCungTen} onHoi={onHoi} /></TenHienProvider>;
 }
 
 export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutputT; onChonCungTen: (tenCung: string) => void; onHoi: (cau: string) => void }) {
@@ -60,6 +64,7 @@ export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutpu
   const giam = useReducedMotion();
   const [chon, setChon] = useState<number | null>(null);
   const tyLe = useTyLe(d.thang.map(maNhip));         // "x% thấy đúng" khi mã đủ ≥ 30 phiếu (LG-ĐS mục 5)
+  const { c } = useChuTuVi();
   const toi = (i: number) => {
     setChon(i);
     document.getElementById(idThe(goc, i))?.scrollIntoView({ behavior: giam ? "auto" : "smooth", block: "start" });
@@ -74,7 +79,7 @@ export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutpu
         </p>
       )}
       <BieuDoNhip thang={d.thang} chon={chon} onChon={toi} />
-      <ol className="space-y-4" aria-label="Ba tháng âm lịch tới">
+      <ol className="space-y-4" aria-label={c("nb.ba_thang")}>
         {d.thang.map((t, i) => (
           <TheThang key={`${t.nam_am}-${t.thang}-${t.nhuan}-${t.phan}`} id={idThe(goc, i)} t={t} i={i} d={d}
             noiBat={chon === i} onChonCungTen={onChonCungTen} onHoi={onHoi} tyLe={tyLe} />
@@ -88,10 +93,11 @@ export function NhipBaThangXem({ d, onChonCungTen, onHoi }: { d: Nhip3ThangOutpu
 // ------------------------------------------------------------------ biểu đồ nhịp
 const W = 320, H = 132, X0 = 92, BUOC = 100;
 const Y_MUC: Record<Muc, number> = { thuan: 30, binh: 60, can_than: 90 };
-const NHAN_TRUC: [Muc, string][] = [["thuan", "Thuận"], ["binh", "Bình"], ["can_than", "Thận trọng"]];
+const NHAN_TRUC: Muc[] = ["thuan", "binh", "can_than"];   // nhãn trục: khoá nb.truc_<mức>
 
 function BieuDoNhip({ thang, chon, onChon }: { thang: Thang[]; chon: number | null; onChon: (i: number) => void }) {
   const giam = useReducedMotion();
+  const { c } = useChuTuVi();
   const diem = thang.map((t, i) => ({ x: X0 + i * BUOC, y: Y_MUC[t.muc] }));
   // Đường cong mềm qua 3 điểm (nửa khoảng cách làm tay đòn Bézier).
   const duong = diem.reduce((s, p, i) => {
@@ -99,14 +105,14 @@ function BieuDoNhip({ thang, chon, onChon }: { thang: Thang[]; chon: number | nu
     const q = diem[i - 1]!, k = (p.x - q.x) / 2;
     return `${s} C ${q.x + k} ${q.y}, ${p.x - k} ${p.y}, ${p.x} ${p.y}`;
   }, "");
-  const moTa = thang.map((t) => `${tenThang(t)}: ${t.nhan_muc}`).join("; ");
+  const moTa = thang.map((t) => `${tenThang(t, c)}: ${t.nhan_muc}`).join("; ");
   return (
     <figure className="rounded-2xl border border-line bg-surface/60 px-2 pb-1 pt-2" data-testid="nhip-bieu-do">
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Nhịp ba tháng — ${moTa}`} className="mx-auto h-auto w-full max-w-xl">
-        {NHAN_TRUC.map(([m, ten]) => (
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={c("nb.aria_bieu_do", { mo_ta: moTa })} className="mx-auto h-auto w-full max-w-xl">
+        {NHAN_TRUC.map((m) => (
           <g key={m}>
             <line x1={58} x2={W - 8} y1={Y_MUC[m]} y2={Y_MUC[m]} stroke="rgb(var(--line))" strokeDasharray="3 4" />
-            <text x={4} y={Y_MUC[m] + 3.5} fontSize="10" fill={`rgb(var(${MAU_MUC[m].bien}))`}>{ten}</text>
+            <text x={4} y={Y_MUC[m] + 3.5} fontSize="10" fill={`rgb(var(${MAU_MUC[m].bien}))`}>{c(`nb.truc_${m}`)}</text>
           </g>
         ))}
         <motion.path d={duong} fill="none" stroke="rgb(var(--gold) / 0.65)" strokeWidth="2" strokeLinecap="round"
@@ -114,7 +120,7 @@ function BieuDoNhip({ thang, chon, onChon }: { thang: Thang[]; chon: number | nu
         {thang.map((t, i) => {
           const p = diem[i]!, mau = `rgb(var(${MAU_MUC[t.muc].bien}))`;
           return (
-            <motion.g key={i} role="button" tabIndex={0} aria-label={`${tenThang(t)} — ${t.nhan_muc}. Xem chi tiết`}
+            <motion.g key={i} role="button" tabIndex={0} aria-label={c("nb.aria_cot", { thang: tenThang(t, c), muc: t.nhan_muc })}
               className="cursor-pointer outline-none" onClick={() => onChon(i)}
               onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onChon(i); } }}
               style={{ transformOrigin: `${p.x}px ${p.y}px` }}
@@ -124,14 +130,14 @@ function BieuDoNhip({ thang, chon, onChon }: { thang: Thang[]; chon: number | nu
                 fill={chon === i ? "rgb(var(--gold) / 0.07)" : "transparent"} />
               <circle cx={p.x} cy={p.y} r={chon === i ? 13 : 11} fill={mau} opacity={0.18} />
               <circle cx={p.x} cy={p.y} r={6.5} fill={mau} stroke="rgb(var(--bg))" strokeWidth="2" />
-              <text x={p.x} y={H - 18} textAnchor="middle" fontSize="11" fill="rgb(var(--fg))">{nhanNgan(t)}</text>
+              <text x={p.x} y={H - 18} textAnchor="middle" fontSize="11" fill="rgb(var(--fg))">{nhanNgan(t, c)}</text>
               <text x={p.x} y={H - 5} textAnchor="middle" fontSize="9.5" fill={mau}>{t.nhan_muc}</text>
             </motion.g>
           );
         })}
       </svg>
       <figcaption className="sr-only">{moTa}</figcaption>
-      <ChanQr className="mx-2 pb-2" nhan="Quét để xem nhịp của bạn" />
+      <ChanQr className="mx-2 pb-2" nhan={c("nb.qr")} />
     </figure>
   );
 }
@@ -146,12 +152,15 @@ const O = 41;
 
 function VongCung({ cung, t }: { cung: NonNullable<Nhip3ThangOutputT["cung"]>; t: Thang }) {
   const giam = useReducedMotion();
+  const { c: ch, en } = useChuTuVi();
+  // Nhãn mảng đời hai dòng: bản Việt hai chữ đầu (như cũ); bản Anh chữ đầu + phần còn lại ("Out and about" → "Out" / "and about").
+  const haiDong = (s: string) => { const w = s.split(" "); return en && w.length > 2 ? [w[0]!, w.slice(1).join(" ")] : w.slice(0, 2); };
   const loai = (ten: string) => [ten === t.cung_goc && "chinh", ten === t.diem_sang && "sang", ten === t.de_y && "de_y"].filter(Boolean) as string[];
-  const tom = [`chuyện chính: ${cung.find((c) => c.ten === t.cung_goc)?.nhan_ngan ?? ""}`,
-    t.diem_sang && `điểm sáng: ${cung.find((c) => c.ten === t.diem_sang)?.nhan_ngan ?? ""}`,
-    t.de_y && `nên để ý: ${cung.find((c) => c.ten === t.de_y)?.nhan_ngan ?? ""}`].filter(Boolean).join(", ");
+  const tom = [ch("nb.tom_chinh", { ds: cung.find((c) => c.ten === t.cung_goc)?.nhan_ngan ?? "" }),
+    t.diem_sang && ch("nb.tom_sang", { ds: cung.find((c) => c.ten === t.diem_sang)?.nhan_ngan ?? "" }),
+    t.de_y && ch("nb.tom_de_y", { ds: cung.find((c) => c.ten === t.de_y)?.nhan_ngan ?? "" })].filter(Boolean).join(", ");
   return (
-    <svg viewBox={`0 0 ${O * 4} ${O * 4}`} role="img" aria-label={`Vòng 12 mảng đời sống của ${tenThang(t).toLowerCase()} — ${tom}`}
+    <svg viewBox={`0 0 ${O * 4} ${O * 4}`} role="img" aria-label={ch("nb.aria_vong", { thang: tenThang(t, ch).toLowerCase(), tom })}
       className="h-auto w-40 shrink-0 sm:w-44" data-testid="vong-cung-thang">
       {cung.map((c) => {
         const vt = VI_TRI[c.chi];
@@ -164,7 +173,7 @@ function VongCung({ cung, t }: { cung: NonNullable<Nhip3ThangOutputT["cung"]>; t
               fill={chinh ? "rgb(var(--gold) / 0.16)" : "rgb(var(--surface-2) / 0.7)"}
               stroke={chinh ? "rgb(var(--gold))" : "rgb(var(--line))"} strokeWidth={chinh ? 1.6 : 1} />
             {c.nhan_ngan.split(" ").length > 1 && c.nhan_ngan.length > 7
-              ? c.nhan_ngan.split(" ").slice(0, 2).map((w, k) => (
+              ? haiDong(c.nhan_ngan).map((w, k) => (
                 <text key={k} x={x + O / 2} y={y + 17 + k * 10} textAnchor="middle" fontSize="8.5" fill={chinh ? "rgb(var(--fg))" : "rgb(var(--fg-faint))"}>{w}</text>))
               : <text x={x + O / 2} y={y + 22} textAnchor="middle" fontSize="8.5" fill={chinh ? "rgb(var(--fg))" : "rgb(var(--fg-faint))"}>{c.nhan_ngan}</text>}
             {l.includes("sang") && (
@@ -176,13 +185,13 @@ function VongCung({ cung, t }: { cung: NonNullable<Nhip3ThangOutputT["cung"]>; t
         );
       })}
       <g fontSize="8.5" fill="rgb(var(--fg-muted))">
-        <text x={O * 2} y={O + 16} textAnchor="middle" fontSize="10" fill="rgb(var(--fg))">{nhanNgan(t)}</text>
+        <text x={O * 2} y={O + 16} textAnchor="middle" fontSize="10" fill="rgb(var(--fg))">{nhanNgan(t, ch)}</text>
         <rect x={O + 8} y={O + 27} width={9} height={9} rx={2} fill="rgb(var(--gold) / 0.16)" stroke="rgb(var(--gold))" />
-        <text x={O + 21} y={O + 35}>Chuyện chính</text>
+        <text x={O + 21} y={O + 35}>{ch("nb.chuyen_chinh")}</text>
         <circle cx={O + 12.5} cy={O + 47} r={3.5} fill={`rgb(${DIEM_SANG})`} />
-        <text x={O + 21} y={O + 50}>Điểm sáng</text>
+        <text x={O + 21} y={O + 50}>{ch("nb.diem_sang")}</text>
         <circle cx={O + 12.5} cy={O + 61} r={3.5} fill={`rgb(${DE_Y})`} />
-        <text x={O + 21} y={O + 64}>Nên để ý</text>
+        <text x={O + 21} y={O + 64}>{ch("nb.de_y")}</text>
       </g>
     </svg>
   );
@@ -195,7 +204,8 @@ function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi, tyLe }: {
 }) {
   const giam = useReducedMotion();
   const mau = MAU_MUC[t.muc];
-  const hop = hopCua(t);
+  const { c } = useChuTuVi();
+  const hop = hopCua(t, c);
   return (
     <motion.li id={id} data-testid="the-thang" data-muc={t.muc}
       className={cn("scroll-mt-20 rounded-2xl border p-4 transition-shadow sm:p-5", mau.vien, noiBat && "shadow-glow")}
@@ -205,7 +215,7 @@ function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi, tyLe }: {
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
             <p className="text-sm text-fg-muted">
               <CalendarClock className="mr-1.5 inline size-4" aria-hidden />
-              <b className="font-medium text-fg">{tenThang(t)}</b> · {t.can_chi}
+              <b className="font-medium text-fg">{tenThang(t, c)}</b> · {t.can_chi}
               <span className="text-fg-faint"> · {ngan(t.tu)}–{ngan(t.den)}/{t.den.slice(0, 4)}</span>
             </p>
             <span className={cn("inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2 py-0.5 text-xs font-medium", mau.chu, mau.chip)}>
@@ -236,10 +246,10 @@ function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi, tyLe }: {
 
       <div className="mt-3 flex flex-wrap gap-2">
         <Button size="sm" variant="secondary" onClick={() => onChonCungTen(t.cung_goc)}>
-          <MousePointerClick aria-hidden /> Xem cung tháng
+          <MousePointerClick aria-hidden /> {c("nb.xem_cung")}
         </Button>
-        <Button size="sm" variant="ghost" onClick={() => onHoi(`Tháng ${t.thang}${t.nhuan ? " nhuận" : ""} âm năm ${t.nam_am} của tôi thế nào?`)}>
-          <MessageCircleQuestion aria-hidden /> Hỏi thêm
+        <Button size="sm" variant="ghost" onClick={() => onHoi(c("nb.cau_hoi", { thang: String(t.thang), nhuan: t.nhuan ? c("nb.nhuan") : "", nam: String(t.nam_am) }))}>
+          <MessageCircleQuestion aria-hidden /> {c("nb.hoi")}
         </Button>
       </div>
       {/* Chỉ tháng đã bắt đầu (hiện tại / đã qua) mới hỏi kiểm chứng — tháng chưa tới thì chưa ai biết đúng hay không. */}
@@ -247,7 +257,7 @@ function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi, tyLe }: {
         <div className="mt-3">
           <KiemChung loai="nhip_3_thang" mau={maNhip(t)} phai={d.phai_luu_nguyet} khoa={`${t.nam_am}-${t.thang}-${t.nhuan ? 1 : 0}-${t.phan}`}
             tyLe={tyLe?.[maNhip(t)]}
-            cauHoi="Tháng này có đúng nhịp với bạn?" />
+            cauHoi={c("nb.kiem_chung")} />
         </div>
       )}
     </motion.li>
@@ -259,6 +269,7 @@ function ViSaoThang({ t }: { t: Thang }) {
   const [mo, setMo] = useState(false);
   const id = useId();
   const c = useChuChung();
+  const { c: ct, ten, hoa } = useChuTuVi();
   const canCu = t.can_cu?.length ? t.can_cu : t.ly_do.map((l) => l.noi_dung);
   return (
     <div className="mt-3" data-testid="vi-sao">
@@ -267,12 +278,12 @@ function ViSaoThang({ t }: { t: Thang }) {
         {c("doc.vi_sao")} <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
       </button>
       <div id={id} hidden={!mo} className="mt-2 space-y-2 border-l-2 border-line pl-3" data-testid="can-cu">
-        <p className="text-xs text-fg-faint"><NhanLop lop="tinh" /> <span className="ml-1">Cung tháng: <b className="text-fg-muted">{t.cung_goc}</b> · tứ hoá theo can tháng {t.can_chi}</span></p>
+        <p className="text-xs text-fg-faint"><NhanLop lop="tinh" /> <span className="ml-1">{ct("nb.cung_thang")}<b className="text-fg-muted">{ten("cung", t.cung_goc)}</b>{ct("nb.theo_can", { can_chi: t.can_chi })}</span></p>
         {t.tu_hoa_thang.length > 0 && (
-          <ul className="flex flex-wrap gap-1" aria-label="Tứ hoá theo can tháng">
+          <ul className="flex flex-wrap gap-1" aria-label={ct("nb.tu_hoa_thang")}>
             {t.tu_hoa_thang.map((h) => (
               <li key={h.hoa} className={cn("rounded-md px-2 py-0.5 text-[11px]", MAU_HOA_DIU[h.hoa] ?? "bg-surface-2")}>
-                {h.hoa} {h.sao}{h.cung_goc ? ` · ${h.cung_goc}` : ""}
+                {hoa(h.hoa)} {ten("sao", h.sao)}{h.cung_goc ? ` · ${ten("cung", h.cung_goc)}` : ""}
               </li>
             ))}
           </ul>
@@ -288,24 +299,25 @@ function ViSaoThang({ t }: { t: Thang }) {
 /** Tứ hoá của năm, phái lưu nguyệt, thứ tự ưu tiên — phần học thuật chung của cả khung, thu gọn. */
 function HocThuatNam({ d }: { d: Nhip3ThangOutputT }) {
   const luuY = Array.isArray(d.luu_y) ? d.luu_y.join(" ") : d.luu_y;
+  const { c, ten, hoa } = useChuTuVi();
   const tuHoaNam = (n: Nhip3ThangOutputT["luu_nien"]) =>
-    `Năm ${n.can_chi}: tứ hoá của năm ${n.tu_hoa.map((h) => `${h.hoa} ${h.sao}${h.cung_goc ? ` (${h.cung_goc})` : ""}`).join(" · ")}.`;
+    c("nb.tu_hoa_nam", { can_chi: n.can_chi, ds: n.tu_hoa.map((h) => `${hoa(h.hoa)} ${ten("sao", h.sao)}${h.cung_goc ? ` (${ten("cung", h.cung_goc)})` : ""}`).join(" · ") });
   return (
     <details className="group rounded-2xl border border-line bg-surface/40 px-4 py-3 text-sm" data-testid="nhip-hoc-thuat">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-fg-muted hover:text-fg">
-        <span>Cách tính: tứ hoá của năm, phái lưu nguyệt, thứ tự ưu tiên</span>
+        <span>{c("nb.cach_tinh")}</span>
         <ChevronDown className="size-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden />
       </summary>
       <div className="mt-3 space-y-2 text-xs leading-relaxed text-fg-faint">
         <p>
           {tuHoaNam(d.luu_nien)}
-          {d.luu_nien_sau && <> Sang năm âm mới — {tuHoaNam(d.luu_nien_sau)}</>}
-          {" "}Mỗi tháng đọc cùng tứ hoá của tháng đó và của năm âm chứa tháng đó.
+          {d.luu_nien_sau && <>{c("nb.nam_moi")}{tuHoaNam(d.luu_nien_sau)}</>}
+          {c("nb.moi_thang")}
         </p>
-        {d.ten_phai_luu_nguyet && <p>Cung tháng theo phái lưu nguyệt: {d.ten_phai_luu_nguyet} (đổi trong khung Trường phái).</p>}
+        {d.ten_phai_luu_nguyet && <p>{c("nb.phai", { ten: d.ten_phai_luu_nguyet })}</p>}
         {(d.uu_tien?.ghi_chu || luuY) && (
           <p data-testid="nhip-3-thang-uu-tien">
-            {d.uu_tien?.ghi_chu && <>Thứ tự ưu tiên: {d.uu_tien.ghi_chu} </>}{luuY}
+            {d.uu_tien?.ghi_chu && <>{c("nb.uu_tien", { ds: d.uu_tien.ghi_chu })}</>}{luuY}
           </p>
         )}
       </div>

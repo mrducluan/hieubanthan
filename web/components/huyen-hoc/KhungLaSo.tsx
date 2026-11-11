@@ -41,7 +41,7 @@ export function KhungLaSo({ chon, children, chan, testId = "la-so-tu-vi", classN
         </p>
         <Button variant="secondary" size="sm" aria-pressed={phong} className="min-h-11 shrink-0"
           onClick={() => { setPhong((v) => !v); ghi("chart_interacted", { mo_dun: "tuvi", kind: phong ? "la_so_thu" : "la_so_phong" }); }}>
-          {phong ? <><Minimize2 aria-hidden /> {c("khung.thu")}</> : <><Maximize2 aria-hidden /> {c("khung.phong")}</>}
+          {phong ? <><Minimize2 aria-hidden />{` ${c("khung.thu")}`}</> : <><Maximize2 aria-hidden />{` ${c("khung.phong")}`}</>}
         </Button>
       </div>
       <div ref={cuon} className={cn("px-4 pb-2 sm:px-0", phong && "overflow-x-auto overscroll-x-contain")} data-testid={testId} data-phong={phong ? "1" : "0"}>

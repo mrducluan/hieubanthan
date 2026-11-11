@@ -34,7 +34,7 @@ CHUA_XONG: dict[str, int] = {
     # GĐ 4 xong (lá số): tuvi (danh sách lá số mẫu), tuvi.tuan_triet, tuvi.van_han, tuvi.luu_nguyet, tuvi.dinh_gio.
     # GĐ 4 (agent B) xong: tuvi.luan_giai; tuvi.hop_tham (sạch sau bản phủ en/tuvi_y_bo_sung.json); tuvi.an_sao,
     # tuvi.la_so_mau, kb.trang.co_thu (sạch sau bản phủ đủ en/tuvi_cach_cuc.json).
-    "hoi.tuvi": 4,
+    # GĐ 4 (agent E) xong: hoi.tuvi (hỏi đáp Tử vi: en_gloss._tuvi, hai lượt "bản Việt quyết", gói bằng chứng theo ngôn ngữ).
     # GĐ 4 (agent C) xong: tuvi.phi_hoa, tuvi.nhip_3_thang. tuvi.hop_tham chờ bản phủ en/tuvi_y_bo_sung.json (agent B, hộp cach_doc_them).
     # GĐ 5 — Phong thuỷ
     "phongthuy": 5, "phongthuy.bo_cuc": 5, "phongthuy.cung_phi": 5, "phongthuy.do_huong": 5, "phongthuy.do_thi": 5,

@@ -6,10 +6,14 @@ import { forwardRef, useId, useMemo, useState, type KeyboardEvent } from "react"
 import { motion, useReducedMotion } from "motion/react";
 import type { LaSoOutputT, VanHanOutputT } from "@/app/api/tuvi/schema";
 import {
-  AN_TAP_DIEU, DO_SANG_TAT, HANH_SAO, NEO, NHAN_LOP_HAN, TEN_HOA_MA, VI_TRI, hoaHanDangBat, nhomSao, tachTuTru, tamPhuong,
+  AN_TAP_DIEU, HANH_SAO, NEO, TEN_HOA_MA, VI_TRI, hoaHanDangBat, nhomSao, tachTuTru, tamPhuong,
   type HoaHan, type MaHoa, type NhomSao,
 } from "@/lib/tuvi-hien-thi";
 import type { GiaoDien } from "@/lib/giao-dien-la-so";
+import { tenGon, useChuTuVi } from "@/components/huyen-hoc/chu-tu-vi";
+
+/** EN-ALL GĐ 4: chữ lá số (lib/chu/tu-vi.ts) + tên hiển thị mã (ten_hien) — bản Việt: đúng chữ cũ, mã hiện nguyên. */
+type ChuLS = ReturnType<typeof useChuTuVi>;
 
 type CungT = LaSoOutputT["cung"][number];
 
@@ -43,19 +47,20 @@ export function doSang(s: SaoT, phai: PhaiDoSang, laChinh: boolean): string | nu
   return s.do_sang;
 }
 
-function dongSaoCot(c: CungT, phai: PhaiDoSang): { trai: DongSao[]; phai: DongSao[] } {
+function dongSaoCot(c: CungT, phai: PhaiDoSang, tc: ChuLS): { trai: DongSao[]; phai: DongSao[] } {
   const trai: DongSao[] = [];
   const phaiCot: DongSao[] = [];
   // Tứ hoá sinh niên (của chính tinh lẫn phụ tinh) đứng đầu cột: Lộc/Quyền/Khoa trái, Kỵ phải.
   for (const s of [...c.chinh_tinh, ...c.phu_tinh]) {
     if (!s.tu_hoa) continue;
-    const d = { ten: `Hoá ${s.tu_hoa}`, mau: MAU_HOA[s.tu_hoa] ?? "var(--ls-chu)", dam: true };
+    const d = { ten: tc.c("ls.hoa", { hoa: tc.hoa(s.tu_hoa) }), mau: MAU_HOA[s.tu_hoa] ?? "var(--ls-chu)", dam: true };
     (s.tu_hoa === "Kỵ" ? phaiCot : trai).push(d);
   }
   for (const s of c.phu_tinh) {
     const g = nhomSao(s.ten, s.loai);
     const ds = doSang(s, phai, false);
-    const ten = ds && DO_SANG_TAT[ds] ? `${s.ten} (${DO_SANG_TAT[ds]})` : s.ten;
+    const tat = tc.tat(ds), tenS = tenGon(tc.ten("sao", s.ten));   // ô chật: bỏ chú giải trong ngoặc của tên Anh
+    const ten = tat ? `${tenS} (${tat})` : tenS;
     const d = { ten, mau: s.ten in HANH_SAO ? MAU_HANH[HANH_SAO[s.ten]!]! : MAU_NHOM[g], dam: true };
     (g === "sat" ? phaiCot : trai).push(d);
   }
@@ -66,8 +71,9 @@ function dongSaoCot(c: CungT, phai: PhaiDoSang): { trai: DongSao[]; phai: DongSa
     daCo.add(t);
     const g = nhomSao(t);
     const ds = phai === "nam" ? c.do_sang_phu?.[t] : undefined;
-    const hien = t === c.tue_tien ? tenThaiTue(c, phai) : t;     // TV-LICH: tên vòng Thái Tuế theo phái
-    const d = { ten: ds && DO_SANG_TAT[ds] ? `${hien} (${DO_SANG_TAT[ds]})` : hien, mau: MAU_NHOM[g] };
+    const hien = tenGon(tc.ten("sao", t === c.tue_tien ? tenThaiTue(c, phai) : t));     // TV-LICH: tên vòng Thái Tuế theo phái
+    const tat = tc.tat(ds);
+    const d = { ten: tat ? `${hien} (${tat})` : hien, mau: MAU_NHOM[g] };
     (g === "sat" || g === "trung" ? phaiCot : trai).push(d);
   }
   return { trai, phai: phaiCot };
@@ -94,36 +100,37 @@ const MAU_HOA_HAN: Record<MaHoa, string> = {
 };
 const CO_HUY = 11.5;
 const CO_HUY_NHO = 10;      // thử cỡ nhỏ hơn trước khi đẩy huy hiệu xuống dòng dưới (đỡ đẩy cột phụ tinh)
-const chuHuy = (b: HoaHan, coSao: boolean) => `${TEN_HOA_MA[b.hoa]}${coSao ? ` · ${b.sao}` : ""}`;
+const nhanLop = (b: HoaHan, t: ChuLS) => t.c(b.lop === "dh" ? "ls.huy_dh" : "ls.huy_ln");   // NHAN_LOP_HAN, theo ngôn ngữ
+const chuHuy = (b: HoaHan, coSao: boolean, t: ChuLS) => `${t.hoa(TEN_HOA_MA[b.hoa])}${coSao ? ` · ${t.ten("sao", b.sao)}` : ""}`;
 /** Bề rộng ước của một huy hiệu (đơn vị viewBox) — như vuaO: theo số ký tự. */
-function rongHuy(b: HoaHan, co: number, coSao = false): number {
-  return (NHAN_LOP_HAN[b.lop].length + 1 + chuHuy(b, coSao).length) * co * 0.58 + co;
+function rongHuy(b: HoaHan, co: number, coSao: boolean, t: ChuLS): number {
+  return (nhanLop(b, t).length + 1 + chuHuy(b, coSao, t).length) * co * 0.58 + co;
 }
-function HuyHan({ b, x, y, co = CO_HUY, coSao = false }: { b: HoaHan; x: number; y: number; co?: number; coSao?: boolean }) {
-  const w = rongHuy(b, co, coSao);
+function HuyHan({ b, x, y, co = CO_HUY, coSao = false, t }: { b: HoaHan; x: number; y: number; co?: number; coSao?: boolean; t: ChuLS }) {
+  const w = rongHuy(b, co, coSao, t);
   const h = co * 1.45;
   const mau = MAU_HOA_HAN[b.hoa];
   return (
     <g transform={`translate(${x},${y})`} data-hoa-han={`${b.lop}-${b.hoa}`}>
       <rect x={0} y={-co * 1.04} width={w} height={h} rx={h / 2} fill="var(--ls-o)" stroke={mau} strokeWidth={1.2} strokeDasharray="3 2.4" />
       <text x={w / 2} y={0} textAnchor="middle" fontSize={co} fontWeight={700} fill={mau}>
-        <tspan fontSize={co * 0.82} fontWeight={600} fill="var(--ls-mo)">{NHAN_LOP_HAN[b.lop]} </tspan>{chuHuy(b, coSao)}
+        <tspan fontSize={co * 0.82} fontWeight={600} fill="var(--ls-mo)">{nhanLop(b, t)} </tspan>{chuHuy(b, coSao, t)}
       </text>
     </g>
   );
 }
 /** Một hàng huy hiệu canh giữa tại tâm `cx`. */
-function HangHuy({ ds, cx, y, co = CO_HUY, coSao = false }: { ds: HoaHan[]; cx: number; y: number; co?: number; coSao?: boolean }) {
-  const rong = ds.map((b) => rongHuy(b, co, coSao));
+function HangHuy({ ds, cx, y, co = CO_HUY, coSao = false, t }: { ds: HoaHan[]; cx: number; y: number; co?: number; coSao?: boolean; t: ChuLS }) {
+  const rong = ds.map((b) => rongHuy(b, co, coSao, t));
   const tong = rong.reduce((a, b) => a + b, 0) + (ds.length - 1) * 5;
   let x = cx - tong / 2;
-  return <>{ds.map((b, k) => { const el = <HuyHan key={`${b.lop}${b.hoa}`} b={b} x={x} y={y} co={co} coSao={coSao} />; x += rong[k]! + 5; return el; })}</>;
+  return <>{ds.map((b, k) => { const el = <HuyHan key={`${b.lop}${b.hoa}`} b={b} x={x} y={y} co={co} coSao={coSao} t={t} />; x += rong[k]! + 5; return el; })}</>;
 }
-const loiHoaHan = (ds: HoaHan[]) => ds.map((b) => `${b.lop === "dh" ? "đại hạn" : "năm xem"}: ${b.sao} hoá ${TEN_HOA_MA[b.hoa]}`).join(", ");
+const loiHoaHan = (ds: HoaHan[], t: ChuLS) => ds.map((b) => t.c("ls.aria_han_muc", { lop: t.c(b.lop === "dh" ? "ls.aria_dh" : "ls.aria_ln"), sao: t.ten("sao", b.sao), hoa: t.hoa(TEN_HOA_MA[b.hoa]) })).join(", ");
 
-function catDong(ds: DongSao[], toiDa: number): DongSao[] {
+function catDong(ds: DongSao[], toiDa: number, t: ChuLS): DongSao[] {
   if (ds.length <= toiDa) return ds;
-  return [...ds.slice(0, toiDa - 1), { ten: `+${ds.length - toiDa + 1} sao`, mau: "var(--ls-mo)", nghieng: true }];
+  return [...ds.slice(0, toiDa - 1), { ten: t.c("ls.them_sao", { so: String(ds.length - toiDa + 1) }), mau: "var(--ls-mo)", nghieng: true }];
 }
 
 interface Props {
@@ -142,6 +149,8 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
   { ls, vanHan, lop = { dai_han: false, luu_nien: false }, giaoDien, ten, gioSinh, chon, onChon, phaiDoSang = "nam" }, ref,
 ) {
   const [di, setDi] = useState<string | null>(null);
+  const t = useChuTuVi();
+  const tenC = (ma: string) => t.ten("cung", ma);
   const giam = useReducedMotion();
   const idTieuDe = useId();
   const dangXem = di ?? chon;
@@ -172,7 +181,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
       aria-labelledby={idTieuDe}
       style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}
     >
-      <title id={idTieuDe}>{`Lá số Tử vi ${ten ? `của ${ten}` : ""} — 12 cung`}</title>
+      <title id={idTieuDe}>{t.c("ls.tieu_de", { cua: ten ? t.c("ls.cua", { ten }) : "" })}</title>
       <rect x={0} y={0} width={4 * W} height={4 * H} rx={18} fill="var(--ls-nen)" />
 
       {/* ---------- Phần giữa: hoa văn bát quái + thông tin ---------- */}
@@ -188,7 +197,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
         <motion.line key={`x-${dangXem}`} x1={x0} y1={y0} x2={xx} y2={yx} stroke="var(--ls-sat)" strokeOpacity={0.6} strokeWidth={1.3}
           strokeDasharray="6 6" initial={giam ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.45 }} />
       </g>
-      <ThongTinGiua ls={ls} vanHan={vanHan} ten={ten} gioSinh={gioSinh} tru={tru} cungThan={cungThan} />
+      <ThongTinGiua ls={ls} vanHan={vanHan} ten={ten} gioSinh={gioSinh} tru={tru} cungThan={cungThan} t={t} />
 
       {/* ---------- 12 cung ---------- */}
       {ls.cung.map((c, i) => {
@@ -198,7 +207,7 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
         const laChon = c.chi === dangXem;
         const laTamPhuong = tp.tam_hop.includes(c.chi);
         const laXung = tp.xung === c.chi;
-        const { trai, phai } = dongSaoCot(c, phaiDoSang);
+        const { trai, phai } = dongSaoCot(c, phaiDoSang, t);
         const yChinh = 62;
         // TV-HOA-HAN: hoá của lớp hạn rơi vào cung này → xếp chỗ cho huy hiệu (sau tên sao, hoặc dòng nhỏ ngay dưới).
         const hhCung = hoaHan.filter((b) => b.chi_so === i);
@@ -206,11 +215,11 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
         let yTiep = yChinh;
         const dongChinh = c.chinh_tinh.map((s) => {
           const d = doSang(s, phaiDoSang, true);
-          const tat = d ? DO_SANG_TAT[d] : undefined;
+          const tat = t.tat(d);
           const huy = hhCung.filter((b) => b.chinh_tinh && b.sao === s.ten);
-          const rongSao = s.ten.length * 19 * 0.56 + (tat ? 4 * 14 * 0.56 : 0);
+          const rongSao = t.ten("sao", s.ten).length * 19 * 0.56 + (tat ? 4 * 14 * 0.56 : 0);
           // Hai huy hiệu (ĐH + Năm) không vừa cạnh tên sao ở cỡ thường → thử cỡ nhỏ trước khi xuống dòng.
-          const rongDs = (co: number) => huy.reduce((a, b) => a + rongHuy(b, co) + 5, 0);
+          const rongDs = (co: number) => huy.reduce((a, b) => a + rongHuy(b, co, false, t) + 5, 0);
           const coHuy = huy.length && rongSao + 6 + rongDs(CO_HUY) > RONG_GON ? CO_HUY_NHO : CO_HUY;
           const rongHuyDs = rongDs(coHuy);
           const canhNhau = huy.length > 0 && rongSao + 6 + rongHuyDs <= RONG_GON;
@@ -224,20 +233,25 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
         const hangPhu: HoaHan[][] = [];
         for (const b of hhPhu) {
           const hang = hangPhu[hangPhu.length - 1];
-          const rong = (ds: HoaHan[]) => ds.reduce((a, x) => a + rongHuy(x, CO_HUY, true) + 5, -5);
+          const rong = (ds: HoaHan[]) => ds.reduce((a, x) => a + rongHuy(x, CO_HUY, true, t) + 5, -5);
           if (hang && rong([...hang, b]) <= RONG_GON) hang.push(b); else hangPhu.push([b]);
         }
         const yPhuHuy = hangPhu.map((_, k) => yTiep - 4 + k * 17);
         const yCot = yTiep + 4 + hangPhu.length * 17;
         const coLuu = lop.luu_nien && vanHan;
-        const tenDh = lop.dai_han && vanHan ? vanHan.dai_han.ten_cung[i] : null;
-        const tenLn = lop.luu_nien && vanHan ? vanHan.luu_nien.ten_cung[i] : null;
+        const tenDhMa = lop.dai_han && vanHan ? vanHan.dai_han.ten_cung[i] : null;
+        const tenLnMa = lop.luu_nien && vanHan ? vanHan.luu_nien.ten_cung[i] : null;
+        // EN-ALL: tên cung Anh dài ("Property Palace") → ở đáy ô bỏ chữ " Palace" (bản Việt không đổi).
+        const tenDh = tenDhMa ? tenC(tenDhMa).replace(/ Palace$/, "") : null;
+        const tenLn = tenLnMa ? tenC(tenLnMa).replace(/ Palace$/, "") : null;
+        const tienDh = t.c("ls.tien_to_dh"), tienLn = t.c("ls.tien_to_ln");
+        const tsHien = t.ten("truong_sinh", c.truong_sinh);
         // Đáy ô: "ĐH.<cung>" trái · vòng Trường sinh giữa · "L.<cung>" phải. Ước bề rộng (như vuaO); không vừa một hàng thì
         // Trường sinh dời sang khoảng trống còn lại, vẫn không vừa → lên một dòng riêng ngay trên (sao lưu lên thêm một dòng).
         const rongChu = (t: string, co: number) => t.length * co * 0.6;
-        const bienTrai = tenDh ? 16 + rongChu(`ĐH.${tenDh}`, 11.5) + 8 : 16;
-        const bienPhai = tenLn ? W - 16 - rongChu(`L.${tenLn}`, 11.5) - 8 : W - 16;
-        const rongTs = rongChu(c.truong_sinh, 14);
+        const bienTrai = tenDh ? 16 + rongChu(`${tienDh}${tenDh}`, 11.5) + 8 : 16;
+        const bienPhai = tenLn ? W - 16 - rongChu(`${tienLn}${tenLn}`, 11.5) - 8 : W - 16;
+        const rongTs = rongChu(tsHien, 14);
         const xTs = W / 2 - rongTs / 2 >= bienTrai && W / 2 + rongTs / 2 <= bienPhai ? W / 2
           : bienPhai - bienTrai >= rongTs ? (bienTrai + bienPhai) / 2 : null;
         const tsRieng = xTs === null;
@@ -247,15 +261,18 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
         const luuSao = coLuu ? vanHan.luu_nien.sao[i] ?? [] : [];
         const laDh = lop.dai_han && vanHan?.dai_han.chi_so === i;
         // TV-DT: tuổi còn trong đồng hạn → ô của cung đồng hạn mang nhãn "Đồng hạn", không gọi là đại hạn.
-        const nhanDh = vanHan?.dai_han.dong_han ? "Đồng hạn" : "Đại hạn";
+        const nhanDh = t.c(vanHan?.dai_han.dong_han ? "ls.dong_han" : "ls.dai_han");
+        const nhanLn = t.c("ls.luu_nien"), nhanTh = t.c("ls.tieu_han");
         const laLn = lop.luu_nien && vanHan?.luu_nien.chi_so === i;
         const laTh = lop.luu_nien && vanHan?.tieu_han.chi_so === i;
-        const nhan = [c.ten.toUpperCase(), c.la_than ? "THÂN" : null].filter(Boolean).join(" · ");
-        const chinh = c.chinh_tinh.map((s) => `${s.ten}${doSang(s, phaiDoSang, true) ? ` ${doSang(s, phaiDoSang, true)}` : ""}${s.tu_hoa ? ` hoá ${s.tu_hoa}` : ""}`).join(", ");
+        // EN-ALL: tên cung Anh dài → đầu ô bỏ chữ " PALACE" và co chữ vừa khoảng giữa nhãn can chi và tuổi (bản Việt như cũ).
+        const nhan = [(t.en ? tenC(c.ten).replace(/ Palace$/, "") : tenC(c.ten)).toUpperCase(), c.la_than ? t.c("ls.than") : null].filter(Boolean).join(" · ");
+        const chinh = c.chinh_tinh.map((s) => `${t.ten("sao", s.ten)}${doSang(s, phaiDoSang, true) ? ` ${t.ten("do_sang", doSang(s, phaiDoSang, true))}` : ""}${s.tu_hoa ? t.c("ls.aria_hoa", { hoa: t.hoa(s.tu_hoa) }) : ""}`).join(", ");
         return (
           <g key={c.chi} transform={`translate(${x},${y})`} role="button" tabIndex={0}
             aria-pressed={c.chi === chon}
-            aria-label={`Cung ${c.ten}${c.la_than ? " (Thân cư)" : ""}, ${c.can} ${c.chi}, đại hạn ${c.dai_han.tu_tuoi}–${c.dai_han.den_tuoi}: ${chinh || "vô chính diệu"}${hhCung.length ? `; hoá theo hạn — ${loiHoaHan(hhCung)}` : ""}`}
+            aria-label={t.c("ls.aria_cung", { cung: tenC(c.ten), than: c.la_than ? t.c("ls.aria_than") : "", can: t.ten("can", c.can), chi: t.ten("chi", c.chi),
+              tu: String(c.dai_han.tu_tuoi), den: String(c.dai_han.den_tuoi), chinh: chinh || t.c("ls.vo_chinh_dieu"), han: hhCung.length ? t.c("ls.aria_han", { ds: loiHoaHan(hhCung, t) }) : "" })}
             onClick={() => onChon(c.chi)} onKeyDown={phim(c.chi)}
             onMouseEnter={() => setDi(c.chi)} onMouseLeave={() => setDi(null)}
             onFocus={() => setDi(c.chi)} onBlur={() => setDi(null)}
@@ -268,73 +285,73 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
             <g className={CHI_TIET}>
             {(laDh || laLn || laTh) && (
               <g>
-                {[laDh && nhanDh, laLn && "Lưu niên", laTh && "Tiểu hạn"].filter(Boolean).map((t, k, ds) => (
-                  <g key={String(t)} transform={`translate(${W / 2 - (ds.length * 74 - 4) / 2 + k * 74},${r === 0 ? 1 : -6})`}
-                    data-nhan-han={t === nhanDh ? "dai_han" : t === "Lưu niên" ? "luu_nien" : "tieu_han"}>
-                    <rect width={70} height={16} rx={8} fill={t === nhanDh ? "var(--ls-thuy)" : t === "Lưu niên" ? "var(--ls-nhan)" : "var(--ls-mo)"} />
-                    <text x={35} y={11.8} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="var(--ls-nen)">{String(t).toUpperCase()}</text>
+                {[laDh && nhanDh, laLn && nhanLn, laTh && nhanTh].filter(Boolean).map((n, k, ds) => (
+                  <g key={String(n)} transform={`translate(${W / 2 - (ds.length * 74 - 4) / 2 + k * 74},${r === 0 ? 1 : -6})`}
+                    data-nhan-han={n === nhanDh ? "dai_han" : n === nhanLn ? "luu_nien" : "tieu_han"}>
+                    <rect width={70} height={16} rx={8} fill={n === nhanDh ? "var(--ls-thuy)" : n === nhanLn ? "var(--ls-nhan)" : "var(--ls-mo)"} />
+                    <text x={35} y={11.8} textAnchor="middle" fontSize={10.5} fontWeight={700} fill="var(--ls-nen)" {...(t.en ? vuaO(String(n).toUpperCase(), 10.5, 62) : {})}>{String(n).toUpperCase()}</text>
                   </g>
                 ))}
               </g>
             )}
             {/* Đầu ô: can chi · tên cung · tuổi đại hạn */}
-            <text x={16} y={30} fontSize={13} fill="var(--ls-mo)">{c.can.charAt(0)}.{c.chi}</text>
+            <text x={16} y={30} fontSize={13} fill="var(--ls-mo)">{t.ten("can", c.can).charAt(0)}.{t.ten("chi", c.chi)}</text>
             <text x={W / 2} y={30} textAnchor="middle" fontSize={c.la_than ? 13.5 : 15} fontWeight={700} letterSpacing="0.04em"
-              fill={c.la_menh ? "var(--ls-nhan)" : "var(--ls-chu)"}>{nhan}</text>
+              fill={c.la_menh ? "var(--ls-nhan)" : "var(--ls-chu)"} {...(t.en ? vuaO(nhan, c.la_than ? 13.5 : 15, 118) : {})}>{nhan}</text>
             <text x={W - 16} y={30} textAnchor="end" fontSize={15} fontWeight={600} fill="var(--ls-chu)">{c.dai_han.tu_tuoi}</text>
             {/* Chính tinh */}
             {c.chinh_tinh.length ? dongChinh.map(({ s, tat, huy, coHuy, canhNhau, y: yS, xSao, rongSao, rongHuyDs }) => (
               <g key={s.ten}>
                 <text x={xSao} y={yS} textAnchor={canhNhau ? "start" : "middle"} fontSize={19} fontWeight={650}
                   fill={MAU_HANH[HANH_SAO[s.ten] ?? "Thổ"]}>
-                  {s.ten}
+                  {t.ten("sao", s.ten)}
                   {tat ? <tspan fontSize={14} fontWeight={500} fill="var(--ls-mo)"> ({tat})</tspan> : null}
                 </text>
                 {huy.length > 0 && (canhNhau
-                  ? <HangHuy ds={huy} cx={xSao + rongSao + 6 + (rongHuyDs - 5) / 2} y={yS - 2} co={coHuy} />
-                  : <HangHuy ds={huy} cx={W / 2} y={yS + 18} />)}
+                  ? <HangHuy ds={huy} cx={xSao + rongSao + 6 + (rongHuyDs - 5) / 2} y={yS - 2} co={coHuy} t={t} />
+                  : <HangHuy ds={huy} cx={W / 2} y={yS + 18} t={t} />)}
               </g>
-            )) : <text x={W / 2} y={yChinh} textAnchor="middle" fontSize={14} fontStyle="italic" fill="var(--ls-mo)">vô chính diệu</text>}
-            {hangPhu.map((ds, k) => <HangHuy key={ds.map((b) => `${b.lop}${b.hoa}`).join()} ds={ds} cx={W / 2} y={yPhuHuy[k]!} coSao />)}
+            )) : <text x={W / 2} y={yChinh} textAnchor="middle" fontSize={14} fontStyle="italic" fill="var(--ls-mo)">{t.c("ls.vo_chinh_dieu")}</text>}
+            {hangPhu.map((ds, k) => <HangHuy key={ds.map((b) => `${b.lop}${b.hoa}`).join()} ds={ds} cx={W / 2} y={yPhuHuy[k]!} coSao t={t} />)}
             {/* Hai cột phụ tinh */}
-            {catDong(trai, toiDa).map((d, k) => (
+            {catDong(trai, toiDa, t).map((d, k) => (
               <text key={`t${k}`} x={16} y={yCot + k * DONG} fontSize={13} fill={d.mau} fontWeight={d.dam ? 600 : 400} fontStyle={d.nghieng ? "italic" : undefined}>{d.ten}</text>
             ))}
-            {catDong(phai, toiDa).map((d, k) => (
+            {catDong(phai, toiDa, t).map((d, k) => (
               <text key={`p${k}`} x={W - 16} y={yCot + k * DONG} textAnchor="end" fontSize={13} fill={d.mau} fontWeight={d.dam ? 600 : 400} fontStyle={d.nghieng ? "italic" : undefined}>{d.ten}</text>
             ))}
             {/* Sao lưu niên */}
             {luuSao.length > 0 && (
               <text x={W / 2} y={yLuu} textAnchor="middle" fontSize={12} fontStyle="italic" fill="var(--ls-luu)">
-                {luuSao.slice(0, 4).join(" · ")}
+                {luuSao.slice(0, 4).map((x) => tenGon(t.ten("sao", x))).join(" · ")}
               </text>
             )}
             {/* Đáy ô: tên cung đại hạn · vòng Trường sinh · tên cung lưu niên */}
             {(
               <>
-                {tenDh && <text x={16} y={H - 20} fontSize={11.5} fontWeight={600} fill="var(--ls-thuy)">ĐH.{tenDh}</text>}
+                {tenDh && <text x={16} y={H - 20} fontSize={11.5} fontWeight={600} fill="var(--ls-thuy)">{tienDh}{tenDh}</text>}
                 <text x={xTs ?? W / 2} y={tsRieng ? H - 37 : H - 20} textAnchor="middle" fontSize={14} fontWeight={600}
                   fill={SINH_TOT.has(c.truong_sinh) ? "var(--ls-moc)" : SINH_XAU.has(c.truong_sinh) ? "var(--ls-sat)" : "var(--ls-tho)"}>
-                  {c.truong_sinh}
+                  {tsHien}
                 </text>
-                {tenLn && <text x={W - 16} y={H - 20} textAnchor="end" fontSize={11.5} fontWeight={600} fill="var(--ls-nhan)">L.{tenLn}</text>}
+                {tenLn && <text x={W - 16} y={H - 20} textAnchor="end" fontSize={11.5} fontWeight={600} fill="var(--ls-nhan)">{tienLn}{tenLn}</text>}
               </>
             )}
             </g>
-            <OGon c={c} phai={phaiDoSang} hh={hhCung.filter((b) => b.chinh_tinh)} han={[laDh && nhanDh, laLn && "Lưu niên", laTh && "Tiểu hạn"].filter((t): t is string => Boolean(t))} />
+            <OGon c={c} phai={phaiDoSang} t={t} hh={hhCung.filter((b) => b.chinh_tinh)} han={([[laDh, nhanDh, "dh"], [laLn, nhanLn, "ln"], [laTh, nhanTh, "th"]] as const).filter(([co]) => co).map(([, n, ma]) => ({ n, ma }))} />
           </g>
         );
       })}
 
       {/* Tuần / Triệt đóng giữa hai cung (lối Việt) */}
-      {ls.tuan_triet && <g className={CHI_TIET}><TuanTriet tt={ls.tuan_triet} chiSo={chiSo} /></g>}
+      {ls.tuan_triet && <g className={CHI_TIET}><TuanTriet tt={ls.tuan_triet} chiSo={chiSo} t={t} /></g>}
     </svg>
   );
 });
 
 /** Lớp gọn của một ô (chỉ hiện ở điện thoại khi lá số đang vừa khung — xem CHI_TIET / GON). */
-function OGon({ c, phai, han, hh }: { c: CungT; phai: PhaiDoSang; han: string[]; hh: HoaHan[] }) {
-  const ten = `${c.ten}${c.la_than ? " · Thân" : ""}`;
+function OGon({ c, phai, han, hh, t }: { c: CungT; phai: PhaiDoSang; han: { n: string; ma: "dh" | "ln" | "th" }[]; hh: HoaHan[]; t: ChuLS }) {
+  const ten = `${t.ten("cung", c.ten).replace(/ Palace$/, "")}${c.la_than ? t.c("ls.than_gon") : ""}`;
   // TV-HOA-HAN: vừa khung chỉ hiện huy hiệu của CHÍNH TINH — một hàng ngay dưới tên sao.
   let yTiep = 96;
   const dong = c.chinh_tinh.map((s) => {
@@ -349,21 +366,21 @@ function OGon({ c, phai, han, hh }: { c: CungT; phai: PhaiDoSang; han: string[];
         fill={c.la_menh ? "var(--ls-nhan)" : "var(--ls-chu)"} {...vuaO(ten, CO_GON)}>{ten}</text>
       {c.chinh_tinh.length ? dong.map(({ s, y, huy }) => {
         const d = doSang(s, phai, true);
-        const tat = d ? DO_SANG_TAT[d] : undefined;
-        const chu = `${s.ten}${tat ? ` (${tat})` : ""}`;
+        const tat = t.tat(d), tenS = t.ten("sao", s.ten);
+        const chu = `${tenS}${tat ? ` (${tat})` : ""}`;
         return (
           <g key={s.ten}>
             <text x={W / 2} y={y} textAnchor="middle" fontSize={CO_GON + 1} fontWeight={650}
               fill={MAU_HANH[HANH_SAO[s.ten] ?? "Thổ"]} {...vuaO(chu, CO_GON + 1)}>
-              {s.ten}{tat && <tspan fontWeight={500} fill="var(--ls-mo)"> ({tat})</tspan>}
+              {tenS}{tat && <tspan fontWeight={500} fill="var(--ls-mo)"> ({tat})</tspan>}
             </text>
-            {huy.length > 0 && <HuyGon ds={huy} y={y + 31} />}
+            {huy.length > 0 && <HuyGon ds={huy} y={y + 31} t={t} />}
           </g>
         );
-      }) : <text x={W / 2} y={96} textAnchor="middle" fontSize={CO_GON} fontStyle="italic" fill="var(--ls-mo)">vô chính diệu</text>}
-      {han.map((t, k) => (
-        <text key={t} x={W / 2} y={H - 22 - (han.length - 1 - k) * 32} textAnchor="middle" fontSize={CO_GON} fontWeight={700}
-          fill={t === "Đại hạn" || t === "Đồng hạn" ? "var(--ls-thuy)" : t === "Lưu niên" ? "var(--ls-nhan)" : "var(--ls-mo)"}>{t}</text>
+      }) : <text x={W / 2} y={96} textAnchor="middle" fontSize={CO_GON} fontStyle="italic" fill="var(--ls-mo)">{t.c("ls.vo_chinh_dieu")}</text>}
+      {han.map(({ n, ma }, k) => (
+        <text key={ma} x={W / 2} y={H - 22 - (han.length - 1 - k) * 32} textAnchor="middle" fontSize={CO_GON} fontWeight={700}
+          fill={ma === "dh" ? "var(--ls-thuy)" : ma === "ln" ? "var(--ls-nhan)" : "var(--ls-mo)"}>{n}</text>
       ))}
     </g>
   );
@@ -371,8 +388,8 @@ function OGon({ c, phai, han, hh }: { c: CungT; phai: PhaiDoSang; han: string[];
 
 /** Huy hiệu hoá theo hạn ở lớp gọn: MỘT dòng chữ cỡ như lớp gọn (≥ 9px ở 375px — e2e di-dong), dài thì co ngang vừa ô
  *  như dòng chính tinh (vuaO); khung viền đứt bao cả dòng. */
-function HuyGon({ ds, y }: { ds: HoaHan[]; y: number }) {
-  const chu = ds.map((b) => `${NHAN_LOP_HAN[b.lop]} ${TEN_HOA_MA[b.hoa]}`).join(" · ");
+function HuyGon({ ds, y, t }: { ds: HoaHan[]; y: number; t: ChuLS }) {
+  const chu = ds.map((b) => `${nhanLop(b, t)} ${t.hoa(TEN_HOA_MA[b.hoa])}`).join(" · ");
   const vua = vuaO(chu, CO_GON, RONG_GON - 20);
   const rong = (vua.textLength ?? chu.length * CO_GON * 0.56) + 20;
   return (
@@ -383,8 +400,8 @@ function HuyGon({ ds, y }: { ds: HoaHan[]; y: number }) {
         {ds.map((b, k) => (
           <tspan key={`${b.lop}${b.hoa}`}>
             {k > 0 && <tspan fill="var(--ls-mo)"> · </tspan>}
-            <tspan fill="var(--ls-mo)" fontWeight={600}>{NHAN_LOP_HAN[b.lop]} </tspan>
-            <tspan fill={MAU_HOA_HAN[b.hoa]}>{TEN_HOA_MA[b.hoa]}</tspan>
+            <tspan fill="var(--ls-mo)" fontWeight={600}>{nhanLop(b, t)} </tspan>
+            <tspan fill={MAU_HOA_HAN[b.hoa]}>{t.hoa(TEN_HOA_MA[b.hoa])}</tspan>
           </tspan>
         ))}
       </text>
@@ -396,9 +413,9 @@ function HuyGon({ ds, y }: { ds: HoaHan[]; y: number }) {
 // (Ngọ–Mùi trên, Tý–Sửu dưới): sát mép trên / dưới lá số; theo cột (Dần–Mão, Thìn–Tỵ trái; Thân–Dậu, Tuất–Hợi phải): sát
 // mép trái / phải. Đặt giữa đường ranh (cách cũ) đè lên dòng phụ tinh, nhãn ĐẠI HẠN/LƯU NIÊN hoặc dòng đáy ô.
 const TT_CAO = 15;
-function TuanTriet({ tt, chiSo }: { tt: { tuan: string[]; triet: string[] }; chiSo: (c: string) => number }) {
+function TuanTriet({ tt, chiSo, t }: { tt: { tuan: string[]; triet: string[] }; chiSo: (c: string) => number; t: ChuLS }) {
   const trung = tt.tuan.join() === tt.triet.join();
-  const muc = trung ? [{ nhan: "Tuần · Triệt", cap: tt.tuan }] : [{ nhan: "Tuần", cap: tt.tuan }, { nhan: "Triệt", cap: tt.triet }];
+  const muc = trung ? [{ nhan: t.c("ls.tuan_triet"), cap: tt.tuan }] : [{ nhan: t.c("ls.tuan"), cap: tt.tuan }, { nhan: t.c("ls.triet"), cap: tt.triet }];
   return (
     <g aria-hidden>
       {muc.map(({ nhan, cap }) => {
@@ -428,28 +445,29 @@ function TuanTriet({ tt, chiSo }: { tt: { tuan: string[]; triet: string[] }; chi
   );
 }
 
-function ThongTinGiua({ ls, vanHan, ten, gioSinh, tru, cungThan }: {
-  ls: LaSoOutputT; vanHan?: VanHanOutputT | null; ten?: string | null; gioSinh?: string | null; tru: string[]; cungThan?: string;
+function ThongTinGiua({ ls, vanHan, ten, gioSinh, tru, cungThan, t }: {
+  ls: LaSoOutputT; vanHan?: VanHanOutputT | null; ten?: string | null; gioSinh?: string | null; tru: string[]; cungThan?: string; t: ChuLS;
 }) {
   const [y, m, d] = ls.duong_lich_goc.split("-");
   const al = ls.am_lich;
+  // [khoá chữ nhãn, giá trị] — dòng "Bản mệnh" và "Cục" in đậm (so theo khoá, không theo chữ).
   const dong: [string, string][] = [
-    ["Dương lịch", `${d}/${m}/${y}${gioSinh ? ` · ${gioSinh}` : ""}`],
-    ["Âm lịch", `${al.ngay}/${al.thang}${al.nhuan ? " (nhuận)" : ""}/${al.nam} · ${ls.gio}`],
+    ["ls.duong_lich", `${d}/${m}/${y}${gioSinh ? ` · ${gioSinh}` : ""}`],
+    ["ls.am_lich", `${al.ngay}/${al.thang}${al.nhuan ? t.c("ls.nhuan") : ""}/${al.nam} · ${ls.gio}`],
   ];
-  if (ls.am_duong) dong.push(["Âm dương", `${ls.am_duong.nhan} · âm dương ${ls.am_duong.ly} lý`]);
-  if (ls.menh_nap_am) dong.push(["Bản mệnh", ls.menh_nap_am.ten]);
-  dong.push(["Cục", `${ls.ngu_hanh_cuc}${ls.menh_cuc ? ` · ${ls.menh_cuc}` : ""}`]);
-  dong.push(["Mệnh chủ", `${ls.menh_chu} · Thân chủ ${ls.than_chu}`]);
-  if (cungThan) dong.push(["Thân cư", cungThan]);
-  if (vanHan) dong.push(["Năm xem", `${vanHan.nam_xem} ${vanHan.can_chi_nam_xem} · ${vanHan.tuoi_mu} tuổi`]);
-  const nhanTru = ["Năm", "Tháng", "Ngày", "Giờ"];
+  if (ls.am_duong) dong.push(["ls.am_duong", t.c("ls.am_duong_ly", { nhan: ls.am_duong.nhan, ly: ls.am_duong.ly })]);
+  if (ls.menh_nap_am) dong.push(["ls.ban_menh", t.ten("nap_am", ls.menh_nap_am.ten)]);
+  dong.push(["ls.cuc", `${t.ten("cuc", ls.ngu_hanh_cuc)}${ls.menh_cuc ? ` · ${ls.menh_cuc}` : ""}`]);
+  dong.push(["ls.menh_chu", t.c("ls.than_chu", { menh: t.ten("sao", ls.menh_chu), than: t.ten("sao", ls.than_chu) })]);
+  if (cungThan) dong.push(["ls.than_cu", t.ten("cung", cungThan)]);
+  if (vanHan) dong.push(["ls.nam_xem", t.c("ls.nam_xem_chu", { nam: String(vanHan.nam_xem), can_chi: vanHan.can_chi_nam_xem, tuoi: String(vanHan.tuoi_mu) })]);
+  const nhanTru = ["ls.tru_nam", "ls.tru_thang", "ls.tru_ngay", "ls.tru_gio"].map((k) => t.c(k));
   const x0 = W + 40;
   return (
     <g aria-hidden>
-      <text x={2 * W} y={H + 58} textAnchor="middle" fontSize={13} letterSpacing="0.3em" fill="var(--ls-mo)" className={CHI_TIET}>LÁ SỐ TỬ VI</text>
+      <text x={2 * W} y={H + 58} textAnchor="middle" fontSize={13} letterSpacing="0.3em" fill="var(--ls-mo)" className={CHI_TIET}>{t.c("ls.nhan_giua")}</text>
       <text x={2 * W} y={H + 96} textAnchor="middle" fontSize={ten && ten.length > 22 ? 24 : 30} fill="var(--ls-nhan)"
-        style={{ fontFamily: "var(--font-display), Georgia, serif" }}>{ten || `${ls.can_chi_nam.can} ${ls.can_chi_nam.chi}`}</text>
+        style={{ fontFamily: "var(--font-display), Georgia, serif" }}>{ten || `${t.ten("can", ls.can_chi_nam.can)} ${t.ten("chi", ls.can_chi_nam.chi)}`}</text>
       {/* Lớp gọn (điện thoại, vừa khung): tứ trụ 2×2 chữ lớn, bỏ các dòng nhỏ */}
       {tru.length === 4 && (
         <g className={GON} display="none">
@@ -471,8 +489,8 @@ function ThongTinGiua({ ls, vanHan, ten, gioSinh, tru, cungThan }: {
       <line x1={x0} x2={3 * W - 40} y1={H + 184} y2={H + 184} stroke="var(--ls-vien)" />
       {dong.map(([k, v], i) => (
         <g key={k} transform={`translate(${x0},${H + 216 + i * 33})`}>
-          <text fontSize={14} fill="var(--ls-mo)">{k}</text>
-          <text x={118} fontSize={15.5} fontWeight={k === "Bản mệnh" || k === "Cục" ? 600 : 500} fill="var(--ls-chu)">{v}</text>
+          <text fontSize={14} fill="var(--ls-mo)">{t.c(k)}</text>
+          <text x={118} fontSize={15.5} fontWeight={k === "ls.ban_menh" || k === "ls.cuc" ? 600 : 500} fill="var(--ls-chu)" {...(t.en ? vuaO(v, 15.5, 2 * W - 80 - 118) : {})}>{v}</text>
         </g>
       ))}
       </g>

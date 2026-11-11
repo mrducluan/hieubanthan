@@ -82,10 +82,11 @@ def gan_khop(k: dict) -> dict:
         khop: list[str] = []
         if kieu == "cung":
             if m.get("vai"):
-                khop = [m["nhan"], *_hai_kieu(*_TU_CUNG.get(m["nhan"], []))]
+                khop = [_tv_cung(m["nhan"]), *_hai_kieu(*(L(f"hoi.tq.tv.tu_cung.{_ma_khoa(m['nhan'])}.{i}", x)
+                                                          for i, x in enumerate(_TU_CUNG.get(m["nhan"], []))))]
             xem = (tuvi_kb.cung(m["nhan"]) or {}).get("xem_duoc")
             if xem:
-                m["giai_thich"] = f"Cung {m['nhan']} nói về: {xem}."
+                m["giai_thich"] = L("hoi.tq.tv.cung_noi", "Cung {cung} nói về: {xem}.", cung=_tv_cung(m["nhan"]), xem=xem)
         elif kieu == "thang" and m["nhan"] != "Bạn" and not m.get("_ban"):
             khop = [m["nhan"]]
         elif kieu == "cot" and not ngon_ngu.la_viet():   # bản dịch: tên hành theo ngôn ngữ (nhãn vẫn là mã)
@@ -99,7 +100,7 @@ def gan_khop(k: dict) -> dict:
             # Hướng một chữ (Đông, Tây…) chỉ khớp dạng "(Đông)": "hướng Đông" sẽ dính vào "hướng Đông Nam".
             khop = [f"({m['huong']})", *(_hai_kieu(f"hướng {m['huong']}") if " " in m["huong"] else [])]
         elif kieu == "nhip":
-            khop = _hai_kieu(f"tháng {m['nhan'].split()[1]}")
+            khop = _hai_kieu(L("hoi.tq.tv.khop_thang", "tháng {n}", n=m["nhan"].split()[1]))
         if khop:
             m["khop"] = khop
         m.pop("_ban", None)
@@ -153,6 +154,27 @@ def _slug(s: str) -> str:
 
 # ---------------------------------------------------------------- Tử vi
 
+# EN-ALL GĐ 4: tên riêng Tử vi trong chữ hiển thị của khối hình (bản Việt: nguyên chữ). Trường MÃ của bàn 12 cung (`nhan`,
+# `chi`, `sao`, `chi_hoi`, `bay`) giữ chữ Việt — web đặt cung theo mã, tên hiển thị đi qua `ten_hien` (kb/ten.KHOA_MA).
+def _tv_cung(x: str) -> str:
+    from app.kb import ten as _ten  # noqa: PLC0415
+    return _ten.ten("cung", x)
+
+
+def _tv_sao(x: str) -> str:
+    from app.luangiai import tuvi_hien  # noqa: PLC0415
+    return x if ngon_ngu.la_viet() else tuvi_hien.ten_sao(x)
+
+
+def _tv_hoa(x: str) -> str:
+    from app.kb import ten as _ten  # noqa: PLC0415
+    return _ten.ten("hoa", x)
+
+
+def _tv_va() -> str:
+    return L("hoi.tv.va", " và ")
+
+
 # Câu hỏi chuẩn cho từng cung (đã kiểm định tuyến đúng cung — tests/test_truc_quan.py) — dùng cho "Hỏi tiếp".
 HOI_CUNG = {
     "Mệnh": "Cung Mệnh nói gì về tính cách của tôi?", "Huynh Đệ": "Anh chị em của tôi thế nào?",
@@ -189,10 +211,11 @@ def _ban_cung(goi: dict, ls: dict | None, cung: str | None = None) -> dict | Non
         muc.append({"chi": c["chi"], "nhan": c["ten"], "vai": vai,
                     "sao": [s["ten"] for s in c.get("chinh_tinh", [])][:2],
                     "sac": {"hoi": "chinh", "tam_hop": "hop", "xung": "trung"}.get(vai, "nhat")})
-    return {"kieu": "cung", "tieu_de": f"Cung {cung_hoi} trên lá số của bạn", "chi_hoi": goc["chi"], "muc": muc,
-            "cau_chuan": cau_hien(HOI_CUNG.get(cung_hoi)),
-            "ghi_chu": f"Cung sáng là cung câu hỏi nhắc tới. {' và '.join(hop)} cùng một tam giác đỡ cho nó; "
-                       f"{xung} nằm đối diện, chiếu sang." if hop and xung else None}
+    return {"kieu": "cung", "tieu_de": L("hoi.tq.tv.ban_cung", "Cung {cung} trên lá số của bạn", cung=_tv_cung(cung_hoi)),
+            "chi_hoi": goc["chi"], "muc": muc, "cau_chuan": cau_hien(HOI_CUNG.get(cung_hoi)),
+            "ghi_chu": L("hoi.tq.tv.ban_cung_gc", "Cung sáng là cung câu hỏi nhắc tới. {hop} cùng một tam giác đỡ cho nó; "
+                         "{xung} nằm đối diện, chiếu sang.", hop=_tv_va().join(_tv_cung(x) for x in hop), xung=_tv_cung(xung))
+            if hop and xung else None}
 
 
 def hoi_tiep_tuvi(goi: dict, ls: dict | None) -> list[str]:
@@ -213,21 +236,24 @@ def tuvi(goi: dict, ls: dict | None = None) -> list[dict]:
         ds.append(bay)
     cc = [m for m in muc if m["loai"] == "cach_cuc"]
     if cc and not ds and (b := _ban_cung(goi, ls, "Mệnh")):
-        b["tieu_de"] = "Cung Mệnh và tam phương — nơi cách cục hình thành"
+        b["tieu_de"] = L("hoi.tq.tv.menh_tam_phuong", "Cung Mệnh và tam phương — nơi cách cục hình thành")
         b["cau_chuan"] = None
         ds.append(b)
     sao = [m for m in muc if m["loai"] == "sao_cung" and m.get("vai") == "la_so" and m.get("do_sang") in _VI_TRI_SANG]
     if sao:
-        ds.append({"kieu": "thang", "tieu_de": f"Sao chính ở cung {sao[0]['cung']} sáng tới đâu", "nac": list(NAC_DO_SANG),
+        ds.append({"kieu": "thang", "tieu_de": L("hoi.tq.tv.sao_sang", "Sao chính ở cung {cung} sáng tới đâu",
+                                                 cung=_tv_cung(sao[0]["cung"])),
+                   "nac": [L(f"hoi.tq.tv.nac.{i}", x) for i, x in enumerate(NAC_DO_SANG)],
                    "cau_chuan": cau_hien(HOI_CUNG.get(sao[0]["cung"])),
-                   "ghi_chu": "Sao càng sáng, nét tốt của nó càng dễ lộ ra; kém sáng thì cần chủ động hơn.",
-                   "muc": [{"nhan": m["sao"], "vi_tri": _VI_TRI_SANG[m["do_sang"]],
+                   "ghi_chu": L("hoi.tq.tv.sao_sang_gc", "Sao càng sáng, nét tốt của nó càng dễ lộ ra; kém sáng thì cần chủ động hơn."),
+                   "muc": [{"nhan": _tv_sao(m["sao"]), "vi_tri": _VI_TRI_SANG[m["do_sang"]],
                             "giai_thich": m.get("doi_thuong") or m.get("noi_dung") or ""} for m in sao[:3]]})
     nhip = next((m for m in muc if m["loai"] == "nhip_3_thang"), None)
     if nhip and nhip.get("thang"):
-        ds.append({"kieu": "nhip", "tieu_de": "Nhịp các tháng tới",
+        ds.append({"kieu": "nhip", "tieu_de": L("hoi.tq.tv.nhip", "Nhịp các tháng tới"),
                    "cau_chuan": cau_hien(HOI_TV_THEM["ba_thang"] if goi["phan_loai"].get("y_dinh") == "ba_thang_toi" else None), "muc": [
-            {"nhan": f"Tháng {t['thang']}{' nhuận' if t.get('nhuan') else ''}", "phu": f"{t['tu'][8:10]}/{t['tu'][5:7]}",
+            {"nhan": L("hoi.tq.tv.thang", "Tháng {n}{nhuan}", n=t["thang"], nhuan=L("hoi.tv.nhuan", " nhuận") if t.get("nhuan") else ""),
+             "phu": f"{t['tu'][8:10]}/{t['tu'][5:7]}",
              "gia_tri": t["nhan_muc"], "muc_ma": t["muc"], "sac": _SAC_NHIP.get(t["muc"], "trung"),
              "giai_thich": " ".join(x for x in (t.get("tieu_de_thang"), t.get("goi_y")) if x)} for t in nhip["thang"]]})
     han = {m["lop"]: m for m in muc if m["loai"] == "han"}
@@ -235,17 +261,18 @@ def tuvi(goi: dict, ls: dict | None = None) -> list[dict]:
     o = []
     if "dai_han" in han and han["dai_han"].get("tu_tuoi") is not None:
         h = han["dai_han"]
-        o.append({"nhan": f"10 năm ({h['tu_tuoi']}–{h['den_tuoi']} tuổi)", "gia_tri": h["cung_goc"],
+        o.append({"nhan": L("hoi.tq.tv.muoi_nam", "10 năm ({tu}–{den} tuổi)", tu=h["tu_tuoi"], den=h["den_tuoi"]),
+                  "gia_tri": _tv_cung(h["cung_goc"]),
                   "chu_thich": _bo_dau_de(h.get("chu_de")), "sac": "chinh"})
     if "luu_nien" in han:
         h = han["luu_nien"]
-        nam = f"Năm {tuoi['ngay_xem'][:4]}" if tuoi else "Năm nay"
-        o.append({"nhan": nam, "gia_tri": h["cung_goc"], "chu_thich": _bo_dau_de(h.get("chu_de")), "sac": "hop"})
+        nam = L("hoi.tq.nam_x", "Năm {nam}", nam=tuoi["ngay_xem"][:4]) if tuoi else L("hoi.tq.tv.nam_nay", "Năm nay")
+        o.append({"nhan": nam, "gia_tri": _tv_cung(h["cung_goc"]), "chu_thich": _bo_dau_de(h.get("chu_de")), "sac": "hop"})
     if o:
-        ds.append({"kieu": "o", "tieu_de": "Bạn đang ở giai đoạn nào", "muc": o})
+        ds.append({"kieu": "o", "tieu_de": L("hoi.tq.giai_doan", "Bạn đang ở giai đoạn nào"), "muc": o})
     if cc:
-        ds.append({"kieu": "o", "tieu_de": "Cách cục trên lá số của bạn",
-                   "muc": [{"nhan": "Cách cục", "gia_tri": m["ten"], "chu_thich": (m.get("y") or "").split(":")[0],
+        ds.append({"kieu": "o", "tieu_de": L("hoi.tq.tv.cach_cuc", "Cách cục trên lá số của bạn"),
+                   "muc": [{"nhan": L("hoi.tq.tv.cach_cuc_nhan", "Cách cục"), "gia_tri": m["ten"], "chu_thich": (m.get("y") or "").split(":")[0],
                             "sac": "chinh" if i == 0 else "trung"} for i, m in enumerate(cc[:3])]})
     if (mm := _muc_mang(goi)):
         ds.append(mm)
@@ -288,9 +315,10 @@ def _ban_bay(goi: dict, ls: dict | None) -> dict | None:
         m = {"chi": c["chi"], "nhan": c["ten"], "vai": vai, "sao": [s["ten"] for s in c.get("chinh_tinh", [])][:2],
              "sac": {"hoi": "chinh", "nguon": "hop"}.get(vai, "nhat")}
         muc.append(m)
-    k = {"kieu": "cung", "tieu_de": "Đường bay tứ hoá trên lá số của bạn", "chi_hoi": chi["Mệnh"], "muc": muc,
+    k = {"kieu": "cung", "tieu_de": L("hoi.tq.tv.bay", "Đường bay tứ hoá trên lá số của bạn"), "chi_hoi": chi["Mệnh"], "muc": muc,
          "bay": [{"tu": t, "den": d, "hoa": h} for (t, d), h in duong.items()],
-         "ghi_chu": "Mũi tên: cung nào gửi Lộc, Quyền, Khoa hay Kỵ vào Mệnh; vòng tròn: cung tự hoá (tự gửi cho chính nó)."}
+         "ghi_chu": L("hoi.tq.tv.bay_gc", "Mũi tên: cung nào gửi Lộc, Quyền, Khoa hay Kỵ vào Mệnh; vòng tròn: cung tự hoá (tự gửi cho "
+                      "chính nó).")}
     gan_khop(k)
     for m in muc:                    # bấm ô: nói luôn đường bay đi từ cung đó
         if m["vai"] == "nguon" and loi.get(m["nhan"]):
@@ -302,17 +330,18 @@ def _kien_thuc_tuvi(muc: list[dict]) -> dict | None:
     from app.kb import trang_tuvi   # noqa: PLC0415
     sc = next((m for m in muc if m["loai"] == "sao_cung" and m.get("sao") and m.get("cung")), None)
     if sc:
-        return _khoi_trang("sao_cung", f"{_slug(sc['sao'])}-cung-{_slug(sc['cung'])}", f"{sc['sao']} ở cung {sc['cung']}")
+        return _khoi_trang("sao_cung", f"{_slug(sc['sao'])}-cung-{_slug(sc['cung'])}",
+                           L("hoi.tq.tv.kt_sao_cung", "{sao} ở cung {cung}", sao=_tv_sao(sc["sao"]), cung=_tv_cung(sc["cung"])))
     th = next((m for m in muc if m["loai"] == "tu_hoa_cung" and m.get("hoa") and m.get("cung")), None)
     if th:
         return _khoi_trang("hoa_cung", f"{trang_tuvi._slug_hoa(th['hoa'])}-cung-{_slug(th['cung'])}",
-                           f"Hoá {th['hoa']} ở cung {th['cung']}")
+                           L("hoi.tq.tv.kt_hoa_cung", "Hoá {hoa} ở cung {cung}", hoa=_tv_hoa(th["hoa"]), cung=_tv_cung(th["cung"])))
     ct = next((m for m in muc if m["loai"] == "chinh_tinh" and m.get("ten")), None)
     if ct:
-        return _khoi_trang("sao", f"sao-{_slug(ct['ten'])}", f"Sao {ct['ten']}")
+        return _khoi_trang("sao", f"sao-{_slug(ct['ten'])}", L("hoi.tq.tv.kt_sao", "Sao {sao}", sao=_tv_sao(ct["ten"])))
     cg = next((m for m in muc if m["loai"] == "cung" and m.get("ten")), None)
     if cg:
-        return _khoi_trang("cung", f"cung-{_slug(cg['ten'])}", f"Cung {cg['ten']}")
+        return _khoi_trang("cung", f"cung-{_slug(cg['ten'])}", L("hoi.tq.tv.kt_cung", "Cung {cung}", cung=_tv_cung(cg["ten"])))
     return None
 
 

@@ -141,26 +141,28 @@ function HinhQue({ so, hao }: { so: number; hao: number[] }) {
 }
 
 // ---------------------------------------------------------------- sao: ngôi sao 8 cánh, tên chữ Hán, màu ngũ hành
-function HinhSaoTuVi({ ten, ten_han, ngu_hanh }: { ten: string; ten_han: string; ngu_hanh: string }) {
+function HinhSaoTuVi({ ten, ten_han, ngu_hanh, c, tn }: { ten: string; ten_han: string; ngu_hanh: string; c: Chu; tn: DocTen }) {
   const cx = 160, cy = 112;
   const canh = Array.from({ length: 16 }, (_, i) => diem(cx, cy, i % 2 ? 34 : 86, -Math.PI / 2 + (Math.PI * i) / 8));
   const d = canh.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(" ") + " Z";
   const mau = mauHanh(ngu_hanh);
   return (
-    <Khung nhan={`Sao ${ten} (${ten_han}), hành ${ngu_hanh}`}>
+    <Khung nhan={c("mh.sao", { ten, han: ten_han, hanh: tn("hanh", ngu_hanh) })}>
       <path d={d} className={`${mau.nen} ${mau.vien}`} strokeWidth={1.2} />
       <circle cx={cx} cy={cy} r={30} className="fill-bg stroke-gold/50" strokeWidth={1} />
       <text x={cx} y={cy + 9} textAnchor="middle" className="fill-fg" fontSize={24} style={{ fontFamily: "var(--font-han), serif" }}>{ten_han}</text>
-      <text x={cx} y={222} textAnchor="middle" className="fill-fg-muted" fontSize={12}>{`${ten} · ${ngu_hanh}`}</text>
+      <text x={cx} y={222} textAnchor="middle" className="fill-fg-muted" fontSize={12}>{c("mh.sao_duoi", { ten, hanh: tn("hanh", ngu_hanh) })}</text>
     </Khung>
   );
 }
 
 // ---------------------------------------------------------------- cung: vòng 12 cung, tô cung đang đọc
-function HinhCung({ chi_so, vong, giua, nhan }: { chi_so: number; vong: string[]; giua?: ReactNode; nhan?: string }) {
+function HinhCung({ chi_so, vong, giua, nhan, c }: { chi_so: number; vong: string[]; giua?: ReactNode; nhan?: string; c: Chu }) {
   const cx = 160, cy = 120, r = 90;
+  // EN-ALL: tên cung bản Anh ("Siblings Palace") quá dài cho nhãn vòng → bỏ chữ " Palace" ở vòng (bản Việt không đổi).
+  const ngan = (t: string) => t.replace(/ Palace$/, "");
   return (
-    <Khung nhan={nhan ?? `Cung ${vong[chi_so]} — vị trí trong vòng 12 cung Tử vi`}>
+    <Khung nhan={nhan ?? c("mh.cung", { cung: vong[chi_so] ?? "" })}>
       <circle cx={cx} cy={cy} r={r} className="fill-none stroke-gold/25" strokeWidth={1} />
       <circle cx={cx} cy={cy} r={r - 34} className="fill-none stroke-gold/15" strokeWidth={1} />
       {vong.map((ten, i) => {
@@ -174,21 +176,21 @@ function HinhCung({ chi_so, vong, giua, nhan }: { chi_so: number; vong: string[]
             <line x1={x1} y1={y1} x2={x2} y2={y2} className="stroke-gold/20" strokeWidth={1} />
             {chon && <rect x={x - 24} y={y - 10} width={48} height={18} rx={9} className="fill-gold/20 stroke-gold" strokeWidth={1.2} />}
             <text x={x} y={y + 3} textAnchor="middle" fontSize={chon ? 8.5 : 7.5}
-              className={chon ? "fill-gold font-semibold" : "fill-fg-faint"}>{ten}</text>
+              className={chon ? "fill-gold font-semibold" : "fill-fg-faint"}>{ngan(ten)}</text>
           </g>
         );
       })}
-      {giua ?? <text x={cx} y={cy + 6} textAnchor="middle" className="fill-fg font-serif" fontSize={17}>{vong[chi_so]}</text>}
+      {giua ?? <text x={cx} y={cy + 6} textAnchor="middle" className="fill-fg font-serif" fontSize={17}>{ngan(vong[chi_so] ?? "")}</text>}
     </Khung>
   );
 }
 
 // ---------------------------------------------------------------- SEO-H: sao ở cung — vòng 12 cung + sao ở giữa
-function HinhSaoCung({ ten, ten_han, ngu_hanh, chi_so, vong }: { ten: string; ten_han: string; ngu_hanh: string; chi_so: number; vong: string[] }) {
+function HinhSaoCung({ ten, ten_han, ngu_hanh, chi_so, vong, c }: { ten: string; ten_han: string; ngu_hanh: string; chi_so: number; vong: string[]; c: Chu }) {
   const cx = 160, cy = 120;
   const mau = mauHanh(ngu_hanh);
   return (
-    <HinhCung chi_so={chi_so} vong={vong} nhan={`Sao ${ten} (${ten_han}) ở cung ${vong[chi_so]} — vòng 12 cung Tử vi`} giua={
+    <HinhCung c={c} chi_so={chi_so} vong={vong} nhan={c("mh.sao_cung", { ten, han: ten_han, cung: vong[chi_so] ?? "" })} giua={
       <>
         <circle cx={cx} cy={cy} r={34} strokeWidth={1.2} className={`${mau.nen} ${mau.vien}`} />
         <text x={cx} y={cy + 2} textAnchor="middle" className="fill-fg" fontSize={19} style={{ fontFamily: "var(--font-han), serif" }}>{ten_han}</text>
@@ -202,14 +204,15 @@ function HinhSaoCung({ ten, ten_han, ngu_hanh, chi_so, vong }: { ten: string; te
 const HOA_HAN: Record<string, string> = { "Lộc": "祿", "Quyền": "權", "Khoa": "科", "Kỵ": "忌" };
 const HOA_MAU: Record<string, string> = { "Lộc": "fill-jade/20 stroke-jade", "Quyền": "fill-gold/20 stroke-gold",
   "Khoa": "fill-moon/20 stroke-moon", "Kỵ": "fill-cinnabar/20 stroke-cinnabar" };
-function HinhHoaCung({ hoa, chi_so, vong }: { hoa: string; chi_so: number; vong: string[] }) {
+function HinhHoaCung({ hoa, chi_so, vong, c, tn }: { hoa: string; chi_so: number; vong: string[]; c: Chu; tn: DocTen }) {
+  const tenHoa = tn("hoa", hoa).replace(/\s*\(.*\)$/, "");   // bản Anh "Lu (Prosperity)" → "Lu"; bản Việt nguyên mã
   const cx = 160, cy = 120;
   return (
-    <HinhCung chi_so={chi_so} vong={vong} nhan={`Hoá ${hoa} (化${HOA_HAN[hoa] ?? ""}) ở cung ${vong[chi_so]} — vòng 12 cung Tử vi`} giua={
+    <HinhCung c={c} chi_so={chi_so} vong={vong} nhan={c("mh.hoa_cung", { hoa: tenHoa, han: `化${HOA_HAN[hoa] ?? ""}`, cung: vong[chi_so] ?? "" })} giua={
       <>
         <circle cx={cx} cy={cy} r={34} strokeWidth={1.2} className={HOA_MAU[hoa] ?? "fill-gold/20 stroke-gold"} />
         <text x={cx} y={cy + 4} textAnchor="middle" className="fill-fg" fontSize={22} style={{ fontFamily: "var(--font-han), serif" }}>{`化${HOA_HAN[hoa] ?? ""}`}</text>
-        <text x={cx} y={cy + 20} textAnchor="middle" className="fill-fg-muted" fontSize={8.5}>{`Hoá ${hoa}`}</text>
+        <text x={cx} y={cy + 20} textAnchor="middle" className="fill-fg-muted" fontSize={8.5}>{c("mh.hoa_nho", { hoa: tenHoa })}</text>
       </>
     } />
   );
@@ -348,10 +351,10 @@ export function MinhHoa({ mh, duong, gon = false, en = false, ten = MA }: { mh?:
       case "so": return <HinhSo {...mh} />;
       case "que": return <HinhQue {...mh} />;
       case "cap_so": return <HinhCapSo {...mh} />;
-      case "sao": return <HinhSaoTuVi {...mh} />;
-      case "cung": return <HinhCung {...mh} />;
-      case "sao_cung": return <HinhSaoCung {...mh} />;
-      case "hoa_cung": return <HinhHoaCung {...mh} />;
+      case "sao": return <HinhSaoTuVi {...mh} c={c} tn={ten} />;
+      case "cung": return <HinhCung {...mh} c={c} />;
+      case "sao_cung": return <HinhSaoCung {...mh} c={c} />;
+      case "hoa_cung": return <HinhHoaCung {...mh} c={c} tn={ten} />;
       case "menh": return <HinhMenh {...mh} c={c} ten={ten} />;
       case "thap_than": return <HinhThapThan {...mh} c={c} />;
       case "nhat_chu": return <HinhNhatChu {...mh} c={c} ten={ten} />;

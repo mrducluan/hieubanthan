@@ -574,9 +574,9 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
                 "luu_nguyet": inp.la_so.luu_nguyet}
         flags = list(dv.flags)
         if ti == 12:
-            flags.append({"loai": "ty_conflict", "chi_tiet": (
+            flags.append({"loai": "ty_conflict", "chi_tiet": L("hoi.tv.co.ty_conflict", (
                 "Sinh 23:00–23:59: tử vi (theo iztro) tính là giờ Tý của NGÀY HÔM SAU — "
-                "lá số có thể khác trang dùng quy ước khác.")})
+                "lá số có thể khác trang dùng quy ước khác."))})
     try:
         kq = hoidap_tv.tra_loi(inp.cau_hoi.strip(), inp.che_do, sinh=sinh, ngay_xem=inp.ngay_xem,
                                y_dinh_goi_y=inp.y_dinh_goi_y)
