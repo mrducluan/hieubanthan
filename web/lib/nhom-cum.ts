@@ -3,7 +3,7 @@
 // Nhóm sai định dạng (engine đổi tiêu đề) → bài vào nhóm "Khác", không mất bài nào. Thuần dữ liệu, dùng được ở trình duyệt.
 
 export type BaiCum = { duong: string; tieu_de: string; mo_ta: string };
-export type NhomCum = { ma: string; ten: string; bai: (BaiCum & { phu: string[] })[] };
+export type NhomCum = { ma: string; ten: string; tieuDe: string; bai: (BaiCum & { phu: string[] })[] };
 export type BoLoc = { nhan: string; ds: { ma: string; ten: string }[] };
 export type MucLucCum = { nhanNhom: string; viDu: string; nhom: NhomCum[]; loc: BoLoc | null };
 
@@ -13,7 +13,8 @@ export function maChu(s: string): string {
 }
 
 type Tach = { nhom: [string, string] | null; phu: [string, string][] };
-type Luat = { nhanNhom: string; viDu: string; tach: (b: BaiCum) => Tach; loc?: { nhan: string; thuTu?: string[] }; thuTuNhom?: string[] };
+/** `tieuDe`: chữ H2 của nhóm — câu tự đứng được khi máy tìm kiếm / AI trích riêng một mục (AEO), khác `ten` ngắn của chip. */
+type Luat = { nhanNhom: string; viDu: string; tach: (b: BaiCum) => Tach; tieuDe: (ten: string) => string; loc?: { nhan: string; thuTu?: string[] }; thuTuNhom?: string[] };
 
 const cap = (ten: string): [string, string] => [maChu(ten), ten];
 
@@ -41,19 +42,19 @@ function quaiTren(tieuDe: string): string | null {
 }
 
 const LUAT: Record<string, Luat> = {
-  "sao-cung": { nhanNhom: "Theo sao", viDu: "Thái Dương, Phu Thê…", loc: { nhan: "Theo cung", thuTu: THU_TU_CUNG },
+  "sao-cung": { nhanNhom: "Theo sao", tieuDe: (t) => `Sao ${t} ở 12 cung`, viDu: "Thái Dương, Phu Thê…", loc: { nhan: "Theo cung", thuTu: THU_TU_CUNG },
     tach: (b) => { const m = b.tieu_de.match(SAO_CUNG); return m ? { nhom: cap(m[1]!), phu: [cap(m[2]!)] } : { nhom: null, phu: [] }; } },
-  "tu-hoa": { nhanNhom: "Theo hoá", viDu: "Hoá Kỵ, Tài Bạch…", loc: { nhan: "Theo cung", thuTu: THU_TU_CUNG },
+  "tu-hoa": { nhanNhom: "Theo hoá", tieuDe: (t) => `${t} ở 12 cung`, viDu: "Hoá Kỵ, Tài Bạch…", loc: { nhan: "Theo cung", thuTu: THU_TU_CUNG },
     tach: (b) => { const m = b.tieu_de.match(SAO_CUNG); return m ? { nhom: cap(m[1]!), phu: [cap(m[2]!)] } : { nhom: null, phu: [] }; } },
-  "kinh-dich": { nhanNhom: "Theo quái trên", viDu: "Càn, Thái, Vị Tế…", thuTuNhom: Object.keys(QUAI),
+  "kinh-dich": { nhanNhom: "Theo quái trên", tieuDe: (t) => `Quẻ có quái trên ${t.replace(" · ", " (")})`, viDu: "Càn, Thái, Vị Tế…", thuTuNhom: Object.keys(QUAI),
     tach: (b) => { const q = quaiTren(b.tieu_de); return { nhom: q ? [q, QUAI[q]!] : null, phu: [] }; } },
-  "menh-tuoi": { nhanNhom: "Theo thập niên", viDu: "1990, Canh Ngọ, Lộ Bàng Thổ…",
+  "menh-tuoi": { nhanNhom: "Theo thập niên", tieuDe: (t) => `Sinh năm ${t} mệnh gì`, viDu: "1990, Canh Ngọ, Lộ Bàng Thổ…",
     tach: (b) => { const n = Number(b.duong.match(/sinh-nam-(\d{4})/)?.[1]); if (!n) return { nhom: null, phu: [] };
       const d = Math.floor(n / 10) * 10; return { nhom: [`thap-nien-${d}`, `${d}–${d + 9}`], phu: [] }; } },
-  "so-kep": { nhanNhom: "Theo hàng chục", viDu: "19, ngôi sao…",
+  "so-kep": { nhanNhom: "Theo hàng chục", tieuDe: (t) => `Ý nghĩa số kép ${t.replace(/^Số /, "")}`, viDu: "19, ngôi sao…",
     tach: (b) => { const n = Number(b.duong.match(/so-kep-(\d+)/)?.[1]); if (!n) return { nhom: null, phu: [] };
       const d = Math.min(40, Math.floor(n / 10) * 10); return { nhom: [`so-${d}`, d === 40 ? "Số 40–52" : `Số ${d}–${d + 9}`], phu: [] }; } },
-  "hop-so": { nhanNhom: "Theo số nhỏ hơn", viDu: "3 và 7…", loc: { nhan: "Có số" },
+  "hop-so": { nhanNhom: "Theo số nhỏ hơn", tieuDe: (t) => `${t.replace(" với…", "")} hợp với số nào`, viDu: "3 và 7…", loc: { nhan: "Có số" },
     tach: (b) => { const m = b.duong.match(/so-chu-dao-(\d+)-va-(\d+)/); if (!m) return { nhom: null, phu: [] };
       const a = m[1]!, c = m[2]!;
       return { nhom: [`so-${a}`, `Số ${a} với…`], phu: [...new Set([a, c])].map((x) => [`so-${x}`, `Số ${x}`] as [string, string]) }; } },
@@ -70,7 +71,7 @@ export function mucLucCum(khoa: string, ds: BaiCum[]): MucLucCum | null {
   for (const b of ds) {
     const t = l.tach(b);
     const [ma, ten] = t.nhom ?? ["khac", "Khác"];
-    if (!nhom.has(ma)) nhom.set(ma, { ma, ten, bai: [] });
+    if (!nhom.has(ma)) nhom.set(ma, { ma, ten, tieuDe: ma === "khac" ? "Các trang khác" : l.tieuDe(ten), bai: [] });
     nhom.get(ma)!.bai.push({ ...b, phu: t.phu.map(([m]) => m) });
     for (const [m, n] of t.phu) if (!loc.has(m)) loc.set(m, n);
   }

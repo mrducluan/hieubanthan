@@ -29,7 +29,7 @@ export default async function Page() {
   const namAm = await namAmHienTai();
   const [nd, ...nam] = await Promise.all([layNoiDungTrang(DUONG), namCongKhai(namAm), namCongKhai(namAm + 1)]);
   if (!nam.some(Boolean)) throw new Error("engine không phản hồi");   // SEO-L3: engine lỗi → 5xx, không trang rỗng 200
-  const h1 = nd.dau.h1 ?? "Xem theo năm";
+  const h1 = nd.dau.h1 ?? "Xem theo năm: năm con gì, mệnh gì, tuổi nào cần lưu ý";
   return (
     <div className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(

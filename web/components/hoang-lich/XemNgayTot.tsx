@@ -27,7 +27,7 @@ export function LichThang({ t, chon }: { t: ThangLich; chon?: string }) {
     <section aria-labelledby="lich-thang" className="glass rounded-2xl p-4 sm:p-5" data-testid="lich-thang">
       <div className="flex items-center justify-between">
         {truoc.nam >= 1901 ? <Link href={duongThang(truoc.nam, truoc.thang)} rel={rel(truoc)} aria-label="Tháng trước" className="vung-cham rounded-lg p-1.5 hover:bg-surface"><ChevronLeft className="size-5" /></Link> : <span />}
-        <h2 id="lich-thang" className="text-lg">Tháng {t.thang}/{t.nam}</h2>
+        <h2 id="lich-thang" className="text-lg">Lịch âm dương tháng {t.thang}/{t.nam}</h2>
         {sau.nam <= 2099 ? <Link href={duongThang(sau.nam, sau.thang)} rel={rel(sau)} aria-label="Tháng sau" className="vung-cham rounded-lg p-1.5 hover:bg-surface"><ChevronRight className="size-5" /></Link> : <span />}
       </div>
       <div className="mt-3 grid grid-cols-7 gap-1 text-center text-xs text-fg-faint">{THU.map((x) => <span key={x}>{x}</span>)}</div>

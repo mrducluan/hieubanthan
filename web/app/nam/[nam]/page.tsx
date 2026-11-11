@@ -76,7 +76,7 @@ export default async function Page(p: P) {
       </section>
 
       <section className="mt-6" aria-labelledby="thong-tin">
-        <h2 id="thong-tin" className="sr-only">Thông tin năm {n}</h2>
+        <h2 id="thong-tin" className="sr-only">Năm {n} con gì, mệnh gì, Tết ngày nào</h2>
         <dl className="grid grid-cols-2 gap-2 sm:grid-cols-3" data-testid="o-nam">
           {o.map(([k, v]) => (
             <div key={k} className="rounded-xl border border-line/70 p-3">
