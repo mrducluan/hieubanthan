@@ -1,4 +1,6 @@
 // TDG-1 — "Xem tuổi làm nhà, cưới hỏi": công cụ (năm sinh từ hồ sơ trên máy) + mục lục trang theo năm sinh.
+import { TomTatNam } from "@/components/seo/TomTatNam";
+import { namTuoiSeo } from "@/lib/nam";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
@@ -16,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [nam, nd] = await Promise.all([namAmHienTai(), layNoiDungTrang(ND_LAM_NHA.duong)]);
+  const [nam, nd, namSeo] = await Promise.all([namAmHienTai(), layNoiDungTrang(ND_LAM_NHA.duong), namTuoiSeo()]);
   const c = taoChu(CHU_LAM_NHA, nd.chu);
   return (
     <TrangCongCu duong={ND_LAM_NHA.duong}>
@@ -24,6 +26,8 @@ export default async function Page() {
         <TieuDeTrang nho={CHU_LAM_NHA["dau.nhan_tren"]!.mac_dinh} lon="Xem tuổi làm nhà, cưới hỏi"
           mo_ta="Tuổi mụ năm định làm có phạm Kim lâu, Hoang ốc, Tam tai không — và năm nào thuận gần nhất." />
         <CongCuTuoi kieu="lam_nha" namMacDinh={nam} />
+        {/* SEO-O: câu trả lời của năm sắp tới ngay trang gốc (trước chỉ có ô nhập). */}
+        <TomTatNam kieu="lam_nha" nam={namSeo} tieuDe={`Năm ${namSeo}: tuổi nào làm nhà được?`} nhanLink={`Bảng đủ 46 tuổi làm nhà năm ${namSeo}`} />
         <section aria-labelledby="theo-nam-sinh" className="mt-8">
           <h2 id="theo-nam-sinh" className="text-xl">{c("theo_nam.tieu_de")}</h2>
           {[nam, nam + 1].map((n) => (

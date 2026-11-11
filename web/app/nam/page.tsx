@@ -1,5 +1,6 @@
 // NAM-1 — mục lục "Xem theo năm": năm âm lịch đang đi + năm tới (trang trụ /nam/{năm}) và lối sang "Thời gian tới của
 // bạn". Năm lấy từ engine (namAmHienTai) → tự trượt sau Tết, không sửa tay mỗi năm.
+import { TomTatNam } from "@/components/seo/TomTatNam";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -48,6 +49,7 @@ export default async function Page() {
           </Link></li>
         ))}
       </ul>
+      <TomTatNam kieu="nam" nam={namAm + 1} tieuDe={`Năm ${namAm + 1} tóm tắt: con gì, mệnh gì, Tết ngày nào`} nhanLink={`Xem đủ năm ${namAm + 1}: 12 con giáp, mốc lễ, hạn năm`} />
       <section className="mt-8" aria-labelledby="moi-nam">
         <h2 id="moi-nam" className="text-2xl">Mỗi trang năm có gì</h2>
         <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-fg-muted">

@@ -1,4 +1,5 @@
 // TDG-1 — trang "Hướng xấu năm {năm}". Index năm âm hiện tại −1…+2.
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -52,6 +53,8 @@ export default async function Page(p: P) {
       <TraLoiNhanh chu={h.tra_loi_nhanh} />
       <BangHanNam h={h} />
       <HoiDapHien ds={h.hoi_dap} />
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="huong_xau" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" />
       <p className="flex flex-wrap gap-3 text-sm">
         {n > 1901 && <Link href={duongHanNam(n - 1)} className="text-gold underline">Năm {n - 1}</Link>}

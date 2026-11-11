@@ -1,5 +1,6 @@
 // SEO-L5 — "Lịch âm năm {năm}": các tháng âm lịch Việt (mùng 1 dương lịch, đủ/thiếu, nhuận), Tết, rằm — engine tính
 // (Hồ Ngọc Đức UTC+7). Index ±10 năm quanh năm nay; năm khác vẫn xem được, noindex.
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -70,12 +71,33 @@ export default async function Page(p: P) {
         </div>
         <p className="mt-3 text-xs leading-relaxed text-fg-faint">{d.cach_tinh}</p>
       </section>
+      {/* SEO-O: ngày lễ âm lịch của năm — engine tính (lunar_to_solar), engine cũ không có → ẩn. */}
+      {d.le?.length ? (
+        <section className="mt-10" aria-labelledby="ngay-le">
+          <h2 id="ngay-le" className="text-2xl">Ngày lễ, ngày rằm năm {n} theo âm lịch</h2>
+          <p className="mt-2 text-sm text-fg-muted">Ngày dương lịch của các ngày lễ, ngày giỗ hay được hỏi trong năm {d.can_chi}, tính theo âm lịch Việt Nam.</p>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[26rem] text-left text-sm" data-testid="bang-le">
+              <thead className="text-xs text-fg-faint"><tr><th className="py-2 pr-3">Ngày lễ</th><th className="pr-3">Âm lịch</th><th>Dương lịch</th></tr></thead>
+              <tbody>{d.le.map((x) => (
+                <tr key={x.ma} className="border-t border-line/50">
+                  <td className="py-2 pr-3 text-fg">{x.ten}</td>
+                  <td className="pr-3 text-fg-muted">{x.am}</td>
+                  <td><Link href={`/xem-ngay-tot/${x.duong}`} className="text-gold underline decoration-gold/40 underline-offset-2">{x.thu}, {dmy(x.duong)}</Link></td>
+                </tr>
+              ))}</tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
       <section className="mt-10" aria-labelledby="hoi-dap">
         <h2 id="hoi-dap" className="text-2xl">Câu hỏi thường gặp</h2>
         <dl className="mt-4 space-y-4">{d.hoi_dap.map((h) => (
           <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
         ))}</dl>
       </section>
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="lich_am" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-8 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/doi-lich-am-duong" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>
       <p className="mt-3 flex flex-wrap gap-3 text-sm">

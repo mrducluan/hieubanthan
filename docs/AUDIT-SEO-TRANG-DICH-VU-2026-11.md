@@ -123,3 +123,17 @@ chặn script lạ (XSS). Trang dựng sẵn thì không có nonce riêng từng
 4. **GEO**: mỗi trang dịch vụ thêm khối "Trả lời nhanh" 40–60 chữ ngay dưới H1 (hiện chỉ trang kiến thức có) — câu AI dễ trích nhất.
 5. **Q-I3 cache HTML** (đang chờ duyệt ở AUDIT-INDEX): phản hồi nhanh hơn → Google thu thập nhiều trang hơn mỗi ngày.
 6. **Ảnh chụp lá số mẫu thật** (không phải SVG) trên `/tu-vi` có alt "lá số tử vi" → vào Google Hình ảnh, nơi chữ "lá số tử vi" có lượng tìm lớn.
+
+## 6. Đợt 3 (SEO-O, 2026-11-10) — trang năm, lịch & tuổi trong menu "Năm" + "Huyền học"
+
+**Đo trước khi sửa** (bản build cục bộ, đếm chữ trong `<main>`): không URL nào trong menu có `<img>` (chỉ SVG nội dòng — Google Hình ảnh không lấy); trang mỏng: `/lich-am` 188 chữ, `/lich-am/2027` 290, `/doi-lich-am-duong` 320, `/tuoi-xong-dat` 354, `/nam` 421, trang gốc công cụ ~450–500; các trang mục lục cụm (sao ở cung, mệnh theo năm, dấu hiệu…) không có câu trả lời ngắn.
+
+**Đã làm:**
+1. **Ảnh tóm tắt có chữ thật** `/og/tom-tat?kieu=…` (1080×1350, nền giấy sáng, QR + đường dẫn trang + hieuban.com) cho trang năm, sinh con, cưới hỏi, Tử vi theo tuổi, tuổi làm nhà (năm + tuổi), xông đất, sao hạn, hướng xấu, lịch âm, ngày, tháng. Ý chính do engine tính (`web/lib/tom-tat-anh.ts`, ≤ 6 dòng) — **cùng một hàm** dựng chữ trong ảnh, `alt`, chú thích và `ImageObject`, nên alt luôn khớp ảnh. `<img>` thật, có `width/height`, `loading=lazy`.
+2. **Khối "… năm X: tóm tắt"** (`TomTatNam`) trên trang gốc công cụ (`/xem-tuoi-lam-nha`, `/tuoi-xong-dat`, `/xem-sao-han`, `/nam`, `/doi-lich-am-duong`, `/xem-ngay-tot`): câu trả lời nhanh của engine + ý chính + link bảng đầy đủ + ảnh. Trước đó trang gốc chỉ có ô nhập.
+3. **Lịch âm**: engine `lich_nam` thêm ngày lễ âm lịch (Rằm tháng Giêng, Hàn thực, Giỗ Tổ, Phật đản, Đoan ngọ, Vu Lan, Trung thu, Hạ nguyên, ông Công ông Táo, giao thừa) + 4 câu hỏi đáp; route mới `GET /v1/lich/cac-nam` (bảng Tết nhiều năm). `/lich-am/{năm}` có bảng "Ngày lễ, ngày rằm", `/lich-am` có câu trả lời "Tết năm sau ngày nào", bảng Tết 15 năm, hỏi đáp FAQPage.
+4. **Trang mục lục cụm** (`TrangChuDe`) có câu trả lời ngắn dưới lời dẫn (số trang lấy từ engine).
+
+**Đo sau** (cục bộ): mọi URL trong hai ảnh menu có 1 ảnh có alt (trừ trang mục lục cụm — chỉ thêm câu trả lời); `/lich-am` 188 → 520 chữ, `/tuoi-xong-dat` 354 → 505, `/xem-tuoi-lam-nha` 519 → 696, `/nam` 421 → 567, `/doi-lich-am-duong` 320 → 424.
+
+**Không làm (có lý do):** `/hop-doi`, `/thoi-gian-toi`, `/chan-dung` là công cụ cá nhân — ảnh tóm tắt cần dữ liệu người dùng, không có câu trả lời chung để vẽ. Dữ liệu lịch đã cache ở tầng fetch: URL engine thêm `?b=le` để bản cache cũ (thiếu `le`) không còn dùng sau deploy.

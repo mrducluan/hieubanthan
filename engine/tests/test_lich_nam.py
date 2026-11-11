@@ -34,3 +34,36 @@ def test_2025_nhuan_6():
 def test_api():
     assert client.get("/v1/lich/nam/2027").json()["tet"] == "2027-02-06"
     assert client.get("/v1/lich/nam/1800").status_code == 422
+
+
+# SEO-O (2026-11-10): ngày lễ âm lịch của năm + bảng Tết nhiều năm (cho /lich-am, /lich-am/{năm}).
+# Đối chiếu tay (lịch Việt): Giỗ Tổ 10/3 Bính Ngọ = 26/04/2026, Vu Lan 15/7 = 27/08/2026, Trung thu 15/8 = 25/09/2026.
+def test_le_2026():
+    le = {x["ma"]: x for x in L.lich_nam(2026)["le"]}
+    assert le["tet"]["duong"] == "2026-02-17" and le["tet"]["am"] == "1/1"
+    assert le["gio_to"]["duong"] == "2026-04-26"
+    assert le["vu_lan"]["duong"] == "2026-08-27"
+    assert le["trung_thu"]["duong"] == "2026-09-25"
+    # giao thừa = ngày cuối tháng Chạp = ngay trước Tết năm sau
+    assert le["giao_thua"]["duong"] == "2027-02-05"
+    assert all(x["thu"] for x in le.values())
+    ngay = [x["duong"] for x in L.lich_nam(2026)["le"]]
+    assert ngay == sorted(ngay)
+
+
+def test_le_nam_nhuan_lay_thang_thuong():
+    # 2025 nhuận tháng 6 → Vu Lan (15/7) vẫn là tháng 7 thường, sau tháng 6 nhuận
+    kq = L.lich_nam(2025)
+    le = {x["ma"]: x for x in kq["le"]}
+    th7 = next(t for t in kq["thang"] if t["thang"] == 7 and not t["nhuan"])
+    assert le["vu_lan"]["duong"] == th7["ram"]
+
+
+def test_cac_nam():
+    ds = L.cac_nam(2025, 2028)
+    assert [x["nam"] for x in ds] == [2025, 2026, 2027, 2028]
+    assert ds[1] == {"nam": 2026, "can_chi": "Bính Ngọ", "con_giap": "Ngọ", "tet": "2026-02-17", "thang_nhuan": None,
+                     "so_ngay": ds[1]["so_ngay"]}
+    assert ds[0]["thang_nhuan"] == 6 and ds[0]["so_ngay"] in (383, 384, 385)
+    assert client.get("/v1/lich/cac-nam?tu=2025&den=2028").json()[2]["tet"] == "2027-02-06"
+    assert client.get("/v1/lich/cac-nam?tu=2000&den=2060").status_code == 422

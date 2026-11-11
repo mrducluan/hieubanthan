@@ -1,4 +1,5 @@
 // TDG-1 — "Xem tuổi xông đất": công cụ (gia chủ từ hồ sơ trên máy) + mục lục theo năm sinh cho Tết sắp tới.
+import { TomTatNam } from "@/components/seo/TomTatNam";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
@@ -24,6 +25,7 @@ export default async function Page() {
         <TieuDeTrang nho={thayBienChu(CHU_XONG_DAT["dau.nhan_tren"]!.mac_dinh, { tet: String(tet) })} bien={{ tet: String(tet) }} lon="Xem tuổi xông đất"
           mo_ta="Tuổi nào hợp xông nhà đầu năm với gia chủ — và giờ hoàng đạo, hướng xuất hành ngày mùng 1." />
         <CongCuTuoi kieu="xong_dat" namMacDinh={tet} />
+        <TomTatNam kieu="xong_dat" nam={tet} tieuDe={`Xông đất Tết ${tet}: mùng 1, giờ đẹp, tuổi nên tránh`} nhanLink={`Bảng tuổi xông đất Tết ${tet} cho mọi tuổi gia chủ`} />
         <section aria-labelledby="theo-nam-sinh" className="mt-8">
           <h2 id="theo-nam-sinh" className="text-xl">{c("theo_nam.tieu_de", { tet: String(tet) })}</h2>
           {/* SEO-L1: bảng cả năm (mọi tuổi gia chủ một trang) */}

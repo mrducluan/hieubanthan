@@ -1,4 +1,5 @@
 // TDG-1 — "Hướng xấu theo năm": năm âm hiện tại (dựng ở máy chủ) + link năm sau.
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
@@ -24,6 +25,7 @@ export default async function Page() {
         <TieuDeTrang nho={CHU_HAN_NAM["dau.nhan_tren"]!.mac_dinh} lon="Hướng xấu theo năm"
           mo_ta="Những phía truyền thống khuyên giữ yên — không động thổ, đục phá, sửa chữa lớn — trong năm." />
         <BangHanNam h={h} />
+        <AnhTomTat kieu="huong_xau" nam={nam} className="mt-2" />
         <p className="flex flex-wrap gap-3 text-sm">
           {[nam - 1, nam + 1, nam + 2].map((n) => <Link key={n} href={duongHanNam(n)} className="text-gold underline">Năm {n}</Link>)}
         </p>
