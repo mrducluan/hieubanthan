@@ -115,7 +115,9 @@ for (const v of KB.video) {
       ...(c.cta ? [] : ["-loop", "1", "-framerate", String(FPS), "-t", dai.toFixed(3), "-i", path.join(ANH, c.anh)])];
     const iAnh = lop.length + 2;
     let loc = c.cta ? "[0:v]null[v0]"
-      : `[${iAnh}:v]scale=-2:700,crop=1000:700:x='(iw-1000)*min(1,t/${dai.toFixed(2)})':y=0[a];[0:v][a]overlay=40:440[v0]`;
+      : i === 0   // ảnh bìa (chữ sát mép trái) → vừa khung, đứng yên, căn giữa theo chiều dọc
+        ? `[${iAnh}:v]scale=1000:-2[a];[0:v][a]overlay=40:'440+(700-h)/2'[v0]`
+        : `[${iAnh}:v]scale=-2:700,crop=1000:700:x='(iw-1000)*min(1,t/${dai.toFixed(2)})':y=0[a];[0:v][a]overlay=40:440[v0]`;
     lop.forEach((l, k) => { loc += `;[v${k}][${k + 1}:v]overlay=0:0:enable='between(t,${l.a.toFixed(2)},${l.b.toFixed(2)})'[v${k + 1}]`; });
     loc += `;[v${lop.length}]fade=t=in:st=0:d=0.2,fade=t=out:st=${(dai - 0.2).toFixed(2)}:d=0.2,format=yuv420p[vr]`;
     loc += `;[${lop.length + 1}:a]adelay=${Math.round(TRUOC * 1000)}|${Math.round(TRUOC * 1000)},apad,atrim=0:${dai.toFixed(3)},aresample=44100,aformat=channel_layouts=stereo[ar]`;
