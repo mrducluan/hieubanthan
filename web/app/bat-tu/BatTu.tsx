@@ -90,7 +90,7 @@ export function BatTu() {
 
   useBatDauDoc("battu", Boolean(ls));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Layers} chip ten={cb("dau.ten")} mo_ta={cb("dau.mo_ta")} />;
+  const dau = <DauMang Icon={Layers} hinh="bat-tu" ten={cb("dau.ten")} mo_ta={cb("dau.mo_ta")} />;
   if (hoSo === undefined) return <div>{dau}<KhungTai nhan={cb("dang_tai")} /></div>;
   const lnDung = ln && ln.nam === namXem ? ln : null;
   // EN-ALL: mã (can, chi, hành, thập thần, thần sát…) giữ chữ Việt làm khoá; HIỆN qua `ten_hien` của phản hồi (bản Việt: nguyên mã).

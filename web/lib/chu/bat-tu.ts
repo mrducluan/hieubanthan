@@ -13,8 +13,6 @@ export const CHU_BAT_TU_UI = {
   "dau.mo_ta": { nhom: T, nhan: "Lời dẫn mặc định", toi_da: 400,
     mac_dinh: "Người bảo bạn thiếu Thuỷ, người bảo thiếu Hoả. Nhập ngày giờ sinh để tự thấy: năm hành của bạn dư thiếu ra sao, sức bạn đang mạnh hay đuối, và hai cách đọc hành nên bù để bạn so với chính đời mình.",
     en: "One person says you lack Water, another says Fire. Enter your birth date and time and see for yourself: which of your five elements are strong or thin, whether your own energy runs high or low, and two ways of reading which element to add — so you can check them against your own life." },
-  "nhan_tren_mac_dinh": { nhom: T, nhan: "Dòng nhỏ cạnh biểu tượng khi bảng chữ trống", mac_dinh: "Huyền học", en: "Chinese metaphysics" },
-  "nhan_duoi_mac_dinh": { nhom: T, nhan: "Nhãn viền dưới lời dẫn khi bảng chữ trống", mac_dinh: "Diễn giải từ kho tri thức Hiểu Bản Thân · tham khảo văn hoá", en: "Readings drawn from the Hieuban knowledge base · cultural reference" },
   "aria.tu_tru": { nhom: T, nhan: "Tên vùng tứ trụ (trình đọc màn hình)", mac_dinh: "Tứ trụ", en: "Four Pillars" },
   "aria.luan_giai": { nhom: T, nhan: "Tên vùng luận giải", mac_dinh: "Luận giải toàn bộ", en: "Full reading" },
   "aria.hoi": { nhom: T, nhan: "Tên vùng hỏi đáp", mac_dinh: "Hỏi Bát tự", en: "Ask about BaZi" },

@@ -13,17 +13,15 @@ const KHUNG: BangChu = {
   "gioi_thieu.doc_them": { nhom: CUOI, nhan: "Chữ trước danh sách đọc thêm", mac_dinh: "Đọc thêm:", en: "Read more:", toi_da: 30 },
 };
 
-/** Bốn mảng huyền học dùng khung DauMang (biểu tượng + dòng nhỏ + nhãn "Diễn giải từ kho tri thức…"). */
+/** Các mảng huyền học dùng khung DauMang (biểu tượng + dòng nhỏ; từ màn rộng có hình trang trí của mảng ở cột phải). */
 // TM-1: dòng nhỏ cạnh biểu tượng nói mảng này làm gì (breadcrumb ngay trên đã ghi "Huyền học" — không lặp lại).
 const mangHuyenHoc = (coHoiAi: boolean, nhanTren: string, nhanTrenEn?: string): BangChu => gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ cạnh biểu tượng", mac_dinh: nhanTren, ...(nhanTrenEn ? { en: nhanTrenEn } : {}), toi_da: 60 },
-  "dau.nhan_duoi": { nhom: DAU, nhan: "Nhãn viền dưới lời dẫn", mac_dinh: "Diễn giải từ kho tri thức Hiểu Bản Thân · tham khảo văn hoá", en: "Readings from the Hieuban knowledge base · cultural reference", toi_da: 100 },
   ...(coHoiAi ? { "hoi.tieu_de": { nhom: "Hỏi đáp", nhan: "Tiêu đề khung hỏi đáp", mac_dinh: "Hỏi đáp chuyên sâu", en: "Ask in depth", toi_da: 60 } } : {}),
 });
 
 // Chữ mặc định (CTA-LS) — đặt trước bảng để bảng đọc được.
 const MOI_TU_VI: MoiLap = {
-  chip: ["Chương đầu đọc ngay", "Không cần tài khoản", "Bạn tự chấm đúng hay chưa"],
   nhan_tren: "Khoảng một phút",
   tieu_de: "Lập lá số để xem *năm nay của bạn*",
   tieu_de_thieu: "Còn {so} thông tin nữa là có lá số: {thieu}",
@@ -39,7 +37,6 @@ const MOI_TU_VI: MoiLap = {
 };
 const MOI_BAT_TU: MoiLap = {
   en: {
-    chip: ["Your element right away", "Two ways to find what to add", "Free full reading"],
     nhan_tren: "About a minute",
     tieu_de: "See how your five elements *are balanced*",
     tieu_de_thieu: "{so} more detail(s) for your pillars: {thieu}",
@@ -52,7 +49,6 @@ const MOI_BAT_TU: MoiLap = {
     minh_hoa: "Illustration. Your real pillars appear as soon as you enter your details.",
     chua_san_sang: "Not ready to enter anything? You can still ask general questions in the box below.",
   },
-  chip: ["Hành của bạn hiện ngay", "Hai cách tìm hành nên bù", "Chương đầu đọc ngay"],
   nhan_tren: "Khoảng một phút",
   tieu_de: "Xem năm hành của bạn *dư thiếu ra sao*",
   tieu_de_thieu: "Còn {so} thông tin nữa là có tứ trụ: {thieu}",
@@ -66,8 +62,8 @@ const MOI_BAT_TU: MoiLap = {
   chua_san_sang: "Chưa muốn nhập? Bạn vẫn hỏi được câu kiến thức ở khung hỏi đáp bên dưới.",
 };
 
-/** CTA-LS: khối "Mời lập lá số" (form ngay trên trang) + 3 chip lợi ích dưới lời dẫn của Tử vi / Bát tự. */
-type MoiLap = { chip: [string, string, string]; nhan_tren: string; tieu_de: string; tieu_de_thieu: string; cau_phu: string; nut: string;
+/** CTA-LS: khối "Mời lập lá số" (form ngay trên trang) của Tử vi / Bát tự / Chân dung. */
+type MoiLap = { nhan_tren: string; tieu_de: string; tieu_de_thieu: string; cau_phu: string; nut: string;
   tran_an: string; nhan_tieu_de: string; ghi_chu_nhan: string; nhan: [string, string, string, string]; minh_hoa: string; chua_san_sang: string; la_so_mau?: string;
   /** EN-ALL: chữ tiếng Anh cùng khoá (trang đã mở bản Anh). */ en?: Omit<MoiLap, "en"> };
 const M = "Mời lập lá số";
@@ -75,7 +71,6 @@ const moiLap = (m: MoiLap): BangChu => {
   const e = m.en;
   const en = (v: string | undefined) => (e && v !== undefined ? { en: v } : {});
   return {
-    ...Object.fromEntries(m.chip.map((v, i) => [`dau.chip_${i + 1}`, { nhom: DAU, nhan: `Chip lợi ích ${i + 1} dưới lời dẫn`, mac_dinh: v, ...en(e?.chip[i]), toi_da: 40 }])),
     "moi.nhan_tren": { nhom: M, nhan: "Dòng nhỏ trên tiêu đề khối", mac_dinh: m.nhan_tren, ...en(e?.nhan_tren), toi_da: 60 },
     "moi.tieu_de": { nhom: M, nhan: "Tiêu đề khối (chưa có hồ sơ) — *chữ* để nhấn màu", mac_dinh: m.tieu_de, ...en(e?.tieu_de), toi_da: 80 },
     "moi.tieu_de_thieu": { nhom: M, nhan: "Tiêu đề khi hồ sơ còn thiếu ({so} = số mục, {thieu} = các mục thiếu)", mac_dinh: m.tieu_de_thieu, ...en(e?.tieu_de_thieu), toi_da: 100 },
@@ -104,9 +99,6 @@ export const CHU_BAT_TU = gopBang(mangHuyenHoc(true, "Bát tự tứ trụ · Ng
 export const CHU_PHONG_THUY = mangHuyenHoc(true, "Hướng nhà · bố trí · Bát trạch");
 export const CHU_KINH_DICH = mangHuyenHoc(false, "Gieo quẻ · 64 quẻ · lời hào");
 export const CHU_NHAN_TUONG = gopBang(mangHuyenHoc(true, "Tự soi gương · Tam đình · Ngũ quan"), {
-  "dau.chip_1": { nhom: DAU, nhan: "Chip lợi ích 1", mac_dinh: "Không cần gửi ảnh", toi_da: 40 },
-  "dau.chip_2": { nhom: DAU, nhan: "Chip lợi ích 2", mac_dinh: "31 câu, khoảng 5 phút", toi_da: 40 },
-  "dau.chip_3": { nhom: DAU, nhan: "Chip lợi ích 3", mac_dinh: "Bạn tự chấm đúng hay chưa", toi_da: 40 },
   "khao_sat.nho": { nhom: "Khảo sát", nhan: "Mục khảo sát — dòng nhỏ", mac_dinh: "Soi gương sáu bước", toi_da: 60 },
   "khao_sat.lon": { nhom: "Khảo sát", nhan: "Mục khảo sát — tiêu đề", mac_dinh: "Bạn thấy gì trong gương?", toi_da: 120 },
   "ban_do.nho": { nhom: "Bản đồ mặt", nhan: "Mục bản đồ — dòng nhỏ", mac_dinh: "Bản đồ gương mặt", toi_da: 60 },
@@ -119,9 +111,6 @@ export const CHU_NHAN_TUONG = gopBang(mangHuyenHoc(true, "Tự soi gương · Ta
 
 // TR-1: Tarot — năm bước (hỏi · xáo · rút · lật · đọc), lá của ngày, bài đọc 8 chương (mở bằng câu trả lời đúng câu hỏi — TR-2), hỏi đáp nghĩa lá.
 export const CHU_TAROT = gopBang(mangHuyenHoc(true, "Tarot · 4 trường phái · 78 lá"), {
-  "dau.chip_1": { nhom: DAU, nhan: "Chip lợi ích 1", mac_dinh: "Tự xáo, tự rút, tự lật", toi_da: 40 },
-  "dau.chip_2": { nhom: DAU, nhan: "Chip lợi ích 2", mac_dinh: "Bốn trường phái có sách", toi_da: 40 },
-  "dau.chip_3": { nhom: DAU, nhan: "Chip lợi ích 3", mac_dinh: "Không phán, bạn tự chấm", toi_da: 40 },
   "la_ngay.tieu_de": { nhom: "Lá của ngày", nhan: "Dòng nhỏ khối lá của ngày", mac_dinh: "Lá của ngày", toi_da: 60 },
   "hoi_bai.nho": { nhom: "Trải bài", nhan: "Bước 1 — dòng nhỏ", mac_dinh: "Bước 1", toi_da: 60 },
   "hoi_bai.lon": { nhom: "Trải bài", nhan: "Bước 1 — tiêu đề", mac_dinh: "Bạn đang hỏi chuyện gì?", toi_da: 120 },
@@ -195,7 +184,6 @@ export const CHU_HAN_NAM = gopBang(KHUNG, {
 // NAM-2 — "Thời gian tới của bạn".
 // CD-1: chữ khối "Mời lập lá số" của /chan-dung (cần giờ + giới tính + nơi sinh như Tử vi / Bát tự).
 const MOI_CHAN_DUNG: MoiLap = {
-  chip: ["Ba cách nhìn, một con người", "Không cộng điểm, không xếp hạng", "Chương đầu đọc ngay"],
   nhan_tren: "Khoảng một phút",
   tieu_de: "Lập lá số để thấy *ba cách nhìn* có cùng thấy một điều về bạn",
   tieu_de_thieu: "Còn {so} thông tin nữa là ghép được ba cách nhìn: {thieu}",

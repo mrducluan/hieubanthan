@@ -64,7 +64,7 @@ export function NhanTuong() {
   const dungVaXem = (tl: TraLoi) => { luuTraLoi(tl); void docVoi(tl); };
 
   const dau = (
-    <DauMang Icon={ScanFace} ten="Xem tướng mặt: gương mặt bạn nói gì?" chip
+    <DauMang Icon={ScanFace} hinh="nhan-tuong" ten="Xem tướng mặt: gương mặt bạn nói gì?"
       mo_ta="Gương mặt kể gì về bạn? Tải một ảnh chân dung để máy gợi ý nét mặt (có thoả thuận, ảnh không lưu), hoặc đứng trước gương tự trả lời 31 câu theo sáu bước — trang ghép điều bạn thấy với cách đọc của sách tướng xưa thành bài đọc tám chương: dáng mặt theo năm hành, tính cách, việc và tiền, tình cảm, sức khoẻ, năm nay nhìn vào đâu, tướng và lá số, việc nên làm. Không điểm số, không xem tướng người khác." />
   );
   // ANH-1: tải ảnh chân dung đứng ngay dưới đầu trang (chỉ khi chưa có bài đọc); gợi ý điền vào khảo sát trên máy.
