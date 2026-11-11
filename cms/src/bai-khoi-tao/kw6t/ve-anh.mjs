@@ -191,6 +191,7 @@ let n = 0;
 for (const b of ds) {
   const url = `https://hieuban.com/blog/${b.slug}`;
   for (const a of b.anh) {
+    if (a.hinh === "bang_doc") continue;   // ảnh dọc bảng tuổi: vẽ bằng ve-bang-tuoi.mjs
     const c = NOI_DUNG[a.ten_tep];
     if (!c) throw new Error(`thiếu nội dung ảnh ${a.ten_tep}`);
     const laBia = a.vi_tri === "bia";

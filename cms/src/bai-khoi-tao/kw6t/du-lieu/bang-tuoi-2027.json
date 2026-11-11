@@ -1,0 +1,508 @@
+[
+{
+"n": 1960,
+"cc": "Canh Tý",
+"tm": 68,
+"thuan": true,
+"xau": [],
+"nam": "Thái Dương",
+"nu": "Thổ Tú"
+},
+{
+"n": 1961,
+"cc": "Tân Sửu",
+"tm": 67,
+"thuan": true,
+"xau": [],
+"nam": "Thái Bạch",
+"nu": "Thái Âm"
+},
+{
+"n": 1962,
+"cc": "Nhâm Dần",
+"tm": 66,
+"thuan": false,
+"xau": [
+"Kim lâu Thê",
+"Lục Hoang Ốc"
+],
+"nam": "Thuỷ Diệu",
+"nu": "Mộc Đức"
+},
+{
+"n": 1963,
+"cc": "Quý Mão",
+"tm": 65,
+"thuan": false,
+"xau": [
+"Ngũ Thọ Tử",
+"Tam tai (năm thứ 3)"
+],
+"nam": "Thổ Tú",
+"nu": "Vân Hán"
+},
+{
+"n": 1964,
+"cc": "Giáp Thìn",
+"tm": 64,
+"thuan": false,
+"xau": [
+"Kim lâu Thân"
+],
+"nam": "La Hầu",
+"nu": "Kế Đô"
+},
+{
+"n": 1965,
+"cc": "Ất Tỵ",
+"tm": 63,
+"thuan": false,
+"xau": [
+"Tam Địa Sát"
+],
+"nam": "Mộc Đức",
+"nu": "Thuỷ Diệu"
+},
+{
+"n": 1966,
+"cc": "Bính Ngọ",
+"tm": 62,
+"thuan": false,
+"xau": [
+"Kim lâu Lục súc"
+],
+"nam": "Thái Âm",
+"nu": "Thái Bạch"
+},
+{
+"n": 1967,
+"cc": "Đinh Mùi",
+"tm": 61,
+"thuan": false,
+"xau": [
+"Tam tai (năm thứ 3)"
+],
+"nam": "Kế Đô",
+"nu": "Thái Dương"
+},
+{
+"n": 1968,
+"cc": "Mậu Thân",
+"tm": 60,
+"thuan": false,
+"xau": [
+"Kim lâu Tử",
+"Lục Hoang Ốc"
+],
+"nam": "Vân Hán",
+"nu": "La Hầu"
+},
+{
+"n": 1969,
+"cc": "Kỷ Dậu",
+"tm": 59,
+"thuan": true,
+"xau": [],
+"nam": "Thái Dương",
+"nu": "Thổ Tú"
+},
+{
+"n": 1970,
+"cc": "Canh Tuất",
+"tm": 58,
+"thuan": true,
+"xau": [],
+"nam": "Thái Bạch",
+"nu": "Thái Âm"
+},
+{
+"n": 1971,
+"cc": "Tân Hợi",
+"tm": 57,
+"thuan": false,
+"xau": [
+"Kim lâu Thê",
+"Lục Hoang Ốc",
+"Tam tai (năm thứ 3)"
+],
+"nam": "Thuỷ Diệu",
+"nu": "Mộc Đức"
+},
+{
+"n": 1972,
+"cc": "Nhâm Tý",
+"tm": 56,
+"thuan": false,
+"xau": [
+"Ngũ Thọ Tử"
+],
+"nam": "Thổ Tú",
+"nu": "Vân Hán"
+},
+{
+"n": 1973,
+"cc": "Quý Sửu",
+"tm": 55,
+"thuan": false,
+"xau": [
+"Kim lâu Thân"
+],
+"nam": "La Hầu",
+"nu": "Kế Đô"
+},
+{
+"n": 1974,
+"cc": "Giáp Dần",
+"tm": 54,
+"thuan": false,
+"xau": [
+"Tam Địa Sát"
+],
+"nam": "Mộc Đức",
+"nu": "Thuỷ Diệu"
+},
+{
+"n": 1975,
+"cc": "Ất Mão",
+"tm": 53,
+"thuan": false,
+"xau": [
+"Kim lâu Lục súc",
+"Tam tai (năm thứ 3)"
+],
+"nam": "Thái Âm",
+"nu": "Thái Bạch"
+},
+{
+"n": 1976,
+"cc": "Bính Thìn",
+"tm": 52,
+"thuan": true,
+"xau": [],
+"nam": "Kế Đô",
+"nu": "Thái Dương"
+},
+{
+"n": 1977,
+"cc": "Đinh Tỵ",
+"tm": 51,
+"thuan": false,
+"xau": [
+"Kim lâu Tử",
+"Lục Hoang Ốc"
+],
+"nam": "Vân Hán",
+"nu": "La Hầu"
+},
+{
+"n": 1978,
+"cc": "Mậu Ngọ",
+"tm": 50,
+"thuan": false,
+"xau": [
+"Ngũ Thọ Tử"
+],
+"nam": "Thái Dương",
+"nu": "Thổ Tú"
+},
+{
+"n": 1979,
+"cc": "Kỷ Mùi",
+"tm": 49,
+"thuan": false,
+"xau": [
+"Tam tai (năm thứ 3)"
+],
+"nam": "Thái Bạch",
+"nu": "Thái Âm"
+},
+{
+"n": 1980,
+"cc": "Canh Thân",
+"tm": 48,
+"thuan": false,
+"xau": [
+"Kim lâu Thê",
+"Lục Hoang Ốc"
+],
+"nam": "Thuỷ Diệu",
+"nu": "Mộc Đức"
+},
+{
+"n": 1981,
+"cc": "Tân Dậu",
+"tm": 47,
+"thuan": false,
+"xau": [
+"Ngũ Thọ Tử"
+],
+"nam": "Thổ Tú",
+"nu": "Vân Hán"
+},
+{
+"n": 1982,
+"cc": "Nhâm Tuất",
+"tm": 46,
+"thuan": false,
+"xau": [
+"Kim lâu Thân"
+],
+"nam": "La Hầu",
+"nu": "Kế Đô"
+},
+{
+"n": 1983,
+"cc": "Quý Hợi",
+"tm": 45,
+"thuan": false,
+"xau": [
+"Tam Địa Sát",
+"Tam tai (năm thứ 3)"
+],
+"nam": "Mộc Đức",
+"nu": "Thuỷ Diệu"
+},
+{
+"n": 1984,
+"cc": "Giáp Tý",
+"tm": 44,
+"thuan": false,
+"xau": [
+"Kim lâu Lục súc"
+],
+"nam": "Thái Âm",
+"nu": "Thái Bạch"
+},
+{
+"n": 1985,
+"cc": "Ất Sửu",
+"tm": 43,
+"thuan": true,
+"xau": [],
+"nam": "Kế Đô",
+"nu": "Thái Dương"
+},
+{
+"n": 1986,
+"cc": "Bính Dần",
+"tm": 42,
+"thuan": false,
+"xau": [
+"Kim lâu Tử",
+"Lục Hoang Ốc"
+],
+"nam": "Vân Hán",
+"nu": "La Hầu"
+},
+{
+"n": 1987,
+"cc": "Đinh Mão",
+"tm": 41,
+"thuan": false,
+"xau": [
+"Ngũ Thọ Tử",
+"Tam tai (năm thứ 3)"
+],
+"nam": "Thái Dương",
+"nu": "Thổ Tú"
+},
+{
+"n": 1988,
+"cc": "Mậu Thìn",
+"tm": 40,
+"thuan": true,
+"xau": [],
+"nam": "Thái Bạch",
+"nu": "Thái Âm"
+},
+{
+"n": 1989,
+"cc": "Kỷ Tỵ",
+"tm": 39,
+"thuan": false,
+"xau": [
+"Kim lâu Thê",
+"Lục Hoang Ốc"
+],
+"nam": "Thuỷ Diệu",
+"nu": "Mộc Đức"
+},
+{
+"n": 1990,
+"cc": "Canh Ngọ",
+"tm": 38,
+"thuan": false,
+"xau": [
+"Ngũ Thọ Tử"
+],
+"nam": "Thổ Tú",
+"nu": "Vân Hán"
+},
+{
+"n": 1991,
+"cc": "Tân Mùi",
+"tm": 37,
+"thuan": false,
+"xau": [
+"Kim lâu Thân",
+"Tam tai (năm thứ 3)"
+],
+"nam": "La Hầu",
+"nu": "Kế Đô"
+},
+{
+"n": 1992,
+"cc": "Nhâm Thân",
+"tm": 36,
+"thuan": false,
+"xau": [
+"Tam Địa Sát"
+],
+"nam": "Mộc Đức",
+"nu": "Thuỷ Diệu"
+},
+{
+"n": 1993,
+"cc": "Quý Dậu",
+"tm": 35,
+"thuan": false,
+"xau": [
+"Kim lâu Lục súc"
+],
+"nam": "Thái Âm",
+"nu": "Thái Bạch"
+},
+{
+"n": 1994,
+"cc": "Giáp Tuất",
+"tm": 34,
+"thuan": true,
+"xau": [],
+"nam": "Kế Đô",
+"nu": "Thái Dương"
+},
+{
+"n": 1995,
+"cc": "Ất Hợi",
+"tm": 33,
+"thuan": false,
+"xau": [
+"Kim lâu Tử",
+"Lục Hoang Ốc",
+"Tam tai (năm thứ 3)"
+],
+"nam": "Vân Hán",
+"nu": "La Hầu"
+},
+{
+"n": 1996,
+"cc": "Bính Tý",
+"tm": 32,
+"thuan": false,
+"xau": [
+"Ngũ Thọ Tử"
+],
+"nam": "Thái Dương",
+"nu": "Thổ Tú"
+},
+{
+"n": 1997,
+"cc": "Đinh Sửu",
+"tm": 31,
+"thuan": true,
+"xau": [],
+"nam": "Thái Bạch",
+"nu": "Thái Âm"
+},
+{
+"n": 1998,
+"cc": "Mậu Dần",
+"tm": 30,
+"thuan": false,
+"xau": [
+"Kim lâu Thê",
+"Tam Địa Sát"
+],
+"nam": "Thuỷ Diệu",
+"nu": "Mộc Đức"
+},
+{
+"n": 1999,
+"cc": "Kỷ Mão",
+"tm": 29,
+"thuan": false,
+"xau": [
+"Ngũ Thọ Tử",
+"Tam tai (năm thứ 3)"
+],
+"nam": "Thổ Tú",
+"nu": "Vân Hán"
+},
+{
+"n": 2000,
+"cc": "Canh Thìn",
+"tm": 28,
+"thuan": false,
+"xau": [
+"Kim lâu Thân"
+],
+"nam": "La Hầu",
+"nu": "Kế Đô"
+},
+{
+"n": 2001,
+"cc": "Tân Tỵ",
+"tm": 27,
+"thuan": false,
+"xau": [
+"Tam Địa Sát"
+],
+"nam": "Mộc Đức",
+"nu": "Thuỷ Diệu"
+},
+{
+"n": 2002,
+"cc": "Nhâm Ngọ",
+"tm": 26,
+"thuan": false,
+"xau": [
+"Kim lâu Lục súc"
+],
+"nam": "Thái Âm",
+"nu": "Thái Bạch"
+},
+{
+"n": 2003,
+"cc": "Quý Mùi",
+"tm": 25,
+"thuan": false,
+"xau": [
+"Tam tai (năm thứ 3)"
+],
+"nam": "Kế Đô",
+"nu": "Thái Dương"
+},
+{
+"n": 2004,
+"cc": "Giáp Thân",
+"tm": 24,
+"thuan": false,
+"xau": [
+"Kim lâu Tử",
+"Lục Hoang Ốc"
+],
+"nam": "Vân Hán",
+"nu": "La Hầu"
+},
+{
+"n": 2005,
+"cc": "Ất Dậu",
+"tm": 23,
+"thuan": false,
+"xau": [
+"Ngũ Thọ Tử"
+],
+"nam": "Thái Dương",
+"nu": "Thổ Tú"
+}
+]

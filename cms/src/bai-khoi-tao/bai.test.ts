@@ -46,7 +46,8 @@ test("KW-6T: đủ 8 bài tuần 1–2, slug không trùng lô cũ, mỗi bài 4
   const cu = new Set(ds.map((b) => b.slug));
   for (const b of dsKw6t) {
     assert.ok(!cu.has(b.slug), b.slug);
-    assert.equal(b.anh?.length, 4, b.slug);
+    // 4 ảnh riêng của bài + tuỳ bài một ảnh dọc "bảng tuổi 2027" dùng chung (ve-bang-tuoi.mjs).
+    assert.equal(b.anh!.filter((a) => a.hinh !== "bang_doc").length, 4, b.slug);
     assert.equal(b.anh!.filter((a) => a.vi_tri === "bia").length, 1, b.slug);
     for (const a of b.anh!) {
       assert.ok(existsSync(new URL(`kw6t/anh/${a.ten_tep}`, THU_MUC)), a.ten_tep);

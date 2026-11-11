@@ -2,7 +2,8 @@
 // Chỉ nhận khi header x-cms-bi-mat khớp CMS_WEBHOOK_SECRET (so thời gian hằng). Không nhận nội dung bài nào từ CMS.
 // ND: kèm `duong` (trang website vừa đổi) → xoá thêm thẻ "trang:<duong>" (chỉ nhận đường dẫn trong site).
 import { revalidatePath, revalidateTag } from "next/cache";
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
+import { baoIndexNow } from "@/lib/indexnow";
 import { soKhop, TAG_CMS } from "@/lib/cms";
 import { duongHopLe, theTrang } from "@/lib/noi-dung-trang";
 
@@ -11,9 +12,10 @@ export async function POST(req: Request) {
   if (!bi || !soKhop(req.headers.get("x-cms-bi-mat"), bi)) {
     return NextResponse.json({ loi: "Không được phép." }, { status: 401 });
   }
-  let slug: string | null = null, duong: string | null = null;
+  let slug: string | null = null, duong: string | null = null, lyDo: string | null = null;
   try {
-    const b = (await req.json()) as { slug?: unknown; duong?: unknown };
+    const b = (await req.json()) as { slug?: unknown; duong?: unknown; ly_do?: unknown };
+    lyDo = typeof b.ly_do === "string" ? b.ly_do : null;
     slug = typeof b.slug === "string" && /^[a-z0-9-]{1,120}$/.test(b.slug) ? b.slug : null;
     duong = duongHopLe(b.duong);
   } catch { /* thân rỗng vẫn làm mới */ }
@@ -23,5 +25,8 @@ export async function POST(req: Request) {
   revalidatePath("/sitemap.xml");
   revalidatePath("/llms.txt");
   if (slug) revalidatePath(`/blog/${slug}`);
+  // KW-6T ý 4: bài vừa xuất bản / sửa / bỏ xuất bản → báo IndexNow ngay (sau khi trả lời CMS, không làm chậm nút Lưu).
+  // Bỏ xuất bản cũng báo: Bing đọc lại thấy trang không còn thì bỏ khỏi chỉ mục.
+  if (slug && (lyDo === "bai" || lyDo === "xoa")) after(() => baoIndexNow([`/blog/${slug}`, "/blog"]).then(() => undefined));
   return NextResponse.json({ ok: true });
 }

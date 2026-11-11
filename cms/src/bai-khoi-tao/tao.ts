@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import type { Payload, PayloadRequest } from "payload";
 import { DANH_DAU_ANH, htmlSangKhoi, type NutLexical } from "../lib/html-lexical";
 import type { BaiKhoiTao } from "./bai";
+import { kiemDinhBai } from "../kiem-dinh/kiem-dinh";
 
 const THU_MUC = path.dirname(fileURLToPath(import.meta.url));
 export const NGUON_ANH = "Ban biên tập Hiểu Bản Thân vẽ minh hoạ (bài khởi tạo BLOG-6)";
@@ -16,15 +17,18 @@ export const GHI_CHU = "BLOG-6: bài khởi tạo do hệ thống soạn theo kh
 
 /** Một lô bài khởi tạo: thư mục chứa *.json + anh/, nhãn nguồn ảnh (để down xoá đúng ảnh của lô) và ghi chú cho Chủ biên.
  *  Mặc định = lô BLOG-6 (thư mục này). KW-6T tuần 1–2 dùng thư mục con `kw6t/` (xem `LO_KW6T`). */
-export type LoBai = { thuMuc: string; nguonAnh: string; ghiChu: string; nhan: string };
+export type LoBai = { thuMuc: string; nguonAnh: string; ghiChu: string; nhan: string; xuatBan?: boolean };
 export const LO_BLOG6: LoBai = { thuMuc: THU_MUC, nguonAnh: NGUON_ANH, ghiChu: GHI_CHU, nhan: "BLOG-6" };
 export const LO_KW6T: LoBai = {
   thuMuc: path.join(THU_MUC, "kw6t"),
   nguonAnh: "Ban biên tập Hiểu Bản Thân vẽ minh hoạ (KW-6T tuần 1–2)",
   ghiChu: "KW-6T tuần 1–2: bài soạn theo khuôn trong docs/KE-HOACH-TU-KHOA-SEO-6-THANG.md mục 6, số liệu tuổi / năm 2027 "
-    + "lấy từ engine (cùng hàm các trang /tuoi-xong-dat, /xem-tuoi-lam-nha, /xem-sao-han). Chủ biên đọc kỹ, thêm trải "
-    + "nghiệm thật (Góc nhìn) rồi xuất bản; bài cùng cụm liên kết nhau nên xuất bản cả nhóm trong cùng tuần.",
+    + "lấy từ engine (cùng hàm các trang /tuoi-xong-dat, /xem-tuoi-lam-nha, /xem-sao-han). Chủ dự án cho đăng ngay "
+    + "(2026-11-11) khi bài qua kiểm định; Chủ biên vẫn đọc lại, thêm trải nghiệm thật (Góc nhìn) rồi bấm Xuất bản lại.",
   nhan: "KW-6T",
+  // Chủ dự án (2026-11-11): "đưa lên website" → migration xuất bản luôn bài đủ ảnh và không lỗi chặn kiểm định.
+  // Bài vẫn "Gửi duyệt" (máy đăng ≠ Chủ biên duyệt — như BLOG-10), chữ ký Ban biên tập, không ký thẩm định.
+  xuatBan: true,
 };
 
 export function docBaiKhoiTao(lo: LoBai = LO_BLOG6): BaiKhoiTao[] {
@@ -78,14 +82,18 @@ async function taoAnh(payload: Payload, req: PayloadRequest | undefined, a: NonN
 export async function taoBaiKhoiTao(payload: Payload, req?: PayloadRequest, lo: LoBai = LO_BLOG6): Promise<string[]> {
   const da: string[] = [];
   const kho = { loi: false };
+  const daTai = new Map<string, number | string | null>();   // ảnh dùng chung nhiều bài (bảng tuổi) chỉ tải một lần
   for (const b of docBaiKhoiTao(lo)) {
     const co = await payload.find({ collection: "bai-viet", where: { slug: { equals: b.slug } }, draft: true, limit: 1, depth: 0, req });
     if (co.docs.length) { payload.logger.info(`${lo.nhan}: đã có bài ${b.slug} — bỏ qua`); continue; }
     const anh = [];
-    for (const a of b.anh ?? []) anh.push({ ...a, id: await taoAnh(payload, req, a, kho, lo) });
+    for (const a of b.anh ?? []) {
+      if (!daTai.has(a.ten_tep)) daTai.set(a.ten_tep, await taoAnh(payload, req, a, kho, lo));
+      anh.push({ ...a, id: daTai.get(a.ten_tep) ?? null });
+    }
     const bia = anh.find((a) => a.vi_tri === "bia")?.id ?? undefined;
     const khoi = htmlSangKhoi(b.html).filter((k): k is NutLexical => k.type !== "__anh");
-    await payload.create({
+    const moi = await payload.create({
       collection: "bai-viet", req, draft: true, context: { boQuaLamMoi: true },
       data: {
         // Thiếu ảnh (đoạn "[Ảnh chưa nhập") thì kiểm định chặn "Gửi duyệt" → để "Đang viết" tới khi chèn ảnh.
@@ -100,9 +108,24 @@ export async function taoBaiKhoiTao(payload: Payload, req?: PayloadRequest, lo: 
         ky_ten: "ban_bien_tap",
       } as never,
     });
+    if (lo.xuatBan) {
+      const ly_do = await xuatBanNeuSach(payload, req, moi.id, anh.every((a) => a.id != null));
+      payload.logger.info(`${lo.nhan}: ${b.slug} — ${ly_do ?? "đã xuất bản"}`);
+    }
     da.push(b.slug);
   }
   return da;
+}
+
+/** Xuất bản bài vừa tạo khi đủ ảnh và kiểm định không có lỗi chặn. Trả lý do KHÔNG xuất bản (null = đã xuất bản). */
+async function xuatBanNeuSach(payload: Payload, req: PayloadRequest | undefined, id: number | string, duAnh: boolean) {
+  if (!duAnh) return "chưa xuất bản: kho ảnh lỗi, còn đoạn [Ảnh chưa nhập";
+  const bai = await payload.findByID({ collection: "bai-viet", id, draft: true, depth: 0, overrideAccess: true, req });
+  const kd = kiemDinhBai(bai as never);
+  if (kd.loi_chan.length) return `chưa xuất bản: ${kd.loi_chan.map((m) => m.thong_diep).join(" · ")}`.slice(0, 300);
+  await payload.update({ collection: "bai-viet", id, overrideAccess: true, req, context: { giuSlugGoc: true },
+    data: { _status: "published" } as never });
+  return null;
 }
 
 /** Down: xoá bài khởi tạo CHƯA từng xuất bản (Chủ biên đã đăng thì giữ) + ảnh do BLOG-6 tải lên không còn bài nào dùng. */
@@ -110,7 +133,9 @@ export async function xoaBaiKhoiTao(payload: Payload, req?: PayloadRequest, lo: 
   for (const b of docBaiKhoiTao(lo)) {
     const r = await payload.find({ collection: "bai-viet", where: { slug: { equals: b.slug } }, draft: true, limit: 1, depth: 0, req });
     const d = r.docs[0] as { id: number | string; _status?: string; publishedAt?: string | null } | undefined;
-    if (d && d._status !== "published" && !d.publishedAt) await payload.delete({ collection: "bai-viet", id: d.id, req, context: { boQuaLamMoi: true } });
+    // Lô tự xuất bản (KW-6T): xoá cả bài đã đăng, trừ bài Chủ biên đã duyệt ("Đã duyệt" = có công biên tập).
+    const xoa = d && (lo.xuatBan ? (d as { trang_thai_duyet?: string }).trang_thai_duyet !== "da_duyet" : d._status !== "published" && !d.publishedAt);
+    if (d && xoa) await payload.delete({ collection: "bai-viet", id: d.id, req, context: { boQuaLamMoi: true } });
   }
   const conBai = await payload.count({ collection: "bai-viet", where: { slug: { in: docBaiKhoiTao(lo).map((b) => b.slug) } }, req });
   if (conBai.totalDocs === 0) await payload.delete({ collection: "media", where: { nguon_anh: { equals: lo.nguonAnh } }, req });

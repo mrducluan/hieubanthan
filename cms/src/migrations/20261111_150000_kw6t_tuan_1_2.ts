@@ -3,7 +3,8 @@ import { LO_KW6T, taoBaiKhoiTao, xoaBaiKhoiTao } from '../bai-khoi-tao/tao'
 
 // KW-6T tuần 1–2 (chủ dự án giao 2026-11-11) — chỉ DỮ LIỆU, không đổi bảng: tạo 8 bài nháp "Gửi duyệt" của tuần 1–2
 // kế hoạch từ khoá (xông đất, Tam tai, Kim lâu, Hoang ốc, mượn tuổi, La Hầu – Kế Đô, thần số cho người mới) từ
-// src/bai-khoi-tao/kw6t/*.json + 32 ảnh minh hoạ có QR. Không xuất bản. Đã có slug → bỏ qua.
+// src/bai-khoi-tao/kw6t/*.json + 32 ảnh minh hoạ có QR + 2 ảnh dọc bảng tuổi 2027. Chủ dự án cho đăng ngay: bài đủ ảnh,
+// không lỗi chặn kiểm định → xuất bản (vẫn "Gửi duyệt", Ban biên tập đứng tên). Đã có slug → bỏ qua.
 // Lỗi bất kỳ chỉ ghi log — không chặn deploy CMS.
 export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   try {
