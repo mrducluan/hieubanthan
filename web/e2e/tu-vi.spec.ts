@@ -316,11 +316,13 @@ test("CTA-LS: hồ sơ thần số (chỉ tên + ngày sinh) → khối mời n�
   const moi = page.getByTestId("moi-lap-la-so");
   await expect(moi.getByRole("heading", { level: 2 })).toHaveText("Còn 3 thông tin nữa là có lá số: giờ sinh, giới tính, nơi sinh");
   await expect(moi.getByLabel("Họ và tên đầy đủ")).toHaveValue(HO_SO_MAU.ho_ten);
-  await expect(page.getByTestId("dau-chip")).toContainText("Chương đầu đọc ngay");
+  // Đầu trang gọn: không còn hàng chip lợi ích và nhãn "Diễn giải từ kho tri thức…" dưới lời dẫn.
+  await expect(page.getByTestId("dau-chip")).toHaveCount(0);
+  await expect(page.locator("main header").first()).not.toContainText("tham khảo văn hoá");
   await expect(page.locator("h1")).toHaveText("Xem Tử vi: năm nay bạn nên chú ý gì?");
 });
 
-test("CTA-LS: điện thoại 360px — khối mời không tràn ngang, tiêu đề + form trước danh sách; Phong thuỷ không có chip", async ({ page }) => {
+test("CTA-LS: điện thoại 360px — khối mời không tràn ngang, tiêu đề + form trước danh sách; hình đầu trang ẩn", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
   for (const duong of ["/tu-vi", "/bat-tu"]) {
     await page.goto(duong);
@@ -332,8 +334,27 @@ test("CTA-LS: điện thoại 360px — khối mời không tràn ngang, tiêu �
     const yDs = await moi.getByText("Bạn nhận được").evaluate((e) => e.getBoundingClientRect().top);
     expect(yTieuDe).toBeLessThan(yForm);
     expect(yForm).toBeLessThan(yDs);
-    await expect(page.getByTestId("dau-chip")).toBeVisible();
+    await expect(page.getByTestId("hinh-dau-mang")).toBeHidden();
   }
-  await page.goto("/phong-thuy");
-  await expect(page.getByTestId("dau-chip")).toHaveCount(0);
+});
+
+test("Đầu trang 6 mảng ở 1440px: cột chữ thẳng một mép, hình trang trí ở cột phải, không tràn ngang", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  for (const duong of ["/tu-vi", "/bat-tu", "/nhan-tuong", "/phong-thuy", "/kinh-dich", "/tarot"]) {
+    await page.goto(duong);
+    const dau = page.locator("main header").first();
+    await expect(dau.locator("h1")).toBeVisible();
+    await expect(dau.getByTestId("dau-chip")).toHaveCount(0);
+    await expect(dau).not.toContainText("tham khảo văn hoá");
+    const hinh = dau.getByTestId("hinh-dau-mang");
+    await expect(hinh, duong).toBeVisible();
+    await expect(hinh).toHaveAttribute("aria-hidden", "true");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth), duong).toBeLessThanOrEqual(1440);
+    // "Trả lời nhanh" (SEO-N2) vẫn ngay dưới lời dẫn, rộng bằng cột chữ; hình nằm hẳn bên phải cột chữ.
+    const tl = await dau.getByTestId("tra-loi-nhanh-dau").boundingBox(), h1 = await dau.locator("h1").boundingBox(), hb = await hinh.boundingBox();
+    expect(tl && h1 && hb).toBeTruthy();
+    expect(Math.abs(tl!.x - h1!.x), duong).toBeLessThanOrEqual(1);
+    expect(Math.abs(tl!.width - h1!.width), duong).toBeLessThanOrEqual(1);
+    expect(hb!.x, duong).toBeGreaterThanOrEqual(tl!.x + tl!.width + 24);
+  }
 });

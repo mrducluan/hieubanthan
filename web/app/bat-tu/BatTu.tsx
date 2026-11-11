@@ -85,7 +85,7 @@ export function BatTu() {
 
   useBatDauDoc("battu", Boolean(ls));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Layers} chip ten="Xem Bát tự: mệnh bạn thiếu hành gì?" mo_ta="Người bảo bạn thiếu Thuỷ, người bảo thiếu Hoả. Nhập ngày giờ sinh để tự thấy: năm hành của bạn dư thiếu ra sao, sức bạn đang mạnh hay đuối, và hai cách đọc hành nên bù để bạn so với chính đời mình." />;
+  const dau = <DauMang Icon={Layers} hinh="bat-tu" ten="Xem Bát tự: mệnh bạn thiếu hành gì?" mo_ta="Người bảo bạn thiếu Thuỷ, người bảo thiếu Hoả. Nhập ngày giờ sinh để tự thấy: năm hành của bạn dư thiếu ra sao, sức bạn đang mạnh hay đuối, và hai cách đọc hành nên bù để bạn so với chính đời mình." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   const lnDung = ln && ln.nam === namXem ? ln : null;
   const sinhGioTy = (goc?.birth_time ?? "") >= "23:00";
