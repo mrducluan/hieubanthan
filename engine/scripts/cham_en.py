@@ -4,6 +4,8 @@
 Đo: định tuyến (nhãn ý định của câu ↔ phân loại engine, bảng ánh xạ dưới), xử lý an toàn (an_toan / tu_choi_nhe đúng),
 mốc thời gian (năm engine đọc ↔ năm nhãn), câu trả lời có chữ Việt hay không. Holdout chỉ in TỔNG (không in từng câu).
 Dùng: python scripts/cham_en.py battu [--holdout] [--sai]
+      python scripts/cham_en.py --v2 [--tep fixtures/cau_hoi/en/battu_holdout_v3.jsonl [--sai]]   (bộ cùng khuôn holdout v2;
+      --sai chỉ in được khi chỉ định --tep, tức bộ đã chuyển thành bộ dev)
       python scripts/cham_en.py --an-toan [--sai]   (bộ an toàn tiếng Anh fixtures/cau_hoi/en/an_toan_en.jsonl, qua
       bộ phân loại hỏi đáp Bát tự ở ngữ cảnh tiếng Anh — khủng hoảng → an_toan, từ chối / cấp cứu → tu_choi_nhe (cấp cứu: nhóm cap_cuu),
       câu thường → không bị chặn)
@@ -190,24 +192,41 @@ def _doi_v2(q: dict) -> dict:
     return {"id": q["id"], "cau_hoi": q["cau_hoi"], "nhan": nhan, "xu_ly": xu_ly, "nam": q.get("moc"), "_loai": loai}
 
 
-def cham_v2(mo_dun: str = "battu") -> dict:
-    """Chấm holdout v2 — CHỈ in tổng (không in từng câu). Thêm đếm theo loại câu (khủng hoảng / cấp cứu / từ chối)."""
-    p = GOC / "fixtures" / "cau_hoi" / "en" / f"{mo_dun}_holdout_v2.jsonl"
+def cham_v2(mo_dun: str = "battu", tep: str | None = None, in_sai: bool = False) -> dict:
+    """Chấm holdout v2 (cùng khuôn: v3…) — mặc định CHỈ in tổng. `tep` = đường dẫn bộ khác cùng khuôn (vd
+    fixtures/cau_hoi/en/battu_holdout_v3.jsonl — nay là bộ DEV, được in câu sai với `in_sai`). Thêm đếm theo loại câu
+    (khủng hoảng / cấp cứu / từ chối) và số câu thường (ca_nhan / kien_thuc) bị chặn nhầm."""
+    p = Path(tep) if tep else GOC / "fixtures" / "cau_hoi" / "en" / f"{mo_dun}_holdout_v2.jsonl"
+    if not p.is_absolute() and not p.exists():
+        p = GOC / p
     cau = [_doi_v2(json.loads(x)) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
     kq = cham(mo_dun, cau=cau)
+    sai: list = []
     dem, tong = collections.Counter(), collections.Counter()
     for q in cau:
         if q["_loai"] in ("khung_hoang", "tu_choi", "cap_cuu"):
             xl = _phan_loai(mo_dun, q["cau_hoi"]).get("xu_ly")
             tong[q["_loai"]] += 1
             dem[q["_loai"]] += xl in q["xu_ly"]
+            if in_sai and xl not in q["xu_ly"]:
+                sai.append((q["id"], q["_loai"], xl, q["cau_hoi"]))
+        elif in_sai:
+            xl = _phan_loai(mo_dun, q["cau_hoi"]).get("xu_ly")
+            if xl in CHAN:
+                sai.append((q["id"], q["_loai"], xl, q["cau_hoi"]))
     kq["theo_loai"] = {k: f"{dem[k]}/{tong[k]}" for k in tong}
+    if in_sai:
+        kq["sai_an_toan"] = sai
     return kq
 
 
 if __name__ == "__main__":
     if "--v2" in sys.argv:
-        print(json.dumps(cham_v2(), ensure_ascii=False))
+        tep = sys.argv[sys.argv.index("--tep") + 1] if "--tep" in sys.argv else None
+        kq = cham_v2(tep=tep, in_sai="--sai" in sys.argv and tep is not None)
+        for s in kq.pop("sai_an_toan", []):
+            print(*s, sep=" | ")
+        print(json.dumps(kq, ensure_ascii=False))
         sys.exit(0)
     if "--an-toan" in sys.argv:
         tep = "an_toan_en_dev2.jsonl" if "--dev2" in sys.argv else "an_toan_en.jsonl"
