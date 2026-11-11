@@ -778,7 +778,8 @@ def la_cau_viet(cau: str) -> bool:
     t = chuan(khong_dau)
     anh = len(set(_TU_ANH_GLOSS.findall(t)))
     if _CO_DAU_VIET.search(cau or ""):
-        return anh < 2
+        co_dau = sum(1 for w in (cau or "").split() if _CO_DAU_VIET.search(w))
+        return anh == 0 or (co_dau >= 3 and anh <= 2)
     tu = t.split()
     vi = sum(w in _TU_VIET for w in tu)
     return bool(tu) and vi >= max(3, len(tu) // 3) and anh <= vi // 4
