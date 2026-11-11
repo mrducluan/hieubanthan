@@ -1,0 +1,230 @@
+{
+ "_trang_thai": "bien_tap",
+ "cach": {
+  "tu_phu_dong_cung": {
+   "ten": "Zi Fu Tong Gong (Zi Wei and Tian Fu together)"
+  },
+  "tu_phu_vu_tuong": {
+   "ten": "Zi Fu Wu Xiang (Zi Wei, Tian Fu, Wu Qu, Tian Xiang)"
+  },
+  "phu_tuong_trieu_vien": {
+   "ten": "Fu Xiang Chao Yuan (Tian Fu and Tian Xiang facing the Life Palace)"
+  },
+  "co_nguyet_dong_luong": {
+   "ten": "Ji Yue Tong Liang (Tian Ji, Tai Yin, Tian Tong, Tian Liang)"
+  },
+  "sat_pha_tham": {
+   "ten": "Sha Po Lang (Qi Sha, Po Jun, Tan Lang)"
+  },
+  "cuc_huong_ly_minh": {
+   "ten": "Ji Xiang Li Ming (the Pole Star facing the bright south)"
+  },
+  "that_sat_trieu_dau": {
+   "ten": "Qi Sha Chao Dou (Qi Sha paying court to the Dipper)"
+  },
+  "that_sat_nguong_dau": {
+   "ten": "Qi Sha Yang Dou (Qi Sha looking up to the Dipper)"
+  },
+  "hung_tu_can_nguyen": {
+   "ten": "Xiong Su Qian Yuan (the strong star at the origin of Heaven)"
+  },
+  "nhat_le_trung_thien": {
+   "ten": "Ri Li Zhong Tian (the sun shining at midday)"
+  },
+  "nguyet_lang_thien_mon": {
+   "ten": "Yue Lang Tian Men (the bright moon at the Gate of Heaven)"
+  },
+  "tho_tinh_nhap_mieu": {
+   "ten": "Shou Xing Ru Miao (the Longevity Star in its temple)"
+  },
+  "anh_tinh_nhap_mieu": {
+   "ten": "Ying Xing Ru Miao (the Hero Star in its temple)"
+  },
+  "thach_trung_an_ngoc": {
+   "ten": "Shi Zhong Yin Yu (jade hidden in stone)"
+  },
+  "cu_nhat_dong_cung": {
+   "ten": "Ju Ri Tong Gong (Ju Men and Tai Yang together)"
+  },
+  "cu_co_dong_lam": {
+   "ten": "Ju Ji Tong Lin (Ju Men and Tian Ji together)"
+  },
+  "tham_vu_dong_hanh": {
+   "ten": "Tan Wu Tong Xing (Tan Lang and Wu Qu together)"
+  },
+  "nhat_nguyet_dong_lam": {
+   "ten": "Ri Yue Tong Lin (sun and moon together)"
+  },
+  "minh_chau_xuat_hai": {
+   "ten": "Ming Zhu Chu Hai (the bright pearl rising from the sea)"
+  },
+  "tam_ky_gia_hoi": {
+   "ten": "San Qi Jia Hui (the three wonders meeting)"
+  },
+  "song_loc": {
+   "ten": "Shuang Lu (double Prosperity)"
+  },
+  "loc_ma_giao_tri": {
+   "ten": "Lu Ma Jiao Chi (Prosperity and the Horse racing together)"
+  },
+  "ta_huu_dong_cung": {
+   "ten": "Zuo You Tong Gong (Zuo Fu and You Bi together)"
+  },
+  "xuong_khuc_dong_cung": {
+   "ten": "Chang Qu Tong Gong (Wen Chang and Wen Qu together)"
+  },
+  "ta_huu_giap_menh": {
+   "ten": "Zuo You Jia Ming (Zuo Fu and You Bi flanking the Life Palace)"
+  },
+  "xuong_khuc_giap_menh": {
+   "ten": "Chang Qu Jia Ming (Wen Chang and Wen Qu flanking the Life Palace)"
+  },
+  "khoi_viet_hoi_menh": {
+   "ten": "Kui Yue Gong Ming (Tian Kui and Tian Yue supporting the Life Palace)"
+  },
+  "hoa_tham": {
+   "ten": "Huo Tan (Huo Xing with Tan Lang)"
+  },
+  "linh_tham": {
+   "ten": "Ling Tan (Ling Xing with Tan Lang)"
+  },
+  "dao_hoa_pham_chu": {
+   "ten": "Tao Hua Fan Zhu (the peach-blossom star meeting the ruler: Zi Wei with Tan Lang)"
+  },
+  "kinh_da_giap_menh": {
+   "ten": "Yang Tuo Jia Ming (Qing Yang and Tuo Luo flanking the Life Palace)"
+  },
+  "hoa_linh_giap_menh": {
+   "ten": "Huo Ling Jia Ming (Huo Xing and Ling Xing flanking the Life Palace)"
+  },
+  "khong_kiep_giap_menh": {
+   "ten": "Kong Jie Jia Ming (Di Kong and Di Jie flanking the Life Palace)"
+  },
+  "ma_dau_doi_kiem": {
+   "ten": "Ma Tou Dai Jian (a sword on the horse's head)"
+  },
+  "hoa_ky_thu_menh": {
+   "ten": "Hua Ji Shou Ming (Hua Ji in the Life Palace)"
+  },
+  "menh_vo_chinh_dieu": {
+   "ten": "Ming Wu Zheng Yao (no main star in the Life Palace)"
+  },
+  "than_menh_dong_cung": {
+   "ten": "Shen Ming Tong Gong (Body and Life in the same palace)"
+  },
+  "quan_than_khanh_hoi": {
+   "ten": "Jun Chen Qing Hui (ruler and ministers meeting)"
+  },
+  "duong_luong_xuong_loc": {
+   "ten": "Yang Liang Chang Lu (Tai Yang, Tian Liang, Wen Chang, Lu Cun)"
+  },
+  "liem_trinh_van_vu": {
+   "ten": "Lian Zhen Wen Wu (Lian Zhen, civil and martial)"
+  },
+  "dan_tri_que_tri": {
+   "ten": "Dan Chi – Gui Chi (the vermilion steps and the cassia steps)"
+  },
+  "nhat_chieu_loi_mon": {
+   "ten": "Ri Zhao Lei Men (the sun shining on the Thunder Gate)"
+  },
+  "nhat_nguyet_tinh_minh": {
+   "ten": "Ri Yue Bing Ming (sun and moon both bright)"
+  },
+  "nguyet_sinh_thuong_hai": {
+   "ten": "Yue Sheng Cang Hai (the moon rising over the sea)"
+  },
+  "nhat_nguyet_chieu_bich": {
+   "ten": "Ri Yue Zhao Bi (sun and moon shining on the wall)"
+  },
+  "co_luong_gia_hoi": {
+   "ten": "Ji Liang Jia Hui (Tian Ji and Tian Liang meeting)"
+  },
+  "van_luong_chan_ky": {
+   "ten": "Wen Liang Zhen Ji (the scholar stars and Tian Liang upholding order)"
+  },
+  "phu_cung_van_tinh": {
+   "ten": "Fu Gong Wen Xing (helper stars supporting the scholar stars)"
+  },
+  "tuong_tinh_dac_dia": {
+   "ten": "Jiang Xing De Di (the General Star well placed)"
+  },
+  "hoa_tinh_phan_quy": {
+   "ten": "Hua Xing Fan Gui (transformed stars turning to honour)"
+  },
+  "quyen_loc_hoi_menh": {
+   "ten": "Quan Lu Hui Ming (Power and Prosperity meeting the Life Palace)"
+  },
+  "loc_hop_uyen_uong": {
+   "ten": "Lu He Yuan Yang (Prosperity paired like mandarin ducks)"
+  },
+  "loc_ma_boi_an": {
+   "ten": "Lu Ma Pei Yin (Prosperity and the Horse bearing the seal)"
+  },
+  "minh_loc_am_loc": {
+   "ten": "Ming Lu An Lu (open and hidden Prosperity)"
+  },
+  "khoa_minh_loc_am": {
+   "ten": "Ke Ming Lu An (open Fame, hidden Prosperity)"
+  },
+  "khoa_quyen_loc_giap": {
+   "ten": "Ke Quan Lu Jia Ming (Fame, Power and Prosperity flanking the Life Palace)"
+  },
+  "song_loc_giap_menh": {
+   "ten": "Shuang Lu Jia Ming (double Prosperity flanking the Life Palace)"
+  },
+  "tai_loc_giap_ma": {
+   "ten": "Cai Lu Jia Ma (wealth and Prosperity flanking the Horse)"
+  },
+  "quy_tinh_giap_menh": {
+   "ten": "Gui Xing Jia Ming (noble stars flanking the Life Palace)"
+  },
+  "quyen_sat_hoa_loc": {
+   "ten": "Quan Sha Hua Lu (Power and the harsh stars turning to Prosperity)"
+  },
+  "cu_phung_tu_sat": {
+   "ten": "Ju Feng Si Sha (Ju Men meeting the four harsh stars)"
+  },
+  "menh_ly_phung_khong": {
+   "ten": "Ming Li Feng Kong (the Life Palace meeting the Void)"
+  },
+  "dong_luong_dan_than": {
+   "ten": "Tong Liang Yin Shen (Tian Tong and Tian Liang in Yin or Shen)"
+  },
+  "liem_tuong_dong_cung": {
+   "ten": "Lian Xiang Tong Gong (Lian Zhen and Tian Xiang together)"
+  },
+  "vu_sat_dong_cung": {
+   "ten": "Wu Sha Tong Gong (Wu Qu and Qi Sha together)"
+  },
+  "tu_vi_co_quan": {
+   "ten": "Zi Wei Gu Jun (Zi Wei as a lone ruler)"
+  },
+  "hoa_ky_thien_di": {
+   "ten": "Hua Ji in the Travel Palace"
+  },
+  "liem_sat_duong": {
+   "ten": "Lian Sha Yang (Lian Zhen, Qi Sha, Qing Yang)"
+  },
+  "cu_hoa_duong": {
+   "ten": "Ju Huo Yang (Ju Men, Huo Xing, Qing Yang)"
+  },
+  "linh_xuong_da_vu": {
+   "ten": "Ling Chang Tuo Wu (Ling Xing, Wen Chang, Tuo Luo, Wu Qu)"
+  },
+  "loc_ton_thu_menh": {
+   "ten": "Lu Cun in the Life Palace"
+  },
+  "loc_ton_thu_than": {
+   "ten": "Lu Cun in the Body Palace"
+  },
+  "thien_ma_menh_di": {
+   "ten": "Tian Ma in the Life or Travel Palace"
+  },
+  "khoa_quyen_hoi_menh": {
+   "ten": "Ke Quan Hui Ming (Fame and Power meeting the Life Palace)"
+  },
+  "co_nguyet_dong_luong_ba": {
+   "ten": "Three of Ji Yue Tong Liang (three of Tian Ji, Tai Yin, Tian Tong, Tian Liang)"
+  }
+ }
+}

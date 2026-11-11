@@ -910,17 +910,17 @@ def _chuong_nam_nay(sinh: dict, ls: dict, cc: dict, vh: dict, ngay_xem: dt.date,
             muc = nam_vh["muc"]
         elif lop == "tieu_han":
             muc = None
-        cc_ = {"cung": _tc(cung), "can": _tk.ten("can", o["can"]), "chi": _tk.ten("chi", o["chi"])}
+        t_cung, t_can, t_chi = _tc(cung), _tk.ten("can", o["can"]), _tk.ten("chi", o["chi"])
         if lop == "dai_han":
             cu = L("tvds.cu.nn.dai_han", f"Đại hạn cung {cung} ({o['can']} {o['chi']}), {o.get('tu_tuoi')}–{o.get('den_tuoi')} tuổi",
-                   tu=o.get("tu_tuoi"), den=o.get("den_tuoi"), **cc_)
+                   tu=o.get("tu_tuoi"), den=o.get("den_tuoi"), cung=t_cung, can=t_can, chi=t_chi)
         elif lop == "luu_nien":
             cu = L("tvds.cu.nn.luu_nien", f"Lưu niên cung {cung} ({o['can']} {o['chi']}) — cung này tự nó "
-                   f"{kb.nhan_muc(cc[cung]['muc']).lower()}", muc=kb.nhan_muc(cc[cung]["muc"]), **cc_) + \
+                   f"{kb.nhan_muc(cc[cung]['muc']).lower()}", muc=kb.nhan_muc(cc[cung]["muc"]), cung=t_cung, can=t_can, chi=t_chi) + \
                 (L("tvds.cu.nn.ca_nam", f"; cả năm chấm theo tứ hoá năm + đại hạn: {kb.nhan_muc(nam_vh['muc']).lower()}",
                    muc=kb.nhan_muc(nam_vh["muc"])) if nam_vh else "")
         else:
-            cu = L("tvds.cu.nn.tieu_han", f"Tiểu hạn cung {cung} ({o['can']} {o['chi']})", **cc_)
+            cu = L("tvds.cu.nn.tieu_han", f"Tiểu hạn cung {cung} ({o['can']} {o['chi']})", cung=t_cung, can=t_can, chi=t_chi)
         can_cu.append(cu)
         if o.get("tu_hoa"):
             can_cu.append(L("tvds.cu.nn.tu_hoa", f"Tứ hoá {ten_lop[lop].lower()}: " + ", ".join(

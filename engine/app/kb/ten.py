@@ -58,7 +58,7 @@ def muc(nhom: str, vi: str | int) -> dict | None:
     return None
 
 
-_CHINH_TA = {"Thuỷ": "Thủy", "Thủy": "Thuỷ", "Hoả": "Hỏa", "Hỏa": "Hoả", "Thuỷ/Mộc": "Thủy/Mộc"}
+_CHINH_TA = {"Thuỷ": "Thủy", "Thủy": "Thuỷ", "Hoả": "Hỏa", "Hỏa": "Hoả", "Thuỷ/Mộc": "Thủy/Mộc", "Bát Toạ": "Bát Tọa", "Bát Tọa": "Bát Toạ"}
 
 
 def ten(nhom: str, vi: str | int, ngon_ngu_: str | None = None) -> str:

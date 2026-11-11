@@ -287,7 +287,7 @@
  "tvds.vh.td_don_suc": "{nam}: the year most worth putting your energy into",
  "tvds.vh.hop_don_suc": "a good time to put in your energy",
  "tvds.vh.tom_thuan": "Of the next ten years, the nearest favourable one is {nam}: {x}.",
- "tvds.vh.tom_khong": "None of your next ten years stands out clearly; the one most worth putting your energy into is {nam}.",
+ "tvds.vh.tom_khong": "No single year in the next ten stands out clearly; the year most worth putting your energy into is {nam}.",
  "tvds.vh.cham": "Years to take more slowly: {ds}.",
  "tvds.vh.cham_0": "No year calls for a real slowdown; the year to keep the steadiest pace is {nam}.",
  "tvds.vh.nam_la": "{nam} is your {t}",

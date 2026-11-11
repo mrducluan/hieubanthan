@@ -24,7 +24,7 @@ CHUA_XONG: dict[str, int] = {
     # (+ /v1/kb/status): sạch khi MỌI loại sạch → GĐ 11.
     "kb": 11,
     # GĐ 3 xong (2026-11-10): kb.trang.thap_than, kb.trang.nhat_chu, kb.trang.menh_nam.
-    "kb.trang.sao": 4, "kb.trang.cung": 4, "kb.trang.sao_cung": 4, "kb.trang.hoa_cung": 4, "kb.trang.co_thu": 4,
+    "kb.trang.co_thu": 4,
     "kb.trang.dau_hieu": 5, "kb.trang.que": 6,
     "kb.trang.so": 7, "kb.trang.so_kep": 7, "kb.trang.cap_so": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7,
     "kb.trang.nam_ca_nhan": 7, "kb.trang.no_nghiep": 7, "kb.trang.la_bai": 7,
@@ -33,8 +33,9 @@ CHUA_XONG: dict[str, int] = {
     # GĐ 3 xong: battu.la_so, battu.luu_nien, battu.doi_chieu_cach, battu.luan_giai, hoi.battu (2026-11-10, GĐ 3c).
     # GĐ 4 — Tử vi
     # GĐ 4 xong (lá số): tuvi (danh sách lá số mẫu), tuvi.tuan_triet, tuvi.van_han, tuvi.luu_nguyet, tuvi.dinh_gio.
-    "tuvi.an_sao": 4, "tuvi.luan_giai": 4,
-    "tuvi.hop_tham": 4, "tuvi.la_so_mau": 4, "hoi.tuvi": 4,
+    # GĐ 4 (agent B) xong: tuvi.luan_giai; tuvi.hop_tham (sạch sau bản phủ en/tuvi_y_bo_sung.json).
+    "tuvi.an_sao": 4,
+    "tuvi.la_so_mau": 4, "hoi.tuvi": 4,
     # GĐ 4 (agent C) xong: tuvi.phi_hoa, tuvi.nhip_3_thang. tuvi.hop_tham chờ bản phủ en/tuvi_y_bo_sung.json (agent B, hộp cach_doc_them).
     # GĐ 5 — Phong thuỷ
     "phongthuy": 5, "phongthuy.bo_cuc": 5, "phongthuy.cung_phi": 5, "phongthuy.do_huong": 5, "phongthuy.do_thi": 5,
