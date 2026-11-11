@@ -270,12 +270,12 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   } },
   // NAM-1 (2026-10-30): mục lục năm + mục lục lịch âm (trước 404).
   { duong: "/nam", nhom: "tinh", ten: "Xem theo năm", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Xem theo năm: năm con gì, Tam tai, làm nhà, xông đất", h1: "Xem theo năm",
+    tieu_de_seo: "Xem theo năm: năm con gì, Tam tai, làm nhà, xông đất", h1: "Xem theo năm: năm con gì, mệnh gì, tuổi nào cần lưu ý",
     mo_ta_seo: "Tra từng năm âm lịch: can chi, mệnh nạp âm, ngày Tết, tuổi Tam tai, năm tuổi, sao hạn, tuổi làm nhà, cưới hỏi, xông đất, sinh con — và xem 3 tháng, 12 tháng tới của riêng bạn.",
     loi_dan: "Mỗi năm âm lịch một trang: năm con gì, Tết ngày nào, tuổi nào Tam tai, xung năm — kèm mọi bảng tra theo tuổi của năm đó.",
   } },
   { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm",
+    tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm: Tết ngày nào, năm nào nhuận?",
     mo_ta_seo: "Lịch âm Việt Nam từng năm: ngày Tết, năm có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu. Kèm công cụ đổi ngày âm dương.",
     loi_dan: "Tính theo giờ Hà Nội (thuật toán Hồ Ngọc Đức). Chọn một năm để xem Tết, tháng nhuận, mùng 1 và rằm từng tháng.",
   } },

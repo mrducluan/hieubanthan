@@ -48,7 +48,7 @@ export const CHU_XONG_DAT_CON = {
 
 export const CHU_HAN_NAM_CON = {
   "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi} = can chi năm)", mac_dinh: "Năm {can_chi}", toi_da: 60 },
-  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Hướng xấu năm {nam}", toi_da: 120 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Hướng xấu năm {nam}: nên tránh động thổ hướng nào?", toi_da: 120 },
   "cuoi.lam_nha": { nhom: C, nhan: "Link xem tuổi làm nhà ({nam})", mac_dinh: "Xem tuổi làm nhà năm {nam}", toi_da: 60 },
   // SEO-M: link chéo cùng năm.
   "cuoi.bang_lam_nha": { nhom: C, nhan: "Link bảng tuổi làm nhà ({nam})", mac_dinh: "Tuổi làm nhà năm {nam}", toi_da: 60 },
@@ -69,7 +69,7 @@ export const CHU_LAM_NHA_NAM = {
 
 export const CHU_XONG_DAT_NAM = {
   "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi} = can chi năm)", mac_dinh: "Tết {can_chi}", toi_da: 60 },
-  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Tuổi xông đất Tết {nam} hợp với gia chủ", toi_da: 120 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Tuổi nào xông đất Tết {nam} hợp gia chủ?", toi_da: 120 },
   "bang.tieu_de": { nhom: "Bảng", nhan: "Tiêu đề bảng", mac_dinh: "Tuổi hợp xông đất theo năm sinh gia chủ", toi_da: 120 },
   "bang.mo_ta": { nhom: "Bảng", nhan: "Giải thích dưới bảng", toi_da: 300,
     mac_dinh: "Mỗi dòng ghi 3 tuổi hợp nhất. Bấm năm sinh gia chủ để xem lý do, tuổi nên tránh và giờ đẹp mùng 1." },

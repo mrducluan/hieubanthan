@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
   const [namAm, nd] = await Promise.all([namAmHienTai(), layNoiDungTrang(DUONG)]);
   const ds = Array.from({ length: 6 }, (_, i) => namAm - 2 + i);
-  const h1 = nd.dau.h1 ?? "Lịch âm các năm";
+  const h1 = nd.dau.h1 ?? "Lịch âm các năm: Tết ngày nào, năm nào nhuận?";
   // SEO-O: bảng Tết 15 năm (engine tính) + trả lời nhanh + hỏi đáp — trước trang chỉ có 6 ô năm (~190 chữ).
   const bang = await cacNamLich(namAm - 2, namAm + 12);
   const toi = bang?.find((x) => x.nam === namAm + 1);

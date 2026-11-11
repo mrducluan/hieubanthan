@@ -26,6 +26,9 @@ export default defineConfig({
     baseURL: `http://localhost:${WEB_PORT}`,
     trace: "retain-on-failure",
     contextOptions: { reducedMotion: "reduce" },
+    // Trình duyệt chạy giờ Việt Nam như người dùng chính: trang "Hôm nay" gửi ngày theo đồng hồ máy (QTE-2), test tính
+    // ngày theo giờ VN → runner CI chạy UTC lệch một ngày trong khung 17:00–24:00 UTC. Web/engine máy chủ vẫn UTC như production.
+    timezoneId: "Asia/Ho_Chi_Minh",
     storageState: { cookies: [{ name: "hbt-goi-y-en", value: "1", domain: "localhost", path: "/", expires: -1, httpOnly: false, secure: false, sameSite: "Lax" }], origins: [{ origin: `http://localhost:${WEB_PORT}`, localStorage: [{ name: "hbt.dong-y-cookie.v1", value: "tu_choi" }] }] },
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"], launchOptions: { executablePath: process.env.PW_CHROMIUM_PATH || undefined } } }],
