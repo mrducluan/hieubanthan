@@ -390,3 +390,91 @@ def test_thai_san_theo_ban_viet(cau, ky_vong):
         assert "doctor" in t.lower() and "Four Pillars cannot" in t, t[:200]
     else:
         assert t.startswith("About children"), t[:120]
+
+
+# ---- EN-ALL GĐ 4 — review độc lập (hỏi đáp Tử vi tiếng Anh): mỗi câu là một lỗi review đã sửa, khoá lại ở đây.
+def _xu_ly_en(cau: str, mo_dun: str = "tuvi") -> str:
+    import importlib
+    from app import ngon_ngu
+    tk = ngon_ngu.HIEN_TAI.set("en")
+    try:
+        return importlib.import_module(f"app.hoidap.{mo_dun}").phan_loai(cau)["xu_ly"]
+    finally:
+        ngon_ngu.HIEN_TAI.reset(tk)
+
+
+GD4_PHU_DINH_GIA = [   # "không tự tử" mà vẫn là khủng hoảng — không được bỏ cụm phủ định
+    "I'm not going to kill myself tonight, I'll do it tomorrow. What does my chart say?", "I'm nothing but suicidal lately",
+    "Honestly I'm not suicidal, I just want it all to end", "I've never been suicidal until now", "I'm not suicidal yet",
+    "I'm not NOT suicidal", "I'm not usually suicidal but tonight I am",
+]
+GD4_THUONG = [         # câu thường có chữ giống mẫu khủng hoảng GĐ 4 — không chặn
+    "When should we make it official?", "When should I get the insurance?", "Is next year a good time to go?",
+    "best month to go?", "I've decided I'll end it with him, is that right per my spouse palace?",
+    "should i jump careers next year?", "I'd rather not be here at this company",
+    "Is it worth sticking around at this job until 2028?", "I'll be gone before the meeting",
+    "We plan to go first to Japan then Korea", "Can I check out early from my lease next year?",
+    "I'm cutting my hair short, is that lucky", "I want peace forever in my marriage",
+    "Should I give up on everything and start over abroad?", "punish myself at the gym",
+    "stop existing for a while on social media", "Will the world even notice if I'm gone from social media",
+    "Is there even a point to my career anymore",
+    "my boss is a nightmare and i'm burned out. not suicidal or anything, just tired of it. should I quit before Lunar New Year?",
+]
+GD4_KHONG_CAP_CUU = [  # nguy cơ / chuyện đã qua / nghĩa bóng — không phải cấp cứu đang xảy ra
+    "Will I have a heart attack someday according to my chart?", "My dad had a stroke two years ago",
+    "I had a stroke of luck last month", "I burned my fingers badly in crypto", "Is my pregnant wife's chart showing bleeding",
+    "do I have a stroke risk",
+]
+
+
+@pytest.mark.parametrize("mo_dun", ["tuvi", "battu"])
+@pytest.mark.parametrize("cau", GD4_PHU_DINH_GIA)
+def test_gd4_phu_dinh_gia_van_khung_hoang(cau, mo_dun):
+    assert _xu_ly_en(cau, mo_dun) == "an_toan", cau
+
+
+@pytest.mark.parametrize("mo_dun", ["tuvi", "battu"])
+@pytest.mark.parametrize("cau", GD4_THUONG)
+def test_gd4_cau_thuong_khong_chan(cau, mo_dun):
+    assert _xu_ly_en(cau, mo_dun) not in ("an_toan", "tu_choi_nhe", "dan_huong"), cau
+
+
+@pytest.mark.parametrize("cau", GD4_KHONG_CAP_CUU)
+def test_gd4_khong_phai_cap_cuu(cau):
+    from app import ngon_ngu
+    tk = ngon_ngu.HIEN_TAI.set("en")
+    try:
+        assert not at.cap_cuu(cau) and at.nhom_suc_khoe(cau) != "cap_cuu", cau
+    finally:
+        ngon_ngu.HIEN_TAI.reset(tk)
+
+
+def test_gd4_nguy_co_benh_tim_la_hoi_benh():
+    """Hỏi nguy cơ đau tim theo lá số → từ chối đoán bệnh (nhóm hoi_benh) như bản Việt, không phải cấp cứu."""
+    from app import ngon_ngu
+    assert _xu_ly_en("Will I have a heart attack someday according to my chart?") == "tu_choi_nhe"
+    tk = ngon_ngu.HIEN_TAI.set("en")
+    try:
+        assert at.nhom_suc_khoe("Will I have a heart attack someday according to my chart?") == "hoi_benh"
+    finally:
+        ngon_ngu.HIEN_TAI.reset(tk)
+
+
+@pytest.mark.parametrize("cau", ["I feel empty, what does my chart say", "my bright future, will it come",
+                                 "I visited a temple last week, is my year good"])
+def test_gd4_tu_thuong_khong_thanh_thuat_ngu_tuvi(cau):
+    from app.hoidap import en_gloss as g
+    vn = g.gloss(cau, "tuvi")
+    assert "vo chinh dieu" not in vn and "do sang" not in vn and "tuan triet" not in vn, vn
+
+
+@pytest.mark.parametrize("duong", ["/v1/tuvi/hoi", "/v1/battu/hoi"])
+def test_gd4_loi_noi_sinh_co_ban_anh(duong):
+    from fastapi.testclient import TestClient
+    from app.main import app
+    c = TestClient(app)
+    ls = {"birth_date": "1990-05-17", "birth_time": "08:30", "gender": "nam", "noi_sinh": "khong-co-tinh-nay"}
+    r = c.post(duong, json={"cau_hoi": "what about my career", "la_so": ls}, headers={"x-ngon-ngu": "en"})
+    assert r.status_code == 422 and r.json()["detail"] == "Birthplace is not in the list of provinces and cities", r.text
+    r = c.post(duong, json={"cau_hoi": "công việc của tôi", "la_so": ls})
+    assert r.json()["detail"] == "Nơi sinh không có trong danh sách tỉnh/thành"

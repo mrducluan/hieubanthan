@@ -108,7 +108,7 @@ class _DauVao:
     def __init__(self, inp: TuanTrietInput):
         gio, phut = int(inp.birth_time[:2]), int(inp.birth_time[3:])
         if gio > 23 or phut > 59:
-            raise HTTPException(422, detail="Giờ sinh không hợp lệ")
+            raise HTTPException(422, detail=L("tv_loi.gio", "Giờ sinh không hợp lệ"))
 
         # ---- 0. Nơi sinh → vùng múi giờ / nước ngoài ------------------------
         nuoc_ngoai = inp.noi_sinh == dia_ly.NUOC_NGOAI or inp.vung is Region.ABROAD
@@ -116,11 +116,11 @@ class _DauVao:
         if inp.noi_sinh and not nuoc_ngoai:
             tinh = dia_ly.tra(inp.noi_sinh)
             if tinh is None:
-                raise HTTPException(422, detail="Nơi sinh không có trong danh sách tỉnh/thành")
+                raise HTTPException(422, detail=L("tv2.ht.loi.noi_sinh", "Nơi sinh không có trong danh sách tỉnh/thành"))
         if inp.gio_mua_he and not nuoc_ngoai:
-            raise HTTPException(422, detail="Giờ mùa hè chỉ áp dụng khi sinh ở nước ngoài")
+            raise HTTPException(422, detail=L("tv_loi.gio_mua_he", "Giờ mùa hè chỉ áp dụng khi sinh ở nước ngoài"))
         if inp.mui_gio and not nuoc_ngoai:
-            raise HTTPException(422, detail="Múi giờ nơi sinh chỉ áp dụng khi sinh ở nước ngoài")
+            raise HTTPException(422, detail=L("tv_loi.mui_gio", "Múi giờ nơi sinh chỉ áp dụng khi sinh ở nước ngoài"))
         # QTE-2: thành phố / vùng IANA → múi giờ chuẩn + giờ mùa hè tại ngày giờ sinh (thắng khai tay); không có → khai tay.
         self.gio_mua_he, self.utc_noi_sinh, self.mui_gio = inp.gio_mua_he, inp.utc_noi_sinh, None
         if inp.mui_gio and nuoc_ngoai:
@@ -132,7 +132,7 @@ class _DauVao:
         vung_khai = None if nuoc_ngoai else inp.vung
         if tinh and tinh["vung"]:
             if vung_khai and vung_khai.value != tinh["vung"]:
-                raise HTTPException(422, detail="Vùng khai báo mâu thuẫn với nơi sinh")
+                raise HTTPException(422, detail=L("tv_loi.vung", "Vùng khai báo mâu thuẫn với nơi sinh"))
             vung_khai = Region(tinh["vung"])
 
         # ---- 1. Âm lịch đầu vào? Đổi về dương trước đã --------------------
@@ -169,7 +169,7 @@ class _DauVao:
         self.doi_mat_troi: int | None = None   # phút đã dịch khi gio_sinh = "mat_troi" (so với giờ chuẩn của khung lịch)
         self.gio_chuan_truoc: _dt.datetime | None = None
         if inp.gio_sinh == "mat_troi" and self.kinh_do is None:
-            raise HTTPException(422, detail="Giờ sinh theo mặt trời thực cần nơi sinh có kinh độ (tỉnh Việt Nam hoặc thành phố trong danh sách)")
+            raise HTTPException(422, detail=L("tv_loi.mat_troi", "Giờ sinh theo mặt trời thực cần nơi sinh có kinh độ (tỉnh Việt Nam hoặc thành phố trong danh sách)"))
         if nuoc_ngoai:
             # config.ABROAD_LOCAL_TIME: giữ giờ địa phương, chỉ bỏ giờ mùa hè.
             if self.gio_mua_he:
@@ -177,10 +177,10 @@ class _DauVao:
             tb = timebase.CalendarTime(calendar_dt=clock_dt, clock_offset=None, tz_disputed=False)
         else:
             if duong_goc < _NGAY_THONG_NHAT_MUI_GIO and vung_khai is None:
-                raise HTTPException(422, detail=(
+                raise HTTPException(422, detail=L("tv_loi.truoc_1975", (
                     "Sinh trước 13/06/1975: bắt buộc khai 'vung' (north/south theo NƠI "
                     "SINH) vì hai miền dùng múi giờ khác nhau — kết quả có thể lệch cả "
-                    "ngày can chi."))
+                    "ngày can chi.")))
             vung = vung_khai or Region.NORTH   # sau 1975 hai vùng cùng UTC+7, chọn gì cũng vậy
             tb = timebase.to_calendar_time(clock_dt, vung)
         self.nuoc_ngoai, self.tinh = nuoc_ngoai, tinh

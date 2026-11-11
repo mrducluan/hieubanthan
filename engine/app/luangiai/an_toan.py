@@ -548,68 +548,77 @@ KHUNG_HOANG_ANH.append(_rx_en(
 # giới có nhận ra nếu tôi biến mất", vũ trụ muốn tôi chết, lên kế hoạch "cách", cố ý uống thêm thuốc, "tôi cũng sẽ kết thúc".
 KHUNG_HOANG_ANH.append(_rx_en(
     r"(?:think\w*|thought|dream\w*|wish\w*|pray\w*|want\w*|hop\w*) (?:about |of )?(?:just )?(?:not|never) waking up(?! (?:early|late|on time|tired))",
-    r"(?:been|started|start|keep|kept|i m|i am|im) cutting (?:again|myself|my)|(?:i ve|i have|i) (?:been )?cutting again",
-    r"(?:be |being |find |finally )?(?:at )?peace\W{0,3} (?:like )?(?:permanently|forever|for good)(?! (?:with|in (?:my|the|our) (?:home|house|family)))",
+    r"(?:been|started|start|keep|kept|i m|i am|im) cutting (?:again|myself|my (?:arms?|wrists?|legs?|thighs?|skin|body|stomach))|"
+    r"(?:i ve|i have|i) (?:been )?cutting again",
+    r"(?:be|being|finally|find|rest) (?:at )?peace\W{0,3} (?:like )?(?:permanently|forever|for good)(?! (?:with|in|at|between))",
     r"(?:have|got|kept|keeping|saved|saving|stashed|hid|hidden) (?:the |my |some |all the |a few )?(?:\w+ )?(?:pills|meds) "
     r"(?:saved|stashed|hidden|put aside|set aside)(?: up)?",
     r"(?:written|wrote|writing|write) (?:goodbye |farewell )?(?:letters?|notes?) (?:to|for) (?:my |all my )?(?:kids|children|family|son|daughter|"
     r"wife|husband|parents)(?=.{0,60}(?:will (?:they|she|he) be (?:ok|okay|alright|fine)|after i m gone|when i m gone|take care of))",
     r"(?:do not|don t|cannot|can t|can not) (?:think i can |think i ll be able to |see how i can )?keep going(?! (?:to|with|at|on with))",
     r"(?:said|say|saying) goodbye to (?:\w+ ){0,2}(?:friends|family|kids|parents)(?=.{0,80}\b(?:next life|afterlife|after i die|other side))",
-    r"(?:ready to |going to |gonna |want to )?check out (?:early|of (?:life|this world|here for good))",
+    r"(?:ready to|want to|going to|gonna|planning to|time to) check out(?: early)?(?=\s*(?:[,.!?;]|$))|"
+    r"check out (?:early )?of (?:life|this world|here for good)",
     r"(?:do not|don t|cannot|can t|can not) see (?:a|any) future (?:for myself|for me)(?: (?:past|after|beyond) (?:this|next) (?:year|month|week))?",
     r"(?:thinking|thought|think) (?:of|about) (?:just )?(?:stopping|stop|quitting|quit) eating",
-    r"(?:would|will|d) (?:the world|anyone|anybody|people|they) (?:even )?(?:notice|care|miss me) if i (?:was|were|m|am) (?:gone|not here|dead)",
+    r"(?:would|will|d) (?:the world|anyone|anybody|people|they) (?:even )?(?:notice|care|miss me) if i (?:was|were|m|am) (?:gone|not here|dead)"
+    r"(?! (?:from|for|to|on|at|in) )",
     r"(?:universe|world|god|everyone|the stars|my chart) (?:wants|want) me (?:dead|to die|gone)",
     r"(?:started|start|been|am|i m) planning (?:how|it|the date|my exit|my death)(?=\s*(?:[,.!?;]|$| to | i ))",
     r"(?:took|take|taken|taking|swallowed) (?:a few |some |a couple of )?(?:extra|more) (?:of )?(?:my |the )?(?:\w+ )?(?:pills|tablets|meds) on purpose",
     r"(?:i ll|i will|i m going to|i am going to|gonna) end (?:too|as well|myself too|with it)(?= when| if| after|\s*(?:[,.!?;]|$))",
-    r"(?:i ve|i have|i) decided (?:that )?i (?:ll|will) end(?! (?:the|my|our|this) (?:relationship|contract|lease|job|marriage|partnership|friendship))",
+    r"(?:i ve|i have|i) decided (?:that )?i (?:ll|will) end(?: it| things| myself| my life)?(?= too| when| after| once|\s*(?:[,.!?;]|$))",
     r"die young .{0,20}(?:because|cause|cos|coz) i (?:kind of |kinda |sort of |really |just )?want(?: to| it)?",
     r"(?:have|got|bought|hid|hidden) (?:a |the |some )?rope (?:in|ready|hidden|set up)(?! (?:for|to tie))",
     r"(?:make sure|ensure) (?:she|he|they) (?:can t|cannot|won t|will not|never) (?:\w+ ){0,3}(?:again|anymore|ever)?(?=.{0,40}(?:ruin|win|chart))|"
     r"(?:ruin|ruined|ruining) my life .{0,30}(?:so )?i (?:m|am) going to make sure (?:she|he|they)",
-    r"is there (?:any|even a|a) point(?=[,.!?;]?.{0,40}(?:my life|all of it|living|anymore|of it all|to anything))",
+    r"is there (?:any|even a|a) point(?=[,.!?;]?.{0,40}(?:my life|all of it|living|of it all|to anything))"
+    r"(?!.{0,30}\b(?:career|job|work|business|degree|study|studies|relationship|marriage)\b)",
     # GĐ 4 (tự viết thêm theo nghĩa — không theo câu của bộ đo): không đáng tồn tại, được nghỉ mãi, buông bỏ cuộc sống,
     # chết bằng tay mình, thư từ biệt, nghĩ tới cái chết mỗi ngày, hỏi có nên nhảy, đời vô nghĩa, cho đi thú cưng, muốn
     # nỗi đau dừng hẳn, "sẵn sàng đi" khi tuyệt vọng, chọn ngày để chết
     r"(?:shouldn t|should not|don t deserve to|do not deserve to|wasn t meant to|was not meant to) (?:even )?(?:exist|be alive|live|be here)",
     r"(?:rest|sleep) forever|eternal (?:rest|sleep)|(?:finally )?(?:get to )?rest in peace(?! (?:grandma|grandpa|mom|dad|\w+ s))",
-    r"give up on (?:life|living|everything|it all)(?! (?:in|at) )",
+    r"give up on (?:life|living|everything|it all)(?! (?:in|at) | and (?:start|move|go|begin|try|travel|focus))",
     r"(?:die|dying|end (?:it|my life)) by my own hand|by my own hand",
     r"goodbye (?:notes?|letters?)|farewell (?:notes?|letters?)|(?:my )?will and (?:goodbye|farewell)",
     r"(?:think|thinking|thought) (?:about|of) (?:dying|death|my death|being dead) (?:every|all the|each) (?:day|night|time)|"
     r"(?:constant|daily) thoughts? (?:of|about) (?:dying|death)",
-    r"(?:should i|if i should|whether i should|whether to|asking .{0,20} if i should) jump(?! (?:ship|at|into (?:a |the )?(?:new|job|business|"
-    r"market|relationship)|on|the gun|in))",
+    r"(?:should i|if i should|whether i should|whether to) jump(?=\s*(?:[,.!?;]|$)| off| from| down)",
     r"life (?:is|feels|seems) (?:so |completely |totally )?(?:pointless|meaningless|not worth (?:it|living))",
     r"(?:can t|cannot|can not) keep (?:living|existing|going on)(?! (?:in|at|with) (?!this))",
     r"(?:given|gave|giving) away my (?:cat|dog|pets?|cats|dogs|things|stuff|belongings)",
     r"(?:want|need|wish) (?:the |all the |this )?(?:pain|suffering|hurt) to (?:end|stop) (?:permanently|forever|for good)",
     r"(?:no light|end of the tunnel|nothing left|hopeless|no point|no way out).{0,60}ready to go(?=\s*(?:[,.!?;]|$))",
-    r"(?:good|best|right|lucky) (?:day|time|month|date|year) (?:for me )?to (?:die|end it|end my life|go)(?=\s*(?:[,.!?;]|$)|.{0,20}(?:die|goodbye|notes?))",
+    r"(?:good|best|right|lucky) (?:day|time|month|date|year) (?:for me )?to (?:die|end it|end my life)(?=\s*(?:[,.!?;]|$))|"
+    r"(?:goodbye|farewell) (?:notes?|letters?).{0,40}(?:good|best|right) (?:day|time|month) to go",
     # không còn ở đây / rời thế giới / không định sống tới mốc
-    r"(?:stop|quit|cease) existing|leave this (?:world|earth|life)|(?:time|days) on (?:this )?earth (?:is|are) (?:up|over|done)|"
+    r"(?:stop|quit|cease) existing(?! (?:for a|on|from|online|in (?:the )?group|at work))|leave this (?:world|earth|life)|(?:time|days) on (?:this )?earth (?:is|are) (?:up|over|done)|"
     r"(?:my )?time (?:here )?is up(?=\s*(?:[,.!?;]|$))",
-    r"(?:rather|prefer to|d rather|would rather) not be (?:around|here|alive)",
+    r"(?:rather|prefer to|d rather|would rather) not be (?:around|here|alive)(?=\s*(?:[,.!?;]|$)| anymore| any longer| in this world| for the next)",
     r"(?:don t|do not|won t|will not|never) (?:plan|intend|expect|want) (?:on |to )?(?:see|seeing|be around for|live to see|make it to) "
     r"(?:(?:19|20)\d\d|next (?:year|month|week|birthday|christmas)|my (?:next )?birthday|the new year|another year)",
-    r"(?:worth|bother) (?:sticking|staying|being) (?:around|alive|here)(?: for)?",
-    r"(?:i ll|i will) be gone (?:before|by|after)(?! (?:the |a )?(?:week|weekend|morning|holiday|trip))",
+    r"(?:worth|bother) (?:sticking|staying|being) (?:around|alive|here)(?: for)?(?! (?:at|in|with|until|till|for (?:this|the|my|a|another) "
+    r"(?:job|company|team|city|place|role|project|promotion)))",
+    r"(?:i ll|i will) be gone (?:before|by) (?:the next |next )?(?:lunar new year|chinese new year|new year|christmas|my (?:next )?birthday|"
+    r"(?:19|20)\d\d|next year|the end of (?:the|this) year)",
     r"(?:won t|will not|don t think i ll|do not think i will) make it to (?:my )?(?:next )?(?:birthday|(?:19|20)\d\d|next year|new year)",
     r"(?:after|when) i m gone(?=.{0,60}(?:ok|okay|alright|fine|kids|children|family|cope|look after|take care))|"
     r"(?:kids|children|family|wife|husband) .{0,30}(?:be )?(?:ok|okay|alright|fine) (?:after|when|once) i m gone",
     r"(?:family|kids|children|everyone|they) (?:will|would|ll|d) be (?:fine|okay|ok|better) without me",
-    r"get the (?:life )?insurance(?= (?:money|payout|when|if|after)|\s*(?:[,.!?;]|$))",
+    r"(?:without me|after i m gone|when i m gone|if i die|when i die|after i die).{0,60}insurance|"
+    r"insurance.{0,40}(?:when i m gone|after i m gone|if i die|when i die|after i die)",
     r"imagin\w* (?:my )?own funeral|(?:nobody|no one|noone) (?:would|will) (?:even )?(?:come|go|show up) to my funeral",
-    r"punish (?:myself|my body)|(?:what|something) i (?:might|may|could) do to myself",
+    r"punish (?:myself|my body)(?! (?:at|in|with|by|for not|for skipping|for eating|for missing))|"
+    r"(?:what|something) i (?:might|may|could) do to myself",
     r"how many (?:\w+ )?(?:pills|tablets) (?:it )?(?:takes|would take|does it take|to die|to overdose)",
     r"(?:bottle|box|stash|pile) of (?:\w+ )?(?:pills|tablets|meds) .{0,40}(?:keep looking|staring|thinking about|tempting)",
     r"(?:drive|driving|drove|crash\w*|steer\w*) (?:my |the )?(?:car|bike|motorbike|truck) (?:off|into) .{0,20}on purpose|"
     r"(?:off|into) the (?:road|cliff|wall|river|barrier) on purpose",
     r"(?:stop the world and get off|get off this ride) (?:permanently|forever|for good)",
-    r"(?:got|have) everything ready.{0,30}(?:right|the) (?:day|time|date)|make it official(?=.{0,10}$)",
-    r"plan to go first|(?:i ll|i will|let me) go first(?= (?:before|so)|\s*$)",
+    r"(?:got|have) everything ready.{0,30}(?:right|the) (?:day|time|date)|"
+    r"(?:ghost|dead|gone|disappear\w*|not here).{0,60}make it official",
+    r"(?:die|death).{0,40}plan to go first|(?:i ll|i will|let me) go first before",
 ))
 # Cặp mới (ý, ngữ cảnh) — GĐ 3d: "I want it to be over" chỉ là khủng hoảng khi câu nói về cuộc sống / khổ đau; dây thừng chỉ
 # khi kèm cảnh nhìn / buộc / treo; ý làm hại người khác chỉ khi nói nghiêm túc (kế hoạch, vũ khí, "for real").
@@ -1063,11 +1072,16 @@ def _qua_lieu_nham(k: str) -> bool:
 
 # EN-ALL GĐ 4: cấp cứu thai sản (đang mang thai + chảy máu / đau dữ dội) và bỏng nặng (da trắng, bong, cháy đen, phồng lớn).
 _CAP_CUU_GD4 = _rx_en(
-    r"(?:having|had|have) (?:a |an )?(?:heart attack|stroke)(?: right now| now)?(?! (?:last|in|years?|months?|when|before|back))",
-    r"pregnan\w* .{0,40}(?:bleeding|severe (?:pain|stomach pain|cramps?)|(?:my )?water(?: s)? broke|contractions)",
-    r"(?:bleeding|severe (?:pain|stomach pain|cramps?)) .{0,40}pregnan\w*",
-    r"burn\w* (?:my |his |her |the )?(?:\w+ ){0,2}(?:badly|severely)|"
-    r"burn\w* .{0,50}(?:skin (?:is |went |turned )?(?:white|peeling|charred|black|leathery)|huge blisters?)")
+    # đang xảy ra (thì hiện tại tiếp diễn), không phải hỏi nguy cơ / chuyện đã qua / "stroke of luck"
+    r"(?:i m|i am|im|he s|she s|he is|she is|they re|my (?:\w+ ){0,2}is|i think i m|i feel like i m|feel like i m|i think (?:he|she) s) "
+    r"(?:\w+ )?having (?:a |an )?(?:heart attack|stroke)(?! of)",
+    r"pregnan\w*(?: \d+ weeks?)?\W{0,2} (?:and |with |having |now )?(?:severe|heavy|bad) (?:\w+ ){0,2}(?:pain|bleeding|cramps?)",
+    r"(?:i m|i am|im|she s|she is|my (?:wife|partner|sister|daughter|girlfriend) is) (?:\w+ ){0,3}pregnan\w* .{0,30}"
+    r"(?:and |now |started )(?:bleeding|having contractions)|(?:my |her )?waters? (?:just )?broke",
+    r"burn(?:ed|t|ing)? (?:my|his|her|their) (?:hand|hands|arm|arms|leg|legs|face|foot|feet|skin|fingers?|chest|back|neck) "
+    r"(?:\w+ ){0,3}(?:badly|severely)(?! in )|"
+    r"burn\w* (?:my|his|her|their) (?:hand|hands|arm|arms|leg|legs|face|foot|feet|skin|fingers?) .{0,50}"
+    r"(?:skin (?:is |went |turned )?(?:white|peeling|charred|black|leathery)|huge blisters?)")
 # một người KHÁC vừa quá liều / ngưng thở → cấp cứu (gọi cấp cứu ngay), không phải lời hỗ trợ khủng hoảng của người hỏi
 _QUA_LIEU_NGUOI_KHAC = _rx_en(r"(?:my (?:\w+ ){0,2}(?:friend|son|daughter|kid|brother|sister|mother|mom|mum|father|dad|husband|wife|"
                               r"partner|roommate|boyfriend|girlfriend)|he|she) (?:has |just |had )?overdosed .{0,40}"
@@ -1076,12 +1090,22 @@ _QUA_LIEU_NGUOI_KHAC = _rx_en(r"(?:my (?:\w+ ){0,2}(?:friend|son|daughter|kid|br
 
 # GĐ 4: người nói tự phủ định ý tự hại ("not suicidal or anything, just tired of it") — bỏ cụm đó trước khi xét; mọi tín hiệu
 # khác trong câu vẫn được xét như thường.
-_KHONG_TU_HAI = re.compile(r"(?<!\w)(?:i m |im |i am )?(?:not|never|nothing) (?:\w+ )?(?:suicidal|going to (?:hurt|kill) myself)"
-                           r"(?: or anything| at all| or something)?(?!\w)")
+_KHONG_TU_HAI = re.compile(r"(?<!\w)(?:i m |im |i am )?(?<!not )not suicidal(?: or anything| at all| or something)?(?!\w)")
+# Review GĐ 4: còn tín hiệu khác (hẹn giờ, "do it", "muốn tất cả kết thúc", "chưa / cho tới giờ / thường thì không / tối
+# nay") → không bỏ — "I'm not suicidal yet", "not usually suicidal but tonight I am", "not suicidal, I just want it to end".
+_KHONG_TU_HAI_GIU = re.compile(r"(?<!\w)(?:yet|until now|till now|usually|tonight|tomorrow|do it|to end|end it|end everything|"
+                               r"kill|die|dying|dead|not not|but)(?!\w)")
+
+
+def _bo_phu_dinh(kd: str) -> str:
+    if not _KHONG_TU_HAI.search(kd):
+        return kd
+    con = _KHONG_TU_HAI.sub(" ", kd)
+    return kd if _KHONG_TU_HAI_GIU.search(con) else con
 
 
 def _khung_hoang_anh(kd: str) -> bool:
-    kd = _KHONG_TU_HAI.sub(" ", kd)
+    kd = _bo_phu_dinh(kd)
     k = _sua_en(kd)
     for i, rx in enumerate(KHUNG_HOANG_ANH):
         if any(rx.search(t) for t in (kd, k)):

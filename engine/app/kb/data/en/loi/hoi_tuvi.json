@@ -246,5 +246,11 @@
  "hoi.md.tv.nhip_thang": "in your chart, this month's own rhythm leans {ket}",
  "hoi.md.tv.tren_la_so": "in your chart: {ds}",
  "hoi.tv.thang_duong": "Most of Gregorian month {d} falls in lunar month {a}.",
- "hoi.tv.thang_am": "Zi Wei Dou Shu counts by the lunar calendar: this is lunar month {a}."
+ "hoi.tv.thang_am": "Zi Wei Dou Shu counts by the lunar calendar: this is lunar month {a}.",
+ "tv_loi.gio": "Invalid time of birth.",
+ "tv_loi.gio_mua_he": "Daylight saving time only applies when you were born outside Vietnam.",
+ "tv_loi.mui_gio": "A birthplace time zone only applies when you were born outside Vietnam.",
+ "tv_loi.vung": "The region you chose does not match your birthplace.",
+ "tv_loi.mat_troi": "True solar time needs a birthplace with a known longitude (a Vietnamese province or a city in the list).",
+ "tv_loi.truoc_1975": "Born before 13/06/1975: please give your region ('vung': north/south, by PLACE OF BIRTH), because the two halves of Vietnam used different time zones — otherwise even the day's stem and branch could be off."
 }

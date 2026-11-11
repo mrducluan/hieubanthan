@@ -461,7 +461,8 @@ _TV_KHAI_NIEM: list[tuple[str, str]] = [
     (r"flying stars?|fei xing|flying hua|flying transformations?|self transform\w*|zi hua|self hua", "phi hoa"),
     (r"(?:five )?elements? bureau|bureau of (?:the )?five elements|wu xing ju|element bureau|bureau", "ngu hanh cuc"),
     (r"tuan|triet|void stars?|emptiness stars?", "tuan triet"),
-    (r"(?:no|without) (?:any )?(?:major|main) stars?|empty (?:life )?palace|palace is empty|empty", "vo chinh dieu"),
+    (r"(?:no|without) (?:any )?(?:major|main) stars?|empty (?:life )?palace|palace is empty|"
+     r"palace (?:\w+ ){0,3}empty", "vo chinh dieu"),
     (r"malefic|sha stars?|bad stars?|unlucky stars?|six malefics?|killing stars?", "sat tinh"),
     (r"(?:fallen|weak|dim|dark|fall) (?:position|state)|is fallen|in a fallen|brightness|temple|bright|exalted", "do sang"),
     (r"(?:14|fourteen) (?:main|major) stars|how many (?:main|major) stars|main stars|major stars", "14 chinh tinh"),
@@ -486,9 +487,17 @@ _TV_KIEN_THUC: list[tuple[str, str]] = [
 ]
 
 
+# Từ thường trong tiếng Anh ("bright", "temple", "fallen") hay âm tiết ngắn ("tuan", "triet") chỉ là thuật ngữ Tử vi khi câu có
+# ngữ cảnh lá số / sao / cung (review GĐ 4: "I feel empty", "my bright future" không phải câu về độ sáng sao).
+_TV_CAN_NGU_CANH = {"tuan triet", "do sang", "tuan", "triet", "do_sang_sao", "ham"}
+_TV_NGU_CANH = re.compile(r"\b(?:stars?|palaces?|chart|charts|zi ?wei|ziwei|purple star|void|zwds|dou shu|main stars?)\b")
+
+
 def _tv_thay(t: str, bang: list[tuple[str, str]]) -> list[str]:
     ra = []
     for mau, vn in bang:
+        if vn in _TV_CAN_NGU_CANH and not _TV_NGU_CANH.search(t):
+            continue
         if re.search(r"\b(?:" + mau + r")\b", t) and vn not in ra:
             ra.append(vn)
     return ra
@@ -723,6 +732,8 @@ def _tu_dien_tuvi(cau: str) -> list[str]:
         return []
     ma: list[str] = []
     for mau, m in _TV_TU_DIEN:
+        if m in _TV_CAN_NGU_CANH and not _TV_NGU_CANH.search(t):
+            continue
         if re.search(r"\b(?:" + mau + r")\b", t) and m not in ma:
             ma.append(m)
     if any(re.search(r"\b(?:" + mau + r")\b", t) for mau, _ in _TV_CUNG) and \
