@@ -3,7 +3,16 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-10 (BT-UI mục 4ak, SEO-N mục 4al, BLOG-10 mục 4am, TR-5 mục 4an, SEO-O mục 4ao).
+> Cập nhật lần cuối: 2026-11-11 (KW-6T mục 4ap; trước đó BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4ap. KW-6T — kế hoạch từ khoá blog 6 tháng (2026-11-11, `docs/KE-HOACH-TU-KHOA-SEO-6-THANG.md`)
+
+- [ ] Đọc Google Sheet "Hieuban — Kế hoạch từ khoá SEO 6 tháng" (Drive của anh) → duyệt / bỏ bài ở tab "Từ khoá & bài viết", cột "Trạng thái".
+- [ ] **Tuần 1 (16/11)**: gộp 3 cặp bài trùng + sửa 3 tiêu đề nhồi từ khoá (tab "Bài cũ") trong CMS.
+- [ ] **Hạn chót 10/1/2027**: 15 bài cụm Tết 2027 (C8) đã xuất bản.
+- [ ] Nối Search Console + GA4 của hieuban.com vào NotFair, hoặc gửi CSV Truy vấn + Trang 3 tháng → em thay lượng tìm ước lượng bằng số thật.
+- [ ] (Tuỳ chọn) Cho phép `trends.google.com` trong mạng môi trường để em kiểm xu hướng 12 tháng của 88 từ khoá.
+- [ ] (Quyết định) Có mở cụm chiêm tinh / cung hoàng đạo (cần làm công cụ trước) hay chỉ giữ 1–2 bài cầu nối.
 
 ### 4ao. SEO-O — ảnh tóm tắt + nội dung dày cho trang năm, lịch & tuổi (2026-11-10, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 6)
 
