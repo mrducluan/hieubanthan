@@ -14,8 +14,14 @@ const VIET = /[ăâđêôơưàáạảãầấậẩẫằắặẳẵèéẹ�
 const TEN = "John O'Brien";
 
 /** Chữ nhìn thấy + thuộc tính đọc được của <main> có chữ Việt (trả các dòng lỗi). */
-async function chuViet(page: Page): Promise<string[]> {
-  const chu = (await page.locator("main").innerText()).split("\n").filter((l) => VIET.test(l));
+async function chuViet(page: Page, boQua?: string): Promise<string[]> {
+  // `boQua`: bộ chọn phần tử KHÔNG phải chữ Việt nhưng có dấu giống (phiên âm pinyin của cổ thư: dòu, shù…).
+  if (boQua) await page.$$eval(boQua, (els) => els.forEach((e) => e.setAttribute("data-bo-qua-test", "1")));
+  const chu = (await page.locator("main").evaluate((m) => {
+    const c = m.cloneNode(true) as HTMLElement;
+    c.querySelectorAll("[data-bo-qua-test]").forEach((e) => e.remove());
+    document.body.appendChild(c); const t = c.innerText; c.remove(); return t;
+  })).split("\n").filter((l) => VIET.test(l));
   const thuocTinh = await page.$$eval("main [aria-label], main [title], main [placeholder], main [alt]", (els) =>
     els.flatMap((e) => ["aria-label", "title", "placeholder", "alt"].map((a) => e.getAttribute(a) ?? "")));
   return [...chu, ...thuocTinh.filter((a) => VIET.test(a)).map((a) => `@${a}`)];
@@ -41,8 +47,12 @@ test.describe("catalog /en/zi-wei-dou-shu", () => {
     expect(t.mo_ta_seo.length).toBeLessThanOrEqual(160);
     expect(JSON.stringify(t)).not.toMatch(VIET);
     const mo = CAP_DUONG.filter((x) => x.mo && !x.rieng && khoaTheoDuong(x.vi) && x.en.startsWith("/en/zi-wei-dou-shu"));
-    expect(mo.map((x) => x.en).sort()).toEqual(["/en/zi-wei-dou-shu/four-transformations", "/en/zi-wei-dou-shu/palaces",
+    expect(mo.map((x) => x.en).sort()).toEqual(["/en/zi-wei-dou-shu/classics", "/en/zi-wei-dou-shu/four-transformations", "/en/zi-wei-dou-shu/palaces",
       "/en/zi-wei-dou-shu/star-in-palace", "/en/zi-wei-dou-shu/stars"]);
+    const lsm = CUM_EN["/tu-vi/la-so-mau"]!;
+    expect(lsm.tieu_de_seo.length).toBeLessThanOrEqual(70);
+    expect(lsm.mo_ta.length).toBeLessThanOrEqual(160);
+    expect(JSON.stringify(lsm)).not.toMatch(VIET);
     for (const c of mo) {
       const x = CUM_EN[c.vi]!;
       expect(x, c.vi).toBeTruthy();
@@ -57,15 +67,18 @@ async function ldTrang(page: Page): Promise<string> {
   return (await page.locator('main script[type="application/ld+json"]').allTextContents()).join("\n");
 }
 
-const CUM: [string, string, string, string, string][] = [
+// [cụm Anh, cụm Việt, trang con Anh, trang con Việt, chữ H1 trang con, trang con có hình minh hoạ]
+const CUM: [string, string, string, string, string, boolean?][] = [
   ["/en/zi-wei-dou-shu/stars", "/tu-vi/chinh-tinh", "/en/zi-wei-dou-shu/stars/zi-wei", "/tu-vi/chinh-tinh/sao-tu-vi", "Zi Wei"],
   ["/en/zi-wei-dou-shu/palaces", "/tu-vi/cung", "/en/zi-wei-dou-shu/palaces/life-palace", "/tu-vi/cung/cung-menh", "Life Palace"],
   ["/en/zi-wei-dou-shu/star-in-palace", "/tu-vi/sao-o-cung", "/en/zi-wei-dou-shu/star-in-palace/zi-wei-in-life-palace", "/tu-vi/sao-o-cung/tu-vi-cung-menh", "Zi Wei in the Life Palace"],
   ["/en/zi-wei-dou-shu/four-transformations", "/tu-vi/tu-hoa", "/en/zi-wei-dou-shu/four-transformations/hua-lu-in-life-palace", "/tu-vi/tu-hoa/hoa-loc-cung-menh", "Hua Lu in the Life Palace"],
+  ["/en/zi-wei-dou-shu/classics", "/tu-vi/co-thu", "/en/zi-wei-dou-shu/classics/dou-shu-gu-sui-fu", "/tu-vi/co-thu/cot-tuy-phu", "Dou Shu Gu Sui Fu", false],
+  ["/en/zi-wei-dou-shu/sample-charts", "/tu-vi/la-so-mau", "/en/zi-wei-dou-shu/sample-charts/tu-phu-dong-cung", "/tu-vi/la-so-mau/tu-phu-dong-cung", "Zi Wei and Tian Fu", false],
 ];
 
 test.describe("/en/zi-wei-dou-shu cụm kiến thức", () => {
-  for (const [cumEn, cumVi, conEn, conVi, h1] of CUM) {
+  for (const [cumEn, cumVi, conEn, conVi, h1, coHinh = true] of CUM) {
     test(`${cumEn}: cụm + trang con tiếng Anh, SEO, hreflang hai chiều`, async ({ page }) => {
       test.setTimeout(90_000);
       const r = await page.goto(cumEn);
@@ -75,7 +88,7 @@ test.describe("/en/zi-wei-dou-shu cụm kiến thức", () => {
       expect(await page.locator('link[rel="canonical"]').getAttribute("href")).toMatch(new RegExp(`${cumEn}$`));
       expect(await page.locator('link[rel="alternate"][hreflang="vi"]').getAttribute("href")).toMatch(new RegExp(`${cumVi}$`));
       await expect(page.locator("h1")).toHaveCount(1);
-      expect(await chuViet(page)).toEqual([]);
+      expect(await chuViet(page, "main blockquote p.italic")).toEqual([]);
       const ld = await ldTrang(page);
       expect(ld).toContain('"inLanguage":"en"');
       expect(ld).not.toMatch(VIET);
@@ -88,8 +101,9 @@ test.describe("/en/zi-wei-dou-shu cụm kiến thức", () => {
       await expect(page.locator("h1")).toHaveCount(1);
       await expect(page.locator("h1")).toContainText(h1);
       expect(await page.locator('link[rel="alternate"][hreflang="vi"]').getAttribute("href")).toMatch(new RegExp(`${conVi}$`));
-      await expect(page.getByTestId("minh-hoa")).toBeVisible();
-      expect(await chuViet(page)).toEqual([]);
+      if (coHinh) await expect(page.getByTestId("minh-hoa")).toBeVisible();
+      // Lá số mẫu: tên nhân vật đã bỏ dấu (engine) — không có ngoại lệ; cổ thư: bỏ qua dòng phiên âm pinyin.
+      expect(await chuViet(page, "main blockquote p.italic")).toEqual([]);
       expect(await ldTrang(page)).not.toMatch(VIET);
       const hrefCon = await page.$$eval("main a[href]", (as) => as.map((a) => a.getAttribute("href") ?? ""));
       expect(hrefCon.filter((h) => h.startsWith("/") && !h.startsWith("/en"))).toEqual([]);
@@ -113,6 +127,9 @@ test.describe("/en/zi-wei-dou-shu cụm kiến thức", () => {
     const b = await request.get("/tu-vi/sao-o-cung/zi-wei-in-life-palace", { maxRedirects: 0 });
     expect(b.status()).toBe(308);
     expect(b.headers().location).toMatch(/\/tu-vi\/sao-o-cung\/tu-vi-cung-menh$/);
+    const c = await request.get("/en/zi-wei-dou-shu/classics/cot-tuy-phu", { maxRedirects: 0 });
+    expect(c.status()).toBe(308);
+    expect(c.headers().location).toMatch(/\/en\/zi-wei-dou-shu\/classics\/dou-shu-gu-sui-fu$/);
   });
 
   test("mục lục 168 trang sao ở cung bản Anh: nhóm theo sao + lọc theo cung", async ({ page }) => {
@@ -122,8 +139,7 @@ test.describe("/en/zi-wei-dou-shu cụm kiến thức", () => {
     expect(await chuViet(page)).toEqual([]);
   });
 
-  test("cụm chưa mở bản Anh (cổ thư, lá số mẫu) trả 404 tiếng Anh; sitemap-en có cụm Tử vi", async ({ page, request }) => {
-    expect((await page.goto("/en/zi-wei-dou-shu/classics"))!.status()).toBe(404);
+  test("sitemap-en có trang công cụ, mọi cụm Tử vi và trang con (kể cả lá số mẫu)", async ({ request }) => {
     const sm = await (await request.get("/sitemap-en.xml")).text();
     for (const [cumEn, , conEn] of CUM) {
       expect(sm).toMatch(new RegExp(`<loc>[^<]*${cumEn}</loc>`));

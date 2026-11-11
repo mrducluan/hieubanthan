@@ -41,6 +41,13 @@ export async function GET() {
       if (t.loai === cd.loai && t.index && t.slug_en) muc.push({ en: `${cd.en}/${t.slug_en}`, vi: `${cd.duong}/${t.slug}`, lastmod: t.cap_nhat });
     }
   }
+  // EN-ALL GĐ 4: lá số mẫu Tử vi (không phải cụm KB — engine /v1/tuvi/la-so-mau, slug giống bản Việt).
+  const lsm = banAnhRewrite("/tu-vi/la-so-mau");
+  if (lsm) {
+    const ds = await engineEn<{ ds: { slug: string }[] }>("/v1/tuvi/la-so-mau");
+    muc.push({ en: lsm, vi: "/tu-vi/la-so-mau" });
+    if (ds.ok) for (const x of ds.data.ds) muc.push({ en: `${lsm}/${x.slug}`, vi: `/tu-vi/la-so-mau/${x.slug}` });
+  }
   if (bo.ok) {
     const ds = Object.entries(bo.data.la);
     // lastmod thật từng lá (sổ ngày cập nhật của engine) — 78 lượt gọi, mỗi lượt cache 6 giờ như trang lá.

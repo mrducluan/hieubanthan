@@ -61,6 +61,12 @@ export const CUM_EN: Readonly<Record<string, CumEn>> = {
     mo_ta: "What Hua Lu (prosperity), Hua Quan (power), Hua Ke (fame) and Hua Ji (obstacle) mean in each of the 12 palaces, and which birth years bring each one.",
     tra_loi: "The Four Transformations are four changes the year's Heavenly Stem makes to four stars: Hua Lu (prosperity), Hua Quan (power), Hua Ke (fame) and Hua Ji (obstacle). Where they land shows where life flows easily and where it asks for care. This section has {so} pages, one for each transformation in each of the 12 palaces, with the birth years that bring it.",
   },
+  "/tu-vi/la-so-mau": {
+    ten: "Sample charts", h1: "Sample Zi Wei Dou Shu charts, read step by step",
+    tieu_de_seo: "Sample Zi Wei Dou Shu charts read step by step · Hieuban",
+    mo_ta: "Six illustrative Zi Wei Dou Shu charts read in order: Life Palace, main stars, brightness, triad, patterns, transformations, 10-year periods, the year.",
+    tra_loi: "Each chart is a typical kind of Zi Wei Dou Shu chart, read in the order a reader usually follows: the Life Palace, its main stars, the triad and opposite palace, patterns, the Four Transformations, then the 10-year periods and the year. Every term comes with a plain-English explanation. This section has {so} charts.",
+  },
   "/tu-vi/co-thu": {
     ten: "Classical texts", h1: "Classical texts of Zi Wei Dou Shu",
     tieu_de_seo: "Classical texts of Zi Wei Dou Shu: Chinese, pinyin, meaning · Hieuban",
@@ -117,7 +123,7 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
     tra_loi_nhanh: {
       hoi: "What does this Zi Wei Dou Shu calculator give you?",
       dap: "Enter your birth date, time, sex and birthplace and you get a 12-palace Zi Wei Dou Shu chart set up by the Vietnamese lunar calendar, with a life reading area by area: character, work, money, love, health, your 10-year periods, this year and the next three months. The chart and the full reading are free, with no account needed.",
-      lien_ket: [{ href: "/en/zi-wei-dou-shu/stars", ten: "The 14 main stars" }, { href: "/en/zi-wei-dou-shu/palaces", ten: "The 12 palaces" }],
+      lien_ket: [{ href: "/en/zi-wei-dou-shu/stars", ten: "The 14 main stars" }, { href: "/en/zi-wei-dou-shu/sample-charts", ten: "How to read a chart" }],
     },
     gioi_thieu: {
       tieu_de: "About the Zi Wei Dou Shu calculator",
@@ -143,7 +149,7 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
     },
     kien_thuc: {
       tieu_de: "Learn Zi Wei Dou Shu",
-      cum: Object.fromEntries(["/tu-vi/chinh-tinh", "/tu-vi/cung", "/tu-vi/sao-o-cung", "/tu-vi/tu-hoa", "/tu-vi/co-thu"]
+      cum: Object.fromEntries(["/tu-vi/la-so-mau", "/tu-vi/chinh-tinh", "/tu-vi/cung", "/tu-vi/sao-o-cung", "/tu-vi/tu-hoa", "/tu-vi/co-thu"]
         .map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
     },
   },

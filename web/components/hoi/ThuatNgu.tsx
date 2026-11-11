@@ -7,6 +7,10 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useDuong } from "@/components/khung/NgonNgu";
+import { banAnh } from "@/lib/duong-en";
+
+/** EN-ALL: Từ điển chưa có bản Anh → bản Anh không trỏ sang trang tiếng Việt (link hiện lại khi /tu-dien mở bản Anh). */
+const coTuDien = (en: boolean) => !en || Boolean(banAnh("/tu-dien"));
 import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 
 export interface ThuatNgu {
@@ -44,7 +48,7 @@ function The({ t, children }: { t: ThuatNgu; children: ReactNode }) {
           <span className="block font-semibold text-gold">{t.ten}{t.han && <span className="ml-1.5 font-normal text-fg-faint" style={{ fontFamily: "var(--font-han), serif" }}>{t.han}</span>}</span>
           <span className="mt-1 block leading-relaxed">{t.de_hieu}</span>
           {t.vi_du && <span className="mt-1 block text-fg-muted">{`${hd.c("vi_du")} `}{t.vi_du}</span>}
-          <Link href={d(`/tu-dien#${t.ma}`)} className="mt-1.5 block text-xs text-gold underline">{hd.c("xem_tu_dien")}</Link>
+          {coTuDien(hd.en) && <Link href={d(`/tu-dien#${t.ma}`)} className="mt-1.5 block text-xs text-gold underline">{hd.c("xem_tu_dien")}</Link>}
         </span>
       )}
     </span>
@@ -108,7 +112,7 @@ export function KhungGiaiNghia({ ds, moSan = false }: { ds: ThuatNgu[] | undefin
             </dt>
             <dd className="leading-relaxed text-fg-muted">
               {t.de_hieu}{t.vi_du && <> <span className="text-fg-faint">{`${hd.c("vi_du")} `}{t.vi_du}</span></>}
-              {" "}<Link href={d(`/tu-dien#${t.ma}`)} className="text-xs text-gold underline">{hd.c("tu_dien")}</Link>
+              {coTuDien(hd.en) && <>{" "}<Link href={d(`/tu-dien#${t.ma}`)} className="text-xs text-gold underline">{hd.c("tu_dien")}</Link></>}
             </dd>
           </div>
         ))}

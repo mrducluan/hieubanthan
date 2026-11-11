@@ -479,6 +479,9 @@ export const CHU_TU_VI_UI = {
   "nt.khong_gio_2": m(NT, "an tạm theo giờ Ngọ (12:00)", "is set up for now at 12:00"),
   "nt.la_so_ban": m(NT, "· lá số của bạn", "· your chart"),
   "nt.goi_y": m(NT, "Lưu tối đa {so} người (cha mẹ, con, bạn bè) để xem nhanh lá số của họ. {cam_ket}", "Save up to {so} people (parents, children, friends) to see their charts quickly. {cam_ket}"),
+  // ---------------------------------------------------------------- lá số mẫu (app/tu-vi/la-so-mau/[slug]/DocLaSoMau.tsx)
+  "lsm.buoc": m(LS, "Bước này là gì? ", "What is this step? "),
+  "lsm.chan": m(LS, "Lá số Tử vi mẫu", "Sample Zi Wei Dou Shu chart"),
   // ---------------------------------------------------------------- 3 tháng tới (NhipBaThang.tsx)
   "nb.thang": m(NB, "Tháng {thang}", "Month {thang}"),
   "nb.nhuan": m(NB, " nhuận", " (leap)"),
