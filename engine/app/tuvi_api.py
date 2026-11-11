@@ -560,6 +560,8 @@ class HoiTVInput(BaseModel):
     # LG-ĐS: ý định web tìm được ở kho vectơ (tim_y_dinh_gan). Chỉ mã trong Y_DINH_CAU_HINH, chỉ áp khi từ khoá không
     # nhận ra; mã lạ bị bỏ qua (không lỗi). Không bao giờ vượt bộ chặn khủng hoảng / ngoài phạm vi.
     y_dinh_goi_y: str | None = Field(default=None, pattern=r"^[a-z_]{2,40}$")
+    # EN-ALL GĐ 4: lá số gửi kèm là của NGƯỜI THÂN (web: đang xem người thân) → lời ngôi thứ ba, dòng mở đầu nói rõ.
+    nguoi_than: bool = False
 
 
 @router.post("/hoi")
@@ -579,7 +581,7 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
                 "lá số có thể khác trang dùng quy ước khác."))})
     try:
         kq = hoidap_tv.tra_loi(inp.cau_hoi.strip(), inp.che_do, sinh=sinh, ngay_xem=inp.ngay_xem,
-                               y_dinh_goi_y=inp.y_dinh_goi_y)
+                               y_dinh_goi_y=inp.y_dinh_goi_y, nguoi_than=inp.nguoi_than)
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
     except ValueError as e:

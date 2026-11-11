@@ -357,6 +357,7 @@ export const HopThamInput = z.object({
     gender: z.enum(["nam", "nu"]).optional(),
     noi_sinh: z.string().regex(/^[a-z0-9_-]{2,40}$/).optional(),
     vung: z.enum(["north", "south"]).optional(),
+    mui_gio: z.string().regex(/^[A-Za-z][A-Za-z0-9_+\-\/]{1,63}$/).optional(),
   }),
   quan_he: z.enum(QUAN_HE_HOP_THAM).default("nguoi_yeu"),
 });

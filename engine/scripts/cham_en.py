@@ -233,7 +233,8 @@ def _nhan_tuvi(pl: dict) -> set[str]:
     loai, cung = pl.get("loai"), pl.get("cung") or []
     tu_cung = set().union(*(_TV_CUNG.get(c, set()) for c in cung)) if cung else set()
     if loai in _TV_KIEN_THUC:
-        return {"kien_thuc"}
+        # hỏi NGHĨA của hoá / sao đúng ở cung người hỏi nêu ("what does my hua ji in the siblings palace mean") → KB hoá × cung
+        return {"kien_thuc"} | ({"tu_hoa", "cung"} if loai == "tu_hoa_cung" else {"sao", "cung"} if loai == "sao_cung" else set())
     if loai == "la_so":
         return tu_cung | {"cung", "sao", "khac"} | ({"tu_hoa"} if pl.get("hoa") or "tu hoa" in (pl.get("cau_chuan_hoa") or "") else set())
     if loai == "han":
@@ -282,8 +283,7 @@ def cham_tuvi(holdout: bool = False, in_sai: bool = False) -> dict:
             else:
                 dem["chan_nham"] += xl in CHAN
                 nhan = _nhan_tuvi(pl)
-                ok = xl not in CHAN and (pl.get("loai") in _TV_KIEN_THUC if loai == "kien_thuc"
-                                         else pl.get("loai") not in _TV_KIEN_THUC and q["chu_de"] in nhan)
+                ok = xl not in CHAN and (pl.get("loai") in _TV_KIEN_THUC if loai == "kien_thuc" else q["chu_de"] in nhan)
                 if not ok:
                     sai_nhan[f"{loai}/{q['chu_de']}"] += 1
                 if q.get("moc") and loai == "ca_nhan":

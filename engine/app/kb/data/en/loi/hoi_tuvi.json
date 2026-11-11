@@ -252,5 +252,16 @@
  "tv_loi.mui_gio": "A birthplace time zone only applies when you were born outside Vietnam.",
  "tv_loi.vung": "The region you chose does not match your birthplace.",
  "tv_loi.mat_troi": "True solar time needs a birthplace with a known longitude (a Vietnamese province or a city in the list).",
- "tv_loi.truoc_1975": "Born before 13/06/1975: please give your region ('vung': north/south, by PLACE OF BIRTH), because the two halves of Vietnam used different time zones — otherwise even the day's stem and branch could be off."
+ "tv_loi.truoc_1975": "Born before 13/06/1975: please give your region ('vung': north/south, by PLACE OF BIRTH), because the two halves of Vietnam used different time zones — otherwise even the day's stem and branch could be off.",
+ "hoi.tq.tv.ban_cung.nt": "The {cung} on this chart",
+ "hoi.tq.tv.sao_sang.nt": "How bright the main stars in the {cung} are",
+ "hoi.tq.giai_doan.nt": "Which stage this person is in",
+ "hoi.tq.tv.cach_cuc.nt": "Chart patterns in this chart",
+ "hoi.tq.tv.bay.nt": "Transformation flights on this chart",
+ "hoi.tv.tuoi.nt": "Age of the chart's owner at the time of reading (counted the Vietnamese way, from 1 at birth): {t}.",
+ "hoi.tv.sc.la_so.nt": "In this chart, {sao} sits in the {cung}",
+ "hoi.tv.cth.nt": "What is being asked about belongs to the area of {mang} ({cung}); in the birth chart this palace holds: {ct}.",
+ "hoi.tv.vo.menh.nt": "This person is not easily boxed in: their personality shifts with where they live and who they meet.",
+ "hoi.tv.ban_bh.nt": "This person: {bh}.",
+ "hoi.tv.nt.dau": "This is the chart of the family member you are viewing: wherever the reading below says “you” or “your”, it means that person, not you."
 }

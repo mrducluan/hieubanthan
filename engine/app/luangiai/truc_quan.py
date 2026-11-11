@@ -156,6 +156,17 @@ def _slug(s: str) -> str:
 
 # EN-ALL GĐ 4: tên riêng Tử vi trong chữ hiển thị của khối hình (bản Việt: nguyên chữ). Trường MÃ của bàn 12 cung (`nhan`,
 # `chi`, `sao`, `chi_hoi`, `bay`) giữ chữ Việt — web đặt cung theo mã, tên hiển thị đi qua `ten_hien` (kb/ten.KHOA_MA).
+import contextvars as _cv
+
+# Hỏi đáp trên lá số NGƯỜI THÂN (web gửi `nguoi_than`): lời của hệ thống nói ngôi thứ ba ("lá số này", "người này").
+NGUOI_THAN: _cv.ContextVar[bool] = _cv.ContextVar("tv_nguoi_than", default=False)
+
+
+def L3(ma: str, vi: str, vi_nt: str, **kw) -> str:
+    """Mẫu câu có bản ngôi thứ ba (mã `<ma>.nt`) khi đang xem lá số người thân."""
+    return L(f"{ma}.nt", vi_nt, **kw) if NGUOI_THAN.get() else L(ma, vi, **kw)
+
+
 def _tv_cung(x: str) -> str:
     from app.kb import ten as _ten  # noqa: PLC0415
     return _ten.ten("cung", x)
@@ -211,7 +222,7 @@ def _ban_cung(goi: dict, ls: dict | None, cung: str | None = None) -> dict | Non
         muc.append({"chi": c["chi"], "nhan": c["ten"], "vai": vai,
                     "sao": [s["ten"] for s in c.get("chinh_tinh", [])][:2],
                     "sac": {"hoi": "chinh", "tam_hop": "hop", "xung": "trung"}.get(vai, "nhat")})
-    return {"kieu": "cung", "tieu_de": L("hoi.tq.tv.ban_cung", "Cung {cung} trên lá số của bạn", cung=_tv_cung(cung_hoi)),
+    return {"kieu": "cung", "tieu_de": L3("hoi.tq.tv.ban_cung", "Cung {cung} trên lá số của bạn", "Cung {cung} trên lá số này", cung=_tv_cung(cung_hoi)),
             "chi_hoi": goc["chi"], "muc": muc, "cau_chuan": cau_hien(HOI_CUNG.get(cung_hoi)),
             "ghi_chu": L("hoi.tq.tv.ban_cung_gc", "Cung sáng là cung câu hỏi nhắc tới. {hop} cùng một tam giác đỡ cho nó; "
                          "{xung} nằm đối diện, chiếu sang.", hop=_tv_va().join(_tv_cung(x) for x in hop), xung=_tv_cung(xung))
@@ -241,7 +252,8 @@ def tuvi(goi: dict, ls: dict | None = None) -> list[dict]:
         ds.append(b)
     sao = [m for m in muc if m["loai"] == "sao_cung" and m.get("vai") == "la_so" and m.get("do_sang") in _VI_TRI_SANG]
     if sao:
-        ds.append({"kieu": "thang", "tieu_de": L("hoi.tq.tv.sao_sang", "Sao chính ở cung {cung} sáng tới đâu",
+        ds.append({"kieu": "thang", "tieu_de": L3("hoi.tq.tv.sao_sang", "Sao chính ở cung {cung} sáng tới đâu",
+                                                  "Sao chính ở cung {cung} sáng tới đâu",
                                                  cung=_tv_cung(sao[0]["cung"])),
                    "nac": [L(f"hoi.tq.tv.nac.{i}", x) for i, x in enumerate(NAC_DO_SANG)],
                    "cau_chuan": cau_hien(HOI_CUNG.get(sao[0]["cung"])),
@@ -269,9 +281,10 @@ def tuvi(goi: dict, ls: dict | None = None) -> list[dict]:
         nam = L("hoi.tq.nam_x", "Năm {nam}", nam=tuoi["ngay_xem"][:4]) if tuoi else L("hoi.tq.tv.nam_nay", "Năm nay")
         o.append({"nhan": nam, "gia_tri": _tv_cung(h["cung_goc"]), "chu_thich": _bo_dau_de(h.get("chu_de")), "sac": "hop"})
     if o:
-        ds.append({"kieu": "o", "tieu_de": L("hoi.tq.giai_doan", "Bạn đang ở giai đoạn nào"), "muc": o})
+        ds.append({"kieu": "o", "tieu_de": L3("hoi.tq.giai_doan", "Bạn đang ở giai đoạn nào", "Người này đang ở giai đoạn nào"),
+                   "muc": o})
     if cc:
-        ds.append({"kieu": "o", "tieu_de": L("hoi.tq.tv.cach_cuc", "Cách cục trên lá số của bạn"),
+        ds.append({"kieu": "o", "tieu_de": L3("hoi.tq.tv.cach_cuc", "Cách cục trên lá số của bạn", "Cách cục trên lá số này"),
                    "muc": [{"nhan": L("hoi.tq.tv.cach_cuc_nhan", "Cách cục"), "gia_tri": m["ten"], "chu_thich": (m.get("y") or "").split(":")[0],
                             "sac": "chinh" if i == 0 else "trung"} for i, m in enumerate(cc[:3])]})
     if (mm := _muc_mang(goi)):
@@ -315,7 +328,7 @@ def _ban_bay(goi: dict, ls: dict | None) -> dict | None:
         m = {"chi": c["chi"], "nhan": c["ten"], "vai": vai, "sao": [s["ten"] for s in c.get("chinh_tinh", [])][:2],
              "sac": {"hoi": "chinh", "nguon": "hop"}.get(vai, "nhat")}
         muc.append(m)
-    k = {"kieu": "cung", "tieu_de": L("hoi.tq.tv.bay", "Đường bay tứ hoá trên lá số của bạn"), "chi_hoi": chi["Mệnh"], "muc": muc,
+    k = {"kieu": "cung", "tieu_de": L3("hoi.tq.tv.bay", "Đường bay tứ hoá trên lá số của bạn", "Đường bay tứ hoá trên lá số này"), "chi_hoi": chi["Mệnh"], "muc": muc,
          "bay": [{"tu": t, "den": d, "hoa": h} for (t, d), h in duong.items()],
          "ghi_chu": L("hoi.tq.tv.bay_gc", "Mũi tên: cung nào gửi Lộc, Quyền, Khoa hay Kỵ vào Mệnh; vòng tròn: cung tự hoá (tự gửi cho "
                       "chính nó).")}

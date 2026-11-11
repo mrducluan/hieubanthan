@@ -187,6 +187,9 @@ test.describe("/en/zi-wei-dou-shu trên trình duyệt", () => {
     await expect(ls).toBeVisible({ timeout: 40_000 });
     const chuLs = (await ls.textContent()) ?? "";
     expect(chuLs).toContain("ZI WEI DOU SHU");
+    // Chú giải chữ viết tắt độ sáng (chữ đầu pinyin, không trùng nhau) có ngay trên lá số bản Anh
+    expect(chuLs).toContain("M temple · W prosperous · D favourable · L beneficial");
+    expect(chuLs).not.toMatch(/\((T|F|N|U)\)/);
     expect(chuLs).toMatch(/LIFE\d|LIFE ·/);
     expect(chuLs.replaceAll(TEN, "")).not.toMatch(VIET);
     // Giao diện Giấy cổ cũng nhãn Anh
@@ -226,8 +229,12 @@ test.describe("/en/zi-wei-dou-shu trên trình duyệt", () => {
     await expect(tq).toBeVisible({ timeout: 30_000 });
     await expect(tq).toContainText("Life Palace");
     expect((await tl.innerText()).split("\n").filter((l) => VIET.test(l))).toEqual([]);
-    const ariaTq = await tq.locator("[aria-label]").evaluateAll((els) => els.map((e) => e.getAttribute("aria-label") ?? ""));
-    expect(ariaTq.filter((x) => VIET.test(x))).toEqual([]);
+    // Mọi [aria-label] / [title] trong cả khung hỏi đáp (chữ gạch xanh trỏ về hình, ô bàn cung, nút…) — không chữ Việt.
+    const khungHoi = page.locator('section[aria-label="Ask about Zi Wei Dou Shu"]');
+    const ariaHoi = await khungHoi.locator("[aria-label], [title]").evaluateAll((els) =>
+      els.flatMap((e) => [e.getAttribute("aria-label") ?? "", e.getAttribute("title") ?? ""]));
+    expect(ariaHoi.filter((x) => VIET.test(x))).toEqual([]);
+    await expect(tq.getByText(/^(Lu|Quan|Ke|Ji|triad)$/).first()).toBeAttached();
     await expect(tl.getByTestId("luoi-an-toan")).toContainText("988");
 
     for (const w of [390, 1280]) {

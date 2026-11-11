@@ -14,6 +14,7 @@ import { NutChiaSeHai } from "@/components/chia-se/NutChiaSeHai";
 import { NhanLop } from "@/components/huyen-hoc/KhoiMoLuoi";
 import { HopNoiBat, KiemChungBai } from "@/components/luan-giai/HopNoiBat";
 import { ChonTuNguoiThan, LuuSauHopTham } from "@/components/huyen-hoc/NguoiThan";
+import { ChonNuocThanhPho } from "@/components/hoso/ChonNuocThanhPho";
 import { MAU_HOA_DIU } from "@/components/huyen-hoc/PhiHoa";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
@@ -43,6 +44,7 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
   const [gio, setGio] = useState("");
   const [gioiTinh, setGioiTinh] = useState("");
   const [noiSinh, setNoiSinh] = useState("");
+  const [muiGio, setMuiGio] = useState("");
   const [vung, setVung] = useState("");
   const [kq, setKq] = useState<HopThamOutputT | null>(null);
   // TCS-1: giữ đúng yêu cầu vừa xem (chỉ trong bộ nhớ trang) để máy chủ chấm lại khi tạo thẻ điểm chia sẻ.
@@ -76,6 +78,7 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
           ...(gio ? { birth_time: gio } : {}),
           ...(gioiTinh === "nam" || gioiTinh === "nu" ? { gender: gioiTinh } : {}),
           ...(noiSinh ? { noi_sinh: noiSinh } : {}),
+          ...(noiSinh === NUOC_NGOAI && muiGio ? { mui_gio: muiGio } : {}),
           ...(canVung && (vung === "north" || vung === "south") ? { vung } : {}),
         },
       };
@@ -87,6 +90,7 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
         ...(gio ? { gio, do_tin_gio: "exact" as const } : {}),
         ...(gioiTinh === "nam" || gioiTinh === "nu" ? { gioi_tinh: gioiTinh } : {}),
         ...(noiSinh ? { noi_sinh: noiSinh } : {}),
+        ...(noiSinh === NUOC_NGOAI && muiGio ? { mui_gio: muiGio } : {}),
         ...(canVung && (vung === "north" || vung === "south") ? { vung } : {}),
       });
       // Đo: chỉ mã (quan hệ, mức điểm) — không ngày sinh, không điểm số cá nhân.
@@ -102,7 +106,7 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
   const dienTu = (nt: NguoiThan) => {
     setQuanHe(nt.quan_he); setLich(nt.lich_nhap);
     setNgay(String(nt.ngay)); setThang(String(nt.thang)); setNam(String(nt.nam)); setNhuan(Boolean(nt.am_nhuan));
-    setGio(nt.do_tin_gio === "unknown" ? "" : nt.gio ?? ""); setGioiTinh(nt.gioi_tinh ?? ""); setNoiSinh(nt.noi_sinh ?? ""); setVung(nt.vung ?? "");
+    setGio(nt.do_tin_gio === "unknown" ? "" : nt.gio ?? ""); setGioiTinh(nt.gioi_tinh ?? ""); setNoiSinh(nt.noi_sinh ?? ""); setVung(nt.vung ?? ""); setMuiGio(nt.mui_gio ?? "");
     setLoi(null);
   };
 
@@ -179,6 +183,7 @@ export function HopThamTuVi({ laSo, onHoi }: { laSo: ChartInputVao; onHoi: (cau:
             </Select>
             {loiTinh && <button type="button" onClick={taiLaiTinh} className="text-xs text-cinnabar underline">{loiTinh} {c("f.thu_lai")}</button>}
           </div>
+          {noiSinh === NUOC_NGOAI && <div className="sm:col-span-3"><ChonNuocThanhPho id="ht" giaTri={muiGio} doi={setMuiGio} /></div>}
           {canVung && (
             <div className="space-y-2 sm:col-span-3">
               <Label htmlFor="ht-vung">{c("f.vung")}</Label>

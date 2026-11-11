@@ -57,7 +57,7 @@ export const CHU_TU_VI_UI = {
   "khoi.dinh_gio.tieu_de": m(T, "Định giờ sinh", "Find your birth hour"),
   "khoi.dinh_gio.mo_ta_khong": m(T, "Chưa biết giờ sinh? Đối chiếu đủ 12 canh giờ với những năm bạn nhớ rõ.", "Don't know your birth time? Compare all 12 two-hour periods with years you remember clearly."),
   "khoi.dinh_gio.mo_ta": m(T, "Không chắc giờ sinh? So lá số giờ trước, giờ đã nhập và giờ sau với những năm bạn nhớ rõ.", "Not sure of your birth time? Compare the chart for the hour before, the hour you entered and the hour after with years you remember clearly."),
-  "khoi.hop_tham.tieu_de": m(T, "Xem lá số 2 người", "Two people's charts"),
+  "khoi.hop_tham.tieu_de": m(T, "Xem lá số 2 người", "Compare two charts"),
   "khoi.hop_tham.mo_ta": m(T, "Điểm tham khảo hợp – khắc theo mệnh, can chi, cung phi và tứ hoá Tử vi — kèm cách dung hoà.", "A reference score for how two charts match and clash, by year element, stems and branches, Kua and the Four Transformations — with ways to get along."),
   "luan_giai.ten": m(T, "lá số Tử vi", "Zi Wei Dou Shu chart"),
   "luan_giai.cau_hoi": m(T, "Lá số và phần luận giải có giúp bạn hiểu mình hơn?", "Did the chart and the reading help you understand yourself better?"),

@@ -520,6 +520,9 @@ _TV_GIA: list[tuple[str, str]] = [
 ]
 
 
+_TV_CO_MOC = re.compile(r"\b(?:19|20)\d\d\b|\b(?:this|next|last|coming) (?:year|month|decade)\b|\bnow\b|\bcurrent\b|\byear of the\b")
+
+
 def _tuvi(cau: str, t: str) -> str:
     ra: list[str] = []
     ca_nhan = bool(_CA_NHAN.search(t)) or bool(re.search(r"\b(?:we|our|us)\b", t)) or bool(re.search(
@@ -535,6 +538,15 @@ def _tuvi(cau: str, t: str) -> str:
     kn = _tv_thay(t, _TV_KHAI_NIEM)
     han = _tv_thay(t, _TV_HAN)
     hoi = _HOI.search(t) or re.search(r"\bmeaning\b|\bwhat about\b|\bwho\b", t)
+    # 0a. "What does Hua Ji in my Wealth Palace mean" — hỏi NGHĨA của một hoá ở một cung (KB tứ hoá × cung), không phải đọc
+    #     cả cung trên lá số
+    if hoa and cung and not han and not _TV_CO_MOC.search(t) and re.search(r"\b(?:mean|means|meaning|what does|what is|explain|signify)\b", t) \
+            and not re.search(r"\b(?:where|which palace|year|month|decade|period)\b", t):
+        return " ".join(hoa[:1]) + " o " + cung[0] + " y nghia"
+    # 0b. "Is Tai Yin fallen in my chart" — hỏi độ sáng của một sao trên lá số → dò vị trí sao (kèm độ sáng, đồng cung)
+    if sao and ca_nhan and not cung and not han and not _TV_CO_MOC.search(t) and re.search(r"\b(?:fallen|bright|brightness|dim|dark|temple|exalted|prosperous|strong|weak|"
+                                                  r"well placed|badly placed|position|placed)\b", t):
+        return " ".join(sao[:2]) + " o cung nao cua toi"
     # 1. câu KIẾN THỨC (không "my / me / I"): khái niệm → cụm giải thích KB; sao / cung / hoá → "… la gi"; còn lại → cụm
     #    kiến thức chung + câu gốc (từ điển thuật ngữ bản tiếng Anh nhận "Hua Ji", "Life Palace"…)
     if not ca_nhan and hoi and not _ve_nguoi_khac(t) and not _hop_nhau(t):
@@ -596,7 +608,8 @@ def _tuvi(cau: str, t: str) -> str:
         ra.append("tong quan la so")
     elif re.search(r"\boverall\b|\bbig picture\b|\bin general\b|\bsummari[sz]e\b|\bgood and bad\b|\bwhat (?:does|will) .{0,15}look like\b|"
                  r"\bhow s .{0,15}looking\b|\bhow is .{0,15}looking\b|\bfocus on\b", t):
-        ra.append("tong quan nam nay" if not han else "tong quan")
+        ra.append("tong quan nam nay" if not han and not re.search(r"\bnext year|\b(?:19|20)\d\d\b|\byear of the\b", t)
+                  else "tong quan")
     # 4. tên cung / sao / hoá / khái niệm nêu trong câu
     ra += cung + sao + hoa
     if "phi hoa" in kn:
@@ -749,16 +762,59 @@ def _tu_dien_tuvi(cau: str) -> list[str]:
 
 
 _CO_DAU_VIET = re.compile(r"[ăâđêôơưàáảãạằắẳẵặầấẩẫậèéẻẽẹềếểễệìíỉĩịòóỏõọồốổỗộờớởỡợùúủũụừứửữựỳýỷỹỵ]", re.I)
+_TU_VIET = {"toi", "cua", "khong", "ko", "minh", "nen", "gi", "nao", "duoc", "dang", "thi", "nhu", "nguoi", "chong", "viec",
+            "tien", "nhieu", "qua", "lam", "vo", "cung", "nam", "thang", "bao", "gio", "voi", "cho", "va", "se", "sau", "nay",
+            "ve", "rat", "hay", "tuoi", "vi", "la", "co"}
+_TU_ANH_GLOSS = re.compile(r"\b(?:i|i m|im|you|your|my|me|is|are|was|will|would|should|could|what|why|when|where|which|how|does|do|"
+                           r"the|and|in|of|to|for|with|about|this|that|year|chart|palace|star|good|bad|have|has)\b")
+
+
+def la_cau_viet(cau: str) -> bool:
+    """Câu gõ tiếng Việt (có dấu, hoặc không dấu mà toàn từ Việt) — người dùng bản Anh vẫn có thể gõ tiếng Việt; khi đó
+    bộ phân loại đọc thẳng câu gốc như bản Việt (không dịch ý theo luật tiếng Anh)."""
+    import unicodedata  # noqa: PLC0415
+    khong_dau = "".join(c for c in unicodedata.normalize("NFD", (cau or "").replace("đ", "d").replace("Đ", "D"))
+                        if unicodedata.category(c) != "Mn")
+    t = chuan(khong_dau)
+    anh = len(set(_TU_ANH_GLOSS.findall(t)))
+    if _CO_DAU_VIET.search(cau or ""):
+        return anh < 2
+    tu = t.split()
+    vi = sum(w in _TU_VIET for w in tu)
+    return bool(tu) and vi >= max(3, len(tu) // 3) and anh <= vi // 4
+
+
+# GĐ 4 (Tử vi): câu chữ Hán (giản thể / phồn thể) vào bản Anh — vài thuật ngữ phổ thông → cụm không dấu; câu chữ Hán coi là
+# câu về chính người hỏi (trừ câu hỏi định nghĩa "是什么").
+_TV_CHU_HAN: list[tuple[str, str]] = [
+    (r"财运|財運|财帛|財帛|钱财|錢財|赚钱|賺錢|金钱|金錢|财富|財富", "tien bac"), (r"事业|事業|工作|职业|職業|官禄|官祿", "cong viec"),
+    (r"感情|婚姻|桃花|恋爱|戀愛|夫妻|姻缘|姻緣", "tinh duyen"), (r"健康|疾厄|身体|身體", "suc khoe"), (r"子女|孩子|小孩", "con cai"),
+    (r"父母", "cha me"), (r"兄弟", "anh chi em"), (r"田宅|房子|买房|買房|房产|房產", "nha cua"), (r"迁移|遷移|出国|出國|搬家", "di xa"),
+    (r"朋友|交友|仆役|僕役", "ban be"), (r"性格|个性|個性|命宫|命宮", "cung menh"), (r"福德", "phuc duc"),
+    (r"流年", "luu nien"), (r"大限|大运|大運", "dai han"), (r"流月", "luu nguyet"), (r"化忌", "hoa ky"), (r"化禄|化祿", "hoa loc"),
+    (r"今年", "nam nay"), (r"明年", "nam sau"), (r"下个月|下個月", "thang sau"), (r"这个月|這個月|本月", "thang nay"),
+]
+_CJK = re.compile(r"[\u4e00-\u9fff]")
+
+
+def _tuvi_han(cau: str) -> str:
+    ra = [vn for mau, vn in _TV_CHU_HAN if re.search(mau, cau)]
+    ra += [f"nam {y}" for y in re.findall(r"(?<!\d)((?:19|20)\d\d)(?!\d)", cau)]
+    if not re.search(r"是什么|是什麼|什么意思|什麼意思", cau):
+        ra.append("cua toi")
+    return " ".join(dict.fromkeys(ra))
 
 
 def gloss(cau: str, mang: str) -> str:
     """Câu tiếng Anh → cụm từ khoá tiếng Việt không dấu cho `phan_loai` của mảng. Không khớp gì → chuỗi rỗng.
     Câu gõ tiếng Việt có dấu (người dùng bản Anh vẫn gõ tiếng Việt) → chuỗi rỗng: bộ phân loại đọc thẳng câu gốc."""
-    if _CO_DAU_VIET.search(cau or ""):
+    if la_cau_viet(cau):
         return ""
     t = chuan(cau)
     if mang == "battu":
         return _battu(cau, t)
     if mang == "tuvi":
+        if _CJK.search(cau or "") and len(_CJK.findall(cau)) >= 2:
+            return _tuvi_han(cau)
         return _tuvi(cau, t)
     return ""

@@ -79,7 +79,7 @@ export function ldToChuc(ngonNgu: "vi" | "en" = "vi") {
     "@type": "Organization",
     "@id": `${siteUrl()}/#to-chuc`,
     name: en ? "Hieuban" : TEN_SITE,   // EN-ALL (chủ dự án chốt 2026-11-10): thương hiệu bản Anh là "Hieuban"
-    alternateName: en ? [TEN_SITE, "hieuban.com", "Hieu Ban Than"] : ["hieuban.com", "Hieuban", "Hieu Ban Than"],
+    alternateName: en ? ["hieuban.com", "Hieu Ban Than"] : ["hieuban.com", "Hieuban", "Hieu Ban Than"],
     ...(vh.chuSoHuu ? { legalName: vh.chuSoHuu } : {}),
     url: siteUrl(),
     logo: { "@type": "ImageObject", url: urlDayDu("/thuong-hieu/avatar-512.png"), width: 512, height: 512 },
@@ -91,8 +91,15 @@ export function ldToChuc(ngonNgu: "vi" | "en" = "vi") {
     ...(vh.diaChi ? { address: vh.diaChi } : {}),
     ...(vh.mangXaHoi.length ? { sameAs: vh.mangXaHoi.map((m) => m.url) } : {}),
     // EEAT-1: người sáng lập / chủ biên (Person đầy đủ ở /tac-gia/duc-luan).
-    founder: { "@type": "Person", "@id": `${siteUrl()}/tac-gia/duc-luan#nguoi`, name: "Đức Luân", url: urlDayDu("/tac-gia/duc-luan") },
-    knowsAbout: [
+    founder: { "@type": "Person", "@id": `${siteUrl()}/tac-gia/duc-luan#nguoi`, name: en ? "Duc Luan" : "Đức Luân", url: urlDayDu("/tac-gia/duc-luan") },
+    // EN-ALL GĐ 4: bản Anh không mang chữ Việt trong JSON-LD — tên thực thể tiếng Anh, chỉ nguồn không phải Wikipedia tiếng Việt.
+    knowsAbout: en ? [
+      ...(["than-so", "tu-vi", "bat-tu", "kinh-dich", "phong-thuy", "lich"] as const).map((m) => {
+        const t = THUC_THE[m];
+        return { "@type": "Thing", name: t.alternateName, sameAs: t.sameAs.filter((u) => !u.includes("vi.wikipedia.org")) };
+      }),
+      "Pythagorean numerology", "Chaldean numerology", "Eight Mansions feng shui", "Flying Star feng shui", "Auspicious date selection",
+    ] : [
       ...(["than-so", "tu-vi", "bat-tu", "kinh-dich", "phong-thuy", "lich"] as const).map((m) => ldThucThe(m)),
       "Thần số học Pythagoras", "Thần số học Chaldea", "Phong thuỷ Bát trạch", "Huyền Không phi tinh", "Xem ngày tốt", "Tuổi làm nhà",
     ],
@@ -105,10 +112,10 @@ export function ldWebsite(ngonNgu: "vi" | "en" = "vi") {
   return {
     "@type": "WebSite",
     "@id": `${siteUrl()}/#website`,
-    name: TEN_SITE,
+    name: ngonNgu === "en" ? "Hieuban" : TEN_SITE,
     // SEO-N: người dùng gõ "hieuban" (không dấu, liền) → khai đủ biến thể để Google nối tên miền với thương hiệu.
-    alternateName: ["hieuban.com", "Hieuban", "Hieu Ban Than", "Hiểu Bản"],
-    keywords: TU_KHOA_SITE.join(", "),
+    alternateName: ngonNgu === "en" ? ["hieuban.com", "Hieu Ban Than"] : ["hieuban.com", "Hieuban", "Hieu Ban Than", "Hiểu Bản"],
+    ...(ngonNgu === "en" ? {} : { keywords: TU_KHOA_SITE.join(", ") }),
     url: siteUrl(),
     // QTE: site có hai bản ngôn ngữ; trang /en khai cả hai (bản Việt là chính).
     inLanguage: ngonNgu === "en" ? ["vi-VN", "en"] : "vi-VN",

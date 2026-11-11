@@ -393,7 +393,7 @@ def test_thai_san_theo_ban_viet(cau, ky_vong):
 
 
 # ---- EN-ALL GĐ 4 — review độc lập (hỏi đáp Tử vi tiếng Anh): mỗi câu là một lỗi review đã sửa, khoá lại ở đây.
-def _xu_ly_en(cau: str, mo_dun: str = "tuvi") -> str:
+def _xu_ly_en_gd4(cau: str, mo_dun: str = "tuvi") -> str:
     import importlib
     from app import ngon_ngu
     tk = ngon_ngu.HIEN_TAI.set("en")
@@ -430,13 +430,13 @@ GD4_KHONG_CAP_CUU = [  # nguy cơ / chuyện đã qua / nghĩa bóng — không 
 @pytest.mark.parametrize("mo_dun", ["tuvi", "battu"])
 @pytest.mark.parametrize("cau", GD4_PHU_DINH_GIA)
 def test_gd4_phu_dinh_gia_van_khung_hoang(cau, mo_dun):
-    assert _xu_ly_en(cau, mo_dun) == "an_toan", cau
+    assert _xu_ly_en_gd4(cau, mo_dun) == "an_toan", cau
 
 
 @pytest.mark.parametrize("mo_dun", ["tuvi", "battu"])
 @pytest.mark.parametrize("cau", GD4_THUONG)
 def test_gd4_cau_thuong_khong_chan(cau, mo_dun):
-    assert _xu_ly_en(cau, mo_dun) not in ("an_toan", "tu_choi_nhe", "dan_huong"), cau
+    assert _xu_ly_en_gd4(cau, mo_dun) not in ("an_toan", "tu_choi_nhe", "dan_huong"), cau
 
 
 @pytest.mark.parametrize("cau", GD4_KHONG_CAP_CUU)
@@ -452,7 +452,7 @@ def test_gd4_khong_phai_cap_cuu(cau):
 def test_gd4_nguy_co_benh_tim_la_hoi_benh():
     """Hỏi nguy cơ đau tim theo lá số → từ chối đoán bệnh (nhóm hoi_benh) như bản Việt, không phải cấp cứu."""
     from app import ngon_ngu
-    assert _xu_ly_en("Will I have a heart attack someday according to my chart?") == "tu_choi_nhe"
+    assert _xu_ly_en_gd4("Will I have a heart attack someday according to my chart?") == "tu_choi_nhe"
     tk = ngon_ngu.HIEN_TAI.set("en")
     try:
         assert at.nhom_suc_khoe("Will I have a heart attack someday according to my chart?") == "hoi_benh"
