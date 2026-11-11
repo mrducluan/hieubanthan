@@ -58,7 +58,7 @@ export default function Page() {
         <p className="mt-3 text-fg-muted">People who like a structured way to think about themselves or a decision — and who want to see the reasoning, not just a verdict. If you are in crisis, these pages will point you to real help instead of a reading. If your question is medical, legal or financial, the reading will say so and send you to a professional.</p>
         <dl className="mt-4 space-y-3 text-fg-muted">
           <div><dt className="font-medium text-fg">Is any of this a prediction?</dt><dd className="mt-1">No. Numbers describe tendencies to test against your own life; cards describe the situation you asked about and suggest a next step. Neither tells you what will happen on a date.</dd></div>
-          <div><dt className="font-medium text-fg">Why is the Vietnamese site so much bigger?</dt><dd className="mt-1">Hieuban started in Vietnam, where Vietnamese astrology (Tử vi), Four Pillars, I Ching and feng shui are everyday references. The English edition opens with the two systems that translate cleanly; the rest stays in Vietnamese for now.</dd></div>
+          <div><dt className="font-medium text-fg">Why is the Vietnamese site so much bigger?</dt><dd className="mt-1">Hieuban started in Vietnam, where Vietnamese astrology (Tu Vi), Four Pillars, I Ching and feng shui are everyday references. The English edition opens with numerology, tarot and BaZi; the rest stays in Vietnamese for now.</dd></div>
           <div><dt className="font-medium text-fg">Does it cost anything?</dt><dd className="mt-1">Everything on the English pages is free and needs no account. Your name and date of birth stay in your browser.</dd></div>
         </dl>
       </section>

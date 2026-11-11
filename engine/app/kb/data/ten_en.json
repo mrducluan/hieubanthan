@@ -145,11 +145,11 @@
  },
  "battu": {
   "thap_than": {
-   "Tỷ Kiên": {"en": "Friend", "han": "比肩", "nghia": "Companion / same element"}, "Kiếp Tài": {"en": "Rob Wealth", "han": "劫財"},
-   "Thực Thần": {"en": "Eating God", "han": "食神"}, "Thương Quan": {"en": "Hurting Officer", "han": "傷官"},
-   "Thiên Tài": {"en": "Indirect Wealth", "han": "偏財"}, "Chính Tài": {"en": "Direct Wealth", "han": "正財"},
-   "Thất Sát": {"en": "Seven Killings", "han": "七殺"}, "Chính Quan": {"en": "Direct Officer", "han": "正官"},
-   "Thiên Ấn": {"en": "Indirect Resource", "han": "偏印"}, "Chính Ấn": {"en": "Direct Resource", "han": "正印"}, "Nhật chủ": {"en": "Day Master", "han": "日主"}
+   "Tỷ Kiên": {"en": "Friend", "pinyin": "Bi Jian", "han": "比肩", "nghia": "Companion / same element"}, "Kiếp Tài": {"en": "Rob Wealth", "pinyin": "Jie Cai", "han": "劫財"},
+   "Thực Thần": {"en": "Eating God", "pinyin": "Shi Shen", "han": "食神"}, "Thương Quan": {"en": "Hurting Officer", "pinyin": "Shang Guan", "han": "傷官"},
+   "Thiên Tài": {"en": "Indirect Wealth", "pinyin": "Pian Cai", "han": "偏財"}, "Chính Tài": {"en": "Direct Wealth", "pinyin": "Zheng Cai", "han": "正財"},
+   "Thất Sát": {"en": "Seven Killings", "pinyin": "Qi Sha", "han": "七殺"}, "Chính Quan": {"en": "Direct Officer", "pinyin": "Zheng Guan", "han": "正官"},
+   "Thiên Ấn": {"en": "Indirect Resource", "pinyin": "Pian Yin", "han": "偏印"}, "Chính Ấn": {"en": "Direct Resource", "pinyin": "Zheng Yin", "han": "正印"}, "Nhật chủ": {"en": "Day Master", "han": "日主"}
   },
   "tru": {"năm": {"en": "Year Pillar"}, "tháng": {"en": "Month Pillar"}, "ngày": {"en": "Day Pillar"}, "giờ": {"en": "Hour Pillar"}},
   "than_sat": {

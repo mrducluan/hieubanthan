@@ -8,9 +8,12 @@ import { duongQr, maHoaQr, type MaQr } from "@/lib/qr";
 import { GOC_QR, TEN_MIEN } from "@/lib/the-chia-se";
 import { linkQrManHinh } from "@/lib/ma-man-hinh";
 import { cn } from "@/lib/utils";
+import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
 
-export function ChanQr({ duong, nhan = "Quét để mở trang này", className }: { duong?: string; nhan?: string; className?: string }) {
+export function ChanQr({ duong, nhan: nhanVao, className }: { duong?: string; nhan?: string; className?: string }) {
   const hienTai = usePathname();
+  const { c } = useChuGiaoDien();
+  const nhan = nhanVao ?? c("qr.mac_dinh");
   const d = duong ?? hienTai ?? "/";
   const qr = useMemo<MaQr | null>(() => { try { return maHoaQr(linkQrManHinh(GOC_QR, d)); } catch { return null; } }, [d]);
   if (!qr) return null;
@@ -22,7 +25,7 @@ export function ChanQr({ duong, nhan = "Quét để mở trang này", className 
         <p className="text-[0.7rem] text-gold">{nhan}</p>
       </div>
       <svg viewBox={`0 0 ${n} ${n}`} width={n * 2} height={n * 2} shapeRendering="crispEdges" role="img"
-        aria-label={`Mã QR mở ${TEN_MIEN}${d}`} className="shrink-0 rounded-md">
+        aria-label={c("qr.aria", { url: `${TEN_MIEN}${d}` })} className="shrink-0 rounded-md">
         <rect width={n} height={n} fill="#f4efe2" />
         <path d={duongQr(qr, 4)} fill="#0a0a17" />
       </svg>

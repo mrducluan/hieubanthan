@@ -23,3 +23,10 @@ export function maNgonNguTrang(): string {
   const l = (document.documentElement.lang || "").toLowerCase();
   return LA_MA_EN.test(l) ? l : "vi";
 }
+
+/** EN-ALL GĐ 3d — route GET có đệm gọi từ trình duyệt ở trang Anh được rewrite: gắn `?ngon_ngu=<mã>` (đệm CDN khoá theo
+ *  URL, `engineTheoReq` đọc query này). Trang Việt → URL giữ nguyên. */
+export function urlTheoNgonNgu(url: string): string {
+  const nn = maNgonNguTrang();
+  return nn === "vi" ? url : `${url}${url.includes("?") ? "&" : "?"}ngon_ngu=${nn}`;
+}

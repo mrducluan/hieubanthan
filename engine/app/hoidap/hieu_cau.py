@@ -7,6 +7,7 @@ from __future__ import annotations
 import datetime as dt
 import re
 
+from app.kb.loi import L
 from app.luangiai.hoi import _co
 
 KIEN_THUC = [r"(la|co nghia la|nghia la|y nghia la) gi", r"y nghia (la )?gi", r"khac (nhau|gi nhau|gi|cho nao|o dau)",
@@ -167,9 +168,10 @@ def muc_tu_dien(ma: list[str]) -> list[dict]:
     for m in (theo_ma[x] for x in ma if x in theo_ma):
         nd = (m.get("de_hieu") or "").strip()
         if m.get("vi_du"):
-            nd += f" Ví dụ: {m['vi_du'].strip()}"
+            nd += L("hoi.td.vi_du", " Ví dụ: {vd}", vd=m["vi_du"].strip())
         if nd:
-            ra.append({"loai": "giai_thich", "ma": f"tu_dien.{m['ma']}", "tieu_de": f"{m['ten']} là gì?", "noi_dung": nd})
+            ra.append({"loai": "giai_thich", "ma": f"tu_dien.{m['ma']}", "tieu_de": L("hoi.td.la_gi", "{ten} là gì?", ten=m["ten"]),
+                       "noi_dung": nd})
     return ra
 
 
@@ -194,7 +196,12 @@ _HOI_LAI = {
 
 def hoi_lai(mo_dun: str) -> dict | None:
     ds = _HOI_LAI.get(mo_dun)
-    return {"cau": "Bạn muốn hỏi cụ thể về chuyện nào? Chọn một câu để có lời đáp đúng hơn:", "chon": ds} if ds else None
+    if not ds:
+        return None
+    if mo_dun == "battu":
+        ds = [L("hoi.hl.battu.nghe", ds[0]), L("hoi.hl.battu.tien", ds[1]), L("hoi.hl.battu.hon_nhan", ds[2]),
+              L("hoi.hl.battu.dai_van", ds[3])]
+    return {"cau": L("hoi.hl.cau", "Bạn muốn hỏi cụ thể về chuyện nào? Chọn một câu để có lời đáp đúng hơn:"), "chon": ds}
 
 
 # ---- EN-5.4: khung thời gian của một quyết định ("có nên đổi việc trong 6 tháng tới") → số tháng cần xem (≤ 12)

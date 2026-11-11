@@ -65,6 +65,13 @@ export function banAnh(duongVi: string, duoi?: string, ds?: readonly CapDuong[])
   return k.cap.en + (duoi ?? k.duoi) + sau;
 }
 
+/** Như `banAnh` nhưng CHỈ khi bản Anh là rewrite của chính trang Việt này (không phải trang viết riêng dưới app/en — mục `rieng`):
+ *  trang Việt dùng chung component với bản Anh khai hreflang tới bản Anh qua đây (EN-ALL GĐ 3d — cụm kiến thức). */
+export function banAnhRewrite(duongVi: string, duoi?: string): string | null {
+  const k = capCuaVi(duongVi);
+  return k && !k.cap.rieng ? banAnh(duongVi, duoi) : null;
+}
+
 /** Bản Việt của một đường dẫn Anh (mọi mục trong bảng, kể cả chưa mở — để nút đổi ngôn ngữ luôn có đích). Không khớp → null. */
 export function banViet(duongEn: string, duoi?: string, ds?: readonly CapDuong[]): string | null {
   const [, sau] = tachDuong(duongEn);

@@ -1,10 +1,14 @@
 // SEO-M — khối "Trả lời nhanh" (câu trả lời trước, do engine dựng) + danh sách hỏi đáp hiển thị.
-// Engine cũ (lệch deploy) chưa trả câu → khối tự ẩn.
-export function TraLoiNhanh({ chu }: { chu?: string | null }) {
+// Engine cũ (lệch deploy) chưa trả câu → khối tự ẩn. EN-ALL: `en` = nhãn theo bảng lib/chu/kien-thuc.ts chiều `en`.
+import { taoChu } from "@/lib/chu-trang";
+import { CHU_KIEN_THUC } from "@/lib/chu/kien-thuc";
+
+export function TraLoiNhanh({ chu, en = false }: { chu?: string | null; en?: boolean }) {
   if (!chu) return null;
+  const nhan = taoChu(CHU_KIEN_THUC, null, en ? "en" : "vi")("tln.nhan");
   return (
-    <section aria-label="Trả lời nhanh" className="rounded-2xl border border-gold/30 bg-gold/5 p-5" data-testid="tra-loi-nhanh">
-      <p className="eyebrow">Trả lời nhanh</p>
+    <section aria-label={nhan} className="rounded-2xl border border-gold/30 bg-gold/5 p-5" data-testid="tra-loi-nhanh">
+      <p className="eyebrow">{nhan}</p>
       <p className="mt-2 leading-relaxed text-fg">{chu}</p>
     </section>
   );

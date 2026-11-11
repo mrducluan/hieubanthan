@@ -137,3 +137,11 @@ chặn script lạ (XSS). Trang dựng sẵn thì không có nonce riêng từng
 **Đo sau** (cục bộ): mọi URL trong hai ảnh menu có 1 ảnh có alt (trừ trang mục lục cụm — chỉ thêm câu trả lời); `/lich-am` 188 → 520 chữ, `/tuoi-xong-dat` 354 → 505, `/xem-tuoi-lam-nha` 519 → 696, `/nam` 421 → 567, `/doi-lich-am-duong` 320 → 424.
 
 **Không làm (có lý do):** `/hop-doi`, `/thoi-gian-toi`, `/chan-dung` là công cụ cá nhân — ảnh tóm tắt cần dữ liệu người dùng, không có câu trả lời chung để vẽ. Dữ liệu lịch đã cache ở tầng fetch: URL engine thêm `?b=le` để bản cache cũ (thiếu `le`) không còn dùng sau deploy.
+
+## 7. Đợt 4 (SEO-O2, 2026-11-11) — rà H1/H2/H3 cho AEO/GEO
+
+Rà dàn ý heading 28 trang (năm, lịch & tuổi, ngày tốt, mục lục cụm, hub): **không lỗi cấu trúc** (đúng 1 H1, không nhảy cấp, không heading rỗng / trùng). Sửa phần nội dung heading để mỗi mục **tự đứng được** khi Google / AI trích riêng:
+- Mục lục cụm: H2 "Tử Vi · 12", "1950–1959 · 10" → "Sao Tử Vi ở 12 cung", "Sinh năm 1950–1959 mệnh gì", "Số 3 hợp với số nào", "Ý nghĩa số kép 10–19", "Quẻ có quái trên Càn (Trời)", "Hoá Lộc ở 12 cung"; số trang dời ra ngoài H2.
+- Trang ngày: "Giờ hoàng đạo", "Sách lịch ghi nên / kiêng", "Xuất hành", "Việc lớn hôm nay" (sai ở trang ngày khác) → "Giờ hoàng đạo ngày 20/11/2026", "Ngày 20/11/2026 nên làm gì / kiêng làm gì", "Hướng xuất hành ngày …", "Ngày … có hợp cưới hỏi, khai trương, động thổ?"; lịch tháng "Lịch âm dương tháng 11/2026".
+- H1 dạng câu hỏi người ta gõ: `/nam`, `/lich-am`, `/phong-thuy/huong-xau-nam/{năm}`, `/tuoi-xong-dat/{năm}` (CMS vẫn ghi đè được).
+- `/xem-ngay-tot`: khối tóm tắt hôm nay bỏ danh sách ý chính trùng thẻ ngày (giữ câu trả lời nhanh + ảnh).

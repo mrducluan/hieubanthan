@@ -12,6 +12,8 @@ import { ghi } from "@/lib/do-luong";
 import { usePost } from "@/lib/goi-api";
 import { docLa, ghiLa, ketQua, khoaLaSo, useCachChinh, type Cach, type DoiChieuCach as DC, type TraLoi } from "@/lib/cach-chinh-battu";
 import { cn } from "@/lib/utils";
+import { ChuNhan } from "@/components/cms/ChuNhan";
+import { useChuBatTu } from "@/components/huyen-hoc/chu-bat-tu";
 
 type LaSo = { birth_date: string; birth_time: string; gender: "nam" | "nu" } & Record<string, unknown>;
 
@@ -21,6 +23,7 @@ export function DoiChieuCach({ laSo }: { laSo: LaSo }) {
   const chinh = useCachChinh(khoa);
   const [traLoi, setTraLoi] = useState<Record<string, TraLoi>>({});
   const giam = useReducedMotion();
+  const { c: cb, en } = useChuBatTu();
   useEffect(() => { setTraLoi(docLa(khoa).tra_loi); }, [khoa]);
 
   const kq = useMemo(() => (data?.co_cau_hoi ? ketQua(data, traLoi) : null), [data, traLoi]);
@@ -59,12 +62,9 @@ export function DoiChieuCach({ laSo }: { laSo: LaSo }) {
     <section aria-labelledby="dc-tieu-de" data-testid="doi-chieu-cach"
       className="rounded-3xl border border-moon/30 bg-gradient-to-b from-moon/[0.07] to-transparent p-5 sm:p-6">
       <h2 id="dc-tieu-de" className="flex items-center gap-2 font-serif text-2xl">
-        <Scale className="size-6 text-moon" aria-hidden /> Cách nào đúng với bạn?
+        <Scale className="size-6 text-moon" aria-hidden /> {cb("dc.tieu_de")}
       </h2>
-      <p className="mt-2 text-fg-muted">
-        Bát tự có hai cách đọc, đôi khi nói khác nhau. Bạn là người biết rõ nhất những năm đã qua — kể lại vài năm, xem cách
-        nào khớp với đời bạn hơn.
-      </p>
+      <p className="mt-2 text-fg-muted">{cb("dc.dan")}</p>
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
         {(["cach_1", "cach_2"] as const).map((c, i) => (
           <div key={c} className={cn("rounded-2xl border px-4 py-3", chinh === c ? "border-gold/70 bg-gold/[0.06]" : "border-line/70")}
@@ -72,14 +72,14 @@ export function DoiChieuCach({ laSo }: { laSo: LaSo }) {
             <p className="flex items-center gap-2 font-medium text-fg">
               <span className={cn("inline-block size-2.5 rounded-full", i ? "border-2 border-moon" : "bg-moon")} aria-hidden />
               {data.cach[c].ten}
-              {chinh === c && <span className="rounded-full bg-gold px-2 py-0.5 text-[0.7rem] font-semibold text-[#1a1406]">cách chính của bạn</span>}
+              {chinh === c && <span className="rounded-full bg-gold px-2 py-0.5 text-[0.7rem] font-semibold text-[#1a1406]">{cb("dc.cach_chinh")}</span>}
             </p>
             <p className="mt-1 text-sm text-fg-muted">{data.cach[c].mo_ta}</p>
           </div>
         ))}
       </div>
 
-      <ol className="mt-5 flex gap-1.5" aria-label="Tiến độ">
+      <ol className="mt-5 flex gap-1.5" aria-label={cb("dc.tien_do")}>
         {data.cau.map((c) => (
           <li key={c.ma} className={cn("h-1.5 flex-1 rounded-full", traLoi[c.ma] ? "bg-moon" : c === dangHoi ? "bg-moon/40" : "bg-line")} />
         ))}
@@ -102,18 +102,18 @@ export function DoiChieuCach({ laSo }: { laSo: LaSo }) {
       </AnimatePresence>
 
       {daXong.length > 0 && (
-        <ul className="mt-5 space-y-2" aria-label="Những năm bạn đã kể">
+        <ul className="mt-5 space-y-2" aria-label={cb("dc.da_ke")}>
           {daXong.map((c) => {
             const t = traLoi[c.ma] ?? "khong_nho";
             return (
               <li key={c.ma} className="rounded-2xl border border-line/70 px-4 py-2.5 text-sm" data-testid="dc-da-tra-loi">
-                <p className="text-fg"><b>{c.nhan}</b>: bạn kể “{nhanTL(t).toLowerCase()}”</p>
+                <p className="text-fg"><ChuNhan lopNhan="font-bold" chu={cb("dc.ban_ke", { nhan: c.nhan, tl: en ? nhanTL(t) : nhanTL(t).toLowerCase() })} /></p>
                 {t !== "khong_nho" && (
                   <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-fg-muted">
                     {(["cach_1", "cach_2"] as const).map((k) => (
                       <span key={k} className="inline-flex items-center gap-1.5">
                         {data.cach[k].ten}: <ChipMuc muc={c[k]} className="px-2 py-0 text-[0.7rem]" />
-                        {t === c[k] && <Check className="size-4 text-moon" aria-label="khớp" />}
+                        {t === c[k] && <Check className="size-4 text-moon" aria-label={cb("dc.khop")} />}
                       </span>
                     ))}
                   </p>
@@ -128,20 +128,17 @@ export function DoiChieuCach({ laSo }: { laSo: LaSo }) {
         <motion.div className="mt-5 rounded-2xl border border-gold/50 bg-gold/[0.06] px-4 py-3" data-testid="dc-ket-luan"
           initial={giam ? false : { opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }}>
           <p className="text-sm text-fg-faint">
-            Khớp: {data.cach.cach_1.ten} {kq.khop_1}/{kq.so_cau} · {data.cach.cach_2.ten} {kq.khop_2}/{kq.so_cau}
+            {cb("dc.khop_dem", { ca: data.cach.cach_1.ten, ka: String(kq.khop_1), cb: data.cach.cach_2.ten, kb: String(kq.khop_2), n: String(kq.so_cau) })}
           </p>
           <p className="mt-1 text-fg">{data.ket_luan[kq.ma]}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {nghieng && chinh !== nghieng && (
-              <Button type="button" size="sm" onClick={() => chon(nghieng)}>Dùng {data.cach[nghieng].ten.toLowerCase()} làm cách chính</Button>
+              <Button type="button" size="sm" onClick={() => chon(nghieng)}>{cb("dc.dung_cach", { cach: data.cach[nghieng].ten.toLowerCase() })}</Button>
             )}
-            {chinh && <Button type="button" size="sm" variant="ghost" onClick={() => chon(undefined)}>Bỏ chọn cách chính</Button>}
-            <Button type="button" size="sm" variant="ghost" onClick={lamLai}><RotateCcw className="mr-1 size-3.5" aria-hidden />Kể lại</Button>
+            {chinh && <Button type="button" size="sm" variant="ghost" onClick={() => chon(undefined)}>{cb("dc.bo_chon")}</Button>}
+            <Button type="button" size="sm" variant="ghost" onClick={lamLai}><RotateCcw className="mr-1 size-3.5" aria-hidden />{cb("dc.ke_lai")}</Button>
           </div>
-          <p className="mt-2 text-xs text-fg-faint">
-            Chọn cách chính chỉ đổi chỗ nhấn khi hai cách nói khác nhau trong bài luận giải; phép tính và cả hai cách vẫn
-            hiện đủ. Câu trả lời chỉ lưu trên máy bạn.
-          </p>
+          <p className="mt-2 text-xs text-fg-faint">{cb("dc.ghi_chu")}</p>
         </motion.div>
       )}
     </section>

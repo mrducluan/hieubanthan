@@ -611,11 +611,11 @@ def loi_en(du_lieu: Any, than: Any = None, toi_da: int = 8) -> list[str]:
 
 
 # Trường CHỈ có ở bản Anh (đường dẫn tiếng Anh của chính trang) — không phải dữ kiện, bản Việt không mang để golden giữ nguyên.
-KHOA_CHI_EN = {"slug_en", "duong_en", "ten_hien"}
+KHOA_CHI_EN = {"slug_en", "duong_en", "ten_hien", "ho_tro"}   # ho_tro = đoạn hỗ trợ mềm (an_toan.ho_tro_mem_en), chỉ bản Anh
 # Trường SUY TỪ CHỮ (không phải dữ kiện): thuật ngữ nhận diện trong lời văn — chữ khác ngôn ngữ thì danh sách khác.
 KHOA_THEO_CHU = {"thuat_ngu", "phut_doc"}   # phut_doc = số phút đọc, đếm theo chữ của ngôn ngữ
 # Danh sách CHỮ mà số phần tử được phép khác theo ngôn ngữ (biến thể tên để nhận diện thuật ngữ trong chữ ngôn ngữ đó).
-DS_CHU_TU_DO = {"bien_the"}
+DS_CHU_TU_DO = {"bien_the", "khop"}   # khop = cụm chữ trong lời đáp để gạch nối với hình (hỏi đáp) — theo chữ của ngôn ngữ
 
 
 def khung(x: Any, duong: str = "$", ra: list[str] | None = None) -> list[str]:

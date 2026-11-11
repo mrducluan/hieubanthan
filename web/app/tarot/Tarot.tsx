@@ -191,7 +191,7 @@ export function Tarot() {
   };
 
   const dau = (
-    <DauMang Icon={Layers} ten="Xem Tarot: rút bài cho điều bạn đang hỏi" chip
+    <DauMang Icon={Layers} hinh="tarot" ten="Xem Tarot: rút bài cho điều bạn đang hỏi"
       mo_ta="Kể điều bạn đang băn khoăn rồi tự tay rút bài từ bộ 78 lá Rider–Waite. Lật lá nào, nghĩa của lá đó ở đúng vị trí hiện ngay. Bài đọc mở bằng câu trả lời cho đúng câu bạn hỏi — nghiêng về có, có điều kiện hay chưa nên vội, vì sao và việc nên làm — rồi mới tới câu chuyện các lá kể. Miễn phí, không phán, không đọc hộ người khác." />
   );
   if (!bo && !loiBo) return <div>{dau}<KhungTai /></div>;
