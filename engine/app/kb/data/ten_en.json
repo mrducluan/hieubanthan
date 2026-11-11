@@ -155,8 +155,7 @@
   },
   "hanh": {
    "Kim": {"en": "Metal", "han": "金"}, "Thủy": {"en": "Water", "han": "水"}, "Mộc": {"en": "Wood", "han": "木"},
-   "Hỏa": {"en": "Fire", "han": "火"}, "Thổ": {"en": "Earth", "han": "土"},
-   "Thuỷ": {"en": "Water", "han": "水"}, "Hoả": {"en": "Fire", "han": "火"}, "Thuỷ/Mộc": {"en": "Water / Wood", "han": "水/木"}
+   "Hỏa": {"en": "Fire", "han": "火"}, "Thổ": {"en": "Earth", "han": "土"}, "Thuỷ/Mộc": {"en": "Water / Wood", "han": "水/木"}
   },
   "am_duong": {"Âm": {"en": "Yin", "han": "陰"}, "Dương": {"en": "Yang", "han": "陽"}}
  },

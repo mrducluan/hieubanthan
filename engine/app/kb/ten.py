@@ -46,11 +46,19 @@ def _bang() -> dict:
 def muc(nhom: str, vi: str | int) -> dict | None:
     """Mục đầy đủ {en|pinyin, han?, nghia?} của một tên Việt (hoặc số quẻ 1–64) trong nhóm; không có → None."""
     b = _bang()
-    for a, c in NHOM[nhom]:
-        m = (b.get(a) or {}).get(c) or {}
-        if str(vi) in m:
-            return m[str(vi)]
+    k = str(vi)
+    # Hai kiểu bỏ dấu ("Thuỷ"/"Thủy", "Hoả"/"Hỏa") là CÙNG một mã — bảng chỉ giữ một kiểu, tra được cả hai.
+    for kk in (k, _CHINH_TA.get(k)):
+        if not kk:
+            continue
+        for a, c in NHOM[nhom]:
+            m = (b.get(a) or {}).get(c) or {}
+            if kk in m:
+                return m[kk]
     return None
+
+
+_CHINH_TA = {"Thuỷ": "Thủy", "Thủy": "Thuỷ", "Hoả": "Hỏa", "Hỏa": "Hoả", "Thuỷ/Mộc": "Thủy/Mộc"}
 
 
 def ten(nhom: str, vi: str | int, ngon_ngu_: str | None = None) -> str:
