@@ -23,14 +23,14 @@ CHUA_XONG: dict[str, int] = {
     # Trang kiến thức theo LOẠI (`kb.trang.<loai>`) — chuyển thể cùng giai đoạn của mảng. `kb` = mục lục /v1/kb/trang
     # (+ /v1/kb/status): sạch khi MỌI loại sạch → GĐ 11.
     "kb": 11,
-    "kb.trang.thap_than": 3, "kb.trang.nhat_chu": 3, "kb.trang.menh_nam": 3,
+    # GĐ 3 xong (2026-11-10): kb.trang.thap_than, kb.trang.nhat_chu, kb.trang.menh_nam.
     "kb.trang.sao": 4, "kb.trang.cung": 4, "kb.trang.sao_cung": 4, "kb.trang.hoa_cung": 4, "kb.trang.co_thu": 4,
     "kb.trang.dau_hieu": 5, "kb.trang.que": 6,
     "kb.trang.so": 7, "kb.trang.so_kep": 7, "kb.trang.cap_so": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7,
     "kb.trang.nam_ca_nhan": 7, "kb.trang.no_nghiep": 7, "kb.trang.la_bai": 7,
     "kb.trang.bo_vi": 8,
     # GĐ 3 — Bát tự
-    "hoi.battu": 3,   # xong: battu.la_so, battu.luu_nien, battu.doi_chieu_cach, battu.luan_giai
+    # GĐ 3 xong: battu.la_so, battu.luu_nien, battu.doi_chieu_cach, battu.luan_giai, hoi.battu (2026-11-10, GĐ 3c).
     # GĐ 4 — Tử vi
     "tuvi": 4, "tuvi.an_sao": 4, "tuvi.tuan_triet": 4, "tuvi.luan_giai": 4, "tuvi.van_han": 4, "tuvi.luu_nguyet": 4,
     "tuvi.nhip_3_thang": 4, "tuvi.phi_hoa": 4, "tuvi.hop_tham": 4, "tuvi.dinh_gio": 4, "tuvi.la_so_mau": 4, "hoi.tuvi": 4,

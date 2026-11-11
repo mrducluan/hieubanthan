@@ -6,6 +6,10 @@ from __future__ import annotations
 
 import datetime as dt
 import math
+import re
+
+from app import ngon_ngu
+from app.kb.loi import L
 
 from app.luangiai import doi_song_khuon as kh
 from app.luangiai import thoi_gian_toi as tgt
@@ -21,8 +25,29 @@ def lap(mo_dun: str, sinh: dict, tu: dt.date, so_thang: int, ls: dict | None = N
     else:
         raise ValueError(mo_dun)
     het = (tu + dt.timedelta(days=round(so_thang * 30.44))).isoformat()
-    thang = [{"ten": x["tieu_de"], "tu": x["tu"], "den": x["den"], "muc": x.get("muc") or "can_bang",
-              "nhan_muc": kh.NHAN_MUC.get(x.get("muc") or "can_bang"), "loi": x.get("loi") or x["noi_dung"]}
+    thang = [{"ten": ten_thang(x["tieu_de"]), "tu": x["tu"], "den": x["den"], "muc": x.get("muc") or "can_bang",
+              "nhan_muc": kh.nhan_muc(x.get("muc") or "can_bang"), "loi": x.get("loi") or x["noi_dung"]}
              for x in ds if x["den"] >= tu.isoformat() and x["tu"] < het]
     return {"mo_dun": mo_dun, "so_thang": so_thang, "tu": tu.isoformat(), "thang": thang,
             "thuan": [x for x in thang if x["muc"] == "thuan"], "cham": [x for x in thang if x["muc"] == "can_chu_dong"]}
+
+
+_THANG_TIET = re.compile(r"^Tháng (\S+) \((\d+)/(\d+)–(\d+)/(\d+)\)$")
+_THANG_AM = re.compile(r"^Tháng (\d+)( nhuận)? âm lịch$")
+
+
+def ten_thang(ten: str) -> str:
+    """Tên tháng của Thời gian tới ("Tháng Hợi (7/11–6/12)", "Tháng 3 âm lịch") theo ngôn ngữ lượt gọi."""
+    if ngon_ngu.la_viet():
+        return ten
+    from app.hoidap.chung import ngay_ngan  # noqa: PLC0415
+    from app.kb import ten as _ten  # noqa: PLC0415
+    m = _THANG_TIET.match(ten)
+    if m:
+        return L("hoi.cs.thang_tiet", "Tháng {chi} ({tu}–{den})", chi=_ten.ten("chi", m.group(1)),
+                 tu=ngay_ngan(int(m.group(2)), int(m.group(3))), den=ngay_ngan(int(m.group(4)), int(m.group(5))))
+    m = _THANG_AM.match(ten)
+    if m:
+        return (L("hoi.cs.thang_am_nhuan", "Tháng {n} nhuận âm lịch", n=m.group(1)) if m.group(2)
+                else L("hoi.cs.thang_am", "Tháng {n} âm lịch", n=m.group(1)))
+    return ten

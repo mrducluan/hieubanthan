@@ -13,6 +13,10 @@ import { cacVungIana, nhanUtc, useDanhSachNuoc, vungMay, type KetQuaMuiGio } fro
 import { ghi, layMaMoi, quenMaMoi } from "@/lib/do-luong";
 import { ghiDongY, thuHoiDongY, useDongYDuLieu } from "@/lib/dong-y-du-lieu";
 import { cn } from "@/lib/utils";
+import { ChuNhan } from "@/components/cms/ChuNhan";
+import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
+import { useDuong } from "@/components/khung/NgonNgu";
+import { MUI_GIO_KHOA } from "@/lib/chu/giao-dien";
 
 interface Props {
   macDinh?: HoSo | null;
@@ -41,16 +45,7 @@ interface KetQuaDoi {
 /** QTE-2: giá trị ô "Nước" khi thành phố không có trong danh sách → chọn mã vùng IANA. */
 const KHAC = "khac";
 
-// EN-6 BI-3: múi giờ chuẩn hay gặp (giờ mùa hè đã có ô riêng) — giá trị là số giờ lệch UTC.
-const MUI_GIO: [string, string][] = [
-  ["-10", "UTC−10 · Hawaii"], ["-8", "UTC−8 · Mỹ miền Tây (California, Washington)"], ["-7", "UTC−7 · Mỹ (Arizona, Colorado)"],
-  ["-6", "UTC−6 · Mỹ miền Trung (Texas, Illinois)"], ["-5", "UTC−5 · Mỹ miền Đông (New York, Florida), Canada (Ontario)"],
-  ["-4", "UTC−4 · Canada (Nova Scotia)"], ["-3", "UTC−3 · Brazil, Argentina"], ["0", "UTC+0 · Anh, Bồ Đào Nha"],
-  ["1", "UTC+1 · Pháp, Đức, Ý, Ba Lan, Séc"], ["2", "UTC+2 · Phần Lan, Hy Lạp, Ukraina"], ["3", "UTC+3 · Nga (Moskva), Thổ Nhĩ Kỳ"],
-  ["4", "UTC+4 · UAE"], ["5.5", "UTC+5:30 · Ấn Độ"], ["7", "UTC+7 · Thái Lan, Lào, Campuchia, Indonesia (Jakarta)"],
-  ["8", "UTC+8 · Trung Quốc, Đài Loan, Singapore, Malaysia, Philippines, Úc (Perth)"], ["9", "UTC+9 · Nhật Bản, Hàn Quốc"],
-  ["9.5", "UTC+9:30 · Úc (Adelaide)"], ["10", "UTC+10 · Úc (Sydney, Melbourne)"], ["12", "UTC+12 · New Zealand"],
-];
+// EN-6 BI-3: múi giờ chuẩn hay gặp (giờ mùa hè đã có ô riêng) — giá trị là số giờ lệch UTC; chữ ở lib/chu/giao-dien.ts (MUI_GIO_KHOA).
 
 // Nhập MỘT LẦN, dùng mọi mảng (docs/THIET-KE-UI.md §4.3). Chỉ tên + ngày sinh bắt buộc; phần còn lại
 // hỏi đúng lúc mảng cần (can). Ngày âm do engine đổi — web không tự đổi lịch.
@@ -75,6 +70,10 @@ function du18Nhap(lich: "duong" | "am", nam: number, thang: number, ngay: number
 
 export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const c = useChuChung();
+  const { c: g, en } = useChuGiaoDien();
+  const dd = useDuong();
+  // EN-ALL: link sang trang chưa có bản Anh thì không hiện ở trang Anh (không đẩy người đọc sang chữ Việt giữa form).
+  const coLink = (duongVi: string) => !en || dd(duongVi).startsWith("/en");
   const dongY = useDongYDuLieu();
   const coDongY = Boolean(dongY);
   const nhapAm = macDinh?.lich_nhap === "am" && macDinh.am;
@@ -129,7 +128,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
     const t = setTimeout(() => {
       postJson<KetQuaDoi>("/api/lich/doi", JSON.parse(khoaDoi))
         .then((r) => { if (!huy) setDoi(r); })
-        .catch((e: unknown) => { if (!huy) setLoiDoi(e instanceof Error ? e.message : "Chưa đổi được lịch."); });
+        .catch((e: unknown) => { if (!huy) setLoiDoi(e instanceof Error && !en ? e.message : g("hs.loi_doi_lich")); });
     }, 300);
     return () => { huy = true; clearTimeout(t); };
   }, [khoaDoi, coDongY]);
@@ -155,7 +154,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   // phái + link trang nước (Ý3). Web không tính gì; engine cũ không có cờ → không gợi ý. Đo chỉ mã (một lần mỗi thành phố).
   const tpChon = noiSinh === NUOC_NGOAI && nuoc && nuoc !== KHAC ? dsNuoc?.find((n) => n.ma === nuoc)?.thanh_pho.find((t) => t.ma === muiGio) ?? null : null;
   const goiYCongTac = tpChon && (tpChon.canh_bao_mat_troi || tpChon.nam_ban_cau_kha_dung)
-    ? [tpChon.canh_bao_mat_troi ? "giờ mặt trời thực" : null, tpChon.nam_ban_cau_kha_dung ? "mùa nơi sinh" : null].filter((x): x is string => Boolean(x)) : [];
+    ? [tpChon.canh_bao_mat_troi ? g("hs.gy_mat_troi") : null, tpChon.nam_ban_cau_kha_dung ? g("hs.gy_mua") : null].filter((x): x is string => Boolean(x)) : [];
   const goiYDaGhi = useRef<string | null>(null);
   useEffect(() => {
     if (!tpChon || !goiYCongTac.length || goiYDaGhi.current === tpChon.ma) return;
@@ -170,12 +169,12 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
 
   async function gui(e: React.FormEvent) {
     e.preventDefault();
-    if (ten.trim().length < 2 || !/\p{L}/u.test(ten)) return setLoi("Nhập họ tên đầy đủ (như trên giấy khai sinh).");
-    if (!coTheDoi) return setLoi(`Ngày sinh chưa đúng — kiểm tra lại ngày, tháng, năm (${lich === "am" ? "âm" : "dương"} lịch).`);
+    if (ten.trim().length < 2 || !/\p{L}/u.test(ten)) return setLoi(g("hs.loi_ten"));
+    if (!coTheDoi) return setLoi(g("hs.loi_ngay", { lich: lich === "am" ? g("hs.am") : g("hs.duong") }));
     const khongBietGio = doTin === "unknown";
-    if (can === "day_du" && ((!gio && !khongBietGio) || !gioiTinh || !noiSinh)) return setLoi("Mảng này cần giờ sinh (hoặc chọn “Không biết giờ”), giới tính và nơi sinh.");
-    if (can === "gioi_tinh" && !gioiTinh) return setLoi("Mảng này cần giới tính.");
-    if (can === "day_du" && canVung && !vung) return setLoi("Sinh ở Quảng Trị trước 13/6/1975: chọn bờ Bắc hay Nam sông Bến Hải.");
+    if (can === "day_du" && ((!gio && !khongBietGio) || !gioiTinh || !noiSinh)) return setLoi(g("hs.loi_day_du"));
+    if (can === "gioi_tinh" && !gioiTinh) return setLoi(g("hs.loi_gioi_tinh"));
+    if (can === "day_du" && canVung && !vung) return setLoi(g("hs.loi_vung"));
     setLoi(null);
     // Bấm "Đồng ý và xem kết quả" = đồng ý rõ ràng cho mục đích tính tại chỗ; ghi TRƯỚC lượt gửi đầu tiên.
     if (!coDongY) ghiDongY();
@@ -185,11 +184,11 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
       if (!kq && yeuCauDoi) kq = await postJson<KetQuaDoi>("/api/lich/doi", yeuCauDoi);
     } catch (e2) {
       // Nhập dương lịch vẫn lưu được khi chưa đổi được sang âm; nhập âm thì bắt buộc phải đổi.
-      if (lich === "am") { setDang(false); return setLoi(e2 instanceof Error ? e2.message : "Chưa đổi được ngày âm."); }
+      if (lich === "am") { setDang(false); return setLoi(e2 instanceof Error && !en ? e2.message : g("hs.loi_doi_am")); }
     }
     setDang(false);
     const dg = lich === "am" ? kq!.duong : { ngay: d, thang: m, nam: y };
-    if (Date.UTC(dg.nam, dg.thang - 1, dg.ngay) > Date.now()) return setLoi("Ngày sinh chưa đúng — ngày này chưa tới.");
+    if (Date.UTC(dg.nam, dg.thang - 1, dg.ngay) > Date.now()) return setLoi(g("hs.loi_chua_toi"));
     const nuocNgoai = noiSinh === NUOC_NGOAI;
     const h = luuHoSo({
       ho_ten: ten.trim(),
@@ -242,62 +241,60 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
       <fieldset className="space-y-2">
         <div className="flex items-center justify-between gap-3">
           <legend className="text-sm font-medium text-fg-muted">{c("ho_so.ngay_sinh")}</legend>
-          <div role="radiogroup" aria-label="Loại lịch" className="flex rounded-full border border-line p-0.5 text-xs">
+          <div role="radiogroup" aria-label={g("hs.loai_lich")} className="flex rounded-full border border-line p-0.5 text-xs">
             {(["duong", "am"] as const).map((l) => (
               <button key={l} type="button" role="radio" aria-checked={lich === l} onClick={() => setLich(l)}
                 className={cn("vung-cham rounded-full px-3 py-1.5 transition-colors", lich === l ? "bg-gold text-bg" : "text-fg-muted hover:text-fg")}>
-                {l === "duong" ? "Dương lịch" : "Âm lịch"}
+                {l === "duong" ? g("hs.duong_lich") : g("hs.am_lich")}
               </button>
             ))}
           </div>
         </div>
         <div className="grid grid-cols-[1fr_1fr_1.4fr] gap-2">
-          <Input aria-label="Ngày" name="ngay-sinh-ngay" autoComplete={lich === "duong" ? "bday-day" : "off"} inputMode="numeric" placeholder="Ngày" value={ngay} className="text-center"
+          <Input aria-label={g("hs.ngay")} name="ngay-sinh-ngay" autoComplete={lich === "duong" ? "bday-day" : "off"} inputMode="numeric" placeholder={g("hs.ngay")} value={ngay} className="text-center"
             onChange={(e) => { const v = chiSo(e.target.value, 2); setNgay(v); if (v.length === 2) thangRef.current?.focus(); }} />
-          <Input ref={thangRef} aria-label="Tháng" name="ngay-sinh-thang" autoComplete={lich === "duong" ? "bday-month" : "off"} inputMode="numeric" placeholder="Tháng" value={thang} className="text-center"
+          <Input ref={thangRef} aria-label={g("hs.thang")} name="ngay-sinh-thang" autoComplete={lich === "duong" ? "bday-month" : "off"} inputMode="numeric" placeholder={g("hs.thang")} value={thang} className="text-center"
             onChange={(e) => { const v = chiSo(e.target.value, 2); setThang(v); if (v.length === 2) namRef.current?.focus(); }} />
-          <Input ref={namRef} aria-label="Năm" name="ngay-sinh-nam" autoComplete={lich === "duong" ? "bday-year" : "off"} inputMode="numeric" placeholder="Năm" value={nam} className="text-center"
+          <Input ref={namRef} aria-label={g("hs.nam")} name="ngay-sinh-nam" autoComplete={lich === "duong" ? "bday-year" : "off"} inputMode="numeric" placeholder={g("hs.nam")} value={nam} className="text-center"
             onChange={(e) => setNam(chiSo(e.target.value, 4))} />
         </div>
         {lich === "am" && (
-          <div role="radiogroup" aria-label="Ngày âm theo lịch nào" className="flex flex-wrap items-center gap-2 text-xs text-fg-muted">
-            <span>Ngày âm theo:</span>
-            {([["viet", "Âm lịch Việt Nam"], ["trung", "Âm lịch Trung Quốc"]] as const).map(([v, chu]) => (
+          <div role="radiogroup" aria-label={g("hs.am_theo")} className="flex flex-wrap items-center gap-2 text-xs text-fg-muted">
+            <span>{g("hs.am_theo_chu")}</span>
+            {([["viet", g("hs.am_viet")], ["trung", g("hs.am_trung")]] as const).map(([v, chu]) => (
               <button key={v} type="button" role="radio" aria-checked={lichAm === v} onClick={() => setLichAm(v)}
                 className={cn("vung-cham rounded-full border px-3 py-1 transition-colors", lichAm === v ? "border-gold text-gold" : "border-line hover:text-fg")}>
                 {chu}
               </button>
             ))}
-            <span className="text-fg-faint">— sổ tử vi, lịch in theo Trung Quốc thì chọn “Trung Quốc”.</span>
+            <span className="text-fg-faint">{g("hs.am_goi_y")}</span>
           </div>
         )}
         {lich === "am" && (
           <label className="flex items-center gap-2 text-sm text-fg-muted">
             <input type="checkbox" checked={nhuan} onChange={(e) => setNhuan(e.target.checked)} className="size-4 accent-[rgb(var(--gold))]" />
-            Tháng nhuận
+            {g("hs.thang_nhuan")}
           </label>
         )}
         <p className="min-h-5 text-xs empty:min-h-0" aria-live="polite" data-testid="doi-lich">
-          {doi && lich === "duong" && <span className="text-fg-muted">Âm lịch: <b className="text-fg">{moTaAm(doi.am, doi.can_chi_nam)}</b> · ngày {doi.can_chi_ngay}, tháng {doi.can_chi_thang}{doi.lich_mien_nam_utc8 ? " · theo lịch miền Nam thời đó" : " · theo lịch Việt Nam"}</span>}
-          {doi && lich === "am" && <span className="text-fg-muted">Dương lịch: <b className="text-fg">{doi.duong.ngay}/{doi.duong.thang}/{doi.duong.nam}</b> · năm {doi.can_chi_nam} · ngày {doi.can_chi_ngay}{doi.lich_mien_nam_utc8 && " · theo lịch miền Nam thời đó"}{lichAm === "trung" && " · đổi theo âm lịch Trung Quốc"}</span>}
+          {doi && lich === "duong" && <span className="text-fg-muted"><ChuNhan lopNhan="font-bold text-fg" chu={g("hs.doi_am", { am: moTaAm(doi.am, doi.can_chi_nam), ngay: doi.can_chi_ngay, thang: doi.can_chi_thang })} />{doi.lich_mien_nam_utc8 ? g("hs.mien_nam") : g("hs.lich_vn")}</span>}
+          {doi && lich === "am" && <span className="text-fg-muted"><ChuNhan lopNhan="font-bold text-fg" chu={g("hs.doi_duong", { duong: `${doi.duong.ngay}/${doi.duong.thang}/${doi.duong.nam}`, nam: doi.can_chi_nam, ngay: doi.can_chi_ngay })} />{doi.lich_mien_nam_utc8 && g("hs.mien_nam")}{lichAm === "trung" && g("hs.theo_trung")}</span>}
           {loiDoi && lich === "am" && <span className="text-cinnabar">{loiDoi.replace(/^Ngày không tồn tại: /, "")}</span>}
         </p>
         {doi && lich === "am" && !nhuan && doi.thang_nhuan_nam === m && (
           <p className="rounded-lg bg-gold/10 px-3 py-2 text-xs text-fg" data-testid="nhac-nhuan">
-            Năm {doi.am.nam} có <b>hai tháng {m}</b> (tháng {m} thường và tháng {m} nhuận). Nếu giấy tờ ghi “tháng {m} nhuận”, hãy đánh dấu ô Tháng nhuận.
+            <ChuNhan lopNhan="font-bold" chu={g("hs.nhac_nhuan", { nam: String(doi.am.nam), m: String(m) })} />
           </p>
         )}
         {doi?.lech_lich_trung && doi.am_trung_quoc && (
           <p className="rounded-lg bg-moon/10 px-3 py-2 text-xs text-fg" data-testid="nhac-lich-trung">
-            Ngày này âm lịch Việt Nam là <b>{moTaAm(doi.am_viet ?? doi.am, doi.can_chi_nam)}</b>, còn theo lịch Trung Quốc là{" "}
-            <b>{doi.am_trung_quoc.ngay}/{doi.am_trung_quoc.thang}{doi.am_trung_quoc.nhuan ? " nhuận" : ""}/{doi.am_trung_quoc.nam}</b>.
-            Sổ tử vi hay phần mềm theo lịch Trung Quốc sẽ ra lá số, lời luận khác. Hệ thống mặc định dùng lịch Việt Nam;
-            ở trang Tử vi bạn chọn được xem theo lịch nào (mục “Trường phái”).
+            <ChuNhan lopNhan="font-bold" chu={g("hs.lech_trung", { viet: moTaAm(doi.am_viet ?? doi.am, doi.can_chi_nam),
+              trung: `${doi.am_trung_quoc.ngay}/${doi.am_trung_quoc.thang}${doi.am_trung_quoc.nhuan ? g("hs.nhuan") : ""}/${doi.am_trung_quoc.nam}` })} />
           </p>
         )}
         {gio >= "23:00" && (
           <p className="text-xs text-fg-faint" data-testid="nhac-gio-ty">
-            Sinh 23:00–23:59 (đầu giờ Tý): Tử vi tính sang ngày âm hôm sau; Thần số và Bát tự giữ ngày này.
+            {g("hs.gio_ty")}
           </p>
         )}
       </fieldset>
@@ -314,7 +311,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
               <div className="space-y-2 sm:col-span-2">
                 <Label htmlFor="ten-khac">{c("ho_so.ten_khac")}</Label>
                 <Input id="ten-khac" value={tenKhac} maxLength={80} onChange={(e) => setTenKhac(e.target.value)}
-                  placeholder="Không dấu, tên ở nhà…" />
+                  placeholder={g("hs.ten_khac_vi_du")} />
               </div>
             )}
             {can !== "gioi_tinh" && (
@@ -325,69 +322,70 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                     onChange={(e) => { setGio(e.target.value); if (e.target.value && doTin === "unknown") setDoTin("approx"); }} />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="do-tin-gio">Giờ sinh này</Label>
+                  <Label htmlFor="do-tin-gio">{g("hs.do_tin")}</Label>
                   <Select id="do-tin-gio" value={doTin} onChange={(e) => { setDoTin(e.target.value); if (e.target.value === "unknown") setGio(""); }}>
-                    <option value="exact">Chính xác (giấy tờ, sổ ghi)</option>
-                    <option value="approx">Áng chừng (nghe kể lại)</option>
-                    <option value="unknown">Không biết giờ</option>
+                    <option value="exact">{g("hs.do_tin_exact")}</option>
+                    <option value="approx">{g("hs.do_tin_approx")}</option>
+                    <option value="unknown">{g("hs.do_tin_unknown")}</option>
                   </Select>
                 </div>
               </>
             )}
             {can !== "gioi_tinh" && doTin === "unknown" && (
               <p className="text-xs text-fg-muted sm:col-span-2" data-testid="nhac-khong-biet-gio">
-                Không sao. Tử vi sẽ an tạm theo giờ Ngọ (12:00) và mở khối “Định giờ sinh” để bạn đối chiếu đủ 12 canh giờ với
-                những năm bạn nhớ rõ. Bát tự khi đó chưa có trụ giờ đáng tin. Biết giờ rồi thì nhập lại ở đây.
+                {g("hs.khong_biet_gio")}
               </p>
             )}
             <div className="space-y-2">
               <Label htmlFor="gioi-tinh">{c("ho_so.gioi_tinh")}</Label>
               <Select id="gioi-tinh" value={gioiTinh} onChange={(e) => setGioiTinh(e.target.value)}>
-                <option value="">— Chọn —</option>
-                <option value="nam">Nam</option>
-                <option value="nu">Nữ</option>
+                <option value="">{g("hs.chon")}</option>
+                <option value="nam">{g("hs.nam_gioi")}</option>
+                <option value="nu">{g("hs.nu_gioi")}</option>
               </Select>
             </div>
             {can !== "gioi_tinh" && (
               <div className="space-y-2">
                 <Label htmlFor="noi-sinh">{c("ho_so.noi_sinh")}</Label>
                 <Select id="noi-sinh" value={noiSinh} onChange={(e) => setNoiSinh(e.target.value)} disabled={!tinh && !loiTinh}>
-                  <option value="">{tinh ? "— Chọn tỉnh/thành —" : "Đang tải…"}</option>
-                  <option value={NUOC_NGOAI}>Sinh ở nước ngoài</option>
-                  {tinh?.map((t) => <option key={t.ma} value={t.ma}>{t.ten}</option>)}
+                  <option value="">{tinh ? g("hs.chon_tinh") : g("hs.dang_tai")}</option>
+                  <option value={NUOC_NGOAI}>{g("hs.nuoc_ngoai")}</option>
+                  {/* EN-ALL: trang Anh gom tỉnh Việt Nam vào một nhóm (người đọc phần lớn sinh ở nước ngoài). */}
+                  {en ? (tinh && <optgroup label={g("hs.nhom_vn")}>{tinh.map((t) => <option key={t.ma} value={t.ma}>{t.ten}</option>)}</optgroup>)
+                    : tinh?.map((t) => <option key={t.ma} value={t.ma}>{t.ten}</option>)}
                 </Select>
-                {loiTinh && <button type="button" onClick={taiLaiTinh} className="text-xs text-cinnabar underline">{loiTinh} Thử lại</button>}
+                {loiTinh && <button type="button" onClick={taiLaiTinh} className="text-xs text-cinnabar underline">{loiTinh} {g("hs.thu_lai")}</button>}
               </div>
             )}
             {noiSinh === NUOC_NGOAI && (
               <div className="space-y-2 sm:col-span-2" data-testid="noi-sinh-nuoc-ngoai">
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="nuoc-sinh">Nước nơi sinh</Label>
+                    <Label htmlFor="nuoc-sinh">{g("hs.nuoc")}</Label>
                     <Select id="nuoc-sinh" value={nuoc} onChange={(e) => { setNuoc(e.target.value); setMuiGio(""); }}
                       disabled={!dsNuoc && !loiNuoc}>
-                      <option value="">{dsNuoc ? "— Chọn nước —" : "Đang tải…"}</option>
-                      {dsNuoc?.map((n) => <option key={n.ma} value={n.ma}>{n.ten}</option>)}
-                      <option value={KHAC}>Nước khác / không thấy thành phố</option>
+                      <option value="">{dsNuoc ? g("hs.chon_nuoc") : g("hs.dang_tai")}</option>
+                      {dsNuoc?.map((n) => <option key={n.ma} value={n.ma}>{en ? n.ten_en || n.ten : n.ten}</option>)}
+                      <option value={KHAC}>{g("hs.nuoc_khac")}</option>
                     </Select>
-                    {loiNuoc && <button type="button" onClick={taiLaiNuoc} className="text-xs text-cinnabar underline">{loiNuoc} Thử lại</button>}
+                    {loiNuoc && <button type="button" onClick={taiLaiNuoc} className="text-xs text-cinnabar underline">{loiNuoc} {g("hs.thu_lai")}</button>}
                   </div>
                   {nuoc && nuoc !== KHAC && (
                     <div className="space-y-2">
-                      <Label htmlFor="thanh-pho-sinh">Thành phố / vùng</Label>
+                      <Label htmlFor="thanh-pho-sinh">{g("hs.thanh_pho")}</Label>
                       <Select id="thanh-pho-sinh" value={muiGio} onChange={(e) => setMuiGio(e.target.value)}>
-                        <option value="">— Chọn thành phố —</option>
-                        {dsNuoc?.find((n) => n.ma === nuoc)?.thanh_pho.map((t) => <option key={t.ma} value={t.ma}>{t.ten}</option>)}
+                        <option value="">{g("hs.chon_thanh_pho")}</option>
+                        {dsNuoc?.find((n) => n.ma === nuoc)?.thanh_pho.map((t) => <option key={t.ma} value={t.ma}>{en ? t.ten_en || t.ten : t.ten}</option>)}
                       </Select>
                     </div>
                   )}
                   {nuoc === KHAC && (
                     <div className="space-y-2">
-                      <Label htmlFor="vung-iana">Múi giờ nơi sinh</Label>
+                      <Label htmlFor="vung-iana">{g("hs.mui_gio_noi_sinh")}</Label>
                       <Select id="vung-iana" value={muiGio} onChange={(e) => setMuiGio(e.target.value)}>
-                        <option value="">— Chọn múi giờ —</option>
+                        <option value="">{g("hs.chon_mui_gio")}</option>
                         {/* múi giờ của máy đang dùng lên đầu cho dễ chọn — KHÔNG tự điền: nơi sinh có thể khác nơi đang ở */}
-                        {vungMay() && <option value={vungMay()!}>{vungMay()!.replace(/_/g, " ")} (máy bạn đang dùng)</option>}
+                        {vungMay() && <option value={vungMay()!}>{vungMay()!.replace(/_/g, " ")}{g("hs.may_ban")}</option>}
                         {cacVungIana().filter((z) => z !== vungMay()).map((z) => <option key={z} value={z}>{z.replace(/_/g, " ")}</option>)}
                       </Select>
                     </div>
@@ -395,73 +393,65 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                 </div>
                 {kqMuiGio && (
                   <p className="text-xs text-fg-muted" data-testid="xac-nhan-mui-gio">
-                    Lúc sinh nơi đó dùng <b className="text-fg">{nhanUtc(kqMuiGio.utc_chuan)}</b>
-                    {kqMuiGio.gio_mua_he ? ", đang giờ mùa hè (lá số tự trừ 1 giờ)" : ", không giờ mùa hè"}
-                    {kqMuiGio.lam_tron ? " — giờ địa phương lẻ phút, đã làm tròn" : ""}
-                    {kqMuiGio.gio_mo_ho ? " — giờ này rơi đúng lúc đổi giờ, kết quả có thể lệch 1 giờ" : ""}.
+                    <ChuNhan lopNhan="font-bold text-fg" chu={g("hs.xac_nhan_mg", { utc: nhanUtc(kqMuiGio.utc_chuan) })} />
+                    {kqMuiGio.gio_mua_he ? g("hs.mua_he_co") : g("hs.mua_he_khong")}
+                    {kqMuiGio.lam_tron ? g("hs.lam_tron") : ""}
+                    {kqMuiGio.gio_mo_ho ? g("hs.mo_ho") : ""}{g("hs.cham")}
                   </p>
                 )}
                 {tpChon && goiYCongTac.length > 0 && (
                   <p className="rounded-lg border border-gold/30 bg-gold/5 px-3 py-2 text-xs text-fg-muted" data-testid="goi-y-cong-tac">
-                    Bạn sinh ở <b className="text-fg">{tpChon.ten.split(" (")[0]}</b>: lá số có thêm {goiYCongTac.length === 2 ? "hai" : "một"} cách xem — {goiYCongTac.join(", ")}.
-                    Bật trong khung Trường phái của{" "}
-                    <Link href="/bat-tu#truong-phai-bat-tu" className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "bat_tu" })}>Bát tự</Link>
-                    {tpChon.canh_bao_mat_troi && <> · <Link href="/tu-vi#truong-phai" className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "tu_vi" })}>Tử vi</Link></>}.
-                    {" "}<Link href={`/sinh-o-nuoc-ngoai/${nuoc}`} className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "trang_nuoc" })}>Người sinh ở nước này cần biết gì?</Link>
+                    <ChuNhan lopNhan="font-bold text-fg" chu={g("hs.gy_cau", { tp: (en ? tpChon.ten_en || tpChon.ten : tpChon.ten).split(" (")[0]!, so: goiYCongTac.length === 2 ? g("hs.gy_hai") : g("hs.gy_mot"), ds: goiYCongTac.join(", ") })} />
+                    {" "}{g("hs.gy_bat")}{" "}
+                    <Link href={`${dd("/bat-tu")}#truong-phai-bat-tu`} className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "bat_tu" })}>{g("hs.gy_bat_tu")}</Link>
+                    {tpChon.canh_bao_mat_troi && coLink("/tu-vi") && <> · <Link href={`${dd("/tu-vi")}#truong-phai`} className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "tu_vi" })}>{g("hs.gy_tu_vi")}</Link></>}.
+                    {coLink(`/sinh-o-nuoc-ngoai/${nuoc}`) && <>{" "}<Link href={dd(`/sinh-o-nuoc-ngoai/${nuoc}`)} className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "trang_nuoc" })}>{g("hs.gy_nuoc")}</Link></>}
                   </p>
                 )}
-                {!goiYCongTac.length && nuoc && nuoc !== KHAC && (
-                  <p className="text-xs text-fg-faint"><Link href={`/sinh-o-nuoc-ngoai/${nuoc}`} className="underline hover:text-fg">Sinh ở nước này thì nhập thế nào?</Link></p>
+                {!goiYCongTac.length && nuoc && nuoc !== KHAC && coLink(`/sinh-o-nuoc-ngoai/${nuoc}`) && (
+                  <p className="text-xs text-fg-faint"><Link href={dd(`/sinh-o-nuoc-ngoai/${nuoc}`)} className="underline hover:text-fg">{g("hs.nuoc_nhap")}</Link></p>
                 )}
-                <p className="text-xs text-fg-faint">
-                  Chọn đúng thành phố là đủ: múi giờ và giờ mùa hè lúc sinh tự tính theo lịch sử nơi đó. Bát tự đổi tháng, đổi năm đúng
-                  lúc giao tiết nên người sinh sát đầu tháng dương lịch cần múi giờ chính xác.
-                </p>
+                <p className="text-xs text-fg-faint">{g("hs.chon_dung_tp")}</p>
                 <details className="text-sm">
-                  <summary className="cursor-pointer text-xs text-fg-muted underline">Không thấy thành phố? Khai tay múi giờ và giờ mùa hè</summary>
+                  <summary className="cursor-pointer text-xs text-fg-muted underline">{g("hs.khai_tay")}</summary>
                   <div className="mt-2 space-y-2">
                     <label className="flex items-start gap-2 text-sm text-fg-muted">
                       <input type="checkbox" checked={gioMuaHe} onChange={(e) => setGioMuaHe(e.target.checked)} className="mt-0.5 size-4 accent-[rgb(var(--gold))]" />
-                      <span>Lúc sinh, nơi đó đang dùng <b className="text-fg">giờ mùa hè</b> (vd Mỹ, châu Âu, Úc thường từ tháng 3–4 đến 10–11). Không chắc thì để trống.</span>
+                      <span><ChuNhan lopNhan="font-bold text-fg" chu={g("hs.gio_mua_he")} /></span>
                     </label>
-                    <Label htmlFor="utc-noi-sinh">Múi giờ chuẩn nơi sinh</Label>
+                    <Label htmlFor="utc-noi-sinh">{g("hs.mui_gio_chuan")}</Label>
                     <Select id="utc-noi-sinh" value={utcNoiSinh} onChange={(e) => setUtcNoiSinh(e.target.value)}>
-                      <option value="">Không rõ</option>
-                      {MUI_GIO.map(([v, ten]) => <option key={v} value={v}>{ten}</option>)}
+                      <option value="">{g("hs.khong_ro")}</option>
+                      {MUI_GIO_KHOA.map(([v, k]) => <option key={v} value={v}>{g(k)}</option>)}
                     </Select>
-                    <p className="text-xs text-fg-faint">Chỉ dùng khi chưa chọn thành phố ở trên (đã chọn thành phố thì hai ô này không được dùng).</p>
+                    <p className="text-xs text-fg-faint">{g("hs.chi_dung_khi")}</p>
                   </div>
                 </details>
               </div>
             )}
             {canVung && (
               <div className="space-y-2 sm:col-span-2">
-                <Label htmlFor="vung">Quảng Trị trước 13/6/1975: sinh ở bờ nào sông Bến Hải?</Label>
+                <Label htmlFor="vung">{g("hs.vung")}</Label>
                 <Select id="vung" value={vung} onChange={(e) => setVung(e.target.value)}>
-                  <option value="">— Chọn —</option>
-                  <option value="north">Bờ Bắc (Vĩnh Linh)</option>
-                  <option value="south">Bờ Nam (Gio Linh, Đông Hà, Quảng Trị…)</option>
+                  <option value="">{g("hs.chon")}</option>
+                  <option value="north">{g("hs.vung_bac")}</option>
+                  <option value="south">{g("hs.vung_nam")}</option>
                 </Select>
               </div>
             )}
             {can === "day_du" && du18Nhap(lich, Number(nam) || 0, Number(thang) || 0, Number(ngay) || 0) && (
               <div className="space-y-2 sm:col-span-2">
-                <Label htmlFor="tinh-trang">Tình trạng (tuỳ chọn)</Label>
+                <Label htmlFor="tinh-trang">{g("hs.tinh_trang")}</Label>
                 <Select id="tinh-trang" value={tinhTrang} onChange={(e) => setTinhTrang(e.target.value)}>
-                  <option value="">Không muốn nói</option>
-                  <option value="doc_than">Đang độc thân</option>
-                  <option value="co_doi">Đang có đôi</option>
+                  <option value="">{g("hs.khong_noi")}</option>
+                  <option value="doc_than">{g("hs.doc_than")}</option>
+                  <option value="co_doi">{g("hs.co_doi")}</option>
                 </Select>
-                <p className="text-xs text-fg-faint" data-testid="tinh-trang-ghi-chu">
-                  Chỉ dùng để chọn lời khuyên hợp hơn ở chương Tình yêu và Gia đình khi xem luận giải toàn bộ. Lưu trên máy
-                  bạn; máy chủ không lưu, không đồng bộ tài khoản. Không chọn cũng được.
-                </p>
+                <p className="text-xs text-fg-faint" data-testid="tinh-trang-ghi-chu">{g("hs.tinh_trang_ghi_chu")}</p>
               </div>
             )}
             <p className="text-xs text-fg-faint sm:col-span-2">
-              {can === "day_du"
-                ? "Tử vi và Bát tự lập theo giờ sinh; nơi sinh quyết định múi giờ lúc đó (hai miền khác nhau trước 1975, nước ngoài dùng giờ địa phương)."
-                : "Giờ sinh, giới tính, nơi sinh chỉ cần cho Tử vi, Bát tự, Phong thuỷ. Thần số chỉ dùng tên và ngày sinh."}
+              {can === "day_du" ? g("hs.vi_sao_day_du") : g("hs.vi_sao_khac")}
             </p>
           </div>
         )}
@@ -476,19 +466,17 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
           <p className="flex items-start gap-2">
             <ShieldCheck className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
             <span>
-              Ngày giờ sinh chỉ dùng để tính, <b className="text-fg">không lưu</b> trên máy{" "}chủ ·{" "}
+              <ChuNhan lopNhan="font-bold text-fg" chu={g("hs.dong_y_ngan")} />{" "}
               <button type="button" onClick={() => setMoDongY((v) => !v)} aria-expanded={moDongY} aria-controls="dong-y-chi-tiet"
                 className="vung-cham inline-flex items-center gap-0.5 text-gold underline underline-offset-2" data-testid="dong-y-chi-tiet-mo">
-                Chi tiết<ChevronDown className={cn("size-3.5 transition-transform", moDongY && "rotate-180")} aria-hidden />
+                {g("hs.chi_tiet")}<ChevronDown className={cn("size-3.5 transition-transform", moDongY && "rotate-180")} aria-hidden />
               </button>
             </span>
           </p>
           {moDongY && (
             <p id="dong-y-chi-tiet" className="mt-2 rounded-xl border border-gold/30 bg-gold/[0.05] p-3" data-testid="dong-y-chi-tiet">
-              <b className="text-fg">{c("ho_so.dong_y_tieu_de")}:</b> ngày giờ sinh chỉ dùng để tính tại chỗ cho bạn, <b className="text-fg">không lưu</b> khi
-              bạn chưa đăng nhập; được gửi tới máy chủ tính toán của chúng tôi (Singapore) rồi bỏ ngay sau khi trả kết quả. Bấm nút
-              bên dưới là bạn đồng ý — rút lại được bất cứ lúc nào tại đây hoặc ở mục Tài khoản.{" "}
-              <Link href="/chinh-sach-rieng-tu#dong-y" className="text-gold underline">{c("ho_so.chinh_sach")}</Link>
+              <b className="text-fg">{c("ho_so.dong_y_tieu_de")}:</b> <ChuNhan lopNhan="font-bold text-fg" chu={g("hs.dong_y_day_du")} />{" "}
+              <Link href={`${dd("/chinh-sach-rieng-tu")}#dong-y`} className="text-gold underline">{c("ho_so.chinh_sach")}</Link>
             </p>
           )}
         </div>
@@ -498,7 +486,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
         {coDongY ? (nutGui ?? c("ho_so.nut_xem")) : c("ho_so.nut_dong_y")} <ArrowRight aria-hidden />
       </Button>
       <p className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-xs text-fg-faint">
-        <Lock className="size-3.5" aria-hidden /> Lưu trên máy của bạn · không cần tài khoản
+        <Lock className="size-3.5" aria-hidden /> {g("hs.luu_may")}
         {coDongY && (
           <span data-testid="da-dong-y">
             · {c("ho_so.da_dong_y")} ·{" "}

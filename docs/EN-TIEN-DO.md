@@ -2,7 +2,7 @@
 
 > Thước đo tiến độ DUY NHẤT của `docs/PROMPT-EN-TOAN-BO.md`. Cập nhật sau mỗi commit đáng kể. Phiên bị ngắt: đọc tệp này +
 > `git log` rồi làm tiếp đúng chỗ.
-> Cập nhật lần cuối: 2026-11-10 (xong GĐ 0, GĐ 1 — PR #251; GĐ 2 nền engine: danh mục, slug Anh, khuôn chung).
+> Cập nhật lần cuối: 2026-11-11 (GĐ 0–2 đã merge qua #251; GĐ 3 Bát tự xong, chờ duyệt PR — mục 3d, câu hỏi mở ở mục 6).
 
 ## 0. Trạng thái giai đoạn
 
@@ -11,7 +11,7 @@
 | 0 | Kiểm kê + golden | **xong** (2026-11-10) | golden bản Việt 10.509 lượt gọi (chụp lại sau khi merge main #246–#249), ổn định 2 lần chạy liên tiếp; khung test 5.2 chạy |
 | 1 | Nền web (rewrite, catalog nhiều ngôn ngữ, khung đầy đủ) | **xong** (PR #251) | khung, catalog, báo cáo + hỏi đáp chung song ngữ; 7 URL `/en` cũ chuyển hệ một-component trong giai đoạn từng mảng (mục 3b) |
 | 2 | Nền engine (tên riêng, `L()` cho khuôn chung, `slug_en`) | **xong phần nền** (mục 3c) | 7 nhóm route danh mục sạch; khuôn chuyên mảng (`truc_quan`, `mo_dau`, căn cứ `chu_y_nam`/`suc_khoe_nam`/`luu_y_mang`) làm cùng mảng |
-| 3 | Bát tự | chưa | 5 nhóm route |
+| 3 | Bát tự | **xong — chờ duyệt PR** (2026-11-11) | 5 nhóm route sạch; `/en/bazi` + 3 cụm kiến thức mở; hỏi đáp tiếng Anh (mục 3d) — câu hỏi mở: bộ dò khủng hoảng tiếng Anh (mục 6) |
 | 4 | Tử vi | chưa | 12 |
 | 5 | Phong thuỷ | chưa | 11 |
 | 6 | Kinh Dịch | chưa | 6 |
@@ -168,11 +168,75 @@ tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2
   (Vừa) mã `loi` trùng giữa tệp không còn làm 500 (log + test bắt); slug Anh thiếu tên chỉ bỏ trang đó (test bắt thiếu);
   mã kiểm chứng dựng từ tiêu đề (`gan_ma_mau`, Phong thuỷ) lấy theo bản Việt. Còn ghi nhận (Thấp): `L()` hai cách gọi,
   `lap` bản Anh chạy hai lượt, vài câu cờ ("0 day(s)", mức độ tin giờ thô).
-- 🟡 Hỏi đáp Bát tự tiếng Anh (5.3): bộ câu viết độc lập `fixtures/cau_hoi/en/battu_dev.jsonl` (260) +
+- ✅ Hỏi đáp Bát tự tiếng Anh (5.3) — xem bảng số đo cuối mục này. Ghi chép ban đầu: bộ câu viết độc lập `fixtures/cau_hoi/en/battu_dev.jsonl` (260) +
   `battu_holdout.jsonl` (160, đóng băng); bộ chấm `engine/scripts/cham_en.py`. **Mốc trước khi làm**: định tuyến dev 15 % /
   holdout 16 %, an toàn 6/12 · 2/12, mốc thời gian 16/72 · 13/44, câu trả lời còn chữ Việt 259/260 → cần bộ hiểu câu tiếng
   Anh + lời đáp theo ngôn ngữ (mục tiêu: định tuyến ≥ 90 %, an toàn 100 %, mốc ≥ 90 %).
-- Chưa: web `/en/bazi` (mở rewrite, hiển thị `ten_hien`, khung Trường phái, cụm thập thần / nhật chủ / mệnh theo năm), thẻ chia sẻ.
+- ✅ **Bộ chặn tiếng Anh theo NGHĨA (GĐ 3d vòng 4, 2026-11-11)**: ba bộ viết độc lập liên tiếp lọt khủng hoảng (v3: 16/25)
+  vì danh sách cụm cứ dài thêm → `luangiai/an_toan.py` thêm bộ nhận nhóm tín hiệu (phương tiện theo loại · ý chấm dứt mạnh /
+  cần thêm tín hiệu · hành vi từ biệt · tự coi mình vô dụng · ý làm hại người khác có chủ thể là người nói), ghép theo luật
+  trong ~15 từ, hợp với mẫu cụm cũ; quá liều ngoài ý muốn ("by mistake", "twice", "for my toothache") → cấp cứu. **Tầng hỗ trợ
+  mềm**: một tín hiệu buồn yếu → vẫn trả lời, kèm trường `ho_tro` (chỉ bản Anh, `kb/data/en/loi/an_toan_mem.json`), web hiện
+  khung dịu trên câu trả lời. Số đo: v3 khủng hoảng 16/25 → 25/25, cấp cứu 8/10 → 10/10; mọi bộ dev khác 100 %; chặn nhầm 0
+  (v2: 1 câu thai sản theo chính sách, có từ trước). `scripts/cham_en.py --v2 --tep <tệp> --sai`. Còn: tầng mềm chưa nối
+  hỏi đáp Tarot / Thần số / Tử vi bản Anh.
+- ✅ **Web `/en/bazi`** (2026-11-11, một cây component): cờ `mo` của `/bat-tu` trong `lib/duong-en.json` → proxy rewrite về
+  `/bat-tu` + `x-ngon-ngu`. Chữ cố định đưa vào catalog có chiều `en`: `lib/chu/bat-tu.ts` (công cụ Bát tự, bảng tứ trụ, vòng
+  địa chi, ngũ giác, đại vận, dụng thần, "Which reading fits you?"), `lib/chu/giao-dien.ts` (khung Trường phái, "Quick answer",
+  khối mời lập lá số, dải QR, khung luận giải, biểu đồ Bát tự trong báo cáo, dòng 10 năm, **form hồ sơ NhapHoSo**),
+  `lib/chu/cong-cu.ts` (`CHU_BAT_TU` thêm `en`), `lib/chu/hoi-dap.ts` (ghi chú / lỗi / lượt hỏi của `lib/hoi-mang.ts`).
+  Mã engine hiện qua `ten_hien` (`lib/ten-hien.ts`, `components/khung/TenHien.tsx`). Khung trang công cụ bản Anh
+  (`TrangCongCu` nhánh en: không CMS, không blog; chữ máy chủ `lib/so-trang-en.ts`), metadata `metaCongCuEn`, hreflang hai
+  chiều (bản Việt `/bat-tu` thêm 3 thẻ `alternate` — lệch HTML có chủ đích DUY NHẤT, 73/74 trang còn lại 0 lệch), sitemap-en.
+  Trình duyệt gửi `x-ngon-ngu` cho route API (`fetchSao` → `kemNgonNgu`), route GET có đệm dùng `urlTheoNgonNgu`. Bản Anh:
+  báo cáo miễn phí (`luan_giai_sao` bỏ thu Sao khi lượt gọi tiếng Anh), không tặng chương / lưu bài, không khối CTA chéo mảng.
+  e2e `web/e2e/en-bazi.spec.ts`. **Chưa**: cụm kiến thức `/en/bazi/{ten-gods, day-masters, element-by-birth-year}` (engine đã
+  sạch nhưng `TrangChuDe` / `TrangKienThuc` / `DanhSachCum` / `DongTacGia` / `MinhHoa` còn chữ Việt cứng + CMS mẫu cụm) — cờ `mo` để tắt; thẻ chia sẻ. → cụm kiến thức: xong ở dòng dưới.
+- ✅ **Cụm kiến thức `/en/bazi/{ten-gods, day-masters, element-by-birth-year}[/slug]`** (2026-11-11, một cây component): cờ `mo`
+  bật trong `lib/duong-en.json` → proxy rewrite về `/bat-tu/{thap-than, nhat-chu, menh-theo-nam}[/slug]`; slug con = `slug_en`
+  engine (URL Anh mang slug Việt → 308 về slug Anh; URL Việt mang slug Anh → 308 về slug Việt). Chữ cố định của khối trang
+  kiến thức dùng chung đưa vào `lib/chu/kien-thuc.ts` (chiều `en`): "Trả lời nhanh" (`TraLoiNhanh`), ngày / nhãn / hỏi đáp /
+  nguồn / miễn trừ / lời mời của `TrangKienThuc` (tách `CacMuc`, `HoiDapBai`, `ThanMuc` dùng chung hai bản), mục lục cụm
+  (`DanhSachCum`, `BoLocCum`; `mucLucCum(…, en)` — luật `menh-tuoi` có nhãn Anh, luật khác bản Anh giữ lưới phẳng), dòng tác
+  giả (`DongTacGia`: bản Anh luôn "Hieuban editorial team · Editor-in-chief Duc Luan" — EEAT-1/BM-1: chuyên gia không đứng tên
+  bản Anh; bản Việt đã thẩm định thì ghi "The Vietnamese edition was reviewed by…"), hình minh hoạ thập thần / nhật chủ / mệnh
+  năm + dải QR (`MinhHoa` nhận `en` + `ten` từ `ten_hien`). Trang cụm + trang con bản Anh: `TrangChuDeEn` / `TrangKienThucEn`
+  (cùng khối, không CMS mẫu cụm, không "Bài viết liên quan", không "Góc nhìn chuyên gia" — lời chuyên gia chỉ có tiếng Việt,
+  không ảnh tóm tắt dọc — /og/y-chinh chỉ vẽ chữ Việt; link tới trang chưa có bản Anh thì ẩn). Chữ máy chủ trang cụm:
+  `CUM_EN` trong `lib/so-trang-en.ts` (cũng là thẻ khối "Learn BaZi" của /en/bazi); breadcrumb `duongDanCumEn`; JSON-LD
+  CollectionPage / Article (+ `translationOfWork`) / FAQPage / BreadcrumbList tiếng Anh, `ldThucTheEn`. Hreflang hai chiều:
+  trang Việt của 3 cụm + trang con khai `en` (slug Anh tra mục lục bản Anh — `slugEnCua`; chỉ cụm rewrite, `banAnhRewrite`) —
+  lệch HTML có chủ đích DUY NHẤT (3 thẻ `alternate` / trang), mọi trang Việt khác 0 lệch. Nút "Tiếng Việt" dựng ở máy chủ trỏ
+  đúng trang Việt cùng mục (`banVietTrangEn`, không qua 308). sitemap-en thêm 3 cụm + 98 trang con (lastmod, hreflang; chỉ cụm rewrite —
+  cụm viết riêng không bị liệt kê hai lần). `kiem-tra-seo.mjs --chi-en`: 199 URL, 0 lỗi, 0 cảnh báo ở /en/bazi/*. e2e
+  `e2e/en-bazi.spec.ts` (+9 ca). **Còn**: thẻ chia sẻ; cột "Learn" của chân trang bản Anh chưa có 3 cụm; bản `.md` trang Anh;
+  trang Việt `/tarot/la-bai`, `/than-so/y-nghia-so` (bản Anh viết riêng) vẫn chưa khai hreflang `en` ở trang cụm (có từ trước).
+
+- ✅ **Sửa theo review độc lập GĐ 3 (2026-11-11)**: bản Anh miễn phí CHỈ cho mảng đã mở tiếng Anh (`web/lib/proxy.ts`
+  `MO_DUN_MIEN_PHI_EN` — trước đó gửi header `x-ngon-ngu` là đọc hết chương khoá mọi mảng); hỏi đáp bản Anh không hạn mức Sao;
+  lời chào bản Anh không gọi người Việt bằng họ (`tenGoiEn`); dòng tác giả bản Anh lấy tên theo dữ liệu; JSON-LD bản Anh bỏ
+  Wikipedia tiếng Việt; engine: "dye" ≠ "die", "my last question" cần từ kết thúc, sửa lỗi gõ không nuốt chữ, "Year of the X"
+  trước Tết đúng năm. Còn ghi nhận: hỏi đáp tiếng Anh chạy engine hai lượt (bản Việt quyết) ≈ 2× CPU.
+- ✅ **Thai sản bản Anh theo bản Việt**: chỉ từ chối đoán kết quả cơ thể (có thai chưa, trai/gái, sảy thai, IVF, vô sinh);
+  hỏi bao giờ có thai / năm nên sinh con → nhánh sinh con (ranh giới bác sĩ, tục so tuổi con); "Will I have kids?" → mảng gia đình.
+- ✅ **Lưới an toàn bản Anh**: dòng cố định (988 / 116 123 / 1767 / findahelpline.com + số cấp cứu địa phương) dưới MỌI câu trả
+  lời hỏi đáp bản Anh (`hoi-dap.ts` khoá `luoi_an_toan`), vì bộ dò dựa trên luật chưa bắt hết tiếng Anh tự do.
+
+**Số đo hỏi đáp Bát tự tiếng Anh (2026-11-11)** — `engine/scripts/cham_en.py`:
+
+| Bộ câu | Vai trò | Định tuyến | Khủng hoảng | Cấp cứu | Từ chối | Chặn nhầm | Mốc năm | Chữ Việt / 500 |
+|---|---|---|---|---|---|---|---|---|
+| `battu_dev.jsonl` (377) | dev | 99,7 % | an toàn 12/12 | | | 0 | 82/82 | 0 / 0 |
+| `an_toan_en.jsonl` (395) | dev | | 128/128 | 17/17 | 90/90 | 0/160 | | |
+| `an_toan_en_dev2.jsonl` (192) | dev | | 51/51 | 20/20 | 41/41 | 0/40 | | |
+| `battu_holdout.jsonl` (160) | đã dùng điều hướng (lộ số đếm) | ~82 % | | | | | | |
+| `battu_holdout_v2.jsonl` (200) | nay là dev (đã xem câu an toàn) | 92,5 % | 20/20 | 10/10 | 20/20 | 0 | 42/42 | 0 / 0 |
+| `battu_holdout_v3.jsonl` (200) | nay là dev (đã xem câu lọt) | 88 % | 25/25 (trước 16/25) | 10/10 | 20/20 | 0 | 45/45 | 0 / 0 |
+| **`battu_holdout_v4.jsonl` (220)** | **đóng băng — chưa ai xem nội dung** | **83,2 %** | **26/30** | **8/13** | **21/22** | **0** | **48/49** | **0 / 0** |
+
+Kết luận đo: mỗi bộ độc lập mới vẫn tìm ra câu khủng hoảng / cấp cứu lọt (v3 64 % → v4 87 % sau khi đổi sang nhóm tín hiệu) —
+bộ dò dựa trên luật có trần với tiếng Anh tự do. Đã có lưới an toàn (dòng cố định) + tầng mềm; quyết định mở hỏi đáp bản Anh
+cho người dùng thật cần chủ dự án (mục 6).
 
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
@@ -211,8 +275,8 @@ sang hệ một-component ở GĐ 1 (cùng URL).
 | `/hop-doi/cap-so[/slug]` | `/en/compatibility/number-pairs[/…]` | chưa | 7 |
 | `/tarot` | `/en/tarot` | đã có (cũ) | 1, 7 |
 | `/tarot/[cum]`, `/tarot/[cum]/[slug]` (la-bai) | `/en/tarot/cards[/slug]` | đã có (cũ) | 1 |
-| `/bat-tu` | `/en/bazi` | chưa | 3 |
-| `/bat-tu/[cum][/slug]` (thap-than, nhat-chu, menh-theo-nam) | `/en/bazi/{ten-gods, day-masters, element-by-birth-year}[/…]` | chưa | 3 |
+| `/bat-tu` | `/en/bazi` | xong (rewrite) | 3 |
+| `/bat-tu/[cum][/slug]` (thap-than, nhat-chu, menh-theo-nam) | `/en/bazi/{ten-gods, day-masters, element-by-birth-year}[/…]` | xong (rewrite) | 3 |
 | `/tu-vi` | `/en/zi-wei-dou-shu` | chưa | 4 |
 | `/tu-vi/[cum][/slug]` (chinh-tinh, cung, sao-o-cung, tu-hoa, co-thu) | `/en/zi-wei-dou-shu/{stars, palaces, star-in-palace, four-transformations, classics}[/…]` | chưa | 4 |
 | `/tu-vi/la-so-mau[/slug]` | `/en/zi-wei-dou-shu/sample-charts[/…]` | chưa | 4 |
@@ -256,7 +320,18 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
 
 ## 6. Cần chủ dự án quyết (ngoài 4 câu đã hỏi)
 
-- Chưa có. (Ghi tại đây khi phát sinh; em làm phần khác trong lúc chờ.)
+1. **Bộ dò khủng hoảng tiếng Anh** (hỏi đáp mọi mảng bản Anh): bộ đóng băng độc lập v4 bắt 26/30 khủng hoảng, 8/13 cấp cứu
+   dù đã có nhóm tín hiệu + tầng mềm + lưới an toàn (dòng cố định dưới mọi câu trả lời). Ba hướng: (a) mở như hiện tại, tiếp tục
+   vòng đo – sửa với bộ độc lập mới mỗi đợt; (b) thêm bộ phân loại an toàn bằng mô hình ngôn ngữ cho câu tiếng Anh (gửi câu hỏi
+   ra nhà cung cấp AI — lệch "LLM chỉ ở tầng diễn đạt", tốn lượt, cần duyệt quyền riêng tư); (c) tạm ẩn ô hỏi đáp bản Anh, chỉ
+   mở lá số + báo cáo cho tới khi có (b). Em đề xuất (a) ngay + cân nhắc (b) trước khi quảng bá bản Anh.
+   **→ Anh chọn (a) (2026-11-11)**: mở như hiện tại; mỗi giai đoạn sau đo lại bằng một bộ khủng hoảng tiếng Anh viết độc lập mới
+   (bộ cũ thành dev), sửa theo NHÓM tín hiệu, không vá từng câu; (b) xét lại trước khi quảng bá bản Anh.
+2. **Bản Việt "Khi nào tôi có thai?"** đang trả lời bằng mức mảng gia đình (vd "cần lưu ý") — dễ đọc thành lời đoán với người
+   đang mong con; bản Anh đã chuyển loại câu này sang nhánh "sinh con" (ranh giới bác sĩ). Đổi bản Việt cho giống = golden bản
+   Việt đổi có chủ đích (vài lượt hỏi đáp) — cần anh đồng ý.
+3. **Số đường dây nóng** trong tầng mềm + lưới an toàn (988 Mỹ, 116 123 Anh/Ireland, 1767 Singapore, Befrienders Malaysia
+   03-7627 2929, 1553 Philippines, findahelpline.com): cần người kiểm lại trước khi mở bản Anh.
 
 ## 7. Nhật ký
 
@@ -266,3 +341,5 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
 - **2026-11-10 — GĐ 1 (phiên 2)**: chụp HTML trang Việt (việc 6), khung đầy đủ tiếng Anh (việc 1), Chữ dùng chung `en` (việc 2), hồ sơ chung (việc 4), khoá đệm theo ngôn ngữ (việc 5), khung báo cáo chung song ngữ + xoá `BaoCaoEn` (nửa đầu việc 3). Bản Việt: HTML máy chủ 0/74 lệch.
 - **2026-11-10 — GĐ 1 (phiên 3)**: khung hỏi đáp chung song ngữ (xoá `HoiEn`), sửa theo review, CodeQL; PR #251 (GĐ 0–1).
 - **2026-11-10 — GĐ 2**: thước đo theo loại trang, 7 nhóm route danh mục sạch, slug Anh 668 trang (+ sửa 404 lá bài), khuôn chung song ngữ (mục 3c).
+- **2026-11-11 — merge #251 (GĐ 0–2)**; GĐ 3 Bát tự: hỏi đáp tiếng Anh (lời + hiểu câu + an toàn theo nhóm tín hiệu + tầng mềm + lưới an toàn), 98 trang kiến thức tiếng Anh, web `/en/bazi` + 3 cụm, review độc lập (sửa paywall theo header, lời chào, dòng tác giả, lỗi gõ an toàn), bộ đóng băng độc lập v2 → v4.
+- **2026-11-11 — anh chọn (a)** cho bộ dò khủng hoảng tiếng Anh; gộp main #255 (SEO-O2: tiêu đề nhóm cụm tự đứng — thêm bản Anh) vào PR #256.

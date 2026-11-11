@@ -288,7 +288,7 @@
  "bt_ds.vh.muoi_hai_thang": "The next twelve months",
  "bt_ds.vh.tom_thuan": "In the next ten years, the nearest favourable year is {nam}: {nhan}.",
  "bt_ds.vh.don_suc": "good for putting in your energy",
- "bt_ds.vh.tom_deu": "None of your next ten years stands out clearly; the year most worth putting your energy into is {nam}.",
+ "bt_ds.vh.tom_deu": "No year in your next ten stands out clearly; the year most worth putting your energy into is {nam}.",
  "bt_ds.vh.cau_cham": "Years to take more slowly: {ds}.",
  "bt_ds.vh.viec_chinh": "main matters",
  "bt_ds.vh.khong_cham": "No year needs to be taken really slowly; the year to keep a steady pace most is {nam}.",

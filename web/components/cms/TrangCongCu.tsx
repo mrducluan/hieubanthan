@@ -19,10 +19,19 @@ import { duongDanCongCu } from "@/lib/duong-dan";
 import { thanhCua } from "@/lib/thanh-mang";
 import { boLap } from "@/lib/the-lap-cms";
 import { namTuoiSeo } from "@/lib/nam";
+import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
+import { trangCongCuEn } from "@/lib/so-trang-en";
+import { banAnh } from "@/lib/duong-en";
+import { ldDuongDanEn } from "@/lib/en/seo";
+import Link from "@/components/khung/Lien";
+import { ArrowRight } from "lucide-react";
 
 export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
   /** Mảng cho "Bài viết liên quan" (không có → không hiện khối này). */ duong: string; mang?: string; truoc?: ReactNode; sau?: ReactNode; children: ReactNode;
 }) {
+  // EN-ALL GĐ 3d: URL Anh được proxy rewrite về trang Việt này (`x-ngon-ngu: en`) → khung bản Anh: không CMS (chưa có
+  // localization — GĐ 10), không bài viết (blog tiếng Việt), chữ từ lib/so-trang-en.ts + bảng chữ của URL (chiều `en`).
+  if ((await ngonNguMayChu()).ngonNgu === "en") return <TrangCongCuEn duong={duong} truoc={truoc} sau={sau}>{children}</TrangCongCuEn>;
   const [nd, dauCum, lapCms] = await Promise.all([layNoiDungTrang(duong), layDauNhieuTrang(dsCumTru(duong).map((x) => x.duong)), boLap()]);
   const lapTuyChon = { ...lapCms, uuTien: nd.loiDiTiep };
   // CTA-2: link đã hiện ở khối "Kiến thức {mảng}" (cụm + thẻ bù của nó) → khối bài viết bên dưới không bù lặp lại.
@@ -57,6 +66,50 @@ export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
         nhan={{ tieuDe: c("gioi_thieu.tieu_de", { ten: nd.ten ?? "" }), hoiDap: c("gioi_thieu.hoi_dap"), docThem: c("gioi_thieu.doc_them") }} />}
       {sau}
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mx-auto mt-12 max-w-5xl" />
+    </>
+  );
+}
+
+/** Bản Anh của khung trang công cụ: breadcrumb (Hieuban › {công cụ}), đầu trang (DauCms đọc bảng chữ chiều `en`), "Learn …"
+ *  (chỉ cụm kiến thức đã mở bản Anh), "About this tool" + FAQPage tiếng Anh. Không đọc CMS. */
+async function TrangCongCuEn({ duong, truoc, sau, children }: { duong: string; truoc?: ReactNode; sau?: ReactNode; children: ReactNode }) {
+  const t = trangCongCuEn(duong);
+  const bang = mucSoTrang(duong)?.mac_dinh.chu ?? {};
+  const duongEn = banAnh(duong) ?? duong;
+  const cum = t?.kien_thuc ? dsCumTru(duong).flatMap((c) => {
+    const en = banAnh(c.duong), chu = t.kien_thuc!.cum[c.duong];
+    return en && chu ? [{ duong: en, ...chu }] : [];
+  }) : [];
+  const traLoi = t ? { hoi: t.tra_loi_nhanh.hoi, dap: t.tra_loi_nhanh.dap,
+    lien_ket: (t.tra_loi_nhanh.lien_ket ?? []).filter((l) => l.href.startsWith("/en")) } : null;
+  return (
+    <>
+      {t && <>
+        <JsonLd data={ldDuongDanEn([{ ten: t.ten, duong: duongEn }])} />
+        <DuongDan nhan="Breadcrumb" ds={[{ ten: "Hieuban", duong: "/en" }, { ten: t.ten, duong: duongEn }]} className="-mt-2 mb-5 md:-mt-4" />
+      </>}
+      {truoc}
+      <DauCms bang={bang} chu={{}} traLoi={traLoi}>{children}</DauCms>
+      {cum.length > 0 && (
+        <nav aria-labelledby="kien-thuc-tru" className="mx-auto mt-12 max-w-5xl" data-testid="cum-kien-thuc-tru">
+          <h2 id="kien-thuc-tru" className="text-2xl">{t!.kien_thuc!.tieu_de}</h2>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {cum.map((c) => (
+              <li key={c.duong}>
+                <Link href={c.duong} className="glass group flex h-full flex-col rounded-2xl p-4 transition-colors hover:border-gold/50">
+                  <span className="flex items-center justify-between gap-2 font-serif text-lg">{c.ten}
+                    <ArrowRight className="size-4 shrink-0 text-gold/70 transition-transform group-hover:translate-x-1" aria-hidden /></span>
+                  <span className="mt-1 line-clamp-2 text-sm text-fg-muted">{c.mo_ta}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+      {t && <GioiThieuCongCu en duong={duongEn} ten={t.ten} moTa={t.mo_ta_seo} doan={t.gioi_thieu.doan} hoiDap={t.gioi_thieu.hoi_dap}
+        lienKet={(t.gioi_thieu.doc_them?.lien_ket ?? []).filter((l) => l.href.startsWith("/en"))}
+        nhan={{ tieuDe: t.gioi_thieu.tieu_de, hoiDap: t.gioi_thieu.hoi_dap_tieu_de, docThem: t.gioi_thieu.doc_them?.tieu_de }} />}
+      {sau}
     </>
   );
 }

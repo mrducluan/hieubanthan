@@ -11,7 +11,7 @@ import { GhiVaoTrang } from "@/components/khung/GhiVaoTrang";
 import { ChanTrang, ChanTrangEn, KhungChanTrang } from "@/components/khung/ChanTrang";
 import { menuEn } from "@/lib/khung-en";
 import { MENU_DAU_TRANG } from "@/lib/menu-dau-trang";
-import { banVietCuaTrang } from "@/lib/duong-en";
+import { banVietTrangEn } from "@/lib/kien-thuc";
 import { COT_CHAN_TRANG } from "@/lib/menu-chan-trang";
 import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { ThanhMang } from "@/components/khung/ThanhMang";
@@ -98,6 +98,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const maNn = hd.get("x-ngon-ngu") ?? "vi";
   if (LA_MA_EN.test(maNn)) {
     const menu = menuEn(MENU_DAU_TRANG);
+    // Trang Việt tương đương cho nút "Tiếng Việt" (trang con cụm kiến thức: slug Anh → slug Việt, không qua 308).
+    const hienThi = hd.get("x-duong-hien-thi") ?? "/en";
+    const banVietEn = await banVietTrangEn(hienThi);
     return (
       <html lang={langHtml(maNn)} className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
         <body>
@@ -107,10 +110,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">Skip to content</a>
           <NgonNguProvider ngonNgu="en" ma={maNn}>
             <ChuChung chu={{}}>
-              <ThanhTren muc={menu} />
+              <ThanhTren muc={menu} banViet={{ cho: hienThi, ve: banVietEn }} />
               <Suspense fallback={<ThanhMang />}><ThanhMangDem /></Suspense>
               <main id="noi-dung" className="container pb-12 pt-6 md:pb-16 md:pt-10" lang="en">{children}</main>
-              <ChanTrangEn banViet={banVietCuaTrang(hd.get("x-duong-hien-thi") ?? "/en")} />
+              <ChanTrangEn banViet={banVietEn} />
               <TabDuoi muc={menu} />
               <HoiDongYCookie />
             </ChuChung>

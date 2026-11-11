@@ -135,7 +135,9 @@ function MenuDiDong({ muc }: { muc: MucMenu[] }) {
   );
 }
 
-export function ThanhTren({ muc = MENU_DAU_DU_PHONG }: { muc?: MucMenu[] }) {
+/** `banViet` (bản Anh): trang Việt tương đương máy chủ đã tra cho URL `cho` (trang con cụm kiến thức có slug Anh ≠ slug Việt);
+ *  chỉ dùng khi đúng trang đang mở — chuyển trang phía trình duyệt thì quay về suy theo bảng (nút còn đọc hreflang của trang). */
+export function ThanhTren({ muc = MENU_DAU_DU_PHONG, banViet }: { muc?: MucMenu[]; banViet?: { cho: string; ve: string } }) {
   const so = useDuongSo();
   const hien = usePathname() ?? "/";
   const { ngonNgu } = useNgonNgu();
@@ -168,7 +170,7 @@ export function ThanhTren({ muc = MENU_DAU_DU_PHONG }: { muc?: MucMenu[] }) {
         </nav>
         {ngonNgu === "en" ? (
           <div className="flex items-center gap-1">
-            <NutDoiNgonNgu href={laDuongEn(hien) ? banVietCuaTrang(hien) : hien} sang="vi"
+            <NutDoiNgonNgu href={banViet?.cho === hien ? banViet.ve : laDuongEn(hien) ? banVietCuaTrang(hien) : hien} sang="vi"
               className="rounded-full border border-line px-3 py-1.5 text-sm text-fg-muted hover:text-fg">{k.doi_ngon_ngu}</NutDoiNgonNgu>
             <MenuDiDong muc={muc} />
           </div>

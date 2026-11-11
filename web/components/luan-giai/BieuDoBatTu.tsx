@@ -10,22 +10,26 @@
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ChanQr } from "@/components/khung/ChanQr";
-import { NHAN_MUC, type BieuDoNguHanh as BieuDoT, type HaiCach, type MocDaiHan, type Muc, type ThanDo } from "./kieu";
+import { type BieuDoNguHanh as BieuDoT, type HaiCach, type MocDaiHan, type Muc, type ThanDo } from "./kieu";
+import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
+import { useTen } from "@/components/khung/TenHien";
+import { useChuBaoCao } from "./chu-bao-cao";
 
 const SLUG: Record<string, string> = { "Kim": "kim", "Mộc": "moc", "Thủy": "thuy", "Hỏa": "hoa", "Thổ": "tho" };
 const pct = (x: number) => Math.round(Math.min(1, Math.max(0, x)) * 100);
 
 export function ThanhThan({ than }: { than: ThanDo }) {
   const giam = useReducedMotion();
+  const { c } = useChuGiaoDien();
   const vi = pct(than.ti_le), duoi = pct(than.nhuoc_duoi), tren = pct(than.vuong_tu);
   return (
     <figure className="mt-5 rounded-2xl border border-line/70 p-4" data-testid="thanh-than" data-muc-than={than.muc}>
       <figcaption className="flex flex-wrap items-baseline justify-between gap-2 text-sm">
         <span className="font-semibold text-fg">{than.nhan}</span>
-        <span className="text-xs text-fg-faint">thang điểm công bố · {vi}% trợ lực</span>
+        <span className="text-xs text-fg-faint">{c("bd.thang_diem", { pt: String(vi) })}</span>
       </figcaption>
       <div className="relative mt-3 h-3 rounded-full" role="img"
-        aria-label={`Sức tự thân ${vi}%: dưới ${duoi}% là cần thêm điểm tựa, từ ${tren}% là mạnh`}>
+        aria-label={c("bd.than_aria", { pt: String(vi), duoi: String(duoi), tren: String(tren) })}>
         <div className="absolute inset-0 flex overflow-hidden rounded-full">
           <span className="h-full bg-[rgb(245_170_80/0.35)]" style={{ width: `${duoi}%` }} />
           <span className="h-full bg-[rgb(170_180_214/0.3)]" style={{ width: `${tren - duoi}%` }} />
@@ -37,26 +41,28 @@ export function ThanhThan({ than }: { than: ThanDo }) {
           transition={giam ? { duration: 0 } : { duration: 1.1, ease: [0.22, 1, 0.36, 1] }} style={{ left: `${vi}%` }} />
       </div>
       <div className="mt-2 grid grid-cols-3 text-[0.7rem] text-fg-faint">
-        <span>Cần điểm tựa</span><span className="text-center">Cân bằng</span><span className="text-right">Mạnh</span>
+        <span>{c("bd.can_diem_tua")}</span><span className="text-center">{c("bd.can_bang")}</span><span className="text-right">{c("bd.manh")}</span>
       </div>
-      <ChanQr nhan="Quét để xem sức tự thân của bạn" />
+      <ChanQr nhan={c("bd.qr_than")} />
     </figure>
   );
 }
 
 export function BieuDoNguHanh({ bd, haiCach }: { bd: BieuDoT; haiCach?: HaiCach }) {
   const giam = useReducedMotion();
+  const { c, en } = useChuGiaoDien();
+  const ten = useTen();
   const lon = Math.max(0.01, ...bd.hanh.map((h) => h.ty_le));
   return (
     <figure className="mt-5 rounded-2xl border border-line/70 p-4" data-testid="bieu-do-ngu-hanh">
-      <figcaption className="text-sm font-semibold text-fg">Năm phần năng lượng trong bạn</figcaption>
+      <figcaption className="text-sm font-semibold text-fg">{c("bd.nam_phan")}</figcaption>
       <ul className="mt-3 space-y-3">
         {bd.hanh.map((h, i) => (
           <li key={h.hanh} data-testid="cot-hanh" data-hanh={SLUG[h.hanh] ?? h.hanh} data-trang-thai={h.trang_thai}
-            className="bd-hanh grid grid-cols-[2.6rem_minmax(0,1fr)_2.6rem] items-center gap-x-2 gap-y-1">
+            className={cn("bd-hanh grid items-center gap-x-2 gap-y-1", en ? "grid-cols-[3.4rem_minmax(0,1fr)_2.6rem]" : "grid-cols-[2.6rem_minmax(0,1fr)_2.6rem]")}>
             <span className={cn("text-sm font-semibold", h.hanh === bd.nhat_chu && "underline decoration-gold underline-offset-4")}
-              title={h.hanh === bd.nhat_chu ? "Hành của chính bạn" : undefined}>{h.hanh}</span>
-            <div className="h-3 overflow-hidden rounded-full bg-line/40" role="img" aria-label={`${h.hanh}: ${pct(h.ty_le)}%`}>
+              title={h.hanh === bd.nhat_chu ? c("bd.hanh_ban") : undefined}>{ten("hanh", h.hanh)}</span>
+            <div className="h-3 overflow-hidden rounded-full bg-line/40" role="img" aria-label={`${ten("hanh", h.hanh)}: ${pct(h.ty_le)}%`}>
               <motion.span className="block h-full rounded-full bg-[rgb(var(--hanh))]"
                 initial={giam ? false : { width: 0 }} animate={{ width: `${(h.ty_le / lon) * 100}%` }}
                 transition={giam ? { duration: 0 } : { duration: 0.8, delay: 0.1 + i * 0.09, ease: "easeOut" }}
@@ -64,22 +70,22 @@ export function BieuDoNguHanh({ bd, haiCach }: { bd: BieuDoT; haiCach?: HaiCach 
             </div>
             <span className="text-right text-xs tabular-nums text-fg-muted">{pct(h.ty_le)}%</span>
             <span className="col-start-2 col-end-4 flex min-w-0 flex-wrap items-center gap-1.5 text-[0.7rem] text-fg-faint">
-              <span className="min-w-0">{h.nhom}</span>
-              {h.trang_thai === "thieu" && <span className="rounded-full border border-[rgb(245_170_80/0.6)] px-1.5 text-[rgb(245_170_80)]">đang thiếu</span>}
-              {h.trang_thai === "thua" && <span className="rounded-full border border-line px-1.5">đang dư</span>}
-              {h.cach_1 && <span className="rounded-full bg-moon/15 px-1.5 text-moon" data-testid="goi-y-cach-1">cách 1 gợi ý bù</span>}
-              {h.cach_2 && <span className="rounded-full border border-moon/50 px-1.5 text-moon" data-testid="goi-y-cach-2">cách 2 gợi ý bù</span>}
+              <span className="min-w-0">{ten("nhom_thap_than", h.nhom)}</span>
+              {h.trang_thai === "thieu" && <span className="rounded-full border border-[rgb(245_170_80/0.6)] px-1.5 text-[rgb(245_170_80)]">{c("bd.thieu")}</span>}
+              {h.trang_thai === "thua" && <span className="rounded-full border border-line px-1.5">{c("bd.du")}</span>}
+              {h.cach_1 && <span className="rounded-full bg-moon/15 px-1.5 text-moon" data-testid="goi-y-cach-1">{c("bd.cach_1_bu")}</span>}
+              {h.cach_2 && <span className="rounded-full border border-moon/50 px-1.5 text-moon" data-testid="goi-y-cach-2">{c("bd.cach_2_bu")}</span>}
             </span>
           </li>
         ))}
       </ul>
       {haiCach && (
         <p className="mt-3 text-xs leading-relaxed text-fg-faint">
-          Cách 1 — {haiCach.cach_1.ten.toLowerCase()}: {haiCach.cach_1.hanh.join(", ") || "đã khá cân"} · Cách 2 —{" "}
-          {haiCach.cach_2.ten.toLowerCase()}: {haiCach.cach_2.hanh.join(", ") || "chưa rõ"}. Hai trường phái, hệ thống không chọn thay bạn.
+          {c("bd.hai_cach", { ta: haiCach.cach_1.ten.toLowerCase(), ha: haiCach.cach_1.hanh.map((h) => ten("hanh", h)).join(", ") || c("bd.da_can"),
+            tb: haiCach.cach_2.ten.toLowerCase(), hb: haiCach.cach_2.hanh.map((h) => ten("hanh", h)).join(", ") || c("bd.chua_ro") })}
         </p>
       )}
-      <ChanQr nhan="Quét để xem ngũ hành của bạn" />
+      <ChanQr nhan={c("bd.qr_ngu_hanh")} />
     </figure>
   );
 }
@@ -89,6 +95,8 @@ const SO: Record<Muc, number> = { thuan: 1, can_bang: 0, can_chu_dong: -1 };
 /** Dải đại vận theo hai cách đọc. Chỉ hiện khi engine trả mức từng cách (báo cáo Bát tự). */
 export function DaiVanHaiCach({ ds }: { ds: MocDaiHan[] }) {
   const giam = useReducedMotion();
+  const { c } = useChuGiaoDien();
+  const { nhanMuc } = useChuBaoCao();
   if (!ds.length || !ds.every((m) => m.muc_cach_1 && m.muc_cach_2)) return null;
   const W = 640, H = 92, pad = 4, w = (W - pad * 2) / ds.length;
   const y = (m?: Muc) => 46 - (m ? SO[m] : 0) * 14;
@@ -97,7 +105,7 @@ export function DaiVanHaiCach({ ds }: { ds: MocDaiHan[] }) {
       {/* Điện thoại: giữ chữ đọc được (≥ 26rem), cuộn ngang TRONG khung, trang không cuộn ngang. */}
       <div className="overflow-x-auto pb-1">
       <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full min-w-[26rem]" role="img"
-        aria-label={`Mức ${ds.length} giai đoạn mười năm theo hai cách đọc: ${ds.map((m) => `${m.tu_tuoi}–${m.den_tuoi} tuổi ${NHAN_MUC[m.muc].toLowerCase()}`).join("; ")}`}>
+        aria-label={c("bd.dv_aria", { so: String(ds.length), ds: ds.map((m) => c("bd.dv_tuoi", { tu: String(m.tu_tuoi), den: String(m.den_tuoi), muc: nhanMuc[m.muc].toLowerCase() })).join("; ") })}>
         {ds.map((m, i) => {
           const x = pad + i * w;
           return (
@@ -118,11 +126,11 @@ export function DaiVanHaiCach({ ds }: { ds: MocDaiHan[] }) {
       </svg>
       </div>
       <figcaption className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.7rem] text-fg-faint">
-        <span className="inline-flex items-center gap-1"><span className="inline-block size-2.5 rounded-full bg-moon" aria-hidden /> cách 1 — cân sức</span>
-        <span className="inline-flex items-center gap-1"><span className="inline-block size-2.5 rounded-full border-2 border-moon" aria-hidden /> cách 2 — theo tháng sinh</span>
-        <span>chấm cao = thuận, giữa = cân bằng, thấp = cần lưu ý · ≠ hai cách khác nhau</span>
+        <span className="inline-flex items-center gap-1"><span className="inline-block size-2.5 rounded-full bg-moon" aria-hidden /> {c("bd.dv_cach_1")}</span>
+        <span className="inline-flex items-center gap-1"><span className="inline-block size-2.5 rounded-full border-2 border-moon" aria-hidden /> {c("bd.dv_cach_2")}</span>
+        <span>{c("bd.dv_chu_thich")}</span>
       </figcaption>
-      <ChanQr nhan="Quét để xem đại vận của bạn" />
+      <ChanQr nhan={c("bd.qr_dai_van")} />
     </figure>
   );
 }

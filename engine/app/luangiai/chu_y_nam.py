@@ -446,7 +446,7 @@ def doan_mang(mang: str, ds: list[dict], mon_ten: str | None = None) -> str:
     else:
         s = kb.mau("khong_nam").format(mang=kb.ten(mang))
         if kb.viec(mang):
-            s += f" Việc nên giữ: {kb.viec(mang)}."
+            s += L("chu_y.viec_nen_giu", " Việc nên giữ: {viec}.", viec=kb.viec(mang))
     if mon_ten:
         s = f"{mon_ten}, {s[:1].lower()}{s[1:]}"
     return f"{s} {kb.ranh_gioi(mang)}".strip()
