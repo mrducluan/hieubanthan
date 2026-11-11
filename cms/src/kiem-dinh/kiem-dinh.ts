@@ -210,7 +210,8 @@ const GIONG_PHAN = ["chắc chắn sẽ", "định mệnh", "số phận đã", 
 const TEN_NOI_BO = [/\b(iztro|lasotuvi|lunar[- ]?typescript|lunar-lite|horosa|mingyu|aov\.cc|openrouter|supabase|vercel|anko-ki-maya|tuvimcp|opencode-tianji|ctext\.org|posthog|sentry)\b/i,
   /\bRender\b/];
 const LIEN_HE_CHU = /\b\d[\d .]{8,}\d\b|[\w.+-]+@[\w-]+\.[\w.]+|\bzalo\b|\bhotline\b/i;
-const CONG_CU = /^(https?:\/\/(www\.)?hieuban\.com)?\/(than-so|tu-vi|bat-tu|kinh-dich|phong-thuy|hop-doi|hom-nay)(\/|$|\?)/;
+// KW-6T (2026-11-11): thêm công cụ lịch & tuổi, năm, Tarot, Nhân tướng — bài mùa Tết dẫn sang /tuoi-xong-dat, /xem-sao-han…
+const CONG_CU = /^(https?:\/\/(www\.)?hieuban\.com)?\/(than-so|tu-vi|bat-tu|kinh-dich|phong-thuy|hop-doi|hom-nay|tarot|nhan-tuong|xem-ngay-tot|xem-tuoi-lam-nha|tuoi-xong-dat|xem-sao-han|nam|thoi-gian-toi|chan-dung|doi-lich-am-duong)(\/|$|\?|#)/;
 const CAU_HOI = /\?\s*$|là gì|thế nào|như nào|tại sao|vì sao|bao nhiêu|có nên|ở đâu|khi nào|ra sao|có phải/i;
 
 // Khớp TRỌN TỪ: "ung thư" không được khớp "cung thường", "dùng thường" (2026-11-06: hai bài bị chặn oan).
