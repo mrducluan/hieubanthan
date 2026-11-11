@@ -57,6 +57,8 @@ function Chip({ ten, nghia, tone }: { ten: string; nghia?: string; tone: "tot" |
 export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
   const laHomNay = d.ngay === homNayVN();
   const nhanNgay = d.hoang_dao ? "Ngày Hoàng đạo" : "Ngày Hắc đạo";
+  // SEO-O2: heading mang ngày cụ thể → mỗi mục tự đứng được khi Google / AI trích riêng (trước "Giờ hoàng đạo", "Xuất hành"…).
+  const nd = ngayHienThi(d.ngay);
   return (
     <div className="space-y-4" data-testid="the-ngay">
       <div className="bau-troi p-5 sm:p-7">
@@ -113,7 +115,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
       </div>
 
       <section aria-labelledby="gio-hd" className="glass rounded-2xl p-5">
-        <h2 id="gio-hd" className="inline-flex items-center gap-2 text-lg"><Clock className="size-5 text-gold" aria-hidden />Giờ hoàng đạo</h2>
+        <h2 id="gio-hd" className="inline-flex items-center gap-2 text-lg"><Clock className="size-5 text-gold" aria-hidden />Giờ hoàng đạo ngày {nd}</h2>
         {laHomNay && <div className="mt-2"><GioSapToi gio={d.gio} /></div>}
         <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" data-testid="gio-hoang-dao">
           {d.gio_hoang_dao.map((g) => (
@@ -128,7 +130,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
 
       <div className="grid gap-3 sm:grid-cols-[3fr_2fr]">
         <section aria-labelledby="nen" className="glass rounded-2xl p-5">
-          <h2 id="nen" className="inline-flex items-center gap-2 text-lg"><ThumbsUp className="size-5 text-jade" aria-hidden />Sách lịch ghi nên</h2>
+          <h2 id="nen" className="inline-flex items-center gap-2 text-lg"><ThumbsUp className="size-5 text-jade" aria-hidden />Ngày {nd} nên làm gì</h2>
           <div className="mt-3 flex flex-wrap gap-2" data-testid="nghi">
             {d.nghi.length ? d.nghi.map((x) => <Chip key={x.ma} ten={x.ten} nghia={x.nghia} tone="tot" />)
               : <p className="text-sm text-fg-muted">Sách không ghi việc nên riêng cho ngày này.</p>}
@@ -136,7 +138,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
           <LuuYViec ds={d.nghi} />
         </section>
         <section aria-labelledby="ky" className="glass rounded-2xl p-5">
-          <h2 id="ky" className="inline-flex items-center gap-2 text-lg"><ThumbsDown className="size-5 text-cinnabar" aria-hidden />Sách lịch ghi kiêng</h2>
+          <h2 id="ky" className="inline-flex items-center gap-2 text-lg"><ThumbsDown className="size-5 text-cinnabar" aria-hidden />Ngày {nd} kiêng làm gì</h2>
           <div className="mt-3 flex flex-wrap gap-2" data-testid="ky">
             {d.ky.length ? d.ky.map((x) => <Chip key={x.ma} ten={x.ten} nghia={x.nghia} tone="ky" />)
               : <p className="text-sm text-fg-muted">Sách không ghi việc kiêng riêng cho ngày này.</p>}
@@ -161,7 +163,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
       {!gon && (
         <>
           <section aria-labelledby="xuat-hanh" className="glass rounded-2xl p-5">
-            <h2 id="xuat-hanh" className="inline-flex items-center gap-2 text-lg"><Compass className="size-5 text-gold" aria-hidden />Xuất hành</h2>
+            <h2 id="xuat-hanh" className="inline-flex items-center gap-2 text-lg"><Compass className="size-5 text-gold" aria-hidden />Hướng xuất hành ngày {nd}</h2>
             <p className="mt-2 text-sm">Hướng Hỷ thần: <b>{d.huong.hy_than}</b> · Tài thần: <b>{d.huong.tai_than}</b> · Phúc thần: <b>{d.huong.phuc_than}</b></p>
             <details className="mt-3 text-sm">
               <summary className="cursor-pointer text-gold">Giờ xuất hành theo Lý Thuần Phong</summary>
@@ -209,13 +211,15 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
 
 const NHAN_VIEC = { tot: "Ngày tốt", binh: "Bình thường", tranh: "Nên chọn ngày khác" } as const;
 
+const ngayHienThi = (iso: string) => iso.split("-").reverse().join("/");
+
 /** 6b-1 — 6 việc lớn chấm bằng ĐÚNG luật của trang "ngày tốt {việc} tháng": sách ghi Nên mà vướng mục Kiêng (vd nên cưới
  *  gả nhưng kiêng Dạm ngõ) thì không gọi là ngày tốt — hai trang nói cùng một kết luận. Engine chấm, web chỉ hiển thị. */
 function ViecLon({ d }: { d: NgayTot }) {
   const m = Number(d.ngay.slice(5, 7)), y = Number(d.ngay.slice(0, 4));
   return (
     <section aria-labelledby="viec-lon" className="glass rounded-2xl p-5" data-testid="viec-lon">
-      <h2 id="viec-lon" className="inline-flex items-center gap-2 text-lg"><CalendarHeart className="size-5 text-gold" aria-hidden />Việc lớn hôm nay</h2>
+      <h2 id="viec-lon" className="inline-flex items-center gap-2 text-lg"><CalendarHeart className="size-5 text-gold" aria-hidden />Ngày {ngayHienThi(d.ngay)} có hợp cưới hỏi, khai trương, động thổ?</h2>
       <ul className="mt-3 grid gap-2 sm:grid-cols-2">
         {d.viec_lon!.map((v) => (
           <li key={v.ma} data-danh-gia={v.danh_gia}>

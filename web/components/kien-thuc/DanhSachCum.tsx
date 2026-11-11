@@ -15,7 +15,11 @@ export function DanhSachCum({ ml, id = "ds-cum" }: { ml: MucLucCum; id?: string 
       <p data-cum-rong hidden className="mt-6 text-fg-muted">Không có trang nào khớp. Thử tên ngắn hơn hoặc bỏ bớt lọc.</p>
       {ml.nhom.map((n) => (
         <section key={n.ma} id={`nhom-${n.ma}`} data-nhom={n.ma} aria-labelledby={`nhom-${n.ma}-h`} className="mt-10 scroll-mt-24">
-          <h2 id={`nhom-${n.ma}-h`} className="text-2xl">{n.ten} <span data-so-nhom className="text-base font-normal text-fg-faint">· {n.bai.length}</span></h2>
+          {/* Số trang nằm NGOÀI H2: heading là câu tự đứng được (AEO), không dính "· 12". */}
+          <div className="flex flex-wrap items-baseline gap-x-2">
+            <h2 id={`nhom-${n.ma}-h`} className="text-2xl">{n.tieuDe}</h2>
+            <span data-so-nhom className="text-base text-fg-faint">· {n.bai.length}</span>
+          </div>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {n.bai.map((b) => (
               <li key={b.duong} data-cum-bai data-tim={maChu(b.tieu_de)} data-phu={b.phu.join(" ")}>

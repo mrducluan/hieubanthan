@@ -25,16 +25,19 @@ async function traLoi(t: ThamSoTomTat): Promise<string | null> {
   }
 }
 
-export async function TomTatNam({ tieuDe, nhanLink, ...t }: ThamSoTomTat & { tieuDe: string; nhanLink: string }) {
+/** `gonDong`: bỏ danh sách ý chính khi chính trang đã hiện đủ các ý đó (vd /xem-ngay-tot đã có thẻ hôm nay) — tránh lặp. */
+export async function TomTatNam({ tieuDe, nhanLink, gonDong = false, ...t }: ThamSoTomTat & { tieuDe: string; nhanLink: string; gonDong?: boolean }) {
   const [tt, tl] = await Promise.all([tomTatAnh(t), traLoi(t)]);
   if (!tt) return null;
   return (
     <section aria-labelledby={`tom-tat-${t.kieu}`} className="mt-10" data-testid="tom-tat-nam">
       <h2 id={`tom-tat-${t.kieu}`} className="text-2xl">{tieuDe}</h2>
       {tl && <div className="mt-3"><TraLoiNhanh chu={tl} /></div>}
-      <ul className="mt-4 space-y-1.5 text-fg-muted">
-        {tt.dong.map((d) => <li key={d} className="flex gap-2"><span aria-hidden className="text-gold">•</span><span>{d}</span></li>)}
-      </ul>
+      {!gonDong && (
+        <ul className="mt-4 space-y-1.5 text-fg-muted">
+          {tt.dong.map((d) => <li key={d} className="flex gap-2"><span aria-hidden className="text-gold">•</span><span>{d}</span></li>)}
+        </ul>
+      )}
       <p className="mt-3"><Link href={tt.duong} className="text-gold underline underline-offset-4">{nhanLink} →</Link></p>
       <AnhTomTat {...t} className="mt-6" />
     </section>
