@@ -1,5 +1,12 @@
 "use client";
 import { fetchSao } from "@/lib/sao-client";
+import { taoChu } from "@/lib/chu-trang";
+import { CHU_HOI_DAP } from "@/lib/chu/hoi-dap";
+import { maNgonNguTrang } from "@/lib/ngon-ngu";
+import { tenTheo, type TenHien } from "@/lib/ten-hien";
+
+/** EN-ALL GĐ 3d: chữ khung hỏi đáp theo ngôn ngữ trang đang mở (bản Việt = chữ cũ). */
+const chuHoi = () => taoChu(CHU_HOI_DAP, null, maNgonNguTrang() === "vi" ? "vi" : "en");
 import type { KetQuaHoi } from "@/components/hoi/KhungChat";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
@@ -16,6 +23,8 @@ export interface HoiMangRes {
   hoi_tiep?: string[];
   /** EN-3: độ tin thấp → mời chọn câu cụ thể hơn. */
   hoi_lai?: { cau: string; chon: string[] } | null;
+  /** EN-ALL: bản Anh — tên hiển thị của mã trong phản hồi. */
+  ten_hien?: TenHien;
   error?: string;
   luot?: LuotHoi;
 }
@@ -26,9 +35,10 @@ export function ghiLuot(l?: LuotHoi): string | undefined {
   if (!l) return undefined;
   if ("sao_da_tru" in l) return l.sao_da_tru ? `Đã dùng ${l.sao_da_tru} Sao cho câu này${l.so_du != null ? ` · ví còn ${l.so_du} Sao` : ""}.` : undefined;
   if (l.con_lai > 2) return undefined;
+  const c = chuHoi();
   return l.con_lai === 0
-    ? `Đây là câu miễn phí cuối của hôm nay.${l.tai_khoan ? " Câu tiếp theo dùng Sao." : " Đăng nhập để hỏi thêm."}`
-    : `Còn ${l.con_lai} câu miễn phí hôm nay.`;
+    ? `${c("luot_cuoi")}${l.tai_khoan ? c("luot_cuoi_sao") : c("luot_cuoi_dang_nhap")}`
+    : c("luot_con", { so: String(l.con_lai) });
 }
 
 /** Gọi /api/<mảng>/hoi và chuẩn hoá cho KhungChat. `phu` dựng từ phản hồi thô nếu cần. */
@@ -40,17 +50,29 @@ export async function hoiMang<T extends HoiMangRes>(
 ): Promise<KetQuaHoi> {
   const r = await fetchSao(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) }, "hoi");
   const d = (await r.json().catch(() => ({}))) as T;
-  if (!d.cau_tra_loi) return { loi: d.error ?? "Chưa trả lời được lúc này, thử lại sau." };
+  const c = chuHoi();
+  if (!d.cau_tra_loi) return { loi: (maNgonNguTrang() === "vi" && d.error) || c("loi_tra_loi") };
   return {
     ghiLuot: ghiLuot(d.luot),
     van: d.cau_tra_loi,
     thuatNgu: d.thuat_ngu,
-    trucQuan: d.truc_quan,
+    trucQuan: tenKhoiHinh(d.truc_quan, d.ten_hien),
     hoiTiep: d.hoi_tiep,
     hoiLai: d.hoi_lai,
     canCu: d.can_cu?.length ? d.can_cu : undefined,
     phu: phu?.(d),
     canhBao: d.co_canh_bao?.filter((c) => !boQuaCanhBao.includes(c.loai)).map((c) => c.chi_tiet),
-    ghiChu: d.che_do === "llm" ? "Diễn đạt tự động từ kho tri thức có nguồn." : "Ghép từ kho tri thức có nguồn.",
+    ghiChu: d.che_do === "llm" ? c("ghi_chu_llm") : c("ghi_chu_ghep"),
   };
+}
+
+/** EN-ALL GĐ 3d: nhãn mục trong khối hình có thể là MÃ (vd hành "Mộc" ở biểu đồ cột) — bản Anh đổi sang tên hiển thị theo
+ *  `ten_hien` của phản hồi; nhãn không phải mã giữ nguyên. Bản Việt không có `ten_hien` → giữ nguyên khối. */
+function tenKhoiHinh(ds: KhoiTrucQuan[] | undefined, th: TenHien | undefined): KhoiTrucQuan[] | undefined {
+  if (!ds || !th) return ds;
+  const ten = tenTheo(th, true);
+  const laMa = (x: string) => Object.values(th).some((b) => Object.hasOwn(b, x));
+  const doi = (m: unknown): unknown => (m && typeof m === "object" && "nhan" in m && typeof (m as { nhan: unknown }).nhan === "string" && laMa((m as { nhan: string }).nhan)
+    ? { ...(m as object), nhan: ten("", (m as { nhan: string }).nhan) } : m);
+  return ds.map((k) => ("muc" in k && Array.isArray(k.muc) ? { ...k, muc: k.muc.map(doi) } : k) as KhoiTrucQuan);
 }

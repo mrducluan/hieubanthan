@@ -2,6 +2,8 @@
 // SAO-2 — phía trình duyệt: mọi lời gọi có thể gặp "cửa Sao" (402 + can) đi qua fetchSao. Hộp thoại dùng chung
 // (components/sao/HopThoaiSao, gắn ở layout) hỏi người dùng: đăng nhập / đồng ý trừ Sao / nạp nhanh.
 // Đồng ý trừ Sao → gửi lại đúng yêu cầu kèm header x-dong-y-sao: 1 (máy chủ trừ SAU khi trả lời được).
+import { maNgonNguTrang } from "@/lib/ngon-ngu";
+
 export type CanSao = "dang_nhap" | "xac_nhan_sao" | "nap";
 export type YeuCauSao = {
   can: CanSao; error: string; gia?: number; so_du?: number; tran?: number; thuong?: number | null;
@@ -47,10 +49,22 @@ export function dangChoMo(duong: string, nguoi: unknown): boolean {
   } catch { return false; }
 }
 
+/** EN-ALL GĐ 3d — trang Anh được rewrite (vd /en/bazi → /bat-tu) gọi CÙNG route API với trang Việt; route API không qua
+ *  proxy nên trình duyệt tự gửi `x-ngon-ngu` (đọc <html lang>). Route chuyển tiếp header này tới engine (`dauNguoiGoi`).
+ *  Chỉ route trong site; trang Việt không gửi gì (lời gọi bản Việt giữ nguyên từng byte). */
+export function kemNgonNgu(url: string, init: RequestInit = {}): RequestInit {
+  const nn = maNgonNguTrang();
+  if (nn === "vi" || !url.startsWith("/") || url.startsWith("//")) return init;
+  const h = new Headers(init.headers);
+  if (!h.has("x-ngon-ngu")) h.set("x-ngon-ngu", nn);
+  return { ...init, headers: h };
+}
+
 function doc(k: string): string | null { try { return sessionStorage.getItem(k); } catch { return null; } }
 
 /** fetch có xử lý cửa Sao. Trả Response cuối cùng (402 nếu người dùng chưa đồng ý / cần đăng nhập / cần nạp). */
 export async function fetchSao(url: string, init: RequestInit, nguon: YeuCauSao["nguon"]): Promise<Response> {
+  init = kemNgonNgu(url, init);
   const r = await fetch(url, init);
   if (r.status !== 402) return r;
   const d = (await r.clone().json().catch(() => null)) as Omit<YeuCauSao, "nguon"> | null;

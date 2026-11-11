@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import re
 
+from app.kb.loi import L
+
 NHAN_MUC = {"thuan": "thuận lợi", "can_bang": "cân bằng", "can_chu_dong": "cần lưu ý"}
 TEN_MANG = {"tong_quan": "con người bạn", "su_nghiep": "công việc", "tien_bac": "tiền bạc", "tinh_cam": "tình cảm",
             "gia_dinh": "gia đình", "suc_khoe": "sức khoẻ và năng lượng", "quan_he": "quan hệ bên ngoài",
@@ -25,6 +27,25 @@ CHU_DE_CHUONG = {"tinh_cach": "tong_quan", "ngu_hanh": "ngu_hanh", "nghe_tien": 
                  "hau_van": "cuoc_doi", "than_sat": None, "xung_hop": None, "cach_cuc": None, "tru": "gia_dinh",
                  "thap_than": None}
 _TOI_DA_HOP = 2
+
+
+def ten_mang(chuong: str) -> str:
+    """Tên mảng đời theo ngôn ngữ lượt gọi (bản Việt = `TEN_MANG`)."""
+    return {
+        "tong_quan": L("hoi.mang.tong_quan", "con người bạn"), "su_nghiep": L("hoi.mang.su_nghiep", "công việc"),
+        "tien_bac": L("hoi.mang.tien_bac", "tiền bạc"), "tinh_cam": L("hoi.mang.tinh_cam", "tình cảm"),
+        "gia_dinh": L("hoi.mang.gia_dinh", "gia đình"), "suc_khoe": L("hoi.mang.suc_khoe", "sức khoẻ và năng lượng"),
+        "quan_he": L("hoi.mang.quan_he", "quan hệ bên ngoài"), "nha_cua": L("hoi.mang.nha_cua", "nhà cửa"),
+        "hoc_tap": L("hoi.mang.hoc_tap", "học và nghĩ"), "ngu_hanh": L("hoi.mang.ngu_hanh", "năng lượng"),
+        "cuoc_doi": L("hoi.mang.cuoc_doi", "các giai đoạn cuộc đời"), "nam_nay": L("hoi.mang.nam_nay", "năm nay"),
+        "duong_bay": L("hoi.mang.duong_bay", "liên hệ giữa các mảng"),
+    }.get(chuong, chuong)
+
+
+def nhan_muc(muc: str | None) -> str:
+    """Nhãn mức (chữ thường) theo ngôn ngữ lượt gọi (bản Việt = `NHAN_MUC`)."""
+    return {"thuan": L("hoi.muc.thuan", "thuận lợi"), "can_bang": L("hoi.muc.can_bang", "cân bằng"),
+            "can_chu_dong": L("hoi.muc.can_chu_dong", "cần lưu ý")}.get(muc or "", "")
 
 
 def _chon_hop(hop: list[dict], lo_so: bool) -> list[dict]:
@@ -55,8 +76,8 @@ def muc_doi_song(bc: dict | None, chuong: str | None, lo_so: bool = False) -> di
             hop = [*hop, nam]
     gon = [{k: h[k] for k in ("loai", "tieu_de", "noi_dung", "huong_xu_ly", "loi_khuyen", "ma_mau", "can_cu") if h.get(k)}
            for h in hop]
-    return {"loai": "doi_song", "chuong": chuong, "ten_mang": TEN_MANG.get(chuong, chuong), "muc": c.get("muc"),
-            "nhan_muc": NHAN_MUC.get(c.get("muc") or "", ""), "tom_tat": c.get("tom_tat") or "", "hop": gon,
+    return {"loai": "doi_song", "chuong": chuong, "ten_mang": ten_mang(chuong), "muc": c.get("muc"),
+            "nhan_muc": nhan_muc(c.get("muc")), "tom_tat": c.get("tom_tat") or "", "hop": gon,
             "lo_so": lo_so, "can_cu_ds": [x for h in gon for x in h.get("can_cu", [])],
             "source_id": bc.get("source_id"), "school_id": bc.get("school_id")}
 
@@ -69,11 +90,19 @@ def _cau(van: str) -> list[str]:
     return [c.strip() for c in re.split(r"(?<=[.!?])\s+", van or "") if c.strip()]
 
 
-def doan_doi_song(m: dict, da_noi: str = "") -> str:
+def doan_doi_song(m: dict, da_noi: str = "", khoa: tuple | None = None) -> str:
     """Lời đời thường của mục: mức mảng (khi có) → tóm tắt → hộp.
 
     `da_noi` = phần câu trả lời đã có phía trên (lời KB của cung/sao/thập thần). Hộp mượn từ chương đời sống cùng nguồn
-    KB nên hay lặp nguyên câu (HD-CS rà lại 2026-10-29): câu nào đã nói thì bỏ; tiêu đề hộp đã nói thì chỉ giữ việc nên làm."""
+    KB nên hay lặp nguyên câu (HD-CS rà lại 2026-10-29): câu nào đã nói thì bỏ; tiêu đề hộp đã nói thì chỉ giữ việc nên làm.
+
+    EN-ALL: `khoa` (lượt "bản Việt quyết") — có câu mức không, hộp nào bỏ, hộp nào chỉ giữ phần chưa nói: theo bản Việt;
+    câu trùng trong từng hộp so trên chữ của chính ngôn ngữ."""
+    if khoa is not None:
+        from app.luangiai.doi_song_khuon import quyet as q  # noqa: PLC0415
+    else:
+        def q(_k, v):
+            return v
     phan = []
     truoc = _chuan(da_noi)
     da = {_chuan(c) for c in _cau(da_noi)}
@@ -84,28 +113,34 @@ def doan_doi_song(m: dict, da_noi: str = "") -> str:
 
     # Chương gộp nhiều cung (Tiền bạc = Tài Bạch + Điền Trạch) đã nêu mức từng phần trong tóm tắt → không thêm câu mức chung
     # (tránh "đang ở mức thuận lợi" rồi "tiền bạc ở mức cân bằng").
-    if m.get("nhan_muc") and "ở mức" not in (m.get("tom_tat") or ""):
-        phan.append(f"Mảng {m['ten_mang']} của bạn đang ở mức {m['nhan_muc']}.")
+    if q((khoa, "muc"), bool(m.get("nhan_muc") and "ở mức" not in (m.get("tom_tat") or ""))):
+        phan.append(L("hoi.ds.muc", "Mảng {mang} của bạn đang ở mức {muc}.", mang=m["ten_mang"], muc=m["nhan_muc"]))
     if m.get("tom_tat"):
         phan.append(m["tom_tat"])
-    for h in m.get("hop", []):
-        nhan = "Nên để ý" if h["loai"] in ("luu_y", "thoi_diem") else "Điểm sáng"
+    for i, h in enumerate(m.get("hop", [])):
+        nhan = (L("hoi.ds.nen_de_y", "Nên để ý") if h["loai"] in ("luu_y", "thoi_diem")
+                else L("hoi.ds.diem_sang", "Điểm sáng"))
         viec = h.get("huong_xu_ly") or h.get("loi_khuyen")
         if viec and viec in h["noi_dung"]:
             viec = None
         viec = " ".join(c for c in _cau(viec or "") if moi(c)) or None
         than = " ".join(c for c in _cau(h["noi_dung"]) if moi(c))
-        if not than and not viec:
+        if q((khoa, "bo", i), not than and not viec):
             continue
         td = _chuan(h["tieu_de"])
-        if len(td.split()) >= 5 and td in truoc:       # ý chính đã nói phía trên → chỉ giữ phần chưa nói
-            s = f"{nhan}: {than}" if than else f"{nhan} — việc nên làm: {viec}"
+        if q((khoa, "da_noi", i), len(td.split()) >= 5 and td in truoc):   # ý chính đã nói phía trên → chỉ giữ phần chưa nói
+            if not than and not viec:
+                viec = h.get("huong_xu_ly") or h.get("loi_khuyen") or None
+                if not viec:
+                    continue
+            s = (L("hoi.ds.than", "{nhan}: {than}", nhan=nhan, than=than) if than
+                 else L("hoi.ds.chi_viec", "{nhan} — việc nên làm: {viec}", nhan=nhan, viec=viec))
             if than and viec:
-                s += f" Việc nên làm: {viec}"
+                s += L("hoi.ds.viec", " Việc nên làm: {viec}", viec=viec)
             phan.append(s)
             continue
-        s = f"{nhan} — {h['tieu_de']}" + (f": {than}" if than else ".")
+        s = L("hoi.ds.hop", "{nhan} — {td}", nhan=nhan, td=h["tieu_de"]) + (f": {than}" if than else ".")
         if viec:
-            s += f" Việc nên làm: {viec}"
+            s += L("hoi.ds.viec", " Việc nên làm: {viec}", viec=viec)
         phan.append(s)
     return " ".join(phan)

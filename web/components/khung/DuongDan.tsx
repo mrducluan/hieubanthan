@@ -4,10 +4,11 @@ import Link from "@/components/khung/Lien";
 import type { CapDuongDan } from "@/lib/duong-dan";
 import { cn } from "@/lib/utils";
 
-export function DuongDan({ ds, className }: { ds: CapDuongDan[]; className?: string }) {
+/** `nhan`: tên vùng điều hướng (EN-ALL: trang Anh truyền "Breadcrumb"; mặc định chữ Việt cũ). */
+export function DuongDan({ ds, className, nhan = "Đường dẫn" }: { ds: CapDuongDan[]; className?: string; nhan?: string }) {
   if (ds.length < 2) return null;
   return (
-    <nav aria-label="Đường dẫn" className={cn("text-[0.8125rem] text-fg-muted", className)} data-testid="duong-dan">
+    <nav aria-label={nhan} className={cn("text-[0.8125rem] text-fg-muted", className)} data-testid="duong-dan">
       <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
         {ds.map((c, i) => {
           const cuoi = i === ds.length - 1;

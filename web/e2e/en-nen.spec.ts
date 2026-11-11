@@ -169,7 +169,7 @@ test.describe("trên trình duyệt", () => {
   });
 
   test("URL Anh của trang CHƯA mở: 404 tiếng Anh, không rewrite sang chữ Việt, không chuyển hướng", async ({ page }) => {
-    for (const u of ["/en/bazi", "/en/zi-wei-dou-shu", "/en/tu-vi"]) {
+    for (const u of ["/en/feng-shui", "/en/zi-wei-dou-shu", "/en/tu-vi"]) {
       const r = await page.goto(u);
       expect(r!.status(), u).toBe(404);
       expect(new URL(page.url()).pathname, u).toBe(u);

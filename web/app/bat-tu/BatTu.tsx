@@ -28,18 +28,20 @@ import { hoiMang } from "@/lib/hoi-mang";
 import { kemTinhTrang, laSoTuHoSo, tenGoi, useHoSo } from "@/lib/hoso";
 import { taiAnhHtml } from "@/lib/tai-anh-html";
 import { cn } from "@/lib/utils";
+import { ChuNhan } from "@/components/cms/ChuNhan";
+import { TenHienProvider } from "@/components/khung/TenHien";
+import { gopTenHien, tenTheo } from "@/lib/ten-hien";
+import { useDuong } from "@/components/khung/NgonNgu";
+import { useChuBatTu } from "@/components/huyen-hoc/chu-bat-tu";
 
-// Cờ từ engine viết cho người phát triển — đổi sang lời dễ hiểu cho người đọc.
-const LOI_NHAN_CO: Record<string, string> = {
-  // TV-V2: giờ áng chừng / không biết giờ (hồ sơ "Không biết giờ" an tạm 12:00) — trụ giờ chưa đáng tin.
-  hour_confidence: "Giờ sinh chưa chắc chắn (áng chừng hoặc chưa biết giờ): trụ giờ có thể khác, nên đọc nặng ba trụ năm, tháng, ngày. Chưa biết giờ thì hệ thống đang tạm dùng 12:00.",
-  da_ty: "Bạn sinh 23:00–23:59 (giờ Tý muộn): bát tự ở đây giữ trụ ngày hôm đó, trụ giờ lấy giờ Tý của ngày sau. Có trường phái đổi ngày từ 23:00 nên có thể ra trụ ngày khác; tử vi ở đây tính sang ngày mới.",
-};
+// Cờ từ engine viết cho người phát triển — đổi sang lời dễ hiểu cho người đọc (EN-ALL: chữ ở lib/chu/bat-tu.ts, khoá co.<loại>).
+const CO_CO_LOI = new Set(["hour_confidence", "da_ty"]);
 
-const GOI_Y = [
-  { nhom: "Lá số", cau: ["Dụng thần của tôi là gì?", "Tôi thân vượng hay thân nhược?", "Ngũ hành của tôi thiếu gì?"] },
-  { nhom: "Vận", cau: ["Đại vận hiện tại của tôi là gì?", "Năm nay với tôi thế nào?"] },
-  { nhom: "Kiến thức", cau: ["Nhật chủ Giáp là người thế nào?", "Thập thần là gì?"] },
+// Gợi ý câu hỏi theo nhóm (chữ ở lib/chu/bat-tu.ts).
+const GOI_Y_KHOA = [
+  { nhom: "hoi.nhom_la_so", cau: ["hoi.la_so_1", "hoi.la_so_2", "hoi.la_so_3"] },
+  { nhom: "hoi.nhom_van", cau: ["hoi.van_1", "hoi.van_2"] },
+  { nhom: "hoi.nhom_kien_thuc", cau: ["hoi.kien_thuc_1", "hoi.kien_thuc_2"] },
 ];
 
 // Trục 2 UX: bảng kỹ thuật (tàng can, nạp âm, tinh vận, thần sát, dụng thần, hợp – xung…) gom vào mục gập "Lá số chi
@@ -53,6 +55,9 @@ export function BatTu() {
   const cuaLg = useCuaLuanGiai();
   const hoSo = useHoSo();
   const c = useChu();
+  const { c: cb, en, tru } = useChuBatTu();
+  const d = useDuong();
+  const GOI_Y = GOI_Y_KHOA.map((g) => ({ nhom: cb(g.nhom), cau: g.cau.map((k) => cb(k)) }));
   const [gioTy, setGioTy] = useState<"da_ty" | "sang_ngay">("da_ty");
   // HTT-1: giờ sinh theo đồng hồ (mặc định) hay mặt trời thực tại kinh độ nơi sinh — engine lập lại tứ trụ.
   const [gioSinh, setGioSinh] = useState<"dong_ho" | "mat_troi">("dong_ho");
@@ -85,32 +90,38 @@ export function BatTu() {
 
   useBatDauDoc("battu", Boolean(ls));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Layers} chip ten="Xem Bát tự: mệnh bạn thiếu hành gì?" mo_ta="Người bảo bạn thiếu Thuỷ, người bảo thiếu Hoả. Nhập ngày giờ sinh để tự thấy: năm hành của bạn dư thiếu ra sao, sức bạn đang mạnh hay đuối, và hai cách đọc hành nên bù để bạn so với chính đời mình." />;
-  if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
+  const dau = <DauMang Icon={Layers} chip ten={cb("dau.ten")} mo_ta={cb("dau.mo_ta")} />;
+  if (hoSo === undefined) return <div>{dau}<KhungTai nhan={cb("dang_tai")} /></div>;
   const lnDung = ln && ln.nam === namXem ? ln : null;
+  // EN-ALL: mã (can, chi, hành, thập thần, thần sát…) giữ chữ Việt làm khoá; HIỆN qua `ten_hien` của phản hồi (bản Việt: nguyên mã).
+  const ten = tenTheo(gopTenHien(ls?.ten_hien, lnDung?.ten_hien), en);
+  const tenTru = (ds: number[]) => ds.map((i) => tru(i, "thuong")).join(", ");
   const sinhGioTy = (goc?.birth_time ?? "") >= "23:00";
   const namBanCau = Boolean(ls?.tuy_chon?.nam_ban_cau_kha_dung) || dieuHau === "noi_sinh";
   // TP-GON: khung trường phái đóng chỉ còn chip lựa chọn đang dùng; nhắc riêng khi sinh 23:00–23:59 (hai phái ra trụ ngày khác).
   const phaiDangDung: PhaiDangDung[] = [
-    { nhan: gioTy === "da_ty" ? "Giờ Tý: giữ ngày" : "Giờ Tý: đổi ngày lúc 23:00", khac: gioTy !== "da_ty" },
-    { nhan: gioSinh === "mat_troi" ? "Giờ mặt trời thực" : "Giờ đồng hồ", khac: gioSinh === "mat_troi" },
-    ...(namBanCau ? [{ nhan: dieuHau === "noi_sinh" ? "Mùa theo nơi sinh (Nam bán cầu)" : "Mùa theo lịch tiết khí", khac: dieuHau === "noi_sinh" }] : []),
-    { nhan: "Năm, tháng theo tiết khí" },
+    { nhan: gioTy === "da_ty" ? cb("phai.gio_ty_giu") : cb("phai.gio_ty_doi"), khac: gioTy !== "da_ty" },
+    { nhan: gioSinh === "mat_troi" ? cb("phai.gio_mat_troi") : cb("phai.gio_dong_ho"), khac: gioSinh === "mat_troi" },
+    ...(namBanCau ? [{ nhan: dieuHau === "noi_sinh" ? cb("phai.mua_noi_sinh") : cb("phai.mua_tiet_khi"), khac: dieuHau === "noi_sinh" }] : []),
+    { nhan: cb("phai.tiet_khi") },
   ];
   return (
+    <TenHienProvider ten={[ls?.ten_hien, lnDung?.ten_hien]}>
     <div>
       {dau}
 
-      <section aria-label="Tứ trụ" className="space-y-4">
+      <section aria-label={cb("aria.tu_tru")} className="space-y-4">
         {!laSo && <MoiLapLaSo moDun="battu" hoSo={hoSo} />}
-        {laSo && !ls && !loi && <KhungTai dong={6} />}
+        {laSo && !ls && !loi && <KhungTai dong={6} nhan={cb("dang_tai")} />}
         {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
         {/* Trục 2 UX: lời thường lên đầu (câu về nhật chủ từ KB đời sống + nút xuống luận giải), bảng kỹ thuật gập bên dưới. */}
         {ls && (
           <div className="glass space-y-3 rounded-2xl p-5 sm:p-6" data-testid="bat-tu-loi-thuong">
             <p className="text-sm text-fg-muted">
-              {hoSo ? `${tenGoi(hoSo)}, t` : "T"}heo ngày sinh, bạn thuộc hành <b className="text-gold">{ls.nhat_chu.ngu_hanh}</b>
-              {ls.loi_thuong?.hinh_tuong ? <> — hình ảnh của bạn là <b className="text-fg">{ls.loi_thuong.hinh_tuong}</b>.</> : "."}
+              <ChuNhan lopNhan="font-bold text-gold" chu={hoSo
+                ? cb("loi_thuong.co_ten", { ten: en ? (hoSo.ho_ten.trim().split(/\s+/)[0] ?? hoSo.ho_ten) : tenGoi(hoSo), hanh: ten("hanh", ls.nhat_chu.ngu_hanh) })
+                : cb("loi_thuong.khong_ten", { hanh: ten("hanh", ls.nhat_chu.ngu_hanh) })} />
+              {ls.loi_thuong?.hinh_tuong ? <ChuNhan lopNhan="font-bold text-fg" chu={cb("loi_thuong.hinh", { hinh: ls.loi_thuong.hinh_tuong })} /> : cb("loi_thuong.cham")}
             </p>
             {ls.loi_thuong?.chan_dung && <p className="font-serif text-xl leading-snug sm:text-2xl">{ls.loi_thuong.chan_dung}</p>}
             {ls.loi_thuong?.cau_tu_soi && <p className="text-sm italic text-moon">“{ls.loi_thuong.cau_tu_soi}”</p>}
@@ -125,10 +136,10 @@ export function BatTu() {
                       requestAnimationFrame(() => cuonToiLuanGiai());
                     }
                   }}>
-                  Đọc luận giải đời thường <ArrowDown aria-hidden />
+                  {cb("nut.doc_luan_giai")} <ArrowDown aria-hidden />
                 </a>
               </Button>
-              <span className="text-xs text-fg-faint">Chương đầu đọc ngay, lời thường — không cần biết thuật ngữ.</span>
+              <span className="text-xs text-fg-faint">{cb("nut.doc_luan_giai_phu")}</span>
             </div>
           </div>
         )}
@@ -137,9 +148,9 @@ export function BatTu() {
             className="flex w-full items-center justify-between gap-3 rounded-2xl border border-line/70 px-4 py-3 text-left transition-colors hover:border-gold/50"
             data-testid="bat-tu-chi-tiet-mo">
             <span className="min-w-0">
-              <span className="block font-medium text-fg">Lá số chi tiết (cho người đã biết Bát tự)</span>
+              <span className="block font-medium text-fg">{cb("chi_tiet.tieu_de")}</span>
               <span className="block truncate text-xs text-fg-muted">
-                Tứ trụ {ls.tru.map((t) => `${t.can} ${t.chi}`).join(" · ")} — tàng can, nạp âm, thần sát, dụng thần, đại vận
+                {cb("chi_tiet.phu", { tru: ls.tru.map((t) => `${ten("can", t.can)} ${ten("chi", t.chi)}`).join(" · ") })}
               </span>
             </span>
             <ChevronDown className={cn("size-5 shrink-0 text-fg-muted transition-transform", moChiTiet && "rotate-180")} aria-hidden />
@@ -148,56 +159,49 @@ export function BatTu() {
         {laSo && (sinhGioTy || !ls || moChiTiet) && (
           <KhungPhai testId="truong-phai-bat-tu"
             tomTat={<ChipPhai ds={phaiDangDung} />}
-            nhac={sinhGioTy ? "Bạn sinh 23:00–23:59: hai phái ra trụ ngày khác nhau, nhật chủ cũng đổi." : undefined}
-            moTa={<>Mặc định giữ trụ ngày hôm đó khi sinh 23:00–23:59 (dạ Tý). Đổi lựa chọn là tứ trụ được lập lại; hỏi đáp và luận giải bên dưới đi theo lựa chọn đang xem.</>}>
-            <DongPhai ten="Giờ Tý (23:00–23:59)" nhan="Cách tính giờ Tý" giaTri={gioTy} doi={setGioTy}
-              luaChon={[["da_ty", "Dạ Tý (giữ ngày)"], ["sang_ngay", "Đổi ngày lúc 23:00"]]}
-              noiBat={sinhGioTy} nhanNoiBat="Áp dụng với bạn"
-              goiY={sinhGioTy
-                ? "Bạn sinh trong giờ Tý đầu: hai phái ra TRỤ NGÀY khác nhau (nhật chủ đổi), trụ giờ như nhau."
-                : "Bạn không sinh 23:00–23:59 nên hai phái cho cùng một tứ trụ."} />
-            <DongPhai testId="chon-gio-sinh-bat-tu" ten="Giờ sinh" nhan="Cách lấy giờ sinh" giaTri={gioSinh}
+            nhac={sinhGioTy ? cb("phai.nhac_ty") : undefined}
+            moTa={cb("phai.mo_ta")}>
+            <DongPhai ten={cb("phai.ty.ten")} nhan={cb("phai.ty.nhan")} giaTri={gioTy} doi={setGioTy}
+              luaChon={[["da_ty", cb("phai.ty.da_ty")], ["sang_ngay", cb("phai.ty.sang_ngay")]]}
+              noiBat={sinhGioTy} nhanNoiBat={cb("phai.ap_dung")}
+              goiY={sinhGioTy ? cb("phai.ty.goi_y_co") : cb("phai.ty.goi_y_khong")} />
+            <DongPhai testId="chon-gio-sinh-bat-tu" ten={cb("phai.gio_sinh.ten")} nhan={cb("phai.gio_sinh.nhan")} giaTri={gioSinh}
               doi={(v) => { setGioSinh(v); ghi("chart_interacted", { mo_dun: "battu", kind: "phai_gio_sinh", gio_sinh: v }); }}
-              luaChon={[["dong_ho", "Theo đồng hồ"], ["mat_troi", "Theo mặt trời thực"]]}
-              goiY={coKinhDo
-                ? "Giờ mặt trời thực lệch theo kinh độ nơi sinh (4 phút mỗi độ) và theo mùa (tới ±16 phút); sinh gần ranh giới canh giờ thì trụ giờ đổi. Sách Việt thường lập theo đồng hồ."
-                : "Cần nơi sinh có kinh độ (tỉnh Việt Nam, hoặc chọn đúng thành phố khi sinh ở nước ngoài) — sửa ở hồ sơ."} />
+              luaChon={[["dong_ho", cb("phai.gio_sinh.dong_ho")], ["mat_troi", cb("phai.gio_sinh.mat_troi")]]}
+              goiY={coKinhDo ? cb("phai.gio_sinh.goi_y_co") : cb("phai.gio_sinh.goi_y_khong")} />
             {namBanCau && (
-              <DongPhai testId="chon-dieu-hau-bat-tu" ten="Mùa nơi sinh" nhan="Điều hậu (hành cần bù về khí hậu) đọc theo" giaTri={dieuHau}
+              <DongPhai testId="chon-dieu-hau-bat-tu" ten={cb("phai.dieu_hau.ten")} nhan={cb("phai.dieu_hau.nhan")} giaTri={dieuHau}
                 doi={(v) => { setDieuHau(v); ghi("chart_interacted", { mo_dun: "battu", kind: "phai_dieu_hau", dieu_hau: v }); }}
-                luaChon={[["bac_ban_cau", "Lịch tiết khí (Bắc bán cầu)"], ["noi_sinh", "Mùa thực nơi sinh (Nam bán cầu)"]]}
-                noiBat nhanNoiBat="Áp dụng với bạn"
-                goiY="Bạn sinh ở Nam bán cầu: tháng theo lịch tiết khí là mùa hè thì nơi bạn sinh đang giữa đông. Chọn mùa thực thì chỉ hành cần bù về khí hậu (cách 1) đổi; tứ trụ, cách cục và cách 2 giữ nguyên. Đây là thuyết hiện đại, không có trong cổ thư." />
+                luaChon={[["bac_ban_cau", cb("phai.dieu_hau.bac")], ["noi_sinh", cb("phai.dieu_hau.nam")]]}
+                noiBat nhanNoiBat={cb("phai.ap_dung")}
+                goiY={cb("phai.dieu_hau.goi_y")} />
             )}
-            <DongGhiChu ten="Âm lịch">
-              Bát tự tính theo tiết khí (vị trí Mặt Trời), không theo ngày âm — chọn lịch Việt hay Trung Quốc không làm đổi tứ trụ.
-              Năm đổi tại Lập xuân, tháng đổi tại tiết.
-            </DongGhiChu>
+            <DongGhiChu ten={cb("phai.am_lich.ten")}>{cb("phai.am_lich.mo_ta")}</DongGhiChu>
           </KhungPhai>
         )}
         {ls && moChiTiet && (
           <div id="la-so-chi-tiet" className="space-y-4" data-testid="la-so-chi-tiet">
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <Tabs value={giaoDien} onValueChange={(v) => doiGiaoDien(v as GiaoDien)}>
-                <TabsList aria-label="Giao diện lá số">
-                  <TabsTrigger value="dem"><Moon className="mr-1.5 inline size-3.5" aria-hidden />Đêm sao</TabsTrigger>
-                  <TabsTrigger value="giay"><ScrollText className="mr-1.5 inline size-3.5" aria-hidden />Giấy cổ</TabsTrigger>
+                <TabsList aria-label={cb("giao_dien")}>
+                  <TabsTrigger value="dem"><Moon className="mr-1.5 inline size-3.5" aria-hidden />{cb("giao_dien.dem")}</TabsTrigger>
+                  <TabsTrigger value="giay"><ScrollText className="mr-1.5 inline size-3.5" aria-hidden />{cb("giao_dien.giay")}</TabsTrigger>
                 </TabsList>
               </Tabs>
-              <div className="flex items-center rounded-full border border-line bg-surface/60 p-1" role="group" aria-label="Năm xem">
-                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label="Năm trước" onClick={() => setNamXem((n) => Math.max(1900, n - 1))}><ChevronLeft className="size-4" /></button>
+              <div className="flex items-center rounded-full border border-line bg-surface/60 p-1" role="group" aria-label={cb("nam_xem")}>
+                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label={cb("nam_truoc")} onClick={() => setNamXem((n) => Math.max(1900, n - 1))}><ChevronLeft className="size-4" /></button>
                 <span className="min-w-[7.5rem] text-center text-sm" aria-live="polite">
-                  Năm <b className="text-fg">{namXem}</b>{lnDung ? <span className="text-fg-faint"> · {lnDung.can} {lnDung.chi}</span> : null}
+                  {cb("nam")} <b className="text-fg">{namXem}</b>{lnDung ? <span className="text-fg-faint"> · {ten("can", lnDung.can)} {ten("chi", lnDung.chi)}</span> : null}
                 </span>
-                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label="Năm sau" onClick={() => setNamXem((n) => Math.min(2100, n + 1))}><ChevronRight className="size-4" /></button>
+                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label={cb("nam_sau")} onClick={() => setNamXem((n) => Math.min(2100, n + 1))}><ChevronRight className="size-4" /></button>
               </div>
               <Button variant="ghost" size="sm" className="ml-auto" disabled={dangTai} onClick={async () => {
                 if (!tuTruRef.current) return;
                 setDangTai(true); setLoiAnh(null);
                 try {
-                  await taiAnhHtml(tuTruRef.current, `bat-tu-${ls.tru.map((t) => `${t.can}-${t.chi}`).join("_")}.png`);
+                  await taiAnhHtml(tuTruRef.current, `${en ? "bazi" : "bat-tu"}-${ls.tru.map((t) => `${ten("can", t.can)}-${ten("chi", t.chi)}`).join("_")}.png`);
                   ghi("chart_interacted", { mo_dun: "battu", kind: "tai_anh" });
-                } catch (e) { setLoiAnh(e instanceof Error ? e.message : "Chưa xuất được ảnh."); }
+                } catch (e) { setLoiAnh(e instanceof Error && !en ? e.message : cb("loi_anh")); }
                 finally { setDangTai(false); }
               }}><Download aria-hidden /> {cc("doc.tai_anh")}</Button>
             </div>
@@ -207,23 +211,23 @@ export function BatTu() {
               style={{ background: "var(--ls-nen)", color: "var(--ls-chu)" }} data-testid="tu-tru" ref={tuTruRef}>
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-[var(--ls-mo)]">Tứ trụ · 四柱八字</p>
-                  <h2 className="font-serif text-2xl text-[var(--ls-nhan)] sm:text-3xl">{hoSo?.ho_ten ?? "Lá số Bát tự"}</h2>
+                  <p className="text-xs uppercase tracking-[0.3em] text-[var(--ls-mo)]">{cb("tu_tru.nhan")}</p>
+                  <h2 className="font-serif text-2xl text-[var(--ls-nhan)] sm:text-3xl">{hoSo?.ho_ten ?? cb("tu_tru.ten_mac_dinh")}</h2>
                 </div>
                 <p className="text-sm text-[var(--ls-mo)]">
-                  Nhật chủ <b style={{ color: "var(--ls-nhan)" }}>{ls.nhat_chu.can}</b> · {ls.nhat_chu.am_duong} {ls.nhat_chu.ngu_hanh}
-                  {ls.mo_rong ? ` · không vong ${ls.mo_rong.khong_vong.ngay.join(", ")}` : ""}
+                  {cb("nhat_chu")} <b style={{ color: "var(--ls-nhan)" }}>{ten("can", ls.nhat_chu.can)}</b> · {ten("am_duong", ls.nhat_chu.am_duong)} {ten("hanh", ls.nhat_chu.ngu_hanh)}
+                  {ls.mo_rong ? cb("khong_vong", { ds: ls.mo_rong.khong_vong.ngay.map((x) => ten("chi", x)).join(", ") }) : ""}
                 </p>
               </div>
-              <div className="overflow-x-auto"><div className="min-w-[30rem]"><BangTuTru ls={ls} /></div></div>
+              <div className="overflow-x-auto"><div className={en ? "min-w-[42rem]" : "min-w-[30rem]"}><BangTuTru ls={ls} /></div></div>
 
               <div className="grid gap-6 border-t border-[var(--ls-vien)] pt-6 md:grid-cols-2">
                 <div>
-                  <h3 className="mb-2 text-center font-serif text-xl">Ngũ hành sinh – khắc</h3>
+                  <h3 className="mb-2 text-center font-serif text-xl">{cb("h3.ngu_hanh")}</h3>
                   <NguGiacNguHanh ls={ls} />
                 </div>
                 <div>
-                  <h3 className="mb-2 text-center font-serif text-xl">Hợp – xung giữa bốn trụ</h3>
+                  <h3 className="mb-2 text-center font-serif text-xl">{cb("h3.hop_xung")}</h3>
                   <VongDiaChi ls={ls} />
                 </div>
               </div>
@@ -234,32 +238,29 @@ export function BatTu() {
               </div>
               {ls.mo_rong && (
                 <details className="border-t border-[var(--ls-vien)] pt-4 text-sm">
-                  <summary className="cursor-pointer text-[var(--ls-mo)]">Ý nghĩa các thần sát trong lá số ({ls.mo_rong.than_sat.length})</summary>
+                  <summary className="cursor-pointer text-[var(--ls-mo)]">{cb("than_sat.tieu_de", { so: String(ls.mo_rong.than_sat.length) })}</summary>
                   <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                     {ls.mo_rong.than_sat.map((t) => (
-                      <li key={t.ten}><b>{t.ten}</b> <span className="text-[var(--ls-mo)]">— {t.y} · trụ {t.tru.map((i) => ["năm", "tháng", "ngày", "giờ"][i]).join(", ")}</span></li>
+                      <li key={t.ten}><b>{ten("than_sat", t.ten)}</b> <span className="text-[var(--ls-mo)]">— {t.y} · {cb("than_sat.tru", { ds: tenTru(t.tru) })}</span></li>
                     ))}
                   </ul>
-                  <p className="mt-2 text-xs text-[var(--ls-mo)]">Bảng tra: {ls.mo_rong.than_sat_nguon}. Thần sát chỉ là tín hiệu phụ — luận chính dựa vào ngũ hành, thập thần, dụng thần.</p>
+                  <p className="mt-2 text-xs text-[var(--ls-mo)]">{cb("than_sat.nguon", { nguon: ls.mo_rong.than_sat_nguon })}</p>
                   {ls.mo_rong.than_sat_tham_khao && ls.mo_rong.than_sat_tham_khao.length > 0 && (
                     <div className="mt-4" data-testid="than-sat-tham-khao">
-                      <p className="font-medium">Học Đường · Thiên La Địa Võng · Kim Thần (tham khảo)</p>
-                      <p className="mt-1 text-xs text-[var(--ls-mo)]">Mỗi sách chép một cách. Ở đây theo {ls.mo_rong.than_sat_tham_khao_nguon}; cách khác ghi ngay dưới. Các sao này không làm đổi mức nào trong bài luận giải.</p>
+                      <p className="font-medium">{cb("tk.tieu_de")}</p>
+                      <p className="mt-1 text-xs text-[var(--ls-mo)]">{cb("tk.mo_ta", { nguon: ls.mo_rong.than_sat_tham_khao_nguon ?? "" })}</p>
                       <ul className="mt-2 grid gap-2 sm:grid-cols-2">
-                        {ls.mo_rong.than_sat_tham_khao.map((t) => {
-                          const tenTru = (ds: number[]) => ds.map((i) => ["năm", "tháng", "ngày", "giờ"][i]).join(", ");
-                          return (
-                            <li key={t.ten}>
-                              <b>{t.ten}</b>{" "}
-                              <span className="text-[var(--ls-mo)]">
-                                {t.co ? <>— có ở trụ {tenTru(t.tru)}{t.chinh ? " (Chính Học Đường)" : ""}: {t.y}</> : <>— không có (gốc ở {t.goc})</>}
-                              </span>
-                              <span className="block text-xs text-[var(--ls-mo)]">
-                                Cách khác: {t.cach_khac} {t.theo_cach_khac.length ? `Theo cách đó: có ở trụ ${tenTru(t.theo_cach_khac)}.` : "Theo cách đó: không có."}
-                              </span>
-                            </li>
-                          );
-                        })}
+                        {ls.mo_rong.than_sat_tham_khao.map((t) => (
+                          <li key={t.ten}>
+                            <b>{ten("than_sat", t.ten)}</b>{" "}
+                            <span className="text-[var(--ls-mo)]">
+                              {t.co ? <>{cb("tk.co", { ds: tenTru(t.tru) })}{t.chinh ? cb("tk.chinh") : ""}: {t.y}</> : <>{cb("tk.khong", { goc: t.goc })}</>}
+                            </span>
+                            <span className="block text-xs text-[var(--ls-mo)]">
+                              {cb("tk.cach_khac")} {t.cach_khac} {t.theo_cach_khac.length ? cb("tk.theo_co", { ds: tenTru(t.theo_cach_khac) }) : cb("tk.theo_khong")}
+                            </span>
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   )}
@@ -267,13 +268,13 @@ export function BatTu() {
               )}
               {ls.mo_rong?.cung_than && (
                 <details className="border-t border-[var(--ls-vien)] pt-4 text-sm" data-testid="cung-than">
-                  <summary className="cursor-pointer text-[var(--ls-mo)]">Thai nguyên · Mệnh cung · Thân cung{ls.mo_rong.tieu_van?.length ? " · tiểu vận" : ""}</summary>
+                  <summary className="cursor-pointer text-[var(--ls-mo)]">{cb("ct.tieu_de")}{ls.mo_rong.tieu_van?.length ? cb("ct.tieu_van") : ""}</summary>
                   <dl className="mt-3 grid gap-3 sm:grid-cols-3">
-                    {([["thai_nguyen", "Thai nguyên"], ["menh_cung", "Mệnh cung"], ["than_cung", "Thân cung"]] as const).map(([k, ten]) => (
+                    {(["thai_nguyen", "menh_cung", "than_cung"] as const).map((k) => (
                       <div key={k} className="rounded-xl border border-[var(--ls-vien)] p-3">
-                        <dt className="text-xs text-[var(--ls-mo)]">{ten}</dt>
-                        <dd className="font-serif text-lg text-[var(--ls-nhan)]">{ls.mo_rong!.cung_than![k].can} {ls.mo_rong!.cung_than![k].chi}</dd>
-                        <dd className="text-xs text-[var(--ls-mo)]">{ls.mo_rong!.cung_than![k].nap_am}</dd>
+                        <dt className="text-xs text-[var(--ls-mo)]">{cb(`ct.${k}`)}</dt>
+                        <dd className="font-serif text-lg text-[var(--ls-nhan)]">{ten("can", ls.mo_rong!.cung_than![k].can)} {ten("chi", ls.mo_rong!.cung_than![k].chi)}</dd>
+                        <dd className="text-xs text-[var(--ls-mo)]">{ten("nap_am", ls.mo_rong!.cung_than![k].nap_am)}</dd>
                         <dd className="mt-1 text-xs">{ls.mo_rong!.cung_than!.giai_thich[k]}</dd>
                       </div>
                     ))}
@@ -283,21 +284,21 @@ export function BatTu() {
                       <p className="text-xs">{ls.mo_rong.cung_than.giai_thich.tieu_van}</p>
                       <ol className="mt-2 flex flex-wrap gap-1.5 text-xs">
                         {ls.mo_rong.tieu_van.map((t) => (
-                          <li key={t.nam} className="rounded-lg border border-[var(--ls-vien)] px-2 py-1">{t.nam}: <b>{t.can} {t.chi}</b></li>
+                          <li key={t.nam} className="rounded-lg border border-[var(--ls-vien)] px-2 py-1">{t.nam}: <b>{ten("can", t.can)} {ten("chi", t.chi)}</b></li>
                         ))}
                       </ol>
                     </div>
                   )}
-                  <p className="mt-2 text-xs text-[var(--ls-mo)]">Cách lập: {ls.mo_rong.cung_than.nguon}.</p>
+                  <p className="mt-2 text-xs text-[var(--ls-mo)]">{cb("ct.cach_lap", { nguon: ls.mo_rong.cung_than.nguon })}</p>
                 </details>
               )}
             </div>
             {/* Dải chân hieuban.com + QR: ngoài khối được chụp (tuTruRef) để ảnh tải về không in hai lần, nhưng nằm sát dưới
                 khối để chụp màn hình cả hai vẫn mang link về web. */}
-            <div className="-mt-2 overflow-hidden rounded-[1.25rem] shadow-card"><ChanLaSo giaoDien={giaoDien} tieuDe="Lá số Bát tự" duong="/bat-tu" /></div>
+            <div className="-mt-2 overflow-hidden rounded-[1.25rem] shadow-card"><ChanLaSo giaoDien={giaoDien} tieuDe={cb("chan.tieu_de")} duong={d("/bat-tu")} /></div>
           </div>
         )}
-        {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{LOI_NHAN_CO[c.loai] ?? c.chi_tiet}</p>)}
+        {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{CO_CO_LOI.has(c.loai) ? cb(`co.${c.loai}`) : c.chi_tiet}</p>)}
       </section>
 
       {laSo && ls && (
@@ -305,24 +306,26 @@ export function BatTu() {
       )}
 
       {laSo && ls && (
-        <section id="luan-giai" aria-label="Luận giải toàn bộ" className="mt-10 scroll-mt-24">
+        <section id="luan-giai" aria-label={cb("aria.luan_giai")} className="mt-10 scroll-mt-24">
           <CachChinhBatTu.Provider value={{ cach: cachChinh }}>
-            <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten="Bát tự" />
+            <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten={cb("luan_giai.ten")} />
           </CachChinhBatTu.Provider>
-          <CuoiBaiDoc moDun="battu" cauHoi="Tứ trụ và phần luận giải có giúp bạn hiểu mình hơn?" />
+          {/* EN-ALL: bản Anh chưa có lối đi chéo mảng (các mảng khác chưa mở) → bỏ khối CTA, giữ mốc đọc xong + góp ý. */}
+          <CuoiBaiDoc moDun="battu" cauHoi={cb("luan_giai.cau_hoi")} khongCta={en} />
         </section>
       )}
 
-      <section ref={chatRef} aria-label="Hỏi Bát tự" className="mt-10 scroll-mt-24">
-        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp chuyên sâu"}</h2>
+      <section ref={chatRef} aria-label={cb("aria.hoi")} className="mt-10 scroll-mt-24">
+        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || cb("hoi.tieu_de")}</h2>
         <KhungChat
           moDun="battu"
-          loiChao={laSo ? "Hỏi về dụng thần, ngũ hành, đại vận hay một năm cụ thể." : "Hỏi kiến thức chung về nhật chủ, thập thần — hoặc bổ sung giờ sinh để hỏi về tứ trụ của bạn."}
+          loiChao={laSo ? cb("hoi.loi_chao_co") : cb("hoi.loi_chao_khong")}
           goiY={GOI_Y}
-          nhanO="Câu hỏi Bát tự"
+          nhanO={cb("hoi.nhan_o")}
           gui={(cau) => hoiMang("/api/battu/hoi", { cau_hoi: cau, ...(laSo ? { la_so: laSo } : {}) })}
         />
       </section>
     </div>
+    </TenHienProvider>
   );
 }

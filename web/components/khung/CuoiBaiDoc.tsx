@@ -13,6 +13,7 @@ import { MANG_TU_MO_DUN } from "@/lib/goi-y-cheo";
 import { GopY } from "./GopY";
 import { CtaCuoiBai } from "./CtaCuoiBai";
 import { GoiMoCheo, type GoiMo } from "./GoiMoCheo";
+import { useChuGiaoDien } from "./chu-giao-dien";
 
 /** Ghi reading_started một lần khi `sanSang` (kết quả của mảng đã hiện). */
 export function useBatDauDoc(moDun: string, sanSang: boolean): void {
@@ -55,8 +56,9 @@ export function CuoiBaiDoc({ moDun, cauHoi, chiaSe, maYDinh, goiMo, khongCta = f
   /** KC-3/KC-5: mã ý định (chung hoặc riêng của mảng) / gợi mở sẵn từ bài đọc → khối CTA cuối bài. */
   maYDinh?: string | null; goiMo?: GoiMo | null; khongCta?: boolean;
 }) {
+  const { c } = useChuGiaoDien();
   return (
-    <section aria-label="Góp ý bài đọc" className="mt-10 space-y-6">
+    <section aria-label={c("cuoi.gop_y")} className="mt-10 space-y-6">
       <MocDocXong moDun={moDun} />
       {!khongGopY && <GopY moDun={moDun} cauHoi={cauHoi} />}
       {chiaSe}

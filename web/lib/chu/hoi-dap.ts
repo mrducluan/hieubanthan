@@ -19,4 +19,12 @@ export const CHU_HOI_DAP = {
   "giai_nghia": { nhom: K, nhan: "Tiêu đề khung giải nghĩa", mac_dinh: "Giải nghĩa thuật ngữ ({so})", en: "Terms explained ({so})" },
   "bam_mo": { nhom: K, nhan: "Gợi ý bấm mở", mac_dinh: "· bấm để mở", en: "· tap to open" },
   "xem_tren_hinh": { nhom: K, nhan: "Nhãn chữ trỏ về hình (trình đọc màn hình)", mac_dinh: "{chu} — xem trên hình", en: "{chu} — see it on the picture" },
+  // EN-ALL GĐ 3d — chữ do lib/hoi-mang.ts ghép (ghi chú nguồn, lỗi, dòng lượt hỏi miễn phí).
+  "ghi_chu_llm": { nhom: K, nhan: "Ghi chú dưới câu trả lời (AI diễn đạt)", mac_dinh: "Diễn đạt tự động từ kho tri thức có nguồn.", en: "Phrased automatically from a sourced knowledge base." },
+  "ghi_chu_ghep": { nhom: K, nhan: "Ghi chú dưới câu trả lời (ghép mẫu)", mac_dinh: "Ghép từ kho tri thức có nguồn.", en: "Built from a sourced knowledge base." },
+  "loi_tra_loi": { nhom: K, nhan: "Lỗi khi chưa trả lời được", mac_dinh: "Chưa trả lời được lúc này, thử lại sau.", en: "Could not answer right now — please try again later." },
+  "luot_cuoi": { nhom: K, nhan: "Câu miễn phí cuối của ngày", mac_dinh: "Đây là câu miễn phí cuối của hôm nay.", en: "This is your last free question today." },
+  "luot_cuoi_sao": { nhom: K, nhan: "Vế câu sau dùng Sao", mac_dinh: " Câu tiếp theo dùng Sao.", en: " Come back tomorrow for more." },
+  "luot_cuoi_dang_nhap": { nhom: K, nhan: "Vế đăng nhập để hỏi thêm", mac_dinh: " Đăng nhập để hỏi thêm.", en: " Come back tomorrow for more." },
+  "luot_con": { nhom: K, nhan: "Còn N câu miễn phí ({so})", mac_dinh: "Còn {so} câu miễn phí hôm nay.", en: "{so} free questions left today." },
 } as const satisfies BangChu;

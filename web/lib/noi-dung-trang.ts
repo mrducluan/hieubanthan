@@ -7,6 +7,7 @@
 import { locDsThe, type TheTho } from "@/lib/loi-di-tiep";
 import type { Metadata } from "next";
 import { cookies, draftMode } from "next/headers";
+import { capHreflang } from "@/lib/duong-en";
 import { anhCms, COOKIE_PHAM_VI, dangHien, docPhamVi, duongLienKet, goiCms, chuoiTruyVan, type AnhCms, type LienKetCms } from "@/lib/cms";
 import { catMoTa, metaTrang, tieuDeSeo } from "@/lib/seo";
 import { khopMauCum, mucSoTrang, type MacDinhTrang, type NhomTrang } from "@/lib/so-trang";
@@ -250,13 +251,14 @@ export const BAN_TIENG_ANH: Record<string, string> = { "/than-so": "/en/numerolo
 export function banTiengAnh(duong: string): string | undefined {
   const m = duong.match(/^\/than-so\/y-nghia-so\/so-(\d{1,2})$/);
   if (m && ["1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33"].includes(m[1]!)) return `/en/numerology/life-path/${m[1]}`;
-  return BAN_TIENG_ANH[duong];
+  // EN-ALL: trang công cụ mở bản Anh qua rewrite (lib/duong-en.json, cờ `mo`, đúng đường dẫn — không trang con có slug).
+  return BAN_TIENG_ANH[duong] ?? (mucSoTrang(duong)?.nhom === "cong_cu" ? capHreflang(duong)?.en : undefined);
 }
 
 export function metaMacDinh(duong: string): Metadata {
   const m = mucSoTrang(duong)?.mac_dinh ?? {};
   const meta = metaTrang({ tieuDe: m.tieu_de_seo ?? "", moTa: m.mo_ta_seo ?? "", duong });
-  const en = BAN_TIENG_ANH[duong];
+  const en = banTiengAnh(duong);
   return en ? { ...meta, alternates: { ...meta.alternates, languages: { vi: duong, en, "x-default": duong } } } : meta;
 }
 

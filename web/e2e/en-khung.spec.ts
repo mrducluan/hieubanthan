@@ -75,7 +75,9 @@ test.describe("trên trình duyệt", () => {
     await page.goto("/en/tarot/cards/the-fool");
     const nav = page.getByTestId("menu-dau-trang");
     await expect(nav.getByRole("link", { name: "Numerology" })).toBeVisible();
-    await expect(nav.getByRole("link", { name: "Tarot" })).toHaveAttribute("aria-current", "page");
+    // EN-ALL GĐ 3d: Bát tự mở bản Anh → mục cha "Chinese Metaphysics" có ≥ 2 con (BaZi, Tarot), Tarot nằm trong bảng thả xuống;
+    // mục cha sáng khi đang ở trang Tarot.
+    await expect(nav.getByRole("link", { name: "Chinese Metaphysics" })).toHaveAttribute("aria-current", "page");
     const thanh = page.locator("[data-thanh-mang=tarot]:visible"); // lúc tải dần React giữ tạm 2 thanh (bản đệm + bản đếm)
     await expect(thanh).toBeVisible();
     await expect(thanh.locator("[data-muc=la_bai]")).toHaveAttribute("aria-current", /page|location/);

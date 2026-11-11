@@ -12,9 +12,10 @@ export function TieuDeMuc({ nho, lon, mo_ta, className, id, cap = 2 }: { nho?: s
   );
 }
 
-export function KhungTai({ dong = 3 }: { dong?: number }) {
+/** `nhan`: tên vùng cho trình đọc màn hình (EN-ALL: trang Anh truyền chữ catalog; mặc định chữ Việt cũ). */
+export function KhungTai({ dong = 3, nhan = "Đang tải" }: { dong?: number; nhan?: string }) {
   return (
-    <div className="space-y-3" aria-busy="true" aria-label="Đang tải">
+    <div className="space-y-3" aria-busy="true" aria-label={nhan}>
       {Array.from({ length: dong }, (_, i) => (
         <div key={i} className="h-24 animate-pulse rounded-2xl bg-surface/60" />
       ))}

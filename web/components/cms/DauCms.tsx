@@ -7,6 +7,8 @@ import { ChuNhan } from "@/components/cms/ChuNhan";
 import { taoChu, thayBienChu, type BangChu, type ChuCms } from "@/lib/chu-trang";
 import { lopKieuChu } from "@/lib/kieu-chu";
 import type { KieuChu } from "@/lib/noi-dung-trang";
+import { useNgonNgu } from "@/components/khung/NgonNgu";
+import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
 
 // ND-7: `bang` = bảng chữ của URL (lib/chu/*.ts), `chu` = chữ CMS đã lọc theo bảng → công cụ đọc bằng useChu().
 export type TraLoiNhanhDau = { hoi: string; dap: string; lien_ket?: { href: string; ten: string }[] };
@@ -23,11 +25,12 @@ export function DauCms({ h1 = null, loiDan = null, kieuChu = null, khoiTren = nu
  *  Google / bot AI đọc, nhưng gập lại để form nhập vẫn ở màn đầu). Link chỉ trong site. */
 export function TraLoiNhanhDau({ className = "mt-4" }: { className?: string }) {
   const t = useDauCms().traLoi;
+  const { c } = useChuGiaoDien();
   if (!t) return null;
   return (
     <details className={`${className} group max-w-2xl rounded-xl border border-gold/25 bg-gold/[0.04] px-4 py-2.5 text-sm`} data-testid="tra-loi-nhanh-dau">
       <summary className="cursor-pointer list-none py-1 text-fg [&::-webkit-details-marker]:hidden">
-        <span className="eyebrow mr-2">Trả lời nhanh</span>{t.hoi}
+        <span className="eyebrow mr-2">{c("dau.tra_loi_nhanh")}</span>{t.hoi}
         <span aria-hidden className="ml-1 inline-block text-fg-faint transition-transform group-open:rotate-180">⌄</span>
       </summary>
       <p className="mt-2 leading-relaxed text-fg-muted">{t.dap}</p>
@@ -44,7 +47,9 @@ export const useDauCms = () => useContext(Ctx);
 /** Chữ trên trang của URL đang xem (ND-7): `c("dau.nhan_tren")` → chữ CMS hoặc mặc định trong bảng. */
 export function useChu() {
   const { bang, chu } = useContext(Ctx);
-  return useMemo(() => taoChu(bang, chu), [bang, chu]);
+  // EN-ALL: trang Anh (rewrite của trang Việt) đọc chiều `en` của bảng — không rơi về chữ Việt.
+  const { ngonNgu } = useNgonNgu();
+  return useMemo(() => taoChu(bang, chu, ngonNgu), [bang, chu, ngonNgu]);
 }
 
 /** Lời dẫn dưới H1: chữ CMS (theo kiểu chữ đã chọn) hoặc chữ mặc định của công cụ. */

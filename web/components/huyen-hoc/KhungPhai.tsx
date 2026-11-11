@@ -10,6 +10,7 @@ import { useId, useState, type ReactNode } from "react";
 import { ChevronDown, Info, Layers } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
 
 /** Mốc đầu năm tính mệnh quái (phong thuỷ): Lập xuân / Tết âm lịch Việt Nam / Tết âm lịch Trung Quốc. */
 export type MocNam = "lap_xuan" | "tet_viet" | "tet_trung";
@@ -37,10 +38,12 @@ export function ChipPhai({ ds }: { ds: PhaiDangDung[] }) {
  * `nhac`: câu nhắc riêng cho người xem (vd "ngày sinh của bạn lệch hai lịch") — hiện cả khi đóng.
  * `mo` / `doiMo`: điều khiển từ ngoài khi khung có thể bị gỡ rồi dựng lại lúc engine tính lại (Tử vi), để không tự đóng.
  */
-export function KhungPhai({ moTa, children, testId, tomTat, nhac, tieuDe = "Trường phái", mo: moNgoai, doiMo }: {
+export function KhungPhai({ moTa, children, testId, tomTat, nhac, tieuDe: tieuDeVao, mo: moNgoai, doiMo }: {
   moTa: ReactNode; children: ReactNode; testId: string; tomTat?: ReactNode; nhac?: ReactNode; tieuDe?: string;
   mo?: boolean; doiMo?: (v: boolean) => void;
 }) {
+  const { c } = useChuGiaoDien();
+  const tieuDe = tieuDeVao ?? c("phai.tieu_de");
   const [moTrong, setMoTrong] = useState(false);
   const mo = moNgoai ?? moTrong;
   const datMo = (v: boolean) => { setMoTrong(v); doiMo?.(v); };
@@ -76,7 +79,7 @@ export function KhungPhai({ moTa, children, testId, tomTat, nhac, tieuDe = "Trư
           )}
         </span>
         <span className="inline-flex shrink-0 items-center gap-0.5 pt-0.5 text-sm font-medium text-gold">
-          {mo ? "Thu gọn" : "Đổi"}
+          {mo ? c("phai.thu_gon") : c("phai.doi")}
           <ChevronDown className={cn("size-4 transition-transform", mo && "rotate-180")} aria-hidden />
         </span>
       </button>
@@ -91,9 +94,11 @@ export function KhungPhai({ moTa, children, testId, tomTat, nhac, tieuDe = "Trư
 }
 
 /** Khung một dòng lựa chọn: tên + nhãn "ảnh hưởng tới bạn" + ô chọn + giải thích (gập, trừ khi `noiBat`). */
-export function DongKhung({ ten, goiY, noiBat, nhanNoiBat = "Khác với bạn", children, testId }: {
+export function DongKhung({ ten, goiY, noiBat, nhanNoiBat: nhanVao, children, testId }: {
   ten: string; goiY: ReactNode; noiBat?: boolean; nhanNoiBat?: string; children: ReactNode; testId?: string;
 }) {
+  const { c } = useChuGiaoDien();
+  const nhanNoiBat = nhanVao ?? c("phai.khac_ban");
   return (
     <div className="border-t border-line/50 py-3 first:border-t-0" data-testid={testId}>
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -106,7 +111,7 @@ export function DongKhung({ ten, goiY, noiBat, nhanNoiBat = "Khác với bạn",
       ) : (
         <details className="group mt-1.5">
           <summary className="inline-flex cursor-pointer list-none items-center gap-1 py-1 text-xs text-fg-faint hover:text-fg-muted [&::-webkit-details-marker]:hidden">
-            <Info className="size-3.5" aria-hidden /> Khác nhau thế nào?
+            <Info className="size-3.5" aria-hidden /> {c("phai.khac_nhau")}
             <ChevronDown className="size-3.5 transition-transform group-open:rotate-180" aria-hidden />
           </summary>
           <p className="mt-1 text-xs leading-relaxed text-fg-faint">{goiY}</p>

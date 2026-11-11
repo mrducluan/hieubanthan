@@ -9,7 +9,7 @@
 import { createHmac } from "node:crypto";
 import { NextResponse } from "next/server";
 import type { ZodTypeAny } from "zod";
-import { dauNguoiGoi, goiEngineDaKiem as goiEngine } from "@/lib/proxy";
+import { dauNgonNgu, dauNguoiGoi, goiEngineDaKiem as goiEngine } from "@/lib/proxy";
 import { layCauHinh } from "@/lib/cau-hinh";
 import { biMat, chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
 import { catXemTruoc, type BaoCaoDay } from "@/lib/sao-xem-truoc";
@@ -80,7 +80,8 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     return !kq.ok && kq.res.status === 422 ? goiEngine(data, p, dau) : kq;
   };
 
-  if (!(await dangThuSao(moDun))) {
+  // EN-ALL mục 6.1: bản Anh chưa có cổng thanh toán quốc tế → mọi chương "đang miễn phí" (không thu Sao, không khoá).
+  if (dauNgonNgu(req)["x-ngon-ngu"] || !(await dangThuSao(moDun))) {
     const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
     return kq.ok ? NextResponse.json({ ...(kq.body as object), phi: MIEN_PHI }) : kq.res;
   }

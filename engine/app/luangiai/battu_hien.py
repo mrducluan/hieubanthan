@@ -77,6 +77,22 @@ def _co(c: dict) -> dict:
     return c
 
 
+def phu_uc_gt(pu: dict, ket_luan: str | None = None) -> str:
+    """Giải thích phù ức của CALC ("thân nhược") theo ngôn ngữ — `ket_luan` thiếu thì đọc từ chính câu."""
+    kl = ket_luan or pu.get("giai_thich", "").removeprefix("thân ").strip()
+    return L("battu.phu_uc", pu.get("giai_thich", ""), than=_ten.ten("than_vuong", kl))
+
+
+def dieu_hau_gt(dh: dict, chi_thang: str) -> str:
+    """Giải thích điều hậu của CALC theo ngôn ngữ (dựng lại từ chi tháng + hành cần + thuyết)."""
+    chi = _ten.ten("chi", chi_thang)
+    gt = dh.get("giai_thich", "")
+    if dh.get("thuyet") == "nam_ban_cau":
+        k = "he" if "mùa đông" in gt else "dong" if "mùa hè" in gt else "on_hoa"
+        return L(f"battu.dieu_hau.nam_ban_cau.{k}", gt, chi=chi)
+    return L("battu.dieu_hau.can" if dh.get("hanh") else "battu.dieu_hau.on_hoa", gt, chi=chi)
+
+
 def la_so(kq: dict) -> dict:
     """Bản sao kết quả `/v1/battu/la-so` với câu theo ngôn ngữ lượt gọi."""
     r = copy.deepcopy(kq)
@@ -86,15 +102,10 @@ def la_so(kq: dict) -> dict:
         th["thang_diem"] = L("battu.thang_diem", th["thang_diem"])
     dt = r.get("dung_than") or {}
     if dt.get("phu_uc", {}).get("giai_thich"):
-        dt["phu_uc"]["giai_thich"] = L("battu.phu_uc", dt["phu_uc"]["giai_thich"], than=_ten.ten("than_vuong", th.get("ket_luan", "")))
+        dt["phu_uc"]["giai_thich"] = phu_uc_gt(dt["phu_uc"], th.get("ket_luan", ""))
     dh = dt.get("dieu_hau") or {}
     if dh.get("giai_thich"):
-        chi = _ten.ten("chi", r["tru"][1]["chi"])
-        if dh.get("thuyet") == "nam_ban_cau":
-            k = "he" if "mùa đông" in dh["giai_thich"] else "dong" if "mùa hè" in dh["giai_thich"] else "on_hoa"
-            dh["giai_thich"] = L(f"battu.dieu_hau.nam_ban_cau.{k}", dh["giai_thich"], chi=chi)
-        else:
-            dh["giai_thich"] = L("battu.dieu_hau.can" if dh.get("hanh") else "battu.dieu_hau.on_hoa", dh["giai_thich"], chi=chi)
+        dh["giai_thich"] = dieu_hau_gt(dh, r["tru"][1]["chi"])
     mr = r.get("mo_rong") or {}
     for s in mr.get("than_sat", []):
         s["y"] = L(f"battu.than_sat.y.{_ma(s['ten'])}", s["y"])

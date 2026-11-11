@@ -1,0 +1,1497 @@
+{
+ "_nguon": "EN-ALL GĐ 3 — bản tiếng Anh phần bổ sung trang nhat_chu (ban biên tập viết từ nghĩa bản Việt; tên riêng theo ten_en.json).",
+ "_trang_thai": "bien_tap",
+ "source": {
+  "ten": "Day Master page supplement",
+  "mo_ta": "Compiled by the Hieu Ban Than editorial team from the knowledge base and public-domain classics (draft, awaiting expert review)"
+ },
+ "trang": {
+  "nhat-chu-giap": {
+   "muc": [
+    {
+     "tieu_de": "How to tell if you are a Jia Day Master",
+     "doan": "The Day Master is the stem of your birth-day pillar, so people born on a Jia Zi, Jia Yin, Jia Chen, Jia Wu, Jia Shen or Jia Xu day are Jia Day Masters. The day stem changes every day in a sixty-day cycle, not with the birth year, so two siblings born in the same year can have different Day Masters. The quickest way is to draw up a BaZi chart from your Gregorian birth date and time and look at the stem in the day column."
+    },
+    {
+     "tieu_de": "Which jobs suit a Jia Day Master?",
+     "doan": "A Jia Day Master often suits long-range work that needs someone to build the frame and lead a team: project management, education, planning, forestry, founding an organisation. A great tree grows slowly but lasts, so Jia does well when given one area to tend for years. What is hard for Jia is a place that keeps changing direction, where everyone steps in to make changes. The exact career still depends on which element the chart needs more of."
+    },
+    {
+     "tieu_de": "A Jia Day Master in relationships",
+     "doan": "In love, Jia tends to protect, keep promises and want to be a support for the person they care about. The common snag is rarely saying they are tired, standing straight until it is too much. Jia combines with Ji under the Five Combinations; for a Jia man, Ji is also Direct Wealth, so the old books often mention this pairing. A small step this week: tell someone close one thing you need, instead of waiting for them to guess."
+    },
+    {
+     "tieu_de": "Which elements help a Jia Day Master?",
+     "doan": "There is no single helpful element for every Jia Day Master; it depends on whether Jia is strong or weak and which month it was born in. In the strength-balancing approach, a weak Jia needs Water (Resource) and Wood (Companions), while a strong Jia needs Fire to let energy out, Earth to have work to do, and Metal to prune. In the climate approach, those born in the Si, Wu and Wei months need Water; those born in Hai, Zi and Chou need Fire. In Zi Ping Zhen Quan, the helpful element is the one that supports the month's structure. The three approaches can point to different elements."
+    },
+    {
+     "tieu_de": "How do Jia Zi, Jia Yin and the other Jia days differ?",
+     "danh_sach": [
+      "For Jia, the day branch is like the roots underground: the old books call it the spouse palace, and the stems hidden in the branch show the colour of close relationships.",
+      "Jia Zi: the day branch holds Gui as its main qi, which is Direct Resource for Jia — home is a source of support and care; Zi hides only one stem, so its energy is very pure.",
+      "Jia Yin: the day branch holds Jia as its main qi, which is Friend for Jia — sitting on your own root, very self-reliant; Yin also holds Bing (Eating God) and Wu (Indirect Wealth), adding ease and an eye for enjoyment.",
+      "Jia Chen: the day branch holds Wu as its main qi, which is Indirect Wealth for Jia — the person beside you has a knack for business and socialising; Chen also holds Yi (Rob Wealth) and Gui (Direct Resource), adding rivalry and sharing out.",
+      "Jia Wu: the day branch holds Ding as its main qi, which is Hurting Officer for Jia — plain talk and plenty of feedback at home; Wu also holds Ji (Direct Wealth), adding a steady hand with money.",
+      "Jia Shen: the day branch holds Geng as its main qi, which is Seven Killings for Jia — close ties carry pressure, so boundaries need saying out loud; Shen also holds Ren (Indirect Resource) and Wu (Indirect Wealth), adding a need for private space.",
+      "Jia Xu: the day branch holds Wu as its main qi, which is Indirect Wealth for Jia — the person beside you has a knack for business and socialising; Xu also holds Xin (Direct Officer) and Ding (Hurting Officer), adding a sense of order."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "In which months is a Jia Day Master in season?",
+    "chu_thich": "In season means the month's element is Wood, or Water that feeds Wood. The Chen and Wei months are not in season but still hide a little Wood (Yi) for Jia to take root.",
+    "cot": [
+     "Birth month (by solar term)",
+     "Element of the month",
+     "Main qi of the month for Jia",
+     "In season?"
+    ],
+    "dong": [
+     [
+      "Yin (Tiger) · 1st month (from Start of Spring)",
+      "Wood",
+      "Jia — Friend",
+      "Yes — same element"
+     ],
+     [
+      "Mao (Rabbit) · 2nd month (from Awakening of Insects)",
+      "Wood",
+      "Yi — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "Chen (Dragon) · 3rd month (from Clear and Bright)",
+      "Earth",
+      "Wu — Indirect Wealth",
+      "No"
+     ],
+     [
+      "Si (Snake) · 4th month (from Start of Summer)",
+      "Fire",
+      "Bing — Eating God",
+      "No"
+     ],
+     [
+      "Wu (Horse) · 5th month (from Grain in Ear)",
+      "Fire",
+      "Ding — Hurting Officer",
+      "No"
+     ],
+     [
+      "Wei (Goat) · 6th month (from Minor Heat)",
+      "Earth",
+      "Ji — Direct Wealth",
+      "No"
+     ],
+     [
+      "Shen (Monkey) · 7th month (from Start of Autumn)",
+      "Metal",
+      "Geng — Seven Killings",
+      "No"
+     ],
+     [
+      "You (Rooster) · 8th month (from White Dew)",
+      "Metal",
+      "Xin — Direct Officer",
+      "No"
+     ],
+     [
+      "Xu (Dog) · 9th month (from Cold Dew)",
+      "Earth",
+      "Wu — Indirect Wealth",
+      "No"
+     ],
+     [
+      "Hai (Pig) · 10th month (from Start of Winter)",
+      "Water",
+      "Ren — Indirect Resource",
+      "Yes — Water feeds Wood"
+     ],
+     [
+      "Zi (Rat) · 11th month (from Major Snow)",
+      "Water",
+      "Gui — Direct Resource",
+      "Yes — Water feeds Wood"
+     ],
+     [
+      "Chou (Ox) · 12th month (from Minor Cold)",
+      "Earth",
+      "Ji — Direct Wealth",
+      "No"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What about a Jia Day Master born in the You month?",
+     "dap": "In the You month Metal is strong, and Xin, Jia's Direct Officer, sits in the month commander. In Zi Ping terms this is a Direct Officer structure; in the strength-balancing approach, Jia is out of season and needs Water (Resource) to turn Metal's force into food for Wood."
+    },
+    {
+     "hoi": "How is a Jia Day Master different from Yi?",
+     "dap": "Both are Wood. Jia is a tall, upright tree; Yi is a vine, a flower or grass that knows how to bend. Jia suits the role of building the frame; Yi suits connecting people with a soft touch."
+    },
+    {
+     "hoi": "Why does Di Tian Sui say Jia needs Fire to come into its own?",
+     "dap": "It means Jia needs Fire to bring its strength out, as a tree needs sun to flower and bear fruit. Jia with Wood but no Fire is often good at preparing but slow to deliver results."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Tong Shen Lun — the Heavenly Stems",
+     "phien_am": "Jia mu can tian, tuo tai yao huo.",
+     "nghia": "Jia Wood rises tall into the sky; to break out and take shape, it needs Fire."
+    },
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On the Useful God",
+     "phien_am": "Ba zi yong shen, zhuan qiu yue ling.",
+     "nghia": "The Useful God of the eight characters is looked for first in the birth month, which is why the month table above is the first step in reading a Jia chart the Zi Ping way."
+    }
+   ],
+   "y_chinh": [
+    "Day Master = stem of the day pillar, not the birth year",
+    "Jia suits building the frame and long tending",
+    "In love: protective, keeps promises, hides fatigue",
+    "Strong Jia needs Fire as an outlet; weak Jia needs Water"
+   ]
+  },
+  "nhat-chu-at": {
+   "muc": [
+    {
+     "tieu_de": "How do I know if I am a Yi Day Master?",
+     "doan": "You are a Yi Day Master when your birth-day pillar carries the Yi stem, that is one of the six days Yi Chou, Yi Mao, Yi Si, Yi Wei, Yi You and Yi Hai. The birth year gives your zodiac animal; the birth day gives your Day Master. Many people born in a Rabbit year have Geng or Gui as Day Master. If you were born between 11 pm and midnight, the default here still keeps that same date for the day pillar."
+    },
+    {
+     "tieu_de": "Which jobs suit a Yi Day Master?",
+     "doan": "A Yi Day Master often suits work that needs skill, tact and connecting people: design, flower arranging, customer care, diplomacy, editing, gardening, advising. A vine climbs by leaning on a trellis, so Yi does well in a team with a clear lead and room to adjust. Work that means facing off alone usually drains Yi more than others."
+    },
+    {
+     "tieu_de": "A Yi Day Master in relationships",
+     "doan": "In love, Yi tends to be gentle, notice details and read the mood well. The hard part is avoiding conflict and giving way until it feels unfair. Yi combines with Geng under the Five Combinations; for a Yi woman, Geng is also the Direct Officer, so the old books often mention the pull of this soft-and-hard pair. A tip for this week: say no to one small thing you usually accept to keep the peace."
+    },
+    {
+     "tieu_de": "Which elements help a Yi Day Master?",
+     "doan": "It depends on whether Yi is strong or weak: a weak Yi usually needs Water to feed it and Wood to support it, while a strong Yi needs Fire to flower and Earth to take root and get work done. Di Tian Sui describes Yi holding Ding and embracing Bing, meaning that with Fire, Yi does not fear the Metal months. The birth-month approach takes the structure as its base. Read the two approaches side by side, then compare with real life."
+    },
+    {
+     "tieu_de": "How do Yi Chou, Yi Mao and the other Yi days differ?",
+     "danh_sach": [
+      "The Yi vine holds on to the day branch like a trellis; the old books see this place as the spouse palace, and the main stem in the branch gives the strongest colour.",
+      "Yi Chou: the day branch holds Ji as its main qi, which is Indirect Wealth for Yi — the person beside you has a knack for business and socialising; Chou also holds Gui (Indirect Resource) and Xin (Seven Killings), adding a need for private space.",
+      "Yi Mao: the day branch holds Yi as its main qi, which is Friend for Yi — sitting on your own root, very self-reliant; Mao hides only one stem, so its energy is very pure.",
+      "Yi Si: the day branch holds Bing as its main qi, which is Hurting Officer for Yi — plain talk and plenty of feedback at home; Si also holds Geng (Direct Officer) and Wu (Direct Wealth), adding a sense of order.",
+      "Yi Wei: the day branch holds Ji as its main qi, which is Indirect Wealth for Yi — the person beside you has a knack for business and socialising; Wei also holds Ding (Eating God) and Yi (Friend), adding ease and an eye for enjoyment.",
+      "Yi You: the day branch holds Xin as its main qi, which is Seven Killings for Yi — close ties carry pressure, so boundaries need saying out loud; You hides only one stem, so its energy is very pure.",
+      "Yi Hai: the day branch holds Ren as its main qi, which is Direct Resource for Yi — home is a source of support and care; Hai also holds Jia (Rob Wealth), adding rivalry and sharing out."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "In which months is a Yi Day Master in season?",
+    "chu_thich": "Yi is in season in the Wood and Water months. The third column shows what role the birth month gives Yi: the Shen month is Direct Officer and the You month is Seven Killings, the clearest pressure on Yi.",
+    "cot": [
+     "Birth month (by solar term)",
+     "Element of the month",
+     "Main qi of the month for Yi",
+     "In season?"
+    ],
+    "dong": [
+     [
+      "Yin (Tiger) · 1st month (from Start of Spring)",
+      "Wood",
+      "Jia — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "Mao (Rabbit) · 2nd month (from Awakening of Insects)",
+      "Wood",
+      "Yi — Friend",
+      "Yes — same element"
+     ],
+     [
+      "Chen (Dragon) · 3rd month (from Clear and Bright)",
+      "Earth",
+      "Wu — Direct Wealth",
+      "No"
+     ],
+     [
+      "Si (Snake) · 4th month (from Start of Summer)",
+      "Fire",
+      "Bing — Hurting Officer",
+      "No"
+     ],
+     [
+      "Wu (Horse) · 5th month (from Grain in Ear)",
+      "Fire",
+      "Ding — Eating God",
+      "No"
+     ],
+     [
+      "Wei (Goat) · 6th month (from Minor Heat)",
+      "Earth",
+      "Ji — Indirect Wealth",
+      "No"
+     ],
+     [
+      "Shen (Monkey) · 7th month (from Start of Autumn)",
+      "Metal",
+      "Geng — Direct Officer",
+      "No"
+     ],
+     [
+      "You (Rooster) · 8th month (from White Dew)",
+      "Metal",
+      "Xin — Seven Killings",
+      "No"
+     ],
+     [
+      "Xu (Dog) · 9th month (from Cold Dew)",
+      "Earth",
+      "Wu — Direct Wealth",
+      "No"
+     ],
+     [
+      "Hai (Pig) · 10th month (from Start of Winter)",
+      "Water",
+      "Ren — Direct Resource",
+      "Yes — Water feeds Wood"
+     ],
+     [
+      "Zi (Rat) · 11th month (from Major Snow)",
+      "Water",
+      "Gui — Indirect Resource",
+      "Yes — Water feeds Wood"
+     ],
+     [
+      "Chou (Ox) · 12th month (from Minor Cold)",
+      "Earth",
+      "Ji — Indirect Wealth",
+      "No"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is a Yi Day Master weak?",
+     "dap": "No. Yi is soft but tough: Di Tian Sui says that though Yi is soft it can still cut up a goat and carve an ox, meaning Yi can still take root in Wei and Chou earth."
+    },
+    {
+     "hoi": "What about a Yi Day Master born in the Shen or You month?",
+     "dap": "In the Shen and You months Metal is strong and Yi is tightly controlled. The strength-balancing approach usually looks for Water to turn Metal into food for Wood; the birth-month approach reads this as a Direct Officer or Seven Killings structure and then looks at the gods that come with it."
+    },
+    {
+     "hoi": "Which Day Master does Yi combine with?",
+     "dap": "Under the Five Combinations, Yi combines with Geng. Beyond that, whether two people get on depends on how they treat each other day to day; BaZi only hints at where things are easy and where someone needs to give way."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Tong Shen Lun — the Heavenly Stems",
+     "phien_am": "Yi mu sui rou, kui yang jie niu. Huai ding bao bing, kua feng cheng hou.",
+     "nghia": "Though Yi Wood is soft, it can cut up a goat and carve an ox (take root in Wei and Chou); holding Ding and embracing Bing, it can ride the phoenix and the monkey (stand firm in You and Shen)."
+    },
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On how the ten stems combine to shape temperament",
+     "nghia": "The book reminds readers that temperament is not read from the day stem alone but from how it pairs with other stems: a Yi that combines with Geng is quite different from a Yi that never meets Geng."
+    }
+   ],
+   "y_chinh": [
+    "Yi: flowers, grass, vines — soft but tough",
+    "Suits skilled, connecting work with a clear lead",
+    "With Fire, Yi does not fear the Metal months",
+    "Five Combinations: Yi – Geng"
+   ]
+  },
+  "nhat-chu-binh": {
+   "muc": [
+    {
+     "tieu_de": "How to tell if you are a Bing Day Master",
+     "doan": "A Bing Day Master is someone whose day pillar carries the Bing stem: Bing Zi, Bing Yin, Bing Chen, Bing Wu, Bing Shen or Bing Xu. The day stem repeats every ten days, so a month has about three Bing days. Do not confuse it with the year stem: the year stem goes with your age, while the day stem is you in BaZi."
+    },
+    {
+     "tieu_de": "Which jobs suit a Bing Day Master?",
+     "doan": "A Bing Day Master often suits work in front of a crowd or work that inspires: sales, media, the stage, teaching, events, the energy sector. The sun shines everywhere, so Bing likes openness and feels uneasy doing things in secret. Bing tends to pour everything into the first stage and then run short; splitting a project into legs helps keep the fire steady."
+    },
+    {
+     "tieu_de": "A Bing Day Master in relationships",
+     "doan": "In love, Bing tends to be warm and proactive and likes to show it with big gestures. A partner sometimes finds Bing too bright, leaving little room for them to speak. Under the Five Combinations, Bing combines with Xin; for a Bing man, Xin is Direct Wealth. Something to do this week: ask someone close one question, then listen to the end without cutting in."
+    },
+    {
+     "tieu_de": "Which elements help a Bing Day Master?",
+     "doan": "A Bing born in a very hot summer usually does better with Water, especially Ren, to cool it; a weak Bing born in winter needs Wood to keep the fire going. Di Tian Sui also says Bing with much Earth turns gentle, and with strong Water shows its integrity. The Zi Ping approach asks which god the birth month is for Bing and then looks for gods that help the structure. Read the two side by side."
+    },
+    {
+     "tieu_de": "How do Bing Zi, Bing Yin and the other Bing days differ?",
+     "danh_sach": [
+      "The Bing sun shines down on the day branch right beneath it; the Zi Ping approach takes this branch as the spouse palace, reading the main qi first and then the hidden stems.",
+      "Bing Zi: the day branch holds Gui as its main qi, which is Direct Officer for Bing — order and good manners at home matter; Zi hides only one stem, so its energy is very pure.",
+      "Bing Yin: the day branch holds Jia as its main qi, which is Indirect Resource for Bing — a need for private space even in close ties; Yin also holds Bing (Friend) and Wu (Eating God), adding independence.",
+      "Bing Chen: the day branch holds Wu as its main qi, which is Eating God for Bing — home is a place to relax and enjoy things together; Chen also holds Yi (Direct Resource) and Gui (Direct Officer), adding protection.",
+      "Bing Wu: the day branch holds Ding as its main qi, which is Rob Wealth for Bing — people close to you share tasks and share portions; Wu also holds Ji (Hurting Officer), adding bluntness and frequent feedback.",
+      "Bing Shen: the day branch holds Geng as its main qi, which is Indirect Wealth for Bing — the person beside you has a knack for business and socialising; Shen also holds Ren (Seven Killings) and Wu (Eating God), adding pressure, so boundaries are needed.",
+      "Bing Xu: the day branch holds Wu as its main qi, which is Eating God for Bing — home is a place to relax and enjoy things together; Xu also holds Xin (Direct Wealth) and Ding (Rob Wealth), adding a steady hand with money."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "In which months is a Bing Day Master in season?",
+    "chu_thich": "Bing is in season in the Fire and Wood months. In the Hai and Zi months Water is strong: the main qi is Bing's Seven Killings and Direct Officer, when the sun's fire is weakest in the year.",
+    "cot": [
+     "Birth month (by solar term)",
+     "Element of the month",
+     "Main qi of the month for Bing",
+     "In season?"
+    ],
+    "dong": [
+     [
+      "Yin (Tiger) · 1st month (from Start of Spring)",
+      "Wood",
+      "Jia — Indirect Resource",
+      "Yes — Wood feeds Fire"
+     ],
+     [
+      "Mao (Rabbit) · 2nd month (from Awakening of Insects)",
+      "Wood",
+      "Yi — Direct Resource",
+      "Yes — Wood feeds Fire"
+     ],
+     [
+      "Chen (Dragon) · 3rd month (from Clear and Bright)",
+      "Earth",
+      "Wu — Eating God",
+      "No"
+     ],
+     [
+      "Si (Snake) · 4th month (from Start of Summer)",
+      "Fire",
+      "Bing — Friend",
+      "Yes — same element"
+     ],
+     [
+      "Wu (Horse) · 5th month (from Grain in Ear)",
+      "Fire",
+      "Ding — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "Wei (Goat) · 6th month (from Minor Heat)",
+      "Earth",
+      "Ji — Hurting Officer",
+      "No"
+     ],
+     [
+      "Shen (Monkey) · 7th month (from Start of Autumn)",
+      "Metal",
+      "Geng — Indirect Wealth",
+      "No"
+     ],
+     [
+      "You (Rooster) · 8th month (from White Dew)",
+      "Metal",
+      "Xin — Direct Wealth",
+      "No"
+     ],
+     [
+      "Xu (Dog) · 9th month (from Cold Dew)",
+      "Earth",
+      "Wu — Eating God",
+      "No"
+     ],
+     [
+      "Hai (Pig) · 10th month (from Start of Winter)",
+      "Water",
+      "Ren — Seven Killings",
+      "No"
+     ],
+     [
+      "Zi (Rat) · 11th month (from Major Snow)",
+      "Water",
+      "Gui — Direct Officer",
+      "No"
+     ],
+     [
+      "Chou (Ox) · 12th month (from Minor Cold)",
+      "Earth",
+      "Ji — Hurting Officer",
+      "No"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does a Bing Day Master suit leadership?",
+     "dap": "Many Bing people have a leading presence because they like taking on hard tasks and saying clearly what they think. Whether they lead well also depends on whether the chart has Officer and Resource to keep the pace."
+    },
+    {
+     "hoi": "How is a Bing Day Master different from Ding?",
+     "dap": "Both are Fire. Bing is a yang stem, like the sun: bright and wide. Ding is a yin stem, like a lamp: bright up close and long-lasting. Bing suits work with many people; Ding suits work that needs focus."
+    },
+    {
+     "hoi": "Why does Di Tian Sui say Bing shrinks back when it meets Xin?",
+     "dap": "Because Bing combines with Xin, its heat is drawn into the bond and it loses its usual force. In daily life, Bing people often soften completely in front of someone they cherish."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Tong Shen Lun — the Heavenly Stems",
+     "phien_am": "Bing huo meng lie, qi shuang wu xue. Neng duan geng jin, feng xin fan qie.",
+     "nghia": "Bing Fire is fierce and scorns frost and snow; it can smelt Geng Metal, yet when it meets Xin it turns timid."
+    },
+    {
+     "sach": "Yuan Hai Zi Ping",
+     "nghia": "The book gathers the Zi Ping method of taking the day stem as the self; each stem is given a natural image, Bing being the fire of the sun, so readers can picture the temperament before moving on to the ten gods."
+    }
+   ],
+   "y_chinh": [
+    "Bing: the sun — bright, wide, likes openness",
+    "Suits work in front of a crowd, inspiring others",
+    "Summer needs Water; winter needs Wood for the fire",
+    "Five Combinations: Bing – Xin"
+   ]
+  },
+  "nhat-chu-dinh": {
+   "muc": [
+    {
+     "tieu_de": "How do I know if I am a Ding Day Master?",
+     "doan": "People born on a Ding Chou, Ding Mao, Ding Si, Ding Wei, Ding You or Ding Hai day are Ding Day Masters. To be sure, draw up the chart from the Gregorian date with the birth time; a lunar date typed by hand can slip if there is a leap month. The birth time rarely changes the day stem; for births after 11 pm each school counts differently, so check the note on the chart."
+    },
+    {
+     "tieu_de": "Which jobs suit a Ding Day Master?",
+     "doan": "Ding often suits careful work that lights the way for others at close range: advising, counselling, editing, lighting design, research, precision engineering, baking. A lamp shines brightest in the dark, so Ding often stands out when others are confused. Noisy places that change all the time tend to unsettle Ding."
+    },
+    {
+     "tieu_de": "A Ding Day Master in relationships",
+     "doan": "In love, Ding tends to be thoughtful, remembers details and cares in a quiet way. The hard part is reading too much into a passing remark. Ding combines with Ren under the Five Combinations; for a Ding woman, Ren is the Direct Officer, and Di Tian Sui has the line 'combining with Ren, it is loyal'. A small step: ask directly instead of guessing what the other person means."
+    },
+    {
+     "tieu_de": "Which elements help a Ding Day Master?",
+     "doan": "A weak Ding usually does better with Wood, especially Jia as firewood, and Fire as support; a strong Ding does better with Earth to let energy out, Metal to have work to do, and some Water to keep it in check. The climate approach: those born in the Si, Wu and Wei months need Water; those born in Hai, Zi and Chou need warm Fire. The birth-month approach takes the structure as its base. One colour chart does not fit every Ding."
+    },
+    {
+     "tieu_de": "How do Ding Chou, Ding Mao and the other Ding days differ?",
+     "danh_sach": [
+      "The Ding lamp burns in the manner of whichever day branch it stands on; the day branch is also the spouse palace in the Zi Ping reading.",
+      "Ding Chou: the day branch holds Ji as its main qi, which is Eating God for Ding — home is a place to relax and enjoy things together; Chou also holds Gui (Seven Killings) and Xin (Indirect Wealth), adding pressure, so boundaries are needed.",
+      "Ding Mao: the day branch holds Yi as its main qi, which is Indirect Resource for Ding — a need for private space even in close ties; Mao hides only one stem, so its energy is very pure.",
+      "Ding Si: the day branch holds Bing as its main qi, which is Rob Wealth for Ding — people close to you share tasks and share portions; Si also holds Geng (Direct Wealth) and Wu (Hurting Officer), adding a steady hand with money.",
+      "Ding Wei: the day branch holds Ji as its main qi, which is Eating God for Ding — home is a place to relax and enjoy things together; Wei also holds Ding (Friend) and Yi (Indirect Resource), adding independence.",
+      "Ding You: the day branch holds Xin as its main qi, which is Indirect Wealth for Ding — the person beside you has a knack for business and socialising; You hides only one stem, so its energy is very pure.",
+      "Ding Hai: the day branch holds Ren as its main qi, which is Direct Officer for Ding — order and good manners at home matter; Hai also holds Jia (Direct Resource), adding protection."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "In which months is a Ding Day Master in season?",
+    "chu_thich": "Ding is in season when the birth month belongs to Fire or Wood. The Hai month is not in season but hides Jia, Ding's Direct Resource, so there is still firewood.",
+    "cot": [
+     "Birth month (by solar term)",
+     "Element of the month",
+     "Main qi of the month for Ding",
+     "In season?"
+    ],
+    "dong": [
+     [
+      "Yin (Tiger) · 1st month (from Start of Spring)",
+      "Wood",
+      "Jia — Direct Resource",
+      "Yes — Wood feeds Fire"
+     ],
+     [
+      "Mao (Rabbit) · 2nd month (from Awakening of Insects)",
+      "Wood",
+      "Yi — Indirect Resource",
+      "Yes — Wood feeds Fire"
+     ],
+     [
+      "Chen (Dragon) · 3rd month (from Clear and Bright)",
+      "Earth",
+      "Wu — Hurting Officer",
+      "No"
+     ],
+     [
+      "Si (Snake) · 4th month (from Start of Summer)",
+      "Fire",
+      "Bing — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "Wu (Horse) · 5th month (from Grain in Ear)",
+      "Fire",
+      "Ding — Friend",
+      "Yes — same element"
+     ],
+     [
+      "Wei (Goat) · 6th month (from Minor Heat)",
+      "Earth",
+      "Ji — Eating God",
+      "No"
+     ],
+     [
+      "Shen (Monkey) · 7th month (from Start of Autumn)",
+      "Metal",
+      "Geng — Direct Wealth",
+      "No"
+     ],
+     [
+      "You (Rooster) · 8th month (from White Dew)",
+      "Metal",
+      "Xin — Indirect Wealth",
+      "No"
+     ],
+     [
+      "Xu (Dog) · 9th month (from Cold Dew)",
+      "Earth",
+      "Wu — Hurting Officer",
+      "No"
+     ],
+     [
+      "Hai (Pig) · 10th month (from Start of Winter)",
+      "Water",
+      "Ren — Direct Officer",
+      "No"
+     ],
+     [
+      "Zi (Rat) · 11th month (from Major Snow)",
+      "Water",
+      "Gui — Seven Killings",
+      "No"
+     ],
+     [
+      "Chou (Ox) · 12th month (from Minor Cold)",
+      "Earth",
+      "Ji — Eating God",
+      "No"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Why is Ding said to be strong without being harsh, and weak without going out?",
+     "dap": "That is the sense of the Di Tian Sui line 'flourishing but not fierce, declining but not exhausted': a lamp flame stays gentle when strong and still flickers when weak. Ding people are often more resilient than they look."
+    },
+    {
+     "hoi": "Is a Ding Day Master born in the Hai month all right?",
+     "dap": "In the Hai month Water is strong and Ding is out of season, but Hai hides Jia, Ding's Direct Resource, so there is still a source of support. This is Officer with Resource alongside, often read as pressure that comes with someone who backs you."
+    },
+    {
+     "hoi": "Which Day Master does Ding combine with?",
+     "dap": "Under the Five Combinations, Ding combines with Ren: the lamp meets the great river. Whether two people get on still depends on how they behave; BaZi only hints at where things are easy and where someone needs to give way."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Tong Shen Lun — the Heavenly Stems",
+     "phien_am": "Ding huo rou zhong, nei xing zhao rong. Bao yi er xiao, he ren er zhong.",
+     "nghia": "Ding Fire is soft yet keeps to the centre, bright and warm within; embracing Yi (the mother) it is filial, combining with Ren it is loyal."
+    },
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On the Useful God",
+     "nghia": "The book starts the search for the Useful God from the birth month; for Ding, knowing whether the month is Resource, Officer or Wealth shows which axis the chart turns on before talking about helpful elements."
+    }
+   ],
+   "y_chinh": [
+    "Ding: a lamp — close light, steady, thoughtful",
+    "Suits careful work that lights the way for others",
+    "A weak Ding needs Jia as firewood",
+    "Five Combinations: Ding – Ren"
+   ]
+  },
+  "nhat-chu-mau": {
+   "muc": [
+    {
+     "tieu_de": "How to tell if you are a Wu Day Master",
+     "doan": "A Wu Day Master is someone whose day stem is Wu, falling on the days Wu Zi, Wu Yin, Wu Chen, Wu Wu, Wu Shen and Wu Xu. Wu is the yang stem of Earth, unlike Ji, the yin stem. On the chart, look at the stem box of the Day column, not the Year column."
+    },
+    {
+     "tieu_de": "Which jobs suit a Wu Day Master?",
+     "doan": "Wu often suits work that needs someone to hold the axis and carry the load: construction, property, operations management, logistics, insurance, security, administration. A mountain does not chase the wind, so Wu is trusted for being steady. Fields where fashions change every month tire Wu more than others. The exact career still depends on which element the chart needs."
+    },
+    {
+     "tieu_de": "A Wu Day Master in relationships",
+     "doan": "In love, Wu tends to be dependable, sparing with flowery words, and shows care through steady actions. A partner sometimes finds Wu hard to read because Wu rarely talks about feelings. Under the Five Combinations, Wu combines with Gui; for a Wu man, Gui is Direct Wealth. A tip for this week: tell someone close one thing you are worried about, however small."
+    },
+    {
+     "tieu_de": "Which elements help a Wu Day Master?",
+     "doan": "A weak Wu usually needs Fire to feed it and Earth to support it; a strong Wu does better with Metal to drain it, Water to give it work, and Wood to open it up. Di Tian Sui notes that Wu in Yin or Shen dislikes being clashed and prefers calm. Born in a dry summer it often needs Water; born in a cold winter it often needs Fire. The birth-month approach sees the helpful element as the one that supports the structure."
+    },
+    {
+     "tieu_de": "How do Wu Zi, Wu Yin and the other Wu days differ?",
+     "danh_sach": [
+      "The Wu mountain sits on the day branch as on its ground; that ground, in the old books, is the spouse palace, and its main qi says the most.",
+      "Wu Zi: the day branch holds Gui as its main qi, which is Direct Wealth for Wu — care and housekeeping at home matter; Zi hides only one stem, so its energy is very pure.",
+      "Wu Yin: the day branch holds Jia as its main qi, which is Seven Killings for Wu — close ties carry pressure, so boundaries need saying out loud; Yin also holds Bing (Indirect Resource) and Wu (Friend), adding a need for private space.",
+      "Wu Chen: the day branch holds Wu as its main qi, which is Friend for Wu — sitting on your own root, very self-reliant; Chen also holds Yi (Direct Officer) and Gui (Direct Wealth), adding a sense of order.",
+      "Wu Wu: the day branch holds Ding as its main qi, which is Direct Resource for Wu — home is a source of support and care; Wu also holds Ji (Rob Wealth), adding rivalry and sharing out.",
+      "Wu Shen: the day branch holds Geng as its main qi, which is Eating God for Wu — home is a place to relax and enjoy things together; Shen also holds Ren (Indirect Wealth) and Wu (Friend), adding resourcefulness and networking.",
+      "Wu Xu: the day branch holds Wu as its main qi, which is Friend for Wu — sitting on your own root, very self-reliant; Xu also holds Xin (Hurting Officer) and Ding (Direct Resource), adding bluntness and frequent feedback."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "In which months is a Wu Day Master in season?",
+    "chu_thich": "Wu is in season in the four Earth months (Chen, Wei, Xu, Chou) and the two Fire months (Si, Wu). The Yin and Mao months, when Wood is strong, are when Wu is under the most pressure.",
+    "cot": [
+     "Birth month (by solar term)",
+     "Element of the month",
+     "Main qi of the month for Wu",
+     "In season?"
+    ],
+    "dong": [
+     [
+      "Yin (Tiger) · 1st month (from Start of Spring)",
+      "Wood",
+      "Jia — Seven Killings",
+      "No"
+     ],
+     [
+      "Mao (Rabbit) · 2nd month (from Awakening of Insects)",
+      "Wood",
+      "Yi — Direct Officer",
+      "No"
+     ],
+     [
+      "Chen (Dragon) · 3rd month (from Clear and Bright)",
+      "Earth",
+      "Wu — Friend",
+      "Yes — same element"
+     ],
+     [
+      "Si (Snake) · 4th month (from Start of Summer)",
+      "Fire",
+      "Bing — Indirect Resource",
+      "Yes — Fire feeds Earth"
+     ],
+     [
+      "Wu (Horse) · 5th month (from Grain in Ear)",
+      "Fire",
+      "Ding — Direct Resource",
+      "Yes — Fire feeds Earth"
+     ],
+     [
+      "Wei (Goat) · 6th month (from Minor Heat)",
+      "Earth",
+      "Ji — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "Shen (Monkey) · 7th month (from Start of Autumn)",
+      "Metal",
+      "Geng — Eating God",
+      "No"
+     ],
+     [
+      "You (Rooster) · 8th month (from White Dew)",
+      "Metal",
+      "Xin — Hurting Officer",
+      "No"
+     ],
+     [
+      "Xu (Dog) · 9th month (from Cold Dew)",
+      "Earth",
+      "Wu — Friend",
+      "Yes — same element"
+     ],
+     [
+      "Hai (Pig) · 10th month (from Start of Winter)",
+      "Water",
+      "Ren — Indirect Wealth",
+      "No"
+     ],
+     [
+      "Zi (Rat) · 11th month (from Major Snow)",
+      "Water",
+      "Gui — Direct Wealth",
+      "No"
+     ],
+     [
+      "Chou (Ox) · 12th month (from Minor Cold)",
+      "Earth",
+      "Ji — Rob Wealth",
+      "Yes — same element"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What about a Wu Day Master born in the Yin month?",
+     "dap": "In the Yin month Wood is strong and Jia, Wu's Seven Killings, sits in the month commander; but Yin hides Bing, the Indirect Resource, so Killings feeds Resource and Resource feeds the self. The Zi Ping books call this Killings transformed by Resource."
+    },
+    {
+     "hoi": "How are Wu and Ji different?",
+     "dap": "Both are Earth. Wu is a mountain or a dyke, a yang stem: solid, shielding, load-bearing. Ji is field soil, a yin stem: soft, moist, nourishing. Wu holds the axis; Ji builds up."
+    },
+    {
+     "hoi": "Why do the books say Wu holds the life of all things?",
+     "dap": "The Di Tian Sui line 'still, it gathers in; moving, it opens out; it holds the life of all things' describes Wu closing when still and opening when moving. In daily terms, Wu suits the role of keeping the pace for the whole group."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Tong Shen Lun — the Heavenly Stems",
+     "phien_am": "Wu tu gu zhong, ji zhong qie zheng. Jing xi dong pi, wan wu si ming.",
+     "nghia": "Wu Earth is solid and heavy, both central and upright; still, it gathers in, moving, it opens out, holding the life of all things."
+    },
+    {
+     "sach": "Qiong Tong Bao Jian",
+     "nghia": "This Qing-dynasty book on climate balance reads the ten day stems month by month; for Wu, the birth month decides whether the Earth is dry or moist, heavy or light, before the other gods are weighed."
+    }
+   ],
+   "y_chinh": [
+    "Wu: a great mountain — solid, load-bearing, steady",
+    "Suits construction, operations, work built on trust",
+    "Yin month: Killings transformed by Resource",
+    "Five Combinations: Wu – Gui"
+   ]
+  },
+  "nhat-chu-ky": {
+   "muc": [
+    {
+     "tieu_de": "How do I know if I am a Ji Day Master?",
+     "doan": "Anyone born on a Ji Chou, Ji Mao, Ji Si, Ji Wei, Ji You or Ji Hai day is a Ji Day Master. Ji is moist garden and field soil, the yin stem of Earth. Printed perpetual calendars also list the day's stem and branch; look up the Gregorian date and read the day stem, with no need to convert to the lunar calendar first."
+    },
+    {
+     "tieu_de": "Which jobs suit a Ji Day Master?",
+     "doan": "Ji often suits work that nurtures and builds up gradually: early-years teaching, human resources, farming, food, customer care, in-house accounting. A good field comes from steady care, so Ji is good at work that needs patience and detail. What is hard for Ji is having to decide fast and carry big risks alone."
+    },
+    {
+     "tieu_de": "A Ji Day Master in relationships",
+     "doan": "In love, Ji tends to look after others, remember important dates, see to meals and keep the household running. The hard part is taking on everything and then feeling sad that no one notices. Ji combines with Jia under the Five Combinations; for a Ji woman, Jia is the Direct Officer. Something to do this week: ask someone close to take over one household task you usually do alone."
+    },
+    {
+     "tieu_de": "Which elements help a Ji Day Master?",
+     "doan": "A weak Ji usually does better with Fire to feed it, especially Bing for warmth, and Earth to support it; a strong Ji does better with Metal to drain it, Wood to loosen the soil, and just enough Water to irrigate. Di Tian Sui says Ji does not worry about flourishing Wood and does not fear raging Water, meaning moist soil can hold a lot. Still read the strength-balancing and birth-month approaches side by side."
+    },
+    {
+     "tieu_de": "How do Ji Chou, Ji Mao and the other Ji days differ?",
+     "danh_sach": [
+      "The Ji field lies on the day branch: this branch is both the root of the self and, in the Zi Ping reading, the spouse palace.",
+      "Ji Chou: the day branch holds Ji as its main qi, which is Friend for Ji — sitting on your own root, very self-reliant; Chou also holds Gui (Indirect Wealth) and Xin (Eating God), adding resourcefulness and networking.",
+      "Ji Mao: the day branch holds Yi as its main qi, which is Seven Killings for Ji — close ties carry pressure, so boundaries need saying out loud; Mao hides only one stem, so its energy is very pure.",
+      "Ji Si: the day branch holds Bing as its main qi, which is Direct Resource for Ji — home is a source of support and care; Si also holds Geng (Hurting Officer) and Wu (Rob Wealth), adding bluntness and frequent feedback.",
+      "Ji Wei: the day branch holds Ji as its main qi, which is Friend for Ji — sitting on your own root, very self-reliant; Wei also holds Ding (Indirect Resource) and Yi (Seven Killings), adding a need for private space.",
+      "Ji You: the day branch holds Xin as its main qi, which is Eating God for Ji — home is a place to relax and enjoy things together; You hides only one stem, so its energy is very pure.",
+      "Ji Hai: the day branch holds Ren as its main qi, which is Direct Wealth for Ji — care and housekeeping at home matter; Hai also holds Jia (Direct Officer), adding a sense of order."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "In which months is a Ji Day Master in season?",
+    "chu_thich": "Ji is in season in the Earth and Fire months, like Wu, but within the same month the main qi carries a different ten-god name because Ji is a yin stem.",
+    "cot": [
+     "Birth month (by solar term)",
+     "Element of the month",
+     "Main qi of the month for Ji",
+     "In season?"
+    ],
+    "dong": [
+     [
+      "Yin (Tiger) · 1st month (from Start of Spring)",
+      "Wood",
+      "Jia — Direct Officer",
+      "No"
+     ],
+     [
+      "Mao (Rabbit) · 2nd month (from Awakening of Insects)",
+      "Wood",
+      "Yi — Seven Killings",
+      "No"
+     ],
+     [
+      "Chen (Dragon) · 3rd month (from Clear and Bright)",
+      "Earth",
+      "Wu — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "Si (Snake) · 4th month (from Start of Summer)",
+      "Fire",
+      "Bing — Direct Resource",
+      "Yes — Fire feeds Earth"
+     ],
+     [
+      "Wu (Horse) · 5th month (from Grain in Ear)",
+      "Fire",
+      "Ding — Indirect Resource",
+      "Yes — Fire feeds Earth"
+     ],
+     [
+      "Wei (Goat) · 6th month (from Minor Heat)",
+      "Earth",
+      "Ji — Friend",
+      "Yes — same element"
+     ],
+     [
+      "Shen (Monkey) · 7th month (from Start of Autumn)",
+      "Metal",
+      "Geng — Hurting Officer",
+      "No"
+     ],
+     [
+      "You (Rooster) · 8th month (from White Dew)",
+      "Metal",
+      "Xin — Eating God",
+      "No"
+     ],
+     [
+      "Xu (Dog) · 9th month (from Cold Dew)",
+      "Earth",
+      "Wu — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "Hai (Pig) · 10th month (from Start of Winter)",
+      "Water",
+      "Ren — Direct Wealth",
+      "No"
+     ],
+     [
+      "Zi (Rat) · 11th month (from Major Snow)",
+      "Water",
+      "Gui — Indirect Wealth",
+      "No"
+     ],
+     [
+      "Chou (Ox) · 12th month (from Minor Cold)",
+      "Earth",
+      "Ji — Friend",
+      "Yes — same element"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What about a Ji Day Master born in the Mao month?",
+     "dap": "In the Mao month Wood is strong and Yi, Ji's Seven Killings, sits in the month commander. In Zi Ping terms this is a Seven Killings structure, needing Eating God to control it or Resource to transform it; Ji people here often feel work pressure early."
+    },
+    {
+     "hoi": "Which Day Master does Ji combine with?",
+     "dap": "Under the Five Combinations, Ji combines with Jia: the tree needs soil, and the soil is held in place by the tree's roots. Whether it truly works still depends on how two people share tasks and talk."
+    },
+    {
+     "hoi": "Why is Ji described as keeping the storehouse in the middle?",
+     "dap": "Di Tian Sui describes Ji as low, moist, central, upright and storing. In daily terms, Ji is good at saving up bit by bit, and at keeping things, people and household ways."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Tong Shen Lun — the Heavenly Stems",
+     "phien_am": "Ji tu bei shi, zhong zheng xu cang. Bu chou mu sheng, bu wei shui kuang.",
+     "nghia": "Ji Earth is low and moist, central and upright, storing things away; it does not worry about flourishing Wood or fear raging Water."
+    },
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On how the ten stems combine to shape temperament",
+     "nghia": "The book holds that the same day stem changes colour when another stem pairs with it; a Ji that combines with Jia is quite different from a Ji standing alone."
+    }
+   ],
+   "y_chinh": [
+    "Ji: garden and field soil — nurturing, building up",
+    "Suits patient, detailed work that cares for people",
+    "A weak Ji needs Bing for warmth",
+    "Five Combinations: Ji – Jia"
+   ]
+  },
+  "nhat-chu-canh": {
+   "muc": [
+    {
+     "tieu_de": "How to tell if you are a Geng Day Master",
+     "doan": "People whose day pillar is Geng Zi, Geng Yin, Geng Chen, Geng Wu, Geng Shen or Geng Xu are Geng Day Masters. Your birth-year animal does not tell you this. Two people born in a Dragon year can be a Geng Day Master and a Yi Day Master, read in quite different ways."
+    },
+    {
+     "tieu_de": "Which jobs suit a Geng Day Master?",
+     "doan": "Geng often suits work that needs decisiveness and stamina under pressure: mechanical engineering, installation, legal compliance, the military, sport, rescue, incident response. Raw metal must be forged before it becomes a tool, so Geng grows in places with discipline and a demanding teacher. Where things are too relaxed, Geng easily loses direction."
+    },
+    {
+     "tieu_de": "A Geng Day Master in relationships",
+     "doan": "In love, Geng tends to be straightforward and loyal and protects loved ones through action. The hard part is sharp words that can hurt without Geng noticing. Geng combines with Yi under the Five Combinations; for a Geng man, Yi is Direct Wealth. Di Tian Sui says Geng beats its elder brother Jia but gives way to its younger sister Yi: hard yields to soft. A tip: before giving criticism, say one thing you value in the other person."
+    },
+    {
+     "tieu_de": "Which elements help a Geng Day Master?",
+     "doan": "A strong Geng, especially one born in autumn, usually does better with Ding Fire to forge it and Water to show its clarity; a weak Geng needs moist Earth to feed it and Metal to support it. Di Tian Sui says with Water it becomes clear, with Fire it becomes sharp; moist Earth feeds it, dry Earth makes it brittle. The birth-month and strength-balancing approaches can point to different elements, so read both."
+    },
+    {
+     "tieu_de": "How do Geng Zi, Geng Yin and the other Geng days differ?",
+     "danh_sach": [
+      "Geng metal stands on the day branch like an axe on an anvil; the old books read this branch as the spouse palace, the main qi first and the hidden stems after.",
+      "Geng Zi: the day branch holds Gui as its main qi, which is Hurting Officer for Geng — plain talk and plenty of feedback at home; Zi hides only one stem, so its energy is very pure.",
+      "Geng Yin: the day branch holds Jia as its main qi, which is Indirect Wealth for Geng — the person beside you has a knack for business and socialising; Yin also holds Bing (Seven Killings) and Wu (Indirect Resource), adding pressure, so boundaries are needed.",
+      "Geng Chen: the day branch holds Wu as its main qi, which is Indirect Resource for Geng — a need for private space even in close ties; Chen also holds Yi (Direct Wealth) and Gui (Hurting Officer), adding a steady hand with money.",
+      "Geng Wu: the day branch holds Ding as its main qi, which is Direct Officer for Geng — order and good manners at home matter; Wu also holds Ji (Direct Resource), adding protection.",
+      "Geng Shen: the day branch holds Geng as its main qi, which is Friend for Geng — sitting on your own root, very self-reliant; Shen also holds Ren (Eating God) and Wu (Indirect Resource), adding ease and an eye for enjoyment.",
+      "Geng Xu: the day branch holds Wu as its main qi, which is Indirect Resource for Geng — a need for private space even in close ties; Xu also holds Xin (Rob Wealth) and Ding (Direct Officer), adding rivalry and sharing out."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "In which months is a Geng Day Master in season?",
+    "chu_thich": "Geng is in season in the Metal and Earth months. In the Si and Wu months Fire is strong: the main qi is Geng's Seven Killings and Direct Officer, the time when the metal is smelted.",
+    "cot": [
+     "Birth month (by solar term)",
+     "Element of the month",
+     "Main qi of the month for Geng",
+     "In season?"
+    ],
+    "dong": [
+     [
+      "Yin (Tiger) · 1st month (from Start of Spring)",
+      "Wood",
+      "Jia — Indirect Wealth",
+      "No"
+     ],
+     [
+      "Mao (Rabbit) · 2nd month (from Awakening of Insects)",
+      "Wood",
+      "Yi — Direct Wealth",
+      "No"
+     ],
+     [
+      "Chen (Dragon) · 3rd month (from Clear and Bright)",
+      "Earth",
+      "Wu — Indirect Resource",
+      "Yes — Earth feeds Metal"
+     ],
+     [
+      "Si (Snake) · 4th month (from Start of Summer)",
+      "Fire",
+      "Bing — Seven Killings",
+      "No"
+     ],
+     [
+      "Wu (Horse) · 5th month (from Grain in Ear)",
+      "Fire",
+      "Ding — Direct Officer",
+      "No"
+     ],
+     [
+      "Wei (Goat) · 6th month (from Minor Heat)",
+      "Earth",
+      "Ji — Direct Resource",
+      "Yes — Earth feeds Metal"
+     ],
+     [
+      "Shen (Monkey) · 7th month (from Start of Autumn)",
+      "Metal",
+      "Geng — Friend",
+      "Yes — same element"
+     ],
+     [
+      "You (Rooster) · 8th month (from White Dew)",
+      "Metal",
+      "Xin — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "Xu (Dog) · 9th month (from Cold Dew)",
+      "Earth",
+      "Wu — Indirect Resource",
+      "Yes — Earth feeds Metal"
+     ],
+     [
+      "Hai (Pig) · 10th month (from Start of Winter)",
+      "Water",
+      "Ren — Eating God",
+      "No"
+     ],
+     [
+      "Zi (Rat) · 11th month (from Major Snow)",
+      "Water",
+      "Gui — Hurting Officer",
+      "No"
+     ],
+     [
+      "Chou (Ox) · 12th month (from Minor Cold)",
+      "Earth",
+      "Ji — Direct Resource",
+      "Yes — Earth feeds Metal"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What about a Geng Day Master born in the Wu month?",
+     "dap": "In the Wu month Fire is strong; Ding, Geng's Direct Officer, sits in the month commander, and Wu also hides Ji, the Direct Resource. The books call this Officer and Resource together; in daily life it often means meeting rules early but having someone to teach you."
+    },
+    {
+     "hoi": "How are Geng and Xin different?",
+     "dap": "Geng is raw metal, a yang stem: strong, keen to act. Xin is crafted metal, a yin stem: refined, fond of standards. Geng likes to be forged by Ding; Xin likes to be washed by Ren."
+    },
+    {
+     "hoi": "Why does Di Tian Sui say Geng carries a killing force?",
+     "dap": "The book opens its section on Geng with the line that Geng Metal carries a killing force and is the hardest and strongest of all. In daily terms, Geng has great decisive power and needs a place to use it on the right task."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Tong Shen Lun — the Heavenly Stems",
+     "phien_am": "Geng jin dai sha, gang jian wei zui. De shui er qing, de huo er rui.",
+     "nghia": "Geng Metal carries a killing force and is the hardest and strongest; with Water it becomes clear, with Fire it becomes sharp."
+    },
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On the Useful God",
+     "nghia": "The book divides Useful Gods into those used directly and those used in reverse; Geng in the Wu or Si month is a clear example of weighing Officer and Killings against the self's strength before talking about helpful elements."
+    }
+   ],
+   "y_chinh": [
+    "Geng: raw metal, blades — brave, decisive",
+    "Grows through discipline and a demanding teacher",
+    "With Water it is clear, with Fire it is sharp",
+    "Five Combinations: Geng – Yi"
+   ]
+  },
+  "nhat-chu-tan": {
+   "muc": [
+    {
+     "tieu_de": "How do I know if I am a Xin Day Master?",
+     "doan": "A Xin Day Master is someone born on one of six days: Xin Chou, Xin Mao, Xin Si, Xin Wei, Xin You, Xin Hai. Every BaZi chart has eight characters, but only the stem in the day column is called the Day Master. The other seven are named by their relation to it."
+    },
+    {
+     "tieu_de": "Which jobs suit a Xin Day Master?",
+     "doan": "Xin often suits work that needs a sharp eye and high standards: jewellery, fashion, valuation, auditing, product design, beauty, photo editing. Gold and silver are prized for being polished and kept clean, so Xin does well where quality matters more than quantity. Rough, noisy work without respect easily discourages Xin."
+    },
+    {
+     "tieu_de": "A Xin Day Master in relationships",
+     "doan": "In love, Xin tends to be refined and notices how the other person treats them through small details. The hard part is taking offence easily, setting high standards and then being quietly let down. Xin combines with Bing under the Five Combinations; for a Xin woman, Bing is the Direct Officer. Something for this week: state one wish clearly instead of waiting for the other person to notice."
+    },
+    {
+     "tieu_de": "Which elements help a Xin Day Master?",
+     "doan": "Xin usually does better with Ren Water to wash it bright, and just enough Earth to feed it without burying it. Di Tian Sui says Xin fears layered Earth and delights in abundant Water; in hot weather it welcomes Earth, in cold weather it welcomes Ding. The birth-month approach still takes the structure as its base. The two approaches are set side by side, not chosen for you."
+    },
+    {
+     "tieu_de": "How do Xin Chou, Xin Mao and the other Xin days differ?",
+     "danh_sach": [
+      "The Xin jewel glows according to the setting of its day branch; the day branch is also the spouse palace in BaZi.",
+      "Xin Chou: the day branch holds Ji as its main qi, which is Indirect Resource for Xin — a need for private space even in close ties; Chou also holds Gui (Eating God) and Xin (Friend), adding ease and an eye for enjoyment.",
+      "Xin Mao: the day branch holds Yi as its main qi, which is Indirect Wealth for Xin — the person beside you has a knack for business and socialising; Mao hides only one stem, so its energy is very pure.",
+      "Xin Si: the day branch holds Bing as its main qi, which is Direct Officer for Xin — order and good manners at home matter; Si also holds Geng (Rob Wealth) and Wu (Direct Resource), adding rivalry and sharing out.",
+      "Xin Wei: the day branch holds Ji as its main qi, which is Indirect Resource for Xin — a need for private space even in close ties; Wei also holds Ding (Seven Killings) and Yi (Indirect Wealth), adding pressure, so boundaries are needed.",
+      "Xin You: the day branch holds Xin as its main qi, which is Friend for Xin — sitting on your own root, very self-reliant; You hides only one stem, so its energy is very pure.",
+      "Xin Hai: the day branch holds Ren as its main qi, which is Hurting Officer for Xin — plain talk and plenty of feedback at home; Hai also holds Jia (Direct Wealth), adding a steady hand with money."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "In which months is a Xin Day Master in season?",
+    "chu_thich": "Xin is in season in the Metal and Earth months. In the Zi and Hai months Water is strong: the main qi is Xin's Eating God and Hurting Officer, Water washing the gold to make it shine.",
+    "cot": [
+     "Birth month (by solar term)",
+     "Element of the month",
+     "Main qi of the month for Xin",
+     "In season?"
+    ],
+    "dong": [
+     [
+      "Yin (Tiger) · 1st month (from Start of Spring)",
+      "Wood",
+      "Jia — Direct Wealth",
+      "No"
+     ],
+     [
+      "Mao (Rabbit) · 2nd month (from Awakening of Insects)",
+      "Wood",
+      "Yi — Indirect Wealth",
+      "No"
+     ],
+     [
+      "Chen (Dragon) · 3rd month (from Clear and Bright)",
+      "Earth",
+      "Wu — Direct Resource",
+      "Yes — Earth feeds Metal"
+     ],
+     [
+      "Si (Snake) · 4th month (from Start of Summer)",
+      "Fire",
+      "Bing — Direct Officer",
+      "No"
+     ],
+     [
+      "Wu (Horse) · 5th month (from Grain in Ear)",
+      "Fire",
+      "Ding — Seven Killings",
+      "No"
+     ],
+     [
+      "Wei (Goat) · 6th month (from Minor Heat)",
+      "Earth",
+      "Ji — Indirect Resource",
+      "Yes — Earth feeds Metal"
+     ],
+     [
+      "Shen (Monkey) · 7th month (from Start of Autumn)",
+      "Metal",
+      "Geng — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "You (Rooster) · 8th month (from White Dew)",
+      "Metal",
+      "Xin — Friend",
+      "Yes — same element"
+     ],
+     [
+      "Xu (Dog) · 9th month (from Cold Dew)",
+      "Earth",
+      "Wu — Direct Resource",
+      "Yes — Earth feeds Metal"
+     ],
+     [
+      "Hai (Pig) · 10th month (from Start of Winter)",
+      "Water",
+      "Ren — Hurting Officer",
+      "No"
+     ],
+     [
+      "Zi (Rat) · 11th month (from Major Snow)",
+      "Water",
+      "Gui — Eating God",
+      "No"
+     ],
+     [
+      "Chou (Ox) · 12th month (from Minor Cold)",
+      "Earth",
+      "Ji — Indirect Resource",
+      "Yes — Earth feeds Metal"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What about a Xin Day Master born in the Si month?",
+     "dap": "In the Si month Fire is strong; Bing, Xin's Direct Officer, sits in the month commander, and Si also hides Wu (Direct Resource) and Geng (Rob Wealth). Hot Fire makes it hard for Xin to shine, so the climate approach usually looks for Water."
+    },
+    {
+     "hoi": "Why do the books say Xin can support the state and save lives?",
+     "dap": "The Di Tian Sui line 'it can support the state, it can save the living' describes Xin as soft yet very useful when put in the right place. Xin people often do well at keeping shared standards."
+    },
+    {
+     "hoi": "Which Day Master does Xin combine with?",
+     "dap": "Under the Five Combinations, Xin combines with Bing: gold in the sun begins to gleam. Beyond this rule, whether two people get on still depends on how they respect each other every day."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Tong Shen Lun — the Heavenly Stems",
+     "phien_am": "Xin jin ruan ruo, wen run er qing. Wei tu zhi die, le shui zhi ying.",
+     "nghia": "Xin Metal is soft and weak, warm, moist and clear; it fears layered Earth and delights in abundant Water."
+    },
+    {
+     "sach": "Yuan Hai Zi Ping",
+     "nghia": "The book takes the day stem as the self to name the ten gods; for Xin, Ren is Hurting Officer and Bing is Direct Officer: the same Water or Fire plays a different role depending on the self."
+    }
+   ],
+   "y_chinh": [
+    "Xin: gold, silver, jewellery — refined, high standards",
+    "Suits work where quality and a sharp eye matter",
+    "Likes Ren Water to wash it; fears thick Earth",
+    "Five Combinations: Xin – Bing"
+   ]
+  },
+  "nhat-chu-nham": {
+   "muc": [
+    {
+     "tieu_de": "How to tell if you are a Ren Day Master",
+     "doan": "If your birth day's stem is Ren (Ren Zi, Ren Yin, Ren Chen, Ren Wu, Ren Shen, Ren Xu), you are a Ren Day Master. The day stems run in an unbroken sixty-day cycle from ancient times to now, without restarting at Lunar New Year or the start of the year. So the chart needs the right day; a lunar date is just another way of writing the same day."
+    },
+    {
+     "tieu_de": "Which jobs suit a Ren Day Master?",
+     "doan": "Ren often suits work that moves and connects widely: trade, transport, travel, import and export, digital media, strategy consulting. A great river needs banks, so Ren shines when there is a planning frame and someone keeping to schedule. Without banks, the energy is there but spills into many half-finished jobs."
+    },
+    {
+     "tieu_de": "A Ren Day Master in relationships",
+     "doan": "In love, Ren tends to be open and generous and likes travelling far together and trying new things. The hard part is needing a lot of private space, which can be read as coolness. Ren combines with Ding under the Five Combinations; for a Ren man, Ding is Direct Wealth. A tip: set one fixed hour each week just for the people close to you."
+    },
+    {
+     "tieu_de": "Which elements help a Ren Day Master?",
+     "doan": "A strong Ren, born in autumn or winter, usually does better with Wu Earth as a dyke, Wood to drain it and Fire for warmth; a weak Ren, born in summer, needs Metal to feed it and Water to support it. Di Tian Sui describes Ren as reaching the rivers and able to drain Metal's energy. The birth-month approach sees the helpful element as the one that supports the structure; the strength-balancing approach sees it as the one that brings Ren back to the middle."
+    },
+    {
+     "tieu_de": "How do Ren Zi, Ren Yin and the other Ren days differ?",
+     "danh_sach": [
+      "The Ren river flows over the day branch as over a riverbed; that riverbed is seen as the spouse palace, and the main qi gives the clearest colour.",
+      "Ren Zi: the day branch holds Gui as its main qi, which is Rob Wealth for Ren — people close to you share tasks and share portions; Zi hides only one stem, so its energy is very pure.",
+      "Ren Yin: the day branch holds Jia as its main qi, which is Eating God for Ren — home is a place to relax and enjoy things together; Yin also holds Bing (Indirect Wealth) and Wu (Seven Killings), adding resourcefulness and networking.",
+      "Ren Chen: the day branch holds Wu as its main qi, which is Seven Killings for Ren — close ties carry pressure, so boundaries need saying out loud; Chen also holds Yi (Hurting Officer) and Gui (Rob Wealth), adding bluntness and frequent feedback.",
+      "Ren Wu: the day branch holds Ding as its main qi, which is Direct Wealth for Ren — care and housekeeping at home matter; Wu also holds Ji (Direct Officer), adding a sense of order.",
+      "Ren Shen: the day branch holds Geng as its main qi, which is Indirect Resource for Ren — a need for private space even in close ties; Shen also holds Ren (Friend) and Wu (Seven Killings), adding independence.",
+      "Ren Xu: the day branch holds Wu as its main qi, which is Seven Killings for Ren — close ties carry pressure, so boundaries need saying out loud; Xu also holds Xin (Direct Resource) and Ding (Direct Wealth), adding protection."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "In which months is a Ren Day Master in season?",
+    "chu_thich": "Ren is in season in the Water and Metal months. The four Earth months (Chen, Wei, Xu, Chou) put Officer and Killings in the month commander, like water meeting a dyke.",
+    "cot": [
+     "Birth month (by solar term)",
+     "Element of the month",
+     "Main qi of the month for Ren",
+     "In season?"
+    ],
+    "dong": [
+     [
+      "Yin (Tiger) · 1st month (from Start of Spring)",
+      "Wood",
+      "Jia — Eating God",
+      "No"
+     ],
+     [
+      "Mao (Rabbit) · 2nd month (from Awakening of Insects)",
+      "Wood",
+      "Yi — Hurting Officer",
+      "No"
+     ],
+     [
+      "Chen (Dragon) · 3rd month (from Clear and Bright)",
+      "Earth",
+      "Wu — Seven Killings",
+      "No"
+     ],
+     [
+      "Si (Snake) · 4th month (from Start of Summer)",
+      "Fire",
+      "Bing — Indirect Wealth",
+      "No"
+     ],
+     [
+      "Wu (Horse) · 5th month (from Grain in Ear)",
+      "Fire",
+      "Ding — Direct Wealth",
+      "No"
+     ],
+     [
+      "Wei (Goat) · 6th month (from Minor Heat)",
+      "Earth",
+      "Ji — Direct Officer",
+      "No"
+     ],
+     [
+      "Shen (Monkey) · 7th month (from Start of Autumn)",
+      "Metal",
+      "Geng — Indirect Resource",
+      "Yes — Metal feeds Water"
+     ],
+     [
+      "You (Rooster) · 8th month (from White Dew)",
+      "Metal",
+      "Xin — Direct Resource",
+      "Yes — Metal feeds Water"
+     ],
+     [
+      "Xu (Dog) · 9th month (from Cold Dew)",
+      "Earth",
+      "Wu — Seven Killings",
+      "No"
+     ],
+     [
+      "Hai (Pig) · 10th month (from Start of Winter)",
+      "Water",
+      "Ren — Friend",
+      "Yes — same element"
+     ],
+     [
+      "Zi (Rat) · 11th month (from Major Snow)",
+      "Water",
+      "Gui — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "Chou (Ox) · 12th month (from Minor Cold)",
+      "Earth",
+      "Ji — Direct Officer",
+      "No"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What about a Ren Day Master born in the Xu month?",
+     "dap": "In the Xu month the Earth is thick and Wu, Ren's Seven Killings, sits in the month commander; Xu also hides Xin (Direct Resource) and Ding (Direct Wealth). Water meets a dyke and its force is channelled: clear work pressure, but with someone to teach you and pay for the work."
+    },
+    {
+     "hoi": "How are Ren and Gui different?",
+     "dap": "Both are Water. Ren is a yang stem like a great river: strong, flowing far. Gui is a yin stem like rain or dew: light, soaking deep. Ren suits work that expands; Gui suits work that goes deep."
+    },
+    {
+     "hoi": "Which Day Master does Ren combine with?",
+     "dap": "Under the Five Combinations, Ren combines with Ding, and the old books say this pair transforms into Wood. Beyond that, whether two people get on depends on how they keep their own rhythm and a shared one."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Tong Shen Lun — the Heavenly Stems",
+     "phien_am": "Ren shui tong he, neng xie jin qi. Gang zhong zhi de, zhou liu bu zhi.",
+     "nghia": "Ren Water reaches the rivers and can drain the energy of Metal; it has the virtue of strength held at the centre, flowing everywhere without stagnating."
+    },
+    {
+     "sach": "Qiong Tong Bao Jian",
+     "nghia": "This Qing-dynasty book on climate balance reads the day stem month by month; Ren born in autumn or winter is described as a great flood needing Earth for banks, and born in summer as a dry river needing a source."
+    }
+   ],
+   "y_chinh": [
+    "Ren: a great river — wide, flexible, always moving",
+    "Suits trade, transport, work that connects widely",
+    "A strong Ren needs Wu as a dyke",
+    "Five Combinations: Ren – Ding"
+   ]
+  },
+  "nhat-chu-quy": {
+   "muc": [
+    {
+     "tieu_de": "How do I know if I am a Gui Day Master?",
+     "doan": "People born on a Gui Chou, Gui Mao, Gui Si, Gui Wei, Gui You or Gui Hai day are Gui Day Masters. Gui is the last of the ten stems, the yin stem of Water. When the chart shows a Gui day stem, the other characters are named in relation to Gui: Wu is Direct Officer, Geng is Direct Resource, Bing is Direct Wealth."
+    },
+    {
+     "tieu_de": "Which jobs suit a Gui Day Master?",
+     "doan": "Gui often suits work that needs deep observation and slow soaking-in: research, data analysis, psychology, writing, the arts, behind-the-scenes work. Light rain soaks in for a long time, so Gui does well at long, fine work. Places that demand loud, constant debate tend to make Gui withdraw."
+    },
+    {
+     "tieu_de": "A Gui Day Master in relationships",
+     "doan": "In love, Gui tends to be sensitive, picks up what the other person has not said, and cares in a discreet way. The hard part is thinking things over alone and then pulling back. Gui combines with Wu under the Five Combinations; for a Gui woman, Wu is the Direct Officer. Something to do this week: send someone close a message about a feeling you have had but not yet said."
+    },
+    {
+     "tieu_de": "Which elements help a Gui Day Master?",
+     "doan": "A weak Gui usually does better with Metal (Geng, Xin) to feed it and Water to support it; a strong Gui, especially born in winter, does better with warm Fire, Wood to drain it, and just enough Earth. Di Tian Sui says Gui does not worry about Fire and Earth and need not discuss Geng and Xin, meaning Gui is weak yet adaptable. Still read the strength-balancing and birth-month approaches side by side."
+    },
+    {
+     "tieu_de": "How do Gui Chou, Gui Mao and the other Gui days differ?",
+     "danh_sach": [
+      "The Gui raindrop soaks into whichever day branch it falls on; the Zi Ping reading sees the day branch as the spouse palace and reads both the main qi and the hidden stems.",
+      "Gui Chou: the day branch holds Ji as its main qi, which is Seven Killings for Gui — close ties carry pressure, so boundaries need saying out loud; Chou also holds Gui (Friend) and Xin (Indirect Resource), adding independence.",
+      "Gui Mao: the day branch holds Yi as its main qi, which is Eating God for Gui — home is a place to relax and enjoy things together; Mao hides only one stem, so its energy is very pure.",
+      "Gui Si: the day branch holds Bing as its main qi, which is Direct Wealth for Gui — care and housekeeping at home matter; Si also holds Geng (Direct Resource) and Wu (Direct Officer), adding protection.",
+      "Gui Wei: the day branch holds Ji as its main qi, which is Seven Killings for Gui — close ties carry pressure, so boundaries need saying out loud; Wei also holds Ding (Indirect Wealth) and Yi (Eating God), adding resourcefulness and networking.",
+      "Gui You: the day branch holds Xin as its main qi, which is Indirect Resource for Gui — a need for private space even in close ties; You hides only one stem, so its energy is very pure.",
+      "Gui Hai: the day branch holds Ren as its main qi, which is Rob Wealth for Gui — people close to you share tasks and share portions; Hai also holds Jia (Hurting Officer), adding bluntness and frequent feedback."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "In which months is a Gui Day Master in season?",
+    "chu_thich": "Gui is in season in the Water and Metal months. In the Si and Wu months Fire is strong: the main qi is Gui's Direct Wealth and Indirect Wealth, when light rain dries up easily.",
+    "cot": [
+     "Birth month (by solar term)",
+     "Element of the month",
+     "Main qi of the month for Gui",
+     "In season?"
+    ],
+    "dong": [
+     [
+      "Yin (Tiger) · 1st month (from Start of Spring)",
+      "Wood",
+      "Jia — Hurting Officer",
+      "No"
+     ],
+     [
+      "Mao (Rabbit) · 2nd month (from Awakening of Insects)",
+      "Wood",
+      "Yi — Eating God",
+      "No"
+     ],
+     [
+      "Chen (Dragon) · 3rd month (from Clear and Bright)",
+      "Earth",
+      "Wu — Direct Officer",
+      "No"
+     ],
+     [
+      "Si (Snake) · 4th month (from Start of Summer)",
+      "Fire",
+      "Bing — Direct Wealth",
+      "No"
+     ],
+     [
+      "Wu (Horse) · 5th month (from Grain in Ear)",
+      "Fire",
+      "Ding — Indirect Wealth",
+      "No"
+     ],
+     [
+      "Wei (Goat) · 6th month (from Minor Heat)",
+      "Earth",
+      "Ji — Seven Killings",
+      "No"
+     ],
+     [
+      "Shen (Monkey) · 7th month (from Start of Autumn)",
+      "Metal",
+      "Geng — Direct Resource",
+      "Yes — Metal feeds Water"
+     ],
+     [
+      "You (Rooster) · 8th month (from White Dew)",
+      "Metal",
+      "Xin — Indirect Resource",
+      "Yes — Metal feeds Water"
+     ],
+     [
+      "Xu (Dog) · 9th month (from Cold Dew)",
+      "Earth",
+      "Wu — Direct Officer",
+      "No"
+     ],
+     [
+      "Hai (Pig) · 10th month (from Start of Winter)",
+      "Water",
+      "Ren — Rob Wealth",
+      "Yes — same element"
+     ],
+     [
+      "Zi (Rat) · 11th month (from Major Snow)",
+      "Water",
+      "Gui — Friend",
+      "Yes — same element"
+     ],
+     [
+      "Chou (Ox) · 12th month (from Minor Cold)",
+      "Earth",
+      "Ji — Seven Killings",
+      "No"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What about a Gui Day Master born in the Shen month?",
+     "dap": "In the Shen month Metal is strong and feeds Water, so Gui is in season through Geng, its Direct Resource; Shen also hides Ren (Rob Wealth) and Wu (Direct Officer). This chart often has good sources of learning; check whether Wealth and Output are enough to bring that strength out."
+    },
+    {
+     "hoi": "Why is Gui called the weakest Water?",
+     "dap": "The opening line of the Gui section in Di Tian Sui calls Gui the weakest Water, like dew. But the book also says Gui reaches the ford of heaven, meaning its power to soak in goes very far."
+    },
+    {
+     "hoi": "Which Day Master does Gui combine with?",
+     "dap": "Under the Five Combinations, Gui combines with Wu: rain and mountain. Di Tian Sui adds that combining with Wu and seeing Fire, it truly transforms. In real life it still depends on how two people listen to each other."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Tong Shen Lun — the Heavenly Stems",
+     "phien_am": "Gui shui zhi ruo, da yu tian jin. De long er yun, gong hua si shen.",
+     "nghia": "Gui Water is the weakest, yet it reaches the ford of heaven; meeting the Dragon (Chen) it starts to move, and its transforming work is truly wondrous."
+    },
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On how the ten stems combine to shape temperament",
+     "nghia": "The book notes that stems which combine change each other's temperament; Gui with Wu is an example: soft Water meets hard Earth, and a reserved person gains something to lean on."
+    }
+   ],
+   "y_chinh": [
+    "Gui: rain and dew — soaks deep, sensitive, discreet",
+    "Suits deep observation and long, patient work",
+    "Weak Gui needs Metal; strong Gui needs warm Fire",
+    "Five Combinations: Gui – Wu"
+   ]
+  }
+ }
+}

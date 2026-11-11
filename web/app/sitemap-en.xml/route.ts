@@ -5,13 +5,18 @@
 import { engineEn, slugLa, slugVi } from "@/lib/en/engine";
 import { BAN_TIENG_ANH } from "@/lib/noi-dung-trang";
 import { urlDayDu } from "@/lib/seo";
+import { CAP_DUONG } from "@/lib/duong-en";
+import { mucSoTrang } from "@/lib/so-trang";
 
 export const revalidate = 21600;
 
 const SO = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33];
 const VI_CUA_EN: Record<string, string> = { ...Object.fromEntries(Object.entries(BAN_TIENG_ANH).map(([vi, en]) => [en, vi])),
-  "/en/numerology/life-path": "/than-so/y-nghia-so", "/en/privacy": "/chinh-sach-rieng-tu", "/en/terms": "/dieu-khoan" };
-const TINH = ["/en", "/en/numerology", "/en/numerology/life-path", "/en/tarot", "/en/tarot/cards", "/en/privacy", "/en/terms"];
+  "/en/numerology/life-path": "/than-so/y-nghia-so", "/en/privacy": "/chinh-sach-rieng-tu", "/en/terms": "/dieu-khoan",
+  // EN-ALL: trang công cụ mở bản Anh qua rewrite (một cây component) — lấy từ bảng lib/duong-en.json (cờ `mo`, không `rieng`).
+  ...Object.fromEntries(CAP_DUONG.filter((c) => c.mo && !c.rieng && mucSoTrang(c.vi)?.nhom === "cong_cu").map((c) => [c.en, c.vi])) };
+const TINH = ["/en", "/en/numerology", "/en/numerology/life-path", "/en/tarot", "/en/tarot/cards", "/en/privacy", "/en/terms",
+  ...CAP_DUONG.filter((c) => c.mo && !c.rieng && mucSoTrang(c.vi)?.nhom === "cong_cu").map((c) => c.en)];
 
 const xmlThoat = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 

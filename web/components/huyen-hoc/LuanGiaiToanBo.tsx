@@ -26,6 +26,10 @@ import { laBaoCaoDoiSong } from "@/components/luan-giai/kieu";
 import { ChuQua } from "@/components/luan-giai/ChuQua";
 import { TangChuong } from "@/components/luan-giai/TangChuong";
 import { mangLuanGiai } from "@/lib/luan-giai-mang";
+import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
+import { TenHienProvider } from "@/components/khung/TenHien";
+import { useChuBaoCao } from "@/components/luan-giai/chu-bao-cao";
+import type { TenHien } from "@/lib/ten-hien";
 
 
 type ChuongMo = { ma: string; tieu_de: string; doan: string[]; van_ai?: string; che_do?: string; thuat_ngu?: ThuatNgu[]; khoa?: false };
@@ -38,6 +42,8 @@ interface BaoCao {
   dien_dat?: "ai" | "tron" | "mau";
   trang_thai: string;
   so_khoa?: number;
+  /** EN-ALL: bản Anh — tên hiển thị của mã trong báo cáo (lib/ten-hien.ts). */
+  ten_hien?: TenHien;
   phi: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null;
     /** SAO-V: chương bạn bè tặng (đọc thêm một chương sau các chương miễn phí). */ chuong_tang?: number; chuong_tang_ma?: string };
 }
@@ -54,17 +60,21 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
   const [loi, setLoi] = useState<string | null>(null);
   const [goc, setGoc] = useState(false);
   const [phi, setPhi] = useState<{ thu: boolean; gia: number } | null>(null);
+  const { c: cg, en } = useChuGiaoDien();
+  const { c: cbc } = useChuBaoCao();
   // Báo cáo chờ mở gắn với NGƯỜI (dữ liệu sinh), không với lựa chọn trường phái — các công tắc phái không lưu qua lượt
   // đăng nhập / nạp nên lá số quay về có thể khác phái mà vẫn là cùng người.
   const hs = useHoSo();
   const nguoi = hs ? { t: hs.ho_ten, d: hs.ngay, m: hs.thang, y: hs.nam, g: hs.gio ?? null, s: hs.gioi_tinh ?? null, n: hs.noi_sinh ?? null } : null;
   const maCua = moDun ?? (duongDan.includes("battu") ? "battu" : duongDan.includes("thanso") ? "thanso" : "tuvi");
   useEffect(() => {
+    // EN-ALL mục 6.1: bản Anh chưa có Sao / cổng thanh toán quốc tế — báo cáo miễn phí, không hỏi giá.
+    if (en) return;
     let huy = false;
     // SAO-V: công tắc thu Sao có thể bật riêng từng mảng → hỏi đúng mảng đang xem.
     fetch(`/api/luan-giai/phi?mo_dun=${encodeURIComponent(maCua)}`).then((r) => r.json()).then((d) => { if (!huy) setPhi(d); }).catch(() => { /* coi như miễn phí */ });
     return () => { huy = true; };
-  }, [maCua]);
+  }, [maCua, en]);
   // Chỉ nhận phản hồi của lượt gọi mới nhất — đổi đầu vào (vd cách tính Đường đời) khi một lượt cũ còn bay thì lượt cũ
   // về muộn không được ghi đè báo cáo mới.
   const luot = useRef(0);
@@ -83,7 +93,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
       if (moKhoa && d.phi.ly_do === "da_tru_sao") ghi("unlock_succeeded", { mo_dun: d.mo_dun, so_sao: d.phi.sao });
       // Bản xem trước tự tải (bản đồ con số) đo riêng, không làm phồng tỉ lệ paywall của các mảng bấm mới mở.
       else if (d.so_khoa) ghi("paywall_viewed", { mo_dun: d.mo_dun, kind: xemTruocTuDong ? "luan_giai_tu_dong" : "luan_giai_toan_bo" });
-    } catch (e) { if (so === luot.current) setLoi(e instanceof Error ? e.message : "Chưa tải được luận giải."); }
+    } catch (e) { if (so === luot.current) setLoi(e instanceof Error && !en ? e.message : cg("lg.loi")); }
     finally { if (so === luot.current) setDang(false); }
   };
   // CTA-1: báo trạng thái báo cáo cho nút Sao ở khối "Đọc tiếp" cuối trang — nút đó gọi đúng hàm mở của báo cáo này.
@@ -121,14 +131,14 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
       <div className="glass flex flex-col items-start gap-4 rounded-2xl p-5 sm:flex-row sm:items-center">
         <BookOpenText className="size-7 shrink-0 text-gold" aria-hidden />
         <div className="flex-1">
-          <p className="font-serif text-xl">Luận giải toàn bộ {ten}</p>
+          <p className="font-serif text-xl">{cg("lg.tieu_de", { ten })}</p>
           <p className="text-sm text-fg-muted" data-testid="gia-luan-giai">
-            Báo cáo theo chương, ghép từ kho tri thức có nguồn ·{" "}
-            {phi?.thu ? <>chương đầu miễn phí, toàn bộ <b className="text-gold">{phi.gia} Sao</b>, xem lại trong ngày không mất thêm</> : "miễn phí giai đoạn ra mắt"} · không lưu trên máy chủ.
+            {cg("lg.mo_ta")}{" "}
+            {phi?.thu ? <>chương đầu miễn phí, toàn bộ <b className="text-gold">{phi.gia} Sao</b>, xem lại trong ngày không mất thêm</> : cg("lg.mien_phi")}{cg("lg.khong_luu")}
           </p>
           {/* Trục 1 (báo cáo UX mục 9): đang miễn phí thì nói trước, trung tính, Sao là gì + giá dự kiến (lấy từ API phí,
               không ghi cứng). Không đếm ngược, không doạ. */}
-          {phi && !phi.thu && phi.gia > 0 && (
+          {!en && phi && !phi.thu && phi.gia > 0 && (
             <p className="mt-1.5 text-xs leading-relaxed text-fg-faint" data-testid="gia-du-kien">
               Sao là điểm dùng trong ứng dụng để mở các bài đọc sâu, không đổi ra tiền. Sau giai đoạn ra mắt, chương đầu vẫn
               miễn phí, mở cả bài dự kiến {phi.gia} Sao.{" "}
@@ -136,8 +146,8 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
             </p>
           )}
         </div>
-        <Button onClick={() => void tai()} disabled={dang}><Sparkles aria-hidden /> {dang ? "Đang soạn…" : phi?.thu ? "Đọc miễn phí chương đầu" : "Xem luận giải"}</Button>
-        {dang && <div className="w-full"><KhungTai dong={3} /></div>}
+        <Button onClick={() => void tai()} disabled={dang}><Sparkles aria-hidden /> {dang ? cg("lg.dang_soan") : phi?.thu ? "Đọc miễn phí chương đầu" : cg("lg.nut_xem")}</Button>
+        {dang && <div className="w-full"><KhungTai dong={3} nhan={cg("lg.dang_soan")} /></div>}
         {loi && (
           <div className="w-full space-y-2">
             <BaoLoi loi={loi} thuLai={() => void tai()} />
@@ -150,25 +160,26 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
     );
   }
   const mangQua = mangLuanGiai(bc.mo_dun) ?? mangLuanGiai(maCua);
-  const tang = DA_MO_BANG_SAO.has(bc.phi?.ly_do) && mangQua ? <TangChuong moDun={mangQua} /> : null;
+  // EN-ALL mục 6.1: bản Anh chưa có tài khoản / Sao → không tặng chương, không lưu bài vào tài khoản.
+  const tang = !en && DA_MO_BANG_SAO.has(bc.phi?.ly_do) && mangQua ? <TangChuong moDun={mangQua} /> : null;
   const chuongQua = bc.phi?.chuong_tang ? bc.phi.chuong_tang_ma : undefined;
   if (laBaoCaoDoiSong(bc)) {
     const coAi = bc.chuong.some((c) => !c.khoa && c.van_ai);
     // KC-1: một khuôn cho mọi mảng — Tử vi, Bát tự, Bản đồ con số cùng component; chỉ Tử vi lưu bài (LG-ĐS).
     const tenLuu = { tuvi: "Luận giải Tử vi", battu: "Luận giải Bát tự", thanso: "Bản đồ con số" }[bc.mo_dun] ?? "Luận giải";
-    return (<>
+    return (<TenHienProvider ten={[bc.ten_hien]}>
       {dau?.(bc)}
-      <BaoCaoDoiSongView bc={bc} ten={ten} goc={goc} nhan={bc.mo_dun === "thanso" ? "Bản đồ con số" : bc.mo_dun === "chan_dung" ? "Chân dung tổng hợp" : "Luận giải toàn bộ"} chuongQua={chuongQua}
+      <BaoCaoDoiSongView bc={bc} ten={ten} goc={goc} nhan={en ? cbc("nhan_mac_dinh") : bc.mo_dun === "thanso" ? "Bản đồ con số" : bc.mo_dun === "chan_dung" ? "Chân dung tổng hợp" : "Luận giải toàn bộ"} chuongQua={chuongQua}
         hanhDong={<>
           {coAi && (
             <Button variant="ghost" size="sm" aria-pressed={goc} onClick={() => setGoc((v) => !v)}>
-              {goc ? "Xem bản diễn đạt" : "Xem bản dữ liệu gốc"}
+              {goc ? cg("lg.xem_dien_dat") : cg("lg.xem_goc")}
             </Button>
           )}
-          <Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> In / lưu PDF</Button>
+          <Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> {cg("lg.in")}</Button>
         </>}
         phanKhoa={bc.so_khoa ? <PhanKhoa bc={bc as unknown as BaoCao} dang={dang} loi={loi} moKhoa={() => void tai(true)} /> : null}
-        chanTrang={!bc.so_khoa && banLuu ? (
+        chanTrang={!en && !bc.so_khoa && banLuu ? (
           <div className="mt-6">
             <LuuBaiLuan moDun={bc.mo_dun} tieuDe={`${tenLuu} — ${hs?.ho_ten ?? "hồ sơ của bạn"}`} noiDung={banLuu}
               dangNhap={bc.phi?.dang_nhap} />
@@ -176,7 +187,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
           </div>
         ) : tang}
       />
-    </>);
+    </TenHienProvider>);
   }
   return (
     <article className="glass rounded-2xl p-5 sm:p-8 print:bg-white print:text-black" data-testid="luan-giai-toan-bo">

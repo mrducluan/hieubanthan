@@ -172,7 +172,18 @@ tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2
   `battu_holdout.jsonl` (160, đóng băng); bộ chấm `engine/scripts/cham_en.py`. **Mốc trước khi làm**: định tuyến dev 15 % /
   holdout 16 %, an toàn 6/12 · 2/12, mốc thời gian 16/72 · 13/44, câu trả lời còn chữ Việt 259/260 → cần bộ hiểu câu tiếng
   Anh + lời đáp theo ngôn ngữ (mục tiêu: định tuyến ≥ 90 %, an toàn 100 %, mốc ≥ 90 %).
-- Chưa: web `/en/bazi` (mở rewrite, hiển thị `ten_hien`, khung Trường phái, cụm thập thần / nhật chủ / mệnh theo năm), thẻ chia sẻ.
+- ✅ **Web `/en/bazi`** (2026-11-11, một cây component): cờ `mo` của `/bat-tu` trong `lib/duong-en.json` → proxy rewrite về
+  `/bat-tu` + `x-ngon-ngu`. Chữ cố định đưa vào catalog có chiều `en`: `lib/chu/bat-tu.ts` (công cụ Bát tự, bảng tứ trụ, vòng
+  địa chi, ngũ giác, đại vận, dụng thần, "Which reading fits you?"), `lib/chu/giao-dien.ts` (khung Trường phái, "Quick answer",
+  khối mời lập lá số, dải QR, khung luận giải, biểu đồ Bát tự trong báo cáo, dòng 10 năm, **form hồ sơ NhapHoSo**),
+  `lib/chu/cong-cu.ts` (`CHU_BAT_TU` thêm `en`), `lib/chu/hoi-dap.ts` (ghi chú / lỗi / lượt hỏi của `lib/hoi-mang.ts`).
+  Mã engine hiện qua `ten_hien` (`lib/ten-hien.ts`, `components/khung/TenHien.tsx`). Khung trang công cụ bản Anh
+  (`TrangCongCu` nhánh en: không CMS, không blog; chữ máy chủ `lib/so-trang-en.ts`), metadata `metaCongCuEn`, hreflang hai
+  chiều (bản Việt `/bat-tu` thêm 3 thẻ `alternate` — lệch HTML có chủ đích DUY NHẤT, 73/74 trang còn lại 0 lệch), sitemap-en.
+  Trình duyệt gửi `x-ngon-ngu` cho route API (`fetchSao` → `kemNgonNgu`), route GET có đệm dùng `urlTheoNgonNgu`. Bản Anh:
+  báo cáo miễn phí (`luan_giai_sao` bỏ thu Sao khi lượt gọi tiếng Anh), không tặng chương / lưu bài, không khối CTA chéo mảng.
+  e2e `web/e2e/en-bazi.spec.ts`. **Chưa**: cụm kiến thức `/en/bazi/{ten-gods, day-masters, element-by-birth-year}` (engine đã
+  sạch nhưng `TrangChuDe` / `TrangKienThuc` / `DanhSachCum` / `DongTacGia` / `MinhHoa` còn chữ Việt cứng + CMS mẫu cụm) — cờ `mo` để tắt; thẻ chia sẻ.
 
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
@@ -211,7 +222,7 @@ sang hệ một-component ở GĐ 1 (cùng URL).
 | `/hop-doi/cap-so[/slug]` | `/en/compatibility/number-pairs[/…]` | chưa | 7 |
 | `/tarot` | `/en/tarot` | đã có (cũ) | 1, 7 |
 | `/tarot/[cum]`, `/tarot/[cum]/[slug]` (la-bai) | `/en/tarot/cards[/slug]` | đã có (cũ) | 1 |
-| `/bat-tu` | `/en/bazi` | chưa | 3 |
+| `/bat-tu` | `/en/bazi` | xong (rewrite) | 3 |
 | `/bat-tu/[cum][/slug]` (thap-than, nhat-chu, menh-theo-nam) | `/en/bazi/{ten-gods, day-masters, element-by-birth-year}[/…]` | chưa | 3 |
 | `/tu-vi` | `/en/zi-wei-dou-shu` | chưa | 4 |
 | `/tu-vi/[cum][/slug]` (chinh-tinh, cung, sao-o-cung, tu-hoa, co-thu) | `/en/zi-wei-dou-shu/{stars, palaces, star-in-palace, four-transformations, classics}[/…]` | chưa | 4 |

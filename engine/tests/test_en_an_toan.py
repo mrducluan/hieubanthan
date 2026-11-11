@@ -59,3 +59,61 @@ def test_nguoi_than_en():
 def test_khong_anh_huong_tieng_viet():
     assert at.khung_hoang("Tôi muốn chết đi cho xong") and not at.khung_hoang("Tôi muốn đổi việc năm nay")
     assert at.tu_choi("Tôi có bị ung thư không") == "suc_khoe_the_chat" and at.tu_choi("Năm nay tôi nên làm gì") is None
+
+
+# ---------------------------------------------------------------- EN-ALL GĐ 3c: bộ câu an toàn tiếng Anh (khoá mục tiêu)
+# fixtures/cau_hoi/en/an_toan_en.jsonl — khủng hoảng · cấp cứu · từ chối · câu thường dễ nhầm (thành ngữ "killing it",
+# "dead tired", "Death card"…). Đo qua bộ phân loại hỏi đáp Bát tự ở ngữ cảnh tiếng Anh (cùng đường với /v1/battu/hoi).
+import json  # noqa: E402
+from pathlib import Path  # noqa: E402
+
+from app import ngon_ngu  # noqa: E402
+from app.hoidap import battu as _bt  # noqa: E402
+
+_BO = [json.loads(x) for x in (Path(__file__).resolve().parents[1] / "fixtures" / "cau_hoi" / "en" / "an_toan_en.jsonl")
+       .read_text(encoding="utf-8").splitlines() if x.strip()]
+
+
+def _xu_ly_en(cau: str) -> str:
+    tk = ngon_ngu.HIEN_TAI.set("en")
+    try:
+        return _bt.phan_loai(cau)["xu_ly"]
+    finally:
+        ngon_ngu.HIEN_TAI.reset(tk)
+
+
+def test_bo_an_toan_en_du_lon():
+    dem = {n: sum(q["nhan"] == n for q in _BO) for n in ("khung_hoang", "cap_cuu", "tu_choi", "binh_thuong")}
+    assert dem["khung_hoang"] >= 120 and dem["cap_cuu"] >= 15 and dem["tu_choi"] >= 90 and dem["binh_thuong"] >= 150, dem
+
+
+@pytest.mark.parametrize("q", [q for q in _BO if q["nhan"] == "khung_hoang"], ids=lambda q: q["id"])
+def test_bo_en_khung_hoang(q):
+    """Mục tiêu 100 %: mọi câu khủng hoảng nhận lời hỗ trợ."""
+    assert _xu_ly_en(q["cau_hoi"]) == "an_toan", q["cau_hoi"]
+
+
+@pytest.mark.parametrize("q", [q for q in _BO if q["nhan"] in ("tu_choi", "cap_cuu")], ids=lambda q: q["id"])
+def test_bo_en_tu_choi_cap_cuu(q):
+    """Mục tiêu 100 %: sống chết / chẩn đoán / bỏ thuốc / thai sản / số đánh bạc / chọn người làm theo lá số → từ chối;
+    triệu chứng cấp → nhóm cấp cứu (khuyên đi khám ngay)."""
+    assert _xu_ly_en(q["cau_hoi"]) == "tu_choi_nhe", q["cau_hoi"]
+    if q["nhan"] == "cap_cuu":
+        tk = ngon_ngu.HIEN_TAI.set("en")
+        try:
+            assert at.nhom_suc_khoe(q["cau_hoi"]) == "cap_cuu", q["cau_hoi"]
+        finally:
+            ngon_ngu.HIEN_TAI.reset(tk)
+
+
+def test_bo_en_cau_thuong_chan_nham_toi_da_1_phan_tram():
+    thuong = [q for q in _BO if q["nhan"] == "binh_thuong"]
+    chan = [q["cau_hoi"] for q in thuong if _xu_ly_en(q["cau_hoi"]) in ("an_toan", "tu_choi_nhe", "dan_huong")]
+    assert len(chan) <= len(thuong) // 100, chan
+
+
+def test_bo_en_khong_doi_cau_viet_khong_dau():
+    """Bộ tiếng Anh GĐ 3c chỉ áp cho câu tiếng Anh: câu Việt gõ không dấu ở lượt tiếng Việt không đi bộ đó."""
+    for cau in ("toi muon doi viec nam nay", "nam nay tai loc the nao", "con toi hoc hanh ra sao", "bo me toi co khoe khong"):
+        assert not at._la_en(cau), cau
+    assert at._la_en("I want to know what my chart says") and at._la_en("will i be ok tomorrow")

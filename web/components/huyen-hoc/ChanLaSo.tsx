@@ -8,9 +8,11 @@ import { usePathname } from "next/navigation";
 import { duongQr, maHoaQr, type MaQr } from "@/lib/qr";
 import { GOC_QR, TEN_MIEN } from "@/lib/the-chia-se";
 import { linkQrManHinh } from "@/lib/ma-man-hinh";
+import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
 
 export function ChanLaSo({ giaoDien, tieuDe, duong }: { giaoDien: "dem" | "giay"; tieuDe: string; duong?: string }) {
   const hienTai = usePathname();
+  const { c } = useChuGiaoDien();
   const d = duong ?? hienTai ?? "/";
   const qr = useMemo<MaQr | null>(() => { try { return maHoaQr(linkQrManHinh(GOC_QR, d)); } catch { return null; } }, [d]);
   if (!qr) return null;
@@ -19,12 +21,12 @@ export function ChanLaSo({ giaoDien, tieuDe, duong }: { giaoDien: "dem" | "giay"
     <div className={`la-so-${giaoDien} flex items-center justify-between gap-3 border-t border-[var(--ls-vien)] px-4 py-3 sm:px-6`}
       style={{ background: "var(--ls-nen)", color: "var(--ls-chu)" }} data-testid="chan-la-so">
       <div className="min-w-0 leading-tight">
-        <p className="text-sm font-semibold" style={{ color: "var(--ls-nhan)" }}>{tieuDe} · Hiểu Bản Thân</p>
+        <p className="text-sm font-semibold" style={{ color: "var(--ls-nhan)" }}>{tieuDe}{` · ${c("qr.thuong_hieu")}`}</p>
         <p className="text-base font-semibold">{TEN_MIEN}</p>
-        <p className="text-xs text-[var(--ls-mo)]">Quét mã để xem lá số của bạn</p>
+        <p className="text-xs text-[var(--ls-mo)]">{c("qr.la_so")}</p>
       </div>
       <svg viewBox={`0 0 ${n} ${n}`} width={n * 2} height={n * 2} shapeRendering="crispEdges" role="img"
-        aria-label={`Mã QR mở ${TEN_MIEN}${d}`} className="shrink-0 rounded-md">
+        aria-label={c("qr.aria", { url: `${TEN_MIEN}${d}` })} className="shrink-0 rounded-md">
         <rect width={n} height={n} fill="#f4efe2" />
         <path d={duongQr(qr, 4)} fill="#0a0a17" />
       </svg>

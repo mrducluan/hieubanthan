@@ -25,9 +25,14 @@ NHOM: dict[str, tuple[tuple[str, str], ...]] = {
     "quan_he": (("battu", "quan_he"),), "than_vuong": (("battu", "than_vuong"),), "cach_cuc_bt": (("battu", "cach_cuc"),),
     "nhom_thap_than": (("battu", "nhom_thap_than"),), "sach_battu": (("battu", "sach"),),
     "quai": (("phongthuy", "quai"), ("kinhdich", "bat_quai")), "du_nien": (("phongthuy", "du_nien"),),
-    "huong": (("phongthuy", "huong"),), "sao_bay": (("phongthuy", "sao_bay"),),
+    "huong": (("phongthuy", "huong"),), "sao_bay": (("phongthuy", "sao_bay"),), "nhom_trach": (("phongthuy", "nhom"),),
     "que": (("kinhdich", "que_64"),), "hao": (("kinhdich", "hao"),), "kinhdich_khai_niem": (("kinhdich", "khai_niem"),),
     "tinh": (("dia_ly", "tinh"),),
+    # EN-ALL GĐ 3c — nhóm GỘP cho trường mã dùng chung khoá nhưng khác bảng tên: nhãn mục hình hỏi đáp (`muc.nhan`: hành ở
+    # cột năm hành Bát tự, cung ở bàn 12 cung Tử vi) và loại trong danh sách gói bằng chứng Bát tự (`ds.loai`: quan hệ
+    # can chi ở mục xung hợp, cát/hung ở mục thần sát).
+    "nhan_hinh": (("can_chi", "hanh"), ("tuvi", "cung")),
+    "loai_bt": (("battu", "quan_he"), ("battu", "cat_hung")),
 }
 
 
@@ -104,6 +109,8 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "bieu_do.nhat_chu": "hanh",
     # dict có khoá là mã VÀ giá trị là mã (nhóm khoá, nhóm giá trị)
     "bang_hanh.can": ("can", "hanh"), "bang_hanh.chi": ("chi", "hanh"), "vai_tro_hanh": ("hanh", "nhom_thap_than"),
+    # EN-ALL GĐ 3c — hỏi đáp: nhãn mục hình (khối `truc_quan`), loại trong danh sách gói bằng chứng (nhóm gộp ở `NHOM`)
+    "muc.nhan": "nhan_hinh", "ds.loai": "loai_bt",
 }
 
 
