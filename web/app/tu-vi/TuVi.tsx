@@ -344,7 +344,7 @@ export function TuVi() {
             phan_loai?: { cung?: string[]; xu_ly?: string }; goi_y_vec?: GoiYVec | null; co_the_goi_y?: boolean; nhan_ra_y_dinh?: boolean;
           }>(
             "/api/tuvi/hoi",
-            { cau_hoi: cau, che_do: cheDo, ...(laSo ? { la_so: laSo } : {}) },
+            { cau_hoi: cau, che_do: cheDo, ...(laSo ? { la_so: laSo } : {}), ...(nt ? { nguoi_than: true } : {}) },
             (d) => {
               // LG-ĐS: có câu gần nghĩa trong kho → hỏi lại "đúng ý bạn chứ?"; không có → cho chọn 1 trong 8 chủ đề.
               // v3 M1: phần hỏi lại này đi SAU câu trả lời (đọc trước, xác nhận sau); "Cung xem" vẫn ở trên.

@@ -18,6 +18,8 @@ const Input = z.object({
   cau_hoi: z.string().min(3).max(500),
   che_do: z.enum(["tham_khao", "chi_tiet"]).default("tham_khao"),
   la_so: LaSo.optional(),
+  /** Đang xem lá số người thân (chỉ trên máy) → engine đáp ở ngôi thứ ba ("lá số này"). Chỉ là cờ, không mang dữ liệu. */
+  nguoi_than: z.boolean().optional(),
 }).strict();
 
 type TraLoi = { co_the_goi_y?: boolean; nhan_ra_y_dinh?: boolean; y_dinh_tu_goi_y?: boolean; phan_loai?: { xu_ly?: string } };
