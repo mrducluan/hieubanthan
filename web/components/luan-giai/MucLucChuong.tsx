@@ -32,7 +32,11 @@ export function useChuongDangDoc(ds: MucChuong[]): string | null {
     let khung = 0;
     const tinh = () => {
       khung = 0;
-      const moc = window.matchMedia("(min-width: 1024px)").matches ? MOC_CANH : MOC_GON;
+      // TM-1: trang có thanh mảng (44px, cộng vào scroll-padding-top) → bấm mục lục đưa đầu chương xuống thấp hơn mốc cũ
+      // 44px và chương TRƯỚC vẫn sáng. Cộng chiều cao thanh mảng vào mốc — kể cả lúc nó đang tự ẩn trên điện thoại
+      // (điểm dừng của lượt cuộn tính theo lúc thanh còn hiện).
+      const tm = document.querySelector<HTMLElement>("[data-thanh-mang]")?.offsetHeight ?? 0;
+      const moc = (window.matchMedia("(min-width: 1024px)").matches ? MOC_CANH : MOC_GON) + tm;
       let d: string | null = null;
       for (const c of ds) {
         const el = document.getElementById(`lg-${c.ma}`);
