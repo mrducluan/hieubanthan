@@ -133,6 +133,15 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "cau_hoi.hoa": "hoa", "than_cu": "cung", "cung_sao_menh.sao": "sao",
     # EN-ALL GĐ 4 — trang kiến thức Tử vi: hình minh hoạ "Hoá ở cung" (web tra chữ Hán theo mã hoá).
     "minh_hoa.hoa": "hoa",
+    # EN-ALL GĐ 4 (agent C) — phi hoá / nhịp 3 tháng / xem lá số 2 người: đường bay {hoa, sao, can, tu_cung, den_cung,
+    # xung_cung, den_tuan_triet} nằm trong các danh sách dưới đây; mã cung / can ở trường riêng của các route này.
+    "tu_cung": "cung", "den_cung": "cung", "xung_cung": "cung", "den_tuan_triet": "sao", "can_nam_sinh": "can",
+    "can_nam_nguoi_kia": "can", "can_menh_nguoi_kia": "can", "lai_nhan.cung": "cung", "tieu_diem": "cung",
+    "diem_sang": "cung", "de_y": "cung", "hop.cung": "cung",
+    "duong_bay.hoa": "hoa", "duong_bay.sao": "sao", "tu_hoa.hoa": "hoa", "tu_hoa.sao": "sao", "vao_menh.hoa": "hoa",
+    "vao_menh.sao": "sao", "duong.hoa": "hoa", "duong.sao": "sao", "hoa.hoa": "hoa", "hoa.sao": "sao",
+    "nguoi_kia_vao_ban.hoa": "hoa", "nguoi_kia_vao_ban.sao": "sao", "ban_vao_nguoi_kia.hoa": "hoa",
+    "ban_vao_nguoi_kia.sao": "sao", "menh_nguoi_kia_vao_ban.hoa": "hoa", "menh_nguoi_kia_vao_ban.sao": "sao",
 }
 
 

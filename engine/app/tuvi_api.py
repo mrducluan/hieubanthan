@@ -478,9 +478,9 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
         } for p in la["palaces"]],
         # KB-TV3: `dieu_kien_dat` = điều kiện có / điểm cộng / điểm trừ (dữ kiện đã tính, chữ từ KB, chỉ thuật ngữ).
         "cach_cuc": [{**(tuvi_kb.cach_cuc(c["ma"]) or {}), "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"],
-                      "dieu_kien_dat": tuvi_kb.dieu_kien_dat(c["du_kien"] if viet else tuvi_hien.du_kien(c["du_kien"]))}
+                      "dieu_kien_dat": tuvi_kb.dieu_kien_dat(c["du_kien"]) if viet else tuvi_hien.dieu_kien_dat(c["du_kien"])}
                      for c in tuvi_cach_cuc.nhan_dien(la)],
-        "cach_cuc_luu_y": tuvi_kb.luu_y_pha_cach(),
+        "cach_cuc_luu_y": tuvi_kb.luu_y_pha_cach() if viet else L("tuvi_ls.cach_cuc_luu_y", tuvi_kb.luu_y_pha_cach()),
         # TV-ZW "Cùng sao Mệnh": tỉ lệ thời điểm sinh (mẫu 1940–2010 × 12 canh) có cùng chính tinh cung Mệnh — không
         # phải thống kê dân số. Không biết giờ sinh → cung Mệnh là tạm, không hiện.
         "cung_sao_menh": None if inp.do_tin_gio is HourConfidence.UNKNOWN else cung_sao_menh.tu_la_so(la),

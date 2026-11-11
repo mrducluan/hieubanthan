@@ -478,7 +478,7 @@ def lap(sinh: dict, ngay_xem: dt.date, phai: str = ln.MAC_DINH, ls: dict | None 
         "tom_tat_3_thang": tom_tat_ba_thang(thang),
         "thang": thang,
         "cung": [{"ten": c["ten"], "chi": c["chi"], "nhan_ngan": _nhan_ngan(c["ten"])} for c in ls["cung"]],
-        "uu_tien": {"thu_tu": THU_TU_UU_TIEN, "ghi_chu": luan_ln.UU_TIEN, "han_nam": nam[nam_am]["han_nam"]},
+        "uu_tien": {"thu_tu": THU_TU_UU_TIEN, "ghi_chu": L("tv2.n3.uu_tien", luan_ln.UU_TIEN), "han_nam": nam[nam_am]["han_nam"]},
         "luu_y": [L(f"tv2.n3.luu_y.{i}", s) for i, s in enumerate(LUU_Y)],
     }
     if nam_am + 1 in nam:

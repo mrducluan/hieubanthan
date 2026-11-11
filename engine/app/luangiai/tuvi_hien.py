@@ -22,7 +22,9 @@ from app.luangiai.battu_hien import _ma as ma  # noqa: F401 — mã ASCII từ t
 
 
 def ten_sao(x: str) -> str:
-    """Tên một sao (chính / phụ / tạp diệu / sao lưu) theo ngôn ngữ."""
+    """Tên một sao (chính / phụ / tạp diệu / sao lưu, "Hoá Lộc"…) theo ngôn ngữ."""
+    if x.startswith(("Hoá ", "Hóa ")) and _ten.muc("hoa", x[4:]):
+        return L("tuvi_ls.hoa_sao", x, hoa=_ten.ten("hoa", x[4:]))
     return _ten.sao_luu(x) if x.startswith(("Lưu ", "Vận ")) else _ten.ten("sao", x)
 
 
@@ -107,6 +109,47 @@ def du_kien(ds: list[dict] | None) -> list[dict] | None:
             g["ds"] = [ten_sao(x) for x in g["ds"]]
         ra.append(g)
     return ra
+
+
+_MUC_DK = {"Miếu": "muc.mieu", "Vượng": "muc.vuong", "Đắc": "muc.dac"}
+
+
+def dieu_kien_dat(ds: list[dict] | None) -> list[dict]:
+    """Như `tuvi_kb.dieu_kien_dat` (cùng thứ tự, cùng luật bỏ câu trùng — quyết định theo câu bản Việt) nhưng chữ theo
+    mẫu `L()` của ngôn ngữ lượt gọi và tên riêng theo bảng tên. Mẫu bản Việt: `tuvi_cach_cuc.json` → `dieu_kien_mau`."""
+    from app.kb import tuvi_kb  # noqa: PLC0415
+    with _ngon_ngu_viet():
+        mau_vi = tuvi_kb._cc()["dieu_kien_mau"]                   # noqa: SLF001 — chữ Việt: khoá bỏ trùng + chữ dự phòng
+    ra, da = [], set()
+    for loai in ("can", "tang", "giam"):
+        for f in ds or []:
+            if f.get("loai") != loai:
+                continue
+            vi = tuvi_kb._chu_dieu_kien(f, mau_vi)                  # noqa: SLF001
+            if not vi or vi in da:
+                continue
+            da.add(vi)
+            ra.append({"loai": loai, "noi_dung": _chu_dk(f, mau_vi)})
+    return ra
+
+
+def _ngon_ngu_viet():
+    from app import ngon_ngu  # noqa: PLC0415
+    return ngon_ngu.dung(ngon_ngu.MAC_DINH)
+
+
+def _chu_dk(f: dict, mau_vi: dict) -> str:
+    g = (du_kien([f]) or [f])[0]
+    ds = L("tuvi_ls.noi", ", ").join(g.get("ds", []))
+    k = g["kieu"]
+    if k == "sao":
+        nhan = L("tuvi_ls.dk.sao_hoa", mau_vi["sao_hoa"], sao=g["sao"], hoa=g.get("hoa", "")) if g.get("hoa") else g["sao"]
+        return L(f"tuvi_ls.dk.vi_tri_{g['vi_tri']}", mau_vi.get(f"vi_tri_{g['vi_tri']}", ""), nhan=nhan,
+                 cung=g.get("cung", ""), chi=g.get("chi", ""))
+    if k == "sang":
+        muc = L(f"tuvi_ls.dk.{_MUC_DK[f['muc']]}", f["muc"]) if f["muc"] in _MUC_DK else _ten.ten("do_sang", f["muc"]).lower()
+        return L("tuvi_ls.dk.sang", mau_vi["sang"], sao=g["sao"], chi=g["chi"], muc=muc)
+    return L(f"tuvi_ls.dk.{k}", mau_vi.get(k, ""), ds=ds, **{a: g[a] for a in ("sao", "hoa", "cung", "chi") if a in g})
 
 
 # ------------------------------------------------------------------ Tuần / Triệt (bản sao nguyên văn engine gốc)

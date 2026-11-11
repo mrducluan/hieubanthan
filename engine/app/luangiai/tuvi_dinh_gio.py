@@ -216,7 +216,7 @@ def _khac_nhau_dich(uv: list[dict], vi: list[dict]) -> list[str]:
                             ("tuvi_ls.dg.cuc", lambda u: u["cuc"], lambda u: _ten.ten("cuc", u["cuc"])),
                             ("tuvi_ls.dg.than_cu", lambda u: u["than_cu"], lambda u: _ten.ten("cung", u["than_cu"] or ""))):
         if len({lay_vi(u) for u in vi}) > 1:
-            ra.append(f"{L(ma, '')}: " + " · ".join(f"{_nhan(u['nhan'])} {lay(u)}" for u in uv))
+            ra.append(f"{L(ma, '')}: " + " · ".join(f"{_nhan(u['nhan'])} → {lay(u)}" for u in uv))
     if not ra:
         ra.append(L("tuvi_ls.dg.giong_nhau", ""))
     return ra
