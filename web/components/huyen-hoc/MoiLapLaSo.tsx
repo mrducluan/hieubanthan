@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
 import { useDuong } from "@/components/khung/NgonNgu";
 import { banAnh } from "@/lib/duong-en";
+import { caoDinhTren } from "@/lib/thanh-mang";
 
 type MoDun = "tuvi" | "battu" | "chan_dung";
 
@@ -34,6 +35,7 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
   const d = useDuong();
   // Theo dõi tiêu đề (không phải cả khối): trên điện thoại khối cao hơn màn hình, tỉ lệ diện tích không bao giờ đủ ngưỡng.
   const ref = useRef<HTMLHeadingElement>(null);
+  const khoi = useRef<HTMLElement>(null);
   const daGhi = useRef(false);
   const thieu = conThieu(hoSo);
   // Đo: thấy khối → bấm gửi (profile_created do NhapHoSo ghi). Một lần mỗi lượt vào trang.
@@ -54,7 +56,7 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
 
   // Tên khối cố định (không trỏ vào h2): tiêu đề động "…còn thiếu: nơi sinh" sẽ trùng nhãn ô "Nơi sinh" của form.
   return (
-    <section aria-label={cg(moDun === "tuvi" ? "moi.aria_tuvi" : moDun === "battu" ? "moi.aria_battu" : "moi.aria_chan_dung")} data-testid="moi-lap-la-so"
+    <section ref={khoi} aria-label={cg(moDun === "tuvi" ? "moi.aria_tuvi" : moDun === "battu" ? "moi.aria_battu" : "moi.aria_chan_dung")} data-testid="moi-lap-la-so"
       className="relative overflow-hidden rounded-3xl border border-gold/45 bg-gradient-to-br from-gold/[0.09] via-surface/70 to-bg/40 p-5 shadow-[0_0_60px_-24px_rgb(var(--gold)/0.55)] sm:p-8">
       <div className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-gold/10 blur-3xl" aria-hidden />
       <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,27rem)] lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-6">
@@ -67,7 +69,17 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
         <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
           <div className="rounded-2xl border border-line/70 bg-bg/70 p-4 shadow-card sm:p-5">
             <NhapHoSo macDinh={hoSo} can="day_du" nutGui={c("moi.nut")}
-              onXong={() => ghi("chart_interacted", { mo_dun: moDun, kind: "moi_lap_gui", co_ho_so: Boolean(hoSo) })} />
+              onXong={() => {
+                ghi("chart_interacted", { mo_dun: moDun, kind: "moi_lap_gui", co_ho_so: Boolean(hoSo) });
+                // UX (EN-ALL GĐ 4, áp cả bản Việt): khối mời biến mất ngay khi có hồ sơ, trang co lại và trình duyệt đứng ở gần
+                // cuối trang (điện thoại thấy khối "Kiến thức…", không thấy lá số). Nhớ vị trí đầu khối TRƯỚC khi gỡ, rồi đưa
+                // đúng chỗ đó (nơi lá số hiện ra) lên dưới thanh đầu trang.
+                const el = khoi.current;
+                if (!el) return;
+                const y = el.getBoundingClientRect().top + window.scrollY;
+                const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+                window.setTimeout(() => window.scrollTo({ top: Math.max(0, y - caoDinhTren() - 12), behavior: giam ? "auto" : "smooth" }), 120);
+              }} />
             <p className="mt-3 flex items-start gap-1.5 text-xs leading-relaxed text-fg-faint">
               <Clock className="mt-0.5 size-3.5 shrink-0" aria-hidden />{c("moi.tran_an")}
             </p>

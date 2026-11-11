@@ -748,8 +748,14 @@ def _tu_dien_tuvi(cau: str) -> list[str]:
     return ma[:2]
 
 
+_CO_DAU_VIET = re.compile(r"[ăâđêôơưàáảãạằắẳẵặầấẩẫậèéẻẽẹềếểễệìíỉĩịòóỏõọồốổỗộờớởỡợùúủũụừứửữựỳýỷỹỵ]", re.I)
+
+
 def gloss(cau: str, mang: str) -> str:
-    """Câu tiếng Anh → cụm từ khoá tiếng Việt không dấu cho `phan_loai` của mảng. Không khớp gì → chuỗi rỗng."""
+    """Câu tiếng Anh → cụm từ khoá tiếng Việt không dấu cho `phan_loai` của mảng. Không khớp gì → chuỗi rỗng.
+    Câu gõ tiếng Việt có dấu (người dùng bản Anh vẫn gõ tiếng Việt) → chuỗi rỗng: bộ phân loại đọc thẳng câu gốc."""
+    if _CO_DAU_VIET.search(cau or ""):
+        return ""
     t = chuan(cau)
     if mang == "battu":
         return _battu(cau, t)

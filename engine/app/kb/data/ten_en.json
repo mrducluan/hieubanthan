@@ -151,7 +151,7 @@
    "Tý": {"en": "Zi", "han": "子", "nghia": "Rat"}, "Sửu": {"en": "Chou", "han": "丑", "nghia": "Ox"}, "Dần": {"en": "Yin", "han": "寅", "nghia": "Tiger"},
    "Mão": {"en": "Mao", "han": "卯", "nghia": "Rabbit"}, "Thìn": {"en": "Chen", "han": "辰", "nghia": "Dragon"}, "Tỵ": {"en": "Si", "han": "巳", "nghia": "Snake"},
    "Ngọ": {"en": "Wu", "han": "午", "nghia": "Horse"}, "Mùi": {"en": "Wei", "han": "未", "nghia": "Goat"}, "Thân": {"en": "Shen", "han": "申", "nghia": "Monkey"},
-   "Dậu": {"en": "You", "han": "酉", "nghia": "Rooster"}, "Tuất": {"en": "Xu", "han": "戌", "nghia": "Dog"}, "Hợi": {"en": "Hai", "han": "亥", "nghia": "Pig"}
+   "Dậu": {"en": "You (Rooster)", "han": "酉", "nghia": "Rooster"}, "Tuất": {"en": "Xu", "han": "戌", "nghia": "Dog"}, "Hợi": {"en": "Hai", "han": "亥", "nghia": "Pig"}
   },
   "hanh": {
    "Kim": {"en": "Metal", "han": "金"}, "Thủy": {"en": "Water", "han": "水"}, "Mộc": {"en": "Wood", "han": "木"},

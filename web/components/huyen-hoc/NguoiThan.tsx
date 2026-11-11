@@ -21,6 +21,7 @@ import {
 } from "@/lib/nguoi-than";
 import { cn } from "@/lib/utils";
 import { useChuTuVi } from "@/components/huyen-hoc/chu-tu-vi";
+import { ChonNuocThanhPho } from "@/components/hoso/ChonNuocThanhPho";
 
 /** EN-ALL: tên quan hệ + tên hiển thị người thân theo ngôn ngữ (bản Việt: TEN_QUAN_HE / tenHien như cũ). */
 function useTenNT() {
@@ -79,6 +80,7 @@ export function FormNguoiThan({ onXong }: { onXong: (nt: NguoiThan) => void }) {
   const [nhuan, setNhuan] = useState(false);
   const [gio, setGio] = useState(""); const [khongBietGio, setKhongBietGio] = useState(false);
   const [gioiTinh, setGioiTinh] = useState(""); const [noiSinh, setNoiSinh] = useState(""); const [vung, setVung] = useState("");
+  const [muiGio, setMuiGio] = useState("");
   const [dongY, setDongY] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const { tinh, loi: loiTinh, thuLai } = useDanhSachTinh();
@@ -94,6 +96,7 @@ export function FormNguoiThan({ onXong }: { onXong: (nt: NguoiThan) => void }) {
       ...(lich === "am" && nhuan ? { am_nhuan: true } : {}),
       ...(khongBietGio ? { gio: GIO_DAI_DIEN_KHONG_BIET, do_tin_gio: "unknown" as const } : { gio, do_tin_gio: "exact" as const }),
       gioi_tinh: gioiTinh as "nam" | "nu", noi_sinh: noiSinh,
+      ...(noiSinh === NUOC_NGOAI && muiGio ? { mui_gio: muiGio } : {}),
       ...(canVung && (vung === "north" || vung === "south") ? { vung } : {}),
     };
     const kq = luuNguoiThan(vao, dongY);
@@ -162,6 +165,9 @@ export function FormNguoiThan({ onXong }: { onXong: (nt: NguoiThan) => void }) {
           </Select>
           {loiTinh && <button type="button" onClick={thuLai} className="text-xs text-cinnabar underline">{loiTinh} {t("f.thu_lai")}</button>}
         </div>
+        {noiSinh === NUOC_NGOAI && (
+          <div className="sm:col-span-3"><ChonNuocThanhPho id="nt" giaTri={muiGio} doi={setMuiGio} /></div>
+        )}
         {canVung && (
           <div className="space-y-1.5 sm:col-span-3">
             <Label htmlFor="nt-vung">{t("f.vung")}</Label>

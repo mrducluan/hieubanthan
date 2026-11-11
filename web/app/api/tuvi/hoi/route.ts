@@ -7,7 +7,7 @@ import { voiCuaHoi } from "@/lib/cua-sao";
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
-import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
+import { dauNguoiGoi, goiEngineDaKiem, loiChung, laBanAnh } from "@/lib/proxy";
 import { LaSoVao } from "@/lib/la-so-vao";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { MO_HINH_NHUNG, NGUONG_Y_DINH } from "@/lib/hoc-tuvi";
@@ -30,7 +30,7 @@ export async function POST(req: Request): Promise<NextResponse> {
 async function xuLy(req: Request): Promise<NextResponse> {
   const parsed = Input.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
-    return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
+    return NextResponse.json({ error: loiChung("dau_vao", laBanAnh(req)) }, { status: 422 });
   }
   const dau = dauNguoiGoi(req);
   const kq = await goiEngineDaKiem(parsed.data, "/v1/tuvi/hoi", dau);

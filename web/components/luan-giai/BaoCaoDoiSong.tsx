@@ -26,6 +26,7 @@ import { GocNhinKhac } from "./GocNhinKhac";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
 import { ChamMuc, ChuThichMuc, CotChuong, giamChuyenDong, ThanhChuongGon, useChuongDangDoc, type MucChuong } from "./MucLucChuong";
 import { useChuBaoCao } from "./chu-bao-cao";
+import { useTen } from "@/components/khung/TenHien";
 import { maMauBaoCao, type BaoCaoDoiSong, type ChuongDoiSongMo, type Hop, type LuuYMang, type MocDaiHan, type Muc } from "./kieu";
 
 export function ChipMuc({ muc, nhan, className }: { muc?: Muc; nhan?: string; className?: string }) {
@@ -369,6 +370,7 @@ function MucCachChinh({ hai, ngan = false }: { hai?: { cach_1: Muc; cach_2: Muc 
 function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
   // "2026-12-13" → "13/12/2026" (bản Anh theo Intl) — chỉ đổi cách viết ngày engine đã tính.
   const { c: chu, ngay: ngayVn } = useChuBaoCao();
+  const tenMa = useTen();   // EN-ALL: mã cung của giai đoạn → tên Anh (ten_hien của báo cáo)
   const khung = useRef<HTMLOListElement>(null);
   const hienTai = useRef<HTMLLIElement>(null);
   useEffect(() => {
@@ -401,7 +403,7 @@ function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
             )}
             <div className="mt-1 flex flex-wrap items-center gap-1.5">
               <ChipMuc muc={m.muc} className="px-2 py-0 text-[0.7rem]" />
-              <span className="text-xs text-fg-faint">{m.nhan ?? chu("cung", { ten: String(m.cung) })}</span>
+              <span className="text-xs text-fg-faint">{m.nhan ?? chu("cung", { ten: tenMa("cung", String(m.cung)) })}</span>
               {m.hai_cach_khac && <span className="text-[0.7rem] text-moon" data-testid="hai-cach-khac">{chu("hai_cach_khac")}</span>}
               {m.hai_cach_khac && m.muc_cach_1 && m.muc_cach_2 && <MucCachChinh hai={{ cach_1: m.muc_cach_1, cach_2: m.muc_cach_2 }} ngan />}
             </div>

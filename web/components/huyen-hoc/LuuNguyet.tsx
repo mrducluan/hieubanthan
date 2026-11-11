@@ -60,7 +60,7 @@ export function LuuNguyet({ d, onChonCung, onHoi }: {
                 {tenThang(x, c)}
                 <span className={cn("size-2 shrink-0 rounded-full", MAU_KET[x.xu_huong.ket] ?? "bg-fg-faint")} title={c("ln.xu_huong_title", { ket: ten("xu_huong_tuvi", x.xu_huong.ket) })} />
               </span>
-              <span className="block text-[11px] text-fg-faint">{ngan(x.tu)}–{ngan(x.den)}</span>
+              <span className="block text-[11px] text-fg-faint">{tv.en ? tv.khoangNgay(x.tu, x.den) : <>{ngan(x.tu)}–{ngan(x.den)}</>}</span>
               <span className="block truncate text-xs text-fg-muted">{tc(x.cung_goc)}</span>
               {x.trung.length > 0 && <span className="mt-0.5 block text-[10px] text-moon">{c("ln.trung", { ds: x.trung.map((l) => tenLop(l, tv)).join(", ") })}</span>}
             </button>
@@ -71,7 +71,7 @@ export function LuuNguyet({ d, onChonCung, onHoi }: {
       <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_18rem]" data-testid="luu-nguyet-chi-tiet">
         <div className="space-y-2 text-sm">
           <p className="font-serif text-lg text-fg">
-            {tenThang(t, c)} · {t.can_chi} <span className="text-sm text-fg-faint">({ngan(t.tu)}–{ngan(t.den)}/{t.den.slice(0, 4)})</span>
+            {tenThang(t, c)} · {t.can_chi} <span className="text-sm text-fg-faint">({tv.en ? tv.khoangNgay(t.tu, t.den, true) : <>{ngan(t.tu)}–{ngan(t.den)}/{t.den.slice(0, 4)}</>})</span>
           </p>
           <p>{c("ln.menh_thang_1")}<b className="text-gold">{tc(t.cung_goc)}</b> ({ten("chi", t.chi)}). {t.chu_de}</p>
           <p className="text-fg-muted">

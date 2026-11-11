@@ -8,6 +8,9 @@ import { BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useDuong } from "@/components/khung/NgonNgu";
 import { banAnh } from "@/lib/duong-en";
+import { taoChu } from "@/lib/chu-trang";
+import { CHU_HOI_DAP } from "@/lib/chu/hoi-dap";
+import { maNgonNguTrang } from "@/lib/ngon-ngu";
 
 /** EN-ALL: Từ điển chưa có bản Anh → bản Anh không trỏ sang trang tiếng Việt (link hiện lại khi /tu-dien mở bản Anh). */
 const coTuDien = (en: boolean) => !en || Boolean(banAnh("/tu-dien"));
@@ -77,7 +80,7 @@ export function doanCoThuatNgu(van: string, ds: ThuatNgu[] | undefined, lopDoan?
         if (id && chieu && !daGach.has(`h:${id}`)) {
           daGach.add(`h:${id}`);
           return (
-            <button key={j} type="button" onClick={() => chieu.bam(id)} data-chieu={id} aria-label={`${manh} — xem trên hình`}
+            <button key={j} type="button" onClick={() => chieu.bam(id)} data-chieu={id} aria-label={taoChu(CHU_HOI_DAP, null, maNgonNguTrang() === "vi" ? "vi" : "en")("xem_tren_hinh", { chu: manh })}
               className="rounded-sm text-fg underline decoration-jade/70 decoration-2 underline-offset-[3px] hover:bg-jade/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-jade">
               {manh}
             </button>

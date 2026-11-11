@@ -97,7 +97,7 @@ const NHAN_TRUC: Muc[] = ["thuan", "binh", "can_than"];   // nhãn trục: khoá
 
 function BieuDoNhip({ thang, chon, onChon }: { thang: Thang[]; chon: number | null; onChon: (i: number) => void }) {
   const giam = useReducedMotion();
-  const { c } = useChuTuVi();
+  const { c, en } = useChuTuVi();
   const diem = thang.map((t, i) => ({ x: X0 + i * BUOC, y: Y_MUC[t.muc] }));
   // Đường cong mềm qua 3 điểm (nửa khoảng cách làm tay đòn Bézier).
   const duong = diem.reduce((s, p, i) => {
@@ -111,8 +111,9 @@ function BieuDoNhip({ thang, chon, onChon }: { thang: Thang[]; chon: number | nu
       <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={c("nb.aria_bieu_do", { mo_ta: moTa })} className="mx-auto h-auto w-full max-w-xl">
         {NHAN_TRUC.map((m) => (
           <g key={m}>
-            <line x1={58} x2={W - 8} y1={Y_MUC[m]} y2={Y_MUC[m]} stroke="rgb(var(--line))" strokeDasharray="3 4" />
-            <text x={4} y={Y_MUC[m] + 3.5} fontSize="10" fill={`rgb(var(${MAU_MUC[m].bien}))`}>{c(`nb.truc_${m}`)}</text>
+            {/* Bản Anh: nhãn trục dài hơn ("Go carefully") → chữ nhỏ hơn, đường kẻ bắt đầu xa hơn (điểm tháng ở X0 = 92 không đổi). */}
+            <line x1={en ? 70 : 58} x2={W - 8} y1={Y_MUC[m]} y2={Y_MUC[m]} stroke="rgb(var(--line))" strokeDasharray="3 4" />
+            <text x={4} y={Y_MUC[m] + 3.5} fontSize={en ? 9 : 10} fill={`rgb(var(${MAU_MUC[m].bien}))`}>{c(`nb.truc_${m}`)}</text>
           </g>
         ))}
         <motion.path d={duong} fill="none" stroke="rgb(var(--gold) / 0.65)" strokeWidth="2" strokeLinecap="round"
@@ -204,7 +205,7 @@ function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi, tyLe }: {
 }) {
   const giam = useReducedMotion();
   const mau = MAU_MUC[t.muc];
-  const { c } = useChuTuVi();
+  const { c, en, khoangNgay } = useChuTuVi();
   const hop = hopCua(t, c);
   return (
     <motion.li id={id} data-testid="the-thang" data-muc={t.muc}
@@ -216,7 +217,7 @@ function TheThang({ id, t, i, d, noiBat, onChonCungTen, onHoi, tyLe }: {
             <p className="text-sm text-fg-muted">
               <CalendarClock className="mr-1.5 inline size-4" aria-hidden />
               <b className="font-medium text-fg">{tenThang(t, c)}</b> · {t.can_chi}
-              <span className="text-fg-faint"> · {ngan(t.tu)}–{ngan(t.den)}/{t.den.slice(0, 4)}</span>
+              <span className="text-fg-faint"> · {en ? khoangNgay(t.tu, t.den, true) : <>{ngan(t.tu)}–{ngan(t.den)}/{t.den.slice(0, 4)}</>}</span>
             </p>
             <span className={cn("inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2 py-0.5 text-xs font-medium", mau.chu, mau.chip)}>
               <span className={cn("size-2 rounded-full", mau.cham)} aria-hidden />{t.nhan_muc}

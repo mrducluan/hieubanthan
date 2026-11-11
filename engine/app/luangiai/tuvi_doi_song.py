@@ -414,15 +414,18 @@ def _ly_do_sao(sao: str, do_sang: str, cung: str | None = None) -> str | None:
     sk = slug(k)
     # bản Anh: chủ ngữ kèm động từ / sở hữu cách theo người (tránh lệch số ít / số nhiều)
     ai_be, ai_cua = L(f"tvds.ai.be.{sk}", ai), L(f"tvds.ai.cua.{sk}", ai)
+    # bản Anh: nét mạnh / mặt tối dạng DANH NGỮ riêng từng sao (KB chính tinh tiếng Anh trộn tính từ, động từ, danh từ —
+    # ghép vào một khung câu bị vỡ ngữ pháp); bản Việt giữ chữ KB.
+    dm_t, mt_t = L(f"tvds.dm.{slug(sao)}", dm), L(f"tvds.mt.{slug(sao)}", mt)
     if do_sang in ("Miếu", "Vượng") and dm:
-        return L("tvds.ly.sao.manh", f"{ai} mạnh ở chỗ {dm}", ai=ai_be, dm=dm)
+        return L("tvds.ly.sao.manh", f"{ai} mạnh ở chỗ {dm}", ai=ai_be, ac=ai_cua, dm=dm_t)
     if do_sang == "Đắc" and dm:
-        return L("tvds.ly.sao.dac", f"{ai} dựa được vào nét {dm}", ai=ai_be, dm=dm)
+        return L("tvds.ly.sao.dac", f"{ai} dựa được vào nét {dm}", ai=ai_be, ac=ai_cua, dm=dm_t)
     if do_sang == "Bình" and dm:
-        return L("tvds.ly.sao.binh", f"{ai} có nét {dm} nhưng chưa nổi hẳn", ai=ai_be, dm=dm)
+        return L("tvds.ly.sao.binh", f"{ai} có nét {dm} nhưng chưa nổi hẳn", ai=ai_be, ac=ai_cua, dm=dm_t)
     if do_sang == "Hãm" and mt:
         return L("tvds.ly.sao.ham", f"khi gặp áp lực, {ai} {mt}" if mt.startswith(("dễ ", "hay "))
-                 else f"khi gặp áp lực, {ai} dễ {mt}", ai=ai_cua, mt=mt)
+                 else f"khi gặp áp lực, {ai} dễ {mt}", ai=ai_cua, ac=ai_cua, mt=mt_t)
     return None
 
 

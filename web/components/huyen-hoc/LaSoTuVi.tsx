@@ -493,6 +493,11 @@ function ThongTinGiua({ ls, vanHan, ten, gioSinh, tru, cungThan, t }: {
           <text x={118} fontSize={15.5} fontWeight={k === "ls.ban_menh" || k === "ls.cuc" ? 600 : 500} fill="var(--ls-chu)" {...(t.en ? vuaO(v, 15.5, 2 * W - 80 - 118) : {})}>{v}</text>
         </g>
       ))}
+      {/* EN-ALL: chú giải chữ viết tắt độ sáng (bản Anh dùng chữ đầu pinyin, người đọc chưa quen) — cả hai giao diện. */}
+      {t.en && <g data-testid="chu-giai-do-sang" fontSize={12.5} fill="var(--ls-mo)" textAnchor="middle">
+        <text x={2 * W} y={3 * H - 40} {...vuaO(t.c("ls.chu_giai_ds_1"), 12.5, 2 * W - 40)}>{t.c("ls.chu_giai_ds_1")}</text>
+        <text x={2 * W} y={3 * H - 22} {...vuaO(t.c("ls.chu_giai_ds_2"), 12.5, 2 * W - 40)}>{t.c("ls.chu_giai_ds_2")}</text>
+      </g>}
       </g>
     </g>
   );
