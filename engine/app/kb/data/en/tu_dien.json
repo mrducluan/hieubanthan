@@ -1,0 +1,2231 @@
+{
+ "_ghi_chu": "EN-ALL GĐ 2 — bản phủ tiếng Anh của từ điển thuật ngữ (tu_dien.json). Ban biên tập viết từ nghĩa; tên theo thuat_ngu_en.json / ten_en.json.",
+ "_nguon": "Plain-English glossary of Zi Wei Dou Shu, BaZi, Feng Shui, I Ching and numerology terms. Written by the editorial team; drafts awaiting native-speaker review.",
+ "_trang_thai": "bien_tap",
+ "muc": [
+  {
+   "ma": "la_so_tu_vi",
+   "ten": "Zi Wei Dou Shu chart",
+   "bien_the": [
+    "Zi Wei chart",
+    "Zi Wei Dou Shu chart",
+    "Purple Star chart"
+   ],
+   "de_hieu": "A map of 12 boxes (12 palaces) drawn from the hour, day, month and year of your birth in the lunar calendar. Each box is one area of life and holds 'stars' — old symbols that describe how that area tends to go.",
+   "vi_du": "Like the floor plan of a house with 12 rooms, each room holding different furniture (stars)."
+  },
+  {
+   "ma": "cung",
+   "ten": "palace",
+   "bien_the": [
+    "chart palace",
+    "Zi Wei palace"
+   ],
+   "de_hieu": "One of the 12 boxes of the chart. Each box stands for one area of life: yourself, siblings, spouse, children, money, health, travel, friends, career, home, inner life and parents."
+  },
+  {
+   "ma": "cung_menh",
+   "ten": "Life Palace",
+   "bien_the": [
+    "Life Palace",
+    "Ming Palace",
+    "Self Palace"
+   ],
+   "de_hieu": "The most important box. It is about you: your basic character and how you respond to life. Reading a chart always starts here."
+  },
+  {
+   "ma": "cung_than",
+   "ten": "Body Palace",
+   "bien_the": [
+    "Body Palace",
+    "Shen Palace"
+   ],
+   "de_hieu": "The box that shows which area of life you put your energy into in the second half of life. 'Body Palace in the Career Palace' means that later on you put great weight on your career."
+  },
+  {
+   "ma": "huynh_de",
+   "ten": "Siblings Palace",
+   "bien_the": [
+    "Siblings Palace",
+    "Brothers Palace"
+   ],
+   "de_hieu": "The box about your brothers and sisters, and close friends of your own age."
+  },
+  {
+   "ma": "phu_the",
+   "ten": "Spouse Palace",
+   "bien_the": [
+    "Spouse Palace",
+    "Marriage Palace"
+   ],
+   "de_hieu": "The box about love, marriage and the kind of person you easily bond with."
+  },
+  {
+   "ma": "tu_nu",
+   "ten": "Children Palace",
+   "bien_the": [
+    "Children Palace",
+    "Offspring Palace"
+   ],
+   "de_hieu": "The box about your children, your students and younger people you look after."
+  },
+  {
+   "ma": "tai_bach",
+   "ten": "Wealth Palace",
+   "bien_the": [
+    "Wealth Palace",
+    "Money Palace"
+   ],
+   "de_hieu": "The box about how you earn, keep and spend money."
+  },
+  {
+   "ma": "tat_ach",
+   "ten": "Health Palace",
+   "bien_the": [
+    "Health Palace",
+    "Ji E Palace"
+   ],
+   "de_hieu": "The box about your body and the parts of it worth keeping an eye on. It is not for diagnosing illness and it is not medical advice — for any health concern, see a doctor."
+  },
+  {
+   "ma": "thien_di",
+   "ten": "Travel Palace",
+   "bien_the": [
+    "Travel Palace",
+    "Migration Palace"
+   ],
+   "de_hieu": "The box about the times you step out into society, travel far or work in an unfamiliar setting."
+  },
+  {
+   "ma": "no_boc",
+   "ten": "Friends Palace",
+   "bien_the": [
+    "Friends Palace",
+    "Servants Palace",
+    "Subordinates Palace"
+   ],
+   "de_hieu": "The box about friends, colleagues and people who work under you — people on your level or below."
+  },
+  {
+   "ma": "quan_loc",
+   "ten": "Career Palace",
+   "bien_the": [
+    "Career Palace",
+    "Official Palace"
+   ],
+   "de_hieu": "The box about your work and profession, how you work and how you move up."
+  },
+  {
+   "ma": "dien_trach",
+   "ten": "Property Palace",
+   "bien_the": [
+    "Property Palace",
+    "Home Palace"
+   ],
+   "de_hieu": "The box about your home, land and property, and the atmosphere in your family."
+  },
+  {
+   "ma": "phuc_duc",
+   "ten": "Fortune Palace",
+   "bien_the": [
+    "Fortune Palace",
+    "Happiness Palace"
+   ],
+   "de_hieu": "The box about your inner life, the joy you feel inside, and the blessings that come down through your family line."
+  },
+  {
+   "ma": "phu_mau",
+   "ten": "Parents Palace",
+   "bien_the": [
+    "Parents Palace",
+    "Parent Palace"
+   ],
+   "de_hieu": "The box about your parents, your mentors and how you get on with people above you."
+  },
+  {
+   "ma": "tam_phuong_tu_chinh",
+   "ten": "three-sided-four-cornered palaces",
+   "bien_the": [
+    "three-sided-four-cornered palaces",
+    "San Fang Si Zheng",
+    "triangle and opposite palaces"
+   ],
+   "de_hieu": "When you read one palace, you also look at 3 other palaces that 'shine' on it: the two that form a triangle with it (the three harmonies) and the one directly opposite. Together these four palaces shape one area of life.",
+   "vi_du": "To read the Life Palace, you also look at the Wealth Palace and the Career Palace (the triangle) and the Travel Palace (opposite)."
+  },
+  {
+   "ma": "chinh_tinh",
+   "ten": "major star",
+   "bien_the": [
+    "major stars",
+    "14 major stars",
+    "main stars"
+   ],
+   "de_hieu": "The 14 main stars, which set the 'character' of each palace. The other stars only add colour."
+  },
+  {
+   "ma": "phu_tinh",
+   "ten": "minor star",
+   "bien_the": [
+    "minor stars",
+    "secondary stars"
+   ],
+   "de_hieu": "The secondary stars that sit next to a major star, either adding help (auspicious stars) or causing obstacles (malefic stars)."
+  },
+  {
+   "ma": "vo_chinh_dieu",
+   "ten": "empty palace (no major star)",
+   "bien_the": [
+    "empty palace",
+    "palace with no major star",
+    "empty Life Palace"
+   ],
+   "de_hieu": "A palace with no major star in it. You then borrow the stars of the opposite palace to read it. People whose Life Palace is an empty palace tend to be flexible and shaped by their surroundings."
+  },
+  {
+   "ma": "cuc",
+   "ten": "Element Bureau",
+   "bien_the": [
+    "Element Bureau",
+    "Five Element Bureau",
+    "Water 2 Bureau",
+    "Fire 6 Bureau"
+   ],
+   "de_hieu": "A number (2–6) tied to one of the five elements and worked out from the Life Palace. It decides where the Zi Wei star sits and the age at which your first Major Period begins.",
+   "vi_du": "Earth Five Bureau: the first Major Period starts at age 5."
+  },
+  {
+   "ma": "menh_chu",
+   "ten": "Life Master star",
+   "bien_the": [
+    "Life Master",
+    "Ming Zhu star"
+   ],
+   "de_hieu": "The star that 'stands for' your basic self, set by the Earthly Branch of your birth year — a minor reference point."
+  },
+  {
+   "ma": "than_chu",
+   "ten": "Body Master star",
+   "bien_the": [
+    "Body Master",
+    "Shen Zhu star"
+   ],
+   "de_hieu": "The star that 'stands for' the Body Palace, set by your birth year — a minor reference point."
+  },
+  {
+   "ma": "nap_am",
+   "ten": "Na Yin (sound element)",
+   "bien_the": [
+    "Na Yin",
+    "sound element",
+    "Na Yin element"
+   ],
+   "de_hieu": "The 'poetic' element tied to the stem-and-branch pair of your birth year, such as 'Lu Pang Tu' (Earth by the Roadside). In everyday talk people often call it your 'element', as in 'people born this year are Metal'.",
+   "vi_du": "Geng Wu (1990) is Lu Pang Tu (Earth by the Roadside)."
+  },
+  {
+   "ma": "am_duong_nam_nu",
+   "ten": "yin/yang male/female",
+   "bien_the": [
+    "yang male",
+    "yin female",
+    "yin male",
+    "yang female"
+   ],
+   "de_hieu": "Whether your birth year has a yang or a yin stem, combined with your sex, decides the direction of each Major Period and of some stars (forward or backward)."
+  },
+  {
+   "ma": "lai_nhan_cung",
+   "ten": "Origin Palace",
+   "bien_the": [
+    "Origin Palace",
+    "Lai Yin Palace"
+   ],
+   "de_hieu": "The palace whose stem matches the stem of your birth year — a side technique of the Flying Star school of Zi Wei. The site only notes it and does not use it for the main reading."
+  },
+  {
+   "ma": "do_sang_sao",
+   "ten": "star brightness",
+   "bien_the": [
+    "star brightness",
+    "brightness level",
+    "star strength"
+   ],
+   "de_hieu": "Each star is 'strong' or 'weak' depending on the palace it sits in — like a plant that does or does not suit its soil. The levels are Temple, Prosperous, Favourable, Neutral and Fallen."
+  },
+  {
+   "ma": "mieu",
+   "ten": "Temple (brightest)",
+   "bien_the": [
+    "Temple position",
+    "Miao position",
+    "brightest position"
+   ],
+   "de_hieu": "The brightest level: the star sits in its proper 'home' and shows its good side most clearly."
+  },
+  {
+   "ma": "vuong",
+   "ten": "Prosperous",
+   "bien_the": [
+    "Prosperous position",
+    "Wang position"
+   ],
+   "de_hieu": "Fairly strong; its good side is easy to see."
+  },
+  {
+   "ma": "dac",
+   "ten": "Favourable",
+   "bien_the": [
+    "Favourable position",
+    "Favorable position",
+    "De position"
+   ],
+   "de_hieu": "The star sits in a suitable place and works fairly well."
+  },
+  {
+   "ma": "binh",
+   "ten": "Neutral",
+   "bien_the": [
+    "Neutral position",
+    "Ping position"
+   ],
+   "de_hieu": "An average level; good or bad depends on the stars beside it."
+  },
+  {
+   "ma": "ham",
+   "ten": "Fallen (dim)",
+   "bien_the": [
+    "Fallen position",
+    "dim star",
+    "Xian position"
+   ],
+   "de_hieu": "The star sits in an unsuitable place, so its harder side shows more easily. This does not mean 'bad' — only that you need more effort and more self-awareness."
+  },
+  {
+   "ma": "nam_phai",
+   "ten": "Southern (Vietnamese) school",
+   "bien_the": [
+    "Southern school",
+    "Vietnamese school",
+    "Vietnamese Zi Wei"
+   ],
+   "de_hieu": "The way of reading Zi Wei found in Vietnamese books (Thai Thu Lang, Nguyen Phat Loc…). It differs from the Chinese schools in a few lookup tables, such as star brightness and how the Huo Xing and Ling Xing stars are placed."
+  },
+  {
+   "ma": "trung_chau",
+   "ten": "Zhong Zhou school",
+   "bien_the": [
+    "Zhong Zhou school",
+    "Zhongzhou school",
+    "Chinese school"
+   ],
+   "de_hieu": "A Chinese school of Zi Wei. The star placement the site uses follows this school; the site marks clearly where it differs from Vietnamese books and lets you choose."
+  },
+  {
+   "ma": "tu_hoa",
+   "ten": "Four Transformations",
+   "bien_the": [
+    "Four Transformations",
+    "Si Hua",
+    "four transformation stars"
+   ],
+   "de_hieu": "Four 'transformations' attached to 4 stars according to the stem of your birth year: Hua Lu, Hua Quan, Hua Ke and Hua Ji — like 4 labels that make a star stand out in one direction."
+  },
+  {
+   "ma": "hoa_loc",
+   "ten": "Hua Lu (Prosperity transformation)",
+   "bien_the": [
+    "Hua Lu",
+    "Prosperity transformation",
+    "Lu transformation"
+   ],
+   "de_hieu": "The label for 'gain and smooth flow': an area with Hua Lu usually goes well and tends to bring a harvest."
+  },
+  {
+   "ma": "hoa_quyen",
+   "ten": "Hua Quan (Power transformation)",
+   "bien_the": [
+    "Hua Quan",
+    "Power transformation",
+    "Quan transformation"
+   ],
+   "de_hieu": "The label for 'holding power and taking charge': in that area you want to decide for yourself, and you have influence."
+  },
+  {
+   "ma": "hoa_khoa",
+   "ten": "Hua Ke (Fame transformation)",
+   "bien_the": [
+    "Hua Ke",
+    "Fame transformation",
+    "Ke transformation"
+   ],
+   "de_hieu": "The label for 'reputation and learning': in that area you are easily recognised, and helpful people lift you up."
+  },
+  {
+   "ma": "hoa_ky",
+   "ten": "Hua Ji (Obstacle transformation)",
+   "bien_the": [
+    "Hua Ji",
+    "Obstacle transformation",
+    "Ji transformation"
+   ],
+   "de_hieu": "The label for 'snags and worry': that area easily weighs on your mind and calls for care — it is also the place you care about most."
+  },
+  {
+   "ma": "tuan",
+   "ten": "Xun Void",
+   "bien_the": [
+    "Xun Void",
+    "Xun Kong"
+   ],
+   "de_hieu": "A 'gap' mark placed between two palaces according to your birth year. It weakens the stars inside at first, and they only show clearly later. Difficult stars that meet the Xun Void become less harsh."
+  },
+  {
+   "ma": "triet",
+   "ten": "Jie Void",
+   "bien_the": [
+    "Jie Void",
+    "Jie Lu"
+   ],
+   "de_hieu": "A 'roadblock' mark between two palaces according to the stem of your birth year. It holds things back strongly in the early part of life (usually before age 30)."
+  },
+  {
+   "ma": "cach_cuc",
+   "ten": "chart pattern",
+   "bien_the": [
+    "chart pattern",
+    "star pattern",
+    "star combination"
+   ],
+   "de_hieu": "A named 'combination of stars' described in old books, such as the Zi-Fu-Wu-Xiang group or the Sha-Po-Lang group. A chart pattern is only a reference frame — whether it works out still depends on the difficult stars that come with it."
+  },
+  {
+   "ma": "pha_cach",
+   "ten": "broken pattern",
+   "bien_the": [
+    "broken pattern",
+    "spoiled pattern"
+   ],
+   "de_hieu": "When a good chart pattern meets difficult stars (Qing Yang, Tuo Luo, Huo Xing, Ling Xing, Di Kong, Di Jie, Hua Ji) that weaken its good meaning."
+  },
+  {
+   "ma": "luc_sat",
+   "ten": "Six Malefic stars",
+   "bien_the": [
+    "Six Malefic stars",
+    "malefic stars",
+    "Liu Sha stars"
+   ],
+   "de_hieu": "Six stars that cause obstacles: Qing Yang, Tuo Luo, Huo Xing, Ling Xing, Di Kong and Di Jie. They make life more testing, but they also give you the push to bounce back."
+  },
+  {
+   "ma": "luc_cat",
+   "ten": "Six Auspicious stars",
+   "bien_the": [
+    "Six Auspicious stars",
+    "auspicious stars",
+    "Liu Ji stars"
+   ],
+   "de_hieu": "Six helpful stars: Zuo Fu, You Bi, Wen Chang, Wen Qu, Tian Kui and Tian Yue — like having people who help you, a way with words, and benefactors."
+  },
+  {
+   "ma": "dai_han",
+   "ten": "Major Period (10-year luck)",
+   "bien_the": [
+    "Major Period",
+    "10-year luck",
+    "decade luck period"
+   ],
+   "de_hieu": "A 10-year stage of life, each stage tied to one palace. When you read the timing of a chart, always look at the Major Period first.",
+   "vi_du": "A Major Period from 25–34 in the Career Palace: for these ten years, work is the centre of attention."
+  },
+  {
+   "ma": "tieu_han",
+   "ten": "Minor Period",
+   "bien_the": [
+    "Minor Period",
+    "yearly Minor Period"
+   ],
+   "de_hieu": "The year-by-year period by age, moving through the 12 palaces — a secondary layer under the Major Period and the annual flow."
+  },
+  {
+   "ma": "luu_nien",
+   "ten": "annual flow",
+   "bien_the": [
+    "annual flow",
+    "year of reading",
+    "Tai Sui year"
+   ],
+   "de_hieu": "The influence of one particular solar or lunar year (by the year's Earthly Branch), laid on top of your birth chart to see which areas stand out that year."
+  },
+  {
+   "ma": "tuoi_mu",
+   "ten": "East Asian age (counted from birth as 1)",
+   "bien_the": [
+    "East Asian age",
+    "lunar age",
+    "traditional age"
+   ],
+   "de_hieu": "The Vietnamese way of counting age: you are already 1 at birth and add 1 at each Lunar New Year (Tet). Zi Wei periods are counted by this East Asian age."
+  },
+  {
+   "ma": "gio_ty_muon",
+   "ten": "late Zi hour (23:00-23:59)",
+   "bien_the": [
+    "late Zi hour",
+    "late Rat hour",
+    "night Zi hour"
+   ],
+   "de_hieu": "Born between 23:00 and 23:59. Zi Wei treats this as already the next day, while numerology and BaZi keep it as the same day — so the site always adds a note for people born at this hour."
+  },
+  {
+   "ma": "thang_nhuan",
+   "ten": "leap month",
+   "bien_the": [
+    "leap month",
+    "intercalary month"
+   ],
+   "de_hieu": "A lunar month 'slotted in' so the calendar stays in step with the seasons. For people born in the second half of a leap month there are two ways to set up the chart — the site shows you both."
+  },
+  {
+   "ma": "tu_vi",
+   "ten": "Zi Wei (Emperor)",
+   "bien_the": [
+    "Zi Wei star",
+    "Emperor star",
+    "Purple Star"
+   ],
+   "de_hieu": "The 'emperor' star: self-respecting, likes to lead, has presence. Worth watching: can become proud and dislikes hearing other views."
+  },
+  {
+   "ma": "thien_co",
+   "ten": "Tian Ji (Strategist)",
+   "bien_the": [
+    "Tian Ji",
+    "Strategist star"
+   ],
+   "de_hieu": "The 'advisor' star: quick-witted, good at planning, enjoys change. Worth watching: tends to overthink and finds it hard to stay with one thing."
+  },
+  {
+   "ma": "thai_duong",
+   "ten": "Tai Yang (Sun)",
+   "bien_the": [
+    "Tai Yang",
+    "Sun star"
+   ],
+   "de_hieu": "The 'sun' star: giving, warm-hearted, likes to be recognised. Worth watching: takes on other people's work and wears itself out easily."
+  },
+  {
+   "ma": "vu_khuc",
+   "ten": "Wu Qu (General)",
+   "bien_the": [
+    "Wu Qu",
+    "General star",
+    "Finance star"
+   ],
+   "de_hieu": "The 'finance' star: practical, decisive, good with money. Worth watching: rigid, rarely shows its feelings."
+  },
+  {
+   "ma": "thien_dong",
+   "ten": "Tian Tong (Harmonizer)",
+   "bien_the": [
+    "Tian Tong",
+    "Harmonizer star"
+   ],
+   "de_hieu": "The 'kind-hearted' star: gentle, easy-going, likes an easy life. Worth watching: lacks drive and tends to put things off."
+  },
+  {
+   "ma": "liem_trinh",
+   "ten": "Lian Zhen (Upright)",
+   "bien_the": [
+    "Lian Zhen",
+    "Upright star"
+   ],
+   "de_hieu": "The 'principles' star: firm views, strong, passionate. Worth watching: can go to extremes and clash with others."
+  },
+  {
+   "ma": "thien_phu",
+   "ten": "Tian Fu (Treasurer)",
+   "bien_the": [
+    "Tian Fu",
+    "Treasurer star"
+   ],
+   "de_hieu": "The 'storehouse' star: steady, good at keeping what it has, thoughtful. Worth watching: overly cautious, shies away from risk."
+  },
+  {
+   "ma": "thai_am",
+   "ten": "Tai Yin (Moon)",
+   "bien_the": [
+    "Tai Yin",
+    "Moon star"
+   ],
+   "de_hieu": "The 'moon' star: subtle, full of feeling, cares for the family. Worth watching: tends to keep private worries to itself."
+  },
+  {
+   "ma": "tham_lang",
+   "ten": "Tan Lang (Desire)",
+   "bien_the": [
+    "Tan Lang",
+    "Desire star"
+   ],
+   "de_hieu": "The 'many talents, many wants' star: good at socialising, many interests. Worth watching: easily scattered, fond of fun."
+  },
+  {
+   "ma": "cu_mon",
+   "ten": "Ju Men (Great Gate)",
+   "bien_the": [
+    "Ju Men",
+    "Great Gate star"
+   ],
+   "de_hieu": "The 'speech' star: good at analysis and debate. Worth watching: draws gossip easily, and blunt words can cause offence."
+  },
+  {
+   "ma": "thien_tuong",
+   "ten": "Tian Xiang (Minister)",
+   "bien_the": [
+    "Tian Xiang",
+    "Minister star"
+   ],
+   "de_hieu": "The 'seal of office' star: trustworthy, fair, likes helping others. Worth watching: easily pulled into other people's affairs."
+  },
+  {
+   "ma": "thien_luong",
+   "ten": "Tian Liang (Elder)",
+   "bien_the": [
+    "Tian Liang",
+    "Elder star"
+   ],
+   "de_hieu": "The 'protector' star: chivalrous, like an eldest brother, suited to teaching and caring work. Worth watching: tends to lecture and can be stubborn."
+  },
+  {
+   "ma": "that_sat",
+   "ten": "Qi Sha (Seven Killings)",
+   "bien_the": [
+    "Qi Sha",
+    "Seven Killings star"
+   ],
+   "de_hieu": "The 'vanguard general' star: brave, willing to take on hard jobs. Worth watching: impatient, prone to taking risks."
+  },
+  {
+   "ma": "pha_quan",
+   "ten": "Po Jun (Breaker)",
+   "bien_the": [
+    "Po Jun",
+    "Breaker star"
+   ],
+   "de_hieu": "The 'tear down the old, build the new' star: loves renewal and does not mind knocking things down to start again. Worth watching: unpredictable, wasteful of resources."
+  },
+  {
+   "ma": "ta_phu",
+   "ten": "Zuo Fu (Left Assistant)",
+   "bien_the": [
+    "Zuo Fu",
+    "Left Assistant"
+   ],
+   "de_hieu": "The 'helper on the left' star: you have people to help you and you work well in a team."
+  },
+  {
+   "ma": "huu_bat",
+   "ten": "You Bi (Right Assistant)",
+   "bien_the": [
+    "You Bi",
+    "Right Assistant"
+   ],
+   "de_hieu": "The 'helper on the right' star: you have backing and are good at working with others."
+  },
+  {
+   "ma": "van_xuong",
+   "ten": "Wen Chang (Literary Star)",
+   "bien_the": [
+    "Wen Chang",
+    "Literary Star"
+   ],
+   "de_hieu": "The 'letters' star: good at study and writing; paperwork goes smoothly."
+  },
+  {
+   "ma": "van_khuc",
+   "ten": "Wen Qu (Arts Star)",
+   "bien_the": [
+    "Wen Qu",
+    "Arts Star"
+   ],
+   "de_hieu": "The 'artistic talent' star: a way with words, the arts, skill and tact."
+  },
+  {
+   "ma": "thien_khoi",
+   "ten": "Tian Kui (Noble Helper)",
+   "bien_the": [
+    "Tian Kui",
+    "daytime Noble Helper"
+   ],
+   "de_hieu": "The 'daytime benefactor' star: you meet good people who help you openly."
+  },
+  {
+   "ma": "thien_viet",
+   "ten": "Tian Yue (Noble Helper)",
+   "bien_the": [
+    "Tian Yue",
+    "night-time Noble Helper"
+   ],
+   "de_hieu": "The 'night-time benefactor' star: help comes to you quietly, behind the scenes."
+  },
+  {
+   "ma": "loc_ton",
+   "ten": "Lu Cun (Wealth Keeper)",
+   "bien_the": [
+    "Lu Cun",
+    "Wealth Keeper"
+   ],
+   "de_hieu": "The 'savings' star: keeps money well and builds up slowly but surely."
+  },
+  {
+   "ma": "thien_ma",
+   "ten": "Tian Ma (Sky Horse)",
+   "bien_the": [
+    "Tian Ma",
+    "Sky Horse"
+   ],
+   "de_hieu": "The 'heavenly horse' star: travel, change, energy. When it meets Lu (prosperity), money comes easily through moving around."
+  },
+  {
+   "ma": "kinh_duong",
+   "ten": "Qing Yang (Goat Blade)",
+   "bien_the": [
+    "Qing Yang",
+    "Qing Yang star"
+   ],
+   "de_hieu": "A malefic star, the 'spear': forceful, competitive, prone to head-on clashes."
+  },
+  {
+   "ma": "da_la",
+   "ten": "Tuo Luo (Spinning Top)",
+   "bien_the": [
+    "Tuo Luo",
+    "Spinning Top star"
+   ],
+   "de_hieu": "A malefic star of 'tangles': delays, drawn-out matters, things that drag on."
+  },
+  {
+   "ma": "hoa_tinh",
+   "ten": "Huo Xing (Fire Star)",
+   "bien_the": [
+    "Huo Xing",
+    "Fire Star"
+   ],
+   "de_hieu": "A malefic star of 'flaring fire': hot-tempered and sudden, quick to come and quick to go."
+  },
+  {
+   "ma": "linh_tinh",
+   "ten": "Ling Xing (Bell Star)",
+   "bien_the": [
+    "Ling Xing",
+    "Bell Star"
+   ],
+   "de_hieu": "A malefic star of 'smouldering fire': frustration held inside, hidden pressure."
+  },
+  {
+   "ma": "dia_khong",
+   "ten": "Di Kong (Earth Void)",
+   "bien_the": [
+    "Di Kong",
+    "Earth Void"
+   ],
+   "de_hieu": "A malefic star of 'emptiness': unusual ideas, but easy disappointment and losses."
+  },
+  {
+   "ma": "dia_kiep",
+   "ten": "Di Jie (Earth Robbery)",
+   "bien_the": [
+    "Di Jie",
+    "Earth Robbery"
+   ],
+   "de_hieu": "A malefic star of 'loss': sudden upheavals, so keep something in reserve."
+  },
+  {
+   "ma": "hong_loan",
+   "ten": "Hong Luan (Red Phoenix)",
+   "bien_the": [
+    "Hong Luan",
+    "Red Phoenix"
+   ],
+   "de_hieu": "The 'red thread' star: love, weddings, charm."
+  },
+  {
+   "ma": "thien_hy",
+   "ten": "Tian Xi (Sky Joy)",
+   "bien_the": [
+    "Tian Xi",
+    "Sky Joy"
+   ],
+   "de_hieu": "The 'joy' star: happy events, parties, good news."
+  },
+  {
+   "ma": "dao_hoa",
+   "ten": "Tao Hua (Peach Blossom)",
+   "bien_the": [
+    "Tao Hua",
+    "Peach Blossom",
+    "Xian Chi"
+   ],
+   "de_hieu": "The 'peach blossom' star: attractiveness and appeal to the opposite sex."
+  },
+  {
+   "ma": "thien_hinh",
+   "ten": "Tian Xing (Sky Punishment)",
+   "bien_the": [
+    "Tian Xing",
+    "Sky Punishment"
+   ],
+   "de_hieu": "The 'discipline and law' star: strict, suited to law, the military and medicine; it also points to gossip and disputes."
+  },
+  {
+   "ma": "thien_dieu",
+   "ten": "Tian Yao (Sky Charm)",
+   "bien_the": [
+    "Tian Yao",
+    "Sky Charm"
+   ],
+   "de_hieu": "The 'romantic' star: romantic, artistic, easily caught up in love affairs."
+  },
+  {
+   "ma": "thien_khoc",
+   "ten": "Tian Ku (Sky Weeping)",
+   "bien_the": [
+    "Tian Ku",
+    "Sky Weeping"
+   ],
+   "de_hieu": "The 'tears' star: sorrow, but also depth."
+  },
+  {
+   "ma": "thien_hu",
+   "ten": "Tian Xu (Sky Void)",
+   "bien_the": [
+    "Tian Xu",
+    "Sky Void"
+   ],
+   "de_hieu": "The 'drain' star: worry and a feeling of emptiness."
+  },
+  {
+   "ma": "dai_hao",
+   "ten": "Da Hao (Great Consumer)",
+   "bien_the": [
+    "Da Hao",
+    "Great Consumer"
+   ],
+   "de_hieu": "The 'big spending' star: heavy spending, material loss."
+  },
+  {
+   "ma": "tieu_hao",
+   "ten": "Xiao Hao (Small Consumer)",
+   "bien_the": [
+    "Xiao Hao",
+    "Small Consumer"
+   ],
+   "de_hieu": "The 'small spending' star: petty expenses, things slipping away."
+  },
+  {
+   "ma": "tam_thai",
+   "ten": "San Tai (Three Terraces)",
+   "bien_the": [
+    "San Tai",
+    "Three Terraces"
+   ],
+   "de_hieu": "The 'stairs' star: status, moving up step by step."
+  },
+  {
+   "ma": "bat_toa",
+   "ten": "Ba Zuo (Eight Seats)",
+   "bien_the": [
+    "Ba Zuo",
+    "Eight Seats"
+   ],
+   "de_hieu": "The 'seat' star: position and stability."
+  },
+  {
+   "ma": "an_quang",
+   "ten": "En Guang (Grace Light)",
+   "bien_the": [
+    "En Guang",
+    "Grace Light"
+   ],
+   "de_hieu": "The 'favour' star: receiving favours and praise."
+  },
+  {
+   "ma": "thien_quy",
+   "ten": "Tian Gui (Sky Noble)",
+   "bien_the": [
+    "Tian Gui",
+    "Sky Noble"
+   ],
+   "de_hieu": "The 'noble' star: being respected, having benefactors."
+  },
+  {
+   "ma": "long_tri",
+   "ten": "Long Chi (Dragon Pool)",
+   "bien_the": [
+    "Long Chi",
+    "Dragon Pool"
+   ],
+   "de_hieu": "The 'dragon pool' star: talent and good fortune in writing and the arts."
+  },
+  {
+   "ma": "phung_cac",
+   "ten": "Feng Ge (Phoenix Pavilion)",
+   "bien_the": [
+    "Feng Ge",
+    "Phoenix Pavilion"
+   ],
+   "de_hieu": "The 'phoenix pavilion' star: style, elegance, a good name."
+  },
+  {
+   "ma": "co_than",
+   "ten": "Gu Chen (Lonely Star)",
+   "bien_the": [
+    "Gu Chen",
+    "Lonely Star"
+   ],
+   "de_hieu": "The 'lonely' star (for men): likes independence, shares little."
+  },
+  {
+   "ma": "qua_tu",
+   "ten": "Gua Su (Solitary Star)",
+   "bien_the": [
+    "Gua Su",
+    "Solitary Star"
+   ],
+   "de_hieu": "The 'solitary' star (for women): an inward life, independent."
+  },
+  {
+   "ma": "truong_sinh",
+   "ten": "Chang Sheng (Twelve Life Stages)",
+   "bien_the": [
+    "Chang Sheng",
+    "Twelve Life Stages",
+    "Chang Sheng cycle"
+   ],
+   "de_hieu": "A cycle of 12 stages, like the life of a tree: Growth (Chang Sheng), Bath, Youth, Prime, Peak, Decline, Sickness, Death, Grave, Extinction, Conception, Nurture. It shows how much vitality each palace has."
+  },
+  {
+   "ma": "thai_tue",
+   "ten": "Tai Sui (Grand Duke)",
+   "bien_the": [
+    "Tai Sui",
+    "Grand Duke",
+    "Tai Sui cycle"
+   ],
+   "de_hieu": "A cycle of 12 stars set by the Earthly Branch of your birth year, about your attitude to life and your social relationships."
+  },
+  {
+   "ma": "bac_sy",
+   "ten": "Bo Shi (Scholar)",
+   "bien_the": [
+    "Bo Shi",
+    "Bo Shi cycle",
+    "Scholar cycle"
+   ],
+   "de_hieu": "A cycle of 12 stars that starts from Lu Cun, about wealth and smaller career gains."
+  },
+  {
+   "ma": "tu_phu_vu_tuong",
+   "ten": "Zi-Fu-Wu-Xiang group",
+   "bien_the": [
+    "Zi-Fu-Wu-Xiang",
+    "Zi Fu Wu Xiang"
+   ],
+   "de_hieu": "A group of 4 'management and stability' stars meeting on the Life Palace: suited to organising, finance and administration."
+  },
+  {
+   "ma": "sat_pha_tham",
+   "ten": "Sha-Po-Lang group",
+   "bien_the": [
+    "Sha-Po-Lang",
+    "Sha Po Lang"
+   ],
+   "de_hieu": "A group of 3 'change and daring' stars meeting on the Life Palace: a life with many changes, suited to starting a business and to competition."
+  },
+  {
+   "ma": "co_nguyet_dong_luong",
+   "ten": "Ji-Yue-Tong-Liang group",
+   "bien_the": [
+    "Ji-Yue-Tong-Liang",
+    "Ji Yue Tong Liang"
+   ],
+   "de_hieu": "A group of 4 'gentle, specialist' stars meeting on the Life Palace: suited to stable jobs, office work, expert roles and service."
+  },
+  {
+   "ma": "cu_nhat",
+   "ten": "Ju-Ri (Great Gate + Sun) pair",
+   "bien_the": [
+    "Ju-Ri pair",
+    "Ju Men and Tai Yang"
+   ],
+   "de_hieu": "Ju Men and Tai Yang in the same palace or facing each other: your words carry weight, suited to teaching, media and diplomacy."
+  },
+  {
+   "ma": "bat_tu",
+   "ten": "BaZi (Four Pillars of Destiny)",
+   "bien_the": [
+    "BaZi",
+    "Ba Zi",
+    "Four Pillars",
+    "Eight Characters"
+   ],
+   "de_hieu": "Eight characters that record the hour, day, month and year of birth. Each one is a pair of a Heavenly Stem and an Earthly Branch, called a 'pillar'. Four pillars = eight characters.",
+   "vi_du": "Geng Wu · Xin Si · Ren Wu · Bing Wu"
+  },
+  {
+   "ma": "tru",
+   "ten": "pillar",
+   "bien_the": [
+    "Year Pillar",
+    "Month Pillar",
+    "Day Pillar",
+    "Hour Pillar"
+   ],
+   "de_hieu": "A column made of 1 stem + 1 branch. The Year Pillar relates to your roots, the Month Pillar to the setting you grew up in, the Day Pillar to yourself and your spouse, and the Hour Pillar to your children and later life."
+  },
+  {
+   "ma": "thien_can",
+   "ten": "Heavenly Stem",
+   "bien_the": [
+    "Heavenly Stems",
+    "Tian Gan"
+   ],
+   "de_hieu": "10 symbols — Jia, Yi, Bing, Ding, Wu, Ji, Geng, Xin, Ren, Gui — each carrying one element (Wood, Fire, Earth, Metal, Water) and being either yin or yang."
+  },
+  {
+   "ma": "dia_chi",
+   "ten": "Earthly Branch",
+   "bien_the": [
+    "Earthly Branches",
+    "Di Zhi"
+   ],
+   "de_hieu": "12 symbols — Zi, Chou, Yin… Hai (the 12 zodiac animals) — used for the year, month, day and hour."
+  },
+  {
+   "ma": "nhat_chu",
+   "ten": "Day Master",
+   "bien_the": [
+    "Day Master",
+    "Day Stem",
+    "Ri Zhu"
+   ],
+   "de_hieu": "The stem of the Day Pillar — it stands for you. Everything else in BaZi is read in relation to this character.",
+   "vi_du": "Born on a Ren Wu day → Day Master Ren (great water)."
+  },
+  {
+   "ma": "ngu_hanh",
+   "ten": "Five Elements",
+   "bien_the": [
+    "Five Elements",
+    "Wu Xing",
+    "five phases"
+   ],
+   "de_hieu": "Five kinds of 'qi': Metal, Wood, Water, Fire and Earth. They produce and control one another in a cycle.",
+   "vi_du": "Wood produces Fire (wood feeds a fire); Water controls Fire (water puts out fire)."
+  },
+  {
+   "ma": "tuong_sinh",
+   "ten": "producing cycle",
+   "bien_the": [
+    "producing cycle",
+    "generating cycle",
+    "Sheng cycle"
+   ],
+   "de_hieu": "Each element nourishes the next: Wood → Fire → Earth → Metal → Water → Wood."
+  },
+  {
+   "ma": "tuong_khac",
+   "ten": "controlling cycle",
+   "bien_the": [
+    "controlling cycle",
+    "overcoming cycle",
+    "Ke cycle"
+   ],
+   "de_hieu": "Each element keeps another in check: Wood controls Earth, Earth controls Water, Water controls Fire, Fire controls Metal, Metal controls Wood."
+  },
+  {
+   "ma": "tang_can",
+   "ten": "hidden stems",
+   "bien_the": [
+    "hidden stems",
+    "Cang Gan"
+   ],
+   "de_hieu": "The stems 'hidden' inside each Earthly Branch. For example, the branch Si hides Bing, Geng and Wu. They are the quiet strength of the chart."
+  },
+  {
+   "ma": "thau",
+   "ten": "revealed (stem)",
+   "bien_the": [
+    "revealed stem",
+    "exposed stem",
+    "protruding stem"
+   ],
+   "de_hieu": "When a stem hidden in a branch also shows up in the row of stems above — that strength has 'come out' and is easy to use."
+  },
+  {
+   "ma": "nguyet_lenh",
+   "ten": "month commander",
+   "bien_the": [
+    "month commander",
+    "Yue Ling",
+    "month order"
+   ],
+   "de_hieu": "The Earthly Branch of your birth month — the 'season' you were born in, which decides which element is strong. It is the most important character for setting the chart pattern."
+  },
+  {
+   "ma": "thap_than",
+   "ten": "Ten Gods",
+   "bien_the": [
+    "Ten Gods",
+    "ten roles"
+   ],
+   "de_hieu": "Ten 'roles' the other stems play in relation to the Day Master (you): like a sibling, a creative child, money, a boss, a protector…"
+  },
+  {
+   "ma": "ty_kien",
+   "ten": "Friend (Bi Jian)",
+   "bien_the": [
+    "Bi Jian",
+    "Friend star",
+    "Companion"
+   ],
+   "de_hieu": "On an equal footing — the same element and the same yin/yang as you: friends, siblings, a spirit of independence."
+  },
+  {
+   "ma": "kiep_tai",
+   "ten": "Rob Wealth",
+   "bien_the": [
+    "Rob Wealth",
+    "Jie Cai"
+   ],
+   "de_hieu": "The same element but the opposite yin/yang: a rival, but also the strength to compete for what you want."
+  },
+  {
+   "ma": "thuc_than",
+   "ten": "Eating God",
+   "bien_the": [
+    "Eating God",
+    "Food God"
+   ],
+   "de_hieu": "What you produce in a relaxed way: talent, enjoyment, gentle creativity."
+  },
+  {
+   "ma": "thuong_quan",
+   "ten": "Hurting Officer",
+   "bien_the": [
+    "Hurting Officer",
+    "Shang Guan"
+   ],
+   "de_hieu": "What you produce in a sharp way: unconventional creativity, a gift for speech, the nerve to push against the rules."
+  },
+  {
+   "ma": "chinh_tai",
+   "ten": "Direct Wealth",
+   "bien_the": [
+    "Direct Wealth",
+    "Zheng Cai"
+   ],
+   "de_hieu": "Steady money and honest work; for a man it also stands for the wife."
+  },
+  {
+   "ma": "thien_tai",
+   "ten": "Indirect Wealth",
+   "bien_the": [
+    "Indirect Wealth",
+    "Pian Cai"
+   ],
+   "de_hieu": "Unexpected money, opportunities, business; also the father."
+  },
+  {
+   "ma": "chinh_quan",
+   "ten": "Direct Officer",
+   "bien_the": [
+    "Direct Officer",
+    "Zheng Guan"
+   ],
+   "de_hieu": "Rules and order, the boss, honour; for a woman it also stands for the husband."
+  },
+  {
+   "ma": "that_sat_battu",
+   "ten": "Seven Killings",
+   "bien_the": [
+    "Seven Killings",
+    "Qi Sha",
+    "Indirect Officer"
+   ],
+   "de_hieu": "Pressure, challenges and tough authority — both a strain and a driving force."
+  },
+  {
+   "ma": "chinh_an",
+   "ten": "Direct Resource",
+   "bien_the": [
+    "Direct Resource",
+    "Zheng Yin"
+   ],
+   "de_hieu": "Protection, education, the mother, the people who support you."
+  },
+  {
+   "ma": "thien_an",
+   "ten": "Indirect Resource",
+   "bien_the": [
+    "Indirect Resource",
+    "Pian Yin",
+    "Owl God"
+   ],
+   "de_hieu": "Knowledge of your own, an original way of thinking, protection that comes in unusual ways."
+  },
+  {
+   "ma": "than_vuong",
+   "ten": "strong Day Master",
+   "bien_the": [
+    "strong Day Master",
+    "strong self"
+   ],
+   "de_hieu": "The Day Master (you) has many elements of the same kind, or elements that feed it — plenty of energy that needs an outlet to 'flow out' into."
+  },
+  {
+   "ma": "than_nhuoc",
+   "ten": "weak Day Master",
+   "bien_the": [
+    "weak Day Master",
+    "weak self"
+   ],
+   "de_hieu": "The Day Master gets little support — it needs nourishing and building up."
+  },
+  {
+   "ma": "dung_than",
+   "ten": "Useful God (favourable element)",
+   "bien_the": [
+    "Useful God",
+    "favourable element",
+    "Yong Shen"
+   ],
+   "de_hieu": "The element 'you need' to balance the chart. The site sets out two ways of finding it (the support-and-restrain method and the climate-adjusting method) and does not choose for you."
+  },
+  {
+   "ma": "phu_uc",
+   "ten": "support-and-restrain method",
+   "bien_the": [
+    "support-and-restrain method",
+    "Fu Yi method"
+   ],
+   "de_hieu": "A way of finding the Useful God by the rule 'if it is weak, build it up; if it is strong, drain it' for the Day Master."
+  },
+  {
+   "ma": "dieu_hau",
+   "ten": "climate-adjusting method",
+   "bien_the": [
+    "climate-adjusting method",
+    "climate adjustment",
+    "Tiao Hou method"
+   ],
+   "de_hieu": "A way of finding the Useful God from the climate of your birth season: born in a hot season, you need water; born in a cold season, you need fire."
+  },
+  {
+   "ma": "hy_than",
+   "ten": "Joy God",
+   "bien_the": [
+    "Joy God",
+    "Xi Shen",
+    "helpful element"
+   ],
+   "de_hieu": "An element or factor that helps, making the chart work better."
+  },
+  {
+   "ma": "ky_than",
+   "ten": "Taboo God",
+   "bien_the": [
+    "Taboo God",
+    "Ji Shen",
+    "unfavourable element"
+   ],
+   "de_hieu": "An element or factor that works against you, throwing the chart off balance."
+  },
+  {
+   "ma": "dai_van",
+   "ten": "Luck Pillar (10-year luck)",
+   "bien_the": [
+    "Luck Pillar",
+    "10-year Luck Pillar",
+    "Da Yun"
+   ],
+   "de_hieu": "A 10-year stage in BaZi. Each stage brings a new stem-and-branch pair that acts on the chart."
+  },
+  {
+   "ma": "khong_vong",
+   "ten": "Void (Kong Wang)",
+   "bien_the": [
+    "Kong Wang",
+    "void branches",
+    "empty branches"
+   ],
+   "de_hieu": "Two 'empty' branches set by the Day Pillar — that spot is left open, as it were, and matters linked to it easily come to nothing."
+  },
+  {
+   "ma": "than_sat",
+   "ten": "Symbolic Stars (Shen Sha)",
+   "bien_the": [
+    "Symbolic Stars",
+    "Shen Sha"
+   ],
+   "de_hieu": "The 'minor stars' of BaZi, such as the Heavenly Noble, Peach Blossom and Travelling Horse — side signals, not part of the main reading."
+  },
+  {
+   "ma": "thien_at_quy_nhan",
+   "ten": "Heavenly Noble (Tian Yi Gui Ren)",
+   "bien_the": [
+    "Heavenly Noble",
+    "Tian Yi Gui Ren",
+    "Noble Person star"
+   ],
+   "de_hieu": "The best of the symbolic stars: someone helps you when times are hard."
+  },
+  {
+   "ma": "dich_ma",
+   "ten": "Travelling Horse",
+   "bien_the": [
+    "Travelling Horse",
+    "Traveling Horse",
+    "Yi Ma"
+   ],
+   "de_hieu": "The Shen Sha (symbolic star) of movement, moving house and working far away."
+  },
+  {
+   "ma": "duong_nhan",
+   "ten": "Goat Blade (Yang Ren)",
+   "bien_the": [
+    "Goat Blade",
+    "Yang Ren"
+   ],
+   "de_hieu": "The extreme strength of a yang Day Master — decisive, but prone to going too far."
+  },
+  {
+   "ma": "kien_loc",
+   "ten": "Establishing Prosperity (Jian Lu)",
+   "bien_the": [
+    "Jian Lu",
+    "Establishing Prosperity"
+   ],
+   "de_hieu": "The birth month is where the Day Master 'has its prosperity' — self-reliant, standing firm on its own strength."
+  },
+  {
+   "ma": "luc_hop",
+   "ten": "Six Harmonies",
+   "bien_the": [
+    "Six Harmonies",
+    "Liu He",
+    "six combinations"
+   ],
+   "de_hieu": "An Earthly Branch pair that 'shakes hands', such as Zi–Chou or Yin–Hai: connection and harmony."
+  },
+  {
+   "ma": "luc_xung",
+   "ten": "Six Clashes",
+   "bien_the": [
+    "Six Clashes",
+    "Liu Chong",
+    "branch clash"
+   ],
+   "de_hieu": "An Earthly Branch pair that faces off, such as Zi–Wu: clashes, change, upheaval."
+  },
+  {
+   "ma": "tam_hop",
+   "ten": "Three Harmonies",
+   "bien_the": [
+    "Three Harmonies",
+    "San He",
+    "three-branch combination"
+   ],
+   "de_hieu": "Three branches that combine into one strong element group, such as Shen–Zi–Chen forming Water."
+  },
+  {
+   "ma": "hinh",
+   "ten": "Punishment",
+   "bien_the": [
+    "branch punishment",
+    "self-punishment",
+    "Xing punishment"
+   ],
+   "de_hieu": "A 'hurting' relationship between branches — prone to worry and gossip."
+  },
+  {
+   "ma": "tiet_khi",
+   "ten": "solar term",
+   "bien_the": [
+    "solar terms",
+    "24 solar terms",
+    "Jie Qi"
+   ],
+   "de_hieu": "24 climate markers in the year, set by the position of the sun (Start of Spring, Awakening of Insects…). BaZi changes month at the solar term, not on the 1st day of the lunar month."
+  },
+  {
+   "ma": "lap_xuan",
+   "ten": "Start of Spring (Li Chun)",
+   "bien_the": [
+    "Start of Spring",
+    "Li Chun",
+    "Lichun"
+   ],
+   "de_hieu": "The first solar term of the year (around 4 February, early in month 2 of the solar calendar). BaZi and Feng Shui change year at the Start of Spring, not at Lunar New Year (Tet)."
+  },
+  {
+   "ma": "cung_thong_bao_giam",
+   "ten": "Qiong Tong Bao Jian",
+   "bien_the": [
+    "Qiong Tong Bao Jian",
+    "Qiongtong Baojian"
+   ],
+   "de_hieu": "A classic book from the Qing dynasty on balancing the climate for each Day Master born in each month (the climate-adjusting method of finding the Useful God)."
+  },
+  {
+   "ma": "tu_binh_chan_thuyen",
+   "ten": "Zi Ping Zhen Quan",
+   "bien_the": [
+    "Zi Ping Zhen Quan",
+    "Ziping Zhenquan"
+   ],
+   "de_hieu": "A classic book from the Qing dynasty (by Shen Xiaozhan) on setting the BaZi chart pattern by birth month."
+  },
+  {
+   "ma": "que",
+   "ten": "hexagram",
+   "bien_the": [
+    "hexagram",
+    "64 hexagrams",
+    "I Ching hexagram"
+   ],
+   "de_hieu": "A figure of 6 stacked lines, each either solid (yang) or broken (yin). There are 64 hexagrams, and each one describes a 'situation' a matter is in."
+  },
+  {
+   "ma": "hao",
+   "ten": "line",
+   "bien_the": [
+    "hexagram line",
+    "line of a hexagram"
+   ],
+   "de_hieu": "One of the 6 lines of a hexagram, counted from the bottom up: line 1 is the beginning, line 6 is the end or peak."
+  },
+  {
+   "ma": "hao_duong",
+   "ten": "yang line",
+   "bien_the": [
+    "yang line",
+    "solid line"
+   ],
+   "de_hieu": "A solid line —, standing for strength, initiative and light."
+  },
+  {
+   "ma": "hao_am",
+   "ten": "yin line",
+   "bien_the": [
+    "yin line",
+    "broken line"
+   ],
+   "de_hieu": "A broken line - -, standing for softness, receptiveness and stillness."
+  },
+  {
+   "ma": "hao_dong",
+   "ten": "changing line",
+   "bien_the": [
+    "changing line",
+    "moving line"
+   ],
+   "de_hieu": "A line that is 'turning' into its opposite (solid to broken, or the other way round) — the key point of what you are asking about."
+  },
+  {
+   "ma": "que_ban",
+   "ten": "primary hexagram",
+   "bien_the": [
+    "primary hexagram",
+    "original hexagram",
+    "main hexagram"
+   ],
+   "de_hieu": "The hexagram you cast — the present situation."
+  },
+  {
+   "ma": "que_bien",
+   "ten": "changed hexagram",
+   "bien_the": [
+    "changed hexagram",
+    "resulting hexagram",
+    "transformed hexagram"
+   ],
+   "de_hieu": "The hexagram you get when each changing line flips — the direction the matter is moving in."
+  },
+  {
+   "ma": "que_ho",
+   "ten": "nuclear hexagram",
+   "bien_the": [
+    "nuclear hexagram",
+    "inner hexagram",
+    "Hu Gua"
+   ],
+   "de_hieu": "The hexagram built from the middle lines — how things develop on the inside, the 'hidden' part."
+  },
+  {
+   "ma": "bat_quai",
+   "ten": "Eight Trigrams (Bagua)",
+   "bien_the": [
+    "Eight Trigrams",
+    "Bagua",
+    "trigram"
+   ],
+   "de_hieu": "8 figures of 3 lines: Qian (heaven), Kun (earth), Zhen (thunder), Xun (wind), Kan (water), Li (fire), Gen (mountain), Dui (lake). Two trigrams stacked together make 1 of the 64 hexagrams."
+  },
+  {
+   "ma": "thuong_quai",
+   "ten": "upper trigram",
+   "bien_the": [
+    "upper trigram",
+    "outer trigram"
+   ],
+   "de_hieu": "The top three lines of a hexagram — the outside world, other people."
+  },
+  {
+   "ma": "ha_quai",
+   "ten": "lower trigram",
+   "bien_the": [
+    "lower trigram",
+    "inner trigram"
+   ],
+   "de_hieu": "The bottom three lines — the inside, you yourself."
+  },
+  {
+   "ma": "quai_tu",
+   "ten": "Judgment",
+   "bien_the": [
+    "Judgment",
+    "Judgement",
+    "hexagram statement"
+   ],
+   "de_hieu": "The ancient words on the whole hexagram, e.g. 'origin, success, benefit, steadfastness' for Qian."
+  },
+  {
+   "ma": "hao_tu",
+   "ten": "line statement",
+   "bien_the": [
+    "line statement",
+    "line text"
+   ],
+   "de_hieu": "The ancient words about each line on its own — read when that line is changing."
+  },
+  {
+   "ma": "thoan_truyen",
+   "ten": "Commentary on the Judgment (Tuan Zhuan)",
+   "bien_the": [
+    "Tuan Zhuan",
+    "Commentary on the Judgment"
+   ],
+   "de_hieu": "The part of the Ten Wings (the commentaries of the Confucian school) that explains the Judgment."
+  },
+  {
+   "ma": "dai_tuong",
+   "ten": "Great Image",
+   "bien_the": [
+    "Great Image",
+    "Image commentary",
+    "Xiang Zhuan"
+   ],
+   "de_hieu": "The 'image' commentary on a hexagram, with advice for the noble person, such as 'Heaven moves with strength; the noble person keeps strengthening themselves without rest'."
+  },
+  {
+   "ma": "nguyen_hanh_loi_trinh",
+   "ten": "origin, success, benefit, steadfastness",
+   "bien_the": [
+    "yuan heng li zhen",
+    "four virtues of Qian"
+   ],
+   "de_hieu": "The four virtues of the Qian hexagram: a great beginning, flowing through, benefit, and holding firm to what is right. Put simply: things go well if you do them rightly and keep at it."
+  },
+  {
+   "ma": "hoi",
+   "ten": "regret",
+   "bien_the": [
+    "regret",
+    "remorse"
+   ],
+   "de_hieu": "Something to regret, but it can still be put right if you know when to stop and adjust."
+  },
+  {
+   "ma": "lan",
+   "ten": "humiliation",
+   "bien_the": [
+    "humiliation",
+    "distress"
+   ],
+   "de_hieu": "Difficulty, a small dead end, or something to feel ashamed of — caused by stubbornness or hesitation."
+  },
+  {
+   "ma": "cat",
+   "ten": "good fortune",
+   "bien_the": [
+    "good fortune",
+    "auspicious"
+   ],
+   "de_hieu": "Good and favourable — the matter is on the right track if you keep doing it this way."
+  },
+  {
+   "ma": "hung",
+   "ten": "misfortune",
+   "bien_the": [
+    "misfortune",
+    "inauspicious"
+   ],
+   "de_hieu": "Bad, with risk — a reminder to be careful, change your approach or wait for the right time."
+  },
+  {
+   "ma": "vo_cuu",
+   "ten": "no blame",
+   "bien_the": [
+    "no blame",
+    "without blame"
+   ],
+   "de_hieu": "No fault — acting this way is fine and brings no blame."
+  },
+  {
+   "ma": "nghia_ly",
+   "ten": "meaning-and-principle reading",
+   "bien_the": [
+    "meaning-and-principle school",
+    "Yi Li school"
+   ],
+   "de_hieu": "A way of reading hexagrams through their moral meaning and their advice on how to conduct yourself (Wang Bi, Cheng Yi, Zhu Xi)."
+  },
+  {
+   "ma": "luc_hao",
+   "ten": "Six Lines (Na Jia) divination",
+   "bien_the": [
+    "Six Lines divination",
+    "Six Lines method",
+    "Na Jia divination"
+   ],
+   "de_hieu": "A way of reading a hexagram by attaching stems and branches to its 6 lines and weighing how they produce and control one another, to judge a specific matter (the book Zeng Shan Bu Yi)."
+  },
+  {
+   "ma": "mai_hoa_dich_so",
+   "ten": "Plum Blossom numerology",
+   "bien_the": [
+    "Plum Blossom numerology",
+    "Mei Hua Yi Shu",
+    "Plum Blossom method"
+   ],
+   "de_hieu": "A way of setting up a hexagram from numbers, the time, or things you happen to come across, traditionally credited to Shao Yong of the Song dynasty."
+  },
+  {
+   "ma": "the",
+   "ten": "Self line (Shi)",
+   "bien_the": [
+    "Self line",
+    "Shi line"
+   ],
+   "de_hieu": "In Six Lines divination: the line that stands for the person asking."
+  },
+  {
+   "ma": "ung",
+   "ten": "Response line (Ying)",
+   "bien_the": [
+    "Response line",
+    "Ying line"
+   ],
+   "de_hieu": "In Six Lines divination: the line that stands for the other party, or the other side of the matter."
+  },
+  {
+   "ma": "luc_than",
+   "ten": "Six Relations",
+   "bien_the": [
+    "Six Relations",
+    "Six Kin",
+    "Liu Qin"
+   ],
+   "de_hieu": "Five roles attached to the lines in Six Lines divination: Parents (papers, protection), Siblings (competition), Offspring (cheerfulness, relief), Wealth (money) and Officer Ghost (work, pressure)."
+  },
+  {
+   "ma": "dung_than_luc_hao",
+   "ten": "Use God line",
+   "bien_the": [
+    "Use God line",
+    "Yong Shen line"
+   ],
+   "de_hieu": "The line that stands for what you are asking about — for money look at Wealth, for work look at Officer Ghost, for papers look at Parents."
+  },
+  {
+   "ma": "nguyet_kien",
+   "ten": "month branch",
+   "bien_the": [
+    "month branch",
+    "Yue Jian"
+   ],
+   "de_hieu": "The Earthly Branch of the month when casting a hexagram — used to judge which lines are strong and which are weak."
+  },
+  {
+   "ma": "nhat_than",
+   "ten": "day branch",
+   "bien_the": [
+    "day branch",
+    "Ri Chen"
+   ],
+   "de_hieu": "The Earthly Branch of the day when casting a hexagram — also used to judge the strength of the lines."
+  },
+  {
+   "ma": "gieo_que",
+   "ten": "casting a hexagram",
+   "bien_the": [
+    "casting a hexagram",
+    "coin method",
+    "three-coin method"
+   ],
+   "de_hieu": "How a hexagram is set up: toss 3 coins 6 times (each toss gives one line), or use numbers or the time. The site can cast at random for you, or you cast it yourself and enter the result."
+  },
+  {
+   "ma": "menh_quai",
+   "ten": "Kua number",
+   "bien_the": [
+    "Kua number",
+    "Gua number",
+    "personal trigram"
+   ],
+   "de_hieu": "Your personal trigram in Eight Mansions, worked out from your birth year and sex. It places you in the East group or the West group."
+  },
+  {
+   "ma": "dong_tu_menh",
+   "ten": "East group",
+   "bien_the": [
+    "East group",
+    "East Four Life group",
+    "East-group house"
+   ],
+   "de_hieu": "The group whose Kua number falls on Kan, Li, Zhen or Xun — suited to the North, South, East and South-East directions."
+  },
+  {
+   "ma": "tay_tu_menh",
+   "ten": "West group",
+   "bien_the": [
+    "West group",
+    "West Four Life group",
+    "West-group house"
+   ],
+   "de_hieu": "The group whose Kua number falls on Qian, Kun, Gen or Dui — suited to North-West, South-West, North-East and West."
+  },
+  {
+   "ma": "bat_trach",
+   "ten": "Eight Mansions",
+   "bien_the": [
+    "Eight Mansions",
+    "Ba Zhai"
+   ],
+   "de_hieu": "A Feng Shui school that sorts the 8 directions into 4 good and 4 bad ones according to the Kua number of the person living there."
+  },
+  {
+   "ma": "du_nien",
+   "ten": "Eight Mansions star",
+   "bien_the": [
+    "Eight Mansions stars",
+    "You Nian",
+    "Eight Wandering Stars"
+   ],
+   "de_hieu": "Eight 'qualities' each direction has for each Kua number: 4 good (Sheng Qi, Tian Yi, Yan Nian, Fu Wei) and 4 bad (Jue Ming, Wu Gui, Liu Sha, Huo Hai)."
+  },
+  {
+   "ma": "sinh_khi",
+   "ten": "Sheng Qi (Life Generating)",
+   "bien_the": [
+    "Sheng Qi",
+    "Life Generating"
+   ],
+   "de_hieu": "The best direction: vitality, growth, wealth."
+  },
+  {
+   "ma": "thien_y",
+   "ten": "Tian Yi (Heavenly Doctor)",
+   "bien_the": [
+    "Tian Yi direction",
+    "Heavenly Doctor"
+   ],
+   "de_hieu": "A good direction for health and for getting help."
+  },
+  {
+   "ma": "dien_nien",
+   "ten": "Yan Nian (Longevity)",
+   "bien_the": [
+    "Yan Nian",
+    "Longevity direction"
+   ],
+   "de_hieu": "A good direction for relationships and a lasting marriage."
+  },
+  {
+   "ma": "phuc_vi",
+   "ten": "Fu Wei (Stability)",
+   "bien_the": [
+    "Fu Wei",
+    "Stability direction"
+   ],
+   "de_hieu": "A calm, stable direction, good for study and a quiet mind."
+  },
+  {
+   "ma": "tuyet_menh",
+   "ten": "Jue Ming (Total Loss)",
+   "bien_the": [
+    "Jue Ming",
+    "Total Loss"
+   ],
+   "de_hieu": "The worst direction in Eight Mansions: prone to loss and drain, so avoid having the main door, the bed or the stove face it."
+  },
+  {
+   "ma": "ngu_quy",
+   "ten": "Wu Gui (Five Ghosts)",
+   "bien_the": [
+    "Wu Gui",
+    "Five Ghosts"
+   ],
+   "de_hieu": "A bad direction: prone to gossip, trouble and things going missing."
+  },
+  {
+   "ma": "luc_sat_phongthuy",
+   "ten": "Liu Sha (Six Killings)",
+   "bien_the": [
+    "Liu Sha",
+    "Six Killings direction"
+   ],
+   "de_hieu": "A bad direction: trouble in love, lawsuits, small problems."
+  },
+  {
+   "ma": "hoa_hai",
+   "ten": "Huo Hai (Mishap)",
+   "bien_the": [
+    "Huo Hai",
+    "Mishap direction"
+   ],
+   "de_hieu": "A mildly bad direction: annoyances and tiredness."
+  },
+  {
+   "ma": "toa",
+   "ten": "sitting direction",
+   "bien_the": [
+    "sitting direction",
+    "back of the house",
+    "sitting mountain"
+   ],
+   "de_hieu": "The 'back' of the house — opposite the direction its front faces."
+  },
+  {
+   "ma": "huong",
+   "ten": "facing direction",
+   "bien_the": [
+    "facing direction",
+    "house facing",
+    "front of the house"
+   ],
+   "de_hieu": "The direction the front of the house looks out toward."
+  },
+  {
+   "ma": "24_son",
+   "ten": "24 Mountains",
+   "bien_the": [
+    "24 Mountains",
+    "twenty-four mountains"
+   ],
+   "de_hieu": "The compass divides 360° into 24 parts of 15° each, named after stems, branches and trigrams (Ren, Zi, Gui, Chou…)."
+  },
+  {
+   "ma": "huyen_khong",
+   "ten": "Xuan Kong (Flying Stars)",
+   "bien_the": [
+    "Xuan Kong",
+    "Flying Stars",
+    "Flying Star school"
+   ],
+   "de_hieu": "A Feng Shui school that looks at 'flying stars' over time: every 20 years (one Period), the numbers 1–9 move through the 9 squares of the house."
+  },
+  {
+   "ma": "van",
+   "ten": "Period",
+   "bien_the": [
+    "Period 9",
+    "20-year Period",
+    "Xuan Kong Period"
+   ],
+   "de_hieu": "A 20-year cycle in Xuan Kong. We are now in Period 9 (2024–2043), when star number 9 is 'prosperous'."
+  },
+  {
+   "ma": "cuu_tinh",
+   "ten": "Nine Stars",
+   "bien_the": [
+    "Nine Stars",
+    "nine flying stars",
+    "9 Purple",
+    "5 Yellow"
+   ],
+   "de_hieu": "The nine 'stars' numbered 1–9 in Xuan Kong, each with its own colour and nature (e.g. 1 White, 5 Yellow, 9 Purple)."
+  },
+  {
+   "ma": "van_tinh",
+   "ten": "Period star",
+   "bien_the": [
+    "Period star",
+    "base star"
+   ],
+   "de_hieu": "The Period number placed in each square — the 'background' of that era."
+  },
+  {
+   "ma": "son_tinh",
+   "ten": "Mountain star",
+   "bien_the": [
+    "Mountain star",
+    "Sitting star"
+   ],
+   "de_hieu": "The number on the left of each square: about people, health and relationships — best placed in a quiet spot with a 'mountain' (a wall, tall furniture)."
+  },
+  {
+   "ma": "huong_tinh",
+   "ten": "Facing star",
+   "bien_the": [
+    "Facing star",
+    "Water star"
+   ],
+   "de_hieu": "The number on the right of each square: about money and opportunity — best placed in an open spot with 'water' (a door, a walkway)."
+  },
+  {
+   "ma": "ha_quai_ban",
+   "ten": "base chart",
+   "bien_the": [
+    "base chart",
+    "standard chart",
+    "Xia Gua chart"
+   ],
+   "de_hieu": "The usual way of setting up a Xuan Kong chart, when the house sits exactly in the centre of one mountain."
+  },
+  {
+   "ma": "the_quai",
+   "ten": "replacement chart",
+   "bien_the": [
+    "replacement chart",
+    "replacement stars",
+    "Ti Gua"
+   ],
+   "de_hieu": "The chart used when the house is more than 3° off the centre of a mountain (a mixed facing): the middle number is swapped for a 'replacement star' by the traditional formula."
+  },
+  {
+   "ma": "vuong_son_vuong_huong",
+   "ten": "Prosperous Mountain, Prosperous Facing",
+   "bien_the": [
+    "Prosperous Mountain, Prosperous Facing",
+    "Wang Shan Wang Xiang"
+   ],
+   "de_hieu": "The best chart: the prosperous star is at both the back of the house (people) and the front (money)."
+  },
+  {
+   "ma": "thuong_son_ha_thuy",
+   "ten": "Reversed (Up the Mountain, Down the Water)",
+   "bien_the": [
+    "Up the Mountain, Down the Water",
+    "reversed chart"
+   ],
+   "de_hieu": "A reversed chart: the people star runs to the front of the house and the money star runs to the back — the layout needs to make up for it."
+  },
+  {
+   "ma": "song_tinh_dao_huong",
+   "ten": "Double Stars at Facing",
+   "bien_the": [
+    "Double Stars at Facing",
+    "double facing stars"
+   ],
+   "de_hieu": "Both prosperous stars sit at the front of the house: good for money, but keep an eye on matters of people."
+  },
+  {
+   "ma": "song_tinh_dao_toa",
+   "ten": "Double Stars at Sitting",
+   "bien_the": [
+    "Double Stars at Sitting",
+    "double sitting stars"
+   ],
+   "de_hieu": "Both prosperous stars sit at the back of the house: good for people; keep the back open to stir up money."
+  },
+  {
+   "ma": "phuc_ngam",
+   "ten": "Fu Yin (Hidden Chant)",
+   "bien_the": [
+    "Fu Yin",
+    "Hidden Chant"
+   ],
+   "de_hieu": "A number that matches the base number of its square — like 'marking time', stagnation."
+  },
+  {
+   "ma": "phan_ngam",
+   "ten": "Fan Yin (Reverse Chant)",
+   "bien_the": [
+    "Fan Yin",
+    "Reverse Chant"
+   ],
+   "de_hieu": "A number that adds up to 10 with the base number of its square — like a 'reversal', upheaval."
+  },
+  {
+   "ma": "luu_nien_phi_tinh",
+   "ten": "annual flying stars",
+   "bien_the": [
+    "annual flying stars",
+    "yearly flying stars",
+    "annual star"
+   ],
+   "de_hieu": "The year's numbers flying into the squares — in 2026, star number 1 (White) sits in the centre. The year changes at the Start of Spring."
+  },
+  {
+   "ma": "khong_vong_phong_thuy",
+   "ten": "void line (Kong Wang)",
+   "bien_the": [
+    "void line",
+    "Kong Wang line",
+    "great void line"
+   ],
+   "de_hieu": "A facing that falls right on the boundary between two mountains — the energy is mixed, so measure again."
+  },
+  {
+   "ma": "so_duong_doi",
+   "ten": "Life Path Number",
+   "bien_the": [
+    "Life Path",
+    "Life Path number"
+   ],
+   "de_hieu": "The most important number, added up from your day, month and year of birth. It is about your path and the main lessons of your life.",
+   "vi_du": "17/05/1990 → 1+7+5+1+9+9+0 = 32 → 3+2 = 5."
+  },
+  {
+   "ma": "so_su_menh",
+   "ten": "Expression Number",
+   "bien_the": [
+    "Expression number",
+    "name number"
+   ],
+   "de_hieu": "The number from all the letters of your full name — your talents and how you show yourself to the world."
+  },
+  {
+   "ma": "so_linh_hon",
+   "ten": "Soul Urge Number",
+   "bien_the": [
+    "Soul Urge",
+    "Soul Urge number",
+    "Heart's Desire number"
+   ],
+   "de_hieu": "The number from the vowels in your name — what you truly long for inside."
+  },
+  {
+   "ma": "so_nhan_cach",
+   "ten": "Personality Number",
+   "bien_the": [
+    "Personality number",
+    "outer personality number"
+   ],
+   "de_hieu": "The number from the consonants in your name — the first impression other people get of you."
+  },
+  {
+   "ma": "so_chu_dao",
+   "ten": "Master Number",
+   "bien_the": [
+    "Master Number",
+    "master numbers"
+   ],
+   "de_hieu": "The numbers 11, 22 and 33, which are not reduced any further — they carry strong energy and greater pressure."
+  },
+  {
+   "ma": "nam_ca_nhan",
+   "ten": "Personal Year",
+   "bien_the": [
+    "Personal Year",
+    "Personal Year number"
+   ],
+   "de_hieu": "A number in a 9-year cycle, based on your birth date and the current year — the theme of that year for you personally."
+  },
+  {
+   "ma": "thang_ca_nhan",
+   "ten": "Personal Month",
+   "bien_the": [
+    "Personal Month",
+    "Personal Month number"
+   ],
+   "de_hieu": "The smaller theme of each month within your Personal Year."
+  },
+  {
+   "ma": "dinh_cao",
+   "ten": "Pinnacle",
+   "bien_the": [
+    "Pinnacle number",
+    "Pinnacles",
+    "Pinnacle cycle"
+   ],
+   "de_hieu": "Four big stages of life, each with its own theme number and age range."
+  },
+  {
+   "ma": "thu_thach",
+   "ten": "Challenge",
+   "bien_the": [
+    "Challenge number",
+    "Challenge numbers"
+   ],
+   "de_hieu": "Numbers that point to the hard lessons you tend to meet again in each stage."
+  },
+  {
+   "ma": "no_nghiep",
+   "ten": "Karmic Debt Number",
+   "bien_the": [
+    "Karmic Debt",
+    "Karmic Debt number"
+   ],
+   "de_hieu": "The numbers 13, 14, 16 and 19 that appear while adding up — they hint at a lesson to correct from old habits (according to numerology)."
+  },
+  {
+   "ma": "bieu_do_ngay_sinh",
+   "ten": "Birth Date Grid",
+   "bien_the": [
+    "birth grid",
+    "birthday grid",
+    "numerology grid"
+   ],
+   "de_hieu": "A 3×3 grid that places the digits of your birth date in squares 1–9, so you can see which numbers appear often and which are missing."
+  },
+  {
+   "ma": "mui_ten",
+   "ten": "Arrow",
+   "bien_the": [
+    "arrow of strength",
+    "empty arrow",
+    "birth grid arrow"
+   ],
+   "de_hieu": "A straight row of 3 squares on the Birth Date Grid that are all filled (an arrow of strength) or all empty (an empty arrow) — it points to a standout personality trait."
+  },
+  {
+   "ma": "pitago",
+   "ten": "Pythagorean numerology",
+   "bien_the": [
+    "Pythagorean",
+    "Pythagoras method",
+    "Pythagorean system"
+   ],
+   "de_hieu": "The most widely used way of working out numerology in Vietnam: each letter matches a number from 1 to 9 in alphabetical order; you add up the birth date and full name, then reduce. It has the Master Numbers 11, 22 and 33.",
+   "vi_du": "A is 1, B is 2 … I is 9, then J is 1 again."
+  },
+  {
+   "ma": "chaldea",
+   "ten": "Chaldean numerology",
+   "bien_the": [
+    "Chaldean",
+    "Chaldean system"
+   ],
+   "de_hieu": "An older way of working out numerology. It gives letters the numbers 1 to 8 by how they sound (there is no 9), puts weight on the name you are usually called, and uses compound numbers from 10 to 52.",
+   "vi_du": "The same name can give two different numbers in the Pythagorean and Chaldean systems — two viewpoints, not one right and one wrong."
+  },
+  {
+   "ma": "so_kep",
+   "ten": "Compound Number",
+   "bien_the": [
+    "Compound Number",
+    "compound numbers",
+    "double-digit number"
+   ],
+   "de_hieu": "A two-digit number before it is reduced (for example 23 before it adds up to 5). The Chaldean school reads the meaning of compound numbers on their own, alongside the root number."
+  },
+  {
+   "ma": "tai_tinh",
+   "ten": "Wealth star",
+   "bien_the": [
+    "Wealth star",
+    "Wealth stars",
+    "Cai Xing"
+   ],
+   "de_hieu": "The shared name for Direct Wealth and Indirect Wealth — the element the Day Master controls. In BaZi, the Wealth star is about money and possessions, and for men it is also linked to the wife.",
+   "vi_du": "If the Day Master is Wood, the Wealth star is Earth (Wood controls Earth)."
+  },
+  {
+   "ma": "quan_tinh",
+   "ten": "Officer star",
+   "bien_the": [
+    "Officer star",
+    "Officer stars",
+    "Guan Xing"
+   ],
+   "de_hieu": "The shared name for Direct Officer and Seven Killings — the element that controls the Day Master. It is about discipline, bosses and work with rules; for women it is also linked to the husband.",
+   "vi_du": "If the Day Master is Water, the Officer star is Earth (Earth controls Water)."
+  },
+  {
+   "ma": "an_tinh",
+   "ten": "Resource star",
+   "bien_the": [
+    "Resource star",
+    "Resource stars",
+    "Yin Xing"
+   ],
+   "de_hieu": "The shared name for Direct Resource and Indirect Resource — the element that produces the Day Master. It is about study, protection, people who support you, and paperwork.",
+   "vi_du": "If the Day Master is Fire, the Resource star is Wood (Wood produces Fire)."
+  },
+  {
+   "ma": "khoi_van",
+   "ten": "start of luck",
+   "bien_the": [
+    "start of luck",
+    "luck start age",
+    "Qi Yun"
+   ],
+   "de_hieu": "The age at which you enter your first Luck Pillar, counted from your birthday to the nearest solar term (three days count as one year). Before that age, the chart is read through the Month Pillar."
+  },
+  {
+   "ma": "luu_nien_bt",
+   "ten": "annual pillar",
+   "bien_the": [
+    "annual pillar",
+    "Liu Nian pillar",
+    "yearly pillar"
+   ],
+   "de_hieu": "The stem and branch of each year (counted from the Start of Spring), set beside the four pillars to see how that year affects the Day Master: if it adds strength to the element you need, things go smoothly; if it presses on your weak spot, slow down.",
+   "vi_du": "The year 2027 is Ding Wei: the stem Ding (Fire), the branch Wei (Earth)."
+  },
+  {
+   "ma": "huyen_khong_pt",
+   "ten": "Xuan Kong Flying Stars",
+   "bien_the": [
+    "Xuan Kong Flying Stars",
+    "Flying Star Feng Shui"
+   ],
+   "de_hieu": "A school that looks at the nine flying stars over time (20-year Periods, years, months) laid over the facing of the house. It is used mostly to choose when to renovate or break ground, and which side to leave undisturbed."
+  },
+  {
+   "ma": "nap_giap",
+   "ten": "Na Jia",
+   "bien_the": [
+    "Na Jia",
+    "Na Jia method"
+   ],
+   "de_hieu": "A way of linking each line of a hexagram to an Earthly Branch (Zi, Chou, Yin…) according to its lower and upper trigrams. Through the branch, each line gets an element, so you can work out its Six Relations and compare it with the day and month of casting a hexagram.",
+   "vi_du": "The Kan hexagram (Water doubled): lines 1 to 6 are Yin, Chen, Wu, Shen, Xu and Zi in turn."
+  },
+  {
+   "ma": "thac_quai",
+   "ten": "opposite hexagram",
+   "bien_the": [
+    "opposite hexagram",
+    "Cuo Gua",
+    "reversed-polarity hexagram"
+   ],
+   "de_hieu": "The hexagram you get by changing all six lines: yin becomes yang and yang becomes yin — the opposite side of the situation.",
+   "vi_du": "The opposite hexagram of Kan (Water doubled) is Li (Fire doubled)."
+  },
+  {
+   "ma": "tong_quai",
+   "ten": "inverted hexagram",
+   "bien_the": [
+    "inverted hexagram",
+    "Zong Gua",
+    "upside-down hexagram"
+   ],
+   "de_hieu": "The hexagram you get by turning the six lines upside down (line 6 becomes line 1) — the same matter seen from the other person's side.",
+   "vi_du": "The inverted hexagram of Zhun (Water over Thunder) is Meng (Mountain over Water)."
+  },
+  {
+   "ma": "bat_cung",
+   "ten": "Eight Palaces",
+   "bien_the": [
+    "Eight Palaces",
+    "Eight Palace system"
+   ],
+   "de_hieu": "A way of sorting the 64 hexagrams into 8 groups headed by the 8 pure hexagrams (Qian, Kan, Gen, Zhen, Xun, Li, Kun, Dui). The element of each palace is used to work out the Six Relations of each line, and each hexagram has one Self line and one Response line."
+  }
+ ]
+}

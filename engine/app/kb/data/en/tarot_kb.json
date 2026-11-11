@@ -4036,5 +4036,115 @@
    "truong_phai": null,
    "viec_lv": null
   }
- }
+ },
+ "goi_y_hoi": [
+  {
+   "ma": "crush",
+   "ten": "Crush",
+   "chu_de": "tinh_cam",
+   "cau": [
+    "Should I tell the person I like how I feel?",
+    "What do I need to understand about myself before I move closer to them?"
+   ]
+  },
+  {
+   "ma": "dang_yeu",
+   "ten": "In love",
+   "chu_de": "tinh_cam",
+   "cau": [
+    "What does my current relationship need most right now?",
+    "Should I think about a long-term future with my partner?"
+   ]
+  },
+  {
+   "ma": "nguoi_cu",
+   "ten": "An ex",
+   "chu_de": "tinh_cam",
+   "cau": [
+    "Should I get back with my ex or close that chapter and move on?",
+    "What do I need to do to truly let go of the past relationship?"
+   ]
+  },
+  {
+   "ma": "doc_than",
+   "ten": "Single",
+   "chu_de": "tinh_cam",
+   "cau": [
+    "When will I be ready for a new relationship?",
+    "What should I change to open my heart to love?"
+   ]
+  },
+  {
+   "ma": "cong_viec",
+   "ten": "Work",
+   "chu_de": "cong_viec",
+   "cau": [
+    "Is my current job heading in the right direction?",
+    "What should I focus on to move forward at work?"
+   ]
+  },
+  {
+   "ma": "nhay_viec",
+   "ten": "Changing jobs",
+   "chu_de": "cong_viec",
+   "cau": [
+    "Should I stay at my current company or move to a new one?",
+    "Should I hand in my resignation in the next three months?"
+   ]
+  },
+  {
+   "ma": "kinh_doanh",
+   "ten": "Business",
+   "chu_de": "cong_viec",
+   "cau": [
+    "Should I start the business plan I have been thinking about?",
+    "What should I prepare before opening my shop?"
+   ]
+  },
+  {
+   "ma": "thi_cu",
+   "ten": "Study and exams",
+   "chu_de": "cong_viec",
+   "cau": [
+    "What should I pay attention to so I do well in my upcoming exam?",
+    "Should I choose the major I like or the one my family wants?"
+   ]
+  },
+  {
+   "ma": "tien_bac",
+   "ten": "Money",
+   "chu_de": "tien_bac",
+   "cau": [
+    "What should I do to make my finances steadier in the next three months?",
+    "Should I spend this large sum of money right now?"
+   ]
+  },
+  {
+   "ma": "gia_dinh",
+   "ten": "Family",
+   "chu_de": "gia_dinh",
+   "cau": [
+    "What can I do to calm the mood at home?",
+    "Should I talk openly with my parents about this?"
+   ]
+  },
+  {
+   "ma": "quyet_dinh",
+   "ten": "A big decision",
+   "chu_de": null,
+   "cau": [
+    "Should I continue or stop the thing I am unsure about?",
+    "Is now the right time for me to start this?"
+   ]
+  },
+  {
+   "ma": "ban_than",
+   "ten": "Myself",
+   "chu_de": "ban_than",
+   "cau": [
+    "What is holding me back right now?",
+    "What do I need to let go of to feel lighter?"
+   ]
+  }
+ ]
 }

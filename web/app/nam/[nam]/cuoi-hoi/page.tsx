@@ -1,5 +1,6 @@
 // NAM-1 — "Cưới năm {năm}: tuổi nào không phạm Kim lâu?" — Kim lâu theo tuổi mụ CÔ DÂU (chủ dự án chốt 2026-10-30),
 // cô dâu tuổi mụ 20–45. Engine `/v1/nam/{nam}/cuoi-hoi`; web hiển thị + lối sang ngày tốt cưới hỏi từng tháng.
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -86,6 +87,8 @@ export default async function Page(p: P) {
           <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
         ))}</dl>
       </section>
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="cuoi_hoi" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-8 text-sm text-fg-muted">Làm nhà cũng xét Kim lâu, Hoang ốc, Tam tai: <Link href={duongLamNhaNam(n)} className="text-gold underline">tuổi làm nhà năm {n}</Link>. Mọi tra cứu khác: <Link href={duongNam(n)} className="text-gold underline">năm {n}</Link>.</p>
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />

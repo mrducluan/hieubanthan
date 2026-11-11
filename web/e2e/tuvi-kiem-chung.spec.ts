@@ -144,7 +144,7 @@ test("Xem lá số 2 người: hộp điểm có nút kiểm chứng loại hai_
   await khoi.getByTestId("hop-noi-bat").nth(0).getByRole("button", { name: "Đúng với mình" }).click();
   await expect(khoi.getByTestId("hop-noi-bat").nth(0).getByRole("status")).toContainText("Cảm ơn");
   await expect.poll(() => guiMayChu.length).toBe(1);
-  expect(guiMayChu[0]).toEqual({ loai: "hai_nguoi", mau: hop[0]!.ma_mau, phai: D.phien_ban, ket_qua: "dung" });
+  expect(guiMayChu[0]).toEqual({ loai: "hai_nguoi", mau: hop[0]!.ma_mau, phai: D.phien_ban, ket_qua: "dung", ngon_ngu: "vi" });
   const sk = await kiemChung(page);
   expect(sk).toEqual([{ su_kien: "tuvi_kiem_chung", feature_version: "gate_v1", loai: "hai_nguoi", mau: hop[0]!.ma_mau, ket_qua: "dung", phai: D.phien_ban }]);
 });
@@ -191,5 +191,5 @@ test("Xem lá số 2 người: hộp 'Thêm một cách đọc' (không tính đ
   await expect(page.getByTestId("diem-tong")).toHaveAttribute("data-diem", String(HOP_THAM.diem!.tong));
   await khoi.getByTestId("hop-noi-bat").nth(1).getByRole("button", { name: "Đúng với mình" }).click();
   await expect.poll(() => guiMayChu.length).toBe(1);
-  expect(guiMayChu[0]).toEqual({ loai: "doi_song", mau: CDT[1]!.ma_mau, phai: "tam_hop_hien_dai", ket_qua: "dung" });
+  expect(guiMayChu[0]).toEqual({ loai: "doi_song", mau: CDT[1]!.ma_mau, phai: "tam_hop_hien_dai", ket_qua: "dung", ngon_ngu: "vi" });
 });

@@ -2,13 +2,15 @@
 // bản tiếng Việt (/chinh-sach-rieng-tu); trang này không hứa thêm gì ngoài điều hệ thống đang làm.
 import type { Metadata } from "next";
 import Lien from "@/components/khung/Lien";
-import { metaEn } from "@/lib/en/seo";
+import { ldDuongDanEn, metaEn } from "@/lib/en/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
-export const metadata: Metadata = metaEn({ title: "Privacy — Hieu Ban Than (English)", description: "What the English numerology and tarot pages do with your name, date of birth and questions.", path: "/en/privacy", vi: "/chinh-sach-rieng-tu" });
+export const metadata: Metadata = metaEn({ title: "Privacy — Hieuban (English)", description: "What the English numerology and tarot pages do with your name, date of birth and questions.", path: "/en/privacy", vi: "/chinh-sach-rieng-tu" });
 
 export default function Page() {
   return (
     <article className="prose-vn mx-auto max-w-3xl">
+      <JsonLd data={ldDuongDanEn([{ ten: "Privacy", duong: "/en/privacy" }])} />
       <h1>Privacy — English pages</h1>
       <p className="text-fg-muted">This is a plain-language summary for the English numerology and tarot pages. The complete, legally binding policy is the Vietnamese <Lien href="/chinh-sach-rieng-tu" hrefLang="vi" className="text-gold hover:underline">Privacy Policy</Lien>.</p>
       <h2>What we process</h2>

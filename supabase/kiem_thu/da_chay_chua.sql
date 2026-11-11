@@ -44,6 +44,15 @@ select * from (values
   ('0032 nhật ký ngày ghé (Tháng của tôi)', to_regclass('public.nhat_ky_ghe') is not null),
   ('0033 múi giờ nơi sinh trong hồ sơ', exists (select 1 from information_schema.columns
                                            where table_schema = 'public' and table_name = 'ho_so'
-                                             and column_name = 'utc_noi_sinh'))
+                                             and column_name = 'utc_noi_sinh')),
+  ('0034 phiếu kiểm chứng theo ngôn ngữ', exists (select 1 from information_schema.columns
+                                           where table_schema = 'public' and table_name = 'kiem_chung_phieu'
+                                             and column_name = 'ngon_ngu')),
+  ('0035 mốc push đầu tháng hai lá số', exists (select 1 from pg_constraint
+                                           where conname = 'push_tuy_chon_moc_lich_check'
+                                             and pg_get_constraintdef(oid) like '%thang_hai_la_so%')),
+  ('0036 mốc push sáng thứ Hai tuần của tôi', exists (select 1 from pg_constraint
+                                           where conname = 'push_tuy_chon_moc_lich_check'
+                                             and pg_get_constraintdef(oid) like '%tuan_cua_toi%'))
 ) as t(migration, da_chay)
 order by 1;

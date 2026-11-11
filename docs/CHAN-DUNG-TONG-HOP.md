@@ -34,7 +34,7 @@ la_so (giờ + giới tính + nơi sinh)  ──► tuvi_doi_song.lap  ─┐
                                     ──► battu_doi_song.lap ─┤  chỉ ĐỌC mức chương + mượn hộp (giữ ma_mau gốc)
 tra_loi khảo sát NT (tuỳ chọn)      ──► nhan_tuong.bao_cao ─┘
                                             ▼
-          RULES luangiai/chan_dung_tong_hop.py  (ma trận 6 mảng × 3 môn · dong_thuan() · 8 chương khuôn doi_song_1)
+          RULES luangiai/chan_dung_tong_hop.py  (ma trận 6 mảng × 3 môn · dong_thuan() · 9 chương khuôn doi_song_1 — Ý2 thêm chương `da_xac_nhan`)
                                             ▼
           POST /v1/chan-dung  →  web /api/chan-dung (luanGiaiCoSao, mô-đun chan_dung)  →  /chan-dung (MaTranBaCach + BaoCaoDoiSongView)
 ```
@@ -53,3 +53,35 @@ Engine `tests/test_chan_dung_tong_hop.py` 20 ca (luật đồng thuận thuần 
 
 - Phương án B khi đủ phiếu; thần số vào ma trận khi Bản đồ con số có mức theo mảng.
 - Menu Huyền học đang đủ 12 mục con — `/chan-dung` vào từ hub, /ban-than, sổ trang; thêm vào menu khi bỏ một mục khác (chủ dự án quyết).
+
+
+## 6. Ý2 + Ý4 (2026-11-09, theo `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 8)
+
+**Ý2 — chương "Điều bạn đã xác nhận" (`da_xac_nhan`, sau "Năm nay", trước "Việc nên làm"; mở bằng Sao như mọi chương sau chương 1).**
+`chan_dung_tong_hop.lap(..., ca_nhan=…)` đã nhận phiếu "Đúng / Chưa đúng" của chính người xem (web đọc RLS, chỉ MÃ hộp `ds.*`,
+≤ 500 mã). Chương dựng bằng `luangiai/giao_thoa.lap([], ca_nhan=phiếu)` (ba luật A/B/C trên mã): ≥ 2 phiếu Đúng → tóm tắt + hộp giao
+thoa (giữ `ma_mau` `ds.giao_thoa.*`, phái `giao_thoa_1`, `nguon = giao_thoa` → phiếu về đúng hộp qua 0017, không migration); khách /
+< 2 phiếu → chỉ lời mời bấm "Đúng với mình", không hộp. Mã trùng hộp đã dùng trong bài thì bỏ. Không chữ người dùng (test quét).
+Golden mã kiểm chứng chỉ THÊM 3 mã `ds.giao_thoa.*` vào nhóm `chan_dung` (ca có phiếu cố định).
+
+**Ý4 — thước "đồng thuận liên môn" cho người duyệt.** `scripts/dong_thuan_lien_mon.py` lập báo cáo Tử vi + Bát tự (đúng hàm sản
+phẩm) cho 1.000 đầu vào lá mẫu, đọc mức 6 mảng của ma trận bằng cùng `_muc_mon`, ghi `kb/data/dong_thuan_thong_ke.json`
+(engine chỉ đọc: `GET|POST /v1/quan-tri/dong-thuan`, khung "Đồng thuận liên môn" ở `/quan-tri/hoc`). Kết quả 2026-11-09 (n = 1.000,
+ngày xem 6/11/2026):
+
+| Mảng | Cùng mức | Kỳ vọng ngẫu nhiên | Kappa |
+|---|---|---|---|
+| Công việc | 37,2 % | 38,1 % | −0,01 |
+| Tiền bạc | 39,1 % | 39,5 % | −0,01 |
+| Tình cảm | 38,8 % | 36,1 % | 0,04 |
+| Gia đình | 29,5 % | 29,6 % | 0,00 |
+| Sức khoẻ | 36,8 % | 37,4 % | −0,01 |
+| Năm nay | 33,0 % | 34,9 % | −0,03 |
+
+→ **Trên lá số mẫu, mức Tử vi và mức Bát tự của cùng một mảng độc lập với nhau** (kappa ≈ 0 ở cả 6 mảng): "cùng thấy" xảy ra
+đúng bằng tần suất ngẫu nhiên (~1/3), nên hộp "N cách xem cùng thấy" KHÔNG được đọc như hai bằng chứng độc lập xác nhận nhau,
+mà là "hai cách nhìn tình cờ gặp nhau ở mảng này — đáng nhìn kỹ hơn". Hệ quả đã làm: hộp "nhìn khác nhau" tự thêm câu
+"Trên lá số mẫu, Tử vi và Bát tự hiếm khi trùng mức ở mảng …" khi kappa của mảng < 0,1 (KB `khac.hiem_trung`, chỉ lời + căn cứ;
+mức, mã hộp, việc nên làm không đổi). Việc chờ người duyệt: đổi lời hộp "cùng thấy" (`cung.*`) cho đúng số (đang nói "cùng chỉ về
+một hướng"), và cân nhắc ngưỡng "cùng thấy" cần thêm điều kiện (vd cùng mức VÀ cùng nhắc một việc) thay vì chỉ trùng nhãn mức.
+Sinh lại tệp sau mỗi lần đổi luật chấm mức của Tử vi / Bát tự đời sống.

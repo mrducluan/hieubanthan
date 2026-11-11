@@ -5,7 +5,8 @@ import { timingSafeEqual } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { baoLoi } from "@/lib/giam-sat";
 import { goiEngineDaKiem } from "@/lib/proxy";
-import { ghepThongBao, guiPush, homNayVn, khoaVapid, type DangKyPush, type GoiSangNay, type KetQuaGui, type NguoiNhan, type NhaTiet } from "@/lib/web-push";
+import { ghepThongBao, guiPush, laThuHai, homNayVn, khoaVapid, type DangKyPush, type GoiSangNay, type KetQuaGui, type NguoiNhan, type NhaTiet, type ThangHaiLaSo, type TuanCuaToiPush } from "@/lib/web-push";
+import { laSoTuHangHoSo, type HangLaSo } from "@/lib/push-thang";
 
 export function dungKhoaCron(req: Request): boolean {
   const bi = process.env.CRON_SECRET;
@@ -44,6 +45,14 @@ export async function guiNhacNgay(dv: SupabaseClient): Promise<Record<string, un
   // khoản (ho_so_nha, 0018) → đọc đúng HƯỚNG nhà (không năm xây, không bố cục), một lời gọi engine, không lưu thêm gì.
   let soNha = 0;
   if (sn?.moc_lich.some((m) => m.nhom.includes("giao_tiet"))) soNha = await ganNhaTiet(dv, hang, ngay);
+  // Ý1 (0035) "tháng này hai lá số cùng nói": chỉ ngày 1 dương lịch, người đã tự tích mốc `thang_hai_la_so` → đọc LÁ SỐ
+  // (ngày giờ sinh, giới tính, nơi sinh / múi giờ — không tên) trong ho_so của chính họ, một lời gọi engine, không lưu thêm gì.
+  let soThang = 0;
+  if (ngay.endsWith("-01")) soThang = await ganThangHaiLaSo(dv, hang, ngay);
+  // 0036 "Tuần này của bạn": chỉ sáng thứ Hai, người đã tự tích mốc `tuan_cua_toi` → đọc NGÀY SINH (không tên, không giờ sinh)
+  // trong ho_so của chính họ, một lời gọi engine, không lưu thêm gì.
+  let soTuan = 0;
+  if (laThuHai(ngay)) soTuan = await ganTuanCuaToi(dv, hang, ngay);
   const dem: Record<KetQuaGui | "loi_ghi" | "khong_co_gi", number> = { ok: 0, het_han: 0, loi: 0, loi_ghi: 0, khong_co_gi: 0 };
   // Từng lô 10 người — đủ nhanh cho vài nghìn người trong 60 giây, không dồn hàng nghìn kết nối một lúc. Mỗi thiết bị
   // gửi xong ghi ngay kết quả; ghi hỏng (loi_ghi) → thiết bị còn trong hàng đợi, lần chạy lại gửi tiếp (≤ 1 / thiết bị / ngày).
@@ -59,7 +68,64 @@ export async function guiNhacNgay(dv: SupabaseClient): Promise<Record<string, un
       });
     }));
   }
-  return { ngay, nguoi: hang.length, sang_nay: Boolean(sn), nha_tiet: soNha, ...dem };
+  return { ngay, nguoi: hang.length, sang_nay: Boolean(sn), nha_tiet: soNha, thang_hai_la_so: soThang, tuan_cua_toi: soTuan, ...dem };
+}
+
+const COT_LA_SO_0033 = "user_id,ngay_sinh,gio_sinh,gioi_tinh,vung,noi_sinh,gio_mua_he,do_tin_gio,utc_noi_sinh";
+const COT_LA_SO_0007 = "user_id,ngay_sinh,gio_sinh,gioi_tinh,vung,noi_sinh,gio_mua_he,do_tin_gio";
+
+/** Ý1: gắn `thang_hai_la_so` cho người nhận mốc đầu tháng có lá số đủ (giờ + giới tính + nơi sinh) trong tài khoản. Trả số
+ *  người được gắn. Chưa chạy 0007/0033 → lùi bộ cột; lỗi khác → 0 (các mốc khác vẫn gửi). Engine nhận ≤ 200 lá một lượt. */
+async function ganThangHaiLaSo(dv: SupabaseClient, hang: Hang[], ngay: string): Promise<number> {
+  const can = hang.filter((h) => h.moc_lich?.includes("thang_hai_la_so"));
+  if (!can.length) return 0;
+  const laSo = new Map<string, HangLaSo>();
+  for (let i = 0; i < can.length; i += 200) {
+    const ids = can.slice(i, i + 200).map((h) => h.user_id);
+    type Dong = HangLaSo & { user_id: string };
+    const doc = async (cot: string) => {
+      const { data, error } = await dv.from("ho_so").select(cot).in("user_id", ids);
+      return { data: (data ?? null) as unknown as Dong[] | null, error };
+    };
+    let { data, error } = await doc(COT_LA_SO_0033);
+    if (error) ({ data, error } = await doc(COT_LA_SO_0007));   // chưa chạy 0033
+    if (error) { if (i === 0) return 0; break; }                // chưa chạy 0007 → không dựng được; lô sau lỗi → vẫn gửi lô đã đọc
+    for (const r of data ?? []) laSo.set(r.user_id, r);
+  }
+  const ds = can.map((h) => ({ h, la_so: laSoTuHangHoSo(laSo.get(h.user_id)) })).filter((x) => x.la_so);
+  let gan = 0;
+  for (let i = 0; i < ds.length; i += 200) {
+    const lo = ds.slice(i, i + 200);
+    const r = await goiEngineDaKiem({ ngay_xem: ngay, nguoi: lo.map((x) => ({ la_so: x.la_so })) }, "/v1/push/thang-hai-la-so");
+    const kq = r.ok ? (r.body as { ket_qua?: (ThangHaiLaSo | null)[] }).ket_qua ?? [] : [];
+    lo.forEach((x, j) => { x.h.thang_hai_la_so = kq[j] ?? null; if (kq[j]) gan += 1; });
+  }
+  return gan;
+}
+
+/** 0036: gắn `tuan_cua_toi` cho người nhận mốc sáng thứ Hai có ngày sinh trong tài khoản. Trả số người được gắn. Lỗi đọc /
+ *  engine cũ → 0 (các mốc khác vẫn gửi). Engine nhận ≤ 500 người một lượt, chỉ ngày sinh. */
+async function ganTuanCuaToi(dv: SupabaseClient, hang: Hang[], ngay: string): Promise<number> {
+  const can = hang.filter((h) => h.moc_lich?.includes("tuan_cua_toi"));
+  if (!can.length) return 0;
+  const sinh = new Map<string, string>();
+  for (let i = 0; i < can.length; i += 200) {
+    const { data, error } = await dv.from("ho_so").select("user_id,ngay_sinh").in("user_id", can.slice(i, i + 200).map((h) => h.user_id));
+    if (error) { baoLoi(new Error("cron_tuan_doc_ho_so"), { noi: "cron", duong: "/api/cron/hang-ngay" }); if (i === 0) return 0; break; }
+    for (const r of (data ?? []) as { user_id: string; ngay_sinh: string | null }[]) {
+      if (r.ngay_sinh && /^\d{4}-\d{2}-\d{2}$/.test(r.ngay_sinh)) sinh.set(r.user_id, r.ngay_sinh);
+    }
+  }
+  const ds = can.filter((h) => sinh.has(h.user_id));
+  let gan = 0;
+  for (let i = 0; i < ds.length; i += 500) {
+    const lo = ds.slice(i, i + 500);
+    const r = await goiEngineDaKiem({ ngay_xem: ngay, nguoi: lo.map((h) => ({ ngay_sinh: sinh.get(h.user_id) })) }, "/v1/push/tuan");
+    if (!r.ok) baoLoi(new Error("cron_tuan_engine"), { noi: "cron", duong: "/v1/push/tuan", ma: r.res.status });
+    const kq = r.ok ? (r.body as { ket_qua?: (TuanCuaToiPush | null)[] }).ket_qua ?? [] : [];
+    lo.forEach((h, j) => { h.tuan_cua_toi = kq[j] ?? null; if (kq[j]) gan += 1; });
+  }
+  return gan;
 }
 
 const HUONG8 = new Set(["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]);
@@ -122,7 +188,8 @@ export async function donDuLieuHoc(dv: SupabaseClient): Promise<{ ok: boolean; k
   return { ok: true, ket_qua: { ...(ts as object | null ?? {}), tuvi: tv, nhac_viec: nv, kiem_chung_sau: ks, de_xuat_luat: gx, qua_tang: qt, chuyen_gia: { qua_han: cgQh, don: cgDon } } };
 }
 
-/** BLOG-9d: nhờ CMS nhập + chuẩn hoá bài NotFair MỚI thành nháp (CMS làm, web chỉ gọi). Chưa nối CMS → bỏ qua. Có trần
+/** BLOG-9d: nhờ CMS nhập + chuẩn hoá bài NotFair MỚI (CMS làm, web chỉ gọi); BLOG-10: bài đạt điểm kiểm định thì CMS
+ *  tự xuất bản, không đạt thì thành nháp chờ Chủ biên. Chưa nối CMS → bỏ qua. Có trần
  *  thời gian để cron ngày (60 giây) không bị cắt; bài còn lại để ngày sau. Lỗi không làm hỏng các việc khác của cron. */
 export async function tuDongNotFairCms(conMs: number): Promise<Record<string, unknown>> {
   const goc = (process.env.CMS_URL || "").replace(/\/+$/, ""), bi = process.env.CMS_WEBHOOK_SECRET;
@@ -132,8 +199,10 @@ export async function tuDongNotFairCms(conMs: number): Promise<Record<string, un
     const r = await fetch(`${goc}/api/bai-viet/tu-dong-notfair`, {
       method: "POST", headers: { "x-cms-bi-mat": bi }, signal: AbortSignal.timeout(Math.min(conMs - 5_000, 40_000)),
     });
-    const d = await r.json().catch(() => ({})) as { moi?: { slug: string; diem: number; loi?: string }[]; con_lai?: number; loi?: string };
-    return { trang_thai: r.status, moi: d.moi?.map((m) => ({ slug: m.slug, diem: m.diem, ...(m.loi ? { loi: m.loi } : {}) })) ?? [],
+    const d = await r.json().catch(() => ({})) as { moi?: { slug: string; diem: number; xuat_ban?: boolean; ly_do?: string; loi?: string }[];
+      con_lai?: number; loi?: string };
+    return { trang_thai: r.status, moi: d.moi?.map((m) => ({ slug: m.slug, diem: m.diem, xuat_ban: Boolean(m.xuat_ban),
+      ...(m.ly_do ? { ly_do: m.ly_do } : {}), ...(m.loi ? { loi: m.loi } : {}) })) ?? [],
       con_lai: d.con_lai ?? null, ...(d.loi ? { loi: d.loi } : {}) };
   } catch (e) {
     return { loi: String((e as Error)?.name ?? e) };

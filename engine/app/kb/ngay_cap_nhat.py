@@ -17,7 +17,10 @@ SO = Path(__file__).parent / "data" / "ngay_cap_nhat.json"
 # Không đưa vào băm: trường do chính sổ này đặt, và trường biên tập (thẩm định / chủ biên / góc nhìn / trạng thái) —
 # ngày thẩm định đã tự thành ngày cập nhật (trang.py lấy max), duyệt bài không cần chạy lại lệnh.
 _BO_QUA = ("cap_nhat", "ngay_dang", "chu_bien", "duyet_xuat_ban", "tac_gia", "tham_dinh", "goc_nhin", "bien_soan",
-           "trang_thai", "index")
+           "trang_thai", "index", "ban_en")
+# QTE: trang tiếng Anh (/en) không đi qua `trang.lay` — khoá sổ riêng `en_la_bai/<slug-en>`, `en_so/<n>`; ngày mặc định
+# là ngày bản Anh ra mắt (QTE-3).
+CAP_NHAT_EN = "2026-11-09"
 
 
 def bam(t: dict) -> str:

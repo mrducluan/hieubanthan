@@ -1,0 +1,1371 @@
+{
+ "_nguon": "EN-ALL GĐ 3 — bản tiếng Anh phần bổ sung trang thap_than (ban biên tập viết từ nghĩa bản Việt; tên riêng theo ten_en.json).",
+ "_trang_thai": "bien_tap",
+ "source": {
+  "ten": "Ten Gods page supplement",
+  "mo_ta": "Compiled by the Hieu Ban Than editorial team from the knowledge base and public-domain classics (draft, awaiting expert review)"
+ },
+ "trang": {
+  "ty-kien": {
+   "muc": [
+    {
+     "tieu_de": "What is Friend, and how do you spot it in a chart?",
+     "doan": "Friend is a stem with the same element and the same yin-yang as the Day Master, like a copy of you standing in another pillar. For example, a Bing Day Master meets another Bing stem in the year or hour pillar. Among the branches, Bing's Friend sits in Si. The closer it stands to the day pillar, such as the month or hour stem, the more it shows in daily life."
+    },
+    {
+     "tieu_de": "Is a lot of Friend good for running a business with others?",
+     "doan": "Usually yes, if the roles are split clearly from the start, because people with a lot of Friend work better as equals than under someone. The common snag is that both partners want to steer. The Zi Ping books put the Companion group on the side that shares out Wealth, so money put in together needs paperwork. Something to do this week: write down who decides what before you shake hands."
+    },
+    {
+     "tieu_de": "How does Friend differ in a strong and a weak chart?",
+     "doan": "With a weak Day Master, Friend is usually a support; with an already strong Day Master, more Friend easily turns into excess force and stubbornness. That is the strength-balancing approach. The birth-month approach of Zi Ping Zhen Quan asks a different question: does Friend help or block the main structure? The two can reach different conclusions; this page sets them side by side and does not choose for you."
+    },
+    {
+     "tieu_de": "What does Friend say about relationships?",
+     "doan": "In love, Friend often describes someone who wants an equal footing and dislikes being managed. For men, the old books take Wealth as the wife, so very heavy Friend is sometimes read as attention shared out to friends and siblings. For women, it often shows as wanting to keep their own income and make their own calls. This is a tendency to reflect on, not a verdict."
+    },
+    {
+     "tieu_de": "A sample chart with Friend",
+     "doan": "Take an imagined chart: Geng Day Master, Geng month stem, Shen day branch. Geng on the month stem is Friend revealed, and Shen holds Geng as its main qi, so the self side is quite thick. A person like this tends to do things alone, rarely asks for help, and carries hard tasks by themselves. Reading on, look for Eating God to let the force out, or for Officer and Killings to give it direction."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which stem is Friend for each Day Master",
+    "chu_thich": "Friend is always the Day Master's own stem repeated in another pillar. The last column lists branches that hide this stem as middle or residual qi: a secondary root, weaker than the main qi.",
+    "cot": [
+     "Day Master",
+     "Stem that is its Friend",
+     "Element of that stem",
+     "Branch holding that stem as main qi",
+     "Branches hiding that stem as minor qi"
+    ],
+    "dong": [
+     [
+      "Jia (Yang Wood)",
+      "Jia",
+      "Yang Wood",
+      "Yin (Tiger)",
+      "Hai (Pig)"
+     ],
+     [
+      "Yi (Yin Wood)",
+      "Yi",
+      "Yin Wood",
+      "Mao (Rabbit)",
+      "Chen (Dragon), Wei (Goat)"
+     ],
+     [
+      "Bing (Yang Fire)",
+      "Bing",
+      "Yang Fire",
+      "Si (Snake)",
+      "Yin (Tiger)"
+     ],
+     [
+      "Ding (Yin Fire)",
+      "Ding",
+      "Yin Fire",
+      "Wu (Horse)",
+      "Wei (Goat), Xu (Dog)"
+     ],
+     [
+      "Wu (Yang Earth)",
+      "Wu",
+      "Yang Earth",
+      "Chen (Dragon), Xu (Dog)",
+      "Yin (Tiger), Si (Snake), Shen (Monkey)"
+     ],
+     [
+      "Ji (Yin Earth)",
+      "Ji",
+      "Yin Earth",
+      "Chou (Ox), Wei (Goat)",
+      "Wu (Horse)"
+     ],
+     [
+      "Geng (Yang Metal)",
+      "Geng",
+      "Yang Metal",
+      "Shen (Monkey)",
+      "Si (Snake)"
+     ],
+     [
+      "Xin (Yin Metal)",
+      "Xin",
+      "Yin Metal",
+      "You (Rooster)",
+      "Chou (Ox), Xu (Dog)"
+     ],
+     [
+      "Ren (Yang Water)",
+      "Ren",
+      "Yang Water",
+      "Hai (Pig)",
+      "Shen (Monkey)"
+     ],
+     [
+      "Gui (Yin Water)",
+      "Gui",
+      "Yin Water",
+      "Zi (Rat)",
+      "Chou (Ox), Chen (Dragon)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How is Friend different from Rob Wealth?",
+     "dap": "Both share the Day Master's element. Friend has the same yin-yang, Rob Wealth the opposite. The books tend to describe Friend as a like-minded peer and Rob Wealth as someone more ready to compete for a share."
+    },
+    {
+     "hoi": "Is it a problem if no Friend is revealed in my chart?",
+     "dap": "It does not mean being alone. Check whether a branch hides a stem of the same kind and whether the Day Master is strong or weak; a strong Day Master without Friend is often easier to balance."
+    },
+    {
+     "hoi": "What tends to happen in a year with a Friend stem?",
+     "dap": "A year whose stem matches the Day Master is usually read as a year when many equals turn up: partners, old friends, rivals. Be clear about shared money and keep your own pace."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On Jian Lu and Yue Jie (month Prosperity and month Rob Wealth)",
+     "nghia": "The book discusses births in the month that is the Day Master's Prosperity or Rob Wealth: the self side is already strong at the root, so it is not used itself; instead, look for revealed Wealth, Officer, Killings or Eating God to use."
+    },
+    {
+     "sach": "Yuan Hai Zi Ping",
+     "nghia": "The book gathers the method of taking the day stem as the self and naming the ten gods by their relation to the other stems; Friend is the god of the same kind, with the same yin-yang as the self."
+    }
+   ],
+   "y_chinh": [
+    "Friend: same element and same yin-yang as the day stem",
+    "Weak chart: a support; strong chart: easily too much",
+    "Working together: split roles and money from the start",
+    "A Friend year: many equals turn up"
+   ]
+  },
+  "kiep-tai": {
+   "muc": [
+    {
+     "tieu_de": "What is Rob Wealth, and why the word 'rob'?",
+     "doan": "Rob Wealth is a stem with the same element as the Day Master but the opposite yin-yang, for example a Jia Day Master meeting Yi. 'Rob' is literal: this group stands next to Wealth and tends to take a share of it. The name sounds heavy, but the core idea is competitive drive. Among the branches, Jia's Rob Wealth sits in Mao and hides in Chen and Wei."
+    },
+    {
+     "tieu_de": "Rob Wealth and money",
+     "doan": "People with a lot of Rob Wealth often earn by being willing to act, but money also passes easily through other people's hands. Common patterns: lending out of politeness, investing because a friend does, spending freely when in a good mood. The bright side is the ability to gather people and get things moving fast. Something to do this week: set a top amount you can lend without checking with whoever shares your budget."
+    },
+    {
+     "tieu_de": "What is the Goat Blade, and is it related to Rob Wealth?",
+     "doan": "Yes. The Goat Blade (Yang Ren) is the Rob Wealth of a yang stem sitting in its peak branch: Jia with Mao, Bing with Wu, Geng with You, Ren with Zi. Zi Ping Zhen Quan gives the Goat Blade a chapter of its own. The book describes strong momentum and decisiveness, which needs Officer or Killings to rein it in before that force turns into results."
+    },
+    {
+     "tieu_de": "Rob Wealth in a strong or a weak chart",
+     "doan": "With a weak Day Master, Rob Wealth is usually seen as a helper; with a strong one, it easily becomes a pull that takes money away. The strength-balancing approach looks for an element that drains or controls it when the chart is strong. The birth-month approach says that if the month is Rob Wealth (Yue Jie), look for revealed Wealth, Officer or Output to use. Both approaches are set side by side; neither is chosen."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which stem is Rob Wealth for each Day Master",
+    "chu_thich": "Rob Wealth is a stem of the same element but the opposite yin-yang. A yang stem's Rob Wealth is the yin stem of its element, and the other way round.",
+    "cot": [
+     "Day Master",
+     "Stem that is its Rob Wealth",
+     "Element of that stem",
+     "Branch holding that stem as main qi",
+     "Branches hiding that stem as minor qi"
+    ],
+    "dong": [
+     [
+      "Jia (Yang Wood)",
+      "Yi",
+      "Yin Wood",
+      "Mao (Rabbit)",
+      "Chen (Dragon), Wei (Goat)"
+     ],
+     [
+      "Yi (Yin Wood)",
+      "Jia",
+      "Yang Wood",
+      "Yin (Tiger)",
+      "Hai (Pig)"
+     ],
+     [
+      "Bing (Yang Fire)",
+      "Ding",
+      "Yin Fire",
+      "Wu (Horse)",
+      "Wei (Goat), Xu (Dog)"
+     ],
+     [
+      "Ding (Yin Fire)",
+      "Bing",
+      "Yang Fire",
+      "Si (Snake)",
+      "Yin (Tiger)"
+     ],
+     [
+      "Wu (Yang Earth)",
+      "Ji",
+      "Yin Earth",
+      "Chou (Ox), Wei (Goat)",
+      "Wu (Horse)"
+     ],
+     [
+      "Ji (Yin Earth)",
+      "Wu",
+      "Yang Earth",
+      "Chen (Dragon), Xu (Dog)",
+      "Yin (Tiger), Si (Snake), Shen (Monkey)"
+     ],
+     [
+      "Geng (Yang Metal)",
+      "Xin",
+      "Yin Metal",
+      "You (Rooster)",
+      "Chou (Ox), Xu (Dog)"
+     ],
+     [
+      "Xin (Yin Metal)",
+      "Geng",
+      "Yang Metal",
+      "Shen (Monkey)",
+      "Si (Snake)"
+     ],
+     [
+      "Ren (Yang Water)",
+      "Gui",
+      "Yin Water",
+      "Zi (Rat)",
+      "Chou (Ox), Chen (Dragon)"
+     ],
+     [
+      "Gui (Yin Water)",
+      "Ren",
+      "Yang Water",
+      "Hai (Pig)",
+      "Shen (Monkey)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What does Rob Wealth say in a woman's chart?",
+     "dap": "For women, the old books do not take Rob Wealth as the husband star; it usually shows in sisters, close friends and how one competes at work. A lot of Rob Wealth often describes someone independent who dislikes having to ask."
+    },
+    {
+     "hoi": "Should I put money into a joint venture in a Rob Wealth year?",
+     "dap": "The books describe a Rob Wealth year as one with many offers to team up. There is no answer for every chart; look at whether the Day Master is strong or weak, and put the agreement in writing before investing."
+    },
+    {
+     "hoi": "Is Rob Wealth a bad god?",
+     "dap": "It is better not to call it bad. Rob Wealth gives drive and boldness; what needs watching is the pace of spending and the boundaries with friends."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On the Goat Blade (Yang Ren)",
+     "nghia": "The book places the Goat Blade among the gods to be used in reverse: its strength needs Officer or Killings to control it before it forms a proper structure; left alone, it easily leads to fighting over shares."
+    },
+    {
+     "sach": "San Ming Tong Hui",
+     "nghia": "This Ming-dynasty compendium gathers the ten-god methods of earlier books; Rob Wealth is discussed with Friend as the group of the same kind as the day stem."
+    }
+   ],
+   "y_chinh": [
+    "Rob Wealth: same element, opposite yin-yang",
+    "Bright side: bold, gathers people, moves fast",
+    "Watch: money lent out of politeness, joint bets",
+    "Goat Blade: a yang stem's Rob Wealth at its peak"
+   ]
+  },
+  "thuc-than": {
+   "muc": [
+    {
+     "tieu_de": "What is Eating God, and where is it in a chart?",
+     "doan": "Eating God is the element the Day Master produces, with the same yin-yang as the Day Master; for example a Wu Day Master meeting Geng. Among the branches, Wu's Eating God sits in Shen and hides in Si. A simple picture: this is how you give your energy away in an easy, pleasant way, like cooking a good meal or making something well."
+    },
+    {
+     "tieu_de": "Which jobs suit Eating God?",
+     "doan": "Eating God often suits work that makes things other people use and enjoy: food, design, teaching, writing, customer care. What these share is a concrete product and a pace that is not too harsh. When Eating God feeds Wealth, the old books call it a fine pattern: skill turns into income. The blind spot is working on whim and missing deadlines."
+    },
+    {
+     "tieu_de": "What does 'Eating God controls Seven Killings' mean?",
+     "doan": "It is when Eating God stands next to Seven Killings and eases its pressure, like using skill to handle stress. Zi Ping Zhen Quan treats this as a good form of the Seven Killings structure. In daily life, it is the person who answers a demanding boss by making a better product instead of arguing."
+    },
+    {
+     "tieu_de": "What is 'the Owl steals the Food'?",
+     "doan": "It is when Indirect Resource (also called the Owl) presses on Eating God and blocks self-expression. Indirect Resource produces the Day Master but controls Eating God, so the old books often mention the two standing close together. A common pattern: having ideas but thinking too long, fearing mistakes, and never starting. A small deadline is a simple way out."
+    },
+    {
+     "tieu_de": "Does Eating God suit a strong or a weak chart?",
+     "doan": "Eating God usually suits a strong Day Master better, because it draws energy away from the day stem. A strong chart with Eating God has an outlet for its extra force; a weak chart with heavy Eating God easily does a lot and runs out of breath. The birth-month approach asks other questions: is the month Eating God, is there Wealth to receive its force, is the Owl pressing on it."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which stem is Eating God for each Day Master",
+    "chu_thich": "Eating God is the element the day stem produces, with the same yin-yang. For example, Wood feeds Fire, so Jia's Eating God is Bing and Yi's is Ding.",
+    "cot": [
+     "Day Master",
+     "Stem that is its Eating God",
+     "Element of that stem",
+     "Branch holding that stem as main qi",
+     "Branches hiding that stem as minor qi"
+    ],
+    "dong": [
+     [
+      "Jia (Yang Wood)",
+      "Bing",
+      "Yang Fire",
+      "Si (Snake)",
+      "Yin (Tiger)"
+     ],
+     [
+      "Yi (Yin Wood)",
+      "Ding",
+      "Yin Fire",
+      "Wu (Horse)",
+      "Wei (Goat), Xu (Dog)"
+     ],
+     [
+      "Bing (Yang Fire)",
+      "Wu",
+      "Yang Earth",
+      "Chen (Dragon), Xu (Dog)",
+      "Yin (Tiger), Si (Snake), Shen (Monkey)"
+     ],
+     [
+      "Ding (Yin Fire)",
+      "Ji",
+      "Yin Earth",
+      "Chou (Ox), Wei (Goat)",
+      "Wu (Horse)"
+     ],
+     [
+      "Wu (Yang Earth)",
+      "Geng",
+      "Yang Metal",
+      "Shen (Monkey)",
+      "Si (Snake)"
+     ],
+     [
+      "Ji (Yin Earth)",
+      "Xin",
+      "Yin Metal",
+      "You (Rooster)",
+      "Chou (Ox), Xu (Dog)"
+     ],
+     [
+      "Geng (Yang Metal)",
+      "Ren",
+      "Yang Water",
+      "Hai (Pig)",
+      "Shen (Monkey)"
+     ],
+     [
+      "Xin (Yin Metal)",
+      "Gui",
+      "Yin Water",
+      "Zi (Rat)",
+      "Chou (Ox), Chen (Dragon)"
+     ],
+     [
+      "Ren (Yang Water)",
+      "Jia",
+      "Yang Wood",
+      "Yin (Tiger)",
+      "Hai (Pig)"
+     ],
+     [
+      "Gui (Yin Water)",
+      "Yi",
+      "Yin Wood",
+      "Mao (Rabbit)",
+      "Chen (Dragon), Wei (Goat)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How is Eating God different from Hurting Officer?",
+     "dap": "Both are the element the Day Master produces. Eating God has the same yin-yang, so it is usually soft and mild; Hurting Officer has the opposite yin-yang, so it is sharper and more rule-breaking."
+    },
+    {
+     "hoi": "Does a lot of Eating God mean laziness?",
+     "dap": "Not really. The books say heavy Eating God can lean towards comfort; but if the chart has Wealth to take its force, it describes a careful, steady craftsperson."
+    },
+    {
+     "hoi": "What is a year with Eating God good for?",
+     "dap": "A year whose stem is Eating God is usually read as good for making things, learning a practical skill, and settling into regular eating and sleeping."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On the Eating God",
+     "nghia": "The book says Eating God is the energy that flows out of the day stem and is valued because it produces Wealth. The fine pattern is Eating God feeding Wealth; the worry is Indirect Resource taking the Food."
+    },
+    {
+     "sach": "Yuan Hai Zi Ping",
+     "nghia": "This old classic of chart reading puts Eating God among the kindly gods, standing for food and comfort, and an easy life when the Owl does not press on it."
+    }
+   ],
+   "y_chinh": [
+    "Eating God: what the day stem produces, same yin-yang",
+    "Suits work with a concrete product and a steady pace",
+    "Eating God feeds Wealth: skill turns into income",
+    "Owl steals the Food: overthinking, fear of mistakes"
+   ]
+  },
+  "thuong-quan": {
+   "muc": [
+    {
+     "tieu_de": "What is Hurting Officer, and why does the name sound worrying?",
+     "doan": "Hurting Officer is the element the Day Master produces, but with the opposite yin-yang; the name means 'harming the Officer'. The reason: Hurting Officer controls exactly the element of the Day Master's Direct Officer. Because Direct Officer stands for rules and order, the old books were wary of it. Today many readers see Hurting Officer as a critical mind, a gift for words, and a dislike of the beaten track."
+    },
+    {
+     "tieu_de": "What happens when Hurting Officer meets the Officer?",
+     "doan": "The books call this 'Hurting Officer meets the Officer', the pattern in this group that needs the most care. In daily life it often looks like this: very good at the job but clashing with the boss, or right in substance but wrong in timing. Zi Ping Zhen Quan points to using Resource to rein in Hurting Officer, or Wealth to turn its force into earnings. Something you can do: give feedback in writing, after sleeping on it."
+    },
+    {
+     "tieu_de": "Which jobs suit Hurting Officer?",
+     "doan": "Hurting Officer often suits work that needs speaking, writing, creating or challenging ideas: law, journalism, advertising, the arts, research, start-ups. The more rigid the procedures, the more stifled a Hurting Officer person feels. They do well when given a goal and left to choose the way."
+    },
+    {
+     "tieu_de": "What does Hurting Officer say in a woman's chart?",
+     "doan": "For women, the old books take the Officer as the husband, so heavy Hurting Officer is often described as critical and uneasy with rules in marriage. A modern reading is gentler: this is someone who needs a relationship where people speak plainly and their views are respected. The thing worth reflecting on is how you say things, not whether you have opinions."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which stem is Hurting Officer for each Day Master",
+    "chu_thich": "Hurting Officer is the element the day stem produces, with the opposite yin-yang. It is also the god that controls the Day Master's Direct Officer.",
+    "cot": [
+     "Day Master",
+     "Stem that is its Hurting Officer",
+     "Element of that stem",
+     "Branch holding that stem as main qi",
+     "Branches hiding that stem as minor qi"
+    ],
+    "dong": [
+     [
+      "Jia (Yang Wood)",
+      "Ding",
+      "Yin Fire",
+      "Wu (Horse)",
+      "Wei (Goat), Xu (Dog)"
+     ],
+     [
+      "Yi (Yin Wood)",
+      "Bing",
+      "Yang Fire",
+      "Si (Snake)",
+      "Yin (Tiger)"
+     ],
+     [
+      "Bing (Yang Fire)",
+      "Ji",
+      "Yin Earth",
+      "Chou (Ox), Wei (Goat)",
+      "Wu (Horse)"
+     ],
+     [
+      "Ding (Yin Fire)",
+      "Wu",
+      "Yang Earth",
+      "Chen (Dragon), Xu (Dog)",
+      "Yin (Tiger), Si (Snake), Shen (Monkey)"
+     ],
+     [
+      "Wu (Yang Earth)",
+      "Xin",
+      "Yin Metal",
+      "You (Rooster)",
+      "Chou (Ox), Xu (Dog)"
+     ],
+     [
+      "Ji (Yin Earth)",
+      "Geng",
+      "Yang Metal",
+      "Shen (Monkey)",
+      "Si (Snake)"
+     ],
+     [
+      "Geng (Yang Metal)",
+      "Gui",
+      "Yin Water",
+      "Zi (Rat)",
+      "Chou (Ox), Chen (Dragon)"
+     ],
+     [
+      "Xin (Yin Metal)",
+      "Ren",
+      "Yang Water",
+      "Hai (Pig)",
+      "Shen (Monkey)"
+     ],
+     [
+      "Ren (Yang Water)",
+      "Yi",
+      "Yin Wood",
+      "Mao (Rabbit)",
+      "Chen (Dragon), Wei (Goat)"
+     ],
+     [
+      "Gui (Yin Water)",
+      "Jia",
+      "Yang Wood",
+      "Yin (Tiger)",
+      "Hai (Pig)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Hurting Officer a bad god?",
+     "dap": "No. The Zi Ping books say Hurting Officer is not a kindly god, yet it is a refined energy; many well-read people with a gift for writing carry it."
+    },
+    {
+     "hoi": "What about Hurting Officer in a weak chart?",
+     "dap": "A weak Day Master with heavy Hurting Officer often runs down from thinking and talking too much. The strength-balancing approach looks for Resource to keep strength; the birth-month approach checks whether Hurting Officer feeds Wealth or is held by Resource. Read the two side by side."
+    },
+    {
+     "hoi": "What to watch in a Hurting Officer year?",
+     "dap": "Such a year usually brings many ideas and many words. Pick the right channel to speak, and write your view down before raising it in front of a crowd."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On the Hurting Officer",
+     "phien_am": "Shang guan sui fei ji shen, shi wei xiu qi.",
+     "nghia": "Although Hurting Officer is not a kindly god, it is in truth a refined energy; this is why well-read people with a gift for words often carry it."
+    },
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "Women's charts",
+     "nghia": "The book's section on women's charts reads the husband through Officer and Killings and children through the Output stars, and reminds readers to look at the whole chart rather than judge from one god."
+    }
+   ],
+   "y_chinh": [
+    "Hurting Officer: produced by the day stem, opposite yin-yang",
+    "Refined energy: speaking, writing, debate",
+    "Meeting the Officer: easy clashes with bosses",
+    "Balance: Resource reins it in, or Wealth takes its force"
+   ]
+  },
+  "thien-tai": {
+   "muc": [
+    {
+     "tieu_de": "What is Indirect Wealth, and where is it in a chart?",
+     "doan": "Indirect Wealth is the element the Day Master controls, with the same yin-yang; for example a Ren Day Master meeting Bing. Among the branches, Ren's Indirect Wealth sits in Si and hides in Yin. The books call it 'side wealth': money that is not regular, arriving through opportunities, deals and connections."
+    },
+    {
+     "tieu_de": "How do people with Indirect Wealth tend to earn?",
+     "doan": "It often suits income by project, commission, trading, or small investments made with care. People with a lot of Indirect Wealth notice price gaps, remember people and are good at opening a conversation. The blind spot is starting too many things at once. A tip for this week: list the payments you are waiting for and drop one you cannot keep up with."
+    },
+    {
+     "tieu_de": "What does Indirect Wealth say about father and love?",
+     "doan": "The Zi Ping books take Indirect Wealth as the father and, for men, also as a lover. So when Indirect Wealth stands out, readers often ask about the relationship with the father and about habits of spending on loved ones. This is a prompt for self-reflection, not a basis for conclusions about family members."
+    },
+    {
+     "tieu_de": "Indirect Wealth with many Companions, or in a weak chart",
+     "doan": "Many Companion stars form what the old books call 'robbing Wealth': many people sharing one portion. A weak Day Master with large Indirect Wealth is like carrying a load too heavy for you. The strength-balancing approach looks for elements that help the self; the birth-month approach asks whether Indirect Wealth forms the structure and whether an Officer guards it. Read both, then compare with real life."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which stem is Indirect Wealth for each Day Master",
+    "chu_thich": "Indirect Wealth is the element the day stem controls, with the same yin-yang. Wu is Jia's Indirect Wealth, so Chen and Xu, the two branches whose main qi is Wu, are where Jia's Indirect Wealth has roots.",
+    "cot": [
+     "Day Master",
+     "Stem that is its Indirect Wealth",
+     "Element of that stem",
+     "Branch holding that stem as main qi",
+     "Branches hiding that stem as minor qi"
+    ],
+    "dong": [
+     [
+      "Jia (Yang Wood)",
+      "Wu",
+      "Yang Earth",
+      "Chen (Dragon), Xu (Dog)",
+      "Yin (Tiger), Si (Snake), Shen (Monkey)"
+     ],
+     [
+      "Yi (Yin Wood)",
+      "Ji",
+      "Yin Earth",
+      "Chou (Ox), Wei (Goat)",
+      "Wu (Horse)"
+     ],
+     [
+      "Bing (Yang Fire)",
+      "Geng",
+      "Yang Metal",
+      "Shen (Monkey)",
+      "Si (Snake)"
+     ],
+     [
+      "Ding (Yin Fire)",
+      "Xin",
+      "Yin Metal",
+      "You (Rooster)",
+      "Chou (Ox), Xu (Dog)"
+     ],
+     [
+      "Wu (Yang Earth)",
+      "Ren",
+      "Yang Water",
+      "Hai (Pig)",
+      "Shen (Monkey)"
+     ],
+     [
+      "Ji (Yin Earth)",
+      "Gui",
+      "Yin Water",
+      "Zi (Rat)",
+      "Chou (Ox), Chen (Dragon)"
+     ],
+     [
+      "Geng (Yang Metal)",
+      "Jia",
+      "Yang Wood",
+      "Yin (Tiger)",
+      "Hai (Pig)"
+     ],
+     [
+      "Xin (Yin Metal)",
+      "Yi",
+      "Yin Wood",
+      "Mao (Rabbit)",
+      "Chen (Dragon), Wei (Goat)"
+     ],
+     [
+      "Ren (Yang Water)",
+      "Bing",
+      "Yang Fire",
+      "Si (Snake)",
+      "Yin (Tiger)"
+     ],
+     [
+      "Gui (Yin Water)",
+      "Ding",
+      "Yin Fire",
+      "Wu (Horse)",
+      "Wei (Goat), Xu (Dog)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How is Indirect Wealth different from Direct Wealth?",
+     "dap": "Both are the element the Day Master controls. Indirect Wealth has the same yin-yang: changing money and opportunities. Direct Wealth has the opposite yin-yang: steady money and effort that adds up."
+    },
+    {
+     "hoi": "Does Indirect Wealth in my chart mean I will be rich?",
+     "dap": "No. Indirect Wealth shows how a person approaches money, not how much. Whether the Day Master can carry it and keep it is the next thing to look at."
+    },
+    {
+     "hoi": "What to do with money in an Indirect Wealth year?",
+     "dap": "A year with an Indirect Wealth stem usually brings many business offers. Set aside a part first that you will not touch, and only try things you understand well."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On Wealth",
+     "nghia": "The book places Wealth among the gods used directly; Wealth is valued when it feeds the Officer and the Day Master is strong enough to carry it, and the worst worry is Companions competing for it."
+    },
+    {
+     "sach": "San Ming Tong Hui",
+     "nghia": "This Ming-dynasty compendium separates direct wealth from side wealth: one is earned by effort, the other comes from outside and rises and falls unevenly."
+    }
+   ],
+   "y_chinh": [
+    "Indirect Wealth: controlled by the day stem, same yin-yang",
+    "Money through opportunities, projects, connections",
+    "Many Companions: many people share one portion",
+    "Indirect Wealth does not mean being rich"
+   ]
+  },
+  "chinh-tai": {
+   "muc": [
+    {
+     "tieu_de": "What is Direct Wealth, and where is it in a chart?",
+     "doan": "Direct Wealth is the element the Day Master controls, but with the opposite yin-yang; for example a Jia Day Master meeting Ji. Among the branches, Jia's Direct Wealth sits in Chou and Wei (as main qi) and hides in Wu. A common image: a garden you plant yourself and harvest in season, with few surprises."
+    },
+    {
+     "tieu_de": "What does Direct Wealth say in a man's chart?",
+     "doan": "For men, the Zi Ping books take Direct Wealth as the wife star, so a clear Direct Wealth that is not contested is often read as someone who values family and looks after things well. When Direct Wealth is surrounded by Companions, the books mention shared money and divided attention. For women, Direct Wealth leans towards steady income and how money is managed."
+    },
+    {
+     "tieu_de": "Direct Wealth, work and money",
+     "doan": "Direct Wealth often suits a fixed salary, accounting, stock control, operations: places that pay for steady effort. People with a lot of Direct Wealth like clear books and dislike open debts. The blind spot is reluctance to try things and missing worthwhile chances for fear of losing money. A small step this week: set aside a little money for one new experience."
+    },
+    {
+     "tieu_de": "Direct Wealth in a strong and a weak chart",
+     "doan": "A strong Day Master with Direct Wealth is usually a fine pattern: enough strength to keep what is earned. When the Day Master is weak and Wealth is heavy, the books call it 'much Wealth, weak self': working hard but keeping little. In the strength-balancing approach, Resource or Companions are needed to support the self; in the birth-month approach, check whether Direct Wealth forms the structure and feeds the Officer."
+    },
+    {
+     "tieu_de": "A sample chart with Direct Wealth",
+     "doan": "Imagine a Bing Day Master with Xin on the month stem and You on the month branch. Xin is Bing's Direct Wealth, and You holds Xin as its main qi, so Wealth sits right in the month commander and is revealed on a stem: in the Zi Ping approach this is a Direct Wealth structure. You is an autumn month, when Bing is out of season, so look at Wood and Fire supporting the self before discussing how to keep money."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which stem is Direct Wealth for each Day Master",
+    "chu_thich": "Direct Wealth is the element the day stem controls, with the opposite yin-yang. For a yang stem, Direct Wealth is also its Five Combinations partner (Jia – Ji, Bing – Xin, Wu – Gui, Geng – Yi, Ren – Ding).",
+    "cot": [
+     "Day Master",
+     "Stem that is its Direct Wealth",
+     "Element of that stem",
+     "Branch holding that stem as main qi",
+     "Branches hiding that stem as minor qi"
+    ],
+    "dong": [
+     [
+      "Jia (Yang Wood)",
+      "Ji",
+      "Yin Earth",
+      "Chou (Ox), Wei (Goat)",
+      "Wu (Horse)"
+     ],
+     [
+      "Yi (Yin Wood)",
+      "Wu",
+      "Yang Earth",
+      "Chen (Dragon), Xu (Dog)",
+      "Yin (Tiger), Si (Snake), Shen (Monkey)"
+     ],
+     [
+      "Bing (Yang Fire)",
+      "Xin",
+      "Yin Metal",
+      "You (Rooster)",
+      "Chou (Ox), Xu (Dog)"
+     ],
+     [
+      "Ding (Yin Fire)",
+      "Geng",
+      "Yang Metal",
+      "Shen (Monkey)",
+      "Si (Snake)"
+     ],
+     [
+      "Wu (Yang Earth)",
+      "Gui",
+      "Yin Water",
+      "Zi (Rat)",
+      "Chou (Ox), Chen (Dragon)"
+     ],
+     [
+      "Ji (Yin Earth)",
+      "Ren",
+      "Yang Water",
+      "Hai (Pig)",
+      "Shen (Monkey)"
+     ],
+     [
+      "Geng (Yang Metal)",
+      "Yi",
+      "Yin Wood",
+      "Mao (Rabbit)",
+      "Chen (Dragon), Wei (Goat)"
+     ],
+     [
+      "Xin (Yin Metal)",
+      "Jia",
+      "Yang Wood",
+      "Yin (Tiger)",
+      "Hai (Pig)"
+     ],
+     [
+      "Ren (Yang Water)",
+      "Ding",
+      "Yin Fire",
+      "Wu (Horse)",
+      "Wei (Goat), Xu (Dog)"
+     ],
+     [
+      "Gui (Yin Water)",
+      "Bing",
+      "Yang Fire",
+      "Si (Snake)",
+      "Yin (Tiger)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What does Direct Wealth mean in a woman's chart?",
+     "dap": "The old books do not take Direct Wealth as a woman's husband star. For women, Direct Wealth leans towards steady income and how money is managed."
+    },
+    {
+     "hoi": "Does lacking Direct Wealth mean being poor?",
+     "dap": "No. When no Direct Wealth is revealed, it only suggests that little income comes from a regular salary; many such people earn through projects or skills. Look at the hidden stems and the luck pillars."
+    },
+    {
+     "hoi": "What is a Direct Wealth year usually like?",
+     "dap": "A year with a Direct Wealth stem usually suits money plans, paying off debts and settling into work. For men who are dating, the old books often mention family matters in this year."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On Wealth",
+     "nghia": "The book says Wealth is what the day stem controls and puts to use; it is fine because it produces the Officer, so when reading Wealth you must ask whether the self can carry it."
+    },
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "On the six relations (family)",
+     "nghia": "The section on husband and wife looks at the Wealth star (for men) together with the day pillar, weighs whether Wealth is used and whether it is contested, and only then speaks of harmony."
+    }
+   ],
+   "y_chinh": [
+    "Direct Wealth: controlled by the day stem, opposite yin-yang",
+    "Steady money, effort that adds up, clear books",
+    "For men: the old books take it as the wife star",
+    "Much Wealth, weak self: work hard, keep little"
+   ]
+  },
+  "that-sat": {
+   "muc": [
+    {
+     "tieu_de": "What is Seven Killings, and where is it in a chart?",
+     "doan": "Seven Killings is the element that controls the Day Master, with the same yin-yang; for example a Jia Day Master meeting Geng. It is called 'seven' because Geng is the seventh stem counting from Jia. Among the branches, Jia's Seven Killings sits in Shen and hides in Si. The old books also call it the Side Officer (Pian Guan): power without formal rules, direct pressure."
+    },
+    {
+     "tieu_de": "Which jobs suit Seven Killings?",
+     "doan": "Seven Killings often suits work with pressure and quick decisions: the military, rescue services, construction, sport, production management, negotiation, start-ups. People with strong Seven Killings do well with a clear goal and the right to decide. They easily feel stifled where there is little work and many meetings."
+    },
+    {
+     "tieu_de": "What does Seven Killings say in a woman's chart?",
+     "doan": "For women, the old books take Seven Killings as a lover or husband, especially when the chart has no Direct Officer. A clear Seven Killings often describes being drawn to strong, decisive partners. What is worth reflecting on is the line between strength and control in a relationship."
+    },
+    {
+     "tieu_de": "What do 'controlled' and 'transformed' Seven Killings mean?",
+     "doan": "In the Zi Ping books, Seven Killings needs to be held in check by Eating God, or transformed by Resource. Control means meeting pressure with skill and good work. Transformation means using learning and mentors to turn pressure into a ladder. A strong Day Master often suits control, a weak one transformation; compare both with real life."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which stem is Seven Killings for each Day Master",
+    "chu_thich": "Seven Killings is the element that controls the day stem, with the same yin-yang. Counting from the day stem, it is always the seventh stem (Jia → Geng, Yi → Xin…).",
+    "cot": [
+     "Day Master",
+     "Stem that is its Seven Killings",
+     "Element of that stem",
+     "Branch holding that stem as main qi",
+     "Branches hiding that stem as minor qi"
+    ],
+    "dong": [
+     [
+      "Jia (Yang Wood)",
+      "Geng",
+      "Yang Metal",
+      "Shen (Monkey)",
+      "Si (Snake)"
+     ],
+     [
+      "Yi (Yin Wood)",
+      "Xin",
+      "Yin Metal",
+      "You (Rooster)",
+      "Chou (Ox), Xu (Dog)"
+     ],
+     [
+      "Bing (Yang Fire)",
+      "Ren",
+      "Yang Water",
+      "Hai (Pig)",
+      "Shen (Monkey)"
+     ],
+     [
+      "Ding (Yin Fire)",
+      "Gui",
+      "Yin Water",
+      "Zi (Rat)",
+      "Chou (Ox), Chen (Dragon)"
+     ],
+     [
+      "Wu (Yang Earth)",
+      "Jia",
+      "Yang Wood",
+      "Yin (Tiger)",
+      "Hai (Pig)"
+     ],
+     [
+      "Ji (Yin Earth)",
+      "Yi",
+      "Yin Wood",
+      "Mao (Rabbit)",
+      "Chen (Dragon), Wei (Goat)"
+     ],
+     [
+      "Geng (Yang Metal)",
+      "Bing",
+      "Yang Fire",
+      "Si (Snake)",
+      "Yin (Tiger)"
+     ],
+     [
+      "Xin (Yin Metal)",
+      "Ding",
+      "Yin Fire",
+      "Wu (Horse)",
+      "Wei (Goat), Xu (Dog)"
+     ],
+     [
+      "Ren (Yang Water)",
+      "Wu",
+      "Yang Earth",
+      "Chen (Dragon), Xu (Dog)",
+      "Yin (Tiger), Si (Snake), Shen (Monkey)"
+     ],
+     [
+      "Gui (Yin Water)",
+      "Ji",
+      "Yin Earth",
+      "Chou (Ox), Wei (Goat)",
+      "Wu (Horse)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How is Seven Killings different from Direct Officer?",
+     "dap": "Both are the element that controls the Day Master. Direct Officer has the opposite yin-yang, so it is like rules and rank; Seven Killings has the same yin-yang, so it is like direct pressure and challenge."
+    },
+    {
+     "hoi": "What about a weak chart with heavy Seven Killings?",
+     "dap": "The books describe it as a heavy load on a small frame: easily tense and worn out by work. The strength-balancing approach looks for Resource and Companions to support the self; the birth-month approach checks for Eating God to control it or Resource to transform it."
+    },
+    {
+     "hoi": "What to do in a Seven Killings year?",
+     "dap": "A year with a Seven Killings stem usually brings many urgent tasks and demands. Break work into small steps, keep regular sleep, and ask experienced people for advice."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On the Seven Killings (Pian Guan)",
+     "nghia": "The book says Seven Killings is a strong god that must be used in reverse: controlled by Eating God it becomes authority, transformed by Resource it becomes capability; uncontrolled Killings with a weak self is heavy."
+    },
+    {
+     "sach": "Yuan Hai Zi Ping",
+     "nghia": "This old classic calls Seven Killings the Side Officer and sets it apart from the Direct Officer because yin and yang do not pair, so its pressure is more direct and stronger."
+    }
+   ],
+   "y_chinh": [
+    "Seven Killings: controls the day stem, same yin-yang",
+    "Suits pressure and quick decisions",
+    "Easier to use when controlled or transformed",
+    "For women: the old books read it as lover or husband"
+   ]
+  },
+  "chinh-quan": {
+   "muc": [
+    {
+     "tieu_de": "What is Direct Officer, and where is it in a chart?",
+     "doan": "Direct Officer is the element that controls the Day Master, with the opposite yin-yang; for example a Yi Day Master meeting Geng. Among the branches, Yi's Direct Officer sits in Shen and hides in Si. Because this control pairs yin with yang, the books treat Direct Officer as courteous authority: law, good order, titles and a good name."
+    },
+    {
+     "tieu_de": "What does Direct Officer say in a woman's chart?",
+     "doan": "For women, Direct Officer is the husband star in the Zi Ping books. A clear Direct Officer not mixed with Seven Killings is often read as someone who values a well-ordered marriage. When Officer and Killings are both strongly revealed, the books mention more complicated love lives; a modern reading sees many options and a need to be clear with yourself."
+    },
+    {
+     "tieu_de": "Which work suits Direct Officer?",
+     "doan": "Direct Officer often suits organisations with ranks: the civil service, banks, education, large companies, quality control. Direct Officer people keep their word, follow procedures and are often given positions. The blind spot is waiting for permission before acting. A tip: each week, make one small decision on your own without asking anyone."
+    },
+    {
+     "tieu_de": "Direct Officer meeting Wealth, Resource, Hurting Officer and Seven Killings",
+     "danh_sach": [
+      "Meeting Wealth: Wealth feeds the Officer, which the old books see as a smooth pattern: effort feeds a good name.",
+      "Meeting Resource: the Officer feeds Resource and Resource feeds the self: position comes with learning and mentors.",
+      "Meeting Hurting Officer: Hurting Officer controls the Officer: easy clashes with bosses; Resource or Wealth is needed to balance it.",
+      "Seven Killings also revealed: the books call it 'Officer and Killings mixed': blurred roles; pick one clear direction."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which stem is Direct Officer for each Day Master",
+    "chu_thich": "Direct Officer is the element that controls the day stem, with the opposite yin-yang. For a yin stem (Yi, Ding, Ji, Xin, Gui), Direct Officer is also its own Five Combinations partner.",
+    "cot": [
+     "Day Master",
+     "Stem that is its Direct Officer",
+     "Element of that stem",
+     "Branch holding that stem as main qi",
+     "Branches hiding that stem as minor qi"
+    ],
+    "dong": [
+     [
+      "Jia (Yang Wood)",
+      "Xin",
+      "Yin Metal",
+      "You (Rooster)",
+      "Chou (Ox), Xu (Dog)"
+     ],
+     [
+      "Yi (Yin Wood)",
+      "Geng",
+      "Yang Metal",
+      "Shen (Monkey)",
+      "Si (Snake)"
+     ],
+     [
+      "Bing (Yang Fire)",
+      "Gui",
+      "Yin Water",
+      "Zi (Rat)",
+      "Chou (Ox), Chen (Dragon)"
+     ],
+     [
+      "Ding (Yin Fire)",
+      "Ren",
+      "Yang Water",
+      "Hai (Pig)",
+      "Shen (Monkey)"
+     ],
+     [
+      "Wu (Yang Earth)",
+      "Yi",
+      "Yin Wood",
+      "Mao (Rabbit)",
+      "Chen (Dragon), Wei (Goat)"
+     ],
+     [
+      "Ji (Yin Earth)",
+      "Jia",
+      "Yang Wood",
+      "Yin (Tiger)",
+      "Hai (Pig)"
+     ],
+     [
+      "Geng (Yang Metal)",
+      "Ding",
+      "Yin Fire",
+      "Wu (Horse)",
+      "Wei (Goat), Xu (Dog)"
+     ],
+     [
+      "Xin (Yin Metal)",
+      "Bing",
+      "Yang Fire",
+      "Si (Snake)",
+      "Yin (Tiger)"
+     ],
+     [
+      "Ren (Yang Water)",
+      "Ji",
+      "Yin Earth",
+      "Chou (Ox), Wei (Goat)",
+      "Wu (Horse)"
+     ],
+     [
+      "Gui (Yin Water)",
+      "Wu",
+      "Yang Earth",
+      "Chen (Dragon), Xu (Dog)",
+      "Yin (Tiger), Si (Snake), Shen (Monkey)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Direct Officer good for a weak Day Master?",
+     "dap": "With a weak Day Master, Direct Officer easily becomes the pressure of rules. The strength-balancing approach looks for Resource to turn the Officer into support; the birth-month approach checks whether Wealth feeds the Officer and Resource protects it. Read both."
+    },
+    {
+     "hoi": "What does Direct Officer in a man's chart say about work?",
+     "dap": "For men, a clear Direct Officer is often read through work: liking a path with steps on a ladder, and valuing recognition by title more than by bonus."
+    },
+    {
+     "hoi": "What is a Direct Officer year usually like?",
+     "dap": "A year with a Direct Officer stem usually brings paperwork, reviews, promotions or new responsibilities. Prepare your documents and keep good routines."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On the Direct Officer",
+     "nghia": "The book places the Officer among the gods used directly; the Officer is fine when Wealth feeds it and Resource protects it, and its worst worry is Hurting Officer harming it."
+    },
+    {
+     "sach": "Yuan Hai Zi Ping",
+     "nghia": "The book gathers Song-dynasty rhymed formulas for reading charts; Direct Officer is discussed as the god of rank and reputation, which should be kept clear and not mixed with Seven Killings."
+    }
+   ],
+   "y_chinh": [
+    "Direct Officer: controls the day stem, opposite yin-yang",
+    "Good order, titles, a good name",
+    "Wealth feeds Officer, Officer feeds Resource: smooth",
+    "Hurting Officer meets Officer: clashes with bosses"
+   ]
+  },
+  "thien-an": {
+   "muc": [
+    {
+     "tieu_de": "What is Indirect Resource, and where is it in a chart?",
+     "doan": "Indirect Resource is the element that produces the Day Master, with the same yin-yang; for example a Geng Day Master meeting Wu. Geng's Indirect Resource sits in Chen and Xu (as main qi) and hides in Yin, Si and Shen. The old books also call it the Owl (Xiao Shen). A close picture: self-taught knowledge, a side skill, intuition, and help that comes by unofficial routes."
+    },
+    {
+     "tieu_de": "Which jobs suit Indirect Resource?",
+     "doan": "Indirect Resource often suits work that needs depth of your own: research, specialist technical work, writing, translation, the metaphysical arts, personal art. They do well when left alone with a hard problem. The blind spot is holding on to knowledge and sharing little of it for others to use."
+    },
+    {
+     "tieu_de": "Indirect Resource and learning",
+     "doan": "People with clear Indirect Resource tend to learn their own way: reading alone, studying online, learning outside their field. Degrees may come late or by an indirect route, but the understanding is deep. Something to do this week: pick one thing you are exploring and explain it to someone else in ten minutes."
+    },
+    {
+     "tieu_de": "Indirect Resource in a strong and a weak chart",
+     "doan": "With a weak Day Master, Indirect Resource is a source that gives strength. With a strong Day Master and heavy Resource, it is like pouring into a full jar: thinking a lot, doing little, finding decisions hard. In the strength-balancing approach, a strong chart needs Wealth to temper Resource; in the birth-month approach, an Indirect Resource structure worries about the Owl blocking Eating God, so check whether Wealth comes to the rescue."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which stem is Indirect Resource for each Day Master",
+    "chu_thich": "Indirect Resource is the element that produces the day stem, with the same yin-yang. Because it shares yin-yang with Eating God, Indirect Resource controls Eating God directly: the root of the pattern 'the Owl steals the Food'.",
+    "cot": [
+     "Day Master",
+     "Stem that is its Indirect Resource",
+     "Element of that stem",
+     "Branch holding that stem as main qi",
+     "Branches hiding that stem as minor qi"
+    ],
+    "dong": [
+     [
+      "Jia (Yang Wood)",
+      "Ren",
+      "Yang Water",
+      "Hai (Pig)",
+      "Shen (Monkey)"
+     ],
+     [
+      "Yi (Yin Wood)",
+      "Gui",
+      "Yin Water",
+      "Zi (Rat)",
+      "Chou (Ox), Chen (Dragon)"
+     ],
+     [
+      "Bing (Yang Fire)",
+      "Jia",
+      "Yang Wood",
+      "Yin (Tiger)",
+      "Hai (Pig)"
+     ],
+     [
+      "Ding (Yin Fire)",
+      "Yi",
+      "Yin Wood",
+      "Mao (Rabbit)",
+      "Chen (Dragon), Wei (Goat)"
+     ],
+     [
+      "Wu (Yang Earth)",
+      "Bing",
+      "Yang Fire",
+      "Si (Snake)",
+      "Yin (Tiger)"
+     ],
+     [
+      "Ji (Yin Earth)",
+      "Ding",
+      "Yin Fire",
+      "Wu (Horse)",
+      "Wei (Goat), Xu (Dog)"
+     ],
+     [
+      "Geng (Yang Metal)",
+      "Wu",
+      "Yang Earth",
+      "Chen (Dragon), Xu (Dog)",
+      "Yin (Tiger), Si (Snake), Shen (Monkey)"
+     ],
+     [
+      "Xin (Yin Metal)",
+      "Ji",
+      "Yin Earth",
+      "Chou (Ox), Wei (Goat)",
+      "Wu (Horse)"
+     ],
+     [
+      "Ren (Yang Water)",
+      "Geng",
+      "Yang Metal",
+      "Shen (Monkey)",
+      "Si (Snake)"
+     ],
+     [
+      "Gui (Yin Water)",
+      "Xin",
+      "Yin Metal",
+      "You (Rooster)",
+      "Chou (Ox), Xu (Dog)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How is Indirect Resource different from Direct Resource?",
+     "dap": "Both are the element that produces the Day Master. Direct Resource has the opposite yin-yang: formal study, the mother, clear protection. Indirect Resource has the same yin-yang: unusual knowledge, intuition, support that comes by a side road."
+    },
+    {
+     "hoi": "Why is Indirect Resource also called the Owl?",
+     "dap": "In old texts the word 'xiao' means owl; the Zi Ping books use this name for Indirect Resource pressing on Eating God and cutting off self-expression. Not every Indirect Resource carries that meaning."
+    },
+    {
+     "hoi": "What to do in an Indirect Resource year?",
+     "dap": "A year with an Indirect Resource stem usually suits learning an unusual subject, changing how you think, and resting on purpose. Watch the urge to withdraw, and keep in touch with a few close people."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On Resource (Yin Shou)",
+     "nghia": "The book groups direct and indirect Resource together, both valued because they produce the self; when using Indirect Resource, look closely at how it presses on Eating God."
+    },
+    {
+     "sach": "Yuan Hai Zi Ping",
+     "nghia": "The book gives Indirect Resource another name, Dao Shi, meaning 'overturning the bowl' of Eating God: a vivid way to describe Indirect Resource blocking Eating God."
+    }
+   ],
+   "y_chinh": [
+    "Indirect Resource: produces the day stem, same yin-yang",
+    "Self-taught, intuitive, deep in its own way",
+    "Owl steals the Food: it presses on Eating God",
+    "Strong chart, heavy Resource: think a lot, do little"
+   ]
+  },
+  "chinh-an": {
+   "muc": [
+    {
+     "tieu_de": "What is Direct Resource, and where is it in a chart?",
+     "doan": "Direct Resource is the element that produces the Day Master, with the opposite yin-yang; for example a Ding Day Master meeting Jia. Ding's Direct Resource sits in Yin and hides in Hai. The word 'yin' here originally means a seal, linked to recognised authority; common images are a diploma, a mother, a roof over your head."
+    },
+    {
+     "tieu_de": "Direct Resource, study and qualifications",
+     "doan": "Direct Resource often describes someone who learns along a set path, does well in exams and likes clear certificates. Fitting work includes education, administration, academic research, expert consulting and jobs that need long-term credibility. The blind spot is reluctance to step outside the familiar. A tip for this week: take on a small task you have never done, without needing to do it well."
+    },
+    {
+     "tieu_de": "What does Direct Resource say about the mother?",
+     "doan": "The Zi Ping books take Direct Resource as the mother, for both men and women. A clear Resource fed by the Officer is often read as having mentors and a home that is a source of support. Very heavy Resource often points to being looked after for a long time and becoming independent later. This is a prompt for self-reflection, not a statement about any particular mother."
+    },
+    {
+     "tieu_de": "What does 'Wealth breaks Resource' mean?",
+     "doan": "It is when Wealth stands close and controls Resource, so the support of study or family is crowded out by money matters. In daily life: leaving study early to start earning, or brushing aside good advice because of money worries. With a strong Day Master this pattern is mild; with a weak one leaning on Resource, the books treat it more carefully."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which stem is Direct Resource for each Day Master",
+    "chu_thich": "Direct Resource is the element that produces the day stem, with the opposite yin-yang. For example, Water feeds Wood: Jia (yang) has Gui (yin) as Direct Resource, and Yi (yin) has Ren (yang).",
+    "cot": [
+     "Day Master",
+     "Stem that is its Direct Resource",
+     "Element of that stem",
+     "Branch holding that stem as main qi",
+     "Branches hiding that stem as minor qi"
+    ],
+    "dong": [
+     [
+      "Jia (Yang Wood)",
+      "Gui",
+      "Yin Water",
+      "Zi (Rat)",
+      "Chou (Ox), Chen (Dragon)"
+     ],
+     [
+      "Yi (Yin Wood)",
+      "Ren",
+      "Yang Water",
+      "Hai (Pig)",
+      "Shen (Monkey)"
+     ],
+     [
+      "Bing (Yang Fire)",
+      "Yi",
+      "Yin Wood",
+      "Mao (Rabbit)",
+      "Chen (Dragon), Wei (Goat)"
+     ],
+     [
+      "Ding (Yin Fire)",
+      "Jia",
+      "Yang Wood",
+      "Yin (Tiger)",
+      "Hai (Pig)"
+     ],
+     [
+      "Wu (Yang Earth)",
+      "Ding",
+      "Yin Fire",
+      "Wu (Horse)",
+      "Wei (Goat), Xu (Dog)"
+     ],
+     [
+      "Ji (Yin Earth)",
+      "Bing",
+      "Yang Fire",
+      "Si (Snake)",
+      "Yin (Tiger)"
+     ],
+     [
+      "Geng (Yang Metal)",
+      "Ji",
+      "Yin Earth",
+      "Chou (Ox), Wei (Goat)",
+      "Wu (Horse)"
+     ],
+     [
+      "Xin (Yin Metal)",
+      "Wu",
+      "Yang Earth",
+      "Chen (Dragon), Xu (Dog)",
+      "Yin (Tiger), Si (Snake), Shen (Monkey)"
+     ],
+     [
+      "Ren (Yang Water)",
+      "Xin",
+      "Yin Metal",
+      "You (Rooster)",
+      "Chou (Ox), Xu (Dog)"
+     ],
+     [
+      "Gui (Yin Water)",
+      "Geng",
+      "Yang Metal",
+      "Shen (Monkey)",
+      "Si (Snake)"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Direct Resource good for a weak Day Master?",
+     "dap": "A weak Day Master with Direct Resource is usually seen as having a source of support. That is the strength-balancing approach; the birth-month approach checks whether the Officer feeds Resource and whether Wealth breaks it. Set the two side by side."
+    },
+    {
+     "hoi": "Does a lot of Direct Resource mean being dependent?",
+     "dap": "Not necessarily. Heavy Resource can get used to being looked after, but if the chart has Wealth to temper it or Output to make things, it describes someone who learns deeply and passes knowledge on."
+    },
+    {
+     "hoi": "What is a Direct Resource year good for?",
+     "dap": "A year with a Direct Resource stem usually suits studying for a qualification, sorting out paperwork, and asking a respected person for an introduction. It is also a good year to repair or tidy up your home."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Ping Zhen Quan",
+     "chuong": "On Resource (Yin Shou)",
+     "nghia": "The book says Resource is valued because it produces the self; Resource is at its best when Officer or Killings feed it, and it worries about Wealth coming to break it."
+    },
+    {
+     "sach": "Di Tian Sui",
+     "chuong": "On the six relations (family)",
+     "nghia": "The section on parents looks at the year and month pillars and reminds readers to place them in the whole chart; taking Resource as the mother is the reading of the Zi Ping books."
+    }
+   ],
+   "y_chinh": [
+    "Direct Resource: produces the day stem, opposite yin-yang",
+    "Formal study, diplomas, long-term credibility",
+    "Resource fed by the Officer: mentors who back you",
+    "Wealth breaks Resource: money crowds out study"
+   ]
+  }
+ }
+}

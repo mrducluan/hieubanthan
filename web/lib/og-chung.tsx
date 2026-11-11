@@ -28,6 +28,18 @@ async function font(ten: string): Promise<ArrayBuffer | null> {
   }
 }
 
+/** TR-5: tranh một lá Tarot (Rider–Waite 1909, JPEG 240 px trong assets/tarot) thành data URI cho ảnh chia sẻ.
+ *  Mã lá lạ / thiếu tệp → null (nơi gọi vẽ lá giấy như cũ). */
+export async function anhLaOg(id: string): Promise<string | null> {
+  if (!/^[a-z]{3,4}_[a-z0-9_]{1,12}$/.test(id)) return null;
+  try {
+    const b = await readFile(path.join(process.cwd(), "assets", "tarot", `${id}.jpg`));
+    return `data:image/jpeg;base64,${b.toString("base64")}`;
+  } catch {
+    return null;
+  }
+}
+
 /** Be Vietnam Pro (Sans) + Newsreader (Serif) — OFL, assets/fonts. Thiếu tệp → ảnh vẫn dựng bằng phông mặc định. */
 export async function napPhong() {
   const [sans, serif] = await Promise.all([font("BeVietnamPro-SemiBold.ttf"), font("Newsreader.ttf")]);

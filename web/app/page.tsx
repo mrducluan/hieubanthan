@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
-import { ArrowRight, ListChecks, Sparkles, Sun, Zap } from "lucide-react";
+import { ArrowRight, CalendarDays, CalendarRange, Layers, ListChecks, Sparkles, Sun, Zap, type LucideIcon } from "lucide-react";
 import { HinhBauTroi, HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
 import { CuaVao } from "@/components/hoso/CuaVao";
 import { DiemMuLuot } from "@/components/trang-chu/DiemMuLuot";
@@ -9,7 +9,7 @@ import { ChuNhan } from "@/components/cms/ChuNhan";
 import { AnhCmsHoac } from "@/components/cms/AnhCmsHoac";
 import { taoChu } from "@/lib/chu-trang";
 import { CO_TRANG_CHU, layCo } from "@/lib/kieu-chu";
-import { CHU_TRANG_CHU, SO_DIEM_MU } from "@/lib/chu/trang-chu";
+import { CHU_TRANG_CHU, DS_GHEP, SO_DIEM_MU } from "@/lib/chu/trang-chu";
 import { SoSanhChatbot } from "@/components/trang-chu/SoSanhChatbot";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { TEN_SITE } from "@/lib/seo";
@@ -21,9 +21,10 @@ import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 // Mô tả trang chủ ≤ 160 ký tự (mô tả site dài hơn vẫn dùng cho schema/llms.txt).
-// SEO-K (chủ dự án duyệt 2026-10-21): tiêu đề có từ khoá người ta tìm; CMS "Trang website" vẫn ghi đè được.
-const TIEU_DE_CHU = "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân";
-const MO_TA_CHU = "Thần số học và huyền học phương Đông (Tử vi, Bát tự, Kinh Dịch, Phong thuỷ): tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.";
+// SEO-N (2026-11-10, thay tiêu đề SEO-K): trang chủ đứng tên THƯƠNG HIỆU + thần số (cửa chính); "Tử vi", "Bát tự" để
+// cho trang công cụ của chính nó — trước đó trang chủ tranh từ khoá với /tu-vi, /bat-tu. CMS vẫn ghi đè được.
+const TIEU_DE_CHU = "Hiểu Bản Thân — Thần số học và huyền học online miễn phí";
+const MO_TA_CHU = "Thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot: tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.";
 const META: Metadata = {
   title: { absolute: TIEU_DE_CHU },
   description: MO_TA_CHU,
@@ -43,10 +44,13 @@ export async function generateMetadata(): Promise<Metadata> {
 // Chữ thẻ: bảng chữ trang chủ (mang.<khoa>_ten / _mo).
 const MANG: { href: string; khoa: string; kieu: KieuMang }[] = [
   { href: "/tu-vi", khoa: "tu_vi", kieu: "tu-vi" },
-  { href: "/kinh-dich", khoa: "kinh_dich", kieu: "kinh-dich" },
   { href: "/bat-tu", khoa: "bat_tu", kieu: "bat-tu" },
+  { href: "/kinh-dich", khoa: "kinh_dich", kieu: "kinh-dich" },
   { href: "/phong-thuy", khoa: "phong_thuy", kieu: "phong-thuy" },
+  { href: "/nhan-tuong", khoa: "nhan_tuong", kieu: "nhan-tuong" },
+  { href: "/tarot", khoa: "tarot", kieu: "tarot" },
 ];
+const ICON_GHEP: Record<string, LucideIcon> = { chan_dung: Layers, thoi_gian: CalendarRange, nam: CalendarDays };
 
 export default async function TrangChu() {
   const nd = await layNoiDungTrang(DUONG);
@@ -104,7 +108,7 @@ export default async function TrangChu() {
 
       <section aria-labelledby="kham-pha" className="hien-dan">
         <TieuDeMuc id="kham-pha" nho={c("mang.nho")} lon={c("mang.lon")} mo_ta={c("mang.mo_ta")} />
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
           {MANG.map(({ href, khoa, kieu }) => (
             <Link key={href} href={href} className="glass group flex flex-col rounded-2xl p-4 hover:border-gold/50 sm:p-5">
               <AnhCmsHoac anh={nd.hinh[`mang.${khoa}`]} co="nho" className="h-14 w-auto self-start object-contain sm:h-16">
@@ -119,6 +123,25 @@ export default async function TrangChu() {
         <Link href="/huyen-hoc" className="mt-4 inline-flex items-center gap-1.5 text-sm text-gold underline-offset-4 hover:underline">
           {c("mang.xem_tat_ca")} <ArrowRight className="size-4" aria-hidden />
         </Link>
+      </section>
+
+      {/* Bài đọc ghép nhiều mảng (CD-1 chân dung, NAM-2 thời gian tới, NAM-1 theo năm). */}
+      <section aria-labelledby="doc-ghep" className="hien-dan" data-testid="khoi-doc-ghep">
+        <TieuDeMuc id="doc-ghep" nho={c("ghep.nho")} lon={c("ghep.lon")} mo_ta={c("ghep.mo_ta")} />
+        <ul className="grid gap-3 md:grid-cols-3">
+          {DS_GHEP.map(({ khoa, href }) => { const Icon = ICON_GHEP[khoa] ?? Layers; return (
+            <li key={href}>
+              <Link href={href} className="glass group flex h-full items-start gap-3 rounded-2xl p-4 hover:border-gold/50 sm:p-5">
+                <Icon className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
+                <span className="min-w-0 flex-1">
+                  <span className="block font-serif text-lg">{c(`ghep.${khoa}_ten`)}</span>
+                  <span className="mt-1 block text-sm text-fg-muted">{c(`ghep.${khoa}_mo`)}</span>
+                </span>
+                <ArrowRight className="mt-1 size-4 shrink-0 text-fg-faint transition-transform group-hover:translate-x-1 group-hover:text-gold" aria-hidden />
+              </Link>
+            </li>
+          ); })}
+        </ul>
       </section>
 
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" />

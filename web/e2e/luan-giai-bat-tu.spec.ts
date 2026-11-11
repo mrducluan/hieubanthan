@@ -85,7 +85,7 @@ test("Bát tự: kiểm chứng gửi phái tu_binh + mã ds.bt.*, tỉ lệ cô
   await expect(cot.nth(1).getByTestId("ty-le-dung")).toContainText("80% trong 45 người");
   await cot.nth(2).getByRole("button", { name: "Đúng với mình" }).click();
   await expect.poll(() => goi.kiemChung!.length).toBe(1);
-  expect(goi.kiemChung![0]!.postDataJSON()).toEqual({ loai: "doi_song", mau: BC.cot_loi[2]!.ma_mau, phai: "tu_binh", ket_qua: "dung" });
+  expect(goi.kiemChung![0]!.postDataJSON()).toEqual({ loai: "doi_song", mau: BC.cot_loi[2]!.ma_mau, phai: "tu_binh", ket_qua: "dung", ngon_ngu: "vi" });
   expect(BC.cot_loi[2]!.ma_mau).toMatch(/^ds\.bt\./);
 
   const khoi = page.getByTestId("luu-bai-luan");

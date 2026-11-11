@@ -20,12 +20,15 @@ Sắc thái: chinh (nổi bật) · hop (hợp) · trung (bình thường) · nh
 nằm trong nhãn: chúng ở "Vì sao nói vậy"."""
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import functools
 import re
 
 from app.calc import phongthuy as pt
 from app.calc.lunar import CHI
 from app.kb import battu_kb, phongthuy_kb, tuvi_kb
+from app.kb.loi import L
 
 TOI_DA = 3
 NAC_DO_SANG = ("Kém sáng", "Bình", "Khá sáng", "Sáng", "Rất sáng")
@@ -83,8 +86,11 @@ def gan_khop(k: dict) -> dict:
             xem = (tuvi_kb.cung(m["nhan"]) or {}).get("xem_duoc")
             if xem:
                 m["giai_thich"] = f"Cung {m['nhan']} nói về: {xem}."
-        elif kieu == "thang" and m["nhan"] != "Bạn":
+        elif kieu == "thang" and m["nhan"] != "Bạn" and not m.get("_ban"):
             khop = [m["nhan"]]
+        elif kieu == "cot" and not ngon_ngu.la_viet():   # bản dịch: tên hành theo ngôn ngữ (nhãn vẫn là mã)
+            from app.kb import ten as _ten  # noqa: PLC0415
+            khop = [L("hoi.tq.khop_hanh", "hành {h}", h=_ten.ten("hanh", m["nhan"]))]
         elif kieu == "cot":   # "hành Kim" thay "Kim" trần — tránh khớp tên nạp âm / thần sát ("Kim Dư", "Phúc Đăng Hỏa")
             khop = _hai_kieu(*(f"hành {h}" for h in [m["nhan"], *([_HANH_KHAC[m["nhan"]]] if m["nhan"] in _HANH_KHAC else [])]))
         elif kieu == "so":
@@ -96,6 +102,7 @@ def gan_khop(k: dict) -> dict:
             khop = _hai_kieu(f"tháng {m['nhan'].split()[1]}")
         if khop:
             m["khop"] = khop
+        m.pop("_ban", None)
     return k
 
 
@@ -111,13 +118,19 @@ def _muc_mang(goi: dict) -> dict | None:
     m = next((x for x in goi["muc"] if x["loai"] == "doi_song" and x.get("muc") in _VT_MUC), None)
     if not m:
         return None
-    ten = m.get("ten_mang") or "mảng này"
-    return {"kieu": "thang", "tieu_de": f"Mảng {ten} của bạn đang ở mức nào", "nac": list(NAC_MUC),
-            "ghi_chu": "Mức đọc từ cả lá số, cùng mức với chương này trong bài luận giải; đây là gợi ý để tự soi, không phải lời phán.",
+    ten = m.get("ten_mang") or L("hoi.tq.mang_nay", "mảng này")
+    return {"kieu": "thang", "tieu_de": L("hoi.tq.mang_muc", "Mảng {ten} của bạn đang ở mức nào", ten=ten), "nac": _nac_muc(),
+            "ghi_chu": L("hoi.tq.mang_ghi_chu", "Mức đọc từ cả lá số, cùng mức với chương này trong bài luận giải; đây là gợi ý "
+                         "để tự soi, không phải lời phán."),
             "muc": [{"nhan": ten[:1].upper() + ten[1:], "vi_tri": _VT_MUC[m["muc"]], "giai_thich": m.get("tom_tat") or ""}]}
 
 
-@functools.lru_cache(maxsize=512)
+def _nac_muc() -> list[str]:
+    from app.luangiai import doi_song_khuon as _kh  # noqa: PLC0415
+    return list(NAC_MUC) if ngon_ngu.la_viet() else [_kh.nhan_muc(x) for x in ("can_chu_dong", "can_bang", "thuan")]
+
+
+@ngon_ngu.lru(maxsize=512)
 def _hinh_trang(loai: str, slug: str) -> dict | None:
     from app.kb import trang      # noqa: PLC0415 — trang.py nạp nhiều KB; chỉ cần khi câu hỏi là kiến thức chung
     t = trang.lay(loai, slug)
@@ -177,7 +190,7 @@ def _ban_cung(goi: dict, ls: dict | None, cung: str | None = None) -> dict | Non
                     "sao": [s["ten"] for s in c.get("chinh_tinh", [])][:2],
                     "sac": {"hoi": "chinh", "tam_hop": "hop", "xung": "trung"}.get(vai, "nhat")})
     return {"kieu": "cung", "tieu_de": f"Cung {cung_hoi} trên lá số của bạn", "chi_hoi": goc["chi"], "muc": muc,
-            "cau_chuan": HOI_CUNG.get(cung_hoi),
+            "cau_chuan": cau_hien(HOI_CUNG.get(cung_hoi)),
             "ghi_chu": f"Cung sáng là cung câu hỏi nhắc tới. {' và '.join(hop)} cùng một tam giác đỡ cho nó; "
                        f"{xung} nằm đối diện, chiếu sang." if hop and xung else None}
 
@@ -188,7 +201,7 @@ def hoi_tiep_tuvi(goi: dict, ls: dict | None) -> list[str]:
     if _dac_biet(goi) or not ls or not cung_hoi:
         return []
     _, hop, xung = _tam_phuong(ls, cung_hoi)
-    return [HOI_CUNG[c] for c in [*hop, xung] if c in HOI_CUNG and c != cung_hoi][:3]
+    return [cau_hien(HOI_CUNG[c]) for c in [*hop, xung] if c in HOI_CUNG and c != cung_hoi][:3]
 
 
 def tuvi(goi: dict, ls: dict | None = None) -> list[dict]:
@@ -206,14 +219,14 @@ def tuvi(goi: dict, ls: dict | None = None) -> list[dict]:
     sao = [m for m in muc if m["loai"] == "sao_cung" and m.get("vai") == "la_so" and m.get("do_sang") in _VI_TRI_SANG]
     if sao:
         ds.append({"kieu": "thang", "tieu_de": f"Sao chính ở cung {sao[0]['cung']} sáng tới đâu", "nac": list(NAC_DO_SANG),
-                   "cau_chuan": HOI_CUNG.get(sao[0]["cung"]),
+                   "cau_chuan": cau_hien(HOI_CUNG.get(sao[0]["cung"])),
                    "ghi_chu": "Sao càng sáng, nét tốt của nó càng dễ lộ ra; kém sáng thì cần chủ động hơn.",
                    "muc": [{"nhan": m["sao"], "vi_tri": _VI_TRI_SANG[m["do_sang"]],
                             "giai_thich": m.get("doi_thuong") or m.get("noi_dung") or ""} for m in sao[:3]]})
     nhip = next((m for m in muc if m["loai"] == "nhip_3_thang"), None)
     if nhip and nhip.get("thang"):
         ds.append({"kieu": "nhip", "tieu_de": "Nhịp các tháng tới",
-                   "cau_chuan": HOI_TV_THEM["ba_thang"] if goi["phan_loai"].get("y_dinh") == "ba_thang_toi" else None, "muc": [
+                   "cau_chuan": cau_hien(HOI_TV_THEM["ba_thang"] if goi["phan_loai"].get("y_dinh") == "ba_thang_toi" else None), "muc": [
             {"nhan": f"Tháng {t['thang']}{' nhuận' if t.get('nhuan') else ''}", "phu": f"{t['tu'][8:10]}/{t['tu'][5:7]}",
              "gia_tri": t["nhan_muc"], "muc_ma": t["muc"], "sac": _SAC_NHIP.get(t["muc"], "trung"),
              "giai_thich": " ".join(x for x in (t.get("tieu_de_thang"), t.get("goi_y")) if x)} for t in nhip["thang"]]})
@@ -318,11 +331,33 @@ def _phan_tram(diem: dict[str, float]) -> dict[str, int]:
 _VAI_TRU = {"năm": "gốc gác, thơ ấu", "tháng": "cha mẹ, anh em", "ngày": "bản thân, vợ chồng", "giờ": "con cái, về sau"}
 
 
+def _vai_tru(t: str) -> str:
+    return {"năm": L("hoi.tq.vai.nam", _VAI_TRU["năm"]), "tháng": L("hoi.tq.vai.thang", _VAI_TRU["tháng"]),
+            "ngày": L("hoi.tq.vai.ngay", _VAI_TRU["ngày"]), "giờ": L("hoi.tq.vai.gio", _VAI_TRU["giờ"])}[t]
+
+
+def _cc(s: str) -> str:
+    """Can chi ("Canh Ngọ") theo ngôn ngữ lượt gọi."""
+    if ngon_ngu.la_viet():
+        return s
+    from app.luangiai import battu_hien  # noqa: PLC0415
+    return " ".join(battu_hien._can_chi(x) for x in str(s).split())
+
+
+def _suc_than(kl: str) -> tuple[int, str] | None:
+    st = _SUC_THAN.get(kl)
+    if not st:
+        return None
+    return st[0], {"nhược": L("hoi.tq.suc.nhuoc", _SUC_THAN["nhược"][1]), "trung hoà": L("hoi.tq.suc.trung", _SUC_THAN["trung hoà"][1]),
+                   "vượng": L("hoi.tq.suc.vuong", _SUC_THAN["vượng"][1])}[kl]
+
+
 def battu(goi: dict, ls: dict | None = None) -> list[dict]:
     """`ls` (lá Bát tự đã tính, tuỳ chọn): câu hỏi về một mảng đời / cách cục không đưa ngũ hành vào lời trả lời, nhưng
     hình vẫn vẽ năm hành từ chính lá số đó (đợt 4) — không tính lại gì."""
     if _dac_biet(goi):
         return []
+    from app.luangiai import battu_hien  # noqa: PLC0415
     muc = goi["muc"]
     ds: list[dict] = []
     nh = next((m for m in muc if m["loai"] == "ngu_hanh"), None)
@@ -337,8 +372,9 @@ def battu(goi: dict, ls: dict | None = None) -> list[dict]:
     if tt and hoi_tru:
         tru = tt["tru"].split(" · ")
         if len(tru) == 4:
-            ds.append({"kieu": "o", "tieu_de": "Bốn trụ của bạn", "muc": [
-                {"nhan": f"Trụ {t}", "gia_tri": cc, "chu_thich": _VAI_TRU[t], "sac": "chinh" if t == hoi_tru else "trung"}
+            ds.append({"kieu": "o", "tieu_de": L("hoi.tq.bon_tru", "Bốn trụ của bạn"), "muc": [
+                {"nhan": L("hoi.tq.tru_x", "Trụ {t}", t=battu_hien._tru(t)), "gia_tri": _cc(cc), "chu_thich": _vai_tru(t),
+                 "sac": "chinh" if t == hoi_tru else "trung"}
                 for t, cc in zip(_VAI_TRU, tru)]})
     if nh:
         pt = _phan_tram(nh["diem"])
@@ -350,34 +386,39 @@ def battu(goi: dict, ls: dict | None = None) -> list[dict]:
             them = k.get("khi_thua") if sac == "chinh" else k.get("khi_thieu") if sac == "nhat" else None
             cot.append({"nhan": h, "gia_tri": pt[h], "sac": sac,
                         "giai_thich": "; ".join(x for x in (k.get("tinh_chat"), them) if x)})
-        ds.append({"kieu": "cot", "tieu_de": "Năm hành trong ngày giờ sinh", "don_vi": "%", "muc": cot,
-                   "cau_chuan": HOI_BT["ngu_hanh"] if goi["phan_loai"].get("chu_de") == "ngu_hanh" else None,
-                   "ghi_chu": "Cột cho biết hành nào nhiều, hành nào ít; nhiều chưa hẳn là hay, ít chưa hẳn là dở."})
-        st = _SUC_THAN.get((nh.get("than") or {}).get("ket_luan", ""))
+        ds.append({"kieu": "cot", "tieu_de": L("hoi.tq.nam_hanh", "Năm hành trong ngày giờ sinh"), "don_vi": "%", "muc": cot,
+                   "cau_chuan": cau_hien(HOI_BT["ngu_hanh"] if goi["phan_loai"].get("chu_de") == "ngu_hanh" else None),
+                   "ghi_chu": L("hoi.tq.cot_ghi_chu", "Cột cho biết hành nào nhiều, hành nào ít; nhiều chưa hẳn là hay, ít chưa hẳn "
+                                "là dở.")})
+        st = _suc_than((nh.get("than") or {}).get("ket_luan", ""))
         if st:
-            ds.append({"kieu": "thang", "tieu_de": "Sức tự thân", "nac": list(NAC_SUC_THAN),
-                       "cau_chuan": HOI_BT["loi_song"] if goi["phan_loai"].get("chu_de") == "loi_song" else None,
-                       "muc": [{"nhan": "Bạn", "vi_tri": st[0], "giai_thich": st[1]}]})
+            nac = list(NAC_SUC_THAN) if ngon_ngu.la_viet() else [L("hoi.tq.nac.nhe", "Nhẹ"), L("hoi.tq.nac.can_bang", "Cân bằng"),
+                                                                 L("hoi.tq.nac.manh", "Mạnh")]
+            ds.append({"kieu": "thang", "tieu_de": L("hoi.tq.suc_than", "Sức tự thân"), "nac": nac,
+                       "cau_chuan": cau_hien(HOI_BT["loi_song"] if goi["phan_loai"].get("chu_de") == "loi_song" else None),
+                       "muc": [{"nhan": L("hoi.tq.ban", "Bạn"), "vi_tri": st[0], "giai_thich": st[1], "_ban": True}]})
     dv = next((m for m in muc if m["loai"] == "dai_van" and m.get("vai") == "hien_tai"), None)
     ln = next((m for m in muc if m["loai"] == "luu_nien"), None)
     o = []
     if dv:
-        o.append({"nhan": f"10 năm ({dv['tu_nam']}–{dv['den_nam']})", "gia_tri": f"{dv['can']} {dv['chi']}",
-                  "chu_thich": dv.get("y_tt") or "", "sac": "chinh"})
+        o.append({"nhan": L("hoi.tq.muoi_nam", "10 năm ({tu}–{den})", tu=dv["tu_nam"], den=dv["den_nam"]),
+                  "gia_tri": _cc(f"{dv['can']} {dv['chi']}"), "chu_thich": dv.get("y_tt") or "", "sac": "chinh"})
     if ln:
-        o.append({"nhan": f"Năm {ln['nam']}", "gia_tri": f"{ln['can']} {ln['chi']}", "chu_thich": ln.get("y_tt") or "",
-                  "sac": "hop"})
+        o.append({"nhan": L("hoi.tq.nam_x", "Năm {nam}", nam=ln["nam"]), "gia_tri": _cc(f"{ln['can']} {ln['chi']}"),
+                  "chu_thich": ln.get("y_tt") or "", "sac": "hop"})
     if o:
-        ds.append({"kieu": "o", "tieu_de": "Bạn đang ở giai đoạn nào", "muc": o})
+        ds.append({"kieu": "o", "tieu_de": L("hoi.tq.giai_doan", "Bạn đang ở giai đoạn nào"), "muc": o})
     if mm and mm not in ds:
         ds.append(mm)
     if not ds:
         nc = next((m for m in muc if m["loai"] == "nhat_chu" and m.get("can")), None)
         th = next((m for m in muc if m["loai"] == "thap_than" and m.get("ten") and m.get("so_lan") is None), None)
+        from app.kb import ten as _ten  # noqa: PLC0415
         if nc:
-            ds = [k for k in [_khoi_trang("nhat_chu", f"nhat-chu-{_slug(nc['can'])}", f"Nhật chủ {nc['can']}")] if k]
+            ds = [k for k in [_khoi_trang("nhat_chu", f"nhat-chu-{_slug(nc['can'])}",
+                                          L("hoi.tq.nhat_chu", "Nhật chủ {can}", can=_ten.ten("can", nc["can"])))] if k]
         elif th:
-            ds = [k for k in [_khoi_trang("thap_than", _slug(th["ten"]), th["ten"])] if k]
+            ds = [k for k in [_khoi_trang("thap_than", _slug(th["ten"]), _ten.ten("thap_than", th["ten"]))] if k]
     return _cat(ds)
 
 
@@ -402,11 +443,11 @@ def thanso(goi: dict) -> list[dict]:
     for i, s in enumerate(so):
         s["sac"] = "chinh" if i == 0 else "trung"
     if so:
-        ds.append({"kieu": "so", "tieu_de": "Các con số trả lời câu này", "muc": so[:4], "cau_chuan": _cau_ts(goi)})
+        ds.append({"kieu": "so", "tieu_de": "Các con số trả lời câu này", "muc": so[:4], "cau_chuan": cau_hien(_cau_ts(goi))})
     nam = next((m for m in muc if m["loai"] == "nam_ca_nhan"), None)
     if nam and 1 <= nam["so"] <= 9:
         ds.append({"kieu": "chu_ky", "tieu_de": f"Năm {nam['nam']} trong vòng 9 năm", "so_nac": 9, "hien_tai": nam["so"],
-                   "cau_chuan": HOI_TS["nam"] if _cau_ts(goi) == HOI_TS["nam"] else None,
+                   "cau_chuan": cau_hien(HOI_TS["nam"] if _cau_ts(goi) == HOI_TS["nam"] else None),
                    "nhan_hien_tai": nam.get("chu_de") or "", "giai_thich": nam.get("y_nghia") or ""})
         if nam.get("nen") or nam.get("tranh"):
             ds.append({"kieu": "hai_cot", "tieu_de": "Năm nay nên và nên tránh",
@@ -536,7 +577,7 @@ def _khoa_pt(pl: dict) -> str | None:
 def _hoi_tiep(pl: dict, khoa: str | None, cau: dict, gan: dict, mac_dinh: tuple) -> list[str]:
     if pl.get("xu_ly") in ("an_toan", "tu_choi_nhe"):
         return []
-    return [cau[k] for k in gan.get(khoa, mac_dinh) if k != khoa][:3]
+    return [cau_hien(cau[k]) for k in gan.get(khoa, mac_dinh) if k != khoa][:3]
 
 
 def hoi_tiep_battu(pl: dict) -> list[str]:
@@ -603,5 +644,29 @@ HOI_TS = {"ban_than": "Tôi là người thế nào?", "nam": "Năm nay của t�
 
 def cau_chuan_tat_ca() -> dict[str, list[str]]:
     """Danh mục câu chuẩn theo mảng — thẻ chia sẻ chỉ được mang câu trong danh mục này (web máy chủ đối chiếu)."""
-    return {"tuvi": [*HOI_CUNG.values(), *HOI_TV_THEM.values()], "battu": list(HOI_BT.values()),
-            "phongthuy": list(HOI_PT.values()), "thanso": list(HOI_TS.values())}
+    return {"tuvi": [cau_hien(c) for c in (*HOI_CUNG.values(), *HOI_TV_THEM.values())], "battu": [cau_hien(c) for c in HOI_BT.values()],
+            "phongthuy": [cau_hien(c) for c in HOI_PT.values()], "thanso": [cau_hien(c) for c in HOI_TS.values()]}
+
+
+@ngon_ngu.lru(maxsize=1)
+def _ma_cau() -> dict[str, str]:
+    """Câu chuẩn tiếng Việt → mã mẫu câu ổn định (`hoi_chuan.<mảng>.<khoá>`). Logic so khớp bên trên vẫn dùng chữ Việt."""
+    ra: dict[str, str] = {}
+    for mang, bang in (("tuvi", HOI_CUNG), ("tuvi", HOI_TV_THEM), ("battu", HOI_BT), ("phongthuy", HOI_PT), ("thanso", HOI_TS)):
+        for k, v in bang.items():
+            ra.setdefault(v, f"hoi_chuan.{mang}.{_ma_khoa(k)}")
+    return ra
+
+
+def _ma_khoa(k: str) -> str:
+    import unicodedata  # noqa: PLC0415
+    k = unicodedata.normalize("NFD", k.replace("Đ", "D").replace("đ", "d"))
+    return re.sub(r"[^a-z0-9]+", "_", "".join(c for c in k if unicodedata.category(c) != "Mn").lower()).strip("_")
+
+
+def cau_hien(cau: str | None) -> str | None:
+    """EN-ALL: câu chuẩn ở ĐẦU RA theo ngôn ngữ lượt gọi (bản Việt trả nguyên chữ)."""
+    if not cau:
+        return cau
+    ma = _ma_cau().get(cau)
+    return L(ma, cau) if ma else cau

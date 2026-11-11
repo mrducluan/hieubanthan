@@ -11,11 +11,14 @@ là dữ kiện TÍNH được, không phải văn sinh thêm:
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import re
 
 from app.calc import tuvi_do_sang_vn as ds_vn
 from app.calc import tuvi_vi_tri as vt
 from app.calc.tuvi_luu_nguyet import TU_HOA
+from app.kb import nap
 
 _HOA = ("Lộc", "Quyền", "Khoa", "Kỵ")
 _SANG = ("Miếu", "Vượng", "Đắc")
@@ -43,6 +46,7 @@ def _ds_ten(ds: list[str]) -> str:
     return ", ".join(ds[:-1]) + " và " + ds[-1] if len(ds) > 1 else (ds[0] if ds else "")
 
 
+@ngon_ngu.theo_viet
 def ds_sao_cung() -> list[tuple[tuple[str, str], str]]:
     t, kb = _t(), _kb()
     return [((sao, cung), f"{t._slug(sao)}-cung-{t._slug(cung)}")
@@ -173,8 +177,10 @@ def noi_y_bo_sung() -> dict[str, list[tuple[str, object]]]:
     return {m["id"]: n for m in _ybs() if (n := _noi_mot(m))}
 
 
+@nap.nho
 def y_cho_trang(loai: str, k) -> list[dict]:
-    """Ý bổ sung của một trang (≤ 3 ý mỗi nhóm hiển thị, theo thứ tự KB)."""
+    """Ý bổ sung của một trang (≤ 3 ý mỗi nhóm hiển thị, theo thứ tự KB). Nhớ theo (loại, khoá): mục lục KB gọi cho ~670 trang,
+    mỗi lần duyệt 171 ý × mọi trang (`_noi_mot`) — lần gọi thứ hai của `trang.danh_sach()` từng mất 0,3–0,5 s (CI đỏ 2026-11-09)."""
     ra = {"hop": [], "goc_nhin_khac": []}
     for m in _ybs():
         if (loai, k) in _noi_mot(m) and len(ra[m["hien_thi"]]) < _TOI_DA_Y:
@@ -437,6 +443,7 @@ def _slug_hoa(h: str) -> str:
     return f"hoa-{_t()._slug(h)}"
 
 
+@ngon_ngu.theo_viet
 def ds_hoa_cung() -> list[tuple[tuple[str, str], str]]:
     t, kb = _t(), _kb()
     return [((h, cung), f"{_slug_hoa(h)}-cung-{t._slug(cung)}")

@@ -35,6 +35,10 @@ const buoi = (n: number) => (n === 1 ? "một buổi sáng" : `${n} buổi sáng
 export function loiTongKet(tk: TongKet, tenHuyHieu: (ma: string) => string): string[] {
   const cau: string[] = [`Tháng ${tk.thang} bạn ghé Hôm nay ${buoi(tk.so_ngay)}.`];
   if (tk.so_la > 0) cau.push(tk.so_la === 1 ? "Bạn đã lật một lá bài đầu ngày." : `Bạn đã lật ${tk.so_la} lá bài đầu ngày.`);
+  // BT-UI đợt 2: lá Tarot riêng đã gặp trong tháng (nhật ký máy). Có lá lặp lại → nêu lá gặp nhiều nhất; không thì kể tên ≤ 3 lá.
+  const tr = tk.tarot ?? [];
+  if (tr.length && tr[0]!.lan >= 2) cau.push(`Lá Tarot bạn gặp nhiều nhất: ${tr[0]!.ten} (${tr[0]!.lan} lần).`);
+  else if (tr.length) cau.push(`Lá Tarot bạn đã gặp: ${tr.slice(0, 3).map((x) => x.ten).join(", ")}${tr.length > 3 ? ` và ${tr.length - 3} lá khác` : ""}.`);
   if (tk.du_9) cau.push("Bạn đã đi qua đủ 9 nhịp ngày cá nhân trong tháng.");
   else if (tk.so_khac >= 5) cau.push(`Bạn đã đi qua ${tk.so_khac} nhịp ngày cá nhân khác nhau.`);   // không "x trong 9" — phân số thành áp lực
   const hh = tk.huy_hieu_moi.filter((m) => !HUY_HIEU_KHONG_NEU.has(m)).map(tenHuyHieu);

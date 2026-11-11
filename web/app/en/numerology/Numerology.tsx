@@ -5,13 +5,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/input";
-import { HoiEn, type TraLoiEn } from "@/components/en/HoiEn";
+import { KhungChat, type KetQuaHoi } from "@/components/hoi/KhungChat";
+import type { TraLoiEn } from "@/lib/en/api";
 import { postEn } from "@/lib/en/api";
 import { hoTen, useProfileEn, type ProfileEn } from "@/lib/en/hoso";
 import type { LuanGiaiResult, MatChanDung, ViTriLuanGiai } from "@/lib/engine";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 
+/** EN-ALL: lời đáp engine (bản Anh) → dạng khung hỏi đáp chung. */
+const sangKetQua = (d: TraLoiEn): KetQuaHoi => ({ van: d.cau_tra_loi, canCu: d.can_cu, hoiTiep: d.hoi_tiep });
+const CHU_THICH_HOI = "Answers are assembled from a sourced knowledge base, not written by an AI, and are not predictions. Your question is sent only to compute the answer and is not stored with your name.";
 const THANG = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const GOI_Y = ["What does my Life Path number say about me?", "How do I tend to behave in love?", "How does my number show up at work?", "What is my personal year about?", "What is this month about for me?"];
 type Loai = "name" | "nickname" | "day" | "month" | "year" | "method";
@@ -155,7 +159,11 @@ export function Numerology() {
       <div className="flex flex-wrap items-center gap-3 text-sm text-fg-muted" data-testid="dong-ho-so-en">
         <span><b className="text-fg">{p.name}</b> · born {p.day} {THANG[p.month - 1]} {p.year}</span>
         <button type="button" onClick={() => setSua(true)} className="text-gold hover:underline">Edit</button>
-        <button type="button" onClick={() => { setP(null); setBc(null); }} className="text-fg-faint hover:text-fg" data-testid="nut-xoa-en">Clear from this browser</button>
+        <button type="button" onClick={() => {
+          // Hồ sơ dùng chung hai ngôn ngữ: xoá ở đây xoá cả bản Việt (lá số người thân, chuỗi ngày ghé) → hỏi lại trước.
+          if (!window.confirm("This removes your profile from this browser for both the English and the Vietnamese site, together with saved family members and your daily streak. Continue?")) return;
+          setP(null); setBc(null);
+        }} className="text-fg-faint hover:text-fg" data-testid="nut-xoa-en">Clear from this browser</button>
       </div>
       {loi && <p role="alert" className="rounded-xl bg-cinnabar/10 p-4 text-sm text-cinnabar">{loi}</p>}
       {!bc && !loi && <div className="glass h-60 animate-pulse rounded-2xl" aria-busy />}
@@ -192,8 +200,9 @@ export function Numerology() {
             </section>
           )}
           <section aria-labelledby="ask"><h2 id="ask" className="mb-3 text-2xl">Ask about your numbers</h2>
-            <HoiEn moDun="thanso" goiY={GOI_Y} loiChao="Ask about yourself, love, work, money, family, well-being, this year or this month. Answers come from your own numbers and the knowledge base — tendencies to check, not predictions."
-              gui={(q) => postEn<TraLoiEn>("/api/thanso/hoi", { ...body, cau_hoi: q })} /></section>
+            <KhungChat moDun="thanso" goiY={[{ nhom: "Suggestions", cau: GOI_Y }]} loiChao="Ask about yourself, love, work, money, family, well-being, this year or this month. Answers come from your own numbers and the knowledge base — tendencies to check, not predictions."
+              gui={(q) => postEn<TraLoiEn>("/api/thanso/hoi", { ...body, cau_hoi: q }).then(sangKetQua)} />
+            <p className="mt-3 text-xs text-fg-faint">{CHU_THICH_HOI}</p></section>
           <p className="text-xs text-fg-faint">{bc.trich_nguon_chung}</p>
         </>
       )}

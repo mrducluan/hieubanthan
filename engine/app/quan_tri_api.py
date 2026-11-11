@@ -55,3 +55,67 @@ def soan_nhap(vao: SoanNhapVao) -> dict:
 @router.post("/kiem-dinh")
 def kiem_dinh(vao: KiemDinhVao) -> dict:
     return {"ket_qua": [quan_tri_ai.kiem_dinh(m.moi, m.cu) for m in vao.muc]}
+
+
+# ---------------------------------------------------------------- HTT-1: lệch tỉ lệ "Đúng với mình" theo ngôn ngữ
+class DongTyLe(BaseModel):
+    mau: str = Field(pattern=r"^[a-z0-9_.+-]{3,60}$")
+    ngon_ngu: str = Field(pattern=r"^[a-z]{2}(-[a-z]{2,4})?$")
+    dung: int = Field(ge=0, le=100_000_000)
+    chua_dung: int = Field(ge=0, le=100_000_000)
+
+
+class LechNgonNguVao(BaseModel):
+    dong: list[DongTyLe] = Field(default_factory=list, max_length=10_000)
+    toi_thieu: int = Field(default=100, ge=10, le=100_000)
+    delta: float = Field(default=0.15, ge=0.01, le=0.9)
+
+
+@router.post("/lech-ngon-ngu")
+def lech_ngon_ngu(vao: LechNgonNguVao) -> dict:
+    """Web máy chủ đọc `ty_le_kiem_chung_ngon_ngu()` (migration 0034) rồi gửi số vào đây; engine chỉ tính (không chạm DB),
+    trả danh sách mã lệch cho NGƯỜI DUYỆT — không sửa gì."""
+    from app.luangiai import lech_ngon_ngu as ln  # noqa: PLC0415
+    return ln.quet([d.model_dump() for d in vao.dong], toi_thieu=vao.toi_thieu, delta=vao.delta)
+
+
+class SoanLaiLechVao(BaseModel):
+    """HTT-2 H6 — soạn lại NHÁP bản dịch cho một mã hộp bị lệch theo ngôn ngữ (khung "Lệch theo ngôn ngữ" ở /quan-tri/hoc)."""
+    ma: str = Field(pattern=r"^ds\.[a-z0-9_]+(\.[a-z0-9_+-]+)+$", max_length=60)
+    ngon_ngu: Literal["en"] = "en"
+
+
+@router.post("/soan-lai-lech")
+def soan_lai_lech(vao: SoanLaiLechVao) -> dict:
+    """Suy cụm KB từ mã → máy chuyển ngữ QT-0 ba lượt chỉ trên cụm đó → nháp cho người duyệt mở PR (web, QT-1). Không ghi
+    KB, không trừ lượt AI của người dùng (quản trị). Thiếu khoá AI → 503."""
+    from app.chuyen_ngu import soan_lai  # noqa: PLC0415
+    from app.narrative.ai_goi import goi_chat  # noqa: PLC0415
+    if not os.environ.get("OPENROUTER_API_KEY"):
+        raise HTTPException(503, detail="Chưa cấu hình khoá AI cho máy chuyển ngữ")
+    mo_hinh = os.environ.get("CHUYEN_NGU_MODEL")
+
+    def goi(messages, **kw):
+        return goi_chat(messages, mo_hinh=mo_hinh, nho=False, tru_luot=False, het_gio=120, **kw)
+
+    try:
+        return soan_lai.soan_lai(vao.ma, vao.ngon_ngu, goi=goi)
+    except Exception as e:  # noqa: BLE001 — lỗi mạng / JSON của máy chuyển ngữ → báo gọn, không lộ chi tiết nhà cung cấp
+        raise HTTPException(502, detail=f"Máy chuyển ngữ chưa trả nháp ({type(e).__name__})") from e
+
+
+# ---------------------------------------------------------------- Ý4: thước "đồng thuận liên môn" cho người duyệt
+@router.api_route("/dong-thuan", methods=["GET", "POST"])
+def dong_thuan() -> dict:
+    """Bảng Tử vi–Bát tự cùng mức theo mảng trên lá số mẫu (`kb/data/dong_thuan_thong_ke.json`, sinh bằng
+    scripts/dong_thuan_lien_mon.py — engine chỉ đọc) + ngưỡng gợi ý cho người duyệt. Chưa có tệp → `co: false`."""
+    from app.luangiai import dong_thuan_thong_ke as dtk  # noqa: PLC0415
+    d = dtk.doc()
+    if not d:
+        return {"co": False, "nguong": dtk.NGUONG, "mang": {}}
+    return {"co": True, "nguong": dtk.NGUONG, "ngay": d.get("ngay"), "n": d.get("n"), "nguon_la": d.get("nguon_la"),
+            "mang": {m: {**t, "ten": CD_TEN_MANG.get(m, m)} for m, t in d["mang"].items()}}
+
+
+CD_TEN_MANG = {"cong_viec": "Công việc", "tien_bac": "Tiền bạc", "tinh_cam": "Tình cảm", "gia_dinh": "Gia đình",
+               "suc_khoe": "Sức khoẻ", "nam_nay": "Năm nay"}

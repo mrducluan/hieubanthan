@@ -1,5 +1,7 @@
 // MT-ĐS B3 — "Xem sao hạn theo tuổi": công cụ (năm sinh + giới tính từ hồ sơ trên máy) + link bảng theo năm. Tập quán,
 // miễn phí, không nghi lễ, không vật phẩm; lời ở KB sao_han_kb.json (engine), web chỉ hiển thị.
+import { TomTatNam } from "@/components/seo/TomTatNam";
+import { namTuoiSeo } from "@/lib/nam";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
@@ -13,11 +15,11 @@ import { CHU_SAO_HAN } from "@/lib/chu/cong-cu";
 import { taoChu } from "@/lib/chu-trang";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return apDungSeo(metaTrang({ tieuDe: "Xem sao hạn năm nay theo tuổi: La Hầu, Kế Đô, Thái Bạch…", moTa: ND_SAO_HAN.moTa, duong: ND_SAO_HAN.duong }), await layNoiDungTrang(ND_SAO_HAN.duong));
+  return apDungSeo(metaTrang({ tieuDe: "Xem sao hạn theo tuổi: La Hầu, Kế Đô, Thái Bạch", moTa: ND_SAO_HAN.moTa, duong: ND_SAO_HAN.duong }), await layNoiDungTrang(ND_SAO_HAN.duong));
 }
 
 export default async function Page() {
-  const [nam, nd] = await Promise.all([namAmHienTai(), layNoiDungTrang(ND_SAO_HAN.duong)]);
+  const [nam, nd, namSeo] = await Promise.all([namAmHienTai(), layNoiDungTrang(ND_SAO_HAN.duong), namTuoiSeo()]);
   const c = taoChu(CHU_SAO_HAN, nd.chu);
   return (
     <TrangCongCu duong={ND_SAO_HAN.duong}>
@@ -25,6 +27,7 @@ export default async function Page() {
         <TieuDeTrang nho={CHU_SAO_HAN["dau.nhan_tren"]!.mac_dinh} lon="Xem sao hạn theo tuổi"
           mo_ta="Năm nay bạn gặp sao nào theo tục xếp theo tuổi — đọc bằng lời đời thường và việc nhỏ nên làm. Không cúng sao, không vật phẩm." />
         <CongCuTuoi kieu="sao_han" namMacDinh={nam} />
+        <TomTatNam kieu="sao_han" nam={namSeo} tieuDe={`Sao hạn năm ${namSeo}: tuổi nào gặp La Hầu, Kế Đô, Thái Bạch?`} nhanLink={`Bảng sao hạn năm ${namSeo} cho mọi tuổi, nam và nữ`} />
         <section aria-labelledby="theo-nam" className="mt-8">
           <h2 id="theo-nam" className="text-xl">{c("theo_nam.tieu_de")}</h2>
           <ul className="mt-2 space-y-1 text-sm">

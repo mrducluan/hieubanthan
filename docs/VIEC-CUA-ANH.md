@@ -3,7 +3,122 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-10-27 (rà toàn bộ — bảng tổng ngay dưới).
+> Cập nhật lần cuối: 2026-11-11 (KW-6T mục 4ap; trước đó BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4ap. KW-6T — kế hoạch từ khoá blog 6 tháng (2026-11-11, `docs/KE-HOACH-TU-KHOA-SEO-6-THANG.md`)
+
+- [ ] Đọc Google Sheet "Hieuban — Kế hoạch từ khoá SEO 6 tháng" (Drive của anh) → duyệt / bỏ bài ở tab "Từ khoá & bài viết", cột "Trạng thái".
+- [ ] **Sửa 24 bài cũ đã có sẵn trong migration CMS `kw6t_bai_cu`** — merge PR rồi để Vercel deploy dự án CMS (migration chạy lúc build).
+  Sau deploy: Vercel (dự án CMS) → Logs → tìm `KW-6T:` — mỗi bài "xong" hoặc lý do (vd "có bản nháp đang sửa — không đè":
+  mở bài đó, xuất bản hoặc bỏ bản nháp, rồi báo em chạy lại). Kiểm nhanh: `/blog/xem-hop-doi-xem-tinh-yeu-boi-tinh-yeu-boi-nguoi-do-doc-sao-cho-tinh-tao`
+  phải chuyển sang `/blog/xem-hop-doi-theo-ngay-sinh-doc-sao-cho-tinh-tao`; `/blog/tu-vi-ly-so-la-gi-cach-hieu-la-so-va-kiem-tra-du-lieu-sinh`
+  chuyển sang `/blog/tu-vi-la-gi-cau-truc-la-so-cach-doc-va-gioi-han`. Muốn trả lại như cũ: `payload migrate:down` (khôi phục bản trước).
+- [ ] Đọc lại 24 bài khi rảnh (ghi chú "KW-6T" trong "Ghi chú của Chủ biên" nói rõ máy đã sửa gì); thấy ổn bấm Xuất bản → "Đã duyệt".
+- [ ] Search Console → Kiểm tra URL → Yêu cầu lập chỉ mục cho 3 đường dẫn mới (hợp đôi, hợp sếp, Kinh Dịch hay Bát tự).
+- [ ] **Hạn chót 10/1/2027**: 15 bài cụm Tết 2027 (C8) đã xuất bản.
+- [ ] Nối Search Console + GA4 của hieuban.com vào NotFair, hoặc gửi CSV Truy vấn + Trang 3 tháng → em thay lượng tìm ước lượng bằng số thật.
+- [ ] (Tuỳ chọn) Cho phép `trends.google.com` trong mạng môi trường để em kiểm xu hướng 12 tháng của 88 từ khoá.
+- [ ] (Quyết định) Có mở cụm chiêm tinh / cung hoàng đạo (cần làm công cụ trước) hay chỉ giữ 1–2 bài cầu nối.
+
+### 4ao. SEO-O — ảnh tóm tắt + nội dung dày cho trang năm, lịch & tuổi (2026-11-10, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 6)
+
+- [ ] **Deploy engine TRƯỚC web** (route mới `/v1/lich/cac-nam`, trường `le` / `so_ngay` của `/v1/lich/nam`). Web cũ / engine cũ vẫn chạy được: thiếu dữ liệu thì bảng / ảnh tự ẩn.
+- [ ] Sau deploy, Search Console → Kiểm tra URL → **Yêu cầu lập chỉ mục** cho: `/lich-am`, `/lich-am/2027`, `/nam`, `/nam/2027`, `/xem-tuoi-lam-nha`, `/xem-tuoi-lam-nha/2027`, `/tuoi-xong-dat`, `/tuoi-xong-dat/2027`, `/xem-sao-han`, `/xem-sao-han/2027`, `/doi-lich-am-duong`, `/xem-ngay-tot`.
+- [ ] 2–4 tuần sau: Search Console → Hiệu suất → loại tìm kiếm **Hình ảnh**, lọc trang chứa `/og/tom-tat` để xem ảnh tóm tắt có được hiển thị không.
+
+### 4an. TR-5 — Tarot: tranh lá thật + flow hỏi mới (2026-11-10)
+
+- [ ] **Deploy engine trước web** (bộ bài thêm `goi_y_hoi`, `tu_khoa_nguoc`). Web lên trước thì hàng chip câu hỏi mẫu tự ẩn, không vỡ.
+- [x] (3 phút) `/tarot` trên điện thoại: bấm chip "Nhảy việc" → câu mẫu → "Xáo bài · rút 5 lá" → "Rút giúp tôi" → lật một lá
+  thấy nghĩa ngay → lật hết tự vào bài đọc; dải "Ý nghĩa từng lá" chạm được.
+- [x] Đọc 24 câu hỏi mẫu (`engine/app/kb/data/tarot_kb.json` → `goi_y_hoi`, sửa được ở `/quan-tri` Kho tri thức) — đổi câu nào
+  chưa hợp giọng anh muốn.
+- [x] (Pháp lý, tuỳ chọn) Tranh lá là bản in 1909 đã hết bản quyền (ghi ở `docs/NGUON-MO.md`); nếu luật sư muốn chắc hơn, có
+  phương án dự phòng tranh nét đen trắng từ sách Waite 1910 — báo em đổi.
+- [x] (Quyết định, sau 2 tuần có số) Áp cùng flow cho Kinh Dịch: chip việc hay hỏi + thẻ "Quẻ của bạn nói gì" ngay sau khi gieo
+  (`docs/NANG-CAP-TAROT.md` mục 11).
+
+### 4am. BLOG-10 — bài NotFair mới tự xuất bản khi đạt điểm (2026-11-10)
+
+- [ ] **Gộp nhánh + để Vercel deploy CMS**: migration `blog_10_xuat_ban_notfair` chạy lúc build — tự nhập mọi bài NotFair
+  còn thiếu (gồm "Quẻ Kinh Dịch Mai Hoa…" 10/11) + mọi nháp NotFair chưa từng xuất bản, vẽ ảnh mới, điền nguồn, xuất bản bài
+  ≥ 85 điểm. Xem kết quả: Vercel (dự án **CMS**) → Deployments → bản mới → Build Logs → tìm `BLOG-10:` (mỗi bài một dòng
+  "xuất bản (N điểm)" hoặc "giữ nháp: lý do").
+- [ ] Bài "giữ nháp" (nếu có): mở bài trong CMS, đọc "Ghi chú của Chủ biên" (dòng `BLOG-10: chưa tự xuất bản: …`), sửa rồi
+  bấm Xuất bản — hoặc gửi em tên bài để em sửa nội dung.
+- [ ] Sau 8:03 sáng: Vercel (dự án web) → Logs → tìm `[cron hang-ngay] blog` — mỗi bài có `xuat_ban: true` hoặc `ly_do`
+  (điểm thấp, trùng nội dung, kho ảnh lỗi). Bài không tự lên vẫn nằm ở bảng điều khiển CMS "Bài NotFair mới chờ đọc".
+- [ ] Bài máy tự xuất bản vẫn ghi "Gửi duyệt": anh đọc lại khi rảnh, sửa rồi bấm Xuất bản là thành "Đã duyệt"; bài có vấn đề
+  thì Bỏ xuất bản.
+- [ ] (Tuỳ chọn) Env dự án **CMS**: `NOTFAIR_TU_XUAT_BAN_DIEM` (mặc định 85, 50–100) để nới / siết ngưỡng;
+  `NOTFAIR_TU_XUAT_BAN=0` để quay về chỉ nhập nháp như trước.
+
+### 4ak. BT-UI — Bản thân, Hôm nay, Ba lá của ngày (2026-11-10, `docs/DE-XUAT-BAN-THAN-HOM-NAY.md`) — deploy ENGINE trước web
+
+- [ ] **Deploy engine trước web** (trường mới `ba_la` ở `/v1/thanso/hom-nay`, trang `ban_than` ở `/v1/goi-y-cheo`). Web lên trước thì
+  Hôm nay vẫn hiện Lá bài đầu ngày cũ và khối "Bảy cách nhìn" tự ẩn — không vỡ trang, tự đúng khi engine xong.
+- [ ] **Render → `hieubanthan-engine-sg` → Environment: thêm `LA_NGAY_MUOI`** = một chuỗi ngẫu nhiên ≥ 16 ký tự (vd lấy từ
+  trình tạo mật khẩu, 32 ký tự), giữ bí mật. Có biến này thì lá Tarot riêng mới hiện trên thẻ chia sẻ "Ba lá"; chưa đặt thì
+  thẻ vẽ lá Tarot úp (vẫn chia sẻ được, không lộ gì). Đặt xong mọi người đổi lá riêng một lần — nên đặt ngay lúc deploy.
+- [ ] (3 phút) `/hom-nay`: lật đủ ba lá → "Ba lá ghép lại" → "Chia sẻ ba lá" → mở link thẻ trên máy khác, "Tải ảnh" có QR.
+  Xem chip "Giờ tốt sắp tới" có đúng với giờ hiện tại không; mở thử một mục "Đọc thêm".
+- [ ] (2 phút) `/ban-than`: hai cột đầu trang cao bằng nhau; "Chia sẻ thẻ" trên thẻ hồ sơ hiện QR; khối "Bảy cách nhìn về bạn"
+  có đủ tám ô, ô thiếu dữ liệu bấm ra bảng Sửa hồ sơ.
+- [ ] (Tuỳ chọn) CMS → Trang website `/hom-nay` → "Chữ trên trang": tiêu đề khối mới "Ba lá của ngày" sửa được ở đó.
+- [x] **Chạy migration 0036** (`supabase/migrations/0036_push_tuan_cua_toi.sql`, sau 0035): mốc Web Push "Sáng thứ Hai: tuần này
+  của bạn". Chưa chạy thì ô tích mới báo "Chưa lưu được", cron bỏ qua — không vỡ gì. Chạy xong: Hôm nay → Bật nhắc → tích
+  "Sáng thứ Hai: tuần này của bạn" (cần hồ sơ đã lưu vào tài khoản); thứ Hai kế tiếp xem log cron có `tuan_cua_toi ≥ 1`,
+  bấm thông báo phải mở Hôm nay đúng mục "Tuần này của bạn". Deploy engine trước web (route mới `/v1/push/tuan`).
+- [ ] (Đợt 2, sau deploy — engine trước web) `/hom-nay` → "Đọc thêm": mở "Tuần này của bạn" (bảy ô + ngày đáng để ý) và
+  "Hôm nay của hai người" (cần đã lưu một người thân ở `/tu-vi` → "Xem lá số 2 người"); `/ban-than`: bấm "Mặt sau: thẻ 5 mảnh ghép".
+- [ ] (Quyết định) Gửi "Tuần của tôi" qua thông báo sáng thứ Hai: cần migration mới thêm một mốc vào tuỳ chọn nhắc — báo em nếu
+  anh muốn làm.
+
+### 4al. SEO-N — trang dịch vụ đứng tên từ khoá + thương hiệu (2026-11-10, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md`)
+
+- [ ] **CMS → Trang website**: mở `/`, `/tu-vi`, `/bat-tu`, `/kinh-dich`… — nếu ô "Tiêu đề SEO" / H1 đã có chữ anh tự nhập thì chữ đó vẫn thắng mặc định mới; xoá trống (hoặc sửa theo bảng trong tài liệu) để dùng tiêu đề mới.
+- [ ] **Search Console → Kiểm tra URL** cho `https://hieuban.com/` và 7 trang dịch vụ (`/tu-vi`, `/bat-tu`, `/than-so`, `/kinh-dich`, `/phong-thuy`, `/nhan-tuong`, `/tarot`) → "Yêu cầu lập chỉ mục" sau khi deploy (để Google đọc tiêu đề mới sớm).
+- [ ] Sau 2–4 tuần: Hiệu suất → truy vấn chứa "tử vi" → tab Trang: `/tu-vi` phải nhận phần lớn hiển thị thay cho trang chủ. Gửi em file xuất nếu chưa đổi.
+- [x] 6 đề xuất SEO-N — mục 1–5 đã làm (SEO-N2, 10/11).
+- [ ] (Quyết định, 19–26/11) **Q-I3 cache HTML**: xem Thống kê thu thập → thời gian phản hồi trung bình; > 1.000 ms thì chọn cách A ở `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 4.3 (bỏ nonce riêng trang kiến thức), < 600 ms thì giữ nguyên.
+- [ ] **Liên kết ngoài**: bài trên fanpage / diễn đàn / bài khách trỏ thẳng `https://hieuban.com/tu-vi` (chữ "xem tử vi online", "lá số tử vi"), `/bat-tu`, `/than-so` — không trỏ hết về trang chủ.
+- [ ] Đặt env `MXH_FACEBOOK`, `MXH_YOUTUBE`… (Vercel, dự án web) cho các kênh thật → Google nối thương hiệu "hieuban" với site, dễ hiện sitelinks.
+- [ ] Sau 4 tuần: Search Console → Hiệu suất → Truy vấn, gửi em file xuất để đối chiếu bảng từ khoá (mục 4.1) với số thật.
+
+### 4aj. HTT-3 — Ý1–Ý7 + QC `/en` (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9) — deploy ENGINE trước web
+
+- [x] **Chạy migration 0035** (`supabase/migrations/0035_push_thang_hai_la_so.sql`, sau 0034): mốc Web Push "Đầu tháng — hai lá số
+  cùng nói". Chưa chạy thì ô tích mới không ghi được (DB từ chối giá trị), cron bỏ qua mốc này.
+- [ ] Sau deploy + 0035: Hôm nay → Bật nhắc → tích "Đầu tháng: Tử vi và Bát tự cùng thấy gì" (cần lá số đủ giờ + giới tính + nơi sinh
+  trong tài khoản) → ngày 1/12 kiểm log Vercel cron `hang-ngay` có `thang_hai_la_so ≥ 1` và điện thoại nhận một thông báo.
+- [ ] **Search Console**: thêm property URL-prefix `https://hieuban.com/en/` (tách số bản Anh); gửi `https://hieuban.com/sitemap-en.xml`.
+- [ ] Sau deploy, kiểm nhanh `/en`: `https://hieuban.com/en/khong-co` ra trang 404 tiếng Anh; `view-source:/en/tarot/cards/the-fool`
+  có `hreflang="vi"` trỏ `/tarot/la-bai/chang-kho` và `og:image` chứa `lang=en`; mở với trình duyệt Mỹ (Accept-Language en-US) thấy
+  `<html lang="en-US">`.
+- [ ] Sau deploy: form hồ sơ chọn "Sinh ở nước ngoài → Úc → Sydney" thấy dòng gợi ý hai công tắc; trang
+  `https://hieuban.com/sinh-o-nuoc-ngoai/au` hiện bảng giờ mùa hè + lịch âm lệch.
+- [ ] Người duyệt (rành Tử vi + Bát tự) đọc `docs/CHAN-DUNG-TONG-HOP.md` mục 6: trên 1.000 lá mẫu hai lá số cùng mức đúng bằng ngẫu
+  nhiên → quyết sửa lời hộp "cùng thấy" và ngưỡng "cùng thấy" của Chân dung tổng hợp (em không tự sửa lời luận).
+- [ ] Chốt mảng tiếng Anh tiếp theo: em đề xuất Kinh Dịch (`/en/i-ching`, nguồn Legge 1882) trước Bát tự — khác thứ tự QTE-1 mục 2.
+- [ ] Sau 8 tuần có phiếu `/en`: xem `/quan-tri/hoc` → "Lệch theo ngôn ngữ" cột "So với" để biết bản phủ `en-us` có khác bản en không.
+
+### 4ai. Hybrid Two-Tier → HTT-1 (2026-11-09, `docs/DANH-GIA-HYBRID-TWO-TIER.md`) — deploy ENGINE trước web
+
+- [x] **Chạy migration 0034** (`supabase/migrations/0034_kiem_chung_ngon_ngu.sql`, sau 0033): phiếu "Đúng với mình" mang ngôn ngữ
+  trang; chưa chạy thì phiếu vẫn ghi như cũ, chỉ chưa có khung "Lệch theo ngôn ngữ" ở `/quan-tri/hoc`.
+- [x] ~~Quyết H1 / H5 / H6~~ — anh duyệt 2026-11-09, đã làm trong HTT-2 (`docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 7).
+- [ ] **Bật công tắc "AI diễn đạt lại hộp giao thoa"** (`/quan-tri/cai-dat` → nhóm "Điểm giao thoa", mặc định tắt) khi hộp
+  `ds.giao_thoa.*` có ≥ 30 phiếu "Đúng với mình" (xem `/quan-tri/hoc`); chỉ bản Việt, tốn lượt AI.
+- [ ] **H6 cần khoá AI trên engine** (đã có `OPENROUTER_API_KEY`; tuỳ chọn `CHUYEN_NGU_MODEL`) + `QUAN_TRI_GITHUB_TOKEN` trên web
+  (đã có từ QT-1). Nút "Soạn lại nháp" chỉ có việc khi khung "Lệch theo ngôn ngữ" có mã (cần 0034 + ≥ 100 phiếu /en mỗi mã).
+- [ ] Sau deploy: hồ sơ sinh ở **Sydney / Melbourne / Auckland** → `/bat-tu` → "Lá số chi tiết" → khung Trường phái có dòng
+  "Mùa nơi sinh"; chọn "Mùa thực nơi sinh" thì hành điều hậu đổi (Thủy ↔ Hỏa), tứ trụ giữ nguyên. Hồ sơ Tokyo / Việt Nam không có dòng này.
+- [x] ~~Chọn ý tưởng tiếp theo trong `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 8 (Ý1–Ý7)~~ — anh duyệt làm cả bảy 2026-11-09 (HTT-3, mục 4aj).
+- [ ] Người bản xứ duyệt `engine/app/kb/data/en/giao_thoa_kb.json` (`_trang_thai: bien_tap`) cùng đợt với các tệp `en/` khác.
+- [ ] Đã kiểm 8 QID Wikidata qua API (5 QID trong tài liệu Drive sai thực thể) — không cần anh làm gì; nếu anh muốn thêm thực thể
+  khác (vd Chaldea, Lạc Thư) thì báo em tra.
+- [ ] Sau deploy: thử `/tu-vi` → "Hiển thị" → khung Trường phái → "Giờ sinh: Theo mặt trời thực" với hồ sơ sinh ở tỉnh xa kinh tuyến
+  105° (Điện Biên, Cà Mau) hoặc thành phố nước ngoài → lá số an lại, chip "Giờ mặt trời thực".
 
 ### 4ah. Bản tiếng Anh `/en` — Tarot · Thần số · hỏi đáp (QTE-3, 2026-11-09) — deploy ENGINE trước web
 

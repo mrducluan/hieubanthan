@@ -113,6 +113,11 @@ def tu_khoa(*khoa) -> dict | list:
     return x if x is not None else {}
 
 
+def goi_y_hoi() -> list[dict]:
+    """TR-5: chip "chuyện hay hỏi" + câu hỏi mẫu (bấm là điền vào ô hỏi). Bản ngôn ngữ khác tắt bằng `null` → rỗng."""
+    return list(_lay("goi_y_hoi") or [])
+
+
 def cum_cam() -> list[str]:
     return list(_lay("cum_cam") or [])
 

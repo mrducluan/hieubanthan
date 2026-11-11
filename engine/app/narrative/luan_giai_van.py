@@ -50,6 +50,29 @@ kiện, dự đoán hay lời khuyên nào không có trong đó.
 - Không chào hỏi, không tiêu đề, không kết luận chung chung ngoài đoạn gốc."""
 
 
+# H5-en: lời nhắc cho bản tiếng Anh — cùng ràng buộc (chỉ diễn đạt lại, không thêm dữ kiện, không giọng phán, không cụm sáo).
+_SYSTEM_EN = """You are an editor, NOT a fortune-teller. You receive ONE chapter of a {mo_dun} reading: a title and the body \
+paragraphs (`doan`) already chosen by the system from a sourced knowledge base. Rewrite ONLY that body as one flowing piece, \
+ABOUT THE SAME LENGTH as the original (never more than 1.5×; a short original means a short piece), in 1–3 paragraphs. \
+Highlight boxes and "Why we say this" are kept separately by the system — do not write or mention them.
+
+VOICE: plain, everyday English, as a friend who knows the subject; short sentences; address the reader as "you"; keep any \
+everyday example the original has. No technical terms unless the original uses them.
+
+HARD RULES:
+- Use ONLY ideas present in the given paragraphs. Add no numbers, years, ages, card names, star names, events, predictions \
+or advice that are not there.
+- Keep both the bright side and the SHADOW SIDE / caution if the original has them; keep each caution with its suggested \
+step; keep any self-check question.
+- No verdict voice: never "you will", "certainly", "destined", "your fate".
+- Do NOT use these phrases (empty or frightening): {cum_cam}.
+- No greeting, no title, no generic conclusion beyond the original.
+- Nothing here is medical, legal or financial advice; if the original says so, keep that sentence."""
+_CUM_CAM_EN_LOI_NHAC = ["guaranteed", "accurate prediction", "doomed", "cursed", "you will die", "delve into", "tapestry",
+                        "testament to", "beacon of", "unlock your potential", "in conclusion", "embark on", "game-changer",
+                        "it is important to note", "destined to", "inevitable", "bad omen"]
+
+
 def _cum_cam() -> list[str]:
     from app.kb import tuvi_doi_song_kb
     return tuvi_doi_song_kb.cum_cam()
@@ -60,6 +83,9 @@ def kiem_tra_chuong(van: str, nguon: str) -> list[str]:
     cả viết bằng chữ, thuật ngữ lạ theo từ điển 5 mảng + bảng Tử vi / Bát tự, cụm cấm, từ y tế, câu ý mới, độ dài)."""
     from app.narrative import kiem_ai  # noqa: PLC0415
     loi: list[str] = kiem_ai.kiem(van, nguon)
+    from app import ngon_ngu  # noqa: PLC0415
+    if not ngon_ngu.la_viet():
+        return loi                               # H5-en: danh mục Việt bên dưới (tên sao, cụm cấm KB Việt) không áp cho bản Anh
     con_lai = van                                # thuật ngữ riêng Tử vi / Bát tự (phụ tinh, thập thần…) ngoài từ điển
     for t in _thuat_ngu():
         if t in con_lai:
@@ -80,10 +106,15 @@ def _goi_llm(tieu_de: str, doan: list[str], mo_dun: str) -> str:
     # EN-4: một hàm gọi AI chung; RL-1 mỗi chương một lượt (chương đã diễn đạt cùng gói → nhớ, không tốn lượt).
     # max_tokens theo độ dài nguồn (bản AI ≤ ~1,5 lần nguồn; tiếng Việt ~2–3 ký tự / token).
     from app.narrative import ai_goi  # noqa: PLC0415
-    ten = {"tuvi": "Tử vi", "battu": "Bát tự"}.get(mo_dun, mo_dun)
+    from app import ngon_ngu  # noqa: PLC0415
+    en = not ngon_ngu.la_viet()
+    ten = ({"tuvi": "Zi Wei astrology", "battu": "Four Pillars", "giao_thoa": "cross-check", "tarot": "tarot", "thanso": "numerology"}
+           if en else {"tuvi": "Tử vi", "battu": "Bát tự"}).get(mo_dun, mo_dun)
     nguon = len(tieu_de) + sum(len(d) for d in doan)
+    he_thong = (_SYSTEM_EN.format(mo_dun=ten, cum_cam="; ".join(f'"{c}"' for c in _CUM_CAM_EN_LOI_NHAC)) if en
+                else _SYSTEM.format(mo_dun=ten, cum_cam="; ".join(f'"{c}"' for c in _cum_cam())))
     return ai_goi.goi_chat(
-        [{"role": "system", "content": _SYSTEM.format(mo_dun=ten, cum_cam="; ".join(f'"{c}"' for c in _cum_cam()))},
+        [{"role": "system", "content": he_thong},
          {"role": "user", "content": json.dumps({"chuong": tieu_de, "doan": doan}, ensure_ascii=False)}],
         nhiet_do=0.4, max_tokens=max(250, min(1200, nguon * 3 // 4)), het_gio=40,
         kiem=lambda v: kiem_tra_chuong(v.strip(), "\n".join([tieu_de, *doan]))).strip()

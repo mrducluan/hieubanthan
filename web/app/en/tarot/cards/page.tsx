@@ -3,11 +3,13 @@ import type { Metadata } from "next";
 import Lien from "@/components/khung/Lien";
 import { MatTruoc } from "@/components/tarot/LaBai";
 import { engineEn, slugLa } from "@/lib/en/engine";
-import { metaEn } from "@/lib/en/seo";
+import { ldDuongDanEn, metaEn } from "@/lib/en/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { urlDayDu } from "@/lib/seo";
 import type { BoBai } from "@/lib/tarot-chung";
 
 export const metadata: Metadata = metaEn({
-  title: "All 78 tarot cards: meanings upright and reversed, in love, work and money",
+  title: "78 tarot card meanings: upright, reversed, love, work, money",
   description: "The 22 Major Arcana and 56 Minor Arcana (Wands, Cups, Swords, Pentacles) with plain-English meanings from Waite 1910 and Mathers 1888, keywords, and one thing to do.",
   path: "/en/tarot/cards", vi: "/tarot/la-bai",
 });
@@ -24,6 +26,9 @@ export default async function Page() {
   const la = r.data.thu_tu.map((id) => r.data.la[id]!).filter(Boolean);
   return (
     <div className="mx-auto max-w-5xl">
+      <JsonLd data={ldDuongDanEn([{ ten: "Tarot", duong: "/en/tarot" }, { ten: "78 cards", duong: "/en/tarot/cards" }])} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: "All 78 tarot cards", inLanguage: "en", url: urlDayDu("/en/tarot/cards"),
+        mainEntity: { "@type": "ItemList", numberOfItems: la.length, itemListElement: la.slice(0, 78).map((x, i) => ({ "@type": "ListItem", position: i + 1, name: x.en, url: urlDayDu(`/en/tarot/cards/${slugLa(x.en)}`) })) } }} />
       <header className="mb-8"><p className="eyebrow">Tarot reference</p><h1 className="mt-2 font-serif text-4xl">All 78 tarot cards</h1>
         <p className="mt-3 max-w-3xl text-fg-muted">Each card has its upright and reversed meaning, how it reads in love, work, money and daily rhythm, and one small thing to do — written in plain English from public-domain sources (Waite 1910, Mathers 1888, Book T). <Lien href="/en/tarot" className="text-gold hover:underline">Draw your own spread</Lien>.</p></header>
       {NHOM.map(([ten, mo, loc]) => (

@@ -1,7 +1,9 @@
 // Proxy mỏng web → engine cho route handler: giữ ENGINE key phía server, không tự tính gì.
 import { NextResponse } from "next/server";
+import { LA_MA_EN } from "@/lib/ngon-ngu";
 import type { ZodTypeAny } from "zod";
 import { baoLoi } from "@/lib/giam-sat";
+import { ganNgonNgu } from "@/lib/engine-ngon-ngu";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
@@ -34,8 +36,28 @@ export function dauNguoiGoi(req: Request): Record<string, string> {
 
 /** QTE: ngôn ngữ của lượt gọi (trang /en gửi `x-ngon-ngu: en`) → chuyển tiếp nguyên header tới engine; giá trị lạ bỏ qua. */
 export function dauNgonNgu(req: Request): Record<string, string> {
-  const nn = req.headers.get("x-ngon-ngu");
-  return nn === "en" ? { "x-ngon-ngu": "en" } : {};
+  const nn = (req.headers.get("x-ngon-ngu") ?? "").toLowerCase();
+  return LA_MA_EN.test(nn) ? { "x-ngon-ngu": nn } : {};
+}
+
+/** EN-ALL mục 6.1: bản Anh chưa có cổng thanh toán quốc tế → miễn phí, nhưng CHỈ cho mảng đã mở tiếng Anh (header do
+ *  trình duyệt gửi, giả được — miễn phí rộng hơn thì người dùng bản Việt chỉ cần gửi header là đọc hết chương khoá).
+ *  Mở thêm mảng tiếng Anh = thêm mã vào đây. Người gửi header giả chỉ nhận bản TIẾNG ANH của đúng mảng đã mở miễn phí. */
+export const MO_DUN_MIEN_PHI_EN = {
+  luan_giai: new Set(["battu"]),
+  hoi: new Set(["battu", "thanso"]),
+} as const;
+
+export function mienPhiBanAnh(req: Request, loai: keyof typeof MO_DUN_MIEN_PHI_EN, moDun: string): boolean {
+  return Boolean(dauNgonNgu(req)["x-ngon-ngu"]) && MO_DUN_MIEN_PHI_EN[loai].has(moDun);
+}
+
+/** EN-ALL việc 5: ngôn ngữ của một lượt gọi route GET có đệm — header `x-ngon-ngu` HOẶC `?ngon_ngu=` (trình duyệt nên dùng
+ *  query: bộ đệm CDN khoá theo URL). Trả đường dẫn engine đã gắn ngôn ngữ (bản Việt giữ nguyên) + header kèm theo. */
+export function engineTheoReq(req: Request, duong: string): { duong: string; dau: Record<string, string> } {
+  let nn = (req.headers.get("x-ngon-ngu") ?? "").toLowerCase();
+  if (!LA_MA_EN.test(nn)) { try { nn = (new URL(req.url).searchParams.get("ngon_ngu") ?? "").toLowerCase(); } catch { nn = ""; } }
+  return ganNgonNgu(duong, LA_MA_EN.test(nn) ? nn : "vi");
 }
 
 /** Gọi engine với dữ liệu ĐÃ kiểm (dùng chung cho goiEngine và các route cần xử lý thêm, vd trừ Sao). */

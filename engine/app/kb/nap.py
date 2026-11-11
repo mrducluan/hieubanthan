@@ -28,7 +28,7 @@ from app import ngon_ngu
 
 DATA = Path(__file__).parent / "data"
 _KHOA = threading.Lock()
-_NHO: dict[tuple[str, str], Any] = {}
+_NHO: dict[tuple[str, str, str | None], Any] = {}
 
 
 def duong(ten: str, ngon_ngu_: str | None = None) -> Path:
@@ -65,7 +65,8 @@ def doc(ten: str) -> Any:
     """JSON của tệp KB `ten` theo ngôn ngữ hiện tại (nhớ theo tệp + ngôn ngữ). Tệp gốc không có → FileNotFoundError
     như `read_text` (module gọi tự quyết bắt hay không — giữ hành vi cũ)."""
     nn = ngon_ngu.hien_tai()
-    k = (ten, nn)
+    bt = ngon_ngu.bien_the()          # Ý7: "en-us"… chồng lên bản phủ ngôn ngữ (vi → en → en-us)
+    k = (ten, nn, bt)
     try:
         return _NHO[k]
     except KeyError:
@@ -75,6 +76,10 @@ def doc(ten: str) -> Any:
         p = duong(ten, nn)
         if p.exists():
             goc = gop(goc, _doc_tho(p))
+        if bt:
+            pb = duong(ten, bt)
+            if pb.exists():
+                goc = gop(goc, _doc_tho(pb))
     with _KHOA:
         _NHO.setdefault(k, goc)
     return _NHO[k]
@@ -102,7 +107,7 @@ def nho(fn: Callable) -> Callable:
 
     @wraps(fn)
     def boc(*a, **kw):
-        k = (ngon_ngu.hien_tai(), a, tuple(sorted(kw.items())))
+        k = (ngon_ngu.hien_tai(), ngon_ngu.bien_the(), a, tuple(sorted(kw.items())))
         try:
             return kho[k]
         except KeyError:

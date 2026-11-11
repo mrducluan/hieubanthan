@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from app.kb import nap
+from app.kb.loi import L
 
 THU_MUC = Path(__file__).resolve().parent / "data"
 LOAI = ("thap_than", "nhat_chu", "nam_ca_nhan", "no_nghiep", "tinh_yeu", "nghe", "so", "so_kep", "cap_so", "hoa_cung",
@@ -36,10 +37,16 @@ def _nguon(td: dict) -> str:
 # Tên sách chữ Hán trong `source` của KB gốc ↔ tên Việt dùng trong trích dẫn — gộp để mục "Nguồn" không lặp một sách.
 _HAN_VIET = {"子平真詮": "Tử Bình Chân Thuyên", "滴天髓": "Trích Thiên Tuỷ", "淵海子平": "Uyên Hải Tử Bình",
              "三命通會": "Tam Mệnh Thông Hội", "窮通寶鑑": "Cùng Thông Bảo Giám"}
+# EN-ALL GĐ 3: mã mẫu câu của tên sách — bản Anh dùng tên pinyin (khớp `sach` trong bản phủ `en/bo_sung_*.json`).
+_MA_SACH = {"子平真詮": "zpcq", "滴天髓": "ttt", "淵海子平": "uhtb", "三命通會": "tmth", "窮通寶鑑": "ctbg"}
+
+
+def _ten_sach(han: str) -> str:
+    return L(f"trang.sach.{_MA_SACH[han]}", _HAN_VIET[han])
 
 
 def _goc_sach(s: str) -> str:
-    s = _HAN_VIET.get(s.strip(), s)
+    s = _ten_sach(s.strip()) if s.strip() in _HAN_VIET else s
     return s.split(",")[0].split(" (")[0].replace("’", "'").strip().lower()
 
 
@@ -47,7 +54,7 @@ def _gop_nguon(cu: list[str], td: list[dict]) -> list[str]:
     """Nguồn gốc của trang + sách trích dẫn; sách đã có ở bản trích dẫn (kèm chương) thì bỏ dòng tên trống trùng sách."""
     moi = [_nguon(x) for x in td]
     co = {_goc_sach(x) for x in moi}
-    giu = [(f"{_HAN_VIET[x]} ({x})" if x in _HAN_VIET else x) for x in cu if _goc_sach(x) not in co]
+    giu = [(f"{_ten_sach(x)} ({x})" if x in _HAN_VIET else x) for x in cu if _goc_sach(x) not in co]
     return list(dict.fromkeys([*giu, *moi]))
 
 
@@ -64,12 +71,14 @@ def ap(t: dict) -> dict:
         them.append({"tieu_de": b["tieu_de"], **({"doan": b["chu_thich"]} if b.get("chu_thich") else {}),
                      "bang": {"cot": b["cot"], "dong": b["dong"]}, **({"bien_tap": True} if bien_tap else {})})
     if bs.get("trich_dan"):
-        them.append({"tieu_de": "Sách xưa nói gì", "trich_dan": bs["trich_dan"],
+        them.append({"tieu_de": L("trang.sach_xua", "Sách xưa nói gì"), "trich_dan": bs["trich_dan"],
                      **({"bien_tap": True} if bien_tap else {})})
     # Thêm sau nội dung gốc; nếu mục cuối là "Câu hỏi tự soi" thì chèn trước nó để tự soi vẫn đứng cuối bài.
     # (Không chèn giữa các mục gốc — thứ tự mục gốc giữ nguyên.)
     muc = list(t["muc"])
-    i = len(muc) - 1 if muc and muc[-1]["tieu_de"].lower().startswith("câu hỏi tự soi") else len(muc)
+    cuoi = muc[-1]["tieu_de"].lower() if muc else ""
+    tu_soi = cuoi.startswith("câu hỏi tự soi") or cuoi == L("trang.tu_soi", "Câu hỏi tự soi").lower()
+    i = len(muc) - 1 if tu_soi else len(muc)
     t["muc"] = muc[:i] + them + muc[i:]
     co = {h["hoi"].strip().lower() for h in t["hoi_dap"]}
     t["hoi_dap"] = t["hoi_dap"] + [{**h, **({"bien_tap": True} if bien_tap else {})}

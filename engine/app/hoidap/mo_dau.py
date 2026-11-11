@@ -13,7 +13,10 @@ trong đoạn mở đầu (không lặp).
 from __future__ import annotations
 
 import re
+import unicodedata
 
+from app import ngon_ngu as _nn
+from app.kb.loi import L
 from app.luangiai.hoi import _co
 
 # (mã, nhãn đời thường, mảng, mẫu trên câu đã chuẩn hoá — bỏ dấu, mở viết tắt). Thứ tự: cụ thể trước, chung sau.
@@ -318,8 +321,29 @@ def dieu_hoi(t: str, raw: str | None = None, chuong: str | None = None) -> dict 
         kem = next((d for d in ds if d is not d0 and d["mang"] != d0["mang"] and d.get("nhan_ro")
                     and d["nhan_ro"].removeprefix("chuyện ") not in d0["nhan_ro"]), None)
         if kem:
-            d0 = {**d0, "nhan_ro": f"{d0['nhan_ro']} và {kem['nhan_ro'].removeprefix('chuyện ')}"}
+            d0 = {**d0, "nhan_ro": f"{d0['nhan_ro']} và {kem['nhan_ro'].removeprefix('chuyện ')}",
+                  "_ro0": d0["nhan_ro"], "_kem": kem["nhan_ro"]}
     return d0
+
+
+def _ma_nhan(s: str) -> str:
+    s = unicodedata.normalize("NFD", s.replace("Đ", "D").replace("đ", "d"))
+    return re.sub(r"[^a-z0-9]+", "_", "".join(c for c in s if unicodedata.category(c) != "Mn").lower()).strip("_")
+
+
+def nhan_hien(dieu: dict | None) -> str | None:
+    """Nhãn hiển thị của điều được hỏi theo ngôn ngữ lượt gọi (bản Việt: `nhan_ro` hoặc `nhan` nguyên chữ). Mẫu tiếng Anh
+    theo mã điều hỏi (`hoi.dh.<mã>`) và theo nhãn rõ (`hoi.dhr.<nhãn>`) — vẫn là danh mục cố định."""
+    if not dieu:
+        return None
+    if _nn.la_viet():
+        return dieu.get("nhan_ro") or dieu.get("nhan")
+    if dieu.get("_kem"):
+        return L("hoi.dh.va", "{a} và {b}", a=L("hoi.dhr." + _ma_nhan(dieu["_ro0"]), dieu["_ro0"]),
+                 b=L("hoi.dhr." + _ma_nhan(dieu["_kem"]), dieu["_kem"]))
+    if dieu.get("nhan_ro"):
+        return L("hoi.dhr." + _ma_nhan(dieu["nhan_ro"]), dieu["nhan_ro"])
+    return L("hoi.dh." + dieu["ma"], dieu["nhan"]) if dieu.get("ma") else dieu.get("nhan")
 
 
 # Mảng của điều được hỏi → chương báo cáo đời sống (Tử vi / Bát tự); một số mã có chương riêng.
@@ -390,13 +414,15 @@ def ve_mang(mang: str) -> str:
     """"Về chuyện đi lại" / "Về chuyện tình cảm" — nhãn đoạn mở đầu theo mảng của câu lo (KB `chu_y_kb`)."""
     from app.kb import chu_y_kb as cykb  # noqa: PLC0415
     t = cykb.ten(mang)
+    if not _nn.la_viet():
+        return L("hoi.md.ve", "Về {nhan}", nhan=t)
     return f"Về {t}" if t.startswith("chuyện") else f"Về chuyện {t}"
 
 
 def dau_cau(dieu: dict | None, mac_dinh: str, moc: str | None = None) -> str:
     """"Về {điều được hỏi}{, mốc}" — nhãn từ danh mục cố định; không nhận ra thì dùng `mac_dinh` (tên mảng)."""
-    nhan = (dieu or {}).get("nhan_ro") or (dieu or {}).get("nhan") or mac_dinh
-    return f"Về {nhan}" + (f" {moc}" if moc else "")
+    nhan = nhan_hien(dieu) or mac_dinh
+    return L("hoi.md.ve_moc", "Về {nhan} {moc}", nhan=nhan, moc=moc) if moc else L("hoi.md.ve", "Về {nhan}", nhan=nhan)
 
 
 # ---------------------------------------------------------------- đặt lên đầu, bỏ lặp
@@ -432,30 +458,69 @@ def so_la(mo: str | None, goi: dict) -> list[int]:
     return [int(n) for n in re.findall(r"\d+", mo or "") if int(n) not in duoc]
 
 
-def dat_dau(van: str, mo: str | None, goi: dict | None = None) -> str:
+def dat_dau(van: str, mo: str | None, goi: dict | None = None, khoa: tuple | None = None) -> str:
     """Đặt đoạn mở đầu `mo` lên đầu `van`. Đoạn mở đầu TÓM các đoạn nó lấy chữ: câu (≥ 6 chữ) đã có nguyên văn trong
     `mo` bị bỏ ở phần dưới (không lặp); phần còn lại của đoạn đã tóm (chi tiết) dời xuống cuối thân bài, trước phần
     chân (tự soi, lưu ý, lời tham khảo) — các đoạn chưa nói tới giữ thứ tự ngay sau đoạn mở đầu. Không có `mo` → giữ
-    nguyên."""
-    if not mo or not van or (goi is not None and so_la(mo, goi)):
+    nguyên.
+
+    EN-ALL: `khoa` (lượt "bản Việt quyết", `doi_song_khuon.quyet`) — bản dịch theo đúng quyết định của bản Việt: có đặt
+    đoạn mở đầu không, mỗi đoạn đi về đâu (thân / dời xuống / chân / bỏ); câu đã nói trong đoạn mở đầu so trên chữ của
+    chính ngôn ngữ đó. Số đoạn hai bản khác nhau → bản dịch tự xếp như bản Việt."""
+    dat = bool(mo and van and not (goi is not None and so_la(mo, goi)))
+    q = None
+    if khoa is not None:
+        from app.luangiai import doi_song_khuon as _dsk  # noqa: PLC0415
+        q = _dsk.quyet
+        dat = q(khoa + ("dat",), dat)
+    if not dat or not mo or not van:
         return van
     da = _chuan(mo)
+    doan = van.split("\n\n")
+    xep = _xep_doan(doan, da)
+    if q is not None:
+        vx = q(khoa + ("xep",), xep)
+        xep = vx if len(vx) == len(xep) else xep
     than, sau, chan = [], [], []
-    for p in van.split("\n\n"):
+    for p, (dich, tom) in zip(doan, xep):
+        if dich is None:
+            continue
+        if tom:
+            p = _phan_con(p, da)
+            if p is None:
+                continue
+        {"than": than, "sau": sau, "chan": chan}[dich].append(p)
+    return "\n\n".join([mo, *than, *sau, *chan])
+
+
+def _phan_con(p: str, da: str) -> str | None:
+    """Phần còn lại của đoạn sau khi bỏ câu đã nói trong đoạn mở đầu (None: không còn gì đáng giữ)."""
+    moi = " ".join(c for c in _cac_cau(p) if not _da_noi(c, da)).strip()
+    if not moi or re.fullmatch(r"[^.!?]{0,80}[:—]", moi) or len(moi.split()) < 4:
+        return None
+    return moi
+
+
+def _xep_doan(doan: list[str], da: str) -> list[tuple[str | None, bool]]:
+    """Mỗi đoạn → (đích: "than" | "sau" | "chan" | None = bỏ, có bị tóm bớt câu không)."""
+    ra: list[tuple[str | None, bool]] = []
+    co_chan = False
+    for p in doan:
         if any(re.match(m, p) for m in _CHAN):
-            chan.append(p)
+            co_chan = True
+            ra.append(("chan", False))
             continue
         cac = _cac_cau(p)
         giu = [c for c in cac if not _da_noi(c, da)]
         if len(giu) == len(cac):
-            (than if not chan else chan).append(p)   # đoạn chưa nói tới: giữ nguyên (cả xuống dòng bên trong)
+            ra.append(("chan" if co_chan else "than", False))   # đoạn chưa nói tới: giữ nguyên (cả xuống dòng bên trong)
             continue
-        moi = " ".join(giu).strip()
-        if not moi or re.fullmatch(r"[^.!?]{0,80}[:—]", moi) or len(moi.split()) < 4:
+        if _phan_con(p, da) is None:
+            ra.append((None, True))
             continue
         # đoạn bị tóm phần lớn (≥ một nửa số câu) → phần chi tiết còn lại xuống dưới; tóm ít → giữ chỗ
-        (sau if len(cac) - len(giu) >= len(cac) / 2 else (than if not chan else chan)).append(moi)
-    return "\n\n".join([mo, *than, *sau, *chan])
+        ra.append(("sau" if len(cac) - len(giu) >= len(cac) / 2 else ("chan" if co_chan else "than"), True))
+    return ra
 
 
 # ---------------------------------------------------------------- câu không dựng đoạn mở đầu
@@ -473,8 +538,11 @@ DONG_CAM_QH = ("Chuyện bạn đang trải qua rất nặng lòng. Không lá s
 
 def dong_cam(dieu: dict | None) -> str:
     """Câu đồng cảm cho câu khủng hoảng quan hệ; gọi tên điều được hỏi (nhãn danh mục) khi nhận ra."""
-    nhan = (dieu or {}).get("nhan_ro") or ((dieu or {}).get("nhan") if (dieu or {}).get("mang") == "tinh_cam" else None)
-    return DONG_CAM_QH if not nhan else DONG_CAM_QH.replace("Chuyện bạn đang", hoa(nhan) + " bạn đang", 1)
+    d = dieu or {}
+    if not (d.get("nhan_ro") or (d.get("nhan") if d.get("mang") == "tinh_cam" else None)):
+        return L("hoi.md.dong_cam", DONG_CAM_QH)
+    nhan = nhan_hien(d if d.get("nhan_ro") else {k: v for k, v in d.items() if k != "nhan_ro"})
+    return L("hoi.md.dong_cam_nhan", "{nhan}" + DONG_CAM_QH[len("Chuyện"):], nhan=hoa(nhan))
 
 
 def khong_mo(t: str) -> bool:
@@ -542,42 +610,46 @@ def _ly_do(ds: dict) -> str:
 
 
 def _nam_txt(sn: dict) -> tuple[str, str]:
+    from app.hoidap.chung import can_chi_hien  # noqa: PLC0415
     ds = sn["nam"]
-    moc = "năm " + " và ".join(str(x["nam"]) for x in ds)
-    cac = [f"năm {x['nam']} ({x['can_chi']}) {x['nhan_muc'].lower()}" for x in ds]
-    s = "mức chung của " + ", ".join(cac)
+    moc = L("hoi.md.moc_nam", "năm {ds}", ds=L("hoi.md.va_noi", " và ").join(str(x["nam"]) for x in ds))
+    cac = [L("hoi.md.nam_muc", "năm {nam} ({cc}) {muc}", nam=x["nam"], cc=can_chi_hien(x["can_chi"]), muc=x["nhan_muc"].lower())
+           for x in ds]
+    s = L("hoi.md.muc_chung", "mức chung của {ds}", ds=", ".join(cac))
     if len(ds) >= 2:
         thu = {"thuan": 2, "can_bang": 1, "can_chu_dong": 0}
         muc = {thu.get(x["muc"], 1) for x in ds}
         if len(muc) > 1:
             tot = max(ds, key=lambda x: thu.get(x["muc"], 1))
-            s += f" — năm {tot['nam']} nhỉnh hơn"
+            s += L("hoi.md.nhinh", " — năm {nam} nhỉnh hơn", nam=tot["nam"])
         else:
-            s += " — hai năm ngang nhau"
+            s += L("hoi.md.ngang", " — hai năm ngang nhau")
     return moc, s
 
 
 def _ngu_hanh_cau(muc: list[dict]) -> tuple[str, str]:
     """Bát tự: (câu dữ kiện ngũ hành, việc bù hành thiếu) từ mục `ngu_hanh` + `hanh` đã có trong gói."""
+    from app.kb import ten as _ten  # noqa: PLC0415
     nh = next((m for m in muc if m.get("loai") == "ngu_hanh"), None)
     if not nh:
         return "", ""
-    s = f"tứ trụ của bạn nhiều nhất hành {nh['nhieu_nhat']}"
+    s = L("hoi.md.nh.nhieu", "tứ trụ của bạn nhiều nhất hành {h}", h=_ten.ten("hanh", nh["nhieu_nhat"]))
     if nh.get("thieu"):
-        s += f", thiếu hẳn hành {', '.join(nh['thieu'])}"
+        s += L("hoi.md.nh.thieu", ", thiếu hẳn hành {ds}", ds=", ".join(_ten.ten("hanh", h) for h in nh["thieu"]))
     kl = (nh.get("than") or {}).get("ket_luan")
     nc = next((m for m in muc if m.get("loai") == "nhat_chu"), None)
-    ten_nc = f"nhật chủ {nc['can']}, " if nc else ""
+    ten_nc = L("hoi.md.nh.ten_nc", "nhật chủ {can}, ", can=_ten.ten("can", nc["can"])) if nc else ""
     if kl:
-        s += {"nhược": f"; sức tự thân yếu ({ten_nc}thân nhược)", "vượng": f"; sức tự thân mạnh ({ten_nc}thân vượng)"}.get(
-            kl, f"; sức tự thân {kl}")
+        s += {"nhược": L("hoi.md.nh.nhuoc", "; sức tự thân yếu ({nc}thân nhược)", nc=ten_nc),
+              "vượng": L("hoi.md.nh.vuong", "; sức tự thân mạnh ({nc}thân vượng)", nc=ten_nc)}.get(
+            kl, L("hoi.md.nh.khac", "; sức tự thân {kl}", kl=_ten.ten("than_vuong", kl)))
     th = next((m for m in muc if m.get("loai") == "hanh" and m.get("vai") == "thieu"), None)
     # EN-3c (review): ứng dụng dân gian (màu, hướng, nghề) chỉ là tham khảo — KHÔNG thành "Việc nên làm: bù hành X" (dụng
     # thần luôn trình bày hai cách, hệ thống không tự chọn hành cần bù).
     tk = ""
     if th and th.get("ung_dung"):
-        tk = (f"dân gian gắn hành {th['hanh']} với {thuong(bo_dau_cham(th['ung_dung']))} — chỉ để tham khảo; nên bù hành "
-              f"nào còn tuỳ cách lấy dụng thần, hai cách được trình bày bên dưới")
+        tk = L("hoi.md.nh.dan_gian", "dân gian gắn hành {h} với {ud} — chỉ để tham khảo; nên bù hành nào còn tuỳ cách lấy "
+               "dụng thần, hai cách được trình bày bên dưới", h=_ten.ten("hanh", th["hanh"]), ud=thuong(bo_dau_cham(th["ung_dung"])))
     return s, tk
 
 
@@ -586,13 +658,16 @@ def _dai_van_cau(muc: list[dict]) -> str:
     kt = next((m for m in muc if m.get("loai") == "dai_van" and m.get("vai") != "hien_tai"), None)
     if not ht and not kt:
         return ""
+    from app.kb import ten as _ten  # noqa: PLC0415
     phan = []
     if ht:
-        phan.append(f"giai đoạn mười năm bạn đang đi (đại vận {ht['can']} {ht['chi']}, {ht['tu_nam']}–{ht['den_nam']}) "
-                    f"nghiêng về {thuong(bo_dau_cham(ht['y_tt']))}")
+        phan.append(L("hoi.md.dv.ht", "giai đoạn mười năm bạn đang đi (đại vận {can} {chi}, {tu}–{den}) nghiêng về {y}",
+                      can=_ten.ten("can", ht["can"]), chi=_ten.ten("chi", ht["chi"]), tu=ht["tu_nam"], den=ht["den_nam"],
+                      y=thuong(bo_dau_cham(ht["y_tt"]))))
     if kt:
-        phan.append(f"giai đoạn kế tiếp bắt đầu năm {kt['tu_nam']} (đại vận {kt['can']} {kt['chi']}), nghiêng về "
-                    f"{thuong(bo_dau_cham(kt['y_tt']))}")
+        phan.append(L("hoi.md.dv.kt", "giai đoạn kế tiếp bắt đầu năm {tu} (đại vận {can} {chi}), nghiêng về {y}",
+                      tu=kt["tu_nam"], can=_ten.ten("can", kt["can"]), chi=_ten.ten("chi", kt["chi"]),
+                      y=thuong(bo_dau_cham(kt["y_tt"]))))
     return "; ".join(phan)
 
 
@@ -623,7 +698,7 @@ def _thang_cau(muc: list[dict]) -> tuple[str | None, str, str]:
     return None, "", ""
 
 
-def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | None:
+def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None, khoa: tuple | None = None) -> str | None:
     """Đoạn mở đầu Tử vi / Bát tự: điều được hỏi + mức năm (khi hỏi năm) / tháng thuận (khi hỏi khung tháng) + mức mảng
     đời sống + một lý do + một việc. Chỉ từ các mục đã có trong gói (`so_nam`, `cua_so`, `doi_song`; Bát tự thêm
     `ngu_hanh`/`hanh` khi hỏi hành, `dai_van` khi hỏi vận)."""
@@ -650,7 +725,8 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
     dieu = dieu_hoi(t, raw, (ds or {}).get("chuong"))
     if ds:
         ds = _hop_khop(ds, dieu)
-    nguon = _NGUON.get(mon, "trên lá số")
+    nguon = (L("hoi.md.nguon.battu", "theo tứ trụ") if mon == "battu" else L("hoi.md.nguon.tuvi", "trên lá số")
+             if mon == "tuvi" else _NGUON.get(mon, L("hoi.md.nguon.tuvi", "trên lá số")))
     moc, phan = None, []
     if nh_cau:
         phan.append(nh_cau)
@@ -665,31 +741,38 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
         moc, s = _nam_txt(sn)
         phan.append(f"{nguon}, {s}")
     elif cs and not th_cau:
-        moc = f"trong {cs['so_thang']} tháng tới"
+        moc = L("hoi.md.moc_thang", "trong {n} tháng tới", n=cs["so_thang"])
         th = ", ".join(x["ten"] for x in cs.get("thuan") or [])
         ch = ", ".join(x["ten"] for x in cs.get("cham") or [])
-        s = f"{nguon}, " + (f"tháng thuận hơn là {th}" if th else "không tháng nào nổi hẳn")
+        s = f"{nguon}, " + (L("hoi.md.cs.thuan", "tháng thuận hơn là {th}", th=th) if th
+                            else L("hoi.md.cs.khong", "không tháng nào nổi hẳn"))
         if ch:
-            s += f"; tháng nên đi chậm là {ch}"
+            s += L("hoi.md.cs.cham", "; tháng nên đi chậm là {ch}", ch=ch)
         phan.append(s)
     if ds:
         tt = ds.get("tom_tat") or ""
-        if "ở mức" in tt:
+        o_muc = "ở mức" in tt
+        if khoa is not None:
+            from app.luangiai import doi_song_khuon as _dsk  # noqa: PLC0415
+            o_muc = _dsk.quyet(khoa + ("o_muc",), o_muc)
+        if o_muc:
             ly, muc_cau = "", cau(tt)
         else:
             ly = _ly_do(ds)
-            muc_cau = (f"riêng mảng {ds['ten_mang']} {nguon} gốc ở mức {ds['nhan_muc']}" if (sn or cs or th_cau)
-                       else f"{nguon}, mảng {ds['ten_mang']} của bạn ở mức {ds['nhan_muc']}")
+            muc_cau = (L("hoi.md.muc_rieng", "riêng mảng {mang} {nguon} gốc ở mức {muc}", mang=ds["ten_mang"], nguon=nguon,
+                         muc=ds["nhan_muc"]) if (sn or cs or th_cau)
+                       else L("hoi.md.muc", "{nguon}, mảng {mang} của bạn ở mức {muc}", nguon=nguon, mang=ds["ten_mang"],
+                              muc=ds["nhan_muc"]))
         phan.append(muc_cau)
         if ly:
             phan.append(ly)
     v = th_viec or (_viec_hop(ds) if ds else "")
     if v:
-        phan.append("Việc nên làm: " + thuong(v))
+        phan.append(L("hoi.md.viec", "Việc nên làm: ") + thuong(v))
     if ds and ds.get("chuong") == "suc_khoe":
         # SK-1 (2026-11-04): năm nên chú ý sức khoẻ (hộp của chương, cùng hàm báo cáo) nói ngay ở đoạn mở đầu.
         from app.luangiai import suc_khoe_nam as _skn  # noqa: PLC0415
-        hn = next((h for h in ds.get("hop") or [] if h.get("tieu_de") == _skn.TIEU_DE_HOP), None)
+        hn = next((h for h in ds.get("hop") or [] if h.get("tieu_de") == _skn.tieu_de_hop()), None)
         if hn:
             phan.append(hn["noi_dung"].replace(_skn.mien_tru(), "").strip())
     cy = next((m for m in muc if m.get("ma") == "chu_y_nam" and m.get("lo_ro") and m.get("cau_nam")), None)
@@ -703,25 +786,26 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None) -> str | No
         phan.append(cy["cau_nam"])
     if ds and ds.get("chuong") == "suc_khoe" or (dieu or {}).get("mang") == "suc_khoe":
         from app.kb import tuvi_doi_song_kb as _kbds  # noqa: PLC0415
-        phan.append(_kbds.suc_khoe_chung())          # câu miễn trừ cố định (một nguồn với báo cáo đời sống)
+        # câu miễn trừ cố định (một nguồn với báo cáo đời sống)
+        phan.append(L("hoi.md.suc_khoe_chung", _kbds.suc_khoe_chung()))
     if cy_dau and cy_dau.get("cau_nam_rieng") and cy_dau.get("ranh_gioi"):
         phan.append(cy_dau["ranh_gioi"])
     if hoi_dau_tu(t, dieu):
-        phan.append(KHONG_DAU_TU)
+        phan.append(L("hoi.md.khong_dau_tu", KHONG_DAU_TU))
     if la_quyet_dinh(t):
-        phan.append(KHONG_QUYET)
+        phan.append(L("hoi.md.khong_quyet", KHONG_QUYET))
     if dieu and ds and chuong_cua(dieu) and chuong_cua(dieu) != ds.get("chuong") and not (sn or th_cau or cs):
         dieu = None
     if dieu:
         dau = dau_cau(dieu, "", moc)
     elif dv_cau and not ds:
-        dau = "Về giai đoạn mười năm của bạn"
+        dau = L("hoi.md.ve_dai_van", "Về giai đoạn mười năm của bạn")
     elif nh_cau:
-        dau = "Về ngũ hành của bạn"
+        dau = L("hoi.md.ve_ngu_hanh", "Về ngũ hành của bạn")
     elif moc and (not ds or ds.get("chuong") in ("nam_nay", "cuoc_doi")):
-        dau = f"Về {moc}"
+        dau = L("hoi.md.ve", "Về {nhan}", nhan=moc)
     else:
-        dau = dau_cau(None, ds["ten_mang"] if ds else "việc bạn hỏi", moc)
+        dau = dau_cau(None, ds["ten_mang"] if ds else L("hoi.md.viec_ban_hoi", "việc bạn hỏi"), moc)
     if cy_dau and not moc:
         dau = ve_mang(cy_dau["mang"])
     return f"{dau}: {thuong(ghep(*phan))}"

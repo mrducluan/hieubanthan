@@ -48,7 +48,30 @@ def _trang_hien_tai(ghi_tep: bool = False) -> tuple[dict[str, str], dict[str, se
             tep[k] = set(dang_doc)
     finally:
         trang._doc = goc_doc
+    # QTE: trang tiếng Anh (/en/tarot/cards/<slug>, /en/numerology/life-path/<n>) dựng từ bản phủ KB `data/en/` qua hai
+    # route công khai — băm đúng gói route trả (bỏ trường do sổ đặt) để ngày đăng / sửa của bản Anh cũng là ngày thật.
+    for k, t in _trang_en().items():
+        bam[k] = ncn.bam(t)
+        tep[k] = {"en/tarot_kb.json"} if k.startswith("en_la_bai/") else {"en/thanso_meanings.json", "en/thanso_chan_dung.json", "en/thanso_linh_vuc.json"}
     return bam, tep
+
+
+def _trang_en() -> dict[str, dict]:
+    from app import ngon_ngu  # noqa: PLC0415
+    from app.calc import tarot as calc_tarot  # noqa: PLC0415
+    from app.kb import tarot_kb  # noqa: PLC0415
+    from app.kb.trang_tarot import slug_en  # noqa: PLC0415
+    from app.main import api_so  # noqa: PLC0415
+    from app.tarot_api import api_la  # noqa: PLC0415
+    ra: dict[str, dict] = {}
+    with ngon_ngu.dung("en"):
+        for ma in calc_tarot.BO_BAI:
+            t = api_la(ma)
+            ra[f"en_la_bai/{slug_en(tarot_kb.la()[ma]['en'])}"] = {k: v for k, v in t.items() if k not in ("engine_version", "thu_tu")}
+        for so in (1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33):
+            t = api_so(so)
+            ra[f"en_so/{so}"] = {k: v for k, v in t.items() if k != "engine_version"}
+    return ra
 
 
 def _ngay_git(duong: list[str]) -> str | None:

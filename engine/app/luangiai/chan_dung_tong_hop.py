@@ -7,6 +7,9 @@ ma trận mảng × môn, ghép hộp "cùng thấy / nhìn khác nhau" (khuôn 
 hộp của từng môn — giữ mã kiểm chứng gốc để phiếu "Đúng với mình" về đúng môn đã nói câu ấy. Không tính lại, không điểm
 số, không đổi mức môn nào, không phán môn nào đúng. Lời ở KB `chan_dung_kb.json` (nháp ban biên tập).
 Chương 1 (ma trận + điều các cách cùng thấy) miễn phí; các chương sau mở bằng Sao ở tầng web (mô-đun `chan_dung`).
+Ý2 (2026-11-09): chương "Điều bạn đã xác nhận" (`da_xac_nhan`) dựng từ phiếu `ca_nhan` của CHÍNH người xem (mã hộp đã bấm
+"Đúng / Chưa đúng", đọc qua RLS) bằng lớp giao thoa `luangiai/giao_thoa` — báo cáo trả Sao cá nhân hơn theo thời gian dùng.
+Ý4: hộp "nhìn khác nhau" nói thật hơn khi thống kê lá số mẫu (`dong_thuan_thong_ke`) cho thấy mảng ấy hai lá số hiếm khi trùng.
 """
 from __future__ import annotations
 
@@ -17,13 +20,16 @@ from app import config
 from app.calc import lunar
 from app.luangiai import doi_song_khuon as kh
 from app.kb import nap
+from app.luangiai import dong_thuan_thong_ke as dtk
+from app.luangiai import giao_thoa as gt
 
 MO_DUN = "chan_dung"
 PHAI_BA_MON = "tuvi_battu_nhantuong"
 PHAI = {"tuvi": "nam_phai_viet", "battu": "tu_binh", "nhantuong": "nhan_tuong_tong_hop", "ba_mon": PHAI_BA_MON,
-        "hai_la_so": "tuvi_battu"}
+        "hai_la_so": "tuvi_battu", "giao_thoa": gt.PHAI}
 MON = ("tuvi", "battu", "nhantuong")
-THU_TU_CHUONG = ["tong_quan", "con_nguoi", "cong_viec_tien", "tinh_cam_gia_dinh", "suc_khoe", "nang_luong", "nam_nay", "loi_khuyen"]
+THU_TU_CHUONG = ["tong_quan", "con_nguoi", "cong_viec_tien", "tinh_cam_gia_dinh", "suc_khoe", "nang_luong", "nam_nay", "da_xac_nhan", "loi_khuyen"]
+TOI_THIEU_XAC_NHAN = 2      # Ý2: cần ≥ 2 hộp "Đúng với mình" mới dệt được điểm giao thoa (như giao_thoa.lap)
 MANG_CO_MUC = ["cong_viec", "tien_bac", "tinh_cam", "gia_dinh", "suc_khoe", "nam_nay"]
 # mảng → chương của từng môn mà mức được ĐỌC từ đó (Nhân tướng gộp việc + tiền, tình cảm + gia đình trong một chương)
 CHUONG_MON: dict[str, dict[str, str]] = {
@@ -96,6 +102,14 @@ def dong_thuan(mang: str, muc: dict[str, str | None]) -> dict | None:
             noi_dung = o["da_so"].format(muc_da_so=kh.NHAN_MUC[v_ds].lower(), mon_le=_ten(m_le), muc_le=kh.NHAN_MUC[v_le].lower(),
                                          mat_le=k["mon"][m_le]["mat"]) + " " + noi_dung
     ma = "".join(_MA_NGAN[co.get(m)] for m in MON)
+    # Ý4: hai lá số khác mức ở mảng mà trên lá số mẫu chúng hiếm khi trùng (kappa < 0,1) → nói thật là hai góc nhìn độc lập.
+    # Chỉ thêm LỜI + căn cứ; mức, mã hộp, việc nên làm không đổi.
+    tk = dtk.cua_mang(mang) if {"tuvi", "battu"} <= set(co) and co["tuvi"] != co["battu"] else None
+    if tk and tk["kappa"] < dtk.KAPPA_THAP:
+        noi_dung += " " + o["hiem_trung"].format(ngan=ngan, ti_le=round(tk["ti_le_cung"] * 100))
+    if tk:
+        can_cu.append(o["can_cu_thong_ke"].format(n=tk["n"], ti_le=round(tk["ti_le_cung"] * 100), ngau_nhien=round(tk["ngau_nhien"] * 100),
+                                                  kappa=f"{tk['kappa']:.2f}".replace(".", ",")))
     h = kh.hop("loi_khuyen", o["tieu_de"].format(mang=ten_mang), noi_dung, huong_xu_ly=o["huong_xu_ly"][thap].format(ngan=ngan),
                can_cu=can_cu, ma=kh.ma_mau(MO_DUN, mang, "khac", ma))
     return _gan(h, "ba_mon")
@@ -143,6 +157,33 @@ def _moi_xem(c: dict) -> dict:
     from app.luangiai.toan_bo import diem_nhan, so_chu_chuong  # noqa: PLC0415
     return {"diem_nhan": diem_nhan(c["doan"]), "cau_hoi": kb()["chuong"][c["ma"]]["cau_hoi"], "so_doan": len(c["doan"]),
             "phut_doc": max(1, round(so_chu_chuong(c) / 200))}
+
+
+# ------------------------------------------------------------------ Ý2: chương từ phiếu của chính người xem
+def _chuong_da_xac_nhan(ca_nhan: dict | None, da_dung: set[str]) -> dict:
+    """Phiếu `ca_nhan` ({mã: dung|chua_dung}, do web đọc RLS của người đang xem) → `giao_thoa.lap` (ba luật A/B/C trên MÃ) → một
+    chương khuôn `doi_song_1`. < 2 phiếu Đúng (hoặc khách) → chương chỉ có lời mời, không hộp. Hộp giữ `ma_mau` ds.giao_thoa.* +
+    phái giao_thoa_1 để phiếu về đúng hộp; mã trùng hộp đã dùng trong bài thì bỏ (không lặp)."""
+    k = kb()
+    ck = k["chuong"]["da_xac_nhan"]
+    phieu = {m: v for m, v in (ca_nhan or {}).items() if v in ("dung", "chua_dung") and isinstance(m, str)}
+    kq = gt.lap([], ca_nhan=phieu) if phieu else {"du": False, "so_dung": 0, "so_chua_dung": 0, "hop": [], "tom_tat": ""}
+    doan = [str(k["mau"]["da_xac_nhan_mo"])]
+    hop: list[dict] = []
+    if kq["du"] and kq["so_dung"] >= TOI_THIEU_XAC_NHAN:
+        doan.append(kq["tom_tat"])
+        if kq["so_chua_dung"]:
+            doan.append(str(k["mau"]["da_xac_nhan_co_chua_dung"]).format(so=kq["so_chua_dung"]))
+        for h in kq["hop"]:
+            if h.get("ma_mau") and h["ma_mau"] not in da_dung:
+                da_dung.add(h["ma_mau"])
+                hop.append(_gan(h, "giao_thoa"))
+        tom_tat = kq["tom_tat"]
+    else:
+        doan.append(str(k["mau"]["da_xac_nhan_khong_du"]))
+        tom_tat = str(k["mau"]["da_xac_nhan_khong_du"])
+    return kh.chuong("da_xac_nhan", ck["tieu_de"], doan, hop=hop, tom_tat=tom_tat, cau_hoi=ck["cau_hoi"],
+                     cau_tu_soi=k["cau_tu_soi"]["da_xac_nhan"], so_xac_nhan=kq["so_dung"], so_chua_dung=kq["so_chua_dung"])
 
 
 # ------------------------------------------------------------------ báo cáo
@@ -248,7 +289,10 @@ def lap(tv_sinh: dict, bt_sinh: dict, tra_loi: dict | None, ngay_xem: dt.date | 
     chuong.append(kh.chuong("nam_nay", ck["nam_nay"]["tieu_de"], [str(k["mau"]["nam_nay_mo"]), _dong_muc("nam_nay", d_nam["muc"])],
                             hop=hop7, cau_hoi=ck["nam_nay"]["cau_hoi"], cau_tu_soi=cts["nam_nay"]))
 
-    # 8. Việc nên làm: từ hộp tổng hợp từng mảng — mảng cùng nhắc đi chậm trước, rồi khác nhau, rồi thuận
+    # 8. Điều bạn đã xác nhận (Ý2): lớp giao thoa từ phiếu của chính người xem — mã hộp, không chữ; hộp giữ mã ds.giao_thoa.*
+    chuong.append(_chuong_da_xac_nhan(ca_nhan, da_dung))
+
+    # 9. Việc nên làm: từ hộp tổng hợp từng mảng — mảng cùng nhắc đi chậm trước, rồi khác nhau, rồi thuận
     def _uu(d: dict) -> tuple:
         mc = d["muc_chung"]
         return (0 if mc == "can_chu_dong" else 1 if d["dong_thuan"] == "khac" else 2 if mc == "can_bang" else 3, MANG_CO_MUC.index(d["ma"]))

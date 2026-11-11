@@ -7,6 +7,14 @@ import { BanDoMat } from "@/components/nhan-tuong/BanDoMat";
 import { MatTruoc } from "@/components/tarot/LaBai";
 import type { BoTarot, LoaiLa, NguyenTo } from "@/lib/tarot-chung";
 import { GOC_QR, TEN_MIEN } from "@/lib/the-chia-se";
+import { taoChu, type DocChu } from "@/lib/chu-trang";
+import { CHU_KIEN_THUC } from "@/lib/chu/kien-thuc";
+import type { DocTen } from "@/lib/ten-hien";
+
+// EN-ALL GĐ 3d: chữ cố định của hình đọc bảng lib/chu/kien-thuc.ts theo ngôn ngữ (`en`); mã engine (can, hành, nạp âm)
+// hiện qua `ten` (lib/ten-hien.ts — bản Việt trả nguyên mã). Bản Việt: đúng chữ cũ từng ký tự.
+type Chu = DocChu<typeof CHU_KIEN_THUC>;
+const MA = (_n: string, m: string | null | undefined) => m ?? "";
 
 export type MinhHoaDuLieu =
   | { kieu: "so"; so: number; so_cai: boolean; so_goc: number }
@@ -53,14 +61,14 @@ function Khung({ nhan, children, rong = 320, cao = 240, sang = false }: { nhan: 
 
 /** Dải chân hình: link + mã QR về đúng trang (chủ dự án 2026-10-26: "bổ sung link web, QR code web cho hình ảnh bài viết") —
  *  ai chụp màn hình / lưu hình vẫn quét về được bài. QR tự vẽ (lib/qr.ts), nền sáng ở cả hai giao diện để máy quét đọc được. */
-function ChanHinh({ duong, sang }: { duong: string; sang: boolean }) {
+function ChanHinh({ duong, sang, c }: { duong: string; sang: boolean; c: Chu }) {
   const url = `${GOC_QR}${duong}`;
   let qr: MaQr;
   try { qr = maHoaQr(url); } catch { return null; }
   const n = qr.kichThuoc + 8;                    // cạnh = số ô × 2px → mỗi ô sắc nét kể cả màn hình thường, chụp màn hình vẫn quét được
   return (
     <div className={`mt-3 flex items-center justify-center gap-3 border-t pt-3 ${sang ? "border-[#b8892b]/30" : "border-line/50"}`} data-testid="minh-hoa-qr" data-nosnippet="">
-      <svg viewBox={`0 0 ${n} ${n}`} width={n * 2} height={n * 2} shapeRendering="crispEdges" role="img" aria-label={`Mã QR mở ${TEN_MIEN}${duong}`}
+      <svg viewBox={`0 0 ${n} ${n}`} width={n * 2} height={n * 2} shapeRendering="crispEdges" role="img" aria-label={c("mh.qr_aria", { url: `${TEN_MIEN}${duong}` })}
         className={`shrink-0 rounded-md ${sang ? "ring-1 ring-[#b8892b]/40" : ""}`}>
         <rect width={n} height={n} fill="#f4efe2" />
         <path d={duongQr(qr, 4)} fill="#0a0a17" />
@@ -68,7 +76,7 @@ function ChanHinh({ duong, sang }: { duong: string; sang: boolean }) {
       <div className="min-w-0 text-left leading-tight">
         <a href={duong} className={`block text-sm font-semibold ${sang ? "text-[#2a2540]" : "text-fg"}`}>{TEN_MIEN}</a>
         <span className={`block break-all text-[0.7rem] ${sang ? "text-[#5b5470]" : "text-fg-faint"}`}>{TEN_MIEN}{duong}</span>
-        <span className={`block text-[0.7rem] ${sang ? "text-[#9a6f1c]" : "text-gold"}`}>Quét để mở bài này</span>
+        <span className={`block text-[0.7rem] ${sang ? "text-[#9a6f1c]" : "text-gold"}`}>{c("mh.qr_moi")}</span>
       </div>
     </div>
   );
@@ -210,7 +218,7 @@ function HinhHoaCung({ hoa, chi_so, vong }: { hoa: string; chi_so: number; vong:
 // ---------------------------------------------------------------- ngũ hành: vòng tương sinh + sao tương khắc
 const HANH = ["Mộc", "Hỏa", "Thổ", "Kim", "Thủy"];   // thứ tự tương sinh
 
-function VongNguHanh({ sang, nhan_rieng, nhan_giua, theo_hanh = true }: { sang: number; nhan_rieng?: string[]; nhan_giua: ReactNode; theo_hanh?: boolean }) {
+function VongNguHanh({ sang, nhan_rieng, nhan_giua, theo_hanh = true, ten = MA }: { sang: number; nhan_rieng?: string[]; nhan_giua: ReactNode; theo_hanh?: boolean; ten?: DocTen }) {
   const cx = 160, cy = 120, r = 78;
   const p = HANH.map((_, i) => diem(cx, cy, r, -Math.PI / 2 + (2 * Math.PI * i) / 5));
   return (
@@ -224,7 +232,7 @@ function VongNguHanh({ sang, nhan_rieng, nhan_giua, theo_hanh = true }: { sang: 
             <circle cx={x} cy={y} r={chon ? 24 : 18} strokeWidth={chon ? 1.6 : 1}
               className={!chon ? "fill-surface stroke-line" : theo_hanh ? `${mauHanh(HANH[i]!).nen} ${mauHanh(HANH[i]!).vien}` : "fill-gold/20 stroke-gold"} />
             <text x={x} y={y + 4} textAnchor="middle" fontSize={chon ? 11 : 10} className={chon ? "fill-fg font-semibold" : "fill-fg-muted"}>
-              {nhan_rieng?.[i] ?? HANH[i]}
+              {nhan_rieng?.[i] ?? ten("hanh", HANH[i])}
             </text>
           </g>
         );
@@ -235,38 +243,39 @@ function VongNguHanh({ sang, nhan_rieng, nhan_giua, theo_hanh = true }: { sang: 
 }
 
 const QH_THU_TU: Record<string, number> = { dong_hanh: 0, ta_sinh: 1, ta_khac: 2, khac_ta: 3, sinh_ta: 4 };
-const QH_NHAN = ["Ta (đồng hành)", "Ta sinh", "Ta khắc", "Khắc ta", "Sinh ta"];
 
-function HinhThapThan({ ten, quan_he, cung_am_duong }: { ten: string; quan_he: string; cung_am_duong: boolean }) {
+function HinhThapThan({ ten, quan_he, cung_am_duong, c }: { ten: string; quan_he: string; cung_am_duong: boolean; c: Chu }) {
+  const i = QH_THU_TU[quan_he] ?? 0, ad = c(cung_am_duong ? "mh.cung_ad" : "mh.khac_ad");
   return (
-    <Khung nhan={`${ten}: ${QH_NHAN[QH_THU_TU[quan_he] ?? 0]!.toLowerCase()}, ${cung_am_duong ? "cùng" : "khác"} âm dương với nhật chủ`}>
-      <VongNguHanh sang={QH_THU_TU[quan_he] ?? 0} theo_hanh={false} nhan_rieng={["Ta", "Ta sinh", "Ta khắc", "Khắc ta", "Sinh ta"]}
+    <Khung nhan={c("mh.thap_than", { ten, qh: c(`mh.qh_dai_${i + 1}`).toLowerCase(), ad })}>
+      <VongNguHanh sang={i} theo_hanh={false} nhan_rieng={[1, 2, 3, 4, 5].map((n) => c(`mh.qh_${n}`))}
         nhan_giua={<>
           <text x={160} y={118} textAnchor="middle" className="fill-gold font-serif" fontSize={15}>{ten}</text>
-          <text x={160} y={134} textAnchor="middle" className="fill-fg-faint" fontSize={9}>{cung_am_duong ? "cùng âm dương" : "khác âm dương"}</text>
+          <text x={160} y={134} textAnchor="middle" className="fill-fg-faint" fontSize={9}>{ad}</text>
         </>} />
     </Khung>
   );
 }
 
-function HinhNhatChu({ can, hanh, duong }: { can: string; hanh: string; duong: boolean }) {
+function HinhNhatChu({ can, hanh, duong, c, ten }: { can: string; hanh: string; duong: boolean; c: Chu; ten: DocTen }) {
   const i = HANH.indexOf(hanh === "Hoả" ? "Hỏa" : hanh === "Thuỷ" ? "Thủy" : hanh);
+  const bien = { can: ten("can", can), hanh: ten("hanh", hanh), ad: c(duong ? "mh.duong" : "mh.am") };
   return (
-    <Khung nhan={`Nhật chủ ${can} — hành ${hanh} ${duong ? "dương" : "âm"} trong vòng ngũ hành`}>
-      <VongNguHanh sang={i < 0 ? 0 : i} nhan_giua={<>
-        <text x={160} y={120} textAnchor="middle" className="fill-gold font-serif" fontSize={20}>{can}</text>
-        <text x={160} y={136} textAnchor="middle" className="fill-fg-faint" fontSize={9}>{`${hanh} ${duong ? "dương" : "âm"}`}</text>
+    <Khung nhan={c("mh.nhat_chu", bien)}>
+      <VongNguHanh ten={ten} sang={i < 0 ? 0 : i} nhan_giua={<>
+        <text x={160} y={120} textAnchor="middle" className="fill-gold font-serif" fontSize={20}>{bien.can}</text>
+        <text x={160} y={136} textAnchor="middle" className="fill-fg-faint" fontSize={9}>{c("mh.nhat_chu_giua", bien)}</text>
       </>} />
     </Khung>
   );
 }
 
 // ---------------------------------------------------------------- SEO-J: mệnh nạp âm — hành sáng trong vòng ngũ hành
-function HinhMenh({ hanh, nap_am, han, can_chi }: { hanh: string; nap_am: string; han: string; can_chi: string }) {
+function HinhMenh({ hanh, nap_am, han, can_chi, c, ten }: { hanh: string; nap_am: string; han: string; can_chi: string; c: Chu; ten: DocTen }) {
   const i = HANH.indexOf(hanh === "Hoả" ? "Hỏa" : hanh === "Thuỷ" ? "Thủy" : hanh);
   return (
-    <Khung nhan={`Tuổi ${can_chi}, mệnh ${nap_am} (${han}) — hành ${hanh} trong vòng ngũ hành`}>
-      <VongNguHanh sang={i < 0 ? 0 : i} nhan_giua={<>
+    <Khung nhan={c("mh.menh", { can_chi, nap_am: ten("nap_am", nap_am), han, hanh: ten("hanh", hanh) })}>
+      <VongNguHanh ten={ten} sang={i < 0 ? 0 : i} nhan_giua={<>
         <text x={160} y={118} textAnchor="middle" className="fill-gold" fontSize={18} style={{ fontFamily: "var(--font-han), serif" }}>{han}</text>
         <text x={160} y={134} textAnchor="middle" className="fill-fg-faint" fontSize={8.5}>{can_chi}</text>
       </>} />
@@ -325,13 +334,15 @@ function HinhLaBai(mh: { id: string; ten: string; en: string; so: number; bo: Bo
   return (
     <figure className="mx-auto w-[168px]">
       <MatTruoc la={{ id: mh.id, ten: mh.ten, en: mh.en, so: mh.so, bo: mh.bo, loai: mh.loai, nguyen_to: mh.nguyen_to }} w={168} />
-      <figcaption className="mt-2 text-center text-xs text-fg-faint">{mh.ten} ({mh.en}) — hình ký hiệu giản lược, không phải tranh của bộ bài nào</figcaption>
+      <figcaption className="mt-2 text-center text-xs text-fg-faint">{mh.ten} ({mh.en}) — tranh bộ Rider–Waite in năm 1909</figcaption>
     </figure>
   );
 }
 
-export function MinhHoa({ mh, duong, gon = false }: { mh?: MinhHoaDuLieu | null; duong?: string; gon?: boolean }) {
+/** `en` + `ten`: trang Anh (EN-ALL) — chữ hình theo bảng chiều `en`, mã engine qua `ten_hien`. Mặc định bản Việt. */
+export function MinhHoa({ mh, duong, gon = false, en = false, ten = MA }: { mh?: MinhHoaDuLieu | null; duong?: string; gon?: boolean; en?: boolean; ten?: DocTen }) {
   if (!mh) return null;
+  const c = taoChu(CHU_KIEN_THUC, null, en ? "en" : "vi");
   const hinh = (() => {
     switch (mh.kieu) {
       case "so": return <HinhSo {...mh} />;
@@ -341,9 +352,9 @@ export function MinhHoa({ mh, duong, gon = false }: { mh?: MinhHoaDuLieu | null;
       case "cung": return <HinhCung {...mh} />;
       case "sao_cung": return <HinhSaoCung {...mh} />;
       case "hoa_cung": return <HinhHoaCung {...mh} />;
-      case "menh": return <HinhMenh {...mh} />;
-      case "thap_than": return <HinhThapThan {...mh} />;
-      case "nhat_chu": return <HinhNhatChu {...mh} />;
+      case "menh": return <HinhMenh {...mh} c={c} ten={ten} />;
+      case "thap_than": return <HinhThapThan {...mh} c={c} />;
+      case "nhat_chu": return <HinhNhatChu {...mh} c={c} ten={ten} />;
       case "dau_hieu": return <HinhDauHieu {...mh} />;
       case "bo_vi": return <HinhBoVi {...mh} />;
       case "la_bai": return <HinhLaBai {...mh} />;
@@ -357,7 +368,7 @@ export function MinhHoa({ mh, duong, gon = false }: { mh?: MinhHoaDuLieu | null;
     <figure className={sang ? "relative mt-6 overflow-hidden rounded-2xl border border-gold/50 bg-[#f6f0e2] p-4 shadow-[0_18px_40px_-18px_rgb(0_0_0/0.65)]"
       : "glass relative mt-6 overflow-hidden rounded-2xl p-4"} data-testid="minh-hoa">
       {hinh}
-      {duong?.startsWith("/") && <ChanHinh duong={duong} sang={sang} />}
+      {duong?.startsWith("/") && <ChanHinh duong={duong} sang={sang} c={c} />}
     </figure>
   );
 }

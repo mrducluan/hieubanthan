@@ -78,6 +78,9 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Nhiệm vụ: Hỏi 3 câu", moTa: "Đếm câu hỏi đáp trả lời được khi đã đăng nhập (mọi mảng, cộng dồn). 0 = tạm dừng." },
   { khoa: "sao.nhiem_vu.moi_1_ban", nhom: "Nhiệm vụ kiếm Sao", loai: "so", min: 0, max: 50, macDinh: 5,
     ten: "Nhiệm vụ: Mời 1 bạn", moTa: "Cộng thêm, ngoài thưởng mời (người mời / được mời ở trên). 0 = tạm dừng." },
+  // HTT-2 H5: AI chỉ diễn đạt LẠI các hộp "Điểm giao thoa" đã ghép (bản tất định vẫn hiện), qua bộ kiểm chung; chỉ bản Việt.
+  { khoa: "giao_thoa.dien_dat", nhom: "Điểm giao thoa", loai: "bat_tat", macDinh: false,
+    ten: "AI diễn đạt lại hộp giao thoa", moTa: "Tắt = chỉ bản mẫu tất định. Bật = thêm một đoạn AI diễn đạt lại đúng các hộp đã ghép (không thêm dữ kiện; không qua kiểm thì không hiện), tốn lượt AI. Nên bật sau khi hộp giao thoa có ≥ 30 phiếu \"Đúng với mình\"." },
   { khoa: "luan_giai.thu_sao", nhom: "Luận giải toàn bộ", loai: "bat_tat", macDinh: false, env: "LUAN_GIAI_THU_SAO",
     ten: "Thu Sao cho Luận giải toàn bộ", moTa: "Tắt = miễn phí thử nghiệm. Chưa đặt ở đây thì theo env LUAN_GIAI_THU_SAO." },
   // SAO-V: bật thu Sao TỪNG mảng (chạy thử Bản đồ con số trước). Mảng thu khi công tắc chung HOẶC công tắc mảng bật.

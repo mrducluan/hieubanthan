@@ -16,6 +16,8 @@ Gia đình Tử vi luôn đầy, lời không bao giờ hiện). Chương khoá 
 """
 from __future__ import annotations
 
+from app.kb.loi import L
+
 import datetime as dt
 import itertools
 from pathlib import Path
@@ -91,10 +93,11 @@ def hop(chuong: str, muc: str | None, ngay_sinh: dt.date, ngay_xem: dt.date, tin
     if not o:
         return None
     noi = o["noi_dung"]
-    if chuong == "suc_khoe" and BAC_SI not in noi:
-        noi = f"{noi} {BAC_SI}"
+    bac_si = L("hoan_canh.bac_si", BAC_SI)
+    if chuong == "suc_khoe" and bac_si not in noi:
+        noi = f"{noi} {bac_si}"
     h = {"loai": "loi_khuyen", "tieu_de": o["tieu_de"], "noi_dung": noi,
-         "can_cu": ["Lời chọn theo mức của chương và giai đoạn tuổi — không đổi mức, không suy đoán."],
+         "can_cu": [L("hoan_canh.can_cu", "Lời chọn theo mức của chương và giai đoạn tuổi — không đổi mức, không suy đoán.")],
          "_w": 0.0, "_ch": chuong}
     # Mã kiểm chứng chỉ khi MỘT mã ↔ MỘT lời (review lần 2): chương tình yêu / gia đình có ba lời theo tình trạng mà mã không
     # được mang tình trạng → chỉ lời chung ("chua_noi") nhận phiếu; hai lời kia không có nút kiểm chứng, không gộp tỉ lệ.
@@ -121,6 +124,6 @@ def ap(chuong_ds: list[dict], ngay_sinh: dt.date, ngay_xem: dt.date, tinh_trang:
         if dg:
             h["ty_le_dung"], h["so_phieu"] = dg[0], dg[1]
             if dg[2]:
-                c.setdefault("can_cu", []).append(f"Đang xem lại: {h['tieu_de']}")
+                c.setdefault("can_cu", []).append(L("hop.dang_xem_lai_dong", f"Đang xem lại: {h['tieu_de']}", tieu_de=h["tieu_de"]))
                 continue
         c["loi_hoan_canh"] = h

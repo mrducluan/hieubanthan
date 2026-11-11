@@ -47,7 +47,7 @@ const nextConfig = {
         { key: "X-Content-Type-Options", value: "nosniff" },
         { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
         { key: "X-Frame-Options", value: "SAMEORIGIN" },
-        { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(self), payment=(), accelerometer=(self), gyroscope=(self), magnetometer=(self)" },
+        { key: "Permissions-Policy", value: "camera=(self), microphone=(), geolocation=(self), payment=(), accelerometer=(self), gyroscope=(self), magnetometer=(self)" },
       ],
     }];
   },
@@ -70,7 +70,8 @@ const nextConfig = {
   // "google.com/bot.html" trong UA Googlebot nên loại bằng lookahead đầu chuỗi (Next dùng new RegExp(source, "i").test).
   htmlLimitedBots: /^(?!.*(?:googlebot|google-inspectiontool))(?=.*(?:bot|crawl|spider|slurp|preview|facebookexternalhit|facebookcatalog|embedly|whatsapp|zalo|google-extended|googleother|mediapartners-google|adsbot-google|storebot-google|anthropic|claude|perplexity|cohere|bytespider|meta-externalagent|ia_archiver|vkshare|yeti))/i,
   // Ảnh thẻ chia sẻ (/og) đọc font OFL từ assets/fonts — đưa vào gói deploy. (Next 15: instrumentation.ts bật sẵn.)
-  outputFileTracingIncludes: { "/og": ["./assets/fonts/**"] },
+  // TR-5: ảnh thẻ Tarot / Ba lá vẽ tranh lá thật (JPEG nhỏ trong assets/tarot — bộ dựng ảnh không đọc webp).
+  outputFileTracingIncludes: { "/og": ["./assets/fonts/**"], "/og/tarot": ["./assets/fonts/**", "./assets/tarot/**"], "/og/ba-la": ["./assets/fonts/**", "./assets/tarot/**"] },
   // Blog: ảnh bìa bài NotFair đi qua tối ưu ảnh của Next (/_next/image).
   images: {
     remotePatterns: [

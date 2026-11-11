@@ -6,7 +6,7 @@
 //  · Ý 2: "Chia sẻ" thẻ câu trả lời (lib/the-hoi.ts — chỉ dữ liệu danh mục cố định + câu hỏi chuẩn, không câu gõ / ngày sinh).
 import { useState, type ReactNode } from "react";
 import Link from "@/components/khung/Lien";
-import { BookmarkCheck, BookmarkPlus, Check, Copy, Download, Info, Share2 } from "lucide-react";
+import { BookmarkCheck, BookmarkPlus, Check, Copy, Download, Heart, Info, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -22,6 +22,7 @@ import { KIEU_BIET, TrucQuan, type CoCauChuan, type KhoiTrucQuan } from "@/compo
 import { banDoKhop, useChieuSang, VungChieuSang } from "@/components/hoi/ChieuSang";
 import type { KetQuaHoi } from "@/components/hoi/KhungChat";
 import { useXemNguoiThan } from "@/components/huyen-hoc/XemNguoiThan";
+import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 
 interface Props {
   t: KetQuaHoi;
@@ -42,11 +43,20 @@ export function CauTraLoi(p: Props) {
 
 function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
   const { chieu } = useChieuSang();
+  const hd = useChuHoiDap();
   const theo = banDoKhop(t.trucQuan);
   const coHinh = !!t.trucQuan?.some((k) => KIEU_BIET.has(k.kieu));
   const tiep = (t.hoiTiep ?? []).filter((c) => !daHoi.includes(c));
   const loi: ReactNode = (
     <div className="min-w-0 space-y-4">
+      {t.hoTro && (
+        // EN-ALL GĐ 3d: câu hỏi có một tín hiệu buồn yếu — lời hỗ trợ dịu (không đỏ), câu trả lời vẫn hiện bên dưới.
+        <div className="flex gap-2.5 rounded-xl border border-moon/30 bg-moon/5 px-3.5 py-3 text-sm leading-relaxed text-fg"
+          role="note" data-testid="ho-tro-mem">
+          <Heart className="mt-0.5 size-4 shrink-0 text-moon" aria-hidden />
+          <p>{t.hoTro}</p>
+        </div>
+      )}
       {t.hoiLai && t.hoiLai.chon.length > 0 && (
         <div className="rounded-xl border border-moon/30 bg-moon/5 px-3 py-2.5" data-testid="hoi-lai">
           <p className="text-sm text-fg-muted">{t.hoiLai.cau}</p>
@@ -67,15 +77,22 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
           } : undefined)}
         </div>
       )}
-      {t.van && theo.size > 0 && <p className="text-xs text-fg-faint">Chữ gạch xanh: bấm để xem trên hình.</p>}
+      {t.van && theo.size > 0 && <p className="text-xs text-fg-faint">{hd.c("chu_xanh")}</p>}
       {t.van && <ViSao canCu={t.canCu} thuatNgu={t.thuatNgu} />}
       <KhungGiaiNghia ds={t.thuatNgu} />
       {t.canhBao?.map((c) => (
         <p key={c} className="flex gap-2 rounded-xl bg-moon/10 px-3 py-2 text-xs text-moon"><Info className="mt-0.5 size-3.5 shrink-0" aria-hidden /> {c}</p>
       ))}
       {t.ghiChu && <p className="text-xs text-fg-faint">{t.ghiChu}</p>}
+      {hd.en && t.van && (
+        // EN-ALL GĐ 3c: lưới an toàn bản Anh — luôn có lối cầu cứu, kể cả khi bộ dò khủng hoảng bỏ sót (không đỏ, không doạ).
+        <p className="flex gap-2 text-xs leading-relaxed text-fg-faint" data-testid="luoi-an-toan">
+          <Heart className="mt-0.5 size-3.5 shrink-0 text-moon/70" aria-hidden /> {hd.c("luoi_an_toan")}
+        </p>
+      )}
       {t.ghiLuot && <p className="text-xs text-gold" data-testid="ghi-luot">{t.ghiLuot}</p>}
-      {t.van && !t.loi && (
+      {/* EN-ALL: Lưu (tài khoản) và thẻ chia sẻ câu trả lời chưa có bản Anh (GĐ 9) → ẩn ở bản Anh. */}
+      {t.van && !t.loi && !hd.en && (
         <div className="flex flex-wrap items-start gap-2" data-testid="hanh-dong-tra-loi">
           <NutLuu t={t} cauHoi={cauHoi} moDun={moDun} />
           <NutChiaSe ds={t.trucQuan} moDun={moDun} maMoi={maMoi ?? null} />
@@ -83,7 +100,7 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
       )}
       {tiep.length > 0 && (
         <div data-testid="hoi-tiep-chung">
-          <p className="text-xs text-fg-muted">Hỏi tiếp</p>
+          <p className="text-xs text-fg-muted">{hd.c("hoi_tiep")}</p>
           <div className="mt-1.5 flex flex-wrap gap-2">
             {tiep.map((c) => (
               <button key={c} type="button" disabled={dang} onClick={() => { ghi("chart_interacted", { mo_dun: moDun, kind: "hoi_tiep" }); hoi(c); }}

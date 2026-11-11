@@ -128,4 +128,13 @@ class PhanHoiCongKhai(JSONResponse):
     """JSONResponse mặc định của engine: tuần tự hoá như cũ rồi lọc chữ nội bộ."""
 
     def render(self, content) -> bytes:  # noqa: ANN001
+        # EN-ALL GĐ 2: bản ngôn ngữ khác kèm `ten_hien` cho mọi MÃ tên riêng trong phản hồi (kb/ten.KHOA_MA) — giá trị mã
+        # giữ nguyên (web dùng làm khoá), web hiện tên theo bảng này. Bản Việt không đổi một byte.
+        if isinstance(content, dict) and "ten_hien" not in content:
+            from app import ngon_ngu  # noqa: PLC0415
+            if not ngon_ngu.la_viet():
+                from app.kb import ten  # noqa: PLC0415
+                th = ten.ten_hien(content)
+                if th:
+                    content = {**content, "ten_hien": th}
         return loc(super().render(content).decode("utf-8")).encode("utf-8")

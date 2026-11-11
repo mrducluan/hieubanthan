@@ -13,7 +13,7 @@ export async function GET(req: Request): Promise<NextResponse> {
   try {
     // QTE: trang /en gửi `x-ngon-ngu: en` → lá của ngày tiếng Anh (khoá đệm riêng theo ngôn ngữ).
     const nn = dauNgonNgu(req);
-    const r = await fetch(`${ENGINE_URL}/v1/tarot/la-ngay?ngay=${ngay}${nn["x-ngon-ngu"] ? "&ngon_ngu=en" : ""}`,
+    const r = await fetch(`${ENGINE_URL}/v1/tarot/la-ngay?ngay=${ngay}${nn["x-ngon-ngu"] ? `&ngon_ngu=${nn["x-ngon-ngu"]}` : ""}`,
       { headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn }, next: { revalidate: 3600 } });
     if (!r.ok) return NextResponse.json({ error: "Chưa lấy được lá của ngày." }, { status: 502 });
     return NextResponse.json(await r.json(), { headers: { "cache-control": "public, max-age=600, s-maxage=3600", vary: "x-ngon-ngu" } });

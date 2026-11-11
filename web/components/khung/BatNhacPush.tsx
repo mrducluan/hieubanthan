@@ -110,10 +110,17 @@ export function BatNhacPush({ className }: { className?: string }) {
   );
 }
 
-const MOC: { ma: MocLichChon; chu: string }[] = [
+// `phu`: dòng nhỏ nói rõ máy chủ đọc gì khi tích ô này (minh bạch dữ liệu) — tách khỏi nhãn để danh sách dễ lướt.
+const MOC: { ma: MocLichChon; chu: string; phu?: string }[] = [
   { ma: "thang_ca_nhan", chu: "Đầu tháng cá nhân mới (ngày 1 dương lịch)" },
   { ma: "giao_tiet", chu: "Ngày giao tiết — sang tháng mới theo tiết khí (tháng của nhà)" },
   { ma: "lap_xuan_tet", chu: "Lập xuân và Tết âm lịch" },
+  // Ý1 (0035): đầu tháng, một dòng dựng từ CHÍNH lá số trong tài khoản (cần giờ sinh + giới tính + nơi sinh).
+  { ma: "thang_hai_la_so", chu: "Đầu tháng: Tử vi và Bát tự cùng nói gì về tháng này",
+    phu: "Cần lá số Tử vi + Bát tự đã lưu vào tài khoản. Mỗi ngày 1, máy chủ đọc ngày giờ sinh, giới tính, nơi sinh trong hồ sơ của bạn để dựng một dòng, không ghi thêm gì." },
+  // 0036: sáng thứ Hai, một dòng "Tuần này của bạn" — cần NGÀY SINH đủ năm (để biết tuổi hợp / xung từng ngày), không tên, không giờ sinh.
+  { ma: "tuan_cua_toi", chu: "Sáng thứ Hai: tuần này của bạn — ngày thuận, ngày nên đi chậm",
+    phu: "Cần hồ sơ đã lưu vào tài khoản. Mỗi thứ Hai, máy chủ đọc ngày sinh trong hồ sơ của bạn để dựng một dòng, không ghi thêm gì." },
 ];
 
 /** GĐ2: người dùng tự tích nhận thêm (không tích sẵn). Vẫn tối đa một thông báo mỗi ngày — gộp vào một. */
@@ -148,7 +155,7 @@ function TuyChonNhan({ userId }: { userId: string }) {
         <label key={m.ma} className="flex items-start gap-2">
           <input type="checkbox" className="mt-1" checked={tc.moc_lich.includes(m.ma)}
             onChange={(e) => doi({ ...tc, moc_lich: e.target.checked ? [...tc.moc_lich, m.ma] : tc.moc_lich.filter((x) => x !== m.ma) })} />
-          <span>{m.chu}</span>
+          <span>{m.chu}{m.phu && <span className="block text-xs text-fg-faint">{m.phu}</span>}</span>
         </label>
       ))}
       <p className="text-xs text-fg-faint">Sáng hôm sau ngày bạn chọn “Hôm nay bạn định làm gì?”, thông báo sẽ hỏi lại một chạm: gợi ý hôm qua có đúng với bạn không.</p>

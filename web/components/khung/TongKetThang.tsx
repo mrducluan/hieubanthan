@@ -42,7 +42,8 @@ function useTongKet(hoSo: HoSo, homNay: string, mayChu: DiemDanh["thang_truoc"] 
     const hhMoi = huyHieuMay(hoSo).filter((h) => h.dat && h.luc?.startsWith(tien)).map((h) => h.ma);
     const ghep = (t: ThongKeThang, nguon: Nguon) => {
       if (nguon === "tai_khoan" && t.so_ngay < NGUONG_NGAY_TONG_KET && may.so_ngay >= NGUONG_NGAY_TONG_KET) { t = may; nguon = "may"; }
-      setKq({ tk: { ...t, thang_ca_nhan: t.thang_ca_nhan ?? may.thang_ca_nhan, huy_hieu_moi: hhMoi }, nguon });
+      // Lá Tarot đã gặp luôn lấy từ nhật ký MÁY (máy chủ không giữ mã lá Tarot).
+      setKq({ tk: { ...t, thang_ca_nhan: t.thang_ca_nhan ?? may.thang_ca_nhan, tarot: may.tarot, huy_hieu_moi: hhMoi }, nguon });
     };
     if (mayChu === undefined && !docBang && coTaiKhoan()) { setKq(undefined); return; }   // chờ máy chủ, không đo "may" rồi đổi
     if (mayChu && mayChu.nam === nam && mayChu.thang === thang) {

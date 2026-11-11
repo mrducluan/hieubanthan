@@ -648,6 +648,7 @@ def _theo_y_dinh(ma: str | None, chuong: list[dict], bc_luan: dict | None, huong
             "loi": "Nhịp từng năm theo sách xưa chỉ nói lúc nào nên chủ động hơn với phòng đó — nền vẫn là ánh sáng, gió, lối đi và các dấu hiệu bên trên."}
 
 
+@kh.vi_quyet_dinh
 def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None, ngay_xem: dt.date | None = None,
               goc_nhin: str = "sach_xua", y_dinh: str | None = None) -> dict:
     """`sinh` = {nam, gioi_tinh, ngay|None, moc_nam} hoặc None · `nha` = {huong_do | huong | bo_cuc, nam_xay, toa, theo} ·

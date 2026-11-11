@@ -249,3 +249,40 @@ def test_ai_chi_dien_dat_chuong_tra_loi(monkeypatch):
     assert r["dien_dat"] == "tra_loi"
     r = client.post("/v1/tarot/doc-bai", json={"trai_bai": "ba_la_thoi_gian", "la": CA_ANH, "dien_dat": True}).json()
     assert r.get("dien_dat") is None
+
+
+# ---------------------------------------------------------------- TR-5: chip chuyện hay hỏi + từ khoá lá ngược
+def test_goi_y_hoi_cau_mau_duoc_hieu_dung():
+    """Mỗi câu mẫu của chip phải: không bị bộ chặn an toàn, không thành câu hỏi về người khác, engine nhận ra kiểu câu
+    (không rơi về 'tổng quát') và chủ đề của chip có trong danh mục — bấm chip là ra bài đọc trả lời đúng câu."""
+    from app import ngon_ngu
+    for nn in ("vi", "en"):
+        with ngon_ngu.dung(nn):
+            bb = tr.bo_bai()
+            gy = bb["goi_y_hoi"]
+            assert 10 <= len(gy) <= 14 and len({g["ma"] for g in gy}) == len(gy)
+            for g in gy:
+                assert g["chu_de"] is None or g["chu_de"] in bb["chu_de"], g["ma"]
+                assert 2 <= len(g["cau"]) <= 3
+                for cau in g["cau"]:
+                    assert len(cau) <= 120 and cau.endswith("?")
+                    hc = tr.hieu_cau_cong_khai(cau, g["chu_de"])
+                    assert hc["chan"] is None, (cau, hc["chan"])
+                    assert hc["y_dinh"] not in ("nguoi_khac", "tong_quat"), (cau, hc["y_dinh"])
+                    assert hc["goi_y_trai_bai"] in bb["trai_bai"]
+                    if g["chu_de"]:
+                        assert hc["chu_de"] == g["chu_de"], (cau, hc["chu_de"])
+
+
+def test_bo_bai_co_tu_khoa_nguoc_va_ban_anh_co_chip_tieng_anh():
+    from app import ngon_ngu
+    with ngon_ngu.dung("vi"):
+        la = tr.bo_bai()["la"]
+        assert all(1 <= len(x["tu_khoa_nguoc"]) <= 3 and x["tu_khoa_nguoc"] != x["tu_khoa"] for x in la.values())
+    with ngon_ngu.dung("en"):
+        bb = tr.bo_bai()
+        # EN-ALL: bản Anh có cùng 12 chip (cùng mã, cùng chủ đề) — khung đầu ra giống bản Việt
+        with ngon_ngu.dung("vi"):
+            vi = [(g["ma"], g["chu_de"], len(g["cau"])) for g in tr.bo_bai()["goi_y_hoi"]]
+        assert [(g["ma"], g["chu_de"], len(g["cau"])) for g in bb["goi_y_hoi"]] == vi
+        assert all(x["tu_khoa_nguoc"] for x in bb["la"].values())

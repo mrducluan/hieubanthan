@@ -1,6 +1,9 @@
 // Trang kiến thức (SEO-B): nội dung từ KB của engine, render phía server để máy tìm kiếm và AI đọc được.
 // Chỉ dùng ở Server Component / route handler. Web chỉ hiển thị — không tự viết nghĩa. Lỗi engine → trả null/[] (trang vẫn render, cache tự làm mới).
 
+import { duongTheoLuot, ganNgonNgu } from "@/lib/engine-ngon-ngu";
+import type { TenHien } from "@/lib/ten-hien";
+import { banAnhRewrite, banVietCuaTrang, tachDuong } from "@/lib/duong-en";
 import { unstable_noStore as noStore } from "next/cache";
 import type { MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
@@ -114,7 +117,7 @@ export interface TrichDan {
   khi?: string; chu_thich?: string; neo?: string;
 }
 export interface MucTrang {
-  tieu_de: string; doan?: string; danh_sach?: string[]; xem_them?: { loai: LoaiTrang; slug: string; tieu_de: string }[];
+  tieu_de: string; doan?: string; danh_sach?: string[]; xem_them?: { loai: LoaiTrang; slug: string; tieu_de: string; slug_en?: string }[];
   /** SEO-M: bảng thật · trích dẫn · phần do ban biên tập bổ sung trên trang chuyên gia tự viết (EEAT-1). */
   bang?: { cot: string[]; dong: string[][] }; trich_dan?: TrichDan[]; bien_tap?: boolean;
   /** TV-YBS: mục phụ hiện gập sẵn (vd "Góc nhìn khác (tham khảo)") — chữ vẫn trong HTML máy chủ. */
@@ -128,6 +131,10 @@ export interface TrangKienThuc {
   trang_thai: string; index: boolean; cap_nhat: string;
   /** SEO-L4: ngày đăng thật (sổ băm nội dung engine); `cap_nhat` = ngày sửa nội dung gần nhất. */
   ngay_dang?: string;
+  /** QTE: đường dẫn bản tiếng Anh tương đương (hreflang), engine trả cho lá bài Tarot + ý nghĩa số. */
+  ban_en?: string;
+  /** EN-ALL GĐ 2: chỉ bản Anh — slug tiếng Anh của trang (URL /en/…) + tên hiển thị của trường mã (lib/ten-hien.ts). */
+  slug_en?: string; ten_hien?: TenHien;
   /** EEAT-1: mã chuyên gia (tra hồ sơ ở lib/chuyen-gia.ts). tac_gia chỉ có khi chuyên gia tự viết; tham_dinh chỉ khi đã duyệt. */
   chu_bien: string; tac_gia: string | null; tham_dinh: { nguoi: string; ngay: string } | null;
   /** GN-1: lời chính chuyên gia viết (2–4 câu kinh nghiệm), chỉ có trên trang người đó đã thẩm định / tự viết. */
@@ -137,25 +144,26 @@ export interface TrangKienThuc {
   bien_soan: "chuyen_gia" | "ai_ho_tro";
   /** MH-1: dữ liệu hình minh hoạ do engine trả (web chỉ vẽ). */
   minh_hoa?: MinhHoaDuLieu;
-  lien_quan: { loai: LoaiTrang; slug: string; tieu_de: string }[];
+  lien_quan: { loai: LoaiTrang; slug: string; tieu_de: string; slug_en?: string }[];
   /** SEO-H: trang sao / trang cung trỏ tới 12 hoặc 14 trang "sao ở cung" (engine dựng danh sách). */
-  trang_con?: { tieu_de: string; ds: { loai: LoaiTrang; slug: string; tieu_de: string }[] };
+  trang_con?: { tieu_de: string; ds: { loai: LoaiTrang; slug: string; tieu_de: string; slug_en?: string }[] };
   /** SEO-I: trang cung trỏ tới 4 trang "Hoá X ở cung này". */
-  trang_con_hoa?: { tieu_de: string; ds: { loai: LoaiTrang; slug: string; tieu_de: string }[] };
+  trang_con_hoa?: { tieu_de: string; ds: { loai: LoaiTrang; slug: string; tieu_de: string; slug_en?: string }[] };
   /** SEO-J: link sang trang ngoài thư viện kiến thức (vd /phong-thuy/huong-hop-tuoi/tuoi-1990). Engine dựng đường dẫn. */
   lien_ket_ngoai?: { duong: string; ten: string }[];
 }
 export type MucLuc = Pick<TrangKienThuc, "loai" | "slug" | "tieu_de" | "mo_ta" | "trang_thai" | "index" | "cap_nhat" | "ngay_dang"
-  | "chu_bien" | "tac_gia" | "tham_dinh" | "bien_soan">;
+  | "chu_bien" | "tac_gia" | "tham_dinh" | "bien_soan" | "slug_en">;
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 const LAM_MOI = 60 * 60 * 6;   // 6 giờ
 
-async function lay<T>(duong: string): Promise<T | null> {
+async function lay<T>(duong: string, ngonNgu?: string): Promise<T | null> {
   try {
-    const r = await fetch(`${ENGINE_URL}${duong}`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    const nn = ngonNgu ? ganNgonNgu(duong, ngonNgu) : await duongTheoLuot(duong);
+    const r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: LAM_MOI },
       signal: AbortSignal.timeout(20_000),
     });
@@ -172,8 +180,9 @@ export class LoiEngine extends Error {}
 async function layTrangMot<T>(duong: string): Promise<T | null> {
   let r: Response;
   try {
-    r = await fetch(`${ENGINE_URL}${duong}`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    const nn = await duongTheoLuot(duong);
+    r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: LAM_MOI },
       signal: AbortSignal.timeout(20_000),
     });
@@ -196,6 +205,31 @@ export async function mucLuc(): Promise<MucLuc[]> {
   // chuyển trang sang render động; dữ liệu engine vẫn được cache ở tầng fetch khi lấy được.
   if (!ds) noStore();
   return ds ?? [];
+}
+
+/** EN-ALL GĐ 3d — mục lục BẢN ANH (dù lượt tải là bản Việt): cặp slug Việt ↔ slug Anh để trang Việt khai hreflang tới trang
+ *  Anh cùng mục, và để trang Việt nhận nhầm slug Anh thì chuyển về slug Việt. Lỗi engine → null (không khai hreflang). */
+async function mucLucEn(): Promise<MucLuc[] | null> {
+  return (await lay<{ trang: MucLuc[] }>(BAN_DEPLOY ? `/v1/kb/trang?b=${BAN_DEPLOY}` : "/v1/kb/trang", "en"))?.trang ?? null;
+}
+export async function slugEnCua(loai: LoaiTrang, slug: string): Promise<string | null> {
+  return (await mucLucEn())?.find((t) => t.loai === loai && t.slug === slug)?.slug_en ?? null;
+}
+export async function slugViCua(loai: LoaiTrang, slugEn: string): Promise<string | null> {
+  return (await mucLucEn())?.find((t) => t.loai === loai && t.slug_en === slugEn)?.slug ?? null;
+}
+
+/** Trang Việt tương đương của một URL Anh cho NÚT ĐỔI NGÔN NGỮ dựng ở máy chủ (header + chân trang): như `banVietCuaTrang`,
+ *  riêng trang con của cụm kiến thức mở bản Anh qua rewrite thì đổi slug Anh → slug Việt (mục lục bản Anh của engine) để link
+ *  không đi qua 308. Trang khác: không gọi engine. */
+export async function banVietTrangEn(duongEn: string): Promise<string> {
+  const vi = banVietCuaTrang(duongEn);
+  const [p] = tachDuong(vi);
+  const cd = Object.values(CHU_DE).find((c) => p.startsWith(`${c.duong}/`) && banAnhRewrite(c.duong));
+  const slugEn = cd ? p.slice(cd.duong.length + 1) : "";
+  if (!cd || !slugEn || slugEn.includes("/")) return vi;
+  const s = await slugViCua(cd.loai, slugEn);
+  return s ? `${cd.duong}/${s}` : vi;
 }
 
 export function trang(loai: LoaiTrang, slug: string): Promise<TrangKienThuc | null> {

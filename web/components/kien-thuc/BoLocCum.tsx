@@ -4,6 +4,9 @@
 import { useEffect, useState } from "react";
 import { maChu, type BoLoc } from "@/lib/nhom-cum";
 import { cn } from "@/lib/utils";
+import { useNgonNgu } from "@/components/khung/NgonNgu";
+import { taoChu } from "@/lib/chu-trang";
+import { CHU_KIEN_THUC } from "@/lib/chu/kien-thuc";
 
 // Điện thoại: mỗi nhóm chip là MỘT hàng vuốt ngang (14 + 12 chip xếp dòng sẽ đẩy danh sách xuống 2 màn); ≥ sm xếp dòng.
 const HANG = "-mx-4 mt-1.5 flex gap-1.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0";
@@ -12,6 +15,9 @@ const CHIP = "inline-flex min-h-9 shrink-0 items-center whitespace-nowrap rounde
 export function BoLocCum({ goc, tong, nhanNhom, viDu, nhom, loc }: {
   goc: string; tong: number; nhanNhom: string; viDu: string; nhom: { ma: string; ten: string; so: number }[]; loc: BoLoc | null;
 }) {
+  const c = taoChu(CHU_KIEN_THUC, null, useNgonNgu().ngonNgu);
+  // Số trang là một nút chữ riêng (như bản cũ `Lọc nhanh trong {tong} trang`) — HTML bản Việt không đổi.
+  const nhanLoc = [...c("ml.loc_nhanh").split("{tong}"), ""] as [string, string];
   const [tim, setTim] = useState("");
   const [phu, setPhu] = useState<string | null>(null);
   const [so, setSo] = useState<Record<string, number> | null>(null);   // null = không lọc
@@ -45,12 +51,12 @@ export function BoLocCum({ goc, tong, nhanNhom, viDu, nhom, loc }: {
   return (
     <div className="space-y-3 rounded-2xl border border-line/70 bg-surface/40 p-4" data-testid="muc-luc-cum">
       <label className="block">
-        <span className="text-sm font-medium text-fg">Lọc nhanh trong {tong} trang</span>
+        <span className="text-sm font-medium text-fg">{nhanLoc[0]}{tong}{nhanLoc[1]}</span>
         <input type="search" value={tim} onChange={(e) => setTim(e.target.value)} data-testid="cum-tim"
-          placeholder={`Gõ tên, ví dụ: ${viDu}`} enterKeyHint="search"
+          placeholder={c("ml.vi_du", { vi_du: viDu })} enterKeyHint="search"
           className="mt-1.5 h-11 w-full rounded-xl border border-line bg-bg/60 px-3 text-[0.95rem] text-fg placeholder:text-fg-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold" />
       </label>
-      <nav aria-label={`Mục lục ${nhanNhom.toLowerCase()}`}>
+      <nav aria-label={c("ml.muc_luc", { nhom: nhanNhom.toLowerCase() })}>
         <p className="text-xs text-fg-faint">{nhanNhom}</p>
         <ul className={HANG}>
           {nhom.map((n) => {
@@ -67,7 +73,7 @@ export function BoLocCum({ goc, tong, nhanNhom, viDu, nhom, loc }: {
         </ul>
       </nav>
       {loc && (
-        <div role="group" aria-label={`Lọc ${loc.nhan.toLowerCase()}`}>
+        <div role="group" aria-label={c("ml.loc", { nhom: loc.nhan.toLowerCase() })}>
           <p className="text-xs text-fg-faint">{loc.nhan}</p>
           <div className={HANG}>
             {loc.ds.map((x) => (
@@ -81,8 +87,8 @@ export function BoLocCum({ goc, tong, nhanNhom, viDu, nhom, loc }: {
       )}
       {dangLoc && (
         <p className="flex flex-wrap items-center gap-x-3 text-sm text-fg-muted" aria-live="polite" data-testid="cum-dem">
-          Đang hiện {tongHien} trang.
-          <button type="button" className="min-h-9 text-gold underline underline-offset-4" onClick={() => { setTim(""); setPhu(null); }}>Bỏ lọc</button>
+          {c("ml.dang_hien", { so: String(tongHien) })}
+          <button type="button" className="min-h-9 text-gold underline underline-offset-4" onClick={() => { setTim(""); setPhu(null); }}>{c("ml.bo_loc")}</button>
         </p>
       )}
     </div>

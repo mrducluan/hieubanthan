@@ -66,11 +66,11 @@ test.describe("M1 hỏi đáp: câu hỏi → câu trả lời → hỏi tiếp 
   }
 });
 
-test("M4 lá bài: lật 3D thấy pha giữa (~550 ms), giảm chuyển động thì tức thì; mặt sau mang loại lá", async ({ page }) => {
+test("M4 ba lá của ngày: lật 3D thấy pha giữa (~600 ms), giảm chuyển động thì tức thì; mặt ngửa mang nội dung lá", async ({ page }) => {
   await napHoSo(page);
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/hom-nay");
-  const la = page.getByTestId("la-bai");
+  const la = page.getByTestId("ba-la");
   await la.scrollIntoViewIfNeeded();
   // UI-HN: trên máy tính lá bài nằm đầu cột bên (gần đầu trang) → chờ các khối khác hiện ra xong rồi mới lật,
   // để phép đo thời gian nghiêng không lẫn khung hình bị rơi do hiệu ứng khác chạy cùng lúc.
@@ -80,10 +80,10 @@ test("M4 lá bài: lật 3D thấy pha giữa (~550 ms), giảm chuyển động
   // bận làm rơi khung chỉ khiến số này DÀI ra, không ngắn đi (bản cũ đo khoảng giữa khung nghiêng đầu và cuối → rơi khung
   // làm khoảng đo co lại 116–149 ms dù hiệu ứng vẫn chạy đủ, hỏng ~1/5 lần cả trên main).
   const mau = await page.evaluate(() => new Promise<[number, number][]>((ok) => {
-    const el = document.querySelector<HTMLElement>("[data-testid='la-bai'] .relative.size-full")!;
+    const el = document.querySelector<HTMLElement>("[data-testid='ba-la-so'] .la-lat")!;
     const doc = () => { const t = getComputedStyle(el).transform; const m = new DOMMatrix(t === "none" ? undefined : t); return Math.abs(Math.round(Math.atan2(-m.m13, m.m11) * 180 / Math.PI)); };
     const ds: [number, number][] = [];
-    document.querySelector<HTMLButtonElement>("[data-testid='la-bai-up']")!.click();
+    document.querySelector<HTMLButtonElement>("[data-testid='ba-la-so']")!.click();
     const t0 = performance.now();
     const vong = (t: number) => { ds.push([t - t0, doc()]); if (t - t0 < 1500) requestAnimationFrame(vong); else ok(ds); };
     requestAnimationFrame(vong);
@@ -94,9 +94,8 @@ test("M4 lá bài: lật 3D thấy pha giữa (~550 ms), giảm chuyển động
   expect(xong, JSON.stringify(mau)).toBeTruthy();
   expect(xong![0], JSON.stringify(mau)).toBeGreaterThanOrEqual(450);                       // lật ~550 ms, không tức thì
   expect(mau[mau.length - 1]![1]).toBe(180);
-  const mat = page.getByTestId("la-bai-mat");
-  await expect(mat).toHaveAttribute("data-loai", /^(viec|cau_hoi|gio)$/);
-  await expect(mat).toContainText(/Việc nhỏ|Câu hỏi|Giờ tốt/);
+  await expect(page.getByTestId("ba-la-so")).toHaveAttribute("data-lat", "1");
+  await expect(page.getByTestId("ba-la-so")).toContainText("Ngày cá nhân");
 });
 
 test("M6 chính sách: thẻ đồng ý mô tả đúng form (một dòng + Chi tiết)", async ({ page }) => {

@@ -34,6 +34,8 @@ export const SO_CACH_HH = 3;
 
 /** Lối tra cứu thêm cho mảng ít cụm kiến thức (chân thẻ không trơ một chip). Chỉ trang có thật trong site. */
 export const TRA_CUU_THEM: Partial<Record<KhoaMangHH, { duong: string; ten: string; khoa: null }[]>> = {
+  tu_vi: [{ duong: "/sinh-o-nuoc-ngoai", ten: "Sinh ở nước ngoài", khoa: null }],
+  bat_tu: [{ duong: "/sinh-o-nuoc-ngoai", ten: "Sinh ở nước ngoài", khoa: null }],
   kinh_dich: [{ duong: "/hom-nay", ten: "Quẻ đầu ngày", khoa: null }, { duong: "/tu-dien", ten: "Từ điển thuật ngữ", khoa: null }],
   nhan_tuong: [{ duong: "/tu-dien", ten: "Từ điển thuật ngữ", khoa: null }],
   tarot: [{ duong: "/kinh-dich", ten: "Gieo quẻ Kinh Dịch", khoa: null }],

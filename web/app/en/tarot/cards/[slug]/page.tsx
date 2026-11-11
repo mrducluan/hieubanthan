@@ -4,9 +4,8 @@ import { notFound } from "next/navigation";
 import Lien from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { MatTruoc } from "@/components/tarot/LaBai";
-import { engineEn, slugLa } from "@/lib/en/engine";
-import { metaEn } from "@/lib/en/seo";
-import { urlDayDu } from "@/lib/seo";
+import { engineEn, slugLa, slugVi } from "@/lib/en/engine";
+import { ldBaiEn, ldDuongDanEn, metaEn, tieuDeVua } from "@/lib/en/seo";
 import type { BoBai, LaGon } from "@/lib/tarot-chung";
 
 export const revalidate = 21600;
@@ -16,6 +15,9 @@ interface TrangLa {
   chiem_tinh: string | null; decan: { cung: string; so: number; hanh_tinh: string } | null;
   trich: { sach: string; nguyen_van: string | null; nguyen_van_nguoc: string | null }[];
   bo: { ten: string; mang: string; nhip: string; loi: string } | null; nguyen_to: { ten: string; tinh: string; loi: string }; thu_tu: string[];
+  ngay_dang?: string; cap_nhat?: string;
+  /** tên Việt của lá (từ `/v1/tarot/bo-bai` bản Việt) → slug trang Việt tương đương cho hreflang. */
+  ten_vi?: string;
 }
 const LV: [string, string][] = [["tinh_cam", "Love & relationships"], ["cong_viec", "Work & study"], ["tien_bac", "Money"], ["suc_khoe", "Health & daily rhythm"]];
 
@@ -27,9 +29,11 @@ async function timId(slug: string): Promise<string | null> {
 async function lay(slug: string): Promise<TrangLa | null> {
   const id = await timId(slug);
   if (!id) return null;
-  const r = await engineEn<TrangLa>(`/v1/tarot/la/${id}`);
+  const [r, vi] = await Promise.all([engineEn<TrangLa>(`/v1/tarot/la/${id}`), engineEn<BoBai>("/v1/tarot/bo-bai", 21_600, "vi")]);
   if (!r.ok) { if (r.status === 404) return null; throw new Error("engine"); }
-  return r.data;
+  // tên Việt của lá (bản phủ tiếng Anh đã đổi `ten` sang tiếng Anh — giữ nguyên cho hình lá) → slug bản Việt cho hreflang.
+  const tenVi = vi.ok ? vi.data.la[id]?.ten : undefined;
+  return { ...r.data, ten_vi: tenVi };
 }
 export async function generateStaticParams() {
   const r = await engineEn<BoBai>("/v1/tarot/bo-bai");
@@ -39,9 +43,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const d = await lay(slug).catch(() => null);
   const ten = d?.la.en ?? slug.replace(/-/g, " ");
-  return metaEn({ title: `${ten} tarot card meaning: upright and reversed, love, work, money`,
+  // hreflang: bản Việt tương ứng là trang CÙNG lá (/tarot/la-bai/<slug Việt>), không phải mục lục.
+  return metaEn({ title: tieuDeVua([`${ten} tarot card meaning: upright and reversed, love, work`, `${ten} tarot card meaning: upright & reversed`, `${ten} tarot card meaning`]),
     description: d ? `${d.la.en} — ${d.la.tu_khoa.join(", ")}. Reversed: ${d.la.tu_khoa_nguoc.join(", ")}. Meaning in love, work, money and daily life, with one thing to do (Waite 1910, Mathers 1888).` : `Meaning of the ${ten} tarot card.`,
-    path: `/en/tarot/cards/${slug}`, vi: "/tarot/la-bai" });
+    path: `/en/tarot/cards/${slug}`, vi: d?.ten_vi ? `/tarot/la-bai/${slugVi(d.ten_vi)}` : "/tarot/la-bai", ngayDang: d?.ngay_dang, capNhat: d?.cap_nhat });
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
@@ -55,8 +60,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const ten = (id: string | null) => (id && bo.ok ? bo.data.la[id]?.en ?? null : null);
   return (
     <article className="mx-auto max-w-4xl">
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "Article", headline: `${l.en} tarot card meaning`, inLanguage: "en", url: urlDayDu(`/en/tarot/cards/${slug}`),
-        author: { "@type": "Organization", name: "Hieu Ban Than editorial team" }, publisher: { "@type": "Organization", name: "Hieu Ban Than" }, image: urlDayDu("/og") }} />
+      <JsonLd data={ldBaiEn({ tieuDe: `${l.en} tarot card meaning: upright and reversed`, duong: `/en/tarot/cards/${slug}`, moTa: `${l.en} — ${l.tu_khoa.join(", ")}. Reversed: ${l.tu_khoa_nguoc.join(", ")}.`,
+        ngayDang: d.ngay_dang, capNhat: d.cap_nhat, about: ["Tarot", l.en] })} />
+      <JsonLd data={ldDuongDanEn([{ ten: "Tarot", duong: "/en/tarot" }, { ten: "78 cards", duong: "/en/tarot/cards" }, { ten: l.en, duong: `/en/tarot/cards/${slug}` }])} />
       <nav className="mb-4 text-sm text-fg-muted" aria-label="Breadcrumb"><Lien href="/en" className="hover:text-fg">English</Lien> › <Lien href="/en/tarot" className="hover:text-fg">Tarot</Lien> › <Lien href="/en/tarot/cards" className="hover:text-fg">78 cards</Lien> › {l.en}</nav>
       <div className="grid gap-6 sm:grid-cols-[180px_1fr]">
         <div className="mx-auto w-40 sm:w-full"><MatTruoc la={l} /></div>
@@ -93,11 +99,20 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         </section>
       )}
       {d.bo && <p className="mt-6 text-sm text-fg-muted">{d.bo.loi} Pace of the suit: {d.bo.nhip}.</p>}
-      <nav className="mt-8 flex justify-between text-sm" aria-label="Neighbouring cards">
+      <div className="mt-8 flex justify-between text-sm" aria-label="Neighbouring cards">
         <span>{truoc && ten(truoc) && <Lien href={`/en/tarot/cards/${slugLa(ten(truoc)!)}`} className="text-gold hover:underline">← {ten(truoc)}</Lien>}</span>
         <span>{sau && ten(sau) && <Lien href={`/en/tarot/cards/${slugLa(ten(sau)!)}`} className="text-gold hover:underline">{ten(sau)} →</Lien>}</span>
-      </nav>
-      <p className="mt-8 text-sm text-fg-muted">Meanings are a reference for reflection, not a prediction. <Lien href="/en/tarot" className="text-gold hover:underline">Draw this card in a reading of your own</Lien>.</p>
+      </div>
+      <section className="mt-8 glass rounded-2xl p-5" data-testid="doc-tiep-en">
+        <h2 className="text-lg">Keep reading</h2>
+        <ul className="mt-2 grid gap-2 text-sm sm:grid-cols-2">
+          <li><Lien href="/en/tarot" className="text-gold hover:underline">Draw {l.en} in a reading of your own</Lien> — type a question, shuffle, pick your cards.</li>
+          <li><Lien href="/en/tarot/cards" className="text-gold hover:underline">All 78 cards</Lien> — {l.loai === "an_chinh" ? "the other Major Arcana" : `the rest of the ${d.bo?.ten ?? "suit"} and the other suits`}.</li>
+          <li><Lien href="/en/numerology" className="text-gold hover:underline">Your numbers</Lien> — a second way to look at the same question, from your date of birth.</li>
+          <li><Lien href="/en/numerology/life-path" className="text-gold hover:underline">Life Path numbers 1–33</Lien> — what each number tends to look like.</li>
+        </ul>
+      </section>
+      <p className="mt-6 text-sm text-fg-muted">Meanings are a reference for reflection, not a prediction. Nothing here replaces a doctor, a lawyer or your own judgement.</p>
     </article>
   );
 }

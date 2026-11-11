@@ -9,6 +9,8 @@ không sinh nghĩa mới — mọi câu nghĩa lấy nguyên từ KB; câu nối
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 DUONG_CONG_CU = "/phong-thuy#khao-sat-nha"
 DUONG_CUM = "/phong-thuy/dau-hieu"          # = web lib/chuyen-huong.json chu_de["dau-hieu"]
 _TEN_NHOM = {"ngoai_canh": "ngoại cảnh quanh nhà", "hinh_nha": "hình dáng nhà", "trong_nha": "bố trí trong nhà"}
@@ -32,6 +34,7 @@ def _do_thi() -> dict:
     return _t()._doc("phongthuy_do_thi.json")
 
 
+@ngon_ngu.theo_viet
 def ds_dau_hieu() -> list[tuple[str, str]]:
     bt = _kb()["bo_tri"]
     return [(ma, _t()._slug(bt[ma]["tieu_de"])) for ma in _bc().DAU_HIEU]

@@ -1,5 +1,6 @@
 // SEO-L1 — "Tuổi xông đất Tết {năm}": bảng gia chủ sinh 1960–2005 → 3 tuổi hợp nhất (engine ghép từ đúng hàm của trang
 // từng tuổi), tuổi nên tránh, giờ hoàng đạo mùng 1. Index cùng cửa sổ trang con (Tết năm nay + Tết tới).
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -19,7 +20,7 @@ const dmy = (iso: string) => iso.split("-").reverse().join("/");
 async function metaGoc(p: P): Promise<Metadata> {
   const n = docNamBang((await p.params).nam);
   if (!n) return {};
-  const m = metaTrang({ tieuDe: `Tuổi xông đất Tết ${n} hợp gia chủ, tuổi nên tránh, giờ đẹp`,
+  const m = metaTrang({ tieuDe: `Tuổi xông đất Tết ${n} hợp gia chủ, giờ đẹp mùng 1`,
     moTa: `Tết ${n}: tuổi nào hợp xông đất cho gia chủ sinh 1960–2005, tuổi nên tránh (xung năm, Tam tai), giờ hoàng đạo và hướng xuất hành mùng 1.`,
     duong: duongXongDatNam(n), anh: `/og/xong-dat?nam=${n}` });
   const namAm = await namAmHienTai();
@@ -94,6 +95,8 @@ export default async function Page(p: P) {
         </dl>
       </section>
 
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="xong_dat" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-8 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/tuoi-xong-dat" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>
       <p className="mt-3 flex flex-wrap gap-3 text-sm">

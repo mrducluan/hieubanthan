@@ -6,8 +6,8 @@
 type DauHieu = { bang: string; cot?: string } | { ham: string };
 export interface Migration { so: string; ten: string; dau: DauHieu }
 
-/** Migration có dấu hiệu nhìn thấy qua API (bảng / cột / hàm mới). Migration chỉ đổi ràng buộc (0015, 0021, 0023) không
- *  có ở đây — kiểm bằng da_chay_chua.sql. */
+/** Migration có dấu hiệu nhìn thấy qua API (bảng / cột / hàm mới). Migration chỉ đổi ràng buộc (0015, 0021, 0023, 0035 + 0036 — mốc
+ *  push `thang_hai_la_so`, `tuan_cua_toi`) không có ở đây — kiểm bằng da_chay_chua.sql. */
 export const MIGRATION: readonly Migration[] = [
   { so: "0006", ten: "Hồ sơ tài khoản", dau: { bang: "ho_so" } },
   { so: "0007", ten: "Nơi sinh trong hồ sơ", dau: { bang: "ho_so", cot: "noi_sinh" } },
@@ -33,6 +33,7 @@ export const MIGRATION: readonly Migration[] = [
   { so: "0031", ten: "Nhật ký hỏi đáp dùng khoá riêng", dau: { ham: "ghi_nhat_ky_hoi" } },
   { so: "0032", ten: "Nhật ký ngày ghé (Tháng của tôi)", dau: { bang: "nhat_ky_ghe" } },
   { so: "0033", ten: "Múi giờ nơi sinh trong hồ sơ", dau: { bang: "ho_so", cot: "utc_noi_sinh" } },
+  { so: "0034", ten: "Phiếu kiểm chứng theo ngôn ngữ (lệch bản dịch)", dau: { bang: "kiem_chung_phieu", cot: "ngon_ngu" } },
 ];
 
 /** Công tắc / số ở /quan-tri/cai-dat chỉ có tác dụng khi các migration này đã chạy (tiền tố khoá → số migration). */

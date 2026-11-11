@@ -15,6 +15,9 @@ import {
 } from "@/lib/menu-chan-trang";
 import { NutTuyChonCookie } from "@/components/khung/HoiDongYCookie";
 import { Logo } from "./Logo";
+import { NutDoiNgonNgu } from "./NutDoiNgonNgu";
+import { CAM_KET_CHAN_TRANG_EN, CHU_KHUNG, GIOI_THIEU_CHAN_TRANG_EN, MIEN_TRU_CHAN_TRANG_EN, cotChanTrangEn } from "@/lib/khung-en";
+import type { NgonNgu } from "@/lib/duong-en";
 
 const BIEU_TUONG: Record<BieuTuongCamKet, LucideIcon> = {
   khien: ShieldCheck, may_chu: Server, lap_lanh: Sparkles, khoa: Lock, bat_tay: HeartHandshake, sach: BookOpen, can: Scale, la_ban: Compass,
@@ -26,16 +29,26 @@ export async function ChanTrang() {
   return <KhungChanTrang cot={cms?.cot ?? COT_CHAN_TRANG} chu={cms?.chu} />;
 }
 
-export function KhungChanTrang({ cot, chu }: { cot: readonly CotChanTrang[]; chu?: ChuChanTrangCms | null }) {
+/** EN-ALL: chân trang bản Anh — cùng khung, chữ tiếng Anh (lib/khung-en.ts), chỉ link có bản Anh đã mở, không CMS
+ *  (chữ CMS là bản Việt — giai đoạn 10 thêm localization), không nút ủng hộ (ví / ngân hàng Việt Nam). `banViet` = trang
+ *  Việt tương đương cho dòng "Tiếng Việt". */
+export function ChanTrangEn({ banViet }: { banViet: string }) {
+  return <KhungChanTrang cot={cotChanTrangEn()} ngonNgu="en" banViet={banViet}
+    chu={{ gioiThieu: GIOI_THIEU_CHAN_TRANG_EN, camKet: [...CAM_KET_CHAN_TRANG_EN], mienTru: MIEN_TRU_CHAN_TRANG_EN, nhanUngHo: null }} />;
+}
+
+export function KhungChanTrang({ cot, chu, ngonNgu = "vi", banViet }: { cot: readonly CotChanTrang[]; chu?: ChuChanTrangCms | null; ngonNgu?: NgonNgu; banViet?: string }) {
   const vh = vanHanh();
+  const en = ngonNgu === "en";
+  const k = CHU_KHUNG[ngonNgu];
   const camKet = chu?.camKet ?? CAM_KET_CHAN_TRANG;
   const nam = new Date().getFullYear();
   return (
     <footer className="vach-sang mt-8 border-t border-line/60 bg-surface/30 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-10" data-testid="chan-trang">
       <div className="container grid gap-10 pt-10 lg:grid-cols-[1.2fr_2fr]">
         <div>
-          <Link href="/" className="inline-flex items-center gap-2.5" aria-label="Hiểu Bản Thân — trang chủ">
-            <Logo /><span className="font-serif text-xl tracking-tight">Hiểu Bản Thân</span>
+          <Link href={en ? "/en" : "/"} className="inline-flex items-center gap-2.5" aria-label={k.ve_trang_chu}>
+            <Logo /><span className="font-serif text-xl tracking-tight">{k.ten_site}</span>
           </Link>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-fg-muted" data-testid="chan-trang-gioi-thieu">
             {chu?.gioiThieu ?? GIOI_THIEU_CHAN_TRANG}
@@ -47,10 +60,10 @@ export function KhungChanTrang({ cot, chu }: { cot: readonly CotChanTrang[]; chu
             })}
           </ul>
           {vh.mangXaHoi.length > 0 && (
-            <ul className="mt-5 flex flex-wrap gap-2" aria-label="Mạng xã hội">
+            <ul className="mt-5 flex flex-wrap gap-2" aria-label={k.mang_xa_hoi}>
               {vh.mangXaHoi.map((m) => (
                 <li key={m.ten}>
-                  <a href={m.url} target="_blank" rel="noopener noreferrer me" aria-label={`Hiểu Bản Thân trên ${m.ten}`}
+                  <a href={m.url} target="_blank" rel="noopener noreferrer me" aria-label={k.tren(m.ten)}
                     className="inline-flex h-8 items-center rounded-full border border-line px-3 text-xs text-fg-muted hover:border-gold hover:text-fg">
                     {m.ten}
                   </a>
@@ -60,7 +73,7 @@ export function KhungChanTrang({ cot, chu }: { cot: readonly CotChanTrang[]; chu
           )}
         </div>
 
-        <nav aria-label="Liên kết cuối trang" className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+        <nav aria-label={k.lien_ket_cuoi} className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           {cot.map((c, i) => (
             <div key={i}>
               <p className="eyebrow">{c.ten}</p>
@@ -80,7 +93,7 @@ export function KhungChanTrang({ cot, chu }: { cot: readonly CotChanTrang[]; chu
           <p data-testid="chan-trang-mien-tru">{chu?.mienTru ?? MIEN_TRU_CHAN_TRANG}</p>
           {(vh.chuSoHuu || vh.diaChi || vh.email || vh.dienThoai) && (
             <div className="space-y-1 pt-1" data-testid="thong-tin-van-hanh">
-              {vh.chuSoHuu && <p className="text-fg-muted">{vh.chuSoHuu}{vh.maSo ? ` · Mã số: ${vh.maSo}` : ""}{vh.noiCap ? ` · ${vh.noiCap}` : ""}</p>}
+              {vh.chuSoHuu && <p className="text-fg-muted">{vh.chuSoHuu}{vh.maSo ? ` · ${k.ma_so}: ${vh.maSo}` : ""}{vh.noiCap ? ` · ${vh.noiCap}` : ""}</p>}
               {vh.diaChi && <p className="flex items-start gap-1.5"><MapPin className="mt-0.5 size-3 shrink-0" aria-hidden />{vh.diaChi}</p>}
               <p className="flex flex-wrap gap-x-4 gap-y-1">
                 {vh.email && <a href={`mailto:${vh.email}`} className="inline-flex items-center gap-1.5 py-1 hover:text-fg"><Mail className="size-3" aria-hidden />{vh.email}</a>}
@@ -93,16 +106,17 @@ export function KhungChanTrang({ cot, chu }: { cot: readonly CotChanTrang[]; chu
           {vh.boCongThuong && (
             <a href={vh.boCongThuong} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-[rgb(41_110_188)]/60 bg-[rgb(41_110_188)]/15 px-3 py-2 text-[11px] font-semibold text-fg">
-              <BadgeCheck className="size-4 text-[rgb(96_165_250)]" aria-hidden /> ĐÃ THÔNG BÁO BỘ CÔNG THƯƠNG
+              <BadgeCheck className="size-4 text-[rgb(96_165_250)]" aria-hidden />{` ${k.bo_cong_thuong}`}
             </a>
           )}
-          {coUngHo() && (
+          {!en && coUngHo() && (
             <Link href="/ung-ho" data-testid="chan-trang-ung-ho"
               className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-3 py-1.5 text-[12px] font-medium text-gold hover:bg-gold/10">
               <HeartHandshake className="size-3.5" aria-hidden /> {chu?.nhanUngHo ?? NHAN_UNG_HO_CHAN_TRANG}
             </Link>
           )}
-          <p>© {nam} Hiểu Bản Thân. Bảo lưu mọi quyền. <NutTuyChonCookie /></p>
+          {en ? <p>{k.ban_quyen(nam)} <NutTuyChonCookie /></p> : <p>© {nam} Hiểu Bản Thân (hieuban.com). Bảo lưu mọi quyền. <NutTuyChonCookie /></p>}
+          {en && banViet && <NutDoiNgonNgu href={banViet} sang="vi" className="hover:text-fg">{k.doi_ngon_ngu}</NutDoiNgonNgu>}
         </div>
       </div>
       </div>

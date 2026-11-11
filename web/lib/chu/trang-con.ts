@@ -48,7 +48,7 @@ export const CHU_XONG_DAT_CON = {
 
 export const CHU_HAN_NAM_CON = {
   "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi} = can chi năm)", mac_dinh: "Năm {can_chi}", toi_da: 60 },
-  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Hướng xấu năm {nam}", toi_da: 120 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Hướng xấu năm {nam}: nên tránh động thổ hướng nào?", toi_da: 120 },
   "cuoi.lam_nha": { nhom: C, nhan: "Link xem tuổi làm nhà ({nam})", mac_dinh: "Xem tuổi làm nhà năm {nam}", toi_da: 60 },
   // SEO-M: link chéo cùng năm.
   "cuoi.bang_lam_nha": { nhom: C, nhan: "Link bảng tuổi làm nhà ({nam})", mac_dinh: "Tuổi làm nhà năm {nam}", toi_da: 60 },
@@ -69,7 +69,7 @@ export const CHU_LAM_NHA_NAM = {
 
 export const CHU_XONG_DAT_NAM = {
   "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi} = can chi năm)", mac_dinh: "Tết {can_chi}", toi_da: 60 },
-  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Tuổi xông đất Tết {nam} hợp với gia chủ", toi_da: 120 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Tuổi nào xông đất Tết {nam} hợp gia chủ?", toi_da: 120 },
   "bang.tieu_de": { nhom: "Bảng", nhan: "Tiêu đề bảng", mac_dinh: "Tuổi hợp xông đất theo năm sinh gia chủ", toi_da: 120 },
   "bang.mo_ta": { nhom: "Bảng", nhan: "Giải thích dưới bảng", toi_da: 300,
     mac_dinh: "Mỗi dòng ghi 3 tuổi hợp nhất. Bấm năm sinh gia chủ để xem lý do, tuổi nên tránh và giờ đẹp mùng 1." },
@@ -146,4 +146,15 @@ export const CHU_NAM_TUOI = {
   "ca_nhan.mo_ta": { nhom: "Của riêng bạn", nhan: "Lời mời", toi_da: 260,
     mac_dinh: "Nhập ngày giờ sinh để xem năm {nam} của riêng bạn: 3 tháng tới, 12 tháng tới, Lộc – Kỵ của năm rơi vào mảng đời nào trên lá số." },
   "ca_nhan.nut": { nhom: "Của riêng bạn", nhan: "Chữ nút", mac_dinh: "Xem năm {nam} của tôi", toi_da: 40 },
+} as const satisfies BangChu;
+
+// Ý3 — "Sinh ở {ten}: lập lá số thế nào" (cụm trang người Việt sinh ở nước ngoài). Biến: {ten}, {nuoc}, {nam}.
+export const CHU_SINH_NN = {
+  "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({ten} = tên nước)", mac_dinh: "Người Việt sinh ở {ten}", toi_da: 80 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({ten})", mac_dinh: "Sinh ở {ten}: lập lá số Tử vi, Bát tự thế nào cho đúng giờ?", toi_da: 120 },
+  "bang.tieu_de": { nhom: "Bảng thành phố", nhan: "Tiêu đề bảng múi giờ từng thành phố", mac_dinh: "Múi giờ và giờ mùa hè từng thành phố năm {nam}", toi_da: 120 },
+  "lich_su.tieu_de": { nhom: "Lịch sử giờ mùa hè", nhan: "Tiêu đề bảng lịch sử", mac_dinh: "Năm bạn sinh có giờ mùa hè không?", toi_da: 100 },
+  "lich_am.tieu_de": { nhom: "Lịch âm", nhan: "Tiêu đề khối lịch âm Việt – Trung", mac_dinh: "Ngày âm trong sổ gia đình theo lịch Việt hay lịch Trung Quốc?", toi_da: 120 },
+  "huong_dan.tieu_de": { nhom: "Hướng dẫn", nhan: "Tiêu đề khối hướng dẫn nhập", mac_dinh: "Nhập hồ sơ cho người sinh ở {ten}", toi_da: 100 },
+  "cuoi.nut": { nhom: C, nhan: "Chữ nút lập lá số", mac_dinh: "Lập lá số với nơi sinh {ten}", toi_da: 60 },
 } as const satisfies BangChu;

@@ -1,5 +1,6 @@
 // HL-1 — "Xem ngày tốt hôm nay": máy chủ dựng sẵn thẻ hôm nay (giờ Việt Nam) cho người xem + SEO; hồ sơ trên máy
 // thêm phần tuổi xung/hợp ở trình duyệt.
+import { TomTatNam } from "@/components/seo/TomTatNam";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { TieuDeTrang } from "@/components/cms/DauCms";
@@ -13,7 +14,7 @@ import { ND_XEM_NGAY } from "./noi-dung";
 import { CHU_XEM_NGAY } from "@/lib/chu/cong-cu";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return apDungSeo(metaTrang({ tieuDe: "Xem ngày tốt hôm nay: hoàng đạo, giờ tốt, việc nên làm", moTa: ND_XEM_NGAY.moTa, duong: "/xem-ngay-tot" }), await layNoiDungTrang(ND_XEM_NGAY.duong));
+  return apDungSeo(metaTrang({ tieuDe: "Xem ngày tốt hôm nay: lịch vạn niên, giờ hoàng đạo", moTa: ND_XEM_NGAY.moTa, duong: "/xem-ngay-tot" }), await layNoiDungTrang(ND_XEM_NGAY.duong));
 }
 
 export default async function Page() {
@@ -27,6 +28,7 @@ export default async function Page() {
           mo_ta="Ngày hoàng đạo hay hắc đạo, giờ tốt, việc sách lịch ghi nên làm và nên kiêng — và ngày này có xung tuổi bạn không." />
         <XemNgayTot banDau={d} thang={t} />
         <p className="mt-4 text-xs text-fg-faint">Đường dẫn cố định của ngày này: <Link href={`/xem-ngay-tot/${iso}`} className="text-gold underline">/xem-ngay-tot/{iso}</Link></p>
+        <TomTatNam kieu="ngay" ngay={iso} gonDong tieuDe={`Hôm nay ${iso.split("-").reverse().join("/")} tốt hay xấu?`} nhanLink="Xem đủ giờ tốt, việc nên làm của ngày này" />
         <NgayTotTheoViec className="mt-10" />
       </div>
     </TrangCongCu>

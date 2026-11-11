@@ -7,7 +7,8 @@ export const NHANH_GOC = "main";
 export const TIEN_TO_NHANH = "quan-tri/";
 /** File sửa bằng công cụ riêng (sổ thẩm định: scripts/tham_dinh.py) — trang quản trị chỉ cho xem. */
 export const CHI_XEM = new Set(["tham_dinh.json"]);
-export const TEN_TEP = /^[a-z0-9_]+\.json$/;
+// HTT-2 H6: cả bản phủ tiếng Anh `en/<tên>.json` (soạn lại nháp cho mã lệch theo ngôn ngữ) — vẫn trong THU_MUC_KB.
+export const TEN_TEP = /^([a-z]{2}(-[a-z]{2})?\/)?[a-z0-9_]+\.json$/;
 
 const repo = () => process.env.QUAN_TRI_GITHUB_REPO || "mrducluan/hieubanthan";
 export const coGithub = () => Boolean(process.env.QUAN_TRI_GITHUB_TOKEN);
@@ -43,7 +44,15 @@ export interface TepKb { ten: string; kichThuoc: number; chiXem: boolean }
 
 export async function danhSachTepKb(): Promise<TepKb[]> {
   const ds = await gh<{ name: string; size: number; type: string }[]>(`/contents/${THU_MUC_KB}?ref=${NHANH_GOC}`);
-  return ds.filter((f) => f.type === "file" && TEN_TEP.test(f.name))
+  // HTT-2: bản phủ ngôn ngữ nằm trong thư mục con (`en/`, `en-us/`…) — liệt kê theo tên `en/<tệp>` (TEN_TEP nhận `en/`).
+  const thuMuc = ds.filter((f) => f.type === "dir" && /^[a-z]{2}(-[a-z]{2})?$/.test(f.name));
+  const con = (await Promise.all(thuMuc.map(async (d) => {
+    try {
+      const c = await gh<{ name: string; size: number; type: string }[]>(`/contents/${THU_MUC_KB}/${d.name}?ref=${NHANH_GOC}`);
+      return c.filter((f) => f.type === "file" && TEN_TEP.test(`${d.name}/${f.name}`)).map((f) => ({ ...f, name: `${d.name}/${f.name}` }));
+    } catch { return []; }
+  }))).flat();
+  return [...ds.filter((f) => f.type === "file" && TEN_TEP.test(f.name)), ...con]
     .map((f) => ({ ten: f.name, kichThuoc: f.size, chiXem: CHI_XEM.has(f.name) }))
     .sort((a, b) => a.ten.localeCompare(b.ten));
 }
@@ -68,7 +77,7 @@ export async function prQuanTriDangMo(): Promise<PrMo[]> {
 export async function moPrSuaKb(o: { ten: string; shaGoc: string; text: string; tieuDe: string; moTa: string }): Promise<PrMo> {
   const dau = await gh<{ object: { sha: string } }>(`/git/ref/heads/${NHANH_GOC}`);
   const tem = new Date().toISOString().replace(/\D/g, "").slice(0, 14);
-  const nhanh = `${TIEN_TO_NHANH}${o.ten.replace(/\.json$/, "").replace(/_/g, "-")}-${tem}`;
+  const nhanh = `${TIEN_TO_NHANH}${o.ten.replace(/\.json$/, "").replace(/[_/]/g, "-")}-${tem}`;
   await gh(`/git/refs`, { method: "POST", body: JSON.stringify({ ref: `refs/heads/${nhanh}`, sha: dau.object.sha }) });
   try {
     await gh(`/contents/${THU_MUC_KB}/${o.ten}`, {

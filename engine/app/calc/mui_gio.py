@@ -22,6 +22,10 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError, available_timezones
 _F = Path(__file__).parent / "data" / "mui_gio.json"
 _ZONE = re.compile(r"^[A-Z][A-Za-z_]+(?:/[A-Za-z0-9_+\-]+){1,2}$")
 _MA_TP = re.compile(r"^[a-z]{2}-[a-z0-9_]{2,40}$")
+# Ý6/H1: mùa chỉ đảo rõ ngoài chí tuyến Nam (cùng số với `battu_api.CHI_TUYEN_NAM` — test khoá hai nơi bằng nhau);
+# lệch giờ mặt trời trung bình ≥ 30 phút (nửa canh giờ) → đáng nhắc công tắc "Giờ mặt trời thực".
+CHI_TUYEN_NAM = -23.44
+NGUONG_CANH_BAO_PHUT = 30
 
 
 @lru_cache(maxsize=1)
@@ -45,6 +49,43 @@ def _tp() -> dict[str, dict]:
 
 def thanh_pho(ma: str) -> dict | None:
     return _tp().get(ma)
+
+
+def nam_ban_cau_kha_dung(vi_do: float | None) -> bool:
+    return vi_do is not None and vi_do <= CHI_TUYEN_NAM
+
+
+def lech_mat_troi_phut(kinh_do: float | None, utc_chuan: float) -> int | None:
+    """Lệch giờ mặt trời TRUNG BÌNH so với giờ chuẩn của múi (4 phút/độ kinh so với kinh tuyến múi); phương trình thời gian
+    (±16 phút theo ngày) không tính ở đây — đó là việc của `timebase` khi lập lá số."""
+    if kinh_do is None:
+        return None
+    return int(round(kinh_do * 4.0 - utc_chuan * 60.0))
+
+
+def utc_chuan_nam(zone: str, nam: int) -> float:
+    """Múi giờ CHUẨN (không giờ mùa hè) của vùng trong năm `nam` — lấy tại 15/01 và 15/07, giá trị nhỏ hơn là giờ chuẩn
+    (Nam bán cầu giờ mùa hè rơi vào tháng 1)."""
+    a = tai(zone, nam, 1, 15, 12)
+    b = tai(zone, nam, 7, 15, 12)
+    return min(a["utc_chuan"], b["utc_chuan"])
+
+
+@lru_cache(maxsize=4)
+def danh_sach_day_du(nam: int) -> list[dict]:
+    """Ý6 — danh sách nước + thành phố kèm cờ cho form hồ sơ: `utc_chuan` (năm `nam`), `lech_mat_troi_phut`,
+    `canh_bao_mat_troi` (|lệch| ≥ 30 phút), `nam_ban_cau_kha_dung` — web chỉ hiển thị, không tự tính."""
+    ra = []
+    for n in _d()["nuoc"]:
+        tp = []
+        for t in n["thanh_pho"]:
+            chuan = utc_chuan_nam(t["zone"], nam)
+            lech = lech_mat_troi_phut(t.get("kinh_do"), chuan)
+            tp.append({**t, "utc_chuan": chuan, "lech_mat_troi_phut": lech,
+                       "canh_bao_mat_troi": lech is not None and abs(lech) >= NGUONG_CANH_BAO_PHUT,
+                       "nam_ban_cau_kha_dung": nam_ban_cau_kha_dung(t.get("vi_do"))})
+        ra.append({**n, "thanh_pho": tp})
+    return ra
 
 
 @lru_cache(maxsize=1)

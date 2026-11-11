@@ -1,6 +1,6 @@
 "use client";
 // CD-1 — phần riêng của /chan-dung: hồ sơ trên máy (cần giờ + giới tính + nơi sinh) + câu trả lời khảo sát Nhân tướng trên
-// máy (tuỳ chọn) → báo cáo 8 chương do engine ghép (chương 1 miễn phí; chương sau mở bằng Sao khi công tắc bật — cùng
+// máy (tuỳ chọn) → báo cáo 9 chương do engine ghép (Ý2: chương "Điều bạn đã xác nhận" từ phiếu của chính người xem) (chương 1 miễn phí; chương sau mở bằng Sao khi công tắc bật — cùng
 // luồng `luanGiaiCoSao`, mô-đun "chan_dung"). Ma trận mảng × cách nhìn vẽ ngay trên báo cáo. Web không tính gì.
 import { useMemo } from "react";
 import { ScanFace } from "lucide-react";

@@ -1,6 +1,7 @@
 // NAM-1 (hướng A, chủ dự án duyệt 2026-10-30) — trang trụ "Năm {năm}": năm con gì, mệnh gì, Tết, Tam tai, 12 con giáp,
 // mốc lễ, hạn năm + lối sang mọi trang tra theo tuổi của năm đó và "Năm {năm} của riêng bạn" (/thoi-gian-toi).
 // Engine dựng toàn bộ dữ kiện (`/v1/nam/{nam}`); web chỉ hiển thị. Index năm âm hiện tại + năm sau.
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -23,7 +24,7 @@ const MENH_TOI = 2027;   // cụm "Sinh năm X mệnh gì" có tới năm này (
 async function metaGoc(p: P): Promise<Metadata> {
   const n = docNamBang((await p.params).nam);
   if (!n) return {};
-  const m = metaTrang({ tieuDe: `Năm ${n} là năm con gì, mệnh gì? Tết, Tam tai, tuổi xung`,
+  const m = metaTrang({ tieuDe: `Năm ${n} là năm con gì, mệnh gì? Tết, Tam tai`,
     moTa: `Năm ${n} theo âm lịch Việt Nam: can chi, mệnh nạp âm, ngày Tết, tháng nhuận, tuổi Tam tai, năm tuổi, tuổi xung, mốc lễ trong năm và lối tra sao hạn, tuổi làm nhà, xông đất, cưới hỏi.`,
     duong: duongNam(n), anh: anhBai({ tieuDe: `Năm ${n}`, mang: "lich" }) });
   return namIndex(n, await namAmHienTai()) ? m : { ...m, robots: { index: false, follow: true } };
@@ -75,7 +76,7 @@ export default async function Page(p: P) {
       </section>
 
       <section className="mt-6" aria-labelledby="thong-tin">
-        <h2 id="thong-tin" className="sr-only">Thông tin năm {n}</h2>
+        <h2 id="thong-tin" className="sr-only">Năm {n} con gì, mệnh gì, Tết ngày nào</h2>
         <dl className="grid grid-cols-2 gap-2 sm:grid-cols-3" data-testid="o-nam">
           {o.map(([k, v]) => (
             <div key={k} className="rounded-xl border border-line/70 p-3">
@@ -170,6 +171,8 @@ export default async function Page(p: P) {
           <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
         ))}</dl>
       </section>
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="nam" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       {/* AUD-Q5 (chủ dự án 2026-11-03): câu "tập quán, không phải tiên đoán" ĐƯỢC trích — AI trích lời tục lệ phải kèm câu rào này. */}
       <p className="mt-8 text-sm text-fg-muted" data-testid="luu-y-tap-quan">{d.luu_y}</p>

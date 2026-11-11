@@ -62,6 +62,8 @@ export function TuVi() {
   const c = useChu();
   // TV-PHAI (chủ dự án chốt 2026-10-02): "hiện cả hai" — Hoả/Linh lối Việt | Trung Châu; nửa sau tháng nhuận.
   const [hoaLinh, setHoaLinh] = useState<"viet" | "trung">("viet");
+  // HTT-1: giờ sinh theo đồng hồ (mặc định, như sách Việt) hay giờ mặt trời thực tại kinh độ nơi sinh — engine lập lại lá số.
+  const [gioSinh, setGioSinh] = useState<"dong_ho" | "mat_troi">("dong_ho");
   const [thangNhuan, setThangNhuan] = useState<ThangNhuan>("thang_sau");
   // TV-LICH (chủ dự án yêu cầu 2026-10-02): âm lịch Việt Nam (mặc định) ↔ lịch Trung Quốc.
   const [lich, setLich] = useState<"viet" | "trung">("viet");
@@ -79,7 +81,7 @@ export function TuVi() {
   const [luuNguyet, setLuuNguyet] = useState<PhaiLuuNguyet>("dau_quan_thai_tue");
   const laSoBan = laSoTuHoSo(hoSo);
   const goc: ChartInputVao | null = nt ? laSoNguoiThan(nt) : laSoBan;
-  const laSoGoc = goc ? { ...goc, ...(hoaLinh === "trung" ? { hoa_linh: hoaLinh } : {}), ...(thangNhuan !== "thang_sau" ? { thang_nhuan: thangNhuan } : {}), ...(lich === "trung" ? { lich } : {}) } : null;
+  const laSoGoc = goc ? { ...goc, ...(hoaLinh === "trung" ? { hoa_linh: hoaLinh } : {}), ...(thangNhuan !== "thang_sau" ? { thang_nhuan: thangNhuan } : {}), ...(lich === "trung" ? { lich } : {}), ...(gioSinh === "mat_troi" ? { gio_sinh: gioSinh } : {}) } : null;
   const laSo = laSoGoc ? { ...laSoGoc, ...(luuNguyet !== "dau_quan_thai_tue" ? { luu_nguyet: luuNguyet } : {}) } : null;
   // Lá số gốc không phụ thuộc phái lưu nguyệt → không an lại khi chỉ đổi phái tháng.
   const { data: ls, loi, thuLai } = usePost<LaSoOutputT>("/api/tuvi/la-so", laSoGoc);
@@ -103,7 +105,7 @@ export function TuVi() {
 
   const chiMenh = ls?.cung.find((c) => c.la_menh)?.chi ?? ls?.chi_cung_menh ?? "Dần";
   // TM-1: như TruongPhai — có lựa chọn khác mặc định / điều cần biết thì nút "Hiển thị" có chấm, nhắc hiện cả khi đóng.
-  const phaiKhac = lich !== "viet" || phaiDoSang !== "nam" || hoaLinh !== "viet" || luuNguyet !== "dau_quan_thai_tue" || thangNhuan !== "thang_sau";
+  const phaiKhac = lich !== "viet" || phaiDoSang !== "nam" || hoaLinh !== "viet" || luuNguyet !== "dau_quan_thai_tue" || thangNhuan !== "thang_sau" || gioSinh !== "dong_ho";
   // TV-NHUAN3: sinh trong tháng nhuận (mọi ngày — cách "cả tháng tính tháng sau" đổi cả nửa đầu tháng)
   const coNhuan = !!ls?.phai?.co_the_doi_thang_nhuan || !!ls?.phai?.sinh_thang_nhuan || thangNhuan !== "thang_sau";
   const nhacPhai = [
@@ -150,7 +152,7 @@ export function TuVi() {
 
   useBatDauDoc("tuvi", Boolean(ls) && !nt);
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Orbit} chip ten="Xem Tử vi: năm nay bạn nên chú ý gì?" mo_ta="Việc đang chững, tiền vào rồi lại ra, chuyện tình cảm chưa rõ? Nhập ngày giờ sinh để có lá số 12 cung, rồi đọc từng mảng đời bằng lời thường: chỗ đang thuận, chỗ nên chú ý, việc nên làm." />;
+  const dau = <DauMang Icon={Orbit} hinh="tu-vi" ten="Xem Tử vi: năm nay bạn nên chú ý gì?" mo_ta="Việc đang chững, tiền vào rồi lại ra, chuyện tình cảm chưa rõ? Nhập ngày giờ sinh để có lá số 12 cung, rồi đọc từng mảng đời bằng lời thường: chỗ đang thuận, chỗ nên chú ý, việc nên làm." />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   return (
     <div>
@@ -237,6 +239,8 @@ export function TuVi() {
                   lich={lich} setLich={setLich} lichKhac={!!ls.phai?.lich_khac}
                   phaiDoSang={phaiDoSang} setPhaiDoSang={setPhaiDoSang}
                   hoaLinh={hoaLinh} setHoaLinh={setHoaLinh}
+                  gioSinh={gioSinh} setGioSinh={(v) => { setGioSinh(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_gio_sinh", gio_sinh: v }); }}
+                  coKinhDo={!!goc?.noi_sinh && (goc.noi_sinh !== "nuoc_ngoai" || /^[a-z]{2}-(?!khac$)[a-z0-9_]+$/.test(goc.mui_gio ?? ""))}
                   thangNhuan={thangNhuan} setThangNhuan={setThangNhuan}
                   coNhuan={coNhuan}
                   luuNguyet={luuNguyet} setLuuNguyet={(v) => { setLuuNguyet(v); ghi("chart_interacted", { mo_dun: "tuvi", kind: "phai_luu_nguyet" }); }}

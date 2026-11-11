@@ -203,3 +203,16 @@ def hom_nay_vn() -> date:
     7 giờ sáng giờ VN (ngày/năm cá nhân, quẻ, nhịp sai một ngày). Mọi ngày mặc định của engine dùng hàm này."""
     from datetime import datetime, timedelta, timezone  # noqa: PLC0415
     return datetime.now(timezone(timedelta(hours=7))).date()
+
+
+# BT-UI — muối bí mật cho "lá Tarot riêng của ngày" (calc.tarot.la_ngay khi có ngày sinh). Công thức băm là công khai, nên
+# không có muối thì ai biết lá + ngày xem có thể quét ra ngày sinh (2–3 lá là đủ). Có muối (env LA_NGAY_MUOI ≥ 16 ký tự,
+# đặt trên máy chủ engine) → lá riêng mới được phép lên thẻ chia sẻ (`ba_la.chia_se_tarot`). Không đặt → lá vẫn chạy như
+# cũ nhưng chỉ hiện cho chính người xem. Đổi muối = mọi người đổi lá của ngày (không ảnh hưởng phép tính nào khác).
+def doc_muoi_la_ngay() -> str | None:
+    import os  # noqa: PLC0415
+    m = (os.environ.get("LA_NGAY_MUOI") or "").strip()
+    return m if len(m) >= 16 else None
+
+
+LA_NGAY_MUOI: str | None = doc_muoi_la_ngay()

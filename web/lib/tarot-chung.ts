@@ -11,7 +11,7 @@ export type SucLa = "tiep_suc" | "binh" | "bi_kim";
 
 /** Một lá rút gọn (engine `/v1/tarot/bo-bai` và trong hộp bài đọc). */
 export interface LaGon { id: string; ten: string; en: string; so: number; bo: BoTarot | null; nguyen_to: NguyenTo; loai: LoaiLa; nguoc?: boolean }
-export interface LaBoBai extends LaGon { tu_khoa: string[]; huong_nhin: -1 | 0 | 1 | null; chiem_tinh: string | null; decan: { cung: string; so: number; hanh_tinh: string } | null }
+export interface LaBoBai extends LaGon { tu_khoa: string[]; /** TR-5 (engine cũ chưa có) */ tu_khoa_nguoc?: string[]; huong_nhin: -1 | 0 | 1 | null; chiem_tinh: string | null; decan: { cung: string; so: number; hanh_tinh: string } | null }
 export interface ViTriTraiBai { ma: string; ten: string; hoi: string; x: number; y: number; xoay?: number }
 export interface TraiBai {
   ten: string; ngan: string; mo_ta: string; vi_tri: ViTriTraiBai[]; ke_can: [number, number][]; truc: { ten: string; vi_tri: number[] }[];
@@ -23,6 +23,8 @@ export interface BoBai {
   nguyen_to: Record<NguyenTo, { ten: string; en: string; bo: BoTarot; tinh: string; loi: string }>;
   trai_bai: Record<MaTraiBai, TraiBai>;
   chu_de: Record<string, { ten: string }>;
+  /** TR-5: chip chuyện hay hỏi + câu mẫu (engine cũ chưa có → web ẩn hàng chip). */
+  goi_y_hoi?: { ma: string; ten: string; chu_de: string | null; cau: string[] }[];
   truong_phai: Record<string, { ten: string; ngan: string; mo_ta: string; hoi: string }>;
 }
 /** Lá người dùng đã rút cho một vị trí. */

@@ -195,3 +195,32 @@ Chưa làm / chờ quyết:
 - Pháp lý: `/en/privacy`, `/en/terms` là tóm tắt — luật sư xem trước tuần 9 như mục 7; bản ràng buộc vẫn tiếng Việt.
 - Search Console: thêm `sitemap-en.xml`; theo dõi hiển thị / nhấp `/en/*` làm cột mốc tuần 8 (mục 6).
 
+## 14. HTT-1 — đối chiếu bộ tài liệu "Hybrid Two-Tier 6 bước" (2026-11-09)
+
+Chủ dự án gửi bộ tài liệu Drive (PostgreSQL 17 + Apache AGE + pgvector, Morphological AST, pipeline 4 agent, Tier 2 SSE, Coolify,
+cron RLHF) và hỏi "làm được không / phương án tốt nhất". Đánh giá đầy đủ: `docs/DANH-GIA-HYBRID-TWO-TIER.md`. Tóm tắt cho kế hoạch
+quốc tế:
+
+- **Kiến trúc đa ngôn ngữ giữ như QTE-2** ("dữ kiện tất định — lời theo ngôn ngữ", bản phủ `kb/data/<ngôn ngữ>/`); không đưa lời
+  vào DB, không VPS riêng. Phần lấy được của Drive đã vào HTT-1: lớp "Điểm giao thoa" tất định (vi + en), máy chuyển ngữ có lượt
+  kiểm định + cấm dịch sát + cụm "giọng AI", thống kê lệch tỉ lệ "Đúng với mình" theo ngôn ngữ (migration 0034) cho người duyệt,
+  giờ mặt trời thực toàn cầu + công tắc trường phái, dải gợi ý bản tiếng Anh (không chuyển hướng), Wikidata `sameAs` đã kiểm.
+- **Bản `/en` có phiếu kiểm chứng** ("Resonates with me / Not quite me") từ HTT-1 → từ đây đo được bản dịch nào bản xứ không thấy
+  đúng (mục 3.5 của tài liệu) — đây là số liệu quyết định cho mốc tuần 8 (mục 6) bên cạnh Search Console.
+- **HTT-2 đã làm (2026-11-09)**: AI diễn đạt hộp giao thoa (công tắc quản trị, mặc định tắt, chỉ bản Việt); "Soạn lại nháp → PR"
+  cho mã lệch (Tarot + Giao thoa — hai nơi /en có phiếu); điều hậu Bát tự theo mùa thực cho người sinh ngoài chí tuyến Nam.
+- Còn chờ số liệu: biến thể A/B theo thị trường bằng
+  bản phủ thứ hai + cờ PostHog.
+
+## 15. HTT-3 — bản `/en` được QC SEO/GEO + biến thể thị trường (2026-11-09)
+
+- `/en` đã qua bộ rà SEO (97 URL, 0 lỗi): hreflang hai chiều tới trang tương đương, ngày đăng/sửa thật, OG tiếng Anh, 404 tiếng
+  Anh, breadcrumb / Article / CollectionPage / FAQ JSON-LD, Organization tiếng Anh, llms.txt có mục English — chi tiết
+  `docs/DANH-GIA-HYBRID-TWO-TIER.md` mục 9.2.
+- **Biến thể thị trường** (Ý7): `x-ngon-ngu = en-us` theo Accept-Language khi có bản phủ `kb/data/en-us/`; phiếu "Resonates" mang
+  biến thể; khung "Lệch theo ngôn ngữ" so en-us với cả vi lẫn en. Thêm thị trường = thêm thư mục bản phủ + mã vào `BIEN_THE_EN`.
+- Hạ tầng: giữ Singapore (mục 5); đo TTFB từ Mỹ trên production bằng PSI / workflow "Kiểm tra SEO" trước khi xét `preferredRegion`.
+- Việc của anh: Search Console property `https://hieuban.com/en/`; mốc tuần 8 đọc cả tỉ lệ "Resonates" theo biến thể.
+- Mảng tiếng Anh tiếp theo: đề xuất Kinh Dịch (`/en/i-ching`) trước Bát tự vì nguồn công cộng tiếng Anh (Legge 1882) sẵn, ít tên
+  riêng; cần anh chốt vì khác thứ tự mục 2.
+

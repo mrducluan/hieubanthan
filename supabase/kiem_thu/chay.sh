@@ -27,6 +27,8 @@ psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_thanso_hoc.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_tuvi_hoc_0017.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_push_0019.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_push_0020.sql
+psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_push_0035.sql
+psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_push_0036.sql
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_kiem_chung_0021.sql
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_kiem_chung_sau_0022.sql
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_sec2_0023.sql
@@ -40,3 +42,4 @@ psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_chuoi_huy_hieu_
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_nhat_ky_0031.sql
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_nhat_ky_ghe_0032.sql
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_ho_so_0033.sql
+psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_kiem_chung_0034.sql

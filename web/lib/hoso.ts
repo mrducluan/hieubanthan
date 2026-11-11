@@ -86,7 +86,7 @@ export function capNhatHoSo(them: Partial<Omit<HoSo, "v" | "tao_luc">>): HoSo | 
 
 /** Khoá localStorage gắn với MỘT hồ sơ (chuỗi máy, lá bài, hẹn, huy hiệu máy, tổng kết đã đóng, mảng đã xem, nhật ký ghé) —
  *  xoá hồ sơ thì xoá theo, để người khác dùng cùng máy không thừa kế dấu mốc của người trước (KV-THANG). */
-export const KHOA_THEO_HO_SO = ["hbt.hom_nay", "hbt.la_bai.v1", "hbt.hen.v1", "hbt.huy_hieu_may.v1", "hbt.huy_hieu_da_bao.v1",
+export const KHOA_THEO_HO_SO = ["hbt.hom_nay", "hbt.la_bai.v1", "hbt.ba_la.v1", "hbt.hen.v1", "hbt.huy_hieu_may.v1", "hbt.huy_hieu_da_bao.v1",
   "hbt.tong_ket_dong.v1", "hbt.mang_da_xem.v1", "hbt.nhat_ky.v1", "hbt.ngoai_tuyen.v1",
   // Dấu vết khác gắn với người dùng hồ sơ này: ý định hôm nay, đối chiếu cách Bát tự, hộp chờ kiểm chứng sau, phiếu phái,
   // lần ghé Bản thân, nhắc chuỗi đã đóng.
@@ -145,6 +145,14 @@ export function hoTenList(h: Pick<HoSo, "ho_ten" | "ten_khac">): string[] {
 export function tenGoi(h: Pick<HoSo, "ho_ten">): string {
   const phan = h.ho_ten.trim().split(/\s+/);
   return phan[phan.length - 1] ?? h.ho_ten;
+}
+
+/** EN-ALL: tên gọi ở bản Anh. Hồ sơ dùng chung hai ngôn ngữ — tên Việt (có dấu) đặt họ trước nên gọi tên cuối như bản Việt;
+ *  tên Anh / không dấu gọi tên đầu ("John Smith" → John). Tên thường gọi (`ten_khac`) có thì dùng luôn. */
+export function tenGoiEn(h: Pick<HoSo, "ho_ten" | "ten_khac">): string {
+  if (h.ten_khac?.trim()) return h.ten_khac.trim();
+  if (/[^\u0000-\u024f]|[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/i.test(h.ho_ten)) return tenGoi(h);
+  return h.ho_ten.trim().split(/\s+/)[0] ?? h.ho_ten;
 }
 
 /** Ngày có tồn tại không (31/2 → false). Kiểm tra định dạng, không phải tính toán huyền học. */

@@ -15,7 +15,7 @@ import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { layCauHinh } from "@/lib/cau-hinh";
 import { baoLoi } from "@/lib/giam-sat";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
-import { goiEngineDaKiem } from "@/lib/proxy";
+import { goiEngineDaKiem, mienPhiBanAnh } from "@/lib/proxy";
 
 export const coTaiKhoan = () => Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 export const biMat = () => {
@@ -71,6 +71,8 @@ async function laCauDacBiet(req: Request): Promise<boolean> {
 }
 
 export async function cuaHoi(req: Request, moDun: string): Promise<Cua> {
+  // EN-ALL mục 6.1: bản Anh không có Sao / cổng nạp → không đếm lượt, không hộp thoại tiếng Việt (chỉ mảng đã mở tiếng Anh).
+  if (mienPhiBanAnh(req, "hoi", moDun)) return MO;
   if (!coTaiKhoan() || !(await layCauHinh<boolean>("sao.hoi.thu"))) return MO;
   const dv = khachDichVu();
   if (!dv) return MO;

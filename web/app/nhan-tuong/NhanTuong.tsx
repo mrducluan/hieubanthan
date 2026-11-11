@@ -19,7 +19,7 @@ import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { hoiMang } from "@/lib/hoi-mang";
 import { laSoTuHoSo, useHoSo } from "@/lib/hoso";
-import { demTraLoi, laVung, luuTraLoi, useTraLoi, type BaoCaoNhanTuong as Bc, type KhaoSat } from "@/lib/nhan-tuong";
+import { demTraLoi, laVung, luuTraLoi, useTraLoi, type BaoCaoNhanTuong as Bc, type KhaoSat, type TraLoi } from "@/lib/nhan-tuong";
 
 const GOI_Y = [
   { nhom: "Một vùng", cau: ["Ấn Đường rộng nghĩa là gì?", "Sơn Căn thấp thì sao?", "Pháp Lệnh đâm vào mép là gì?"] },
@@ -46,27 +46,30 @@ export function NhanTuong() {
   const soCau = demTraLoi(traLoi);
   const namSinh = hoSo?.nam && hoSo.nam >= 1900 ? hoSo.nam : undefined;
 
-  const xemBaiDoc = async () => {
-    if (!traLoi || dang) return;
+  // NT-2: `tl` truyền thẳng khi vừa điền từ số đo ảnh (state traLoi chưa kịp cập nhật).
+  const docVoi = async (tl: TraLoi | undefined) => {
+    if (!tl || dang) return;
     setDang(true); setLoi(null);
     try {
       const laSo = laSoTuHoSo(hoSo);
-      const body = { tra_loi: traLoi, ...(hoSo?.nam && hoSo.thang && hoSo.ngay && hoSo.am == null ? { ngay_sinh: `${hoSo.nam}-${String(hoSo.thang).padStart(2, "0")}-${String(hoSo.ngay).padStart(2, "0")}` } : namSinh ? { nam_sinh: namSinh } : {}),
+      const body = { tra_loi: tl, ...(hoSo?.nam && hoSo.thang && hoSo.ngay && hoSo.am == null ? { ngay_sinh: `${hoSo.nam}-${String(hoSo.thang).padStart(2, "0")}-${String(hoSo.ngay).padStart(2, "0")}` } : namSinh ? { nam_sinh: namSinh } : {}),
         ...(hoSo?.gioi_tinh ? { gioi_tinh: hoSo.gioi_tinh } : {}), ...(laSo ? { la_so: laSo } : {}) };
       const d = await postJson<Bc>("/api/nhan-tuong/luan-giai", body);
       setBc(d);
-      ghi("chart_interacted", { mo_dun: "nhantuong", kind: "bai_doc", so_cau: soCau, ngu_hinh: d.da_tinh?.ngu_hinh?.hinh });
+      ghi("chart_interacted", { mo_dun: "nhantuong", kind: "bai_doc", so_cau: demTraLoi(tl), ngu_hinh: d.da_tinh?.ngu_hinh?.hinh });
       setTimeout(() => refBaiDoc.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
     } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đọc được lúc này."); } finally { setDang(false); }
   };
+  const xemBaiDoc = () => void docVoi(traLoi);
+  const dungVaXem = (tl: TraLoi) => { luuTraLoi(tl); void docVoi(tl); };
 
   const dau = (
-    <DauMang Icon={ScanFace} ten="Nhân tướng học" chip
+    <DauMang Icon={ScanFace} hinh="nhan-tuong" ten="Xem tướng mặt: gương mặt bạn nói gì?"
       mo_ta="Gương mặt kể gì về bạn? Tải một ảnh chân dung để máy gợi ý nét mặt (có thoả thuận, ảnh không lưu), hoặc đứng trước gương tự trả lời 31 câu theo sáu bước — trang ghép điều bạn thấy với cách đọc của sách tướng xưa thành bài đọc tám chương: dáng mặt theo năm hành, tính cách, việc và tiền, tình cảm, sức khoẻ, năm nay nhìn vào đâu, tướng và lá số, việc nên làm. Không điểm số, không xem tướng người khác." />
   );
   // ANH-1: tải ảnh chân dung đứng ngay dưới đầu trang (chỉ khi chưa có bài đọc); gợi ý điền vào khảo sát trên máy.
   const anhChanDung = !bc && traLoi !== undefined && (
-    <AnhChanDung ks={ks} daTraLoi={traLoi} onGoiY={luuTraLoi} onXem={xemBaiDoc} dangXem={dang} />
+    <AnhChanDung ks={ks} daTraLoi={traLoi} onGoiY={luuTraLoi} onXem={xemBaiDoc} onDungVaXem={dungVaXem} dangXem={dang} />
   );
   // Khối bản đồ không cần dữ liệu người dùng → render cả ở máy chủ (HTML có sẵn hình + lời dẫn khi chờ hồ sơ / lúc không JS).
   const banDo = !bc && (

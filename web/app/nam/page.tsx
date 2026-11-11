@@ -1,5 +1,6 @@
 // NAM-1 — mục lục "Xem theo năm": năm âm lịch đang đi + năm tới (trang trụ /nam/{năm}) và lối sang "Thời gian tới của
 // bạn". Năm lấy từ engine (namAmHienTai) → tự trượt sau Tết, không sửa tay mỗi năm.
+import { TomTatNam } from "@/components/seo/TomTatNam";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -11,7 +12,7 @@ import { duongNam, namCongKhai, dmy } from "@/lib/nam";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 const DUONG = "/nam";
-const MAC = { tieuDe: "Xem theo năm: năm con gì, Tết, Tam tai, tuổi làm nhà, xông đất",
+const MAC = { tieuDe: "Xem theo năm: năm con gì, Tam tai, làm nhà, xông đất",
   moTa: "Tra từng năm âm lịch: can chi, mệnh nạp âm, ngày Tết, tuổi Tam tai, năm tuổi, sao hạn, tuổi làm nhà, cưới hỏi, xông đất, sinh con — và xem 3 tháng, 12 tháng tới của riêng bạn." };
 
 const HOI_DAP = [
@@ -28,7 +29,7 @@ export default async function Page() {
   const namAm = await namAmHienTai();
   const [nd, ...nam] = await Promise.all([layNoiDungTrang(DUONG), namCongKhai(namAm), namCongKhai(namAm + 1)]);
   if (!nam.some(Boolean)) throw new Error("engine không phản hồi");   // SEO-L3: engine lỗi → 5xx, không trang rỗng 200
-  const h1 = nd.dau.h1 ?? "Xem theo năm";
+  const h1 = nd.dau.h1 ?? "Xem theo năm: năm con gì, mệnh gì, tuổi nào cần lưu ý";
   return (
     <div className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(
@@ -48,6 +49,7 @@ export default async function Page() {
           </Link></li>
         ))}
       </ul>
+      <TomTatNam kieu="nam" nam={namAm + 1} tieuDe={`Năm ${namAm + 1} tóm tắt: con gì, mệnh gì, Tết ngày nào`} nhanLink={`Xem đủ năm ${namAm + 1}: 12 con giáp, mốc lễ, hạn năm`} />
       <section className="mt-8" aria-labelledby="moi-nam">
         <h2 id="moi-nam" className="text-2xl">Mỗi trang năm có gì</h2>
         <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-fg-muted">

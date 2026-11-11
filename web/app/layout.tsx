@@ -1,14 +1,17 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { GoiYTiengAnh } from "@/components/khung/GoiYTiengAnh";
 import { Newsreader, Be_Vietnam_Pro, Noto_Serif_TC } from "next/font/google";
 import { HopThoaiSao } from "@/components/sao/HopThoaiSao";
 import { ThuongVe } from "@/components/sao/ThuongVe";
 import { DangKyApp } from "@/components/khung/DangKyApp";
 import { GhiVaoTrang } from "@/components/khung/GhiVaoTrang";
-import { ChanTrang, KhungChanTrang } from "@/components/khung/ChanTrang";
-import { KhungEn } from "@/components/en/KhungEn";
+import { ChanTrang, ChanTrangEn, KhungChanTrang } from "@/components/khung/ChanTrang";
+import { menuEn } from "@/lib/khung-en";
+import { MENU_DAU_TRANG } from "@/lib/menu-dau-trang";
+import { banVietTrangEn } from "@/lib/kien-thuc";
 import { COT_CHAN_TRANG } from "@/lib/menu-chan-trang";
 import { ThanhTren, TabDuoi } from "@/components/khung/DieuHuong";
 import { ThanhMang } from "@/components/khung/ThanhMang";
@@ -26,7 +29,9 @@ import "./globals.css";
 import { DaiXemNhap } from "@/components/cms/DaiXemNhap";
 import { ChuChung } from "@/components/cms/ChuChung";
 import { chuChungCms } from "@/lib/cms";
-import { dangXemNhap } from "@/lib/noi-dung-trang";
+import { banTiengAnh, dangXemNhap } from "@/lib/noi-dung-trang";
+import { LA_MA_EN, langHtml } from "@/lib/ngon-ngu";
+import { NgonNguProvider } from "@/components/khung/NgonNgu";
 
 // Display: Newsreader — serif, chữ số đẹp cho con số lớn. Body: Be Vietnam Pro — thiết kế cho tiếng Việt.
 // PERF-1: tách nghiêng ra bản riêng KHÔNG preload — bản nghiêng (64 KB) chỉ dùng ở vài câu trích, trước đây
@@ -56,7 +61,7 @@ const han = Noto_Serif_TC({ weight: ["600"], subsets: ["latin"], variable: "--fo
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  title: { default: "Thần số học, Tử vi, Bát tự online miễn phí — Hiểu Bản Thân", template: "%s · Hiểu Bản Thân" },
+  title: { default: "Hiểu Bản Thân — Thần số học và huyền học online miễn phí", template: "%s · Hiểu Bản Thân" },
   description: MO_TA_SITE,
   applicationName: TEN_SITE,
   category: "lifestyle",
@@ -87,16 +92,33 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   // CSP-2: nonce của lượt tải (proxy.ts) — đọc header cũng khiến mọi trang render động, bắt buộc để nonce khớp từng lượt.
   const hd = await headers();
   const nonce = hd.get("x-nonce") ?? undefined;
-  // QTE: /en → khung tiếng Anh gọn (không CMS, không Sao, không menu Huyền học); đo lường + giám sát giữ như bản Việt.
-  if (hd.get("x-ngon-ngu") === "en") {
+  // EN-ALL GĐ 1: /en → CÙNG khung với bản Việt (menu + menu con, thanh mảng, chân trang, hộp cookie, tab dưới) với chữ
+  // tiếng Anh (lib/khung-en.ts) và chỉ các mục đã có bản Anh. Chưa có ở bản Anh: chữ CMS (dải thông báo, menu CMS — chờ
+  // localization ở GĐ 10), Sao / ví / hộp nạp (mục 6.1: chưa có cổng thanh toán quốc tế), mời cài app (manifest bản Việt).
+  const maNn = hd.get("x-ngon-ngu") ?? "vi";
+  if (LA_MA_EN.test(maNn)) {
+    const menu = menuEn(MENU_DAU_TRANG);
+    // Trang Việt tương đương cho nút "Tiếng Việt" (trang con cụm kiến thức: slug Anh → slug Việt, không qua 308).
+    const hienThi = hd.get("x-duong-hien-thi") ?? "/en";
+    const banVietEn = await banVietTrangEn(hienThi);
     return (
-      <html lang="en" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
+      <html lang={langHtml(maNn)} className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
         <body>
           <GtmNoScript />
-          <JsonLd data={goiLd(ldToChuc(), ldWebsite())} />
+          <JsonLd data={goiLd(ldToChuc("en"), ldWebsite("en"))} />
           <div className="star-field" aria-hidden />
           <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">Skip to content</a>
-          <KhungEn>{children}</KhungEn>
+          <NgonNguProvider ngonNgu="en" ma={maNn}>
+            <ChuChung chu={{}}>
+              <ThanhTren muc={menu} banViet={{ cho: hienThi, ve: banVietEn }} />
+              <Suspense fallback={<ThanhMang />}><ThanhMangDem /></Suspense>
+              <main id="noi-dung" className="container pb-12 pt-6 md:pb-16 md:pt-10" lang="en">{children}</main>
+              <ChanTrangEn banViet={banVietEn} />
+              <TabDuoi muc={menu} />
+              <HoiDongYCookie />
+            </ChuChung>
+          </NgonNguProvider>
+          <GhiGioiThieu />
           <GiamSat />
           <GhiVaoTrang />
           <DoLuongGoogle nonce={nonce} />
@@ -105,11 +127,23 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     );
   }
   const chuChung = await chuChungCms();
+  // HTT-1: trình duyệt ưu tiên tiếng Anh (thẻ đầu của Accept-Language), KHÔNG kê tiếng Việt ở bất kỳ vị trí nào (người Việt
+  // dùng Chrome tiếng Anh thường vẫn có "vi" trong danh sách → đọc được bản Việt, không mời) và chưa tắt dải → mời đọc bản /en
+  // (không chuyển hướng). Chỉ ở trang CÓ bản Anh (banTiengAnh) — không hiện ở trang quản trị / thẻ chia sẻ / trang không có bản dịch.
+  const ngonNguTrinhDuyet = (hd.get("accept-language") ?? "").toLowerCase();
+  const uuTien = ngonNguTrinhDuyet.split(",")[0]?.trim() ?? "";
+  const coTiengViet = /(^|,)\s*vi(-[a-z]{2})?\s*(;|,|$)/.test(ngonNguTrinhDuyet);
+  const duongDangMo = (hd.get("x-duong-dan") ?? "").replace(/\/+$/, "") || "/";
+  const hrefEn = banTiengAnh(duongDangMo);
+  const goiYEn = Boolean(hrefEn) && uuTien.startsWith("en") && !coTiengViet && !(await cookies()).get("hbt-goi-y-en");
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
       <body>
         <GtmNoScript />
-        <JsonLd data={goiLd(ldToChuc(), ldWebsite(), ldUngDung())} />
+        {goiYEn && hrefEn && <GoiYTiengAnh href={hrefEn} />}
+        {/* SEO-N: WebApplication của cả site (url = trang chủ) chỉ phát ở trang chủ — phát mọi trang là bảo máy tìm kiếm
+            "ứng dụng Tử vi nằm ở trang chủ". Trang công cụ có WebApplication của riêng nó. */}
+        <JsonLd data={duongDangMo === "/" ? goiLd(ldToChuc(), ldWebsite(), ldUngDung()) : goiLd(ldToChuc(), ldWebsite())} />
         <div className="star-field" aria-hidden />
         <a href="#noi-dung" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">
           Bỏ qua điều hướng

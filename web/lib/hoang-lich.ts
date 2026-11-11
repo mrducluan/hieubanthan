@@ -1,5 +1,6 @@
 // HL-1 — kiểu dữ liệu + đọc phía máy chủ cho "Xem ngày tốt". Engine tính mọi thứ (trực, hoàng đạo, nghi/kỵ, giờ…),
 // web chỉ hiển thị. Bản công khai (không ngày sinh) đọc bằng GET để cache; bản cá nhân đi qua /api/lich/*.
+import { duongTheoLuot } from "@/lib/engine-ngon-ngu";
 import { unstable_noStore as noStore } from "next/cache";
 
 /** `ten` = việc theo lối ngày nay; `ten_goc` = cách sách xưa gọi (chỉ ở phần giải nghĩa); `luu_y` = việc y tế / pháp lý. */
@@ -76,8 +77,9 @@ const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
 async function lay<T>(duong: string): Promise<T | null> {
   try {
-    const r = await fetch(`${ENGINE_URL}${duong}`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    const nn = await duongTheoLuot(duong);
+    const r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: 60 * 60 * 6 },        // dữ liệu một ngày cố định — không đổi theo giờ
       signal: AbortSignal.timeout(15_000),
     });

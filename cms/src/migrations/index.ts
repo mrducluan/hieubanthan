@@ -22,6 +22,9 @@ import * as migration_20261027_090000_hh_huyen_hoc from './20261027_090000_hh_hu
 import * as migration_20261103_090000_aud_q2_cung_phi from './20261103_090000_aud_q2_cung_phi';
 import * as migration_20261103_120000_tm_1_menu_huyen_hoc from './20261103_120000_tm_1_menu_huyen_hoc';
 import * as migration_20261107_090000_tr_1_menu_tarot from './20261107_090000_tr_1_menu_tarot';
+import * as migration_20261110_200000_blog_10_xuat_ban_notfair from './20261110_200000_blog_10_xuat_ban_notfair';
+import * as migration_20261111_090000_kw6t_bai_cu from './20261111_090000_kw6t_bai_cu';
+import * as migration_20261111_120000_kw6t_lan_2 from './20261111_120000_kw6t_lan_2';
 
 export const migrations = [
   {
@@ -143,5 +146,20 @@ export const migrations = [
     up: migration_20261107_090000_tr_1_menu_tarot.up,
     down: migration_20261107_090000_tr_1_menu_tarot.down,
     name: '20261107_090000_tr_1_menu_tarot',
+  },
+  {
+    up: migration_20261110_200000_blog_10_xuat_ban_notfair.up,
+    down: migration_20261110_200000_blog_10_xuat_ban_notfair.down,
+    name: '20261110_200000_blog_10_xuat_ban_notfair',
+  },
+  {
+    up: migration_20261111_090000_kw6t_bai_cu.up,
+    down: migration_20261111_090000_kw6t_bai_cu.down,
+    name: '20261111_090000_kw6t_bai_cu',
+  },
+  {
+    up: migration_20261111_120000_kw6t_lan_2.up,
+    down: migration_20261111_120000_kw6t_lan_2.down,
+    name: '20261111_120000_kw6t_lan_2',
   },
 ];

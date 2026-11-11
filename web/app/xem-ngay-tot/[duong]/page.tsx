@@ -1,5 +1,6 @@
 // HL-1 — trang một ngày (/xem-ngay-tot/2026-10-13) hoặc một tháng (/xem-ngay-tot/thang-10-2026).
 // Ngày ngoài cửa sổ hữu ích (7 ngày trước → NGAY_SAU = 90 ngày tới) vẫn xem được nhưng noindex; tháng index trong ±2 năm.
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { HoiDapHien, TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
@@ -79,6 +80,8 @@ export default async function Page({ params }: P) {
           <div className="mb-5"><TraLoiNhanh chu={d.tra_loi_nhanh} /></div>
           <XemNgayTot banDau={d} thang={t} />
         </div>
+        {/* SEO-O: ảnh tóm tắt ngày (alt cùng nguồn với chữ trong ảnh). */}
+        <AnhTomTat kieu="ngay" ngay={x.iso} />
         <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mx-auto mt-10 max-w-3xl" />
         <LdTrangCon duong={duong} ten={tieuDe} cuoi={{ chu: c("cuoi.chu"), link: c("cuoi.link") }}
           moTa={`${d.thu}, âm lịch ${d.am.chu}, ngày ${d.can_chi.ngay}: ${d.hoang_dao ? "hoàng đạo" : "hắc đạo"} (${d.than.ten}), trực ${d.truc.ten}.`}
@@ -129,6 +132,7 @@ export default async function Page({ params }: P) {
         </nav>
         <HoiDapHien ds={t.hoi_dap} />
         {t.hoi_dap?.length ? <JsonLd data={goiLd(ldHoiDap(t.hoi_dap))} /> : null}
+        <AnhTomTat kieu="thang" nam={x.nam} thang={x.thang} className="mt-4" />
         <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" />
       </div>
       <LdTrangCon duong={duong} ten={tieuDe} cuoi={{ chu: c("cuoi.chu"), link: c("cuoi.link") }}

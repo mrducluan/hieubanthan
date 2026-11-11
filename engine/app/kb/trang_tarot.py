@@ -7,6 +7,10 @@ tinh, Sephirah, Hebrew — bảng thật cho lá số 2–10), trích sách (Wai
 Không điểm số, không sinh nghĩa mới."""
 from __future__ import annotations
 
+from app import ngon_ngu
+
+import re
+
 from app.calc import tarot as calc
 from app.kb import tarot_kb as kb
 
@@ -21,6 +25,7 @@ def _t():
     return trang
 
 
+@ngon_ngu.theo_viet
 def ds_la_bai() -> list[tuple[str, str]]:
     t = _t()
     return [(ma, t._slug(kb.la()[ma]["ten"])) for ma in calc.BO_BAI]
@@ -36,6 +41,11 @@ def _ngay(tu: list[int], den: list[int]) -> str:
     return f"{tu[1]}/{tu[0]}–{den[1]}/{den[0]}"
 
 
+def slug_en(en: str) -> str:
+    """Slug URL bản tiếng Anh của lá ("The Fool" → "the-fool") — cùng luật với `web/lib/en/engine.ts slugLa`."""
+    return re.sub(r"^-|-$", "", re.sub(r"[^a-z0-9]+", "-", en.lower()))
+
+
 def trang_la_bai(ma: str, slug: str) -> dict:
     t = _t()
     l = kb.la()[ma]
@@ -49,10 +59,13 @@ def trang_la_bai(ma: str, slug: str) -> dict:
            {"tieu_de": "Hình trên lá (bộ Waite 1909)", "doan": l["hinh_anh"]},
            {"tieu_de": "Xuôi và ngược", "danh_sach": [f"Xuôi: {l['y_xuoi']}", f"Ngược: {l['y_nguoc']}"]},
            {"tieu_de": "Theo từng chuyện", "danh_sach": [f"{TEN_LV[k]}: {l['linh_vuc'][k]}" + (" Lời nhắc nhịp sống, không thay lời bác sĩ." if k == "suc_khoe" else "") for k in TEN_LV]},
-           {"tieu_de": "Bốn trường phái đọc lá này thế nào",
-            "doan": "Cùng một lá, bốn trường phái hỏi bốn câu khác nhau — ở Hiểu Bản Thân cả bốn cùng góp vào một bài đọc.",
-            "bang": {"cot": ["Trường phái", "Câu hỏi của phái", "Cách đọc lá này"],
-                     "dong": [[TEN_PHAI[k], kb.truong_phai()[k]["hoi"], l["truong_phai"][k]["loi"]] for k in ("rws", "thoth", "tdm", "bota")]}}]
+           # EN-ALL: bản phủ ngôn ngữ có thể tắt `truong_phai` (null, QTE-3) → bỏ mục này thay vì ném KeyError (mục lục KB
+           # gọi bằng tiếng Anh từng trả 500). Bản Việt luôn có trường này → đầu ra không đổi.
+           *([{"tieu_de": "Bốn trường phái đọc lá này thế nào",
+               "doan": "Cùng một lá, bốn trường phái hỏi bốn câu khác nhau — ở Hiểu Bản Thân cả bốn cùng góp vào một bài đọc.",
+               "bang": {"cot": ["Trường phái", "Câu hỏi của phái", "Cách đọc lá này"],
+                        "dong": [[TEN_PHAI[k], kb.truong_phai()[k]["hoi"], l["truong_phai"][k]["loi"]] for k in ("rws", "thoth", "tdm", "bota")]}}]
+             if l.get("truong_phai") else [])]
     # chiêm tinh & nhịp
     if l["loai"] == "an_chinh":
         ct = l["chiem_tinh"]
@@ -86,8 +99,11 @@ def trang_la_bai(ma: str, slug: str) -> dict:
         if tr.get("ten"):
             nv = f"{tr['ten']}. {nv}"
         trich_dan.append({"sach": kb.ten_nguon(tr["sach"]), "nguyen_van": nv, "nghia": tr["nghia"]})
-    muc.append({"tieu_de": "Sách xưa nói gì", "doan": f"Waite (1910): {l['truong_phai']['rws']['loi']} Book T: {l['truong_phai']['thoth']['loi']}",
-                **({"trich_dan": trich_dan} if trich_dan else {})})
+    if l.get("truong_phai") or trich_dan:
+        tp = l.get("truong_phai")
+        muc.append({"tieu_de": "Sách xưa nói gì",
+                    **({"doan": f"Waite (1910): {tp['rws']['loi']} Book T: {tp['thoth']['loi']}"} if tp else {}),
+                    **({"trich_dan": trich_dan} if trich_dan else {})})
     muc.append({"tieu_de": "Việc nên làm khi rút được lá này", "danh_sach": [f"Việc 0 đồng: {l['viec']}", f"Câu tự soi: {l['cau_tu_soi']}"]})
     hoi_dap = [{"hoi": f"{ten} ngược nghĩa là gì?", "dap": l["y_nguoc"]},
                {"hoi": f"{ten} trong tình cảm nói gì?", "dap": l["linh_vuc"]["tinh_cam"]},
@@ -96,6 +112,7 @@ def trang_la_bai(ma: str, slug: str) -> dict:
     lien_quan = _lien_quan(ma)
     mo_ta = t._cat(f"{ten} ({l['en']}): {', '.join(l['tu_khoa'])}; ngược: {', '.join(l['tu_khoa_nguoc'][:2])}. Ý nghĩa trong tình cảm, công việc, tiền bạc theo Waite, Golden Dawn, Marseille, B.O.T.A.")
     return {"loai": "la_bai", "slug": slug, "tieu_de": _tieu_de(l), "mo_ta": mo_ta, "tra_loi_nhanh": tra_loi_nhanh, "muc": muc, "hoi_dap": hoi_dap,
+            "ban_en": f"/en/tarot/cards/{slug_en(l['en'])}",
             "lien_quan": lien_quan, "y_chinh": [f"{ten}: {', '.join(l['tu_khoa'][:3])}", f"Ngược: {', '.join(l['tu_khoa_nguoc'][:2])}", f"Việc nên làm: {l['viec'][:90]}"],
             "minh_hoa": {"kieu": "la_bai", "id": ma, "ten": ten, "en": l["en"], "so": l["so"], "bo": l["bo"], "loai": l["loai"], "nguyen_to": l["nguyen_to"]},
             "trang_thai": kb.meta()["trang_thai"], "nguon": [kb.ten_nguon(k) for k in ("waite_1910", "book_t", "tdm_conver")]}

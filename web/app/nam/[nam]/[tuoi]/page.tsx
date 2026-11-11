@@ -2,6 +2,7 @@
 // mạng + nữ mạng (không 2 trang văn mẫu): điểm nhấn của tuổi với năm (địa chi, thiên can, nạp âm, Tam tai, làm nhà),
 // sao hạn hai giới bằng lời đời thường + việc nên làm, tứ hoá của năm, lối sang lá số riêng. Engine dựng hết
 // (`/v1/nam/{nam}/tuoi/{ns}`); web chỉ hiển thị. Index năm âm hiện tại + năm sau, năm sinh 1960–2005.
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -194,6 +195,8 @@ export default async function Page(p: P) {
           <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
         ))}</dl>
       </section>
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="tuoi" nam={x.n} ns={x.ns} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <CungTuoi namSinh={x.ns} canChi={d.nguoi.can_chi} namSeo={namSeo} namTet={namAm + 1} boQua={duongNamTuoi(x.n, x.ns)} />
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />

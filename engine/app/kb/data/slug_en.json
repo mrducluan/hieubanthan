@@ -1,0 +1,22 @@
+{
+ "_nguon": "EN-ALL GĐ 2 — slug tiếng Anh soạn tay cho loại trang kiến thức không suy được từ bảng tên riêng (dấu hiệu nhà, bộ vị mặt, cổ thư). Slug đã công bố KHÔNG đổi; đổi = thêm 308 ở web (lib/duong-en.json `doi`).",
+ "dau_hieu": {
+  "duong_dam": "road-pointing-straight-at-the-house", "nga_ba": "house-at-a-t-junction-or-crossroads", "cot_dien": "pole-or-big-tree-in-front-of-the-door",
+  "song_truoc": "river-or-lake-in-front-of-the-house", "nghia_trang": "house-near-a-cemetery-or-hospital", "minh_duong": "bright-hall-open-space-in-front",
+  "no_hau": "plot-wider-or-narrower-at-the-back", "nha_chu_l": "l-shaped-house-missing-corner", "bep_doi_cua": "stove-facing-the-front-door",
+  "cau_thang_cua": "stairs-facing-the-front-door", "guong_cua_chinh": "mirror-facing-the-front-door", "guong_giuong": "mirror-facing-the-bed",
+  "cua_doi_nhau": "doors-facing-each-other", "xa_ngang": "bed-or-desk-under-a-beam", "phong_ngu_tren_bep": "bedroom-above-the-kitchen",
+  "bep_wc": "stove-next-to-the-toilet", "quay_lung_cua": "sitting-with-your-back-to-the-door", "wc_giua_nha": "toilet-in-the-centre-of-the-house",
+  "cua_thong_ban_cong": "front-door-in-line-with-balcony-or-big-window", "ban_tho_gio_thoi": "fan-or-air-con-blowing-on-the-altar",
+  "cau_thang_giua_nha": "stairs-in-the-centre-of-the-house", "cay_truoc_cua": "tree-right-in-front-of-the-door", "be_ca": "fish-tank-in-the-house"
+ },
+ "bo_vi": {
+  "thien_trung": "tian-zhong-upper-forehead", "thien_dinh": "tian-ting-forehead", "tu_khong": "si-kong-mid-forehead", "trung_chinh": "zhong-zheng-lower-forehead",
+  "nhat_nguyet_giac": "sun-and-moon-corners-of-the-forehead", "thien_thuong": "tian-cang-temples", "an_duong": "yin-tang-between-the-brows",
+  "long_may": "eyebrows", "dien_trach": "tian-zhai-upper-eyelids", "mat": "eyes", "ngu_vi": "fish-tail-outer-eye-corners", "le_duong": "lei-tang-under-the-eyes",
+  "son_can": "shan-gen-root-of-the-nose", "song_mui": "nian-shang-shou-shang-bridge-of-the-nose", "luong_quyen": "cheekbones", "chuan_dau": "tip-of-the-nose",
+  "canh_mui": "lan-tai-ting-wei-wings-of-the-nose", "nhan_trung": "ren-zhong-philtrum", "phap_lenh": "fa-ling-smile-lines", "mieng": "mouth",
+  "thua_tuong": "cheng-jiang-below-the-lower-lip", "dia_cac": "di-ge-chin", "ham": "nu-pu-jaw-and-lower-cheeks", "tai": "ears", "khuon_mat": "the-whole-face"
+ },
+ "co_thu": {"cot_tuy_phu": "dou-shu-gu-sui-fu"}
+}

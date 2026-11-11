@@ -65,10 +65,96 @@ def _tu(s: str) -> list[str]:
     return [w for w in re.findall(r"\w+", s.lower()) if len(w) >= 2 and w not in _BO_TU_KD and not w.isdigit()]
 
 
+# ---- H5-en (HTT-2 mục 8, 2026-11-09): cùng MỘT hàm `kiem` cho bản tiếng Anh — danh mục tiếng Anh thay danh mục Việt khi
+# ngôn ngữ lượt gọi là "en" (bộ kiểm chọn theo `ngon_ngu.hien_tai()`, nơi gọi không phải truyền gì thêm).
+CAM_EN = ["you will", "destined", "fate has", "cannot be avoided", "100%", "guaranteed", "predestined", "inevitable"]
+Y_TE_EN = ["cancer", "tumor", "tumour", "diabetes", "stroke", "heart attack", "depression", "surgery", "chemotherapy",
+           "radiation therapy", "prescription", "medication", "hospitalised", "hospitalized", "terminal illness", "you will die",
+           "miscarriage", "infertility", "dementia", "diagnosis", "diagnosed with"]
+VAT_PHAM_EN = ["crystal", "amulet", "talisman", "lucky charm", "bracelet", "pi xiu", "pixiu", "feng shui item", "ritual to",
+               "cleansing ritual", "remove the curse", "curse removal", "bagua mirror", "wind chime", "money frog"]
+_SO_CHU_EN = {"ten": 10, "eleven": 11, "twelve": 12, "thirteen": 13, "fourteen": 14, "fifteen": 15, "sixteen": 16,
+              "seventeen": 17, "eighteen": 18, "nineteen": 19, "twenty": 20, "thirty": 30, "forty": 40, "fifty": 50,
+              "sixty": 60, "seventy": 70, "eighty": 80, "ninety": 90, "hundred": 100, "thousand": 1000}
+_BO_TU_EN = {"the", "a", "an", "and", "or", "of", "to", "in", "on", "at", "for", "with", "you", "your", "it", "is", "are", "be",
+             "this", "that", "as", "if", "not", "no", "but", "so", "than", "then", "there", "here", "what", "when", "how", "can",
+             "will", "do", "does", "have", "has", "from", "by", "into", "about", "one", "more", "most", "very", "just", "also",
+             "may", "might", "would", "could", "should", "them", "they", "their", "we", "our", "us", "he", "she", "his", "her"}
+
+
+def _la_en() -> bool:
+    from app import ngon_ngu  # noqa: PLC0415
+    return ngon_ngu.hien_tai() == "en"
+
+
+@lru_cache(maxsize=1)
+def _cum_cam_en() -> tuple[re.Pattern, ...]:
+    """Regex cụm cấm tiếng Anh của KB `thuat_ngu_en.json` (`cum_cam_en`: giọng phán, "accurate", giọng AI sáo, bệnh / chết,
+    lô đề, lời khuyên mua bán, vật phẩm) — một nguồn với máy chuyển ngữ (QT-0)."""
+    from app.kb import nap  # noqa: PLC0415
+    try:
+        ds = nap.doc("thuat_ngu_en.json").get("cum_cam_en") or []
+    except FileNotFoundError:
+        ds = []
+    ra = []
+    for x in ds:
+        try:
+            ra.append(re.compile(x, re.IGNORECASE))
+        except re.error:
+            continue
+    return tuple(ra)
+
+
+def _so_chu_en(s: str) -> set[int]:
+    ra: set[int] = set()
+    for w in re.findall(r"[a-z]+", s.lower()):
+        if w in _SO_CHU_EN:
+            ra.add(_SO_CHU_EN[w])
+    return ra
+
+
+def _tu_en(s: str) -> list[str]:
+    return [w for w in re.findall(r"[a-z]+", s.lower()) if len(w) >= 3 and w not in _BO_TU_EN]
+
+
+def _kiem_en(van: str, nguon: str, so_duoc: set[int] | None, cum_them: list[str] | None, kiem_y_moi: bool, ti_le_dai: float) -> list[str]:
+    from app.narrative.hoi_van import lien_ket_la  # noqa: PLC0415
+    loi: list[str] = lien_ket_la(van, nguon)
+    goc = nguon.lower()
+    loi += [f"liên kết lạ: {m.group(0)[:40]}" for m in _LIEN_KET.finditer(van)
+            if m.group(0).lower() not in goc and not any(m.group(0)[:40] in x for x in loi)]
+    so_nguon = {int(x) for x in re.findall(r"\d+", nguon)} | _so_chu_en(nguon) | set(so_duoc or ())
+    loi += [f"số lạ: {n}" for n in re.findall(r"\d+", van) if int(n) not in so_nguon]
+    if kiem_y_moi:
+        loi += [f"số lạ (viết bằng chữ): {n}" for n in sorted(_so_chu_en(van) - so_nguon)]
+    thap = van.lower()
+    for c in CAM_EN + list(cum_them or []):
+        if re.search(r"(?<!\w)" + re.escape(c.lower()) + r"(?!\w)", thap) and not re.search(r"(?<!\w)" + re.escape(c.lower()) + r"(?!\w)", goc):
+            loi.append(f"cụm cấm: {c}")
+    for rx in _cum_cam_en():
+        m = rx.search(van)
+        if m and not rx.search(nguon):
+            loi.append(f"cụm cấm: {m.group(0)}")
+    loi += [f"từ y tế: {c}" for c in Y_TE_EN if re.search(r"(?<!\w)" + re.escape(c), thap) and not re.search(r"(?<!\w)" + re.escape(c), goc)]
+    loi += [f"vật phẩm: {c}" for c in VAT_PHAM_EN if re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", thap)
+            and not re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", goc)]
+    if kiem_y_moi:
+        tu_nguon = set(_tu_en(nguon))
+        for cau in re.split(r"(?<=[.!?…])\s+", van):
+            w = _tu_en(cau)
+            if len(cau.split()) >= 10 and w and sum(x in tu_nguon for x in w) / len(w) < 0.25:
+                loi.append(f"câu ý mới: {cau[:60]}")
+    if nguon and len(van) > ti_le_dai * len(nguon) + 80:
+        loi.append(f"dài hơn {ti_le_dai} lần nguồn")
+    return list(dict.fromkeys(loi))
+
+
 def kiem(van: str, nguon: str, so_duoc: set[int] | None = None, cum_them: list[str] | None = None,
          kiem_y_moi: bool = True, ti_le_dai: float = 1.5, kiem_thuat_ngu: bool = True) -> list[str]:
     """Danh sách vi phạm của bản AI `van` so với `nguon` (văn bản). `so_duoc` = số được phép thêm. Nguồn là JSON mã khoá
     (gói bằng chứng chưa dựng thành câu) thì tắt `kiem_thuat_ngu` / `kiem_y_moi` — tên hiển thị không có trong JSON."""
+    if _la_en():
+        return _kiem_en(van, nguon, so_duoc, cum_them, kiem_y_moi, ti_le_dai)
     from app.narrative.hoi_van import lien_ket_la  # noqa: PLC0415 — bộ lọc liên kết SEC-2 (kể cả "chấm com")
     loi: list[str] = lien_ket_la(van, nguon)
     goc = nguon.lower()

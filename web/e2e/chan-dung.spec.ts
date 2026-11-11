@@ -30,6 +30,8 @@ test("chưa có giờ sinh → mời lập lá số; đủ hồ sơ + khảo sá
   await expect(page.getByTestId("mt-thieu-nhan-tuong")).toHaveCount(0);
   await expect(page.getByTestId("mt-cong_viec").getByTestId("chip-muc")).toHaveCount(3);
   await expect(page.locator("main")).toContainText("Ba cách nhìn, một con người");
+  // Ý2: chương "Điều bạn đã xác nhận" có mặt (khách chưa có phiếu → chỉ lời mời, không hộp); Ý4: hộp "nhìn khác nhau" nói thật
+  await expect(page.locator("main")).toContainText("Điều bạn đã xác nhận");
   // chương 1 có hộp tổng hợp; bấm dòng ma trận cuộn tới chương
   await page.getByTestId("mt-suc_khoe").click();
   await expect(page.locator("#lg-suc_khoe, #lg-tong_quan").first()).toBeAttached();

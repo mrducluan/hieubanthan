@@ -1236,6 +1236,7 @@ def chon_cot_loi(ds_chuong: list[dict], toi_da: int = 5) -> list[dict]:
 
 
 # ------------------------------------------------------------------ điểm vào
+@kh.vi_quyet_dinh
 def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
         ca_nhan: dict | None = None, ls: dict | None = None, vh: dict | None = None, y_bo_sung: bool = True) -> dict:
     """`sinh` như `hoidap.tuvi.tra_loi` (+ `luu_nguyet` tuỳ chọn). → báo cáo `doi_song_1` (chưa có moi_xem / phí —

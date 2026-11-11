@@ -20,23 +20,26 @@ import { BieuDoNguHanh, DaiVanHaiCach, ThanhThan } from "./BieuDoBatTu";
 import { DongMuoiNam } from "./DongMuoiNam";
 import { SaoLuuNam } from "./SaoLuuNam";
 import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
+import { GiaoThoa } from "./GiaoThoa";
 import { ChuQua } from "./ChuQua";
 import { GocNhinKhac } from "./GocNhinKhac";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
 import { ChamMuc, ChuThichMuc, CotChuong, giamChuyenDong, ThanhChuongGon, useChuongDangDoc, type MucChuong } from "./MucLucChuong";
-import { maMauBaoCao, NHAN_MUC, type BaoCaoDoiSong, type ChuongDoiSongMo, type Hop, type LuuYMang, type MocDaiHan, type Muc } from "./kieu";
+import { useChuBaoCao } from "./chu-bao-cao";
+import { maMauBaoCao, type BaoCaoDoiSong, type ChuongDoiSongMo, type Hop, type LuuYMang, type MocDaiHan, type Muc } from "./kieu";
 
 export function ChipMuc({ muc, nhan, className }: { muc?: Muc; nhan?: string; className?: string }) {
+  const { nhanMuc } = useChuBaoCao();
   if (!muc) return null;
   return (
     <span data-muc={muc} data-testid="chip-muc"
       className={cn("chip-muc inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium", className)}>
-      {nhan ?? NHAN_MUC[muc] ?? muc}
+      {nhan ?? nhanMuc[muc] ?? muc}
     </span>
   );
 }
 
-export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan = "Luận giải toàn bộ", chuongQua, moSan }: {
+export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan: nhanVao, chuongQua, moSan }: {
   bc: BaoCaoDoiSong; ten: string; /** hiện bản dữ liệu gốc thay bản diễn đạt AI */ goc?: boolean;
   hanhDong?: ReactNode; phanKhoa?: ReactNode; chanTrang?: ReactNode; /** tắt dòng kiểm chứng (vd bài đã lưu cũ) */ kiemChung?: boolean;
   /** Nhãn nhỏ trên tiêu đề (KC-1: mỗi mảng một tên gói). */ nhan?: string;
@@ -44,6 +47,8 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
   /** TR-4: chương mở sẵn ngoài chương 1 (vd Tarot "Câu chuyện các lá kể" — đọc liền với câu trả lời). */ moSan?: string[];
 }) {
   const tyLe = useTyLe(kiemChung ? maMauBaoCao(bc) : []);
+  const { c: chu, en } = useChuBaoCao();
+  const nhan = nhanVao ?? chu("nhan_mac_dinh");
   const cotLoi = (bc.cot_loi ?? []).filter((h) => !h.dang_xem_lai);
   // Số hộp lẻ → một hộp trải trọn hàng (máy tính): hộp đầu như cũ. UX v3 M7: hộp đầu chỉ còn tiêu đề (thân trùng tiêu đề
   // đã bỏ, KB không còn việc nên làm riêng) → nằm gọn trong lưới 2 cột, hộp CUỐI (nếu có thân) trải trọn hàng — không hở ô.
@@ -126,12 +131,12 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
             {bc.dien_dat && bc.dien_dat !== "mau" && (
               <p className="mt-1 text-xs text-fg-faint" data-testid="dien-dat-ai">
                 {bc.dien_dat === "tra_loi"
-                  ? "Phần trả lời câu hỏi được diễn đạt tự động từ chính các lá đã đọc · đã kiểm: không thêm lá, con số hay lời phán ngoài dữ liệu; các chương khác là bản gốc."
-                  : <>Diễn đạt tự động từ dữ liệu đã tính · mỗi chương đã kiểm: không thêm sao, cung, con số hay lời phán ngoài dữ liệu
-                    {bc.dien_dat === "tron" && " (chương nào không đạt kiểm tra giữ bản gốc)"}.</>}
+                  ? chu("dien_dat_tra_loi")
+                  : <>{chu("dien_dat")}
+                    {bc.dien_dat === "tron" && chu("dien_dat_tron")}.</>}
               </p>
             )}
-            <h2 className="mt-1 text-3xl">Luận giải {ten}</h2>
+            <h2 className="mt-1 text-3xl">{chu("tieu_de", { ten })}</h2>
           </div>
           {/* Điện thoại: hàng nút xuống dưới tiêu đề, kéo trái bằng phần đệm của nút ghost để chữ nút thẳng mép chữ tiêu đề
               (trước bị lệch vào ~12px và nằm lơ lửng). Từ sm: về góc phải như cũ. */}
@@ -146,7 +151,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
 
         {cotLoi.length > 0 && (
           <section id="lg-cot-loi" aria-labelledby="lg-cot-loi-td" className="mt-6 scroll-mt-32 lg:scroll-mt-24" data-testid="lg-cot-loi">
-            <h3 id="lg-cot-loi-td" className="font-serif text-2xl">Điều quan trọng nhất</h3>
+            <h3 id="lg-cot-loi-td" className="font-serif text-2xl">{chu("cot_loi")}</h3>
             <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
               {cotLoi.map((h, i) => <HopNoiBat key={`${h.ma_mau ?? h.tieu_de}-${i}`} hop={h} className={i === hopTronHang ? "md:col-span-2" : undefined} />)}
             </div>
@@ -157,12 +162,12 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
           <KhungLuuYMang ds={bc.luu_y_mang} soChuong={soChuong} tenChuong={tenChuong} onMo={(ma) => moChuong(ma, true)} />
         )}
 
-        <nav aria-label="Mục lục" className="mt-6 print:hidden" data-testid="lg-muc-luc">
+        <nav aria-label={chu("muc_luc")} className="mt-6 print:hidden" data-testid="lg-muc-luc">
           <div className="flex items-baseline justify-between gap-3">
-            <p className="text-sm text-fg-faint">Mục lục · {bc.chuong.length} chương{doc.length > 1 ? " · bấm tên chương để mở" : ""}</p>
+            <p className="text-sm text-fg-faint">{chu("muc_luc_dem", { so: String(bc.chuong.length) })}{doc.length > 1 ? chu("muc_luc_bam") : ""}</p>
             {doc.length > 1 && mo.size < doc.length && (
               <button type="button" onClick={moTatCa} data-testid="lg-mo-het"
-                className="min-h-9 shrink-0 text-sm text-fg-muted underline-offset-4 hover:text-fg hover:underline">Mở hết các chương</button>
+                className="min-h-9 shrink-0 text-sm text-fg-muted underline-offset-4 hover:text-fg hover:underline">{chu("mo_het_chuong")}</button>
             )}
           </div>
           <ChuThichMuc ds={dsMuc} className="mt-1.5" />
@@ -172,7 +177,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
                 <a href={c.khoa ? "#lg-khoa" : `#lg-${c.ma}`}
                   onClick={(e) => { if (!c.khoa) { e.preventDefault(); moChuong(c.ma, true); } }}
                   className="flex min-h-11 items-center gap-2 rounded-xl border border-line/70 px-3 py-1.5 text-fg-muted hover:border-gold/60 hover:text-fg">
-                  {c.khoa && <LockKeyhole className="size-3 shrink-0 text-gold" aria-label="đang khoá" />}
+                  {c.khoa && <LockKeyhole className="size-3 shrink-0 text-gold" aria-label={chu("dang_khoa")} />}
                   <span className="min-w-0 flex-1">{i + 1}. {c.tieu_de}</span>
                   {!c.khoa && c.muc && <ChamMuc muc={c.muc} />}
                 </a>
@@ -203,6 +208,8 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
           </div>
           {doc.length > 1 && <CotChuong ds={dsMuc} dang={dang} onChon={(ma) => moChuong(ma, true)} moTatCa={moTatCa} />}
         </div>
+        {/* HTT-1: lớp 2 — ghép "điểm giao thoa" từ các hộp người đọc đã bấm "Đúng với mình" (≥ 2), tất định ở engine. */}
+        {kiemChung && <GiaoThoa en={en} />}
         <p className="mt-8 border-t border-line pt-4 text-sm text-fg-faint">{bc.ket}</p>
         {chanTrang}
       </article>
@@ -212,13 +219,14 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
 
 /** Dòng tham chiếu thay hộp lặp (Trục 1): hộp này đã hiện đầy đủ ở "Điều quan trọng nhất" / một chương trước. */
 function DongThamChieu({ hop, den, tenDen, onMo }: { hop: Hop; den: string; tenDen: string; onMo?: () => void }) {
+  const { c: chu } = useChuBaoCao();
   return (
     <a href={den === "cot_loi" ? "#lg-cot-loi" : `#lg-${den}`} data-testid="hop-tham-chieu" data-ma-mau={hop.ma_mau}
       onClick={onMo ? (e) => { e.preventDefault(); onMo(); } : undefined}
       className="flex min-h-11 items-center gap-2.5 rounded-xl border border-dashed border-line/80 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg">
       <Star className="size-3.5 shrink-0 text-gold" aria-hidden />
       <span className="min-w-0">
-        <span className="text-fg-faint">Đã nêu ở {tenDen}: </span>
+        <span className="text-fg-faint">{chu("da_neu_o", { noi: tenDen })}</span>
         <span className="font-medium text-fg">{hop.tieu_de}</span>
       </span>
       <ArrowUp className="ml-auto size-3.5 shrink-0 text-fg-faint" aria-hidden />
@@ -232,6 +240,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
   soChuong: (ma: string) => number; tenChuong: (ma: string) => string; moDich: (ma: string) => void;
   tiep: { ma: string; so: number; tieu_de: string } | null; conKhoa: boolean; onCuoi?: () => void;
 }) {
+  const { c: chu } = useChuBaoCao();
   const hopHien = (c.hop ?? []).filter((h) => !h.dang_xem_lai);
   const hop = hopHien.filter((h) => !thamChieu(h));
   const thamChieuDs = hopHien.filter((h) => thamChieu(h));
@@ -243,7 +252,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
       {c.van_ai && !goc
         ? doanCoThuatNgu(c.van_ai.replace(/\n\s*\n/g, "\n\n"), c.thuat_ngu)
         : doanCoThuatNgu(doan.join("\n\n"), c.thuat_ngu,
-          (d) => (d.startsWith("Câu hỏi để tự soi") ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""))}
+          (d) => (d.startsWith(chu("cau_tu_soi_dau")) ? "rounded-xl bg-moon/10 px-4 py-2 text-moon" : ""))}
     </div>
   ) : null;
   const idThan = useId();
@@ -276,7 +285,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
       {!mo && (
         <button type="button" onClick={doiMo} aria-controls={idThan} aria-expanded={false}
           className="mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-full border border-gold/40 px-4 text-sm font-medium text-gold transition-colors hover:bg-gold/10 print:hidden">
-          Đọc chương này{hop.length ? ` · ${hop.length} điểm chính` : ""} <ChevronDown className="size-4" aria-hidden />
+          {chu("doc_chuong")}{hop.length ? chu("diem_chinh", { so: String(hop.length) }) : ""} <ChevronDown className="size-4" aria-hidden />
         </button>
       )}
       <div id={idThan} className={cn(!mo && "hidden print:block")}>
@@ -294,7 +303,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
         )}
         {c.loi_hoan_canh && (
           <div className="mt-3" data-testid="loi-hoan-canh">
-            <p className="mb-1.5 text-xs font-medium uppercase tracking-wide text-fg-faint">Với bạn lúc này</p>
+            <p className="mb-1.5 text-xs font-medium uppercase tracking-wide text-fg-faint">{chu("voi_ban")}</p>
             <HopNoiBat hop={c.loi_hoan_canh} thuatNgu={c.thuat_ngu} />
           </div>
         )}
@@ -304,7 +313,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
             {thamChieuDs.map((h) => {
               const den = thamChieu(h)!;
               return <DongThamChieu key={h.ma_mau} hop={h} den={den}
-                tenDen={den === "cot_loi" ? "Điều quan trọng nhất" : `chương ${soChuong(den)} · ${tenChuong(den)}`}
+                tenDen={den === "cot_loi" ? chu("cot_loi") : chu("chuong_so", { so: String(soChuong(den)), ten: tenChuong(den) })}
                 onMo={den === "cot_loi" ? undefined : () => moDich(den)} />;
             })}
           </div>
@@ -315,7 +324,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
         )}
         {c.cau_tu_soi && (
           <p className="mt-4 rounded-xl bg-moon/10 px-4 py-2.5 text-moon" data-testid="cau-tu-soi">
-            <span className="text-xs font-semibold uppercase tracking-wider">Tự hỏi mình</span>
+            <span className="text-xs font-semibold uppercase tracking-wider">{chu("tu_hoi")}</span>
             <span className="mt-0.5 block italic">{c.cau_tu_soi}</span>
           </p>
         )}
@@ -327,7 +336,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
             className="mt-5 flex min-h-11 w-full items-center gap-3 rounded-xl border border-line/70 px-4 py-2.5 text-left text-sm transition-colors hover:border-gold/60 print:hidden">
             {/* UX v3 M9: tên chương không cắt — điện thoại nhãn nằm trên, tên xuống dòng khi dài. */}
             <span className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-3">
-              <span className="shrink-0 text-xs text-fg-faint sm:text-sm">Chương tiếp</span>
+              <span className="shrink-0 text-xs text-fg-faint sm:text-sm">{chu("chuong_tiep")}</span>
               <span className="min-w-0 text-pretty font-medium leading-snug text-fg">{tiep.so}. {tiep.tieu_de}</span>
             </span>
             <ArrowDown className="size-4 shrink-0 text-gold" aria-hidden />
@@ -335,7 +344,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
         )}
         {conKhoa && (
           <a href="#lg-khoa" className="mt-5 flex min-h-11 items-center gap-2 rounded-xl border border-gold/40 px-4 py-2.5 text-sm text-gold hover:bg-gold/10 print:hidden">
-            <LockKeyhole className="size-4" aria-hidden /> Xem các chương còn lại
+            <LockKeyhole className="size-4" aria-hidden /> {chu("chuong_con_lai")}
           </a>
         )}
       </div>
@@ -348,18 +357,18 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
  * cạnh mức chung. Không đổi mức chung, không tính gì (mức từng cách engine đã trả). */
 function MucCachChinh({ hai, ngan = false }: { hai?: { cach_1: Muc; cach_2: Muc }; ngan?: boolean }) {
   const { cach } = useCachChinhBaoCao();
+  const { c: chu } = useChuBaoCao();
   if (!cach || !hai || hai.cach_1 === hai.cach_2) return null;
   return (
     <span className="inline-flex items-center gap-1.5 text-xs text-fg-faint" data-testid="muc-cach-chinh">
-      {ngan ? "cách bạn chọn:" : "Theo cách bạn chọn:"} <ChipMuc muc={hai[cach]} className={ngan ? "px-2 py-0 text-[0.7rem]" : undefined} />
+      {ngan ? chu("cach_chon_ngan") : chu("cach_chon")} <ChipMuc muc={hai[cach]} className={ngan ? "px-2 py-0 text-[0.7rem]" : undefined} />
     </span>
   );
 }
 
-/** "2026-12-13" → "13/12/2026" (chỉ đổi cách viết ngày engine đã tính). */
-const ngayVn = (iso: string) => iso.split("-").reverse().map((x, i) => (i < 2 ? String(Number(x)) : x)).join("/");
-
 function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
+  // "2026-12-13" → "13/12/2026" (bản Anh theo Intl) — chỉ đổi cách viết ngày engine đã tính.
+  const { c: chu, ngay: ngayVn } = useChuBaoCao();
   const khung = useRef<HTMLOListElement>(null);
   const hienTai = useRef<HTMLLIElement>(null);
   useEffect(() => {
@@ -367,7 +376,7 @@ function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
     if (k && h && k.scrollWidth > k.clientWidth + 4) k.scrollLeft = Math.max(0, h.offsetLeft - k.offsetLeft - 16);
   }, []);
   return (
-    <ol ref={khung} aria-label="Các giai đoạn mười năm" data-testid="dong-thoi-gian"
+    <ol ref={khung} aria-label={chu("giai_doan")} data-testid="dong-thoi-gian"
       className="mt-5 flex flex-col md:flex-row md:gap-3 md:overflow-x-auto md:pb-3 md:snap-x print:flex-col print:overflow-visible">
       {ds.map((m) => (
         <li key={`${m.tu_tuoi}-${m.cung}`} ref={m.hien_tai ? hienTai : undefined} aria-current={m.hien_tai ? "step" : undefined}
@@ -382,18 +391,18 @@ function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
             {m.hien_tai && (
               <p className="mb-1 inline-flex items-center gap-1 rounded-full bg-gold px-2 py-0.5 text-[0.7rem] font-semibold text-[#1a1406]"
                 data-testid="ban-dang-o-day">
-                <MapPin className="size-3" aria-hidden /> Bạn đang ở đây
+                <MapPin className="size-3" aria-hidden /> {chu("dang_o_day")}
               </p>
             )}
-            <p className="text-sm font-semibold text-fg">{m.tu_tuoi}–{m.den_tuoi} tuổi
+            <p className="text-sm font-semibold text-fg">{chu("tuoi_khoang", { tu: String(m.tu_tuoi), den: String(m.den_tuoi) })}
               {!m.tu_ngay && <span className="ml-1.5 font-normal text-fg-faint">{m.nam_tu}–{m.nam_den}</span>}</p>
             {m.tu_ngay && m.den_ngay && (
-              <p className="text-[0.7rem] text-fg-faint" data-testid="ngay-van">từ {ngayVn(m.tu_ngay)} đến {ngayVn(m.den_ngay)}</p>
+              <p className="text-[0.7rem] text-fg-faint" data-testid="ngay-van">{chu("tu_den_ngay", { tu: ngayVn(m.tu_ngay), den: ngayVn(m.den_ngay) })}</p>
             )}
             <div className="mt-1 flex flex-wrap items-center gap-1.5">
               <ChipMuc muc={m.muc} className="px-2 py-0 text-[0.7rem]" />
-              <span className="text-xs text-fg-faint">{m.nhan ?? `cung ${m.cung}`}</span>
-              {m.hai_cach_khac && <span className="text-[0.7rem] text-moon" data-testid="hai-cach-khac">hai cách khác nhau</span>}
+              <span className="text-xs text-fg-faint">{m.nhan ?? chu("cung", { ten: String(m.cung) })}</span>
+              {m.hai_cach_khac && <span className="text-[0.7rem] text-moon" data-testid="hai-cach-khac">{chu("hai_cach_khac")}</span>}
               {m.hai_cach_khac && m.muc_cach_1 && m.muc_cach_2 && <MucCachChinh hai={{ cach_1: m.muc_cach_1, cach_2: m.muc_cach_2 }} ngan />}
             </div>
             <p className="mt-1.5 text-sm font-medium text-fg-muted first-letter:uppercase">{m.chu_de}</p>
@@ -412,25 +421,26 @@ function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
 function KhungLuuYMang({ ds, soChuong, tenChuong, onMo }: {
   ds: LuuYMang[]; soChuong: (ma: string) => number; tenChuong: (ma: string) => string; onMo: (ma: string) => void;
 }) {
+  const { c: chu, nhanMuc } = useChuBaoCao();
   return (
     <section id="lg-luu-y-mang" aria-labelledby="lg-luu-y-mang-td" className="mt-6 scroll-mt-32 lg:scroll-mt-24" data-testid="lg-luu-y-mang">
-      <h3 id="lg-luu-y-mang-td" className="font-serif text-2xl">Cần lưu ý ở từng mảng hay hỏi</h3>
-      <p className="mt-1 text-sm text-fg-muted">Tiền bạc, công việc, tình cảm, con cái, đi lại, giấy tờ, sức khoẻ — gom từ các chương bên dưới: mức của mảng, điều nên để ý và một việc nên làm. Không phải dự báo chuyện gì sẽ xảy ra.</p>
+      <h3 id="lg-luu-y-mang-td" className="font-serif text-2xl">{chu("luu_y_mang")}</h3>
+      <p className="mt-1 text-sm text-fg-muted">{chu("luu_y_mang_dan")}</p>
       <ul className="mt-3 grid grid-cols-1 gap-2 md:grid-cols-2">
         {ds.map((r) => (
           <li key={r.ma} className="rounded-xl border border-line/70 bg-bg/40 p-3" data-testid="luu-y-mang" data-ma={r.ma} data-muc={r.muc} data-khoa={r.khoa ? "1" : undefined}>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="font-medium text-fg">{r.ten}</p>
-              <span data-muc={r.muc} className="chip-muc rounded-full px-2 py-0 text-xs">{r.nhan_muc ?? NHAN_MUC[r.muc]}</span>
+              <span data-muc={r.muc} className="chip-muc rounded-full px-2 py-0 text-xs">{r.nhan_muc ?? nhanMuc[r.muc]}</span>
             </div>
             {r.khoa ? (
               <button type="button" onClick={() => onMo(r.tu_chuong)} className="mt-1.5 inline-flex items-center gap-1 text-sm text-gold underline">
-                <LockKeyhole className="size-3.5" aria-hidden />Mở chương {soChuong(r.tu_chuong)} · {tenChuong(r.tu_chuong)} để đọc
+                <LockKeyhole className="size-3.5" aria-hidden />{chu("mo_chuong_doc", { so: String(soChuong(r.tu_chuong)), ten: tenChuong(r.tu_chuong) })}
               </button>
             ) : (
               <>
                 <p className="mt-1.5 text-[0.95rem] leading-relaxed text-fg-muted">{r.luu_y}</p>
-                {r.viec && <p className="mt-1 text-[0.95rem] leading-relaxed text-fg"><b className="font-semibold">Nên làm:</b> {r.viec}</p>}
+                {r.viec && <p className="mt-1 text-[0.95rem] leading-relaxed text-fg"><b className="font-semibold">{chu("nen_lam")}</b> {r.viec}</p>}
                 {r.ranh_gioi && <p className="mt-1 text-xs text-fg-faint" data-nosnippet="">{r.ranh_gioi}</p>}
               </>
             )}

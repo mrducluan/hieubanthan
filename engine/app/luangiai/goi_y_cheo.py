@@ -19,6 +19,8 @@ hồ sơ, cùng ngày, một mảng không lặp đúng câu ở hai trang khác
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import datetime as dt
 from dataclasses import dataclass, field
 from functools import lru_cache
@@ -34,6 +36,9 @@ from app.kb import nap
 # Trang công cụ có khối "Đọc tiếp" (mã mảng ở web = khoá này).
 MANG_TRANG = ("than_so", "tu_vi", "bat_tu", "phong_thuy", "kinh_dich", "hop_doi", "hom_nay", "xem_ngay",
               "tuoi_lam_nha", "tuoi_xong_dat")
+# BT-UI: trang Bản thân ("Bảy cách nhìn về bạn") xin thẻ của MỌI mảng theo thứ tự cố định. Không nằm trong MANG_TRANG:
+# câu của nó dùng lại đúng biến thể của trang Hôm nay (thẻ Hôm nay dùng biến thể của trang Thần số) — không sinh tổ hợp mới.
+TRANG_BAN_THAN = "ban_than"
 # Mảng có thẻ gợi chéo.
 THE = ("than_so", "tu_vi", "bat_tu", "phong_thuy", "kinh_dich", "hop_doi", "hom_nay", "xem_ngay")
 _SO_MAU = 3      # số câu dẫn / câu hỏi mỗi mảng dùng để xoay (KB có thể nhiều hơn)
@@ -110,7 +115,7 @@ def _dau_vao_la_so(h: HoSo):
     return _DauVao(inp)
 
 
-@lru_cache(maxsize=256)
+@ngon_ngu.lru(maxsize=256)
 def _sao_menh(h: HoSo) -> dict | str:
     """→ {"sao": [...], "do_sang": str|None, "muon": bool} hoặc mã thiếu ("gio" | "noi_sinh")."""
     if not h.co_gio:
@@ -131,7 +136,7 @@ def _sao_menh(h: HoSo) -> dict | str:
     return {"sao": sao, "do_sang": tuvi_do_sang_vn.do_sang(sao[0], p["earthlyBranch"]) if sao else None, "muon": muon}
 
 
-@lru_cache(maxsize=256)
+@ngon_ngu.lru(maxsize=256)
 def _bat_tu(h: HoSo) -> dict:
     """→ {"can", "hanh", "than": "vượng"|"nhược"|"trung hoà"|None, "thieu": None|"gio"|"noi_sinh"}."""
     if h.co_gio:
@@ -330,13 +335,16 @@ def _dung_the(mang: str, h: HoSo | None, ngay_xem: dt.date, v: int) -> dict:
 def goi_y(h: HoSo | None, mang_hien_tai: str, ngay_xem: dt.date) -> dict:
     """Thẻ gợi chéo cho trang `mang_hien_tai`: mọi mảng khác, xoay thứ tự theo ngày; thẻ thiếu dữ liệu (cần thêm giờ /
     giới tính / nơi sinh) xếp sau. Web hiện 3 thẻ đầu."""
-    if mang_hien_tai not in MANG_TRANG:
-        raise ValueError(f"mang_hien_tai không hợp lệ: {mang_hien_tai}")
-    ds = [c for c in THE if c != mang_hien_tai]
-    lech = (ngay_xem.toordinal() + MANG_TRANG.index(mang_hien_tai)) % len(ds)
-    ds = ds[lech:] + ds[:lech]
-    the = [_dung_the(c, h, ngay_xem, _bien_the(c, mang_hien_tai, ngay_xem)) for c in ds]
-    the.sort(key=lambda t: t["can_them"] is not None)          # sort ổn định: giữ thứ tự xoay trong từng nhóm
+    if mang_hien_tai == TRANG_BAN_THAN:
+        the = [_dung_the(c, h, ngay_xem, _bien_the(c, "than_so" if c == "hom_nay" else "hom_nay", ngay_xem)) for c in THE]
+    else:
+        if mang_hien_tai not in MANG_TRANG:
+            raise ValueError(f"mang_hien_tai không hợp lệ: {mang_hien_tai}")
+        ds = [c for c in THE if c != mang_hien_tai]
+        lech = (ngay_xem.toordinal() + MANG_TRANG.index(mang_hien_tai)) % len(ds)
+        ds = ds[lech:] + ds[:lech]
+        the = [_dung_the(c, h, ngay_xem, _bien_the(c, mang_hien_tai, ngay_xem)) for c in ds]
+        the.sort(key=lambda t: t["can_them"] is not None)          # sort ổn định: giữ thứ tự xoay trong từng nhóm
     k = _kb()
     return {"mang_hien_tai": mang_hien_tai, "ngay_xem": ngay_xem.isoformat(), "ca_nhan": h is not None, "the": the,
             "source_id": k["source_id"], "school_id": k["school_id"], "trang_thai": k["trang_thai"],

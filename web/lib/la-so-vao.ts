@@ -24,4 +24,8 @@ export const LaSoVao = z.object({
   gio_ty: z.enum(["da_ty", "sang_ngay"]).optional(),
   /** EN-2 mục 5 — tình trạng người dùng tự chọn; chỉ báo cáo đời sống đọc để chọn lời, không lưu. */
   tinh_trang: z.enum(["doc_than", "co_doi"]).optional(),
+  /** HTT-1 — giờ sinh theo đồng hồ (mặc định) hay giờ mặt trời thực tại kinh độ nơi sinh (Tử vi + Bát tự, khung Trường phái). */
+  gio_sinh: z.enum(["dong_ho", "mat_troi"]).optional(),
+  /** HTT-2 H1 — Bát tự: điều hậu theo mùa thực nơi sinh (chỉ có tác dụng khi nơi sinh ngoài chí tuyến Nam). */
+  dieu_hau: z.enum(["bac_ban_cau", "noi_sinh"]).optional(),
 }).strict();

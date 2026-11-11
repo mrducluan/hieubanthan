@@ -132,11 +132,14 @@ test("PT-V1: đo hướng nhà — nhập tay và la bàn điện thoại (giả
 
   // Giả lập la bàn Android: alpha tuyệt đối 180 → hướng 180° (Nam)
   await o.getByRole("button", { name: "Đo bằng la bàn điện thoại" }).click();
-  await page.evaluate(() => {
-    const ten = "ondeviceorientationabsolute" in window ? "deviceorientationabsolute" : "deviceorientation";
-    window.dispatchEvent(new DeviceOrientationEvent(ten, { alpha: 180, beta: 0, gamma: 0, absolute: true }));
-  });
-  await expect(o.getByText("180°")).toBeVisible();
+  // Trang gắn bộ nghe cảm biến SAU cú bấm (effect) → phát sự kiện lại tới khi mặt la bàn nhận (phát một lần là chạy đua).
+  await expect(async () => {
+    await page.evaluate(() => {
+      const ten = "ondeviceorientationabsolute" in window ? "deviceorientationabsolute" : "deviceorientation";
+      window.dispatchEvent(new DeviceOrientationEvent(ten, { alpha: 180, beta: 0, gamma: 0, absolute: true }));
+    });
+    await expect(o.getByText("180°")).toBeVisible({ timeout: 1_000 });
+  }).toPass();
   await expect(o.getByTestId("la-ban-song")).toContainText("Diên Niên");       // Nam với Khảm, đọc theo thời gian thực
   await o.getByRole("button", { name: "Chốt hướng này" }).click();
   await expect(kq).toContainText("Nam");
@@ -298,8 +301,12 @@ test("DH-PC: máy tính — kéo / phím mũi tên trên mặt la bàn rồi Ch�
   await expect(mat).toHaveAttribute("role", "slider");
   // bấm vào chữ "Đ" (bên phải mặt la bàn) → Đông lên dưới kim = 90°
   await mat.scrollIntoViewIfNeeded();
-  const hop = (await mat.boundingBox())!;
-  await expect(async () => {   // bấm lại tới khi trang đã hydrate
+  // Bấm lại tới khi trang đã hydrate. Đo lại khung MỖI lượt: ở chế độ dev các khối phía trên (thanh mảng, hành trình…)
+  // hiện muộn làm mặt la bàn dịch xuống — toạ độ đo một lần từ đầu sẽ bấm trượt mãi.
+  let hop = (await mat.boundingBox())!;
+  await expect(async () => {
+    await mat.scrollIntoViewIfNeeded();
+    hop = (await mat.boundingBox())!;
     await page.mouse.click(hop.x + hop.width * 0.82, hop.y + hop.height / 2);
     await expect(mat).toHaveAttribute("aria-valuenow", "90", { timeout: 1_000 });
   }).toPass();

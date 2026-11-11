@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 from app import config, giam_sat, gioi_han
 from app.cong_khai import PhanHoiCongKhai
 from app.kb import tu_dien
+from app.kb.loi import L
 from app.calc import thanso, timebase
 from app import ngon_ngu
 from app.kb import store as kb_store
@@ -54,6 +55,8 @@ from app.goi_y_cheo_api import router as goi_y_cheo_router
 from app.nhan_tuong_api import router as nhan_tuong_router  # NT-1
 from app.chan_dung_api import router as chan_dung_router
 from app.tarot_api import router as tarot_router  # noqa: E402 — TR-1: Tarot /v1/tarot/*
+from app.giao_thoa_api import router as giao_thoa_router  # HTT-1
+from app.sinh_nuoc_ngoai_api import router as sinh_nuoc_ngoai_router  # Ý3
 
 giam_sat.khoi_tao()   # Sentry — chỉ bật khi có SENTRY_DSN, không gửi dữ liệu cá nhân
 
@@ -152,10 +155,13 @@ async def require_engine_key(request: Request, call_next):
     tok = ngan_sach.NGUOI_GOI.set(ai)
     # QTE-2: ngôn ngữ của lượt gọi — header `x-ngon-ngu` (web gửi) thắng query `?ngon_ngu=`; lạ → "vi". Chỉ lớp CHỮ
     # (kb.nap, kb.ten, lời RULES) đọc; phép tính không đổi theo ngôn ngữ.
-    tok_nn = ngon_ngu.HIEN_TAI.set(ngon_ngu.chuan(request.headers.get("x-ngon-ngu") or request.query_params.get("ngon_ngu")))
+    _nn_tho = request.headers.get("x-ngon-ngu") or request.query_params.get("ngon_ngu")
+    tok_nn = ngon_ngu.HIEN_TAI.set(ngon_ngu.chuan(_nn_tho))
+    tok_bt = ngon_ngu.BIEN_THE.set(ngon_ngu.bien_the_cua(_nn_tho))   # Ý7: biến thể thị trường (en-us…) nếu có bản phủ
     try:
         return await call_next(request)
     finally:
+        ngon_ngu.BIEN_THE.reset(tok_bt)
         ngon_ngu.HIEN_TAI.reset(tok_nn)
         ngan_sach.NGUOI_GOI.reset(tok)
 
@@ -177,6 +183,8 @@ app.include_router(thoi_gian_toi_router)
 app.include_router(nhan_tuong_router)
 app.include_router(chan_dung_router)
 app.include_router(tarot_router)
+app.include_router(giao_thoa_router)
+app.include_router(sinh_nuoc_ngoai_router)
 
 
 # --------------------------------------------------------------------------- #
@@ -505,7 +513,10 @@ def api_so(so: int) -> dict:
     if not m:
         raise HTTPException(404, detail="Chưa có nghĩa cho số này")
     cd = kb2.chan_dung(so) or {}
-    return {"engine_version": ENGINE_VERSION, "so": so, "nghia": m, "chan_dung": {k: cd.get(k) for k in ("tong_quan", "tinh_cam", "cong_viec", "bien_co")},
+    from app.kb import ngay_cap_nhat as _ncn  # noqa: PLC0415
+    dang, sua = _ncn.ngay("en_so", str(so), _ncn.CAP_NHAT_EN)
+    return {"engine_version": ENGINE_VERSION, "so": so, "ngay_dang": dang, "cap_nhat": sua, "nghia": m,
+            "chan_dung": {k: cd.get(k) for k in ("tong_quan", "tinh_cam", "cong_viec", "bien_co")},
             "ten_mat": kb2.ten_mat_chan_dung(),
             "linh_vuc": {lv: kb2.nghia_linh_vuc(so, lv) for lv in ("ban_than", "tinh_yeu", "gia_dinh", "su_nghiep", "tai_chinh", "suc_khoe")},
             "ten_linh_vuc": {lv: kb2.ten_linh_vuc(lv) for lv in ("ban_than", "tinh_yeu", "gia_dinh", "su_nghiep", "tai_chinh", "suc_khoe")},
@@ -645,6 +656,56 @@ def api_hom_nay(inp: HomNayInput) -> dict:
                                                                           inp.y_dinh, inp.du_dinh)}
 
 
+class TuanInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ngay: int = Field(ge=1, le=31)
+    thang: int = Field(ge=1, le=12)
+    nam: int = Field(ge=1900, le=2100)
+    ngay_xem: _dt.date | None = None     # trống = hôm nay theo giờ Việt Nam
+    gioi_tinh: Literal["nam", "nu"] | None = None   # chỉ để biết mệnh quái cho dòng phong thuỷ tháng (không bắt buộc)
+
+
+@app.post("/v1/thanso/tuan")
+def api_tuan(inp: TuanInput) -> dict:
+    """BT-UI đợt 2 — "Tuần này của bạn": bảy ngày + tối đa ba ngày đáng để ý (ngày cá nhân × hoàng lịch theo tuổi)."""
+    from app.luangiai import tuan_hai_nguoi  # noqa: PLC0415
+    try:
+        _dt.date(inp.nam, inp.thang, inp.ngay)
+    except ValueError:
+        raise HTTPException(422, detail="Ngày không tồn tại")
+    return {"engine_version": ENGINE_VERSION, **tuan_hai_nguoi.tuan(inp.ngay, inp.thang, inp.nam, inp.ngay_xem or config.hom_nay_vn(), inp.gioi_tinh)}
+
+
+class HomNayHaiInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ngay: int = Field(ge=1, le=31)
+    thang: int = Field(ge=1, le=12)
+    # Người thứ hai: chỉ ngày + tháng sinh; năm chỉ cần khi nhập âm lịch (để đổi sang dương). Không tên, không lưu.
+    kia_ngay: int = Field(ge=1, le=31)
+    kia_thang: int = Field(ge=1, le=12)
+    kia_nam: int | None = Field(default=None, ge=1900, le=2100)
+    kia_lich: Literal["duong", "am"] = "duong"
+    kia_nhuan: bool = False
+    kia_vung: Literal["north", "south"] | None = None      # chỉ để đổi ngày âm theo đúng lịch lá số của người đó
+    kia_lich_am: Literal["viet", "trung"] | None = None
+    quan_he: str | None = Field(default=None, pattern=r"^[a-z_]{2,20}$")
+    ngay_xem: _dt.date | None = None
+
+
+@app.post("/v1/thanso/hom-nay-hai")
+def api_hom_nay_hai(inp: HomNayHaiInput) -> dict:
+    """BT-UI đợt 2 — "Hôm nay của hai người": ngày cá nhân của hai người + một việc nên làm cùng (không chấm điểm)."""
+    from app.luangiai import tuan_hai_nguoi  # noqa: PLC0415
+    try:
+        _dt.date(2000, inp.thang, inp.ngay)
+        kq = tuan_hai_nguoi.hai_nguoi(inp.ngay, inp.thang, inp.kia_ngay, inp.kia_thang, inp.ngay_xem or config.hom_nay_vn(),
+                                      quan_he=inp.quan_he, kia_lich=inp.kia_lich, kia_nam=inp.kia_nam, kia_nhuan=inp.kia_nhuan,
+                                      kia_vung=inp.kia_vung, kia_lich_am=inp.kia_lich_am)
+    except ValueError:
+        raise HTTPException(422, detail="Ngày sinh không hợp lệ")
+    return {"engine_version": ENGINE_VERSION, **kq}
+
+
 class NhipInput(BaseModel):
     ngay: int = Field(ge=1, le=31)
     thang: int = Field(ge=1, le=12)
@@ -719,27 +780,30 @@ def api_timebase(inp: TimebaseInput) -> dict:
     if kq.clock_offset != config.CALENDAR_MERIDIAN_TZ:
         flags.append({
             "loai": "tz_adjusted",
-            "chi_tiet": f"Đồng hồ lúc sinh chạy UTC+{kq.clock_offset:g}; giờ theo "
-                        f"kinh tuyến lịch (UTC+7) là "
-                        f"{kq.calendar_dt.strftime('%H:%M ngày %d/%m/%Y')}.",
+            "chi_tiet": L("timebase.tz_adjusted",
+                          f"Đồng hồ lúc sinh chạy UTC+{kq.clock_offset:g}; giờ theo "
+                          f"kinh tuyến lịch (UTC+7) là "
+                          f"{kq.calendar_dt.strftime('%H:%M ngày %d/%m/%Y')}.",
+                          utc=f"{kq.clock_offset:g}", gio=kq.calendar_dt.strftime("%H:%M"),
+                          ngay=kq.calendar_dt.strftime("%d/%m/%Y")),
         })
     if kq.tz_disputed:
         flags.append({
             "loai": "tz_disputed",
-            "chi_tiet": "Ngày sinh nằm trong giai đoạn các nguồn sử liệu về múi giờ "
-                        "mâu thuẫn. Kết quả cần được đối chiếu cả hai giả thiết.",
+            "chi_tiet": L("timebase.tz_disputed", "Ngày sinh nằm trong giai đoạn các nguồn sử liệu về múi giờ "
+                          "mâu thuẫn. Kết quả cần được đối chiếu cả hai giả thiết."),
         })
     if timebase.sat_bien_gio_ty(kq.calendar_dt):
         flags.append({
             "loai": "ty_edge",
-            "chi_tiet": "Giờ sinh sát ranh giới giờ Tý (23:00–00:59) — trụ ngày "
-                        "nhạy với sai số vài phút.",
+            "chi_tiet": L("timebase.ty_edge", "Giờ sinh sát ranh giới giờ Tý (23:00–00:59) — trụ ngày "
+                          "nhạy với sai số vài phút."),
         })
     if inp.do_tin_gio is not HourConfidence.EXACT:
         flags.append({
             "loai": "hour_confidence",
-            "chi_tiet": f"Độ tin giờ sinh: {inp.do_tin_gio.value}. Nên đối chiếu "
-                        "các canh giờ lân cận thay vì tin một lá số duy nhất.",
+            "chi_tiet": L("timebase.hour_confidence", f"Độ tin giờ sinh: {inp.do_tin_gio.value}. Nên đối chiếu "
+                          "các canh giờ lân cận thay vì tin một lá số duy nhất.", muc=inp.do_tin_gio.value),
         })
 
     ngay_cc: str | None = None

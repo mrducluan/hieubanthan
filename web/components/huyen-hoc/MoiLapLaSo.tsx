@@ -12,21 +12,25 @@ import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { ghi } from "@/lib/do-luong";
 import type { HoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
+import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
+import { useDuong } from "@/components/khung/NgonNgu";
 
 type MoDun = "tuvi" | "battu" | "chan_dung";
 
-/** Còn thiếu gì để lập lá số (hồ sơ thần số chỉ có tên + ngày sinh). */
+/** Còn thiếu gì để lập lá số (hồ sơ thần số chỉ có tên + ngày sinh) — khoá chữ lib/chu/giao-dien.ts. */
 function conThieu(h: HoSo | null): string[] {
   if (!h) return [];
   return [
-    !h.gio && "giờ sinh",
-    !h.gioi_tinh && "giới tính",
-    !h.noi_sinh && "nơi sinh",
+    !h.gio && "moi.thieu_gio",
+    !h.gioi_tinh && "moi.thieu_gioi_tinh",
+    !h.noi_sinh && "moi.thieu_noi_sinh",
   ].filter(Boolean) as string[];
 }
 
 export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null }) {
   const c = useChu();
+  const { c: cg } = useChuGiaoDien();
+  const d = useDuong();
   // Theo dõi tiêu đề (không phải cả khối): trên điện thoại khối cao hơn màn hình, tỉ lệ diện tích không bao giờ đủ ngưỡng.
   const ref = useRef<HTMLHeadingElement>(null);
   const daGhi = useRef(false);
@@ -43,13 +47,13 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
   }, [moDun, hoSo]);
 
   const tieuDe = hoSo && thieu.length
-    ? c("moi.tieu_de_thieu", { so: String(thieu.length), thieu: thieu.join(", ") })
+    ? c("moi.tieu_de_thieu", { so: String(thieu.length), thieu: thieu.map((k) => cg(k)).join(", ") })
     : c("moi.tieu_de");
   const nhan = [1, 2, 3, 4].map((i) => c(`moi.nhan_${i}`)).filter(Boolean);
 
   // Tên khối cố định (không trỏ vào h2): tiêu đề động "…còn thiếu: nơi sinh" sẽ trùng nhãn ô "Nơi sinh" của form.
   return (
-    <section aria-label={moDun === "tuvi" ? "Lập lá số Tử vi" : moDun === "battu" ? "Xem tứ trụ Bát tự" : "Xem chân dung tổng hợp"} data-testid="moi-lap-la-so"
+    <section aria-label={cg(moDun === "tuvi" ? "moi.aria_tuvi" : moDun === "battu" ? "moi.aria_battu" : "moi.aria_chan_dung")} data-testid="moi-lap-la-so"
       className="relative overflow-hidden rounded-3xl border border-gold/45 bg-gradient-to-br from-gold/[0.09] via-surface/70 to-bg/40 p-5 shadow-[0_0_60px_-24px_rgb(var(--gold)/0.55)] sm:p-8">
       <div className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-gold/10 blur-3xl" aria-hidden />
       <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,27rem)] lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-6">
@@ -89,7 +93,7 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
           </figure>
           <p className="flex items-start gap-1.5 text-xs text-fg-faint">
             <MessageCircleQuestion className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-            <span>{c("moi.chua_san_sang")}{moDun === "tuvi" && <> <Link href="/tu-vi/la-so-mau" className="text-gold underline underline-offset-2">{c("moi.la_so_mau")}</Link></>}</span>
+            <span>{c("moi.chua_san_sang")}{moDun === "tuvi" && <> <Link href={d("/tu-vi/la-so-mau")} className="text-gold underline underline-offset-2">{c("moi.la_so_mau")}</Link></>}</span>
           </p>
         </div>
       </div>
@@ -150,8 +154,9 @@ function MinhHoaTuVi() {
 
 // Bốn trụ (dấu hỏi — chữ của bạn) + năm cột ngũ hành thừa / thiếu.
 function MinhHoaBatTu() {
-  const tru = ["Năm", "Tháng", "Ngày", "Giờ"];
-  const hanh = [["Kim", 0.35], ["Mộc", 0.8], ["Thuỷ", 0.2], ["Hoả", 0.55], ["Thổ", 0.65]] as const;
+  const { c, en } = useChuGiaoDien();
+  const tru = ["mh_nam", "mh_thang", "mh_ngay", "mh_gio"].map((k) => c(`moi.${k}`));
+  const hanh = ([["mh_kim", 0.35], ["mh_moc", 0.8], ["mh_thuy", 0.2], ["mh_hoa", 0.55], ["mh_tho", 0.65]] as const).map(([k, v]) => [c(`moi.${k}`), v] as const);
   return (
     <svg viewBox="0 0 260 130" className="w-full max-w-sm" aria-hidden>
       {tru.map((t, i) => (
@@ -165,7 +170,7 @@ function MinhHoaBatTu() {
       {hanh.map(([t, v], i) => (
         <g key={t}>
           <rect x={156 + i * 20} y={110 - v * 88} width={13} height={v * 88} rx={3} className={cn(v < 0.3 ? "fill-moon/50" : "fill-gold/60")} />
-          <text x={162.5 + i * 20} y={124} textAnchor="middle" className="fill-fg-faint text-[7.5px]">{t}</text>
+          <text x={162.5 + i * 20} y={124} textAnchor="middle" className={cn("fill-fg-faint", en ? "text-[5.5px]" : "text-[7.5px]")}>{t}</text>
         </g>
       ))}
     </svg>

@@ -1,5 +1,6 @@
 // SEO-L1 — "Tuổi nào làm nhà, cưới hỏi năm {năm}?": bảng 46 tuổi 1960–2005 (Kim lâu, Hoang ốc, Tam tai) do engine ghép
 // từ đúng hàm của từng tuổi; link xuống trang từng tuổi. Index cùng cửa sổ với trang con (năm âm hiện tại + năm sau).
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -17,7 +18,7 @@ type P = { params: Promise<{ nam: string }> };
 async function metaGoc(p: P): Promise<Metadata> {
   const n = docNamBang((await p.params).nam);
   if (!n) return {};
-  const m = metaTrang({ tieuDe: `Tuổi nào làm nhà năm ${n}? Bảng Kim lâu, Hoang ốc, Tam tai`,
+  const m = metaTrang({ tieuDe: `Tuổi nào làm nhà năm ${n}? Kim lâu, Hoang ốc, Tam tai`,
     moTa: `Năm ${n}: tuổi sinh 1960–2005 nào làm nhà, cưới hỏi được, tuổi nào phạm Kim lâu, Hoang ốc, Tam tai — tính theo tuổi mụ âm lịch.`,
     duong: duongLamNhaNam(n), anh: anhBai({ tieuDe: `Tuổi nào làm nhà năm ${n}?`, mang: "lich" }) });
   const namAm = await namAmHienTai();
@@ -86,6 +87,8 @@ export default async function Page(p: P) {
         </dl>
       </section>
 
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="lam_nha" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-8 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/xem-tuoi-lam-nha" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>
       <p className="mt-3 flex flex-wrap gap-3 text-sm">

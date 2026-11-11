@@ -17,6 +17,10 @@ from app.kb import do_rieng as _dr
 from app.kb import ngay_cap_nhat as _ncn
 from app.kb import tham_dinh as _td
 from app.kb import nap
+from app.kb import slug_en as _sle
+from app.kb import ten as _tn
+from app.kb.loi import L
+from app import ngon_ngu
 
 _DATA = Path(__file__).parent / "data"
 
@@ -74,7 +78,8 @@ def _mh_thap_than(ten: str) -> dict:
     ta, no = bt.CAN_NH[0], bt.CAN_NH[CAN.index(can)]
     quan_he = ("dong_hanh" if ta == no else "ta_sinh" if SINH[ta] == no else "ta_khac" if KHAC[ta] == no
                else "khac_ta" if KHAC[no] == ta else "sinh_ta")
-    return {"kieu": "thap_than", "ten": ten, "quan_he": quan_he, "cung_am_duong": CAN.index(can) % 2 == 0}
+    # `ten` là chữ hiển thị (web vẽ nhãn) — bản Anh mang tên tiếng Anh; nhóm quan hệ là mã.
+    return {"kieu": "thap_than", "ten": _tn.ten("thap_than", ten), "quan_he": quan_he, "cung_am_duong": CAN.index(can) % 2 == 0}
 
 
 def _mh_nhat_chu(can: str) -> dict:
@@ -120,6 +125,8 @@ def _trang_so(so: str) -> dict:
     lien = [f"so-{x}" for x in (_SO[i - 1] if i else None, _SO[i + 1] if i + 1 < len(_SO) else None, _SO_GOC.get(so)) if x]
     return {
         "loai": "so", "slug": f"so-{so}",
+        # QTE: bản tiếng Anh tương ứng (hreflang hai chiều; web chỉ đọc).
+        "ban_en": f"/en/numerology/life-path/{so}",
         "tieu_de": f"Số {so} trong thần số học: {m['tu_khoa'].lower()}",
         "mo_ta": _cat(f"Số {so} thần số học: {m['tu_khoa'].lower()}. Mặt tối: {m['mat_toi'].lower()}. "
                       "Kèm câu hỏi tự soi, năm cá nhân và cách tính."),
@@ -168,6 +175,7 @@ def ten_que_day_du(k: str) -> str:
     return f"{tt[thuong]} {tt[ha]} {ten}"
 
 
+@ngon_ngu.theo_viet
 def _ds_que() -> list[tuple[str, str]]:
     return [(k, f"que-{k}-{_slug(v['ten'])}") for k, v in _doc("kinhdich_kb.json")["que"].items()]
 
@@ -220,6 +228,7 @@ def _trang_que(k: str, slug: str) -> dict:
 
 
 # ---- Sao -----------------------------------------------------------------------
+@ngon_ngu.theo_viet
 def _ds_sao() -> list[tuple[str, str]]:
     return [(ten, f"sao-{_slug(ten)}") for ten in _doc("tuvi_kb.json")["chinh_tinh"]]
 
@@ -310,6 +319,11 @@ def _trang_cung(ten: str, slug: str) -> dict:
 
 
 # ---- SEO-C: 10 thập thần · 10 nhật chủ Bát tự --------------------------------------
+# EN-ALL GĐ 3: chữ khuôn qua `L()` (data/en/loi/trang_battu.json), tên riêng qua `kb/ten` — bản Việt giữ nguyên từng byte.
+def _hoa1(s: str) -> str:
+    return _cau(s[:1].upper() + s[1:])
+
+
 def _ds_thap_than() -> list[tuple[str, str]]:
     return [(ten, _slug(ten)) for ten in _doc("battu_kb.json")["thap_than"]]
 
@@ -317,20 +331,26 @@ def _ds_thap_than() -> list[tuple[str, str]]:
 def _trang_thap_than(ten: str, slug: str) -> dict:
     kb = _doc("battu_kb.json")
     t = kb["thap_than"][ten]
-    tra_loi = f"{ten} (nhóm {t['nhom']}) trong Bát tự: {t['y_nghia']} Tính cách thường gặp: {t['tinh_cach']}."
-    muc = [{"tieu_de": "Tính cách", "doan": _cau(t["tinh_cach"][:1].upper() + t["tinh_cach"][1:])},
-           {"tieu_de": f"Khi {ten} quá nhiều", "doan": _cau(t["khi_nhieu"][:1].upper() + t["khi_nhieu"][1:])},
-           {"tieu_de": f"Khi thiếu {ten}", "doan": _cau(t["khi_thieu"][:1].upper() + t["khi_thieu"][1:])},
-           {"tieu_de": "Với nam, với nữ", "danh_sach": [f"Với nam: {t['nam']}.", f"Với nữ: {t['nu']}."]},
-           {"tieu_de": "Câu hỏi tự soi", "doan": t["cau_tu_soi"]}]
-    hoi_dap = [{"hoi": f"{ten} trong Bát tự là gì?", "dap": tra_loi},
-               {"hoi": f"Lá số nhiều {ten} thì sao?", "dap": _cau(t["khi_nhieu"][:1].upper() + t["khi_nhieu"][1:])}]
+    tt = _tn.ten("thap_than", ten)
+    pin = (_tn.muc("thap_than", ten) or {}).get("pinyin", "")
+    nhom = _tn.ten("nhom_thap_than", t["nhom"])
+    tra_loi = L("trang_bt.tt.tra_loi", "{ten} (nhóm {nhom}) trong Bát tự: {y} Tính cách thường gặp: {tc}.",
+                ten=tt, pin=pin, nhom=nhom, y=t["y_nghia"], tc=t["tinh_cach"])
+    muc = [{"tieu_de": L("trang_bt.tt.tinh_cach", "Tính cách"), "doan": _hoa1(t["tinh_cach"])},
+           {"tieu_de": L("trang_bt.tt.khi_nhieu", "Khi {ten} quá nhiều", ten=tt), "doan": _hoa1(t["khi_nhieu"])},
+           {"tieu_de": L("trang_bt.tt.khi_thieu", "Khi thiếu {ten}", ten=tt), "doan": _hoa1(t["khi_thieu"])},
+           {"tieu_de": L("trang_bt.tt.nam_nu", "Với nam, với nữ"),
+            "danh_sach": [L("trang_bt.tt.nam", "Với nam: {x}.", x=t["nam"]), L("trang_bt.tt.nu", "Với nữ: {x}.", x=t["nu"])]},
+           {"tieu_de": L("trang.tu_soi", "Câu hỏi tự soi"), "doan": t["cau_tu_soi"]}]
+    hoi_dap = [{"hoi": L("trang_bt.tt.hoi_la_gi", "{ten} trong Bát tự là gì?", ten=tt, pin=pin), "dap": tra_loi},
+               {"hoi": L("trang_bt.tt.hoi_nhieu", "Lá số nhiều {ten} thì sao?", ten=tt), "dap": _hoa1(t["khi_nhieu"])}]
     ds = _ds_thap_than()
     i = [x for _, x in ds].index(slug)
     return {
         "loai": "thap_than", "slug": slug,
-        "tieu_de": f"{ten} trong Bát tự (thập thần) — ý nghĩa, khi nhiều, khi thiếu",
-        "mo_ta": _cat(f"{ten} — thập thần nhóm {t['nhom']}: {t['y_nghia']} Tính cách, khi quá nhiều, khi thiếu và câu hỏi tự soi."),
+        "tieu_de": L("trang_bt.tt.tieu_de", "{ten} trong Bát tự (thập thần) — ý nghĩa, khi nhiều, khi thiếu", ten=tt, pin=pin),
+        "mo_ta": _cat(L("trang_bt.tt.mo_ta", "{ten} — thập thần nhóm {nhom}: {y} Tính cách, khi quá nhiều, khi thiếu và câu hỏi tự soi.",
+                        ten=tt, pin=pin, nhom=nhom, y=t["y_nghia"])),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
         "nguon": list(kb["source"].values()),
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
@@ -350,24 +370,30 @@ def _trang_nhat_chu(can: str, slug: str) -> dict:
     kb = _doc("battu_kb.json")
     n = kb["nhat_chu"][can]
     nh = kb["ngu_hanh"].get(n["ngu_hanh"], {})
-    tra_loi = (f"Nhật chủ {can} (hành {n['ngu_hanh']}) mang hình tượng {n['hinh_tuong']}: {n['tinh_chat']}. "
-               f"Điểm mạnh: {n['diem_manh']}. Mặt tối: {n['mat_toi']}.")
-    muc = [{"tieu_de": "Điểm mạnh", "doan": _cau(n["diem_manh"][:1].upper() + n["diem_manh"][1:])},
-           {"tieu_de": "Mặt tối", "doan": _cau(n["mat_toi"][:1].upper() + n["mat_toi"][1:])},
-           {"tieu_de": "Theo mùa sinh", "danh_sach": [f"{_MUA[k]}: {v}" for k, v in n["mua"].items() if k in _MUA]}]
+    c, h = _tn.ten("can", can), _tn.ten("hanh", n["ngu_hanh"])
+    loai_can = _tn.nghia("can", can) or ""          # "Yang Wood" — chỉ mẫu câu bản Anh dùng
+    tra_loi = L("trang_bt.nc.tra_loi", "Nhật chủ {can} (hành {hanh}) mang hình tượng {ht}: {tc}. Điểm mạnh: {dm}. Mặt tối: {mt}.",
+                can=c, hanh=h, loai=loai_can, ht=n["hinh_tuong"], tc=n["tinh_chat"], dm=n["diem_manh"], mt=n["mat_toi"])
+    muc = [{"tieu_de": L("trang_bt.nc.diem_manh", "Điểm mạnh"), "doan": _hoa1(n["diem_manh"])},
+           {"tieu_de": L("trang_bt.nc.mat_toi", "Mặt tối"), "doan": _hoa1(n["mat_toi"])},
+           {"tieu_de": L("trang_bt.nc.theo_mua", "Theo mùa sinh"),
+            "danh_sach": [f"{L(f'trang_bt.nc.mua.{k}', _MUA[k])}: {v}" for k, v in n["mua"].items() if k in _MUA]}]
     if nh:
-        muc.append({"tieu_de": f"Hành {n['ngu_hanh']}", "danh_sach": [
-            f"Tính chất: {nh['tinh_chat']}.", _cau(nh["khi_thieu"][:1].upper() + nh["khi_thieu"][1:]),
-            _cau(nh["khi_thua"][:1].upper() + nh["khi_thua"][1:]), f"Ứng dụng dân gian: {nh['ung_dung']}."]})
-    muc.append({"tieu_de": "Câu hỏi tự soi", "doan": n["cau_tu_soi"]})
-    hoi_dap = [{"hoi": f"Nhật chủ {can} là người thế nào?", "dap": tra_loi},
-               {"hoi": f"Nhật chủ {can} sinh mùa đông thì sao?", "dap": n["mua"].get("dong", "")}]
+        muc.append({"tieu_de": L("trang_bt.nc.hanh", "Hành {hanh}", hanh=h), "danh_sach": [
+            L("trang_bt.nc.hanh_tinh_chat", "Tính chất: {x}.", x=nh["tinh_chat"]), _hoa1(nh["khi_thieu"]),
+            _hoa1(nh["khi_thua"]), L("trang_bt.nc.hanh_ung_dung", "Ứng dụng dân gian: {x}.", x=nh["ung_dung"])]})
+    muc.append({"tieu_de": L("trang.tu_soi", "Câu hỏi tự soi"), "doan": n["cau_tu_soi"]})
+    hoi_dap = [{"hoi": L("trang_bt.nc.hoi_nguoi", "Nhật chủ {can} là người thế nào?", can=c, loai=loai_can), "dap": tra_loi},
+               {"hoi": L("trang_bt.nc.hoi_dong", "Nhật chủ {can} sinh mùa đông thì sao?", can=c, loai=loai_can),
+                "dap": n["mua"].get("dong", "")}]
     ds = _ds_nhat_chu()
     i = [x for _, x in ds].index(slug)
     return {
         "loai": "nhat_chu", "slug": slug,
-        "tieu_de": f"Nhật chủ {can} ({n['ngu_hanh']}) trong Bát tự — tính cách và mùa sinh",
-        "mo_ta": _cat(f"Nhật chủ {can}, hình tượng {n['hinh_tuong']}: {n['tinh_chat']}. Điểm mạnh, mặt tối, ảnh hưởng mùa sinh."),
+        "tieu_de": L("trang_bt.nc.tieu_de", "Nhật chủ {can} ({hanh}) trong Bát tự — tính cách và mùa sinh",
+                     can=c, hanh=h, loai=loai_can),
+        "mo_ta": _cat(L("trang_bt.nc.mo_ta", "Nhật chủ {can}, hình tượng {ht}: {tc}. Điểm mạnh, mặt tối, ảnh hưởng mùa sinh.",
+                        can=c, loai=loai_can, ht=n["hinh_tuong"], tc=n["tinh_chat"])),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": [h for h in hoi_dap if h["dap"]],
         "nguon": list(kb["source"].values()),
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
@@ -394,7 +420,9 @@ from app.kb import trang_tarot as _ttr  # noqa: E402 — TR-1: 78 lá bài Tarot
 _TRANG.update(_ttr.TRANG)
 _TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN, **_tpt.TEN_NGAN, **_tct.TEN_NGAN, **_tnt.TEN_NGAN, **_ttr.TEN_NGAN}
 from app.kb import bo_sung as _bs  # noqa: E402 — SEO-M: nội dung bổ sung trang mỏng (KB bo_sung_<loai>.json)
-_TRANG = {k: (ds, _bs.boc(dung)) for k, (ds, dung) in _TRANG.items()}
+# EN-ALL GĐ 2: danh sách (khoá, slug Việt) luôn dựng ở ngữ cảnh tiếng Việt — slug là KHOÁ URL, không đổi theo ngôn ngữ
+# (trước đây lá bài dựng slug từ tên đã phủ tiếng Anh → bản Anh 404 với slug Việt).
+_TRANG = {k: (ngon_ngu.theo_viet(ds), _bs.boc(dung)) for k, (ds, dung) in _TRANG.items()}
 
 
 # ---- API công khai của module -------------------------------------------------
@@ -411,7 +439,11 @@ def _ten_ngan(loai: str, slug: str) -> str:
         ten = dict((s, t) for t, s in _TRANG[loai][0]())[slug]
         if loai in _TEN_NGAN:
             return _TEN_NGAN[loai](ten)
-        return {"cung": f"Cung {ten}", "thap_than": ten, "nhat_chu": f"Nhật chủ {ten}"}[loai]
+        if loai == "thap_than":
+            return _tn.ten("thap_than", ten)
+        if loai == "nhat_chu":
+            return L("trang_bt.ten_ngan.nhat_chu", "Nhật chủ {can}", can=_tn.ten("can", ten), loai=_tn.nghia("can", ten) or "")
+        return {"cung": f"Cung {ten}"}[loai]
     return f"Sao {dict((s, t) for t, s in _ds_sao())[slug]}"
 
 
@@ -426,10 +458,25 @@ def _hoan_tat(t: dict) -> dict:
     dang, sua = _ncn.ngay(t["loai"], t["slug"], CAP_NHAT)
     t["ngay_dang"] = dang
     t["cap_nhat"] = max(sua, (t["tham_dinh"] or {}).get("ngay", ""))
+    if not ngon_ngu.la_viet():
+        # EN-ALL GĐ 2: slug Anh của chính trang + mọi link tới trang kiến thức khác (web dựng URL /en/… từ đây). Bản Việt
+        # không mang trường này → đầu ra bản Việt giữ nguyên từng byte.
+        t["slug_en"] = _sle.cua(t["loai"], t["slug"])
+        for l in (t["lien_quan"] + (t.get("trang_con") or {}).get("ds", []) + (t.get("trang_con_hoa") or {}).get("ds", [])
+                  + [x for m in t["muc"] for x in m.get("xem_them", [])]):
+            if l.get("loai") in LOAI:
+                l["slug_en"] = _sle.cua(l["loai"], l["slug"])
     return t
 
 
 def lay(loai: str, slug: str) -> dict | None:
+    """Trang kiến thức theo slug Việt; bản Anh nhận cả slug Anh (EN-ALL GĐ 2)."""
+    if not ngon_ngu.la_viet() and loai in LOAI:
+        slug = _sle.ve_viet(loai, slug) or slug
+    return _lay(loai, slug)
+
+
+def _lay(loai: str, slug: str) -> dict | None:
     if loai == "so" and slug.startswith("so-") and slug[3:] in _SO:
         return _hoan_tat(_bs.ap(_trang_so(slug[3:])))
     if loai == "que":
@@ -457,6 +504,6 @@ def danh_sach() -> list[dict]:
         for slug in slugs:
             t = lay(loai, slug)
             assert t is not None
-            ra.append({k: t[k] for k in ("loai", "slug", "tieu_de", "mo_ta", "trang_thai", "index", "cap_nhat", "ngay_dang",
-                                       "chu_bien", "tac_gia", "tham_dinh", "bien_soan")})
+            ra.append({k: t[k] for k in ("loai", "slug", "slug_en", "tieu_de", "mo_ta", "trang_thai", "index", "cap_nhat", "ngay_dang",
+                                       "chu_bien", "tac_gia", "tham_dinh", "bien_soan") if k in t})
     return ra

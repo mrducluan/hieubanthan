@@ -17,6 +17,8 @@ from __future__ import annotations
 import re
 
 from app.kb import suc_khoe_kb as kb
+from app.kb import ten as _ten
+from app.kb.loi import L, danh_sach
 
 SO_NAM = 10
 TOI_DA_NAM = 3            # hộp / câu trả lời nêu tối đa 3 năm gần nhất (đủ để sắp lịch khám, không dài như danh sách lo)
@@ -35,7 +37,7 @@ def cau_nam(nam: list[int] | int, he: dict | None, hien_tai: bool = False) -> st
     """"Năm 2028 nên chú ý sức khoẻ bản thân hơn, nhất là {hệ}; sắp xếp đi {khám} vào đầu năm." (nhiều năm: "Năm 2028
     và 2031 …"). Không có hệ → câu khám tổng quát. `hien_tai` = năm đang đi (đầu năm đã qua → "sắp xếp … sớm")."""
     ds = [nam] if isinstance(nam, int) else list(nam)
-    n = ", ".join(str(x) for x in ds[:-1]) + (f" và {ds[-1]}" if len(ds) > 1 else str(ds[-1]))
+    n = danh_sach([str(x) for x in ds])          # bản Việt: "2027, 2029 và 2031" như cũ; bản Anh: "… and …"
     he = _tron(he)
     if he:
         return kb.mau("nam_nay" if hien_tai else "nam").format(nam=n, he=he["he"], kham=he["kham"])
@@ -123,7 +125,7 @@ def tuvi_giai_doan(ls: dict, nam_am_xem: int, nam_am_sinh: int, so_nam: int = SO
 
 def cau_giai_doan(g: dict) -> str:
     he = _tron(g.get("he"))
-    s = kb.mau("giai_doan").format(tu=g["tu"], den=g["den"], he=he["he"] if he else "sức khoẻ tổng quát")
+    s = kb.mau("giai_doan").format(tu=g["tu"], den=g["den"], he=he["he"] if he else L("bt_ds.skn.tong_quat", "sức khoẻ tổng quát"))
     return s.replace(" tuổi", f" tuổi (khoảng {g['nam_tu']}–{g['nam_den']})", 1)
 
 
@@ -158,12 +160,17 @@ def battu_nam(ty_le_hanh: dict[str, float], nam_muc: dict[int, str], nam0: int, 
         ap = _ap_luc(hc, yeu) + _ap_luc(hh, yeu)
         if ap >= 2 or (ap == 1 and nam_muc.get(nam) == "can_chu_dong"):
             ra.append({"nam": nam, "ly_do": ["khac_yeu"], "hien_tai": k == 0, "he": kb.he_hanh(yeu),
-                       "can_cu": [f"Năm {nam} {can} {chi} ({hc}/{hh}): {k_yeu} khắc {yeu} — hành yếu nhất của tứ trụ "
-                                  f"({round(ty_le_hanh.get(yeu, 0) * 100)}%)"]})
+                       "can_cu": [L("bt_ds.skn.khac_yeu", f"Năm {nam} {can} {chi} ({hc}/{hh}): {k_yeu} khắc {yeu} — hành yếu nhất của tứ trụ "
+                                    f"({round(ty_le_hanh.get(yeu, 0) * 100)}%)", nam=nam,
+                                    cc=f"{_ten.ten('can', can)} {_ten.ten('chi', chi)}", hc=_ten.ten("hanh", hc),
+                                    hh=_ten.ten("hanh", hh), k_yeu=_ten.ten("hanh", k_yeu), yeu=_ten.ten("hanh", yeu),
+                                    pct=round(ty_le_hanh.get(yeu, 0) * 100))]})
         elif ty_le_hanh.get(lon, 0) >= nguong_dam and hc == lon and hh == lon:
             ra.append({"nam": nam, "ly_do": ["don_thua"], "hien_tai": k == 0, "he": kb.he_hanh(lon),
-                       "can_cu": [f"Năm {nam} {can} {chi}: cả can lẫn chi là {lon}, dồn thêm hành đang thừa của tứ trụ "
-                                  f"({round(ty_le_hanh[lon] * 100)}%)"]})
+                       "can_cu": [L("bt_ds.skn.don_thua", f"Năm {nam} {can} {chi}: cả can lẫn chi là {lon}, dồn thêm hành đang thừa của tứ trụ "
+                                    f"({round(ty_le_hanh[lon] * 100)}%)", nam=nam,
+                                    cc=f"{_ten.ten('can', can)} {_ten.ten('chi', chi)}", lon=_ten.ten("hanh", lon),
+                                    pct=round(ty_le_hanh[lon] * 100))]})
     return ra
 
 
@@ -240,6 +247,11 @@ def doan_hoi_benh(t_khong_dau: str, he_la_so: dict | None = None) -> str:
 TIEU_DE_HOP = "Năm nên chú ý sức khoẻ hơn"
 
 
+def tieu_de_hop() -> str:
+    """Tiêu đề hộp "Năm nên chú ý sức khoẻ hơn" theo ngôn ngữ lượt gọi — nơi DÒ hộp theo tiêu đề phải so bằng hàm này."""
+    return L("bt_ds.skn.tieu_de_hop", TIEU_DE_HOP)
+
+
 def hop_nam(ds: list[dict], ma_mau: str, hop_fn, trong: float = 1.4,
             giai_doan: list[dict] | None = None) -> dict | None:
     """Hộp "thoi_diem" — "Năm nên chú ý sức khoẻ hơn" (≤ 3 năm gần nhất + giai đoạn mười năm nếu có + lời miễn trừ);
@@ -251,7 +263,7 @@ def hop_nam(ds: list[dict], ma_mau: str, hop_fn, trong: float = 1.4,
     cau = ([cau_cac_nam(ds)] if ds else []) + [cau_giai_doan(g) for g in gd]
     cu = [c for x in ds[:TOI_DA_NAM] for c in x["can_cu"]] + [c for g in gd for c in g["can_cu"]]
     them = {"nam": ds[0]["nam"], "cac_nam": [x["nam"] for x in ds[:TOI_DA_NAM]]} if ds else {}
-    return hop_fn("thoi_diem", TIEU_DE_HOP, f"{' '.join(cau)} {mien_tru()}", cu, ma_mau, trong, **them)
+    return hop_fn("thoi_diem", tieu_de_hop(), f"{' '.join(cau)} {mien_tru()}", cu, ma_mau, trong, **them)
 
 
 def ma_ly_do(x: dict) -> str:

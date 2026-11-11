@@ -827,7 +827,7 @@ def bao_cao(trai_bai: str, la: list[dict], *, cau_hoi: str | None = None, chu_de
 # ------------------------------------------------------------------ lá ngày, bộ bài
 def la_ngay(ngay: dt.date | None = None, ngay_sinh: dt.date | None = None) -> dict:
     ngay = ngay or config.hom_nay_vn()
-    x = calc.la_ngay(ngay, ngay_sinh)
+    x = calc.la_ngay(ngay, ngay_sinh, muoi=config.LA_NGAY_MUOI)
     l = _la(x["id"])
     return {"ngay": ngay.isoformat(), "rieng": x["rieng"],
             "la": {**_tom_la(l, False), "tu_khoa": _tu_khoa(l, False)[:3], "y_xuoi": l["y_xuoi"], "viec": l["viec"], "cau_tu_soi": l["cau_tu_soi"], "hinh_anh": l["hinh_anh"]},
@@ -836,7 +836,7 @@ def la_ngay(ngay: dt.date | None = None, ngay_sinh: dt.date | None = None) -> di
 
 def bo_bai() -> dict:
     """Dữ liệu bộ bài cho web vẽ (không có nhãn nội bộ): 78 lá rút gọn, bộ, nguyên tố, trải bài, chủ đề, trường phái."""
-    la = {ma: {**_tom_la(x, False), "tu_khoa": _tu_khoa(x, False)[:3], "huong_nhin": x["huong_nhin"], "chiem_tinh": (x.get("chiem_tinh") or {}).get("ten"),
+    la = {ma: {**_tom_la(x, False), "tu_khoa": _tu_khoa(x, False)[:3], "tu_khoa_nguoc": _tu_khoa(x, True)[:3], "huong_nhin": x["huong_nhin"], "chiem_tinh": (x.get("chiem_tinh") or {}).get("ten"),
                "decan": x.get("decan")} for ma, x in kb.la().items()}
     for v in la.values():
         v.pop("nguoc", None)
@@ -844,7 +844,9 @@ def bo_bai() -> dict:
             "trai_bai": {k: {kk: vv for kk, vv in v.items() if kk != "_ma"} for k, v in kb.trai_bai().items()},
             "chu_de": {k: {"ten": v["ten"]} for k, v in kb.chu_de().items()},
             "truong_phai": {k: {"ten": v["ten"], "ngan": v["ngan"], "mo_ta": v["mo_ta"], "hoi": v["hoi"]} for k, v in kb.truong_phai().items()},
-            "pham_gia": kb.pham_gia()}
+            "pham_gia": kb.pham_gia(),
+            # TR-5: chip chuyện hay hỏi + câu mẫu (web chỉ ĐIỀN vào ô hỏi; chủ đề phải có trong `chu_de`)
+            "goi_y_hoi": [{"ma": g["ma"], "ten": g["ten"], "chu_de": g.get("chu_de"), "cau": list(g["cau"])} for g in kb.goi_y_hoi()]}
 
 
 # ------------------------------------------------------------------ hỏi đáp
