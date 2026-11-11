@@ -26,6 +26,7 @@ import * as migration_20261110_200000_blog_10_xuat_ban_notfair from './20261110_
 import * as migration_20261111_090000_kw6t_bai_cu from './20261111_090000_kw6t_bai_cu';
 import * as migration_20261111_120000_kw6t_lan_2 from './20261111_120000_kw6t_lan_2';
 import * as migration_20261111_150000_kw6t_tuan_1_2 from './20261111_150000_kw6t_tuan_1_2';
+import * as migration_20261111_180000_kw6t_video from './20261111_180000_kw6t_video';
 
 export const migrations = [
   {
@@ -167,5 +168,10 @@ export const migrations = [
     up: migration_20261111_150000_kw6t_tuan_1_2.up,
     down: migration_20261111_150000_kw6t_tuan_1_2.down,
     name: '20261111_150000_kw6t_tuan_1_2',
+  },
+  {
+    up: migration_20261111_180000_kw6t_video.up,
+    down: migration_20261111_180000_kw6t_video.down,
+    name: '20261111_180000_kw6t_video',
   },
 ];
