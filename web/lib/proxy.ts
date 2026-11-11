@@ -44,8 +44,8 @@ export function dauNgonNgu(req: Request): Record<string, string> {
  *  trình duyệt gửi, giả được — miễn phí rộng hơn thì người dùng bản Việt chỉ cần gửi header là đọc hết chương khoá).
  *  Mở thêm mảng tiếng Anh = thêm mã vào đây. Người gửi header giả chỉ nhận bản TIẾNG ANH của đúng mảng đã mở miễn phí. */
 export const MO_DUN_MIEN_PHI_EN = {
-  luan_giai: new Set(["battu"]),
-  hoi: new Set(["battu", "thanso"]),
+  luan_giai: new Set(["battu", "tuvi"]),
+  hoi: new Set(["battu", "thanso", "tuvi"]),
 } as const;
 
 export function mienPhiBanAnh(req: Request, loai: keyof typeof MO_DUN_MIEN_PHI_EN, moDun: string): boolean {
