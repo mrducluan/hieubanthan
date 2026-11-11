@@ -111,12 +111,14 @@ def tuvi_giai_doan(ls: dict, nam_am_xem: int, nam_am_sinh: int, so_nam: int = SO
         ly, cu = [], []
         if c["ten"] == CUNG_SK:
             ly.append("dai_han")
-            cu.append(f"Đại hạn {tu}–{den} tuổi đi cung Tật Ách")
+            cu.append(L("tv.skn.dai_han", f"Đại hạn {tu}–{den} tuổi đi cung Tật Ách", tu=tu, den=den,
+                        cung=_ten.ten("cung", CUNG_SK)))
         if c.get("can"):
             ky = next(x for x in phi.phi_tu_can(c["can"], ls["cung"]) if x["hoa"] == "Kỵ")
             if ky["den_cung"] == CUNG_SK:
                 ly.append("ky_dai_han")
-                cu.append(f"Hoá Kỵ của can đại hạn {c['can']} ({ky['sao']}) nhập Tật Ách")
+                cu.append(L("tv.skn.ky_dai_han", f"Hoá Kỵ của can đại hạn {c['can']} ({ky['sao']}) nhập Tật Ách",
+                            can=_ten.ten("can", c["can"]), sao=_ten.ten("sao", ky["sao"]), cung=_ten.ten("cung", CUNG_SK)))
         if ly:
             ra.append({"tu": tu, "den": den, "nam_tu": nam_am_sinh + tu - 1, "nam_den": nam_am_sinh + den - 1,
                        "ly_do": ly, "can_cu": cu, "he": he0})
@@ -126,7 +128,9 @@ def tuvi_giai_doan(ls: dict, nam_am_xem: int, nam_am_sinh: int, so_nam: int = SO
 def cau_giai_doan(g: dict) -> str:
     he = _tron(g.get("he"))
     s = kb.mau("giai_doan").format(tu=g["tu"], den=g["den"], he=he["he"] if he else L("bt_ds.skn.tong_quat", "sức khoẻ tổng quát"))
-    return s.replace(" tuổi", f" tuổi (khoảng {g['nam_tu']}–{g['nam_den']})", 1)
+    return s.replace(L("tv.skn.moc_tuoi", " tuổi", den=g["den"]),
+                     L("tv.skn.khoang", f" tuổi (khoảng {g['nam_tu']}–{g['nam_den']})", den=g["den"], nam_tu=g["nam_tu"],
+                       nam_den=g["nam_den"]), 1)
 
 
 # ------------------------------------------------------------------ Bát tự

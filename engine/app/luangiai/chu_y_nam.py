@@ -109,42 +109,48 @@ def tuvi_nam_cung(ls: dict, nam_am_xem: int, nam_am_sinh: int, cung: str, so_nam
         # SK-1 giữ bất biến "Kỵ năm nhập Tật Ách luôn là năm nên chú ý" — Lộc cùng vào thì vẫn nhắc đi khám
         if (loc["den_cung"] == cung and (mang_thuong or ky["den_cung"] != cung)) or (mang_thuong and g.get("muc") == "thuan"):
             continue
-        dau = f"Năm {nam} ({can} {chi}): "
+        dau = L("tv.cyn.dau", f"Năm {nam} ({can} {chi}): ", nam=nam, can=_ten.ten("can", can), chi=_ten.ten("chi", chi))
+        tc, ks = _ten.ten("cung", cung), _ten.ten("sao", ky["sao"])
         ly, cu, bc = [], [], []
         if ky["den_cung"] == cung:
             ly.append("ky_nhap")
-            cu.append(f"{dau}Hoá Kỵ năm ({ky['sao']}) nhập cung {cung}")
+            cu.append(L("tv.cyn.ky_nhap", f"{dau}Hoá Kỵ năm ({ky['sao']}) nhập cung {cung}", dau=dau, sao=ks, cung=tc))
             if mang_thuong and goc_ky == cung:
                 ly.append("chong_ky")
-                cu.append(f"{dau}trùng cung Hoá Kỵ gốc (chồng Kỵ)")
+                cu.append(L("tv.cyn.chong_ky", f"{dau}trùng cung Hoá Kỵ gốc (chồng Kỵ)", dau=dau))
         elif ky["xung_cung"] == cung:
             ly.append("ky_chieu")
-            cu.append(f"{dau}Hoá Kỵ năm ({ky['sao']}) ở cung {ky['den_cung']}, chiếu sang {cung}")
+            cu.append(L("tv.cyn.ky_chieu", f"{dau}Hoá Kỵ năm ({ky['sao']}) ở cung {ky['den_cung']}, chiếu sang {cung}", dau=dau,
+                        sao=ks, den=_ten.ten("cung", ky["den_cung"]), cung=tc))
         c_ln = next(c for c in ls["cung"] if c["chi"] == chi)
         if c_ln["ten"] == cung:
             ly.append("luu_nien")
-            cu.append(f"{dau}cung lưu niên ({chi}) là {cung}")
+            cu.append(L("tv.cyn.luu_nien", f"{dau}cung lưu niên ({chi}) là {cung}", dau=dau, chi=_ten.ten("chi", chi), cung=tc))
         if mang_thuong and g.get("muc") == "can_chu_dong" and (g.get("_tac") or (None, None))[1] == cung:
             ly.append("van_han_can")
-            cu.append(f"{dau}chương Vận hạn chấm năm này Cần lưu ý vì Hoá Kỵ năm chạm cung {cung}")
+            cu.append(L("tv.cyn.van_han_can", f"{dau}chương Vận hạn chấm năm này Cần lưu ý vì Hoá Kỵ năm chạm cung {cung}",
+                        dau=dau, cung=tc))
         dh = next((c for c in ls["cung"] if c["dai_han"][0] <= tuoi <= c["dai_han"][1]), None)
         lop10 = []
         if dh:
             if dh["ten"] == cung:
-                lop10.append(("dai_han", f"Đại hạn {dh['dai_han'][0]}–{dh['dai_han'][1]} tuổi đi cung {cung}"))
+                lop10.append(("dai_han", L("tv.cyn.dai_han", f"Đại hạn {dh['dai_han'][0]}–{dh['dai_han'][1]} tuổi đi cung {cung}",
+                                           tu=dh["dai_han"][0], den=dh["dai_han"][1], cung=tc)))
             if dh.get("can"):
                 ky_dh = next(x for x in phi.phi_tu_can(dh["can"], ls["cung"]) if x["hoa"] == "Kỵ")
                 if ky_dh["den_cung"] == cung:
-                    lop10.append(("ky_dai_han", f"Hoá Kỵ của can đại hạn {dh['can']} ({ky_dh['sao']}) nhập {cung}"))
+                    lop10.append(("ky_dai_han", L("tv.cyn.ky_dai_han", f"Hoá Kỵ của can đại hạn {dh['can']} ({ky_dh['sao']}) nhập {cung}",
+                                                  can=_ten.ten("can", dh["can"]), sao=_ten.ten("sao", ky_dh["sao"]), cung=tc)))
         for ma, cau in lop10:
             if mang_thuong:
-                bc.append(f"Bối cảnh cả giai đoạn (không tính điểm cho từng năm): {cau}")
+                bc.append(L("tv.cyn.boi_canh", f"Bối cảnh cả giai đoạn (không tính điểm cho từng năm): {cau}", cau=cau))
             else:
                 ly.append(ma)
                 cu.append(f"{dau}{cau}")
         if k == 0 and sao_luu_ta:
             ly.append("sao_luu")
-            cu.append(f"{dau}sao lưu ở {cung}: {', '.join(sao_luu_ta)}")
+            cu.append(L("tv.cyn.sao_luu", f"{dau}sao lưu ở {cung}: {', '.join(sao_luu_ta)}", dau=dau, cung=tc,
+                        ds=", ".join(sao_luu_ta)))
         for ma, cau in (them or {}).get(nam, []):
             if ma not in ly:
                 ly.append(ma)

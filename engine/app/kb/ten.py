@@ -150,6 +150,8 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "vao_menh.sao": "sao", "duong.hoa": "hoa", "duong.sao": "sao", "hoa.hoa": "hoa", "hoa.sao": "sao",
     "nguoi_kia_vao_ban.hoa": "hoa", "nguoi_kia_vao_ban.sao": "sao", "ban_vao_nguoi_kia.hoa": "hoa",
     "ban_vao_nguoi_kia.sao": "sao", "menh_nguoi_kia_vao_ban.hoa": "hoa", "menh_nguoi_kia_vao_ban.sao": "sao",
+    # EN-ALL GĐ 4 (agent B) — bài đọc Tử vi: dòng thời gian đại hạn, sao lưu năm
+    "thoi_gian_bieu.cung": "cung", "muc.cung": "cung", "muc.cac_cung": "cung",
 }
 
 
