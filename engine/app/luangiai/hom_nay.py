@@ -12,6 +12,8 @@ Kèm ngày phổ quát, 3 câu hỏi nổi bật xoay theo ngày, và số ngày
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import datetime as dt
 import json
 from functools import lru_cache
@@ -152,7 +154,7 @@ def que_rieng(so_tren: int, so_duoi: int, thoi_diem: dt.datetime) -> dict:
     return kq
 
 
-@lru_cache(maxsize=1)
+@ngon_ngu.lru(maxsize=1)
 def _kb_battu() -> dict:
     return json.loads((Path(__file__).parents[1] / "kb" / "data" / "battu_kb.json").read_text(encoding="utf-8"))
 
@@ -169,7 +171,7 @@ def _nhip_bat_tu(ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict:
             "cach_tinh": f"Can ngày hôm nay ({can}) so với nhật chủ {nhat_chu} của bạn (can ngày sinh) theo ngũ hành và âm dương."}
 
 
-@lru_cache(maxsize=1)
+@ngon_ngu.lru(maxsize=1)
 def _kb_que() -> dict:
     return json.loads((Path(__file__).parents[1] / "kb" / "data" / "kinhdich_kb.json").read_text(encoding="utf-8"))["que"]
 

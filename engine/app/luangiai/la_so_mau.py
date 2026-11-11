@@ -8,6 +8,8 @@ khối bằng chứng của hỏi đáp Tử vi, nên lá mẫu và lá của ng
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import copy
 import datetime as dt
 from functools import lru_cache
@@ -74,7 +76,7 @@ def _sao_cung(ls: dict, ten_cung: str, da_co: set[str]) -> list[str | None]:
     return out + [_doan(tv._m_sao_cung(s["ten"], ten_cung, None, "muon"), da_co) for s in doi["chinh_tinh"][:2]]
 
 
-@lru_cache(maxsize=None)
+@ngon_ngu.lru(maxsize=None)
 def _doc(slug: str) -> dict:
     from app.tuvi_api import TuanTrietInput, _DauVao, api_an_sao
     m = _THEO_SLUG[slug]

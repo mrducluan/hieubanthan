@@ -7,6 +7,7 @@
 // QT-0: riêng /quan-tri (+ /api/quan-tri) — làm mới phiên Supabase (Server Component không ghi được cookie) + header noindex.
 import { NextRequest, NextResponse } from "next/server";
 import { langHtml, maNgonNguEn } from "@/lib/ngon-ngu";
+import { dichRewrite, suaDuongLac } from "@/lib/duong-en";
 import { createServerClient } from "@supabase/ssr";
 import { SITE_CHINH } from "@/lib/seo";
 import { taoCsp, taoNonce } from "@/lib/csp";
@@ -49,18 +50,34 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   const cookieMoi = quanTri ? await lamMoiPhien(req) : [];
   // DH-PC2: khung bản đồ vệ tinh tự gắn CSP riêng (Google Maps cần 'unsafe-eval') — không chồng CSP chung lên (hai CSP = giao nhau).
   if (pathname === "/khung/ve-tinh") return NextResponse.next();
+  // EN-ALL mục 3.1: "/en/<slug-việt>" gõ lạc hoặc slug Anh đã đổi → 308 một bước về URL Anh đúng (chỉ trang đã mở).
+  const tiengAnh = pathname === "/en" || pathname.startsWith("/en/");
+  if (tiengAnh) {
+    const dung = suaDuongLac(pathname);
+    if (dung) return NextResponse.redirect(new URL(dung + req.nextUrl.search, req.url), 308);
+  }
+  // URL Anh đã mở mà KHÔNG có trang riêng dưới app/en → hiển thị chính trang Việt tương ứng (một cây component), ngôn ngữ đi
+  // theo header. Bảng `lib/duong-en.json` là nguồn duy nhất; trang chưa mở không rewrite (404 tiếng Anh).
+  const dichVi = tiengAnh ? dichRewrite(pathname) : null;
   const nonce = taoNonce();
   const csp = taoCsp(nonce);
   const dau = new Headers(req.headers);   // chép SAU khi làm mới phiên → cookie mới đi kèm request
   dau.set("x-nonce", nonce);
   dau.set("content-security-policy", csp);
   // QTE: bản tiếng Anh ở /en — layout đọc `x-ngon-ngu` để dựng khung tiếng Anh; route API chuyển tiếp header này tới engine.
-  const tiengAnh = pathname === "/en" || pathname.startsWith("/en/");
   // Ý7: biến thể thị trường (en-us) theo Accept-Language — chỉ khi engine có bản phủ; còn lại "en".
   const maEn = tiengAnh ? maNgonNguEn(req.headers.get("accept-language")) : "vi";
   dau.set("x-ngon-ngu", maEn);
   dau.set("x-duong-dan", pathname);   // HTT-1: layout biết trang đang mở (dải gợi ý bản tiếng Anh chỉ ở trang có bản Anh)
-  const res = NextResponse.next({ request: { headers: dau } });
+  dau.set("x-duong-hien-thi", pathname);   // EN-ALL: URL người dùng thấy (trước rewrite) → canonical, hreflang, nút đổi ngôn ngữ
+  let res: NextResponse;
+  if (dichVi) {
+    const u = req.nextUrl.clone();
+    u.pathname = dichVi;
+    res = NextResponse.rewrite(u, { request: { headers: dau } });
+  } else {
+    res = NextResponse.next({ request: { headers: dau } });
+  }
   res.headers.set("content-security-policy", csp);
   if (tiengAnh) { res.headers.set("content-language", langHtml(maEn)); res.headers.append("vary", "Accept-Language"); }
   cookieMoi.forEach((c) => res.cookies.set(c.name, c.value, c.options));

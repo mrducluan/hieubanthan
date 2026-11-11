@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Lien from "@/components/khung/Lien";
 import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = { title: { absolute: "Page not found — Hieu Ban Than" }, robots: { index: false, follow: true } };
+export const metadata: Metadata = { title: { absolute: "Page not found — Hieuban" }, robots: { index: false, follow: true } };
 
 export default function NotFoundEn() {
   return (

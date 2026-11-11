@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { siteUrl, urlDayDu } from "@/lib/seo";
 
-export const TEN_SITE_EN = "Hieu Ban Than";
+export const TEN_SITE_EN = "Hieuban";
 
 /** Ảnh chia sẻ tiếng Anh: cùng khung "trang sách" của /og nhưng chữ tiếng Anh (`lang=en`), QR + hieuban.com như mọi ảnh. */
 export function anhOgEn(tieuDe: string): string {
@@ -26,7 +26,7 @@ export function catMoTaEn(s: string, toiDa = 160): string {
 export function metaEn({ title, description, path, vi, noindex = false, ngayDang, capNhat, anh }: {
   title: string; description: string; path: string; vi?: string; noindex?: boolean; ngayDang?: string; capNhat?: string; anh?: string;
 }): Metadata {
-  const image = anh ?? anhOgEn(title.replace(/ — Hieu Ban Than.*$/, ""));
+  const image = anh ?? anhOgEn(title.replace(/ — Hieuban.*$/, ""));
   description = catMoTaEn(description);
   return {
     metadataBase: new URL(siteUrl()),
@@ -48,7 +48,7 @@ export function ldDuongDanEn(cap: { ten: string; duong: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [{ ten: "Hieu Ban Than (English)", duong: "/en" }, ...cap].map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.ten, item: urlDayDu(c.duong) })),
+    itemListElement: [{ ten: "Hieuban (English)", duong: "/en" }, ...cap].map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.ten, item: urlDayDu(c.duong) })),
   };
 }
 
@@ -58,7 +58,7 @@ export function ldBaiEn(o: { tieuDe: string; duong: string; moTa: string; ngayDa
     "@context": "https://schema.org",
     "@type": "Article",
     headline: o.tieuDe, description: o.moTa, inLanguage: "en", url: urlDayDu(o.duong), mainEntityOfPage: urlDayDu(o.duong),
-    author: { "@type": "Organization", name: "Hieu Ban Than editorial team", url: urlDayDu("/en") },
+    author: { "@type": "Organization", name: "Hieuban editorial team", url: urlDayDu("/en") },
     publisher: { "@id": `${siteUrl()}/#to-chuc` },
     image: { "@type": "ImageObject", url: urlDayDu(anhOgEn(o.tieuDe)), width: 1200, height: 630 },
     ...(o.ngayDang ? { datePublished: o.ngayDang } : {}), ...(o.capNhat ? { dateModified: o.capNhat } : {}),

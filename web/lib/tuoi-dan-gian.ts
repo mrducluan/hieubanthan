@@ -1,4 +1,5 @@
 // TDG-1 — kiểu dữ liệu + đọc phía máy chủ cho xem tuổi làm nhà/cưới, hướng xấu năm, tuổi xông đất. Engine tính hết.
+import { duongTheoLuot } from "@/lib/engine-ngon-ngu";
 import { unstable_noStore as noStore } from "next/cache";
 
 export interface MetaKb { nguon: string; trang_thai: string; luu_y: string }
@@ -41,8 +42,9 @@ const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
 async function lay<T>(duong: string): Promise<T | null> {
   try {
-    const r = await fetch(`${ENGINE_URL}${duong}`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    const nn = await duongTheoLuot(duong);
+    const r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: 60 * 60 * 24 }, signal: AbortSignal.timeout(15_000),
     });
     return r.ok ? ((await r.json()) as T) : null;

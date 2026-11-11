@@ -49,8 +49,8 @@ def muc_doi_song(bc: dict | None, chuong: str | None, lo_so: bool = False) -> di
     if chuong == "suc_khoe":
         # SK-1 (2026-11-04): câu hỏi sức khoẻ luôn nhận thêm hộp "Năm nên chú ý sức khoẻ hơn" của chương (cùng hàm báo
         # cáo dùng — một bộ tính), để lời đáp nêu được năm nên đi khám.
-        from app.luangiai.suc_khoe_nam import TIEU_DE_HOP  # noqa: PLC0415
-        nam = next((h for h in c.get("hop") or [] if h.get("tieu_de") == TIEU_DE_HOP), None)
+        from app.luangiai.suc_khoe_nam import tieu_de_hop  # noqa: PLC0415
+        nam = next((h for h in c.get("hop") or [] if h.get("tieu_de") == tieu_de_hop()), None)
         if nam and nam not in hop:
             hop = [*hop, nam]
     gon = [{k: h[k] for k in ("loai", "tieu_de", "noi_dung", "huong_xu_ly", "loi_khuyen", "ma_mau", "can_cu") if h.get(k)}

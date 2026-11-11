@@ -17,6 +17,8 @@ from app.kb import do_rieng as _dr
 from app.kb import ngay_cap_nhat as _ncn
 from app.kb import tham_dinh as _td
 from app.kb import nap
+from app.kb import slug_en as _sle
+from app import ngon_ngu
 
 _DATA = Path(__file__).parent / "data"
 
@@ -170,6 +172,7 @@ def ten_que_day_du(k: str) -> str:
     return f"{tt[thuong]} {tt[ha]} {ten}"
 
 
+@ngon_ngu.theo_viet
 def _ds_que() -> list[tuple[str, str]]:
     return [(k, f"que-{k}-{_slug(v['ten'])}") for k, v in _doc("kinhdich_kb.json")["que"].items()]
 
@@ -222,6 +225,7 @@ def _trang_que(k: str, slug: str) -> dict:
 
 
 # ---- Sao -----------------------------------------------------------------------
+@ngon_ngu.theo_viet
 def _ds_sao() -> list[tuple[str, str]]:
     return [(ten, f"sao-{_slug(ten)}") for ten in _doc("tuvi_kb.json")["chinh_tinh"]]
 
@@ -396,7 +400,9 @@ from app.kb import trang_tarot as _ttr  # noqa: E402 — TR-1: 78 lá bài Tarot
 _TRANG.update(_ttr.TRANG)
 _TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN, **_tpt.TEN_NGAN, **_tct.TEN_NGAN, **_tnt.TEN_NGAN, **_ttr.TEN_NGAN}
 from app.kb import bo_sung as _bs  # noqa: E402 — SEO-M: nội dung bổ sung trang mỏng (KB bo_sung_<loai>.json)
-_TRANG = {k: (ds, _bs.boc(dung)) for k, (ds, dung) in _TRANG.items()}
+# EN-ALL GĐ 2: danh sách (khoá, slug Việt) luôn dựng ở ngữ cảnh tiếng Việt — slug là KHOÁ URL, không đổi theo ngôn ngữ
+# (trước đây lá bài dựng slug từ tên đã phủ tiếng Anh → bản Anh 404 với slug Việt).
+_TRANG = {k: (ngon_ngu.theo_viet(ds), _bs.boc(dung)) for k, (ds, dung) in _TRANG.items()}
 
 
 # ---- API công khai của module -------------------------------------------------
@@ -428,10 +434,25 @@ def _hoan_tat(t: dict) -> dict:
     dang, sua = _ncn.ngay(t["loai"], t["slug"], CAP_NHAT)
     t["ngay_dang"] = dang
     t["cap_nhat"] = max(sua, (t["tham_dinh"] or {}).get("ngay", ""))
+    if not ngon_ngu.la_viet():
+        # EN-ALL GĐ 2: slug Anh của chính trang + mọi link tới trang kiến thức khác (web dựng URL /en/… từ đây). Bản Việt
+        # không mang trường này → đầu ra bản Việt giữ nguyên từng byte.
+        t["slug_en"] = _sle.cua(t["loai"], t["slug"])
+        for l in (t["lien_quan"] + (t.get("trang_con") or {}).get("ds", []) + (t.get("trang_con_hoa") or {}).get("ds", [])
+                  + [x for m in t["muc"] for x in m.get("xem_them", [])]):
+            if l.get("loai") in LOAI:
+                l["slug_en"] = _sle.cua(l["loai"], l["slug"])
     return t
 
 
 def lay(loai: str, slug: str) -> dict | None:
+    """Trang kiến thức theo slug Việt; bản Anh nhận cả slug Anh (EN-ALL GĐ 2)."""
+    if not ngon_ngu.la_viet() and loai in LOAI:
+        slug = _sle.ve_viet(loai, slug) or slug
+    return _lay(loai, slug)
+
+
+def _lay(loai: str, slug: str) -> dict | None:
     if loai == "so" and slug.startswith("so-") and slug[3:] in _SO:
         return _hoan_tat(_bs.ap(_trang_so(slug[3:])))
     if loai == "que":
@@ -459,6 +480,6 @@ def danh_sach() -> list[dict]:
         for slug in slugs:
             t = lay(loai, slug)
             assert t is not None
-            ra.append({k: t[k] for k in ("loai", "slug", "tieu_de", "mo_ta", "trang_thai", "index", "cap_nhat", "ngay_dang",
-                                       "chu_bien", "tac_gia", "tham_dinh", "bien_soan")})
+            ra.append({k: t[k] for k in ("loai", "slug", "slug_en", "tieu_de", "mo_ta", "trang_thai", "index", "cap_nhat", "ngay_dang",
+                                       "chu_bien", "tac_gia", "tham_dinh", "bien_soan") if k in t})
     return ra

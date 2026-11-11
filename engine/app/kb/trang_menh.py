@@ -9,6 +9,8 @@ Nghĩa: hình tượng nạp âm (battu_kb.nap_am — nháp AI), ứng dụng ng
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import datetime as dt
 
 from app import config
@@ -76,6 +78,7 @@ def _sinh_khi(q: dict) -> str:
     return _huong_tot(q)[0]
 
 
+@ngon_ngu.theo_viet
 def ds_menh_nam() -> list[tuple[int, str]]:
     return [(n, f"sinh-nam-{n}-menh-gi") for n in range(NAM_DAU, NAM_CUOI + 1)]
 

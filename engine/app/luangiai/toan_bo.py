@@ -13,6 +13,7 @@ import re
 from app.luangiai import battu_doi_song as ds_battu
 from app.luangiai import tuvi_doi_song as ds_tuvi
 from app.narrative import hoi_van
+from app.kb.loi import L
 
 PHI = {"sao": 0, "ly_do": "mien_phi_thu_nghiem"}
 
@@ -98,7 +99,8 @@ def gan_gio_tam(bc: dict, mo_dun: str = "tuvi") -> dict:
     """EN-2 (P2-17): không biết giờ sinh → báo cáo mang `gio_tam` (một câu) — web hiện thành dải riêng đầu bài, không
     phụ thuộc bản diễn đạt AI (trước: một câu trong đoạn, bản AI có thể lược mất)."""
     if bc.get("chuong"):
-        bc["gio_tam"] = GIO_TAM.get(mo_dun, GIO_TAM["tuvi"])
+        g = GIO_TAM.get(mo_dun, GIO_TAM["tuvi"])
+        bc["gio_tam"] = L("bt_ds.gio_tam", g) if mo_dun == "battu" else g
     return bc
 
 
@@ -147,5 +149,7 @@ def battu(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = N
     các trường cũ (mo_dun, chuong[].ma/tieu_de/cau_hoi/doan/moi_xem, ket, trang_thai, phi) cho SAO-2 và diễn đạt."""
     bc = ds_battu.lap(sinh, ngay_xem, trong_so=trong_so, ca_nhan=ca_nhan)
     chuong = [{**c, "moi_xem": _moi_xem("battu", c["ma"], c["doan"], c)} for c in bc["chuong"]]
-    return {"mo_dun": "battu", **bc, "chuong": chuong, "ket": hoi_van.KET,
+    for c in chuong:            # EN-ALL: câu hỏi mở của lời mời theo ngôn ngữ (bản Việt giữ nguyên chữ)
+        c["moi_xem"]["cau_hoi"] = L(f"bt_ds.moi_xem.{c['ma']}", c["moi_xem"]["cau_hoi"])
+    return {"mo_dun": "battu", **bc, "chuong": chuong, "ket": L("bt_ds.ket", hoi_van.KET),
             "trang_thai": bc.get("trang_thai", "nhap_ai"), "phi": PHI}

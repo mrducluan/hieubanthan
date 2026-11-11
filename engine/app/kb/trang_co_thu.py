@@ -10,6 +10,8 @@ qua `muc_trich()` và trỏ về trang trụ. Nguồn gốc nội bộ (bản ch
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import re
 
 SLUG = "cot-tuy-phu"
@@ -83,6 +85,7 @@ def muc_trich(sao: str | None = None, cung: str | None = None, hoa: str | None =
             "xem_them": [{"loai": "co_thu", "slug": SLUG}]}
 
 
+@ngon_ngu.theo_viet
 def ds_co_thu() -> list[tuple[str, str]]:
     return [("cot_tuy_phu", SLUG)]
 

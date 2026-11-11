@@ -1,0 +1,603 @@
+{
+ "_trang_thai": "bien_tap",
+ "_nguon": "AI draft summarising common knowledge from Yuan Hai Zi Ping, Zi Ping Zhen Quan and Di Tian Sui; not yet checked against the original texts.",
+ "nhat_chu": {
+  "Giáp": {
+   "hinh_tuong": "a great tree",
+   "tinh_chat": "direct, purposeful, keen to grow upward and to shelter others",
+   "diem_manh": "steadfast, with a natural drive to lead",
+   "mat_toi": "rigid, hard to bend, can snap under pressure",
+   "cau_tu_soi": "Are you trying to stand straight in a place where you need to learn to bend?",
+   "mua": {
+    "xuan": "In spring Wood is in season: Jia Wood is strong and needs Metal to prune it and Fire to let it shine before it becomes useful.",
+    "ha": "In summer strong Fire drains Wood: Jia Wood dries out easily and needs Water to stay moist.",
+    "thu": "In autumn strong Metal controls Wood: Jia Wood is held in check and needs Water (a Resource) to turn Metal into support for Wood.",
+    "dong": "In winter the Water is cold: Jia Wood is nourished but chilled, and needs Fire for warmth."
+   }
+  },
+  "Ất": {
+   "hinh_tuong": "flowers, grass, vines",
+   "tinh_chat": "soft, deft, good at adapting and at leaning on support",
+   "diem_manh": "flexible, perceptive, resilient",
+   "mat_toi": "can become dependent, often calculates for safety",
+   "cau_tu_soi": "Who are you leaning on — and do you still need to?",
+   "mua": {
+    "xuan": "In spring Yi Wood is in season and thriving; it needs Fire to bloom.",
+    "ha": "In summer Yi Wood wilts easily and needs Water.",
+    "thu": "In autumn Yi Wood is weak against Metal and needs Water plus support from peers (Friend and Rob Wealth).",
+    "dong": "In winter Yi Wood is frozen and needs Bing Fire for warmth."
+   }
+  },
+  "Bính": {
+   "hinh_tuong": "the sun",
+   "tinh_chat": "warm-hearted, generous, likes to shine and to act in the open",
+   "diem_manh": "passes energy on to others, generous",
+   "mat_toi": "showy, impatient, finds it hard to keep a secret",
+   "cau_tu_soi": "Who are you shining for — and do you keep some warmth for yourself?",
+   "mua": {
+    "xuan": "In spring Wood feeds Fire: Bing Fire is supported and shines clearly.",
+    "ha": "In summer Bing Fire is at its peak and needs Water (Ren Water) to balance it.",
+    "thu": "In autumn Bing Fire slowly weakens and needs Wood to feed it.",
+    "dong": "In winter Bing Fire is at its weakest and needs Wood plus support from peers (Friend and Rob Wealth)."
+   }
+  },
+  "Đinh": {
+   "hinh_tuong": "a candle flame, a lamp",
+   "tinh_chat": "warm, perceptive, attentive, a light in dark places",
+   "diem_manh": "focused, lights the way for others",
+   "mat_toi": "prone to worry, sways with emotions",
+   "cau_tu_soi": "What is keeping your flame supplied with oil?",
+   "mua": {
+    "xuan": "In spring Ding Fire is fed by Wood and stays steady.",
+    "ha": "In summer Ding Fire is strong and needs Water to temper it.",
+    "thu": "In autumn Ding Fire is weak and needs Jia Wood as firewood.",
+    "dong": "In winter Ding Fire flickers and needs Wood and shelter from the wind."
+   }
+  },
+  "Mậu": {
+   "hinh_tuong": "a great mountain, a dyke",
+   "tinh_chat": "solid, trustworthy, calm, accepting",
+   "diem_manh": "stable, carries burdens, keeps their word",
+   "mat_toi": "slow, conservative, resistant to change",
+   "cau_tu_soi": "What are you holding on to only out of habit?",
+   "mua": {
+    "xuan": "In spring Wood controls Earth: Wu Earth is held in check and needs Fire to turn Wood into support for Earth.",
+    "ha": "In summer Fire feeds Earth: Wu Earth is strong but dry and needs Water to stay moist.",
+    "thu": "In autumn Wu Earth spends its energy on Metal and needs Fire for support.",
+    "dong": "In winter Wu Earth is cold and needs Fire for warmth."
+   }
+  },
+  "Kỷ": {
+   "hinh_tuong": "garden and field soil",
+   "tinh_chat": "hardworking, modest, nurturing, practical",
+   "diem_manh": "thorough, accepting, good at helping things grow",
+   "mat_toi": "a worrier, takes on too much, can be indecisive",
+   "cau_tu_soi": "You nurture other people — who nurtures you?",
+   "mua": {
+    "xuan": "In spring Ji Earth is controlled by Wood and needs Fire to feed it.",
+    "ha": "In summer Ji Earth is dry and hot and needs Water.",
+    "thu": "In autumn Ji Earth is drained and needs Fire plus support from peers (Friend and Rob Wealth).",
+    "dong": "In winter Ji Earth is damp and cold and needs Bing Fire."
+   }
+  },
+  "Canh": {
+   "hinh_tuong": "raw metal, a sword",
+   "tinh_chat": "resolute, loyal, direct, likes to act",
+   "diem_manh": "brave, decisive, handles pressure",
+   "mat_toi": "hard-edged, can hurt people with words",
+   "cau_tu_soi": "Is your directness hurting the people you love?",
+   "mua": {
+    "xuan": "In spring Geng Metal is weak and needs Earth to feed it.",
+    "ha": "In summer Geng Metal is forged by Fire: just enough turns it into a fine tool, too much damages it — it needs Earth and Water.",
+    "thu": "In autumn Geng Metal is in season and very strong; it needs Ding Fire to forge it.",
+    "dong": "In winter Geng Metal is cold and needs Fire."
+   }
+  },
+  "Tân": {
+   "hinh_tuong": "gold, silver, jewellery",
+   "tinh_chat": "refined, cares about form, sensitive, a perfectionist",
+   "diem_manh": "good taste, high standards, self-respect",
+   "mat_toi": "easily hurt, picky, worried about saving face",
+   "cau_tu_soi": "Which of your standards is wearing you out?",
+   "mua": {
+    "xuan": "In spring Xin Metal is weak and needs Earth, plus Water to wash it clean.",
+    "ha": "In summer Xin Metal fears being melted by Fire and needs Ren Water.",
+    "thu": "In autumn Xin Metal is in season and shines; it needs Ren Water to wash it.",
+    "dong": "In winter Xin Metal is cold and needs Bing Fire."
+   }
+  },
+  "Nhâm": {
+   "hinh_tuong": "a great river, the open sea",
+   "tinh_chat": "clever, free-spirited, loves freedom and movement",
+   "diem_manh": "broad vision, flexible, accepting",
+   "mat_toi": "hard to contain, can let things slide, short on staying power",
+   "cau_tu_soi": "Where are you flowing to — or are you just overflowing?",
+   "mua": {
+    "xuan": "In spring Ren Water is drained by Wood and needs Metal to feed it.",
+    "ha": "In summer Ren Water is weak and needs Metal plus support from peers (Friend and Rob Wealth).",
+    "thu": "In autumn Metal feeds Water: Ren Water is strong and needs Wu Earth as a dyke.",
+    "dong": "In winter Ren Water is at its strongest and needs Wu Earth to contain it and Fire for warmth."
+   }
+  },
+  "Quý": {
+   "hinh_tuong": "rain and dew",
+   "tinh_chat": "deep, intuitive, discreet, gentle",
+   "diem_manh": "perceptive, patient, soaks in deeply",
+   "mat_toi": "overthinks, slips into pessimism, closes off",
+   "cau_tu_soi": "What do you sense that you have not yet dared to say?",
+   "mua": {
+    "xuan": "In spring Gui Water is drained and needs Metal to feed it.",
+    "ha": "In summer Gui Water dries up and needs Metal plus support from peers (Friend and Rob Wealth).",
+    "thu": "In autumn Gui Water is fed by Metal and runs clear.",
+    "dong": "In winter Gui Water is strong and needs Fire for warmth."
+   }
+  }
+ },
+ "thap_than": {
+  "Tỷ Kiên": {
+   "y_nghia": "Peers of the same nature as you: siblings, friends, rivals with the same goals.",
+   "tinh_cach": "independent, confident, values fairness",
+   "khi_nhieu": "stubborn, hard to work with, often competes for a share",
+   "khi_thieu": "short of like-minded people, can feel alone",
+   "nam": "siblings, friends",
+   "nu": "siblings, friends",
+   "cau_tu_soi": "Who are you competing with — and is it necessary?"
+  },
+  "Kiếp Tài": {
+   "y_nghia": "Peers of a different nature: friends, partners, people who share in what you have.",
+   "tinh_cach": "generous, willing to take risks, good at getting things moving",
+   "khi_nhieu": "money tends to go out because of friends; reckless",
+   "khi_thieu": "lacks decisiveness",
+   "nam": "siblings, friends",
+   "nu": "siblings, friends",
+   "cau_tu_soi": "Does your money often leave because you find it hard to say no?"
+  },
+  "Thực Thần": {
+   "y_nghia": "Gentle self-expression: talent, enjoyment, creativity.",
+   "tinh_cach": "easygoing, perceptive, enjoys the good things",
+   "khi_nhieu": "lazy, pleasure-seeking, short of healthy pressure",
+   "khi_thieu": "finds self-expression hard",
+   "nam": "talent, juniors",
+   "nu": "children, talent",
+   "cau_tu_soi": "Which talent have you left asleep?"
+  },
+  "Thương Quan": {
+   "y_nghia": "Sharp self-expression: creativity, breaking the mould, speech.",
+   "tinh_cach": "clever, sharp, does not like being boxed in",
+   "khi_nhieu": "proud, quick to push back, can overstep with superiors",
+   "khi_thieu": "lacks creativity",
+   "nam": "talent, juniors",
+   "nu": "children, talent",
+   "cau_tu_soi": "When was the last time you were more blunt than you needed to be?"
+  },
+  "Thiên Tài": {
+   "y_nghia": "Money that moves around, opportunities, windfalls.",
+   "tinh_cach": "generous, quick to spot opportunities, good with people",
+   "khi_nhieu": "spends freely, speculates, amorous",
+   "khi_thieu": "misses opportunities",
+   "nam": "money, father, partner/wife",
+   "nu": "money, father",
+   "cau_tu_soi": "Which opportunities do you chase for gain, and which because you enjoy them?"
+  },
+  "Chính Tài": {
+   "y_nghia": "Steady money, effort, saving up over time.",
+   "tinh_cach": "thrifty, practical, keeps their word",
+   "khi_nhieu": "tight-fisted, too focused on the practical",
+   "khi_thieu": "struggles to keep money",
+   "nam": "wife, salary",
+   "nu": "salary",
+   "cau_tu_soi": "Do you save to feel safe, or to live?"
+  },
+  "Thất Sát": {
+   "y_nghia": "Pressure, challenge, hard power.",
+   "tinh_cach": "brave, decisive, handles pressure",
+   "khi_nhieu": "hot-tempered, weighed down by pressure, prone to clashes",
+   "khi_thieu": "lacks the drive to push through difficulty",
+   "nam": "sons, pressure at work",
+   "nu": "partner/husband, pressure",
+   "cau_tu_soi": "Which pressure is helping you grow, and which is just wearing you down?"
+  },
+  "Chính Quan": {
+   "y_nghia": "Discipline, honour, order, position.",
+   "tinh_cach": "upright, responsible, respects rules",
+   "khi_nhieu": "boxed in, afraid of mistakes, rigid",
+   "khi_thieu": "lacks discipline",
+   "nam": "daughters, position",
+   "nu": "husband, position",
+   "cau_tu_soi": "Which rules do you keep because you believe in them, and which out of fear?"
+  },
+  "Thiên Ấn": {
+   "y_nghia": "Unusual learning, intuition, support from unconventional places.",
+   "tinh_cach": "deep, original, likes to research",
+   "khi_nhieu": "solitary, suspicious, feels out of place",
+   "khi_thieu": "lacks inner depth",
+   "nam": "stepmother, teacher",
+   "nu": "stepmother, teacher",
+   "cau_tu_soi": "Do you study to understand, or to avoid having to act?"
+  },
+  "Chính Ấn": {
+   "y_nghia": "Protection, formal learning, mother, good name.",
+   "tinh_cach": "kind, eager to learn, calm",
+   "khi_nhieu": "over-reliant, slow, not very practical",
+   "khi_thieu": "short of people who back them",
+   "nam": "mother, education",
+   "nu": "mother, education",
+   "cau_tu_soi": "Who is protecting you — and are you protecting anyone?"
+  }
+ },
+ "tru": {
+  "năm": "Year Pillar: roots, ancestors, childhood (roughly ages 1–16) and the wider social setting.",
+  "tháng": "Month Pillar (month commander): parents, siblings, the setting you grow up in, career — the heaviest pillar when judging strength.",
+  "ngày": "Day Pillar: you yourself (the Day Stem is the Day Master); the Day Branch is the spouse palace — it describes how you bond in marriage.",
+  "giờ": "Hour Pillar: children, those who come after you, later life and what you achieve later on."
+ },
+ "ngu_hanh": {
+  "Mộc": {
+   "tinh_chat": "growth, kindness, planning",
+   "khi_thieu": "too little Wood: hard to get started, not very flexible",
+   "khi_thua": "too much Wood: stubborn, takes on too much",
+   "ung_dung": "green; East; work in education, publishing, plants and growing, fashion",
+   "mau": "green",
+   "nghe": "education, publishing, plants and growing, fashion"
+  },
+  "Hỏa": {
+   "tinh_chat": "passion, courtesy, expression",
+   "khi_thieu": "too little Fire: low motivation, hard to express yourself",
+   "khi_thua": "too much Fire: impatient, burns out easily",
+   "ung_dung": "red, orange; South; work in media, energy, food and drink, performing arts",
+   "mau": "red, orange",
+   "nghe": "media, energy, food and drink, performing arts"
+  },
+  "Thổ": {
+   "tinh_chat": "stability, trustworthiness, acceptance",
+   "khi_thieu": "too little Earth: lacks a firm footing, wavers",
+   "khi_thua": "too much Earth: sluggish, conservative",
+   "ung_dung": "yellow, brown; centre/North-East/South-West; work in property, construction, agriculture, management",
+   "mau": "yellow, brown",
+   "nghe": "property, construction, agriculture, management"
+  },
+  "Kim": {
+   "tinh_chat": "decisiveness, loyalty, discipline",
+   "khi_thieu": "too little Metal: indecisive, hard to set boundaries",
+   "khi_thua": "too much Metal: hard-edged, cold",
+   "ung_dung": "white, silver; West; work in finance, engineering, mechanics, legal affairs",
+   "mau": "white, silver",
+   "nghe": "finance, engineering, mechanics, legal affairs"
+  },
+  "Thủy": {
+   "tinh_chat": "wisdom, flexibility, communication",
+   "khi_thieu": "too little Water: hard to adapt, not very gentle",
+   "khi_thua": "too much Water: scattered, unsettled",
+   "ung_dung": "black, blue; North; work in trade, transport, travel, consulting, information technology",
+   "mau": "black, blue",
+   "nghe": "trade, transport, travel, consulting, information technology"
+  }
+ },
+ "cach_cuc": {
+  "Chính Quan cách": "The month commander is the Direct Officer: someone who respects rules and fits organised settings. Zi Ping Zhen Quan: best when the Officer is clean; dislikes the Hurting Officer breaking the Officer.",
+  "Thất Sát cách": "The month commander is Seven Killings: someone who handles pressure and dares to charge ahead. Zi Ping Zhen Quan: needs the Eating God to control Seven Killings, or a Resource to transform it.",
+  "Chính Tài cách": "The month commander is Direct Wealth: practical, good at managing money. Zi Ping Zhen Quan: Wealth needs a Day Master strong enough to carry it.",
+  "Thiên Tài cách": "The month commander is Indirect Wealth: quick to spot opportunities, suited to business. Zi Ping Zhen Quan: dislikes peers (Friend and Rob Wealth) taking the Wealth.",
+  "Chính Ấn cách": "The month commander is the Direct Resource: eager to learn, well protected. Zi Ping Zhen Quan: the Resource needs the Officer to feed it, and dislikes Wealth breaking the Resource.",
+  "Thiên Ấn cách": "The month commander is the Indirect Resource: original thinking. Zi Ping Zhen Quan: dislikes the Indirect Resource (Owl) seizing the Eating God.",
+  "Thực Thần cách": "The month commander is the Eating God: talented and gentle. Zi Ping Zhen Quan: the Eating God producing Wealth is a good sign; dislikes the Indirect Resource (Owl).",
+  "Thương Quan cách": "The month commander is the Hurting Officer: creative, breaks the mould. Zi Ping Zhen Quan: the Hurting Officer needs a Resource to control it, or should go on to produce Wealth.",
+  "Kiến Lộc cách": "The month commander is the Friend (Establishing Prosperity, Jian Lu): self-reliant. Zi Ping Zhen Quan: it is not taken as the main structure; look at Wealth and the Officer to use.",
+  "Dương Nhận cách": "The month commander is the Goat Blade (Rob Wealth at the Peak stage of a yang stem): very strong drive, decisive, prone to grabbing. Zi Ping Zhen Quan: it needs the Officer or Seven Killings to control the Blade before it forms a structure.",
+  "Nguyệt Kiếp cách": "The month commander is Rob Wealth: self-reliant, competitive. Zi Ping Zhen Quan: Prosperity and Rob Wealth are not taken as the useful element; look at Wealth, the Officer, Seven Killings or the Eating God revealed on the stems to use."
+ },
+ "giai_thich": {
+  "bat_tu_vs_tuvi": {
+   "tieu_de": "How is BaZi different from Zi Wei Dou Shu?",
+   "noi_dung": "BaZi (Four Pillars) uses the eight stem-and-branch characters of your birth year, month, day and hour, and looks at the Five Elements around the Day Stem; months follow the solar term calendar. Zi Wei Dou Shu places stars in 12 palaces using the lunar calendar. The two systems are independent and should not be mixed in one reading."
+  },
+  "tiet_khi": {
+   "tieu_de": "Why do BaZi months follow the solar term calendar?",
+   "noi_dung": "BaZi uses the solar term calendar (based on the sun): the year changes at the Start of Spring (Li Chun), and the month changes at each of the 12 solar term boundaries (Start of Spring, Awakening of Insects, Clear and Bright…), not on day 1 of the lunar month. If you were born close to a solar term boundary, you need an accurate birth time."
+  },
+  "gio_ty": {
+   "tieu_de": "Born in the late Zi hour",
+   "noi_dung": "Here, for people born 23:00–23:59, BaZi keeps the Day Pillar of that same day (an agreed policy) and takes the Hour Pillar as the Zi hour of the next day (night Zi). Schools that change the day at 23:00 will give a different Day Pillar — it is worth looking at both."
+  },
+  "thap_than": {
+   "tieu_de": "What are the Ten Gods?",
+   "noi_dung": "The ten relationships between the Day Master and the other stems, based on how the Five Elements produce and control one another and on yin and yang: Friend, Rob Wealth (same element), Eating God, Hurting Officer (the element you produce), Indirect Wealth, Direct Wealth (the element you control), Seven Killings, Direct Officer (the element that controls you), Indirect Resource, Direct Resource (the element that produces you)."
+  },
+  "dung_than": {
+   "tieu_de": "The Useful God, two ways",
+   "noi_dung": "Zi Ping Zhen Quan uses the month commander to set the structure (chart pattern), then looks for the element that helps that structure succeed. Di Tian Sui looks at the balance of the whole chart — the support-and-restrain method (a weak Day Master is fed and supported, a strong Day Master is controlled and drained) and the climate-adjusting method (hot and cold). The two ways can give different results; the system shows both and does not choose for you."
+  },
+  "than_vuong": {
+   "tieu_de": "How is a strong Day Master or a weak Day Master decided?",
+   "noi_dung": "It looks at how much support the Day Master gets (from the same element and from the element that produces it), especially from the month commander. The system uses a published points scale: each Heavenly Stem counts 1 point, each Earthly Branch is split across its hidden stems, and the month branch is multiplied by 2; a ratio ≥ 0.55 means strong, ≤ 0.45 means weak. This is one method; other practitioners may judge differently."
+  },
+  "tang_can": {
+   "tieu_de": "What are hidden stems?",
+   "noi_dung": "The Heavenly Stem characters hidden inside each Earthly Branch (main qi, middle qi, residual qi). For example, Yin (Tiger) holds Jia, Bing and Wu. Hidden stems decide the hidden Ten Gods and how strong each of the Five Elements is."
+  },
+  "dai_van": {
+   "tieu_de": "Luck Pillar: forward or reverse",
+   "noi_dung": "A man born in a yang-stem year and a woman born in a yin-stem year move forward; otherwise they move in reverse. The start of luck (the age when your Luck Pillars begin) is counted from the gap between the birth time and the nearest solar term (3 days ≈ 1 year). Each Luck Pillar lasts 10 years and takes the stem-branch pair right after or right before the Month Pillar."
+  },
+  "cach_cuc": {
+   "tieu_de": "What is a chart pattern?",
+   "noi_dung": "The main pattern of the chart. In Zi Ping Zhen Quan it comes from which of the Ten Gods the month commander is (giving priority to a stem hidden in the month branch that is revealed on a Heavenly Stem): Officer, Seven Killings, Wealth, Resource, Eating God, Hurting Officer, Establishing Prosperity (Jian Lu), Month Rob Wealth."
+  },
+  "xung_hop": {
+   "tieu_de": "Earthly Branch clashes and combinations",
+   "noi_dung": "Six Clashes: Zi–Wu, Chou–Wei, Yin–Shen, Mao–You, Chen–Xu, Si–Hai. Six Harmonies: Zi–Chou, Yin–Hai, Mao–Xu, Chen–You, Si–Shen, Wu–Wei. A year that clashes with your Day Branch is often read as a year of change in your private life — not a fixed bad sign."
+  },
+  "chinh_xac": {
+   "tieu_de": "Is BaZi accurate?",
+   "noi_dung": "BaZi is a cultural system of interpretation and has not been tested the way a forecasting tool would be. Use it as a frame for reflecting on yourself, and check it against milestones you have already lived through (testing it against experience)."
+  }
+ },
+ "mau": {
+  "can_la_so": "To read a BaZi chart you need your date of birth, time of birth and sex (if born before 13/06/1975, also whether you were born in northern or southern Vietnam). Birth time matters: the Hour Pillar, and also the Month Pillar if you were born close to a solar term, depend on it.",
+  "nguoi_khac": "This question asks about someone else's BaZi chart. That needs their date and time of birth and their consent. If you like, ask instead about how you yourself handle that relationship.",
+  "hop": "Comparing two BaZi charts needs the full date and time of birth for both people (and the other person's consent). The system only describes how the Five Elements on each side support or clash with each other — it does not rule 'compatible/incompatible' and does not rely on the Day Stem alone.",
+  "con": "Reading your child's BaZi chart needs the baby's date and time of birth. The system does not choose a birth time or a name based on the Five Elements — those choices should rest on the health of mother and baby and on what your family wants.",
+  "sinh_con_tuoi": "Whether to have a child, in which year, boy or girl, is a matter for your body and your doctor — the Four Pillars cannot decide it. Folk custom compares a child's age sign with the parents' using the Three Harmonies / Six Clashes (a custom, not a BaZi calculation); you can see it in the Age Check tool, but do not let custom decide in place of the two of you. The system does not choose a birth time or a birth year for your baby."
+ },
+ "luu_y": {
+  "ung_dung": "Colours, directions and kinds of work linked to the Five Elements are a common folk application, not a fixed rule in the classical texts — use them as a reference and do not let them decide for you.",
+  "suc_khoe": "The Five Elements only hint at your rhythm of living; for any health concern, see a doctor. This is not medical advice.",
+  "van": "Each Luck Pillar and annual pillar is read as the theme of a period, not as events already set in stone.",
+  "dung_than": "The two ways of finding the Useful God can differ; the system does not choose for you — compare them with what you have actually lived through.",
+  "thang_diem": "A strong Day Master or weak Day Master is judged on the system's published points scale; other practitioners may judge differently.",
+  "lo_so": "The Four Pillars do not answer 'will it happen or not' — no one can say that from a date of birth. What they can say is which area needs more of your attention and what to do; you are still the one who decides.",
+  "phap_ly": "Papers, contracts, disputes: the Four Pillars only say which years this area needs a closer check from you. Winning or losing depends on your documents and your lawyer — ask a qualified professional before you sign or sue.",
+  "tien_bac": "This is not investment advice. The Four Pillars only describe the rhythm of money by period and what to do to keep it; for borrowing, putting in capital or buying and selling, work it out with real numbers.",
+  "di_xa": "Travelling far, moving home, working abroad: the Four Pillars only say in which periods you handle change more easily and what to prepare. Whether you can go depends on your paperwork, health and money — the system does not choose a country or a year for you.",
+  "an_toan": "The Four Pillars do not say whether an accident will happen — no one can say that from a date of birth. What can be said is which periods call for going more slowly, plus small things to do: leave early, do not drive when tired, check your safety gear.",
+  "hau_van": "Whether old age is easy depends far more on health, savings and the people beside you than on luck. The section above only describes the rhythm of later periods so you can plan early.",
+  "hoc_hanh": "Passing an exam depends on your study and how you revise; the Four Pillars only suggest a way of learning that suits you and which periods make focus easier — they do not predict exam results.",
+  "quan_he": "Helpful people and difficult people are not built into anyone's date of birth; the Four Pillars only say which kinds of people you tend to get on with and which you tend to clash with — so you can choose how to keep your boundaries, not to label other people.",
+  "hon_nhan": "The Four Pillars do not count how many marriages you will have or say who will leave whom, and the system does not call any family member someone who 'harms' you. What can be read is where two people tend to rub against each other and which periods make love easier to open up or easier to misread — so you can choose how to talk, not to put a label on anyone.",
+  "xac_nhan": "The system does not comment on what other people have told you — the part above only reads your own Four Pillars. If the two say different things, trust whichever matches your real experience."
+ },
+ "cach_cuc_tbct": {
+  "_nguon": "Zi Ping Zhen Quan (by Shen Xiaozhan, Qing dynasty) — the chapters On the Useful God, On Success and Failure, and the chapter on each structure. Ideas summarised, not quoted; AI draft awaiting comparison with the original.",
+  "nguyen_tac": "Set the structure by the month commander: if one of the hidden stems of the month branch is revealed on the year, month or hour stem, take the revealed stem (main qi first, then middle qi, then residual qi). If none is revealed, take the main qi. If the month branch is the Prosperity (Lu) or the Rob Wealth of the Day Master, do not build the structure on it; look at the other revealed stems to use. Whether a structure succeeds or fails also depends on its supporting elements and on punishments and clashes; the table below is only a starting point.",
+  "cach": {
+   "chinh_quan": {
+    "y": "The Officer presses on the Day Master with goodwill (opposite yin and yang): someone who fits order and values honour.",
+    "hy": "Wealth producing the Officer, a Resource protecting the Officer; a clean Officer (one Officer, not mixed with Seven Killings).",
+    "ky": "The Hurting Officer attacking the Officer, the Officer and Seven Killings mixed together, a punishment or clash on the month commander."
+   },
+   "that_sat": {
+    "y": "Seven Killings is pressure that controls the Day Master with the same yin–yang: someone who can take pressure and dares to charge ahead, but needs to be kept in check.",
+    "hy": "The Eating God controlling Seven Killings, or a Resource transforming it; a Day Master strong enough to carry it.",
+    "ky": "Wealth feeding Seven Killings while the Day Master is weak, Seven Killings left uncontrolled, Seven Killings mixed with the Officer."
+   },
+   "chinh_tai": {
+    "y": "Wealth is what the Day Master controls and holds: practical, good at managing.",
+    "hy": "A strong Day Master to carry the Wealth; Eating God and Hurting Officer producing Wealth; the Officer protecting the Wealth from peers (Friend and Rob Wealth).",
+    "ky": "Peers (Friend and Rob Wealth) taking the Wealth; plenty of Wealth but a weak Day Master."
+   },
+   "thien_tai": {
+    "y": "Indirect Wealth is money from outside and opportunity: quick-witted, suited to trade.",
+    "hy": "A strong Day Master; Eating God and Hurting Officer producing Wealth; an Officer to protect it.",
+    "ky": "Peers (Friend and Rob Wealth) competing for it; a weak Day Master unable to carry the Wealth."
+   },
+   "chinh_an": {
+    "y": "The Resource produces the Day Master with goodwill: eager to learn, well protected, values solid foundations.",
+    "hy": "The Officer or Seven Killings producing the Resource; for a weak Day Master, using the Resource works well.",
+    "ky": "Wealth breaking the Resource; too much Resource makes the Day Master lazy, with nowhere to grow."
+   },
+   "thien_an": {
+    "y": "The Indirect Resource (Owl) produces the Day Master but off-centre: independent thinking, original, expertise that is narrow but deep.",
+    "hy": "Wealth controlling the Owl when it is too heavy; the Officer or Seven Killings producing the Resource.",
+    "ky": "The Owl seizing the Eating God (meeting the Eating God with no Wealth to rescue it)."
+   },
+   "thuc_than": {
+    "y": "The Eating God is the Day Master's energy flowing out gently: talented, knows how to enjoy life, good at creating value.",
+    "hy": "The Eating God producing Wealth; the Eating God controlling Seven Killings; a Day Master with enough energy.",
+    "ky": "The Indirect Resource (Owl) seizing the Eating God; a very weak Day Master drained by the Eating God."
+   },
+   "thuong_quan": {
+    "y": "The Hurting Officer is the Day Master's energy flowing out sharply: creative, breaks the mould, expressive.",
+    "hy": "The Hurting Officer producing Wealth, or the Hurting Officer paired with a Resource (the Resource controls it).",
+    "ky": "The Hurting Officer meeting the Officer (attacking it) with no Resource or Wealth to resolve it."
+   },
+   "kien_loc": {
+    "y": "The month branch is the Prosperity (Lu) of the Day Master: self-reliant, standing firm on your own strength.",
+    "hy": "Wealth, the Officer, Seven Killings or the Eating God revealed to use (a Day Master that is already steady needs an outlet).",
+    "ky": "No Wealth or Officer to use, with peers (Friend and Rob Wealth) piled up."
+   },
+   "duong_nhan": {
+    "y": "The month branch is the Goat Blade of a yang stem: extremely strong drive, decisive.",
+    "hy": "The Officer or Seven Killings controlling the Blade (the Blade meeting Seven Killings is a fine structure in Zi Ping Zhen Quan).",
+    "ky": "No Officer or Seven Killings to control it; revealed Wealth taken by the Blade."
+   },
+   "nguyet_kiep": {
+    "y": "The month branch carries Rob Wealth: self-reliant, competitive, prone to grabbing.",
+    "hy": "The Officer or Seven Killings controlling Rob Wealth, or Eating God and Hurting Officer draining it and then producing Wealth.",
+    "ky": "Wealth revealed without an Officer to protect it, so it is easily taken."
+   }
+  }
+ },
+ "nap_am": {
+  "Hải Trung Kim": {
+   "hinh_tuong": "gold in the sea — precious but hidden, it needs the right moment to show",
+   "tinh_chat": "keeps its value inside, discreet, waits patiently for its time",
+   "mat_toi": "can withdraw and is slow to show itself, so it is easily underrated",
+   "cau_tu_soi": "What are you good at that you have not shown anyone yet?"
+  },
+  "Lô Trung Hỏa": {
+   "hinh_tuong": "fire in a furnace — fire with a job to do, able to forge things",
+   "tinh_chat": "enthusiastic, accepts being tested, likes making concrete things",
+   "mat_toi": "burns hot inside, can wear itself out by holding on to work too long",
+   "cau_tu_soi": "What have you been working on long enough for it to take shape?"
+  },
+  "Đại Lâm Mộc": {
+   "hinh_tuong": "a great forest — sheltering, living as a community",
+   "tinh_chat": "generous, likes the big picture, a good support for others",
+   "mat_toi": "takes on too much, finds it hard to cut back what is not needed",
+   "cau_tu_soi": "Which tasks should you trim so the main one can grow?"
+  },
+  "Lộ Bàng Thổ": {
+   "hinh_tuong": "roadside earth — carries the people who pass by, needs water before it can grow plants",
+   "tinh_chat": "hardworking, practical, ready to help",
+   "mat_toi": "easily taken for granted, rarely recognised",
+   "cau_tu_soi": "Do you speak up when you need to be recognised?"
+  },
+  "Kiếm Phong Kim": {
+   "hinh_tuong": "a sword's edge — tempered metal, sharp",
+   "tinh_chat": "decisive, clear, good at handling hard tasks",
+   "mat_toi": "words can be sharp and hurt others",
+   "cau_tu_soi": "The last time you were blunt, how did the listener feel?"
+  },
+  "Sơn Đầu Hỏa": {
+   "hinh_tuong": "fire on a mountaintop — seen from afar, but it spreads easily in the wind",
+   "tinh_chat": "stands out, spreads its influence, dares to lead the way",
+   "mat_toi": "flares up fast and dies down fast, hard to keep a steady pace",
+   "cau_tu_soi": "When you start something with excitement, do you keep it going to the end?"
+  },
+  "Giản Hạ Thủy": {
+   "hinh_tuong": "water in a mountain stream — clear, winding through the rocks",
+   "tinh_chat": "subtle, flexible, finds a way through difficulty",
+   "mat_toi": "trickles, tends to spread its energy in many directions",
+   "cau_tu_soi": "Which way are you channelling your energy?"
+  },
+  "Thành Đầu Thổ": {
+   "hinh_tuong": "earth of a city wall — solid, protecting those inside",
+   "tinh_chat": "trustworthy, responsible, keeps good order",
+   "mat_toi": "rigid, slow to open the door to new things",
+   "cau_tu_soi": "When did you last try a new way of doing something?"
+  },
+  "Bạch Lạp Kim": {
+   "hinh_tuong": "metal in white wax — young metal that still needs fire to refine it",
+   "tinh_chat": "elegant, with great potential once tested",
+   "mat_toi": "avoids friction, so matures slowly",
+   "cau_tu_soi": "Which challenge are you avoiding that could shape you?"
+  },
+  "Dương Liễu Mộc": {
+   "hinh_tuong": "a willow — soft, it bends with the wind without breaking",
+   "tinh_chat": "gentle, adapts well, easy to like",
+   "mat_toi": "easily goes along with others, short on views of its own",
+   "cau_tu_soi": "Is there a decision you are letting someone else make for you?"
+  },
+  "Tuyền Trung Thủy": {
+   "hinh_tuong": "water in a well — clear, deep, nourishing people for a long time",
+   "tinh_chat": "calm, deep, steady",
+   "mat_toi": "closed off, rarely shares its thoughts",
+   "cau_tu_soi": "Who can you tell what you are thinking?"
+  },
+  "Ốc Thượng Thổ": {
+   "hinh_tuong": "earth on the roof — tiles that shelter the whole house from rain and sun",
+   "tinh_chat": "looks after the family, thorough, keeps the home warm",
+   "mat_toi": "cares for others and forgets its own needs",
+   "cau_tu_soi": "What time in your week do you keep for yourself?"
+  },
+  "Tích Lịch Hỏa": {
+   "hinh_tuong": "thunderbolt fire — powerful, sudden, clearing the way",
+   "tinh_chat": "big energy, dares to break through",
+   "mat_toi": "explosive, finds it hard to control emotions when things get tense",
+   "cau_tu_soi": "When you are angry, what do you usually do first?"
+  },
+  "Tùng Bách Mộc": {
+   "hinh_tuong": "pine and cypress — standing firm through the winter",
+   "tinh_chat": "resilient, principled, handles pressure",
+   "mat_toi": "stubborn, finds it hard to admit being wrong",
+   "cau_tu_soi": "Have you recently changed your mind because of a good argument?"
+  },
+  "Trường Lưu Thủy": {
+   "hinh_tuong": "a long river — flowing without end",
+   "tinh_chat": "persistent, sees far ahead, likes long undertakings",
+   "mat_toi": "keeps going and forgets to stop and look back",
+   "cau_tu_soi": "Do you often stop to see how far you have come?"
+  },
+  "Sa Trung Kim": {
+   "hinh_tuong": "gold in sand — it must be panned before you can see it",
+   "tinh_chat": "of real worth, good at sorting the good from the rest",
+   "mat_toi": "can lack confidence before being discovered",
+   "cau_tu_soi": "Which of your strengths needs someone else to point it out?"
+  },
+  "Sơn Hạ Hỏa": {
+   "hinh_tuong": "fire at the foot of a mountain — evening firelight, warm and close",
+   "tinh_chat": "warm, approachable, keeps its heat for a long time",
+   "mat_toi": "shy of standing in high places, sets limits on itself",
+   "cau_tu_soi": "What limits are you setting for yourself?"
+  },
+  "Bình Địa Mộc": {
+   "hinh_tuong": "a tree on the plains — growing on flat ground, close to people",
+   "tinh_chat": "friendly, practical, easy to work with",
+   "mat_toi": "easily content, hesitant to reach far",
+   "cau_tu_soi": "What goal do you want to reach for this year?"
+  },
+  "Bích Thượng Thổ": {
+   "hinh_tuong": "earth in a wall — earth that has become a wall, with shape and form",
+   "tinh_chat": "principled, tidy, keeps clear boundaries",
+   "mat_toi": "finds it hard to flex when circumstances change",
+   "cau_tu_soi": "Which of your boundaries should stay, and which should loosen?"
+  },
+  "Kim Bạch Kim": {
+   "hinh_tuong": "gold leaf — thin, beautiful, used for decoration",
+   "tinh_chat": "refined, has good taste, pays attention to form",
+   "mat_toi": "values looks over foundations",
+   "cau_tu_soi": "How are you investing in your own foundations?"
+  },
+  "Phú Đăng Hỏa": {
+   "hinh_tuong": "lamplight — lighting the way at night",
+   "tinh_chat": "hardworking, lights the way for others, good at late-night work",
+   "mat_toi": "can run dry from giving so much",
+   "cau_tu_soi": "How do you recharge?"
+  },
+  "Thiên Hà Thủy": {
+   "hinh_tuong": "water of the Milky Way — rain from the sky, generous",
+   "tinh_chat": "accepting, idealistic, with a rich imagination",
+   "mat_toi": "far from practical, plans struggle to touch the ground",
+   "cau_tu_soi": "What is the smallest step you can take today?"
+  },
+  "Đại Dịch Thổ": {
+   "hinh_tuong": "earth of the great road — connecting many places",
+   "tinh_chat": "good at connecting, open, likes to get around",
+   "mat_toi": "spreads itself thin, lacks a firm footing",
+   "cau_tu_soi": "Where do you want to put down roots for the long term?"
+  },
+  "Thoa Xuyến Kim": {
+   "hinh_tuong": "gold hairpins and bracelets — precious jewellery",
+   "tinh_chat": "graceful, knows how to make themselves and others look good",
+   "mat_toi": "can come to depend on praise",
+   "cau_tu_soi": "Can you judge your own work without anyone's praise?"
+  },
+  "Tang Đố Mộc": {
+   "hinh_tuong": "a mulberry tree — its leaves feed silkworms, useful to people",
+   "tinh_chat": "useful, hardworking, works quietly",
+   "mat_toi": "others draw on its strength and it does not speak up",
+   "cau_tu_soi": "Have you ever turned down a request that was too much for you?"
+  },
+  "Đại Khê Thủy": {
+   "hinh_tuong": "water of a great creek — a strong current rushing down from the mountains",
+   "tinh_chat": "lively, determined, moves fast",
+   "mat_toi": "impatient, gets carried along and forgets to think things through",
+   "cau_tu_soi": "Did you sleep on your last decision before making it final?"
+  },
+  "Sa Trung Thổ": {
+   "hinh_tuong": "sandy earth — loose, light, changes shape easily",
+   "tinh_chat": "flexible, adapts easily to new settings",
+   "mat_toi": "hard to hold a shape, changes easily to suit others",
+   "cau_tu_soi": "Which values do you want to keep wherever you are?"
+  },
+  "Thiên Thượng Hỏa": {
+   "hinh_tuong": "fire in the sky — sunlight shining everywhere",
+   "tinh_chat": "radiant, inspiring, generous",
+   "mat_toi": "wants to shine everywhere, so finds it hard to focus",
+   "cau_tu_soi": "What is one thing you want to do deeply instead of broadly?"
+  },
+  "Thạch Lựu Mộc": {
+   "hinh_tuong": "a pomegranate tree — tough, full of seeds, bearing fruit later on",
+   "tinh_chat": "persistent, results come late but solid",
+   "mat_toi": "gets impatient before seeing results",
+   "cau_tu_soi": "How much longer does what you are sowing need before it bears fruit?"
+  },
+  "Đại Hải Thủy": {
+   "hinh_tuong": "the great ocean — wide, able to hold a great deal",
+   "tinh_chat": "accepting, wide vision, weathers storms",
+   "mat_toi": "hard to read, emotions rise and fall like waves",
+   "cau_tu_soi": "Do the people close to you know when you need someone to check in on you?"
+  }
+ },
+ "nap_am_luu_y": "Na Yin is a system that matches the 60 pairs of the sixty-year cycle to the five tones; each pair of years shares one name. It is a folk image for reflecting on yourself, not a way to judge good or bad or to choose a partner. Eight Mansions (house direction) uses your Kua number, not Na Yin."
+}

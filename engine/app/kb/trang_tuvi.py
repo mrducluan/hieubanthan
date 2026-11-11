@@ -11,6 +11,8 @@ là dữ kiện TÍNH được, không phải văn sinh thêm:
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import re
 
 from app.calc import tuvi_do_sang_vn as ds_vn
@@ -44,6 +46,7 @@ def _ds_ten(ds: list[str]) -> str:
     return ", ".join(ds[:-1]) + " và " + ds[-1] if len(ds) > 1 else (ds[0] if ds else "")
 
 
+@ngon_ngu.theo_viet
 def ds_sao_cung() -> list[tuple[tuple[str, str], str]]:
     t, kb = _t(), _kb()
     return [((sao, cung), f"{t._slug(sao)}-cung-{t._slug(cung)}")
@@ -440,6 +443,7 @@ def _slug_hoa(h: str) -> str:
     return f"hoa-{_t()._slug(h)}"
 
 
+@ngon_ngu.theo_viet
 def ds_hoa_cung() -> list[tuple[tuple[str, str], str]]:
     t, kb = _t(), _kb()
     return [((h, cung), f"{_slug_hoa(h)}-cung-{t._slug(cung)}")

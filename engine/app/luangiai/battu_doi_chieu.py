@@ -23,6 +23,8 @@ import datetime as dt
 from app import config
 from app.calc import battu_mo_rong as mr_calc
 from app.kb import battu_doi_song_kb as kb
+from app.kb import ten as _ten
+from app.kb.loi import L
 from app.luangiai import battu_doi_song as bt
 
 PHIEN_BAN = "doi_chieu_cach_1"
@@ -61,7 +63,8 @@ def _nguoc(m1: str, m2: str) -> int:
 
 
 def _cu(nhan: str, m1: str, m2: str) -> list[str]:
-    return [f"{nhan}: {_TEN_CU['cach_1']} → {kb.nhan_muc(m1)}; {_TEN_CU['cach_2']} → {kb.nhan_muc(m2)}"]
+    return [L("battu.doi_chieu.can_cu", f"{nhan}: {_TEN_CU['cach_1']} → {kb.nhan_muc(m1)}; {_TEN_CU['cach_2']} → {kb.nhan_muc(m2)}",
+              nhan=nhan, muc_1=kb.nhan_muc(m1), muc_2=kb.nhan_muc(m2))]
 
 
 def lap(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
@@ -80,10 +83,12 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
         if m1 == m2:
             continue
         tuoi = nam - nam_sinh
-        ung_nam.append({"ma": f"nam.{nam}", "loai": "nam", "nam": nam, "tuoi": tuoi, "nhan": f"Năm {nam}",
+        ung_nam.append({"ma": f"nam.{nam}", "loai": "nam", "nam": nam, "tuoi": tuoi, "nhan": L("battu.doi_chieu.nhan_nam", f"Năm {nam}", nam=nam),
                         "hoi": _chu("hoi_nam", mac=_MAC_DINH["hoi_nam"]).format(nam=nam, tuoi=tuoi),
                         "cach_1": m1, "cach_2": m2,
-                        "can_cu": _cu(f"Năm {nam} {ln['can']} {ln['chi']} ({ln['thap_than']})", m1, m2)})
+                        "can_cu": _cu(L("battu.doi_chieu.nam", f"Năm {nam} {ln['can']} {ln['chi']} ({ln['thap_than']})", nam=nam,
+                                        can=_ten.ten("can", ln["can"]), chi=_ten.ten("chi", ln["chi"]),
+                                        thap_than=_ten.ten("thap_than", ln["thap_than"])), m1, m2)})
     ung_van = []
     for g in bt.thoi_gian_bieu(pt, ngay_xem):
         if g["den_ngay"] >= ngay_xem.isoformat() or g["tu_tuoi"] < TUOI_NHO_NHAT:
@@ -94,11 +99,14 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
         tu, den = bt._thang_nam(g["tu_ngay"]), bt._thang_nam(g["den_ngay"])
         ung_van.append({"ma": f"van.{g['tu_ngay'][:4]}", "loai": "van", "tu_tuoi": g["tu_tuoi"],
                         "den_tuoi": g["den_tuoi"], "tu_ngay": g["tu_ngay"], "den_ngay": g["den_ngay"],
-                        "nhan": f"Quãng {g['tu_tuoi']}–{g['den_tuoi']} tuổi",
+                        "nhan": L("battu.doi_chieu.nhan_van", f"Quãng {g['tu_tuoi']}–{g['den_tuoi']} tuổi", tu_tuoi=g["tu_tuoi"],
+                                  den_tuoi=g["den_tuoi"]),
                         "hoi": _chu("hoi_van", mac=_MAC_DINH["hoi_van"]).format(
                             tu_tuoi=g["tu_tuoi"], den_tuoi=g["den_tuoi"], tu=tu, den=den),
                         "cach_1": m1, "cach_2": m2,
-                        "can_cu": _cu(f"Đại vận {g['cung']} ({g['thap_than']}), {tu}–{den}", m1, m2)})
+                        "can_cu": _cu(L("battu.doi_chieu.van", f"Đại vận {g['cung']} ({g['thap_than']}), {tu}–{den}",
+                                        cung=" ".join(_ten.ten("can", x) if _ten.muc("can", x) else _ten.ten("chi", x) for x in str(g["cung"]).split()),
+                                        thap_than=_ten.ten("thap_than", g["thap_than"]), tu=tu, den=den), m1, m2)})
 
     ung_nam.sort(key=lambda c: (-_nguoc(c["cach_1"], c["cach_2"]), -c["nam"]))
     ung_van.sort(key=lambda c: (-_nguoc(c["cach_1"], c["cach_2"]), -int(c["tu_ngay"][:4])))
@@ -115,7 +123,7 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
     cach = {}
     for c in ("cach_1", "cach_2"):
         o = kb.doi_chieu(c) or {}
-        hanh = ", ".join(pt[c]["hanh"]) or "hành đang thiếu"
+        hanh = ", ".join(_ten.ten("hanh", h) for h in pt[c]["hanh"]) or L("battu.doi_chieu.hanh_thieu", "hành đang thiếu")
         cach[c] = {"ten": o.get("ten") or _CACH_MAC_DINH[c]["ten"],
                    "mo_ta": (o.get("mo_ta") or _CACH_MAC_DINH[c]["mo_ta"]).format(hanh=hanh),
                    "hanh": pt[c]["hanh"]}

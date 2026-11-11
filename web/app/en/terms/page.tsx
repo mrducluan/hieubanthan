@@ -4,7 +4,7 @@ import Lien from "@/components/khung/Lien";
 import { ldDuongDanEn, metaEn } from "@/lib/en/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 
-export const metadata: Metadata = metaEn({ title: "Terms and disclaimer — Hieu Ban Than (English)", description: "Terms of use and disclaimer for the English numerology and tarot pages.", path: "/en/terms", vi: "/dieu-khoan" });
+export const metadata: Metadata = metaEn({ title: "Terms and disclaimer — Hieuban (English)", description: "Terms of use and disclaimer for the English numerology and tarot pages.", path: "/en/terms", vi: "/dieu-khoan" });
 
 export default function Page() {
   return (

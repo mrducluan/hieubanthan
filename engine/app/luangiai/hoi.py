@@ -881,9 +881,11 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
         cs = {**(cs or {}), **{vt: so_nhac[vt] for vt in vi_tri_nhac}}
 
     kb_lv = "tre_em" if dt_ == "con" and cs is not None else KB_LV.get(lv, "ban_than")
+    so_cua_ban = False
     if lv == "con_cai" and dt_ == "con" and cs is None:
         kb_lv = "con_cai"
         cs = cs_ban
+        so_cua_ban = True      # đặt tên / chọn ngày sinh cho con: luận theo con số của NGƯỜI HỎI
     if cs:
         _them_linh_vuc(muc, cs, kb_lv, vai, vi_tri_nhac or None)
         if kb_lv in CD_LV and cs.get("duong_doi") and pl["y_dinh"] != "thoi_diem":
@@ -896,8 +898,9 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
         hoi_moc = bool(hieu_cau.thoi_gian(t, ngay_xem)) and vai == "ban"
         if pl["y_dinh"] == "thoi_diem" or lv == "thoi_van" or hoi_moc or \
                 so_nhac.keys() & {"nam_ca_nhan", "thang_ca_nhan", "ngay_ca_nhan"}:
-            nguoi_tinh = nguoi if vai == "ban" else (nguoi_kia or {"ngay": pl["ngay_nhac"][0][0],
-                                                                 "thang": pl["ngay_nhac"][0][1]})
+            # `cs` là số của người hỏi (kể cả khi câu nhắc tới con mà không có ngày sinh) → mốc thời gian cũng của người hỏi
+            nguoi_tinh = nguoi if vai == "ban" or so_cua_ban else (
+                nguoi_kia or {"ngay": pl["ngay_nhac"][0][0], "thang": pl["ngay_nhac"][0][1]})
             truoc = len(muc)
             _them_thoi_diem(muc, cs, t, ngay_xem, nguoi_tinh)
             if hoi_moc and lv != "thoi_van":     # EN-3: câu nêu mốc thời gian → năm / tháng cá nhân của mốc đó đứng đầu

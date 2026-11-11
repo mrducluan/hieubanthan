@@ -82,3 +82,34 @@ def dung(ngon_ngu: str | None):
     finally:
         BIEN_THE.reset(tok_bt)
         HIEN_TAI.reset(tok)
+
+
+def theo_viet(fn):
+    """Decorator: chạy hàm ở ngữ cảnh tiếng Việt bất kể lượt gọi (khoá / slug / mã phải ổn định giữa các ngôn ngữ)."""
+    from functools import wraps
+
+    @wraps(fn)
+    def boc(*a, **kw):
+        with dung(MAC_DINH):
+            return fn(*a, **kw)
+    return boc
+
+
+def lru(maxsize: int | None = 128):
+    """`functools.lru_cache` có khoá kèm ngôn ngữ + biến thể của lượt gọi (EN-ALL): kết quả có CHỮ theo ngôn ngữ không
+    được rò từ lượt bản Anh sang lượt bản Việt trong cùng tiến trình."""
+    from functools import lru_cache, wraps
+
+    def deco(fn):
+        @lru_cache(maxsize=maxsize)
+        def trong(_nn, _bt, *a, **kw):
+            return fn(*a, **kw)
+
+        @wraps(fn)
+        def boc(*a, **kw):
+            return trong(hien_tai(), bien_the(), *a, **kw)
+        boc.cache_clear = trong.cache_clear  # type: ignore[attr-defined]
+        boc.cache_info = trong.cache_info    # type: ignore[attr-defined]
+        return boc
+    return deco
+

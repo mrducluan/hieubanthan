@@ -1,0 +1,29 @@
+{
+ "_trang_thai": "bien_tap",
+ "nam": {
+  "cung": {
+   "thuan": {"tieu_de": "{nam}: {noi} both see a favourable year",
+    "noi_dung": "Two independent readings point the same way: {nam} is a year to be bolder with what you have already prepared.",
+    "huong_xu_ly": "Pick the single biggest task of the year and start early, in the first half of the year."},
+   "can_bang": {"tieu_de": "{nam}: {noi} both see a steady year",
+    "noi_dung": "Both readings see {nam} without a big push and without a big stumble. Results come from keeping a steady pace.",
+    "huong_xu_ly": "Set small quarterly milestones and keep them; try anything new on a small scale first."},
+   "can_chu_dong": {"tieu_de": "{nam}: {noi} both suggest going slowly",
+    "noi_dung": "Both readings see {nam} as a year that asks for more care than usual. This is a reminder to plan carefully, not a bad omen.",
+    "huong_xu_ly": "Break big tasks into small steps and keep a back-up plan; check paperwork and money twice before you sign."}
+  },
+  "khac": {
+   "tieu_de": "{nam}: the two charts see different sides",
+   "noi_dung": "{mat}. The two methods do not contradict each other — each looks at a different side of the same year, so the level can differ.",
+   "huong_xu_ly": {
+    "can_chu_dong": "Use the side that needs care as your safety frame: break big tasks into steps and keep a back-up; use the favourable side for work you have prepared well.",
+    "can_bang": "Keep a steady pace as your base; save the favourable side for one task you have already prepared, rather than taking on lots of new things.",
+    "thuan": "Neither method sees a major stumble — choose the most important task and start it early."}
+  },
+  "mat": {
+   "tuvi": "looks at the areas of your life: work, money, home, relationships",
+   "battu": "looks at your own strength against the year",
+   "thanso": "looks at the nine-year rhythm of your numbers"
+  }
+ }
+}
