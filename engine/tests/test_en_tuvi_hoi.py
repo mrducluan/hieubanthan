@@ -62,3 +62,24 @@ def test_la_so_nguoi_than_ngoi_thu_ba():
     vi = _hoi("công việc năm sau thế nào", "vi", nguoi_than=True)
     assert vi["cau_tra_loi"].startswith("Đây là lá số của người thân")
     assert not _hoi("công việc năm sau thế nào", "vi")["cau_tra_loi"].startswith("Đây là lá số của người thân")
+
+
+def test_y_bo_sung_cau_tien_chi_nhan_y_noi_ve_tien():
+    """Mục 4 (chủ dự án duyệt 2026-11-11, đổi cả bản Việt): câu hỏi tiền bạc không nhận ý bổ sung nói về thăng tiến / nghề."""
+    from app.hoidap import tuvi_y_bo_sung as ybs
+    from app.kb import tuvi_y_bo_sung as kyb
+    assert not ybs._noi_tien(kyb.lay("yb.cap.tham_ma_dieu_chuyen"))
+    assert ybs._noi_tien(kyb.lay("yb.sao.tham_lang_tien_va_cuoc_vui"))
+    from tests import _dau_ra as dr
+    c = dr.may_khach()
+    with dr.dong_bang():
+        ds = [lg for lg in dr.luot_goi(c) if lg[0] in ("hoi.tuvi.dev_en3.d_tv026", "hoi.tuvi.huyenhoc_cau_hoi.hhq01487")]
+        assert len(ds) == 2
+        for lg in ds:
+            for nn in ("vi", "en"):
+                import json
+                d = json.loads(dr.goi(c, lg, nn)[1])
+                assert d["phan_loai"]["cung"] == ["Tài Bạch"], lg[0]
+                for m in d["bang_chung"]["muc"]:
+                    if m["loai"] == "y_bo_sung":
+                        assert ybs._noi_tien(kyb.lay(m["ma"])), (lg[0], nn, m["ma"])
