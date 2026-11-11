@@ -325,6 +325,8 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
    vòng đo – sửa với bộ độc lập mới mỗi đợt; (b) thêm bộ phân loại an toàn bằng mô hình ngôn ngữ cho câu tiếng Anh (gửi câu hỏi
    ra nhà cung cấp AI — lệch "LLM chỉ ở tầng diễn đạt", tốn lượt, cần duyệt quyền riêng tư); (c) tạm ẩn ô hỏi đáp bản Anh, chỉ
    mở lá số + báo cáo cho tới khi có (b). Em đề xuất (a) ngay + cân nhắc (b) trước khi quảng bá bản Anh.
+   **→ Anh chọn (a) (2026-11-11)**: mở như hiện tại; mỗi giai đoạn sau đo lại bằng một bộ khủng hoảng tiếng Anh viết độc lập mới
+   (bộ cũ thành dev), sửa theo NHÓM tín hiệu, không vá từng câu; (b) xét lại trước khi quảng bá bản Anh.
 2. **Bản Việt "Khi nào tôi có thai?"** đang trả lời bằng mức mảng gia đình (vd "cần lưu ý") — dễ đọc thành lời đoán với người
    đang mong con; bản Anh đã chuyển loại câu này sang nhánh "sinh con" (ranh giới bác sĩ). Đổi bản Việt cho giống = golden bản
    Việt đổi có chủ đích (vài lượt hỏi đáp) — cần anh đồng ý.
@@ -340,3 +342,4 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
 - **2026-11-10 — GĐ 1 (phiên 3)**: khung hỏi đáp chung song ngữ (xoá `HoiEn`), sửa theo review, CodeQL; PR #251 (GĐ 0–1).
 - **2026-11-10 — GĐ 2**: thước đo theo loại trang, 7 nhóm route danh mục sạch, slug Anh 668 trang (+ sửa 404 lá bài), khuôn chung song ngữ (mục 3c).
 - **2026-11-11 — merge #251 (GĐ 0–2)**; GĐ 3 Bát tự: hỏi đáp tiếng Anh (lời + hiểu câu + an toàn theo nhóm tín hiệu + tầng mềm + lưới an toàn), 98 trang kiến thức tiếng Anh, web `/en/bazi` + 3 cụm, review độc lập (sửa paywall theo header, lời chào, dòng tác giả, lỗi gõ an toàn), bộ đóng băng độc lập v2 → v4.
+- **2026-11-11 — anh chọn (a)** cho bộ dò khủng hoảng tiếng Anh; gộp main #255 (SEO-O2: tiêu đề nhóm cụm tự đứng — thêm bản Anh) vào PR #256.
