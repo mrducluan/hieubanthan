@@ -95,6 +95,8 @@ test("SEO-N: trang dịch vụ có 'Trả lời nhanh' dưới H1 (HTML máy ch�
   expect(tv).toMatch(/href="\/nam\/20\d\d#theo-tuoi"/);
   expect(tv).not.toMatch(/href="[^"]*\{nam\}/);
   expect((await request.get("/anh/la-so-tu-vi-mau.webp")).status()).toBe(200);
+  // Search Console "Image metadata": ảnh có đủ trường bản quyền.
+  for (const k of ['"license":', '"acquireLicensePage":', '"creator":', '"creditText":', '"copyrightNotice":']) expect(tv).toContain(k);
 });
 
 test("trang kiến thức: ảnh đại diện theo mảng, about có sameAs Wikipedia, Article đủ E-E-A-T", async ({ request }) => {

@@ -2,7 +2,7 @@
 // /tu-vi/la-so-mau/tu-phu-dong-cung (nhân vật giả định "Minh An", không phải người thật). Chụp lại khi đổi giao diện lá số.
 import Lien from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { goiLd, urlDayDu } from "@/lib/seo";
+import { banQuyenAnh, goiLd, urlDayDu } from "@/lib/seo";
 
 const ANH = "/anh/la-so-tu-vi-mau.webp";
 const ALT = "Lá số Tử vi mẫu 12 cung: Tử Vi – Thiên Phủ đồng cung ở Mệnh, Can chi Mậu Ngọ, Thuỷ Nhị Cục";
@@ -11,7 +11,7 @@ export function AnhLaSoMau() {
   return (
     <section aria-labelledby="anh-la-so-mau" className="mx-auto mt-12 max-w-3xl">
       <JsonLd data={goiLd({ "@type": "ImageObject", contentUrl: urlDayDu(ANH), url: urlDayDu(ANH), width: 1024, height: 1127,
-        name: "Lá số Tử vi mẫu", caption: ALT, encodingFormat: "image/webp", creditText: "Hiểu Bản Thân", copyrightNotice: "Hiểu Bản Thân",
+        name: "Lá số Tử vi mẫu", caption: ALT, encodingFormat: "image/webp", ...banQuyenAnh(),
         representativeOfPage: false })} />
       <h2 id="anh-la-so-mau" className="text-2xl text-fg">Lá số Tử vi trông thế nào?</h2>
       <figure className="mt-4">

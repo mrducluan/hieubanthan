@@ -200,9 +200,22 @@ export function mangTheoDuong(duong: string): MangAnh | null {
   return (["tu-vi", "bat-tu", "kinh-dich", "phong-thuy", "nhan-tuong", "tarot"] as const).find((m) => m === d) ?? null;
 }
 
+/** Siêu dữ liệu bản quyền ảnh cho Google Hình ảnh (Search Console "Image metadata": creator, creditText,
+ *  copyrightNotice, license, acquireLicensePage). license = mục "Nội dung và sở hữu trí tuệ" của Điều khoản;
+ *  acquireLicensePage = trang Liên hệ (xin phép dùng lại ảnh). Ảnh do chính site vẽ / chụp — ảnh người dùng không vào đây. */
+export function banQuyenAnh() {
+  return {
+    creator: { "@type": "Organization", "@id": `${siteUrl()}/#to-chuc`, name: TEN_SITE, url: siteUrl() },
+    creditText: TEN_SITE,
+    copyrightNotice: `© ${TEN_SITE}`,
+    license: urlDayDu("/dieu-khoan#noi-dung"),
+    acquireLicensePage: urlDayDu("/lien-he"),
+  };
+}
+
 /** ImageObject đủ kích thước + chú thích (Google Discover/ảnh tìm kiếm cần ảnh ≥ 1200 px rộng). */
 export function ldAnh(duong: string, chuThich: string) {
-  return { "@type": "ImageObject", url: urlDayDu(duong), contentUrl: urlDayDu(duong), width: 1200, height: 630, caption: chuThich };
+  return { "@type": "ImageObject", url: urlDayDu(duong), contentUrl: urlDayDu(duong), width: 1200, height: 630, caption: chuThich, ...banQuyenAnh() };
 }
 
 /** Metadata chuẩn cho trang tĩnh: title, description, canonical, Open Graph + Twitter có ảnh. */
