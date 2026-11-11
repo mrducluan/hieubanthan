@@ -149,9 +149,57 @@
    "Thực Thần": {"en": "Eating God", "han": "食神"}, "Thương Quan": {"en": "Hurting Officer", "han": "傷官"},
    "Thiên Tài": {"en": "Indirect Wealth", "han": "偏財"}, "Chính Tài": {"en": "Direct Wealth", "han": "正財"},
    "Thất Sát": {"en": "Seven Killings", "han": "七殺"}, "Chính Quan": {"en": "Direct Officer", "han": "正官"},
-   "Thiên Ấn": {"en": "Indirect Resource", "han": "偏印"}, "Chính Ấn": {"en": "Direct Resource", "han": "正印"}
+   "Thiên Ấn": {"en": "Indirect Resource", "han": "偏印"}, "Chính Ấn": {"en": "Direct Resource", "han": "正印"}, "Nhật chủ": {"en": "Day Master", "han": "日主"}
   },
   "tru": {"năm": {"en": "Year Pillar"}, "tháng": {"en": "Month Pillar"}, "ngày": {"en": "Day Pillar"}, "giờ": {"en": "Hour Pillar"}},
+  "than_sat": {
+   "Thiên Ất Quý Nhân": {"en": "Heavenly Noble (Tian Yi Gui Ren)"}, "Thái Cực Quý Nhân": {"en": "Grand Ultimate Noble (Tai Ji Gui Ren)"}, "Văn Xương": {"en": "Academic Star (Wen Chang)"},
+   "Lộc Thần": {"en": "Prosperity Star (Lu Shen)"}, "Dương Nhận": {"en": "Goat Blade (Yang Ren)"}, "Kim Dư": {"en": "Golden Carriage (Jin Yu)"},
+   "Hồng Diễm": {"en": "Red Glow (Hong Yan)"}, "Thiên Đức": {"en": "Heavenly Virtue (Tian De)"}, "Nguyệt Đức": {"en": "Monthly Virtue (Yue De)"},
+   "Đào Hoa": {"en": "Peach Blossom (Tao Hua)"}, "Dịch Mã": {"en": "Travelling Horse (Yi Ma)"}, "Hoa Cái": {"en": "Canopy Star (Hua Gai)"},
+   "Tướng Tinh": {"en": "General Star (Jiang Xing)"}, "Kiếp Sát": {"en": "Robbery Sha (Jie Sha)"}, "Vong Thần": {"en": "Lost Spirit (Wang Shen)"},
+   "Cô Thần": {"en": "Lonely Star (Gu Chen)"}, "Quả Tú": {"en": "Widow Star (Gua Su)"}, "Khôi Cương": {"en": "Kui Gang"},
+   "Thiên Y": {"en": "Heavenly Doctor (Tian Yi)"}, "Học Đường": {"en": "Study Hall (Xue Tang)"}, "Thiên La": {"en": "Heaven's Net (Tian Luo)"},
+   "Địa Võng": {"en": "Earth's Net (Di Wang)"}, "Thiên La Địa Võng": {"en": "Heaven's Net and Earth's Net (Tian Luo Di Wang)"}, "Kim Thần": {"en": "Metal Spirit (Jin Shen)"}
+  },
+  "cat_hung": {
+   "cát": {"en": "auspicious"}, "hung": {"en": "challenging"}, "trung": {"en": "mixed"}
+  },
+  "quan_he": {
+   "lục hợp": {"en": "six combination"}, "lục xung": {"en": "six clash"}, "lục hại": {"en": "six harm"},
+   "tương phá": {"en": "destruction"}, "tương hình": {"en": "punishment"}, "tự hình": {"en": "self-punishment"},
+   "tam hợp": {"en": "three-harmony combination"}, "bán hợp": {"en": "half combination"}, "tam hội": {"en": "directional combination"},
+   "can ngũ hợp": {"en": "Heavenly Stem combination"}, "can tương xung": {"en": "Heavenly Stem clash"}, "ngũ hợp": {"en": "stem combination"},
+   "tương xung": {"en": "stem clash"}
+  },
+  "than_vuong": {
+   "vượng": {"en": "strong"}, "nhược": {"en": "weak"}, "trung hoà": {"en": "balanced"}
+  },
+  "cach_cuc": {
+   "Chính Quan cách": {"en": "Direct Officer structure"}, "Thất Sát cách": {"en": "Seven Killings structure"}, "Chính Tài cách": {"en": "Direct Wealth structure"},
+   "Thiên Tài cách": {"en": "Indirect Wealth structure"}, "Chính Ấn cách": {"en": "Direct Resource structure"}, "Thiên Ấn cách": {"en": "Indirect Resource structure"},
+   "Thực Thần cách": {"en": "Eating God structure"}, "Thương Quan cách": {"en": "Hurting Officer structure"}, "Kiến Lộc cách": {"en": "Establishing Prosperity structure"},
+   "Dương Nhận cách": {"en": "Goat Blade structure"}, "Nguyệt Kiếp cách": {"en": "Monthly Rob Wealth structure"}
+  },
+  "nhom_thap_than": {
+   "Quan Sát": {"en": "Officer and Killings"}, "Ấn": {"en": "Resource"}, "Tỷ Kiếp": {"en": "Companions (Friend and Rob Wealth)"},
+   "Tài": {"en": "Wealth"}, "Thực Thương": {"en": "Output (Eating God and Hurting Officer)"}
+  },
+  "sach": {
+   "Tam Mệnh Thông Hội": {"en": "San Ming Tong Hui", "han": "三命通會"}
+  },
+  "nap_am": {
+   "Hải Trung Kim": {"en": "Sea Metal", "han": "海中金"}, "Lô Trung Hỏa": {"en": "Furnace Fire", "han": "炉中火"}, "Đại Lâm Mộc": {"en": "Great Forest Wood", "han": "大林木"},
+   "Lộ Bàng Thổ": {"en": "Roadside Earth", "han": "路旁土"}, "Kiếm Phong Kim": {"en": "Sword Edge Metal", "han": "剑锋金"}, "Sơn Đầu Hỏa": {"en": "Mountain Top Fire", "han": "山头火"},
+   "Giản Hạ Thủy": {"en": "Ravine Stream Water", "han": "涧下水"}, "Thành Đầu Thổ": {"en": "City Wall Earth", "han": "城头土"}, "Bạch Lạp Kim": {"en": "White Wax Metal", "han": "白蜡金"},
+   "Dương Liễu Mộc": {"en": "Willow Wood", "han": "杨柳木"}, "Tuyền Trung Thủy": {"en": "Spring Water", "han": "泉中水"}, "Ốc Thượng Thổ": {"en": "Rooftop Earth", "han": "屋上土"},
+   "Tích Lịch Hỏa": {"en": "Thunderbolt Fire", "han": "霹雳火"}, "Tùng Bách Mộc": {"en": "Pine and Cypress Wood", "han": "松柏木"}, "Trường Lưu Thủy": {"en": "Long River Water", "han": "长流水"},
+   "Sa Trung Kim": {"en": "Sand Metal", "han": "沙中金"}, "Sơn Hạ Hỏa": {"en": "Fire Below the Mountain", "han": "山下火"}, "Bình Địa Mộc": {"en": "Flatland Wood", "han": "平地木"},
+   "Bích Thượng Thổ": {"en": "Wall Earth", "han": "壁上土"}, "Kim Bạch Kim": {"en": "Gold Leaf Metal", "han": "金箔金"}, "Phú Đăng Hỏa": {"en": "Lamp Fire", "han": "覆灯火"},
+   "Thiên Hà Thủy": {"en": "Heavenly River Water", "han": "天河水"}, "Đại Dịch Thổ": {"en": "Great Post Road Earth", "han": "大驿土"}, "Thoa Xuyến Kim": {"en": "Hairpin and Bracelet Metal", "han": "钗钏金"},
+   "Tang Đố Mộc": {"en": "Mulberry Wood", "han": "桑柘木"}, "Đại Khê Thủy": {"en": "Great Stream Water", "han": "大溪水"}, "Sa Trung Thổ": {"en": "Sand Earth", "han": "沙中土"},
+   "Thiên Thượng Hỏa": {"en": "Heavenly Fire", "han": "天上火"}, "Thạch Lựu Mộc": {"en": "Pomegranate Wood", "han": "石榴木"}, "Đại Hải Thủy": {"en": "Great Ocean Water", "han": "大海水"}
+  },
   "khai_niem": {
    "nhật chủ": {"en": "Day Master", "han": "日主"}, "dụng thần": {"en": "Useful God", "han": "用神"}, "hỷ thần": {"en": "Favourable element", "han": "喜神"},
    "kỵ thần": {"en": "Unfavourable element", "han": "忌神"}, "đại vận": {"en": "10-year Luck Pillar", "han": "大運"}, "lưu niên": {"en": "Annual Pillar", "han": "流年"},
@@ -239,6 +287,27 @@
    "quẻ biến": {"en": "resulting hexagram", "han": "變卦"}, "quẻ hỗ": {"en": "nuclear hexagram", "han": "互卦"},
    "Mai Hoa": {"en": "Plum Blossom numerology", "han": "梅花易數"}, "lục hào": {"en": "Six Lines method", "han": "六爻"},
    "Thế": {"en": "Self line (Shi)", "han": "世"}, "Ứng": {"en": "Other line (Ying)", "han": "應"}
+  }
+ },
+ "dia_ly": {
+  "_ghi_chu": "EN-ALL GĐ 2 — 63 tỉnh / thành theo tên tiếng Anh quen dùng (tên không dấu; Hanoi, Ho Chi Minh City theo cách viết quốc tế).",
+  "tinh": {
+   "Hà Nội": {"en": "Hanoi"}, "Hải Phòng": {"en": "Hai Phong"}, "Hà Giang": {"en": "Ha Giang"}, "Cao Bằng": {"en": "Cao Bang"},
+   "Bắc Kạn": {"en": "Bac Kan"}, "Tuyên Quang": {"en": "Tuyen Quang"}, "Lào Cai": {"en": "Lao Cai"}, "Điện Biên": {"en": "Dien Bien"},
+   "Lai Châu": {"en": "Lai Chau"}, "Sơn La": {"en": "Son La"}, "Yên Bái": {"en": "Yen Bai"}, "Hoà Bình": {"en": "Hoa Binh"},
+   "Thái Nguyên": {"en": "Thai Nguyen"}, "Lạng Sơn": {"en": "Lang Son"}, "Quảng Ninh": {"en": "Quang Ninh"}, "Bắc Giang": {"en": "Bac Giang"},
+   "Phú Thọ": {"en": "Phu Tho"}, "Vĩnh Phúc": {"en": "Vinh Phuc"}, "Bắc Ninh": {"en": "Bac Ninh"}, "Hải Dương": {"en": "Hai Duong"},
+   "Hưng Yên": {"en": "Hung Yen"}, "Thái Bình": {"en": "Thai Binh"}, "Hà Nam": {"en": "Ha Nam"}, "Nam Định": {"en": "Nam Dinh"},
+   "Ninh Bình": {"en": "Ninh Binh"}, "Thanh Hoá": {"en": "Thanh Hoa"}, "Nghệ An": {"en": "Nghe An"}, "Hà Tĩnh": {"en": "Ha Tinh"},
+   "Quảng Bình": {"en": "Quang Binh"}, "Quảng Trị": {"en": "Quang Tri"}, "Thừa Thiên Huế": {"en": "Thua Thien Hue"}, "Đà Nẵng": {"en": "Da Nang"},
+   "Quảng Nam": {"en": "Quang Nam"}, "Quảng Ngãi": {"en": "Quang Ngai"}, "Bình Định": {"en": "Binh Dinh"}, "Phú Yên": {"en": "Phu Yen"},
+   "Khánh Hoà": {"en": "Khanh Hoa"}, "Ninh Thuận": {"en": "Ninh Thuan"}, "Bình Thuận": {"en": "Binh Thuan"}, "Kon Tum": {"en": "Kon Tum"},
+   "Gia Lai": {"en": "Gia Lai"}, "Đắk Lắk": {"en": "Dak Lak"}, "Đắk Nông": {"en": "Dak Nong"}, "Lâm Đồng": {"en": "Lam Dong"},
+   "Bình Phước": {"en": "Binh Phuoc"}, "Tây Ninh": {"en": "Tay Ninh"}, "Bình Dương": {"en": "Binh Duong"}, "Đồng Nai": {"en": "Dong Nai"},
+   "Bà Rịa – Vũng Tàu": {"en": "Ba Ria-Vung Tau"}, "TP Hồ Chí Minh": {"en": "Ho Chi Minh City"}, "Long An": {"en": "Long An"}, "Tiền Giang": {"en": "Tien Giang"},
+   "Bến Tre": {"en": "Ben Tre"}, "Trà Vinh": {"en": "Tra Vinh"}, "Vĩnh Long": {"en": "Vinh Long"}, "Đồng Tháp": {"en": "Dong Thap"},
+   "An Giang": {"en": "An Giang"}, "Kiên Giang": {"en": "Kien Giang"}, "Cần Thơ": {"en": "Can Tho"}, "Hậu Giang": {"en": "Hau Giang"},
+   "Sóc Trăng": {"en": "Soc Trang"}, "Bạc Liêu": {"en": "Bac Lieu"}, "Cà Mau": {"en": "Ca Mau"}
   }
  }
 }

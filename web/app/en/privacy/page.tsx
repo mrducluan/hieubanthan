@@ -5,7 +5,7 @@ import Lien from "@/components/khung/Lien";
 import { ldDuongDanEn, metaEn } from "@/lib/en/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 
-export const metadata: Metadata = metaEn({ title: "Privacy — Hieu Ban Than (English)", description: "What the English numerology and tarot pages do with your name, date of birth and questions.", path: "/en/privacy", vi: "/chinh-sach-rieng-tu" });
+export const metadata: Metadata = metaEn({ title: "Privacy — Hieuban (English)", description: "What the English numerology and tarot pages do with your name, date of birth and questions.", path: "/en/privacy", vi: "/chinh-sach-rieng-tu" });
 
 export default function Page() {
   return (

@@ -11,6 +11,8 @@ Web máy chủ gom ngày + tháng sinh của những người đã bật rồi g
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import datetime as dt
 import json
 from functools import lru_cache
@@ -24,7 +26,7 @@ _KB = Path(__file__).resolve().parent.parent / "kb" / "data" / "push_sang_nay.js
 _VN = dt.timedelta(hours=7)
 
 
-@lru_cache(maxsize=1)
+@ngon_ngu.lru(maxsize=1)
 def _kb() -> dict:
     return json.loads(_KB.read_text(encoding="utf-8"))
 

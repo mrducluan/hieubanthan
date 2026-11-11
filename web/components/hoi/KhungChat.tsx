@@ -13,6 +13,7 @@ import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 import { CauTraLoi } from "@/components/hoi/CauTraLoi";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
+import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 
 export interface KetQuaHoi {
   van?: string;
@@ -68,9 +69,11 @@ interface Props {
 
 // Mỗi mảng một khung chat (chủ dự án chốt): lịch sử trong phiên, gợi ý câu hỏi, không lưu phía server
 // ngoài nhật ký ẩn danh đã lọc (0004/0005).
-export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi của bạn", goiYO, cauNgoai, cauDienSan, moDun, className,
+export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO: nhanOVao, goiYO, cauNgoai, cauDienSan, moDun, className,
                             chipDienSan = false, dieuKhienDuoi, onCauDoi }: Props) {
   const cc = useChuChung();
+  const hd = useChuHoiDap();
+  const nhanO = nhanOVao ?? hd.c("nhan_o");
   const [tin, setTin] = useState<Tin[]>([]);
   const [cau, setCau] = useState("");
   const [dang, setDang] = useState(false);
@@ -187,7 +190,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
     try {
       const kq = await gui(c);
       setTin((t) => [...t, { id: ++soId.current, ai: "he", ...kq }]);
-      ghi("advisor_question_completed", { mo_dun: moDun, ket_qua: kq.loi ? "loi" : "ok" });
+      ghi("advisor_question_completed", { mo_dun: moDun, ket_qua: kq.loi ? "loi" : "ok", ...(hd.en ? { ngon_ngu: "en" } : {}) });
     } catch {
       setTin((t) => [...t, { id: ++soId.current, ai: "he", loi: cc("hoi.loi_ket_noi") }]);
     } finally {
@@ -209,7 +212,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
           {tin.map((t) =>
             t.ai === "ban" ? (
               <motion.div key={t.id} id={`cau-${moDun}-${t.id}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="scroll-mt-24 border-t border-line/70 pt-5" data-testid="cau-hoi-ban">
-                <p className="text-[0.7rem] font-semibold uppercase tracking-wider text-gold/90">Bạn hỏi</p>
+                <p className="text-[0.7rem] font-semibold uppercase tracking-wider text-gold/90">{hd.c("ban_hoi")}</p>
                 <p className="mt-1 font-serif text-xl leading-snug text-fg [text-wrap:balance]">{t.van}</p>
               </motion.div>
             ) : (
@@ -227,7 +230,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
             <div className="space-y-2">
               <p className="flex items-center gap-2 text-sm text-fg-muted">
                 <Sparkles className="size-4 animate-pulse text-gold" aria-hidden />
-                Đang soi câu hỏi…
+                {hd.c("dang_soi")}
                 <span className="flex gap-1" aria-hidden>
                   {[0, 1, 2].map((i) => <span key={i} className="size-1.5 animate-bounce rounded-full bg-gold/70" style={{ animationDelay: `${i * 120}ms` }} />)}
                 </span>
@@ -243,8 +246,8 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
       <div ref={vung} className="mt-4 border-t border-line/70 pt-4 sm:mt-0 sm:p-5">
         {/* HD-CS đợt 2 (hướng C): đã hỏi từ 2 câu → dải câu đã hỏi, bấm để quay lại đúng câu (không phải cuộn dò). */}
         {daHoi.length > 1 && (
-          <nav aria-label="Các câu đã hỏi" className="mb-3" data-testid="cau-da-hoi">
-            <p className="mb-1.5 text-xs text-fg-faint">Các câu đã hỏi</p>
+          <nav aria-label={hd.c("cau_da_hoi")} className="mb-3" data-testid="cau-da-hoi">
+            <p className="mb-1.5 text-xs text-fg-faint">{hd.c("cau_da_hoi")}</p>
             <ol className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none]">
               {daHoi.map((t, i) => (
                 <li key={t.id} className="shrink-0">
@@ -257,7 +260,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
             </ol>
           </nav>
         )}
-        <div className="-mx-1 mb-3 flex gap-2 overflow-x-auto px-1 pb-1 [mask-image:linear-gradient(to_right,black_88%,transparent)] [scrollbar-width:none]" aria-label="Câu hỏi gợi ý">
+        <div className="-mx-1 mb-3 flex gap-2 overflow-x-auto px-1 pb-1 [mask-image:linear-gradient(to_right,black_88%,transparent)] [scrollbar-width:none]" aria-label={hd.c("goi_y")}>
           {goiY.flatMap((g) => g.cau.map((c) => (
             <button key={c} type="button" disabled={dang} onClick={() => chonGoiY(c)} title={g.nhom}
               className="min-h-10 shrink-0 rounded-full border border-line bg-surface-2/60 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg active:scale-[0.97] disabled:opacity-50">
@@ -271,7 +274,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO = "Câu hỏi c
             onChange={(e) => { setCau(e.target.value); onCauDoi?.(e.target.value); }}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void hoi(cau); } }}
             className="max-h-40 min-h-[4.5rem] [field-sizing:content] sm:min-h-12" />
-          <Button type="submit" size="icon" className="shrink-0" disabled={dang || cau.trim().length < 3} aria-label="Gửi câu hỏi">
+          <Button type="submit" size="icon" className="shrink-0" disabled={dang || cau.trim().length < 3} aria-label={hd.c("gui")}>
             <Send aria-hidden />
           </Button>
         </form>

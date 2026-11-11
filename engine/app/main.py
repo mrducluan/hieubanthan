@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 from app import config, giam_sat, gioi_han
 from app.cong_khai import PhanHoiCongKhai
 from app.kb import tu_dien
+from app.kb.loi import L
 from app.calc import thanso, timebase
 from app import ngon_ngu
 from app.kb import store as kb_store
@@ -779,27 +780,30 @@ def api_timebase(inp: TimebaseInput) -> dict:
     if kq.clock_offset != config.CALENDAR_MERIDIAN_TZ:
         flags.append({
             "loai": "tz_adjusted",
-            "chi_tiet": f"Đồng hồ lúc sinh chạy UTC+{kq.clock_offset:g}; giờ theo "
-                        f"kinh tuyến lịch (UTC+7) là "
-                        f"{kq.calendar_dt.strftime('%H:%M ngày %d/%m/%Y')}.",
+            "chi_tiet": L("timebase.tz_adjusted",
+                          f"Đồng hồ lúc sinh chạy UTC+{kq.clock_offset:g}; giờ theo "
+                          f"kinh tuyến lịch (UTC+7) là "
+                          f"{kq.calendar_dt.strftime('%H:%M ngày %d/%m/%Y')}.",
+                          utc=f"{kq.clock_offset:g}", gio=kq.calendar_dt.strftime("%H:%M"),
+                          ngay=kq.calendar_dt.strftime("%d/%m/%Y")),
         })
     if kq.tz_disputed:
         flags.append({
             "loai": "tz_disputed",
-            "chi_tiet": "Ngày sinh nằm trong giai đoạn các nguồn sử liệu về múi giờ "
-                        "mâu thuẫn. Kết quả cần được đối chiếu cả hai giả thiết.",
+            "chi_tiet": L("timebase.tz_disputed", "Ngày sinh nằm trong giai đoạn các nguồn sử liệu về múi giờ "
+                          "mâu thuẫn. Kết quả cần được đối chiếu cả hai giả thiết."),
         })
     if timebase.sat_bien_gio_ty(kq.calendar_dt):
         flags.append({
             "loai": "ty_edge",
-            "chi_tiet": "Giờ sinh sát ranh giới giờ Tý (23:00–00:59) — trụ ngày "
-                        "nhạy với sai số vài phút.",
+            "chi_tiet": L("timebase.ty_edge", "Giờ sinh sát ranh giới giờ Tý (23:00–00:59) — trụ ngày "
+                          "nhạy với sai số vài phút."),
         })
     if inp.do_tin_gio is not HourConfidence.EXACT:
         flags.append({
             "loai": "hour_confidence",
-            "chi_tiet": f"Độ tin giờ sinh: {inp.do_tin_gio.value}. Nên đối chiếu "
-                        "các canh giờ lân cận thay vì tin một lá số duy nhất.",
+            "chi_tiet": L("timebase.hour_confidence", f"Độ tin giờ sinh: {inp.do_tin_gio.value}. Nên đối chiếu "
+                          "các canh giờ lân cận thay vì tin một lá số duy nhất.", muc=inp.do_tin_gio.value),
         })
 
     ngay_cc: str | None = None

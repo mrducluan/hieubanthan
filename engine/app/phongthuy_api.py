@@ -54,7 +54,8 @@ def api_menh_quai(inp: SinhInput) -> dict:
     ss = {m: {k: v for k, v in pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"], m).items() if k in ("quai", "nhom", "nam_tinh")}
           for m in pt.MOC_NAM}
     # UI-PT "la bàn sống": nghĩa + "dùng cho" của 8 du niên (KB) để web đọc hướng đang quay về theo thời gian thực.
-    du_nien_y = {ten: {k: v for k, v in (kbp.du_nien(ten) or {}).items() if k in ("loai", "y_nghia", "dung_cho")} for ten in set(bang.values())}
+    # Xếp theo tên: lặp thẳng qua `set` thì thứ tự khoá đổi theo hạt băm tiến trình (PYTHONHASHSEED).
+    du_nien_y = {ten: {k: v for k, v in (kbp.du_nien(ten) or {}).items() if k in ("loai", "y_nghia", "dung_cho")} for ten in sorted(set(bang.values()))}
     return {"engine_version": ENGINE_VERSION, **mq, "bang_huong": bang,
             "huong_cat": [h for h, d in bang.items() if d in pt.CAT],
             "du_nien_y": du_nien_y,

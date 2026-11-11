@@ -1,0 +1,23 @@
+{
+ "_nguon": "EN-ALL GĐ 2 — mẫu câu tiếng Anh cho chuỗi trong mã Python của các route nền (timebase, danh mục, khuôn dùng chung). Ban biên tập viết từ nghĩa; {slot} giữ nguyên.",
+ "_trang_thai": "bien_tap",
+ "timebase.tz_adjusted": "Clocks at your birth ran on UTC+{utc}. On the calendar meridian (UTC+7) that is {gio} on {ngay}.",
+ "timebase.tz_disputed": "Your birth date falls in a period where historical sources disagree about the time zone. Check the result under both assumptions.",
+ "timebase.ty_edge": "Your birth time sits close to the Rat-hour boundary (23:00–00:59), so the day pillar can change with an error of a few minutes.",
+ "timebase.hour_confidence": "Birth time confidence: {muc}. Compare the neighbouring two-hour periods rather than trusting a single chart.",
+ "mon.tuvi": "Zi Wei",
+ "mon.battu": "BaZi",
+ "mon.thanso": "Numerology",
+ "nhat_quan.can_cu": "{mon}: {nam} is {muc}",
+ "nhat_quan.mat": "{mon} ({mat}) sees the year as {muc}",
+ "co_dan_gian.nam_tuoi": "your zodiac year",
+ "co_dan_gian.xung_tuoi": "a year that clashes with your zodiac sign",
+ "co_dan_gian.va_tuoi": "a year that rubs against your zodiac sign",
+ "co_dan_gian.tam_tai": "a Three Calamities year",
+ "co_dan_gian.xung_ngay": "home life may be unsettled",
+ "co_dan_gian.hinh_ngay": "friction with people close to you is more likely",
+ "nam.tieu_de_nam": "{nam}",
+ "hoan_canh.bac_si": "This is a reminder to look after yourself, not medical advice — see a doctor for any health concern.",
+ "hoan_canh.can_cu": "Chosen from the chapter's level and your age group — it does not change the level and makes no guesses.",
+ "chu_y.nam_dang_di": " (this year)"
+}

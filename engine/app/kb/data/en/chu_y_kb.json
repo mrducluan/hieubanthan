@@ -1,0 +1,166 @@
+{
+ "_trang_thai": "bien_tap",
+ "mang": {
+  "tien_bac": {
+   "ten": "money",
+   "viec": "limit lending and avoid signing as guarantor for others; split big expenses into smaller parts and keep an emergency fund that covers a few months",
+   "viec_nay": "review money you have lent or put into shared ventures; split any big expense left this year and keep an emergency fund",
+   "viec_ngan": "limit lending and keep an emergency fund",
+   "ranh_gioi": "These money reminders are about keeping your money safe, not investment advice: base big decisions on real figures and ask a qualified professional.",
+   "ranh_gioi_gon": "not investment advice",
+   "battu": {
+    "ly": "a {tt} year: money splits easily, and peers may pull you into spending"
+   },
+   "thanso": {
+    "so": {
+     "4": "personal year 4, a year of discipline and steady steps",
+     "8": "personal year 8, a year of money and big decisions"
+    }
+   },
+   "phongthuy": {
+    "sao": {
+     "7": "star 7 (Seven Red) reaches the main door side; old texts link it with overspending and gossip"
+    }
+   }
+  },
+  "cong_viec": {
+   "ten": "your work",
+   "viec": "keep good relations with your manager and colleagues, update your skills; do not quit before a new job is lined up",
+   "viec_nay": "clarify your duties with your manager and record what you have achieved; if you want to change jobs, find the new one before leaving",
+   "viec_ngan": "keep good relations at work; do not quit without a new job lined up",
+   "ranh_gioi": "This is a reminder to look after your job, not a prediction about keeping or losing it: base big decisions on your real circumstances.",
+   "battu": {
+    "ly": "a {tt} year: work pressure builds and you may feel pushed hard"
+   },
+   "thanso": {
+    "so": {
+     "7": "personal year 7, a year to slow down and review your direction",
+     "9": "personal year 9, a year that closes one chapter of work"
+    }
+   }
+  },
+  "tinh_cam": {
+   "ten": "your love life",
+   "viec": "tell your partner clearly what you hope for and make time for just the two of you; avoid big decisions while angry",
+   "viec_nay": "set a time for an honest talk about what you both hope for; leave big matters until the anger has passed",
+   "viec_ngan": "say what you hope for; leave big matters until anger passes",
+   "ranh_gioi": "No one can say in advance whether two people will break up; what helps is giving your relationship more care at times like these.",
+   "battu": {
+    "ly": "a {chi} year clashes with your day branch (the partner position)"
+   },
+   "thanso": {
+    "so": {
+     "2": "personal year 2, a sensitive year that calls for patience in relationships",
+     "9": "personal year 9, a year of closing, easier to let go of the old"
+    }
+   }
+  },
+  "gia_dao": {
+   "ten": "family life",
+   "viec": "make time for your family and speak up early when something is wrong; discuss shared family matters with everyone",
+   "viec_nay": "pick one evening a week to eat and talk with the whole family; say what bothers you early and gently",
+   "viec_ngan": "make time for family, and raise anything that bothers you early",
+   "ranh_gioi": "This is a reminder to look after the mood at home, not a prediction of family quarrels.",
+   "battu": {
+    "ly": "a {chi} year clashes with your month or hour pillar (roots, children)"
+   },
+   "thanso": {
+    "so": {
+     "6": "personal year 6, a year of family and responsibility"
+    }
+   }
+  },
+  "nha_cua": {
+   "ten": "your home",
+   "viec": "check paperwork carefully before buying, selling or paying a deposit; plan major repairs with spare money and time",
+   "viec_nay": "read property papers carefully before signing or paying a deposit; plan any major repairs left this year and keep a buffer",
+   "viec_ngan": "read papers carefully before a deposit, and keep a buffer for major repairs",
+   "ranh_gioi": "This is a reminder to be careful with property matters, not advice to buy or sell: ask a qualified professional about prices and legal checks.",
+   "ranh_gioi_gon": "ask a qualified professional about property prices and legal checks",
+   "battu": {
+    "ly": "a {chi} year clashes with your day branch; home may be unsettled"
+   },
+   "thanso": {
+    "so": {
+     "4": "personal year 4, a year of laying foundations and doing each task solidly"
+    }
+   },
+   "phongthuy": {
+    "sao": {
+     "5": "star 5 (Five Yellow) reaches the main door side; old texts advise keeping that side undisturbed"
+    }
+   }
+  },
+  "di_lai": {
+   "ten": "travel",
+   "viec": "check your vehicle before long trips and wear a helmet or seatbelt; never drive when tired or after drinking alcohol",
+   "viec_nay": "service your vehicle and plan long trips for when you are rested; never drive tired or after drinking alcohol",
+   "viec_ngan": "check your vehicle, and never drive tired or after drinking",
+   "ranh_gioi": "No one can say whether a collision will happen; what helps is keeping safe travel habits every day.",
+   "ranh_gioi_gon": "keep safe travel habits every day",
+   "battu": {
+    "ly": "a {chi} year clashes with your birth-year branch: busy travel, easy to rush"
+   },
+   "thanso": {
+    "so": {
+     "5": "personal year 5, a year of change and plenty of travel"
+    }
+   }
+  },
+  "giay_to": {
+   "ten": "paperwork",
+   "viec": "read contracts carefully before signing and keep copies of important documents; in any dispute, talk to a lawyer early",
+   "viec_nay": "review the contracts and documents now in force; if anything is unclear, ask a qualified professional before signing anything more",
+   "viec_ngan": "read contracts carefully before signing, and keep copies",
+   "ranh_gioi": "No one can say in advance whether a case will be won or lost; for legal matters, see a lawyer or the relevant authority.",
+   "ranh_gioi_gon": "talk to a lawyer about legal matters",
+   "battu": {
+    "ly": "a {tt} year: arguments come easily, and you may clash with rules"
+   },
+   "thanso": {
+    "so": {
+     "8": "personal year 8, a year of contracts and rights"
+    }
+   },
+   "phongthuy": {
+    "sao": {
+     "3": "star 3 (Three Jade) reaches the main door side; old texts link it with arguments and paperwork"
+    }
+   }
+  },
+  "ban_be": {
+   "ten": "friends and outsiders",
+   "viec": "keep boundaries when invited to pool money or go into business together; put money matters with friends clearly in writing",
+   "viec_nay": "write down clearly any money pooled or lent between friends; wait a few days before answering new business offers",
+   "viec_ngan": "put money pooled or lent with friends in writing",
+   "ranh_gioi": "This is a reminder to keep boundaries, not a prediction of what anyone will do: judge each person by what they actually do.",
+   "battu": {
+    "ly": "a {tt} year: peers may pull you in or compete"
+   },
+   "thanso": {
+    "so": {
+     "3": "personal year 3, a social year, easy to overpromise",
+     "5": "personal year 5, a year of meeting many new people"
+    }
+   }
+  }
+ },
+ "mau": {
+  "nam": "In {nam}, take more care with {mang}: {viec}.",
+  "nam_nay": "This year, {nam}, take more care with {mang}: {viec}.",
+  "tieu_de": "Years to watch {mang} more closely",
+  "khong_noi_chac": "No one can say for sure whether this will happen, so the answer here is not a yes or a no.",
+  "khong_nam": "None of the next ten years stands out for {mang}; keeping steady habits is enough.",
+  "may_rui": "In any year or month, keep your money for what matters most and stay away from gambles.",
+  "tai_nan_nang": "The system cannot see this and does not discuss it. What helps is keeping safe travel habits: check your vehicle, wear a helmet, and never drive when tired or after drinking alcohol.",
+  "tuyen_dung": "When you hire or keep staff, go by skills, work results and an honest conversation; it is fair to the candidate and more reliable for you.",
+  "van_han_chung": "About your yearly luck: {ds}",
+  "van_han_khong": "None of the next ten years stands out in the areas people often worry about; steady habits are enough.",
+  "thanso_dau": "Numerology cannot predict events; what the numbers can show is which years call for more care.",
+  "nam_khong": "{nam} is not a standout year for {mang}; keep doing this: {viec}.",
+  "nam_khac": "Years to take more care with {mang} in the next ten: {nam}.",
+  "hh_dau": "What the chart can show is the timing and what to prepare for, as set out below.",
+  "ranh_gioi_nhieu": "This is a reminder to act early, not a prediction of what will happen",
+  "kinhdich_khung": "The hexagram gives no yes or no here and names no year in advance; it shows the shape of things when you asked and how to carry yourself."
+ }
+}

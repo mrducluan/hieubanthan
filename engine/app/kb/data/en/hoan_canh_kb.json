@@ -1,0 +1,525 @@
+{
+ "_trang_thai": "bien_tap",
+ "chuong": {
+  "su_nghiep": {
+   "thuan": {
+    "t18_24": {
+     "tieu_de": "New to work and in a good phase: learn as fast as you can now",
+     "noi_dung": "Take on harder tasks within reach and ask a senior for feedback on each; one year of careful work beats three years of sloppy work."
+    },
+    "t25_44": {
+     "tieu_de": "Building your career: a good phase for taking on a bigger role",
+     "noi_dung": "Propose one project you lead from start to finish, and record the results in numbers for your next negotiation."
+    },
+    "t45_59": {
+     "tieu_de": "Your experience is your edge: a good time to hold your position and mentor others",
+     "noi_dung": "Pick one or two younger people to train, and turn your way of working into a process, so the work runs while you are away."
+    },
+    "t60": {
+     "tieu_de": "Familiar work still goes smoothly: do just enough and keep your joy in the craft",
+     "noi_dung": "Take on advisory or part-time work at your own pace, and choose work you enjoy over work that pays the most."
+    }
+   },
+   "can_bang": {
+    "t18_24": {
+     "tieu_de": "Early working years at a steady pace: try many things to find what suits you",
+     "noi_dung": "Each quarter, try one new skill linked to your current job, and note which tasks make you lose track of time."
+    },
+    "t25_44": {
+     "tieu_de": "Work is steady: you move up through skill, not luck",
+     "noi_dung": "Choose one skill that helps you stand out in your team and practise it for 3 months before you think about changing jobs."
+    },
+    "t45_59": {
+     "tieu_de": "Work is stable: a good time to rearrange things and lighten the load",
+     "noi_dung": "Drop one draining task that adds little value, and give that time to the work you do best."
+    },
+    "t60": {
+     "tieu_de": "Regular work keeps your mind sharp",
+     "noi_dung": "Keep one activity on a fixed weekly schedule, such as teaching, gardening or helping with a relative's shop, so your days have a rhythm."
+    }
+   },
+   "can_chu_dong": {
+    "t18_24": {
+     "tieu_de": "New to work and hitting bumps: learn the ropes before rushing to change jobs",
+     "noi_dung": "Stay long enough to learn one full cycle of the work, and ask your manager directly what you should fix first."
+    },
+    "t25_44": {
+     "tieu_de": "Work calls for a slower pace: secure your footing before any big move",
+     "noi_dung": "Before changing jobs or starting a business, save at least 6 months of expenses and find one person who will give you honest feedback."
+    },
+    "t45_59": {
+     "tieu_de": "A high-pressure phase at work: protect what you already have first",
+     "noi_dung": "Learn the new skills your field now needs and keep good relations with younger colleagues; talk big decisions over with your family first."
+    },
+    "t60": {
+     "tieu_de": "Keep extra work light and avoid heavy responsibilities",
+     "noi_dung": "Do not borrow or act as guarantor for a new venture; take on work that suits your health, with someone alongside you."
+    }
+   }
+  },
+  "tien_bac": {
+   "thuan": {
+    "t18_24": {
+     "tieu_de": "Money comes in easily: build the habit of keeping some from now on",
+     "noi_dung": "Each payday, move a share into a separate savings account first, then spend the rest."
+    },
+    "t25_44": {
+     "tieu_de": "Money flows well: a good time to build savings and plan for big assets",
+     "noi_dung": "First build an emergency fund that covers 6 months of expenses; only put the surplus into long-term options you clearly understand."
+    },
+    "t45_59": {
+     "tieu_de": "Good money at this age is best set aside for life after work",
+     "noi_dung": "Work out what you will need after retiring and for big family costs, split it into parts, and do not keep it all in one place."
+    },
+    "t60": {
+     "tieu_de": "Enough money to live on: put safety ahead of returns",
+     "noi_dung": "Keep your money where you can withdraw it when needed, write down your asset papers clearly for your family, and say no to offers of high interest."
+    }
+   },
+   "can_bang": {
+    "t18_24": {
+     "tieu_de": "Money in and out evenly: learn to track spending before you learn to invest",
+     "noi_dung": "Record your spending for a full month to see where it goes; cut one small expense that repeats every day."
+    },
+    "t25_44": {
+     "tieu_de": "Money is fine but there is little to spare: keep discipline rather than chase opportunities",
+     "noi_dung": "Set a limit on instalment payments, and wait one more week before deciding on any big purchase."
+    },
+    "t45_59": {
+     "tieu_de": "Finances are steady: review your fixed costs every year",
+     "noi_dung": "Look again at your insurance, your loans and the money you have lent; trim whatever you no longer need."
+    },
+    "t60": {
+     "tieu_de": "Steady spending: keep the habit of spending to a plan",
+     "noi_dung": "Split your money by month and set aside a separate amount for health check-ups and surprises."
+    }
+   },
+   "can_chu_dong": {
+    "t18_24": {
+     "tieu_de": "Money runs short easily in this phase: do not borrow to keep up with friends",
+     "noi_dung": "Avoid buy-now-pay-later for things you can wait for; if in debt, clear high-interest debt first."
+    },
+    "t25_44": {
+     "tieu_de": "Money calls for a slower pace: keep your emergency fund before any plan",
+     "noi_dung": "Do not lend or invest with others without clear paperwork; discuss big moves with the person who shares your expenses."
+    },
+    "t45_59": {
+     "tieu_de": "A time to guard money rather than earn more",
+     "noi_dung": "Do not act as guarantor or put all your money in one place; wait a quarter before any new investment."
+    },
+    "t60": {
+     "tieu_de": "Money at this age needs careful protection",
+     "noi_dung": "Be wary of calls and investment offers that promise quick returns; always have a trusted relative look over any large transaction with you."
+    }
+   }
+  },
+  "suc_khoe": {
+   "thuan": {
+    "t18_24": {
+     "tieu_de": "Your energy is good: build healthy routines while it is still easy",
+     "noi_dung": "Keep a regular bedtime and one form of exercise you enjoy; these habits last a long time."
+    },
+    "t25_44": {
+     "tieu_de": "Your health is good, but busy years make it easy to neglect",
+     "noi_dung": "Get a general check-up once a year even if you feel well, and keep three exercise sessions a week."
+    },
+    "t45_59": {
+     "tieu_de": "Health is good: keep your rhythm, do not overdo it",
+     "noi_dung": "Get the regular check-ups recommended for your age, walk every day, and eat a little less salt."
+    },
+    "t60": {
+     "tieu_de": "Your health is good: light exercise every day keeps you strong for longer",
+     "noi_dung": "Walk, do gentle exercises or garden regularly; keep the check-up schedule your doctor sets."
+    }
+   },
+   "can_bang": {
+    "t18_24": {
+     "tieu_de": "Your health is normal: watch your sleep and screen time",
+     "noi_dung": "Turn off your phone half an hour before bed, drink enough water, and eat breakfast regularly."
+    },
+    "t25_44": {
+     "tieu_de": "Your health is holding up: you need a clear rest routine",
+     "noi_dung": "Keep one day a week free of work, sleep a full 7 hours, and get checked if tiredness drags on."
+    },
+    "t45_59": {
+     "tieu_de": "Your health needs steady care: small habits matter more than supplements",
+     "noi_dung": "Eat at regular times, get up and move after each hour of sitting, and get check-ups for your age."
+    },
+    "t60": {
+     "tieu_de": "Your health needs regular care: rest on time and exercise within your limits",
+     "noi_dung": "Keep fixed times for meals and sleep, follow your doctor's instructions if you are in treatment, and let a relative know your check-up schedule."
+    }
+   },
+   "can_chu_dong": {
+    "t18_24": {
+     "tieu_de": "Your body is asking you to stay up less and push less",
+     "noi_dung": "Sleep before midnight and do not skip meals to work; if tiredness drags on, get checked early."
+    },
+    "t25_44": {
+     "tieu_de": "Work and home are stretching you thin: take rest on purpose",
+     "noi_dung": "Hand some housework and work tasks to others; get a health check-up this quarter, do not wait."
+    },
+    "t45_59": {
+     "tieu_de": "A phase to look after your health more actively than in other years",
+     "noi_dung": "Get the regular check-ups for your age, stay up late less, cut the habits that tire you, and do light exercise every day."
+    },
+    "t60": {
+     "tieu_de": "Your health needs your family's attention too",
+     "noi_dung": "Go to check-ups with someone, keep your home bright and walkways clear, and tell your doctor right away if anything feels unusual."
+    }
+   }
+  },
+  "tinh_cam": {
+   "thuan": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Young and in a good phase: easy to meet someone suitable",
+      "noi_dung": "Widen your circle through things you truly enjoy, such as clubs or classes; the right people are often found there."
+     },
+     "co_doi": {
+      "tieu_de": "In a relationship during a good phase: grow together",
+      "noi_dung": "Set one small shared goal, like learning something new or saving for a trip, so you have something to do together."
+     },
+     "chua_noi": {
+      "tieu_de": "Love in your young years is going well",
+      "noi_dung": "Spend time with the people you care about, and say what you think honestly and gently."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Single and in a good phase for love: a good time to open up seriously",
+      "noi_dung": "Tell close friends you are ready to meet someone new; favour people who share your direction in life."
+     },
+     "co_doi": {
+      "tieu_de": "Together and going well: a good time to talk long term",
+      "noi_dung": "Set aside time alone to talk about the next few years (where to live, money, what each of you hopes for) while you are both in good spirits."
+     },
+     "chua_noi": {
+      "tieu_de": "Love is going well: a good time to nurture it",
+      "noi_dung": "Keep a regular weekly date with the person who matters to you."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "On your own at this age, still a good time to meet someone suitable",
+      "noi_dung": "Go where people share your interests; get to know someone slowly and understand each other before thinking further ahead."
+     },
+     "co_doi": {
+      "tieu_de": "Together at this age: a good phase to grow closer",
+      "noi_dung": "Make time again just for the two of you, like a short trip or a new shared hobby."
+     },
+     "chua_noi": {
+      "tieu_de": "Love at this age is going well: a good time to say thank you",
+      "noi_dung": "Tell a loved one one thing you are grateful for in them; a small thing that lasts."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "Later in life, the timing is still good for a close companion",
+      "noi_dung": "Join groups of people your age, go to services or exercise classes; someone to talk to each day is already good."
+     },
+     "co_doi": {
+      "tieu_de": "Someone by your side at this age: a good phase to enjoy life together",
+      "noi_dung": "Keep one small daily habit together, like a morning walk or afternoon tea."
+     },
+     "chua_noi": {
+      "tieu_de": "Love at this age is calm: a good time for get-togethers",
+      "noi_dung": "Call or meet an old friend or relative you have not seen for a long while."
+     }
+    }
+   },
+   "can_bang": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Love at a steady pace: no rush, know yourself first",
+      "noi_dung": "Notice which kind of people you are happy around; relationships that start as friendships often last longer."
+     },
+     "co_doi": {
+      "tieu_de": "In a relationship at a steady pace: keep asking about each other",
+      "noi_dung": "Each day, ask one real question about the other person's day, and listen fully before giving advice."
+     },
+     "chua_noi": {
+      "tieu_de": "Love is normal right now, nothing urgent",
+      "noi_dung": "Put your energy into study and work; the right person comes when you live at your own pace."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Single at a steady pace: meet people on purpose rather than wait",
+      "noi_dung": "Accept one new meeting each month; say early on what you need in a relationship."
+     },
+     "co_doi": {
+      "tieu_de": "Together at a steady pace: do not let work crowd each other out",
+      "noi_dung": "Agree on who handles what at home, and keep one phone-free evening a week."
+     },
+     "chua_noi": {
+      "tieu_de": "Love is stable and needs care, just like work",
+      "noi_dung": "Book time for the person who matters to you as you would a meeting, and keep it."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "On your own at this age: live comfortably first, meet someone later",
+      "noi_dung": "Keep your own life full; the right person comes more easily when you are content with yourself."
+     },
+     "co_doi": {
+      "tieu_de": "Together at this age: refresh the way you talk to each other",
+      "noi_dung": "Bring up old issues less and do more new things together; when angry, agree to talk again once you are both calm."
+     },
+     "chua_noi": {
+      "tieu_de": "Love at this age is steady: a good time for small gestures",
+      "noi_dung": "Remember the important days of those close to you; a timely word of care beats a big gift."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "At this age, having someone to talk to matters more than anything",
+      "noi_dung": "Stay in regular touch with old friends and neighbours, and accept invitations to gatherings with people your age."
+     },
+     "co_doi": {
+      "tieu_de": "Two people at a steady pace: give way on small things",
+      "noi_dung": "Share chores by what each can manage, go to check-ups together, and keep each other on regular meals and sleep."
+     },
+     "chua_noi": {
+      "tieu_de": "Love at this age is peaceful: keep up regular get-togethers",
+      "noi_dung": "Set a fixed day each week to meet or call relatives and friends."
+     }
+    }
+   },
+   "can_chu_dong": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Young love bruises easily right now: slow down so you do not get hurt",
+      "noi_dung": "Do not rush to believe every promise; keep your own studies, work and friends."
+     },
+     "co_doi": {
+      "tieu_de": "In a relationship and quick to argue: learn to talk when you are calm",
+      "noi_dung": "When angry, pause and agree to talk again in a few hours; do not decide big things in the heat of the moment."
+     },
+     "chua_noi": {
+      "tieu_de": "Love calls for being gentle with yourself right now",
+      "noi_dung": "Put your sleep, your studies and trusted friends first; love matters do not need deciding right now."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Single at a slower pace: choose carefully rather than quickly",
+      "noi_dung": "Watch how the other person keeps their word and treats the people around them before going further."
+     },
+     "co_doi": {
+      "tieu_de": "Together at a slower pace: raise small issues early, before they pile up",
+      "noi_dung": "Each week, spend fifteen minutes calmly talking about the home and money; if needed, ask someone outside for advice."
+     },
+     "chua_noi": {
+      "tieu_de": "Love needs active care right now",
+      "noi_dung": "Promise less and do more; a timely apology keeps a lot intact."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "On your own at this age: be careful with new acquaintances",
+      "noi_dung": "Get to know people slowly, meet in public places, and do not discuss money or property early on."
+     },
+     "co_doi": {
+      "tieu_de": "Together at this age: you need more patience with each other",
+      "noi_dung": "When you disagree, talk about the issue, not the person; find someone you both trust for advice when needed."
+     },
+     "chua_noi": {
+      "tieu_de": "Love at this age needs more care than usual",
+      "noi_dung": "Ask after your loved ones more and blame less; choose a quiet moment for hard conversations."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "On your own at a slower pace: seek out someone to talk to",
+      "noi_dung": "Join activities in your neighbourhood or community groups; tell your family when you need someone by your side."
+     },
+     "co_doi": {
+      "tieu_de": "You two clash easily over small things: give way a little",
+      "noi_dung": "Each keep a hobby of your own, and sit together in the evening to share your day."
+     },
+     "chua_noi": {
+      "tieu_de": "At this age, family should look in on you more",
+      "noi_dung": "Arrange regular calls with your family, and say clearly when you feel sad or tired."
+     }
+    }
+   }
+  },
+  "gia_dinh": {
+   "thuan": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Home life is calm: a time to grow closer to family",
+      "noi_dung": "Call or visit your relatives regularly, and share your plans with a trusted family member before you decide."
+     },
+     "co_doi": {
+      "tieu_de": "Both families get along: get to know each other gradually",
+      "noi_dung": "Visit your partner's family at a relaxed time, bring a small gift, and listen more than you talk."
+     },
+     "chua_noi": {
+      "tieu_de": "The family mood is good",
+      "noi_dung": "Lend a hand with housework, and keep one meal a week with the whole family."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Family life is going well: a good time to help your relatives",
+      "noi_dung": "Agree in advance with your family how to share household tasks, so no one carries them alone."
+     },
+     "co_doi": {
+      "tieu_de": "Your shared life is going well: a good time to set routines",
+      "noi_dung": "Agree on a few shared routines (meals together, how you spend money, who does which chores) and keep them up."
+     },
+     "chua_noi": {
+      "tieu_de": "Family life is going well: a good time for shared plans",
+      "noi_dung": "Invite the whole family on a short trip or to a get-together, and share housework evenly."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "Family life is going well: a good time to bridge the generations",
+      "noi_dung": "Host a family gathering and help younger relatives learn more about your family."
+     },
+     "co_doi": {
+      "tieu_de": "Home is going well: both your families need you",
+      "noi_dung": "Schedule visits to the elders on both sides if they are still with you; if you have children, talk with them as adults."
+     },
+     "chua_noi": {
+      "tieu_de": "Family life is good: a time to tend it",
+      "noi_dung": "Note down everyone's important occasions, and help organise a family meal each month."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "Your family feels close: enjoy the gatherings",
+      "noi_dung": "Tell the younger ones in the family stories from the old days, and teach them a family dish or a family skill."
+     },
+     "co_doi": {
+      "tieu_de": "You two and your family are in harmony",
+      "noi_dung": "Keep a fixed day for gatherings, so the whole family can come home at once."
+     },
+     "chua_noi": {
+      "tieu_de": "Family life is going well: pass on family ways",
+      "noi_dung": "Write down recipes, family stories and important papers for your relatives to keep."
+     }
+    }
+   },
+   "can_bang": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Home life at a steady pace: become independent while staying in touch",
+      "noi_dung": "Cover part of your own expenses, and call home at least once a week."
+     },
+     "co_doi": {
+      "tieu_de": "Your two families are still strangers: take it step by step",
+      "noi_dung": "Let the two families get to know each other naturally, without forcing meetings, and respect the other family's ways."
+     },
+     "chua_noi": {
+      "tieu_de": "Family at a steady pace, everyone with their own role",
+      "noi_dung": "Ask your family what help they need this week, and take on one regular chore of your own."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "Family at a steady pace: keep boundaries without growing distant",
+      "noi_dung": "Talk gently with your family about your choices; help at home as you can, without promising beyond your means."
+     },
+     "co_doi": {
+      "tieu_de": "You two at a steady pace: divide tasks clearly to avoid friction",
+      "noi_dung": "Write down who handles which chores and shared tasks, and review it each month when your schedules change."
+     },
+     "chua_noi": {
+      "tieu_de": "Family at a steady pace: give each person a little care",
+      "noi_dung": "Each week, check in with one family member on their own, beyond the group conversations."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "Steady home life: care for the elders and for yourself at once",
+      "noi_dung": "Share the care of the elders with your relatives on a schedule, and keep rest time for yourself."
+     },
+     "co_doi": {
+      "tieu_de": "You two at a steady pace: agree first, tell others later",
+      "noi_dung": "Agree between yourselves before telling relatives; if you have children, ask their views before decisions that affect them."
+     },
+     "chua_noi": {
+      "tieu_de": "Family at a steady pace: keep up the get-togethers",
+      "noi_dung": "One shared meal each week; whoever is busy calls in at that time."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "Family at a steady pace: tell your relatives clearly what you want",
+      "noi_dung": "Let your family know how you want to live and what help you need, so everyone can plan more easily."
+     },
+     "co_doi": {
+      "tieu_de": "You two at a steady pace: respect each household's privacy",
+      "noi_dung": "Help relatives when asked and give advice when asked; keep your own routines as a couple."
+     },
+     "chua_noi": {
+      "tieu_de": "Family at a steady pace: put papers and household matters in order",
+      "noi_dung": "Keep important papers in one place, and tell one trusted relative where they are."
+     }
+    }
+   },
+   "can_chu_dong": {
+    "t18_24": {
+     "doc_than": {
+      "tieu_de": "Disagreements come easily at home: reason gently instead of arguing",
+      "noi_dung": "Choose a time when the elders at home are relaxed to say what you want, and hear their reasons in full first."
+     },
+     "co_doi": {
+      "tieu_de": "Your two families still have friction: do not force it, give it time",
+      "noi_dung": "Do not make your partner pick sides; be polite and patient with their family."
+     },
+     "chua_noi": {
+      "tieu_de": "Home life needs a gentler touch right now",
+      "noi_dung": "When you disagree, pause and talk again later; ask an older relative the whole family trusts for advice."
+     }
+    },
+    "t25_44": {
+     "doc_than": {
+      "tieu_de": "A lot of pressure at home: share the load, do not carry it alone",
+      "noi_dung": "Sit down with your family to divide housework and money matters clearly, and write it down so no one misunderstands."
+     },
+     "co_doi": {
+      "tieu_de": "Shared matters are tense right now: put talking ahead of who is right",
+      "noi_dung": "Each week, set aside time for the two of you to talk calmly about the home and money; if needed, see a counsellor."
+     },
+     "chua_noi": {
+      "tieu_de": "Your family needs you to keep the peace actively",
+      "noi_dung": "Talk less when you are tired, write down household money matters clearly, and raise anything that bothers you early."
+     }
+    },
+    "t45_59": {
+     "doc_than": {
+      "tieu_de": "Family tasks are piling up: rearrange them to match your energy",
+      "noi_dung": "Write down what the elders need and what you need, ask for help where you can, and keep one day off each week."
+     },
+     "co_doi": {
+      "tieu_de": "Lots of pressure: you two need to stand on the same side",
+      "noi_dung": "Agree first on money and on the elders on both sides before talking to anyone outside."
+     },
+     "chua_noi": {
+      "tieu_de": "Your family needs your patience right now",
+      "noi_dung": "Talk about property and inheritance early, with paperwork; talk about feelings at a quiet time."
+     }
+    },
+    "t60": {
+     "doc_than": {
+      "tieu_de": "Family matters need to be said clearly so your relatives feel at ease",
+      "noi_dung": "Sort out your papers, your assets and your wishes for care if you fall ill, and tell your relatives together."
+     },
+     "co_doi": {
+      "tieu_de": "You two need more help from family: just say so",
+      "noi_dung": "Say clearly which tasks you need help with, and give each person a task so no one is overloaded."
+     },
+     "chua_noi": {
+      "tieu_de": "Your family needs you to speak first",
+      "noi_dung": "Call a relative you have not talked to in a long time; close old matters with a gentle word."
+     }
+    }
+   }
+  }
+ }
+}

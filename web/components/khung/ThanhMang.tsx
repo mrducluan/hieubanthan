@@ -9,18 +9,29 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "@/components/khung/Lien";
 import { useChuChung } from "@/components/cms/ChuChung";
+import { useDuongVi, useNgonNgu } from "@/components/khung/NgonNgu";
+import { banAnh } from "@/lib/duong-en";
+import { CHU_KHUNG } from "@/lib/khung-en";
 import { ghi } from "@/lib/do-luong";
 import { khoaChu, mucDangXem, thanhCua } from "@/lib/thanh-mang";
 import { cn } from "@/lib/utils";
 
 export function ThanhMang({ dem = {} }: { dem?: Record<string, number> }) {
-  const path = usePathname() ?? "/";
-  const t = thanhCua(path);
+  const hien = usePathname() ?? "/";
+  // EN-ALL: so khớp theo đường dẫn Việt tương đương (bản Anh: URL /en/… hoặc trang Việt được rewrite).
+  const path = useDuongVi();
+  const { ngonNgu } = useNgonNgu();
+  const en = ngonNgu === "en";
+  const k = CHU_KHUNG[ngonNgu];
+  const goc = thanhCua(path);
+  // Bản Anh: chỉ hiện thanh khi trang trụ đã có bản Anh, và chỉ các mục đã mở; link đổi sang URL Anh.
+  const t = goc && (!en || banAnh(goc.tru)) ? goc : null;
+  const lienKet = (d: string) => (en ? banAnh(d) : d);
   const c = useChuChung();
   const [an, setAn] = useState(false);
   const [query, setQuery] = useState("");
   const cuon = useRef<HTMLDivElement>(null);
-  useEffect(() => { setQuery(window.location.search); }, [path]);
+  useEffect(() => { setQuery(window.location.search); }, [hien]);
   const dang = t ? mucDangXem(t, path + query) : -1;
   const dungTrang = (duong: string) => (path + query).replace(/\/$/, "") === duong;
 
@@ -46,7 +57,7 @@ export function ThanhMang({ dem = {} }: { dem?: Record<string, number> }) {
   useEffect(() => {
     const k = cuon.current, el = k?.querySelector<HTMLElement>("[aria-current]");
     if (k && el) k.scrollLeft = Math.max(0, el.offsetLeft - (k.clientWidth - el.offsetWidth) / 2);
-  }, [path, dang]);
+  }, [hien, dang]);
 
   if (!t) return null;
   return (
@@ -57,27 +68,29 @@ export function ThanhMang({ dem = {} }: { dem?: Record<string, number> }) {
       className={cn("sticky top-16 z-30 border-b border-line/50 bg-bg/85 backdrop-blur-lg transition-[transform,opacity] duration-200 print:hidden",
         an && "pointer-events-none -translate-y-full opacity-0")}
     >
-      <nav aria-label={`Các mục ${t.ten}`} className="container">
+      <nav aria-label={k.cac_muc(en ? t.en : t.ten)} className="container">
         <div ref={cuon} className="-mx-4 flex h-11 items-stretch overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0">
-          <Link href={t.tru} className="mr-1.5 flex shrink-0 items-center gap-2 border-r border-line/60 pr-3 font-serif text-[0.95rem] text-fg">
+          <Link href={lienKet(t.tru)!} className="mr-1.5 flex shrink-0 items-center gap-2 border-r border-line/60 pr-3 font-serif text-[0.95rem] text-fg">
             <span aria-hidden className="grid size-5 place-items-center rounded-full bg-gold/15 text-[0.6rem] text-gold">✦</span>
-            {c(`thanh.${t.ma}.ten`) || t.ten}
+            {c(`thanh.${t.ma}.ten`) || (en ? t.en : t.ten)}
           </Link>
           <ul className="flex items-stretch">
             {t.muc.map((m, i) => {
-              const on = i === dang, so = m.dem ? dem[m.dem] : undefined, nhan = c(khoaChu(t, m)) || m.nhan;
+              const href = lienKet(m.duong);
+              if (!href) return null;
+              const on = i === dang, so = m.dem ? dem[m.dem] : undefined, nhan = c(khoaChu(t, m)) || (en ? m.en : m.nhan);
               // Mục mở một CHẾ ĐỘ của trang công cụ (?cach=…): tải lại trang thật — công cụ chỉ đọc query lúc mở trang.
               const Lk = m.duong.includes("?") ? "a" : Link;
               return (
                 <li key={m.ma} className="flex">
-                  <Lk href={m.duong} onClick={() => ghi("nav_bar_clicked", { tu: t.ma, den: m.ma, trang: path })} aria-current={on ? (dungTrang(m.duong) ? "page" : "location") : undefined} data-muc={m.ma}
+                  <Lk href={href} onClick={() => ghi("nav_bar_clicked", { tu: t.ma, den: m.ma, trang: path })} aria-current={on ? (dungTrang(m.duong) ? "page" : "location") : undefined} data-muc={m.ma}
                     className={cn("relative flex shrink-0 items-center whitespace-nowrap px-2.5 text-[0.84rem] text-fg-muted transition-colors hover:text-fg",
                       "focus-visible:rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold",
                       i === 0 && "font-medium text-fg",
                       on && "text-gold after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:rounded-full after:bg-gold")}>
                     {i === 0 && <span aria-hidden className="mr-1.5 size-1.5 rounded-full bg-gold" />}
                     {nhan}
-                    {so ? <span className="ml-1.5 text-[0.7rem] tabular-nums text-fg-faint"><span className="sr-only">, </span>{so}<span className="sr-only"> trang</span></span> : null}
+                    {so ? <span className="ml-1.5 text-[0.7rem] tabular-nums text-fg-faint"><span className="sr-only">, </span>{so}<span className="sr-only">{k.trang}</span></span> : null}
                   </Lk>
                 </li>
               );

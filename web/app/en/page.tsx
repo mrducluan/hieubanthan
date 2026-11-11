@@ -6,7 +6,7 @@ import { metaEn } from "@/lib/en/seo";
 import { urlDayDu } from "@/lib/seo";
 
 export const metadata: Metadata = metaEn({
-  title: "Free numerology and tarot readings in plain English — Hieu Ban Than",
+  title: "Free numerology and tarot readings in plain English — Hieuban",
   description: "Your Life Path, Expression, Soul Urge and Personality numbers with a portrait you can check against yourself, plus a tarot spread that answers the question you actually asked. No predictions, no sign-up.",
   path: "/en", vi: "/",
 });
@@ -19,14 +19,14 @@ const MANG = [
 export default function Page() {
   return (
     <div className="mx-auto max-w-5xl">
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", name: "Hieu Ban Than — English", url: urlDayDu("/en"), inLanguage: "en", isPartOf: { "@type": "WebSite", name: "Hieu Ban Than", url: urlDayDu("/") } }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", name: "Hieuban — English", url: urlDayDu("/en"), inLanguage: "en", isPartOf: { "@type": "WebSite", name: "Hieuban", url: urlDayDu("/") } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", inLanguage: "en", mainEntity: [
         ["Is any of this a prediction?", "No. Numbers describe tendencies to test against your own life; cards describe the situation you asked about and suggest a next step. Neither tells you what will happen on a date."],
-        ["Why is the Vietnamese site so much bigger?", "Hieu Ban Than started in Vietnam, where Vietnamese astrology, Four Pillars, I Ching and feng shui are everyday references. The English edition opens with numerology and tarot; the rest stays in Vietnamese for now."],
+        ["Why is the Vietnamese site so much bigger?", "Hieuban started in Vietnam, where Vietnamese astrology, Four Pillars, I Ching and feng shui are everyday references. The English edition opens with numerology and tarot; the rest stays in Vietnamese for now."],
         ["Does it cost anything?", "Everything on the English pages is free and needs no account. Your name and date of birth stay in your browser."],
       ].map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }} />
       <header className="mb-10 max-w-3xl">
-        <p className="eyebrow">Hieu Ban Than · English edition</p>
+        <p className="eyebrow">Hieuban · English edition</p>
         <h1 className="mt-2 font-serif text-4xl sm:text-5xl">Know yourself through numbers and cards — without being told your future.</h1>
         <p className="mt-4 text-lg text-fg-muted">Every reading here is built from sourced books and shows its reasoning. You decide what rings true. Nothing is a prediction, and nothing replaces a doctor, a lawyer or your own judgement.</p>
       </header>
@@ -58,7 +58,7 @@ export default function Page() {
         <p className="mt-3 text-fg-muted">People who like a structured way to think about themselves or a decision — and who want to see the reasoning, not just a verdict. If you are in crisis, these pages will point you to real help instead of a reading. If your question is medical, legal or financial, the reading will say so and send you to a professional.</p>
         <dl className="mt-4 space-y-3 text-fg-muted">
           <div><dt className="font-medium text-fg">Is any of this a prediction?</dt><dd className="mt-1">No. Numbers describe tendencies to test against your own life; cards describe the situation you asked about and suggest a next step. Neither tells you what will happen on a date.</dd></div>
-          <div><dt className="font-medium text-fg">Why is the Vietnamese site so much bigger?</dt><dd className="mt-1">Hieu Ban Than started in Vietnam, where Vietnamese astrology (Tử vi), Four Pillars, I Ching and feng shui are everyday references. The English edition opens with the two systems that translate cleanly; the rest stays in Vietnamese for now.</dd></div>
+          <div><dt className="font-medium text-fg">Why is the Vietnamese site so much bigger?</dt><dd className="mt-1">Hieuban started in Vietnam, where Vietnamese astrology (Tử vi), Four Pillars, I Ching and feng shui are everyday references. The English edition opens with the two systems that translate cleanly; the rest stays in Vietnamese for now.</dd></div>
           <div><dt className="font-medium text-fg">Does it cost anything?</dt><dd className="mt-1">Everything on the English pages is free and needs no account. Your name and date of birth stay in your browser.</dd></div>
         </dl>
       </section>

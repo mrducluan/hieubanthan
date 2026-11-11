@@ -156,7 +156,7 @@ function TheKienThuc({ tieuDe, qr, W, H, en = false }: { tieuDe: string; qr: str
         <polyline points="520,282 600,320 690,276" fill="none" stroke={MAU.vang} strokeOpacity="0.5" strokeWidth="1.5" />
       </svg>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "absolute", top: 70, left: 100, width: W - 200 }}>
-        <div style={{ display: "flex", fontSize: 24, letterSpacing: 6, color: MAU.mo, textTransform: "uppercase" }}>{en ? (tieuDe ? "Hieu Ban Than · English" : "Hieu Ban Than") : tieuDe ? "Thư viện kiến thức" : "Hiểu Bản Thân"}</div>
+        <div style={{ display: "flex", fontSize: 24, letterSpacing: 6, color: MAU.mo, textTransform: "uppercase" }}>{en ? (tieuDe ? "Hieuban · English" : "Hieuban") : tieuDe ? "Thư viện kiến thức" : "Hiểu Bản Thân"}</div>
         <div style={{ display: "flex", marginTop: 24, fontSize: tieuDe.length > 60 ? 50 : 60, fontFamily: "Serif", textAlign: "center", lineHeight: 1.2, justifyContent: "center" }}>
           {tieuDe || (en ? "Know yourself through numbers and cards" : "Bạn là số mấy?")}
         </div>

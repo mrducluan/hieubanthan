@@ -10,6 +10,8 @@ from __future__ import annotations
 from collections import Counter
 from functools import lru_cache
 
+from app import ngon_ngu
+
 NGUONG = 0.30          # SEO-M (chủ dự án duyệt 2026-10-23): 20 % → 30 % — đợt quét spam 08/2026 nhắm trang lập trình
 _N = 6
 
@@ -31,6 +33,7 @@ def _cum(tu: list[str]) -> set[tuple[str, ...]]:
 
 
 @lru_cache(maxsize=1)
+@ngon_ngu.theo_viet         # EN-ALL: luật index đo trên chữ Việt — lượt bản Anh gọi trước không được đổi kết quả
 def ty_le() -> dict[tuple[str, str], float]:
     from app.kb import trang
     ra: dict[tuple[str, str], float] = {}

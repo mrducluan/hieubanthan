@@ -9,6 +9,7 @@ bản xứ duyệt) và nằm trong git như KB. Mã kiểm chứng (`ma_mau`) K
 from __future__ import annotations
 
 import json
+import logging
 from typing import Any
 
 from app import ngon_ngu
@@ -18,10 +19,26 @@ TEP = "loi_khuon.json"
 _NHO: dict[str, dict] = {}
 
 
-def _doc_bang(nn: str) -> dict:
-    p = nap.duong(TEP, nn)
+THU_MUC = "loi"   # EN-ALL: mẫu câu chia theo cụm module — `data/<ngôn ngữ>/loi/<cụm>.json`, gộp với `loi_khuon.json`
+
+
+def _doc_mot(p) -> dict:
     d: Any = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
     return {k: v for k, v in d.items() if not k.startswith("_")} if isinstance(d, dict) else {}
+
+
+def _doc_bang(nn: str) -> dict:
+    """Bảng mẫu câu của một ngôn ngữ = `loi_khuon.json` + mọi tệp `loi/*.json`. Một mã chỉ được có ở MỘT tệp."""
+    ra = _doc_mot(nap.duong(TEP, nn))
+    thu_muc = nap.duong(THU_MUC, nn)
+    if thu_muc.is_dir():
+        for p in sorted(thu_muc.glob("*.json")):
+            d = _doc_mot(p)
+            trung = sorted(set(d) & set(ra))
+            if trung:   # không làm sập mọi route bản dịch — giữ bản đầu, báo log; test `test_en_khuon` bắt trùng
+                logging.getLogger(__name__).warning("loi: mã trùng giữa %s và tệp khác: %s", p.name, trung[:5])
+            ra.update({k: v for k, v in d.items() if k not in ra})
+    return ra
 
 
 def bang(ngon_ngu_: str | None = None) -> dict:

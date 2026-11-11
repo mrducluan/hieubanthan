@@ -10,6 +10,7 @@ import re
 import unicodedata
 
 from app.luangiai import doi_song_khuon as kh
+from app.kb.loi import L, danh_sach
 
 MA_MAU_RE = re.compile(r"^[a-z0-9_.+-]{3,60}$")
 TOI_DA_HOP = 6
@@ -35,6 +36,16 @@ _DAN = re.compile(r"^(?:Trong|Với|Ở|Về|Khi|Lúc|Nếu|Quan hệ|Mỗi|Sau|
 _NOI = re.compile(r"\s(?:hay|hoặc|và|nhưng|nên|vì|khi|mà|để|rồi|nhất là|trong khi)\s")
 _TREO = {"những", "các", "một", "của", "với", "cho", "và", "hay", "là", "được", "bị", "từ", "tới", "đến", "vào",
          "như", "mà", "ở", "trong"}
+# EN-ALL GĐ 2: bản Anh cắt tiêu đề theo ngữ pháp tiếng Anh (câu KB đã phủ). Bản Việt dùng đúng ba hằng trên.
+_DAN_EN = re.compile(r"^(?:In|With|At|About|When|While|If|Each|Every|After|Before|For|At work|In love)(?!\w)")
+_NOI_EN = re.compile(r"\s(?:or|and|but|so|because|when|while|which|that|to|then|especially)\s")
+_TREO_EN = {"the", "a", "an", "of", "with", "for", "and", "or", "is", "are", "be", "to", "from", "into", "as", "that", "in",
+            "on", "at", "by", "your", "you", "can", "will", "may"}
+
+
+def _luat_tieu_de() -> tuple[re.Pattern, re.Pattern, set[str]]:
+    from app import ngon_ngu  # noqa: PLC0415
+    return (_DAN, _NOI, _TREO) if ngon_ngu.la_viet() else (_DAN_EN, _NOI_EN, _TREO_EN)
 
 
 def _tieu_de(s: str, mac_dinh: str) -> str:
@@ -43,16 +54,17 @@ def _tieu_de(s: str, mac_dinh: str) -> str:
     cau = re.split(r"(?<=[.!?…])\s", (s or "").strip(), maxsplit=1)[0].rstrip(".!?… ")
     phan = [p for p in re.split(r"\s*[,;:—–(]\s*", cau) if p]
     v = phan[0] if phan else ""
-    if len(phan) > 1 and (len(v) < 8 or (_DAN.match(v) and len(v) < 30)):
+    dan, noi, treo = _luat_tieu_de()
+    if len(phan) > 1 and (len(v) < 8 or (dan.match(v) and len(v) < 30)):
         v = f"{v}, {phan[1]}"
     if len(v) < 8:
         return mac_dinh[:60]
     if len(v) > 60:
-        cat = [m.start() for m in _NOI.finditer(v) if 18 <= m.start() <= 60]
+        cat = [m.start() for m in noi.finditer(v) if 18 <= m.start() <= 60]
         if not cat:
             return mac_dinh[:60]
         w = v[:cat[-1]].split()
-        while len(w) > 3 and w[-1].lower() in _TREO:
+        while len(w) > 3 and w[-1].lower() in treo:
             w.pop()
         v = " ".join(w)
     return v
@@ -77,7 +89,7 @@ def _ap_hoc(cand: list[dict], trong_so: dict | None, ca_nhan: dict | None) -> tu
         if dg:
             h["ty_le_dung"], h["so_phieu"], h["dang_xem_lai"] = dg
         if h.get("dang_xem_lai"):
-            xem_lai.append(f"Đang xem lại: {h['tieu_de']}")
+            xem_lai.append(L("hop.dang_xem_lai_dong", f"Đang xem lại: {h['tieu_de']}", tieu_de=h["tieu_de"]))
             continue
         if ca_nhan.get(h["ma_mau"]) == "chua_dung":
             h["_chua_dung"] = True
@@ -118,6 +130,11 @@ TUOI_VH_NHO, TUOI_VH_LON = 18, 35        # < 18: lời cho trẻ (cha mẹ đọ
 CO_DAN_GIAN = ("nam_tuoi", "xung_tuoi", "va_tuoi", "tam_tai")
 NHAN_CO = {"nam_tuoi": "năm tuổi", "xung_tuoi": "năm xung tuổi", "va_tuoi": "năm va tuổi", "tam_tai": "năm tam tai",
            "xung_ngay": "dễ xáo trộn chỗ ở", "hinh_ngay": "dễ va chạm với người gần"}
+
+
+def nhan_co(ma: str) -> str:
+    """Nhãn cờ tập quán theo ngôn ngữ lượt gọi (EN-ALL): bản Việt = `NHAN_CO`."""
+    return L(f"co_dan_gian.{ma}", NHAN_CO[ma]) if ma in NHAN_CO else ma
 
 
 def giai_doan_tuoi(tuoi: int) -> str:
@@ -164,8 +181,9 @@ def chon_hop_van_han(dong: list[dict], hoc: tuple, them: list[dict] | None = Non
             cand.append(h)
     for h in cand:
         if len(h["_nam_gop"]) > 1:
-            nam = ", ".join(str(n) for n in h["_nam_gop"][:-1]) + f" và {h['_nam_gop'][-1]}"
-            h["tieu_de"] = h["tieu_de"].replace(f"Năm {h['_nam_gop'][0]}", f"Năm {nam}", 1)[:60]
+            nam = danh_sach([str(n) for n in h["_nam_gop"]])
+            h["tieu_de"] = h["tieu_de"].replace(L("nam.tieu_de_nam", "Năm {nam}", nam=h["_nam_gop"][0]),
+                                                L("nam.tieu_de_nam", "Năm {nam}", nam=nam), 1)[:60]
             h["nam_gop"] = list(h["_nam_gop"])
     return _ap_hoc(_sap(cand + list(them or [])), *hoc)
 

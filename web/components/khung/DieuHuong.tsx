@@ -15,6 +15,18 @@ import { cn } from "@/lib/utils";
 import { dangOMuc, mucDangO, MENU_DAU_DU_PHONG, type BieuTuong, type MucMenu } from "@/lib/menu-dau-trang";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Logo } from "./Logo";
+import { useNgonNgu } from "./NgonNgu";
+import { NutDoiNgonNgu } from "./NutDoiNgonNgu";
+import { CHU_KHUNG } from "@/lib/khung-en";
+import { banVietCuaTrang, duongEnDeSo, laDuongEn } from "@/lib/duong-en";
+
+/** Đường dẫn đang mở để so khớp mục menu: bản Việt nguyên `usePathname()`; bản Anh đổi về URL Anh (mục menu bản Anh đã là
+ *  URL Anh; trang Việt được rewrite cũng về đúng URL Anh của nó). */
+function useDuongSo(): string {
+  const path = usePathname() ?? "/";
+  const { ngonNgu } = useNgonNgu();
+  return ngonNgu === "en" ? duongEnDeSo(path) : path;
+}
 
 const ICON: Record<BieuTuong, LucideIcon> = {
   lap_lanh: Sparkles, trai_tim: HeartHandshake, la_ban: Compass, sach: BookOpen, bao: Newspaper, sao: Star,
@@ -44,6 +56,7 @@ function MucCoCon({ m, on, i }: { m: MucMenu; on: boolean; i: number }) {
     return () => { document.removeEventListener("pointerdown", ngoai); document.removeEventListener("keydown", esc); };
   }, [mo]);
   const id = `menu-con-${i}`;
+  const k = CHU_KHUNG[useNgonNgu().ngonNgu];
   return (
     <div ref={goc} className="relative" onMouseEnter={() => setRe(true)} onMouseLeave={() => setRe(false)}
       onBlur={(e) => { if (!goc.current?.contains(e.relatedTarget as Node | null)) setMo(false); }}>
@@ -52,7 +65,7 @@ function MucCoCon({ m, on, i }: { m: MucMenu; on: boolean; i: number }) {
         on && "bg-surface-2 text-gold shadow-[inset_0_0_0_1px_rgb(var(--gold)/0.25)] hover:text-gold",
       )}>
         <Link href={m.href} aria-current={on ? "page" : undefined} className="py-2.5 pl-4 pr-1">{m.ten}</Link>
-        <button ref={nut} type="button" aria-expanded={mo} aria-controls={id} aria-label={`Mở menu ${m.ten}`}
+        <button ref={nut} type="button" aria-expanded={mo} aria-controls={id} aria-label={k.mo_menu_con(m.ten)}
           onClick={() => (bam ? setMo(false) : setBam(true))} className="grid min-h-10 place-items-center rounded-full pl-0.5 pr-3">
           <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
         </button>
@@ -78,23 +91,25 @@ function MucCoCon({ m, on, i }: { m: MucMenu; on: boolean; i: number }) {
 function MenuDiDong({ muc }: { muc: MucMenu[] }) {
   const [mo, setMo] = useState(false);
   const path = usePathname();
+  const so = useDuongSo();
+  const k = CHU_KHUNG[useNgonNgu().ngonNgu];
   useEffect(() => setMo(false), [path]);
   return (
     <>
-      <button type="button" onClick={() => setMo(true)} aria-label="Mở menu" aria-haspopup="dialog" aria-expanded={mo} data-testid="nut-menu"
+      <button type="button" onClick={() => setMo(true)} aria-label={k.mo_menu} aria-haspopup="dialog" aria-expanded={mo} data-testid="nut-menu"
         className="grid size-11 place-items-center rounded-full text-fg-muted hover:bg-surface-2/60 hover:text-fg md:hidden">
         <Menu className="size-5" aria-hidden />
       </button>
       <Sheet open={mo} onOpenChange={setMo}>
-        <SheetContent title="Menu">
-          <nav aria-label="Menu đầy đủ" data-testid="menu-di-dong">
+        <SheetContent title={k.menu}>
+          <nav aria-label={k.menu_day_du} data-testid="menu-di-dong">
             <ul className="space-y-4">
               {muc.map((m) => {
                 const Icon = ICON[m.bieu_tuong] ?? Compass;
                 return (
                   <li key={m.href + m.ten}>
                     <Link href={m.href} onClick={() => setMo(false)} className={cn("flex min-h-11 items-center gap-3 rounded-xl px-2 font-medium",
-                      dangOMuc(path, m) ? "text-gold" : "text-fg")}>
+                      dangOMuc(so, m) ? "text-gold" : "text-fg")}>
                       <Icon className="size-5" aria-hidden />{m.ten}
                     </Link>
                     {m.con.length ? (
@@ -121,16 +136,19 @@ function MenuDiDong({ muc }: { muc: MucMenu[] }) {
 }
 
 export function ThanhTren({ muc = MENU_DAU_DU_PHONG }: { muc?: MucMenu[] }) {
-  const path = usePathname();
-  const sang = mucDangO(path, muc);
+  const so = useDuongSo();
+  const hien = usePathname() ?? "/";
+  const { ngonNgu } = useNgonNgu();
+  const k = CHU_KHUNG[ngonNgu];
+  const sang = mucDangO(so, muc);
   return (
     <header data-thanh-dau className="vach-sang sticky top-0 z-40 border-b border-line/50 bg-bg/70 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="group flex min-h-11 items-center gap-2.5" aria-label="Hiểu Bản Thân — trang chủ">
+        <Link href={ngonNgu === "en" ? "/en" : "/"} className="group flex min-h-11 items-center gap-2.5" aria-label={k.ve_trang_chu}>
           <Logo className="h-7 w-auto transition-transform duration-500 group-hover:scale-105" />
-          <span className="font-serif text-xl tracking-tight">Hiểu Bản Thân</span>
+          <span className="font-serif text-xl tracking-tight">{k.ten_site}</span>
         </Link>
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Điều hướng chính" data-testid="menu-dau-trang">
+        <nav className="hidden items-center gap-1 md:flex" aria-label={k.dieu_huong} data-testid="menu-dau-trang">
           {muc.map((m, i) => {
             const on = i === sang;
             return m.con.length ? <MucCoCon key={i} m={m} on={on} i={i} /> : (
@@ -148,14 +166,21 @@ export function ThanhTren({ muc = MENU_DAU_DU_PHONG }: { muc?: MucMenu[] }) {
             );
           })}
         </nav>
-        <MenuDiDong muc={muc} />
+        {ngonNgu === "en" ? (
+          <div className="flex items-center gap-1">
+            <NutDoiNgonNgu href={laDuongEn(hien) ? banVietCuaTrang(hien) : hien} sang="vi"
+              className="rounded-full border border-line px-3 py-1.5 text-sm text-fg-muted hover:text-fg">{k.doi_ngon_ngu}</NutDoiNgonNgu>
+            <MenuDiDong muc={muc} />
+          </div>
+        ) : <MenuDiDong muc={muc} />}
       </div>
     </header>
   );
 }
 
 export function TabDuoi({ muc = MENU_DAU_DU_PHONG }: { muc?: MucMenu[] }) {
-  const path = usePathname();
+  const path = useDuongSo();
+  const k = CHU_KHUNG[useNgonNgu().ngonNgu];
   const tab = muc.filter((m) => m.di_dong).slice(0, 5);
   const sang = mucDangO(path, tab);
   if (!tab.length) return null;
@@ -164,7 +189,7 @@ export function TabDuoi({ muc = MENU_DAU_DU_PHONG }: { muc?: MucMenu[] }) {
       data-thanh-duoi
       className="fixed inset-x-0 bottom-0 z-40 border-t border-line/60 bg-bg/85 backdrop-blur-lg md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-      aria-label="Điều hướng chính"
+      aria-label={k.dieu_huong}
     >
       <ul className="grid" style={{ gridTemplateColumns: `repeat(${Math.max(tab.length, 1)}, minmax(0, 1fr))` }}>
         {tab.map((m, i) => {

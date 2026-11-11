@@ -10,6 +10,8 @@ Năm loại trang (danh sách + hàm dựng), đăng ký vào `trang._TRANG` đ�
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+
 import re
 
 _SO = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33")
@@ -40,6 +42,7 @@ def _tu_khoa(so: str) -> str:
 
 
 # ---- cặp số ----------------------------------------------------------------------
+@ngon_ngu.theo_viet
 def ds_cap_so() -> list[tuple[str, str]]:
     return [(k, f"so-chu-dao-{k.replace('-', '-va-')}") for k in _t()._doc("thanso_cap_so.json")["cap"]]
 
@@ -85,6 +88,7 @@ def trang_cap_so(k: str, slug: str) -> dict:
 
 
 # ---- nghề nghiệp ------------------------------------------------------------------
+@ngon_ngu.theo_viet
 def ds_nghe() -> list[tuple[str, str]]:
     return [(s, f"so-{s}-hop-nghe-gi") for s in _SO]
 
@@ -123,6 +127,7 @@ def trang_nghe(so: str, slug: str) -> dict:
 
 
 # ---- tình yêu ------------------------------------------------------------------------
+@ngon_ngu.theo_viet
 def ds_tinh_yeu() -> list[tuple[str, str]]:
     return [(s, f"so-{s}-trong-tinh-yeu") for s in _SO]
 
@@ -161,6 +166,7 @@ def trang_tinh_yeu(so: str, slug: str) -> dict:
 
 
 # ---- năm cá nhân --------------------------------------------------------------------
+@ngon_ngu.theo_viet
 def ds_nam_ca_nhan() -> list[tuple[str, str]]:
     return [(s, f"nam-ca-nhan-{s}") for s in _t()._doc("thanso_depth.json")["nam_ca_nhan"]]
 
@@ -198,6 +204,7 @@ def trang_nam_ca_nhan(so: str, slug: str) -> dict:
 
 
 # ---- nợ nghiệp -----------------------------------------------------------------------
+@ngon_ngu.theo_viet
 def ds_no_nghiep() -> list[tuple[str, str]]:
     return [(s, f"no-nghiep-{s}") for s in _t()._doc("thanso_chi_so_phu.json")["no_nghiep"]]
 
@@ -237,6 +244,7 @@ def trang_no_nghiep(so: str, slug: str) -> dict:
 
 
 # ---- số kép Chaldea 10–52 (TS-PHAI → SEO) ----------------------------------------------------------------
+@ngon_ngu.theo_viet
 def ds_so_kep() -> list[tuple[str, str]]:
     return [(s, f"so-kep-{s}") for s in _t()._doc("thanso_chaldean.json")["kep"]]
 

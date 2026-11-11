@@ -9,6 +9,8 @@ from __future__ import annotations
 import datetime as _dt
 from typing import Literal
 
+from app import ngon_ngu
+from app.kb.loi import L
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -28,18 +30,18 @@ def _sinh(inp: TuanTrietInput) -> tuple[dict, list[dict]]:
     dv = _DauVao(inp)
     flags = [f for f in dv.flags if f["loai"] != "tet_edge"]   # bát tự đổi năm tại Lập xuân, không tại Tết
     if dv.nuoc_ngoai and dv.utc_noi_sinh is None:
-        flags.append({"loai": "mui_gio_nuoc_ngoai", "chi_tiet": (
+        flags.append({"loai": "mui_gio_nuoc_ngoai", "chi_tiet": L("co.mui_gio_nuoc_ngoai", (
             "Chưa khai múi giờ nơi sinh: Bát tự đang so mốc giao tiết theo giờ Việt Nam. Người sinh sát ngày giao tiết "
-            "(đầu tháng dương lịch) có thể lệch trụ tháng, trụ năm — khai múi giờ nơi sinh trong hồ sơ để tính đúng.")})
+            "(đầu tháng dương lịch) có thể lệch trụ tháng, trụ năm — khai múi giờ nơi sinh trong hồ sơ để tính đúng."))})
     # HTT-2 H1: điều hậu theo mùa thực nơi sinh — chỉ khi người dùng chọn VÀ nơi sinh ngoài chí tuyến Nam.
     if inp.dieu_hau == "noi_sinh" and dv.vi_do is None:
         raise HTTPException(422, detail="Điều hậu theo mùa nơi sinh cần nơi sinh có toạ độ (chọn đúng thành phố trong danh sách)")
     nam_ban_cau = inp.dieu_hau == "noi_sinh" and nam_ban_cau_kha_dung(dv.vi_do)
     if nam_ban_cau:
-        flags.append({"loai": "dieu_hau_nam_ban_cau", "chi_tiet": (
+        flags.append({"loai": "dieu_hau_nam_ban_cau", "chi_tiet": L("co.dieu_hau_nam_ban_cau", (
             f"Điều hậu đọc theo mùa thực ở {dv.ten_noi} (Nam bán cầu, bạn chọn): tháng theo lịch tiết khí là mùa hè thì nơi "
             "bạn sinh đang giữa đông và ngược lại — chỉ hành cần bù về khí hậu (cách 1) đổi; tứ trụ, cách cục, cách 2 giữ "
-            "nguyên. Đây là thuyết hiện đại, không có trong cổ thư.")})
+            "nguyên. Đây là thuyết hiện đại, không có trong cổ thư."), noi=dv.ten_noi or "")})
     return {"lich": dv.tb.calendar_dt, "gioi_tinh": inp.gender, "gio_ty": inp.gio_ty, "utc_lich": dv.utc_lich,
             "nam_ban_cau": nam_ban_cau, "_vi_do": dv.vi_do}, flags
 
@@ -57,10 +59,14 @@ def api_la_so(inp: TuanTrietInput) -> dict:
     sinh, flags = _sinh(inp)
     ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"], sinh["gio_ty"], sinh["utc_lich"], nam_ban_cau=sinh["nam_ban_cau"])
     ls["co_canh_bao"] = flags + ls["co_canh_bao"]
-    return {"engine_version": ENGINE_VERSION, "pham_vi": "bat_tu", "gio_lich": sinh["lich"].isoformat(), **ls,
-            "tuy_chon": {"dieu_hau": inp.dieu_hau, "nam_ban_cau_kha_dung": nam_ban_cau_kha_dung(sinh["_vi_do"])},
-            "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls), "cach_cuc_tbct": cach_tbct(ls)},
-            "loi_thuong": loi_thuong(ls)}
+    ra = {"engine_version": ENGINE_VERSION, "pham_vi": "bat_tu", "gio_lich": sinh["lich"].isoformat(), **ls,
+          "tuy_chon": {"dieu_hau": inp.dieu_hau, "nam_ban_cau_kha_dung": nam_ban_cau_kha_dung(sinh["_vi_do"])},
+          "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls), "cach_cuc_tbct": cach_tbct(ls)},
+          "loi_thuong": loi_thuong(ls)}
+    if not ngon_ngu.la_viet():
+        from app.luangiai import battu_hien  # noqa: PLC0415 — EN-ALL GĐ 3: câu CALC theo ngôn ngữ (bản Việt không qua đây)
+        ra = battu_hien.la_so(ra)
+    return ra
 
 
 def loi_thuong(ls: dict) -> dict | None:
@@ -97,7 +103,11 @@ class LuuNienBTInput(BaseModel):
 def api_luu_nien(inp: LuuNienBTInput) -> dict:
     sinh, _ = _sinh(inp.la_so)
     ls = battu.la_so(sinh["lich"], sinh["gioi_tinh"], sinh["gio_ty"], sinh["utc_lich"], nam_ban_cau=sinh["nam_ban_cau"])
-    return {"engine_version": ENGINE_VERSION, **battu_mo_rong.luu_nien(ls, inp.nam_xem)}
+    ra = {"engine_version": ENGINE_VERSION, **battu_mo_rong.luu_nien(ls, inp.nam_xem)}
+    if not ngon_ngu.la_viet() and ra.get("quan_he"):
+        from app.luangiai import battu_hien  # noqa: PLC0415
+        ra["quan_he"] = battu_hien.quan_he_ds(ra["quan_he"])
+    return ra
 
 
 class HoiBTInput(BaseModel):

@@ -1,4 +1,5 @@
 // SEO-L5 — lịch âm cả năm (engine `/v1/lich/nam/{nam}`, Hồ Ngọc Đức UTC+7). Web chỉ hiển thị.
+import { duongTheoLuot } from "@/lib/engine-ngon-ngu";
 import { unstable_noStore as noStore } from "next/cache";
 
 export interface ThangAm { thang: number; nhuan: boolean; mung_mot: string; so_ngay: number; cuoi: string; can_chi: string; ram: string }
@@ -29,8 +30,9 @@ const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 // SEO-O: "?b=le" đổi khoá bộ nhớ đệm fetch (đệm 7 ngày, giữ qua deploy) để trang nhận ngay trường `le` mới.
 export async function lichNamCongKhai(nam: number): Promise<LichNam | null> {
   try {
-    const r = await fetch(`${ENGINE_URL}/v1/lich/nam/${nam}?b=le`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    const nn = await duongTheoLuot(`/v1/lich/nam/${nam}?b=le`);
+    const r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: 60 * 60 * 24 * 7 }, signal: AbortSignal.timeout(15_000),
     });
     if (r.ok) return (await r.json()) as LichNam;

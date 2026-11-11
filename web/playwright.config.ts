@@ -52,9 +52,9 @@ export default defineConfig({
     baseURL: `http://localhost:${WEB_PORT}`,
     trace: "retain-on-failure",
     contextOptions: { reducedMotion: "reduce" },
-    // Trình duyệt chạy giờ Việt Nam như người dùng chính: trang "Hôm nay" gửi ngày theo đồng hồ máy (QTE-2), test tính
-    // ngày theo giờ VN → runner CI chạy UTC lệch một ngày trong khung 17:00–24:00 UTC. Web/engine máy chủ vẫn UTC như production.
-    timezoneId: process.env.E2E_TZ || "Asia/Ho_Chi_Minh",
+    // Trình duyệt theo giờ Việt Nam như người dùng (test tính "hôm nay" theo giờ VN): giữ UTC thì CI chạy 17:00–24:00 UTC lệch
+    // một ngày với máy chủ (chuỗi ngày ghé, số ngày cá nhân, "35 ngày trước"…). Test múi giờ khác tự đặt timezoneId riêng.
+    timezoneId: "Asia/Ho_Chi_Minh",
     // Hộp hỏi cookie đã trả lời "từ chối" → không che nút ở các test khác; test riêng tự xoá để thử hộp hỏi.
     // HTT-1: trình duyệt Playwright gửi Accept-Language en-US → dải "Read it in English" sẽ hiện và đẩy bố cục xuống ~30px;
     // cookie tắt dải đặt sẵn (test dải tự tạo ngữ cảnh riêng trong e2e/htt1.spec.ts).
