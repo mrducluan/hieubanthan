@@ -238,6 +238,8 @@ test.describe("/en/bazi trên trình duyệt", () => {
     const tl = page.getByTestId("cau-tra-loi").last();
     await expect(tl).toContainText(/Useful God|Water/, { timeout: 30_000 });
     expect((await tl.innerText()).split("\n").filter((l) => VIET.test(l))).toEqual([]);
+    // Lưới an toàn bản Anh: dòng đường dây hỗ trợ + số cấp cứu dưới mọi câu trả lời
+    await expect(tl.getByTestId("luoi-an-toan")).toContainText("988");
 
     // Nút đổi ngôn ngữ → trang tương đương, hồ sơ dùng chung
     await page.getByRole("link", { name: "Tiếng Việt" }).first().click();

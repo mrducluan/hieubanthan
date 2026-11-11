@@ -27,4 +27,8 @@ export const CHU_HOI_DAP = {
   "luot_cuoi_sao": { nhom: K, nhan: "Vế câu sau dùng Sao", mac_dinh: " Câu tiếp theo dùng Sao.", en: " Come back tomorrow for more." },
   "luot_cuoi_dang_nhap": { nhom: K, nhan: "Vế đăng nhập để hỏi thêm", mac_dinh: " Đăng nhập để hỏi thêm.", en: " Come back tomorrow for more." },
   "luot_con": { nhom: K, nhan: "Còn N câu miễn phí ({so})", mac_dinh: "Còn {so} câu miễn phí hôm nay.", en: "{so} free questions left today." },
+  // EN-ALL GĐ 3c — lưới an toàn bản Anh: bộ dò khủng hoảng dựa trên luật không bắt hết mọi cách viết tiếng Anh tự do
+  // (bộ câu độc lập thứ tư: 26/30) → dòng cố định dưới MỌI câu trả lời bản Anh. Bản Việt không hiện (mac_dinh rỗng).
+  "luoi_an_toan": { nhom: K, nhan: "Bản Anh: dòng hỗ trợ cố định dưới câu trả lời", mac_dinh: "",
+    en: "Going through something hard? You don't have to face it alone — call or text 988 (US), 116 123 (UK & Ireland), 1767 (Singapore), or find a line at findahelpline.com. In an emergency, call your local emergency number now." },
 } as const satisfies BangChu;
