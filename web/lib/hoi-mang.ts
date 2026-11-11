@@ -77,5 +77,14 @@ function tenKhoiHinh(ds: KhoiTrucQuan[] | undefined, th: TenHien | undefined): K
   const laMa = (x: string) => Object.values(th).some((b) => Object.hasOwn(b, x));
   const doi = (m: unknown): unknown => (m && typeof m === "object" && "nhan" in m && typeof (m as { nhan: unknown }).nhan === "string" && laMa((m as { nhan: string }).nhan)
     ? { ...(m as object), nhan: ten("", (m as { nhan: string }).nhan) } : m);
-  return ds.map((k) => ("muc" in k && Array.isArray(k.muc) ? { ...k, muc: k.muc.map(doi) } : k) as KhoiTrucQuan);
+  // EN-ALL GĐ 4: bàn 12 cung Tử vi — tên sao trong ô (`sao`) cũng là mã; `chi` (vị trí ô) và `bay.hoa` (màu) giữ mã, tên hoá
+  // hiện qua `ten_hien` gắn kèm khối (`ten_hien` riêng — TrucQuan không nằm trong ngữ cảnh tên của lá số).
+  const doiSao = (m: unknown): unknown => {
+    const x = doi(m);
+    return x && typeof x === "object" && Array.isArray((x as { sao?: unknown }).sao)
+      ? { ...(x as object), sao: (x as { sao: unknown[] }).sao.map((s) => (typeof s === "string" ? ten("sao", s) : s)) } : x;
+  };
+  return ds.map((k) => ("muc" in k && Array.isArray(k.muc)
+    ? { ...k, muc: k.muc.map(k.kieu === "cung" ? doiSao : doi), ...(k.kieu === "cung" ? { ten_hien: th } : {}) }
+    : k.kieu === "minh_hoa" ? { ...k, ten_hien: th } : k) as KhoiTrucQuan);
 }

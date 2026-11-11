@@ -201,6 +201,19 @@ test.describe("/en/zi-wei-dou-shu trên trình duyệt", () => {
     await expect(page.getByText(/\bSao\b/)).toHaveCount(0);
     expect((await chuViet(page)).filter((l) => !l.includes(TEN))).toEqual([]);
 
+    // Hỏi đáp tiếng Anh + khối hình (bàn 12 cung, thang độ sáng): tên cung / sao qua ten_hien, chữ khung bằng tiếng Anh
+    await page.getByRole("textbox", { name: "Your Zi Wei Dou Shu question" }).fill("What does my Life Palace say about my character?");
+    await page.getByRole("button", { name: "Send question" }).click();
+    const tl = page.getByTestId("cau-tra-loi").last();
+    await expect(tl).toContainText(/\w/, { timeout: 30_000 });
+    const tq = tl.getByTestId("truc-quan");
+    await expect(tq).toBeVisible({ timeout: 30_000 });
+    await expect(tq).toContainText("Life Palace");
+    expect((await tl.innerText()).split("\n").filter((l) => VIET.test(l))).toEqual([]);
+    const ariaTq = await tq.locator("[aria-label]").evaluateAll((els) => els.map((e) => e.getAttribute("aria-label") ?? ""));
+    expect(ariaTq.filter((x) => VIET.test(x))).toEqual([]);
+    await expect(tl.getByTestId("luoi-an-toan")).toContainText("988");
+
     for (const w of [390, 1280]) {
       await page.setViewportSize({ width: w, height: 900 });
       expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth), `${w}px`).toBeLessThanOrEqual(0);

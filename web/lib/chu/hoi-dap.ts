@@ -31,4 +31,12 @@ export const CHU_HOI_DAP = {
   // (bộ câu độc lập thứ tư: 26/30) → dòng cố định dưới MỌI câu trả lời bản Anh. Bản Việt không hiện (mac_dinh rỗng).
   "luoi_an_toan": { nhom: K, nhan: "Bản Anh: dòng hỗ trợ cố định dưới câu trả lời", mac_dinh: "",
     en: "Going through something hard? You don't have to face it alone — call or text 988 (US), 116 123 (UK & Ireland), 1767 (Singapore), or find a line at findahelpline.com. In an emergency, call your local emergency number now." },
+  // EN-ALL GĐ 4 — chữ cố định của khối hình (components/hoi/TrucQuan.tsx) dùng ở hỏi đáp Tử vi.
+  "tq.tu": { nhom: K, nhan: "Khối nhịp — dòng nguồn ({phu})", mac_dinh: "từ {phu}", en: "from {phu}" },
+  "tq.tu_hoa": { nhom: K, nhan: "Bàn 12 cung — tự hoá ({ds})", mac_dinh: "↻ tự hoá {ds}", en: "↻ self-transforms {ds}" },
+  "tq.tam_hop": { nhom: K, nhan: "Bàn 12 cung — chú thích tam hợp", mac_dinh: "tam hợp", en: "triad" },
+  "tq.doi_dien": { nhom: K, nhan: "Bàn 12 cung — chú thích đối diện", mac_dinh: "đối diện", en: "opposite" },
+  "tq.xem_tren": { nhom: K, nhan: "Bàn 12 cung — nút xem trên lá số", mac_dinh: "Xem trên lá số", en: "See it on the chart" },
+  "tq.aria_cung": { nhom: K, nhan: "Bàn 12 cung — tên ô ({cung}, {sao})", mac_dinh: "Cung {cung}{sao}", en: "{cung}{sao}" },
+  "tq.doc_ky": { nhom: K, nhan: "Khối hình minh hoạ — link đọc kỹ ({nhan})", mac_dinh: "Đọc kỹ: {nhan} →", en: "Read more: {nhan} →" },
 } as const satisfies BangChu;

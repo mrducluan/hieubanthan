@@ -10,6 +10,9 @@ import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
 import { duongTrangKb } from "@/lib/duong-silo";
 import { MinhHoa, type MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
+import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
+import { tenTheo, type TenHien } from "@/lib/ten-hien";
+import { banAnh } from "@/lib/duong-en";
 
 export type Sac = "chinh" | "hop" | "trung" | "nhat";
 type Muc = { nhan: string; gia_tri?: string | number; chu_thich?: string; giai_thich?: string; sac?: Sac; vi_tri?: number;
@@ -21,8 +24,9 @@ export type KhoiTrucQuan =
   | { kieu: "chu_ky"; tieu_de: string; so_nac: number; hien_tai: number; nhan_hien_tai?: string; giai_thich?: string }
   | { kieu: "hai_cot"; tieu_de: string; trai: { tieu_de: string; ds: string[] }; phai: { tieu_de: string; ds: string[] } }
   | { kieu: "cung"; tieu_de: string; chi_hoi: string; muc: (Muc & { chi: string; vai: string; sao?: string[] })[]; ghi_chu?: string;
-      /** đợt 4: đường bay tứ hoá — từ chi → tới chi (trùng = tự hoá) */ bay?: { tu: string; den: string; hoa: string[] }[] }
-  | { kieu: "minh_hoa"; tieu_de: string; hinh: MinhHoaDuLieu; trang?: { loai: string; slug: string; nhan: string } }
+      /** đợt 4: đường bay tứ hoá — từ chi → tới chi (trùng = tự hoá) */ bay?: { tu: string; den: string; hoa: string[] }[];
+      /** EN-ALL: tên hiển thị mã (lib/hoi-mang.ts gắn ở bản Anh) — tên hoá ở chú thích đường bay. */ ten_hien?: TenHien }
+  | { kieu: "minh_hoa"; tieu_de: string; hinh: MinhHoaDuLieu; trang?: { loai: string; slug: string; nhan: string }; ten_hien?: TenHien }
   | { kieu: "hao"; tieu_de: string; muc: (Muc & { vi_tri: number; duong: boolean; dong: boolean; chu: boolean })[]; ghi_chu?: string };
 
 /** Các kiểu web biết vẽ — kiểu khác (engine mới hơn web) bị bỏ qua, không chiếm chỗ cột hình. */
@@ -146,10 +150,11 @@ const nutCls = "w-full rounded-xl border text-left transition-colors focus-visib
 
 function ONhip({ m, chon, bam }: { m: Muc; chon: boolean; bam: () => void }) {
   const s = m.sac ?? "trung";
+  const { c } = useChuHoiDap();
   return (
     <button type="button" aria-pressed={chon} onClick={bam} className={cn(nutCls, "min-h-[5.5rem] px-2.5 py-2.5", chon ? VIEN[s] : "border-line/60", "bg-bg/40")}>
       <span className="block text-sm font-semibold text-fg">{m.nhan}</span>
-      {m.phu && <span className="block text-[0.7rem] text-fg-faint">từ {m.phu}</span>}
+      {m.phu && <span className="block text-[0.7rem] text-fg-faint">{c("tq.tu", { phu: m.phu })}</span>}
       <span className={cn("mt-1.5 flex items-center gap-1.5 text-[0.8rem] font-medium", CHU[s])}>
         <span className={cn("size-2 shrink-0 rounded-full", NEN[s])} aria-hidden />{m.gia_tri}
       </span>
@@ -346,9 +351,11 @@ function BanCung({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cung" }> }) {
   const { xemCung } = useContext(HanhDongTrucQuan);
   const giam = useGiamChuyenDong();
   const [chon, setChon] = useChon();
+  const { c, en } = useChuHoiDap();
+  const tenHoa = (h: string) => (en ? tenTheo(k.ten_hien, true)("hoa", h).replace(/\s*\(.*\)$/, "") : h);
   const hoi = k.muc.find((m) => m.vai === "hoi");
   const m = chon === null ? null : k.muc[chon];
-  const tuHoa = new Map((k.bay ?? []).filter((b) => b.tu === b.den).map((b) => [b.tu, b.hoa.join(", ")]));
+  const tuHoa = new Map((k.bay ?? []).filter((b) => b.tu === b.den).map((b) => [b.tu, b.hoa.map(tenHoa).join(", ")]));
   return (
     <>
       <div className="relative mx-auto grid aspect-square w-full max-w-[22rem] grid-cols-4 grid-rows-4 gap-1">
@@ -359,7 +366,7 @@ function BanCung({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cung" }> }) {
           return (
             // Ô cung bấm được (đợt 3): hiện "cung này nói về gì" bên dưới bàn.
             <button key={x.chi} type="button" style={{ gridRow: vt[0], gridColumn: vt[1] }} data-vai={x.vai || undefined}
-              aria-pressed={chon === i} aria-label={`Cung ${x.nhan}${x.sao?.length ? `: ${x.sao.join(", ")}` : ""}`}
+              aria-pressed={chon === i} aria-label={c("tq.aria_cung", { cung: x.nhan, sao: x.sao?.length ? `: ${x.sao.join(", ")}` : "" })}
               onClick={() => setChon(chon === i ? null : i)}
               className={cn("relative flex min-w-0 flex-col justify-between overflow-hidden rounded-lg border p-1 text-left text-[0.62rem] leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 sm:p-1.5 sm:text-[0.7rem]",
                 x.vai === "hoi" ? "border-gold bg-gold/20" : x.vai === "tam_hop" || x.vai === "nguon" ? "border-jade/50 bg-jade/10"
@@ -368,7 +375,7 @@ function BanCung({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cung" }> }) {
               {x.vai === "hoi" && !giam && <motion.span aria-hidden className="absolute inset-0 rounded-lg ring-2 ring-gold/70"
                 initial={{ opacity: 0.9 }} animate={{ opacity: 0 }} transition={{ duration: 1.6, repeat: 2 }} />}
               <span className={cn("font-semibold", x.vai ? CHU[s] : "text-fg-muted")}>{x.nhan}</span>
-              {tuHoa.get(x.chi) && <span className="text-[0.58rem] font-medium text-jade">↻ tự hoá {tuHoa.get(x.chi)}</span>}
+              {tuHoa.get(x.chi) && <span className="text-[0.58rem] font-medium text-jade">{c("tq.tu_hoa", { ds: tuHoa.get(x.chi)! })}</span>}
               <span className="truncate text-fg-faint">{x.sao?.join(", ") || "\u00a0"}</span>
             </button>
           );
@@ -380,19 +387,19 @@ function BanCung({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cung" }> }) {
           {k.bay?.length ? (
             <span className="flex flex-wrap justify-center gap-x-2 gap-y-0.5 text-[0.65rem] text-fg-faint">
               {HOA_BAY.map(([h, mau]) => (
-                <span key={h} className="inline-flex items-center gap-1"><span className="h-0.5 w-3 rounded" style={{ background: mau }} aria-hidden />{h}</span>
+                <span key={h} className="inline-flex items-center gap-1"><span className="h-0.5 w-3 rounded" style={{ background: mau }} aria-hidden />{tenHoa(h)}</span>
               ))}
             </span>
           ) : (
             <span className="flex flex-wrap justify-center gap-x-2 gap-y-0.5 text-[0.65rem] text-fg-faint">
-              <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm bg-jade/60" aria-hidden />tam hợp</span>
-              <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm border border-dashed border-moon" aria-hidden />đối diện</span>
+              <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm bg-jade/60" aria-hidden />{c("tq.tam_hop")}</span>
+              <span className="inline-flex items-center gap-1"><span className="size-2 rounded-sm border border-dashed border-moon" aria-hidden />{c("tq.doi_dien")}</span>
             </span>
           )}
           {xemCung && (
             <button type="button" onClick={() => xemCung(k.chi_hoi)}
               className="mt-1 min-h-9 rounded-full border border-gold/60 px-3 text-xs font-medium text-gold hover:bg-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60">
-              Xem trên lá số
+              {c("tq.xem_tren")}
             </button>
           )}
         </div>
@@ -441,14 +448,17 @@ function MuiTenBay({ bay }: { bay: { tu: string; den: string; hoa: string[] }[] 
 
 /** Đợt 4 — câu hỏi kiến thức chung: hình minh hoạ của chính trang kiến thức + link sang trang đọc kỹ. */
 function KhoiMinhHoa({ k }: { k: Extract<KhoiTrucQuan, { kieu: "minh_hoa" }> }) {
-  const duong = k.trang ? duongTrangKb(k.trang.loai, k.trang.slug) : null;
+  const { c, en } = useChuHoiDap();
+  // EN-ALL: link sang trang kiến thức bản Anh (URL Việt trong cụm đã mở — proxy 308 sang slug Anh); cụm chưa mở → không link.
+  const duongVi = k.trang ? duongTrangKb(k.trang.loai, k.trang.slug) : null;
+  const duong = duongVi && en ? banAnh(duongVi) : duongVi;
   return (
     <>
-      <div className="mx-auto max-w-sm"><MinhHoa mh={k.hinh} gon /></div>
+      <div className="mx-auto max-w-sm"><MinhHoa mh={k.hinh} gon en={en} ten={tenTheo(k.ten_hien, en)} /></div>
       {duong && k.trang && (
         <Link href={duong} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-medium text-gold underline-offset-4 hover:underline"
           onClick={() => ghi("chart_interacted", { kind: "hoi_minh_hoa_trang", loai: k.trang!.loai })}>
-          Đọc kỹ: {k.trang.nhan} →
+          {c("tq.doc_ky", { nhan: k.trang.nhan })}
         </Link>
       )}
     </>
