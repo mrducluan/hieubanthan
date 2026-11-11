@@ -52,7 +52,9 @@ export const boChuyenHtml: HTMLConvertersFunctionAsync = ({ defaultConverters })
       const ma = maYoutube(f.url);
       if (!ma) return "";
       const t = giayBatDau(f.url);
-      return `<figure class="hbt-video"><iframe src="https://www.youtube-nocookie.com/embed/${ma}${t ? `?start=${t}` : ""}" title="${thoat(f.tieu_de || "Video")}" loading="lazy" allowfullscreen></iframe>${f.chu_thich ? `<figcaption>${thoat(f.chu_thich)}</figcaption>` : ""}</figure>`;
+      // Link Shorts (video dọc) → khung dọc 9:16 (web: lớp hbt-video-doc), tránh viền đen hai bên trong khung ngang.
+      const doc = /youtube\.com\/shorts\//.test(String(f.url ?? ""));
+      return `<figure class="hbt-video${doc ? " hbt-video-doc" : ""}"><iframe src="https://www.youtube-nocookie.com/embed/${ma}${t ? `?start=${t}` : ""}" title="${thoat(f.tieu_de || "Video")}" loading="lazy" allowfullscreen></iframe>${f.chu_thich ? `<figcaption>${thoat(f.chu_thich)}</figcaption>` : ""}</figure>`;
     },
   },
   // Link nội bộ tới bài khác trong CMS → /blog/{slug} (đường dẫn tương đối, web hiểu là trong site).

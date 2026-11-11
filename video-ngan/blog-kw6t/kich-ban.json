@@ -1,0 +1,253 @@
+{
+  "_ghi_chu": "KW-6T ý 3 — 8 video dọc ~30 giây, mỗi bài blog tuần 1–2 một video. Cảnh dùng chính ảnh minh hoạ của bài (cms/src/bai-khoi-tao/kw6t/anh), lời đọc khớp số liệu trong bài (lấy từ engine). Dựng: node dung.mjs <thư mục ra>.",
+  "video": [
+    {
+      "ma": "b1",
+      "slug": "cach-chon-nguoi-xong-dat-dau-nam",
+      "canh": [
+        {
+          "anh": "xong-dat-bia.png",
+          "tieu": "Tết 2027 mời ai xông đất?",
+          "vo": "[warmly] Tết Đinh Mùi 2027, nhà bạn mời ai xông đất? Bốn bước tự chọn, không cần hỏi thầy."
+        },
+        {
+          "anh": "xong-dat-tuoi-tranh-2027.png",
+          "tieu": "Bước 2: tuổi nên tránh",
+          "vo": "Có năm sinh gia chủ rồi, gạt ra ba nhóm: tuổi Sửu xung năm Mùi, tuổi xung với gia chủ, và tuổi Hợi, Mão, Mùi đang Tam tai."
+        },
+        {
+          "anh": "xong-dat-vi-du-gia-chu-1988.png",
+          "tieu": "Ví dụ gia chủ 1988",
+          "vo": "Ví dụ gia chủ sinh năm 1988, tuổi Mậu Thìn. Người sinh 1966, 1980, 1981 hay 1996 đều hợp để mời."
+        },
+        {
+          "anh": "xong-dat-gio-hoang-dao-mung-1.png",
+          "tieu": "Giờ đẹp sáng mùng 1",
+          "vo": "Mùng 1 Tết là thứ Bảy, ngày 6 tháng 2. Giờ Thìn, từ 7 đến 9 giờ sáng, là giờ hoàng đạo nhiều nhà chọn."
+        },
+        {
+          "cta": true,
+          "tieu": "Tuổi hợp của nhà bạn",
+          "vo": "Nhập năm sinh gia chủ ở hiểu bản chấm com, để có danh sách tuổi hợp của riêng nhà bạn."
+        }
+      ]
+    },
+    {
+      "ma": "b2",
+      "slug": "khong-co-nguoi-hop-tuoi-xong-dat-thi-lam-sao",
+      "canh": [
+        {
+          "anh": "khong-hop-tuoi-xong-dat-bia.png",
+          "tieu": "Không có ai hợp tuổi?",
+          "vo": "[warmly] Không tìm được ai hợp tuổi xông đất? Đừng lo, có năm cách nhiều nhà vẫn dùng."
+        },
+        {
+          "anh": "nam-cach-khi-khong-co-nguoi-xong-dat.png",
+          "tieu": "Năm cách quen dùng",
+          "vo": "Gia chủ tự xông đất, nhờ người trong nhà, nới tiêu chí, mời trẻ nhỏ, hoặc cứ để khách đến tự nhiên."
+        },
+        {
+          "anh": "vi-du-gia-dinh-4-nguoi-xong-dat.png",
+          "tieu": "Ví dụ nhà bốn người",
+          "vo": "Ví dụ nhà bốn người, chồng sinh năm 1988. Con lớn sinh 2016 là người hợp nhất, có thể để bé bước vào nhà trước."
+        },
+        {
+          "anh": "ba-dieu-kien-chinh-xong-dat.png",
+          "tieu": "Chỉ cần giữ ba điều",
+          "vo": "Nếu nới tiêu chí, chỉ cần giữ ba điều: không xung năm Mùi, không xung gia chủ, không đang Tam tai."
+        },
+        {
+          "cta": true,
+          "tieu": "Đọc đủ năm cách",
+          "vo": "Đọc đủ năm cách ở hiểu bản chấm com. Một buổi sáng đầu năm vui vẻ mới là điều chính."
+        }
+      ]
+    },
+    {
+      "ma": "b3",
+      "slug": "tam-tai-la-gi-cach-tinh",
+      "canh": [
+        {
+          "anh": "tam-tai-bia.png",
+          "tieu": "Tam tai là gì?",
+          "vo": "[curious] Tam tai là gì, và năm 2027 tuổi nào gặp? Bạn tự tính được trong ba bước."
+        },
+        {
+          "anh": "tam-tai-bon-nhom-tam-hop.png",
+          "tieu": "Bốn nhóm tam hợp",
+          "vo": "Mười hai con giáp chia bốn nhóm tam hợp. Mỗi nhóm có ba năm liền nhau, dân gian khuyên thận trọng với việc lớn."
+        },
+        {
+          "anh": "cach-tinh-tam-tai-3-buoc.png",
+          "tieu": "Ví dụ người sinh 1991",
+          "vo": "Ví dụ người sinh năm 1991, tuổi Tân Mùi, thuộc nhóm Hợi Mão Mùi. Ba năm Tam tai là Tỵ, Ngọ, Mùi, nên 2027 là năm cuối."
+        },
+        {
+          "anh": "tuoi-gap-tam-tai-2027.png",
+          "tieu": "Năm 2027 tuổi nào gặp?",
+          "vo": "Năm 2027, tuổi Mão, tuổi Mùi và tuổi Hợi ở năm Tam tai cuối. Sang năm 2028 thì tới lượt tuổi Dần, Ngọ, Tuất."
+        },
+        {
+          "cta": true,
+          "tieu": "Bảng đủ năm sinh",
+          "vo": "Bảng đủ năm sinh có ở hiểu bản chấm com. Hãy hiểu đây là lời nhắc thận trọng, không phải điều đáng sợ."
+        }
+      ]
+    },
+    {
+      "ma": "b4",
+      "slug": "kim-lau-la-gi-cach-tinh-tuoi-kim-lau",
+      "canh": [
+        {
+          "anh": "kim-lau-bia.png",
+          "tieu": "Kim lâu là gì?",
+          "vo": "[curious] Kim lâu là gì? Chỉ cần một phép chia cho 9 là ra."
+        },
+        {
+          "anh": "kim-lau-bon-loai.png",
+          "tieu": "Tuổi mụ chia 9",
+          "vo": "Lấy tuổi mụ chia cho 9. Dư 1 là Kim lâu Thân, dư 3 là Kim lâu Thê, dư 6 là Kim lâu Tử, dư 8 là Kim lâu Lục súc."
+        },
+        {
+          "anh": "cach-tinh-kim-lau-vi-du-1998.png",
+          "tieu": "Ví dụ cô dâu 1998",
+          "vo": "Ví dụ cô dâu sinh năm 1998, cưới năm 2027. Tuổi mụ là 30, chia 9 dư 3, nên phạm Kim lâu Thê."
+        },
+        {
+          "anh": "tuoi-pham-kim-lau-2027.png",
+          "tieu": "Năm 2027 ai phạm?",
+          "vo": "Năm 2027, người sinh 1980, 1989, 1998 gặp Kim lâu Thê. Người sinh 1986, 1995, 2004 gặp Kim lâu Tử."
+        },
+        {
+          "cta": true,
+          "tieu": "Tra năm sinh của bạn",
+          "vo": "Tra năm sinh của bạn ở hiểu bản chấm com. Có cả bảng tuổi làm nhà 2027 để lưu về máy."
+        }
+      ]
+    },
+    {
+      "ma": "b5",
+      "slug": "hoang-oc-la-gi-cach-dem-tuoi-lam-nha",
+      "canh": [
+        {
+          "anh": "hoang-oc-bia.png",
+          "tieu": "Hoang ốc là gì?",
+          "vo": "[curious] Hoang ốc là gì? Đó là cách người xưa đếm tuổi làm nhà trên sáu cung."
+        },
+        {
+          "anh": "sau-cung-hoang-oc.png",
+          "tieu": "Ba cung tốt, ba cung tránh",
+          "vo": "Nhất Cát, Nhì Nghi, Tứ Tấn Tài là cung tốt. Tam Địa Sát, Ngũ Thọ Tử, Lục Hoang Ốc là cung dân gian thường tránh."
+        },
+        {
+          "anh": "dem-hoang-oc-vi-du-tuoi-37.png",
+          "tieu": "Ví dụ tuổi mụ 37",
+          "vo": "Ví dụ tuổi mụ 37. Bắt đầu từ số 30 ở cung Tam Địa Sát, đếm thêm bảy bước, dừng ở Tứ Tấn Tài, là cung tốt."
+        },
+        {
+          "anh": "cung-hoang-oc-2027.png",
+          "tieu": "Cung Hoang ốc năm 2027",
+          "vo": "Năm 2027, người sinh năm 1988 tuổi mụ 40, rơi đúng cung Tứ Tấn Tài. Cung tốt được tô màu xanh trong bảng."
+        },
+        {
+          "cta": true,
+          "tieu": "Xem đủ ba điều",
+          "vo": "Hoang ốc chỉ là một trong ba điều khi xét tuổi làm nhà. Xem đủ cả ba ở hiểu bản chấm com."
+        }
+      ]
+    },
+    {
+      "ma": "b6",
+      "slug": "muon-tuoi-lam-nha-nhu-the-nao",
+      "canh": [
+        {
+          "anh": "muon-tuoi-lam-nha-bia.png",
+          "tieu": "Tuổi chưa đẹp, vẫn muốn làm nhà?",
+          "vo": "[warmly] Năm nay tuổi chưa đẹp mà vẫn muốn làm nhà? Dân gian có cách mượn tuổi."
+        },
+        {
+          "anh": "tieu-chi-chon-nguoi-cho-muon-tuoi.png",
+          "tieu": "Mượn tuổi ai?",
+          "vo": "Người cho mượn tuổi nên có tuổi đẹp năm đó, là người thân gần, sức khoẻ ổn và thật lòng sẵn lòng."
+        },
+        {
+          "anh": "vi-du-muon-tuoi-gia-chu-1986.png",
+          "tieu": "Ví dụ gia chủ 1986",
+          "vo": "Ví dụ gia chủ sinh năm 1986, năm 2027 vướng Kim lâu Tử và Lục Hoang Ốc. Có thể mượn tuổi người sinh 1985, 1988 hoặc 1994."
+        },
+        {
+          "anh": "nam-buoc-muon-tuoi-lam-nha.png",
+          "tieu": "Năm bước làm",
+          "vo": "Người được mượn tuổi đứng ra làm lễ động thổ. Còn giấy phép xây dựng vẫn đứng tên chủ đất."
+        },
+        {
+          "cta": true,
+          "tieu": "Năm bước cụ thể",
+          "vo": "Năm bước cụ thể và bảng tuổi làm nhà 2027 có ở hiểu bản chấm com."
+        }
+      ]
+    },
+    {
+      "ma": "b7",
+      "slug": "sao-la-hau-ke-do-nam-2027-nen-lam-gi",
+      "canh": [
+        {
+          "anh": "sao-la-hau-ke-do-2027-bia.png",
+          "tieu": "Gặp La Hầu, Kế Đô 2027?",
+          "vo": "[warmly] Năm 2027 gặp sao La Hầu hay Kế Đô? Hiểu cho đúng thì không cần lo."
+        },
+        {
+          "anh": "cuu-dieu-cach-tinh-sao-han.png",
+          "tieu": "Sao đổi theo tuổi mụ",
+          "vo": "Sao hạn đổi theo tuổi mụ. Ở tuổi 10, nam khởi từ La Hầu, nữ khởi từ Kế Đô, chín năm quay lại một vòng."
+        },
+        {
+          "anh": "tuoi-gap-la-hau-ke-do-2027.png",
+          "tieu": "Năm sinh gặp sao",
+          "vo": "Năm 2027, nam sinh 1964, 1973, 1982, 1991, 2000 gặp La Hầu. Nữ cùng các năm sinh đó gặp Kế Đô."
+        },
+        {
+          "anh": "viec-nen-lam-nam-la-hau-ke-do.png",
+          "tieu": "Việc nên làm",
+          "vo": "La Hầu là năm nên nói ít, nghe nhiều, giữ giấy tờ gọn. Kế Đô là năm nên bớt lo nghĩ, quan tâm người nhà."
+        },
+        {
+          "cta": true,
+          "tieu": "Sao hạn cả nhà",
+          "vo": "Xem sao hạn của cả nhà ở hiểu bản chấm com. Đây là tập quán dân gian, không phải lời phán."
+        }
+      ]
+    },
+    {
+      "ma": "b8",
+      "slug": "than-so-hoc-cho-nguoi-moi-bat-dau",
+      "canh": [
+        {
+          "anh": "than-so-nguoi-moi-bia.png",
+          "tieu": "Mới học thần số học?",
+          "vo": "[curious] Mới tìm hiểu thần số học? Hãy bắt đầu từ bốn con số này."
+        },
+        {
+          "anh": "bon-con-so-than-so-hoc.png",
+          "tieu": "Bốn con số chính",
+          "vo": "Đường đời tính từ ngày sinh. Sứ mệnh từ cả họ tên. Linh hồn từ nguyên âm. Nhân cách từ phụ âm."
+        },
+        {
+          "anh": "cach-tinh-duong-doi-24-10-1988.png",
+          "tieu": "Ví dụ 24/10/1988",
+          "vo": "Ví dụ ngày sinh 24 tháng 10 năm 1988. Rút gọn từng phần ra số 6, còn cộng hết một lần ra 33. Hai cách này đều có trong sách."
+        },
+        {
+          "anh": "bang-chu-cai-pitago.png",
+          "tieu": "Đổi chữ thành số",
+          "vo": "Tên được đổi thành số theo bảng chữ cái. Nguyễn Minh Anh ra Sứ mệnh 9, Linh hồn 9, Nhân cách 9."
+        },
+        {
+          "cta": true,
+          "tieu": "Bốn con số của bạn",
+          "vo": "Nhập tên và ngày sinh ở hiểu bản chấm com, ba mươi giây là có bốn con số của bạn."
+        }
+      ]
+    }
+  ]
+}
