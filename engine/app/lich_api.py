@@ -10,7 +10,7 @@ from __future__ import annotations
 import datetime as _dt
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, HTTPException, Path as FPath
+from fastapi import APIRouter, HTTPException, Path as FPath, Query
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import config
@@ -131,6 +131,14 @@ def api_doi_lich(inp: DoiLichInput) -> dict:
 
 
 # SEO-L5: lịch âm cả năm (các tháng, Tết, nhuận) — không dữ liệu cá nhân.
+# SEO-O: bảng Tết nhiều năm (≤ 30 năm một lượt) cho mục lục /lich-am.
+@router.get("/v1/lich/cac-nam")
+def api_lich_cac_nam(tu: Annotated[int, Query(ge=1901, le=2098)], den: Annotated[int, Query(ge=1901, le=2098)]) -> list[dict]:
+    if den < tu or den - tu > 29:
+        raise HTTPException(422, "Khoảng năm từ 1 đến 30 năm.")
+    return _lich_nam.cac_nam(tu, den)
+
+
 @router.get("/v1/lich/nam/{nam}")
 def api_lich_nam(nam: Annotated[int, FPath(ge=1901, le=2098)]) -> dict:
     return _lich_nam.lich_nam(nam)

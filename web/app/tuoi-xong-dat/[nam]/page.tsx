@@ -1,5 +1,6 @@
 // SEO-L1 — "Tuổi xông đất Tết {năm}": bảng gia chủ sinh 1960–2005 → 3 tuổi hợp nhất (engine ghép từ đúng hàm của trang
 // từng tuổi), tuổi nên tránh, giờ hoàng đạo mùng 1. Index cùng cửa sổ trang con (Tết năm nay + Tết tới).
+import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -94,6 +95,8 @@ export default async function Page(p: P) {
         </dl>
       </section>
 
+      {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
+      <AnhTomTat kieu="xong_dat" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-8 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/tuoi-xong-dat" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>
       <p className="mt-3 flex flex-wrap gap-3 text-sm">

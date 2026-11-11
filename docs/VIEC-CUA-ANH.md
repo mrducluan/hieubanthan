@@ -3,7 +3,13 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-10 (BT-UI mục 4ak, SEO-N mục 4al, BLOG-10 mục 4am, TR-5 mục 4an).
+> Cập nhật lần cuối: 2026-11-10 (BT-UI mục 4ak, SEO-N mục 4al, BLOG-10 mục 4am, TR-5 mục 4an, SEO-O mục 4ao).
+
+### 4ao. SEO-O — ảnh tóm tắt + nội dung dày cho trang năm, lịch & tuổi (2026-11-10, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 6)
+
+- [ ] **Deploy engine TRƯỚC web** (route mới `/v1/lich/cac-nam`, trường `le` / `so_ngay` của `/v1/lich/nam`). Web cũ / engine cũ vẫn chạy được: thiếu dữ liệu thì bảng / ảnh tự ẩn.
+- [ ] Sau deploy, Search Console → Kiểm tra URL → **Yêu cầu lập chỉ mục** cho: `/lich-am`, `/lich-am/2027`, `/nam`, `/nam/2027`, `/xem-tuoi-lam-nha`, `/xem-tuoi-lam-nha/2027`, `/tuoi-xong-dat`, `/tuoi-xong-dat/2027`, `/xem-sao-han`, `/xem-sao-han/2027`, `/doi-lich-am-duong`, `/xem-ngay-tot`.
+- [ ] 2–4 tuần sau: Search Console → Hiệu suất → loại tìm kiếm **Hình ảnh**, lọc trang chứa `/og/tom-tat` để xem ảnh tóm tắt có được hiển thị không.
 
 ### 4an. TR-5 — Tarot: tranh lá thật + flow hỏi mới (2026-11-10)
 

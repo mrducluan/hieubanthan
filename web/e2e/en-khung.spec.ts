@@ -76,7 +76,7 @@ test.describe("trên trình duyệt", () => {
     const nav = page.getByTestId("menu-dau-trang");
     await expect(nav.getByRole("link", { name: "Numerology" })).toBeVisible();
     await expect(nav.getByRole("link", { name: "Tarot" })).toHaveAttribute("aria-current", "page");
-    const thanh = page.locator("[data-thanh-mang=tarot]");
+    const thanh = page.locator("[data-thanh-mang=tarot]:visible"); // lúc tải dần React giữ tạm 2 thanh (bản đệm + bản đếm)
     await expect(thanh).toBeVisible();
     await expect(thanh.locator("[data-muc=la_bai]")).toHaveAttribute("aria-current", /page|location/);
     await expect(thanh.locator("[data-muc=la_bai]")).toHaveAttribute("href", "/en/tarot/cards");
@@ -105,7 +105,7 @@ test.describe("trên trình duyệt", () => {
     await expect(page.getByRole("banner")).toContainText("Hiểu Bản Thân");
     await expect(page.getByRole("contentinfo")).toContainText("Bảo lưu mọi quyền");
     await expect(page.locator("[data-thanh-dau] [data-testid=doi-tieng-viet], [data-testid=chan-trang] [data-testid=doi-tieng-viet]")).toHaveCount(0);
-    await expect(page.locator("[data-thanh-mang=tarot] [data-muc=la_bai]")).toHaveAttribute("href", "/tarot/la-bai");
+    await expect(page.locator("[data-thanh-mang=tarot]:visible [data-muc=la_bai]")).toHaveAttribute("href", "/tarot/la-bai");
   });
 });
 

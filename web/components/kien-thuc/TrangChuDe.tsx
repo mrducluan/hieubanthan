@@ -16,10 +16,24 @@ import { DuongDan } from "@/components/khung/DuongDan";
 import { duongDanCum } from "@/lib/duong-dan";
 import { DanhSachCum } from "@/components/kien-thuc/DanhSachCum";
 import { mucLucCum } from "@/lib/nhom-cum";
+import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 
 // Chủ đề kiến thức → mảng bài CMS, suy từ trang công cụ của chủ đề (CHU_DE[x].mang) — thêm chủ đề không phải sửa ở đây.
 const MANG_CONG_CU: Record<string, string> = {
   "/than-so": "than_so", "/hop-doi": "than_so", "/tu-vi": "tu_vi", "/bat-tu": "bat_tu", "/kinh-dich": "kinh_dich", "/phong-thuy": "phong_thuy",
+};
+
+// SEO-O: "Trả lời nhanh" cho trang cụm (GEO — câu AI trích đầu tiên). `{so}` = số trang của cụm (đếm từ engine).
+const TRA_LOI_CUM: Record<string, string> = {
+  "sao-cung": "Mỗi lá số Tử vi có 14 chính tinh rải trong 12 cung, nên có 168 trường hợp \"sao X ở cung Y\". Cụm này có {so} trang, mỗi trang nói sao đó sáng hay hãm theo từng vị trí, sao nào thường đi cùng hay chiếu tới, và đọc thành lời đời thường cho cung đó.",
+  "tu-hoa": "Tứ hoá gồm Hoá Lộc, Hoá Quyền, Hoá Khoa, Hoá Kỵ, gắn vào bốn sao theo can năm sinh. Cụm này có {so} trang cho từng hoá rơi vào từng cung: ý nghĩa, năm sinh nào có, nên làm gì khi gặp.",
+  "menh-tuoi": "Mệnh theo năm sinh là mệnh nạp âm của năm can chi, tính theo năm âm lịch (từ Tết). Cụm này có {so} trang, mỗi năm sinh một trang: can chi, mệnh, màu và nghề hợp theo ngũ hành, tuổi hợp, tuổi xung, cung phi nam và nữ.",
+  "hop-so": "Thần số học so số chủ đạo (đường đời) của hai người: 9 số tạo 45 cặp. Cụm này có {so} trang, mỗi cặp nói chỗ hai người dễ hoà, chỗ dễ va và việc nên cùng làm — không chấm điểm hợp hay khắc.",
+  "dau-hieu": "Đây là {so} dấu hiệu trong nhà mà phong thuỷ hay nhắc: cửa đối cửa, bếp đối WC, cầu thang giữa nhà, giường dưới xà… Mỗi trang nói dấu hiệu đó là gì, sách xưa và cách hiểu ngày nay nói sao, việc làm được ngay không tốn tiền.",
+  "kinh-dich": "Kinh Dịch có 64 quẻ, mỗi quẻ sáu hào. Cụm này có {so} trang, mỗi quẻ một trang: tên, cấu trúc quái trên dưới, lời quẻ nguyên văn kèm cách hiểu đơn giản, lời từng hào và câu hỏi tự soi.",
+  "than-so": "Thần số học Pythagoras dùng các số 1–9 và số chủ đạo 11, 22, 33. Cụm này có {so} trang, mỗi số một trang: tính cách, điểm mạnh, điểm dễ vấp, công việc, tình cảm.",
+  "tu-vi": "Tử vi có 14 chính tinh. Cụm này có {so} trang, mỗi sao một trang: ngũ hành, tính chất, khi sáng và khi hãm, và ý nghĩa khi đứng ở từng cung.",
+  "cung-tu-vi": "Lá số Tử vi có 12 cung, mỗi cung nói về một mảng đời: Mệnh, Phụ Mẫu, Phúc Đức, Điền Trạch, Quan Lộc, Nô Bộc, Thiên Di, Tật Ách, Tài Bạch, Tử Tức, Phu Thê, Huynh Đệ. Cụm có {so} trang.",
 };
 
 export async function metaChuDe(khoa: string | null): Promise<Metadata> {
@@ -54,6 +68,7 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
       <HinhMang kieu={HINH_CHU_DE[khoa] ?? "than-so"} className="mt-4 h-20" />
       <h1 className="mt-3 text-4xl sm:text-5xl">{nd.dau.h1 ?? cd.ten}</h1>
       <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{cd.mo_ta}</LoiDanCms>
+      {TRA_LOI_CUM[khoa] && <div className="mt-6 max-w-3xl"><TraLoiNhanh chu={TRA_LOI_CUM[khoa]!.replace("{so}", String(ds.length))} /></div>}
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-8" />
       {ml ? <DanhSachCum ml={ml} /> : <ul className="mt-8 grid gap-3 sm:grid-cols-2">
         {ds.map((t) => (
