@@ -37,6 +37,8 @@ export interface KetQuaHoi {
   hoiTiep?: string[];
   /** EN-3 — câu không khớp tín hiệu nào: engine mời chọn câu cụ thể hơn (lời đáp mặc định vẫn hiện bên dưới). */
   hoiLai?: { cau: string; chon: string[] } | null;
+  /** EN-ALL GĐ 3d — đoạn hỗ trợ mềm (engine `ho_tro`, chỉ bản Anh): hiện trong khung dịu TRÊN câu trả lời. */
+  hoTro?: string;
 }
 
 interface Tin extends KetQuaHoi {

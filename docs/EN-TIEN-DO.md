@@ -172,6 +172,14 @@ tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2
   `battu_holdout.jsonl` (160, đóng băng); bộ chấm `engine/scripts/cham_en.py`. **Mốc trước khi làm**: định tuyến dev 15 % /
   holdout 16 %, an toàn 6/12 · 2/12, mốc thời gian 16/72 · 13/44, câu trả lời còn chữ Việt 259/260 → cần bộ hiểu câu tiếng
   Anh + lời đáp theo ngôn ngữ (mục tiêu: định tuyến ≥ 90 %, an toàn 100 %, mốc ≥ 90 %).
+- ✅ **Bộ chặn tiếng Anh theo NGHĨA (GĐ 3d vòng 4, 2026-11-11)**: ba bộ viết độc lập liên tiếp lọt khủng hoảng (v3: 16/25)
+  vì danh sách cụm cứ dài thêm → `luangiai/an_toan.py` thêm bộ nhận nhóm tín hiệu (phương tiện theo loại · ý chấm dứt mạnh /
+  cần thêm tín hiệu · hành vi từ biệt · tự coi mình vô dụng · ý làm hại người khác có chủ thể là người nói), ghép theo luật
+  trong ~15 từ, hợp với mẫu cụm cũ; quá liều ngoài ý muốn ("by mistake", "twice", "for my toothache") → cấp cứu. **Tầng hỗ trợ
+  mềm**: một tín hiệu buồn yếu → vẫn trả lời, kèm trường `ho_tro` (chỉ bản Anh, `kb/data/en/loi/an_toan_mem.json`), web hiện
+  khung dịu trên câu trả lời. Số đo: v3 khủng hoảng 16/25 → 25/25, cấp cứu 8/10 → 10/10; mọi bộ dev khác 100 %; chặn nhầm 0
+  (v2: 1 câu thai sản theo chính sách, có từ trước). `scripts/cham_en.py --v2 --tep <tệp> --sai`. Còn: tầng mềm chưa nối
+  hỏi đáp Tarot / Thần số / Tử vi bản Anh.
 - ✅ **Web `/en/bazi`** (2026-11-11, một cây component): cờ `mo` của `/bat-tu` trong `lib/duong-en.json` → proxy rewrite về
   `/bat-tu` + `x-ngon-ngu`. Chữ cố định đưa vào catalog có chiều `en`: `lib/chu/bat-tu.ts` (công cụ Bát tự, bảng tứ trụ, vòng
   địa chi, ngũ giác, đại vận, dụng thần, "Which reading fits you?"), `lib/chu/giao-dien.ts` (khung Trường phái, "Quick answer",

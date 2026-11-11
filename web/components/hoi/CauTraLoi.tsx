@@ -6,7 +6,7 @@
 //  · Ý 2: "Chia sẻ" thẻ câu trả lời (lib/the-hoi.ts — chỉ dữ liệu danh mục cố định + câu hỏi chuẩn, không câu gõ / ngày sinh).
 import { useState, type ReactNode } from "react";
 import Link from "@/components/khung/Lien";
-import { BookmarkCheck, BookmarkPlus, Check, Copy, Download, Info, Share2 } from "lucide-react";
+import { BookmarkCheck, BookmarkPlus, Check, Copy, Download, Heart, Info, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -49,6 +49,14 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
   const tiep = (t.hoiTiep ?? []).filter((c) => !daHoi.includes(c));
   const loi: ReactNode = (
     <div className="min-w-0 space-y-4">
+      {t.hoTro && (
+        // EN-ALL GĐ 3d: câu hỏi có một tín hiệu buồn yếu — lời hỗ trợ dịu (không đỏ), câu trả lời vẫn hiện bên dưới.
+        <div className="flex gap-2.5 rounded-xl border border-moon/30 bg-moon/5 px-3.5 py-3 text-sm leading-relaxed text-fg"
+          role="note" data-testid="ho-tro-mem">
+          <Heart className="mt-0.5 size-4 shrink-0 text-moon" aria-hidden />
+          <p>{t.hoTro}</p>
+        </div>
+      )}
       {t.hoiLai && t.hoiLai.chon.length > 0 && (
         <div className="rounded-xl border border-moon/30 bg-moon/5 px-3 py-2.5" data-testid="hoi-lai">
           <p className="text-sm text-fg-muted">{t.hoiLai.cau}</p>

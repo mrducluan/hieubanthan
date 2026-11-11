@@ -21,6 +21,7 @@ from app import ngon_ngu
 from app.hoidap import chung, en_gloss, hieu_cau, mo_dau, doi_song_muc as dsm
 from app.kb import battu_kb as kb, ten as _ten
 from app.kb.loi import L
+from app.luangiai import an_toan as _at
 from app.luangiai import battu_hien as _bth
 from app.luangiai import doi_song_khuon as _dsk
 from app.luangiai import hoi as _h, truc_quan
@@ -807,8 +808,13 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
     if ngon_ngu.la_viet():
         return _tra_loi(pl, cau_hoi, sinh, ngay_xem, dung_llm)
-    kq = _tra_loi_theo_vi(pl, cau_hoi, sinh, ngay_xem, False)
-    return _hien(kq)
+    kq = _hien(_tra_loi_theo_vi(pl, cau_hoi, sinh, ngay_xem, False))
+    # GĐ 3d vòng 4 — tầng hỗ trợ MỀM (chỉ bản ngôn ngữ khác tiếng Việt): câu có MỘT tín hiệu buồn yếu ("they keep saying
+    # I'm useless", "the river looks peaceful lately") chưa đủ luật khủng hoảng → vẫn trả lời câu hỏi, kèm đoạn hỗ trợ ngắn
+    # có số đường dây ở trường riêng `ho_tro` (web hiện TRÊN câu trả lời). Bản Việt không có trường này (golden giữ nguyên).
+    if pl["xu_ly"] != "an_toan" and _at.ho_tro_mem_en(cau_hoi):
+        kq["ho_tro"] = _at.loi_ho_tro_mem()
+    return kq
 
 
 def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_llm: bool) -> dict:

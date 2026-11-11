@@ -23,6 +23,8 @@ export interface HoiMangRes {
   hoi_tiep?: string[];
   /** EN-3: độ tin thấp → mời chọn câu cụ thể hơn. */
   hoi_lai?: { cau: string; chon: string[] } | null;
+  /** EN-ALL GĐ 3d: bản Anh — câu hỏi có một tín hiệu buồn yếu → đoạn hỗ trợ ngắn (đường dây) hiện TRÊN câu trả lời. */
+  ho_tro?: string;
   /** EN-ALL: bản Anh — tên hiển thị của mã trong phản hồi. */
   ten_hien?: TenHien;
   error?: string;
@@ -59,6 +61,7 @@ export async function hoiMang<T extends HoiMangRes>(
     trucQuan: tenKhoiHinh(d.truc_quan, d.ten_hien),
     hoiTiep: d.hoi_tiep,
     hoiLai: d.hoi_lai,
+    hoTro: d.ho_tro || undefined,
     canCu: d.can_cu?.length ? d.can_cu : undefined,
     phu: phu?.(d),
     canhBao: d.co_canh_bao?.filter((c) => !boQuaCanhBao.includes(c.loai)).map((c) => c.chi_tiet),

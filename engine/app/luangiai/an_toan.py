@@ -305,7 +305,7 @@ TU_CHOI_EN: list[tuple[str, str]] = [
     (r"(should|can) i (stop|quit) (my )?(treatment|therapy|medication)", "suc_khoe_the_chat"),
     (r"(when|how long) (will|do|am) i (going to )?(die|live|have left)", "du_doan_cu_the"), (r"how long (do|will) i live", "du_doan_cu_the"),
     (r"(am i|will i|is .{1,30}) going to die", "du_doan_cu_the"), (r"(my|the) (baby|fetus|foetus|unborn)( is| will| has)? (healthy|sick|disabled|ok|normal|down syndrome)", "suc_khoe_the_chat"),
-    (r"(will|am|could) i (get|be|fall) pregnant", "suc_khoe_the_chat"), (r"(gender|sex) of (my|the) (baby|child)(?! name)", "suc_khoe_the_chat"),
+    (r"am i pregnant", "suc_khoe_the_chat"), (r"(gender|sex) of (my|the) (baby|child)(?! name)", "suc_khoe_the_chat"),
     (r"(lottery|lotto|powerball|mega ?millions|jackpot|winning|lucky|betting|roulette|slot machine) numbers?", "may_rui"), (r"(numbers?|which number) (to|should i) (bet|play|pick)", "may_rui"),
     (r"(win|winning) (the )?(lottery|lotto|jackpot|bet|casino)", "may_rui"), (r"(stock|crypto|coin|bitcoin|share) (price|will go|to buy|should i buy|pump)", "may_rui"),
     (r"(which|what) (candidate|applicant|employee|person) (should i|to) (hire|fire|promote)", "ngoai_pham_vi"), (r"(hire|fire) (him|her|them|this (person|candidate|employee))", "ngoai_pham_vi"),
@@ -357,9 +357,13 @@ _SUA_EN_BANG: dict[str, str] = {
     "what is": "wats|whats|what s", "about": "abt|abut", "stuff": "stuf", "too many": "to many|2 many|too much of", "please": "plz|pls|plese|pleas",
     "pregnant": "pregnent|pregant|preggo|preggers|preg", "miscarry": "misscarry|miscary|miscarrie", "miscarriage": "misscarriage|miscarage",
     "cancer": "cancr|canser", "diabetes": "diabeets|diabetis|diabetees|diabeties", "insulin": "insulen|insuline", "stop": "stopp|stp",
-    "autism": "auttism|autisim|autizm", "heart": "hart|heard disease", "breathe": "brethe|breath e|breth|breathe e", "seizure": "seezure|seizur|siezure",
+    "autism": "auttism|autisim|autizm", "heart": "hart", "heart disease": "heard disease", "breathe": "brethe|breath e|breth|breathe e", "seizure": "seezure|seizur|siezure",
     "candidate": "canditate|candidat|candidte", "employee": "emploee|employe|emplyee", "lottery": "lotery|lottry|lotto ry", "numbers": "nummbers|numbrs|nos|numba",
-    "die": "dye", "according to": "acording to|accrding to|acc to|according", "their": "there birth", "because": "becuase|bcos|bcoz|cuz|coz|bc",
+    # "dye" → "die" chỉ khi không có tân ngữ đi sau ("will i dye young", "what year will i dye"); "dye my clothes black",
+    # "dye my hair" giữ nguyên (review GĐ 3d vòng 4).
+    "die": r"dye(?=\s*(?:[,.!?;]|$)| (?:acording|accrding|according|acc to|at age|at \d|young|early|soon|before|in \d|by \d|when|"
+           r"next year|this year|alone|of |from |or not))",
+    "according to": "acording to|accrding to|acc to|according", "their birth": "there birth", "because": "becuase|bcos|bcoz|cuz|coz|bc",
     "have": "hv|hav|got to have", "baby": "bby|bebe|babi", "medicine": "medecine|medicin", "medication": "medicaton|medcation",
     "before": "b4|bfr", "years": "yrs|yeers|yeers", "year": "yr|yeer|yer", "be": "b", "live": "liv", "life": "lyf|lyfe", "hurt": "hrt",
     "myself": "my self|meself|myslf", "really": "rly|realy", "help": "halp|hlp", "nothing": "nuthin|nothin", "someone": "sm1|some1",
@@ -451,11 +455,11 @@ KHUNG_HOANG_ANH: list[re.Pattern] = [
            r"(?:nobody|no one|noone|anyone|anybody|people)(?: \w+){0,3} (?:notice|care|miss me|cry|come to my funeral)\w*(?: \w+){0,3} if i (?:died|die|was gone|were gone|"
            r"disappeared|vanished|was not here|wasn t here|was not around|wasn t around|killed myself|ended it)",
            r"no more me", r"(?:i am|feel|feeling|felt|am|i m|just) (?:like )?(?:a |such a |only a |nothing but a )?(?:burden|burdan)(?! of)",
-           r"(?:this|it) (?:is|will be|s|might be|may be|is going to be)? ?(?:going to be )?my (?:last|final) (?:reading|question|time asking|time|tarot|card|message)",
            r"(?:my )?last (?:reading|time asking|question|card|tarot) (?:ever|before i go)", r"last reading ever",
            r"(?:my )?last time (?:ask|asking) (?:you|anything)", r"goodbye (?:everyone|everybody|world|all|cruel world)",
            r"(?:said|saying|say) goodbye to (?:everyone|everybody|all my|my family)", r"(?:i am|i m) done(?: with (?:life|everything|living|it all))?(?=\s*(?:[,.!?;]|$))",
-           r"(?:i am|i m) done with (?:life|living|everything|it all)",
+           r"(?:i am|i m) done with (?:life|living|everything|it all)(?! (?:in|at|on|as|here|there|admin|insurance|coach\w*|"
+           r"lessons|of|with|for)(?!\w))",
            r"ready to (?:leave this world|end it|die|end everything)"),
     # 3. tự hại
     _rx_en(r"self[- ]?harm\w*", r"(?:relapsed|relapse) (?:on )?sh", r"(?:tw|cw) sh", r"sh (?:urges?|again|last|tonight|relapse|scars?)",
@@ -472,7 +476,9 @@ KHUNG_HOANG_ANH: list[re.Pattern] = [
            r"handful|all|twenty|thirty|fifty|dozen|\d+|more than)(?:.{0,30})(?:pills|meds|medication|tablets|paracetamol|panadol|"
            r"tylenol|ibuprofen|aspirin|antidepressants|sleeping pills|painkillers|pain killers|insulin)",
            r"(?:collect\w*|sav\w*|stockpil\w*|hoard\w*) (?:up )?(?:\w+ )?(?:pills|meds|tablets|sleeping pills|painkillers)",
-           r"(?:took|take|taking|swallowed|steal\w*|stole) (?:my )?(?:\w+ )?(?:s )?sleeping pills",
+           r"(?:took|take|taking|swallowed) (?:my )?(?:mother|mom|mum|mummy|father|dad|grandma|grandpa|grandmother|grandfather|"
+           r"wife|husband|sister|brother|parents|friend|roommate|\w+ s)(?: s)? sleeping pills",     # thuốc ngủ của NGƯỜI KHÁC
+           r"(?:steal\w*|stole|stealing) (?:my )?(?:\w+ )?(?:s )?sleeping pills",
            r"sleeping pills .{0,50}(?:want to take|going to take|take more|take again|also want)"),
     # 5. bạo lực / xâm hại đang xảy ra
     _rx_en(_NGUOI_EN + r" .{0,40}(?:hits|hit|hitting|beats|beat|beating|beaten|chokes|choked|choking|strangl\w*|slaps|slapped|slapping|"
@@ -571,13 +577,29 @@ _HAI_CON = _rx_en(r"(?:thinking|thought|think|scared|afraid|urges?|tempted|going
                   r" (?:about |of |to )?(?:hurting|harming|hitting|shaking|smothering|drowning|killing|strangling|hurt|harm|kill|"
                   r"smother|drown|strangle|shake) (?:my |our |the )?(?:own )?(?:baby|babies|newborn|infant|child|children|kid|kids|"
                   r"son|daughter|toddler)(?! s (?:feelings|chances|confidence|future)| feelings)")
+_NHAY = re.compile(r"(?<!\w)jump\w* (?:off|down|from|out of)(?!\w)")
+_NHAY_GT = _rx_en(r"bungee|cliff ?div\w*|skydiv\w*|parachut\w*|base jump\w*|high dive|diving board|zip ?lin\w*")
 # Uống nhầm / quá liều NGOÀI Ý MUỐN → nhóm cấp cứu (khuyên đi khám ngay), không phải lời hỗ trợ khủng hoảng.
 _NHAM = _rx_en(r"by (?:accident|mistake)|accidentally|accidental|mistakenly|did not mean to|didn t mean to|wrong (?:dose|medicine|pills|bottle)|"
                r"double dosed|forgot i (?:already )?took")
+# Uống thuốc để CHỮA một chứng đau cụ thể ("for my toothache") mà quá liều — cũng là quá liều ngoài ý muốn (cấp cứu).
+_VI_BENH = _rx_en(r"for (?:my |a |the |his |her )?(?:bad |sore )?(?:back|back pain|tooth\w*|headaches?|migraines?|pain|fever|cold|flu|"
+                  r"period|cramps|cough|knee|arthritis|sore throat|injury|joints?|stomach ?ache)")
+
+
+def _nham(k: str) -> bool:
+    return bool(_NHAM.search(k) or _VI_BENH.search(k))
+
 
 # Cặp (ý, ngữ cảnh): cụm chỉ là khủng hoảng khi cùng câu có ngữ cảnh chết / buông bỏ ("speed it up" + death; "ready to
 # go" + peace / tired / done…; cho đi đồ đạc, thú cưng + lá cuối / trả hết nợ / tạm biệt).
 _KHUNG_HOANG_KEP: list[tuple[re.Pattern, re.Pattern]] = [
+    # "this is my last question / reading" chỉ là khủng hoảng khi câu có ý chết / chấm dứt / từ biệt ("This is my last
+    # question: when will I get promoted?" là câu thường).
+    (_rx_en(r"(?:this|it) (?:is|will be|s|might be|may be|is going to be)? ?(?:going to be )?my (?:last|final) (?:reading|question|"
+            r"time asking|time|tarot|card|message)"),
+     _rx_en(r"die|dying|death|dead|kill\w*|end (?:it|things|everything)|gone|goodbye|before i go|(?:won t|will not|not) (?:be (?:here|"
+            r"around|alive)|need)|leave this world|ever|forever|last day|suicid\w*|no more me|(?:thank you|thanks) for ever\w*")),
     (_rx_en(r"speed it up|hurry it up|get it over with"), _rx_en(r"death|die|dying|dead|end")),
     (_rx_en(r"(?:i am|i m|am|finally) ready to (?:go|leave)(?=\s*(?:[,.!?;]|$))"),
      _rx_en(r"peace|tired|done|pain|suffer\w*|anymore|enough|goodbye|finally|rest|over")),
@@ -711,12 +733,9 @@ TU_CHOI_ANH: list[tuple[re.Pattern, str]] = [
             r"(?:surgery|operation) (?:go well|be (?:successful|ok|okay|fine|safe)|succeed|work)",
             _NGUNG + r" (?:taking )?(?:my |the |his |her |all )?.{0,25}" + _THUOC,
             _THUOC + r" .{0,70}(?:" + _NGUNG + r"|safe to stop|can stop|stop or not|skip it|stop it|quit it)",
-            # thai sản / sinh nở (bác sĩ, không lá số)
-            r"(?:will|can|could|would|am|is|are|when will|when can|which (?:month|year) will|whether) (?:i|we|she|my \w+|her) (?:ever )?"
-            r"(?:get|be|fall|become|getting) (?:pregnant)",
-            r"am i pregnant", r"(?:get|have|getting|having|conceive|conceiving) (?:a )?baby (?:or not|this year|next year|in \d{4}|soon)",
-            r"(?:can|will|could) (?:i|we|she) (?:get|have) (?:a )?baby", r"(?:able to|can i|can we|will i|will we|could i|whether i m able to|whether i can|i m able to)"
-            r" (?:have|conceive|bear|get) (?:children|kids|a (?:child|baby))", r"\bttc\b", r"trying to conceive", r"infertil\w*",
+            # thai sản / sinh nở (bác sĩ, không lá số) — như bản Việt (MT-ĐS, CY-1): KHÔNG đoán kết quả cơ thể (có thai chưa, trai hay gái,
+            # sảy thai, IVF, thai khoẻ, vô sinh); hỏi "bao giờ có con / có con không" thì trả lời bằng mảng gia đình + ranh giới bác sĩ.
+            r"am i pregnant", r"infertil\w*",
             r"(?:ivf|iui) .{0,20}(?:success|work|succeed|chance|or nah|or not|will)", r"miscarr\w*",
             r"(?:boy|son) or (?:a )?(?:girl|daughter)|(?:girl|daughter) or (?:a )?(?:boy|son)", r"baby (?:s )?(?:gender|sex)",
             r"gender (?:of|prediction|reveal prediction)", r"twins .{0,20}(?:pregnan\w*|baby|babies)|(?:pregnan\w*|expecting) .{0,30}twins",
@@ -760,12 +779,217 @@ _THAN_BENH_ANH = re.compile(r"(?<!\w)(?:my (?:\w+ ){0,2}(?:mother|mom|mum|moter|
                             r"outcome|wake up|chart (?:says?|shows?)|bazi (?:says?|shows?))(?!\w)")
 
 
+# ================================================================== EN-ALL GĐ 3d vòng 4 — bộ nhận NGHĨA theo nhóm tín hiệu
+# Ba bộ câu viết độc lập liên tiếp đều lọt câu khủng hoảng vì danh sách cụm cứ dài thêm. Phần này nhận các NHÓM tín hiệu
+# theo nghĩa rồi ghép theo luật (hợp với các mẫu cụm ở trên, không thay):
+#   · PHƯƠNG TIỆN: thuốc (tên thuốc, "stash"), vật (dây, dao, súng, than, khí…), chỗ cao, đường ray / xe, sông biển.
+#   · Ý CHẤM DỨT: mạnh (một mình đã đủ: muốn biến mất hẳn, muốn ngủ không dậy, "done with life", câu Tagalog / Malay /
+#     Singlish) · cần thêm tín hiệu (không dậy nữa, uống hết, "end it", biến mất mãi, lời từ biệt cuối) · hành vi từ biệt
+#     (cho đi thú cưng / đồ đạc, viết thư cho gia đình…) · "trông thật bình yên" sát một phương tiện.
+#   · TỰ COI MÌNH VÔ DỤNG / GÁNH NẶNG / HẾT HY VỌNG.
+#   · Ý LÀM HẠI NGƯỜI KHÁC: người nói định giết / đâm / bắn… một người (không tính thành ngữ, câu đùa, câu cường điệu).
+# Khủng hoảng = ý mạnh · ý chấm dứt + phương tiện đúng loại trong ~15 từ (thứ tự nào cũng được) · hành động nhảy / bước khi
+# đang nghĩ tới + chỗ cao / đường ray · vô dụng + ý chấm dứt · hai hành vi từ biệt · "bình yên" sát phương tiện + một tín hiệu
+# khác · ý làm hại người khác. Chỉ MỘT tín hiệu yếu → không chặn câu hỏi, câu trả lời kèm đoạn hỗ trợ (`ho_tro_mem_en`).
+# Uống nhầm / quá liều ngoài ý muốn → nhóm cấp cứu (`_QUA_LIEU_NHAM`). Thước đo: scripts/cham_en.py.
+
+def _cac_vi_tri(rx: re.Pattern, k: str) -> list[int]:
+    """Vị trí TỪ (đếm khoảng trắng; câu đã thường hoá một khoảng trắng) của mỗi chỗ khớp."""
+    return [k.count(" ", 0, m.start()) for m in rx.finditer(k)]
+
+
+def _gan(a: list[int], b: list[int], n: int = 15) -> bool:
+    return any(abs(x - y) <= n for x in a for y in b)
+
+
+_THUOC_TEN = (r"paracetamol|panadol|tylenol|acetaminophen|ibuprofen|nurofen|aspirin|codeine|tramadol|oxycodone|xanax|valium|ambien|"
+              r"zolpidem|melatonin|benzos?|diazepam|antidepressants?|insulin|painkillers?|pain killers?|sleeping pills?")
+_PT_THUOC = _rx_en(r"(?:sleeping |sleep |headache |bp |blood pressure |anxiety )?(?:pills?|tablets?|capsules?|meds|medications?|medicines?)",
+                   _THUOC_TEN, r"stash|stockpile")
+_PT_VAT = _rx_en(r"rope|noose|ligature|knife|knives|blade|blades|razors?|gun|pistol|rifle|bullets?|charcoal|helium|car exhaust|"
+                 r"exhaust pipe|carbon monoxide|rat poison|poison|bleach|pesticide|weed killer|antifreeze")
+_PT_CAO = _rx_en(r"bridge|ledge|roof|rooftop|balcony|cliff|parapet|railing|(?:top|highest|\d+\w*) floor|hdb|condo|car ?park|"
+                 r"multi storey|building|tower block|window")
+_PT_RAY = _rx_en(r"(?:train |railway |rail |mrt |subway |metro )?tracks?|(?:mrt|train|subway|metro|lrt) (?:platform|station|line)|"
+                 r"platform|oncoming (?:train|traffic|car|bus|truck|lorry)|traffic|(?:a |the )(?:train|bus|lorry|truck|car)")
+_PT_NUOC = _rx_en(r"river|sea|ocean|lake|reservoir|waves|canal")
+# hành động gắn với chỗ cao / đường ray / nước — chỉ tính khi có ý nghĩ / ý muốn đứng trước (≤ 6 từ)
+_HD_CAO = _rx_en(r"(?:step|stepping|stepped|steps) (?:off|in front)|(?:jump|jumping|jumped|jumps) (?:off|from|down|out of|out the|"
+                 r"in front|onto the (?:tracks|rail))|(?:throw|throwing) myself|(?:fall|falling) (?:off|from)|(?:let|letting) myself (?:fall|go|slip)|"
+                 r"go over the (?:edge|railing)")
+_HD_NUOC = _rx_en(r"(?:walk|walking|walked) (?:into|in front)|drown\w*|(?:let|letting) myself (?:fall|go|slip|sink)|(?:throw|throwing) myself|"
+                  r"let (?:the )?(?:river|sea|waves|water) take me")
+_NGHI_DEN = _rx_en(r"think|thinks|thinking|thought|imagine|imagining|picture|picturing|tempted|tempting|urge|urges|want|wanted|wanna|"
+                   r"wish|plan|planning|planned|going to|gonna|ready|feel like|could just|how easy|keep|kept|about to|dream\w*|fantasi[sz]\w*")
+_GIAI_TRI = _rx_en(r"bungee|cliff ?div\w*|skydiv\w*|parachut\w*|zip ?lin\w*|base jump\w*|high dive|diving board|swim\w*|pool|fishing|"
+                   r"sail\w*|boat\w*|kayak\w*|surf\w*|cruise|trip|holiday|vacation|beach|picnic|wedding|photos?|view|travel\w*|resort|"
+                   r"hik\w*|camping|retreat|fireworks")
+_KHONG_DAY = (r"(?:not|never|do not|don t|won t|will not|wouldn t|did not|didn t) wake up(?! (?:early|late|on time|in the (?:morning|night)|"
+              r"at|for|before|till|until|refreshed|rested|tired|feeling|with|to|in time|again until|properly))")
+_Y_MANH = _rx_en(
+    r"(?:want|wanna|wish|wishing|feel like|feeling like|felt like|thinking (?:of|about)|dream\w* (?:of|about)|ready|planning|plan|"
+    r"need|better if i|i) (?:to )?(?:just )?(?:disappear\w*|vanish\w*|cease to exist|stop existing) (?:forever|for good|permanently|"
+    r"from (?:this|the) world|from existence|and never come back)",
+    r"(?:want|wanna|wish|hope|hoping|pray|praying|rather|prefer|better if i) (?:to )?(?:just )?(?:sleep and )?(?:i )?" + _KHONG_DAY,
+    r"(?:would it|does it|will it|to|it) take to (?:not|never) wake up|enough (?:\w+ )?to (?:not|never) wake up",
+    r"(?:i m|i am|im|so|just|completely|totally|really|honestly) done (?:with )?(?:life|living|existing|being alive|this life)"
+    r"(?=\s*(?:[,.!?;]|$|anymore|already|tbh|honestly|man|bro|ngl|fr))",
+    r"(?:just |better |might as well |may as well |wanna |want to |let me )die already", r"sian until (?:want (?:to )?)?die",
+    r"jump down (?:from )?(?:my |the |our )?(?:hdb|block|flat|building|condo)",
+    r"mamatay|magpakamatay|nagpakamatay|ayoko na(?:ng)? mabuhay|ayaw ko na(?:ng)? mabuhay|tapusin (?:ko )?na (?:ang )?(?:lahat|buhay ko)|"
+    r"patayin (?:ko )?(?:na lang )?(?:ang )?sarili ko",
+    r"nak mati|mahu mati|ingin mati|bunuh diri|tak nak hidup|tak mahu hidup|(?:lebih )?baik aku mati|penat (?:nak )?hidup",
+    r"(?:end|ending|ended|finish|finishing) (?:my|this) (?:own )?(?:life|existence)(?! (?:as|in|at) )",
+    r"(?:i d|i would|i ll|i will) rather be dead")
+_C_DAY = _rx_en(_KHONG_DAY)                                         # + thuốc / vật
+_C_HET = _rx_en(r"(?:take|taking|took|swallow\w*|down|downing) (?:them|it|those|these) all|(?:take|taking|swallow\w*) all of (?:them|it|those)|"
+                r"(?:take|taking|swallow\w*|down|downing) (?:the )?(?:whole|entire) (?:bottle|box|pack|packet|strip|stash|stockpile|lot)")   # + thuốc
+_C_END = _rx_en(r"(?:end|ending) (?:it|everything|things)(?: all)?(?! (?:with|between|off|for (?:us|him|her|them)|on a|on good|early|"
+                r"today at|now and go))")                           # + mọi phương tiện
+_C_MAT = _rx_en(r"disappear\w* (?:forever|for good|permanently)|vanish\w* (?:forever|for good)|one last goodbye|final goodbye|goodbye forever")
+_TU_BIET = [
+    _rx_en(r"(?:gave|give|giving|given|rehom\w*|found (?:a )?new (?:home|owner)s? for) (?:away )?(?:all )?my (?:cat|cats|dog|dogs|pets?|"
+           r"bird|fish|rabbit|hamster|things|stuff|belongings|possessions|savings|guitar|jewel\w*|clothes)(?: away)?"),
+    _rx_en(r"(?:wrote|write|writing|written|left|leaving|leave) (?:a |some |my |the )?(?:goodbye |farewell |final )?(?:letters?|notes?) "
+           r"(?:to|for) (?:my |all my )?(?:\w+ ){0,2}?(?:family|parents|kids|children|friends|wife|husband|mum|mom|mother|dad|father|"
+           r"sister|brother|everyone|everybody|partner)"),
+    _rx_en(r"(?:said|say|saying) goodbye to (?:everyone|everybody|all my|my (?:family|friends|parents|kids))|"
+           r"(?:paid|paying|pay) off (?:all )?my debts? (?:so|before)|(?:sorted|sorting|wrote|writing|updated) (?:out )?my will (?:so|before)"),
+]
+_TU_BIET_THUONG = _rx_en(r"declutter\w*|donat\w*|moving|move (?:house|abroad|overseas|out|to)|relocat\w*|emigrat\w*|marie kondo|"
+                         r"spring clean\w*|sell\w*|sold|garage sale|minimalis\w*|allerg\w*|new baby|landlord|lease|cny|chinese new year|"
+                         r"christmas|tet|new year|birthday|wedding|graduation|anniversary|thank you")
+_GAN_DAY = _rx_en(r"lately|recently|these days|nowadays|keeps?|kept|at night|more and more|sometimes|always|again|every (?:day|night)")
+_Y_YEU = _rx_en(r"peaceful|calm|calming|quiet|inviting|tempting|so easy|beautiful down there")
+# phương tiện "đang gọi mình" — sát phương tiện là đủ khủng hoảng (không cần tín hiệu thứ hai)
+_Y_GOI = _rx_en(r"(?:calling|calls|called|keeps calling|been calling) (?:out )?(?:to )?(?:me|my name)")
+_VO_DUNG = _rx_en(
+    r"(?:i m|i am|im|i feel|feel|feeling|felt|(?:feel|feeling|felt) like|i ve been|calls? me|calling me|called me|says? i m|saying i m|said i m|says? i am|"
+    r"think i m|thinks i m|tells? me i m|telling me i m|i m just|i m so|i m nothing but) "
+    r"(?:so |completely |totally |just |really |utterly |only )*(?:useless|worthless|pathetic|unlovable|good for nothing|hopeless|"
+    r"(?:a |such a |a total |a complete |nothing but a |just a )(?:failure|waste of (?:space|air|life)|disappointment|mistake|loser|burden)|"
+    r"nothing|no good)(?! (?:at|in|with|for|of) (?!life|living|everything))",
+    r"(?:not|no longer) (?:be )?a burden (?:to (?:anyone|anybody|everyone|everybody|them|my family) |on (?:anyone|everyone|them|my family) )?anymore|"
+    r"burden (?:to|on) (?:everyone|everybody|anyone)",
+    r"hate (?:myself|my life|being alive|being me)|(?:can t|cannot|can not) (?:go on|do this anymore|take (?:it|this) anymore|"
+    r"cope anymore)|(?:no one|nobody|noone) (?:cares about me|cares if i|loves me|needs me|wants me|would care if i)|"
+    r"(?:lost|losing|have no|got no) (?:all )?(?:hope|will to live|reason to live)(?! (?:in|of|for) (?!life|living))|"
+    r"(?:there is |there s )?no way out(?=\s*(?:[,.!?;]|$))|(?:so )?empty inside|nothing matters (?:anymore|to me)|"
+    r"(?:tired|sick|exhausted) of (?:everything|living|life|being me|being alive|existing)|give up on (?:myself|life|living)")
+# --- ý làm hại NGƯỜI khác (người nói là chủ thể)
+_HAI_DONG = (r"(?:kill|murder|stab|shoot|poison|strangle|choke|beat up|run over|burn|attack|hurt|harm)")
+_HAI_DOI = (r"(?:my (?:\w+ ){0,2}(?:husband|wife|partner|boyfriend|girlfriend|ex|father|dad|mother|mom|mum|stepdad|stepfather|stepmom|"
+            r"stepmother|step dad|step mom|uncle|aunt|brother|sister|cousin|boss|manager|teacher|coworker|co worker|colleague|neighbou?r|"
+            r"landlord|roommate|flatmate|classmate|in laws?|son|daughter|kid|kids|baby|family|supervisor|bully|rival)|"
+            r"(?:that|this) (?:\w+ )?(?:guy|girl|man|woman|kid|bastard|bitch|asshole|idiot|coworker|co worker|colleague|neighbou?r|boss|"
+            r"teacher|bully)|the (?:\w+ )?(?:guy|girl|man|woman|bastard|bitch|asshole)|him|her|them|someone|somebody|everyone|people)")
+_HAI_NGUOI = re.compile(r"(?<!\w)(?:want|wanna|going|gonna|plan|planning|planned|about|ready|decided|intend\w*|tryna|trying|will|ll|"
+                        r"gotta|need|thinking (?:of|about)|fantasi[sz]\w* about|dream\w* (?:of|about))(?: to)? (?:really |seriously |"
+                        r"just |go )?" + _HAI_DONG + r"(?:ing)? " + _HAI_DOI
+                        + r"(?! s(?!\w))(?! (?:a|an|some|the|this) (?:text|message|email|msg|dm|note|line|look|glance|smile|question|call|"
+                          r"quick|photo|picture|pic|video|shot)| (?:text|email|message|dm|msg)s?(?!\w))(?!\w)")
+_PHU_DINH = re.compile(r"(?<!\w)(?:not|never|don t|do not|won t|will not|wouldn t|would not|didn t|did not|no)(?!\w)")
+_TOI = re.compile(r"(?<!\w)(?:i|i m|im|i am|i ll|i d|i ve)(?!\w)")
+_DUA_HAI = _rx_en(r"if (?:he|she|they|you|my \w+|it)|for (?:eating|taking|spoiling|being|not|forgetting|leaving|losing|breaking|using|"
+                  r"drinking|telling|stealing|finishing|making)|when (?:he|she|they) (?:gets?|finds?|sees?|comes?)")
+_THAT_HAI = _rx_en(r"deserves? it|deserve to die|revenge|for real|seriously|serious|not joking|i mean it|tonight|tomorrow|which day|"
+                   r"lucky (?:day|date|time)|best (?:day|date|time)|good (?:day|date|time)|when should|knife|gun|weapon|poison|plan|planned|"
+                   r"how to|get away with|humiliat\w*|hate (?:him|her|them)|again today|keeps? (?:hitting|abusing|hurting|bullying)")
+
+
+def _hai_nguoi_khac(k: str) -> bool:
+    """Người nói có ý giết / đâm / bắn… một NGƯỜI. Không tính: chủ thể là người khác ("my boss will kill me"), phủ định ("I
+    would never hurt him"), thành ngữ (đích không phải người: "kill it", "kill time"), sở hữu ("shoot my sister's wedding"),
+    nói đùa / cường điệu ("lol", "if she spoils the ending") — trừ khi câu có dấu hiệu nghiêm túc ("he deserves it",
+    "which day", "revenge"…). "hurt / harm / burn / attack" chỉ tính khi có dấu hiệu nghiêm túc."""
+    that = bool(_THAT_HAI.search(k))
+    for m in _HAI_NGUOI.finditer(k):
+        ve = re.split(r"[,.!?;]", k[max(0, m.start() - 50):m.start()])[-1].strip()   # vế trước động từ ý định
+        if _PHU_DINH.search(ve):
+            continue
+        if not _TOI.search(ve) and len(ve.split()) > 2:
+            continue                                  # chủ thể không phải người nói ("my boss is going to kill her")
+        if re.search(r"(?<!\w)(?:hurt|harm|burn|attack|choke)(?!\w)", m.group(0)) and not that:
+            continue
+        if (_DUA_RX.search(k) or _DUA_HAI.search(k[m.end():m.end() + 60])) and not that:
+            continue
+        return True
+    return False
+
+
+def _tin_hieu_en(k: str) -> dict:
+    nghi = _cac_vi_tri(_NGHI_DEN, k)
+    giai_tri = bool(_GIAI_TRI.search(k))
+
+    def _hd(rx):
+        return [] if giai_tri else [p for p in _cac_vi_tri(rx, k) if any(0 <= p - q <= 6 for q in nghi)]
+    return {"thuoc": _cac_vi_tri(_PT_THUOC, k), "vat": _cac_vi_tri(_PT_VAT, k), "cao": _cac_vi_tri(_PT_CAO, k) + _cac_vi_tri(_PT_RAY, k),
+            "nuoc": _cac_vi_tri(_PT_NUOC, k), "hd_cao": _hd(_HD_CAO), "hd_nuoc": _hd(_HD_NUOC),
+            "manh": bool(_Y_MANH.search(k)), "day": _cac_vi_tri(_C_DAY, k), "het": _cac_vi_tri(_C_HET, k),
+            "end": _cac_vi_tri(_C_END, k), "mat": _cac_vi_tri(_C_MAT, k),
+            "yeu": [] if giai_tri else _cac_vi_tri(_Y_YEU, k), "goi": [] if giai_tri else _cac_vi_tri(_Y_GOI, k), "vo_dung": bool(_VO_DUNG.search(k)),
+            "tu_biet": 0 if _TU_BIET_THUONG.search(k) else sum(bool(r.search(k)) for r in _TU_BIET), "hai": _hai_nguoi_khac(k)}
+
+
+def _khung_hoang_y(k: str) -> bool:
+    t = _tin_hieu_en(k)
+    if t["manh"] or t["hai"]:
+        return True
+    thuoc = [] if _nham(k) else t["thuoc"]                 # uống nhầm → cấp cứu (trừ khi có ý chấm dứt mạnh / vô dụng)
+    vat, moi = thuoc + t["vat"], thuoc + t["vat"] + t["cao"] + t["nuoc"]
+    if _gan(t["day"], vat) or _gan(t["het"], thuoc) or _gan(t["end"], moi) or _gan(t["mat"], moi):
+        return True
+    if _gan(t["hd_cao"], t["cao"], 10) or _gan(t["hd_nuoc"], t["nuoc"] + t["cao"], 10):
+        return True
+    if _gan(t["goi"], t["cao"] + t["nuoc"] + vat, 8):   # "the train tracks have been calling me"
+        return True
+    yeu = [p for p in t["yeu"] if _gan([p], t["cao"] + t["nuoc"] + vat, 8)]
+    cuoi = t["day"] + t["het"] + t["end"] + t["mat"]
+    if yeu and (t["vo_dung"] or cuoi or t["tu_biet"]):
+        return True
+    if t["vo_dung"] and (cuoi or t["hd_cao"] or t["hd_nuoc"]):
+        return True
+    return t["tu_biet"] >= 2 or bool(t["tu_biet"] and (t["vo_dung"] or vat or cuoi))
+
+
+def _mem_y(k: str) -> bool:
+    """Một tín hiệu yếu chưa đủ luật khủng hoảng: tự coi mình vô dụng / gánh nặng / hết hy vọng, một hành vi từ biệt, "trông
+    thật bình yên" sát một phương tiện, muốn biến mất mãi, hành động nhảy / bước khi đang nghĩ tới (chưa nói nơi)."""
+    t = _tin_hieu_en(k)
+    # "bình yên" sát phương tiện chỉ tính khi kèm dấu hiệu lặp lại / gần đây ("lately the river looks peaceful") —
+    # "the river near my house looks peaceful, good feng shui?" là câu thường
+    yeu = [p for p in t["yeu"] if _gan([p], t["cao"] + t["nuoc"] + t["thuoc"] + t["vat"], 8)] if _GAN_DAY.search(k) else []
+    return bool(t["vo_dung"] or t["tu_biet"] or yeu or t["mat"] or (t["hd_cao"] and not _GIAI_TRI.search(k)))
+
+
+# Uống nhầm / quá liều NGOÀI Ý MUỐN (hai lần, quá nhiều, N viên trong vài giờ) + "nhầm" hoặc triệu chứng → cấp cứu.
+_THUOC_UONG = (r"(?:(?:my |his |her |the |some |a few |\d+ |extra |more )?(?:\w+ )?(?:pills?|tablets?|capsules?|meds|medications?|"
+               r"medicines?|doses?)|" + _THUOC_TEN + r")")
+_QUA_LIEU = _rx_en(
+    r"(?:took|taken|take|taking|swallowed|had|gave|given|double dosed|doubled up on) (?:\w+ ){0,4}?" + _THUOC_UONG
+    + r"(?: \w+){0,5}? (?:twice|two times|again|double|a second time|two doses)",
+    r"(?:took|taken|swallowed|had|gave|given) (?:\w+ ){0,3}?(?:too many|too much|a double dose|two doses|extra|more than (?:the |my )?"
+    r"(?:dose|recommended|limit|prescribed))(?: \w+){0,3}? " + _THUOC_UONG,
+    r"(?:took|taken|swallowed|had) (?:\w+ ){0,3}?(?:\d+|twelve|ten|eight|fifteen|twenty) (?:\w+ )?" + _THUOC_UONG
+    + r"(?: \w+){0,6}? (?:in|within|over) (?:a few|few|\d+|two|three|four|a couple of) hours")
+_TRIEU_CHUNG = _rx_en(r"faint\w*|dizzy|dizziness|light ?headed|vomit\w*|throwing up|threw up|nause\w*|sick|unwell|drowsy|sleepy|confused|"
+                      r"numb|shaking|shaky|sweating|heart (?:is )?(?:racing|pounding)|palpitations?|stomach (?:pain|ache)|weird|strange|"
+                      r"blurry|collaps\w*|can t stay awake")
+
+
+def _qua_lieu_nham(k: str) -> bool:
+    return bool(_QUA_LIEU.search(k) and (_nham(k) or _TRIEU_CHUNG.search(k)))
+
+
 def _khung_hoang_anh(kd: str) -> bool:
     k = _sua_en(kd)
     for i, rx in enumerate(KHUNG_HOANG_ANH):
         if any(rx.search(t) for t in (kd, k)):
+            # nhảy bungee / lặn vách đá / nhảy cầu ở bể bơi: bỏ cụm "jump off …" rồi xét lại
+            if i == 0 and _NHAY_GT.search(k) and not any(rx.search(_NHAY.sub(" ", t)) for t in (kd, k)):
+                continue
             # GĐ 3d: quá liều NGOÀI Ý MUỐN ("took too many pills by accident") → cấp cứu, trừ khi câu có dấu hiệu khủng hoảng khác
-            if i == 3 and _NHAM.search(k) and not any(r.search(k) for j, r in enumerate(KHUNG_HOANG_ANH) if j != 3):
+            if i == 3 and _nham(k) and not any(r.search(k) for j, r in enumerate(KHUNG_HOANG_ANH) if j != 3):
                 continue
             return True
     if any(a.search(k) and b.search(k) for a, b in _KHUNG_HOANG_KEP + _KHUNG_HOANG_KEP_3D):
@@ -778,7 +1002,7 @@ def _khung_hoang_anh(kd: str) -> bool:
         return True
     if (_DOA_GIET.search(k) or _DOA_GIET_2.search(k)) and (not _DUA_RX.search(k) or _THAT.search(k)):
         return True
-    return False
+    return _khung_hoang_y(k)            # GĐ 3d vòng 4: nhận theo nhóm tín hiệu
 
 
 # --- từ chối theo NGHĨA (đồng xuất hiện trong câu hỏi), bổ sung cho các mẫu cụm ở trên
@@ -847,13 +1071,11 @@ _MO_HOI = _rx_en(r"should|go ahead|go for|refuse|skip|delay|postpone|cancel|safe
                  r"or not|anot|need to|do i need|necessary|"
                  r"good (?:day|date|month|time|year) (?:for|to)|best (?:day|date|month|time) (?:for|to)|according to|based on|chart|bazi")
 _MO_KHONG = _rx_en(r"recovery celebration|business operations?|military operation|company operations?")
-_THAI = _rx_en(r"conceive\w*|conception|get(?:ting)? pregnant|fall pregnant|become pregnant|be pregnant|"
-               r"(?:baby|unborn|fetus|foetus|pregnancy|bump) .{0,20}(?:is|be|will be|going to be) (?:a )?(?:boy|girl)|"
+_THAI = _rx_en(r"(?:baby|unborn|fetus|foetus|pregnancy|bump) .{0,20}(?:is|be|will be|going to be) (?:a )?(?:boy|girl)|"
                r"(?:is|will) (?:it|she|he) be a (?:boy|girl)|(?:is|will) (?:my |our |the )?(?:unborn )?(?:baby|fetus|foetus|bump) (?:be )?(?:a )?(?:boy|girl)|"
                r"(?:am i|if i m|if i am|whether i m|whether i am|is she|if she is|whether she is) pregnant|pregnancy test|"
                r"baby .{0,15}(?:be |born )+(?:healthy|sick|ok|okay|normal|disabled|fine)|"
-               r"miscarr\w*|stillbirth|(?:can|could) (?:i|we|she) (?:ever )?(?:have|get) (?:kids|kid|children|a child|a baby|baby)(?! (?:this|next|in|now|soon))|"
-               r"(?:if|whether) (?:i|we|she) (?:can|could|will|am able to|are able to) (?:ever )?(?:have|get) (?:kids|kid|children|a child|a baby|baby)")
+               r"miscarr\w*|stillbirth")
 _THAI_HOI = _rx_en(r"will|can|could|when|which|chance|able|going to|gonna|ever|or not|predict|show|is|am i")
 _NHAN_SU_RX = _rx_en(r"candidates?|applicants?|interns?|staff|employees?|workers?|assistants?|accountants?|nanny|nannies|maids?|"
                      r"domestic helpers?|new hires?|hires|recruits?|team members?|job seekers?|cvs?|resumes?|interviewees?|suppliers?|"
@@ -933,13 +1155,21 @@ _NGUOI_NGOAI = _rx_en(r"(?:co ?workers?|colleagues?|neighbou?rs?|classmates?|roo
                       r"employee|employer|teacher|student|cousin s (?:husband|wife))")
 _PHAN_XET = _rx_en(r"cheat\w*|affair|lying|lies|lie to|liar|steal\w*|stole|betray\w*|divorc\w*|still (?:love|loves|like|likes|think|thinks)"
                    r"(?: about)? me|gay|pregnant|hiding (?:something|money)|in debt|faithful|loyal|seeing someone|sleeping with")
-_LA_SO_NGUOI = _rx_en(r"(?:his|her|their|\w s) (?:bazi|chart|charts|day master|birth ?date|birthday|elements?|pillars?|horoscope)|"
+_LA_SO_NGUOI = _rx_en(r"(?:his|her|their|\w+ s) (?:bazi|chart|charts|day master|birth ?date|birthday|elements?|pillars?|horoscope)|"
                       r"(?!i\b)\w+ (?:was|were|is) born|born (?:on|in) .{0,25}(?:tell|is|will|does)|"
                       r"(?:read|check|look at|analy[sz]e) (?:his|her|their)")
 
 
+# Dùng lá số của người khác để HẠI họ ("find his weak year so I can get him sacked") — từ chối (GĐ 3d vòng 4).
+_HAI_QUA_LA_SO = _rx_en(r"(?:get|got|have) (?:him|her|them) (?:sacked|fired|demoted|dumped|kicked out|in trouble)|"
+                        r"(?:bring|take) (?:him|her|them) down|(?:ruin|destroy|sabotage) (?:him|her|them|his|her|their)|"
+                        r"(?:revenge|payback) on (?:him|her|them)|weak (?:year|point|spot|time|month)s? (?:to|so)")
+
+
 def _doc_nguoi_khac(k: str) -> bool:
     if _LEN.search(k) and (_LA_SO_NGUOI.search(k) or _NGUOI_NGOAI.search(k)):
+        return True
+    if _LA_SO_NGUOI.search(k) and _HAI_QUA_LA_SO.search(k):
         return True
     return bool(_NGUOI_NGOAI.search(k) and _PHAN_XET.search(k) and _LA_SO_NGUOI.search(k))
 
@@ -981,6 +1211,8 @@ def _cap_cuu_anh(kd: str) -> bool:
     k = _sua_en(kd)
     if _CAP_CUU_ANH.search(k) or _CAP_CUU_ANH.search(kd):
         return True
+    if _qua_lieu_nham(k):                # GĐ 3d vòng 4: uống nhầm / quá liều ngoài ý muốn
+        return True
     return bool(_TAI_NAN_NGAY.search(k) and _TAI_NAN_NANG.search(k) and not _DA_QUA.search(k))
 
 
@@ -996,6 +1228,26 @@ def _tu_choi_anh(kd: str) -> str | None:
     if _CHON_MEM.search(k) and re.search(r"(?<!\w)" + _NHAN_SU + r"(?!\w)", k) and re.search(r"(?<!\w)" + _LA_SO_HO + r"(?!\w)", k):
         return "ngoai_pham_vi"
     return _tu_choi_nghia(k)
+
+
+def ho_tro_mem_en(raw: str) -> bool:
+    """Tầng hỗ trợ MỀM (câu tiếng Anh): một tín hiệu buồn yếu (`_mem_y`) mà câu KHÔNG phải khủng hoảng / cấp cứu → câu hỏi
+    vẫn được trả lời, kèm đoạn hỗ trợ ngắn (`loi_ho_tro_mem`). Câu tiếng Việt → False (bản Việt không đổi)."""
+    if not _la_en(raw):
+        return False
+    kd = _hai_ban(raw)[1]
+    if _khung_hoang_anh(kd) or _cap_cuu_anh(kd):
+        return False
+    return _mem_y(_sua_en(kd))
+
+
+def loi_ho_tro_mem() -> str:
+    """Đoạn hỗ trợ mềm theo ngôn ngữ lượt gọi (mẫu câu `an_toan_mem.ho_tro`, kb/data/en/loi/an_toan_mem.json)."""
+    from app.kb.loi import L  # noqa: PLC0415
+    return L("an_toan_mem.ho_tro", (
+        "Nghe như dạo này bạn đang mang một điều khá nặng. Bạn không phải gỡ một mình: nói với một người bạn tin, hoặc gọi "
+        "đường dây hỗ trợ miễn phí, bảo mật. Nếu có lúc bạn nghĩ tới chuyện làm hại bản thân, hãy gọi 115 hoặc tới cơ sở y tế "
+        "gần nhất."))
 
 
 def khung_hoang_en(raw: str) -> bool:

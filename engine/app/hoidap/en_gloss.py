@@ -109,8 +109,16 @@ CHU_DE_EN: list[tuple[str, str, str]] = [
                              r"education|learning|ielts|toefl|sat|gaokao|scholarship|subjects?|(a|an|online|short|the) course|courses|my major|a major|bar exam|"
                              r"thesis|graduat\w*|academic|retake|a levels?|o levels?|psle|test results?|driving test|pass (my|the|a|this) (\w+ )?test|"
                              r"certificat\w*|qualification\w*"),
+    # "năm nào nên sinh con" → nhánh sinh_con_tuoi của bản Việt (kèm câu ranh giới bác sĩ + tục so tuổi con)
+    ("sinh_con", "nam nao nen sinh con", r"(which|what|good|best|right|lucky|auspicious) (year|time|month)s? .{0,25}(have|having|to have|for) (a |our |my )?"
+                                         r"(baby|kid|child|second child)|should (i|we) have (a |another |our )?(baby|kid|child)|"
+                                         r"(baby|kid|child) in (19|20)\d\d|(year|zodiac|animal) (of|for) (the |our |my )?(baby|kid|child)|"
+                                         # đang mong con / hỏi bao giờ có thai: lời ranh giới bác sĩ, không đọc mức gia đình như lời đoán
+                                         r"(get|getting|fall|be|become) (preg\w*|pregnent)|conceiv\w*|\bttc\b|trying (for a baby|to have)|"
+                                         r"(can|could) (get|have) (a )?baby|try\w* .{0,15}(years?|yrs?|months?)"),
     ("con_cai", "con cai", r"have (a )?(baby|kid|children|child)|start a family|try(ing)? for a baby|(2nd|second|third|another|"
-                           r"more) (kid|child|baby)|kid when|children (luck|star|palace)|become a (mother|father|parent)"),
+                           r"more) (kid|child|baby)|kid when|children (luck|star|palace)|become a (mother|father|parent)|"
+                           r"have (any )?kid"),
     ("tinh_cam", "tinh duyen", r"love(?! life)|romance|romantic|dating|first date|a date|go on dates?|date (him|her|someone)|marriage|commitment|marry|married|wedding|divorce\w*|breakup|"
                                r"break up|broke up|ex|cheat\w*|affair|crush|soulmate|single|engaged|engagement|fianc\w*|"
                                r"propose|pop the question|peach blossom|move in together|renew (our )?vows|settle down|"
@@ -277,8 +285,8 @@ def _moc(t: str) -> list[str]:
     for ten, goc in _CON_GIAP.items():
         if re.search(rf"\byear of the (?:\w+ )?{ten}\b|\b(?:wood |fire |earth |metal |water )?{ten} year\b", t) and not re.search(
                 rf"\b(born|i am|my|a|an) (?:in the )?(?:year of the )?(?:\w+ )?{ten}\b|\b{ten} year pillar\b", t):
-            y = goc + 12 * ((hn.year - 1 - goc) // 12 + 1)           # lần gần nhất từ năm ngoái trở đi
-            ra.append(f"nam {y if y >= hn.year - 1 else y + 12}")
+            y = goc + 12 * ((hn.year - 1 - goc) // 12)               # năm con giáp gần nhất ≤ năm ngoái …
+            ra.append(f"nam {y if y >= hn.year - 1 else y + 12}")   # … → lần gần nhất từ năm ngoái trở đi
     if re.search(r"\b(after|post|from|since|right after|wait until after|until after) (the )?(chinese|lunar) new year\b|"
                  r"\bnext (chinese|lunar) new year\b", t):
         from app.calc import lunar  # noqa: PLC0415
