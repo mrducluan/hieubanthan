@@ -192,3 +192,36 @@ test("Dữ liệu của tôi: liệt kê + xoá người thân; thu hồi đồn
   await page.goto("/chinh-sach-rieng-tu");
   await expect(page.locator("main")).toContainText("Lá số người thân trên máy");
 });
+
+test("hỏi đáp Tử vi: đang xem lá số người thân → gửi cờ nguoi_than (engine đáp ngôi thứ ba); lá số mình thì không gửi", async ({ page }) => {
+  const gui: Record<string, unknown>[] = [];
+  await page.route("**/api/tuvi/hoi", (r) => {
+    gui.push(r.request().postDataJSON() as Record<string, unknown>);
+    return r.fulfill({ json: { cau_tra_loi: "Cung Mệnh của lá số này có Thiên Phủ.", che_do: "template" } });
+  });
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toContainText("Thổ Ngũ Cục");
+  const hoi = async (cau: string) => {
+    await page.getByRole("textbox", { name: /[Cc]âu hỏi/ }).first().fill(cau);
+    await page.getByRole("button", { name: "Gửi câu hỏi" }).click();
+    await expect.poll(() => gui.length).toBeGreaterThan(0);
+  };
+  await hoi("Cung Mệnh của tôi nói gì?");
+  expect(gui[0]).not.toHaveProperty("nguoi_than");
+  gui.length = 0;
+  await napKho(page, [ME]);
+  await page.getByTestId("nguoi-than-mo").click();
+  await page.getByTestId("nguoi-than-xem").first().click();
+  await expect(page.getByTestId("nguoi-than-dang-xem")).toHaveText("Mẹ");
+  await hoi("Cung Mệnh nói gì về tính cách?");
+  expect(gui[0]).toMatchObject({ nguoi_than: true });
+  expect(JSON.stringify(gui[0])).toContain("1965-08-12");
+});
+
+test("route /api/tuvi/hoi nhận nguoi_than (boolean), từ chối kiểu khác", async ({ request }) => {
+  const ok = await request.post("/api/tuvi/hoi", { data: { cau_hoi: "Cung Mệnh là gì?", nguoi_than: true } });
+  expect(ok.status()).not.toBe(422);
+  const sai = await request.post("/api/tuvi/hoi", { data: { cau_hoi: "Cung Mệnh là gì?", nguoi_than: "co" } });
+  expect(sai.status()).toBe(422);
+});

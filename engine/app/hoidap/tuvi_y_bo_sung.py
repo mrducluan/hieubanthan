@@ -121,6 +121,18 @@ _HOI_DAI_HAN = [r"dai han", r"muoi nam", r"10 nam", r"giai doan"]
 _HOI_NAM = [r"(?<!\w)(?<!muoi )(?<!10 )nam (nay|sau|toi|20\d\d)", r"luu nien", r"tieu han"]
 
 
+_TIEN = re.compile(r"(?i)tiền|tài chính|thu nhập|giàu|của cải|tích (?:luỹ|lũy)|tiêu|kiếm|tài lộc|(?<!\w)lộc|làm ăn|kinh doanh|"
+                   r"đầu tư|(?<!\w)nợ|lương|chi tiêu|vốn|buôn bán|tài sản|tiết kiệm")
+
+
+def _noi_tien(m: dict) -> bool:
+    """Lời của ý (bản Việt — một nguồn để bản dịch cùng quyết định) có nói về tiền bạc không."""
+    from app import ngon_ngu as _nn  # noqa: PLC0415
+    with _nn.dung(_nn.MAC_DINH):
+        g = kyb.lay(m["id"]) or m
+    return bool(_TIEN.search(f"{g.get('loi_doi_thuong', '')} {g.get('viec_nen_lam', '')}"))
+
+
 def _neu_cung(pl: dict) -> bool:
     """Câu hỏi nêu đích danh tên cung (không phải cung mặc định của bộ phân loại)."""
     from app.hoidap import tuvi  # noqa: PLC0415 — tránh vòng import
@@ -169,6 +181,8 @@ def chon(pl: dict, nc: dict) -> list[dict]:
             return False
         if chi_dai_han and "dai_han" not in _ds(m["dieu_kien"].get("lop")):
             return False
+        if not han and cung_hoi == {"Tài Bạch"} and not _noi_tien(m):
+            return False                         # câu tiền bạc: ý nói về thăng tiến / nghề (cùng nhóm luật) là lạc mảng
         if chat:                                 # góc nhìn khác: luật phải nêu đích danh cung đang hỏi
             return bool(_cung_neu(m) & cung_hoi and noi & cung_hoi)
         if han:
