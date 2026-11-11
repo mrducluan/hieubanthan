@@ -40,7 +40,7 @@
  "hoi.tv.y_hoa.quyen": "more initiative and responsibility",
  "hoi.tv.y_hoa.khoa": "more credibility and clarity",
  "hoi.tv.y_hoa.ky": "more friction that needs care",
- "hoi.tv.ban_bh": "You {bh}.",
+ "hoi.tv.ban_bh": "Typical of your main star: someone who {bh}.",
  "hoi.tv.nhom_cach": "The kind of work and pace of life that suits you: {nc}",
  "hoi.tv.mo_di": "This quality tends to fade whenever {ds}.",
  "hoi.tv.vo.menh": "You are not easily boxed in: your personality shifts with where you live and who you meet.",
@@ -235,7 +235,7 @@
  "hoi.tv.yd.cach_ghep.tai_van": "The Southern school speaks about your base of savings (Tian Fu as a store, the Property Palace); the flying-star layer shows where money comes in and goes out easily. Together they become tendencies and habits worth keeping; no money figures, no financial products.",
  "hoi.tv.yd.cach_ghep.hoc_hanh_con": "Only about how a parent can be there for the child and which months to go easier on studies; no predicting grades, no choosing a school or career for the child. For a closer look, use the child's own chart.",
  "hoi.tv.yd.cach_ghep.phan_van": "Each option is linked to a palace that represents it; the flights of each palace are shown as an angle to weigh, with a question to reflect on. We do not say which option is right or tell you to drop one.",
- "hoi.tv.yd.cach_ghep.ba_thang_toi": "Uses the three-month rhythm: each month gets a level — Favourable, Neutral or Take care — with the reason, what to do and a question to reflect on. Southern-school moving stars describe the background; no weighting, no naming the month something will happen.",
+ "hoi.tv.yd.cach_ghep.ba_thang_toi": "Uses the three-month rhythm: each month gets a level — Favourable, Steady or Go carefully — with the reason, what to do and a question to reflect on. Southern-school moving stars describe the background; no weighting, no naming the month something will happen.",
  "hoi.tv.yd.cach_ghep.chon_thoi_diem": "Suggests the favourable months by the rhythm of the transformations and points to the Good-day finder for a specific day. Timing is only one factor; your preparation matters more.",
  "hoi.tv.yd.cach_ghep.tong_quan_nam": "Read in the order 10-year period > annual chart > minor yearly limit; each area (work, money, love, family, travel, friends) gets its theme and what to do. The Health Palace only speaks about daily rhythm; no predicting events.",
  "hoi.tv.yd.cach_ghep.hieu_ban_than": "Brings together the main stars, their Southern-school brightness and the transformation flights into a portrait with strengths, things to watch and a question to reflect on; the 10-year periods are read as the theme of each stage of life, not a fixed timetable.",
@@ -262,6 +262,6 @@
  "hoi.tv.sc.la_so.nt": "In this chart, {sao} sits in the {cung}",
  "hoi.tv.cth.nt": "What is being asked about belongs to the area of {mang} ({cung}); in the birth chart this palace holds: {ct}.",
  "hoi.tv.vo.menh.nt": "This person is not easily boxed in: their personality shifts with where they live and who they meet.",
- "hoi.tv.ban_bh.nt": "This person: {bh}.",
+ "hoi.tv.ban_bh.nt": "Typical of this chart's main star: someone who {bh}.",
  "hoi.tv.nt.dau": "This is the chart of the family member you are viewing: wherever the reading below says “you” or “your”, it means that person, not you."
 }

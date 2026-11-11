@@ -9,7 +9,7 @@ export type TenHien = Readonly<Record<string, Readonly<Record<string, string>>>>
  *  mã kể cả mã không có trong phản hồi. Cùng tên với engine `kb/data/ten_en.json` (pinyin, không dịch nghĩa). */
 const DU_PHONG_EN: TenHien = {
   can: { "Giáp": "Jia", "Ất": "Yi", "Bính": "Bing", "Đinh": "Ding", "Mậu": "Wu", "Kỷ": "Ji", "Canh": "Geng", "Tân": "Xin", "Nhâm": "Ren", "Quý": "Gui" },
-  chi: { "Tý": "Zi", "Sửu": "Chou", "Dần": "Yin", "Mão": "Mao", "Thìn": "Chen", "Tỵ": "Si", "Ngọ": "Wu", "Mùi": "Wei", "Thân": "Shen", "Dậu": "You", "Tuất": "Xu", "Hợi": "Hai" },
+  chi: { "Tý": "Zi", "Sửu": "Chou", "Dần": "Yin", "Mão": "Mao", "Thìn": "Chen", "Tỵ": "Si", "Ngọ": "Wu", "Mùi": "Wei", "Thân": "Shen", "Dậu": "You (Rooster)", "Tuất": "Xu", "Hợi": "Hai" },
   hanh: { "Kim": "Metal", "Thủy": "Water", "Mộc": "Wood", "Hỏa": "Fire", "Thổ": "Earth" },
   am_duong: { "Âm": "Yin", "Dương": "Yang" },
 };
