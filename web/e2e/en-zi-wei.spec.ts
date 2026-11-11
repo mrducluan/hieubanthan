@@ -243,6 +243,57 @@ test.describe("/en/zi-wei-dou-shu trên trình duyệt", () => {
     }
   });
 
+  test("xem lá số 2 người: người kia sinh ở nước ngoài → chọn nước, thành phố; gửi mã thành phố cho engine", async ({ page }) => {
+    test.setTimeout(120_000);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/en/zi-wei-dou-shu");
+    await page.fill("#ho-ten", TEN);
+    await page.getByLabel("Day", { exact: true }).fill("15");
+    await page.getByLabel("Month", { exact: true }).fill("05");
+    await page.getByLabel("Year", { exact: true }).fill("1990");
+    await page.fill("#gio-sinh", "08:30");
+    await page.selectOption("#gioi-tinh", "nam");
+    await expect(page.locator("#noi-sinh")).toBeEnabled({ timeout: 20_000 });
+    await page.selectOption("#noi-sinh", "ha-noi");
+    await page.getByRole("button", { name: "Agree and see my result" }).click();
+    await expect(page.getByTestId("la-so-tu-vi").locator("svg").first()).toBeVisible({ timeout: 40_000 });
+    // Can chi của cung viết đủ (chữ đầu Jia/Ji, Geng/Gui trùng nhau), nhãn lớp năm là "Year …"
+    const chuLs = (await page.getByTestId("la-so-tu-vi").locator("svg").first().textContent()) ?? "";
+    expect(chuLs).toMatch(/Geng Chen/);
+    expect(chuLs).not.toMatch(/\b[GJ]\.(Zi|Chou|Yin|Mao|Chen|Si|Wu|Wei|Shen|You|Xu|Hai)/);
+    expect(chuLs).not.toMatch(/\bYr /);
+
+    const khoi = page.getByTestId("hop-tham");
+    await khoi.getByRole("button").first().click();
+    const f = page.getByTestId("hop-tham-form");
+    await expect(f).toBeVisible();
+    await f.getByLabel("Their birth day").fill("20");
+    await f.getByLabel("Their birth month").fill("11");
+    await f.getByLabel("Their birth year").fill("1992");
+    await page.fill("#ht-gio", "14:15");
+    await page.selectOption("#ht-gioi-tinh", "nu");
+    await expect(page.locator("#ht-noi-sinh")).toBeEnabled({ timeout: 20_000 });
+    await page.selectOption("#ht-noi-sinh", "nuoc_ngoai");
+    await expect(page.getByTestId("ht-nuoc-ngoai")).toBeVisible();
+    await expect(page.locator("#ht-nuoc")).toBeEnabled({ timeout: 20_000 });
+    await page.selectOption("#ht-nuoc", "us");
+    await page.selectOption("#ht-thanh-pho", "us-new_york");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+    expect((await f.innerText()).split("\n").filter((l) => VIET.test(l))).toEqual([]);
+    const [yc] = await Promise.all([
+      page.waitForRequest((r) => r.method() === "POST" && r.url().includes("/api/tuvi/hop-tham")),
+      f.locator('button[type="submit"]').click(),
+    ]);
+    expect(JSON.stringify(yc.postDataJSON())).toContain('"mui_gio":"us-new_york"');
+    const kq = page.getByTestId("hop-tham-ket-qua");
+    await expect(kq).toBeVisible({ timeout: 40_000 });
+    expect((await kq.innerText()).split("\n").filter((l) => VIET.test(l))).toEqual([]);
+    for (const w of [390, 1280]) {
+      await page.setViewportSize({ width: w, height: 900 });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth), `${w}px`).toBeLessThanOrEqual(0);
+    }
+  });
+
   test("điện thoại 390px: không cuộn ngang", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/en/zi-wei-dou-shu");

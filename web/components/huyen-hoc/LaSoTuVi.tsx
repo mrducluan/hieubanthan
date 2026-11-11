@@ -295,8 +295,8 @@ export const LaSoTuVi = forwardRef<SVGSVGElement, Props>(function LaSoTuVi(
               </g>
             )}
             {/* Đầu ô: can chi · tên cung · tuổi đại hạn */}
-            <text x={16} y={30} fontSize={13} fill="var(--ls-mo)">{/* Bản Anh: 3 chữ đầu của can (Jia/Ji, Geng/Gui không trùng) + chi gọn ("You", bỏ chú giải trong ngoặc). */}
-              {t.en ? `${t.ten("can", c.can).slice(0, 3)}.${tenGon(t.ten("chi", c.chi))}` : `${c.can.charAt(0)}.${c.chi}`}</text>
+            <text x={16} y={30} fontSize={13} fill="var(--ls-mo)">{/* Bản Anh: can viết đủ (chữ đầu Jia/Ji, Geng/Gui trùng nhau) + chi gọn ("You", bỏ chú giải trong ngoặc). */}
+              {t.en ? `${t.ten("can", c.can)} ${tenGon(t.ten("chi", c.chi))}` : `${c.can.charAt(0)}.${c.chi}`}</text>
             <text x={W / 2} y={30} textAnchor="middle" fontSize={c.la_than ? 13.5 : 15} fontWeight={700} letterSpacing="0.04em"
               fill={c.la_menh ? "var(--ls-nhan)" : "var(--ls-chu)"} {...(t.en ? vuaO(nhan, c.la_than ? 13.5 : 15, 100) : {})}>{nhan}</text>
             <text x={W - 16} y={30} textAnchor="end" fontSize={15} fontWeight={600} fill="var(--ls-chu)">{c.dai_han.tu_tuoi}</text>
