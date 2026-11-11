@@ -2,13 +2,16 @@
 // bằng chữ: ảnh bìa — Chủ biên gắn khi duyệt; chữ ký chuyên gia — người thật ký). Chạy: npm test.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { kiemDinhBai } from "../kiem-dinh/kiem-dinh.ts";
 import { noiDungLexical, type BaiKhoiTao } from "./bai.ts";
 
 const THU_MUC = new URL(".", import.meta.url);
-const ds: BaiKhoiTao[] = readdirSync(THU_MUC).filter((f) => f.endsWith(".json"))
-  .map((f) => JSON.parse(readFileSync(new URL(f, THU_MUC), "utf8")) as BaiKhoiTao);
+const docThuMuc = (u: URL): BaiKhoiTao[] => readdirSync(u).filter((f) => f.endsWith(".json"))
+  .map((f) => JSON.parse(readFileSync(new URL(f, u), "utf8")) as BaiKhoiTao);
+const ds: BaiKhoiTao[] = docThuMuc(THU_MUC);
+// KW-6T tuần 1–2 (thư mục con kw6t/): cùng bộ kiểm định, cùng khuôn dữ liệu.
+const dsKw6t: BaiKhoiTao[] = docThuMuc(new URL("kw6t/", THU_MUC));
 
 // Chỉ hai mục này được phép còn cảnh báo: cần người thật (ảnh bìa, chuyên gia ký).
 const DUOC_CANH_BAO = new Set(["anh_bia", "chuyen_gia"]);
@@ -17,7 +20,7 @@ test("có bài khởi tạo cho đủ ba mảng chưa có bài", () => {
   for (const m of ["kinh_dich", "bat_tu", "phong_thuy"]) assert.ok(ds.some((b) => b.mang === m), `thiếu bài mảng ${m}`);
 });
 
-for (const b of ds) {
+for (const b of [...ds, ...dsKw6t]) {
   test(`kiểm định CMS: ${b.slug}`, () => {
     const kq = kiemDinhBai({ ...b, noi_dung: noiDungLexical(b.html), ky_ten: "ban_bien_tap" });
     const loi = kq.muc.filter((m) => m.muc_do === "loi" || m.chan);
@@ -37,3 +40,19 @@ for (const b of ds) {
     for (const m of b.html.matchAll(/href="([^"]+)"/g)) assert.match(m[1]!, /^\/[a-z0-9\-/#?=&.]*$/, m[1]);
   });
 }
+
+test("KW-6T: đủ 8 bài tuần 1–2, slug không trùng lô cũ, mỗi bài 4 ảnh có tệp + alt", () => {
+  assert.equal(dsKw6t.length, 8);
+  const cu = new Set(ds.map((b) => b.slug));
+  for (const b of dsKw6t) {
+    assert.ok(!cu.has(b.slug), b.slug);
+    assert.equal(b.anh?.length, 4, b.slug);
+    assert.equal(b.anh!.filter((a) => a.vi_tri === "bia").length, 1, b.slug);
+    for (const a of b.anh!) {
+      assert.ok(existsSync(new URL(`kw6t/anh/${a.ten_tep}`, THU_MUC)), a.ten_tep);
+      assert.ok(a.alt.length >= 40 && a.alt.length <= 160, `${a.ten_tep}: alt ${a.alt.length} ký tự`);
+      // Ảnh trong bài phải có chỗ chèn: một H2/H3 chứa đúng chữ vi_tri.
+      if (a.vi_tri !== "bia") assert.ok(new RegExp(`<h[23]>[^<]*${a.vi_tri.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`).test(b.html), `${a.ten_tep}: không thấy H2 "${a.vi_tri}"`);
+    }
+  }
+});

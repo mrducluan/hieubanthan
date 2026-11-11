@@ -265,3 +265,16 @@ test("ảnh NotFair chưa nhập (kho ảnh lỗi lúc nhập) → lỗi chặn 
   assert.ok(kiemDinhBai(co).loi_chan.some((m) => m.ma === "anh_chua_nhap"));
   assert.ok(!kiemDinhBai(b).loi_chan.some((m) => m.ma === "anh_chua_nhap"));
 });
+
+test("KW-6T: công cụ lịch & tuổi, năm, Tarot, Nhân tướng tính là liên kết công cụ", () => {
+  for (const url of ["/tuoi-xong-dat/2027", "/xem-tuoi-lam-nha/2027", "/xem-sao-han/2027", "/nam/2027", "/nam/2027#theo-tuoi",
+    "/tarot", "/nhan-tuong", "/xem-ngay-tot", "https://hieuban.com/tuoi-xong-dat"]) {
+    const b = baiTot();
+    b.noi_dung = goc(doan(chu(tu(80))), doan(lien(url, "công cụ"), lien("/blog/bai-khac", "bài khác")));
+    const m = kiemDinhBai(b).muc.find((x) => x.ma === "cta_cong_cu");
+    assert.equal(m?.muc_do, "dat", url);
+  }
+  const b = baiTot();
+  b.noi_dung = goc(doan(chu(tu(80))), doan(lien("/blog/bai-khac", "bài khác"), lien("/namdinh", "không phải công cụ")));
+  assert.equal(kiemDinhBai(b).muc.find((x) => x.ma === "cta_cong_cu")?.muc_do, "canh_bao");
+});

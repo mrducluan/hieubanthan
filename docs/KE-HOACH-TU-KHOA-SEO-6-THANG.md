@@ -184,3 +184,21 @@ Tuần 9–26: mỗi tuần cập nhật một bài (liên kết sang bài mới
 - Nối Search Console + GA4 của hieuban.com vào NotFair, hoặc gửi CSV "Truy vấn" + "Trang" 3 tháng → em thay cột ước lượng bằng số thật.
 - Cho phép `trends.google.com` trong mạng môi trường (hoặc nối Keyword Planner) → em kiểm xu hướng 12 tháng của 88 từ khoá.
 - Chọn người duyệt bài theo cụm (chủ biên đọc ≥ bài P1).
+
+## Đã viết: tuần 1–2 (2026-11-11)
+
+8 bài nháp "Gửi duyệt" nạp vào CMS bằng migration `20261111_150000_kw6t_tuan_1_2` (nguồn: `cms/src/bai-khoi-tao/kw6t/*.json`,
+32 ảnh 1600×1028 có QR + đường dẫn bài, vẽ lại bằng `node cms/src/bai-khoi-tao/kw6t/ve-anh.mjs`). Mọi bài qua bộ kiểm định CMS
+(test `bai.test.ts`), số liệu 2027 lấy từ engine. Không tự xuất bản — Chủ biên đọc rồi xuất bản cả cụm trong cùng tuần
+(các bài link chéo nhau).
+
+| Tuần | Bài | Từ khoá chính |
+|---|---|---|
+| 1 | Cách chọn người xông đất đầu năm | cách chọn người xông đất |
+| 1 | Không có người hợp tuổi xông đất thì làm sao? | người hợp tuổi xông đất |
+| 1 | Tam tai là gì? Cách tự tính | tam tai là gì |
+| 1 | Kim lâu là gì? Cách tính tuổi Kim lâu | kim lâu là gì |
+| 2 | Hoang ốc là gì? | hoang ốc là gì |
+| 2 | Mượn tuổi làm nhà như thế nào? | mượn tuổi làm nhà |
+| 2 | Sao La Hầu, Kế Đô năm 2027 nên làm gì | sao la hầu |
+| 2 | Thần số học cho người mới bắt đầu | thần số học cho người mới |
