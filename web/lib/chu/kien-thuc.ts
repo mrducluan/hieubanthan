@@ -55,6 +55,7 @@ export const CHU_KIEN_THUC = {
   "tg.nguon": { nhom: T, nhan: "Trạng thái: biên soạn từ nguồn", mac_dinh: "Biên soạn từ cổ thư và tài liệu tham khảo, ghi rõ nguồn và trường phái", en: "Drawn from classical texts and reference books, with sources and schools named" },
   "tg.quy_trinh": { nhom: T, nhan: "Link quy trình biên soạn", mac_dinh: "Quy trình biên soạn", en: "How we write" },
   "tg.ban_viet": { nhom: T, nhan: "Bản Anh: bản Việt đã được chuyên gia đọc ({ten}, {ngay})", mac_dinh: "Bản tiếng Việt do {ten} thẩm định ngày {ngay}.", en: "The Vietnamese edition was reviewed by {ten} on {ngay}." },
+  "tg.ban_viet_tac_gia": { nhom: T, nhan: "Bản Anh: bản Việt do chuyên gia tự viết ({ten})", mac_dinh: "Bản tiếng Việt do {ten} tự biên soạn.", en: "The Vietnamese edition was written by {ten}." },
   "tg.vai_tro": { nhom: T, nhan: "Bản Anh: vai trò chủ biên", mac_dinh: "Người sáng lập · Chủ biên nội dung", en: "Founder · Editor-in-chief" },
   "tg.tom_tat": { nhom: T, nhan: "Bản Anh: tóm tắt chủ biên", mac_dinh: "Hơn 15 năm nghiên cứu thần số học, Tử vi, Bát tự, Phong thuỷ và Kinh Dịch.", en: "More than 15 years studying numerology, Zi Wei Dou Shu, BaZi, feng shui and the I Ching." },
   "tg.ten_chu_bien": { nhom: T, nhan: "Bản Anh: tên chủ biên viết không dấu", mac_dinh: "Đức Luân", en: "Duc Luan" },

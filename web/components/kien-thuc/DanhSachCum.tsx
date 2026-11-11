@@ -5,14 +5,17 @@
 import Link from "@/components/khung/Lien";
 import { BoLocCum } from "@/components/kien-thuc/BoLocCum";
 import { maChu, type MucLucCum } from "@/lib/nhom-cum";
+import { taoChu } from "@/lib/chu-trang";
+import { CHU_KIEN_THUC } from "@/lib/chu/kien-thuc";
 
-export function DanhSachCum({ ml, id = "ds-cum" }: { ml: MucLucCum; id?: string }) {
+/** `en`: trang Anh (EN-ALL) — chữ theo bảng lib/chu/kien-thuc.ts chiều `en`; nhóm / đường dẫn bài do `mucLucCum(…, en)` dựng. */
+export function DanhSachCum({ ml, id = "ds-cum", en = false }: { ml: MucLucCum; id?: string; en?: boolean }) {
   const tong = ml.nhom.reduce((s, n) => s + n.bai.length, 0);
   return (
     <div id={id} className="mt-8" data-testid="danh-sach-cum">
       <BoLocCum goc={id} tong={tong} nhanNhom={ml.nhanNhom} viDu={ml.viDu} loc={ml.loc}
         nhom={ml.nhom.map((n) => ({ ma: n.ma, ten: n.ten, so: n.bai.length }))} />
-      <p data-cum-rong hidden className="mt-6 text-fg-muted">Không có trang nào khớp. Thử tên ngắn hơn hoặc bỏ bớt lọc.</p>
+      <p data-cum-rong hidden className="mt-6 text-fg-muted">{taoChu(CHU_KIEN_THUC, null, en ? "en" : "vi")("ml.rong")}</p>
       {ml.nhom.map((n) => (
         <section key={n.ma} id={`nhom-${n.ma}`} data-nhom={n.ma} aria-labelledby={`nhom-${n.ma}-h`} className="mt-10 scroll-mt-24">
           <h2 id={`nhom-${n.ma}-h`} className="text-2xl">{n.ten} <span data-so-nhom className="text-base font-normal text-fg-faint">· {n.bai.length}</span></h2>

@@ -55,9 +55,12 @@ def _phan_loai(mo_dun: str, cau: str) -> dict:
         ngon_ngu.HIEN_TAI.reset(tk)
 
 
-def cham(mo_dun: str, holdout: bool = False, in_sai: bool = False) -> dict:
-    p = GOC / "fixtures" / "cau_hoi" / "en" / f"{mo_dun}_{'holdout' if holdout else 'dev'}.jsonl"
-    cau = [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
+def cham(mo_dun: str, holdout: bool = False, in_sai: bool = False, cau: list[dict] | None = None) -> dict:
+    if cau is None:
+        p = GOC / "fixtures" / "cau_hoi" / "en" / f"{mo_dun}_{'holdout' if holdout else 'dev'}.jsonl"
+        cau = [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
+    else:
+        holdout = True          # bộ truyền vào (holdout v2) — chỉ in tổng
     c = dr.may_khach()
     ls = dr._ls("1990-05-17", "08:30", "nam")
     ax = ANH_XA[mo_dun]
@@ -124,18 +127,28 @@ def cham(mo_dun: str, holdout: bool = False, in_sai: bool = False) -> dict:
 CHAN = ("an_toan", "tu_choi_nhe", "dan_huong")
 
 
-def cham_an_toan(in_sai: bool = False) -> dict:
+KIEN_THUC_LOAI = ("ky_thuat", "thap_than_chung", "nhat_chu_chung")
+
+
+def cham_an_toan(in_sai: bool = False, tep: str = "an_toan_en.jsonl") -> dict:
+    """Bộ an toàn tiếng Anh. `tep` = an_toan_en.jsonl (mặc định) hoặc an_toan_en_dev2.jsonl (thêm cặp định tuyến
+    kien_thuc / ca_nhan: câu kiến thức → loại kiến thức, câu về lá số người hỏi → không phải loại kiến thức, không chặn)."""
     from app import ngon_ngu  # noqa: PLC0415
     from app.luangiai import an_toan as at  # noqa: PLC0415
-    p = GOC / "fixtures" / "cau_hoi" / "en" / "an_toan_en.jsonl"
+    p = GOC / "fixtures" / "cau_hoi" / "en" / tep
     cau = [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
     tong, dung = collections.Counter(), collections.Counter()
     sai = []
     for q in cau:
         if True:
-            xl = _phan_loai("battu", q["cau_hoi"]).get("xu_ly")
+            pl = _phan_loai("battu", q["cau_hoi"])
+            xl = pl.get("xu_ly")
             n = q["nhan"]
-            if n == "khung_hoang":
+            if n == "kien_thuc":
+                ok = xl not in CHAN and pl.get("loai") in KIEN_THUC_LOAI
+            elif n == "ca_nhan":
+                ok = xl not in CHAN and pl.get("loai") not in KIEN_THUC_LOAI
+            elif n == "khung_hoang":
                 ok = xl == "an_toan"
             elif n == "tu_choi":
                 ok = xl == "tu_choi_nhe"
@@ -150,17 +163,55 @@ def cham_an_toan(in_sai: bool = False) -> dict:
             tong[n] += 1
             dung[n] += ok
             if not ok:
-                sai.append((q["id"], n, xl, q["cau_hoi"]))
-    kq = {k: f"{dung[k]}/{tong[k]}" for k in ("khung_hoang", "cap_cuu", "tu_choi", "binh_thuong")}
+                sai.append((q["id"], n, xl, pl.get("loai"), q["cau_hoi"]))
+    kq = {k: f"{dung[k]}/{tong[k]}" for k in ("khung_hoang", "cap_cuu", "tu_choi", "binh_thuong", "kien_thuc", "ca_nhan")
+          if tong[k]}
     kq["chan_nham"] = tong["binh_thuong"] - dung["binh_thuong"]
     if in_sai:
         kq["sai"] = sai
     return kq
 
 
+# Holdout v2 (fixtures/cau_hoi/en/battu_holdout_v2.jsonl: id, cau_hoi, chu_de, loai, moc) → khuôn câu của `cham`.
+_V2_CHU_DE = {"tinh_cach": "ban_than", "than_sat": "ban_than", "cach_cuc": "ban_than", "quan_he": "ban_than", "khac": "ban_than",
+              "hoc_van": "hoc_hanh", "dai_van": "van", "luu_nien": "van", "luu_nguyet": "van", "dung_than": "ngu_hanh"}
+
+
+def _doi_v2(q: dict) -> dict:
+    loai = q["loai"]
+    if loai == "kien_thuc":
+        nhan, xu_ly = ["ky_thuat"], ["tra_loi", "tra_loi_kem_luu_y"]
+    elif loai == "khung_hoang":
+        nhan, xu_ly = ["dac_biet"], ["an_toan"]
+    elif loai in ("tu_choi", "cap_cuu"):
+        nhan, xu_ly = ["dac_biet"], ["tu_choi_nhe"]
+    else:
+        nhan, xu_ly = [_V2_CHU_DE.get(q["chu_de"], q["chu_de"])], ["tra_loi", "tra_loi_kem_luu_y"]
+    return {"id": q["id"], "cau_hoi": q["cau_hoi"], "nhan": nhan, "xu_ly": xu_ly, "nam": q.get("moc"), "_loai": loai}
+
+
+def cham_v2(mo_dun: str = "battu") -> dict:
+    """Chấm holdout v2 — CHỈ in tổng (không in từng câu). Thêm đếm theo loại câu (khủng hoảng / cấp cứu / từ chối)."""
+    p = GOC / "fixtures" / "cau_hoi" / "en" / f"{mo_dun}_holdout_v2.jsonl"
+    cau = [_doi_v2(json.loads(x)) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
+    kq = cham(mo_dun, cau=cau)
+    dem, tong = collections.Counter(), collections.Counter()
+    for q in cau:
+        if q["_loai"] in ("khung_hoang", "tu_choi", "cap_cuu"):
+            xl = _phan_loai(mo_dun, q["cau_hoi"]).get("xu_ly")
+            tong[q["_loai"]] += 1
+            dem[q["_loai"]] += xl in q["xu_ly"]
+    kq["theo_loai"] = {k: f"{dem[k]}/{tong[k]}" for k in tong}
+    return kq
+
+
 if __name__ == "__main__":
+    if "--v2" in sys.argv:
+        print(json.dumps(cham_v2(), ensure_ascii=False))
+        sys.exit(0)
     if "--an-toan" in sys.argv:
-        kq = cham_an_toan("--sai" in sys.argv)
+        tep = "an_toan_en_dev2.jsonl" if "--dev2" in sys.argv else "an_toan_en.jsonl"
+        kq = cham_an_toan("--sai" in sys.argv, tep)
         for s in kq.pop("sai", []):
             print(*s, sep=" | ")
         print(json.dumps(kq, ensure_ascii=False))

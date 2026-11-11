@@ -1,6 +1,6 @@
 // QTE — metadata cho trang /en: canonical + hreflang (en ↔ vi, bản Việt là x-default), Open Graph tiếng Anh, ảnh /og chung.
 import type { Metadata } from "next";
-import { siteUrl, urlDayDu } from "@/lib/seo";
+import { siteUrl, urlDayDu, THUC_THE, type MangAnh } from "@/lib/seo";
 import { banAnh } from "@/lib/duong-en";
 import { trangCongCuEn } from "@/lib/so-trang-en";
 
@@ -74,4 +74,11 @@ export function metaCongCuEn(duongVi: string): Metadata {
   const t = trangCongCuEn(duongVi), path = banAnh(duongVi) ?? `/en${duongVi}`;
   if (!t) return metaEn({ title: "Hieuban", description: "Hieuban in English.", path, vi: duongVi, noindex: true });
   return metaEn({ title: t.tieu_de_seo, description: t.mo_ta_seo, path, vi: duongVi });
+}
+
+/** Thực thể của mảng cho JSON-LD bản Anh (cùng bảng THUC_THE của bản Việt): tên tiếng Anh, chỉ nguồn tiếng Anh + Wikidata. */
+export function ldThucTheEn(mang: MangAnh | null | undefined) {
+  if (!mang) return undefined;
+  const t = THUC_THE[mang];
+  return { "@type": "Thing", name: t.alternateName, sameAs: t.sameAs.filter((u) => !u.includes("vi.wikipedia.org")) };
 }

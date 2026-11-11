@@ -13,7 +13,9 @@ export function maChu(s: string): string {
 }
 
 type Tach = { nhom: [string, string] | null; phu: [string, string][] };
-type Luat = { nhanNhom: string; viDu: string; tach: (b: BaiCum) => Tach; loc?: { nhan: string; thuTu?: string[] }; thuTuNhom?: string[] };
+type Luat = { nhanNhom: string; viDu: string; tach: (b: BaiCum) => Tach; loc?: { nhan: string; thuTu?: string[] }; thuTuNhom?: string[];
+  /** EN-ALL: nhãn bản Anh (trang Anh dùng cùng luật; tiêu đề / đường dẫn bài tiếng Anh). Luật chưa có → bản Anh giữ lưới phẳng. */
+  en?: { nhanNhom: string; viDu: string } };
 
 const cap = (ten: string): [string, string] => [maChu(ten), ten];
 
@@ -48,7 +50,8 @@ const LUAT: Record<string, Luat> = {
   "kinh-dich": { nhanNhom: "Theo quái trên", viDu: "Càn, Thái, Vị Tế…", thuTuNhom: Object.keys(QUAI),
     tach: (b) => { const q = quaiTren(b.tieu_de); return { nhom: q ? [q, QUAI[q]!] : null, phu: [] }; } },
   "menh-tuoi": { nhanNhom: "Theo thập niên", viDu: "1990, Canh Ngọ, Lộ Bàng Thổ…",
-    tach: (b) => { const n = Number(b.duong.match(/sinh-nam-(\d{4})/)?.[1]); if (!n) return { nhom: null, phu: [] };
+    en: { nhanNhom: "By decade", viDu: "1990, Geng Wu, Roadside Earth…" },
+    tach: (b) => { const n = Number(b.duong.match(/(?:sinh-nam|born)-(\d{4})/)?.[1]); if (!n) return { nhom: null, phu: [] };
       const d = Math.floor(n / 10) * 10; return { nhom: [`thap-nien-${d}`, `${d}–${d + 9}`], phu: [] }; } },
   "so-kep": { nhanNhom: "Theo hàng chục", viDu: "19, ngôi sao…",
     tach: (b) => { const n = Number(b.duong.match(/so-kep-(\d+)/)?.[1]); if (!n) return { nhom: null, phu: [] };
@@ -63,13 +66,13 @@ const LUAT: Record<string, Luat> = {
 export const CUM_CO_MUC_LUC = Object.keys(LUAT);
 
 /** Chia cụm thành nhóm theo thứ tự xuất hiện (hoặc thứ tự cố định của luật). Cụm không có luật → null (giữ lưới phẳng). */
-export function mucLucCum(khoa: string, ds: BaiCum[]): MucLucCum | null {
+export function mucLucCum(khoa: string, ds: BaiCum[], en = false): MucLucCum | null {
   const l = LUAT[khoa];
-  if (!l) return null;
+  if (!l || (en && !l.en)) return null;
   const nhom = new Map<string, NhomCum>(), loc = new Map<string, string>();
   for (const b of ds) {
     const t = l.tach(b);
-    const [ma, ten] = t.nhom ?? ["khac", "Khác"];
+    const [ma, ten] = t.nhom ?? ["khac", en ? "Other" : "Khác"];
     if (!nhom.has(ma)) nhom.set(ma, { ma, ten, bai: [] });
     nhom.get(ma)!.bai.push({ ...b, phu: t.phu.map(([m]) => m) });
     for (const [m, n] of t.phu) if (!loc.has(m)) loc.set(m, n);
@@ -80,5 +83,5 @@ export function mucLucCum(khoa: string, ds: BaiCum[]): MucLucCum | null {
   // "Khác" luôn cuối.
   dsNhom.sort((a, b) => Number(a.ma === "khac") - Number(b.ma === "khac"));
   const dsLoc = l.loc && loc.size ? { nhan: l.loc.nhan, ds: xep([...loc.entries()], l.loc.thuTu).map(([ma, ten]) => ({ ma, ten })) } : null;
-  return { nhanNhom: l.nhanNhom, viDu: l.viDu, nhom: dsNhom, loc: dsLoc };
+  return { nhanNhom: en ? l.en!.nhanNhom : l.nhanNhom, viDu: en ? l.en!.viDu : l.viDu, nhom: dsNhom, loc: dsLoc };
 }

@@ -14,6 +14,31 @@ export type TrangCongCuEn = {
   kien_thuc?: { tieu_de: string; cum: Record<string, { ten: string; mo_ta: string }> };
 };
 
+/** EN-ALL GĐ 3d — chữ máy chủ của TRANG CỤM KIẾN THỨC bản Anh (rewrite của trang cụm Việt `TrangChuDe`), khoá = đường dẫn
+ *  cụm Việt. `ten` + `mo_ta` cũng là thẻ cụm trong khối "Learn …" của trang công cụ. `tra_loi`: `{so}` = số trang của cụm
+ *  (đếm từ engine). Cụm mở bản Anh (cờ `mo`) PHẢI có mục ở đây — e2e/en-bazi.spec.ts kiểm. */
+export type CumEn = { ten: string; h1: string; tieu_de_seo: string; mo_ta: string; tra_loi: string };
+export const CUM_EN: Readonly<Record<string, CumEn>> = {
+  "/bat-tu/thap-than": {
+    ten: "The Ten Gods", h1: "The Ten Gods in BaZi",
+    tieu_de_seo: "The Ten Gods in BaZi: meaning of all ten relationships · Hieuban",
+    mo_ta: "What each of the ten relationships to your Day Master means, from Friend to Direct Resource: traits, and what happens when there is too much or too little.",
+    tra_loi: "The Ten Gods are the ten ways every other stem in a BaZi chart relates to your Day Master, the stem of your birth day: the same element (Friend, Rob Wealth), the element you produce (Eating God, Hurting Officer), the element you control (Indirect and Direct Wealth), the element that controls you (Seven Killings, Direct Officer) and the element that produces you (Indirect and Direct Resource). This section has {so} pages, one for each.",
+  },
+  "/bat-tu/nhat-chu": {
+    ten: "The ten Day Masters", h1: "The ten Day Masters in BaZi",
+    tieu_de_seo: "The ten Day Masters in BaZi: Jia Wood to Gui Water · Hieuban",
+    mo_ta: "The person behind each Day Master, from Jia (Yang Wood) to Gui (Yin Water): image, strengths, blind spots and how the birth season changes them.",
+    tra_loi: "Your Day Master is the Heavenly Stem of your birth day, the element that stands for you in a BaZi chart. There are ten: Yang and Yin of Wood, Fire, Earth, Metal and Water. This section has {so} pages, one per Day Master: its image in nature, its strengths and blind spots, and how it feels in each season of birth.",
+  },
+  "/bat-tu/menh-theo-nam": {
+    ten: "Element by birth year", h1: "Your element by birth year",
+    tieu_de_seo: "Element by birth year 1950–2027: Na Yin and zodiac sign · Hieuban",
+    mo_ta: "The Na Yin element of every birth year from 1950 to 2027: stem and branch, zodiac sign, matching and clashing signs, Kua number, and the Lunar New Year cut-off.",
+    tra_loi: "Your birth-year element is the Na Yin element of the year's stem and branch, counted by the lunar year (from Lunar New Year), such as Great Forest Wood for 1988. It is not the same as your element in BaZi, which comes from your birth day. This section has {so} pages, one per year: stem and branch, zodiac sign, Na Yin meaning, signs that match or clash, and the Kua number for men and women.",
+  },
+};
+
 export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
   "/bat-tu": {
     ten: "BaZi (Four Pillars)",
@@ -22,6 +47,7 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
     tra_loi_nhanh: {
       hoi: "What does this BaZi calculator give you?",
       dap: "From your birth date, time and place it sets up the four pillars by the solar terms, scores the five elements so you can see which are strong and which are thin, shows the Useful God read two ways and your 10-year Luck Pillars, then explains each area of life in plain words. The chart and the full reading are free.",
+      lien_ket: [{ href: "/en/bazi/element-by-birth-year", ten: "Element by birth year" }, { href: "/en/bazi/ten-gods", ten: "The Ten Gods" }],
     },
     gioi_thieu: {
       tieu_de: "About the BaZi calculator",
@@ -49,13 +75,12 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
     },
     kien_thuc: {
       tieu_de: "Learn BaZi",
-      cum: {
-        "/bat-tu/thap-than": { ten: "The Ten Gods", mo_ta: "What each of the ten relationships to your Day Master means, when there is too much or too little." },
-        "/bat-tu/nhat-chu": { ten: "The ten Day Masters", mo_ta: "The person behind each Day Master, from Jia Wood to Gui Water." },
-        "/bat-tu/menh-theo-nam": { ten: "Element by birth year", mo_ta: "The Na Yin element of each birth year and how it differs from your BaZi element." },
-      },
+      cum: Object.fromEntries(["/bat-tu/thap-than", "/bat-tu/nhat-chu", "/bat-tu/menh-theo-nam"]
+        .map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
     },
   },
 };
 
 export const trangCongCuEn = (duongVi: string): TrangCongCuEn | null => SO_TRANG_EN[duongVi] ?? null;
+
+export const cumEn = (duongVi: string): CumEn | null => CUM_EN[duongVi] ?? null;
