@@ -16,9 +16,21 @@ const SAO: [number, number, number][] = [
 const VACH = Array.from({ length: 48 }, (_, k) => tron(160, (k * Math.PI) / 24));
 const TAM_HUONG = Array.from({ length: 8 }, (_, k) => [tron(126, (k * Math.PI) / 4), tron(138, (k * Math.PI) / 4)] as const);
 
-export function HinhDauMang({ kieu, className }: { kieu: KieuMang; className?: string }) {
+/** Chữ thay thế (alt) của hình: nói hình vẽ gì + từ khoá của mảng — cho trình đọc màn hình và máy tìm kiếm. */
+export const ALT_HINH_MANG: Record<KieuMang, { vi: string; en: string }> = {
+  "tu-vi": { vi: "Hình minh hoạ lá số Tử vi 12 cung trong vành la bàn", en: "Illustration of a twelve-palace Zi Wei Dou Shu chart inside a compass ring" },
+  "bat-tu": { vi: "Hình minh hoạ Bát tự: bốn trụ năm, tháng, ngày, giờ và năm hành", en: "Illustration of the four pillars of BaZi and the five elements" },
+  "kinh-dich": { vi: "Hình minh hoạ quẻ Kinh Dịch sáu hào âm dương", en: "Illustration of a six-line I Ching hexagram" },
+  "phong-thuy": { vi: "Hình minh hoạ la bàn phong thuỷ tám hướng xem hướng nhà hợp tuổi", en: "Illustration of an eight-direction feng shui compass" },
+  "nhan-tuong": { vi: "Hình minh hoạ xem tướng mặt: gương mặt chia tam đình", en: "Illustration of a face divided into three zones for face reading" },
+  tarot: { vi: "Hình minh hoạ ba lá bài Tarot trong một trải bài", en: "Illustration of three tarot cards in a spread" },
+  "than-so": { vi: "Hình minh hoạ các con số thần số học", en: "Illustration of numerology numbers" },
+};
+
+export function HinhDauMang({ kieu, alt, className }: { kieu: KieuMang; /** Chữ thay thế; trống → hình trang trí (aria-hidden). */ alt?: string; className?: string }) {
   return (
-    <svg viewBox="0 0 360 360" aria-hidden focusable="false" data-testid="hinh-dau-mang" className={cn("h-auto w-full", className)}>
+    <svg viewBox="0 0 360 360" {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })} focusable="false" data-testid="hinh-dau-mang" className={cn("h-auto w-full", className)}>
+      {alt && <title>{alt}</title>}
       <defs>
         <radialGradient id="dm-tinh-van" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="rgb(var(--moon))" stopOpacity="0.2" />
@@ -55,7 +67,7 @@ export function HinhDauMang({ kieu, className }: { kieu: KieuMang; className?: s
       ))}
       <circle cx={180} cy={180} r={110} className="fill-none stroke-moon/20" strokeWidth={1} strokeDasharray="2 6" />
       {/* nét vẽ của mảng (hệ 120×80) phóng vào giữa đĩa */}
-      <svg x={69} y={106} width={222} height={148} viewBox="0 0 120 80"><HoaTietMang kieu={kieu} /></svg>
+      <svg aria-hidden x={69} y={106} width={222} height={148} viewBox="0 0 120 80"><HoaTietMang kieu={kieu} /></svg>
     </svg>
   );
 }

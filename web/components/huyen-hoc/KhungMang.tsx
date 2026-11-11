@@ -7,8 +7,9 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { ChuNhan } from "@/components/cms/ChuNhan";
 import { LoiDan, TraLoiNhanhDau, useChu, useDauCms } from "@/components/cms/DauCms";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
-import { HinhDauMang } from "@/components/huyen-hoc/HinhDauMang";
+import { ALT_HINH_MANG, HinhDauMang } from "@/components/huyen-hoc/HinhDauMang";
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
+import { useNgonNgu } from "@/components/khung/NgonNgu";
 import type { HoSo } from "@/lib/hoso";
 
 // Khung chung cho các mảng Huyền học: tiêu đề + hỏi thêm dữ liệu đúng lúc (BirthSheet).
@@ -16,7 +17,7 @@ import type { HoSo } from "@/lib/hoso";
 // Bố cục: cột chữ rộng tối đa 42rem (dòng nhỏ, H1, lời dẫn, "Trả lời nhanh" thẳng một mép phải); từ lg thêm cột phải
 // là hình trang trí của mảng (`hinh`) — ẩn bằng CSS ở màn hẹp nên không thêm chiều cao trên điện thoại.
 export function DauMang({ Icon, ten, mo_ta, hinh, children }: { Icon: LucideIcon; ten: string; mo_ta: string; /** Hình trang trí cột phải (≥ lg). */ hinh?: KieuMang; children?: ReactNode }) {
-  const d = useDauCms(), c = useChu();
+  const d = useDauCms(), c = useChu(), { ngonNgu: nn } = useNgonNgu();
   return (
     <>
     <header className="mb-8 lg:mb-10 lg:grid lg:grid-cols-[minmax(0,42rem)_minmax(0,1fr)] lg:items-center lg:gap-x-12">
@@ -30,7 +31,7 @@ export function DauMang({ Icon, ten, mo_ta, hinh, children }: { Icon: LucideIcon
         <TraLoiNhanhDau className="mt-5" />
         {children}
       </div>
-      {hinh && <div className="hidden lg:block lg:justify-self-end"><HinhDauMang kieu={hinh} className="w-[17rem] xl:w-[22rem]" /></div>}
+      {hinh && <div className="hidden lg:block lg:justify-self-end"><HinhDauMang kieu={hinh} alt={ALT_HINH_MANG[hinh][nn === "en" ? "en" : "vi"]} className="w-[17rem] xl:w-[22rem]" /></div>}
     </header>
     {d.khoiTren && <div className="mb-8">{d.khoiTren}</div>}
     </>

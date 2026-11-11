@@ -348,7 +348,10 @@ test("Đầu trang 6 mảng ở 1440px: cột chữ thẳng một mép, hình tr
     await expect(dau).not.toContainText("tham khảo văn hoá");
     const hinh = dau.getByTestId("hinh-dau-mang");
     await expect(hinh, duong).toBeVisible();
-    await expect(hinh).toHaveAttribute("aria-hidden", "true");
+    // Hình có chữ thay thế (role=img + aria-label + <title>) nêu từ khoá của mảng.
+    await expect(hinh).toHaveAttribute("role", "img");
+    expect((await hinh.getAttribute("aria-label"))?.startsWith("Hình minh hoạ"), duong).toBe(true);
+    await expect(hinh.locator("title").first()).toHaveText((await hinh.getAttribute("aria-label")) ?? "");
     expect(await page.evaluate(() => document.documentElement.scrollWidth), duong).toBeLessThanOrEqual(1440);
     // "Trả lời nhanh" (SEO-N2) vẫn ngay dưới lời dẫn, rộng bằng cột chữ; hình nằm hẳn bên phải cột chữ.
     const tl = await dau.getByTestId("tra-loi-nhanh-dau").boundingBox(), h1 = await dau.locator("h1").boundingBox(), hb = await hinh.boundingBox();
