@@ -118,6 +118,21 @@ làm nhà / sao hạn theo năm, ngày tốt theo việc–tháng, cặp số…
 | `luan-giai-la-so-tu-vi-tron-doi…` ↔ `cach-xem-tu-vi-lap-la-so…` | Phân vai: "lá số trọn đời" / "cách xem tử vi" |
 | `vong-tron-ngu-hanh…` ↔ `ngu-hanh-la-gi…` | Phân vai: "tương sinh tương khắc" / "ngũ hành là gì" |
 
+**Đã làm (2026-11-11, migration CMS `20261111_090000_kw6t_bai_cu`, chạy khi CMS deploy):** chủ dự án giao làm thẳng trong CMS.
+Phiên làm việc không có tài khoản ghi CMS (Chủ biên phải qua 2 bước), nên sửa bằng migration dữ liệu như BLOG-6/7/10:
+`cms/src/lib/kw6t-bai-cu.ts` (kế hoạch từng bài + hàm áp), có `down` khôi phục bản trước. Đã thử trên Postgres với bản sao
+24 bài đang xuất bản (`cms/tests/kw6t-du-lieu-that.ts`): áp đủ 24/24, chạy lại không đổi thêm, hoàn tác về đúng bản cũ.
+
+- Gộp 3 cặp (bài phụ thôi xuất bản, đường dẫn 308 về bài chính, phần riêng chuyển sang bài chính: "Tử vi lý số là gì",
+  âm lịch Việt / Trung lệch nhau, đo hướng cửa hay ban công + bảng việc nên làm, hai cách cộng 33 / 6, đọc hồ sơ thần số).
+- 3 bài đổi tiêu đề + đường dẫn mới (đường cũ 308), bỏ "bói người đó", vẽ lại ảnh bìa + 3 ảnh minh hoạ có in tiêu đề
+  (ảnh cũ của bài Kinh Dịch còn lỗi "Kinh Dịnh").
+- Rà soát cả 24 bài, sửa thêm: 22 link "Hiểu Bản Thân" về trang chủ → công cụ đúng mảng; ~20 bài trước chỉ link `/than-so`,
+  `/hop-doi` nay có đoạn "Đọc tiếp" tới trang kiến thức + bài cùng cụm; mọi bài có "Bài liên quan"; 4 cặp từ khoá chính trùng
+  → mỗi bài một từ khoá; mảng của 6 bài sửa lại (CTA cuối bài đúng công cụ); bài Mai Hoa thêm nguồn; câu "không phải lời
+  khuyên đầu tư" cho bài tài lộc; Tử vi 2027 + Thời gian tới cho bài cách xem Tử vi; ranh giới "không dùng để chọn nhân viên".
+- Bài có bản nháp đang sửa dở trong CMS thì máy **không đè** (ghi log). Chưa làm: chuyên mục (CMS chưa có chuyên mục nào).
+
 Tuần 9–26: mỗi tuần cập nhật một bài (liên kết sang bài mới cùng cụm, thêm năm 2027, ranh giới CY-1/SK-1) — xem tab "Bài cũ".
 
 ## 6. Khuôn một bài (để AI soạn nháp + chủ biên duyệt)

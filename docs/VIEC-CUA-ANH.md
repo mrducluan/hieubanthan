@@ -8,7 +8,13 @@
 ### 4ap. KW-6T — kế hoạch từ khoá blog 6 tháng (2026-11-11, `docs/KE-HOACH-TU-KHOA-SEO-6-THANG.md`)
 
 - [ ] Đọc Google Sheet "Hieuban — Kế hoạch từ khoá SEO 6 tháng" (Drive của anh) → duyệt / bỏ bài ở tab "Từ khoá & bài viết", cột "Trạng thái".
-- [ ] **Tuần 1 (16/11)**: gộp 3 cặp bài trùng + sửa 3 tiêu đề nhồi từ khoá (tab "Bài cũ") trong CMS.
+- [ ] **Sửa 24 bài cũ đã có sẵn trong migration CMS `kw6t_bai_cu`** — merge PR rồi để Vercel deploy dự án CMS (migration chạy lúc build).
+  Sau deploy: Vercel (dự án CMS) → Logs → tìm `KW-6T:` — mỗi bài "xong" hoặc lý do (vd "có bản nháp đang sửa — không đè":
+  mở bài đó, xuất bản hoặc bỏ bản nháp, rồi báo em chạy lại). Kiểm nhanh: `/blog/xem-hop-doi-xem-tinh-yeu-boi-tinh-yeu-boi-nguoi-do-doc-sao-cho-tinh-tao`
+  phải chuyển sang `/blog/xem-hop-doi-theo-ngay-sinh-doc-sao-cho-tinh-tao`; `/blog/tu-vi-ly-so-la-gi-cach-hieu-la-so-va-kiem-tra-du-lieu-sinh`
+  chuyển sang `/blog/tu-vi-la-gi-cau-truc-la-so-cach-doc-va-gioi-han`. Muốn trả lại như cũ: `payload migrate:down` (khôi phục bản trước).
+- [ ] Đọc lại 24 bài khi rảnh (ghi chú "KW-6T" trong "Ghi chú của Chủ biên" nói rõ máy đã sửa gì); thấy ổn bấm Xuất bản → "Đã duyệt".
+- [ ] Search Console → Kiểm tra URL → Yêu cầu lập chỉ mục cho 3 đường dẫn mới (hợp đôi, hợp sếp, Kinh Dịch hay Bát tự).
 - [ ] **Hạn chót 10/1/2027**: 15 bài cụm Tết 2027 (C8) đã xuất bản.
 - [ ] Nối Search Console + GA4 của hieuban.com vào NotFair, hoặc gửi CSV Truy vấn + Trang 3 tháng → em thay lượng tìm ước lượng bằng số thật.
 - [ ] (Tuỳ chọn) Cho phép `trends.google.com` trong mạng môi trường để em kiểm xu hướng 12 tháng của 88 từ khoá.
