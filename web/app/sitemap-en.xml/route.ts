@@ -7,7 +7,7 @@ import { BAN_TIENG_ANH } from "@/lib/noi-dung-trang";
 import { urlDayDu } from "@/lib/seo";
 import { CAP_DUONG } from "@/lib/duong-en";
 import { mucSoTrang } from "@/lib/so-trang";
-import { banAnh } from "@/lib/duong-en";
+import { banAnhRewrite } from "@/lib/duong-en";
 import { CHU_DE, type MucLuc } from "@/lib/kien-thuc";
 
 export const revalidate = 21600;
@@ -22,7 +22,7 @@ const TINH = ["/en", "/en/numerology", "/en/numerology/life-path", "/en/tarot", 
 
 // EN-ALL GĐ 3d: cụm kiến thức mở bản Anh (rewrite của trang cụm Việt) — trang cụm + mọi trang con có index, slug Anh từ
 // mục lục bản Anh của engine, hreflang về trang Việt CÙNG mục.
-const CUM_MO = Object.values(CHU_DE).flatMap((cd) => { const en = banAnh(cd.duong); return en ? [{ ...cd, en }] : []; });
+const CUM_MO = Object.values(CHU_DE).flatMap((cd) => { const en = banAnhRewrite(cd.duong); return en ? [{ ...cd, en }] : []; });
 
 const xmlThoat = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 

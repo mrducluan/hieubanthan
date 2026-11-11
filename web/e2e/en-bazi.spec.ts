@@ -9,6 +9,9 @@ import { khoaThieuEn } from "../lib/chu-trang";
 import { SO_TRANG_EN } from "../lib/so-trang-en";
 import { CAP_DUONG } from "../lib/duong-en";
 import { mucSoTrang } from "../lib/so-trang";
+import { CHU_KIEN_THUC } from "../lib/chu/kien-thuc";
+import { CUM_EN } from "../lib/so-trang-en";
+import { khoaTheoDuong } from "../lib/kien-thuc";
 
 const VIET = /[ăâđêôơưàáạảãầấậẩẫằắặẳẵèéẹẻẽềếệểễìíịỉĩòóọỏõồốộổỗờớợởỡùúụủũừứựửữỳýỵỷỹ]/i;
 
@@ -22,7 +25,7 @@ async function chuViet(page: Page): Promise<string[]> {
 
 test.describe("catalog /en/bazi", () => {
   test("mọi khoá bảng chữ của trang có chữ tiếng Anh, không dấu Việt, trong giới hạn", () => {
-    for (const [ten, bang] of [["CHU_BAT_TU_UI", CHU_BAT_TU_UI], ["CHU_GIAO_DIEN", CHU_GIAO_DIEN], ["CHU_BAT_TU", CHU_BAT_TU]] as const) {
+    for (const [ten, bang] of [["CHU_BAT_TU_UI", CHU_BAT_TU_UI], ["CHU_GIAO_DIEN", CHU_GIAO_DIEN], ["CHU_BAT_TU", CHU_BAT_TU], ["CHU_KIEN_THUC", CHU_KIEN_THUC]] as const) {
       expect(khoaThieuEn(bang), ten).toEqual([]);
       for (const [k, m] of Object.entries(bang) as [string, { en?: string; toi_da?: number }][]) {
         expect(m.en ?? "", `${ten}.${k}`).not.toMatch(VIET);
@@ -40,6 +43,127 @@ test.describe("catalog /en/bazi", () => {
       expect(t!.mo_ta_seo.length, c.vi).toBeLessThanOrEqual(160);
       expect(JSON.stringify(t), c.vi).not.toMatch(VIET);
     }
+  });
+});
+
+test.describe("catalog cụm kiến thức /en/bazi/*", () => {
+  test("mọi cụm kiến thức mở bản Anh qua rewrite có chữ máy chủ tiếng Anh (title ≤ 70, description ≤ 160)", () => {
+    const mo = CAP_DUONG.filter((x) => x.mo && !x.rieng && khoaTheoDuong(x.vi));
+    expect(mo.map((x) => x.en).sort()).toEqual(["/en/bazi/day-masters", "/en/bazi/element-by-birth-year", "/en/bazi/ten-gods"]);
+    for (const c of mo) {
+      const t = CUM_EN[c.vi];
+      expect(t, c.vi).toBeTruthy();
+      expect(t!.tieu_de_seo.length, c.vi).toBeLessThanOrEqual(70);
+      expect(t!.mo_ta.length, c.vi).toBeLessThanOrEqual(160);
+      expect(JSON.stringify(t), c.vi).not.toMatch(VIET);
+    }
+  });
+});
+
+/** JSON-LD riêng của trang (bỏ khối Organization/WebSite chung của layout — tên Việt của thương hiệu là chủ ý). */
+async function ldTrang(page: Page): Promise<string> {
+  const ds = await page.locator('main script[type="application/ld+json"]').allTextContents();
+  return ds.join("\n");
+}
+
+const CUM: [string, string, string, string, string][] = [
+  // [cụm Anh, cụm Việt, trang con Anh, trang con Việt tương đương, chữ phải có trong H1 trang con]
+  ["/en/bazi/ten-gods", "/bat-tu/thap-than", "/en/bazi/ten-gods/friend", "/bat-tu/thap-than/ty-kien", "Friend"],
+  ["/en/bazi/day-masters", "/bat-tu/nhat-chu", "/en/bazi/day-masters/jia-yang-wood", "/bat-tu/nhat-chu/nhat-chu-giap", "Jia"],
+  ["/en/bazi/element-by-birth-year", "/bat-tu/menh-theo-nam", "/en/bazi/element-by-birth-year/born-1988", "/bat-tu/menh-theo-nam/sinh-nam-1988-menh-gi", "1988"],
+];
+
+test.describe("/en/bazi cụm kiến thức trên trình duyệt", () => {
+  for (const [cumEn, cumVi, conEn, conVi, h1] of CUM) {
+    test(`${cumEn}: trang cụm + một trang con tiếng Anh, SEO, hreflang hai chiều, đổi ngôn ngữ`, async ({ page }) => {
+      test.setTimeout(90_000);
+      // ---- trang cụm
+      const r = await page.goto(cumEn);
+      expect(r!.status()).toBe(200);
+      await expect(page.locator("html")).toHaveAttribute("lang", /^en/);
+      const title = await page.title();
+      expect(title.length).toBeLessThanOrEqual(70);
+      expect(title).not.toMatch(VIET);
+      expect((await page.locator('meta[name="description"]').getAttribute("content"))!.length).toBeLessThanOrEqual(160);
+      expect(await page.locator('link[rel="canonical"]').getAttribute("href")).toMatch(new RegExp(`${cumEn}$`));
+      expect(await page.locator('link[rel="alternate"][hreflang="vi"]').getAttribute("href")).toMatch(new RegExp(`${cumVi}$`));
+      await expect(page.locator("h1")).toHaveCount(1);
+      await expect(page.getByTestId("tra-loi-nhanh")).toContainText("Quick answer");
+      expect(await chuViet(page)).toEqual([]);
+      const ld = await ldTrang(page);
+      expect(ld).toContain('"inLanguage":"en"');
+      expect(ld).toContain("CollectionPage");
+      expect(ld).toContain("BreadcrumbList");
+      expect(ld).not.toMatch(VIET);
+      // mọi link trong <main> là URL Anh (hoặc #neo)
+      const hrefs = await page.$$eval("main a[href]", (as) => as.map((a) => a.getAttribute("href") ?? ""));
+      expect(hrefs.filter((h) => h.startsWith("/") && !h.startsWith("/en"))).toEqual([]);
+      await expect(page.locator(`main a[href="${conEn}"]`).first()).toBeVisible();
+
+      // ---- trang con
+      await page.goto(conEn);
+      expect(new URL(page.url()).pathname).toBe(conEn);
+      await expect(page.locator("h1")).toHaveCount(1);
+      await expect(page.locator("h1")).toContainText(h1);
+      expect((await page.title()).length).toBeLessThanOrEqual(70);
+      expect(await page.locator('link[rel="canonical"]').getAttribute("href")).toMatch(new RegExp(`${conEn}$`));
+      expect(await page.locator('link[rel="alternate"][hreflang="vi"]').getAttribute("href")).toMatch(new RegExp(`${conVi}$`));
+      await expect(page.locator("[data-dong-tac-gia]")).toContainText("Hieuban editorial team");
+      await expect(page.getByTestId("minh-hoa-qr")).toContainText("Scan to open this page");
+      expect(await chuViet(page)).toEqual([]);
+      const ldCon = await ldTrang(page);
+      expect(ldCon).toContain('"@type":"Article"');
+      expect(ldCon).toContain('"inLanguage":"en"');
+      expect(ldCon).toContain("Hieuban editorial team");
+      expect(ldCon).toContain("FAQPage");
+      expect(ldCon).not.toMatch(VIET);
+      const hrefCon = await page.$$eval("main a[href]", (as) => as.map((a) => a.getAttribute("href") ?? ""));
+      expect(hrefCon.filter((h) => h.startsWith("/") && !h.startsWith("/en"))).toEqual([]);
+
+      // ---- 390px không cuộn ngang
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.reload();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+      await page.setViewportSize({ width: 1280, height: 900 });
+
+      // ---- nút đổi ngôn ngữ → trang Việt CÙNG mục; trang Việt khai hreflang về bản Anh
+      await page.getByTestId("doi-tieng-viet").first().click();
+      await expect(page).toHaveURL(new RegExp(`${conVi}$`));
+      await expect(page.locator("html")).toHaveAttribute("lang", "vi");
+      expect(await page.locator('link[rel="alternate"][hreflang="en"]').getAttribute("href")).toMatch(new RegExp(`${conEn}$`));
+      await page.goto(cumVi);
+      expect(await page.locator('link[rel="alternate"][hreflang="en"]').getAttribute("href")).toMatch(new RegExp(`${cumEn}$`));
+    });
+  }
+
+  test("URL Anh mang slug Việt → 308 về slug Anh; URL Việt mang slug Anh → 308 về slug Việt", async ({ request }) => {
+    const a = await request.get("/en/bazi/ten-gods/ty-kien", { maxRedirects: 0 });
+    expect(a.status()).toBe(308);
+    expect(a.headers().location).toMatch(/\/en\/bazi\/ten-gods\/friend$/);
+    const b = await request.get("/bat-tu/thap-than/friend", { maxRedirects: 0 });
+    expect(b.status()).toBe(308);
+    expect(b.headers().location).toMatch(/\/bat-tu\/thap-than\/ty-kien$/);
+  });
+
+  test("/en/bazi có khối Learn BaZi với 3 cụm; sitemap-en có cụm + trang con kèm hreflang", async ({ page, request }) => {
+    await page.goto("/en/bazi");
+    const khoi = page.getByTestId("cum-kien-thuc-tru");
+    for (const [cumEn] of CUM) await expect(khoi.locator(`a[href="${cumEn}"]`)).toBeVisible();
+    const sm = await (await request.get("/sitemap-en.xml")).text();
+    for (const [cumEn, cumVi, conEn, conVi] of CUM) {
+      expect(sm).toContain(`<loc>http`);
+      expect(sm).toMatch(new RegExp(`<loc>[^<]*${cumEn}</loc>`));
+      expect(sm).toMatch(new RegExp(`<loc>[^<]*${conEn}</loc>(<lastmod>[^<]*</lastmod>)?<xhtml:link rel="alternate" hreflang="en" href="[^"]*${conEn}"/><xhtml:link rel="alternate" hreflang="vi" href="[^"]*${conVi}"/>`));
+      expect(sm).toContain(cumVi);
+    }
+  });
+
+  test("mục lục cụm dài bản Anh: nhóm theo thập niên + lọc nhanh bằng chữ Anh", async ({ page }) => {
+    await page.goto("/en/bazi/element-by-birth-year");
+    await expect(page.getByTestId("muc-luc-cum")).toContainText("Quick filter across 78 pages");
+    await page.getByTestId("cum-tim").fill("Great Forest");
+    await expect(page.getByTestId("cum-dem")).toContainText("Showing 2 pages.");
+    await expect(page.locator('main a[href="/en/bazi/element-by-birth-year/born-1988"]')).toBeVisible();
   });
 });
 

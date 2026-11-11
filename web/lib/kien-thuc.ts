@@ -3,6 +3,7 @@
 
 import { duongTheoLuot, ganNgonNgu } from "@/lib/engine-ngon-ngu";
 import type { TenHien } from "@/lib/ten-hien";
+import { banAnhRewrite, banVietCuaTrang, tachDuong } from "@/lib/duong-en";
 import { unstable_noStore as noStore } from "next/cache";
 import type { MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
@@ -216,6 +217,19 @@ export async function slugEnCua(loai: LoaiTrang, slug: string): Promise<string |
 }
 export async function slugViCua(loai: LoaiTrang, slugEn: string): Promise<string | null> {
   return (await mucLucEn())?.find((t) => t.loai === loai && t.slug_en === slugEn)?.slug ?? null;
+}
+
+/** Trang Việt tương đương của một URL Anh cho NÚT ĐỔI NGÔN NGỮ dựng ở máy chủ (header + chân trang): như `banVietCuaTrang`,
+ *  riêng trang con của cụm kiến thức mở bản Anh qua rewrite thì đổi slug Anh → slug Việt (mục lục bản Anh của engine) để link
+ *  không đi qua 308. Trang khác: không gọi engine. */
+export async function banVietTrangEn(duongEn: string): Promise<string> {
+  const vi = banVietCuaTrang(duongEn);
+  const [p] = tachDuong(vi);
+  const cd = Object.values(CHU_DE).find((c) => p.startsWith(`${c.duong}/`) && banAnhRewrite(c.duong));
+  const slugEn = cd ? p.slice(cd.duong.length + 1) : "";
+  if (!cd || !slugEn || slugEn.includes("/")) return vi;
+  const s = await slugViCua(cd.loai, slugEn);
+  return s ? `${cd.duong}/${s}` : vi;
 }
 
 export function trang(loai: LoaiTrang, slug: string): Promise<TrangKienThuc | null> {

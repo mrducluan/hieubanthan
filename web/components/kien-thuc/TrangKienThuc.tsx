@@ -21,7 +21,7 @@ import { idTu } from "@/lib/cms-html";
 import { DuongDan } from "@/components/khung/DuongDan";
 import { duongDanCum, duongDanCumEn } from "@/lib/duong-dan";
 import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
-import { banAnh, duongTheo } from "@/lib/duong-en";
+import { banAnh, banAnhRewrite, duongTheo } from "@/lib/duong-en";
 import { anhOgEn, ldThucTheEn, metaEn, tieuDeVua } from "@/lib/en/seo";
 import { cumEn, trangCongCuEn } from "@/lib/so-trang-en";
 import { tenTheo } from "@/lib/ten-hien";
@@ -75,7 +75,7 @@ async function metaGoc(params: Thamso): Promise<Metadata> {
   const duong = duongTrang(t.loai, t.slug);
   const anh = anhKienThuc(t, cd.duong);
   // EN-ALL GĐ 3d: cụm đã mở bản Anh → hreflang tới trang Anh CÙNG mục (slug Anh từ mục lục bản Anh của engine).
-  const banEn = t.ban_en ?? (banAnh(cd.duong) ? await slugEnCua(t.loai, t.slug).then((s) => (s ? banAnh(cd.duong, `/${s}`) ?? undefined : undefined)) : undefined);
+  const banEn = t.ban_en ?? (banAnhRewrite(cd.duong) ? await slugEnCua(t.loai, t.slug).then((s) => (s ? banAnhRewrite(cd.duong, `/${s}`) ?? undefined : undefined)) : undefined);
   return {
     title: tieuDeSeo(t.tieu_de),
     description: catMoTa(t.mo_ta),
@@ -124,7 +124,7 @@ export async function TrangKienThucView(params: Thamso) {
   if (!kq) {
     // EN-ALL: nút / link đổi ngôn ngữ không chạy JS có thể mở URL Việt với slug Anh → 308 về slug Việt (chỉ cụm đã mở bản Anh).
     const cd = params.khoa ? CHU_DE[params.khoa] : undefined;
-    const vi = !en && cd && banAnh(cd.duong) ? await slugViCua(cd.loai, params.slug) : null;
+    const vi = !en && cd && banAnhRewrite(cd.duong) ? await slugViCua(cd.loai, params.slug) : null;
     if (vi && cd) permanentRedirect(duongTrang(cd.loai, vi));
     notFound();
   }
@@ -370,7 +370,10 @@ async function TrangKienThucEn({ cd, t, duong, ma }: { cd: (typeof CHU_DE)[strin
       {congCu && (
         <aside className="glass mt-10 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center" data-nosnippet="">
           <BookOpen className="size-6 shrink-0 text-gold" aria-hidden />
-          <p className="flex-1 text-fg-muted">{loiMoi ?? <LoiMoiChung c={c} />}</p>
+          <div className="flex-1 text-fg-muted">
+            <p>{loiMoi ?? <LoiMoiChung c={c} />}</p>
+            <p className="mt-2 text-sm">{c("bai.tat_ca")} <Link href={duongCum} className="text-gold underline underline-offset-2 hover:text-fg">{tenCum}</Link></p>
+          </div>
           <Button asChild><Link href={congCu}>{cd.mang === "/bat-tu" ? c("moi.nut_bat_tu") : c("moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
         </aside>
       )}

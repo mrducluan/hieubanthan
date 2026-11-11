@@ -24,6 +24,7 @@ export const CHU_KIEN_THUC = {
   "bai.doc_tiep": { nhom: B, nhan: "Tiêu đề link đọc tiếp", mac_dinh: "Đọc tiếp", en: "Keep reading" },
   "bai.nguon": { nhom: B, nhan: "Tiêu đề nguồn", mac_dinh: "Nguồn", en: "Sources" },
   "bai.mien_tru": { nhom: B, nhan: "Câu miễn trừ cuối bài", mac_dinh: "Tham khảo văn hoá và tự suy ngẫm — không phải dự báo, không thay thế tư vấn y tế, pháp lý, tài chính.", en: "Cultural reference and self-reflection — not a prediction, and no substitute for medical, legal or financial advice." },
+  "bai.tat_ca": { nhom: B, nhan: "Bản Anh: chữ trước link về trang cụm", mac_dinh: "Xem cả cụm:", en: "Browse all:" },
   "bai.anh_dai_dien": { nhom: B, nhan: "Chú thích ảnh đại diện trong JSON-LD", mac_dinh: "Tóm tắt: {tieu_de}", en: "Summary: {tieu_de}" },
 
   // ---------------------------------------------------------------- lời mời cuối bài (theo loại trang + nút theo công cụ)

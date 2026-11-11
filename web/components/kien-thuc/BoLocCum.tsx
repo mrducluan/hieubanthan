@@ -16,6 +16,8 @@ export function BoLocCum({ goc, tong, nhanNhom, viDu, nhom, loc }: {
   goc: string; tong: number; nhanNhom: string; viDu: string; nhom: { ma: string; ten: string; so: number }[]; loc: BoLoc | null;
 }) {
   const c = taoChu(CHU_KIEN_THUC, null, useNgonNgu().ngonNgu);
+  // Số trang là một nút chữ riêng (như bản cũ `Lọc nhanh trong {tong} trang`) — HTML bản Việt không đổi.
+  const nhanLoc = [...c("ml.loc_nhanh").split("{tong}"), ""] as [string, string];
   const [tim, setTim] = useState("");
   const [phu, setPhu] = useState<string | null>(null);
   const [so, setSo] = useState<Record<string, number> | null>(null);   // null = không lọc
@@ -49,7 +51,7 @@ export function BoLocCum({ goc, tong, nhanNhom, viDu, nhom, loc }: {
   return (
     <div className="space-y-3 rounded-2xl border border-line/70 bg-surface/40 p-4" data-testid="muc-luc-cum">
       <label className="block">
-        <span className="text-sm font-medium text-fg">{c("ml.loc_nhanh", { tong: String(tong) })}</span>
+        <span className="text-sm font-medium text-fg">{nhanLoc[0]}{tong}{nhanLoc[1]}</span>
         <input type="search" value={tim} onChange={(e) => setTim(e.target.value)} data-testid="cum-tim"
           placeholder={c("ml.vi_du", { vi_du: viDu })} enterKeyHint="search"
           className="mt-1.5 h-11 w-full rounded-xl border border-line bg-bg/60 px-3 text-[0.95rem] text-fg placeholder:text-fg-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold" />

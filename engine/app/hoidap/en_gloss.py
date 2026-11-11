@@ -376,6 +376,38 @@ def _battu(cau: str, t: str) -> str:
     return " ".join(dict.fromkeys(x for x in ra if x))
 
 
+# GĐ 3d: câu KIẾN THỨC thuần (không "my / me / I") mà từ điển thuật ngữ không nhận tên → mã từ điển theo NGHĨA (tên gọi
+# khác của cùng khái niệm; còn lại theo loại khái niệm: sao → thần sát, trụ → trụ, khác → Bát tự là gì). Không đọc lá số.
+_TU_DIEN_EN: list[tuple[str, str]] = [
+    (r"nobleman|noble (?:person|people|star|man)|benefactor star|heavenly noble", "thien_at_quy_nhan"),
+    (r"peach blossom|academic star|intelligence star|lonely star|grave star|solitary star|sky horse|red phoenix|"
+     r"symbolic stars?|shen ?sha|special stars?", "than_sat"),
+    (r"(?:year|month|day|hour) pillars?|the pillars?|a pillar", "tru"),
+    (r"month branch|season (?:of|you are) born|birth season", "nguyet_lenh"),
+    (r"travel+ing horse", "dich_ma"),
+]
+_KIEN_THUC_HOI = re.compile(r"\bwhat (is|are|does|do)\b|\bmeaning\b|\bmean\b|\bexplain\b|\bdefine\b|\bdefinition\b|"
+                            r"\btell me about (the |a |an )?(?!my\b)|\bwhat .{0,20}\b(represent|represents|stand for|stands for|symboli[sz]e)\b")
+_KIEN_THUC_MOC = re.compile(r"\b(this|next|last) (year|month|week)\b|\b(19|20)\d\d\b|\btoday\b|\bnow\b")
+
+
+def tu_dien_kien_thuc(cau: str, mang: str = "battu") -> list[str]:
+    """Mã từ điển cho câu kiến thức thuần tiếng Anh (Bát tự) mà bộ phân loại chưa nhận ra; không phải câu kiến thức → []."""
+    if mang != "battu":
+        return []
+    t = chuan(cau)
+    if _CA_NHAN.search(t) or not _KIEN_THUC_HOI.search(t) or _KIEN_THUC_MOC.search(t) or _ve_nguoi_khac(t) or _hop_nhau(t):
+        return []
+    from app.kb import tu_dien  # noqa: PLC0415
+    ma = [m["ma"] for m in tu_dien.nhan_dien(_goc_tu_dien(cau), "battu")]
+    for mau, m in _TU_DIEN_EN:
+        if re.search(r"\b(?:" + mau + r")\b", t) and m not in ma:
+            ma.append(m)
+    if not ma:
+        ma = ["than_sat"] if re.search(r"\bstars?\b", t) else ["tru"] if re.search(r"\bpillars?\b", t) else []
+    return ma[:2]
+
+
 def gloss(cau: str, mang: str) -> str:
     """Câu tiếng Anh → cụm từ khoá tiếng Việt không dấu cho `phan_loai` của mảng. Không khớp gì → chuỗi rỗng."""
     t = chuan(cau)

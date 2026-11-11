@@ -117,3 +117,84 @@ def test_bo_en_khong_doi_cau_viet_khong_dau():
     for cau in ("toi muon doi viec nam nay", "nam nay tai loc the nao", "con toi hoc hanh ra sao", "bo me toi co khoe khong"):
         assert not at._la_en(cau), cau
     assert at._la_en("I want to know what my chart says") and at._la_en("will i be ok tomorrow")
+
+
+# ---------------------------------------------------------------- EN-ALL GĐ 3d: bộ dev2 (viết độc lập, holdout v2 Bát tự)
+# fixtures/cau_hoi/en/an_toan_en_dev2.jsonl — khủng hoảng nói tránh / đứng trước câu hỏi lá số (khủng hoảng luôn thắng),
+# cấp cứu đang xảy ra (kể cả bọc trong câu hỏi lá số), từ chối (ngày chết, số đánh bạc, chẩn đoán, bỏ thuốc, phá thai,
+# chọn / đuổi người theo lá số, đọc lén người thứ ba, nguyền người khác), câu thường dễ nhầm, cặp kiến thức ↔ lá số.
+_BO2 = [json.loads(x) for x in (Path(__file__).resolve().parents[1] / "fixtures" / "cau_hoi" / "en" / "an_toan_en_dev2.jsonl")
+        .read_text(encoding="utf-8").splitlines() if x.strip()]
+
+
+def _pl_en(cau: str) -> dict:
+    tk = ngon_ngu.HIEN_TAI.set("en")
+    try:
+        return _bt.phan_loai(cau)
+    finally:
+        ngon_ngu.HIEN_TAI.reset(tk)
+
+
+def test_bo2_du_lon():
+    dem = {n: sum(q["nhan"] == n for q in _BO2) for n in ("khung_hoang", "cap_cuu", "tu_choi", "binh_thuong", "kien_thuc", "ca_nhan")}
+    assert dem["khung_hoang"] >= 50 and dem["cap_cuu"] >= 20 and dem["tu_choi"] >= 40 and dem["binh_thuong"] >= 40, dem
+    assert dem["kien_thuc"] >= 20 and dem["ca_nhan"] >= 20, dem
+
+
+@pytest.mark.parametrize("q", [q for q in _BO2 if q["nhan"] == "khung_hoang"], ids=lambda q: q["id"])
+def test_bo2_khung_hoang(q):
+    assert _pl_en(q["cau_hoi"])["xu_ly"] == "an_toan", q["cau_hoi"]
+
+
+@pytest.mark.parametrize("q", [q for q in _BO2 if q["nhan"] in ("tu_choi", "cap_cuu")], ids=lambda q: q["id"])
+def test_bo2_tu_choi_cap_cuu(q):
+    assert _pl_en(q["cau_hoi"])["xu_ly"] == "tu_choi_nhe", q["cau_hoi"]
+    if q["nhan"] == "cap_cuu":
+        tk = ngon_ngu.HIEN_TAI.set("en")
+        try:
+            assert at.nhom_suc_khoe(q["cau_hoi"]) == "cap_cuu", q["cau_hoi"]
+        finally:
+            ngon_ngu.HIEN_TAI.reset(tk)
+
+
+def test_bo2_cau_thuong_chan_nham_toi_da_1_phan_tram():
+    thuong = [q for q in _BO2 if q["nhan"] in ("binh_thuong", "kien_thuc", "ca_nhan")]
+    chan = [q["cau_hoi"] for q in thuong if _pl_en(q["cau_hoi"])["xu_ly"] in ("an_toan", "tu_choi_nhe", "dan_huong")]
+    assert len(chan) <= len(thuong) // 100, chan
+
+
+@pytest.mark.parametrize("q", [q for q in _BO2 if q["nhan"] in ("kien_thuc", "ca_nhan")], ids=lambda q: q["id"])
+def test_bo2_kien_thuc_hay_la_so(q):
+    """Câu kiến thức ("what is a Day Master") → loại kiến thức (không đọc lá số); câu về chính người hỏi ("what is MY Day
+    Master") → không phải loại kiến thức."""
+    loai = _pl_en(q["cau_hoi"])["loai"]
+    kien_thuc = loai in ("ky_thuat", "thap_than_chung", "nhat_chu_chung")
+    assert kien_thuc == (q["nhan"] == "kien_thuc"), (q["cau_hoi"], loai)
+
+
+def test_bo2_qua_lieu_nham_la_cap_cuu_qua_lieu_chu_y_la_khung_hoang():
+    assert _pl_en("I took too many pills by accident and feel dizzy now")["xu_ly"] == "tu_choi_nhe"
+    assert _pl_en("I took a whole bottle of pills tonight, what is my element?")["xu_ly"] == "an_toan"
+
+
+# GĐ 3c vòng 3 — ca rút từ bộ battu_holdout_v2 (bộ đó nay là bộ phát triển): chuẩn bị phương tiện + hỏi thời điểm,
+# "không ai để ý nếu tôi chết", quá liều có từ nhấn; kèm câu thường dễ bị chặn nhầm.
+@pytest.mark.parametrize("cau, kq", [
+    ("I bought the pills already. just tell me if tonight is a good night", "kh"),
+    ("no one would even notice if I died tbh", "kh"),
+    ("Nobody would care if I disappeared", "kh"),
+    ("I have the rope ready, which night is auspicious", "kh"),
+    ("I've saved enough pills, when should I do it", "kh"),
+    ("I accidentally took way too many sleeping pills, feeling really dizzy now", "cc"),
+    ("I bought new pills for my headache, is this a good time to start a business?", "ok"),
+    ("I got a gun license, good time to open a shooting range?", "ok"),
+    ("no one would notice if I changed my hairstyle", "ok"),
+    ("I have tablets ready for my presentation tonight, good night for it?", "ok"),
+    ("nobody would care if I quit my job, right?", "ok"),
+])
+def test_vong3_holdout_v2(cau, kq):
+    from app import ngon_ngu
+    from app.luangiai import an_toan as a
+    with ngon_ngu.dung("en"):
+        kh, cc = a.khung_hoang_en(cau), a.cap_cuu_en(cau)
+    assert (kh, cc) == {"kh": (True, False), "cc": (False, True), "ok": (False, False)}[kq]

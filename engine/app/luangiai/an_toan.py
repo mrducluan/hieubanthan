@@ -447,7 +447,9 @@ KHUNG_HOANG_ANH: list[re.Pattern] = [
            r"(?:better|happier) (?:off )?without me", r"happier if i (?:go|left|leave|was gone|were gone|disappear|die|was not here|wasn t here|am gone)",
            r"(?:everyone|everybody|they) (?:would|will|d) (?:finally )?be (?:better|happier) off(?=\s*(?:[,.!?;]|$))",
            r"if i (?:was|were|am)(?: not| n t)? (?:not )?(?:here|around|alive|gone)(?=.{0,60}(?:better|happier|step up|notice|care|miss))",
-           r"(?:nobody|no one|noone) (?:would|will|is going to|even|gonna)? ?(?:notice|care|miss me)(?: if i| when i)?",
+           r"(?:nobody|no one|noone) (?:would|will|is going to|even|gonna)? ?(?:even )?(?:notice|care|miss me)(?: if i| when i)?(?=\s*(?:[,.!?;]|$))", r"(?:nobody|no one|noone) (?:would|will|is going to|even|gonna)? ?(?:even )?miss me",
+           r"(?:nobody|no one|noone|anyone|anybody|people)(?: \w+){0,3} (?:notice|care|miss me|cry|come to my funeral)\w*(?: \w+){0,3} if i (?:died|die|was gone|were gone|"
+           r"disappeared|vanished|was not here|wasn t here|was not around|wasn t around|killed myself|ended it)",
            r"no more me", r"(?:i am|feel|feeling|felt|am|i m|just) (?:like )?(?:a |such a |only a |nothing but a )?(?:burden|burdan)(?! of)",
            r"(?:this|it) (?:is|will be|s|might be|may be|is going to be)? ?(?:going to be )?my (?:last|final) (?:reading|question|time asking|time|tarot|card|message)",
            r"(?:my )?last (?:reading|time asking|question|card|tarot) (?:ever|before i go)", r"last reading ever",
@@ -466,7 +468,7 @@ KHUNG_HOANG_ANH: list[re.Pattern] = [
            r"(?:keep|kept|always|been|started) (?:cutting|burning|scratching|hurting|hitting) (?:my|myself)"),
     # 4. uống quá liều / tích thuốc
     _rx_en(r"overdos\w*", r"overdosed on", r"(?:took|take|taken|taking|swallowed|swallow|ate|eat|had|downed|popped|drank|drink) "
-           r"(?:a |an |about |like |around |almost |maybe )?(?:whole (?:box|bottle|pack|strip)|bottle|box|too many|too much|a lot|lot|bunch|"
+           r"(?:a |an |about |like |around |almost |maybe |way |far |way way |so )?(?:whole (?:box|bottle|pack|strip)|bottle|box|too many|too much|a lot|lot|bunch|"
            r"handful|all|twenty|thirty|fifty|dozen|\d+|more than)(?:.{0,30})(?:pills|meds|medication|tablets|paracetamol|panadol|"
            r"tylenol|ibuprofen|aspirin|antidepressants|sleeping pills|painkillers|pain killers|insulin)",
            r"(?:collect\w*|sav\w*|stockpil\w*|hoard\w*) (?:up )?(?:\w+ )?(?:pills|meds|tablets|sleeping pills|painkillers)",
@@ -503,15 +505,15 @@ KHUNG_HOANG_ANH.append(_rx_en(
     r"stay alive|be alive|be here|exist|continue|stay)",
     r"(?:lost|losing|lose|have no|got no|no) (?:the |my |all |any )?(?:will|desire|wish|reason|strength) to (?:live|go on|keep going|keep living|stay alive)",
     # 6b. biến mất hẳn / ngày cuối / không cần xem nữa
-    r"disappear\w* (?:for good|forever|permanently|from (?:this|the) world|from everyone s life)",
+    r"(?:(?:i|me|myself)(?: (?:just|really|simply|could|would|should|want to|wanna|wish i could|keep|am|m|will))*|about|of) "
+    r"disappear\w* (?:for good|forever|permanently)",
+    r"disappear\w* (?:from|out of) (?:this|the) world|disappear\w* from everyone s li(?:fe|ves)",
     r"(?:this|tonight|today|tomorrow|this (?:weekend|week|month)) (?:is|will be|is going to be) my last(?=\s*(?:[,.!?;]|$))",
     r"my last (?:day|night|week|weekend|birthday|christmas) (?:alive|on earth|in this world|ever)",
     r"(?:will not|never|not going to|won t) (?:need|be needing) (?:a |any |another |more )?(?:readings?|charts?|advice|answers?|this|anything)"
     r" (?:after (?:this (?:week|weekend|month)|tonight|today|tomorrow|next week)|where i (?:am|m) going|where i will be)",
-    r"(?:do not|don t|cannot|can t) (?:think|expect|see|plan on|plan to) (?:that )?(?:i will |i ll |i am going to |i ll still |myself |to )?(?:still )?"
-    r"(?:be|being|stick|sticking) (?:here|around|alive)(?: (?:much|any) longer| for (?:long|much longer)| anymore)",
     r"(?:remove|removing|erase|erasing|take|taking) myself (?:from|out of) (?:everyone s|everybody s|their|this|the) (?:life|lives|world|picture)"
-    r"(?: (?:permanently|forever|for good))?(?!\w)(?=.{0,30}(?:permanent|forever|for good|burden|better|$))",
+    r"(?: (?:permanently|forever|for good))?(?!\w)(?=.{0,30}(?:permanent|forever|for good|burden|better))",
     # 6c. "thế giới tốt hơn nếu tôi không ở đây" (mọi cách nói)
     r"(?:better|happier|easier|lighter) (?:off )?(?:for everyone |for them |for my family |for everybody )?if i (?:just |simply |only )?"
     r"(?:(?:was|were) (?:not |n t )?(?:here|around|alive|gone|in it|in the world|born|dead)|(?:wasn t|weren t) (?:here|around|alive|in it|"
@@ -522,9 +524,9 @@ KHUNG_HOANG_ANH.append(_rx_en(
     r"i (?:should|might as well|may as well) (?:just )?die(?=\s*(?:[,.!?;]|$))",
     # 6d. lên ban công / mép cao để bước xuống; nhịn thở mãi; dây thừng
     r"(?:step|stepping|stepped|throw\w* myself|let myself fall|lean\w* over|go over) (?:off |over |from |out of )?(?:the |a |my |our )?(?:\w+ ){0,2}"
-    r"(?:balcony|ledge|roof|rooftop|bridge|edge|window|railing|cliff|building|platform)",
+    r"(?:balcony|ledge|roof|rooftop|bridge|edge|window|railing|cliff)",
     r"(?:standing|stand|stood|sitting|sat) on (?:the |a |my |our )?(?:\w+ ){0,2}(?:balcony|ledge|roof|rooftop|bridge|railing|edge)"
-    r" .{0,40}(?:thinking|wondering|imagining|wanting|about to|ready)",
+    r" .{0,40}(?:thinking|wondering|imagining) (?:about |of )?(?:jumping|stepping|falling|letting go|ending|going over|how easy)",
     r"stop breathing (?:forever|for good|permanently)|(?:want|wish|wanna|need) (?:to )?(?:just )?stop breathing|"
     r"(?:want|wish) my heart (?:to|would) (?:just )?stop",
     r"noose",
@@ -532,8 +534,8 @@ KHUNG_HOANG_ANH.append(_rx_en(
     r"plan\w* (?:out )?(?:how|when|where) (?:i (?:would|will|could|might|am going to|d|ll) |to )(?:die|end (?:it|things|my life)|kill myself|do it|go)",
     r"(?:keep|kept|always|constantly) (?:thinking|think) (?:about|of) (?:dying|my (?:own )?death|killing myself|ending it|not being here)",
     # 6f. muốn mọi thứ chấm dứt hẳn / chấm dứt khổ đau vĩnh viễn
-    r"(?:end|ending|stop|stopping) (?:my|the|this|all (?:my|the|this)) (?:suffering|pain|misery|torment)(?: \w+){0,2} (?:permanently|forever|for good|once and for all)",
-    r"(?:permanently|forever|for good|once and for all) end\w* (?:my|the|this) (?:suffering|pain|misery|life)",
+    r"(?:end|ending|stop|stopping) (?:my|the|this|all (?:my|the|this)) (?:suffering|misery|torment)(?: \w+){0,2} (?:permanently|forever|for good|once and for all)",
+    r"(?:permanently|forever|for good|once and for all) end\w* (?:my|the|this) (?:suffering|misery|life)",
 ))
 # Cặp mới (ý, ngữ cảnh) — GĐ 3d: "I want it to be over" chỉ là khủng hoảng khi câu nói về cuộc sống / khổ đau; dây thừng chỉ
 # khi kèm cảnh nhìn / buộc / treo; ý làm hại người khác chỉ khi nói nghiêm túc (kế hoạch, vũ khí, "for real").
@@ -543,15 +545,27 @@ _KHUNG_HOANG_KEP_3D: list[tuple[re.Pattern, re.Pattern]] = [
      _rx_en(r"life|living|alive|pointless|meaningless|hopeless|worthless|suffer\w*|exist\w*|anymore|tired of|done with")),
     (_rx_en(r"life is (?:pointless|meaningless|worthless|hopeless|not worth it)|(?:i am|i m) (?:worthless|hopeless)"),
      _rx_en(r"(?:want|wish|need) .{0,20}(?:over|end|stop|gone|die|disappear)|give up on (?:life|living)|no reason|cannot go on")),
-    (_rx_en(r"rope"), _rx_en(r"(?:keep |kept )?(?:looking|staring|stare) at it|around my neck|hang\w*|tie (?:it|a knot)|ceiling|beam|"
-                             r"in my (?:closet|wardrobe|room|car|bag)|tonight")),
+    (_rx_en(r"rope"), _rx_en(r"(?:keep |kept )?(?:looking|staring|stare) at it|around my neck|hang\w* (?:myself|it from|from)|ceiling|beam")),
     (_rx_en(r"(?:want|wanted|going|plan\w*|gonna|ready|thinking about how|think about how|thought about how|decided) (?:to )?"
             r"(?:kill|murder|stab|shoot|poison|strangle|seriously hurt|hurt) (?:my |the |that |this )?(?:\w+ ){0,2}"
             r"(?:boss|husband|wife|partner|ex|neighbou?r|colleague|coworker|co worker|father|dad|mother|mom|mum|stepdad|stepmom|"
             r"brother|sister|teacher|him|her|them|someone|people|everyone|family)"),
      _rx_en(r"for real|seriously|serious|thought about how|planned|planning|a plan|my plan|tonight|not joking|i mean it|"
-            r"i will do it|how to do it|knife|gun|weapon|poison|really going to")),
+            r"i will do it|how to do it|knife|gun|weapon|poison|really going to")),    # Đã chuẩn bị phương tiện ("bought the pills already", "the rope is ready") + hỏi THỜI ĐIỂM ("is tonight a good night") — khủng hoảng.
+    (_rx_en(r"(?:bought|got|have|collected|saved|stocked up on|got hold of|picked up) (?:all |enough |the |my )?(?:\w+ )?"
+            r"(?:pills|meds|sleeping pills|rope|noose|charcoal|razors?|blades?|gun|bullets?|poison|helium)(?: \w+){0,2} (?:already|ready)"
+            r"|already (?:bought|got|have|collected|saved) (?:all |enough |the |my )?(?:\w+ )?(?:pills|tablets|meds|sleeping pills|rope|noose|"
+            r"charcoal|razors?|blades?|gun|bullets?|poison|helium)"
+            r"|(?:enough|all the|all my) (?:sleeping )?(?:pills|meds|tablets)(?: \w+){0,3} (?:saved|ready|collected|stocked)"
+            r"|(?:pills|rope|noose|charcoal|gun|blades?|poison) (?:are|is) (?:ready|here|next to me|in front of me|all set)"),
+     _rx_en(r"tonight|good night|good (?:day|time|hour|moment)|right (?:day|time|night|moment)|best (?:day|time|night)|when (?:should|to|do) i|"
+            r"which (?:day|night|hour)|lucky (?:day|night|hour)|auspicious|already|ready|do it|go through with")),
 ]
+# "I don't think I'll be here much longer" — khủng hoảng, trừ khi câu nói chuyện chuyển nhà / đi nước ngoài / nghỉ việc.
+_KHONG_CON_O_DAY = _rx_en(r"(?:do not|don t|cannot|can t) (?:think|expect|see|plan on|plan to) (?:that )?(?:i will |i ll |i am going to |i ll still |"
+                          r"myself |to )?(?:still )?(?:be|being|stick|sticking) (?:here|around|alive)(?: (?:much|any) longer| for (?:long|much longer)| anymore)")
+_CHUYEN_DI = _rx_en(r"mov\w*|relocat\w*|abroad|overseas|emigrat\w*|transfer\w*|new job|resign\w*|quit\w*|contract|lease|company|office|"
+                    r"job|visa|university|school|city|country|town|travel\w*")
 # Ý làm hại con nhỏ / người phụ thuộc mình (bản Việt: bạo lực, xâm hại) — luôn là khủng hoảng.
 _HAI_CON = _rx_en(r"(?:thinking|thought|think|scared|afraid|urges?|tempted|going|want|wanted|planning|plan|imagin\w*|feel like)"
                   r" (?:about |of |to )?(?:hurting|harming|hitting|shaking|smothering|drowning|killing|strangling|hurt|harm|kill|"
@@ -611,21 +625,24 @@ _CAP_CUU_ANH = _rx_en(
     r"(?:lost|losing) (?:the )?(?:vision|sight) in one eye",
     r"(?:head|ear|ears|mouth|eye|eyes|wound|neck|stomach) (?:is |are |s |keeps |won t stop |will not stop |started )?(?:bleeding|gushing blood)",
     r"(?:vomit\w*|throw\w* up|threw up|cough\w* up|coughing) (?:up )?(?:blood|black stuff)|blood in (?:my |his |her )?(?:vomit|stool|poo)",
-    r"(?:going to|about to|gonna|feel like (?:i|he|she) (?:m|am|is|s|will|would) (?:going to )?|feel like passing) "
-    r"(?:pass out|faint|collapse|black out)(?: (?:right now|now|any (?:second|minute)))?",
+    r"(?:feel(?:ing)? like|about to|going to|gonna) (?:i m |i am |i will |i ll |he s |she s |he is |she is )?(?:going to |gonna |about to )?"
+    r"(?:pass out|faint|collapse|black out)(?= (?:right now|now|any (?:second|minute)))",
+    r"(?:heart|chest|dizzy|dizziness|cannot breathe) .{0,40}(?:going to|about to|gonna|feel like) (?:\w+ ){0,3}(?:pass out|faint|collapse|black out)",
     r"slurr\w* (?:speech|words|(?:his|her|their) words)|(?:speech|talking|voice) (?:is |was )?(?:\w+ )?slurr\w*|"
     r"(?:is|s|was|started|keeps|been|now|and) slurring",
     r"hit (?:his|her|my|their|the|its) head .{0,60}(?:confused|vomit\w*|unconscious|drowsy|sleepy|slurr\w*|cannot wake|can t wake|"
     r"bleeding|not making sense|throwing up)",
-    r"(?:swallowed|ate|eaten|drank|drunk|got into|chewed) (?:a |an |some |the |my |his |her |our )?(?:\w+ ){0,2}(?:pills|tablets|meds|medicine|"
-    r"medication|bleach|detergent|poison|chemicals?|batter(?:y|ies)|cleaning (?:liquid|product)|pesticide|weed killer|antifreeze|"
-    r"laundry pods?|rat poison)",
-    r"(?:took|taken|take|swallowed|had) (?:too many|too much|a double dose|the wrong|an overdose)(?:.{0,30})(?:pills|meds|medication|tablets|"
+    r"(?:swallowed|ate|eaten|drank|drunk|got into|chewed) (?:a |an |some |the |my |his |her |our )?(?:\w+ ){0,2}(?:bleach|detergent|poison|"
+    r"chemicals?|batter(?:y|ies)|cleaning (?:liquid|product)|pesticide|weed killer|antifreeze|laundry pods?|rat poison)",
+    r"got into (?:my |his |her |our |the |grandma s |mom s |dad s )?(?:\w+ )?(?:pills|tablets|meds|medicine|medication)",
+    r"(?:toddler|baby|child|kid|son|daughter|dog|cat|puppy) (?:\w+ ){0,3}(?:swallowed|ate|chewed|drank) (?:some |a handful of |a bunch of |"
+    r"a lot of |my |the |grandma s |mom s |dad s )(?:\w+ )?(?:pills|tablets|meds|medicine|medication)",
+    r"(?:took|taken|take|swallowed|had) (?:way |far |so |a bit |accidentally )?(?:too many|too much|a double dose|the wrong|an overdose)(?:.{0,30})(?:pills|meds|medication|tablets|"
     r"medicine|insulin|dose)(?=.{0,40}(?:accident|mistake|dizzy|faint|vomit|confused|drowsy|now|sick|numb))",
 )
 # Tai nạn đang xảy ra (chảy máu, bất tỉnh, không cử động được) — không tính chuyện tai nạn đã qua ("last year", "in 2019").
 _TAI_NAN_NGAY = _rx_en(r"(?:in|had|got into|was in|been in|just had) (?:a |an )?(?:\w+ ){0,2}(?:crash|accident|collision)|hit by a (?:car|bus|truck|motorbike|bike)")
-_TAI_NAN_NANG = _rx_en(r"bleed\w*|blood|unconscious|cannot move|can t move|not breathing|not moving|broken|bone sticking")
+_TAI_NAN_NANG = _rx_en(r"bleed\w*|unconscious|cannot move|can t move|not breathing|not moving|bone sticking")
 _DA_QUA = _rx_en(r"last (?:year|month|week)|years? ago|months? ago|in (?:19|20)\d\d|when i was|back in|childhood")
 
 # --- từ chối
@@ -755,6 +772,8 @@ def _khung_hoang_anh(kd: str) -> bool:
         return True
     if _HAI_CON.search(k) and (not _DUA_RX.search(k) or _THAT.search(k)):
         return True
+    if _KHONG_CON_O_DAY.search(k) and not _CHUYEN_DI.search(k):
+        return True
     if _CHO_DO.search(k) and not _CHO_DO_THUONG.search(k):
         return True
     if (_DOA_GIET.search(k) or _DOA_GIET_2.search(k)) and (not _DUA_RX.search(k) or _THAT.search(k)):
@@ -870,7 +889,9 @@ _DU_DOAN = _rx_en(r"(?:gold|bitcoin|btc|crypto|stock|stocks|share|shares|propert
 # Yểm bùa / nguyền người khác (bản Việt TU_CHOI_THEM "yểm bùa") — từ chối; hỏi nhà mình có bị yểm thì là chuyện tâm linh khác.
 _YEM = _rx_en(r"(?:put|cast|place|send) (?:a |an )?(?:curse|hex|spell|jinx|black magic) on (?!me\b|my house|my home|us\b)\w+|"
               r"(?:bring|send|cause|give|wish) (?:bad luck|misfortune|harm|illness|sickness|bad things|disaster|bad energy) "
-              r"(?:to|on|upon|for|onto) (?!me\b|myself|us\b|my (?:house|home|self))\w+|"
+              r"(?:to|on|upon|for|onto) (?:him|her|them|someone|somebody|(?:my|our|his|her|that|this) (?:\w+ )?(?:rival|enemy|enemies|ex|boss|"
+              r"neighbou?r|colleague|coworker|competitor|husband|wife|sister|brother|friend|cousin|mother in law|father in law|in laws|"
+              r"landlord|teacher|classmate|girl|guy|woman|man|family))|"
               r"(?:ritual|spell|charm|curse|hex|talisman|black magic)s? (?:to|that will|that can|for|which will) (?:harm|hurt|punish|ruin|destroy|"
               r"break (?:them |him |her )?up|curse|make (?:him|her|them) (?:sick|suffer|fail|leave|lose))|"
               r"(?:curse|hex|jinx) (?:him|her|them|my (?:ex|boss|neighbou?r|enemy|rival|colleague|coworker|husband|wife|mother in law))|"
@@ -903,7 +924,7 @@ def _tung_cau(k: str) -> list[str]:
 # "without telling her") hoặc lấy ngày sinh / lá số của đồng nghiệp, hàng xóm, người yêu cũ… để phán chuyện riêng của họ
 # (ngoại tình, nói dối, ly hôn, còn yêu không) → từ chối. Câu về chồng / vợ / người yêu trong quan hệ của chính người hỏi
 # ("will my husband cheat on me") không thuộc nhóm này.
-_LEN = _rx_en(r"secret\w*|without (?:telling|asking|letting|informing) (?:him|her|them)|without (?:his|her|their) (?:knowledge|consent|"
+_LEN = _rx_en(r"secretly|in secret|without (?:telling|asking|letting|informing) (?:him|her|them)|without (?:his|her|their) (?:knowledge|consent|"
               r"permission|knowing)|behind (?:his|her|their) back|(?:he|she|they) (?:will not|won t|must not|does not|doesn t|never) "
               r"(?:know|find out)|(?:do not|don t|not) tell (?:him|her|them)")
 _NGUOI_NGOAI = _rx_en(r"(?:co ?workers?|colleagues?|neighbou?rs?|classmates?|roommates?|flatmates?|boss|manager|"

@@ -183,7 +183,26 @@ tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2
   Trình duyệt gửi `x-ngon-ngu` cho route API (`fetchSao` → `kemNgonNgu`), route GET có đệm dùng `urlTheoNgonNgu`. Bản Anh:
   báo cáo miễn phí (`luan_giai_sao` bỏ thu Sao khi lượt gọi tiếng Anh), không tặng chương / lưu bài, không khối CTA chéo mảng.
   e2e `web/e2e/en-bazi.spec.ts`. **Chưa**: cụm kiến thức `/en/bazi/{ten-gods, day-masters, element-by-birth-year}` (engine đã
-  sạch nhưng `TrangChuDe` / `TrangKienThuc` / `DanhSachCum` / `DongTacGia` / `MinhHoa` còn chữ Việt cứng + CMS mẫu cụm) — cờ `mo` để tắt; thẻ chia sẻ.
+  sạch nhưng `TrangChuDe` / `TrangKienThuc` / `DanhSachCum` / `DongTacGia` / `MinhHoa` còn chữ Việt cứng + CMS mẫu cụm) — cờ `mo` để tắt; thẻ chia sẻ. → cụm kiến thức: xong ở dòng dưới.
+- ✅ **Cụm kiến thức `/en/bazi/{ten-gods, day-masters, element-by-birth-year}[/slug]`** (2026-11-11, một cây component): cờ `mo`
+  bật trong `lib/duong-en.json` → proxy rewrite về `/bat-tu/{thap-than, nhat-chu, menh-theo-nam}[/slug]`; slug con = `slug_en`
+  engine (URL Anh mang slug Việt → 308 về slug Anh; URL Việt mang slug Anh → 308 về slug Việt). Chữ cố định của khối trang
+  kiến thức dùng chung đưa vào `lib/chu/kien-thuc.ts` (chiều `en`): "Trả lời nhanh" (`TraLoiNhanh`), ngày / nhãn / hỏi đáp /
+  nguồn / miễn trừ / lời mời của `TrangKienThuc` (tách `CacMuc`, `HoiDapBai`, `ThanMuc` dùng chung hai bản), mục lục cụm
+  (`DanhSachCum`, `BoLocCum`; `mucLucCum(…, en)` — luật `menh-tuoi` có nhãn Anh, luật khác bản Anh giữ lưới phẳng), dòng tác
+  giả (`DongTacGia`: bản Anh luôn "Hieuban editorial team · Editor-in-chief Duc Luan" — EEAT-1/BM-1: chuyên gia không đứng tên
+  bản Anh; bản Việt đã thẩm định thì ghi "The Vietnamese edition was reviewed by…"), hình minh hoạ thập thần / nhật chủ / mệnh
+  năm + dải QR (`MinhHoa` nhận `en` + `ten` từ `ten_hien`). Trang cụm + trang con bản Anh: `TrangChuDeEn` / `TrangKienThucEn`
+  (cùng khối, không CMS mẫu cụm, không "Bài viết liên quan", không "Góc nhìn chuyên gia" — lời chuyên gia chỉ có tiếng Việt,
+  không ảnh tóm tắt dọc — /og/y-chinh chỉ vẽ chữ Việt; link tới trang chưa có bản Anh thì ẩn). Chữ máy chủ trang cụm:
+  `CUM_EN` trong `lib/so-trang-en.ts` (cũng là thẻ khối "Learn BaZi" của /en/bazi); breadcrumb `duongDanCumEn`; JSON-LD
+  CollectionPage / Article (+ `translationOfWork`) / FAQPage / BreadcrumbList tiếng Anh, `ldThucTheEn`. Hreflang hai chiều:
+  trang Việt của 3 cụm + trang con khai `en` (slug Anh tra mục lục bản Anh — `slugEnCua`; chỉ cụm rewrite, `banAnhRewrite`) —
+  lệch HTML có chủ đích DUY NHẤT (3 thẻ `alternate` / trang), mọi trang Việt khác 0 lệch. Nút "Tiếng Việt" dựng ở máy chủ trỏ
+  đúng trang Việt cùng mục (`banVietTrangEn`, không qua 308). sitemap-en thêm 3 cụm + 98 trang con (lastmod, hreflang; chỉ cụm rewrite —
+  cụm viết riêng không bị liệt kê hai lần). `kiem-tra-seo.mjs --chi-en`: 199 URL, 0 lỗi, 0 cảnh báo ở /en/bazi/*. e2e
+  `e2e/en-bazi.spec.ts` (+9 ca). **Còn**: thẻ chia sẻ; cột "Learn" của chân trang bản Anh chưa có 3 cụm; bản `.md` trang Anh;
+  trang Việt `/tarot/la-bai`, `/than-so/y-nghia-so` (bản Anh viết riêng) vẫn chưa khai hreflang `en` ở trang cụm (có từ trước).
 
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
@@ -223,7 +242,7 @@ sang hệ một-component ở GĐ 1 (cùng URL).
 | `/tarot` | `/en/tarot` | đã có (cũ) | 1, 7 |
 | `/tarot/[cum]`, `/tarot/[cum]/[slug]` (la-bai) | `/en/tarot/cards[/slug]` | đã có (cũ) | 1 |
 | `/bat-tu` | `/en/bazi` | xong (rewrite) | 3 |
-| `/bat-tu/[cum][/slug]` (thap-than, nhat-chu, menh-theo-nam) | `/en/bazi/{ten-gods, day-masters, element-by-birth-year}[/…]` | chưa | 3 |
+| `/bat-tu/[cum][/slug]` (thap-than, nhat-chu, menh-theo-nam) | `/en/bazi/{ten-gods, day-masters, element-by-birth-year}[/…]` | xong (rewrite) | 3 |
 | `/tu-vi` | `/en/zi-wei-dou-shu` | chưa | 4 |
 | `/tu-vi/[cum][/slug]` (chinh-tinh, cung, sao-o-cung, tu-hoa, co-thu) | `/en/zi-wei-dou-shu/{stars, palaces, star-in-palace, four-transformations, classics}[/…]` | chưa | 4 |
 | `/tu-vi/la-so-mau[/slug]` | `/en/zi-wei-dou-shu/sample-charts[/…]` | chưa | 4 |

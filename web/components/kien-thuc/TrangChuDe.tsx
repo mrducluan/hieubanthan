@@ -18,7 +18,7 @@ import { DanhSachCum } from "@/components/kien-thuc/DanhSachCum";
 import { mucLucCum } from "@/lib/nhom-cum";
 import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
-import { banAnh } from "@/lib/duong-en";
+import { banAnh, banAnhRewrite } from "@/lib/duong-en";
 import { duongDanCumEn } from "@/lib/duong-dan";
 import { cumEn } from "@/lib/so-trang-en";
 import { ldThucTheEn, metaEn } from "@/lib/en/seo";
@@ -48,7 +48,7 @@ const TRA_LOI_CUM: Record<string, string> = {
 export async function metaChuDe(khoa: string | null): Promise<Metadata> {
   const cd = khoa ? CHU_DE[khoa] : undefined;
   if (!cd) return { title: "Không tìm thấy", robots: { index: false } };
-  const en = banAnh(cd.duong);
+  const en = banAnhRewrite(cd.duong);
   if ((await ngonNguMayChu()).ngonNgu === "en") {
     // EN-ALL GĐ 3d: trang cụm bản Anh (rewrite) — chữ máy chủ từ lib/so-trang-en.ts (CUM_EN), không CMS.
     const ce = cumEn(cd.duong);

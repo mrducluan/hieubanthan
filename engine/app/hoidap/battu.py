@@ -179,6 +179,8 @@ def phan_loai(cau_hoi: str) -> dict:
         kq["loai"] = "ky_thuat"
     elif td := hieu_cau.la_kien_thuc_tu_dien(t_chinh, cau_hoi, "battu"):
         kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển, không tứ trụ
+    elif not ngon_ngu.la_viet() and (td_en := en_gloss.tu_dien_kien_thuc(goc)):
+        kq["loai"], kq["tu_dien"] = "ky_thuat", td_en     # GĐ 3d: câu kiến thức tiếng Anh, tên gọi khác của thuật ngữ
     elif chung.co(t_chinh, VAN):
         kq.update(loai="van", xu_ly="tra_loi_kem_luu_y")
         kq["chu_de"] = _chu_de_cau(cau_hoi, t_chinh)   # MT-ĐS B2: mảng của câu vận
