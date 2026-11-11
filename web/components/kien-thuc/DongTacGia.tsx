@@ -62,7 +62,9 @@ export function DongTacGia({ chu_bien, tac_gia, tham_dinh, duyet_xuat_ban, en = 
  *  kèm link; tên viết không dấu (như chân trang bản Anh). */
 function DongTacGiaEn({ chu_bien, tac_gia, tham_dinh, c }: Omit<Props, "duyet_xuat_ban" | "en"> & { c: DocChu<typeof CHU_KIEN_THUC> }) {
   const ten = CHUYEN_GIA[chu_bien] ? c("tg.ten_chu_bien") : "";
-  const tenViet = (slug: string | null | undefined) => (slug && CHUYEN_GIA[slug] ? c("tg.ten_chu_bien") : "");
+  // Tên theo đúng người trong dữ liệu (tham_dinh.nguoi / tac_gia), viết không dấu như chân trang bản Anh.
+  const tenViet = (slug: string | null | undefined) =>
+    (slug && CHUYEN_GIA[slug] ? CHUYEN_GIA[slug].ten.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D") : "");
   const banViet = tham_dinh && tenViet(tham_dinh.nguoi) ? c("tg.ban_viet", { ten: tenViet(tham_dinh.nguoi), ngay: tham_dinh.ngay })
     : tac_gia && tenViet(tac_gia) ? c("tg.ban_viet_tac_gia", { ten: tenViet(tac_gia) }) : "";
   return (

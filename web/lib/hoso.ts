@@ -147,6 +147,14 @@ export function tenGoi(h: Pick<HoSo, "ho_ten">): string {
   return phan[phan.length - 1] ?? h.ho_ten;
 }
 
+/** EN-ALL: tên gọi ở bản Anh. Hồ sơ dùng chung hai ngôn ngữ — tên Việt (có dấu) đặt họ trước nên gọi tên cuối như bản Việt;
+ *  tên Anh / không dấu gọi tên đầu ("John Smith" → John). Tên thường gọi (`ten_khac`) có thì dùng luôn. */
+export function tenGoiEn(h: Pick<HoSo, "ho_ten" | "ten_khac">): string {
+  if (h.ten_khac?.trim()) return h.ten_khac.trim();
+  if (/[^\u0000-\u024f]|[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/i.test(h.ho_ten)) return tenGoi(h);
+  return h.ho_ten.trim().split(/\s+/)[0] ?? h.ho_ten;
+}
+
 /** Ngày có tồn tại không (31/2 → false). Kiểm tra định dạng, không phải tính toán huyền học. */
 export function ngayHopLe(ngay: number, thang: number, nam: number): boolean {
   const d = new Date(Date.UTC(nam, thang - 1, ngay));

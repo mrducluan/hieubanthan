@@ -25,7 +25,7 @@ import type { LaSoBatTu, LuuNienBatTu } from "@/lib/battu-kieu";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang } from "@/lib/hoi-mang";
-import { kemTinhTrang, laSoTuHoSo, tenGoi, useHoSo } from "@/lib/hoso";
+import { kemTinhTrang, laSoTuHoSo, tenGoi, tenGoiEn, useHoSo } from "@/lib/hoso";
 import { taiAnhHtml } from "@/lib/tai-anh-html";
 import { cn } from "@/lib/utils";
 import { ChuNhan } from "@/components/cms/ChuNhan";
@@ -119,7 +119,7 @@ export function BatTu() {
           <div className="glass space-y-3 rounded-2xl p-5 sm:p-6" data-testid="bat-tu-loi-thuong">
             <p className="text-sm text-fg-muted">
               <ChuNhan lopNhan="font-bold text-gold" chu={hoSo
-                ? cb("loi_thuong.co_ten", { ten: en ? (hoSo.ho_ten.trim().split(/\s+/)[0] ?? hoSo.ho_ten) : tenGoi(hoSo), hanh: ten("hanh", ls.nhat_chu.ngu_hanh) })
+                ? cb("loi_thuong.co_ten", { ten: en ? tenGoiEn(hoSo) : tenGoi(hoSo), hanh: ten("hanh", ls.nhat_chu.ngu_hanh) })
                 : cb("loi_thuong.khong_ten", { hanh: ten("hanh", ls.nhat_chu.ngu_hanh) })} />
               {ls.loi_thuong?.hinh_tuong ? <ChuNhan lopNhan="font-bold text-fg" chu={cb("loi_thuong.hinh", { hinh: ls.loi_thuong.hinh_tuong })} /> : cb("loi_thuong.cham")}
             </p>

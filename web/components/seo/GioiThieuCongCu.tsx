@@ -5,6 +5,7 @@ import { thanhCua } from "@/lib/thanh-mang";
 import { banViet } from "@/lib/duong-en";
 import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ldThucTheEn } from "@/lib/en/seo";
 import { TEN_MANG_SILO, truCua } from "@/lib/kien-thuc";
 import { anhBai, goiLd, ldAnh, ldDuongDan, ldHoiDap, ldThucThe, mangTheoDuong, siteUrl, urlDayDu } from "@/lib/seo";
 
@@ -29,8 +30,8 @@ export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [], 
         <JsonLd data={goiLd(
           { "@type": "WebPage", "@id": `${urlDayDu(duong)}#trang`, url: urlDayDu(duong), name: ten, description: moTa,
             inLanguage: "en", isPartOf: { "@id": `${siteUrl()}/#website` },
-            // Thực thể chung (Wikipedia/Wikidata) với tên tiếng Anh — bản Việt dùng tên Việt + alternateName.
-            about: [((tt) => tt && { "@type": "Thing", name: tt.alternateName, sameAs: tt.sameAs })(ldThucThe(mangTheoDuong(banViet(duong) ?? duong))), { "@type": "Thing", name: ten }].filter(Boolean),
+            // Thực thể chung (Wikipedia/Wikidata) với tên tiếng Anh, bỏ link Wikipedia tiếng Việt — bản Việt dùng tên Việt + alternateName.
+            about: [ldThucTheEn(mangTheoDuong(banViet(duong) ?? duong)), { "@type": "Thing", name: ten }].filter(Boolean),
             mainEntity: { "@id": `${urlDayDu(duong)}#ung-dung` } },
           { "@type": "WebApplication", "@id": `${urlDayDu(duong)}#ung-dung`, name: ten, url: urlDayDu(duong), description: moTa,
             applicationCategory: "LifestyleApplication", operatingSystem: "Web", inLanguage: "en", isAccessibleForFree: true,
