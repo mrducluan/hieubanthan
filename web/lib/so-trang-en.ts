@@ -37,6 +37,37 @@ export const CUM_EN: Readonly<Record<string, CumEn>> = {
     mo_ta: "The Na Yin element of every birth year from 1950 to 2027: stem and branch, zodiac sign, matching and clashing signs, Kua number, and the Lunar New Year cut-off.",
     tra_loi: "Your birth-year element is the Na Yin element of the year's stem and branch, counted by the lunar year (from Lunar New Year), such as Great Forest Wood for 1988. It is not the same as your element in BaZi, which comes from your birth day. This section has {so} pages, one per year: stem and branch, zodiac sign, Na Yin meaning, signs that match or clash, and the Kua number for men and women.",
   },
+  "/tu-vi/chinh-tinh": {
+    ten: "The 14 main stars", h1: "The 14 main stars of Zi Wei Dou Shu",
+    tieu_de_seo: "The 14 main stars of Zi Wei Dou Shu: nature and meaning · Hieuban",
+    mo_ta: "Zi Wei, Tian Ji, Tai Yang and the other main stars: element, strengths, blind spots, how each behaves bright or dim, and what it means in the 12 palaces.",
+    tra_loi: "Zi Wei Dou Shu reads a chart mainly through 14 main stars, from Zi Wei (the Emperor) to Po Jun (the Breaker). Each has an element and a character, shows its best side when bright and its harder side when dim, and colours whichever palace it sits in. This section has {so} pages, one for each main star.",
+  },
+  "/tu-vi/cung": {
+    ten: "The 12 palaces", h1: "The 12 palaces of a Zi Wei Dou Shu chart",
+    tieu_de_seo: "The 12 palaces of Zi Wei Dou Shu: what each one covers · Hieuban",
+    mo_ta: "The Life, Wealth, Career, Spouse and other palaces of a Zi Wei Dou Shu chart: what area of life each covers, and how each main star changes it.",
+    tra_loi: "A Zi Wei Dou Shu chart is a ring of 12 palaces, each standing for one area of life: the Life Palace for who you are, then Siblings, Spouse, Children, Wealth, Health, Travel, Friends, Career, Property, Fortune and Parents. Each palace is read together with its triad and the palace opposite it. This section has {so} pages, one per palace.",
+  },
+  "/tu-vi/sao-o-cung": {
+    ten: "Main star in each palace", h1: "Each main star in each of the 12 palaces",
+    tieu_de_seo: "Zi Wei Dou Shu: each main star in each of the 12 palaces · Hieuban",
+    mo_ta: "168 pages, one for each of the 14 main stars in each of the 12 palaces: meaning, brightness by branch, stars that share or face the palace, and the Four Transformations.",
+    tra_loi: "The same star reads differently depending on the palace it sits in: Zi Wei in the Life Palace speaks about how you lead your own life, in the Career Palace about how you work. This section has {so} pages, one for each of the 14 main stars in each of the 12 palaces, with the brightness by branch, the stars that sit with it or face it, and which birth years transform it.",
+  },
+  "/tu-vi/tu-hoa": {
+    ten: "Four Transformations by palace", h1: "The Four Transformations in the 12 palaces",
+    tieu_de_seo: "Hua Lu, Quan, Ke and Ji in the 12 palaces of Zi Wei Dou Shu · Hieuban",
+    mo_ta: "What Hua Lu (prosperity), Hua Quan (power), Hua Ke (fame) and Hua Ji (obstacle) mean in each of the 12 palaces, and which birth years bring each one.",
+    tra_loi: "The Four Transformations are four changes the year's Heavenly Stem makes to four stars: Hua Lu (prosperity), Hua Quan (power), Hua Ke (fame) and Hua Ji (obstacle). Where they land shows where life flows easily and where it asks for care. This section has {so} pages, one for each transformation in each of the 12 palaces, with the birth years that bring it.",
+  },
+  "/tu-vi/co-thu": {
+    ten: "Classical texts", h1: "Classical texts of Zi Wei Dou Shu",
+    tieu_de_seo: "Classical texts of Zi Wei Dou Shu: Chinese, pinyin, meaning · Hieuban",
+    mo_ta: "Old verses of Zi Wei Dou Shu in the original Chinese with pinyin and a plain-English editorial translation, and what each line means on a real chart.",
+    tra_loi: "The rules of Zi Wei Dou Shu were handed down as short verses in classical Chinese. This section gives the original text with pinyin, a plain-English translation by our editorial team, and what each line means when you read a chart. It has {so} page(s).",
+  },
+
 };
 
 export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
@@ -76,6 +107,43 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
     kien_thuc: {
       tieu_de: "Learn BaZi",
       cum: Object.fromEntries(["/bat-tu/thap-than", "/bat-tu/nhat-chu", "/bat-tu/menh-theo-nam"]
+        .map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
+    },
+  },
+  "/tu-vi": {
+    ten: "Zi Wei Dou Shu",
+    tieu_de_seo: "Free Zi Wei Dou Shu chart: 12 palaces and your reading · Hieuban",
+    mo_ta_seo: "Free Zi Wei Dou Shu (Purple Star Astrology) chart from your birth date, time and place: 12 palaces, 10-year periods, this year, the next 3 months, in plain words.",
+    tra_loi_nhanh: {
+      hoi: "What does this Zi Wei Dou Shu calculator give you?",
+      dap: "Enter your birth date, time, sex and birthplace and you get a 12-palace Zi Wei Dou Shu chart set up by the Vietnamese lunar calendar, with a life reading area by area: character, work, money, love, health, your 10-year periods, this year and the next three months. The chart and the full reading are free, with no account needed.",
+      lien_ket: [{ href: "/en/zi-wei-dou-shu/stars", ten: "The 14 main stars" }, { href: "/en/zi-wei-dou-shu/palaces", ten: "The 12 palaces" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the Zi Wei Dou Shu calculator",
+      doan: [
+        "Enter your birth date and time, your sex and your birthplace (a Vietnamese province, or your country and city if you were born abroad). The 12-palace chart appears straight away, set up by the Vietnamese lunar calendar, with historical clock changes handled; if you were born abroad it uses the local time where you were born. Tap any palace to see its stars, how bright each star is, and a page on each star.",
+        "Zi Wei Dou Shu (Purple Star Astrology) places more than a hundred stars into twelve palaces, each for one area of life. The reading on this page turns that into plain words: what tends to go well, what needs care and what you can do, for each area, then for your 10-year periods, this year and the next three months. Technical terms stay in the “Why we say this” notes.",
+        "Different schools set up some parts of a chart differently: the lunar calendar used, the brightness table, how Huo Xing and Ling Xing are placed, leap months and monthly periods. The defaults follow the Vietnamese method; under “Display” you can switch and see whether your chart changes. The reading is cultural reference, not a prediction; decisions stay with you.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "What is Zi Wei Dou Shu?", dap: "Zi Wei Dou Shu, often called Purple Star Astrology, is a Chinese system that places stars into twelve palaces from your lunar birth date and hour. Each palace stands for one area of life, such as self, wealth, career or relationships, and the stars in it and around it colour how that area tends to go." },
+        { hoi: "What do I need to enter?", dap: "Your birth date, birth time, sex and birthplace. The hour matters a lot: each two-hour period gives a different chart. Your sex sets the direction of the 10-year periods, and your birthplace turns the time into the right local clock time at your birth." },
+        { hoi: "Can I use it without knowing my birth time?", dap: "Yes, with limits. Choose “I do not know” and the chart is set up for now at 12:00, clearly marked. The “Find your birth hour” panel lets you compare all twelve two-hour periods with years you remember clearly, then correct the time yourself." },
+        { hoi: "Why does my chart differ from another website?", dap: "Mostly because of the calendar and the school. Vietnamese and Chinese lunar calendars occasionally differ by a day or a month, and schools differ on brightness, a few star placements and leap months. Open “Display” to see which options this page uses and switch them." },
+        { hoi: "What are the 10-year periods and the annual layer?", dap: "Every ten years the chart's focus moves to another palace — that is your 10-year period. Each year also has its own palace. Turn on the layers to highlight both on the chart, or tap a period in the strip under the chart to jump to its first year." },
+        { hoi: "Is it free? Is my data stored?", dap: "The chart and the full reading are free in English. By default your profile stays only on your device; your birth details pass through one calculation and are then discarded. The reading is cultural reference, not advice or a prediction." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/numerology", ten: "Numerology from your name and birth date" },
+        { href: "/en/tarot", ten: "Tarot reading" },
+      ] },
+    },
+    kien_thuc: {
+      tieu_de: "Learn Zi Wei Dou Shu",
+      cum: Object.fromEntries(["/tu-vi/chinh-tinh", "/tu-vi/cung", "/tu-vi/sao-o-cung", "/tu-vi/tu-hoa", "/tu-vi/co-thu"]
         .map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
     },
   },

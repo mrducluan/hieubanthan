@@ -22,6 +22,20 @@ const mangHuyenHoc = (coHoiAi: boolean, nhanTren: string, nhanTrenEn?: string): 
 
 // Chữ mặc định (CTA-LS) — đặt trước bảng để bảng đọc được.
 const MOI_TU_VI: MoiLap = {
+  en: {
+    nhan_tren: "About a minute",
+    tieu_de: "Set up your chart to see *your year ahead*",
+    tieu_de_thieu: "{so} more detail(s) for your chart: {thieu}",
+    cau_phu: "Each two-hour period of birth gives a different chart. Your birthplace gives the local clock time at your birth.",
+    nut: "Set up my chart",
+    tran_an: "Don't remember your birth time? Choose “I do not know” under “This time is” — the chart is still set up and marked as provisional.",
+    nhan_tieu_de: "What you get",
+    ghi_chu_nhan: "The chart and the full reading are free.",
+    nhan: ["A 12-palace chart drawn right away — tap any palace to see its stars", "A *Favourable, Balanced or Needs care* level for each area of life", "Which of the next 10 years to watch for money, work and love", "The next three months: when to push ahead, when to slow down"],
+    minh_hoa: "Illustration. Your real chart appears as soon as you enter your details.",
+    chua_san_sang: "Not ready to enter anything? You can still ask general questions in the box below.",
+    la_so_mau: "Or see 6 sample charts read step by step.",
+  },
   nhan_tren: "Khoảng một phút",
   tieu_de: "Lập lá số để xem *năm nay của bạn*",
   tieu_de_thieu: "Còn {so} thông tin nữa là có lá số: {thieu}",
@@ -86,14 +100,15 @@ const moiLap = (m: MoiLap): BangChu => {
   };
 };
 
-export const CHU_TU_VI = gopBang(mangHuyenHoc(true, "Tử vi 12 cung · Âm lịch Việt"), moiLap(MOI_TU_VI), {
+export const CHU_TU_VI = gopBang(mangHuyenHoc(true, "Tử vi 12 cung · Âm lịch Việt", "Zi Wei Dou Shu · 12 palaces · Lunar calendar"), moiLap(MOI_TU_VI), {
   // TV-HOA-HAN: dải 12 giai đoạn 10 năm dưới lá số (chạm → năm xem nhảy tới đầu giai đoạn).
-  "dai_han.tieu_de": { nhom: "Lá số", nhan: "Tiêu đề dải giai đoạn 10 năm dưới lá số", mac_dinh: "Các giai đoạn 10 năm — chạm để xem", toi_da: 80 },
+  "dai_han.tieu_de": { nhom: "Lá số", nhan: "Tiêu đề dải giai đoạn 10 năm dưới lá số", mac_dinh: "Các giai đoạn 10 năm — chạm để xem", en: "Your 10-year periods — tap to view", toi_da: 80 },
   // TV-VONG: hai vòng sao theo hạn trong thẻ chi tiết cung (chỉ hiển thị, không đổi mức nào).
-  "vong_han.dai_han": { nhom: "Lá số", nhan: "Nhãn dòng vòng sao theo hạn 10 năm (chi tiết cung)", mac_dinh: "Theo hạn 10 năm", toi_da: 40 },
-  "vong_han.nam": { nhom: "Lá số", nhan: "Nhãn dòng vòng sao theo năm xem ({nam} = năm)", mac_dinh: "Theo năm {nam}", toi_da: 40 },
+  "vong_han.dai_han": { nhom: "Lá số", nhan: "Nhãn dòng vòng sao theo hạn 10 năm (chi tiết cung)", mac_dinh: "Theo hạn 10 năm", en: "By 10-year period", toi_da: 40 },
+  "vong_han.nam": { nhom: "Lá số", nhan: "Nhãn dòng vòng sao theo năm xem ({nam} = năm)", mac_dinh: "Theo năm {nam}", en: "By year {nam}", toi_da: 40 },
   "vong_han.giai_thich": { nhom: "Lá số", nhan: "Giải thích hai vòng sao theo hạn (trong \"Vì sao nói vậy\")",
-    mac_dinh: "Mỗi giai đoạn 10 năm và mỗi năm có hai vòng 12 sao riêng — vòng Thái Tuế và vòng Tướng tinh — xếp lại từ cung của hạn đó. Ở đây chỉ để bạn đối chiếu với sách: hai vòng này không làm đổi mức thuận lợi hay lưu ý nào trong bài đọc.", toi_da: 320 },
+    mac_dinh: "Mỗi giai đoạn 10 năm và mỗi năm có hai vòng 12 sao riêng — vòng Thái Tuế và vòng Tướng tinh — xếp lại từ cung của hạn đó. Ở đây chỉ để bạn đối chiếu với sách: hai vòng này không làm đổi mức thuận lợi hay lưu ý nào trong bài đọc.",
+    en: "Each 10-year period and each year has its own two rings of 12 stars — the Tai Sui ring and the General ring — counted again from that period's palace. They are shown only so you can compare with the books: they do not change any level in your reading.", toi_da: 320 },
 });
 export const CHU_BAT_TU = gopBang(mangHuyenHoc(true, "Bát tự tứ trụ · Ngũ hành", "BaZi · Four Pillars · Five elements"), moiLap(MOI_BAT_TU));
 export const CHU_PHONG_THUY = mangHuyenHoc(true, "Hướng nhà · bố trí · Bát trạch");
