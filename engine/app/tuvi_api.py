@@ -27,6 +27,8 @@ from app.hoidap import tuvi as hoidap_tv
 from app.luangiai import tuvi_luu_nguyet as luan_luu_nguyet
 from app.luangiai import tuvi_the_cung as the_cung
 from app.luangiai import cung_sao_menh
+from app.luangiai import tuvi_hien
+from app import ngon_ngu
 from app import nhat_ky
 from app.kb import trang_tuvi, tuvi_kb
 from app.config import ENGINE_VERSION, HourConfidence, Region
@@ -350,7 +352,7 @@ def api_tuan_triet(inp: TuanTrietInput) -> dict:
         "ngay_can_chi": ngay_cc,
         "ty_boundary_policy": (config.TY_BOUNDARY_POLICY.value
                                if config.TY_BOUNDARY_POLICY else None),
-        "tuan_triet": tt,
+        "tuan_triet": tt if ngon_ngu.la_viet() else tuvi_hien.tuan_triet(tt),
         "co_canh_bao": dv.flags,
     }
 
@@ -420,17 +422,18 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
 
     flags = list(dv.flags)
     if ti == 12:
-        flags.append({"loai": "ty_conflict", "chi_tiet": (
+        flags.append({"loai": "ty_conflict", "chi_tiet": L("tuvi_ls.co.ty_conflict", (
             "Sinh 23:00–23:59: tử vi (theo iztro) tính là giờ Tý của NGÀY HÔM SAU, "
             "còn thần số học/bát tự ở đây tính vẫn là ngày hôm đó. Hai phần có thể "
-            "lệch ngày — đây là quy ước, không phải lỗi.")})
-    flags.append({"loai": "nam_phai", "chi_tiet": (
+            "lệch ngày — đây là quy ước, không phải lỗi."))})
+    flags.append({"loai": "nam_phai", "chi_tiet": L("tuvi_ls.co.nam_phai", (
         "An sao theo iztro (Tử Vi Đẩu Số). Chính tinh, tứ hoá khớp aov.cc; bộ phụ "
         "tinh Nam phái (Việt) chưa được đối chiếu đầy đủ. Tuần/Triệt theo lối Việt (đóng giữa "
-        "hai cung) ở khoá tuan_triet.")})
+        "hai cung) ở khoá tuan_triet."))})
 
     ld, lm, ly, leap = dv.am
-    return {
+    viet = ngon_ngu.la_viet()
+    kq = {
         "engine_version": ENGINE_VERSION,
         "pham_vi": "an_sao_day_du",
         "iztro": la["iztro"],
@@ -475,7 +478,7 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
         } for p in la["palaces"]],
         # KB-TV3: `dieu_kien_dat` = điều kiện có / điểm cộng / điểm trừ (dữ kiện đã tính, chữ từ KB, chỉ thuật ngữ).
         "cach_cuc": [{**(tuvi_kb.cach_cuc(c["ma"]) or {}), "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"],
-                      "dieu_kien_dat": tuvi_kb.dieu_kien_dat(c["du_kien"])}
+                      "dieu_kien_dat": tuvi_kb.dieu_kien_dat(c["du_kien"] if viet else tuvi_hien.du_kien(c["du_kien"]))}
                      for c in tuvi_cach_cuc.nhan_dien(la)],
         "cach_cuc_luu_y": tuvi_kb.luu_y_pha_cach(),
         # TV-ZW "Cùng sao Mệnh": tỉ lệ thời điểm sinh (mẫu 1940–2010 × 12 canh) có cùng chính tinh cung Mệnh — không
@@ -484,6 +487,7 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
         "phai": dv.phai,
         "co_canh_bao": flags,
     }
+    return kq if viet else tuvi_hien.la_so(kq)
 
 
 class VanHanInput(BaseModel):
@@ -514,7 +518,7 @@ def api_van_han(inp: VanHanInput) -> dict:
         raise _loi_an_sao(e)
     can, chi = lunar.can_chi_nam(lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, 7.0)[2])
     return {"engine_version": ENGINE_VERSION, "ngay_xem": ngay.isoformat(), "nam_xem": ngay.year,
-            "can_chi_nam_xem": f"{can} {chi}", **vh}
+            "can_chi_nam_xem": f"{can} {chi}" if ngon_ngu.la_viet() else tuvi_hien.can_chi(f"{can} {chi}"), **vh}
 
 
 class LuuNguyetInput(BaseModel):
@@ -539,9 +543,10 @@ def api_luu_nguyet(inp: LuuNguyetInput) -> dict:
         kq = luan_luu_nguyet.lap_nam(sinh, nam, inp.la_so.luu_nguyet)
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
-    return {"engine_version": ENGINE_VERSION, **kq,
-            "cac_phai": {k: {"ten": v["ten"], "cach_tinh": v["cach_tinh"], "nguon": v["nguon"]}
-                         for k, v in calc_luu_nguyet.PHAI.items()}}
+    kq = {"engine_version": ENGINE_VERSION, **kq,
+          "cac_phai": {k: {"ten": v["ten"], "cach_tinh": v["cach_tinh"], "nguon": v["nguon"]}
+                       for k, v in calc_luu_nguyet.PHAI.items()}}
+    return kq if ngon_ngu.la_viet() else tuvi_hien.luu_nguyet(kq)
 
 
 class HoiTVInput(BaseModel):

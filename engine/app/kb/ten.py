@@ -15,10 +15,10 @@ TEP = "ten_en.json"
 # Nhóm tra cứu → đường trong tệp (nhóm chung giữa các mảng gộp nhiều bảng, bảng trước thắng).
 NHOM: dict[str, tuple[tuple[str, str], ...]] = {
     "sao": (("tuvi", "chinh_tinh"), ("tuvi", "phu_tinh"), ("tuvi", "tap_dieu"), ("tuvi", "bac_si"), ("tuvi", "tuong_tien"),
-            ("tuvi", "tue_tien")),
+            ("tuvi", "tue_tien"), ("tuvi", "thai_tue_vn"), ("tuvi", "sao_luu"), ("tuvi", "hoa_sao")),
     "chinh_tinh": (("tuvi", "chinh_tinh"),), "phu_tinh": (("tuvi", "phu_tinh"),), "tap_dieu": (("tuvi", "tap_dieu"),),
     "truong_sinh": (("tuvi", "truong_sinh"), ("battu", "truong_sinh")),
-    "cung": (("tuvi", "cung"),), "do_sang": (("tuvi", "do_sang"),), "hoa": (("tuvi", "hoa"),), "cuc": (("tuvi", "cuc"),),
+    "cung": (("tuvi", "cung"),), "do_sang": (("tuvi", "do_sang"), ("tuvi", "do_sang_nam_phai")), "hoa": (("tuvi", "hoa"),), "cuc": (("tuvi", "cuc"),),
     "can": (("can_chi", "can"),), "chi": (("can_chi", "chi"),), "hanh": (("can_chi", "hanh"),), "am_duong": (("can_chi", "am_duong"),),
     "thap_than": (("battu", "thap_than"),), "battu_khai_niem": (("battu", "khai_niem"),),
     "nap_am": (("battu", "nap_am"),), "than_sat": (("battu", "than_sat"),), "cat_hung": (("battu", "cat_hung"),),
@@ -28,6 +28,9 @@ NHOM: dict[str, tuple[tuple[str, str], ...]] = {
     "huong": (("phongthuy", "huong"),), "sao_bay": (("phongthuy", "sao_bay"),), "nhom_trach": (("phongthuy", "nhom"),),
     "que": (("kinhdich", "que_64"),), "hao": (("kinhdich", "hao"),), "kinhdich_khai_niem": (("kinhdich", "khai_niem"),),
     "tinh": (("dia_ly", "tinh"),),
+    # EN-ALL GĐ 4 (Tử vi): nguồn Tuần/Triệt, kết luận xu hướng lưu nguyệt (mã web tô màu).
+    "tuan_triet": (("tuvi", "tuan_triet"),), "tuan_triet_kieu": (("tuvi", "tuan_triet_kieu"),),
+    "xu_huong_tuvi": (("tuvi", "xu_huong"),),
     # EN-ALL GĐ 3c — nhóm GỘP cho trường mã dùng chung khoá nhưng khác bảng tên: nhãn mục hình hỏi đáp (`muc.nhan`: hành ở
     # cột năm hành Bát tự, cung ở bàn 12 cung Tử vi) và loại trong danh sách gói bằng chứng Bát tự (`ds.loai`: quan hệ
     # can chi ở mục xung hợp, cát/hung ở mục thần sát).
@@ -111,6 +114,25 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "bang_hanh.can": ("can", "hanh"), "bang_hanh.chi": ("chi", "hanh"), "vai_tro_hanh": ("hanh", "nhom_thap_than"),
     # EN-ALL GĐ 3c — hỏi đáp: nhãn mục hình (khối `truc_quan`), loại trong danh sách gói bằng chứng (nhóm gộp ở `NHOM`)
     "muc.nhan": "nhan_hinh", "ds.loai": "loai_bt",
+    # EN-ALL GĐ 4 — Tử vi (lá số, vận hạn, lưu nguyệt, định giờ). Khoá "cha.con" khi tên trường chung chung (`ten`, `tu_hoa`,
+    # `sao`…); khoá đơn khi tên trường chỉ Tử vi dùng. Giá trị: sao / cung / độ sáng / hoá / cục / chi theo bảng `tuvi`.
+    "cung.ten": "cung", "chinh_tinh.ten": "sao", "phu_tinh.ten": "sao", "do_sang": "do_sang", "do_sang_nam_phai": "do_sang",
+    "chinh_tinh.tu_hoa": "hoa", "phu_tinh.tu_hoa": "hoa", "tu_hoa_goc": "hoa", "cung.tap_dieu": "sao",
+    "bac_si": "sao", "tuong_tien": "sao", "tue_tien": "sao", "thai_tue_nam_phai": "sao", "do_sang_phu": ("sao", "do_sang"),
+    "cung_lien_quan": "cung", "sat_hoi": "sao", "cach_cuc.nhom": "cat_hung",
+    "menh_chu": "sao", "than_chu": "sao", "chi_cung_menh": "chi", "chi_cung_than": "chi", "ngu_hanh_cuc": "cuc",
+    "tuan_triet.tuan": "chi", "tuan_triet.triet": "chi", "tuan_dong_tai": "chi", "triet_dong_tai": "chi",
+    "cung_KHONG_bi_anh_huong": "chi", "chi_tiet_tung_cung.cung": "chi", "chi_tiet_tung_cung.nguon": "tuan_triet", "chi_tiet_tung_cung.kieu": "tuan_triet_kieu",
+    "am_duong.nam_sinh": "am_duong", "menh_nap_am.ten": "nap_am",
+    "cung_goc": "cung", "ten_cung": "cung", "dai_han.tu_hoa": "sao", "luu_nien.tu_hoa": "sao", "dai_han.sao": "sao",
+    "luu_nien.sao": "sao", "tu_hoa_sao.cung": "cung", "tu_hoa_sao.sao": "sao", "vong_thai_tue": "sao",
+    "vong_thai_tue_nam_phai": "sao", "vong_tuong_tien": "sao",
+    "phu_tinh.cat": "sao", "phu_tinh.sat": "sao", "tam_phuong": "cung", "tu_hoa_thang.hoa": "hoa", "tu_hoa_thang.sao": "sao",
+    "thang.tuan_triet": "sao", "xu_huong.ket": "xu_huong_tuvi", "theo_thang": "cung",
+    "gio_sinh": "chi", "chi_gio": "chi", "ung_vien.cuc": "cuc", "cung_menh.chinh_tinh": "sao", "cau_hoi.cung": "cung",
+    "cau_hoi.hoa": "hoa", "than_cu": "cung", "cung_sao_menh.sao": "sao",
+    # EN-ALL GĐ 4 — trang kiến thức Tử vi: hình minh hoạ "Hoá ở cung" (web tra chữ Hán theo mã hoá).
+    "minh_hoa.hoa": "hoa",
 }
 
 

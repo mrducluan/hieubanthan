@@ -102,6 +102,21 @@
    "Thiên Đức": {"en": "Tian De", "han": "天德"}, "Điếu Khách": {"en": "Diao Ke", "han": "弔客"}, "Bệnh Phù": {"en": "Bing Fu", "han": "病符"}
   },
   "sao_luu_tien_to": {"Lưu": "Annual", "Vận": "Decade"},
+  "_ghi_chu_gd4": "EN-ALL GĐ 4 (agent A): thai_tue_vn = vòng Thái Tuế lối Việt (Nam phái); sao_luu = sao lưu niên / lưu đại hạn của iztro dạng mã; hoa_sao = Hoá Kỵ trong bảng độ sáng phụ tinh; do_sang_nam_phai = tên độ sáng lối Việt khác iztro (Hãm); tuan_triet = nguồn Tuần/Triệt; xu_huong = kết luận xu hướng lưu nguyệt (mã web tô màu).",
+  "thai_tue_vn": {
+   "Thái Tuế": {"en": "Tai Sui", "han": "太歲"}, "Thiếu Dương": {"en": "Shao Yang", "han": "少陽"}, "Tang Môn": {"en": "Sang Men", "han": "喪門"},
+   "Thiếu Âm": {"en": "Shao Yin", "han": "少陰"}, "Quan Phù": {"en": "Guan Fu (talisman)", "han": "官符"}, "Tử Phù": {"en": "Si Fu", "han": "死符"},
+   "Tuế Phá": {"en": "Sui Po", "han": "歲破"}, "Long Đức": {"en": "Long De", "han": "龍德"}, "Bạch Hổ": {"en": "Bai Hu", "han": "白虎"},
+   "Phúc Đức": {"en": "Fu De", "han": "福德"}, "Điếu Khách": {"en": "Diao Ke", "han": "弔客"}, "Trực Phù": {"en": "Zhi Fu", "han": "直符"}
+  },
+  "sao_luu": {
+   "Lưu Lộc": {"en": "Annual Lu Cun", "han": "流祿"}, "Lưu Mã": {"en": "Annual Tian Ma", "han": "流馬"}, "Lưu Dương": {"en": "Annual Qing Yang", "han": "流羊"}, "Lưu Đà": {"en": "Annual Tuo Luo", "han": "流陀"}, "Lưu Xương": {"en": "Annual Wen Chang", "han": "流昌"}, "Lưu Khúc": {"en": "Annual Wen Qu", "han": "流曲"}, "Lưu Khôi": {"en": "Annual Tian Kui", "han": "流魁"}, "Lưu Việt": {"en": "Annual Tian Yue", "han": "流鉞"}, "Lưu Loan": {"en": "Annual Hong Luan", "han": "流鸞"}, "Lưu Hỷ": {"en": "Annual Tian Xi", "han": "流喜"},
+   "Vận Lộc": {"en": "Decade Lu Cun", "han": "運祿"}, "Vận Mã": {"en": "Decade Tian Ma", "han": "運馬"}, "Vận Dương": {"en": "Decade Qing Yang", "han": "運羊"}, "Vận Đà": {"en": "Decade Tuo Luo", "han": "運陀"}, "Vận Xương": {"en": "Decade Wen Chang", "han": "運昌"}, "Vận Khúc": {"en": "Decade Wen Qu", "han": "運曲"}, "Vận Khôi": {"en": "Decade Tian Kui", "han": "運魁"}, "Vận Việt": {"en": "Decade Tian Yue", "han": "運鉞"}, "Vận Loan": {"en": "Decade Hong Luan", "han": "運鸞"}, "Vận Hỷ": {"en": "Decade Tian Xi", "han": "運喜"}
+  },
+  "hoa_sao": {"Hóa Kỵ": {"en": "Hua Ji (Obstacle)", "han": "化忌"}},
+  "tuan_triet": {"Tuần": {"en": "Xun (Void)", "han": "旬"}, "Triệt": {"en": "Jie (Cut-off)", "han": "截"}},
+  "tuan_triet_kieu": {"đóng trực tiếp": {"en": "sits here directly"}, "lan qua tam hợp": {"en": "spreads in through the triad"}},
+  "xu_huong": {"thuận hơn": {"en": "more favourable"}, "cân bằng": {"en": "balanced"}, "nhiều thử thách hơn": {"en": "more challenging"}},
   "cung": {
    "Mệnh": {"en": "Life Palace", "han": "命宮"}, "Phụ Mẫu": {"en": "Parents Palace", "han": "父母宮"}, "Phúc Đức": {"en": "Fortune Palace", "han": "福德宮"},
    "Điền Trạch": {"en": "Property Palace", "han": "田宅宮"}, "Quan Lộc": {"en": "Career Palace", "han": "官祿宮"}, "Nô Bộc": {"en": "Friends Palace", "han": "僕役宮"},
@@ -113,6 +128,7 @@
    "Miếu": {"en": "Temple (brightest)", "han": "廟"}, "Vượng": {"en": "Prosperous", "han": "旺"}, "Đắc": {"en": "Favourable", "han": "得"},
    "Lợi": {"en": "Beneficial", "han": "利"}, "Bình": {"en": "Neutral", "han": "平"}, "Bất": {"en": "Unfavourable", "han": "不"}, "Hạn": {"en": "Fallen (dimmest)", "han": "陷"}
   },
+  "do_sang_nam_phai": {"Hãm": {"en": "Fallen (dimmest)", "han": "陷"}},
   "hoa": {
    "Lộc": {"en": "Lu (Prosperity)", "han": "化祿"}, "Quyền": {"en": "Quan (Power)", "han": "化權"},
    "Khoa": {"en": "Ke (Fame)", "han": "化科"}, "Kỵ": {"en": "Ji (Obstacle)", "han": "化忌"}
@@ -139,7 +155,8 @@
   },
   "hanh": {
    "Kim": {"en": "Metal", "han": "金"}, "Thủy": {"en": "Water", "han": "水"}, "Mộc": {"en": "Wood", "han": "木"},
-   "Hỏa": {"en": "Fire", "han": "火"}, "Thổ": {"en": "Earth", "han": "土"}
+   "Hỏa": {"en": "Fire", "han": "火"}, "Thổ": {"en": "Earth", "han": "土"},
+   "Thuỷ": {"en": "Water", "han": "水"}, "Hoả": {"en": "Fire", "han": "火"}, "Thuỷ/Mộc": {"en": "Water / Wood", "han": "水/木"}
   },
   "am_duong": {"Âm": {"en": "Yin", "han": "陰"}, "Dương": {"en": "Yang", "han": "陽"}}
  },

@@ -234,43 +234,53 @@ def _ds_sao() -> list[tuple[str, str]]:
 
 
 def _trang_sao(ten: str, slug: str) -> dict:
+    # EN-ALL GĐ 4: chữ khuôn qua `L()` (data/en/loi/trang_tuvi.json), tên riêng qua `kb/ten` — bản Việt giữ nguyên từng byte.
     kb = _doc("tuvi_kb.json")
     s = kb["chinh_tinh"][ten]
-    tra_loi = f"{ten} là chính tinh hành {s['ngu_hanh']}, nhóm {s['nhom']}. {_cau(s['tinh_chat'])}"
+    T, H = _ttv.ts(ten), _ttv.hanh(s["ngu_hanh"])
+    N, NG = _ttv.nhom_sao(s["nhom"]), _tn.nghia("chinh_tinh", ten) or ""
+    tra_loi = L("trang_tv.sao.tra_loi", "{ten} là chính tinh hành {hanh}, nhóm {nhom}. {tc}",
+                ten=T, hanh=H, nhom=N, nghia=NG, tc=_cau(s["tinh_chat"]))
     o_cung = kb["sao_cung"].get(ten, {})
     muc = [
-        {"tieu_de": "Điểm mạnh", "doan": _cau(s["diem_manh"][:1].upper() + s["diem_manh"][1:])},
-        {"tieu_de": "Mặt tối", "doan": _cau(s["mat_toi"][:1].upper() + s["mat_toi"][1:])},
-        {"tieu_de": "Biểu hiện thường gặp", "doan": _cau(s["bieu_hien"][:1].upper() + s["bieu_hien"][1:])},
+        {"tieu_de": L("trang_tv.sao.diem_manh", "Điểm mạnh"), "doan": _cau(s["diem_manh"][:1].upper() + s["diem_manh"][1:])},
+        {"tieu_de": L("trang_tv.sao.mat_toi", "Mặt tối"), "doan": _cau(s["mat_toi"][:1].upper() + s["mat_toi"][1:])},
+        {"tieu_de": L("trang_tv.sao.bieu_hien", "Biểu hiện thường gặp"),
+         "doan": _cau(s["bieu_hien"][:1].upper() + s["bieu_hien"][1:])},
     ]
     if o_cung:
-        muc.append({"tieu_de": f"{ten} ở 12 cung", "danh_sach": [f"{c}: {v}" for c, v in o_cung.items()]})
+        muc.append({"tieu_de": L("trang_tv.sao.o_12_cung", "{ten} ở 12 cung", ten=T),
+                    "danh_sach": [f"{_ttv.tc_ngan(c)}: {v}" for c, v in o_cung.items()]})
     from app.kb import trang_tuvi as ttv          # SEO-K: 12 vị trí theo chi đặt ở trang sao (trước lặp ở 12 trang sao × cung)
-    muc.append({"tieu_de": f"{ten} ở 12 chi: độ sáng và sao đi cùng",
-                "doan": (f"Cung nào chứa {ten} cũng rơi vào một trong 12 chi. Ở mỗi chi, độ sáng (bảng Nam phái), "
-                         f"chính tinh đi cùng và chính tinh ở cung đối diện là cố định:"),
+    muc.append({"tieu_de": L("trang_tv.sao.o_12_chi", "{ten} ở 12 chi: độ sáng và sao đi cùng", ten=T),
+                "doan": L("trang_tv.sao.o_12_chi_doan",
+                          "Cung nào chứa {ten} cũng rơi vào một trong 12 chi. Ở mỗi chi, độ sáng (bảng Nam phái), "
+                          "chính tinh đi cùng và chính tinh ở cung đối diện là cố định:", ten=T),
                 "danh_sach": ttv.theo_chi_sao(ten)})
     from app.kb import trang_co_thu as tct      # TV-CTP: câu Cốt Tuỷ Phú nhắc sao này (≤ 2 câu, trỏ về trang trụ)
     if (ct := tct.muc_trich(sao=ten)):
         muc.append(ct)
-    muc.append({"tieu_de": "Câu hỏi tự soi", "doan": s["cau_tu_soi"]})
-    hoi_dap = [{"hoi": f"Sao {ten} trong Tử vi là gì?", "dap": tra_loi},
-               {"hoi": f"Mặt tối của sao {ten}?", "dap": _cau(s["mat_toi"])}]
+    muc.append({"tieu_de": L("trang.tu_soi", "Câu hỏi tự soi"), "doan": s["cau_tu_soi"]})
+    hoi_dap = [{"hoi": L("trang_tv.sao.hoi_la_gi", "Sao {ten} trong Tử vi là gì?", ten=T, nghia=NG), "dap": tra_loi},
+               {"hoi": L("trang_tv.sao.hoi_mat_toi", "Mặt tối của sao {ten}?", ten=T), "dap": _cau(s["mat_toi"])}]
     if "Mệnh" in o_cung:
-        hoi_dap.insert(1, {"hoi": f"Sao {ten} thủ cung Mệnh nói gì?", "dap": o_cung["Mệnh"]})
+        hoi_dap.insert(1, {"hoi": L("trang_tv.sao.hoi_menh", "Sao {ten} thủ cung Mệnh nói gì?", ten=T, cung=_ttv.tc("Mệnh")),
+                           "dap": o_cung["Mệnh"]})
     ds = _ds_sao()
     i = [x for _, x in ds].index(slug)
     return _ttv.them_y_bo_sung({
         "loai": "sao", "slug": slug,
-        "tieu_de": f"Sao {ten} ({s['ten_han']}) trong Tử vi — tính chất và 12 cung",
-        "mo_ta": _cat(f"Sao {ten} ({s['ten_han']}), hành {s['ngu_hanh']}: {s['tinh_chat']} Điểm mạnh, mặt tối và ý nghĩa ở 12 cung."),
+        "tieu_de": L("trang_tv.sao.tieu_de", "Sao {ten} ({han}) trong Tử vi — tính chất và 12 cung", ten=T, han=s["ten_han"]),
+        "mo_ta": _cat(L("trang_tv.sao.mo_ta", "Sao {ten} ({han}), hành {hanh}: {tc} Điểm mạnh, mặt tối và ý nghĩa ở 12 cung.",
+                        ten=T, han=s["ten_han"], hanh=H, tc=s["tinh_chat"])),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
-        "nguon": list(kb["source"].values()),
+        "nguon": _ttv.nguon_kb(kb),
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "sao", "slug": ds[j][1]} for j in (i - 1, i + 1) if 0 <= j < len(ds)],
-        "minh_hoa": {"kieu": "sao", "ten": ten, "ten_han": s["ten_han"], "ngu_hanh": s["ngu_hanh"]},
+        # `ten` là chữ hiển thị (web vẽ nhãn) — bản Anh mang tên tiếng Anh; `ngu_hanh` là mã (web tô màu theo hành).
+        "minh_hoa": {"kieu": "sao", "ten": T, "ten_han": s["ten_han"], "ngu_hanh": s["ngu_hanh"]},
         # SEO-H: 12 trang "sao ở từng cung"
-        "trang_con": {"tieu_de": f"{ten} ở từng cung",
+        "trang_con": {"tieu_de": L("trang_tv.sao.tung_cung", "{ten} ở từng cung", ten=T),
                       "ds": [{"loai": "sao_cung", "slug": f"{_slug(ten)}-cung-{_slug(c)}"} for c in o_cung]},
     }, "sao", ten)
 
@@ -283,36 +293,45 @@ def _ds_cung() -> list[tuple[str, str]]:
 def _trang_cung(ten: str, slug: str) -> dict:
     kb = _doc("tuvi_kb.json")
     c = kb["cung"][ten]
-    tra_loi = f"Cung {ten} trong Tử vi: {c['y_nghia']} Cung này cho thấy {c['xem_duoc']}; nó {c['khong_tra_loi']}."
-    muc = [{"tieu_de": "Cung này cho thấy gì", "doan": _cau(c["xem_duoc"][:1].upper() + c["xem_duoc"][1:])},
-           {"tieu_de": "Cung này không trả lời được gì", "doan": _cau(c["khong_tra_loi"][:1].upper() + c["khong_tra_loi"][1:])},
-           {"tieu_de": f"14 chính tinh ở cung {ten}",
-            "danh_sach": [f"{sao}: {o[ten]}" for sao, o in kb["sao_cung"].items() if ten in o]},
-           {"tieu_de": f"Tứ hoá rơi vào cung {ten}",
-            "danh_sach": [f"Hoá {h}: {o[ten]}" for h, o in kb["tu_hoa_cung"].items() if ten in o]}]
+    C = _ttv.tc(ten)
+    tra_loi = L("trang_tv.cung.tra_loi", "Cung {cung} trong Tử vi: {y} Cung này cho thấy {xem}; nó {khong}.",
+                cung=C, y=c["y_nghia"], xem=c["xem_duoc"], khong=c["khong_tra_loi"])
+    muc = [{"tieu_de": L("trang_tv.cung.cho_thay", "Cung này cho thấy gì"),
+            "doan": _cau(c["xem_duoc"][:1].upper() + c["xem_duoc"][1:])},
+           {"tieu_de": L("trang_tv.cung.khong_tra_loi", "Cung này không trả lời được gì"),
+            "doan": _cau(c["khong_tra_loi"][:1].upper() + c["khong_tra_loi"][1:])},
+           {"tieu_de": L("trang_tv.cung.chinh_tinh", "14 chính tinh ở cung {cung}", cung=C),
+            "danh_sach": [f"{_ttv.ts(sao)}: {o[ten]}" for sao, o in kb["sao_cung"].items() if ten in o]},
+           {"tieu_de": L("trang_tv.cung.tu_hoa", "Tứ hoá rơi vào cung {cung}", cung=C),
+            "danh_sach": [L("trang_tv.cung.tu_hoa_dong", "Hoá {h}: {x}", h=_ttv.th(h), x=o[ten])
+                          for h, o in kb["tu_hoa_cung"].items() if ten in o]}]
     if ten in kb.get("chu_de_han", {}):
-        muc.append({"tieu_de": f"Khi đại hạn, lưu niên đi qua cung {ten}", "doan": kb["chu_de_han"][ten]})
-    muc.append({"tieu_de": "Câu hỏi tự soi", "doan": c["cau_tu_soi"]})
-    hoi_dap = [{"hoi": f"Cung {ten} trong Tử vi nói về điều gì?", "dap": _cau(c["y_nghia"])},
-               {"hoi": f"Cung {ten} có đoán được chuyện cụ thể không?",
-                "dap": _cau(f"Không — cung {ten} {c['khong_tra_loi']}; nó cho thấy {c['xem_duoc']}")}]
+        muc.append({"tieu_de": L("trang_tv.cung.han", "Khi đại hạn, lưu niên đi qua cung {cung}", cung=C),
+                    "doan": kb["chu_de_han"][ten]})
+    muc.append({"tieu_de": L("trang.tu_soi", "Câu hỏi tự soi"), "doan": c["cau_tu_soi"]})
+    hoi_dap = [{"hoi": L("trang_tv.cung.hoi_la_gi", "Cung {cung} trong Tử vi nói về điều gì?", cung=C), "dap": _cau(c["y_nghia"])},
+               {"hoi": L("trang_tv.cung.hoi_cu_the", "Cung {cung} có đoán được chuyện cụ thể không?", cung=C),
+                "dap": _cau(L("trang_tv.cung.dap_cu_the", "Không — cung {cung} {khong}; nó cho thấy {xem}",
+                              cung=C, khong=c["khong_tra_loi"], xem=c["xem_duoc"]))}]
     ds = _ds_cung()
     i = [x for _, x in ds].index(slug)
     return _ttv.them_y_bo_sung({
         "loai": "cung", "slug": slug,
-        "tieu_de": f"Cung {ten} trong Tử vi — ý nghĩa và 14 chính tinh",
-        "mo_ta": _cat(f"Cung {ten} Tử vi: {c['y_nghia']} 14 chính tinh và tứ hoá ở cung {ten}, kèm câu hỏi tự soi."),
+        "tieu_de": L("trang_tv.cung.tieu_de", "Cung {cung} trong Tử vi — ý nghĩa và 14 chính tinh", cung=C),
+        "mo_ta": _cat(L("trang_tv.cung.mo_ta", "Cung {cung} Tử vi: {y} 14 chính tinh và tứ hoá ở cung {cung}, kèm câu hỏi tự soi.",
+                        cung=C, y=c["y_nghia"])),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
-        "nguon": list(kb["source"].values()),
+        "nguon": _ttv.nguon_kb(kb),
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "cung", "slug": ds[j % len(ds)][1]} for j in (i - 1, i + 1)],
-        "minh_hoa": {"kieu": "cung", "chi_so": list(kb["cung"]).index(ten), "vong": list(kb["cung"])},
+        # `vong` là nhãn hiển thị (web vẽ vòng 12 cung theo `chi_so`) — bản Anh mang tên tiếng Anh.
+        "minh_hoa": {"kieu": "cung", "chi_so": list(kb["cung"]).index(ten), "vong": _ttv.vong_hien()},
         # SEO-I: 4 trang "Hoá X ở cung này"
-        "trang_con_hoa": {"tieu_de": f"Tứ hoá ở cung {ten}",
+        "trang_con_hoa": {"tieu_de": L("trang_tv.cung.trang_con_hoa", "Tứ hoá ở cung {cung}", cung=C),
                           "ds": [{"loai": "hoa_cung", "slug": f"hoa-{_slug(h)}-cung-{_slug(ten)}"} for h in kb["tu_hoa_cung"]
                                  if ten in kb["tu_hoa_cung"][h]]},
         # SEO-H: 14 trang "chính tinh ở cung này"
-        "trang_con": {"tieu_de": f"14 chính tinh ở cung {ten}",
+        "trang_con": {"tieu_de": L("trang_tv.cung.trang_con", "14 chính tinh ở cung {cung}", cung=C),
                       "ds": [{"loai": "sao_cung", "slug": f"{_slug(sao)}-cung-{_slug(ten)}"}
                              for sao, o in kb["sao_cung"].items() if ten in o]},
     }, "cung", ten)
@@ -443,8 +462,8 @@ def _ten_ngan(loai: str, slug: str) -> str:
             return _tn.ten("thap_than", ten)
         if loai == "nhat_chu":
             return L("trang_bt.ten_ngan.nhat_chu", "Nhật chủ {can}", can=_tn.ten("can", ten), loai=_tn.nghia("can", ten) or "")
-        return {"cung": f"Cung {ten}"}[loai]
-    return f"Sao {dict((s, t) for t, s in _ds_sao())[slug]}"
+        return {"cung": L("trang_tv.ten_ngan.cung", "Cung {cung}", cung=_ttv.tc(ten))}[loai]
+    return L("trang_tv.ten_ngan.sao", "Sao {ten}", ten=_ttv.ts(dict((s, t) for t, s in _ds_sao())[slug]))
 
 
 def _hoan_tat(t: dict) -> dict:

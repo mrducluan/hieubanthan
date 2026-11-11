@@ -1,0 +1,732 @@
+{
+ "_nguon": "EN-ALL GĐ 4 — bản phủ tiếng Anh của tuvi_kb.json (ban biên tập viết từ nghĩa; khoá giữ tên Việt).",
+ "_trang_thai": "bien_tap",
+ "source": {
+  "tu_vi_dau_so_toan_thu": "Zi Wei Dou Shu Quan Shu (Complete Book of Zi Wei Dou Shu, traditionally attributed to Chen Tuan)",
+  "tuvi_vn": "Vietnamese Southern-school framework of Zi Wei Dou Shu"
+ },
+ "cung": {
+  "Mệnh": {
+   "y_nghia": "The root palace of the chart: your temperament, your natural reactions, your strengths and the places you tend to trip.",
+   "xem_duoc": "your personality, how you make decisions, your main energy",
+   "khong_tra_loi": "does not tell you how rich you will be or how long you will live",
+   "cau_tu_soi": "Under pressure, what is your first reaction — and does it help you or hold you back?"
+  },
+  "Huynh Đệ": {
+   "y_nghia": "Relationships between equals: siblings, close friends, partners on the same level.",
+   "xem_duoc": "how you cooperate and share with people on your level",
+   "khong_tra_loi": "cannot say what will happen to your siblings",
+   "cau_tu_soi": "With siblings and friends, are you usually the one who gives or the one who receives?"
+  },
+  "Phu Thê": {
+   "y_nghia": "What you expect and how you behave in a couple or a marriage.",
+   "xem_duoc": "what you look for in a partner and where you tend to clash",
+   "khong_tra_loi": "cannot say whether the other person is good or bad, and does not pronounce 'clashing fates' or how many times you will marry",
+   "cau_tu_soi": "What you hope your partner will do for you — have you told them clearly?"
+  },
+  "Tử Nữ": {
+   "y_nghia": "Your relationship with children, the next generation and students; also your own creativity.",
+   "xem_duoc": "how you parent and how you nurture what you create",
+   "khong_tra_loi": "does not tell you how many children you will have, their sex or their health",
+   "cau_tu_soi": "What do you want to pass on to the next generation — through words or through how you live?"
+  },
+  "Tài Bạch": {
+   "y_nghia": "How you earn, keep and spend money; your attitude to material things.",
+   "xem_duoc": "the kind of income that suits your temperament, spending habits that drain you",
+   "khong_tra_loi": "gives no income figure and does not pick an investment for you",
+   "cau_tu_soi": "Does your money usually go on real needs or on feelings?"
+  },
+  "Tật Ách": {
+   "y_nghia": "How your body and mind react to pressure, and where you tend to store tension.",
+   "xem_duoc": "your rhythm of rest and the self-care habits worth watching",
+   "khong_tra_loi": "does not diagnose illness or predict accidents — health needs a doctor",
+   "cau_tu_soi": "Which sign of tiredness does your body give that you tend to ignore?"
+  },
+  "Thiên Di": {
+   "y_nghia": "You out in the world, travelling, meeting strangers; the image other people see in you.",
+   "xem_duoc": "how you adapt to new surroundings and the openings that come with moving",
+   "khong_tra_loi": "cannot say whether any particular trip is safe or dangerous",
+   "cau_tu_soi": "In an unfamiliar place, are you more open or more guarded than at home?"
+  },
+  "Nô Bộc": {
+   "y_nghia": "Acquaintances, colleagues, people who work for you, customers — the network around you.",
+   "xem_duoc": "the kind of people you attract and how you keep boundaries",
+   "khong_tra_loi": "does not conclude that anyone will betray you or stay loyal",
+   "cau_tu_soi": "Do you choose friends for comfort or for shared values?"
+  },
+  "Quan Lộc": {
+   "y_nghia": "How you work, the settings and roles that suit you, and how you pursue achievement.",
+   "xem_duoc": "your working style and the kinds of work that suit your temperament",
+   "khong_tra_loi": "does not name one single career and does not promise promotion",
+   "cau_tu_soi": "Which work makes you lose track of time — and what does it have in common with what you do now?"
+  },
+  "Điền Trạch": {
+   "y_nghia": "Your home, the places you live, fixed assets and the atmosphere of the household.",
+   "xem_duoc": "your need for a settled home and how you build up assets",
+   "khong_tra_loi": "does not pick the year to buy a house or a particular house for you",
+   "cau_tu_soi": "For you, is 'home' a place or the people in it?"
+  },
+  "Phúc Đức": {
+   "y_nghia": "Your spiritual base, inner life, deep joys, family line and inherited blessings; Vietnamese Zi Wei gives this palace great weight.",
+   "xem_duoc": "what feeds your spirit and how you find peace",
+   "khong_tra_loi": "cannot measure 'how much blessing' you have in numbers",
+   "cau_tu_soi": "What lightens your heart even when no one praises you for it?"
+  },
+  "Phụ Mẫu": {
+   "y_nghia": "Your relationship with parents, elders and bosses; also paperwork and your basic education.",
+   "xem_duoc": "how you take in teaching and how you deal with people in authority",
+   "khong_tra_loi": "cannot say anything about your parents' health or lifespan",
+   "cau_tu_soi": "What from your parents do you want to keep, and what do you want to do differently?"
+  }
+ },
+ "chinh_tinh": {
+  "Tử Vi": {
+   "tinh_chat": "The Emperor star: self-respecting, wants to lead, likes order and being respected.",
+   "diem_manh": "stepping up to carry the load, organising, upholding standards",
+   "mat_toi": "can feel lonely at the top, worries about face, finds feedback hard to take",
+   "bieu_hien": "often takes over the decision when the group is stuck",
+   "khi_sang": "Bright: natural dignity that earns respect; knows how to use people well and carry big tasks while keeping a sense of measure — the 'king' quality in the right place.",
+   "khi_ham": "Dim: wants to be in charge without the backing, protective of face, talks bigger than their strength; needs good helpers (Zuo Fu and You Bi, Tian Kui and Tian Yue) to stand firm.",
+   "cau_tu_soi": "Do you let others see when you need help?"
+  },
+  "Thiên Cơ": {
+   "tinh_chat": "The Strategist star: quick-witted, loves to think things through, often switches plans.",
+   "diem_manh": "planning, analysing, advising",
+   "mat_toi": "thinks a lot and does little, worries ahead, wavers easily",
+   "bieu_hien": "usually has plan B and plan C ready before starting",
+   "khi_sang": "Bright: quick-witted, plans at the right moment, good at planning and improvising; trusted as an adviser.",
+   "khi_ham": "Fallen: thinking goes in circles, worries ahead, changes mind unpredictably; many small schemes but few finished — needs to settle on one direction and see it through.",
+   "cau_tu_soi": "Which plan have you thought through carefully but not yet started?"
+  },
+  "Thái Dương": {
+   "tinh_chat": "The Noble star: generous, outgoing, likes to give and to be seen by others.",
+   "diem_manh": "inspiring others, generous, open and transparent",
+   "mat_toi": "cares for others beyond their own strength, burns out easily, hungry for recognition",
+   "bieu_hien": "often takes on helping others before their own tasks",
+   "khi_sang": "Bright: the daytime sun — generous, warm, well regarded, does visible work that gets noticed; likes to help.",
+   "khi_ham": "Fallen: the sun at night — looks after others but is rarely acknowledged, works hard and tires easily; better suited to quiet, specialist work than chasing a name.",
+   "cau_tu_soi": "Are you giving more than you can keep up?"
+  },
+  "Vũ Khúc": {
+   "tinh_chat": "The Wealth star: decisive, practical, good at managing money and resources.",
+   "diem_manh": "disciplined, follows through, fair and square",
+   "mat_toi": "rigid, dry in matters of the heart, solitary",
+   "bieu_hien": "usually weighs cost and results before talking about feelings",
+   "khi_sang": "Bright: the wealth star well placed — decisive, good with money, practical in business, able to build wealth on their own.",
+   "khi_ham": "Fallen: rigid, solitary, money comes and goes; clashes easily through blunt speech — needs more softness with people and discipline with spending.",
+   "cau_tu_soi": "Do the people close to you feel your care, or only your worrying?"
+  },
+  "Thiên Đồng": {
+   "tinh_chat": "The Blessing star: mild, easy-going, enjoys comfort and harmony.",
+   "diem_manh": "easing tension, adapting easily, optimistic",
+   "mat_toi": "avoids hard things, procrastinates, lacks drive",
+   "bieu_hien": "is often the one who makes the group's mood easier",
+   "khi_sang": "Bright: a gentle blessing star, optimistic and easy to get along with; enjoys small joys and usually finds help in hard times.",
+   "khi_ham": "Fallen: likes ease and avoids effort, drifts with circumstances; many shifts in youth — needs to set their own goals.",
+   "cau_tu_soi": "Which hard task are you leaving for 'later'?"
+  },
+  "Liêm Trinh": {
+   "tinh_chat": "The Prisoner star: principled, strong emotions, magnetic and ambitious.",
+   "diem_manh": "upright once convinced, persistent, able to organise",
+   "mat_toi": "hot-tempered, stubborn, easily caught up in gossip and disputes",
+   "bieu_hien": "often reacts strongly to anything that breaks a principle",
+   "khi_sang": "Bright: serious, principled, precise; gifted in work that needs discipline (administration, engineering, legal and compliance work).",
+   "khi_ham": "Fallen: quick temper, easily offended, prone to gossip or clashes; should avoid shortcuts and keep a calm mind.",
+   "cau_tu_soi": "Which of your principles is helping you, and which is tying you down?"
+  },
+  "Thiên Phủ": {
+   "tinh_chat": "The Treasury star: steady, careful, good at keeping and saving.",
+   "diem_manh": "tolerant, trustworthy, good at managing",
+   "mat_toi": "conservative, avoids risk, wants too much safety",
+   "bieu_hien": "usually keeps a reserve before trying anything new",
+   "khi_sang": "Bright: a full treasury — calm, careful with things, good at saving and managing; trusted to look after money and people.",
+   "khi_ham": "Dim: a half-empty treasury — overly cautious, fears running short, conservative; needs to be bolder when opportunities come.",
+   "cau_tu_soi": "Which safety net are you holding on to that you no longer need?"
+  },
+  "Thái Âm": {
+   "tinh_chat": "The Riches star: refined, sensitive, inward-looking, likes to build up quietly.",
+   "diem_manh": "thoughtful, a good eye for beauty, patient",
+   "mat_toi": "very emotional, keeps things inside, can feel sad for no clear reason",
+   "bieu_hien": "often notices small changes in other people's moods",
+   "khi_sang": "Bright: a full autumn moon — gentle, refined, rich in feeling and taste; a knack for quietly building up property and savings.",
+   "khi_ham": "Fallen: the moon by day — moods swing, often sad or suspicious; can lose out in love or money by trusting too easily.",
+   "cau_tu_soi": "Does what you are holding inside need to be said out loud?"
+  },
+  "Tham Lang": {
+   "tinh_chat": "The Romance star: hungry for life, many talents, good at socialising, many desires.",
+   "diem_manh": "flexible, attractive, quick to learn many things",
+   "mat_toi": "eager at first then quickly bored, easily lost in pleasure",
+   "bieu_hien": "often has several hobbies at once",
+   "khi_sang": "Bright: many talents, wide connections, keen to learn and enjoys life in moderation; resourceful and lucky in business.",
+   "khi_ham": "Fallen: desires that are hard to stop, easily drawn into partying, gambling and tangled relationships; needs clear limits.",
+   "cau_tu_soi": "Of all the things you want, which do you really need?"
+  },
+  "Cự Môn": {
+   "tinh_chat": "The Dark star: sharp, a good talker, questions and analyses everything to the end.",
+   "diem_manh": "arguing a case, critical thinking, work that uses words",
+   "mat_toi": "suspicious, words can stir up disputes, slow to trust people",
+   "bieu_hien": "often asks 'why' more than others",
+   "khi_sang": "Bright: words that carry weight — good at reasoning and analysis, suited to work with words (teaching, law, consulting, media).",
+   "khi_ham": "Fallen: words that stir up trouble, easily misunderstood or giving offence; often suspicious — better to say less and check more.",
+   "cau_tu_soi": "What was the last thing you said that you regretted?"
+  },
+  "Thiên Tướng": {
+   "tinh_chat": "The Seal star: fair, values courtesy, good at supporting and coordinating.",
+   "diem_manh": "reliable, knows how to save face for others",
+   "mat_toi": "easily swayed, lacks a firm view when standing alone",
+   "bieu_hien": "often steps in to settle things when two sides disagree",
+   "khi_sang": "Bright: upright, keeps their word, stands up for what is right; trustworthy in managing and coordinating roles.",
+   "khi_ham": "Fallen: easily pulled along by others and dragged into their trouble; likes appearances — needs to choose the right people to help.",
+   "cau_tu_soi": "Are you living by your own standards or by someone else's?"
+  },
+  "Thiên Lương": {
+   "tinh_chat": "The Shelter star: protective, likes to guide, values doing what is right.",
+   "diem_manh": "protecting, advising, calm in a crisis",
+   "mat_toi": "prone to lecturing, solitary, likes to play the 'rescuer'",
+   "bieu_hien": "others often come to them for advice",
+   "khi_sang": "Bright: the 'teacher' star, a shelter — decent, kind-hearted, helps others; tends to get through trouble and is well respected.",
+   "khi_ham": "Fallen: likes to lecture and meddle in others' affairs; can become lonely or rootless — better to help when asked.",
+   "cau_tu_soi": "Do you let other people learn their own lessons?"
+  },
+  "Thất Sát": {
+   "tinh_chat": "The General star: brave, independent, ready to push forward and make changes.",
+   "diem_manh": "decisive, handles pressure well, opens new paths",
+   "mat_toi": "hasty, reckless, finds long-term cooperation hard",
+   "bieu_hien": "often chooses to act now rather than wait for full information",
+   "khi_sang": "Bright: a general going into battle — bold, determined, takes on hard work; can rise fast at times thanks to sheer grit.",
+   "khi_ham": "Fallen: hasty and reckless, a life of ups and downs; trips through hurry — needs patience and steady, sure steps.",
+   "cau_tu_soi": "The last time you acted too fast, what did you learn?"
+  },
+  "Phá Quân": {
+   "tinh_chat": "The Consumer star: breaks the old to build the new, loves reform, won't be boxed in.",
+   "diem_manh": "dares to change, innovates, starts ventures",
+   "mat_toi": "wasteful, impulsive, drops things halfway",
+   "bieu_hien": "often wants to start over when the old way isn't working",
+   "khi_sang": "Bright: a trailblazer — dares to break the old to make the new, strong bounce-back, suited to start-ups and restructuring.",
+   "khi_ham": "Fallen: tears down more than it builds, often leaves things unfinished, money leaks; home and work can be unsettled — needs a foundation that holds them steady.",
+   "cau_tu_soi": "What do you want to break down — and what do you want to build in its place?"
+  }
+ },
+ "sao_cung": {
+  "Tử Vi": {
+   "Mệnh": "Strong self-respect, wants to run their own life; suited to leading roles but needs to learn to listen.",
+   "Huynh Đệ": "Siblings or close friends often have strong personalities; things go well when each respects the other's place.",
+   "Phu Thê": "Expects a partner with standing and backbone; clashes come when both want to make the call.",
+   "Tử Nữ": "High hopes for the children; needs to avoid pressing their own mould onto them.",
+   "Tài Bạch": "Money comes through position and reputation rather than luck; spending to keep up appearances is where it leaks.",
+   "Tật Ách": "Stress tends to build from carrying responsibility alone; share the load and rest at the right time.",
+   "Thiên Di": "Out in the world they are respected and meet helpful people; new settings often open a bigger role.",
+   "Nô Bộc": "The network includes people of standing; needs to tell real helpers from those who lean on them.",
+   "Quan Lộc": "Suited to management and leadership in a clearly structured place; uncomfortable when treated as a subordinate.",
+   "Điền Trạch": "Sees the home as a mark of standing; usually wants a proper, settled place to live.",
+   "Phúc Đức": "The inner self needs respect and meaning; peace comes from work of lasting value.",
+   "Phụ Mẫu": "Relations with parents and bosses lean towards rules and protocol; learns a lot from people of standing."
+  },
+  "Thiên Cơ": {
+   "Mệnh": "Quick-witted, full of ideas, loves to think things through; the skill to build is reaching a decision and sticking to it.",
+   "Huynh Đệ": "Siblings and friends often swap ideas; bonds form through conversation more than long joint projects.",
+   "Phu Thê": "Expects a clever, understanding partner; trouble comes from overthinking and guessing each other's minds.",
+   "Tử Nữ": "Cares about teaching the children to think; the children may be sharp and full of questions.",
+   "Tài Bạch": "Money comes from brainwork, advice and planning; income tends to shift from one stage to the next.",
+   "Tật Ách": "Stress easily comes from thinking too much; sleep and a steady rest rhythm are the things to protect.",
+   "Thiên Di": "Likes moving around and learning from new places; often changes jobs or homes.",
+   "Nô Bộc": "Varied, clever friends who come and go; few relationships last very long.",
+   "Quan Lộc": "Suited to planning, analysis, technical and advisory work; needs a place with room for new ideas.",
+   "Điền Trạch": "May move house a few times; likes a practical, well-thought-out home.",
+   "Phúc Đức": "A restless mind that finds stillness hard; peace comes from learning and understanding something new.",
+   "Phụ Mẫu": "Parents and bosses are often tactful people; you learn how to think things through from them."
+  },
+  "Thái Dương": {
+   "Mệnh": "Outgoing, generous, likes to be recognised; tends to take on other people's work.",
+   "Huynh Đệ": "Often the one who looks after siblings and friends; should avoid carrying everything for them.",
+   "Phu Thê": "Expects a decent, honourable partner; can get so busy outside that little time is left for home.",
+   "Tử Nữ": "Wants to be a role model for the children; the children are often open and like to express themselves.",
+   "Tài Bạch": "Money comes through reputation and visible work; being generous, needs discipline to hold on to it.",
+   "Tật Ách": "Can burn out from overwork; worth keeping an eye on the eyes and blood pressure as your doctor advises, and resting regularly.",
+   "Thiên Di": "Becomes well known out in the world; suited to wide settings with plenty of contact.",
+   "Nô Bộc": "A wide network and a habit of helping; needs to be selective so their kindness isn't taken advantage of.",
+   "Quan Lộc": "Suited to education, media, public service and work with a sense of contribution.",
+   "Điền Trạch": "A bright home that welcomes guests; assets are tied to hard work.",
+   "Phúc Đức": "The inner self needs to contribute; peace comes from feeling useful.",
+   "Phụ Mẫu": "The father and elders have a big influence; learns a sense of responsibility from them."
+  },
+  "Vũ Khúc": {
+   "Mệnh": "Decisive, practical, good with money; needs more softness in relationships.",
+   "Huynh Đệ": "Fair, clear-cut relations with siblings; distance can grow when money gets involved.",
+   "Phu Thê": "Expects a practical, capable partner; love can dry up if all the talk is about money.",
+   "Tử Nữ": "Raises the children with discipline; needs more warmth and listening.",
+   "Tài Bạch": "The wealth star in a fitting place: good at earning and keeping money, suited to finance and disciplined business.",
+   "Tật Ách": "Stress is often bottled up inside; better to find ways to release it than just endure.",
+   "Thiên Di": "Does well doing business outside, suited to competitive settings with clear numbers.",
+   "Nô Bộc": "Colleagues and staff work by the rules; relationships rest on results.",
+   "Quan Lộc": "Suited to finance, banking, engineering and management — anywhere decisiveness is needed.",
+   "Điền Trạch": "Builds up fixed assets according to a plan; sees the home more as an asset than a nest.",
+   "Phúc Đức": "Rarely shows the inner self; at peace when everything is under control.",
+   "Phụ Mẫu": "Strict parents and bosses; you learn discipline from them."
+  },
+  "Thiên Đồng": {
+   "Mệnh": "Mild, approachable, likes an easy life; needs to build determination for the hard tasks.",
+   "Huynh Đệ": "Harmonious, pleasant siblings and friends; light relationships with little conflict.",
+   "Phu Thê": "Expects a smooth, pampering relationship; tends to dodge conflict when it comes.",
+   "Tử Nữ": "Close to the children and easily plays with them; needs more rules.",
+   "Tài Bạch": "Money comes steadily but not in floods; enjoying life, tends to spend on pleasures.",
+   "Tật Ách": "Tires easily from too little exercise or irregular eating; a steady daily rhythm keeps the strength up.",
+   "Thiên Di": "Well liked when out and about; enjoys outings and light experiences.",
+   "Nô Bộc": "Lots of cheerful friends; few who really take on big projects together.",
+   "Quan Lộc": "Suited to service and care work in stable settings without fierce competition.",
+   "Điền Trạch": "Likes a comfortable, convenient home; doesn't put much weight on big assets.",
+   "Phúc Đức": "An optimistic inner self that finds small joys; this is an important source of blessing.",
+   "Phụ Mẫu": "Warm relations with parents, often spoilt; needs to become independent earlier."
+  },
+  "Liêm Trinh": {
+   "Mệnh": "Principled, strong emotions, magnetic; needs to keep the temper in check.",
+   "Huynh Đệ": "Relations with siblings get tense at times because everyone holds their ground; be direct but gentle.",
+   "Phu Thê": "Intense love that expects total faithfulness; prone to jealousy or tension.",
+   "Tử Nữ": "Raises the children strictly with high moral standards; should avoid being rigid.",
+   "Tài Bạch": "Money comes through organising ability; avoid 'quick' money that isn't transparent.",
+   "Tật Ách": "Stress easily bursts out as anger; find healthy ways to let off pressure.",
+   "Thiên Di": "Magnetic out in the world but easily caught up in gossip; keep to transparent principles.",
+   "Nô Bộc": "A complicated network; keep people and tasks clearly separate.",
+   "Quan Lộc": "Suited to management, legal and compliance, technical work — anywhere discipline and principles matter.",
+   "Điền Trạch": "Home and property need clear paperwork; be careful with joint ownership.",
+   "Phúc Đức": "An inner tug-of-war between desire and principle; peace comes from living true to one's values.",
+   "Phụ Mẫu": "Relations with parents and bosses are tense at times; teaches lessons about principles."
+  },
+  "Thiên Phủ": {
+   "Mệnh": "Steady, tolerant, good at looking after things; needs to dare to try something new at the right time.",
+   "Huynh Đệ": "Siblings and friends can be relied on; lasting, practical relationships.",
+   "Phu Thê": "Expects a stable family and a thoughtful partner; things can grow dull without renewal.",
+   "Tử Nữ": "Provides carefully for the children's material needs; worth spending more time talking with them.",
+   "Tài Bạch": "The treasury star in a fitting place: good at saving and managing assets, careful with spending.",
+   "Tật Ách": "Stress builds from worrying about keeping everything safe; regular, moderate eating is the thing to watch.",
+   "Thiên Di": "Trusted out in the world, suited to roles managing resources.",
+   "Nô Bộc": "A stable network with reliable people; few surface-level ties.",
+   "Quan Lộc": "Suited to administration, finance and asset management, where stability is needed.",
+   "Điền Trạch": "Values home and land; builds up property step by step.",
+   "Phúc Đức": "At peace when there is a solid foundation; the blessing lies in having enough.",
+   "Phụ Mẫu": "Caring, protective parents and bosses; you inherit their carefulness."
+  },
+  "Thái Âm": {
+   "Mệnh": "Refined, sensitive, inward-looking; needs to speak up instead of keeping things inside.",
+   "Huynh Đệ": "Bonds with siblings and friends are emotional; quietly takes care of others.",
+   "Phu Thê": "Expects a gentle, understanding partner; hurt when not understood.",
+   "Tử Nữ": "Close to the children and cares for them in detail; the children are often sensitive.",
+   "Tài Bạch": "Money builds up quietly, good at saving; suited to steady income and long-term assets.",
+   "Tật Ách": "Emotions strongly affect health; sleep and mood need looking after.",
+   "Thiên Di": "Reserved at first when out in the world but liked for being thoughtful.",
+   "Nô Bộc": "Few friends but deep ones; many people come to them to confide.",
+   "Quan Lộc": "Suited to beauty, care, finance, real estate and detailed work.",
+   "Điền Trạch": "Values the home deeply; likes a quiet, cosy home and tends to build up property.",
+   "Phúc Đức": "A deep, emotional inner life; peace comes from art and nature.",
+   "Phụ Mẫu": "The mother has a big influence; learns thoughtfulness from her."
+  },
+  "Tham Lang": {
+   "Mệnh": "Hungry for life, many talents, a good communicator; needs to choose among desires so as not to scatter.",
+   "Huynh Đệ": "Fun-loving siblings and friends who like to enjoy life together; keep clear boundaries about money.",
+   "Phu Thê": "Passionate love and many admirers; clear commitments help avoid misunderstandings.",
+   "Tử Nữ": "Lively children with many interests; parents need to model moderation.",
+   "Tài Bạch": "Money comes from networking, business and entertainment; easily spent on pleasure.",
+   "Tật Ách": "Prone to overeating and late nights; set a fixed bedtime and cut down on alcohol.",
+   "Thiên Di": "Great at socialising out in the world, many openings; stay alert to temptation.",
+   "Nô Bộc": "A wide network of social contacts; choose friends wisely to save energy.",
+   "Quan Lộc": "Suited to business, sales, entertainment, the arts and diplomacy.",
+   "Điền Trạch": "Homes may change; likes beautiful, comfortable spaces.",
+   "Phúc Đức": "An inner life full of longings; at peace on finding what they truly love.",
+   "Phụ Mẫu": "Open relations with parents, though sometimes lacking deep closeness."
+  },
+  "Cự Môn": {
+   "Mệnh": "Sharp, a good talker, analytical; needs to watch their words to avoid disputes.",
+   "Huynh Đệ": "Relations with siblings easily turn into arguments; be clear from the start.",
+   "Phu Thê": "Words easily cause misunderstandings in a couple; frank conversation keeps things together.",
+   "Tử Nữ": "Teaches the children with reasons; the children may argue back, so patience is needed.",
+   "Tài Bạch": "Money comes from work using words and expertise; keep paperwork clear in business.",
+   "Tật Ách": "Stress often comes from negative thoughts and worry; share with someone you trust.",
+   "Thiên Di": "Has to compete with arguments out in the world; suited to debate and negotiation.",
+   "Nô Bộc": "Colleagues easily attract gossip; stay transparent to avoid misunderstandings.",
+   "Quan Lộc": "Suited to law, education, consulting, media, sales and research.",
+   "Điền Trạch": "Home and property can lead to paperwork disputes; get the legal side clear.",
+   "Phúc Đức": "A questioning, restless inner self; peace comes on finding a satisfying answer.",
+   "Phụ Mẫu": "Relations with parents and bosses need plenty of talking to understand each other."
+  },
+  "Thiên Tướng": {
+   "Mệnh": "Fair, values courtesy, good at supporting others; needs to develop a view of their own.",
+   "Huynh Đệ": "Siblings and friends help each other at the right time; loyal relationships.",
+   "Phu Thê": "Expects a relationship of mutual respect and fairness; tends to give in too much.",
+   "Tử Nữ": "Raises the children with good manners; an orderly parent–child relationship.",
+   "Tài Bạch": "Money comes from stable work and a trusted position; suited to a regular income.",
+   "Tật Ách": "Stress comes from trying to please everyone; needs to learn to say 'no'.",
+   "Thiên Di": "Trusted out in the world, often asked for favours.",
+   "Nô Bộc": "Colleagues and staff are good when rules are clear; you are often the one in the middle sorting things out when two sides disagree.",
+   "Quan Lộc": "Suited to administration, HR, legal work, coordination and senior assistant roles.",
+   "Điền Trạch": "A neat, tidy home; likes things in order.",
+   "Phúc Đức": "The inner self values fairness; at peace when people treat each other kindly.",
+   "Phụ Mẫu": "Smooth relations with parents and bosses; you are trusted with important tasks."
+  },
+  "Thiên Lương": {
+   "Mệnh": "Protective, values doing right, calm; needs to avoid lecturing.",
+   "Huynh Đệ": "Often the one who shelters siblings and friends; relationships rest on loyalty.",
+   "Phu Thê": "Expects a mature partner; may prefer someone older, or be the one who protects the other.",
+   "Tử Nữ": "Wants to teach the children right from wrong; the children are well protected but need room to learn for themselves.",
+   "Tài Bạch": "Money comes steadily, without chasing quick gains; suited to service and insurance work.",
+   "Tật Ách": "Staying calm in difficulty is a strength; regular check-ups as your doctor advises still matter.",
+   "Thiên Di": "Often meets helpers out in the world, or is the helper for others.",
+   "Nô Bộc": "The network treats them as a guide; needs to keep boundaries.",
+   "Quan Lộc": "Suited to healthcare, education, insurance, social work and advisory roles.",
+   "Điền Trạch": "The home is often inherited or tied to the family.",
+   "Phúc Đức": "A steady inner self drawn to ethics and spirituality; this is a source of blessing.",
+   "Phụ Mẫu": "Good relations with parents and elders; often looked after by them."
+  },
+  "Thất Sát": {
+   "Mệnh": "Brave, independent, ready to open new paths; needs patience and teamwork.",
+   "Huynh Đệ": "Siblings and friends with strong personalities clash easily; respecting each other's space keeps things together.",
+   "Phu Thê": "Strong, intense love; both need their own space to avoid head-on clashes.",
+   "Tử Nữ": "Independent, strong-willed children; teach through respect rather than force.",
+   "Tài Bạch": "Money comes by pushing forward and competing; income rises and falls by stages.",
+   "Tật Ách": "Built-up pressure can lead to exhaustion; rest in between each burst of effort.",
+   "Thiên Di": "Dares to take risks out in the world, suited to challenging settings.",
+   "Nô Bộc": "Strong colleagues; roles need to be clear to avoid power struggles.",
+   "Quan Lộc": "Suited to the military, engineering, start-ups and work that needs decisiveness under pressure.",
+   "Điền Trạch": "Homes may change a lot; assets come through big efforts.",
+   "Phúc Đức": "An inner self that is rarely still; at peace when there is a goal worth pursuing.",
+   "Phụ Mẫu": "Relations with parents and bosses are tense at times; likes to decide for themselves."
+  },
+  "Phá Quân": {
+   "Mệnh": "Loves change and breaking moulds; needs to learn to finish before starting over.",
+   "Huynh Đệ": "Relations with siblings shift, sometimes close, sometimes distant.",
+   "Phu Thê": "Love goes through ups and downs and craves constant renewal; commitment needs nurturing.",
+   "Tử Nữ": "Independent children who like to be different; parents need to be flexible.",
+   "Tài Bạch": "Money flows in and out strongly; keep an emergency fund and avoid impulsive investments.",
+   "Tật Ách": "Easily drained by living at high intensity; needs a steady rest rhythm.",
+   "Thiên Di": "Ready for change out in the world, suited to new, innovative settings.",
+   "Nô Bộc": "The network changes with each stage of life.",
+   "Quan Lộc": "Suited to start-ups, restructuring, technology and work that replaces the old with the new.",
+   "Điền Trạch": "The home may be renovated or changed many times.",
+   "Phúc Đức": "Restless with the old; at peace when able to create.",
+   "Phụ Mẫu": "Differences of view with parents and bosses; mutual respect helps."
+  }
+ },
+ "do_sang": {
+  "Miếu": "The star in its strongest position: its good qualities show clearly and its blind spots are held in check.",
+  "Vượng": "The star in a strong position: it works well.",
+  "Đắc": "The star in a fairly good position: it can do its work.",
+  "Lợi": "The star in a relatively favourable position.",
+  "Bình": "The star in an average position: good or bad depends on the stars with it.",
+  "Bất": "The star in a weak position: its good qualities struggle to show.",
+  "Hãm": "The star in a fallen position: its blind spots show easily, and it needs good stars alongside to balance it."
+ },
+ "tu_hoa": {
+  "Lộc": {
+   "y_nghia": "Hua Lu: ease, a source of gain and joy flowing into the area of life the palace rules.",
+   "luu_y": "When things go too smoothly, it is easy to get complacent."
+  },
+  "Quyền": {
+   "y_nghia": "Hua Quan: strength, the initiative and a wish to control in the area the palace rules.",
+   "luu_y": "It can turn into imposing your will."
+  },
+  "Khoa": {
+   "y_nghia": "Hua Ke: reputation, learning and gentle relief in the area the palace rules.",
+   "luu_y": "Better for your name than for your purse."
+  },
+  "Kỵ": {
+   "y_nghia": "Hua Ji: a sticking point, where you care a lot and things snag easily in the area the palace rules.",
+   "luu_y": "Ji marks where there is a lesson to learn — it is not a bad omen."
+  }
+ },
+ "tu_hoa_cung": {
+  "Lộc": {
+   "Mệnh": "People warm to you and help you easily; openings often come through the way you behave. Keep your small promises so that goodwill lasts.",
+   "Huynh Đệ": "Siblings and close friends often help you find work or business contacts, or lend a hand when needed. Repay them fairly to keep the bond.",
+   "Phu Thê": "Your partner tends to bring advantages: extra income, new contacts, a cheerful home. Say out loud what they have contributed.",
+   "Tử Nữ": "Your children, or what you create (products, students), make you proud and can even become a source of income. Make time for your children while things are going well.",
+   "Tài Bạch": "Money comes fairly easily, often with extras beyond the salary such as bonuses or side work. Put part of every extra aside straight away.",
+   "Tật Ách": "Health is generally fine, but you can overdo eating and lounging when relaxed. Keep meals moderate even when celebrating.",
+   "Thiên Di": "Going out, travelling or changing settings often brings openings: business contacts, new work, helpful people. Take trips with a clear purpose.",
+   "Nô Bộc": "Friends, colleagues and customers bring business and referrals. Stay in touch even when you don't need a favour.",
+   "Quan Lộc": "Work goes fairly smoothly: good assignments, bonuses and recognition come your way. Choose work that fits your strengths instead of taking everything.",
+   "Điền Trạch": "You may gain property, valuable belongings or inherit assets from the family. Get the paperwork clear from the start.",
+   "Phúc Đức": "You know how to find small joys and rarely let sadness drag on; relatives tend to support each other. Set aside a fund for your hobbies so you can enjoy them without worry.",
+   "Phụ Mẫu": "Parents, teachers or bosses are willing to support you; paperwork and studies go fairly smoothly. Ask their advice before big decisions."
+  },
+  "Quyền": {
+   "Mệnh": "You like to decide for yourself and often take the lead when the group is stuck. Check with the people involved before deciding for everyone.",
+   "Huynh Đệ": "Among siblings or close friends someone has a strong voice and decides for others — sometimes it is you. Agree clearly who handles which part of shared tasks.",
+   "Phu Thê": "In the relationship one person tends to want to decide everything, from money to housework. Agree who decides what, and talk big things through together.",
+   "Tử Nữ": "You expect a lot and like to plan things for your children; they have strong personalities too. Let them choose things that are within their reach.",
+   "Tài Bạch": "You actively earn money, negotiate well and keep a tight grip on spending. Let your family know the money plan too.",
+   "Tật Ách": "You handle pressure well but tend to push through, working on even when tired. Set a daily stop time and keep to it.",
+   "Thiên Di": "Out in the world you are respected and often put in charge in new places. Listen to the people there before changing how they work.",
+   "Nô Bộc": "You often lead the group and have staff or followers. Delegate clearly and let people choose how to do the work.",
+   "Quan Lộc": "Work comes with management, decision-making and big responsibilities. Learn to delegate so you don't carry it all.",
+   "Điền Trạch": "You are the one who decides about the home and household assets. Talk it over with the family before big purchases or sales.",
+   "Phúc Đức": "You have a strong will and make up your own mind about inner matters; others rarely sway you. Listen to loved ones when you are stuck.",
+   "Phụ Mẫu": "Parents or bosses are strict and commanding and expect a lot from you. Make your case with reasons and figures rather than arguing back."
+  },
+  "Khoa": {
+   "Mệnh": "You have a good name, a courteous manner and people believe what you say. Keep your credibility by doing what you promise.",
+   "Huynh Đệ": "Siblings and close friends give you timely advice, helping more with morale than money. Ask their view when you are unsure.",
+   "Phu Thê": "The two of you respect each other and rarely raise your voices; your partner is often educated and well regarded. Keep the habit of saying clearly what you think.",
+   "Tử Nữ": "Your children love learning and easily earn a good name at school or work. Praise the specific things they do well.",
+   "Tài Bạch": "Money comes through reputation, expertise and qualifications rather than luck. Invest in learning to raise your own value.",
+   "Tật Ách": "When you are worn out someone usually looks after you, and good care is easy to find. Keep up regular check-ups.",
+   "Thiên Di": "Out in the world you are trusted and easily build a name in new places. Keep your records and references complete when you move.",
+   "Nô Bộc": "Friends and colleagues are often educated people who introduce you to good contacts. Keep up your professional relationships.",
+   "Quan Lộc": "Work is tied to expertise and qualifications, and you can build a name in your field. Write, teach or share your expertise to become known.",
+   "Điền Trạch": "Home and property papers are usually clear, with few disputes. Keep copies of documents somewhere safe.",
+   "Phúc Đức": "You feel settled when learning, reading and living decently; you rarely hold grudges. Keep a regular reading or learning habit.",
+   "Phụ Mẫu": "Parents or mentors value education and are happy to guide you; exams and paperwork go fairly smoothly. Ask their view when choosing a school or a job."
+  },
+  "Kỵ": {
+   "Mệnh": "You tend to make things hard for yourself, going over the same thing again and again and blaming yourself when it isn't done. Write down what is worrying you, then pick one small thing to do right now.",
+   "Huynh Đệ": "Matters with siblings or close friends easily weigh on you, especially shared money. Keep money separate from affection, and write it down if you lend.",
+   "Phu Thê": "The two of you easily misunderstand each other over things left unsaid. Set aside one time each week to talk openly, without blame.",
+   "Tử Nữ": "You worry about your children more than needed and get tense when they don't do things your way. Hear them out before giving your view.",
+   "Tài Bạch": "Money in and out often snags: unexpected costs, late payments. Keep an emergency fund and track spending every month.",
+   "Tật Ách": "Stress tends to build up and sleep gets shallow when something is on your mind. Keep a fixed bedtime and have regular check-ups as your doctor advises.",
+   "Thiên Di": "Going out or travelling can bring small hitches: delays, forgotten documents, changed plans. Prepare a day ahead and leave earlier than planned.",
+   "Nô Bộc": "Misunderstandings with colleagues or friends come easily, or you help people who then forget it. Make clear who does what, and write money matters down.",
+   "Quan Lộc": "Work often weighs on your mind: pressure, changes of direction, standards set too high. Settle on one goal per quarter instead of taking on many.",
+   "Điền Trạch": "Home matters can take a lot of effort: repairs, unclear papers, second thoughts about where to live. Check the paperwork carefully before paying.",
+   "Phúc Đức": "Your mind finds it hard to rest and often worries about relatives or the past. Have one activity that truly rests your mind, like walking or gardening.",
+   "Phụ Mẫu": "There can be distance between you and your parents or boss because you think differently; paperwork often needs redoing. Talk with your elders using gentle reasoning."
+  }
+ },
+ "phu_tinh": {
+  "Tả Phù": {
+   "y_nghia": "A helper star: people who help you, an ability to cooperate."
+  },
+  "Hữu Bật": {
+   "y_nghia": "A helper star: help and support from many sides."
+  },
+  "Văn Xương": {
+   "y_nghia": "A literary star: learning, the written word, exams and paperwork."
+  },
+  "Văn Khúc": {
+   "y_nghia": "A literary star: artistic talent and a way with words."
+  },
+  "Thiên Khôi": {
+   "y_nghia": "A benefactor star (yang): support from people of standing."
+  },
+  "Thiên Việt": {
+   "y_nghia": "A benefactor star (yin): quiet help behind the scenes."
+  },
+  "Lộc Tồn": {
+   "y_nghia": "A prosperity star: building up, saving, financial stability; a little cautious."
+  },
+  "Thiên Mã": {
+   "y_nghia": "A movement star: change, long journeys, an active life."
+  },
+  "Kình Dương": {
+   "y_nghia": "A malefic star: forceful and competitive; clashes come easily when rushed."
+  },
+  "Đà La": {
+   "y_nghia": "A malefic star: delays and dragging; patience is needed."
+  },
+  "Hỏa Tinh": {
+   "y_nghia": "A malefic star: hot-tempered, flares up fast."
+  },
+  "Linh Tinh": {
+   "y_nghia": "A malefic star: smouldering, a hidden unease."
+  },
+  "Địa Không": {
+   "y_nghia": "A malefic star: let-downs, unusual ideas; losses come easily with risky moves."
+  },
+  "Địa Kiếp": {
+   "y_nghia": "A malefic star: upheaval and sudden loss; be prepared."
+  },
+  "Hàm Trì": {
+   "y_nghia": "A romance star (Xian Chi, which Vietnamese readers often call the Peach Blossom star): charm, easy attraction."
+  },
+  "Hồng Loan": {
+   "y_nghia": "A romance star: love affinity, happy occasions."
+  },
+  "Thiên Hỷ": {
+   "y_nghia": "A joy star: happiness and good news."
+  },
+  "Thiên Diêu": {
+   "y_nghia": "A romance star: romantic, easily carried away by feelings."
+  },
+  "Thiên Hình": {
+   "y_nghia": "A discipline star: strictness, legal matters, blades and surgery."
+  },
+  "Hoa Cái": {
+   "y_nghia": "A star of art and religion: a feel for beauty, a liking for solitude."
+  },
+  "Cô Thần": {
+   "y_nghia": "A solitary star: likes being alone, self-reliant."
+  },
+  "Quả Tú": {
+   "y_nghia": "A solitary star: closed off in matters of the heart."
+  },
+  "Thiên Khốc": {
+   "y_nghia": "A sorrow star: melancholy, prone to worry."
+  },
+  "Thiên Hư": {
+   "y_nghia": "A sorrow star: emptiness, a sense of loss."
+  },
+  "Tuần Không": {
+   "y_nghia": "Xun (Void): slows things down, puts them on hold; in the Southern school it counts only for the palace it sits in."
+  },
+  "Triệt Lộ": {
+   "y_nghia": "Jie (Cut-off): cuts things short, blocks them; strongest in the early part of life."
+  }
+ },
+ "nhom_cach": {
+  "Tử Phủ Vũ Tướng": "The Zi–Fu–Wu–Xiang group: leans towards organising, managing and stability; suited to structured settings.",
+  "Sát Phá Tham": "The Sha–Po–Lang group: leans towards change, pushing forward and starting things; a life with many shifts.",
+  "Cơ Nguyệt Đồng Lương": "The Ji–Yue–Tong–Liang group: leans towards expertise, service and stability, working within a system.",
+  "Cự Nhật": "The Ju–Ri group: leans towards speaking, communicating and public work."
+ },
+ "chu_de_han": {
+  "Mệnh": "A Life Palace stage: reshaping your own way of living, your career and your goals.",
+  "Huynh Đệ": "A Siblings Palace stage: relationships with siblings, friends and partners come to the table.",
+  "Phu Thê": "A Spouse Palace stage: love, marriage and close partnerships take centre stage.",
+  "Tử Nữ": "A Children Palace stage: children, the next generation, creativity, investing in what you create.",
+  "Tài Bạch": "A Wealth Palace stage: money, income and how you manage your finances.",
+  "Tật Ách": "A Health Palace stage: health, daily rhythm and how you handle pressure need looking after.",
+  "Thiên Di": "A Travel Palace stage: moving, new surroundings, relationships out in the world.",
+  "Nô Bộc": "A Friends Palace stage: your network, colleagues, staff and social circle.",
+  "Quan Lộc": "A Career Palace stage: work, career and your role in society.",
+  "Điền Trạch": "A Property Palace stage: home, where you live, assets, the atmosphere at home.",
+  "Phúc Đức": "A Fortune Palace stage: inner life, the family line, peace of mind.",
+  "Phụ Mẫu": "A Parents Palace stage: parents, bosses, paperwork, studies."
+ },
+ "chu_de_han_ngan": {
+  "Mệnh": "reshaping your own way of living, your career and your goals",
+  "Huynh Đệ": "relationships with siblings, friends and partners come to the table",
+  "Phu Thê": "love, marriage and close partnerships take centre stage",
+  "Tử Nữ": "children, the next generation, creativity, investing in what you create",
+  "Tài Bạch": "money, income and how you manage your finances",
+  "Tật Ách": "health, daily rhythm and how you handle pressure need looking after",
+  "Thiên Di": "moving, new surroundings, relationships out in the world",
+  "Nô Bộc": "your network, colleagues, staff and social circle",
+  "Quan Lộc": "work, career and your role in society",
+  "Điền Trạch": "home, where you live, assets, the atmosphere at home",
+  "Phúc Đức": "inner life, the family line, peace of mind",
+  "Phụ Mẫu": "parents, bosses, paperwork, studies"
+ },
+ "mau": {
+  "can_la_so": "To answer this we need your chart: enter your date of birth, time of birth and sex (if born before 13/06/1975, also whether you were born in the North or South of Vietnam). The stars are placed on our own servers; your date of birth is not sent anywhere else.",
+  "nguoi_khac": "This question is about someone else's chart. It needs their date and time of birth — and ideally their consent before you look. If you like, ask instead how you yourself handle that relationship, based on your own chart.",
+  "hop_hon": "Comparing two charts needs both people's full date and time of birth (and the other person's consent). We only describe the dynamics of the relationship — we don't pronounce a 'match' or a 'clash', give a score, or go by Chinese zodiac animals alone.",
+  "con": "Reading a child's chart needs the child's date and time of birth. We only describe temperament so parents can understand their child — we don't choose birth times or pronounce on how many children you will have or their health.",
+  "hop_lam_an": "There is no reliable table of 'this age suits that age' for business — folk custom compares zodiac animals by trines and clashes, but whether a business works depends on how two people split the work and the money and how they talk when they disagree. We don't score matches or clashes; if you have both people's full birth details (and the other person agrees), 'Two-person chart reading' set to a business partnership points out where you may clash and what to agree in writing beforehand.",
+  "sinh_con_tuoi": "Having a child — which year, boy or girl — is a matter for the body and the doctor; a chart cannot decide it. Vietnamese folk custom compares a child's zodiac year with the parents' by trines and clashes (a custom, not a chart calculation); you can look it up in the Age checker, but please don't let that custom decide for the two of you. We don't choose a birth time or a birth year for a baby."
+ },
+ "luu_y": {
+  "tham_khao": "Reference mode: each period is read as the theme of a stage of life, not as a fixed event.",
+  "chi_tiet": "Detailed mode: it shows whether a year leans easier or harder according to the good and difficult stars, but never pronounces accidents, illness, lawsuits or money figures — the three layers of time are read in the order 10-year period > year chart > minor yearly limit.",
+  "iztro": "The chart is placed with the standard Zi Wei Dou Shu framework; the main stars and Four Transformations match independent reference sources, while the Southern-school minor stars are not yet fully cross-checked.",
+  "tat_ach": "This part only talks about your daily rhythm and how you handle pressure; it is not a substitute for a doctor — ask a doctor about any health concern.",
+  "han_su_kien": "A chart doesn't say which year will bring an accident, a lawsuit, a financial loss, a wedding or a child — no one can tell that from a birth date. The part above only points out which areas of the year deserve attention and what is worth doing.",
+  "luu_nguyet": "The monthly chart is read as the theme that comes up in the month, ranked after the 10-year period, the year chart and the minor yearly limit. Changing school can change the palace of a month — check the comparison table of schools before relying on a particular month.",
+  "lo_so": "A chart doesn't answer 'will it happen or not' — no one can tell that from a birth date. What it can say is which area needs more of your attention and what is worth doing; you are still the one who decides.",
+  "phap_ly": "Paperwork, contracts and disputes: the chart only says which years this area needs a closer look. Winning or losing, right or wrong, depends on the documents and a lawyer — ask a professional before you sign or sue.",
+  "tien_bac": "This is not investment advice. The chart only shows the rhythm of money coming in and going out by stage, and what is worth doing to keep it; for borrowing, investing or buying and selling, work with real figures and ask a professional.",
+  "hon_nhan": "A chart doesn't count how many marriages you will have or say who will leave whom, and we never use the word 'clash' about family members. What it can show is where two people tend to rub against each other and when love opens up or misunderstandings come easily — so you can choose how to talk, not to label anyone.",
+  "xac_nhan": "We don't comment on what someone else has told you — the part above only reads from your own chart. If the two say different things, trust whichever matches your real experience."
+ },
+ "doc_tung_buoc": {
+  "menh_than": {
+   "tieu_de": "Step 1 · Life Palace, Body Palace and Bureau",
+   "cach_doc": "The Life Palace is a 'portrait' of your character and how you set out in life; the Body Palace shows which area you put your energy into later on. The Bureau (Water, Wood, Metal, Earth, Fire) sets the age when the first 10-year period begins. Reading a chart always starts here."
+  },
+  "chinh_tinh": {
+   "tieu_de": "Step 2 · Main stars in the Life Palace and their brightness",
+   "cach_doc": "The main stars are the 14 big stars, like the 'lead characters' of each palace. The same star in a bright spot (Temple, Prosperous, Favourable) shows its good side; in a fallen spot its blind side shows more easily. A palace with no main star borrows the stars of the opposite palace to be read."
+  },
+  "tam_phuong": {
+   "tieu_de": "Step 3 · The trine and opposite palaces",
+   "cach_doc": "No palace stands alone: the Life Palace is always read with the three palaces that face it — Career (work), Wealth (money) and Travel (going out into the world). These four palaces are called the trine and opposite palaces, like the four walls of a room."
+  },
+  "cach_cuc": {
+   "tieu_de": "Step 4 · Chart patterns",
+   "cach_doc": "Chart patterns are star 'shapes' that the old books gave names to — when a group of stars lands in the right places around the Life Palace. A pattern is only a frame of reference; when malefic stars gather, the books say the pattern is weakened. No pattern decides your fate."
+  },
+  "tu_hoa": {
+   "tieu_de": "Step 5 · The Four Transformations of the birth year",
+   "cach_doc": "The heavenly stem of your birth year 'recolours' four stars: Hua Lu (ease, gain), Hua Quan (ability, taking charge), Hua Ke (reputation, studies), Hua Ji (snags, things to learn). See which palaces they land in to know where your life's energy gathers."
+  },
+  "dai_han": {
+   "tieu_de": "Step 6 · The 10-year periods",
+   "cach_doc": "Life is divided into 10-year stretches, each 'borrowing' a palace as its theme. The 10-year period is the most important layer of timing (ranked above the year chart and the minor yearly limit): it tells what those ten years revolve around, not whether a particular year is good or bad."
+  },
+  "luu_nien": {
+   "tieu_de": "Step 7 · The year chart and the minor yearly limit — one particular year",
+   "cach_doc": "The year (annual) chart is the theme of a single year; the minor yearly limit is the smallest layer. Always read a year in the context of the 10-year period it falls in — the year is the 'weather', the 10-year period is the 'season'."
+  }
+ },
+ "giai_thich": {
+  "tuan_triet": {
+   "tieu_de": "What are Xun and Jie?",
+   "noi_dung": "Xun (Void) and Jie (Cut-off) are two 'blocking zones' in the chart, placed by the stem and branch of the birth year. Jie is like a cut — strong early in life, then fading; Xun is like being put on hold — slow and lasting, growing stronger later in life. In the Vietnamese Southern school they count only for the palace they sit in (a narrow reading)."
+  },
+  "tu_hoa": {
+   "tieu_de": "What are the Four Transformations?",
+   "noi_dung": "The Four Transformations are four changes — Hua Lu, Hua Quan, Hua Ke and Hua Ji — attached to four stars according to the stem of the birth year (the natal transformations). Vietnamese Zi Wei uses the natal transformations and does not use the flying-star technique by each palace's stem."
+  },
+  "mieu_ham": {
+   "tieu_de": "Temple, Prosperous, Favourable, Fallen",
+   "noi_dung": "A star's brightness depends on its palace position: Temple is strongest, then Prosperous, Favourable, Beneficial, Neutral, Unfavourable, and Fallen is weakest. A fallen star shows its blind side more easily; a star in its Temple shows its good side."
+  },
+  "dai_han": {
+   "tieu_de": "10-year periods, minor yearly limits, year charts",
+   "noi_dung": "A 10-year period is a ten-year stage that starts according to the Bureau; the minor yearly limit and the year chart cover single years. When they disagree, the settled order is: 10-year period > year chart > minor yearly limit. Age is counted the traditional East Asian way (lunar age)."
+  },
+  "am_duong_lich": {
+   "tieu_de": "Which calendar does Zi Wei Dou Shu use?",
+   "noi_dung": "Zi Wei Dou Shu places the stars by the LUNAR day, month and year and the hour of birth. You can enter your solar (Gregorian) date and it is converted automatically (Ho Ngoc Duc's algorithm, Vietnam time zone)."
+  },
+  "gio_ty": {
+   "tieu_de": "Why do charts differ for people born in the Zi hour?",
+   "noi_dung": "The Zi hour (23:00–00:59) straddles midnight. Some traditions treat 23:00 as the start of the next day (the convention used for Zi Wei Dou Shu here), others keep it as the same day. People born between 23:00 and 23:59 should look at both charts."
+  },
+  "khong_ro_gio": {
+   "tieu_de": "What if I don't know my time of birth?",
+   "noi_dung": "Don't invent a time. Narrow the window (early morning, noon, late night…), draw a chart for each possible hour, trust what all the charts share and check what differs against things that have already happened in your life."
+  },
+  "mien_nam_1975": {
+   "tieu_de": "Born in southern Vietnam before 1975",
+   "noi_dung": "Before 13/06/1975 southern Vietnam used UTC+8 for certain periods, so the clock time must be converted to UTC+7 before placing the stars. We ask which region you were born in and convert automatically."
+  },
+  "chinh_xac": {
+   "tieu_de": "Is Zi Wei Dou Shu accurate?",
+   "noi_dung": "Zi Wei Dou Shu is a cultural system of interpretation, not a tested forecasting tool. Its value lies in giving you a frame for self-reflection and questions to ask yourself; check it against your past milestones before trusting it."
+  },
+  "cung_gio_khac_doi": {
+   "tieu_de": "Why do people born at the same time live different lives?",
+   "noi_dung": "A chart is only one layer describing tendencies. Family, education, choices, environment and real-world luck matter far more — so two people with the same chart still live differently."
+  },
+  "nam_bac_phai": {
+   "tieu_de": "Southern and Northern schools",
+   "noi_dung": "Vietnamese Zi Wei (the Southern school) gives weight to Xun and Jie, the Tai Sui ring and the Fortune Palace, and uses the natal transformations; Chinese Zi Wei Dou Shu has the San He (three-harmony) and Flying Star schools (flying transformations by each palace's stem). Charts here are placed with the standard Chinese framework and cross-checked for Xun and Jie against the Southern school."
+  },
+  "chinh_tinh_14": {
+   "tieu_de": "The 14 main stars",
+   "noi_dung": "Zi Wei, Tian Ji, Tai Yang, Wu Qu, Tian Tong, Lian Zhen, Tian Fu, Tai Yin, Tan Lang, Ju Men, Tian Xiang, Tian Liang, Qi Sha, Po Jun — in four groups: Zi–Fu–Wu–Xiang, Sha–Po–Lang, Ji–Yue–Tong–Liang and Ju–Ri."
+  },
+  "vo_chinh_dieu": {
+   "tieu_de": "A Life Palace with no main star",
+   "noi_dung": "A palace without a main star. It is read by borrowing the main stars of the opposite palace; the traits are milder and depend a lot on the minor stars. It isn't bad — just flexible and easily shaped by surroundings."
+  },
+  "menh_than": {
+   "tieu_de": "Life Palace and Body Palace",
+   "noi_dung": "The Life Palace is your root nature; the Body Palace is the part that shows more clearly from middle age. Whichever palace the Body Palace sits in is where later life puts its focus."
+  },
+  "tam_phuong": {
+   "tieu_de": "The trine and opposite palaces",
+   "noi_dung": "To read a palace you must also look at its two trine palaces and the opposite palace: for the Life Palace that means Life – Wealth – Career, plus Travel. Never read a palace on its own."
+  },
+  "cuc": {
+   "tieu_de": "The Five-Element Bureau",
+   "noi_dung": "The Bureau (Water 2, Wood 3, Metal 4, Earth 5, Fire 6) sets the age at which the first 10-year period begins."
+  },
+  "tam_tai": {
+   "tieu_de": "Tam Tai and Tai Sui years",
+   "noi_dung": "Tam Tai ('three calamities' years) and offending Tai Sui are folk beliefs tied to your zodiac age; they are not part of placing the stars on a chart. We only show the palace of the year chart and the theme of the year, and never pronounce misfortune."
+  },
+  "luu_nguyet": {
+   "tieu_de": "Reading by month",
+   "noi_dung": "The monthly chart looks at which palace serves as the 'Life Palace of the month'. Schools differ on where the first lunar month starts: the most common is Dou Jun (count backwards from the Tai Sui palace of the year to the birth month, then forwards to the birth hour); some schools start from the minor yearly limit, from the palace of the year chart, or from the earthly branch of the month. You choose the school in the 'School' panel. The monthly chart is the thinnest layer of Zi Wei: a month only adds colour to the year and the 10-year period, and cannot predict events."
+  }
+ }
+}
