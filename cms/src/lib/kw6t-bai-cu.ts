@@ -437,13 +437,32 @@ async function timBai(payload: Payload, slug: string) {
   return r.docs[0] as Record<string, any> | undefined; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
-/** Có bản nháp mới hơn bản đang xuất bản (Chủ biên đang sửa dở) → không đè. */
-async function coNhapDangSua(payload: Payload, id: number | string): Promise<boolean> {
-  const v = await payload.findVersions({ collection: "bai-viet", where: { parent: { equals: id } }, sort: "-updatedAt", limit: 1,
-    depth: 0, overrideAccess: true });
-  const moi = v.docs[0] as { version?: { _status?: string } } | undefined;
-  return moi?.version?._status === "draft";
+/** Dấu nội dung THẬT của một bài (chữ, link, ảnh, trường SEO) — bỏ qua cách trình soạn thảo lưu JSON. */
+export function dauNoiDung(x: Record<string, any>): string { // eslint-disable-line @typescript-eslint/no-explicit-any
+  const link: string[] = [];
+  const duyet = (n: Nut | undefined) => {
+    if (!n || typeof n !== "object") return;
+    if (n.type === "link") link.push(String(n.fields?.url ?? ""));
+    if (n.type === "upload") link.push(`anh:${typeof n.value === "object" && n.value ? n.value.id : n.value}`);
+    (n.children ?? []).forEach(duyet);
+  };
+  const goc = (x.noi_dung as { root?: Nut } | undefined)?.root;
+  duyet(goc);
+  return JSON.stringify([x.tieu_de ?? "", x.slug ?? "", x.mo_ta_ngan ?? "", x.tra_loi_nhanh ?? "",
+    x.meta?.title ?? "", x.meta?.description ?? "", goc ? chuCua(goc).replace(/\s+/g, " ").trim() : "", link,
+    ((x.hoi_dap ?? []) as { cau_hoi?: string; tra_loi?: string }[]).map((h) => [h.cau_hoi ?? "", h.tra_loi ?? ""])]);
 }
+
+/** Bản nháp mới nhất KHÁC bản đang xuất bản ở nội dung thật (Chủ biên đang sửa dở) → không đè. Bản nháp do trình soạn thảo
+ *  tự lưu khi chỉ mở bài (autosave 2 giây) có cùng nội dung → không tính (lần chạy đầu bị chặn nhầm cả 21 bài vì lý do này). */
+async function coNhapDangSua(payload: Payload, bai: Record<string, any>): Promise<boolean> { // eslint-disable-line @typescript-eslint/no-explicit-any
+  const v = await payload.findVersions({ collection: "bai-viet", where: { parent: { equals: bai.id } }, sort: "-updatedAt", limit: 1,
+    depth: 0, overrideAccess: true });
+  const moi = (v.docs[0] as { version?: Record<string, any> } | undefined)?.version; // eslint-disable-line @typescript-eslint/no-explicit-any
+  return moi?._status === "draft" && dauNoiDung(moi) !== dauNoiDung(bai);
+}
+
+const loiCua = (e: unknown) => String((e as Error)?.message ?? e).slice(0, 300);
 
 export async function apDungKw6t(payload: Payload, _req?: PayloadRequest): Promise<KetQuaKw6t[]> {
   const kq: KetQuaKw6t[] = [];
@@ -451,44 +470,50 @@ export async function apDungKw6t(payload: Payload, _req?: PayloadRequest): Promi
   const cuCua = new Map(KE_HOACH.filter((k) => k.slugMoi).map((k) => [k.slugMoi!, k.slug]));
   const idTheoSlug = async (slug: string) =>
     (await timBai(payload, slug))?.id ?? (cuCua.has(slug) ? (await timBai(payload, cuCua.get(slug)!))?.id ?? null : null);
-  // Gộp trước: bài phụ thôi xuất bản → bài chính nhận slug (không còn hai bài cùng hiện, kiểm trùng không vướng).
-  const gop = new Map<string, string[]>();
-  for (const ke of KE_HOACH.filter((k) => k.gopVao)) {
-    const bai = await timBai(payload, ke.slug);
-    if (!bai) { kq.push({ slug: ke.slug, viec: "gộp", ok: false, ly_do: "không thấy bài" }); continue; }
-    if (String(bai.ghi_chu_duyet ?? "").includes(DAU_KW6T)) { kq.push({ slug: ke.slug, viec: "gộp", ok: true, ly_do: "đã gộp từ trước" }); continue; }
-    if (bai._status !== "published") { kq.push({ slug: ke.slug, viec: "gộp", ok: false, ly_do: "bài không ở trạng thái xuất bản" }); continue; }
-    try {
-      await payload.update({ collection: "bai-viet", id: bai.id, overrideAccess: true, context: { giuSlugGoc: true },
-        data: { _status: "draft", ...apTruong(bai, ke) } as never });
-      gop.set(ke.gopVao!, [...(gop.get(ke.gopVao!) ?? []), bai.slug, ...(bai.slug_cu ?? [])]);
-      kq.push({ slug: ke.slug, viec: `gộp vào ${ke.gopVao}`, ok: true });
-    } catch (e) { kq.push({ slug: ke.slug, viec: "gộp", ok: false, ly_do: String((e as Error)?.message ?? e).slice(0, 200) }); }
-  }
+  const phuCua = new Map<string, Ke[]>();
+  for (const k of KE_HOACH.filter((x) => x.gopVao)) phuCua.set(k.gopVao!, [...(phuCua.get(k.gopVao!) ?? []), k]);
+
   for (const ke of KE_HOACH.filter((k) => !k.gopVao)) {
     const bai = (await timBai(payload, ke.slug)) ?? (ke.slugMoi ? await timBai(payload, ke.slugMoi) : undefined);
+    const phu = phuCua.get(ke.slug) ?? [];
     if (!bai) { kq.push({ slug: ke.slug, viec: "sửa", ok: false, ly_do: "không thấy bài" }); continue; }
     if (bai._status !== "published") { kq.push({ slug: ke.slug, viec: "sửa", ok: false, ly_do: "bài chưa xuất bản — không đụng" }); continue; }
-    if (String(bai.ghi_chu_duyet ?? "").includes(DAU_KW6T)) { kq.push({ slug: ke.slug, viec: "sửa", ok: true, ly_do: "đã sửa từ trước" }); continue; }
-    if (await coNhapDangSua(payload, bai.id)) { kq.push({ slug: ke.slug, viec: "sửa", ok: false, ly_do: "có bản nháp đang sửa — không đè" }); continue; }
-    try {
-      const than = apThan(bai.noi_dung, ke);
-      const data = apTruong(bai, ke);
-      const ids = (await Promise.all((ke.lienQuan ?? []).map(idTheoSlug))).filter((x) => x != null && x !== bai.id);
-      if (ids.length) data.bai_lien_quan = ids.slice(0, 4);
-      const them = gop.get(ke.slug);
-      if (them?.length) data.slug_cu = [...new Set([...(bai.slug_cu ?? []), ...them])].filter((s) => s !== bai.slug);
-      if (ke.veAnh) {
-        const tam = { ...bai, ...data, hoi_dap: data.hoi_dap ?? bai.hoi_dap };
-        const { bia } = await veLaiAnh(payload, tam, than.noi_dung);
-        data.anh_bia = bia;
-        data.meta = { ...((data.meta as object) ?? bai.meta ?? {}), image: bia };
-      }
-      data.noi_dung = than.noi_dung;
-      await payload.update({ collection: "bai-viet", id: bai.id, overrideAccess: true, context: { giuSlugGoc: true },
-        data: { _status: "published", ...data } as never });
-      kq.push({ slug: ke.slug, viec: "sửa", ok: true, ly_do: than.loi.join("; ") || undefined });
-    } catch (e) { kq.push({ slug: ke.slug, viec: "sửa", ok: false, ly_do: String((e as Error)?.message ?? e).slice(0, 300) }); }
+    const baiPhu = await Promise.all(phu.map((p) => timBai(payload, p.slug)));
+    if (String(bai.ghi_chu_duyet ?? "").includes(DAU_KW6T)) {
+      kq.push({ slug: ke.slug, viec: "sửa", ok: true, ly_do: "đã sửa từ trước" });
+    } else {
+      try {
+        if (await coNhapDangSua(payload, bai)) { kq.push({ slug: ke.slug, viec: "sửa", ok: false, ly_do: "có bản nháp đang sửa — không đè" }); continue; }
+        const than = apThan(bai.noi_dung, ke);
+        const data = apTruong(bai, ke);
+        const ids = (await Promise.all((ke.lienQuan ?? []).map(idTheoSlug))).filter((x) => x != null && x !== bai.id);
+        if (ids.length) data.bai_lien_quan = ids.slice(0, 4);
+        // Bài chính nhận slug của bài phụ (kể cả bài phụ đã thôi xuất bản ở lần chạy trước) → web 308 về bài chính.
+        const them = baiPhu.flatMap((b) => (b ? [b.slug, ...(b.slug_cu ?? [])] : []));
+        if (them.length) data.slug_cu = [...new Set([...(bai.slug_cu ?? []), ...them])].filter((x) => x && x !== bai.slug);
+        if (ke.veAnh) {
+          const tam = { ...bai, ...data, hoi_dap: data.hoi_dap ?? bai.hoi_dap };
+          const { bia } = await veLaiAnh(payload, tam, than.noi_dung);
+          data.anh_bia = bia;
+          data.meta = { ...((data.meta as object) ?? bai.meta ?? {}), image: bia };
+        }
+        data.noi_dung = than.noi_dung;
+        await payload.update({ collection: "bai-viet", id: bai.id, overrideAccess: true, context: { giuSlugGoc: true },
+          data: { _status: "published", ...data } as never });
+        kq.push({ slug: ke.slug, viec: "sửa", ok: true, ly_do: than.loi.join("; ") || undefined });
+      } catch (e) { kq.push({ slug: ke.slug, viec: "sửa", ok: false, ly_do: loiCua(e) }); continue; }
+    }
+    // Chỉ sau khi bài chính đã nhận slug: bài phụ thôi xuất bản (không còn hai bài cùng hiện, đường cũ 308 về bài chính).
+    for (const [n, p] of phu.entries()) {
+      const b = baiPhu[n];
+      if (!b) { kq.push({ slug: p.slug, viec: "gộp", ok: false, ly_do: "không thấy bài" }); continue; }
+      if (b._status !== "published") { kq.push({ slug: p.slug, viec: "gộp", ok: true, ly_do: "đã gộp từ trước" }); continue; }
+      try {
+        await payload.update({ collection: "bai-viet", id: b.id, overrideAccess: true, context: { giuSlugGoc: true },
+          data: { _status: "draft", ...apTruong(b, p) } as never });
+        kq.push({ slug: p.slug, viec: `gộp vào ${ke.slug}`, ok: true });
+      } catch (e) { kq.push({ slug: p.slug, viec: "gộp", ok: false, ly_do: loiCua(e) }); }
+    }
   }
   return kq;
 }
@@ -501,7 +526,11 @@ export async function hoanTacKw6t(payload: Payload): Promise<number> {
   for (const bai of r.docs) {
     const v = await payload.findVersions({ collection: "bai-viet", where: { parent: { equals: bai.id } }, sort: "-updatedAt", limit: 50,
       depth: 0, overrideAccess: true });
-    const cu = v.docs.find((d) => !String((d as { version?: { ghi_chu_duyet?: string } }).version?.ghi_chu_duyet ?? "").includes(DAU_KW6T));
+    // Chỉ phiên bản ĐÃ XUẤT BẢN trước KW-6T (bỏ qua bản nháp trình soạn thảo tự lưu).
+    const cu = v.docs.find((d) => {
+      const x = (d as { version?: { ghi_chu_duyet?: string; _status?: string } }).version;
+      return x?._status === "published" && !String(x?.ghi_chu_duyet ?? "").includes(DAU_KW6T);
+    });
     if (!cu) continue;
     await payload.restoreVersion({ collection: "bai-viet", id: cu.id, overrideAccess: true, depth: 0 });
     dem++;

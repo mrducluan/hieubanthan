@@ -1,6 +1,7 @@
 // KW-6T — thử trên Postgres THẬT với bản sao bài đang xuất bản: nạp bài từ tệp JSON (REST công khai của CMS,
 // ?depth=1), chạy apDungKw6t, kiểm kết quả, rồi hoàn tác. KHÔNG chạy trong CI (cần tệp dữ liệu ngoài repo).
 // Chạy: DATABASE_URI=… KW6T_JSON=/đường/dẫn/bai.json npx payload run tests/kw6t-du-lieu-that.ts
+// (KW6T_MOI=1: bỏ bước giả lập "lần chạy đầu đã cho 3 bài phụ thôi xuất bản" — thử đường chạy từ đầu)
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { getPayload } from "payload";
@@ -42,9 +43,27 @@ for (const b of d.docs) {
 }
 console.log(`nạp ${d.docs.length} bài, ${anh.size} ảnh`);
 
+// Như CMS thật: (1) mở bài trong trình soạn thảo → bản nháp tự lưu, CÙNG nội dung nhưng JSON Lexical khác cách ghi;
+// (2) một bài Chủ biên đang sửa dở thật → phải giữ nguyên; (3) lần chạy đầu (bản cũ) đã cho 3 bài phụ thôi xuất bản.
+const thatSua = "self-discovery-tu-hieu-minh-qua-gia-tri-thoi-quen-va-lua-chon";
+const themDinhDang = (n: any): any => ({ ...n, ...(n.type === "paragraph" ? { textFormat: 0, textStyle: "" } : {}),
+  ...(n.children ? { children: n.children.map(themDinhDang) } : {}) });
+for (const b of d.docs) {
+  const id = idCu.get(b.slug)!;
+  const hien = await payload.findByID({ collection: "bai-viet", id, depth: 0, overrideAccess: true }) as any;
+  await payload.update({ collection: "bai-viet", id, overrideAccess: true, draft: true, autosave: true,
+    context: { giuSlugGoc: true, boQuaLamMoi: true },
+    data: b.slug === thatSua ? { tieu_de: hien.tieu_de + " (đang sửa)" } : { noi_dung: { root: themDinhDang(hien.noi_dung.root) } } } as never);
+}
+for (const ke of KE_HOACH.filter((k) => k.gopVao && !process.env.KW6T_MOI)) {
+  await payload.update({ collection: "bai-viet", id: idCu.get(ke.slug)!, overrideAccess: true, context: { giuSlugGoc: true, boQuaLamMoi: true },
+    data: { _status: "draft", ghi_chu_duyet: "KW-6T 2026-11-11: lần chạy đầu" } as never });
+}
+
 const kq = await apDungKw6t(payload);
 for (const r of kq) console.log(`  ${r.ok ? "✓" : "✗"} ${r.slug.slice(0, 60)} — ${r.viec}${r.ly_do ? ` (${r.ly_do})` : ""}`);
-assert.equal(kq.filter((r) => !r.ok).length, 0, "mọi bài đều áp được");
+assert.deepEqual(kq.filter((r) => !r.ok).map((r) => [r.slug, r.ly_do]), [[thatSua, "có bản nháp đang sửa — không đè"]],
+  "chỉ bài đang sửa thật bị giữ lại");
 
 const lay = async (slug: string) => (await payload.find({ collection: "bai-viet", where: { slug: { equals: slug } }, depth: 1, overrideAccess: true })).docs[0] as any;
 for (const ke of KE_HOACH) {
@@ -54,6 +73,7 @@ for (const ke of KE_HOACH) {
     assert.ok(chinh.slug_cu.includes(ke.slug), `${ke.gopVao} nhận slug_cu ${ke.slug}`);
     continue;
   }
+  if (ke.slug === thatSua) continue;
   const b = await lay(ke.slugMoi ?? ke.slug);
   assert.ok(b, `thấy bài ${ke.slugMoi ?? ke.slug}`);
   assert.equal(b._status, "published");
@@ -74,11 +94,12 @@ for (const ke of KE_HOACH) {
 }
 // Chạy lại: không sửa thêm.
 const lan2 = await apDungKw6t(payload);
-assert.ok(lan2.every((r) => r.ok && /từ trước/.test(r.ly_do ?? "")), "chạy lại không đổi thêm: " + JSON.stringify(lan2.filter((r) => !/từ trước/.test(r.ly_do ?? ""))));
+assert.ok(lan2.every((r) => r.slug === thatSua || (r.ok && /từ trước/.test(r.ly_do ?? ""))), "chạy lại không đổi thêm: " + JSON.stringify(lan2.filter((r) => !/từ trước/.test(r.ly_do ?? ""))));
 
 const so = await hoanTacKw6t(payload);
 console.log(`hoàn tác ${so} bài`);
 for (const b of d.docs) {
+  if (b.slug === thatSua) continue;
   const x = (await payload.findByID({ collection: "bai-viet", id: idCu.get(b.slug)!, depth: 0, overrideAccess: true })) as any;
   assert.equal(x.slug, b.slug, `hoàn tác slug ${b.slug}`);
   assert.equal(x.tieu_de, b.tieu_de);

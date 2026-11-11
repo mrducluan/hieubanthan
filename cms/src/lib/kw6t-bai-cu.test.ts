@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { htmlSangKhoi } from "./html-lexical.ts";
-import { apThan, apTruong, chenCuoiMuc, chuCua, KE_HOACH, thayLinkGoc, type Nut } from "./kw6t-bai-cu.ts";
+import { apThan, apTruong, chenCuoiMuc, chuCua, dauNoiDung, KE_HOACH, thayLinkGoc, type Nut } from "./kw6t-bai-cu.ts";
 
 const lex = (html: string) => ({ root: { type: "root", children: htmlSangKhoi(html) as Nut[] } as Nut });
 
@@ -68,4 +68,14 @@ test("bài đổi tiêu đề không còn chữ 'bói' trong tiêu đề, mô t�
     assert.ok(!/bói/i.test(d.tieu_de + d.meta.title), d.tieu_de);
     assert.ok(d.meta.title.length <= 60 && d.meta.description.length <= 170, d.meta.title);
   }
+});
+
+test("bản nháp tự lưu (cùng chữ, khác cách ghi JSON) không bị coi là đang sửa; sửa chữ thật thì có", () => {
+  const bai = { tieu_de: "A", slug: "a", noi_dung: lex(`<p>Chữ <a href="/tu-vi">link</a></p>`), hoi_dap: [{ cau_hoi: "Q", tra_loi: "R", id: "1" }] };
+  const tuLuu = JSON.parse(JSON.stringify(bai));
+  tuLuu.noi_dung.root.children[0].textFormat = 0;
+  tuLuu.hoi_dap[0].id = "khac";
+  assert.equal(dauNoiDung(tuLuu), dauNoiDung(bai));
+  assert.notEqual(dauNoiDung({ ...bai, tieu_de: "A (đang sửa)" }), dauNoiDung(bai));
+  assert.notEqual(dauNoiDung({ ...bai, noi_dung: lex(`<p>Chữ <a href="/bat-tu">link</a></p>`) }), dauNoiDung(bai));
 });
