@@ -24,7 +24,7 @@
 
 ## 2. Luật Thương mại điện tử 122/2025 (hiệu lực 01/07/2026) — việc của anh
 
-hieuban.com **bán Sao** qua payOS → là website có chức năng bán hàng/dịch vụ trực tuyến.
+hieuban.com **bán Sao** qua Pay2S (trước: payOS) → là website có chức năng bán hàng/dịch vụ trực tuyến.
 
 | # | Việc | Làm thế nào | Chắc chắn |
 |---|---|---|---|

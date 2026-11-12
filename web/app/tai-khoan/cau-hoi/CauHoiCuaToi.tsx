@@ -11,13 +11,14 @@ import { KhungTai } from "@/components/khung/TieuDe";
 import { ghi } from "@/lib/do-luong";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { dinhDangVnd, dongHan, TEN_MANG_CG, TEN_TRANG_THAI, type CauHoiCg } from "@/lib/chuyen-gia-hoi";
+import { maDonQuayVe } from "@/lib/thanh-toan/ma-don";
 
 const ngayGio = (s: string) =>
   new Intl.DateTimeFormat("vi-VN", { dateStyle: "short", timeStyle: "short", timeZone: "Asia/Ho_Chi_Minh" }).format(new Date(s));
 
 export function CauHoiCuaToi() {
   const sp = useSearchParams();
-  const don = sp.get("don");
+  const don = maDonQuayVe(sp.get("don"), sp.get("orderId")) || null;
   const [ds, setDs] = useState<CauHoiCg[] | null>(null);
   const [token, setToken] = useState<string | null | undefined>(undefined);
   const [loi, setLoi] = useState<string | null>(null);
@@ -82,7 +83,7 @@ export function CauHoiCuaToi() {
   return (
     <div className="mt-8 space-y-4" data-testid="cg-danh-sach">
       {sp.get("moi") === "1" && <p className="text-sm text-jade">Đã gửi câu hỏi — chuyên gia sẽ trả lời trong hạn ghi bên dưới.</p>}
-      {sp.get("huy") === "1" && <p className="text-sm text-fg-muted">Bạn đã huỷ thanh toán. Câu hỏi còn chờ, bạn có thể huỷ hẳn bên dưới.</p>}
+      {(sp.get("huy") === "1" || (sp.get("resultCode") ?? "0") !== "0") && <p className="text-sm text-fg-muted">Bạn đã huỷ thanh toán. Câu hỏi còn chờ, bạn có thể huỷ hẳn bên dưới.</p>}
       {bao && <p role="status" className="text-sm text-fg-muted">{bao}</p>}
       {ds!.length === 0 && (
         <Card className="text-sm text-fg-muted">Bạn chưa gửi câu hỏi nào. <Link href="/hoi-chuyen-gia" className="text-gold underline">Hỏi chuyên gia</Link></Card>

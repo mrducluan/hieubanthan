@@ -1,18 +1,18 @@
 // Thanh toán nạp Sao (TT-1/TT-2, migration 0012). Chỉ chạy ở MÁY CHỦ.
-// Cổng đang bật: payOS khi có đủ 3 khoá env; "gia" (cổng giả, không thu tiền) chỉ khi THANH_TOAN_GIA=1 và KHÔNG phải
+// Cổng đang bật: Pay2S (chuyển khoản VietQR) khi có đủ khoá env (lib/thanh-toan/pay2s.ts); "gia" (cổng giả, không thu tiền) chỉ khi THANH_TOAN_GIA=1 và KHÔNG phải
 // production — để anh thử trọn luồng trên bản preview. Không cổng nào → trang /nap-sao báo "sắp mở".
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { cauHinhPayos } from "@/lib/thanh-toan/payos";
+import { cauHinhPay2s } from "@/lib/thanh-toan/pay2s";
 import type { NapDau } from "@/lib/thanh-toan/nap-dau";
 import { docHoiVien, type HoiVien } from "@/lib/thanh-toan/hoi-vien";
 
-export type Cong = "payos" | "gia";
+export type Cong = "pay2s" | "gia";
 
 export const choPhepCongGia = () => process.env.THANH_TOAN_GIA === "1" && process.env.VERCEL_ENV !== "production";
 
 export function congDangBat(): Cong | null {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return null;
-  if (cauHinhPayos()) return "payos";
+  if (cauHinhPay2s()) return "pay2s";
   return choPhepCongGia() ? "gia" : null;
 }
 

@@ -24,7 +24,7 @@ export interface ThongTinCg {
   bat: boolean; gia_vnd: number; giam_lan_dau_pt: number; han_gio: number; gia_lan_dau: number;
   /** null = khách / chưa biết. */ lan_dau: boolean | null; gia_lan_nay: number; dang_cho: number | null;
   /** Do route web thêm: cổng thanh toán đang bật, người gọi đã đăng nhập, lượt hội viên còn (0028; null = không phải hội viên). */
-  cong?: "payos" | "gia" | null; dang_nhap?: boolean; hoi_vien_con_luot?: number | null;
+  cong?: "pay2s" | "gia" | null; dang_nhap?: boolean; hoi_vien_con_luot?: number | null;
 }
 
 export interface CauHoiCg {

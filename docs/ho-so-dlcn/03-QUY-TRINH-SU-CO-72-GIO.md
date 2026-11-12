@@ -24,7 +24,7 @@ Ngay khi nghi ngờ: ghi **giờ phát hiện** vào sổ sự cố (`docs/ho-so
 
 1. Xác định phạm vi: bảng/dịch vụ nào, bao nhiêu tài khoản, loại dữ liệu (theo bảng tệp 01 mục 3).
 2. Chặn ngay nếu cần: đổi khoá bí mật bị nghi lộ (`SAO_KHOA_SECRET`, `LOI_MOI_SECRET`, `ENGINE_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY`,
-   `PAYLOAD_SECRET`, `CMS_WEBHOOK_SECRET`, VAPID, payOS) → Redeploy; thu hồi phiên Supabase (Auth → Users → sign out all);
+   `PAYLOAD_SECRET`, `CMS_WEBHOOK_SECRET`, VAPID, Pay2S) → Redeploy; thu hồi phiên Supabase (Auth → Users → sign out all);
    tắt công tắc liên quan ở `/quan-tri/cai-dat`; tạm tắt route lỗi.
 3. Giữ bằng chứng: xuất nhật ký Vercel/Supabase/Render của khoảng thời gian; không xoá.
 4. Không trả lời công khai trước khi có đánh giá (mục 3).
