@@ -39,6 +39,28 @@ def _doc_so() -> dict:
     return _doc_file()
 
 
+_FILE_GN = Path(__file__).parent / "data" / "goc_nhin.json"
+
+
+@lru_cache(maxsize=1)
+def _doc_goc_nhin() -> dict:
+    """GN-2: ô "Góc nhìn chuyên gia" để TRỐNG cho chuyên gia tự điền (QT-1 sửa giá trị chuỗi đã có). Ô trống không hiện gì."""
+    return json.loads(_FILE_GN.read_text("utf-8"))
+
+
+def goc_nhin_o(loai: str, slug: str) -> dict | None:
+    """Góc nhìn đã điền cho một trang (None nếu ô trống, thiếu ngày, hoặc không qua luật nội dung — đóng cửa khi nghi ngờ)."""
+    from app import ngon_ngu
+    if not ngon_ngu.la_viet():                      # lời chuyên gia viết bằng tiếng Việt, không hiện trên bản Anh
+        return None
+    d = _doc_goc_nhin()
+    o = d["trang"].get(f"{loai}/{slug}")
+    van = " ".join(((o or {}).get("noi_dung") or "").split())
+    if not o or not van or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", (o.get("ngay") or "").strip()) or kiem_goc_nhin(van):
+        return None
+    return {"noi_dung": van, "nguoi": d["nguoi"], "ngay": o["ngay"].strip()}
+
+
 # GN-1 — "Góc nhìn chuyên gia": 2–4 câu kinh nghiệm thật, do CHÍNH chuyên gia viết, chỉ đi kèm trang người đó đã thẩm
 # định (hoặc tự viết). Hệ thống chỉ sửa chính tả, không thêm ý. Luật nội dung như KB: không phán, không bệnh tật/sống
 # chết, không bán vật phẩm/giải hạn, không dẫn liên hệ ra ngoài. `ghi_chu` là ghi chú NỘI BỘ (đã sửa gì) — không lộ.
@@ -82,6 +104,8 @@ def gan(t: dict) -> dict:
     t["tham_dinh"] = {"nguoi": td["nguoi"], "ngay": td["ngay"]} if td else None
     t["goc_nhin"] = ({"noi_dung": td["goc_nhin"], "nguoi": td["nguoi"], "ngay": td["ngay"]}
                      if td and td.get("goc_nhin") else None)
+    if t["goc_nhin"] is None:                       # GN-2: ô chuyên gia tự điền — KHÔNG đổi trạng thái thẩm định của trang
+        t["goc_nhin"] = goc_nhin_o(t["loai"], t["slug"])
     t["bien_soan"] = "chuyen_gia" if tg else "ai_ho_tro"
     if td:
         t["trang_thai"] = "da_duyet"

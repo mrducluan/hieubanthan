@@ -419,6 +419,7 @@ _TRANG.update(_tnt.TRANG)
 from app.kb import trang_tarot as _ttr  # noqa: E402 — TR-1: 78 lá bài Tarot /tarot/la-bai
 _TRANG.update(_ttr.TRANG)
 _TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN, **_tpt.TEN_NGAN, **_tct.TEN_NGAN, **_tnt.TEN_NGAN, **_ttr.TEN_NGAN}
+from app.kb import y_chinh_tu_dong as _yct  # noqa: E402
 from app.kb import bo_sung as _bs  # noqa: E402 — SEO-M: nội dung bổ sung trang mỏng (KB bo_sung_<loai>.json)
 # EN-ALL GĐ 2: danh sách (khoá, slug Việt) luôn dựng ở ngữ cảnh tiếng Việt — slug là KHOÁ URL, không đổi theo ngôn ngữ
 # (trước đây lá bài dựng slug từ tên đã phủ tiếng Anh → bản Anh 404 với slug Việt).
@@ -448,6 +449,10 @@ def _ten_ngan(loai: str, slug: str) -> str:
 
 
 def _hoan_tat(t: dict) -> dict:
+    if not t.get("y_chinh") and ngon_ngu.la_viet() and (yc := _yct.tao(t)):
+        t["y_chinh"] = yc           # KB-TT1: ý chính rút từ chính trang → có ảnh tóm tắt (alt + ImageObject) cho họ chưa có KB bổ sung
+    if t.get("y_chinh") and ngon_ngu.la_viet() and any(len(y) > _yct.TOI_DA for y in t["y_chinh"]):
+        t["y_chinh"] = [y if len(y) <= _yct.TOI_DA else _yct._cat(y) for y in t["y_chinh"]]   # lá bài: ý dài tràn khung ảnh
     _td.gan(t)                      # EEAT-1: chủ biên / tác giả / thẩm định (thẩm định → "da_duyet")
     # SEO-K (2026-10-21): nháp có phần riêng < 20 % trong họ trang → tạm không index (vẫn có link, .md).
     t["index"] = t["trang_thai"] == "da_duyet" or (INDEX_NHAP_AI and not _dr.thap(t["loai"], t["slug"]))
@@ -482,11 +487,11 @@ def _lay(loai: str, slug: str) -> dict | None:
     if loai == "que":
         for k, s in _ds_que():
             if s == slug:
-                return _hoan_tat(_trang_que(k, s))
+                return _hoan_tat(_bs.ap(_trang_que(k, s)))     # KB-TT3: nội dung bổ sung 64 quẻ
     if loai == "sao":
         for ten, s in _ds_sao():
             if s == slug:
-                return _hoan_tat(_trang_sao(ten, s))
+                return _hoan_tat(_bs.ap(_trang_sao(ten, s)))     # KB-TT1: nội dung bổ sung cho 14 chính tinh
     if loai in _TRANG:
         ds, dung = _TRANG[loai]
         for ten, s in ds():
