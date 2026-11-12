@@ -110,6 +110,14 @@ def hanh(h: str) -> dict:
     return {k: _chuoi(v) for k, v in m.items()}
 
 
+def ngoai_cach(ma: str) -> dict | None:
+    """KT-TT4 — lời "một cách đọc khác" cho cách cục đặc biệt: {tieu_de, y, duoi} (mẫu có {hanh}, {hy}, {ky})."""
+    m = _chuoi_hoa(_muc(_lay("ngoai_cach", ma)), "tieu_de", "y")
+    if not m or not m["tieu_de"] or not m["y"]:
+        return None
+    return {**m, "duoi": _chuoi(_lay("ngoai_cach", "duoi")) or ""}
+
+
 def than_sat(ten: str) -> dict | None:
     return _chuoi_hoa(_muc(_lay("than_sat", ten)), "tieu_de", "y", "loi_khuyen")
 

@@ -1731,5 +1731,25 @@
     "viec": "Đi khám sức khoẻ định kỳ, mỗi tháng nói ra một điều đang lo với người thân."
    }
   }
+ },
+ "ngoai_cach": {
+  "_nguon": "KT-TT4: Tử Bình Chân Thuyên, thiên «Luận tạp cách» (kho nguồn fixtures/nguon/tu_binh_chan_thuyen.json). Lời là tóm ý nháp; chỉ hiện khi lá số đủ điều kiện chặt của calc/battu_ngoai_cach; không đổi mức nào.",
+  "duoi": "Cách đọc này có thể ngược với hai cách phía trên. Hệ thống không chọn thay bạn: hãy nhớ lại vài năm đã qua xem cách nào khớp với bạn hơn.",
+  "chuyen_vuong": {
+   "tieu_de": "Một cách đọc khác: đi theo thế mạnh {hanh}",
+   "y": "Lá số của bạn gần như dồn hết về một phía: {hanh}, cũng là phần của chính bạn. Với lá số như vậy, sách xưa có thêm một cách đọc: không tìm cách bớt phần đang nhiều, mà đi theo thế mạnh ấy. Theo cách này, bạn hợp với {hy}; phần nên dè chừng là {ky}."
+  },
+  "hoa_khi": {
+   "tieu_de": "Một cách đọc khác: cả lá số quy về {hanh}",
+   "y": "Lá số của bạn có một nét hiếm: phần đại diện cho bạn kết đôi với phần đứng ngay cạnh, và cả lá số cùng quy về {hanh}. Với lá số như vậy, sách xưa có thêm một cách đọc: lấy {hanh} làm trục chính. Theo cách này, bạn hợp với {hy}; phần nên dè chừng là {ky}."
+  },
+  "tong_tai": {
+   "tieu_de": "Một cách đọc khác: thuận theo dòng {hanh}",
+   "y": "Phần đại diện cho bạn trong lá số rất mỏng, còn {hanh} (phần nói về tiền bạc và nguồn lực) gần như phủ kín. Với lá số như vậy, sách xưa có thêm một cách đọc: thay vì cố bù cho mình mạnh lên, hãy thuận theo dòng đang mạnh. Theo cách này, bạn hợp với {hy}; phần nên dè chừng là {ky}."
+  },
+  "tong_sat": {
+   "tieu_de": "Một cách đọc khác: thuận theo dòng {hanh}",
+   "y": "Phần đại diện cho bạn trong lá số rất mỏng, còn {hanh} (phần nói về khuôn khổ, trách nhiệm và sức ép từ bên ngoài) gần như phủ kín. Với lá số như vậy, sách xưa có thêm một cách đọc: thay vì cố bù cho mình mạnh lên, hãy thuận theo dòng đang mạnh. Theo cách này, bạn hợp với {hy}; phần nên dè chừng là {ky}."
+  }
  }
 }
