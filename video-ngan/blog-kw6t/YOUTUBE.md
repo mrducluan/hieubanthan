@@ -1,12 +1,20 @@
 # 8 video bài blog KW-6T tuần 1–2: đăng YouTube rồi nhúng vào bài
 
-Video dọc 1080×1920, 35–55 giây. YouTube tự xếp vào **Shorts** (video dọc ≤ 3 phút).
-Tệp MP4 không vào git. Dựng lại bằng:
+Video dọc 1080×1920, 35–50 giây. YouTube tự xếp vào **Shorts** (video dọc ≤ 3 phút).
+Tệp MP4 không vào git.
+
+**Bản HyperFrames (2026-11-12, bản dùng chính):** chữ động GSAP, vòng con giáp / 6 cung Hoang ốc / 9 sao vẽ từ số engine,
+khung điện thoại cuộn **trang công cụ thật** trên hieuban.com, **ảnh tóm tắt do engine dựng** (`/og/tom-tat`), phụ đề,
+giọng Hanh đã nghe lại kiểm từng câu, nhạc tự tổng hợp. Hình từng cảnh: `hinh-hf.json`.
 
 ```bash
-python3 video-ngan/blog-kw6t/giong.py <thư mục ra>
-node video-ngan/blog-kw6t/dung.mjs <thư mục ra>
+python3 video-ngan/blog-kw6t/giong.py <thư mục giọng>          # giọng ElevenLabs (đã có thì bỏ qua)
+# tài sản: npm i hyperframes@0.9.37 gsap@3.15.0 trong <thư mục>, chép gsap.min.js + ảnh web-*.png (chụp hieuban.com,
+# khổ 390 px ×2, ẩn thanh tab dưới, locale vi-VN) + tt-*.png (https://hieuban.com/og/tom-tat?kieu=…) vào <tài sản>
+node video-ngan/blog-kw6t/dung-hf.mjs <thư mục giọng> <tài sản> <thư mục ra>
 ```
+
+Bản cũ (ảnh minh hoạ lia ngang): `dung.mjs`.
 
 ## Cách đăng và nhúng tốt nhất
 
