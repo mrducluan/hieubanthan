@@ -16,9 +16,9 @@
 // Tuỳ chọn: PAY2S_API_URL (mặc định https://payment.pay2s.vn), PAY2S_HISTORY_URL (mặc định
 // https://api.pay2s.vn/userapi/transactions), PAY2S_TOKEN (token API lịch sử; mặc định Base64(secretKey) như tài liệu).
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { maDonTuPay2s, maPay2s } from "@/lib/thanh-toan/ma-don";
+import { maDonTrongNoiDung, maDonTuPay2s, maPay2s } from "@/lib/thanh-toan/ma-don";
 
-export { maDonTuPay2s, maPay2s };
+export { maDonTrongNoiDung, maDonTuPay2s, maPay2s };
 
 export type TaiKhoanNhan = { account_number: string; bank_id: string };
 export type CauHinhPay2s = {
@@ -130,14 +130,38 @@ export const ngayVn = (d: Date) => {
   return `${g("day")}/${g("month")}/${g("year")}`;
 };
 
-const chuanNoiDung = (s: string) => s.toUpperCase().replace(/[^0-9A-Z]/g, "");
-
-/** Khoản tiền VÀO có nội dung chứa đúng mã của đơn (bỏ dấu cách / ký tự lạ ngân hàng chèn vào). */
+/** Khoản tiền VÀO có nội dung mang đúng mã của đơn. */
 export function timGiaoDich(ds: GiaoDichNh[], maDon: number): GiaoDichNh | null {
-  const ma = maPay2s(maDon);
-  // Mã đơn dài hơn (vd HBT01000012) không được khớp nhầm với HBT0100001: sau mã phải là hết chuỗi hoặc không phải chữ số.
-  const re = new RegExp(`${ma}(?![0-9])`);
-  return ds.find((g) => g.type === "IN" && re.test(chuanNoiDung(g.description))) ?? null;
+  return ds.find((g) => g.type === "IN" && maDonTrongNoiDung(g.description) === maDon) ?? null;
+}
+
+// ---------- Webhook giao dịch ngân hàng (Pay2S Open Banking: mỗi khoản tiền vào tài khoản liên kết) ----------
+
+/** So token "Authorization: Bearer <token của Hook>" (thời gian hằng). Thiếu PAY2S_HOOK_TOKEN (< 16 ký tự) → luôn sai. */
+export function dungTokenHook(authorization: string | null, token = process.env.PAY2S_HOOK_TOKEN?.trim()): boolean {
+  if (!token || token.length < 16) return false;
+  const a = Buffer.from(authorization?.trim() ?? ""), b = Buffer.from(`Bearer ${token}`);
+  return a.length === b.length && timingSafeEqual(a, b);
+}
+
+export type GiaoDichHook = { id: string; amount: number; noiDung: string; vao: boolean };
+
+/** Thân webhook: { transactions: [...] } (tài liệu kỹ thuật) hoặc một giao dịch lẻ (ví dụ "Tạo Hook"). Dòng sai bị bỏ. */
+export function docHook(body: unknown): GiaoDichHook[] | null {
+  if (!body || typeof body !== "object") return null;
+  const b = body as { transactions?: unknown };
+  const ds = Array.isArray(b.transactions) ? b.transactions : Array.isArray(body) ? null : [body];
+  if (!ds) return null;
+  const ra: GiaoDichHook[] = [];
+  for (const x of ds.slice(0, 50)) {
+    if (!x || typeof x !== "object") continue;
+    const g = x as Record<string, unknown>;
+    const amount = Number(g.transferAmount);
+    const id = giaTri(g.id ?? g.transactionNumber).slice(0, 60);
+    if (!id || !Number.isSafeInteger(amount)) continue;
+    ra.push({ id, amount, noiDung: giaTri(g.content), vao: giaTri(g.transferType).toUpperCase() === "IN" });
+  }
+  return ra;
 }
 
 let boNho: { khoa: string; luc: number; ds: GiaoDichNh[] } | null = null;

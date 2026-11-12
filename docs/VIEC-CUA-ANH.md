@@ -15,6 +15,10 @@
   `PAY2S_BANK_ACCOUNTS` = `số tài khoản|mã ngân hàng` (vd `0123456789|ACB`; nhiều tài khoản ngăn bằng `;`),
   `SUPABASE_SERVICE_ROLE_KEY`, `CRON_SECRET` (≥ 16 ký tự) → Redeploy. Xoá 3 biến `PAYOS_*` nếu đã đặt.
   Tuỳ chọn: `PAY2S_TOKEN` nếu trang Tích hợp của Pay2S cấp token API lịch sử giao dịch khác với Base64(Secret Key).
+- [ ] **Webhook giao dịch ngân hàng** (đường báo tiền thứ hai, bắt cả khi khách tự chuyển khoản đúng nội dung `HBT…`):
+  Pay2S → Webhooks → Thêm webhook: chọn tài khoản nhận tiền, sự kiện **Nhận tiền**, Endpoint
+  `https://hieuban.com/api/thanh-toan/webhook/pay2s-ngan-hang` → lưu → **chép token** (Pay2S chỉ hiện một lần) →
+  Vercel đặt `PAY2S_HOOK_TOKEN` = token đó (≥ 16 ký tự) → Redeploy. Chưa đặt thì đường này tự khoá (401), IPN vẫn chạy.
 - [ ] Thử thật gói nhỏ nhất: nạp → quét QR → thấy "Đã nhận … Sao". IPN về `https://hieuban.com/api/thanh-toan/webhook/pay2s`
   (web tự gửi địa chỉ này mỗi đơn, không cần khai ở Pay2S). Lỡ IPN thì trang kết quả tự đối soát qua lịch sử giao dịch.
 - [ ] (Quyết định) **Thẻ Visa/Mastercard**: Pay2S không có. Cổng thẻ Việt Nam (SePay, VNPAY, OnePay) bắt buộc đăng ký

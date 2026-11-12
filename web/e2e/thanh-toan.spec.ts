@@ -4,8 +4,8 @@
 import { napHoSo } from "./_hoso";
 import { test, expect } from "@playwright/test";
 import { createHmac } from "node:crypto";
-import { chuoiIpn, chuoiTaoDon, docTaiKhoan, kiemIpn, kyIpn, kyTaoDon, ngayVn, timGiaoDich } from "../lib/thanh-toan/pay2s";
-import { maDonQuayVe, maDonTuPay2s, maPay2s } from "../lib/thanh-toan/ma-don";
+import { chuoiIpn, chuoiTaoDon, docHook, docTaiKhoan, dungTokenHook, kiemIpn, kyIpn, kyTaoDon, ngayVn, timGiaoDich } from "../lib/thanh-toan/pay2s";
+import { maDonQuayVe, maDonTrongNoiDung, maDonTuPay2s, maPay2s } from "../lib/thanh-toan/ma-don";
 import { dsViUngHo, nganHangUngHo } from "../lib/ung-ho";
 
 const C = { partnerCode: "PAY2SE2E", accessKey: "e2e-access", secretKey: "e2e-pay2s-secret-0000" };
@@ -81,6 +81,26 @@ test("Pay2S đối soát: chỉ khoản VÀO mang đúng mã đơn (bỏ ký t�
   expect(ngayVn(new Date("2026-11-11T17:30:00Z"))).toBe("12/11/2026");
 });
 
+test("Pay2S webhook ngân hàng: đọc mã đơn trong nội dung CK mọi kiểu ngân hàng ghi; token Hook so đúng; thân 1 giao dịch hay mảng đều đọc", () => {
+  expect(maDonTrongNoiDung("MBVCB.12345.HBT0100001.CT tu 0123 NGUYEN VAN A")).toBe(100001);
+  expect(maDonTrongNoiDung("QR - hbt0100001 GD 750915-080324 02:23:07")).toBe(100001);
+  expect(maDonTrongNoiDung("HBT 0100001 123456")).toBe(100001);
+  expect(maDonTrongNoiDung("IBFT-HBT0100001-FT26316")).toBe(100001);
+  expect(maDonTrongNoiDung("HBT01000012 GD 9")).toBe(1000012);
+  for (const x of ["HBT01 GD", "DOIXU119052 GD 6276", "ung ho HBT", "", null]) expect(maDonTrongNoiDung(x)).toBeNull();
+  const tk = "e2e-pay2s-hook-token-0000";
+  expect(dungTokenHook(`Bearer ${tk}`, tk)).toBe(true);
+  expect(dungTokenHook(`Bearer ${tk}x`, tk)).toBe(false);
+  expect(dungTokenHook(null, tk)).toBe(false);
+  expect(dungTokenHook("Bearer ngan", "ngan")).toBe(false); // token < 16 ký tự → khoá
+  const g = { id: 32756283, gateway: "ACB", transactionNumber: "24936", content: "HBT0100001 GD 6276", transferType: "IN", transferAmount: 99000 };
+  expect(docHook({ transactions: [g, { id: "x" }] })).toEqual([{ id: "32756283", amount: 99000, noiDung: "HBT0100001 GD 6276", vao: true }]);
+  expect(docHook(g)).toHaveLength(1);
+  expect(docHook({ ...g, transferType: "OUT" })?.[0]?.vao).toBe(false);
+  expect(docHook([g])).toBeNull();
+  expect(docHook(null)).toBeNull();
+});
+
 test("ủng hộ: đọc ví + tài khoản từ env, bỏ dòng sai", () => {
   expect(dsViUngHo("USDT (TRC20)|TXyzAbc1234567890abcdefXYZ;Bitcoin|bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh\nSai|<script>;|x")).toEqual([
     { mang: "USDT (TRC20)", diaChi: "TXyzAbc1234567890abcdefXYZ" },
@@ -103,6 +123,16 @@ test("route IPN Pay2S: sai chữ ký 401; JSON hỏng 400; giao dịch không th
   expect(await boQua.json()).toMatchObject({ success: true, bo_qua: "khong_thanh_cong" });
   const dung = await request.post("/api/thanh-toan/webhook/pay2s", { data: { ...IPN, m2signature: kyIpn(IPN, C) } });
   expect(dung.status()).toBe(503);
+  // Webhook giao dịch ngân hàng: thiếu / sai token 401; khoản không mang mã đơn 200 bỏ qua; có mã đơn nhưng máy chủ
+  // chưa có service role → 503 (Pay2S gửi lại).
+  const NH = "/api/thanh-toan/webhook/pay2s-ngan-hang", auth = { authorization: "Bearer e2e-pay2s-hook-token-0000" };
+  const gd = (content: string) => ({ transactions: [{ id: 1, content, transferType: "IN", transferAmount: 99000 }] });
+  expect((await request.post(NH, { data: gd("HBT0100001") })).status()).toBe(401);
+  expect((await request.post(NH, { data: gd("HBT0100001"), headers: { authorization: "Bearer sai" } })).status()).toBe(401);
+  const khac = await request.post(NH, { data: gd("DOIXU119052 GD 6276"), headers: auth });
+  expect(khac.status()).toBe(200);
+  expect(await khac.json()).toMatchObject({ success: true, bo_qua: 1 });
+  expect((await request.post(NH, { data: gd("MBVCB.1.HBT0100001.CT"), headers: auth })).status()).toBe(503);
   expect((await request.get("/api/thanh-toan/doi-soat")).status()).toBe(401);
   expect((await request.post("/api/thanh-toan/tao-don", { data: { goi: "thu" } })).status()).toBe(503);
   expect((await request.post("/api/thanh-toan/gia", { data: { ma_don: 1 } })).status()).toBe(404);

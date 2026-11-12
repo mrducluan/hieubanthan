@@ -18,3 +18,13 @@ export function maDonQuayVe(ma: string | null, orderId: string | null): string {
   const n = maDonTuPay2s(orderId);
   return n ? String(n) : "";
 }
+
+/** Mã đơn trong nội dung chuyển khoản ngân hàng báo về (vd "MBVCB.123.HBT0100001.CT tu …", "QR - hbt0100001 GD 7509").
+ *  Ký tự lạ ngân hàng chèn (. - _ /) coi như dấu cách; sau mã phải là hết chuỗi hoặc không phải chữ số, để
+ *  "HBT0100001 123456" không đọc nhầm thành mã dài hơn. Không có → null. */
+export function maDonTrongNoiDung(s: unknown): number | null {
+  if (typeof s !== "string") return null;
+  const m = /HBT ?(\d{7,15})(?![0-9])/.exec(s.toUpperCase().replace(/[^0-9A-Z]+/g, " "));
+  const n = m ? Number(m[1]) : NaN;
+  return Number.isSafeInteger(n) && n > 0 ? n : null;
+}

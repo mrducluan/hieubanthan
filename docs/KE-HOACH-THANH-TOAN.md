@@ -23,6 +23,9 @@
   tự chữ + số, không trùng).
 - `/api/thanh-toan/webhook/pay2s` (IPN, trả `{"success": true}`), `/api/thanh-toan/doi-soat` (cron), trang kết quả tự
   đối soát khi đơn ≥ 20 giây. Trang quay về đọc được mã đơn cả khi Pay2S nối `?partnerCode=…` vào sau `?ma=`.
+- `/api/thanh-toan/webhook/pay2s-ngan-hang`: webhook giao dịch ngân hàng (Pay2S Open Banking, xác thực token Hook
+  `PAY2S_HOOK_TOKEN`) — khoản VÀO có mã `HBT…` trong nội dung thì cộng Sao. Đường thứ hai cạnh IPN: IPN lỡ, hoặc khách tự
+  chuyển khoản sau khi trang thanh toán đóng, vẫn nhận. Hàm SQL idempotent → hai đường cùng báo chỉ cộng một lần.
 - Migration **0037** cho cổng `pay2s` (`don_nap.cong` + ba hàm tạo đơn). Test: `supabase/kiem_thu/thu_cong_pay2s_0037.sql`,
   `web/e2e/thanh-toan.spec.ts`.
 - Bỏ `web/lib/thanh-toan/payos.ts` và `/api/thanh-toan/webhook/payos`.
