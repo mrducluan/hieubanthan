@@ -1393,3 +1393,16 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] Hỏi luật sư: Luật Trí tuệ nhân tạo 134/2025 (hiệu lực 01/3/2026) về nhãn "nội dung AI" cho "Hỏi đáp chuyên sâu".
 - [ ] Quyết từng sản phẩm mới ngoài 4 mảng: báo cáo chủ đề giá thấp · đặt tên con · sổ người thân · bản đồ nhóm · xem số SIM/biển số · Tarot · đọc thành tiếng.
 - [ ] Duyệt thứ tự EN-1 → EN-6 (em đề xuất làm EN-1 an toàn + đúng ngay).
+
+## GN-2. Ô "Góc nhìn chuyên gia" để anh tự viết (2026-11-12, thay cho việc em viết "kinh nghiệm" hộ)
+
+- [ ] **GN2-1.** Vào `/quan-tri` → **Kho tri thức** → tệp **"Góc nhìn chuyên gia — ô để anh tự viết (42 trang)"** (`goc_nhin.json`). Mỗi trang có
+  4 phần: `trang` (tên), `goi_y` (3 câu hỏi gợi ý, không hiện công khai), **`noi_dung`** (để trống — anh viết 2–4 câu kinh nghiệm THẬT của
+  anh, 60–800 ký tự) và **`ngay`** (gõ `2026-11-12` kiểu năm-tháng-ngày). Bấm **Xuất bản** → mở PR → CI kiểm luật → anh merge là hiện khung
+  "Góc nhìn chuyên gia" dưới "Trả lời nhanh" của đúng trang đó. Ô trống thì web không hiện gì.
+- Luật nội dung (CI chặn nếu vi phạm): không phán ("sẽ phá sản", "định mệnh"…), không tên bệnh / tuổi thọ, không vật phẩm / giải hạn, không
+  link / số điện thoại. Em chỉ sửa chính tả khi anh nhờ, không thêm ý. Điền ô **không** tự biến trang thành "đã thẩm định" — thẩm định vẫn
+  là việc riêng anh quyết (Phòng duyệt → `scripts/ap_duyet.py`).
+- Gợi ý cách làm nhanh: mỗi trang kể MỘT tình huống anh thật sự đã gặp (ẩn danh) hoặc một điều anh thấy khác sách; 5–10 phút/trang; làm
+  trước 14 chính tinh + 12 cung + 3 trang dấu hiệu nhà đang có hiển thị.
+- Bài viết blog trong CMS: đã có sẵn mục chữ ký "Chuyên gia là tác giả / thẩm định" (anh tự tích xác nhận) — không cần ô riêng.
