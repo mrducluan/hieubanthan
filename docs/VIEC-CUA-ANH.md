@@ -10,6 +10,7 @@
 - [x] (Q1–Q3 đã duyệt 2026-11-12; điều hậu đã sửa 34 ô — chỉ là phần hiển thị, không đổi phép tính)
 - [x] (Quyết định **Q5**) anh giao em quyết 2026-11-12 — đã sửa 2/4 chỗ có căn cứ nguyên văn (Thất Sát, Chính Ấn / Thiên Ấn), 2 chỗ kia không cần sửa; khoảng 3 % lá số đổi một nhãn; `ENGINE_VERSION` 0.1.8 (tài liệu mục 10.6). **Việc của anh: deploy engine trước web.**
 - [x] KT-TT4 (2026-11-12): lá số Bát tự thuộc cách cục đặc biệt (≈ 0,6 %) có thêm hộp "Một cách đọc khác" theo «Luận tạp cách» — anh không cần làm gì; khi có phiếu "Đúng với mình" em sẽ báo số.
+- [x] KT-TT5 (2026-11-12): bài đọc Kinh Dịch có thêm dòng "Thế chung của quẻ" (quẻ dễ tan / dễ kết / lòng chưa yên…) theo Tăng San Bốc Dịch — anh không cần làm gì.
 - [ ] Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
 - [ ] (Tuỳ chọn) Mời người rành Dịch / Tử vi đọc soát: 64 trang quẻ (lời Ngô Tất Tố bản điện tử còn lỗi gõ), 74 nghĩa sao nhỏ.
 - [x] **Gửi sách em không tự lấy được** (anh đã gửi thư mục Drive 9 tệp 2026-11-12) (Google Drive hoặc đính kèm; PDF chữ tốt hơn ảnh quét) — ưu tiên: (1) *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang), (2) *Tử vi tổng hợp* (Nguyễn Phát Lộc), (4) *Tử Bình Chân Thuyên* bản chữ — mở `ctext.org/wiki.pl?if=gb&res=413248` trên trình duyệt rồi lưu PDF, (5) *Uyên Hải Tử Bình* bản đủ (ctext res=307303), (6) *Kinh Dịch* Ngô Tất Tố dịch / *Chu Dịch* Phan Bội Châu. Bảng đầy đủ: mục 6 của tài liệu.

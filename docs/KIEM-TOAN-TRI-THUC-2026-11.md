@@ -345,3 +345,27 @@ thể ngược hai cách trên, hệ thống không chọn thay. Không đổi c
   nguyên văn chỉ ở "Vì sao nói vậy".
 - Không đổi mức / phép tính cũ → không tăng `ENGINE_VERSION` (0.1.8). Web không đổi (hộp đi qua khung báo cáo có sẵn).
 - **Đo tiếp**: tỉ lệ "Đúng với mình" của hộp này so với hộp Cách 1 / Cách 2 trên cùng lá — đủ phiếu thì mới xét đưa vào hỷ / kỵ.
+
+### 10.9 Kinh Dịch: thế chung của quẻ theo Tăng San Bốc Dịch (KT-TT5, 2026-11-12)
+
+**Đánh giá trước khi làm.** Bài đọc Lục Hào mới xét từng hào (dụng thần, động hoá, không / phá / mộ); chưa nói gì về tính chất của
+CẢ quẻ — thứ người học Lục Hào nhìn đầu tiên: quẻ lục xung (10 quẻ), lục hợp (8 quẻ), du hồn (8), quy hồn (8), và quẻ biến từ
+xung sang hợp / hợp sang xung. 34 / 64 quẻ có ít nhất một nét → hơn nửa số lần gieo có thêm một ý đúng sách, dễ hiểu ("việc dễ
+tan / dễ kết / lúc đầu thuận về sau dễ rời").
+
+**Nguồn.** Tăng San Bốc Dịch (增刪卜易, Dã Hạc lão nhân, đời Thanh — công cộng), bản Wikisource tiếng Trung: nạp 4 chương engine
+đang dùng (六合, 六沖, 反伏, 歸魂遊魂) vào `engine/fixtures/nguon/tang_san_boc_dich.json` bằng `scripts/nap_tang_san_boc_dich.py`.
+Bản gõ lại (trang ghi chất lượng 50 %) → `can_doi_chieu: true`.
+
+**Đã làm.**
+- CALC `luc_hao.tinh_chat_que(que)` (test viết trước, `tests/test_kt_tt5_tinh_chat_que.py`): lục xung / lục hợp tính từ địa chi nạp
+  giáp ba cặp hào 1–4, 2–5, 3–6 (ra đúng 10 + 8 quẻ kinh điển); du hồn / quy hồn đọc từ bát cung đã có; biến xung ↔ hợp theo đúng
+  các ví dụ của sách (乾之泰, 離之旅, 否之乾, 旅之賁).
+- KB `kinhdich_tra_loi.tinh_chat_que` (nháp): mỗi nét một câu đời thường + câu sách (test: phải là chuỗi con nguyên văn).
+- RULES `kinhdich_doi_song.the_que`: bài đọc thêm dòng "Thế chung của quẻ: …" + mục "Lục Hào — thế quẻ" ở "Vì sao nói vậy" (thuật
+  ngữ + nguyên văn) + trường `tinh_chat_que`. Luôn kèm lời sách dặn «須以用神爲主» — chỉ là nét phụ.
+- **Không đổi mức, không đổi mã kiểm chứng** (test khoá). Sách cho quẻ "lục xung biến lục hợp" được đoán tốt không cần xét dụng
+  thần — hệ thống KHÔNG theo điểm này (chỉ nêu ý), tránh thành lời phán.
+- Chưa làm: phản ngâm / phục ngâm cấp quẻ (chương 反伏 đã nạp, CALC mới có cấp hào), tam hợp cục trong quẻ, quẻ hợp xứ phùng xung
+  theo ngày tháng.
+- Golden đầu ra bản Việt đổi có chủ đích: 516 lượt, đều là Kinh Dịch. Không tăng `ENGINE_VERSION`.
