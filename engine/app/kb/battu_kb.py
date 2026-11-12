@@ -33,6 +33,11 @@ def nhat_chu(can: str) -> dict | None:
     return _lay("nhat_chu", can)
 
 
+def co_tho(can: str) -> dict | None:
+    """Bài «thể tượng» của thiên can trong Uyên Hải Tử Bình: {han (nguyên văn), y (tóm ý Việt)}."""
+    return _lay("co_tho", can)
+
+
 def thap_than(ten: str) -> dict | None:
     return _lay("thap_than", ten)
 

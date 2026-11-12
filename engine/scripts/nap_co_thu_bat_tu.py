@@ -7,6 +7,9 @@
    lấy từ bộ dữ liệu tianzhi-classics (mã + metadata MIT; chỉ lấy câu cổ văn và danh sách can, KHÔNG lấy lời dịch hiện đại):
        python scripts/nap_co_thu_bat_tu.py dieu_hau /duong/dan/tianzhi-classics
    Lệnh này cũng ghi lại bảng `app/kb/data/battu_dieu_hau.json` (bang + trich).
+3) Uyên Hải Tử Bình (淵海子平, Từ Thăng đời Tống; bản hợp biên «Uyên Hải» + «Uyên Nguyên» đời Minh) — từ tệp chữ thuần
+   (giản thể, chấm câu hiện đại) chủ dự án lưu trên Drive, xuất ra .txt:
+       python scripts/nap_co_thu_bat_tu.py uyen_hai /duong/dan/uhtb.txt
 """
 from __future__ import annotations
 
@@ -46,6 +49,43 @@ def tbct(tep: Path) -> dict:
             "source_id": "tu_binh_chan_thuyen", "school_id": "tu_binh", "thien": thien}
 
 
+_UH_DAU = re.compile(r"^《([^》]+)》(.*)$")
+
+
+def uyen_hai(tep: Path) -> dict:
+    """Cắt theo dòng tiêu đề «《…》». Mục «诗诀» và mục một chữ (can / chi của «干支体象») ghi `thuoc` = thiên đứng trước."""
+    thien: list[dict] = [{"so": 1, "ten": "基础", "van": []}]
+    cha = "基础"
+    for d in tep.read_text(encoding="utf-8-sig").splitlines():
+        d = d.strip()
+        if not d or d == "【渊海子平】" or d == "基 础":
+            continue
+        m = _UH_DAU.match(d)
+        if not m:
+            thien[-1]["van"].append(d)
+            continue
+        ten, sau = m.group(1).replace(" ", ""), m.group(2).strip()
+        muc = {"so": len(thien) + 1, "ten": ten, "van": []}
+        con = ten == "诗诀" or (len(ten) == 1 and cha == "干支体象") or sau.startswith("★")
+        if con and ten != cha:
+            muc["thuoc"] = cha
+        else:
+            cha = ten
+        if sau.startswith("★"):
+            muc["van"].append(sau[1:])
+        elif sau and len(sau) <= 12 and not re.search(r"[，。；：]", sau):
+            muc["phu"] = sau.replace(" ", "")
+        elif sau:
+            muc["van"].append(sau)
+        thien.append(muc)
+    return {"_nguon": "淵海子平 (Uyên Hải Tử Bình), Từ Thăng (Từ Tử Bình môn hạ, đời Tống) soạn; bản hợp biên «Uyên Hải» + «Uyên Nguyên» "
+                      "đời Minh. Cổ thư công cộng.",
+            "ban": "bản điện tử lưu truyền (giản thể, chấm câu hiện đại, đã lược bớt so với bản khắc) do chủ dự án cung cấp 2026-11-12 — "
+                   "CHƯA đối chiếu bản khắc; chữ dị thể giữ nguyên như tệp",
+            "can_doi_chieu": True,
+            "source_id": "uyen_hai_tu_binh", "school_id": "tu_binh", "thien": thien}
+
+
 def dieu_hau(thu_muc: Path) -> tuple[dict, dict]:
     bang = json.loads((thu_muc / "bazi/tiaohou.json").read_text(encoding="utf-8"))
     muc = json.loads((thu_muc / "bazi/entries/qiongtong.json").read_text(encoding="utf-8"))["entries"]
@@ -79,6 +119,10 @@ if __name__ == "__main__":
         d = tbct(duong)
         _ghi(NGUON / "tu_binh_chan_thuyen.json", d)
         print(len(d["thien"]), "thiên;", sum(len(t["van"]) for t in d["thien"]), "chữ")
+    elif lenh == "uyen_hai":
+        d = uyen_hai(duong)
+        _ghi(NGUON / "uyen_hai_tu_binh.json", d)
+        print(len(d["thien"]), "mục;", sum(len(x) for t in d["thien"] for x in t["van"]), "chữ")
     elif lenh == "dieu_hau":
         fx, o = dieu_hau(duong)
         _ghi(NGUON / "cung_thong_bao_giam.json", fx)

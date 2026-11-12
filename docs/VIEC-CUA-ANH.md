@@ -12,7 +12,7 @@
 - [ ] Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
 - [ ] (Tuỳ chọn) Mời người rành Dịch / Tử vi đọc soát: 64 trang quẻ (lời Ngô Tất Tố bản điện tử còn lỗi gõ), 74 nghĩa sao nhỏ.
 - [x] **Gửi sách em không tự lấy được** (anh đã gửi thư mục Drive 9 tệp 2026-11-12) (Google Drive hoặc đính kèm; PDF chữ tốt hơn ảnh quét) — ưu tiên: (1) *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang), (2) *Tử vi tổng hợp* (Nguyễn Phát Lộc), (4) *Tử Bình Chân Thuyên* bản chữ — mở `ctext.org/wiki.pl?if=gb&res=413248` trên trình duyệt rồi lưu PDF, (5) *Uyên Hải Tử Bình* bản đủ (ctext res=307303), (6) *Kinh Dịch* Ngô Tất Tố dịch / *Chu Dịch* Phan Bội Châu. Bảng đầy đủ: mục 6 của tài liệu.
-- [ ] (Không gấp) **Uyên Hải Tử Bình** trên Drive là Google Docs — em đọc được qua kết nối Drive nhưng không chép nguyên tệp về kho nguồn được: anh mở tài liệu → Tệp → Tải xuống → Văn bản thuần (.txt) hoặc PDF → thả lại vào cùng thư mục Drive. (Tam Mệnh Thông Hội không cần — em lấy ở kho Tứ khố.)
+- [x] **Uyên Hải Tử Bình** — anh đã tải lại 2026-11-12, em đã nạp thử vào kho nguồn (`docs/KIEM-TOAN-TRI-THUC-2026-11.md` mục 10.5). (Không gấp) nếu anh có **bản khắc / bản đủ 5 quyển** thì gửi để em so lại — bản hiện tại là bản điện tử đã lược bớt.
 - [ ] Deploy **engine** để 24 chỗ kinh văn Kinh Dịch vừa sửa lên trang quẻ (web không cần đổi).
 - [ ] (Đã làm) Môi trường `hieubanthan` thêm tên miền `zh.wikisource.org` — anh đã duyệt ở hộp thoại; không cần làm gì thêm.
 

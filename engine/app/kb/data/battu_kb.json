@@ -770,5 +770,48 @@
    "cau_tu_soi": "Người thân có biết lúc nào bạn đang cần được hỏi han không?"
   }
  },
- "nap_am_luu_y": "Nạp âm là hệ 60 hoa giáp ghép ngũ âm; mỗi cặp hai năm chung một tên. Đây là hình tượng dân gian để tự soi, không dùng để kết luận tốt xấu hay chọn bạn đời. Bát trạch (hướng nhà) dùng cung phi, không dùng nạp âm."
+ "nap_am_luu_y": "Nạp âm là hệ 60 hoa giáp ghép ngũ âm; mỗi cặp hai năm chung một tên. Đây là hình tượng dân gian để tự soi, không dùng để kết luận tốt xấu hay chọn bạn đời. Bát trạch (hướng nhà) dùng cung phi, không dùng nạp âm.",
+ "co_tho_nguon": "Uyên Hải Tử Bình (淵海子平), thiên «Can chi thể tượng» (干支体象) — mười bài thơ tả hình tượng mười thiên can. `han` = nguyên văn (bản điện tử giản thể, chưa đối chiếu bản khắc); `y` = tóm ý tiếng Việt do ban biên tập viết (nháp), lời trung tính.",
+ "co_tho": {
+  "Giáp": {
+   "han": "甲木天干作首排，原无枝叶与根荄；欲存天地千年久，直向沙泥万丈埋。断就栋樑金得用，化成灰炭火为灾；蠢然块物无机事，一任春秋自往来。",
+   "y": "Sách ví Giáp như khối gỗ lớn đã thành hình, không còn cành lá. Gỗ này cần Kim đẽo gọt mới thành rường cột, gặp Hỏa quá mạnh thì dễ thành than; vùi trong đất sâu thì bền lâu. Ý sách: người Giáp cần được rèn giũa đúng cách và cần nền đất vững."
+  },
+  "Ất": {
+   "han": "乙木根荄种得深，只宜阳地不宜阴；漂浮最怕多逢水，刻断何当苦用金。南去火炎灾不浅，西行土重祸尤侵；栋樑不是连根木，辨别工夫好用心。",
+   "y": "Sách ví Ất như cây còn liền rễ, rễ bám sâu, ưa chỗ có nắng. Cây này ngại nước nhiều làm trôi, ngại Kim chặt mạnh, đi về phương nam lửa nóng hay phương tây đất nặng đều vất vả. Ý sách: Ất không phải gỗ làm cột, đừng đem cách dùng gỗ lớn mà xét."
+  },
+  "Bính": {
+   "han": "丙火明明一太阳，原从正大立纲常；洪光不独窥千里，巨焰犹能遍八荒。出世肯为浮木子，传生不作湿泥娘；江湖死水安能剋，惟怕成林木作殃。",
+   "y": "Sách ví Bính như mặt trời: sáng, ngay thẳng, soi xa nghìn dặm. Bính nhận sức từ Mộc, không hợp sinh cho đất ướt; nước ao hồ không dập nổi, chỉ ngại Mộc quá dày thành rừng che mất ánh sáng."
+  },
+  "Đinh": {
+   "han": "丁火其形一烛灯，太阳相见夺光明；得时能铸千金铁，失令难鎔一寸金。虽少乾柴犹可引，纵多湿木不能生；其间衰旺当分晓，旺比一炉衰一檠。",
+   "y": "Sách ví Đinh như ngọn đèn: đứng cạnh mặt trời thì bị lấn sáng. Đúng mùa thì lửa này đủ sức luyện sắt, trái mùa thì một tấc kim cũng khó nung. Ít củi khô vẫn cháy được, nhiều gỗ ướt lại không giúp gì. Ý sách: phải xét kỹ lửa đang mạnh như lò hay yếu như đèn."
+  },
+  "Mậu": {
+   "han": "戊土城墙堤岸同，振江河海要根重；柱中带合形还壮，日下乘虚势必崩。力薄不胜金漏洩，功成安用木疏通；平生最要东南健，身旺东南健失中。",
+   "y": "Sách ví Mậu như tường thành, bờ đê: muốn chắn được sông biển thì gốc phải dày. Trong lá số có chỗ hợp thì vững, chỗ ngày sinh trống thì dễ sụt. Sức mỏng thì không chịu nổi Kim rút khí; đã vững rồi thì không cần Mộc xới thêm."
+  },
+  "Kỷ": {
+   "han": "己土田园属四维，坤深能为万物基；水金旺处身还弱，火土功成局最奇。失令岂能埋剑戟，得时方可用鎡基；漫夸印旺兼多合，不遇刑冲总不宜。",
+   "y": "Sách ví Kỷ như ruộng vườn, là nền cho muôn vật. Gặp Thủy, Kim mạnh thì đất yếu đi; có Hỏa, Thổ góp sức thì thành cục đẹp. Trái mùa thì đất không giữ nổi vật nặng, đúng mùa mới cày cấy được."
+  },
+  "Canh": {
+   "han": "庚金顽钝性偏刚，火制功成怕水乡；夏产东南过煆炼，秋生西北亦光芒。水深反是他相剋，木旺能令我自伤；戊己干支重遇土，不逢冲破即埋藏。",
+   "y": "Sách ví Canh như khối kim thô, tính cứng: có Hỏa luyện mới thành đồ dùng, ngại chìm trong nước. Sinh mùa hạ lại đi về đông nam thì bị nung quá tay; sinh mùa thu đi về tây bắc vẫn sáng. Thổ quá dày mà không có gì khơi ra thì kim bị vùi."
+  },
+  "Tân": {
+   "han": "辛金珠玉性通灵，最爱阳和沙水清；成就不劳炎火煆，资扶偏爱湿泥生。水多火旺宜西北，水冷金寒要丙丁；坐禄通根身旺地，何愁厚土没其形。",
+   "y": "Sách ví Tân như châu ngọc: ưa nắng ấm, nước trong để rửa sáng. Ngọc không cần lửa lớn nung, lại hợp đất ẩm nuôi. Trời lạnh nước lạnh thì cần Bính, Đinh sưởi; gốc đã vững thì không ngại đất dày che."
+  },
+  "Nhâm": {
+   "han": "壬水汪洋併百川，漫流天下总无边；干支多聚成漂荡，火土重逢涸本源。养性结胎须未午，长生归禄属乾坤；身强原自无财禄，西北行程厄少年。",
+   "y": "Sách ví Nhâm như sông lớn gom trăm dòng, chảy không bờ. Nước tụ quá nhiều thì trôi dạt, gặp Hỏa Thổ dồn dập thì cạn nguồn. Ý sách: nước lớn cần bờ vừa đủ, không thiếu cũng không thừa."
+  },
+  "Quý": {
+   "han": "癸水应非雨露麼，根通亥子即江河；柱无坤坎还身弱，局有财官不尚多。申子辰全成上格，寅午戌备要中和；假饶火土生深夏，西北行程岂太过。",
+   "y": "Sách ví Quý như mưa móc, nhưng có gốc ở Hợi, Tý thì thành sông. Thiếu gốc thì thân yếu, khi ấy tài và quan không cần nhiều. Đủ Thân Tý Thìn thì thành cách cao; đủ Dần Ngọ Tuất thì cần giữ cho cân."
+  }
+ }
 }
