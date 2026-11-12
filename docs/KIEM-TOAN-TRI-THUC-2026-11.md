@@ -157,3 +157,49 @@ Mỗi bước một PR, có số trước / sau (số mục có nguyên văn, ho
 - **Q2.** Nguyên văn cổ thư: chỉ dùng nội bộ để kiểm + trích ≤ 2 câu như hiện nay, hay mở thêm cụm trang đọc (như trang Cốt Tuỷ Phú) cho Thái Vi Phú, Nữ Mệnh Cốt Tuỷ Phú, Thuyết Quái… (thêm trang SEO, thêm việc dịch)?
 - **Q3.** Thứ tự K3 như trên, hay anh muốn một môn trước?
 - **Q4.** Sách mục 6: anh gửi được cuốn nào (ưu tiên #1, #4, #6)?
+
+## 9. Tiến độ nạp (cập nhật 2026-11-12, đợt 1)
+
+Chủ dự án đã: chỉ kho `kanripo/KR1a0091` (Chu Dịch Truyện Nghĩa Đại Toàn, 24 quyển) và gửi thư mục Drive 9 tệp sách.
+
+### 9.1 Đã xong — Chu Dịch Truyện Nghĩa Đại Toàn (周易傳義大全, Hồ Quảng, đời Minh; bản Văn Uyên Các Tứ khố)
+
+- **Kho nguồn** `engine/fixtures/nguon/chu_dich_truyen_nghia.json` (dựng bằng `engine/scripts/nap_truyen_nghia.py`, tất định):
+  64 quẻ · 386 hào (kể Dụng cửu, Dụng lục) · 1.296 đoạn kinh văn, mỗi đoạn kèm **Trình Di truyện** (≈ 115 nghìn chữ) và
+  **Chu Hy bản nghĩa** (≈ 31 nghìn chữ ở phần quẻ + ≈ 6,7 nghìn chữ ở Thập Dực), số tờ bản Tứ khố để tra lại.
+  Có đủ: Thoán, Đại tượng, **Tiểu tượng từng hào**, **Văn Ngôn** (Càn, Khôn), **Hệ Từ thượng / hạ, Thuyết Quái, Tự Quái,
+  Tạp Quái** — tức đã có nguyên văn cho toàn bộ phần Thập Dực còn thiếu ở mục 3.3.
+- **Chưa nạp**: lời các nhà Tống – Nguyên in chữ nhỏ (≈ 387 nghìn chữ) và 6 thiên đầu sách (đồ thuyết, phệ nghi, cương lĩnh) —
+  bộ cắt sách dựng lại được khi cần.
+- Bản số hoá gõ nhầm ký hiệu quẻ Quan (䷓ thành ䷺) — đã sửa theo hai quái ghi kèm; vài chỗ sót chữ (vd. hào Sơ quẻ Khiêm
+  thiếu chữ 吉) → không coi bản này là chuẩn duy nhất, chỗ lệch đều xét tay.
+- **Soát KB bằng nguồn này → sửa 24 chỗ kinh văn chép sai trong `kinhdich_hao.json`** (bản số hoá cũ
+  `fixtures/chu_dich/nguyen_van.json` mang sẵn lỗi): Càn thoán 大明終始; Mông 初筮告; Lý 定民志; Bác 山附於地; Vô Vọng 不耕穫;
+  Đại Quá 得其士夫; Khảm 險之時用; Đại Tráng 非禮弗履; Tấn 鼫鼠; Minh Di 于出門庭; Gia Nhân 勿恤吉 (bỏ chữ 往 thừa — bản dịch
+  cũng sửa); Tổn 利有攸往; Cách 革而信之; Phong 故豐 / 況於人乎; Tốn 利有攸往; Tiểu Quá 飛鳥遺之音; Ký Tế 豫防; Tuỳ 係 (3 chỗ
+  chữ giản thể 系); Khốn 蒺藜; Tỉnh 甕, 洌. Năm câu dịch Việt sửa theo.
+- **Test** `tests/test_nguon_chu_dich_truyen_nghia.py`: đủ 64 quẻ / 386 hào đều có Trình + Chu + Tiểu tượng; quái từ + hào từ
+  trong KB phải trùng bản Tứ khố sau khi quy dị thể (12 chỗ khác bản đã xét tay nằm trong danh sách chấp nhận).
+- Golden đầu ra bản Việt sinh lại có chủ đích (43 / 10.509 lượt, đều là Kinh Dịch + trang quẻ); sổ ngày cập nhật 20 trang quẻ.
+- Phép tính không đổi → không tăng `ENGINE_VERSION`.
+
+### 9.2 Thư mục Drive — đã tải về máy làm việc, CHƯA nạp vào repo
+
+| Tệp | Dạng | Dùng thế nào |
+|---|---|---|
+| Kinh Dịch trọn bộ — Ngô Tất Tố (938 trang, có lớp chữ) | Bản dịch Việt của **chính cuốn Truyện Nghĩa Đại Toàn** (dịch âm, dịch nghĩa, truyện Trình Di, bản nghĩa Chu Hy) | Bước kế: ghép theo quẻ / hào với kho nguồn 9.1 → có lời Việt uy tín cho Trình / Chu, soát 64 + 384 câu dịch nháp |
+| Tử Bình Chân Thuyên — nguyên tác (27 trang, chữ giản thể có chấm câu) | Cổ thư | Kho nguồn theo thiên; đối chiếu `cach_cuc_tbct` + bảng hỷ / kỵ đang chờ duyệt (BT-HK) |
+| Tử Bình Chân Thuyên bình chú hợp san (166 trang, có lớp chữ) | Từ Lạc Ngô chú (mất 1949) | Lời giải thích từng cách, ví dụ mệnh |
+| Tử Bình Chân Thuyên bình chú (287 trang) | **Ảnh quét, không có lớp chữ** | Không cần — hai bản trên đã đủ |
+| Trích Thiên Tuỷ (235 trang) | **Bản dịch Việt hiện đại** | Chỉ tóm ý; nguyên văn lấy ở Wikisource `滴天髓闡微` |
+| Tử vi đẩu số tân biên — Vân Đằng Thái Thứ Lang (277 trang, có lớp chữ) | Sách Việt hiện đại | Tóm ý nghĩa ~110 sao (45 sao đang thiếu), ghi nguồn, **không chép vào repo công khai** |
+| Tử vi tổng hợp — Nguyễn Phát Lộc (443 trang) | Lớp chữ mã VNI (phải đổi sang Unicode) | như trên; đối chiếu cấu hình ưu tiên hạn |
+| Tam Mệnh Thông Hội, Uyên Hải Tử Bình | Google Docs | **Chưa tải được** — Google xuất tài liệu qua máy chủ có tên đổi mỗi lần, môi trường không cho phép ký tự đại diện. Tam Mệnh em lấy ở kho Tứ khố `KR3g0042`; **Uyên Hải**: nhờ anh mở tài liệu → Tệp → Tải xuống → `.txt` (hoặc PDF) rồi thả lại vào thư mục |
+
+### 9.3 Thứ tự làm tiếp (mỗi bước một PR)
+
+1. **Kinh Dịch lớp lời Việt**: ghép Ngô Tất Tố ↔ kho nguồn; thêm vào bài đọc quẻ mục "Trình Di nói gì · Chu Hy nói gì" + Tiểu
+   tượng 384 hào + Thuyết Quái → loại tượng tám quái cho Mai Hoa.
+2. **Bát tự**: kho nguồn Tử Bình Chân Thuyên; sửa 26 ô điều hậu (chờ Q1); soát bảng hỷ / kỵ 8 cách theo nguyên văn.
+3. **Tử vi**: kho nguồn Toàn Thư 3 quyển; nghĩa 45 sao thiếu + phụ tinh theo Tân Biên / Tổng Hợp (tóm ý, ghi nguồn, thang độ tin).
+4. Tam Mệnh Thông Hội, Trích Thiên Tuỷ Xiển Vi, Tăng San Bốc Dịch.
