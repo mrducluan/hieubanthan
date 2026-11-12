@@ -77,12 +77,13 @@ Không phát hiện phép tính nào sai so với nguồn đã đọc.
 
 ## 4. Nguồn còn thiếu — cần chủ dự án hỗ trợ
 
-Hai cách, chọn một:
+**Cập nhật cùng ngày:** chủ dự án đã duyệt mở mạng tới Wikisource, archive.org, Gutenberg. Dò lại:
 
-**Cách A (nhanh nhất): mở mạng** cho môi trường làm việc tới `zh.wikisource.org`, `en.wikisource.org`, `archive.org`,
-`www.gutenberg.org`. Khi đó em tự tải và đối chiếu.
-
-**Cách B: anh tải PDF / bản chữ lên Google Drive** (thư mục "Phong thuy nguon" và "Tarot nguon"):
+- **Em tự tải được** (làm ở đợt 2, không cần anh gửi): Papus *The Tarot of the Bohemians* (archive.org, bản 1892), Wirth
+  *Le Tarot des imagiers du Moyen Âge* (1927), Waite bản Gutenberg, Địa Lý Biện Chính (Wikisource chữ Hán).
+- **Tìm không ra bản chữ** trên Wikisource / archive.org: Thẩm Thị Huyền Không Học, Dương Trạch Tam Yếu, Bát Trạch Minh
+  Kính, Lỗ Ban Kinh; Case 1920 và Liber 78 cũng chưa thấy → **cần anh tải PDF lên Google Drive** (thư mục "Phong thuy
+  nguon", "Tarot nguon"), các dòng ưu tiên 1, 2, 3, 6, 8, 9 trong bảng dưới.
 
 | Ưu tiên | Sách | Dùng để | Tìm ở đâu |
 |---|---|---|---|

@@ -7,13 +7,13 @@
 
 ### 4ar. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
 
-- [ ] **Chọn một trong hai**: (A) cho môi trường làm việc mở mạng tới `zh.wikisource.org`, `en.wikisource.org`, `archive.org`,
-  `www.gutenberg.org` để em tự tải sách; hoặc (B) anh tải PDF lên Google Drive theo bảng ở mục 4 của tài liệu.
+- [x] Mở mạng tới Wikisource, archive.org, Gutenberg (đã duyệt 2026-11-12). Dò lại: sách Tarot của Papus, Wirth em tự tải được;
+  ba bộ phong thuỷ dưới đây **không có bản chữ trên mạng mở** → cần anh tải PDF lên Google Drive (thư mục "Phong thuy nguon").
 - [ ] Ưu tiên 1–3 (Phong thuỷ): **Thẩm Thị Huyền Không Học** (沈氏玄空學), **Dương Trạch Tam Yếu** (陽宅三要), **Bát Trạch Minh Kính** (八宅明鏡)
   — bản chữ Hán hoặc bản dịch Việt đều được (bản dịch chỉ tóm ý).
 - [ ] Ưu tiên 4–6: Dương Trạch Thập Thư (陽宅十書), Địa Lý Biện Chính (地理辨正) bản có chú, Lỗ Ban Kinh (魯班經) bản khắc.
-- [ ] Tarot: Papus *The Tarot of the Bohemians*; Crowley Liber 78 (The Equinox I:8); Case *An Introduction to the Study of the Tarot* (1920);
-  Wirth *Le Tarot des imagiers du Moyen Âge*; chương Introduction còn thiếu của Mathers 1888.
+- [ ] Tarot (thư mục "Tarot nguon"): Crowley Liber 78 (The Equinox I:8, 1912); Case *An Introduction to the Study of the Tarot* (1920);
+  chương Introduction còn thiếu của Mathers 1888. (Papus, Wirth em tự tải.)
 - [ ] (Quyết định) 6 đề xuất ở mục 5 của tài liệu: hiện "Sách xưa nói gì" trong báo cáo nhà · sửa nhãn nguồn Thanh Long – Bạch Hổ ·
   nối lớp "đa số" vào bài đọc Tarot · thành môn quyết · thước Lỗ Ban · sổ đối chiếu cho mọi KB.
 
