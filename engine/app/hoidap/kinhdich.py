@@ -318,7 +318,9 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | 
         td = mai_hoa["the_dung"]
         n = kb.the_dung(td["quan_he"])
         if n:
-            muc.append({"loai": "the_dung", **td, **n, "dau_vao": mai_hoa["dau_vao"]})
+            lt = [t for t in (kb.loai_tuong(td["the"]), kb.loai_tuong(td["dung"])) if t]
+            muc.append({"loai": "the_dung", **td, **n, "dau_vao": mai_hoa["dau_vao"],
+                        **({"loai_tuong": lt, "loai_tuong_dan": kb.mau("loai_tuong_dan").format(the=td["the"], dung=td["dung"])} if lt else {})})
     if pl["truong_phai"] == "luc_hao" and pl["dung_than"]:
         muc.append(_muc_dung_than(que, pl["dung_than"], tg))
     if que["hao_dong"]:
@@ -371,7 +373,8 @@ def _muc_loi_kinh(x: dict) -> dict | None:
         noi = {"tieu_de": f"Quái từ quẻ {ten}", "han": q["que_tu"]["han"], "dich": q["que_tu"]["dich"],
                "y": f"Đại tượng: {q['dai_tuong']['dich']}", "nom_na": None,
                "thoan": q["thoan"].get("dich") if x["chu"] else None}
-    return {"loai": "loi_kinh", "chu": x["chu"], **noi, "source_id": q["source_id"],
+    tn = kb.truyen_nghia(x["que"], "hao" if x["loai"] == "hao" else "que_tu", x.get("vi_tri")) if x["loai"] != "dung" else None
+    return {"loai": "loi_kinh", "chu": x["chu"], **noi, **(tn or {}), "source_id": q["source_id"],
             "school_id": q["school_id"], "trang_thai": q["trang_thai"]}
 
 
@@ -396,7 +399,8 @@ def _doan(m: dict) -> tuple[str, str | None]:
                 + (f"\nHiểu đơn giản: {m['nom_na']}" if m.get("nom_na") else "")), None
     if l == "the_dung":
         return (f"Mai Hoa — Thể là {m['the']} ({m['the_ngu_hanh']}), Dụng là {m['dung']} "
-                f"({m['dung_ngu_hanh']}): {m['ten']}. {m['y_nghia']} {m['luu_y']}", None)
+                f"({m['dung_ngu_hanh']}): {m['ten']}. {m['y_nghia']} {m['luu_y']}"
+                + (f"\n{m['loai_tuong_dan']} " + " ".join(m["loai_tuong"]) if m.get("loai_tuong") else ""), None)
     if l == "dung_than":
         if m["phuc"]:
             return (f"Lục Hào — dụng thần {m['dung_than']} không hiện trong quẻ bản (phục thần): "

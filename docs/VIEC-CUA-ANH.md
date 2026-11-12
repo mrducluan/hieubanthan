@@ -7,10 +7,12 @@
 
 ### 4ar. KT-TT — kiểm toán kho tri thức Tử vi · Bát tự · Kinh Dịch (2026-11-12, `docs/KIEM-TOAN-TRI-THUC-2026-11.md`)
 
-- [ ] (Quyết định Q1) Duyệt sửa **26 / 120 ô bảng điều hậu Bát tự** theo nguyên văn Cùng Thông Bảo Giám (đổi kết quả dụng thần cách 1 của một số lá, tăng `ENGINE_VERSION`).
-- [ ] (Quyết định Q2–Q3) Nguyên văn cổ thư chỉ dùng để kiểm + trích ngắn, hay mở thêm trang đọc; thứ tự lấp chỗ thiếu (mục 7–8 của tài liệu).
+- [x] (Q1–Q3 đã duyệt 2026-11-12; điều hậu đã sửa 34 ô — chỉ là phần hiển thị, không đổi phép tính)
+- [ ] (Quyết định **Q5**) Duyệt sửa 4 chỗ bảng hỷ / kỵ cách cục Bát tự lệch Tử Bình Chân Thuyên (tài liệu mục 10.2) — sửa sẽ đổi mức một số chương, tăng `ENGINE_VERSION`.
+- [ ] Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
+- [ ] (Tuỳ chọn) Mời người rành Dịch / Tử vi đọc soát: 64 trang quẻ (lời Ngô Tất Tố bản điện tử còn lỗi gõ), 74 nghĩa sao nhỏ.
 - [x] **Gửi sách em không tự lấy được** (anh đã gửi thư mục Drive 9 tệp 2026-11-12) (Google Drive hoặc đính kèm; PDF chữ tốt hơn ảnh quét) — ưu tiên: (1) *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang), (2) *Tử vi tổng hợp* (Nguyễn Phát Lộc), (4) *Tử Bình Chân Thuyên* bản chữ — mở `ctext.org/wiki.pl?if=gb&res=413248` trên trình duyệt rồi lưu PDF, (5) *Uyên Hải Tử Bình* bản đủ (ctext res=307303), (6) *Kinh Dịch* Ngô Tất Tố dịch / *Chu Dịch* Phan Bội Châu. Bảng đầy đủ: mục 6 của tài liệu.
-- [ ] **Uyên Hải Tử Bình** trên Drive là Google Docs nên em không tải nguyên tệp được: anh mở tài liệu → Tệp → Tải xuống → Văn bản thuần (.txt) hoặc PDF → thả lại vào cùng thư mục Drive. (Tam Mệnh Thông Hội không cần — em lấy ở kho Tứ khố.)
+- [ ] (Không gấp) **Uyên Hải Tử Bình** trên Drive là Google Docs — em đọc được qua kết nối Drive nhưng không chép nguyên tệp về kho nguồn được: anh mở tài liệu → Tệp → Tải xuống → Văn bản thuần (.txt) hoặc PDF → thả lại vào cùng thư mục Drive. (Tam Mệnh Thông Hội không cần — em lấy ở kho Tứ khố.)
 - [ ] Deploy **engine** để 24 chỗ kinh văn Kinh Dịch vừa sửa lên trang quẻ (web không cần đổi).
 - [ ] (Đã làm) Môi trường `hieubanthan` thêm tên miền `zh.wikisource.org` — anh đã duyệt ở hộp thoại; không cần làm gì thêm.
 

@@ -203,3 +203,69 @@ Chủ dự án đã: chỉ kho `kanripo/KR1a0091` (Chu Dịch Truyện Nghĩa Đ
 2. **Bát tự**: kho nguồn Tử Bình Chân Thuyên; sửa 26 ô điều hậu (chờ Q1); soát bảng hỷ / kỵ 8 cách theo nguyên văn.
 3. **Tử vi**: kho nguồn Toàn Thư 3 quyển; nghĩa 45 sao thiếu + phụ tinh theo Tân Biên / Tổng Hợp (tóm ý, ghi nguồn, thang độ tin).
 4. Tam Mệnh Thông Hội, Trích Thiên Tuỷ Xiển Vi, Tăng San Bốc Dịch.
+
+## 10. Đợt 2 (2026-11-12) — chủ dự án duyệt Q1–Q3, giao làm cả ba môn
+
+Khâu của vòng tăng trưởng: QUAY LẠI (bài đọc quẻ, lá số có thêm lớp nghĩa truy được về sách) + THU HÚT (64 trang quẻ dày hơn,
+phần riêng tăng). Đo: `chart_interacted{mo_dun=kinhdich, kind=mo_loi_kinh}`, `chart_interacted{kind=chon_sao}`, hiển thị / nhấp
+Search Console cụm `/kinh-dich/que`, `advisor_question_completed{tuvi}` cho câu hỏi về sao nhỏ.
+
+**Đính chính mục 4**: bảng điều hậu Cùng Thông Bảo Giám chỉ dùng để HIỂN THỊ trên lá số Bát tự (`mo_rong.dieu_hau_ctbg`) và trong
+hỏi đáp; dụng thần cách 1 của engine tính lớp điều hậu bằng quy tắc mùa riêng (`calc/battu.py`). Vì vậy sửa bảng **không** đổi "hành
+cần thêm", không đổi mức chương nào, **không tăng `ENGINE_VERSION`** (trái với điều em viết ở mục 4 và Q1).
+
+### 10.1 Kinh Dịch
+
+| Việc | Kết quả | Người dùng thấy ở đâu |
+|---|---|---|
+| Ghép bản dịch **Ngô Tất Tố** với chữ Hán bản Tứ khố (`scripts/ghep_ngo_tat_to.py`, khớp chữ Hán theo thứ tự sách) | KB `kinhdich_truyen_nghia.json`: 1.106 / 1.118 đoạn ghép được; 367 / 384 hào có dịch nghĩa + lời Trình Di, 359 có lời Chu Hy, 369 có Tiểu tượng, 64 / 64 Đại tượng, 62 / 64 quái từ. Kiểm chéo: câu dịch tự nêu vị trí hào phải trùng hào được gắn — 2 chỗ lệch bị loại tự động | — |
+| Bài đọc quẻ | Mỗi mục "Lời kinh" thêm **Tiểu tượng** (Hán + dịch), **Trình Di giảng**, **Chu Hy giảng** (trích trọn câu, ≤ 420 ký tự), ghi "theo bản dịch của Ngô Tất Tố" | `/kinh-dich` → khối gập "Lời kinh nguyên văn" |
+| Trang quẻ | Hai mục mới: "Tiểu tượng truyện: lời giảng từng hào", "Trình Di và Chu Hy giảng quẻ này" | 64 trang `/kinh-dich/que/*` (+ bản .md) |
+| **Loại tượng tám quái** từ Thuyết Quái (đức, người, thân thể, loài vật, 8–12 vật; mỗi quái kèm câu nguyên văn — test bắt là chuỗi con của kho nguồn) | `kinhdich_kb.bat_quai[*].loai_tuong` | Câu trả lời theo Mai Hoa: thêm đoạn "Quẻ Thể là phía bạn, quẻ Dụng là phía việc… Theo Thuyết Quái, Chấn là sấm…" — gợi ý người / vật / nơi chốn, không phải lời đoán |
+
+Chưa làm: Văn Ngôn, Hệ Từ lên trang đọc (đã có nguyên văn trong kho nguồn; Ngô Tất Tố không dịch Hệ Từ trong bản này);
+vạn vật loại tượng mở rộng của Mai Hoa Dịch Số (thời tiết, ăn uống, nơi chốn — ngoài Thuyết Quái); tính chất quẻ Lục Hào
+(lục xung, lục hợp, du hồn, quy hồn — cần phép tính mới, test trước). Bản điện tử Ngô Tất Tố còn lỗi gõ lẻ tẻ; lời trích giữ nguyên.
+
+### 10.2 Bát tự
+
+- **Kho nguồn** `fixtures/nguon/tu_binh_chan_thuyen.json` (47 thiên, ≈ 25,5 nghìn chữ) và `fixtures/nguon/cung_thong_bao_giam.json`
+  (120 ô: câu nguyên văn, can đọc từ câu, bảng điều hậu) — `scripts/nap_co_thu_bat_tu.py`.
+- **Bảng điều hậu sửa 34 / 120 ô** theo nguyên tắc "thứ tự can theo đúng câu sách, can sách nêu ở đoạn sau xếp sau, nhật can không
+  tự làm dụng thần cho mình khi sách không nêu" (26 ô lệch can + 8 ô lệch thứ tự so bản soát). Mỗi ô có `trich` — câu nguyên văn —
+  trả kèm trong `mo_rong.dieu_hau_ctbg.trich`. `trang_thai: da_doi_chieu_nguyen_van`.
+- **Bảng hỷ / kỵ cách cục (BT-HK) — 4 chỗ lệch thiên «Luận dụng thần» của Tử Bình Chân Thuyên, CHƯA sửa** (sửa sẽ đổi dụng thần
+  cách 2 → mức chương, golden, `ENGINE_VERSION`; quyết định BT-HK yêu cầu người duyệt):
+
+  | Cách | KB đang ghi | Nguyên văn | Đề xuất |
+  |---|---|---|---|
+  | Thất Sát | hỷ Thực Thương, **Ấn**; kỵ — | 七煞喜食神以制伏，忌財印以資扶 | hỷ Thực Thương; kỵ Tài (và cân nhắc Ấn — thiên «Luận thiên quan» có cách Sát Ấn tương sinh, nên Ấn để trung tính) |
+  | Chính Ấn, Thiên Ấn | hỷ Quan Sát; kỵ Tài | 印喜官煞以相生，劫才以護印 | thêm hỷ Tỷ Kiếp |
+  | Thực Thần | hỷ Tài; kỵ Ấn | 食喜身旺以相生，生財以護食 | thêm hỷ Tỷ Kiếp |
+  | Thương Quan | hỷ Tài; kỵ Quan Sát | 傷官喜佩印以制伏，生財以化傷 | thêm hỷ Ấn |
+
+  → **câu hỏi Q5** cho chủ dự án: duyệt sửa 4 chỗ này (em sẽ đo số lá mẫu đổi mức trước khi gộp).
+- Uyên Hải Tử Bình (Google Docs trên Drive): đọc được qua kết nối Drive, là bản rút gọn chữ giản thể; chưa nạp.
+
+### 10.3 Tử vi
+
+- **Kho nguồn** `fixtures/nguon/tu_vi_dau_so_toan_thu.json`: quyển 1 (56 thiên: Thái Vi Phú, Hình Tính Phú, chư tinh vấn đáp, Cốt
+  Tuỷ Phú, Nữ Mệnh Cốt Tuỷ Phú, định cách…), an sao 43 quyết, luận 12 cung 289 đoạn, quyển 3 (20 thiên luận hạn), chư tinh đồng
+  viên 34 nhóm câu — `scripts/nap_tu_vi_toan_thu.py`.
+- **Nghĩa 74 sao nhỏ** (số thật là 79 tên engine an được mà KB chưa có mục nghĩa, không phải 45): tạp diệu, vòng Trường Sinh,
+  vòng Bác Sĩ, vòng Tướng tiền, vòng Thái Tuế (cả tên phái Trung Châu lẫn tên lối Việt). KB `tuvi_kb.sao_nho` — 53 mục tóm ý
+  từ *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang, 1956; `do_tin: truyen_thong_viet`), 21 mục tên phái Trung Châu
+  (`do_tin: hien_dai`, nháp ban biên tập). Lời viết lại theo giọng của sản phẩm: không phán, không tên bệnh, mục nhắc sức khoẻ
+  kèm câu không thay lời bác sĩ. Test: **mọi sao engine an được đều có nghĩa**.
+- Hiển thị: lá số trả `cung[].nghia_sao_nho`; bấm một sao nhỏ trong chi tiết cung hiện nghĩa; dòng "Trường sinh" có nghĩa đi kèm.
+  Hỏi đáp: "Sao Tấu Thư là gì?" trả lời được. Mục `sao_nho` tách khỏi `phu_tinh` để tên một chữ ("Tử", "Mộ", "Bệnh") không làm
+  lệch việc nhận tên sao; tên bỏ dấu trùng chữ thường ("Lâm Quan / làm quan", "Quan Đới / quân đội") chỉ nhận khi gõ đúng dấu.
+- Chưa làm: đưa 289 đoạn luận 12 cung + 20 thiên luận hạn của Toàn Thư thành lời Việt (cần dịch + duyệt); *Tử vi tổng hợp*
+  (Nguyễn Phát Lộc) — tệp chữ mã VNI, chưa đổi mã, chưa đọc.
+
+### 10.4 Còn thiếu sau đợt này (xếp theo giá trị với người hỏi)
+
+1. Tử vi: lời Việt cho luận hạn Toàn Thư quyển 3 và nghĩa phụ tinh theo cung (lục cát, lục sát) — hiện mỗi sao một câu.
+2. Bát tự: cách cục đặc biệt (tòng, hoá khí, chuyên vượng), thông quan, bệnh – dược; sửa hỷ / kỵ sau Q5.
+3. Kinh Dịch: tính chất quẻ Lục Hào; luận theo việc có câu Tăng San Bốc Dịch đi kèm.
+4. Thang độ tin 4 bậc cho MỌI mục KB (đợt này mới gắn cho `sao_nho`).

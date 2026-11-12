@@ -75,6 +75,17 @@ def ten_phu_tinh() -> list[str]:
     return list(_d()["phu_tinh"])
 
 
+def sao_nho(ten: str) -> dict | None:
+    """KT-TT: nghĩa ngắn của tạp diệu và sao các vòng Trường Sinh, Bác Sĩ, Tướng tiền, Thái Tuế (mục riêng — KHÔNG nằm
+    trong `phu_tinh` để tên một chữ như «Tử», «Mộ», «Bệnh» không làm lệch việc nhận tên sao trong câu hỏi)."""
+    m = _d().get("sao_nho", {}).get(ten)
+    return {**m, **meta()} if m else None
+
+
+def ten_sao_nho() -> list[str]:
+    return list(_d().get("sao_nho", {}))
+
+
 def nhom_cach(nhom: str) -> str | None:
     return _d()["nhom_cach"].get(nhom)
 

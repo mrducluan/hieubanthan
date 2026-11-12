@@ -1,0 +1,124 @@
+"""KT-TT đợt 2 — tri thức mới phải truy được về nguồn và không làm lệch phần đang chạy.
+
+- Kinh Dịch: bản dịch Ngô Tất Tố ghép đúng hào; loại tượng tám quái trích đúng Thuyết Quái.
+- Bát tự: bảng điều hậu khớp nguyên văn Cùng Thông Bảo Giám từng ô; kho nguồn Tử Bình Chân Thuyên đủ 47 thiên.
+- Tử vi: MỌI sao engine an được đều có nghĩa trong KB; kho nguồn Toàn Thư đủ phần.
+"""
+import json
+import re
+from pathlib import Path
+
+from app import ngon_ngu
+from app.hoidap import tuvi as hoi_tuvi
+from app.kb import battu_kb, kinhdich_kb, trang, tuvi_kb
+
+GOC = Path(__file__).resolve().parents[1]
+doc = lambda p: json.loads((GOC / p).read_text(encoding="utf-8"))
+CAN = dict(zip(["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"], "甲乙丙丁戊己庚辛壬癸"))
+_SO_HAO = {"đầu": 1, "hai": 2, "ba": 3, "tư": 4, "bốn": 4, "năm": 5, "trên": 6}
+
+
+# ----------------------------------------------------------------------------- Kinh Dịch
+def test_ngo_tat_to_ghep_dung_hao_va_du_do_phu():
+    kb = doc("app/kb/data/kinhdich_truyen_nghia.json")["que"]
+    assert len(kb) == 64
+    co_dich = co_trinh = co_tt = 0
+    for q, v in kb.items():
+        for h, x in (v.get("hao") or {}).items():
+            d = (x.get("tu") or {}).get("dich", "")
+            m = re.match(r"\s*Hào\s+(?:Chín|Sáu)\s+(Đầu|Hai|Ba|Tư|Bốn|Năm|Trên)\b", d, flags=re.I)
+            if m:      # câu dịch tự nói vị trí hào → phải đúng hào đang gắn
+                assert _SO_HAO[m.group(1).lower()] == int(h), (q, h, d[:40])
+            co_dich += bool(d)
+            co_trinh += bool((x.get("tu") or {}).get("trinh"))
+            co_tt += bool((x.get("tieu_tuong") or {}).get("dich"))
+    assert co_dich >= 360 and co_trinh >= 360 and co_tt >= 360, (co_dich, co_trinh, co_tt)
+    assert sum(bool((v.get("dai_tuong") or {}).get("dich")) for v in kb.values()) == 64
+
+
+def test_truyen_nghia_chi_o_ban_viet_va_trich_tron_cau():
+    tn = kinhdich_kb.truyen_nghia(10, "hao", 3)
+    assert tn and tn["nguoi_dich"] == "Ngô Tất Tố" and tn["tieu_tuong"]["han"] and len(tn["trinh"]) <= 420
+    assert tn["trinh"].rstrip()[-1] in ".!?…”\""
+    with ngon_ngu.dung("en"):
+        assert kinhdich_kb.truyen_nghia(10, "hao", 3) is None and kinhdich_kb.loai_tuong("Càn") is None
+
+
+def test_loai_tuong_tam_quai_trich_dung_thuyet_quai():
+    nguon = "".join(d["kinh"] for d in doc("fixtures/nguon/chu_dich_truyen_nghia.json")["thien"]["thuyet_quai"])
+    bq = doc("app/kb/data/kinhdich_kb.json")["bat_quai"]
+    assert len(bq) == 8
+    for ten, v in bq.items():
+        lt = v["loai_tuong"]
+        assert lt["trich"] and all(t in nguon for t in lt["trich"]), ten
+        assert len(lt["vat"]) >= 8 and kinhdich_kb.loai_tuong(ten).startswith("Theo Thuyết Quái")
+
+
+def test_trang_que_co_tieu_tuong_va_loi_trinh_chu():
+    t = trang.lay("que", "que-10-ly")
+    td = [m["tieu_de"] for m in t["muc"]]
+    assert any("Tiểu tượng" in x for x in td) and any("Trình Di" in x for x in td)
+
+
+# ----------------------------------------------------------------------------- Bát tự
+def test_dieu_hau_khop_nguyen_van_tung_o():
+    kb = doc("app/kb/data/battu_dieu_hau.json")
+    fx = doc("fixtures/nguon/cung_thong_bao_giam.json")["o"]
+    assert kb["can_doi_chieu"] is False
+    n = 0
+    for can, hang in kb["bang"].items():
+        assert len(hang) == 12
+        for chi, ds in hang.items():
+            o = fx[can][chi]
+            cau = kb["trich"][can][chi]
+            assert cau == o["trich"] and len(cau) >= 8
+            assert ds[:len(o["can_trong_cau"])] == o["can_trong_cau"], (can, chi)      # thứ tự theo đúng câu sách
+            assert any(CAN[c] in cau for c in o["can_trong_cau"]), (can, chi)            # câu trích nêu can ấy (5 ô câu trích chỉ nêu can đầu)
+            assert len(ds) == len(set(ds)) and 1 <= len(ds) <= 5
+            n += 1
+    assert n == 120
+    assert battu_kb.dieu_hau("Giáp", "Mùi")["can"][:2] == ["Đinh", "Canh"]               # «先丁后庚»
+
+
+def test_kho_nguon_tu_binh_chan_thuyen_du_47_thien():
+    d = doc("fixtures/nguon/tu_binh_chan_thuyen.json")["thien"]
+    assert [t["so"] for t in d] == list(range(1, 48))
+    assert d[7]["ten"] == "论用神" and "八字用神，专求月令" in d[7]["van"]
+    assert all(len(t["van"]) > 100 for t in d)
+
+
+# ----------------------------------------------------------------------------- Tử vi
+def test_moi_sao_engine_an_duoc_deu_co_nghia():
+    g = doc("fixtures/golden/iztro_ten_vi.json")
+    ten = []
+    for k in ("phu_tinh", "tap_dieu", "truong_sinh", "bac_si", "tuong_tien", "tue_tien"):
+        ten += list(g[k].values()) if isinstance(g[k], dict) else list(g[k])
+    from app.calc import tuvi_thai_tue_vn
+    thieu = [t for t in dict.fromkeys(ten + tuvi_thai_tue_vn.VIET) if not (tuvi_kb.phu_tinh(t) or tuvi_kb.sao_nho(t))]
+    assert not thieu, thieu
+
+
+def test_sao_nho_co_nguon_va_loi_khong_phan():
+    kb = doc("app/kb/data/tuvi_kb.json")
+    cam = re.compile(r"chết|yểu|tù tội|tai hoạ|tai họa|dâm|hung tinh|bệnh tật|sẽ bị|chắc chắn", re.I)
+    for ten, m in kb["sao_nho"].items():
+        assert m["source_id"] in kb["sao_nho_nguon"] and m["school_id"] and m["do_tin"] in ("truyen_thong_viet", "hien_dai"), ten
+        assert 30 <= len(m["y_nghia"]) <= 260 and not cam.search(m["y_nghia"]), ten
+        if re.search(r"sức khoẻ|giữ sức|sức yếu|mệt", m["y_nghia"]):
+            assert "không thay lời bác sĩ" in m["y_nghia"], ten
+    assert not set(kb["sao_nho"]) & set(kb["phu_tinh"])          # không trùng mục phụ tinh đang dùng để nhận tên sao
+
+
+def test_hoi_dap_nhan_sao_nho_ma_khong_nham_chu_thuong():
+    assert hoi_tuvi.phan_loai("Sao Tấu Thư là gì?")["loai"] == "phu_tinh"
+    assert hoi_tuvi.phan_loai("Lâm Quan là gì")["phu"] == ["Lâm Quan"]
+    assert hoi_tuvi.phan_loai("tôi muốn làm quan thì là gì").get("phu") in ([], None)
+    assert hoi_tuvi.phan_loai("vào quân đội nghĩa là gì với lá số tôi").get("phu") in ([], None)
+    assert "Tử" not in tuvi_kb.ten_phu_tinh() and "Mộ" not in tuvi_kb.ten_phu_tinh()
+
+
+def test_kho_nguon_toan_thu_du_phan():
+    d = doc("fixtures/nguon/tu_vi_dau_so_toan_thu.json")
+    assert len(d["quyen_1"]) == 56 and len(d["quyen_3"]) == 20 and len(d["an_sao"]) >= 40 and len(d["muoi_hai_cung"]) >= 240
+    assert any(x["thien"] == "太微賦" for x in d["quyen_1"])
+    assert {x["cung"] for x in d["muoi_hai_cung"]} >= {"命宫", "财帛", "官禄", "疾厄"}

@@ -68,6 +68,8 @@ test("chạm sao trong chi tiết cung → thẻ sao; Hỏi về sao này chỉ 
   const the = page.getByTestId("the-sao");
   await expect(the).toBeVisible();
   await expect(the).toContainText("Độ sáng");
+  // KT-TT: vòng Trường Sinh của cung có nghĩa đi kèm (engine tra KB sao nhỏ)
+  await expect(page.getByTestId("nghia-truong-sinh").first()).not.toBeEmpty();
   await expect(the.getByTestId("the-sao-han")).toBeVisible();
   await expect(the.getByRole("link", { name: "Đọc kỹ" })).toHaveAttribute("href", /^\/tu-vi\/sao-o-cung\/[a-z0-9-]+-cung-[a-z0-9-]+$/);
   await the.getByTestId("hoi-sao").click();
