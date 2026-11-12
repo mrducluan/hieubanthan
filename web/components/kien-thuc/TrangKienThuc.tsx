@@ -300,7 +300,7 @@ async function TrangKienThucEn({ cd, t, duong, ma }: { cd: (typeof CHU_DE)[strin
       datePublished: t.ngay_dang ?? t.cap_nhat,
       dateModified: t.cap_nhat,
       mainEntityOfPage: { "@id": `${urlDayDu(duong)}#trang` },
-      image: ldAnh(anh, t.tieu_de),
+      image: ldAnh(anh, t.tieu_de, "en"),
       // Bản Anh do ban biên tập chuyển thể — tác giả là tổ chức, không ghi chuyên gia (EEAT-1).
       author: { "@type": "Organization", name: "Hieuban editorial team", url: urlDayDu("/en") },
       publisher: { "@id": `${siteUrl()}/#to-chuc` },
@@ -319,7 +319,7 @@ async function TrangKienThucEn({ cd, t, duong, ma }: { cd: (typeof CHU_DE)[strin
       name: t.tieu_de,
       inLanguage: "en",
       isPartOf: { "@id": `${siteUrl()}/#website` },
-      primaryImageOfPage: ldAnh(anh, t.tieu_de),
+      primaryImageOfPage: ldAnh(anh, t.tieu_de, "en"),
     },
     ldHoiDap(t.hoi_dap),
     ldDuongDan(dd),
