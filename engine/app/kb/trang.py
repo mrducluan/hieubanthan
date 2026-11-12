@@ -180,6 +180,33 @@ def _ds_que() -> list[tuple[str, str]]:
     return [(k, f"que-{k}-{_slug(v['ten'])}") for k, v in _doc("kinhdich_kb.json")["que"].items()]
 
 
+def _muc_truyen_nghia(k: str, kv: dict) -> list[dict]:
+    """KT-TT: Tiểu tượng từng hào + lời Trình Di, Chu Hy (Ngô Tất Tố dịch) — chỉ bản tiếng Việt."""
+    from app import ngon_ngu
+    from app.kb import kinhdich_kb as kd
+    if not ngon_ngu.la_viet():
+        return []
+    tn = kd.truyen_nghia_que(int(k))
+    muc = []
+    tt = [f"{h['ten']} 「{x['tieu_tuong']['han']}」 — {x['tieu_tuong']['dich']}"
+          for h in kv["hao"] for x in [(tn.get("hao") or {}).get(str(h["vi_tri"])) or {}] if (x.get("tieu_tuong") or {}).get("dich")]
+    if tt:
+        muc.append({"tieu_de": "Tiểu tượng truyện: lời giảng từng hào", "danh_sach": tt,
+                    "doan": "Tiểu tượng là lời Khổng Tử (theo truyền thống) giảng ngắn cho từng hào. Bản dịch của Ngô Tất Tố."})
+    qt = tn.get("quai_tu") or {}
+    ds = [f"{ten}: {loi}" for ten, loi in (("Trình Di", kd.trich_gon(qt.get("trinh"), 700)), ("Chu Hy", kd.trich_gon(qt.get("chu"), 500))) if loi]
+    for h in kv["hao"]:
+        x = ((tn.get("hao") or {}).get(str(h["vi_tri"])) or {}).get("tu") or {}
+        loi = kd.trich_gon(x.get("chu"), 260) or kd.trich_gon(x.get("trinh"), 260)
+        if loi:
+            ds.append(f"Hào {h['ten']} — {'Chu Hy' if x.get('chu') else 'Trình Di'}: {loi}")
+    if ds:
+        muc.append({"tieu_de": "Trình Di và Chu Hy giảng quẻ này", "danh_sach": ds,
+                    "doan": "Hai bản chú kinh điển của phái Nghĩa Lý đời Tống: «Dịch truyện» của Trình Di và «Chu Dịch bản nghĩa» "
+                            "của Chu Hy, trích theo bản dịch của Ngô Tất Tố. Lời xưa giữ nguyên cách nói của sách."})
+    return muc
+
+
 def _trang_que(k: str, slug: str) -> dict:
     kb = _doc("kinhdich_kb.json")
     q = kb["que"][k]
@@ -197,6 +224,7 @@ def _trang_que(k: str, slug: str) -> dict:
                                   + (f" Hiểu đơn giản: {h['nom_na']}" if h.get("nom_na") else "") for h in kv["hao"]]
                     + ([f"{'Dụng Cửu' if k == '1' else 'Dụng Lục'} 「{kv['dung']['han']}」 — {kv['dung']['dich']}"]
                        if kv.get("dung") else [])})
+        muc += _muc_truyen_nghia(k, kv)
     muc.append(_muc_cau_truc_que(k))
     muc += [
         {"tieu_de": "Lời khuyên", "doan": q["loi_khuyen"]},

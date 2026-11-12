@@ -23,6 +23,10 @@ test("gieo tay: quẻ Lý biến Đoài — lời đời thường trước, b�
   await expect(ans).not.toContainText("Quẻ bản: Lý");
   await dq.getByRole("button", { name: /Lời kinh nguyên văn/ }).click();
   await expect(dq.getByTestId("loi-kinh")).toContainText("Thượng Cửu");
+  // KT-TT: lời kinh kèm Tiểu tượng + lời Trình Di, Chu Hy (engine trích từ bản dịch Ngô Tất Tố)
+  await expect(dq.getByTestId("tieu-tuong").first()).toContainText("Lời Tượng nói rằng");
+  await expect(dq.getByTestId("loi-trinh-di").first()).toContainText("Trình Di giảng:");
+  await expect(dq.getByTestId("loi-kinh")).toContainText("theo bản dịch của Ngô Tất Tố");
   await dq.getByRole("button", { name: /Ba cách đọc cùng một quẻ/ }).click();
   await expect(dq.getByTestId("goc-nhin")).toContainText("Lục Hào (dụng thần)");
   await dq.getByRole("button", { name: /Bản đọc đầy đủ theo sách/ }).click();

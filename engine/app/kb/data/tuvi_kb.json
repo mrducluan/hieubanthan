@@ -958,5 +958,530 @@
    "tieu_de": "Bước 7 · Lưu niên và tiểu hạn — một năm cụ thể",
    "cach_doc": "Lưu niên là chủ đề của riêng một năm, tiểu hạn là lớp nhỏ nhất. Luôn đọc năm trong bối cảnh đại hạn đang chạy — năm chỉ là 'thời tiết', đại hạn mới là 'mùa'."
   }
+ },
+ "sao_nho_nguon": {
+  "tu_vi_dau_so_tan_bien": "Tử vi đẩu số tân biên — Vân Đằng Thái Thứ Lang (Tín Đức Thư Xã, 1956), chương đặc tính các sao: tóm ý, viết lại bằng lời ngày nay, không chép nguyên văn.",
+  "trung_chau_tap_dieu": "Tên và cách an theo phái Trung Châu; cổ thư chỉ nêu tên sao, nghĩa theo cách đọc phổ biến ngày nay (nháp ban biên tập)."
+ },
+ "sao_nho_luu_y": "Sao nhỏ chỉ thêm sắc thái cho cung; ý chính vẫn do chính tinh, độ sáng và tứ hoá quyết định.",
+ "sao_nho": {
+  "Ân Quang": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của ân nghĩa: trọng tình, dễ được người đỡ đần đúng lúc; sách xếp vào nhóm làm dịu chuyện khó.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thiên Quý": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Đi cặp với Ân Quang: tính ôn hoà, nhớ ơn, hay gặp người giúp khi cần.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Long Trì": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của nét trang nhã, khéo tay: hợp việc cần thẩm mỹ; sách gắn với tin vui cưới hỏi và nhà cửa khang trang.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Phụng Các": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Đi cặp với Long Trì: vẻ thanh lịch, tài hoa; hai sao cùng có mặt thì việc vui đến dễ hơn.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tam Thai": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của phong thái đĩnh đạc: ưa nề nếp, an ổn; hợp việc cần uy tín.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Bát Tọa": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Đi cặp với Tam Thai: vững vàng, bệ vệ, thích chỗ ở chỉn chu.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Đài Phụ": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của danh nghĩa và bằng cấp (sách Việt gọi Thai Phụ): coi trọng sự công nhận; thuận cho thi cử, khen thưởng — mặt trái là chuộng hình thức.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Phong Cáo": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của văn bằng, giấy khen: việc cần giấy tờ xác nhận dễ có kết quả; nhớ đừng làm chỉ vì tiếng.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thiên Quan": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao phúc: ngay thẳng, có niềm tin, hay giúp người; sách coi là sao làm nhẹ chuyện khó.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thiên Phúc": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Đi cặp với Thiên Quan: lòng lành, làm việc tử tế thì hay gặp may.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thiên Đức": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao đức: đoan chính, hiền hoà; giúp giữ mình trước cám dỗ và làm dịu việc nhỏ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Nguyệt Đức": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Đi cặp với Thiên Đức: nết na, nhân hậu, chuyện vướng nhỏ dễ qua.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Giải Thần": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao gỡ rối: chuyện vướng dễ tìm được lối ra. Sách lưu ý khi sao này ở cung tiền bạc hay nhà đất thì của khó tích lớn — nên có thói quen để dành.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Niên Giải": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao gỡ rối tính theo năm sinh: việc vướng mắc thường có người hoặc dịp giúp tháo ra.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Thiên Thọ": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của sự điềm đạm, hiền hoà; sách gắn với nếp sống đều đặn và sức bền.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thiên Tài": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao làm dịu: bớt cả cái hay lẫn cái dở của sao đứng cùng; gặp Thái Dương, Thái Âm kém sáng thì giúp sáng lên.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thiên Trù": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao bếp núc: thích ăn ngon, khéo chuyện ăn uống, có lộc ăn; nhớ giữ chừng mực.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thiên Thương": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của nỗi buồn và hao hụt, luôn an ở cung Nô Bộc: việc dễ chậm, lòng dễ nặng — khi hạn đi qua nên bớt ôm đồm, chọn bạn mà tin.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thiên Sứ": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Luôn an ở cung Tật Ách, đi cặp với Thiên Thương: nhắc giữ sức, việc dễ trì trệ khi cố quá — nên giữ nhịp sinh hoạt đều và khám định kỳ. Đây là lời nhắc phòng ngừa, không thay lời bác sĩ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thiên Không": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của khoảng trống: nhiều ý tưởng, tính xa nhưng dễ dang dở; hợp cách nghĩ khác người, nên chốt việc bằng giấy trắng mực đen.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Phá Toái": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của sự vỡ vụn nhỏ: dễ chán, hay bỏ ngang, hao vặt — chia việc thành đoạn ngắn để làm cho xong.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Phi Liêm": {
+   "nhom": "Tạp diệu · vòng Bác Sĩ",
+   "y_nghia": "Sao nhanh như tên bay: việc đến nhanh, hay dở tuỳ sao đi cùng; cũng chỉ lời ra tiếng vào, nên nói năng có chừng.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Âm Sát": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của chuyện khuất tất sau lưng: nên rõ ràng giấy tờ, ít bàn chuyện người vắng mặt.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Thiên Vu": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao của sự kế thừa và thăng tiến: thuận việc lên chức, học theo thầy, nhận lại việc người trước giao.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Thiên Nguyệt": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Sao nhắc chuyện sức khoẻ kéo dài: giữ nếp sinh hoạt, đi khám định kỳ. Đây là lời nhắc phòng ngừa, không thay lời bác sĩ.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Không Vong": {
+   "nhom": "Tạp diệu",
+   "y_nghia": "Chỉ ô trống của vòng sáu mươi hoa giáp: việc ở cung này hay chậm thành, hợp chuẩn bị kỹ rồi mới làm.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Trường Sinh": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "Khởi đầu, sức sống bền: việc dễ bén rễ và kéo dài; tính hiền, độ lượng.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Mục Dục": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "Giai đoạn «tắm gội»: hay đổi thay, dễ chán, ưa làm đẹp; nên tập làm cho tới nơi.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Quan Đới": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "«Đội mũ thắt đai»: ham tiến thân, trọng danh vị; hợp đặt mục tiêu rõ rồi đi từng bậc.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Lâm Quan": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "«Ra nhận việc»: tự tin, thích thể hiện; khéo thì việc phát đạt, quá tay thì thành khoe.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Đế Vượng": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "Đỉnh sức: mạnh mẽ, đường bệ, việc hưng thịnh; lên tới đỉnh thì nên biết giữ chừng.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Suy": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "Sức bắt đầu giảm: nên làm chậm lại, hợp giữ hơn mở.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Bệnh": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "Sức yếu đi: dễ mệt, hay lo, dễ nhầm; cần nghỉ đủ và làm từng việc một. Đây là lời nhắc phòng ngừa, không thay lời bác sĩ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tử": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "Lắng xuống: kín đáo, hay nghĩ sâu, giỏi giữ của; nên nói ra điều mình nghĩ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Mộ": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "Cất giữ: tích luỹ, giữ kín, chậm bày tỏ; ở cung Phúc Đức sách coi là gốc gác vững.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tuyệt": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "Điểm cạn trước khi sinh lại: việc dễ bế tắc rồi mở lối mới; người nhiều mưu, giỏi xoay xở.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thai": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "Mầm mới: ý tưởng, kế hoạch đang thành hình; còn non nên dễ theo ý người, cần kiên định.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Dưỡng": {
+   "nhom": "Vòng Trường Sinh",
+   "y_nghia": "Nuôi dưỡng: chăm chỉ, cẩn thận, được người thương; hợp việc chăm sóc, nuôi trồng.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Bác Sỹ": {
+   "nhom": "Vòng Bác Sĩ",
+   "y_nghia": "Thông minh, khoan hoà; thuận cho học hành, thi cử.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Lực Sỹ": {
+   "nhom": "Vòng Bác Sĩ",
+   "y_nghia": "Khoẻ, mạnh bạo, nhanh nhẹn: đẩy nhanh cả việc hay lẫn việc dở của sao đi cùng.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thanh Long": {
+   "nhom": "Vòng Bác Sĩ",
+   "y_nghia": "Vui vẻ, hoà nhã, hay có tin mừng; thuận cho cưới hỏi, cầu danh.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tiểu Hao": {
+   "nhom": "Vòng Bác Sĩ · vòng Thái Tuế",
+   "y_nghia": "Hao vặt: tiền ra từng khoản nhỏ, đồ đạc hay hư lặt vặt — ghi chép chi tiêu là đỡ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tướng Quân": {
+   "nhom": "Vòng Bác Sĩ",
+   "y_nghia": "Can đảm, hiên ngang, thích cầm đầu; coi chừng lấn át người bên cạnh.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tấu Thư": {
+   "nhom": "Vòng Bác Sĩ",
+   "y_nghia": "Nói năng khéo, viết lách tốt; hợp việc đàm luận, văn thư, đàn hát.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Hỷ Thần": {
+   "nhom": "Vòng Bác Sĩ",
+   "y_nghia": "Sao vui: đem tin mừng, thuận cho cưới hỏi và các dịp gặp gỡ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Bệnh Phù": {
+   "nhom": "Vòng Bác Sĩ · vòng Thái Tuế",
+   "y_nghia": "Dễ mệt, hay buồn: nhắc giữ sức và nghỉ ngơi đủ. Đây là lời nhắc phòng ngừa, không thay lời bác sĩ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Đại Hao": {
+   "nhom": "Vòng Bác Sĩ · vòng Thái Tuế",
+   "y_nghia": "Hao lớn: khoản chi to, dễ xa cách, phân tán; ở chỗ đắc địa thì là người dám chi cho việc lớn.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Phục Binh": {
+   "nhom": "Vòng Bác Sĩ",
+   "y_nghia": "Người giúp ngầm hoặc chuyện khuất tất, tuỳ sao đi cùng: làm gì cũng nên minh bạch.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Quan Phủ": {
+   "nhom": "Vòng Bác Sĩ",
+   "y_nghia": "Rắc rối thủ tục, phiền nhiễu giấy tờ: cứ làm đúng quy định thì nhẹ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tướng Tinh": {
+   "nhom": "Vòng Tướng tiền",
+   "y_nghia": "Có uy, hợp đứng mũi chịu sào; việc cần quyết thì dám quyết.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Phan Án": {
+   "nhom": "Vòng Tướng tiền",
+   "y_nghia": "«Lên yên»: thuận đường danh tiếng, thăng tiến.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Tuế Dịch": {
+   "nhom": "Vòng Tướng tiền",
+   "y_nghia": "Sao của sự đi lại, đổi chỗ: năm, tháng dễ có dịch chuyển.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Tức Thần": {
+   "nhom": "Vòng Tướng tiền",
+   "y_nghia": "Chùng xuống, thiếu hứng: nên đặt việc nhỏ, dễ xong để lấy lại đà.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Kiếp Sát": {
+   "nhom": "Vòng Tướng tiền",
+   "y_nghia": "Việc đến đột ngột, dễ hao: làm gì cũng nên có phương án dự phòng, tránh liều.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tai Sát": {
+   "nhom": "Vòng Tướng tiền",
+   "y_nghia": "Trục trặc bất ngờ: nên kiểm tra kỹ trước khi bắt tay làm.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Thiên Sát": {
+   "nhom": "Vòng Tướng tiền",
+   "y_nghia": "Dễ va chạm với người trên: mềm mỏng, nói có căn cứ.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Chỉ Bối": {
+   "nhom": "Vòng Tướng tiền",
+   "y_nghia": "«Chỉ sau lưng»: dễ bị bàn ra tán vào; cứ làm rõ ràng, ít phân trần.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Nguyệt Sát": {
+   "nhom": "Vòng Tướng tiền",
+   "y_nghia": "Dễ rối chuyện tình cảm, va chạm với nữ giới trong nhà: nói chậm, nghe đủ.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Vong Thần": {
+   "nhom": "Vòng Tướng tiền",
+   "y_nghia": "Hay quên, thất lạc, hao vặt: ghi lại việc và cất đồ có chỗ.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Tuế Kiện": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Tức Thái Tuế theo cách gọi khác: việc dễ căng, dễ va chạm lý lẽ — làm đúng phép, nói đủ ý.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Thái Tuế": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Lý lẽ, hay xét đoán, ít bộc lộ tình cảm; gặp sao sáng thì nói năng đanh thép, gặp sao khó thì dễ thành tranh cãi.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Hối Khí": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Chuyện bực mình vặt, tâm trạng dễ u ám: đừng quyết việc lớn lúc đang bực.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Thiếu Dương": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Sáng dạ, vui vẻ, nhân hậu; làm nhẹ những chuyện vướng nhỏ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Thiếu Âm": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Hoà nhã, tinh ý, nhân hậu; đi cùng Thiếu Dương làm dịu việc nhỏ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tang Môn": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Sao của nỗi buồn và chuyện hiếu: sống chậm lại, dành thời gian cho người lớn tuổi trong nhà.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Quán Tác": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "«Dây buộc»: dễ vướng cam kết, thủ tục — đọc kỹ trước khi ký.",
+   "source_id": "trung_chau_tap_dieu",
+   "school_id": "trung_chau",
+   "do_tin": "hien_dai"
+  },
+  "Quan Phù": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Biết xét đoán, lý luận; hay dính việc giấy tờ, pháp lý — làm đúng luật, cần thì hỏi luật sư.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tử Phù": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Việc dễ trì trệ, lòng dễ nặng: kiên nhẫn, làm từng bước.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Trực Phù": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Đi cùng nhóm với Tử Phù: việc hay vướng, cần bền bỉ gỡ dần.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Tuế Phá": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Ngang, thích phá cái cũ: hợp cải tổ, nên báo trước cho người liên quan.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Long Đức": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Có đức độ, đoan chính, hoà nhã; chuyện vướng dễ được bỏ qua.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Phúc Đức": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Đi cùng Long Đức: nhân hậu, hay giúp người, việc khó có người đỡ.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Bạch Hổ": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Mạnh, dữ dội: dễ va chạm, hao hụt; ở chỗ đắc địa lại thuận đường công danh. Đi lại, làm việc nặng nhớ giữ an toàn.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  },
+  "Điếu Khách": {
+   "nhom": "Vòng Thái Tuế",
+   "y_nghia": "Lời ra tiếng vào, hay có việc thăm viếng chuyện buồn: nói năng cẩn thận, bớt khoe.",
+   "source_id": "tu_vi_dau_so_tan_bien",
+   "school_id": "nam_phai_viet",
+   "do_tin": "truyen_thong_viet"
+  }
  }
 }

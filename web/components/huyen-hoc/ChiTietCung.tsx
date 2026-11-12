@@ -27,7 +27,7 @@ const TEN_NHOM: Record<NhomSao, string> = { cat: "Cát tinh", sat: "Sát tinh", 
 const MAU_NHOM: Record<NhomSao, string> = { cat: "text-gold", sat: "text-cinnabar", dao_hoa: "text-[rgb(244_154_193)]", trung: "text-fg-muted" };
 
 /** Một sao trong thẻ chi tiết: tên hiển thị + dữ liệu engine để mở thẻ sao. */
-interface MucSao { ten: string; hien: string; doSang: string | null; nguonDoSang?: string; tuHoa: string | null; trang?: string | null }
+interface MucSao { ten: string; hien: string; doSang: string | null; nguonDoSang?: string; tuHoa: string | null; trang?: string | null; nghia?: string | null }
 
 const nguon = (s: { do_sang_nam_phai?: string | null; do_sang: string | null }) =>
   s.do_sang_nam_phai ? "Nam phái" : s.do_sang ? "phái Trung" : undefined;
@@ -58,7 +58,7 @@ export function ChiTietCung({ ls, chi, vanHan, hanSao, lop, onHoi, onDienCau, ph
     const ds = c.do_sang_phu?.[t];
     const hien = t === c.tue_tien ? tenThaiTue(c, phai) : t;
     nhom[nhomSao(t)].push({ ten: hien, hien: ds ? `${hien} (${DO_SANG_DAY[ds] ?? ds})` : hien, doSang: ds ?? null, tuHoa: null,
-      nguonDoSang: ds ? "Nam phái" : undefined });
+      nguonDoSang: ds ? "Nam phái" : undefined, nghia: c.nghia_sao_nho?.[hien]?.y_nghia ?? c.nghia_sao_nho?.[t]?.y_nghia ?? null });
   }
   const tt = [ls.tuan_triet?.tuan.includes(chi) && "Tuần", ls.tuan_triet?.triet.includes(chi) && "Triệt"].filter(Boolean);
   const hoaCung = [...c.chinh_tinh, ...c.phu_tinh].filter((s) => s.tu_hoa);
@@ -127,7 +127,8 @@ export function ChiTietCung({ ls, chi, vanHan, hanSao, lop, onHoi, onDienCau, ph
           <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-sm">
             <dt className="text-fg-faint">Tam hợp</dt><dd>{tp.tam_hop.map(tenTai).join(" · ")}</dd>
             <dt className="text-fg-faint">Xung chiếu</dt><dd>{tenTai(tp.xung)}</dd>
-            <dt className="text-fg-faint">Trường sinh</dt><dd>{c.truong_sinh}</dd>
+            <dt className="text-fg-faint">Trường sinh</dt>
+            <dd>{c.truong_sinh}{c.nghia_sao_nho?.[c.truong_sinh] && <span className="text-fg-faint" data-testid="nghia-truong-sinh"> — {c.nghia_sao_nho[c.truong_sinh]!.y_nghia}</span>}</dd>
             {tt.length > 0 && (<><dt className="text-fg-faint">Không vong</dt><dd>{tt.join(", ")} đóng tại cung</dd></>)}
             <dt className="text-fg-faint">Tiểu hạn</dt><dd>tuổi {c.tieu_han_tuoi.slice(0, 6).join(", ")}…</dd>
             {vanHan && (
@@ -208,6 +209,7 @@ function TheSao({ m, cung, han, onHoi }: { m: MucSao; cung: string; han?: VanHan
     <div className="w-full rounded-xl border border-line/70 bg-surface/50 p-3.5 text-sm text-fg-muted" data-testid="the-sao"
       role="group" aria-label={`Sao ${m.ten} ở cung ${cung}`}>
       <p className="font-semibold text-fg">{m.ten} <span className="font-normal text-fg-faint">ở cung {cung}</span></p>
+      {m.nghia && <p className="mt-1.5 leading-relaxed" data-testid="nghia-sao-nho">{m.nghia}</p>}
       <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
         <dt className="text-fg-faint">Độ sáng</dt>
         <dd>{m.doSang

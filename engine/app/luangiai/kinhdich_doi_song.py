@@ -390,7 +390,8 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     for g, ten in (("nghia_ly", "Nghĩa Lý — lời kinh"), ("mai_hoa", "Mai Hoa — thể, dụng, hỗ, biến"), ("luc_hao", "Lục Hào — dụng thần theo ngày tháng")):
         if gn.get(g):
             can_cu.append({"tieu_de": f"{ten} → {gn[g]['nhan']}", "noi_dung": " ".join(gn[g]["can_cu"])})
-    loi_kinh = [{k: m.get(k) for k in ("tieu_de", "han", "dich", "y", "nom_na", "thoan", "chu")} for m in goi["muc"] if m["loai"] == "loi_kinh"]
+    loi_kinh = [{k: m.get(k) for k in ("tieu_de", "han", "dich", "y", "nom_na", "thoan", "chu", "tieu_tuong", "trinh", "chu_hy", "nguoi_dich")
+                 if k in m or k in ("tieu_de", "han", "dich", "y", "nom_na", "thoan", "chu")} for m in goi["muc"] if m["loai"] == "loi_kinh"]
 
     # ---- câu hỏi tiếp (không gieo lại cùng việc)
     cau = list(cd.get("cau_tiep") or [])[:2]

@@ -343,3 +343,8 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
 - **2026-11-10 — GĐ 2**: thước đo theo loại trang, 7 nhóm route danh mục sạch, slug Anh 668 trang (+ sửa 404 lá bài), khuôn chung song ngữ (mục 3c).
 - **2026-11-11 — merge #251 (GĐ 0–2)**; GĐ 3 Bát tự: hỏi đáp tiếng Anh (lời + hiểu câu + an toàn theo nhóm tín hiệu + tầng mềm + lưới an toàn), 98 trang kiến thức tiếng Anh, web `/en/bazi` + 3 cụm, review độc lập (sửa paywall theo header, lời chào, dòng tác giả, lỗi gõ an toàn), bộ đóng băng độc lập v2 → v4.
 - **2026-11-11 — anh chọn (a)** cho bộ dò khủng hoảng tiếng Anh; gộp main #255 (SEO-O2: tiêu đề nhóm cụm tự đứng — thêm bản Anh) vào PR #256.
+
+- **2026-11-12 (KT-TT đợt 2, ngoài lộ trình EN)**: bản Việt thêm lớp tri thức chỉ có tiếng Việt — bản dịch Ngô Tất Tố (Tiểu tượng, lời Trình
+  Di, Chu Hy) ở bài đọc quẻ + trang quẻ, loại tượng tám quái ở câu trả lời Mai Hoa, nghĩa sao nhỏ `cung[].nghia_sao_nho` ở lá số Tử vi.
+  Bản Anh **chưa có** các trường này (engine chỉ trả khi `ngon_ngu.la_viet()`), nên khung dữ kiện lệch ở `tuvi.an_sao`, `tuvi.la_so_mau`
+  (→ chuyển thể ở GĐ 4) và `kb.trang.que`, `kinhdich.hoi` (→ GĐ 6) — đã ghi vào `KHUNG_CHUA_XONG`. Golden đầu ra bản Việt sinh lại có chủ đích.

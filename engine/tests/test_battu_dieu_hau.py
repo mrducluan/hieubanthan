@@ -29,7 +29,9 @@ def test_dieu_hau_tren_la_so():
     from app.battu_api import dieu_hau
     ls = bt.la_so(dt.datetime(1990, 5, 17, 12, 30), "nam")           # Nhâm sinh tháng Tỵ
     d = dieu_hau(ls)
-    assert [x["can"] for x in d["chi_tiet"]] == ["Nhâm", "Tân", "Canh", "Quý"]
+    # KT-TT 2026-11-12: theo nguyên văn «专取壬水比肩为助，次取辛金发源，庚金为佐» — không có Quý.
+    assert [x["can"] for x in d["chi_tiet"]] == ["Nhâm", "Tân", "Canh"]
+    assert "专取壬水" in d["trich"]
     nham = d["chi_tiet"][0]
     assert nham["thap_than"] == "Tỷ Kiên" and nham["hanh"] == "Thủy" and nham["thau"] is False
     canh = next(x for x in d["chi_tiet"] if x["can"] == "Canh")
