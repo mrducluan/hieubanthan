@@ -19,6 +19,7 @@ code cho mọi trang (+ ảnh AI cho vài trang trụ — chờ có dịch vụ 
 | `dau_hieu` | `/phong-thuy/dau-hieu/*` | 23 | `bo_sung_dau_hieu.json` (Y5, 2026-10-26; ảnh tóm tắt nền giấy sáng) |
 | `sao` | `/tu-vi/chinh-tinh/*` | 14 | `bo_sung_sao.json` (KB-TT1, 2026-11-12) |
 | `cung` | `/tu-vi/cung/*` | 12 | `bo_sung_cung.json` (KB-TT1, 2026-11-12) |
+| `que` | `/kinh-dich/que/*` | 64 | `bo_sung_que.json` (KB-TT3, 2026-11-12) |
 
 ## Khuôn một tệp
 

@@ -67,7 +67,7 @@ KHUNG_BO_QUA = {
 # KB-TT1: ý chính cho ảnh tóm tắt (`y_chinh`, rút từ chữ Việt của trang) + bảng năm âm lịch ở mệnh theo năm chỉ có bản Việt —
 # bản Anh làm ở giai đoạn ghi kèm (ảnh `/og/y-chinh` chỉ vẽ chữ Việt).
 KHUNG_CHUA_XONG: dict[str, int] = {"kb.trang.la_bai": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7, "goi_y_cheo": 7,
-                                   "kb.trang.bo_vi": 7, "kb.trang.menh_nam": 7, "kb.trang.que": 7, "kb.trang.sao_cung": 7}
+                                   "kb.trang.bo_vi": 7, "kb.trang.menh_nam": 7, "kb.trang.sao_cung": 7}
 
 
 @pytest.fixture(scope="module")

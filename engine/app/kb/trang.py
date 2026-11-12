@@ -487,7 +487,7 @@ def _lay(loai: str, slug: str) -> dict | None:
     if loai == "que":
         for k, s in _ds_que():
             if s == slug:
-                return _hoan_tat(_trang_que(k, s))
+                return _hoan_tat(_bs.ap(_trang_que(k, s)))     # KB-TT3: nội dung bổ sung 64 quẻ
     if loai == "sao":
         for ten, s in _ds_sao():
             if s == slug:

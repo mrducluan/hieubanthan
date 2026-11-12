@@ -42,6 +42,8 @@ def _slugs(loai: str) -> list[str]:
         return [f"so-{s}" for s in trang._SO]
     if loai == "sao":
         return [s for _, s in trang._ds_sao()]
+    if loai == "que":
+        return [s for _, s in trang._ds_que()]
     return [s for _, s in trang._TRANG[loai][0]()]
 
 

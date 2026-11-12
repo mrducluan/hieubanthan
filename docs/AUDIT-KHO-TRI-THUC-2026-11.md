@@ -75,3 +75,14 @@ Site còn rất nhỏ nên chưa kết luận được trang nào "thắng"; ưu
   **Muốn nâng phần riêng thật sự phải bớt khuôn chung của họ trang này (việc lớn hơn)**, chỉ thêm chữ không giải quyết được.
 - **Chưa làm được**: (3) đối chiếu nguyên văn — ctext chặn bot, Wikisource không truy cập được từ môi trường này; (4) ảnh AI — không có dịch vụ tạo ảnh kết nối.
 - **Không làm**: viết "kinh nghiệm 30 năm" dưới tên chuyên gia. Đó là tín hiệu E-E-A-T giả; `goc_nhin` chỉ do chính người đó viết (GN-1).
+
+## 7. Đợt 2 (KB-TT3, 2026-11-12): 64 quẻ Kinh Dịch
+
+Mỗi quẻ thêm, viết tay theo Chu Dịch: "Gieo được quẻ X khi hỏi một việc: đọc thế nào?", 3 ví dụ đời thường, bảng
+"mỗi hào động nghiêng về đâu" (dữ kiện KB `kinhdich_tra_loi.hao_xu_huong` — cùng nguồn với hỏi đáp Kinh Dịch), hỏi đáp
+"quẻ tốt hay xấu" (dựa lời hào cụ thể) + "động hào nào thuận nhất" (tính từ bảng), "Sách xưa nói gì" = vì sao quẻ đứng
+ở vị trí đó theo **Tự quái truyện** (diễn ý, chưa chép nguyên văn — cần đối chiếu), và 3 ý chính cho ảnh tóm tắt.
+Chữ/trang (trung vị) 872 → 1.238. Vẫn nháp ban biên tập, chờ thẩm định.
+
+- **Ảnh AI: không làm.** Không có dịch vụ tạo ảnh; anh không cấp khoá OpenRouter. Ảnh tóm tắt `/og/y-chinh` (vẽ bằng code, có QR) vẫn là ảnh của mọi trang.
+- **Còn lại cho đợt 3:** sao ở cung (168 trang, phần riêng thấp nhất 0,306 — sát ngưỡng), bộ vị (25, thấp nhất 0,305), lá bài (78).
