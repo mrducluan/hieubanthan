@@ -27,6 +27,7 @@
 | Cổ thư (ctext.org) | Nguyên văn Kinh Dịch, Tử Vi Đẩu Số Toàn Thư, Tử Bình Chân Thuyên… | Phạm vi công cộng; ctext cấm cào tự động |
 | Wikisource 紫微斗數全書/全覽 (oldid 850734, bản đóng băng) | Nguyên văn Đẩu Số Cốt Tuỷ Phú (`kb/data/tuvi_co_thu.json`, `docs/CO-THU-COT-TUY-PHU.md`) | Văn bản đời Minh công cộng; lớp trang Wikisource CC BY-SA — chỉ dùng chữ của cổ văn |
 | iztro-docs (SylarLong) · tianzhi-classics | Bản phồn thể đối chiếu chéo Cốt Tuỷ Phú (1.522/1.522 chữ) | MIT — chỉ đối chiếu |
+| tianzhi-classics (zaoxu001), commit 047b827 | KT-TT 2026-11-12: bảng điều hậu 120 ô đã soát nguyên văn Cùng Thông Bảo Giám (đối chiếu `battu_dieu_hau.json`, lệch 26 ô); Tử Vi Đẩu Số Toàn Thư q.1–3 đã cắt theo thiên — dự kiến làm kho nguồn (`docs/KIEM-TOAN-TRI-THUC-2026-11.md`) | Mã + metadata MIT; nguyên văn cổ thư công cộng. Lời dịch hiện đại của kho đó không chép. Bảng "packaged" / "modeled" chưa soát → không dùng |
 | ziwei-doushu (Renhuai123) | Đọc mã làm đặc tả để đối chiếu lá số (`docs/DOI-CHIEU-ZIWEI-DOUSHU.md`); KHÔNG chạy mã | MIT (mã) — bộ dữ liệu CC BY 4.0 không dùng; "cổ thư" trong repo là văn hiện đại → không dùng |
 | Bài giảng Tử vi tam hợp hiện đại (CC BY-NC-SA) | Chỉ rút Ý / quy tắc, viết lại hoàn toàn (`kb/data/tuvi_y_bo_sung.json`, `docs/DE-XUAT-Y-TUVI-BO-SUNG.md`) | Không trích, không dịch sát, không nêu tên người giảng công khai; chủ dự án duyệt 2026-11-04 |
 

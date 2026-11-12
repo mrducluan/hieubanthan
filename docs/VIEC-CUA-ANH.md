@@ -3,7 +3,14 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-12 (PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-12 (KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4ar. KT-TT — kiểm toán kho tri thức Tử vi · Bát tự · Kinh Dịch (2026-11-12, `docs/KIEM-TOAN-TRI-THUC-2026-11.md`)
+
+- [ ] (Quyết định Q1) Duyệt sửa **26 / 120 ô bảng điều hậu Bát tự** theo nguyên văn Cùng Thông Bảo Giám (đổi kết quả dụng thần cách 1 của một số lá, tăng `ENGINE_VERSION`).
+- [ ] (Quyết định Q2–Q3) Nguyên văn cổ thư chỉ dùng để kiểm + trích ngắn, hay mở thêm trang đọc; thứ tự lấp chỗ thiếu (mục 7–8 của tài liệu).
+- [ ] **Gửi sách em không tự lấy được** (Google Drive hoặc đính kèm; PDF chữ tốt hơn ảnh quét) — ưu tiên: (1) *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang), (2) *Tử vi tổng hợp* (Nguyễn Phát Lộc), (4) *Tử Bình Chân Thuyên* bản chữ — mở `ctext.org/wiki.pl?if=gb&res=413248` trên trình duyệt rồi lưu PDF, (5) *Uyên Hải Tử Bình* bản đủ (ctext res=307303), (6) *Kinh Dịch* Ngô Tất Tố dịch / *Chu Dịch* Phan Bội Châu. Bảng đầy đủ: mục 6 của tài liệu.
+- [ ] (Đã làm) Môi trường `hieubanthan` thêm tên miền `zh.wikisource.org` — anh đã duyệt ở hộp thoại; không cần làm gì thêm.
 
 ### 4aq. PAY2S-1 — Pay2S thay payOS · thẻ Visa/Mastercard (2026-11-12, `docs/KE-HOACH-THANH-TOAN.md` mục 0b, `docs/SO-SANH-CONG-THE.md`)
 
