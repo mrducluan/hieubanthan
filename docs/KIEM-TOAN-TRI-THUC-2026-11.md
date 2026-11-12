@@ -382,7 +382,7 @@ cao nhất phải chứng minh được bằng máy.
 - Test `tests/test_do_tin_kb.py`: tệp KB mới chưa vào sổ → đỏ; mức "có nguyên văn" phải nêu tệp kho nguồn CÓ THẬT và hàm test CÓ
   THẬT; phần ghi trong sổ phải tồn tại trong tệp; sổ không lộ ra API (BM-1).
 - Báo cáo `docs/DO-TIN-KHO-TRI-THUC.md` dựng bằng `scripts/do_tin_kb.py` (test bắt quên chạy).
-- Số hiện tại: 11 tệp / phần có nguyên văn đối chiếu (Bát tự 4, Kinh Dịch 4, Tử vi 1, Tarot 1 + điều hậu); phần lớn lời đời
+- Số hiện tại: 10 tệp / phần có nguyên văn đối chiếu (Bát tự 4 gồm bảng điều hậu, Kinh Dịch 4, Tử vi 1, Tarot 1); phần lớn lời đời
   thường là "ban biên tập soạn" — đúng bản chất, không tô thêm.
 - Mức **không** phải "đã thẩm định" và không hiện cho người dùng; không đổi đầu ra nào của engine.
 
