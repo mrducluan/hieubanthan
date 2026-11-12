@@ -16,7 +16,7 @@ import { docHoiVien, giaMoiThang, ngayVn, TEN_HANG, thuocTinhHoiVien, vnd, type 
 
 export interface HangBan { hang: HangHoiVien; bat: boolean; gia: number; cauHoi: number; hanGio: number | null }
 
-export function ChonHangHoiVien({ cong, hang: ds, hanChung }: { cong: "payos" | "gia"; hang: HangBan[]; hanChung: number }) {
+export function ChonHangHoiVien({ cong, hang: ds, hanChung }: { cong: "pay2s" | "gia"; hang: HangBan[]; hanChung: number }) {
   const [token, setToken] = useState<string | null | undefined>(undefined);
   const [hv, setHv] = useState<HoiVien | null | undefined>(undefined);
   const [dang, setDang] = useState<HangHoiVien | null>(null);

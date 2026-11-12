@@ -21,7 +21,7 @@ Như tệp 01, mục 1.
 | 6 | Google (Tag Manager, Analytics 4) | Hoa Kỳ | Bên kiểm soát độc lập / xử lý | Trang đã xem, thiết bị, cookie `_ga` | Đo lưu lượng | Consent Mode (analytics granted mặc định — người dùng tắt được) | Google Ads Data Processing Terms; không gửi tên/ngày sinh |
 | 7 | Sentry (báo lỗi) | Hoa Kỳ / EU | Bên xử lý thay | Thông tin lỗi kỹ thuật; **tắt** IP, cookie, body, user | Sửa lỗi | Lợi ích hợp pháp | [DPA Sentry] |
 | 8 | Google FCM / Apple / Mozilla / Microsoft (push) | Hoa Kỳ hoặc nơi nhà cung cấp đặt | Bên xử lý thay | Thông báo mã hoá đầu-cuối (RFC 8291) — chỉ thiết bị đọc được | Gửi nhắc việc opt-in | Đồng ý khi bật nhắc | Mã hoá đầu-cuối; endpoint chỉ máy chủ chính thức |
-| 9 | payOS | Việt Nam | Bên xử lý thay | Mã đơn, số tiền, nội dung chuyển khoản | Thanh toán | Hợp đồng | Không chuyển ra nước ngoài (liệt kê để đủ) |
+| 9 | Pay2S | Việt Nam | Bên xử lý thay | Mã đơn, số tiền, nội dung chuyển khoản | Thanh toán | Hợp đồng | Không chuyển ra nước ngoài (liệt kê để đủ) |
 
 ## 3. Đánh giá sự cần thiết và tối thiểu hoá
 

@@ -88,7 +88,7 @@ test("/nap-sao chưa bật tài khoản: ghi VND + ≈ N báo cáo, KHÔNG chọ
 });
 
 async function moHopNap(page: Page, napDau: object | null) {
-  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "payos", goi: GOI, gia_bao_cao: 29, nap_dau: napDau } }));
+  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "pay2s", goi: GOI, gia_bao_cao: 29, nap_dau: napDau } }));
   await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 29 } }));
   await page.route("**/api/tuvi/luan-giai", (r) => r.request().headers()["x-mo-khoa"] === "1"
     ? r.fulfill({ status: 402, json: { error: "Cần 29 Sao, ví bạn còn 10 Sao.", can: "nap", gia: 29, so_du: 10 } })

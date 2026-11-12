@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { QUAY_VE } from "@/lib/sao-client";
+import { maDonQuayVe } from "@/lib/thanh-toan/ma-don";
 
 type Don = { ma_don: number; sao: number; so_tien: number; trang_thai: string; loai?: string };
 /** SAO-HV (0028): đơn hội viên năm trả xong → về thẻ hội viên ở Tài khoản (không có Sao để "nhận"). */
@@ -15,7 +16,7 @@ const HOI_TOI_DA = 100; // ~5 phút, 3 giây/lần
 
 export function KetQua() {
   const p = useSearchParams();
-  const ma = p.get("ma") ?? "";
+  const ma = maDonQuayVe(p.get("ma"), p.get("orderId"));
   const [don, setDon] = useState<Don | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [het, setHet] = useState(false);
@@ -62,7 +63,9 @@ export function KetQua() {
 
   if (loi) return <p className="mt-6 text-fg-muted">{loi}</p>;
   if (!don) return <p className="mt-8 inline-flex items-center gap-2 text-fg-muted"><Loader2 className="size-4 animate-spin" aria-hidden /> Đang kiểm tra đơn…</p>;
-  const huy = p.get("huy") === "1";
+  // Pay2S nối resultCode vào URL quay về: khác "0" = khách huỷ / giao dịch không thành công.
+  const kq = p.get("resultCode");
+  const huy = p.get("huy") === "1" || (kq !== null && kq !== "0");
   return (
     <div className="glass mt-8 space-y-4 rounded-2xl p-6" data-testid="ket-qua-nap" data-trang-thai={don.trang_thai}>
       {don.trang_thai === "da_tra" && laHoiVien(don) ? (

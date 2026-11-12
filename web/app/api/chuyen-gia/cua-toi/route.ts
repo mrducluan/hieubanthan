@@ -1,5 +1,5 @@
 // /api/chuyen-gia/cua-toi — câu hỏi chuyên gia của CHÍNH người gọi (RLS qua hàm SQL, 0029).
-//   GET            danh sách (không trả ảnh chụp hồ sơ — chỉ cờ co_ho_so). Có ?don= thì đối soát đơn payOS còn chờ trước (webhook lỡ).
+//   GET            danh sách (không trả ảnh chụp hồ sơ — chỉ cờ co_ho_so). Có ?don= thì đối soát đơn Pay2S còn chờ trước (webhook lỡ).
 //   POST {viec}    danh_gia {id, diem 1–5} · huy {id} (chỉ khi còn chờ thanh toán).
 import { NextResponse } from "next/server";
 import { z } from "zod";
@@ -16,9 +16,9 @@ export async function GET(req: Request) {
   if (!nm) return NextResponse.json({ error: "Hãy đăng nhập.", can: "dang_nhap" }, { status: 401 });
   const don = new URL(req.url).searchParams.get("don");
   if (don && /^\d{1,15}$/.test(don)) {
-    const { data } = await nm.sb.from("don_nap").select("ma_don,cong,trang_thai").eq("ma_don", Number(don)).maybeSingle();
+    const { data } = await nm.sb.from("don_nap").select("ma_don,cong,trang_thai,tao_luc").eq("ma_don", Number(don)).maybeSingle();
     const dv = khachDichVu();
-    if (data?.trang_thai === "cho" && data.cong === "payos" && dv) await doiSoatMotDon(dv, Number(don));
+    if (data?.trang_thai === "cho" && data.cong === "pay2s" && dv) await doiSoatMotDon(dv, { ma_don: Number(don), tao_luc: data.tao_luc });
   }
   const { data, error } = await nm.sb.rpc("cau_hoi_cua_toi");
   if (error) {

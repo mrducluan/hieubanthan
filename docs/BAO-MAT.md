@@ -34,7 +34,7 @@ lên / xuống / lên lại; test engine; build web).
   `search_path = ''` và revoke khỏi `public/anon/authenticated` (trừ `don_nhac_viec`, đã sửa). Không có view (view bỏ qua RLS).
   Vai trò quản trị: không tự cấp được; `aal2` đọc từ JWT ký. Sao: `dung_sao`, `nap_sao_tu_cong`, `hoan_don_nap`, thưởng —
   khoá dòng / khoá tư vấn, khoá giao dịch duy nhất, số tiền lấy từ `goi_sao` ở máy chủ. Endpoint push chỉ 4 máy chủ push (không SSRF).
-- **Web**: mọi `/api/quan-tri/*` qua cổng đăng nhập → vai trò → MFA; payOS so chữ ký hằng thời gian; cron + webhook CMS
+- **Web**: mọi `/api/quan-tri/*` qua cổng đăng nhập → vai trò → MFA; Pay2S so chữ ký IPN hằng thời gian (trước là payOS); cron + webhook CMS
   từ chối khi thiếu bí mật; mã thẻ HMAC theo miền, có hạn, production thiếu `LOI_MOI_SECRET` thì báo lỗi; CSP nonce
   `strict-dynamic`, HSTS, nosniff, frame-ancestors; HTML từ CMS / NotFair qua `sanitize-html` danh sách trắng; PostHog tắt
   autocapture + ghi phiên, che toàn bộ chữ.
