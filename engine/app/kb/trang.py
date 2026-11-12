@@ -180,6 +180,33 @@ def _ds_que() -> list[tuple[str, str]]:
     return [(k, f"que-{k}-{_slug(v['ten'])}") for k, v in _doc("kinhdich_kb.json")["que"].items()]
 
 
+def _muc_truyen_nghia(k: str, kv: dict) -> list[dict]:
+    """KT-TT: Tiểu tượng từng hào + lời Trình Di, Chu Hy (Ngô Tất Tố dịch) — chỉ bản tiếng Việt."""
+    from app import ngon_ngu
+    from app.kb import kinhdich_kb as kd
+    if not ngon_ngu.la_viet():
+        return []
+    tn = kd.truyen_nghia_que(int(k))
+    muc = []
+    tt = [f"{h['ten']} 「{x['tieu_tuong']['han']}」 — {x['tieu_tuong']['dich']}"
+          for h in kv["hao"] for x in [(tn.get("hao") or {}).get(str(h["vi_tri"])) or {}] if (x.get("tieu_tuong") or {}).get("dich")]
+    if tt:
+        muc.append({"tieu_de": "Tiểu tượng truyện: lời giảng từng hào", "danh_sach": tt,
+                    "doan": "Tiểu tượng là lời Khổng Tử (theo truyền thống) giảng ngắn cho từng hào. Bản dịch của Ngô Tất Tố."})
+    qt = tn.get("quai_tu") or {}
+    ds = [f"{ten}: {loi}" for ten, loi in (("Trình Di", kd.trich_gon(qt.get("trinh"), 700)), ("Chu Hy", kd.trich_gon(qt.get("chu"), 500))) if loi]
+    for h in kv["hao"]:
+        x = ((tn.get("hao") or {}).get(str(h["vi_tri"])) or {}).get("tu") or {}
+        loi = kd.trich_gon(x.get("chu"), 260) or kd.trich_gon(x.get("trinh"), 260)
+        if loi:
+            ds.append(f"Hào {h['ten']} — {'Chu Hy' if x.get('chu') else 'Trình Di'}: {loi}")
+    if ds:
+        muc.append({"tieu_de": "Trình Di và Chu Hy giảng quẻ này", "danh_sach": ds,
+                    "doan": "Hai bản chú kinh điển của phái Nghĩa Lý đời Tống: «Dịch truyện» của Trình Di và «Chu Dịch bản nghĩa» "
+                            "của Chu Hy, trích theo bản dịch của Ngô Tất Tố. Lời xưa giữ nguyên cách nói của sách."})
+    return muc
+
+
 def _trang_que(k: str, slug: str) -> dict:
     kb = _doc("kinhdich_kb.json")
     q = kb["que"][k]
@@ -197,6 +224,7 @@ def _trang_que(k: str, slug: str) -> dict:
                                   + (f" Hiểu đơn giản: {h['nom_na']}" if h.get("nom_na") else "") for h in kv["hao"]]
                     + ([f"{'Dụng Cửu' if k == '1' else 'Dụng Lục'} 「{kv['dung']['han']}」 — {kv['dung']['dich']}"]
                        if kv.get("dung") else [])})
+        muc += _muc_truyen_nghia(k, kv)
     muc.append(_muc_cau_truc_que(k))
     muc += [
         {"tieu_de": "Lời khuyên", "doan": q["loi_khuyen"]},
@@ -342,6 +370,10 @@ def _trang_thap_than(ten: str, slug: str) -> dict:
            {"tieu_de": L("trang_bt.tt.nam_nu", "Với nam, với nữ"),
             "danh_sach": [L("trang_bt.tt.nam", "Với nam: {x}.", x=t["nam"]), L("trang_bt.tt.nu", "Với nữ: {x}.", x=t["nu"])]},
            {"tieu_de": L("trang.tu_soi", "Câu hỏi tự soi"), "doan": t["cau_tu_soi"]}]
+    cv = (kb.get("co_van_thap_than") or {}).get(ten)      # KT-TT: câu nguyên văn Uyên Hải Tử Bình + tóm ý
+    if cv:
+        muc.insert(-1, {"tieu_de": L("trang_bt.tt.co_van", "Uyên Hải Tử Bình nói gì về {ten}", ten=tt), "doan": cv["y"],
+                        "danh_sach": [L("trang_bt.tt.co_van_van", "Nguyên văn: 「{han}」", han=h) for h in cv["han"]]})
     hoi_dap = [{"hoi": L("trang_bt.tt.hoi_la_gi", "{ten} trong Bát tự là gì?", ten=tt, pin=pin), "dap": tra_loi},
                {"hoi": L("trang_bt.tt.hoi_nhieu", "Lá số nhiều {ten} thì sao?", ten=tt), "dap": _hoa1(t["khi_nhieu"])}]
     ds = _ds_thap_than()
@@ -382,6 +414,10 @@ def _trang_nhat_chu(can: str, slug: str) -> dict:
         muc.append({"tieu_de": L("trang_bt.nc.hanh", "Hành {hanh}", hanh=h), "danh_sach": [
             L("trang_bt.nc.hanh_tinh_chat", "Tính chất: {x}.", x=nh["tinh_chat"]), _hoa1(nh["khi_thieu"]),
             _hoa1(nh["khi_thua"]), L("trang_bt.nc.hanh_ung_dung", "Ứng dụng dân gian: {x}.", x=nh["ung_dung"])]})
+    ct = (kb.get("co_tho") or {}).get(can)          # KT-TT: bài «thể tượng» của can trong Uyên Hải Tử Bình
+    if ct:
+        muc.append({"tieu_de": L("trang_bt.nc.co_tho", "Uyên Hải Tử Bình tả can {can} thế nào", can=c, loai=loai_can), "doan": ct["y"],
+                    "danh_sach": [L("trang_bt.nc.co_tho_van", "Nguyên văn (thiên «Can chi thể tượng»): 「{han}」", han=ct["han"])]})
     muc.append({"tieu_de": L("trang.tu_soi", "Câu hỏi tự soi"), "doan": n["cau_tu_soi"]})
     hoi_dap = [{"hoi": L("trang_bt.nc.hoi_nguoi", "Nhật chủ {can} là người thế nào?", can=c, loai=loai_can), "dap": tra_loi},
                {"hoi": L("trang_bt.nc.hoi_dong", "Nhật chủ {can} sinh mùa đông thì sao?", can=c, loai=loai_can),
@@ -419,6 +455,7 @@ _TRANG.update(_tnt.TRANG)
 from app.kb import trang_tarot as _ttr  # noqa: E402 — TR-1: 78 lá bài Tarot /tarot/la-bai
 _TRANG.update(_ttr.TRANG)
 _TEN_NGAN = {**_tts.TEN_NGAN, **_ttv.TEN_NGAN, **_tm.TEN_NGAN, **_tpt.TEN_NGAN, **_tct.TEN_NGAN, **_tnt.TEN_NGAN, **_ttr.TEN_NGAN}
+from app.kb import y_chinh_tu_dong as _yct  # noqa: E402
 from app.kb import bo_sung as _bs  # noqa: E402 — SEO-M: nội dung bổ sung trang mỏng (KB bo_sung_<loai>.json)
 # EN-ALL GĐ 2: danh sách (khoá, slug Việt) luôn dựng ở ngữ cảnh tiếng Việt — slug là KHOÁ URL, không đổi theo ngôn ngữ
 # (trước đây lá bài dựng slug từ tên đã phủ tiếng Anh → bản Anh 404 với slug Việt).
@@ -448,6 +485,10 @@ def _ten_ngan(loai: str, slug: str) -> str:
 
 
 def _hoan_tat(t: dict) -> dict:
+    if not t.get("y_chinh") and ngon_ngu.la_viet() and (yc := _yct.tao(t)):
+        t["y_chinh"] = yc           # KB-TT1: ý chính rút từ chính trang → có ảnh tóm tắt (alt + ImageObject) cho họ chưa có KB bổ sung
+    if t.get("y_chinh") and ngon_ngu.la_viet() and any(len(y) > _yct.TOI_DA for y in t["y_chinh"]):
+        t["y_chinh"] = [y if len(y) <= _yct.TOI_DA else _yct._cat(y) for y in t["y_chinh"]]   # lá bài: ý dài tràn khung ảnh
     _td.gan(t)                      # EEAT-1: chủ biên / tác giả / thẩm định (thẩm định → "da_duyet")
     # SEO-K (2026-10-21): nháp có phần riêng < 20 % trong họ trang → tạm không index (vẫn có link, .md).
     t["index"] = t["trang_thai"] == "da_duyet" or (INDEX_NHAP_AI and not _dr.thap(t["loai"], t["slug"]))
@@ -482,11 +523,11 @@ def _lay(loai: str, slug: str) -> dict | None:
     if loai == "que":
         for k, s in _ds_que():
             if s == slug:
-                return _hoan_tat(_trang_que(k, s))
+                return _hoan_tat(_bs.ap(_trang_que(k, s)))     # KB-TT3: nội dung bổ sung 64 quẻ
     if loai == "sao":
         for ten, s in _ds_sao():
             if s == slug:
-                return _hoan_tat(_trang_sao(ten, s))
+                return _hoan_tat(_bs.ap(_trang_sao(ten, s)))     # KB-TT1: nội dung bổ sung cho 14 chính tinh
     if loai in _TRANG:
         ds, dung = _TRANG[loai]
         for ten, s in ds():

@@ -180,6 +180,25 @@ def muc_luc_hao(pt: dict) -> tuple[str, list[str]]:
     return ("thuan" if diem >= 1 else "can_chu_dong" if diem <= -1 else "can_bang"), ly
 
 
+def the_que(que: dict) -> dict | None:
+    """KT-TT5 — "thế chung của quẻ" theo Tăng San Bốc Dịch: quẻ lục xung / lục hợp, biến xung ↔ hợp, du hồn / quy hồn.
+    → {loai, hon, bien, loi: [câu đời thường…, câu "chỉ là nét phụ"], can_cu: thuật ngữ + nguyên văn} hoặc None.
+    Chỉ thêm một dòng đọc; mức của bài đọc và mã kiểm chứng không đổi."""
+    from app.calc import luc_hao as lh  # noqa: PLC0415
+    tc = lh.tinh_chat_que(que)
+    ma = [m for m in (tc["bien"] if tc["bien"] in ("xung_hoa_hop", "hop_hoa_xung") else tc["loai"], tc["hon"]) if m]
+    muc = [(m, kbt.tinh_chat_que(m)) for m in ma]
+    muc = [(m, k) for m, k in muc if k]
+    chung_ = kbt.tinh_chat_que("chung")
+    if not muc or not chung_:
+        return None
+    ten = que["quai_ban"]["ten"]
+    cu = "; ".join(f"{k.get('ten', m)} — «{k['trich']}»" for m, k in muc)
+    bien = f" (biến ra quẻ {que['quai_bien']['ten']})" if tc["bien"] and que.get("quai_bien") else ""
+    return {**tc, "loi": [k["loi"] for _, k in muc] + [chung_["loi"]],
+            "can_cu": f"Quẻ {ten}{bien}: {cu}. Sách dặn: «{chung_['trich']}» — lấy dụng thần làm chính, thế quẻ chỉ để tham khảo thêm."}
+
+
 # ----------------------------------------------------------------------------- dựng gói
 def _nom_na(s: str | None) -> str | None:
     if not s:
@@ -374,6 +393,9 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
         qb = kbq.que(que["quai_bien"]["so_king_wen"]) or {}
         if qb.get("y_chinh"):
             doan.append(f"Việc đang chuyển dần sang quẻ {que['quai_bien']['ten']}: {qb['y_chinh']}")
+    tcq = the_que(que)                           # KT-TT5: nét phụ theo cấu trúc quẻ — không đổi mức
+    if tcq:
+        doan.append("Thế chung của quẻ: " + " ".join(tcq["loi"]))
     if gn["mai_hoa"] and chinh != "mai_hoa":
         doan.append(f"Nhìn theo thể–dụng: {gn['mai_hoa']['tom_tat']}.")
     if gn["luc_hao"] and gn["luc_hao"].get("dung_than") and chinh != "luc_hao" and gn["luc_hao"]["ly_do"]:
@@ -390,7 +412,10 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     for g, ten in (("nghia_ly", "Nghĩa Lý — lời kinh"), ("mai_hoa", "Mai Hoa — thể, dụng, hỗ, biến"), ("luc_hao", "Lục Hào — dụng thần theo ngày tháng")):
         if gn.get(g):
             can_cu.append({"tieu_de": f"{ten} → {gn[g]['nhan']}", "noi_dung": " ".join(gn[g]["can_cu"])})
-    loi_kinh = [{k: m.get(k) for k in ("tieu_de", "han", "dich", "y", "nom_na", "thoan", "chu")} for m in goi["muc"] if m["loai"] == "loi_kinh"]
+    if tcq:
+        can_cu.append({"tieu_de": "Lục Hào — thế quẻ (Tăng San Bốc Dịch)", "noi_dung": tcq["can_cu"]})
+    loi_kinh = [{k: m.get(k) for k in ("tieu_de", "han", "dich", "y", "nom_na", "thoan", "chu", "tieu_tuong", "trinh", "chu_hy", "nguoi_dich")
+                 if k in m or k in ("tieu_de", "han", "dich", "y", "nom_na", "thoan", "chu")} for m in goi["muc"] if m["loai"] == "loi_kinh"]
 
     # ---- câu hỏi tiếp (không gieo lại cùng việc)
     cau = list(cd.get("cau_tiep") or [])[:2]
@@ -399,7 +424,8 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
         cau.append(f"Quẻ {ban['ten']} nói gì về {LV_TEN[lv_khac]}?")
     return {"muc": muc, "nhan_muc": kb.nhan_muc(muc), "mo_ta_muc": kb.muc(muc).get("mo_ta", ""), "ket_luan": ket_luan,
             "hop": hop, "doan": doan, "hanh_dong": hanh_dong, "can_cu": can_cu, "cau_tu_soi": q.get("cau_tu_soi"),
-            "loi_kinh": loi_kinh, "goc_nhin": gn, "ung_ky": ung_ky, "cau_lien_quan": cau[:3],
+            "loi_kinh": loi_kinh, "goc_nhin": gn,
+            "tinh_chat_que": {k: tcq[k] for k in ("loai", "hon", "bien", "loi")} if tcq else None, "ung_ky": ung_ky, "cau_lien_quan": cau[:3],
             "chu_de": {"ma": ma, "ten": cd["ten"], "dung_than": cd.get("dung_than")},
             # KD-V3: gói trả lời theo việc (kiểu câu, vai, nghiêng theo từng phái, lý do, người kia, điều cần gỡ) — web hiện
             # ở đầu bài đọc; không lặp hộp (hộp đã nằm trong `hop`).

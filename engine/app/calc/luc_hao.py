@@ -101,6 +101,31 @@ def phuc_than(quai_ban: dict) -> list[dict]:
     return ra
 
 
+# ------------------------------------------------------------------ tính chất quẻ (KT-TT5)
+def _loai_xung_hop(quai: dict) -> str | None:
+    """Quẻ lục xung / lục hợp: ba cặp hào 1–4, 2–5, 3–6 (theo địa chi nạp giáp) cùng xung hoặc cùng hợp."""
+    chi = [h["dia_chi"] for h in quai["hao"]]
+    cap = [(chi[i], chi[i + 3]) for i in range(3)]
+    if all(xung(a, b) for a, b in cap):
+        return "luc_xung"
+    if all(hop(a, b) for a, b in cap):
+        return "luc_hop"
+    return None
+
+
+def tinh_chat_que(que: dict) -> dict:
+    """Tính chất của quẻ theo Tăng San Bốc Dịch (chương 六合, 六沖, 歸魂遊魂). Chỉ nhận diện, không chấm mức.
+
+    → {loai: "luc_xung" | "luc_hop" | None, hon: "du_hon" | "quy_hon" | None,
+       bien: "xung_hoa_hop" | "hop_hoa_xung" | "hop_hoa_hop" | "xung_hoa_xung" | None}"""
+    ban, bien = que["quai_ban"], que.get("quai_bien")
+    loai = _loai_xung_hop(ban)
+    hon = {"Du hồn": "du_hon", "Quy hồn": "quy_hon"}.get((ban.get("bat_cung") or {}).get("loai"))
+    lb = _loai_xung_hop(bien) if bien else None
+    ten = {"luc_xung": "xung", "luc_hop": "hop"}
+    return {"loai": loai, "hon": hon, "bien": f"{ten[loai]}_hoa_{ten[lb]}" if loai and lb else None}
+
+
 # ------------------------------------------------------------------ hào động hoá ra
 def hoa(chi_goc: str, chi_bien: str) -> dict:
     """Quan hệ giữa hào động và hào nó biến ra."""

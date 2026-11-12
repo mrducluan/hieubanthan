@@ -88,7 +88,8 @@ def dieu_hau(ls: dict) -> dict | None:
         return None
     d = battu_mo_rong.dieu_hau_ctbg(ls, b["can"])
     mua = (battu_kb.nhat_chu(ls["nhat_chu"]["can"]) or {}).get("mua", {}).get(d["mua"])
-    return {**d, "mua_y": mua, "nguon": b["nguon"], "trang_thai": b["trang_thai"], "can_doi_chieu": b["can_doi_chieu"]}
+    return {**d, "mua_y": mua, "trich": b.get("trich"), "nguon": b["nguon"], "trang_thai": b["trang_thai"],
+            "can_doi_chieu": b["can_doi_chieu"]}
 
 
 class LuuNienBTInput(BaseModel):

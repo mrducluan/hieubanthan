@@ -22,6 +22,7 @@ export const TEN_TEP_KB: Record<string, string> = {
   "phongthuy_huyen_khong.json": "Phong thuỷ · Huyền Không",
   "tu_dien.json": "Từ điển thuật ngữ",
   "tham_dinh.json": "Sổ thẩm định chuyên gia",
+  "goc_nhin.json": "Góc nhìn chuyên gia — ô để anh tự viết (42 trang)",
   // QTE / HTT-2: bản phủ tiếng Anh (kb/data/en/) + biến thể thị trường (kb/data/en-us/)
   "en/tarot_kb.json": "Bản Anh · Tarot (78 lá, trải bài, mẫu câu)",
   "en/loi_khuon.json": "Bản Anh · Mẫu câu theo ngôn ngữ (loi.L)",

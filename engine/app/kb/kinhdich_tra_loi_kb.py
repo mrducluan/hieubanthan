@@ -91,6 +91,12 @@ def can_go(ma: str) -> str | None:
     return _lay("can_go", ma)
 
 
+def tinh_chat_que(ma: str) -> dict | None:
+    """KT-TT5 — lời + câu sách cho một tính chất quẻ (luc_xung, luc_hop, xung_hoa_hop, hop_hoa_xung, du_hon, quy_hon, chung)."""
+    m = (_d().get("tinh_chat_que") or {}).get(ma)
+    return m if isinstance(m, dict) and m.get("loi") and m.get("trich") else None
+
+
 def mau(ma: str) -> str:
     return _lay("mau", ma) or ""
 

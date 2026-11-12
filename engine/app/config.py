@@ -21,7 +21,9 @@ from enum import Enum
 # BI-3 Bát tự sinh ở nước ngoài so mốc tiết theo múi giờ nơi sinh (khi khai).
 # 0.1.7 (TV-DT, 2026-11-04): đồng hạn Tử vi (tuổi mụ < số cục) báo khoảng đại hạn 1 … cục − 1 + cờ `dong_han`
 # (trước lấy khoảng của chính cung đồng hạn, vd bé 2 tuổi ra "86–95"); cung, can, tứ hoá không đổi.
-ENGINE_VERSION = "0.1.7"
+# 0.1.8 (Q5, 2026-11-12): bảng hỷ / kỵ cách cục Bát tự (dụng thần cách 2) sửa theo nguyên văn Tử Bình Chân Thuyên — Thất Sát,
+# Chính Ấn, Thiên Ấn; đổi mức chương / đại vận ở khoảng 3 % lá số. Tứ trụ không đổi.
+ENGINE_VERSION = "0.1.8"
 
 
 # ---------------------------------------------------------------------------

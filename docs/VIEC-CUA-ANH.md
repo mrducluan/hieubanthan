@@ -3,9 +3,9 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-12 (PT-NG1 mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-12 (PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
-### 4ar. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
+### 4as. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
 
 - [x] Mở mạng tới Wikisource, archive.org, Gutenberg (đã duyệt 2026-11-12). Dò lại: sách Tarot của Papus, Wirth em tự tải được;
   ba bộ phong thuỷ dưới đây **không có bản chữ trên mạng mở** → cần anh tải PDF lên Google Drive (thư mục "Phong thuy nguon").
@@ -16,6 +16,21 @@
   chương Introduction còn thiếu của Mathers 1888. (Papus, Wirth em tự tải.)
 - [ ] (Quyết định) 6 đề xuất ở mục 5 của tài liệu: hiện "Sách xưa nói gì" trong báo cáo nhà · sửa nhãn nguồn Thanh Long – Bạch Hổ ·
   nối lớp "đa số" vào bài đọc Tarot · thành môn quyết · thước Lỗ Ban · sổ đối chiếu cho mọi KB.
+
+### 4ar. KT-TT — kiểm toán kho tri thức Tử vi · Bát tự · Kinh Dịch (2026-11-12, `docs/KIEM-TOAN-TRI-THUC-2026-11.md`)
+
+- [x] (Q1–Q3 đã duyệt 2026-11-12; điều hậu đã sửa 34 ô — chỉ là phần hiển thị, không đổi phép tính)
+- [x] (Quyết định **Q5**) anh giao em quyết 2026-11-12 — đã sửa 2/4 chỗ có căn cứ nguyên văn (Thất Sát, Chính Ấn / Thiên Ấn), 2 chỗ kia không cần sửa; khoảng 3 % lá số đổi một nhãn; `ENGINE_VERSION` 0.1.8 (tài liệu mục 10.6). **Việc của anh: deploy engine trước web.**
+- [x] KT-TT4 (2026-11-12): lá số Bát tự thuộc cách cục đặc biệt (≈ 0,6 %) có thêm hộp "Một cách đọc khác" theo «Luận tạp cách» — anh không cần làm gì; khi có phiếu "Đúng với mình" em sẽ báo số.
+- [x] KT-TT5 (2026-11-12): bài đọc Kinh Dịch có thêm dòng "Thế chung của quẻ" (quẻ dễ tan / dễ kết / lòng chưa yên…) theo Tăng San Bốc Dịch — anh không cần làm gì.
+- [ ] KT-TT6 (2026-11-12): xem `docs/DO-TIN-KHO-TRI-THUC.md` (tệp nào đã có nguyên văn đối chiếu, tệp nào mới là tóm ý / biên tập) và cho em biết muốn nâng mức phần nào trước — em đề xuất thứ tự ở mục 10.10 của tài liệu kiểm toán.
+- [ ] Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
+- [ ] (Tuỳ chọn) Mời người rành Dịch / Tử vi đọc soát: 64 trang quẻ (lời Ngô Tất Tố bản điện tử còn lỗi gõ), 74 nghĩa sao nhỏ.
+- [x] **Gửi sách em không tự lấy được** (anh đã gửi thư mục Drive 9 tệp 2026-11-12) (Google Drive hoặc đính kèm; PDF chữ tốt hơn ảnh quét) — ưu tiên: (1) *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang), (2) *Tử vi tổng hợp* (Nguyễn Phát Lộc), (4) *Tử Bình Chân Thuyên* bản chữ — mở `ctext.org/wiki.pl?if=gb&res=413248` trên trình duyệt rồi lưu PDF, (5) *Uyên Hải Tử Bình* bản đủ (ctext res=307303), (6) *Kinh Dịch* Ngô Tất Tố dịch / *Chu Dịch* Phan Bội Châu. Bảng đầy đủ: mục 6 của tài liệu.
+- [ ] **SK-2 (2026-11-12) — xem lại danh sách tên bệnh** em chọn cho 5 hành + 14 chính tinh (`engine/app/kb/data/suc_khoe_kb.json`, trường `benh`; sửa ở `/quan-tri` → Kho tri thức). Em cố ý KHÔNG đưa bệnh hiểm nghèo (ung thư, đột quỵ, suy thận…) — anh muốn thêm thì báo em. Nên hỏi luật sư một câu: nêu tên bệnh trong lời "nên đi khám để phát hiện sớm …" có cần thêm miễn trừ nào không.
+- [x] **Uyên Hải Tử Bình** — anh đã tải lại 2026-11-12, em đã nạp thử vào kho nguồn (`docs/KIEM-TOAN-TRI-THUC-2026-11.md` mục 10.5). (Không gấp) nếu anh có **bản khắc / bản đủ 5 quyển** thì gửi để em so lại — bản hiện tại là bản điện tử đã lược bớt.
+- [ ] Deploy **engine** để 24 chỗ kinh văn Kinh Dịch vừa sửa lên trang quẻ (web không cần đổi).
+- [ ] (Đã làm) Môi trường `hieubanthan` thêm tên miền `zh.wikisource.org` — anh đã duyệt ở hộp thoại; không cần làm gì thêm.
 
 ### 4aq. PAY2S-1 — Pay2S thay payOS · thẻ Visa/Mastercard (2026-11-12, `docs/KE-HOACH-THANH-TOAN.md` mục 0b, `docs/SO-SANH-CONG-THE.md`)
 
@@ -1405,3 +1420,16 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] Hỏi luật sư: Luật Trí tuệ nhân tạo 134/2025 (hiệu lực 01/3/2026) về nhãn "nội dung AI" cho "Hỏi đáp chuyên sâu".
 - [ ] Quyết từng sản phẩm mới ngoài 4 mảng: báo cáo chủ đề giá thấp · đặt tên con · sổ người thân · bản đồ nhóm · xem số SIM/biển số · Tarot · đọc thành tiếng.
 - [ ] Duyệt thứ tự EN-1 → EN-6 (em đề xuất làm EN-1 an toàn + đúng ngay).
+
+## GN-2. Ô "Góc nhìn chuyên gia" để anh tự viết (2026-11-12, thay cho việc em viết "kinh nghiệm" hộ)
+
+- [ ] **GN2-1.** Vào `/quan-tri` → **Kho tri thức** → tệp **"Góc nhìn chuyên gia — ô để anh tự viết (42 trang)"** (`goc_nhin.json`). Mỗi trang có
+  4 phần: `trang` (tên), `goi_y` (3 câu hỏi gợi ý, không hiện công khai), **`noi_dung`** (để trống — anh viết 2–4 câu kinh nghiệm THẬT của
+  anh, 60–800 ký tự) và **`ngay`** (gõ `2026-11-12` kiểu năm-tháng-ngày). Bấm **Xuất bản** → mở PR → CI kiểm luật → anh merge là hiện khung
+  "Góc nhìn chuyên gia" dưới "Trả lời nhanh" của đúng trang đó. Ô trống thì web không hiện gì.
+- Luật nội dung (CI chặn nếu vi phạm): không phán ("sẽ phá sản", "định mệnh"…), không tên bệnh / tuổi thọ, không vật phẩm / giải hạn, không
+  link / số điện thoại. Em chỉ sửa chính tả khi anh nhờ, không thêm ý. Điền ô **không** tự biến trang thành "đã thẩm định" — thẩm định vẫn
+  là việc riêng anh quyết (Phòng duyệt → `scripts/ap_duyet.py`).
+- Gợi ý cách làm nhanh: mỗi trang kể MỘT tình huống anh thật sự đã gặp (ẩn danh) hoặc một điều anh thấy khác sách; 5–10 phút/trang; làm
+  trước 14 chính tinh + 12 cung + 3 trang dấu hiệu nhà đang có hiển thị.
+- Bài viết blog trong CMS: đã có sẵn mục chữ ký "Chuyên gia là tác giả / thẩm định" (anh tự tích xác nhận) — không cần ô riêng.

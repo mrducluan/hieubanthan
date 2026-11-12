@@ -17,7 +17,7 @@ from typing import Annotated, Literal
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
-from app import config
+from app import config, ngon_ngu
 from app.kb import ten as _ten
 from app.kb.loi import L
 from app.kb import tu_dien
@@ -376,6 +376,21 @@ def _giai_nghia_sao(ten: str, do_sang: str | None, cung: str) -> dict | None:
     return the_cung.loi_sao_cung(ten, cung, do_sang)
 
 
+def _nghia_sao_nho(p: dict) -> dict[str, dict]:
+    """KT-TT: nghĩa ngắn của tạp diệu + sao bốn vòng đang đứng trong cung (KB `sao_nho`; chỉ bản tiếng Việt)."""
+    if not ngon_ngu.la_viet():
+        return {}
+    ten = [x["name"] for x in p["adjectiveStars"]] + [p["changsheng12"], p["boshi12"], p["jiangqian12"], p["suiqian12"],
+                                                      tuvi_thai_tue_vn.ten_nam_phai(p["suiqian12"])]
+    ra = {t: {"nhom": m["nhom"], "y_nghia": m["y_nghia"], "do_tin": m["do_tin"]}
+          for t in dict.fromkeys(ten) if t and (m := tuvi_kb.sao_nho(t))}
+    # KT-TT3: phụ tinh ở chính cung này theo Toàn Thư quyển 3 (6 cung về việc và nếp sống) — tóm ý + nguyên văn.
+    for x in p["minorStars"]:
+        if (m := tuvi_kb.phu_tinh_cung(x["name"], p["name"])):
+            ra[x["name"]] = {"nhom": "Phụ tinh ở cung này", "y_nghia": m["y"], "trich": m["trich"], "do_tin": "co_thu"}
+    return ra
+
+
 def _do_sang_phu(p: dict) -> dict[str, str]:
     """TV-NP2: độ sáng lối Việt của phụ tinh, tạp diệu, Đại/Tiểu Hao (vòng Bác sĩ) và Hoá Kỵ trong cung
     — chỉ những sao sách có luận đắc/hãm ở cung đó."""
@@ -463,6 +478,7 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
             "phu_tinh": [{**_phu(x), "do_sang_nam_phai": tuvi_do_sang_vn.do_sang_phu(x["name"], p["earthlyBranch"])}
                          for x in p["minorStars"]],
             "tap_dieu": [x["name"] for x in p["adjectiveStars"]],
+            "nghia_sao_nho": _nghia_sao_nho(p),
             "truong_sinh": p["changsheng12"], "bac_si": p["boshi12"],
             "tuong_tien": p["jiangqian12"], "tue_tien": p["suiqian12"],
             "thai_tue_nam_phai": tuvi_thai_tue_vn.ten_nam_phai(p["suiqian12"]),

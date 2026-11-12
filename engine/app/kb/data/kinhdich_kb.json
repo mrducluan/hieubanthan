@@ -1174,56 +1174,279 @@
    "ngu_hanh": "Kim",
    "gia_dinh": "Cha",
    "tinh": "Cương kiện, sáng tạo",
-   "phuong_hau_thien": "Tây Bắc"
+   "phuong_hau_thien": "Tây Bắc",
+   "loai_tuong": {
+    "duc": "mạnh mẽ, bền bỉ",
+    "con_vat": "ngựa",
+    "than_the": "đầu",
+    "vat": [
+     "trời",
+     "vật tròn",
+     "vua",
+     "cha",
+     "ngọc",
+     "vàng và kim loại",
+     "cái lạnh, băng",
+     "màu đỏ thẫm",
+     "ngựa tốt, ngựa già",
+     "quả trên cây"
+    ],
+    "trich": [
+     "乾健也",
+     "乾為馬",
+     "乾為首",
+     "乾為天為圜為君為父為玉為金為寒為冰為大赤為良馬為老馬為瘠馬為駁馬為木果"
+    ],
+    "source_id": "chu_dich",
+    "school_id": "nghia_ly",
+    "thien": "Thuyết Quái truyện",
+    "trang_thai": "da_doi_chieu_nguyen_van"
+   }
   },
   "Khôn": {
    "tuong": "Đất",
    "ngu_hanh": "Thổ",
    "gia_dinh": "Mẹ",
    "tinh": "Nhu thuận, bao dung",
-   "phuong_hau_thien": "Tây Nam"
+   "phuong_hau_thien": "Tây Nam",
+   "loai_tuong": {
+    "duc": "thuận theo, nâng đỡ",
+    "con_vat": "trâu bò",
+    "than_the": "bụng",
+    "vat": [
+     "đất",
+     "mẹ",
+     "vải vóc",
+     "nồi niêu",
+     "sự tằn tiện",
+     "sự chia đều",
+     "bò mẹ có con",
+     "xe lớn chở nặng",
+     "văn vẻ",
+     "số đông người",
+     "tay cầm, cán",
+     "màu đen của đất"
+    ],
+    "trich": [
+     "坤順也",
+     "坤為牛",
+     "坤為腹",
+     "坤為地為母為布為釡為吝嗇為均為子母牛為大輿為文為衆為柄其於地也為黑"
+    ],
+    "source_id": "chu_dich",
+    "school_id": "nghia_ly",
+    "thien": "Thuyết Quái truyện",
+    "trang_thai": "da_doi_chieu_nguyen_van"
+   }
   },
   "Chấn": {
    "tuong": "Sấm",
    "ngu_hanh": "Mộc",
    "gia_dinh": "Trưởng nam",
    "tinh": "Động, khởi phát",
-   "phuong_hau_thien": "Đông"
+   "phuong_hau_thien": "Đông",
+   "loai_tuong": {
+    "duc": "động, khởi lên",
+    "con_vat": "rồng",
+    "than_the": "chân",
+    "vat": [
+     "sấm",
+     "rồng",
+     "màu xanh đen pha vàng",
+     "sự lan toả",
+     "đường lớn",
+     "con trai trưởng",
+     "sự quyết liệt, nóng vội",
+     "tre non",
+     "lau sậy",
+     "hạt nảy mầm",
+     "sự tươi tốt"
+    ],
+    "trich": [
+     "震動也",
+     "震為龍",
+     "震為足",
+     "震為雷為龍為元黃為旉為大塗為長子為決躁"
+    ],
+    "source_id": "chu_dich",
+    "school_id": "nghia_ly",
+    "thien": "Thuyết Quái truyện",
+    "trang_thai": "da_doi_chieu_nguyen_van"
+   }
   },
   "Tốn": {
    "tuong": "Gió/Cây",
    "ngu_hanh": "Mộc",
    "gia_dinh": "Trưởng nữ",
    "tinh": "Thuận nhập, thấm dần",
-   "phuong_hau_thien": "Đông Nam"
+   "phuong_hau_thien": "Đông Nam",
+   "loai_tuong": {
+    "duc": "thấm vào, len vào",
+    "con_vat": "gà",
+    "than_the": "đùi",
+    "vat": [
+     "cây gỗ",
+     "gió",
+     "con gái trưởng",
+     "dây căng thẳng, thước dây",
+     "người thợ khéo",
+     "màu trắng",
+     "vật dài, vật cao",
+     "sự tiến lui, lưỡng lự",
+     "mùi hương",
+     "việc buôn bán có lãi"
+    ],
+    "trich": [
+     "巽入也",
+     "巽為雞",
+     "巽為股",
+     "巽為木為風為長女為䋲直為工為白為長為髙為進退為不果為臭",
+     "為近利市三倍"
+    ],
+    "source_id": "chu_dich",
+    "school_id": "nghia_ly",
+    "thien": "Thuyết Quái truyện",
+    "trang_thai": "da_doi_chieu_nguyen_van"
+   }
   },
   "Khảm": {
    "tuong": "Nước",
    "ngu_hanh": "Thủy",
    "gia_dinh": "Trung nam",
    "tinh": "Hiểm, sâu",
-   "phuong_hau_thien": "Bắc"
+   "phuong_hau_thien": "Bắc",
+   "loai_tuong": {
+    "duc": "hiểm, chìm xuống",
+    "con_vat": "lợn",
+    "than_the": "tai",
+    "vat": [
+     "nước",
+     "ngòi rãnh",
+     "sự ẩn nấp",
+     "việc uốn nắn",
+     "cung và bánh xe",
+     "nỗi lo trong lòng",
+     "màu đỏ",
+     "xe hay trục trặc",
+     "sự thông suốt",
+     "mặt trăng",
+     "kẻ trộm",
+     "gỗ cứng nhiều lõi"
+    ],
+    "trich": [
+     "坎陷也",
+     "坎為豕",
+     "坎為耳",
+     "坎為水為溝瀆為隐伏為矯輮為弓輪其於人也為加憂",
+     "為通為月為盜其於木也為堅多心"
+    ],
+    "source_id": "chu_dich",
+    "school_id": "nghia_ly",
+    "thien": "Thuyết Quái truyện",
+    "trang_thai": "da_doi_chieu_nguyen_van"
+   }
   },
   "Ly": {
    "tuong": "Lửa",
    "ngu_hanh": "Hỏa",
    "gia_dinh": "Trung nữ",
    "tinh": "Sáng, bám vào",
-   "phuong_hau_thien": "Nam"
+   "phuong_hau_thien": "Nam",
+   "loai_tuong": {
+    "duc": "sáng, bám vào",
+    "con_vat": "chim trĩ",
+    "than_the": "mắt",
+    "vat": [
+     "lửa",
+     "mặt trời",
+     "tia chớp",
+     "con gái giữa",
+     "áo giáp, mũ trụ",
+     "binh khí",
+     "bụng lớn",
+     "sự khô ráo",
+     "ba ba, cua, ốc, trai, rùa (loài ngoài cứng trong mềm)",
+     "cây rỗng ruột khô ngọn"
+    ],
+    "trich": [
+     "離麗也",
+     "離為雉",
+     "離為目",
+     "離為火為日為電為中女為甲胄為戈兵其於人也為大腹為乾卦為鼈為蟹為蠃為蚌為龜其於木也為科上槁"
+    ],
+    "source_id": "chu_dich",
+    "school_id": "nghia_ly",
+    "thien": "Thuyết Quái truyện",
+    "trang_thai": "da_doi_chieu_nguyen_van"
+   }
   },
   "Cấn": {
    "tuong": "Núi",
    "ngu_hanh": "Thổ",
    "gia_dinh": "Thiếu nam",
    "tinh": "Dừng, tĩnh",
-   "phuong_hau_thien": "Đông Bắc"
+   "phuong_hau_thien": "Đông Bắc",
+   "loai_tuong": {
+    "duc": "dừng lại",
+    "con_vat": "chó",
+    "than_the": "tay",
+    "vat": [
+     "núi",
+     "đường mòn nhỏ",
+     "đá nhỏ",
+     "cổng, cửa lớn",
+     "quả cây, quả dây leo",
+     "người gác cổng",
+     "ngón tay",
+     "chó",
+     "chuột",
+     "loài chim mỏ cứng",
+     "gỗ cứng nhiều mắt"
+    ],
+    "trich": [
+     "艮止也",
+     "艮為狗",
+     "艮為手",
+     "艮為山為徑路為小石為門闕為果蓏為閽寺為指為狗為䑕為黔喙之屬其於木也為堅多節"
+    ],
+    "source_id": "chu_dich",
+    "school_id": "nghia_ly",
+    "thien": "Thuyết Quái truyện",
+    "trang_thai": "da_doi_chieu_nguyen_van"
+   }
   },
   "Đoài": {
    "tuong": "Đầm",
    "ngu_hanh": "Kim",
    "gia_dinh": "Thiếu nữ",
    "tinh": "Vui, nói",
-   "phuong_hau_thien": "Tây"
+   "phuong_hau_thien": "Tây",
+   "loai_tuong": {
+    "duc": "vui, đẹp lòng",
+    "con_vat": "dê",
+    "than_the": "miệng",
+    "vat": [
+     "đầm, hồ",
+     "con gái út",
+     "người cầu khấn thời xưa",
+     "miệng lưỡi, lời nói",
+     "sự gãy vỡ",
+     "sự bong ra, rụng xuống",
+     "đất cứng mặn",
+     "người thiếp",
+     "dê"
+    ],
+    "trich": [
+     "兌說也",
+     "兌為羊",
+     "兌為口",
+     "兌為澤為少女為巫為口舌為毁折為附決其於地也為剛鹵為妾為羊"
+    ],
+    "source_id": "chu_dich",
+    "school_id": "nghia_ly",
+    "thien": "Thuyết Quái truyện",
+    "trang_thai": "da_doi_chieu_nguyen_van"
+   }
   }
  },
  "the_dung": {
@@ -1464,6 +1687,8 @@
   "an_toan": "Mình rất tiếc vì bạn đang phải trải qua điều này. Lúc này điều quan trọng nhất là bạn an toàn — không quẻ, lá số hay hướng nhà nào quyết định được giá trị đời bạn. Nếu bạn đang nghĩ đến việc làm hại bản thân hoặc đang gặp nguy hiểm, hãy gọi ngay 115 (cấp cứu) hoặc 113 (công an); nếu liên quan đến trẻ em, gọi 111. Hãy nói chuyện với một người bạn tin tưởng ngay hôm nay — người thân, bạn bè, hoặc chuyên gia tâm lý.",
   "tu_choi": "Câu hỏi này nằm ngoài những gì cổ học có thể trả lời có trách nhiệm (con số may rủi, ngày giờ sống chết, chẩn đoán bệnh, đánh giá người để tuyển dụng, hay tác động lên người khác), nên hệ thống không luận. Nếu bạn muốn, hãy hỏi về cách chính bạn nên ứng xử với tình huống này.",
   "dan_huong": "Hệ thống không xem vong, căn, bùa hay điều gì thuộc thế giới vô hình — và không ai xem được những điều đó từ ngày sinh hay hướng nhà. Nếu dạo này bạn ngủ kém, hay giật mình hoặc thấy bất an, điều làm được ngay: ngủ đủ giờ, bớt đọc tin đêm, kể chuyện đang lo với một người thân. Nếu gia đình có lệ thờ cúng, hãy giữ như một dịp sum họp — hệ thống không hướng dẫn nghi lễ, không giới thiệu thầy hay vật gì. Bạn vẫn có thể hỏi về công việc, tiền bạc, tình cảm hay nhịp của năm nay — những điều lá số, quẻ và hướng nhà nói được.",
-  "chia_buon": "Xin chia buồn với gia đình bạn. Mất mát liên tiếp làm cả nhà mệt và hay tìm lý do ở những điều ngoài tầm tay — điều cần nhất lúc này là người trong nhà ở gần nhau, ăn ngủ đủ và chia việc cho nhau."
+  "chia_buon": "Xin chia buồn với gia đình bạn. Mất mát liên tiếp làm cả nhà mệt và hay tìm lý do ở những điều ngoài tầm tay — điều cần nhất lúc này là người trong nhà ở gần nhau, ăn ngủ đủ và chia việc cho nhau.",
+  "loai_tuong": "Theo Thuyết Quái, {quai} là {tuong}, tính {duc}; về người là {nguoi}, trên thân là {than_the}, loài vật là {con_vat}; còn ứng với {vat}.",
+  "loai_tuong_dan": "Quẻ Thể ({the}) là phía bạn, quẻ Dụng ({dung}) là phía việc — hình ảnh của hai quẻ gợi ý người, vật, nơi chốn liên quan, không phải lời đoán."
  }
 }

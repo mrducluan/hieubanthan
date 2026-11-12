@@ -770,5 +770,115 @@
    "cau_tu_soi": "Người thân có biết lúc nào bạn đang cần được hỏi han không?"
   }
  },
- "nap_am_luu_y": "Nạp âm là hệ 60 hoa giáp ghép ngũ âm; mỗi cặp hai năm chung một tên. Đây là hình tượng dân gian để tự soi, không dùng để kết luận tốt xấu hay chọn bạn đời. Bát trạch (hướng nhà) dùng cung phi, không dùng nạp âm."
+ "nap_am_luu_y": "Nạp âm là hệ 60 hoa giáp ghép ngũ âm; mỗi cặp hai năm chung một tên. Đây là hình tượng dân gian để tự soi, không dùng để kết luận tốt xấu hay chọn bạn đời. Bát trạch (hướng nhà) dùng cung phi, không dùng nạp âm.",
+ "co_tho_nguon": "Uyên Hải Tử Bình (淵海子平), thiên «Can chi thể tượng» (干支体象) — mười bài thơ tả hình tượng mười thiên can. `han` = nguyên văn (bản điện tử giản thể, chưa đối chiếu bản khắc); `y` = tóm ý tiếng Việt do ban biên tập viết (nháp), lời trung tính.",
+ "co_tho": {
+  "Giáp": {
+   "han": "甲木天干作首排，原无枝叶与根荄；欲存天地千年久，直向沙泥万丈埋。断就栋樑金得用，化成灰炭火为灾；蠢然块物无机事，一任春秋自往来。",
+   "y": "Sách ví Giáp như khối gỗ lớn đã thành hình, không còn cành lá. Gỗ này cần Kim đẽo gọt mới thành rường cột, gặp Hỏa quá mạnh thì dễ thành than; vùi trong đất sâu thì bền lâu. Ý sách: người Giáp cần được rèn giũa đúng cách và cần nền đất vững."
+  },
+  "Ất": {
+   "han": "乙木根荄种得深，只宜阳地不宜阴；漂浮最怕多逢水，刻断何当苦用金。南去火炎灾不浅，西行土重祸尤侵；栋樑不是连根木，辨别工夫好用心。",
+   "y": "Sách ví Ất như cây còn liền rễ, rễ bám sâu, ưa chỗ có nắng. Cây này ngại nước nhiều làm trôi, ngại Kim chặt mạnh, đi về phương nam lửa nóng hay phương tây đất nặng đều vất vả. Ý sách: Ất không phải gỗ làm cột, đừng đem cách dùng gỗ lớn mà xét."
+  },
+  "Bính": {
+   "han": "丙火明明一太阳，原从正大立纲常；洪光不独窥千里，巨焰犹能遍八荒。出世肯为浮木子，传生不作湿泥娘；江湖死水安能剋，惟怕成林木作殃。",
+   "y": "Sách ví Bính như mặt trời: sáng, ngay thẳng, soi xa nghìn dặm. Bính nhận sức từ Mộc, không hợp sinh cho đất ướt; nước ao hồ không dập nổi, chỉ ngại Mộc quá dày thành rừng che mất ánh sáng."
+  },
+  "Đinh": {
+   "han": "丁火其形一烛灯，太阳相见夺光明；得时能铸千金铁，失令难鎔一寸金。虽少乾柴犹可引，纵多湿木不能生；其间衰旺当分晓，旺比一炉衰一檠。",
+   "y": "Sách ví Đinh như ngọn đèn: đứng cạnh mặt trời thì bị lấn sáng. Đúng mùa thì lửa này đủ sức luyện sắt, trái mùa thì một tấc kim cũng khó nung. Ít củi khô vẫn cháy được, nhiều gỗ ướt lại không giúp gì. Ý sách: phải xét kỹ lửa đang mạnh như lò hay yếu như đèn."
+  },
+  "Mậu": {
+   "han": "戊土城墙堤岸同，振江河海要根重；柱中带合形还壮，日下乘虚势必崩。力薄不胜金漏洩，功成安用木疏通；平生最要东南健，身旺东南健失中。",
+   "y": "Sách ví Mậu như tường thành, bờ đê: muốn chắn được sông biển thì gốc phải dày. Trong lá số có chỗ hợp thì vững, chỗ ngày sinh trống thì dễ sụt. Sức mỏng thì không chịu nổi Kim rút khí; đã vững rồi thì không cần Mộc xới thêm."
+  },
+  "Kỷ": {
+   "han": "己土田园属四维，坤深能为万物基；水金旺处身还弱，火土功成局最奇。失令岂能埋剑戟，得时方可用鎡基；漫夸印旺兼多合，不遇刑冲总不宜。",
+   "y": "Sách ví Kỷ như ruộng vườn, là nền cho muôn vật. Gặp Thủy, Kim mạnh thì đất yếu đi; có Hỏa, Thổ góp sức thì thành cục đẹp. Trái mùa thì đất không giữ nổi vật nặng, đúng mùa mới cày cấy được."
+  },
+  "Canh": {
+   "han": "庚金顽钝性偏刚，火制功成怕水乡；夏产东南过煆炼，秋生西北亦光芒。水深反是他相剋，木旺能令我自伤；戊己干支重遇土，不逢冲破即埋藏。",
+   "y": "Sách ví Canh như khối kim thô, tính cứng: có Hỏa luyện mới thành đồ dùng, ngại chìm trong nước. Sinh mùa hạ lại đi về đông nam thì bị nung quá tay; sinh mùa thu đi về tây bắc vẫn sáng. Thổ quá dày mà không có gì khơi ra thì kim bị vùi."
+  },
+  "Tân": {
+   "han": "辛金珠玉性通灵，最爱阳和沙水清；成就不劳炎火煆，资扶偏爱湿泥生。水多火旺宜西北，水冷金寒要丙丁；坐禄通根身旺地，何愁厚土没其形。",
+   "y": "Sách ví Tân như châu ngọc: ưa nắng ấm, nước trong để rửa sáng. Ngọc không cần lửa lớn nung, lại hợp đất ẩm nuôi. Trời lạnh nước lạnh thì cần Bính, Đinh sưởi; gốc đã vững thì không ngại đất dày che."
+  },
+  "Nhâm": {
+   "han": "壬水汪洋併百川，漫流天下总无边；干支多聚成漂荡，火土重逢涸本源。养性结胎须未午，长生归禄属乾坤；身强原自无财禄，西北行程厄少年。",
+   "y": "Sách ví Nhâm như sông lớn gom trăm dòng, chảy không bờ. Nước tụ quá nhiều thì trôi dạt, gặp Hỏa Thổ dồn dập thì cạn nguồn. Ý sách: nước lớn cần bờ vừa đủ, không thiếu cũng không thừa."
+  },
+  "Quý": {
+   "han": "癸水应非雨露麼，根通亥子即江河；柱无坤坎还身弱，局有财官不尚多。申子辰全成上格，寅午戌备要中和；假饶火土生深夏，西北行程岂太过。",
+   "y": "Sách ví Quý như mưa móc, nhưng có gốc ở Hợi, Tý thì thành sông. Thiếu gốc thì thân yếu, khi ấy tài và quan không cần nhiều. Đủ Thân Tý Thìn thì thành cách cao; đủ Dần Ngọ Tuất thì cần giữ cho cân."
+  }
+ },
+ "co_van_thap_than_nguon": "Uyên Hải Tử Bình (淵海子平) — câu nguyên văn tả từng thập thần (`han`, mỗi câu phải là chuỗi con của kho nguồn fixtures/nguon/uyen_hai_tu_binh.json; bản điện tử giản thể, chưa đối chiếu bản khắc) + tóm ý tiếng Việt của ban biên tập (`y`, nháp, lời trung tính: bỏ các câu phán khắc vợ / khắc chồng / thọ yểu của sách).",
+ "co_van_thap_than": {
+  "Tỷ Kiên": {
+   "han": [
+    "比肩者，兄弟也。",
+    "遇比肩而争竞。"
+   ],
+   "y": "Sách gọi Tỷ Kiên là \"anh em\": người ngang vai với mình. Có người ngang vai thì có bạn đồng hành, và cũng có lúc phải tranh phần. Ý sách: xem Tỷ Kiên là xem cách bạn đứng cạnh người ngang hàng — chung sức hay ganh nhau."
+  },
+  "Kiếp Tài": {
+   "han": [
+    "财者，人之所欲，方令弟兄见之，多有争竞"
+   ],
+   "y": "Sách viết: tiền là thứ ai cũng muốn, nên anh em cùng thấy thì dễ sinh tranh giành. Ý sách: Kiếp Tài nhắc chuyện chia phần với người thân, bạn bè, đối tác — nói rõ phần ai nấy giữ từ đầu thì nhẹ về sau."
+  },
+  "Thực Thần": {
+   "han": [
+    "主人财厚食丰、腹量宽洪、肌体肥大、优游自足"
+   ],
+   "y": "Sách tả người có Thực Thần: ăn mặc đủ đầy, bụng dạ rộng rãi, dáng đầy đặn, sống thong dong tự thấy đủ. Sách cũng dặn Thực Thần ưa sức mình vững và ngại bị Thiên Ấn lấn. Ý sách: đây là nét biết hưởng và biết đủ."
+  },
+  "Thương Quan": {
+   "han": [
+    "伤官主人多才艺、傲物气高，常以天下之人不如己"
+   ],
+   "y": "Sách tả người có Thương Quan: nhiều tài nghệ, khí cao, hay thấy người khác không bằng mình — nên người trên dè chừng, người quanh dễ phật ý. Ý sách: tài là thật; phần cần giữ là cách nói và cách nhìn người."
+  },
+  "Thiên Tài": {
+   "han": [
+    "偏财主人慷慨、不甚吝财"
+   ],
+   "y": "Sách tả người có Thiên Tài: hào phóng, không quá tiếc tiền. Ý sách: tiền đến từ giao thiệp và cơ hội bên ngoài, đến nhanh thì đi cũng nhanh — rộng rãi là nét đẹp, miễn có một khoản giữ lại."
+  },
+  "Chính Tài": {
+   "han": [
+    "故财要得时，不要财多。"
+   ],
+   "y": "Sách viết: tiền cần đến đúng lúc, không cần nhiều; người phải đủ sức khoẻ và tinh thần thì mới hưởng được của mình làm ra, sức yếu thì của nhiều cũng chỉ đứng nhìn. Ý sách: lo cho sức mình trước, rồi mới tính chuyện kiếm thêm."
+  },
+  "Thất Sát": {
+   "han": [
+    "身旺有气为偏官，身弱无制为七杀。",
+    "七杀却宜制伏，亦不要制之太过"
+   ],
+   "y": "Sách viết: sức mình vững thì áp lực ấy là \"Thiên Quan\" — thành quyền, thành việc lớn; sức mình yếu mà không có gì kìm thì mới gọi là \"Thất Sát\". Sách còn dặn: cần kìm, nhưng đừng kìm quá tay. Ý sách: đừng vội coi áp lực là xấu; việc cần làm là giữ sức và chọn đúng việc khó."
+  },
+  "Chính Quan": {
+   "han": [
+    "盖人之命，宜得中和之气，太过与不及同",
+    "正官或多，反不为福。"
+   ],
+   "y": "Sách viết: Chính Quan nhiều quá lại không phải phúc, vì mệnh người quý ở chỗ vừa phải — thừa cũng như thiếu. Ý sách: khuôn phép và trách nhiệm là điểm tựa khi vừa đủ; ôm quá nhiều vai thì thành gánh."
+  },
+  "Thiên Ấn": {
+   "han": [
+    "犹尊长之制我身，不得自由也"
+   ],
+   "y": "Sách ví Thiên Ấn (khi lấn Thực Thần) như bề trên kìm mình, khó được tự do; nét dễ vấp sách nêu là làm việc lúc tiến lúc lùi, có đầu mà thiếu cuối. Ý sách: người có Thiên Ấn nghĩ sâu và khác người; nên chọn ít việc và làm tới cùng."
+  },
+  "Chính Ấn": {
+   "han": [
+    "夫印綬者，生我之谓也，亦名生气。",
+    "印綬主多智慧、丰身自在心慈。"
+   ],
+   "y": "Sách viết: Ấn là thứ \"sinh ra mình\", còn gọi là sinh khí — sự nâng đỡ có sẵn. Sách tả người có Ấn: nhiều trí tuệ, thân tâm thư thái, lòng hiền. Sách cũng dặn Ấn ngại Tài quá mạnh. Ý sách: bạn có chỗ dựa; đừng để chuyện tiền bạc làm mất nếp học và sự điềm tĩnh."
+  }
+ }
 }
