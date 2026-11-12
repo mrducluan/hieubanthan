@@ -369,3 +369,23 @@ Bản gõ lại (trang ghi chất lượng 50 %) → `can_doi_chieu: true`.
 - Chưa làm: phản ngâm / phục ngâm cấp quẻ (chương 反伏 đã nạp, CALC mới có cấp hào), tam hợp cục trong quẻ, quẻ hợp xứ phùng xung
   theo ngày tháng.
 - Golden đầu ra bản Việt đổi có chủ đích: 516 lượt, đều là Kinh Dịch. Không tăng `ENGINE_VERSION`.
+
+### 10.10 Thang độ tin cho kho tri thức (KT-TT6, 2026-11-12)
+
+**Đánh giá trước khi làm.** Ý ban đầu "gắn độ tin cho MỌI mục KB" (hàng nghìn mục) — **không làm theo kiểu đó**: máy tự dán nhãn
+từng mục mà không đối chiếu được thì chính là nhãn giả. Cách có ích và trung thực: mức ghi theo TỆP / PHẦN, do người ghi, và mức
+cao nhất phải chứng minh được bằng máy.
+
+**Đã làm.**
+- Sổ `engine/app/kb/do_tin.py`: 78 tệp KB + các phần riêng, thang năm mức — có nguyên văn đối chiếu · tóm ý cổ thư chưa khớp từng
+  câu · tập quán / sách hiện đại tóm ý · ban biên tập soạn · tệp kỹ thuật.
+- Test `tests/test_do_tin_kb.py`: tệp KB mới chưa vào sổ → đỏ; mức "có nguyên văn" phải nêu tệp kho nguồn CÓ THẬT và hàm test CÓ
+  THẬT; phần ghi trong sổ phải tồn tại trong tệp; sổ không lộ ra API (BM-1).
+- Báo cáo `docs/DO-TIN-KHO-TRI-THUC.md` dựng bằng `scripts/do_tin_kb.py` (test bắt quên chạy).
+- Số hiện tại: 11 tệp / phần có nguyên văn đối chiếu (Bát tự 4, Kinh Dịch 4, Tử vi 1, Tarot 1 + điều hậu); phần lớn lời đời
+  thường là "ban biên tập soạn" — đúng bản chất, không tô thêm.
+- Mức **không** phải "đã thẩm định" và không hiện cho người dùng; không đổi đầu ra nào của engine.
+
+**Dùng để làm gì tiếp.** Thứ tự nâng mức đề xuất (mỗi việc = nạp nguyên văn + test): (1) `tuvi_co_thu.json` nối test với kho Toàn
+Thư (Cốt Tuỷ Phú đã có nguyên văn); (2) `tuvi_cach_cuc.json` (cổ ca cách cục) ; (3) `nhan_tuong_kb.json` (130 câu trích, chưa có
+kho nguồn Ma Y); (4) `phongthuy_huyen_khong.json` (Thẩm thị); (5) chương 反伏 của Tăng San Bốc Dịch → phản / phục ngâm cấp quẻ.
