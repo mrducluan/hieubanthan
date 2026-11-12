@@ -1,0 +1,887 @@
+{
+ "source_id": "bo_sung_cung_v1",
+ "school_id": "nam_phai",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Mười hai cung — Ban biên tập bổ sung",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + cổ thư công cộng (nháp AI, chờ thẩm định)"
+ },
+ "trang": {
+  "cung-menh": {
+   "muc": [
+    {
+     "tieu_de": "Cung Mệnh khác cung Thân ở điểm nào?",
+     "doan": "Cung Mệnh là gốc khí chất, còn cung Thân thường được đọc như nửa sau cuộc đời, khi đã trải việc. Cả hai cùng nằm trong lá số và hay đứng chung hoặc kề nhau. Xem Mệnh để biết phản ứng tự nhiên của bạn. Xem Thân để biết điều bạn nghiêng về khi đã có nhiều kinh nghiệm. Hai cung giống nhau thì nét tính cách khá đồng nhất, khác nhau thì thấy rõ sự đổi thay theo tuổi."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Mệnh của một lá số giả định",
+     "doan": "Giả sử cung Mệnh có Thiên Đồng sáng, đi cùng nhóm Cơ Nguyệt Đồng Lương. Người này thường nhẹ nhàng, hay được tìm đến xin lời khuyên, nhưng ngại việc khó. Đọc tiếp cung Thiên Di để xem ra ngoài có chủ động hơn không, rồi xem Tài Bạch và Quan Lộc để biết khí chất ấy dùng vào đâu. Đây là ví dụ minh hoạ, không phải lá số của ai."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Mệnh?",
+     "danh_sach": [
+      "Viết ba tính cách mà người thân hay nói về bạn, rồi gạch điều bạn thấy đúng.",
+      "Nhớ lần gần nhất bạn phản ứng mạnh và ghi điều gì đã khiến bạn như vậy.",
+      "Chọn một thói quen nhỏ bạn muốn đổi trong hai tuần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Mệnh nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Thiên Di",
+      "Mệnh là con người bạn ở nhà, Thiên Di là con người bạn ngoài xã hội; đặt cạnh nhau để thấy mình bên ngoài có khác bên trong không."
+     ],
+     [
+      "Cung tam hợp",
+      "Tài Bạch",
+      "Khí chất đối với cách kiếm tiền; người điềm tĩnh và người nóng tính thường kiếm và giữ tiền theo kiểu khác nhau."
+     ],
+     [
+      "Cung tam hợp",
+      "Quan Lộc",
+      "Khí chất đối với cách làm việc; cho thấy vai trò và môi trường hợp với bạn."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Phụ Mẫu và Huynh Đệ",
+      "Với Phụ Mẫu: Người đi trước nuôi dạy đứng ngay trước khí chất của bạn; xem cách bạn tiếp nhận lời dạy. Với Huynh Đệ: Con người bạn đi liền quan hệ ngang hàng; xem bạn hợp tác với bạn bè, anh em thế nào."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cung Mệnh có phải cung quan trọng nhất không?",
+     "dap": "Nhiều trường phái coi cung Mệnh là gốc của lá số vì nó nói về chính bạn. Tuy vậy các cung khác vẫn quan trọng khi bạn hỏi chuyện tiền, công việc hay gia đình. Đọc một cung đơn lẻ dễ thiếu sót, nên xem cả tam phương tứ chính."
+    },
+    {
+     "hoi": "Cung Mệnh vô chính diệu có kém không?",
+     "dap": "Không. Vô chính diệu nghĩa là cung không có chính tinh nào đóng, người đọc mượn sao ở cung đối diện để xem. Đây là cách đọc khác, thường gợi người dễ thay đổi theo hoàn cảnh, không phải điềm xấu."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Mệnh: khí chất, cách phản ứng tự nhiên",
+    "Đọc cùng Thiên Di (xung chiếu), Tài Bạch, Quan Lộc",
+    "Khác cung Thân: Thân là nửa sau cuộc đời",
+    "Không cho biết giàu nghèo hay tuổi thọ"
+   ]
+  },
+  "cung-huynh-de": {
+   "muc": [
+    {
+     "tieu_de": "Cung Huynh Đệ chỉ xem anh chị em hay cả bạn bè?",
+     "doan": "Cung Huynh Đệ nói về quan hệ ngang hàng, gồm anh chị em ruột, bạn thân và người cộng sự cùng vai. Sách xưa nhấn vào anh em, người đọc hiện nay hay mở rộng sang bạn thân và đồng nghiệp ngang cấp. Điều cung này nói được là cách bạn hợp tác và chia sẻ. Nó không nói được anh chị em bạn gặp chuyện gì."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Huynh Đệ của một lá số giả định",
+     "doan": "Giả sử Huynh Đệ có Thái Dương sáng: người này thường hào phóng với anh em, hay đứng ra lo việc chung. Nếu thêm Hoá Kỵ, việc chung dễ vướng hiểu lầm về tiền nhỏ. Hướng xử lý là nói rõ phần của từng người ngay từ đầu. Đây chỉ là ví dụ giả định."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Huynh Đệ?",
+     "danh_sach": [
+      "Liên lạc với một anh chị em hoặc bạn thân lâu chưa gặp.",
+      "Với việc chung, ghi rõ ai làm gì và chia thế nào.",
+      "Hỏi một người bạn thân điều họ cần ở bạn mà chưa dám nói."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Huynh Đệ nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Nô Bộc",
+      "Huynh Đệ là bạn bè anh em gần gũi lâu năm, Nô Bộc là mạng lưới xã giao; so hai cung để biết bạn thân thiên về nhóm nào."
+     ],
+     [
+      "Cung tam hợp",
+      "Tật Ách",
+      "Quan hệ ngang hàng đối với nhịp nghỉ ngơi; bạn bè có giúp bạn nghỉ đúng lúc hay kéo bạn thức khuya."
+     ],
+     [
+      "Cung tam hợp",
+      "Điền Trạch",
+      "Anh em bạn thân đối với nhà cửa; ai hay ghé nhà, ai cùng chia chỗ ở hoặc tài sản chung."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Mệnh và Phu Thê",
+      "Với Mệnh: Con người bạn đi liền quan hệ ngang hàng; xem bạn hợp tác với bạn bè, anh em thế nào. Với Phu Thê: Bạn thân đứng cạnh người bạn đời; xem bạn bè có ảnh hưởng đến chuyện đôi lứa không."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cung Huynh Đệ có cho biết có bao nhiêu anh chị em không?",
+     "dap": "Cung này không dùng để đếm số anh chị em. Sách xưa có cách đoán, nhưng độ chính xác thấp và dễ gây hiểu sai. Cách dùng hữu ích hơn là xem kiểu quan hệ ngang hàng bạn dễ có."
+    },
+    {
+     "hoi": "Không có anh chị em thì cung Huynh Đệ đọc gì?",
+     "dap": "Đọc sang bạn thân, anh em họ, đồng nghiệp ngang cấp, người cộng sự. Cung này vẫn có ích vì nó nói về kiểu hợp tác, ngoài chuyện quan hệ máu mủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Huynh Đệ: quan hệ ngang hàng, bạn thân, cộng sự",
+    "Đọc cùng Nô Bộc (xung chiếu), Tật Ách, Điền Trạch",
+    "Cho thấy cách bạn hợp tác và chia sẻ",
+    "Không đếm được số anh chị em"
+   ]
+  },
+  "cung-phu-the": {
+   "muc": [
+    {
+     "tieu_de": "Cung Phu Thê xem người yêu, hôn nhân hay cả hai?",
+     "doan": "Cung Phu Thê nói về quan hệ đôi lứa nói chung, gồm người yêu và vợ chồng. Nó cho thấy bạn mong gì ở người bạn đời và dễ va chạm ở điểm nào. Cung không nói người kia tốt hay xấu, cũng không phán số lần kết hôn. Muốn xem hai người hợp nhau thế nào, cần thêm lá số của người kia."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Phu Thê của một lá số giả định",
+     "doan": "Giả sử Phu Thê có Thiên Đồng: người này thường mong một mối quan hệ nhẹ nhàng, ít cãi vã. Điểm cần để ý là ngại nói chuyện khó nên chuyện nhỏ dồn lại. Cách làm tốt là hẹn một ngày trong tuần để hai người nói thẳng với nhau. Nếu cung có thêm Hoá Kỵ, việc nói rõ điều mình mong càng quan trọng. Đây là ví dụ giả định."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Phu Thê?",
+     "danh_sach": [
+      "Nói rõ một điều bạn mong ở người kia, bằng câu 'mình muốn…'.",
+      "Cảm ơn người ấy vì một việc nhỏ hằng ngày.",
+      "Ghi lại điều bạn hay nhường mà thấy ấm ức."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Phu Thê nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Quan Lộc",
+      "Quan hệ đôi lứa đối diện công việc; so để thấy chuyện tình cảm và sự nghiệp đang kéo nhau lại hay đỡ nhau lên."
+     ],
+     [
+      "Cung tam hợp",
+      "Thiên Di",
+      "Đôi lứa đối với việc đi xa; hai người hợp đi cùng nhau hay mỗi người hợp một môi trường."
+     ],
+     [
+      "Cung tam hợp",
+      "Phúc Đức",
+      "Quan hệ đôi lứa đối với đời sống tinh thần; người bạn đời có làm bạn nhẹ lòng không."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Huynh Đệ và Tử Nữ",
+      "Với Huynh Đệ: Bạn thân đứng cạnh người bạn đời; xem bạn bè có ảnh hưởng đến chuyện đôi lứa không. Với Tử Nữ: Đôi lứa dẫn tới con cái; xem hai người cùng nuôi dạy ra sao."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cung Phu Thê có đoán được kết hôn mấy lần không?",
+     "dap": "Không. Cung Phu Thê chỉ cho thấy kiểu quan hệ bạn dễ có và điểm dễ va chạm. Số lần kết hôn phụ thuộc nhiều vào lựa chọn và hoàn cảnh, nên đoán là không đáng tin."
+    },
+    {
+     "hoi": "Chưa có người yêu thì xem cung Phu Thê làm gì?",
+     "dap": "Xem để hiểu mình đang tìm gì ở một mối quan hệ và nên rèn gì. Ví dụ biết mình ngại nói chuyện khó thì tập nói sớm với bạn bè trước."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Phu Thê: kỳ vọng và cách hành xử trong quan hệ đôi lứa",
+    "Đọc cùng Quan Lộc (xung chiếu), Thiên Di, Phúc Đức",
+    "Cho thấy điểm dễ va chạm, không phán tốt xấu",
+    "Không đoán số lần kết hôn"
+   ]
+  },
+  "cung-tu-nu": {
+   "muc": [
+    {
+     "tieu_de": "Cung Tử Nữ có chỉ xem con cái không?",
+     "doan": "Không. Cung Tử Nữ nói về con cái và cả những điều bạn nuôi dưỡng, như học trò, người trẻ bạn dìu dắt hay sản phẩm tự tay làm ra. Với người chưa có con, cung này vẫn có nghĩa. Cung không cho biết số con hay giới tính của con. Chuyện sinh con thuộc về hai người và bác sĩ."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Tử Nữ của một lá số giả định",
+     "doan": "Giả sử Tử Nữ có Thiên Cơ: người này hay muốn con học nhiều, giải thích nhiều, dễ lo xa cho con. Điểm cần để ý là kỳ vọng nhiều khiến con thấy áp lực. Cách làm tốt là hỏi con muốn gì trước khi đưa phương án. Với người không có con, Thiên Cơ ở đây có thể là cách bạn kèm người trẻ trong công việc. Đây là ví dụ giả định."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Tử Nữ?",
+     "danh_sach": [
+      "Dành mười lăm phút nghe con hoặc người trẻ kể một ngày của họ, không khuyên.",
+      "Khen một điều cụ thể con hoặc học trò đã làm tốt.",
+      "Chọn một sản phẩm của chính mình để hoàn thành trong tuần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Tử Nữ nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Điền Trạch",
+      "Con cái, điều bạn nuôi dưỡng đối diện nhà cửa; so để thấy việc chăm con và không gian sống ảnh hưởng nhau thế nào."
+     ],
+     [
+      "Cung tam hợp",
+      "Nô Bộc",
+      "Con cái, học trò đối với mạng lưới quanh bạn; cách bạn dìu dắt người trẻ trong nhóm của mình."
+     ],
+     [
+      "Cung tam hợp",
+      "Phụ Mẫu",
+      "Con cái đối với cha mẹ; cách bạn làm cha mẹ đang theo hay khác cách bạn được nuôi dạy."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Phu Thê và Tài Bạch",
+      "Với Phu Thê: Đôi lứa dẫn tới con cái; xem hai người cùng nuôi dạy ra sao. Với Tài Bạch: Con cái và tiền bạc; xem bạn chi cho con và kiếm tiền vì con ở mức nào."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cung Tử Nữ có cho biết con trai hay con gái không?",
+     "dap": "Không. Sách xưa có cách đoán, nhưng đây là điều nên tránh vì dễ sai và gây áp lực. Cung Tử Nữ phù hợp để hiểu cách bạn làm cha mẹ hoặc người dìu dắt."
+    },
+    {
+     "hoi": "Người chưa kết hôn đọc cung Tử Nữ thế nào?",
+     "dap": "Đọc sang chuyện sáng tạo và dìu dắt: học trò, nhân viên trẻ, dự án riêng. Cung này cho thấy bạn nuôi dưỡng điều mình tạo ra theo cách nào."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Tử Nữ: con cái, học trò, điều bạn nuôi dưỡng",
+    "Đọc cùng Điền Trạch (xung chiếu), Nô Bộc, Phụ Mẫu",
+    "Cho thấy cách bạn làm cha mẹ, người dìu dắt",
+    "Không cho biết số con hay giới tính"
+   ]
+  },
+  "cung-tai-bach": {
+   "muc": [
+    {
+     "tieu_de": "Cung Tài Bạch khác cung Điền Trạch ở điểm nào?",
+     "doan": "Tài Bạch nói về dòng tiền: kiếm, giữ và tiêu. Điền Trạch nói về tài sản cố định: nhà, đất, nơi ở. Hai cung đều liên quan tiền nhưng khác nhịp. Người có Tài Bạch thuận có thể kiếm nhanh mà chưa có tài sản lâu dài, và ngược lại. Hỏi 'tháng này kiếm được không' thì xem Tài Bạch, hỏi 'có nên mua nhà' thì xem Điền Trạch cùng điều kiện thực tế."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Tài Bạch của một lá số giả định",
+     "doan": "Giả sử Tài Bạch có Thiên Phủ: người này giỏi giữ, ít chi bốc đồng, thích có quỹ dự phòng. Nếu thêm Văn Xương, thu nhập hay gắn với chuyên môn và giấy tờ. Chỗ cần để ý là ngại mạo hiểm nên bỏ lỡ cơ hội. Cách làm tốt là dành một khoản nhỏ cố định cho thử nghiệm. Đây là ví dụ giả định, không phải lời khuyên đầu tư."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Tài Bạch?",
+     "danh_sach": [
+      "Ghi lại mọi khoản chi trong bảy ngày và khoanh khoản chi do cảm xúc.",
+      "Đặt một khoản tiết kiệm tự động nhỏ mỗi tháng.",
+      "Hỏi một người có kinh nghiệm về khoản chi lớn bạn đang cân nhắc."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Tài Bạch nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Phúc Đức",
+      "Tiền bạc đối diện đời sống tinh thần; so để thấy kiếm tiền có làm bạn yên lòng hay chỉ thêm bận."
+     ],
+     [
+      "Cung tam hợp",
+      "Quan Lộc",
+      "Công việc đối với thu nhập; nghề bạn đang làm có dẫn tới nguồn tiền hợp mong muốn hay không."
+     ],
+     [
+      "Cung tam hợp",
+      "Mệnh",
+      "Khí chất đối với cách kiếm tiền; người điềm tĩnh và người nóng tính thường kiếm và giữ tiền theo kiểu khác nhau."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Tử Nữ và Tật Ách",
+      "Với Tử Nữ: Con cái và tiền bạc; xem bạn chi cho con và kiếm tiền vì con ở mức nào. Với Tật Ách: Kiếm tiền và nhịp nghỉ; xem làm nhiều có làm bạn hụt sức không."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cung Tài Bạch có đoán được thu nhập bao nhiêu không?",
+     "dap": "Không. Cung này cho thấy cách bạn kiếm và giữ tiền, không cho con số. Thu nhập thật phụ thuộc nghề, thị trường và nỗ lực. Bài này không phải lời khuyên đầu tư."
+    },
+    {
+     "hoi": "Tài Bạch có Hoá Kỵ thì phải làm sao?",
+     "dap": "Hoá Kỵ ở đây nghĩa là tiền vào ra hay vướng, chi bất ngờ hoặc tiền về chậm. Cách thực tế là có quỹ dự phòng, ghi chi tiêu hằng tháng và chờ một đêm trước khoản chi lớn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Tài Bạch: cách kiếm, giữ và tiêu tiền",
+    "Đọc cùng Phúc Đức (xung chiếu), Mệnh, Quan Lộc",
+    "Khác Điền Trạch: Tài Bạch là dòng tiền, Điền Trạch là tài sản",
+    "Không cho con số thu nhập, không phải lời khuyên đầu tư"
+   ]
+  },
+  "cung-tat-ach": {
+   "muc": [
+    {
+     "tieu_de": "Cung Tật Ách có cho biết mắc bệnh gì không?",
+     "doan": "Không. Cung Tật Ách chỉ cho thấy nhịp thân tâm và nơi bạn dễ tích căng thẳng. Cung này không nêu tên bệnh và không báo trước chuyện sẽ xảy ra. Sức khoẻ thật cần bác sĩ khám và xét nghiệm, bài này không thay lời bác sĩ. Hãy dùng cung này như lời nhắc ngủ đủ, nghỉ đúng lúc và đi khám định kỳ."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Tật Ách của một lá số giả định",
+     "doan": "Giả sử Tật Ách có Thái Dương: sách xưa gắn Thái Dương với mắt và đầu, nên người này nên chú ý nghỉ mắt, ngủ đủ và khám mắt định kỳ. Đây là lời nhắc phòng ngừa, không phải dự báo, và không thay lời bác sĩ. Cách làm tốt là đặt lịch nghỉ mắt mỗi ngày và hẹn khám theo lịch."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Tật Ách?",
+     "danh_sach": [
+      "Ngủ trước 23 giờ ba đêm liên tiếp.",
+      "Đặt lịch khám tổng quát nếu đã hơn một năm chưa khám.",
+      "Chọn một cách giải toả căng thẳng, như đi bộ hai mươi phút."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Tật Ách nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Phụ Mẫu",
+      "Nhịp nghỉ ngơi đối diện nếp nhà đầu đời; so để thấy thói quen sinh hoạt hiện nay bắt nguồn từ cách bạn được nuôi dạy."
+     ],
+     [
+      "Cung tam hợp",
+      "Điền Trạch",
+      "Nhịp sinh hoạt đối với nơi ở; không gian nhà có giúp bạn nghỉ ngơi và hồi sức không."
+     ],
+     [
+      "Cung tam hợp",
+      "Huynh Đệ",
+      "Quan hệ ngang hàng đối với nhịp nghỉ ngơi; bạn bè có giúp bạn nghỉ đúng lúc hay kéo bạn thức khuya."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Tài Bạch và Thiên Di",
+      "Với Tài Bạch: Kiếm tiền và nhịp nghỉ; xem làm nhiều có làm bạn hụt sức không. Với Thiên Di: Nhịp nghỉ và việc đi lại; xem đi xa có làm bạn mệt hơn bình thường không."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cung Tật Ách có phán được năm ốm không?",
+     "dap": "Không. Năm nên chú ý sức khoẻ chỉ là lời nhắc phòng ngừa, như sắp xếp đi khám đầu năm. Cung không dự báo chuyện đau ốm và không thay lời bác sĩ."
+    },
+    {
+     "hoi": "Cung Tật Ách có sát tinh thì phải làm gì?",
+     "dap": "Không hoang mang. Hãy xem đó như lời nhắc giữ nhịp sinh hoạt đều, nghỉ đúng lúc và đi khám định kỳ. Nếu có triệu chứng lạ, hãy đi khám ngay thay vì chờ xem lá số."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Tật Ách: nhịp thân tâm, nơi dễ tích căng thẳng",
+    "Đọc cùng Phụ Mẫu (xung chiếu), Huynh Đệ, Điền Trạch",
+    "Là lời nhắc nghỉ đúng lúc, đi khám định kỳ",
+    "Không nêu tên bệnh, không thay lời bác sĩ"
+   ]
+  },
+  "cung-thien-di": {
+   "muc": [
+    {
+     "tieu_de": "Cung Thiên Di xem đi xa hay xem ngoài xã hội?",
+     "doan": "Cả hai. Thiên Di nói về bạn khi ra ngoài: đi xa, đổi chỗ ở, gặp người lạ và hình ảnh người khác thấy ở bạn. Cung này nằm đối diện cung Mệnh nên được coi là mặt ngoài của khí chất. Nó không cho biết chuyến đi cụ thể nào an toàn hay nguy hiểm."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Thiên Di của một lá số giả định",
+     "doan": "Giả sử Thiên Di có Thiên Cơ: người này ra ngoài thường quan sát trước, nhanh nhận ra cơ hội, hợp môi trường đổi mới. Nếu thêm Thiên Mã, nét đi lại, thay đổi chỗ làm rõ hơn. Cần để ý là đổi quá nhiều nên khó tích luỹ. Cách làm tốt là chọn một nơi ở đủ lâu cho thành quả chín. Đây là ví dụ giả định."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Thiên Di?",
+     "danh_sach": [
+      "Đến một nơi mới trong thành phố và ghi lại cảm nhận.",
+      "Hỏi ba người bạn họ thấy bạn khác nhau thế nào ở nhà và ngoài xã hội.",
+      "Làm một việc bạn ngại ở môi trường lạ, như phát biểu trong nhóm mới."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Thiên Di nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Mệnh",
+      "Mệnh là con người bạn ở nhà, Thiên Di là con người bạn ngoài xã hội; đặt cạnh nhau để thấy mình bên ngoài có khác bên trong không."
+     ],
+     [
+      "Cung tam hợp",
+      "Phúc Đức",
+      "Đi ra ngoài đối với bình an trong lòng; môi trường mới giúp bạn thư thả hay làm bạn xáo trộn."
+     ],
+     [
+      "Cung tam hợp",
+      "Phu Thê",
+      "Đôi lứa đối với việc đi xa; hai người hợp đi cùng nhau hay mỗi người hợp một môi trường."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Tật Ách và Nô Bộc",
+      "Với Tật Ách: Nhịp nghỉ và việc đi lại; xem đi xa có làm bạn mệt hơn bình thường không. Với Nô Bộc: Ra ngoài và bạn bè xã giao; xem môi trường mới thường đưa bạn tới những ai."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cung Thiên Di có cho biết nên đi nước ngoài không?",
+     "dap": "Cung này chỉ cho thấy bạn thích nghi với môi trường mới thế nào và cơ hội khi dịch chuyển. Quyết định đi hay ở còn phụ thuộc điều kiện thực tế, gia đình và công việc, nên không thể đọc từ một cung."
+    },
+    {
+     "hoi": "Thiên Di kém thuận có nghĩa là không nên ra ngoài không?",
+     "dap": "Không. Nó thường gợi bạn nên chuẩn bị kỹ khi vào môi trường mới và giữ thói quen an toàn. Không có lệnh cấm đi đâu cả."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Thiên Di: bạn khi ra ngoài, đi xa, gặp người lạ",
+    "Đối diện cung Mệnh: mặt ngoài của khí chất",
+    "Đọc cùng Phúc Đức, Phu Thê (tam hợp)",
+    "Không chọn chuyến đi, không phán an toàn hay nguy hiểm"
+   ]
+  },
+  "cung-no-boc": {
+   "muc": [
+    {
+     "tieu_de": "Cung Nô Bộc có phải chỉ nói về người giúp việc không?",
+     "doan": "Không. Tên cũ là Nô Bộc, nhưng người đọc hiện nay hiểu rộng hơn: bạn bè xã giao, đồng nghiệp, cấp dưới, khách hàng và mạng lưới quanh bạn. Cung này cho thấy kiểu người bạn dễ thu hút và cách bạn giữ ranh giới. Nó không kết luận ai đó phản bội hay trung thành."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Nô Bộc của một lá số giả định",
+     "doan": "Giả sử Nô Bộc có Tham Lang: mạng lưới rộng, nhiều bạn mới nhưng nhiều quan hệ chỉ ở mức xã giao. Người này hợp nghề cần kết nối. Cần để ý là khó phân biệt người giúp thật với người chỉ gần khi cần. Cách làm tốt là chọn ba người bạn đáng tin để đầu tư thời gian. Đây là ví dụ giả định."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Nô Bộc?",
+     "danh_sach": [
+      "Liệt kê năm người bạn tin nhất và hẹn gặp một người.",
+      "Xem một mối quan hệ làm bạn mệt và quyết định giảm tần suất.",
+      "Nhờ một đồng nghiệp góp ý về cách bạn làm việc chung."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Nô Bộc nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Huynh Đệ",
+      "Huynh Đệ là bạn bè anh em gần gũi lâu năm, Nô Bộc là mạng lưới xã giao; so hai cung để biết bạn thân thiên về nhóm nào."
+     ],
+     [
+      "Cung tam hợp",
+      "Phụ Mẫu",
+      "Mạng lưới đối với người đi trước; quanh bạn có người lớn tuổi hay cấp trên dẫn dắt không."
+     ],
+     [
+      "Cung tam hợp",
+      "Tử Nữ",
+      "Con cái, học trò đối với mạng lưới quanh bạn; cách bạn dìu dắt người trẻ trong nhóm của mình."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Thiên Di và Quan Lộc",
+      "Với Thiên Di: Ra ngoài và bạn bè xã giao; xem môi trường mới thường đưa bạn tới những ai. Với Quan Lộc: Mạng lưới và công việc; xem người quanh bạn có giúp việc làm trơn tru hơn không."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Nô Bộc có sát tinh thì bạn bè có phản bội không?",
+     "dap": "Không thể kết luận như vậy. Sát tinh ở đây thường gợi việc cần giữ ranh giới rõ với người xung quanh và có giấy tờ khi làm ăn chung. Người thế nào còn tuỳ cách bạn chọn và đối xử."
+    },
+    {
+     "hoi": "Cung Nô Bộc dùng để chọn nhân viên được không?",
+     "dap": "Không nên. Lá số không dùng để chọn hay loại một người. Cung này chỉ giúp bạn hiểu cách mình làm việc với người khác."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Nô Bộc: bạn xã giao, đồng nghiệp, cấp dưới, khách",
+    "Đọc cùng Huynh Đệ (xung chiếu), Tử Nữ, Phụ Mẫu",
+    "Cho thấy cách bạn giữ ranh giới trong quan hệ",
+    "Không kết luận ai trung thành hay phản bội"
+   ]
+  },
+  "cung-quan-loc": {
+   "muc": [
+    {
+     "tieu_de": "Cung Quan Lộc khác cung Tài Bạch ở điểm nào?",
+     "doan": "Quan Lộc nói về cách bạn làm việc và vai trò hợp, còn Tài Bạch nói về cách tiền đến. Hai cung cùng tam hợp với Mệnh nên thường được đọc chung. Công việc hợp chưa chắc thu nhập cao, và ngược lại. Hỏi 'mình hợp làm nghề gì' thì xem Quan Lộc, hỏi 'mình kiếm tiền kiểu nào' thì xem Tài Bạch."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Quan Lộc của một lá số giả định",
+     "doan": "Giả sử Quan Lộc có Vũ Khúc: người này làm việc có kỷ luật, hợp tài chính, kinh doanh, quản lý vận hành. Nếu thêm Hoá Quyền, vai trò quản lý rõ hơn. Cần để ý là khô khan khi cần mềm mỏng với đồng nghiệp. Cách làm tốt là chủ động ghi nhận người cùng làm. Đây là ví dụ giả định, không ấn định một nghề duy nhất."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Quan Lộc?",
+     "danh_sach": [
+      "Ghi lại ba việc trong tuần khiến bạn quên giờ giấc.",
+      "Hỏi sếp hoặc đồng nghiệp một điểm bạn có thể làm tốt hơn.",
+      "Dành hai giờ học một kỹ năng liên quan đến nghề."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Quan Lộc nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Phu Thê",
+      "Quan hệ đôi lứa đối diện công việc; so để thấy chuyện tình cảm và sự nghiệp đang kéo nhau lại hay đỡ nhau lên."
+     ],
+     [
+      "Cung tam hợp",
+      "Mệnh",
+      "Khí chất đối với cách làm việc; cho thấy vai trò và môi trường hợp với bạn."
+     ],
+     [
+      "Cung tam hợp",
+      "Tài Bạch",
+      "Công việc đối với thu nhập; nghề bạn đang làm có dẫn tới nguồn tiền hợp mong muốn hay không."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Nô Bộc và Điền Trạch",
+      "Với Nô Bộc: Mạng lưới và công việc; xem người quanh bạn có giúp việc làm trơn tru hơn không. Với Điền Trạch: Công việc và nhà cửa; xem nơi làm việc và nơi ở có ăn khớp với nhau không."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cung Quan Lộc có chỉ ra nghề duy nhất cho mình không?",
+     "dap": "Không. Cung này chỉ ra phong cách làm việc và nhóm nghề hợp khí chất. Nhiều nghề khác nhau có thể cùng hợp, và điều kiện thực tế vẫn rất quan trọng."
+    },
+    {
+     "hoi": "Quan Lộc có hứa thăng chức không?",
+     "dap": "Không. Cung này không hứa thăng chức. Năm Quan Lộc thuận chỉ gợi là thời điểm hợp để chủ động nhận việc mới hay xin vai trò lớn hơn."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Quan Lộc: cách làm việc, vai trò và môi trường hợp",
+    "Đọc cùng Phu Thê (xung chiếu), Mệnh, Tài Bạch",
+    "Khác Tài Bạch: Quan Lộc là việc, Tài Bạch là tiền",
+    "Không ấn định một nghề duy nhất, không hứa thăng chức"
+   ]
+  },
+  "cung-dien-trach": {
+   "muc": [
+    {
+     "tieu_de": "Cung Điền Trạch có xem được năm mua nhà không?",
+     "doan": "Không. Điền Trạch cho thấy nhu cầu về nơi an cư và cách bạn tích luỹ tài sản cố định. Cung này không chọn giúp năm mua nhà hay căn nhà cụ thể, vì còn tuỳ tài chính, pháp lý và thị trường. Với quyết định mua hay bán, nên hỏi chuyên gia và xem giấy tờ kỹ."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Điền Trạch của một lá số giả định",
+     "doan": "Giả sử Điền Trạch có Thiên Phủ: người này coi nhà là nơi an toàn, thích ổn định và hay tích góp đồ đạc. Nếu thêm Hoá Lộc, chuyện nhà đất dễ có cơ hội. Cần để ý là bám nơi cũ quá lâu. Cách làm tốt là xem lại nhà định kỳ, dọn bớt đồ không dùng. Đây là ví dụ giả định."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Điền Trạch?",
+     "danh_sach": [
+      "Dọn một ngăn tủ hoặc góc nhà bạn hay tránh.",
+      "Rà giấy tờ nhà và hợp đồng, lưu vào một chỗ.",
+      "Hỏi người ở cùng một điều họ muốn đổi trong không gian chung."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Điền Trạch nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Tử Nữ",
+      "Con cái, điều bạn nuôi dưỡng đối diện nhà cửa; so để thấy việc chăm con và không gian sống ảnh hưởng nhau thế nào."
+     ],
+     [
+      "Cung tam hợp",
+      "Huynh Đệ",
+      "Anh em bạn thân đối với nhà cửa; ai hay ghé nhà, ai cùng chia chỗ ở hoặc tài sản chung."
+     ],
+     [
+      "Cung tam hợp",
+      "Tật Ách",
+      "Nhịp sinh hoạt đối với nơi ở; không gian nhà có giúp bạn nghỉ ngơi và hồi sức không."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Quan Lộc và Phúc Đức",
+      "Với Quan Lộc: Công việc và nhà cửa; xem nơi làm việc và nơi ở có ăn khớp với nhau không. Với Phúc Đức: Nhà cửa và đời sống tinh thần; xem không gian ở có làm bạn yên lòng không."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Điền Trạch khác phong thuỷ nhà ở thế nào?",
+     "dap": "Điền Trạch trong Tử vi nói về nhu cầu và cách bạn giữ tài sản cố định. Phong thuỷ nói về cách bố trí không gian và hướng nhà. Hai việc khác nhau, có thể dùng cùng nhau nhưng không thay thế nhau."
+    },
+    {
+     "hoi": "Điền Trạch không có chính tinh thì đọc thế nào?",
+     "dap": "Cung không có chính tinh thì mượn sao ở cung đối diện để đọc. Đây là cách đọc thông thường, không phải điềm xấu."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Điền Trạch: nhà cửa, nơi ở, tài sản cố định",
+    "Đọc cùng Tử Nữ (xung chiếu), Huynh Đệ, Tật Ách",
+    "Khác Tài Bạch: Điền Trạch là tài sản, không phải dòng tiền",
+    "Không chọn năm mua nhà, cần hỏi chuyên gia"
+   ]
+  },
+  "cung-phuc-duc": {
+   "muc": [
+    {
+     "tieu_de": "Cung Phúc Đức có phải phúc dày mỏng của dòng họ không?",
+     "doan": "Một phần. Cung Phúc Đức nói về nền tinh thần, niềm vui sâu và cách bạn tìm bình an, đồng thời Tử vi Việt nhắc đến phúc ấm của dòng họ. Cung này không đo phúc dày mỏng bằng con số. Với đời thường, nên đọc nó như một câu hỏi: điều gì nuôi tinh thần của bạn."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Phúc Đức của một lá số giả định",
+     "doan": "Giả sử Phúc Đức có Thái Âm: người này bình an khi có không gian riêng, âm nhạc, thiên nhiên và những việc nhẹ nhàng. Cần để ý là giữ cảm xúc trong lòng quá lâu. Cách làm tốt là dành thời gian mỗi tuần cho một việc nuôi tinh thần và chia sẻ với người tin cậy. Đây là ví dụ giả định."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Phúc Đức?",
+     "danh_sach": [
+      "Chọn một việc làm bạn nhẹ lòng và làm nó trong tuần.",
+      "Ngồi yên mười phút mỗi ngày, không điện thoại.",
+      "Viết ba điều bạn biết ơn, trong đó một điều về gia đình gốc."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Phúc Đức nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Tài Bạch",
+      "Tiền bạc đối diện đời sống tinh thần; so để thấy kiếm tiền có làm bạn yên lòng hay chỉ thêm bận."
+     ],
+     [
+      "Cung tam hợp",
+      "Phu Thê",
+      "Quan hệ đôi lứa đối với đời sống tinh thần; người bạn đời có làm bạn nhẹ lòng không."
+     ],
+     [
+      "Cung tam hợp",
+      "Thiên Di",
+      "Đi ra ngoài đối với bình an trong lòng; môi trường mới giúp bạn thư thả hay làm bạn xáo trộn."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Điền Trạch và Phụ Mẫu",
+      "Với Điền Trạch: Nhà cửa và đời sống tinh thần; xem không gian ở có làm bạn yên lòng không. Với Phụ Mẫu: Bình an trong lòng và gia đình gốc; xem nếp nhà đầu đời nuôi nội tâm bạn ra sao."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Phúc Đức có thể cải thiện bằng cách nào?",
+     "dap": "Không có phép màu. Cách thực tế là nuôi những thói quen tinh thần lành mạnh: ngủ đủ, nói lời tử tế, làm việc có ý nghĩa và giữ liên hệ với người thân. Nhiều gia đình còn giữ nếp nhà riêng, đó là lựa chọn của mỗi nhà."
+    },
+    {
+     "hoi": "Phúc Đức có liên quan đến tâm linh không?",
+     "dap": "Có phần liên quan, vì sách xưa gắn cung này với phúc ấm. Với người đọc hôm nay, điều đáng chú ý là chuyện nội tâm: cách bạn tìm bình an và giữ giá trị sống."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Phúc Đức: nền tinh thần, niềm vui sâu, phúc ấm",
+    "Đọc cùng Tài Bạch (xung chiếu), Phu Thê, Thiên Di",
+    "Hỏi: điều gì nuôi tinh thần của bạn",
+    "Không đo phúc dày mỏng bằng con số"
+   ]
+  },
+  "cung-phu-mau": {
+   "muc": [
+    {
+     "tieu_de": "Cung Phụ Mẫu có nói về sức khoẻ cha mẹ không?",
+     "doan": "Không. Cung Phụ Mẫu nói về quan hệ với cha mẹ, người đi trước và cấp trên, cùng giấy tờ và học vấn nền. Cung không cho biết sức khoẻ hay tuổi thọ của cha mẹ. Sức khoẻ người thân cần bác sĩ, bài này không thay lời bác sĩ. Hãy dùng cung này để hiểu cách bạn đón nhận sự dạy dỗ và lời của người có thẩm quyền."
+    },
+    {
+     "tieu_de": "Ví dụ đọc cung Phụ Mẫu của một lá số giả định",
+     "doan": "Giả sử Phụ Mẫu có Thiên Lương: cha mẹ hoặc người thầy đầu đời thường có nét che chở, dạy đạo lý, nhiều lời khuyên. Người này học được nhiều từ người đi trước nhưng đôi khi thấy bị quản. Cách làm tốt là nói rõ điều mình trân trọng, rồi nói điều muốn tự quyết. Đây là ví dụ giả định."
+    },
+    {
+     "tieu_de": "Tuần này làm gì với chủ đề cung Phụ Mẫu?",
+     "danh_sach": [
+      "Gọi hoặc nhắn một người đi trước từng dạy bạn điều gì đó.",
+      "Viết điều bạn muốn giữ và điều muốn làm khác so với nếp nhà gốc.",
+      "Rà giấy tờ quan trọng như bằng cấp, hợp đồng, rồi lưu bản sao."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cung Phụ Mẫu nhìn cùng cung nào — đọc nhanh",
+    "chu_thich": "Tam phương tứ chính gồm cung chính, cung đối diện (xung chiếu) và hai cung tam hợp; hai cung kề (giáp) cho thêm sắc thái. Cột cuối là điều có thể đọc khi đặt hai cung cạnh nhau.",
+    "cot": [
+     "Quan hệ",
+     "Cung",
+     "Đọc cùng để biết"
+    ],
+    "dong": [
+     [
+      "Cung đối diện (xung chiếu)",
+      "Tật Ách",
+      "Nhịp nghỉ ngơi đối diện nếp nhà đầu đời; so để thấy thói quen sinh hoạt hiện nay bắt nguồn từ cách bạn được nuôi dạy."
+     ],
+     [
+      "Cung tam hợp",
+      "Tử Nữ",
+      "Con cái đối với cha mẹ; cách bạn làm cha mẹ đang theo hay khác cách bạn được nuôi dạy."
+     ],
+     [
+      "Cung tam hợp",
+      "Nô Bộc",
+      "Mạng lưới đối với người đi trước; quanh bạn có người lớn tuổi hay cấp trên dẫn dắt không."
+     ],
+     [
+      "Hai cung kề (giáp)",
+      "Phúc Đức và Mệnh",
+      "Với Phúc Đức: Bình an trong lòng và gia đình gốc; xem nếp nhà đầu đời nuôi nội tâm bạn ra sao. Với Mệnh: Người đi trước nuôi dạy đứng ngay trước khí chất của bạn; xem cách bạn tiếp nhận lời dạy."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cung Phụ Mẫu còn nói về giấy tờ, bằng cấp à?",
+     "dap": "Đúng, theo cách đọc phổ biến. Cung này gắn với văn bản, chứng chỉ, hợp đồng và sự học nền. Điều này hợp lý vì đó đều là thứ người đi trước để lại hoặc cấp trên xác nhận."
+    },
+    {
+     "hoi": "Cung Phụ Mẫu có chỉ cấp trên của mình không?",
+     "dap": "Có, theo nghĩa người có thẩm quyền với bạn. Cung này cho thấy bạn đón nhận chỉ dẫn từ người trên thế nào. Nó không cho biết người đó tốt hay xấu."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "nghia": "Sách chia lá số thành mười hai cung, mỗi cung ứng với một lĩnh vực đời sống, và dặn xem cung chính cùng cung đối diện và hai cung tam hợp."
+    }
+   ],
+   "y_chinh": [
+    "Cung Phụ Mẫu: cha mẹ, người đi trước, cấp trên, giấy tờ",
+    "Đọc cùng Tật Ách (xung chiếu), Tử Nữ, Nô Bộc",
+    "Cho thấy cách bạn đón nhận sự dạy dỗ",
+    "Không cho biết sức khoẻ hay tuổi thọ của cha mẹ"
+   ]
+  }
+ }
+}

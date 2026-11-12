@@ -235,7 +235,8 @@ export async function TrangKienThucView(params: Thamso) {
         <figure className="mt-10">
           {/* eslint-disable-next-line @next/next/no-img-element -- ảnh do chính site vẽ, đã đúng cỡ */}
           <img src={anhYChinh(t)} width={1080} height={1350} loading="lazy" decoding="async"
-            alt={`Tóm tắt: ${t.tieu_de} — ${t.y_chinh.join("; ")}`} className="mx-auto h-auto w-full max-w-sm rounded-2xl border border-line/60" />
+            // KB-TT1: alt ngắn, mô tả đúng ảnh (tên trang + hai ý đầu) — bản đầy đủ các ý nằm trong chính nội dung trang.
+            alt={`Infographic ${t.tieu_de.split(" — ")[0]}: ${t.y_chinh.slice(0, 2).join("; ")}`} className="mx-auto h-auto w-full max-w-sm rounded-2xl border border-line/60" />
           <figcaption className="mt-2 text-center text-xs text-fg-faint">{t.tac_gia ? "Ban biên tập tóm tắt · " : ""}Ảnh tóm tắt có mã QR về trang này ·{" "}
             <a href={anhYChinh(t)} download className="text-gold underline">Tải ảnh</a></figcaption>
         </figure>

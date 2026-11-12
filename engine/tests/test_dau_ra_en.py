@@ -64,12 +64,13 @@ KHUNG_BO_QUA = {
     "tarot.doc_bai",     # QTE-3: bản phủ tắt `truong_phai` / `viec_lv` (null) → ít hộp hơn; khôi phục ở GĐ 7
 }
 # Khung lệch CHƯA giải thích — phải sửa ở giai đoạn ghi kèm (ngôn ngữ không được đổi dữ kiện).
-KHUNG_CHUA_XONG: dict[str, int] = {
-    "kb.trang.la_bai": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7, "goi_y_cheo": 7,
-    # KT-TT (2026-11-12): lớp tri thức mới CHỈ có bản Việt — bản dịch Ngô Tất Tố (Tiểu tượng, Trình Di, Chu Hy), loại tượng
-    # tám quái, nghĩa sao nhỏ. Bản Anh chưa có các trường này; chuyển thể cùng giai đoạn của mảng (Tử vi GĐ 4, Kinh Dịch GĐ 6).
-    "tuvi.an_sao": 4, "tuvi.la_so_mau": 4, "kb.trang.que": 6, "kinhdich.hoi": 6,
-}
+# KB-TT1: ý chính cho ảnh tóm tắt (`y_chinh`, rút từ chữ Việt của trang) + bảng năm âm lịch ở mệnh theo năm chỉ có bản Việt —
+# bản Anh làm ở giai đoạn ghi kèm (ảnh `/og/y-chinh` chỉ vẽ chữ Việt).
+# KT-TT (2026-11-12): lớp tri thức mới CHỈ có bản Việt — bản dịch Ngô Tất Tố (Tiểu tượng, Trình Di, Chu Hy), loại tượng
+# tám quái, nghĩa sao nhỏ. Bản Anh chưa có các trường này; chuyển thể cùng giai đoạn của mảng (Tử vi GĐ 4, Kinh Dịch GĐ 6).
+KHUNG_CHUA_XONG: dict[str, int] = {"kb.trang.la_bai": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7, "goi_y_cheo": 7,
+                                   "kb.trang.bo_vi": 7, "kb.trang.menh_nam": 7, "kb.trang.sao_cung": 7,
+                                   "tuvi.an_sao": 4, "tuvi.la_so_mau": 4, "kb.trang.que": 6, "kinhdich.hoi": 6}
 
 
 @pytest.fixture(scope="module")

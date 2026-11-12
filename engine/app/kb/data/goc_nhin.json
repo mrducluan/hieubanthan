@@ -1,0 +1,426 @@
+{
+ "_mo_ta": "GN-2: ô TRỐNG để chuyên gia tự viết 'Góc nhìn chuyên gia' (2–4 câu kinh nghiệm THẬT, 60–800 ký tự). Điền noi_dung + ngay (YYYY-MM-DD) ở /quan-tri → Kho tri thức. Để trống = web không hiện gì. goi_y chỉ là câu hỏi gợi ý, không hiện công khai. Hệ thống chỉ sửa chính tả, không viết thay, không thêm ý (GN-1). Luật nội dung: tham_dinh.kiem_goc_nhin.",
+ "nguoi": "duc-luan",
+ "trang": {
+  "cung/cung-dien-trach": {
+   "trang": "Cung Điền Trạch",
+   "goi_y": [
+    "Khi xem Cung Điền Trạch cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Điền Trạch ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Điền Trạch?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-huynh-de": {
+   "trang": "Cung Huynh Đệ",
+   "goi_y": [
+    "Khi xem Cung Huynh Đệ cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Huynh Đệ ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Huynh Đệ?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-menh": {
+   "trang": "Cung Mệnh",
+   "goi_y": [
+    "Khi xem Cung Mệnh cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Mệnh ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Mệnh?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-no-boc": {
+   "trang": "Cung Nô Bộc",
+   "goi_y": [
+    "Khi xem Cung Nô Bộc cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Nô Bộc ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Nô Bộc?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-phu-mau": {
+   "trang": "Cung Phụ Mẫu",
+   "goi_y": [
+    "Khi xem Cung Phụ Mẫu cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Phụ Mẫu ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Phụ Mẫu?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-phu-the": {
+   "trang": "Cung Phu Thê",
+   "goi_y": [
+    "Khi xem Cung Phu Thê cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Phu Thê ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Phu Thê?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-phuc-duc": {
+   "trang": "Cung Phúc Đức",
+   "goi_y": [
+    "Khi xem Cung Phúc Đức cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Phúc Đức ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Phúc Đức?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-quan-loc": {
+   "trang": "Cung Quan Lộc",
+   "goi_y": [
+    "Khi xem Cung Quan Lộc cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Quan Lộc ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Quan Lộc?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-tai-bach": {
+   "trang": "Cung Tài Bạch",
+   "goi_y": [
+    "Khi xem Cung Tài Bạch cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Tài Bạch ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Tài Bạch?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-tat-ach": {
+   "trang": "Cung Tật Ách",
+   "goi_y": [
+    "Khi xem Cung Tật Ách cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Tật Ách ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Tật Ách?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-thien-di": {
+   "trang": "Cung Thiên Di",
+   "goi_y": [
+    "Khi xem Cung Thiên Di cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Thiên Di ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Thiên Di?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "cung/cung-tu-nu": {
+   "trang": "Cung Tử Nữ",
+   "goi_y": [
+    "Khi xem Cung Tử Nữ cho khách, bạn thường nhìn vào điều gì đầu tiên?",
+    "Người ta hay hiểu nhầm Cung Tử Nữ ở điểm nào, và bạn giải thích ra sao?",
+    "Một lời nhắc đời thường bạn hay đưa cho người hỏi về chủ đề của Cung Tử Nữ?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "dau_hieu/cau-thang-doi-dien-cua-chinh": {
+   "trang": "Cầu thang đối diện cửa chính",
+   "goi_y": [
+    "Bạn đã gặp tình huống này ở nhà thật chưa? Người ở đó xử lý thế nào và thấy khác gì sau đó?",
+    "Điều gì người ta hay làm sai khi nghe nói về dấu hiệu này?",
+    "Một cách xử lý rẻ, làm được ngay mà bạn tin?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "dau_hieu/nha-o-nga-ba-nga-tu": {
+   "trang": "Nhà ở ngã ba, ngã tư",
+   "goi_y": [
+    "Bạn đã gặp tình huống này ở nhà thật chưa? Người ở đó xử lý thế nào và thấy khác gì sau đó?",
+    "Điều gì người ta hay làm sai khi nghe nói về dấu hiệu này?",
+    "Một cách xử lý rẻ, làm được ngay mà bạn tin?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "dau_hieu/nha-ve-sinh-o-giua-nha": {
+   "trang": "Nhà vệ sinh ở giữa nhà",
+   "goi_y": [
+    "Bạn đã gặp tình huống này ở nhà thật chưa? Người ở đó xử lý thế nào và thấy khác gì sau đó?",
+    "Điều gì người ta hay làm sai khi nghe nói về dấu hiệu này?",
+    "Một cách xử lý rẻ, làm được ngay mà bạn tin?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "menh_nam/sinh-nam-2019-menh-gi": {
+   "trang": "Sinh năm 2019 mệnh gì",
+   "goi_y": [
+    "Người sinh năm này bạn gặp thường có nét chung nào, hay chỉ là chuyện từng người? (nói thật điều bạn thấy)",
+    "Người ta hay hỏi bạn điều gì về mệnh và năm sinh này?",
+    "Một lời nhắc bạn dành cho người sinh năm này khi chọn việc lớn?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-cu-mon": {
+   "trang": "Sao Cự Môn",
+   "goi_y": [
+    "Người có Sao Cự Môn bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Cự Môn mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Cự Môn, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-liem-trinh": {
+   "trang": "Sao Liêm Trinh",
+   "goi_y": [
+    "Người có Sao Liêm Trinh bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Liêm Trinh mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Liêm Trinh, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-pha-quan": {
+   "trang": "Sao Phá Quân",
+   "goi_y": [
+    "Người có Sao Phá Quân bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Phá Quân mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Phá Quân, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-thai-am": {
+   "trang": "Sao Thái Âm",
+   "goi_y": [
+    "Người có Sao Thái Âm bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Thái Âm mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Thái Âm, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-thai-duong": {
+   "trang": "Sao Thái Dương",
+   "goi_y": [
+    "Người có Sao Thái Dương bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Thái Dương mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Thái Dương, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-tham-lang": {
+   "trang": "Sao Tham Lang",
+   "goi_y": [
+    "Người có Sao Tham Lang bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Tham Lang mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Tham Lang, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-that-sat": {
+   "trang": "Sao Thất Sát",
+   "goi_y": [
+    "Người có Sao Thất Sát bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Thất Sát mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Thất Sát, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-thien-co": {
+   "trang": "Sao Thiên Cơ",
+   "goi_y": [
+    "Người có Sao Thiên Cơ bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Thiên Cơ mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Thiên Cơ, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-thien-dong": {
+   "trang": "Sao Thiên Đồng",
+   "goi_y": [
+    "Người có Sao Thiên Đồng bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Thiên Đồng mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Thiên Đồng, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-thien-luong": {
+   "trang": "Sao Thiên Lương",
+   "goi_y": [
+    "Người có Sao Thiên Lương bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Thiên Lương mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Thiên Lương, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-thien-phu": {
+   "trang": "Sao Thiên Phủ",
+   "goi_y": [
+    "Người có Sao Thiên Phủ bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Thiên Phủ mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Thiên Phủ, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-thien-tuong": {
+   "trang": "Sao Thiên Tướng",
+   "goi_y": [
+    "Người có Sao Thiên Tướng bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Thiên Tướng mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Thiên Tướng, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-tu-vi": {
+   "trang": "Sao Tử Vi",
+   "goi_y": [
+    "Người có Sao Tử Vi bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Tử Vi mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Tử Vi, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "sao/sao-vu-khuc": {
+   "trang": "Sao Vũ Khúc",
+   "goi_y": [
+    "Người có Sao Vũ Khúc bạn từng gặp ngoài đời mạnh ở đâu, hay vấp ở đâu? (một ví dụ ẩn danh, không nêu tên người)",
+    "Điều sách nói về Sao Vũ Khúc mà thực tế bạn thấy khác hoặc cần nói thêm là gì?",
+    "Lời khuyên ngắn bạn hay dành cho người có Sao Vũ Khúc, để họ dùng tốt nét này?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-1": {
+   "trang": "Số 1",
+   "goi_y": [
+    "Người mang Số 1 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 1 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 1 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-11": {
+   "trang": "Số 11",
+   "goi_y": [
+    "Người mang Số 11 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 11 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 11 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-2": {
+   "trang": "Số 2",
+   "goi_y": [
+    "Người mang Số 2 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 2 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 2 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-22": {
+   "trang": "Số 22",
+   "goi_y": [
+    "Người mang Số 22 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 22 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 22 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-3": {
+   "trang": "Số 3",
+   "goi_y": [
+    "Người mang Số 3 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 3 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 3 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-33": {
+   "trang": "Số 33",
+   "goi_y": [
+    "Người mang Số 33 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 33 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 33 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-4": {
+   "trang": "Số 4",
+   "goi_y": [
+    "Người mang Số 4 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 4 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 4 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-5": {
+   "trang": "Số 5",
+   "goi_y": [
+    "Người mang Số 5 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 5 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 5 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-6": {
+   "trang": "Số 6",
+   "goi_y": [
+    "Người mang Số 6 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 6 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 6 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-7": {
+   "trang": "Số 7",
+   "goi_y": [
+    "Người mang Số 7 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 7 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 7 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-8": {
+   "trang": "Số 8",
+   "goi_y": [
+    "Người mang Số 8 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 8 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 8 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  },
+  "so/so-9": {
+   "trang": "Số 9",
+   "goi_y": [
+    "Người mang Số 9 bạn gặp thường có nét nào nổi bật nhất — mặt sáng và mặt khó? (ví dụ ẩn danh)",
+    "Điều gì ở Số 9 mà bạn thấy sách phổ thông hay nói chưa đúng hoặc chưa đủ?",
+    "Việc nhỏ bạn khuyên người mang Số 9 làm trong tuần?"
+   ],
+   "noi_dung": "",
+   "ngay": ""
+  }
+ }
+}
