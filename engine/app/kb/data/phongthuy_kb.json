@@ -1,5 +1,6 @@
 {
  "_nguon": "Nháp AI tổng hợp Dương Trạch Tam Yếu, Táng Thư, Hám Long Kinh (kiến thức phổ thông) + quan niệm dân gian ghi rõ; chưa đối chiếu nguyên văn.",
+ "_doi_chieu_ghi_chu": "Kho tri thức Phong thuỷ — diễn giải do ban biên tập viết (nháp, chờ chuyên gia duyệt). Từ PT-NG1 (2026-11-12): các câu ở mục `co_thu` và các bảng tính (du niên, cung phi, 24 sơn, tử bạch, Tam sát) đã đối chiếu nguyên văn bản Tứ khố toàn thư (Táng Thư, Trạch Kinh, Thanh Nang Áo Ngữ, Thanh Nang Tự, Thiên Ngọc Kinh, Hiệp Kỷ Biện Phương Thư) — xem `doi_chieu`, tests/test_phongthuy_nguon.py. Dương Trạch Tam Yếu, Bát Trạch Minh Kính, Hám Long Kinh: lời tóm ý còn chờ nguyên văn. Quan niệm dân gian ghi rõ `nguon=dan_gian`.",
  "source": {
   "duong_trach_tam_yeu": "陽宅三要",
   "tang_thu": "葬書",
@@ -1553,6 +1554,96 @@
    ],
    "source_id": "duong_trach_tam_yeu",
    "school_id": "bat_trach"
+  },
+  "phong_thuy_la_gi": {
+   "tieu_de": "Phong thuỷ là gì?",
+   "noi_dung": "Chữ 'phong thuỷ' lấy từ Táng Thư: 'Khí thừa phong tắc tán, giới thuỷ tắc chỉ' — khí gặp gió thì tan, gặp nước chắn thì dừng; người xưa tìm cách cho khí tụ lại không tan, nên gọi là phong thuỷ (gió và nước). Sách còn nói: 'đắc thuỷ vi thượng, tàng phong thứ chi' — được nước là hơn hết, kín gió là thứ nhì. Tức là gốc của phong thuỷ là hình thế quanh chỗ ở: có chỗ tựa, có khoảng thoáng, gió không lùa thẳng, nước không đọng. Các phép tính hướng theo tuổi (Bát trạch) hay theo thời gian (Huyền Không) ra đời sau và đứng sau phần hình thế này. Hệ thống xem phong thuỷ như tham khảo văn hoá để sắp xếp chỗ ở cho dễ chịu.",
+   "tu_khoa": [
+    "phong thuy la gi",
+    "phong thuy nghia la gi",
+    "tang phong tu khi",
+    "tang phong dac thuy",
+    "chu phong thuy"
+   ],
+   "source_id": "tang_thu",
+   "school_id": "loan_dau",
+   "trich": [
+    "phong_thuy",
+    "dac_thuy",
+    "sinh_khi"
+   ]
+  },
+  "ngu_hu_ngu_thuc": {
+   "tieu_de": "Ngũ hư, ngũ thực: nhà rộng người ít có sao không?",
+   "noi_dung": "Trạch Kinh (sách về nhà ở, khoảng đời Đường) kể năm điều 'hư' làm nhà hao và năm điều 'thực' làm nhà thịnh. Năm hư: nhà rộng mà người ít; cổng to mà nhà trong nhỏ; tường rào không kín; giếng và bếp đặt không đúng chỗ; đất rộng nhà ít, sân vườn bỏ trống. Năm thực: nhà vừa mà đông người; nhà lớn cổng nhỏ; tường rào kín; nhà nhỏ mà vật nuôi nhiều; rãnh nước thoát thông. Đọc theo đời sống: nhà vừa với số người ở thì ấm và dễ chăm; phòng không dùng nên có việc để dùng (phòng đọc, phòng khách cho người thân) thay vì đóng kín; cửa cân với nhà; bếp, nước gọn đúng chỗ; sân có cây, có người qua lại. Sách cũng nhắc: 'nhà dù đẹp, có sửa sang mới thịnh'.",
+   "tu_khoa": [
+    "ngu hu",
+    "ngu thuc",
+    "nha rong nguoi it",
+    "nha to it nguoi",
+    "nha qua rong",
+    "nha rong qua",
+    "cong to nha nho"
+   ],
+   "source_id": "trach_kinh",
+   "school_id": "duong_trach",
+   "trich": [
+    "ngu_hu_ngu_thuc",
+    "nha_can_cham",
+    "nha_la_goc"
+   ]
+  },
+  "du_nien_tu_dau": {
+   "tieu_de": "Tám du niên (Sinh Khí, Thiên Y…) từ đâu ra?",
+   "noi_dung": "Tám tên Sinh Khí, Thiên Y, Diên Niên, Phục Vị, Hoạ Hại, Lục Sát, Ngũ Quỷ, Tuyệt Mệnh đến từ phép 'đại du niên biến quái', chép trong Hiệp Kỷ Biện Phương Thư (sách lịch pháp triều Thanh, 1739): lấy quẻ của mình làm gốc rồi lần lượt đổi từng hào. Quy tắc gọn: đổi một hào trên ra Sinh Khí; đổi hai hào dưới ra Thiên Y; đổi cả ba hào ra Diên Niên; không đổi là Phục Vị — bốn hướng này cùng nhóm với mình nên tốt, bốn hướng còn lại khác nhóm nên kém. Sách cũng giải thích hai nhóm: Càn, Đoài, Cấn, Khôn là Tây tứ; Ly, Chấn, Tốn, Khảm là Đông tứ; cùng nhóm phối nhau là thuận. Bảng hướng của bạn trong hệ thống dựng đúng theo phép này (đã đối chiếu nguyên văn cho cả tám quẻ).",
+   "tu_khoa": [
+    "du nien la gi",
+    "du nien tu dau",
+    "dai du nien",
+    "cach tinh du nien",
+    "sinh khi thien y la gi",
+    "phien quai"
+   ],
+   "source_id": "hiep_ky",
+   "school_id": "bat_trach",
+   "trich": [
+    "dai_du_nien",
+    "phien_quai",
+    "dong_tay_tu_trach"
+   ]
+  },
+  "hai_muoi_bon_son": {
+   "tieu_de": "24 sơn là gì?",
+   "noi_dung": "La bàn phong thuỷ chia vòng 360 độ thành 24 sơn, mỗi sơn 15 độ, gồm 12 địa chi, 8 thiên can (không dùng Mậu, Kỷ) và 4 quẻ góc (Càn, Khôn, Cấn, Tốn). Tám quẻ mỗi quẻ quản ba sơn: Khảm (Bắc) gồm Nhâm – Tý – Quý; Cấn (Đông Bắc) gồm Sửu – Cấn – Dần; Chấn (Đông) gồm Giáp – Mão – Ất; Tốn (Đông Nam) gồm Thìn – Tốn – Tỵ; Ly (Nam) gồm Bính – Ngọ – Đinh; Khôn (Tây Nam) gồm Mùi – Khôn – Thân; Đoài (Tây) gồm Canh – Dậu – Tân; Càn (Tây Bắc) gồm Tuất – Càn – Hợi. Bát trạch chỉ cần biết hướng thuộc quẻ nào (45 độ); Huyền Không cần đúng sơn (15 độ), nên phải đo la bàn kỹ hơn.",
+   "tu_khoa": [
+    "24 son",
+    "hai muoi bon son",
+    "nhi thap tu son",
+    "hai tu son"
+   ],
+   "source_id": "hiep_ky",
+   "school_id": "huyen_khong",
+   "trich": [
+    "hai_muoi_bon_son"
+   ]
+  },
+  "tu_bach_cuu_tinh": {
+   "tieu_de": "Sao năm, sao tháng (tử bạch) tính thế nào?",
+   "noi_dung": "Chín sao từ Nhất Bạch tới Cửu Tử lần lượt vào cung giữa theo năm và theo tháng. Theo Hiệp Kỷ Biện Phương Thư: năm Giáp Tý thượng nguyên (1864) Nhất Bạch vào giữa, mỗi năm lùi một sao; Giáp Tý trung nguyên (1924) là Tứ Lục, hạ nguyên (1984) là Thất Xích. Tháng: năm Tý, Ngọ, Mão, Dậu tháng Giêng khởi Bát Bạch; năm Thìn, Tuất, Sửu, Mùi khởi Ngũ Hoàng; năm Dần, Thân, Tỵ, Hợi khởi Nhị Hắc; mỗi tháng lùi một sao. Năm đổi ở Lập xuân, tháng đổi theo tiết khí. Sao năm, sao tháng chỉ nói về thời điểm (lúc nào nên sửa, nên dọn phía nào), không đổi nền hình thế của ngôi nhà.",
+   "tu_khoa": [
+    "tu bach la gi",
+    "cuu tinh la gi",
+    "cach tinh sao nam",
+    "sao nam tinh the nao",
+    "sao thang tinh the nao",
+    "cach tinh phi tinh nam"
+   ],
+   "source_id": "hiep_ky",
+   "school_id": "huyen_khong",
+   "trich": [
+    "tu_bach_nam",
+    "tu_bach_thang"
+   ]
   }
  },
  "mau": {
@@ -1758,5 +1849,260 @@
    "noi_dung": "Nhiều điều khó chịu trong nhà là do nếp dùng (bừa, bí, để đồ chắn lối) chứ không do hướng. Bài đọc luôn tách hai nhóm: việc của nhà (kê lại, sửa) và việc của thói quen (dọn, đóng cửa, giờ giấc). Không ghép sao Huyền Không với con số thần số — hai hệ không có cầu nối trong cổ thư; chỉ gợi mở sang mảng khác bằng ý định chung."
   }
  },
- "mau_an_toan": "Sách xưa gắn cặp sao này với {thu} — đây là lời nhắc chăm nhà cho cẩn thận, không phải dự báo."
+ "mau_an_toan": "Sách xưa gắn cặp sao này với {thu} — đây là lời nhắc chăm nhà cho cẩn thận, không phải dự báo.",
+ "co_thu": {
+  "sinh_khi": {
+   "doan": "tang_thu.sinh_khi",
+   "sach": "tang_thu",
+   "mang": "loan_dau",
+   "nguyen_van": "葬者乘生氣也",
+   "phien_am": "Táng giả, thừa sinh khí dã.",
+   "nghia": "Chôn cất là nương theo sinh khí. Đây là câu mở đầu Táng Thư — cả môn phong thuỷ xoay quanh việc tìm nơi khí tụ lại.",
+   "doi_song": "Với nhà ở, 'sinh khí' có thể hiểu là nơi có nắng, gió nhẹ, cây cỏ tươi tốt, người ở thấy dễ chịu."
+  },
+  "phong_thuy": {
+   "doan": "tang_thu.phong_thuy",
+   "sach": "tang_thu",
+   "mang": "loan_dau",
+   "nguyen_van": "經曰氣乗風則㪚界水則止 … 古人聚之使不散行之使有止故謂之風水",
+   "phien_am": "Khí thừa phong tắc tán, giới thuỷ tắc chỉ. Cổ nhân tụ chi sử bất tán, hành chi sử hữu chỉ, cố vị chi phong thuỷ.",
+   "nghia": "Khí gặp gió thì tan, gặp nước chắn thì dừng. Người xưa làm cho khí tụ lại không tan, đi mà có chỗ dừng — vì thế gọi là phong thuỷ (gió và nước).",
+   "doi_song": "Nhà đón gió nhẹ nhưng không bị gió lùa thẳng, có khoảng thoáng phía trước và chỗ tựa phía sau là hợp ý câu này."
+  },
+  "dac_thuy": {
+   "doan": "tang_thu.dac_thuy",
+   "sach": "tang_thu",
+   "mang": "loan_dau",
+   "nguyen_van": "風水之法得水為上藏風次之",
+   "phien_am": "Phong thuỷ chi pháp, đắc thuỷ vi thượng, tàng phong thứ chi.",
+   "nghia": "Phép phong thuỷ: được nước là hơn hết, kín gió là thứ nhì.",
+   "doi_song": "Sách đặt hình thế (nước, gió, thế đất) lên trước mọi phép tính hướng — cũng là thứ tự hệ thống này dùng: hình thế là nền, hướng và sao chỉ là nhịp."
+  },
+  "tu_linh": {
+   "doan": "tang_thu.tu_linh",
+   "sach": "tang_thu",
+   "mang": "loan_dau",
+   "nguyen_van": "夫葬以左為青龍右為白虎前為朱雀後為𤣥武 … 𤣥武垂頭 … 朱雀翔舞 … 青龍蜿蜒 … 白虎馴頫",
+   "phien_am": "Phù táng dĩ tả vi Thanh Long, hữu vi Bạch Hổ, tiền vi Chu Tước, hậu vi Huyền Vũ. Huyền Vũ thuỳ đầu, Chu Tước tường vũ, Thanh Long uyển diên, Bạch Hổ thuần phủ.",
+   "nghia": "Lấy bên trái làm Thanh Long, bên phải làm Bạch Hổ, phía trước làm Chu Tước, phía sau làm Huyền Vũ. Phía sau cúi đầu (thoải dần xuống), phía trước bay múa (thoáng, đẹp), bên trái uốn lượn mềm mại, bên phải nằm phục hiền lành.",
+   "doi_song": "Bốn phía tính từ chỗ đứng trong nhà nhìn ra cửa. Sách không nói bên trái phải cao hơn bên phải; ý chính là sau có chỗ tựa, trước thoáng, hai bên ôm vào và không lấn át."
+  },
+  "cam_ung": {
+   "doan": "tang_thu.cam_ung",
+   "sach": "tang_thu",
+   "mang": "loan_dau",
+   "nguyen_van": "經曰氣感而應鬼福及人",
+   "phien_am": "Khí cảm nhi ứng, quỷ phúc cập nhân.",
+   "nghia": "Khí cảm thì ứng, phúc của người đã khuất tới được người sống — thuyết 'đồng khí cảm ứng' của Táng Thư về mộ phần và con cháu.",
+   "doi_song": "Đây là niềm tin văn hoá, không kiểm chứng được; hệ thống không quy may rủi của ai cho mộ phần."
+  },
+  "ngu_bat_tang": {
+   "doan": "tang_thu.ngu_bat_tang",
+   "sach": "tang_thu",
+   "mang": "loan_dau",
+   "nguyen_van": "山之不可葬者五 … 氣以生和而童山不可葬也 … 氣因形來而斷山不可葬也 … 氣因土行而石山不可葬也 … 過山不可葬也 … 氣以龍㑹而獨山不可葬也",
+   "phien_am": "Sơn chi bất khả táng giả ngũ: đồng sơn, đoạn sơn, thạch sơn, quá sơn, độc sơn.",
+   "nghia": "Năm loại núi sách khuyên không chôn: núi trọc (cỏ cây không mọc), núi bị xẻ đứt mạch, núi toàn đá, núi chạy thẳng không dừng, núi đứng trơ trọi một mình.",
+   "doi_song": "Đọc theo đời sống: đất cằn không nuôi được cây, đất bị đào xẻ, nền toàn đá, chỗ gió nước chảy tuột qua và chỗ trơ trọi không che chắn đều kém cho việc ở."
+  },
+  "dat_dep": {
+   "doan": "tang_thu.dat_dep",
+   "sach": "tang_thu",
+   "mang": "loan_dau",
+   "nguyen_van": "來積止聚沖陽和隂 … 土高水深鬱草茂林",
+   "phien_am": "Lai tích chỉ tụ, xung dương hoà âm; thổ cao thuỷ thâm, uất thảo mậu lâm.",
+   "nghia": "Thế đất tới thì dồn lại, dừng thì tụ; âm dương hoà nhau; đất dày nước sâu, cỏ rậm rừng tươi.",
+   "doi_song": "Dấu hiệu dễ thấy nhất của chỗ đất tốt theo sách: cây cỏ quanh đó xanh tốt."
+  },
+  "nha_la_goc": {
+   "doan": "trach_kinh.goc",
+   "sach": "trach_kinh",
+   "mang": "duong_trach",
+   "nguyen_van": "故宅者人之本人以宅為家居若安即家代昌吉若不安即門族衰微",
+   "phien_am": "Cố trạch giả, nhân chi bản. Nhân dĩ trạch vi gia, cư nhược an tức gia đại xương cát, nhược bất an tức môn tộc suy vi.",
+   "nghia": "Nhà là gốc của người. Người lấy nhà làm tổ ấm: ở yên thì nhà nhiều đời thịnh, ở không yên thì dòng họ sa sút.",
+   "doi_song": "Thước đo của Trạch Kinh là 'ở có yên không' — ngủ ngon, ít cãi vã, ra vào thuận tiện — trước cả hướng hay tuổi."
+  },
+  "ngu_hu_ngu_thuc": {
+   "doan": "trach_kinh.ngu_hu_ngu_thuc",
+   "sach": "trach_kinh",
+   "mang": "duong_trach",
+   "nguyen_van": "宅有五虚令人貧耗五實令人富貴宅大人少一虚宅門大内小二虚牆院不完三虚井竈不處四虚宅地多屋少庭院廣五虚宅小人多一實宅大門小二實牆院完全三實宅小六畜多四實宅水溝東南流五實",
+   "phien_am": "Trạch hữu ngũ hư lệnh nhân bần hao, ngũ thực lệnh nhân phú quý. Trạch đại nhân thiểu nhất hư; trạch môn đại nội tiểu nhị hư; tường viện bất hoàn tam hư; tỉnh táo bất xứ tứ hư; trạch địa đa ốc thiểu, đình viện quảng ngũ hư. Trạch tiểu nhân đa nhất thực; trạch đại môn tiểu nhị thực; tường viện hoàn toàn tam thực; trạch tiểu lục súc đa tứ thực; trạch thuỷ câu đông nam lưu ngũ thực.",
+   "nghia": "Nhà có năm điều 'hư' (rỗng) làm hao, năm điều 'thực' (đầy) làm thịnh. Năm hư: nhà rộng người ít; cổng to mà nhà trong nhỏ; tường rào không kín; giếng và bếp đặt không đúng chỗ; đất rộng nhà ít, sân vườn trống trải. Năm thực: nhà vừa mà đông người; nhà lớn cổng nhỏ; tường rào kín; nhà nhỏ mà vật nuôi nhiều; rãnh nước chảy về đông nam.",
+   "doi_song": "Ý dùng được hôm nay: nhà vừa với số người ở, cửa không quá khổ so với nhà, ranh giới rõ ràng, bếp và nguồn nước gọn đúng chỗ, sân không bỏ hoang, nước thoát thông. 'Chảy về đông nam' là theo thế đất nơi sách ra đời (cao tây bắc, thấp đông nam) — với nhà bạn, chỉ cần nước thoát thuận chiều dốc."
+  },
+  "nha_nhu_than_the": {
+   "doan": "trach_kinh.than_the",
+   "sach": "trach_kinh",
+   "mang": "duong_trach",
+   "nguyen_van": "宅以形勢為身體以泉水為血脈以土地為皮肉以草木為毛髪以舍屋為衣服以門户為冠帶若得如斯是事儼雅乃為上吉",
+   "phien_am": "Trạch dĩ hình thế vi thân thể, dĩ tuyền thuỷ vi huyết mạch, dĩ thổ địa vi bì nhục, dĩ thảo mộc vi mao phát, dĩ xá ốc vi y phục, dĩ môn hộ vi quan đới; nhược đắc như tư, thị sự nghiễm nhã, nãi vi thượng cát.",
+   "nghia": "Nhà lấy hình thế làm thân thể, nguồn nước làm mạch máu, đất làm da thịt, cỏ cây làm tóc, phòng ốc làm áo quần, cửa ngõ làm mũ đai; được đủ như thế, mọi thứ ngay ngắn trang nhã, là tốt nhất.",
+   "doi_song": "Một cách tự rà nhà: thế đất – nước – đất – cây – phòng – cửa, cái nào đang 'ốm' thì chăm cái đó trước."
+  },
+  "nha_can_cham": {
+   "doan": "trach_kinh.cham_sua",
+   "sach": "trach_kinh",
+   "mang": "duong_trach",
+   "nguyen_van": "其田雖良薅鋤乃芳其宅雖善修移乃昌",
+   "phien_am": "Kỳ điền tuy lương, hao sừ nãi phương; kỳ trạch tuy thiện, tu di nãi xương.",
+   "nghia": "Ruộng dù tốt, có làm cỏ mới thơm lúa; nhà dù đẹp, có sửa sang mới thịnh.",
+   "doi_song": "Không có ngôi nhà nào 'đặt đúng hướng là xong' — dọn dẹp, sửa chỗ hỏng mới là phần chính."
+  },
+  "nha_tot_nguoi_vuong": {
+   "doan": "trach_kinh.nguoi_va_nha",
+   "sach": "trach_kinh",
+   "mang": "duong_trach",
+   "nguyen_van": "地善即苗茂宅吉即人榮",
+   "phien_am": "Địa thiện tức miêu mậu, trạch cát tức nhân vinh.",
+   "nghia": "Đất tốt thì mạ xanh, nhà lành thì người tươi."
+  },
+  "ai_tinh": {
+   "doan": "thanh_nang_ao_ngu.ai_tinh",
+   "sach": "thanh_nang_ao_ngu",
+   "mang": "huyen_khong",
+   "nguyen_van": "坤壬乙巨門從頭出艮丙辛位位是破軍㢲辰亥盡是武曲位甲癸申貪狼一路行",
+   "phien_am": "Khôn Nhâm Ất, Cự Môn tòng đầu xuất; Cấn Bính Tân, vị vị thị Phá Quân; Tốn Thìn Hợi, tận thị Vũ Khúc vị; Giáp Quý Thân, Tham Lang nhất lộ hành.",
+   "nghia": "Bốn câu 'ai tinh' mở đầu Thanh Nang Áo Ngữ: Khôn – Nhâm – Ất thuộc Cự Môn (2); Cấn – Bính – Tân thuộc Phá Quân (7); Tốn – Thìn – Hợi thuộc Vũ Khúc (6); Giáp – Quý – Thân thuộc Tham Lang (1).",
+   "doi_song": "Mười hai sơn này trùng khít bảng thế tinh (thế quái) hệ thống đang dùng cho nhà kiêm hướng; mười hai sơn còn lại lấy theo Thẩm thị, chưa có nguyên văn để đối chiếu."
+  },
+  "dien_dao": {
+   "doan": "thanh_nang_ao_ngu.dien_dao",
+   "sach": "thanh_nang_ao_ngu",
+   "mang": "huyen_khong",
+   "nguyen_van": "顛顛倒二十四山有珠寳逆順行二十四山有火坑",
+   "phien_am": "Điên điên đảo, nhị thập tứ sơn hữu châu bảo; nghịch thuận hành, nhị thập tứ sơn hữu hoả khanh.",
+   "nghia": "Đảo qua đảo lại, 24 sơn sơn nào cũng có châu báu; đi thuận đi nghịch, 24 sơn sơn nào cũng có hố lửa.",
+   "doi_song": "Không có hướng nào tốt mãi hay xấu mãi — cùng một hướng, đúng vận thì thuận, lỡ vận thì nên chủ động hơn. Đây là lý do Huyền Không hỏi năm xây nhà."
+  },
+  "son_thuy_long_than": {
+   "doan": "thanh_nang_tu.long_than",
+   "sach": "thanh_nang_tu",
+   "mang": "huyen_khong",
+   "nguyen_van": "山上龍神不下水水裏龍神不上山",
+   "phien_am": "Sơn thượng long thần bất hạ thuỷ, thuỷ lý long thần bất thượng sơn.",
+   "nghia": "Long thần trên núi không xuống nước, long thần dưới nước không lên núi.",
+   "doi_song": "Gốc của tên cục 'thượng sơn hạ thuỷ': sao quản người (sơn tinh) nên ở phía có chỗ tựa, sao quản tiền (hướng tinh) nên ở phía thoáng, có nước hay đường; đặt ngược thì kém."
+  },
+  "son_quan_son": {
+   "doan": "thanh_nang_tu.am_duong",
+   "sach": "thanh_nang_tu",
+   "mang": "huyen_khong",
+   "nguyen_van": "山管山兮水管水此是隂陽不待言",
+   "phien_am": "Sơn quản sơn hề thuỷ quản thuỷ, thử thị âm dương bất đãi ngôn.",
+   "nghia": "Núi quản việc của núi, nước quản việc của nước — lẽ âm dương ấy khỏi phải bàn.",
+   "doi_song": "Cách đọc phổ biến của phái Huyền Không: phía 'núi' (chỗ cao, đặc, yên) nói về người ở và sức khoẻ; phía 'nước' (chỗ thấp, thoáng, động) nói về tiền bạc và công việc."
+  },
+  "tam_ban_quai": {
+   "doan": "thien_ngoc_kinh.tam_ban",
+   "sach": "thien_ngoc_kinh",
+   "mang": "huyen_khong",
+   "nguyen_van": "東西父母三般卦筭值千金價",
+   "phien_am": "Đông tây phụ mẫu tam ban quái, toán trị thiên kim giá.",
+   "nghia": "Ba bộ quẻ phụ mẫu (tam ban quái) — đáng giá nghìn vàng.",
+   "doi_song": "Nguồn của tên các cách 'phụ mẫu tam ban', 'liên châu tam ban' trong trạch bàn. Cách tính cụ thể hệ thống theo Thẩm thị."
+  },
+  "that_tinh_da_kiep": {
+   "doan": "thien_ngoc_kinh.da_kiep",
+   "sach": "thien_ngoc_kinh",
+   "mang": "huyen_khong",
+   "nguyen_van": "識得父母三般卦便是真神路北斗七星去打劫離宫要相合",
+   "phien_am": "Thức đắc phụ mẫu tam ban quái, tiện thị chân thần lộ; Bắc Đẩu thất tinh khứ đả kiếp, Ly cung yếu tương hợp.",
+   "nghia": "Hiểu được tam ban quái phụ mẫu là thấy đường chân thần; bảy sao Bắc Đẩu đi 'đả kiếp', cung Ly cần hợp với nhau.",
+   "doi_song": "Nguồn của tên cách 'thất tinh đả kiếp'. Các phái giải câu này khác nhau (bản chú trong Tứ khố giải theo tam hợp, phái Huyền Không giải theo tam ban quái) — hệ thống ghi rõ là theo Thẩm thị."
+  },
+  "hai_muoi_bon_son": {
+   "doan": "hiep_ky.hai_muoi_bon_son",
+   "sach": "hiep_ky",
+   "mang": "lich_nam",
+   "nguyen_van": "戌乾亥屬乾壬子癸屬坎丑艮寅屬艮甲卯乙屬震辰巽巳屬巽丙午丁屬離未坤申屬坤庚酉辛屬兌",
+   "phien_am": "Tuất Càn Hợi thuộc Càn; Nhâm Tý Quý thuộc Khảm; Sửu Cấn Dần thuộc Cấn; Giáp Mão Ất thuộc Chấn; Thìn Tốn Tỵ thuộc Tốn; Bính Ngọ Đinh thuộc Ly; Mùi Khôn Thân thuộc Khôn; Canh Dậu Tân thuộc Đoài.",
+   "nghia": "24 sơn chia cho tám quẻ, mỗi quẻ quản ba sơn (mỗi sơn 15 độ): Càn gồm Tuất – Càn – Hợi, Khảm gồm Nhâm – Tý – Quý, Cấn gồm Sửu – Cấn – Dần, Chấn gồm Giáp – Mão – Ất, Tốn gồm Thìn – Tốn – Tỵ, Ly gồm Bính – Ngọ – Đinh, Khôn gồm Mùi – Khôn – Thân, Đoài gồm Canh – Dậu – Tân."
+  },
+  "dai_du_nien": {
+   "doan": "hiep_ky.dai_du_nien_thu_tu",
+   "sach": "hiep_ky",
+   "mang": "bat_trach",
+   "nguyen_van": "如乾為本宫乾上爻變為兌為貪狼兌中爻變為震為五鬼震下爻變為坤為武曲坤中爻變為坎為文曲坎上爻變為巽為禄存巽中爻變為艮為巨門艮下爻變為離為破軍離中爻變復為乾為輔弼",
+   "phien_am": "",
+   "nghia": "Phép 'đại du niên' của nhà xem dương trạch, lấy quẻ Càn làm ví dụ: đổi hào trên thành Đoài là Tham Lang (Sinh Khí); đổi tiếp hào giữa thành Chấn là Ngũ Quỷ; đổi hào dưới thành Khôn là Vũ Khúc (Diên Niên); đổi hào giữa thành Khảm là Văn Khúc (Lục Sát); đổi hào trên thành Tốn là Lộc Tồn (Hoạ Hại); đổi hào giữa thành Cấn là Cự Môn (Thiên Y); đổi hào dưới thành Ly là Phá Quân (Tuyệt Mệnh); đổi hào giữa trở về Càn là Phụ Bật (Phục Vị).",
+   "doi_song": "Bảng tám hướng tốt – xấu của từng mệnh quái trong hệ thống được dựng đúng theo phép này."
+  },
+  "phien_quai": {
+   "doan": "hiep_ky.phien_quai",
+   "sach": "hiep_ky",
+   "mang": "bat_trach",
+   "nguyen_van": "翻卦之法皆以上一爻變為生氣貪狼下二爻變為天醫巨門三爻俱變為延年武曲三爻俱不變為伏位輔弼",
+   "phien_am": "",
+   "nghia": "Quy tắc gọn: đổi một hào trên là Sinh Khí; đổi hai hào dưới là Thiên Y; đổi cả ba hào là Diên Niên; không đổi hào nào là Phục Vị."
+  },
+  "dong_tay_tu_trach": {
+   "doan": "hiep_ky.dong_tay_tu_trach",
+   "sach": "hiep_ky",
+   "mang": "bat_trach",
+   "nguyen_van": "蓋陽宅之法以乾兌為老陽艮坤為老隂離震為少隂巽坎為少陽二老相配為西四宅二少相配為東四宅東西各自相配為吉交錯相配為凶",
+   "phien_am": "Nhị lão tương phối vi Tây tứ trạch, nhị thiếu tương phối vi Đông tứ trạch; đông tây các tự tương phối vi cát, giao thác tương phối vi hung.",
+   "nghia": "Càn – Đoài là lão dương, Cấn – Khôn là lão âm, Ly – Chấn là thiếu âm, Tốn – Khảm là thiếu dương. Hai 'lão' ghép nhau thành Tây tứ trạch, hai 'thiếu' ghép nhau thành Đông tứ trạch; cùng nhóm phối nhau là tốt, lẫn nhóm là kém.",
+   "doi_song": "Đây là gốc của cách chia Đông tứ mệnh / Tây tứ mệnh."
+  },
+  "cung_phi_nam_nu": {
+   "doan": "hiep_ky.menh_cung_nam_nu",
+   "sach": "hiep_ky",
+   "mang": "bat_trach",
+   "nguyen_van": "男命上元甲子起坎一中元甲子起巽四下元甲子起兑七逆行九宫女命上元甲子起中五中元甲子起坤二下元甲子起艮八順行九宫",
+   "phien_am": "Nam mệnh thượng nguyên Giáp Tý khởi Khảm nhất, trung nguyên Giáp Tý khởi Tốn tứ, hạ nguyên Giáp Tý khởi Đoài thất, nghịch hành cửu cung; nữ mệnh thượng nguyên Giáp Tý khởi trung ngũ, trung nguyên Giáp Tý khởi Khôn nhị, hạ nguyên Giáp Tý khởi Cấn bát, thuận hành cửu cung.",
+   "nghia": "Cung phi (mệnh quái) theo năm sinh: nam sinh năm Giáp Tý thượng nguyên (1864) khởi Khảm 1, trung nguyên (1924) khởi Tốn 4, hạ nguyên (1984) khởi Đoài 7, mỗi năm lùi một cung; nữ lần lượt khởi cung giữa 5, Khôn 2, Cấn 8, mỗi năm tiến một cung.",
+   "doi_song": "Hệ thống tính đúng theo quy tắc này. Đoạn sách không nói người rơi vào cung giữa (5) gửi về đâu; hệ thống theo lệ phổ biến nam gửi Khôn, nữ gửi Cấn."
+  },
+  "tu_bach_nam": {
+   "doan": "hiep_ky.tu_bach_nam",
+   "sach": "hiep_ky",
+   "mang": "lich_nam",
+   "nguyen_van": "九星之法上元甲子一白入中宫乙丑九紫丙寅八白丁卯七赤戊辰六白己巳五黄庚午四緑辛未三碧壬申二黑癸酉復一白 … 中元甲子四緑下元甲子七赤",
+   "phien_am": "",
+   "nghia": "Sao năm (tử bạch): năm Giáp Tý thượng nguyên sao Nhất Bạch vào giữa, Ất Sửu là Cửu Tử, Bính Dần là Bát Bạch… mỗi năm lùi một sao; Giáp Tý trung nguyên là Tứ Lục, Giáp Tý hạ nguyên là Thất Xích."
+  },
+  "tu_bach_thang": {
+   "doan": "hiep_ky.tu_bach_thang",
+   "sach": "hiep_ky",
+   "mang": "lich_nam",
+   "nguyen_van": "故以子午卯酉年為上元正月起八白辰戌丑未年為中元正月起五黄寅申巳亥年為下元正月起二黑逐月逆轉",
+   "phien_am": "",
+   "nghia": "Sao tháng: năm Tý, Ngọ, Mão, Dậu tháng Giêng khởi Bát Bạch; năm Thìn, Tuất, Sửu, Mùi tháng Giêng khởi Ngũ Hoàng; năm Dần, Thân, Tỵ, Hợi tháng Giêng khởi Nhị Hắc; mỗi tháng lùi một sao."
+  },
+  "tam_sat": {
+   "doan": "hiep_ky.tam_sat",
+   "sach": "hiep_ky",
+   "mang": "lich_nam",
+   "nguyen_van": "如申子辰合水局水旺於北方南方其衝也故三煞在南方巳午未",
+   "phien_am": "",
+   "nghia": "Tam sát là phương đối với phương vượng của nhóm tam hợp năm đó. Ví dụ năm Thân, Tý, Thìn hợp thành thuỷ cục, thuỷ vượng ở Bắc, phương đối là Nam — nên Tam sát ở Nam (Tỵ, Ngọ, Mùi).",
+   "doi_song": "Quy ước lịch pháp để chọn lúc động thổ, sửa lớn; việc sửa chữa vì an toàn thì không nên hoãn."
+  }
+ },
+ "doi_chieu": {
+  "ngay": "2026-11-12",
+  "tep": "fixtures/nguon/phongthuy_co_thu.json",
+  "test": "tests/test_phongthuy_nguon.py",
+  "ban": "Văn Uyên Các Tứ khố toàn thư, bản số hoá Kanseki Repository (kanripo)",
+  "da_doi_chieu": {
+   "tang_thu": "định nghĩa phong thuỷ, đắc thuỷ – tàng phong, tứ linh, năm loại núi không táng, đồng khí cảm ứng",
+   "trach_kinh": "nhà là gốc của người, ngũ hư – ngũ thực, nhà như thân thể",
+   "thanh_nang_ao_ngu": "bốn câu ai tinh (12/24 sơn của bảng thế tinh), điên đảo",
+   "thanh_nang_tu": "sơn thượng long thần / thuỷ lý long thần",
+   "thien_ngoc_kinh": "tam ban quái, thất tinh đả kiếp (chỉ tên gọi; cách giải theo Thẩm thị)",
+   "hiep_ky": "đại du niên Bát trạch (cả 8 quái), Đông – Tây tứ trạch, cung phi nam nữ tam nguyên, 24 sơn, tử bạch năm – tháng, Tam sát"
+  },
+  "chua_doi_chieu": {
+   "duong_trach_tam_yeu": "陽宅三要 (Triệu Cửu Phong, 1786) — cửa – chủ – bếp; KB đang tóm ý",
+   "bat_trach_minh_kinh": "八宅明鏡 — lời luận tám du niên, bếp 'toạ hung hướng cát'",
+   "tham_thi_huyen_khong_hoc": "沈氏玄空學 (Thẩm Trúc Nhưng) — hạ quái, thế quái 12 sơn còn lại, thành môn, nhập tù, phản – phục ngâm, đả kiếp",
+   "tu_bach_quyet_phi_tinh_phu": "紫白訣, 飛星賦, 玄空秘旨, 玄機賦 — nghĩa 81 cặp sao",
+   "dia_ly_bien_chinh": "地理辨正 (Tưởng Đại Hồng) — cách giải Huyền Không của Thanh Nang, Thiên Ngọc; linh thần – chính thần",
+   "ham_long_kinh": "撼龍經 — đã có bản Tứ khố, chưa trích",
+   "duong_trach_thap_thu": "陽宅十書 — hình thế ngoài nhà (đường đâm, góc nhọn…) mà mục bo_tri đang ghi 'cổ thư'",
+   "lo_ban_kinh": "魯班經 — thước Lỗ Ban; chưa có bản đáng tin nên CHƯA làm công cụ"
+  }
+ }
 }

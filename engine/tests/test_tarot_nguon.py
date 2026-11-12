@@ -163,3 +163,23 @@ def test_vung_hoang_dao_hoang_gia_khop_book_t(ma):
     b = kb.cung_hoang_dao()[ds[(ds.index(v["tu_cung"]) + 1) % 12]]["en"]
     mo_ta = _book_t(ma)["mo_ta"]
     assert a in mo_ta and b in mo_ta and v["do"] == 20, (ma, a, b)
+
+
+# PT-NG1 (2026-11-12): lớp "đa số" của Book T — bàn bài nghiêng về một bộ / nhóm lá.
+def test_da_so_la_nguyen_van_book_t():
+    ds = kb._d()["da_so"]
+    kho = _chuan(BOOK_T["coc_4"]["mo_ta"])          # bản OCR nối đoạn cách đọc vào cuối mục 4 Cốc
+    assert {"gay", "coc", "kiem", "tien", "an_chinh", "hoang_gia", "at"} <= set(ds)
+    for ma, m in ds.items():
+        if ma.startswith("_"):
+            continue
+        assert _chuan(m["nguyen_van"]) in kho and m["nghia"].strip(), ma
+    cam = [c.lower() for c in kb._d()["cum_cam"]]
+    chu = " ".join(m["nghia"] for k, m in ds.items() if not k.startswith("_")).lower() + " " + kb._d()["mau"]["khai_niem"]["da_so"].lower()
+    assert not [c for c in cam if c in chu]
+
+
+def test_hoi_dap_nhan_cau_hoi_da_so():
+    from app.luangiai import tarot as rules
+    kq = rules.hoi("Bàn bài của tôi nhiều lá Kiếm nghĩa là gì?")
+    assert kq["xu_ly"] == "khai_niem" and "nhiều Kiếm" in kq["cau_tra_loi"]

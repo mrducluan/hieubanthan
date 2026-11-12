@@ -3,7 +3,19 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-12 (PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-12 (PT-NG1 mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4ar. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
+
+- [ ] **Chọn một trong hai**: (A) cho môi trường làm việc mở mạng tới `zh.wikisource.org`, `en.wikisource.org`, `archive.org`,
+  `www.gutenberg.org` để em tự tải sách; hoặc (B) anh tải PDF lên Google Drive theo bảng ở mục 4 của tài liệu.
+- [ ] Ưu tiên 1–3 (Phong thuỷ): **Thẩm Thị Huyền Không Học** (沈氏玄空學), **Dương Trạch Tam Yếu** (陽宅三要), **Bát Trạch Minh Kính** (八宅明鏡)
+  — bản chữ Hán hoặc bản dịch Việt đều được (bản dịch chỉ tóm ý).
+- [ ] Ưu tiên 4–6: Dương Trạch Thập Thư (陽宅十書), Địa Lý Biện Chính (地理辨正) bản có chú, Lỗ Ban Kinh (魯班經) bản khắc.
+- [ ] Tarot: Papus *The Tarot of the Bohemians*; Crowley Liber 78 (The Equinox I:8); Case *An Introduction to the Study of the Tarot* (1920);
+  Wirth *Le Tarot des imagiers du Moyen Âge*; chương Introduction còn thiếu của Mathers 1888.
+- [ ] (Quyết định) 6 đề xuất ở mục 5 của tài liệu: hiện "Sách xưa nói gì" trong báo cáo nhà · sửa nhãn nguồn Thanh Long – Bạch Hổ ·
+  nối lớp "đa số" vào bài đọc Tarot · thành môn quyết · thước Lỗ Ban · sổ đối chiếu cho mọi KB.
 
 ### 4aq. PAY2S-1 — Pay2S thay payOS · thẻ Visa/Mastercard (2026-11-12, `docs/KE-HOACH-THANH-TOAN.md` mục 0b, `docs/SO-SANH-CONG-THE.md`)
 

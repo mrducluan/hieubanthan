@@ -533,7 +533,8 @@
    "decan": "A decan is one third of a zodiac sign (10 degrees, about 10 days). The Golden Dawn tied the 36 pip cards 2–10 to the 36 decans — here used as a timing hint, not a forecast date.",
    "dai_dien": "The significator is the court card chosen to 'play' the person asking. Waite chose by age and appearance; here it comes from the face shape you observed yourself plus your age — for you alone.",
    "celtic": "The Celtic Cross is the ten-card spread Waite recorded in 1910: a cross of six cards (heart of the matter, what crosses it, root, recent past, what you aim for, near future) and a staff of four (you, your surroundings, hopes and fears, likely outcome).",
-   "tarot_la_gi": "Tarot is a deck of 78 cards from 15th-century Italy, used from the 18th–19th century to reflect on a question. Here tarot is a way of looking at something again through images and four sourced schools — not a prediction, not a substitute for a doctor, a lawyer or your own decision."
+   "tarot_la_gi": "Tarot is a deck of 78 cards from 15th-century Italy, used from the 18th–19th century to reflect on a question. Here tarot is a way of looking at something again through images and four sourced schools — not a prediction, not a substitute for a doctor, a lawyer or your own decision.",
+   "da_so": "When a spread leans heavily toward one group of cards, the Golden Dawn (Book T) reads one extra layer for the whole table: many Wands point to energy and friction; many Cups to feeling and enjoyment; many Swords to worry, tension and things that need saying plainly; many Pentacles to work, money and possessions; many Major Arcana to forces larger than your own arranging; many court cards to a matter that involves many people; many Aces to strength and fresh starts. Read this background first, then go card by card. It is not a prediction."
   },
   "tra_loi": {
    "nghieng": {
@@ -4146,5 +4147,29 @@
     "What do I need to let go of to feel lighter?"
    ]
   }
- ]
+ ],
+ "da_so": {
+  "_nguon": "Book T (Golden Dawn) — the 'A Majority of…' passage; verbatim text in fixtures/nguon/tarot_book_t.json.",
+  "gay": {
+   "nghia": "A spread full of Wands: plenty of fire — drive, the urge to act now, and friction or argument close behind."
+  },
+  "coc": {
+   "nghia": "A spread full of Cups: feeling and enjoyment are the main part of this matter."
+  },
+  "kiem": {
+   "nghia": "A spread full of Swords: the old text is blunt; read it as a stretch of worry and tension, with something that needs saying plainly or cutting away. It is not a forecast of harm."
+  },
+  "tien": {
+   "nghia": "A spread full of Pentacles: the centre of gravity is work, money, possessions and practical things."
+  },
+  "an_chinh": {
+   "nghia": "A spread full of Major Arcana: forces larger than the querent's own arranging are in play; see the matter as a stage of the road."
+  },
+  "hoang_gia": {
+   "nghia": "A spread full of court cards: many people are involved — meetings and other people's views carry weight."
+  },
+  "at": {
+   "nghia": "A spread full of Aces: strength in general and several beginnings at once; Aces are always strong cards."
+  }
+ }
 }

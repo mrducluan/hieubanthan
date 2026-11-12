@@ -9955,7 +9955,8 @@
    "decan": "Decan là một phần ba của một cung hoàng đạo (10 độ, khoảng 10 ngày). Golden Dawn gắn 36 lá số 2–10 với 36 decan — ở đây dùng làm nhịp gợi ý thời gian, không phải ngày dự báo.",
    "dai_dien": "Lá đại diện (significator) là lá hoàng gia được chọn để 'đóng vai' người hỏi. Waite chọn theo tuổi và dáng vẻ; ở đây chọn từ dáng mặt bạn tự quan sát và tuổi — chỉ cho chính bạn.",
    "celtic": "Celtic Cross là trải bài 10 lá Waite ghi lại năm 1910: chữ thập sáu lá (tâm điểm, điều cản, gốc rễ, vừa qua, điều hướng tới, sắp tới) và cây cột bốn lá (bạn, quanh bạn, hy vọng – nỗi lo, khả năng diễn ra).",
-   "tarot_la_gi": "Tarot là bộ 78 lá bài có từ Ý thế kỷ 15, sang thế kỷ 18–19 được dùng để soi một câu hỏi. Ở đây tarot là cách nhìn lại một việc qua hình ảnh và bốn trường phái có sách — không phải lời đoán trước, không thay bác sĩ, luật sư hay quyết định của bạn."
+   "tarot_la_gi": "Tarot là bộ 78 lá bài có từ Ý thế kỷ 15, sang thế kỷ 18–19 được dùng để soi một câu hỏi. Ở đây tarot là cách nhìn lại một việc qua hình ảnh và bốn trường phái có sách — không phải lời đoán trước, không thay bác sĩ, luật sư hay quyết định của bạn.",
+   "da_so": "Khi một bàn bài nghiêng hẳn về một nhóm lá, Golden Dawn (Book T) đọc thêm một lớp nghĩa chung: nhiều Gậy là nhiều năng lượng và dễ va chạm; nhiều Cốc là tình cảm, niềm vui; nhiều Kiếm là lo nghĩ, căng thẳng, điều cần nói thẳng; nhiều Tiền là việc làm ăn, tiền bạc, của cải; nhiều lá ẩn chính là có lực lớn hơn tầm sắp xếp của mình; nhiều lá hoàng gia là chuyện có nhiều người tham gia; nhiều Át là sức mạnh và khởi đầu. Đây là lớp nghĩa nền của cả bàn bài, đọc trước rồi mới đi vào từng lá; nó không phải lời dự báo."
   },
   "tra_loi": {
    "nghieng": {
@@ -10160,6 +10161,21 @@
     "co dung khong",
     "co tin duoc",
     "me tin"
+   ],
+   "da_so": [
+    "nhieu la cung bo",
+    "cung mot bo",
+    "toan la kiem",
+    "toan la coc",
+    "toan la gay",
+    "toan la tien",
+    "nhieu la kiem",
+    "nhieu la coc",
+    "nhieu la gay",
+    "nhieu la tien",
+    "nhieu la an chinh",
+    "nhieu la hoang gia",
+    "nhieu la at"
    ]
   },
   "trai_bai": {
@@ -13632,7 +13648,7 @@
    "ban": "archive.org \"book-t-the-tarot\" — bản chép Golden Dawn (OCR), đối chiếu tên lá + luật phẩm giá với kho mã MIT độc lập",
    "tep": "fixtures/nguon/tarot_book_t.json",
    "ngay": "2026-11-07",
-   "phu": "36 lá số + 16 hoàng gia (tên, nghĩa), luật phẩm giá, thứ tự decan"
+   "phu": "36 lá số + 16 hoàng gia (tên, nghĩa), luật phẩm giá, thứ tự decan, đoạn 'A Majority of…' (da_so)"
   },
   "mathers_1888": {
    "ban": "sacred-texts.com/book/the-tarot — 5/6 chương chủ dự án lưu PDF vào Drive \"Tarot nguon\" (thiếu Introduction)",
@@ -13890,5 +13906,43 @@
     "Tôi cần buông điều gì để nhẹ lòng hơn?"
    ]
   }
- ]
+ ],
+ "da_so": {
+  "_nguon": "Book T (Golden Dawn) — đoạn 'A Majority of…' trong phần cách đọc; nguyên văn ở fixtures/nguon/tarot_book_t.json. Lời Việt viết lại trung tính: không dự báo, không tên bệnh.",
+  "gay": {
+   "sach": "book_t",
+   "nguyen_van": "A Majority of Wands Energy, opposition, quarrel.",
+   "nghia": "Bàn bài nhiều lá Gậy: chuyện đang nhiều lửa — hăng hái, muốn làm ngay, và cũng dễ va chạm, tranh cãi."
+  },
+  "coc": {
+   "sach": "book_t",
+   "nguyen_van": "A Majority of Cups Pleasure, merriment.",
+   "nghia": "Bàn bài nhiều lá Cốc: tình cảm và niềm vui đang là phần chính của chuyện này."
+  },
+  "kiem": {
+   "sach": "book_t",
+   "nguyen_van": "A Majority of Swords Trouble, sadness, sickness, death.",
+   "nghia": "Bàn bài nhiều lá Kiếm: sách xưa ghi khá nặng lời; đọc theo đời sống là giai đoạn nhiều lo nghĩ, căng thẳng, có điều cần nói thẳng hoặc cắt bỏ. Không phải dự báo chuyện xấu."
+  },
+  "tien": {
+   "sach": "book_t",
+   "nguyen_van": "A Majority of Pentacles Business, money, possessions.",
+   "nghia": "Bàn bài nhiều lá Tiền: trọng tâm là việc làm ăn, tiền bạc, của cải và những thứ cụ thể."
+  },
+  "an_chinh": {
+   "sach": "book_t",
+   "nguyen_van": "A Majority of Keys Strong forces beyond the Querent's control.",
+   "nghia": "Bàn bài nhiều lá ẩn chính: có những lực lớn hơn tầm sắp xếp của người hỏi; nên nhìn chuyện như một chặng đường."
+  },
+  "hoang_gia": {
+   "sach": "book_t",
+   "nguyen_van": "A Majority of Court Cards Society, meetings of many persons.",
+   "nghia": "Bàn bài nhiều lá hoàng gia: chuyện có nhiều người tham gia — gặp gỡ, ý kiến của người khác đóng vai lớn."
+  },
+  "at": {
+   "sach": "book_t",
+   "nguyen_van": "A Majority of Aces Strength generally. Aces are always strong cards.",
+   "nghia": "Bàn bài nhiều lá Át: sức mạnh nói chung, nhiều khởi đầu cùng lúc; Át luôn là lá mạnh."
+  }
+ }
 }
