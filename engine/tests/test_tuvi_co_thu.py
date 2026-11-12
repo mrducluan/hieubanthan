@@ -194,3 +194,25 @@ def test_vi_du_sao_o_cung():
     assert any("七殺朝斗" in d["nguyen_van"] for d in m["trich_dan"])
     assert t["muc"][-1]["tieu_de"] == "Câu hỏi tự soi"          # tự soi vẫn đứng cuối
     assert tct.muc_trich(sao="Tử Vi", cung="Nô Bộc") is None
+
+
+# Cặp giản → phồn ĐÃ GẶP giữa kho nguồn (giản thể) và KB (phồn thể) — đóng băng: cặp lạ xuất hiện = có chữ bị sửa.
+CAP_GIAN_PHON = set("""万萬 专專 两兩 丧喪 临臨 为為 乐樂 乡鄉 于於 云雲 众眾 会會 伤傷 体體 内內 军軍 冲沖 决決 凑湊 则則 刚剛 剑劍 劳勞 华華 却卻 发發 台臺 后後 吕呂 国國 坚堅 堕墮 声聲 头頭 夹夾 学學 实實 宫宮 宽寬 对對 寿壽 将將 尧堯 尸屍 岁歲 岂豈 峥崢 嵘嶸 带帶 干乾 并並 广廣 应應 庙廟 异異 当當 忧憂 恶惡 惊驚 数數 断斷 无無 时時 显顯 晓曉 机機 杀殺 杂雜 权權 来來 杨楊 极極 楼樓 灾災 犹猶 盖蓋 着著 祸禍 禀稟 禄祿 积積 稳穩 穷窮 粮糧 纲綱 纵縱 绁紲 细細 终終 绝絕 绯緋 绿綠 缠纏 缢縊 缧縲 网網 罗羅 脱脫 艺藝 荡蕩 荣榮 虚虛 见見 誉譽 论論 详詳 诸諸 谁誰 谊誼 贞貞 财財 贪貪 贫貧 贱賤 贵貴 贾賈 资資 跃躍 辅輔 辈輩 辉輝 边邊 迁遷 运運 还還 进進 远遠 连連 邓鄧 里裏 钟鍾 钺鉞 铃鈴 银銀 锦錦 镇鎮 长長 门門 闲閑 阳陽 阴陰 隐隱 项項 须須 颜顏 飘飄 饿餓 马馬 骘騭 鸯鴦 鸳鴛""".split())
+
+
+def test_nguyen_van_khop_kho_nguon_toan_thu_tung_chu():
+    """KT-TT7 — 84 câu phồn thể của KB khớp TỪNG CHỮ với bài 斗数骨髓赋 trong kho nguồn Toàn Thư (bản chép giản thể):
+    cùng số dòng, cùng số chữ; chữ khác nhau chỉ được là cặp giản → phồn đã đóng băng (后 có thể giữ 后 hoặc thành 後)."""
+    nguon = json.loads((DATA.parents[2] / "fixtures" / "nguon" / "tu_vi_dau_so_toan_thu.json").read_text("utf-8"))
+    bai = next(t for t in nguon["quyen_1"] if t["thien"] == "斗数骨髓赋")["van"]
+    dong = [d for d in bai.split("\n") if d.strip()]
+    bo = lambda s: re.sub(r"[，。、；：！？\s]", "", s)  # noqa: E731
+    assert len(dong) == len(CAU) == 84
+    tong = 0
+    for d, c in zip(dong, CAU):
+        a, b = bo(d), bo(c["nguyen_van"])
+        assert len(a) == len(b), c["id"]
+        tong += len(a)
+        for x, y in zip(a, b):
+            assert x == y or x + y in CAP_GIAN_PHON, (c["id"], x, y)
+    assert tong == 1522
