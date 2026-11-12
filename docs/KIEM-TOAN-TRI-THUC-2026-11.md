@@ -316,3 +316,32 @@ Tỷ Kiên bản này chỉ có câu rất ngắn («比肩者，兄弟也») �
   lớp nữa sẽ lặp, cần so từng ô với nguyên văn thay vì viết mới: việc của đợt đối chiếu); 20 thiên luận hạn quyển 3 (nhiều câu đoán
   hoạ, cần chọn lọc từng thiên); Địa Không / Địa Kiếp / Khôi Việt theo cung (sách chỉ có 1–4 đoạn, không đủ 6 cung).
 
+
+### 10.8 Bát tự: cách cục đặc biệt theo «Luận tạp cách» (KT-TT4, 2026-11-12)
+
+**Đánh giá trước khi làm.** Hệ thống chỉ định cách theo tháng sinh (bát chính cách + Lộc / Nhận). Sách Tử Bình Chân Thuyên có riêng
+thiên «Luận tạp cách» cho lá số "tháng sinh không dùng được", trong đó bốn loại sách cho là có lý: một hành đắc thế (取五行一方秀气),
+hoá khí (从化取格), bỏ mệnh theo Tài (弃命保财), bỏ mệnh theo Sát (弃命从煞). Với những lá này, cách đọc của sách **ngược** hẳn cách
+"cân sức" (cách 1 bảo bù phần thiếu; sách bảo đi theo phần đang mạnh). Tác động: hiếm (30 / 5.000 lá mẫu ≈ 0,6 %) nhưng đúng chỗ
+người có lá số ấy hay thấy "bài đọc không giống mình".
+
+**Chọn cách làm** (3 hướng): (a) tự xếp lá vào cách đặc biệt và đổi hỷ / kỵ, mức — **loại**: ranh giới "thật tòng / giả tòng" các
+nhà cãi nhau, đổi mức cần đo và tăng `ENGINE_VERSION`; (b) không làm — bỏ sót đúng nhóm người đọc khó tính nhất; (c) **làm**: chỉ
+NHẬN DIỆN bằng điều kiện chặt theo chữ sách và thêm MỘT hộp "Một cách đọc khác" trong chương Năng lượng, có nguyên văn, nói rõ có
+thể ngược hai cách trên, hệ thống không chọn thay. Không đổi cách cục, dụng thần, mức.
+
+**Đã làm.**
+- CALC `engine/app/calc/battu_ngoai_cach.py` (`nhan_dien(tru)`), test viết trước `tests/test_battu_ngoai_cach.py`: golden = chính
+  4 mệnh ví dụ của sách (吴相公, mệnh 丁壬化木, 王十万, 李侍郎); ca phản chứng (lộ Quan Sát, không đắc lệnh, nhật chủ có gốc, lộ
+  Thực / Ấn, chi ngoài cục là Sát); câu hỷ / kỵ `TRICH` phải là chuỗi con nguyên văn kho nguồn; trên 5.000 lá mẫu < 2 %.
+- Điều kiện: chuyên vượng = sinh tháng cùng hành + đủ tam hợp / tam hội (Thổ: bốn chi Thổ) + can không lộ Quan Sát, chi không có
+  Sát, Tài lộ ≤ 1; hoá khí = can ngày ngũ hợp can tháng / giờ + hành hoá đắc lệnh + đủ cục + không lộ hành khắc; tòng Tài / Sát =
+  nhật chủ không gốc ở chi nào + tháng và ≥ 3 chi là hành ấy (chi còn lại sinh nó) + điều kiện "không tòng" của sách.
+- **Không làm** các cách sách gọi "mượn chữ không có" (đảo xung, triều dương, hợp lộc, tỉnh lan, hình hợp, dao hợp) và loạt cách
+  sách bảo bỏ (củng lộc, khôi cương, nhật đức…); chưa làm tòng nhi, giả tòng, hoá khí "thứ đẳng" (tháng Hợi / Mùi) — sách không nêu
+  đủ điều kiện.
+- RULES: `battu_doi_song._hop_ngoai_cach` — hộp `loi_khuyen`, mã `ds.bt.ngu_hanh.ngoai_cach.<mã>.<hành>.khuyen` (qua ràng buộc SQL
+  sẵn có, vào vòng kiểm chứng "Đúng với mình"); lời đời thường ở KB `battu_doi_song_kb.ngoai_cach` (vi + en, nháp), thuật ngữ +
+  nguyên văn chỉ ở "Vì sao nói vậy".
+- Không đổi mức / phép tính cũ → không tăng `ENGINE_VERSION` (0.1.8). Web không đổi (hộp đi qua khung báo cáo có sẵn).
+- **Đo tiếp**: tỉ lệ "Đúng với mình" của hộp này so với hộp Cách 1 / Cách 2 trên cùng lá — đủ phiếu thì mới xét đưa vào hỷ / kỵ.

@@ -1526,5 +1526,24 @@
     "viec": "Have regular health check-ups, and each month share one worry with someone close."
    }
   }
+ },
+ "ngoai_cach": {
+  "duoi": "This reading may point the opposite way from the two above. The system does not choose for you: look back over the past few years and see which one fits you better.",
+  "chuyen_vuong": {
+   "tieu_de": "Another reading: go with your {hanh} strength",
+   "y": "Your chart leans almost entirely one way: {hanh}, which is also your own element. For a chart like this the classic text offers one more reading: do not try to trim what is abundant, go with that strength. Read this way, {hy} suit you; the part to be careful with is {ky}."
+  },
+  "hoa_khi": {
+   "tieu_de": "Another reading: the whole chart turns to {hanh}",
+   "y": "Your chart has a rare feature: the part that stands for you pairs with the part right next to it, and the whole chart turns to {hanh}. For a chart like this the classic text offers one more reading: take {hanh} as the main axis. Read this way, {hy} suit you; the part to be careful with is {ky}."
+  },
+  "tong_tai": {
+   "tieu_de": "Another reading: follow the {hanh} current",
+   "y": "The part that stands for you is very thin, while {hanh} (the part about money and resources) covers almost the whole chart. For a chart like this the classic text offers one more reading: rather than trying to build yourself up, follow the current that is already strong. Read this way, {hy} suit you; the part to be careful with is {ky}."
+  },
+  "tong_sat": {
+   "tieu_de": "Another reading: follow the {hanh} current",
+   "y": "The part that stands for you is very thin, while {hanh} (the part about structure, duty and outside pressure) covers almost the whole chart. For a chart like this the classic text offers one more reading: rather than trying to build yourself up, follow the current that is already strong. Read this way, {hy} suit you; the part to be careful with is {ky}."
+  }
  }
 }
