@@ -451,6 +451,8 @@ def _ten_ngan(loai: str, slug: str) -> str:
 def _hoan_tat(t: dict) -> dict:
     if not t.get("y_chinh") and ngon_ngu.la_viet() and (yc := _yct.tao(t)):
         t["y_chinh"] = yc           # KB-TT1: ý chính rút từ chính trang → có ảnh tóm tắt (alt + ImageObject) cho họ chưa có KB bổ sung
+    if t.get("y_chinh") and ngon_ngu.la_viet() and any(len(y) > _yct.TOI_DA for y in t["y_chinh"]):
+        t["y_chinh"] = [y if len(y) <= _yct.TOI_DA else _yct._cat(y) for y in t["y_chinh"]]   # lá bài: ý dài tràn khung ảnh
     _td.gan(t)                      # EEAT-1: chủ biên / tác giả / thẩm định (thẩm định → "da_duyet")
     # SEO-K (2026-10-21): nháp có phần riêng < 20 % trong họ trang → tạm không index (vẫn có link, .md).
     t["index"] = t["trang_thai"] == "da_duyet" or (INDEX_NHAP_AI and not _dr.thap(t["loai"], t["slug"]))
