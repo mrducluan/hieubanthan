@@ -49,7 +49,7 @@ export function ChiTietCung({ ls, chi, vanHan, hanSao, lop, onHoi, onDienCau, ph
   for (const s of c.phu_tinh) {
     const ds = s.do_sang_nam_phai ?? s.do_sang;      // ưu tiên lối Việt (TV-NP2)
     nhom[nhomSao(s.ten, s.loai)].push({ ten: s.ten, hien: ds ? `${s.ten} (${DO_SANG_DAY[ds] ?? ds})` : s.ten, doSang: ds,
-      tuHoa: s.tu_hoa, nguonDoSang: nguon(s) });
+      tuHoa: s.tu_hoa, nguonDoSang: nguon(s), nghia: c.nghia_sao_nho?.[s.ten]?.y_nghia ?? null });
   }
   const daCo = new Set(c.phu_tinh.map((s) => s.ten));
   for (const t of [c.bac_si, c.tue_tien, c.tuong_tien, ...c.tap_dieu.filter((t) => !AN_TAP_DIEU.has(t))]) {

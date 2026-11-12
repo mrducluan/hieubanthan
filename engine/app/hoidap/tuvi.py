@@ -16,7 +16,7 @@ import datetime as dt
 import re
 import unicodedata
 
-from app import config
+from app import config, ngon_ngu
 from app.calc import lunar, tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc, tuvi_do_sang_vn
 from app.calc import tuvi_luu_nguyet as ln
 from app.hoidap import chung, hieu_cau, mo_dau, doi_song_muc as dsm
@@ -1202,7 +1202,9 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         return f"Phụ tinh đáng kể ở cung {m['cung']}: {ds}", None
     if l == "phu_tinh":
         noi = f" — trong lá số của bạn nằm ở cung {m['cung']}" if m.get("cung") else ""
-        return f"{m['ten']} ({m['nhom']}){noi}: {m['y_nghia']}", None
+        tc = kb.phu_tinh_cung(m["ten"], m.get("cung")) if ngon_ngu.la_viet() else None   # KT-TT3: theo Toàn Thư quyển 3
+        them = f" Riêng ở cung {m['cung']}, sách xưa ghi: {tc['y']}" if tc else ""
+        return f"{m['ten']} ({m['nhom']}){noi}: {m['y_nghia']}{them}", None
     if l == "tuoi":
         return f"Tuổi mụ tại thời điểm xem: {m['tuoi_mu']}.", None
     if l == "han":

@@ -382,8 +382,13 @@ def _nghia_sao_nho(p: dict) -> dict[str, dict]:
         return {}
     ten = [x["name"] for x in p["adjectiveStars"]] + [p["changsheng12"], p["boshi12"], p["jiangqian12"], p["suiqian12"],
                                                       tuvi_thai_tue_vn.ten_nam_phai(p["suiqian12"])]
-    return {t: {"nhom": m["nhom"], "y_nghia": m["y_nghia"], "do_tin": m["do_tin"]}
-            for t in dict.fromkeys(ten) if t and (m := tuvi_kb.sao_nho(t))}
+    ra = {t: {"nhom": m["nhom"], "y_nghia": m["y_nghia"], "do_tin": m["do_tin"]}
+          for t in dict.fromkeys(ten) if t and (m := tuvi_kb.sao_nho(t))}
+    # KT-TT3: phụ tinh ở chính cung này theo Toàn Thư quyển 3 (6 cung về việc và nếp sống) — tóm ý + nguyên văn.
+    for x in p["minorStars"]:
+        if (m := tuvi_kb.phu_tinh_cung(x["name"], p["name"])):
+            ra[x["name"]] = {"nhom": "Phụ tinh ở cung này", "y_nghia": m["y"], "trich": m["trich"], "do_tin": "co_thu"}
+    return ra
 
 
 def _do_sang_phu(p: dict) -> dict[str, str]:

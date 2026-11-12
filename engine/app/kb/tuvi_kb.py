@@ -75,6 +75,13 @@ def ten_phu_tinh() -> list[str]:
     return list(_d()["phu_tinh"])
 
 
+def phu_tinh_cung(sao: str, cung: str | None) -> dict | None:
+    """KT-TT3: phụ tinh ở MỘT cung theo Tử Vi Đẩu Số Toàn Thư quyển 3 → {y (tóm ý Việt), trich (nguyên văn)}; chỉ 6 cung
+    nói về việc và nếp sống (không có mục cho cung người thân / Tật Ách)."""
+    m = _d().get("phu_tinh_cung", {}).get(sao, {}).get(cung or "")
+    return dict(m) if m else None
+
+
 def sao_nho(ten: str) -> dict | None:
     """KT-TT: nghĩa ngắn của tạp diệu và sao các vòng Trường Sinh, Bác Sĩ, Tướng tiền, Thái Tuế (mục riêng — KHÔNG nằm
     trong `phu_tinh` để tên một chữ như «Tử», «Mộ», «Bệnh» không làm lệch việc nhận tên sao trong câu hỏi)."""
