@@ -8,7 +8,7 @@
 ### 4ar. KT-TT — kiểm toán kho tri thức Tử vi · Bát tự · Kinh Dịch (2026-11-12, `docs/KIEM-TOAN-TRI-THUC-2026-11.md`)
 
 - [x] (Q1–Q3 đã duyệt 2026-11-12; điều hậu đã sửa 34 ô — chỉ là phần hiển thị, không đổi phép tính)
-- [ ] (Quyết định **Q5**) Duyệt sửa 4 chỗ bảng hỷ / kỵ cách cục Bát tự lệch Tử Bình Chân Thuyên (tài liệu mục 10.2) — sửa sẽ đổi mức một số chương, tăng `ENGINE_VERSION`.
+- [x] (Quyết định **Q5**) anh giao em quyết 2026-11-12 — đã sửa 2/4 chỗ có căn cứ nguyên văn (Thất Sát, Chính Ấn / Thiên Ấn), 2 chỗ kia không cần sửa; khoảng 3 % lá số đổi một nhãn; `ENGINE_VERSION` 0.1.8 (tài liệu mục 10.6). **Việc của anh: deploy engine trước web.**
 - [ ] Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
 - [ ] (Tuỳ chọn) Mời người rành Dịch / Tử vi đọc soát: 64 trang quẻ (lời Ngô Tất Tố bản điện tử còn lỗi gõ), 74 nghĩa sao nhỏ.
 - [x] **Gửi sách em không tự lấy được** (anh đã gửi thư mục Drive 9 tệp 2026-11-12) (Google Drive hoặc đính kèm; PDF chữ tốt hơn ảnh quét) — ưu tiên: (1) *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang), (2) *Tử vi tổng hợp* (Nguyễn Phát Lộc), (4) *Tử Bình Chân Thuyên* bản chữ — mở `ctext.org/wiki.pl?if=gb&res=413248` trên trình duyệt rồi lưu PDF, (5) *Uyên Hải Tử Bình* bản đủ (ctext res=307303), (6) *Kinh Dịch* Ngô Tất Tố dịch / *Chu Dịch* Phan Bội Châu. Bảng đầy đủ: mục 6 của tài liệu.

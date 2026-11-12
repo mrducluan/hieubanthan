@@ -144,3 +144,31 @@ def test_co_tho_nhat_chu_khop_nguyen_van_uyen_hai():
         assert 80 <= len(ct["y"]) <= 420 and not any(c in ct["y"] for c in ("chết", "hoạ", "tai ương", "yểu")), can
     tr = trang.lay("nhat_chu", "nhat-chu-giap")
     assert any("Uyên Hải" in m["tieu_de"] and "甲木天干作首排" in m["danh_sach"][0] for m in tr["muc"])
+
+
+def test_q5_hy_ky_cach_cuc_khop_luan_dung_than():
+    """Q5: bảng hỷ / kỵ (dụng thần cách 2) khớp câu nguyên văn thiên «Luận dụng thần» — câu trích phải có trong kho nguồn."""
+    from app.kb import battu_doi_song_kb as dk
+    van = "".join(x["van"] for x in doc("fixtures/nguon/tu_binh_chan_thuyen.json")["thien"])
+    for cau in ("七煞喜食神以制伏，忌财印以资扶", "七煞逢财无制，七煞格败也", "印喜官煞以相生，劫才以护印",
+                "食喜身旺以相生，生财以护食", "伤官喜佩印以制伏，生财以化伤"):
+        assert cau in van, cau
+    sat = dk.cach("that_sat")
+    assert sat["hy"] == ["Thực Thương"] and sat["ky"] == ["Tài"] and sat["than_nhuoc"] == {"hy": ["Ấn"], "ky": ["Tài"]}
+    for ma in ("chinh_an", "thien_an"):
+        assert dk.cach(ma)["hy"] == ["Quan Sát", "Tỷ Kiếp"] and dk.cach(ma)["ky"] == ["Tài"]
+    assert dk.cach("thuc_than")["than_nhuoc"]["hy"] == ["Tỷ Kiếp"] and dk.cach("thuong_quan")["than_nhuoc"]["hy"] == ["Ấn"]
+
+
+def test_co_van_thap_than_khop_nguyen_van_uyen_hai():
+    van = "\n".join(v for x in doc("fixtures/nguon/uyen_hai_tu_binh.json")["thien"] for v in x["van"])
+    kbd = doc("app/kb/data/battu_kb.json")
+    cv = kbd["co_van_thap_than"]
+    assert set(cv) == set(kbd["thap_than"])
+    for ten, o in cv.items():
+        assert o["han"] and all(h in van for h in o["han"]), ten
+        assert 100 <= len(o["y"]) <= 420, ten
+        assert not any(c in o["y"].lower() for c in ("chết", "khắc vợ", "khắc chồng", "yểu", "tai hoạ", "hoạ")), ten
+    with ngon_ngu.dung("en"):
+        en = trang.lay("thap_than", trang._ds_thap_than()[0][1])
+    assert any("Yuan Hai Zi Ping" in m["tieu_de"] for m in en["muc"])
