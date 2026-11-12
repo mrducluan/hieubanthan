@@ -172,3 +172,18 @@ def test_co_van_thap_than_khop_nguyen_van_uyen_hai():
     with ngon_ngu.dung("en"):
         en = trang.lay("thap_than", trang._ds_thap_than()[0][1])
     assert any("Yuan Hai Zi Ping" in m["tieu_de"] for m in en["muc"])
+
+
+def test_phu_tinh_cung_khop_nguyen_van_toan_thu():
+    """KT-TT3: 52 mục phụ tinh × cung — nguyên văn là đoạn của kho nguồn; chỉ 6 cung về việc và nếp sống."""
+    van = {x["van"] for x in doc("fixtures/nguon/tu_vi_dau_so_toan_thu.json")["muoi_hai_cung"]}
+    ptc = doc("app/kb/data/tuvi_kb.json")["phu_tinh_cung"]
+    cung = {c for ds in ptc.values() for c in ds}
+    assert cung == {"Tài Bạch", "Quan Lộc", "Thiên Di", "Phúc Đức", "Điền Trạch", "Nô Bộc"}
+    assert sum(len(ds) for ds in ptc.values()) >= 50 and set(ptc) <= set(tuvi_kb.ten_phu_tinh())
+    cam = ("chết", "yểu", "khắc", "hoạ", "phá sản", "tù", "nghèo hèn", "hạ tiện", "bỏ tổ", "trộm")
+    for sao, ds in ptc.items():
+        for c, m in ds.items():
+            assert m["trich"] in van, (sao, c)
+            assert 40 <= len(m["y"]) <= 330 and not any(x in m["y"].lower() for x in cam), (sao, c, m["y"])
+    assert tuvi_kb.phu_tinh_cung("Kình Dương", "Tài Bạch")["y"] and tuvi_kb.phu_tinh_cung("Kình Dương", "Phu Thê") is None

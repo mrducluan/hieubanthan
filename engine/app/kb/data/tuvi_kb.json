@@ -1483,5 +1483,234 @@
    "school_id": "nam_phai_viet",
    "do_tin": "truyen_thong_viet"
   }
+ },
+ "phu_tinh_cung_nguon": "Tử Vi Đẩu Số Toàn Thư (紫微斗數全書) quyển 3, phần luận mười hai cung — `trich` = nguyên văn đoạn sách về sao ấy ở cung ấy (chuỗi con của fixtures/nguon/tu_vi_dau_so_toan_thu.json, test); `y` = tóm ý tiếng Việt của ban biên tập (nháp, lời hành vi, kèm việc nên làm). Chỉ 6 cung nói về việc và nếp sống (Tài Bạch, Quan Lộc, Thiên Di, Phúc Đức, Điền Trạch, Nô Bộc). KHÔNG làm 6 cung người thân / thân thể (Huynh Đệ, Phu Thê, Tử Nữ, Phụ Mẫu, Tật Ách, và phần hình tướng ở Mệnh): sách ở đó đoán số anh em, số con, hình khắc, thương tật — trái quy tắc lời luận.",
+ "phu_tinh_cung": {
+  "Văn Xương": {
+   "Tài Bạch": {
+    "y": "Khi sao sáng thì tiền bạc dư dả, có thêm sao tốt thì đường kiếm tiền rộng. Khi sao yếu lại đi cùng sao khó, sách ví như người học giỏi mà túi mỏng — nên biến hiểu biết thành nghề có thu nhập đều.",
+    "trich": "文昌富足仓箱，加吉星财气旺，巨门同富，陷地将同陀火铃空败寒儒辈。"
+   },
+   "Quan Lộc": {
+    "y": "Sao sáng, đi cùng Thái Dương và sao tốt thì hợp cả việc chữ nghĩa lẫn việc điều hành; cùng Thiên Phủ, Văn Khúc thì công việc và thu nhập đều vững.",
+    "trich": "文昌入庙太阳同加吉科权禄，文武之材，同天府文曲富贵双全。"
+   },
+   "Thiên Di": {
+    "y": "Ra ngoài dễ gặp người nâng đỡ và phát triển; chỉ ngại người hẹp hòi quanh mình. Đi cùng sao khó thì ở ngoài kém yên — nên chọn bạn đồng hành kỹ.",
+    "trich": "文昌出外遇贵发达，小人不足，加羊陀火铃空劫在外欠安宁。"
+   },
+   "Phúc Đức": {
+    "y": "Sao sáng có sao tốt thì biết hưởng, vui sống. Sao yếu gặp sao khó thì thân và tâm khó yên — nên có giờ nghỉ cố định mỗi ngày.",
+    "trich": "文昌加吉星入庙享福快乐，陷地遇羊陀火铃空劫，心身俱不得安静。"
+   },
+   "Điền Trạch": {
+    "y": "Gặp các sao tốt thì mua thêm được nhiều nhà đất. Đi cùng sao khó thì khó giữ phần có sẵn — giấy tờ nhà đất nên làm kỹ.",
+    "trich": "文昌会诸吉田园广置，加羊陀火铃空劫败祖。"
+   },
+   "Nô Bộc": {
+    "y": "Sao sáng đứng một mình thì có người giúp việc đắc lực. Đi cùng sao khó thì có người nhưng khó bền lòng — nên rõ ràng quyền lợi.",
+    "trich": "文昌入庙独守得力助主，加羊陀火铃空劫虽有背主。"
+   }
+  },
+  "Văn Khúc": {
+   "Tài Bạch": {
+    "y": "Sao sáng thì đủ đầy, dễ được người có vị thế giúp về tiền. Đi cùng sao khó thì tiền vào rồi lại ra — nên có một khoản để riêng, không đụng tới.",
+    "trich": "文曲入庙富足，加吉星得贵人财，加羊陀火铃空劫家忌，东来西去成败不遂。"
+   },
+   "Quan Lộc": {
+    "y": "Sao sáng thì việc bàn giấy hay việc thực địa đều làm được; gần người có quyền thì được tin dùng. Đi cùng sao khó thì công việc ở mức bình thường — nên bền một hướng.",
+    "trich": "文曲庙旺文武皆宜，陷宫与天机太阴同宫，胥吏权贵，会紫府左右近君频而执政，加羊陀火铃空劫平常。"
+   },
+   "Thiên Di": {
+    "y": "Ra ngoài gần được người có vị thế; thêm sao tốt thì có tiền. Đi cùng sao khó thì ít khi như ý — nên chuẩn bị kỹ trước chuyến đi, việc xa.",
+    "trich": "文曲在外近贵，加吉星得财，加羊陀火铃少遂志。"
+   },
+   "Điền Trạch": {
+    "y": "Sao sáng thì giữ được nhà cửa có sẵn; có sao tốt thì tự mua thêm. Đi cùng sao khó thì lúc thêm lúc bớt.",
+    "trich": "文曲旺地有分，守祖业，加吉星自置，同羊陀火铃空劫凑有进有退。"
+   },
+   "Nô Bộc": {
+    "y": "Sao sáng thì được người giúp; sao yếu thì ít. Đi cùng sao khó thì người dễ trách rồi rời đi — nên lắng nghe sớm.",
+    "trich": "文曲入庙得力，陷宫无分，加羊陀火铃空劫怨主逃走。"
+   }
+  },
+  "Tả Phù": {
+   "Tài Bạch": {
+    "y": "Sách ghi ở cung nào cũng nghiêng về đủ đầy; gặp sao tốt thì có người giúp về tiền. Đi cùng sao khó thì lúc được lúc hụt, khó giữ — nên ghi chép thu chi và chậm lại trước khoản lớn.",
+    "trich": "左辅右弼，诸宫富足，会诸吉星得贵人财，加羊陀火铃空劫耗忌，主成败而不聚。"
+   },
+   "Quan Lộc": {
+    "y": "Hợp vai trợ lực, tổ chức; sách ghi việc cần hành động thì nổi hơn việc bàn giấy. Đi cùng sao khó thì tiếng tăm lúc lên lúc xuống — giữ chữ tín là gốc.",
+    "trich": "左辅入庙文武之材，武职最旺，不利文人，会吉星身中清，文武皆良，见羊陀火铃空劫进退声名。"
+   },
+   "Thiên Di": {
+    "y": "Càng đi, càng làm thì càng có người giúp. Đi cùng sao khó thì dễ bị người dưới làm phiền, sinh lời ra tiếng vào — nên nói rõ việc ngay từ đầu.",
+    "trich": "左辅动中贵人扶持发福，加羊陀火铃下人不足多招是非。"
+   },
+   "Phúc Đức": {
+    "y": "Có sao tốt thì hưởng phúc; đứng một mình thì về sau an yên. Đi cùng sao khó thì vất vả hơn — nên học cách nhận giúp đỡ.",
+    "trich": "左辅加吉星享福独守，晚年安宁，加羊陀火铃空劫辛勤。"
+   },
+   "Điền Trạch": {
+    "y": "Có phần nhà đất từ gia đình; gặp sao tốt thì nhiều. Đi cùng sao khó thì phần có sẵn giảm đi — nên dựa vào sức mình là chính.",
+    "trich": "左辅有祖业，加羊陀火铃空劫退祖，田地少，会吉星多。"
+   },
+   "Nô Bộc": {
+    "y": "Đứng một mình mà sáng thì nói một tiếng nhiều người theo. Đi cùng sao khó thì khó giữ người — đãi ngộ công bằng là cách giữ.",
+    "trich": "左辅独守旺相一呼百诺，加羊陀火铃空劫耗忌背主难招。"
+   }
+  },
+  "Hữu Bật": {
+   "Tài Bạch": {
+    "y": "Sách ghi ở cung nào cũng nghiêng về đủ đầy; gặp sao tốt thì có người giúp về tiền. Đi cùng sao khó thì lúc được lúc hụt, khó giữ — nên hỏi thêm một người trước khoản chi lớn.",
+    "trich": "左辅右弼，诸宫富足，会诸吉星得贵人财，加羊陀火铃空劫耗忌，主成败而不聚。"
+   },
+   "Quan Lộc": {
+    "y": "Hợp việc thực thi, hỗ trợ; cùng sao tốt thì công việc và tiền đều đẹp. Sao yếu hoặc đi cùng sao khó thì có lúc bị đổi vị trí — nên làm rõ phạm vi trách nhiệm của mình.",
+    "trich": "右弼宜居武职，不和文人，与紫府昌曲同，财官双美，陷宫成败有贬谪，见美陀火铃空劫亦有黜降。"
+   },
+   "Thiên Di": {
+    "y": "Ra ngoài gặp người giúp mà phát triển; sách dặn không nên ngồi yên một chỗ. Đi cùng sao khó thì dễ hơn thua với người ngoài — nhường nửa bước thì yên.",
+    "trich": "右弼出外遇贵人扶持发达，不宜静守，加羊陀火铃空劫，在外与人有争竞。"
+   },
+   "Phúc Đức": {
+    "y": "Sách ghi phúc lộc trọn vẹn, có sao tốt thì ít lo. Gặp sao khó thì hay bận lòng — thử viết nỗi lo ra giấy trước khi ngủ.",
+    "trich": "右弼生平福禄全美，加吉星一生少忧，见羊陀火铃空劫，凑劳心欠安。"
+   },
+   "Nô Bộc": {
+    "y": "Đứng một mình thì có cả nhóm người theo. Đi cùng sao khó thì nên cẩn trọng khi giao tiền bạc cho người khác — luôn có đối soát.",
+    "trich": "右弼独守成行，加羊陀火铃空劫耗忌，背主盗财而走。"
+   }
+  },
+  "Lộc Tồn": {
+   "Tài Bạch": {
+    "y": "Sách tả như kho đầy, tiền đến mà không quá nhọc. Đi cùng sao khó thì trước ít sau có — kiên nhẫn tích dần là đúng nhịp.",
+    "trich": "禄存富足仓箱堆金积玉，加吉美不待劳而财自加，羊陀火铃空劫耗忌先无后有。"
+   },
+   "Quan Lộc": {
+    "y": "Gặp sao tốt thì việc nào cũng hợp, công việc và thu nhập cùng đẹp; sách ghi sao này ở cung nào cũng là điểm cộng.",
+    "trich": "禄存会吉文武皆良，财官双美，子孙爵秩，诸宫为美。"
+   },
+   "Thiên Di": {
+    "y": "Ra ngoài cơm áo như ý. Gặp sao khó thì hay không vừa lòng với người — nên giữ kỳ vọng vừa phải.",
+    "trich": "禄存出外衣禄遂心，会羊陀火铃空劫与人多不足意。"
+   },
+   "Phúc Đức": {
+    "y": "Phúc dày, sống điềm tĩnh; có sao tốt thì nhiều niềm vui. Gặp sao khó thì thân tâm khó tĩnh — nên giữ một thói quen làm mình lắng lại.",
+    "trich": "禄存终身福厚安静处世，加吉星有喜有福，见羊陀火铃空劫，心身不得宁静。"
+   },
+   "Điền Trạch": {
+    "y": "Nhà đất nhiều, sao sáng thì tự mua được; gặp sao tốt thì giữ và phát triển phần gia đình để lại. Đi cùng sao khó thì ít hơn.",
+    "trich": "禄存田园多旺自置，会吉星承祖业荣昌，加羊陀火铃空劫田宅少。"
+   },
+   "Nô Bộc": {
+    "y": "Nhiều người theo giúp; có sao tốt thì họ góp sức dựng nghiệp. Gặp sao khó thì người giúp kém sức hơn.",
+    "trich": "禄存奴仆多，加吉星卫主起家，见羊陀火铃耗忌欠力。"
+   }
+  },
+  "Kình Dương": {
+   "Tài Bạch": {
+    "y": "Ở Thìn, Tuất, Sửu, Mùi: kiếm tiền từ chỗ đông người, nhiều cạnh tranh. Khi sao yếu thì khó giữ của có sẵn, tiền đến từ việc nặng nhọc ít ai muốn làm — nên chọn nghề cần sự lì và tránh vay nóng.",
+    "trich": "擎羊辰戌丑未宫闹中生财，陷地破祖不聚终不能发达，只鱼盐污垢中生财。"
+   },
+   "Quan Lộc": {
+    "y": "Sao sáng thì hợp việc cần quyết đoán, cạnh tranh, kỷ luật; có sao tốt thì có thực quyền. Sao yếu thì bình thường, dễ có danh mà ít thực — nên chọn chỗ đo được kết quả.",
+    "trich": "擎羊入庙最利武职，同吉星权贵，陷地平常，虚名而已。"
+   },
+   "Thiên Di": {
+    "y": "Sao sáng thì ra ngoài đủ đầy, có sao tốt thì kiếm tiền giữa chỗ đông; sao yếu thì vẫn thành việc nhưng hay không vừa ý với người dưới — nên rõ ràng về quyền lợi.",
+    "trich": "擎羊入庙在外衣禄遂心，加吉星闹中发财，陷地有成下人多不足。"
+   },
+   "Phúc Đức": {
+    "y": "Sao sáng thì tìm được vui trong lúc bận rộn; sao yếu thì hay lo, hao sức; có sao tốt thì bớt lo. Đứng một mình thì khó ngồi yên — vận động là cách nghỉ hợp với bạn.",
+    "trich": "擎羊入庙动中有福，陷宫劳心欠力，得吉星，同减忧独守身心不安。"
+   },
+   "Điền Trạch": {
+    "y": "Sao sáng thì trước hao sau thành; sao yếu lại thêm Địa Không, Địa Kiếp thì khó giữ phần có sẵn — đừng vội mua bán nhà đất.",
+    "trich": "擎羊入庙先破后成陷地加空劫退祖业。"
+   },
+   "Nô Bộc": {
+    "y": "Dễ có va chạm với cộng sự, người giúp khó ở lâu; sao sáng thì về sau mới có người hợp — nên nói rõ kỳ vọng từ đầu.",
+    "trich": "擎羊背主招怨不得力，有也不长久入庙晚年方可招。"
+   }
+  },
+  "Đà La": {
+   "Tài Bạch": {
+    "y": "Kiếm tiền từ nơi náo nhiệt nhưng chậm; sao yếu thì phải chăm mới đủ. Thêm Địa Không, Địa Kiếp thì tiền vào ra thất thường — nên chia nhỏ khoản để dành.",
+    "trich": "陀罗闹中生财，陷宫辛勤求财度日，加空劫东来西去。"
+   },
+   "Quan Lộc": {
+    "y": "Đứng một mình thì công việc bình thường, tiến chậm; có sao tốt cũng dễ là danh nhiều hơn thực — nên đo mình bằng việc đã làm xong.",
+    "trich": "陀罗独守平常，加吉星亦虚名而已。"
+   },
+   "Thiên Di": {
+    "y": "Có sao tốt thì ra ngoài gặp người giúp và có tiền; sao yếu lại thêm sao khó thì dễ vướng lời ra tiếng vào — nên tránh chuyện không phải của mình.",
+    "trich": "陀罗会吉星在外遇贵得财，陷地加羊火铃星空劫多招是非下人不足。"
+   },
+   "Phúc Đức": {
+    "y": "Đứng một mình thì nhọc; sao sáng thì có phúc lộc; sao yếu thì hay phải chạy ngược xuôi; có sao tốt thì về sau thảnh thơi.",
+    "trich": "陀罗独守辛勤，入庙有福禄，陷地奔驰，加吉星晚年有福。"
+   },
+   "Điền Trạch": {
+    "y": "Khó dựa vào phần có sẵn, phải chăm làm; có sao tốt thì trước chưa có, sau có.",
+    "trich": "陀罗退祖辛勤度日，加吉星先无后有，加空劫全无。"
+   },
+   "Nô Bộc": {
+    "y": "Người giúp thường thiếu sức và hay phàn nàn; sao sáng có sao tốt thì vẫn có người hợp.",
+    "trich": "陀罗奴仆欠力怨主，入庙加吉星有分。"
+   }
+  },
+  "Hỏa Tinh": {
+   "Tài Bạch": {
+    "y": "Tiền đến nhanh và đi cũng nhanh; sao yếu thì vất vả hơn; có sao tốt thì tiền nhiều, toại ý. Nên tách ngay một phần mỗi khi có khoản lớn.",
+    "trich": "火星独守横发横破，陷宫辛勤，加吉星财多遂志。"
+   },
+   "Quan Lộc": {
+    "y": "Sách ghi lúc trẻ công việc lúc được lúc hỏng, về sau mới toại ý; gặp Tử Vi, Tham Lang thì tốt. Nên kiên nhẫn, đừng bỏ ngang khi mới vấp.",
+    "trich": "火星晚年功名遂心，早年成败，会紫微贪狼吉，陷地不美。"
+   },
+   "Thiên Di": {
+    "y": "Đứng một mình thì ra ngoài hay bồn chồn; có sao tốt thì kiếm được tiền nơi náo nhiệt; thêm sao khó thì dễ vướng lời ra tiếng vào — nên chậm một nhịp trước khi phản ứng.",
+    "trich": "火星独守出外不安，加吉星闹中进财，加羊陀空劫招是非在外少遂志。"
+   },
+   "Phúc Đức": {
+    "y": "Khó ngồi yên, hay làm nhiều nhọc sức; có sao tốt thì về sau toại ý — nên tập nghỉ trước khi mệt.",
+    "trich": "火星欠安劳力辛勤，加吉星晚年遂志。"
+   },
+   "Điền Trạch": {
+    "y": "Đứng một mình thì khó dựa vào nhà cửa có sẵn; gặp sao tốt thì trước chưa có, sau có — nhà là thứ bạn tự gây dựng.",
+    "trich": "火星独守，退祖业，会吉星先无后有，加空劫全无。"
+   },
+   "Nô Bộc": {
+    "y": "Đứng một mình thì cộng sự hay trách, ít giúp được; sao sáng có sao tốt thì có một hai người tin cậy.",
+    "trich": "火星独守怨主不得力，加吉星入庙可招一二。"
+   }
+  },
+  "Linh Tinh": {
+   "Tài Bạch": {
+    "y": "Sao sáng đứng một mình thì có lúc được khoản bất ngờ; sao yếu thì kiếm tiền nhọc hơn — nên dựa vào thu nhập đều thay vì trông khoản bất ngờ.",
+    "trich": "铃星入庙独守横发，陷地孤寒辛苦度日。"
+   },
+   "Quan Lộc": {
+    "y": "Sao sáng đứng một mình thì tốt, có thêm sao tốt thì có quyền; sao yếu thì kém hơn — nên chọn việc cần sự bền bỉ, tỉ mỉ.",
+    "trich": "铃星独守旺宫吉，陷地不美，加诸吉星权贵。"
+   },
+   "Thiên Di": {
+    "y": "Có sao tốt đi cùng thì ra ngoài thuận; thêm sao khó thì thiếu thốn hơn, dễ có lời ra tiếng vào — ở nơi mới nên có người quen dẫn đường.",
+    "trich": "铃星有吉星同在外吉，加羊火铃空劫不足招是非。"
+   },
+   "Phúc Đức": {
+    "y": "Hay ôm việc, nhọc lòng; có sao tốt thì bình hoà — mỗi tuần nên chọn một việc để buông.",
+    "trich": "铃星劳苦，加吉星平和，独守辛勤。"
+   },
+   "Điền Trạch": {
+    "y": "Khó dựa vào phần có sẵn; sao sáng có sao tốt thì tự mua được.",
+    "trich": "铃星退祖，入庙加吉星自有置，见空劫全无。"
+   },
+   "Nô Bộc": {
+    "y": "Đứng một mình thì ít người giúp, dễ bất hoà; gặp sao tốt, sao sáng thì có người giúp việc, giữ nhà.",
+    "trich": "铃星独守不得力，恨主，会吉星入庙，助主卫家，加空劫耗忌全欠力。"
+   }
+  }
  }
 }

@@ -109,7 +109,7 @@ const Cung = z.object({
   phu_tinh: z.array(PhuTinh),
   tap_dieu: z.array(z.string()),
   /** KT-TT: nghĩa ngắn của tạp diệu + sao bốn vòng trong cung (engine tra KB; web chỉ hiện). */
-  nghia_sao_nho: z.record(z.string(), z.object({ nhom: z.string(), y_nghia: z.string(), do_tin: z.string().optional() })).optional(),
+  nghia_sao_nho: z.record(z.string(), z.object({ nhom: z.string(), y_nghia: z.string(), do_tin: z.string().optional(), trich: z.string().optional() })).optional(),
   truong_sinh: z.string(),
   bac_si: z.string(),
   tuong_tien: z.string(),

@@ -300,3 +300,19 @@ Golden: 3/15 lá mẫu Bát tự đổi (đúng ba cách này); mã kiểm chứ
 + tóm ý Việt và Anh (nháp, lời trung tính; bỏ các câu phán khắc vợ / khắc chồng / thọ yểu). Hiện ở 10 trang `/bat-tu/thap-than/*`.
 Tỷ Kiên bản này chỉ có câu rất ngắn («比肩者，兄弟也») — đủ dùng, sẽ bổ sung khi có bản đủ.
 
+### 10.7 Tử vi: phụ tinh ở từng cung theo Toàn Thư quyển 3 (2026-11-12)
+
+Đánh giá trước khi làm: phần «luận mười hai cung» của Toàn Thư có 289 đoạn, nhưng **một nửa không dùng được cho người đọc** —
+ở cung Huynh Đệ, Phu Thê, Tử Nữ, Phụ Mẫu, Tật Ách sách đoán số anh em, số con, hình khắc cha mẹ, thương tật ("三人", "刑克", "四肢必伤残").
+Đưa các câu đó thành lời Việt là trái quy tắc lời luận (không phán, không doạ, SK-1). Vì vậy chỉ làm phần có ích:
+
+- KB `tuvi_kb.phu_tinh_cung`: **52 mục = 9 phụ tinh** (Văn Xương, Văn Khúc, Tả Phù, Hữu Bật, Lộc Tồn, Kình Dương, Đà La, Hỏa Tinh,
+  Linh Tinh) **× 6 cung về việc và nếp sống** (Tài Bạch, Quan Lộc, Thiên Di, Phúc Đức, Điền Trạch, Nô Bộc). Mỗi mục: `trich` =
+  nguyên văn đoạn sách (test bắt phải là đoạn của kho nguồn) + `y` = tóm ý Việt bằng lời hành vi, kèm một việc nên làm (nháp).
+- Người dùng thấy ở đâu: bấm một phụ tinh trong **chi tiết cung** của lá số → hiện nghĩa riêng ở cung đó (trước chỉ có một câu chung
+  cho mọi cung); hỏi đáp "Kình Dương của tôi thế nào" → thêm câu "Riêng ở cung …, sách xưa ghi: …".
+- Không đổi mức, không đổi phép tính, không đưa vào chấm hộp báo cáo (đợt sau, cần đo trước).
+- **Chưa làm và vì sao**: lời Việt cho 14 chính tinh × 12 cung của Toàn Thư (KB đời sống đã có lời riêng 14 × 12 × sáng / hãm — thêm
+  lớp nữa sẽ lặp, cần so từng ô với nguyên văn thay vì viết mới: việc của đợt đối chiếu); 20 thiên luận hạn quyển 3 (nhiều câu đoán
+  hoạ, cần chọn lọc từng thiên); Địa Không / Địa Kiếp / Khôi Việt theo cung (sách chỉ có 1–4 đoạn, không đủ 6 cung).
+
