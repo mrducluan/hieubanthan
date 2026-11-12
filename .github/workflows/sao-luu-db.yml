@@ -41,7 +41,7 @@ jobs:
       - name: Sao lưu + mã hoá
         if: steps.co.outputs.chay == '1'
         run: bash supabase/sao-luu/sao-luu.sh "$RUNNER_TEMP/sao-luu"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: steps.co.outputs.chay == '1'
         with:
           name: db-${{ github.run_id }}
