@@ -109,6 +109,66 @@ def _huong_tot_hien(q: dict) -> str:
     return ", ".join(_tn.ten("huong", h) for h in _huong_tot(q))
 
 
+def _quan_he_hanh(o: str, hanh: str) -> str:
+    """Hành của người kia (`o`) so với hành của bản mệnh — chỉ là quan niệm dân gian về hợp tính."""
+    if o == hanh:
+        return "Cùng hành"
+    if cc._SINH[o] == hanh:
+        return "Họ sinh bạn (nâng đỡ)"
+    if cc._SINH[hanh] == o:
+        return "Bạn sinh họ (bạn nuôi dưỡng)"
+    if cc._KHAC[o] == hanh:
+        return "Họ khắc bạn (gây áp lực)"
+    return "Bạn khắc họ (bạn chế ngự)"
+
+
+def _muc_so_sanh(nam: int, chi: str, hanh: str, ten: str, tam_hop, luc_hop, luc_xung) -> tuple[list[dict], list[dict]]:
+    """KB-TT2 (chỉ bản Việt): hai bảng tính từ chính năm sinh — các năm sinh liền kề và các năm âm lịch sắp tới — cùng hỏi đáp
+    tuổi mụ / năm cùng mệnh. Dữ kiện tính (lunar, can_chi), không thêm nghĩa mới; số liệu riêng cho từng năm sinh."""
+    gan = []
+    for n in range(nam - 3, nam + 4):
+        c, ch = lunar.can_chi_nam(n)
+        na = cc.nap_am(c, ch)
+        d = n - nam
+        so_bao = "Chính bạn" if d == 0 else (f"Sinh sau bạn {d} năm" if d > 0 else f"Sinh trước bạn {-d} năm")
+        gan.append([so_bao, f"{n} {c} {ch}", na["ten"], "—" if d == 0 else _quan_he_hanh(na["hanh"], hanh)])
+    sap = []
+    for n in range(2026, 2032):
+        c, ch = lunar.can_chi_nam(n)
+        if ch == chi:
+            qh = "Năm tuổi (cùng con giáp)"
+        elif ch in tam_hop:
+            qh = "Tam hợp với tuổi bạn"
+        elif ch == luc_hop:
+            qh = "Lục hợp với tuổi bạn"
+        elif ch == luc_xung:
+            qh = "Lục xung với tuổi bạn"
+        else:
+            qh = "Bình thường"
+        sap.append([f"Tuổi mụ {n - nam + 1}, năm {n} ({c} {ch})", qh])
+    muc = [
+        {"tieu_de": f"Người sinh năm {nam} so với các năm sinh gần đó thế nào?",
+         "doan": f"Mệnh {ten} được tính riêng từng năm sinh, nên người sinh trước hoặc sau bạn vài năm có thể cùng hành, sinh hoặc khắc hành của bạn. "
+                 "Bảng dưới xếp ba năm trước và ba năm sau năm sinh của bạn. Quan hệ ngũ hành chỉ là quan niệm dân gian về mức hợp tính, "
+                 "không dùng để chọn bạn đời hay đối tác.",
+         "bang": {"cot": ["So với bạn", "Năm sinh và tuổi", "Mệnh nạp âm", "Hành so với bạn"], "dong": gan}},
+        {"tieu_de": f"Các năm âm lịch 2026–2031 đối với tuổi {chi} sinh năm {nam}",
+         "doan": f"Tuổi mụ của người sinh năm {nam} bằng năm xem trừ năm sinh cộng một. Cột cuối so con giáp của năm xem với tuổi {chi}. "
+                 "Đây là mốc tập quán để tham khảo khi chọn thời điểm việc lớn, nhiều gia đình vẫn làm như thường.",
+         "bang": {"cot": ["Tuổi mụ và năm âm lịch", "Con giáp năm so với tuổi bạn"], "dong": sap}},
+    ]
+    cung_menh = [n for n in range(1900, 2051) if cc.nap_am(*lunar.can_chi_nam(n))["ten"] == ten]
+    hd = [
+        {"hoi": f"Năm 2027 người sinh năm {nam} bao nhiêu tuổi?",
+         "dap": f"Năm dương lịch 2027 là {2027 - nam} tuổi theo năm sinh, còn tuổi mụ theo tập quán là {2027 - nam + 1}. "
+                f"Năm âm lịch 2027 là năm {' '.join(lunar.can_chi_nam(2027))}, bắt đầu từ Tết âm lịch."},
+        {"hoi": f"Người sinh năm {nam} cùng mệnh với người sinh năm nào?",
+         "dap": f"Cùng mệnh {ten} với năm {nam} là năm {nam + (1 if nam in cung_menh and cung_menh.index(nam) % 2 == 0 else -1)}, "
+                f"vì mỗi mệnh nạp âm gồm hai năm sinh liền nhau. Hai năm này khác can và khác con giáp nhưng cùng hành {hanh}."},
+    ]
+    return muc, hd
+
+
 @ngon_ngu.theo_viet
 def ds_menh_nam() -> list[tuple[int, str]]:
     return [(n, f"sinh-nam-{n}-menh-gi") for n in range(NAM_DAU, NAM_CUOI + 1)]
@@ -230,6 +290,10 @@ def trang_menh_nam(nam: int, slug: str) -> dict:
                            quai=_tn.ten("quai", q["quai"]), so=q["so"])}
                  for ma, gt, q in (("nam", "Nam", q_nam), ("nu", "Nữ", q_nu))]
                 if _PT_DAU <= nam <= _PT_CUOI else [])
+    if ngon_ngu.la_viet():           # KB-TT2: bảng so sánh năm sinh liền kề + năm âm lịch sắp tới (số riêng từng năm sinh)
+        m_moi, h_moi = _muc_so_sanh(nam, chi, hanh, ten, tam_hop, luc_hop, luc_xung)
+        muc[-1:-1] = m_moi[1:]       # chỉ bảng năm âm lịch sắp tới (bảng năm sinh liền kề trùng nhiều giữa các trang)
+        hoi_dap += h_moi
     ln = [n for n in (nam - 1, nam + 1) if NAM_DAU <= n <= NAM_CUOI]
     src = kb["source"].get("uyen_hai_tu_binh", "Uyên Hải Tử Bình")
     return {

@@ -62,3 +62,16 @@ bản `.md`, canonical, ngày đăng/sửa thật, bộ rà `kiem-tra-seo.mjs` 0
    (chờ anh chọn; không bịa ảnh "người thật").
 5. Gỡ nhãn "nháp" khỏi tiêu đề trang chỉ sau khi trang có tên người thẩm định; trước đó giữ nhãn trung thực.
 6. Liên kết nội bộ: trang cung ↔ trang sao ↔ trang "sao ở cung" đã có; thêm khối "đọc cùng" 3 link cuối bài ở trang mệnh theo năm.
+
+## 6. Cập nhật 2026-11-12 (sau khi nối Search Console hieuban.com)
+
+Số thật 90 ngày (14/08–12/11): **1.650 lượt hiển thị, 47 nhấp, 284 trang có hiển thị**. Nhóm kho tri thức có hiển thị: dấu hiệu nhà (20 trang, 186),
+mệnh theo năm (14 trang, 96), cặp số (13, 62), tứ hoá (9, 23), sao ở cung (10/168 trang, 16), quẻ (5/64, 12).
+Site còn rất nhỏ nên chưa kết luận được trang nào "thắng"; ưu tiên viết dày theo họ có hiển thị trước.
+
+- **Mệnh theo năm (78 trang)**: thêm bảng "tuổi mụ và năm âm lịch 2026–2031 so với tuổi bạn" + hai câu hỏi đáp tính từ năm sinh
+  (tuổi năm 2027; năm cùng mệnh). Em đã thử thêm bảng "năm sinh liền kề" nhưng bảng này trùng giữa các trang kề nhau và kéo 31 trang xuống dưới
+  ngưỡng phần riêng (sẽ bị noindex) nên bỏ. Kết quả: phần riêng 0,34 → 0,35, trang thấp nhất 0,31 (cũ 0,30), cả 78 trang vẫn index, chữ 976 → 1.183.
+  **Muốn nâng phần riêng thật sự phải bớt khuôn chung của họ trang này (việc lớn hơn)**, chỉ thêm chữ không giải quyết được.
+- **Chưa làm được**: (3) đối chiếu nguyên văn — ctext chặn bot, Wikisource không truy cập được từ môi trường này; (4) ảnh AI — không có dịch vụ tạo ảnh kết nối.
+- **Không làm**: viết "kinh nghiệm 30 năm" dưới tên chuyên gia. Đó là tín hiệu E-E-A-T giả; `goc_nhin` chỉ do chính người đó viết (GN-1).
