@@ -1,0 +1,15 @@
+{
+  "name": "hieubanthan-video-ngan",
+  "private": true,
+  "type": "module",
+  "description": "Video ngắn 9:16 cho Hiểu Bản Thân — dựng bằng HyperFrames (HTML → MP4), giọng ElevenLabs v3.",
+  "scripts": {
+    "giong": "node tao-giong.mjs",
+    "dung": "node dung.mjs",
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "gsap": "3.14.2",
+    "hyperframes": "0.8.212"
+  }
+}
