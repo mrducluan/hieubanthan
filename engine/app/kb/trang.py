@@ -370,6 +370,10 @@ def _trang_thap_than(ten: str, slug: str) -> dict:
            {"tieu_de": L("trang_bt.tt.nam_nu", "Với nam, với nữ"),
             "danh_sach": [L("trang_bt.tt.nam", "Với nam: {x}.", x=t["nam"]), L("trang_bt.tt.nu", "Với nữ: {x}.", x=t["nu"])]},
            {"tieu_de": L("trang.tu_soi", "Câu hỏi tự soi"), "doan": t["cau_tu_soi"]}]
+    cv = (kb.get("co_van_thap_than") or {}).get(ten)      # KT-TT: câu nguyên văn Uyên Hải Tử Bình + tóm ý
+    if cv:
+        muc.insert(-1, {"tieu_de": L("trang_bt.tt.co_van", "Uyên Hải Tử Bình nói gì về {ten}", ten=tt), "doan": cv["y"],
+                        "danh_sach": [L("trang_bt.tt.co_van_van", "Nguyên văn: 「{han}」", han=h) for h in cv["han"]]})
     hoi_dap = [{"hoi": L("trang_bt.tt.hoi_la_gi", "{ten} trong Bát tự là gì?", ten=tt, pin=pin), "dap": tra_loi},
                {"hoi": L("trang_bt.tt.hoi_nhieu", "Lá số nhiều {ten} thì sao?", ten=tt), "dap": _hoa1(t["khi_nhieu"])}]
     ds = _ds_thap_than()

@@ -304,7 +304,7 @@
     "su_nghiep": "thuan",
     "tien_bac": "can_chu_dong",
     "tinh_cam": "can_bang",
-    "gia_dinh": "can_bang",
+    "gia_dinh": "can_chu_dong",
     "hoc_tap": "can_bang",
     "suc_khoe": "can_bang",
     "quan_he": "can_bang",
@@ -319,19 +319,19 @@
     "thuan",
     "thuan",
     "can_bang",
-    "can_bang",
-    "thuan"
+    "can_chu_dong",
+    "can_chu_dong"
    ],
    "hien_tai": [
     3
    ],
    "van_han_nam": [
+    "can_chu_dong",
+    "can_chu_dong",
     "can_bang",
     "can_bang",
-    "thuan",
-    "thuan",
-    "thuan",
-    "thuan",
+    "can_bang",
+    "can_bang",
     "can_bang",
     "can_bang",
     "thuan",
@@ -424,12 +424,12 @@
    "van_han_nam": [
     "thuan",
     "thuan",
-    "can_chu_dong",
-    "can_chu_dong",
+    "can_bang",
+    "can_bang",
     "thuan",
     "can_bang",
     "can_bang",
-    "can_bang",
+    "thuan",
     "can_bang",
     "can_bang"
    ]
@@ -508,10 +508,10 @@
     "can_chu_dong",
     "thuan",
     "thuan",
-    "can_bang",
     "thuan",
-    "can_bang",
-    "can_bang",
+    "thuan",
+    "thuan",
+    "thuan",
     "thuan"
    ],
    "hien_tai": [
@@ -523,8 +523,8 @@
     "thuan",
     "thuan",
     "thuan",
-    "can_bang",
-    "can_bang",
+    "thuan",
+    "thuan",
     "thuan",
     "can_bang",
     "can_bang"

@@ -278,3 +278,25 @@ Chủ dự án tải lại tệp lên Drive (Google Docs `1zojmde…`), em tải
 - **Độ tin của bản**: sách là cổ thư chuẩn, nhưng **bản này là bản điện tử lưu truyền** (giản thể, chấm câu hiện đại, đã lược bớt — không có Kế thiện thiên, phần thần sát, phần cách cục ngoại cách). Ghi `can_doi_chieu: true`; khi có bản khắc (ctext res=307303 hoặc bản Tứ khố) thì so lại.
 - **Dùng ngay cho người đọc**: 10 trang nhật chủ (`/bat-tu/nhat-chu/*`, cả bản Anh) thêm mục «Uyên Hải Tử Bình tả can … thế nào» = tóm ý (ban biên tập viết, nháp, lời trung tính) + nguyên văn bài thơ. KB `battu_kb.co_tho`; test bắt nguyên văn trong KB phải có trong kho nguồn.
 - **Chưa dùng** (đề xuất đợt sau, cần viết lời Việt + duyệt): thi quyết mười thần cho 10 trang thập thần; thiên «Luận tính tình» (đối chiếu chương Con người bạn); «Luận nhật vi chủ», «Luận nguyệt lệnh» làm trích dẫn cho "Vì sao nói vậy"; 12 bài địa chi thể tượng. **Không dùng**: «Luận tật bệnh» (tên bệnh — trái SK-1), «Cách cục sinh tử dẫn dụng», phần nữ mệnh "quý / tiện", "tiểu nhi quan sát" (phán sống chết, phán phẩm giá — trái quy tắc lời luận); để nguyên trong kho nguồn làm tư liệu, không đưa vào lời.
+
+### 10.6 Q5 + thi văn mười thần (2026-11-12, chủ dự án giao em quyết theo thứ tự đề xuất)
+
+**Q5 — bảng hỷ / kỵ cách cục (dụng thần cách 2).** Đọc lại hai thiên «Luận dụng thần» và «Luận dụng thần thành bại cứu ứng»:
+trong 4 chỗ nghi lệch, chỉ **2 chỗ thật sự cần sửa** — hai chỗ kia KB đã thể hiện đúng ý sách qua nhánh thân yếu.
+
+| Cách | Trước | Sau | Căn cứ |
+|---|---|---|---|
+| Thất Sát (thân không yếu) | hỷ Thực Thương, Ấn; kỵ — | hỷ Thực Thương; kỵ Tài; Ấn trung tính | «七煞喜食神以制伏，忌财印以资扶»; «七煞逢财无制，七煞格败也»; «七煞逢食制而又逢印» là "đái kỵ". Thân yếu giữ hỷ Ấn (Sát Ấn tương sinh) |
+| Chính Ấn, Thiên Ấn (thân yếu, cân) | hỷ Quan Sát | hỷ Quan Sát, Tỷ Kiếp | «印喜官煞以相生，劫才以护印» |
+| Thực Thần | — | **không sửa** | «食喜身旺以相生»: nhánh thân yếu đã hỷ Tỷ Kiếp |
+| Thương Quan | — | **không sửa** | «伤官喜佩印以制伏»: nhánh thân yếu đã hỷ Ấn; thân mạnh dùng Tài («生财以化伤») |
+
+Tác động đo trên 300 lá mẫu (`scripts/thong_ke_hy_ky.py --de-xuat`): 100 lá thuộc ba cách này; trong đó 5 % đổi nhãn "Con người",
+8 % "Năng lượng", 4 % "Gia đình", 9 % đại vận; công việc / tiền bạc / tình cảm không đổi. Tính trên mọi lá: khoảng 3 % lá đổi một nhãn.
+Phân bố nhãn vẫn trong ngưỡng 10–60 %. Tứ trụ, cách 1, cách cục không đổi. Đổi mức → **`ENGINE_VERSION` 0.1.8**.
+Golden: 3/15 lá mẫu Bát tự đổi (đúng ba cách này); mã kiểm chứng của các lá đó sinh lại.
+
+**Thi văn mười thần.** KB `battu_kb.co_van_thap_than`: mỗi thập thần 1–2 câu nguyên văn Uyên Hải Tử Bình (chuỗi con của kho nguồn — test)
++ tóm ý Việt và Anh (nháp, lời trung tính; bỏ các câu phán khắc vợ / khắc chồng / thọ yểu). Hiện ở 10 trang `/bat-tu/thap-than/*`.
+Tỷ Kiên bản này chỉ có câu rất ngắn («比肩者，兄弟也») — đủ dùng, sẽ bổ sung khi có bản đủ.
+
