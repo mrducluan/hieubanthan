@@ -156,21 +156,24 @@ function dungVideo(v) {
       tl.push(`tl.from("#${id} .n",{scale:0,opacity:0,duration:.4,ease:"back.out(1.7)",stagger:.08},${(t0 + .2).toFixed(2)});`);
       tl.push(`tl.from("#${id} .s",{scale:0,opacity:0,duration:.45,ease:"back.out(2)",stagger:${((dai - 2) / h.muc.length).toFixed(2)}},${(t0 + 1).toFixed(2)});`);
     } else if (h.loai === "dem") {
+      // Đếm từng bước trên vòng: con trỏ đứng ở ô bắt đầu ~1/3 cảnh (khớp lời "bắt đầu từ…"), giữa vòng hiện số đang đếm.
       const { html, vi, r } = vongSvg(h.muc, "");
       const vong = Array.from({ length: h.buoc + 1 }, (_, k) => vi[(h.bat_dau + k) % vi.length]);
       than = `<div class="vung" style="position:absolute">${html}</div>
-        ${vong.map((p, k) => `<div class="tro tro${k}" style="position:absolute;left:${180 + p.x - r - 12}px;top:${450 + 40 + p.y - r - 12}px;width:${2 * r + 24}px;height:${2 * r + 24}px;border-radius:50%;border:8px solid #e9c46a;box-shadow:0 0 40px #e9c46a;opacity:0"></div>`).join("")}
-        <div class="dem-dau" style="position:absolute;left:0;right:0;top:1180px;text-align:center;font-family:NR;font-size:56px;color:#fff">${e(h.nhan_dau)}</div>
-        <div class="dem-cuoi" style="position:absolute;left:0;right:0;top:1180px;text-align:center;font-family:NR;font-size:60px;color:#e9c46a;opacity:0">${e(h.nhan_cuoi)}</div>`;
+        ${vong.map((p, k) => `<div class="tro tro${k}" style="position:absolute;left:${180 + p.x - r - 12}px;top:${490 + p.y - r - 12}px;width:${2 * r + 24}px;height:${2 * r + 24}px;border-radius:50%;border:8px solid #e9c46a;box-shadow:0 0 40px #e9c46a;opacity:0"></div>`).join("")}
+        ${vong.map((_, k) => `<div class="dso dso${k}" style="position:absolute;left:0;right:0;top:${490 + 360 - 60}px;text-align:center;font-family:NR;font-weight:600;font-size:${h.tien_to ? 76 : 110}px;color:#e9c46a;opacity:0">${e((h.tien_to ?? "") + (h.so_dau + k))}</div>`).join("")}
+        <div class="dem-dau" style="position:absolute;left:0;right:0;top:1228px;text-align:center;font-family:NR;font-size:48px;color:#fff">${e(h.nhan_dau)}</div>
+        <div class="dem-cuoi" style="position:absolute;left:0;right:0;top:1228px;text-align:center;font-family:NR;font-size:52px;color:#e9c46a;opacity:0">${e(h.nhan_cuoi)}</div>`;
       tl.push(`tl.from("#${id} .n",{scale:0,opacity:0,duration:.4,ease:"back.out(1.7)",stagger:.06},${(t0 + .1).toFixed(2)});`);
-      const b = (dai - 2.2) / (h.buoc + 1);
+      const cho = Math.max(1.6, dai * 0.33), b = (dai - cho - 1.4) / h.buoc;
       vong.forEach((_, k) => {
-        const tk = t0 + 0.9 + k * b;
-        tl.push(`tl.set("#${id} .tro${k}",{opacity:1},${tk.toFixed(2)});`);
-        if (k < vong.length - 1) tl.push(`tl.set("#${id} .tro${k}",{opacity:0},${(tk + b).toFixed(2)});`);
+        const tk = t0 + (k === 0 ? 0.8 : cho + (k - 1) * b);
+        tl.push(`tl.set("#${id} .tro${k}, #${id} .dso${k}",{opacity:1},${tk.toFixed(2)});`);
+        if (k < vong.length - 1) tl.push(`tl.set("#${id} .tro${k}, #${id} .dso${k}",{opacity:0},${(t0 + cho + k * b).toFixed(2)});`);
       });
-      tl.push(`tl.set("#${id} .dem-dau",{opacity:0},${(t0 + 0.9 + h.buoc * b).toFixed(2)});`);
-      tl.push(`tl.to("#${id} .dem-cuoi",{opacity:1,duration:.4},${(t0 + 0.9 + h.buoc * b).toFixed(2)});`);
+      const het = t0 + cho + (h.buoc - 1) * b;
+      tl.push(`tl.set("#${id} .dem-dau",{opacity:0},${het.toFixed(2)});`);
+      tl.push(`tl.to("#${id} .dem-cuoi",{opacity:1,duration:.4},${het.toFixed(2)});`);
     } else if (h.loai === "cta") {
       const src = chep(path.join(TAI_SAN, h.anh)); const k = kichAnh(path.join(TAI_SAN, h.anh)); const tile = 410 / k.w;
       than = `<div class="cta"><div class="dt"><img src="${src}"></div>

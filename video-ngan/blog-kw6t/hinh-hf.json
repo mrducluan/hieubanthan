@@ -1,59 +1,561 @@
 {
   "_ghi_chu": "Hình từng cảnh cho bản HyperFrames (dung-hf.mjs). Số liệu lấy từ engine (luangiai.tuoi_dan_gian, calc.tuoi_dan_gian, thần số) — khớp bài và ảnh tóm tắt /og/tom-tat. 'web-*' = ảnh chụp trang công cụ thật trên hieuban.com (khổ điện thoại); 'tt-*' = ảnh tóm tắt do engine dựng (/og/tom-tat).",
   "b1": [
-    {"loai": "mo_dau", "nhan": "Tết Đinh Mùi 2027", "vong": {"muc": ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"], "sang": ["Mùi"], "giua": "2027"}},
-    {"loai": "the", "muc": [{"k": "Xung với năm", "v": "Tuổi Sửu", "mau": "xau"}, {"k": "Xung với gia chủ", "v": "Gia chủ Thìn → tránh Tuất", "mau": "xau"}, {"k": "Đang Tam tai", "v": "Tuổi Hợi, Mão, Mùi", "mau": "xau"}]},
-    {"loai": "dien_thoai", "anh": "web-xd-1988.png", "tu": 0, "den": 1500, "nhan": "hieuban.com · Tuổi xông đất 2027"},
-    {"loai": "anh_engine", "anh": "tt-xong_dat_nam_2027.png", "nhan": "Mùng 1 Tết · giờ hoàng đạo"},
-    {"loai": "cta", "anh": "web-xd-nam.png", "url": "https://hieuban.com/blog/cach-chon-nguoi-xong-dat-dau-nam", "dong": "Tra tuổi hợp theo năm sinh gia chủ"}
+    {
+      "loai": "mo_dau",
+      "nhan": "Tết Đinh Mùi 2027",
+      "vong": {
+        "muc": [
+          "Tý",
+          "Sửu",
+          "Dần",
+          "Mão",
+          "Thìn",
+          "Tỵ",
+          "Ngọ",
+          "Mùi",
+          "Thân",
+          "Dậu",
+          "Tuất",
+          "Hợi"
+        ],
+        "sang": [
+          "Mùi"
+        ],
+        "giua": "2027"
+      }
+    },
+    {
+      "loai": "the",
+      "muc": [
+        {
+          "k": "Xung với năm",
+          "v": "Tuổi Sửu",
+          "mau": "xau"
+        },
+        {
+          "k": "Xung với gia chủ",
+          "v": "Gia chủ Thìn → tránh Tuất",
+          "mau": "xau"
+        },
+        {
+          "k": "Đang Tam tai",
+          "v": "Tuổi Hợi, Mão, Mùi",
+          "mau": "xau"
+        }
+      ]
+    },
+    {
+      "loai": "dien_thoai",
+      "anh": "web-xd-1988.png",
+      "tu": 0,
+      "den": 1500,
+      "nhan": "hieuban.com · Tuổi xông đất 2027"
+    },
+    {
+      "loai": "anh_engine",
+      "anh": "tt-xong_dat_nam_2027.png",
+      "nhan": "Mùng 1 Tết · giờ hoàng đạo"
+    },
+    {
+      "loai": "cta",
+      "anh": "web-xd-nam.png",
+      "url": "https://hieuban.com/blog/cach-chon-nguoi-xong-dat-dau-nam",
+      "dong": "Tra tuổi hợp theo năm sinh gia chủ"
+    }
   ],
   "b2": [
-    {"loai": "mo_dau", "nhan": "Xông đất Tết 2027", "vong": {"muc": ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"], "sang": ["Thìn"], "giua": "?"}},
-    {"loai": "the", "muc": [{"k": "1", "v": "Gia chủ tự xông đất"}, {"k": "2", "v": "Nhờ người trong nhà"}, {"k": "3", "v": "Nới tiêu chí chọn tuổi"}, {"k": "4", "v": "Mời trẻ nhỏ, hàng xóm vui tính"}, {"k": "5", "v": "Để khách đến tự nhiên"}]},
-    {"loai": "the", "muc": [{"k": "Chồng 1988", "v": "Gia chủ · Mậu Thìn"}, {"k": "Vợ 1990", "v": "Canh Ngọ · dùng được", "mau": "tot"}, {"k": "Con 2016", "v": "Bính Thân · hợp nhất", "mau": "tot"}, {"k": "Con 2019", "v": "Kỷ Hợi · đang Tam tai", "mau": "xau"}]},
-    {"loai": "the", "muc": [{"k": "✓", "v": "Không xung năm Mùi (tuổi Sửu)", "mau": "tot"}, {"k": "✓", "v": "Không xung gia chủ", "mau": "tot"}, {"k": "✓", "v": "Không đang Tam tai", "mau": "tot"}]},
-    {"loai": "cta", "anh": "web-xd-nam.png", "url": "https://hieuban.com/blog/khong-co-nguoi-hop-tuoi-xong-dat-thi-lam-sao", "dong": "Bảng tuổi xông đất 1960–2005"}
+    {
+      "loai": "mo_dau",
+      "nhan": "Xông đất Tết 2027",
+      "vong": {
+        "muc": [
+          "Tý",
+          "Sửu",
+          "Dần",
+          "Mão",
+          "Thìn",
+          "Tỵ",
+          "Ngọ",
+          "Mùi",
+          "Thân",
+          "Dậu",
+          "Tuất",
+          "Hợi"
+        ],
+        "sang": [
+          "Thìn"
+        ],
+        "giua": "?"
+      }
+    },
+    {
+      "loai": "the",
+      "muc": [
+        {
+          "k": "1",
+          "v": "Gia chủ tự xông đất"
+        },
+        {
+          "k": "2",
+          "v": "Nhờ người trong nhà"
+        },
+        {
+          "k": "3",
+          "v": "Nới tiêu chí chọn tuổi"
+        },
+        {
+          "k": "4",
+          "v": "Mời trẻ nhỏ, hàng xóm vui tính"
+        },
+        {
+          "k": "5",
+          "v": "Để khách đến tự nhiên"
+        }
+      ]
+    },
+    {
+      "loai": "the",
+      "muc": [
+        {
+          "k": "Chồng 1988",
+          "v": "Gia chủ · Mậu Thìn"
+        },
+        {
+          "k": "Vợ 1990",
+          "v": "Canh Ngọ · dùng được",
+          "mau": "tot"
+        },
+        {
+          "k": "Con 2016",
+          "v": "Bính Thân · hợp nhất",
+          "mau": "tot"
+        },
+        {
+          "k": "Con 2019",
+          "v": "Kỷ Hợi · đang Tam tai",
+          "mau": "xau"
+        }
+      ]
+    },
+    {
+      "loai": "the",
+      "muc": [
+        {
+          "k": "✓",
+          "v": "Không xung năm Mùi (tuổi Sửu)",
+          "mau": "tot"
+        },
+        {
+          "k": "✓",
+          "v": "Không xung gia chủ",
+          "mau": "tot"
+        },
+        {
+          "k": "✓",
+          "v": "Không đang Tam tai",
+          "mau": "tot"
+        }
+      ]
+    },
+    {
+      "loai": "cta",
+      "anh": "web-xd-nam.png",
+      "url": "https://hieuban.com/blog/khong-co-nguoi-hop-tuoi-xong-dat-thi-lam-sao",
+      "dong": "Bảng tuổi xông đất 1960–2005"
+    }
   ],
   "b3": [
-    {"loai": "mo_dau", "nhan": "Tập quán theo tuổi", "vong": {"muc": ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"], "sang": ["Hợi","Mão","Mùi"], "giua": "2027"}},
-    {"loai": "the", "muc": [{"k": "Thân · Tý · Thìn", "v": "Dần · Mão · Thìn"}, {"k": "Dần · Ngọ · Tuất", "v": "Thân · Dậu · Tuất"}, {"k": "Hợi · Mão · Mùi", "v": "Tỵ · Ngọ · Mùi", "mau": "xau"}, {"k": "Tỵ · Dậu · Sửu", "v": "Hợi · Tý · Sửu"}]},
-    {"loai": "phep_tinh", "dong": ["1991 = Tân Mùi", "Nhóm Hợi · Mão · Mùi", "Tỵ 2025 → Ngọ 2026 → Mùi 2027", "2027 = năm Tam tai cuối"]},
-    {"loai": "dien_thoai", "anh": "web-ln-nam.png", "tu": 700, "den": 2200, "nhan": "hieuban.com · Tuổi làm nhà 2027"},
-    {"loai": "cta", "anh": "web-ln-nam.png", "url": "https://hieuban.com/blog/tam-tai-la-gi-cach-tinh", "dong": "Bảng Tam tai, Kim lâu, Hoang ốc 2027"}
+    {
+      "loai": "mo_dau",
+      "nhan": "Tập quán theo tuổi",
+      "vong": {
+        "muc": [
+          "Tý",
+          "Sửu",
+          "Dần",
+          "Mão",
+          "Thìn",
+          "Tỵ",
+          "Ngọ",
+          "Mùi",
+          "Thân",
+          "Dậu",
+          "Tuất",
+          "Hợi"
+        ],
+        "sang": [
+          "Hợi",
+          "Mão",
+          "Mùi"
+        ],
+        "giua": "2027"
+      }
+    },
+    {
+      "loai": "the",
+      "muc": [
+        {
+          "k": "Thân · Tý · Thìn",
+          "v": "Dần · Mão · Thìn"
+        },
+        {
+          "k": "Dần · Ngọ · Tuất",
+          "v": "Thân · Dậu · Tuất"
+        },
+        {
+          "k": "Hợi · Mão · Mùi",
+          "v": "Tỵ · Ngọ · Mùi",
+          "mau": "xau"
+        },
+        {
+          "k": "Tỵ · Dậu · Sửu",
+          "v": "Hợi · Tý · Sửu"
+        }
+      ]
+    },
+    {
+      "loai": "phep_tinh",
+      "dong": [
+        "1991 = Tân Mùi",
+        "Nhóm Hợi · Mão · Mùi",
+        "Tỵ 2025 → Ngọ 2026 → Mùi 2027",
+        "2027 = năm Tam tai cuối"
+      ]
+    },
+    {
+      "loai": "dien_thoai",
+      "anh": "web-ln-nam.png",
+      "tu": 700,
+      "den": 2200,
+      "nhan": "hieuban.com · Tuổi làm nhà 2027"
+    },
+    {
+      "loai": "cta",
+      "anh": "web-ln-nam.png",
+      "url": "https://hieuban.com/blog/tam-tai-la-gi-cach-tinh",
+      "dong": "Bảng Tam tai, Kim lâu, Hoang ốc 2027"
+    }
   ],
   "b4": [
-    {"loai": "mo_dau", "nhan": "Cưới hỏi · làm nhà", "lon": "÷ 9"},
-    {"loai": "the", "muc": [{"k": "Dư 1", "v": "Kim lâu Thân", "mau": "xau"}, {"k": "Dư 3", "v": "Kim lâu Thê", "mau": "xau"}, {"k": "Dư 6", "v": "Kim lâu Tử", "mau": "xau"}, {"k": "Dư 8", "v": "Kim lâu Lục súc", "mau": "xau"}]},
-    {"loai": "phep_tinh", "dong": ["Cô dâu sinh 1998", "2027 − 1998 + 1 = 30 tuổi mụ", "30 ÷ 9 = 3 dư 3", "→ Kim lâu Thê"]},
-    {"loai": "dien_thoai", "anh": "web-ch-nam.png", "tu": 600, "den": 2300, "nhan": "hieuban.com · Cưới năm 2027"},
-    {"loai": "cta", "anh": "web-ch-nam.png", "url": "https://hieuban.com/blog/kim-lau-la-gi-cach-tinh-tuoi-kim-lau", "dong": "Tuổi cô dâu không phạm Kim lâu 2027"}
+    {
+      "loai": "mo_dau",
+      "nhan": "Cưới hỏi · làm nhà",
+      "lon": "÷ 9"
+    },
+    {
+      "loai": "the",
+      "muc": [
+        {
+          "k": "Dư 1",
+          "v": "Kim lâu Thân",
+          "mau": "xau"
+        },
+        {
+          "k": "Dư 3",
+          "v": "Kim lâu Thê",
+          "mau": "xau"
+        },
+        {
+          "k": "Dư 6",
+          "v": "Kim lâu Tử",
+          "mau": "xau"
+        },
+        {
+          "k": "Dư 8",
+          "v": "Kim lâu Lục súc",
+          "mau": "xau"
+        }
+      ]
+    },
+    {
+      "loai": "phep_tinh",
+      "dong": [
+        "Cô dâu sinh 1998",
+        "2027 − 1998 + 1 = 30 tuổi mụ",
+        "30 ÷ 9 = 3 dư 3",
+        "→ Kim lâu Thê"
+      ]
+    },
+    {
+      "loai": "dien_thoai",
+      "anh": "web-ch-nam.png",
+      "tu": 600,
+      "den": 2300,
+      "nhan": "hieuban.com · Cưới năm 2027"
+    },
+    {
+      "loai": "cta",
+      "anh": "web-ch-nam.png",
+      "url": "https://hieuban.com/blog/kim-lau-la-gi-cach-tinh-tuoi-kim-lau",
+      "dong": "Tuổi cô dâu không phạm Kim lâu 2027"
+    }
   ],
   "b5": [
-    {"loai": "mo_dau", "nhan": "Xem tuổi làm nhà", "vong": {"muc": ["Nhất Cát","Nhì Nghi","Tam Địa Sát","Tứ Tấn Tài","Ngũ Thọ Tử","Lục Hoang Ốc"], "sang": ["Nhất Cát","Nhì Nghi","Tứ Tấn Tài"], "giua": "6 cung"}},
-    {"loai": "vong", "muc": ["Nhất Cát","Nhì Nghi","Tam Địa Sát","Tứ Tấn Tài","Ngũ Thọ Tử","Lục Hoang Ốc"], "tot": ["Nhất Cát","Nhì Nghi","Tứ Tấn Tài"], "xau": ["Tam Địa Sát","Ngũ Thọ Tử","Lục Hoang Ốc"], "giua": "Hoang ốc"},
-    {"loai": "dem", "muc": ["Nhất Cát","Nhì Nghi","Tam Địa Sát","Tứ Tấn Tài","Ngũ Thọ Tử","Lục Hoang Ốc"], "bat_dau": 2, "buoc": 7, "nhan_dau": "30", "nhan_cuoi": "37 → Tứ Tấn Tài"},
-    {"loai": "dien_thoai", "anh": "web-ln-1988.png", "tu": 0, "den": 1300, "nhan": "hieuban.com · Tuổi 1988 làm nhà 2027"},
-    {"loai": "cta", "anh": "web-ln-nam.png", "url": "https://hieuban.com/blog/hoang-oc-la-gi-cach-dem-tuoi-lam-nha", "dong": "Kim lâu, Hoang ốc, Tam tai theo năm sinh"}
+    {
+      "loai": "mo_dau",
+      "nhan": "Xem tuổi làm nhà",
+      "vong": {
+        "muc": [
+          "Nhất Cát",
+          "Nhì Nghi",
+          "Tam Địa Sát",
+          "Tứ Tấn Tài",
+          "Ngũ Thọ Tử",
+          "Lục Hoang Ốc"
+        ],
+        "sang": [
+          "Nhất Cát",
+          "Nhì Nghi",
+          "Tứ Tấn Tài"
+        ],
+        "giua": "6 cung"
+      }
+    },
+    {
+      "loai": "vong",
+      "muc": [
+        "Nhất Cát",
+        "Nhì Nghi",
+        "Tam Địa Sát",
+        "Tứ Tấn Tài",
+        "Ngũ Thọ Tử",
+        "Lục Hoang Ốc"
+      ],
+      "tot": [
+        "Nhất Cát",
+        "Nhì Nghi",
+        "Tứ Tấn Tài"
+      ],
+      "xau": [
+        "Tam Địa Sát",
+        "Ngũ Thọ Tử",
+        "Lục Hoang Ốc"
+      ],
+      "giua": "Hoang ốc"
+    },
+    {
+      "loai": "dem",
+      "muc": [
+        "Nhất Cát",
+        "Nhì Nghi",
+        "Tam Địa Sát",
+        "Tứ Tấn Tài",
+        "Ngũ Thọ Tử",
+        "Lục Hoang Ốc"
+      ],
+      "bat_dau": 2,
+      "buoc": 7,
+      "nhan_dau": "30",
+      "nhan_cuoi": "37 → Tứ Tấn Tài",
+      "so_dau": 30,
+      "tien_to": ""
+    },
+    {
+      "loai": "dien_thoai",
+      "anh": "web-ln-1988.png",
+      "tu": 0,
+      "den": 1300,
+      "nhan": "hieuban.com · Tuổi 1988 làm nhà 2027"
+    },
+    {
+      "loai": "cta",
+      "anh": "web-ln-nam.png",
+      "url": "https://hieuban.com/blog/hoang-oc-la-gi-cach-dem-tuoi-lam-nha",
+      "dong": "Kim lâu, Hoang ốc, Tam tai theo năm sinh"
+    }
   ],
   "b6": [
-    {"loai": "mo_dau", "nhan": "Làm nhà năm 2027", "lon": "Mượn tuổi"},
-    {"loai": "the", "muc": [{"k": "1", "v": "Tuổi đẹp trong năm đó", "mau": "tot"}, {"k": "2", "v": "Người thân gần", "mau": "tot"}, {"k": "3", "v": "Sức khoẻ ổn", "mau": "tot"}, {"k": "4", "v": "Thật lòng sẵn lòng", "mau": "tot"}]},
-    {"loai": "anh_engine", "anh": "tt-lam_nha_tuoi_nam_2027_ns_1986.png", "nhan": "Gia chủ 1986 · năm 2027"},
-    {"loai": "the", "muc": [{"k": "Lễ động thổ", "v": "Người được mượn tuổi đứng ra làm"}, {"k": "Giấy phép xây dựng", "v": "Vẫn đứng tên chủ đất"}]},
-    {"loai": "cta", "anh": "web-ln-1986.png", "url": "https://hieuban.com/blog/muon-tuoi-lam-nha-nhu-the-nao", "dong": "Xem tuổi làm nhà của bạn"}
+    {
+      "loai": "mo_dau",
+      "nhan": "Làm nhà năm 2027",
+      "lon": "Mượn tuổi"
+    },
+    {
+      "loai": "the",
+      "muc": [
+        {
+          "k": "1",
+          "v": "Tuổi đẹp trong năm đó",
+          "mau": "tot"
+        },
+        {
+          "k": "2",
+          "v": "Người thân gần",
+          "mau": "tot"
+        },
+        {
+          "k": "3",
+          "v": "Sức khoẻ ổn",
+          "mau": "tot"
+        },
+        {
+          "k": "4",
+          "v": "Thật lòng sẵn lòng",
+          "mau": "tot"
+        }
+      ]
+    },
+    {
+      "loai": "anh_engine",
+      "anh": "tt-lam_nha_tuoi_nam_2027_ns_1986.png",
+      "nhan": "Gia chủ 1986 · năm 2027"
+    },
+    {
+      "loai": "the",
+      "muc": [
+        {
+          "k": "Lễ động thổ",
+          "v": "Người được mượn tuổi đứng ra làm"
+        },
+        {
+          "k": "Giấy phép xây dựng",
+          "v": "Vẫn đứng tên chủ đất"
+        }
+      ]
+    },
+    {
+      "loai": "cta",
+      "anh": "web-ln-1986.png",
+      "url": "https://hieuban.com/blog/muon-tuoi-lam-nha-nhu-the-nao",
+      "dong": "Xem tuổi làm nhà của bạn"
+    }
   ],
   "b7": [
-    {"loai": "mo_dau", "nhan": "Sao hạn 2027", "vong": {"muc": ["La Hầu","Thổ Tú","Thuỷ Diệu","Thái Bạch","Thái Dương","Vân Hán","Kế Đô","Thái Âm","Mộc Đức"], "sang": ["La Hầu","Kế Đô"], "giua": "9 sao"}},
-    {"loai": "dem", "muc": ["La Hầu","Thổ Tú","Thuỷ Diệu","Thái Bạch","Thái Dương","Vân Hán","Kế Đô","Thái Âm","Mộc Đức"], "bat_dau": 0, "buoc": 9, "nhan_dau": "Tuổi 10 · nam", "nhan_cuoi": "9 năm · một vòng"},
-    {"loai": "anh_engine", "anh": "tt-sao_han_nam_2027.png", "nhan": "Sao hạn 2027 theo năm sinh"},
-    {"loai": "the", "muc": [{"k": "La Hầu", "v": "Nói ít, nghe nhiều, giữ giấy tờ gọn"}, {"k": "Kế Đô", "v": "Bớt lo nghĩ, quan tâm người nhà"}]},
-    {"loai": "cta", "anh": "web-sh-nam.png", "url": "https://hieuban.com/blog/sao-la-hau-ke-do-nam-2027-nen-lam-gi", "dong": "Sao hạn 2027 của cả nhà"}
+    {
+      "loai": "mo_dau",
+      "nhan": "Sao hạn 2027",
+      "vong": {
+        "muc": [
+          "La Hầu",
+          "Thổ Tú",
+          "Thuỷ Diệu",
+          "Thái Bạch",
+          "Thái Dương",
+          "Vân Hán",
+          "Kế Đô",
+          "Thái Âm",
+          "Mộc Đức"
+        ],
+        "sang": [
+          "La Hầu",
+          "Kế Đô"
+        ],
+        "giua": "9 sao"
+      }
+    },
+    {
+      "loai": "dem",
+      "muc": [
+        "La Hầu",
+        "Thổ Tú",
+        "Thuỷ Diệu",
+        "Thái Bạch",
+        "Thái Dương",
+        "Vân Hán",
+        "Kế Đô",
+        "Thái Âm",
+        "Mộc Đức"
+      ],
+      "bat_dau": 0,
+      "buoc": 9,
+      "nhan_dau": "Tuổi 10 · nam",
+      "nhan_cuoi": "9 năm · một vòng",
+      "so_dau": 10,
+      "tien_to": "Tuổi "
+    },
+    {
+      "loai": "anh_engine",
+      "anh": "tt-sao_han_nam_2027.png",
+      "nhan": "Sao hạn 2027 theo năm sinh"
+    },
+    {
+      "loai": "the",
+      "muc": [
+        {
+          "k": "La Hầu",
+          "v": "Nói ít, nghe nhiều, giữ giấy tờ gọn"
+        },
+        {
+          "k": "Kế Đô",
+          "v": "Bớt lo nghĩ, quan tâm người nhà"
+        }
+      ]
+    },
+    {
+      "loai": "cta",
+      "anh": "web-sh-nam.png",
+      "url": "https://hieuban.com/blog/sao-la-hau-ke-do-nam-2027-nen-lam-gi",
+      "dong": "Sao hạn 2027 của cả nhà"
+    }
   ],
   "b8": [
-    {"loai": "mo_dau", "nhan": "Thần số học", "vong": {"muc": ["1","2","3","4","5","6","7","8","9"], "sang": ["6","9"], "giua": "4 số"}},
-    {"loai": "the", "muc": [{"k": "Đường đời", "v": "Từ ngày tháng năm sinh"}, {"k": "Sứ mệnh", "v": "Từ cả họ tên"}, {"k": "Linh hồn", "v": "Từ nguyên âm"}, {"k": "Nhân cách", "v": "Từ phụ âm"}]},
-    {"loai": "phep_tinh", "dong": ["24 / 10 / 1988", "6 + 1 + 8 = 15 → 6", "2+4+1+0+1+9+8+8 = 33", "Đường đời 6 · hoặc 33"]},
-    {"loai": "phep_tinh", "dong": ["NGUYEN MINH ANH", "Sứ mệnh 72 → 9", "Linh hồn 18 → 9", "Nhân cách 54 → 9"]},
-    {"loai": "cta", "anh": "web-ts-ket-qua.png", "url": "https://hieuban.com/blog/than-so-hoc-cho-nguoi-moi-bat-dau", "dong": "Bốn con số của bạn trong 30 giây"}
+    {
+      "loai": "mo_dau",
+      "nhan": "Thần số học",
+      "vong": {
+        "muc": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        "sang": [
+          "6",
+          "9"
+        ],
+        "giua": "4 số"
+      }
+    },
+    {
+      "loai": "the",
+      "muc": [
+        {
+          "k": "Đường đời",
+          "v": "Từ ngày tháng năm sinh"
+        },
+        {
+          "k": "Sứ mệnh",
+          "v": "Từ cả họ tên"
+        },
+        {
+          "k": "Linh hồn",
+          "v": "Từ nguyên âm"
+        },
+        {
+          "k": "Nhân cách",
+          "v": "Từ phụ âm"
+        }
+      ]
+    },
+    {
+      "loai": "phep_tinh",
+      "dong": [
+        "24 / 10 / 1988",
+        "6 + 1 + 8 = 15 → 6",
+        "2+4+1+0+1+9+8+8 = 33",
+        "Đường đời 6 · hoặc 33"
+      ]
+    },
+    {
+      "loai": "phep_tinh",
+      "dong": [
+        "NGUYEN MINH ANH",
+        "Sứ mệnh 72 → 9",
+        "Linh hồn 18 → 9",
+        "Nhân cách 54 → 9"
+      ]
+    },
+    {
+      "loai": "cta",
+      "anh": "web-ts-ket-qua.png",
+      "url": "https://hieuban.com/blog/than-so-hoc-cho-nguoi-moi-bat-dau",
+      "dong": "Bốn con số của bạn trong 30 giây"
+    }
   ]
 }
