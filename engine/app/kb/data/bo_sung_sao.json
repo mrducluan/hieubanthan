@@ -1,0 +1,1229 @@
+{
+ "source_id": "bo_sung_sao_v1",
+ "school_id": "nam_phai",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Chính tinh — Ban biên tập bổ sung",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân tổng hợp từ kho tri thức + cổ thư công cộng (nháp AI, chờ thẩm định)"
+ },
+ "trang": {
+  "sao-tu-vi": {
+   "muc": [
+    {
+     "tieu_de": "Sao Tử Vi khác sao Thiên Phủ ở điểm nào?",
+     "doan": "Tử Vi là sao ra quyết định, còn Thiên Phủ là sao giữ nền. Hai sao đứng chung cung ở Dần và Thân nên hay bị nhầm. Tử Vi muốn ở vị trí dẫn dắt và được tôn trọng. Thiên Phủ muốn mọi thứ đủ đầy và có đường lui. Gặp một việc mới, Tử Vi hỏi 'ai chịu trách nhiệm', còn Thiên Phủ hỏi 'nếu hỏng thì còn gì để giữ'."
+    },
+    {
+     "tieu_de": "Sao Tử Vi hợp nghề và vai trò nào?",
+     "doan": "Tử Vi hợp vai trò có người cùng làm hoặc có chuẩn mực để giữ: quản lý, trưởng nhóm, hiệu trưởng, người đứng đầu một dự án. Người này làm tốt khi vai trò rõ và chuyên môn được nể. Nghề tự do kéo dài mà không có cấp bậc thì động lực dễ xẹp. Ví dụ: một trưởng phòng chốt hướng đi rất nhanh nhưng ngại hỏi cấp dưới về lỗi của chính mình."
+    },
+    {
+     "tieu_de": "Sao Tử Vi trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Tử Vi thường mong được tôn trọng và giữ nếp nhà. Họ ít là người nói lời mềm trước nên người thân dễ hiểu thành lạnh. Gia đình có một người cầm trịch thường nể người đó nhưng ít dám nói thật. Việc nhỏ có tác dụng: hỏi 'em/anh thấy sao' trước khi chốt chuyện chung."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Tử Vi?",
+     "danh_sach": [
+      "Chọn một quyết định nhỏ, để người khác nói trước rồi mới nêu ý mình.",
+      "Ghi ba việc bạn đang ôm mà có thể giao lại.",
+      "Nói một lời cảm ơn cụ thể với người làm việc cùng bạn."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Tử Vi đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Tử Vi thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có thêm người giúp việc; uy của Tử Vi có chỗ dựa vững hơn.",
+      "Nhờ việc thì nói rõ phần của từng người, đừng chỉ ra lệnh."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm chữ nghĩa, lời lẽ chuẩn mực; hợp chức vụ cần soạn thảo, phát biểu.",
+      "Tập viết ngắn, đưa ý chính lên đầu."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Dễ có người lớn hơn nâng đỡ khi vào môi trường mới.",
+      "Giữ liên lạc với người từng chỉ dạy mình."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Uy gặp va chạm hoặc chậm trễ; dễ cứng đầu, việc lớn hay bị cản.",
+      "Chia việc lớn thành bước nhỏ, kiên nhẫn từng bước."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Ý tưởng lớn nhưng dễ hụt; có giai đoạn phải làm lại từ nền.",
+      "Chuẩn bị phương án dự phòng trước khi cam kết việc lớn."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Sao Tử Vi có phải lúc nào cũng tốt không?",
+     "dap": "Không. Tử Vi sáng thì uy tín tự nhiên, kém sáng thì dễ sĩ diện mà thiếu thế. Sách xưa cũng dặn Tử Vi cần có sao phụ giúp mới vững. Tốt hay khó còn tuỳ cung và các sao đứng cùng."
+    },
+    {
+     "hoi": "Người có Tử Vi nên làm gì để dễ gần hơn?",
+     "dap": "Hỏi ý người khác trước khi chốt, nhận lỗi sớm và nói rõ lý do của quyết định. Những việc nhỏ này làm uy tín giữ được mà bớt khoảng cách."
+    },
+    {
+     "hoi": "Năm nào sao Tử Vi được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Tử Vi: hoá Quyền ở năm có can Nhâm; hoá Khoa ở năm có can Ất. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách đặt Tử Vi ở vị trí đứng đầu các chính tinh và dặn xét sao phụ đi kèm, vì Tử Vi một mình chưa đủ làm nên cách cục."
+    }
+   ],
+   "y_chinh": [
+    "Tử Vi: đế tinh, hành Thổ, nhóm Tử Phủ Vũ Tướng",
+    "Hợp vai trò dẫn dắt, có chuẩn mực để giữ",
+    "Dễ cô đơn trên cao, khó nhận lời góp ý",
+    "Khác Thiên Phủ: Tử Vi quyết định, Thiên Phủ giữ nền"
+   ]
+  },
+  "sao-thien-co": {
+   "muc": [
+    {
+     "tieu_de": "Sao Thiên Cơ khác sao Thiên Lương ở điểm nào?",
+     "doan": "Thiên Cơ là sao tính toán, Thiên Lương là sao che chở. Cả hai cùng nhóm Cơ Nguyệt Đồng Lương và đứng chung cung ở Thìn, Tuất. Thiên Cơ nghĩ nhanh, luôn có phương án B. Thiên Lương nghĩ chậm hơn, hay đứng ra khuyên bảo. Người nhiều Thiên Cơ thường được nhờ 'tính giúp', người nhiều Thiên Lương thường được nhờ 'cho lời khuyên'."
+    },
+    {
+     "tieu_de": "Sao Thiên Cơ hợp nghề và vai trò nào?",
+     "doan": "Thiên Cơ hợp việc dùng đầu óc: lập kế hoạch, phân tích số liệu, tư vấn, nghiên cứu, lập trình, kế toán. Hợp những chỗ cần ứng biến nhanh khi kế hoạch đổi. Điểm dễ vấp là nghĩ quá nhiều nên bắt đầu chậm. Ví dụ: một người làm kế hoạch giỏi, có ba bản dự phòng, nhưng cả tháng chưa gửi bản đầu tiên cho sếp."
+    },
+    {
+     "tieu_de": "Sao Thiên Cơ trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Thiên Cơ hay suy nghĩ về người kia hơn là nói thẳng với họ. Họ chu đáo, để ý chi tiết nhưng có thể lo xa khiến người bên cạnh thấy mệt. Trong gia đình, người này thường là người nhớ lịch, nhớ việc. Cách giữ nhịp tốt là nói ra điều đang lo trước khi nó thành chuyện lớn."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Thiên Cơ?",
+     "danh_sach": [
+      "Chọn một việc đã lên kế hoạch rồi mà chưa làm, đặt hạn chót trong ba ngày.",
+      "Viết ra hai điều bạn đang lo, rồi gạch điều không làm gì được.",
+      "Thử làm một việc theo phương án đầu, không chờ phương án hoàn hảo."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Thiên Cơ đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Thiên Cơ thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Thêm người cùng bàn bạc; kế hoạch được góp ý nên chắc hơn.",
+      "Mời một người đọc kế hoạch trước khi làm."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm chữ nghĩa và khả năng trình bày; hợp nghề viết, nghiên cứu.",
+      "Viết ra thay vì chỉ nghĩ trong đầu."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Hay có người chỉ đường đúng lúc kẹt.",
+      "Hỏi người có kinh nghiệm trước khi đổi hướng."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Mưu tính gặp va chạm hoặc chậm; dễ nghi ngờ, đổi ý nhiều lần.",
+      "Chốt một hướng và đặt mốc kiểm tra."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Ý tưởng lạ nhưng khó thành hình; dễ bỏ giữa chừng.",
+      "Làm thử quy mô nhỏ trước khi đầu tư lớn."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thiên Cơ có phải sao của người thông minh không?",
+     "dap": "Thiên Cơ gắn với nhanh trí và biết tính toán. Thông minh ở đây nghiêng về lập kế hoạch và ứng biến, không đồng nghĩa với học giỏi hay thành công. Điều quyết định vẫn là chuyện biết bắt tay làm."
+    },
+    {
+     "hoi": "Người có Thiên Cơ hay lo nghĩ phải làm sao?",
+     "dap": "Dành mười phút mỗi ngày viết ra điều lo và việc nhỏ có thể làm ngay. Cách này đưa lo nghĩ ra giấy, nhẹ đầu hơn. Nếu lo nghĩ kéo dài, hãy nói với người thân hoặc chuyên gia tâm lý, bài này không thay lời bác sĩ."
+    },
+    {
+     "hoi": "Năm nào sao Thiên Cơ được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Thiên Cơ: hoá Lộc ở năm có can Ất; hoá Quyền ở năm có can Bính; hoá Khoa ở năm có can Đinh; hoá Kỵ ở năm có can Mậu. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách xếp Thiên Cơ vào nhóm sao mưu tính, hay biến đổi, nên sách dặn xem Thiên Cơ ở cung nào để biết sự linh hoạt dùng vào việc gì."
+    }
+   ],
+   "y_chinh": [
+    "Thiên Cơ: mưu tinh, hành Mộc, nhóm Cơ Nguyệt Đồng Lương",
+    "Hợp việc dùng đầu óc: kế hoạch, phân tích, tư vấn",
+    "Dễ nghĩ nhiều làm ít, lo xa, đổi ý",
+    "Khác Thiên Lương: Cơ tính toán, Lương che chở"
+   ]
+  },
+  "sao-thai-duong": {
+   "muc": [
+    {
+     "tieu_de": "Sao Thái Dương khác sao Thái Âm ở điểm nào?",
+     "doan": "Thái Dương là mặt trời, hướng ngoại và cho đi. Thái Âm là mặt trăng, hướng nội và tích luỹ. Hai sao đối nhau về tính cách nên sách hay đọc thành cặp Nhật – Nguyệt. Người nhiều Thái Dương thích làm việc nơi mọi người nhìn thấy. Người nhiều Thái Âm thích làm âm thầm, chỉn chu. Cùng gặp việc khó, Thái Dương lao ra giúp, Thái Âm lặng lẽ tính đường."
+    },
+    {
+     "tieu_de": "Sao Thái Dương hợp nghề và vai trò nào?",
+     "doan": "Thái Dương hợp việc công khai và có ảnh hưởng: giảng dạy, truyền thông, quản lý cộng đồng, công chức, bán hàng trực tiếp. Hợp môi trường có nhiều người và cần người truyền cảm hứng. Cần tránh nhận việc thiện nguyện quá sức. Ví dụ: một giáo viên được học trò quý, nhưng cuối tuần vẫn nhận thêm việc nhóm và hết sức vào thứ Hai."
+    },
+    {
+     "tieu_de": "Sao Thái Dương trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Thái Dương hào phóng, thích chăm sóc, nói chuyện cởi mở. Họ dễ quên mình khi lo cho người khác, đến khi mệt mới thấy ấm ức. Trong gia đình, đây là người thường đứng ra lo mọi việc chung. Cách giữ cân bằng là chọn một việc mỗi tuần chỉ làm cho riêng mình."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Thái Dương?",
+     "danh_sach": [
+      "Từ chối một lời nhờ không quan trọng bằng một câu lịch sự.",
+      "Giữ một buổi tối trống chỉ cho bản thân.",
+      "Ghi lại một việc tốt bạn đã làm và nhờ người khác biết đến, đừng chỉ giữ trong lòng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Thái Dương đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Thái Dương thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người san việc; Thái Dương đỡ phải gánh một mình.",
+      "Nhờ người cùng chia sẻ việc chung."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm danh tiếng và tài ăn nói; hợp diễn thuyết, dạy học.",
+      "Nhận vai trò đứng trước đám đông có chuẩn bị."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Hay gặp người lớn đỡ đầu.",
+      "Cảm ơn và giữ liên lạc với người giúp mình."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Nhiệt tình gặp va chạm; dễ bị hiểu lầm hoặc tự gồng.",
+      "Nói rõ giới hạn trước khi nhận việc."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Dễ hụt hơi, công sức không được ghi nhận.",
+      "Ghi lại thành quả và hỏi phản hồi sớm."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thái Dương sáng và hãm khác nhau ra sao?",
+     "dap": "Sáng thì như mặt trời ban ngày: rộng rãi, có tiếng tốt, việc làm được nhiều người biết. Hãm thì như mặt trời về đêm: lo cho người nhiều mà ít được ghi nhận, nên chọn việc chuyên môn hơn tranh tiếng."
+    },
+    {
+     "hoi": "Người có Thái Dương nên chọn nghề gì?",
+     "dap": "Nghề có công chúng và ý nghĩa giúp người, như giáo dục, truyền thông, tổ chức cộng đồng. Nếu sao hãm, nên làm việc chuyên môn sâu và có người ghi nhận rõ ràng."
+    },
+    {
+     "hoi": "Năm nào sao Thái Dương được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Thái Dương: hoá Lộc ở năm có can Canh; hoá Quyền ở năm có can Tân; hoá Kỵ ở năm có can Giáp. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách coi Thái Dương là sao quý, chủ về danh tiếng và lòng rộng rãi, đồng thời dặn xét độ sáng theo giờ sinh vì ban ngày và ban đêm khác nhau."
+    }
+   ],
+   "y_chinh": [
+    "Thái Dương: quý tinh, hành Hoả, nhóm Cự Nhật",
+    "Hợp việc công khai, truyền cảm hứng",
+    "Dễ kiệt sức vì lo cho người hơn mình",
+    "Khác Thái Âm: Dương cho đi, Âm tích luỹ"
+   ]
+  },
+  "sao-vu-khuc": {
+   "muc": [
+    {
+     "tieu_de": "Sao Vũ Khúc khác sao Thiên Phủ ở điểm nào?",
+     "doan": "Vũ Khúc là sao kiếm tiền, Thiên Phủ là sao giữ tiền. Cả hai thuộc nhóm Tử Phủ Vũ Tướng và liên quan đến tài chính. Vũ Khúc quyết đoán, thích hành động để có kết quả đo được. Thiên Phủ thận trọng, thích tích luỹ vững. Người nhiều Vũ Khúc hỏi 'việc này sinh lợi bao nhiêu', người nhiều Thiên Phủ hỏi 'giữ được bao lâu'."
+    },
+    {
+     "tieu_de": "Sao Vũ Khúc hợp nghề và vai trò nào?",
+     "doan": "Vũ Khúc hợp việc cần kỷ luật và con số: tài chính, kế toán, kinh doanh, kỹ thuật, quản lý vận hành. Hợp môi trường có chỉ tiêu rõ và thưởng theo kết quả. Cần chú ý là khô khan trong giao tiếp, dễ làm đồng nghiệp ngại. Ví dụ: một kế toán trưởng làm chuẩn đến từng đồng, nhưng ít khi khen nhân viên nên cả nhóm làm việc trong im lặng."
+    },
+    {
+     "tieu_de": "Sao Vũ Khúc trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Vũ Khúc thể hiện bằng việc làm hơn lời nói: lo tiền, lo nhà, lo kế hoạch. Người thân đôi khi thấy thiếu những lời nhẹ nhàng. Cách điều chỉnh đơn giản là thêm một câu hỏi thăm không liên quan đến tiền mỗi ngày."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Vũ Khúc?",
+     "danh_sach": [
+      "Dành năm phút mỗi ngày hỏi han một người thân, không nói chuyện tiền.",
+      "Khen công khai một đồng nghiệp làm tốt.",
+      "Rà các khoản chi cố định trong tháng và cắt một khoản."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Vũ Khúc đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Vũ Khúc thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người hỗ trợ; việc lớn được chia nhỏ, kỷ luật nhẹ gánh hơn.",
+      "Giao phần mình ít giỏi cho người đáng tin."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm chữ nghĩa, mềm hơn trong lời nói; hợp tài chính cần báo cáo.",
+      "Tập giải thích con số bằng lời dễ hiểu."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Dễ có quý nhân trong làm ăn.",
+      "Giữ quan hệ với người từng giúp mình về tiền bạc."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Cứng gặp cứng; dễ va chạm, tiền đến rồi đi.",
+      "Giữ kỷ luật chi tiêu và mềm hơn khi thương lượng."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Tính toán hụt hoặc ý tưởng làm ăn quá mạo hiểm.",
+      "Không dồn hết vốn vào một cách, giữ quỹ dự phòng."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Vũ Khúc có phải sao giàu có không?",
+     "dap": "Vũ Khúc là tài tinh, chỉ khả năng kiếm và quản lý tiền. Sao không bảo đảm số tiền, vì còn cung, sao đi cùng và hoàn cảnh sống. Nên dùng nó để biết cách mình làm tiền, không để đoán giàu nghèo."
+    },
+    {
+     "hoi": "Người có Vũ Khúc hay bị nói khô khan, sửa thế nào?",
+     "dap": "Thêm những câu hỏi thăm ngắn, không gắn với việc. Một lời khen hay một tin nhắn hỏi đã ăn chưa thường có ích hơn một khoản chi lớn."
+    },
+    {
+     "hoi": "Năm nào sao Vũ Khúc được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Vũ Khúc: hoá Lộc ở năm có can Kỷ; hoá Quyền ở năm có can Canh; hoá Khoa ở năm có can Giáp; hoá Kỵ ở năm có can Nhâm. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách xếp Vũ Khúc là tài tinh, thuộc Kim, tính quyết đoán và thực tế, nên hay dùng khi bàn về khả năng kiếm tiền và quản lý nguồn lực."
+    }
+   ],
+   "y_chinh": [
+    "Vũ Khúc: tài tinh, hành Kim, nhóm Tử Phủ Vũ Tướng",
+    "Hợp việc cần kỷ luật và con số",
+    "Dễ khô khan trong tình cảm",
+    "Khác Thiên Phủ: Vũ Khúc kiếm tiền, Thiên Phủ giữ tiền"
+   ]
+  },
+  "sao-thien-dong": {
+   "muc": [
+    {
+     "tieu_de": "Sao Thiên Đồng khác sao Thái Âm ở điểm nào?",
+     "doan": "Thiên Đồng là sao phúc hiền, Thái Âm là sao tinh tế giàu cảm xúc. Cả hai cùng hành Thuỷ và cùng nhóm Cơ Nguyệt Đồng Lương nên tính cách đều nhẹ nhàng. Thiên Đồng dễ chịu, thích hoà khí và niềm vui nhỏ. Thái Âm nhạy cảm, hay giữ cảm xúc trong lòng. Người nhiều Thiên Đồng ít nghĩ phức tạp, người nhiều Thái Âm hay nhận ra thay đổi rất nhỏ."
+    },
+    {
+     "tieu_de": "Sao Thiên Đồng hợp nghề và vai trò nào?",
+     "doan": "Thiên Đồng hợp việc cần sự dễ chịu và thích nghi: chăm sóc khách hàng, giáo dục mầm non, ẩm thực, dịch vụ, nghệ thuật nhẹ nhàng, tư vấn. Hợp môi trường ít áp lực thi đua. Điểm dễ vấp là trì hoãn khi việc khó. Ví dụ: một nhân viên chăm sóc khách hàng được khen thân thiện, nhưng báo cáo cuối tháng luôn nộp sát hạn."
+    },
+    {
+     "tieu_de": "Sao Thiên Đồng trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Thiên Đồng ôn hoà, ít cãi và thích những buổi hẹn bình thường. Họ ngại nói chuyện khó nên chuyện nhỏ có thể dồn lại. Trong gia đình, đây là người làm không khí dịu xuống. Cách tốt là chọn một ngày cố định mỗi tuần để nói những chuyện cần nói."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Thiên Đồng?",
+     "danh_sach": [
+      "Chọn một việc khó đang để 'mai tính' và làm mười phút đầu hôm nay.",
+      "Đặt giờ cố định mỗi tuần để nói chuyện khó với người thân.",
+      "Tự đặt một mục tiêu nhỏ cho tháng này và viết ra."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Thiên Đồng đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Thiên Đồng thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người cùng làm; việc đỡ trì hoãn vì có bạn bên cạnh.",
+      "Hẹn một người cùng làm việc khó."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm khiếu nghệ thuật và lời nói dịu; hợp nghề sáng tạo.",
+      "Dành thời gian cho một sở thích thật."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Hay được giúp đúng lúc, nên dễ ỷ vào người khác.",
+      "Tự làm trước một phần rồi mới nhờ."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Nhẹ nhàng gặp va chạm; dễ bực khi bị ép tiến độ.",
+      "Đặt hạn chót sớm và chia thành các bước nhỏ."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Dễ lơ lửng, mục tiêu không rõ.",
+      "Viết mục tiêu ba tháng và việc đầu tiên."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thiên Đồng là sao phúc, vậy có sướng cả đời không?",
+     "dap": "Không đảm bảo. Thiên Đồng chỉ khí chất ôn hoà, thích hưởng thụ và hay gặp giúp đỡ. Nếu ngại cố gắng, người này dễ trôi theo hoàn cảnh, nên cần tự đặt mục tiêu rõ."
+    },
+    {
+     "hoi": "Người có Thiên Đồng hợp làm việc nhóm hay một mình?",
+     "dap": "Thường hợp nhóm nhỏ, nơi có không khí dễ chịu và có người nhắc tiến độ. Làm một mình quá lâu dễ trì hoãn, trừ khi có lịch cố định."
+    },
+    {
+     "hoi": "Năm nào sao Thiên Đồng được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Thiên Đồng: hoá Lộc ở năm có can Bính; hoá Quyền ở năm có can Đinh; hoá Kỵ ở năm có can Canh. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách gọi Thiên Đồng là phúc tinh, thuộc Thuỷ, chủ hoà khí và sự hưởng thụ, nên thường nêu đi cùng chuyện phúc đức trong lá số."
+    }
+   ],
+   "y_chinh": [
+    "Thiên Đồng: phúc tinh, hành Thuỷ, nhóm Cơ Nguyệt Đồng Lương",
+    "Hợp việc cần dễ chịu, thích nghi, chăm sóc",
+    "Dễ ngại khó, trì hoãn, thiếu quyết liệt",
+    "Khác Thái Âm: Đồng nhẹ nhàng, Âm tinh tế"
+   ]
+  },
+  "sao-liem-trinh": {
+   "muc": [
+    {
+     "tieu_de": "Sao Liêm Trinh khác sao Vũ Khúc ở điểm nào?",
+     "doan": "Liêm Trinh là sao nguyên tắc và cảm xúc, Vũ Khúc là sao thực tế và tiền bạc. Cả hai cùng nhóm Tử Phủ Vũ Tướng và đều nghiêm túc. Liêm Trinh làm theo điều mình tin, phản ứng mạnh khi thấy trái nguyên tắc. Vũ Khúc làm theo hiệu quả, cân nhắc chi phí trước cảm xúc. Người nhiều Liêm Trinh nói 'việc này không đúng', người nhiều Vũ Khúc nói 'việc này không lời'."
+    },
+    {
+     "tieu_de": "Sao Liêm Trinh hợp nghề và vai trò nào?",
+     "doan": "Liêm Trinh hợp việc cần chính xác và nguyên tắc: pháp chế, hành chính, kiểm toán, kỹ thuật, quản trị chất lượng. Hợp nơi có quy trình rõ. Cần để ý là chuyện thị phi và nóng nảy khi bị coi thường. Ví dụ: một chuyên viên pháp chế rất cẩn thận với giấy tờ, nhưng dễ nổi nóng khi bị yêu cầu làm tắt."
+    },
+    {
+     "tieu_de": "Sao Liêm Trinh trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Liêm Trinh sâu sắc và cảm xúc mạnh, đã tin ai thì rất trung thành. Khi thất vọng, họ dễ phản ứng gay gắt. Với gia đình, họ giữ nếp rõ, nhưng đôi khi cứng. Cách tốt là kể điều khiến mình tổn thương sớm, không chờ dồn lại."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Liêm Trinh?",
+     "danh_sach": [
+      "Trước khi trả lời tin nhắn gây bực, chờ mười phút rồi viết lại.",
+      "Xem lại một nguyên tắc của mình: nó đang giúp hay đang trói bạn.",
+      "Gặp một người bạn nói chuyện thoải mái, không bàn công việc."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Liêm Trinh đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Liêm Trinh thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người cùng đỡ; nguyên tắc có thêm người đồng tình.",
+      "Nhờ người trung thực nhận xét cách làm của mình."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm chữ nghĩa, văn bản chuẩn; hợp nghề cần giấy tờ.",
+      "Viết rõ quy trình để người khác theo."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Hay được người có uy tín bênh vực.",
+      "Làm đúng và minh bạch để giữ niềm tin."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Nóng nảy gặp va chạm; dễ vướng thị phi và cãi vã.",
+      "Tránh quyết khi đang giận, chọn kênh nói chuyện trực tiếp."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Dễ bị hụt vì tin nhầm hoặc đi đường tắt.",
+      "Kiểm tra giấy tờ và nguồn kỹ trước khi cam kết."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Liêm Trinh có phải sao đào hoa không?",
+     "dap": "Sách có nhắc Liêm Trinh với nét đào hoa kiểu sức hút và cảm xúc mạnh. Nó không phải lời phán về chuyện tình cảm phức tạp. Điều đáng để ý là cường độ cảm xúc và việc giữ nguyên tắc cá nhân."
+    },
+    {
+     "hoi": "Người có Liêm Trinh nên tránh điều gì?",
+     "dap": "Tránh đường tắt và những chuyện thiếu minh bạch, vì họ dễ vướng thị phi. Cũng nên tập nói chuyện khi bình tĩnh thay vì lúc đang bực."
+    },
+    {
+     "hoi": "Năm nào sao Liêm Trinh được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Liêm Trinh: hoá Lộc ở năm có can Giáp; hoá Kỵ ở năm có can Bính. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách xếp Liêm Trinh là sao thuộc Hoả, chủ nguyên tắc và cảm xúc, đồng thời nhắc đến nét đào hoa theo nghĩa sức hút và đam mê."
+    }
+   ],
+   "y_chinh": [
+    "Liêm Trinh: tù tinh, hành Hoả, nhóm Tử Phủ Vũ Tướng",
+    "Hợp việc cần chính xác và nguyên tắc",
+    "Dễ nóng nảy, cố chấp, dính thị phi",
+    "Khác Vũ Khúc: Liêm theo nguyên tắc, Vũ theo hiệu quả"
+   ]
+  },
+  "sao-thien-phu": {
+   "muc": [
+    {
+     "tieu_de": "Sao Thiên Phủ khác sao Thái Âm ở điểm nào?",
+     "doan": "Thiên Phủ là sao giữ của cho cả nhà, Thái Âm là sao giữ trong lặng lẽ và nhạy cảm. Cả hai đều liên quan đến tích luỹ. Thiên Phủ điềm tĩnh, quản lý và đáng tin. Thái Âm tinh tế, thích tích luỹ âm thầm, cảm xúc dễ dao động hơn. Người nhiều Thiên Phủ giữ tiền bằng kế hoạch, người nhiều Thái Âm giữ tiền bằng cảm giác an toàn."
+    },
+    {
+     "tieu_de": "Sao Thiên Phủ hợp nghề và vai trò nào?",
+     "doan": "Thiên Phủ hợp việc quản lý và gìn giữ: kế toán, ngân hàng, quản lý tài sản, bất động sản, hành chính nhân sự, vận hành. Hợp tổ chức ổn định, có quy trình. Điểm dễ vấp là ngại thay đổi. Ví dụ: một quản lý tài chính giữ quỹ rất chắc, nhưng bỏ lỡ cơ hội mở rộng vì mãi chờ thêm thông tin."
+    },
+    {
+     "tieu_de": "Sao Thiên Phủ trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Thiên Phủ bao dung, đáng tin, thích một mái ấm ổn định. Họ ít thể hiện bằng lời, thường lo cho gia đình bằng việc chuẩn bị. Cách tốt là thỉnh thoảng thử một điều mới cùng người thân, như một chuyến đi ngắn."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Thiên Phủ?",
+     "danh_sach": [
+      "Thử một điều mới nhỏ, ví dụ đi con đường khác hay ăn món lạ.",
+      "Rà lại khoản dự phòng và quyết định một việc cần chi.",
+      "Nói với người thân một điều bạn đang giữ vì lo xa."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Thiên Phủ đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Thiên Phủ thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Thêm người giúp; kho được giữ cùng nhiều tay.",
+      "Chia việc quản lý cho người đáng tin."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm chữ nghĩa và kỹ năng giấy tờ; hợp nghề cần hồ sơ.",
+      "Hệ thống lại giấy tờ, hợp đồng của nhà."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Có người lớn nâng đỡ khi làm việc lớn.",
+      "Hỏi ý người có kinh nghiệm trước quyết định lớn."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Kho gặp va chạm; dễ bảo thủ hoặc chậm với thay đổi.",
+      "Đặt một mốc xem xét lại các thói quen cũ."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Dự phòng bị hụt vì biến động ngoài dự tính.",
+      "Chia tài sản vào vài chỗ, không dồn một nơi."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thiên Phủ có phải sao giàu không?",
+     "dap": "Thiên Phủ là sao kho, gắn với tích luỹ và quản lý. Giàu hay không còn phụ thuộc cung, sao đi cùng và nỗ lực của mỗi người. Nên hiểu nó là khuynh hướng giữ gìn, không phải lời hứa về tiền."
+    },
+    {
+     "hoi": "Người có Thiên Phủ có hay bảo thủ không?",
+     "dap": "Nhiều người dễ dè dặt trước thay đổi. Thử đặt một khoản nhỏ cho điều mới mỗi quý giúp cân bằng giữa giữ và thử."
+    },
+    {
+     "hoi": "Năm nào sao Thiên Phủ được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Thiên Phủ không mang Hoá Lộc, Quyền, Khoa hay Kỵ ở năm can nào. Sắc thái của Thiên Phủ thay đổi chủ yếu qua sao đi cùng và cung đóng, không qua tứ hoá của năm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách gọi Thiên Phủ là kho tinh thuộc Thổ, chủ sự ổn định, bao dung và tích luỹ, thường đi đôi với Tử Vi trong thế Tử Phủ."
+    }
+   ],
+   "y_chinh": [
+    "Thiên Phủ: kho tinh, hành Thổ, nhóm Tử Phủ Vũ Tướng",
+    "Hợp việc quản lý, gìn giữ, tích luỹ",
+    "Dễ bảo thủ, ngại mạo hiểm quá mức",
+    "Khác Thái Âm: Phủ giữ bằng kế hoạch, Âm bằng cảm giác"
+   ]
+  },
+  "sao-thai-am": {
+   "muc": [
+    {
+     "tieu_de": "Sao Thái Âm khác sao Thái Dương ở điểm nào?",
+     "doan": "Thái Âm là mặt trăng, hướng nội và tích luỹ. Thái Dương là mặt trời, hướng ngoại và cho đi. Hai sao thường được đọc thành cặp Nhật – Nguyệt vì tính cách đối nhau. Thái Âm nhạy cảm, tinh tế, thích làm âm thầm. Thái Dương rộng rãi, thích làm công khai. Cùng gặp một chuyện buồn, Thái Âm giữ trong lòng, Thái Dương tìm người để chia sẻ."
+    },
+    {
+     "tieu_de": "Sao Thái Âm hợp nghề và vai trò nào?",
+     "doan": "Thái Âm hợp việc cần tỉ mỉ và thẩm mỹ: thiết kế, nội thất, biên tập, chăm sóc, kế toán, nghệ thuật, kinh doanh nhỏ lẻ. Hợp môi trường yên tĩnh, ít cạnh tranh ồn ào. Điểm cần chú ý là cảm xúc thất thường khi áp lực. Ví dụ: một biên tập viên rất nhạy câu chữ, nhưng buồn nhiều ngày khi bị góp ý gay gắt."
+    },
+    {
+     "tieu_de": "Sao Thái Âm trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Thái Âm dịu dàng, quan tâm, nhớ những chi tiết nhỏ. Họ hay giữ cảm xúc nên người kia có thể không biết. Trong gia đình, đây là người để ý ai đang buồn. Cách tốt là tập nói ra một điều khó chịu nhỏ trước khi nó thành lớn."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Thái Âm?",
+     "danh_sach": [
+      "Nói ra một điều đang giữ trong lòng với người đáng tin.",
+      "Dọn một góc nhà hoặc bàn làm việc cho dễ chịu.",
+      "Dành ba mươi phút cho một việc thẩm mỹ bạn thích."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Thái Âm đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Thái Âm thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người sẻ chia; cảm xúc bớt giữ một mình.",
+      "Kể một chuyện của mình với người ấy."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm tài văn chương, nghệ thuật; hợp việc sáng tạo.",
+      "Viết nhật ký hoặc làm một sản phẩm nhỏ."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Hay được người lớn giúp âm thầm.",
+      "Nói lời cảm ơn rõ ràng."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Cảm xúc gặp va chạm; dễ buồn vô cớ hoặc đa nghi.",
+      "Ngủ đủ và đi bộ ngoài trời, bài này không thay lời bác sĩ."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Tình cảm hoặc tiền dễ hụt nếu quá tin người.",
+      "Hỏi lại và kiểm chứng trước khi cho vay, góp vốn."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thái Âm sáng và hãm khác nhau ra sao?",
+     "dap": "Sáng thì như trăng đêm thu: dịu dàng, giàu cảm xúc, có duyên tích luỹ nhà đất và tiền bạc lặng lẽ. Hãm thì như trăng ban ngày: cảm xúc thất thường, hay buồn, dễ đa nghi."
+    },
+    {
+     "hoi": "Người có Thái Âm hay buồn vu vơ phải làm sao?",
+     "dap": "Giữ nhịp ngủ nghỉ đều, đi bộ ngoài trời và nói chuyện với người tin cậy. Nếu buồn kéo dài nhiều tuần, hãy gặp chuyên gia tâm lý hoặc bác sĩ, vì bài này không thay lời bác sĩ."
+    },
+    {
+     "hoi": "Năm nào sao Thái Âm được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Thái Âm: hoá Lộc ở năm có can Đinh; hoá Quyền ở năm có can Mậu; hoá Khoa ở năm có can Canh, Quý; hoá Kỵ ở năm có can Ất. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách coi Thái Âm là phú tinh thuộc Thuỷ, chủ sự tinh tế và tích luỹ, dặn xét độ sáng của sao theo giờ sinh ngày hay đêm."
+    }
+   ],
+   "y_chinh": [
+    "Thái Âm: phú tinh, hành Thuỷ, nhóm Cơ Nguyệt Đồng Lương",
+    "Hợp việc tỉ mỉ, thẩm mỹ, chăm sóc",
+    "Dễ buồn vô cớ, giữ cảm xúc trong lòng",
+    "Khác Thái Dương: Âm tích luỹ, Dương cho đi"
+   ]
+  },
+  "sao-tham-lang": {
+   "muc": [
+    {
+     "tieu_de": "Sao Tham Lang khác sao Phá Quân ở điểm nào?",
+     "doan": "Tham Lang là sao ham muốn, Phá Quân là sao đổi mới. Cả hai cùng nhóm Sát Phá Tham và đều muốn trải nghiệm. Tham Lang muốn có thêm nhiều thứ, giỏi giao tế và học nhanh. Phá Quân muốn phá cái cũ để làm cái mới, hay làm lại từ đầu. Người nhiều Tham Lang hỏi 'còn gì hay nữa', người nhiều Phá Quân hỏi 'có cách nào khác không'."
+    },
+    {
+     "tieu_de": "Sao Tham Lang hợp nghề và vai trò nào?",
+     "doan": "Tham Lang hợp việc cần giao tiếp và đa năng: kinh doanh, sale, sự kiện, truyền thông, giải trí, ẩm thực, du lịch. Hợp môi trường nhiều người và nhiều chuyện mới. Cần để ý là chóng chán, nhiều dự án dở dang. Ví dụ: một người làm sự kiện giỏi kết nối, nhưng bắt đầu ba dự án mới trong khi hai dự án cũ chưa xong."
+    },
+    {
+     "tieu_de": "Sao Tham Lang trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Tham Lang hấp dẫn, duyên dáng, thích sự mới mẻ. Họ dễ bị cuốn vào cảm giác lúc đầu rồi chán. Trong gia đình, đây là người mang niềm vui nhưng cần thêm sự bền. Cách tốt là chọn một thói quen chung cố định, như bữa tối chủ nhật."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Tham Lang?",
+     "danh_sach": [
+      "Liệt kê ba thứ bạn đang muốn và chọn một thứ thật cần.",
+      "Hoàn thành một việc dở dang trước khi bắt đầu việc mới.",
+      "Đặt một giới hạn rõ cho một thói quen hưởng thụ, như giờ chơi game, mua sắm."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Tham Lang đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Tham Lang thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người giúp giữ nhịp; nhiều ý tưởng có người cùng làm.",
+      "Chọn một người nhắc bạn về điều đã hẹn."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm tài ăn nói, nghệ thuật; hợp việc trình diễn, giao tiếp.",
+      "Biến sở thích thành sản phẩm nhỏ."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Hay gặp người chỉ đường cho cơ hội mới.",
+      "Hỏi ý người đi trước trước khi đổi hướng."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Ham muốn gặp va chạm; dễ sa đà hoặc nhiều mối quan hệ rối.",
+      "Đặt giới hạn thời gian, tiền cho thú vui."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Hụt vì tham nhiều, đầu tư nóng.",
+      "Không vay để theo cơ hội, chờ một tuần trước khi quyết."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Tham Lang có phải chỉ chuyện hưởng thụ không?",
+     "dap": "Không. Tham Lang cũng là đa tài, giao tế rộng và ham học. Mặt dễ vấp là chóng chán và sa đà. Biết đặt giới hạn thì nét này thành động lực làm nhiều việc."
+    },
+    {
+     "hoi": "Người có Tham Lang nên chọn nghề gì?",
+     "dap": "Nghề cần tiếp xúc và linh hoạt, như bán hàng, truyền thông, tổ chức sự kiện, kinh doanh dịch vụ. Cần một người hoặc hệ thống nhắc việc để hoàn thành đến cùng."
+    },
+    {
+     "hoi": "Năm nào sao Tham Lang được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Tham Lang: hoá Lộc ở năm có can Mậu; hoá Quyền ở năm có can Kỷ; hoá Kỵ ở năm có can Quý. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách xếp Tham Lang là đào hoa tinh trong nhóm Sát Phá Tham, chủ sự đa tài và ham muốn, nên bàn nhiều về giới hạn của mong muốn."
+    }
+   ],
+   "y_chinh": [
+    "Tham Lang: đào hoa tinh, hành Thuỷ/Mộc, nhóm Sát Phá Tham",
+    "Hợp việc giao tiếp, đa năng, kinh doanh",
+    "Dễ cả thèm chóng chán, sa đà hưởng thụ",
+    "Khác Phá Quân: Tham muốn nhiều, Phá muốn đổi mới"
+   ]
+  },
+  "sao-cu-mon": {
+   "muc": [
+    {
+     "tieu_de": "Sao Cự Môn khác sao Thiên Cơ ở điểm nào?",
+     "doan": "Cự Môn là sao lời nói và nghi vấn, Thiên Cơ là sao mưu tính. Cả hai đều dùng nhiều đầu óc. Cự Môn hỏi 'tại sao' và phân tích tận cùng, hay thể hiện qua lời nói. Thiên Cơ tính phương án và ứng biến, ít nói ra. Người nhiều Cự Môn tranh luận để hiểu, người nhiều Thiên Cơ lặng lẽ tính để làm."
+    },
+    {
+     "tieu_de": "Sao Cự Môn hợp nghề và vai trò nào?",
+     "doan": "Cự Môn hợp nghề dùng lời: giảng dạy, luật, tư vấn, truyền thông, biên tập, bán hàng chuyên sâu, phiên dịch. Hợp môi trường cần phản biện và chuyên môn. Cần để ý lời nói dễ gây hiểu lầm khi vội. Ví dụ: một luật sư lập luận sắc, nhưng một câu nhận xét thẳng trong họp khiến đồng nghiệp tránh mặt vài tuần."
+    },
+    {
+     "tieu_de": "Sao Cự Môn trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Cự Môn hay hỏi và muốn hiểu rõ. Họ cần sự rõ ràng, nhưng đôi khi người kia thấy bị chất vấn. Trong gia đình, đây là người nói thẳng. Cách tốt là mở đầu bằng điều mình hiểu hoặc trân trọng, rồi mới hỏi điều thắc mắc."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Cự Môn?",
+     "danh_sach": [
+      "Trước khi góp ý ai, hỏi mình: lời này có giúp họ không.",
+      "Kiểm chứng một điều bạn đang nghi trước khi nói ra.",
+      "Nói một lời khen thật lòng với một người bạn ít khen."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Cự Môn đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Cự Môn thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người cân bằng; lời nói được hỗ trợ bởi người tin cậy.",
+      "Nhờ người hoà giải khi cần giải thích."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm tài lời nói và chữ nghĩa; hợp việc viết, diễn giải.",
+      "Viết lại ý chính thành ba câu trước khi nói."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Có người lớn nâng đỡ, lời nói được tin hơn.",
+      "Dùng uy tín để giúp người, không để tranh hơn thua."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Lời nói gặp va chạm; dễ gây thị phi, bị hiểu lầm.",
+      "Ghi lại quyết định quan trọng bằng văn bản."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Nghi ngờ quá nhiều hoặc phân tích thành lạc hướng.",
+      "Đặt giới hạn thời gian cho việc suy xét và quyết."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Cự Môn có phải sao thị phi không?",
+     "dap": "Sách hay nhắc Cự Môn với chuyện thị phi vì sao này liên quan đến lời nói. Nghĩa đời thường là lời nói có sức nặng nên cần cẩn thận. Dùng khéo, Cự Môn thành tài lý luận và phản biện."
+    },
+    {
+     "hoi": "Người có Cự Môn nên nói thế nào cho đỡ mất lòng?",
+     "dap": "Nêu điều hiểu hoặc đồng ý trước, rồi mới nêu điều thắc mắc, dùng câu hỏi thay câu phán. Viết ra khi chuyện nhạy cảm để tránh hiểu lầm."
+    },
+    {
+     "hoi": "Năm nào sao Cự Môn được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Cự Môn: hoá Lộc ở năm có can Tân; hoá Quyền ở năm có can Quý; hoá Kỵ ở năm có can Đinh. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách gọi Cự Môn là ám tinh thuộc Thuỷ, chủ chuyện lời nói, nghi vấn và thị phi, nên dặn xem độ sáng và sao đi cùng để biết lời nói giúp hay vướng."
+    }
+   ],
+   "y_chinh": [
+    "Cự Môn: ám tinh, hành Thuỷ, nhóm Cự Nhật",
+    "Hợp nghề dùng lời: dạy, luật, tư vấn, truyền thông",
+    "Dễ đa nghi, gây hiểu lầm vì lời nói",
+    "Khác Thiên Cơ: Cự Môn hỏi và nói, Thiên Cơ tính"
+   ]
+  },
+  "sao-thien-tuong": {
+   "muc": [
+    {
+     "tieu_de": "Sao Thiên Tướng khác sao Thiên Lương ở điểm nào?",
+     "doan": "Thiên Tướng là sao giữ lễ và điều phối, Thiên Lương là sao che chở và khuyên bảo. Cả hai đều giúp người khác. Thiên Tướng giữ thể diện cho mọi bên, làm cầu nối khi bất đồng. Thiên Lương hay đứng ra dạy và nhắc điều đúng. Người nhiều Thiên Tướng nói 'để em xếp cho ổn', người nhiều Thiên Lương nói 'để tôi chỉ cho'."
+    },
+    {
+     "tieu_de": "Sao Thiên Tướng hợp nghề và vai trò nào?",
+     "doan": "Thiên Tướng hợp vai trò điều phối và phò tá: thư ký điều hành, quản lý dự án, hành chính, nhân sự, trợ lý, ngoại giao, dịch vụ cao cấp. Hợp môi trường có quy tắc ứng xử rõ. Điểm cần để ý là dễ bị cuốn theo ý người khác. Ví dụ: một quản lý dự án phối hợp ba phòng rất nhịp nhàng, nhưng khó nói 'không' khi sếp nhờ thêm."
+    },
+    {
+     "tieu_de": "Sao Thiên Tướng trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Thiên Tướng lịch sự, chu đáo, biết giữ thể diện cho người kia. Họ ngại xung đột nên hay nhường. Trong gia đình, đây là người làm trung gian. Cách tốt là nói rõ một mong muốn của mình mỗi tuần."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Thiên Tướng?",
+     "danh_sach": [
+      "Tập nói 'để mình xem lịch rồi trả lời' thay vì đồng ý ngay.",
+      "Viết ra một điều bạn muốn, không phải điều người khác muốn.",
+      "Chọn một người bạn tin để nhờ nhận xét thẳng về quyết định gần đây."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Thiên Tướng đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Thiên Tướng thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người cùng làm; vai điều phối nhẹ hơn.",
+      "Phân việc rõ để không phải đứng giữa quá nhiều."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm lời lẽ khéo và giấy tờ gọn; hợp nghề hành chính, ngoại giao.",
+      "Soạn mẫu trả lời cho các việc lặp lại."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Hay có người lớn đỡ đầu khi làm việc lớn.",
+      "Giữ tín với người giúp mình."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Lễ nghĩa gặp va chạm; dễ bị kẹt giữa hai bên.",
+      "Nói rõ vai trò và giới hạn từ đầu."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Dễ bị người khác lôi kéo hoặc vạ lây vì giúp người.",
+      "Hỏi lại mục đích trước khi nhận lời giúp."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thiên Tướng có phải sao làm phụ tá mãi không?",
+     "dap": "Không. Thiên Tướng giỏi phò tá và điều phối, nhưng vẫn có thể làm lãnh đạo khi có chủ kiến rõ. Cái cần tập là nói ý mình thay vì chỉ làm cho người khác yên."
+    },
+    {
+     "hoi": "Người có Thiên Tướng làm sao đỡ bị lợi dụng?",
+     "dap": "Đặt giới hạn cụ thể cho việc nhận lời, ví dụ số việc thêm mỗi tuần. Nói 'cho mình thời gian xem lại' trước khi đồng ý."
+    },
+    {
+     "hoi": "Năm nào sao Thiên Tướng được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Thiên Tướng không mang Hoá Lộc, Quyền, Khoa hay Kỵ ở năm can nào. Sắc thái của Thiên Tướng thay đổi chủ yếu qua sao đi cùng và cung đóng, không qua tứ hoá của năm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách gọi Thiên Tướng là ấn tinh thuộc Thuỷ, chủ lễ nghĩa và việc phò tá, thường nằm trong thế Tử Phủ Vũ Tướng."
+    }
+   ],
+   "y_chinh": [
+    "Thiên Tướng: ấn tinh, hành Thuỷ, nhóm Tử Phủ Vũ Tướng",
+    "Hợp vai trò điều phối, phò tá, ngoại giao",
+    "Dễ bị người khác ảnh hưởng, ngại nói không",
+    "Khác Thiên Lương: Tướng giữ lễ, Lương che chở"
+   ]
+  },
+  "sao-thien-luong": {
+   "muc": [
+    {
+     "tieu_de": "Sao Thiên Lương khác sao Thiên Đồng ở điểm nào?",
+     "doan": "Thiên Lương là sao che chở và dạy bảo, Thiên Đồng là sao hưởng thụ và hoà khí. Cả hai cùng nhóm Cơ Nguyệt Đồng Lương và ôn hoà. Thiên Lương nghiêm hơn, trọng đạo lý, hay đứng ra khuyên. Thiên Đồng nhẹ nhàng, thích vui và ít can thiệp. Người nhiều Thiên Lương hay được nhờ xin lời khuyên, người nhiều Thiên Đồng hay được rủ đi chơi."
+    },
+    {
+     "tieu_de": "Sao Thiên Lương hợp nghề và vai trò nào?",
+     "doan": "Thiên Lương hợp vai trò hướng dẫn và che chở: giáo viên, cố vấn, bảo hiểm, y tế hỗ trợ, tư vấn pháp lý, công tác xã hội, nhân sự. Hợp môi trường có giá trị rõ ràng. Cần để ý là thích lên lớp và can thiệp. Ví dụ: một giáo viên chủ nhiệm được học trò quý, nhưng hay sửa bài làm hộ thay vì để học trò tự thử."
+    },
+    {
+     "tieu_de": "Sao Thiên Lương trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Thiên Lương chăm sóc, bao bọc và trọng trách nhiệm. Họ đôi khi vô tình thành người dạy, người kia thấy mình bị coi như học trò. Cách tốt là hỏi 'em muốn anh nghe hay muốn anh góp ý' trước khi khuyên."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Thiên Lương?",
+     "danh_sach": [
+      "Lần tới ai kể chuyện, nghe hết trước khi nêu lời khuyên.",
+      "Chọn một việc bạn hay làm hộ người khác và để họ tự làm.",
+      "Dành thời gian cho một sở thích không mang ý nghĩa dạy dỗ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Thiên Lương đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Thiên Lương thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người cùng che chở; việc giúp người đỡ một mình.",
+      "Nhờ đồng nghiệp chia việc hỗ trợ."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm chữ nghĩa và tài giảng giải; hợp dạy học, tư vấn.",
+      "Viết lại bài học thành ví dụ ngắn."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Hay được người lớn che chở khi gặp khó.",
+      "Nhận giúp đỡ và cảm ơn đúng lúc."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Che chở gặp va chạm; dễ bị chê dạy đời hoặc cô độc.",
+      "Giúp khi được nhờ, đừng giúp trước."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Dễ lang bạt hoặc thấy mình lạc lõng với nhóm.",
+      "Giữ một nhóm bạn ổn định để chia sẻ."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thiên Lương là sao gì, có phải sao cứu giải không?",
+     "dap": "Sách hay gọi Thiên Lương là sao ấm, có khuynh hướng che chở và gặp khó thường có người hay cách đỡ. Đó là nét tính cách và may mắn, không phải bảo đảm tránh được mọi khó khăn."
+    },
+    {
+     "hoi": "Người có Thiên Lương làm sao bớt dạy đời?",
+     "dap": "Hỏi người kia muốn nghe hay muốn lời khuyên trước khi nói. Đưa một câu hỏi mở thay vì một câu kết luận."
+    },
+    {
+     "hoi": "Năm nào sao Thiên Lương được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Thiên Lương: hoá Lộc ở năm có can Nhâm; hoá Quyền ở năm có can Ất; hoá Khoa ở năm có can Kỷ. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách gọi Thiên Lương là ấm tinh thuộc Thổ, chủ che chở và đạo lý, nên thường bàn đến nét cố vấn và sự đỡ đần trong lá số."
+    }
+   ],
+   "y_chinh": [
+    "Thiên Lương: ấm tinh, hành Thổ, nhóm Cơ Nguyệt Đồng Lương",
+    "Hợp vai trò hướng dẫn, che chở, cố vấn",
+    "Dễ hay lên lớp, cô độc, làm người cứu",
+    "Khác Thiên Đồng: Lương che chở, Đồng hưởng thụ"
+   ]
+  },
+  "sao-that-sat": {
+   "muc": [
+    {
+     "tieu_de": "Sao Thất Sát khác sao Phá Quân ở điểm nào?",
+     "doan": "Thất Sát là sao xông pha, Phá Quân là sao đổi mới. Cả hai cùng nhóm Sát Phá Tham và đều dám thay đổi. Thất Sát dũng cảm, độc lập, hành động nhanh để đạt mục tiêu. Phá Quân phá khuôn cũ để làm cái khác, hay làm lại từ đầu. Người nhiều Thất Sát hỏi 'đi hướng nào cho nhanh', người nhiều Phá Quân hỏi 'cách cũ có đáng giữ không'."
+    },
+    {
+     "tieu_de": "Sao Thất Sát hợp nghề và vai trò nào?",
+     "doan": "Thất Sát hợp việc cần quyết đoán và chịu áp lực: kinh doanh tự lập, quản lý khủng hoảng, bán hàng mục tiêu cao, kỹ thuật thực địa, quân đội, thể thao, khởi nghiệp. Hợp môi trường nhiều thử thách. Cần để ý là nóng vội và khó hợp tác lâu. Ví dụ: một trưởng nhóm bán hàng đạt chỉ tiêu nhanh, nhưng nhân viên rời đi vì bị giục liên tục."
+    },
+    {
+     "tieu_de": "Sao Thất Sát trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Thất Sát thẳng thắn, bảo vệ người mình thương nhưng khó chịu khi bị kiểm soát. Họ có thể quyết nhanh và làm người kia choáng. Trong gia đình, đây là người dám gánh khi có biến. Cách tốt là hỏi ý kiến người kia trước khi quyết chuyện chung."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Thất Sát?",
+     "danh_sach": [
+      "Trước một quyết định lớn, chờ một đêm rồi quyết.",
+      "Nghe người khác trình bày hết trước khi nêu ý.",
+      "Tập thể thao hoặc vận động mạnh để xả năng lượng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Thất Sát đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Thất Sát thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người cùng xông pha; có người hợp tác đáng tin cậy.",
+      "Chọn người bổ sung cho chỗ thiếu của mình."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm chữ nghĩa, kế hoạch rõ; quyết đoán có cơ sở hơn.",
+      "Viết kế hoạch ngắn trước khi hành động."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Hay có người đỡ đúng lúc gấp.",
+      "Nhận giúp đỡ, đừng chỉ gồng."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Sắc gặp sắc; dễ va chạm vì vội, đường đời nhiều thăng trầm.",
+      "Đi chậm lại, kiểm tra an toàn trước khi làm việc rủi ro."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Hành động liều hoặc thay đổi lớn đột ngột.",
+      "Dự trù nguồn lực cho ít nhất ba tháng."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Thất Sát có phải sao nguy hiểm không?",
+     "dap": "Không. Thất Sát là tướng tinh, chỉ sự dũng cảm và quyết đoán. Mặt dễ vấp là nóng vội, thăng trầm. Dùng đúng chỗ, nó cho sức bật để làm việc khó."
+    },
+    {
+     "hoi": "Người có Thất Sát nên rèn điều gì?",
+     "dap": "Rèn kiên nhẫn và việc nghe người khác. Làm chắc từng bước, có người tin cậy cùng bàn việc lớn."
+    },
+    {
+     "hoi": "Năm nào sao Thất Sát được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Thất Sát không mang Hoá Lộc, Quyền, Khoa hay Kỵ ở năm can nào. Sắc thái của Thất Sát thay đổi chủ yếu qua sao đi cùng và cung đóng, không qua tứ hoá của năm."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách gọi Thất Sát là tướng tinh thuộc Kim, chủ quyết đoán và xông pha, thường bàn cùng Phá Quân, Tham Lang trong thế Sát Phá Tham."
+    }
+   ],
+   "y_chinh": [
+    "Thất Sát: tướng tinh, hành Kim, nhóm Sát Phá Tham",
+    "Hợp việc cần quyết đoán, chịu áp lực",
+    "Dễ nóng vội, liều, khó hợp tác lâu",
+    "Khác Phá Quân: Sát xông pha, Phá đổi mới"
+   ]
+  },
+  "sao-pha-quan": {
+   "muc": [
+    {
+     "tieu_de": "Sao Phá Quân khác sao Tham Lang ở điểm nào?",
+     "doan": "Phá Quân là sao đổi mới, Tham Lang là sao ham muốn. Cả hai cùng nhóm Sát Phá Tham và thích trải nghiệm. Phá Quân phá khuôn cũ để làm lại, hợp khởi nghiệp và cải tổ. Tham Lang muốn thêm nhiều điều hay, giỏi giao tế. Người nhiều Phá Quân nói 'làm lại theo cách khác', người nhiều Tham Lang nói 'thử thêm cái này nữa'."
+    },
+    {
+     "tieu_de": "Sao Phá Quân hợp nghề và vai trò nào?",
+     "doan": "Phá Quân hợp việc cần đổi mới: khởi nghiệp, cải tổ quy trình, thiết kế sản phẩm mới, tư vấn chuyển đổi, nghệ thuật thử nghiệm. Hợp môi trường thay đổi nhanh. Điểm cần để ý là bỏ dở giữa chừng và hao tổn. Ví dụ: một người làm sản phẩm ra mắt bản thử rất nhanh, nhưng đổi hướng ba lần trong sáu tháng nên đội ngũ mất phương hướng."
+    },
+    {
+     "tieu_de": "Sao Phá Quân trong tình cảm và gia đình thường ra sao?",
+     "doan": "Trong tình cảm, Phá Quân thích sự mới mẻ và không chịu khuôn mẫu. Họ dám làm lại, nhưng đôi khi bỏ dở quá sớm. Trong gia đình, đây là người hay thay đổi cách sống, bố trí nhà. Cách tốt là chọn một nền ổn định, như thói quen hằng tuần, rồi mới thử cái mới."
+    },
+    {
+     "tieu_de": "Tuần này làm gì để dùng tốt sao Phá Quân?",
+     "danh_sach": [
+      "Trước khi bỏ một việc, viết ra ba lý do ở lại và ba lý do đi.",
+      "Hoàn thành một việc dở dang trong tuần.",
+      "Cố định một nền nếp nhỏ, như giờ ngủ hoặc bữa tối chung."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sao Phá Quân đứng cùng sao phụ — đọc nhanh",
+    "chu_thich": "Sao phụ chỉ thêm sắc thái, không đổi bản chất của chính tinh. Cột giữa là điều thường gợi khi hai sao cùng cung hoặc chiếu nhau; cột cuối là việc làm được trong đời thường.",
+    "cot": [
+     "Sao phụ đi cùng",
+     "Với Phá Quân thường gợi",
+     "Việc nên làm"
+    ],
+    "dong": [
+     [
+      "Tả Phù, Hữu Bật",
+      "Có người cùng xây; làm lại có người đỡ.",
+      "Tìm người giữ nhịp khi bạn đổi hướng."
+     ],
+     [
+      "Văn Xương, Văn Khúc",
+      "Thêm chữ nghĩa và ý tưởng; hợp việc sáng tạo, thiết kế.",
+      "Ghi lại ý tưởng và chọn một để thử."
+     ],
+     [
+      "Thiên Khôi, Thiên Việt",
+      "Hay có người chỉ đường khi muốn đổi nghề.",
+      "Hỏi người đi trước trước khi đổi lớn."
+     ],
+     [
+      "Kình Dương, Đà La",
+      "Sức phá gặp lực cản; dễ bốc đồng, hao tổn, đổi chỗ ở, đổi việc.",
+      "Giữ quỹ dự phòng và giữ thói quen nền."
+     ],
+     [
+      "Địa Không, Địa Kiếp",
+      "Làm lại từ đầu nhiều lần; dễ hụt vốn.",
+      "Thử quy mô nhỏ, đặt mốc dừng rõ."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Phá Quân có phải sao phá tài không?",
+     "dap": "Phá Quân là hao tinh, chỉ khuynh hướng phá cũ lập mới nên hay tốn nguồn lực khi thay đổi. Cách dùng tốt là thay đổi có kế hoạch và giữ quỹ dự phòng, không phải lời phán mất tiền."
+    },
+    {
+     "hoi": "Người có Phá Quân hợp khởi nghiệp không?",
+     "dap": "Thường hợp ở giai đoạn đầu cần đổi mới và chấp nhận thử sai. Cần người giữ vận hành và tiền bạc để đi đường dài."
+    },
+    {
+     "hoi": "Năm nào sao Phá Quân được hoá Lộc, Quyền, Khoa, Kỵ?",
+     "dap": "Theo bảng tứ hoá đang dùng, sao Phá Quân: hoá Lộc ở năm có can Quý; hoá Quyền ở năm có can Giáp. Năm âm lịch có cùng can là lúc sao này được hoá tương ứng trên lá số lưu niên."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Tử Vi Đẩu Số Toàn Thư",
+     "chuong": "Chư tinh vấn đáp luận",
+     "nghia": "Sách gọi Phá Quân là hao tinh thuộc Thuỷ, chủ phá cũ lập mới, nên hay được nhắc khi bàn về thay đổi và khởi nghiệp."
+    }
+   ],
+   "y_chinh": [
+    "Phá Quân: hao tinh, hành Thuỷ, nhóm Sát Phá Tham",
+    "Hợp việc đổi mới, cải tổ, khởi nghiệp",
+    "Dễ hao tổn, bốc đồng, bỏ dở giữa chừng",
+    "Khác Tham Lang: Phá đổi mới, Tham ham muốn"
+   ]
+  }
+ }
+}
