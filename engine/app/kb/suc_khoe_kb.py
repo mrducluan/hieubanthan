@@ -34,17 +34,33 @@ def hanh_chuan(h: str | None) -> str | None:
     return _HANH.get(h, h) if h else None
 
 
-def he_hanh(hanh: str | None) -> dict | None:
-    """Hành → {he, kham, hanh} (hệ cơ quan sách xưa gắn với hành + việc đi khám)."""
+def _benh(m: dict, co: bool) -> dict:
+    """SK-2: tên vài bệnh hay gặp của hệ cơ quan — CHỈ Tử vi và Bát tự xin (`benh=True`); mảng khác không mang."""
+    return {"benh": m["benh"]} if co and isinstance(m.get("benh"), str) and m["benh"].strip() else {}
+
+
+def ten_benh() -> list[str]:
+    """SK-2: mọi tên bệnh hay gặp KB cho phép nêu (trường `benh` của hành / sao), chữ thường, không trùng."""
+    d = _d()
+    ra: list[str] = []
+    for nhom in ("he_co_quan", "sao_tuvi"):
+        for m in (d.get(nhom) or {}).values():
+            if isinstance(m, dict) and isinstance(m.get("benh"), str):
+                ra += [x.strip().lower() for x in re.split(r",| and | và ", m["benh"]) if x.strip()]
+    return list(dict.fromkeys(ra))
+
+
+def he_hanh(hanh: str | None, benh: bool = False) -> dict | None:
+    """Hành → {he, kham, hanh[, benh]} (hệ cơ quan sách xưa gắn với hành + việc đi khám)."""
     h = hanh_chuan(hanh)
     m = (_d().get("he_co_quan") or {}).get(h or "")
-    return {"he": m["he"], "kham": m["kham"], "hanh": h} if isinstance(m, dict) else None
+    return {"he": m["he"], "kham": m["kham"], "hanh": h, **_benh(m, benh)} if isinstance(m, dict) else None
 
 
-def he_sao(sao: str) -> dict | None:
-    """Chính tinh Tử vi → {he, kham, hanh}."""
+def he_sao(sao: str, benh: bool = False) -> dict | None:
+    """Chính tinh Tử vi → {he, kham, hanh[, benh]}."""
     m = (_d().get("sao_tuvi") or {}).get(sao)
-    return {"he": m["he"], "kham": m["kham"], "hanh": m.get("hanh")} if isinstance(m, dict) else None
+    return {"he": m["he"], "kham": m["kham"], "hanh": m.get("hanh"), **_benh(m, benh)} if isinstance(m, dict) else None
 
 
 def he_quai(quai: str | None) -> dict | None:

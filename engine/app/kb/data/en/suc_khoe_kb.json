@@ -1,46 +1,156 @@
 {
  "_trang_thai": "bien_tap",
  "he_co_quan": {
-  "Kim": {"he": "breathing and lungs", "kham": "lung and breathing check-up"},
-  "Thổ": {"he": "digestion and stomach", "kham": "digestive and stomach check-up"},
-  "Mộc": {"he": "liver, gallbladder and tendons", "kham": "liver and gallbladder check-up"},
-  "Thủy": {"he": "kidneys and urinary tract", "kham": "kidney and urinary check-up"},
-  "Hỏa": {"he": "heart, blood pressure and eyes", "kham": "heart check-up, blood pressure reading and eye exam"}
+  "Kim": {
+   "he": "breathing and lungs",
+   "kham": "lung and breathing check-up",
+   "benh": "bronchitis, asthma and sinusitis"
+  },
+  "Thổ": {
+   "he": "digestion and stomach",
+   "kham": "digestive and stomach check-up",
+   "benh": "gastritis and acid reflux"
+  },
+  "Mộc": {
+   "he": "liver, gallbladder and tendons",
+   "kham": "liver and gallbladder check-up",
+   "benh": "fatty liver, raised liver enzymes and gallstones"
+  },
+  "Thủy": {
+   "he": "kidneys and urinary tract",
+   "kham": "kidney and urinary check-up",
+   "benh": "kidney stones and urinary tract infections"
+  },
+  "Hỏa": {
+   "he": "heart, blood pressure and eyes",
+   "kham": "heart check-up, blood pressure reading and eye exam",
+   "benh": "high blood pressure, an irregular heartbeat and high cholesterol"
+  }
  },
  "sao_tuvi": {
-  "Tử Vi": {"he": "digestion and stomach", "kham": "digestive check-up"},
-  "Thiên Cơ": {"he": "liver and tendons", "kham": "liver check-up"},
-  "Thái Dương": {"he": "eyes and heart", "kham": "heart and eye check-up"},
-  "Vũ Khúc": {"he": "breathing and lungs", "kham": "lung and breathing check-up"},
-  "Thiên Đồng": {"he": "kidneys and urinary tract", "kham": "kidney and urinary check-up"},
-  "Liêm Trinh": {"he": "heart and blood", "kham": "blood test and heart check-up"},
-  "Thiên Phủ": {"he": "stomach and digestion", "kham": "digestive check-up"},
-  "Thái Âm": {"he": "kidneys, eyes and hormones", "kham": "hormone and eye check-up"},
-  "Tham Lang": {"he": "liver and kidneys", "kham": "liver and kidney check-up"},
-  "Cự Môn": {"he": "teeth, mouth, throat and digestion", "kham": "dental and digestive check-up"},
-  "Thiên Tướng": {"he": "skin and urinary tract", "kham": "urinary and skin check-up"},
-  "Thiên Lương": {"he": "stomach and chest", "kham": "digestive and chest check-up"},
-  "Thất Sát": {"he": "lungs, breathing, bones and joints", "kham": "breathing and joint check-up"},
-  "Phá Quân": {"he": "kidneys, urinary tract and bowels", "kham": "kidney and digestive check-up"}
+  "Tử Vi": {
+   "he": "digestion and stomach",
+   "kham": "digestive check-up",
+   "benh": "gastritis and acid reflux"
+  },
+  "Thiên Cơ": {
+   "he": "liver and tendons",
+   "kham": "liver check-up",
+   "benh": "fatty liver and raised liver enzymes"
+  },
+  "Thái Dương": {
+   "he": "eyes and heart",
+   "kham": "heart and eye check-up",
+   "benh": "high blood pressure and common eye problems"
+  },
+  "Vũ Khúc": {
+   "he": "breathing and lungs",
+   "kham": "lung and breathing check-up",
+   "benh": "bronchitis, asthma and sinusitis"
+  },
+  "Thiên Đồng": {
+   "he": "kidneys and urinary tract",
+   "kham": "kidney and urinary check-up",
+   "benh": "kidney stones and urinary tract infections"
+  },
+  "Liêm Trinh": {
+   "he": "heart and blood",
+   "kham": "blood test and heart check-up",
+   "benh": "high blood pressure and high cholesterol"
+  },
+  "Thiên Phủ": {
+   "he": "stomach and digestion",
+   "kham": "digestive check-up",
+   "benh": "gastritis and indigestion"
+  },
+  "Thái Âm": {
+   "he": "kidneys, eyes and hormones",
+   "kham": "hormone and eye check-up",
+   "benh": "kidney stones, hormone imbalance and common eye problems"
+  },
+  "Tham Lang": {
+   "he": "liver and kidneys",
+   "kham": "liver and kidney check-up",
+   "benh": "fatty liver and kidney stones"
+  },
+  "Cự Môn": {
+   "he": "teeth, mouth, throat and digestion",
+   "kham": "dental and digestive check-up",
+   "benh": "sore throat, tooth decay and gastritis"
+  },
+  "Thiên Tướng": {
+   "he": "skin and urinary tract",
+   "kham": "urinary and skin check-up",
+   "benh": "dermatitis and urinary tract infections"
+  },
+  "Thiên Lương": {
+   "he": "stomach and chest",
+   "kham": "digestive and chest check-up",
+   "benh": "gastritis and acid reflux"
+  },
+  "Thất Sát": {
+   "he": "lungs, breathing, bones and joints",
+   "kham": "breathing and joint check-up",
+   "benh": "bronchitis and joint wear"
+  },
+  "Phá Quân": {
+   "he": "kidneys, urinary tract and bowels",
+   "kham": "kidney and digestive check-up",
+   "benh": "kidney stones and colitis"
+  }
  },
  "sao_huyen_khong": {
-  "2": {"ten": "Two Black (sickness star)"},
-  "5": {"ten": "Five Yellow"}
+  "2": {
+   "ten": "Two Black (sickness star)"
+  },
+  "5": {
+   "ten": "Five Yellow"
+  }
  },
  "quai_bo_phan": {
-  "Càn": {"he": "head", "kham": "general check-up and blood pressure reading"},
-  "Khôn": {"he": "belly and digestion", "kham": "digestive check-up"},
-  "Chấn": {"he": "legs and tendons", "kham": "muscle and joint check-up"},
-  "Tốn": {"he": "thighs, hips and breathing", "kham": "joint and breathing check-up"},
-  "Khảm": {"he": "ears and kidneys", "kham": "hearing and kidney check-up"},
-  "Ly": {"he": "eyes and heart", "kham": "heart and eye check-up"},
-  "Cấn": {"he": "hands and joints", "kham": "muscle and joint check-up"},
-  "Đoài": {"he": "mouth, teeth and throat", "kham": "dental and throat check-up"}
+  "Càn": {
+   "he": "head",
+   "kham": "general check-up and blood pressure reading"
+  },
+  "Khôn": {
+   "he": "belly and digestion",
+   "kham": "digestive check-up"
+  },
+  "Chấn": {
+   "he": "legs and tendons",
+   "kham": "muscle and joint check-up"
+  },
+  "Tốn": {
+   "he": "thighs, hips and breathing",
+   "kham": "joint and breathing check-up"
+  },
+  "Khảm": {
+   "he": "ears and kidneys",
+   "kham": "hearing and kidney check-up"
+  },
+  "Ly": {
+   "he": "eyes and heart",
+   "kham": "heart and eye check-up"
+  },
+  "Cấn": {
+   "he": "hands and joints",
+   "kham": "muscle and joint check-up"
+  },
+  "Đoài": {
+   "he": "mouth, teeth and throat",
+   "kham": "dental and throat check-up"
+  }
  },
  "nam_ca_nhan": {
-  "4": {"ly_do": "a year of work; numerology books remind you to look after your physical health"},
-  "7": {"ly_do": "an inward year, good for resting and reviewing your pace of life"},
-  "8": {"ly_do": "a harvest year, when it is easy to overwork"}
+  "4": {
+   "ly_do": "a year of work; numerology books remind you to look after your physical health"
+  },
+  "7": {
+   "ly_do": "an inward year, good for resting and reviewing your pace of life"
+  },
+  "8": {
+   "ly_do": "a harvest year, when it is easy to overwork"
+  }
  },
  "mau": {
   "nam": "In {nam}, pay more attention to your own health, especially your {he}; arrange a {kham} early in the year.",
@@ -54,6 +164,11 @@
   "cap_cuu": "Chest pain, trouble breathing, a high fever, seizures or fainting need a doctor right away: go to the nearest medical facility or call emergency services (115 in Vietnam). A chart or a number cannot replace this; once you are okay, come back and ask again.",
   "hoi_benh_chung": "Your chart cannot tell whether something is wrong with your body; only a doctor's examination can answer that. If you are worried, get a general health check-up so a doctor can check early.",
   "he_chart": "Old texts say your chart asks you to look after your {he}; get a regular {kham}.",
-  "nguoi_than": "Your chart or numbers cannot speak to a relative's health. Each person needs a reading from their own date and time of birth, and only a doctor's examination can show how that person's body is doing. If you are worried about a relative, take them for a general health check-up so a doctor can check early. To see that person's own chart: on the Zi Wei Dou Shu page, tap the “Viewing: You” box above the chart and choose “Add a relative” (the details are stored only on your device). This does not replace a doctor's advice."
+  "nguoi_than": "Your chart or numbers cannot speak to a relative's health. Each person needs a reading from their own date and time of birth, and only a doctor's examination can show how that person's body is doing. If you are worried about a relative, take them for a general health check-up so a doctor can check early. To see that person's own chart: on the Zi Wei Dou Shu page, tap the “Viewing: You” box above the chart and choose “Add a relative” (the details are stored only on your device). This does not replace a doctor's advice.",
+  "nam_benh": "In {nam}, pay more attention to your own health, especially your {he}; it is worth arranging a {kham} early in the year to catch common conditions in this area early, such as {benh}.",
+  "nam_nay_benh": "This year, {nam}, pay more attention to your own health, especially your {he}; if you have not had a check-up yet this year, it is worth arranging a {kham} soon to catch common conditions in this area early, such as {benh}.",
+  "he_chart_benh": "Old texts say your chart asks you to look after your {he}; it is worth getting a regular {kham} to catch common conditions in this area early, such as {benh}.",
+  "kham_benh": "{loi}; it is worth getting a regular {kham} to catch common conditions in this area early, such as {benh}.",
+  "kham_benh_cau": "It is worth getting a regular {kham} to catch common conditions in this area early, such as {benh}."
  }
 }

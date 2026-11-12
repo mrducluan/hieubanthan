@@ -1256,9 +1256,11 @@ def _chuong_su_nghiep(cm: dict, pt: dict, hoc: tuple, da_dung: set[str]) -> dict
 
 def _kham_them(loi: str, hanh: str) -> str:
     """SK-1: lời chăm sóc + việc đi khám cụ thể của hệ cơ quan sách xưa gắn với hành (KB `suc_khoe_kb`, một nguồn)."""
-    he = skn.kb.he_hanh(hanh)
+    he = skn.kb.he_hanh(hanh, benh=True)
     if not he or he["kham"] in loi:
         return loi
+    if he.get("benh") and skn.kb.mau("kham_benh"):          # SK-2: kèm tên bệnh hay gặp của hệ cơ quan
+        return skn.kb.mau("kham_benh").format(loi=loi.rstrip("."), kham=he["kham"], benh=he["benh"])
     return L("bt_ds.sk.kham_them", f"{loi.rstrip('.')}; nên {he['kham']} định kỳ.", loi=loi.rstrip("."), kham=he["kham"])
 
 
