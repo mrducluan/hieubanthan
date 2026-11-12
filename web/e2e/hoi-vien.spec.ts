@@ -160,7 +160,7 @@ test("báo cáo với phi.ly_do = hoi_vien: đầy đủ, không nút mở khoá
 
 // Mỗi trường hợp một trang mới: dùng lại một trang thì lượt sau tự mở báo cáo (nhớ "quay về sau khi nạp") → nút đầu không còn.
 async function hopNap(page: Page, hoi_vien: object | null) {
-  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "payos", goi: GOI, gia_bao_cao: 29, nap_dau: null, hoi_vien } }));
+  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "pay2s", goi: GOI, gia_bao_cao: 29, nap_dau: null, hoi_vien } }));
   await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 29 } }));
   await page.route("**/api/tuvi/luan-giai", (r) => r.request().headers()["x-mo-khoa"] === "1"
     ? r.fulfill({ status: 402, json: { error: "Cần 29 Sao, ví bạn còn 3 Sao.", can: "nap", gia: 29, so_du: 3 } })

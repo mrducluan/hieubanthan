@@ -3,7 +3,24 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-11 (KW-6T mục 4ap; trước đó BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-12 (PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4aq. PAY2S-1 — Pay2S thay payOS · thẻ Visa/Mastercard (2026-11-12, `docs/KE-HOACH-THANH-TOAN.md` mục 0b, `docs/SO-SANH-CONG-THE.md`)
+
+- [ ] **Chạy migration `0037_cong_pay2s.sql`** (Supabase → SQL Editor, SAU 0036; kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`).
+  Chưa chạy thì nút nạp báo "Cổng thanh toán chưa sẵn sàng" — không thu nhầm tiền.
+- [ ] Đăng ký **Pay2S** (pay2s.vn) bằng tài khoản ngân hàng của anh → liên kết tài khoản nhận tiền → mục Tích hợp lấy
+  **Partner Code, Access Key, Secret Key**. Không dán khoá vào chat.
+- [ ] Vercel (dự án **web**, Production, không `NEXT_PUBLIC_`): `PAY2S_PARTNER_CODE`, `PAY2S_ACCESS_KEY`, `PAY2S_SECRET_KEY`,
+  `PAY2S_BANK_ACCOUNTS` = `số tài khoản|mã ngân hàng` (vd `0123456789|ACB`; nhiều tài khoản ngăn bằng `;`),
+  `SUPABASE_SERVICE_ROLE_KEY`, `CRON_SECRET` (≥ 16 ký tự) → Redeploy. Xoá 3 biến `PAYOS_*` nếu đã đặt.
+  Tuỳ chọn: `PAY2S_TOKEN` nếu trang Tích hợp của Pay2S cấp token API lịch sử giao dịch khác với Base64(Secret Key).
+- [ ] Thử thật gói nhỏ nhất: nạp → quét QR → thấy "Đã nhận … Sao". IPN về `https://hieuban.com/api/thanh-toan/webhook/pay2s`
+  (web tự gửi địa chỉ này mỗi đơn, không cần khai ở Pay2S). Lỡ IPN thì trang kết quả tự đối soát qua lịch sử giao dịch.
+- [ ] (Quyết định) **Thẻ Visa/Mastercard**: Pay2S không có. Cổng thẻ Việt Nam (SePay, VNPAY, OnePay) bắt buộc đăng ký
+  kinh doanh; Paddle cấm ngành tử vi; Lemon Squeezy nhận cá nhân nhưng rủi ro khoá cửa hàng. Đọc `docs/SO-SANH-CONG-THE.md`
+  rồi báo em: đăng ký hộ kinh doanh + hỏi SePay, hay hỏi Lemon Squeezy cho khách nước ngoài.
+
 
 ### 4ap. KW-6T — kế hoạch từ khoá blog 6 tháng (2026-11-11, `docs/KE-HOACH-TU-KHOA-SEO-6-THANG.md`)
 
@@ -1076,15 +1093,14 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
 ## TT. Thanh toán nạp Sao (kế hoạch + các bước bật: `docs/KE-HOACH-THANH-TOAN.md` mục 0b)
 
 Code đã làm (2026-10-12, hình thức cá nhân): `/nap-sao`, payOS, webhook, đối soát, migration 0012, trang `/ung-ho`.
+**2026-11-12: Pay2S thay payOS** — bước bật ở mục 4aq (TT-b cũ không làm nữa).
 
 - [x] TT-0. Chạy migration **`0012_thanh_toan.sql`** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (sau khi bật tài khoản — mục F).
-- [ ] TT-b. Đăng ký **payOS** bằng tài khoản ngân hàng của anh → Vercel đặt `PAYOS_CLIENT_ID`, `PAYOS_API_KEY`,
-  `PAYOS_CHECKSUM_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `CRON_SECRET` → Redeploy → payOS khai Webhook URL
-  `https://hieuban.com/api/thanh-toan/webhook/payos`. Không dán khoá vào chat.
+- [x] TT-b. ~~Đăng ký payOS~~ *(bỏ 12/11/2026: anh chọn Pay2S — làm theo mục 4aq)*.
 - [ ] TT-f. **Ủng hộ crypto**: Vercel đặt `UNG_HO_VI` = `USDT (TRC20)|<địa chỉ>;Bitcoin|<địa chỉ>` (tuỳ chọn
   `UNG_HO_NGAN_HANG` = `Ngân hàng|Số TK|Chủ TK`) → Redeploy → nút ủng hộ hiện ở chân trang, `/ung-ho`, cuối bài.
 - [ ] TT-a. Hộ kinh doanh + MST (anh bổ sung sau) → em làm hoá đơn điện tử (TT-6), mở thẻ Visa (TT-3).
-- [ ] TT-c. Liên hệ VNPay hoặc OnePay nếu muốn nhận thẻ Visa/Master/JCB.
+- [ ] TT-c. Thẻ Visa/Master/JCB: xem `docs/SO-SANH-CONG-THE.md` (SePay / VNPAY / OnePay cần đăng ký kinh doanh).
 - [ ] TT-d. Luật sư rà điều khoản Sao + hoàn tiền; chọn nhà cung cấp hoá đơn điện tử.
 - [ ] TT-e. Quyết bật tài khoản (mục F) — Sao cần gắn tài khoản.
 

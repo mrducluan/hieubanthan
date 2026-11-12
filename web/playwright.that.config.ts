@@ -53,7 +53,7 @@ export default defineConfig({
         NEXT_PUBLIC_SUPABASE_URL: "http://localhost:54321", NEXT_PUBLIC_SUPABASE_ANON_KEY: khoa("anon"),
         SUPABASE_SERVICE_ROLE_KEY: khoa("service_role"),
         SAO_KHOA_SECRET: "e2e-that-sao-khoa-chi-dung-cho-kiem-thu", LOI_MOI_SECRET: "e2e-that-loi-moi-chi-dung-cho-kiem-thu",
-        THANH_TOAN_GIA: "1", PAYOS_CLIENT_ID: "", PAYOS_API_KEY: "", PAYOS_CHECKSUM_KEY: "",
+        THANH_TOAN_GIA: "1", PAY2S_PARTNER_CODE: "", PAY2S_ACCESS_KEY: "", PAY2S_SECRET_KEY: "", PAY2S_BANK_ACCOUNTS: "",
         ...(BAN_BUILD ? {} : { NODE_OPTIONS: "--max-old-space-size=6144" }),
       },
       reuseExistingServer: !process.env.CI,

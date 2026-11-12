@@ -16,7 +16,7 @@ import {
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
 
 export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau, mienPhi = false }: {
-  goi: GoiHienThi[]; cong: "payos" | "gia" | null; giaBaoCao: number; napDau: NapDau | null;
+  goi: GoiHienThi[]; cong: "pay2s" | "gia" | null; giaBaoCao: number; napDau: NapDau | null;
   /** Không chỗ nào đang trừ Sao (máy chủ đọc công tắc) — chỉ để đo tỉ lệ rời trang theo trạng thái này. */
   mienPhi?: boolean;
 }) {

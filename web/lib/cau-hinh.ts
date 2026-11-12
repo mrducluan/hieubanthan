@@ -104,7 +104,7 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Giá mỗi câu vượt lượt (Sao)", moTa: "Chỉ áp dụng khi bật giới hạn hỏi đáp." },
   // ---- SAO-HV (0028) ----
   // Hội viên năm HAI HẠNG (chủ dự án chốt phương án a, docs/SO-SANH-GIA-HOI-VIEN.md): thường + Chuyên gia. Mua MỘT LẦN bằng
-  // VND (payOS, không tự gia hạn). SQL đọc cùng khoá (hv_goi, tao_don_hoi_vien, hv_cap_sao_thang_cho, hoi_vien_cua_toi,
+  // VND (Pay2S, không tự gia hạn). SQL đọc cùng khoá (hv_goi, tao_don_hoi_vien, hv_cap_sao_thang_cho, hoi_vien_cua_toi,
   // hoan_don_nap) — kẹp cùng khoảng. Quyền lợi ĐÓNG BĂNG lúc mua: đổi số ở đây chỉ áp cho đơn / gia hạn SAU khi đổi.
   // Công tắc mặc định TẮT: trang /hoi-vien vẫn có (noindex) nhưng nút ẩn.
   { khoa: "sao.hoi_vien.bat", nhom: "Hội viên năm", loai: "bat_tat", macDinh: false,

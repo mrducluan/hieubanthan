@@ -1,37 +1,84 @@
-// Thanh toán nạp Sao (TT-1/TT-2) + ủng hộ. Chữ ký payOS đối chiếu VECTOR sinh bằng SDK chính thức @payos/node 1.0.10
-// (không cài SDK vào dự án — chỉ dùng một lần để sinh số đúng). Luồng có Supabase thật thử bằng supabase/kiem_thu.
+// Thanh toán nạp Sao (TT-1/TT-2, PAY2S-1 2026-11-12: Pay2S thay payOS) + ủng hộ. Chuỗi ký Pay2S so NGUYÊN VĂN với mẫu
+// trong tài liệu docs.pay2s.vn (others/signature, api/instant-payment-notification); HMAC tính lại bằng node:crypto độc
+// lập. Luồng có Supabase thật thử bằng supabase/kiem_thu (thu_cong_pay2s_0037.sql).
 import { napHoSo } from "./_hoso";
 import { test, expect } from "@playwright/test";
 import { createHmac } from "node:crypto";
-import { chuoiDuLieu, kiemWebhook, kyDuLieu, kyYeuCau, moTaChuyenKhoan } from "../lib/thanh-toan/payos";
+import { chuoiIpn, chuoiTaoDon, docTaiKhoan, kiemIpn, kyIpn, kyTaoDon, ngayVn, timGiaoDich } from "../lib/thanh-toan/pay2s";
+import { maDonQuayVe, maDonTuPay2s, maPay2s } from "../lib/thanh-toan/ma-don";
 import { dsViUngHo, nganHangUngHo } from "../lib/ung-ho";
 
-const K = "khoa-thu-nghiem-e2e";
-const DL = {
-  orderCode: 100001, amount: 99000, description: "HBT100001", accountNumber: "123", reference: "FT1",
-  transactionDateTime: "2026-10-12 10:00:00", currency: "VND", paymentLinkId: "abc", code: "00", desc: "success",
-  counterAccountBankId: null, virtualAccountName: "",
+const C = { partnerCode: "PAY2SE2E", accessKey: "e2e-access", secretKey: "e2e-pay2s-secret-0000" };
+const hmac = (k: string, s: string) => createHmac("sha256", k).update(s, "utf8").digest("hex");
+const IPN = {
+  partnerCode: "PAY2SE2E", orderId: "HBT0100001", requestId: "998877", amount: 99000, orderInfo: "HBT0100001",
+  orderType: "pay2s", transId: 2588659987, resultCode: 0, message: "Giao dịch thành công.", payType: "qr",
+  responseTime: 1762900000000, extraData: "",
 };
 
-test("chữ ký payOS khớp SDK chính thức (tạo link, webhook, dữ liệu có mảng)", () => {
-  expect(kyYeuCau({ orderCode: 100001, amount: 99000, description: "HBT100001",
-    returnUrl: "https://hieuban.com/nap-sao/ket-qua?ma=100001", cancelUrl: "https://hieuban.com/nap-sao/ket-qua?ma=100001&huy=1" }, K))
-    .toBe("fc1ee7c9be4fdcabf2e3f2fa40cdbd900867b969abf71fcf77e2908a2dcbbfe8");
-  expect(kyDuLieu(DL, K)).toBe("5be7db06583570f19df67ec4faf9e60f05ee740777ada57cf823d373c4727b07");
-  expect(kyDuLieu({ id: "x", orderCode: 5, amount: 1, transactions: [{ reference: "r", amount: 1, accountNumber: "9" }], status: "PAID", canceledAt: null }, K))
-    .toBe("c1164c76f629ce6eb623da14d063a26e09263ae5dadb7e28e09dd475d611f9ba");
-  expect(chuoiDuLieu({ b: 1, a: null })).toBe("a=&b=1");
-  expect(moTaChuyenKhoan(100001)).toBe("HBT100001");
+test("Pay2S: mã đơn ↔ orderId, nội dung CK 10–32 ký tự chữ + số; trang quay về đọc được mã khi Pay2S nối ?…", () => {
+  expect(maPay2s(100001)).toBe("HBT0100001");
+  expect(maPay2s(123456789)).toBe("HBT123456789");
+  for (const n of [100001, 9999999, 123456789012]) expect(maPay2s(n)).toMatch(/^[A-Z0-9]{10,32}$/);
+  expect(maDonTuPay2s("HBT0100001")).toBe(100001);
+  for (const x of ["HBT01", "XHBT0100001", "HBT0100001 ", 100001, null]) expect(maDonTuPay2s(x)).toBeNull();
+  expect(maDonQuayVe("100001", null)).toBe("100001");
+  expect(maDonQuayVe("100001?partnerCode=PAY2SE2E", "HBT0100001")).toBe("100001");
+  expect(maDonQuayVe(null, "HBT0100002")).toBe("100002");
+  expect(maDonQuayVe("abc", "khac")).toBe("");
+  expect(docTaiKhoan("0123456789|acb; 99999999|MBB\nsai|; <x>|VCB")).toEqual([
+    { account_number: "0123456789", bank_id: "ACB" }, { account_number: "99999999", bank_id: "MBB" }]);
+  expect(docTaiKhoan(undefined)).toEqual([]);
 });
 
-test("webhook payOS: đúng chữ ký thì nhận, sửa số tiền / sai khoá / thiếu chữ ký thì từ chối", () => {
-  const sig = kyDuLieu(DL, K);
-  expect(kiemWebhook({ code: "00", data: DL, signature: sig }, K)?.orderCode).toBe(100001);
-  expect(kiemWebhook({ data: { ...DL, amount: 1000 }, signature: sig }, K)).toBeNull();
-  expect(kiemWebhook({ data: DL, signature: sig }, "khoa-khac")).toBeNull();
-  expect(kiemWebhook({ data: DL }, K)).toBeNull();
-  expect(kiemWebhook({ data: [DL], signature: sig }, K)).toBeNull();
-  expect(kiemWebhook(null, K)).toBeNull();
+test("Pay2S: chuỗi ký tạo đơn đúng thứ tự tài liệu (bankAccounts=Array cố định), HMAC-SHA256 hex", () => {
+  const r = { requestId: "HBT0100001-1", amount: 99000, orderId: "HBT0100001", orderInfo: "HBT0100001",
+    redirectUrl: "https://hieuban.com/nap-sao/ket-qua?ma=100001", ipnUrl: "https://hieuban.com/api/thanh-toan/webhook/pay2s" };
+  const raw = "accessKey=e2e-access&amount=99000&bankAccounts=Array&ipnUrl=https://hieuban.com/api/thanh-toan/webhook/pay2s" +
+    "&orderId=HBT0100001&orderInfo=HBT0100001&partnerCode=PAY2SE2E&redirectUrl=https://hieuban.com/nap-sao/ket-qua?ma=100001" +
+    "&requestId=HBT0100001-1&requestType=pay2s";
+  expect(chuoiTaoDon(r, C)).toBe(raw);
+  expect(kyTaoDon(r, C)).toBe(hmac(C.secretKey, raw));
+  // Vector HMAC công khai trong tài liệu Pay2S (kiểm thư viện).
+  expect(hmac("key", "The quick brown fox jumps over the lazy dog")).toBe("f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8");
+});
+
+test("Pay2S IPN: đúng m2signature + đúng partnerCode thì nhận; sửa số tiền / sai khoá / sai đối tác / orderId lạ thì từ chối", () => {
+  const raw = "accessKey=e2e-access&amount=99000&extraData=&message=Giao dịch thành công.&orderId=HBT0100001" +
+    "&orderInfo=HBT0100001&orderType=pay2s&partnerCode=PAY2SE2E&payType=qr&requestId=998877&responseTime=1762900000000" +
+    "&resultCode=0&transId=2588659987";
+  expect(chuoiIpn(IPN, C.accessKey)).toBe(raw);
+  const sig = hmac(C.secretKey, raw);
+  expect(kyIpn(IPN, C)).toBe(sig);
+  expect(kiemIpn({ ...IPN, m2signature: sig }, C)).toMatchObject({ maDon: 100001, amount: 99000, resultCode: 0, transId: "2588659987" });
+  expect(kiemIpn({ ...IPN, m2signature: sig.toUpperCase() }, C)?.maDon).toBe(100001);
+  // extraData thiếu = rỗng (vẫn có "&extraData=" trong chuỗi ký).
+  const { extraData: _bo, ...khongExtra } = IPN;
+  expect(kiemIpn({ ...khongExtra, m2signature: sig }, C)?.maDon).toBe(100001);
+  expect(kiemIpn({ ...IPN, amount: 1000, m2signature: sig }, C)).toBeNull();
+  expect(kiemIpn({ ...IPN, m2signature: sig }, { ...C, secretKey: "khac" })).toBeNull();
+  expect(kiemIpn({ ...IPN, m2signature: sig }, { ...C, partnerCode: "KHAC" })).toBeNull();
+  const la = { ...IPN, orderId: "DH123456789" };
+  expect(kiemIpn({ ...la, m2signature: kyIpn(la, C) }, C)).toBeNull();
+  expect(kiemIpn({ ...IPN }, C)).toBeNull();
+  expect(kiemIpn({ ...IPN, m2signature: "deadbeef" }, C)).toBeNull();
+  expect(kiemIpn([IPN], C)).toBeNull();
+  expect(kiemIpn(null, C)).toBeNull();
+  const loi = { ...IPN, resultCode: 2, message: "Giao dịch đã hủy" };
+  expect(kiemIpn({ ...loi, m2signature: kyIpn(loi, C) }, C)?.resultCode).toBe(2);
+});
+
+test("Pay2S đối soát: chỉ khoản VÀO mang đúng mã đơn (bỏ ký tự ngân hàng chèn), không khớp nhầm mã dài hơn; ngày theo giờ VN", () => {
+  const ds = [
+    { id: "1", amount: 99000, description: "MBVCB.123 HBT 0100001 . CT tu 0123", type: "OUT" },
+    { id: "2", amount: 29000, description: "HBT01000012 GD 9", type: "IN" },
+    { id: "3", amount: 99000, description: "QR - hbt0100001 GD 750915-080324", type: "IN" },
+  ];
+  expect(timGiaoDich(ds, 100001)?.id).toBe("3");
+  expect(timGiaoDich(ds.slice(0, 2), 100001)).toBeNull();
+  expect(timGiaoDich(ds, 1000001)).toBeNull();
+  expect(timGiaoDich([{ id: "4", amount: 1, description: "HBT1000001", type: "IN" }], 1000001)?.id).toBe("4");
+  expect(ngayVn(new Date("2026-11-11T17:30:00Z"))).toBe("12/11/2026");
 });
 
 test("ủng hộ: đọc ví + tài khoản từ env, bỏ dòng sai", () => {
@@ -44,13 +91,17 @@ test("ủng hộ: đọc ví + tài khoản từ env, bỏ dòng sai", () => {
   expect(nganHangUngHo("MB|abc|X")).toBeNull();
 });
 
-test("route webhook: sai chữ ký 401; đúng chữ ký nhưng máy chủ chưa có service role → 503 (payOS gửi lại sau)", async ({ request }) => {
-  const khoa = "e2e-payos-checksum-0000";
-  const sai = await request.post("/api/thanh-toan/webhook/payos", { data: { code: "00", data: DL, signature: "deadbeef" } });
+test("route IPN Pay2S: sai chữ ký 401; JSON hỏng 400; giao dịch không thành công 200 không cộng; đúng chữ ký nhưng máy chủ chưa có service role → 503 (Pay2S gửi lại sau)", async ({ request }) => {
+  const sai = await request.post("/api/thanh-toan/webhook/pay2s", { data: { ...IPN, m2signature: "0".repeat(64) } });
   expect(sai.status()).toBe(401);
-  const dung = await request.post("/api/thanh-toan/webhook/payos", {
-    data: { code: "00", data: DL, signature: createHmac("sha256", khoa).update(chuoiDuLieu(DL)).digest("hex") },
-  });
+  expect(await sai.json()).toMatchObject({ success: false });
+  const hong = await request.post("/api/thanh-toan/webhook/pay2s", { data: Buffer.from("{khong-phai-json"), headers: { "content-type": "application/json" } });
+  expect(hong.status()).toBe(400);
+  const loi = { ...IPN, resultCode: 2, message: "Giao dịch đã hủy" };
+  const boQua = await request.post("/api/thanh-toan/webhook/pay2s", { data: { ...loi, m2signature: kyIpn(loi, C) } });
+  expect(boQua.status()).toBe(200);
+  expect(await boQua.json()).toMatchObject({ success: true, bo_qua: "khong_thanh_cong" });
+  const dung = await request.post("/api/thanh-toan/webhook/pay2s", { data: { ...IPN, m2signature: kyIpn(IPN, C) } });
   expect(dung.status()).toBe(503);
   expect((await request.get("/api/thanh-toan/doi-soat")).status()).toBe(401);
   expect((await request.post("/api/thanh-toan/tao-don", { data: { goi: "thu" } })).status()).toBe(503);

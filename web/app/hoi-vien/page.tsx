@@ -1,5 +1,5 @@
 // /hoi-vien — Hội viên năm HAI HẠNG: thường + Chuyên gia (SAO-HV, migration 0028; docs/DANH-GIA-VIRAL-V2-VA-KINH-DOANH.md §3, §9 cách tiếp cận B).
-// Mua MỘT LẦN bằng VND qua QR payOS → không tự gia hạn, không trừ tiền định kỳ. Quyền lợi + giá + chính sách hoàn tiền ghi
+// Mua MỘT LẦN bằng VND qua QR chuyển khoản (Pay2S) → không tự gia hạn, không trừ tiền định kỳ. Quyền lợi + giá + chính sách hoàn tiền ghi
 // rõ; công tắc sao.hoi_vien.bat tắt (hoặc chưa có cổng) → trang vẫn có (noindex) nhưng chỉ một khung "Sắp có" gọn, không giá
 // (rà UX mục 17). Không đếm ngược, không "ưu đãi", không gạch giá. Giá hiển thị đọc từ cùng cài đặt mà máy chủ dùng khi tạo đơn.
 import type { Metadata } from "next";

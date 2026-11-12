@@ -6,10 +6,30 @@
 > - tỷ lệ hoàn tiền / khiếu nại;
 > - thời gian từ bấm "Nạp" tới khi có Sao (mục tiêu dưới 30 giây với QR).
 >
+> **2026-11-12 — PAY2S-1: Pay2S thay payOS** (payOS chưa từng bật). Pay2S chỉ thu chuyển khoản VietQR; thẻ
+> Visa/Master đi cổng khác, cần đăng ký kinh doanh — so sánh ở `docs/SO-SANH-CONG-THE.md`. Các bước bật ở mục 0c.
+>
 > **2026-10-12 — anh chốt làm luôn theo hình thức CÁ NHÂN** (đăng ký hộ kinh doanh bổ sung sau). Đã làm TT-1 + TT-2
 > (payOS/VietQR), xem mục 0b. Thẻ Visa/Master, ví, quốc tế (TT-3…TT-5) vẫn cần pháp nhân/hợp đồng cổng.
 
-## 0b. Đã làm (2026-10-12) — anh bật thế nào
+## 0c. Pay2S (2026-11-12) — thay payOS trong mục 0b
+
+**Code (không thêm dependency, không dùng SDK Pay2S):**
+
+- `web/lib/thanh-toan/pay2s.ts`: tạo link Collection Link V1 (`POST https://payment.pay2s.vn/v1/gateway/api/create`,
+  chữ ký HMAC-SHA256 chuỗi cố định theo tài liệu), kiểm IPN (`m2signature`, so thời gian hằng, đúng `partnerCode`),
+  đối soát qua API lịch sử giao dịch (Pay2S không có API tra đơn): khoản VÀO có nội dung chứa mã đơn.
+- Mã đơn Pay2S = nội dung chuyển khoản = `HBT` + mã đơn 7 chữ số (`web/lib/thanh-toan/ma-don.ts`; Pay2S đòi 10–32 ký
+  tự chữ + số, không trùng).
+- `/api/thanh-toan/webhook/pay2s` (IPN, trả `{"success": true}`), `/api/thanh-toan/doi-soat` (cron), trang kết quả tự
+  đối soát khi đơn ≥ 20 giây. Trang quay về đọc được mã đơn cả khi Pay2S nối `?partnerCode=…` vào sau `?ma=`.
+- Migration **0037** cho cổng `pay2s` (`don_nap.cong` + ba hàm tạo đơn). Test: `supabase/kiem_thu/thu_cong_pay2s_0037.sql`,
+  `web/e2e/thanh-toan.spec.ts`.
+- Bỏ `web/lib/thanh-toan/payos.ts` và `/api/thanh-toan/webhook/payos`.
+
+**Anh làm:** `docs/VIEC-CUA-ANH.md` mục 4aq.
+
+## 0b. Đã làm (2026-10-12) — anh bật thế nào (payOS — đã thay bằng Pay2S, xem 0c)
 
 **Code (không thêm dependency):**
 
