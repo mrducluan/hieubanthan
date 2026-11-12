@@ -33,7 +33,8 @@ def _kiem(ds: list[dict], mo_dun: str) -> None:
         assert r["ten"] and r["muc"] in ("thuan", "can_bang", "can_chu_dong") and r["nhan_muc"]
         assert r["luu_y"] and r["viec"] and r["tu_chuong"], r
         assert r["luu_y"].endswith(".") and r["viec"].endswith(".")
-        s = (r["ten"] + " " + r["luu_y"] + " " + r["viec"]).lower()
+        from app.luangiai import suc_khoe_nam as skn   # SK-2: vế "những bệnh hay gặp … như a, b" là chỗ duy nhất được nêu tên bệnh
+        s = skn.bo_ve_benh(r["ten"] + " " + r["luu_y"] + " " + r["viec"]).lower()
         assert not [c for c in CAM if c in s], (r["ma"], [c for c in CAM if c in s])
         assert len(r["luu_y"]) <= 320 and len(r["viec"]) <= 200
     ranh = {r["ma"]: r.get("ranh_gioi") for r in ds}

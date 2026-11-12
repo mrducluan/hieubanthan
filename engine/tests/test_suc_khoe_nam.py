@@ -54,7 +54,7 @@ def test_mau_khong_cum_cam_va_co_mien_tru():
     d = json.loads((Path(__file__).parents[1] / "app" / "kb" / "data" / "suc_khoe_kb.json").read_text("utf-8"))
     for ma, s in d["mau"].items():
         assert not skn.kiem(s), (ma, skn.kiem(s))
-        assert not re.search(r"(?<!\w)bệnh(?!\w)", s.replace("bác sĩ", "")) or ma.startswith("hoi_benh"), ma
+        assert not re.search(r"(?<!\w)bệnh(?!\w)", skn.bo_ve_benh(s).replace("bác sĩ", "")) or ma.startswith("hoi_benh"), ma
     assert MIEN_TRU in kb.mien_tru() and "không phải lời đoán" in kb.mien_tru()
     assert "115" in kb.mau("cap_cuu") and "ngay" in kb.mau("cap_cuu")
 
@@ -256,4 +256,26 @@ def test_kiem_ai_cho_he_co_quan_khi_nguon_co_va_chan_ten_benh():
     nguon = "Năm 2028 nên chú ý sức khoẻ bản thân hơn, nhất là tim mạch, huyết áp và mắt; sắp xếp đi khám tim mạch."
     assert not [x for x in kiem_ai.kiem("Năm 2028 bạn nên chú ý tim mạch, đi khám tim mạch.", nguon) if "y tế" in x]
     assert any("y tế" in x for x in kiem_ai.kiem("Năm 2028 bạn dễ bị cao huyết áp.", nguon))
+    # SK-2: nguồn đã nêu tên bệnh trong câu khuyên đi khám → AI diễn đạt lại được; gán bệnh cho người đọc thì vẫn chặn
+    nguon2 = nguon + " Nên chú ý đi khám tim mạch để phát hiện sớm những bệnh hay gặp ở phần này như cao huyết áp, mỡ máu cao."
+    assert not [x for x in kiem_ai.kiem("Nên đi khám tim mạch để phát hiện sớm cao huyết áp.", nguon2) if "y tế" in x]
+    assert any("y tế" in x for x in kiem_ai.kiem("Năm 2028 bạn dễ bị cao huyết áp.", nguon2))
+    assert any("y tế" in x for x in kiem_ai.kiem("Năm 2028 nên đi khám sỏi thận.", nguon2))
     assert any("y tế" in x for x in kiem_ai.kiem("Năm 2028 bạn sẽ ốm.", nguon))
+
+
+def test_sk2_ten_benh_chi_o_tu_vi_bat_tu_va_khong_ten_hiem_ngheo():
+    """SK-2 (2026-11-12): hành / sao có `benh` (2–3 tên bệnh hay gặp, dễ tầm soát); mảng khác không mang; không tên hiểm nghèo."""
+    ten = kb.ten_benh()
+    assert len(ten) >= 12 and "cao huyết áp" in ten and "sỏi thận" in ten
+    for cam in ("ung thư", "đột quỵ", "tai biến", "khối u", "suy thận", "suy tim", "xơ gan", "trầm cảm", "vô sinh"):
+        assert not any(cam in x for x in ten), cam
+    assert not set(ten) & {c.lower() for c in kb.cum_cam()}
+    assert "benh" not in kb.he_hanh("Kim") and "benh" in kb.he_hanh("Kim", benh=True)
+    assert "benh" not in kb.he_sao("Cự Môn") and "viêm họng" in kb.he_sao("Cự Môn", benh=True)["benh"]
+    assert all("benh" not in (x.get("he") or {}) for x in skn.phongthuy_nam("Khảm", 2026))
+    c = skn.cau_nam(2028, kb.he_hanh("Hỏa", benh=True))
+    assert "nên chú ý đi khám tim mạch" in c and "những bệnh hay gặp ở phần này như cao huyết áp" in c
+    assert "bệnh" not in skn.cau_nam(2028, kb.he_hanh("Hỏa"))
+    assert skn.doan_benh("Năm 2028 bạn dễ bị cao huyết áp.") and not skn.doan_benh(c)
+    assert not skn.kiem(c)

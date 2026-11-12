@@ -410,6 +410,10 @@ def _trang_nhat_chu(can: str, slug: str) -> dict:
         muc.append({"tieu_de": L("trang_bt.nc.hanh", "Hành {hanh}", hanh=h), "danh_sach": [
             L("trang_bt.nc.hanh_tinh_chat", "Tính chất: {x}.", x=nh["tinh_chat"]), _hoa1(nh["khi_thieu"]),
             _hoa1(nh["khi_thua"]), L("trang_bt.nc.hanh_ung_dung", "Ứng dụng dân gian: {x}.", x=nh["ung_dung"])]})
+    ct = (kb.get("co_tho") or {}).get(can)          # KT-TT: bài «thể tượng» của can trong Uyên Hải Tử Bình
+    if ct:
+        muc.append({"tieu_de": L("trang_bt.nc.co_tho", "Uyên Hải Tử Bình tả can {can} thế nào", can=c, loai=loai_can), "doan": ct["y"],
+                    "danh_sach": [L("trang_bt.nc.co_tho_van", "Nguyên văn (thiên «Can chi thể tượng»): 「{han}」", han=ct["han"])]})
     muc.append({"tieu_de": L("trang.tu_soi", "Câu hỏi tự soi"), "doan": n["cau_tu_soi"]})
     hoi_dap = [{"hoi": L("trang_bt.nc.hoi_nguoi", "Nhật chủ {can} là người thế nào?", can=c, loai=loai_can), "dap": tra_loi},
                {"hoi": L("trang_bt.nc.hoi_dong", "Nhật chủ {can} sinh mùa đông thì sao?", can=c, loai=loai_can),

@@ -21,7 +21,8 @@ Y_TE = ["tim mạch", "huyết áp", "phẫu thuật", "xạ trị", "hoá trị
 
 def _y_te() -> list[str]:
     from app.kb import suc_khoe_kb  # noqa: PLC0415
-    return list(dict.fromkeys([*Y_TE, *(c.lower() for c in suc_khoe_kb.cum_cam())]))
+    # SK-2: tên bệnh KB cho phép nêu cũng là "từ y tế" — AI chỉ được giữ khi CHÍNH nguồn có (không tự thêm).
+    return list(dict.fromkeys([*Y_TE, *(c.lower() for c in suc_khoe_kb.cum_cam()), *suc_khoe_kb.ten_benh()]))
 # Ranh giới cứng: không bán / gợi vật phẩm "hoá giải", lễ giải hạn — chỉ chặn khi nguồn không có
 VAT_PHAM = ["vòng tay", "thạch anh", "tỳ hưu", "tì hưu", "linh vật", "vật phẩm", "đá phong thuỷ", "đá phong thủy",
             "bùa", "giải hạn", "cúng sao", "dâng sao", "trấn yểm", "hoá giải bằng", "hóa giải bằng", "cóc ngậm tiền",
@@ -177,6 +178,8 @@ def kiem(van: str, nguon: str, so_duoc: set[int] | None = None, cum_them: list[s
             loi.append(f"cụm cấm: {c}")
     loi += [f"từ y tế: {c}" for c in _y_te() if re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", thap)
             and not re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", goc)]
+    from app.luangiai import suc_khoe_nam as _skn  # noqa: PLC0415
+    loi += [f"từ y tế: gán bệnh — {c}" for c in _skn.doan_benh(thap)]      # SK-2: "dễ bị / sẽ mắc <bệnh>" luôn cấm
     loi += [f"vật phẩm: {c}" for c in VAT_PHAM if re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", thap)
             and not re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", goc)]
     if kiem_y_moi:

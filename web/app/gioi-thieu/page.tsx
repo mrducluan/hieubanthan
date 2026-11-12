@@ -85,8 +85,8 @@ export default async function GioiThieu() {
         <ul>
           <li>Minh bạch trường phái: luôn ghi rõ đang tính theo phái nào, và cho bạn chuyển sang phái khác để so.</li>
           <li>Tôn trọng dữ liệu: hồ sơ mặc định chỉ nằm trên máy bạn. Xem <Link href="/chinh-sach-rieng-tu" className="text-gold underline">Chính sách quyền riêng tư</Link>.</li>
-          <li>Không gây sợ hãi: không nêu tên bệnh, không phán tai nạn hay sống chết, không bán "giải hạn". Về sức khoẻ chỉ gợi phần cơ
-            thể nên chăm sóc, năm nên chú ý và việc đi khám — không thay lời bác sĩ.</li>
+          <li>Không gây sợ hãi: không chẩn đoán bệnh, không phán tai nạn hay sống chết, không bán "giải hạn". Về sức khoẻ chỉ gợi phần cơ
+            thể nên chăm sóc, năm nên chú ý và việc đi khám (Tử vi, Bát tự có nêu vài bệnh hay gặp để bạn tầm soát sớm) — không thay lời bác sĩ.</li>
           <li>Sẵn sàng sửa sai: phát hiện lỗi tính hay lỗi nội dung, xin báo qua trang <Link href="/lien-he" className="text-gold underline">Liên hệ</Link>.</li>
         </ul>
       ),

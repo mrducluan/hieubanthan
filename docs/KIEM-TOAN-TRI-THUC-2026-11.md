@@ -245,7 +245,7 @@ vạn vật loại tượng mở rộng của Mai Hoa Dịch Số (thời tiết
   | Thương Quan | hỷ Tài; kỵ Quan Sát | 傷官喜佩印以制伏，生財以化傷 | thêm hỷ Ấn |
 
   → **câu hỏi Q5** cho chủ dự án: duyệt sửa 4 chỗ này (em sẽ đo số lá mẫu đổi mức trước khi gộp).
-- Uyên Hải Tử Bình (Google Docs trên Drive): đọc được qua kết nối Drive, là bản rút gọn chữ giản thể; chưa nạp.
+- Uyên Hải Tử Bình: **đã nạp thử** — xem mục 10.5.
 
 ### 10.3 Tử vi
 
@@ -269,3 +269,12 @@ vạn vật loại tượng mở rộng của Mai Hoa Dịch Số (thời tiết
 2. Bát tự: cách cục đặc biệt (tòng, hoá khí, chuyên vượng), thông quan, bệnh – dược; sửa hỷ / kỵ sau Q5.
 3. Kinh Dịch: tính chất quẻ Lục Hào; luận theo việc có câu Tăng San Bốc Dịch đi kèm.
 4. Thang độ tin 4 bậc cho MỌI mục KB (đợt này mới gắn cho `sao_nho`).
+
+### 10.5 Uyên Hải Tử Bình — nạp thử (2026-11-12, sau khi gộp đợt 2)
+
+Chủ dự án tải lại tệp lên Drive (Google Docs `1zojmde…`), em tải được qua kết nối Drive (56.322 chữ).
+
+- **Kho nguồn** `engine/fixtures/nguon/uyen_hai_tu_binh.json` (`scripts/nap_co_thu_bat_tu.py uyen_hai <tệp>`): 184 mục — luận nhật chủ, nguyệt lệnh, Thái Tuế, đại vận, tính tình, **can chi thể tượng** (10 can + 12 chi), mười thần (Thương Quan, Thực Thần, Tài, Quan, Sát, Ấn, Kiếp, Dương Nhận) kèm 77 bài thi quyết, nhật quý / nhật đức / khôi cương / kim thần, lục thân, nữ mệnh, Hỷ kỵ thiên, Tứ ngôn / Ngũ ngôn độc bộ, Lạc Lục Tử tiêu tức phú, các bài phú.
+- **Độ tin của bản**: sách là cổ thư chuẩn, nhưng **bản này là bản điện tử lưu truyền** (giản thể, chấm câu hiện đại, đã lược bớt — không có Kế thiện thiên, phần thần sát, phần cách cục ngoại cách). Ghi `can_doi_chieu: true`; khi có bản khắc (ctext res=307303 hoặc bản Tứ khố) thì so lại.
+- **Dùng ngay cho người đọc**: 10 trang nhật chủ (`/bat-tu/nhat-chu/*`, cả bản Anh) thêm mục «Uyên Hải Tử Bình tả can … thế nào» = tóm ý (ban biên tập viết, nháp, lời trung tính) + nguyên văn bài thơ. KB `battu_kb.co_tho`; test bắt nguyên văn trong KB phải có trong kho nguồn.
+- **Chưa dùng** (đề xuất đợt sau, cần viết lời Việt + duyệt): thi quyết mười thần cho 10 trang thập thần; thiên «Luận tính tình» (đối chiếu chương Con người bạn); «Luận nhật vi chủ», «Luận nguyệt lệnh» làm trích dẫn cho "Vì sao nói vậy"; 12 bài địa chi thể tượng. **Không dùng**: «Luận tật bệnh» (tên bệnh — trái SK-1), «Cách cục sinh tử dẫn dụng», phần nữ mệnh "quý / tiện", "tiểu nhi quan sát" (phán sống chết, phán phẩm giá — trái quy tắc lời luận); để nguyên trong kho nguồn làm tư liệu, không đưa vào lời.

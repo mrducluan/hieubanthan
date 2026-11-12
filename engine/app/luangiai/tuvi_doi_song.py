@@ -592,6 +592,9 @@ def _chuong_suc_khoe(cc: dict, hoc: tuple, ls: dict | None = None, nam_am_xem: i
             cau.append(f"Theo sách xưa, phần cơ thể bạn nên chăm sóc phòng ngừa là {hai}.")
         elif hai:
             cau.append(f"Với tính cách của bạn, sách xưa nhắc chăm sóc phòng ngừa {hai}.")
+        he0 = skn.kb.he_sao(s0["ten"], benh=True) if hai else None      # SK-2: tên bệnh hay gặp của hệ cơ quan
+        if he0 and he0.get("benh") and skn.kb.mau("kham_benh_cau"):
+            cau.append(skn.kb.mau("kham_benh_cau").format(kham=he0["kham"], benh=he0["benh"]))
         tq = (sk0.get("thoi_quen") or "").strip()
         if tq and not re.match(r"(?i)(bạn|người|khi|nên|hay|dễ)\b", tq):
             tq = "Thói quen dễ hao sức: " + tq[:1].lower() + tq[1:]

@@ -122,3 +122,25 @@ def test_kho_nguon_toan_thu_du_phan():
     assert len(d["quyen_1"]) == 56 and len(d["quyen_3"]) == 20 and len(d["an_sao"]) >= 40 and len(d["muoi_hai_cung"]) >= 240
     assert any(x["thien"] == "太微賦" for x in d["quyen_1"])
     assert {x["cung"] for x in d["muoi_hai_cung"]} >= {"命宫", "财帛", "官禄", "疾厄"}
+
+
+def test_kho_nguon_uyen_hai_tu_binh():
+    d = doc("fixtures/nguon/uyen_hai_tu_binh.json")
+    t = d["thien"]
+    assert d["can_doi_chieu"] is True and len(t) >= 180
+    ten = {x["ten"] for x in t}
+    assert {"论日为主", "论月令", "喜忌篇", "四言独步", "五言独步", "珞琭子消息赋", "论伤官", "论阳刃"} <= ten
+    assert sum(1 for x in t if x.get("thuoc") == "干支体象") == 22          # 10 can + 12 chi
+    assert all(x["van"] or x["ten"] in ("干支体象", "群兴论") for x in t)
+
+
+def test_co_tho_nhat_chu_khop_nguyen_van_uyen_hai():
+    from app.kb import battu_kb, trang
+    van = {v for x in doc("fixtures/nguon/uyen_hai_tu_binh.json")["thien"] if x.get("thuoc") == "干支体象" for v in x["van"]}
+    han = dict(zip(["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"], "甲乙丙丁戊己庚辛壬癸"))
+    for can, h in han.items():
+        ct = battu_kb.co_tho(can)
+        assert ct["han"] in van and ct["han"].startswith(h), can
+        assert 80 <= len(ct["y"]) <= 420 and not any(c in ct["y"] for c in ("chết", "hoạ", "tai ương", "yểu")), can
+    tr = trang.lay("nhat_chu", "nhat-chu-giap")
+    assert any("Uyên Hải" in m["tieu_de"] and "甲木天干作首排" in m["danh_sach"][0] for m in tr["muc"])

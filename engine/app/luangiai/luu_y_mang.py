@@ -15,6 +15,11 @@ from app.luangiai import doi_song_khuon as kh
 
 import re
 
+
+def _skn_bo(van: str) -> str:
+    from app.luangiai import suc_khoe_nam  # noqa: PLC0415 — tránh vòng import
+    return suc_khoe_nam.bo_ve_benh(van)
+
 MANG = [
     # (mã, tên, chương Tử vi, cung Tử vi lấy mức, chương Bát tự, từ khoá chọn hộp)
     ("tien_bac", "Tiền bạc", "tien_bac", ["Tài Bạch"], "tien_bac", [r"tiền", r"nợ", r"vay", r"chi tiêu", r"thu nhập"]),
@@ -122,6 +127,8 @@ def dung(bc_chuong: list[dict], mo_dun: str, muc_cung: dict[str, str] | None = N
         if h:
             da_dung.add(h.get("ma_mau") or h.get("tieu_de"))
             viec = h.get("huong_xu_ly") or h.get("loi_khuyen") or o["viec"]
+            # SK-2: khung tóm tắt giữ gọn — vế nêu tên bệnh hay gặp chỉ nằm ở chương Sức khoẻ đầy đủ
+            viec = re.sub(r"\s+([.;])", r"\1", _skn_bo(viec)).strip()
             viec = viec if viec.endswith(".") else viec + "."
             # thân hộp đã nối sẵn "hướng xử lý" ở cuối → bỏ để không lặp với dòng "Nên làm"
             than = h["noi_dung"].replace(viec, "").replace(viec.rstrip("."), "").strip()
