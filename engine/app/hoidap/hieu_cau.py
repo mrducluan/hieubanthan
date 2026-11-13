@@ -97,7 +97,7 @@ def thoi_gian(t: str, hom_nay: dt.date) -> list[dict]:
 
     thang_ev: list[tuple[int, dict]] = []
     for m in re.finditer(r"thang (1[0-2]|[1-9])(?![\d/-])", t):
-        if re.match(r"\s*(am|vua roi|vua qua|truoc|roi)\b", t[m.end():]):          # tháng âm / đã qua
+        if re.match(r"\s{0,5}(am|vua roi|vua qua|truoc|roi)\b", t[m.end():]):          # tháng âm / đã qua
             continue
         th = int(m.group(1))
         sau = [e for p, e in nam_ev if 0 < p - m.end() <= 14]                       # "tháng 3 năm 2027 / năm sau"
@@ -143,7 +143,7 @@ def nguoi_thu_hai(t: str) -> dict | None:
             if not k:
                 continue
             sau = t[k.end():k.end() + 30]
-            ns = re.match(r"\s*(?:(?:toi|minh|em)\s+)?(?:(?:sinh|sn|tuoi)\s*(?:nam\s*)?)?(19[3-9]\d|20[0-4]\d)", sau) \
+            ns = re.match(r"\s{0,5}(?:(?:toi|minh|em)\s+)?(?:(?:sinh|sn|tuoi)\s*(?:nam\s*)?)?(19[3-9]\d|20[0-4]\d)", sau) \
                 or re.search(r"(?:sinh|sn)\s*(?:nam\s*)?(19[3-9]\d|20[0-4]\d)", sau)
             ra = {"quan_he": qh, **({"nam_sinh": int(ns.group(1))} if ns else {})}
             cac = [int(x) for x in re.findall(r"(?:sinh|sn)\s*(?:nam\s*)?(19[3-9]\d|20[0-4]\d)", t)]

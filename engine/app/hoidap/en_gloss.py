@@ -62,7 +62,7 @@ def chuan(cau: str) -> str:
 
 def _cau(cau: str) -> list[str]:
     """Các câu, câu hỏi thật trước (câu có "?" từ cuối lên), rồi câu kể (từ cuối lên) — như `battu._chu_de_cau`."""
-    cac = [c for c in re.split(r"(?<=[.!?])\s+|\s*[\n;]\s*", (cau or "").strip()) if c.strip()]
+    cac = [c for c in re.split(r"(?<=[.!?])\s+|[ \t]{0,20}[\n;]\s*", (cau or "").strip()) if c.strip()]
     if len(cac) < 2:
         return [chuan(cau)]
     hoi = [c for c in cac if c.rstrip().endswith("?")][::-1]

@@ -628,7 +628,7 @@ def _loi_thoi(loi: str, khi: str) -> tuple[str, str]:
     này, …", "Năm thuận cho …"). Tiêu đề = mốc + vế đầu (≤ 60 ký tự, cắt ở dấu ngắt vế)."""
     moi = _MO_DAU_THOI.sub("", loi, count=1)
     moi = moi[:1].lower() + moi[1:]
-    ve = re.split(r"\s*[,;:—(]\s*|\.\s", moi, maxsplit=1)[0].rstrip(". ")
+    ve = re.split(r"\s{0,5}[,;:—(]\s*|\.\s", moi, maxsplit=1)[0].rstrip(". ")
     tieu = f"{khi}: {ve}" if len(f"{khi}: {ve}") <= 70 else khi
     return tieu, f"{khi}: {moi}"
 

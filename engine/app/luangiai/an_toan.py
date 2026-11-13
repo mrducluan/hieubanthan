@@ -1378,7 +1378,7 @@ _YEM = _rx_en(r"(?:put|cast|place|send) (?:a |an )?(?:curse|hex|spell|jinx|black
 
 
 # Tên bệnh chỉ nơi làm việc / tổ chức ("cancer ward", "cancer research") không phải câu hỏi có bệnh.
-_BENH_NOI = re.compile(r"\s*(?:ward|unit|hospital|centre|center|research|charity|patients?|survivors?|awareness|foundation|clinic|"
+_BENH_NOI = re.compile(r"\s{0,5}(?:ward|unit|hospital|centre|center|research|charity|patients?|survivors?|awareness|foundation|clinic|"
                        r"department|nurse|doctor|specialist|society|fundrais\w*|walk|run)(?!\w)")
 
 
