@@ -894,7 +894,7 @@ _PT_THUOC = _rx_en(r"(?:sleeping |sleep |headache |bp |blood pressure |anxiety )
                    _THUOC_TEN, r"stash|stockpile")
 _PT_VAT = _rx_en(r"rope|noose|ligature|knife|knives|blade|blades|razors?|gun|pistol|rifle|bullets?|charcoal|helium|car exhaust|"
                  r"exhaust pipe|carbon monoxide|rat poison|poison|bleach|pesticide|weed killer|antifreeze")
-_PT_CAO = _rx_en(r"bridge|ledge|roof|rooftop|balcony|cliff|parapet|railing|(?:top|highest|\d+\w*) floor|hdb|condo|car ?park|"
+_PT_CAO = _rx_en(r"bridge|ledge|roof|rooftop|balcony|cliff|parapet|railing|(?:top|highest|(?<!\d)\d+(?:st|nd|rd|th)?) floor|hdb|condo|car ?park|"
                  r"multi storey|building|tower block|window")
 _PT_RAY = _rx_en(r"(?:train |railway |rail |mrt |subway |metro )?tracks?|(?:mrt|train|subway|metro|lrt) (?:platform|station|line)|"
                  r"platform|oncoming (?:train|traffic|car|bus|truck|lorry)|traffic|(?:a |the )(?:train|bus|lorry|truck|car)")

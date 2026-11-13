@@ -125,7 +125,7 @@ _SAO_NAM: list[tuple[str, str]] = [
 
 def _chuan(cau: str) -> str:
     t = " " + (cau or "").lower().replace("’", "'").replace("‘", "'") + " "
-    t = re.sub(r"(\d+(?:\.\d+)?) ?(?:°|degrees?|deg)\b", r" \1 do ", t)
+    t = re.sub(r"(?<![\d.])(\d+(?:\.\d+)?) ?(?:°|degrees?|deg)\b", r" \1 do ", t)
     t = re.sub(r"(\w)'s\b", r"\1 s", t)
     t = re.sub(r"[^a-z0-9 ]+", " ", t)
     return " ".join(t.split())

@@ -33,6 +33,10 @@ def _pl(cau: str) -> dict:
     ("Which sector of my home has the 5 Yellow star in 2026?", "nam", None),
     ("My Kua is 6. Is a north-facing house okay?", "menh_quai_chung", None),
     ("We live on a dead-end street. Bad feng shui or just quiet?", "bo_tri", "ngo_cut"),
+    ("Is it a problem if two doors face each other?", "bo_tri", "cua_doi_nhau"),
+    ("Our two bedroom doors are directly opposite each other upstairs. Bad?", "bo_tri", "cua_doi_nhau"),
+    ("5 Yellow", "nam", None),
+    ("Is Tai Sui in the east this year?", "nam", None),
 ])
 def test_dinh_tuyen(cau, loai, bo_tri):
     p = _pl(cau)
@@ -102,3 +106,26 @@ def test_cau_tieng_viet_o_ban_anh_phan_loai_nhu_ban_viet():
 def test_ban_viet_giu_nguyen_chu():
     kq = _hoi("Nhà tôi hướng Tây Nam có hợp không?", "vi")
     assert "Câu hỏi để tự soi: Ngoài hướng" in kq["cau_tra_loi"] and "Mệnh quái (cung phi) của bạn" in kq["cau_tra_loi"]
+
+
+@pytest.mark.parametrize("cau", ["5 Yellow", "Is Tai Sui in the east this year?", "Where is the 2 Black next year?",
+                                 "Which sector of my home has the 5 Yellow star in 2026?"])
+def test_sao_nam_khong_thanh_sao_han_theo_tuoi(cau):
+    """Phi tinh năm / hạn năm phương (Thái Tuế, Tam Sát…) không phải câu sao hạn Cửu Diệu theo tuổi (La Hầu…)."""
+    kq = _hoi(cau)
+    loai = [m.get("loai") for m in kq["bang_chung"]["muc"]]
+    assert "sao_han" not in loai and "sao_nam" in loai, loai
+    assert "La Hou" not in kq["cau_tra_loi"]
+
+
+def test_ten_du_nien_ban_anh_khong_cat_cut():
+    """Tên đời thường của du niên (tiêu đề hộp "Which directions suit you") cắt ở vế công dụng, không ở phẩy đầu:
+    "a calm, wholesome side" chứ không "a calm"; bản Việt giữ vế trước phẩy đầu."""
+    from app.luangiai import phongthuy_doi_song as ds
+    with ngon_ngu.dung("en"):
+        ten = {dn: ds._ten_thuong(dn) for dn in ("Sinh Khí", "Thiên Y", "Diên Niên", "Phục Vị", "Hoạ Hại", "Lục Sát",
+                                                  "Ngũ Quỷ", "Tuyệt Mệnh")}
+    assert ten["Thiên Y"] == "a calm, wholesome side" and ten["Diên Niên"] == "a steady, harmonious side", ten
+    assert all("side" in t and not re.search(r"\b(good|fine|best|for)\b", t) for t in ten.values()), ten
+    with ngon_ngu.dung("vi"):
+        assert ds._ten_thuong("Thiên Y") == "phía yên và lành"

@@ -11,7 +11,7 @@ import { ghi } from "@/lib/do-luong";
 import { duongTrangKb } from "@/lib/duong-silo";
 import { MinhHoa, type MinhHoaDuLieu } from "@/components/minh-hoa/MinhHoa";
 import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
-import { tenTheo, type TenHien } from "@/lib/ten-hien";
+import { boChuGiai, tenTheo, type TenHien } from "@/lib/ten-hien";
 import { banAnh } from "@/lib/duong-en";
 
 export type Sac = "chinh" | "hop" | "trung" | "nhat";
@@ -357,7 +357,7 @@ function BanCung({ k }: { k: Extract<KhoiTrucQuan, { kieu: "cung" }> }) {
   const giam = useGiamChuyenDong();
   const [chon, setChon] = useChon();
   const { c, en } = useChuHoiDap();
-  const tenHoa = (h: string) => (en ? tenTheo(k.ten_hien, true)("hoa", h).replace(/\s*\(.*\)$/, "") : h);
+  const tenHoa = (h: string) => (en ? boChuGiai(tenTheo(k.ten_hien, true)("hoa", h)) : h);
   const hoi = k.muc.find((m) => m.vai === "hoi");
   const m = chon === null ? null : k.muc[chon];
   const tuHoa = new Map((k.bay ?? []).filter((b) => b.tu === b.den).map((b) => [b.tu, b.hoa.map(tenHoa).join(", ")]));

@@ -3,12 +3,13 @@
 // du niên…: `ten_hien` của phản hồi đang vẽ, lib/ten-hien.ts có dự phòng 8 hướng / 8 quái / 8 du niên). Bản Việt = đúng chữ cũ.
 import { Fragment, useMemo } from "react";
 import { useNgonNgu } from "@/components/khung/NgonNgu";
+import { boChuGiai } from "@/lib/ten-hien";
 import { useTen } from "@/components/khung/TenHien";
 import { tachNhan, taoChu } from "@/lib/chu-trang";
 import { CHU_PHONG_THUY_UI } from "@/lib/chu/phong-thuy";
 
 /** Bỏ phần chú giải trong ngoặc của tên Anh ("Sheng Qi (Life Generating)" → "Sheng Qi") — dùng ở chỗ chật. */
-export const tenGonPT = (s: string) => s.replace(/\s*\(.*\)\s*$/, "");
+export const tenGonPT = (s: string) => boChuGiai(s);
 
 export function useChuPT() {
   const { ngonNgu } = useNgonNgu();

@@ -2,6 +2,7 @@
 // VZ-3 — Bát tự trực quan: bảng tứ trụ đầy đủ (thập thần, can chi tô ngũ hành, tàng can, nạp âm,
 // trường sinh, thần sát, không vong) · vòng 12 địa chi với hợp/xung/hình/hại/phá · ngũ giác ngũ hành
 // sinh–khắc · dải đại vận + lưu niên/lưu nguyệt. Chỉ VẼ số liệu engine; màu theo biến --ls-* (2 giao diện).
+import { boChuGiai } from "@/lib/ten-hien";
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import type { LaSoBatTu, LuuNienBatTu, QuanHe } from "@/lib/battu-kieu";
@@ -265,7 +266,7 @@ export function NguGiacNguHanh({ ls }: { ls: LaSoBatTu }) {
               <circle cx={x} cy={y} r={r} fill={mau(h)} fillOpacity={d ? 0.85 : 0.12} stroke={mau(h)} strokeWidth={1.5} />
               <text x={x} y={y + 4.5} textAnchor="middle" fontSize={en ? 11 : 13} fontWeight={700} fill={d ? "var(--ls-nen)" : mau(h)}>{ten("hanh", h)}</text>
               <text x={x} y={nhanY} textAnchor="middle" fontSize={11.5} fill="var(--ls-chu)">
-                {Math.round((d / tong) * 100)}%{m?.vai_tro_hanh[h] ? <tspan fill="var(--ls-mo)"> · {laNc ? c("nhat_chu") : ten("nhom_thap_than", m.vai_tro_hanh[h]).replace(/\s*\(.*\)$/, "")}</tspan> : null}
+                {Math.round((d / tong) * 100)}%{m?.vai_tro_hanh[h] ? <tspan fill="var(--ls-mo)"> · {laNc ? c("nhat_chu") : boChuGiai(ten("nhom_thap_than", m.vai_tro_hanh[h]))}</tspan> : null}
               </text>
             </g>
           );

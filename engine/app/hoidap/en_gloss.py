@@ -476,7 +476,7 @@ _TV_HAN: list[tuple[str, str]] = [
      r"current (?:period|phase|cycle)|this period|next period|phase of my life|period of my life", "dai han"),
     (r"liu nian|annual (?:chart|palace|stars?|luck)|yearly (?:chart|palace|luck)|year ahead|tai sui|clash year|year of the", "luu nien"),
     (r"xiao xian|minor (?:yearly )?limit", "tieu han"),
-    (r"liu yue|monthly chart|month by month|which months?|what months?|best months?|worst months?|any month|(?:\d+(?:st|nd|rd|th)?|first|1st) lunar month", "luu nguyet"),
+    (r"liu yue|monthly chart|month by month|which months?|what months?|best months?|worst months?|any month|(?:(?<!\d)\d+(?:st|nd|rd|th)?|first|1st) lunar month", "luu nguyet"),
 ]
 _TV_KIEN_THUC: list[tuple[str, str]] = [
     (r"\b(?:accurate|accuracy|scientific|science|legit|reliable|real)\b", "co chinh xac"),

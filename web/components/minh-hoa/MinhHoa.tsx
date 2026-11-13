@@ -9,7 +9,7 @@ import type { BoTarot, LoaiLa, NguyenTo } from "@/lib/tarot-chung";
 import { GOC_QR, TEN_MIEN } from "@/lib/the-chia-se";
 import { taoChu, type DocChu } from "@/lib/chu-trang";
 import { CHU_KIEN_THUC } from "@/lib/chu/kien-thuc";
-import type { DocTen } from "@/lib/ten-hien";
+import { boChuGiai, type DocTen } from "@/lib/ten-hien";
 
 // EN-ALL GĐ 3d: chữ cố định của hình đọc bảng lib/chu/kien-thuc.ts theo ngôn ngữ (`en`); mã engine (can, hành, nạp âm)
 // hiện qua `ten` (lib/ten-hien.ts — bản Việt trả nguyên mã). Bản Việt: đúng chữ cũ từng ký tự.
@@ -205,7 +205,7 @@ const HOA_HAN: Record<string, string> = { "Lộc": "祿", "Quyền": "權", "Kho
 const HOA_MAU: Record<string, string> = { "Lộc": "fill-jade/20 stroke-jade", "Quyền": "fill-gold/20 stroke-gold",
   "Khoa": "fill-moon/20 stroke-moon", "Kỵ": "fill-cinnabar/20 stroke-cinnabar" };
 function HinhHoaCung({ hoa, chi_so, vong, c, tn }: { hoa: string; chi_so: number; vong: string[]; c: Chu; tn: DocTen }) {
-  const tenHoa = tn("hoa", hoa).replace(/\s*\(.*\)$/, "");   // bản Anh "Lu (Prosperity)" → "Lu"; bản Việt nguyên mã
+  const tenHoa = boChuGiai(tn("hoa", hoa));   // bản Anh "Lu (Prosperity)" → "Lu"; bản Việt nguyên mã
   const cx = 160, cy = 120;
   return (
     <HinhCung c={c} chi_so={chi_so} vong={vong} nhan={c("mh.hoa_cung", { hoa: tenHoa, han: `化${HOA_HAN[hoa] ?? ""}`, cung: vong[chi_so] ?? "" })} giua={

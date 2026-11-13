@@ -53,3 +53,11 @@ export function tenTheo(th: TenHien | null | undefined, en: boolean) {
   };
 }
 export type DocTen = ReturnType<typeof tenTheo>;
+
+/** Bỏ chú giải trong ngoặc ở CUỐI tên ("Lu (Prosperity)" → "Lu"). Không dùng regex `\s*\(.*\)$` (CodeQL: polynomial ReDoS). */
+export function boChuGiai(s: string): string {
+  const t = s.trimEnd();
+  if (!t.endsWith(")")) return s;
+  const i = t.lastIndexOf("(");
+  return i > 0 ? t.slice(0, i).trimEnd() : s;
+}

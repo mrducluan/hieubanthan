@@ -289,8 +289,16 @@ def _dn_kb(dn: str) -> dict:
 
 
 def _ten_thuong(dn: str) -> str:
-    """Review EN-2: tên đời thường = vế đầu của câu KB `mot_cau` — MỘT nguồn, không lệch thân hộp."""
-    return _dn_kb(dn)["mot_cau"].split(",")[0].split(";")[0].strip()
+    """Review EN-2: tên đời thường = vế đầu của câu KB `mot_cau` — MỘT nguồn, không lệch thân hộp.
+
+    Bản Việt: vế trước dấu phẩy đầu ("phía yên và lành, hợp bếp…"). Bản dịch có thể có phẩy NGAY TRONG tên
+    ("a calm, wholesome side, good for…") → cắt ở ranh giới vế công dụng (", good / fine / best for", ";"), không ở phẩy đầu."""
+    mc = _dn_kb(dn)["mot_cau"]
+    if not ngon_ngu.la_viet():
+        m = re.search(r",\s+(?=(?:good|fine|best|ideal|suited|suits|useful|works?|for)\b)|;", mc)
+        if m:
+            return mc[:m.start()].strip()
+    return mc.split(",")[0].split(";")[0].strip()
 
 
 def _cau_sau_ten(dn: str) -> str:
