@@ -1,4 +1,7 @@
+"use client";
 // La bàn 8 hướng: tô ngọc = hướng cát, chu sa nhạt = hướng hung (theo `huong_cat` engine trả).
+import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
+
 const HUONG = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"];
 
 function cung(i: number, r0: number, r1: number) {
@@ -8,9 +11,11 @@ function cung(i: number, r0: number, r1: number) {
 }
 
 export function LaBan({ quai, nhom, bang, huongCat }: { quai: string; nhom: string; bang: Record<string, string>; huongCat: string[] }) {
+  // EN-ALL GĐ 5: mã (hướng, du niên, quái, nhóm) hiện qua tên Anh ở bản Anh; du niên ở ô chật dùng tên gọn ("Sheng Qi").
+  const { c, huong, duNien, quai: tq, nhom: tn } = useChuPT();
   return (
     <figure className="mx-auto w-full max-w-sm">
-      <svg viewBox="0 0 200 200" role="img" aria-label={`La bàn 8 hướng cho mệnh ${quai}`} className="h-auto w-full">
+      <svg viewBox="0 0 200 200" role="img" aria-label={c("lb.aria", { quai: tq(quai) })} className="h-auto w-full">
         {HUONG.map((h, i) => {
           const cat = huongCat.includes(h);
           const a = ((i * 45 - 90) * Math.PI) / 180;
@@ -18,19 +23,19 @@ export function LaBan({ quai, nhom, bang, huongCat }: { quai: string; nhom: stri
             <g key={h}>
               <path d={cung(i, 38, 96)} fill={cat ? "rgb(var(--jade) / 0.16)" : "rgb(var(--cinnabar) / 0.07)"}
                 stroke="rgb(var(--line))" strokeWidth="0.6" />
-              <text x={100 + 76 * Math.cos(a)} y={100 + 76 * Math.sin(a) - 3} textAnchor="middle" fontSize="7.5" fill="rgb(var(--fg))">{h}</text>
+              <text x={100 + 76 * Math.cos(a)} y={100 + 76 * Math.sin(a) - 3} textAnchor="middle" fontSize="7.5" fill="rgb(var(--fg))">{huong(h)}</text>
               <text x={100 + 76 * Math.cos(a)} y={100 + 76 * Math.sin(a) + 7} textAnchor="middle" fontSize="6.5"
-                fill={cat ? "rgb(var(--jade))" : "rgb(var(--cinnabar))"}>{bang[h]}</text>
+                fill={cat ? "rgb(var(--jade))" : "rgb(var(--cinnabar))"}>{duNien(bang[h], true)}</text>
             </g>
           );
         })}
         <circle cx="100" cy="100" r="36" fill="rgb(var(--surface))" stroke="rgb(var(--gold) / 0.6)" />
-        <text x="100" y="98" textAnchor="middle" fontSize="15" fontFamily="var(--font-display)" fill="rgb(var(--gold))">{quai}</text>
-        <text x="100" y="111" textAnchor="middle" fontSize="6.5" fill="rgb(var(--fg-muted))">{nhom}</text>
+        <text x="100" y="98" textAnchor="middle" fontSize="15" fontFamily="var(--font-display)" fill="rgb(var(--gold))">{tq(quai)}</text>
+        <text x="100" y="111" textAnchor="middle" fontSize="6.5" fill="rgb(var(--fg-muted))">{tn(nhom)}</text>
       </svg>
       <figcaption className="mt-2 flex justify-center gap-4 text-xs text-fg-muted">
-        <span className="flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-jade/40" /> Hướng cát</span>
-        <span className="flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-cinnabar/30" /> Hướng hung</span>
+        <span className="flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-jade/40" /> {c("lb.cat")}</span>
+        <span className="flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-cinnabar/30" /> {c("lb.hung")}</span>
       </figcaption>
     </figure>
   );
