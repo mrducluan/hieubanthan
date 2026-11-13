@@ -93,7 +93,7 @@ test.describe("/en/feng-shui trên trình duyệt", () => {
 
     // Kua + la bàn 8 hướng (tên hướng, du niên, quái bằng tiếng Anh)
     const mq = page.getByTestId("menh-quai");
-    await expect(mq).toContainText("Your Kua: Kan", { timeout: 30_000 });
+    await expect(mq).toContainText("Your Kua number: 1 (Kan)", { timeout: 30_000 });
     await expect(mq).toContainText("East Group");
     const laBan = mq.locator("svg").first();
     await expect(laBan).toContainText("South-East");
@@ -107,7 +107,7 @@ test.describe("/en/feng-shui trên trình duyệt", () => {
     // Đo hướng: gõ độ → kết quả engine (hướng, sơn, trạch, du niên) tiếng Anh
     const dh = page.getByTestId("do-huong");
     await dh.getByRole("textbox", { name: "Home direction in degrees", exact: true }).fill("135");
-    await dh.getByRole("button", { name: "Show", exact: true }).click();
+    await dh.getByRole("button", { name: "Check", exact: true }).click();
     const kq = page.getByTestId("ket-qua-do-huong");
     await expect(kq).toContainText("South-East", { timeout: 30_000 });
     await expect(kq).toContainText("Xun (SE2)");
@@ -139,8 +139,9 @@ test.describe("/en/feng-shui trên trình duyệt", () => {
     await page.getByRole("button", { name: "Use 315° for the Flying Star chart" }).click();
     await page.getByRole("button", { name: "Set up the chart" }).click();
     const hk = page.getByTestId("ban-huyen-khong");
-    await expect(hk).toContainText("Period", { timeout: 30_000 });
-    await expect(hk).toContainText("Mountain star");
+    // Năm xây 2008 đã nhập ở "Your home" tự điền sang Huyền Không (không bắt nhập lại) → vận 8.
+    await expect(hk).toContainText("Period 8", { timeout: 30_000 });
+    await expect(hk).toContainText(/mountain star/i);
 
     expect(await chuViet(page)).toEqual([]);
     expect(await ngang(page)).toBeLessThanOrEqual(0);

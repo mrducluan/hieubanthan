@@ -46,7 +46,7 @@ export function HanhTrinhNha({ mq, coSinh, sinh = null }: { mq: { quai: string; 
   const buoc: Buoc[] = [
     { ma: "menh", ten: t("ht.b1"), neo: "#menh-quai",
       trang_thai: mq ? "xong" : coSinh ? "san_sang" : "cho",
-      chi: mq ? t("ht.b1_xong", { quai: quai(mq.quai), nhom: nhom(mq.nhom), so: String(mq.so ?? "") }) : coSinh ? t("ht.b1_dang") : t("ht.b1_can") },
+      chi: mq ? t("ht.b1_xong", { quai: en && mq.so ? `${mq.so} (${quai(mq.quai)})` : quai(mq.quai), nhom: nhom(mq.nhom) }) : coSinh ? t("ht.b1_dang") : t("ht.b1_can") },
     { ma: "huong", ten: t("ht.b2"), neo: "#do-huong",
       trang_thai: coHuong ? "xong" : "san_sang",
       chi: coHuong ? (nha!.huong_do != null ? `${nha!.huong_do}°${nha!.theo === "ban_cong" ? t("ht.ban_cong") : ""}` : huong(nha!.huong!))

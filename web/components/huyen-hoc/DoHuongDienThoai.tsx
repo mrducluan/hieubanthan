@@ -340,7 +340,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
               <Button onClick={batDau} variant="secondary"><Smartphone aria-hidden /> {t("dh.nut_do")}</Button>
               {cheDo === "nha" && doSong != null && (
                 <Button onClick={() => chot(doSong)} disabled={dang} data-testid="chot-la-ban-keo">
-                  <Compass aria-hidden /> {dang ? t("dh.dang_doi") : t("dh.chot_do", { do: String(Math.round(doSong)), h: huong(oHuong(doSong)) })}
+                  <Compass aria-hidden /> {dang ? t("dh.dang_doi") : t("dh.chot_do", { do: en ? `${Math.round(doSong)}° (${huong(oHuong(doSong))})` : String(Math.round(doSong)) })}
                 </Button>
               )}
             </div>

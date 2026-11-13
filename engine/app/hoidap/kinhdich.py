@@ -17,7 +17,8 @@ import unicodedata
 
 from app.calc import kinhdich, kinhdich_maihoa as mh, luc_hao as lh, vuong_suy as vs
 from app.calc.kinhdich_vendor import CHI_NH, KHAC, SINH
-from app.hoidap import chung, hieu_cau, mo_dau
+from app import ngon_ngu
+from app.hoidap import chung, en_gloss, en_gloss_kd, hieu_cau, mo_dau
 from app.kb import kinhdich_kb as kb
 from app.luangiai import kinhdich_doi_song as kd_ds, truc_quan
 from app.narrative import hoi_van
@@ -146,11 +147,34 @@ def _moc_hoi(t: str, hom_nay: dt.date) -> str | None:
 
 
 def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
+    """EN-ALL GĐ 6: câu tiếng Anh → cụm từ khoá tiếng Việt không dấu (`en_gloss_kd`, dịch ý) rồi đi đúng luật bên dưới; bộ
+    chặn an toàn xét trên CÂU GỐC (`luangiai/an_toan`, một bộ cho mọi ngôn ngữ). Câu gõ tiếng Việt ở bản Anh → phân loại như
+    bản Việt."""
+    if ngon_ngu.la_viet():
+        return _phan_loai(cau_hoi, che_do)
+    if en_gloss.la_cau_viet(cau_hoi):
+        with ngon_ngu.dung(ngon_ngu.MAC_DINH):
+            return _phan_loai(cau_hoi, che_do)
+    kq = _phan_loai(en_gloss_kd.gloss(cau_hoi) or cau_hoi, che_do, goc=cau_hoi)
+    if kq["xu_ly"] == "tra_loi" and kq["loai"] not in ("ky_thuat", "doc_que_da_co") and en_gloss_kd.do_tin_thap(cau_hoi):
+        kq["do_tin_thap"] = True     # mời chọn câu cụ thể ("Did you mean…"), lời đáp chung vẫn có
+    return kq
+
+
+# Câu tiếng Anh: mua bùa / vật phẩm / lễ "sửa quẻ xấu" → từ chối nhẹ (như "vật phẩm" của bản Việt).
+_VAT_PHAM_EN = re.compile(r"\b(?:buy|purchase|pay for|pay)\b.{0,50}\b(?:talisman|amulet|charm|crystal|bracelet|statue|ritual|ceremony)s?\b|"
+                          r"\b(?:talisman|amulet|lucky charm)s?\b.{0,60}\b(?:fix|cure|change|cancel|undo|break)\b")
+
+
+def _phan_loai(cau_hoi: str, che_do: str = "tu_dong", goc: str | None = None) -> dict:
+    """`goc` (bản ngôn ngữ khác): câu gốc người dùng gõ — `cau_hoi` khi đó là cụm từ khoá đã dịch ý."""
     t = chung.chuan_hoa_cau(cau_hoi)
-    kq = {"cau_chuan_hoa": t, "cau_goc": cau_hoi, "che_do": che_do, "que_nhac": _que_nhac(cau_hoi), "hao_nhac": _hao_nhac(cau_hoi),
+    kq = {"cau_chuan_hoa": t, "cau_goc": goc or cau_hoi, "che_do": che_do, "que_nhac": _que_nhac(cau_hoi), "hao_nhac": _hao_nhac(cau_hoi),
           "giai_thich": _giai_thich_khop(t), "linh_vuc": chung.linh_vuc_doi_song(t),
           "truong_phai": None, "dung_than": None, "xu_ly": "tra_loi", "loai": None}
     db = chung.dac_biet(t, cau_hoi)
+    if goc is not None:     # bản ngôn ngữ khác: câu gốc qua bộ chặn chung trước; vật phẩm / bùa (tiếng Anh) như "vật phẩm"
+        db = chung.dac_biet(chung.chuan_hoa_cau(goc), goc) or ("tu_choi_nhe" if _VAT_PHAM_EN.search(goc.lower()) else None) or db
     if not db and chung.co(t, chung.KD_SUC_KHOE):
         db = "tu_choi_nhe"          # SK-1: Kinh Dịch không có chương sức khoẻ → không đọc quẻ cho câu sức khoẻ bản thân
     if db:
@@ -188,6 +212,9 @@ def phan_loai(cau_hoi: str, che_do: str = "tu_dong") -> dict:
     if not td_kd(t) and chung.co(t, KY_THUAT) and chung.co(t, THUAT_NGU) and not chung.co(t, [r"\btoi\b", r"\bminh\b", r"\bem\b"]):
         kq["loai"] = "ky_thuat"      # EN-3c: "Quẻ biến khác quẻ hỗ thế nào" — câu kiến thức về thuật ngữ, không gieo quẻ
         kq["tu_dien"] = [m["ma"] for m in hieu_cau.tu_dien_khop(cau_hoi, "kinhdich")]   # EN-3d: trước trả lời rỗng
+        return kq
+    if goc is not None and (td_en := en_gloss_kd.tu_dien_kien_thuc(goc)):
+        kq["loai"], kq["tu_dien"] = "ky_thuat", td_en     # GĐ 6: câu kiến thức tiếng Anh → từ điển, không gieo quẻ
         return kq
     if td := hieu_cau.la_kien_thuc_tu_dien(t, cau_hoi, "kinhdich"):
         kq["loai"], kq["tu_dien"] = "ky_thuat", [m["ma"] for m in td]     # EN-3: câu kiến thức → từ điển, không gieo quẻ

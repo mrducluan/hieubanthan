@@ -80,7 +80,7 @@ export const CHU_PHONG_THUY_UI = {
   // ---------------------------------------------------------------- hành trình nhà (HanhTrinhNha.tsx)
   "ht.tieu_de": m(HT, "Hành trình nhà bạn", "Your home, step by step"),
   "ht.b1": m(HT, "Bạn hợp phía nào", "Which directions suit you"),
-  "ht.b1_xong": m(HT, "mệnh {quai} · {nhom}", "Kua {so} ({quai}) · {nhom}"),
+  "ht.b1_xong": m(HT, "mệnh {quai} · {nhom}", "Kua {quai} · {nhom}"),
   "ht.b1_dang": m(HT, "đang tính", "working it out"),
   "ht.b1_can": m(HT, "cần năm sinh + giới tính", "needs birth year + sex"),
   "ht.b2": m(HT, "Hướng nhà", "Home direction"),
@@ -193,7 +193,7 @@ export const CHU_PHONG_THUY_UI = {
   "dh.hop_dat": m(DH, " Hợp đặt: {x}.", " Suits: {x}."),
   "dh.nut_do": m(DH, "Đo bằng la bàn điện thoại", "Use the phone's compass"),
   "dh.dang_doi": m(DH, "Đang đổi…", "Converting…"),
-  "dh.chot_do": m(DH, "Chốt hướng {do}°", "Use {do}° ({h})"),
+  "dh.chot_do": m(DH, "Chốt hướng {do}°", "Use {do}"),
   "dh.chot": m(DH, "Chốt hướng này", "Set this direction"),
   "dh.ke_dung": m(DH, "Dừng ở hướng ghi đúng việc bạn cần (Sinh Khí · Diên Niên · Thiên Y · Phục Vị) rồi kê theo đó. Muốn lưu hướng NHÀ, chuyển lại “Đo hướng nhà”.",
     "Stop at the direction that matches what you need (Sheng Qi · Yan Nian · Tian Yi · Fu Wei) and place it that way. To save the HOME's direction, switch back to “Find the home's direction”."),

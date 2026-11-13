@@ -140,7 +140,8 @@ def _que_ngay(ngay_xem: dt.date) -> dict:
     """Quẻ Mai Hoa đầu ngày: khởi theo năm–tháng–ngày âm (lịch Việt) và giờ Tý — mọi người cùng một quẻ trong ngày."""
     ad, am, ay, _ = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, CALENDAR_MERIDIAN_TZ)
     m = mh.khoi_que_thoi_gian(lunar.can_chi_nam(ay)[1], am, ad, "Tý")
-    return _goi_que(m, "Mai Hoa Dịch Số: năm + tháng + ngày âm lịch → quẻ trên; cộng giờ Tý → quẻ dưới và hào động.")
+    from app.kb.loi import L  # noqa: PLC0415
+    return _goi_que(m, L("kd.qr.cach_khoi_ngay", "Mai Hoa Dịch Số: năm + tháng + ngày âm lịch → quẻ trên; cộng giờ Tý → quẻ dưới và hào động."))
 
 
 def que_rieng(so_tren: int, so_duoi: int, thoi_diem: dt.datetime) -> dict:
@@ -149,7 +150,10 @@ def que_rieng(so_tren: int, so_duoi: int, thoi_diem: dt.datetime) -> dict:
     không có công thức "số từ hồ sơ" tự chế; Mai Hoa cổ điển: tâm động thì số động."""
     cg = mh.chi_gio(thoi_diem.hour)
     m = mh.khoi_que_tu_so(int(so_tren), int(so_duoi), cg)
-    kq = _goi_que(m, f"Mai Hoa theo số: số {so_tren} → quẻ trên, số {so_duoi} → quẻ dưới; cộng số giờ {cg} → hào động.")
+    from app.kb.loi import L  # noqa: PLC0415
+    from app.kb import ten as _tn  # noqa: PLC0415
+    kq = _goi_que(m, L("kd.qr.cach_khoi", "Mai Hoa theo số: số {a} → quẻ trên, số {b} → quẻ dưới; cộng số giờ {gio} → hào động.",
+                       a=so_tren, b=so_duoi, gio=_tn.ten("chi", cg)))
     kq["dau_vao"] = {"so": [int(so_tren), int(so_duoi)], "chi_gio": cg, "thoi_diem": thoi_diem.isoformat(timespec="seconds")}
     return kq
 
@@ -171,9 +175,10 @@ def _nhip_bat_tu(ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict:
             "cach_tinh": f"Can ngày hôm nay ({can}) so với nhật chủ {nhat_chu} của bạn (can ngày sinh) theo ngũ hành và âm dương."}
 
 
-@ngon_ngu.lru(maxsize=1)
 def _kb_que() -> dict:
-    return json.loads((Path(__file__).parents[1] / "kb" / "data" / "kinhdich_kb.json").read_text(encoding="utf-8"))["que"]
+    """64 quẻ của KB Kinh Dịch — đọc qua `nap.doc` (bản phủ theo ngôn ngữ, EN-ALL GĐ 6)."""
+    from app.kb import nap  # noqa: PLC0415
+    return nap.doc("kinhdich_kb.json")["que"]
 
 
 def _cau_hoi_noi_bat(so_ngay: int, ngay_xem: dt.date) -> list[str]:

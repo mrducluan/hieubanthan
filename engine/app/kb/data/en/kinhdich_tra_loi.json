@@ -1,0 +1,278 @@
+{
+ "_nguon": "EN-ALL GĐ 6 — bản phủ tiếng Anh của lớp 'trả lời theo việc' (xu hướng hào, nghiêng, khuôn câu theo kiểu câu, vai, dụng thần theo việc, Thế–Ứng, điều cần gỡ, thế quẻ). Ban biên tập viết từ nghĩa bản Việt; câu sách Hán ('trich') giữ nguyên văn. Chờ người bản xứ duyệt.",
+ "_trang_thai": "bien_tap",
+ "xu_huong": {
+  "tien": {
+   "nhan": "go ahead",
+   "y": "the line text opens the way: acting now fits the time",
+   "vap": "pushing too hard because things look smooth, and skipping the preparation",
+   "nen": "go forward, but follow the order you planned"
+  },
+  "tien_giu": {
+   "nhan": "it can be done, but keep it right",
+   "y": "the line text allows it, on condition you stay upright — slow and sure",
+   "vap": "doing the right thing the wrong way: rushing, or letting go of what needs holding",
+   "nen": "go step by step and keep to the principles you set"
+  },
+  "giu": {
+   "nhan": "hold steady, stay the course",
+   "y": "the line text advises keeping your current position and not changing now",
+   "vap": "changing direction out of impatience when the matter needs to be kept steady",
+   "nen": "keep your present routine, do your part fully, and do not start anything new yet"
+  },
+  "hop_tac": {
+   "nhan": "you need people working with you",
+   "y": "the line text speaks of helpers and companions — alone it is not enough",
+   "vap": "carrying it all yourself, or trusting people you do not know well",
+   "nen": "find the right people to talk it over and work with before deciding"
+  },
+  "cho": {
+   "nhan": "not yet time",
+   "y": "the line text says wait: conditions are not ripe",
+   "vap": "acting too early out of impatience, before the conditions are there",
+   "nen": "prepare what is missing, set a date to review, then decide"
+  },
+  "than_trong": {
+   "nhan": "be careful, easy to slip",
+   "y": "the line text warns of a danger point; if you act, act with caution",
+   "vap": "being careless at exactly the point the line warns about",
+   "nen": "plan your way out first, and break the task into small trials"
+  },
+  "lui": {
+   "nhan": "better to stop or pull back",
+   "y": "the line text leans towards not acting, or withdrawing",
+   "vap": "forcing it through because you have already put in so much",
+   "nen": "stop here, keep what can still be kept, and look for another direction"
+  },
+  "ket": {
+   "nhan": "the matter has reached its end",
+   "y": "the line text stands at the extreme: the matter has come to its close, and dragging it on will spoil it",
+   "vap": "refusing to close something that has run out of steam",
+   "nen": "wrap it up neatly, learn from it, and save your energy for what comes next"
+  }
+ },
+ "nghieng": {
+  "co": {
+   "nhan": "Leans towards yes"
+  },
+  "dieu_kien": {
+   "nhan": "Yes, with conditions"
+  },
+  "chua_voi": {
+   "nhan": "Not in a hurry"
+  },
+  "chua": {
+   "nhan": "Not right now"
+  }
+ },
+ "kieu_cau": {
+  "co_nen": {
+   "ten": "should I",
+   "cau_dau": {
+    "co": "The hexagram leans towards doing it: {ly_do}.",
+    "dieu_kien": "It can be done, but with conditions: {ly_do}.",
+    "chua_voi": "Do not rush it: {ly_do}.",
+    "chua": "The hexagram leans towards not now: {ly_do}."
+   }
+  },
+  "ket_qua": {
+   "ten": "will it work out",
+   "cau_dau": {
+    "co": "The hexagram leans towards yes: {ly_do}.",
+    "dieu_kien": "Yes, but slowly and with conditions: {ly_do}.",
+    "chua_voi": "Not clear yet — it needs more time: {ly_do}.",
+    "chua": "Difficult for now: {ly_do}."
+   }
+  },
+  "nguoi_kia": {
+   "ten": "what about the other person"
+  },
+  "khi_nao": {
+   "ten": "when",
+   "cau_dau": {
+    "co": "The matter has momentum and the timing is close: {ly_do}.",
+    "dieu_kien": "It will come, but it needs one more beat: {ly_do}.",
+    "chua_voi": "Not right now: {ly_do}.",
+    "chua": "No clear date in sight for now: {ly_do}."
+   }
+  },
+  "cach_lam": {
+   "ten": "how should I go about it",
+   "cau_dau": {
+    "co": "The right way now is to {nen}: {ly_do}.",
+    "dieu_kien": "The right way now is to {nen}: {ly_do}.",
+    "chua_voi": "The right way now is to {nen}: {ly_do}.",
+    "chua": "The right way now is to {nen}: {ly_do}."
+   }
+  },
+  "tong_quat": {
+   "ten": "the state of things",
+   "cau_dau": {
+    "co": "Things are flowing your way: {ly_do}.",
+    "dieu_kien": "Not settled yet — it depends on how you act: {ly_do}.",
+    "chua_voi": "Things call for caution: {ly_do}.",
+    "chua": "Things are difficult: {ly_do}."
+   }
+  }
+ },
+ "vai": {
+  "toi": "you",
+  "con": "your child",
+  "cha_me": "your parents",
+  "vo_chong": "your partner",
+  "nguoi_yeu": "that person",
+  "sep": "your boss",
+  "doi_tac": "your partner in this",
+  "ban_be": "that friend",
+  "nguoi_kia": "the other person"
+ },
+ "dung_than_viec": {
+  "chuyen_viec": {
+   "ten": "the line that stands for the new workplace",
+   "ten_phu": "the line for papers and decisions"
+  },
+  "thang_tien": {
+   "ten": "the line that stands for the position or title",
+   "ten_phu": "the line for the appointment decision"
+  },
+  "kinh_doanh": {
+   "ten": "the line that stands for the profit",
+   "ten_phu": "the line for where the money comes from (customers, products)"
+  },
+  "hop_tac": {
+   "ten": "the line that stands for the partner",
+   "ten_phu": "the line for shared profit"
+  },
+  "tien_no": {
+   "ten": "the line that stands for the money",
+   "ten_ky": "the line for the debtor, or whoever drains the money"
+  },
+  "mua_nha": {
+   "ten": "the line that stands for the house and its title deed",
+   "ten_phu": "the line for the purchase money"
+  },
+  "ban_nha": {
+   "ten": "the line that stands for the sale money",
+   "ten_phu": "the line for the buyer"
+  },
+  "xe_co": {
+   "ten": "the line that stands for the vehicle",
+   "ten_phu": "the line for the purchase money"
+  },
+  "thi_cu": {
+   "ten": "the line that stands for the exam and the results letter",
+   "ten_phu": "the line for the school or title"
+  },
+  "giay_to": {
+   "ten": "the line that stands for the papers and the file",
+   "ten_phu": "the line for the office that reviews it"
+  },
+  "tinh_cam": {
+   "ten": "the line that stands for that person"
+  },
+  "hon_nhan": {
+   "ten": "the line that stands for the other person"
+  },
+  "hon_nhan_tt": {
+   "ten": "the line that stands for the other person"
+  },
+  "gia_dinh": {
+   "ten": "the line that stands for parents and home"
+  },
+  "con_cai": {
+   "ten": "the line that stands for the child"
+  },
+  "suc_khoe": {
+   "ten": "the line that stands for you yourself"
+  },
+  "di_xa": {
+   "ten": "the line that stands for you yourself",
+   "ten_phu": "the line for papers and transport"
+  },
+  "mat_do": {
+   "ten": "the line that stands for the lost item"
+  },
+  "tranh_chap": {
+   "ten": "the line that stands for the case and whoever judges it",
+   "ten_phu": "the line for papers and evidence"
+  },
+  "ban_be": {
+   "ten": "the line that stands for that friend"
+  },
+  "khac": {
+   "ten": "the line that stands for the matter you asked about"
+  }
+ },
+ "the_ung": {
+  "ung_sinh_the": "{nguoi} is turning towards you and wants to support you",
+  "the_sinh_ung": "you are the one giving more; {nguoi} is receiving more than giving",
+  "ung_khac_the": "{nguoi} is putting pressure on you; it is not smooth yet",
+  "the_khac_ung": "you hold the initiative, but it is easy to push {nguoi} too hard",
+  "ty_hoa": "the two sides are evenly matched — whether it goes well depends on whether you have spoken openly with each other"
+ },
+ "trang_thai_nguoi_kia": {
+  "tuan_khong": "{nguoi} is not really present in this yet — their heart is still undecided",
+  "nguyet_pha": "{nguoi} is being pulled elsewhere this month and has not put their mind to this yet",
+  "dong": "{nguoi} is going through a change of heart",
+  "vuong": "{nguoi} is in a steady position",
+  "suy": "{nguoi} is in a weak position, or does not yet have the strength to deal with this",
+  "phuc": "{nguoi} has not shown up in the hexagram yet — the matter is still in the background, not yet time to see it clearly"
+ },
+ "ly_do_luc_hao": {
+  "vuong": "{ten} is strong for the month and day you asked",
+  "binh": "{ten} is at an ordinary level for the month and day you asked",
+  "suy": "{ten} is weak for the month and day you asked",
+  "phuc": "{ten} has not appeared in the hexagram"
+ },
+ "can_go": {
+  "ky_than_dong": "the opposing force is moving: someone or something is pulling the other way — deal with that first",
+  "nguyen_than_dong": "the supporting force is moving: you have something to lean on — use it",
+  "tuan_khong": "{ten} is falling into a gap — the time has not come yet; things will be clearer once this stretch has passed",
+  "nguyet_pha": "{ten} is clashed by this month — this month is hard; look again next month",
+  "nhap_mo": "{ten} is locked in — the matter is stuck and needs something to open it",
+  "hoa_xau": "the changing line turns into an unfavourable pattern ({loai}) — if you act, plan your way out",
+  "que_bien_xau": "the matter is moving into the pattern of {bien} — the hard part comes later",
+  "the_sinh_dung": "you are giving more than you receive",
+  "dung_khac_the": "circumstances are pressing on you"
+ },
+ "mau": {
+  "viec_mac_dinh": "the matter you asked about",
+  "khong_quyet": "The hexagram does not decide for you; it shows the state of things now so you can choose how to act.",
+  "nguoi_kia_khong_doc": "A hexagram can only shed light on the matter between you and that person; it cannot read anyone else's private thoughts.",
+  "mot_mot": "One hexagram, one matter: this reading is only for {viec}, not for anything else.",
+  "hai_cach_khac": "Two readings, two sides: the classic text speaks about doing it the right way, while the structure of the hexagram by month and day speaks about the state of the matter — when they do not point the same way, follow the more cautious one.",
+  "tieu_de_tra_loi": "The answer to your question",
+  "tieu_de_nguoi_kia": "The other person's side",
+  "tieu_de_can_go": "What to clear up first",
+  "tieu_de_vi_sao": "Why we say this"
+ },
+ "tinh_chat_que": {
+  "luc_hop": {
+   "ten": "Six Harmonies (liu he)",
+   "loi": "The six lines of this hexagram pair up in harmony: things come together easily and last. If this is something you want to end, the opposite holds — it will drag on and be hard to break off."
+  },
+  "luc_xung": {
+   "ten": "Six Clashes (liu chong)",
+   "loi": "The six lines of this hexagram push against each other in pairs: things come apart and change direction easily. Good when you want to get out of something; anything you want to keep will need extra effort to hold."
+  },
+  "xung_hoa_hop": {
+   "ten": "Six Clashes turning into Six Harmonies",
+   "loi": "The hexagram moves from pushing apart to coming together: scattered at first, later it can be gathered up; what seemed lost can still be reconnected."
+  },
+  "hop_hoa_xung": {
+   "ten": "Six Harmonies turning into Six Clashes",
+   "loi": "The hexagram moves from harmony to pushing apart: it goes well at first, but later it drifts apart easily; to see it through, take good care of the later stage."
+  },
+  "du_hon": {
+   "ten": "Wandering Soul (you hun)",
+   "loi": "This hexagram belongs to the restless group: intentions change easily and it is hard to hold one direction for long. Settle on one direction before you act."
+  },
+  "quy_hon": {
+   "ten": "Returning Soul (gui hun)",
+   "loi": "This hexagram belongs to the group that returns to where it started: the matter tends to go round in circles and is slow to go far or expand."
+  },
+  "chung": {
+   "loi": "This is only a secondary feature of the hexagram; the main thing is still the line that stands for your matter."
+  }
+ }
+}
