@@ -436,7 +436,23 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
           <ChanQr className="max-w-sm" nhan={t("ks.qr")} />
         )}
         {d.vi_tri.length > 0 && (
-          <div className="-mx-1 mt-2 overflow-x-auto">
+          <>
+          {/* Điện thoại: mỗi phòng một thẻ (bảng 5 cột bị cắt ở 390px); từ sm trở lên giữ bảng. Chữ như bảng. */}
+          <ul className="mt-2 space-y-2 sm:hidden" data-testid="ks-the-phong">
+            {d.vi_tri.map((x) => (
+              <li key={x.phong} className="rounded-xl border border-line/60 bg-bg/30 px-3 py-2 text-sm">
+                <div className="flex items-baseline justify-between gap-2">
+                  <b className="text-fg">{x.ten}</b>
+                  <span>{x.hop == null ? <span className="text-fg-faint">—</span> : x.hop
+                    ? <span className="inline-flex items-center gap-1 text-jade"><Check className="size-3.5" aria-hidden />{t("ks.hop")}</span>
+                    : <span className="inline-flex items-center gap-1 text-cinnabar"><X className="size-3.5" aria-hidden />{t("ks.chua_hop")}</span>}</span>
+                </div>
+                <p className="mt-0.5 text-fg-muted">{huong(x.cung)} · {duNien(x.du_nien_menh ?? x.du_nien_trach) || "—"}</p>
+                <p className="text-xs text-fg-faint">{t("ks.cot_nen")}: {x.nen === "cat" ? t("ks.phuong_tot") : t("ks.phuong_xau")}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="-mx-1 mt-2 hidden overflow-x-auto sm:block">
             <table className="w-full min-w-[30rem] text-left text-sm">
               <thead><tr className="border-b border-line text-fg"><th className="py-1.5 pr-2">{t("ks.cot_phong")}</th><th className="pr-2">{t("ks.cot_phuong")}</th><th className="pr-2">{t("ks.cot_du_nien", { theo: d.menh_quai ? t("ks.theo_menh") : t("ks.theo_trach") })}</th><th className="pr-2">{t("ks.cot_nen")}</th><th>{t("ks.cot_danh_gia")}</th></tr></thead>
               <tbody>
@@ -453,6 +469,7 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
               </tbody>
             </table>
           </div>
+          </>
         )}
         {d.huong.length > 0 && (
           <ul className="mt-2 space-y-1 text-sm">

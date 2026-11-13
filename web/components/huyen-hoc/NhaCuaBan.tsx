@@ -403,7 +403,10 @@ function ChuongNha({ c, so, huongNha }: { c: Chuong; so: number; huongNha?: stri
         </div>
       )}
       {c.han_nam && c.han_nam.length > 0 && (
-        <p className="mt-3 text-sm text-fg-muted" data-testid="nha-han-nam">{t("nc.giu_yen", { ds: c.han_nam.map((h) => `${huong(h.phuong)} (${h.ten})`).join(" · ") })}</p>
+        <p className="mt-3 text-sm text-fg-muted" data-testid="nha-han-nam">{t("nc.giu_yen", { ds: en
+          // Bản Anh: gom theo phương ("North: Year Breaker (Sui Po), Three Killings (San Sha)") — không lồng ngoặc, không lặp phương.
+          ? [...new Set(c.han_nam.map((h) => h.phuong))].map((p) => `${huong(p)}: ${c.han_nam!.filter((h) => h.phuong === p).map((h) => h.ten).join(", ")}`).join(" · ")
+          : c.han_nam.map((h) => `${huong(h.phuong)} (${h.ten})`).join(" · ") })}</p>
       )}
       {hanhDong && hanhDong.length > 0 && (
         <div className="mt-3 rounded-xl border border-line/70 bg-surface/40 p-3" data-testid="nha-hanh-dong">
