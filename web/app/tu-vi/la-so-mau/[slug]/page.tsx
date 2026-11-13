@@ -112,7 +112,7 @@ async function TrangEn({ m }: { m: NonNullable<Awaited<ReturnType<typeof laSoMau
       "@type": "Article", "@id": `${urlDayDu(duong)}#bai`, headline: m.tieu_de, description: catMoTaEn(m.mo_ta), inLanguage: "en",
       mainEntityOfPage: urlDayDu(duong),
       author: { "@type": "Organization", name: "Hieuban editorial team", url: urlDayDu("/en") },
-      image: ldAnh(anh, m.tieu_de),
+      image: ldAnh(anh, m.tieu_de, "en"),
       publisher: { "@id": `${siteUrl()}/#to-chuc` }, isPartOf: { "@id": `${siteUrl()}/#website` }, isAccessibleForFree: true,
       about: ldThucTheEn("tu-vi"), articleSection: m.buoc.map((b) => b.tieu_de),
       translationOfWork: { "@id": `${urlDayDu(duongVi)}#bai` },

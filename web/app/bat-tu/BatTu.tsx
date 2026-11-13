@@ -303,7 +303,7 @@ export function BatTu() {
             <div className="-mt-2 overflow-hidden rounded-[1.25rem] shadow-card"><ChanLaSo giaoDien={giaoDien} tieuDe={cb("chan.tieu_de")} duong={d("/bat-tu")} /></div>
           </div>
         )}
-        {ls && <SachXuaNoi ds={ls.sach_xua} moDun="battu" en={en} />}
+        {ls && <SachXuaNoi ds={ls.sach_xua} moDun="battu" />}
         {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{CO_CO_LOI.has(c.loai) ? cb(`co.${c.loai}`) : c.chi_tiet}</p>)}
       </section>
 

@@ -106,6 +106,10 @@ def mau_tu_choi(goc: str | None, t: str, mau_chung: str, he_la_so: dict | None =
     thay lời bác sĩ; còn lại (sống chết, chữa trị, thai nhi, may rủi…) → `mau_chung` như cũ."""
     from app.kb import suc_khoe_kb  # noqa: PLC0415
     from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+    if goc and _at.nha_nguy_hiem(goc):       # EN-ALL GĐ 5: nguy hiểm trong nhà (chỉ câu tiếng Anh) — ra ngoài / gọi cứu hộ
+        from app.kb.loi import L  # noqa: PLC0415
+        return L("hoi.pt.nha_nguy_hiem", "Đây là tình huống nguy hiểm trong nhà, không phải câu hỏi phong thuỷ: đưa mọi người ra "
+                 "chỗ thoáng, không bật tắt điện, gọi cứu hộ hoặc đường dây khẩn cấp ngay; an toàn rồi hãy hỏi lại.")
     nhom = _at.nhom_suc_khoe(goc or t)
     if nhom == "cap_cuu":
         return suc_khoe_kb.mau("cap_cuu")

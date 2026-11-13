@@ -245,7 +245,7 @@
   "huong": {
    "Bắc": {"en": "North"}, "Đông Bắc": {"en": "North-East"}, "Đông": {"en": "East"}, "Đông Nam": {"en": "South-East"},
    "Nam": {"en": "South"}, "Tây Nam": {"en": "South-West"}, "Tây": {"en": "West"}, "Tây Bắc": {"en": "North-West"}, "Trung cung": {"en": "Centre"},
-   "Trung tâm": {"en": "Centre"}
+   "Trung tâm": {"en": "Middle"}
   },
   "nhom": {"Đông tứ mệnh": {"en": "East Group"}, "Tây tứ mệnh": {"en": "West Group"}, "Đông tứ trạch": {"en": "East-group house"}, "Tây tứ trạch": {"en": "West-group house"}},
   "sao_bay": {

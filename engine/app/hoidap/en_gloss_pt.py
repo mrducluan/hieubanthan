@@ -266,7 +266,7 @@ def gloss(cau: str) -> str:
     # 7. vợ chồng khác nhóm / hai mệnh quái
     if re.search(r"\b(east|west) group\b.{0,60}\b(east|west) group\b|different (kua )?groups?|(husband|wife|partner|hubby).{0,40}"
                  r"(group|kua)|(group|kua).{0,40}(husband|wife|partner|hubby)|whose (direction|kua)|which of us", t):
-        ra.append("vo chong khac menh theo ai" + (" cua toi" if ca_nhan else ""))
+        ra.append("vo chong toi hop huong nao")
         ra += nguoi
         if huong:
             ra.append(f"nha huong {huong[0]}")
@@ -317,6 +317,8 @@ def gloss(cau: str) -> str:
     if re.search(r"\b(promotion|career|job|business (has been )?slow|clients?|customers?)\b", t):
         ra.append("cong viec co nen chu y")
     ra += [x for x in nam_moc if x not in " ".join(ra)]
+    if not ra and re.search(r"\b(directions?|facing|face)\b", t) and (ca_nhan or nguoi):
+        ra.append("huong nao hop voi toi")
     if not ra and re.search(r"\b(house|home|flat|apartment|room|feng shui)\b", t) and ca_nhan:
         ra.append("nha toi")
     if ca_nhan and ra and not any("toi" in x for x in ra):

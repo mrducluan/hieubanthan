@@ -170,7 +170,7 @@ def _phan_loai(cau_hoi: str, goc: str | None = None) -> dict:
         return kq
     m_van = re.search(r"van ([1-9])(?!\d)", t)
     kq["van"] = int(m_van.group(1)) if m_van else None
-    if goc is not None and not kq["giai_thich"] and (td_en := en_gloss_pt.tu_dien_kien_thuc(goc)):
+    if goc is not None and (td_en := en_gloss_pt.tu_dien_kien_thuc(goc)):
         kq["loai"], kq["tu_dien"] = "ky_thuat", td_en       # câu kiến thức tiếng Anh → từ điển (không đọc mệnh quái)
         return kq
     # HH-CT2: "phi tinh năm 2027 sao nào đến hướng Nam" = sao LƯU NIÊN (năm), không phải tinh bàn nhà theo vận
@@ -594,7 +594,8 @@ def _doan(m: dict) -> tuple[str, str | None]:
     if l == "du_nien":
         dau = L("hoi.pt.du_nien.huong", "Hướng {h} ", h=_hg(m["huong"])) if m.get("huong") else ""
         vai = f"({_vai(m['vai'])}) " if m.get("vai") else ""
-        return (L("hoi.pt.du_nien", "{dau}{vai}— {ten} ({loai}): {y} Hợp dùng cho: {dc}.", dau=dau, vai=vai, ten=_dn(m["ten"]),
+        return (L("hoi.pt.du_nien" if dau or vai else "hoi.pt.du_nien.tron", "{dau}{vai}— {ten} ({loai}): {y} Hợp dùng cho: {dc}.",
+                  dau=dau, vai=vai, ten=_dn(m["ten"]),
                   loai=L("hoi.pt.huong_tot", "hướng tốt") if m["cat_hung"] == "cát" else L("hoi.pt.huong_xau", "hướng xấu"),
                   y=m["y_nghia"], dc=m["dung_cho"]), None)
     if l == "trach":
@@ -821,7 +822,7 @@ def _hien_chuoi(k: str, v: str):
         return _dn(v)
     if k == "cuc_ten":
         return _th("cuc_hk", v)
-    if k == "vai":
+    if k in ("vai", "cap"):
         return _vai(v)
     return v
 
@@ -836,6 +837,8 @@ def _hien_goi(x, k: str = ""):
             from app.kb import nap  # noqa: PLC0415
             m = nap.doc("tuoi_dan_gian_kb.json").get("tam_tai") or {}
             return {**x, **{kk: m[kk] for kk in ("ten", "nghia") if isinstance(m.get(kk), str)}}
+        if isinstance(x.get("phong"), str) and isinstance(x.get("ten"), str):
+            x = {**x, "ten": L(f"hoi.pt.phong.{x['phong']}", x["ten"])}
         if k == "nam" and isinstance(x.get("can_chi"), str):
             return {**x, "can_chi": _cc(x["can_chi"])}
         return {kk: _hien_goi(v, kk) for kk, v in x.items() if kk != "tu_khoa"}    # tu_khoa = mẫu so khớp tiếng Việt (nội bộ)

@@ -279,6 +279,13 @@ def thanso_nam_nguoi(ngay: int, thang: int, mang: str, nam0: int, so_nam: int = 
 
 
 # ------------------------------------------------------------------ Phong thuỷ
+def _cc_pt(n: int, y: str, noi: str, quai: str) -> str:
+    """Căn cứ năm của sao lưu niên (EN-ALL GĐ 5: bản Anh thay cụm "the main door side" theo đúng nơi)."""
+    y = y.replace("phía cửa chính", f"phía {noi} (quái {quai})")
+    y = y.replace("the main door side", L("pt.cy.noi", "phía {noi} (quái {quai})", noi=noi, quai=_ten.ten("quai", quai)))
+    return L("pt.cy.can_cu", "Lưu niên {n}: {y}", n=n, y=y)
+
+
 def phongthuy_nam(quai: str, tu_nam: int, mang: str, so_nam: int = SO_NAM, noi: str = "cửa chính") -> list[dict]:
     """Năm (Lập xuân) sao lưu niên KB của mảng bay tới quái `quai` (phía cửa chính)."""
     from app.calc import huyen_khong as hk  # noqa: PLC0415
@@ -288,7 +295,7 @@ def phongthuy_nam(quai: str, tu_nam: int, mang: str, so_nam: int = SO_NAM, noi: 
         so = hk.luu_nien(n)["cung"].get(quai)
         if str(so) in sao:
             ra.append({"nam": n, "sao": so, "ly_do": [f"sao{so}"], "hien_tai": n == tu_nam, "mang": mang,
-                       "can_cu": [f"Lưu niên {n}: {sao[str(so)].replace('phía cửa chính', f'phía {noi} (quái {quai})')}"]})
+                       "can_cu": [_cc_pt(n, sao[str(so)], noi, quai)]})
     return ra
 
 

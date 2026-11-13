@@ -24,7 +24,7 @@ CHUA_XONG: dict[str, int] = {
     # (+ /v1/kb/status): sạch khi MỌI loại sạch → GĐ 11.
     "kb": 11,
     # GĐ 3 xong (2026-11-10): kb.trang.thap_than, kb.trang.nhat_chu, kb.trang.menh_nam.
-    "kb.trang.dau_hieu": 5, "kb.trang.que": 6,
+    "kb.trang.que": 6,
     "kb.trang.so": 7, "kb.trang.so_kep": 7, "kb.trang.cap_so": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7,
     "kb.trang.nam_ca_nhan": 7, "kb.trang.no_nghiep": 7, "kb.trang.la_bai": 7,
     "kb.trang.bo_vi": 8,
@@ -37,9 +37,9 @@ CHUA_XONG: dict[str, int] = {
     # GĐ 4 (agent E) xong: hoi.tuvi (hỏi đáp Tử vi: en_gloss._tuvi, hai lượt "bản Việt quyết", gói bằng chứng theo ngôn ngữ).
     # GĐ 4 (agent C) xong: tuvi.phi_hoa, tuvi.nhip_3_thang. tuvi.hop_tham chờ bản phủ en/tuvi_y_bo_sung.json (agent B, hộp cach_doc_them).
     # GĐ 5 — Phong thuỷ
-    "phongthuy": 5, "phongthuy.bo_cuc": 5, "phongthuy.cung_phi": 5, "phongthuy.do_huong": 5, "phongthuy.do_thi": 5,
-    "phongthuy.huyen_khong": 5, "phongthuy.luan_giai": 5, "phongthuy.menh_quai": 5, "phongthuy.thang_nay": 5,
-    "phongthuy.viec_tuan": 5, "hoi.phongthuy": 5,
+    # GĐ 5 (engine) xong: phongthuy, phongthuy.bo_cuc, phongthuy.cung_phi, phongthuy.do_huong, phongthuy.do_thi,
+    # phongthuy.huyen_khong, phongthuy.luan_giai, phongthuy.menh_quai, phongthuy.thang_nay, phongthuy.viec_tuan,
+    # kb.trang.dau_hieu. GĐ 5 (hỏi đáp) xong: hoi.phongthuy.
     # GĐ 6 — Kinh Dịch
     "kinhdich": 6, "kinhdich.hieu_cau": 6, "kinhdich.hoi": 6, "kinhdich.khoi_que": 6, "kinhdich.que_rieng": 6, "hoi.kinhdich": 6,
     # GĐ 7 — Thần số + Tarot đầy đủ

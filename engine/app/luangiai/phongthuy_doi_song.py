@@ -651,7 +651,7 @@ def _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem: dt.date) -> dict:
     if q_huong:
         from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
         mangs = cyn.kb.chuong("phongthuy").get("nam_nay") or []
-        theo = {m: cyn.phongthuy_nam(q_huong, nam, m, noi=f"cửa chính ({huong})") for m in mangs}
+        theo = {m: cyn.phongthuy_nam(q_huong, nam, m, noi=L("hoi.pt.cy.noi", "cửa chính ({h})", h=_h(huong))) for m in mangs}
         co = [m for m in mangs if theo[m]]
         if co:
             h_cy = cyn.hop_chuong(theo, kh.ma_mau("phongthuy", "nam_nay", "chu_y", "+".join(co), cyn.ma_ly_do(theo[co[0]][0])),

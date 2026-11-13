@@ -7,6 +7,13 @@ import type { BangChu } from "@/lib/chu-trang";
 const K = "Khung báo cáo";
 
 export const CHU_BAO_CAO = {
+  // SX-1 — khối "Sách xưa nói gì về lá số của bạn" (Tử vi, Bát tự). Câu sách + lời tóm ý do engine trả theo ngôn ngữ.
+  "sach_xua.tieu_de": { nhom: K, nhan: "Sách xưa: tiêu đề khối", mac_dinh: "Sách xưa nói gì về lá số của bạn", en: "What the classics say about your chart" },
+  "sach_xua.mo_ta": { nhom: K, nhan: "Sách xưa: lời dẫn ({so} = số câu)", mac_dinh: "{so} câu chép trong cổ thư ứng với đúng lá số này. Lời Việt là phần tóm ý của ban biên tập; bấm vào từng câu để xem nguyên văn.",
+    en: "{so} passages from the classical texts that match this chart. The English lines are our editors' summaries; open any card to see the original." },
+  "sach_xua.nguyen_van": { nhom: K, nhan: "Sách xưa: nút xem nguyên văn", mac_dinh: "Nguyên văn", en: "Original text" },
+  "sach_xua.chan": { nhom: K, nhan: "Sách xưa: dòng chân khối", mac_dinh: "Sách xưa viết cho người thời đó; đây là văn hoá để tham khảo và tự soi, không phải lời đoán trước điều gì sẽ xảy ra.",
+    en: "These books were written for readers of their own time. Treat them as culture and a mirror for reflection, not as a forecast of what will happen." },
   "muc.thuan": { nhom: K, nhan: "Mức: thuận", mac_dinh: "Thuận lợi", en: "Favourable" },
   "muc.can_bang": { nhom: K, nhan: "Mức: cân bằng", mac_dinh: "Cân bằng", en: "Balanced" },
   "muc.can_chu_dong": { nhom: K, nhan: "Mức: cần chủ động", mac_dinh: "Cần lưu ý", en: "Needs care" },

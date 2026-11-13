@@ -1126,8 +1126,9 @@ _KHUNG_HOANG_GD5 = _rx_en(
     r"(?:kill|hurt|harm|cut|cutting|hurting|harming|killing) (?:herself|himself|themselves)",
     r"(?:end|ending|take|taking) (?:his|her|their) (?:own )?life",
     r"(?:make|making) my death (?:painless|quick|peaceful|easy)|(?:painless|quick|peaceful) way to die",
-    r"(?:think|thinking|thought) (?:about|of) jumping\b.{0,60}|(?:window|balcony|floor|roof|ledge)\b.{0,60}(?:think|thinking|thought) "
-    r"(?:about|of) jumping",
+    r"(?:think|thinking|thought) (?:about|of) jumping\b.{0,60}(?:window|balcony|\d+\w* floor|roof|ledge|bridge|building)\b|"
+    r"(?:window|balcony|floor|roof|ledge|bridge)\b.{0,60}(?:think|thinking|thought) (?:about|of) jumping(?! (?:into|on|at) (?:the|a) "
+    r"(?:market|chance|opportunity|deal|trend|bandwagon))",
     r"(?:can t|cannot|can not|do not|don t) see (?:a|any) way out",
     r"(?:best|right|good|peaceful|quietest|ideal) (?:spot|place|room|corner|direction) (?:in (?:the|my|this) (?:house|home|flat) )?to die",
     r"(?:stop |keep )?wanting to die|(?:i |i still |i just |i really )(?:want|wanna) to die",
@@ -1136,9 +1137,10 @@ _KHUNG_HOANG_GD5 = _rx_en(
     r"husband) (?:take|have|get))",
     r"(?:where|how) (?:should|do|can) i (?:put|hang|tie|hide) (?:the |a |my )?(?:rope|noose)|(?:rope|noose)\b.{0,40}(?:not visible|hidden|"
     r"won t be seen|from the beam)",
-    r"how high (?:does|do|is|should|must) (?:the |my |a |this )?(?:balcony|window|floor|roof|ledge|building|bridge)\b.{0,40}(?:make sure|"
-    r"be sure|enough|certain)",
-    r"(?:this is|it s|today is|tonight is) my (?:last|final) (?:week|day|night|month|weekend)|decided (?:this|today|tonight) is (?:the|my) (?:last|end)",
+    r"how high (?:does|do|is|should|must) (?:the |my |a |this )?(?:balcony|window|floor|roof|ledge|building|bridge)(?! rail\w*| fence\w*)"
+    r"\b.{0,40}(?:make sure|be sure|certain)(?!.{0,40}(?:safe|safety|toddler|kid|child|baby|view))",
+    r"(?:this is|it s|today is|tonight is) my (?:last|final) (?:week|day|night|month|weekend)(?=\s*(?:[,.!?;]|$))|"
+    r"decided (?:this|today|tonight) is (?:the|my) (?:last|end)(?=\s*(?:[,.!?;]|$))",
     r"(?:i |i just |i only )?want (?:everything|it all|all of it|the pain) to (?:stop|end) (?:forever|for good|permanently)?(?=\s*(?:[,.!?;]|$))",
     r"(?:i am|i m) ready to go(?=\s*(?:[,.!?;]|$))",
     r"(?:she|he|they) (?:ll|will|would|is going to|s going to|says she ll|says he ll) (?:jump|kill (?:her|him|them)sel(?:f|ves))",
@@ -1179,7 +1181,7 @@ _NHA_NGUY = _rx_en(
     r"(?:smoke|sparks?|flames?) (?:\w+ ){0,2}(?:coming|came|pouring) (?:out )?(?:from|of|out of)|(?:sparks?|sparking) (?:from|in|at) (?:the )?"
     r"(?:plug|socket|outlet|wire|wiring|switch)",
     r"burning(?: \w+)? smell|smell of burning|(?:is |it s |are |keeps )sparking|smoke (?:is )?filling|full of smoke|filled with smoke",
-    r"fire (?:started|broke out|is spreading|spread)|started a fire|earthquake|(?:house|building|floor) is shaking",
+    r"fire (?:started|broke out|is spreading|spread)(?! in the (?:fireplace|fire pit|grill|bbq|stove|oven))|started a fire|earthquake|(?:house|building|floor) is shaking",
     r"(?:on fire|caught fire|catching fire|set (?:\w+ ){0,3}on fire|is burning|are burning|house fire|kitchen fire)",
     r"water (?:\w+ ){0,3}(?:in|into|through|from|pouring through|coming out of) (?:the |an |my )?(?:electrical |power |plug )?(?:socket|outlet|"
     r"sockets|outlets|switch|fuse ?box|wiring)",
