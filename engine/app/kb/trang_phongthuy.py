@@ -50,7 +50,11 @@ def _tieu_de(ten: str, tot: bool) -> str:
     ung = ([L("pt.dh.td.tot1", "{ten} trong phong thuỷ: ý nghĩa và cách giữ", ten=ten), L("pt.dh.td.tot2", "{ten}: ý nghĩa phong thuỷ", ten=ten)] if tot else
            [L("pt.dh.td.xau1", "{ten} có sao không? Ý nghĩa và cách xử lý", ten=ten), L("pt.dh.td.xau2", "{ten} có sao không? Cách xử lý", ten=ten),
             L("pt.dh.td.xau3", "{ten}: phong thuỷ nói gì", ten=ten)])
-    return next((x for x in ung if len(x) <= 70), ung[-1][:70])
+    vua = next((x for x in ung if len(x) <= 70), None)
+    if vua is None and not ngon_ngu.la_viet():
+        # Bản dịch: tên dài thì dùng chính tên (cắt ở ranh giới từ) — không cắt giữa chữ ("…what fen").
+        vua = ten if len(ten) <= 70 else ten[:70].rsplit(" ", 1)[0]
+    return vua if vua is not None else ung[-1][:70]
 
 
 def _quy_tac(ma: str) -> list[tuple[str, dict]]:
@@ -138,7 +142,7 @@ def trang_dau_hieu(ma: str, slug: str) -> dict:
         "loai": "dau_hieu", "slug": slug,
         "tieu_de": _tieu_de(ten, tot),
         "mo_ta": t._cat(L("pt.dh.mo_ta", "{ten}: {nguon} nói gì, nhìn theo đời sống hiện đại và việc nên làm theo 3 mức chi phí, bắt đầu "
-                          "từ việc 0 đồng.", ten=ten, nguon=nguon_y)),
+                          "từ việc 0 đồng.", ten=ten, nguon=nguon_y, gy=(m.get("goi_y") or "")[:1].lower() + (m.get("goi_y") or "")[1:])),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
         "nguon": [kb["_nguon"]],
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
