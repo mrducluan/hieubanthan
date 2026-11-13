@@ -150,3 +150,31 @@ Giới hạn kỹ thuật: công cụ đọc Drive của em cắt tệp lớn v�
 2. **Dương Trạch Tam Yếu** bản có chữ.
 3. Dương Trạch Thập Thư, Lỗ Ban Kinh (chưa gửi).
 4. Case, Papus: bản dưới 10 MB hoặc tách nhỏ; Papus em tự lấy từ archive.org.
+
+## 7. Đợt 3 (PT-NG3, 2026-11-13) — hai kho mã GitHub anh gửi cho phần Thẩm thị
+
+Anh gửi `xuanfu-web/dsh-metaphysics` (giấy phép MIT) và `voidforall/fengshui.skill` (không ghi giấy phép).
+
+**Hai kho này không chứa nguyên văn Thẩm Thị Huyền Không Học.** Cả hai là phần mềm lập bàn phi tinh, và tự ghi rõ:
+`fengshui.skill/references/sources.md` đánh dấu «沈氏玄空學 — chưa lấy được nguyên văn»; tài liệu đối chiếu của
+`dsh-metaphysics` dẫn bài viết trên mạng (163, CSDN, Zhihu) và ghi «chưa so hàng loạt với bàn của bên thứ ba».
+Vì vậy em **không nạp chúng như nguồn tri thức** — dùng làm **bộ đối chiếu độc lập** (như đã làm với lasotuvi cho Tử vi).
+Máy phiên không cho chạy mã ngoài, nên em đọc quy tắc trong mã rồi so bằng test của mình.
+
+| Hạng mục | Kết quả |
+|---|---|
+| Bảng thế tinh 24 sơn (khẩu quyết «子癸甲申貪狼一路行…») | khớp cả hai kho **24/24** (trước chỉ có 12/24 so được với Thanh Nang Áo Ngữ) |
+| Hạ quái: quy tắc thuận – nghịch (sơn cùng nguyên trong cung của sao vận; sao 5 theo chính sơn) | cùng quy tắc ở cả ba bản |
+| Cục vượng sơn vượng hướng, 9 vận × 24 sơn = 216 bàn | trùng bảng thông hành **9/9 vận** |
+| Thượng sơn hạ thuỷ vận 7, vận 8; vận 9 toàn song tinh | trùng |
+| Ba vận 20 năm từ 1864 | trùng |
+
+**Ba chỗ các bản KHÁC nhau** (ghi ở `fixtures/nguon/phongthuy_huyen_khong_bang.json`, engine chưa đổi gì):
+
+1. Ngưỡng kiêm hướng: engine và `fengshui.skill` 3°, `dsh-metaphysics` 4,5°.
+2. Thế quái tra thế tinh của sơn nào: engine và `fengshui.skill` tra **sơn gốc** (đúng cách đọc phổ biến của Thẩm thị);
+   `dsh-metaphysics` tra chính toạ / hướng sơn — bàn thế quái của kho này sẽ khác engine.
+3. Sao 5 nhập trung khi thế quái: engine thay bằng thế tinh của chính sơn; `fengshui.skill` không thay.
+
+Chỗ 2 và 3 chỉ nguyên văn Thẩm thị mới phân xử được → bàn thế quái vẫn mang cờ `chua_doi_chieu_oracle`.
+Phần còn thiếu của Thẩm thị (81 cặp sao, lời đoán từng cục, ví dụ bàn thế quái) **vẫn thiếu** sau đợt này.

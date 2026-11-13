@@ -12,6 +12,8 @@
 - [x] Đã gửi 7 tệp lên Drive (2026-11-12). Dùng được: Liber 78 (đủ), Bát Trạch Minh Kính bản dịch (tóm ý). Chi tiết: mục 6 của tài liệu.
 - [ ] **Thẩm Thị Huyền Không Học (沈氏玄空學)**: tệp anh gửi chỉ là bản xem thử vài trang của sách viết lại năm 2010 → cần **bản đủ** (nguyên tác
   4 / 6 quyển hoặc bản dịch Việt của Nguyễn Anh Vũ), PDF **có lớp chữ**, mỗi tệp **dưới 10 MB** (tách nhỏ nếu cần).
+  (2026-11-13) Hai kho GitHub anh gửi không có nguyên văn sách này — em chỉ dùng được làm bộ đối chiếu bảng (mục 7 tài liệu). Vẫn cần bản chữ của sách.
+- [ ] (Quyết định) Thế quái khi sao 5 nhập trung: giữ cách engine (thay bằng thế tinh của chính sơn) hay theo cách "sao 5 không thay"? Em đề xuất giữ tới khi có nguyên văn.
 - [ ] **Dương Trạch Tam Yếu (陽宅三要)**: tệp 91 MB là ảnh quét, không có chữ → cần bản có chữ (PDF chữ / Word / txt) hoặc bản dịch Việt gõ chữ.
 - [ ] Case *The Tarot* và Papus: tệp trên 10 MB bị cắt (Case chỉ đọc tới lá 2). Gửi lại bản dưới 10 MB hoặc tách 2–3 phần. (Papus em tự lấy từ archive.org.)
 - [ ] Chưa gửi: Dương Trạch Thập Thư (陽宅十書), Địa Lý Biện Chính bản có chú, Lỗ Ban Kinh (魯班經); chương Introduction của Mathers 1888.

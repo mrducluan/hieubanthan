@@ -197,3 +197,42 @@ def test_gui_cung_va_xep_hang_theo_bat_trach_minh_kinh():
     cat = {k for k, v in BTMK["xep_hang"].items() if v.endswith("cát")}
     assert cat == set(pt.CAT)
     assert {"bat_trach_minh_kinh"} <= set(KB["doi_chieu"]["doc_ban_dich"])
+
+
+# --------------------------------------------------------------------------- PT-NG3: đối chiếu chéo Huyền Không
+_HV = dict(zip("壬子癸丑艮寅甲卯乙辰巽巳丙午丁未坤申庚酉辛戌乾亥",
+               ["Nhâm", "Tý", "Quý", "Sửu", "Cấn", "Dần", "Giáp", "Mão", "Ất", "Thìn", "Tốn", "Tỵ", "Bính", "Ngọ", "Đinh",
+                "Mùi", "Khôn", "Thân", "Canh", "Dậu", "Tân", "Tuất", "Càn", "Hợi"]))
+
+
+def _bang_hk():
+    import json
+    from pathlib import Path
+    return json.loads((Path(__file__).parent.parent / "fixtures/nguon/phongthuy_huyen_khong_bang.json").read_text("utf-8"))
+
+
+def test_the_tinh_24_son_khop_bo_doi_chieu():
+    from app.calc import huyen_khong as hk
+    quyet = _bang_hk()["the_tinh_quyet"]
+    bang = {_HV[c]: int(n) for n, s in quyet.items() for c in s}
+    assert len(bang) == 24 and bang == hk.THE_TINH
+
+
+def test_vuong_son_vuong_huong_9_van_khop_bang_thong_hanh():
+    """216 bàn hạ quái (9 vận × 24 sơn): tập toạ sơn ra cục vượng sơn vượng hướng trùng bảng thông hành."""
+    from app.calc import huyen_khong as hk
+    bang = _bang_hk()["vuong_son_vuong_huong"]
+    for van in range(1, 10):
+        nam = 1864 + 20 * (van - 1)
+        ra = {s for s in _HV.values() if hk.trach_ban(nam, s)["cuc"] == "vuong_son_vuong_huong"}
+        assert ra == {_HV[c] for c in bang[str(van)]}, van
+
+
+def test_van_7_8_thuong_son_ha_thuy_va_van_9_song_tinh():
+    from app.calc import huyen_khong as hk
+    mong = {7: "甲巽巳庚乾亥", 8: "艮寅辰坤申戌"}
+    for van, s in mong.items():
+        nam = 1864 + 20 * (van - 1)
+        ra = {x for x in _HV.values() if hk.trach_ban(nam, x)["cuc"] == "thuong_son_ha_thuy"}
+        assert ra == {_HV[c] for c in s}, van
+    assert all(hk.trach_ban(2024, x)["cuc"].startswith("song_tinh") for x in _HV.values())
