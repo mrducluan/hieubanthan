@@ -93,7 +93,7 @@
 | Phong thuỷ | `phongthuy_doi_song.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_huyen_khong.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
 | Phong thuỷ | `phongthuy_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
-| Nhân tướng | `nhan_tuong_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | có câu trích sách nhưng chưa có kho nguồn |
+| Nhân tướng | `nhan_tuong_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-NT1: câu trích Băng Giám / Tâm Tướng Thiên / Linh Khu khớp kho nguồn `nhan_tuong_co_thu.json` (tests/test_kt_nt1_kho_nguon.py); Ma Y, Thần Tướng Toàn Biên, Thuỷ Kính chưa có kho nguồn |
 | Tarot | `tarot_kb.json` |  | Có nguyên văn đối chiếu | câu trích khớp Waite / Mathers / Book T; lớp Marseille, Thoth là tóm ý |
 | Thần số | `bo_sung_cap_so.json` |  | Ban biên tập soạn |  |
 | Thần số | `bo_sung_nam_ca_nhan.json` |  | Ban biên tập soạn |  |
