@@ -406,7 +406,9 @@ def cham_phongthuy(holdout: bool = False, in_sai: bool = False) -> dict:
             else:
                 dem["chan_nham"] += xl in CHAN
                 nhan = _nhan_pt(pl, r.get("bang_chung"))
-                ok = xl not in CHAN and (pl.get("loai") in _PT_KIEN_THUC + ("nam", "huyen_khong", "am_trach")
+                # câu kiến thức về một dấu hiệu / bố trí: trả bằng chính mục KB của dấu hiệu đó cũng đúng tuyến
+                ok = xl not in CHAN and ((pl.get("loai") in _PT_KIEN_THUC + ("nam", "huyen_khong", "am_trach")
+                                          or (pl.get("loai") == "bo_tri" and q["chu_de"] in nhan))
                                          if loai == "kien_thuc" else q["chu_de"] in nhan)
                 if not ok:
                     sai_nhan[f"{loai}/{q['chu_de']}"] += 1

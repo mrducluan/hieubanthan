@@ -16,7 +16,8 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints, Validation
 from app.calc import phongthuy as pt
 from app.kb import phongthuy_kb as kbp
 from app.kb import tu_dien
-from app import nhat_ky
+from app import ngon_ngu, nhat_ky
+from app.kb.loi import L
 from app.config import ENGINE_VERSION
 from app.hoidap import phongthuy as hoidap_pt
 from app.luangiai import phongthuy_bo_cuc as bo_cuc
@@ -56,6 +57,9 @@ def api_menh_quai(inp: SinhInput) -> dict:
     # UI-PT "la bàn sống": nghĩa + "dùng cho" của 8 du niên (KB) để web đọc hướng đang quay về theo thời gian thực.
     # Xếp theo tên: lặp thẳng qua `set` thì thứ tự khoá đổi theo hạt băm tiến trình (PYTHONHASHSEED).
     du_nien_y = {ten: {k: v for k, v in (kbp.du_nien(ten) or {}).items() if k in ("loai", "y_nghia", "dung_cho")} for ten in sorted(set(bang.values()))}
+    if not ngon_ngu.la_viet():
+        from app.luangiai import phongthuy_hien  # noqa: PLC0415
+        mq = {**mq, "co_canh_bao": phongthuy_hien.co_canh_bao(mq["co_canh_bao"])}
     return {"engine_version": ENGINE_VERSION, **mq, "bang_huong": bang,
             "huong_cat": [h for h, d in bang.items() if d in pt.CAT],
             "du_nien_y": du_nien_y,
@@ -83,10 +87,10 @@ def api_do_huong(inp: DoHuongInput) -> dict:
     nhiễu từ (thép, loa, máy tính) — luôn cho sửa tay và khuyên đo lại vài lần."""
     r = pt.do_huong(inp.do_huong)
     ra = {"engine_version": ENGINE_VERSION, **r,
-          "canh_bao_y": CANH_BAO_DO.get(r["canh_bao"]) if r["canh_bao"] else None,
-          "luu_y": ("Độ đo bằng điện thoại là độ từ (bắc từ), lệch bắc thật khoảng 1° ở Việt Nam — không đáng kể "
-                    "với 8 hướng, nhưng đáng kể khi sát ranh sơn. Đứng ở cửa chính, quay lưng vào nhà, giữ điện "
-                    "thoại nằm ngang, tránh xa xe, cột thép, loa.")}
+          "canh_bao_y": L(f"pt.do.{r['canh_bao']}", CANH_BAO_DO[r["canh_bao"]]) if r["canh_bao"] in CANH_BAO_DO else None,
+          "luu_y": L("pt.do.luu_y", "Độ đo bằng điện thoại là độ từ (bắc từ), lệch bắc thật khoảng 1° ở Việt Nam — không đáng kể "
+                     "với 8 hướng, nhưng đáng kể khi sát ranh sơn. Đứng ở cửa chính, quay lưng vào nhà, giữ điện "
+                     "thoại nằm ngang, tránh xa xe, cột thép, loa.")}
     if inp.sinh:
         s = inp.sinh.sinh()
         mq = pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"], s["moc_nam"])
@@ -141,9 +145,9 @@ def api_huong_ban_do(inp: HuongBanDoInput) -> dict:
     do = mb.bearing(*inp.tam, *inp.truoc)
     ra = api_do_huong(DoHuongInput(do_huong=do, sinh=inp.sinh))
     ra["khoang_cach_m"] = kc
-    ra["luu_y"] = ("Hướng lấy từ hai điểm trên bản đồ là hướng theo bắc thật (không lệch từ), sai số khoảng 1–2° khi hai điểm cách "
-                   "nhau trên 10 m. " + ("Hai điểm quá gần (dưới 5 m) — chọn điểm trước mặt xa hơn cho chắc. " if kc < 5 else "")
-                   + "Vẫn nên đối chiếu với la bàn ở cửa nếu đo được.")
+    ra["luu_y"] = (L("pt.bd.luu_y_1", "Hướng lấy từ hai điểm trên bản đồ là hướng theo bắc thật (không lệch từ), sai số khoảng 1–2° khi hai điểm cách "
+                     "nhau trên 10 m. ") + (L("pt.bd.qua_gan", "Hai điểm quá gần (dưới 5 m) — chọn điểm trước mặt xa hơn cho chắc. ") if kc < 5 else "")
+                   + L("pt.bd.luu_y_2", "Vẫn nên đối chiếu với la bàn ở cửa nếu đo được."))
     return ra
 
 
@@ -155,8 +159,8 @@ def api_do_thi(y_dinh: str) -> dict:
     g = do_thi.theo_y_dinh(y_dinh)
     if not g:
         raise HTTPException(404, detail="Không có ý định này trong đồ thị")
-    g["dau_hieu_hoi"] = {x: bo_cuc.DAU_HIEU[x]["hoi"] for x in g["dau_hieu"] if x in bo_cuc.DAU_HIEU}
-    g["ten_phong"] = {p: bo_cuc.TEN_PHONG[p] for p in g["phong"]}
+    g["dau_hieu_hoi"] = {x: bo_cuc.hoi(x) for x in g["dau_hieu"] if x in bo_cuc.DAU_HIEU}
+    g["ten_phong"] = {p: bo_cuc.ten_phong(p) for p in g["phong"]}
     return {"engine_version": ENGINE_VERSION, **g, **do_thi.meta()}
 
 
@@ -212,8 +216,8 @@ def api_doc_anh(inp: DocAnhInput) -> dict:
 @router.get("/bo-cuc/danh-muc")
 def api_bo_cuc_danh_muc() -> dict:
     """Danh mục cho form khảo sát: phòng, phương, dấu hiệu quan sát được (câu hỏi), vật dụng đo hướng."""
-    return {"phong": bo_cuc.TEN_PHONG, "cung": list(bo_cuc.Cung9.__args__),
-            "dau_hieu": [{"ma": k, **v} for k, v in bo_cuc.DAU_HIEU.items()],
+    return {"phong": {p: bo_cuc.ten_phong(p) for p in bo_cuc.TEN_PHONG}, "cung": list(bo_cuc.Cung9.__args__),
+            "dau_hieu": [{"ma": k, **v, "hoi": bo_cuc.hoi(k)} for k, v in bo_cuc.DAU_HIEU.items()],
             "vat_huong": {k: v["tieu_de"] for k, v in bo_cuc.kb.bo_cuc()["huong_vat"].items()}}
 
 
@@ -267,6 +271,11 @@ class HuyenKhongInput(BaseModel):
         return self
 
 
+def _ten_son(son: str) -> str:
+    from app.kb import ten  # noqa: PLC0415
+    return ten.ten("son", son)
+
+
 def _bay_gio_utc() -> _dt.datetime:
     return _dt.datetime.now(_dt.timezone.utc).replace(tzinfo=None)
 
@@ -282,9 +291,10 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
         s = hk.son_tu_do(inp.do)
         toa = s["son"]
         if s["canh_bao"] == "khong_vong":
-            canh_bao.append({"loai": "khong_vong", "chi_tiet": f"Toạ {s['do']}° nằm đúng ranh giới hai sơn (không vong) — nên đo lại; bàn có thể sai hoàn toàn."})
+            canh_bao.append({"loai": "khong_vong", "chi_tiet": L("pt.hk.khong_vong", "Toạ {do}° nằm đúng ranh giới hai sơn (không vong) — nên đo lại; bàn có thể sai hoàn toàn.", do=s['do'])})
         elif s["canh_bao"] == "kiem_huong":
-            canh_bao.append({"loai": "kiem_huong", "chi_tiet": f"Toạ lệch {abs(s['lech'])}° so với chính {toa} (kiêm hướng, quá 3°) — lập THẾ QUÁI theo khẩu quyết Thẩm thị; kèm cục của hạ quái để so sánh."})
+            canh_bao.append({"loai": "kiem_huong", "chi_tiet": L("pt.hk.kiem_huong", "Toạ lệch {lech}° so với chính {son} (kiêm hướng, quá 3°) — lập THẾ QUÁI theo khẩu quyết Thẩm thị; kèm cục của hạ quái để so sánh.",
+                                                                     lech=abs(s['lech']), son=_ten_son(toa))})
     the_quai = inp.the_quai if inp.the_quai is not None else any(c["loai"] == "kiem_huong" for c in canh_bao)
     try:
         b = hk.trach_ban(inp.nam_xay, toa, the_quai=the_quai)

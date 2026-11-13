@@ -1114,8 +1114,9 @@ def _bo_phu_dinh(kd: str) -> str:
 _KHUNG_HOANG_GD5 = _rx_en(
     r"so (?:that )?(?:i )?(?:just |can |will |would )?(?:not|never|do not|won t|will not) wake up(?! (?:early|late|on time|at|tired|"
     r"refreshed|with|for|in the))",
-    r"(?:do not|don t|did not|didn t|never) (?:want|wanna|wish) to wake up(?! (?:early|so early|at|on time|in the morning|for|before|"
-    r"tired|groggy|with))",
+    r"(?:do not|don t|did not|didn t|never) (?:want|wanna|wish) to wake up(?! (?:early|so early|at(?! all)|on time|in the morning|for|"
+    r"before|tired|groggy|with))",
+    r"(?:peaceful|quiet|calm)\b.{0,40}(?:leave|write) (?:a |my )?(?:note|letter) (?:for|to) (?:my )?(?:family|kids|children|wife|husband|parents)",
     r"(?:done|tired|finished|through) (?:with )?trying to (?:live|stay alive|keep going|keep living|be alive)",
     r"(?:wanting|want|wants|wanted|wish|wishing) to (?:just )?(?:disappear|vanish|cease to exist) (?:forever|for good|permanently)",
     r"(?:meant|supposed|destined|fated|going) to die (?:\w+ ){0,4}(?:anyway|anyways|so why (?:fight|bother|try)|why (?:fight|bother|try))",
@@ -1160,7 +1161,7 @@ _NHA_NGUY = _rx_en(
     r"(?:on fire|caught fire|catching fire|set (?:\w+ ){0,3}on fire|is burning|are burning|house fire|kitchen fire)",
     r"water (?:\w+ ){0,3}(?:in|into|through|from|pouring through|coming out of) (?:the |an |my )?(?:electrical |power |plug )?(?:socket|outlet|"
     r"sockets|outlets|switch|fuse ?box|wiring)",
-    r"(?:ceiling|roof|wall) (?:is |are )?(?:\w+ )?(?:cracking|sagging|caving|collapsing|bulging|coming down|falling)",
+    r"(?:ceiling|roof|wall)(?: \w+){0,4} (?:is |are )?(?:\w+ )?(?:cracking|sagging|caving|collapsing|bulging|coming down|falling)",
     r"(?:railing|balustrade|banister|handrail) (?:is |are )?(?:loose|broken|wobbly|coming off)",
     r"(?:headache|dizz\w*|nause\w*|vomit\w*|drowsy)\b.{0,80}(?:gas heater|heater|boiler|generator|stove|fireplace|charcoal)|"
     r"(?:gas heater|heater|boiler|generator|charcoal)\b.{0,80}(?:headache|dizz\w*|nause\w*|vomit\w*|drowsy)",

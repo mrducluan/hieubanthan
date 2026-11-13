@@ -66,7 +66,10 @@ _BO_TRI: list[tuple[str, str]] = [
     (r"\b(temple|church|pagoda|shrine|mosque)\b", "gan chua"),
     (r"dead ?-? ?end|cul ?-? ?de ?-? ?sac|no through road", "nha o cuoi ngo cut"),
     (r"(lower than|below) (the )?(road|street)|step down into|sunken (house|living)", "nha thap hon mat duong"),
-    (r"\b(dark|gloomy|damp|mou?ldy|mildew|musty|humid)\b", "nha toi am moc"),
+    (r"\b(dark|gloomy|damp|mou?ldy|mildew|musty|humid|water stains?|drip\w*|leak\w*)\b", "nha toi am moc"),
+    (r"(no|without) (a |any )?(mountain|hill|backing|support) (at |behind )?|slope\w* (going )?(down )?behind|behind (it|the house) slopes?",
+     "thanh long bach ho huyen vu"),
+    (r"\b(water feature|fountain)\b", "be ca"),
     (r"\bl ?-? ?shaped\b|missing (a |the )?(\w+ )?corner|(irregular|odd) (shaped )?(floor ?plan|house)|u ?-? ?shaped", "nha chu l thieu goc"),
     (r"(sharp|pointed|pointy) (corner|edge|column|pillar)|poison arrow|(roof|corner|edge|building).{0,30}points? (right |straight )?at",
      "goc nhon chia vao nha"),
@@ -99,7 +102,7 @@ _BO_TRI: list[tuple[str, str]] = [
     (r"\b(kids?|children|child|son|daughter|boys|girls|baby|nursery|cot|crib|bunk beds?|toddler)\b", "phong tre"),
     (r"\b(elderly|old|aging|ageing) (father|mother|parents?|dad|mum|mom)|grand(ma|pa|mother|father|parents)", "phong nguoi gia"),
     (r"\b(argu\w*|fight\w*|quarrel\w*|bicker\w*|tension)\b", "hay cai nhau"),
-    (r"\b(single|love|romance|romantic|relationship|marriage|married|partner|husband and i|wife and i|mandarin ducks?|"
+    (r"\b(single|love life|in love|find love|romance|romantic|relationship|marriage|married|partner|husband and i|wife and i|mandarin ducks?|"
      r"couple|ex|separate mattresses|peach blossom)\b", "phong ngu vo chong tinh duyen"),
     (r"\b(apartment|condo|condominium|flat|high ?-? ?rise|unit|hdb|studio)\b", "can ho chung cu"),
     (r"\bwell\b(?! (being|lit|ventilated|designed|kept|known|done|maintained))", "gieng cu"),
@@ -196,7 +199,7 @@ def gloss(cau: str) -> str:
                     r"double (8|eight|9|nine)|period [1-9]|annual stars?|monthly (flying )?stars?|(5|five) yellow|wu huang|"
                     r"(2|two) black|illness star|sickness star|robbery star|(7|seven) red|(9|nine) purple|(8|eight) white|"
                     r"(1|one) white|(6|six) white|(3|three) jade|(4|four) green|quarrel\w* star|tai sui|grand duke|three killings|"
-                    r"san sha|year breaker|\b2 5 combination|star [1-9]|[1-9] star)\b", t)
+                    r"san sha|year breaker|\b2 5 combination|star [1-9]|[1-9] star|(which|what) stars?)\b", t)
     nam_moc = en_gloss._moc(t)
     co_nam = bool(nam_moc) or bool(re.search(r"\b(this|next|coming) year\b|\byear ahead\b", t))
     if re.search(r"\bnext year\b|\bcoming year\b", t):
@@ -230,6 +233,15 @@ def gloss(cau: str) -> str:
     if re.search(r"\b(grave|graves|tomb|burial|bury|buried|ancestral (plot|tomb|grave)|cemetery plot|columbarium|niche)\b", t) and \
             not re.search(r"\b(behind|near|next to|across|opposite|view)\b", t):
         return "mo phan dat mo"
+    # 2b. sức khoẻ theo năm → năm nên chú ý (SK-1), không phải tuổi làm nhà
+    if re.search(r"\b(health|sick|ill|illness|sleep\w*)\b", t) and re.search(r"\b(year|years|when)\b", t):
+        ra.append("suc khoe nam nao nen chu y")
+        if huong:
+            ra.append(f"phong ngu phia {huong[0]}")
+        return " ".join(ra + nguoi)
+    # 2c. tín ngưỡng / nghi lễ / phong thuỷ có cần không → giải thích chung
+    if re.search(r"\b(christian|muslim|catholic|religio\w*|faith|bless\w*|ritual|ceremony|superstition)\b", t):
+        return "phong thuy co khoa hoc co that khong"
     # 3. năm làm nhà / mua nhà / dọn nhà (tuổi làm nhà)
     if re.search(r"\b(good|right|best|lucky|auspicious) (year|time|month|date|day)s?\b|\bkim lau\b|\bwhich year\b|\bwhen should\b", t) and \
             re.search(r"\b(build|building|buy|buying|purchase|renovat\w*|move|moving|property|house|home|flat|apartment)\b", t):
@@ -274,6 +286,10 @@ def gloss(cau: str) -> str:
     nha_huong = bool(re.search(r"\b(house|home|flat|apartment|unit|condo|townhouse|place|property|door|units?|options?)\b.{0,25}"
                                r"\b(faces?|facing|face)\b|\b(faces?|facing)\b.{0,5}\b(house|home|flat)\b|-?facing (house|home|flat|unit)|"
                                r"facing direction|(house|home|flat|unit) (is )?(north|south|east|west)", t))
+    if dn or kua:
+        bt = [x for x in bt if x not in ("ban lam viec", "phong tre", "cua hang van phong", "can ho chung cu")]
+    if kua and not huong and not dn:
+        ra.append("cung phi cua toi huong tot huong xau")
     if dn:
         ra.append(" ".join(dn) + (" cua toi la huong nao co xau khong hop voi toi" if ca_nhan else " la gi y nghia"))
     if re.search(r"\b(lucky|good|best|favou?rable|auspicious|bad|unlucky|worst|four|4) directions?\b|\bmy directions\b|"
@@ -292,7 +308,7 @@ def gloss(cau: str) -> str:
         ra.append(f"{vat} nao hop voi toi")
     ra += bt
     # 9. nỗi lo theo mảng (CY-1)
-    if re.search(r"\b(money|wealth|finances?|financial\w*|income|savings|cash flow|rich|prosper\w*|cash)\b", t) and \
+    if re.search(r"\b(money|wealth|finances?|financial\w*|income|savings|cash flow|rich|prosper\w*|cash|side hustle|hustle)\b", t) and \
             not any(x == "ket sat" for x in bt):
         ra.append("tien bac co nen chu y")
     if re.search(r"\b(health|sick|ill|illness|sleep\w*|insomnia|tired|colds?|energy)\b", t) and \
