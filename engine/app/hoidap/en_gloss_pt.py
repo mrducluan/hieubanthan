@@ -54,6 +54,9 @@ _BO_TRI: list[tuple[str, str]] = [
      r"(stair|stairs|staircase).{0,30}(bedroom|room) door", "phong ngu sat cau thang"),
     (r"(front|main) (door|entrance).{0,40}(back|rear) door|(back|rear) door.{0,40}(front|main) door|doors? (are )?in a straight line",
      "cua chinh doi dien cua sau"),
+    (r"\bdoors?\b.{0,30}\b(face|faces|facing|opposite|across from|line up with|in line with) (each other|one another)|"
+     r"\bdoor\b.{0,20}\b(faces|facing|opposite|across from|directly across from)\b.{0,15}\b(another|other|second|the next|a) "
+     r"(\w+ )?door\b|\bdoor to door\b", "cua doi nhau"),
     (r"(door|entrance).{0,40}(balcony|window|glass)|see (straight )?(through|out) (to|the) (balcony|window)", "cua chinh thang ban cong"),
     (r"t ?-? ?junction|road (that )?(runs|points|leads|coming|heads) (straight )?(at|to|into|towards)|"
      r"road running (straight )?(into|at)|end of a (long |straight )?road", "duong dam thang vao nha"),
@@ -111,6 +114,13 @@ _BO_TRI: list[tuple[str, str]] = [
      r"crystals?|worth buying|does (it|this|that|they) (really )?work", "hoa giai huong xau"),
 ]
 _THUONG_NHO = r"(?:(?:my|our|the|this|a) )?"
+# Tên sao năm / hạn năm phương (Huyền Không lưu niên, Thái Tuế…) → tên Việt không dấu (chỉ để bộ phân loại thấy tên sao).
+# Ngũ Hoàng không thêm: loại "nam" đã kèm mục giải thích Ngũ Hoàng, thêm tên sẽ lặp đoạn.
+_SAO_NAM: list[tuple[str, str]] = [
+    (r"\b(2|two) black|illness star|sickness star", "nhi hac"),
+    (r"\b(7|seven) red|robbery star", "that xich"), (r"\b(3|three) jade|quarrel\w* star", "tam bich"),
+    (r"\btai sui|grand duke", "thai tue"), (r"\byear breaker|sui po", "tue pha"), (r"three killings|san sha", "tam sat"),
+]
 
 
 def _chuan(cau: str) -> str:
@@ -217,7 +227,9 @@ def gloss(cau: str) -> str:
         if tinh_ban:
             ra.append(f"huyen khong phi tinh van {van}" if van else "huyen khong phi tinh")
             return " ".join(ra)
-        ra.append("phi tinh " + (" ".join(nam_moc) or "nam nay") + " sao nao phia nao nen tranh")
+        # Không dùng cụm "sao nào": sau "năm nay" nó khớp câu hỏi SAO HẠN theo tuổi (`chung.SAO_HAN_KW`) → La Hầu…
+        ra.append("phi tinh " + (" ".join(nam_moc) or "nam nay") + " phia nao nen tranh")
+        ra += [vn for mau, vn in _SAO_NAM if re.search(mau, t)]
         if huong:
             ra.append(f"phia {huong[0]}")
         if re.search(r"\b(renovat\w*|dig\w*|construction|build\w*|pond|break ground|knock\w*|drill\w*)\b", t):
