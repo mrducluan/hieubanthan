@@ -2,7 +2,7 @@
 
 > Thước đo tiến độ DUY NHẤT của `docs/PROMPT-EN-TOAN-BO.md`. Cập nhật sau mỗi commit đáng kể. Phiên bị ngắt: đọc tệp này +
 > `git log` rồi làm tiếp đúng chỗ.
-> Cập nhật lần cuối: 2026-11-11 (GĐ 0–2 đã merge qua #251; GĐ 3 Bát tự xong, chờ duyệt PR — mục 3d, câu hỏi mở ở mục 6).
+> Cập nhật lần cuối: 2026-11-13 (GĐ 3 đã merge qua #256; GĐ 4 Tử vi xong, GĐ 5 Phong thuỷ engine + hỏi đáp xong, web đang làm — mục 3e, 3f; hỏi đáp lai mục 6.4).
 
 ## 0. Trạng thái giai đoạn
 
@@ -11,9 +11,9 @@
 | 0 | Kiểm kê + golden | **xong** (2026-11-10) | golden bản Việt 10.509 lượt gọi (chụp lại sau khi merge main #246–#249), ổn định 2 lần chạy liên tiếp; khung test 5.2 chạy |
 | 1 | Nền web (rewrite, catalog nhiều ngôn ngữ, khung đầy đủ) | **xong** (PR #251) | khung, catalog, báo cáo + hỏi đáp chung song ngữ; 7 URL `/en` cũ chuyển hệ một-component trong giai đoạn từng mảng (mục 3b) |
 | 2 | Nền engine (tên riêng, `L()` cho khuôn chung, `slug_en`) | **xong phần nền** (mục 3c) | 7 nhóm route danh mục sạch; khuôn chuyên mảng (`truc_quan`, `mo_dau`, căn cứ `chu_y_nam`/`suc_khoe_nam`/`luu_y_mang`) làm cùng mảng |
-| 3 | Bát tự | **xong — chờ duyệt PR** (2026-11-11) | 5 nhóm route sạch; `/en/bazi` + 3 cụm kiến thức mở; hỏi đáp tiếng Anh (mục 3d) — câu hỏi mở: bộ dò khủng hoảng tiếng Anh (mục 6) |
-| 4 | Tử vi | chưa | 12 |
-| 5 | Phong thuỷ | chưa | 11 |
+| 3 | Bát tự | **xong** (PR #256) | 5 nhóm route sạch; `/en/bazi` + 3 cụm kiến thức mở; hỏi đáp tiếng Anh (mục 3d) — câu hỏi mở: bộ dò khủng hoảng tiếng Anh (mục 6) |
+| 4 | Tử vi | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/zi-wei-dou-shu` + 6 cụm kiến thức; hỏi đáp tiếng Anh (mục 3e) |
+| 5 | Phong thuỷ | **engine + hỏi đáp xong**, web đang làm | 12 nhóm route sạch (gồm `kb.trang.dau_hieu`, `hoi.phongthuy`) — mục 3f |
 | 6 | Kinh Dịch | chưa | 6 |
 | 7 | Thần số + Tarot đầy đủ | chưa | 18 |
 | 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | chưa | 26 |
@@ -21,7 +21,7 @@
 | 10 | CMS + Blog + pháp lý + hub | chưa | |
 | 11 | QC tổng | chưa | |
 
-Số nhóm route = số khoá còn trong `CHUA_XONG` của `engine/tests/test_dau_ra_en.py` (hiện **90**). Làm xong route nào, test
+Số nhóm route = số khoá còn trong `CHUA_XONG` của `engine/tests/test_dau_ra_en.py` (hiện **67**, 2026-11-13). Làm xong route nào, test
 tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2026-11-10) thêm 4 nhóm: `thanso.tuan`, `thanso.hom_nay_hai` (GĐ 7), `push.tuan` (GĐ 9), `kb.chuyen_gia` (GĐ 10) → **94**.
 
 ## 1. Quyết định của chủ dự án (hỏi một lần, 2026-11-10)
@@ -238,6 +238,48 @@ Kết luận đo: mỗi bộ độc lập mới vẫn tìm ra câu khủng hoả
 bộ dò dựa trên luật có trần với tiếng Anh tự do. Đã có lưới an toàn (dòng cố định) + tầng mềm; quyết định mở hỏi đáp bản Anh
 cho người dùng thật cần chủ dự án (mục 6).
 
+## 3e. Giai đoạn 4 — Tử vi (2026-11-11 → 13)
+
+- **Engine**: lớp hiển thị `luangiai/tuvi_hien.py` (CALC không đọc ngôn ngữ); mẫu câu `en/loi/tuvi.json`, `tuvi_v2.json`,
+  `tuvi_doi_song.json`, `trang_tuvi.json`, `hoi_tuvi.json`, `sach_xua_tuvi.json`; bản phủ `en/tuvi_kb.json` (gồm 74 sao nhỏ +
+  52 mục phụ tinh × cung), `tuvi_doi_song_kb`, `tuvi_y_bo_sung`, `tuvi_sao_luu_kb`, `tuvi_cach_cuc` (76 cách, cổ ca pinyin
+  "editorial translation"), `tuvi_phi_hoa_kb`, `tuvi_hai_nguoi_kb`, `bo_sung_hoa_cung`, `bo_sung_sao`, `bo_sung_cung`,
+  `tuvi_co_thu`, `tuvi_cung_sao_menh_kb`, `su_kien_kb`. `ten.muc()` nhận hai kiểu bỏ dấu (Thuỷ/Thủy, Hoả/Hỏa, Bát Toạ/Tọa).
+  Trang `sao_cung` bản Anh có ý chính rút từ chính trang tiếng Anh (`trang_tuvi.y_chinh_en`). `sach_xua` bản Anh: nguyên văn Hán
+  giữ nguyên + tóm ý bản phủ. `NguoiKiaInput.mui_gio` (Xem lá số 2 người, người kia sinh nước ngoài).
+- **Sửa cả hai ngôn ngữ (anh duyệt 2026-11-12)**: câu hỏi tiền chỉ nhận ý "đọc thêm" về tiền → golden `hoi_tuvi` đổi đúng
+  2/10.509 lượt (`hhq01487`, `d_tv026`).
+- **Hỏi đáp tiếng Anh** (`hoidap/tuvi.py` hai lượt, `nguoi_than: bool`): bộ `en/tuvi_dev.jsonl` (260) định tuyến 98,4 %, an toàn
+  100 %; **đóng băng `tuvi_holdout.jsonl` (200)**: định tuyến 82,6 %, khủng hoảng 14/26, cấp cứu 6/12, từ chối 16/18, mốc năm
+  33/35, chữ Việt / 500 = 0 → trần của luật, dẫn tới quyết định hỏi đáp lai (mục 6.4).
+- **Web**: `/en/zi-wei-dou-shu` + 6 cụm (main stars, palaces, star in palace, Four Transformations, sample charts, classics);
+  catalog `lib/chu/tu-vi.ts` (~420 khoá); chữ độ sáng M/W/D/L/P/B/X + chú giải; chọn nước → thành phố ở hồ sơ người thân /
+  hai người; `MucLucChuong` sửa vạch cuộn (áp cho cả bản Việt); `SachXuaNoi` đọc catalog báo cáo. E2E `en-zi-wei.spec.ts` 15/15.
+- **Review**: code độc lập (HIGH `_KHONG_TU_HAI` nuốt khủng hoảng thật — đã sửa + test khoá) + UX 3 vai (chữ Việt lọt, lỗi tiếng
+  Việt, aria, ngữ pháp câu ghép, đại từ lá số người thân, định dạng ngày) — đã sửa.
+- Còn: 37/168 trang sao-ở-cung bản Anh phần riêng < 30 % (quyết noindex ở web khi đo Search Console); đoạn trùng chữ trong
+  `tuvi_doi_song._chuong` bản Anh (thấp).
+
+## 3f. Giai đoạn 5 — Phong thuỷ (2026-11-13, đang)
+
+- **Engine** (12 nhóm route sạch: `phongthuy`, `.bo_cuc`, `.cung_phi`, `.do_huong`, `.do_thi`, `.huyen_khong`, `.luan_giai`,
+  `.menh_quai`, `.thang_nay`, `.viec_tuan`, `kb.trang.dau_hieu`, `hoi.phongthuy`): lớp hiển thị `luangiai/phongthuy_hien.py`;
+  `en/loi/phongthuy.json` (~300 mã `pt.*`), bản phủ `phongthuy_kb`, `phongthuy_huyen_khong`, `phongthuy_doi_song`,
+  `phongthuy_do_thi`, `bo_sung_dau_hieu`, `tuoi_dan_gian_kb` (kim lâu, hoang ốc, tam tai, hạn năm — phần còn lại GĐ 8);
+  `ten_en` thêm 24 sơn, cục Huyền Không, trạng thái sao, "Middle" (Trung tâm).
+- **Hỏi đáp**: `hoidap/en_gloss_pt.py`, `en/loi/hoi_phongthuy.json`; an toàn tiếng Anh thêm khủng hoảng gắn nhà cửa + **nguy hiểm
+  trong nhà** (`an_toan.nha_nguy_hiem`: gas, CO, khói/điện, cháy, trần nứt, lan can, trẻ nuốt vật nhỏ → lời "ra chỗ thoáng,
+  gọi cấp cứu"); từ chối chọn giới tính thai, tuyển người theo năm sinh, đoán ngoại tình, dùng gương/dao hại người.
+  Số: dev (240) định tuyến 19 → 95,4 %, khủng hoảng 31/31, cấp cứu 14/14, từ chối 22/22, chặn nhầm 0; **đóng băng (180)**
+  định tuyến 70 %, khủng hoảng 11/23, cấp cứu 7/11, từ chối 11/16, chặn nhầm 1; chữ Việt / 500 = 0. Bản Việt 0 lệch.
+- **Còn**: web `/en/feng-shui` + cụm dấu hiệu (đang làm); 8 tình huống bố trí chưa có mục KB (TV đối cửa, bếp đảo, giày dép
+  chắn cửa, đầu giường sát WC, xương rồng, cửa mở vào tường, phòng ký túc xá); "mua nhà năm sau" đang trả bằng tuổi làm nhà (như
+  bản Việt); `phongthuy_tuoi.tuoi()` / `tuoi_gop()` (route cũ) chưa dịch thân bài; thống nhất "Seven Red / 7 Red", "main door /
+  front door" giữa `chu_y_kb` và `ten_en`.
+- **Thuật ngữ cần người bản xứ duyệt**: Kua (personal trigram), East/West Group, 24 sơn dạng "Zi (N2)", trạng thái sao timely /
+  growing / retreating / fading / dormant, Kim Lau / Hoang Oc / Tam Tai (phiên âm), Three Disasters, Year Breaker, Three Killings,
+  Tai Sui, "Door – master – stove", "the stove's control side".
+
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
 1. ~~**Engine không tất định giữa các tiến trình**~~ — **ĐÃ SỬA**: hai chỗ lặp qua `set` rồi đưa ra đầu ra — `kb/tu_dien._mau`
@@ -377,3 +419,7 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
   Di, Chu Hy) ở bài đọc quẻ + trang quẻ, loại tượng tám quái ở câu trả lời Mai Hoa, nghĩa sao nhỏ `cung[].nghia_sao_nho` ở lá số Tử vi.
   Bản Anh **chưa có** các trường này (engine chỉ trả khi `ngon_ngu.la_viet()`), nên khung dữ kiện lệch ở `tuvi.an_sao`, `tuvi.la_so_mau`
   (→ chuyển thể ở GĐ 4) và `kb.trang.que`, `kinhdich.hoi` (→ GĐ 6) — đã ghi vào `KHUNG_CHUA_XONG`. Golden đầu ra bản Việt sinh lại có chủ đích.
+- **2026-11-11 → 13 — GĐ 4 Tử vi**: engine 12 nhóm route, hỏi đáp tiếng Anh + bộ dev/đóng băng, web `/en/zi-wei-dou-shu` + 6
+  cụm, review code + UX 3 vai; anh duyệt sửa hai ngôn ngữ (golden đổi 2 lượt); gộp main (KT-TT4…SX-1: sao nhỏ, sách xưa, bổ sung
+  sao/cung — đã chuyển thể).
+- **2026-11-13 — hỏi đáp lai** (mục 6.4) + **GĐ 5 Phong thuỷ** engine + hỏi đáp (mục 3f).
