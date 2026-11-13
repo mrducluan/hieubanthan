@@ -425,3 +425,18 @@ Anh duyệt đề xuất ở mục 10.11.
 - **Mã đầu đới kiếm**, **Lộc Mã bội ấn**: giữ cách hiểu đang lưu hành ở sách Việt, vẫn gắn `khac_dieu_kien` ("sách chép khác").
 - Đổi kết quả nhận diện trên lá số → **`ENGINE_VERSION` 0.1.9**; golden cách cục 1.000 lá + golden đầu ra bản Việt sinh lại có chủ đích.
 
+### 10.13 Nhân tướng: kho nguồn đợt 1 và câu trích sai (KT-NT1, 2026-11-13)
+
+- **Kho nguồn** `engine/fixtures/nguon/nhan_tuong_co_thu.json` (dựng bằng `scripts/nap_nhan_tuong_co_thu.py` từ Wikisource tiếng
+  Trung, `can_doi_chieu: true`): 冰鑑 Băng Giám (7 chương), 心相篇 Tâm Tướng Thiên (bản giản thể), 靈樞經 · 五色第四十九 (bản Tứ khố).
+- **Đối chiếu 11 câu trích của KB ghi ba sách này: chỉ 1 câu có thật** («一身精神，具乎兩目»). 10 câu kia là câu phú tự đặt rồi gán
+  tên sách, kể cả cả 3 câu ghi Tâm Tướng Thiên. Đã sửa:
+  - 8 câu thay bằng câu CÓ trong sách và hợp ý mục (Băng Giám: «光焰不發，珠玉與瓦礫同觀», «肥不熊餐，瘦不鵲寒», «靜若含珠，動若水發»,
+    «欲辨邪正，先觀動靜», «在面以眉骨、顴骨為主», «始於丹田，發於喉»; Tâm Tướng Thiên: «心者貌之根，审心而善恶自见»; Linh Khu:
+    «下極者，心也»). Mỗi câu có trường `han` (nguyên văn) để test so.
+  - 2 câu bỏ hẳn (nếp dọc Ấn Đường, Pháp Lệnh): sách không bàn chuyện này.
+  - Lời đời thường đi kèm sửa cho khớp, ví dụ Sơn Căn chỉ còn "tim mạch" vì Linh Khu không nói tiêu hoá.
+- Test `engine/tests/test_kt_nt1_kho_nguon.py`: câu trích ghi một trong ba sách phải có `han` khớp nguyên văn (bỏ dấu câu).
+- **Chưa kiểm**: 17 câu ghi Ma Y Thần Tướng / Thần Tướng Toàn Biên / Thuỷ Kính. Tỉ lệ sai ở đợt này cho thấy phần lớn chúng cũng sẽ
+  sai, nên cần bản quét để đối chiếu (danh sách sách ở `docs/VIEC-CUA-ANH.md` mục KT-NT1).
+

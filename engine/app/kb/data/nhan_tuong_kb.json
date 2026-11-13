@@ -1245,7 +1245,7 @@
    "tang": null,
    "hanh": null,
    "he": null,
-   "y": "'Sắc quý minh nhuận, bất quý nộn bạch': quý ở sáng và ẩm từ bên trong, không phải ở trắng.",
+   "y": "Sách xưa ví mặt không toả sáng thì ngọc cũng như sỏi: quý ở sáng và ẩm từ bên trong, không phải ở trắng.",
    "loi": "Da sáng, ẩm, có ánh từ bên trong là dấu hiệu ngủ đủ, ăn đúng. Giữ nhịp này."
   }
  },
@@ -2580,13 +2580,14 @@
     "suc_khoe"
    ],
    "tieu_de": "Sắc mặt sáng nhuận",
-   "noi_dung": "Da sáng, có ánh từ bên trong — sách xưa quý sắc 'minh nhuận' hơn da trắng. Đây là dấu bạn đang ngủ đủ, ăn đúng; việc gì làm lúc này cũng dễ trôi.",
+   "noi_dung": "Da sáng, có ánh từ bên trong — sách xưa ví mặt không có ánh thì ngọc cũng như sỏi. Đây là dấu bạn đang ngủ đủ, ăn đúng; việc gì làm lúc này cũng dễ trôi.",
    "viec": "Giữ nhịp hiện tại thêm một tháng, ghi lại xem điều gì làm bạn khoẻ.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Sắc quý minh nhuận, bất quý nộn bạch.",
+    "trich": "Quang diễm bất phát, châu ngọc dữ ngoã lịch đồng quan.",
     "nguon": "bang_giam",
-    "y": "Sắc quý ở sáng và ẩm, không quý ở non trắng (Băng Giám)."
+    "y": "Sắc không toả sáng thì ngọc quý cũng như sỏi đá (Băng Giám, Khí sắc).",
+    "han": "光焰不發，珠玉與瓦礫同觀"
    }
   },
   "sac_vang_xin": {
@@ -2700,13 +2701,14 @@
     "con_nguoi"
    ],
    "tieu_de": "Xương thịt cân nhau",
-   "noi_dung": "Thịt săn, có đàn hồi, xương không trơ — sách xưa gọi là 'cốt nhục tương xứng': sức bền tốt, chịu được áp lực mà vẫn mềm trong đối xử.",
+   "noi_dung": "Thịt săn, có đàn hồi, xương không trơ — sách xưa nói béo không nặng nề, gầy không co ro: sức bền tốt, chịu được áp lực mà vẫn mềm trong đối xử.",
    "viec": "Vận động đều để giữ độ săn của cơ mặt và cơ người.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Cốt bất khả lộ, nhục bất khả phù.",
+    "trich": "Phì bất hùng xan, sấu bất thước hàn.",
     "nguon": "bang_giam",
-    "y": "Xương không được lộ, thịt không được nổi bệu (Băng Giám)."
+    "y": "Béo không nặng nề như gấu, gầy không co ro như chim khách gặp rét (Băng Giám, Dung mạo).",
+    "han": "肥不熊餐，瘦不鵲寒"
    }
   },
   "cot_tro": {
@@ -3317,12 +3319,7 @@
    "tieu_de": "Nếp dọc giữa hai mày",
    "noi_dung": "'Huyền châm văn' — nếp dọc là dấu của người hay nhíu mày tập trung, cầu toàn, hay tự gánh. Đây là thói quen cơ mặt nhiều năm, tập thả lỏng thì nhạt đi.",
    "viec": "Đặt nhắc mỗi giờ: thả lỏng vùng giữa hai mày, mỉm nhẹ.",
-   "uu_tien": 1,
-   "sach": {
-    "trich": "Ấn Đường huyền châm văn kiến, đa ưu tư cố chấp.",
-    "nguon": "tam_tuong_thien",
-    "y": "Ấn Đường có nếp kim treo, nhiều lo nghĩ cố chấp (Tâm Tướng Thiên)."
-   }
+   "uu_tien": 1
   },
   "an_duong_toi": {
    "ten": "Ấn Đường tối, xám",
@@ -3398,7 +3395,8 @@
    "sach": {
     "trich": "Nhất thân tinh thần, cụ hồ lưỡng mục.",
     "nguon": "bang_giam",
-    "y": "Tinh thần cả người tụ ở hai mắt (Băng Giám)."
+    "y": "Tinh thần cả người hiện ở hai mắt (Băng Giám, Thần cốt).",
+    "han": "一身精神，具乎兩目"
    }
   },
   "mat_dai_hep": {
@@ -3535,9 +3533,10 @@
    "viec": "Giữ thói quen nhìn thẳng vào mắt người đối diện khi nói chuyện quan trọng.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Thần tàng tắc tĩnh nhi quang minh.",
+    "trich": "Tĩnh nhược hàm châu, động nhược thuỷ phát.",
     "nguon": "bang_giam",
-    "y": "Thần giấu bên trong thì tĩnh mà sáng (Băng Giám)."
+    "y": "Lúc yên như ngậm ngọc, lúc động như nước tuôn (Băng Giám, Thần cốt).",
+    "han": "靜若含珠，動若水發"
    }
   },
   "than_mo": {
@@ -3579,13 +3578,14 @@
     "con_nguoi"
    ],
    "tieu_de": "Ánh mắt sắc, dễ gắt",
-   "noi_dung": "'Thần lộ' — ánh mắt sắc gắt: ý chí mạnh, dám vượt lên, nhưng dễ làm người khác e dè và dễ căng thần kinh. Sách xưa khuyên 'tu tâm dưỡng tính dĩ hoá sát'.",
+   "noi_dung": "'Thần lộ' — ánh mắt sắc gắt: ý chí mạnh, dám vượt lên, nhưng dễ làm người khác e dè và dễ căng thần kinh. Sách xưa xem thần ở cả lúc yên lẫn lúc động: lúc nghỉ mà ánh mắt dịu lại là điều nên tập.",
    "viec": "Khi nói chuyện khó, hạ giọng một nấc và chớp mắt chậm.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Thần lộ tắc phù nhi hôn trọc.",
+    "trich": "Dục biện tà chính, tiên quan động tĩnh.",
     "nguon": "bang_giam",
-    "y": "Thần lộ ra ngoài thì nổi mà đục (Băng Giám)."
+    "y": "Muốn biết thần chính hay lệch, trước hết xem lúc yên và lúc động (Băng Giám, Thần cốt).",
+    "han": "欲辨邪正，先觀動靜"
    }
   },
   "than_dao": {
@@ -3862,13 +3862,14 @@
     "suc_khoe"
    ],
    "tieu_de": "Nếp ngang ở gốc mũi",
-   "noi_dung": "Nếp ngang cắt Sơn Căn: Nội Kinh gắn vùng này với tim mạch và tiêu hoá — hay gặp ở người tự gánh nhiều, căng thẳng kéo dài. Lời nhắc là chăm, không phải lời đoán.",
-   "viec": "Vuốt ấm hai bên gốc mũi 30 lần mỗi sáng; khám tim mạch và tiêu hoá định kỳ quanh tuổi 40.",
+   "noi_dung": "Nếp ngang cắt Sơn Căn: Nội Kinh gắn vùng này với tim mạch — hay gặp ở người tự gánh nhiều, căng thẳng kéo dài. Lời nhắc là chăm, không phải lời đoán.",
+   "viec": "Vuốt ấm hai bên gốc mũi 30 lần mỗi sáng; khám tim mạch định kỳ quanh tuổi 40.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Tâm ứng vu Sơn Căn.",
+    "trich": "Hạ cực giả, tâm dã.",
     "nguon": "noi_kinh",
-    "y": "Tim ứng ở Sơn Căn (Linh Khu, Ngũ Sắc)."
+    "y": "Hạ cực (vùng gốc mũi giữa hai mắt) ứng với tim (Linh Khu, Ngũ Sắc).",
+    "han": "下極者，心也"
    },
    "he": "Hỏa"
   },
@@ -4205,9 +4206,10 @@
    "viec": "Nhận trách nhiệm điều phối một việc trong 3 tháng tới.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Quyền cốt phong khởi nhi hữu nhục bao, chủ quyền.",
+    "trich": "Tại diện dĩ mi cốt, quyền cốt vi chủ.",
     "nguon": "bang_giam",
-    "y": "Gò má nổi mà có thịt bọc, chủ về quyền (Băng Giám)."
+    "y": "Trên mặt, xương mày và xương gò má là chính (Băng Giám, Thần cốt).",
+    "han": "在面以眉骨、顴骨為主"
    }
   },
   "quyen_tro": {
@@ -4392,12 +4394,7 @@
    "tieu_de": "Pháp Lệnh rõ, mở rộng",
    "noi_dung": "Rãnh cười rõ, mở rộng dần xuống: dấu của uy tín và nề nếp — người có kỷ luật, nói có người nghe, từ 56 tuổi càng được nể. Đây là nếp của nhiều năm làm việc nghiêm túc.",
    "viec": "Nhận hướng dẫn một người trẻ hơn trong nghề.",
-   "uu_tien": 1,
-   "sach": {
-    "trich": "Pháp Lệnh thâm trường khoan quảng, hậu vận khoan hoà đắc chúng.",
-    "nguon": "tam_tuong_thien",
-    "y": "Pháp Lệnh sâu dài rộng, hậu vận khoan hoà được lòng người."
-   }
+   "uu_tien": 1
   },
   "phap_lenh_mo": {
    "ten": "Pháp Lệnh mờ",
@@ -4995,9 +4992,10 @@
    "viec": "Dùng giọng này để nói điều khó thay vì nhắn tin.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Thanh âm hồng lượng xuất tự Đan Điền.",
+    "trich": "Thuỷ ư Đan Điền, phát ư hầu.",
     "nguon": "bang_giam",
-    "y": "Tiếng nói vang sáng phát từ Đan Điền (Băng Giám)."
+    "y": "Tiếng nói bắt đầu từ Đan Điền rồi mới ra cổ họng (Băng Giám, Thanh âm).",
+    "han": "始於丹田，發於喉"
    }
   },
   "giong_cao_nhanh": {
@@ -5087,13 +5085,14 @@
     "loi_khuyen"
    ],
    "tieu_de": "Mặt nghỉ vẫn dễ gần",
-   "noi_dung": "Không cười mà vẫn ấm — 'tâm từ tắc mạo hoà': nếp mặt của người hay nghĩ tốt cho người khác. Đây là thứ hút quý nhân mà không cần cố.",
+   "noi_dung": "Không cười mà vẫn ấm — sách xưa nói lòng là gốc của dáng mặt: nếp mặt của người hay nghĩ tốt cho người khác. Đây là thứ hút quý nhân mà không cần cố.",
    "viec": "Giữ: mỗi ngày nói một lời động viên.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Tâm từ tắc mạo hoà.",
+    "trich": "Tâm giả mạo chi căn, thẩm tâm nhi thiện ác tự kiến.",
     "nguon": "tam_tuong_thien",
-    "y": "Lòng từ thì mặt hoà (Tâm Tướng Thiên)."
+    "y": "Lòng là gốc của dáng mặt; xét lòng thì tốt xấu tự hiện (Tâm Tướng Thiên).",
+    "han": "心者貌之根，审心而善恶自见"
    }
   },
   "net_nghiem": {
