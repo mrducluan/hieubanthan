@@ -61,6 +61,7 @@ export interface ThangGiaThu {
   co_dau: { nam_sinh: number; con_giap: string };
   dai_loi: number[]; tieu_loi: number[]; dai_loi_chi: string[]; tieu_loi_chi: string[];
   nhan: { dai_loi: string; tieu_loi: string }; nguon: string; loi: string;
+  nguyen_van?: { quy_tac: string; bac: string };
 }
 export interface ChonNgayNhieuKq {
   viec: { ma: string; ten: string }; tu: string; den: string;

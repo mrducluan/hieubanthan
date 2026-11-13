@@ -38,6 +38,9 @@ _LAM_NHA = {"dong_tho", "nhap_trach"}
 _TAM_TAI = {"khai_truong", "cau_tai", "ky_ket"}
 GIA_THU_NGUON = ("Hiệp Kỷ Biện Phương Thư (1741), quyển 36 — mục bàn về tháng gả cưới theo tuổi cô dâu; bộ sách này "
                  "ghi lại quy tắc rồi cho là không có căn cứ")
+# KT-N2 (2026-11-13): câu quy tắc + câu sách bác, nguyên văn (khớp `fixtures/nguon/hiep_ky_bien_phuong_thu.json`).
+GIA_THU_HAN = {"quy_tac": "其法以女命為主子寅辰午申戌六陽年自本命前一月向前順數丑夘己未酉亥六隂年自本命後一月向後逆數第一月為大利",
+               "bac": "求之隂陽五行九宫八卦堪輿建除叢辰之説無一可通"}
 GIA_THU_NHAN = {"dai_loi": "tháng đại lợi (tập quán)", "tieu_loi": "tháng tiểu lợi (tập quán)"}
 
 
@@ -193,7 +196,7 @@ def _gia_thu_ra(co_dau: dict | None, g: dict | None) -> dict | None:
         return None
     ten = lambda ds, ch: ", ".join(f"tháng {m} ({c})" for m, c in zip(ds, ch))   # noqa: E731
     return {"co_dau": {"nam_sinh": co_dau["nam_sinh"], "con_giap": co_dau["con_giap"]},
-            **g, "nhan": GIA_THU_NHAN, "nguon": GIA_THU_NGUON,
+            **g, "nhan": GIA_THU_NHAN, "nguon": GIA_THU_NGUON, "nguyen_van": dict(GIA_THU_HAN),
             "loi": (f"Lịch dân gian chia tháng gả cưới theo tuổi cô dâu. Cô dâu tuổi {co_dau['con_giap']}: tháng đại lợi là "
                     f"{ten(g['dai_loi'], g['dai_loi_chi'])}; tháng tiểu lợi là {ten(g['tieu_loi'], g['tieu_loi_chi'])}. "
                     "Tháng ở đây tính theo tiết khí (tháng Dần là tháng Giêng), lịch in theo tháng âm có thể lệch vài "

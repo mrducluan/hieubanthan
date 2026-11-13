@@ -483,3 +483,21 @@ Anh giao làm nhóm 1 của đề xuất; em đánh giá từng việc trước 
    danh sách (76 cách), cách cũ không đổi → không tăng `ENGINE_VERSION`. 16 dòng sách ghi "xem chú ở trên" là cách trùng tên câu
    phú đã có, chưa rà thêm.
 
+### 10.16 Nguồn mới từ kho Tứ khố: Tam Mệnh Thông Hội · Hiệp Kỷ Biện Phương Thư (KT-N2, 2026-11-13)
+
+Nhóm 2 của đề xuất. Đánh giá trước khi làm: phép tính đã có golden; việc đáng làm là **nối bảng đang dùng với câu của chính sách**,
+để người đọc thấy căn cứ và người duyệt thấy chỗ nào engine khác sách.
+
+1. **Bát tự — Tam Mệnh Thông Hội** (Kanseki `KR3g0042`, bản Tứ khố gõ lại): kho nguồn `tam_menh_thong_hoi.json` 34 thiên (Thai
+   nguyên, Mệnh cung, tiểu vận, toàn bộ quyển 3 thần sát, hai thiên quyển 6). 18 / 19 thần sát của bảng chính có câu nguyên văn
+   (`THAN_SAT_SACH`, test chuỗi con). Kết quả đối chiếu: **16 sao khớp sách**; Kim Dư và Dương Nhận kiểm lại được bằng phép tính từ
+   bảng Lộc. **Ba chỗ khác**: Hồng Diễm (khác ở Ất, Mậu, Nhâm), Văn Xương (engine dùng bảng phổ biến đời sau), Thiên Y (sách không
+   có). Không đổi phép tính; lá số ghi "Sách chép: …" hoặc "Sách chép cách khác: …" dưới từng sao. Chờ anh quyết ba chỗ khác.
+2. **Xem ngày — Hiệp Kỷ Biện Phương Thư** (Kanseki `KR3g0051`): chỉ nạp mục «男女合婚大利月» của quyển 36 (1.803 chữ) — mục engine
+   đang dẫn cho tháng gả cưới đại lợi. Test tính lại 12 tuổi theo đúng câu sách («陽年自本命前一月向前順數…», «第十二月為女本命第六
+   月為本命之衝») → hàm `thang_gia_thu` khớp cả 12. Kết quả chọn ngày nay kèm câu quy tắc và câu sách bác thuyết này. Bảng nghi / kỵ
+   hoàng lịch đã có golden oracle 1930–2030 nên không nạp lại.
+3. **Phong thuỷ — chưa nạp**: Tứ khố chỉ có Trạch Kinh (24 lộ — không phải Bát trạch), Táng Thư, Hám Long Kinh (âm trạch). Hai sách
+   engine dựa vào (Dương Trạch Tam Yếu, Bát Trạch Minh Kính) không có bản gõ tin được → báo anh, không nạp nguồn lệch môn.
+
+Mức, phép tính không đổi → không tăng `ENGINE_VERSION`. Golden đầu ra bản Việt đổi có chủ đích (Bát tự, hỏi đáp Bát tự, lịch).

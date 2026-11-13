@@ -2,7 +2,10 @@ import type { TenHien } from "@/lib/ten-hien";
 // Kiểu dữ liệu Bát tự từ engine (/api/battu/la-so, /api/battu/luu-nien) — web chỉ vẽ.
 export interface Tru { can: string; chi: string }
 export interface TruNapAm extends Tru { nap_am: string }
-export interface ThanSat { ten: string; loai: "cát" | "hung" | "trung"; y: string; tru: number[]; goc: string }
+export interface ThanSat { ten: string; loai: "cát" | "hung" | "trung"; y: string; tru: number[]; goc: string
+  /** KT-N2 — câu của Tam Mệnh Thông Hội cho sao này; khop=false: bảng đang dùng là bảng phổ thông khác câu sách. */
+  sach?: { han: string; khop: boolean };
+}
 /** EN-5.3 (2026-11-02) — thần sát tham khảo (Tam Mệnh Thông Hội), luôn đủ 4 mục; không vào luận giải. */
 export interface ThanSatThamKhao extends ThanSat {
   nhom: string; co: boolean; phai: string; cach_khac: string; theo_cach_khac: number[]; chinh?: boolean; chinh_tru?: number[];

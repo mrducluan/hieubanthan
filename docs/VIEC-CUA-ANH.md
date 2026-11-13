@@ -18,6 +18,14 @@
   chấm câu, hoặc tệp chữ do người soát) — bản quét PDF đẹp nhưng không có lớp chữ.
 - [x] KT-TT7 (2026-11-12, xong KT-TT8 2026-11-13: sửa Quân thần + Nguyệt sinh theo sách): bốn cách cục Tử vi đang nhận diện KHÁC chữ Toàn Thư (bảng ở mục 10.11 tài liệu kiểm toán) — anh quyết sửa theo sách hay giữ; em đề xuất sửa Quân thần khánh hội + Nguyệt sinh thương hải, giữ hai cách còn lại.
 - [x] (đã lên — kiểm 2026-11-13) Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
+- [ ] **KT-N2 (2026-11-13) — ba thần sát Bát tự đang khác chữ Tam Mệnh Thông Hội** (em KHÔNG đổi phép tính, chỉ ghi rõ trên lá số
+  "sách chép cách khác"; anh quyết giữ bảng phổ biến hay đổi theo sách — đổi thì tăng `ENGINE_VERSION`): **Hồng Diễm** (sách: Ất gặp Ngọ,
+  Mậu gặp Tý, Nhâm gặp Tỵ; engine: Ất–Thân, Mậu–Thìn, Nhâm–Tý), **Văn Xương** (engine dùng bảng Giáp Tỵ, Ất Ngọ… phổ biến ở sách
+  đời sau; câu của Tam Mệnh là bảng khác), **Thiên Y** (không có trong sách này). Em đề xuất: giữ như hiện nay.
+- [ ] **KT-N2 — nguồn Phong thuỷ**: kho Tứ khố chỉ có *Trạch Kinh* (24 lộ, âm trạch / dương trạch — không phải Bát trạch engine đang
+  dùng), *Táng Thư*, *Hám Long Kinh* (âm trạch, hình thế núi). Sách engine thật sự dựa vào là **Dương Trạch Tam Yếu** (Triệu Cửu Phong,
+  đời Thanh) và **Bát Trạch Minh Kính** — không có bản gõ trong kho em vào được. Anh có **bản gõ chữ Hán** (hoặc bản dịch Việt cũ
+  đã hết bản quyền) thì gửi em; PDF quét không có lớp chữ thì em không đọc được.
 - [ ] (Tuỳ chọn) Mời người rành Dịch / Tử vi đọc soát: 64 trang quẻ (lời Ngô Tất Tố bản điện tử còn lỗi gõ), 74 nghĩa sao nhỏ.
 - [x] **Gửi sách em không tự lấy được** (anh đã gửi thư mục Drive 9 tệp 2026-11-12) (Google Drive hoặc đính kèm; PDF chữ tốt hơn ảnh quét) — ưu tiên: (1) *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang), (2) *Tử vi tổng hợp* (Nguyễn Phát Lộc), (4) *Tử Bình Chân Thuyên* bản chữ — mở `ctext.org/wiki.pl?if=gb&res=413248` trên trình duyệt rồi lưu PDF, (5) *Uyên Hải Tử Bình* bản đủ (ctext res=307303), (6) *Kinh Dịch* Ngô Tất Tố dịch / *Chu Dịch* Phan Bội Châu. Bảng đầy đủ: mục 6 của tài liệu.
 - [x] (anh duyệt 2026-11-13) **SK-2 (2026-11-12) — xem lại danh sách tên bệnh** em chọn cho 5 hành + 14 chính tinh (`engine/app/kb/data/suc_khoe_kb.json`, trường `benh`; sửa ở `/quan-tri` → Kho tri thức). Em cố ý KHÔNG đưa bệnh hiểm nghèo (ung thư, đột quỵ, suy thận…) — anh muốn thêm thì báo em. Nên hỏi luật sư một câu: nêu tên bệnh trong lời "nên đi khám để phát hiện sớm …" có cần thêm miễn trừ nào không.
