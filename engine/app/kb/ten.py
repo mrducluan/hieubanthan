@@ -43,6 +43,11 @@ NHOM: dict[str, tuple[tuple[str, str], ...]] = {
     # hướng khi thì sơn (`huong`, `toa`), khi thì quái khi thì hướng (cung Huyền Không: 8 quái + "Trung cung").
     "son": (("phongthuy", "son"),), "cuc_hk": (("phongthuy", "cuc"),), "trang_thai_sao": (("phongthuy", "trang_thai_sao"),),
     "huong_son": (("phongthuy", "huong"), ("phongthuy", "son")), "cung_hk": (("phongthuy", "quai"), ("phongthuy", "huong")),
+    # EN-ALL GĐ 6 — Kinh Dịch: tên 64 quẻ theo TÊN Việt (trường mã của cấu trúc quẻ), lục thân (+ Thế / Ứng khi dụng thần là hào
+    # Thế / Ứng), lục thú, vượng suy theo tháng / ngày, hào động hoá, bậc thế trong bát cung, đơn vị ứng kỳ Mai Hoa.
+    "que_ten": (("kinhdich", "que_ten"),), "luc_than_kd": (("kinhdich", "luc_than"), ("kinhdich", "the_ung")),
+    "the_ung_kd": (("kinhdich", "the_ung"),), "luc_thu": (("kinhdich", "luc_thu"),), "vuong_suy": (("kinhdich", "vuong_suy"),),
+    "hoa_hao": (("kinhdich", "hoa_hao"),), "the_bac": (("kinhdich", "the_bac"),), "don_vi_kd": (("kinhdich", "don_vi"),),
 }
 
 
@@ -179,6 +184,16 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "to_hop.nhom": "cat_hung", "to_hop.cung": "cung_hk", "cung.cung": "cung_hk", "luu_nien.cung": "cung_hk",
     "vi_tri.cung": "huong", "phong.cung": "huong", "nam_sao_toi.cung": "huong", ".cung": "huong",
     "cap.tu": "huong", "cap.den": "huong",
+    # EN-ALL GĐ 6 — Kinh Dịch (khởi quẻ, đọc quẻ, Mai Hoa, quẻ ngày riêng): cấu trúc quẻ CALC giữ tên Việt làm mã.
+    **{f"{q}.ten": "que_ten" for q in ("quai_ban", "quai_bien", "quai_ho", "quai_thac", "quai_tong", "bien")}, ".ten": "que_ten",
+    "thuong_quai": "quai", "ha_quai": "quai", "bat_cung.cung": "quai", "bat_cung.loai": "the_bac", "cung_ngu_hanh": "hanh",
+    "dia_chi": "chi", "luc_than": "luc_than_kd", "the_ung": "the_ung_kd", "luc_thu": "luc_thu", "nguyet_lenh": "vuong_suy",
+    "nhat_than": "vuong_suy", "tong": "vuong_suy", "hoa.loai": "hoa_hao", "dung_than": "luc_than_kd",
+    "dung_than.chinh": "luc_than_kd", "dung_than.phu": "luc_than_kd", "dung_than.vai": "luc_than_kd", "dung_than.ky": "luc_than_kd",
+    **{f"{c}.{k}": "quai" for c in ("mai_hoa", "the_dung", "toan_cuc") for k in ("the", "dung", "bien", "thuong", "ha")},
+    "ho.thuong": "quai", "ho.ha": "quai", ".thuong": "quai", ".ha": "quai", "the_ngu_hanh": "hanh", "dung_ngu_hanh": "hanh",
+    "chi_nam": "chi", "chi_ngay": "chi", "can_ngay": "can", "thoi_diem_gieo.tuan_khong": "chi", "thoi_gian.tuan_khong": "chi",
+    "ung_ky_so.don_vi": "don_vi_kd",
 }
 
 
