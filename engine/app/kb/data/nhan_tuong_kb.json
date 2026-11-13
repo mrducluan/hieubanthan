@@ -2307,9 +2307,10 @@
    "viec": "Giữ nhịp: mỗi tuần dành thời gian cho đủ ba thứ — việc, người thân, sức khoẻ.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Tam đình bình đẳng, chung thân y lộc vô khuy.",
-    "nguon": "ma_y",
-    "y": "Ba đình cân thì cả đời không thiếu ăn mặc (Ma Y)."
+    "trich": "Tam đình bình đẳng năng hoà mỹ.",
+    "nguon": "ngoc_quan",
+    "y": "Ba đình cân nhau thì hài hoà, đẹp (Ngọc Quản Chiếu Thần Cục).",
+    "han": "三停平等能和美"
    }
   },
   "tam_dinh_tran_dai": {
@@ -2897,9 +2898,10 @@
    "viec": "Nhận một việc khó hơn mức hiện tại trong 6 tháng tới.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Thiên Đình bão mãn, thiếu niên đắc chí.",
-    "nguon": "ma_y",
-    "y": "Trán đầy, trẻ đã đạt chí (Ma Y)."
+    "trich": "Thiên Đình đoan tủng, đắc thượng quý chi đề huề.",
+    "nguon": "ngoc_quan",
+    "y": "Trán ngay ngắn, nhô cao thì được người trên nâng đỡ (Ngọc Quản Chiếu Thần Cục).",
+    "han": "天庭端聳得上貴之提攜"
    }
   },
   "tran_hep_thap": {
@@ -3036,9 +3038,10 @@
    "viec": "Gọi về nhà một lần trong tuần này.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Nhật Nguyệt giác khởi, phụ mẫu song toàn.",
-    "nguon": "than_tuong_toan_bien",
-    "y": "Hai góc trán nổi đầy, cha mẹ đủ đầy (Thần Tướng Toàn Biên)."
+    "trich": "Nhật Nguyệt giác vi Phụ Mẫu cung.",
+    "nguon": "thai_thanh",
+    "y": "Hai góc trán Nhật, Nguyệt là cung Phụ Mẫu (Thái Thanh Thần Giám).",
+    "han": "日月角為父母宫"
    }
   },
   "giac_lech": {
@@ -3080,13 +3083,14 @@
     "con_nguoi"
    ],
    "tieu_de": "Lông mày mượt, dài qua mắt",
-   "noi_dung": "'Mi thanh mục tú', mày dài quá mắt: anh em bạn bè hoà thuận, dễ có người giúp. Sợi mày mượt cũng là dấu khí huyết đều.",
+   "noi_dung": "Mày dài quá mắt: sách xưa gắn với người có trí và giữ lời, nên bạn bè dễ tin cậy. Sợi mày mượt cũng là dấu khí huyết đều.",
    "viec": "Nhắn cho một người bạn lâu không gặp.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Mi trường quá mục, huynh đệ hoà mục.",
-    "nguon": "than_tuong_toan_bien",
-    "y": "Mày dài qua mắt, anh em hoà thuận (Thần Tướng Toàn Biên)."
+    "trich": "Mi trường ư mục hữu trí tín.",
+    "nguon": "nhan_luan",
+    "y": "Mày dài hơn mắt là người có trí và giữ chữ tín (lời chú Nhân Luân Đại Thống Phú).",
+    "han": "眉長於目有智信"
    }
   },
   "may_dam_ngan": {
@@ -3200,12 +3204,7 @@
    "tieu_de": "Mí trên rộng, đầy",
    "noi_dung": "Điền Trạch rộng: tâm rộng, biết tích luỹ, nhà cửa về sau ổn. Người này không hay so đo chuyện nhỏ.",
    "viec": "Sắp xếp lại một góc nhà cho gọn trong tuần này.",
-   "uu_tien": 1,
-   "sach": {
-    "trich": "Điền Trạch khoan quảng, gia nghiệp hưng long.",
-    "nguon": "ma_y",
-    "y": "Điền Trạch rộng rãi, gia nghiệp hưng thịnh (Ma Y)."
-   }
+   "uu_tien": 1
   },
   "dien_trach_hep": {
    "ten": "Mày sát mắt, mí trên hẹp",
@@ -3273,9 +3272,10 @@
    "viec": "Chốt một việc đã để treo lâu trong tuần này.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Ấn Đường hồng hoàng minh nhuận, cát khánh lập chí.",
-    "nguon": "thuy_kinh",
-    "y": "Ấn Đường sắc hồng vàng sáng nhuận, việc vui sắp đến (Thuỷ Kính Tập)."
+    "trich": "Ấn Đường khoát nhi bình.",
+    "nguon": "nguyet_ba",
+    "y": "Ấn Đường rộng mà phẳng (Nguyệt Ba Động Trung Ký).",
+    "han": "印堂濶而平"
    }
   },
   "an_duong_hep": {
@@ -3625,14 +3625,9 @@
     "con_nguoi"
    ],
    "tieu_de": "Lộ lòng trắng dưới",
-   "noi_dung": "'Hạ tam bạch': ý chí vượt lên mạnh, không chịu thua, nhưng dễ căng và hay nghi. Sách xưa dặn người này cần người bên cạnh nói thật.",
+   "noi_dung": "'Hạ tam bạch': ý chí vượt lên mạnh, không chịu thua, nhưng dễ căng và hay nghi. Người này nên có người bên cạnh nói thật.",
    "viec": "Chọn một người được phép nói thẳng với bạn.",
-   "uu_tien": 1,
-   "sach": {
-    "trich": "Thượng hạ tam bạch, tính cương quả cảm nhi đa nghi.",
-    "nguon": "than_tuong_toan_bien",
-    "y": "Mắt tam bạch: tính cứng, quả cảm mà hay nghi."
-   }
+   "uu_tien": 1
   },
   "tam_bach_tren": {
    "ten": "Lộ lòng trắng trên",
@@ -3676,9 +3671,10 @@
    "viec": "Dành một buổi trong tuần cho người nhỏ tuổi hơn trong nhà.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Lệ Đường bình mãn như ngoạ tằm, tử tôn hiền quý.",
-    "nguon": "ma_y",
-    "y": "Dưới mắt đầy như tằm nằm, con cháu hiền quý (Ma Y)."
+    "trich": "Mục hạ ngoạ tàm văn, đương sinh quý tử tôn.",
+    "nguon": "ngoc_quan",
+    "y": "Dưới mắt có ngoạ tằm thì con cháu tốt (Ngọc Quản Chiếu Thần Cục).",
+    "han": "目下臥蠶紋當生貴子孫"
    }
   },
   "le_duong_tham": {
@@ -3743,13 +3739,14 @@
     "tinh_cam_gia_dinh"
    ],
    "tieu_de": "Đuôi mắt phẳng, sáng",
-   "noi_dung": "Gian Môn phẳng sáng: cung Phu Thê thuận — đời sống đôi lứa êm, ít chuyện ngầm.",
+   "noi_dung": "Gian Môn phẳng sáng: cung Phu Thê thuận; sách xưa gắn với tính ngay thẳng, nên đời sống đôi lứa dễ êm, ít chuyện ngầm.",
    "viec": "Nói với người ấy một điều bạn biết ơn trong tuần này.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Gian Môn bình mãn quang nhuận, phu thê hoà hợp.",
-    "nguon": "than_tuong_toan_bien",
-    "y": "Đuôi mắt đầy sáng, vợ chồng hoà hợp."
+    "trich": "Gian Môn bình khoát nhi minh, chủ tính cảnh khiết.",
+    "nguon": "nhan_luan",
+    "y": "Gian Môn phẳng rộng mà sáng là người ngay thẳng, trong sạch (lời chú Nhân Luân Đại Thống Phú).",
+    "han": "奸門平濶而明主性耿潔"
    }
   },
   "ngu_vi_nep": {
@@ -3819,9 +3816,10 @@
    "viec": "Duy trì một môn vận động từ giờ tới 45 tuổi.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Sơn Căn cao long, tật ách vô ưu.",
-    "nguon": "ma_y",
-    "y": "Gốc mũi cao đầy, cung Tật Ách không lo (Ma Y)."
+    "trich": "Sơn Căn bất chiết, tỵ lương bất khúc.",
+    "nguon": "nguyet_ba",
+    "y": "Sơn Căn không gãy, sống mũi không cong (Nguyệt Ba Động Trung Ký).",
+    "han": "山根不折鼻梁不曲"
    }
   },
   "son_can_thap": {
@@ -4012,9 +4010,10 @@
    "viec": "Tăng khoản để dành thêm 5% từ tháng này.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Chuẩn Đầu phong long, phú quý trung lương.",
-    "nguon": "ma_y",
-    "y": "Đầu mũi tròn đầy, giàu sang mà trung hậu (Ma Y)."
+    "trich": "Chuẩn Đầu tề giả tâm tính từ.",
+    "nguon": "thai_thanh",
+    "y": "Đầu mũi đầy ngay ngắn là người lòng từ (Thái Thanh Thần Giám).",
+    "han": "準頭齊者心性慈"
    }
   },
   "chuan_dau_nhon": {
@@ -4106,9 +4105,10 @@
    "viec": "Giữ nguyên cách tiêu hiện tại; thêm một khoản cho người thân.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Lan Đài Đình Uý tương xứng, phú quý.",
-    "nguon": "ma_y",
-    "y": "Hai cánh mũi cân xứng, giàu sang (Ma Y)."
+    "trich": "Tả vi Lan Đài, hữu vi Đình Uý, thành tựu bình hảo giả.",
+    "nguon": "thai_thanh",
+    "y": "Cánh mũi trái là Lan Đài, phải là Đình Uý; hai bên đầy đặn cân nhau là người sáng suốt, có hiểu biết (Thái Thanh Thần Giám).",
+    "han": "左為蘭臺右為廷尉成就平好者"
    }
   },
   "canh_mui_mong": {
@@ -4302,9 +4302,10 @@
    "viec": "Giữ nhịp ngủ đều — đó là thứ nuôi sức bền này.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Nhân Trung thâm trường, thọ nguyên miên viễn.",
-    "nguon": "than_tuong_toan_bien",
-    "y": "Nhân Trung sâu dài, sức sống lâu bền (viết lại: không nói thọ số)."
+    "trich": "Thâm trực đoan quảng giả, trung tín hữu tử tôn.",
+    "nguon": "thai_thanh",
+    "y": "Nhân Trung sâu, thẳng, ngay, rộng là người trung tín (Thái Thanh Thần Giám).",
+    "han": "深直端廣者忠信有子孫"
    }
   },
   "nhan_trung_nong": {
@@ -4512,13 +4513,14 @@
     "cong_viec_tien"
    ],
    "tieu_de": "Miệng rộng vừa, khoé hướng lên",
-   "noi_dung": "Khoé miệng tự nhiên hướng lên — sách xưa gọi 'khẩu như giốc cung': ăn nói có duyên, giữ chữ tín, được lộc ăn nói. Đây cũng là nếp của người hay cười thật.",
+   "noi_dung": "Khoé miệng tự nhiên hướng lên — sách xưa ví 'miệng như cánh cung': ăn nói có duyên, giữ chữ tín, được lộc ăn nói. Đây cũng là nếp của người hay cười thật.",
    "viec": "Nói lời cảm ơn thành tiếng với ba người trong ngày.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Khẩu như giốc cung, ngôn xuất hữu tín.",
-    "nguon": "ma_y",
-    "y": "Miệng như cánh cung, nói ra có tín (Ma Y)."
+    "trich": "Hình như giác cung giả quan lộc.",
+    "nguon": "nhan_luan",
+    "y": "Miệng như cánh cung là tướng có lộc nhờ việc làm (lời chú Nhân Luân Đại Thống Phú).",
+    "han": "形如角弓者官祿"
    }
   },
   "mieng_nho_mong": {
@@ -4702,13 +4704,14 @@
     "cong_viec_tien"
    ],
    "tieu_de": "Cằm tròn, đầy, hơi đưa ra",
-   "noi_dung": "Địa Các tròn đầy 'triều củng': hậu vận an, có người dưới tin cậy, về già có chỗ ở ổn. Người này được việc nhờ bền hơn nhờ nhanh.",
+   "noi_dung": "Địa Các vuông vức, đầy đặn: hậu vận an, có người dưới tin cậy, về già có chỗ ở ổn. Người này được việc nhờ bền hơn nhờ nhanh.",
    "viec": "Mua hoặc giữ một chỗ ở lâu dài thay vì đổi liên tục.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Địa Các phương viên triều củng, vãn vận an khang.",
-    "nguon": "ma_y",
-    "y": "Cằm vuông tròn chầu lên, hậu vận an khang (Ma Y)."
+    "trich": "Địa Các phương đình vạn khoảnh điền.",
+    "nguon": "nhan_luan",
+    "y": "Cằm vuông vức, cân đối là tướng có nhà đất (lời chú Nhân Luân Đại Thống Phú).",
+    "han": "地閣方停萬頃田"
    }
   },
   "cam_nhon_lem": {
@@ -4871,9 +4874,10 @@
    "viec": "Giữ nhịp ngủ — vốn bẩm sinh tốt vẫn cần giữ.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Nhĩ cao quá mi, luân quách phân minh, thông tuệ.",
-    "nguon": "ma_y",
-    "y": "Tai cao hơn mày, vành ngoài trong rõ, thông tuệ (viết lại: không nói trường thọ)."
+    "trich": "Nhĩ bất dục hướng tiền, bất dục đê ư mi.",
+    "nguon": "nguyet_ba",
+    "y": "Tai không nên chĩa ra trước, không nên thấp hơn mày (Nguyệt Ba Động Trung Ký).",
+    "han": "耳不欲向前不欲低於眉"
    }
   },
   "tai_mong_lat": {
@@ -5157,13 +5161,14 @@
     "loi_khuyen"
    ],
    "tieu_de": "Dáng vững, thẳng, chậm rãi",
-   "noi_dung": "'Hành toạ tĩnh trọng': đi đứng vững, chậm là người có nội lực, được giao việc lớn. Động tướng xem đây là dấu quý.",
+   "noi_dung": "Sách xưa ví người quý 'đi như nước chảy': đi đứng vững, chậm là người có nội lực, được giao việc lớn. Động tướng xem đây là dấu quý.",
    "viec": "Giữ: bước vào phòng chậm hơn một nhịp, nhìn hết mọi người.",
    "uu_tien": 1,
    "sach": {
-    "trich": "Hành như thuỷ lưu, toạ như sơn trọng.",
-    "nguon": "than_tuong_toan_bien",
-    "y": "Đi như nước chảy, ngồi như núi vững."
+    "trich": "Quý nhân chi hành như thuỷ nhi lưu.",
+    "nguon": "thai_thanh",
+    "y": "Người quý đi như nước chảy (Thái Thanh Thần Giám).",
+    "han": "貴人之行如水而流"
    }
   },
   "dang_hap_tap": {
@@ -5301,9 +5306,10 @@
    "viec": "Ghi lại ba khoản chi lớn nhất tháng này, xem khoản nào bạn muốn giữ lại.",
    "uu_tien": 2,
    "sach": {
-    "trich": "Lan Đài Đình Uý tương xứng, phú quý.",
-    "nguon": "ma_y",
-    "y": "Hai cánh mũi cân xứng là nét thuận về tiền (Ma Y)."
+    "trich": "Tả vi Lan Đài, hữu vi Đình Uý, thành tựu bình hảo giả.",
+    "nguon": "thai_thanh",
+    "y": "Cánh mũi trái là Lan Đài, phải là Đình Uý; hai bên đầy đặn cân nhau là người sáng suốt, có hiểu biết (Thái Thanh Thần Giám).",
+    "han": "左為蘭臺右為廷尉成就平好者"
    }
   },
   "mieng_vua": {

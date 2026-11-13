@@ -82,7 +82,7 @@ SO: dict[str, dict] = {
     "phongthuy_do_thi.json": {"mang": "phongthuy", "muc": "bien_tap"},
     "bo_sung_dau_hieu.json": {"mang": "phongthuy", "muc": "bien_tap"},
     # ---- Nhân tướng · Tarot
-    "nhan_tuong_kb.json": {"mang": "nhantuong", "muc": "tom_y_co_thu", "ghi_chu": "KT-NT1: câu trích Băng Giám / Tâm Tướng Thiên / Linh Khu khớp kho nguồn `nhan_tuong_co_thu.json` (tests/test_kt_nt1_kho_nguon.py); Ma Y, Thần Tướng Toàn Biên, Thuỷ Kính chưa có kho nguồn"},
+    "nhan_tuong_kb.json": {"mang": "nhantuong", "muc": "tom_y_co_thu", "ghi_chu": "KT-NT1/2: cả 25 câu trích sách (`dac_diem.*.sach`) khớp kho nguồn `nhan_tuong_co_thu.json` (Băng Giám, Tâm Tướng Thiên, Linh Khu, 4 sách Tứ khố — tests/test_kt_nt1_kho_nguon.py); lời luận vẫn là tóm ý, trường `nguon` Ma Y / Thần Tướng Toàn Biên chỉ ghi phái"},
     "tarot_kb.json": {"mang": "tarot", **_nv("tarot_waite_1910.json", "tests/test_tarot_nguon.py::test_moi_trich_la_nguyen_van_cua_nguon",
                                              "câu trích khớp Waite / Mathers / Book T; lớp Marseille, Thoth là tóm ý")},
     # ---- Thần số (truyền thống phương Tây hiện đại — không có "cổ thư")
