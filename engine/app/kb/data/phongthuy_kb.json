@@ -1387,6 +1387,87 @@
      "lam": "Thay cửa kính hai lớp ở mặt tiền, làm vách cách âm cho phòng ngủ khi sửa nhà."
     }
    ]
+  },
+  "thien_tram": {
+   "tieu_de": "Khe hẹp giữa hai toà nhà cao chiếu thẳng vào nhà",
+   "noi_dung": "Giới phong thuỷ Hồng Kông, Đài Loan thời nay gọi là 'thiên trảm sát': hai toà nhà cao đứng sát nhau, để lại một khe hẹp chiếu thẳng vào cửa hoặc cửa sổ nhà mình. Tên gọi này không có trong cổ thư; ý gốc là điều Táng Thư đã nói: khí gặp gió thì tan. Thực tế: khe hẹp giữa hai khối nhà làm gió rít mạnh và hắt thẳng vào nhà.",
+   "goi_y": "Che tầm nhìn và chắn gió ở đúng ô cửa nhìn ra khe: rèm dày, cây tán rộng ở ban công, ít mở ô cửa đó khi gió lớn. Chỗ ngồi lâu, đầu giường không đặt thẳng luồng gió ấy.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "thien tram",
+    "khe (hep|ho) giua hai (toa|toa nha|nha|cao oc|chung cu)",
+    "giua hai (toa|cao oc|chung cu) .{0,30}(chieu|doi|huong|nhin) (thang|vao)",
+    "hai toa nha .{0,20}khe"
+   ],
+   "giai_thich_hien_dai": "Gió bị ép qua khe hẹp sẽ mạnh lên rõ rệt, kèm tiếng rít và bụi; ngồi hay ngủ đúng luồng gió đó dễ mệt. Chắn luồng gió là đủ.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đóng ô cửa nhìn ra khe khi gió lớn; dời ghế, giường khỏi luồng gió thẳng."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Rèm dày hoặc mành, chậu cây tán rộng ở ban công phía đó."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Thay cửa kính dày, làm lam chắn gió cho ô cửa đó khi sửa nhà."
+    }
+   ]
+  },
+  "phan_cung": {
+   "tieu_de": "Đường hoặc sông cong, lưng cong quay vào nhà",
+   "noi_dung": "Sách hình thế chuộng nước và đường ôm vòng lấy nhà (gọi là 'bão'); khi nhà nằm ở phía ngoài khúc cong, lưng cong chĩa vào, người làm nghề gọi là 'phản cung'. Thực tế: nhà ở lưng khúc cua nhận đèn pha, tiếng phanh và rủi ro xe lạc tay lái nhiều hơn; ở bờ sông thì bờ phía ngoài khúc cong là bờ dễ bị xói.",
+   "goi_y": "Khi chọn nhà, ưu tiên phía trong khúc cong. Đang ở rồi thì làm hàng rào chắc, hàng cây hoặc bồn hoa xây ở mặt giáp khúc cua; phòng ngủ đặt lùi về phía sau.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "phan cung",
+    "lung (duong|khuc) cong",
+    "(duong|song|khuc cua|khuc cong) .{0,25}(cong|cua) .{0,25}(lung|phia ngoai|chia|quay) .{0,15}(vao|ve) nha",
+    "nha .{0,20}(ngay|o) (khuc cua|khuc cong|goc cua|cho cua)",
+    "khuc cua .{0,20}(vao|truoc) nha"
+   ],
+   "giai_thich_hien_dai": "Ở lưng khúc cua, đèn xe quét vào nhà mỗi tối và xe mất lái thường lao về phía này. Rào chắn chắc và phòng ngủ lùi vào trong là việc thiết thực nhất.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Dời phòng ngủ, chỗ ngồi lâu khỏi mặt giáp khúc cua; kéo rèm buổi tối để bớt đèn pha."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Trồng hàng cây, đặt bồn cây nặng ở mặt giáp đường; dán phản quang ở góc tường."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Xây tường rào hoặc bồn hoa bê tông chắc ở mặt giáp khúc cua."
+    }
+   ]
+  },
+  "dau_giuong_sat_wc": {
+   "tieu_de": "Đầu giường kê sát tường nhà vệ sinh",
+   "noi_dung": "Đây là kinh nghiệm kê giường của thợ và thầy thời nay, không có câu nào trong cổ thư nói riêng việc này. Thực tế: tường nhà vệ sinh có ống nước, hay ẩm và có tiếng xả nước ban đêm ngay sau đầu người nằm.",
+   "goi_y": "Xoay giường để đầu tựa vào bức tường khô khác. Không xoay được thì kê cách tường một khoảng, thêm đầu giường dày và giữ nhà vệ sinh khô, đóng cửa khi ngủ.",
+   "nguon": "dan_gian",
+   "tu_khoa": [
+    "dau giuong .{0,25}(sat|tua|giap|ke|dua) .{0,20}(wc|nha ve sinh|toilet|phong tam|nha tam)",
+    "(wc|nha ve sinh|toilet|phong tam) .{0,15}(sau|canh|sat) dau giuong",
+    "giuong .{0,15}(chung|sat|giap) tuong .{0,10}(wc|nha ve sinh|toilet|phong tam)"
+   ],
+   "giai_thich_hien_dai": "Tiếng nước chảy trong ống và hơi ẩm thấm qua tường làm giấc ngủ nông hơn, gối đệm dễ mốc. Dời đầu giường sang tường khô là xong.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Xoay giường sang bức tường khác; đóng cửa nhà vệ sinh và bật quạt hút trước khi ngủ."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Lắp đầu giường bọc dày, kê giường cách tường một gang tay; sơn chống thấm mặt tường phía phòng ngủ."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Chống thấm lại tường nhà vệ sinh, bọc cách âm ống nước khi sửa nhà."
+    }
+   ]
   }
  },
  "am_trach": {
@@ -1644,6 +1725,22 @@
     "tu_bach_nam",
     "tu_bach_thang"
    ]
+  },
+  "ngu_quyet": {
+   "tieu_de": "Long, huyệt, sa, thuỷ, hướng là gì?",
+   "noi_dung": "Đây là năm điều người xem thế đất ngày xưa nhìn, thường gọi theo tên sách Địa Lý Ngũ Quyết (Triệu Cửu Phong, đời Thanh). Long là mạch núi, thế đất dẫn tới chỗ ở. Huyệt là điểm đất tụ lại, nơi đặt nhà. Sa là gò, đồi, nhà cửa che chắn chung quanh. Thuỷ là dòng nước tới và đi. Hướng là phía nhà quay mặt. Ở phố ngày nay người ta đọc theo cách ví: nhà cao, tường đặc coi như núi; đường và khoảng trống thấp coi như nước. Đó là cách ví của người thời nay, không phải lời sách. Phần này phải nhìn tận nơi, công cụ chỉ hỏi bạn: trước cửa là gì, sau lưng nhà là gì, hai bên cao hay thấp.",
+   "tu_khoa": [
+    "long huyet sa thuy",
+    "ngu quyet",
+    "dia ly ngu quyet",
+    "long mach la gi",
+    "long huyet",
+    "sa thuy",
+    "xem the dat"
+   ],
+   "source_id": "dia_ly_ngu_quyet",
+   "school_id": "hinh_the",
+   "can_doi_chieu": true
   }
  },
  "mau": {

@@ -178,3 +178,33 @@ Máy phiên không cho chạy mã ngoài, nên em đọc quy tắc trong mã r�
 
 Chỗ 2 và 3 chỉ nguyên văn Thẩm thị mới phân xử được → bàn thế quái vẫn mang cờ `chua_doi_chieu_oracle`.
 Phần còn thiếu của Thẩm thị (81 cặp sao, lời đoán từng cục, ví dụ bàn thế quái) **vẫn thiếu** sau đợt này.
+
+## 8. Đợt 4 (PT-NG4, 2026-11-13) — phần engine còn thiếu so với `fengshui.skill`
+
+Anh giao nạp phần còn thiếu, có sách thì đối chiếu và sửa sau. Kho này **không ghi giấy phép**, nên em không chép chữ hay mã:
+chỉ lấy đầu mục (tên tình huống, quy tắc truyền thống — vốn là điều chung của nghề) rồi tự viết lời theo khuôn của dự án.
+
+So từng mục của kho với engine:
+
+| Mục của `fengshui.skill` | Engine | Việc đã làm |
+|---|---|---|
+| Lập bàn phi tinh, thế quái, 4 cục, phản – phục ngâm, hợp thập | đã có | so chéo ở mục 7 |
+| Tử bạch năm – tháng, Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng | đã có (khớp Hiệp Kỷ) | — |
+| Bát trạch, cung phi, nạp âm, hợp – xung địa chi | đã có | — |
+| Khe hẹp giữa hai toà nhà cao (天斬) | **thiếu** | thêm `bo_tri.thien_tram` |
+| Đường / sông cong lưng vào nhà (反弓) | **thiếu** | thêm `bo_tri.phan_cung` |
+| Đầu giường sát tường nhà vệ sinh | **thiếu** | thêm `bo_tri.dau_giuong_sat_wc` |
+| Long – huyệt – sa – thuỷ – hướng (Địa Lý Ngũ Quyết) | **thiếu** | thêm `giai_thich.ngu_quyet` (`can_doi_chieu`) |
+| Góc nhọn, cạnh tường chĩa vào (尖角, 壁刀) · đường đâm · cửa thông cửa · xà ngang · gương đối giường | đã có | — |
+| Ngày Tuế Phá, ngày Thụ Tử (受死) trong chọn ngày | **chưa làm** | xem dưới |
+| Nhà vệ sinh rơi vào cung có sao vượng | **chưa làm** | xem dưới |
+| Tên gọi các cặp sao (二五交加…) | đã có 81 cặp | kho kia cũng chỉ liệt kê tên, chưa có nguyên văn |
+
+Ba mục `bo_tri` mới đủ khuôn (lời đời thường, giải thích theo đời sống, ba việc theo chi phí, không vật phẩm). Hai mục
+gọi theo tên của giới phong thuỷ Hồng Kông – Đài Loan thời nay được ghi rõ là **không có trong cổ thư**.
+
+**Hai mục em chưa làm, kèm lý do:**
+
+- *Ngày Tuế Phá, ngày Thụ Tử*: đưa vào là đổi kết quả trang Xem ngày tốt đang chạy; chính kho kia ghi hai mục này là
+  "tục kỵ của thông thư, không thuộc hệ Hiệp Kỷ". Cần anh quyết có hiện như nhãn tập quán (không loại ngày) hay không.
+- *Nhà vệ sinh ở cung sao vượng*: phải ghép mặt bằng với bàn phi tinh; lời đoán cần nguyên văn Thẩm thị.

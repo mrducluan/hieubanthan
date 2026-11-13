@@ -236,3 +236,27 @@ def test_van_7_8_thuong_son_ha_thuy_va_van_9_song_tinh():
         ra = {x for x in _HV.values() if hk.trach_ban(nam, x)["cuc"] == "thuong_son_ha_thuy"}
         assert ra == {_HV[c] for c in s}, van
     assert all(hk.trach_ban(2024, x)["cuc"].startswith("song_tinh") for x in _HV.values())
+
+
+# --------------------------------------------------------------------------- PT-NG4: tình huống hình thế còn thiếu
+import pytest as _pt4
+
+
+@_pt4.mark.parametrize("cau,ma", [
+    ("Nhà tôi nhìn ra khe hẹp giữa hai toà nhà cao chiếu thẳng vào có sao không?", "thien_tram"),
+    ("Nhà ở ngay khúc cua, lưng đường cong quay vào nhà thì sao?", "phan_cung"),
+    ("Đầu giường kê sát tường nhà vệ sinh có nên không?", "dau_giuong_sat_wc"),
+])
+def test_bo_tri_pt_ng4_dinh_tuyen_va_du_khuon(cau, ma):
+    from app.hoidap import phongthuy as pt
+    pl = pt.phan_loai(cau)
+    assert pl["loai"] == "bo_tri" and ma in pl["bo_tri"], (pl["loai"], pl.get("bo_tri"))
+    m = pt.kb.bo_tri(ma)
+    assert m["giai_thich_hien_dai"] and {v["chi_phi"] for v in m["viec"]} == {"khong_ton", "it_tien", "sua_chua"}
+    assert not any(x in (m["noi_dung"] + m["goi_y"]) for x in ("gương bát quái", "tỳ hưu", "bùa", "vật phẩm"))
+
+
+def test_giai_thich_ngu_quyet():
+    from app.hoidap import phongthuy as pt
+    pl = pt.phan_loai("Long huyệt sa thuỷ hướng là gì?")
+    assert "ngu_quyet" in str(pl)
