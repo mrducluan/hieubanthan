@@ -307,6 +307,61 @@
    "quẻ biến": {"en": "resulting hexagram", "han": "變卦"}, "quẻ hỗ": {"en": "nuclear hexagram", "han": "互卦"},
    "Mai Hoa": {"en": "Plum Blossom numerology", "han": "梅花易數"}, "lục hào": {"en": "Six Lines method", "han": "六爻"},
    "Thế": {"en": "Self line (Shi)", "han": "世"}, "Ứng": {"en": "Other line (Ying)", "han": "應"}
+  },
+  "que_ten": {
+   "Càn": {"en": "Qian (The Creative)", "han": "乾"}, "Khôn": {"en": "Kun (The Receptive)", "han": "坤"}, "Truân": {"en": "Zhun (Difficult Beginnings)", "han": "屯"},
+   "Mông": {"en": "Meng (Youthful Folly)", "han": "蒙"}, "Nhu": {"en": "Xu (Waiting)", "han": "需"}, "Tụng": {"en": "Song (Conflict)", "han": "訟"},
+   "Sư": {"en": "Shi (The Army)", "han": "師"}, "Tỷ": {"en": "Bi (Holding Together)", "han": "比"}, "Tiểu Súc": {"en": "Xiao Xu (Small Taming)", "han": "小畜"},
+   "Lý": {"en": "Lü (Treading)", "han": "履"}, "Thái": {"en": "Tai (Peace)", "han": "泰"}, "Bĩ": {"en": "Pi (Standstill)", "han": "否"},
+   "Đồng Nhân": {"en": "Tong Ren (Fellowship)", "han": "同人"}, "Đại Hữu": {"en": "Da You (Great Possession)", "han": "大有"}, "Khiêm": {"en": "Qian (Modesty)", "han": "謙"},
+   "Dự": {"en": "Yu (Enthusiasm)", "han": "豫"}, "Tùy": {"en": "Sui (Following)", "han": "隨"}, "Cổ": {"en": "Gu (Repairing Decay)", "han": "蠱"},
+   "Lâm": {"en": "Lin (Approach)", "han": "臨"}, "Quan": {"en": "Guan (Contemplation)", "han": "觀"}, "Phệ Hạp": {"en": "Shi He (Biting Through)", "han": "噬嗑"},
+   "Bí": {"en": "Bi (Grace)", "han": "賁"}, "Bác": {"en": "Bo (Splitting Apart)", "han": "剝"}, "Phục": {"en": "Fu (Return)", "han": "復"},
+   "Vô Vọng": {"en": "Wu Wang (Innocence)", "han": "無妄"}, "Đại Súc": {"en": "Da Xu (Great Taming)", "han": "大畜"}, "Di": {"en": "Yi (Nourishment)", "han": "頤"},
+   "Đại Quá": {"en": "Da Guo (Great Excess)", "han": "大過"}, "Khảm": {"en": "Kan (The Abyss)", "han": "坎"}, "Ly": {"en": "Li (The Clinging Fire)", "han": "離"},
+   "Hàm": {"en": "Xian (Influence)", "han": "咸"}, "Hằng": {"en": "Heng (Duration)", "han": "恆"}, "Độn": {"en": "Dun (Retreat)", "han": "遯"},
+   "Đại Tráng": {"en": "Da Zhuang (Great Power)", "han": "大壯"}, "Tấn": {"en": "Jin (Progress)", "han": "晉"}, "Minh Di": {"en": "Ming Yi (Darkening of the Light)", "han": "明夷"},
+   "Gia Nhân": {"en": "Jia Ren (The Family)", "han": "家人"}, "Khuê": {"en": "Kui (Opposition)", "han": "睽"}, "Kiển": {"en": "Jian (Obstruction)", "han": "蹇"},
+   "Giải": {"en": "Xie (Deliverance)", "han": "解"}, "Tổn": {"en": "Sun (Decrease)", "han": "損"}, "Ích": {"en": "Yi (Increase)", "han": "益"},
+   "Quải": {"en": "Guai (Breakthrough)", "han": "夬"}, "Cấu": {"en": "Gou (Coming to Meet)", "han": "姤"}, "Tụy": {"en": "Cui (Gathering)", "han": "萃"},
+   "Thăng": {"en": "Sheng (Pushing Upward)", "han": "升"}, "Khốn": {"en": "Kun (Oppression)", "han": "困"}, "Tỉnh": {"en": "Jing (The Well)", "han": "井"},
+   "Cách": {"en": "Ge (Revolution)", "han": "革"}, "Đỉnh": {"en": "Ding (The Cauldron)", "han": "鼎"}, "Chấn": {"en": "Zhen (Arousing Thunder)", "han": "震"},
+   "Cấn": {"en": "Gen (Keeping Still)", "han": "艮"}, "Tiệm": {"en": "Jian (Gradual Progress)", "han": "漸"}, "Quy Muội": {"en": "Gui Mei (The Marrying Maiden)", "han": "歸妹"},
+   "Phong": {"en": "Feng (Abundance)", "han": "豐"}, "Lữ": {"en": "Lü (The Wanderer)", "han": "旅"}, "Tốn": {"en": "Xun (The Gentle Wind)", "han": "巽"},
+   "Đoài": {"en": "Dui (The Joyous Lake)", "han": "兌"}, "Hoán": {"en": "Huan (Dispersion)", "han": "渙"}, "Tiết": {"en": "Jie (Limitation)", "han": "節"},
+   "Trung Phu": {"en": "Zhong Fu (Inner Truth)", "han": "中孚"}, "Tiểu Quá": {"en": "Xiao Guo (Small Excess)", "han": "小過"}, "Ký Tế": {"en": "Ji Ji (After Completion)", "han": "既濟"},
+   "Vị Tế": {"en": "Wei Ji (Before Completion)", "han": "未濟"}
+  },
+  "luc_than": {
+   "Phụ Mẫu": {"en": "Parent (Fu Mu)", "han": "父母"}, "Huynh Đệ": {"en": "Sibling (Xiong Di)", "han": "兄弟"}, "Tử Tôn": {"en": "Offspring (Zi Sun)", "han": "子孫"},
+   "Thê Tài": {"en": "Wealth (Qi Cai)", "han": "妻財"}, "Quan Quỷ": {"en": "Officer (Guan Gui)", "han": "官鬼"}
+  },
+  "the_ung": {
+   "Thế": {"en": "Self line (Shi)", "han": "世"}, "Ứng": {"en": "Other line (Ying)", "han": "應"}
+  },
+  "luc_thu": {
+   "Thanh Long": {"en": "Green Dragon", "han": "青龍"}, "Chu Tước": {"en": "Vermilion Bird", "han": "朱雀"}, "Câu Trần": {"en": "Gou Chen (Coiled Earth)", "han": "勾陳"},
+   "Đằng Xà": {"en": "Teng She (Flying Snake)", "han": "螣蛇"}, "Bạch Hổ": {"en": "White Tiger", "han": "白虎"}, "Huyền Vũ": {"en": "Black Tortoise", "han": "玄武"}
+  },
+  "vuong_suy": {
+   "vượng": {"en": "strong", "han": "旺"}, "tướng": {"en": "supported", "han": "相"}, "hưu": {"en": "resting", "han": "休"},
+   "tù": {"en": "confined", "han": "囚"}, "tử": {"en": "dormant", "han": "死"}, "suy": {"en": "weak", "han": "衰"},
+   "bình": {"en": "neutral", "han": "平"}, "lâm nhật": {"en": "same branch as the day", "han": "臨日"}, "nhật xung": {"en": "clashed by the day", "han": "日沖"},
+   "nhật hợp": {"en": "combined with the day", "han": "日合"}, "nhật sinh": {"en": "fed by the day", "han": "日生"}, "nhật khắc": {"en": "checked by the day", "han": "日剋"},
+   "không": {"en": "no link with the day"}
+  },
+  "hoa_hao": {
+   "tiến thần": {"en": "advancing", "han": "進神"}, "thoái thần": {"en": "retreating", "han": "退神"}, "hồi đầu sinh": {"en": "turns back to feed", "han": "回頭生"},
+   "hồi đầu khắc": {"en": "turns back to check", "han": "回頭剋"}, "hoá tiết": {"en": "drains itself", "han": "化洩"}, "hoá khắc xuất": {"en": "turns to control", "han": "化剋出"},
+   "hoá tỷ": {"en": "turns to the same element", "han": "化比"}, "phục ngâm": {"en": "repeats itself", "han": "伏吟"}, "phản ngâm": {"en": "flips back and forth", "han": "反吟"}
+  },
+  "the_bac": {
+   "Bát thuần": {"en": "pure hexagram (Self line 6)", "han": "八純"}, "1 thế": {"en": "Self line 1", "han": "一世"}, "2 thế": {"en": "Self line 2", "han": "二世"},
+   "3 thế": {"en": "Self line 3", "han": "三世"}, "4 thế": {"en": "Self line 4", "han": "四世"}, "5 thế": {"en": "Self line 5", "han": "五世"},
+   "Du hồn": {"en": "Wandering Soul", "han": "遊魂"}, "Quy hồn": {"en": "Returning Soul", "han": "歸魂"}
+  },
+  "don_vi": {
+   "ngày": {"en": "days"}, "tuần": {"en": "weeks"}, "tháng": {"en": "months"}
   }
  },
  "dia_ly": {
