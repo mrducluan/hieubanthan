@@ -126,7 +126,9 @@ def trang_dau_hieu(ma: str, slug: str) -> dict:
                 "danh_sach": [bc.hoi(ma), L("pt.dh.tu_kiem_2", "Mở Khảo sát nhà, tích dấu hiệu bạn thấy — bài đọc Nhà của bạn sẽ xếp việc nên làm theo "
                                              "đúng hướng nhà và người ở; đã xử lý thì bấm “Tôi đã xử lý” để xem trước – sau.")]})
 
-    hoi_dap = [{"hoi": (L("pt.dh.hd.tot", "{ten} có tốt không?", ten=ten) if tot else L("pt.dh.hd.xau", "{ten} có sao không?", ten=ten)), "dap": tra_loi}]
+    ten_l = ten[:1].lower() + ten[1:]          # bản dịch: "Is a mirror facing the bed a problem?" (không "Is A mirror…")
+    hoi_dap = [{"hoi": (L("pt.dh.hd.tot", "{ten} có tốt không?", ten=ten, ten_l=ten_l) if tot
+                        else L("pt.dh.hd.xau", "{ten} có sao không?", ten=ten, ten_l=ten_l)), "dap": tra_loi}]
     if v0:
         hoi_dap.append({"hoi": L("pt.dh.hd.v0", "Xử lý “{ten}” thế nào mà không tốn tiền?", ten=ten.lower()), "dap": v0})
     if can_ho:
