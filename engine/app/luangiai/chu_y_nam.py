@@ -517,22 +517,27 @@ def phongthuy_doan_hoi(mang: str, tu_nam: int, huong_cua: str | None = None, so_
     sao = kb.theo_mon(mang, "phongthuy").get("sao") or {}
     ten_m = kb.ten(mang)
     if not sao:
-        s = f"Phong thuỷ nhà không chỉ ra năm riêng cho {ten_m}. Việc nên giữ: {kb.viec(mang)}."
+        s = L("hoi.pt.cy.khong_nam", "Phong thuỷ nhà không chỉ ra năm riêng cho {m}. Việc nên giữ: {v}.", m=ten_m, v=kb.viec(mang))
         return f"{s} {kb.ranh_gioi(mang)}"
     if huong_cua:
         q = next((k for k, v in hk.QUAI.items() if v[1] == huong_cua), None)
         if q:
-            return doan_mang(mang, phongthuy_nam(q, tu_nam, mang, SO_NAM, f"cửa chính ({huong_cua})"),
-                             f"Theo nhà bạn đã lưu (cửa chính phía {huong_cua})")
+            hc = _ten.ten("huong", huong_cua) if _ten.muc("huong", huong_cua) else huong_cua
+            return doan_mang(mang, phongthuy_nam(q, tu_nam, mang, SO_NAM, L("hoi.pt.cy.noi", "cửa chính ({h})", h=hc)),
+                             L("hoi.pt.cy.theo_nha", "Theo nhà bạn đã lưu (cửa chính phía {h})", h=hc))
     so = int(next(iter(sao)))
     nam_phia = []
     for n in range(tu_nam, tu_nam + so_nam):
         q = next((k for k, v in hk.luu_nien(n)["cung"].items() if v == so), None)
         if q and q in hk.QUAI:
-            nam_phia.append(f"năm {n} phía {hk.QUAI[q][1]}")
-    s = (f"Theo Huyền Không, {sao[str(so)].split(' bay tới')[0]} bay tới " + ", ".join(nam_phia) + ". Năm sao này tới đúng "
-         f"phía cửa chính nhà bạn thì năm đó nên chú ý {ten_m} hơn: {kb.viec(mang)}. Lưu hồ sơ nhà (hướng cửa) để xem đúng "
-         "năm cho nhà bạn.")
+            h = hk.QUAI[q][1]
+            nam_phia.append(L("hoi.pt.cy.nam_phia", "năm {n} phía {h}", n=n, h=_ten.ten("huong", h) if _ten.muc("huong", h) else h))
+    sao_ten = sao[str(so)].split(' bay tới')[0]
+    if " reaches" in sao_ten:                     # bản phủ tiếng Anh của câu sao: "star 7 (Seven Red) reaches …"
+        sao_ten = sao_ten.split(" reaches")[0]
+    s = L("hoi.pt.cy.theo_hk", "Theo Huyền Không, {sao} bay tới {ds}. Năm sao này tới đúng phía cửa chính nhà bạn thì năm đó "
+          "nên chú ý {m} hơn: {v}. Lưu hồ sơ nhà (hướng cửa) để xem đúng năm cho nhà bạn.", sao=sao_ten,
+          ds=L("hoi.pt.noi", ", ").join(nam_phia), m=ten_m, v=kb.viec(mang))
     return f"{s} {kb.ranh_gioi(mang)}"
 
 

@@ -838,7 +838,7 @@ def _hien_goi(x, k: str = ""):
             return {**x, **{kk: m[kk] for kk in ("ten", "nghia") if isinstance(m.get(kk), str)}}
         if k == "nam" and isinstance(x.get("can_chi"), str):
             return {**x, "can_chi": _cc(x["can_chi"])}
-        return {kk: _hien_goi(v, kk) for kk, v in x.items()}
+        return {kk: _hien_goi(v, kk) for kk, v in x.items() if kk != "tu_khoa"}    # tu_khoa = mẫu so khớp tiếng Việt (nội bộ)
     if isinstance(x, list):
         return [_hien_goi(v, k) for v in x]
     if isinstance(x, str):

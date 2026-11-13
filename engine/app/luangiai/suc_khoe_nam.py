@@ -223,22 +223,25 @@ def phongthuy_doan_hoi(tu_nam: int, phuong_ngu: str | None = None, so_nam: int =
     if phuong_ngu:
         q = next((k for k, v in hk.QUAI.items() if v[1] == phuong_ngu), None)
         if q:
-            ds = phongthuy_nam(q, tu_nam, SO_NAM, noi=f"phòng ngủ chính ({phuong_ngu})")
+            pn = _ten.ten("huong", phuong_ngu) if _ten.muc("huong", phuong_ngu) else phuong_ngu
+            ds = phongthuy_nam(q, tu_nam, SO_NAM, noi=L("hoi.pt.sk.noi", "phòng ngủ chính ({h})", h=pn))
             if ds:
-                return (f"Theo nhà bạn đã lưu (phòng ngủ chính ở phía {phuong_ngu}): {cau_cac_nam(ds)} "
+                return (L("hoi.pt.sk.theo_nha", "Theo nhà bạn đã lưu (phòng ngủ chính ở phía {h}): ", h=pn) + f"{cau_cac_nam(ds)} "
                         f"{mien_tru()}")
-            return (f"Theo nhà bạn đã lưu, mười năm tới sao lưu niên sách xưa gắn với sức khoẻ không bay tới phía phòng ngủ "
-                    f"chính ({phuong_ngu}). {kb.mau('khong_nam')} {mien_tru()}")
+            return (L("hoi.pt.sk.khong_toi", "Theo nhà bạn đã lưu, mười năm tới sao lưu niên sách xưa gắn với sức khoẻ không bay tới "
+                      "phía phòng ngủ chính ({h}). ", h=pn) + f"{kb.mau('khong_nam')} {mien_tru()}")
     nam_phia = []
     for n in range(tu_nam, tu_nam + so_nam):
         q = next((k for k, v in hk.luu_nien(n)["cung"].items() if v == 2), None)
         if q and q in hk.QUAI:
-            nam_phia.append(f"năm {n} phía {hk.QUAI[q][1]}")
+            h = hk.QUAI[q][1]
+            nam_phia.append(L("hoi.pt.cy.nam_phia", "năm {n} phía {h}", n=n, h=_ten.ten("huong", h) if _ten.muc("huong", h) else h))
     he = _tron(kb.he_hanh("Thổ"))
-    s = ("Theo Huyền Không, sao 2 (Nhị Hắc — sách xưa gắn với sức khoẻ người ở) bay tới " + ", ".join(nam_phia) + ". "
-         "Năm sao này tới đúng phía phòng ngủ chính của bạn thì năm đó nên chú ý sức khoẻ bản thân hơn"
-         + (f", nhất là {he['he']}; sắp xếp đi {he['kham']} vào đầu năm" if he else "")
-         + ", giữ phòng thoáng, sạch, ít đồ đạc. Lưu hồ sơ nhà (vị trí phòng ngủ) để xem đúng năm cho nhà bạn.")
+    s = (L("hoi.pt.sk.dau", "Theo Huyền Không, sao 2 (Nhị Hắc — sách xưa gắn với sức khoẻ người ở) bay tới {ds}. "
+           "Năm sao này tới đúng phía phòng ngủ chính của bạn thì năm đó nên chú ý sức khoẻ bản thân hơn",
+           ds=L("hoi.pt.noi", ", ").join(nam_phia))
+         + (L("hoi.pt.sk.he", ", nhất là {he}; sắp xếp đi {kham} vào đầu năm", he=he["he"], kham=he["kham"]) if he else "")
+         + L("hoi.pt.sk.cuoi", ", giữ phòng thoáng, sạch, ít đồ đạc. Lưu hồ sơ nhà (vị trí phòng ngủ) để xem đúng năm cho nhà bạn."))
     return f"{s} {mien_tru()}"
 
 
