@@ -35,24 +35,25 @@
 - [x] KT-TT4 (2026-11-12): lá số Bát tự thuộc cách cục đặc biệt (≈ 0,6 %) có thêm hộp "Một cách đọc khác" theo «Luận tạp cách» — anh không cần làm gì; khi có phiếu "Đúng với mình" em sẽ báo số.
 - [x] KT-TT5 (2026-11-12): bài đọc Kinh Dịch có thêm dòng "Thế chung của quẻ" (quẻ dễ tan / dễ kết / lòng chưa yên…) theo Tăng San Bốc Dịch — anh không cần làm gì.
 - [ ] KT-TT6 (2026-11-12): xem `docs/DO-TIN-KHO-TRI-THUC.md` (tệp nào đã có nguyên văn đối chiếu, tệp nào mới là tóm ý / biên tập) và cho em biết muốn nâng mức phần nào trước — em đề xuất thứ tự ở mục 10.10 của tài liệu kiểm toán.
-- [ ] **KT-NT1 (2026-11-13) — sách Nhân tướng em cần anh tải giúp** (proxy chặn máy chủ tải của archive.org; anh tải bản PDF
-  hoặc tệp chữ `…_djvu.txt` rồi gửi qua Drive, em nạp vào kho nguồn và đối chiếu 17 câu trích còn lại):
-  1. 神相全編 (Thần Tướng Toàn Biên, Trần Đoàn soạn, Viên Trung Triệt đính chính, Trí Hoà đường, bản Minh) —
-     https://archive.org/details/20260503_20260503_1256
-  2. 袁柳莊先生神相全編 (bản Liễu Trang, Quang Tự 15, Hiệu Kinh sơn phòng; dùng cho phần Liễu Trang) —
-     https://archive.org/details/20260503_20260503_1414
-  3. 水鏡集 (Thuỷ Kính Tập, Phạm Lai, Tảo Diệp sơn phòng) — https://archive.org/details/20260503_20260503_1427
-     (bản dự phòng: https://archive.org/details/20260507_20260507_0042)
-  4. 麻衣相法 / 麻衣神相 (Ma Y Thần Tướng, nguồn KB trích nhiều nhất): em CHƯA tìm được bản quét đáng tin. Anh có bản in đời
-     Thanh / Dân Quốc (bản quét PDF) thì gửi em; không có thì em đổi các câu ghi Ma Y sang câu có thật trong Thần Tướng Toàn Biên
-     (Ma Y nằm trong bộ này).
+- [x] **KT-NT1/2 (2026-11-13) — sách Nhân tướng**: anh đã gửi; 3 tệp chữ archive.org là chữ máy nhận dạng hỏng (không dùng được),
+  em lấy bốn sách tướng thuật bản Tứ khố đã gõ lại → cả 25 câu trích KB nay khớp sách (`docs/KIEM-TOAN-TRI-THUC-2026-11.md` mục 10.14).
+  Không cần nạp lại ngay. Nếu sau này muốn thêm nội dung riêng của Liễu Trang / Thuỷ Kính / Ma Y: tìm **bản gõ** (sách in chữ chì có
+  chấm câu, hoặc tệp chữ do người soát) — bản quét PDF đẹp nhưng không có lớp chữ.
 - [x] KT-TT7 (2026-11-12, xong KT-TT8 2026-11-13: sửa Quân thần + Nguyệt sinh theo sách): bốn cách cục Tử vi đang nhận diện KHÁC chữ Toàn Thư (bảng ở mục 10.11 tài liệu kiểm toán) — anh quyết sửa theo sách hay giữ; em đề xuất sửa Quân thần khánh hội + Nguyệt sinh thương hải, giữ hai cách còn lại.
-- [ ] Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
+- [x] (đã lên — kiểm 2026-11-13) Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
+- [ ] **KT-N2 (2026-11-13) — ba thần sát Bát tự đang khác chữ Tam Mệnh Thông Hội** (em KHÔNG đổi phép tính, chỉ ghi rõ trên lá số
+  "sách chép cách khác"; anh quyết giữ bảng phổ biến hay đổi theo sách — đổi thì tăng `ENGINE_VERSION`): **Hồng Diễm** (sách: Ất gặp Ngọ,
+  Mậu gặp Tý, Nhâm gặp Tỵ; engine: Ất–Thân, Mậu–Thìn, Nhâm–Tý), **Văn Xương** (engine dùng bảng Giáp Tỵ, Ất Ngọ… phổ biến ở sách
+  đời sau; câu của Tam Mệnh là bảng khác), **Thiên Y** (không có trong sách này). Em đề xuất: giữ như hiện nay.
+- [ ] **KT-N2 — nguồn Phong thuỷ**: kho Tứ khố chỉ có *Trạch Kinh* (24 lộ, âm trạch / dương trạch — không phải Bát trạch engine đang
+  dùng), *Táng Thư*, *Hám Long Kinh* (âm trạch, hình thế núi). Sách engine thật sự dựa vào là **Dương Trạch Tam Yếu** (Triệu Cửu Phong,
+  đời Thanh) và **Bát Trạch Minh Kính** — không có bản gõ trong kho em vào được. Anh có **bản gõ chữ Hán** (hoặc bản dịch Việt cũ
+  đã hết bản quyền) thì gửi em; PDF quét không có lớp chữ thì em không đọc được.
 - [ ] (Tuỳ chọn) Mời người rành Dịch / Tử vi đọc soát: 64 trang quẻ (lời Ngô Tất Tố bản điện tử còn lỗi gõ), 74 nghĩa sao nhỏ.
 - [x] **Gửi sách em không tự lấy được** (anh đã gửi thư mục Drive 9 tệp 2026-11-12) (Google Drive hoặc đính kèm; PDF chữ tốt hơn ảnh quét) — ưu tiên: (1) *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang), (2) *Tử vi tổng hợp* (Nguyễn Phát Lộc), (4) *Tử Bình Chân Thuyên* bản chữ — mở `ctext.org/wiki.pl?if=gb&res=413248` trên trình duyệt rồi lưu PDF, (5) *Uyên Hải Tử Bình* bản đủ (ctext res=307303), (6) *Kinh Dịch* Ngô Tất Tố dịch / *Chu Dịch* Phan Bội Châu. Bảng đầy đủ: mục 6 của tài liệu.
-- [ ] **SK-2 (2026-11-12) — xem lại danh sách tên bệnh** em chọn cho 5 hành + 14 chính tinh (`engine/app/kb/data/suc_khoe_kb.json`, trường `benh`; sửa ở `/quan-tri` → Kho tri thức). Em cố ý KHÔNG đưa bệnh hiểm nghèo (ung thư, đột quỵ, suy thận…) — anh muốn thêm thì báo em. Nên hỏi luật sư một câu: nêu tên bệnh trong lời "nên đi khám để phát hiện sớm …" có cần thêm miễn trừ nào không.
+- [x] (anh duyệt 2026-11-13) **SK-2 (2026-11-12) — xem lại danh sách tên bệnh** em chọn cho 5 hành + 14 chính tinh (`engine/app/kb/data/suc_khoe_kb.json`, trường `benh`; sửa ở `/quan-tri` → Kho tri thức). Em cố ý KHÔNG đưa bệnh hiểm nghèo (ung thư, đột quỵ, suy thận…) — anh muốn thêm thì báo em. Nên hỏi luật sư một câu: nêu tên bệnh trong lời "nên đi khám để phát hiện sớm …" có cần thêm miễn trừ nào không.
 - [x] **Uyên Hải Tử Bình** — anh đã tải lại 2026-11-12, em đã nạp thử vào kho nguồn (`docs/KIEM-TOAN-TRI-THUC-2026-11.md` mục 10.5). (Không gấp) nếu anh có **bản khắc / bản đủ 5 quyển** thì gửi để em so lại — bản hiện tại là bản điện tử đã lược bớt.
-- [ ] Deploy **engine** để 24 chỗ kinh văn Kinh Dịch vừa sửa lên trang quẻ (web không cần đổi).
+- [x] (đã lên — kiểm 2026-11-13) Deploy **engine** để 24 chỗ kinh văn Kinh Dịch vừa sửa lên trang quẻ (web không cần đổi).
 - [ ] (Đã làm) Môi trường `hieubanthan` thêm tên miền `zh.wikisource.org` — anh đã duyệt ở hộp thoại; không cần làm gì thêm.
 
 ### 4aq. PAY2S-1 — Pay2S thay payOS · thẻ Visa/Mastercard (2026-11-12, `docs/KE-HOACH-THANH-TOAN.md` mục 0b, `docs/SO-SANH-CONG-THE.md`)
@@ -128,7 +129,7 @@
 
 - [ ] **Deploy engine trước web** (trường mới `ba_la` ở `/v1/thanso/hom-nay`, trang `ban_than` ở `/v1/goi-y-cheo`). Web lên trước thì
   Hôm nay vẫn hiện Lá bài đầu ngày cũ và khối "Bảy cách nhìn" tự ẩn — không vỡ trang, tự đúng khi engine xong.
-- [ ] **Render → `hieubanthan-engine-sg` → Environment: thêm `LA_NGAY_MUOI`** = một chuỗi ngẫu nhiên ≥ 16 ký tự (vd lấy từ
+- [x] (anh đã đặt 2026-11-13) **Render → `hieubanthan-engine-sg` → Environment: thêm `LA_NGAY_MUOI`** = một chuỗi ngẫu nhiên ≥ 16 ký tự (vd lấy từ
   trình tạo mật khẩu, 32 ký tự), giữ bí mật. Có biến này thì lá Tarot riêng mới hiện trên thẻ chia sẻ "Ba lá"; chưa đặt thì
   thẻ vẽ lá Tarot úp (vẫn chia sẻ được, không lộ gì). Đặt xong mọi người đổi lá riêng một lần — nên đặt ngay lúc deploy.
 - [ ] (3 phút) `/hom-nay`: lật đủ ba lá → "Ba lá ghép lại" → "Chia sẻ ba lá" → mở link thẻ trên máy khác, "Tải ảnh" có QR.

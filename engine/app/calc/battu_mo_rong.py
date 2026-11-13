@@ -89,6 +89,30 @@ _KHOI_CUONG = {("Canh", "Thìn"), ("Canh", "Tuất"), ("Nhâm", "Thìn"), ("Mậ
 
 THAN_SAT_NGUON = "Tam Mệnh Thông Hội (Vạn Dân Anh, đời Minh) — bảng tra phổ thông"
 
+# KT-N2 (2026-11-13) — câu của chính sách cho từng sao (nguyên văn, khớp kho nguồn `fixtures/nguon/tam_menh_thong_hoi.json`;
+# test `tests/test_kt_n2_tam_menh.py`). `khop` = bảng engine đang dùng trùng câu sách; False = engine dùng bảng phổ thông
+# khác câu này (ghi rõ để người duyệt quyết, KHÔNG đổi phép tính). Thiên Y không có trong sách → không có mục.
+THAN_SAT_SACH: dict[str, dict] = {
+    "Thiên Ất Quý Nhân": {"han": "甲戊庚牛羊六辛逢馬虎", "khop": True},
+    "Thái Cực Quý Nhân": {"han": "甲乙木先造乎子坎水助而生後終乎午離火焚而死", "khop": True},
+    "Văn Xương": {"han": "甲人蛇口乙猪頭丙狗丁龍戊向猴己午庚寅辛未貴六壬卯位癸逢牛", "khop": False},
+    "Lộc Thần": {"han": "甲祿寅乙祿卯庚祿申辛祿酉壬祿亥癸祿子", "khop": True},
+    "Dương Nhận": {"han": "羊刃常居祿前一辰", "khop": True},      # sách kể cả can âm; engine chỉ xét can dương (lối phổ biến)
+    "Kim Dư": {"han": "金轝常居祿前二辰", "khop": True},
+    "Hồng Diễm": {"han": "甲乙逢午丙寅丁未戊子己辰庚戌辛酉壬巳癸申為紅艶煞", "khop": False},
+    "Thiên Đức": {"han": "正月丁喜亥將", "khop": True},
+    "Nguyệt Đức": {"han": "壬甲丙庚謂之月徳", "khop": True},
+    "Đào Hoa": {"han": "寅午戌在卯申子辰在酉為桃花煞", "khop": True},
+    "Dịch Mã": {"han": "寅午戌生人馬在申", "khop": True},
+    "Hoa Cái": {"han": "三合底處得庫謂之華葢", "khop": True},
+    "Tướng Tinh": {"han": "三合中位謂之将星", "khop": True},
+    "Kiếp Sát": {"han": "申子辰以巳為刼煞", "khop": True},
+    "Vong Thần": {"han": "申子辰以亥為亡神", "khop": True},
+    "Cô Thần": {"han": "進前一辰見寅為孤退後一辰見戌為寡", "khop": True},
+    "Quả Tú": {"han": "進前一辰見寅為孤退後一辰見戌為寡", "khop": True},
+    "Khôi Cương": {"han": "壬辰庚戌與庚辰戊戌魁罡四座神", "khop": True},
+}
+
 
 def _nhom(chi: str) -> int:
     return next(i for i, g in enumerate(_TAM_HOP_NHOM) if chi in g)
@@ -129,7 +153,8 @@ def than_sat(tru: list[dict]) -> list[dict]:
     them("Quả Tú", {i for i in range(1, 4) if chi[i] == qua}, "chi năm")
     if (nc, cn) in _KHOI_CUONG:
         them("Khôi Cương", {2}, "trụ ngày")
-    return [{"ten": t, "loai": _Y[t][0], "y": _Y[t][1], "tru": sorted(o[t]), "goc": goc[t]}
+    return [{"ten": t, "loai": _Y[t][0], "y": _Y[t][1], "tru": sorted(o[t]), "goc": goc[t],
+             **({"sach": dict(THAN_SAT_SACH[t])} if t in THAN_SAT_SACH else {})}
             for t in _Y if t in o]
 
 

@@ -44,7 +44,8 @@ def _can_cu_sach(dd: dict) -> str | None:
     s = dd.get("sach") or {}
     ten = kb.ten_nguon(s.get("nguon"))
     if s.get("trich"):
-        return f"Sách: “{s['trich']}” ({ten}){' — ' + s['y'] if s.get('y') else ''}"
+        han = f"{s['han']} — " if s.get("han") else ""          # KT-NT: nguyên văn chữ Hán đã đối chiếu kho nguồn
+        return f"Sách: “{han}{s['trich']}” ({ten}){' — ' + s['y'] if s.get('y') else ''}"
     if s.get("y"):
         return f"Sách ({ten}): {s['y']}"
     return f"Nguồn: {ten}"

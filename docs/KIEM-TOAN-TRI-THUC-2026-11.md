@@ -440,3 +440,64 @@ Anh duyệt đề xuất ở mục 10.11.
 - **Chưa kiểm**: 17 câu ghi Ma Y Thần Tướng / Thần Tướng Toàn Biên / Thuỷ Kính. Tỉ lệ sai ở đợt này cho thấy phần lớn chúng cũng sẽ
   sai, nên cần bản quét để đối chiếu (danh sách sách ở `docs/VIEC-CUA-ANH.md` mục KT-NT1).
 
+### 10.14 Nhân tướng: kho nguồn đợt 2, mọi câu trích đều khớp sách (KT-NT2, 2026-11-13)
+
+**Đánh giá nguồn anh gửi (Drive "nhân tướng")**
+
+| Tệp | Chất lượng | Dùng được? |
+|---|---|---|
+| 3 tệp "Full text of …" (.html) — Thần Tướng Toàn Biên, Thuỷ Kính Tập, Liễu Trang | Chữ do máy archive.org tự nhận dạng từ bản khắc gỗ chữ dọc: toàn chữ giản thể vô nghĩa xen chữ Latin. Không có lần nào xuất hiện 三停, 印堂, 山根, 法令, 準頭… | **Không** — cần nạp lại |
+| PDF Liễu Trang (袁柳莊先生神相全編, Quang Tự 15, 95 trang đôi, 46 MB) | Bản quét rõ nét, đọc được từng chữ khi phóng to; không có lớp chữ | Dùng làm bản gốc đối chiếu; muốn thành kho nguồn phải gõ lại |
+| PDF Thần Tướng Toàn Biên (bản Minh, Trí Hoà đường, 562 MB) | Bản quét; không có lớp chữ | Như trên |
+| Thuỷ Kính Tập | Chỉ có tệp chữ máy nhận dạng hỏng, không có PDF | Thiếu |
+
+**Em lấy thay bằng bản gõ đã chấm lại**: bốn sách tướng thuật trong Tứ khố toàn thư (Kanseki Repository, bản Văn Uyên Các) —
+月波洞中記 (Nguyệt Ba Động Trung Ký), 玉管照神局 (Ngọc Quản Chiếu Thần Cục), 太清神鑑 (Thái Thanh Thần Giám), 人倫大統賦
+(Nhân Luân Đại Thống Phú, kèm chú Tiết Diên Niên). Thần Tướng Toàn Biên chép lại nhiều phần của bốn sách này. Nạp vào
+`engine/fixtures/nguon/nhan_tuong_co_thu.json` bằng `engine/scripts/nap_nhan_tuong_co_thu.py`.
+
+**Kết quả đối chiếu 17 câu còn lại** (ghi Ma Y / Thần Tướng Toàn Biên / Thuỷ Kính): không câu nào có đúng chữ trong các sách đã
+có. 15 câu thay bằng câu CÓ THẬT trong bốn sách Tứ khố và hợp ý mục (vd «三停平等能和美», «日月角為父母宫», «準頭齊者心性慈»,
+«目下臥蠶紋當生貴子孫», «地閣方停萬頃田»); 2 câu bỏ (Điền Trạch, mắt tam bạch — không tìm được câu sách hợp ý). Lời đi kèm sửa
+cho khớp (bỏ "anh em hoà thuận" ở mục lông mày, "khẩu như giốc cung" → "miệng như cánh cung"…). Nay **cả 25 câu trích** của KB
+Nhân tướng có nguyên văn chữ Hán (`han`) và test bắt buộc mọi câu trích ghi sách có kho nguồn
+(`engine/tests/test_kt_nt1_kho_nguon.py`). Trường `nguon` cấp mục (Ma Y, Thần Tướng Toàn Biên) vẫn chỉ là ghi phái của phần tóm ý.
+
+**Còn lại (không gấp)**: muốn đưa nội dung riêng của Liễu Trang / Ma Y vào lời luận thì phải có bản gõ; em có thể gõ dần từ PDF
+Liễu Trang theo từng thiên khi cần (chậm, phải soát).
+
+### 10.15 Ba việc dùng nguồn sẵn có (KT-N1, 2026-11-13)
+
+Anh giao làm nhóm 1 của đề xuất; em đánh giá từng việc trước khi làm.
+
+1. **Nhân tướng — thêm câu sách thật**: 105 nét chưa có câu trích. Phần lớn nét "cần lưu ý" chỉ có câu sách mang giọng phán
+   (nghèo, yểu, hình khắc) → **không đưa**. Thêm 18 câu trung tính, đúng ý nét (năm hình Kim / Mộc / Thuỷ / Hoả / Thổ, mắt, mũi,
+   môi, hàm, trán, xương – thịt, ánh mắt, quầng mắt, dáng mặt cân đối) → 43 câu, câu nào cũng có `han` khớp kho nguồn. Câu trích
+   ở "Vì sao nói vậy" và trang bộ vị nay hiện cả chữ Hán. **12 cung trên mặt**: KB theo lối Ma Y (Tài Bạch ở mũi, Huynh Đệ ở mày,
+   Quan Lộc ở trán); Thái Thanh Thần Giám chép lối cổ hơn (Tài Bạch ở Thiên Thương – Địa Khố, Huynh Đệ ở góc trán, Quan Lộc ở
+   chính diện). Hai lối cùng tồn tại; giữ lối Ma Y vì phổ biến, ghi lại để người duyệt biết.
+2. **Kinh Dịch — Tự Quái nguyên văn**: 64 trang quẻ có câu Tự Quái của đúng quẻ (cắt từ kho Truyện Nghĩa, test khớp nguyên văn);
+   phần diễn ý giữ nguyên bên dưới.
+3. **Tử vi — cách «Phụ Bật củng chủ»** (定贵局: «紫微守命二星来拱是也，夹之亦然»): Tử Vi thủ Mệnh, Tả Phù + Hữu Bật cùng về tam
+   phương tứ chính hoặc kẹp Mệnh; cùng ở Mệnh vẫn là Quân Thần Khánh Hội. 1.000 lá mẫu: 14 lá (88 lá Tử Vi thủ Mệnh). Nối cuối
+   danh sách (76 cách), cách cũ không đổi → không tăng `ENGINE_VERSION`. 16 dòng sách ghi "xem chú ở trên" là cách trùng tên câu
+   phú đã có, chưa rà thêm.
+
+### 10.16 Nguồn mới từ kho Tứ khố: Tam Mệnh Thông Hội · Hiệp Kỷ Biện Phương Thư (KT-N2, 2026-11-13)
+
+Nhóm 2 của đề xuất. Đánh giá trước khi làm: phép tính đã có golden; việc đáng làm là **nối bảng đang dùng với câu của chính sách**,
+để người đọc thấy căn cứ và người duyệt thấy chỗ nào engine khác sách.
+
+1. **Bát tự — Tam Mệnh Thông Hội** (Kanseki `KR3g0042`, bản Tứ khố gõ lại): kho nguồn `tam_menh_thong_hoi.json` 34 thiên (Thai
+   nguyên, Mệnh cung, tiểu vận, toàn bộ quyển 3 thần sát, hai thiên quyển 6). 18 / 19 thần sát của bảng chính có câu nguyên văn
+   (`THAN_SAT_SACH`, test chuỗi con). Kết quả đối chiếu: **16 sao khớp sách**; Kim Dư và Dương Nhận kiểm lại được bằng phép tính từ
+   bảng Lộc. **Ba chỗ khác**: Hồng Diễm (khác ở Ất, Mậu, Nhâm), Văn Xương (engine dùng bảng phổ biến đời sau), Thiên Y (sách không
+   có). Không đổi phép tính; lá số ghi "Sách chép: …" hoặc "Sách chép cách khác: …" dưới từng sao. Chờ anh quyết ba chỗ khác.
+2. **Xem ngày — Hiệp Kỷ Biện Phương Thư** (Kanseki `KR3g0051`): chỉ nạp mục «男女合婚大利月» của quyển 36 (1.803 chữ) — mục engine
+   đang dẫn cho tháng gả cưới đại lợi. Test tính lại 12 tuổi theo đúng câu sách («陽年自本命前一月向前順數…», «第十二月為女本命第六
+   月為本命之衝») → hàm `thang_gia_thu` khớp cả 12. Kết quả chọn ngày nay kèm câu quy tắc và câu sách bác thuyết này. Bảng nghi / kỵ
+   hoàng lịch đã có golden oracle 1930–2030 nên không nạp lại.
+3. **Phong thuỷ — chưa nạp**: Tứ khố chỉ có Trạch Kinh (24 lộ — không phải Bát trạch), Táng Thư, Hám Long Kinh (âm trạch). Hai sách
+   engine dựa vào (Dương Trạch Tam Yếu, Bát Trạch Minh Kính) không có bản gõ tin được → báo anh, không nạp nguồn lệch môn.
+
+Mức, phép tính không đổi → không tăng `ENGINE_VERSION`. Golden đầu ra bản Việt đổi có chủ đích (Bát tự, hỏi đáp Bát tự, lịch).

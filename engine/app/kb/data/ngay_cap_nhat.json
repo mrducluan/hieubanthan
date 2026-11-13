@@ -2,84 +2,84 @@
  "_ghi_chu": "SEO-L4 — ngày đăng / sửa thật của từng trang kiến thức. KHÔNG sửa tay: chạy `python scripts/ngay_cap_nhat.py` sau khi sửa KB hoặc mã dựng trang.",
  "trang": {
   "bo_vi/an-duong": {
-   "bam": "876dde0a482655d6",
+   "bam": "3c214c38af03f21a",
    "dang": "2026-11-06",
    "sua": "2026-11-13"
   },
   "bo_vi/chuan-dau": {
-   "bam": "7f8a25dc5dc34051",
+   "bam": "f791af68f8bf2fa9",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/dia-cac": {
-   "bam": "92fe66a0155eafb6",
+   "bam": "afdee15fec009a20",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/dien-trach": {
-   "bam": "a4e3f0e18a78d9df",
+   "bam": "c18a2bfcdd3a5a32",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/khuon-mat-tong-the": {
-   "bam": "95c6462d51427999",
+   "bam": "beb470c790d37d4a",
    "dang": "2026-11-06",
    "sua": "2026-11-13"
   },
   "bo_vi/lan-dai": {
-   "bam": "09c4c64303f4f7ce",
+   "bam": "9159f6147fa36c15",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/le-duong": {
-   "bam": "9ab8e87d3c8f59a4",
+   "bam": "50c59c8f78b65bd6",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/long-may": {
-   "bam": "9f1ede8513f56157",
+   "bam": "d8c5515376d4d187",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/luong-quyen": {
-   "bam": "1c54ccfcba0d7d74",
+   "bam": "aabe6bb0d13a212e",
    "dang": "2026-11-06",
    "sua": "2026-11-13"
   },
   "bo_vi/mat": {
-   "bam": "212406684e342c7e",
+   "bam": "85406b14c3aa6f9d",
    "dang": "2026-11-06",
    "sua": "2026-11-13"
   },
   "bo_vi/mieng": {
-   "bam": "33d50567b7494171",
+   "bam": "8de1c4e9d0a9af24",
    "dang": "2026-11-06",
    "sua": "2026-11-13"
   },
   "bo_vi/ngu-vi": {
-   "bam": "be17c2a7c9ac4d60",
+   "bam": "f61c4145c0b36afe",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/nhan-trung": {
-   "bam": "08aa5b70c5e5768f",
+   "bam": "d547d3086ab03994",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/nhat-giac": {
-   "bam": "4c68e6e5a8e10251",
+   "bam": "acc31b52e8799253",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/nien-thuong": {
-   "bam": "c445d2a27286a9f7",
+   "bam": "2845b76b4583a165",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/no-boc": {
-   "bam": "e1d183dfed56ddb4",
+   "bam": "a584f92779bbe80f",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/phap-lenh": {
    "bam": "1c1af7b5f94e0003",
@@ -87,19 +87,19 @@
    "sua": "2026-11-13"
   },
   "bo_vi/son-can": {
-   "bam": "6ece6236ce120110",
+   "bam": "af281d2cb64e184b",
    "dang": "2026-11-06",
    "sua": "2026-11-13"
   },
   "bo_vi/tai": {
-   "bam": "7a9869c3ed639da3",
+   "bam": "1c8f1ff657dcd431",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/thien-dinh": {
-   "bam": "f102af520010e6e0",
+   "bam": "10aa4619e7830c26",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "bo_vi/thien-thuong": {
    "bam": "5cc82cc602a3e404",
@@ -2177,324 +2177,324 @@
    "sua": "2026-10-23"
   },
   "que/que-1-can": {
-   "bam": "144b5d670bbf7560",
+   "bam": "d2251ffabd68bff7",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-10-ly": {
-   "bam": "653afcb6f91152c9",
+   "bam": "c6ebd06e4bd702a0",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-11-thai": {
-   "bam": "f90b052491b25eda",
+   "bam": "d34dfb7d584a3ed1",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-12-bi": {
-   "bam": "715e04cc2c982ea9",
+   "bam": "f4fccd31e8b8d5e0",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-13-dong-nhan": {
-   "bam": "a6664c2f000b656b",
+   "bam": "4535630dfb6a1bd6",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-14-dai-huu": {
-   "bam": "6f9b2aac22a2bf49",
+   "bam": "4e3ea4f0fcc787d4",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-15-khiem": {
-   "bam": "53fe99f2dc2ba782",
+   "bam": "1496783c35c9b403",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-16-du": {
-   "bam": "b6674ff9f55e1078",
+   "bam": "923c008daa84ba2c",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-17-tuy": {
-   "bam": "558bdf6de58876ed",
+   "bam": "5a3d05ed598342d5",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-18-co": {
-   "bam": "49009219fb0987c3",
+   "bam": "fe501f7fb340f8b9",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-19-lam": {
-   "bam": "e4862f0a386707e0",
+   "bam": "f33f5955125ac52a",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-2-khon": {
-   "bam": "11341c4511555f83",
+   "bam": "38d4e6917903831b",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-20-quan": {
-   "bam": "27cfbdf41af5d51a",
+   "bam": "d28795ca127e47a8",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-21-phe-hap": {
-   "bam": "3c4a28b780c71ba7",
+   "bam": "502f8a04d73a53d6",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-22-bi": {
-   "bam": "23a0c6afebaf7f0c",
+   "bam": "0eb3479c6cb81c27",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-23-bac": {
-   "bam": "861c3b0a98280421",
+   "bam": "85cb73b19d49950b",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-24-phuc": {
-   "bam": "1c8f25ba8fee1705",
+   "bam": "94fb1c9cff8618a3",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-25-vo-vong": {
-   "bam": "70e0b87d7e200c3a",
+   "bam": "957590e167534245",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-26-dai-suc": {
-   "bam": "29a1bc35a63584de",
+   "bam": "60d8fd2d1f05abfc",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-27-di": {
-   "bam": "6ca69f89b86c960c",
+   "bam": "5a8c3bd5554b5628",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-28-dai-qua": {
-   "bam": "b1465743c45207c6",
+   "bam": "2a266f2bed852e0e",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-29-kham": {
-   "bam": "8fe102a0323b35da",
+   "bam": "4eaa7b08cae9689a",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-3-truan": {
-   "bam": "8b18223d3450d85a",
+   "bam": "8189aa0519e1fee1",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-30-ly": {
-   "bam": "38b11a7c9ffd2cdc",
+   "bam": "66fc49c791b72fc7",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-31-ham": {
-   "bam": "5b46678ce995f6af",
+   "bam": "2cf15a1c71ca504a",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-32-hang": {
-   "bam": "c7a9a904fb35e958",
+   "bam": "8a36749e3d31ce1e",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-33-don": {
-   "bam": "9f600310e4c9cab5",
+   "bam": "29bb251f59868942",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-34-dai-trang": {
-   "bam": "27ebefad095e86e8",
+   "bam": "e9541f1261f16d35",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-35-tan": {
-   "bam": "86480220eb706f91",
+   "bam": "6d2472d26a6a8483",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-36-minh-di": {
-   "bam": "844aed25226bf03b",
+   "bam": "584bc0b5b3c4f9dd",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-37-gia-nhan": {
-   "bam": "4cc7f3c4c13043ad",
+   "bam": "d7ba95da3148b5d2",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-38-khue": {
-   "bam": "050a5f18a4ef4aea",
+   "bam": "b08b5b4c09606f9e",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-39-kien": {
-   "bam": "a443153f1d3f731e",
+   "bam": "f32c4a9be3f16bc6",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-4-mong": {
-   "bam": "234ad0407adc313e",
+   "bam": "032442da77db63c3",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-40-giai": {
-   "bam": "0da0cbd20c2183f0",
+   "bam": "21151d67ac5cfdfe",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-41-ton": {
-   "bam": "f5f1bad1694a6be5",
+   "bam": "a78cda4af9748e79",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-42-ich": {
-   "bam": "ce725ddccb8968ec",
+   "bam": "be46562ee5beacf5",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-43-quai": {
-   "bam": "afd7869cf2c10ec4",
+   "bam": "ffe25a823229cd72",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-44-cau": {
-   "bam": "178ea0c20b36c919",
+   "bam": "7865d4ce83baa0d5",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-45-tuy": {
-   "bam": "c9c2ba83226de8ba",
+   "bam": "eecd3e8cd3f5e4c6",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-46-thang": {
-   "bam": "9ca714fedc8f1ecb",
+   "bam": "135b87ca473bb612",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-47-khon": {
-   "bam": "5da2da3f320ee7cf",
+   "bam": "8806902b8a11bc86",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-48-tinh": {
-   "bam": "d901509b57f0f130",
+   "bam": "e8745a2af0e5e0b8",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-49-cach": {
-   "bam": "fe22e8c8c0b54733",
+   "bam": "8d28671bf2bd4f5f",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-5-nhu": {
-   "bam": "a08db2a17909bb6f",
+   "bam": "b7ff247271ded423",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-50-dinh": {
-   "bam": "0fae377288bc3a55",
+   "bam": "5a058b1c7920e7c1",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-51-chan": {
-   "bam": "ee5c8d40680f1357",
+   "bam": "fa08eaf98c40874d",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-52-can": {
-   "bam": "0139cccced91d413",
+   "bam": "e45c4aab9b585cae",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-53-tiem": {
-   "bam": "ef682f6866ad956c",
+   "bam": "ea73f99ed1341e5d",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-54-quy-muoi": {
-   "bam": "59e2f348ec911a35",
+   "bam": "e0179ce4e49856bb",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-55-phong": {
-   "bam": "1ac1d9d8640d57b4",
+   "bam": "32afc0b1083565a1",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-56-lu": {
-   "bam": "eda343b3203ab8dc",
+   "bam": "1fdfb625307ba3e3",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-57-ton": {
-   "bam": "bc5cb54c90e1fe8a",
+   "bam": "9797e6dac4c98a49",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-58-doai": {
-   "bam": "5592a76eb0daf92c",
+   "bam": "e9ea79a2a5c2bb01",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-59-hoan": {
-   "bam": "59b4518e57788ff0",
+   "bam": "cc036eb9406c9990",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-6-tung": {
-   "bam": "0ac4cf6b3701515b",
+   "bam": "7450581a620f8672",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-60-tiet": {
-   "bam": "7e3909d2b0c677e4",
+   "bam": "dc321b9069bac5b2",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-61-trung-phu": {
-   "bam": "b25d236653a2ce23",
+   "bam": "ea2b1492a9cb818a",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-62-tieu-qua": {
-   "bam": "0709391e1d7e7e4e",
+   "bam": "9ea2b04c012b5479",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-63-ky-te": {
-   "bam": "6bb9596ba8af0d57",
+   "bam": "e90fe940fa6ece74",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-64-vi-te": {
-   "bam": "3a0409b948b56c87",
+   "bam": "23ef8c9730a7e250",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-7-su": {
-   "bam": "f0d3a62cca2f7e8d",
+   "bam": "ec662afe8aa32337",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-8-ty": {
-   "bam": "9a377cdb5787e13e",
+   "bam": "df9807aa8c69b5dd",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "que/que-9-tieu-suc": {
-   "bam": "9709295e094dd37c",
+   "bam": "020e2c7cd4b87f24",
    "dang": "2026-10-08",
-   "sua": "2026-11-12"
+   "sua": "2026-11-13"
   },
   "sao/sao-cu-mon": {
    "bam": "e22363ca69951bd8",

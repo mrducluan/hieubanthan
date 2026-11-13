@@ -170,6 +170,11 @@ export function ChonNgayNhieu({ tu }: { tu: string }) {
               <summary className="cursor-pointer font-semibold">Tháng đại lợi / tiểu lợi theo tuổi cô dâu (tập quán)</summary>
               <p className="mt-2 text-fg-muted">{kq.thang_gia_thu.loi}</p>
               <p className="mt-2 text-xs text-fg-faint">Nguồn: {kq.thang_gia_thu.nguon}.</p>
+              {kq.thang_gia_thu.nguyen_van && (
+                <p className="mt-1 text-xs text-fg-faint" lang="zh-Hant" data-testid="gia-thu-nguyen-van">
+                  Sách chép: «{kq.thang_gia_thu.nguyen_van.quy_tac}». Sách bình: «{kq.thang_gia_thu.nguyen_van.bac}».
+                </p>
+              )}
             </details>
           )}
           {kq.ngay_noi_bat.length > 0 && (
