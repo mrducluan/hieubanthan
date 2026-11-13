@@ -94,6 +94,9 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Giá Luận giải toàn bộ (Sao/báo cáo)", moTa: "Chỉ áp dụng khi đang thu Sao." },
   { khoa: "luan_giai.chuong_mien_phi", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 3, macDinh: 1,
     ten: "Số chương xem miễn phí", moTa: "Khi đang thu Sao: ai cũng đọc trọn N chương đầu; chương sau hiện tiêu đề + điểm nhấn + câu hỏi, mở bằng Sao." },
+  // EN-AI: lớp phân loại AI cho câu gõ tự do tiếng Anh (Bát tự, Tử vi). Cần CẢ env engine HOI_PHAN_LOAI_AI=1 lẫn công tắc này.
+  { khoa: "hoi.phan_loai_ai_en", nhom: "Hỏi đáp", loai: "bat_tat", macDinh: false,
+    ten: "Bản Anh: AI phân loại câu hỏi gõ tự do", moTa: "Bật = câu hỏi tiếng Anh (chỉ câu chữ, không dữ liệu sinh) được gửi tới nhà cung cấp AI để gán nhãn an toàn + chủ đề; AI chỉ được nâng mức an toàn, câu trả lời vẫn do engine dựng. Chỉ bật SAU khi Chính sách riêng tư bản Anh đã ghi ngày hiệu lực và env engine HOI_PHAN_LOAI_AI=1. Tốn lượt AI." },
   { khoa: "sao.hoi.thu", nhom: "Hỏi đáp", loai: "bat_tat", macDinh: false,
     ten: "Giới hạn hỏi đáp miễn phí mỗi ngày", moTa: "Tắt = hỏi không giới hạn (vẫn có trần chống lạm dụng ở engine). Bật = quá lượt miễn phí thì mỗi câu tốn Sao." },
   { khoa: "sao.hoi.mien_phi_khach", nhom: "Hỏi đáp", loai: "so", min: 0, max: 50, macDinh: 3,

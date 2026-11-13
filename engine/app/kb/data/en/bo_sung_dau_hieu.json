@@ -1,0 +1,1710 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 5 — bản phủ tiếng Anh (ban biên tập viết, chờ người bản xứ duyệt).",
+ "source": {
+  "ten": "The Three Essentials of Yang Dwellings, The Bright Mirror of Eight Mansions, The Book of Burial, The Classic of Moving the Dragon, Shen's Xuan Kong Studies (public-domain classics) + Vietnamese folk feng shui",
+  "mo_ta": "Compiled by the Hieuban editorial team from the knowledge base and public-domain classics (draft, awaiting expert review). Y5, 2026-10-26."
+ },
+ "trang": {
+  "duong-dam-thang-vao-nha": {
+   "muc": [
+    {
+     "tieu_de": "Should you buy a house at the end of a road that runs straight at it?",
+     "doan": "You can if the front door can be set back from the line of the road or there is a front yard as a buffer. If the door opens right onto the road edge, where traffic drives up before turning, think harder. Visit at the evening rush hour: do headlights shine straight into the living room, do motorbikes race up to the step before turning? For a shop, the passing trade is a plus; for a home with small children running to the door, it becomes a daily worry."
+    },
+    {
+     "tieu_de": "How is a dead-end alley pointing at the house different from a main road?",
+     "doan": "A dead-end alley is usually much milder because traffic is slow and light. What to watch in an alley is the wind funnelling down it, carrying dust, litter and smells straight into the living room, especially in the dry season. A main road adds horns, headlights at night and the feeling that something is always rushing towards you. It is the same sign but at very different strengths, so go and see in person before deciding."
+    },
+    {
+     "tieu_de": "Does an apartment at the end of a corridor count as a road arrow?",
+     "doan": "Yes, the old books treat any long straight path leading to a door the same way, including corridors inside a building. In an apartment block, a long corridor funnels footsteps, lift noise and shared air conditioning towards the last flat's door. The neatest fix is inside the flat: a tall shoe cabinet or half-height screen just inside the door, so people turn slightly as they come in and can't see straight into the bedroom."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Road arrows by situation: how much to watch and what to do",
+    "chu_thich": "The level is based on how fast and how much traffic heads straight at the door, not a score.",
+    "cot": [
+     "Situation",
+     "How much to watch",
+     "Do first"
+    ],
+    "dong": [
+     [
+      "Dead-end alley under 30 m, only a few houses",
+      "Mild",
+      "Curtains, move seats off the line, keep the porch free of dust"
+     ],
+     [
+      "Long apartment corridor leading to the last flat",
+      "Moderate",
+      "Tall shoe cabinet or half-height screen inside the door, door closed when not in use"
+     ],
+     [
+      "Internal estate road with motorbikes passing",
+      "Moderate",
+      "A gate or low planter in front of the door, a soft porch light"
+     ],
+     [
+      "Main road with trucks and coaches heading straight at it",
+      "Cao",
+      "Set the door back, build a solid fence, no children playing in the front yard"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is it a problem if the road comes in at an angle rather than hitting the middle of the door?",
+     "dap": "At an angle it is clearly milder, because headlights and wind no longer shine straight into the house. Just watch the corner of the house where vehicles swing round."
+    },
+    {
+     "hoi": "I have lived in a road-arrow house for years — do I need to change the door now?",
+     "dap": "There is no rush. Try curtains, moving your seat and an entrance screen for a few weeks; if it feels quieter and less jarring, there is no need to touch the structure."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "The Three Essentials of Yang Dwellings",
+     "nghia": "The book makes the door, the master room and the stove the three essentials of a home; the door is where qi enters, so anything rushing straight at it is considered first."
+    }
+   ],
+   "y_chinh": [
+    "A dead-end alley is milder than a main road: go and see at rush hour",
+    "A long apartment corridor also counts as a road arrow",
+    "Fix it inside the door: a tall shoe cabinet, a half-height screen, heavy curtains",
+    "Homes with small children: a solid fence and gate come first"
+   ]
+  },
+  "nha-o-nga-ba-nga-tu": {
+   "muc": [
+    {
+     "tieu_de": "Should you buy a house at a T-junction to live in?",
+     "doan": "Yes, if the bedrooms can go at the back, away from the junction. Junctions often have traffic lights, with cars stopping and revving, and horns pile up at commuting and school times. Stand inside the house around 7 am and 5 pm to hear what it is really like. If the house is deep, with two or three floors, and the noise only reaches the ground-floor front, it can still be comfortable to live in."
+    },
+    {
+     "tieu_de": "Is a corner house at a crossroads good for a business?",
+     "doan": "For a business, a corner house at a crossroads is usually an advantage: two frontages and lots of people see it. Cafés, pharmacies and convenience stores often choose this kind of house. What to weigh up is customer parking, dust on the glass and sun from two sides. Many families run a shop downstairs and live upstairs, with the bedrooms facing the alley side."
+    },
+    {
+     "tieu_de": "How do a T-junction and a Y-junction differ?",
+     "danh_sach": [
+      "T-junction: a house at the head of the stem also takes a road arrow, so it needs more attention.",
+      "T-junction: a house along the crossbar mainly deals with noise and traffic waiting.",
+      "Y-junction: two streams of traffic converge at the corner of the house, which catches dust and vehicles cutting close.",
+      "A small roundabout: traffic is slow and steady, usually easier to live with than a signalled crossroads."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Where the house sits around a junction: how livable it is",
+    "chu_thich": "Suggestions based on light, noise and access; use them to compare when viewing houses.",
+    "cot": [
+     "Position",
+     "To live in",
+     "For a business",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Corner house, two frontages",
+      "Noise on two sides, sun on two sides",
+      "Very convenient, easy to see",
+      "Double glazing, bedrooms upstairs at the back"
+     ],
+     [
+      "At the head of a T-junction",
+      "Needs the most attention",
+      "Good if there is parking",
+      "Set the door back, add a porch or a planter as a screen"
+     ],
+     [
+      "Two or three houses away from the junction",
+      "Moderate noise, fewer headlights",
+      "Still visible",
+      "Heavy curtains in front rooms, keep the porch tidy"
+     ],
+     [
+      "In an alley right by the junction",
+      "Quieter, quick to the main road",
+      "Little passing trade",
+      "Watch the alley exit and alley lighting at night"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Should a house at a junction avoid any door direction?",
+     "dap": "Whether a door direction suits you depends on the occupants' Kua numbers. At a junction, the thing to weigh first is whether the door sits right on the line of oncoming traffic."
+    },
+    {
+     "hoi": "Is a crossroads house hard to resell?",
+     "dap": "Corner houses on a main road are usually easy to rent out to businesses. Buyers looking for a home are pickier, so the resale price depends on how busy the area is."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "The Three Essentials of Yang Dwellings",
+     "nghia": "The book treats the door as where the house takes in qi from outside; where streams of traffic and people pour in from all sides, qi moves strongly, which suits trading more than resting."
+    }
+   ],
+   "y_chinh": [
+    "Stand inside at peak time to hear the real noise",
+    "Crossroads corner house: good for trade; to live in, put bedrooms at the back",
+    "The head of a T-junction needs the most attention",
+    "A few houses away from the junction is usually easier to live with"
+   ]
+  },
+  "cot-dien-cay-lon-truoc-cua": {
+   "muc": [
+    {
+     "tieu_de": "How far from the front door should a power pole be?",
+     "doan": "The further from the door the better; one set well off to the side is usually more comfortable than one right in the middle. The first thing to check is whether power lines sag near the balcony or first-floor windows. The pole and its stay wires also cut morning light, making the entrance darker. If the pole sits right in the path where you wheel the bike, squeezing past every day becomes irritating over time."
+    },
+    {
+     "tieu_de": "Is a transformer or electrical cabinet in front of the house a concern?",
+     "doan": "More than an ordinary pole, mainly because of the hum and the safety of children playing nearby. Ask the local power company about safe distances and their inspection schedule. In townhouses, many people put low planters round the base so children stay away, and keep that side's windows shut at night."
+    },
+    {
+     "tieu_de": "What about a power pole facing an apartment?",
+     "doan": "For an apartment high up looking at a pole on the street, it is almost only about the view. If it bothers you, a sheer curtain or plants on the balcony are enough. On the first or second floor near power lines, keep the balcony tidy and don't hang laundry out towards the wires."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Things in front of the door: what to check and how to deal with it",
+    "chu_thich": "Safety and access first, the view second.",
+    "cot": [
+     "Object in front of the door",
+     "What to check",
+     "How to deal with it"
+    ],
+    "dong": [
+     [
+      "Low-voltage power pole",
+      "Wires sagging near the balcony or windows",
+      "Report to the power company, keep the bike path clear"
+     ],
+     [
+      "Transformer, electrical cabinet",
+      "Humming, distance from where children play",
+      "A planter round the base; ask about safe distances"
+     ],
+     [
+      "Telecom pole, street light",
+      "Light shining into the bedroom at night",
+      "Blackout curtains, move the bedroom inward"
+     ],
+     [
+      "Large old street tree",
+      "Dead branches, roots lifting the pavement",
+      "Ask the parks authority to prune before the storm season"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Can I move the power pole in front of my house myself?",
+     "dap": "Don't do it yourself. Submit a request to the local power company; it usually comes with a cost and a site survey."
+    },
+    {
+     "hoi": "Does a pole set well towards the neighbour's house count?",
+     "dap": "If it is clearly off your own door, it is much milder. Just keep the entrance clear and watch the wires through the storm season."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Folk tradition calls a hard, pointed object standing right in front of the door 'sha'; people used to advise offsetting the door or planting trees or a low wall as a buffer."
+    }
+   ],
+   "y_chinh": [
+    "First check power lines near the balcony and windows",
+    "A pole off to one side is easier than one in the middle of the door",
+    "Transformer: ask the power company about safe distances",
+    "Don't move a pole yourself; send a request to the power company"
+   ]
+  },
+  "song-ho-truoc-nha": {
+   "muc": [
+    {
+     "tieu_de": "Is a house looking out over a lake good?",
+     "doan": "Usually seen as good when the lake is in front, wide and calm. A lake keeps the air cooler in summer, the morning view is pleasant and your eyes can rest on the distance. What to weigh is damp in the humid season, mosquitoes at dusk and afternoon glare off the water if the house faces West."
+    },
+    {
+     "tieu_de": "Should you buy a riverside house?",
+     "doan": "Check the flood-season water level carefully before admiring the view. Ask the neighbours which year the water rose highest, how far the floor sits above the road, and whether the embankment has slipped anywhere. A river curving towards the house is seen as good in the old books; a river running straight away or eating into the bank is weaker, and in practice that bank also erodes more."
+    },
+    {
+     "tieu_de": "Is a drainage canal in front of the house the same as a river or lake?",
+     "doan": "No, because stagnant water and smell are the main issue. A ditch of standing water brings mosquitoes, smells in hot weather and floods easily in heavy rain. If the canal is clean, covered or upgraded, the house is still pleasant; if not, put mosquito screens first and ask the ward about its dredging schedule."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Types of water in front of the house: how to read them, what to do",
+    "chu_thich": "The old books look at the shape of the water; daily life looks at smell, damp and safety. Look at both.",
+    "cot": [
+     "Type of water",
+     "Old books' view",
+     "What to watch in practice",
+     "Do this"
+    ],
+    "dong": [
+     [
+      "Wide, calm lake in front",
+      "Good, qi gathers",
+      "Damp in the humid season, mosquitoes at dusk",
+      "Window screens, close up late in the afternoon"
+     ],
+     [
+      "River curving towards the house",
+      "Good",
+      "Flood-season water level",
+      "Ask about the highest water level; make sure the floor is high enough"
+     ],
+     [
+      "River running straight away or eating into the bank",
+      "Weaker",
+      "Bank prone to collapse, fast current",
+      "Check the embankment and fencing for children"
+     ],
+     [
+      "Ditch or canal with stagnant water",
+      "Not discussed",
+      "Smell, mosquitoes, flooding when it rains",
+      "Ask about dredging, mosquito screens"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What if the lake is behind the house rather than in front?",
+     "dap": "The old books prefer water in front and support behind. In practice, a lake behind the house still keeps it cool; just keep the bedrooms on that side dry."
+    },
+    {
+     "hoi": "What should a lakeside home with small children prepare?",
+     "dap": "A fence or gate with a high latch, teach children never to go to the edge alone, keep the yard light on in the evening."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "The Book of Burial",
+     "phien_am": "Qi rides the wind and scatters; it meets water and stops.",
+     "nghia": "Qi scatters when it meets wind and stops when water holds it. That is why people of old paid close attention to the shape of water in front of a house."
+    }
+   ],
+   "y_chinh": [
+    "A calm lake in front is usually seen as good",
+    "Riverside house: ask about flood levels before enjoying the view",
+    "A stagnant ditch is nothing like a river or lake: think smell and mosquitoes",
+    "With small children: fence the water's edge, a gate with a high latch"
+   ]
+  },
+  "nha-gan-nghia-trang-benh-vien": {
+   "muc": [
+    {
+     "tieu_de": "Should you buy a house near a hospital?",
+     "doan": "Many families still choose one, especially with older relatives who need regular check-ups. What to test is the sound of ambulance sirens at night: a house on the route to the emergency entrance is much noisier than one by a side gate. The area around a hospital is usually crowded with stalls and parking, so your entrance often gets blocked. Visit in the evening to find out for real."
+    },
+    {
+     "tieu_de": "Is it all right to live opposite a cemetery?",
+     "doan": "Whether it is all right depends a lot on how the people living there feel. Some find it quiet, with little traffic and lots of trees; others feel a weight every time they look out. At Qingming and the Ghost Festival the area gets crowded and full of incense smoke. If someone in the family feels uneasy, respect that rather than trying to talk them out of it."
+    },
+    {
+     "tieu_de": "Is living near a funeral home or a large pagoda like living near a cemetery?",
+     "danh_sach": [
+      "Funeral home: hearses, music and crowds at set times, so think about noise and parking.",
+      "Large pagoda or church: bells, festivals and worshippers on the full moon and the first of the lunar month.",
+      "Cemetery: quiet most of the time, crowded at grave-sweeping festivals.",
+      "All three: decide by how the whole family feels, not by scare stories."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Places near the house: what is worth knowing",
+    "chu_thich": "The psychological side is real and deserves to be heard; the table only lists what you can see and hear.",
+    "cot": [
+     "Place nearby",
+     "In practice",
+     "Do this"
+    ],
+    "dong": [
+     [
+      "Hospital emergency entrance",
+      "Sirens at night, lots of people passing",
+      "Bedrooms at the back, soundproof glazing"
+     ],
+     [
+      "Cemetery",
+      "Quiet, crowded at grave-sweeping festivals",
+      "Curtains or a screen of plants to block the view if it weighs on you"
+     ],
+     [
+      "Funeral home",
+      "Hearses, music at set times, little parking",
+      "Keep your entrance clear; ask about opening hours before buying"
+     ],
+     [
+      "Large pagoda or church",
+      "Bells, crowds on festival days",
+      "Know the festival calendar to plan your trips"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does living near a hospital affect your health?",
+     "dap": "There is no basis for the idea that living nearby affects you. What really matters is noise keeping you awake; if poor sleep goes on for a long time, see a doctor — this is not a substitute for medical advice."
+    },
+    {
+     "hoi": "What if a small child is frightened looking out at a cemetery?",
+     "dap": "Move the child's play and sleep area to the inside of the house, draw the curtains in the evening, and talk gently about the place as somewhere people remember their loved ones."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Folk belief holds that places of burial and healing carry 'yin qi'; the modern reading is that a heavy atmosphere, noise and the grief of passers-by affect the mood of those living nearby."
+    }
+   ],
+   "y_chinh": [
+    "The ambulance route is much noisier than the side-gate side",
+    "View the house in the evening to hear and see it for real",
+    "How the family feels matters more than scare stories",
+    "Poor sleep that goes on: see a doctor; this is not medical advice"
+   ]
+  },
+  "minh-duong": {
+   "muc": [
+    {
+     "tieu_de": "What is the ming tang, and do townhouses have one?",
+     "doan": "The ming tang is the open, bright space right in front of the front door. Townhouses usually have a small one: the pavement, a set-back yard or a parking porch. It doesn't need to be large to be good; it needs to be clean, bright and unblocked. A two-metre yard, swept tidy and lit, still does the job of a ming tang."
+    },
+    {
+     "tieu_de": "Where is the ming tang in an apartment?",
+     "doan": "In an apartment, people usually count the entrance hall just inside the door and the first part of the living room you see. A hall piled with shoes and cardboard boxes chokes it. A weekly tidy, a shoe cabinet with doors and a bright ceiling light are enough to transform how it feels coming home."
+    },
+    {
+     "tieu_de": "What if the ming tang is blocked?",
+     "danh_sach": [
+      "Motorbikes parked right by the door: move them to one side and leave a straight path to the door.",
+      "Old things and sacks piled in the yard: clear them in one weekend session.",
+      "A metal roof covering the whole front yard: replace part of it with translucent panels.",
+      "Plants too dense: trim them low so you can see out."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "The ming tang by type of home: how to keep it",
+    "chu_thich": "The ming tang is a good sign; the main job is keeping it open and bright.",
+    "cot": [
+     "Type of home",
+     "The ming tang is usually",
+     "How to keep it"
+    ],
+    "dong": [
+     [
+      "Townhouse on a main street",
+      "The pavement, the set-back in front of the door",
+      "Don't let vehicles or goods block the middle of the door"
+     ],
+     [
+      "Townhouse in an alley",
+      "A small yard, a porch",
+      "Sweep it clean, a porch light, one or two low plants"
+     ],
+     [
+      "Single-storey or garden house",
+      "A wide front yard",
+      "Don't build over the yard; keep the ground dry"
+     ],
+     [
+      "Apartments",
+      "The hall inside the door, the front of the living room",
+      "A shoe cabinet with doors, bright light, little clutter"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does the ming tang need to be wide to be good?",
+     "dap": "No. The old books favour a wide one, but for an urban home a small space that is clean, bright and unobstructed still counts as good."
+    },
+    {
+     "hoi": "Does roofing over the front yard to park a car cost you the ming tang?",
+     "dap": "A full roof makes the yard darker and stuffier. If you need a roof, choose translucent panels or leave an opening above."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "The Book of Burial",
+     "nghia": "The book values the open space in front of a grave where qi stops; home feng shui borrows this idea for the yard and porch in front of the door."
+    },
+    {
+     "sach": "The Classic of Moving the Dragon",
+     "nghia": "The book discusses the lie of the land, in which a wide, open ming tang in front is seen as where qi gathers."
+    }
+   ],
+   "y_chinh": [
+    "The ming tang is the bright, clean space in front of the door",
+    "A small townhouse still has a ming tang: the pavement, the porch",
+    "Apartment: count the hall inside the door and the front of the living room",
+    "Don't let vehicles or old things block the middle of the door"
+   ]
+  },
+  "dat-no-hau-hay-thop-hau": {
+   "muc": [
+    {
+     "tieu_de": "What is a plot that widens at the back, and how do you tell?",
+     "doan": "It is a plot whose back is wider than its frontage. The simple way to tell is to measure the width at the front and the back, on the title deed or with a tape measure. A difference of a few tens of centimetres is practically square; you only see a clear widening or narrowing from about a metre."
+    },
+    {
+     "tieu_de": "Should you buy a plot that narrows at the back?",
+     "doan": "You still can if the price is fair and the back still has room for the kitchen and a light well. Plots that narrow at the back are usually cheaper, but the narrow rear easily becomes a dark corner that is hard to furnish. When designing, put the living room and bedrooms in the wider front part and use the narrow part for storage, a drying yard or a light well. Many townhouses on narrowing plots are still bright and pleasant thanks to a layout like this."
+    },
+    {
+     "tieu_de": "Is a plot that widens at the back always good?",
+     "doan": "Not always: if it widens too much the plot becomes lopsided and hard to build square. A frontage that is too narrow compared with the back means a small front door, a cramped entrance and little light from the front. A slight widening with a frontage of at least four metres is usually the easiest to use."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Widening, narrowing or square: a quick comparison when viewing land",
+    "chu_thich": "Measure the width at the front and at the back; under about 0.5 m difference, treat it as square.",
+    "cot": [
+     "Plot shape",
+     "How to tell",
+     "Advantage",
+     "Layout suggestion"
+    ],
+    "dong": [
+     [
+      "Slightly wider at the back",
+      "The back is about 1–2 m wider than the front",
+      "Roomy at the back, easy to have quiet bedrooms",
+      "Bedrooms and back yard in the wide part"
+     ],
+     [
+      "Much wider at the back, narrow frontage",
+      "Frontage under 3.5 m, back about one and a half times wider",
+      "A large area for the price",
+      "Make the door as wide as possible, bring light in through a light well"
+     ],
+     [
+      "Square plot",
+      "Front and back roughly equal",
+      "Easy to design, easy to resell",
+      "Lay it out by function, nothing to compensate"
+     ],
+     [
+      "Narrower at the back",
+      "The back is at least 1 m narrower than the front",
+      "Usually cheaper, wide frontage",
+      "Use the narrow part for storage, a drying yard, a light well"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Can I cut off the narrow part of a plot to make it square?",
+     "dap": "Yes, many people build the square part as the house and use the narrow part as a back yard or planting bed. This is neat and helps ventilation."
+    },
+    {
+     "hoi": "Does widening at the back apply to apartments?",
+     "dap": "Usually not, since the apartment's floor plan is set by the building. In an apartment, look at missing corners and light instead."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Folk tradition likens a plot that widens at the back to a pouch with a small mouth and a wide base that holds on to wealth, and a narrowing plot to a funnel that lets it slip away. This is an oral belief, not something in the Compass School books."
+    }
+   ],
+   "y_chinh": [
+    "Measure the front and back widths; a 1 m difference is when it shows",
+    "Slightly wider at the back with at least 4 m frontage is usually easiest to use",
+    "Narrowing plot: use the narrow part for storage, drying or a light well",
+    "A square plot is easy to design and to resell"
+   ]
+  },
+  "nha-chu-l-nha-thieu-goc": {
+   "muc": [
+    {
+     "tieu_de": "Should you buy an L-shaped house?",
+     "doan": "You can buy an L-shaped house if the missing part has a clear use and the bedrooms aren't pushed into a dark corner. What to weigh is light and circulation, not the L shape itself. When viewing, stand in the centre of the house and look around: which corner is furthest from a window, which can only be reached by going round? If that spot is just storage or the washing machine, it is nothing to worry about. If it is a young child's or an older person's bedroom, plan lighting, a fan and a way for air to flow out in advance."
+    },
+    {
+     "tieu_de": "Does a tube house with a corner cut off by the plot count as a missing corner?",
+     "doan": "Yes, a tube house with one corner cut off by a slanted plot also counts as missing a corner, but it is usually milder than an L shape. The cut-off part tends to fall at the front or the back of the house. At the front, the angled corner can become a bike ramp, a flower bed or entrance steps. At the back, it suits a small drying yard or a light well, making the kitchen brighter and airier."
+    },
+    {
+     "tieu_de": "What about an L-shaped apartment?",
+     "doan": "You can't change an apartment's outer walls, so you can only rework how the inside is used. Put the living room and dining table in the part that gets the most sun; use the narrow wing for a reading room, wardrobes or laundry. Don't knock through load-bearing walls or beams to square off the flat. A few wall lights and a large rug make the broken outline feel more continuous."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Where the missing part is and what to use it for",
+    "chu_thich": "Suggestions by position relative to the front door, for townhouses, single-storey houses and apartments.",
+    "cot": [
+     "Position of the missing part",
+     "What tends to happen",
+     "Free fix",
+     "Low-cost fix"
+    ],
+    "dong": [
+     [
+      "At the front, beside the door",
+      "Narrow entrance, hard to turn a vehicle",
+      "Leave it clear, no old things piled up",
+      "A low flower bed, a porch light"
+     ],
+     [
+      "At the back, behind the kitchen",
+      "Dark kitchen, smells can't escape",
+      "Open the back door after cooking",
+      "Turn it into a drying yard or a small light well"
+     ],
+     [
+      "A side corner, mid-house",
+      "A broken walkway, a wasted corner",
+      "Use it for storage or built-in cupboards",
+      "A motion-sensor light at the turn"
+     ],
+     [
+      "One wing of an L-shaped apartment",
+      "Room far from a window, little air",
+      "Put a reading corner or wardrobes there",
+      "A wall fan, ceiling uplights"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does a house with a missing corner need building out to make it square?",
+     "dap": "No. Building out is only worth it when there is spare land and a permit; most homes just need the missing part used as a yard, porch or storage to feel tidy."
+    },
+    {
+     "hoi": "Should an L-shaped plot be split into two blocks?",
+     "dap": "It can be, if each block is square and has its own windows. Two neat blocks are usually easier to live in than one broken block with many dark corners."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "The Bright Mirror of Eight Mansions",
+     "nghia": "The book reads a house through the eight palaces around its centre; a missing corner means that palace of the house is incomplete, which is why people of old valued square, balanced houses."
+    },
+    {
+     "sach": "The Three Essentials of Yang Dwellings",
+     "nghia": "Zhao Jiufeng treats a neat, regular house shape as the foundation, before looking at the door, rooms and stove."
+    }
+   ],
+   "y_chinh": [
+    "An L-shaped house is fine to live in if the missing part has a clear use",
+    "Don't push bedrooms into the corner furthest from a window",
+    "L-shaped apartment: rework how rooms are used, don't knock through load-bearing walls",
+    "The missing part suits a drying yard, light well or storage"
+   ]
+  },
+  "bep-doi-dien-cua-chinh": {
+   "muc": [
+    {
+     "tieu_de": "What about a stove visible from the door in a studio flat?",
+     "doan": "In a studio the kitchen is almost always visible from the door, so blocking the view and the draught is enough. Open shelving at shoulder height set at right angles to the door both divides the entrance and holds shoes. With an induction hob the wind can't blow out a flame, so the main job is good extraction so cooking smells don't cling to the sofa and curtains."
+    },
+    {
+     "tieu_de": "Is it a problem if you open the door of a tube house and see the kitchen at the back?",
+     "doan": "A kitchen at the back of a tube house in line with the front door is usually less bothersome than one near the door, because of the long distance in between. The worst part is the through-draught from the front door to the back door passing right over the cooking area. Putting the fridge, a dresser or a half-height screen at the border between living room and kitchen is a neat fix, and visitors don't see a sink full of dishes."
+    },
+    {
+     "tieu_de": "Should you turn the gas stove round when renovating?",
+     "doan": "Yes, if the gas stove sits right in the draught from the door and you are refitting the kitchen anyway. Turning the hob to a side wall keeps the flame steady, cooks pots evenly, and the cook doesn't have their back to the door. When turning it, keep the gas pipe short with an easy-to-reach shut-off valve, and keep the hob a safe distance from the window."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Types of stove and how to screen them when they face the front door",
+    "chu_thich": "Only a heat-producing cooktop counts; a dry island is not a stove.",
+    "cot": [
+     "Situation",
+     "How urgently to deal with it",
+     "Free fix",
+     "Low-cost fix"
+    ],
+    "dong": [
+     [
+      "Gas hob near the door, direct draught",
+      "Deal with it soon",
+      "Close the front door while cooking",
+      "A frosted glass screen or open shelving to break the draught"
+     ],
+     [
+      "Induction hob in a studio flat",
+      "Mild",
+      "Turn on the extractor before cooking",
+      "Open shelving to divide the entrance"
+     ],
+     [
+      "Kitchen at the back of a tube house, far from the door",
+      "Mild",
+      "Close the back door after cooking to stop the through-draught",
+      "Fridge or dresser as a half-height screen"
+     ],
+     [
+      "A dry island in between",
+      "Hardly needed",
+      "Keep the worktop tidy",
+      "Pendant lights over the island"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does an induction hob facing the front door need the same treatment as gas?",
+     "dap": "Much less so. An induction hob has no flame, so the wind can't blow it out; what remains is screening the view and good extraction."
+    },
+    {
+     "hoi": "Is a curtain between the front door and the kitchen all right?",
+     "dap": "Yes, as long as the curtain is far enough from the hob and is a fire-resistant kind. A wooden bead curtain or heavy fabric curtain hung near the door is safer than one right by the stove."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "The Three Essentials of Yang Dwellings",
+     "nghia": "Zhao Jiufeng makes the door, the master room and the stove the three key elements of a home; the stove should be discreet, with a steady flame, not exposed to the door."
+    }
+   ],
+   "y_chinh": [
+    "Gas hob near the door with a direct draught: deal with it soon",
+    "Induction hob facing the door is milder: mainly screen the view and extract smells",
+    "Open shelving, a dresser or a frosted glass screen all work",
+    "A dry island doesn't count as a stove"
+   ]
+  },
+  "cau-thang-doi-dien-cua-chinh": {
+   "muc": [
+    {
+     "tieu_de": "How do you deal with stairs right by the front door of a townhouse?",
+     "doan": "For a townhouse with a narrow frontage, the easiest way is a buffer zone between the door and the first step. The buffer can be a low shoe cabinet, a tall plant or a landing that turns sideways. Visitors see the living room first, not the way up to the bedrooms. The family also gets a place to change shoes without standing at the foot of the stairs."
+    },
+    {
+     "tieu_de": "Are stairs going down opposite the door different from stairs going up?",
+     "doan": "Yes: stairs going down right behind the door deserve more attention because it is easy to miss a step. Common in houses with a basement, split-level houses or houses on a slope. Opening the door with your hands full and eyes not used to the dark is when people miss a step. A light already on by the door, anti-slip strips on the step edges and a continuous handrail are the three things to do first."
+    },
+    {
+     "tieu_de": "Should a straight single-flight staircase facing the door be turned?",
+     "doan": "Only when the house is being fully renovated and there is room for a landing. If you are not doing major work, leave it and screen it with a half-height partition or an open bookcase. A straight single flight also pulls hot air from the ground floor upstairs; a roof window or vent at the top of the stairs keeps the house cooler."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Stairs facing the door, by type, and what to do",
+    "chu_thich": "For townhouses and split-level houses; a duplex apartment is treated like a townhouse.",
+    "cot": [
+     "Type of stairs",
+     "What to watch",
+     "Free fix",
+     "Low-cost fix"
+    ],
+    "dong": [
+     [
+      "Straight single flight going up, by the door",
+      "Cramped entrance, upper floor on show",
+      "Don't leave bikes or things at the foot of the stairs",
+      "A low shoe cabinet as a buffer"
+     ],
+     [
+      "Stairs going down just inside the door",
+      "Easy to miss a step in the dark",
+      "Turn the light on before opening the door",
+      "Anti-slip strips, a motion-sensor light"
+     ],
+     [
+      "Spiral or U-shaped, 2–3 m from the door",
+      "Usually fine",
+      "Keep the walkway clear",
+      "A tall plant on the landing"
+     ],
+     [
+      "Light steel stairs with open treads",
+      "Draughts, you can see right through",
+      "Put a bookcase along the side",
+      "A wooden or steel louvre screen"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How tall should a screen between the stairs and the front door be?",
+     "dap": "Usually shoulder height, about 1.4 to 1.6 m, or an open louvre style. That is enough to block the view while keeping the living room bright and airy."
+    },
+    {
+     "hoi": "With small children and stairs right by the door, what comes first?",
+     "dap": "Fit safety gates at the bottom and top of the stairs and a bright light at the entrance. A shoe cabinet set as a buffer also stops children running straight from the door onto the steps."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Our grandparents said stairs should not point straight at the door, believing qi coming in would run straight off up the steps instead of staying in the main room."
+    },
+    {
+     "sach": "The Three Essentials of Yang Dwellings",
+     "nghia": "The book treats the door as where the house receives qi, so the space just inside should be open, with a place to pause before going further in."
+    }
+   ],
+   "y_chinh": [
+    "Create a buffer between the door and the first step",
+    "Stairs going down just inside the door: lights and anti-slip strips first",
+    "Only turn the stairs during a full renovation with enough room",
+    "A shoulder-height screen or open louvres is about right"
+   ]
+  },
+  "guong-chieu-thang-cua-chinh": {
+   "muc": [
+    {
+     "tieu_de": "What about a shoe cabinet with mirrored doors facing the door?",
+     "doan": "A mirrored shoe cabinet facing the door should move to a side wall, or swap the mirror doors for wooden ones. If you can't change it yet, leave a door slightly ajar so the mirror sits at an angle. People coming in don't see their own reflection head-on, while people going out can still check themselves standing sideways."
+    },
+    {
+     "tieu_de": "Where should a mirror go in an apartment hallway?",
+     "doan": "On a wall parallel to the way you walk in. Turn to the side while changing shoes and you can see yourself, enough to straighten your clothes before going out. A mirror hung this way also makes a narrow hall look wider without throwing corridor light into the face of people approaching."
+    },
+    {
+     "tieu_de": "Does reflective glass on a door count as a mirror?",
+     "doan": "A tinted glass door or glossy glass wall reflects like a mirror at night, but only needs dealing with when it reflects straight at the entrance. At night it is bright inside and dark outside, so the glass becomes a large mirror. A sheer curtain drawn after dark or frosted film on the lower part is enough and costs little."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Mirrors near the front door: is it a problem, what to do",
+    "chu_thich": "Suggestions based on where people usually put mirrors in townhouse and apartment entrances.",
+    "cot": [
+     "Mirror position",
+     "Does it need changing",
+     "Suggestion"
+    ],
+    "dong": [
+     [
+      "Hung facing the door at eye level",
+      "Change it",
+      "Move it to the side wall by the door"
+     ],
+     [
+      "Mirrored shoe cabinet door facing the front door",
+      "Change it",
+      "Swap for wooden doors or leave it ajar at an angle"
+     ],
+     [
+      "Side wall, parallel to the walkway",
+      "No need",
+      "Leave it, add a soft light"
+     ],
+     [
+      "Dark glass wall reflecting at night",
+      "Depends",
+      "A sheer curtain or frosted film on the lower part"
+     ],
+     [
+      "Small mirror inside a closed cabinet",
+      "No need",
+      "Nothing to do"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is a full-length mirror in the living room that can see the door from afar a problem?",
+     "dap": "Usually nothing to worry about if the mirror is far away and at an angle. What to avoid is a mirror right inside the door, facing whoever steps in."
+    },
+    {
+     "hoi": "Do I need to hang something outside the door instead of a mirror?",
+     "dap": "No. A bright porch light, a clean doormat and an easy-to-read house number make the entrance neater than anything you could hang."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "People of old believed a mirror right in front of the door pushes out the good that has just come in; this is custom — the classic Compass School books don't discuss mirrors."
+    }
+   ],
+   "y_chinh": [
+    "Mirror facing the door: move it to the side wall",
+    "Mirrored shoe cabinet: swap for wooden doors or leave ajar at an angle",
+    "A mirror parallel to the walkway lets you check yourself and widens the hall",
+    "Dark glass turns into a mirror at night: draw a sheer curtain"
+   ]
+  },
+  "guong-doi-dien-giuong": {
+   "muc": [
+    {
+     "tieu_de": "Where should a mirror facing the bed go?",
+     "doan": "Turn it to a wall parallel to the bed, or to the inside of a wardrobe door. A quick check: lie down, look straight ahead and to each side; if you can't see yourself in the mirror, it's fine. Put the dressing-table mirror by a window so you have daylight when using it; it doesn't need to face the bed."
+    },
+    {
+     "tieu_de": "Should you keep a mirrored wardrobe in a small bedroom?",
+     "doan": "Yes, if you draw a curtain or use frosted film at night, since a small room often needs a mirror to feel bigger. In a one-bedroom apartment, sliding mirrored wardrobes often sit right next to the bed. A fabric curtain on a ceiling track covering the whole wardrobe at night is cheap and easy to take down. By day, open the curtain and the room is as bright and spacious as before."
+    },
+    {
+     "tieu_de": "What about a mirror on the ceiling or above the bed?",
+     "doan": "Take down a mirror on the ceiling or right above the bed: you see it as soon as you lie on your back, and it is hard to clean safely. A large mirror hung high above where you lie also makes many people feel uneasy when they sleep. Replace it with a light fabric picture or leave the wall plain. If poor sleep goes on, look at your daily routine and have regular check-ups; this article is not a substitute for a doctor."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Mirrors in the bedroom: is it a problem, suggestions",
+    "chu_thich": "Check by lying on the bed and looking straight ahead and to the sides.",
+    "cot": [
+     "Mirror position",
+     "Does it need changing",
+     "Suggestion"
+    ],
+    "dong": [
+     [
+      "At the foot of the bed, facing where you lie",
+      "Change it",
+      "Turn it to a wall parallel to the bed"
+     ],
+     [
+      "Sliding mirrored wardrobe next to the bed",
+      "Depends",
+      "A ceiling-track curtain to cover it at night"
+     ],
+     [
+      "On the ceiling, above the head of the bed",
+      "Take it down",
+      "A light fabric picture or a plain wall"
+     ],
+     [
+      "Dressing table by the window",
+      "No need",
+      "Leave it, use it in daylight"
+     ],
+     [
+      "Small mirror inside a closed cabinet",
+      "No need",
+      "Nothing to do"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is it all right to drape a cloth over the mirror every night?",
+     "dap": "Yes, that is the cheapest way. Just use a cloth big enough, don't cover a socket, and fold it away in the morning."
+    },
+    {
+     "hoi": "What about the en-suite bathroom mirror reflecting the bed?",
+     "dap": "Closing the bathroom door at night is enough. The habit also keeps the bedroom drier and less smelly."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Our grandparents said not to let a mirror reflect the sleeping place, believing the sleeper startles easily and doesn't rest well."
+    }
+   ],
+   "y_chinh": [
+    "Lie down and look: if you can't see yourself in the mirror, it's fine",
+    "Mirrored wardrobe: a ceiling-track curtain to cover it at night",
+    "Take down a mirror on the ceiling or above the bed",
+    "Poor sleep that goes on: review your routine, have regular check-ups"
+   ]
+  },
+  "cua-phong-doi-nhau": {
+   "muc": [
+    {
+     "tieu_de": "Is a bedroom door facing the bathroom door a problem?",
+     "doan": "This is the kind of facing doors to deal with first, because damp and smells go straight into the bedroom. The habit of closing the toilet lid and the bathroom door, plus running the extractor ten more minutes after a shower, solves most of it. If the bathroom door opens into the corridor, changing which way it opens during a renovation is a small job."
+    },
+    {
+     "tieu_de": "What about parents' and children's bedrooms with doors facing each other?",
+     "doan": "It's fine if each room has a private spot that can't be seen from the other door. Put beds and desks in a corner out of sight through the doorway. As children grow, phone calls and music carry across easily; rubber seals at the foot of the door and a habit of closing doors after 10 pm make it easier for both sides."
+    },
+    {
+     "tieu_de": "Do doors offset by half a door width count as facing?",
+     "doan": "Two doors offset by more than half a door width usually don't count as facing. Then the line of sight is broken, sound doesn't travel straight and the draught weakens too. If they are only slightly offset, re-hanging one door so the two open in opposite directions is the gentlest fix."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Types of facing doors: how urgent and what to do",
+    "chu_thich": "In an apartment, do everything inside your own door.",
+    "cot": [
+     "Type of facing doors",
+     "How urgently to deal with it",
+     "Free fix",
+     "Low-cost fix"
+    ],
+    "dong": [
+     [
+      "Bedroom facing the bathroom",
+      "Deal with it first",
+      "Close the door, close the toilet lid",
+      "Extractor fan, change which way the door opens"
+     ],
+     [
+      "Two bedrooms facing each other",
+      "Mild",
+      "Place beds out of sight",
+      "Rubber seals at the foot of the door"
+     ],
+     [
+      "Bedroom facing the kitchen",
+      "Moderate",
+      "Close the bedroom door while cooking",
+      "Bead curtain, stronger extraction"
+     ],
+     [
+      "Apartment door facing the neighbour's door",
+      "Mild",
+      "Keep the door closed, don't leave things in the corridor",
+      "An entrance screen or curtain inside the door"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Should I swap a room door for a sliding door so they don't face each other?",
+     "dap": "A sliding door doesn't change the two door frames facing each other, but it means fewer doors banging. Worth doing when the corridor is narrow and the doors often hit each other."
+    },
+    {
+     "hoi": "What about a single-storey house with the front and back doors in line?",
+     "dap": "A strong through-draught: cool, but light things blow about and lots of dust comes in. Put a low cabinet or screen in the middle of the house to slow the air while keeping it airy."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "People of old said two facing doors make the people in the two rooms raise their voices; the practical meaning is less privacy, with sound and draughts going straight across."
+    }
+   ],
+   "y_chinh": [
+    "Bedroom facing the bathroom: deal with it first",
+    "Offset by more than half a door width usually doesn't count as facing",
+    "Place the bed out of sight through the doorway",
+    "Apartment: only deal with things inside your own door"
+   ]
+  },
+  "giuong-ban-duoi-xa-ngang": {
+   "muc": [
+    {
+     "tieu_de": "Can I put in a ceiling to cover a beam over the bed in an apartment?",
+     "doan": "Yes, a flat or stepped plasterboard ceiling to hide the beam is the common way in apartments. The ceiling hangs from the slab and doesn't touch the beam, so it doesn't affect the building's structure. Before starting, ask the building management about permitted work hours and leave an inspection hatch if there are service pipes in the ceiling. Don't cut, drill deep into or chip away at the beam."
+    },
+    {
+     "tieu_de": "What if the room is too small to move the bed out from under the beam?",
+     "doan": "If there is no room to shift it, turn the bed so the beam runs along the length of your body rather than across your chest. Or move the head of the bed out of the beam's shadow so the beam falls at the foot. A tall bedside cabinet or a bookshelf against the wall also stops your eyes landing on the edge of the beam when you lie down."
+    },
+    {
+     "tieu_de": "Should a desk under a beam be moved?",
+     "doan": "Move it if you sit there for long with the beam right over your head; a dining or side table rarely needs it. Working eight hours under a low block of concrete leaves many people feeling stuffy and tired. Pulling the desk over to the window both avoids the beam and gives you natural light. This is about feeling and habit; it is not a substitute for a doctor if you feel tired for a long time."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Where the beam is relative to where you sleep or sit",
+    "chu_thich": "None of these touch the structure; in an apartment never cut or chip a beam.",
+    "cot": [
+     "Situation",
+     "How urgently to deal with it",
+     "Free fix",
+     "Low-cost fix"
+    ],
+    "dong": [
+     [
+      "Beam crossing right over your chest or head",
+      "Deal with it first",
+      "Move the bed 40–60 cm",
+      "Plasterboard ceiling to hide the beam"
+     ],
+     [
+      "Beam running along your body",
+      "Mild",
+      "Leave it, move the head of the bed out from under the beam",
+      "Uplighting to soften the beam's edge"
+     ],
+     [
+      "Beam at the foot of the bed",
+      "Mild",
+      "Nothing to do",
+      "A curtain or fabric canopy if you like"
+     ],
+     [
+      "Desk under a beam",
+      "Moderate",
+      "Pull the desk over to the window",
+      "A bright desk lamp, a good supportive chair"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "In a house with a metal roof, do exposed purlins above the bed count as a beam?",
+     "dap": "They count, but purlins are small and high, so it is milder than a concrete beam. A plastic or plasterboard ceiling also keeps the room cooler and quieter when it rains."
+    },
+    {
+     "hoi": "Can a mosquito net hide an overhead beam?",
+     "dap": "It hides the view when you lie down, and also keeps out mosquitoes and direct air-conditioning airflow. This is a cheap fix for a rented room where you can't put in a ceiling."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Folk tradition says not to place a bed, altar or desk under a beam, believing the beam presses down on whoever lies or sits there, making them feel heavy and unsettled."
+    }
+   ],
+   "y_chinh": [
+    "Beam across the chest or head: deal with it first",
+    "Small room: turn the bed so the beam runs along the body",
+    "Apartments can add a ceiling to hide the beam, never cut it",
+    "Rented room: a mosquito net covers the beam and blocks air-conditioning draughts"
+   ]
+  },
+  "phong-ngu-tren-bep": {
+   "muc": [
+    {
+     "tieu_de": "A townhouse with a bedroom right above the kitchen: what first?",
+     "doan": "First check whether the head of the bed sits directly above the cooktop and the extractor duct. If it does, moving the bed to the other side of the room takes care of the main part. Next, check whether the extractor duct vents outdoors or just blows into the service shaft next to the bedroom; an open duct is the most common source of smells."
+    },
+    {
+     "tieu_de": "Is an insulated floor for a bedroom above the kitchen worth it?",
+     "doan": "Yes, especially for townhouses that cook late dinners and bedrooms with young children. A layer of insulating foam under a wooden floor keeps it cooler and dampens the clatter of pans. If you don't want to renovate yet, a thick rug under the bed and running the kitchen extractor harder while cooking are cheap first steps to try."
+    },
+    {
+     "tieu_de": "What about a duplex apartment with a bedroom above an open kitchen?",
+     "doan": "Duplex apartments often have a bedroom looking down onto an open kitchen, so smells and sound go straight up very fast. Glass doors or heavy curtains at the edge of the bedroom balustrade block most of it. When cooking oily dishes, turn the extractor on early and open the downstairs balcony door so air flows across rather than straight up."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Bedroom above the kitchen: situations and what to do",
+    "chu_thich": "Free fixes first; for anything involving gas pipes or exhaust ducts, call a qualified tradesperson.",
+    "cot": [
+     "Situation",
+     "How urgently to deal with it",
+     "Free fix",
+     "Low-cost fix"
+    ],
+    "dong": [
+     [
+      "Head of the bed directly above the cooktop",
+      "Deal with it first",
+      "Move the bed to the other side",
+      "A thick rug under the bed"
+     ],
+     [
+      "Extractor duct venting into the service shaft",
+      "Moderate",
+      "Turn the extractor on early and off late",
+      "Connect the duct to vent outdoors"
+     ],
+     [
+      "Bedroom above an open double-height kitchen",
+      "Moderate",
+      "Close the bedroom door while cooking",
+      "Heavy curtains or a glass screen at the balustrade edge"
+     ],
+     [
+      "Bed well clear of the kitchen area",
+      "Mild",
+      "Leave it as it is",
+      "Nothing more needed"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does a bedroom above the kitchen affect health?",
+     "dap": "What usually happens is a warmer room, smells and noise that disturb sleep. Keep the room airy, ventilate after cooking and have regular check-ups; this is not a substitute for a doctor."
+    },
+    {
+     "hoi": "Does switching from gas to induction help the bedroom above?",
+     "dap": "It helps somewhat, since induction gives off less heat to its surroundings. Cooking smells remain, so you still need an extractor that vents outdoors."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Our grandparents avoided sleeping right above the cooking place, believing the rising heat leaves the sleeper restless and unable to rest."
+    }
+   ],
+   "y_chinh": [
+    "Check whether the head of the bed is directly above the cooktop",
+    "The extractor duct must vent outdoors",
+    "A thick rug or insulated floor cuts heat and noise",
+    "Duplex apartment: heavy curtains at the balustrade edge"
+   ]
+  },
+  "bep-canh-nha-ve-sinh": {
+   "muc": [
+    {
+     "tieu_de": "A townhouse kitchen sharing a wall with the bathroom: does it need knocking down and redoing?",
+     "doan": "Usually there is no need to knock anything down. Most of the discomfort comes from smells and steam travelling through the door, ceiling gaps and vents, rarely through a brick wall. Narrow townhouses in Hanoi or Saigon often line up the kitchen and bathroom along one water pipe run to save cost. Before calling a builder, check three things: which way the bathroom door opens, where the extractor blows the air, and whether the kitchen side of the wall has yellow stains or mould."
+    },
+    {
+     "tieu_de": "How do you cope with a bathroom door opening straight onto where you cook?",
+     "doan": "The cheapest fix is a habit: close the door right after use and fit a self-closing hinge. When the door opens into the kitchen, steam from hot showers lands right where you keep dishes and raw vegetables. A heavy fabric curtain or a tall cabinet to block the view stops people at the table looking straight inside. If you get the chance to renovate, changing which way the door opens is a small job that makes a big difference."
+    },
+    {
+     "tieu_de": "An apartment with the kitchen next to the bathroom: what first?",
+     "doan": "Ventilation first, because apartments usually have no windows in these two areas. The bathroom extractor should run fifteen to twenty minutes after a shower; switch the kitchen extractor on when boiling and steaming too, not only when frying. The service shaft is part of the building's shared structure, so it can't be moved. What you can do is on the surface: keep the spice rack away from the shared wall and stand chopping boards against the outer wall."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Signs to look for and what to do",
+    "chu_thich": "Start with what costs nothing; only renovate when small fixes aren't enough.",
+    "cot": [
+     "What you notice",
+     "Usual cause",
+     "Do now"
+    ],
+    "dong": [
+     [
+      "A faint smell drifts into the kitchen after a shower",
+      "The extractor is weak or switched off too soon",
+      "Set the fan on a timer to run 15–20 minutes more, keep the door closed"
+     ],
+     [
+      "Stains or peeling paint on the kitchen side of the wall",
+      "Damp seeping from the shower area through the base of the wall",
+      "Pull the kitchen units a few centimetres from the wall to dry out; call a waterproofing specialist if it spreads"
+     ],
+     [
+      "From the dining table you look straight at the toilet",
+      "The door opens towards the dining table",
+      "A heavy fabric curtain or tall cabinet as a screen; change the door's swing when you renovate"
+     ],
+     [
+      "Cockroaches or ants around the sink",
+      "Shared pipe runs, gaps not sealed",
+      "Seal the pipe gaps, pour hot water down the drain regularly"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does a kitchen next to the bathroom affect the whole family's health?",
+     "dap": "What to watch is food hygiene: damp and smells make food, chopping boards and tea towels spoil faster. Keeping it ventilated and raw food away from the shared wall is enough as prevention; this is household advice, not a substitute for a doctor."
+    },
+    {
+     "hoi": "Building a new house: how should the kitchen and bathroom be arranged?",
+     "dap": "If you can still choose, separate them with a storeroom or a short corridor, and have the bathroom door open onto a walkway, not into the cooking area."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Folk tradition says the stove is the place of fire and the bathroom the place of water and unclean qi, so the two should be kept apart. In everyday terms, it is a reminder to keep the cooking area clean, dry and airy."
+    }
+   ],
+   "y_chinh": [
+    "Smells and damp travel through doors and ceiling gaps more than through walls",
+    "Close the bathroom door; run the extractor 15–20 minutes more",
+    "Keep chopping boards, raw vegetables and spices away from the shared wall",
+    "Apartments: don't move the service shaft, deal with the surface"
+   ]
+  },
+  "ngoi-quay-lung-ra-cua": {
+   "muc": [
+    {
+     "tieu_de": "How should a home desk be placed so you don't sit with your back to the door?",
+     "doan": "Place the desk at an angle to the door, back against a solid wall, so you can see people come in. Small apartment bedrooms often have only one empty wall facing the door, so many people push the desk against it. Try turning the desk ninety degrees and placing it along a side wall. Then the door is in the corner of your eye, not behind your head."
+    },
+    {
+     "tieu_de": "What if the room is too small to turn the desk?",
+     "doan": "There are still cheap ways to feel settled at your back. Put a low shelf or filing cabinet behind the chair as a buffer, so anyone coming in has to walk round rather than stand right behind you. Leaving the door ajar or hanging a door curtain also cuts noise from the corridor. If you work on video calls, there is a bonus: the background behind your screen doesn't show your home."
+    },
+    {
+     "tieu_de": "Do a shop's cashier counter and reception desk need to face the door?",
+     "doan": "They should, since whoever is at the counter needs to see customers come in to greet them in time. In a street-front shop, a counter with its back to the door keeps the seller looking round, and customers easily feel ignored. Set the counter off to one side, facing the door, with the storeroom wall behind, so you can watch the goods and have support at your back."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which seats need a view of the door",
+    "chu_thich": "For seats used for long periods, an hour or more.",
+    "cot": [
+     "Seat",
+     "Good placement",
+     "If you can't change it"
+    ],
+    "dong": [
+     [
+      "Child's study desk",
+      "Back to the wall, angled to the door, near a window",
+      "A low shelf behind the chair, door closed while studying"
+     ],
+     [
+      "Home desk",
+      "Along a side wall, door in the corner of your eye",
+      "A curtain at the door, a bright enough desk lamp"
+     ],
+     [
+      "Shop counter",
+      "Facing the door, storeroom wall behind",
+      "A door chime for customers"
+     ],
+     [
+      "Main living-room sofa",
+      "Back against a wall or a low cabinet",
+      "A coffee table, a low shelf behind the sofa"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Should my child's desk be moved if it faces away from the door?",
+     "dap": "Move it if you can, since children are easily distracted by the door opening behind them. Placing the desk at an angle to the door, near a window for natural light, is enough."
+    },
+    {
+     "hoi": "Is sitting with your back to a window the same as your back to the door?",
+     "dap": "Not quite. Nobody comes in through a window, but afternoon sun behind you causes screen glare, so you still need a curtain or to turn the desk."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "The Three Essentials of Yang Dwellings",
+     "nghia": "The book is about homes for the living and treats the door as the main way qi comes in and out. Later readers broadened this: a seat used for long periods should have support behind and a view of the entrance so the sitter feels at ease."
+    }
+   ],
+   "y_chinh": [
+    "A seat used for long periods should have a solid wall behind and a view of the door",
+    "Place the desk along a side wall so the door is in the corner of your eye",
+    "Small room: a low shelf behind the chair as a buffer",
+    "A shop counter should face the door so you can greet customers in time"
+   ]
+  },
+  "nha-ve-sinh-o-giua-nha": {
+   "muc": [
+    {
+     "tieu_de": "How do you deal with a bathroom in the middle of an apartment?",
+     "doan": "With ventilation and keeping it dry, not by knocking walls down to move it. In an apartment, this position is tied to the building's shared service shaft. What you can do is check the extractor really pulls air: hold a tissue under the fan; if it isn't sucked up, the fan is weak or the duct is blocked. Tell the building management if the shared duct has a problem."
+    },
+    {
+     "tieu_de": "A townhouse with a bathroom in the middle of a floor: what to fix first?",
+     "doan": "Fix the air outlet first, since the middle of a tube house usually has no window. The usual way is to run a duct to the rear facade or up to a light well, with a strong enough extractor. Only then think about separating the shower and toilet areas and sloping the floor properly to the drain so water doesn't pool. If you are building new, now is the time to move it to a corner."
+    },
+    {
+     "tieu_de": "How should the bed go in a bedroom sharing a wall with a central bathroom?",
+     "doan": "Put the head of the bed against another wall, not the one with the water pipes. Flushing at midnight and cold damp from the pipe wall make sleep fitful. If there is only one spot for the bed, leave a gap of a few centimetres between headboard and wall and add wooden panelling or a headboard shelf to soften the sound. This is a sleep-habit suggestion, not a substitute for a doctor."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Bathroom in the middle of the house: how apartments and townhouses differ",
+    "chu_thich": "Apartments can't move the service shaft; townhouses can reroute the air duct when renovating.",
+    "cot": [
+     "Task",
+     "Apartment",
+     "Townhouse, single-storey house"
+    ],
+    "dong": [
+     [
+      "Ventilation",
+      "Check the extractor; tell the management when the shared duct is weak",
+      "Run a duct to the rear facade or a light well"
+     ],
+     [
+      "Keeping dry",
+      "Squeegee the floor, dry towels on the balcony",
+      "Floor sloped to the drain, a separate shower area"
+     ],
+     [
+      "Screening the view",
+      "Change the door's swing or use a concealed door in the wall colour",
+      "Add a small lobby in front of the door"
+     ],
+     [
+      "When building or renovating",
+      "Don't knock down walls to move the room",
+      "Consider moving it to a corner"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How do you tell whether the bathroom extractor is strong enough?",
+     "dap": "Hold a tissue under the fan while it is running. If the tissue is pulled up against it, it's fine; if it falls, the fan is weak, the grille is dusty or the duct is blocked."
+    },
+    {
+     "hoi": "Should I skip an apartment with a bathroom in the middle?",
+     "dap": "Not necessarily. Check the extractor, the smell when you first open the door, and whether the bedroom wall is damp; if everything else is fine, it can still be pleasant to live in."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Folk tradition sees the middle of the house as a place that should be clean and calm, so people don't want a bathroom there. In everyday terms, the middle of the house is where air struggles to flow through, so smells and damp linger longer than in the corners."
+    }
+   ],
+   "y_chinh": [
+    "Apartment: ventilate and keep dry, don't knock walls down to move it",
+    "Test the extractor with a tissue",
+    "Townhouse: run a duct to the rear facade or a light well",
+    "Don't put the head of the bed against the wall with the water pipes"
+   ]
+  },
+  "cua-chinh-nhin-thang-ra-ban-cong-cua-so-lon": {
+   "muc": [
+    {
+     "tieu_de": "In an apartment where you open the door and see the balcony, what screens it nicely?",
+     "doan": "The best fit is a tall shoe cabinet combined with a wooden louvre screen just inside the door, which screens and gives storage. A small one-bedroom flat can use an open double-sided bookcase so light still gets through. There is no need to block the whole way, just break the straight line of sight from the door to the balcony. People in the corridor can no longer see the whole living room."
+    },
+    {
+     "tieu_de": "What about a townhouse with the front and back doors in line?",
+     "doan": "Put a soft obstacle in the middle of the house, such as the dining table, open shelving or a tall plant, so air flows round rather than rushing straight through. A tube house twenty or thirty metres long with both ends open in the windy season has papers flying and doors slamming. In hot weather you want air flowing through, so use movable obstacles and arrange them by season."
+    },
+    {
+     "tieu_de": "Will screening the door–balcony line make the home dark and stuffy?",
+     "doan": "Not if you choose a screen with gaps. Wooden louvres, open shelving, frosted glass or sheer curtains still let light and air through, only blocking the straight view and slowing the air. Avoid a solid floor-to-ceiling cabinet right in the middle of the way, as a small living room will go dark. Also note: the way out to the balcony still needs to be wide and easy to use in an emergency."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Choosing a screen by floor area",
+    "chu_thich": "The aim is to break the straight line of sight, not to seal it off.",
+    "cot": [
+     "Area, type of home",
+     "Suitable screen",
+     "Note"
+    ],
+    "dong": [
+     [
+      "Apartment under 50 m²",
+      "Open double-sided bookcase, sheer curtain",
+      "Keep a walkway of at least 80 cm"
+     ],
+     [
+      "2–3 bedroom apartment",
+      "Tall shoe cabinet with a wooden louvre screen",
+      "Leave a gap at the top so it doesn't go dark"
+     ],
+     [
+      "Street-front tube house",
+      "Dining table, tall plant in the middle of the house",
+      "Arrange by season; open it up for air in hot weather"
+     ],
+     [
+      "Single-storey house with a back yard",
+      "A wooden screen or a plant trellis outside the back door",
+      "Don't block the way out to the yard"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is it all right to put a fish tank or screen right behind the front door?",
+     "dap": "A screen, shoe cabinet or open shelving all work. A fish tank right behind the door is easy to knock when carrying things, so favour something heavy, stable and easy to wipe."
+    },
+    {
+     "hoi": "In a rented home where you can't drill the walls, how do you screen it?",
+     "dap": "Use a free-standing shelf, a tension-rod curtain that needs no drilling, or a tall plant on wheels you can move when you leave."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "The Three Essentials of Yang Dwellings",
+     "nghia": "The book treats the door, the main room and the stove as the three essential parts of a home. As the Form School reads it, qi entering the door should be held, moving slowly through the rooms rather than escaping straight out the back."
+    }
+   ],
+   "y_chinh": [
+    "Just break the straight line of sight from door to balcony, don't seal it off",
+    "Choose a screen with gaps: wooden louvres, open shelving, sheer curtains",
+    "Tube house: movable obstacles, arranged by season",
+    "Keep the way to the balcony wide and easy to use"
+   ]
+  },
+  "dieu-hoa-quat-tran-thoi-thang-vao-ban-tho": {
+   "muc": [
+    {
+     "tieu_de": "Where should an altar under the air conditioner go?",
+     "doan": "Move it to a wall outside the main airflow of the indoor unit, usually the wall on the same side as the unit, off to one side. Air conditioning blows forward and then down, so the spot directly opposite the unit takes the most air. To be sure, light a stick of incense where you plan to put it and watch the smoke: smoke rising straight up means the spot is still."
+    },
+    {
+     "tieu_de": "What if the apartment living room has only one place for the altar?",
+     "doan": "Keep the spot and change how the air is used. Point the unit's vanes up at the ceiling or towards the sofa, and turn off the auto-swing mode. Fit a clear plastic deflector to the indoor unit, a clip-on kind that needs no drilling. When lighting incense, turn the ceiling fan off or to its lowest setting. Add a smoke-stain guard on the ceiling so it doesn't discolour."
+    },
+    {
+     "tieu_de": "Is a wall-mounted altar in a townhouse near a ceiling fan a problem?",
+     "doan": "The thing to watch most is fire. A spinning ceiling fan scatters incense ash further and makes oil lamp and candle flames lean towards curtains and paper offerings. Put a wide ash tray under the incense bowl, use electric lights instead of candles when nobody is home, and keep curtains at least half a metre from the altar. This is a safety habit every home should have."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sources of airflow around the altar and how to adjust them",
+    "chu_thich": "Test with incense smoke: smoke rising straight up means the spot is still.",
+    "cot": [
+     "Airflow source",
+     "Sign",
+     "Free fix",
+     "Low-cost fix"
+    ],
+    "dong": [
+     [
+      "Wall-mounted air conditioner",
+      "Incense smoke blown sideways, ash on the floor",
+      "Point the vanes at the ceiling, turn off swing",
+      "A clip-on deflector for the indoor unit"
+     ],
+     [
+      "Ceiling fan",
+      "Candle flame leaning, ash scattered far",
+      "Off or on low when lighting incense",
+      "A wide ash tray, electric lights instead of candles"
+     ],
+     [
+      "Pedestal or standing fan",
+      "Air blowing up from below",
+      "Turn the fan away from the altar corner",
+      "Choose a fixed spot for the fan"
+     ],
+     [
+      "Window, balcony",
+      "Seasonal draughts",
+      "Close the door when lighting incense",
+      "Heavy curtains on the window side"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is there a way to test whether the altar is in a draught?",
+     "dap": "Light a stick of incense while the air conditioning and fan are running as usual. Smoke rising straight up is fine; smoke blown sideways or swirling means the spot is catching the air."
+    },
+    {
+     "hoi": "Can the altar go under the outdoor unit or the air-conditioning pipes?",
+     "dap": "Best avoided. The copper pipes can drip condensation and the outdoor unit vibrates and heats up, which doesn't suit a spot that needs to be clean, calm and dry."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Folk tradition wants the place of worship calm and clean, with no draught scattering the incense. In everyday terms, it is a reminder to keep the incense flame safe and the altar free of ash and dust."
+    }
+   ],
+   "y_chinh": [
+    "Test with incense smoke: smoke rising straight up means the spot is still",
+    "Point the vanes at the ceiling, turn off auto-swing",
+    "Turn the ceiling fan off or to low when lighting incense",
+    "Curtains at least half a metre from the altar, with an ash tray"
+   ]
+  },
+  "cau-thang-o-giua-nha": {
+   "muc": [
+    {
+     "tieu_de": "How do you get light into a tube house with stairs in the middle?",
+     "doan": "Bring light down from above: a light well or skylight right over the stairwell is the most effective way. Tube houses four or five metres wide in old streets often only get light at the two ends. The stairwell in the middle is itself a good light shaft if the roof can be opened. If you can't renovate yet, paint the walls around the stairs a light colour and swap solid balustrades for metal or glass ones."
+    },
+    {
+     "tieu_de": "How do you deal with the bottom step pointing straight at the front door?",
+     "doan": "Put something at the foot of the stairs to catch the eye, such as a plant, a low shelf or a rug in a different colour. When you walk in, your eye stops there rather than seeing the flight of steps straight away. This has a practical benefit too: someone hurrying down is less likely to bump into a visitor just coming in. In a major renovation, you can turn the last steps or add a landing that turns sideways."
+    },
+    {
+     "tieu_de": "Stairs in the middle carry noise to every floor — how to reduce it?",
+     "doan": "Covering the treads with wood or a thin runner cuts most of the sound of footsteps. In multi-generation homes where the elders sleep early and the children come home late from school, stair noise carries up very clearly. A door at the top of the stairs on the bedroom floor also keeps the air-conditioned cool in. Remember to fit motion-sensor lights along the stairs so moving about at night is safe."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Stairs in the middle of the house: problems and what to do",
+    "chu_thich": "From free fixes up to a major renovation.",
+    "cot": [
+     "Problem",
+     "Free fix",
+     "Low-cost fix",
+     "In a major renovation"
+    ],
+    "dong": [
+     [
+      "Dark middle of the house",
+      "Open the doors of rooms around the stairs by day",
+      "Wall lights along the stairs, light-coloured walls",
+      "A light well or skylight over the stairwell"
+     ],
+     [
+      "Bottom step pointing at the door",
+      "A plant or low shelf at the foot of the stairs",
+      "A rug in a different colour to mark the foot of the stairs",
+      "Turn the last steps, add a landing"
+     ],
+     [
+      "Footsteps echoing",
+      "Wear soft slippers indoors",
+      "Stair runners, rubber pads on the treads",
+      "Wooden tread covers, a door at the top of the stairs"
+     ],
+     [
+      "Cluttered space under the stairs",
+      "Clear some of it, leave the way open",
+      "A built-in cupboard with doors under the stairs",
+      "Make it a reading corner or neat storage"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Should the space under central stairs be a toilet?",
+     "dap": "Not if it can be avoided: the space is low and hard to ventilate, so smells and damp settle in the middle of the house. A cupboard with doors or a reading corner is neater."
+    },
+    {
+     "hoi": "Are spiral stairs in the middle different from straight stairs?",
+     "dap": "Spiral stairs take less space and divide the house less, but the narrow treads are hard for older people and small children. They need a sturdy handrail and enough light."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Folk tradition wants the middle of the house calm and bright, so people are wary of stairs taking up the very centre. In everyday terms, it is a reminder to keep light, clear walkways and quiet in the middle of the home."
+    }
+   ],
+   "y_chinh": [
+    "A central stairwell can become a light shaft if the roof is opened",
+    "Bottom step pointing at the door: a plant or low shelf at the foot",
+    "Runners or tread covers to soften footsteps",
+    "Motion-sensor lights along the stairs for night-time"
+   ]
+  },
+  "cay-truoc-cua-nha": {
+   "muc": [
+    {
+     "tieu_de": "What should you plant in front of the door?",
+     "doan": "Choose plants with a neat canopy, moderate height and roots that don't spread aggressively. Narrow townhouses suit pots on either side of the door, such as parlour palm, snake plant or golden pothos on a trellis; houses with a yard suit low shrubs or a neatly trimmed bougainvillea. Choose for your home's sun and wind and the time you have to water, not for promises about money."
+    },
+    {
+     "tieu_de": "How far from the door should a tree be?",
+     "doan": "A large tree should be at least half its canopy height from the edge of the door, and not in the middle of the entrance. For example, a six-metre tree should be at least about three metres away, off to one side. This distance keeps roots away from the foundations, branches off the roof, and the door still gets enough light."
+    },
+    {
+     "tieu_de": "Which plants don't suit being right by the door?",
+     "danh_sach": [
+      "Trees with strong, spreading roots such as tropical almond, banyan or weeping fig: they lift floors and crack fences.",
+      "Thorny plants right by the path: they snag people and scratch small children.",
+      "Plants that drop lots of leaves or fruit on the porch: slippery, damp, and they attract flies and mosquitoes.",
+      "Plants with toxic sap when a branch snaps: keep them out of children's reach."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Plants in front of the door: suitable or not, and why",
+    "chu_thich": "Judged on size, roots, leaf fall and safety at the entrance.",
+    "cot": [
+     "Plant",
+     "In front of the door",
+     "Reason"
+    ],
+    "dong": [
+     [
+      "Low pots on either side of the door",
+      "Suitable",
+      "Green, cool, doesn't block the way, easy to move"
+     ],
+     [
+      "A climber over the gate",
+      "Suitable if kept trimmed",
+      "Shades the sun while keeping the door bright"
+     ],
+     [
+      "A neat tree 3–4 m tall, off to one side",
+      "Suitable",
+      "Shade, moderate roots"
+     ],
+     [
+      "A large old tree with spreading roots in the middle of the entrance",
+      "Not suitable",
+      "Blocks light, roots lift the floor, dead branches in the storm season"
+     ],
+     [
+      "Thorny or toxic-sap plants right by the path",
+      "Not suitable",
+      "Snags people, unsafe for children"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Should you cut down a big tree already growing in front of the door?",
+     "dap": "No need to cut it yet. Trim the lower branches, raise the canopy so the door gets light, and check the roots first; only move the tree once the roots have cracked the floor."
+    },
+    {
+     "hoi": "Can an apartment have a plant by the front door?",
+     "dap": "Yes, a shade-loving plant just inside the door suits it. Don't put pots in the shared corridor, since they block the fire escape."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Folk tradition avoids a big tree right in the middle of the door, believing it blocks qi from coming in; moderate plants on either side are seen as good, like two people standing to welcome you."
+    }
+   ],
+   "y_chinh": [
+    "Choose neat-canopied plants with gentle roots, placed on either side of the door",
+    "A large tree at least half its canopy height from the door",
+    "Avoid spreading roots and thorny plants by the path",
+    "An existing big tree: trim and raise the canopy before thinking of cutting it down"
+   ]
+  },
+  "be-ca-trong-nha": {
+   "muc": [
+    {
+     "tieu_de": "Where in the house does a fish tank suit?",
+     "doan": "Best in the living room or entrance hall, an airy spot where people pass to enjoy it and it is easy to look after. A fish tank is neither good nor bad in itself; it depends on where it is. Choose a spot with its own socket above the water line, out of direct sun to avoid algae, and a floor that can take spills when you change the water."
+    },
+    {
+     "tieu_de": "Should a fish tank go in the bedroom?",
+     "doan": "Usually not, since a bedroom needs to be quiet and dry. A filter running all night hums and gurgles, and the tank light stops the room getting fully dark. A small apartment bedroom kept closed for air conditioning gets damper with a tank of water evaporating. If you like, choose a small bowl that needs no filter, away from the head of the bed."
+    },
+    {
+     "tieu_de": "What does Period 9 feng shui say about where to put a fish tank?",
+     "doan": "In Flying Stars, water belongs only in the sector with a timely facing star; sectors that need stillness should not have water. Period 9 runs from 2024 to 2043. Every house has a different chart depending on its facing and the year you moved in, so there is no single corner that suits every home. To see which side to keep still, read Your home after entering your house's direction."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Fish tank placement: suitable or not yet",
+    "chu_thich": "Seen through daily life: noise, damp, electrics, sunlight, care.",
+    "cot": [
+     "Position",
+     "Assessment",
+     "Everyday reason"
+    ],
+    "dong": [
+     [
+      "Living room, an airy wall shelf",
+      "Suitable",
+      "Easy to enjoy, easy to look after, tidy sockets"
+     ],
+     [
+      "Entrance hall, beside the shoe cabinet",
+      "Suitable if the walkway is wide",
+      "Nobody bumps it, there is room to change the water"
+     ],
+     [
+      "Bedroom",
+      "Not yet suitable",
+      "Noisy filter at night, a closed room gets damp"
+     ],
+     [
+      "Next to the cooktop",
+      "Not yet suitable",
+      "Cooking grease settles on the water, heat changes the water temperature"
+     ],
+     [
+      "By a window with afternoon sun",
+      "Not yet suitable",
+      "Algae grows fast, the water heats up"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How many fish, and which colours, are lucky?",
+     "dap": "We don't choose the number or colour of fish by feng shui. Keep as many as the tank and your care can manage; healthy fish and clear water are enough."
+    },
+    {
+     "hoi": "Is a fish tank on an ordinary cabinet or wooden shelf safe?",
+     "dap": "A tank over fifty litres is quite heavy when full. Use a dedicated load-bearing stand with a flat top and a mat, placed against the wall so small children can't pull it over."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Shen's Xuan Kong Studies",
+     "nghia": "The book sets out the Flying Stars by period, distinguishing sectors suited to moving water from those that need stillness. The general idea: where to put water depends on the house's direction and period; there is no one right corner for every home."
+    },
+    {
+     "sach": "Vietnamese folk feng shui (oral tradition)",
+     "nghia": "Folk tradition sees clean water in the house as a good thing, but dirty, stagnant water should be avoided. The everyday meaning: keep a tank only if you look after it."
+    }
+   ],
+   "y_chinh": [
+    "A fish tank is neither good nor bad; it depends on where it is",
+    "An airy living room or hall is the easiest place to look after it",
+    "Avoid bedrooms, right by the stove, and afternoon sun",
+    "Period 9: where to put water depends on each house's chart",
+    "Socket above the water line, a dedicated load-bearing stand"
+   ]
+  }
+ }
+}

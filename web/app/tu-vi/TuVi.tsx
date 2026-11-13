@@ -39,6 +39,8 @@ import { ghi } from "@/lib/do-luong";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
+import { useGoiYDau } from "@/lib/goi-y-dau";
+import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 import { gioHienThi, kemTinhTrang, laSoTuHoSo, useHoSo } from "@/lib/hoso";
 import { laSoNguoiThan, tenHien, useNguoiThan, type NguoiThan } from "@/lib/nguoi-than";
 import { taiAnhSvg } from "@/lib/tai-anh-svg";
@@ -65,7 +67,8 @@ export function TuVi() {
   const c = useChu();
   const { c: ct, en } = useChuTuVi();
   const d = useDuong();
-  const GOI_Y = GOI_Y_KHOA.map((g) => ({ nhom: ct(g.nhom), cau: g.cau.map((k) => ct(k)) }));
+  // EN-AI: bản Anh — chip = câu chuẩn engine (bấm là hỏi luôn), ô gõ tự do vẫn ngay dưới.
+  const GOI_Y = useGoiYDau("tuvi", en, GOI_Y_KHOA.map((g) => ({ nhom: ct(g.nhom), cau: g.cau.map((k) => ct(k)) })), useChuHoiDap().c("goi_y"));
   // TV-PHAI (chủ dự án chốt 2026-10-02): "hiện cả hai" — Hoả/Linh lối Việt | Trung Châu; nửa sau tháng nhuận.
   const [hoaLinh, setHoaLinh] = useState<"viet" | "trung">("viet");
   // HTT-1: giờ sinh theo đồng hồ (mặc định, như sách Việt) hay giờ mặt trời thực tại kinh độ nơi sinh — engine lập lại lá số.

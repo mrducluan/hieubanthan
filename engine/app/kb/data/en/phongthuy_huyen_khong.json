@@ -1,0 +1,1378 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 5 — bản phủ tiếng Anh (ban biên tập viết, chờ người bản xứ duyệt).",
+ "luu_y": "Flying Stars are only one layer of information about how qi shifts over time; a home also depends on its real surroundings (roads, water, light, airflow, how rooms are used). A facing that sits close to the border between two mountains needs re-measuring with a compass — a few degrees off changes the whole chart.",
+ "cuc": {
+  "vuong_son_vuong_huong": {
+   "y": "The mountain chart's timely star sits at the back and the facing chart's timely star at the front — the best formation: the back should be solid and full (hills, tall buildings, walls), the front open, with an entrance or water.",
+   "goi_y": "Keep the back closed and solid; the front door and living room should open to the facing side, open and bright."
+  },
+  "thuong_son_ha_thuy": {
+   "y": "The mountain's timely star runs to the front and the facing's timely star runs to the back — the old books call this a weaker formation if the setting is ordinary (open in front, solid behind).",
+   "goi_y": "The traditional way to balance it: something tall and solid in front and open space or water behind; or choose rooms and doors in the sectors holding timely stars."
+  },
+  "song_tinh_dao_huong": {
+   "y": "Both timely stars, mountain and facing, sit at the front: good for money if the front is open yet has something to lean on; watch the people and health side at the back.",
+   "goi_y": "In front, have both an open yard or path and a row of trees or a solid building some distance away; keep the back stable."
+  },
+  "song_tinh_dao_toa": {
+   "y": "Both timely stars sit at the back: good for the people in the house and for stability; money needs an opening at the back.",
+   "goi_y": "The back should have some open space, a back yard or a side door; keep the front tidy."
+  }
+ },
+ "to_hop": {
+  "phu_mau_tam_ban": {
+   "ten": "Parent string of three",
+   "y": "All nine palaces (period–mountain–facing) form the sets 1-4-7 / 2-5-8 / 3-6-9: qi flows across the three eras, which the old books see as highly favourable."
+  },
+  "lien_chau_tam_ban": {
+   "ten": "Continuous bead string of three",
+   "y": "Every palace holds three consecutive numbers: qi flows on without a break and weak sectors are softened."
+  },
+  "son_tinh_hop_thap": {
+   "ten": "Mountain stars sum to ten",
+   "y": "Across the chart, mountain star plus period star equals 10: qi flows, good for the people in the house and their health."
+  },
+  "huong_tinh_hop_thap": {
+   "ten": "Facing stars sum to ten",
+   "y": "Across the chart, facing star plus period star equals 10: qi flows, good for money and work."
+  },
+  "toan_ban_phuc_ngam_son": {
+   "ten": "Whole-chart Fu Yin (mountain stars)",
+   "y": "The mountain chart repeats the original Lo Shu in all nine palaces: qi stagnates, and the old books associate it with worry affecting the household."
+  },
+  "toan_ban_phuc_ngam_huong": {
+   "ten": "Whole-chart Fu Yin (facing stars)",
+   "y": "The facing chart repeats the original Lo Shu in all nine palaces: qi stagnates for money and work."
+  },
+  "toan_ban_phan_ngam_son": {
+   "ten": "Whole-chart Fan Yin (mountain stars)",
+   "y": "Mountain stars sum to 10 with the original Lo Shu throughout: the old books associate it with sudden changes for the people in the house."
+  },
+  "toan_ban_phan_ngam_huong": {
+   "ten": "Whole-chart Fan Yin (facing stars)",
+   "y": "Facing stars sum to 10 with the original Lo Shu throughout: ups and downs in money."
+  },
+  "don_cung_phuc_ngam_son": {
+   "ten": "Single-palace Fu Yin (mountain star)",
+   "y": "One or two palaces have a mountain star matching the palace's base number; with no harsh feature outside to set it off, the effect is small."
+  },
+  "don_cung_phuc_ngam_huong": {
+   "ten": "Single-palace Fu Yin (facing star)",
+   "y": "One or two palaces have a facing star matching the base number; small effect unless something sets it off."
+  },
+  "don_cung_phan_ngam_son": {
+   "ten": "Single-palace Fan Yin (mountain star)",
+   "y": "One or two palaces have a mountain star summing to 10 with the base number; small effect unless something sets it off."
+  },
+  "don_cung_phan_ngam_huong": {
+   "ten": "Single-palace Fan Yin (facing star)",
+   "y": "One or two palaces have a facing star summing to 10 with the base number; small effect unless something sets it off."
+  },
+  "son_tinh_nhap_tu": {
+   "ten": "Mountain star imprisoned",
+   "y": "The mountain chart's timely star falls in the centre — its strong qi is locked in; tradition says a bright, open centre releases it."
+  },
+  "huong_tinh_nhap_tu": {
+   "ten": "Facing star imprisoned",
+   "y": "The facing chart's timely star falls in the centre — wealth qi is locked in; keep the centre open and in use."
+  },
+  "that_tinh_chan_da_kiep": {
+   "ten": "True Seven-Star Robbery",
+   "y": "Double stars at the facing, and the Qian – Zhen – Li palaces have facing stars forming a set of three: it 'borrows' qi from the coming period and is strong — open doors and walkways in these three palaces."
+  },
+  "that_tinh_gia_da_kiep": {
+   "ten": "False Seven-Star Robbery",
+   "y": "Double stars at the facing, and the Kan – Xun – Dui palaces form a set of three: weaker than the true version but still draws in timely qi."
+  }
+ },
+ "sao": {
+  "1": {
+   "y_vuong": "writing, reputation, good romantic luck",
+   "y_suy": "drifting, losses through romance"
+  },
+  "2": {
+   "y_vuong": "land and property, saving up",
+   "y_suy": "illness qi — tradition advises keeping this palace quiet"
+  },
+  "3": {
+   "y_vuong": "starting a business, growth",
+   "y_suy": "gossip, arguments"
+  },
+  "4": {
+   "y_vuong": "study, qualifications, relationships",
+   "y_suy": "flirtation, going astray"
+  },
+  "5": {
+   "y_vuong": "authority (only when Period 5 is current)",
+   "y_suy": "the 5 Yellow sha — tradition advises no ground-breaking and no front door in this palace"
+  },
+  "6": {
+   "y_vuong": "power, leadership, helpful people",
+   "y_suy": "isolation, rigidity"
+  },
+  "7": {
+   "y_vuong": "a way with words, small business",
+   "y_suy": "arguments, theft"
+  },
+  "8": {
+   "y_vuong": "steady wealth, property (timely in Period 8)",
+   "y_suy": "retreating qi in Period 9 — still fairly good, but fading"
+  },
+  "9": {
+   "y_vuong": "timely in Period 9 (2024–2043): reputation, happy events, technology, media",
+   "y_suy": "haste, too much fire"
+  }
+ },
+ "the_quai": {
+  "y": "When a house is a 'replacement' facing (the back is more than 3° off the centre of its mountain), its qi is no longer purely one mountain. The Shen school uses the replacement chart: the stars entering the centre of the mountain and facing charts are swapped for 'replacement stars' by a mnemonic, while the direction of flight still follows the yin–yang of the original mountain. The period chart does not change.",
+  "khau_quyet": "Zi, Gui, Jia and Shen go with Tan Lang (1); Ren, Mao, Yi, Wei and Kun with Ju Men (2); Qian, Hai, Chen, Xun, Si and Xu with Wu Qu (6); You, Xin, Chou, Gen and Bing with Po Jun (7); Yin, Wu, Geng and Ding with You Bi (9).",
+  "luu_y": "Schools differ on the threshold (3° or 4.5°), on the direction of flight after the swap and on how star 5 is handled. We follow the Shen school and have no independent source to cross-check yet, so always look at the standard chart too and re-measure with a compass."
+ },
+ "sao_doi_thuong": {
+  "1": {
+   "ten": "1 White",
+   "goi": "the star of wisdom and travel",
+   "mat_sang": "bright ideas, study, communication, good connections",
+   "mat_toi": "drifting, coldness, losses through romance",
+   "hop_phong": "study, workroom"
+  },
+  "2": {
+   "ten": "2 Black",
+   "goi": "the star of land and tiredness",
+   "mat_sang": "saving, land and property (when timely)",
+   "mat_toi": "heaviness, sluggishness, minor ailments — keep this palace quiet",
+   "hop_phong": "storage, rarely used spaces"
+  },
+  "3": {
+   "ten": "3 Jade",
+   "goi": "the star of drive and arguments",
+   "mat_sang": "new starts, growth",
+   "mat_toi": "bickering, losing things",
+   "hop_phong": "exercise room, workroom"
+  },
+  "4": {
+   "ten": "4 Green",
+   "goi": "the star of learning and relationships",
+   "mat_sang": "study, qualifications, relationships",
+   "mat_toi": "daydreaming, getting carried away",
+   "hop_phong": "study, reading desk"
+  },
+  "5": {
+   "ten": "5 Yellow",
+   "goi": "the heaviest star, best left quiet",
+   "mat_sang": "authority (only when Period 5 is current)",
+   "mat_toi": "stuck, heavy, draining — no ground-breaking, no front door",
+   "hop_phong": "places people rarely go"
+  },
+  "6": {
+   "ten": "6 White",
+   "goi": "the star of authority and elders",
+   "mat_sang": "leadership, helpful people, discipline",
+   "mat_toi": "rigidity, solitude",
+   "hop_phong": "the main earner's room"
+  },
+  "7": {
+   "ten": "7 Red",
+   "goi": "the star of talk and trade",
+   "mat_sang": "good talkers, small trade, fun",
+   "mat_toi": "gossip, money leaking away, theft",
+   "hop_phong": "living room"
+  },
+  "8": {
+   "ten": "8 White",
+   "goi": "the star of wealth and children",
+   "mat_sang": "stability, property, children",
+   "mat_toi": "gradually fading in Period 9, still fairly good",
+   "hop_phong": "living room, bedroom"
+  },
+  "9": {
+   "ten": "9 Purple",
+   "goi": "the current period's star (2024–2043)",
+   "mat_sang": "reputation, happy events, technology, media",
+   "mat_toi": "haste, a short temper",
+   "hop_phong": "living room, workroom, front door"
+  }
+ },
+ "luu_nguyet": {
+  "y": "The monthly star changes with the solar terms: the Tiger month begins at Li Chun (Start of Spring), the Rabbit month at Jing Zhe (Awakening of Insects)… In Rat, Horse, Rabbit and Rooster years the Tiger month's centre star is 8; in Dragon, Dog, Ox and Goat years 5; in Tiger, Monkey, Snake and Pig years 2; each month steps back one number.",
+  "luu_y": "The monthly star is only a short-term layer on top of the annual star and the house chart — use it to choose when to break ground, repair or tidy a room; it is not a prediction."
+ },
+ "to_hop_81": {
+  "1-1": {
+   "ten": "1 White doubled",
+   "y": "Two Water stars meet: bright ideas, good for study, travel and communication; too much Water feels cold and drifting. Mountain star 1 (1 White) speaks of the people living here: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting; facing star 1 (1 White) speaks of money and work: money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+   "linh_vuc": {
+    "tien_bac": "Money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+    "cong_viec": "Suits research, consulting, travel and trade.",
+    "gia_dao": "Someone in the house often travels or studies; feelings drift easily — keep a habit of meeting up every week.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 1 with the kidneys and ears — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "workroom, study, reading corner",
+   "luu_y": "Keep it warm and well lit; avoid damp.",
+   "an_toan": [
+    "Watch for leaks, seepage and slippery floors on this side: check the pipes, waterproof, and put non-slip mats where it often gets wet."
+   ]
+  },
+  "1-2": {
+   "ten": "1 and 2",
+   "y": "Earth presses on Water: home life easily feels heavy and slow; the older woman of the house is often tired. Mountain star 1 (1 White) speaks of the people living here: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting; facing star 2 (2 Black) speaks of money and work: money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+    "cong_viec": "Suits slow but steady work: logistics, asset management; avoid work that needs a sprint.",
+    "gia_dao": "The mother or wife tends to carry a lot that nobody notices; share out the housework clearly.",
+    "suc_khoe": "The old books link mountain star 1 with the kidneys and ears: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "storage, rarely used room",
+   "luu_y": "Don't put a bed or stove here; keep it airy, clean and well lit.",
+   "an_toan": [
+    "Watch for leaks, seepage and slippery floors on this side: check the pipes, waterproof, and put non-slip mats where it often gets wet."
+   ]
+  },
+  "1-3": {
+   "ten": "1 and 3",
+   "y": "Water feeds Wood: new starts and a voice that is heard; when star 3 is out of season, bickering and paperwork disputes come easily. Mountain star 1 (1 White) speaks of the people living here: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting; facing star 3 (3 Jade) speaks of money and work: new opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+   "linh_vuc": {
+    "tien_bac": "Opportunities come fast and go fast — sign only once you have read carefully. New opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+    "cong_viec": "Suits launching things and work that needs a burst of energy; avoid work full of disputes.",
+    "gia_dao": "At home: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting.",
+    "suc_khoe": "The old books link mountain star 1 with the kidneys and ears: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "workroom, second living room",
+   "luu_y": "Speak clearly and keep the paperwork clear."
+  },
+  "1-4": {
+   "ten": "1 and 4 together",
+   "y": "Water feeds Wood, a pairing the old books link with study, exams, writing and good connections. Mountain star 1 (1 White) speaks of the people living here: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting; facing star 4 (4 Green) speaks of money and work: money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+   "linh_vuc": {
+    "tien_bac": "Money from knowledge, expertise, consulting and personal brand. Money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+    "cong_viec": "Suits teaching, writing, diplomacy and personal brand.",
+    "gia_dao": "Children study well; good connections for the people here — keep the space tidy so connection doesn't turn into distraction.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 1 with the kidneys and ears — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "study, workroom, reading desk",
+   "luu_y": "Dirty water or clutter in this palace weakens the good side; keep it clean and bright."
+  },
+  "1-5": {
+   "ten": "1 and 5",
+   "y": "Heavy Earth presses on Water: this palace gets stuck and heavy; avoid breaking ground or using it much. Mountain star 1 (1 White) speaks of the people living here: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting; facing star 5 (5 Yellow) speaks of money and work: money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+    "cong_viec": "Not a place to start new work; keep current work tidy.",
+    "gia_dao": "At home: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting.",
+    "suc_khoe": "The old books link mountain star 1 with the kidneys and ears: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "storage, bathroom, places people rarely go",
+   "luu_y": "Keep it quiet and clean; no front door, stove or bed.",
+   "an_toan": [
+    "Watch for leaks, seepage and slippery floors on this side: check the pipes, waterproof, and put non-slip mats where it often gets wet."
+   ]
+  },
+  "1-6": {
+   "ten": "6 and 1",
+   "y": "Metal produces Water: clear thinking, support from elders, good for study and public work. Mountain star 1 (1 White) speaks of the people living here: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting; facing star 6 (6 White) speaks of money and work: money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+   "linh_vuc": {
+    "tien_bac": "Money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+    "cong_viec": "Suits management, legal work and roles that need credibility; avoid carrying everything alone.",
+    "gia_dao": "Parents and children, older and younger people understand each other when they sit down to work together.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 1 with the kidneys and ears — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "workroom, the main earner's room",
+   "luu_y": "When 6 is out of season it turns rigid and lonely — add warmth and light colours.",
+   "an_toan": [
+    "Keep this spot sheltered from draughts: avoid sitting or lying right in a draught or under an air conditioner blowing straight down."
+   ]
+  },
+  "1-7": {
+   "ten": "1 and 7",
+   "y": "Metal produces Water, but star 7 leans towards gossip, spending and flighty romance. Mountain star 1 (1 White) speaks of the people living here: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting; facing star 7 (7 Red) speaks of money and work: money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+   "linh_vuc": {
+    "tien_bac": "Money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+    "cong_viec": "Suits sales, services and entertainment; be careful with verbal agreements.",
+    "gia_dao": "Romance on the side easily gets talked about; be clear with each other from the start.",
+    "suc_khoe": "The old books link mountain star 1 with the kidneys and ears: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "living room, reception room",
+   "luu_y": "Keep your word and your money; fewer noisy gatherings.",
+   "an_toan": [
+    "Keep this spot sheltered from draughts: avoid sitting or lying right in a draught or under an air conditioner blowing straight down."
+   ]
+  },
+  "1-8": {
+   "ten": "1 and 8",
+   "y": "Earth presses on Water: star 8 still carries good qi for wealth, but because Earth presses on Water the youngest in the house need attention. Mountain star 1 (1 White) speaks of the people living here: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting; facing star 8 (8 White) speaks of money and work: money from land, saving and steady work; still fairly good in Period 9 but fading.",
+   "linh_vuc": {
+    "tien_bac": "Money from land, saving and steady work; still fairly good in Period 9 but fading.",
+    "cong_viec": "Suits property, finance and long-term saving.",
+    "gia_dao": "The youngest in the house need more listening; don't let the children sleep on this side for long.",
+    "suc_khoe": "The old books link mountain star 1 with the kidneys and ears: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "living room, storage",
+   "luu_y": "Don't put a young child's bed here for the long term."
+  },
+  "1-9": {
+   "ten": "1 and 9 make ten",
+   "y": "Water meets Fire and together they make ten: yin and yang meet, which Period 9 sees as good for both reputation and money. Mountain star 1 (1 White) speaks of the people living here: the people here are quick-witted, travel often and make friends easily; too much Water feels cold and drifting; facing star 9 (9 Purple) speaks of money and work: timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+   "linh_vuc": {
+    "tien_bac": "Money and reputation go together in Period 9. Timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+    "cong_viec": "Suits work that needs to stand out: media, technology, creative work, beauty.",
+    "gia_dao": "Couples get on easily; a home with laughter.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 1 with the kidneys and ears — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "living room, workroom, front door",
+   "luu_y": "Water and Fire face off — keep the stove and water apart."
+  },
+  "2-1": {
+   "ten": "1 and 2",
+   "y": "Earth presses on Water: home life easily feels heavy and slow; the older woman of the house is often tired. Mountain star 2 (2 Black) speaks of the people living here: older family members and the women of the house tire easily and feel sluggish; the home feels heavy; facing star 1 (1 White) speaks of money and work: money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+   "linh_vuc": {
+    "tien_bac": "Money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+    "cong_viec": "Suits research, consulting, travel and trade.",
+    "gia_dao": "The mother or wife tends to carry a lot that nobody notices; share out the housework clearly.",
+    "suc_khoe": "The old books link mountain star 2 with the abdomen and digestion: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "storage, rarely used room",
+   "luu_y": "Don't put a bed or stove here; keep it airy, clean and well lit.",
+   "an_toan": [
+    "Watch for leaks, seepage and slippery floors on this side: check the pipes, waterproof, and put non-slip mats where it often gets wet."
+   ]
+  },
+  "2-2": {
+   "ten": "2 Black doubled",
+   "y": "Two heavy Earth stars: a sluggish palace, tiredness and lethargy come easily; the old books advise keeping it quiet. Mountain star 2 (2 Black) speaks of the people living here: older family members and the women of the house tire easily and feel sluggish; the home feels heavy; facing star 2 (2 Black) speaks of money and work: money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+    "cong_viec": "Suits slow but steady work: logistics, asset management; avoid work that needs a sprint.",
+    "gia_dao": "At home: older family members and the women of the house tire easily and feel sluggish; the home feels heavy.",
+    "suc_khoe": "The old books link mountain star 2 with the abdomen and digestion: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "storage, bathroom",
+   "luu_y": "Don't sleep or cook here; keep it airy and well lit.",
+   "an_toan": [
+    "Keep it dry and airy and prevent mould; cover food and store it well; don't break ground or knock through on this side in years when stars 5 or 2 arrive."
+   ]
+  },
+  "2-3": {
+   "ten": "Fighting Bulls",
+   "y": "Wood clashes with Earth, which the books call 'fighting bulls': quarrels, discord between older and younger people, and lawsuits come easily. Mountain star 2 (2 Black) speaks of the people living here: older family members and the women of the house tire easily and feel sluggish; the home feels heavy; facing star 3 (3 Jade) speaks of money and work: new opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+   "linh_vuc": {
+    "tien_bac": "New opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+    "cong_viec": "Suits launching things and work that needs a burst of energy; avoid work full of disputes.",
+    "gia_dao": "A mother and her eldest son, or old and young, easily disagree; talk things over in another room.",
+    "suc_khoe": "The old books link mountain star 2 with the abdomen and digestion: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "Avoid using it as the living or dining room; fewer sharp objects.",
+   "an_toan": [
+    "Make money matters and contracts clear from the start, in writing; when an argument starts, pause and talk later."
+   ]
+  },
+  "2-4": {
+   "ten": "2 and 4",
+   "y": "Wood clashes with Earth: the older woman and the young people of the house easily disagree; mild household friction. Mountain star 2 (2 Black) speaks of the people living here: older family members and the women of the house tire easily and feel sluggish; the home feels heavy; facing star 4 (4 Green) speaks of money and work: money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+   "linh_vuc": {
+    "tien_bac": "Money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+    "cong_viec": "Suits teaching, writing, diplomacy and personal brand.",
+    "gia_dao": "At home: older family members and the women of the house tire easily and feel sluggish; the home feels heavy.",
+    "suc_khoe": "The old books link mountain star 2 with the abdomen and digestion: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "spare bedroom, workroom",
+   "luu_y": "Give each person a clearly separate space."
+  },
+  "2-5": {
+   "ten": "2 and 5 combined",
+   "y": "Two heavy Earth stars meet — the pairing the old books see as heaviest for health and losses; avoid using it as the main living space. Mountain star 2 (2 Black) speaks of the people living here: older family members and the women of the house tire easily and feel sluggish; the home feels heavy; facing star 5 (5 Yellow) speaks of money and work: money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money drains through health, legal disputes or hasty decisions; don't sign anything big while you are tired. Money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+    "cong_viec": "Not a place to start new work; keep current work tidy.",
+    "gia_dao": "Older family members tire for long stretches; give them a room on another side.",
+    "suc_khoe": "The old books link mountain star 2 with the abdomen and digestion: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "storage, bathroom, not for living in",
+   "luu_y": "No front door, stove or bed; no ground-breaking in this palace; keep it clean and quiet.",
+   "an_toan": [
+    "Keep it dry and airy and prevent mould; cover food and store it well; don't break ground or knock through on this side in years when stars 5 or 2 arrive."
+   ]
+  },
+  "2-6": {
+   "ten": "2 and 6",
+   "y": "Earth produces Metal: good for older people, property and saving; when out of season, lonely and set in their ways. Mountain star 2 (2 Black) speaks of the people living here: older family members and the women of the house tire easily and feel sluggish; the home feels heavy; facing star 6 (6 White) speaks of money and work: money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+   "linh_vuc": {
+    "tien_bac": "Money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+    "cong_viec": "Suits management, legal work and roles that need credibility; avoid carrying everything alone.",
+    "gia_dao": "At home: older family members and the women of the house tire easily and feel sluggish; the home feels heavy.",
+    "suc_khoe": "The old books link mountain star 2 with the abdomen and digestion: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "room for older family members, prayer room",
+   "luu_y": "Add life: plants and natural light."
+  },
+  "2-7": {
+   "ten": "2 and 7 together",
+   "y": "Earth produces Metal, but 2 and 7 are the 'pre-heaven fire numbers': hot tempers and sharp words; take care with the stove and electrics. Mountain star 2 (2 Black) speaks of the people living here: older family members and the women of the house tire easily and feel sluggish; the home feels heavy; facing star 7 (7 Red) speaks of money and work: money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+   "linh_vuc": {
+    "tien_bac": "Money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+    "cong_viec": "Suits sales, services and entertainment; be careful with verbal agreements.",
+    "gia_dao": "At home: older family members and the women of the house tire easily and feel sluggish; the home feels heavy.",
+    "suc_khoe": "The old books link mountain star 2 with the abdomen and digestion: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No stove here; check electrics and anything with a flame regularly.",
+   "an_toan": [
+    "Take extra care with fire and electrics on this side: check old wiring, sockets and the gas stove regularly; don't cluster heat-producing appliances; keep a small fire extinguisher at home."
+   ]
+  },
+  "2-8": {
+   "ten": "2 and 8",
+   "y": "Two Earth stars: wealth from land and property; the youngest in the house works harder. Mountain star 2 (2 Black) speaks of the people living here: older family members and the women of the house tire easily and feel sluggish; the home feels heavy; facing star 8 (8 White) speaks of money and work: money from land, saving and steady work; still fairly good in Period 9 but fading.",
+   "linh_vuc": {
+    "tien_bac": "Wealth from land; saving slowly but surely. Money from land, saving and steady work; still fairly good in Period 9 but fading.",
+    "cong_viec": "Suits property, finance and long-term saving.",
+    "gia_dao": "At home: older family members and the women of the house tire easily and feel sluggish; the home feels heavy.",
+    "suc_khoe": "The old books link mountain star 2 with the abdomen and digestion: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "storeroom for valuables, finance workroom",
+   "luu_y": "Keep it tidy and clean. Keep it bright and airy."
+  },
+  "2-9": {
+   "ten": "2 and 9",
+   "y": "Fire feeds heavy Earth: a hot and heavy palace, stubbornness and long-lasting tiredness come easily. Mountain star 2 (2 Black) speaks of the people living here: older family members and the women of the house tire easily and feel sluggish; the home feels heavy; facing star 9 (9 Purple) speaks of money and work: timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+   "linh_vuc": {
+    "tien_bac": "Timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+    "cong_viec": "Suits work that needs to stand out: media, technology, creative work, beauty.",
+    "gia_dao": "At home: older family members and the women of the house tire easily and feel sluggish; the home feels heavy.",
+    "suc_khoe": "The old books link mountain star 2 with the abdomen and digestion: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No stove here (Fire feeds the Earth even more); keep it cool and airy.",
+   "an_toan": [
+    "Take extra care with fire and electrics on this side: check old wiring, sockets and the gas stove regularly; don't cluster heat-producing appliances; keep a small fire extinguisher at home.",
+    "If the kitchen is on this side, keep it clean, store food well and run the extractor while cooking."
+   ]
+  },
+  "3-1": {
+   "ten": "1 and 3",
+   "y": "Water feeds Wood: new starts and a voice that is heard; when star 3 is out of season, bickering and paperwork disputes come easily. Mountain star 3 (3 Jade) speaks of the people living here: the people here are lively and outspoken; bickering and haste come easily; facing star 1 (1 White) speaks of money and work: money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+   "linh_vuc": {
+    "tien_bac": "Opportunities come fast and go fast — sign only once you have read carefully. Money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+    "cong_viec": "Suits research, consulting, travel and trade.",
+    "gia_dao": "At home: the people here are lively and outspoken; bickering and haste come easily.",
+    "suc_khoe": "The old books link mountain star 3 with the liver and legs: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "workroom, second living room",
+   "luu_y": "Speak clearly and keep the paperwork clear."
+  },
+  "3-2": {
+   "ten": "Fighting Bulls",
+   "y": "Wood clashes with Earth, which the books call 'fighting bulls': quarrels, discord between older and younger people, and lawsuits come easily. Mountain star 3 (3 Jade) speaks of the people living here: the people here are lively and outspoken; bickering and haste come easily; facing star 2 (2 Black) speaks of money and work: money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+    "cong_viec": "Suits slow but steady work: logistics, asset management; avoid work that needs a sprint.",
+    "gia_dao": "A mother and her eldest son, or old and young, easily disagree; talk things over in another room.",
+    "suc_khoe": "The old books link mountain star 3 with the liver and legs: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "Avoid using it as the living or dining room; fewer sharp objects.",
+   "an_toan": [
+    "Make money matters and contracts clear from the start, in writing; when an argument starts, pause and talk later."
+   ]
+  },
+  "3-3": {
+   "ten": "3 Jade doubled",
+   "y": "Two Wood stars: plenty of drive, good for starting a business, but bickering and lost belongings come easily. Mountain star 3 (3 Jade) speaks of the people living here: the people here are lively and outspoken; bickering and haste come easily; facing star 3 (3 Jade) speaks of money and work: new opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+   "linh_vuc": {
+    "tien_bac": "New opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+    "cong_viec": "Suits launching things and work that needs a burst of energy; avoid work full of disputes.",
+    "gia_dao": "At home: the people here are lively and outspoken; bickering and haste come easily.",
+    "suc_khoe": "The old books link mountain star 3 with the liver and legs: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "workroom, exercise room",
+   "luu_y": "Lock doors carefully; watch your words.",
+   "an_toan": [
+    "Steps and floors on this side should be sturdy and well lit; keep cables and toys off the walkway."
+   ]
+  },
+  "3-4": {
+   "ten": "3 and 4",
+   "y": "Wood meets Wood, wind and thunder: romance and rumours; both are out of season in Period 9, so gossip comes easily. Mountain star 3 (3 Jade) speaks of the people living here: the people here are lively and outspoken; bickering and haste come easily; facing star 4 (4 Green) speaks of money and work: money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+   "linh_vuc": {
+    "tien_bac": "Money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+    "cong_viec": "Suits teaching, writing, diplomacy and personal brand.",
+    "gia_dao": "At home: the people here are lively and outspoken; bickering and haste come easily.",
+    "suc_khoe": "The old books link mountain star 3 with the liver and legs: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "workroom",
+   "luu_y": "Keep private matters private.",
+   "an_toan": [
+    "Steps and floors on this side should be sturdy and well lit; keep cables and toys off the walkway."
+   ]
+  },
+  "3-5": {
+   "ten": "3 and 5",
+   "y": "Wood clashes with heavy Earth: money lost through disputes and clashes; keep this palace quiet. Mountain star 3 (3 Jade) speaks of the people living here: the people here are lively and outspoken; bickering and haste come easily; facing star 5 (5 Yellow) speaks of money and work: money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+    "cong_viec": "Not a place to start new work; keep current work tidy.",
+    "gia_dao": "At home: the people here are lively and outspoken; bickering and haste come easily.",
+    "suc_khoe": "The old books link mountain star 3 with the liver and legs: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "luu_y": "No ground-breaking; avoid putting a door or bed here."
+  },
+  "3-6": {
+   "ten": "3 and 6",
+   "y": "Metal cuts Wood: the eldest son and the father easily raise their voices; take care with arms, legs and getting about. Mountain star 3 (3 Jade) speaks of the people living here: the people here are lively and outspoken; bickering and haste come easily; facing star 6 (6 White) speaks of money and work: money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+   "linh_vuc": {
+    "tien_bac": "Money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+    "cong_viec": "Suits management, legal work and roles that need credibility; avoid carrying everything alone.",
+    "gia_dao": "Father and eldest son raise their voices easily; choose a calm moment for important talks.",
+    "suc_khoe": "The old books link mountain star 3 with the liver and legs: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "Fewer sharp metal objects; move slowly in this area."
+  },
+  "3-7": {
+   "ten": "3 and 7",
+   "y": "Metal cuts Wood, which the books call 'piercing the heart': watch for lost belongings, lawsuits and accidents with sharp objects. Mountain star 3 (3 Jade) speaks of the people living here: the people here are lively and outspoken; bickering and haste come easily; facing star 7 (7 Red) speaks of money and work: money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+   "linh_vuc": {
+    "tien_bac": "Money drains through paperwork, contracts and shareholder disputes; read carefully and keep the originals. Money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+    "cong_viec": "Suits sales, services and entertainment; be careful with verbal agreements.",
+    "gia_dao": "Couples and siblings easily exchange harsh words; avoid discussing money on this side.",
+    "suc_khoe": "The old books link mountain star 3 with the liver and legs: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "storage, rarely used spaces",
+   "luu_y": "Lock up carefully; don't keep money or important papers here; no bed.",
+   "an_toan": [
+    "Keep knives and sharp things in a lidded drawer; lock windows and side doors firmly; store money and papers somewhere with a lock."
+   ]
+  },
+  "3-8": {
+   "ten": "3 and 8",
+   "y": "Wood clashes with Earth: children are hard to manage and wealth drains; star 8 still has qi, so it is not too heavy. Mountain star 3 (3 Jade) speaks of the people living here: the people here are lively and outspoken; bickering and haste come easily; facing star 8 (8 White) speaks of money and work: money from land, saving and steady work; still fairly good in Period 9 but fading.",
+   "linh_vuc": {
+    "tien_bac": "Money from land, saving and steady work; still fairly good in Period 9 but fading.",
+    "cong_viec": "Suits property, finance and long-term saving.",
+    "gia_dao": "At home: the people here are lively and outspoken; bickering and haste come easily.",
+    "suc_khoe": "The old books link mountain star 3 with the liver and legs: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "playroom, spare room",
+   "luu_y": "Fewer sharp objects, more warmth."
+  },
+  "3-9": {
+   "ten": "3 and 9",
+   "y": "Wood feeds Fire: clever, standing out, in tune with Period 9; quick-tempered and hasty. Mountain star 3 (3 Jade) speaks of the people living here: the people here are lively and outspoken; bickering and haste come easily; facing star 9 (9 Purple) speaks of money and work: timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+   "linh_vuc": {
+    "tien_bac": "Timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+    "cong_viec": "Suits work that needs to stand out: media, technology, creative work, beauty.",
+    "gia_dao": "At home: the people here are lively and outspoken; bickering and haste come easily.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 3 with the liver and legs — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "workroom, living room",
+   "luu_y": "Stay calm, keep the heat down.",
+   "an_toan": [
+    "If this is the kitchen or a spot with many appliances: check the gas stove and wiring regularly; turn off the stove and the gas when you finish cooking."
+   ]
+  },
+  "4-1": {
+   "ten": "1 and 4 together",
+   "y": "Water feeds Wood, a pairing the old books link with study, exams, writing and good connections. Mountain star 4 (4 Green) speaks of the people living here: the people here love learning and are good with people; they get carried away in romance easily; facing star 1 (1 White) speaks of money and work: money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+   "linh_vuc": {
+    "tien_bac": "Money from knowledge, expertise, consulting and personal brand. Money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+    "cong_viec": "Suits research, consulting, travel and trade.",
+    "gia_dao": "Children study well; good connections for the people here — keep the space tidy so connection doesn't turn into distraction.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 4 with the hips, thighs and airways — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "study, workroom, reading desk",
+   "luu_y": "Dirty water or clutter in this palace weakens the good side; keep it clean and bright."
+  },
+  "4-2": {
+   "ten": "2 and 4",
+   "y": "Wood clashes with Earth: the older woman and the young people of the house easily disagree; mild household friction. Mountain star 4 (4 Green) speaks of the people living here: the people here love learning and are good with people; they get carried away in romance easily; facing star 2 (2 Black) speaks of money and work: money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+    "cong_viec": "Suits slow but steady work: logistics, asset management; avoid work that needs a sprint.",
+    "gia_dao": "At home: the people here love learning and are good with people; they get carried away in romance easily.",
+    "suc_khoe": "The old books link mountain star 4 with the hips, thighs and airways: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "spare bedroom, workroom",
+   "luu_y": "Give each person a clearly separate space."
+  },
+  "4-3": {
+   "ten": "3 and 4",
+   "y": "Wood meets Wood, wind and thunder: romance and rumours; both are out of season in Period 9, so gossip comes easily. Mountain star 4 (4 Green) speaks of the people living here: the people here love learning and are good with people; they get carried away in romance easily; facing star 3 (3 Jade) speaks of money and work: new opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+   "linh_vuc": {
+    "tien_bac": "New opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+    "cong_viec": "Suits launching things and work that needs a burst of energy; avoid work full of disputes.",
+    "gia_dao": "At home: the people here love learning and are good with people; they get carried away in romance easily.",
+    "suc_khoe": "The old books link mountain star 4 with the hips, thighs and airways: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "workroom",
+   "luu_y": "Keep private matters private.",
+   "an_toan": [
+    "Steps and floors on this side should be sturdy and well lit; keep cables and toys off the walkway."
+   ]
+  },
+  "4-4": {
+   "ten": "4 Green doubled",
+   "y": "Two Xun Wood stars: words and networking; too much of it becomes daydreaming and impractical. Mountain star 4 (4 Green) speaks of the people living here: the people here love learning and are good with people; they get carried away in romance easily; facing star 4 (4 Green) speaks of money and work: money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+   "linh_vuc": {
+    "tien_bac": "Money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+    "cong_viec": "Suits teaching, writing, diplomacy and personal brand.",
+    "gia_dao": "At home: the people here love learning and are good with people; they get carried away in romance easily.",
+    "suc_khoe": "The old books link mountain star 4 with the hips, thighs and airways: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "study, workroom",
+   "luu_y": "Keep things in order; confirm work in writing.",
+   "an_toan": [
+    "Steps and floors on this side should be sturdy and well lit; keep cables and toys off the walkway."
+   ]
+  },
+  "4-5": {
+   "ten": "4 and 5",
+   "y": "Wood clashes with heavy Earth: losses through paperwork and documents; a heavy palace. Mountain star 4 (4 Green) speaks of the people living here: the people here love learning and are good with people; they get carried away in romance easily; facing star 5 (5 Yellow) speaks of money and work: money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+    "cong_viec": "Not a place to start new work; keep current work tidy.",
+    "gia_dao": "At home: the people here love learning and are good with people; they get carried away in romance easily.",
+    "suc_khoe": "The old books link mountain star 4 with the hips, thighs and airways: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "luu_y": "No ground-breaking; no altar or bed here."
+  },
+  "4-6": {
+   "ten": "4 Green",
+   "y": "Metal cuts Wood: the older woman and the father easily get tense; mental pressure when both stars are out of season. Mountain star 4 (4 Green) speaks of the people living here: the people here love learning and are good with people; they get carried away in romance easily; facing star 6 (6 White) speaks of money and work: money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+   "linh_vuc": {
+    "tien_bac": "Money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+    "cong_viec": "Suits management, legal work and roles that need credibility; avoid carrying everything alone.",
+    "gia_dao": "An older couple gets tense over small things; give each a corner of their own.",
+    "suc_khoe": "The old books link mountain star 4 with the hips, thighs and airways: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "spare room",
+   "luu_y": "Add warm colours and soft greenery."
+  },
+  "4-7": {
+   "ten": "4 and 7",
+   "y": "Metal cuts Wood: talk and rumours, complicated romance, being badmouthed. Mountain star 4 (4 Green) speaks of the people living here: the people here love learning and are good with people; they get carried away in romance easily; facing star 7 (7 Red) speaks of money and work: money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+   "linh_vuc": {
+    "tien_bac": "Money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+    "cong_viec": "Suits sales, services and entertainment; be careful with verbal agreements.",
+    "gia_dao": "A third person easily meddles in romance; keep private matters private.",
+    "suc_khoe": "The old books link mountain star 4 with the hips, thighs and airways: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No couple's bed here."
+  },
+  "4-8": {
+   "ten": "4 and 8",
+   "y": "Wood clashes with Earth: young children find it hard to focus on study; star 8 protects the wealth side. Mountain star 4 (4 Green) speaks of the people living here: the people here love learning and are good with people; they get carried away in romance easily; facing star 8 (8 White) speaks of money and work: money from land, saving and steady work; still fairly good in Period 9 but fading.",
+   "linh_vuc": {
+    "tien_bac": "Money from land, saving and steady work; still fairly good in Period 9 but fading.",
+    "cong_viec": "Suits property, finance and long-term saving.",
+    "gia_dao": "At home: the people here love learning and are good with people; they get carried away in romance easily.",
+    "suc_khoe": "The old books link mountain star 4 with the hips, thighs and airways: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "living room, spare bedroom",
+   "luu_y": "Put the study corner in another palace."
+  },
+  "4-9": {
+   "ten": "4 and 9",
+   "y": "Wood feeds Fire: brilliant with words, reputation, in tune with Period 9. Mountain star 4 (4 Green) speaks of the people living here: the people here love learning and are good with people; they get carried away in romance easily; facing star 9 (9 Purple) speaks of money and work: timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+   "linh_vuc": {
+    "tien_bac": "Money from reputation, writing and content — in tune with Period 9. Timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+    "cong_viec": "Suits work that needs to stand out: media, technology, creative work, beauty.",
+    "gia_dao": "At home: the people here love learning and are good with people; they get carried away in romance easily.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 4 with the hips, thighs and airways — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "workroom, study, living room",
+   "luu_y": "Avoid it getting too hot and stuffy.",
+   "an_toan": [
+    "If this is the kitchen or a spot with many appliances: check the gas stove and wiring regularly; turn off the stove and the gas when you finish cooking."
+   ]
+  },
+  "5-1": {
+   "ten": "1 and 5",
+   "y": "Heavy Earth presses on Water: this palace gets stuck and heavy; avoid breaking ground or using it much. Mountain star 5 (5 Yellow) speaks of the people living here: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used; facing star 1 (1 White) speaks of money and work: money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+   "linh_vuc": {
+    "tien_bac": "Money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+    "cong_viec": "Suits research, consulting, travel and trade.",
+    "gia_dao": "At home: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used.",
+    "suc_khoe": "The old books link mountain star 5 with the whole household's stamina: look after it preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "storage, bathroom, places people rarely go",
+   "luu_y": "Keep it quiet and clean; no front door, stove or bed.",
+   "an_toan": [
+    "Watch for leaks, seepage and slippery floors on this side: check the pipes, waterproof, and put non-slip mats where it often gets wet."
+   ]
+  },
+  "5-2": {
+   "ten": "2 and 5 combined",
+   "y": "Two heavy Earth stars meet — the pairing the old books see as heaviest for health and losses; avoid using it as the main living space. Mountain star 5 (5 Yellow) speaks of the people living here: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used; facing star 2 (2 Black) speaks of money and work: money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money drains through health, legal disputes or hasty decisions; don't sign anything big while you are tired. Money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+    "cong_viec": "Suits slow but steady work: logistics, asset management; avoid work that needs a sprint.",
+    "gia_dao": "Older family members tire for long stretches; give them a room on another side.",
+    "suc_khoe": "The old books link mountain star 5 with the whole household's stamina: look after it preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "storage, bathroom, not for living in",
+   "luu_y": "No front door, stove or bed; no ground-breaking in this palace; keep it clean and quiet.",
+   "an_toan": [
+    "Keep it dry and airy and prevent mould; cover food and store it well; don't break ground or knock through on this side in years when stars 5 or 2 arrive."
+   ]
+  },
+  "5-3": {
+   "ten": "3 and 5",
+   "y": "Wood clashes with heavy Earth: money lost through disputes and clashes; keep this palace quiet. Mountain star 5 (5 Yellow) speaks of the people living here: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used; facing star 3 (3 Jade) speaks of money and work: new opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+   "linh_vuc": {
+    "tien_bac": "New opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+    "cong_viec": "Suits launching things and work that needs a burst of energy; avoid work full of disputes.",
+    "gia_dao": "At home: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used.",
+    "suc_khoe": "The old books link mountain star 5 with the whole household's stamina: look after it preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "luu_y": "No ground-breaking; avoid putting a door or bed here."
+  },
+  "5-4": {
+   "ten": "4 and 5",
+   "y": "Wood clashes with heavy Earth: losses through paperwork and documents; a heavy palace. Mountain star 5 (5 Yellow) speaks of the people living here: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used; facing star 4 (4 Green) speaks of money and work: money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+   "linh_vuc": {
+    "tien_bac": "Money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+    "cong_viec": "Suits teaching, writing, diplomacy and personal brand.",
+    "gia_dao": "At home: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used.",
+    "suc_khoe": "The old books link mountain star 5 with the whole household's stamina: look after it preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "luu_y": "No ground-breaking; no altar or bed here."
+  },
+  "5-5": {
+   "ten": "5 Yellow doubled",
+   "y": "Two 5 Yellows: the heaviest palace in the chart; the old books advise keeping it completely quiet. Mountain star 5 (5 Yellow) speaks of the people living here: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used; facing star 5 (5 Yellow) speaks of money and work: money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+    "cong_viec": "Not a place to start new work; keep current work tidy.",
+    "gia_dao": "At home: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used.",
+    "suc_khoe": "The old books link mountain star 5 with the whole household's stamina: look after it preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "not for living in, storage",
+   "luu_y": "No ground-breaking, no door, stove or bed; clean it and leave it be.",
+   "an_toan": [
+    "Keep it dry and airy and prevent mould; cover food and store it well; don't break ground or knock through on this side in years when stars 5 or 2 arrive."
+   ]
+  },
+  "5-6": {
+   "ten": "5 and 6",
+   "y": "Heavy Earth produces Metal: the main earner carries a heavy load and gets worn out. Mountain star 5 (5 Yellow) speaks of the people living here: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used; facing star 6 (6 White) speaks of money and work: money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+   "linh_vuc": {
+    "tien_bac": "Money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+    "cong_viec": "Suits management, legal work and roles that need credibility; avoid carrying everything alone.",
+    "gia_dao": "At home: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used.",
+    "suc_khoe": "The old books link mountain star 5 with the whole household's stamina: look after it preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "Not the main bedroom; the main earner should sleep on another side."
+  },
+  "5-7": {
+   "ten": "5 and 7",
+   "y": "Heavy Earth produces Metal 7: gossip, sharp words; take care with food and drink. Mountain star 5 (5 Yellow) speaks of the people living here: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used; facing star 7 (7 Red) speaks of money and work: money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+   "linh_vuc": {
+    "tien_bac": "Money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+    "cong_viec": "Suits sales, services and entertainment; be careful with verbal agreements.",
+    "gia_dao": "At home: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used.",
+    "suc_khoe": "The old books link mountain star 5 with the whole household's stamina: look after it preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No stove or dining table here."
+  },
+  "5-8": {
+   "ten": "5 and 8",
+   "y": "Two Earth stars: star 8 softens the 5 Yellow; wealth from land, but still best kept quiet. Mountain star 5 (5 Yellow) speaks of the people living here: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used; facing star 8 (8 White) speaks of money and work: money from land, saving and steady work; still fairly good in Period 9 but fading.",
+   "linh_vuc": {
+    "tien_bac": "Money from land, saving and steady work; still fairly good in Period 9 but fading.",
+    "cong_viec": "Suits property, finance and long-term saving.",
+    "gia_dao": "At home: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used.",
+    "suc_khoe": "The old books link mountain star 5 with the whole household's stamina: look after it preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "storage, spare room",
+   "luu_y": "No major ground-breaking."
+  },
+  "5-9": {
+   "ten": "5 and 9",
+   "y": "Fire feeds heavy Earth: hot tempers and tension; keep this palace cool and quiet. Mountain star 5 (5 Yellow) speaks of the people living here: the people here tire for long stretches and things often get stuck; keep this palace quiet and little used; facing star 9 (9 Purple) speaks of money and work: timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+   "linh_vuc": {
+    "tien_bac": "Timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+    "cong_viec": "Suits work that needs to stand out: media, technology, creative work, beauty.",
+    "gia_dao": "Arguments over small things come easily in hot weather; avoid family meetings on this side.",
+    "suc_khoe": "The old books link mountain star 5 with the whole household's stamina: look after it preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No stove; no lamps or large heat-producing appliances.",
+   "an_toan": [
+    "Take extra care with fire and electrics on this side: check old wiring, sockets and the gas stove regularly; don't cluster heat-producing appliances; keep a small fire extinguisher at home.",
+    "If the kitchen is on this side, keep it clean, store food well and run the extractor while cooking."
+   ]
+  },
+  "6-1": {
+   "ten": "6 and 1",
+   "y": "Metal produces Water: clear thinking, support from elders, good for study and public work. Mountain star 6 (6 White) speaks of the people living here: the main earner or father carries authority; when the star is out of season, rigid and lonely; facing star 1 (1 White) speaks of money and work: money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+   "linh_vuc": {
+    "tien_bac": "Money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+    "cong_viec": "Suits research, consulting, travel and trade.",
+    "gia_dao": "Parents and children, older and younger people understand each other when they sit down to work together.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 6 with the head, lungs and bones — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "workroom, the main earner's room",
+   "luu_y": "When 6 is out of season it turns rigid and lonely — add warmth and light colours.",
+   "an_toan": [
+    "Keep this spot sheltered from draughts: avoid sitting or lying right in a draught or under an air conditioner blowing straight down."
+   ]
+  },
+  "6-2": {
+   "ten": "2 and 6",
+   "y": "Earth produces Metal: good for older people, property and saving; when out of season, lonely and set in their ways. Mountain star 6 (6 White) speaks of the people living here: the main earner or father carries authority; when the star is out of season, rigid and lonely; facing star 2 (2 Black) speaks of money and work: money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+    "cong_viec": "Suits slow but steady work: logistics, asset management; avoid work that needs a sprint.",
+    "gia_dao": "At home: the main earner or father carries authority; when the star is out of season, rigid and lonely.",
+    "suc_khoe": "The old books link mountain star 6 with the head, lungs and bones: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "room for older family members, prayer room",
+   "luu_y": "Add life: plants and natural light."
+  },
+  "6-3": {
+   "ten": "3 and 6",
+   "y": "Metal cuts Wood: the eldest son and the father easily raise their voices; take care with arms, legs and getting about. Mountain star 6 (6 White) speaks of the people living here: the main earner or father carries authority; when the star is out of season, rigid and lonely; facing star 3 (3 Jade) speaks of money and work: new opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+   "linh_vuc": {
+    "tien_bac": "New opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+    "cong_viec": "Suits launching things and work that needs a burst of energy; avoid work full of disputes.",
+    "gia_dao": "Father and eldest son raise their voices easily; choose a calm moment for important talks.",
+    "suc_khoe": "The old books link mountain star 6 with the head, lungs and bones: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "Fewer sharp metal objects; move slowly in this area."
+  },
+  "6-4": {
+   "ten": "4 Green",
+   "y": "Metal cuts Wood: the older woman and the father easily get tense; mental pressure when both stars are out of season. Mountain star 6 (6 White) speaks of the people living here: the main earner or father carries authority; when the star is out of season, rigid and lonely; facing star 4 (4 Green) speaks of money and work: money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+   "linh_vuc": {
+    "tien_bac": "Money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+    "cong_viec": "Suits teaching, writing, diplomacy and personal brand.",
+    "gia_dao": "An older couple gets tense over small things; give each a corner of their own.",
+    "suc_khoe": "The old books link mountain star 6 with the head, lungs and bones: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "spare room",
+   "luu_y": "Add warm colours and soft greenery."
+  },
+  "6-5": {
+   "ten": "5 and 6",
+   "y": "Heavy Earth produces Metal: the main earner carries a heavy load and gets worn out. Mountain star 6 (6 White) speaks of the people living here: the main earner or father carries authority; when the star is out of season, rigid and lonely; facing star 5 (5 Yellow) speaks of money and work: money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+    "cong_viec": "Not a place to start new work; keep current work tidy.",
+    "gia_dao": "At home: the main earner or father carries authority; when the star is out of season, rigid and lonely.",
+    "suc_khoe": "The old books link mountain star 6 with the head, lungs and bones: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "Not the main bedroom; the main earner should sleep on another side."
+  },
+  "6-6": {
+   "ten": "6 White doubled",
+   "y": "Two Qian Metal stars: authority, discipline, toughness; star 6 has retreated in Period 9, so rigidity comes easily. Mountain star 6 (6 White) speaks of the people living here: the main earner or father carries authority; when the star is out of season, rigid and lonely; facing star 6 (6 White) speaks of money and work: money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+   "linh_vuc": {
+    "tien_bac": "Money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+    "cong_viec": "Suits management, legal work and roles that need credibility; avoid carrying everything alone.",
+    "gia_dao": "At home: the main earner or father carries authority; when the star is out of season, rigid and lonely.",
+    "suc_khoe": "The old books link mountain star 6 with the head, lungs and bones: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "the main earner's room, workroom",
+   "luu_y": "Add softness and warm colours.",
+   "an_toan": [
+    "Keep this spot sheltered from draughts: avoid sitting or lying right in a draught or under an air conditioner blowing straight down."
+   ]
+  },
+  "6-7": {
+   "ten": "6 and 7 crossed swords",
+   "y": "Two Metal stars clash like two blades: rivalry, friction, cutting words. Mountain star 6 (6 White) speaks of the people living here: the main earner or father carries authority; when the star is out of season, rigid and lonely; facing star 7 (7 Red) speaks of money and work: money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+   "linh_vuc": {
+    "tien_bac": "Money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+    "cong_viec": "Suits sales, services and entertainment; be careful with verbal agreements.",
+    "gia_dao": "Two strong-willed people in the house easily clash; don't let both sit on this side for long.",
+    "suc_khoe": "The old books link mountain star 6 with the head, lungs and bones: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "Fewer metal and sharp objects; no bed.",
+   "an_toan": [
+    "Keep knives and sharp things in a lidded drawer; lock windows and side doors firmly; store money and papers somewhere with a lock."
+   ]
+  },
+  "6-8": {
+   "ten": "6 and 8",
+   "y": "Earth produces Metal: wealth, helpful people, stability — a fine Period 8 pairing that still holds value in Period 9. Mountain star 6 (6 White) speaks of the people living here: the main earner or father carries authority; when the star is out of season, rigid and lonely; facing star 8 (8 White) speaks of money and work: money from land, saving and steady work; still fairly good in Period 9 but fading.",
+   "linh_vuc": {
+    "tien_bac": "Lasting wealth; suits property, management and roles that need credibility. Money from land, saving and steady work; still fairly good in Period 9 but fading.",
+    "cong_viec": "Suits property, finance and long-term saving.",
+    "gia_dao": "An orderly household with a steady main earner; the children have someone to lean on.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 6 with the head, lungs and bones — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "living room, workroom, cash safe",
+   "luu_y": "Keep it bright and tidy. Keep it bright and airy."
+  },
+  "6-9": {
+   "ten": "6 and 9",
+   "y": "Fire melts Metal: the father or main earner is under pressure; Fire is strong in Period 9, so take note. Mountain star 6 (6 White) speaks of the people living here: the main earner or father carries authority; when the star is out of season, rigid and lonely; facing star 9 (9 Purple) speaks of money and work: timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+   "linh_vuc": {
+    "tien_bac": "Timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+    "cong_viec": "Suits work that needs to stand out: media, technology, creative work, beauty.",
+    "gia_dao": "The father or eldest is easily loaded with work; share the responsibilities.",
+    "suc_khoe": "The old books link mountain star 6 with the head, lungs and bones: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "spare room",
+   "luu_y": "No stove; not the main earner's bedroom.",
+   "an_toan": [
+    "If this is the kitchen or a spot with many appliances: check the gas stove and wiring regularly; turn off the stove and the gas when you finish cooking."
+   ]
+  },
+  "7-1": {
+   "ten": "1 and 7",
+   "y": "Metal produces Water, but star 7 leans towards gossip, spending and flighty romance. Mountain star 7 (7 Red) speaks of the people living here: the people here are talkative and cheerful; gossip and sharp words come easily; facing star 1 (1 White) speaks of money and work: money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+   "linh_vuc": {
+    "tien_bac": "Money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+    "cong_viec": "Suits research, consulting, travel and trade.",
+    "gia_dao": "Romance on the side easily gets talked about; be clear with each other from the start.",
+    "suc_khoe": "The old books link mountain star 7 with the mouth, teeth and throat: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "living room, reception room",
+   "luu_y": "Keep your word and your money; fewer noisy gatherings.",
+   "an_toan": [
+    "Keep this spot sheltered from draughts: avoid sitting or lying right in a draught or under an air conditioner blowing straight down."
+   ]
+  },
+  "7-2": {
+   "ten": "2 and 7 together",
+   "y": "Earth produces Metal, but 2 and 7 are the 'pre-heaven fire numbers': hot tempers and sharp words; take care with the stove and electrics. Mountain star 7 (7 Red) speaks of the people living here: the people here are talkative and cheerful; gossip and sharp words come easily; facing star 2 (2 Black) speaks of money and work: money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+    "cong_viec": "Suits slow but steady work: logistics, asset management; avoid work that needs a sprint.",
+    "gia_dao": "At home: the people here are talkative and cheerful; gossip and sharp words come easily.",
+    "suc_khoe": "The old books link mountain star 7 with the mouth, teeth and throat: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No stove here; check electrics and anything with a flame regularly.",
+   "an_toan": [
+    "Take extra care with fire and electrics on this side: check old wiring, sockets and the gas stove regularly; don't cluster heat-producing appliances; keep a small fire extinguisher at home."
+   ]
+  },
+  "7-3": {
+   "ten": "3 and 7",
+   "y": "Metal cuts Wood, which the books call 'piercing the heart': watch for lost belongings, lawsuits and accidents with sharp objects. Mountain star 7 (7 Red) speaks of the people living here: the people here are talkative and cheerful; gossip and sharp words come easily; facing star 3 (3 Jade) speaks of money and work: new opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+   "linh_vuc": {
+    "tien_bac": "Money drains through paperwork, contracts and shareholder disputes; read carefully and keep the originals. New opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+    "cong_viec": "Suits launching things and work that needs a burst of energy; avoid work full of disputes.",
+    "gia_dao": "Couples and siblings easily exchange harsh words; avoid discussing money on this side.",
+    "suc_khoe": "The old books link mountain star 7 with the mouth, teeth and throat: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "storage, rarely used spaces",
+   "luu_y": "Lock up carefully; don't keep money or important papers here; no bed.",
+   "an_toan": [
+    "Keep knives and sharp things in a lidded drawer; lock windows and side doors firmly; store money and papers somewhere with a lock."
+   ]
+  },
+  "7-4": {
+   "ten": "4 and 7",
+   "y": "Metal cuts Wood: talk and rumours, complicated romance, being badmouthed. Mountain star 7 (7 Red) speaks of the people living here: the people here are talkative and cheerful; gossip and sharp words come easily; facing star 4 (4 Green) speaks of money and work: money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+   "linh_vuc": {
+    "tien_bac": "Money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+    "cong_viec": "Suits teaching, writing, diplomacy and personal brand.",
+    "gia_dao": "A third person easily meddles in romance; keep private matters private.",
+    "suc_khoe": "The old books link mountain star 7 with the mouth, teeth and throat: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No couple's bed here."
+  },
+  "7-5": {
+   "ten": "5 and 7",
+   "y": "Heavy Earth produces Metal 7: gossip, sharp words; take care with food and drink. Mountain star 7 (7 Red) speaks of the people living here: the people here are talkative and cheerful; gossip and sharp words come easily; facing star 5 (5 Yellow) speaks of money and work: money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+    "cong_viec": "Not a place to start new work; keep current work tidy.",
+    "gia_dao": "At home: the people here are talkative and cheerful; gossip and sharp words come easily.",
+    "suc_khoe": "The old books link mountain star 7 with the mouth, teeth and throat: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No stove or dining table here."
+  },
+  "7-6": {
+   "ten": "6 and 7 crossed swords",
+   "y": "Two Metal stars clash like two blades: rivalry, friction, cutting words. Mountain star 7 (7 Red) speaks of the people living here: the people here are talkative and cheerful; gossip and sharp words come easily; facing star 6 (6 White) speaks of money and work: money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+   "linh_vuc": {
+    "tien_bac": "Money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+    "cong_viec": "Suits management, legal work and roles that need credibility; avoid carrying everything alone.",
+    "gia_dao": "Two strong-willed people in the house easily clash; don't let both sit on this side for long.",
+    "suc_khoe": "The old books link mountain star 7 with the mouth, teeth and throat: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "Fewer metal and sharp objects; no bed.",
+   "an_toan": [
+    "Keep knives and sharp things in a lidded drawer; lock windows and side doors firmly; store money and papers somewhere with a lock."
+   ]
+  },
+  "7-7": {
+   "ten": "7 Red doubled",
+   "y": "Two Dui Metal stars: talk, small trade, fun; money and words leak away easily. Mountain star 7 (7 Red) speaks of the people living here: the people here are talkative and cheerful; gossip and sharp words come easily; facing star 7 (7 Red) speaks of money and work: money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+   "linh_vuc": {
+    "tien_bac": "Money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+    "cong_viec": "Suits sales, services and entertainment; be careful with verbal agreements.",
+    "gia_dao": "At home: the people here are talkative and cheerful; gossip and sharp words come easily.",
+    "suc_khoe": "The old books link mountain star 7 with the mouth, teeth and throat: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "living room, dining room",
+   "luu_y": "Keep your word and your money.",
+   "an_toan": [
+    "Keep knives and sharp things in a lidded drawer; lock windows and side doors firmly; store money and papers somewhere with a lock."
+   ]
+  },
+  "7-8": {
+   "ten": "7 and 8",
+   "y": "Earth produces Metal: wealth and youthful charm; star 7 is out of season in Period 9, so the good side weakens. Mountain star 7 (7 Red) speaks of the people living here: the people here are talkative and cheerful; gossip and sharp words come easily; facing star 8 (8 White) speaks of money and work: money from land, saving and steady work; still fairly good in Period 9 but fading.",
+   "linh_vuc": {
+    "tien_bac": "Money from land, saving and steady work; still fairly good in Period 9 but fading.",
+    "cong_viec": "Suits property, finance and long-term saving.",
+    "gia_dao": "At home: the people here are talkative and cheerful; gossip and sharp words come easily.",
+    "suc_khoe": "The old books link mountain star 7 with the mouth, teeth and throat: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "living room, spare bedroom",
+   "luu_y": "Avoid clutter."
+  },
+  "7-9": {
+   "ten": "7 and 9",
+   "y": "Fire melts Metal: sharp words, hot tempers; take care with fire and electrics. Mountain star 7 (7 Red) speaks of the people living here: the people here are talkative and cheerful; gossip and sharp words come easily; facing star 9 (9 Purple) speaks of money and work: timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+   "linh_vuc": {
+    "tien_bac": "Timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+    "cong_viec": "Suits work that needs to stand out: media, technology, creative work, beauty.",
+    "gia_dao": "At home: the people here are talkative and cheerful; gossip and sharp words come easily.",
+    "suc_khoe": "The old books link mountain star 7 with the mouth, teeth and throat: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No stove; check the electrics regularly.",
+   "an_toan": [
+    "Take extra care with fire and electrics on this side: check old wiring, sockets and the gas stove regularly; don't cluster heat-producing appliances; keep a small fire extinguisher at home."
+   ]
+  },
+  "8-1": {
+   "ten": "1 and 8",
+   "y": "Earth presses on Water: star 8 still carries good qi for wealth, but because Earth presses on Water the youngest in the house need attention. Mountain star 8 (8 White) speaks of the people living here: the people here are calm and steady; the children and young people of the house benefit; facing star 1 (1 White) speaks of money and work: money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+   "linh_vuc": {
+    "tien_bac": "Money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+    "cong_viec": "Suits research, consulting, travel and trade.",
+    "gia_dao": "The youngest in the house need more listening; don't let the children sleep on this side for long.",
+    "suc_khoe": "The old books link mountain star 8 with the hands, back and joints: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "living room, storage",
+   "luu_y": "Don't put a young child's bed here for the long term."
+  },
+  "8-2": {
+   "ten": "2 and 8",
+   "y": "Two Earth stars: wealth from land and property; the youngest in the house works harder. Mountain star 8 (8 White) speaks of the people living here: the people here are calm and steady; the children and young people of the house benefit; facing star 2 (2 Black) speaks of money and work: money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+   "linh_vuc": {
+    "tien_bac": "Wealth from land; saving slowly but surely. Money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+    "cong_viec": "Suits slow but steady work: logistics, asset management; avoid work that needs a sprint.",
+    "gia_dao": "At home: the people here are calm and steady; the children and young people of the house benefit.",
+    "suc_khoe": "The old books link mountain star 8 with the hands, back and joints: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "storeroom for valuables, finance workroom",
+   "luu_y": "Keep it tidy and clean. Keep it bright and airy."
+  },
+  "8-3": {
+   "ten": "3 and 8",
+   "y": "Wood clashes with Earth: children are hard to manage and wealth drains; star 8 still has qi, so it is not too heavy. Mountain star 8 (8 White) speaks of the people living here: the people here are calm and steady; the children and young people of the house benefit; facing star 3 (3 Jade) speaks of money and work: new opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+   "linh_vuc": {
+    "tien_bac": "New opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+    "cong_viec": "Suits launching things and work that needs a burst of energy; avoid work full of disputes.",
+    "gia_dao": "At home: the people here are calm and steady; the children and young people of the house benefit.",
+    "suc_khoe": "The old books link mountain star 8 with the hands, back and joints: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "playroom, spare room",
+   "luu_y": "Fewer sharp objects, more warmth."
+  },
+  "8-4": {
+   "ten": "4 and 8",
+   "y": "Wood clashes with Earth: young children find it hard to focus on study; star 8 protects the wealth side. Mountain star 8 (8 White) speaks of the people living here: the people here are calm and steady; the children and young people of the house benefit; facing star 4 (4 Green) speaks of money and work: money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+   "linh_vuc": {
+    "tien_bac": "Money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+    "cong_viec": "Suits teaching, writing, diplomacy and personal brand.",
+    "gia_dao": "At home: the people here are calm and steady; the children and young people of the house benefit.",
+    "suc_khoe": "The old books link mountain star 8 with the hands, back and joints: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "living room, spare bedroom",
+   "luu_y": "Put the study corner in another palace."
+  },
+  "8-5": {
+   "ten": "5 and 8",
+   "y": "Two Earth stars: star 8 softens the 5 Yellow; wealth from land, but still best kept quiet. Mountain star 8 (8 White) speaks of the people living here: the people here are calm and steady; the children and young people of the house benefit; facing star 5 (5 Yellow) speaks of money and work: money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+    "cong_viec": "Not a place to start new work; keep current work tidy.",
+    "gia_dao": "At home: the people here are calm and steady; the children and young people of the house benefit.",
+    "suc_khoe": "The old books link mountain star 8 with the hands, back and joints: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "storage, spare room",
+   "luu_y": "No major ground-breaking."
+  },
+  "8-6": {
+   "ten": "6 and 8",
+   "y": "Earth produces Metal: wealth, helpful people, stability — a fine Period 8 pairing that still holds value in Period 9. Mountain star 8 (8 White) speaks of the people living here: the people here are calm and steady; the children and young people of the house benefit; facing star 6 (6 White) speaks of money and work: money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+   "linh_vuc": {
+    "tien_bac": "Lasting wealth; suits property, management and roles that need credibility. Money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+    "cong_viec": "Suits management, legal work and roles that need credibility; avoid carrying everything alone.",
+    "gia_dao": "An orderly household with a steady main earner; the children have someone to lean on.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 8 with the hands, back and joints — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "living room, workroom, cash safe",
+   "luu_y": "Keep it bright and tidy. Keep it bright and airy."
+  },
+  "8-7": {
+   "ten": "7 and 8",
+   "y": "Earth produces Metal: wealth and youthful charm; star 7 is out of season in Period 9, so the good side weakens. Mountain star 8 (8 White) speaks of the people living here: the people here are calm and steady; the children and young people of the house benefit; facing star 7 (7 Red) speaks of money and work: money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+   "linh_vuc": {
+    "tien_bac": "Money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+    "cong_viec": "Suits sales, services and entertainment; be careful with verbal agreements.",
+    "gia_dao": "At home: the people here are calm and steady; the children and young people of the house benefit.",
+    "suc_khoe": "The old books link mountain star 8 with the hands, back and joints: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "living room, spare bedroom",
+   "luu_y": "Avoid clutter."
+  },
+  "8-8": {
+   "ten": "8 White doubled",
+   "y": "Two Gen Earth stars: wealth, children, good order; still good qi in Period 9 but fading. Mountain star 8 (8 White) speaks of the people living here: the people here are calm and steady; the children and young people of the house benefit; facing star 8 (8 White) speaks of money and work: money from land, saving and steady work; still fairly good in Period 9 but fading.",
+   "linh_vuc": {
+    "tien_bac": "Money from land, saving and steady work; still fairly good in Period 9 but fading.",
+    "cong_viec": "Suits property, finance and long-term saving.",
+    "gia_dao": "At home: the people here are calm and steady; the children and young people of the house benefit.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 8 with the hands, back and joints — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "living room, workroom, bedroom",
+   "luu_y": "Keep it tidy and bright. Keep it bright and airy."
+  },
+  "8-9": {
+   "ten": "8 and 9",
+   "y": "Fire produces Earth: happy events, weddings, wealth — a fine Period 9 pairing. Mountain star 8 (8 White) speaks of the people living here: the people here are calm and steady; the children and young people of the house benefit; facing star 9 (9 Purple) speaks of money and work: timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+   "linh_vuc": {
+    "tien_bac": "Timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+    "cong_viec": "Suits work that needs to stand out: media, technology, creative work, beauty.",
+    "gia_dao": "Happy news, weddings and new family members; things go well for the children.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 8 with the hands, back and joints — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "living room, main bedroom, front door",
+   "luu_y": "Keep it bright, warm and clean."
+  },
+  "9-1": {
+   "ten": "1 and 9 make ten",
+   "y": "Water meets Fire and together they make ten: yin and yang meet, which Period 9 sees as good for both reputation and money. Mountain star 9 (9 Purple) speaks of the people living here: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily; facing star 1 (1 White) speaks of money and work: money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+   "linh_vuc": {
+    "tien_bac": "Money and reputation go together in Period 9. Money comes from know-how, travel and networking; in Period 9 star 1 is growing qi, so it is still good.",
+    "cong_viec": "Suits research, consulting, travel and trade.",
+    "gia_dao": "Couples get on easily; a home with laughter.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 9 with the heart and eyes — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "Pressure from money and work falls on the people here; they get tense and short-tempered easily — share the load and speak up early."
+   },
+   "hop_cho": "living room, workroom, front door",
+   "luu_y": "Water and Fire face off — keep the stove and water apart."
+  },
+  "9-2": {
+   "ten": "2 and 9",
+   "y": "Fire feeds heavy Earth: a hot and heavy palace, stubbornness and long-lasting tiredness come easily. Mountain star 9 (9 Purple) speaks of the people living here: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily; facing star 2 (2 Black) speaks of money and work: money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money moves slowly and drains through family matters and health; save gradually and don't expand on this side.",
+    "cong_viec": "Suits slow but steady work: logistics, asset management; avoid work that needs a sprint.",
+    "gia_dao": "At home: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily.",
+    "suc_khoe": "The old books link mountain star 9 with the heart and eyes: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No stove here (Fire feeds the Earth even more); keep it cool and airy.",
+   "an_toan": [
+    "Take extra care with fire and electrics on this side: check old wiring, sockets and the gas stove regularly; don't cluster heat-producing appliances; keep a small fire extinguisher at home.",
+    "If the kitchen is on this side, keep it clean, store food well and run the extractor while cooking."
+   ]
+  },
+  "9-3": {
+   "ten": "3 and 9",
+   "y": "Wood feeds Fire: clever, standing out, in tune with Period 9; quick-tempered and hasty. Mountain star 9 (9 Purple) speaks of the people living here: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily; facing star 3 (3 Jade) speaks of money and work: new opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+   "linh_vuc": {
+    "tien_bac": "New opportunities arrive but arguments, paperwork costs and lawsuits come easily; put everything in writing.",
+    "cong_viec": "Suits launching things and work that needs a burst of energy; avoid work full of disputes.",
+    "gia_dao": "At home: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 9 with the heart and eyes — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "workroom, living room",
+   "luu_y": "Stay calm, keep the heat down.",
+   "an_toan": [
+    "If this is the kitchen or a spot with many appliances: check the gas stove and wiring regularly; turn off the stove and the gas when you finish cooking."
+   ]
+  },
+  "9-4": {
+   "ten": "4 and 9",
+   "y": "Wood feeds Fire: brilliant with words, reputation, in tune with Period 9. Mountain star 9 (9 Purple) speaks of the people living here: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily; facing star 4 (4 Green) speaks of money and work: money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+   "linh_vuc": {
+    "tien_bac": "Money from reputation, writing and content — in tune with Period 9. Money from words, relationships and advice; without a practical side it drifts away — confirm things in writing.",
+    "cong_viec": "Suits teaching, writing, diplomacy and personal brand.",
+    "gia_dao": "At home: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 9 with the heart and eyes — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "Work and money support the people here; the overall mood is relaxed, as long as nobody gets complacent."
+   },
+   "hop_cho": "workroom, study, living room",
+   "luu_y": "Avoid it getting too hot and stuffy.",
+   "an_toan": [
+    "If this is the kitchen or a spot with many appliances: check the gas stove and wiring regularly; turn off the stove and the gas when you finish cooking."
+   ]
+  },
+  "9-5": {
+   "ten": "5 and 9",
+   "y": "Fire feeds heavy Earth: hot tempers and tension; keep this palace cool and quiet. Mountain star 9 (9 Purple) speaks of the people living here: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily; facing star 5 (5 Yellow) speaks of money and work: money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+   "linh_vuc": {
+    "tien_bac": "Money gets stuck easily and drains unexpectedly; don't expand, don't make big investments and don't break ground on this side.",
+    "cong_viec": "Not a place to start new work; keep current work tidy.",
+    "gia_dao": "Arguments over small things come easily in hot weather; avoid family meetings on this side.",
+    "suc_khoe": "The old books link mountain star 9 with the heart and eyes: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No stove; no lamps or large heat-producing appliances.",
+   "an_toan": [
+    "Take extra care with fire and electrics on this side: check old wiring, sockets and the gas stove regularly; don't cluster heat-producing appliances; keep a small fire extinguisher at home.",
+    "If the kitchen is on this side, keep it clean, store food well and run the extractor while cooking."
+   ]
+  },
+  "9-6": {
+   "ten": "6 and 9",
+   "y": "Fire melts Metal: the father or main earner is under pressure; Fire is strong in Period 9, so take note. Mountain star 9 (9 Purple) speaks of the people living here: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily; facing star 6 (6 White) speaks of money and work: money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+   "linh_vuc": {
+    "tien_bac": "Money from position and support from elders; star 6 has retreated in Period 9, so spending needs discipline.",
+    "cong_viec": "Suits management, legal work and roles that need credibility; avoid carrying everything alone.",
+    "gia_dao": "The father or eldest is easily loaded with work; share the responsibilities.",
+    "suc_khoe": "The old books link mountain star 9 with the heart and eyes: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "spare room",
+   "luu_y": "No stove; not the main earner's bedroom.",
+   "an_toan": [
+    "If this is the kitchen or a spot with many appliances: check the gas stove and wiring regularly; turn off the stove and the gas when you finish cooking."
+   ]
+  },
+  "9-7": {
+   "ten": "7 and 9",
+   "y": "Fire melts Metal: sharp words, hot tempers; take care with fire and electrics. Mountain star 9 (9 Purple) speaks of the people living here: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily; facing star 7 (7 Red) speaks of money and work: money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+   "linh_vuc": {
+    "tien_bac": "Money from trade and talk; drains through spending and gossip — keep your word and your wallet.",
+    "cong_viec": "Suits sales, services and entertainment; be careful with verbal agreements.",
+    "gia_dao": "At home: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily.",
+    "suc_khoe": "The old books link mountain star 9 with the heart and eyes: look after them preventively, rest enough and have regular check-ups — this is not a substitute for a doctor and not a forecast of illness.",
+    "tam_ly": "The people here steer the money and may spend on impulse; keep a separate budget for fun."
+   },
+   "hop_cho": "rarely used room",
+   "luu_y": "No stove; check the electrics regularly.",
+   "an_toan": [
+    "Take extra care with fire and electrics on this side: check old wiring, sockets and the gas stove regularly; don't cluster heat-producing appliances; keep a small fire extinguisher at home."
+   ]
+  },
+  "9-8": {
+   "ten": "8 and 9",
+   "y": "Fire produces Earth: happy events, weddings, wealth — a fine Period 9 pairing. Mountain star 9 (9 Purple) speaks of the people living here: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily; facing star 8 (8 White) speaks of money and work: money from land, saving and steady work; still fairly good in Period 9 but fading.",
+   "linh_vuc": {
+    "tien_bac": "Money from land, saving and steady work; still fairly good in Period 9 but fading.",
+    "cong_viec": "Suits property, finance and long-term saving.",
+    "gia_dao": "Happy news, weddings and new family members; things go well for the children.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 9 with the heart and eyes — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "People here tend to throw themselves into work and money and forget to rest; set fixed times to stop."
+   },
+   "hop_cho": "living room, main bedroom, front door",
+   "luu_y": "Keep it bright, warm and clean."
+  },
+  "9-9": {
+   "ten": "9 Purple doubled",
+   "y": "Two Fire stars: timely in Period 9 — standing out, reputation, happy events; too hot and it turns harsh. Mountain star 9 (9 Purple) speaks of the people living here: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily; facing star 9 (9 Purple) speaks of money and work: timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+   "linh_vuc": {
+    "tien_bac": "Money comes fast in Period 9 when the front is open; don't let haste drag spending along with it. Timely qi of Period 9: reputation, money from creative work, technology, beauty and media.",
+    "cong_viec": "Suits work that needs to stand out: media, technology, creative work, beauty.",
+    "gia_dao": "At home: the people here stand out and are warm-hearted; they get hot-headed, hasty and tense easily.",
+    "suc_khoe": "The people here are generally fine; the old books link mountain star 9 with the heart and eyes — a steady routine and regular check-ups are enough; this is not a substitute for a doctor.",
+    "tam_ly": "Two stars of the same element tend to overdo things — the good gets too good and the heavy gets heavier; knowing when to stop is enough."
+   },
+   "hop_cho": "living room, workroom, front door",
+   "luu_y": "Keep it airy; avoid stuffy heat.",
+   "an_toan": [
+    "This side gets hot and stuffy easily: ventilate, shade from the sun, don't crowd heat-producing appliances; don't overload the wiring.",
+    "Take extra care with fire and electrics on this side: check old wiring, sockets and the gas stove regularly; don't cluster heat-producing appliances; keep a small fire extinguisher at home."
+   ]
+  }
+ },
+ "_nguon": "Flying Stars (Xuan Kong) — Shen's Xuan Kong Studies (Shen Zhureng, late Qing; public-domain classic), with the theory of the nine stars following the Green Bag Mysterious Sayings. Editorial draft, awaiting checking. Traditional beliefs are labelled as such; no objects to 'cure' anything are recommended."
+}

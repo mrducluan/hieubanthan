@@ -232,6 +232,15 @@ test.describe("/en/bazi trên trình duyệt", () => {
     const ngang = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(ngang).toBeLessThanOrEqual(0);
 
+    // EN-AI: câu gợi ý trước (câu chuẩn engine /v1/hoi/goi-y, bấm là hỏi luôn), ô gõ tự do vẫn ngay dưới.
+    const chip = page.getByRole("button", { name: "How are my finances?", exact: true });
+    await expect(chip).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByRole("button", { name: "What careers suit me?", exact: true })).toBeVisible();
+    await chip.click();
+    await expect(page.getByTestId("cau-hoi-ban").last()).toContainText("How are my finances?");
+    await expect(page.getByTestId("cau-tra-loi").last()).toContainText(/\w/, { timeout: 30_000 });
+    expect((await page.getByTestId("cau-tra-loi").last().innerText()).split("\n").filter((l) => VIET.test(l))).toEqual([]);
+
     // Hỏi đáp bằng tiếng Anh (engine /v1/battu/hoi trả lời theo ngôn ngữ lượt gọi — header do trình duyệt gửi kèm)
     await page.getByRole("textbox", { name: "Your BaZi question" }).fill("What is my Useful God?");
     await page.getByRole("button", { name: "Send question" }).click();

@@ -244,7 +244,8 @@
   },
   "huong": {
    "Bắc": {"en": "North"}, "Đông Bắc": {"en": "North-East"}, "Đông": {"en": "East"}, "Đông Nam": {"en": "South-East"},
-   "Nam": {"en": "South"}, "Tây Nam": {"en": "South-West"}, "Tây": {"en": "West"}, "Tây Bắc": {"en": "North-West"}, "Trung cung": {"en": "Centre"}
+   "Nam": {"en": "South"}, "Tây Nam": {"en": "South-West"}, "Tây": {"en": "West"}, "Tây Bắc": {"en": "North-West"}, "Trung cung": {"en": "Centre"},
+   "Trung tâm": {"en": "Centre"}
   },
   "nhom": {"Đông tứ mệnh": {"en": "East Group"}, "Tây tứ mệnh": {"en": "West Group"}, "Đông tứ trạch": {"en": "East-group house"}, "Tây tứ trạch": {"en": "West-group house"}},
   "sao_bay": {
@@ -252,7 +253,10 @@
    "Tứ Lục": {"en": "4 Green", "han": "四綠"}, "Ngũ Hoàng": {"en": "5 Yellow", "han": "五黃"}, "Lục Bạch": {"en": "6 White", "han": "六白"},
    "Thất Xích": {"en": "7 Red", "han": "七赤"}, "Bát Bạch": {"en": "8 White", "han": "八白"}, "Cửu Tử": {"en": "9 Purple", "han": "九紫"}
   },
-  "khai_niem": {"cung phi": {"en": "Kua number", "han": "命卦"}, "phi tinh": {"en": "Flying Stars", "han": "飛星"}, "bát trạch": {"en": "Eight Mansions", "han": "八宅"}}
+  "khai_niem": {"cung phi": {"en": "Kua number", "han": "命卦"}, "phi tinh": {"en": "Flying Stars", "han": "飛星"}, "bát trạch": {"en": "Eight Mansions", "han": "八宅"}},
+  "son": {"Tý": {"en": "Zi (N2)", "han": "子"}, "Quý": {"en": "Gui (N3)", "han": "癸"}, "Sửu": {"en": "Chou (NE1)", "han": "丑"}, "Cấn": {"en": "Gen (NE2)", "han": "艮"}, "Dần": {"en": "Yin (NE3)", "han": "寅"}, "Giáp": {"en": "Jia (E1)", "han": "甲"}, "Mão": {"en": "Mao (E2)", "han": "卯"}, "Ất": {"en": "Yi (E3)", "han": "乙"}, "Thìn": {"en": "Chen (SE1)", "han": "辰"}, "Tốn": {"en": "Xun (SE2)", "han": "巽"}, "Tỵ": {"en": "Si (SE3)", "han": "巳"}, "Bính": {"en": "Bing (S1)", "han": "丙"}, "Ngọ": {"en": "Wu (S2)", "han": "午"}, "Đinh": {"en": "Ding (S3)", "han": "丁"}, "Mùi": {"en": "Wei (SW1)", "han": "未"}, "Khôn": {"en": "Kun (SW2)", "han": "坤"}, "Thân": {"en": "Shen (SW3)", "han": "申"}, "Canh": {"en": "Geng (W1)", "han": "庚"}, "Dậu": {"en": "You (W2)", "han": "酉"}, "Tân": {"en": "Xin (W3)", "han": "辛"}, "Tuất": {"en": "Xu (NW1)", "han": "戌"}, "Càn": {"en": "Qian (NW2)", "han": "乾"}, "Hợi": {"en": "Hai (NW3)", "han": "亥"}, "Nhâm": {"en": "Ren (N1)", "han": "壬"}},
+  "cuc": {"Vượng sơn vượng hướng": {"en": "Prosperous Mountain, Prosperous Facing", "han": "旺山旺向"}, "Thượng sơn hạ thuỷ": {"en": "Up the Mountain, Down the Water", "han": "上山下水"}, "Song tinh đáo hướng": {"en": "Double Stars at the Facing", "han": "雙星到向"}, "Song tinh đáo toạ": {"en": "Double Stars at the Sitting", "han": "雙星到坐"}},
+  "trang_thai_sao": {"vượng": {"en": "timely"}, "sinh": {"en": "growing"}, "thoái": {"en": "retreating"}, "suy": {"en": "fading"}, "tử": {"en": "dormant"}}
  },
  "kinhdich": {
   "que_64": {

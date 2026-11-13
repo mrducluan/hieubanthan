@@ -690,6 +690,19 @@ def cau_chuan_tat_ca() -> dict[str, list[str]]:
             "phongthuy": [cau_hien(c) for c in HOI_PT.values()], "thanso": [cau_hien(c) for c in HOI_TS.values()]}
 
 
+# EN-AI (câu gợi ý trước, gõ tự do sau): 6 câu chuẩn mỗi mảng hiện thành chip ở khung hỏi đáp bản Anh — bấm là hỏi luôn.
+# Chỉ câu trong danh mục chuẩn (định tuyến đã kiểm, tests/test_phan_loai_en.py), theo chủ đề người mới hay hỏi.
+GOI_Y_DAU = {
+    "battu": [HOI_BT["nghe_tien"], HOI_CUNG["Tài Bạch"], HOI_BT["hon_nhan"], HOI_BT["van"], HOI_BT["tinh_cach"], HOI_BT["ngu_hanh"]],
+    "tuvi": [HOI_CUNG["Mệnh"], HOI_CUNG["Quan Lộc"], HOI_CUNG["Tài Bạch"], HOI_CUNG["Phu Thê"], HOI_CUNG["Tật Ách"],
+             HOI_TV_THEM["ba_thang"]],
+}
+
+
+def goi_y_dau(mang: str) -> list[str]:
+    return [c for c in (cau_hien(x) for x in GOI_Y_DAU.get(mang, [])) if c]
+
+
 @ngon_ngu.lru(maxsize=1)
 def _ma_cau() -> dict[str, str]:
     """Câu chuẩn tiếng Việt → mã mẫu câu ổn định (`hoi_chuan.<mảng>.<khoá>`). Logic so khớp bên trên vẫn dùng chữ Việt."""

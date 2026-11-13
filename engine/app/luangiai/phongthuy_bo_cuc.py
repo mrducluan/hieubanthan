@@ -14,8 +14,10 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from app import ngon_ngu
 from app.calc import phongthuy as pt
 from app.kb import phongthuy_kb as kb
+from app.kb.loi import L
 
 Cung9 = Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc", "Trung cung"]
 Phong = Literal["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "phong_lam_viec"]
@@ -56,6 +58,20 @@ def dau_hieu_veto() -> set[str]:
     return {ma for ma in DAU_HIEU if (kb.bo_tri(ma) or {}).get("veto")}
 
 
+def hoi(ma: str) -> str:
+    """Câu hỏi khảo sát của một dấu hiệu theo ngôn ngữ lượt gọi (mã `DAU_HIEU` giữ nguyên chữ Việt — nhãn cho lớp đọc ảnh)."""
+    return L(f"pt.dh.{ma}", DAU_HIEU[ma]["hoi"])
+
+
+def ten_phong(p: str) -> str:
+    return L(f"pt.phong.{p}", TEN_PHONG[p])
+
+
+def chi_phi() -> dict[str, str]:
+    return {k: L(f"pt.chi_phi.{k}", v) for k, v in CHI_PHI.items()}
+
+
+@ngon_ngu.theo_viet
 def duong_trang(ma: str) -> str:
     """Y5: đường dẫn trang kiến thức của dấu hiệu (`kb/trang_phongthuy.py`) — engine dựng, web chỉ hiện link."""
     from app.kb import trang  # noqa: PLC0415
@@ -99,6 +115,11 @@ class BoCuc(BaseModel):
     huong_do: dict[VatHuong, float] = Field(default_factory=dict, description="Độ la bàn hướng vật dụng (0–360)")
     dau_hieu: dict[Literal[tuple(DAU_HIEU)], DauHieuVao] = Field(default_factory=dict)  # type: ignore[valid-type]
     mat_bang: MatBang | None = Field(default=None, description="Q2: mặt bằng vẽ tay — suy vị trí phòng, WC giữa nhà, khuyết góc, cửa thông ban công")
+
+
+def _hien():
+    from app.luangiai import phongthuy_hien  # noqa: PLC0415 — lớp hiển thị theo ngôn ngữ (câu CALC)
+    return phongthuy_hien
 
 
 def json_schema() -> dict:
@@ -153,8 +174,15 @@ def _viec_cho(ma: str, m: dict, loai_nha: str | None) -> list[dict]:
     """Việc nên làm theo 3 mức chi phí; căn hộ + dấu hiệu kết cấu → bỏ việc đụng kết cấu (luật khong_dap_ket_cau)."""
     viec = [dict(v) for v in (m.get("viec") or [])]
     if loai_nha == "can_ho" and ma in ("wc_giua_nha", "xa_ngang"):
-        viec = [v for v in viec if v["chi_phi"] != "sua_chua" or any(t in v["lam"] for t in ("thạch cao", "chiều mở cửa", "cửa giấu", "khu khô"))]
+        giu = _giu_can_ho(ma)        # EN-ALL: lọc theo CHỮ VIỆT của KB (bản dịch chọn đúng các việc bản Việt chọn)
+        viec = [v for i, v in enumerate(viec) if i in giu]
     return viec
+
+
+@ngon_ngu.theo_viet
+def _giu_can_ho(ma: str) -> set[int]:
+    return {i for i, v in enumerate((kb.bo_tri(ma) or {}).get("viec") or [])
+            if v["chi_phi"] != "sua_chua" or any(t in v["lam"] for t in ("thạch cao", "chiều mở cửa", "cửa giấu", "khu khô"))}
 
 
 def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
@@ -185,7 +213,7 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
         dt_ = bang_t.get(cung) if bang_t else None
         xet = dm or dt_
         hop = None if xet is None else (xet in pt.CAT) == (m["nen"] == "cat")
-        vi_tri.append({"phong": phong, "ten": TEN_PHONG[phong], "cung": cung, "du_nien_menh": dm,
+        vi_tri.append({"phong": phong, "ten": ten_phong(phong), "cung": cung, "du_nien_menh": dm,
                        "du_nien_trach": dt_, "nen": m["nen"], "uu_tien": m["uu_tien"], "hop": hop,
                        "kb": f"vi_tri_phong.{phong}"})
 
@@ -221,7 +249,7 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
                              "noi_dung": nay if goc_nhin == "doi_song" else xua, "goi_y": m["goi_y"], "nguon": m["nguon"],
                              "veto": ma in veto_ds, "giai_thich": {"sach_xua": xua, "doi_song": nay},
                              "viec": _viec_cho(ma, m, b.loai_nha), "tu_mat_bang": ma in dh_mb, "trang": duong_trang(ma)})
-    can_xn = [{"ma": ma, "hoi": DAU_HIEU[ma]["hoi"], "do_tin": dh.do_tin, "nguon": dh.nguon}
+    can_xn = [{"ma": ma, "hoi": hoi(ma), "do_tin": dh.do_tin, "nguon": dh.nguon}
               for ma, dh in b.dau_hieu.items() if dh.co and not _nhan(dh)]
 
     giai_vi_tri = [{**k["vi_tri_phong"][x["phong"]], "phong": x["phong"]} for x in vi_tri]
@@ -230,17 +258,18 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
         "da_tinh": {"huong_nha": huong_nha, "trach": trach,
                     "menh_quai": {"quai": mq["quai"], "nhom": mq["nhom"]} if mq else None,
                     "cung_nhom": (pt.nhom(mq["quai"]).split()[0] == trach["nhom"].split()[0]) if mq and trach else None,
-                    "vi_tri": vi_tri, "huong": huong, "cua_chu_bep": ccb},
+                    "vi_tri": vi_tri, "huong": huong,
+                    "cua_chu_bep": ccb if ngon_ngu.la_viet() or not ccb else _hien().cua_chu_bep(ccb)},
         "dien_giai": {"vi_tri": giai_vi_tri, "huong": giai_huong, "dau_hieu": dau_hieu},
         "tu_soi": k["tu_soi"],
         "can_xac_nhan": can_xn,
         "luu_y": k["luu_y"],
         # Q1 / Q2 / Q6: dấu hiệu veto đã xác nhận (trần mức), mặt bằng vẽ tay, luật thực hành đang áp dụng.
         "veto_da_xac_nhan": [d["ma"] for d in dau_hieu if d["veto"]],
-        "mat_bang": mat_bang,
+        "mat_bang": mat_bang if ngon_ngu.la_viet() or not mat_bang else _hien().mat_bang(mat_bang),
         "quy_tac": _quy_tac(b.loai_nha, co),
         "goc_nhin": goc_nhin,
-        "chi_phi": CHI_PHI,
+        "chi_phi": chi_phi(),
         **kb.meta(),
     }
 

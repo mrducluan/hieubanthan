@@ -220,6 +220,18 @@ test.describe("/en/zi-wei-dou-shu trên trình duyệt", () => {
     await expect(page.getByText(/\bSao\b/)).toHaveCount(0);
     expect((await chuViet(page)).filter((l) => !l.includes(TEN))).toEqual([]);
 
+    // EN-AI: câu gợi ý trước (câu chuẩn engine, bấm là hỏi luôn); câu máy chưa hiểu chắc → "Did you mean…" + lời chung gập.
+    const chip = page.getByRole("button", { name: "Is my career looking good?", exact: true });
+    await expect(chip).toBeVisible({ timeout: 30_000 });
+    await chip.click();
+    await expect(page.getByTestId("cau-hoi-ban").last()).toContainText("Is my career looking good?");
+    await expect(page.getByTestId("cau-tra-loi").last()).toContainText(/\w/, { timeout: 30_000 });
+    await page.getByRole("textbox", { name: "Your Zi Wei Dou Shu question" }).fill("Should I take the plunge with the bakery idea?");
+    await page.getByRole("button", { name: "Send question" }).click();
+    const hl = page.getByTestId("cau-tra-loi").last().getByTestId("hoi-lai");
+    await expect(hl).toContainText("Did you mean", { timeout: 30_000 });
+    await expect(page.getByTestId("cau-tra-loi").last().getByTestId("tra-loi-chung")).not.toHaveAttribute("open", "");
+
     // Hỏi đáp tiếng Anh + khối hình (bàn 12 cung, thang độ sáng): tên cung / sao qua ten_hien, chữ khung bằng tiếng Anh
     await page.getByRole("textbox", { name: "Your Zi Wei Dou Shu question" }).fill("What does my Life Palace say about my character?");
     await page.getByRole("button", { name: "Send question" }).click();

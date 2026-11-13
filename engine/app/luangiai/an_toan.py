@@ -1106,6 +1106,101 @@ def _bo_phu_dinh(kd: str) -> str:
     return kd if _KHONG_TU_HAI_GIU.search(con) else con
 
 
+# ------------------------------------------------------------------ EN-ALL GĐ 5 (hỏi đáp Phong thuỷ tiếng Anh)
+# Bộ câu Phong thuỷ viết độc lập lọt các cách nói khủng hoảng gắn với nhà cửa: chủ đích "không tỉnh dậy" đặt sau "so",
+# "done trying to live", "meant to die anyway", "I want to be with him soon" (người thân đã mất), người KHÁC nói muốn chết /
+# tự hại, đứng ở ban công / cầu "ngay lúc này" sau mất mát, "take all of them" + "peaceful", vật nguy hiểm + "asking for
+# reasons", "after I'm gone" + chuẩn bị cho người ở lại, "let it" sau một lời phán chết.
+_KHUNG_HOANG_GD5 = _rx_en(
+    r"so (?:that )?(?:i )?(?:just |can |will |would )?(?:not|never|do not|won t|will not) wake up(?! (?:early|late|on time|at|tired|"
+    r"refreshed|with|for|in the))",
+    r"(?:do not|don t|did not|didn t|never) (?:want|wanna|wish) to wake up(?! (?:early|so early|at|on time|in the morning|for|before|"
+    r"tired|groggy|with))",
+    r"(?:done|tired|finished|through) (?:with )?trying to (?:live|stay alive|keep going|keep living|be alive)",
+    r"(?:wanting|want|wants|wanted|wish|wishing) to (?:just )?(?:disappear|vanish|cease to exist) (?:forever|for good|permanently)",
+    r"(?:meant|supposed|destined|fated|going) to die (?:\w+ ){0,4}(?:anyway|anyways|so why (?:fight|bother|try)|why (?:fight|bother|try))",
+    r"(?:maybe|might as well|may as well) (?:it|the beam|the house|this house) (?:should|could|can|will) (?:just )?finish (?:the job|me off|me)",
+    r"(?:want|wanna|going|ready|hope|hoping) to (?:be with|join|see) (?:him|her|them) (?:again )?soon",
+    r"(?:wish|wishes|wished|wishing) (?:i|he|she|they|i d|he d|she d) (?:had |would have |d )?never (?:been born|existed)",
+    r"(?:kill|hurt|harm|cut|cutting|hurting|harming|killing) (?:herself|himself|themselves)",
+    r"(?:take|taking|swallow\w*) (?:them|it|those|these) all\b.{0,60}(?:peaceful|painless|quiet|calm)|"
+    r"(?:take|taking|swallow\w*) all of (?:them|it|those)\b.{0,60}(?:peaceful|painless|quiet|calm)",
+    r"(?:rope|noose|knife|blade|pills|tablets)\b.{0,60}asking for (?:reasons|no reason|a reason|personal reasons)",
+    r"after (?:i am|i m|im) (?:gone|dead|no longer here|not here anymore)\b.{0,60}(?:set (?:it|things|everything|the room) up|"
+    r"prepare|get (?:it|things) ready|arrange|for them|for my (?:family|kids|children|wife|husband))",
+    r"(?:eats?|kills?|takes?) (?:the )?(?:eldest|oldest|youngest|first) (?:son|daughter|child)\b.{0,80}(?:maybe|might as well) "
+    r"(?:i should )?(?:just )?let (?:it|them)(?: (?:happen|take me|have me|win))?\s*(?:[,.!?;]|$)",
+)
+_DUNG_CAO_NGAY = _rx_en(r"(?:i am|im|i m) (?:standing|sitting|sat|stood|leaning) (?:on|at|over) (?:the |my |a |our )?(?:edge|ledge|railing|parapet|"
+                        r"roof|rooftop|balcony|bridge|window ?sill|top floor)(?: \w+){0,4} (?:now|right now|tonight)")
+_MAT_MAT = _rx_en(r"(?:wife|husband|partner|girlfriend|boyfriend) (?:left|is gone|walked out)|(?:business|company|marriage|life|everything) "
+                  r"(?:collapsed|fell apart|is gone|failed|is over)|lost (?:everything|the house|my house|my home|my job|it all)|"
+                  r"nothing (?:left|helps)|no (?:hope|way out)")
+_CAU_DUNG = _rx_en(r"(?:bridge|ledge|cliff|tracks|railway|river|overpass|flyover)\b.{0,40}(?:wanting|want|urge|tempted|wish\w*) to "
+                   r"(?:stop|pull over|get out|jump|step)")
+
+
+def _khung_hoang_gd5(k: str) -> bool:
+    if _KHUNG_HOANG_GD5.search(k):
+        return True
+    if _DUNG_CAO_NGAY.search(k) and _MAT_MAT.search(k):
+        return True
+    return bool(_CAU_DUNG.search(k) and _GAN_DAY.search(k))
+
+
+# Nguy hiểm đang xảy ra TRONG NHÀ (rò gas, báo khí CO, khói / mùi khét từ ổ điện, cháy, nước tràn vào ổ điện, trần nứt
+# võng, lan can lỏng có trẻ nhỏ) → coi như cấp cứu: ra ngoài / ngắt điện / gọi cứu hộ — không đọc phong thuỷ.
+_NHA_NGUY = _rx_en(
+    r"(?:smell|smells|smelling|smelt|smelled) (?:of )?(?:gas|burning|smoke)|gas (?:leak|leaking|is leaking|smell)|leaking gas",
+    r"(?:co|carbon monoxide|smoke|fire|gas) (?:alarm|detector|sensor)s? (?:\w+ ){0,2}(?:beep\w*|going off|went off|goes off|sounding|ringing|"
+    r"keeps (?:beeping|going off))",
+    r"(?:smoke|sparks?|flames?) (?:\w+ ){0,2}(?:coming|came|pouring) (?:out )?(?:from|of|out of)|(?:sparks?|sparking) (?:from|in|at) (?:the )?"
+    r"(?:plug|socket|outlet|wire|wiring|switch)",
+    r"burning smell|smell of burning",
+    r"(?:on fire|caught fire|catching fire|set (?:\w+ ){0,3}on fire|is burning|are burning|house fire|kitchen fire)",
+    r"water (?:\w+ ){0,3}(?:in|into|through|from|pouring through|coming out of) (?:the |an |my )?(?:electrical |power |plug )?(?:socket|outlet|"
+    r"sockets|outlets|switch|fuse ?box|wiring)",
+    r"(?:ceiling|roof|wall) (?:is |are )?(?:\w+ )?(?:cracking|sagging|caving|collapsing|bulging|coming down|falling)",
+    r"(?:railing|balustrade|banister|handrail) (?:is |are )?(?:loose|broken|wobbly|coming off)",
+    r"(?:headache|dizz\w*|nause\w*|vomit\w*|drowsy)\b.{0,80}(?:gas heater|heater|boiler|generator|stove|fireplace|charcoal)|"
+    r"(?:gas heater|heater|boiler|generator|charcoal)\b.{0,80}(?:headache|dizz\w*|nause\w*|vomit\w*|drowsy)",
+)
+_NUOT_VAT = _rx_en(r"(?:kid|child|toddler|baby|son|daughter|he|she) (?:\w+ ){0,3}(?:swallowed|choking on|choked on|ate) (?:\w+ ){0,8}?"
+                   r"(?:crystals?|stones?|beads?|marbles?|coins?|magnets?|batter(?:y|ies)|gem\w*|pebbles?|pieces?)")
+
+
+def nha_nguy_hiem(raw: str) -> bool:
+    """Nguy hiểm đang xảy ra trong nhà (câu tiếng Anh) — xem `_NHA_NGUY`. Câu tiếng Việt → False (bản Việt không đổi)."""
+    if not _la_en(raw):
+        return False
+    k = _sua_en(_hai_ban(raw)[1])
+    return bool(_NHA_NGUY.search(k))
+
+
+# Từ chối (câu tiếng Anh): chọn giới tính thai, tuyển người theo năm sinh, đoán bạn đời ngoại tình, dùng phong thuỷ / gương /
+# dao làm hại người khác.
+_TU_CHOI_GD5: list[tuple[re.Pattern, str]] = [
+    (_rx_en(r"(?:pregnant|conceive|have) (?:with )?(?:a )?(?:baby )?(?:boy|girl)\b|(?:boy|girl) (?:baby|child) (?:\w+ ){0,3}(?:room|direction|bed)"),
+     "suc_khoe_the_chat"),
+    (_rx_en(r"(?:hire|hiring|recruit\w*|employ\w*|reject\w*|avoid hiring|only hire)\b.{0,60}(?:birth years?|born in|year of the|zodiac|"
+            r"animal signs?|kua)|(?:birth years?|zodiac|year of the \w+)\b.{0,40}(?:hire|hiring|employees?|staff|tenants?|applicants?)"),
+     "ngoai_pham_vi"),
+    (_rx_en(r"(?:tell|know|see|show|find out|reveal)\b.{0,30}(?:if|whether) (?:my )?(?:husband|wife|partner|boyfriend|girlfriend|he|she) "
+            r"(?:is |s )?(?:cheating|unfaithful|having an affair)"), "ngoai_pham_vi"),
+    (_rx_en(r"so (?:that )?(?:the |my )?(?:person|people|neighbou?rs?|ex|boss|they|he|she|family)\b.{0,40}(?:gets? sick|get ill|"
+            r"bad luck|suffers?|fails?|dies?|loses?)|(?:mirror|knife|blade|cannon|arrow)\b.{0,50}(?:so (?:that )?)?(?:my |the )?"
+            r"(?:ex|neighbou?r|boss|rival)\w* (?:s )?(?:\w+ ){0,3}(?:gets?|has|have) (?:bad luck|sick|ill)|"
+            r"(?:curse|hex|jinx) (?:my|the|our|that) (?:neighbou?r|ex|boss|rival|landlord|colleague)"), "ngoai_pham_vi"),
+]
+
+
+def _tu_choi_gd5(k: str) -> str | None:
+    for rx, loai in _TU_CHOI_GD5:
+        if rx.search(k):
+            return loai
+    return None
+
+
 def _khung_hoang_anh(kd: str) -> bool:
     kd = _bo_phu_dinh(kd)
     k = _sua_en(kd)
@@ -1130,6 +1225,8 @@ def _khung_hoang_anh(kd: str) -> bool:
     if _CHO_DO.search(k) and not _CHO_DO_THUONG.search(k):
         return True
     if (_DOA_GIET.search(k) or _DOA_GIET_2.search(k)) and (not _DUA_RX.search(k) or _THAT.search(k)):
+        return True
+    if _khung_hoang_gd5(k):             # EN-ALL GĐ 5
         return True
     return _khung_hoang_y(k)            # GĐ 3d vòng 4: nhận theo nhóm tín hiệu
 
@@ -1342,6 +1439,8 @@ def _cap_cuu_anh(kd: str) -> bool:
         return True
     if _qua_lieu_nham(k):                # GĐ 3d vòng 4: uống nhầm / quá liều ngoài ý muốn
         return True
+    if _NHA_NGUY.search(k) or _NUOT_VAT.search(k):     # EN-ALL GĐ 5: nguy hiểm trong nhà, trẻ nuốt vật nhỏ
+        return True
     return bool(_TAI_NAN_NGAY.search(k) and _TAI_NAN_NANG.search(k) and not _DA_QUA.search(k))
 
 
@@ -1356,7 +1455,7 @@ def _tu_choi_anh(kd: str) -> str | None:
             return loai
     if _CHON_MEM.search(k) and re.search(r"(?<!\w)" + _NHAN_SU + r"(?!\w)", k) and re.search(r"(?<!\w)" + _LA_SO_HO + r"(?!\w)", k):
         return "ngoai_pham_vi"
-    return _tu_choi_nghia(k)
+    return _tu_choi_gd5(k) or _tu_choi_nghia(k)       # EN-ALL GĐ 5
 
 
 def ho_tro_mem_en(raw: str) -> bool:

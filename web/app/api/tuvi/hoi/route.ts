@@ -11,6 +11,7 @@ import { dauNguoiGoi, goiEngineDaKiem, loiChung, laBanAnh } from "@/lib/proxy";
 import { LaSoVao } from "@/lib/la-so-vao";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { MO_HINH_NHUNG, NGUONG_Y_DINH } from "@/lib/hoc-tuvi";
+import { dauPhanLoaiAi } from "@/lib/phan-loai-ai";
 
 const LaSo = LaSoVao;
 
@@ -34,7 +35,7 @@ async function xuLy(req: Request): Promise<NextResponse> {
   if (!parsed.success) {
     return NextResponse.json({ error: loiChung("dau_vao", laBanAnh(req)) }, { status: 422 });
   }
-  const dau = dauNguoiGoi(req);
+  const dau = { ...dauNguoiGoi(req), ...(await dauPhanLoaiAi(req)) };
   const kq = await goiEngineDaKiem(parsed.data, "/v1/tuvi/hoi", dau);
   if (!kq.ok) return kq.res;
   const goc = kq.body as TraLoi;

@@ -39,6 +39,10 @@ NHOM: dict[str, tuple[tuple[str, str], ...]] = {
     # can chi ở mục xung hợp, cát/hung ở mục thần sát).
     "nhan_hinh": (("can_chi", "hanh"), ("tuvi", "cung")),
     "loai_bt": (("battu", "quan_he"), ("battu", "cat_hung")),
+    # EN-ALL GĐ 5 — Phong thuỷ: 24 sơn, tên cục Huyền Không, trạng thái sao theo vận; nhóm GỘP cho trường mang khi thì
+    # hướng khi thì sơn (`huong`, `toa`), khi thì quái khi thì hướng (cung Huyền Không: 8 quái + "Trung cung").
+    "son": (("phongthuy", "son"),), "cuc_hk": (("phongthuy", "cuc"),), "trang_thai_sao": (("phongthuy", "trang_thai_sao"),),
+    "huong_son": (("phongthuy", "huong"), ("phongthuy", "son")), "cung_hk": (("phongthuy", "quai"), ("phongthuy", "huong")),
 }
 
 
@@ -161,6 +165,20 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "hinh.hoa": "hoa",
     # EN-ALL GĐ 4 (agent D) — lá số Tử vi: dict nghĩa sao nhỏ theo MÃ tên sao (khoá), giá trị là lời của bản phủ.
     "nghia_sao_nho": "sao_nho",
+    # EN-ALL GĐ 5 — Phong thuỷ (mệnh quái, đo hướng, bố cục, Huyền Không, cung phi, Nhà của bạn): quái, hướng, sơn, du niên,
+    # nhóm Đông/Tây, sao bay, cục, trạng thái sao — web dùng làm khoá (la bàn tô hướng, sơ đồ nhà theo phương, bàn 9 cung).
+    "quai": "quai", "quai_nam": "quai", "quai_nu": "quai", "nhom": "nhom_trach", "nhom_nam": "nhom_trach",
+    "nhom_nu": "nhom_trach", "huong": "huong_son", "toa": "huong_son", "son": "son", "son_huong": "son", "son_toa": "son",
+    "phuong": "huong", "huong_nha": "huong", "du_nien": "du_nien", "du_nien_menh": "du_nien", "du_nien_trach": "du_nien",
+    "uu_tien": "du_nien", "huong_cat": "huong", "huong_tot": "huong", "huong_chung": "huong", "nam_gioi.tot": "huong",
+    "nu_gioi.tot": "huong", "bang_huong": ("huong", "du_nien"), "du_nien_y": "du_nien",
+    **{f"{d}.loai": "cat_hung" for d in ("Sinh Khí", "Thiên Y", "Diên Niên", "Phục Vị", "Hoạ Hại", "Lục Sát", "Ngũ Quỷ", "Tuyệt Mệnh")},
+    "cuc_ten": "cuc_hk", "sao_tam": "sao_bay", "ba_thang.ten_sao": "sao_bay", "thang.ten_sao": "sao_bay",
+    "trang_thai_sao.ten": "sao_bay", "trang_thai_sao.trang_thai": "trang_thai_sao", "trang_thai_son": "trang_thai_sao",
+    "trang_thai_huong": "trang_thai_sao", "hanh_a": "hanh", "hanh_b": "hanh", "hanh_thong_quan": "hanh",
+    "to_hop.nhom": "cat_hung", "to_hop.cung": "cung_hk", "cung.cung": "cung_hk", "luu_nien.cung": "cung_hk",
+    "vi_tri.cung": "huong", "phong.cung": "huong", "nam_sao_toi.cung": "huong", ".cung": "huong",
+    "cap.tu": "huong", "cap.den": "huong",
 }
 
 

@@ -152,14 +152,14 @@ def _khoa(cau: str, mang: str) -> str:
 
 def _goi(cau: str, mang: str) -> dict | None:
     from app.narrative import ai_goi  # noqa: PLC0415
-    van = ai_goi.goi_chat(loi_nhac(cau, mang), nhiet_do=0.0, max_tokens=60, mo_hinh=mo_hinh(), het_gio=HET_GIO,
+    van = ai_goi.goi_chat(loi_nhac(cau, mang), nhiet_do=0.0, max_tokens=80, mo_hinh=mo_hinh(), het_gio=HET_GIO,
                           nho=False, thu_lai=False)
     return doc_nhan(van, mang)
 
 
 def phan_loai(cau: str, mang: str) -> dict | None:
     """Nhãn của câu (đã kiểm) hoặc None. Không bao giờ ném lỗi; chờ tối đa `HET_GIO` giây."""
-    if mang not in MANG or not (cau or "").strip() or not os.environ.get("OPENROUTER_API_KEY"):
+    if mang not in MANG or not (cau or "").strip():
         return None
     k = _khoa(cau, mang)
     with _NHO_KHOA:
@@ -167,6 +167,8 @@ def phan_loai(cau: str, mang: str) -> dict | None:
         if o and time.time() - o[0] < _han_nho():
             _NHO.move_to_end(k)
             return dict(o[1]) if o[1] else None
+    if not os.environ.get("OPENROUTER_API_KEY"):
+        return None
     ctx = contextvars.copy_context()           # giữ người gọi (hạn mức RL-1) + ngôn ngữ trong luồng phụ
     try:
         nhan = _THO.submit(ctx.run, _goi, cau, mang).result(timeout=HET_GIO)

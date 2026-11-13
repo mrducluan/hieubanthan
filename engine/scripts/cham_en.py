@@ -4,6 +4,7 @@
 Đo: định tuyến (nhãn ý định của câu ↔ phân loại engine, bảng ánh xạ dưới), xử lý an toàn (an_toan / tu_choi_nhe đúng),
 mốc thời gian (năm engine đọc ↔ năm nhãn), câu trả lời có chữ Việt hay không. Holdout chỉ in TỔNG (không in từng câu).
 Dùng: python scripts/cham_en.py battu [--holdout] [--sai]
+      python scripts/cham_en.py phongthuy [--holdout] [--sai]   (EN-ALL GĐ 5: bộ câu Phong thuỷ, cùng khuôn)
       python scripts/cham_en.py tuvi [--holdout] [--sai]   (EN-ALL GĐ 4: bộ câu Tử vi, khuôn id/cau_hoi/chu_de/loai/moc)
       python scripts/cham_en.py --v2 [--tep fixtures/cau_hoi/en/battu_holdout_v3.jsonl [--sai]]   (bộ cùng khuôn holdout v2;
       --sai chỉ in được khi chỉ định --tep, tức bộ đã chuyển thành bộ dev)
@@ -315,6 +316,119 @@ def cham_tuvi(holdout: bool = False, in_sai: bool = False) -> dict:
     return kq
 
 
+
+# ---- EN-ALL GĐ 5 — hỏi đáp Phong thuỷ (fixtures/cau_hoi/en/phongthuy_{dev,holdout}.jsonl: id, cau_hoi, chu_de, loai, moc)
+_PT_KIEN_THUC = ("ky_thuat", "du_nien_chung", "menh_quai_chung")
+_PT_DAU_HIEU = {"duong_dam", "nga_ba", "cot_dien", "song_truoc", "nghia_trang", "no_hau", "minh_duong", "tu_linh", "wc_giua_nha",
+                "cau_thang_cua", "cua_doi_nhau", "nha_chu_l", "xa_ngang", "cau_thang_giua_nha", "cay_truoc_cua",
+                "cua_thong_ban_cong", "ngo_cut", "gieng_cu", "gan_chua", "nen_thap", "nha_toi_am", "dat_meo", "goc_nhon",
+                "duong_lon_on", "cua_phong_doi_wc", "wc_tren_bep", "phong_tren_khoang_trong", "cau_thang_cua_phong"}
+_PT_THEM = {  # mã bố trí → nhãn chủ đề thêm (ngoài bo_tri / dau_hieu)
+    "cua_hang": {"van_phong", "tien_bac"}, "phong_lam_viec": {"van_phong"}, "quay_lung_cua": {"van_phong"},
+    "ket_sat": {"tien_bac", "van_phong"}, "hoa_giai": {"huong_nha", "tien_bac"}, "be_ca": {"tien_bac"},
+    "vo_chong_ngu": {"tinh_cam"}, "cai_nhau": {"tinh_cam"}, "nguoi_gia": {"suc_khoe"}, "nha_toi_am": {"suc_khoe"},
+    "phong_tre": {"suc_khoe"}, "nha_cu_mua_lai": {"mua_nha"}, "can_ho": {"mua_nha", "huong_nha"}, "dat_meo": {"mua_nha"},
+    "no_hau": {"mua_nha"}, "duong_lon_on": {"mua_nha"}, "ngo_cut": {"mua_nha"}, "nghia_trang": {"mua_nha"},
+    "song_truoc": {"mua_nha"}, "duong_dam": {"mua_nha", "van_phong"}, "nga_ba": {"mua_nha", "van_phong"},
+    "cay_trong_phong_ngu": {"suc_khoe"}, "giuong_sat_cua": {"suc_khoe"}, "xa_ngang": {"suc_khoe"},
+    "cua_so_dau_giuong": {"suc_khoe"}, "phong_tren_khoang_trong": {"suc_khoe"}, "cau_thang_cua_phong": {"suc_khoe"},
+}
+_PT_GIAI_THICH = {"bat_trach": {"huong_nha"}, "cung_phi_menh": {"huong_nha"}, "dong_tay_tu_menh": {"huong_nha"},
+                  "quai_huong": {"huong_nha"}, "la_ban": {"huong_nha"}, "vo_chong_khac_menh": {"huong_nha", "tinh_cam"},
+                  "huyen_khong": {"phi_tinh"}, "ngu_hoang": {"phi_tinh"}, "loan_dau_ly_khi": {"dau_hieu", "khac"},
+                  "tam_yeu": {"bo_tri", "huong_nha"}, "khoa_hoc": {"khac"}, "tuoi_lam_nha": {"mua_nha"}}
+_PT_CHU_Y = {"tien_bac": {"tien_bac"}, "cong_viec": {"van_phong"}, "tinh_cam": {"tinh_cam"}, "gia_dao": {"tinh_cam"},
+             "nha_cua": {"mua_nha"}, "van_han": {"phi_tinh"}}
+
+
+def _nhan_pt(pl: dict, goi: dict | None) -> set[str]:
+    """Phân loại engine Phong thuỷ (+ mục gói bằng chứng) → tập nhãn chủ đề của bộ câu."""
+    loai = pl.get("loai")
+    ra: set[str] = set()
+    if loai in ("huong_ca_nhan", "menh_quai_chung", "du_nien_chung", "cua_bep"):
+        ra |= {"huong_nha"} | ({"mua_nha", "van_phong"} if loai == "huong_ca_nhan" else set())
+    if loai == "hop":
+        ra |= {"huong_nha", "tinh_cam"}
+    if loai in ("nam", "huyen_khong"):
+        ra |= {"phi_tinh"} | ({"mua_nha"} if loai == "nam" else set())
+    if loai == "am_trach":
+        ra |= {"khac"}
+    if loai == "vat_treo":
+        ra |= {"bo_tri", "dau_hieu", "van_phong", "tien_bac"}
+    for m in pl.get("bo_tri") or []:
+        ra |= {"bo_tri", "dau_hieu"} | _PT_THEM.get(m, set())
+    for m in pl.get("giai_thich") or []:
+        ra |= _PT_GIAI_THICH.get(m, set())
+    if loai == "ky_thuat" and not ra:
+        ra |= {"khac"}
+    for m in (goi or {}).get("muc") or []:
+        if m.get("ma") == "chu_y_nam":
+            ra |= _PT_CHU_Y.get(m.get("mang"), set())
+        if m.get("ma") == "suc_khoe_nam":
+            ra |= {"suc_khoe"}
+        if m.get("loai") == "nha_rieng":
+            ra |= {"bo_tri", "dau_hieu"}
+    return ra
+
+
+def cham_phongthuy(holdout: bool = False, in_sai: bool = False) -> dict:
+    """Bộ câu Phong thuỷ tiếng Anh. Câu kiến thức đúng khi loại engine là loại kiến thức (không bị chặn); câu cá nhân đúng
+    khi nhãn chủ đề nằm trong tập nhãn suy từ phân loại + gói bằng chứng (`_nhan_pt`); khủng hoảng → an_toan; từ chối →
+    tu_choi_nhe; cấp cứu → tu_choi_nhe và (nhóm cap_cuu sức khoẻ hoặc nguy hiểm trong nhà). Holdout: chỉ tổng."""
+    from app import ngon_ngu  # noqa: PLC0415
+    from app.luangiai import an_toan as at  # noqa: PLC0415
+    p = GOC / "fixtures" / "cau_hoi" / "en" / f"phongthuy_{'holdout' if holdout else 'dev'}.jsonl"
+    cau = [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
+    c = dr.may_khach()
+    dem, tong, dung = collections.Counter(), collections.Counter(), collections.Counter()
+    sai_nhan = collections.Counter()
+    sai = []
+    with dr.dong_bang():
+        for q in cau:
+            rr = c.post("/v1/phongthuy/hoi", json={"cau_hoi": q["cau_hoi"], "sinh": {"birth_year": 1990, "gender": "nam"},
+                                                  "ngay_xem": "2026-11-10"}, headers={"x-ngon-ngu": "en"})
+            r = rr.json() if rr.status_code == 200 else {}
+            dem["loi_500"] += rr.status_code >= 500
+            pl = _phan_loai("phongthuy", q["cau_hoi"])
+            xl, loai = pl.get("xu_ly"), q["loai"]
+            tong[loai] += 1
+            if loai == "khung_hoang":
+                ok = xl == "an_toan"
+            elif loai == "tu_choi":
+                ok = xl == "tu_choi_nhe"
+            elif loai == "cap_cuu":
+                tk = ngon_ngu.HIEN_TAI.set("en")
+                try:
+                    ok = xl == "tu_choi_nhe" and (at.nhom_suc_khoe(q["cau_hoi"]) == "cap_cuu"
+                                                  or bool(getattr(at, "nha_nguy_hiem", lambda _x: False)(q["cau_hoi"])))
+                finally:
+                    ngon_ngu.HIEN_TAI.reset(tk)
+            else:
+                dem["chan_nham"] += xl in CHAN
+                nhan = _nhan_pt(pl, r.get("bang_chung"))
+                ok = xl not in CHAN and (pl.get("loai") in _PT_KIEN_THUC + ("nam", "huyen_khong", "am_trach")
+                                         if loai == "kien_thuc" else q["chu_de"] in nhan)
+                if not ok:
+                    sai_nhan[f"{loai}/{q['chu_de']}"] += 1
+            dung[loai] += ok
+            if dr.loi_en({"t": r.get("cau_tra_loi")}, {"q": q["cau_hoi"]}):
+                dem["con_chu_viet"] += 1
+            if dr.loi_en(r, {"q": q["cau_hoi"]}):
+                dem["phan_hoi_con_viet"] += 1
+            if not ok:
+                sai.append((q["id"], loai, q["chu_de"], pl.get("loai"), pl.get("bo_tri"), xl, pl.get("cau_chuan_hoa"),
+                            q["cau_hoi"]))
+    thuong = tong["ca_nhan"] + tong["kien_thuc"]
+    kq = {"tong": sum(tong.values()), "dinh_tuyen": round((dung["ca_nhan"] + dung["kien_thuc"]) / max(thuong, 1), 3),
+          **{k: f"{dung[k]}/{tong[k]}" for k in ("ca_nhan", "kien_thuc", "khung_hoang", "cap_cuu", "tu_choi") if tong[k]},
+          "chan_nham": dem["chan_nham"], "tra_loi_con_chu_viet": dem["con_chu_viet"],
+          "phan_hoi_con_chu_viet": dem["phan_hoi_con_viet"], "loi_500": dem["loi_500"]}
+    if not holdout:
+        kq["sai_theo_nhan"] = dict(sai_nhan)
+        if in_sai:
+            kq["sai"] = sai
+    return kq
+
 if __name__ == "__main__":
     if "--v2" in sys.argv:
         tep = sys.argv[sys.argv.index("--tep") + 1] if "--tep" in sys.argv else None
@@ -331,6 +445,12 @@ if __name__ == "__main__":
         print(json.dumps(kq, ensure_ascii=False))
         sys.exit(0)
     a = [x for x in sys.argv[1:] if not x.startswith("--")]
+    if a and a[0] == "phongthuy":
+        kq = cham_phongthuy("--holdout" in sys.argv, "--sai" in sys.argv)
+        for s in kq.pop("sai", []):
+            print(*s, sep=" | ")
+        print(json.dumps(kq, ensure_ascii=False))
+        sys.exit(0)
     if a and a[0] == "tuvi":
         kq = cham_tuvi("--holdout" in sys.argv, "--sai" in sys.argv)
         for s in kq.pop("sai", []):

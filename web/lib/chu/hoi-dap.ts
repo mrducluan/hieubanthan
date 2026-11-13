@@ -31,6 +31,9 @@ export const CHU_HOI_DAP = {
   // (bộ câu độc lập thứ tư: 26/30) → dòng cố định dưới MỌI câu trả lời bản Anh. Bản Việt không hiện (mac_dinh rỗng).
   "luoi_an_toan": { nhom: K, nhan: "Bản Anh: dòng hỗ trợ cố định dưới câu trả lời", mac_dinh: "",
     en: "Going through something hard? You don't have to face it alone — call or text 988 (US), 116 123 (UK & Ireland), 1767 (Singapore), or find a line at findahelpline.com. In an emergency, call your local emergency number now." },
+  // EN-AI — bản Anh: câu hỏi máy chưa hiểu chắc (engine trả `hoi_lai`) → "Did you mean…" đứng trước, lời đáp chung gập lại
+  // (không đoán thay người hỏi). Bản Việt không đổi (mac_dinh rỗng — bản Việt vẫn hiện lời đáp như cũ).
+  "tra_loi_chung": { nhom: K, nhan: "Bản Anh: nút mở lời đáp chung khi máy hỏi lại", mac_dinh: "", en: "Or read a general answer for now" },
   // EN-ALL GĐ 4 — chữ cố định của khối hình (components/hoi/TrucQuan.tsx) dùng ở hỏi đáp Tử vi.
   "tq.tu": { nhom: K, nhan: "Khối nhịp — dòng nguồn ({phu})", mac_dinh: "từ {phu}", en: "from {phu}" },
   "tq.tu_hoa": { nhom: K, nhan: "Bàn 12 cung — tự hoá ({ds})", mac_dinh: "↻ tự hoá {ds}", en: "↻ self-transforms {ds}" },

@@ -10,8 +10,9 @@ from __future__ import annotations
 import datetime as dt
 import re
 
+from app import ngon_ngu
 from app.calc import phongthuy as pt
-from app.hoidap import chung, hieu_cau, mo_dau
+from app.hoidap import chung, en_gloss, en_gloss_pt, hieu_cau, mo_dau
 from app.kb import phongthuy_kb as kb
 from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
@@ -66,7 +67,29 @@ def _khop(bang: dict, t: str) -> list[str]:
     return [ma for ma, m in bang.items() if chung.co(t, m["tu_khoa"])]
 
 
-def phan_loai(cau_hoi: str) -> dict:
+def phan_loai(cau_hoi: str, _cum: str | None = None) -> dict:
+    """EN-ALL GĐ 5: câu tiếng Anh → cụm từ khoá tiếng Việt không dấu (`en_gloss_pt`, dịch ý) rồi đi đúng luật bên dưới; bộ
+    chặn an toàn xét trên CÂU GỐC (`luangiai/an_toan`, một bộ cho mọi ngôn ngữ). Câu gõ tiếng Việt ở bản Anh → phân loại
+    như bản Việt. `_cum` (EN-AI): cụm thay bản dịch ý — `chung.thu_nhan_ngoai`."""
+    if ngon_ngu.la_viet():
+        return _phan_loai(cau_hoi)
+    if en_gloss.la_cau_viet(cau_hoi):
+        with ngon_ngu.dung(ngon_ngu.MAC_DINH):
+            return _phan_loai(cau_hoi)
+    kq = _phan_loai(_cum or en_gloss_pt.gloss(cau_hoi) or cau_hoi, goc=cau_hoi)
+    if _cum is None:
+        kq = chung.thu_nhan_ngoai(kq, cau_hoi, "phongthuy", lambda cum: _phan_loai(cum, goc=cau_hoi))
+    return kq
+
+
+_VAT_PHAM_EN = re.compile(r"\bsell me\b|\bhow much (?:is|for|does) (?:a |an |the |your )?(?:\w+ )?(?:amulet|talisman|charm|cure|statue|crystal)|"
+                          r"\b(?:buy|purchase|pay)\b.{0,50}\b(?:remove|break|lift|get rid of|cure|end|fix)\b.{0,20}\b(?:bad luck|curse|"
+                          r"jinx|misfortune)\b|\bbreak (?:my|the) curse\b|\bshould i pay the (?:master|monk|priest|consultant)\b|"
+                          r"\b(?:amulet|talisman)s? for (?:my|the) (?:house|home)\b")
+
+
+def _phan_loai(cau_hoi: str, goc: str | None = None) -> dict:
+    """`goc` (bản ngôn ngữ khác): câu gốc người dùng gõ — `cau_hoi` khi đó là cụm từ khoá đã dịch ý."""
     _, t_chinh = _h._tach_gioi_thieu(cau_hoi)
     t = chung.chuan_hoa_cau(cau_hoi)
     if "," in cau_hoi:                     # "Tôi sắp mua nhà, …" — lời dẫn, không phải câu hỏi cá nhân
@@ -75,7 +98,7 @@ def phan_loai(cau_hoi: str) -> dict:
                 and chung.chuan_hoa_cau(sau):
             t_chinh = chung.chuan_hoa_cau(sau)
     nam, gioi = _nam_gioi(cau_hoi, t)
-    kq = {"cau_chuan_hoa": t, "cau_goc": cau_hoi, "loai": None, "xu_ly": "tra_loi", "huong": _huong_nhac(t),
+    kq = {"cau_chuan_hoa": t, "cau_goc": goc or cau_hoi, "loai": None, "xu_ly": "tra_loi", "huong": _huong_nhac(t),
           "quai": next((QUAI_KD[m] for m in re.findall(r"menh quai (kham|khon|chan|ton|can|doai|ly)\b", t)
                         + re.findall(r"quai (kham|khon|chan|ton|can|doai|ly)\b", t)), None),
           "du_nien": [v for k, v in DU_NIEN_KD.items() if re.search(rf"(?<!\w){k}(?!\w)", t)],
@@ -86,6 +109,8 @@ def phan_loai(cau_hoi: str) -> dict:
     # MT-ĐS B1: gương / chuông gió / hình bát quái treo cửa = vật trang trí → trả lời kèm lưu ý, không từ chối, không tâm linh.
     vat_treo = chung.co(t, [r"bat quai", r"chuong gio", r"treo guong", r"guong .{0,15}(chong|phan tac dung|tru)"])
     db = None if vat_treo else chung.dac_biet(t, cau_hoi)
+    if goc is not None:     # bản ngôn ngữ khác: câu gốc qua bộ chặn chung trước; vật phẩm / bùa (tiếng Anh) như "vat pham"
+        db = chung.dac_biet(chung.chuan_hoa_cau(goc), goc) or ("tu_choi_nhe" if _VAT_PHAM_EN.search(goc.lower()) else None) or db
     if db:
         kq.update(xu_ly=db, loai="dac_biet")
         return kq
@@ -97,6 +122,9 @@ def phan_loai(cau_hoi: str) -> dict:
         return kq
     m_van = re.search(r"van ([1-9])(?!\d)", t)
     kq["van"] = int(m_van.group(1)) if m_van else None
+    if goc is not None and not kq["giai_thich"] and (td_en := en_gloss_pt.tu_dien_kien_thuc(goc)):
+        kq["loai"], kq["tu_dien"] = "ky_thuat", td_en       # câu kiến thức tiếng Anh → từ điển (không đọc mệnh quái)
+        return kq
     # HH-CT2: "phi tinh năm 2027 sao nào đến hướng Nam" = sao LƯU NIÊN (năm), không phải tinh bàn nhà theo vận
     if not kq["van"] and chung.co(t, NAM_KW) and chung.co(t, [r"phi tinh", r"sao (nao|gi)", r"cuu tinh",
                                                     r"sao (xau|tot|du|lanh)", r"bay (toi|den|vao)",

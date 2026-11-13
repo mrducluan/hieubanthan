@@ -332,6 +332,35 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
    Việt đổi có chủ đích (vài lượt hỏi đáp) — cần anh đồng ý.
 3. **Số đường dây nóng** trong tầng mềm + lưới an toàn (988 Mỹ, 116 123 Anh/Ireland, 1767 Singapore, Befrienders Malaysia
    03-7627 2929, 1553 Philippines, findahelpline.com): cần người kiểm lại trước khi mở bản Anh.
+4. **Hỏi đáp tiếng Anh "lai" — QUYẾT (2026-11-13, thay phần "(b) xét lại trước khi quảng bá" của mục 1)**: bộ dò luật chạm
+   trần (Tử vi đóng băng 14/26 khủng hoảng, 6/12 cấp cứu; Bát tự v4 26/30) → anh quyết GIỮ gõ tự do, làm cách tốt nhất:
+   - **Câu gợi ý trước, gõ tự do sau** (web `/en/bazi`, `/en/zi-wei-dou-shu`): 6 chip câu chuẩn của mảng (engine
+     `GET /v1/hoi/goi-y?mang=` — `truc_quan.GOI_Y_DAU`, mỗi câu đã kiểm định tuyến; web `/api/hoi/goi-y`, `lib/goi-y-dau.ts`),
+     bấm là hỏi luôn. Engine trả `hoi_lai` (độ tin thấp) → khối **"Did you mean one of these?"** đứng trước, lời đáp chung GẬP
+     ("Or read a general answer for now") — không đoán thay người hỏi. Bản Việt giữ nguyên chip + lời đáp như cũ.
+   - **Lớp phân loại AI** `engine/app/narrative/phan_loai_en.py` (tầng NARRATIVE, qua `ai_goi.goi_chat` + hạn mức RL-1): gửi
+     CHỈ chữ câu hỏi → JSON nhãn trong danh mục cố định (`an_toan` ∈ binh_thuong · ho_tro_mem · khung_hoang · cap_cuu ·
+     tu_choi:<mã>; `y_dinh` ∈ `en_gloss.Y_DINH_CUM` của mảng; `nam`). Nhãn đăng ký cho đúng câu trong lượt gọi
+     (`luangiai/nhan_ngoai.py`, contextvar); **luật hợp nhất**: `an_toan.py` vẫn chạy trước, nhãn AI chỉ NÂNG
+     (khung_hoang > cap_cuu > tu_choi > ho_tro_mem), không bao giờ hạ; ý định AI chỉ dùng khi luật `do_tin_thap`
+     (`hoidap/chung.thu_nhan_ngoai` → phân loại lại bằng cụm từ khoá của chủ đề, câu gốc vẫn qua mọi bộ chặn). AI không viết
+     lời trả lời. Hạn chót 2 s, không thử lại; lỗi / hết giờ / hết lượt / thiếu khoá / JSON hỏng / nhãn ngoài danh mục → luật như
+     cũ, không 5xx. Không log câu hỏi; bộ nhớ ngắn hạn khoá sha256, chỉ giữ nhãn, 10 phút. Chỉ lượt `x-ngon-ngu` khác `vi`
+     và câu không phải câu gõ tiếng Việt → bản Việt 0 lệch. Mô hình env `HOI_PHAN_LOAI_MODEL` (mặc định
+     `google/gemini-2.5-flash-lite`: nhỏ, rẻ, nhanh — hợp hạn chót 2 s; cùng họ mô hình `DOC_ANH_MODEL`).
+   - **Bật = HAI công tắc, mặc định TẮT**: env engine `HOI_PHAN_LOAI_AI=1` VÀ công tắc quản trị `hoi.phan_loai_ai_en`
+     (`/quan-tri/cai-dat`, nhóm "Hỏi đáp" — web gửi header `x-phan-loai-ai: 1`, chỉ ở lượt bản Anh).
+   - **Quyền riêng tư**: `/en/privacy` + bảng bên thứ ba của Chính sách riêng tư bản Việt đã thêm dòng (câu hỏi tiếng Anh có
+     thể gửi nhà cung cấp AI CHỈ để phân loại an toàn + chủ đề, không dữ liệu sinh, không lưu, không huấn luyện) — ghi "hiện
+     đang tắt; ngày bắt đầu sẽ ghi ở đây".
+   - Test: `engine/tests/test_phan_loai_en.py` (AI giả lập: đọc nhãn, luật hợp nhất, rơi về luật, hạn chót, route + header,
+     chip định tuyến rõ); e2e `en-bazi` / `en-zi-wei` (chip bấm là hỏi, "Did you mean…" + lời chung gập).
+   - **Việc của anh**: (1) chạy đo với khoá thật:
+     `cd engine && OPENROUTER_API_KEY=… PYTHONHASHSEED=0 PYTHONPATH=. .venv/bin/python scripts/do_phan_loai_en.py` (bảng tắt → bật
+     cho Bát tự dev / v1–v4, Tử vi dev / holdout, hai bộ an toàn; in độ trễ trung vị / p90 và số câu > 2 s; holdout chỉ in tổng;
+     `--het-gio 10` để đo chất lượng nhãn tách khỏi độ trễ; `HOI_PHAN_LOAI_MODEL=…` để so mô hình); (2) nếu số tốt (khủng
+     hoảng / cấp cứu tăng, chặn nhầm ≈ 0, p90 < 2 s): ghi ngày hiệu lực vào `/en/privacy` + bảng bên thứ ba bản Việt (đổi
+     `NGAY_HIEU_LUC`), đặt env Render `HOI_PHAN_LOAI_AI=1`, bật `hoi.phan_loai_ai_en` ở `/quan-tri/cai-dat`.
 
 ## 7. Nhật ký
 

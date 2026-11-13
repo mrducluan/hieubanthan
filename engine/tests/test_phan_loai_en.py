@@ -227,3 +227,26 @@ def test_route_khong_khoa_khong_loi(monkeypatch):
     monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
     r = TestClient(app).post("/v1/battu/hoi", json={"cau_hoi": THUONG}, headers={"x-ngon-ngu": "en", "x-phan-loai-ai": "1"})
     assert r.status_code == 200 and r.json()["hoi_lai"]
+
+
+# ------------------------------------------------------------------ câu gợi ý đầu khung (chip bản Anh)
+
+@pytest.mark.parametrize("mang", ["battu", "tuvi"])
+def test_cau_goi_y_dau_dinh_tuyen_ro(en, mang):
+    """Chip bản Anh: 4–6 câu, không chữ Việt, mỗi câu luật nhận ra chủ đề (không rơi về mặc định, không bị chặn)."""
+    from app.luangiai import truc_quan
+    ds = truc_quan.goi_y_dau(mang)
+    assert 4 <= len(ds) <= 6 and len(set(ds)) == len(ds)
+    mod = battu if mang == "battu" else tuvi
+    for c in ds:
+        assert not en_gloss.la_cau_viet(c) and all(ord(ch) < 128 for ch in c), c
+        kq = mod.phan_loai(c)
+        assert kq["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y") and not kq.get("do_tin_thap"), (c, kq.get("loai"))
+
+
+def test_route_goi_y_dau():
+    c = TestClient(app)
+    en_ds = c.get("/v1/hoi/goi-y", params={"mang": "battu"}, headers={"x-ngon-ngu": "en"}).json()["cau"]
+    vi_ds = c.get("/v1/hoi/goi-y", params={"mang": "battu"}).json()["cau"]
+    assert len(en_ds) == len(vi_ds) == 6 and en_ds != vi_ds
+    assert c.get("/v1/hoi/goi-y", params={"mang": "la"}).json()["cau"] == []

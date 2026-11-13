@@ -1,0 +1,886 @@
+{
+ "_nguon": "EN-ALL GĐ 4 — bản phủ tiếng Anh của bo_sung_cung.json (ban biên tập viết từ nghĩa; tên cung dựng từ ten_en).",
+ "_trang_thai": "bien_tap",
+ "source": {
+  "ten": "Twelve palaces — editorial additions",
+  "mo_ta": "Compiled by the Hieu Ban Than editorial team from the knowledge base and public-domain classics (draft, awaiting expert review)"
+ },
+ "trang": {
+  "cung-menh": {
+   "muc": [
+    {
+     "tieu_de": "How is the Life Palace different from the Body Palace?",
+     "doan": "The Life Palace is the root of your temperament, while the Body Palace is often read as the second half of life, once you have experience. Both are on the chart and often sit together or side by side. Look at the Life Palace for your natural reactions. Look at the Body Palace for what you lean towards with plenty of experience. When the two are alike, your character is fairly consistent; when they differ, you can see clear change with age."
+    },
+    {
+     "tieu_de": "An example reading of the Life Palace on a made-up chart",
+     "doan": "Suppose the Life Palace holds a bright Tian Tong, with the Ji–Yue–Tong–Liang group. This person is usually gentle, often sought out for advice, but shies away from hard tasks. Read on to the Travel Palace to see whether they are more proactive out in the world, then the Wealth and Career palaces to see where that temperament gets used. This is an illustration, not anyone's chart."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Life Palace?",
+     "danh_sach": [
+      "Write down three traits people close to you often mention, then cross off the ones you think are true.",
+      "Recall the last time you reacted strongly and note what made you react that way.",
+      "Choose one small habit you want to change over two weeks."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Life Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Travel Palace",
+      "The Life Palace is who you are at home, the Travel Palace who you are out in the world; put them side by side to see whether your outside differs from your inside."
+     ],
+     [
+      "Trine palace",
+      "Wealth Palace",
+      "Temperament set against how you earn; a calm person and a hot-tempered one usually earn and keep money in different ways."
+     ],
+     [
+      "Trine palace",
+      "Career Palace",
+      "Temperament set against how you work; shows the roles and settings that suit you."
+     ],
+     [
+      "Neighbouring palaces",
+      "Parents Palace and Siblings Palace",
+      "With the Parents Palace: The people who raised you stand right before your temperament; see how you take in guidance. With the Siblings Palace: Who you are goes hand in hand with relationships between equals; see how you cooperate with friends and siblings."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is the Life Palace the most important palace?",
+     "dap": "Many schools treat the Life Palace as the root of the chart because it is about you. Even so, other palaces still matter when you ask about money, work or family. Reading one palace alone easily misses things, so read its trine and opposite palaces too."
+    },
+    {
+     "hoi": "Is an empty Life Palace (no main star) a bad sign?",
+     "dap": "No. An empty palace means no main star sits there, and readers borrow the stars of the opposite palace. It is a different way of reading, often suggesting someone who adapts to circumstances — not a sign of bad luck."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Life Palace: temperament, natural reactions",
+    "Read with the Travel (opposite), Wealth and Career palaces",
+    "Unlike the Body Palace: the Body is the second half of life",
+    "Does not tell wealth or lifespan"
+   ]
+  },
+  "cung-huynh-de": {
+   "muc": [
+    {
+     "tieu_de": "Is the Siblings Palace only about brothers and sisters, or friends too?",
+     "doan": "The Siblings Palace is about relationships between equals: brothers and sisters, close friends and partners at the same level. The old books focus on siblings; readers today often extend it to close friends and colleagues of the same rank. What this palace can tell you is how you cooperate and share. It cannot tell you what will happen to your siblings."
+    },
+    {
+     "tieu_de": "An example reading of the Siblings Palace on a made-up chart",
+     "doan": "Suppose the Siblings Palace holds a bright Tai Yang: this person is usually generous with siblings and often takes charge of shared matters. Add Hua Ji, and shared matters easily snag on misunderstandings over small sums. The fix is to spell out each person's share from the start. This is only a made-up example."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Siblings Palace?",
+     "danh_sach": [
+      "Get in touch with a sibling or close friend you have not seen for a while.",
+      "For shared matters, write down who does what and how things are split.",
+      "Ask a close friend what they need from you but have not dared to say."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Siblings Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Friends Palace",
+      "The Siblings Palace is close, long-standing friends and family, the Friends Palace your wider social network; compare the two to see which group your close friends come from."
+     ],
+     [
+      "Trine palace",
+      "Health Palace",
+      "Relationships between equals set against your rest rhythm; do friends help you rest on time or keep you up late?"
+     ],
+     [
+      "Trine palace",
+      "Property Palace",
+      "Siblings and close friends set against home; who drops by, who shares living space or joint property."
+     ],
+     [
+      "Neighbouring palaces",
+      "Life Palace and Spouse Palace",
+      "With the Life Palace: Who you are goes hand in hand with relationships between equals; see how you cooperate with friends and siblings. With the Spouse Palace: Close friends standing next to your partner; see whether friends affect your love life."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does the Siblings Palace tell how many siblings you have?",
+     "dap": "This palace is not used to count siblings. The old books have methods for it, but they are unreliable and easily misleading. A more useful way to use it is to see the kind of peer relationships you tend to have."
+    },
+    {
+     "hoi": "If you have no siblings, what does the Siblings Palace show?",
+     "dap": "Read it as close friends, cousins, colleagues of the same rank, business partners. The palace is still useful because it is about how you cooperate, beyond blood ties."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Siblings Palace: peers, close friends, partners",
+    "Read with the Friends (opposite), Health and Property palaces",
+    "Shows how you cooperate and share",
+    "Cannot count your siblings"
+   ]
+  },
+  "cung-phu-the": {
+   "muc": [
+    {
+     "tieu_de": "Is the Spouse Palace about dating, marriage or both?",
+     "doan": "The Spouse Palace is about romantic relationships in general, both partners and spouses. It shows what you hope for in a partner and where friction comes easily. The palace does not say whether the other person is good or bad, nor does it rule on how many times you will marry. To see how two people fit, you also need the other person's chart."
+    },
+    {
+     "tieu_de": "An example reading of the Spouse Palace on a made-up chart",
+     "doan": "Suppose the Spouse Palace holds Tian Tong: this person usually hopes for a light, low-conflict relationship. The thing to watch is avoiding hard conversations so small issues pile up. A good approach is to set one day a week for the two of you to talk openly. If the palace also has Hua Ji, saying clearly what you hope for matters even more. This is a made-up example."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Spouse Palace?",
+     "danh_sach": [
+      "State clearly one thing you hope for from the other person, starting with 'I'd like…'.",
+      "Thank them for one small everyday thing.",
+      "Note something you often give in on and feel resentful about."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Spouse Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Career Palace",
+      "Your love life faces your work; compare them to see whether romance and career are pulling each other down or lifting each other up."
+     ],
+     [
+      "Trine palace",
+      "Travel Palace",
+      "Your relationship set against travel; whether the two of you suit going places together or each suits a different setting."
+     ],
+     [
+      "Trine palace",
+      "Fortune Palace",
+      "Your relationship set against your inner life; whether your partner helps you feel at ease."
+     ],
+     [
+      "Neighbouring palaces",
+      "Siblings Palace and Children Palace",
+      "With the Siblings Palace: Close friends standing next to your partner; see whether friends affect your love life. With the Children Palace: The couple leads on to children; see how the two of you raise them together."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Can the Spouse Palace predict how many times you will marry?",
+     "dap": "No. The Spouse Palace only shows the kind of relationship you tend to have and where friction comes easily. How many times someone marries depends heavily on choices and circumstances, so such predictions are not reliable."
+    },
+    {
+     "hoi": "If you are single, what is the Spouse Palace for?",
+     "dap": "Read it to understand what you are looking for in a relationship and what to work on. For example, if you know you avoid hard conversations, practise speaking up early with friends first."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Spouse Palace: expectations and behaviour in a relationship",
+    "Read with the Career (opposite), Travel and Fortune palaces",
+    "Shows where friction comes easily, without judging good or bad",
+    "Does not predict how many times you marry"
+   ]
+  },
+  "cung-tu-nu": {
+   "muc": [
+    {
+     "tieu_de": "Is the Children Palace only about children?",
+     "doan": "No. The Children Palace is about children and also the things you nurture, such as students, young people you mentor or work you make with your own hands. For people without children, this palace still has meaning. It does not tell the number or sex of your children. Having a child is a matter for the two partners and their doctor."
+    },
+    {
+     "tieu_de": "An example reading of the Children Palace on a made-up chart",
+     "doan": "Suppose the Children Palace holds Tian Ji: this person often wants the child to learn a lot, explains a lot and easily worries ahead for the child. The thing to watch is that high expectations put pressure on the child. A good approach is to ask what the child wants before offering a plan. For someone without children, Tian Ji here may be how you coach young people at work. This is a made-up example."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Children Palace?",
+     "danh_sach": [
+      "Spend fifteen minutes listening to your child or a young person tell you about their day, without advising.",
+      "Praise one specific thing your child or student did well.",
+      "Pick one piece of your own work to finish this week."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Children Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Property Palace",
+      "Children and what you nurture face your home; compare them to see how caring for children and your living space affect each other."
+     ],
+     [
+      "Trine palace",
+      "Friends Palace",
+      "Children and students set against the network around you; how you mentor young people in your group."
+     ],
+     [
+      "Trine palace",
+      "Parents Palace",
+      "Children set against parents; whether your way of parenting follows or differs from how you were raised."
+     ],
+     [
+      "Neighbouring palaces",
+      "Spouse Palace and Wealth Palace",
+      "With the Spouse Palace: The couple leads on to children; see how the two of you raise them together. With the Wealth Palace: Children set against money; see how much you spend on your children and how much you earn for them."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does the Children Palace tell whether you will have a son or a daughter?",
+     "dap": "No. The old books have methods for it, but it is something to avoid, since it is often wrong and creates pressure. The Children Palace is better used to understand how you parent or mentor."
+    },
+    {
+     "hoi": "How does someone who is not married read the Children Palace?",
+     "dap": "Read it as creating and mentoring: students, young staff, your own projects. This palace shows how you nurture what you create."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Children Palace: children, students, what you nurture",
+    "Read with the Property (opposite), Friends and Parents palaces",
+    "Shows how you parent and mentor",
+    "Does not tell the number or sex of children"
+   ]
+  },
+  "cung-tai-bach": {
+   "muc": [
+    {
+     "tieu_de": "How is the Wealth Palace different from the Property Palace?",
+     "doan": "The Wealth Palace is about cash flow: earning, keeping and spending. The Property Palace is about fixed assets: house, land, where you live. Both relate to money but run at different speeds. Someone with a favourable Wealth Palace may earn quickly without lasting assets yet, and the other way round. For 'can I earn this month?' look at the Wealth Palace; for 'should I buy a home?' look at the Property Palace alongside the real conditions."
+    },
+    {
+     "tieu_de": "An example reading of the Wealth Palace on a made-up chart",
+     "doan": "Suppose the Wealth Palace holds Tian Fu: this person is good at keeping money, seldom spends on impulse and likes having an emergency fund. Add Wen Chang, and income often ties to expertise and paperwork. The thing to watch is avoiding risk and missing chances. A good approach is to set aside a small fixed amount for experiments. This is a made-up example, not investment advice."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Wealth Palace?",
+     "danh_sach": [
+      "Record every expense for seven days and circle the ones driven by emotion.",
+      "Set up a small automatic saving each month.",
+      "Ask someone experienced about a big expense you are weighing up."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Wealth Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Fortune Palace",
+      "Money faces your inner life; compare them to see whether earning brings you peace or just more busyness."
+     ],
+     [
+      "Trine palace",
+      "Career Palace",
+      "Work set against income; whether your job leads to the kind of income you want."
+     ],
+     [
+      "Trine palace",
+      "Life Palace",
+      "Temperament set against how you earn; a calm person and a hot-tempered one usually earn and keep money in different ways."
+     ],
+     [
+      "Neighbouring palaces",
+      "Children Palace and Health Palace",
+      "With the Children Palace: Children set against money; see how much you spend on your children and how much you earn for them. With the Health Palace: Earning set against your rest rhythm; see whether working a lot drains you."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Can the Wealth Palace predict how much you will earn?",
+     "dap": "No. This palace shows how you earn and keep money, not a figure. Real income depends on your work, the market and effort. This article is not investment advice."
+    },
+    {
+     "hoi": "What to do if the Wealth Palace has Hua Ji?",
+     "dap": "Hua Ji here means money flows get snagged: surprise expenses or slow payments. The practical response is an emergency fund, a monthly record of spending, and sleeping on any big purchase."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Wealth Palace: how you earn, keep and spend money",
+    "Read with the Fortune (opposite), Life and Career palaces",
+    "Unlike the Property Palace: Wealth is cash flow, Property is assets",
+    "No income figures, not investment advice"
+   ]
+  },
+  "cung-tat-ach": {
+   "muc": [
+    {
+     "tieu_de": "Does the Health Palace tell what illness you will have?",
+     "doan": "No. The Health Palace only shows the rhythm of body and mind and where you tend to store stress. It does not name illnesses or foretell what will happen. Real health needs a doctor's examination and tests; this article is not a substitute for a doctor's advice. Use this palace as a reminder to sleep enough, rest on time and have regular check-ups."
+    },
+    {
+     "tieu_de": "An example reading of the Health Palace on a made-up chart",
+     "doan": "Suppose the Health Palace holds Tai Yang: the old books link Tai Yang with the eyes and head, so this person should rest their eyes, sleep enough and have regular eye check-ups. This is a preventive reminder, not a prediction, and not a substitute for a doctor's advice. A good approach is to schedule daily eye breaks and book check-ups on a regular basis."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Health Palace?",
+     "danh_sach": [
+      "Go to bed before 11 pm three nights in a row.",
+      "Book a general check-up if it has been more than a year.",
+      "Pick one way to release stress, such as a twenty-minute walk."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Health Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Parents Palace",
+      "Your rest rhythm faces the household you grew up in; compare them to see how today's daily habits come from the way you were raised."
+     ],
+     [
+      "Trine palace",
+      "Property Palace",
+      "Daily rhythm set against where you live; whether your home helps you rest and recover."
+     ],
+     [
+      "Trine palace",
+      "Siblings Palace",
+      "Relationships between equals set against your rest rhythm; do friends help you rest on time or keep you up late?"
+     ],
+     [
+      "Neighbouring palaces",
+      "Wealth Palace and Travel Palace",
+      "With the Wealth Palace: Earning set against your rest rhythm; see whether working a lot drains you. With the Travel Palace: Rest rhythm set against travel; see whether trips tire you more than usual."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Can the Health Palace predict a year of illness?",
+     "dap": "No. A year to watch your health is only a preventive reminder, such as booking a check-up early in the year. The palace does not predict illness and is not a substitute for a doctor's advice."
+    },
+    {
+     "hoi": "What to do if the Health Palace has difficult stars?",
+     "dap": "Don't panic. Take it as a reminder to keep a regular routine, rest on time and have regular check-ups. If you notice unusual symptoms, see a doctor right away instead of waiting on the chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Health Palace: rhythm of body and mind, where stress builds up",
+    "Read with the Parents (opposite), Siblings and Property palaces",
+    "A reminder to rest on time and have regular check-ups",
+    "Names no illness, not a substitute for a doctor"
+   ]
+  },
+  "cung-thien-di": {
+   "muc": [
+    {
+     "tieu_de": "Is the Travel Palace about trips or about life out in society?",
+     "doan": "Both. The Travel Palace is about you when you go out: travelling, moving house, meeting strangers and the image others have of you. It sits opposite the Life Palace, so it is seen as the outer face of your temperament. It does not tell whether any particular trip is safe or dangerous."
+    },
+    {
+     "tieu_de": "An example reading of the Travel Palace on a made-up chart",
+     "doan": "Suppose the Travel Palace holds Tian Ji: out in the world this person usually observes first, spots opportunities quickly and suits changing settings. Add Tian Ma, and the pattern of travel and job changes is stronger. The thing to watch is changing so much that little builds up. A good approach is to stay in one place long enough for results to ripen. This is a made-up example."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Travel Palace?",
+     "danh_sach": [
+      "Visit a new place in your city and note how it feels.",
+      "Ask three friends how they see you differently at home and out in society.",
+      "Do something you shy away from in an unfamiliar setting, such as speaking up in a new group."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Travel Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Life Palace",
+      "The Life Palace is who you are at home, the Travel Palace who you are out in the world; put them side by side to see whether your outside differs from your inside."
+     ],
+     [
+      "Trine palace",
+      "Fortune Palace",
+      "Going out set against inner peace; whether new settings relax you or unsettle you."
+     ],
+     [
+      "Trine palace",
+      "Spouse Palace",
+      "Your relationship set against travel; whether the two of you suit going places together or each suits a different setting."
+     ],
+     [
+      "Neighbouring palaces",
+      "Health Palace and Friends Palace",
+      "With the Health Palace: Rest rhythm set against travel; see whether trips tire you more than usual. With the Friends Palace: Going out and your social circle; see who new settings usually bring you to."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does the Travel Palace say whether you should move abroad?",
+     "dap": "This palace only shows how you adapt to new settings and the openings that come with moving. Whether to go or stay also depends on real conditions, family and work, so it cannot be read from one palace."
+    },
+    {
+     "hoi": "Does a less favourable Travel Palace mean you should not go out?",
+     "dap": "No. It usually suggests preparing well when entering a new setting and keeping safe habits. Nothing forbids you from going anywhere."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Travel Palace: you out in the world, travelling, meeting strangers",
+    "Opposite the Life Palace: the outer face of your temperament",
+    "Read with the Fortune and Spouse palaces (trine)",
+    "Does not pick trips, does not rule on safe or dangerous"
+   ]
+  },
+  "cung-no-boc": {
+   "muc": [
+    {
+     "tieu_de": "Is the Friends Palace only about servants?",
+     "doan": "No. Its old name means servants, but readers today take it more broadly: social friends, colleagues, people under you, customers and the network around you. This palace shows the kind of people you attract and how you keep boundaries. It does not conclude that anyone is disloyal or loyal."
+    },
+    {
+     "tieu_de": "An example reading of the Friends Palace on a made-up chart",
+     "doan": "Suppose the Friends Palace holds Tan Lang: a wide network with many new friends, but many ties stay at the social level. This person suits jobs that need networking. The thing to watch is telling real helpers from people who only come close when they need something. A good approach is to choose three trusted friends to invest time in. This is a made-up example."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Friends Palace?",
+     "danh_sach": [
+      "List the five friends you trust most and arrange to meet one.",
+      "Look at one relationship that wears you out and decide to see them less often.",
+      "Ask a colleague for feedback on how you work together."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Friends Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Siblings Palace",
+      "The Siblings Palace is close, long-standing friends and family, the Friends Palace your wider social network; compare the two to see which group your close friends come from."
+     ],
+     [
+      "Trine palace",
+      "Parents Palace",
+      "Your network set against the people ahead of you; whether there are elders or superiors around you to guide you."
+     ],
+     [
+      "Trine palace",
+      "Children Palace",
+      "Children and students set against the network around you; how you mentor young people in your group."
+     ],
+     [
+      "Neighbouring palaces",
+      "Travel Palace and Career Palace",
+      "With the Travel Palace: Going out and your social circle; see who new settings usually bring you to. With the Career Palace: Your network and your work; see whether the people around you make work go more smoothly."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "If the Friends Palace has difficult stars, will friends betray you?",
+     "dap": "No such conclusion can be drawn. Difficult stars here usually suggest keeping clear boundaries with the people around you and putting things in writing when doing business together. What people are like depends on how you choose and treat them."
+    },
+    {
+     "hoi": "Can the Friends Palace be used to choose employees?",
+     "dap": "It should not be. A chart is not used to choose or reject a person. This palace only helps you understand how you work with others."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Friends Palace: social friends, colleagues, people under you, customers",
+    "Read with the Siblings (opposite), Children and Parents palaces",
+    "Shows how you keep boundaries in relationships",
+    "Does not conclude who is loyal or disloyal"
+   ]
+  },
+  "cung-quan-loc": {
+   "muc": [
+    {
+     "tieu_de": "How is the Career Palace different from the Wealth Palace?",
+     "doan": "The Career Palace is about how you work and which roles suit you, while the Wealth Palace is about how money comes in. Both are trines of the Life Palace, so they are usually read together. A suitable job does not always mean a high income, and the other way round. For 'what work suits me?' look at the Career Palace; for 'how do I earn money?' look at the Wealth Palace."
+    },
+    {
+     "tieu_de": "An example reading of the Career Palace on a made-up chart",
+     "doan": "Suppose the Career Palace holds Wu Qu: this person works with discipline and suits finance, business and operations management. Add Hua Quan, and the management role is clearer. The thing to watch is coming across as dry when softness is needed with colleagues. A good approach is to make a point of recognising the people you work with. This is a made-up example and does not fix a single career."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Career Palace?",
+     "danh_sach": [
+      "Note three tasks this week that made you lose track of time.",
+      "Ask your boss or a colleague about one thing you could do better.",
+      "Spend two hours learning a skill related to your work."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Career Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Spouse Palace",
+      "Your love life faces your work; compare them to see whether romance and career are pulling each other down or lifting each other up."
+     ],
+     [
+      "Trine palace",
+      "Life Palace",
+      "Temperament set against how you work; shows the roles and settings that suit you."
+     ],
+     [
+      "Trine palace",
+      "Wealth Palace",
+      "Work set against income; whether your job leads to the kind of income you want."
+     ],
+     [
+      "Neighbouring palaces",
+      "Friends Palace and Property Palace",
+      "With the Friends Palace: Your network and your work; see whether the people around you make work go more smoothly. With the Property Palace: Work and home; see whether where you work and where you live fit together."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does the Career Palace point to a single career for you?",
+     "dap": "No. This palace points to a working style and the groups of jobs that suit your temperament. Many different jobs can fit, and real conditions still matter a great deal."
+    },
+    {
+     "hoi": "Does the Career Palace promise a promotion?",
+     "dap": "No. This palace does not promise promotions. A year when the Career Palace is favourable only suggests a good time to take on new work or ask for a bigger role."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Career Palace: how you work, suitable roles and settings",
+    "Read with the Spouse (opposite), Life and Wealth palaces",
+    "Unlike the Wealth Palace: Career is work, Wealth is money",
+    "Does not fix a single career, does not promise promotion"
+   ]
+  },
+  "cung-dien-trach": {
+   "muc": [
+    {
+     "tieu_de": "Can the Property Palace tell which year to buy a home?",
+     "doan": "No. The Property Palace shows your need for a settled home and how you build up fixed assets. It does not pick the year to buy or a particular house, since that depends on finances, legal matters and the market. For buying or selling decisions, ask professionals and check the papers carefully."
+    },
+    {
+     "tieu_de": "An example reading of the Property Palace on a made-up chart",
+     "doan": "Suppose the Property Palace holds Tian Fu: this person sees home as a safe place, likes stability and tends to accumulate belongings. Add Hua Lu, and property matters easily bring opportunities. The thing to watch is clinging to the old place for too long. A good approach is to review your home regularly and clear out things you no longer use. This is a made-up example."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Property Palace?",
+     "danh_sach": [
+      "Clear out a drawer or a corner of the house you tend to avoid.",
+      "Go through property papers and contracts and keep them in one place.",
+      "Ask the people you live with one thing they would like to change in the shared space."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Property Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Children Palace",
+      "Children and what you nurture face your home; compare them to see how caring for children and your living space affect each other."
+     ],
+     [
+      "Trine palace",
+      "Siblings Palace",
+      "Siblings and close friends set against home; who drops by, who shares living space or joint property."
+     ],
+     [
+      "Trine palace",
+      "Health Palace",
+      "Daily rhythm set against where you live; whether your home helps you rest and recover."
+     ],
+     [
+      "Neighbouring palaces",
+      "Career Palace and Fortune Palace",
+      "With the Career Palace: Work and home; see whether where you work and where you live fit together. With the Fortune Palace: Home and inner life; see whether your living space puts you at ease."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How is the Property Palace different from feng shui for the home?",
+     "dap": "The Property Palace in Zi Wei Dou Shu is about your needs and how you keep fixed assets. Feng shui is about arranging space and the facing of the house. They are different things that can be used together but do not replace each other."
+    },
+    {
+     "hoi": "How is a Property Palace with no main star read?",
+     "dap": "A palace with no main star borrows the stars of the opposite palace for the reading. This is the usual way of reading, not a sign of bad luck."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Property Palace: home, where you live, fixed assets",
+    "Read with the Children (opposite), Siblings and Health palaces",
+    "Unlike the Wealth Palace: Property is assets, not cash flow",
+    "Does not pick the year to buy a home; ask a professional"
+   ]
+  },
+  "cung-phuc-duc": {
+   "muc": [
+    {
+     "tieu_de": "Is the Fortune Palace about how much good fortune your family line has?",
+     "doan": "Partly. The Fortune Palace is about your inner foundation, deep joys and how you find peace, and Vietnamese Zi Wei also links it to the blessings of the family line. This palace does not measure good fortune with a number. In everyday terms, read it as a question: what feeds your spirit?"
+    },
+    {
+     "tieu_de": "An example reading of the Fortune Palace on a made-up chart",
+     "doan": "Suppose the Fortune Palace holds Tai Yin: this person finds peace with private space, music, nature and gentle activities. The thing to watch is keeping feelings inside for too long. A good approach is to spend time each week on something that feeds your spirit and to share with someone you trust. This is a made-up example."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Fortune Palace?",
+     "danh_sach": [
+      "Choose one thing that lightens your heart and do it this week.",
+      "Sit quietly for ten minutes each day, without your phone.",
+      "Write three things you are grateful for, one of them about the family you grew up in."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Fortune Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Wealth Palace",
+      "Money faces your inner life; compare them to see whether earning brings you peace or just more busyness."
+     ],
+     [
+      "Trine palace",
+      "Spouse Palace",
+      "Your relationship set against your inner life; whether your partner helps you feel at ease."
+     ],
+     [
+      "Trine palace",
+      "Travel Palace",
+      "Going out set against inner peace; whether new settings relax you or unsettle you."
+     ],
+     [
+      "Neighbouring palaces",
+      "Property Palace and Parents Palace",
+      "With the Property Palace: Home and inner life; see whether your living space puts you at ease. With the Parents Palace: Inner peace and the family you grew up in; see how early home life nourished your inner world."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How can the Fortune Palace be improved?",
+     "dap": "There is no magic. The practical way is to build healthy habits for the mind: enough sleep, kind words, meaningful work and keeping in touch with loved ones. Many families also keep their own household customs; that is each family's choice."
+    },
+    {
+     "hoi": "Is the Fortune Palace related to spirituality?",
+     "dap": "Partly, since the old books link this palace to ancestral blessings. For readers today, what matters is the inner life: how you find peace and hold on to your values."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Fortune Palace: inner foundation, deep joys, ancestral blessings",
+    "Read with the Wealth (opposite), Spouse and Travel palaces",
+    "Ask: what feeds your spirit?",
+    "Does not measure good fortune with a number"
+   ]
+  },
+  "cung-phu-mau": {
+   "muc": [
+    {
+     "tieu_de": "Does the Parents Palace tell about your parents' health?",
+     "doan": "No. The Parents Palace is about your relationship with parents, people ahead of you and superiors, along with paperwork and your early education. It does not tell your parents' health or lifespan. A loved one's health needs a doctor; this article is not a substitute for a doctor's advice. Use this palace to understand how you take in guidance and the words of people in authority."
+    },
+    {
+     "tieu_de": "An example reading of the Parents Palace on a made-up chart",
+     "doan": "Suppose the Parents Palace holds Tian Liang: parents or early teachers often have a protective streak, teach ethics and give a lot of advice. This person learns much from those ahead of them but sometimes feels managed. A good approach is to say clearly what you appreciate, then say what you want to decide for yourself. This is a made-up example."
+    },
+    {
+     "tieu_de": "What can you do this week with the theme of the Parents Palace?",
+     "danh_sach": [
+      "Call or message someone older who once taught you something.",
+      "Write down what you want to keep and what you want to do differently from the home you grew up in.",
+      "Go through important papers such as diplomas and contracts, then keep copies."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Which palaces to read with the Parents Palace — a quick guide",
+    "chu_thich": "The trine and opposite palaces are the palace itself, the palace facing it (opposite) and its two trine palaces; the two neighbouring palaces (flanking) add shading. The last column is what you can read by putting the two palaces side by side.",
+    "cot": [
+     "Relationship",
+     "Palace",
+     "Read together to learn"
+    ],
+    "dong": [
+     [
+      "Opposite palace",
+      "Health Palace",
+      "Your rest rhythm faces the household you grew up in; compare them to see how today's daily habits come from the way you were raised."
+     ],
+     [
+      "Trine palace",
+      "Children Palace",
+      "Children set against parents; whether your way of parenting follows or differs from how you were raised."
+     ],
+     [
+      "Trine palace",
+      "Friends Palace",
+      "Your network set against the people ahead of you; whether there are elders or superiors around you to guide you."
+     ],
+     [
+      "Neighbouring palaces",
+      "Fortune Palace and Life Palace",
+      "With the Fortune Palace: Inner peace and the family you grew up in; see how early home life nourished your inner world. With the Life Palace: The people who raised you stand right before your temperament; see how you take in guidance."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is the Parents Palace also about paperwork and qualifications?",
+     "dap": "Yes, in the common reading. This palace is linked to documents, certificates, contracts and early education. That makes sense, since these are things left by those ahead of you or confirmed by superiors."
+    },
+    {
+     "hoi": "Does the Parents Palace show your superiors?",
+     "dap": "Yes, in the sense of people with authority over you. This palace shows how you take guidance from those above you. It does not say whether that person is good or bad."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "nghia": "The book divides the chart into twelve palaces, each tied to an area of life, and advises reading a palace together with its opposite palace and its two trine palaces."
+    }
+   ],
+   "y_chinh": [
+    "Parents Palace: parents, people ahead of you, superiors, paperwork",
+    "Read with the Health (opposite), Children and Friends palaces",
+    "Shows how you take in guidance",
+    "Does not tell your parents' health or lifespan"
+   ]
+  }
+ }
+}

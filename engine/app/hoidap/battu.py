@@ -144,6 +144,10 @@ def phan_loai(cau_hoi: str, _cum: str | None = None) -> dict:
     thấp mà lớp phân loại AI có nhãn chủ đề hợp lệ."""
     kq = _phan_loai(cau_hoi, _cum)
     if _cum is None and not ngon_ngu.la_viet():
+        # EN-AI: bản dịch ý đã nhận ra câu hỏi tính cách ("What is my personality like?" → "tinh cach") — chủ đề này là
+        # mặc định của luật nên trước đây vẫn bị coi độ tin thấp và hiện khối "hỏi lại". Chỉ bản ngôn ngữ khác tiếng Việt.
+        if kq.get("do_tin_thap") and kq.get("chu_de") == "tinh_cach" and re.search(r"\btinh cach\b", kq.get("cau_chuan_hoa") or ""):
+            kq["do_tin_thap"] = False
         kq = chung.thu_nhan_ngoai(kq, cau_hoi, "battu", lambda cum: _phan_loai(cau_hoi, cum))
     return kq
 

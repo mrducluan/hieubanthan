@@ -1,0 +1,1228 @@
+{
+ "_nguon": "EN-ALL GĐ 4 — bản phủ tiếng Anh của bo_sung_sao.json (ban biên tập viết từ nghĩa; bảng sao phụ, năm tứ hoá dựng từ ten_en).",
+ "_trang_thai": "bien_tap",
+ "source": {
+  "ten": "Main stars — editorial additions",
+  "mo_ta": "Compiled by the Hieu Ban Than editorial team from the knowledge base and public-domain classics (draft, awaiting expert review)"
+ },
+ "trang": {
+  "sao-tu-vi": {
+   "muc": [
+    {
+     "tieu_de": "How is the Zi Wei star different from the Tian Fu star?",
+     "doan": "Zi Wei is the star that makes decisions, while Tian Fu is the star that holds the base. The two sit together in Yin and Shen, so they are often confused. Zi Wei wants to lead and be respected. Tian Fu wants everything well stocked with a way to fall back. Facing something new, Zi Wei asks 'who is responsible?', while Tian Fu asks 'if it fails, what is left to keep?'."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Zi Wei star?",
+     "doan": "Zi Wei suits roles with people working alongside or standards to uphold: manager, team lead, school principal, head of a project. This person does well when the role is clear and their expertise is respected. Long stretches of freelance work with no ranks tend to drain their drive. Example: a department head who sets direction very quickly but avoids asking staff about their own mistakes."
+    },
+    {
+     "tieu_de": "How does the Zi Wei star usually show up in love and family?",
+     "doan": "In love, Zi Wei usually wants respect and keeps family customs. They are rarely the first to say something soft, so loved ones can read them as cold. A family with one person in charge often respects that person but seldom dares to speak frankly. A small thing that helps: ask 'what do you think?' before settling a shared matter."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Zi Wei star well?",
+     "danh_sach": [
+      "Pick one small decision, let others speak first, then give your view.",
+      "Write down three tasks you are holding on to that you could hand over.",
+      "Say one specific thank-you to someone you work with."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Zi Wei alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Zi Wei it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "More people to help with the work; Zi Wei's authority has firmer support.",
+      "When you ask for help, spell out each person's part instead of just giving orders."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds learning and polished words; suits posts that involve drafting and speaking.",
+      "Practise writing short, with the main point first."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Older people tend to lend a hand when you enter a new setting.",
+      "Stay in touch with people who once taught you."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Authority meets friction or delay; easily stubborn, and big plans often get blocked.",
+      "Break big tasks into small steps and be patient with each one."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Big ideas that easily fall short; there are stretches of rebuilding from the ground up.",
+      "Prepare a backup plan before committing to anything big."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is the Zi Wei star always good?",
+     "dap": "No. A bright Zi Wei carries natural authority; a dim one can cling to pride without the standing to back it. The old books also say Zi Wei needs helper stars to be steady. Good or hard depends on the palace and the stars beside it."
+    },
+    {
+     "hoi": "What can someone with Zi Wei do to be more approachable?",
+     "dap": "Ask for others' views before deciding, admit mistakes early and explain the reason for a decision. These small things keep your standing while closing the distance."
+    },
+    {
+     "hoi": "In which years does the Zi Wei star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Zi Wei star takes Hua Quan in years with the Ren stem; Hua Ke in years with the Yi stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book places Zi Wei at the head of the main stars and advises checking the helper stars around it, since Zi Wei alone is not enough to form a chart pattern."
+    }
+   ],
+   "y_chinh": [
+    "Zi Wei: emperor star, Earth element, Zi–Fu–Wu–Xiang group",
+    "Suits leading roles with standards to uphold",
+    "Can feel lonely at the top, finds feedback hard to take",
+    "Unlike Tian Fu: Zi Wei decides, Tian Fu holds the base"
+   ]
+  },
+  "sao-thien-co": {
+   "muc": [
+    {
+     "tieu_de": "How is the Tian Ji star different from the Tian Liang star?",
+     "doan": "Tian Ji is the calculating star, Tian Liang the protecting star. Both belong to the Ji–Yue–Tong–Liang group and sit together in Chen and Xu. Tian Ji thinks fast and always has a plan B. Tian Liang thinks more slowly and often steps in to give advice. People with strong Tian Ji are asked to 'work it out', people with strong Tian Liang are asked for 'a word of advice'."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Tian Ji star?",
+     "doan": "Tian Ji suits brain work: planning, data analysis, consulting, research, programming, accounting. It suits places that need quick adjustment when plans change. The usual stumble is overthinking and starting late. Example: a strong planner with three backup versions who still has not sent the first draft to the boss after a month."
+    },
+    {
+     "tieu_de": "How does the Tian Ji star usually show up in love and family?",
+     "doan": "In love, Tian Ji thinks about the other person more than talking straight to them. They are thoughtful and notice details, but their worrying ahead can tire the people around them. In the family, this is often the one who remembers dates and chores. A good rhythm is to say what is worrying you before it grows into something big."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Tian Ji star well?",
+     "danh_sach": [
+      "Pick one task you have planned but not started and set a deadline within three days.",
+      "Write down two things you are worrying about, then cross out the one you can do nothing about.",
+      "Try doing one task with your first plan instead of waiting for the perfect one."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tian Ji alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Tian Ji it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "More people to talk things through; plans that get feedback become sturdier.",
+      "Ask someone to read your plan before you act on it."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds learning and presentation skills; suits writing and research.",
+      "Write it down instead of only thinking it through."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Someone often shows you the way just when you are stuck.",
+      "Ask someone experienced before changing direction."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Plans meet friction or delay; easily doubtful, changing your mind many times.",
+      "Settle on one direction and set checkpoints."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Unusual ideas that are hard to bring into shape; easily dropped halfway.",
+      "Try it on a small scale before investing big."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Tian Ji the star of clever people?",
+     "dap": "Tian Ji goes with quick wits and the ability to calculate. Cleverness here leans towards planning and adapting; it is not the same as good grades or success. What decides things is still being able to get started."
+    },
+    {
+     "hoi": "What should someone with Tian Ji do about worrying too much?",
+     "dap": "Spend ten minutes a day writing down what worries you and one small thing you can do right away. It moves the worry onto paper and lightens your head. If the worry lasts, talk to someone close or a mental-health professional; this article is not a substitute for a doctor's advice."
+    },
+    {
+     "hoi": "In which years does the Tian Ji star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Tian Ji star takes Hua Lu in years with the Yi stem; Hua Quan in years with the Bing stem; Hua Ke in years with the Ding stem; Hua Ji in years with the Wu stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book puts Tian Ji among the scheming, changeable stars, so it advises looking at which palace Tian Ji sits in to see where its flexibility is put to use."
+    }
+   ],
+   "y_chinh": [
+    "Tian Ji: strategist star, Wood element, Ji–Yue–Tong–Liang group",
+    "Suits brain work: planning, analysis, consulting",
+    "Tends to think a lot and do little, worry ahead, change its mind",
+    "Unlike Tian Liang: Ji calculates, Liang protects"
+   ]
+  },
+  "sao-thai-duong": {
+   "muc": [
+    {
+     "tieu_de": "How is the Tai Yang star different from the Tai Yin star?",
+     "doan": "Tai Yang is the sun: outward-facing and giving. Tai Yin is the moon: inward-facing and gathering. The two are opposite in character, so the books often read them as the Sun–Moon pair. People with strong Tai Yang like working where everyone can see. People with strong Tai Yin like working quietly and neatly. Facing the same hard problem, Tai Yang rushes out to help, Tai Yin quietly works out a route."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Tai Yang star?",
+     "doan": "Tai Yang suits public work with influence: teaching, media, community management, public service, direct sales. It suits places with many people that need someone to inspire them. Avoid taking on more volunteer work than you can carry. Example: a teacher loved by students who still takes on extra group work at weekends and is worn out by Monday."
+    },
+    {
+     "tieu_de": "How does the Tai Yang star usually show up in love and family?",
+     "doan": "In love, Tai Yang is generous, caring and open in conversation. They easily forget themselves while looking after others, and only feel resentful once they are tired. In the family, this is the one who usually takes charge of shared matters. A way to keep balance is to choose one thing each week that you do only for yourself."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Tai Yang star well?",
+     "danh_sach": [
+      "Turn down one unimportant request with a polite sentence.",
+      "Keep one evening free just for yourself.",
+      "Note down one good thing you did and let others know about it, instead of keeping it to yourself."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tai Yang alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Tai Yang it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "People share the load; Tai Yang no longer has to carry it alone.",
+      "Ask others to share the common tasks."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds reputation and a way with words; suits public speaking and teaching.",
+      "Take on roles in front of a crowd, with preparation."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Often meets older people who act as sponsors.",
+      "Thank and stay in touch with the people who help you."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Enthusiasm meets friction; easily misunderstood or pushing yourself too hard.",
+      "State your limits before taking on a task."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Easily runs out of breath, and the effort goes unrecognised.",
+      "Record your results and ask for feedback early."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How do a bright and a fallen Tai Yang differ?",
+     "dap": "Bright, it is like the sun by day: generous, well regarded, your work seen by many. Fallen, it is like the sun at night: you care for many but get little recognition, so choose specialist work over competing for a name."
+    },
+    {
+     "hoi": "What job should someone with Tai Yang choose?",
+     "dap": "Work with a public and a sense of helping people, such as education, media or community organising. If the star is fallen, go for deep specialist work where your contribution is clearly recognised."
+    },
+    {
+     "hoi": "In which years does the Tai Yang star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Tai Yang star takes Hua Lu in years with the Geng stem; Hua Quan in years with the Xin stem; Hua Ji in years with the Jia stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book counts Tai Yang as a noble star governing reputation and generosity, and advises judging its brightness by birth hour, since day and night differ."
+    }
+   ],
+   "y_chinh": [
+    "Tai Yang: noble star, Fire element, Ju Men–Tai Yang group",
+    "Suits public, inspiring work",
+    "Easily burns out caring for others more than for yourself",
+    "Unlike Tai Yin: Yang gives, Yin gathers"
+   ]
+  },
+  "sao-vu-khuc": {
+   "muc": [
+    {
+     "tieu_de": "How is the Wu Qu star different from the Tian Fu star?",
+     "doan": "Wu Qu is the star that earns money, Tian Fu the star that keeps it. Both belong to the Zi–Fu–Wu–Xiang group and relate to finances. Wu Qu is decisive and likes acting for measurable results. Tian Fu is cautious and likes building up steadily. People with strong Wu Qu ask 'how much will this make?', people with strong Tian Fu ask 'how long can we keep it?'."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Wu Qu star?",
+     "doan": "Wu Qu suits work that needs discipline and numbers: finance, accounting, business, engineering, operations management. It suits places with clear targets and pay by results. Watch out for dryness in how you communicate, which can make colleagues wary. Example: a chief accountant who is precise to the last coin but seldom praises staff, so the whole team works in silence."
+    },
+    {
+     "tieu_de": "How does the Wu Qu star usually show up in love and family?",
+     "doan": "In love, Wu Qu shows care through deeds more than words: handling money, the house, the plans. Loved ones sometimes miss gentle words. A simple adjustment is one extra question each day about how they are, unrelated to money."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Wu Qu star well?",
+     "danh_sach": [
+      "Spend five minutes a day checking in with someone close, without talking about money.",
+      "Publicly praise a colleague who did well.",
+      "Review your fixed monthly expenses and cut one."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Wu Qu alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Wu Qu it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "Support is at hand; big jobs get split up and discipline feels lighter.",
+      "Hand the parts you are less good at to someone you trust."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds learning and softer words; suits finance work that involves reporting.",
+      "Practise explaining numbers in plain language."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Helpful people tend to appear in business.",
+      "Keep in touch with people who once helped you with money."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Hard meets hard; easy clashes, money comes and goes.",
+      "Keep spending discipline and soften up when negotiating."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Miscalculations or business ideas that are too risky.",
+      "Don't put all your capital into one approach; keep an emergency fund."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Wu Qu the star of wealth?",
+     "dap": "Wu Qu is the wealth star, showing the ability to earn and manage money. The star does not guarantee any amount, since the palace, the stars beside it and life circumstances also count. Use it to understand how you make money, not to predict rich or poor."
+    },
+    {
+     "hoi": "People with Wu Qu are often called dry — how to fix that?",
+     "dap": "Add short check-ins that are not about work. A word of praise or a message asking whether they have eaten often helps more than a big expense."
+    },
+    {
+     "hoi": "In which years does the Wu Qu star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Wu Qu star takes Hua Lu in years with the Ji stem; Hua Quan in years with the Geng stem; Hua Ke in years with the Jia stem; Hua Ji in years with the Ren stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book lists Wu Qu as the wealth star, of the Metal element, decisive and practical, so it is often used when discussing the ability to earn money and manage resources."
+    }
+   ],
+   "y_chinh": [
+    "Wu Qu: wealth star, Metal element, Zi–Fu–Wu–Xiang group",
+    "Suits work that needs discipline and numbers",
+    "Can come across as dry in relationships",
+    "Unlike Tian Fu: Wu Qu earns money, Tian Fu keeps it"
+   ]
+  },
+  "sao-thien-dong": {
+   "muc": [
+    {
+     "tieu_de": "How is the Tian Tong star different from the Tai Yin star?",
+     "doan": "Tian Tong is the gentle star of blessings, Tai Yin the refined, emotional star. Both are of the Water element and in the Ji–Yue–Tong–Liang group, so both have a gentle character. Tian Tong is easy-going, likes harmony and small joys. Tai Yin is sensitive and tends to keep feelings inside. People with strong Tian Tong rarely overcomplicate things; people with strong Tai Yin notice the tiniest changes."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Tian Tong star?",
+     "doan": "Tian Tong suits work that needs a pleasant manner and adaptability: customer care, early-childhood education, food, services, gentle arts, counselling. It suits places with little competitive pressure. The usual stumble is putting things off when they get hard. Example: a customer-care worker praised for being friendly whose end-of-month report always arrives right at the deadline."
+    },
+    {
+     "tieu_de": "How does the Tian Tong star usually show up in love and family?",
+     "doan": "In love, Tian Tong is mild, rarely argues and likes ordinary dates. They avoid difficult talks, so small issues can pile up. In the family, this is the one who calms the mood. A good approach is to set a fixed day each week to talk about what needs saying."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Tian Tong star well?",
+     "danh_sach": [
+      "Pick one hard task you have left for 'tomorrow' and do the first ten minutes today.",
+      "Set a fixed time each week for difficult conversations with loved ones.",
+      "Set yourself one small goal for this month and write it down."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tian Tong alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Tian Tong it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "Someone to work alongside; less procrastination with a friend beside you.",
+      "Arrange to tackle a hard task with someone else."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds an artistic gift and gentle words; suits creative work.",
+      "Make time for a hobby you really enjoy."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Help often arrives just in time, so it is easy to lean on others.",
+      "Do part of it yourself first, then ask for help."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Gentleness meets friction; easily irritated when pushed on deadlines.",
+      "Set early deadlines and split the work into small steps."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Easily drifting, with unclear goals.",
+      "Write a three-month goal and the very first task."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Tian Tong is a star of blessings — does that mean an easy life?",
+     "dap": "Not guaranteed. Tian Tong shows a mild temperament that enjoys comfort and often gets help. If they shy away from effort, they easily drift with circumstances, so they need to set clear goals for themselves."
+    },
+    {
+     "hoi": "Does someone with Tian Tong work better in a team or alone?",
+     "dap": "Usually in a small team with a pleasant atmosphere and someone to keep track of progress. Working alone for too long invites procrastination, unless there is a fixed schedule."
+    },
+    {
+     "hoi": "In which years does the Tian Tong star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Tian Tong star takes Hua Lu in years with the Bing stem; Hua Quan in years with the Ding stem; Hua Ji in years with the Geng stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book calls Tian Tong the blessing star, of the Water element, governing harmony and enjoyment, so it is often mentioned together with good fortune in the chart."
+    }
+   ],
+   "y_chinh": [
+    "Tian Tong: blessing star, Water element, Ji–Yue–Tong–Liang group",
+    "Suits pleasant, adaptable, caring work",
+    "Tends to avoid hard things, procrastinate, lack drive",
+    "Unlike Tai Yin: Tong is light-hearted, Yin is refined"
+   ]
+  },
+  "sao-liem-trinh": {
+   "muc": [
+    {
+     "tieu_de": "How is the Lian Zhen star different from the Wu Qu star?",
+     "doan": "Lian Zhen is the star of principles and emotion, Wu Qu the star of practicality and money. Both belong to the Zi–Fu–Wu–Xiang group and both are serious. Lian Zhen acts on what it believes and reacts strongly to anything against its principles. Wu Qu acts on efficiency, weighing costs before feelings. People with strong Lian Zhen say 'this isn't right', people with strong Wu Qu say 'this doesn't pay'."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Lian Zhen star?",
+     "doan": "Lian Zhen suits work that needs precision and principle: legal compliance, administration, auditing, engineering, quality management. It suits places with clear procedures. Watch out for gossip and a quick temper when feeling looked down on. Example: a compliance officer who is very careful with paperwork but flares up when asked to cut corners."
+    },
+    {
+     "tieu_de": "How does the Lian Zhen star usually show up in love and family?",
+     "doan": "In love, Lian Zhen is deep and feels strongly; once they trust someone they are very loyal. When disappointed, they can react harshly. With family, they keep clear customs, but can be rigid. A good approach is to say early what hurt you, instead of letting it pile up."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Lian Zhen star well?",
+     "danh_sach": [
+      "Before replying to an irritating message, wait ten minutes and then rewrite it.",
+      "Review one of your principles: is it helping you or tying you down?",
+      "Meet a friend for a relaxed chat with no talk of work."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Lian Zhen alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Lian Zhen it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "Someone to back you; your principles gain supporters.",
+      "Ask an honest person to comment on how you work."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds learning and proper documents; suits work that involves paperwork.",
+      "Write procedures clearly for others to follow."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "People of standing often speak up for you.",
+      "Do things correctly and transparently to keep trust."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "A quick temper meets friction; easily caught up in gossip and quarrels.",
+      "Avoid deciding while angry; choose to talk face to face."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Easily loses out by trusting the wrong person or taking shortcuts.",
+      "Check papers and sources carefully before committing."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Lian Zhen a romance star?",
+     "dap": "The book mentions Lian Zhen with a romantic streak in the sense of magnetism and strong emotions. It is not a verdict about complicated love affairs. What is worth watching is the intensity of feeling and keeping to your own principles."
+    },
+    {
+     "hoi": "What should someone with Lian Zhen avoid?",
+     "dap": "Avoid shortcuts and anything not transparent, since they easily get caught up in gossip. It also helps to practise talking things over when calm rather than while annoyed."
+    },
+    {
+     "hoi": "In which years does the Lian Zhen star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Lian Zhen star takes Hua Lu in years with the Jia stem; Hua Ji in years with the Bing stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book lists Lian Zhen as a Fire star governing principles and emotion, and also mentions its romantic streak in the sense of magnetism and passion."
+    }
+   ],
+   "y_chinh": [
+    "Lian Zhen: prisoner star, Fire element, Zi–Fu–Wu–Xiang group",
+    "Suits work that needs precision and principle",
+    "Can be hot-tempered, stubborn, caught up in gossip",
+    "Unlike Wu Qu: Lian follows principle, Wu follows efficiency"
+   ]
+  },
+  "sao-thien-phu": {
+   "muc": [
+    {
+     "tieu_de": "How is the Tian Fu star different from the Tai Yin star?",
+     "doan": "Tian Fu is the star that keeps the wealth for the whole household, Tai Yin the star that keeps things quietly and sensitively. Both are about building up reserves. Tian Fu is calm, a manager, dependable. Tai Yin is refined, likes saving quietly, and its feelings sway more easily. People with strong Tian Fu keep money through planning, people with strong Tai Yin keep money through a sense of safety."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Tian Fu star?",
+     "doan": "Tian Fu suits managing and safeguarding: accounting, banking, asset management, real estate, HR administration, operations. It suits stable organisations with procedures. The usual stumble is reluctance to change. Example: a finance manager who keeps the funds very secure but misses a chance to expand by forever waiting for more information."
+    },
+    {
+     "tieu_de": "How does the Tian Fu star usually show up in love and family?",
+     "doan": "In love, Tian Fu is tolerant, dependable and wants a stable home. They seldom express it in words and usually care for the family by preparing ahead. A good approach is to try something new with loved ones now and then, such as a short trip."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Tian Fu star well?",
+     "danh_sach": [
+      "Try one small new thing, such as taking a different road or eating an unfamiliar dish.",
+      "Review your reserve fund and decide on one thing worth spending on.",
+      "Tell someone close about one thing you have been holding back out of worry."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tian Fu alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Tian Fu it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "More helpers; the storehouse is kept by many hands.",
+      "Share the management work with someone you trust."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds learning and paperwork skills; suits work with files and records.",
+      "Put the household's papers and contracts in order."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Older people lend a hand when you take on big things.",
+      "Ask someone experienced before a big decision."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "The storehouse meets friction; easily conservative or slow to change.",
+      "Set a date to review old habits."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Reserves fall short because of unexpected swings.",
+      "Spread your assets across a few places instead of one."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Tian Fu the star of wealth?",
+     "dap": "Tian Fu is the storehouse star, tied to saving and managing. Whether someone is wealthy also depends on the palace, the stars beside it and each person's effort. Read it as a tendency to safeguard, not a promise about money."
+    },
+    {
+     "hoi": "Are people with Tian Fu conservative?",
+     "dap": "Many tend to be wary of change. Setting aside a small amount for something new each quarter helps balance keeping and trying."
+    },
+    {
+     "hoi": "In which years does the Tian Fu star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Tian Fu star does not take Hua Lu, Hua Quan, Hua Ke or Hua Ji in any stem year. The colour of Tian Fu changes mainly through the stars beside it and the palace it sits in, not through the year's transformations."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book calls Tian Fu the storehouse star of the Earth element, governing stability, tolerance and saving, often paired with Zi Wei in the Zi–Fu setting."
+    }
+   ],
+   "y_chinh": [
+    "Tian Fu: storehouse star, Earth element, Zi–Fu–Wu–Xiang group",
+    "Suits managing, safeguarding, saving",
+    "Can be overly conservative and risk-averse",
+    "Unlike Tai Yin: Fu keeps by planning, Yin by feeling"
+   ]
+  },
+  "sao-thai-am": {
+   "muc": [
+    {
+     "tieu_de": "How is the Tai Yin star different from the Tai Yang star?",
+     "doan": "Tai Yin is the moon: inward-facing and gathering. Tai Yang is the sun: outward-facing and giving. The two are usually read as the Sun–Moon pair because their characters are opposite. Tai Yin is sensitive, refined, likes working quietly. Tai Yang is generous and likes working in the open. Facing the same sad event, Tai Yin keeps it inside, Tai Yang looks for someone to share it with."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Tai Yin star?",
+     "doan": "Tai Yin suits work that needs care and taste: design, interiors, editing, caregiving, accounting, the arts, small business. It suits quiet settings without noisy competition. Watch out for moodiness under pressure. Example: an editor with a fine ear for words who stays down for days after harsh feedback."
+    },
+    {
+     "tieu_de": "How does the Tai Yin star usually show up in love and family?",
+     "doan": "In love, Tai Yin is gentle, attentive and remembers small details. They tend to keep feelings in, so the other person may not know. In the family, this is the one who notices who is sad. A good approach is to practise voicing a small annoyance before it grows big."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Tai Yin star well?",
+     "danh_sach": [
+      "Share something you have been keeping inside with someone you trust.",
+      "Tidy one corner of your home or desk so it feels pleasant.",
+      "Spend thirty minutes on something creative or beautiful that you enjoy."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tai Yin alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Tai Yin it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "Someone to share with; you hold your feelings alone less.",
+      "Tell that person something about yourself."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds literary and artistic talent; suits creative work.",
+      "Keep a journal or make a small piece of work."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Older people often help quietly.",
+      "Say thank you clearly."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Feelings meet friction; easily sad for no reason or suspicious.",
+      "Sleep enough and walk outdoors; this article is not a substitute for a doctor's advice."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Feelings or money easily fall short if you trust too readily.",
+      "Ask again and verify before lending money or investing together."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How do a bright and a fallen Tai Yin differ?",
+     "dap": "Bright, it is like the autumn moon at night: gentle, rich in feeling, with a knack for quietly building up property and savings. Fallen, it is like the moon in daytime: moody, often sad, easily suspicious."
+    },
+    {
+     "hoi": "What should someone with Tai Yin do about feeling low for no reason?",
+     "dap": "Keep a regular sleep rhythm, walk outdoors and talk to someone you trust. If the low mood lasts for weeks, see a mental-health professional or a doctor, since this article is not a substitute for a doctor's advice."
+    },
+    {
+     "hoi": "In which years does the Tai Yin star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Tai Yin star takes Hua Lu in years with the Ding stem; Hua Quan in years with the Wu stem; Hua Ke in years with the Geng or Gui stem; Hua Ji in years with the Yi stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book treats Tai Yin as a wealth star of the Water element, governing refinement and saving, and advises judging its brightness by whether the birth hour is day or night."
+    }
+   ],
+   "y_chinh": [
+    "Tai Yin: wealth star, Water element, Ji–Yue–Tong–Liang group",
+    "Suits careful, artistic, caring work",
+    "Can feel sad for no reason, keeps feelings inside",
+    "Unlike Tai Yang: Yin gathers, Yang gives"
+   ]
+  },
+  "sao-tham-lang": {
+   "muc": [
+    {
+     "tieu_de": "How is the Tan Lang star different from the Po Jun star?",
+     "doan": "Tan Lang is the star of desire, Po Jun the star of renewal. Both belong to the Sha–Po–Tan group and both want experiences. Tan Lang wants more of many things, is good at socialising and learns fast. Po Jun wants to break the old to build the new, and often starts over from scratch. People with strong Tan Lang ask 'what else is fun?', people with strong Po Jun ask 'is there another way?'."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Tan Lang star?",
+     "doan": "Tan Lang suits work that needs people skills and versatility: business, sales, events, media, entertainment, food, travel. It suits places with many people and lots of new things. Watch out for getting bored quickly and leaving many projects half-done. Example: an events person who is great at connecting people but starts three new projects while two old ones are unfinished."
+    },
+    {
+     "tieu_de": "How does the Tan Lang star usually show up in love and family?",
+     "doan": "In love, Tan Lang is attractive, charming and likes novelty. They easily get swept up in the first rush and then lose interest. In the family, this is the one who brings fun but needs more staying power. A good approach is to keep one fixed shared habit, such as Sunday dinner."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Tan Lang star well?",
+     "danh_sach": [
+      "List three things you want and pick the one you really need.",
+      "Finish one half-done task before starting a new one.",
+      "Set a clear limit for one indulgent habit, such as gaming time or shopping."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tan Lang alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Tan Lang it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "Someone helps keep the pace; your many ideas get people working on them.",
+      "Pick one person to remind you of what you promised."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds a way with words and art; suits performing and communication.",
+      "Turn a hobby into a small product."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Often meets people who point to new opportunities.",
+      "Ask someone who has gone before you before changing direction."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Desire meets friction; easy to overindulge or get into tangled relationships.",
+      "Set time and money limits for your pleasures."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Losses from wanting too much and hasty investments.",
+      "Don't borrow to chase an opportunity; wait a week before deciding."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Tan Lang only about indulgence?",
+     "dap": "No. Tan Lang also means many talents, wide social circles and eagerness to learn. The stumble is getting bored fast and overdoing things. With limits in place, this trait becomes the drive to do many things."
+    },
+    {
+     "hoi": "What job should someone with Tan Lang choose?",
+     "dap": "Jobs that need contact with people and flexibility, such as sales, media, event organising, service businesses. They need a person or a system to keep them on track to finish things."
+    },
+    {
+     "hoi": "In which years does the Tan Lang star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Tan Lang star takes Hua Lu in years with the Wu stem; Hua Quan in years with the Ji stem; Hua Ji in years with the Gui stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book lists Tan Lang as the romance star in the Sha–Po–Tan group, governing versatility and desire, so it discusses at length the limits of wanting."
+    }
+   ],
+   "y_chinh": [
+    "Tan Lang: romance star, Water/Wood element, Sha–Po–Tan group",
+    "Suits communication, versatile work, business",
+    "Quick to want, quick to tire, prone to overindulging",
+    "Unlike Po Jun: Tan wants more, Po wants renewal"
+   ]
+  },
+  "sao-cu-mon": {
+   "muc": [
+    {
+     "tieu_de": "How is the Ju Men star different from the Tian Ji star?",
+     "doan": "Ju Men is the star of words and questioning, Tian Ji the star of planning. Both use their heads a lot. Ju Men asks 'why?' and analyses to the end, mostly through speech. Tian Ji works out options and adapts, saying less. People with strong Ju Men argue in order to understand, people with strong Tian Ji quietly calculate in order to act."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Ju Men star?",
+     "doan": "Ju Men suits jobs that use words: teaching, law, consulting, media, editing, specialist sales, interpreting. It suits places that need critical thinking and expertise. Watch out for words causing misunderstanding when said in a hurry. Example: a lawyer with sharp arguments whose one blunt remark in a meeting made colleagues avoid her for weeks."
+    },
+    {
+     "tieu_de": "How does the Ju Men star usually show up in love and family?",
+     "doan": "In love, Ju Men asks a lot and wants to understand clearly. They need clarity, but the other person can feel interrogated. In the family, this is the one who speaks bluntly. A good approach is to start with what you understand or appreciate, and then ask your question."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Ju Men star well?",
+     "danh_sach": [
+      "Before giving someone feedback, ask yourself: will this help them?",
+      "Check something you suspect before saying it out loud.",
+      "Give a sincere compliment to a friend you seldom praise."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ju Men alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Ju Men it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "Someone to balance things; your words are backed by a trusted person.",
+      "Ask someone to mediate when explanations are needed."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds a gift for words and learning; suits writing and explaining.",
+      "Rewrite your main point as three sentences before speaking."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Older people lend support, so your words are trusted more.",
+      "Use your standing to help others, not to win arguments."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Words meet friction; easily stirs up gossip or gets misunderstood.",
+      "Put important decisions in writing."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Too much doubt, or analysis that wanders off course.",
+      "Set a time limit for weighing things up and deciding."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Ju Men a star of gossip and disputes?",
+     "dap": "The book often links Ju Men with gossip and disputes because the star is about speech. In everyday terms, your words carry weight, so take care with them. Used well, Ju Men becomes a talent for reasoning and debate."
+    },
+    {
+     "hoi": "How can someone with Ju Men speak without offending?",
+     "dap": "State what you understand or agree with first, then your question, using questions instead of verdicts. Write things down when the matter is sensitive, to avoid misunderstanding."
+    },
+    {
+     "hoi": "In which years does the Ju Men star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Ju Men star takes Hua Lu in years with the Xin stem; Hua Quan in years with the Gui stem; Hua Ji in years with the Ding stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book calls Ju Men the dark star of the Water element, governing speech, doubt and disputes, and advises checking its brightness and the stars beside it to see whether words help or entangle."
+    }
+   ],
+   "y_chinh": [
+    "Ju Men: dark star, Water element, Ju Men–Tai Yang group",
+    "Suits jobs that use words: teaching, law, consulting, media",
+    "Can be suspicious, causes misunderstandings through words",
+    "Unlike Tian Ji: Ju Men asks and speaks, Tian Ji calculates"
+   ]
+  },
+  "sao-thien-tuong": {
+   "muc": [
+    {
+     "tieu_de": "How is the Tian Xiang star different from the Tian Liang star?",
+     "doan": "Tian Xiang is the star of courtesy and coordination, Tian Liang the star of protection and advice. Both help others. Tian Xiang saves face for every side and builds bridges in disagreements. Tian Liang tends to step in to teach and point out what is right. People with strong Tian Xiang say 'let me sort it out', people with strong Tian Liang say 'let me show you'."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Tian Xiang star?",
+     "doan": "Tian Xiang suits coordinating and assisting roles: executive secretary, project manager, administration, HR, assistant, diplomacy, high-end service. It suits places with clear codes of conduct. Watch out for being swept along by others' wishes. Example: a project manager who coordinates three departments smoothly but finds it hard to say 'no' when the boss asks for more."
+    },
+    {
+     "tieu_de": "How does the Tian Xiang star usually show up in love and family?",
+     "doan": "In love, Tian Xiang is polite, attentive and knows how to save the other person's face. They avoid conflict, so they often give way. In the family, this is the go-between. A good approach is to state one wish of your own clearly each week."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Tian Xiang star well?",
+     "danh_sach": [
+      "Practise saying 'let me check my schedule and get back to you' instead of agreeing straight away.",
+      "Write down one thing you want, not what others want.",
+      "Pick a trusted friend and ask for blunt feedback on a recent decision."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tian Xiang alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Tian Xiang it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "People working alongside; the coordinating role gets lighter.",
+      "Divide tasks clearly so you are not stuck in the middle too often."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds tactful words and tidy paperwork; suits administration and diplomacy.",
+      "Draft template replies for recurring tasks."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Older people often sponsor you when you take on big things.",
+      "Keep faith with the people who help you."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Courtesy meets friction; easily caught between two sides.",
+      "Make your role and limits clear from the start."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Easily pulled in by others or caught in the fallout from helping someone.",
+      "Ask about the purpose before agreeing to help."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Tian Xiang the star of a lifelong assistant?",
+     "dap": "No. Tian Xiang is good at supporting and coordinating, but can still lead when it has a clear view of its own. What to practise is stating your own view instead of only keeping others happy."
+    },
+    {
+     "hoi": "How can someone with Tian Xiang avoid being taken advantage of?",
+     "dap": "Set specific limits on saying yes, such as a number of extra tasks per week. Say 'give me time to think it over' before agreeing."
+    },
+    {
+     "hoi": "In which years does the Tian Xiang star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Tian Xiang star does not take Hua Lu, Hua Quan, Hua Ke or Hua Ji in any stem year. The colour of Tian Xiang changes mainly through the stars beside it and the palace it sits in, not through the year's transformations."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book calls Tian Xiang the seal star of the Water element, governing courtesy and assisting, usually within the Zi–Fu–Wu–Xiang setting."
+    }
+   ],
+   "y_chinh": [
+    "Tian Xiang: seal star, Water element, Zi–Fu–Wu–Xiang group",
+    "Suits coordinating, assisting, diplomatic roles",
+    "Easily swayed by others, finds it hard to say no",
+    "Unlike Tian Liang: Xiang keeps courtesy, Liang protects"
+   ]
+  },
+  "sao-thien-luong": {
+   "muc": [
+    {
+     "tieu_de": "How is the Tian Liang star different from the Tian Tong star?",
+     "doan": "Tian Liang is the star of protection and guidance, Tian Tong the star of enjoyment and harmony. Both are in the Ji–Yue–Tong–Liang group and both are mild. Tian Liang is more serious, values ethics and often steps in to advise. Tian Tong is light-hearted, likes fun and rarely intervenes. People with strong Tian Liang are often asked for advice, people with strong Tian Tong are often invited out."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Tian Liang star?",
+     "doan": "Tian Liang suits guiding and protecting roles: teacher, adviser, insurance, health support work, legal advice, social work, HR. It suits places with clear values. Watch out for lecturing and intervening. Example: a homeroom teacher loved by students who keeps fixing their work for them instead of letting them try."
+    },
+    {
+     "tieu_de": "How does the Tian Liang star usually show up in love and family?",
+     "doan": "In love, Tian Liang is caring, protective and takes responsibility seriously. They sometimes become the teacher without meaning to, and the other person feels treated like a pupil. A good approach is to ask 'do you want me to listen, or to give advice?' before advising."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Tian Liang star well?",
+     "danh_sach": [
+      "Next time someone shares a story, listen to the end before offering advice.",
+      "Pick one thing you usually do for others and let them do it themselves.",
+      "Spend time on a hobby that has nothing to do with teaching."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tian Liang alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Tian Liang it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "Someone to share the protecting; helping others is less of a solo job.",
+      "Ask colleagues to share the support work."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds learning and a gift for explaining; suits teaching and consulting.",
+      "Turn the lesson into a short example."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Older people often shelter you when things get hard.",
+      "Accept help and say thank you at the right time."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Protecting meets friction; easily called preachy, or left lonely.",
+      "Help when asked, not before."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Easily drifting, or feeling out of place in the group.",
+      "Keep a stable circle of friends to share with."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "What kind of star is Tian Liang — is it a rescuing star?",
+     "dap": "The book often calls Tian Liang the sheltering star: it tends to protect, and in hard times a person or a way out often appears. That is a trait and a kind of luck, not a guarantee of avoiding every difficulty."
+    },
+    {
+     "hoi": "How can someone with Tian Liang lecture less?",
+     "dap": "Ask whether the other person wants to be heard or wants advice before you speak. Offer an open question instead of a conclusion."
+    },
+    {
+     "hoi": "In which years does the Tian Liang star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Tian Liang star takes Hua Lu in years with the Ren stem; Hua Quan in years with the Yi stem; Hua Ke in years with the Ji stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book calls Tian Liang the sheltering star of the Earth element, governing protection and ethics, so it often discusses its adviser streak and the help it brings in the chart."
+    }
+   ],
+   "y_chinh": [
+    "Tian Liang: sheltering star, Earth element, Ji–Yue–Tong–Liang group",
+    "Suits guiding, protecting, advisory roles",
+    "Tends to lecture, feel alone, play the rescuer",
+    "Unlike Tian Tong: Liang protects, Tong enjoys"
+   ]
+  },
+  "sao-that-sat": {
+   "muc": [
+    {
+     "tieu_de": "How is the Qi Sha star different from the Po Jun star?",
+     "doan": "Qi Sha is the star that charges ahead, Po Jun the star of renewal. Both belong to the Sha–Po–Tan group and both dare to change. Qi Sha is brave, independent and acts fast to reach its goal. Po Jun breaks the old mould to make something different, and often starts over. People with strong Qi Sha ask 'which way is fastest?', people with strong Po Jun ask 'is the old way worth keeping?'."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Qi Sha star?",
+     "doan": "Qi Sha suits work that needs decisiveness and pressure tolerance: running your own business, crisis management, high-target sales, field engineering, the military, sport, start-ups. It suits challenging settings. Watch out for haste and difficulty working with others for long. Example: a sales team lead who hits targets fast, but staff leave because they are pushed constantly."
+    },
+    {
+     "tieu_de": "How does the Qi Sha star usually show up in love and family?",
+     "doan": "In love, Qi Sha is direct and protective of the people it loves, but dislikes being controlled. They can decide quickly and leave the other person reeling. In the family, this is the one who dares to carry the load when something goes wrong. A good approach is to ask the other person's view before deciding shared matters."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Qi Sha star well?",
+     "danh_sach": [
+      "Before a big decision, sleep on it first.",
+      "Hear others out fully before giving your view.",
+      "Exercise or do something vigorous to let off energy."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Qi Sha alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Qi Sha it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "Someone to charge ahead with; a partner you can rely on.",
+      "Choose people who fill in where you fall short."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds learning and clear plans; decisiveness gets a firmer basis.",
+      "Write a short plan before acting."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Someone often steps in just when things are urgent.",
+      "Accept help instead of only pushing through alone."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "Sharp meets sharp; easy clashes from haste, a life with many ups and downs.",
+      "Slow down and check safety before doing anything risky."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Reckless moves or sudden big changes.",
+      "Budget resources for at least three months."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Qi Sha a dangerous star?",
+     "dap": "No. Qi Sha is the general star, showing courage and decisiveness. The stumble is haste and ups and downs. Used in the right place, it gives the spring to take on hard work."
+    },
+    {
+     "hoi": "What should someone with Qi Sha practise?",
+     "dap": "Practise patience and listening to others. Go step by step and have someone you trust to talk big decisions through with."
+    },
+    {
+     "hoi": "In which years does the Qi Sha star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Qi Sha star does not take Hua Lu, Hua Quan, Hua Ke or Hua Ji in any stem year. The colour of Qi Sha changes mainly through the stars beside it and the palace it sits in, not through the year's transformations."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book calls Qi Sha the general star of the Metal element, governing decisiveness and charging ahead, often discussed with Po Jun and Tan Lang in the Sha–Po–Tan setting."
+    }
+   ],
+   "y_chinh": [
+    "Qi Sha: general star, Metal element, Sha–Po–Tan group",
+    "Suits work that needs decisiveness and pressure tolerance",
+    "Can be hasty, reckless, hard to work with for long",
+    "Unlike Po Jun: Sha charges ahead, Po renews"
+   ]
+  },
+  "sao-pha-quan": {
+   "muc": [
+    {
+     "tieu_de": "How is the Po Jun star different from the Tan Lang star?",
+     "doan": "Po Jun is the star of renewal, Tan Lang the star of desire. Both belong to the Sha–Po–Tan group and like new experiences. Po Jun breaks the old mould to start again, suiting start-ups and restructuring. Tan Lang wants more good things and is good at socialising. People with strong Po Jun say 'let's redo it another way', people with strong Tan Lang say 'let's try this too'."
+    },
+    {
+     "tieu_de": "What jobs and roles suit the Po Jun star?",
+     "doan": "Po Jun suits work that needs renewal: start-ups, process restructuring, new product design, change consulting, experimental art. It suits fast-changing settings. Watch out for leaving things half-done and wasting resources. Example: a product person who ships a prototype very fast but changes direction three times in six months, so the team loses its bearings."
+    },
+    {
+     "tieu_de": "How does the Po Jun star usually show up in love and family?",
+     "doan": "In love, Po Jun likes novelty and resists set patterns. They dare to start over, but sometimes give up too soon. In the family, this is the one who keeps changing the way of living or rearranging the house. A good approach is to settle one stable base, such as a weekly habit, before trying something new."
+    },
+    {
+     "tieu_de": "What can you do this week to use the Po Jun star well?",
+     "danh_sach": [
+      "Before quitting something, write down three reasons to stay and three to leave.",
+      "Finish one half-done task this week.",
+      "Fix one small routine, such as bedtime or a shared dinner."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Po Jun alongside minor stars — a quick guide",
+    "chu_thich": "Minor stars only add shading; they do not change the nature of the main star. The middle column is what the pair usually suggests when the two stars share a palace or face each other; the last column is something you can do in everyday life.",
+    "cot": [
+     "Minor stars alongside",
+     "With Po Jun it usually suggests",
+     "What to do"
+    ],
+    "dong": [
+     [
+      "Zuo Fu, You Bi",
+      "Someone to build with; starting over has support.",
+      "Find someone to keep the pace when you change direction."
+     ],
+     [
+      "Wen Chang, Wen Qu",
+      "Adds learning and ideas; suits creative and design work.",
+      "Note your ideas and pick one to try."
+     ],
+     [
+      "Tian Kui, Tian Yue",
+      "Someone often shows the way when you want to change careers.",
+      "Ask someone who has gone before you before a big change."
+     ],
+     [
+      "Qing Yang, Tuo Luo",
+      "The urge to break things meets resistance; easily impulsive, wasteful, moving house or changing jobs.",
+      "Keep an emergency fund and your basic routines."
+     ],
+     [
+      "Di Kong, Di Jie",
+      "Starting over many times; easily running short of capital.",
+      "Test on a small scale and set a clear stopping point."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Po Jun a star that loses money?",
+     "dap": "Po Jun is the consumption star, showing a tendency to break the old and build the new, so change often costs resources. The good way to use it is planned change with an emergency fund — it is not a verdict that you will lose money."
+    },
+    {
+     "hoi": "Does someone with Po Jun suit starting a business?",
+     "dap": "Usually yes in the early stage, which needs renewal and accepting trial and error. They need someone to keep operations and money steady for the long run."
+    },
+    {
+     "hoi": "In which years does the Po Jun star take Hua Lu, Hua Quan, Hua Ke or Hua Ji?",
+     "dap": "Using the Four Transformations table in use here, the Po Jun star takes Hua Lu in years with the Gui stem; Hua Quan in years with the Jia stem. A lunar year with the same stem is when this star takes that transformation on the annual chart."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zi Wei Dou Shu Quan Shu",
+     "chuong": "Zhu Xing Wen Da Lun (questions and answers on the stars)",
+     "nghia": "The book calls Po Jun the consumption star of the Water element, governing breaking the old and building the new, so it is often mentioned in talk of change and starting businesses."
+    }
+   ],
+   "y_chinh": [
+    "Po Jun: consumption star, Water element, Sha–Po–Tan group",
+    "Suits renewal, restructuring, start-ups",
+    "Can be wasteful, impulsive, leave things half-done",
+    "Unlike Tan Lang: Po renews, Tan desires"
+   ]
+  }
+ }
+}
