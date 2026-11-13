@@ -21,7 +21,7 @@ from __future__ import annotations
 import datetime as dt
 import re
 
-from app import config
+from app import config, ngon_ngu
 from app.calc import lunar, tuvi_an_sao as az
 from app.calc import tuvi_luu_nguyet as ln
 from app.calc import tuvi_phi_hoa as phi_calc
@@ -702,6 +702,9 @@ def _chuong_suc_khoe(cc: dict, hoc: tuple, ls: dict | None = None, nam_am_xem: i
             cau.append(L("tvds.sk.bo_phan_ta", f"Theo sách xưa, phần cơ thể bạn nên chăm sóc phòng ngừa là {hai}.", hai=hai))
         elif hai:
             cau.append(L("tvds.sk.bo_phan_menh", f"Với tính cách của bạn, sách xưa nhắc chăm sóc phòng ngừa {hai}.", hai=hai))
+        he0 = skn.kb.he_sao(s0["ten"], benh=True) if hai else None      # SK-2: tên bệnh hay gặp của hệ cơ quan
+        if he0 and he0.get("benh") and skn.kb.mau("kham_benh_cau") and ngon_ngu.la_viet():   # EN-ALL: bản Anh chưa có lời SK-2
+            cau.append(skn.kb.mau("kham_benh_cau").format(kham=he0["kham"], benh=he0["benh"]))
         tq = (sk0.get("thoi_quen") or "").strip()
         if tq and not re.match(r"(?i)(bạn|người|khi|nên|hay|dễ|you|people|when|try|often|easily|tend)\b", tq):
             tq = L("tvds.sk.thoi_quen", "Thói quen dễ hao sức: ") + tq[:1].lower() + tq[1:]

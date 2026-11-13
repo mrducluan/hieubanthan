@@ -1,0 +1,5131 @@
+{
+ "source_id": "bo_sung_que_v1",
+ "school_id": "nghia_ly",
+ "trang_thai": "nhap_ai",
+ "source": {
+  "ten": "Quẻ Kinh Dịch — Ban biên tập bổ sung",
+  "mo_ta": "Ban biên tập Hiểu Bản Thân viết từ Chu Dịch (hào từ, Tự quái truyện — phạm vi công cộng) và kho tri thức; nháp, chờ thẩm định"
+ },
+ "trang": {
+  "que-1-can": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Càn khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Càn khi hỏi một việc nghĩa là việc đang có lực đẩy mạnh, nhưng mỗi chặng cần một cách đi khác nhau. Sáu hào là sáu bậc của con rồng: ẩn, hiện, lo toan, thử nhảy, bay, lên quá cao. Muốn đọc đúng, xác định mình đang ở bậc nào rồi làm việc của bậc đó, đừng làm việc của bậc trên."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Càn trong đời thường",
+     "danh_sach": [
+      "Hỏi xin lên chức khi mới vào công ty ba tháng: còn ở bậc rồng ẩn, nên học việc và để kết quả tự nói.",
+      "Hỏi có nên mở rộng cửa hàng khi đang bán tốt: lực có, nhưng tính trước phần vốn dự phòng để không thành rồng lên quá cao.",
+      "Hỏi có nên tỏ tình: Càn khuyên chủ động, nói rõ lòng mình rồi chờ nhịp của người kia."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Càn: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Nhị",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Việc đã tới cuối",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Càn là quẻ tốt hay xấu?",
+     "dap": "Càn là quẻ mạnh, lời quẻ nói hanh thông. Nhưng tốt có điều kiện là giữ chính bền; hào trên cùng nhắc lên quá cao thì có hối. Sức càng mạnh càng cần biết lúc dừng."
+    },
+    {
+     "hoi": "Gieo quẻ Càn mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Càn, lời hào nghiêng về có khi động Cửu Nhị, Cửu Tứ, Cửu Ngũ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện mở đầu: có trời đất rồi muôn vật mới sinh. Càn đứng đầu vì là trời, là sức khởi đầu của mọi việc; Khôn đứng sau làm đất để nhận và nuôi.",
+     "nguyen_van": "有天地然後萬物生焉"
+    }
+   ],
+   "y_chinh": [
+    "Càn: sức mạnh khởi đầu, đi theo từng bậc",
+    "Hỏi việc: xác định mình đang ở bậc nào của con rồng",
+    "Mạnh nhưng phải biết lúc dừng"
+   ]
+  },
+  "que-2-khon": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Khôn khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Khôn khi hỏi một việc nghĩa là nên đi sau, làm nền và nâng đỡ, thay vì giành dẫn đầu. Lời quẻ nói đi trước thì lạc, đi sau thì được chủ. Việc thuận khi bạn chịu làm phần âm thầm, bền bỉ, và có người hoặc kế hoạch rõ để theo."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Khôn trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên tự mở công ty riêng ngay: Khôn nghiêng về làm cùng một người dẫn dắt có kinh nghiệm trước.",
+      "Hỏi về việc chăm lo gia đình: quẻ khen người giữ nhà bao dung, nhưng nhắc nói ra nhu cầu của chính mình.",
+      "Hỏi chuyện học: chọn một lộ trình có sẵn và theo cho đều, đừng tự đổi giữa chừng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Khôn: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Khôn là quẻ tốt hay xấu?",
+     "dap": "Khôn không xấu; đây là quẻ thuận, chở muôn vật. Điều kiện là đúng vai: theo sau, giữ bền như ngựa cái. Hào trên cùng cảnh báo khi âm tranh với dương thì hai bên đều tổn."
+    },
+    {
+     "hoi": "Gieo quẻ Khôn mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Khôn, lời hào nghiêng về có khi động Lục Nhị, Lục Tứ, Lục Ngũ. Nghiêng về chưa nên lúc này khi động Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Theo Tự quái truyện, Khôn đi cùng Càn thành cặp trời đất mở đầu Kinh. Có trời đất rồi mới có muôn vật, nên ngay sau đó là Truân, lúc vạn vật mới sinh còn chật vật.",
+     "nguyen_van": "有天地然後萬物生焉"
+    }
+   ],
+   "y_chinh": [
+    "Khôn: làm nền, nâng đỡ, đi sau thì được",
+    "Hỏi việc: tìm người dẫn đường đáng tin rồi theo bền",
+    "Tránh tranh phần dẫn đầu lúc này"
+   ]
+  },
+  "que-3-truan": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Truân khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Truân khi hỏi một việc nghĩa là việc mới bắt đầu, còn rối và chưa nên đi xa. Hình ảnh là mầm cây đội đất: có sức sống nhưng cần thời gian. Lời quẻ khuyên dựng người giúp (lợi kiến hầu), sắp xếp nền móng trước khi mở rộng."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Truân trong đời thường",
+     "danh_sach": [
+      "Hỏi về dự án vừa khởi động mà việc gì cũng vướng: bình thường của giai đoạn đầu, nên tìm người có kinh nghiệm cùng gỡ.",
+      "Hỏi có nên chuyển nhà ngay tháng này: Truân nghiêng về chuẩn bị kỹ, chưa vội.",
+      "Hỏi một mối quan hệ mới quen: còn bỡ ngỡ, để thời gian cho hai bên hiểu nhau."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Truân: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Nhị",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Truân là quẻ tốt hay xấu?",
+     "dap": "Truân là quẻ khó buổi đầu, không phải quẻ hỏng việc. Lời quẻ vẫn có nguyên hanh lợi trinh. Khó vì đang lập, nên sức dồn vào nền móng và người giúp."
+    },
+    {
+     "hoi": "Gieo quẻ Truân mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Truân, lời hào nghiêng về có khi động Sơ Cửu, Lục Tứ. Nghiêng về chưa nên lúc này khi động Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện nói: đầy khắp trời đất chỉ là muôn vật, nên tiếp theo là Truân; Truân là đầy, là lúc vật mới sinh. Vật mới sinh thì còn non, nên sau Truân là Mông.",
+     "nguyen_van": "盈天地之間者唯萬物，故受之以屯"
+    }
+   ],
+   "y_chinh": [
+    "Truân: khó buổi đầu như mầm đội đất",
+    "Hỏi việc: chưa đi xa, dựng nền và tìm người giúp",
+    "Rối lúc đầu là bình thường, không phải hỏng"
+   ]
+  },
+  "que-4-mong": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Mông khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Mông khi hỏi một việc nghĩa là bạn còn thiếu hiểu biết về việc đó và cần học từ người biết. Lời quẻ nói hỏi lần đầu thì được đáp, hỏi đi hỏi lại là nhờn. Việc thuận khi bạn chịu học bài bản thay vì đoán mò."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Mông trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên đầu tư vào lĩnh vực mới: học cho kỹ trước, và đừng gieo đi gieo lại cùng một câu.",
+      "Hỏi chuyện dạy con: Mông nhắc thầy cần nghiêm mà có tình, trẻ cần được tự hỏi.",
+      "Hỏi có nên nhận việc trái chuyên môn: được nếu có người chỉ dẫn và bạn chấp nhận học từ đầu."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Mông: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Tứ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Việc đã tới cuối",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Mông là quẻ tốt hay xấu?",
+     "dap": "Mông không xấu, là quẻ của tuổi học. Hanh thông khi trò thành tâm cầu thầy. Khó khi người hỏi không chịu nghe, hoặc hỏi để tìm câu mình muốn nghe."
+    },
+    {
+     "hoi": "Gieo quẻ Mông mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Mông, lời hào nghiêng về có khi động Cửu Nhị, Lục Ngũ. Nghiêng về chưa nên lúc này khi động Lục Tam. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật mới sinh thì non dại, nên sau Truân là Mông. Mông là vật còn nhỏ; vật nhỏ thì phải được nuôi, nên tiếp theo là Nhu, đạo ăn uống.",
+     "nguyen_van": "屯者盈也屯者物之始生也物生必蒙，故受之以蒙"
+    }
+   ],
+   "y_chinh": [
+    "Mông: còn non, cần học từ người biết",
+    "Hỏi một lần cho rõ, đừng gieo lại cùng một việc",
+    "Thuận khi chịu học bài bản"
+   ]
+  },
+  "que-5-nhu": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Nhu khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Nhu khi hỏi một việc nghĩa là phải chờ, nhưng chờ có niềm tin và có chuẩn bị. Hình ảnh là mây đã lên trời mà mưa chưa xuống. Lời quẻ khuyên ăn uống, giữ sức trong lúc chờ, không lao qua chỗ hiểm khi thời chưa tới."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Nhu trong đời thường",
+     "danh_sach": [
+      "Hỏi khi nào có kết quả phỏng vấn: Nhu nói việc đang trên đường, giữ liên lạc nhẹ và chăm việc hiện tại.",
+      "Hỏi có nên giải ngân ngay: chờ đủ giấy tờ và thông tin, vội thì dễ sa lầy.",
+      "Hỏi chuyện tình cảm đang dở dang: cho người kia thời gian, đừng ép trả lời."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Nhu: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Nhu là quẻ tốt hay xấu?",
+     "dap": "Nhu là quẻ tốt nếu biết chờ đúng cách; lời quẻ có hữu phu, sáng hanh, lợi vượt sông lớn. Xấu chỉ khi nóng vội, như các hào gần chỗ hiểm nhắc tới bùn và máu."
+    },
+    {
+     "hoi": "Gieo quẻ Nhu mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Nhu, lời hào nghiêng về có khi động Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật nhỏ thì không thể không nuôi, nên sau Mông là Nhu; Nhu là đạo ăn uống. Ăn uống thì sinh tranh giành, nên sau Nhu là Tụng.",
+     "nguyen_van": "蒙者蒙也物之穉也物穉不可不養也，故受之以需"
+    }
+   ],
+   "y_chinh": [
+    "Nhu: chờ có niềm tin, mây đã lên mà mưa chưa xuống",
+    "Hỏi việc: giữ sức, chuẩn bị, đừng lao qua chỗ hiểm",
+    "Tốt khi biết chờ đúng cách"
+   ]
+  },
+  "que-6-tung": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tụng khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tụng khi hỏi một việc nghĩa là đang có tranh chấp, và cách đi tốt nhất là dừng giữa chừng thay vì theo tới cùng. Lời quẻ nói có lý mà bị nghẹn; dừng ở giữa thì tốt, kéo tới cuối thì xấu. Nên tìm người phân xử công bằng."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tụng trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên kiện đối tác: Tụng nghiêng về thương lượng, có người trung gian; hỏi ý kiến luật sư trước khi quyết.",
+      "Hỏi về cãi vã trong nhà: nói rõ điểm mình không đồng ý rồi dừng, đừng cố thắng.",
+      "Hỏi có nên làm ăn chung với người vừa bất đồng: làm rõ thoả thuận bằng giấy trước khi bắt đầu."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tụng: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Nhị",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Tam",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tụng là quẻ tốt hay xấu?",
+     "dap": "Tụng là quẻ khó, nhưng lời quẻ chỉ rõ lối ra: giữa chừng dừng thì tốt. Hào trên cùng nói có thể được ban đai mà một ngày ba lần bị tước, thắng bằng tranh thì không giữ được."
+    },
+    {
+     "hoi": "Gieo quẻ Tụng mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tụng, lời hào nghiêng về có khi động Cửu Ngũ. Nghiêng về chưa nên lúc này khi động Sơ Lục, Cửu Nhị, Cửu Tứ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: ăn uống ắt có tranh, nên sau Nhu là Tụng. Tranh thì ắt có đám đông nổi lên, nên sau Tụng là Sư, quẻ của tập hợp đông người.",
+     "nguyen_van": "需者飲食之道也飲食必有訟，故受之以訟"
+    }
+   ],
+   "y_chinh": [
+    "Tụng: có tranh chấp, dừng giữa chừng thì tốt",
+    "Hỏi việc: tìm người phân xử, đừng cố thắng tới cùng",
+    "Việc pháp lý: hỏi luật sư trước khi quyết"
+   ]
+  },
+  "que-7-su": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Sư khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Sư khi hỏi một việc nghĩa là việc cần tổ chức đông người, kỷ luật rõ và một người cầm trịch có kinh nghiệm. Lời quẻ nói cần trượng nhân thì tốt. Việc thuận khi lý do chính đáng và quy tắc làm việc được nói trước."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Sư trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên nhận dẫn một nhóm lớn: được nếu bạn có người phó tin cậy và luật làm việc rõ.",
+      "Hỏi về một chiến dịch bán hàng: chia vai rõ, có người theo dõi tiến độ mỗi tuần.",
+      "Hỏi chuyện họ hàng cùng góp tiền làm việc chung: cần một người đứng ra giữ sổ và luật rõ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Sư: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Tứ",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Ngũ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Thượng Lục",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Sư là quẻ tốt hay xấu?",
+     "dap": "Sư không xấu, nhưng nặng; đây là quẻ của việc lớn có rủi ro. Tốt khi người dẫn chính đáng; hào thứ ba nhắc xe chở xác, tức để người không đủ sức cầm quân thì hỏng."
+    },
+    {
+     "hoi": "Gieo quẻ Sư mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Sư, lời hào nghiêng về có khi động Cửu Nhị. Nghiêng về chưa nên lúc này khi động Lục Tam. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: tranh thì ắt có đám đông nổi dậy, nên sau Tụng là Sư; Sư là đông người. Đông người thì phải có chỗ gắn bó, nên sau Sư là Tỷ.",
+     "nguyen_van": "訟必有衆起，故受之以師"
+    }
+   ],
+   "y_chinh": [
+    "Sư: việc đông người, cần kỷ luật và người cầm trịch",
+    "Hỏi việc: chia vai rõ, nói luật trước khi làm",
+    "Đừng giao việc lớn cho người chưa đủ sức"
+   ]
+  },
+  "que-8-ty": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tỷ khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tỷ khi hỏi một việc nghĩa là nên tìm chỗ gắn bó, liên kết với người đáng tin, và quyết sớm. Lời quẻ dặn tự xét lòng thành trước khi theo, và kẻ đến muộn thì xấu. Thuận khi hai bên cùng hướng một mục tiêu."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tỷ trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên nhận lời hợp tác: Tỷ nghiêng về có, nếu bạn hiểu rõ người kia và trả lời sớm.",
+      "Hỏi có nên vào một nhóm mới: chọn nhóm có người dẫn chính trực, đừng vì đông mà theo.",
+      "Hỏi chuyện tình cảm: thành thật từ đầu, chần chừ lâu thì dễ lỡ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tỷ: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Ngũ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tỷ là quẻ tốt hay xấu?",
+     "dap": "Tỷ là quẻ tốt cho liên kết. Điều kiện là lòng thành và đúng lúc. Hào trên cùng nói gắn bó mà không có đầu thì xấu, tức theo người không có định hướng."
+    },
+    {
+     "hoi": "Gieo quẻ Tỷ mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tỷ, lời hào nghiêng về có khi động Sơ Lục, Cửu Ngũ. Nghiêng về chưa nên lúc này khi động Lục Tam, Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: đông người ắt phải gắn bó, nên sau Sư là Tỷ; Tỷ là gần gũi. Gắn bó rồi ắt có chỗ tích chứa, nên sau Tỷ là Tiểu Súc.",
+     "nguyen_van": "師者衆也衆必有所比，故受之以比"
+    }
+   ],
+   "y_chinh": [
+    "Tỷ: liên kết với người đáng tin",
+    "Hỏi việc: xét lòng thành rồi quyết sớm",
+    "Đến muộn hoặc theo người không định hướng thì khó"
+   ]
+  },
+  "que-9-tieu-suc": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tiểu Súc khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tiểu Súc khi hỏi một việc nghĩa là có lực nhỏ đang kìm lại, việc chưa bung ra được ngay. Hình ảnh là mây dày từ phía tây mà chưa mưa. Nên tích dần từng phần nhỏ và giữ hoà khí, chưa phải lúc làm lớn."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tiểu Súc trong đời thường",
+     "danh_sach": [
+      "Hỏi khi nào được tăng lương: đang tích, ghi lại các việc đã làm để có cơ sở nói chuyện sau.",
+      "Hỏi có nên vay để mở rộng: Tiểu Súc nghiêng về tích lũy thêm vốn tự có trước.",
+      "Hỏi chuyện vợ chồng có điều chưa nói được: nói nhẹ từng phần, đừng dồn một lần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tiểu Súc: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Ngũ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tiểu Súc là quẻ tốt hay xấu?",
+     "dap": "Tiểu Súc là quẻ hanh thông nhỏ. Không phải trở ngại lớn, chỉ là chưa tới lúc. Hào trên cùng nói mưa đã rơi, tích đủ rồi thì dừng, cố đẩy tiếp lại bất lợi."
+    },
+    {
+     "hoi": "Gieo quẻ Tiểu Súc mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tiểu Súc, lời hào nghiêng về có khi động Sơ Cửu, Cửu Nhị, Cửu Ngũ. Nghiêng về chưa nên lúc này khi động Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: gắn bó ắt có chỗ tích, nên sau Tỷ là Tiểu Súc. Vật tích được rồi thì phải có lễ, nên sau Tiểu Súc là Lý.",
+     "nguyen_van": "比者比也比必有所畜，故受之以小畜"
+    }
+   ],
+   "y_chinh": [
+    "Tiểu Súc: tích nhỏ, mây dày chưa mưa",
+    "Hỏi việc: tích dần, chưa làm lớn",
+    "Giữ hoà khí với người đang kìm việc"
+   ]
+  },
+  "que-10-ly": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Lý khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Lý khi hỏi một việc nghĩa là bạn đang đi sát người mạnh hơn hoặc việc nhạy cảm, nên giữ lễ và từng bước cẩn trọng. Hình ảnh là đạp lên đuôi hổ mà hổ không cắn. Thuận khi bạn khiêm tốn, đúng phép, không liều."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Lý trong đời thường",
+     "danh_sach": [
+      "Hỏi về làm việc dưới quyền một người sếp khó: giữ chuẩn mực, báo cáo rõ, không đối đầu.",
+      "Hỏi có nên đàm phán giá với khách lớn: được, nếu lời lẽ chừng mực và có số liệu.",
+      "Hỏi chuyện ra mắt gia đình người yêu: lễ phép, chuẩn bị kỹ là đủ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Lý: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Ngũ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Lý là quẻ tốt hay xấu?",
+     "dap": "Lý là quẻ hanh thông nếu giữ lễ. Hào thứ ba cảnh báo người mắt kém tưởng mình thấy rõ, chân què tưởng đi được, đạp đuôi hổ thì bị cắn, tức tự tin quá sức mình."
+    },
+    {
+     "hoi": "Gieo quẻ Lý mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Lý, lời hào nghiêng về có khi động Sơ Cửu, Thượng Cửu. Nghiêng về chưa nên lúc này khi động Lục Tam. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật tích rồi phải có lễ, nên sau Tiểu Súc là Lý; Lý là lễ, là bước đi. Đi đúng lễ thì yên, nên sau Lý là Thái.",
+     "nguyen_van": "物畜然後有禮，故受之以履"
+    }
+   ],
+   "y_chinh": [
+    "Lý: đạp đuôi hổ mà hổ không cắn",
+    "Hỏi việc: giữ lễ, từng bước cẩn trọng",
+    "Đừng tự tin quá sức mình"
+   ]
+  },
+  "que-11-thai": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Thái khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Thái khi hỏi một việc nghĩa là thời đang thông, trên dưới hiểu nhau, nên làm. Hình ảnh là trời đất giao hoà, nhỏ đi lớn đến. Nhưng hào thứ ba nhắc không có bằng nào mà không dốc, nên lúc thuận vẫn lo phần dự phòng."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Thái trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên khai trương tháng này: Thái nghiêng về có, kèm việc giữ quan hệ tốt với người làm cùng.",
+      "Hỏi về hợp tác hai bên: thời hai bên dễ hiểu nhau, nên ký thoả thuận khi còn thuận.",
+      "Hỏi chuyện gia đình: dịp tốt để nói những điều lâu nay khó nói."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Thái: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Nhị",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Thái là quẻ tốt hay xấu?",
+     "dap": "Thái là một trong các quẻ tốt nhất về thời. Hào trên cùng nhắc thành đổ xuống hào, tức thịnh cực thì chuyển, nên đừng tưởng thuận mãi."
+    },
+    {
+     "hoi": "Gieo quẻ Thái mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Thái, lời hào nghiêng về có khi động Sơ Cửu, Cửu Nhị, Lục Tứ, Lục Ngũ. Nghiêng về chưa nên lúc này khi động Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: đi đúng lễ rồi được yên, nên sau Lý là Thái; Thái là thông. Nhưng vật không thể thông mãi, nên sau Thái là Bĩ.",
+     "nguyen_van": "履而泰然後安，故受之以泰"
+    }
+   ],
+   "y_chinh": [
+    "Thái: trời đất giao hoà, thời đang thông",
+    "Hỏi việc: nên làm, giữ quan hệ trên dưới",
+    "Lúc thuận vẫn lo phần dự phòng"
+   ]
+  },
+  "que-12-bi": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Bĩ khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Bĩ khi hỏi một việc nghĩa là đường thông đang tắc, người trên kẻ dưới chưa hiểu nhau. Lời quẻ khuyên kiệm đức, tránh nạn, không mưu danh lợi lúc này. Giữ mình, làm chắc từng việc nhỏ, chờ thời đổi."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Bĩ trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên xin chuyển phòng ban khi sếp mới chưa hiểu mình: giữ việc tốt, chờ thời gian chứng minh.",
+      "Hỏi có nên chi lớn cho quảng cáo khi thị trường chậm: Bĩ nghiêng về giữ tiền mặt.",
+      "Hỏi chuyện hai người lạnh nhạt: bớt tranh luận, giữ những việc nhỏ quan tâm nhau."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Bĩ: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Bĩ là quẻ tốt hay xấu?",
+     "dap": "Bĩ là quẻ bế tắc nhưng không kéo dài mãi. Hào thứ năm nói tạm dừng cái bĩ, hào trên cùng nói bĩ đổ, trước bĩ sau mừng. Đây là quẻ của lúc phải kiên nhẫn."
+    },
+    {
+     "hoi": "Gieo quẻ Bĩ mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Bĩ, lời hào nghiêng về có khi động Cửu Tứ, Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể thông mãi, nên sau Thái là Bĩ. Vật không thể bĩ mãi, nên sau Bĩ là Đồng Nhân, lúc người ta cùng nhau.",
+     "nguyen_van": "泰者通也物不可以終通，故受之以否"
+    }
+   ],
+   "y_chinh": [
+    "Bĩ: trên dưới không thông, đường đang tắc",
+    "Hỏi việc: giữ mình, làm việc nhỏ chắc",
+    "Bĩ không kéo dài, trước bĩ sau mừng"
+   ]
+  },
+  "que-13-dong-nhan": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Đồng Nhân khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Đồng Nhân khi hỏi một việc nghĩa là nên làm cùng người khác, cởi mở và công tâm. Lời quẻ nói hoà đồng nơi đồng rộng thì hanh thông. Thuận khi mục tiêu chung rõ ràng; kéo bè với người thân quen thì hẹp đường."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Đồng Nhân trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên lập nhóm khởi nghiệp với bạn cũ: được nếu chọn người theo năng lực, đừng chọn vì thân.",
+      "Hỏi về một cộng đồng mình muốn tham gia: Đồng Nhân nghiêng về có, đóng góp công khai.",
+      "Hỏi chuyện hiểu lầm với đồng nghiệp: nói chuyện thẳng, ở chỗ chung, không nói sau lưng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Đồng Nhân: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Nhị",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Đồng Nhân là quẻ tốt hay xấu?",
+     "dap": "Đồng Nhân là quẻ tốt cho hợp tác. Hào thứ hai nói hoà với người cùng họ thì hẹp. Hào thứ năm nói trước khóc sau cười, tức cùng nhau thì có lúc khó trước khi hợp."
+    },
+    {
+     "hoi": "Gieo quẻ Đồng Nhân mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Đồng Nhân, lời hào nghiêng về có khi động Sơ Cửu, Cửu Tứ, Cửu Ngũ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không bĩ mãi, nên sau Bĩ là Đồng Nhân. Cùng người thì vật ắt quy về, nên sau Đồng Nhân là Đại Hữu.",
+     "nguyen_van": "物不可以終否，故受之以同人"
+    }
+   ],
+   "y_chinh": [
+    "Đồng Nhân: làm cùng người, công tâm, cởi mở",
+    "Hỏi việc: chọn người theo năng lực, không theo phe",
+    "Hợp tác có lúc khó trước khi thuận"
+   ]
+  },
+  "que-14-dai-huu": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Đại Hữu khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Đại Hữu khi hỏi một việc nghĩa là bạn đang có nhiều trong tay: nguồn lực, người giúp, cơ hội. Lời quẻ nói rất hanh thông. Việc của lúc này là dùng cái có cho đúng, ngăn điều xấu, nâng điều tốt, không khoe."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Đại Hữu trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên mở thêm chi nhánh khi đang lãi: được, nhưng chọn người quản lý ngay thẳng.",
+      "Hỏi nên làm gì với khoản tiền mới có: Đại Hữu nghiêng về phân bổ có kế hoạch, chia một phần cho việc giúp người.",
+      "Hỏi chuyện được nhiều người theo đuổi: chọn theo giá trị, không theo cái lợi trước mắt."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Đại Hữu: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tứ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Đại Hữu là quẻ tốt hay xấu?",
+     "dap": "Đại Hữu là quẻ thịnh. Hào thứ ba dặn của lớn dành cho việc chung, kẻ nhỏ không dùng được. Hào thứ tư nói không quá đầy thì không lỗi, tức có nhiều mà biết bớt."
+    },
+    {
+     "hoi": "Gieo quẻ Đại Hữu mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Đại Hữu, lời hào nghiêng về có khi động Sơ Cửu, Cửu Nhị, Lục Ngũ, Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: cùng người thì vật quy về, nên sau Đồng Nhân là Đại Hữu. Có lớn thì không nên đầy tràn, nên sau Đại Hữu là Khiêm.",
+     "nguyen_van": "與人同者物必歸焉，故受之以大有"
+    }
+   ],
+   "y_chinh": [
+    "Đại Hữu: có nhiều trong tay, rất hanh thông",
+    "Hỏi việc: dùng của cho đúng, không khoe",
+    "Có nhiều mà biết bớt thì bền"
+   ]
+  },
+  "que-15-khiem": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Khiêm khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Khiêm khi hỏi một việc nghĩa là cách đi khiêm tốn sẽ đưa việc tới đích. Lời quẻ nói người quân tử có kết quả tốt. Khiêm ở đây không phải tự hạ mình, mà là không khoe, bớt chỗ dư bù chỗ thiếu, để người khác thấy mình đáng tin."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Khiêm trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên nhận khen thưởng trước nhóm: nhận, và nói rõ công của từng người.",
+      "Hỏi về cách thương lượng khi mình đang ở thế mạnh: giữ lời nói mềm, phần lợi vẫn được.",
+      "Hỏi chuyện mới về làm dâu, làm rể: lắng nghe trước, góp ý sau."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Khiêm: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Khiêm là quẻ tốt hay xấu?",
+     "dap": "Khiêm là quẻ duy nhất mà sáu hào đều không có chữ xấu. Các hào đều tốt hoặc không lỗi. Đây là quẻ cho thấy thái độ quyết định kết quả."
+    },
+    {
+     "hoi": "Gieo quẻ Khiêm mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Khiêm, lời hào nghiêng về có khi động Sơ Lục, Cửu Tam, Lục Tứ, Lục Ngũ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: có lớn thì không thể đầy, nên sau Đại Hữu là Khiêm. Có lớn mà biết khiêm thì ắt vui, nên sau Khiêm là Dự.",
+     "nguyen_van": "有大者不可以盈，故受之以謙"
+    }
+   ],
+   "y_chinh": [
+    "Khiêm: khiêm tốn thì việc tới đích",
+    "Sáu hào không có chữ xấu",
+    "Hỏi việc: không khoe, bớt dư bù thiếu"
+   ]
+  },
+  "que-16-du": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Dự khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Dự khi hỏi một việc nghĩa là không khí đang hứng khởi, mọi người sẵn sàng, hợp để phát động việc. Lời quẻ nói lợi dựng người dẫn, lợi ra quân. Điều cần canh là vui quá thì lơ là, nên giữ người tỉnh táo trong nhóm."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Dự trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên ra mắt sản phẩm trong đợt sự kiện: Dự nghiêng về có, chuẩn bị kỹ khâu sau bán hàng.",
+      "Hỏi về tổ chức tiệc cưới, tân gia: thời vui, nên làm, nhưng giữ ngân sách.",
+      "Hỏi chuyện mải vui bỏ việc: hào đầu và hào ba nhắc vui khoe ra hoặc ngó lên trông chờ thì có hối."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Dự: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Dự là quẻ tốt hay xấu?",
+     "dap": "Dự là quẻ thuận về thời và lòng người. Hào thứ hai khen người vững như đá, biết dừng trước khi hết ngày. Hào trên cùng nói vui mê muội, biết đổi thì không lỗi."
+    },
+    {
+     "hoi": "Gieo quẻ Dự mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Dự, lời hào nghiêng về có khi động Cửu Tứ. Nghiêng về chưa nên lúc này khi động Sơ Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: có lớn mà khiêm thì ắt vui, nên sau Khiêm là Dự. Vui thì ắt có người theo, nên sau Dự là Tùy.",
+     "nguyen_van": "有大而能謙必豫，故受之以豫"
+    }
+   ],
+   "y_chinh": [
+    "Dự: hứng khởi, hợp phát động việc",
+    "Hỏi việc: làm khi lòng người đang sẵn",
+    "Vui quá dễ lơ là, giữ người tỉnh táo"
+   ]
+  },
+  "que-17-tuy": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tùy khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tùy khi hỏi một việc nghĩa là nên linh hoạt theo thời, theo người đúng, thay vì giữ ý riêng. Lời quẻ nói nguyên hanh lợi trinh, không lỗi, tức theo mà vẫn giữ chính. Điều cần xét là mình đang theo vì tin hay vì tiện."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tùy trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên theo sếp cũ sang công ty mới: được nếu bạn tin cách làm của người đó, đừng chỉ vì lương.",
+      "Hỏi về đổi cách kinh doanh theo thị trường: Tùy nghiêng về có, đổi từng phần và giữ khách cũ.",
+      "Hỏi chuyện chiều theo ý gia đình trong việc lớn: nghe kỹ, nhưng điều trái lòng thì nói rõ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tùy: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Nhị",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tam",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Việc đã tới cuối",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tùy là quẻ tốt hay xấu?",
+     "dap": "Tùy là quẻ thuận nếu theo điều chính đáng. Hào thứ hai nói theo đứa trẻ mà mất người trưởng thành, tức chọn sai người để theo thì mất phần lớn."
+    },
+    {
+     "hoi": "Gieo quẻ Tùy mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tùy, lời hào nghiêng về có khi động Cửu Ngũ. Nghiêng về chưa nên lúc này khi động Cửu Tứ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vui thì ắt có người theo, nên sau Dự là Tùy. Theo người vì vui thì ắt sinh việc, nên sau Tùy là Cổ, quẻ của việc đã hư cần sửa.",
+     "nguyen_van": "豫必有隨，故受之以隨"
+    }
+   ],
+   "y_chinh": [
+    "Tùy: theo thời, theo người đúng",
+    "Hỏi việc: theo mà vẫn giữ chính",
+    "Xét mình theo vì tin hay vì tiện"
+   ]
+  },
+  "que-18-co": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Cổ khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Cổ khi hỏi một việc nghĩa là có việc cũ đã hư, cần sửa tận gốc chứ không vá tạm. Lời quẻ nói rất hanh thông, lợi vượt sông lớn, và dặn xét ba ngày trước, ba ngày sau. Tức tìm nguyên nhân trước, tính hệ quả sau, rồi mới bắt tay."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Cổ trong đời thường",
+     "danh_sach": [
+      "Hỏi về tiếp quản một bộ phận đang trì trệ: Cổ nghiêng về làm, bắt đầu từ việc tìm vì sao hỏng.",
+      "Hỏi có nên sửa lại căn nhà cũ của bố mẹ: được, lên kế hoạch kỹ phần kết cấu trước phần trang trí.",
+      "Hỏi chuyện một thói quen xấu kéo dài: sửa từ gốc, đặt mốc kiểm tra lại sau một tuần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Cổ: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Việc đã tới cuối",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Cổ là quẻ tốt hay xấu?",
+     "dap": "Cổ không phải quẻ xấu dù nói về việc hư; lời quẻ có nguyên hanh. Đây là quẻ của trách nhiệm sửa sai. Hào trên cùng nói không thờ vương hầu, giữ chí cao, tức biết lúc rút khỏi việc đã sửa xong."
+    },
+    {
+     "hoi": "Gieo quẻ Cổ mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Cổ, lời hào nghiêng về có khi động Lục Ngũ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: theo người vì vui thì ắt có việc, nên sau Tùy là Cổ; Cổ là việc. Có việc rồi mới lớn được, nên sau Cổ là Lâm.",
+     "nguyen_van": "以喜隨人者必有事，故受之以蠱"
+    }
+   ],
+   "y_chinh": [
+    "Cổ: việc cũ đã hư, sửa tận gốc",
+    "Xét ba ngày trước, ba ngày sau rồi mới làm",
+    "Quẻ của trách nhiệm sửa sai, không phải quẻ xấu"
+   ]
+  },
+  "que-19-lam": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Lâm khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Lâm khi hỏi một việc nghĩa là việc đang lớn dần, bạn có cơ hội tiến tới và đứng ra lo liệu. Lời quẻ nói rất hanh thông, nhưng đến tháng tám có hung. Tức thịnh đang lên thì làm, và tính trước lúc chu kỳ đi xuống."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Lâm trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên nhận làm trưởng nhóm: Lâm nghiêng về có, gần gũi người dưới, lắng nghe trước khi ra lệnh.",
+      "Hỏi về kinh doanh mùa cao điểm: làm mạnh, đồng thời để dành cho mùa thấp điểm.",
+      "Hỏi chuyện một mối quan hệ đang tiến triển: tiến tới, nói rõ dự định chung."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Lâm: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Lâm là quẻ tốt hay xấu?",
+     "dap": "Lâm là quẻ tốt về đà. Hào thứ ba nói lâm bằng lời ngọt thì không có lợi, tức dùng lời dễ nghe thay việc thật. Biết lo trước thì không lỗi."
+    },
+    {
+     "hoi": "Gieo quẻ Lâm mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Lâm, lời hào nghiêng về có khi động Cửu Nhị, Lục Tứ, Lục Ngũ, Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: có việc rồi mới lớn, nên sau Cổ là Lâm; Lâm là lớn. Vật lớn rồi thì đáng xem, nên sau Lâm là Quan.",
+     "nguyen_van": "蠱者事也有事而後可大，故受之以臨"
+    }
+   ],
+   "y_chinh": [
+    "Lâm: việc đang lớn dần, nên tiến tới",
+    "Hỏi việc: làm lúc thịnh, tính trước lúc xuống",
+    "Đừng thay việc thật bằng lời ngọt"
+   ]
+  },
+  "que-20-quan": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Quan khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Quan khi hỏi một việc nghĩa là nên quan sát kỹ trước khi làm, và để ý mình đang là tấm gương cho người khác nhìn vào. Lời quẻ nói rửa tay mà chưa dâng lễ, lòng thành nghiêm trang. Lúc này xem nhiều hơn làm."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Quan trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên nhảy việc ngay: Quan khuyên tìm hiểu kỹ công ty mới, hỏi người từng làm ở đó.",
+      "Hỏi về cách dạy con: làm gương bằng việc mình làm hằng ngày, trẻ nhìn và học.",
+      "Hỏi có nên đầu tư theo phong trào: đứng ngoài xem thêm một thời gian."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Quan: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Quan là quẻ tốt hay xấu?",
+     "dap": "Quan là quẻ trung tính, nghiêng về chuẩn bị. Hào đầu nói xem như trẻ con, người lớn thì đáng thẹn, tức nhìn hời hợt. Hào thứ ba nói xem chính đời mình để biết tiến lùi."
+    },
+    {
+     "hoi": "Gieo quẻ Quan mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Quan, lời hào nghiêng về có khi động Lục Tứ, Cửu Ngũ, Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật lớn rồi thì đáng xem, nên sau Lâm là Quan. Đáng xem rồi thì có chỗ hợp, nên sau Quan là Phệ Hạp.",
+     "nguyen_van": "臨者大也物大然後可觀，故受之以觀"
+    }
+   ],
+   "y_chinh": [
+    "Quan: quan sát kỹ trước khi làm",
+    "Hỏi việc: xem nhiều hơn làm lúc này",
+    "Mình đang là tấm gương người khác nhìn"
+   ]
+  },
+  "que-21-phe-hap": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Phệ Hạp khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Phệ Hạp khi hỏi một việc nghĩa là có một vật cản cụ thể phải xử lý dứt khoát thì việc mới khớp. Hình ảnh là miệng có vật chắn giữa, phải cắn vỡ. Lời quẻ nói lợi dùng hình ngục, tức làm rõ luật lệ, phân xử công bằng."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Phệ Hạp trong đời thường",
+     "danh_sach": [
+      "Hỏi về một nhân viên làm sai nhiều lần: Phệ Hạp nghiêng về xử lý theo quy định đã thông báo.",
+      "Hỏi có nên đòi khoản nợ đã lâu: nói thẳng, có giấy tờ, đặt hạn trả rõ.",
+      "Hỏi chuyện hiểu lầm kéo dài giữa hai nhà: gặp nhau nói rõ điểm vướng, đừng để âm ỉ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Phệ Hạp: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Ngũ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Phệ Hạp là quẻ tốt hay xấu?",
+     "dap": "Phệ Hạp là quẻ hanh thông khi dám xử lý. Hào trên cùng nói đeo gông che tai, tức người không chịu nghe thì việc tới mức không gỡ được. Xử sớm khi vật cản còn nhỏ."
+    },
+    {
+     "hoi": "Gieo quẻ Phệ Hạp mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Phệ Hạp, lời hào nghiêng về có khi động Lục Nhị. Nghiêng về chưa nên lúc này khi động Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: đáng xem rồi thì có chỗ hợp, nên sau Quan là Phệ Hạp; Phệ Hạp là hợp. Vật không thể hợp cẩu thả, nên sau Phệ Hạp là Bí, quẻ của trang sức.",
+     "nguyen_van": "可觀而後有所合，故受之以噬嗑"
+    }
+   ],
+   "y_chinh": [
+    "Phệ Hạp: có vật cản phải cắn vỡ",
+    "Hỏi việc: xử lý dứt khoát, rõ luật lệ",
+    "Xử sớm khi vật cản còn nhỏ"
+   ]
+  },
+  "que-22-bi": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Bí khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Bí khi hỏi một việc nghĩa là phần trình bày, hình thức đang được chú ý, hợp với việc nhỏ. Lời quẻ nói hanh thông, lợi có chỗ đi việc nhỏ. Làm đẹp được, nhưng đừng để vẻ ngoài lấn phần thực chất."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Bí trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên làm lại nhận diện thương hiệu: được, nếu sản phẩm bên trong đã ổn.",
+      "Hỏi về buổi gặp mặt quan trọng: chuẩn bị chỉn chu, nhưng nói thật về mình.",
+      "Hỏi có nên chi nhiều cho đám cưới: Bí nghiêng về vừa phải; hào trên cùng khen sự mộc mạc."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Bí: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Nhị",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Bí là quẻ tốt hay xấu?",
+     "dap": "Bí là quẻ tốt nhỏ. Hào trên cùng nói trang sức bằng màu trắng thì không lỗi, tức vẻ đẹp tới cùng là giản dị. Việc lớn không nên trông vào hình thức."
+    },
+    {
+     "hoi": "Gieo quẻ Bí mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Bí, lời hào nghiêng về có khi động Lục Nhị, Lục Tứ, Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể hợp cẩu thả, nên sau Phệ Hạp là Bí; Bí là trang sức. Trang sức tới cùng thì hanh thông cũng hết, nên sau Bí là Bác.",
+     "nguyen_van": "嗑者合也物不可以苟合而已，故受之以賁"
+    }
+   ],
+   "y_chinh": [
+    "Bí: hình thức, trình bày, hợp việc nhỏ",
+    "Đẹp ngoài đừng lấn phần thực chất",
+    "Vẻ đẹp tới cùng là giản dị"
+   ]
+  },
+  "que-23-bac": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Bác khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Bác khi hỏi một việc nghĩa là nền móng đang bị bào mòn từ dưới lên, không nên mở việc mới. Lời quẻ nói không lợi có chỗ đi. Lúc này giữ phần còn lại, củng cố chỗ ở, đợi thời chuyển."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Bác trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên mở thêm cửa hàng khi doanh thu đang giảm: Bác nghiêng về chưa, rà lại chi phí trước.",
+      "Hỏi về một nhóm đang mất người dần: tìm hiểu vì sao người đi, giữ người còn lại.",
+      "Hỏi chuyện tình cảm đang nhạt: đừng ép, chăm những việc nhỏ hằng ngày."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Bác: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Nhị",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Tam",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tứ",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Việc đã tới cuối",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Bác là quẻ tốt hay xấu?",
+     "dap": "Bác là quẻ khó, nhưng hào trên cùng có hình ảnh quả lớn không bị ăn, người quân tử được xe. Tức bào mòn tới cùng thì cái tốt còn lại sẽ là hạt giống cho lần sau, như quẻ Phục đứng tiếp ngay sau."
+    },
+    {
+     "hoi": "Gieo quẻ Bác mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Bác, lời hào nghiêng về có khi động Lục Ngũ. Nghiêng về chưa nên lúc này khi động Sơ Lục, Lục Nhị, Lục Tứ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: trang sức tới cùng thì hanh thông hết, nên sau Bí là Bác; Bác là bóc mòn. Vật không thể mòn hết, mòn ở trên thì trở lại ở dưới, nên sau Bác là Phục.",
+     "nguyen_van": "賁者飾也致飾然後亨則盡矣，故受之以剝"
+    }
+   ],
+   "y_chinh": [
+    "Bác: nền móng đang bị bào mòn",
+    "Hỏi việc: chưa mở việc mới, giữ phần còn lại",
+    "Mòn tới cùng thì có lúc trở lại"
+   ]
+  },
+  "que-24-phuc": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Phục khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Phục khi hỏi một việc nghĩa là có dấu hiệu trở lại, phục hồi sau giai đoạn đi xuống. Hình ảnh là một hào dương sinh lại dưới năm hào âm. Lời quẻ nói qua lại không lỗi, bảy ngày trở lại; bắt đầu lại từ việc nhỏ."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Phục trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên quay lại nghề cũ: Phục nghiêng về có, bắt đầu nhẹ, đừng đòi ngay vị trí cũ.",
+      "Hỏi về hàn gắn với người từng xa cách: một bước nhỏ trước, như một tin nhắn hỏi thăm.",
+      "Hỏi về lấy lại nhịp sinh hoạt: đặt lại giờ ngủ trong bảy ngày rồi xem."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Phục: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Phục là quẻ tốt hay xấu?",
+     "dap": "Phục là quẻ tốt cho khởi đầu lại. Hào đầu nói đi chưa xa đã trở lại, rất tốt. Hào trên cùng nói lạc đường trở lại thì xấu, tức để quá lâu mới quay về thì khó."
+    },
+    {
+     "hoi": "Gieo quẻ Phục mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Phục, lời hào nghiêng về có khi động Sơ Cửu, Lục Nhị. Nghiêng về chưa nên lúc này khi động Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể mòn hết, mòn ở trên thì trở lại ở dưới, nên sau Bác là Phục. Trở lại thì không càn bậy, nên sau Phục là Vô Vọng.",
+     "nguyen_van": "剝者剝也物不可以終盡剝窮上反下，故受之以復"
+    }
+   ],
+   "y_chinh": [
+    "Phục: dấu hiệu trở lại sau lúc đi xuống",
+    "Hỏi việc: bắt đầu lại từ bước nhỏ",
+    "Quay lại sớm thì dễ, để lâu thì khó"
+   ]
+  },
+  "que-25-vo-vong": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Vô Vọng khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Vô Vọng khi hỏi một việc nghĩa là làm thật, đúng lẽ thì thuận, còn mưu tính quá nhiều hoặc làm trái lẽ thì vướng. Lời quẻ nói nguyên hanh lợi trinh, nhưng không chính thì có tai, không lợi có chỗ đi. Giữ thật thà là cách đi tốt nhất."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Vô Vọng trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên khai thấp thuế cho nhẹ: Vô Vọng nghiêng về không, làm đúng quy định; hỏi kế toán, luật sư khi cần.",
+      "Hỏi về một cơ hội đến bất ngờ: nhận nếu không phải làm điều trái lòng.",
+      "Hỏi chuyện tỏ tình: nói thật cảm xúc, không bày kế để người kia phải đáp."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Vô Vọng: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Vô Vọng là quẻ tốt hay xấu?",
+     "dap": "Vô Vọng là quẻ tốt cho người làm thật. Hào thứ ba nói tai không do mình gây ra, như con bò buộc bị người qua đường dắt mất; có việc không lường được, nên giữ bình tĩnh và làm đúng."
+    },
+    {
+     "hoi": "Gieo quẻ Vô Vọng mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Vô Vọng, lời hào nghiêng về có khi động Sơ Cửu, Lục Nhị. Nghiêng về chưa nên lúc này khi động Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: trở lại thì không càn bậy, nên sau Phục là Vô Vọng. Có cái không càn bậy rồi thì tích được lớn, nên sau Vô Vọng là Đại Súc.",
+     "nguyen_van": "復則不妄矣，故受之以无妄"
+    }
+   ],
+   "y_chinh": [
+    "Vô Vọng: làm thật, đúng lẽ thì thuận",
+    "Hỏi việc: đừng mưu tính trái lòng",
+    "Có việc không lường được, giữ bình tĩnh"
+   ]
+  },
+  "que-26-dai-suc": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Đại Súc khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Đại Súc khi hỏi một việc nghĩa là đang có sức tích lớn, nên học thêm, nuôi người giỏi, chuẩn bị cho việc lớn. Lời quẻ nói lợi giữ chính, không ăn ở nhà thì tốt, lợi vượt sông lớn. Tức đem cái đã tích ra làm việc chung."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Đại Súc trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên đi học thêm bằng cấp: Đại Súc nghiêng về có, chọn môn dùng được lâu dài.",
+      "Hỏi về tuyển người giỏi dù lương cao: được, nếu có việc đủ lớn cho họ làm.",
+      "Hỏi có nên nhận dự án lớn ở xa nhà: được, chuẩn bị kỹ trước khi đi."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Đại Súc: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Nhị",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tam",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Đại Súc là quẻ tốt hay xấu?",
+     "dap": "Đại Súc là quẻ tốt. Hai hào đầu nói nên dừng, có nguy thì thôi, tức lúc mới tích thì chưa vội. Hào trên cùng nói đường trời thông suốt, tích đủ rồi thì việc thông."
+    },
+    {
+     "hoi": "Gieo quẻ Đại Súc mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Đại Súc, lời hào nghiêng về có khi động Cửu Tam, Lục Tứ, Lục Ngũ, Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: có cái không càn bậy thì tích được lớn, nên sau Vô Vọng là Đại Súc. Vật tích rồi thì có thể nuôi, nên sau Đại Súc là Di.",
+     "nguyen_van": "有无妄然後可畜，故受之以大畜"
+    }
+   ],
+   "y_chinh": [
+    "Đại Súc: tích lớn, chuẩn bị việc lớn",
+    "Hỏi việc: học thêm, nuôi người giỏi",
+    "Mới tích thì chưa vội, đủ rồi thì thông"
+   ]
+  },
+  "que-27-di": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Di khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Di khi hỏi một việc nghĩa là hãy xem mình đang nuôi gì và tự nuôi mình ra sao: lời nói, ăn uống, người mình chăm lo. Lời quẻ nói giữ chính thì tốt, xem cách nuôi và tự tìm cái ăn. Việc thuận khi nguồn nuôi là chính đáng."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Di trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên nhận một khoản thu nhập dễ dàng nhưng mập mờ: Di nghiêng về không.",
+      "Hỏi về chăm sóc bố mẹ già: chia việc với anh chị em, giữ nhịp đều thay vì làm dồn.",
+      "Hỏi chuyện lời ăn tiếng nói trong công việc: bớt hứa, nói ít mà làm đúng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Di: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Nhị",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Di là quẻ tốt hay xấu?",
+     "dap": "Di là quẻ trung tính, tốt khi nguồn nuôi chính đáng. Hào đầu nói bỏ rùa thiêng của mình mà nhìn người ta ăn, tức bỏ cái mình có để thèm của người, thì xấu."
+    },
+    {
+     "hoi": "Gieo quẻ Di mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Di, lời hào nghiêng về có khi động Lục Tứ. Nghiêng về chưa nên lúc này khi động Sơ Cửu, Lục Nhị, Lục Tam. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật tích rồi thì nuôi được, nên sau Đại Súc là Di; Di là nuôi. Không nuôi thì không động được, nên sau Di là Đại Quá.",
+     "nguyen_van": "物畜然後可養，故受之以頤"
+    }
+   ],
+   "y_chinh": [
+    "Di: xem mình nuôi gì và tự nuôi thế nào",
+    "Hỏi việc: nguồn nuôi phải chính đáng",
+    "Cẩn trọng lời nói, tiết độ ăn uống"
+   ]
+  },
+  "que-28-dai-qua": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Đại Quá khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Đại Quá khi hỏi một việc nghĩa là gánh nặng đang vượt sức chịu, như cây cột cong ở giữa, phải hành động. Lời quẻ nói lợi có chỗ đi, hanh thông. Đừng đứng chờ; tìm chỗ đỡ thêm, san bớt tải, đổi cấu trúc."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Đại Quá trong đời thường",
+     "danh_sach": [
+      "Hỏi về khối việc quá tải: Đại Quá nghiêng về đổi cách làm ngay, nói với cấp trên để chia việc.",
+      "Hỏi có nên vay thêm để cứu dự án: xét lại cấu trúc nợ trước khi vay.",
+      "Hỏi chuyện một người gánh hết việc nhà: phân lại việc, đừng để một người kiệt sức."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Đại Quá: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Đại Quá là quẻ tốt hay xấu?",
+     "dap": "Đại Quá là quẻ áp lực nhưng có lối ra. Hào thứ hai nói cây dương khô ra rễ non, ông già lấy được vợ trẻ, không gì không lợi, tức có cách làm mới từ chỗ cũ."
+    },
+    {
+     "hoi": "Gieo quẻ Đại Quá mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Đại Quá, lời hào nghiêng về có khi động Sơ Lục, Cửu Nhị. Nghiêng về chưa nên lúc này khi động Cửu Tam, Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: không nuôi thì không động được, nên sau Di là Đại Quá. Vật không thể quá mãi, nên sau Đại Quá là Khảm, quẻ của chỗ hiểm.",
+     "nguyen_van": "頤者養也不養則不可動，故受之以大過"
+    }
+   ],
+   "y_chinh": [
+    "Đại Quá: gánh nặng vượt sức chịu",
+    "Hỏi việc: hành động ngay, san bớt tải",
+    "Có lối ra nếu đổi cách làm"
+   ]
+  },
+  "que-29-kham": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Khảm khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Khảm khi hỏi một việc nghĩa là đang ở giữa chỗ hiểm, khó chồng lên khó, nên giữ lòng thành và đi từng bước. Hình ảnh là nước chảy qua chỗ trũng mà không mất tín. Lời quẻ nói có lòng thành thì tâm hanh, làm thì được khen."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Khảm trong đời thường",
+     "danh_sach": [
+      "Hỏi về giai đoạn công việc liên tiếp trục trặc: giữ đều đặn, xử lý từng việc một.",
+      "Hỏi có nên ký hợp đồng lớn lúc này: Khảm nghiêng về chưa, đọc kỹ điều khoản và hỏi luật sư.",
+      "Hỏi chuyện nợ nần chồng chất: lập danh sách, trả phần gấp trước, đừng vay chỗ mới để lấp."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Khảm: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Nhị",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Ngũ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Khảm là quẻ tốt hay xấu?",
+     "dap": "Khảm là quẻ hiểm, nhưng không bảo bỏ cuộc. Hào thứ hai nói trong hiểm cầu được chút ít, tức có tiến bộ nhỏ. Hào thứ năm nói nước chưa đầy mà đã bằng, nghĩa là sắp qua."
+    },
+    {
+     "hoi": "Gieo quẻ Khảm mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Khảm, không hào nào nghiêng hẳn về có; các hào thuận nhất vẫn kèm điều kiện phải giữ đúng. Nghiêng về chưa nên lúc này khi động Sơ Lục, Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể quá mãi, nên sau Đại Quá là Khảm; Khảm là hãm. Hãm thì ắt có chỗ bám, nên sau Khảm là Ly, Ly là bám vào.",
+     "nguyen_van": "物不可以終過，故受之以坎"
+    }
+   ],
+   "y_chinh": [
+    "Khảm: giữa chỗ hiểm, khó chồng lên khó",
+    "Hỏi việc: giữ lòng thành, đi từng bước",
+    "Như nước, chảy qua chỗ trũng mà không mất tín"
+   ]
+  },
+  "que-30-ly": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Ly khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Ly khi hỏi một việc nghĩa là việc sáng rõ được khi bạn bám vào đúng chỗ dựa. Hình ảnh là lửa phải nương vào vật mới cháy sáng. Lời quẻ nói lợi giữ chính, hanh thông, nuôi bò cái thì tốt, tức giữ đức thuận và bền."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Ly trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên làm việc tự do: Ly nghiêng về có nếu bạn có khách hàng ổn định để dựa.",
+      "Hỏi về việc trình bày, giảng dạy, truyền thông: thời để mình được thấy rõ.",
+      "Hỏi chuyện tình cảm: gắn bó vì cùng chí hướng thì sáng lâu, vì nóng vội thì chóng tắt."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Ly: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Ngũ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Ly là quẻ tốt hay xấu?",
+     "dap": "Ly là quẻ tốt về sự sáng. Hào thứ tư nói đến đột ngột như lửa đốt rồi tắt, rồi bị bỏ, tức bùng nhanh mà không có chỗ bám thì không giữ được."
+    },
+    {
+     "hoi": "Gieo quẻ Ly mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Ly, lời hào nghiêng về có khi động Sơ Cửu, Lục Nhị, Thượng Cửu. Nghiêng về chưa nên lúc này khi động Cửu Tam, Cửu Tứ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: hãm thì ắt có chỗ bám, nên sau Khảm là Ly; Ly là bám. Thượng Kinh kết ở Khảm và Ly; Hạ Kinh mở bằng Hàm, chuyện người với người.",
+     "nguyen_van": "坎者陷也陷必有所麗，故受之以離"
+    }
+   ],
+   "y_chinh": [
+    "Ly: lửa sáng nhờ nương vào vật",
+    "Hỏi việc: bám đúng chỗ dựa thì sáng rõ",
+    "Bùng nhanh không chỗ bám thì chóng tắt"
+   ]
+  },
+  "que-31-ham": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Hàm khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Hàm khi hỏi một việc nghĩa là việc đi bằng sự cảm nhận lẫn nhau, nhất là chuyện tình cảm. Lời quẻ nói hanh thông, lợi giữ chính, lấy vợ thì tốt. Thuận khi lòng mở ra để đón người, không phải khi ép người theo mình."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Hàm trong đời thường",
+     "danh_sach": [
+      "Hỏi về một người mới gặp mà thấy hợp: Hàm nghiêng về có, để cảm xúc đi chậm và thật.",
+      "Hỏi có nên thuyết phục khách bằng cảm xúc: được, khi bạn thật sự hiểu nhu cầu của họ.",
+      "Hỏi chuyện vợ chồng ít nói chuyện: dành thời gian lắng nghe, đừng chỉ đáp."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Hàm: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Nhị",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Hàm là quẻ tốt hay xấu?",
+     "dap": "Hàm là quẻ tốt cho quan hệ. Các hào đi từ ngón chân tới miệng: cảm ở chỗ nông thì chưa tới đâu; hào trên cùng nói cảm ở má, lưỡi, tức chỉ có lời mà không có lòng."
+    },
+    {
+     "hoi": "Gieo quẻ Hàm mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Hàm, lời hào nghiêng về có khi động Cửu Tứ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: có trời đất rồi có muôn vật, có muôn vật rồi có nam nữ, có nam nữ rồi có vợ chồng. Hàm mở Hạ Kinh vì nói về cảm ứng giữa người với người. Vợ chồng cần bền, nên sau Hàm là Hằng.",
+     "nguyen_van": "有天地然後有萬物有萬物然後有男女有男女然後有夫婦"
+    }
+   ],
+   "y_chinh": [
+    "Hàm: cảm nhận lẫn nhau, hợp chuyện tình cảm",
+    "Hỏi việc: mở lòng đón người, không ép",
+    "Có lời mà không có lòng thì nông"
+   ]
+  },
+  "que-32-hang": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Hằng khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Hằng khi hỏi một việc nghĩa là nên giữ nếp, bền bỉ với hướng đã chọn thay vì đổi liên tục. Lời quẻ nói hanh thông, không lỗi, lợi giữ chính, lợi có chỗ đi. Bền ở đây là bền về đường hướng, còn cách làm vẫn có thể điều chỉnh."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Hằng trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên đổi nghề khi mới làm được một năm: Hằng nghiêng về ở lại thêm cho đủ nền.",
+      "Hỏi về giữ một thói quen tập luyện: đặt lịch cố định, đừng thay lịch theo hứng.",
+      "Hỏi chuyện hôn nhân lâu năm: giữ những nếp nhỏ chung, như bữa cơm, cuộc nói chuyện cuối tuần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Hằng: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Hằng là quẻ tốt hay xấu?",
+     "dap": "Hằng là quẻ tốt về độ bền. Hào đầu nói đòi bền quá sâu ngay từ đầu thì xấu, hào trên cùng nói rung động không yên thì xấu. Tức bền phải có thời gian và không chao đảo."
+    },
+    {
+     "hoi": "Gieo quẻ Hằng mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Hằng, không hào nào nghiêng hẳn về có; các hào thuận nhất vẫn kèm điều kiện phải giữ đúng. Nghiêng về chưa nên lúc này khi động Sơ Lục, Cửu Tứ, Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: đạo vợ chồng không thể không bền, nên sau Hàm là Hằng; Hằng là lâu. Vật không thể ở yên mãi một chỗ, nên sau Hằng là Độn.",
+     "nguyen_van": "夫婦之道不可以不乆也，故受之以恒"
+    }
+   ],
+   "y_chinh": [
+    "Hằng: bền lâu, giữ nếp đã chọn",
+    "Hỏi việc: bền đường hướng, linh hoạt cách làm",
+    "Đòi bền quá sớm hoặc chao đảo đều khó"
+   ]
+  },
+  "que-33-don": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Độn khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Độn khi hỏi một việc nghĩa là nên lui đúng lúc, rút khỏi chỗ đang bất lợi trước khi bị cuốn vào. Lời quẻ nói hanh thông, việc nhỏ lợi giữ chính. Lui ở đây là chủ động giữ mình, không phải bỏ chạy hay thua cuộc."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Độn trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên ở lại công ty đang có tranh giành nội bộ: Độn nghiêng về chuẩn bị đường đi, rời đi êm đẹp.",
+      "Hỏi về một cuộc tranh luận trên mạng: rút ra, không đáp tiếp.",
+      "Hỏi có nên tiếp tục góp vốn vào dự án đang lệch hướng: giữ phần đã góp, dừng góp thêm."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Độn: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Độn là quẻ tốt hay xấu?",
+     "dap": "Độn là quẻ tốt cho người biết lui. Hào thứ năm khen lui một cách tốt đẹp, hào trên cùng nói lui ung dung thì không gì không lợi. Khó nhất là hào đầu: lui ở đuôi, chậm quá thì nguy."
+    },
+    {
+     "hoi": "Gieo quẻ Độn mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Độn, lời hào nghiêng về có khi động Cửu Tứ, Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể ở yên một chỗ mãi, nên sau Hằng là Độn; Độn là lui. Vật không thể lui mãi, nên sau Độn là Đại Tráng.",
+     "nguyen_van": "恒者乆也物不可以乆居其所，故受之以遯"
+    }
+   ],
+   "y_chinh": [
+    "Độn: lui đúng lúc để giữ mình",
+    "Hỏi việc: rút khỏi chỗ bất lợi trước khi bị cuốn",
+    "Lui chủ động, không phải thua cuộc"
+   ]
+  },
+  "que-34-dai-trang": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Đại Tráng khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Đại Tráng khi hỏi một việc nghĩa là bạn đang có sức mạnh, nhưng chính lúc mạnh dễ dùng sức sai chỗ. Lời quẻ chỉ có bốn chữ: lợi giữ chính. Dùng sức đúng lễ, không húc đầu vào rào như con dê đực."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Đại Tráng trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên cạnh tranh giá gắt với đối thủ: Đại Tráng nghiêng về dùng chất lượng thay vì phá giá.",
+      "Hỏi về thăng chức khi đang có thành tích: đề xuất có số liệu, đừng ép người trên.",
+      "Hỏi chuyện tranh cãi trong nhà mà mình có lý: nói lý nhẹ nhàng, đừng dồn người kia."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Đại Tráng: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Đại Tráng là quẻ tốt hay xấu?",
+     "dap": "Đại Tráng là quẻ mạnh, nhưng các hào hay nhắc dê đực húc rào mắc sừng. Hào thứ tư nói rào mở không mắc, tức đi đúng chỗ thì sức mạnh mới có lợi."
+    },
+    {
+     "hoi": "Gieo quẻ Đại Tráng mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Đại Tráng, không hào nào nghiêng hẳn về có; các hào thuận nhất vẫn kèm điều kiện phải giữ đúng. Nghiêng về chưa nên lúc này khi động Sơ Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể lui mãi, nên sau Độn là Đại Tráng. Vật không thể mạnh mãi, nên sau Đại Tráng là Tấn, Tấn là tiến lên.",
+     "nguyen_van": "遯者退也物不可以終遯，故受之以大壯"
+    }
+   ],
+   "y_chinh": [
+    "Đại Tráng: đang mạnh, dễ dùng sức sai chỗ",
+    "Hỏi việc: dùng sức đúng lễ",
+    "Đừng húc đầu vào rào như dê đực"
+   ]
+  },
+  "que-35-tan": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tấn khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tấn khi hỏi một việc nghĩa là đang có đà tiến lên, được người trên ghi nhận, như mặt trời mọc trên mặt đất. Lời quẻ nói bậc hầu được ban nhiều ngựa, một ngày ba lần được tiếp. Tiến, và giữ cái sáng của mình cho thật."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tấn trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên xin tăng lương lúc này: Tấn nghiêng về có, khi kết quả đã rõ.",
+      "Hỏi về mở rộng thị trường: tiến, kèm việc tạo uy tín với từng khách hàng.",
+      "Hỏi chuyện ra mắt gia đình hai bên: thời thuận để tiến thêm một bước."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tấn: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tứ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tấn là quẻ tốt hay xấu?",
+     "dap": "Tấn là quẻ tốt cho thăng tiến. Hào thứ tư nói tiến như chuột đồng, giữ thì nguy, tức tham ôm nhiều thứ mà không giỏi thứ nào. Tiến bằng thực lực thì bền."
+    },
+    {
+     "hoi": "Gieo quẻ Tấn mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tấn, lời hào nghiêng về có khi động Lục Tam, Lục Ngũ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể mạnh mãi, nên sau Đại Tráng là Tấn; Tấn là tiến. Tiến thì ắt có chỗ bị tổn thương, nên sau Tấn là Minh Di.",
+     "nguyen_van": "物不可以終壯，故受之以晉"
+    }
+   ],
+   "y_chinh": [
+    "Tấn: tiến lên như mặt trời mọc",
+    "Hỏi việc: thời được ghi nhận, nên tiến",
+    "Tiến bằng thực lực, đừng ôm đồm"
+   ]
+  },
+  "que-36-minh-di": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Minh Di khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Minh Di khi hỏi một việc nghĩa là thời đang u ám, cái sáng của bạn bị che hoặc không được hiểu. Lời quẻ nói lợi giữ chính trong gian nan. Cách đi là giữ cái sáng ở bên trong, bề ngoài nhún nhường, chờ qua giai đoạn này."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Minh Di trong đời thường",
+     "danh_sach": [
+      "Hỏi về một người sếp không công nhận mình: làm tốt, ghi lại kết quả, chưa đối đầu.",
+      "Hỏi có nên nói hết ý kiến trong cuộc họp căng thẳng: Minh Di nghiêng về nói phần cần nói, giữ phần còn lại.",
+      "Hỏi chuyện bị hiểu lầm trong gia đình: kiên nhẫn, để việc làm nói thay lời."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Minh Di: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Nhị",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tứ",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Minh Di là quẻ tốt hay xấu?",
+     "dap": "Minh Di là quẻ khó về thời. Nhưng hào thứ năm nhắc Cơ Tử giữ được cái sáng giữa thời tối, và hào trên cùng nói kẻ che sáng trước lên trời sau rơi xuống đất, tức tối không kéo dài."
+    },
+    {
+     "hoi": "Gieo quẻ Minh Di mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Minh Di, lời hào nghiêng về có khi động Lục Nhị. Nghiêng về chưa nên lúc này khi động Sơ Cửu, Lục Tứ, Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: tiến thì ắt có chỗ tổn thương, nên sau Tấn là Minh Di; Di là tổn thương. Bị thương ở ngoài thì ắt trở về nhà, nên sau Minh Di là Gia Nhân.",
+     "nguyen_van": "晉者進也進必有所傷，故受之以明夷"
+    }
+   ],
+   "y_chinh": [
+    "Minh Di: ánh sáng bị che, thời u ám",
+    "Hỏi việc: giữ cái sáng bên trong, ngoài nhún",
+    "Thời tối không kéo dài"
+   ]
+  },
+  "que-37-gia-nhan": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Gia Nhân khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Gia Nhân khi hỏi một việc nghĩa là việc nhà và nếp nhà là trọng tâm: vai trò rõ, lời nói có thực, việc làm có nếp. Lời quẻ nói lợi cho nữ giữ chính. Nhóm làm việc cũng đọc như một nhà, cần luật nhỏ mà mọi người cùng giữ."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Gia Nhân trong đời thường",
+     "danh_sach": [
+      "Hỏi về chia việc nhà giữa vợ chồng: Gia Nhân nghiêng về nói rõ ai lo phần nào.",
+      "Hỏi có nên làm ăn với người trong họ: được nếu có thoả thuận rõ như với người ngoài.",
+      "Hỏi về một nhóm nhỏ hay bất đồng: đặt vài quy ước chung trước khi làm tiếp."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Gia Nhân: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Gia Nhân là quẻ tốt hay xấu?",
+     "dap": "Gia Nhân là quẻ tốt cho gia đạo. Hào thứ ba nói nhà quá nghiêm có hối mà tốt, vợ con cười đùa buông thả thì rốt cuộc đáng thẹn, tức nghiêm có mức vẫn hơn buông lỏng."
+    },
+    {
+     "hoi": "Gieo quẻ Gia Nhân mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Gia Nhân, lời hào nghiêng về có khi động Lục Tứ, Cửu Ngũ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: bị thương ở ngoài thì trở về nhà, nên sau Minh Di là Gia Nhân. Đạo nhà tới cùng thì ắt có chỗ chia lìa, nên sau Gia Nhân là Khuê.",
+     "nguyen_van": "夷者傷也傷於外者必反其家，故受之以家人"
+    }
+   ],
+   "y_chinh": [
+    "Gia Nhân: nếp nhà, vai trò rõ",
+    "Hỏi việc: đặt quy ước chung nhỏ",
+    "Nghiêm có mức hơn buông lỏng"
+   ]
+  },
+  "que-38-khue": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Khuê khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Khuê khi hỏi một việc nghĩa là hai bên đang khác ý, khác hướng, nên làm việc nhỏ cùng nhau trước. Lời quẻ nói việc nhỏ tốt. Khác biệt không phải lúc nào cũng xấu; tìm điểm chung nhỏ để làm, phần lớn để sau."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Khuê trong đời thường",
+     "danh_sach": [
+      "Hỏi về đồng nghiệp luôn trái ý: Khuê nghiêng về hợp tác ở một việc nhỏ có mục tiêu rõ.",
+      "Hỏi có nên ký hợp đồng lớn với đối tác đang bất đồng: chưa, làm thử phần nhỏ trước.",
+      "Hỏi chuyện anh em không hợp: gặp nhau ở việc chung của bố mẹ, tránh chuyện riêng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Khuê: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Khuê là quẻ tốt hay xấu?",
+     "dap": "Khuê là quẻ khác biệt nhưng có lối hoà. Hào trên cùng nói thấy con lợn đội bùn, xe chở đầy ma, giương cung rồi buông, không phải giặc mà là cầu hôn. Tức nghi ngờ quá thì thấy người tốt thành kẻ thù."
+    },
+    {
+     "hoi": "Gieo quẻ Khuê mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Khuê, lời hào nghiêng về có khi động Cửu Nhị, Cửu Tứ, Lục Ngũ, Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: đạo nhà tới cùng thì có chỗ chia lìa, nên sau Gia Nhân là Khuê; Khuê là trái nhau. Trái nhau thì ắt có khó, nên sau Khuê là Kiển.",
+     "nguyen_van": "家道窮必乖，故受之以睽"
+    }
+   ],
+   "y_chinh": [
+    "Khuê: hai bên khác ý, khác hướng",
+    "Hỏi việc: làm việc nhỏ cùng nhau trước",
+    "Nghi ngờ quá dễ thấy người tốt thành địch"
+   ]
+  },
+  "que-39-kien": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Kiển khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Kiển khi hỏi một việc nghĩa là phía trước có núi hiểm, đi thẳng thì vướng, nên dừng lại tự xét và tìm người giúp. Lời quẻ nói lợi Tây Nam, không lợi Đông Bắc, lợi gặp đại nhân. Tức đi đường bằng, đông người, đừng một mình leo núi."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Kiển trong đời thường",
+     "danh_sach": [
+      "Hỏi về dự án gặp nhiều trở ngại liên tiếp: Kiển nghiêng về dừng lại xem lại kế hoạch, mời người có kinh nghiệm góp ý.",
+      "Hỏi có nên tự giải quyết một vụ việc phức tạp: nhờ người trong nghề, đừng làm một mình.",
+      "Hỏi chuyện tình cảm gặp ngăn trở từ gia đình: xét lại cách mình đang làm trước khi đổ lỗi."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Kiển: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Nhị",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Kiển là quẻ tốt hay xấu?",
+     "dap": "Kiển là quẻ khó, nhưng lời quẻ cho lối đi. Hào thứ năm nói khó lớn thì bạn đến, hào trên cùng nói quay về thì lớn, tốt. Khó là lúc người giúp xuất hiện."
+    },
+    {
+     "hoi": "Gieo quẻ Kiển mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Kiển, lời hào nghiêng về có khi động Lục Tứ, Cửu Ngũ, Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: trái nhau thì ắt có khó, nên sau Khuê là Kiển; Kiển là khó. Vật không thể khó mãi, nên sau Kiển là Giải.",
+     "nguyen_van": "睽者乖也乖必有難，故受之以蹇"
+    }
+   ],
+   "y_chinh": [
+    "Kiển: núi hiểm phía trước, đi thẳng thì vướng",
+    "Hỏi việc: dừng lại tự xét, tìm người giúp",
+    "Khó lớn thì bạn đến"
+   ]
+  },
+  "que-40-giai": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Giải khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Giải khi hỏi một việc nghĩa là nút thắt đang được gỡ, nạn đã qua hoặc sắp qua. Lời quẻ nói không còn việc thì trở về, có việc thì làm sớm thì tốt. Tức gỡ xong thì về nhịp bình thường, còn việc dở thì làm nhanh, đừng để lâu."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Giải trong đời thường",
+     "danh_sach": [
+      "Hỏi về một vụ tranh chấp vừa có hướng giải quyết: Giải nghiêng về chốt sớm, tha những lỗi nhỏ.",
+      "Hỏi có nên nghỉ ngơi sau đợt việc dồn dập: có, rồi quay lại nhịp đều.",
+      "Hỏi chuyện xin lỗi sau mâu thuẫn: làm sớm, đừng chờ người kia trước."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Giải: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Giải là quẻ tốt hay xấu?",
+     "dap": "Giải là quẻ tốt về thời. Hào thứ ba nói vừa gánh vừa ngồi xe thì giặc tới, tức vừa thoát khó đã phô trương thì dễ mời rắc rối. Gỡ xong thì gọn gàng."
+    },
+    {
+     "hoi": "Gieo quẻ Giải mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Giải, lời hào nghiêng về có khi động Sơ Lục, Cửu Tứ, Lục Ngũ, Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể khó mãi, nên sau Kiển là Giải; Giải là chậm lại, nới ra. Nới ra thì ắt có chỗ mất, nên sau Giải là Tổn.",
+     "nguyen_van": "蹇者難也物不可以終難，故受之以解"
+    }
+   ],
+   "y_chinh": [
+    "Giải: nút thắt được gỡ, nạn đã qua",
+    "Hỏi việc: việc dở thì làm sớm",
+    "Vừa thoát khó đừng phô trương"
+   ]
+  },
+  "que-41-ton": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tổn khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tổn khi hỏi một việc nghĩa là nên bớt đi một phần để được phần lớn hơn: bớt chi, bớt việc, bớt cái tôi. Lời quẻ nói có lòng thành thì rất tốt, dù hai bát lễ đơn sơ cũng dâng được. Bớt đúng chỗ là đầu tư, không phải mất."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tổn trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên cắt giảm sản phẩm bán chậm: Tổn nghiêng về có, dồn sức cho phần chính.",
+      "Hỏi về góp tiền giúp người thân khó khăn: góp vừa sức, với lòng thành.",
+      "Hỏi chuyện một mối quan hệ cần mình nhún nhường: bớt cái tôi, giữ cái tình."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tổn: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tổn là quẻ tốt hay xấu?",
+     "dap": "Tổn là quẻ tốt dù tên là bớt. Hào trên cùng nói không bớt mà thêm, không lỗi, tức có lúc chính việc bớt của mình lại làm lợi cho cả nhà, cả nhóm."
+    },
+    {
+     "hoi": "Gieo quẻ Tổn mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tổn, lời hào nghiêng về có khi động Lục Tam, Lục Tứ, Lục Ngũ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: nới ra thì ắt có chỗ mất, nên sau Giải là Tổn. Bớt mãi không thôi thì ắt được thêm, nên sau Tổn là Ích.",
+     "nguyen_van": "解者緩也緩必有所失，故受之以損"
+    }
+   ],
+   "y_chinh": [
+    "Tổn: bớt một phần để được phần lớn",
+    "Hỏi việc: bớt chi, bớt việc, bớt cái tôi",
+    "Bớt đúng chỗ là đầu tư"
+   ]
+  },
+  "que-42-ich": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Ích khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Ích khi hỏi một việc nghĩa là thời đang thêm lên, có lợi khi làm việc mới và việc giúp người. Lời quẻ nói lợi có chỗ đi, lợi vượt sông lớn. Đại tượng dặn thấy điều thiện thì theo, có lỗi thì sửa, tức dùng lúc thuận để tự sửa mình."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Ích trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên bắt đầu dự án mới: Ích nghiêng về có, kèm phần đem lợi cho người dùng.",
+      "Hỏi về giúp đỡ người mới vào nghề: thời tốt để kèm người, cả hai cùng có lợi.",
+      "Hỏi chuyện nhận lại một món tiền bất ngờ: dùng một phần làm việc có ích lâu dài."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Ích: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Ích là quẻ tốt hay xấu?",
+     "dap": "Ích là quẻ tốt. Hào trên cùng nói không ai thêm cho, có người đánh, lập lòng không bền thì xấu, tức chỉ muốn thêm cho mình mà không chia thì quẻ quay ngược."
+    },
+    {
+     "hoi": "Gieo quẻ Ích mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Ích, lời hào nghiêng về có khi động Sơ Cửu, Lục Tứ, Cửu Ngũ. Nghiêng về chưa nên lúc này khi động Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: bớt mãi thì ắt được thêm, nên sau Tổn là Ích. Thêm mãi không thôi thì ắt vỡ ra, nên sau Ích là Quải.",
+     "nguyen_van": "損而不已必益，故受之以益"
+    }
+   ],
+   "y_chinh": [
+    "Ích: thời thêm lên, lợi làm việc mới",
+    "Hỏi việc: làm việc đem lợi cho người",
+    "Chỉ thêm cho mình thì quẻ quay ngược"
+   ]
+  },
+  "que-43-quai": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Quải khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Quải khi hỏi một việc nghĩa là phải quyết dứt khoát một việc tồn đọng, nhưng bằng cách công khai, rõ ràng, không dùng sức ép. Lời quẻ nói công bố ở triều đình, thành thật báo nguy, không lợi dùng binh. Quyết bằng sự thật, không bằng đối đầu."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Quải trong đời thường",
+     "danh_sach": [
+      "Hỏi về loại bỏ một thói quen hoặc một người gây hại cho nhóm: Quải nghiêng về nói thẳng, có lý do, có văn bản.",
+      "Hỏi có nên cắt hợp tác với đối tác làm sai cam kết: quyết, theo đúng điều khoản; hỏi luật sư nếu cần.",
+      "Hỏi chuyện chấm dứt một mối quan hệ không lành mạnh: nói rõ, giữ an toàn cho mình."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Quải: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Ngũ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Quải là quẻ tốt hay xấu?",
+     "dap": "Quải là quẻ dứt khoát. Hào thứ ba nói mạnh ở gò má, một mình đi gặp mưa, tức quyết mà nóng nảy, đi một mình thì bị hiểu lầm. Quyết cần có người đồng tình."
+    },
+    {
+     "hoi": "Gieo quẻ Quải mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Quải, không hào nào nghiêng hẳn về có; các hào thuận nhất vẫn kèm điều kiện phải giữ đúng. Nghiêng về chưa nên lúc này khi động Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: thêm mãi thì ắt vỡ, nên sau Ích là Quải; Quải là quyết. Quyết rồi thì ắt có chỗ gặp, nên sau Quải là Cấu.",
+     "nguyen_van": "益而不已必決，故受之以夬"
+    }
+   ],
+   "y_chinh": [
+    "Quải: quyết dứt khoát việc tồn đọng",
+    "Hỏi việc: công khai, rõ ràng, không đối đầu",
+    "Quyết cần có người đồng tình"
+   ]
+  },
+  "que-44-cau": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Cấu khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Cấu khi hỏi một việc nghĩa là có một cuộc gặp, một ảnh hưởng mới đến bất ngờ, nhỏ lúc đầu mà lớn dần. Lời quẻ dặn chớ cưới người con gái ấy, tức đừng vội gắn bó với điều chưa rõ. Gặp thì gặp, nhưng giữ khoảng cách cho tới khi hiểu."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Cấu trong đời thường",
+     "danh_sach": [
+      "Hỏi về một lời mời đầu tư hấp dẫn bất ngờ: Cấu nghiêng về chưa nhận, tìm hiểu kỹ người mời.",
+      "Hỏi chuyện một người mới quen rất cuốn hút: để thời gian, chưa cam kết lớn.",
+      "Hỏi về đối tác mới tới chào: gặp và nghe, nhưng ký thoả thuận nhỏ trước."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Cấu: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Việc đã tới cuối",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Cấu là quẻ tốt hay xấu?",
+     "dap": "Cấu không xấu với cuộc gặp, chỉ cảnh báo gắn bó vội. Hào đầu nói buộc vào phanh bằng kim loại thì tốt, tức kìm ngay từ đầu. Hào thứ năm nói lấy lá kỷ bọc quả dưa, giữ cái đẹp ở trong."
+    },
+    {
+     "hoi": "Gieo quẻ Cấu mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Cấu, không hào nào nghiêng hẳn về có; các hào thuận nhất vẫn kèm điều kiện phải giữ đúng. Nghiêng về chưa nên lúc này khi động Cửu Tứ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: quyết rồi thì có chỗ gặp, nên sau Quải là Cấu; Cấu là gặp. Vật gặp nhau rồi thì tụ lại, nên sau Cấu là Tụy.",
+     "nguyen_van": "夬者決也決必有所遇，故受之以姤"
+    }
+   ],
+   "y_chinh": [
+    "Cấu: cuộc gặp bất ngờ, nhỏ mà lớn dần",
+    "Hỏi việc: đừng vội gắn bó với điều chưa rõ",
+    "Kìm ngay từ đầu thì tốt"
+   ]
+  },
+  "que-45-tuy": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tụy khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tụy khi hỏi một việc nghĩa là thời tụ họp: người, nguồn lực, ý chí đang về một chỗ. Lời quẻ nói lợi gặp đại nhân, dùng lễ lớn thì tốt, lợi có chỗ đi. Đại tượng dặn sửa sẵn binh khí, tức đông người thì phòng việc bất ngờ."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tụy trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên tổ chức họp mặt, sự kiện: Tụy nghiêng về có, có người đứng ra chủ trì.",
+      "Hỏi về gọi vốn từ nhiều người: được nếu có mục đích chung rõ và minh bạch sổ sách.",
+      "Hỏi chuyện họp gia đình bàn việc lớn: chọn người có uy tín điều phối."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tụy: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Nhị",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tụy là quẻ tốt hay xấu?",
+     "dap": "Tụy là quẻ tốt về tập hợp. Hào đầu nói có lòng thành mà không đến cùng thì lúc loạn lúc tụ, tức tụ họp cần cam kết. Hào trên cùng than thở mà không lỗi, tức có lúc rời nhóm cũng là bình thường."
+    },
+    {
+     "hoi": "Gieo quẻ Tụy mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tụy, lời hào nghiêng về có khi động Sơ Lục, Lục Nhị, Cửu Tứ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật gặp nhau rồi thì tụ lại, nên sau Cấu là Tụy; Tụy là tụ. Tụ lại mà đi lên gọi là Thăng, nên sau Tụy là Thăng.",
+     "nguyen_van": "姤者遇也物相遇而後聚，故受之以萃"
+    }
+   ],
+   "y_chinh": [
+    "Tụy: thời tụ họp người và nguồn lực",
+    "Hỏi việc: có người chủ trì, mục đích rõ",
+    "Đông người thì phòng việc bất ngờ"
+   ]
+  },
+  "que-46-thang": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Thăng khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Thăng khi hỏi một việc nghĩa là việc đi lên dần, như cây mọc từ đất, tích nhỏ thành lớn. Lời quẻ nói rất hanh thông, gặp đại nhân, đừng lo, đi về phía nam thì tốt. Đi lên từng bậc, đều đặn, có người đi trước chỉ đường."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Thăng trong đời thường",
+     "danh_sach": [
+      "Hỏi về con đường thăng tiến: Thăng nghiêng về có, đi từng bước, không nhảy cóc.",
+      "Hỏi có nên học lên cao: được, chọn thầy hướng dẫn tốt.",
+      "Hỏi về tích luỹ tiền để mua nhà: mỗi tháng đều đặn một phần, kết quả tới dần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Thăng: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Nhị",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Thăng là quẻ tốt hay xấu?",
+     "dap": "Thăng là quẻ tốt về tiến bộ. Hào trên cùng nói lên trong u tối, lợi ở chỗ không ngừng giữ chính, tức lên tới mức không còn thấy đường thì đừng cố lên thêm mà giữ cái đã có."
+    },
+    {
+     "hoi": "Gieo quẻ Thăng mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Thăng, lời hào nghiêng về có khi động Sơ Lục, Cửu Tam, Lục Tứ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: tụ lại mà đi lên gọi là Thăng, nên sau Tụy là Thăng. Lên mãi không thôi thì ắt khốn, nên sau Thăng là Khốn.",
+     "nguyen_van": "萃者聚也聚而上者謂之升，故受之以升"
+    }
+   ],
+   "y_chinh": [
+    "Thăng: đi lên dần như cây mọc từ đất",
+    "Hỏi việc: từng bậc, đều đặn, có người chỉ đường",
+    "Lên tới mức mờ đường thì giữ cái đã có"
+   ]
+  },
+  "que-47-khon": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Khốn khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Khốn khi hỏi một việc nghĩa là đang bị kẹt, nguồn lực cạn, lời nói ra ít người tin. Hình ảnh là đầm cạn nước. Lời quẻ nói hanh thông, người lớn giữ chính thì tốt, có lời mà không ai tin. Lúc này làm nhiều hơn nói."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Khốn trong đời thường",
+     "danh_sach": [
+      "Hỏi về giai đoạn thất nghiệp kéo dài: giữ nếp sinh hoạt, học thêm một kỹ năng, nộp hồ sơ đều.",
+      "Hỏi có nên thanh minh với mọi người: Khốn nghiêng về để việc làm chứng minh.",
+      "Hỏi chuyện tiền bạc túng thiếu: cắt chi không cần, tìm người tin cậy để hỏi cách, tránh vay lãi cao."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Khốn: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Nhị",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Tứ",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Ngũ",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Thượng Lục",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Khốn là quẻ tốt hay xấu?",
+     "dap": "Khốn là quẻ khó, nhưng lời quẻ vẫn có hanh. Hào trên cùng nói bị dây leo quấn, nghĩ rằng động thì hối, có hối mà đi thì tốt. Tức sợ vướng mà không động thì kẹt mãi."
+    },
+    {
+     "hoi": "Gieo quẻ Khốn mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Khốn, lời hào nghiêng về có khi động Thượng Lục. Nghiêng về chưa nên lúc này khi động Lục Tam. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: lên mãi thì ắt khốn, nên sau Thăng là Khốn. Khốn ở trên thì ắt trở xuống dưới, nên sau Khốn là Tỉnh, cái giếng.",
+     "nguyen_van": "升而不已必困，故受之以困"
+    }
+   ],
+   "y_chinh": [
+    "Khốn: bị kẹt, đầm cạn nước",
+    "Hỏi việc: làm nhiều hơn nói",
+    "Sợ vướng mà không động thì kẹt mãi"
+   ]
+  },
+  "que-48-tinh": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tỉnh khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tỉnh khi hỏi một việc nghĩa là hãy quay về nguồn: kỹ năng gốc, giá trị cốt yếu, chỗ nuôi mình bền lâu. Hình ảnh là cái giếng, làng đổi mà giếng không đổi. Lời quẻ dặn dây gàu chưa tới nước mà vỡ gàu thì xấu, tức làm dở dang thì mất công."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tỉnh trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên đổi hẳn nghề: Tỉnh nghiêng về đào sâu nghề gốc thêm trước.",
+      "Hỏi về xây quy trình cho cửa hàng: làm cho đến nơi, đừng bỏ giữa chừng.",
+      "Hỏi chuyện một người tài mà chưa được dùng: hào thứ ba nói giếng đã sạch mà không ai múc, cần người biết nhìn ra."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tỉnh: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Nhị",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tỉnh là quẻ tốt hay xấu?",
+     "dap": "Tỉnh là quẻ tốt về nền tảng. Hào trên cùng nói giếng múc lên không đậy, có lòng thành thì rất tốt, tức nguồn tốt nên chia cho mọi người dùng."
+    },
+    {
+     "hoi": "Gieo quẻ Tỉnh mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tỉnh, lời hào nghiêng về có khi động Cửu Ngũ, Thượng Lục. Nghiêng về chưa nên lúc này khi động Sơ Lục, Cửu Nhị. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: khốn ở trên thì ắt trở xuống dưới, nên sau Khốn là Tỉnh. Đạo giếng không thể không sửa, nên sau Tỉnh là Cách.",
+     "nguyen_van": "困乎上者必反下，故受之以井"
+    }
+   ],
+   "y_chinh": [
+    "Tỉnh: quay về nguồn, như cái giếng không đổi",
+    "Hỏi việc: làm cho đến nơi, đừng bỏ dở",
+    "Nguồn tốt nên chia cho mọi người"
+   ]
+  },
+  "que-49-cach": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Cách khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Cách khi hỏi một việc nghĩa là đã tới lúc đổi mới, nhưng phải đợi tới đúng ngày người khác tin. Lời quẻ nói đến ngày thì được tin, rất hanh thông, lợi giữ chính, hối tiếc mất đi. Đổi sau khi đã chuẩn bị và giải thích rõ, không đổi vì bực."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Cách trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên thay toàn bộ quy trình làm việc: Cách nghiêng về có, sau khi nhóm thấy rõ vì sao phải đổi.",
+      "Hỏi về chuyển hẳn sang nghề khác: chuẩn bị đủ, rồi đổi dứt khoát.",
+      "Hỏi chuyện thay đổi thói quen chi tiêu của cả nhà: bàn trước, đổi từng phần, có mốc xem lại."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Cách: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Cách là quẻ tốt hay xấu?",
+     "dap": "Cách là quẻ tốt cho thay đổi đúng lúc. Hào đầu nói buộc bằng da bò vàng, tức lúc đầu chưa nên đổi. Hào thứ năm nói đại nhân đổi như hổ biến, chưa bói đã có tin, tức đổi rõ ràng thì người theo."
+    },
+    {
+     "hoi": "Gieo quẻ Cách mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Cách, lời hào nghiêng về có khi động Lục Nhị, Cửu Tứ, Cửu Ngũ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: đạo giếng không thể không sửa, nên sau Tỉnh là Cách; Cách là đổi. Đổi vật không gì bằng cái vạc nấu, nên sau Cách là Đỉnh.",
+     "nguyen_van": "井道不可不革，故受之以革"
+    }
+   ],
+   "y_chinh": [
+    "Cách: tới lúc đổi mới",
+    "Hỏi việc: đổi khi người khác đã tin, có giải thích",
+    "Đừng đổi vì bực, đổi vì đã chuẩn bị"
+   ]
+  },
+  "que-50-dinh": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Đỉnh khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Đỉnh khi hỏi một việc nghĩa là cái mới đã có, giờ cần ổn định và nuôi nó cho chín, như vạc nấu thức ăn. Lời quẻ nói rất tốt, hanh thông. Thuận khi đặt đúng người vào đúng chỗ và giữ chất lượng đều."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Đỉnh trong đời thường",
+     "danh_sach": [
+      "Hỏi sau khi vừa mở cửa hàng: Đỉnh nghiêng về ổn định nhân sự, giữ chất lượng món chính.",
+      "Hỏi về nhận chức mới: lập nếp làm việc trước khi đổi thêm.",
+      "Hỏi chuyện mới cưới: xây nếp nhà, những thói quen chung đầu tiên."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Đỉnh: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Ngũ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Đỉnh là quẻ tốt hay xấu?",
+     "dap": "Đỉnh là quẻ tốt. Hào thứ tư nói vạc gãy chân, đổ thức ăn của bậc trên, tức nhận việc quá sức mình thì hỏng. Hào trên cùng nói quai vạc bằng ngọc, rất tốt, mọi việc đều lợi."
+    },
+    {
+     "hoi": "Gieo quẻ Đỉnh mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Đỉnh, lời hào nghiêng về có khi động Thượng Cửu. Nghiêng về chưa nên lúc này khi động Cửu Tứ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: đổi vật không gì bằng cái vạc, nên sau Cách là Đỉnh. Giữ vật quý không gì bằng con trưởng, nên sau Đỉnh là Chấn, Chấn là con trai trưởng.",
+     "nguyen_van": "革物者莫若鼎，故受之以鼎"
+    }
+   ],
+   "y_chinh": [
+    "Đỉnh: cái mới đã có, cần ổn định cho chín",
+    "Hỏi việc: đúng người đúng chỗ, chất lượng đều",
+    "Nhận việc quá sức mình thì hỏng"
+   ]
+  },
+  "que-51-chan": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Chấn khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Chấn khi hỏi một việc nghĩa là có biến động bất ngờ làm giật mình, nhưng giữ bình tĩnh thì qua được và còn rút được bài học. Lời quẻ nói sấm đến thì sợ, sau đó cười nói; sấm vang trăm dặm mà không đánh rơi thìa rượu tế. Tức hoảng mà không bỏ việc chính."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Chấn trong đời thường",
+     "danh_sach": [
+      "Hỏi khi công ty bất ngờ tái cơ cấu: Chấn khuyên giữ việc đang làm cho tốt, theo dõi thông tin chính thức.",
+      "Hỏi về một tin xấu bất ngờ trong gia đình: bình tĩnh, chia việc, lo phần gấp trước.",
+      "Hỏi có nên bán gấp tài sản khi thị trường rung lắc: chưa vội, chờ qua cơn hoảng."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Chấn: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Nhị",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Ngũ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Chấn là quẻ tốt hay xấu?",
+     "dap": "Chấn là quẻ động, không xấu. Hào thứ năm nói sấm qua lại nguy, nhưng không mất việc, tức giữ được phần cốt lõi. Hào trên cùng nói sấm chưa tới mình mà tới hàng xóm thì không lỗi, biết lo trước."
+    },
+    {
+     "hoi": "Gieo quẻ Chấn mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Chấn, không hào nào nghiêng hẳn về có; các hào thuận nhất vẫn kèm điều kiện phải giữ đúng. Nghiêng về chưa nên lúc này khi động Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: giữ vật quý không gì bằng con trưởng, nên sau Đỉnh là Chấn; Chấn là động. Vật không thể động mãi, phải dừng, nên sau Chấn là Cấn.",
+     "nguyen_van": "主器者莫若長子，故受之以震"
+    }
+   ],
+   "y_chinh": [
+    "Chấn: biến động bất ngờ làm giật mình",
+    "Hỏi việc: hoảng mà không bỏ việc chính",
+    "Qua cơn sợ thì rút được bài học"
+   ]
+  },
+  "que-52-can": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Cấn khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Cấn khi hỏi một việc nghĩa là nên dừng lại, đứng yên ở chỗ của mình, chưa động lúc này. Lời quẻ nói dừng ở lưng, không thấy thân mình; đi trong sân mà không thấy người, không lỗi. Tức dừng để ý nghĩ lắng xuống, không bị kéo theo người khác."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Cấn trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên trả lời ngay một lời đề nghị gấp: Cấn nghiêng về chưa, để một hai ngày rồi đáp.",
+      "Hỏi về việc đang làm quá nhiều thứ cùng lúc: dừng bớt, chọn một việc chính.",
+      "Hỏi chuyện cãi nhau còn nóng: dừng nói, hẹn nói lại khi đã bình tĩnh."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Cấn: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Nhị",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Cấn là quẻ tốt hay xấu?",
+     "dap": "Cấn là quẻ không lỗi khi biết dừng đúng chỗ. Hào thứ năm nói dừng ở má, lời nói có thứ tự, hối mất đi. Hào trên cùng nói dừng một cách dày dặn thì tốt."
+    },
+    {
+     "hoi": "Gieo quẻ Cấn mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Cấn, lời hào nghiêng về có khi động Lục Ngũ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể động mãi, phải dừng, nên sau Chấn là Cấn; Cấn là dừng. Vật không thể dừng mãi, nên sau Cấn là Tiệm, tiến dần.",
+     "nguyen_van": "震者動也物不可以終動止之，故受之以艮"
+    }
+   ],
+   "y_chinh": [
+    "Cấn: dừng lại, đứng yên ở chỗ của mình",
+    "Hỏi việc: chưa động, để ý nghĩ lắng xuống",
+    "Lời nói có thứ tự thì hối mất đi"
+   ]
+  },
+  "que-53-tiem": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tiệm khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tiệm khi hỏi một việc nghĩa là việc tiến dần từng chặng, đúng trình tự thì tốt. Hình ảnh là chim hồng bay từ bờ nước lên đá, lên đất bằng, lên cây, lên gò. Lời quẻ nói con gái về nhà chồng thì tốt, lợi giữ chính, tức mọi bước có lễ, có thời."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tiệm trong đời thường",
+     "danh_sach": [
+      "Hỏi về chuyện cưới hỏi: Tiệm nghiêng về có, đi đủ các bước gặp gỡ, dạm ngõ, ăn hỏi.",
+      "Hỏi có nên thăng chức nhảy hai bậc: Tiệm khuyên đi từng bậc để nền vững.",
+      "Hỏi về xây dựng thương hiệu cá nhân: đăng đều, chậm mà bền."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tiệm: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Ngũ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tiệm là quẻ tốt hay xấu?",
+     "dap": "Tiệm là quẻ tốt cho việc lâu dài. Hào thứ ba nói chim hồng lên gò đất, chồng đi không về, vợ mang thai mà không nuôi, xấu, tức nóng vội vượt bậc thì đổ vỡ."
+    },
+    {
+     "hoi": "Gieo quẻ Tiệm mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tiệm, lời hào nghiêng về có khi động Lục Nhị, Thượng Cửu. Nghiêng về chưa nên lúc này khi động Cửu Tam. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể dừng mãi, nên sau Cấn là Tiệm; Tiệm là tiến. Tiến thì ắt có chỗ về, nên sau Tiệm là Quy Muội.",
+     "nguyen_van": "艮者止也物不可以終止，故受之以漸"
+    }
+   ],
+   "y_chinh": [
+    "Tiệm: tiến dần từng chặng như chim hồng",
+    "Hỏi việc: đi đúng trình tự, có lễ có thời",
+    "Vượt bậc vì nóng vội thì đổ vỡ"
+   ]
+  },
+  "que-54-quy-muoi": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Quy Muội khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Quy Muội khi hỏi một việc nghĩa là bạn đang ở vị trí chưa đúng hoặc chưa chính thức, tiến thêm lúc này thì vướng. Lời quẻ nói tiến thì xấu, không có gì lợi. Giữ vai của mình, làm rõ vị trí trước khi đòi thêm."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Quy Muội trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên đòi quyền lợi khi đang là nhân viên thời vụ: Quy Muội nghiêng về làm rõ hợp đồng trước.",
+      "Hỏi về mối quan hệ chưa được công nhận: đừng vội đòi danh phận, nói chuyện về hướng đi chung.",
+      "Hỏi có nên góp vốn vào công ty khi chưa có giấy tờ rõ: chưa."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Quy Muội: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Quy Muội là quẻ tốt hay xấu?",
+     "dap": "Quy Muội là quẻ khó về vị trí, không phải về con người. Hào thứ năm khen áo của vợ cả không đẹp bằng áo của em gái đi theo, trăng gần rằm thì tốt, tức khiêm tốn ở vị trí thấp thì được trọng."
+    },
+    {
+     "hoi": "Gieo quẻ Quy Muội mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Quy Muội, lời hào nghiêng về có khi động Lục Ngũ. Nghiêng về chưa nên lúc này khi động Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: tiến thì ắt có chỗ về, nên sau Tiệm là Quy Muội. Được chỗ về thì ắt lớn, nên sau Quy Muội là Phong.",
+     "nguyen_van": "漸者進也進必有所歸，故受之以歸妹"
+    }
+   ],
+   "y_chinh": [
+    "Quy Muội: ở vị trí chưa đúng, chưa chính thức",
+    "Hỏi việc: làm rõ vị trí trước khi đòi thêm",
+    "Khiêm tốn ở chỗ thấp thì được trọng"
+   ]
+  },
+  "que-55-phong": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Phong khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Phong khi hỏi một việc nghĩa là việc đang ở lúc thịnh, đầy đủ nhất. Lời quẻ nói hanh thông, đừng lo, nên như mặt trời giữa trưa. Nhưng giữa trưa rồi sẽ xế, nên dùng lúc thịnh để làm việc lớn và chuẩn bị cho lúc bớt."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Phong trong đời thường",
+     "danh_sach": [
+      "Hỏi khi việc kinh doanh đang tốt nhất: Phong nghiêng về đầu tư nền tảng, không tiêu hết lợi nhuận.",
+      "Hỏi về giai đoạn được nhiều người biết tới: nhận việc tốt, nhưng giữ đầu óc tỉnh.",
+      "Hỏi có nên tổ chức việc lớn của gia đình năm nay: được, khi điều kiện đang đủ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Phong: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Nhị",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Phong là quẻ tốt hay xấu?",
+     "dap": "Phong là quẻ thịnh. Các hào giữa nói ban ngày thấy sao Bắc Đẩu, tức lúc sáng nhất lại bị che. Hào trên cùng nói nhà lớn mà ba năm không thấy người, tức đầy mà tự cô lập thì xấu."
+    },
+    {
+     "hoi": "Gieo quẻ Phong mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Phong, lời hào nghiêng về có khi động Sơ Cửu, Lục Nhị, Cửu Tứ, Lục Ngũ. Nghiêng về chưa nên lúc này khi động Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: được chỗ về thì ắt lớn, nên sau Quy Muội là Phong; Phong là lớn. Lớn tới cùng thì mất chỗ ở, nên sau Phong là Lữ.",
+     "nguyen_van": "得其所歸者必大，故受之以豐"
+    }
+   ],
+   "y_chinh": [
+    "Phong: lúc thịnh, đầy đủ nhất",
+    "Hỏi việc: dùng lúc thịnh làm việc lớn",
+    "Giữa trưa rồi sẽ xế, chuẩn bị lúc bớt"
+   ]
+  },
+  "que-56-lu": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Lữ khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Lữ khi hỏi một việc nghĩa là bạn đang ở chỗ lạ, như người đi đường, chưa có gốc rễ. Lời quẻ nói hanh thông nhỏ, đi đường giữ chính thì tốt. Ở chỗ lạ nên khiêm tốn, gọn gàng, giữ đồ của mình, đừng gây chuyện."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Lữ trong đời thường",
+     "danh_sach": [
+      "Hỏi về đi làm ở thành phố mới: Lữ nghiêng về giữ chi tiêu gọn, tìm vài người quen tin cậy.",
+      "Hỏi có nên chuyển công tác xa: được, chuẩn bị chỗ ở và giấy tờ trước.",
+      "Hỏi về dự án ngắn hạn với đối tác lạ: làm đúng phần mình, thoả thuận rõ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Lữ: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Lữ là quẻ tốt hay xấu?",
+     "dap": "Lữ là quẻ hanh thông nhỏ. Hào thứ ba nói đốt quán trọ, mất người hầu, tức ở nơi lạ mà ngạo mạn thì mất chỗ dựa. Hào trên cùng nói chim đốt tổ, người đi đường trước cười sau khóc."
+    },
+    {
+     "hoi": "Gieo quẻ Lữ mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Lữ, lời hào nghiêng về có khi động Lục Nhị, Lục Ngũ. Nghiêng về chưa nên lúc này khi động Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: lớn tới cùng thì mất chỗ ở, nên sau Phong là Lữ; Lữ là người đi xa. Đi xa mà không chỗ dung thân, nên sau Lữ là Tốn, Tốn là thuận vào.",
+     "nguyen_van": "豐者大也窮大者必失其居，故受之以旅"
+    }
+   ],
+   "y_chinh": [
+    "Lữ: ở chỗ lạ, chưa có gốc rễ",
+    "Hỏi việc: khiêm tốn, gọn gàng, đừng gây chuyện",
+    "Ở nơi lạ mà ngạo mạn thì mất chỗ dựa"
+   ]
+  },
+  "que-57-ton": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tốn khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tốn khi hỏi một việc nghĩa là nên đi mềm như gió, thấm dần, lặp lại nhẹ nhàng thay vì ép một lần. Lời quẻ nói hanh thông nhỏ, lợi có chỗ đi, lợi gặp đại nhân. Thuận khi có người hướng dẫn và bạn kiên nhẫn nhắc đi nhắc lại."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tốn trong đời thường",
+     "danh_sach": [
+      "Hỏi về thuyết phục sếp duyệt một đề xuất: Tốn nghiêng về gửi bản ngắn, nhắc lại sau, bổ sung số liệu.",
+      "Hỏi chuyện dạy con một nếp mới: nhắc đều mỗi ngày, không quát.",
+      "Hỏi có nên vào thị trường mới: thử ở quy mô nhỏ, mở dần."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tốn: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tốn là quẻ tốt hay xấu?",
+     "dap": "Tốn là quẻ tốt nhỏ. Hào đầu nói tiến lui do dự, lợi cho người võ giữ chính, tức mềm quá thành do dự thì cần dứt khoát. Hào trên cùng nói thuận phục dưới giường, mất rìu, tức nhún quá thì mất phần của mình."
+    },
+    {
+     "hoi": "Gieo quẻ Tốn mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tốn, lời hào nghiêng về có khi động Lục Tứ. Nghiêng về chưa nên lúc này khi động Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: đi xa mà không chỗ dung thì cần thuận, nên sau Lữ là Tốn; Tốn là vào. Vào được rồi thì vui, nên sau Tốn là Đoài.",
+     "nguyen_van": "旅而无所容，故受之以巽"
+    }
+   ],
+   "y_chinh": [
+    "Tốn: mềm như gió, thấm dần",
+    "Hỏi việc: nhắc lại nhẹ nhàng, có người hướng dẫn",
+    "Mềm quá thành do dự thì phải dứt khoát"
+   ]
+  },
+  "que-58-doai": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Đoài khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Đoài khi hỏi một việc nghĩa là không khí vui, dễ nói chuyện, hợp với trao đổi, học cùng nhau. Lời quẻ nói hanh thông, lợi giữ chính. Đại tượng nói bạn bè cùng giảng tập. Vui thật thì tốt, vui để lấy lòng thì dễ lệch."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Đoài trong đời thường",
+     "danh_sach": [
+      "Hỏi về bán hàng, tư vấn khách: Đoài nghiêng về có, nói chuyện cởi mở và đúng sự thật.",
+      "Hỏi có nên lập nhóm học cùng: được, chia chủ đề cho từng người.",
+      "Hỏi chuyện một người nói lời ngọt để mượn tiền: hào thứ ba nói vui tìm đến là xấu, cân nhắc kỹ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Đoài: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Tứ",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Ngũ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Thượng Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Đoài là quẻ tốt hay xấu?",
+     "dap": "Đoài là quẻ tốt. Hào đầu nói vui hoà thì tốt, hào thứ hai nói vui bằng lòng thành thì tốt. Hào thứ năm nhắc tin vào kẻ bóc mòn thì nguy, tức vui với người không ngay thẳng."
+    },
+    {
+     "hoi": "Gieo quẻ Đoài mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Đoài, lời hào nghiêng về có khi động Sơ Cửu, Cửu Nhị. Nghiêng về chưa nên lúc này khi động Lục Tam. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vào được thì vui, nên sau Tốn là Đoài; Đoài là vui. Vui rồi thì tan ra, nên sau Đoài là Hoán.",
+     "nguyen_van": "巽者入也入而後說之，故受之以兌"
+    }
+   ],
+   "y_chinh": [
+    "Đoài: vui, dễ nói chuyện, hợp trao đổi",
+    "Hỏi việc: nói cởi mở và đúng sự thật",
+    "Cẩn thận lời ngọt để lấy lòng"
+   ]
+  },
+  "que-59-hoan": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Hoán khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Hoán khi hỏi một việc nghĩa là có sự tan tác, rời rạc, và việc cần làm là gom lại bằng một niềm tin chung. Lời quẻ nói vua đến tông miếu, lợi vượt sông lớn, lợi giữ chính. Tức tìm lại điều cả nhóm cùng tin rồi mới đi tiếp."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Hoán trong đời thường",
+     "danh_sach": [
+      "Hỏi về một nhóm làm việc rời rạc: Hoán nghiêng về họp lại, nhắc mục tiêu chung, gỡ hiểu lầm.",
+      "Hỏi có nên bỏ cũ làm mới hoàn toàn: được, nếu bạn giữ được người cùng đi.",
+      "Hỏi chuyện gia đình mỗi người một nơi: tạo một dịp sum họp, một việc chung nhỏ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Hoán: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Nhị",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên tiến",
+      "Nghiêng về có"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Hoán là quẻ tốt hay xấu?",
+     "dap": "Hoán là quẻ tốt: cả sáu hào đều nghiêng về tiến hoặc gom người. Hào thứ tư nói tan bè nhỏ thì rất tốt, tức bỏ phe nhóm riêng để có cái chung lớn hơn."
+    },
+    {
+     "hoi": "Gieo quẻ Hoán mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Hoán, lời hào nghiêng về có khi động Sơ Lục, Cửu Nhị, Lục Tam, Lục Tứ, Cửu Ngũ, Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vui rồi thì tan ra, nên sau Đoài là Hoán; Hoán là tan. Vật không thể tan mãi, nên sau Hoán là Tiết.",
+     "nguyen_van": "兌者說也說而後散之，故受之以渙"
+    }
+   ],
+   "y_chinh": [
+    "Hoán: tan tác, cần gom lại",
+    "Hỏi việc: tìm niềm tin chung rồi đi tiếp",
+    "Bỏ phe nhóm riêng để có cái chung lớn"
+   ]
+  },
+  "que-60-tiet": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tiết khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tiết khi hỏi một việc nghĩa là cần đặt giới hạn hợp lý: chi tiêu, thời gian, lời nói, cam kết. Lời quẻ nói hanh thông, nhưng tiết khổ thì không giữ được lâu. Tiết chế vừa phải, có mức rõ, mới bền."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tiết trong đời thường",
+     "danh_sach": [
+      "Hỏi về kế hoạch tiết kiệm: Tiết nghiêng về đặt mức vừa sức, đừng cắt hết khiến bỏ giữa chừng.",
+      "Hỏi có nên nhận thêm việc ngoài giờ: đặt giới hạn số giờ mỗi tuần.",
+      "Hỏi chuyện một người hay can thiệp việc nhà mình: đặt ranh giới rõ, nói nhẹ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tiết: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tiết là quẻ tốt hay xấu?",
+     "dap": "Tiết là quẻ tốt khi vừa phải. Hào thứ năm nói tiết một cách dễ chịu thì tốt, hào trên cùng nói tiết khổ, giữ thì xấu. Hào đầu nói không ra khỏi cửa sân thì không lỗi, biết lúc nên ở yên."
+    },
+    {
+     "hoi": "Gieo quẻ Tiết mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tiết, lời hào nghiêng về có khi động Lục Tứ, Cửu Ngũ. Nghiêng về chưa nên lúc này khi động Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: vật không thể tan mãi, nên sau Hoán là Tiết. Có tiết độ rồi thì người ta tin, nên sau Tiết là Trung Phu.",
+     "nguyen_van": "渙者離也物不可以終離，故受之以節"
+    }
+   ],
+   "y_chinh": [
+    "Tiết: đặt giới hạn hợp lý",
+    "Hỏi việc: tiết chế vừa phải, có mức rõ",
+    "Tiết khổ quá thì không giữ lâu được"
+   ]
+  },
+  "que-61-trung-phu": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Trung Phu khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Trung Phu khi hỏi một việc nghĩa là việc đi được nhờ lòng tin thật ở bên trong, giữa hai bên. Lời quẻ nói tín tới cả heo cá thì tốt, lợi vượt sông lớn. Thuận khi bạn thành thật, giữ lời, và người kia cảm được điều đó."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Trung Phu trong đời thường",
+     "danh_sach": [
+      "Hỏi về ký thoả thuận với đối tác mới: Trung Phu nghiêng về có, khi hai bên đã giữ lời ở các việc nhỏ.",
+      "Hỏi chuyện xây lại niềm tin sau một lần lỡ hẹn: giữ đúng hẹn nhỏ nhiều lần.",
+      "Hỏi có nên nói thật một điều khó với người thân: nói, bằng lời mềm và đúng lúc."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Trung Phu: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Nhị",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Lục Tam",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Tứ",
+      "Nên tiến",
+      "Nghiêng về có"
+     ],
+     [
+      "Cửu Ngũ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Trung Phu là quẻ tốt hay xấu?",
+     "dap": "Trung Phu là quẻ tốt. Hào thứ hai nói hạc kêu trong bóng râm, con hoạ theo, tức lòng thành thì người tự đáp. Hào trên cùng nói tiếng gà bay lên trời, giữ thì xấu, tức lời nói vượt quá điều mình làm được."
+    },
+    {
+     "hoi": "Gieo quẻ Trung Phu mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Trung Phu, lời hào nghiêng về có khi động Cửu Nhị, Lục Tứ, Cửu Ngũ. Nghiêng về chưa nên lúc này khi động Thượng Cửu. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: có tiết độ thì người ta tin, nên sau Tiết là Trung Phu. Có lòng tin thì ắt làm, nên sau Trung Phu là Tiểu Quá.",
+     "nguyen_van": "節而信之，故受之以中孚"
+    }
+   ],
+   "y_chinh": [
+    "Trung Phu: lòng tin thật ở bên trong",
+    "Hỏi việc: thành thật, giữ lời",
+    "Lời nói đừng vượt quá điều làm được"
+   ]
+  },
+  "que-62-tieu-qua": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Tiểu Quá khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Tiểu Quá khi hỏi một việc nghĩa là làm được việc nhỏ, chưa nên làm việc lớn, và nên đi thấp hơn là lên cao. Hình ảnh là chim bay để lại tiếng, không nên lên mà nên xuống. Làm hơi kỹ, hơi khiêm hơn mức thường thì đúng thời."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Tiểu Quá trong đời thường",
+     "danh_sach": [
+      "Hỏi có nên mở rộng quy mô ngay: Tiểu Quá nghiêng về chưa, làm tốt phần nhỏ trước.",
+      "Hỏi về một việc cần cẩn thận quá mức bình thường: thời này cẩn thận thêm là phải.",
+      "Hỏi chuyện tổ chức tiệc lớn: làm gọn, vừa đủ."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Tiểu Quá: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Lục Nhị",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Cửu Tam",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ],
+     [
+      "Cửu Tứ",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Ngũ",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Thượng Lục",
+      "Nên dừng hoặc rút",
+      "Chưa nên lúc này"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Tiểu Quá là quẻ tốt hay xấu?",
+     "dap": "Tiểu Quá là quẻ tốt với việc nhỏ. Hào đầu nói chim bay lên thì xấu, hào trên cùng nói chim bay xa mắc lưới. Tức tham việc lớn, lên cao khi chưa đủ sức thì vướng."
+    },
+    {
+     "hoi": "Gieo quẻ Tiểu Quá mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Tiểu Quá, không hào nào nghiêng hẳn về có; các hào thuận nhất vẫn kèm điều kiện phải giữ đúng. Nghiêng về chưa nên lúc này khi động Sơ Lục, Cửu Tam, Thượng Lục. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: có lòng tin thì ắt làm, nên sau Trung Phu là Tiểu Quá. Có cái vượt lên thì ắt làm xong việc, nên sau Tiểu Quá là Ký Tế.",
+     "nguyen_van": "有其信者必行之，故受之以小過"
+    }
+   ],
+   "y_chinh": [
+    "Tiểu Quá: làm được việc nhỏ, chưa việc lớn",
+    "Hỏi việc: đi thấp, làm kỹ hơn thường",
+    "Lên cao khi chưa đủ sức thì vướng"
+   ]
+  },
+  "que-63-ky-te": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Ký Tế khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Ký Tế khi hỏi một việc nghĩa là việc đã xong hoặc gần xong, mọi thứ đang vào chỗ. Lời quẻ nói hanh thông nhỏ, lợi giữ chính, đầu tốt mà cuối loạn. Lúc này giữ cái đã làm được, đề phòng lơ là sau khi thành công."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Ký Tế trong đời thường",
+     "danh_sach": [
+      "Hỏi sau khi dự án vừa bàn giao: Ký Tế nghiêng về rà soát lỗi, giữ liên lạc với khách.",
+      "Hỏi về khoản tiền vừa thu về: cất phần dự phòng trước khi chi.",
+      "Hỏi chuyện vừa đạt mục tiêu cá nhân: đặt nếp giữ kết quả, đừng buông hết."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Ký Tế: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Cửu",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Lục Nhị",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tam",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tứ",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Ngũ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Thượng Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Ký Tế là quẻ tốt hay xấu?",
+     "dap": "Ký Tế là quẻ xong việc, tốt ở đầu. Hào trên cùng nói ướt đầu, nguy, tức qua sông rồi còn ngoái lại lặn xuống thì hỏng. Thành công rồi càng cần cẩn thận."
+    },
+    {
+     "hoi": "Gieo quẻ Ký Tế mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Ký Tế, không hào nào nghiêng hẳn về có; các hào thuận nhất vẫn kèm điều kiện phải giữ đúng. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện: có cái vượt lên thì làm xong việc, nên sau Tiểu Quá là Ký Tế. Vật không thể cùng tận, nên sau Ký Tế là Vị Tế, và Kinh kết ở chỗ chưa xong.",
+     "nguyen_van": "有過物者必濟，故受之以既濟"
+    }
+   ],
+   "y_chinh": [
+    "Ký Tế: việc đã xong, mọi thứ vào chỗ",
+    "Hỏi việc: giữ cái đã có, đề phòng lơ là",
+    "Đầu tốt mà cuối loạn nếu buông"
+   ]
+  },
+  "que-64-vi-te": {
+   "muc": [
+    {
+     "tieu_de": "Gieo được quẻ Vị Tế khi hỏi một việc: đọc thế nào?",
+     "doan": "Gieo được Vị Tế khi hỏi một việc nghĩa là việc chưa xong, sắp qua mà chưa qua, vội thì hỏng ở bước cuối. Hình ảnh là con cáo nhỏ sắp qua sông thì ướt đuôi. Lời quẻ nói hanh thông, nhưng không có gì lợi nếu vội; đi tiếp cẩn thận tới bờ."
+    },
+    {
+     "tieu_de": "Ví dụ đọc quẻ Vị Tế trong đời thường",
+     "danh_sach": [
+      "Hỏi về hồ sơ đang xét duyệt: Vị Tế nghiêng về kiểm lại giấy tờ, chờ thêm, đừng nộp vội bản thiếu.",
+      "Hỏi có nên ăn mừng khi hợp đồng chưa ký: chưa, giữ sức cho bước cuối.",
+      "Hỏi chuyện tình cảm đang tiến gần một bước lớn: đi chậm ở đoạn cuối, nói rõ trước khi quyết."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Quẻ Vị Tế: mỗi hào động nghiêng về đâu",
+    "chu_thich": "Khi gieo có hào động, lời của hào đó được đọc trước. Cột giữa tóm hướng của lời hào; cột cuối là cách quẻ trả lời câu hỏi kiểu có nên hay không. Ban biên tập rút từ chữ đoán trong hào từ Chu Dịch.",
+    "cot": [
+     "Hào động",
+     "Lời hào nghiêng về",
+     "Khi hỏi có nên"
+    ],
+    "dong": [
+     [
+      "Sơ Lục",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Nhị",
+      "Giữ nguyên, bền lòng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Tam",
+      "Chưa tới lúc",
+      "Chưa nên vội"
+     ],
+     [
+      "Cửu Tứ",
+      "Làm được, nhưng phải giữ đúng",
+      "Có, với điều kiện"
+     ],
+     [
+      "Lục Ngũ",
+      "Cần người cùng làm",
+      "Nghiêng về có"
+     ],
+     [
+      "Thượng Cửu",
+      "Cẩn thận, dễ vấp",
+      "Chưa nên vội"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Quẻ Vị Tế là quẻ tốt hay xấu?",
+     "dap": "Vị Tế là quẻ còn dở dang, không phải quẻ hỏng. Hào thứ năm nói ánh sáng của người quân tử có lòng tin thì tốt. Kinh Dịch kết ở quẻ này để nói việc đời luôn còn chặng tiếp theo."
+    },
+    {
+     "hoi": "Gieo quẻ Vị Tế mà động hào nào thì thuận nhất?",
+     "dap": "Trong quẻ Vị Tế, lời hào nghiêng về có khi động Lục Ngũ. Đây là xu hướng rút từ chữ đoán trong lời hào; đọc cả quẻ và quẻ biến mới đủ."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Chu Dịch",
+     "chuong": "Tự quái truyện",
+     "nghia": "Tự quái truyện kết: vật không thể cùng tận, nên đặt Vị Tế ở cuối. Hết sáu mươi tư quẻ mà vẫn chưa xong, vòng biến hoá lại bắt đầu.",
+     "nguyen_van": "物不可窮也，故受之以未濟"
+    }
+   ],
+   "y_chinh": [
+    "Vị Tế: chưa xong, sắp qua sông",
+    "Hỏi việc: vội thì hỏng ở bước cuối",
+    "Việc đời luôn còn chặng tiếp theo"
+   ]
+  }
+ }
+}

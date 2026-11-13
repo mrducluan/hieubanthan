@@ -599,5 +599,69 @@
    "cau_tu_soi": "Do the people close to you know when you need someone to check in on you?"
   }
  },
- "nap_am_luu_y": "Na Yin is a system that matches the 60 pairs of the sixty-year cycle to the five tones; each pair of years shares one name. It is a folk image for reflecting on yourself, not a way to judge good or bad or to choose a partner. Eight Mansions (house direction) uses your Kua number, not Na Yin."
+ "nap_am_luu_y": "Na Yin is a system that matches the 60 pairs of the sixty-year cycle to the five tones; each pair of years shares one name. It is a folk image for reflecting on yourself, not a way to judge good or bad or to choose a partner. Eight Mansions (house direction) uses your Kua number, not Na Yin.",
+ "co_tho": {
+  "Giáp": {
+   "y": "The classic pictures Jia as a great timber already shaped, with no branches or leaves left. It needs Metal to be hewn into a beam, turns to charcoal when Fire is too strong, and lasts longest when set deep in the earth. The point: Jia wood wants the right kind of shaping and firm ground under it."
+  },
+  "Ất": {
+   "y": "The classic pictures Yi as a living plant with deep roots that likes a sunny spot. It is wary of too much Water washing it loose and of Metal cutting hard; the hot south and the heavy earth of the west both wear it down. The point: Yi is not timber for beams, so do not read it the way you read big wood."
+  },
+  "Bính": {
+   "y": "The classic pictures Bing as the sun: bright, upright, lighting a thousand miles. It draws strength from Wood and does not suit wet earth; pond and lake water cannot put it out. Its one concern is Wood so dense that it becomes a forest and blocks the light."
+  },
+  "Đinh": {
+   "y": "The classic pictures Ding as a lamp flame: next to the sun its light is outshone. In season this fire can smelt iron; out of season it struggles to melt an inch of metal. A little dry kindling keeps it going, while heaps of wet wood do not help. The point: check carefully whether the fire is a furnace or a lamp."
+  },
+  "Mậu": {
+   "y": "The classic pictures Wu as a city wall or a dyke: to hold back rivers and seas its base must be thick. A combination in the chart keeps it firm; an empty seat under the day lets it slump. When thin it cannot bear Metal draining it; once solid it has no need of Wood to loosen it."
+  },
+  "Kỷ": {
+   "y": "The classic pictures Ji as fields and gardens, the ground that everything grows from. Strong Water and Metal weaken this soil; Fire and Earth working together make the finest structure. Out of season it cannot hold heavy things; in season it is ready for the plough."
+  },
+  "Canh": {
+   "y": "The classic pictures Geng as raw, hard metal: Fire forges it into something useful, and it is wary of sinking in Water. Born in summer and heading south-east it is over-fired; born in autumn and heading north-west it still shines. Earth piled too thick with nothing to open it up buries the metal."
+  },
+  "Tân": {
+   "y": "The classic pictures Xin as pearl and jade: it likes warm sun and clear water that washes it bright. It needs no fierce fire, and damp earth nourishes it. In cold weather and cold water it wants Bing and Ding for warmth; with firm roots it has no fear of thick earth covering it."
+  },
+  "Nhâm": {
+   "y": "The classic pictures Ren as a great river gathering a hundred streams, running without banks. Too much water gathered makes it drift; Fire and Earth piled on dry up its source. The point: big water needs banks that are just enough, neither missing nor excessive."
+  },
+  "Quý": {
+   "y": "The classic pictures Gui as rain and dew, yet with roots in Hai or Zi it becomes a river. Without roots it is weak, and then wealth and officer stars are not wanted in quantity. With Shen, Zi and Chen complete it forms a high structure; with Yin, Wu and Xu complete it needs to be kept in balance."
+  }
+ },
+ "co_van_thap_than": {
+  "Tỷ Kiên": {
+   "y": "The classic calls the Friend star \"siblings\": people who stand shoulder to shoulder with you. Peers mean company, and now and then a contest over the same share. The point: this star shows how you stand beside your equals — pulling together or competing."
+  },
+  "Kiếp Tài": {
+   "y": "The classic says: wealth is what everyone wants, so when brothers see it together, contests often follow. The point: Rob Wealth is about sharing with family, friends and partners — agree clearly on who holds what from the start."
+  },
+  "Thực Thần": {
+   "y": "The classic describes a person with the Eating God: well provided for, generous at heart, full in build, at ease and content. It adds that this star likes a sturdy self and is wary of the Indirect Resource crowding it. The point: this is the gift of enjoying and knowing what is enough."
+  },
+  "Thương Quan": {
+   "y": "The classic describes a person with the Hurting Officer: many talents, a proud spirit, often feeling that no one measures up — so superiors grow wary and others take offence. The point: the talent is real; what needs care is how you speak and how you regard people."
+  },
+  "Thiên Tài": {
+   "y": "The classic describes a person with Indirect Wealth: generous, not one to cling to money. The point: this money comes through dealings and outside chances; what arrives fast can leave fast — generosity is a strength as long as something is kept back."
+  },
+  "Chính Tài": {
+   "y": "The classic says: wealth should come at the right time; it need not be plentiful. You must be strong in body and spirit to enjoy what you earn — when you are worn out, a great deal of wealth can only be looked at. The point: look after your own strength first, then think about earning more."
+  },
+  "Thất Sát": {
+   "y": "The classic says: when the self is strong, this pressure is the \"Indirect Officer\" — it becomes authority and big work; only when the self is weak and nothing restrains it is it called the \"Seven Killings\". It adds: restrain it, but not too hard. The point: do not rush to call pressure bad; keep your strength and choose the right hard thing."
+  },
+  "Chính Quan": {
+   "y": "The classic says: too much Direct Officer is no blessing, because a chart is best in balance — too much is the same as too little. The point: rules and duty support you in the right measure; carrying too many roles turns them into a load."
+  },
+  "Thiên Ấn": {
+   "y": "The classic likens the Indirect Resource (when it crowds the Eating God) to an elder holding you back, leaving little freedom; the pitfall it names is advancing and retreating, starting without finishing. The point: this star thinks deeply and differently; choose fewer things and see them through."
+  },
+  "Chính Ấn": {
+   "y": "The classic says: the Resource is \"what gives birth to me\", also called the breath of life — support that is already there. It describes such a person as wise, at ease in body and mind, and kind. It adds that the Resource is wary of overly strong Wealth. The point: you have something to lean on; do not let money matters wear away your learning and calm."
+  }
+ }
 }

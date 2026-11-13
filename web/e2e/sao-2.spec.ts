@@ -87,7 +87,7 @@ test("xem trước: chương đầu đọc được, chương sau khoá kèm đi
 });
 
 test("mở khoá thiếu Sao → nạp nhanh ngay trong hộp, gợi ý gói nhỏ nhất đủ dùng", async ({ page }) => {
-  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "payos", goi: [
+  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "pay2s", goi: [
     { ma: "thu", ten: "Thử", gia_vnd: 29000, sao: 30, nhan: null, mo_ta: "Đủ 3 lần" },
     { ma: "pho_bien", ten: "Phổ biến", gia_vnd: 99000, sao: 110, nhan: "Phổ biến", mo_ta: null },
   ] } }));

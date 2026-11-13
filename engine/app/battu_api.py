@@ -14,6 +14,7 @@ from app.kb.loi import L
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
+from app.luangiai import sach_xua
 from app.calc import battu, battu_mo_rong
 from app.kb import tu_dien
 from app import nhat_ky
@@ -63,6 +64,7 @@ def api_la_so(inp: TuanTrietInput) -> dict:
           "tuy_chon": {"dieu_hau": inp.dieu_hau, "nam_ban_cau_kha_dung": nam_ban_cau_kha_dung(sinh["_vi_do"])},
           "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls), "cach_cuc_tbct": cach_tbct(ls)},
           "loi_thuong": loi_thuong(ls)}
+    ra["sach_xua"] = sach_xua.battu(ls, ra["mo_rong"])       # SX-1: câu sách xưa ứng với lá số (chỉ bản Việt)
     if not ngon_ngu.la_viet():
         from app.luangiai import battu_hien  # noqa: PLC0415 — EN-ALL GĐ 3: câu CALC theo ngôn ngữ (bản Việt không qua đây)
         ra = battu_hien.la_so(ra)
@@ -88,7 +90,8 @@ def dieu_hau(ls: dict) -> dict | None:
         return None
     d = battu_mo_rong.dieu_hau_ctbg(ls, b["can"])
     mua = (battu_kb.nhat_chu(ls["nhat_chu"]["can"]) or {}).get("mua", {}).get(d["mua"])
-    return {**d, "mua_y": mua, "nguon": b["nguon"], "trang_thai": b["trang_thai"], "can_doi_chieu": b["can_doi_chieu"]}
+    return {**d, "mua_y": mua, "trich": b.get("trich"), "nguon": b["nguon"], "trang_thai": b["trang_thai"],
+            "can_doi_chieu": b["can_doi_chieu"]}
 
 
 class LuuNienBTInput(BaseModel):

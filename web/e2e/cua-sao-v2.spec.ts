@@ -117,7 +117,7 @@ test("hỏi đáp: đủ Sao → hộp đồng ý nói ví đủ mấy câu + Sa
 
 test("nạp (ví thiếu): ba lối — Đọc ngay (một gói vừa đủ + QR, gói khác gập), thẻ hội viên khi bật; điện thoại không tràn ngang", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "payos", gia_bao_cao: 29, goi: [
+  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "pay2s", gia_bao_cao: 29, goi: [
     { ma: "khoi_dau", ten: "Khởi đầu", gia_vnd: 19000, sao: 19, nhan: "Khởi đầu", mo_ta: null },
     { ma: "thu", ten: "Thử", gia_vnd: 29000, sao: 30, nhan: null, mo_ta: "Gói nhỏ để thử" },
     { ma: "pho_bien", ten: "Phổ biến", gia_vnd: 99000, sao: 110, nhan: "Phổ biến", mo_ta: null },
@@ -151,7 +151,7 @@ test("nạp (ví thiếu): ba lối — Đọc ngay (một gói vừa đủ + QR
 });
 
 test("nạp khi CHƯA nhận quà chào mừng: gói gợi ý + số bạn cần mời tính phần thiếu SAU quà (không gợi nạp dư); quà đủ giá → chỉ một nút", async ({ page }) => {
-  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "payos", gia_bao_cao: 29, goi: [
+  await page.route("**/api/thanh-toan/goi", (r) => r.fulfill({ json: { cong: "pay2s", gia_bao_cao: 29, goi: [
     { ma: "khoi_dau", ten: "Khởi đầu", gia_vnd: 19000, sao: 19, nhan: "Khởi đầu", mo_ta: null },
     { ma: "thu", ten: "Thử", gia_vnd: 29000, sao: 30, nhan: null, mo_ta: null },
   ] } }));

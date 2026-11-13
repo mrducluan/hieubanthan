@@ -58,7 +58,7 @@ mua bằng VND; chương trình giới thiệu; dịch vụ hỏi chuyên gia (v
 ## 5. Bên xử lý thay (chi tiết tệp 02)
 
 Hạ tầng web (Vercel, sin1/US), tính toán (Render, Singapore), cơ sở dữ liệu + đăng nhập (Supabase, Singapore), cổng
-thanh toán (payOS, Việt Nam), AI diễn đạt + thị giác (OpenRouter → nhà cung cấp mô hình, Hoa Kỳ), đo lường (PostHog EU/US;
+thanh toán (Pay2S, Việt Nam), AI diễn đạt + thị giác (OpenRouter → nhà cung cấp mô hình, Hoa Kỳ), đo lường (PostHog EU/US;
 Google), báo lỗi (Sentry), push (Google/Apple/Mozilla/Microsoft).
 
 ## 6. Quyền của chủ thể dữ liệu và cách thực hiện

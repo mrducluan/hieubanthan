@@ -3,7 +3,73 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-10 (BT-UI mục 4ak, SEO-N mục 4al, BLOG-10 mục 4am, TR-5 mục 4an, SEO-O mục 4ao).
+> Cập nhật lần cuối: 2026-11-12 (KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4ar. KT-TT — kiểm toán kho tri thức Tử vi · Bát tự · Kinh Dịch (2026-11-12, `docs/KIEM-TOAN-TRI-THUC-2026-11.md`)
+
+- [x] (Q1–Q3 đã duyệt 2026-11-12; điều hậu đã sửa 34 ô — chỉ là phần hiển thị, không đổi phép tính)
+- [x] (Quyết định **Q5**) anh giao em quyết 2026-11-12 — đã sửa 2/4 chỗ có căn cứ nguyên văn (Thất Sát, Chính Ấn / Thiên Ấn), 2 chỗ kia không cần sửa; khoảng 3 % lá số đổi một nhãn; `ENGINE_VERSION` 0.1.8 (tài liệu mục 10.6). **Việc của anh: deploy engine trước web.**
+- [x] KT-TT4 (2026-11-12): lá số Bát tự thuộc cách cục đặc biệt (≈ 0,6 %) có thêm hộp "Một cách đọc khác" theo «Luận tạp cách» — anh không cần làm gì; khi có phiếu "Đúng với mình" em sẽ báo số.
+- [x] KT-TT5 (2026-11-12): bài đọc Kinh Dịch có thêm dòng "Thế chung của quẻ" (quẻ dễ tan / dễ kết / lòng chưa yên…) theo Tăng San Bốc Dịch — anh không cần làm gì.
+- [ ] KT-TT6 (2026-11-12): xem `docs/DO-TIN-KHO-TRI-THUC.md` (tệp nào đã có nguyên văn đối chiếu, tệp nào mới là tóm ý / biên tập) và cho em biết muốn nâng mức phần nào trước — em đề xuất thứ tự ở mục 10.10 của tài liệu kiểm toán.
+- [x] **KT-NT1/2 (2026-11-13) — sách Nhân tướng**: anh đã gửi; 3 tệp chữ archive.org là chữ máy nhận dạng hỏng (không dùng được),
+  em lấy bốn sách tướng thuật bản Tứ khố đã gõ lại → cả 25 câu trích KB nay khớp sách (`docs/KIEM-TOAN-TRI-THUC-2026-11.md` mục 10.14).
+  Không cần nạp lại ngay. Nếu sau này muốn thêm nội dung riêng của Liễu Trang / Thuỷ Kính / Ma Y: tìm **bản gõ** (sách in chữ chì có
+  chấm câu, hoặc tệp chữ do người soát) — bản quét PDF đẹp nhưng không có lớp chữ.
+- [x] KT-TT7 (2026-11-12, xong KT-TT8 2026-11-13: sửa Quân thần + Nguyệt sinh theo sách): bốn cách cục Tử vi đang nhận diện KHÁC chữ Toàn Thư (bảng ở mục 10.11 tài liệu kiểm toán) — anh quyết sửa theo sách hay giữ; em đề xuất sửa Quân thần khánh hội + Nguyệt sinh thương hải, giữ hai cách còn lại.
+- [x] (đã lên — kiểm 2026-11-13) Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
+- [ ] **KT-N2 (2026-11-13) — ba thần sát Bát tự đang khác chữ Tam Mệnh Thông Hội** (em KHÔNG đổi phép tính, chỉ ghi rõ trên lá số
+  "sách chép cách khác"; anh quyết giữ bảng phổ biến hay đổi theo sách — đổi thì tăng `ENGINE_VERSION`): **Hồng Diễm** (sách: Ất gặp Ngọ,
+  Mậu gặp Tý, Nhâm gặp Tỵ; engine: Ất–Thân, Mậu–Thìn, Nhâm–Tý), **Văn Xương** (engine dùng bảng Giáp Tỵ, Ất Ngọ… phổ biến ở sách
+  đời sau; câu của Tam Mệnh là bảng khác), **Thiên Y** (không có trong sách này). Em đề xuất: giữ như hiện nay.
+- [ ] **SX-1 (2026-11-13)**: sau khi lên, mở `/bat-tu` và `/tu-vi` bằng hồ sơ của anh, đọc khối "Sách xưa nói gì về lá số của bạn" — câu nào lời Việt chưa sát thì báo em (hoặc sửa ở `/quan-tri` → Kho tri thức). **Deploy engine trước web.**
+- [ ] **HD-TD (2026-11-13) — hàng đợi thẩm định**: xuất tab "Trang" từ Search Console (CSV) gửi em, em chạy `scripts/tham_dinh.py hang-doi --gsc` ra danh sách 30 trang nên duyệt trước (nhiều hiển thị + có câu sách để so). Cụm "Cổ thư Bát tự" 47 thiên em hoãn — lý do ở `docs/KIEM-TOAN-TRI-THUC-2026-11.md` mục 10.18; anh muốn làm thì báo em, em bắt đầu 8–10 thiên.
+- [ ] **KT-N2 — nguồn Phong thuỷ**: kho Tứ khố chỉ có *Trạch Kinh* (24 lộ, âm trạch / dương trạch — không phải Bát trạch engine đang
+  dùng), *Táng Thư*, *Hám Long Kinh* (âm trạch, hình thế núi). Sách engine thật sự dựa vào là **Dương Trạch Tam Yếu** (Triệu Cửu Phong,
+  đời Thanh) và **Bát Trạch Minh Kính** — không có bản gõ trong kho em vào được. Anh có **bản gõ chữ Hán** (hoặc bản dịch Việt cũ
+  đã hết bản quyền) thì gửi em; PDF quét không có lớp chữ thì em không đọc được.
+- [ ] (Tuỳ chọn) Mời người rành Dịch / Tử vi đọc soát: 64 trang quẻ (lời Ngô Tất Tố bản điện tử còn lỗi gõ), 74 nghĩa sao nhỏ.
+- [x] **Gửi sách em không tự lấy được** (anh đã gửi thư mục Drive 9 tệp 2026-11-12) (Google Drive hoặc đính kèm; PDF chữ tốt hơn ảnh quét) — ưu tiên: (1) *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang), (2) *Tử vi tổng hợp* (Nguyễn Phát Lộc), (4) *Tử Bình Chân Thuyên* bản chữ — mở `ctext.org/wiki.pl?if=gb&res=413248` trên trình duyệt rồi lưu PDF, (5) *Uyên Hải Tử Bình* bản đủ (ctext res=307303), (6) *Kinh Dịch* Ngô Tất Tố dịch / *Chu Dịch* Phan Bội Châu. Bảng đầy đủ: mục 6 của tài liệu.
+- [x] (anh duyệt 2026-11-13) **SK-2 (2026-11-12) — xem lại danh sách tên bệnh** em chọn cho 5 hành + 14 chính tinh (`engine/app/kb/data/suc_khoe_kb.json`, trường `benh`; sửa ở `/quan-tri` → Kho tri thức). Em cố ý KHÔNG đưa bệnh hiểm nghèo (ung thư, đột quỵ, suy thận…) — anh muốn thêm thì báo em. Nên hỏi luật sư một câu: nêu tên bệnh trong lời "nên đi khám để phát hiện sớm …" có cần thêm miễn trừ nào không.
+- [x] **Uyên Hải Tử Bình** — anh đã tải lại 2026-11-12, em đã nạp thử vào kho nguồn (`docs/KIEM-TOAN-TRI-THUC-2026-11.md` mục 10.5). (Không gấp) nếu anh có **bản khắc / bản đủ 5 quyển** thì gửi để em so lại — bản hiện tại là bản điện tử đã lược bớt.
+- [x] (đã lên — kiểm 2026-11-13) Deploy **engine** để 24 chỗ kinh văn Kinh Dịch vừa sửa lên trang quẻ (web không cần đổi).
+- [ ] (Đã làm) Môi trường `hieubanthan` thêm tên miền `zh.wikisource.org` — anh đã duyệt ở hộp thoại; không cần làm gì thêm.
+
+### 4aq. PAY2S-1 — Pay2S thay payOS · thẻ Visa/Mastercard (2026-11-12, `docs/KE-HOACH-THANH-TOAN.md` mục 0b, `docs/SO-SANH-CONG-THE.md`)
+
+- [ ] **Chạy migration `0037_cong_pay2s.sql`** (Supabase → SQL Editor, SAU 0036; kiểm bằng `supabase/kiem_thu/da_chay_chua.sql`).
+  Chưa chạy thì nút nạp báo "Cổng thanh toán chưa sẵn sàng" — không thu nhầm tiền.
+- [ ] Đăng ký **Pay2S** (pay2s.vn) bằng tài khoản ngân hàng của anh → liên kết tài khoản nhận tiền → mục Tích hợp lấy
+  **Partner Code, Access Key, Secret Key**. Không dán khoá vào chat.
+- [ ] Vercel (dự án **web**, Production, không `NEXT_PUBLIC_`): `PAY2S_PARTNER_CODE`, `PAY2S_ACCESS_KEY`, `PAY2S_SECRET_KEY`,
+  `PAY2S_BANK_ACCOUNTS` = `số tài khoản|mã ngân hàng` (vd `0123456789|ACB`; nhiều tài khoản ngăn bằng `;`),
+  `SUPABASE_SERVICE_ROLE_KEY`, `CRON_SECRET` (≥ 16 ký tự) → Redeploy. Xoá 3 biến `PAYOS_*` nếu đã đặt.
+  Tuỳ chọn: `PAY2S_TOKEN` nếu trang Tích hợp của Pay2S cấp token API lịch sử giao dịch khác với Base64(Secret Key).
+- [ ] **Webhook giao dịch ngân hàng** (đường báo tiền thứ hai, bắt cả khi khách tự chuyển khoản đúng nội dung `HBT…`):
+  Pay2S → Webhooks → Thêm webhook: chọn tài khoản nhận tiền, sự kiện **Nhận tiền**, Endpoint
+  `https://hieuban.com/api/thanh-toan/webhook/pay2s-ngan-hang` → lưu → **chép token** (Pay2S chỉ hiện một lần) →
+  Vercel đặt `PAY2S_HOOK_TOKEN` = token đó (≥ 16 ký tự) → Redeploy. Chưa đặt thì đường này tự khoá (401), IPN vẫn chạy.
+- [ ] Thử thật gói nhỏ nhất: nạp → quét QR → thấy "Đã nhận … Sao". IPN về `https://hieuban.com/api/thanh-toan/webhook/pay2s`
+  (web tự gửi địa chỉ này mỗi đơn, không cần khai ở Pay2S). Lỡ IPN thì trang kết quả tự đối soát qua lịch sử giao dịch.
+- [ ] (Quyết định) **Thẻ Visa/Mastercard**: Pay2S không có. Cổng thẻ Việt Nam (SePay, VNPAY, OnePay) bắt buộc đăng ký
+  kinh doanh; Paddle cấm ngành tử vi; Lemon Squeezy nhận cá nhân nhưng rủi ro khoá cửa hàng. Đọc `docs/SO-SANH-CONG-THE.md`
+  rồi báo em: đăng ký hộ kinh doanh + hỏi SePay, hay hỏi Lemon Squeezy cho khách nước ngoài.
+
+
+### 4ap. KW-6T — kế hoạch từ khoá blog 6 tháng (2026-11-11, `docs/KE-HOACH-TU-KHOA-SEO-6-THANG.md`)
+
+- [ ] Đọc Google Sheet "Hieuban — Kế hoạch từ khoá SEO 6 tháng" (Drive của anh) → duyệt / bỏ bài ở tab "Từ khoá & bài viết", cột "Trạng thái".
+- [ ] **Sửa 24 bài cũ đã có sẵn trong migration CMS `kw6t_bai_cu`** — merge PR rồi để Vercel deploy dự án CMS (migration chạy lúc build).
+  Sau deploy: Vercel (dự án CMS) → Logs → tìm `KW-6T:` — mỗi bài "xong" hoặc lý do (vd "có bản nháp đang sửa — không đè":
+  mở bài đó, xuất bản hoặc bỏ bản nháp, rồi báo em chạy lại). Kiểm nhanh: `/blog/xem-hop-doi-xem-tinh-yeu-boi-tinh-yeu-boi-nguoi-do-doc-sao-cho-tinh-tao`
+  phải chuyển sang `/blog/xem-hop-doi-theo-ngay-sinh-doc-sao-cho-tinh-tao`; `/blog/tu-vi-ly-so-la-gi-cach-hieu-la-so-va-kiem-tra-du-lieu-sinh`
+  chuyển sang `/blog/tu-vi-la-gi-cau-truc-la-so-cach-doc-va-gioi-han`. Muốn trả lại như cũ: `payload migrate:down` (khôi phục bản trước).
+- [ ] Đọc lại 24 bài khi rảnh (ghi chú "KW-6T" trong "Ghi chú của Chủ biên" nói rõ máy đã sửa gì); thấy ổn bấm Xuất bản → "Đã duyệt".
+- [ ] Search Console → Kiểm tra URL → Yêu cầu lập chỉ mục cho 3 đường dẫn mới (hợp đôi, hợp sếp, Kinh Dịch hay Bát tự).
+- [ ] **Hạn chót 10/1/2027**: 15 bài cụm Tết 2027 (C8) đã xuất bản.
+- [ ] Nối Search Console + GA4 của hieuban.com vào NotFair, hoặc gửi CSV Truy vấn + Trang 3 tháng → em thay lượng tìm ước lượng bằng số thật.
+- [ ] (Tuỳ chọn) Cho phép `trends.google.com` trong mạng môi trường để em kiểm xu hướng 12 tháng của 88 từ khoá.
+- [ ] (Quyết định) Có mở cụm chiêm tinh / cung hoàng đạo (cần làm công cụ trước) hay chỉ giữ 1–2 bài cầu nối.
 
 ### 4ao. SEO-O — ảnh tóm tắt + nội dung dày cho trang năm, lịch & tuổi (2026-11-10, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 6)
 
@@ -42,7 +108,7 @@
 
 - [ ] **Deploy engine trước web** (trường mới `ba_la` ở `/v1/thanso/hom-nay`, trang `ban_than` ở `/v1/goi-y-cheo`). Web lên trước thì
   Hôm nay vẫn hiện Lá bài đầu ngày cũ và khối "Bảy cách nhìn" tự ẩn — không vỡ trang, tự đúng khi engine xong.
-- [ ] **Render → `hieubanthan-engine-sg` → Environment: thêm `LA_NGAY_MUOI`** = một chuỗi ngẫu nhiên ≥ 16 ký tự (vd lấy từ
+- [x] (anh đã đặt 2026-11-13) **Render → `hieubanthan-engine-sg` → Environment: thêm `LA_NGAY_MUOI`** = một chuỗi ngẫu nhiên ≥ 16 ký tự (vd lấy từ
   trình tạo mật khẩu, 32 ký tự), giữ bí mật. Có biến này thì lá Tarot riêng mới hiện trên thẻ chia sẻ "Ba lá"; chưa đặt thì
   thẻ vẽ lá Tarot úp (vẫn chia sẻ được, không lộ gì). Đặt xong mọi người đổi lá riêng một lần — nên đặt ngay lúc deploy.
 - [ ] (3 phút) `/hom-nay`: lật đủ ba lá → "Ba lá ghép lại" → "Chia sẻ ba lá" → mở link thẻ trên máy khác, "Tải ảnh" có QR.
@@ -250,7 +316,7 @@ Không có lỗi kỹ thuật — Google chưa tải các trang (xếp hàng). Q
       hỏi đáp thử "năm nào tôi cần để ý sức khoẻ?", "tôi có bị bệnh tim không?" — xem giọng có ổn không.
 - [ ] (Quyết định) Trả lời 7 câu hỏi ở `docs/DE-XUAT-Y-TUVI-BO-SUNG.md` mục 9 (200 ý viết lại từ lời giảng hiện đại) — trả lời xong em mới nối vào sản phẩm.
 - [ ] (Chuyên gia, dần dần) Đối chiếu 84 câu Cốt Tuỷ Phú với bản khắc / bản in (`docs/CO-THU-COT-TUY-PHU.md`), duyệt phiên âm + nghĩa.
-- [ ] (Quyết định nhỏ) Quân thần khánh hội: giữ "Tử Vi + 3/7 cát tinh" hay theo sách "phải đủ Tả Phù + Hữu Bật"? (`docs/DOI-CHIEU-ZIWEI-DOUSHU.md`)
+- [x] (Quyết định nhỏ, KT-TT8: theo sách) Quân thần khánh hội: giữ "Tử Vi + 3/7 cát tinh" hay theo sách "phải đủ Tả Phù + Hữu Bật"? (`docs/DOI-CHIEU-ZIWEI-DOUSHU.md`)
 - [ ] Search Console → Kiểm tra URL `https://hieuban.com/tu-vi/co-thu/cot-tuy-phu` → Yêu cầu lập chỉ mục.
 
 ### 4w. Học từ repo Tử vi ziwei-doushu (TV-ZW, 2026-11-04) — sau khi merge
@@ -1061,15 +1127,14 @@ Chi tiết + lý do chọn: `docs/KIEN-TRUC-CMS.md` mục 7. Chưa làm các bư
 ## TT. Thanh toán nạp Sao (kế hoạch + các bước bật: `docs/KE-HOACH-THANH-TOAN.md` mục 0b)
 
 Code đã làm (2026-10-12, hình thức cá nhân): `/nap-sao`, payOS, webhook, đối soát, migration 0012, trang `/ung-ho`.
+**2026-11-12: Pay2S thay payOS** — bước bật ở mục 4aq (TT-b cũ không làm nữa).
 
 - [x] TT-0. Chạy migration **`0012_thanh_toan.sql`** *(đánh dấu 27/10/2026: anh báo xong việc, thẻ "Migration Supabase" ở /quan-tri báo Đủ — nếu chưa đúng thì bỏ dấu)* (sau khi bật tài khoản — mục F).
-- [ ] TT-b. Đăng ký **payOS** bằng tài khoản ngân hàng của anh → Vercel đặt `PAYOS_CLIENT_ID`, `PAYOS_API_KEY`,
-  `PAYOS_CHECKSUM_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `CRON_SECRET` → Redeploy → payOS khai Webhook URL
-  `https://hieuban.com/api/thanh-toan/webhook/payos`. Không dán khoá vào chat.
+- [x] TT-b. ~~Đăng ký payOS~~ *(bỏ 12/11/2026: anh chọn Pay2S — làm theo mục 4aq)*.
 - [ ] TT-f. **Ủng hộ crypto**: Vercel đặt `UNG_HO_VI` = `USDT (TRC20)|<địa chỉ>;Bitcoin|<địa chỉ>` (tuỳ chọn
   `UNG_HO_NGAN_HANG` = `Ngân hàng|Số TK|Chủ TK`) → Redeploy → nút ủng hộ hiện ở chân trang, `/ung-ho`, cuối bài.
 - [ ] TT-a. Hộ kinh doanh + MST (anh bổ sung sau) → em làm hoá đơn điện tử (TT-6), mở thẻ Visa (TT-3).
-- [ ] TT-c. Liên hệ VNPay hoặc OnePay nếu muốn nhận thẻ Visa/Master/JCB.
+- [ ] TT-c. Thẻ Visa/Master/JCB: xem `docs/SO-SANH-CONG-THE.md` (SePay / VNPAY / OnePay cần đăng ký kinh doanh).
 - [ ] TT-d. Luật sư rà điều khoản Sao + hoàn tiền; chọn nhà cung cấp hoá đơn điện tử.
 - [ ] TT-e. Quyết bật tài khoản (mục F) — Sao cần gắn tài khoản.
 
@@ -1358,3 +1423,16 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] Hỏi luật sư: Luật Trí tuệ nhân tạo 134/2025 (hiệu lực 01/3/2026) về nhãn "nội dung AI" cho "Hỏi đáp chuyên sâu".
 - [ ] Quyết từng sản phẩm mới ngoài 4 mảng: báo cáo chủ đề giá thấp · đặt tên con · sổ người thân · bản đồ nhóm · xem số SIM/biển số · Tarot · đọc thành tiếng.
 - [ ] Duyệt thứ tự EN-1 → EN-6 (em đề xuất làm EN-1 an toàn + đúng ngay).
+
+## GN-2. Ô "Góc nhìn chuyên gia" để anh tự viết (2026-11-12, thay cho việc em viết "kinh nghiệm" hộ)
+
+- [ ] **GN2-1.** Vào `/quan-tri` → **Kho tri thức** → tệp **"Góc nhìn chuyên gia — ô để anh tự viết (42 trang)"** (`goc_nhin.json`). Mỗi trang có
+  4 phần: `trang` (tên), `goi_y` (3 câu hỏi gợi ý, không hiện công khai), **`noi_dung`** (để trống — anh viết 2–4 câu kinh nghiệm THẬT của
+  anh, 60–800 ký tự) và **`ngay`** (gõ `2026-11-12` kiểu năm-tháng-ngày). Bấm **Xuất bản** → mở PR → CI kiểm luật → anh merge là hiện khung
+  "Góc nhìn chuyên gia" dưới "Trả lời nhanh" của đúng trang đó. Ô trống thì web không hiện gì.
+- Luật nội dung (CI chặn nếu vi phạm): không phán ("sẽ phá sản", "định mệnh"…), không tên bệnh / tuổi thọ, không vật phẩm / giải hạn, không
+  link / số điện thoại. Em chỉ sửa chính tả khi anh nhờ, không thêm ý. Điền ô **không** tự biến trang thành "đã thẩm định" — thẩm định vẫn
+  là việc riêng anh quyết (Phòng duyệt → `scripts/ap_duyet.py`).
+- Gợi ý cách làm nhanh: mỗi trang kể MỘT tình huống anh thật sự đã gặp (ẩn danh) hoặc một điều anh thấy khác sách; 5–10 phút/trang; làm
+  trước 14 chính tinh + 12 cung + 3 trang dấu hiệu nhà đang có hiển thị.
+- Bài viết blog trong CMS: đã có sẵn mục chữ ký "Chuyên gia là tác giả / thẩm định" (anh tự tích xác nhận) — không cần ô riêng.

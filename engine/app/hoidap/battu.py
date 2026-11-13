@@ -289,7 +289,7 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
             if ls:
                 from app.kb import suc_khoe_kb  # noqa: PLC0415
                 tl = ls["ngu_hanh"]["diem"]
-                he = suc_khoe_kb.he_hanh(min(("Mộc", "Hỏa", "Thổ", "Kim", "Thủy"), key=lambda h: tl.get(h, 0)))
+                he = suc_khoe_kb.he_hanh(min(("Mộc", "Hỏa", "Thổ", "Kim", "Thủy"), key=lambda h: tl.get(h, 0)), benh=True)
             goi["mau"] = chung.mau_tu_choi(pl.get("cau_goc"), pl["cau_chuan_hoa"], goi["mau"], he)
         return chung.ket(goi)
     if pl["xu_ly"] == "dan_huong":

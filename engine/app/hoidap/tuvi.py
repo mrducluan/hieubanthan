@@ -292,6 +292,23 @@ def _phu_nhac(t: str) -> list[str]:
     return ds
 
 
+# KT-TT: sao nhỏ (tạp diệu, các vòng) chỉ nhận khi tên đủ hai chữ. Tên bỏ dấu trùng chữ thường («lâm quan / làm quan»,
+# «quan đới / quân đội», «tử phù / Tử Phủ», «âm sát / ám sát»…) phải gõ ĐÚNG dấu; tên trùng tên cung hay hạn năm thì không nhận.
+_SAO_NHO_BO = {"Phúc Đức", "Thái Tuế"}
+_SAO_NHO_CAN_DAU = {"Bác Sỹ", "Thiên Tài", "Tử Phù", "Tướng Quân", "Âm Sát", "Phan Án", "Lâm Quan", "Quan Đới", "Đài Phụ",
+                    "Quan Phủ", "Quan Phù", "Hối Khí", "Thiên Thương"}
+
+
+def _sao_nho_nhac(t: str, raw: str) -> list[str]:
+    ds, thuong = [], raw.lower()
+    for p in kb.ten_sao_nho():
+        if " " not in p or p in _SAO_NHO_BO:
+            continue
+        if (p.lower() in thuong) if p in _SAO_NHO_CAN_DAU else chung.co(t, [chung.chuan_hoa(p)]):
+            ds.append(p)
+    return ds
+
+
 def _giai_thich_khop(t: str) -> list[str]:
     return [ma for ma, m in kb.giai_thich_tat_ca().items() if chung.co(t, m["tu_khoa"])]
 
@@ -418,6 +435,10 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
         kq["loai"] = "tu_hoa_cung" if kq["hoa"] and kq["cung"] else "sao_cung"
     elif not kq["ca_nhan"] and kq["phu"] and chung.co(t_chinh, [r"la gi", r"y nghia", r"nghia la", r"la (sao|cung|cach) gi"]):
         kq["loai"] = "phu_tinh"
+    elif (not kq["ca_nhan"] and not (kq["sao"] or kq["hoa"] or kq["cung"])
+          and chung.co(t_chinh, [r"la gi", r"y nghia", r"nghia la", r"la (sao|cung|cach) gi", r"noi (ve|len) (dieu )?gi"])
+          and (nho := _sao_nho_nhac(t_chinh, cau_hoi))):
+        kq["loai"], kq["phu"] = "phu_tinh", nho          # KT-TT: tạp diệu, sao các vòng
     elif chung.co(t_chinh, HAN) and not kq["cung"]:
         kq["loai"] = "han"
     else:
@@ -549,7 +570,7 @@ def _m_tu_hoa(hoa: str, cung_: str, sao: str | None = None) -> dict | None:
 
 
 def _m_phu(ten: str, cung_: str | None) -> dict | None:
-    p = kb.phu_tinh(ten)
+    p = kb.phu_tinh(ten) or kb.sao_nho(ten)
     return {"loai": "phu_tinh", "ten": ten, "cung": cung_, **p} if p else None
 
 
@@ -1287,7 +1308,9 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
         return L("hoi.tv.ptc", "Phụ tinh đáng kể ở cung {cung}: {ds}", cung=_tc(m["cung"]), ds=ds), None
     if l == "phu_tinh":
         noi = L("hoi.tv.pt.noi", " — trong lá số của bạn nằm ở cung {cung}", cung=_tc(m["cung"])) if m.get("cung") else ""
-        return f"{_ts(m['ten'])} ({_nhom_sao(m['nhom'])}){noi}: {m['y_nghia']}", None
+        tc = kb.phu_tinh_cung(m["ten"], m.get("cung")) if ngon_ngu.la_viet() else None   # KT-TT3: theo Toàn Thư quyển 3
+        them = f" Riêng ở cung {m['cung']}, sách xưa ghi: {tc['y']}" if tc else ""
+        return f"{_ts(m['ten'])} ({_nhom_sao(m['nhom'])}){noi}: {m['y_nghia']}{them}", None
     if l == "tuoi":
         return L3("hoi.tv.tuoi", "Tuổi mụ tại thời điểm xem: {t}.", "Tuổi mụ của chủ lá số tại thời điểm xem: {t}.",
                   t=m["tuoi_mu"]), None

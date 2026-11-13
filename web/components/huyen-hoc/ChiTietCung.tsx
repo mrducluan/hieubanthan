@@ -30,7 +30,7 @@ const NHOM_THU_TU: NhomSao[] = ["cat", "sat", "dao_hoa", "trung"];   // tên nh�
 const MAU_NHOM: Record<NhomSao, string> = { cat: "text-gold", sat: "text-cinnabar", dao_hoa: "text-[rgb(244_154_193)]", trung: "text-fg-muted" };
 
 /** Một sao trong thẻ chi tiết: tên hiển thị + dữ liệu engine để mở thẻ sao. */
-interface MucSao { ten: string; hien: string; doSang: string | null; nguonDoSang?: string; tuHoa: string | null; trang?: string | null }
+interface MucSao { ten: string; hien: string; doSang: string | null; nguonDoSang?: string; tuHoa: string | null; trang?: string | null; nghia?: string | null }
 
 const nguon = (s: { do_sang_nam_phai?: string | null; do_sang: string | null }) =>
   s.do_sang_nam_phai ? "nam" : s.do_sang ? "trung" : undefined;   // mã nguồn độ sáng → chữ: ct.nam_phai / ct.phai_trung
@@ -57,7 +57,7 @@ export function ChiTietCung({ ls, chi, vanHan, hanSao, lop, onHoi, onDienCau, ph
     const ds = s.do_sang_nam_phai ?? s.do_sang;      // ưu tiên lối Việt (TV-NP2)
     const tS = tn("sao", s.ten);
     nhom[nhomSao(s.ten, s.loai)].push({ ten: s.ten, hien: ds ? `${tS} (${dsDay(ds)})` : tS, doSang: ds,
-      tuHoa: s.tu_hoa, nguonDoSang: nguon(s) });
+      tuHoa: s.tu_hoa, nguonDoSang: nguon(s), nghia: c.nghia_sao_nho?.[s.ten]?.y_nghia ?? null });
   }
   const daCo = new Set(c.phu_tinh.map((s) => s.ten));
   for (const t of [c.bac_si, c.tue_tien, c.tuong_tien, ...c.tap_dieu.filter((t) => !AN_TAP_DIEU.has(t))]) {
@@ -66,7 +66,7 @@ export function ChiTietCung({ ls, chi, vanHan, hanSao, lop, onHoi, onDienCau, ph
     const ds = c.do_sang_phu?.[t];
     const hien = t === c.tue_tien ? tenThaiTue(c, phai) : t, hienTen = tn("sao", hien);
     nhom[nhomSao(t)].push({ ten: hien, hien: ds ? `${hienTen} (${dsDay(ds)})` : hienTen, doSang: ds ?? null, tuHoa: null,
-      nguonDoSang: ds ? "nam" : undefined });
+      nguonDoSang: ds ? "nam" : undefined, nghia: c.nghia_sao_nho?.[hien]?.y_nghia ?? c.nghia_sao_nho?.[t]?.y_nghia ?? null });
   }
   const tt = [ls.tuan_triet?.tuan.includes(chi) && t("ls.tuan"), ls.tuan_triet?.triet.includes(chi) && t("ls.triet")].filter(Boolean);
   const hoaCung = [...c.chinh_tinh, ...c.phu_tinh].filter((s) => s.tu_hoa);
@@ -135,7 +135,7 @@ export function ChiTietCung({ ls, chi, vanHan, hanSao, lop, onHoi, onDienCau, ph
           <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-sm">
             <dt className="text-fg-faint">{t("ct.tam_hop")}</dt><dd>{tp.tam_hop.map(tenTai).join(" · ")}</dd>
             <dt className="text-fg-faint">{t("ct.xung_chieu")}</dt><dd>{tenTai(tp.xung)}</dd>
-            <dt className="text-fg-faint">{t("ct.truong_sinh")}</dt><dd>{tn("truong_sinh", c.truong_sinh)}</dd>
+            <dt className="text-fg-faint">{t("ct.truong_sinh")}</dt><dd>{tn("truong_sinh", c.truong_sinh)}{c.nghia_sao_nho?.[c.truong_sinh] && <span className="text-fg-faint" data-testid="nghia-truong-sinh"> — {c.nghia_sao_nho[c.truong_sinh]!.y_nghia}</span>}</dd>
             {tt.length > 0 && (<><dt className="text-fg-faint">{t("ct.khong_vong")}</dt><dd>{t("ct.dong_tai", { ds: tt.join(", ") })}</dd></>)}
             <dt className="text-fg-faint">{t("ct.tieu_han")}</dt><dd>{t("ct.tieu_han_truoc")}{c.tieu_han_tuoi.slice(0, 6).join(", ")}…</dd>
             {vanHan && (
@@ -224,6 +224,7 @@ function TheSao({ m, cung, han, onHoi }: { m: MucSao; cung: string; han?: VanHan
     <div className="w-full rounded-xl border border-line/70 bg-surface/50 p-3.5 text-sm text-fg-muted" data-testid="the-sao"
       role="group" aria-label={t("ct.the_aria", { sao: tenSao, cung: tenCung })}>
       <p className="font-semibold text-fg">{tenSao} <span className="font-normal text-fg-faint">{t("ct.the_o", { cung: tenCung })}</span></p>
+      {m.nghia && <p className="mt-1.5 leading-relaxed" data-testid="nghia-sao-nho">{m.nghia}</p>}
       <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
         <dt className="text-fg-faint">{t("ct.do_sang")}</dt>
         <dd>{m.doSang

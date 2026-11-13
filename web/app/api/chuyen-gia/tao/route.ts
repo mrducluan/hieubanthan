@@ -3,11 +3,11 @@
 //   2. dung_hoi_vien: SQL tự trừ lượt hội viên trong cùng giao dịch tạo câu (0029 → hoi_vien_dung_cau_hoi của 0028) —
 //      không phải hội viên / hết lượt → 409 (web mời trả VND). Web KHÔNG tự trừ lượt (tránh trừ hai lần / trừ mà không tạo câu).
 //   3. Tạo câu hỏi + đơn don_nap loai 'chuyen_gia' (giá + giảm lần đầu do SQL tính, KHÔNG tin trình duyệt) → link thanh toán
-//      payOS (quay về /tai-khoan/cau-hoi) hoặc cổng giả. Hồ sơ chỉ gửi khi dong_y = true (SQL lọc lại khoá).
+//      Pay2S (quay về /tai-khoan/cau-hoi) hoặc cổng giả. Hồ sơ chỉ gửi khi dong_y = true (SQL lọc lại khoá).
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { congDangBat, khachDichVu, khachNguoiMua } from "@/lib/thanh-toan/cong";
-import { cauHinhPayos, moTaChuyenKhoan, taoLink } from "@/lib/thanh-toan/payos";
+import { cauHinhPay2s, maPay2s, taoLink } from "@/lib/thanh-toan/pay2s";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { siteUrl } from "@/lib/seo";
 import { CAU_HOI_TOI_DA, CAU_HOI_TOI_THIEU, MANG_CG } from "@/lib/chuyen-gia-hoi";
@@ -75,14 +75,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ id: d.id, ma_don: d.ma_don, so_tien: d.so_tien, lan_dau: d.lan_dau, cong,
       checkoutUrl: `/nap-sao/gia?ma=${d.ma_don}&ve=${encodeURIComponent("/tai-khoan/cau-hoi")}` });
   }
-  const c = cauHinhPayos()!;
+  const c = cauHinhPay2s()!;
   try {
+    const ma = maPay2s(d.ma_don);
     const link = await taoLink(c, {
-      orderCode: d.ma_don, amount: d.so_tien!, description: moTaChuyenKhoan(d.ma_don), tenGoi: "Hỏi chuyên gia · 1 câu hỏi",
-      returnUrl: ve, cancelUrl: `${ve}&huy=1`, hetHanGiay: Math.floor(new Date(d.het_han!).getTime() / 1000),
+      orderId: ma, orderInfo: ma, amount: d.so_tien!, tenDon: "Hiểu Bản Thân · Hỏi chuyên gia · 1 câu hỏi",
+      redirectUrl: ve, ipnUrl: `${siteUrl()}/api/thanh-toan/webhook/pay2s`,
     });
-    if (link.paymentLinkId) await khachDichVu()?.rpc("gan_link_don", { p_ma_don: d.ma_don, p_link_id: link.paymentLinkId });
-    return NextResponse.json({ id: d.id, ma_don: d.ma_don, so_tien: d.so_tien, lan_dau: d.lan_dau, cong, checkoutUrl: link.checkoutUrl });
+    await khachDichVu()?.rpc("gan_link_don", { p_ma_don: d.ma_don, p_link_id: ma });
+    return NextResponse.json({ id: d.id, ma_don: d.ma_don, so_tien: d.so_tien, lan_dau: d.lan_dau, cong, checkoutUrl: link.payUrl });
   } catch {
     await nm.sb.rpc("huy_cau_hoi", { p_id: d.id });
     return NextResponse.json({ error: "Cổng thanh toán đang bận, thử lại sau ít phút." }, { status: 502 });

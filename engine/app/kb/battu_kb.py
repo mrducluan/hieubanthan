@@ -33,6 +33,11 @@ def nhat_chu(can: str) -> dict | None:
     return _lay("nhat_chu", can)
 
 
+def co_tho(can: str) -> dict | None:
+    """Bài «thể tượng» của thiên can trong Uyên Hải Tử Bình: {han (nguyên văn), y (tóm ý Việt)}."""
+    return _lay("co_tho", can)
+
+
 def thap_than(ten: str) -> dict | None:
     return _lay("thap_than", ten)
 
@@ -91,5 +96,6 @@ def dieu_hau(can: str, chi_thang: str) -> dict | None:
     ds = d["bang"].get(can, {}).get(chi_thang)
     if ds is None:
         return None
-    return {"can": list(ds), "nguon": d["_nguon"], "trang_thai": d["trang_thai"],
+    return {"can": list(ds), "trich": (d.get("trich") or {}).get(can, {}).get(chi_thang),
+            "nguon": d["_nguon"], "trang_thai": d["trang_thai"],
             "can_doi_chieu": d["can_doi_chieu"], "source_id": d["source_id"], "school_id": d["school_id"]}

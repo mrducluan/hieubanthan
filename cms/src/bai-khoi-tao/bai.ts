@@ -5,7 +5,7 @@
 import { htmlSangKhoi, thayAnh } from "../lib/html-lexical.ts";
 
 export type BaiKhoiTao = {
-  slug: string; tieu_de: string; mang: "kinh_dich" | "bat_tu" | "phong_thuy";
+  slug: string; tieu_de: string; mang: "kinh_dich" | "bat_tu" | "phong_thuy" | "than_so" | "tu_vi" | "chung";
   loai_bai: "bai_viet" | "huong_dan";
   tu_khoa_chinh: string; tu_khoa_phu: string[]; the: string[];
   mo_ta_ngan: string; tra_loi_nhanh: string;

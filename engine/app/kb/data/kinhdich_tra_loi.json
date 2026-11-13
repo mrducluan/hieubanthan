@@ -695,5 +695,42 @@
   "tieu_de_nguoi_kia": "Phía người kia",
   "tieu_de_can_go": "Điều cần gỡ trước",
   "tieu_de_vi_sao": "Vì sao nói vậy"
+ },
+ "tinh_chat_que": {
+  "_nguon": "KT-TT5: Tăng San Bốc Dịch, chương Lục hợp, Lục xung, Quy hồn Du hồn (kho nguồn fixtures/nguon/tang_san_boc_dich.json). Lời là tóm ý nháp; chỉ là nét phụ, không đổi mức.",
+  "luc_hop": {
+   "ten": "lục hợp",
+   "loi": "Sáu hào của quẻ này bắt cặp hoà nhau: việc dễ kết lại và giữ được lâu. Nếu đây là chuyện bạn muốn dứt ra thì ngược lại, sẽ dùng dằng khó dứt.",
+   "trich": "萬事若得三六合，諸事必得久遠，有始有終"
+  },
+  "luc_xung": {
+   "ten": "lục xung",
+   "loi": "Sáu hào của quẻ này từng cặp đẩy nhau: việc dễ tan, dễ đổi hướng. Hợp khi bạn muốn thoát khỏi một chuyện; còn việc muốn giữ lâu thì phải bỏ thêm công giữ.",
+   "trich": "沖者散也，凡占凶事宜於沖散、占吉事而不宜"
+  },
+  "xung_hoa_hop": {
+   "ten": "lục xung biến lục hợp",
+   "loi": "Quẻ đi từ thế đẩy nhau sang thế hoà nhau: lúc đầu rời rạc, về sau gom lại được; chuyện tưởng đã lỡ vẫn còn đường nối lại.",
+   "trich": "散而復聚，離而必合"
+  },
+  "hop_hoa_xung": {
+   "ten": "lục hợp biến lục xung",
+   "loi": "Quẻ đi từ thế hoà nhau sang thế đẩy nhau: lúc đầu thuận, về sau dễ rời; muốn có đầu có cuối thì phải giữ kỹ đoạn sau.",
+   "trich": "先合後離、先親後疏、先濃後淡"
+  },
+  "du_hon": {
+   "ten": "du hồn",
+   "loi": "Quẻ thuộc nhóm lòng chưa yên chỗ: ý định dễ đổi, việc khó giữ một hướng lâu. Nên chốt một hướng rồi hãy làm.",
+   "trich": "心無定向，遷改不常"
+  },
+  "quy_hon": {
+   "ten": "quy hồn",
+   "loi": "Quẻ thuộc nhóm quay về chỗ cũ: việc dễ quanh quẩn, khó đi xa hay mở rộng ngay.",
+   "trich": "歸魂不出疆，諸事拘泥不行"
+  },
+  "chung": {
+   "loi": "Đây chỉ là nét phụ của quẻ; phần chính vẫn là hào đại diện cho việc bạn hỏi.",
+   "trich": "須以用神爲主"
+  }
  }
 }

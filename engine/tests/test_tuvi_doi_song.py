@@ -216,9 +216,15 @@ def test_tim_cum_cam_ranh_gioi_tu():
 def test_suc_khoe_mien_tru_khong_ten_benh(bc):
     sk = next(c for c in bc["chuong"] if c["ma"] == "suc_khoe")
     assert kb.suc_khoe_chung() in sk["doan"] and sk["mien_tru"] == kb.suc_khoe_chung()
-    chu = " ".join([sk["tom_tat"], *sk["doan"], *(h["noi_dung"] for h in sk["hop"])]).lower()
+    from app.luangiai import suc_khoe_nam as _skn
+    day_du = " ".join([sk["tom_tat"], *sk["doan"], *(h["noi_dung"] for h in sk["hop"])]).lower()
+    # SK-2 (2026-11-12): tên bệnh hay gặp CHỈ được nằm trong vế "… những bệnh hay gặp ở phần này như a, b" của câu khuyên
+    # đi khám; phần còn lại vẫn sạch tên bệnh, và không câu nào gán bệnh cho người đọc.
+    chu = _skn.bo_ve_benh(day_du)
     for b in BENH:
         assert b not in chu, b
+    assert "những bệnh hay gặp ở phần này như" in day_du and "nên chú ý đi" in day_du
+    assert not _skn.doan_benh(day_du)
 
 
 def test_moi_xem_va_cau_hoi_mo(bc):

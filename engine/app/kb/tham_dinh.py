@@ -39,6 +39,28 @@ def _doc_so() -> dict:
     return _doc_file()
 
 
+_FILE_GN = Path(__file__).parent / "data" / "goc_nhin.json"
+
+
+@lru_cache(maxsize=1)
+def _doc_goc_nhin() -> dict:
+    """GN-2: ô "Góc nhìn chuyên gia" để TRỐNG cho chuyên gia tự điền (QT-1 sửa giá trị chuỗi đã có). Ô trống không hiện gì."""
+    return json.loads(_FILE_GN.read_text("utf-8"))
+
+
+def goc_nhin_o(loai: str, slug: str) -> dict | None:
+    """Góc nhìn đã điền cho một trang (None nếu ô trống, thiếu ngày, hoặc không qua luật nội dung — đóng cửa khi nghi ngờ)."""
+    from app import ngon_ngu
+    if not ngon_ngu.la_viet():                      # lời chuyên gia viết bằng tiếng Việt, không hiện trên bản Anh
+        return None
+    d = _doc_goc_nhin()
+    o = d["trang"].get(f"{loai}/{slug}")
+    van = " ".join(((o or {}).get("noi_dung") or "").split())
+    if not o or not van or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", (o.get("ngay") or "").strip()) or kiem_goc_nhin(van):
+        return None
+    return {"noi_dung": van, "nguoi": d["nguoi"], "ngay": o["ngay"].strip()}
+
+
 # GN-1 — "Góc nhìn chuyên gia": 2–4 câu kinh nghiệm thật, do CHÍNH chuyên gia viết, chỉ đi kèm trang người đó đã thẩm
 # định (hoặc tự viết). Hệ thống chỉ sửa chính tả, không thêm ý. Luật nội dung như KB: không phán, không bệnh tật/sống
 # chết, không bán vật phẩm/giải hạn, không dẫn liên hệ ra ngoài. `ghi_chu` là ghi chú NỘI BỘ (đã sửa gì) — không lộ.
@@ -82,6 +104,8 @@ def gan(t: dict) -> dict:
     t["tham_dinh"] = {"nguoi": td["nguoi"], "ngay": td["ngay"]} if td else None
     t["goc_nhin"] = ({"noi_dung": td["goc_nhin"], "nguoi": td["nguoi"], "ngay": td["ngay"]}
                      if td and td.get("goc_nhin") else None)
+    if t["goc_nhin"] is None:                       # GN-2: ô chuyên gia tự điền — KHÔNG đổi trạng thái thẩm định của trang
+        t["goc_nhin"] = goc_nhin_o(t["loai"], t["slug"])
     t["bien_soan"] = "chuyen_gia" if tg else "ai_ho_tro"
     if td:
         t["trang_thai"] = "da_duyet"
@@ -120,6 +144,18 @@ def hang_doi() -> list[dict]:
     from app.kb import trang
     ds = [t for t in trang.danh_sach() if t["trang_thai"] != "da_duyet"]
     return sorted(ds, key=lambda t: _UU_TIEN.index(t["loai"]) if t["loai"] in _UU_TIEN else len(_UU_TIEN))
+
+
+def so_nguyen_van(loai: str, slug: str) -> int:
+    """HD-TD (2026-11-13): số câu NGUYÊN VĂN cổ thư trang đang mang (mọi trường `nguyen_van` có chữ). Trang có câu sách thì
+    người thẩm định chỉ cần so lời Việt với câu ấy (nhanh); trang 0 câu là lời biên tập thuần — cần đọc kỹ hơn."""
+    from app.kb import trang
+
+    def dem(x) -> int:
+        if isinstance(x, dict):
+            return (1 if isinstance(x.get("nguyen_van"), str) and x["nguyen_van"].strip() else 0) + sum(dem(v) for v in x.values())
+        return sum(dem(v) for v in x) if isinstance(x, list) else 0
+    return dem(trang.lay(loai, slug) or {})
 
 
 def hang_doi_gsc(duong_csv) -> list[dict]:

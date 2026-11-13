@@ -48,7 +48,7 @@ def trang_bo_vi(ma: str, slug: str) -> dict:
     muc.append({"tieu_de": f"{ten} nói về gì", "doan": mo_dau})
     if dd:
         dong = [f"{x['tieu_de']}: {x['noi_dung']} Việc nên làm: {x['viec']}" for _, x in dd]
-        trich_dan = [{"sach": kb.ten_nguon((x.get("sach") or {}).get("nguon")), "nguyen_van": (x.get("sach") or {}).get("trich"),
+        trich_dan = [{"sach": kb.ten_nguon((x.get("sach") or {}).get("nguon")), "nguyen_van": " — ".join(v for v in ((x.get("sach") or {}).get("han"), (x.get("sach") or {}).get("trich")) if v),
                       "nghia": (x.get("sach") or {}).get("y")} for _, x in dd if (x.get("sach") or {}).get("trich")][:3]
         muc.append({"tieu_de": f"Các nét hay gặp ở {ten.split(' (')[0]} và sách xưa đọc ra sao", "danh_sach": dong,
                     **({"trich_dan": trich_dan} if trich_dan else {})})

@@ -13,6 +13,7 @@ import { MoiLapLaSo } from "@/components/huyen-hoc/MoiLapLaSo";
 import { ChipPhai, DongGhiChu, DongPhai, KhungPhai, type PhaiDangDung } from "@/components/huyen-hoc/KhungPhai";
 import { DoiChieuCach } from "@/components/huyen-hoc/DoiChieuCach";
 import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
+import { SachXuaNoi } from "@/components/huyen-hoc/SachXuaNoi";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -241,7 +242,8 @@ export function BatTu() {
                   <summary className="cursor-pointer text-[var(--ls-mo)]">{cb("than_sat.tieu_de", { so: String(ls.mo_rong.than_sat.length) })}</summary>
                   <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                     {ls.mo_rong.than_sat.map((t) => (
-                      <li key={t.ten}><b>{ten("than_sat", t.ten)}</b> <span className="text-[var(--ls-mo)]">— {t.y} · {cb("than_sat.tru", { ds: tenTru(t.tru) })}</span></li>
+                      <li key={t.ten}><b>{ten("than_sat", t.ten)}</b> <span className="text-[var(--ls-mo)]">— {t.y} · {cb("than_sat.tru", { ds: tenTru(t.tru) })}</span>
+                        {t.sach && <span className="mt-0.5 block text-xs text-[var(--ls-mo)]" data-testid="than-sat-sach">{cb(t.sach.khop ? "than_sat.sach" : "than_sat.sach_khac", { han: t.sach.han })}</span>}</li>
                     ))}
                   </ul>
                   <p className="mt-2 text-xs text-[var(--ls-mo)]">{cb("than_sat.nguon", { nguon: ls.mo_rong.than_sat_nguon })}</p>
@@ -298,6 +300,7 @@ export function BatTu() {
             <div className="-mt-2 overflow-hidden rounded-[1.25rem] shadow-card"><ChanLaSo giaoDien={giaoDien} tieuDe={cb("chan.tieu_de")} duong={d("/bat-tu")} /></div>
           </div>
         )}
+        {ls && <SachXuaNoi ds={ls.sach_xua} moDun="battu" en={en} />}
         {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{CO_CO_LOI.has(c.loai) ? cb(`co.${c.loai}`) : c.chi_tiet}</p>)}
       </section>
 

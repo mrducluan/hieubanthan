@@ -30,7 +30,11 @@ export interface DocQueKq {
   hanh_dong: { muc: Muc; nhan: string; viec: string[] }[];
   can_cu: { tieu_de: string; noi_dung: string }[];
   cau_tu_soi?: string | null;
-  loi_kinh: { tieu_de: string; han: string; dich: string; y?: string | null; nom_na?: string | null; thoan?: string | null; chu?: boolean }[];
+  loi_kinh: {
+    tieu_de: string; han: string; dich: string; y?: string | null; nom_na?: string | null; thoan?: string | null; chu?: boolean;
+    /** KT-TT: Tiểu tượng của hào + lời Trình Di, Chu Hy (engine trích từ bản dịch Ngô Tất Tố; web chỉ hiện). */
+    tieu_tuong?: { han: string; dich: string } | null; trinh?: string | null; chu_hy?: string | null; nguoi_dich?: string | null;
+  }[];
   goc_nhin: { chinh: string; nghia_ly: GocNhin; mai_hoa: GocNhinMaiHoa | null; luc_hao: GocNhinLucHao | null };
   ung_ky: { chi: string; ly_do: string; ngay_gan_nhat: string; sau_bao_nhieu_ngay: number }[];
   cau_lien_quan: string[];
@@ -207,6 +211,16 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
                   <p className="text-fg-muted">{l.dich}{l.y ? ` — ${l.y}` : ""}</p>
                   {l.thoan && <p className="text-fg-faint">Thoán truyện: {l.thoan}</p>}
                   {l.nom_na && <p className="text-fg-faint">Hiểu đơn giản: {l.nom_na}</p>}
+                  {l.tieu_tuong && (
+                    <p className="text-fg-faint" data-testid="tieu-tuong">
+                      Tiểu tượng: <span style={{ fontFamily: "var(--font-han), serif" }}>「{l.tieu_tuong.han}」</span> — {l.tieu_tuong.dich}
+                    </p>
+                  )}
+                  {l.trinh && <p className="text-fg-faint" data-testid="loi-trinh-di">Trình Di giảng: {l.trinh}</p>}
+                  {l.chu_hy && <p className="text-fg-faint" data-testid="loi-chu-hy">Chu Hy giảng: {l.chu_hy}</p>}
+                  {(l.trinh || l.chu_hy || l.tieu_tuong) && l.nguoi_dich && (
+                    <p className="text-xs text-fg-faint">Lời xưa theo bản dịch của {l.nguoi_dich}.</p>
+                  )}
                 </div>
               ))}
             </div>

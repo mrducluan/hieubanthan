@@ -100,8 +100,9 @@ export default defineConfig({
         NOTFAIR_SEO_API_KEY: "e2e", NOTFAIR_SEO_API_URL: "http://127.0.0.1:4555/",
         // BLOG-3b: route /api/cms/notfair cho CMS đọc bài NotFair qua web — bí mật giả chỉ dùng cho test.
         CMS_WEBHOOK_SECRET: "e2e-cms-webhook",
-        // payOS khoá GIẢ (không gọi payOS thật: chưa bật tài khoản → không tạo đơn) — đủ để thử kiểm chữ ký webhook.
-        PAYOS_CLIENT_ID: "e2e", PAYOS_API_KEY: "e2e", PAYOS_CHECKSUM_KEY: "e2e-payos-checksum-0000", SUPABASE_SERVICE_ROLE_KEY: "",
+        // Pay2S khoá GIẢ (không gọi Pay2S thật: chưa bật tài khoản → không tạo đơn) — đủ để thử kiểm chữ ký IPN.
+        PAY2S_PARTNER_CODE: "PAY2SE2E", PAY2S_ACCESS_KEY: "e2e-access", PAY2S_SECRET_KEY: "e2e-pay2s-secret-0000",
+        PAY2S_BANK_ACCOUNTS: "99999999|ACB", PAY2S_HOOK_TOKEN: "e2e-pay2s-hook-token-0000", SUPABASE_SERVICE_ROLE_KEY: "",
         UNG_HO_VI: "USDT (TRC20)|TE2eTestWalletAddress000000000000",
         // Bản build bắt buộc có khoá ký link mời/thẻ (lib/ma-moi.ts) — khoá giả chỉ dùng cho test.
         ...(BAN_BUILD ? { LOI_MOI_SECRET: "e2e-chi-dung-cho-thu-nghiem-0000" } : { NODE_OPTIONS: "--max-old-space-size=6144" }),

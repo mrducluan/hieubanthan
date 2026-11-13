@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """SK-1 (2026-11-04, chủ dự án duyệt) — gợi ý sức khoẻ THEO THỜI ĐIỂM cho mọi mảng (RULES, tất định, không LLM).
 
-Chính sách mới: không nêu tên bệnh → gợi HỆ CƠ QUAN sách xưa gắn với hành / sao + việc đi khám cụ thể; được (và nên)
+SK-2 (2026-11-12): Tử vi, Bát tự được kèm tên vài bệnh hay gặp của hệ cơ quan trong câu khuyên đi khám (`he.benh`).
+Chính sách SK-1: gợi HỆ CƠ QUAN sách xưa gắn với hành / sao + việc đi khám cụ thể; được (và nên)
 nêu năm / giai đoạn chỉ báo sức khoẻ của lá số được kích hoạt, nói bằng lời PHÒNG NGỪA ("Năm 2028 nên chú ý sức khoẻ
 bản thân hơn, nhất là đường hô hấp; sắp xếp đi khám hô hấp, phổi vào đầu năm.") — không bao giờ "sẽ ốm / sẽ bệnh".
 Không đổi MỨC của chương nào: đây là lời / hộp đọc thêm. Mọi phép tính dùng lại CALC có sẵn (một bộ tính):
@@ -39,6 +40,8 @@ def cau_nam(nam: list[int] | int, he: dict | None, hien_tai: bool = False) -> st
     ds = [nam] if isinstance(nam, int) else list(nam)
     n = danh_sach([str(x) for x in ds])          # bản Việt: "2027, 2029 và 2031" như cũ; bản Anh: "… and …"
     he = _tron(he)
+    if he and he.get("benh") and kb.mau("nam_benh"):          # SK-2: Tử vi, Bát tự — kèm tên bệnh hay gặp của hệ cơ quan
+        return kb.mau("nam_nay_benh" if hien_tai else "nam_benh").format(nam=n, he=he["he"], kham=he["kham"], benh=he["benh"])
     if he:
         return kb.mau("nam_nay" if hien_tai else "nam").format(nam=n, he=he["he"], kham=he["kham"])
     return kb.mau("nam_nay_chung" if hien_tai else "nam_chung").format(nam=n)
@@ -57,10 +60,27 @@ def mien_tru() -> str:
     return kb.mien_tru()
 
 
+_VE_BENH = re.compile(r"(để phát hiện sớm )?những bệnh hay gặp ở phần này như [^.;]*", re.IGNORECASE)
+_DOAN_BENH = re.compile(r"(dễ|sẽ|đang|hay|có thể|từng|đã)\s+(bị|mắc)\b[^.;]{0,30}", re.IGNORECASE)
+
+
+def bo_ve_benh(van: str) -> str:
+    """SK-2: bỏ vế DUY NHẤT được nêu tên bệnh ("… những bệnh hay gặp ở phần này như a, b") — phần còn lại của lời vẫn
+    phải sạch tên bệnh (bộ kiểm, test dùng chung)."""
+    return _VE_BENH.sub("", van or "")
+
+
+def doan_benh(van: str) -> list[str]:
+    """Câu gán bệnh cho người đọc ("dễ bị cao huyết áp", "sẽ mắc sỏi thận") — luôn cấm, kể cả tên bệnh KB cho phép nêu."""
+    t = (van or "").lower()
+    ten = kb.ten_benh()
+    return [m.group(0).strip() for m in _DOAN_BENH.finditer(t) if any(x in m.group(0) for x in ten)]
+
+
 def kiem(van: str) -> list[str]:
     """Cụm cấm sức khoẻ (tên bệnh, "sẽ ốm", sống chết…) có trong `van` — rỗng = đạt."""
     t = (van or "").lower()
-    return [c for c in kb.cum_cam() if re.search(r"(?<!\w)" + re.escape(c.lower()) + r"(?!\w)", t)]
+    return [c for c in kb.cum_cam() if re.search(r"(?<!\w)" + re.escape(c.lower()) + r"(?!\w)", t)] + doan_benh(t)
 
 
 # ------------------------------------------------------------------ Tử vi
@@ -70,7 +90,7 @@ def tuvi_he(ls: dict) -> dict | None:
     theo = {c["ten"]: c for c in ls["cung"]}
     for ten in (CUNG_SK, CUNG_XUNG_SK, "Mệnh"):
         for s in (theo.get(ten) or {}).get("chinh_tinh") or []:
-            if (h := kb.he_sao(s["ten"])):
+            if (h := kb.he_sao(s["ten"], benh=True)):
                 return {**h, "sao": s["ten"], "cung": ten}
     return None
 
@@ -91,7 +111,7 @@ def tuvi_nam(ls: dict, nam_am_xem: int, nam_am_sinh: int, so_nam: int = SO_NAM,
     for x in cyn.tuvi_nam_cung(ls, nam_am_xem, nam_am_sinh, CUNG_SK, so_nam, sao_luu_ta, them):
         ky_sao = x.pop("ky_sao")
         # hệ: Kỵ năm nhập Tật Ách mang sao có phần cơ thể sách xưa ghi → hệ của sao đó; còn lại → hệ của lá số
-        he = (kb.he_sao(ky_sao) if "ky_nhap" in x["ly_do"] else None) or he0
+        he = (kb.he_sao(ky_sao, benh=True) if "ky_nhap" in x["ly_do"] else None) or he0
         ra.append({"nam": x["nam"], "tuoi": x["tuoi"], "diem": x["diem"], "ly_do": x["ly_do"], "can_cu": x["can_cu"],
                    "he": he, "hien_tai": x["hien_tai"]})
     return ra
@@ -163,14 +183,14 @@ def battu_nam(ty_le_hanh: dict[str, float], nam_muc: dict[int, str], nam0: int, 
         hc, hh = battu.CAN_NH[i_can], battu.CHI_NH[i_chi]
         ap = _ap_luc(hc, yeu) + _ap_luc(hh, yeu)
         if ap >= 2 or (ap == 1 and nam_muc.get(nam) == "can_chu_dong"):
-            ra.append({"nam": nam, "ly_do": ["khac_yeu"], "hien_tai": k == 0, "he": kb.he_hanh(yeu),
+            ra.append({"nam": nam, "ly_do": ["khac_yeu"], "hien_tai": k == 0, "he": kb.he_hanh(yeu, benh=True),
                        "can_cu": [L("bt_ds.skn.khac_yeu", f"Năm {nam} {can} {chi} ({hc}/{hh}): {k_yeu} khắc {yeu} — hành yếu nhất của tứ trụ "
                                     f"({round(ty_le_hanh.get(yeu, 0) * 100)}%)", nam=nam,
                                     cc=f"{_ten.ten('can', can)} {_ten.ten('chi', chi)}", hc=_ten.ten("hanh", hc),
                                     hh=_ten.ten("hanh", hh), k_yeu=_ten.ten("hanh", k_yeu), yeu=_ten.ten("hanh", yeu),
                                     pct=round(ty_le_hanh.get(yeu, 0) * 100))]})
         elif ty_le_hanh.get(lon, 0) >= nguong_dam and hc == lon and hh == lon:
-            ra.append({"nam": nam, "ly_do": ["don_thua"], "hien_tai": k == 0, "he": kb.he_hanh(lon),
+            ra.append({"nam": nam, "ly_do": ["don_thua"], "hien_tai": k == 0, "he": kb.he_hanh(lon, benh=True),
                        "can_cu": [L("bt_ds.skn.don_thua", f"Năm {nam} {can} {chi}: cả can lẫn chi là {lon}, dồn thêm hành đang thừa của tứ trụ "
                                     f"({round(ty_le_hanh[lon] * 100)}%)", nam=nam,
                                     cc=f"{_ten.ten('can', can)} {_ten.ten('chi', chi)}", lon=_ten.ten("hanh", lon),
@@ -243,6 +263,8 @@ def doan_hoi_benh(t_khong_dau: str, he_la_so: dict | None = None) -> str:
         return kb.mau("hoi_benh").format(he=he["he"], kham=he["kham"])
     he = _tron(he_la_so)
     if he:                     # câu không nêu bộ phận → chỉ nói phần cơ thể LÁ SỐ nhắc chăm sóc (không "bạn đang lo về …")
+        if he.get("benh") and kb.mau("he_chart_benh"):
+            return f"{kb.mau('hoi_benh_chung')} {kb.mau('he_chart_benh').format(he=he['he'], kham=he['kham'], benh=he['benh'])}"
         return f"{kb.mau('hoi_benh_chung')} {kb.mau('he_chart').format(he=he['he'], kham=he['kham'])}"
     return kb.mau("hoi_benh_chung")
 

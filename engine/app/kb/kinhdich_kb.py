@@ -83,3 +83,66 @@ def hao(so: int, vi_tri: int) -> dict | None:
     if not q or not 1 <= vi_tri <= 6:
         return None
     return {**q["hao"][vi_tri - 1], **_meta_hao()}
+
+
+# --------------------------------------------------------------------------- KT-TT: Trình Di · Chu Hy · Tiểu tượng · loại tượng
+@nap.nho
+def _tn() -> dict:
+    return nap.doc("kinhdich_truyen_nghia.json")
+
+
+def trich_gon(s: str | None, toi_da: int = 420) -> str | None:
+    """Lấy trọn câu đầu của lời giảng cho tới `toi_da` ký tự (không cắt giữa câu khi còn câu trọn)."""
+    s = (s or "").strip()
+    if not s:
+        return None
+    if len(s) <= toi_da:
+        return s
+    ra = ""
+    for cau in __import__("re").split(r"(?<=[.!?…])\s+", s):
+        if len(ra) + len(cau) + 1 > toi_da:
+            break
+        ra = (ra + " " + cau).strip()
+    if not ra:
+        ra = s[:toi_da].rsplit(" ", 1)[0].rstrip(",;:") + "…"
+    return ra
+
+
+def truyen_nghia(so: int, loai: str, vi_tri: int | None = None) -> dict | None:
+    """Lời Trình Di (Dịch truyện), Chu Hy (Bản nghĩa) và Tiểu tượng — bản dịch Ngô Tất Tố. Chỉ có ở bản tiếng Việt."""
+    from app import ngon_ngu
+    if not ngon_ngu.la_viet():
+        return None
+    d = _tn()
+    q = d["que"].get(str(so)) or {}
+    if loai == "hao":
+        h = (q.get("hao") or {}).get(str(vi_tri)) or {}
+        goc, tt = h.get("tu") or {}, h.get("tieu_tuong") or {}
+    else:
+        goc, tt = q.get("quai_tu") or {}, {}
+    ra = {"trinh": trich_gon(goc.get("trinh")), "chu_hy": trich_gon(goc.get("chu"))}
+    if tt.get("han") and tt.get("dich"):
+        ra["tieu_tuong"] = {"han": tt["han"], "dich": tt["dich"]}
+    ra = {k: v for k, v in ra.items() if v}
+    return {**ra, "nguoi_dich": d["nguoi_dich"]} if ra else None
+
+
+def truyen_nghia_que(so: int) -> dict:
+    return _tn()["que"].get(str(so)) or {}
+
+
+_DA_NEU = {"cha", "mẹ", "con trai trưởng", "con gái trưởng", "con gái giữa", "con gái út", "trời", "đất", "sấm", "gió", "nước",
+           "lửa", "núi", "đầm, hồ", "cây gỗ", "rồng", "chó", "dê"}        # đã nêu ở vế trước của câu — không lặp
+
+
+def loai_tuong(quai: str) -> str | None:
+    """Một câu loại tượng của quái theo Thuyết Quái (cho Mai Hoa: gợi ý người, vật, nơi chốn — không phải lời đoán)."""
+    from app import ngon_ngu
+    b = _d()["bat_quai"].get(quai) or {}
+    lt = b.get("loai_tuong")
+    if not lt or not ngon_ngu.la_viet():
+        return None
+    return _d()["mau"]["loai_tuong"].format(quai=quai, tuong=b["tuong"].lower(), duc=lt["duc"], nguoi=b["gia_dinh"].lower(),
+                                            than_the=lt["than_the"], con_vat=lt["con_vat"],
+                                            vat=", ".join([v for v in lt["vat"] if v not in _DA_NEU and v != b["tuong"].lower()
+                                                           and v != lt["con_vat"]][:6]))

@@ -369,5 +369,16 @@
  "bt_ds.nhom.an": "Resource",
  "bt_ds.nhom.thuc_thuong": "Output",
  "bt_ds.nhom.tai": "Wealth",
- "bt_ds.nhom.quan_sat": "Officer and Killings"
+ "bt_ds.nhom.quan_sat": "Officer and Killings",
+ "bt_ds.nh.nc.cuc.tam_hop": "a full three-harmony set",
+ "bt_ds.nh.nc.cuc.tam_hoi": "a full seasonal set",
+ "bt_ds.nh.nc.cuc.bon_tho": "all four are Earth",
+ "bt_ds.nh.nc.cu.chuyen_vuong": "Special structure, one dominant element (Zi Ping Zhen Quan, 'On miscellaneous structures'): the Day Master is {hanh}, born in month {chi}; the Branches: {cuc} ({chis}); no Officer or Killing stem shows",
+ "bt_ds.nh.nc.cu.hoa_khi": "Special structure, transformation (Zi Ping Zhen Quan, 'On miscellaneous structures'): Day stem {can} combines with the {tru} stem {can_hop} and turns to {hanh}; born in month {chi}; the Branches: {cuc} ({chis})",
+ "bt_ds.nh.nc.tru.1": "month",
+ "bt_ds.nh.nc.tru.3": "hour",
+ "bt_ds.nh.nc.cu.tong_tai": "Special structure, following Wealth (Zi Ping Zhen Quan, 'On miscellaneous structures'): Day Master {can} has no root in any Branch; the four Branches gather on {hanh} (Wealth); no Officer or Killing stem shows",
+ "bt_ds.nh.nc.cu.tong_sat": "Special structure, following the Killings (Zi Ping Zhen Quan, 'On miscellaneous structures'): Day Master {can} has no root in any Branch; the four Branches gather on {hanh} (Officer / Killing); no Output or Resource stem shows",
+ "bt_ds.nh.nc.cu.trich": "The book on which periods suit this structure: {trich}",
+ "bt_ds.nh.nc.cu.chat": "Conditions are taken strictly from the book's wording; many practitioners apply them more loosely, or do not use this structure at all. No rating in this report changes because of it."
 }

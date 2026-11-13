@@ -42,6 +42,8 @@ DANH_SACH = [
     "dong_luong_dan_than", "liem_tuong_dong_cung", "vu_sat_dong_cung", "tu_vi_co_quan", "hoa_ky_thien_di",
     "liem_sat_duong", "cu_hoa_duong", "linh_xuong_da_vu", "loc_ton_thu_menh", "loc_ton_thu_than",
     "thien_ma_menh_di", "khoa_quyen_hoi_menh", "co_nguyet_dong_luong_ba",
+    # KT-N1 — Toàn Thư «定贵局»: 辅弼拱主 (nối CUỐI, cách cũ giữ chỗ).
+    "phu_bat_cung_chu",
 ]
 TU_SAT = ("Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh")
 CNDL = ("Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương")
@@ -66,7 +68,7 @@ SAO: dict[str, tuple[str, ...]] = {
     "kinh_da_giap_menh": ("Kình Dương", "Đà La"), "hoa_linh_giap_menh": ("Hỏa Tinh", "Linh Tinh"),
     "khong_kiep_giap_menh": ("Địa Không", "Địa Kiếp"), "ma_dau_doi_kiem": ("Kình Dương",),
     "liem_trinh_van_vu": ("Liêm Trinh", "Vũ Khúc", "Văn Xương"), "nhat_chieu_loi_mon": ("Thái Dương",),
-    "nhat_nguyet_tinh_minh": ("Thái Dương", "Thái Âm"), "nguyet_sinh_thuong_hai": ("Thái Âm", "Thiên Đồng"),
+    "nhat_nguyet_tinh_minh": ("Thái Dương", "Thái Âm"), "nguyet_sinh_thuong_hai": ("Thái Âm",),
     "nhat_nguyet_chieu_bich": ("Thái Dương", "Thái Âm"), "co_luong_gia_hoi": ("Thiên Cơ", "Thiên Lương"),
     "van_luong_chan_ky": ("Thiên Lương", "Văn Xương"), "phu_cung_van_tinh": ("Văn Xương", "Tả Phù"),
     "dong_luong_dan_than": ("Thiên Đồng", "Thiên Lương"), "liem_tuong_dong_cung": ("Liêm Trinh", "Thiên Tướng"),
@@ -76,7 +78,7 @@ SAO: dict[str, tuple[str, ...]] = {
     "loc_ton_thu_than": ("Lộc Tồn",),
 }
 # Cách không xét quanh trục Mệnh (điểm cộng/trừ chỉ xét sao chủ, không xét cát tinh tam phương / Không Kiếp ở Mệnh).
-NGOAI_TRUC = {"nhat_nguyet_chieu_bich"}
+NGOAI_TRUC = {"nhat_nguyet_chieu_bich", "nguyet_sinh_thuong_hai"}
 
 
 class _La:
@@ -321,11 +323,9 @@ def nhan_dien(la: dict) -> list[dict]:
     # ---- KB-TV2 ------------------------------------------------------------------------------------
     htp = l.hoa_tp()
     trai, phai = (m - 1) % 12, (m + 1) % 12
-    if "Tử Vi" in cmh and len({"Tả Phù", "Hữu Bật", "Thiên Khôi", "Thiên Việt", "Văn Xương", "Văn Khúc",
-                               "Lộc Tồn"} & stp) >= 3:                      # Tử Vi thủ Mệnh, ≥ 3 cát tinh hội
-        cat = [s for s in ("Tả Phù", "Hữu Bật", "Thiên Khôi", "Thiên Việt", "Văn Xương", "Văn Khúc", "Lộc Tồn")
-               if s in stp]
-        dat("quan_than_khanh_hoi", *tp, can=[_f("Tử Vi", m), {"kieu": "cat_hoi", "ds": cat}], sao=("Tử Vi",))
+    if "Tử Vi" in cmh and {"Tả Phù", "Hữu Bật"} <= sm:          # KT-TT8 — Toàn Thư 定贵局: 紫微左右同守命
+        dat("quan_than_khanh_hoi", can=[_f("Tử Vi", m), _f("Tả Phù", m), _f("Hữu Bật", m)],
+            sao=("Tử Vi", "Tả Phù", "Hữu Bật"))
     if {"Thái Dương", "Thiên Lương", "Văn Xương"} <= stp and ("Lộc Tồn" in stp or "Lộc" in htp):
         can = [_ft(l, s, tp) for s in ("Thái Dương", "Thiên Lương", "Văn Xương")] + [_fl(l, tp)]
         dat("duong_luong_xuong_loc", *tp, can=can, sao=("Thái Dương", "Thiên Lương", "Văn Xương"))
@@ -339,9 +339,9 @@ def nhan_dien(la: dict) -> list[dict]:
     nd, na = l.tim("Thái Dương"), l.tim("Thái Âm")
     if nd in tp and na in tp and l.p[nd]["earthlyBranch"] == "Tỵ" and l.p[na]["earthlyBranch"] == "Dậu":
         dat("nhat_nguyet_tinh_minh", m, nd, na)
-    if {"Thái Âm", "Thiên Đồng"} <= cmh and cm == "Tý":
-        dat("nguyet_sinh_thuong_hai")
     dt_ = next(i for i in range(12) if l.ten(i) == "Điền Trạch")
+    if "Thái Âm" in l.chinh(dt_) and l.p[dt_]["earthlyBranch"] == "Tý":   # KT-TT8 — 定贵局: 月在子宫守田宅
+        dat("nguyet_sinh_thuong_hai", dt_, can=[_f("Thái Âm", dt_)], sao=("Thái Âm",))
     if {"Thái Dương", "Thái Âm"} <= l.chinh(dt_) and l.p[dt_]["earthlyBranch"] in ("Sửu", "Mùi"):
         dat("nhat_nguyet_chieu_bich", dt_)
     if {"Thiên Cơ", "Thiên Lương"} <= cmh or (cm in ("Dần", "Thân", "Thìn", "Tuất")
@@ -412,6 +412,13 @@ def nhan_dien(la: dict) -> list[dict]:
     if "Tử Vi" in cmh and "Thiên Phủ" not in cmh and not ({"Tả Phù", "Hữu Bật"} & stp):   # "cô quân"
         dat("tu_vi_co_quan", can=[_f("Tử Vi", m), {"kieu": "khong_o_menh", "ds": ["Thiên Phủ"]},
                                   {"kieu": "khong_trong_tp", "ds": ["Tả Phù", "Hữu Bật"]}], sao=("Tử Vi",))
+    # KT-N1 — «辅弼拱主 紫微守命二星来拱是也，夹之亦然»: Tử Vi thủ Mệnh, Tả Phù + Hữu Bật cùng về tam phương tứ chính
+    # hoặc kẹp hai bên Mệnh. Cả hai cùng Ở Mệnh là «Quân thần khánh hội» (cách riêng của sách) nên không tính ở đây.
+    th = {"Tả Phù", "Hữu Bật"}
+    if "Tử Vi" in cmh and not th <= sm and (th <= stp or _giap(l, "Tả Phù", "Hữu Bật")):
+        vt = [next(i for i in range(12) if s_ in l.sao(i)) for s_ in ("Tả Phù", "Hữu Bật")]
+        dat("phu_bat_cung_chu", *dict.fromkeys([m, *vt]), can=[_f("Tử Vi", m), _f("Tả Phù", vt[0]), _f("Hữu Bật", vt[1])],
+            sao=("Tử Vi", "Tả Phù", "Hữu Bật"))
     di = (m + 6) % 12
     ky_di = next((x["name"] for x in l.p[di]["majorStars"] if x.get("mutagen") == "Kỵ"), None)
     if ky_di:                                                                   # chính tinh hoá Kỵ tại Thiên Di

@@ -214,3 +214,13 @@ def test_ap_duyet_tu_phong_duyet(so_dang_ky, tmp_path, monkeypatch, capsys):
     assert so_dang_ky["trang"]["que/que-47-khon"]["goc_nhin"] == GOC_NHIN
     assert "sao/sao-tu-vi" not in so_dang_ky["trang"]
     assert "CẦN SỬA  sao/sao-tu-vi: sửa câu 2" in capsys.readouterr().out
+
+
+def test_hd_td_so_nguyen_van_theo_trang():
+    """HD-TD: trang quẻ mang nguyên văn (kinh văn, Tự Quái…) → > 0; trang năm cá nhân là lời biên tập thuần → 0."""
+    from app.kb import tham_dinh as td, trang
+    que = next(t for t in trang.danh_sach() if t["loai"] == "que")
+    assert td.so_nguyen_van("que", que["slug"]) >= 1
+    nam = next(t for t in trang.danh_sach() if t["loai"] == "nam_ca_nhan")
+    assert td.so_nguyen_van("nam_ca_nhan", nam["slug"]) == 0
+    assert td.so_nguyen_van("que", "khong-co-trang-nay") == 0

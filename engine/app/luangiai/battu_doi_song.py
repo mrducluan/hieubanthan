@@ -58,6 +58,7 @@ from app import config
 from app.calc import battu as bt_calc
 from app.calc import lunar as lunar_calc
 from app.calc import battu_mo_rong as mr_calc
+from app.calc import battu_ngoai_cach as ngoai_cach_calc
 from app.calc import tietkhi as tk
 from app.calc.battu import CAN_NH, CHI_NH, THANG_DIEM
 from app.calc.lunar import CAN, CHI
@@ -276,11 +277,12 @@ def phan_tich(ls: dict) -> dict:
     lo = collections.Counter(ls["thap_than_can"][i] for i in (0, 1, 3))
     dem = collections.Counter([ls["thap_than_can"][i] for i in (0, 1, 3)] + [x[0] for x in ls["thap_than_chi"]])
     ts = {t["ten"]: t for t in mr["than_sat"]}
+    ngoai = ngoai_cach_calc.nhan_dien(ls["tru"])
     return {"ls": ls, "mr": mr, "nhom_hanh": nhom_hanh, "diem": diem, "ty_le_hanh": ty_le_hanh, "ty_le": ty_le,
             "muc_do": muc_do, "than": than, "phu": phu, "dieu": dieu,
             "cach_1": {"hanh": hy1, "ky": ky1}, "cach_2": {"ma": cc["ma"], "ten": cc["ten"], "hanh": hy2, "ky": ky2,
                                                           "nhom_hy": list(g_hy), "nhom_ky": list(g_ky)},
-            "lo": lo, "dem": dem, "than_sat": ts, "gioi_tinh": ls.get("_gioi_tinh", "nam")}
+            "lo": lo, "dem": dem, "than_sat": ts, "ngoai_cach": ngoai, "gioi_tinh": ls.get("_gioi_tinh", "nam")}
 
 
 def _co(pt: dict, g: str) -> bool:
@@ -987,6 +989,44 @@ def _goi_y_hanh(ds: list[str]) -> str:
     return " ".join(phan)
 
 
+def _hop_ngoai_cach(pt: dict) -> dict | None:
+    """KT-TT4 — hộp "Một cách đọc khác" khi lá số đủ điều kiện CHẶT của một cách cục đặc biệt (Tử Bình Chân Thuyên,
+    «Luận tạp cách»). Chỉ thêm một cách đọc có nguồn; không đổi mức, không đổi hai cách lấy dụng thần."""
+    r = pt.get("ngoai_cach")
+    k = r and kb.ngoai_cach(r["ma"])
+    if not k:
+        return None
+    ls = pt["ls"]
+    bien = {"hanh": _hanh(r["hanh"]), "hy": _ds_hanh(r["hy"]), "ky": _ds_hanh(r["ky"])}
+    nc_can, chi_thang = ls["tru"][2]["can"], ls["tru"][1]["chi"]
+    ten_cuc = {"tam_hop": "đủ tam hợp", "tam_hoi": "đủ tam hội", "bon_tho": "bốn chi đều Thổ"}
+    cuc = L(f"bt_ds.nh.nc.cuc.{r['cuc']}", ten_cuc[r["cuc"]]) if r.get("cuc") else ""
+    chis_vi = " ".join(r.get("chi_cuc") or [])
+    chis = " ".join(_ten.ten("chi", c) for c in r.get("chi_cuc") or [])
+    sach = "Tử Bình Chân Thuyên, «Luận tạp cách»"
+    if r["ma"] == "chuyen_vuong":
+        cu = L("bt_ds.nh.nc.cu.chuyen_vuong", f"Ngoại cách một hành chuyên vượng ({sach}): nhật chủ {r['hanh']} sinh tháng "
+               f"{chi_thang}; địa chi {ten_cuc[r['cuc']]} ({chis_vi}); thiên can không lộ Quan Sát",
+               hanh=bien["hanh"], chi=_ten.ten("chi", chi_thang), cuc=cuc, chis=chis)
+    elif r["ma"] == "hoa_khi":
+        tru = {1: "tháng", 3: "giờ"}[r["tru_hop"]]
+        cu = L("bt_ds.nh.nc.cu.hoa_khi", f"Ngoại cách hoá khí ({sach}): can ngày {nc_can} hợp can {tru} {r['can_hop']}, hoá "
+               f"{r['hanh']}; sinh tháng {chi_thang}; địa chi {ten_cuc[r['cuc']]} ({chis_vi})",
+               can=_ten.ten("can", nc_can), tru=L(f"bt_ds.nh.nc.tru.{r['tru_hop']}", tru), can_hop=_ten.ten("can", r["can_hop"]),
+               hanh=bien["hanh"], chi=_ten.ten("chi", chi_thang), cuc=cuc, chis=chis)
+    elif r["ma"] == "tong_tai":
+        cu = L("bt_ds.nh.nc.cu.tong_tai", f"Ngoại cách tòng Tài ({sach}): nhật chủ {nc_can} không có gốc ở chi nào; bốn chi dồn về "
+               f"{r['hanh']} (Tài); thiên can không lộ Quan Sát", can=_ten.ten("can", nc_can), hanh=bien["hanh"])
+    else:
+        cu = L("bt_ds.nh.nc.cu.tong_sat", f"Ngoại cách tòng Sát ({sach}): nhật chủ {nc_can} không có gốc ở chi nào; bốn chi dồn về "
+               f"{r['hanh']} (Quan Sát); thiên can không lộ Thực Thương, không lộ Ấn", can=_ten.ten("can", nc_can), hanh=bien["hanh"])
+    can_cu = [cu, L("bt_ds.nh.nc.cu.trich", f"Sách nói về vận hợp với cách này: {r['trich']}", trich=r["trich"]),
+              L("bt_ds.nh.nc.cu.chat", "Điều kiện lấy chặt theo chữ sách; nhiều người đọc Bát tự xét rộng hơn hoặc không dùng "
+                "cách này. Không mức nào trong bài đọc đổi vì cách này.")]
+    return _hop("loi_khuyen", k["tieu_de"].format(**bien), f"{k['y'].format(**bien)} {k['duoi']}".strip(), can_cu,
+                _mm("ngu_hanh", "ngoai_cach", r["ma"], slug(r["hanh"]), "khuyen"), 1.85)
+
+
 def _chuong_ngu_hanh(pt: dict, cm: dict, hoc: tuple, da_dung: set[str]) -> dict:
     ls = pt["ls"]
     tl = pt["ty_le_hanh"]
@@ -1050,6 +1090,9 @@ def _chuong_ngu_hanh(pt: dict, cm: dict, hoc: tuple, da_dung: set[str]) -> dict:
         cand.append(_hop("loi_khuyen", L("bt_ds.nh.cach2_td", f"Cách 2 — theo tháng sinh: {', '.join(h2) or 'chưa rõ'}",
                                          ds=_ds_hanh(h2) or L("bt_ds.nh.chua_ro", "chưa rõ")), nd2, cu2,
                          _mm("ngu_hanh", "cach2", ma_h(h2), "khuyen"), 1.9))
+    hnc = _hop_ngoai_cach(pt)
+    if hnc:
+        cand.append(hnc)
     x = cm["ngu_hanh"]
     hop, xem_lai = _chon("ngu_hanh", cand, hoc, da_dung, x["muc"], [cu_diem])
     tom = _tom("ngu_hanh", x["muc"])
@@ -1256,9 +1299,11 @@ def _chuong_su_nghiep(cm: dict, pt: dict, hoc: tuple, da_dung: set[str]) -> dict
 
 def _kham_them(loi: str, hanh: str) -> str:
     """SK-1: lời chăm sóc + việc đi khám cụ thể của hệ cơ quan sách xưa gắn với hành (KB `suc_khoe_kb`, một nguồn)."""
-    he = skn.kb.he_hanh(hanh)
+    he = skn.kb.he_hanh(hanh, benh=True)
     if not he or he["kham"] in loi:
         return loi
+    if he.get("benh") and skn.kb.mau("kham_benh"):          # SK-2: kèm tên bệnh hay gặp của hệ cơ quan
+        return skn.kb.mau("kham_benh").format(loi=loi.rstrip("."), kham=he["kham"], benh=he["benh"])
     return L("bt_ds.sk.kham_them", f"{loi.rstrip('.')}; nên {he['kham']} định kỳ.", loi=loi.rstrip("."), kham=he["kham"])
 
 

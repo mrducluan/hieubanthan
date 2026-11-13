@@ -260,9 +260,15 @@ def test_suc_khoe_mien_tru_khong_ten_benh(bc):
     sk = next(c for c in bc["chuong"] if c["ma"] == "suc_khoe")
     assert kb.suc_khoe_chung() in sk["doan"] and sk["mien_tru"] == kb.suc_khoe_chung()
     assert "không thay lời bác sĩ" in sk["mien_tru"]
-    chu = " ".join([sk["tom_tat"], *sk["doan"], *(h["noi_dung"] for h in sk["hop"])]).lower()
+    from app.luangiai import suc_khoe_nam as _skn
+    day_du = " ".join([sk["tom_tat"], *sk["doan"], *(h["noi_dung"] for h in sk["hop"])]).lower()
+    # SK-2 (2026-11-12): tên bệnh hay gặp CHỈ được nằm trong vế "… những bệnh hay gặp ở phần này như a, b" của câu khuyên
+    # đi khám; phần còn lại vẫn sạch tên bệnh, và không câu nào gán bệnh cho người đọc.
+    chu = _skn.bo_ve_benh(day_du)
     for b in BENH:
         assert b not in chu, b
+    assert "những bệnh hay gặp ở phần này như" in day_du and "nên chú ý đi" in day_du
+    assert not _skn.doan_benh(day_du)
     assert re.search(r"khám (sức khoẻ )?định kỳ|định kỳ", chu)
     # SK-1 (2026-11-04): được nêu năm nên chú ý sức khoẻ (lời phòng ngừa) — vẫn cấm lời đoán "sẽ ốm / sẽ bệnh / mắc bệnh"
     assert not re.search(r"(năm|tuổi) \d+.{0,20}(sẽ |bị )(ốm|đau|bệnh)", chu)

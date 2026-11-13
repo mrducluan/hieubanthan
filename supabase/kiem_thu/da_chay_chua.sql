@@ -53,6 +53,8 @@ select * from (values
                                              and pg_get_constraintdef(oid) like '%thang_hai_la_so%')),
   ('0036 mốc push sáng thứ Hai tuần của tôi', exists (select 1 from pg_constraint
                                            where conname = 'push_tuy_chon_moc_lich_check'
-                                             and pg_get_constraintdef(oid) like '%tuan_cua_toi%'))
+                                             and pg_get_constraintdef(oid) like '%tuan_cua_toi%')),
+  ('0037 cổng thanh toán Pay2S',  exists (select 1 from pg_constraint where conname = 'don_nap_cong_check'
+                                             and pg_get_constraintdef(oid) like '%pay2s%'))
 ) as t(migration, da_chay)
 order by 1;

@@ -1,0 +1,482 @@
+{
+  "_ghi_chu": "Lô video 21–27 (7 mảng). Mọi câu trả lời lấy từ engine thật (đầu vào ở muc 'engine'). Nhân vật minh hoạ: Minh Anh, nữ, sinh 24/10/1988 lúc 9:30, Hà Nội — không phải người thật. Ngày chạy engine: 09/11/2026.",
+  "video": [
+    {
+      "ma": "v21",
+      "mang": "Thần số học",
+      "motif": "so",
+      "mau": "#E9C46A",
+      "tieu_de": "Vì sao bạn cứ yêu sai người?",
+      "url": "hieuban.com/than-so",
+      "engine": {
+        "route": "POST /v1/thanso/hoi",
+        "dau_vao": "Nguyễn Minh Anh · 24/10/1988 · quy ước Rút gọn con số (mặc định web)",
+        "cau_hoi": "Tình yêu của tôi thế nào, vì sao tôi hay yêu sai người?"
+      },
+      "canh": [
+        {
+          "loai": "hook",
+          "chu": "Bạn không yêu sai người.",
+          "phu": "Có khi bạn đang yêu *sai cách*.",
+          "vo": "[playfully] Bạn không yêu sai người đâu... [mischievously] có khi, bạn đang yêu sai cách!"
+        },
+        {
+          "loai": "hoi",
+          "chu": "Vì sao tôi cứ yêu sai người?",
+          "phu": "Hỏi thử engine Thần số học",
+          "vo": "[curious] Mình đem câu hỏi này vào Hiểu Bản Thân: vì sao tôi cứ yêu sai người?"
+        },
+        {
+          "loai": "tinh",
+          "chu": "Đường đời *6* · Linh hồn *9*",
+          "dong": [
+            "24/10/1988",
+            "2+4 = 6  ·  1+0 = 1  ·  1+9+8+8 = 26 → 8",
+            "6 + 1 + 8 = 15 → 1+5 = *6*",
+            "Nguyên âm trong tên → *9*"
+          ],
+          "nho": "Nhân vật minh hoạ",
+          "vo": "[cheerfully] Ví dụ sinh hai mươi tư tháng mười năm tám tám. Rút gọn từng phần rồi cộng lại, ra số đường đời sáu. [enthusiastic] Còn nguyên âm trong tên cho số linh hồn chín."
+        },
+        {
+          "loai": "dap",
+          "chu": "Số 6 yêu bằng sự chăm lo",
+          "dong": [
+            "Dễ vấp: bao bọc thành *kiểm soát*",
+            "Số linh hồn 9: dễ yêu *hình ảnh* hơn con người thật"
+          ],
+          "vo": "[warmly] Số sáu yêu bằng sự chăm lo... nhưng dễ bao bọc thành kiểm soát. [curious] Còn số linh hồn chín thì dễ yêu hình ảnh, hơn là con người thật."
+        },
+        {
+          "loai": "ngo",
+          "chu": "“Bạn cho đi vì người ấy cần, hay vì bạn *cần được cần*?”",
+          "phu": "Câu tự soi engine trả về",
+          "vo": "[softly] Rồi nó hỏi ngược lại một câu khá đau: [dramatic] bạn cho đi vì người ấy cần... hay vì bạn cần được cần?"
+        },
+        {
+          "loai": "viec",
+          "chu": "Việc nên làm",
+          "dong": [
+            "Hỏi người ấy: họ thấy *được yêu* qua điều gì",
+            "thay vì tự đoán"
+          ],
+          "vo": "[warmly] Việc nên làm: hỏi người ấy, họ thấy được yêu qua điều gì, thay vì tự đoán."
+        },
+        {
+          "loai": "cta",
+          "chu": "Con số của bạn nói gì về chuyện yêu?",
+          "phu": "Nhập tên + ngày sinh · miễn phí",
+          "vo": "[curious] Con số của bạn nói gì về chuyện yêu? Comment số đường đời của bạn nha! [excited] Vào hiểu bản chấm com, gạch chéo, thần số. Miễn phí!"
+        }
+      ]
+    },
+    {
+      "ma": "v22",
+      "mang": "Tử vi",
+      "motif": "la_so",
+      "mau": "#7FA8F0",
+      "tieu_de": "Năm 2027: tiền dễ ra ở chỗ bạn không ngờ",
+      "url": "hieuban.com/tu-vi",
+      "engine": {
+        "route": "POST /v1/tuvi/hoi",
+        "dau_vao": "nữ · 24/10/1988 · 09:30 · Hà Nội · âm lịch Việt Nam",
+        "cau_hoi": "Năm 2027 tiền bạc của tôi thế nào, có nên đầu tư không?"
+      },
+      "canh": [
+        {
+          "loai": "hook",
+          "chu": "Năm 2027",
+          "phu": "Chỗ tiền dễ ra, có khi *không phải* chỗ bạn đang lo.",
+          "vo": "[dramatic] Năm hai không hai bảy... [curious] chỗ tiền dễ ra, có khi không phải chỗ bạn đang lo đâu!"
+        },
+        {
+          "loai": "hoi",
+          "chu": "Năm 2027 tiền bạc của tôi thế nào, có nên đầu tư không?",
+          "phu": "Hỏi thử engine Tử vi",
+          "vo": "[cheerfully] Dịp cuối năm, ai cũng hỏi: năm sau tiền bạc thế nào, có nên đầu tư không?"
+        },
+        {
+          "loai": "tinh",
+          "chu": "Lá số + 3 lớp hạn",
+          "dong": [
+            "Âm lịch Việt Nam · 12 cung",
+            "Mười năm · năm 2027 Đinh Mùi · nhịp phụ",
+            "Cung Tài Bạch có *Thiên Phủ*: kho giữ tiền"
+          ],
+          "nho": "Nhân vật minh hoạ",
+          "vo": "[enthusiastic] Hiểu Bản Thân an lá số theo âm lịch Việt Nam, rồi xếp thêm ba lớp hạn: mười năm, năm Đinh Mùi, và tiểu hạn. [cheerfully] Cung tiền bạc có sao Thiên Phủ, cái kho giữ tiền."
+        },
+        {
+          "loai": "dap",
+          "chu": "Tiền bạc: *thuận lợi*",
+          "dong": [
+            "Hay có người giúp đúng lúc",
+            "Nhưng Hoá Kỵ năm 2027 rơi vào cung *anh em, bạn bè, cộng sự*"
+          ],
+          "vo": "[cheerfully] Kết quả: năm hai không hai bảy ở mức cân bằng, tiền bạc thuận, hay có người giúp đúng lúc. [curious] Nhưng Hoá Kỵ của năm... lại rơi vào cung anh em, bạn bè, cộng sự."
+        },
+        {
+          "loai": "ngo",
+          "chu": "Hạn chế *cho vay*. Đừng *đứng tên bảo lãnh* cho người khác.",
+          "phu": "Lời nhắc của engine không nằm ở chuyện đầu tư",
+          "vo": "[mischievously] Nên lời nhắc không nằm ở chuyện đầu tư: [dramatic] hạn chế cho vay, và đừng đứng tên bảo lãnh cho người khác!"
+        },
+        {
+          "loai": "viec",
+          "chu": "Việc nên làm",
+          "dong": [
+            "Chia nhỏ khoản chi lớn",
+            "Giữ quỹ dự phòng *vài tháng*"
+          ],
+          "nho": "Không phải lời khuyên đầu tư · việc lớn hãy tính bằng con số thật",
+          "vo": "[warmly] Chia nhỏ khoản chi lớn, giữ một quỹ dự phòng vài tháng. À, đây không phải lời khuyên đầu tư nha; việc lớn, hãy tính bằng con số thật."
+        },
+        {
+          "loai": "cta",
+          "chu": "Lá số của bạn nói gì về năm 2027?",
+          "phu": "Cần ngày giờ sinh · xem lá số miễn phí",
+          "vo": "[curious] Lá số của bạn nói gì về năm hai không hai bảy? [excited] Vào hiểu bản chấm com, gạch chéo, tử vi. Xem lá số miễn phí!"
+        }
+      ]
+    },
+    {
+      "ma": "v23",
+      "mang": "Bát tự",
+      "motif": "tu_tru",
+      "mau": "#8FD3B6",
+      "tieu_de": "Đừng hỏi hợp nghề gì, hãy hỏi hợp vai gì",
+      "url": "hieuban.com/bat-tu",
+      "engine": {
+        "route": "POST /v1/battu/hoi",
+        "dau_vao": "nữ · 24/10/1988 · 09:30 · Hà Nội",
+        "cau_hoi": "Tôi hợp với nghề gì?"
+      },
+      "canh": [
+        {
+          "loai": "hook",
+          "chu": "Đừng hỏi mình hợp *nghề* gì.",
+          "phu": "Hãy hỏi mình hợp *vai* gì.",
+          "vo": "[playfully] Đừng hỏi mình hợp nghề gì... [enthusiastic] hãy hỏi mình hợp vai gì!"
+        },
+        {
+          "loai": "hoi",
+          "chu": "Tôi hợp với nghề gì?",
+          "phu": "Hỏi thử engine Bát tự",
+          "vo": "[curious] Mình hỏi phần Bát tự của Hiểu Bản Thân: tôi hợp với nghề gì?"
+        },
+        {
+          "loai": "tinh",
+          "chu": "Nhật chủ *Nhâm*: nước lớn",
+          "dong": [
+            "Mậu Thìn · Nhâm Tuất · Nhâm Tý · Ất Tỵ",
+            "Đất *Mậu* chặn dòng nước: xuất hiện *3 lần*",
+            "→ *Thất Sát*: áp lực, thử thách"
+          ],
+          "nho": "Nhân vật minh hoạ",
+          "vo": "[cheerfully] Ngày giờ sinh đổi ra bốn cột can chi. Người ví dụ có nhật chủ Nhâm, nước lớn. [mysterious] Đất Mậu, thứ chặn dòng nước, xuất hiện tới ba lần. [enthusiastic] Trong Bát tự, đó là Thất Sát: áp lực, thử thách."
+        },
+        {
+          "loai": "dap",
+          "chu": "Dám nhận việc khó, việc gấp",
+          "dong": [
+            "mà người khác *né*",
+            "Áp lực làm bạn *tỉnh táo hơn*"
+          ],
+          "vo": "[enthusiastic] Điểm sáng: bạn dám nhận việc khó, việc gấp mà người khác né. Áp lực làm bạn tỉnh táo hơn."
+        },
+        {
+          "loai": "ngo",
+          "chu": "Nhưng dễ *nhận thêm việc* vì ngại từ chối người trên.",
+          "phu": "Điều engine nhắc nên để ý",
+          "vo": "[mischievously] Nhưng cũng dễ ôm thêm việc... chỉ vì ngại từ chối người trên!"
+        },
+        {
+          "loai": "viec",
+          "chu": "Vai hợp với bạn",
+          "dong": [
+            "Thử thách *rõ ràng*, có *thời hạn*",
+            "Có *quyền quyết* đi kèm",
+            "Hỏi rõ phạm vi việc trước khi nhận"
+          ],
+          "vo": "[warmly] Vai hợp với bạn: thử thách rõ ràng, có thời hạn, và có quyền quyết đi kèm. Trước khi nhận, hỏi rõ phạm vi việc."
+        },
+        {
+          "loai": "cta",
+          "chu": "Bạn mạnh ở vai nào?",
+          "phu": "Nhập ngày giờ sinh · chương đầu đọc miễn phí",
+          "vo": "[curious] Bạn mạnh ở vai nào? Gửi cho đồng nghiệp hay nói để em làm nha! [excited] Vào hiểu bản chấm com, gạch chéo, bát tự. Chương đầu đọc miễn phí!"
+        }
+      ]
+    },
+    {
+      "ma": "v24",
+      "mang": "Kinh Dịch",
+      "motif": "que",
+      "mau": "#F2A65A",
+      "tieu_de": "Người yêu cũ có quay lại không? Hào ra: bừng cháy, tắt lịm",
+      "url": "hieuban.com/kinh-dich",
+      "engine": {
+        "route": "POST /v1/kinhdich/hoi",
+        "dau_vao": "gieo tay ví dụ: 7·8·7·9·8·7 (từ hào 1 lên) → Ly, hào 4 động → Bí",
+        "cau_hoi": "Người yêu cũ có quay lại với tôi không? Anh ấy chia tay tôi 3 tháng rồi."
+      },
+      "canh": [
+        {
+          "loai": "hook",
+          "chu": "Hỏi người cũ có quay lại không…",
+          "phu": "Hào ra đúng mấy chữ: *bừng cháy, tắt lịm*.",
+          "vo": "[curious] Hỏi Kinh Dịch: người yêu cũ có quay lại không? [dramatic] Câu trả lời chỉ có mấy chữ... bừng cháy, tắt lịm."
+        },
+        {
+          "loai": "hoi",
+          "chu": "Người yêu cũ có quay lại với tôi không? Anh ấy chia tay tôi 3 tháng rồi.",
+          "phu": "Có chữ “anh ấy”: engine biết lấy hào nào làm người ấy",
+          "vo": "[cheerfully] Câu hỏi có chữ anh ấy, nên Hiểu Bản Thân biết lấy hào nào đại diện cho người ấy."
+        },
+        {
+          "loai": "tinh",
+          "chu": "Quẻ *Ly*: lửa nối lửa",
+          "dong": [
+            "3 đồng xu × 6 lần gieo",
+            "Hào 4 động → quẻ biến *Bí*"
+          ],
+          "nho": "Một lần gieo minh hoạ",
+          "vo": "[enthusiastic] Ba đồng xu, sáu lần gieo. Lần này ra quẻ Ly, lửa nối lửa. [mysterious] Hào thứ tư động, quẻ biến sang Bí."
+        },
+        {
+          "loai": "dap",
+          "chu": "突如其來如，焚如，死如，棄如",
+          "dong": [
+            "Đột ngột mà đến, *bừng cháy*, *tắt lịm*, bị bỏ rơi",
+            "Hiểu đơn giản: nổi lên quá nhanh thì cũng tắt nhanh"
+          ],
+          "vo": "[mysterious] Lời hào Cửu Tứ: đột ngột mà đến, bừng cháy, tắt lịm. [warmly] Hiểu đơn giản: bùng lên quá nhanh, thì cũng tắt nhanh."
+        },
+        {
+          "loai": "ngo",
+          "chu": "Nghiêng: *Chưa nên vội*",
+          "phu": "Người ấy đang ở thế vững, và đang gây sức ép lên bạn",
+          "vo": "[softly] Kết quả nghiêng về: chưa nên vội. Người ấy đang ở thế vững, và đang gây sức ép lên bạn."
+        },
+        {
+          "loai": "viec",
+          "chu": "Câu nên tự hỏi",
+          "dong": [
+            "Người này có làm mình *dễ chịu*",
+            "khi ở cạnh không?"
+          ],
+          "nho": "Quẻ là tấm gương để soi, không phải lời phán",
+          "vo": "[warmly] Câu nên tự hỏi: người này có làm mình dễ chịu, khi ở cạnh không?"
+        },
+        {
+          "loai": "cta",
+          "chu": "Bạn gieo thì ra quẻ gì?",
+          "phu": "Gieo 3 đồng xu online · miễn phí",
+          "vo": "[mischievously] Bạn tự gieo thì sẽ ra quẻ khác đó! [excited] Vào hiểu bản chấm com, gạch chéo, kinh dịch. Gieo thử miễn phí!"
+        }
+      ]
+    },
+    {
+      "ma": "v25",
+      "mang": "Phong thuỷ",
+      "motif": "la_ban",
+      "mau": "#B9A3F0",
+      "tieu_de": "Giường đối diện cửa: sách xưa có cấm không?",
+      "url": "hieuban.com/phong-thuy",
+      "engine": {
+        "route": "POST /v1/phongthuy/hoi",
+        "dau_vao": "nữ · sinh năm 1988",
+        "cau_hoi": "Giường ngủ đối diện cửa phòng có sao không?"
+      },
+      "canh": [
+        {
+          "loai": "hook",
+          "chu": "Giường kê thẳng cửa phòng.",
+          "phu": "Sách xưa có cấm không? Câu trả lời *khá bất ngờ*.",
+          "vo": "[curious] Giường kê thẳng cửa phòng: sách xưa có cấm không? [mischievously] Câu trả lời khá bất ngờ nha!"
+        },
+        {
+          "loai": "hoi",
+          "chu": "Giường ngủ đối diện cửa phòng có sao không?",
+          "phu": "Hỏi thử engine Phong thuỷ",
+          "vo": "[cheerfully] Mình hỏi phần Phong thuỷ của Hiểu Bản Thân."
+        },
+        {
+          "loai": "ngo",
+          "chu": "Đây là *quan niệm dân gian*.",
+          "phu": "Không có trong cổ thư như một quy tắc. Engine ghi rõ điều này.",
+          "vo": "[dramatic] Bất ngờ là: nó ghi rõ, đây là quan niệm dân gian... [curious] không có trong cổ thư như một quy tắc."
+        },
+        {
+          "loai": "dap",
+          "chu": "Lý do thật rất đời thường",
+          "dong": [
+            "Người đi qua · tiếng mở cửa · *gió lùa*",
+            "làm giấc ngủ *bị ngắt*"
+          ],
+          "vo": "[cheerfully] Lý do thật rất đời thường: người đi qua, tiếng mở cửa, gió lùa, làm giấc ngủ bị ngắt."
+        },
+        {
+          "loai": "viec",
+          "chu": "Việc 0 đồng",
+          "dong": [
+            "Xoay giường *lệch* khỏi lối thẳng của cửa",
+            "Đầu giường tựa tường, nằm vẫn *thấy cửa*",
+            "Phòng trọ chật: rèm hoặc kệ thấp ngăn giữa"
+          ],
+          "vo": "[enthusiastic] Việc không tốn đồng nào: xoay giường lệch khỏi lối thẳng của cửa, đầu giường tựa tường, nằm vẫn thấy cửa. [warmly] Phòng trọ chật thì dùng rèm, hoặc kệ thấp ngăn ở giữa."
+        },
+        {
+          "loai": "tinh",
+          "chu": "Nữ 1988 · cung *Chấn*",
+          "dong": [
+            "Đông Nam = *Diên Niên*",
+            "hợp đầu giường, phòng ngủ vợ chồng"
+          ],
+          "nho": "Hướng tính theo năm sinh + giới tính",
+          "vo": "[cheerfully] Còn hướng thì tính theo năm sinh. Ví dụ nữ sinh năm tám tám, cung Chấn: [enthusiastic] hướng Đông Nam là Diên Niên, hợp đầu giường vợ chồng."
+        },
+        {
+          "loai": "cta",
+          "chu": "4 hướng hợp tuổi bạn là gì?",
+          "phu": "Nhập năm sinh · miễn phí",
+          "vo": "[curious] Bốn hướng hợp tuổi bạn là gì? Gửi cho người đang thuê trọ nha! [excited] Vào hiểu bản chấm com, gạch chéo, phong thuỷ. Miễn phí!"
+        }
+      ]
+    },
+    {
+      "ma": "v26",
+      "mang": "Nhân tướng học",
+      "motif": "mat",
+      "mau": "#F0A3B5",
+      "tieu_de": "Nốt ruồi quanh miệng: sách tướng xưa nói gì?",
+      "url": "hieuban.com/nhan-tuong",
+      "engine": {
+        "route": "POST /v1/nhan-tuong/hoi",
+        "dau_vao": "không cần ảnh",
+        "cau_hoi": "Nốt ruồi ở khoé miệng nói gì?"
+      },
+      "canh": [
+        {
+          "loai": "hook",
+          "chu": "Nốt ruồi quanh miệng.",
+          "phu": "Sách tướng xưa nói gì? Đoạn cuối mới là *quan trọng nhất*.",
+          "vo": "[curious] Nốt ruồi quanh miệng, sách tướng xưa nói gì? [mischievously] Đoạn cuối mới là quan trọng nhất nha!"
+        },
+        {
+          "loai": "hoi",
+          "chu": "Nốt ruồi ở khoé miệng nói gì?",
+          "phu": "Hỏi thử engine Nhân tướng học",
+          "vo": "[cheerfully] Mình hỏi phần Nhân tướng học của Hiểu Bản Thân."
+        },
+        {
+          "loai": "tinh",
+          "chu": "Xuất Nạp quan",
+          "dong": [
+            "Sách tướng chia gương mặt thành các *bộ vị*",
+            "Quanh miệng: *xuất* là ra, *nạp* là vào",
+            "lời nói đi ra, ăn uống đi vào"
+          ],
+          "vo": "[enthusiastic] Sách tướng chia gương mặt thành các bộ vị. Quanh miệng gọi là Xuất Nạp quan: [cheerfully] xuất là ra, nạp là vào. Lời nói đi ra, ăn uống đi vào."
+        },
+        {
+          "loai": "dap",
+          "chu": "Dân gian xem là",
+          "dong": [
+            "Có *lộc ăn* · *khéo nói* · ưa ăn ngon",
+            "Nhắc nhẹ: *giữ lời đã hứa*"
+          ],
+          "vo": "[playfully] Dân gian xem là người có lộc ăn, khéo nói, ưa ăn ngon. [warmly] Và một lời nhắc nhẹ: giữ lời đã hứa."
+        },
+        {
+          "loai": "tinh2",
+          "chu": "Sách xưa còn dặn",
+          "dong": [
+            "Nốt sáng, gọn, hơi nổi",
+            "gọi là *nét sống*"
+          ],
+          "vo": "[curious] Sách xưa còn phân biệt: nốt ruồi sáng, gọn, hơi nổi, gọi là nét sống."
+        },
+        {
+          "loai": "ngo",
+          "chu": "Đổi màu · đổi cỡ · chảy nước → *đi khám da liễu*",
+          "phu": "Không xem tướng thay khám",
+          "vo": "[warmly] Còn điều quan trọng nhất: nốt ruồi đổi màu, đổi cỡ, hay chảy nước, thì đi khám da liễu nha. [cheerfully] Không xem tướng thay cho khám!"
+        },
+        {
+          "loai": "cta",
+          "chu": "Gương mặt bạn nói gì?",
+          "phu": "Tự soi gương 6 bước · miễn phí",
+          "vo": "[curious] Gương mặt bạn nói gì? [excited] Vào hiểu bản chấm com, gạch chéo, nhân tướng, tự soi gương sáu bước. Miễn phí!"
+        }
+      ]
+    },
+    {
+      "ma": "v27",
+      "mang": "Tarot",
+      "motif": "tarot",
+      "mau": "#E9C46A",
+      "tieu_de": "Có nên nghỉ việc nhận lời mời mới? Rút 3 lá Tarot",
+      "url": "hieuban.com/tarot",
+      "engine": {
+        "route": "POST /v1/tarot/xao-bai → /v1/tarot/doc-bai",
+        "dau_vao": "trải bài 3 lá thời gian · hạt giống xáo bài cố định 'hieuban-video-27'",
+        "cau_hoi": "Tôi có nên nghỉ việc để nhận lời mời công việc mới không?"
+      },
+      "canh": [
+        {
+          "loai": "hook",
+          "chu": "Rút 3 lá Tarot, ra cả 3 lá *ngược*.",
+          "phu": "Đừng hoảng. Nghe hết đã.",
+          "vo": "[dramatic] Rút ba lá Tarot... ra cả ba lá ngược! [playfully] Đừng hoảng, nghe hết đã."
+        },
+        {
+          "loai": "hoi",
+          "chu": "Tôi có nên nghỉ việc để nhận lời mời công việc mới không?",
+          "phu": "Hỏi thử engine Tarot",
+          "vo": "[curious] Câu hỏi: có nên nghỉ việc, để nhận lời mời công việc mới không?"
+        },
+        {
+          "loai": "tinh",
+          "chu": "Quá khứ · Hiện tại · Sắp tới",
+          "dong": [
+            "Tháp · 5 Gậy · 8 Cốc (đều ngược)",
+            "Lá *Sắp tới* được tính nặng *gấp đôi*"
+          ],
+          "nho": "Một lần rút minh hoạ",
+          "vo": "[cheerfully] Mình rút ba lá: quá khứ, hiện tại, sắp tới. [mysterious] Được lá Tháp, năm Gậy, và tám Cốc, đều ngược. [enthusiastic] Hiểu Bản Thân cân từng lá, lá sắp tới tính nặng gấp đôi."
+        },
+        {
+          "loai": "dap",
+          "chu": "Lá ngược *không phải điềm xấu*",
+          "dong": [
+            "Nó chỉ *đổi chiều* nghĩa của lá"
+          ],
+          "vo": "[warmly] Lá ngược không có nghĩa là xui đâu. Nó chỉ đổi chiều nghĩa của lá thôi."
+        },
+        {
+          "loai": "ngo",
+          "chu": "“Tôi *đi tìm*, hay *đi trốn*?”",
+          "phu": "Nghiêng: Chưa nên vội · lá nặng nhất: 8 Cốc ngược",
+          "vo": "[softly] Kết quả là: chưa nên vội. Lá nặng nhất là tám Cốc ngược, và nó hỏi bạn: [dramatic] tôi đi tìm... hay đi trốn?"
+        },
+        {
+          "loai": "viec",
+          "chu": "Trước khi quyết, làm 3 việc",
+          "dong": [
+            "1. Hỏi rõ *lương*, việc cụ thể, người quản lý trực tiếp",
+            "2. Hỏi một người *đang làm* ở đó",
+            "3. So cả mức sống thật: đi lại, giờ làm"
+          ],
+          "vo": "[cheerfully] Trước khi quyết, làm ba việc. Hỏi rõ lương, việc cụ thể, người quản lý trực tiếp. Hỏi một người đang làm ở đó. Và so cả mức sống thật: đi lại, giờ làm."
+        },
+        {
+          "loai": "cta",
+          "chu": "Bạn rút được lá gì?",
+          "phu": "Rút bài online · miễn phí",
+          "vo": "[mischievously] Gửi cho đứa bạn đang cầm offer nha! [excited] Vào hiểu bản chấm com, gạch chéo, tarot. Hỏi đúng câu của bạn, miễn phí!"
+        }
+      ]
+    }
+  ]
+}

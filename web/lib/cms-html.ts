@@ -9,7 +9,7 @@ import { ganIdMucLuc, giaiMaHtml, type MucLuc } from "@/lib/muc-luc";
 export type MucLucCms = MucLuc;
 
 const LOP = ["hbt-ghi-chu", "hbt-ghi-chu-luu_y", "hbt-ghi-chu-meo", "hbt-ghi-chu-tu_soi", "hbt-ghi-chu-tom_tat",
-  "hbt-ghi-chu-tieu-de", "hbt-keu-goi", "hbt-trich-dan", "hbt-dich-nghia", "hbt-bang", "hbt-video"];
+  "hbt-ghi-chu-tieu-de", "hbt-keu-goi", "hbt-trich-dan", "hbt-dich-nghia", "hbt-bang", "hbt-video", "hbt-video-doc"];
 
 // Video: CHỈ iframe youtube-nocookie với mã 11 ký tự (+ ?start=giây). Mọi iframe khác bị bỏ.
 const VIDEO = /^https:\/\/www\.youtube-nocookie\.com\/embed\/[A-Za-z0-9_-]{11}(\?start=\d{1,6})?$/;

@@ -1,5 +1,5 @@
 {
- "_nguon": "Nháp AI tổng hợp theo khung Tử Bình (Uyên Hải Tử Bình, Tử Bình Chân Thuyên, Trích Thiên Tuỷ; thần sát theo Tam Mệnh Thông Hội), viết lại bằng lời đời thường cho Luận giải Bát tự đời sống (BT-ĐS); chưa đối chiếu nguyên văn. Màu, hướng, nghề theo ngũ hành là ứng dụng dân gian.",
+ "_nguon": "Nháp AI tổng hợp theo khung Tử Bình (Uyên Hải Tử Bình, Tử Bình Chân Thuyên, Trích Thiên Tuỷ; thần sát theo Tam Mệnh Thông Hội), viết lại bằng lời đời thường cho Luận giải Bát tự đời sống (BT-ĐS); chưa đối chiếu nguyên văn. Màu, hướng, nghề theo ngũ hành là ứng dụng dân gian. Q5 (2026-11-12): đối chiếu thiên «Luận dụng thần» + «Luận dụng thần thành bại cứu ứng» của Tử Bình Chân Thuyên (fixtures/nguon/tu_binh_chan_thuyen.json). Sửa: Thất Sát (thân không yếu) hỷ Thực Thương, kỵ Tài — «七煞喜食神以制伏，忌财印以资扶», «七煞逢财无制，七煞格败也»; Ấn để trung tính (thân yếu vẫn hỷ Ấn: Sát Ấn tương sinh). Chính Ấn / Thiên Ấn (thân yếu, cân) thêm hỷ Tỷ Kiếp — «印喜官煞以相生，劫才以护印». KHÔNG sửa Thực Thần («食喜身旺以相生») và Thương Quan («伤官喜佩印以制伏»): KB đã thể hiện qua nhánh than_nhuoc (hỷ Tỷ Kiếp / hỷ Ấn).",
  "source": {
   "tu_binh_chan_thuyen": "Tử Bình Chân Thuyên (Thẩm Hiếu Chiêm, đời Thanh)",
   "trich_thien_tuy": "Trích Thiên Tuỷ (Lưu Bá Ôn chú, tương truyền)",
@@ -627,10 +627,11 @@
    "loi_khuyen": "Nên chọn trận cần đánh, để những việc nhỏ cho người khác lo.",
    "nghe": "Hợp việc có thử thách, có cạnh tranh: kỹ thuật hiện trường, mở thị trường mới, an ninh, thể thao, xử lý sự cố.",
    "hy": [
-    "Thực Thương",
-    "Ấn"
+    "Thực Thương"
    ],
-   "ky": [],
+   "ky": [
+    "Tài"
+   ],
    "than_nhuoc": {
     "hy": [
      "Ấn"
@@ -691,7 +692,8 @@
    "loi_khuyen": "Nên tự nhận một việc khó mà không hỏi ý ai trước.",
    "nghe": "Hợp giáo dục, nghiên cứu, y dược, pháp lý, viết lách, việc cần bằng cấp và uy tín.",
    "hy": [
-    "Quan Sát"
+    "Quan Sát",
+    "Tỷ Kiếp"
    ],
    "ky": [
     "Tài"
@@ -713,7 +715,8 @@
    "loi_khuyen": "Nên đặt mốc hoàn thành rõ cho mỗi việc riêng bạn đang theo.",
    "nghe": "Hợp nghề chuyên sâu, kỹ thuật lạ, tâm lý, thiết kế, công nghệ, nghiên cứu độc lập.",
    "hy": [
-    "Quan Sát"
+    "Quan Sát",
+    "Tỷ Kiếp"
    ],
    "ky": [
     "Tài"
@@ -1727,6 +1730,26 @@
     "luu_y": "Bạn dễ mệt hơn mình nghĩ và hay giữ chuyện lo trong lòng.",
     "viec": "Đi khám sức khoẻ định kỳ, mỗi tháng nói ra một điều đang lo với người thân."
    }
+  }
+ },
+ "ngoai_cach": {
+  "_nguon": "KT-TT4: Tử Bình Chân Thuyên, thiên «Luận tạp cách» (kho nguồn fixtures/nguon/tu_binh_chan_thuyen.json). Lời là tóm ý nháp; chỉ hiện khi lá số đủ điều kiện chặt của calc/battu_ngoai_cach; không đổi mức nào.",
+  "duoi": "Cách đọc này có thể ngược với hai cách phía trên. Hệ thống không chọn thay bạn: hãy nhớ lại vài năm đã qua xem cách nào khớp với bạn hơn.",
+  "chuyen_vuong": {
+   "tieu_de": "Một cách đọc khác: đi theo thế mạnh {hanh}",
+   "y": "Lá số của bạn gần như dồn hết về một phía: {hanh}, cũng là phần của chính bạn. Với lá số như vậy, sách xưa có thêm một cách đọc: không tìm cách bớt phần đang nhiều, mà đi theo thế mạnh ấy. Theo cách này, bạn hợp với {hy}; phần nên dè chừng là {ky}."
+  },
+  "hoa_khi": {
+   "tieu_de": "Một cách đọc khác: cả lá số quy về {hanh}",
+   "y": "Lá số của bạn có một nét hiếm: phần đại diện cho bạn kết đôi với phần đứng ngay cạnh, và cả lá số cùng quy về {hanh}. Với lá số như vậy, sách xưa có thêm một cách đọc: lấy {hanh} làm trục chính. Theo cách này, bạn hợp với {hy}; phần nên dè chừng là {ky}."
+  },
+  "tong_tai": {
+   "tieu_de": "Một cách đọc khác: thuận theo dòng {hanh}",
+   "y": "Phần đại diện cho bạn trong lá số rất mỏng, còn {hanh} (phần nói về tiền bạc và nguồn lực) gần như phủ kín. Với lá số như vậy, sách xưa có thêm một cách đọc: thay vì cố bù cho mình mạnh lên, hãy thuận theo dòng đang mạnh. Theo cách này, bạn hợp với {hy}; phần nên dè chừng là {ky}."
+  },
+  "tong_sat": {
+   "tieu_de": "Một cách đọc khác: thuận theo dòng {hanh}",
+   "y": "Phần đại diện cho bạn trong lá số rất mỏng, còn {hanh} (phần nói về khuôn khổ, trách nhiệm và sức ép từ bên ngoài) gần như phủ kín. Với lá số như vậy, sách xưa có thêm một cách đọc: thay vì cố bù cho mình mạnh lên, hãy thuận theo dòng đang mạnh. Theo cách này, bạn hợp với {hy}; phần nên dè chừng là {ky}."
   }
  }
 }
