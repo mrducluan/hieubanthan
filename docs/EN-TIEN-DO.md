@@ -13,7 +13,7 @@
 | 2 | Nền engine (tên riêng, `L()` cho khuôn chung, `slug_en`) | **xong phần nền** (mục 3c) | 7 nhóm route danh mục sạch; khuôn chuyên mảng (`truc_quan`, `mo_dau`, căn cứ `chu_y_nam`/`suc_khoe_nam`/`luu_y_mang`) làm cùng mảng |
 | 3 | Bát tự | **xong** (PR #256) | 5 nhóm route sạch; `/en/bazi` + 3 cụm kiến thức mở; hỏi đáp tiếng Anh (mục 3d) — câu hỏi mở: bộ dò khủng hoảng tiếng Anh (mục 6) |
 | 4 | Tử vi | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/zi-wei-dou-shu` + 6 cụm kiến thức; hỏi đáp tiếng Anh (mục 3e) |
-| 5 | Phong thuỷ | **engine + hỏi đáp xong**, web đang làm | 12 nhóm route sạch (gồm `kb.trang.dau_hieu`, `hoi.phongthuy`) — mục 3f |
+| 5 | Phong thuỷ | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/feng-shui` + cụm dấu hiệu trong nhà (gồm `kb.trang.dau_hieu`, `hoi.phongthuy`) — mục 3f |
 | 6 | Kinh Dịch | chưa | 6 |
 | 7 | Thần số + Tarot đầy đủ | chưa | 18 |
 | 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | chưa | 26 |
@@ -260,7 +260,7 @@ cho người dùng thật cần chủ dự án (mục 6).
 - Còn: 37/168 trang sao-ở-cung bản Anh phần riêng < 30 % (quyết noindex ở web khi đo Search Console); đoạn trùng chữ trong
   `tuvi_doi_song._chuong` bản Anh (thấp).
 
-## 3f. Giai đoạn 5 — Phong thuỷ (2026-11-13, đang)
+## 3f. Giai đoạn 5 — Phong thuỷ (2026-11-13)
 
 - **Engine** (12 nhóm route sạch: `phongthuy`, `.bo_cuc`, `.cung_phi`, `.do_huong`, `.do_thi`, `.huyen_khong`, `.luan_giai`,
   `.menh_quai`, `.thang_nay`, `.viec_tuan`, `kb.trang.dau_hieu`, `hoi.phongthuy`): lớp hiển thị `luangiai/phongthuy_hien.py`;
@@ -279,6 +279,7 @@ cho người dùng thật cần chủ dự án (mục 6).
 - **Thuật ngữ cần người bản xứ duyệt**: Kua (personal trigram), East/West Group, 24 sơn dạng "Zi (N2)", trạng thái sao timely /
   growing / retreating / fading / dormant, Kim Lau / Hoang Oc / Tam Tai (phiên âm), Three Disasters, Year Breaker, Three Killings,
   Tai Sui, "Door – master – stove", "the stove's control side".
+- **Review UX 3 vai (2026-11-13) đã sửa**: chữ Việt ở kiểm tra tuổi làm nhà, bảng khảo sát (cột "Best placed on", thẻ trên điện thoại), ngày "4 Feb 2026", số Kua "Kua 2 (Kun)", lời khi chưa có hồ sơ, hướng / năm / loại nhà điền sẵn từ hồ sơ nhà, nhãn la bàn, trang dấu hiệu ("Folk tradition holds…"); engine: sao năm (Ngũ Hoàng / Thái Tuế) không lạc sang sao hạn theo tuổi, tiêu đề hướng không cắt, "cửa đối cửa". Tên du niên dịu đi: Sheng Qi (Vitality), Tian Yi (Health), Yan Nian (Harmony), Huo Hai (Minor Mishaps), Liu Sha (Friction), Wu Gui (Setbacks), Jue Ming (Depletion) — cần người bản xứ duyệt cùng "Golden Tower", "house-age count", "Longevity Wanes", "Deserted House", "Three Calamities". Chưa làm: câu mở đầu hỏi đáp chưa trả lời thẳng (thứ tự đoạn do bản Việt quyết), bảng chi phí trang dấu hiệu dạng thẻ (component chung).
 
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 

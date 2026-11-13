@@ -433,8 +433,8 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     nn = _nom_na(qv.get("nom_na"))
     if muc == "thuan" and bai:                   # bài học đã nằm trong hộp "Điểm đang có lợi"
         nn = _nom_na(canh) + "."
-    doan.append(L("kd.doan.que", "Quẻ {que}", que=tq(ban["ten"])) + (f" ({q['ten_han']})" if q.get("ten_han") else "") + ". "
-                + (nn or q.get("y_chinh", "")))
+    doan.append((L("kd.doan.que_han", "Quẻ {que} ({han})", que=tq(ban["ten"]), han=q["ten_han"]) if q.get("ten_han")
+                 else L("kd.doan.que", "Quẻ {que}", que=tq(ban["ten"]))) + ". " + (nn or q.get("y_chinh", "")))
     if chu and (chu.get("nom_na") or chu.get("y")):
         doan.append(L("kd.doan.diem_roi", "Điểm rơi của quẻ: ") + (chu.get("nom_na") or chu.get("y")))
     if que.get("quai_bien"):
