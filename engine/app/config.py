@@ -23,7 +23,7 @@ from enum import Enum
 # (trước lấy khoảng của chính cung đồng hạn, vd bé 2 tuổi ra "86–95"); cung, can, tứ hoá không đổi.
 # 0.1.8 (Q5, 2026-11-12): bảng hỷ / kỵ cách cục Bát tự (dụng thần cách 2) sửa theo nguyên văn Tử Bình Chân Thuyên — Thất Sát,
 # Chính Ấn, Thiên Ấn; đổi mức chương / đại vận ở khoảng 3 % lá số. Tứ trụ không đổi.
-ENGINE_VERSION = "0.1.8"
+ENGINE_VERSION = "0.1.9"
 
 
 # ---------------------------------------------------------------------------

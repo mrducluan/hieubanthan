@@ -202,5 +202,5 @@ def test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu():
     for k, g in co.items():
         assert g["han"] in van and g["y"] and "sẽ" not in g["y"], k
     # ba cách điều kiện hệ thống đang khác sách — ghi cờ, CHƯA đổi phép nhận diện (đổi = đổi kết quả lá số)
-    assert {k for k, g in co.items() if g.get("khac_dieu_kien")} == {
-        "ma_dau_doi_kiem", "quan_than_khanh_hoi", "nguyet_sinh_thuong_hai", "loc_ma_boi_an"}
+    # KT-TT8: Quân thần khánh hội + Nguyệt sinh thương hải đã theo sách; hai cách còn lại giữ cách hiểu phổ biến
+    assert {k for k, g in co.items() if g.get("khac_dieu_kien")} == {"ma_dau_doi_kiem", "loc_ma_boi_an"}
