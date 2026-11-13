@@ -12,17 +12,10 @@
 - [x] KT-TT4 (2026-11-12): lá số Bát tự thuộc cách cục đặc biệt (≈ 0,6 %) có thêm hộp "Một cách đọc khác" theo «Luận tạp cách» — anh không cần làm gì; khi có phiếu "Đúng với mình" em sẽ báo số.
 - [x] KT-TT5 (2026-11-12): bài đọc Kinh Dịch có thêm dòng "Thế chung của quẻ" (quẻ dễ tan / dễ kết / lòng chưa yên…) theo Tăng San Bốc Dịch — anh không cần làm gì.
 - [ ] KT-TT6 (2026-11-12): xem `docs/DO-TIN-KHO-TRI-THUC.md` (tệp nào đã có nguyên văn đối chiếu, tệp nào mới là tóm ý / biên tập) và cho em biết muốn nâng mức phần nào trước — em đề xuất thứ tự ở mục 10.10 của tài liệu kiểm toán.
-- [ ] **KT-NT1 (2026-11-13) — sách Nhân tướng em cần anh tải giúp** (proxy chặn máy chủ tải của archive.org; anh tải bản PDF
-  hoặc tệp chữ `…_djvu.txt` rồi gửi qua Drive, em nạp vào kho nguồn và đối chiếu 17 câu trích còn lại):
-  1. 神相全編 (Thần Tướng Toàn Biên, Trần Đoàn soạn, Viên Trung Triệt đính chính, Trí Hoà đường, bản Minh) —
-     https://archive.org/details/20260503_20260503_1256
-  2. 袁柳莊先生神相全編 (bản Liễu Trang, Quang Tự 15, Hiệu Kinh sơn phòng; dùng cho phần Liễu Trang) —
-     https://archive.org/details/20260503_20260503_1414
-  3. 水鏡集 (Thuỷ Kính Tập, Phạm Lai, Tảo Diệp sơn phòng) — https://archive.org/details/20260503_20260503_1427
-     (bản dự phòng: https://archive.org/details/20260507_20260507_0042)
-  4. 麻衣相法 / 麻衣神相 (Ma Y Thần Tướng, nguồn KB trích nhiều nhất): em CHƯA tìm được bản quét đáng tin. Anh có bản in đời
-     Thanh / Dân Quốc (bản quét PDF) thì gửi em; không có thì em đổi các câu ghi Ma Y sang câu có thật trong Thần Tướng Toàn Biên
-     (Ma Y nằm trong bộ này).
+- [x] **KT-NT1/2 (2026-11-13) — sách Nhân tướng**: anh đã gửi; 3 tệp chữ archive.org là chữ máy nhận dạng hỏng (không dùng được),
+  em lấy bốn sách tướng thuật bản Tứ khố đã gõ lại → cả 25 câu trích KB nay khớp sách (`docs/KIEM-TOAN-TRI-THUC-2026-11.md` mục 10.14).
+  Không cần nạp lại ngay. Nếu sau này muốn thêm nội dung riêng của Liễu Trang / Thuỷ Kính / Ma Y: tìm **bản gõ** (sách in chữ chì có
+  chấm câu, hoặc tệp chữ do người soát) — bản quét PDF đẹp nhưng không có lớp chữ.
 - [x] KT-TT7 (2026-11-12, xong KT-TT8 2026-11-13: sửa Quân thần + Nguyệt sinh theo sách): bốn cách cục Tử vi đang nhận diện KHÁC chữ Toàn Thư (bảng ở mục 10.11 tài liệu kiểm toán) — anh quyết sửa theo sách hay giữ; em đề xuất sửa Quân thần khánh hội + Nguyệt sinh thương hải, giữ hai cách còn lại.
 - [ ] Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
 - [ ] (Tuỳ chọn) Mời người rành Dịch / Tử vi đọc soát: 64 trang quẻ (lời Ngô Tất Tố bản điện tử còn lỗi gõ), 74 nghĩa sao nhỏ.

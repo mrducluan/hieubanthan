@@ -10,7 +10,8 @@ _F = Path(__file__).parent / "data" / "nhan_tuong_kb.json"
 TEN_NGUON = {
     "ma_y": "Ma Y Thần Tướng", "than_tuong_toan_bien": "Thần Tướng Toàn Biên", "lieu_trang": "Liễu Trang Thần Tướng",
     "bang_giam": "Băng Giám", "thuy_kinh": "Thuỷ Kính Tập", "noi_kinh": "Hoàng Đế Nội Kinh (Linh Khu, Tố Vấn)",
-    "tam_tuong_thien": "Tâm Tướng Thiên", "dan_gian_vn": "quan niệm dân gian Việt Nam", "seed_chu_du_an": "Ban biên tập Hiểu Bản Thân",
+    "tam_tuong_thien": "Tâm Tướng Thiên", "nguyet_ba": "Nguyệt Ba Động Trung Ký", "ngoc_quan": "Ngọc Quản Chiếu Thần Cục",
+    "thai_thanh": "Thái Thanh Thần Giám", "nhan_luan": "Nhân Luân Đại Thống Phú", "dan_gian_vn": "quan niệm dân gian Việt Nam", "seed_chu_du_an": "Ban biên tập Hiểu Bản Thân",
 }
 
 

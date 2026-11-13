@@ -440,3 +440,29 @@ Anh duyệt đề xuất ở mục 10.11.
 - **Chưa kiểm**: 17 câu ghi Ma Y Thần Tướng / Thần Tướng Toàn Biên / Thuỷ Kính. Tỉ lệ sai ở đợt này cho thấy phần lớn chúng cũng sẽ
   sai, nên cần bản quét để đối chiếu (danh sách sách ở `docs/VIEC-CUA-ANH.md` mục KT-NT1).
 
+### 10.14 Nhân tướng: kho nguồn đợt 2, mọi câu trích đều khớp sách (KT-NT2, 2026-11-13)
+
+**Đánh giá nguồn anh gửi (Drive "nhân tướng")**
+
+| Tệp | Chất lượng | Dùng được? |
+|---|---|---|
+| 3 tệp "Full text of …" (.html) — Thần Tướng Toàn Biên, Thuỷ Kính Tập, Liễu Trang | Chữ do máy archive.org tự nhận dạng từ bản khắc gỗ chữ dọc: toàn chữ giản thể vô nghĩa xen chữ Latin. Không có lần nào xuất hiện 三停, 印堂, 山根, 法令, 準頭… | **Không** — cần nạp lại |
+| PDF Liễu Trang (袁柳莊先生神相全編, Quang Tự 15, 95 trang đôi, 46 MB) | Bản quét rõ nét, đọc được từng chữ khi phóng to; không có lớp chữ | Dùng làm bản gốc đối chiếu; muốn thành kho nguồn phải gõ lại |
+| PDF Thần Tướng Toàn Biên (bản Minh, Trí Hoà đường, 562 MB) | Bản quét; không có lớp chữ | Như trên |
+| Thuỷ Kính Tập | Chỉ có tệp chữ máy nhận dạng hỏng, không có PDF | Thiếu |
+
+**Em lấy thay bằng bản gõ đã chấm lại**: bốn sách tướng thuật trong Tứ khố toàn thư (Kanseki Repository, bản Văn Uyên Các) —
+月波洞中記 (Nguyệt Ba Động Trung Ký), 玉管照神局 (Ngọc Quản Chiếu Thần Cục), 太清神鑑 (Thái Thanh Thần Giám), 人倫大統賦
+(Nhân Luân Đại Thống Phú, kèm chú Tiết Diên Niên). Thần Tướng Toàn Biên chép lại nhiều phần của bốn sách này. Nạp vào
+`engine/fixtures/nguon/nhan_tuong_co_thu.json` bằng `engine/scripts/nap_nhan_tuong_co_thu.py`.
+
+**Kết quả đối chiếu 17 câu còn lại** (ghi Ma Y / Thần Tướng Toàn Biên / Thuỷ Kính): không câu nào có đúng chữ trong các sách đã
+có. 15 câu thay bằng câu CÓ THẬT trong bốn sách Tứ khố và hợp ý mục (vd «三停平等能和美», «日月角為父母宫», «準頭齊者心性慈»,
+«目下臥蠶紋當生貴子孫», «地閣方停萬頃田»); 2 câu bỏ (Điền Trạch, mắt tam bạch — không tìm được câu sách hợp ý). Lời đi kèm sửa
+cho khớp (bỏ "anh em hoà thuận" ở mục lông mày, "khẩu như giốc cung" → "miệng như cánh cung"…). Nay **cả 25 câu trích** của KB
+Nhân tướng có nguyên văn chữ Hán (`han`) và test bắt buộc mọi câu trích ghi sách có kho nguồn
+(`engine/tests/test_kt_nt1_kho_nguon.py`). Trường `nguon` cấp mục (Ma Y, Thần Tướng Toàn Biên) vẫn chỉ là ghi phái của phần tóm ý.
+
+**Còn lại (không gấp)**: muốn đưa nội dung riêng của Liễu Trang / Ma Y vào lời luận thì phải có bản gõ; em có thể gõ dần từ PDF
+Liễu Trang theo từng thiên khi cần (chậm, phải soát).
+
