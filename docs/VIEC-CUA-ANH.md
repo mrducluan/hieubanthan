@@ -45,6 +45,8 @@
   "sách chép cách khác"; anh quyết giữ bảng phổ biến hay đổi theo sách — đổi thì tăng `ENGINE_VERSION`): **Hồng Diễm** (sách: Ất gặp Ngọ,
   Mậu gặp Tý, Nhâm gặp Tỵ; engine: Ất–Thân, Mậu–Thìn, Nhâm–Tý), **Văn Xương** (engine dùng bảng Giáp Tỵ, Ất Ngọ… phổ biến ở sách
   đời sau; câu của Tam Mệnh là bảng khác), **Thiên Y** (không có trong sách này). Em đề xuất: giữ như hiện nay.
+- [ ] **SX-1 (2026-11-13)**: sau khi lên, mở `/bat-tu` và `/tu-vi` bằng hồ sơ của anh, đọc khối "Sách xưa nói gì về lá số của bạn" — câu nào lời Việt chưa sát thì báo em (hoặc sửa ở `/quan-tri` → Kho tri thức). **Deploy engine trước web.**
+- [ ] **HD-TD (2026-11-13) — hàng đợi thẩm định**: xuất tab "Trang" từ Search Console (CSV) gửi em, em chạy `scripts/tham_dinh.py hang-doi --gsc` ra danh sách 30 trang nên duyệt trước (nhiều hiển thị + có câu sách để so). Cụm "Cổ thư Bát tự" 47 thiên em hoãn — lý do ở `docs/KIEM-TOAN-TRI-THUC-2026-11.md` mục 10.18; anh muốn làm thì báo em, em bắt đầu 8–10 thiên.
 - [ ] **KT-N2 — nguồn Phong thuỷ**: kho Tứ khố chỉ có *Trạch Kinh* (24 lộ, âm trạch / dương trạch — không phải Bát trạch engine đang
   dùng), *Táng Thư*, *Hám Long Kinh* (âm trạch, hình thế núi). Sách engine thật sự dựa vào là **Dương Trạch Tam Yếu** (Triệu Cửu Phong,
   đời Thanh) và **Bát Trạch Minh Kính** — không có bản gõ trong kho em vào được. Anh có **bản gõ chữ Hán** (hoặc bản dịch Việt cũ

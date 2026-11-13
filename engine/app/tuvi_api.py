@@ -21,6 +21,7 @@ from app import config, ngon_ngu
 from app.kb import ten as _ten
 from app.kb.loi import L
 from app.kb import tu_dien
+from app.luangiai import sach_xua
 from app.calc import can_chi, dia_ly, lunar, mui_gio, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao, tuvi_thai_tue_vn
 from app.calc import tuvi_luu_nguyet as calc_luu_nguyet
 from app.hoidap import tuvi as hoidap_tv
@@ -445,7 +446,7 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
         "hai cung) ở khoá tuan_triet.")})
 
     ld, lm, ly, leap = dv.am
-    return {
+    ra = {
         "engine_version": ENGINE_VERSION,
         "pham_vi": "an_sao_day_du",
         "iztro": la["iztro"],
@@ -500,6 +501,9 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
         "phai": dv.phai,
         "co_canh_bao": flags,
     }
+    # SX-1: câu sách xưa ứng với lá số này (chỉ chọn câu đã có trong KB; không biết giờ sinh thì cung là tạm → không hiện).
+    ra["sach_xua"] = [] if inp.do_tin_gio is HourConfidence.UNKNOWN else sach_xua.tuvi(ra["cach_cuc"], ra["cung"])
+    return ra
 
 
 class VanHanInput(BaseModel):
