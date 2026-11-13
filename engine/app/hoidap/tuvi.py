@@ -1167,12 +1167,13 @@ def _ts(x):
     """Tên sao (chính / phụ / "Hoá Lộc" / "X hoá Kỵ" / "X (Hãm)") theo ngôn ngữ."""
     if not isinstance(x, str) or ngon_ngu.la_viet():
         return x
-    m = re.fullmatch(r"(.+?) hoá (Lộc|Quyền|Khoa|Kỵ)", x)
-    if m:
-        return L("hoi.tv.sao_hoa", "{sao} hoá {hoa}", sao=_th.ten_sao(m.group(1)), hoa=_ten.ten("hoa", m.group(2)))
-    m = re.fullmatch(r"(.+?) \((.+)\)", x)
-    if m:
-        return f"{_th.ten_sao(m.group(1))} ({_ten.ten('do_sang', m.group(2))})"
+    sao, _, hoa = x.rpartition(" hoá ")         # không dùng regex `(.+?) hoá …` (CodeQL: ReDoS)
+    if sao and hoa in ("Lộc", "Quyền", "Khoa", "Kỵ"):
+        return L("hoi.tv.sao_hoa", "{sao} hoá {hoa}", sao=_th.ten_sao(sao), hoa=_ten.ten("hoa", hoa))
+    if x.endswith(")") and " (" in x:
+        a, b = x[:-1].split(" (", 1)
+        if a and b:
+            return f"{_th.ten_sao(a)} ({_ten.ten('do_sang', b)})"
     return _th.ten_sao(x)
 
 
@@ -1566,8 +1567,10 @@ def _doan(m: dict, da_co_sao: set[str] = frozenset()) -> tuple[str, str | None]:
 
 def _hoa_nam(h: str) -> str:
     """"Lộc (Thiên Cơ)" → theo ngôn ngữ."""
-    m = re.fullmatch(r"(\S+) \((.+)\)", h) if isinstance(h, str) else None
-    return f"{_thoa(m.group(1))} ({_ts(m.group(2))})" if m and not ngon_ngu.la_viet() else h
+    if not isinstance(h, str) or ngon_ngu.la_viet() or not h.endswith(")") or " (" not in h:
+        return h
+    a, b = h[:-1].split(" (", 1)              # "(\S+) \((.+)\)" viết bằng tách chuỗi (CodeQL: ReDoS)
+    return f"{_thoa(a)} ({_ts(b)})" if a and b and not any(c.isspace() for c in a) else h
 
 
 def _ghep(goi: dict) -> tuple[list[str], list[str], list[str]]:

@@ -55,15 +55,22 @@ def _noi_ds(ds) -> str:
     return L("hoi.pt.noi_ds", ", ").join(ds)
 
 
-_DN_HUONG = re.compile(r"^(.+?) \((.+)\)$")
 
 
 def _dn_huong(x: str) -> str:
     """"Sinh Khí (Đông Nam)" → bản Việt nguyên; bản khác "South-East: Sheng Qi (Life Generating)"."""
     if ngon_ngu.la_viet():
         return x
-    m = _DN_HUONG.match(x)
-    return L("hoi.pt.dn_huong", "{dn} ({h})", dn=_dn(m.group(1)), h=_hg(m.group(2))) if m else x
+    hai = _tach_ngoac(x)
+    return L("hoi.pt.dn_huong", "{dn} ({h})", dn=_dn(hai[0]), h=_hg(hai[1])) if hai else x
+
+
+def _tach_ngoac(x: str) -> tuple[str, str] | None:
+    """"A (B)" → ("A", "B") tách ở " (" ĐẦU TIÊN — thay regex `(.+?) \((.+)\)` (CodeQL: ReDoS)."""
+    if not x.endswith(")") or " (" not in x:
+        return None
+    a, b = x[:-1].split(" (", 1)
+    return (a, b) if a and b else None
 
 
 PT_MO_DAU = False   # EN-3b: đoạn mở đầu Phong thuỷ chưa bật — xem chỗ dùng trong tra_loi

@@ -680,7 +680,7 @@ def _tuvi(cau: str, t: str) -> str:
     for n in re.findall(r"\b(1[0-2]|[1-9])(?:st|nd|rd|th)? lunar month\b", t_moc):
         moc.append(f"thang {n} am")
     for y in re.findall(r"\b(20\d\d)\b", t):            # năm nêu rõ (không phải năm sinh) mà `_moc` bỏ vì đứng gần "born"
-        if f"nam {y}" not in moc and not re.search(rf"\b(?:born|birth|since)(?: in)? {y}\b|\b{y} (?:born|baby)\b", t):
+        if f"nam {y}" not in moc and not re.search(rf"\b(?:born|birth|since)(?: in)? {re.escape(y)}\b|\b{re.escape(y)} (?:born|baby)\b", t):
             moc.append(f"nam {y}")
     if re.search(r"\b(?:a|this) good year\b|\bgood year to\b", t) and not any(v.startswith("nam ") for v in moc):
         moc.append("nam nay")
