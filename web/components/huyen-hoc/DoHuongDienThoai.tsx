@@ -313,7 +313,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
       <div className="mt-4 grid items-center gap-4 sm:grid-cols-[auto_1fr]">
         <div>
           <MatLaBan doHuong={doSong} laBan={laBan} onXoay={dangDo ? undefined : (d) => { setDoSong(d); setNhap(String(d)); setLoi(null); }} />
-          <p className="text-center font-serif text-2xl text-gold" aria-live="polite">{doSong == null ? "—" : `${Math.round(doSong)}°`}</p>
+          <p className="text-center font-serif text-2xl text-gold" aria-live="polite">{doSong == null ? "—" : en ? `${Math.round(doSong)}° · ${huong(oHuong(doSong))}` : `${Math.round(doSong)}°`}</p>
           {!dangDo && (
             <p className="mx-auto max-w-[14rem] text-center text-[11px] text-fg-faint" data-testid="la-ban-keo-goi-y">
               {doSong == null ? t("dh.biet_huong") : ""}{t("dh.keo_goi_y")}
@@ -340,7 +340,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
               <Button onClick={batDau} variant="secondary"><Smartphone aria-hidden /> {t("dh.nut_do")}</Button>
               {cheDo === "nha" && doSong != null && (
                 <Button onClick={() => chot(doSong)} disabled={dang} data-testid="chot-la-ban-keo">
-                  <Compass aria-hidden /> {dang ? t("dh.dang_doi") : t("dh.chot_do", { do: String(Math.round(doSong)) })}
+                  <Compass aria-hidden /> {dang ? t("dh.dang_doi") : t("dh.chot_do", { do: String(Math.round(doSong)), h: huong(oHuong(doSong)) })}
                 </Button>
               )}
             </div>

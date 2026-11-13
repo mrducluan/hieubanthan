@@ -26,7 +26,7 @@ function ngayNgan(iso?: string, en = false): string | null {
   return en ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short" }).format(d) : `${d.getDate()}/${d.getMonth() + 1}`;
 }
 
-export function HanhTrinhNha({ mq, coSinh, sinh = null }: { mq: { quai: string; nhom: string } | null; coSinh: boolean; sinh?: SinhSo }) {
+export function HanhTrinhNha({ mq, coSinh, sinh = null }: { mq: { quai: string; nhom: string; so?: number } | null; coSinh: boolean; sinh?: SinhSo }) {
   const nha = useHoSoNha();
   const ds = useDanhSachNha();
   const [suaTen, setSuaTen] = useState(false);
@@ -46,7 +46,7 @@ export function HanhTrinhNha({ mq, coSinh, sinh = null }: { mq: { quai: string; 
   const buoc: Buoc[] = [
     { ma: "menh", ten: t("ht.b1"), neo: "#menh-quai",
       trang_thai: mq ? "xong" : coSinh ? "san_sang" : "cho",
-      chi: mq ? t("ht.b1_xong", { quai: quai(mq.quai), nhom: nhom(mq.nhom) }) : coSinh ? t("ht.b1_dang") : t("ht.b1_can") },
+      chi: mq ? t("ht.b1_xong", { quai: quai(mq.quai), nhom: nhom(mq.nhom), so: String(mq.so ?? "") }) : coSinh ? t("ht.b1_dang") : t("ht.b1_can") },
     { ma: "huong", ten: t("ht.b2"), neo: "#do-huong",
       trang_thai: coHuong ? "xong" : "san_sang",
       chi: coHuong ? (nha!.huong_do != null ? `${nha!.huong_do}°${nha!.theo === "ban_cong" ? t("ht.ban_cong") : ""}` : huong(nha!.huong!))

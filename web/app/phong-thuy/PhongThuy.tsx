@@ -24,7 +24,7 @@ import { TenHienProvider } from "@/components/khung/TenHien";
 import type { TenHien } from "@/lib/ten-hien";
 
 interface MenhQuai {
-  quai: string; nhom: string; nam_tinh: number; bang_huong: Record<string, string>; huong_cat: string[];
+  quai: string; so?: number; nhom: string; nam_tinh: number; bang_huong: Record<string, string>; huong_cat: string[];
   co_canh_bao: { loai: string; chi_tiet: string }[];
   /** TP-LICH: engine tính cả ba mốc đầu năm để người dùng thấy đổi mốc có làm khác mệnh quái không. */
   so_sanh_moc?: Record<MocNam, { quai: string; nhom: string; nam_tinh: number }>; moc_khac?: boolean;
@@ -74,7 +74,7 @@ export function PhongThuy() {
     <TenHienProvider ten={[mq?.ten_hien ?? ss?.ten_hien]}>
     <div>
       {dau}
-      <div className="mx-auto mb-6 max-w-3xl"><HanhTrinhNha mq={mq ? { quai: mq.quai, nhom: mq.nhom } : null} coSinh={Boolean(sinh)} sinh={sinh} /></div>
+      <div className="mx-auto mb-6 max-w-3xl"><HanhTrinhNha mq={mq ? { quai: mq.quai, nhom: mq.nhom, so: mq.so } : null} coSinh={Boolean(sinh)} sinh={sinh} /></div>
       <section aria-label={t("aria.menh_quai")} id="menh-quai" className="mx-auto max-w-3xl scroll-mt-24 space-y-3">
           {!sinh && <XinThemDuLieu hoSo={hoSo} can="gioi_tinh" nut={t("xin.nut")} ly_do={t("xin.ly_do")} />}
           {sinh && !mq && !loi && <KhungTai dong={2} />}
@@ -97,7 +97,12 @@ export function PhongThuy() {
           )}
           {mq && (
             <div className="glass rounded-2xl p-5" data-testid="menh-quai">
-              <p className="text-center text-sm text-fg-muted">{t("mq.truoc")}<b className="text-gold">{quai(mq.quai)}</b>{t("mq.sau", { nhom: nhom(mq.nhom), nam: String(mq.nam_tinh), moc: TEN_MOC(mocNam) })}</p>
+              <p className="text-center text-sm text-fg-muted">{t("mq.truoc")}<b className="text-gold">{en && mq.so ? `${mq.so} (${quai(mq.quai)})` : quai(mq.quai)}</b>{
+                // Bản Anh: tính theo năm trước năm sinh dương (sinh trước mốc đầu năm) thì nói rõ vì sao — chữ Việt giữ nguyên.
+                en && sinh && Number(sinh.birth_date.slice(0, 4)) !== mq.nam_tinh
+                  ? t("mq.sau", { nhom: nhom(mq.nhom), nam: String(mq.nam_tinh), moc: TEN_MOC(mocNam) }).split(" · ").slice(0, 2).join(" · ")
+                    + t("mq.truoc_moc", { nam: String(mq.nam_tinh), moc: TEN_MOC(mocNam) })
+                  : t("mq.sau", { nhom: nhom(mq.nhom), nam: String(mq.nam_tinh), moc: TEN_MOC(mocNam) })}</p>
               <LaBan quai={mq.quai} nhom={mq.nhom} bang={mq.bang_huong} huongCat={mq.huong_cat} />
               <ChanQr nhan={t("mq.qr")} />
               {mq.co_canh_bao.map((c) => <p key={c.loai} className="mt-3 text-xs text-moon">{c.chi_tiet}</p>)}
