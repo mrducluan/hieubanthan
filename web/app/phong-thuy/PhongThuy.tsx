@@ -100,8 +100,7 @@ export function PhongThuy() {
               <p className="text-center text-sm text-fg-muted">{t("mq.truoc")}<b className="text-gold">{en && mq.so ? `${mq.so} (${quai(mq.quai)})` : quai(mq.quai)}</b>{
                 // Bản Anh: tính theo năm trước năm sinh dương (sinh trước mốc đầu năm) thì nói rõ vì sao — chữ Việt giữ nguyên.
                 en && sinh && Number(sinh.birth_date.slice(0, 4)) !== mq.nam_tinh
-                  ? t("mq.sau", { nhom: nhom(mq.nhom), nam: String(mq.nam_tinh), moc: TEN_MOC(mocNam) }).split(" · ").slice(0, 2).join(" · ")
-                    + t("mq.truoc_moc", { nam: String(mq.nam_tinh), moc: TEN_MOC(mocNam) })
+                  ? ` · ${nhom(mq.nhom)}` + t("mq.truoc_moc", { nam: String(mq.nam_tinh), moc: TEN_MOC(mocNam) })
                   : t("mq.sau", { nhom: nhom(mq.nhom), nam: String(mq.nam_tinh), moc: TEN_MOC(mocNam) })}</p>
               <LaBan quai={mq.quai} nhom={mq.nhom} bang={mq.bang_huong} huongCat={mq.huong_cat} />
               <ChanQr nhan={t("mq.qr")} />

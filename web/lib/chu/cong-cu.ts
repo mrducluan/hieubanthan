@@ -111,7 +111,7 @@ export const CHU_TU_VI = gopBang(mangHuyenHoc(true, "Tử vi 12 cung · Âm lị
     en: "Each 10-year period and each year has its own two rings of 12 stars — the Tai Sui ring and the General ring — counted again from that period's palace. They are shown only so you can compare with the books: they do not change any level in your reading.", toi_da: 320 },
 });
 export const CHU_BAT_TU = gopBang(mangHuyenHoc(true, "Bát tự tứ trụ · Ngũ hành", "BaZi · Four Pillars · Five elements"), moiLap(MOI_BAT_TU));
-export const CHU_PHONG_THUY = mangHuyenHoc(true, "Hướng nhà · bố trí · Bát trạch");
+export const CHU_PHONG_THUY = mangHuyenHoc(true, "Hướng nhà · bố trí · Bát trạch", "Home direction · layout · Eight Mansions");
 export const CHU_KINH_DICH = mangHuyenHoc(false, "Gieo quẻ · 64 quẻ · lời hào");
 export const CHU_NHAN_TUONG = gopBang(mangHuyenHoc(true, "Tự soi gương · Tam đình · Ngũ quan"), {
   "khao_sat.nho": { nhom: "Khảo sát", nhan: "Mục khảo sát — dòng nhỏ", mac_dinh: "Soi gương sáu bước", toi_da: 60 },
