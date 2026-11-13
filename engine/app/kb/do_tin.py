@@ -46,7 +46,7 @@ SO: dict[str, dict] = {
         "sao_nho": {"muc": "truyen_thong", "ghi_chu": "tóm ý Tử vi đẩu số tân biên + tên phái Trung Châu; từng mục có do_tin"},
         "mau": {"muc": "bien_tap"}, "giai_thich": {"muc": "bien_tap"}, "doc_tung_buoc": {"muc": "bien_tap"}}},
     "tuvi_cach_cuc.json": {"mang": "tuvi", "muc": "tom_y_co_thu",
-                           "ghi_chu": "6 cách có `sach_ghi` khớp «định phú / quý cục» (test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu); 37 cách có cổ ca trỏ Cốt Tuỷ Phú; 4 cách điều kiện đang khác sách"},
+                           "ghi_chu": "6 cách có `sach_ghi` khớp «định phú / quý cục» (test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu); 37 cách có cổ ca trỏ Cốt Tuỷ Phú; Quân thần khánh hội + Nguyệt sinh thương hải sửa theo sách (KT-TT8); Mã đầu đới kiếm, Lộc Mã bội ấn giữ cách phổ biến, gắn `khac_dieu_kien`"},
     "tuvi_co_thu.json": {"mang": "tuvi", "muc": "tom_y_co_thu", "phan": {
         "cau": _nv("tu_vi_dau_so_toan_thu.json", "tests/test_tuvi_co_thu.py::test_nguyen_van_khop_kho_nguon_toan_thu_tung_chu",
                    "84 câu Cốt Tuỷ Phú khớp từng chữ (giản ↔ phồn); phiên âm, nghĩa là nháp; chưa so bản khắc 1600")}},

@@ -16,13 +16,13 @@ CA = [
     ("cu_phung_tu_sat", "Thìn", {"Thìn": ["Cự Môn", "Đà La"]}, {}),
     ("dan_tri_que_tri", "Tỵ", {"Tỵ": ["Thái Dương"]}, {}),
     ("dan_tri_que_tri", "Tuất", {"Tuất": ["Thái Âm"]}, {}),
-    ("quan_than_khanh_hoi", "Ngọ", {"Ngọ": ["Tử Vi"], "Tuất": ["Tả Phù"], "Dần": ["Hữu Bật"], "Tý": ["Văn Xương"]}, {}),
+    ("quan_than_khanh_hoi", "Ngọ", {"Ngọ": ["Tử Vi", "Tả Phù", "Hữu Bật"]}, {}),      # KT-TT8: Tả Hữu cùng ở Mệnh
     ("co_luong_gia_hoi", "Thìn", {"Thìn": ["Thiên Cơ", "Thiên Lương"]}, {}),
     ("van_luong_chan_ky", "Ngọ", {"Ngọ": ["Thiên Lương"], "Tuất": ["Văn Xương"]}, {}),
     ("nhat_chieu_loi_mon", "Mão", {"Mão": ["Thái Dương"]}, {}),
     ("duong_luong_xuong_loc", "Mão", {"Mão": ["Thái Dương", "Thiên Lương"], "Mùi": ["Văn Xương"], "Dậu": ["Lộc Tồn"]}, {}),
     ("nhat_nguyet_tinh_minh", "Sửu", {"Tỵ": ["Thái Dương"], "Dậu": ["Thái Âm"]}, {}),
-    ("nguyet_sinh_thuong_hai", "Tý", {"Tý": ["Thái Âm", "Thiên Đồng"]}, {}),
+    ("nguyet_sinh_thuong_hai", "Mão", {"Tý": ["Thái Âm"]}, {}),                     # KT-TT8: Tý là Điền Trạch
     ("quyen_loc_hoi_menh", "Tý", {"Tý": ["Vũ Khúc"], "Thìn": ["Liêm Trinh"]}, {"Vũ Khúc": "Quyền", "Liêm Trinh": "Lộc"}),
     ("khoa_quyen_loc_giap", "Ngọ", {"Tỵ": ["Liêm Trinh"], "Mùi": ["Thiên Đồng"]}, {"Liêm Trinh": "Lộc", "Thiên Đồng": "Quyền"}),
     ("song_loc_giap_menh", "Ngọ", {"Tỵ": ["Lộc Tồn"], "Mùi": ["Liêm Trinh"]}, {"Liêm Trinh": "Lộc"}),
@@ -52,6 +52,8 @@ def test_nhan_dien(ma_, menh, sao, hoa):
     ("menh_ly_phung_khong", "Tý", {"Tý": ["Tử Vi", "Địa Kiếp"]}, {}),              # có Tử Vi giải
     ("dan_tri_que_tri", "Tý", {"Tý": ["Thái Dương"]}, {}),                         # Nhật ở Tý hãm
     ("quan_than_khanh_hoi", "Ngọ", {"Ngọ": ["Tử Vi"], "Tuất": ["Tả Phù"]}, {}),     # mới 1 cát tinh
+    ("quan_than_khanh_hoi", "Ngọ", {"Ngọ": ["Tử Vi"], "Tuất": ["Tả Phù"], "Dần": ["Hữu Bật"]}, {}),  # Tả Hữu chỉ chiếu
+    ("nguyet_sinh_thuong_hai", "Tý", {"Tý": ["Thái Âm", "Thiên Đồng"]}, {}),        # ở Mệnh, Tý không phải Điền Trạch
     ("van_luong_chan_ky", "Ngọ", {"Dần": ["Thiên Lương"], "Tuất": ["Văn Xương"]}, {}),  # không sao nào ở Mệnh
     ("nhat_nguyet_tinh_minh", "Mão", {"Tỵ": ["Thái Dương"], "Dậu": ["Thái Âm"]}, {}),   # Tỵ/Dậu không chiếu Mão
     ("quy_tinh_giap_menh", "Ngọ", {"Tỵ": ["Thái Dương"], "Thân": ["Thái Âm"]}, {}),

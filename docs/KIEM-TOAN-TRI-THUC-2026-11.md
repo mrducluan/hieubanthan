@@ -412,3 +412,16 @@ Việc đầu trong thứ tự nâng mức của mục 10.10.
 
   Ghi chú: "Mã đầu đới kiếm" có hai cách hiểu lưu hành; cách đang dùng là cách phổ biến ở sách Việt hiện nay. Em đề xuất: theo sách
   cho Quân thần khánh hội và Nguyệt sinh thương hải (đang nhận rộng hơn sách), giữ hai cách còn lại và ghi rõ "sách chép khác".
+
+### 10.12 Tử vi: sửa hai cách cục theo Toàn Thư (KT-TT8, 2026-11-13)
+
+Anh duyệt đề xuất ở mục 10.11.
+
+- **Quân thần khánh hội** = Tử Vi cùng Tả Phù và Hữu Bật ở cung Mệnh (定贵局: 紫微左右同守命). Trước: Tử Vi thủ Mệnh hội ≥ 3 / 7
+  cát tinh. Trên 1.000 lá mẫu: **43 → 1 lá**. Tả Hữu chỉ chiếu / giáp Mệnh là cách khác của sách («Phụ bật củng chủ») — hệ thống
+  CHƯA có cách này; thêm sau nếu anh muốn.
+- **Nguyệt sinh thương hải** = Thái Âm ở cung Tý và cung ấy là Điền Trạch (月在子宫守田宅). Trước: Thái Âm + Thiên Đồng thủ Mệnh
+  tại Tý. Trên 1.000 lá: **5 → 12 lá**; lời đời thường đổi sang phúc nhà cửa, chỗ ở.
+- **Mã đầu đới kiếm**, **Lộc Mã bội ấn**: giữ cách hiểu đang lưu hành ở sách Việt, vẫn gắn `khac_dieu_kien` ("sách chép khác").
+- Đổi kết quả nhận diện trên lá số → **`ENGINE_VERSION` 0.1.9**; golden cách cục 1.000 lá + golden đầu ra bản Việt sinh lại có chủ đích.
+
