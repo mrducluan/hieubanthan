@@ -172,3 +172,28 @@ def test_muc_giai_thich_moi(ma):
     g = kb.giai_thich(ma)
     assert g and g["tieu_de"] and len(g["noi_dung"]) > 120 and g["tu_khoa"]
     assert all(t in KB["co_thu"] for t in g["trich"]), ma
+
+
+# ───────── PT-NG2: Bát Trạch Minh Kính (bản dịch Việt — chỉ dữ kiện) ─────────
+BTMK = json.loads((GOC / "fixtures" / "nguon" / "phongthuy_bat_trach_minh_kinh.json").read_text(encoding="utf-8"))
+_TAT = {"Sinh": "Sinh Khí", "Thiên": "Thiên Y", "Diên": "Diên Niên", "Ngũ": "Ngũ Quỷ", "Lục": "Lục Sát", "Hoạ": "Hoạ Hại", "Tuyệt": "Tuyệt Mệnh"}
+
+
+@pytest.mark.parametrize("goc", sorted(BTMK["du_nien_ca"]["cau"]))
+def test_du_nien_ca_bat_trach_minh_kinh_khop_bang_huong(goc):
+    """Bài ca du niên: 8 câu × 7 sao = 56 ô, đi theo vòng Càn → Khảm → Cấn → Chấn → Tốn → Ly → Khôn → Đoài."""
+    vong = BTMK["du_nien_ca"]["vong"]
+    i = vong.index(goc)
+    bang = pt.bang_huong(goc)
+    assert bang[PHUONG[goc]] == "Phục Vị"
+    for k, tat in enumerate(BTMK["du_nien_ca"]["cau"][goc].split(), start=1):
+        assert bang[PHUONG[vong[(i + k) % 8]]] == _TAT[tat], (goc, k, tat)
+
+
+def test_gui_cung_va_xep_hang_theo_bat_trach_minh_kinh():
+    assert pt.menh_quai(1986, "nam")["quai"] == BTMK["gui_cung"]["nam"]      # nam 1986: cung 5 → gửi Khôn
+    assert pt.menh_quai(1986, "nam")["so"] == 2
+    assert pt.menh_quai(1864, "nu")["quai"] == BTMK["gui_cung"]["nu"]        # nữ thượng nguyên Giáp Tý: cung 5 → gửi Cấn
+    cat = {k for k, v in BTMK["xep_hang"].items() if v.endswith("cát")}
+    assert cat == set(pt.CAT)
+    assert {"bat_trach_minh_kinh"} <= set(KB["doi_chieu"]["doc_ban_dich"])

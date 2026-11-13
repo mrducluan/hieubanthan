@@ -116,3 +116,37 @@ giản thể không rõ bản in của Địa Lý Biện Chính, Thiên Nguyên 
    chỉ làm khi có bản Lỗ Ban Kinh đáng tin, và ghi rõ đâu là lệ thợ Việt.
 6. **Sổ đối chiếu cho mọi KB**: mỗi tệp KB có mục `doi_chieu` (đã / chưa) + test nguồn như ba mảng này, để trang quản trị
    hiện được "bao nhiêu phần trăm tri thức đã có nguyên văn".
+
+## 6. Đợt 2 — bảy tệp chủ dự án gửi lên Drive (PT-NG2, 2026-11-12)
+
+| Tệp | Đọc được | Dùng được gì |
+|---|---|---|
+| **Liber LXXVIII** (Crowley, The Equinox I:8, 1912) | Đủ 46 trang | Phạm vi công cộng. Cùng văn bản với Book T → bản chép thứ hai để soát. **Đã nạp** (dưới đây). |
+| **Bát Trạch Minh Kính** (bản dịch Việt) | ~80 trang đầu | Bản dịch còn bản quyền → chỉ lấy dữ kiện. **Đã đối chiếu** (dưới đây). |
+| Papus, *The Tarot of the Bohemians* (1919) | Chỉ ~44/350 trang (tệp 18 MB, trình đọc Drive cắt) | Chưa tới phần nghĩa lá. Em sẽ lấy bản chữ đủ từ archive.org. |
+| Paul Foster Case, *The Tarot* (1947) | Chỉ tới lá số 2 (tệp 13 MB bị cắt) | Sách còn bản quyền ở Mỹ → chỉ tóm ý. Cần bản đủ. |
+| Wirth, *Tarot of the Magicians* (bản dịch Anh 1985) | Tới lá XIX | Bản dịch còn bản quyền → chỉ tóm ý cho lớp Marseille; chưa làm ở đợt này. |
+| **Dương Trạch Tam Yếu** (91 MB) | **Không** — ảnh quét, không có lớp chữ | Cần bản có chữ (PDF chữ, Word, txt) hoặc bản dịch Việt gõ chữ. |
+| **Thẩm Thị Huyền Không Học** (1 MB) | Chỉ là bản xem thử vài trang (lời tựa + quảng cáo) của một sách viết lại năm 2010 | **Không dùng được.** Vẫn cần nguyên tác (bản 4 hoặc 6 quyển) hoặc bản dịch Việt đủ. |
+
+Giới hạn kỹ thuật: công cụ đọc Drive của em cắt tệp lớn và không tải được tệp trên 10 MB. Tệp nhỏ hơn 10 MB, có lớp chữ, là đọc được trọn.
+
+### Đã làm từ Liber 78
+
+- `engine/fixtures/nguon/tarot_liber_78.json`: bảng 36 lá số (tên, hành tinh, cung), 22 ẩn chính (danh hiệu, chữ Hebrew, ứng chiêm tinh), luật phẩm giá, bảng đa số, bảng ba / bốn lá cùng số.
+- Test mới trong `tests/test_tarot_nguon.py`: decan của **36/36** lá số, chiêm tinh **22/22** ẩn chính, luật phẩm giá trong engine đều khớp bản chép thứ hai này.
+- Phát hiện và sửa 2 lỗi chép tên trong KB + tệp Book T cũ: "…; **he** King of the Spirits of Air" → "The King…" (Hiệp sĩ Kiếm); "THE LORD OF MATERIAL TROUBLE" viết hoa (5 Tiền).
+- KB `tarot_kb.lap_la`: 28 câu "ba / bốn lá cùng số" của Book T (nguyên văn + nghĩa Việt trung tính) — thay cho bảng "lá lặp" của Waite đã loại ở đợt 1. Hỏi đáp nhận câu "ba lá số 7 nghĩa là gì", "bốn lá Át thì sao" (trước đây bị hiểu nhầm là hỏi trải bài ba lá).
+
+### Đã làm từ Bát Trạch Minh Kính
+
+- `engine/fixtures/nguon/phongthuy_bat_trach_minh_kinh.json` (chỉ dữ kiện): bài ca du niên 8 cung, xếp hạng tám sao, lệ gửi cung.
+- Test: bảng hướng của engine khớp bài ca du niên **56/56 ô** (nguồn thứ hai, độc lập với Hiệp Kỷ); lệ "nam cung 5 gửi Khôn, nữ cung 5 gửi Cấn" nay có nguồn (câu quyết "nam ngũ ký nhị, nữ ký bát").
+- **Không nạp**: câu "xoay bếp về Thiên Y thì bệnh không cần thuốc cũng giảm" (trái quy tắc sức khoẻ); phần cô hư sát, giá thú chu đường (ngoài phạm vi nhà ở).
+
+### Còn thiếu sau đợt 2
+
+1. **Thẩm Thị Huyền Không Học** bản đủ — vẫn là thiếu hụt lớn nhất (hạ quái, 12 sơn thế quái còn lại, nghĩa 81 cặp sao).
+2. **Dương Trạch Tam Yếu** bản có chữ.
+3. Dương Trạch Thập Thư, Lỗ Ban Kinh (chưa gửi).
+4. Case, Papus: bản dưới 10 MB hoặc tách nhỏ; Papus em tự lấy từ archive.org.

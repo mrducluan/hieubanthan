@@ -972,8 +972,10 @@ def hoi(cau: str, *, trai_bai: str | None = None, la: list[dict] | None = None, 
         kq.update(cau_tra_loi=str(kb.mau("tra_loi", "chua_rut")).format(ten=goi["ten"]), xu_ly="goi_y_rut", linh_vuc=hc["linh_vuc"], y_dinh=hc["y_dinh"],
                   goi_y_trai_bai=hc["goi_y_trai_bai"], hoi_tiep=[L("tarot.hoi.tiep_kn1", "Lá ngược nghĩa là gì?"), L("tarot.hoi.tiep_kn2", "Trải bài Hai lựa chọn là gì?"), L("tarot.hoi.tiep_kn3", "Celtic Cross là trải bài gì?")])
         return kq
+    # PT-NG2: "ba lá số 7", "bốn lá Át" hỏi về lá CÙNG SỐ (Book T), không phải trải bài ba lá.
+    la_lap = chung.co(t, [re.escape(k) for k in (kb.tu_khoa("khai_niem").get("la_lap") or [])])
     for ma, ds_tk in kb.tu_khoa("trai_bai").items():
-        if chung.co(t, [re.escape(k) for k in ds_tk]):
+        if not la_lap and chung.co(t, [re.escape(k) for k in ds_tk]):
             x = kb.trai_bai()[ma]
             kq.update(cau_tra_loi=str(kb.mau("hoi", "trai_bai")).format(ten=x["ten"], mo_ta=x["mo_ta"], vi_tri="; ".join(f"{i + 1}. {v['ten']} ({v['hoi'].lower()})" for i, v in enumerate(x["vi_tri"]))),
                       xu_ly="trai_bai", can_cu=[L("tarot.hoi.celtic_can_cu", "Celtic Cross: Waite ghi lại trong The Pictorial Key to the Tarot (1910).")] if ma == "celtic" else [],

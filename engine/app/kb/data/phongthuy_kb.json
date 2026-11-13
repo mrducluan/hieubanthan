@@ -2053,7 +2053,7 @@
    "nguyen_van": "男命上元甲子起坎一中元甲子起巽四下元甲子起兑七逆行九宫女命上元甲子起中五中元甲子起坤二下元甲子起艮八順行九宫",
    "phien_am": "Nam mệnh thượng nguyên Giáp Tý khởi Khảm nhất, trung nguyên Giáp Tý khởi Tốn tứ, hạ nguyên Giáp Tý khởi Đoài thất, nghịch hành cửu cung; nữ mệnh thượng nguyên Giáp Tý khởi trung ngũ, trung nguyên Giáp Tý khởi Khôn nhị, hạ nguyên Giáp Tý khởi Cấn bát, thuận hành cửu cung.",
    "nghia": "Cung phi (mệnh quái) theo năm sinh: nam sinh năm Giáp Tý thượng nguyên (1864) khởi Khảm 1, trung nguyên (1924) khởi Tốn 4, hạ nguyên (1984) khởi Đoài 7, mỗi năm lùi một cung; nữ lần lượt khởi cung giữa 5, Khôn 2, Cấn 8, mỗi năm tiến một cung.",
-   "doi_song": "Hệ thống tính đúng theo quy tắc này. Đoạn sách không nói người rơi vào cung giữa (5) gửi về đâu; hệ thống theo lệ phổ biến nam gửi Khôn, nữ gửi Cấn."
+   "doi_song": "Hệ thống tính đúng theo quy tắc này. Đoạn Hiệp Kỷ không nói người rơi vào cung giữa (5) gửi về đâu; Bát Trạch Minh Kính có câu quyết 'nam ngũ ký nhị, nữ ký bát' — nam gửi Khôn (2), nữ gửi Cấn (8) — hệ thống theo đúng lệ này."
   },
   "tu_bach_nam": {
    "doan": "hiep_ky.tu_bach_nam",
@@ -2095,14 +2095,22 @@
    "hiep_ky": "đại du niên Bát trạch (cả 8 quái), Đông – Tây tứ trạch, cung phi nam nữ tam nguyên, 24 sơn, tử bạch năm – tháng, Tam sát"
   },
   "chua_doi_chieu": {
-   "duong_trach_tam_yeu": "陽宅三要 (Triệu Cửu Phong, 1786) — cửa – chủ – bếp; KB đang tóm ý",
-   "bat_trach_minh_kinh": "八宅明鏡 — lời luận tám du niên, bếp 'toạ hung hướng cát'",
-   "tham_thi_huyen_khong_hoc": "沈氏玄空學 (Thẩm Trúc Nhưng) — hạ quái, thế quái 12 sơn còn lại, thành môn, nhập tù, phản – phục ngâm, đả kiếp",
+   "duong_trach_tam_yeu": "陽宅三要 (Triệu Cửu Phong, 1786) — tệp chủ dự án gửi là ảnh quét không có lớp chữ, chưa đọc được; KB đang tóm ý",
+   "bat_trach_minh_kinh": "八宅明鏡 — đã đọc bản dịch Việt (tóm ý); CHƯA có nguyên văn chữ Hán để trích",
+   "tham_thi_huyen_khong_hoc": "沈氏玄空學 (Thẩm Trúc Nhưng) — tệp chủ dự án gửi là bản xem thử vài trang của một sách viết lại năm 2010, không phải nguyên tác; vẫn cần bản đủ",
    "tu_bach_quyet_phi_tinh_phu": "紫白訣, 飛星賦, 玄空秘旨, 玄機賦 — nghĩa 81 cặp sao",
    "dia_ly_bien_chinh": "地理辨正 (Tưởng Đại Hồng) — cách giải Huyền Không của Thanh Nang, Thiên Ngọc; linh thần – chính thần",
    "ham_long_kinh": "撼龍經 — đã có bản Tứ khố, chưa trích",
    "duong_trach_thap_thu": "陽宅十書 — hình thế ngoài nhà (đường đâm, góc nhọn…) mà mục bo_tri đang ghi 'cổ thư'",
    "lo_ban_kinh": "魯班經 — thước Lỗ Ban; chưa có bản đáng tin nên CHƯA làm công cụ"
+  },
+  "doc_ban_dich": {
+   "bat_trach_minh_kinh": {
+    "ban": "bản dịch tiếng Việt (chỉ tóm ý, không chép)",
+    "tep": "fixtures/nguon/phongthuy_bat_trach_minh_kinh.json",
+    "ngay": "2026-11-12",
+    "phu": "bài ca du niên cả 8 cung (khớp 56/56 ô bảng hướng), xếp hạng tám sao, lệ gửi cung nam 5 → Khôn, nữ 5 → Cấn"
+   }
   }
  }
 }
