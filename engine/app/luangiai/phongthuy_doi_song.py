@@ -549,7 +549,7 @@ def _chuong_tung_phong(mq, huong, b, bc_luan, bo_cuc_in) -> dict:  # noqa: C901
         kem = sorted([h for h in pt.HUONG if bang[h] not in pt.CAT], key=lambda h: -_UU_TIEN_DU_NIEN.index(bang[h]))
         # 6b-5: nhà đã có hướng → nói về CỬA ĐANG CÓ (không gợi "đặt cửa Tây Nam" cho nhà đang quay Đông Nam).
         if huong in bang:
-            cua = (L("pt.c3.gy.cua_hop", "Cửa chính: đang quay về {h} ({dn}) — đã hợp, giữ nguyên, giữ lối vào sáng và gọn", h=_h(huong), dn=_dnt(bang[huong]))
+            cua = (L("pt.c3.gy.cua_hop" if mq else "pt.c3.gy.cua_hop_trach", "Cửa chính: đang quay về {h} ({dn}) — đã hợp, giữ nguyên, giữ lối vào sáng và gọn", h=_h(huong), dn=_dnt(bang[huong]))
                    if bang[huong] in pt.CAT else
                    L("pt.c3.gy.cua_kem", "Cửa chính: đang quay về {h} ({dn}) — không cần đổi cửa; nếu nhà có cửa phụ, lối vào phía "
                      "{t} ({tdn}) thì dùng làm lối đi hằng ngày", h=_h(huong), dn=_dnt(bang[huong]), t=_h(tot[0]), tdn=_dnt(bang[tot[0]])))
