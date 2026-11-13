@@ -139,7 +139,7 @@ def que_trong_cau(cau: str) -> tuple[int | None, list[int]]:
 # ------------------------------------------------------------------ câu kiến thức → cụm kho giải thích / mã từ điển
 _GIAI_THICH: list[tuple[str, str]] = [   # (mẫu tiếng Anh, cụm `tu_khoa` của mục KB `giai_thich` Kinh Dịch)
     (r"all six (?:lines )?(?:changing|moving)|six changing|six moving|(?:all|every) (?:line|lines) (?:are )?(?:changing|moving)", "sau hao dong"),
-    (r"same question (?:twice|again|more than once)|recast|re cast|cast again|ask again|keep getting the same|same hexagram", "gieo lai"),
+    (r"same question (?:twice|again|more than once)|(?:cast|ask)(?:ing)? twice|twice for the same|recast|re cast|cast again|ask again|keep getting the same|same hexagram", "gieo lai"),
     (r"yarrow|stalks?|coin method|three coin|3 coin|coins? vs|coins? or", "dong xu va co thi"),
     (r"nuclear|inner hexagram|hidden hexagram|hu gua", "que ho la gi"),
     (r"relating hexagram|resulting hexagram|second hexagram|changed hexagram|future hexagram|primary (?:hexagram )?(?:and|vs|versus|or)|"
@@ -210,14 +210,16 @@ _CHU_DE: list[tuple[str, str]] = [
     (r"divorc\w*|separat\w*|save (?:the |our |my )?marriage|marriage (?:counsel\w*|problems?|trouble)|distant from (?:my )?(?:husband|wife|spouse)|"
      r"forgive (?:my )?(?:husband|wife|spouse|partner)|(?:husband|wife|spouse|partner) (?:lied|lies|lying|cheated|cheats|is cheating|"
      r"has an affair|had an affair)|(?:he|she|husband|wife|partner|boyfriend|girlfriend|spouse|bf|gf) (?:\w+ ){0,2}cheat\w*|cheated on me|"
-     r"cheated once|(?:an |the )affair|unfaithful", "luc duc"),
+     r"cheated once|(?:an |the )affair|unfaithful|(?:husband|wife|spouse) and i (?:\w+ ){0,2}(?:fight|argue|quarrel|bicker)\w*|"
+     r"(?:fix|repair|rescue) (?:our|my|the) marriage|(?:fight|argue|quarrel)\w* with (?:my )?(?:husband|wife|spouse)", "luc duc"),
     # cưới hỏi
     (r"marry|married|marriage|wedding|engag\w*|propos\w*|fianc\w*|maid of honou?r|best man", "ket hon"),
     # tình cảm
     (r"\bex\b|crush|boyfriend|girlfriend|\bbf\b|\bgf\b|dating|date with|second date|first date|relationship|situationship|break ?up|"
      r"broke up|back together|get back with|text (?:him|her|my ex)|confess|feelings for|met someone|meet someone|find love|find (?:the )?one|"
      r"soul ?mate|long ?distance|move in together|moving in together|love (?:me|him|her|life)|romanc\w*|romantic|commit\w*|"
-     r"walk away|the guy|the girl|this guy|this girl|still love|in love|single\b|someone online|dating app", "nguoi yeu"),
+     r"walk away|the guy|the girl|this guy|this girl|still love|in love|single\b|someone online|dating app|(?:the |a )?(?:person|someone|guy|girl) i "
+     r"(?:like|love|fancy|have a crush on)", "nguoi yeu"),
     # con cái
     (r"second child|another (?:baby|child)|try(?:ing)? for (?:a )?(?:baby|child|kids?)|have (?:a )?(?:baby|kids|children)|pregnan\w*|conceiv\w*|"
      r"\b(?:my|our) (?:son|daughter|kid|kids|child|children|baby|toddler|teen\w*|\d+ ?(?:yo|year old))\b|\b\d+ ?yo\b", "con toi"),
@@ -328,11 +330,16 @@ def _cau_chinh(cau: str) -> list[str]:
 
 def _chu_de(cau: str, t: str) -> list[str]:
     """Cụm chủ đề (≤ 2: chủ đề chính + chủ đề thứ hai cho câu hai lựa chọn) — câu hỏi thật trước."""
+    ra: list[str] = []
     for c in _cau_chinh(cau):
-        ra = [vn for mau, vn in _CHU_DE if re.search(r"\b(?:" + mau + r")(?!\w)", c)]
-        if ra:
-            return list(dict.fromkeys(ra))[:3]
-    return []
+        cua_cau = [vn for mau, vn in _CHU_DE if re.search(r"\b(?:" + mau + r")(?!\w)", c)]
+        if cua_cau and (not ra or ra == ["tien bac"]):
+            ra += [x for x in cua_cau if x not in ra]       # câu hỏi chỉ nói chung "tiền" → lấy chủ đề cụ thể từ câu kể
+        if ra and ra != ["tien bac"]:
+            break
+    if "tien bac" in ra and len(ra) > 1:
+        ra = [x for x in ra if x != "tien bac"] + ["tien bac"]
+    return list(dict.fromkeys(ra))[:3]
 
 
 def _vai(t: str) -> list[str]:
