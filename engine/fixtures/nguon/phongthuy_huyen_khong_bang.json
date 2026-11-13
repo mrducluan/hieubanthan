@@ -1,0 +1,11 @@
+{
+ "_nguon": "Bảng thông hành của phái Huyền Không phi tinh, chép lại từ hai kho mã mở dùng làm bộ đối chiếu độc lập (PT-NG3, 2026-11-13). Hai kho này tự ghi CHƯA lấy được nguyên văn Thẩm Thị Huyền Không Học; đây là đối chiếu chéo giữa các bản cài đặt, KHÔNG phải đối chiếu nguyên văn.",
+ "_bo_doi_chieu": ["dsh-metaphysics (MIT) — engine/fengshui.js", "fengshui.skill (không ghi giấy phép: chỉ đọc quy tắc, không chép mã / dữ liệu)"],
+ "the_tinh_quyet": {"1": "子癸甲申", "2": "坤壬乙卯未", "6": "戌乾亥辰巽巳", "7": "艮丙辛酉丑", "9": "寅午庚丁"},
+ "vuong_son_vuong_huong": {"1": "", "2": "乾巽亥巳丑未", "3": "卯酉乙辛辰戌", "4": "艮坤寅申甲庚", "5": "子午癸丁卯酉乙辛丑未辰戌", "6": "艮坤寅申甲庚", "7": "卯酉乙辛辰戌", "8": "乾巽亥巳丑未", "9": ""},
+ "khac_nhau_giua_cac_ban": {
+  "nguong_kiem_huong": "engine: lệch tâm sơn > 3° · dsh-metaphysics: > 4,5° · fengshui.skill: > 3° (ghi rõ các phái không thống nhất)",
+  "the_tinh_tra_theo": "engine + fengshui.skill: tra thế tinh của SƠN GỐC (sơn cùng nguyên trong cung của sao vận), thuận nghịch theo sơn gốc · dsh-metaphysics: tra thế tinh của chính toạ / hướng sơn, thuận nghịch theo cung của thế tinh",
+  "sao_5_nhap_trung": "engine: tra thế tinh của chính toạ / hướng sơn · fengshui.skill: sao 5 không thay"
+ }
+}

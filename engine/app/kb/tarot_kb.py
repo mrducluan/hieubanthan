@@ -113,6 +113,15 @@ def tu_khoa(*khoa) -> dict | list:
     return x if x is not None else {}
 
 
+def lap_la() -> dict:
+    """PT-NG2/5: nghĩa "ba / bốn lá cùng số" (Book T), khoá = at · 2…10 · tieu_dong · hiep_si · hoang_hau · vua."""
+    return _lay("lap_la") or {}
+
+
+def da_so() -> dict:
+    return _lay("da_so") or {}
+
+
 def goi_y_hoi() -> list[dict]:
     """TR-5: chip "chuyện hay hỏi" + câu hỏi mẫu (bấm là điền vào ô hỏi). Bản ngôn ngữ khác tắt bằng `null` → rỗng."""
     return list(_lay("goi_y_hoi") or [])

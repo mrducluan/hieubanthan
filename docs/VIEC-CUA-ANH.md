@@ -3,7 +3,30 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-12 (KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-12 (PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4as. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
+
+- [x] Mở mạng tới Wikisource, archive.org, Gutenberg (đã duyệt 2026-11-12). Dò lại: sách Tarot của Papus, Wirth em tự tải được;
+  ba bộ phong thuỷ dưới đây **không có bản chữ trên mạng mở** → cần anh tải PDF lên Google Drive (thư mục "Phong thuy nguon").
+- [x] Đã gửi 7 tệp lên Drive (2026-11-12). Dùng được: Liber 78 (đủ), Bát Trạch Minh Kính bản dịch (tóm ý). Chi tiết: mục 6 của tài liệu.
+- [ ] **Thẩm Thị Huyền Không Học (沈氏玄空學)**: tệp anh gửi chỉ là bản xem thử vài trang của sách viết lại năm 2010 → cần **bản đủ** (nguyên tác
+  4 / 6 quyển hoặc bản dịch Việt của Nguyễn Anh Vũ), PDF **có lớp chữ**, mỗi tệp **dưới 10 MB** (tách nhỏ nếu cần).
+  (2026-11-13) Hai kho GitHub anh gửi không có nguyên văn sách này — em chỉ dùng được làm bộ đối chiếu bảng (mục 7 tài liệu). Vẫn cần bản chữ của sách.
+- [ ] (Quyết định) Thế quái khi sao 5 nhập trung: giữ cách engine (thay bằng thế tinh của chính sơn) hay theo cách "sao 5 không thay"? Em đề xuất giữ tới khi có nguyên văn.
+- [x] (Đã duyệt + đã làm 2026-11-13, PT-NG5) Có hiện **ngày Tuế Phá, ngày Thụ Tử** ở Xem ngày tốt như nhãn tập quán (không loại ngày) không? Em đề xuất: có, chỉ là nhãn.
+- [ ] (PT-NG5) Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường nhãn mới).
+- [ ] **Dương Trạch Tam Yếu (陽宅三要)**: tệp 91 MB là ảnh quét, không có chữ → cần bản có chữ (PDF chữ / Word / txt) hoặc bản dịch Việt gõ chữ.
+- [ ] Case *The Tarot* và Papus: tệp trên 10 MB bị cắt (Case chỉ đọc tới lá 2). Gửi lại bản dưới 10 MB hoặc tách 2–3 phần. (Papus em tự lấy từ archive.org.)
+- [ ] Chưa gửi: Dương Trạch Thập Thư (陽宅十書), Địa Lý Biện Chính bản có chú, Lỗ Ban Kinh (魯班經); chương Introduction của Mathers 1888.
+- Link bản đầy đủ em dò được (2026-11-13; bản in gốc trên archive.org là **ảnh quét**, chữ nhận dạng tự động không đọc được → vẫn cần bản gõ chữ):
+  Dương Trạch Tam Yếu `archive.org/details/20260507_20260507_0914` · Bát Trạch Minh Kính `archive.org/details/20260507_20260507_0702` ·
+  Lỗ Ban Kinh `archive.org/details/20260605_20260605_0605` · Địa Lý Biện Chính Trực Giải `archive.org/details/20260509_20260509_0115` ·
+  Thẩm thị (bản in lại 2009, chỉ cho mượn đọc) `archive.org/details/zengguangshenshi0000shen` · Papus 1896 `archive.org/details/tarotofbohemians00papu_0` ·
+  Wirth 1927 `archive.org/details/wirth-o.-1860-1943.-tarot-des-imagiers-du-moyen-age-1927.` · Case 1947 (mượn đọc) `archive.org/details/tarotkeytowisdom0000paul`.
+  Chưa tìm thấy: Dương Trạch Thập Thư, chương Introduction của Mathers 1888.
+- [ ] (Quyết định) 6 đề xuất ở mục 5 của tài liệu: hiện "Sách xưa nói gì" trong báo cáo nhà · sửa nhãn nguồn Thanh Long – Bạch Hổ ·
+  nối lớp "đa số" vào bài đọc Tarot · thành môn quyết · thước Lỗ Ban · sổ đối chiếu cho mọi KB.
 
 ### 4ar. KT-TT — kiểm toán kho tri thức Tử vi · Bát tự · Kinh Dịch (2026-11-12, `docs/KIEM-TOAN-TRI-THUC-2026-11.md`)
 

@@ -1,0 +1,458 @@
+{
+ "_nguon": {
+  "sach": "Liber LXXVIII — A Description of the Cards of the Tarot (Aleister Crowley, The Equinox I:8, 1912; phạm vi công cộng)",
+  "ban": "bản sacred-texts.com, chủ dự án lưu PDF vào Google Drive (2026-11-12)",
+  "ngay": "2026-11-12",
+  "ghi_chu": "Cùng văn bản với 'Book T' của Golden Dawn (tep tarot_book_t.json là bản chép archive.org) → hai bản chép độc lập để soát lỗi. PDF lẫn chữ thanh điều hướng ở chỗ ngắt trang nên bảng dưới đây chép tay từ phần đọc được; giữ lỗi chính tả gốc ('Oppresion', 'Illusionary'). Hàng 'Kings (Knights)' của Book T = Hiệp sĩ Waite; 'Princes' = Vua Waite; 'Princesses' = Tiểu đồng. Lá 8 / 11: Liber 78 đánh số Fortitude 11, Justice 8 (thứ tự Marseille); KB theo số Waite (Strength 8, Justice 11)."
+ },
+ "la_so": {
+  "gay_5": {
+   "so_liber": 21,
+   "ten": "Strife",
+   "hanh_tinh": "Saturn",
+   "cung": "Leo"
+  },
+  "gay_6": {
+   "so_liber": 22,
+   "ten": "Victory",
+   "hanh_tinh": "Jupiter",
+   "cung": "Leo"
+  },
+  "gay_7": {
+   "so_liber": 23,
+   "ten": "Valour",
+   "hanh_tinh": "Mars",
+   "cung": "Leo"
+  },
+  "tien_8": {
+   "so_liber": 24,
+   "ten": "Prudence",
+   "hanh_tinh": "Sun",
+   "cung": "Virgo"
+  },
+  "tien_9": {
+   "so_liber": 25,
+   "ten": "Material Gain",
+   "hanh_tinh": "Venus",
+   "cung": "Virgo"
+  },
+  "tien_10": {
+   "so_liber": 26,
+   "ten": "Wealth",
+   "hanh_tinh": "Mercury",
+   "cung": "Virgo"
+  },
+  "kiem_2": {
+   "so_liber": 27,
+   "ten": "Peace restored",
+   "hanh_tinh": "Moon",
+   "cung": "Libra"
+  },
+  "kiem_3": {
+   "so_liber": 28,
+   "ten": "Sorrow",
+   "hanh_tinh": "Saturn",
+   "cung": "Libra"
+  },
+  "kiem_4": {
+   "so_liber": 29,
+   "ten": "Rest from Strife",
+   "hanh_tinh": "Jupiter",
+   "cung": "Libra"
+  },
+  "coc_5": {
+   "so_liber": 30,
+   "ten": "Loss in Pleasure",
+   "hanh_tinh": "Mars",
+   "cung": "Scorpio"
+  },
+  "coc_6": {
+   "so_liber": 31,
+   "ten": "Pleasure",
+   "hanh_tinh": "Sun",
+   "cung": "Scorpio"
+  },
+  "coc_7": {
+   "so_liber": 32,
+   "ten": "Illusionary Success",
+   "hanh_tinh": "Venus",
+   "cung": "Scorpio"
+  },
+  "gay_8": {
+   "so_liber": 33,
+   "ten": "Swiftness",
+   "hanh_tinh": "Mercury",
+   "cung": "Sagittarius"
+  },
+  "gay_9": {
+   "so_liber": 34,
+   "ten": "Great Strength",
+   "hanh_tinh": "Moon",
+   "cung": "Sagittarius"
+  },
+  "gay_10": {
+   "so_liber": 35,
+   "ten": "Oppresion",
+   "hanh_tinh": "Saturn",
+   "cung": "Sagittarius"
+  },
+  "tien_2": {
+   "so_liber": 36,
+   "ten": "Harmonious Change",
+   "hanh_tinh": "Jupiter",
+   "cung": "Capricorn"
+  },
+  "tien_3": {
+   "so_liber": 37,
+   "ten": "Material Works",
+   "hanh_tinh": "Mars",
+   "cung": "Capricorn"
+  },
+  "tien_4": {
+   "so_liber": 38,
+   "ten": "Earthly Power",
+   "hanh_tinh": "Sun",
+   "cung": "Capricorn"
+  },
+  "kiem_5": {
+   "so_liber": 39,
+   "ten": "Defeat",
+   "hanh_tinh": "Venus",
+   "cung": "Aquarius"
+  },
+  "kiem_6": {
+   "so_liber": 40,
+   "ten": "Earned Success",
+   "hanh_tinh": "Mercury",
+   "cung": "Aquarius"
+  },
+  "kiem_7": {
+   "so_liber": 41,
+   "ten": "Unstable Effort",
+   "hanh_tinh": "Moon",
+   "cung": "Aquarius"
+  },
+  "coc_8": {
+   "so_liber": 42,
+   "ten": "Abandoned Success",
+   "hanh_tinh": "Saturn",
+   "cung": "Pisces"
+  },
+  "coc_9": {
+   "so_liber": 43,
+   "ten": "Material Happiness",
+   "hanh_tinh": "Jupiter",
+   "cung": "Pisces"
+  },
+  "coc_10": {
+   "so_liber": 44,
+   "ten": "Perfected Success",
+   "hanh_tinh": "Mars",
+   "cung": "Pisces"
+  },
+  "gay_2": {
+   "so_liber": 45,
+   "ten": "Dominion",
+   "hanh_tinh": "Mars",
+   "cung": "Aries"
+  },
+  "gay_3": {
+   "so_liber": 46,
+   "ten": "Established Strength",
+   "hanh_tinh": "Sun",
+   "cung": "Aries"
+  },
+  "gay_4": {
+   "so_liber": 47,
+   "ten": "Perfected Work",
+   "hanh_tinh": "Venus",
+   "cung": "Aries"
+  },
+  "tien_5": {
+   "so_liber": 48,
+   "ten": "Material Trouble",
+   "hanh_tinh": "Mercury",
+   "cung": "Taurus"
+  },
+  "tien_6": {
+   "so_liber": 49,
+   "ten": "Material Success",
+   "hanh_tinh": "Moon",
+   "cung": "Taurus"
+  },
+  "tien_7": {
+   "so_liber": 50,
+   "ten": "Success unfulfilled",
+   "hanh_tinh": "Saturn",
+   "cung": "Taurus"
+  },
+  "kiem_8": {
+   "so_liber": 51,
+   "ten": "Shortened Force",
+   "hanh_tinh": "Jupiter",
+   "cung": "Gemini"
+  },
+  "kiem_9": {
+   "so_liber": 52,
+   "ten": "Despair and Cruelty",
+   "hanh_tinh": "Mars",
+   "cung": "Gemini"
+  },
+  "kiem_10": {
+   "so_liber": 53,
+   "ten": "Ruin",
+   "hanh_tinh": "Sun",
+   "cung": "Gemini"
+  },
+  "coc_2": {
+   "so_liber": 54,
+   "ten": "Love",
+   "hanh_tinh": "Venus",
+   "cung": "Cancer"
+  },
+  "coc_3": {
+   "so_liber": 55,
+   "ten": "Abundance",
+   "hanh_tinh": "Mercury",
+   "cung": "Cancer"
+  },
+  "coc_4": {
+   "so_liber": 56,
+   "ten": "Blended Pleasure",
+   "hanh_tinh": "Moon",
+   "cung": "Cancer"
+  }
+ },
+ "an_chinh": [
+  {
+   "so_liber": 0,
+   "ten": "The Foolish Man",
+   "danh_hieu": "The Spirit of Aether",
+   "chu": "Aleph",
+   "ung": "Air"
+  },
+  {
+   "so_liber": 1,
+   "ten": "The Magician",
+   "danh_hieu": "The Magus of Power",
+   "chu": "Bet",
+   "ung": "Mercury"
+  },
+  {
+   "so_liber": 2,
+   "ten": "The High Priestess",
+   "danh_hieu": "The Priestess of the Silver Star",
+   "chu": "Gimel",
+   "ung": "Moon"
+  },
+  {
+   "so_liber": 3,
+   "ten": "The Empress",
+   "danh_hieu": "The Daughter of the Mighty Ones",
+   "chu": "Dalet",
+   "ung": "Venus"
+  },
+  {
+   "so_liber": 4,
+   "ten": "The Emperor",
+   "danh_hieu": "Sun of the Morning, chief among the Mighty",
+   "chu": "Heh",
+   "ung": "Aries"
+  },
+  {
+   "so_liber": 5,
+   "ten": "The Hierophant",
+   "danh_hieu": "The Magus of the Eternal",
+   "chu": "Vau",
+   "ung": "Taurus"
+  },
+  {
+   "so_liber": 6,
+   "ten": "The Lovers",
+   "danh_hieu": "The Children of the Voice; the Oracles of the Mighty Gods",
+   "chu": "Zain",
+   "ung": "Gemini"
+  },
+  {
+   "so_liber": 7,
+   "ten": "The Chariot",
+   "danh_hieu": "The Child of the Powers of the Waters; the Lord of the Triumph of Light",
+   "chu": "Chet",
+   "ung": "Cancer"
+  },
+  {
+   "so_liber": 11,
+   "ten": "Fortitude",
+   "danh_hieu": "The Daughter of the Flaming Sword",
+   "chu": "Tet",
+   "ung": "Leo"
+  },
+  {
+   "so_liber": 9,
+   "ten": "The Hermit",
+   "danh_hieu": "The Magus of the Voice of Power, the Prophet of the Eternal",
+   "chu": "Yod",
+   "ung": "Virgo"
+  },
+  {
+   "so_liber": 10,
+   "ten": "The Wheel of Fate",
+   "danh_hieu": "The Lord of the Forces of Life",
+   "chu": "Koph",
+   "ung": "Jupiter"
+  },
+  {
+   "so_liber": 8,
+   "ten": "Justice",
+   "danh_hieu": "The Daughter of the Lords of Truth: the Ruler of the Balance",
+   "chu": "Lamed",
+   "ung": "Libra"
+  },
+  {
+   "so_liber": 12,
+   "ten": "The Hanged Man",
+   "danh_hieu": "The Spirit of the Mighty Waters",
+   "chu": "Mem",
+   "ung": "Water"
+  },
+  {
+   "so_liber": 13,
+   "ten": "Death",
+   "danh_hieu": "The Child of the Great Transformers: the Lord of the Gates of Death",
+   "chu": "Nun",
+   "ung": "Scorpio"
+  },
+  {
+   "so_liber": 14,
+   "ten": "Temperance",
+   "danh_hieu": "The Daughter of the Reconcilers: the Bringer-Forth of life",
+   "chu": "Samekh",
+   "ung": "Sagittarius"
+  },
+  {
+   "so_liber": 15,
+   "ten": "The Devil",
+   "danh_hieu": "The Lord of the Gates of Matter: the Child of the Forces of Time",
+   "chu": "Ayin",
+   "ung": "Capricorn"
+  },
+  {
+   "so_liber": 16,
+   "ten": "The Blasted Tower",
+   "danh_hieu": "The Lord of the Hosts of the Mighty",
+   "chu": "Peh",
+   "ung": "Mars"
+  },
+  {
+   "so_liber": 17,
+   "ten": "The Star",
+   "danh_hieu": "The Daughter of the Firmament, the dweller between the Waters",
+   "chu": "Tzaddi",
+   "ung": "Aquarius"
+  },
+  {
+   "so_liber": 18,
+   "ten": "The Moon",
+   "danh_hieu": "The Ruler of Flux and Reflux: the Child of the Sons of the Mighty",
+   "chu": "Qof",
+   "ung": "Pisces"
+  },
+  {
+   "so_liber": 19,
+   "ten": "The Sun",
+   "danh_hieu": "The Lord of the Fire of the World",
+   "chu": "Resh",
+   "ung": "Sun"
+  },
+  {
+   "so_liber": 20,
+   "ten": "The Judgment",
+   "danh_hieu": "The Spirit of the Primal Fire",
+   "chu": "Shin",
+   "ung": "Spirit and Fire"
+  },
+  {
+   "so_liber": 21,
+   "ten": "The Universe",
+   "danh_hieu": "The Great One of the Night of Time",
+   "chu": "Taw",
+   "ung": "Earth and Saturn"
+  }
+ ],
+ "lap_la": {
+  "at": {
+   "4": "Great power and force.",
+   "3": "Riches, success."
+  },
+  "hiep_si": {
+   "4": "Swiftness, rapidity.",
+   "3": "Unexpected meetings. Knights, in general, shew news."
+  },
+  "hoang_hau": {
+   "4": "Authority, influence.",
+   "3": "Powerful friends."
+  },
+  "vua": {
+   "4": "Meetings with the great.",
+   "3": "Rank and honour."
+  },
+  "tieu_dong": {
+   "4": "New ideas or plans.",
+   "3": "Society of the young."
+  },
+  "10": {
+   "4": "Anxiety, responsibility.",
+   "3": "Buying and selling (commerce)."
+  },
+  "9": {
+   "4": "Added responsibilities.",
+   "3": "Much correspondence."
+  },
+  "8": {
+   "4": "Much news.",
+   "3": "Much journeying."
+  },
+  "7": {
+   "4": "Disappointments.",
+   "3": "Treaties and compacts."
+  },
+  "6": {
+   "4": "Pleasure.",
+   "3": "Gain, success."
+  },
+  "5": {
+   "4": "Order, regularity.",
+   "3": "Quarrels, fights."
+  },
+  "4": {
+   "4": "Rest, peace.",
+   "3": "Industry."
+  },
+  "3": {
+   "4": "Resolution, determination.",
+   "3": "Deceit."
+  },
+  "2": {
+   "4": "Conferences, conversations.",
+   "3": "Reorganization, recommendation."
+  }
+ },
+ "da_so": {
+  "gay": "Energy, opposition, quarrel.",
+  "coc": "Pleasure, merriment.",
+  "kiem": "Trouble, sadness, sickness, death.",
+  "tien": "Business, money, possessions.",
+  "an_chinh": "Strong forces beyond the Querent's control.",
+  "hoang_gia": "Society, meetings of many persons.",
+  "at": "Strength generally. Aces are always strong cards."
+ },
+ "pham_gia": [
+  "Cards of the same suit on either side strengthen it greatly, for good or evil according to their nature.",
+  "Cards of opposite natures on either side weaken it greatly, for either good or evil.",
+  "Swords are inimical to Pentacles.",
+  "Wands are inimical to Cups.",
+  "Swords are friendly with Cups and Wands.",
+  "Wands are friendly with Swords and Pentacles.",
+  "If a card fall between two other which are mutually contrary, it is not much affected by either."
+ ]
+}
