@@ -354,7 +354,7 @@ xung sang hợp / hợp sang xung. 34 / 64 quẻ có ít nhất một nét → h
 tan / dễ kết / lúc đầu thuận về sau dễ rời").
 
 **Nguồn.** Tăng San Bốc Dịch (增刪卜易, Dã Hạc lão nhân, đời Thanh — công cộng), bản Wikisource tiếng Trung: nạp 4 chương engine
-đang dùng (六合, 六沖, 反伏, 歸魂遊魂) vào `engine/fixtures/nguon/tang_san_boc_dich.json` bằng `scripts/nap_tang_san_boc_dich.py`.
+đang dùng (六合, 六沖, 反伏, 歸魂遊魂) vào `engine/fixtures/nguon/tang_san_boc_dich.json` bằng `scripts/nap_tang_san_boc_dich.py` (WS-1 2026-11-13: thay bằng `scripts/nap_wikisource.py`, kho nay đủ 4 quyển).
 Bản gõ lại (trang ghi chất lượng 50 %) → `can_doi_chieu: true`.
 
 **Đã làm.**

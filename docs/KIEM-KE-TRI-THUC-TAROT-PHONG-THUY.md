@@ -233,3 +233,59 @@ gốc gác và câu "hệ thống không loại ngày vì nhãn này". Mỗi nh�
 | Một bộ chiếm quá nửa bàn → câu "A Majority of…" của Book T | "Vì sao nói vậy" của hộp Nguyên tố trội |
 
 Không đổi mức, không đổi phép tính nào. Bản tiếng Anh giữ cùng cấu trúc (câu cổ thư chỉ hiện nguyên văn chữ Hán vì chưa có lời dịch được duyệt).
+
+## 10. Đợt 6 (WS-1, 2026-11-13) — tự dò Wikisource tiếng Trung và nạp kho nguồn
+
+Anh giao: "sách nào còn thiếu tri thức thì tự tìm Wikisource để nạp đầy đủ". Em thử **khoảng 140 tên sách** (cả tên gọi khác) trên
+`zh.wikisource.org`, tải wikitext thô từng trang (trang bị giới hạn tốc độ nên tải chậm), làm sạch vỏ wiki — **không sửa chữ của sách** —
+rồi đưa vào `engine/fixtures/nguon/`. Bộ nạp: `engine/scripts/nap_wikisource.py`; test: `engine/tests/test_ws1_kho_nguon_wikisource.py`.
+
+### Đã nạp (14 sách, đều `can_doi_chieu: true` — bản gõ lại của người dùng Wikisource, chưa so bản khắc)
+
+| Tệp kho nguồn | Sách | Môn | Số thiên · chữ | Ghi chú |
+|---|---|---|---|---|
+| `tang_san_boc_dich.json` | 增刪卜易 Tăng San Bốc Dịch | Kinh Dịch (Lục Hào) | 34 · 119.000 | trước chỉ có 4 chương; nay đủ 4 quyển. Người gõ tự ghi làm từ bản in nhiều lỗi; lời người gõ + phần "增訂" thời nay không nạp |
+| `hoang_kim_sach.json` | 黃金策 Hoàng Kim Sách | Lục Hào | 33 · 22.000 | |
+| `hoa_chau_lam.json` | 火珠林 Hoả Châu Lâm | Lục Hào | 74 · 20.500 | giản thể |
+| `kinh_thi_dich_truyen.json` | 京氏易傳 Kinh Thị Dịch Truyện | Lục Hào (gốc nạp giáp, bát cung) | 67 · 27.500 | đủ 64 quẻ theo tám cung |
+| `mai_hoa_dich_so.json` | 梅花易數 Mai Hoa Dịch Số | Mai Hoa | 111 · 40.000 | |
+| `dia_ly_bien_chinh.json` | 地理辨正 Địa Lý Biện Chính | Huyền Không | 6 · 10.000 | Wikisource mới có Thanh Nang Kinh + Thanh Nang Tự kèm chú Tưởng Đại Hồng; chưa có Áo Ngữ, Thiên Ngọc, Bảo Chiếu |
+| `thien_ngoc_kinh_noi_truyen.json` | 天玉經內傳 Thiên Ngọc Kinh Nội Truyện | Huyền Không | 3 · 9.900 | có lời chú |
+| `thanh_nang_kinh.json` | 青囊經 Thanh Nang Kinh | Huyền Không | 1 · 6.100 | |
+| `huyen_co_phu.json` | 玄機賦 Huyền Cơ Phú | Huyền Không (đoán sao) | 1 · 550 | |
+| `ham_long_kinh.json` | 撼龍經 · 疑龍經 · 葬法倒杖 | Hình thế | 13 · 30.000 | |
+| `nhan_tu_tu_tri.json` | 人子須知 Nhân Tử Tu Tri | Hình thế | 9 · 14.000 | giản thể, mới có phần đầu sách |
+| `trich_thien_tuy.json` | 滴天髓 Trích Thiên Tuỷ | Bát tự | 51 · 13.500 | |
+| `trich_thien_tuy_xien_vi.json` | 滴天髓闡微 Xiển Vi | Bát tự | 63 · 96.000 | giản thể |
+| `than_phong_thong_khao.json` | 神峰通考 Thần Phong Thông Khảo | Bát tự | 1 · 154.000 | giản thể, một trang liền |
+
+### Engine khớp chữ sách (test mới)
+
+- Bảng **nạp giáp** tám quẻ khớp «渾天甲子章» của Tăng San Bốc Dịch 8/8 dòng. Bản gõ chép nhầm 艮 thành 辰 ở một dòng (ba chi là của quẻ Cấn) — đã ghi lại.
+- **Lục thân theo cung** khớp «六親歌章» 25/25.
+- **Mai Hoa**: chia 8 lấy quẻ (dư 0 là Khôn), chia 6 lấy hào động, lệ năm – tháng – ngày – giờ khớp chữ sách.
+
+### Đã xem và KHÔNG nạp (giữ đúng "không nạp nguồn ít uy tín")
+
+| Sách | Lý do |
+|---|---|
+| 五行精紀, 入地眼全書, 靈城精義 | bản gõ đổi giản → phồn bằng máy, sai kiểu 乙丑 → 乙醜, 吉凶 → 吉兇, 周 → 週 (Ngũ Hành Tinh Kỷ sai hơn 300 chỗ). Linh Thành Tinh Nghĩa là sách Tứ khố → nên lấy bản Kanripo |
+| 玉匣記 | bản biên tập thời nay có lời dẫn hiện đại; nội dung chủ yếu bùa chú, ngày cúng — trái quy tắc không vật phẩm / giải hạn |
+| 平砂玉尺經 | giản thể, không ghi bản; sách bị chính Tưởng Đại Hồng bác |
+| 淵海子平, 窮通寶鑑 | trang ghi "No source" / không ghi bản, giản thể — không hơn bản kho đang có |
+| 卜筮正宗 | mới gõ phần đầu quyển |
+| 葬書, 宅經, 三命通會, 紫微斗數全書, 青囊奧語, 青囊序, 月波洞中記 | kho đã có bản Tứ khố / bản đủ hơn |
+
+### Wikisource KHÔNG có (vẫn cần anh gửi bản gõ chữ)
+
+沈氏玄空學 (Thẩm thị) · 陽宅三要 · 八宅明鏡 · 陽宅十書 · 魯班經 · 都天寶照經 · 飛星賦 · 玄空秘旨 · 紫白訣 · 雪心賦 · 子平真詮 (kho đã có từ nguồn khác) ·
+麻衣相法 · 神相全編 · 柳莊相法 · 水鏡神相 · 相理衡真 · 協紀辨方書 (kho có phần trích bản Tứ khố).
+
+### Chưa làm trong đợt này
+
+Mới là **kho nguồn** (để đối chiếu và trích về sau), chưa có lời nào mới hiện cho người dùng. Việc nên làm tiếp, theo giá trị:
+1. Huyền Cơ Phú + Thiên Ngọc Kinh Nội Truyện → đối chiếu 81 tổ hợp sao và thêm câu sách vào "Vì sao nói vậy" của báo cáo nhà.
+2. Trích Thiên Tuỷ → câu sách cho 10 trang nhật chủ và chương "Con người bạn" của Bát tự.
+3. Hoàng Kim Sách → câu sách theo 20 chủ đề hỏi quẻ.
+4. Mai Hoa Dịch Số «八卦萬物類占» → đối chiếu loại tượng tám quái đang dùng.
+
