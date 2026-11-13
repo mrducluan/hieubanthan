@@ -1752,7 +1752,7 @@
   },
   {
    "ma": "sinh_khi",
-   "ten": "Sheng Qi (Life Generating)",
+   "ten": "Sheng Qi (Vitality)",
    "bien_the": [
     "Sheng Qi",
     "Life Generating"
@@ -1761,7 +1761,7 @@
   },
   {
    "ma": "thien_y",
-   "ten": "Tian Yi (Heavenly Doctor)",
+   "ten": "Tian Yi (Health)",
    "bien_the": [
     "Tian Yi direction",
     "Heavenly Doctor"
@@ -1770,7 +1770,7 @@
   },
   {
    "ma": "dien_nien",
-   "ten": "Yan Nian (Longevity)",
+   "ten": "Yan Nian (Harmony)",
    "bien_the": [
     "Yan Nian",
     "Longevity direction"
@@ -1788,7 +1788,7 @@
   },
   {
    "ma": "tuyet_menh",
-   "ten": "Jue Ming (Total Loss)",
+   "ten": "Jue Ming (Depletion)",
    "bien_the": [
     "Jue Ming",
     "Total Loss"
@@ -1797,7 +1797,7 @@
   },
   {
    "ma": "ngu_quy",
-   "ten": "Wu Gui (Five Ghosts)",
+   "ten": "Wu Gui (Disputes)",
    "bien_the": [
     "Wu Gui",
     "Five Ghosts"
@@ -1806,7 +1806,7 @@
   },
   {
    "ma": "luc_sat_phongthuy",
-   "ten": "Liu Sha (Six Killings)",
+   "ten": "Liu Sha (Friction)",
    "bien_the": [
     "Liu Sha",
     "Six Killings direction"

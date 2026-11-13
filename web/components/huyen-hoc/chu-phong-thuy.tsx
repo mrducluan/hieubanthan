@@ -8,7 +8,7 @@ import { useTen } from "@/components/khung/TenHien";
 import { tachNhan, taoChu } from "@/lib/chu-trang";
 import { CHU_PHONG_THUY_UI } from "@/lib/chu/phong-thuy";
 
-/** Bỏ phần chú giải trong ngoặc của tên Anh ("Sheng Qi (Life Generating)" → "Sheng Qi") — dùng ở chỗ chật. */
+/** Bỏ phần chú giải trong ngoặc của tên Anh ("Sheng Qi (Vitality)" → "Sheng Qi") — dùng ở chỗ chật. */
 export const tenGonPT = (s: string) => boChuGiai(s);
 
 export function useChuPT() {

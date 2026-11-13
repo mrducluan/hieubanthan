@@ -1150,19 +1150,19 @@
   {
    "ma": "sinh_khi",
    "vi": "Sinh Khí",
-   "en": "Sheng Qi (Life Generating)",
+   "en": "Sheng Qi (Vitality)",
    "mang": "phong_thuy"
   },
   {
    "ma": "thien_y",
    "vi": "Thiên Y",
-   "en": "Tian Yi (Heavenly Doctor)",
+   "en": "Tian Yi (Health)",
    "mang": "phong_thuy"
   },
   {
    "ma": "dien_nien",
    "vi": "Diên Niên",
-   "en": "Yan Nian (Longevity)",
+   "en": "Yan Nian (Harmony)",
    "mang": "phong_thuy"
   },
   {
@@ -1174,7 +1174,7 @@
   {
    "ma": "tuyet_menh",
    "vi": "Tuyệt Mệnh",
-   "en": "Jue Ming (Total Loss)",
+   "en": "Jue Ming (Depletion)",
    "mang": "phong_thuy",
    "cam_en": [
     "death",
@@ -1186,7 +1186,7 @@
   {
    "ma": "ngu_quy",
    "vi": "Ngũ Quỷ",
-   "en": "Wu Gui (Five Ghosts)",
+   "en": "Wu Gui (Disputes)",
    "mang": "phong_thuy",
    "cam_en": [
     "five demons",
@@ -1196,7 +1196,7 @@
   {
    "ma": "luc_sat_phongthuy",
    "vi": "Lục Sát",
-   "en": "Liu Sha (Six Killings)",
+   "en": "Liu Sha (Friction)",
    "mang": "phong_thuy"
   },
   {

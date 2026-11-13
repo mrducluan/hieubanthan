@@ -278,7 +278,7 @@ def _moc(t: str) -> list[str]:
         if m.group(4):
             da_nam.add(m.group(4))
     for y in re.findall(r"\b(19\d\d|20\d\d)\b", t):
-        if y in da_nam or re.search(rf"\b(born|birth|since|sinh)\b[^.]{{0,24}}\b{y}\b", t) or re.search(rf"\b{y}\b[^.]{{0,6}}\b(born|baby)\b", t):
+        if y in da_nam or re.search(rf"\b(born|birth|since|sinh)\b[^.]{{0,24}}\b{re.escape(y)}\b", t) or re.search(rf"\b{re.escape(y)}\b[^.]{{0,6}}\b(born|baby)\b", t):
             continue
         ra.append(f"nam {y}")
     hn = _hom_nay()

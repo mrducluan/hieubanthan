@@ -158,8 +158,13 @@ def _doan_cap_sao(ch: dict) -> list[str]:
     lv = ch.get("linh_vuc") or {}
     ra = []
     if lv:
-        ra.append(L("pt.ds.cap.tien", "Về tiền bạc, công việc (theo phía cửa): {a} {b}", a=lv.get('tien_bac', ''), b=lv.get('cong_viec', '')).strip())
-        ra.append(L("pt.ds.cap.nguoi", "Về người ở trong nhà: {a} {b}", a=lv.get('gia_dao', ''), b=lv.get('suc_khoe', '')).strip())
+        # Bản dịch: hộp "Phía cửa theo năm xây" ngay trên đã nói `tien_bac` + `gia_dao` → đoạn chỉ thêm phần chưa nói (cùng số
+        # đoạn như bản Việt). Bản Việt giữ nguyên.
+        da_noi = not ngon_ngu.la_viet() and lv.get("cong_viec") and lv.get("suc_khoe")
+        for ma, vi, a, b in (("pt.ds.cap.tien", "Về tiền bạc, công việc (theo phía cửa): {a} {b}", "tien_bac", "cong_viec"),
+                             ("pt.ds.cap.nguoi", "Về người ở trong nhà: {a} {b}", "gia_dao", "suc_khoe")):
+            cau = L(ma, vi, a="" if da_noi else lv.get(a, ''), b=lv.get(b, ''))
+            ra.append((cau.replace(":  ", ": ") if da_noi else cau).strip())
         if lv.get("tam_ly"):
             ra.append(lv["tam_ly"])
     ny = ch.get("nam_chu_y") or {}
@@ -251,7 +256,7 @@ _LOI_THUONG_EN = [
     (re.compile(r"\bin Period 9\b"), "in the 2024–2043 period"),
     (re.compile(r"\bPeriod 9\b"), "the 2024–2043 period"),
     (re.compile(r"\b[Tt]he old books link mountain star \d with"), "the old books link this side with"),
-    (re.compile(r"Two stars of the same element tend to"), "With both layers at the door sharing one nature, things tend to"),
+    (re.compile(r"Two stars of the same element tend to"), "When both layers at the door share one nature, they tend to"),
     (re.compile(r"\bthis pair of stars\b"), "this side"),
     (re.compile(r"\b[Aa]nnual stars?\b"), "yearly rhythm"),
     (re.compile(r"\b[Mm]onthly stars?\b"), "monthly rhythm"),
@@ -570,7 +575,8 @@ def _chuong_tung_phong(mq, huong, b, bc_luan, bo_cuc_in) -> dict:  # noqa: C901
     _ap_tran_muc(c, _veto(bc_luan))
     c["tom_tat"] = (L("pt.c3.tt", "{n} phòng đã khai: {ds}.", n=len(c['phong']),
                       ds=_ds(f"{p['ten'].lower()} {kb.nhan_muc(p['muc']).lower()}" for p in c["phong"]))
-                    if c["phong"] else L("pt.c3.tt_0", "Chưa khai bố cục — dưới đây là gợi ý đặt phòng theo mệnh của bạn."))
+                    if c["phong"] else L("pt.c3.tt_0" if mq else "pt.c3.tt_0_trach",
+                                         "Chưa khai bố cục — dưới đây là gợi ý đặt phòng theo mệnh của bạn."))
     c["cau_tu_soi"] = k["tu_soi"][1] if len(k.get("tu_soi", [])) > 1 else None
     return c
 
@@ -628,7 +634,7 @@ def _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem: dt.date) -> dict:
                              ds="; ".join(L("pt.c4.cc.thang_sao", "{thang} sao {s}", thang=_thang(x['chi_thang']), s=x['sao_tai_cua']) for x in c["ba_thang"])))
     thuan_th = [x for x in c["ba_thang"] if x["muc"] == "thuan"]
     giu = [x for x in c["ba_thang"] if x["muc"] == "can_chu_dong"]
-    t0 = _thang(thuan_th[0]['chi_thang']) if thuan_th else ""
+    t0 = _thang_tu(thuan_th[0]) if thuan_th else ""
     nd = (L("pt.c4.th.thuan", "{thang} là tháng thuận để sửa sang, kê lại phía cửa. ", thang=t0[:1].upper() + t0[1:])
           if thuan_th else L("pt.c4.th.khong", "Ba tháng tới không có tháng nổi bật để sửa lớn phía cửa. ")) \
         + (L("pt.c4.th.giu", "{ds} nên giữ yên phía cửa.", ds=_thang_ds(giu)) if giu else "")
@@ -671,18 +677,28 @@ def _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem: dt.date) -> dict:
     phuong_yen = list(dict.fromkeys(x["phuong"] for x in hn["huong_tranh"]))
     c["tom_tat"] = L("pt.c4.tt", "Năm {nam} ({cc}): nên giữ yên, không động thổ lớn ở phía {ds}. Ba tháng tới: {bt}.", nam=nam, cc=hn['can_chi'],
                      ds=_ds(_h(p) for p in phuong_yen),
-                     bt=_ds(f"{_thang(x['chi_thang'])} {x['nhan_muc'].lower()}" for x in c["ba_thang"]))
+                     bt=_ds(f"{_thang_tu(x)} {x['nhan_muc'].lower()}" for x in c["ba_thang"]))
     c["doan"] = [L("pt.c4.doan", "Nhịp năm và nhịp tháng là lớp thời gian chồng lên nhà — dùng để chọn lúc sửa chữa, động thổ, dọn phòng. "
                    "Việc cần thiết cho an toàn (điện, nước, dột) thì làm ngay, không chờ tháng.")]
     c["cau_tu_soi"] = L("pt.c4.tu_soi", "Trong ba tháng tới bạn định sửa hay kê lại chỗ nào? Có rơi vào phía đang cần giữ yên không?")
     return c
 
 
+def _thang_tu(x: dict) -> str:
+    """Tên tháng tiết; bản dịch kèm ngày dương bắt đầu tháng ("the Zi month (from 7 Dec)") — tên chi một mình không ai đọc ra
+    ngày. Bản Việt giữ nguyên "tháng Tý"."""
+    t = _thang(x["chi_thang"])
+    if ngon_ngu.la_viet() or not x.get("tu_ngay"):
+        return t
+    n = dt.date.fromisoformat(x["tu_ngay"])
+    return L("pt.thang_tu", "{t} (từ {ngay})", t=t, ngay=_hien().ngay(n.year, n.month, n.day, nam=False))
+
+
 def _thang_ds(ds: list[dict]) -> str:
     """"Tháng Dần, Mão" (bản Việt nối tên chi sau một chữ "Tháng") / "The Yin month, Mao month" theo ngôn ngữ."""
     if ngon_ngu.la_viet():
         return "Tháng " + ", ".join(x['chi_thang'] for x in ds)
-    s = _ds(_thang(x['chi_thang']) for x in ds)
+    s = _ds(_thang_tu(x) for x in ds)
     return s[:1].upper() + s[1:]
 
 
@@ -701,7 +717,7 @@ def _chuong_viec_nen_lam(c1, c2, c3, c4) -> dict:
             lam.insert(0, h["huong_xu_ly"])
     for x in c4.get("ba_thang", []):
         if x["muc"] == "thuan" and len(cho) < 2:
-            cho.append(L("pt.c5.cho_thang", "Sửa sang, kê lại phía cửa vào {thang} (theo tiết khí).", thang=_thang(x['chi_thang'])))
+            cho.append(L("pt.c5.cho_thang", "Sửa sang, kê lại phía cửa vào {thang} (theo tiết khí).", thang=_thang_tu(x)))
     if c4.get("tuoi_lam_nha") and c4["tuoi_lam_nha"]["ket_luan"]["ma"] != "thuan" and c4["tuoi_lam_nha"]["nam_thuan"]:
         cho.append(L("pt.c5.cho_nam", "Việc lớn (xây, sửa toàn bộ) dân gian thường chờ năm {nam}.", nam=c4['tuoi_lam_nha']['nam_thuan'][0]['nam']))
     if not cho:

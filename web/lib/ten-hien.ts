@@ -17,9 +17,9 @@ const DU_PHONG_EN: TenHien = {
   huong: { "Bắc": "North", "Đông Bắc": "North-East", "Đông": "East", "Đông Nam": "South-East", "Nam": "South", "Tây Nam": "South-West",
     "Tây": "West", "Tây Bắc": "North-West", "Trung cung": "Centre", "Trung tâm": "Middle" },
   quai: { "Khảm": "Kan", "Khôn": "Kun", "Chấn": "Zhen", "Tốn": "Xun", "Càn": "Qian", "Đoài": "Dui", "Cấn": "Gen", "Ly": "Li" },
-  du_nien: { "Sinh Khí": "Sheng Qi (Life Generating)", "Thiên Y": "Tian Yi (Heavenly Doctor)", "Diên Niên": "Yan Nian (Longevity)",
-    "Phục Vị": "Fu Wei (Stability)", "Hoạ Hại": "Huo Hai (Mishaps)", "Lục Sát": "Liu Sha (Six Killings)", "Ngũ Quỷ": "Wu Gui (Five Ghosts)",
-    "Tuyệt Mệnh": "Jue Ming (Total Loss)" },
+  du_nien: { "Sinh Khí": "Sheng Qi (Vitality)", "Thiên Y": "Tian Yi (Health)", "Diên Niên": "Yan Nian (Harmony)",
+    "Phục Vị": "Fu Wei (Stability)", "Hoạ Hại": "Huo Hai (Minor Mishaps)", "Lục Sát": "Liu Sha (Friction)", "Ngũ Quỷ": "Wu Gui (Disputes)",
+    "Tuyệt Mệnh": "Jue Ming (Depletion)" },
   nhom_trach: { "Đông tứ mệnh": "East Group", "Tây tứ mệnh": "West Group", "Đông tứ trạch": "East-group house", "Tây tứ trạch": "West-group house" },
   // 24 sơn (ô chọn toạ sơn Huyền Không liệt kê đủ 24) + 9 sao bay.
   son: { "Nhâm": "Ren (N1)", "Tý": "Zi (N2)", "Quý": "Gui (N3)", "Sửu": "Chou (NE1)", "Cấn": "Gen (NE2)", "Dần": "Yin (NE3)", "Giáp": "Jia (E1)",

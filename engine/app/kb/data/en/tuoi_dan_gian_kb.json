@@ -2,25 +2,25 @@
  "_trang_thai": "bien_tap",
  "_ghi_chu": "EN-ALL GĐ 5 — bản phủ tiếng Anh một phần (tên + nghĩa Kim lâu, Hoang ốc, Tam tai, hạn năm) cho bài đọc Nhà của bạn; phần còn lại làm ở GĐ 8.",
  "kim_lau": {
-  "than": {"ten": "Kim Lau – Self", "nghia": "folk belief says it affects the person building the house or the bride herself"},
-  "the": {"ten": "Kim Lau – Spouse", "nghia": "folk belief says it affects the husband or wife"},
-  "tu": {"ten": "Kim Lau – Children", "nghia": "folk belief says it affects the children"},
-  "luc_suc": {"ten": "Kim Lau – Livestock", "nghia": "folk belief says it affects animals and the family business"}
+  "than": {"ten": "a Golden Tower year for yourself", "nghia": "folk belief says it affects the person building the house or the bride herself"},
+  "the": {"ten": "a Golden Tower year for your spouse", "nghia": "folk belief says it affects the husband or wife"},
+  "tu": {"ten": "a Golden Tower year for your children", "nghia": "folk belief says it affects the children"},
+  "luc_suc": {"ten": "a Golden Tower year for animals and the family business", "nghia": "folk belief says it affects animals and the family business"}
  },
  "hoang_oc": {
-  "nhat_cat": {"ten": "Nhat Cat (First, Fortunate)", "nghia": "a good position, fine for building"},
-  "nhi_nghi": {"ten": "Nhi Nghi (Second, Fitting)", "nghia": "a good position, a settled home"},
-  "tam_dia_sat": {"ten": "Tam Dia Sat (Third, Earth Sha)", "nghia": "folk tradition usually avoids building in this year"},
-  "tu_tan_tai": {"ten": "Tu Tan Tai (Fourth, Gaining Wealth)", "nghia": "a good position, good for business"},
-  "ngu_tho_tu": {"ten": "Ngu Tho Tu (Fifth, Longevity Ends)", "nghia": "folk tradition usually avoids building in this year"},
-  "luc_hoang_oc": {"ten": "Luc Hoang Oc (Sixth, Deserted House)", "nghia": "folk tradition usually avoids building in this year"}
+  "nhat_cat": {"ten": "the “Fortunate” step (1st) of the house-age count", "nghia": "a good position, fine for building"},
+  "nhi_nghi": {"ten": "the “Fitting” step (2nd) of the house-age count", "nghia": "a good position, a settled home"},
+  "tam_dia_sat": {"ten": "the “Earth Harm” step (3rd) of the house-age count", "nghia": "folk tradition usually avoids building in this year"},
+  "tu_tan_tai": {"ten": "the “Gaining Wealth” step (4th) of the house-age count", "nghia": "a good position, good for business"},
+  "ngu_tho_tu": {"ten": "the “Life’s End” step (5th) of the house-age count", "nghia": "folk tradition usually avoids building in this year"},
+  "luc_hoang_oc": {"ten": "the “Deserted House” step (6th) of the house-age count", "nghia": "folk tradition usually avoids building in this year"}
  },
- "tam_tai": {"ten": "Tam Tai (Three Calamities)", "nghia": "three years in a row when folk tradition advises care with big undertakings (building a house, a wedding, a big new venture)"},
+ "tam_tai": {"ten": "Three Calamities", "nghia": "three years in a row when folk tradition advises care with big undertakings (building a house, a wedding, a big new venture)"},
  "han_nam": {
   "thai_tue": {"ten": "Grand Duke (Tai Sui)", "nghia": "the direction of the year — tradition advises against breaking ground or digging big foundations on this side"},
   "tue_pha": {"ten": "Year Breaker (Sui Po)", "nghia": "the direction opposite the Grand Duke — tradition advises avoiding major repairs on this side"},
   "tam_sat": {"ten": "Three Killings (San Sha)", "nghia": "the three mountains opposite the year's triad — tradition advises not sitting with your back to this side and avoiding ground-breaking"},
-  "ngu_hoang": {"ten": "5 Yellow", "nghia": "where star 5 flies to — tradition advises keeping this side quiet, no knocking through"},
-  "nhi_hac": {"ten": "2 Black", "nghia": "where star 2 flies to — tradition advises keeping this side tidy and quiet"}
+  "ngu_hoang": {"ten": "Five Yellow", "nghia": "where star 5 flies to — tradition advises keeping this side quiet, no knocking through"},
+  "nhi_hac": {"ten": "Two Black", "nghia": "where star 2 flies to — tradition advises keeping this side tidy and quiet"}
  }
 }

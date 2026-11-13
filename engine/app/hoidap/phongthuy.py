@@ -58,7 +58,7 @@ def _noi_ds(ds) -> str:
 
 
 def _dn_huong(x: str) -> str:
-    """"Sinh Khí (Đông Nam)" → bản Việt nguyên; bản khác "South-East: Sheng Qi (Life Generating)"."""
+    """"Sinh Khí (Đông Nam)" → bản Việt nguyên; bản khác "South-East: Sheng Qi (Vitality)"."""
     if ngon_ngu.la_viet():
         return x
     hai = _tach_ngoac(x)

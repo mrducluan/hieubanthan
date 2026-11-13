@@ -237,10 +237,10 @@
    "Cấn": {"en": "Gen", "han": "艮", "nghia": "Mountain · North-East"}, "Ly": {"en": "Li", "han": "離", "nghia": "Fire · South"}
   },
   "du_nien": {
-   "Sinh Khí": {"en": "Sheng Qi (Life Generating)", "han": "生氣"}, "Thiên Y": {"en": "Tian Yi (Heavenly Doctor)", "han": "天醫"},
-   "Diên Niên": {"en": "Yan Nian (Longevity)", "han": "延年"}, "Phục Vị": {"en": "Fu Wei (Stability)", "han": "伏位"},
-   "Hoạ Hại": {"en": "Huo Hai (Mishaps)", "han": "禍害"}, "Lục Sát": {"en": "Liu Sha (Six Killings)", "han": "六煞"},
-   "Ngũ Quỷ": {"en": "Wu Gui (Five Ghosts)", "han": "五鬼"}, "Tuyệt Mệnh": {"en": "Jue Ming (Total Loss)", "han": "絕命"}
+   "Sinh Khí": {"en": "Sheng Qi (Vitality)", "han": "生氣"}, "Thiên Y": {"en": "Tian Yi (Health)", "han": "天醫"},
+   "Diên Niên": {"en": "Yan Nian (Harmony)", "han": "延年"}, "Phục Vị": {"en": "Fu Wei (Stability)", "han": "伏位"},
+   "Hoạ Hại": {"en": "Huo Hai (Minor Mishaps)", "han": "禍害"}, "Lục Sát": {"en": "Liu Sha (Friction)", "han": "六煞"},
+   "Ngũ Quỷ": {"en": "Wu Gui (Disputes)", "han": "五鬼"}, "Tuyệt Mệnh": {"en": "Jue Ming (Depletion)", "han": "絕命"}
   },
   "huong": {
    "Bắc": {"en": "North"}, "Đông Bắc": {"en": "North-East"}, "Đông": {"en": "East"}, "Đông Nam": {"en": "South-East"},

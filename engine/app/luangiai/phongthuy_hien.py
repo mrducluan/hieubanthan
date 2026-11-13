@@ -20,6 +20,12 @@ _CAP = {"cửa–chủ": ("pt.ccb.cua_chu", "cửa–chủ"), "cửa–bếp": (
         "chủ–bếp": ("pt.ccb.chu_bep", "chủ–bếp")}
 
 
+def ngay(y: int, mo: int, d: int, nam: bool = True) -> str:
+    """Ngày hiển thị không mơ hồ theo ngôn ngữ ("4 Feb 2026"; không "4/2/2026" — người Mỹ đọc thành 2 tháng 4)."""
+    th = L(f"pt.thang_ten.{mo}", str(mo))
+    return L("pt.ngay", "{d}/{thang}/{y}", d=d, thang=th, y=y) if nam else L("pt.ngay_thang", "{d}/{thang}", d=d, thang=th)
+
+
 def can_chi(s: str) -> str:
     """"Canh Tý" → "Geng Zi" (mỗi chữ là can hoặc chi)."""
     return " ".join(_ten.ten("can", t) if _ten.muc("can", t) else _ten.ten("chi", t) for t in s.split())
@@ -106,7 +112,8 @@ def han_nam(hn: dict) -> dict:
     cc = can_chi(hn["can_chi"])
     m = re.search(r"khoảng 4/2/(\d+)\); Tết Việt năm .+? là (\d+)/(\d+)/(\d+)\.", hn.get("moc", ""))
     if m:
-        hn["moc"] = L("pt.han_nam.moc", hn["moc"], nam=m.group(1), can_chi=cc, d=m.group(2), mo=m.group(3), y=m.group(4))
+        hn["moc"] = L("pt.han_nam.moc", hn["moc"], nam=m.group(1), can_chi=cc, d=m.group(2), mo=m.group(3), y=m.group(4),
+                      ngay=ngay(int(m.group(4)), int(m.group(3)), int(m.group(2))))
     hn["can_chi"] = cc
     return hn
 
