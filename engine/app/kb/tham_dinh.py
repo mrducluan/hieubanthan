@@ -146,6 +146,18 @@ def hang_doi() -> list[dict]:
     return sorted(ds, key=lambda t: _UU_TIEN.index(t["loai"]) if t["loai"] in _UU_TIEN else len(_UU_TIEN))
 
 
+def so_nguyen_van(loai: str, slug: str) -> int:
+    """HD-TD (2026-11-13): số câu NGUYÊN VĂN cổ thư trang đang mang (mọi trường `nguyen_van` có chữ). Trang có câu sách thì
+    người thẩm định chỉ cần so lời Việt với câu ấy (nhanh); trang 0 câu là lời biên tập thuần — cần đọc kỹ hơn."""
+    from app.kb import trang
+
+    def dem(x) -> int:
+        if isinstance(x, dict):
+            return (1 if isinstance(x.get("nguyen_van"), str) and x["nguyen_van"].strip() else 0) + sum(dem(v) for v in x.values())
+        return sum(dem(v) for v in x) if isinstance(x, list) else 0
+    return dem(trang.lay(loai, slug) or {})
+
+
 def hang_doi_gsc(duong_csv) -> list[dict]:
     """Hàng đợi theo số liệu thật: file CSV tab "Trang" xuất từ Search Console (tiếng Việt hay Anh đều được — đọc theo
     vị trí cột: URL, lượt nhấp, lượt hiển thị, CTR, vị trí). Chỉ trang chưa thẩm định, xếp theo lượt hiển thị bị bỏ lỡ
