@@ -15,6 +15,12 @@
 - [ ] **Dương Trạch Tam Yếu (陽宅三要)**: tệp 91 MB là ảnh quét, không có chữ → cần bản có chữ (PDF chữ / Word / txt) hoặc bản dịch Việt gõ chữ.
 - [ ] Case *The Tarot* và Papus: tệp trên 10 MB bị cắt (Case chỉ đọc tới lá 2). Gửi lại bản dưới 10 MB hoặc tách 2–3 phần. (Papus em tự lấy từ archive.org.)
 - [ ] Chưa gửi: Dương Trạch Thập Thư (陽宅十書), Địa Lý Biện Chính bản có chú, Lỗ Ban Kinh (魯班經); chương Introduction của Mathers 1888.
+- Link bản đầy đủ em dò được (2026-11-13; bản in gốc trên archive.org là **ảnh quét**, chữ nhận dạng tự động không đọc được → vẫn cần bản gõ chữ):
+  Dương Trạch Tam Yếu `archive.org/details/20260507_20260507_0914` · Bát Trạch Minh Kính `archive.org/details/20260507_20260507_0702` ·
+  Lỗ Ban Kinh `archive.org/details/20260605_20260605_0605` · Địa Lý Biện Chính Trực Giải `archive.org/details/20260509_20260509_0115` ·
+  Thẩm thị (bản in lại 2009, chỉ cho mượn đọc) `archive.org/details/zengguangshenshi0000shen` · Papus 1896 `archive.org/details/tarotofbohemians00papu_0` ·
+  Wirth 1927 `archive.org/details/wirth-o.-1860-1943.-tarot-des-imagiers-du-moyen-age-1927.` · Case 1947 (mượn đọc) `archive.org/details/tarotkeytowisdom0000paul`.
+  Chưa tìm thấy: Dương Trạch Thập Thư, chương Introduction của Mathers 1888.
 - [ ] (Quyết định) 6 đề xuất ở mục 5 của tài liệu: hiện "Sách xưa nói gì" trong báo cáo nhà · sửa nhãn nguồn Thanh Long – Bạch Hổ ·
   nối lớp "đa số" vào bài đọc Tarot · thành môn quyết · thước Lỗ Ban · sổ đối chiếu cho mọi KB.
 
