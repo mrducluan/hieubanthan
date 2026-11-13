@@ -54,14 +54,26 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
     setDoLa(String(doToaGoiY));
   }, [doToaGoiY]);
   // KC-2: hồ sơ nhà trên máy → năm xây + độ toạ (= hướng + 180°) điền sẵn một lần.
+  // Theo dõi cả khi hồ sơ nhà có thêm năm xây / hướng SAU lần tải đầu (vừa đo hướng, vừa nhập năm ở "Nhà của bạn"): ô còn
+  // giá trị mặc định hoặc giá trị lần điền tự động trước thì điền lại; người dùng đã gõ tay thì giữ tay.
   const nhaLuu = useHoSoNha();
-  const daDien = useRef(false);
+  const tuDien = useRef<{ nam: string | null; doLa: string | null }>({ nam: null, doLa: null });
+  const hienTai = useRef({ namXay, doLa });
+  useEffect(() => { hienTai.current = { namXay, doLa }; });
+  const namLuu = nhaLuu?.nam_xay ? String(nhaLuu.nam_xay) : null;
+  const doLuu = nhaLuu?.huong_do != null ? String(Math.round(((nhaLuu.huong_do + 180) % 360) * 10) / 10) : null;
   useEffect(() => {
-    if (!nhaLuu || daDien.current) return;
-    daDien.current = true;
-    if (nhaLuu.nam_xay) setNamXay(String(nhaLuu.nam_xay));
-    if (nhaLuu.huong_do != null && doToaGoiY == null) { setCach("do"); setDoLa(String(Math.round(((nhaLuu.huong_do + 180) % 360) * 10) / 10)); }
-  }, [nhaLuu, doToaGoiY]);
+    if (!namLuu) return;
+    const cu = hienTai.current.namXay;
+    if (cu === "2024" || cu === tuDien.current.nam) setNamXay(namLuu);
+    tuDien.current.nam = namLuu;
+  }, [namLuu]);
+  useEffect(() => {
+    if (doLuu == null || doToaGoiY != null) return;
+    const cu = hienTai.current.doLa;
+    if (cu === "" || cu === tuDien.current.doLa) { setCach("do"); setDoLa(doLuu); }
+    tuDien.current.doLa = doLuu;
+  }, [doLuu, doToaGoiY]);
   const [kiem, setKiem] = useState(false);
   const [ban, setBan] = useState<Ban | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
