@@ -375,7 +375,7 @@ async function TrangKienThucEn({ cd, t, duong, ma }: { cd: (typeof CHU_DE)[strin
             <p>{loiMoi ?? <LoiMoiChung c={c} />}</p>
             <p className="mt-2 text-sm">{c("bai.tat_ca")} <Link href={duongCum} className="text-gold underline underline-offset-2 hover:text-fg">{tenCum}</Link></p>
           </div>
-          <Button asChild><Link href={congCu}>{cd.mang === "/bat-tu" ? c("moi.nut_bat_tu") : cd.mang === "/tu-vi" ? c("moi.nut_tu_vi") : c("moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
+          <Button asChild><Link href={congCu}>{cd.mang === "/bat-tu" ? c("moi.nut_bat_tu") : cd.mang === "/tu-vi" ? c("moi.nut_tu_vi") : cd.mang === "/phong-thuy" ? c("moi.nut_phong_thuy") : c("moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
         </aside>
       )}
 

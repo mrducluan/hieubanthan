@@ -290,17 +290,17 @@ function HinhMenh({ hanh, nap_am, han, can_chi, c, ten }: { hanh: string; nap_am
 // Engine trả nhóm dấu hiệu (ngoại cảnh / hình nhà / trong nhà), tên phòng hay gặp, cờ "xử lý trước" / "dấu hiệu tốt".
 // Nền giấy sáng (Khung `sang`) → màu viết thẳng mã hex tối, không dùng token giao diện tối.
 const GIAY = { muc: "#2a2540", mo: "#7a7290", vang: "#b8892b", ngoc: "#2f8f74", son: "#c0533a", nen: "#f6f0e2", phong: "#fbe9c0" };
-function HinhDauHieu({ nhom, phong, veto, tot, ten }: { nhom: string; phong: string[]; veto: boolean; tot: boolean; ten: string }) {
+function HinhDauHieu({ nhom, phong, veto, tot, ten, c }: { nhom: string; phong: string[]; veto: boolean; tot: boolean; ten: string; c: Chu }) {
   const vien = tot ? GIAY.ngoc : veto ? GIAY.vang : GIAY.muc;
   // Nhà chữ L: khuyết góc trên phải; còn lại hình chữ nhật. Cửa luôn ở cạnh dưới (mặt trước).
   const nha = nhom === "hinh_nha" ? "M70,50 H190 V110 H250 V190 H70 Z" : "M70,50 H250 V190 H70 Z";
   const yPhong = nhom === "hinh_nha" ? 128 : 100;
   return (
-    <Khung sang nhan={`${ten} — ${tot ? "dấu hiệu tốt" : veto ? "nên xử lý trước" : "dấu hiệu cần để ý"}${phong.length ? `, hay gặp ở ${phong.join(", ").toLowerCase()}` : ""}`}>
+    <Khung sang nhan={`${ten} — ${tot ? c("mh.dh_tot") : veto ? c("mh.dh_veto") : c("mh.dh_de_y")}${phong.length ? c("mh.dh_hay_gap", { ds: phong.join(", ").toLowerCase() }) : ""}`}>
       {nhom === "hinh_nha" && <path d="M190,50 H250 V110 H190 Z" fill="none" stroke={GIAY.son} strokeOpacity={0.6} strokeWidth={1.2} strokeDasharray="3 4" />}
       <path d={nha} fill="#ffffff" fillOpacity={0.7} stroke={vien} strokeWidth={2} />
       <line x1={140} y1={190} x2={180} y2={190} stroke={GIAY.nen} strokeWidth={5} />
-      <text x={160} y={204} textAnchor="middle" fill={GIAY.mo} fontSize={8}>cửa chính</text>
+      <text x={160} y={204} textAnchor="middle" fill={GIAY.mo} fontSize={8}>{c("mh.dh_cua")}</text>
       {nhom === "ngoai_canh" && <>
         <path d="M160,236 V214" stroke={GIAY.son} strokeOpacity={0.7} strokeWidth={10} strokeLinecap="round" />
         <path d="M60,40 Q40,120 60,200 M260,40 Q280,120 260,200" fill="none" stroke={GIAY.ngoc} strokeOpacity={0.5} strokeWidth={1.2} strokeDasharray="2 5" />
@@ -320,7 +320,7 @@ function HinhDauHieu({ nhom, phong, veto, tot, ten }: { nhom: string; phong: str
           </g>
         );
       })}
-      {(veto || tot) && <text x={160} y={38} textAnchor="middle" fill={tot ? GIAY.ngoc : GIAY.vang} fontSize={10} fontWeight={600}>{tot ? "✓ dấu hiệu tốt" : "! nên xử lý trước"}</text>}
+      {(veto || tot) && <text x={160} y={38} textAnchor="middle" fill={tot ? GIAY.ngoc : GIAY.vang} fontSize={10} fontWeight={600}>{tot ? c("mh.dh_tot_nho") : c("mh.dh_veto_nho")}</text>}
     </Khung>
   );
 }
@@ -358,7 +358,7 @@ export function MinhHoa({ mh, duong, gon = false, en = false, ten = MA }: { mh?:
       case "menh": return <HinhMenh {...mh} c={c} ten={ten} />;
       case "thap_than": return <HinhThapThan {...mh} c={c} />;
       case "nhat_chu": return <HinhNhatChu {...mh} c={c} ten={ten} />;
-      case "dau_hieu": return <HinhDauHieu {...mh} />;
+      case "dau_hieu": return <HinhDauHieu {...mh} c={c} />;
       case "bo_vi": return <HinhBoVi {...mh} />;
       case "la_bai": return <HinhLaBai {...mh} />;
       default: return null;

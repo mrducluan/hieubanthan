@@ -192,9 +192,9 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
   /** Dán toạ độ vừa chép (Google Maps trên máy tính: chuột phải → bấm dòng số đầu tiên là đã chép). */
   const dan = async (o: "tam" | "truoc") => {
     try {
-      const t = (await navigator.clipboard.readText()).slice(0, 300);
-      if (!docToaDo(t)) { setLoi(t("dh.loi_dan_khong")); return; }
-      (o === "tam" ? setTam : setTruoc)(t); setSaiSo((s) => ({ ...s, [o]: null })); setLoi(null);
+      const chep = (await navigator.clipboard.readText()).slice(0, 300);
+      if (!docToaDo(chep)) { setLoi(t("dh.loi_dan_khong")); return; }
+      (o === "tam" ? setTam : setTruoc)(chep); setSaiSo((s) => ({ ...s, [o]: null })); setLoi(null);
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "ban_do_dan", diem: o });
     } catch { setLoi(t("dh.loi_dan")); }
   };

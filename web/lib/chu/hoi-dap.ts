@@ -42,4 +42,7 @@ export const CHU_HOI_DAP = {
   "tq.xem_tren": { nhom: K, nhan: "Bàn 12 cung — nút xem trên lá số", mac_dinh: "Xem trên lá số", en: "See it on the chart" },
   "tq.aria_cung": { nhom: K, nhan: "Bàn 12 cung — tên ô ({cung}, {sao})", mac_dinh: "Cung {cung}{sao}", en: "{cung}{sao}" },
   "tq.doc_ky": { nhom: K, nhan: "Khối hình minh hoạ — link đọc kỹ ({nhan})", mac_dinh: "Đọc kỹ: {nhan} →", en: "Read more: {nhan} →" },
+  "tq.lb_title": { nhom: K, nhan: "La bàn 8 hướng — tên hình", mac_dinh: "La bàn tám hướng, hướng hợp được tô sáng", en: "Eight-direction compass, with your good directions highlighted" },
+  "tq.lb_nha": { nhom: K, nhan: "La bàn 8 hướng — chữ giữa", mac_dinh: "Nhà", en: "Home" },
+  "tq.lb_it_hop": { nhom: K, nhan: "La bàn 8 hướng — hướng ít hợp", mac_dinh: "ít hợp", en: "less suitable" },
 } as const satisfies BangChu;

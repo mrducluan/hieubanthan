@@ -98,7 +98,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
   const [dang, setDang] = useState(false);
   const [loaiNha, setLoaiNha] = useState("");
   const gocNhin = useGocNhin();
-  const { c: t, en, huong } = useChuPT();
+  const { c: t, en, huong: tenHuong } = useChuPT();
   // Q2: mặt bằng vẽ tay (tuỳ chọn) — ô tô + ô đại diện phòng + ô ban công; chỉ gửi khi có ≥ 2 ô tô.
   const [veMb, setVeMb] = useState(false);
   const [luoi, setLuoi] = useState<boolean[][]>(LUOI_TRONG);
@@ -244,8 +244,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     <section className="glass rounded-2xl p-5" aria-labelledby="khao-sat-nha" data-testid="khao-sat-nha">
       <h2 id="khao-sat-nha" className="flex items-center gap-2 text-xl"><Home className="size-5 text-gold" aria-hidden /> {t("ks.tieu_de")}</h2>
       <p className="mt-1 text-sm text-fg-muted">
-        {en ? t("ks.mo_ta") : <>Khai bố cục nhà như khi thầy phong thuỷ đến xem: phòng nằm ở phương nào (nhìn từ giữa nhà), có những dấu hiệu gì.
-        Có thể chọn vài ảnh góc nhà để máy gợi ý dấu hiệu (thử nghiệm) — bạn xác nhận rồi hệ thống mới luận. Ảnh không được lưu.</>}
+        {t("ks.mo_ta")}
       </p>
 
       <div className="mt-4 grid gap-5 lg:grid-cols-2">
@@ -259,7 +258,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
               <select aria-label={t("ks.huong_aria")} value={huong} onChange={(e) => setHuong(e.target.value)} disabled={doNha.trim() !== ""}
                 className="h-10 rounded-full border border-line bg-surface/60 px-3 text-sm disabled:opacity-50">
                 <option value="">{t("ks.chon_huong")}</option>
-                {HUONG8.map((h) => <option key={h} value={h}>{huong(h)}</option>)}
+                {HUONG8.map((h) => <option key={h} value={h}>{tenHuong(h)}</option>)}
               </select>
               <select aria-label={t("ks.loai_aria")} value={loaiNha} onChange={(e) => setLoaiNha(e.target.value)}
                 className="h-10 rounded-full border border-line bg-surface/60 px-3 text-sm">
@@ -335,7 +334,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
               {Object.entries(dm?.phong ?? {}).map(([ma, ten]) => (
                 <button key={ma} type="button" role="radio" aria-checked={phongChon === ma} onClick={() => setPhongChon(ma)}
                   className={cn("min-h-9 rounded-full border px-3 py-1.5 text-xs transition-colors", phongChon === ma ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>
-                  {ten}{viTri[ma] ? ` · ${huong(viTri[ma])}` : ""}
+                  {ten}{viTri[ma] ? ` · ${tenHuong(viTri[ma])}` : ""}
                 </button>
               ))}
             </div>
@@ -343,10 +342,10 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
               {LUOI.map((c) => {
                 const o = Object.entries(viTri).filter(([, v]) => v === c).map(([k]) => dm?.phong[k] ?? k);
                 return (
-                  <button key={c} type="button" onClick={() => dat(c)} aria-label={t("ks.dat_aria", { phong: dm?.phong[phongChon] ?? "", cung: huong(c) })}
+                  <button key={c} type="button" onClick={() => dat(c)} aria-label={t("ks.dat_aria", { phong: dm?.phong[phongChon] ?? "", cung: tenHuong(c) })}
                     className={cn("flex aspect-square flex-col items-center justify-center rounded-lg border p-1 text-center",
                       c === "Trung cung" ? "border-line/60 bg-surface-2/40" : "border-line/70 bg-bg/30", o.length > 0 && "border-gold/70 bg-gold/10")}>
-                    <span className="text-[10px] uppercase tracking-wide text-fg-faint">{huong(c)}</span>
+                    <span className="text-[10px] uppercase tracking-wide text-fg-faint">{tenHuong(c)}</span>
                     {o.map((t) => <span key={t} className="text-[11px] leading-tight text-fg">{t}</span>)}
                   </button>
                 );
@@ -411,35 +410,37 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
 function KetQuaBoCuc({ kq }: { kq: KetQua }) {
   const d = kq.da_tinh;
   const giai = Object.fromEntries(kq.dien_giai.vi_tri.map((x) => [x.phong, x]));
+  const { c: t, en, huong, quai, nhom, duNien } = useChuPT();
+  const duong = useDuong();
   return (
     <div className="mt-6 space-y-5" data-testid="ket-qua-bo-cuc">
       <div>
-        <p className="eyebrow">Đã tính</p>
+        <p className="eyebrow">{t("ks.da_tinh")}</p>
         <p className="mt-1 text-sm">
-          {d.trach ? <>Nhà hướng <b>{d.huong_nha}</b>, toạ {d.trach.toa} → <b className="text-gold">{d.trach.quai} trạch</b> ({d.trach.nhom}). </> : "Chưa có hướng nhà. "}
-          {d.menh_quai && <>Gia chủ mệnh <b className="text-gold">{d.menh_quai.quai}</b> ({d.menh_quai.nhom}){d.cung_nhom != null && <> — {d.cung_nhom ? "cùng nhóm với nhà" : "khác nhóm với nhà"}</>}.</>}
+          {d.trach ? <>{t("ks.nha_huong")}<b>{huong(d.huong_nha)}</b>{t("ks.toa", { toa: huong(d.trach.toa) })}<b className="text-gold">{t("ks.trach", { quai: quai(d.trach.quai) })}</b> ({nhom(d.trach.nhom)}). </> : t("ks.chua_huong")}
+          {d.menh_quai && <>{t("ks.gia_chu")}<b className="text-gold">{quai(d.menh_quai.quai)}</b> ({nhom(d.menh_quai.nhom)}){d.cung_nhom != null && <> — {d.cung_nhom ? t("ks.cung_nhom") : t("ks.khac_nhom")}</>}.</>}
         </p>
         {d.vi_tri.length > 0 && (
-          <SoDoNha className="mt-3" tieuDe="Sơ đồ phòng theo phương" huongNha={d.huong_nha}
+          <SoDoNha className="mt-3" tieuDe={t("ks.so_do_td")} huongNha={d.huong_nha}
             duNien={Object.fromEntries(d.vi_tri.map((x) => [x.cung, x.du_nien_menh ?? x.du_nien_trach]))}
             phong={d.vi_tri.map((x) => ({ cung: x.cung, ten: x.ten, muc: x.hop == null ? null : x.hop ? "thuan" : "can_chu_dong" }))} />
         )}
         {d.vi_tri.length > 0 && (
-          <ChanQr className="max-w-sm" nhan="Quét để khảo sát nhà của bạn" />
+          <ChanQr className="max-w-sm" nhan={t("ks.qr")} />
         )}
         {d.vi_tri.length > 0 && (
           <div className="-mx-1 mt-2 overflow-x-auto">
             <table className="w-full min-w-[30rem] text-left text-sm">
-              <thead><tr className="border-b border-line text-fg"><th className="py-1.5 pr-2">Phòng</th><th className="pr-2">Phương</th><th className="pr-2">Du niên ({d.menh_quai ? "theo mệnh" : "theo trạch"})</th><th className="pr-2">Nên</th><th>Đánh giá</th></tr></thead>
+              <thead><tr className="border-b border-line text-fg"><th className="py-1.5 pr-2">{t("ks.cot_phong")}</th><th className="pr-2">{t("ks.cot_phuong")}</th><th className="pr-2">{t("ks.cot_du_nien", { theo: d.menh_quai ? t("ks.theo_menh") : t("ks.theo_trach") })}</th><th className="pr-2">{t("ks.cot_nen")}</th><th>{t("ks.cot_danh_gia")}</th></tr></thead>
               <tbody>
                 {d.vi_tri.map((x) => (
                   <tr key={x.phong} className="border-b border-line/50">
-                    <td className="py-1.5 pr-2">{x.ten}</td><td className="pr-2">{x.cung}</td>
-                    <td className="pr-2">{x.du_nien_menh ?? x.du_nien_trach ?? "—"}</td>
-                    <td className="pr-2 text-fg-muted">{x.nen === "cat" ? "phương tốt" : "phương xấu"}</td>
+                    <td className="py-1.5 pr-2">{x.ten}</td><td className="pr-2">{huong(x.cung)}</td>
+                    <td className="pr-2">{duNien(x.du_nien_menh ?? x.du_nien_trach) || "—"}</td>
+                    <td className="pr-2 text-fg-muted">{x.nen === "cat" ? t("ks.phuong_tot") : t("ks.phuong_xau")}</td>
                     <td>{x.hop == null ? <span className="text-fg-faint">—</span> : x.hop
-                      ? <span className="inline-flex items-center gap-1 text-jade"><Check className="size-3.5" aria-hidden />hợp</span>
-                      : <span className="inline-flex items-center gap-1 text-cinnabar"><X className="size-3.5" aria-hidden />chưa hợp</span>}</td>
+                      ? <span className="inline-flex items-center gap-1 text-jade"><Check className="size-3.5" aria-hidden />{t("ks.hop")}</span>
+                      : <span className="inline-flex items-center gap-1 text-cinnabar"><X className="size-3.5" aria-hidden />{t("ks.chua_hop")}</span>}</td>
                   </tr>
                 ))}
               </tbody>
@@ -448,56 +449,56 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
         )}
         {d.huong.length > 0 && (
           <ul className="mt-2 space-y-1 text-sm">
-            {d.huong.map((h) => <li key={h.doi_tuong}>{kq.dien_giai.huong.find((x) => x.doi_tuong === h.doi_tuong)?.tieu_de}: {h.huong} ({h.do}°) — <b className={h.cat ? "text-jade" : "text-cinnabar"}>{h.du_nien ?? "—"}</b></li>)}
+            {d.huong.map((h) => <li key={h.doi_tuong}>{kq.dien_giai.huong.find((x) => x.doi_tuong === h.doi_tuong)?.tieu_de}: {huong(h.huong)} ({h.do}°) — <b className={h.cat ? "text-jade" : "text-cinnabar"}>{duNien(h.du_nien) || "—"}</b></li>)}
           </ul>
         )}
         {d.cua_chu_bep && d.cua_chu_bep.cap.length > 0 && (
-          <p className="mt-2 text-sm text-fg-muted">Cửa – chủ – bếp (Dương Trạch Tam Yếu): {d.cua_chu_bep.cap.map((c) => `${c.cap} ${c.du_nien}`).join(" · ")}{d.cua_chu_bep.cung_nhom ? " — cùng một nhóm." : " — không cùng nhóm."}</p>
+          <p className="mt-2 text-sm text-fg-muted">{t("ks.cua_chu_bep", { ds: d.cua_chu_bep.cap.map((c) => `${c.cap} ${duNien(c.du_nien)}`).join(" · ") })}{d.cua_chu_bep.cung_nhom ? t("ks.cung_mot_nhom") : t("ks.khong_cung_nhom")}</p>
         )}
       </div>
 
       <div>
-        <p className="eyebrow">Diễn giải</p>
+        <p className="eyebrow">{t("ks.dien_giai")}</p>
         <ul className="mt-2 space-y-2">
           {d.vi_tri.filter((x) => x.hop === false).map((x) => (
             <li key={x.phong} className="rounded-xl border border-cinnabar/30 bg-cinnabar/5 px-4 py-2.5 text-sm">
-              <b className="text-fg">{giai[x.phong]?.tieu_de} ở phương {x.du_nien_menh ?? x.du_nien_trach}</b>: {giai[x.phong]?.noi_dung} <span className="text-fg-faint">Thực tế: {giai[x.phong]?.thuc_te}</span>
+              <b className="text-fg">{t("ks.o_phuong", { tieu_de: giai[x.phong]?.tieu_de ?? "", x: duNien(x.du_nien_menh ?? x.du_nien_trach) })}</b>: {giai[x.phong]?.noi_dung} <span className="text-fg-faint">{t("ks.thuc_te", { x: giai[x.phong]?.thuc_te ?? "" })}</span>
             </li>
           ))}
           {kq.dien_giai.dau_hieu.map((x) => (
             <li key={x.ma} className={cn("rounded-xl border px-4 py-2.5 text-sm", x.tot ? "border-jade/30 bg-jade/5" : x.veto ? "border-moon/40 bg-moon/[0.06]" : "border-line/70 bg-bg/30")} data-testid={`dau-hieu-${x.ma}`}>
-              <b className="text-fg">{x.tieu_de}</b> <span className="text-xs text-fg-faint">({NGUON[x.nguon] ?? x.nguon}{x.tu_mat_bang ? " · suy từ mặt bằng" : ""})</span>
-              {x.veto && <span className="ml-2 rounded-full border border-moon/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-moon" data-testid="dau-hieu-veto">Xử lý trước</span>}
+              <b className="text-fg">{x.tieu_de}</b> <span className="text-xs text-fg-faint">({NGUON.has(x.nguon) ? t(`ks.nguon.${x.nguon}`) : x.nguon}{x.tu_mat_bang ? t("ks.suy_mat_bang") : ""})</span>
+              {x.veto && <span className="ml-2 rounded-full border border-moon/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-moon" data-testid="dau-hieu-veto">{t("ks.xu_ly_truoc")}</span>}
               : {x.noi_dung}
-              {x.giai_thich && <span className="block text-xs text-fg-faint">{kq.goc_nhin === "doi_song" ? "Sách xưa" : "Đời sống"}: {kq.goc_nhin === "doi_song" ? x.giai_thich.sach_xua : x.giai_thich.doi_song}</span>}
+              {x.giai_thich && <span className="block text-xs text-fg-faint">{kq.goc_nhin === "doi_song" ? t("ks.sach_xua") : t("ks.doi_song")}: {kq.goc_nhin === "doi_song" ? x.giai_thich.sach_xua : x.giai_thich.doi_song}</span>}
               {x.viec?.length ? (
                 <ul className="mt-1.5 space-y-0.5" data-testid="dau-hieu-viec">
-                  {x.viec.map((v) => <li key={v.lam} className="flex gap-2"><span className="shrink-0 rounded-full border border-line px-2 text-[0.65rem] font-semibold uppercase tracking-wide text-fg-faint">{TEN_CHI_PHI[v.chi_phi]}</span><span className="text-fg-muted">{v.lam}</span></li>)}
+                  {x.viec.map((v) => <li key={v.lam} className="flex gap-2"><span className="shrink-0 rounded-full border border-line px-2 text-[0.65rem] font-semibold uppercase tracking-wide text-fg-faint">{t(`ks.cp.${v.chi_phi}`)}</span><span className="text-fg-muted">{v.lam}</span></li>)}
                 </ul>
-              ) : <span className="text-fg-muted"> Gợi ý: {x.goi_y}</span>}
-              {x.trang?.startsWith("/phong-thuy/") && <a href={x.trang} className="mt-1 inline-block text-xs text-gold underline decoration-gold/40 underline-offset-2 hover:decoration-gold">Đọc kỹ về dấu hiệu này</a>}
+              ) : <span className="text-fg-muted">{t("ks.goi_y", { x: x.goi_y })}</span>}
+              {x.trang?.startsWith("/phong-thuy/") && <a href={duong(x.trang)} className="mt-1 inline-block text-xs text-gold underline decoration-gold/40 underline-offset-2 hover:decoration-gold">{t("ks.doc_ky")}</a>}
             </li>
           ))}
           {kq.quy_tac?.map((q) => (
             <li key={q.ma} className="rounded-xl border border-gold/30 bg-gold/5 px-4 py-2.5 text-sm" data-testid={`quy-tac-${q.ma}`}><b className="text-fg">{q.tieu_de}</b>: {q.noi_dung}</li>
           ))}
-          {d.vi_tri.every((x) => x.hop !== false) && kq.dien_giai.dau_hieu.length === 0 && <li className="text-sm text-fg-muted">Chưa thấy điểm nào cần điều chỉnh theo những gì bạn khai.</li>}
+          {d.vi_tri.every((x) => x.hop !== false) && kq.dien_giai.dau_hieu.length === 0 && <li className="text-sm text-fg-muted">{t("ks.chua_thay")}</li>}
         </ul>
       </div>
 
       {kq.mat_bang && (
         <div data-testid="kq-mat-bang">
-          <p className="eyebrow">Mặt bằng</p>
+          <p className="eyebrow">{t("ks.mat_bang")}</p>
           <p className="mt-1 text-sm text-fg-muted">
-            {kq.mat_bang.so_o} ô đã tô, tâm nhà ở ô hàng {kq.mat_bang.tam_o[0]! + 1} cột {kq.mat_bang.tam_o[1]! + 1}{kq.mat_bang.tam_ngoai_nha ? " (rơi ngoài phần đã tô)" : ""}.
-            {kq.mat_bang.khuyet_goc.length ? ` Khuyết góc: ${kq.mat_bang.khuyet_goc.join(", ")}.` : " Không khuyết góc lớn."}
-            {kq.mat_bang.wc_trung_cung ? " Nhà vệ sinh ở vùng giữa nhà." : ""}
-            {kq.mat_bang.cua_thong_ban_cong?.thang_hang ? " Cửa chính nhìn thẳng ra ban công." : ""}
+            {t("ks.mb_tom_tat", { so: String(kq.mat_bang.so_o), r: String(kq.mat_bang.tam_o[0]! + 1), c: String(kq.mat_bang.tam_o[1]! + 1) })}{kq.mat_bang.tam_ngoai_nha ? t("ks.mb_ngoai") : ""}.
+            {kq.mat_bang.khuyet_goc.length ? t("ks.mb_khuyet", { ds: kq.mat_bang.khuyet_goc.map((x) => huong(x)).join(", ") }) : t("ks.mb_khong_khuyet")}
+            {kq.mat_bang.wc_trung_cung ? t("ks.mb_wc") : ""}
+            {kq.mat_bang.cua_thong_ban_cong?.thang_hang ? t("ks.mb_ban_cong") : ""}
           </p>
-          <div className="mt-2 grid w-fit grid-cols-3 gap-0.5" aria-label="Chín ô Cửu cung trên khung nhà">
+          <div className="mt-2 grid w-fit grid-cols-3 gap-0.5" aria-label={t("ks.cuu_cung_aria")}>
             {kq.mat_bang.o_9.map((o) => (
               <div key={`${o.hang}${o.cot}`} className={cn("flex size-16 flex-col items-center justify-center rounded border text-[10px]", o.khuyet ? "border-moon/50 bg-moon/10 text-moon" : "border-line/60 bg-bg/30 text-fg-muted")}>
-                <span>{o.phuong ?? "—"}</span><span className="text-fg-faint">{Math.round(o.ti_le * 100)}%</span>
+                <span>{o.phuong ? huong(o.phuong) : "—"}</span><span className="text-fg-faint">{Math.round(o.ti_le * 100)}%</span>
               </div>
             ))}
           </div>
@@ -506,7 +507,7 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
       )}
 
       <div>
-        <p className="eyebrow">Tự soi</p>
+        <p className="eyebrow">{t("ks.tu_soi")}</p>
         <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-fg-muted">{kq.tu_soi.map((c) => <li key={c}>{c}</li>)}</ul>
       </div>
       <p className="text-xs text-fg-faint">{kq.luu_y}</p>

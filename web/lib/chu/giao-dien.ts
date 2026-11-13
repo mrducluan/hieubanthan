@@ -13,6 +13,12 @@ export const CHU_GIAO_DIEN = {
   "phai.doi": { nhom: P, nhan: "Nút mở để đổi", mac_dinh: "Đổi", en: "Change" },
   "phai.khac_nhau": { nhom: P, nhan: "Nút mở giải thích", mac_dinh: "Khác nhau thế nào?", en: "What is the difference?" },
   "phai.khac_ban": { nhom: P, nhan: "Nhãn \"khác với bạn\" mặc định", mac_dinh: "Khác với bạn", en: "Differs for you" },
+  // EN-ALL GĐ 5: khối "xin thêm dữ liệu" dùng chung (components/huyen-hoc/KhungMang.tsx XinThemDuLieu).
+  "xin.tao": { nhom: P, nhan: "Nút tạo hồ sơ", mac_dinh: "Tạo hồ sơ", en: "Create a profile" },
+  "xin.bo_sung": { nhom: P, nhan: "Tiêu đề bảng bổ sung hồ sơ", mac_dinh: "Bổ sung hồ sơ", en: "Complete your profile" },
+  "xin.mo_ta": { nhom: P, nhan: "Mô tả bảng hồ sơ", mac_dinh: "Lưu trên máy của bạn, dùng chung cho mọi mảng.", en: "Saved on your device and shared across every tool." },
+  "xin.luu_xem": { nhom: P, nhan: "Nút lưu và xem", mac_dinh: "Lưu và xem", en: "Save and show" },
+  "xin.nut": { nhom: P, nhan: "Nút mặc định (thiếu giờ sinh…)", mac_dinh: "Thêm giờ sinh, giới tính, nơi sinh", en: "Add birth time, sex and place of birth" },
 
   // ---------------------------------------------------------------- cuối bài đọc
   "cuoi.gop_y": { nhom: L, nhan: "Tên vùng góp ý cuối bài (trình đọc màn hình)", mac_dinh: "Góp ý bài đọc", en: "Feedback on this reading" },

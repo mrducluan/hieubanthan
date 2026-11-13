@@ -32,6 +32,8 @@ export const CHU_KIEN_THUC = {
   "moi.thap_than": { nhom: M, nhan: "Lời mời — trang thập thần", mac_dinh: "Tứ trụ của bạn có những thập thần nào, đậm hay nhạt? Nhập ngày giờ sinh để lập tứ trụ.", en: "Which of the Ten Gods appear in your own Four Pillars, and are they strong or faint? Enter your birth date and time to set up your chart." },
   "moi.nhat_chu": { nhom: M, nhan: "Lời mời — trang nhật chủ", mac_dinh: "Nhật chủ của bạn là can nào, thân mạnh hay yếu? Nhập ngày giờ sinh để lập tứ trụ.", en: "Which stem is your Day Master, and does your chart run strong or weak? Enter your birth date and time to set up your Four Pillars." },
   "moi.menh_nam": { nhom: M, nhan: "Lời mời — trang mệnh theo năm", mac_dinh: "Ngoài mệnh theo năm sinh, ngũ hành trong tứ trụ của bạn thiếu đủ thế nào? Nhập ngày giờ sinh để xem.", en: "Beyond your birth-year element, how are the five elements balanced in your own Four Pillars? Enter your birth date and time to see." },
+  "moi.dau_hieu": { nhom: M, nhan: "Lời mời — trang dấu hiệu nhà", mac_dinh: "Nhà bạn có dấu hiệu này không, nên xử lý gì trước, việc nào không tốn tiền? Khảo sát nhà miễn phí.", en: "Does your home have this sign, what should you deal with first, and what can you fix for free? Survey your home — it's free." },
+  "moi.nut_phong_thuy": { nhom: M, nhan: "Nút mời — Phong thuỷ", mac_dinh: "Xem nhà của tôi", en: "Check my home" },
   "moi.nut_bat_tu": { nhom: M, nhan: "Nút mời — Bát tự", mac_dinh: "Lập lá số Bát tự của tôi", en: "Set up my BaZi chart" },
   "bai.khi": { nhom: "Bài", nhan: "Trích dẫn cổ thư — nhãn trước điều kiện trên lá số", mac_dinh: "Câu này nói về lá số khi", en: "Applies to charts with" },
   "bai.chu_thich": { nhom: "Bài", nhan: "Trích dẫn cổ thư — nhãn chú thích chữ", mac_dinh: "Chú thích: ", en: "Note: " },
@@ -91,4 +93,12 @@ export const CHU_KIEN_THUC = {
   "mh.sao_cung": { nhom: H, nhan: "Sao ở cung — chú thích hình ({ten}, {han}, {cung})", mac_dinh: "Sao {ten} ({han}) ở cung {cung} — vòng 12 cung Tử vi", en: "{ten} ({han}) in the {cung} — the ring of 12 palaces" },
   "mh.hoa_cung": { nhom: H, nhan: "Hoá ở cung — chú thích hình ({hoa}, {han}, {cung})", mac_dinh: "Hoá {hoa} ({han}) ở cung {cung} — vòng 12 cung Tử vi", en: "Hua {hoa} ({han}) in the {cung} — the ring of 12 palaces" },
   "mh.hoa_nho": { nhom: H, nhan: "Hoá ở cung — chữ nhỏ giữa vòng ({hoa})", mac_dinh: "Hoá {hoa}", en: "Hua {hoa}" },
+  // EN-ALL GĐ 5: hình dấu hiệu nhà (Phong thuỷ).
+  "mh.dh_tot": { nhom: H, nhan: "Dấu hiệu nhà — dấu hiệu tốt", mac_dinh: "dấu hiệu tốt", en: "a good sign" },
+  "mh.dh_veto": { nhom: H, nhan: "Dấu hiệu nhà — nên xử lý trước", mac_dinh: "nên xử lý trước", en: "deal with this first" },
+  "mh.dh_de_y": { nhom: H, nhan: "Dấu hiệu nhà — cần để ý", mac_dinh: "dấu hiệu cần để ý", en: "a sign worth checking" },
+  "mh.dh_hay_gap": { nhom: H, nhan: "Dấu hiệu nhà — hay gặp ở ({ds})", mac_dinh: ", hay gặp ở {ds}", en: ", often found in the {ds}" },
+  "mh.dh_cua": { nhom: H, nhan: "Dấu hiệu nhà — chữ cửa chính", mac_dinh: "cửa chính", en: "front door" },
+  "mh.dh_tot_nho": { nhom: H, nhan: "Dấu hiệu nhà — nhãn trên hình (tốt)", mac_dinh: "✓ dấu hiệu tốt", en: "✓ a good sign" },
+  "mh.dh_veto_nho": { nhom: H, nhan: "Dấu hiệu nhà — nhãn trên hình (xử lý trước)", mac_dinh: "! nên xử lý trước", en: "! deal with this first" },
 } as const satisfies BangChu;

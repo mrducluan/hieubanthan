@@ -56,7 +56,7 @@ export function HanhTrinhNha({ mq, coSinh, sinh = null }: { mq: { quai: string; 
       chi: coHuong ? t("ht.b3_san") : t("ht.b3_can") },
     { ma: "khao_sat", ten: t("ht.b4"), neo: "#khao-sat-nha",
       trang_thai: coKhaoSat ? "xong" : "san_sang",
-      chi: coKhaoSat ? [soPhong ? t("ht.phong", { so: String(soPhong) }) : "", soDau ? t("ht.dau_hieu", { so: String(soDau) }) : "", bc?.mat_bang ? t("ht.mat_bang") : ""].filter(Boolean).join(" · ") : t("ht.b4_can") },
+      chi: coKhaoSat ? [soPhong ? (soPhong === 1 ? t("ht.phong_1") : t("ht.phong", { so: String(soPhong) })) : "", soDau ? (soDau === 1 ? t("ht.dau_hieu_1") : t("ht.dau_hieu", { so: String(soDau) })) : "", bc?.mat_bang ? t("ht.mat_bang") : ""].filter(Boolean).join(" · ") : t("ht.b4_can") },
     { ma: "nam", ten: t("ht.b5"), neo: "#huyen-khong",
       trang_thai: nha?.nam_xay && (nha.toa || nha.huong_do != null) ? "xong" : coHuong ? "san_sang" : "cho",
       chi: nha?.nam_xay ? t("ht.b5_xong", { nam: String(nha.nam_xay) }) : t("ht.b5_can") },

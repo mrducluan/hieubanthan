@@ -55,7 +55,7 @@ export const CHU_PHONG_THUY_UI = {
   "hoi.huong_2": m(P, "Hướng bếp nào hợp với tôi?", "Which direction is best for my stove?"),
   "hoi.huong_3": m(P, "Tôi nên kê bàn làm việc hướng nào?", "Which way should my desk face?"),
   "hoi.nam_1": m(P, "Năm nay tôi làm nhà được không?", "Is this a good year for me to build a house?"),
-  "hoi.nam_2": m(P, "Năm nay sao Ngũ Hoàng ở hướng nào?", "Where is the 5 Yellow star this year?"),
+  "hoi.nam_2": m(P, "Năm nay sao Ngũ Hoàng ở hướng nào?", "Which direction should I avoid renovating this year?"),
   "hoi.bo_tri_1": m(P, "Gương đối diện giường có sao không?", "Is a mirror facing the bed a problem?"),
   "hoi.bo_tri_2": m(P, "Cửa chính đối cửa sau có sao không?", "Is it a problem if the front door lines up with the back door?"),
 
@@ -92,6 +92,8 @@ export const CHU_PHONG_THUY_UI = {
   "ht.b4": m(HT, "Kê gì ở đâu", "What goes where"),
   "ht.phong": m(HT, "{so} phòng", "{so} rooms"),
   "ht.dau_hieu": m(HT, "{so} dấu hiệu", "{so} signs"),
+  "ht.phong_1": m(HT, "1 phòng", "1 room"),
+  "ht.dau_hieu_1": m(HT, "1 dấu hiệu", "1 sign"),
   "ht.mat_bang": m(HT, "mặt bằng", "floor plan"),
   "ht.b4_can": m(HT, "phòng, dấu hiệu, mặt bằng", "rooms, signs, floor plan"),
   "ht.b5": m(HT, "Khi nào sửa", "When to renovate"),
@@ -232,7 +234,7 @@ export const CHU_PHONG_THUY_UI = {
   "dh.xau_ngoac": m(DH, "hướng xấu", "a weaker direction"),
   "dh.nha_cung_nhom": m(DH, "nhà cùng nhóm với mệnh của bạn.", "the home is in the same group as your Kua."),
   "dh.nha_khac_nhom": m(DH, "nhà khác nhóm với mệnh của bạn — Bát trạch gợi ý bù bằng vị trí cửa, bếp, giường theo hướng tốt của bạn.", "the home is in the other group from your Kua — Eight Mansions suggests making up for it by placing the door, stove and bed toward your good directions."),
-  "dh.dung_toa": m(DH, "Dùng toạ {do}° để lập bàn Huyền Không", "Use the {do}° sitting to set up the Flying Star chart"),
+  "dh.dung_toa": m(DH, "Dùng toạ {do}° để lập bàn Huyền Không", "Use {do}° for the Flying Star chart"),
 
   // ---------------------------------------------------------------- cách làm (CachLam.tsx)
   "cl.nut": m(CL, "Cách làm (30 giây)", "How to do it (30 seconds)"),

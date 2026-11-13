@@ -289,11 +289,16 @@ function HaiCot({ k }: { k: Extract<KhoiTrucQuan, { kieu: "hai_cot" }> }) {
 
 const GOC: Record<string, number> = { "Bắc": 0, "Đông Bắc": 45, "Đông": 90, "Đông Nam": 135, "Nam": 180, "Tây Nam": 225, "Tây": 270, "Tây Bắc": 315 };
 const VIET_TAT: Record<string, string> = { "Bắc": "B", "Đông Bắc": "ĐB", "Đông": "Đ", "Đông Nam": "ĐN", "Nam": "N", "Tây Nam": "TN", "Tây": "T", "Tây Bắc": "TB" };
+/** EN-ALL GĐ 5: chữ viết tắt hướng trên la bàn bản Anh (như la bàn thật). */
+const TAT_EN: Record<string, string> = { "Bắc": "N", "Đông Bắc": "NE", "Đông": "E", "Đông Nam": "SE", "Nam": "S", "Tây Nam": "SW", "Tây": "W", "Tây Bắc": "NW" };
 
 function LaBan({ muc }: { muc: Muc[] }) {
   const [chon, setChon] = useChon();
   const id = useId();
   const m = chon === null ? null : muc[chon];
+  const { c, en } = useChuHoiDap();
+  // Mã hướng (Việt) → tên hiển thị: bản Anh "North"…, bản Việt nguyên mã.
+  const tenHuong = (h?: string) => (h ? tenTheo(null, en)("huong", h) : h);
   const R = 92, r = 34, C = 110;
   const diem = (goc: number, ban: number) => {
     const a = ((goc - 90) * Math.PI) / 180;
@@ -307,36 +312,36 @@ function LaBan({ muc }: { muc: Muc[] }) {
     <>
       <div className="flex flex-col items-center gap-3 min-[420px]:flex-row min-[420px]:items-start">
         <svg viewBox="0 0 220 220" className="w-full max-w-[15rem] shrink-0" role="group" aria-labelledby={id}>
-          <title id={id}>La bàn tám hướng, hướng hợp được tô sáng</title>
+          <title id={id}>{c("tq.lb_title")}</title>
           {muc.map((x, i) => {
             const g = GOC[x.huong ?? ""];
             if (g === undefined) return null;
             const hop = x.sac === "hop";
             const [tx, ty] = diem(g, (R + r) / 2);
             return (
-              <g key={x.huong} role="button" tabIndex={0} aria-pressed={chon === i} aria-label={`${x.huong}: ${hop ? x.nhan : "ít hợp"}`}
+              <g key={x.huong} role="button" tabIndex={0} aria-pressed={chon === i} aria-label={`${tenHuong(x.huong)}: ${hop ? x.nhan : c("tq.lb_it_hop")}`}
                 onClick={() => setChon(chon === i ? null : i)}
                 onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setChon(chon === i ? null : i); } }}
                 className="cursor-pointer outline-none [&:focus-visible>path]:stroke-gold">
                 <path d={quat(g)} className={cn(hop ? "fill-jade/35" : "fill-surface", chon === i ? "stroke-gold" : "stroke-bg")} strokeWidth={chon === i ? 2.5 : 2} />
                 <text x={tx} y={ty} textAnchor="middle" dominantBaseline="central"
-                  className={cn("text-[13px] font-semibold", hop ? "fill-fg" : "fill-fg-faint")}>{VIET_TAT[x.huong ?? ""]}</text>
+                  className={cn("text-[13px] font-semibold", hop ? "fill-fg" : "fill-fg-faint")}>{(en ? TAT_EN : VIET_TAT)[x.huong ?? ""]}</text>
               </g>
             );
           })}
           <circle cx={C} cy={C} r={r - 4} className="fill-bg stroke-gold/50" strokeWidth={1} />
-          <text x={C} y={C} textAnchor="middle" dominantBaseline="central" className="fill-gold text-[11px]">Nhà</text>
+          <text x={C} y={C} textAnchor="middle" dominantBaseline="central" className="fill-gold text-[11px]">{c("tq.lb_nha")}</text>
         </svg>
         <ul className="grid w-full grid-cols-2 gap-1.5 text-sm">
           {muc.filter((x) => x.sac === "hop").map((x) => (
             <li key={x.huong} className="rounded-lg border border-jade/40 bg-bg/40 px-2.5 py-1.5">
-              <span className="block font-semibold text-fg">{x.huong}</span>
+              <span className="block font-semibold text-fg">{tenHuong(x.huong)}</span>
               <span className="block text-xs text-jade">{x.nhan}</span>
             </li>
           ))}
         </ul>
       </div>
-      <GiaiThich chu={m?.giai_thich} nhan={m?.huong} />
+      <GiaiThich chu={m?.giai_thich} nhan={tenHuong(m?.huong)} />
     </>
   );
 }

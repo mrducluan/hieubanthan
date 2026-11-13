@@ -21,6 +21,13 @@ const DU_PHONG_EN: TenHien = {
     "Phục Vị": "Fu Wei (Stability)", "Hoạ Hại": "Huo Hai (Mishaps)", "Lục Sát": "Liu Sha (Six Killings)", "Ngũ Quỷ": "Wu Gui (Five Ghosts)",
     "Tuyệt Mệnh": "Jue Ming (Total Loss)" },
   nhom_trach: { "Đông tứ mệnh": "East Group", "Tây tứ mệnh": "West Group", "Đông tứ trạch": "East-group house", "Tây tứ trạch": "West-group house" },
+  // 24 sơn (ô chọn toạ sơn Huyền Không liệt kê đủ 24) + 9 sao bay.
+  son: { "Nhâm": "Ren (N1)", "Tý": "Zi (N2)", "Quý": "Gui (N3)", "Sửu": "Chou (NE1)", "Cấn": "Gen (NE2)", "Dần": "Yin (NE3)", "Giáp": "Jia (E1)",
+    "Mão": "Mao (E2)", "Ất": "Yi (E3)", "Thìn": "Chen (SE1)", "Tốn": "Xun (SE2)", "Tỵ": "Si (SE3)", "Bính": "Bing (S1)", "Ngọ": "Wu (S2)",
+    "Đinh": "Ding (S3)", "Mùi": "Wei (SW1)", "Khôn": "Kun (SW2)", "Thân": "Shen (SW3)", "Canh": "Geng (W1)", "Dậu": "You (W2)", "Tân": "Xin (W3)",
+    "Tuất": "Xu (NW1)", "Càn": "Qian (NW2)", "Hợi": "Hai (NW3)" },
+  sao_bay: { "Nhất Bạch": "1 White", "Nhị Hắc": "2 Black", "Tam Bích": "3 Jade", "Tứ Lục": "4 Green", "Ngũ Hoàng": "5 Yellow", "Lục Bạch": "6 White",
+    "Thất Xích": "7 Red", "Bát Bạch": "8 White", "Cửu Tử": "9 Purple" },
 };
 
 /** Gộp nhiều bảng `ten_hien` (lá số + lưu niên + báo cáo…); bảng sau thắng khi trùng. */

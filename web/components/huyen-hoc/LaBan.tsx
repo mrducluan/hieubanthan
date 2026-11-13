@@ -34,8 +34,8 @@ export function LaBan({ quai, nhom, bang, huongCat }: { quai: string; nhom: stri
         <text x="100" y="111" textAnchor="middle" fontSize="6.5" fill="rgb(var(--fg-muted))">{tn(nhom)}</text>
       </svg>
       <figcaption className="mt-2 flex justify-center gap-4 text-xs text-fg-muted">
-        <span className="flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-jade/40" /> {c("lb.cat")}</span>
-        <span className="flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-cinnabar/30" /> {c("lb.hung")}</span>
+        <span className="flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-jade/40" />{` ${c("lb.cat")}`}</span>
+        <span className="flex items-center gap-1.5"><span className="size-2.5 rounded-sm bg-cinnabar/30" />{` ${c("lb.hung")}`}</span>
       </figcaption>
     </figure>
   );

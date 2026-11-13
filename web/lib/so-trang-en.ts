@@ -73,6 +73,12 @@ export const CUM_EN: Readonly<Record<string, CumEn>> = {
     mo_ta: "Old verses of Zi Wei Dou Shu in the original Chinese with pinyin and a plain-English editorial translation, and what each line means on a real chart.",
     tra_loi: "The rules of Zi Wei Dou Shu were handed down as short verses in classical Chinese. This section gives the original text with pinyin, a plain-English translation by our editorial team, and what each line means when you read a chart. It has {so} page(s).",
   },
+  "/phong-thuy/dau-hieu": {
+    ten: "Home feng shui signs", h1: "Common feng shui signs in the home",
+    tieu_de_seo: "Feng shui home signs: what they mean and what to do · Hieuban",
+    mo_ta: "The home signs feng shui often mentions — a mirror facing the bed, a beam over the bed, doors in a line — what the old books say, and fixes that cost nothing.",
+    tra_loi: "These are {so} signs inside and around a home that feng shui often talks about: a door facing a door, a stove facing the bathroom, stairs in the middle of the house, a bed under a beam, and more. Each page says what the sign is, what the old books and folk tradition say, how it looks through everyday life (light, air, noise, safety), and what you can do about it, starting with fixes that cost nothing.",
+  },
 
 };
 
@@ -151,6 +157,42 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
       tieu_de: "Learn Zi Wei Dou Shu",
       cum: Object.fromEntries(["/tu-vi/la-so-mau", "/tu-vi/chinh-tinh", "/tu-vi/cung", "/tu-vi/sao-o-cung", "/tu-vi/tu-hoa", "/tu-vi/co-thu"]
         .map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
+    },
+  },
+  "/phong-thuy": {
+    ten: "Feng shui",
+    tieu_de_seo: "Free feng shui home reading: Kua number and directions · Hieuban",
+    mo_ta_seo: "Free feng shui home reading: find your Kua number and good directions, take your home's direction with your phone, and see what to place where, room by room.",
+    tra_loi_nhanh: {
+      hoi: "What does this feng shui tool give you?",
+      dap: "From your birth year and sex it finds your Kua number and your four good directions. Take your home's direction with your phone compass, a map or by typing degrees, and you get a plain-English reading: how the home sits with you, what to place in each room, which signs to deal with first, and which months suit repairs. It is free and never sells “cure” objects.",
+      lien_ket: [{ href: "/en/feng-shui/home-signs", ten: "Common home signs" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the feng shui tool",
+      doan: [
+        "This page uses two classical schools of home feng shui. Eight Mansions (Ba Zhai) looks at your Kua number — from your birth year and sex — and the direction your home faces, and sorts the eight directions into four that suit you and four that are weaker. Flying Stars (Xuan Kong) looks at the year a home was built or you moved in and its direction, and shows how the energy of each side changes by year and by month.",
+        "Form comes first: what you can actually see — a road pointing at the door, a beam over the bed, a bathroom in the middle of the house — matters more than any star. If you confirm a major sign, the reading caps the related part at Balanced until you mark it as dealt with. Every suggestion starts with things that cost nothing: moving the bed, turning the desk, changing how a room is used.",
+        "Different books start the year on different dates when working out the Kua number. The default is the Start of Spring (around 4 February); under “Schools and options” you can switch to Lunar New Year and see whether it changes anything for you. The reading is cultural reference for arranging your home more sensibly, not a prediction about health or money.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "What is a Kua number?", dap: "Your Kua number (also called your life trigram) comes from your birth year and sex. It places you in the East or West group and gives you four good directions — Sheng Qi, Tian Yi, Yan Nian and Fu Wei — and four weaker ones. The year is counted from the Start of Spring by default, so if you were born in January or early February, check the Schools and options panel." },
+        { hoi: "How do I find which way my home faces?", dap: "Stand at the front door with your back to the house, hold your phone flat and take the compass reading. In an apartment, measure at the balcony or largest window. If the compass is unreliable, you can pick the centre of the home and a point in front of it on a map, or type the degrees from a real compass." },
+        { hoi: "My home doesn't face one of my good directions. What should I do?", dap: "That is very common, and moving house is not the answer. Eight Mansions suggests making up for it inside: put the head of the bed, your desk and the stove's control side toward your good directions where you can. The reading lists these room by room, starting with changes that cost nothing." },
+        { hoi: "What are Flying Stars, and do I need them?", dap: "Flying Stars works from the year your home was built (or you moved in) and its exact direction. It shows which sides are lively and which are better kept quiet in a given year or month — useful mainly for timing repairs. If you don't know the year, the rest of the reading still works." },
+        { hoi: "Do I need to buy anything to fix bad feng shui?", dap: "No. This page never recommends or sells objects to “cure” anything. Light, fresh air, safe walkways and a layout that suits how you live matter more than direction. Every suggestion starts with what you can do for free." },
+        { hoi: "Is my data stored?", dap: "Your profile and home details stay on your device by default; no account is needed. Birth details and home directions pass through one calculation and are then discarded. Coordinates you paste or pick on a map are only used to work out the angle." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+        { href: "/en/numerology", ten: "Numerology from your name and birth date" },
+      ] },
+    },
+    kien_thuc: {
+      tieu_de: "Learn feng shui",
+      cum: Object.fromEntries(["/phong-thuy/dau-hieu"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
     },
   },
 };
