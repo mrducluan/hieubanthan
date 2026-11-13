@@ -2446,9 +2446,10 @@
    "viec": "Mỗi tuần một lần nói 'tôi chưa chắc' thay vì khẳng định ngay.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Kim hình phương chính.",
+    "nguon": "thai_thanh",
+    "y": "Người hình Kim thì vuông vức, ngay ngắn (Thái Thanh Thần Giám).",
+    "han": "金形方正"
    }
   },
   "mat_dai": {
@@ -2469,9 +2470,10 @@
    "viec": "Khi nghĩ quá 30 phút một việc, đứng dậy đi bộ.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Mộc hình trường sấu.",
+    "nguon": "thai_thanh",
+    "y": "Người hình Mộc thì dài, thanh mảnh (Thái Thanh Thần Giám).",
+    "han": "木形長瘦"
    }
   },
   "mat_tron": {
@@ -2492,9 +2494,10 @@
    "viec": "Trước khi nhận lời, hỏi lại mình 'tôi muốn hay tôi ngại từ chối'.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Thuỷ hình phì nhi viên.",
+    "nguon": "thai_thanh",
+    "y": "Người hình Thuỷ thì đầy mà tròn (Thái Thanh Thần Giám).",
+    "han": "水形肥而圓"
    }
   },
   "mat_hoa": {
@@ -2515,9 +2518,10 @@
    "viec": "Việc lớn chia thành mốc 2 tuần để cái 'ngay' của bạn có chỗ dùng.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Hoả hình xích nhi thượng tiêm.",
+    "nguon": "thai_thanh",
+    "y": "Người hình Hoả thì sắc hồng, phần trên nhọn (Thái Thanh Thần Giám).",
+    "han": "火形赤而上尖"
    }
   },
   "mat_tam_giac_nguoc": {
@@ -2561,9 +2565,10 @@
    "viec": "Mỗi quý thử một cách làm mới cho một việc quen.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Thổ hình trọng nhi hậu.",
+    "nguon": "thai_thanh",
+    "y": "Người hình Thổ thì nặng mà dày (Thái Thanh Thần Giám).",
+    "han": "土形重而厚"
    }
   },
   "sac_sang": {
@@ -2731,9 +2736,10 @@
    "viec": "Ăn đủ đạm, ngủ đủ; mỗi ngày một câu mềm với người bên cạnh.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "bang_giam",
-    "y": null
+    "trich": "Cốt vi quân, nhục vi thần; cốt nhục dục kỳ tương phụ vi quý.",
+    "nguon": "nhan_luan",
+    "y": "Xương là vua, thịt là bề tôi; xương thịt nâng đỡ nhau mới quý (lời chú Nhân Luân Đại Thống Phú).",
+    "han": "骨為君肉為臣骨肉欲其相輔為貴"
    }
   },
   "nhuc_nhao": {
@@ -2755,9 +2761,10 @@
    "viec": "Đi bộ nhanh 30 phút, 4 lần mỗi tuần, trong một tháng.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "bang_giam",
-    "y": null
+    "trich": "Cốt vi quân, nhục vi thần; cốt nhục dục kỳ tương phụ vi quý.",
+    "nguon": "nhan_luan",
+    "y": "Xương là vua, thịt là bề tôi; xương thịt nâng đỡ nhau mới quý (lời chú Nhân Luân Đại Thống Phú).",
+    "han": "骨為君肉為臣骨肉欲其相輔為貴"
    }
   },
   "nep_tran_khong": {
@@ -2801,9 +2808,10 @@
    "viec": "Giữ: khi mệt thì nghỉ mắt thay vì cố nhìn màn hình.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "than_tuong_toan_bien",
-    "y": null
+    "trich": "Hắc bạch phân minh định tri lược.",
+    "nguon": "thai_thanh",
+    "y": "Mắt đen trắng rõ ràng là người có mưu lược (lời chú dẫn Ngọc Quản Chiếu Thần trong Thái Thanh Thần Giám).",
+    "han": "黑白分明定知畧"
    }
   },
   "cham_cot_noi": {
@@ -2824,9 +2832,10 @@
    "viec": "Giãn cơ cổ vai gáy 2 phút mỗi giờ ngồi lâu.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "than_tuong_toan_bien",
-    "y": null
+    "trich": "Não viên thành ngọc chẩm.",
+    "nguon": "thai_thanh",
+    "y": "Sau đầu tròn đầy thành 'ngọc chẩm' (Thái Thanh Thần Giám).",
+    "han": "腦圓成玉枕"
    }
   },
   "cot_vung_cham_day": {
@@ -2946,9 +2955,10 @@
    "viec": "Khi không đồng ý, nói ra ý thay vì im rồi làm theo ý mình.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Ngạch tủng nhi long, bất thụ bần cùng.",
+    "nguon": "thai_thanh",
+    "y": "Trán nhô cao mà đầy thì không chịu cảnh thiếu thốn (Thái Thanh Thần Giám).",
+    "han": "額聳而隆不受貧窮"
    }
   },
   "tran_lom": {
@@ -3417,9 +3427,10 @@
    "viec": "Tin vào nhận xét đầu tiên của mình về một người, rồi kiểm chứng.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Mi trường nhãn tế túc nhân tình.",
+    "nguon": "thai_thanh",
+    "y": "Mày dài, mắt dài nhỏ là người giàu tình cảm (Thái Thanh Thần Giám).",
+    "han": "眉長眼細足人情"
    }
   },
   "mat_tron_to": {
@@ -3606,9 +3617,10 @@
    "viec": "Nhìn một điểm 1 phút mỗi sáng, hai tuần liền.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "bang_giam",
-    "y": null
+    "trich": "Thuấn tức bất định, chiêm thị bất thường, tâm tính bất định chi nhân dã.",
+    "nguon": "nguyet_ba",
+    "y": "Mắt chớp liên hồi, nhìn không yên một chỗ là người tâm tính chưa định (Nguyệt Ba Động Trung Ký).",
+    "han": "瞬息不定瞻視不常心性不定之人也"
    }
   },
   "tam_bach_duoi": {
@@ -3695,9 +3707,10 @@
    "viec": "Ngủ trước 23 giờ hai tuần; khám thận, tiết niệu định kỳ nếu không đổi.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "noi_kinh",
-    "y": null
+    "trich": "Tâm sự ưu lao, thanh như ngưng mặc.",
+    "nguon": "bang_giam",
+    "y": "Lòng lo nghĩ nhọc nhằn thì sắc xanh như mực đọng (Băng Giám, Khí sắc).",
+    "han": "心事憂勞青如凝墨"
    },
    "he": "Thủy"
   },
@@ -3916,9 +3929,10 @@
    "viec": "Nhận vai cầm trịch một việc nhỏ trong nhóm.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Tỵ lương bình chính, chuẩn viên giả quý dã.",
+    "nguon": "nguyet_ba",
+    "y": "Sống mũi ngay phẳng, đầu mũi tròn là nét quý (Nguyệt Ba Động Trung Ký).",
+    "han": "鼻梁平正凖圓者貴也"
    }
   },
   "song_mui_go": {
@@ -4636,9 +4650,10 @@
    "viec": "Giữ bữa ăn đều.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "noi_kinh",
-    "y": null
+    "trich": "Thần dục hồng, bất dục hắc.",
+    "nguon": "ngoc_quan",
+    "y": "Môi nên hồng, không nên thâm (Ngọc Quản Chiếu Thần Cục).",
+    "han": "唇欲紅不欲黒"
    }
   },
   "moi_nhat": {
@@ -4683,9 +4698,10 @@
    "viec": "Giữ ấm, bớt thuốc lá; khám tim mạch nếu môi tím kèm mệt khi leo cầu thang.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "noi_kinh",
-    "y": null
+    "trich": "Thần dục hồng, bất dục hắc.",
+    "nguon": "ngoc_quan",
+    "y": "Môi nên hồng, không nên thâm (Ngọc Quản Chiếu Thần Cục).",
+    "han": "唇欲紅不欲黒"
    },
    "he": "Hỏa"
   },
@@ -4804,9 +4820,10 @@
    "viec": "Nói lời ghi nhận với người giúp việc cho bạn trong tuần này.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Di tai phong mãn.",
+    "nguon": "ngoc_quan",
+    "y": "Cằm và quai hàm đầy đặn — sách xếp vào nét quý (Ngọc Quản Chiếu Thần Cục).",
+    "han": "頤腮豐滿"
    }
   },
   "ham_hep": {
@@ -5237,9 +5254,10 @@
    "viec": "Trả lời thêm hai câu về xương thịt và giọng nói ở phần Khảo sát để dáng mặt theo năm hành rõ hơn.",
    "uu_tien": 2,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": "Ngũ hình xem tổng thể: hình, sắc, thanh, khí cùng xét, không lấy một nét mà định."
+    "trich": "Tương cố tương xứng tắc phúc sinh.",
+    "nguon": "bang_giam",
+    "y": "Các phần trông sang nhau, cân xứng với nhau thì sinh phúc (Băng Giám, Dung mạo).",
+    "han": "相顧相稱則福生"
    }
   },
   "an_duong_vua": {

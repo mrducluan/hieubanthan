@@ -14,12 +14,17 @@ from tests.test_tuvi_cach_cuc import la_gia, ma
 
 MOI = ["dong_luong_dan_than", "liem_tuong_dong_cung", "vu_sat_dong_cung", "tu_vi_co_quan", "hoa_ky_thien_di",
        "liem_sat_duong", "cu_hoa_duong", "linh_xuong_da_vu", "loc_ton_thu_menh", "loc_ton_thu_than",
-       "thien_ma_menh_di", "khoa_quyen_hoi_menh", "co_nguyet_dong_luong_ba"]
+       "thien_ma_menh_di", "khoa_quyen_hoi_menh", "co_nguyet_dong_luong_ba",
+       "phu_bat_cung_chu"]                       # KT-N1 — Toàn Thư 定贵局: 辅弼拱主 紫微守命二星来拱是也，夹之亦然
 
 CA = [
     # (mã, Mệnh, {chi: [sao]}, {sao: hoá}, Thân)
     ("dong_luong_dan_than", "Dần", {"Dần": ["Thiên Đồng", "Thiên Lương"]}, {}, None),
     ("dong_luong_dan_than", "Thân", {"Thân": ["Thiên Đồng", "Thiên Lương"]}, {}, None),
+    ("phu_bat_cung_chu", "Ngọ", {"Ngọ": ["Tử Vi"], "Tuất": ["Tả Phù"], "Dần": ["Hữu Bật"]}, {}, None),   # hai sao tam hợp
+    ("phu_bat_cung_chu", "Ngọ", {"Ngọ": ["Tử Vi"], "Tý": ["Tả Phù", "Hữu Bật"]}, {}, None),              # cùng xung chiếu
+    ("phu_bat_cung_chu", "Ngọ", {"Ngọ": ["Tử Vi"], "Tỵ": ["Tả Phù"], "Mùi": ["Hữu Bật"]}, {}, None),     # giáp Mệnh
+    ("phu_bat_cung_chu", "Ngọ", {"Ngọ": ["Tử Vi", "Tả Phù"], "Tuất": ["Hữu Bật"]}, {}, None),            # một thủ một chiếu
     ("liem_tuong_dong_cung", "Tý", {"Tý": ["Liêm Trinh", "Thiên Tướng"]}, {}, None),
     ("vu_sat_dong_cung", "Mão", {"Mão": ["Vũ Khúc", "Thất Sát"]}, {}, None),
     ("tu_vi_co_quan", "Ngọ", {"Ngọ": ["Tử Vi"]}, {}, None),
@@ -44,6 +49,10 @@ KHONG = [
     ("liem_tuong_dong_cung", "Tý", {"Tý": ["Liêm Trinh"], "Ngọ": ["Thiên Tướng"]}, {}, None),
     ("vu_sat_dong_cung", "Thìn", {"Thìn": ["Vũ Khúc", "Thất Sát"]}, {}, None),
     ("vu_sat_dong_cung", "Mão", {"Mão": ["Vũ Khúc"], "Dậu": ["Thất Sát"]}, {}, None),
+    ("phu_bat_cung_chu", "Ngọ", {"Ngọ": ["Tử Vi", "Tả Phù", "Hữu Bật"]}, {}, None),                  # cùng thủ Mệnh = Quân thần
+    ("phu_bat_cung_chu", "Ngọ", {"Ngọ": ["Tử Vi"], "Tuất": ["Tả Phù"]}, {}, None),                   # mới một sao
+    ("phu_bat_cung_chu", "Ngọ", {"Ngọ": ["Thiên Phủ"], "Tuất": ["Tả Phù"], "Dần": ["Hữu Bật"]}, {}, None),  # không Tử Vi
+    ("phu_bat_cung_chu", "Ngọ", {"Ngọ": ["Tử Vi"], "Tuất": ["Tả Phù"], "Mão": ["Hữu Bật"]}, {}, None),      # Mão ngoài tam phương
     ("tu_vi_co_quan", "Dần", {"Dần": ["Tử Vi", "Thiên Phủ"]}, {}, None),                             # có Thiên Phủ
     ("tu_vi_co_quan", "Ngọ", {"Ngọ": ["Tử Vi"], "Tuất": ["Hữu Bật"]}, {}, None),                     # Hữu Bật tam hợp
     ("tu_vi_co_quan", "Ngọ", {"Ngọ": ["Tử Vi"], "Tý": ["Tả Phù"]}, {}, None),                        # Tả Phù xung chiếu
