@@ -38,6 +38,7 @@
 | `kinhdich_tra_loi.json` | tinh_chat_que | `tang_san_boc_dich.json` | `test_trich_la_nguyen_van_va_kb_du_loi` |  |
 | `kinhdich_truyen_nghia.json` | (cả tệp) | `chu_dich_truyen_nghia.json` | `test_ngo_tat_to_ghep_dung_hao_va_du_do_phu` | bản dịch Ngô Tất Tố ghép theo chữ Hán |
 | `tarot_kb.json` | (cả tệp) | `tarot_waite_1910.json` | `test_moi_trich_la_nguyen_van_cua_nguon` | câu trích khớp Waite / Mathers / Book T; lớp Marseille, Thoth là tóm ý |
+| `tuvi_co_thu.json` | cau | `tu_vi_dau_so_toan_thu.json` | `test_nguyen_van_khop_kho_nguon_toan_thu_tung_chu` | 84 câu Cốt Tuỷ Phú khớp từng chữ (giản ↔ phồn); phiên âm, nghĩa là nháp; chưa so bản khắc 1600 |
 | `tuvi_kb.json` | phu_tinh_cung | `tu_vi_dau_so_toan_thu.json` | `test_phu_tinh_cung_khop_nguyen_van_toan_thu` |  |
 
 ## Toàn bộ sổ
@@ -60,8 +61,9 @@
 | Tử vi | `bo_sung_hoa_cung.json` |  | Ban biên tập soạn |  |
 | Tử vi | `bo_sung_sao.json` |  | Ban biên tập soạn |  |
 | Tử vi | `su_kien_kb.json` |  | Ban biên tập soạn |  |
-| Tử vi | `tuvi_cach_cuc.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
-| Tử vi | `tuvi_co_thu.json` |  | Tóm ý cổ thư, chưa khớp từng câu | có nguyên văn Cốt Tuỷ Phú (đã so chéo hai bản điện tử) nhưng CHƯA nối test với kho nguồn Toàn Thư |
+| Tử vi | `tuvi_cach_cuc.json` |  | Tóm ý cổ thư, chưa khớp từng câu | 6 cách có `sach_ghi` khớp «định phú / quý cục» (test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu); 37 cách có cổ ca trỏ Cốt Tuỷ Phú; 4 cách điều kiện đang khác sách |
+| Tử vi | `tuvi_co_thu.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
+| Tử vi | `tuvi_co_thu.json` | cau | Có nguyên văn đối chiếu | 84 câu Cốt Tuỷ Phú khớp từng chữ (giản ↔ phồn); phiên âm, nghĩa là nháp; chưa so bản khắc 1600 |
 | Tử vi | `tuvi_cung_sao_menh_kb.json` |  | Ban biên tập soạn |  |
 | Tử vi | `tuvi_doi_song_kb.json` |  | Ban biên tập soạn |  |
 | Tử vi | `tuvi_hai_nguoi_kb.json` |  | Tập quán / sách hiện đại tóm ý |  |

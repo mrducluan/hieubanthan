@@ -389,3 +389,26 @@ cao nhất phải chứng minh được bằng máy.
 **Dùng để làm gì tiếp.** Thứ tự nâng mức đề xuất (mỗi việc = nạp nguyên văn + test): (1) `tuvi_co_thu.json` nối test với kho Toàn
 Thư (Cốt Tuỷ Phú đã có nguyên văn); (2) `tuvi_cach_cuc.json` (cổ ca cách cục) ; (3) `nhan_tuong_kb.json` (130 câu trích, chưa có
 kho nguồn Ma Y); (4) `phongthuy_huyen_khong.json` (Thẩm thị); (5) chương 反伏 của Tăng San Bốc Dịch → phản / phục ngâm cấp quẻ.
+
+### 10.11 Tử vi: Cốt Tuỷ Phú và cách cục nối với kho nguồn Toàn Thư (KT-TT7, 2026-11-12)
+
+Việc đầu trong thứ tự nâng mức của mục 10.10.
+
+- **Cốt Tuỷ Phú**: 84 câu phồn thể trong `tuvi_co_thu.json` nay có test so TỪNG CHỮ với bài 斗数骨髓赋 trong kho nguồn Toàn Thư
+  (bản chép giản thể): cùng 84 dòng, 1.522 / 1.522 chữ, chữ khác nhau chỉ được là 151 cặp giản → phồn đã đóng băng
+  (`tests/test_tuvi_co_thu.py::test_nguyen_van_khop_kho_nguon_toan_thu_tung_chu`). Sổ độ tin: phần `cau` lên mức "có nguyên văn đối
+  chiếu" (11 tệp / phần). Vẫn `can_doi_chieu` với bản khắc 1600.
+- **Cách cục**: Toàn Thư quyển 1 có bốn danh sách «định phú cục / quý cục / bần tiện cục / tạp cục» (59 dòng). Chỉ **6 / 75** cách
+  của hệ thống trùng tên và có điều kiện ghi rõ (16 dòng khác ghi "xem chú ở trên", còn lại là cách hệ thống không có). Sáu cách ấy
+  nay có `sach_ghi` (nguyên văn + tóm ý), đi kèm lá số và gói bằng chứng hỏi đáp.
+- **Bốn cách điều kiện đang KHÁC sách — CHƯA sửa, chờ anh quyết** (sửa = đổi kết quả nhận diện cách cục trên lá số):
+
+| Cách | Hệ thống đang dùng | Toàn Thư ghi |
+|---|---|---|
+| Mã đầu đới kiếm | Kình Dương thủ Mệnh tại Ngọ | Thiên Mã đi cùng Kình Dương — "không phải cách ở Ngọ" |
+| Quân thần khánh hội | Tử Vi thủ Mệnh, hội ≥ 3 trong 7 cát tinh | Tử Vi cùng Tả Phù, Hữu Bật thủ Mệnh |
+| Nguyệt sinh thương hải | Thái Âm + Thiên Đồng thủ Mệnh tại Tý | Thái Âm ở Tý và cung ấy là Điền Trạch |
+| Lộc Mã bội ấn | Lộc, Mã, Thiên Tướng hội tam phương Mệnh | Cung ngay trước Thiên Mã có Lộc và Thiên Tướng cùng ở |
+
+  Ghi chú: "Mã đầu đới kiếm" có hai cách hiểu lưu hành; cách đang dùng là cách phổ biến ở sách Việt hiện nay. Em đề xuất: theo sách
+  cho Quân thần khánh hội và Nguyệt sinh thương hải (đang nhận rộng hơn sách), giữ hai cách còn lại và ghi rõ "sách chép khác".

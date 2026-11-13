@@ -187,3 +187,20 @@ def test_phu_tinh_cung_khop_nguyen_van_toan_thu():
             assert m["trich"] in van, (sao, c)
             assert 40 <= len(m["y"]) <= 330 and not any(x in m["y"].lower() for x in cam), (sao, c, m["y"])
     assert tuvi_kb.phu_tinh_cung("Kình Dương", "Tài Bạch")["y"] and tuvi_kb.phu_tinh_cung("Kình Dương", "Phu Thê") is None
+
+
+def test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu():
+    """KT-TT7 — `sach_ghi.han` của cách cục Tử vi là nguyên văn một dòng trong «定富局 / 定贵局» (Toàn Thư quyển 1)."""
+    import json
+    from pathlib import Path
+    goc = Path(__file__).parent.parent
+    nguon = json.loads((goc / "fixtures/nguon/tu_vi_dau_so_toan_thu.json").read_text("utf-8"))
+    van = "\n".join(t["van"] for t in nguon["quyen_1"] if t["thien"] in ("定富局", "定贵局", "定贫贱局", "定杂局"))
+    cach = json.loads((goc / "app/kb/data/tuvi_cach_cuc.json").read_text("utf-8"))["cach"]
+    co = {k: c["sach_ghi"] for k, c in cach.items() if c.get("sach_ghi")}
+    assert len(co) >= 6
+    for k, g in co.items():
+        assert g["han"] in van and g["y"] and "sẽ" not in g["y"], k
+    # ba cách điều kiện hệ thống đang khác sách — ghi cờ, CHƯA đổi phép nhận diện (đổi = đổi kết quả lá số)
+    assert {k for k, g in co.items() if g.get("khac_dieu_kien")} == {
+        "ma_dau_doi_kiem", "quan_than_khanh_hoi", "nguyet_sinh_thuong_hai", "loc_ma_boi_an"}
