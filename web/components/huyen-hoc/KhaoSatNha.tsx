@@ -125,6 +125,13 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
   // UI-PT2 P5: điền lại khi đổi CĂN đang xem (id khác); UI-PT2 A: loại nhà luôn theo hồ sơ nhà (chọn ở Hành trình).
   const daDien = useRef<string | null>(null);
   useEffect(() => { if (nhaLuu?.loai_nha) setLoaiNha(nhaLuu.loai_nha); }, [nhaLuu?.loai_nha]);
+  // Hướng nhà vừa có trong hồ sơ nhà (đo / nhập ở phần trên) sau lần điền đầu → ô hướng còn trống thì điền, không bắt nhập lại.
+  const huongDoLuu = nhaLuu?.huong_do, huongLuu = nhaLuu?.huong;
+  useEffect(() => {
+    if (doHuongGoiY != null) return;
+    if (huongDoLuu != null) setDoNha((c) => (c === "" ? String(huongDoLuu) : c));
+    else if (huongLuu) setHuong((c) => (c === "" ? huongLuu : c));
+  }, [huongDoLuu, huongLuu, doHuongGoiY]);
   useEffect(() => {
     const khoa = nhaLuu ? `${nhaLuu.id ?? "_"}` : null;
     if (!nhaLuu || daDien.current === khoa) return;
