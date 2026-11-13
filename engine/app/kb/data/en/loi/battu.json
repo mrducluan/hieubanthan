@@ -66,5 +66,17 @@
  "battu.doi_chieu.nhan_van": "Age {tu_tuoi}–{den_tuoi}",
  "battu.doi_chieu.nam": "{nam} {can} {chi} ({thap_than})",
  "battu.doi_chieu.van": "Luck Pillar {cung} ({thap_than}), {tu}–{den}",
- "battu.doi_chieu.hanh_thieu": "the element you are short of"
+ "battu.doi_chieu.hanh_thieu": "the element you are short of",
+ "battu.sach_xua.sach.uyen_hai": "Yuan Hai Zi Ping",
+ "battu.sach_xua.sach.ctbg": "Qiong Tong Bao Jian",
+ "battu.sach_xua.sach.tam_menh": "San Ming Tong Hui",
+ "battu.sach_xua.ve.nhat_chu": "Your Day Master is {can}",
+ "battu.sach_xua.ve.dieu_hau": "You were born in the {chi} month, in {mua}",
+ "battu.sach_xua.ve.cach_cuc": "Your chart's structure is built on the {tt}",
+ "battu.sach_xua.ve.than_sat": "Your chart carries the star {sao}",
+ "battu.sach_xua.y.than_sat": "The classic lists this as a helpful star; later readers take it as: {y}.",
+ "battu.sach_xua.mua.xuan": "spring",
+ "battu.sach_xua.mua.ha": "summer",
+ "battu.sach_xua.mua.thu": "autumn",
+ "battu.sach_xua.mua.dong": "winter"
 }

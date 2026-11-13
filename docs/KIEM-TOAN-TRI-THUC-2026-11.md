@@ -501,3 +501,34 @@ Nhóm 2 của đề xuất. Đánh giá trước khi làm: phép tính đã có 
    engine dựa vào (Dương Trạch Tam Yếu, Bát Trạch Minh Kính) không có bản gõ tin được → báo anh, không nạp nguồn lệch môn.
 
 Mức, phép tính không đổi → không tăng `ENGINE_VERSION`. Golden đầu ra bản Việt đổi có chủ đích (Bát tự, hỏi đáp Bát tự, lịch).
+
+### 10.17 "Sách xưa nói gì về lá số của bạn" (SX-1, 2026-11-13)
+
+Việc 7 (nhóm 3). Đánh giá: kho tri thức đã có hơn 300 câu nguyên văn khớp kho nguồn nhưng nằm rải ở "Vì sao nói vậy" và trang
+kiến thức; người lập lá số ít khi thấy. Ba cách: (A) trang riêng `/sach-xua` — thêm một lượt gọi, ít người tới; (B) AI viết lời
+bình từ câu sách — thêm dữ kiện, trái tầng NARRATIVE; **(C, chọn) khối ngay dưới lá số**, engine chỉ CHỌN câu đã có.
+
+- RULES `luangiai/sach_xua.py` (test viết trước): tối đa 5 câu / lá số, mỗi câu `{ve, sach, han, y}`.
+  - Bát tự: bài thể tượng của nhật chủ (Uyên Hải Tử Bình) · câu điều hậu của đúng tháng sinh (Cùng Thông Bảo Giám) · câu về
+    thập thần của cách cục (Uyên Hải) · sao tốt có bảng khớp sách (Tam Mệnh Thông Hội).
+  - Tử vi: cách cục **tốt** đã nhận diện → câu Cốt Tuỷ Phú trỏ đúng cách (kèm phiên âm) hoặc dòng «định cục» của Toàn Thư ·
+    phụ tinh ở sáu cung việc và nếp sống (Toàn Thư quyển 3).
+- Không đưa lên khối này: lời nặng của sách (cách "cần lưu ý", sao hung), cách cục gắn cờ `khac_dieu_kien`, sao có bảng khác
+  sách. Không biết giờ sinh → Tử vi không hiện. Chỉ bản tiếng Việt.
+- Web `SachXuaNoi`: lời Việt trước, nguyên văn chữ Hán gập; hiện ngay cả khi "Lá số chi tiết" còn gập. Đo
+  `chart_interacted{kind=sach_xua_mo, muc}`.
+- Chưa làm: thẻ chia sẻ có QR cho một câu sách (cần mã ký + trang nhận + ảnh) — làm sau khi có số lượt mở.
+
+Không đổi mức / phép tính → không tăng `ENGINE_VERSION`. Golden đầu ra bản Việt đổi có chủ đích (lá số Bát tự, Tử vi).
+
+### 10.18 Hàng đợi thẩm định có số câu sách · cụm "Cổ thư Bát tự" hoãn (2026-11-13)
+
+- **Việc 9 — đã làm (HD-TD)**: `scripts/tham_dinh.py hang-doi [--gsc Trang.csv]` thêm cột "N câu sách" = số câu nguyên văn cổ thư
+  trang đang mang (`tham_dinh.so_nguyen_van`). Trang có câu sách: người duyệt chỉ cần so lời Việt với câu ấy (nhanh). Trang 0 câu:
+  lời biên tập thuần, cần đọc kỹ. Kết hợp với số Search Console thành thứ tự: nhiều hiển thị + có câu sách → duyệt trước.
+- **Việc 8 — cụm "Cổ thư Bát tự" (47 thiên Tử Bình Chân Thuyên): đánh giá xong, CHƯA làm.** Lý do: (1) thêm 47 trang nháp trong
+  khi 656 / 668 trang hiện có còn chờ thẩm định; (2) tóm ý 47 thiên văn ngôn do máy viết, chưa ai rành Tử Bình đọc lại — sai một
+  ý là sai trên trang đứng tên sách; (3) lượng tìm tiếng Việt cho từng thiên rất nhỏ, trang dễ mỏng (kiểm toán AUD). Cách có
+  lợi hơn cho người đọc đã làm ở SX-1: đưa đúng câu sách ứng với lá số của họ. Làm cụm này khi có người đọc soát, bắt đầu bằng
+  8–10 thiên người ta hay hỏi (dụng thần, cách cục thành bại, tài – quan – ấn – thực).
+

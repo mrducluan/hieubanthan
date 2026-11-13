@@ -71,10 +71,11 @@ def main() -> None:
     elif a.lenh == "hang-doi":
         if a.gsc:
             for t in td.hang_doi_gsc(a.gsc)[: a.n]:
-                print(f"{t['hien_thi']:>7} hiển thị {t['nhap']:>5} nhấp  vị trí {t['vi_tri']:>5.1f}  {t['loai']:<12} {t['slug']}")
+                print(f"{t['hien_thi']:>7} hiển thị {t['nhap']:>5} nhấp  vị trí {t['vi_tri']:>5.1f}  "
+                      f"{td.so_nguyen_van(t['loai'], t['slug']):>2} câu sách  {t['loai']:<12} {t['slug']}")
         else:
             for t in td.hang_doi()[: a.n]:
-                print(f"{t['loai']:<12} {t['slug']:<40} {t['tieu_de']}")
+                print(f"{td.so_nguyen_van(t['loai'], t['slug']):>2} câu sách  {t['loai']:<12} {t['slug']:<40} {t['tieu_de']}")
     else:
         ds = trang.danh_sach()
         dem = collections.Counter((t["loai"], t["trang_thai"]) for t in ds)
