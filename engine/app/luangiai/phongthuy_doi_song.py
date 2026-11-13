@@ -164,7 +164,9 @@ def _doan_cap_sao(ch: dict) -> list[str]:
         for ma, vi, a, b in (("pt.ds.cap.tien", "Về tiền bạc, công việc (theo phía cửa): {a} {b}", "tien_bac", "cong_viec"),
                              ("pt.ds.cap.nguoi", "Về người ở trong nhà: {a} {b}", "gia_dao", "suc_khoe")):
             cau = L(ma, vi, a="" if da_noi else lv.get(a, ''), b=lv.get(b, ''))
-            ra.append((cau.replace(":  ", ": ") if da_noi else cau).strip())
+            if da_noi:
+                cau = re.sub(r":  (\w)", lambda m: ": " + m.group(1).upper(), cau)
+            ra.append(cau.strip())
         if lv.get("tam_ly"):
             ra.append(lv["tam_ly"])
     ny = ch.get("nam_chu_y") or {}

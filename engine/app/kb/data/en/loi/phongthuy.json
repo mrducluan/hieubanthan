@@ -81,7 +81,7 @@
  "pt.tl.kl_cuoi": "; for weddings, the Golden Tower rule only looks at the bride's age.",
  "pt.tl.nam_tuoi": "{nam} ({cc_nam}) is the zodiac year of people born {cc_tuoi}: apart from the three main taboos, many families still avoid breaking ground or 'borrow' someone else's age.",
  "pt.tl.xung_tuoi": "{nam} ({cc_nam}) clashes with the {chi} sign of people born {cc_tuoi}: not one of the three main taboos, but some families still avoid it or 'borrow' someone else's age.",
- "pt.tl.cach_tinh": "Lunar age = the year you plan to build − your lunar birth year + 1. Golden Tower (Kim Lau): lunar age divided by 9 leaves 1, 3, 6 or 8. House-age count (Hoang Oc): from age 10 the steps run Fortunate, Fitting, Earth Harm, Gaining Wealth, Life’s End, Deserted House, one step per decade with the years in between counted on; Earth Harm, Life’s End and Deserted House are the steps avoided. Three Calamities (Tam Tai): three years in a row, set by the zodiac triad of your birth year.",
+ "pt.tl.cach_tinh": "Lunar age = the year you plan to build − your lunar birth year + 1. Golden Tower (Kim Lau): lunar age divided by 9 leaves 1, 3, 6 or 8. House-age count (Hoang Oc): from age 10 the steps run Fortunate, Fitting, Earth Harm, Gaining Wealth, Longevity Wanes, Deserted House, one step per decade with the years in between counted on; Earth Harm, Longevity Wanes and Deserted House are the steps avoided. Three Calamities (Tam Tai): three years in a row, set by the zodiac triad of your birth year.",
  "pt.cy.noi": "{noi} side (trigram {quai})",
  "pt.cy.can_cu": "Annual star {n}: {y}",
  "pt.skn.can_cu": "Annual star {n}: star {so} ({ten}) reaches the {noi} side (trigram {quai})",
@@ -171,7 +171,7 @@
  "pt.c3.tt": "{n} rooms entered: {ds}.",
  "pt.c3.tt_0": "No layout entered yet — below are room suggestions for your Kua.",
 
- "pt.c4.cc.nam": "Year {nam} ({cc}), {moc} Directions to keep quiet: {ds}.",
+ "pt.c4.cc.nam": "Year {nam} ({cc}). {moc} Directions to keep quiet: {ds}.",
  "pt.c4.cham_cua": "the door side ({h})",
  "pt.c4.giu_yen.td": "{nam}: keep the door side quiet",
  "pt.c4.giu_yen.nd": "This year {ds} falls on a side the old books advise keeping quiet.",
