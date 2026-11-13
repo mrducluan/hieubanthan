@@ -4,7 +4,7 @@
 RULES, tất định: chỉ CHỌN các câu nguyên văn + tóm ý ĐÃ CÓ trong KB (mỗi câu đã có test khớp kho nguồn cổ thư) ứng với đúng
 dữ kiện đã tính của lá số. Không sinh câu mới, không đổi mức, không phán: chỉ lấy câu trung tính / câu của cách cục tốt và
 sao tốt — lời nặng của sách xưa vẫn ở chỗ cũ (trang kiến thức, "Vì sao nói vậy"), không đưa lên khối nổi bật này.
-Bát tự: cả hai ngôn ngữ (KB đã có bản Anh). Tử vi: chỉ bản tiếng Việt (tóm ý Cốt Tuỷ Phú, phụ tinh chưa dịch).
+Bát tự + Tử vi: cả hai ngôn ngữ (bản Anh: nguyên văn chữ Hán giữ, tóm ý qua bản phủ en/ — bản dịch của ban biên tập).
 """
 from __future__ import annotations
 
@@ -65,27 +65,31 @@ def _cau_phu() -> list[dict]:
 
 def tuvi(cach_cuc: list[dict], cung: list[dict]) -> list[dict]:
     """`cach_cuc` = các cách đã nhận diện (kèm KB), `cung` = 12 cung đầu ra (`ten`, `nghia_sao_nho`)."""
-    if not ngon_ngu.la_viet():
-        return []
     ra: list[dict] = []
     da: set[str] = set()
+
+    def sach(k: str) -> str:
+        return L(f"tuvi.sach_xua.sach.{k}", SACH[k])
     for c in cach_cuc:
         if c.get("nhom") != "cát" or len(ra) >= 3:
             continue
-        ve = f"Lá số của bạn có cách {c['ten']}"
+        ve = L("tuvi.sach_xua.ve.cach_cuc", "Lá số của bạn có cách {ten}", ten=c["ten"])
         cau = next((x for x in _cau_phu() if c["ma"] in x["cach_cuc"] and x["id"] not in da), None)
         sg = c.get("sach_ghi")
         if cau:
             da.add(cau["id"])
-            ra.append(_muc("cach_cuc", ve, "cot_tuy", cau["nguyen_van"], cau["nghia"], ma=c["ma"], phien_am=cau["phien_am"]))
+            ra.append({**_muc("cach_cuc", ve, "cot_tuy", cau["nguyen_van"], cau["nghia"], ma=c["ma"], phien_am=cau["phien_am"]),
+                       "sach": sach("cot_tuy")})
         elif sg and not sg.get("khac_dieu_kien"):
-            ra.append(_muc("cach_cuc", ve, "toan_thu", sg["han"], sg["y"], ma=c["ma"]))
+            ra.append({**_muc("cach_cuc", ve, "toan_thu", sg["han"], sg["y"], ma=c["ma"]), "sach": sach("toan_thu")})
     theo_ten = {k["ten"]: k for k in cung}
     for ten in _CUNG_PHU:
         for sao, m in ((theo_ten.get(ten) or {}).get("nghia_sao_nho") or {}).items():
             if len(ra) >= TOI_DA:
                 return ra
             if m.get("trich") and m.get("do_tin") == "co_thu":
-                ra.append(_muc("phu_tinh", f"Cung {ten} của bạn có sao {sao}", "toan_thu", m["trich"], m["y_nghia"]))
+                ve = L("tuvi.sach_xua.ve.phu_tinh", "Cung {cung} của bạn có sao {sao}", cung=_ten.ten("cung", ten),
+                       sao=_ten.ten("sao", sao))
+                ra.append({**_muc("phu_tinh", ve, "toan_thu", m["trich"], m["y_nghia"]), "sach": sach("toan_thu")})
                 break                                     # mỗi cung một câu
     return ra[:TOI_DA]

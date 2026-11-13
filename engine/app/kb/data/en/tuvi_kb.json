@@ -728,5 +728,485 @@
    "tieu_de": "Reading by month",
    "noi_dung": "The monthly chart looks at which palace serves as the 'Life Palace of the month'. Schools differ on where the first lunar month starts: the most common is Dou Jun (count backwards from the Tai Sui palace of the year to the birth month, then forwards to the birth hour); some schools start from the minor yearly limit, from the palace of the year chart, or from the earthly branch of the month. You choose the school in the 'School' panel. The monthly chart is the thinnest layer of Zi Wei: a month only adds colour to the year and the 10-year period, and cannot predict events."
   }
+ },
+ "sao_nho_nguon": {
+  "tu_vi_dau_so_tan_bien": "Tu Vi Dau So Tan Bien — Van Dang Thai Thu Lang (Tin Duc publishing house, 1956), chapter on star qualities: summarised and rewritten in today's words, not quoted.",
+  "trung_chau_tap_dieu": "Names and placement follow the Zhongzhou school; the classic texts only give the star names, the meanings follow today's common reading (editorial draft)."
+ },
+ "sao_nho_luu_y": "Minor stars only add shading to a palace; the main reading still comes from the major stars, their brightness and the four transformations.",
+ "sao_nho": {
+  "Ân Quang": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of gratitude and kindness: you value loyalty and tend to get help at the right moment; the books count it among the stars that soften hard matters."
+  },
+  "Thiên Quý": {
+   "nhom": "Minor star",
+   "y_nghia": "Paired with En Guang: a mild temper, remembers favours, and often meets someone who helps when needed."
+  },
+  "Long Trì": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of refinement and skilled hands: suits work that needs an eye for beauty; the books link it to happy news about weddings and a well-kept home."
+  },
+  "Phụng Các": {
+   "nhom": "Minor star",
+   "y_nghia": "Paired with Long Chi: elegance and talent; when both stars are present, happy occasions come more easily."
+  },
+  "Tam Thai": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of composure: likes order and stability; suits work that rests on reputation."
+  },
+  "Bát Tọa": {
+   "nhom": "Minor star",
+   "y_nghia": "Paired with San Tai: steady and dignified, likes a tidy, orderly home."
+  },
+  "Đài Phụ": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of titles and degrees (Vietnamese books call it Thai Phu): values recognition; helpful for exams and awards — the flip side is caring too much about appearances."
+  },
+  "Phong Cáo": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of certificates and commendations: matters that need official papers tend to go through; just don't do things only for the name."
+  },
+  "Thiên Quan": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of blessing: upright, has faith, likes helping others; the books see it as a star that eases hard matters."
+  },
+  "Thiên Phúc": {
+   "nhom": "Minor star",
+   "y_nghia": "Paired with Tian Guan: a kind heart; acting decently tends to bring good luck."
+  },
+  "Thiên Đức": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of virtue: proper and gentle; helps you hold firm against temptation and smooths small troubles."
+  },
+  "Nguyệt Đức": {
+   "nhom": "Minor star",
+   "y_nghia": "Paired with Tian De: well-mannered and kind-hearted; small snags pass easily."
+  },
+  "Giải Thần": {
+   "nhom": "Minor star",
+   "y_nghia": "A star that untangles: knotty matters tend to find a way out. The books note that when it sits in the money or property palace, wealth is hard to build up — keep a saving habit."
+  },
+  "Niên Giải": {
+   "nhom": "Minor star",
+   "y_nghia": "An untangling star counted from the birth year: when things get stuck, a person or an occasion often helps undo them."
+  },
+  "Thiên Thọ": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of calm and gentleness; the books link it to a steady daily rhythm and endurance."
+  },
+  "Thiên Tài": {
+   "nhom": "Minor star",
+   "y_nghia": "A softening star: tones down both the strengths and the weaknesses of the star beside it; with a dim Tai Yang or Tai Yin it helps them shine."
+  },
+  "Thiên Trù": {
+   "nhom": "Minor star",
+   "y_nghia": "The kitchen star: enjoys good food, good at cooking and hosting, often treated to meals; keep it in moderation."
+  },
+  "Thiên Thương": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of sadness and loss, always placed in the Friends Palace: things slow down and the heart feels heavy — when the period passes through, take on less and choose whom to trust."
+  },
+  "Thiên Sứ": {
+   "nhom": "Minor star",
+   "y_nghia": "Always placed in the Health Palace, paired with Tian Shang: a reminder to save your strength, since things stall when you push too hard — keep a regular routine and have regular check-ups. This is a preventive reminder, not a substitute for a doctor's advice."
+  },
+  "Thiên Không": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of empty space: many ideas and long-range thinking, but things are easily left half-done; suits unconventional thinking — settle agreements in writing."
+  },
+  "Phá Toái": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of small breakages: easily bored, quits halfway, small leaks of money — split work into short stretches so it gets finished."
+  },
+  "Phi Liêm": {
+   "nhom": "Minor star · Bo Shi cycle",
+   "y_nghia": "A star as fast as an arrow: things arrive quickly, good or bad depending on the stars beside it; it also points to gossip, so watch what you say."
+  },
+  "Âm Sát": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of things done behind your back: keep paperwork clear and avoid discussing people who are not present."
+  },
+  "Thiên Vu": {
+   "nhom": "Minor star",
+   "y_nghia": "A star of inheritance and advancement: helps with promotions, learning from a teacher, and taking over work handed on by someone before you."
+  },
+  "Thiên Nguyệt": {
+   "nhom": "Minor star",
+   "y_nghia": "A star that reminds you about long-running health matters: keep a steady routine and have regular check-ups. This is a preventive reminder, not a substitute for a doctor's advice."
+  },
+  "Không Vong": {
+   "nhom": "Minor star",
+   "y_nghia": "Marks the empty slot of the sixty-year cycle: matters in this palace tend to come together slowly; prepare well before you act."
+  },
+  "Trường Sinh": {
+   "nhom": "Growth cycle",
+   "y_nghia": "A beginning with lasting vitality: things take root easily and last; a gentle, generous nature."
+  },
+  "Mục Dục": {
+   "nhom": "Growth cycle",
+   "y_nghia": "The 'bathing' stage: changeable, easily bored, likes looking good; practise seeing things through."
+  },
+  "Quan Đới": {
+   "nhom": "Growth cycle",
+   "y_nghia": "'Putting on cap and sash': eager to get ahead, values rank; set a clear goal and climb one step at a time."
+  },
+  "Lâm Quan": {
+   "nhom": "Growth cycle",
+   "y_nghia": "'Taking up office': confident, likes to show what you can do; handled well it brings success, overdone it turns into showing off."
+  },
+  "Đế Vượng": {
+   "nhom": "Growth cycle",
+   "y_nghia": "Peak strength: strong, imposing, things flourish; at the top, know when to hold back."
+  },
+  "Suy": {
+   "nhom": "Growth cycle",
+   "y_nghia": "Strength starts to fade: slow down; better for keeping than for expanding."
+  },
+  "Bệnh": {
+   "nhom": "Growth cycle",
+   "y_nghia": "Strength weakens: tires easily, worries, makes slips; rest enough and do one thing at a time. This is a preventive reminder, not a substitute for a doctor's advice."
+  },
+  "Tử": {
+   "nhom": "Growth cycle",
+   "y_nghia": "Settling down: reserved, thinks deeply, good at keeping what you have; say what you think out loud."
+  },
+  "Mộ": {
+   "nhom": "Growth cycle",
+   "y_nghia": "Storing away: accumulates, keeps things private, slow to open up; in the Fortune Palace the books read it as solid roots."
+  },
+  "Tuyệt": {
+   "nhom": "Growth cycle",
+   "y_nghia": "The low point before renewal: things get stuck and then a new way opens; resourceful and good at finding a way around."
+  },
+  "Thai": {
+   "nhom": "Growth cycle",
+   "y_nghia": "A new seed: ideas and plans taking shape; still young, so easily swayed by others — stay steady."
+  },
+  "Dưỡng": {
+   "nhom": "Growth cycle",
+   "y_nghia": "Nurturing: diligent, careful, loved by others; suits caring work, raising and growing things."
+  },
+  "Bác Sỹ": {
+   "nhom": "Bo Shi cycle",
+   "y_nghia": "Intelligent and easy-going; helpful for study and exams."
+  },
+  "Lực Sỹ": {
+   "nhom": "Bo Shi cycle",
+   "y_nghia": "Strong, bold, quick: speeds up both the good and the bad of the stars beside it."
+  },
+  "Thanh Long": {
+   "nhom": "Bo Shi cycle",
+   "y_nghia": "Cheerful and friendly, often brings good news; helpful for weddings and seeking recognition."
+  },
+  "Tiểu Hao": {
+   "nhom": "Bo Shi cycle · Tai Sui cycle",
+   "y_nghia": "Small leaks: money goes out in small amounts and things break here and there — keeping track of spending helps."
+  },
+  "Tướng Quân": {
+   "nhom": "Bo Shi cycle",
+   "y_nghia": "Brave and proud, likes to lead; watch out for overshadowing the people next to you."
+  },
+  "Tấu Thư": {
+   "nhom": "Bo Shi cycle",
+   "y_nghia": "Speaks well and writes well; suits discussion, paperwork, singing and music."
+  },
+  "Hỷ Thần": {
+   "nhom": "Bo Shi cycle",
+   "y_nghia": "A star of joy: brings good news, helpful for weddings and get-togethers."
+  },
+  "Bệnh Phù": {
+   "nhom": "Bo Shi cycle · Tai Sui cycle",
+   "y_nghia": "Tires easily, often low: a reminder to save your strength and rest enough. This is a preventive reminder, not a substitute for a doctor's advice."
+  },
+  "Đại Hao": {
+   "nhom": "Bo Shi cycle · Tai Sui cycle",
+   "y_nghia": "Big outflows: large expenses, distance, scattered effort; in a favourable spot it marks someone who dares to spend on big things."
+  },
+  "Phục Binh": {
+   "nhom": "Bo Shi cycle",
+   "y_nghia": "Hidden helpers or hidden dealings, depending on the stars beside it: keep everything transparent."
+  },
+  "Quan Phủ": {
+   "nhom": "Bo Shi cycle",
+   "y_nghia": "Red tape and paperwork hassles: just follow the rules and it stays light."
+  },
+  "Tướng Tinh": {
+   "nhom": "Jiang Qian cycle",
+   "y_nghia": "Has authority, suits taking the lead; when a decision is needed, you dare to make it."
+  },
+  "Phan Án": {
+   "nhom": "Jiang Qian cycle",
+   "y_nghia": "'Mounting the saddle': helps reputation and advancement."
+  },
+  "Tuế Dịch": {
+   "nhom": "Jiang Qian cycle",
+   "y_nghia": "A star of travel and moving: years and months with it often bring a change of place."
+  },
+  "Tức Thần": {
+   "nhom": "Jiang Qian cycle",
+   "y_nghia": "Slack and uninspired: set small, easy tasks to get your momentum back."
+  },
+  "Kiếp Sát": {
+   "nhom": "Jiang Qian cycle",
+   "y_nghia": "Sudden events, easy losses: always have a backup plan and avoid taking risks."
+  },
+  "Tai Sát": {
+   "nhom": "Jiang Qian cycle",
+   "y_nghia": "Unexpected hitches: check carefully before you start."
+  },
+  "Thiên Sát": {
+   "nhom": "Jiang Qian cycle",
+   "y_nghia": "Easy friction with people above you: stay gentle and speak from facts."
+  },
+  "Chỉ Bối": {
+   "nhom": "Jiang Qian cycle",
+   "y_nghia": "'Pointed at from behind': people talk about you easily; keep things clear and explain yourself less."
+  },
+  "Nguyệt Sát": {
+   "nhom": "Jiang Qian cycle",
+   "y_nghia": "Emotional matters get tangled, friction with women in the household: speak slowly and listen fully."
+  },
+  "Vong Thần": {
+   "nhom": "Jiang Qian cycle",
+   "y_nghia": "Forgetful, things go missing, small leaks: write tasks down and keep things in their place."
+  },
+  "Tuế Kiện": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Another name for Tai Sui: things get tense and arguments flare — do things properly and say what you mean in full."
+  },
+  "Thái Tuế": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Reasoned, judging, seldom shows feelings; with bright stars your words are firm, with difficult stars they easily turn into quarrels."
+  },
+  "Hối Khí": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Petty annoyances, a mood that easily darkens: don't decide big things while annoyed."
+  },
+  "Thiếu Dương": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Quick-minded, cheerful, kind; eases small snags."
+  },
+  "Thiếu Âm": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Gentle, perceptive, kind; together with Shao Yang it smooths small matters."
+  },
+  "Tang Môn": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "A star of sorrow and family funerals: slow down and spend time with the elders at home."
+  },
+  "Quán Tác": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "'A tie that binds': easily caught up in commitments and procedures — read carefully before signing."
+  },
+  "Quan Phù": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Good at judging and arguing; often involved with paperwork and legal matters — follow the law and ask a lawyer when needed."
+  },
+  "Tử Phù": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Things stall and the heart feels heavy: be patient and go step by step."
+  },
+  "Trực Phù": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "In the same group as Si Fu: things often get stuck and need steady effort to undo."
+  },
+  "Tuế Phá": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Contrary, likes breaking with the old: suits reorganising; tell the people involved in advance."
+  },
+  "Long Đức": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Virtuous, proper, gentle; snags are easily forgiven."
+  },
+  "Phúc Đức": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Goes with Long De: kind, likes helping others, gets help when things are hard."
+  },
+  "Bạch Hổ": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Strong and fierce: easy friction and losses; in a favourable spot it helps a career. Take care with safety when travelling or doing heavy work."
+  },
+  "Điếu Khách": {
+   "nhom": "Tai Sui cycle",
+   "y_nghia": "Gossip, and occasions to visit people in mourning: speak carefully and show off less."
+  }
+ },
+ "phu_tinh_cung_nguon": "Tu Vi Dau So Toan Shu (紫微斗數全書), volume 3, the section on the twelve palaces — `trich` = the original passage about that star in that palace; `y` = the editorial team's summary (draft, phrased as behaviour, with something to do). Only the 6 palaces about work and way of life (Wealth, Career, Travel, Fortune, Property, Friends). The 6 palaces about family and the body are not done: there the book predicts numbers of siblings and children, clashes and injuries — against our reading rules.",
+ "phu_tinh_cung": {
+  "Văn Xương": {
+   "Tài Bạch": {
+    "y": "When the star is bright, money is ample, and with other good stars there are many ways to earn. When it is weak and sits with difficult stars, the book compares it to a fine scholar with a thin purse — turn what you know into a trade with a steady income."
+   },
+   "Quan Lộc": {
+    "y": "Bright, and with Tai Yang and good stars, it suits both work with words and work that runs things; with Tian Fu and Wen Qu, both career and income are steady."
+   },
+   "Thiên Di": {
+    "y": "Away from home you easily meet people who lift you up and help you grow; the only worry is petty people around you. With difficult stars, life away from home is less settled — choose your companions carefully."
+   },
+   "Phúc Đức": {
+    "y": "Bright and with good stars, you know how to enjoy life. Weak and with difficult stars, body and mind find it hard to rest — keep a fixed rest time each day."
+   },
+   "Điền Trạch": {
+    "y": "With good stars you can buy more property. With difficult stars it is hard to keep what you already have — handle property papers carefully."
+   },
+   "Nô Bộc": {
+    "y": "Bright and alone, it brings capable helpers. With difficult stars there are people, but their loyalty does not last — be clear about what each person gets."
+   }
+  },
+  "Văn Khúc": {
+   "Tài Bạch": {
+    "y": "Bright, it brings enough and more, and people with standing tend to help with money. With difficult stars money comes in and goes out again — keep one fund set aside that you do not touch."
+   },
+   "Quan Lộc": {
+    "y": "Bright, it handles both desk work and field work; close to people with power, you are trusted. With difficult stars work stays ordinary — stick with one direction."
+   },
+   "Thiên Di": {
+    "y": "Away from home you get close to people with standing; with good stars there is money. With difficult stars things seldom go as hoped — prepare well before trips and far-off work."
+   },
+   "Điền Trạch": {
+    "y": "Bright, it keeps the home you already have; with good stars you buy more yourself. With difficult stars property comes and goes."
+   },
+   "Nô Bộc": {
+    "y": "Bright, it brings helpers; weak, fewer. With difficult stars people easily blame you and then leave — listen early."
+   }
+  },
+  "Tả Phù": {
+   "Tài Bạch": {
+    "y": "The book says it leans towards enough in any palace; with good stars people help with money. With difficult stars it is sometimes gain, sometimes shortfall, hard to keep — track income and spending and slow down before big amounts."
+   },
+   "Quan Lộc": {
+    "y": "Suits supporting and organising roles; the book says work that needs action stands out more than desk work. With difficult stars your reputation rises and falls — keeping your word is the root."
+   },
+   "Thiên Di": {
+    "y": "The more you travel and work, the more help you get. With difficult stars people under you cause trouble and gossip — make the work clear from the start."
+   },
+   "Phúc Đức": {
+    "y": "With good stars you enjoy good fortune; alone, later life is calm. With difficult stars it is harder work — learn to accept help."
+   },
+   "Điền Trạch": {
+    "y": "You get a share of property from the family; with good stars, a large one. With difficult stars that share shrinks — rely mainly on your own effort."
+   },
+   "Nô Bộc": {
+    "y": "Alone and bright, one word from you and many follow. With difficult stars it is hard to keep people — fair treatment is how you keep them."
+   }
+  },
+  "Hữu Bật": {
+   "Tài Bạch": {
+    "y": "The book says it leans towards enough in any palace; with good stars people help with money. With difficult stars it is sometimes gain, sometimes shortfall, hard to keep — ask one more person before a big expense."
+   },
+   "Quan Lộc": {
+    "y": "Suits carrying things out and supporting; with good stars both work and money look good. Weak or with difficult stars, your position may be moved at times — make the scope of your responsibility clear."
+   },
+   "Thiên Di": {
+    "y": "Away from home you meet helpers and grow; the book advises not sitting still in one place. With difficult stars you easily compete with outsiders — give way half a step and things stay calm."
+   },
+   "Phúc Đức": {
+    "y": "The book says good fortune is complete, and with good stars there is little to worry about. With difficult stars your mind is often busy — try writing your worries on paper before sleep."
+   },
+   "Nô Bộc": {
+    "y": "Alone, a whole team follows you. With difficult stars be careful when handing money to others — always reconcile the accounts."
+   }
+  },
+  "Lộc Tồn": {
+   "Tài Bạch": {
+    "y": "The book describes it as a full storehouse: money comes without too much toil. With difficult stars there is little first and more later — patient, steady saving is the right rhythm."
+   },
+   "Quan Lộc": {
+    "y": "With good stars every kind of work suits you, and career and income look good together; the book says this star is a plus in any palace."
+   },
+   "Thiên Di": {
+    "y": "Away from home, food and clothing come as you wish. With difficult stars you are often dissatisfied with people — keep expectations moderate."
+   },
+   "Phúc Đức": {
+    "y": "Deep good fortune and a calm life; with good stars, many joys. With difficult stars body and mind find it hard to settle — keep one habit that calms you down."
+   },
+   "Điền Trạch": {
+    "y": "Much property; bright, you can buy it yourself; with good stars you keep and grow what the family left. With difficult stars, less."
+   },
+   "Nô Bộc": {
+    "y": "Many people follow and help; with good stars they help build your business. With difficult stars the helpers have less to give."
+   }
+  },
+  "Kình Dương": {
+   "Tài Bạch": {
+    "y": "In Chen, Xu, Chou or Wei: money is earned in crowded, competitive places. When the star is weak it is hard to keep what you already have, and money comes from heavy work few want to do — choose work that rewards grit and avoid high-interest loans."
+   },
+   "Quan Lộc": {
+    "y": "Bright, it suits work that needs decisiveness, competition and discipline; with good stars there is real authority. Weak, it is ordinary, often more name than substance — choose a place where results can be measured."
+   },
+   "Thiên Di": {
+    "y": "Bright, life away from home is ample, and with good stars you earn in busy places; weak, things still get done but you are often unhappy with the people under you — be clear about what each person gets."
+   },
+   "Phúc Đức": {
+    "y": "Bright, you find joy while busy; weak, you worry and wear yourself out; with good stars, fewer worries. Alone, it is hard to sit still — moving about is the kind of rest that suits you."
+   },
+   "Điền Trạch": {
+    "y": "Bright, there are losses first and success later; weak and with Di Kong and Di Jie, it is hard to keep what you have — don't rush to buy or sell property."
+   },
+   "Nô Bộc": {
+    "y": "Friction with partners comes easily, and helpers rarely stay long; bright, the right people come later — state your expectations clearly from the start."
+   }
+  },
+  "Đà La": {
+   "Tài Bạch": {
+    "y": "Money is earned in lively places but slowly; weak, you must work hard to have enough. With Di Kong and Di Jie, money comes and goes unevenly — split your savings into small pots."
+   },
+   "Quan Lộc": {
+    "y": "Alone, work is ordinary and progress slow; even with good stars it is often more name than substance — measure yourself by what you have finished."
+   },
+   "Thiên Di": {
+    "y": "With good stars, away from home you meet helpers and earn money; weak and with difficult stars, you easily get caught up in gossip — stay out of matters that are not yours."
+   },
+   "Phúc Đức": {
+    "y": "Alone, it is tiring; bright, there is good fortune; weak, you are often running about; with good stars, later life is relaxed."
+   },
+   "Điền Trạch": {
+    "y": "Hard to rely on what you already have; you must work hard; with good stars, nothing at first, something later."
+   },
+   "Nô Bộc": {
+    "y": "Helpers often lack strength and complain; bright and with good stars, you still find people who suit you."
+   }
+  },
+  "Hỏa Tinh": {
+   "Tài Bạch": {
+    "y": "Money comes fast and goes fast; weak, it is harder work; with good stars, plenty of money and things go your way. Set part aside straight away whenever a large sum comes in."
+   },
+   "Quan Lộc": {
+    "y": "The book says that when young your work goes well one moment and falls apart the next, and only later goes as you wish; with Zi Wei or Tan Lang it is good. Be patient and don't quit at the first stumble."
+   },
+   "Thiên Di": {
+    "y": "Alone, you are restless away from home; with good stars you earn money in busy places; with difficult stars you easily get caught up in gossip — wait a beat before reacting."
+   },
+   "Phúc Đức": {
+    "y": "Hard to sit still, often overworks; with good stars later life goes as you wish — practise resting before you are tired."
+   },
+   "Điền Trạch": {
+    "y": "Alone, it is hard to rely on an existing home; with good stars, nothing at first, something later — home is something you build yourself."
+   },
+   "Nô Bộc": {
+    "y": "Alone, partners often blame you and help little; bright and with good stars, you have one or two people you can trust."
+   }
+  },
+  "Linh Tinh": {
+   "Tài Bạch": {
+    "y": "Bright and alone, unexpected money comes at times; weak, earning is harder — rely on a steady income rather than waiting for windfalls."
+   },
+   "Quan Lộc": {
+    "y": "Bright and alone it is good, and with good stars there is authority; weak, less so — choose work that needs persistence and care with detail."
+   },
+   "Thiên Di": {
+    "y": "With good stars beside it, life away from home goes smoothly; with difficult stars there is more want and more gossip — in a new place, have someone you know show you the way."
+   },
+   "Phúc Đức": {
+    "y": "Takes on too much and worries; with good stars, balanced — each week choose one thing to let go of."
+   },
+   "Điền Trạch": {
+    "y": "Hard to rely on what you already have; bright and with good stars, you can buy your own."
+   },
+   "Nô Bộc": {
+    "y": "Alone, few helpers and easy disagreements; with good stars and brightness, there are people to help with work and look after the home."
+   }
+  }
  }
 }

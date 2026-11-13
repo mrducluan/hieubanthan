@@ -819,3 +819,35 @@ def gloss(cau: str, mang: str) -> str:
             return _tuvi_han(cau)
         return _tuvi(cau, t)
     return ""
+
+
+# ================================================================== EN-AI — nhãn chủ đề của lớp phân loại AI (câu tiếng Anh)
+# Danh mục CỐ ĐỊNH các chủ đề mà lớp AI (`narrative/phan_loai_en.py`) được phép gán, và cụm từ khoá tiếng Việt không dấu
+# tương ứng mà `phan_loai` của mảng nhận đúng chủ đề (tests/test_phan_loai_en.py khoá từng cụm). Chỉ dùng khi luật độ tin
+# thấp (`hoidap/chung.thu_nhan_ngoai`); nhãn ngoài danh mục bị bỏ.
+Y_DINH_CUM: dict[str, dict[str, str]] = {
+    "battu": {
+        "tinh_cach": "tinh cach cua toi", "su_nghiep": "cong viec cua toi", "tien_bac": "tien bac cua toi",
+        "tinh_cam": "tinh duyen cua toi", "gia_dinh": "gia dinh cua toi", "con_cai": "con cai cua toi",
+        "suc_khoe": "suc khoe cua toi", "hoc_hanh": "hoc hanh cua toi", "di_xa": "di xa cua toi",
+        "nha_cua": "bat dong san cua toi", "phap_ly": "kien tung phap luat cua toi", "ban_be": "ban be cua toi",
+        "hau_van": "hau van cua toi", "ngu_hanh": "toi thieu hanh gi", "van_nam": "van han nam nay cua toi",
+    },
+    "tuvi": {
+        "tinh_cach": "cung menh cua toi", "su_nghiep": "cong viec cua toi", "tien_bac": "tien bac cua toi",
+        "tinh_cam": "tinh duyen cua toi", "gia_dinh": "cha me cua toi", "con_cai": "con cai cua toi",
+        "suc_khoe": "suc khoe cua toi", "hoc_hanh": "hoc hanh cua toi", "di_xa": "di xa cua toi",
+        "nha_cua": "nha cua cua toi", "phap_ly": "kien tung cua toi", "ban_be": "ban be cua toi",
+        "hau_van": "hau van cua toi", "ngu_hanh": "cung menh cua toi", "van_nam": "van han nam nay cua toi",
+    },
+}
+
+
+def cum_y_dinh(mang: str, y_dinh: str | None, nam: int | None = None) -> str | None:
+    """Mã chủ đề (danh mục cố định) + năm → cụm từ khoá cho `phan_loai` của mảng; mã lạ → None."""
+    cum = Y_DINH_CUM.get(mang, {}).get(y_dinh or "")
+    if not cum:
+        return None
+    if isinstance(nam, int) and 1900 <= nam <= 2100:
+        cum = cum.replace(" nam nay", "") + f" nam {nam}"
+    return cum

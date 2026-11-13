@@ -506,6 +506,11 @@ def _ten_ngan(loai: str, slug: str) -> str:
 def _hoan_tat(t: dict) -> dict:
     if not t.get("y_chinh") and ngon_ngu.la_viet() and (yc := _yct.tao(t)):
         t["y_chinh"] = yc           # KB-TT1: ý chính rút từ chính trang → có ảnh tóm tắt (alt + ImageObject) cho họ chưa có KB bổ sung
+    elif not t.get("y_chinh") and not ngon_ngu.la_viet() and t.get("loai") == "sao_cung":
+        # EN-ALL GĐ 4: bản Anh có cùng SỐ ý chính như bản Việt (bản Việt quyết), chữ rút từ trang tiếng Anh.
+        vi = ngon_ngu.theo_viet(_lay)(t["loai"], t["slug"]) or {}
+        if yc := _ttv.y_chinh_en(t, len(vi.get("y_chinh") or [])):
+            t["y_chinh"] = yc
     if t.get("y_chinh") and ngon_ngu.la_viet() and any(len(y) > _yct.TOI_DA for y in t["y_chinh"]):
         t["y_chinh"] = [y if len(y) <= _yct.TOI_DA else _yct._cat(y) for y in t["y_chinh"]]   # lá bài: ý dài tràn khung ảnh
     _td.gan(t)                      # EEAT-1: chủ biên / tác giả / thẩm định (thẩm định → "da_duyet")

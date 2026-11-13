@@ -31,6 +31,9 @@ NHOM: dict[str, tuple[tuple[str, str], ...]] = {
     # EN-ALL GĐ 4 (Tử vi): nguồn Tuần/Triệt, kết luận xu hướng lưu nguyệt (mã web tô màu).
     "tuan_triet": (("tuvi", "tuan_triet"),), "tuan_triet_kieu": (("tuvi", "tuan_triet_kieu"),),
     "xu_huong_tuvi": (("tuvi", "xu_huong"),),
+    # EN-ALL GĐ 4 (agent D) — khoá của `cung[].nghia_sao_nho` (lá số Tử vi): tạp diệu, sao bốn vòng (cả vòng Trường Sinh).
+    "sao_nho": (("tuvi", "chinh_tinh"), ("tuvi", "phu_tinh"), ("tuvi", "tap_dieu"), ("tuvi", "bac_si"), ("tuvi", "tuong_tien"),
+                ("tuvi", "tue_tien"), ("tuvi", "thai_tue_vn"), ("tuvi", "truong_sinh")),
     # EN-ALL GĐ 3c — nhóm GỘP cho trường mã dùng chung khoá nhưng khác bảng tên: nhãn mục hình hỏi đáp (`muc.nhan`: hành ở
     # cột năm hành Bát tự, cung ở bàn 12 cung Tử vi) và loại trong danh sách gói bằng chứng Bát tự (`ds.loai`: quan hệ
     # can chi ở mục xung hợp, cát/hung ở mục thần sát).
@@ -156,6 +159,8 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     # sao chính từng ô, đường bay tứ hoá giữa hai chi)
     "phan_loai.cung": "cung", "muc.sao": "sao", "chi_hoi": "chi", "bay.tu": "chi", "bay.den": "chi", "bay.hoa": "hoa",
     "hinh.hoa": "hoa",
+    # EN-ALL GĐ 4 (agent D) — lá số Tử vi: dict nghĩa sao nhỏ theo MÃ tên sao (khoá), giá trị là lời của bản phủ.
+    "nghia_sao_nho": "sao_nho",
 }
 
 

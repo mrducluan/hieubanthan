@@ -13,6 +13,8 @@ from __future__ import annotations
 import re
 import unicodedata
 
+from app.luangiai import nhan_ngoai as _nn   # EN-AI: nhãn ngoài (AI phân loại câu tiếng Anh) — chỉ nâng mức
+
 _H = r"(?=\s*[,.!?;]|\s*$)"          # hết vế câu
 _AI = r"(tôi|em|mình|con|tớ|tao|t|mk)"
 _AI_KD = r"(toi|em|minh|con|to|tao|t|mk)"
@@ -1360,6 +1362,8 @@ def _tu_choi_anh(kd: str) -> str | None:
 def ho_tro_mem_en(raw: str) -> bool:
     """Tầng hỗ trợ MỀM (câu tiếng Anh): một tín hiệu buồn yếu (`_mem_y`) mà câu KHÔNG phải khủng hoảng / cấp cứu → câu hỏi
     vẫn được trả lời, kèm đoạn hỗ trợ ngắn (`loi_ho_tro_mem`). Câu tiếng Việt → False (bản Việt không đổi)."""
+    if _nn.an_toan(raw) == "ho_tro_mem" and not khung_hoang(raw) and not cap_cuu(raw):
+        return True               # EN-AI: nhãn ngoài nâng câu bình thường lên tầng mềm
     if not _la_en(raw):
         return False
     kd = _hai_ban(raw)[1]
@@ -1405,7 +1409,7 @@ def cap_cuu_en(raw: str) -> bool:
 
 def khung_hoang(raw: str) -> bool:
     cd, kd, co_dau = _hai_ban(raw)
-    return any(_khop(k, c, cd, kd, co_dau) for k, c in KHUNG_HOANG) or khung_hoang_en(raw)
+    return any(_khop(k, c, cd, kd, co_dau) for k, c in KHUNG_HOANG) or khung_hoang_en(raw) or _nn.an_toan(raw) == "khung_hoang"
 
 
 # ------------------------------------------------------------------ SK-1: triệu chứng cấp (kiểm TRƯỚC mọi luật từ chối)
@@ -1470,7 +1474,7 @@ _HOI_SK_NGUOI = re.compile(
 
 def cap_cuu(raw: str) -> bool:
     cd, kd, co_dau = _hai_ban(raw)
-    return any(_khop(k, c, cd, kd, co_dau) for k, c in _CAP_CUU) or cap_cuu_en(raw)
+    return any(_khop(k, c, cd, kd, co_dau) for k, c in _CAP_CUU) or cap_cuu_en(raw) or _nn.an_toan(raw) == "cap_cuu"
 
 
 def hoi_benh(raw: str) -> bool:
@@ -1496,7 +1500,7 @@ def tu_choi(raw: str) -> str | None:
             return loai
     if hoi_benh(raw) or _HOI_SK_NGUOI.search(kd):
         return "suc_khoe_the_chat"
-    return tu_choi_en(raw)
+    return tu_choi_en(raw) or _nn.tu_choi(raw)     # EN-AI: nhãn ngoài chỉ thêm lời từ chối khi luật không có
 
 
 # ------------------------------------------------------------------ SK-1: câu từ chối thuộc nhóm sức khoẻ

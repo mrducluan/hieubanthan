@@ -421,6 +421,26 @@ def nam_hoi_hh(t: str, ngay_xem, kieu_nam: str) -> list[int]:
 
 
 
+def thu_nhan_ngoai(kq: dict, goc: str, mang: str, chay) -> dict:
+    """EN-AI: luật độ tin thấp (`do_tin_thap`, câu đang được trả lời bình thường) mà câu có nhãn chủ đề NGOÀI hợp lệ
+    (lớp phân loại AI câu tiếng Anh — `luangiai/nhan_ngoai`) → phân loại lại bằng cụm từ khoá của chủ đề đó (`chay(cụm)`,
+    vẫn qua mọi bộ chặn trên câu gốc). Luật tự tin, câu đặc biệt, không có nhãn → giữ nguyên `kq`."""
+    if not kq.get("do_tin_thap") or kq.get("xu_ly") not in ("tra_loi", "tra_loi_kem_luu_y"):
+        return kq
+    from app.hoidap import en_gloss  # noqa: PLC0415
+    from app.luangiai import nhan_ngoai  # noqa: PLC0415
+    n = nhan_ngoai.lay(goc)
+    cum = en_gloss.cum_y_dinh(mang, n.get("y_dinh"), n.get("nam")) if n else None
+    if not cum:
+        return kq
+    kq2 = chay(cum)
+    if kq2.get("xu_ly") not in ("tra_loi", "tra_loi_kem_luu_y"):
+        return kq
+    kq2["do_tin_thap"] = False
+    kq2["y_dinh_ngoai"] = n["y_dinh"]
+    return kq2
+
+
 def hoi_lai_neu(pl: dict, mo_dun: str) -> dict | None:
     """EN-3: khối "hỏi lại" khi câu rơi về mặc định (cờ `do_tin_thap`) và đang trả lời bình thường."""
     if not pl.get("do_tin_thap") or pl.get("xu_ly") not in ("tra_loi", "tra_loi_kem_luu_y"):

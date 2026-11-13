@@ -265,7 +265,10 @@
    "y": "A sword on the horse's head: brave, willing to go into tough places; suits competitive, highly disciplined work. The old books say that with good stars this person 'commands the frontier'.",
    "mat_toi": "Too rigid and liable to snap, prone to clashing with others, and prone to taking risks when driving or in hard sports.",
    "loi_khuyen": "Use your intensity with control; pay attention to safety in risky work.",
-   "co_ca": "Ma tou dai jian fei yao zhe ze zhu xing shang — editorial translation: A sword on the horse's head: the old text warns of injury — read it as a reminder to take safety seriously."
+   "co_ca": "Ma tou dai jian fei yao zhe ze zhu xing shang — editorial translation: A sword on the horse's head: the old text warns of injury — read it as a reminder to take safety seriously.",
+   "sach_ghi": {
+    "y": "Only Tian Ma together with Qing Yang makes this pattern — not Qing Yang sitting in the Wu palace."
+   }
   },
   "hoa_ky_thu_menh": {
    "ten": "Hua Ji Shou Ming (Hua Ji in the Life Palace)",
@@ -292,10 +295,13 @@
   },
   "quan_than_khanh_hoi": {
    "ten": "Jun Chen Qing Hui (ruler and ministers meeting)",
-   "dieu_kien": "Zi Wei sits in the Life Palace, with at least three good stars among Zuo Fu, You Bi, Tian Kui, Tian Yue, Wen Chang, Wen Qu and Lu Cun in its three supporting palaces and opposite palace.",
+   "dieu_kien": "Zi Wei together with Zuo Fu and You Bi in the Life Palace (if Zuo Fu and You Bi only face or flank the Life Palace, it is not this pattern).",
    "y": "A ruler (Zi Wei) with able ministers: a person of stature surrounded by talented people and helpers; suits leading a group.",
    "mat_toi": "Used to being lifted up, so you may lean on others or like being praised.",
-   "loi_khuyen": "Keep good people by your side through respect and fairness; you still have to carry the decisions yourself."
+   "loi_khuyen": "Keep good people by your side through respect and fairness; you still have to carry the decisions yourself.",
+   "sach_ghi": {
+    "y": "Zi Wei with Zuo Fu and You Bi sits in the Life Palace; meeting Tian Xiang, Wu Qu and Tai Yin as well makes it even better."
+   }
   },
   "duong_luong_xuong_loc": {
    "ten": "Yang Liang Chang Lu (Tai Yang, Tian Liang, Wen Chang, Lu Cun)",
@@ -338,17 +344,23 @@
   },
   "nguyet_sinh_thuong_hai": {
    "ten": "Yue Sheng Cang Hai (the moon rising over the sea)",
-   "dieu_kien": "Tai Yin and Tian Tong both sit in the Life Palace in Zi (the moon rising over the sea).",
-   "y": "The bright moon on the water: gentle and refined, rich in feeling and taste; blessed in your inner life and easily liked.",
-   "mat_toi": "Too soft, so you avoid friction and lack decisiveness.",
-   "loi_khuyen": "Keep your gentleness but practise saying 'no' at the right moment."
+   "dieu_kien": "Tai Yin sits in the Zi palace and that palace is the Property Palace (the moon rising over the sea).",
+   "y": "A bright moon over the water, shining down on the house: good fortune with home and land; a settled place to live, with family assets building up slowly but lastingly.",
+   "mat_toi": "Easily attached to the old home and reluctant to move; good at keeping things but slow to renew them.",
+   "loi_khuyen": "Keep your gentleness but practise saying 'no' at the right moment.",
+   "sach_ghi": {
+    "y": "Tai Yin sits in the Zi palace and that palace is the Property Palace."
+   }
   },
   "nhat_nguyet_chieu_bich": {
    "ten": "Ri Yue Zhao Bi (sun and moon shining on the wall)",
    "dieu_kien": "Tai Yang and Tai Yin share the Property Palace in Chou or Wei.",
    "y": "Sun and moon shining on the 'wall of the house': blessings in home, land and accumulated property; family life is usually warm.",
    "mat_toi": "Prone to pinning too much hope on property and homes.",
-   "loi_khuyen": "Treat home as a place to rest, not a measure of success."
+   "loi_khuyen": "Treat home as a place to rest, not a measure of success.",
+   "sach_ghi": {
+    "y": "Tai Yang and Tai Yin sit in the Property Palace; best when that palace is Chen, Xu, Chou or Wei."
+   }
   },
   "co_luong_gia_hoi": {
    "ten": "Ji Liang Jia Hui (Tian Ji and Tian Liang meeting)",
@@ -411,7 +423,10 @@
    "dieu_kien": "A Prosperity star (Lu Cun or Hua Lu), Tian Ma and Tian Xiang (the seal) all meet in the Life Palace's three supporting palaces and opposite palace.",
    "y": "Prosperity, a horse (movement, opportunity) and a seal (position): business and work away from home go well and bring standing.",
    "mat_toi": "Busy travelling, with little time for family.",
-   "loi_khuyen": "Choose trips that are worth it; keep a rhythm of rest."
+   "loi_khuyen": "Choose trips that are worth it; keep a rhythm of rest.",
+   "sach_ghi": {
+    "y": "The palace just ahead of Tian Ma holds Lu and Tian Xiang together."
+   }
   },
   "minh_loc_am_loc": {
    "ten": "Ming Lu An Lu (open and hidden Prosperity)",
@@ -450,7 +465,10 @@
    "dieu_kien": "Tian Ma sits in the Life Palace, with Wu Qu (the wealth star) on one side and Hua Lu on the other.",
    "y": "The horse flanked by money: the more you travel, move and trade, the more prosperity comes.",
    "mat_toi": "Restless, and easily worn out by constant travel.",
-   "loi_khuyen": "Choose a clear direction so every trip brings a return."
+   "loi_khuyen": "Choose a clear direction so every trip brings a return.",
+   "sach_ghi": {
+    "y": "Tian Ma sits in the Life Palace with Wu Qu and Lu in the two neighbouring palaces; even better when Ma is in a place of growth or strength."
+   }
   },
   "quy_tinh_giap_menh": {
    "ten": "Gui Xing Jia Ming (noble stars flanking the Life Palace)",
@@ -578,6 +596,16 @@
    "y": "Close to the Ji Yue Tong Liang pattern: thorough, fond of stability, suited to specialist work within an organisation; this trait is lighter than with all four stars.",
    "mat_toi": "Wary of risk, easily content to stay where it's familiar.",
    "loi_khuyen": "Become solid in your speciality, and every few years set yourself a new step forward."
+  },
+  "phu_bat_cung_chu": {
+   "sach_ghi": {
+    "y": "Zi Wei sits in the Life Palace and the two stars Zuo Fu and You Bi turn towards it; the two stars flanking the Life Palace count the same."
+   },
+   "ten": "Fu Bi Gong Zhu (helpers turning towards the lord)",
+   "dieu_kien": "Zi Wei in the Life Palace; Zuo Fu and You Bi both in the Life Palace's three supporting palaces and opposite palace, or flanking the Life Palace on both sides (if both sit right in the Life Palace, it is the Jun Chen Qing Hui pattern instead).",
+   "y": "The lead star has helpers on many sides: whatever you do, people easily lend a hand or speak up for you; suits being the one out in front, as long as you know how to work with people.",
+   "mat_toi": "Used to having support, so you may get complacent or avoid doing the hard part yourself.",
+   "loi_khuyen": "Say clearly what you need others to help with and credit their work; the final decision is still yours to carry."
   }
  }
 }

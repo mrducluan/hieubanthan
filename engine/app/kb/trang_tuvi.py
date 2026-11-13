@@ -765,3 +765,34 @@ def trang_hoa_cung(k: tuple[str, str], slug: str) -> dict:
 TRANG = {"sao_cung": (ds_sao_cung, trang_sao_cung), "hoa_cung": (ds_hoa_cung, trang_hoa_cung)}
 TEN_NGAN = {"sao_cung": lambda k: L("trang_tv.ten_ngan.sao_cung", "{sao} ở cung {cung}", sao=ts(k[0]), cung=tc(k[1])),
             "hoa_cung": lambda k: L("trang_tv.ten_ngan.hoa_cung", "Hoá {h} ở cung {cung}", h=th(k[0]), cung=tc(k[1]))}
+
+
+# ------------------------------------------------------------------ EN-ALL GĐ 4 (agent D): ý chính bản Anh
+def y_chinh_en(t: dict, so: int) -> list[str] | None:
+    """Ý chính tiếng Anh cho trang "sao ở cung" (KB-TT1 chỉ rút từ chữ Việt). SỐ Ý do bản Việt quyết (`so` = số ý của
+    trang Việt — khung dữ kiện hai ngôn ngữ phải giống nhau); chữ rút từ chính trang tiếng Anh, cùng thứ tự khe như
+    `y_chinh_tu_dong._sao_cung` (không thêm dữ kiện). Không đủ ý → None."""
+    import re  # noqa: PLC0415
+
+    from app.kb import y_chinh_tu_dong as yct  # noqa: PLC0415
+
+    if t.get("loai") != "sao_cung" or not so:
+        return None
+
+    def doan(dau: str) -> str:
+        return next((m.get("doan") or "" for m in t["muc"] if m["tieu_de"].startswith(dau)), "")
+
+    ra = []
+    if m := re.match(r"In Zi Wei Dou Shu, (.+? in the .+?): (.+)", t["tra_loi_nhanh"]):
+        ra.append(yct._cat(f"{m.group(1)}: {m.group(2)}"))
+    if m := re.search(r"when (the .+? Palace) falls in ([^.]+)\.", doan("When ") if "bright" in doan("When ") else ""):
+        ra.append(yct._cat(f"Bright when {m.group(1)} is in: {m.group(2)}"))
+    if d := doan("Which stars come with"):
+        ra.append(yct._cat(re.sub(r"^Depending on the branch where .+? falls, ", "", d)))
+    if m := re.search(r"its opposite palace, (.+?), and its two trine palaces, (.+?)\.", doan("The trine")):
+        doi, tam = (re.sub(r"\bthe ", "", x) for x in m.groups())
+        ra.append(yct._cat(f"Read with the opposite {doi} and the trines {tam}"))
+    if d := doan("A question to reflect on"):
+        ra.append(yct._cat(d))
+    ra = [y for y in dict.fromkeys(ra) if y and len(y) <= yct.TOI_DA]
+    return ra[:so] if len(ra) >= so else None

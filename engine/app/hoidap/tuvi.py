@@ -353,7 +353,15 @@ def _kb_y_dinh(ma: str) -> dict | None:
     return next((y for y in ds if isinstance(y, dict) and y.get("ma") == ma), None) if isinstance(ds, list) else None
 
 
-def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None = None) -> dict:
+def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None = None, _cum: str | None = None) -> dict:
+    """`_cum` (EN-AI, nội bộ): cụm từ khoá thay bản dịch ý của luật — xem `chung.thu_nhan_ngoai`."""
+    kq = _phan_loai(cau_hoi, che_do, y_dinh_goi_y, _cum)
+    if _cum is None and not ngon_ngu.la_viet():
+        kq = chung.thu_nhan_ngoai(kq, cau_hoi, "tuvi", lambda cum: _phan_loai(cau_hoi, che_do, y_dinh_goi_y, cum))
+    return kq
+
+
+def _phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None = None, _cum: str | None = None) -> dict:
     """`y_dinh_goi_y` (LG-ĐS, kho vectơ pgvector): mã ý định web tìm được bằng láng giềng gần nhất — CHỈ áp khi luật
     từ khoá không nhận ra ý định nào, chỉ cho câu bản mệnh / hạn, chỉ mã trong Y_DINH_CAU_HINH, và đi SAU bộ chặn
     khủng hoảng / ngoài phạm vi (câu đặc biệt trả về trước, gợi ý bị bỏ qua).
@@ -365,7 +373,7 @@ def phan_loai(cau_hoi: str, che_do: str = "tham_khao", y_dinh_goi_y: str | None 
         if en_gloss.la_cau_viet(goc):      # câu gõ tiếng Việt ở bản Anh → phân loại đúng như bản Việt (KB tên Việt)
             with ngon_ngu.dung(ngon_ngu.MAC_DINH):
                 return phan_loai(goc, che_do, y_dinh_goi_y)
-        cau_hoi = en_gloss.gloss(goc, "tuvi") or goc
+        cau_hoi = _cum or en_gloss.gloss(goc, "tuvi") or goc
     gioi_thieu, t_chinh = _h._tach_gioi_thieu(cau_hoi)
     t = chung.chuan_hoa_cau(cau_hoi)
     if gioi_thieu and (chung.co(gioi_thieu, [r"dai han", r"luu nien", r"tieu han", r"la so", r"cung \w+"])

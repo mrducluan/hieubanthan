@@ -139,12 +139,21 @@ def _giai_thich_khop(t: str) -> list[str]:
     return [ma for ma, m in kb.giai_thich_tat_ca().items() if chung.co(t, m["tu_khoa"])]
 
 
-def phan_loai(cau_hoi: str) -> dict:
+def phan_loai(cau_hoi: str, _cum: str | None = None) -> dict:
+    """`_cum` (EN-AI, nội bộ): cụm từ khoá thay cho bản dịch ý của luật — `chung.thu_nhan_ngoai` dùng khi luật độ tin
+    thấp mà lớp phân loại AI có nhãn chủ đề hợp lệ."""
+    kq = _phan_loai(cau_hoi, _cum)
+    if _cum is None and not ngon_ngu.la_viet():
+        kq = chung.thu_nhan_ngoai(kq, cau_hoi, "battu", lambda cum: _phan_loai(cau_hoi, cum))
+    return kq
+
+
+def _phan_loai(cau_hoi: str, _cum: str | None = None) -> dict:
     goc = cau_hoi
     if not ngon_ngu.la_viet():
         # EN-ALL GĐ 3c: câu tiếng Anh → cụm từ khoá tiếng Việt (hoidap/en_gloss) rồi đi đúng luật định tuyến bên dưới;
         # bộ chặn an toàn xét trên CÂU GỐC tiếng Anh (luangiai/an_toan, một bộ cho mọi ngôn ngữ).
-        cau_hoi = en_gloss.gloss(goc, "battu") or goc
+        cau_hoi = _cum or en_gloss.gloss(goc, "battu") or goc
     gioi_thieu, t_chinh = _h._tach_gioi_thieu(cau_hoi)
     t = chung.chuan_hoa_cau(cau_hoi)
     kq = {"cau_chuan_hoa": t, "cau_goc": goc, "loai": None, "xu_ly": "tra_loi", "chu_de": None,

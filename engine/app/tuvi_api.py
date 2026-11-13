@@ -14,10 +14,11 @@ import datetime as _dt
 from functools import lru_cache
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, BackgroundTasks, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 from app import config, ngon_ngu
+from app.narrative import phan_loai_en
 from app.kb import ten as _ten
 from app.kb.loi import L
 from app.kb import tu_dien
@@ -380,9 +381,8 @@ def _giai_nghia_sao(ten: str, do_sang: str | None, cung: str) -> dict | None:
 
 
 def _nghia_sao_nho(p: dict) -> dict[str, dict]:
-    """KT-TT: nghĩa ngắn của tạp diệu + sao bốn vòng đang đứng trong cung (KB `sao_nho`; chỉ bản tiếng Việt)."""
-    if not ngon_ngu.la_viet():
-        return {}
+    """KT-TT: nghĩa ngắn của tạp diệu + sao bốn vòng đang đứng trong cung (KB `sao_nho`; bản Anh qua bản phủ
+    en/tuvi_kb.json — khoá vẫn là MÃ tên sao, tên hiển thị ở `ten_hien`)."""
     ten = [x["name"] for x in p["adjectiveStars"]] + [p["changsheng12"], p["boshi12"], p["jiangqian12"], p["suiqian12"],
                                                       tuvi_thai_tue_vn.ten_nam_phai(p["suiqian12"])]
     ra = {t: {"nhom": m["nhom"], "y_nghia": m["y_nghia"], "do_tin": m["do_tin"]}
@@ -390,7 +390,7 @@ def _nghia_sao_nho(p: dict) -> dict[str, dict]:
     # KT-TT3: phụ tinh ở chính cung này theo Toàn Thư quyển 3 (6 cung về việc và nếp sống) — tóm ý + nguyên văn.
     for x in p["minorStars"]:
         if (m := tuvi_kb.phu_tinh_cung(x["name"], p["name"])):
-            ra[x["name"]] = {"nhom": "Phụ tinh ở cung này", "y_nghia": m["y"], "trich": m["trich"], "do_tin": "co_thu"}
+            ra[x["name"]] = {"nhom": L("tuvi.sao_nho.phu_tinh_cung", "Phụ tinh ở cung này"), "y_nghia": m["y"], "trich": m["trich"], "do_tin": "co_thu"}
     return ra
 
 
@@ -584,7 +584,7 @@ class HoiTVInput(BaseModel):
 
 
 @router.post("/hoi")
-def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
+def api_hoi(inp: HoiTVInput, background: BackgroundTasks, request: Request) -> dict:
     """Phân loại → (lá số + vận hạn qua iztro) → gói bằng chứng KB → trả lời template."""
     sinh, flags = None, []
     if inp.la_so is not None:
@@ -599,8 +599,11 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
                 "Sinh 23:00–23:59: tử vi (theo iztro) tính là giờ Tý của NGÀY HÔM SAU — "
                 "lá số có thể khác trang dùng quy ước khác."))})
     try:
-        kq = hoidap_tv.tra_loi(inp.cau_hoi.strip(), inp.che_do, sinh=sinh, ngay_xem=inp.ngay_xem,
-                               y_dinh_goi_y=inp.y_dinh_goi_y, nguoi_than=inp.nguoi_than)
+        # EN-AI: câu gõ tự do tiếng Anh — lớp phân loại AI (tắt mặc định; env HOI_PHAN_LOAI_AI + công tắc quản trị
+        # qua header x-phan-loai-ai) chỉ gán nhãn an toàn / chủ đề; câu trả lời vẫn do engine dựng.
+        with phan_loai_en.ap_dung(inp.cau_hoi.strip(), "tuvi", request.headers.get("x-phan-loai-ai") == "1"):
+            kq = hoidap_tv.tra_loi(inp.cau_hoi.strip(), inp.che_do, sinh=sinh, ngay_xem=inp.ngay_xem,
+                                   y_dinh_goi_y=inp.y_dinh_goi_y, nguoi_than=inp.nguoi_than)
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
     except ValueError as e:

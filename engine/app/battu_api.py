@@ -10,8 +10,9 @@ import datetime as _dt
 from typing import Literal
 
 from app import ngon_ngu
+from app.narrative import phan_loai_en
 from app.kb.loi import L
-from fastapi import APIRouter, BackgroundTasks, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.luangiai import sach_xua
@@ -123,12 +124,15 @@ class HoiBTInput(BaseModel):
 
 
 @router.post("/hoi")
-def api_hoi(inp: HoiBTInput, background: BackgroundTasks) -> dict:
+def api_hoi(inp: HoiBTInput, background: BackgroundTasks, request: Request) -> dict:
     sinh, flags = (None, [])
     if inp.la_so is not None:
         sinh, flags = _sinh(inp.la_so)
     try:
-        kq = hoidap_bt.tra_loi(inp.cau_hoi.strip(), sinh=sinh, ngay_xem=inp.ngay_xem)
+        # EN-AI: câu gõ tự do tiếng Anh — lớp phân loại AI (tắt mặc định; env HOI_PHAN_LOAI_AI + công tắc quản trị
+        # qua header x-phan-loai-ai) chỉ gán nhãn an toàn / chủ đề; câu trả lời vẫn do engine dựng.
+        with phan_loai_en.ap_dung(inp.cau_hoi.strip(), "battu", request.headers.get("x-phan-loai-ai") == "1"):
+            kq = hoidap_bt.tra_loi(inp.cau_hoi.strip(), sinh=sinh, ngay_xem=inp.ngay_xem)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     kq["co_canh_bao"] = flags + kq["co_canh_bao"]
