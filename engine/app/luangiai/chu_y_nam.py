@@ -556,7 +556,8 @@ def kinhdich_khung() -> str:
 def kinhdich_doan_hoi(mang: str) -> str:
     """Hỏi đáp Kinh Dịch — quẻ đọc cho việc đang hỏi, không chấm riêng từng năm, không trả lời có / không: câu khung +
     việc nên giữ + ranh giới."""
-    return f"{kinhdich_khung()} Điều nên giữ về {kb.ten(mang)}: {kb.viec(mang)}. {kb.ranh_gioi(mang)}"
+    return L("hoi.kd.cy.doan", "{khung} Điều nên giữ về {ten}: {viec}. {ranh}", khung=kinhdich_khung(), ten=kb.ten(mang),
+             viec=kb.viec(mang), ranh=kb.ranh_gioi(mang))
 
 
 MANG_VAN_HAN = ("tien_bac", "cong_viec", "tinh_cam", "di_lai", "giay_to", "nha_cua", "ban_be", "gia_dao")

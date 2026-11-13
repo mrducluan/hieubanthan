@@ -1,0 +1,5066 @@
+{
+ "_nguon": "EN-ALL GĐ 6 — bản phủ tiếng Anh nội dung bổ sung 64 trang quẻ (cách đọc khi hỏi việc, ví dụ, bảng xu hướng hào, hỏi đáp, Tự quái truyện, ý chính). Bảng và câu 'hào nào thuận nhất' dựng từ cùng dữ kiện xu hướng hào; lời là ban biên tập viết, chờ người bản xứ duyệt. Nguyên văn Hán ('nguyen_van') giữ nguyên.",
+ "_trang_thai": "bien_tap",
+ "source": {
+  "ten": "I Ching hexagrams — editorial additions",
+  "mo_ta": "Written by the Hieuban editorial team from the Zhou Yi (line texts and the Sequence of the Hexagrams, public domain) and the knowledge base; draft, awaiting review"
+ },
+ "trang": {
+  "que-1-can": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Qian (The Creative) when you ask about something: how to read it",
+     "doan": "Drawing Qian when you ask about something means the matter has real strength behind it, but each stage needs its own pace. The image is a dragon that rises step by step: hidden, then seen, then flying. It goes well when you act at the right time and stop before going too far."
+    },
+    {
+     "tieu_de": "Examples of reading Qian (The Creative) in everyday life",
+     "danh_sach": [
+      "Asking about a promotion soon after joining: build your track record first — the dragon is still hidden.",
+      "Asking whether to launch a project you have prepared for years: yes, this is the dragon appearing in the field.",
+      "Asking whether to push further after a big success: watch out for the 'arrogant dragon' — know when to stop."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Qian (The Creative): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "The matter has reached its end",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Qian (The Creative) a good or a bad hexagram?",
+     "dap": "Qian is a strong hexagram; its judgment promises great success through perseverance. The top line warns that a dragon that climbs too high will have regrets — strength without restraint turns against you."
+    },
+    {
+     "hoi": "If I cast Qian (The Creative), which changing line is the most favourable?",
+     "dap": "In Qian (The Creative), the line text leans towards yes if the changing line is: nine in the second place (line 2), nine in the fourth place (line 4), nine in the fifth place (line 5). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: The Sequence of the Hexagrams begins with heaven and earth: once there are heaven and earth, all things are born. Qian, heaven, comes first as the source."
+    }
+   ],
+   "y_chinh": [
+    "Qian: creative strength, step by step",
+    "Asking: act when the time is ripe",
+    "Stop before climbing too high"
+   ]
+  },
+  "que-2-khon": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Kun (The Receptive) when you ask about something: how to read it",
+     "doan": "Drawing Kun when you ask about something means this is a time to support, follow and lay the groundwork rather than lead. The image is the earth carrying everything. It goes well with patience, generosity and doing your own part thoroughly."
+    },
+    {
+     "tieu_de": "Examples of reading Kun (The Receptive) in everyday life",
+     "danh_sach": [
+      "Asking whether to start your own business now: better to learn as part of a good team first.",
+      "Asking how to handle a demanding boss: support well, but keep your own limits.",
+      "Asking about a long-term saving plan: yes — steady and safe suits this time."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Kun (The Receptive): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Kun (The Receptive) a good or a bad hexagram?",
+     "dap": "Kun is a gentle, favourable hexagram if you follow the right lead. The top line warns that dragons fighting in the meadow both bleed — when the yielding tries to rival the strong, both sides are hurt."
+    },
+    {
+     "hoi": "If I cast Kun (The Receptive), which changing line is the most favourable?",
+     "dap": "In Kun (The Receptive), the line text leans towards yes if the changing line is: six in the second place (line 2), six in the fourth place (line 4), six in the fifth place (line 5). It leans towards not now if the changing line is: six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: After heaven comes earth: the Sequence pairs Qian and Kun as the two gates through which all things are born and fill the world."
+    }
+   ],
+   "y_chinh": [
+    "Kun: support, steadiness, generosity",
+    "Asking: follow the right lead, do your part",
+    "Do not compete to be first"
+   ]
+  },
+  "que-3-truan": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Zhun (Difficult Beginnings) when you ask about something: how to read it",
+     "doan": "Drawing Zhun when you ask about something means the matter is at a messy beginning. The image is a sprout pushing through hard ground. It goes well if you gather helpers and sort things out one by one instead of rushing ahead alone."
+    },
+    {
+     "tieu_de": "Examples of reading Zhun (Difficult Beginnings) in everyday life",
+     "danh_sach": [
+      "Asking whether a new shop will take off: early troubles are normal — set up the system and find support.",
+      "Asking about a new relationship: let it grow; do not push it too fast.",
+      "Asking whether to take on a big loan at the start: not yet — keep cash flow first."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Zhun (Difficult Beginnings): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Zhun (Difficult Beginnings) a good or a bad hexagram?",
+     "dap": "Zhun is hard at the start but holds great promise. The fifth and top lines warn that pushing big plans with too few resources ends in tears."
+    },
+    {
+     "hoi": "If I cast Zhun (Difficult Beginnings), which changing line is the most favourable?",
+     "dap": "In Zhun (Difficult Beginnings), the line text leans towards yes if the changing line is: nine at the beginning (line 1), six in the fourth place (line 4). It leans towards not now if the changing line is: six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: After heaven and earth, all things are born and fill the space between; that fullness is Zhun — the difficulty of things just beginning."
+    }
+   ],
+   "y_chinh": [
+    "Zhun: a hard beginning with promise",
+    "Asking: find helpers, sort things step by step",
+    "Do not rush ahead alone"
+   ]
+  },
+  "que-4-mong": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Meng (Youthful Folly) when you ask about something: how to read it",
+     "doan": "Drawing Meng when you ask about something means you do not yet see the matter clearly. The image is a spring at the foot of a mountain that does not know where to flow. It goes well if you learn from the right person and ask sincerely once."
+    },
+    {
+     "tieu_de": "Examples of reading Meng (Youthful Folly) in everyday life",
+     "danh_sach": [
+      "Asking whether to invest in something you do not understand: learn first.",
+      "Asking about a new job in an unfamiliar field: humbly ask experienced people.",
+      "Asking the same question again hoping for a better answer: the hexagram itself warns against it."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Meng (Youthful Folly): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "The matter has reached its end",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Meng (Youthful Folly) a good or a bad hexagram?",
+     "dap": "Meng is neither good nor bad — it is about not knowing yet. The judgment warns that asking again and again is disrespectful and gets no answer."
+    },
+    {
+     "hoi": "If I cast Meng (Youthful Folly), which changing line is the most favourable?",
+     "dap": "In Meng (Youthful Folly), the line text leans towards yes if the changing line is: nine in the second place (line 2), six in the fifth place (line 5). It leans towards not now if the changing line is: six in the third place (line 3). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things born are still small and unformed; that is Meng, the youthful stage. So Meng follows Zhun."
+    }
+   ],
+   "y_chinh": [
+    "Meng: not yet clear, ready to learn",
+    "Asking: find the right teacher",
+    "Do not ask the same question again and again"
+   ]
+  },
+  "que-5-nhu": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Xu (Waiting) when you ask about something: how to read it",
+     "doan": "Drawing Xu when you ask about something means the answer is not yet ripe and you need to wait. The image is clouds in the sky before the rain. It goes well if you keep your strength, prepare and trust that the time will come."
+    },
+    {
+     "tieu_de": "Examples of reading Xu (Waiting) in everyday life",
+     "danh_sach": [
+      "Asking about job application results: wait, prepare a plan B, do not chase.",
+      "Asking whether to sign a deal right now: give it time until conditions are clear.",
+      "Asking about an exam: revise steadily and keep calm."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Xu (Waiting): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "You need people working with you",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Xu (Waiting) a good or a bad hexagram?",
+     "dap": "Xu is favourable if you wait with sincerity. Lines three and four warn that waiting in a bad place invites trouble, but help comes in the end."
+    },
+    {
+     "hoi": "If I cast Xu (Waiting), which changing line is the most favourable?",
+     "dap": "In Xu (Waiting), the line text leans towards yes if the changing line is: six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things that are small must be nourished; nourishment takes waiting, so Xu, waiting, follows Meng."
+    }
+   ],
+   "y_chinh": [
+    "Xu: wait with trust",
+    "Asking: prepare while you wait",
+    "Do not cross the river too soon"
+   ]
+  },
+  "que-6-tung": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Song (Conflict) when you ask about something: how to read it",
+     "doan": "Drawing Song when you ask about something means there is conflict or a dispute in it. The image is heaven and water moving apart. It goes well if you seek a fair mediator and stop early instead of fighting to the end."
+    },
+    {
+     "tieu_de": "Examples of reading Song (Conflict) in everyday life",
+     "danh_sach": [
+      "Asking whether to sue a former partner: try mediation first.",
+      "Asking about an argument at home: ask what each person needs, not who is right.",
+      "Asking whether to start a risky new venture during a dispute: not now."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Song (Conflict): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Song (Conflict) a good or a bad hexagram?",
+     "dap": "Song warns about conflict: stopping halfway is good, pushing to the end is bad. The top line says even a reward won through conflict is taken away again."
+    },
+    {
+     "hoi": "If I cast Song (Conflict), which changing line is the most favourable?",
+     "dap": "In Song (Conflict), the line text leans towards yes if the changing line is: nine in the fifth place (line 5). It leans towards not now if the changing line is: six at the beginning (line 1), nine in the second place (line 2), nine in the fourth place (line 4). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Where there is food and drink there is bound to be dispute, so Song, conflict, follows Xu."
+    }
+   ],
+   "y_chinh": [
+    "Song: a dispute pulling both ways",
+    "Asking: seek mediation, stop early",
+    "Winning by fighting does not last"
+   ]
+  },
+  "que-7-su": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Shi (The Army) when you ask about something: how to read it",
+     "doan": "Drawing Shi when you ask about something means the matter needs organisation and a clear leader. The image is water held within the earth, a disciplined force. It goes well with a rightful aim and an experienced person in charge."
+    },
+    {
+     "tieu_de": "Examples of reading Shi (The Army) in everyday life",
+     "danh_sach": [
+      "Asking how to run a large project: assign roles and keep discipline.",
+      "Asking whether a group plan will work: yes, if one person clearly leads.",
+      "Asking whether to retreat from a losing effort: a wise retreat is no mistake."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Shi (The Army): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six at the top (line 6)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Shi (The Army) a good or a bad hexagram?",
+     "dap": "Shi is favourable under a rightful, experienced leader. Line three warns that a team with too many bosses fails."
+    },
+    {
+     "hoi": "If I cast Shi (The Army), which changing line is the most favourable?",
+     "dap": "In Shi (The Army), the line text leans towards yes if the changing line is: nine in the second place (line 2). It leans towards not now if the changing line is: six in the third place (line 3). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Disputes stir up crowds; so Shi, the army or the masses, follows Song."
+    }
+   ],
+   "y_chinh": [
+    "Shi: discipline and a clear leader",
+    "Asking: one leader, clear roles",
+    "Too many bosses spoil it"
+   ]
+  },
+  "que-8-ty": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Bi (Holding Together) when you ask about something: how to read it",
+     "doan": "Drawing Bi when you ask about something means the matter is about joining, bonding or alliances. The image is water on the earth, flowing together. It goes well if you check your sincerity and commit in time."
+    },
+    {
+     "tieu_de": "Examples of reading Bi (Holding Together) in everyday life",
+     "danh_sach": [
+      "Asking whether to join a business partnership: yes, with partners who share your values.",
+      "Asking about a new relationship: reach out sincerely, do not wait too long.",
+      "Asking whether to stay with a group you doubt: look honestly at why you are there."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Bi (Holding Together): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Bi (Holding Together) a good or a bad hexagram?",
+     "dap": "Bi is a favourable hexagram of union. The judgment and top line warn that whoever comes too late, or bonds without a clear centre, meets misfortune."
+    },
+    {
+     "hoi": "If I cast Bi (Holding Together), which changing line is the most favourable?",
+     "dap": "In Bi (Holding Together), the line text leans towards yes if the changing line is: six at the beginning (line 1), nine in the fifth place (line 5). It leans towards not now if the changing line is: six in the third place (line 3), six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Masses must have something to hold them together, so Bi, holding together, follows Shi."
+    }
+   ],
+   "y_chinh": [
+    "Bi: holding together",
+    "Asking: bond sincerely, in good time",
+    "Do not join too late"
+   ]
+  },
+  "que-9-tieu-suc": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Xiao Xu (Small Taming) when you ask about something: how to read it",
+     "doan": "Drawing Xiao Xu when you ask about something means only small progress is possible for now. The image is wind across the sky with dense clouds but no rain. It goes well if you accumulate little by little."
+    },
+    {
+     "tieu_de": "Examples of reading Xiao Xu (Small Taming) in everyday life",
+     "danh_sach": [
+      "Asking about a raise: build up small wins first.",
+      "Asking whether to launch a big product: refine the details first.",
+      "Asking about savings: small regular amounts."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Xiao Xu (Small Taming): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Xiao Xu (Small Taming) a good or a bad hexagram?",
+     "dap": "Xiao Xu is mildly favourable: things build up but are not complete. The top line warns not to push once the rain has come."
+    },
+    {
+     "hoi": "If I cast Xiao Xu (Small Taming), which changing line is the most favourable?",
+     "dap": "In Xiao Xu (Small Taming), the line text leans towards yes if the changing line is: nine at the beginning (line 1), nine in the second place (line 2), nine in the fifth place (line 5). It leans towards not now if the changing line is: nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Holding together leads to accumulating, so Xiao Xu, small accumulation, follows Bi."
+    }
+   ],
+   "y_chinh": [
+    "Xiao Xu: dense clouds, no rain yet",
+    "Asking: build up little by little",
+    "Not yet time for the big result"
+   ]
+  },
+  "que-10-ly": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Lu (Treading) when you ask about something: how to read it",
+     "doan": "Drawing Lu when you ask about something means you are close to someone stronger or something sensitive, so keep good manners and move carefully. The image is treading on a tiger's tail without being bitten. It goes well when you are modest, correct and not reckless."
+    },
+    {
+     "tieu_de": "Examples of reading Lu (Treading) in everyday life",
+     "danh_sach": [
+      "Asking about working under a difficult boss: keep to the standards, report clearly, do not confront.",
+      "Asking whether to negotiate prices with a big client: yes, if your words are measured and backed by figures.",
+      "Asking about meeting your partner's family: politeness and good preparation are enough."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Lu (Treading): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Lu (Treading) a good or a bad hexagram?",
+     "dap": "Lu succeeds if you keep good form. The third line warns of the one-eyed man who thinks he can see and the lame man who thinks he can walk: overconfidence gets you bitten."
+    },
+    {
+     "hoi": "If I cast Lu (Treading), which changing line is the most favourable?",
+     "dap": "In Lu (Treading), the line text leans towards yes if the changing line is: nine at the beginning (line 1), nine at the top (line 6). It leans towards not now if the changing line is: six in the third place (line 3). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: After accumulation there must be order and manners, so Lu, treading, follows Xiao Xu; treading correctly brings peace, so Tai follows Lu."
+    }
+   ],
+   "y_chinh": [
+    "Lu: treading on the tiger's tail",
+    "Asking: good manners, careful steps",
+    "Do not overestimate yourself"
+   ]
+  },
+  "que-11-thai": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Tai (Peace) when you ask about something: how to read it",
+     "doan": "Drawing Tai when you ask about something means things flow freely and both sides understand each other. The image is heaven and earth meeting. It goes well if you use the good time to build foundations and prepare for change."
+    },
+    {
+     "tieu_de": "Examples of reading Tai (Peace) in everyday life",
+     "danh_sach": [
+      "Asking whether to expand a business: yes, with control.",
+      "Asking about a relationship: nurture it while things are good.",
+      "Asking about money: a good time — set aside an emergency fund."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tai (Peace): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Tai (Peace) a good or a bad hexagram?",
+     "dap": "Tai is one of the most favourable hexagrams. The third and top lines warn that every plain has its slope and the wall falls back into the moat — good times also turn."
+    },
+    {
+     "hoi": "If I cast Tai (Peace), which changing line is the most favourable?",
+     "dap": "In Tai (Peace), the line text leans towards yes if the changing line is: nine at the beginning (line 1), nine in the second place (line 2), six in the fourth place (line 4), six in the fifth place (line 5). It leans towards not now if the changing line is: six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Treading correctly brings ease, so Tai, peace, follows Lu."
+    }
+   ],
+   "y_chinh": [
+    "Tai: heaven and earth meet",
+    "Asking: build while it flows",
+    "Good times also turn"
+   ]
+  },
+  "que-12-bi": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Pi (Standstill) when you ask about something: how to read it",
+     "doan": "Drawing Pi when you ask about something means communication is blocked and things are not getting through. The image is heaven and earth drawing apart. It goes well if you keep your principles, keep a low profile and wait."
+    },
+    {
+     "tieu_de": "Examples of reading Pi (Standstill) in everyday life",
+     "danh_sach": [
+      "Asking whether to push a proposal at work: wait for a better time.",
+      "Asking about a cold relationship: lower expectations, keep respect.",
+      "Asking about spending: tighten up."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Pi (Standstill): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Pi (Standstill) a good or a bad hexagram?",
+     "dap": "Pi is a hard, blocked hexagram, but not for ever: the fifth and top lines show the standstill lifting and joy following."
+    },
+    {
+     "hoi": "If I cast Pi (Standstill), which changing line is the most favourable?",
+     "dap": "In Pi (Standstill), the line text leans towards yes if the changing line is: nine in the fourth place (line 4), nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot flow freely for ever, so Pi, standstill, follows Tai."
+    }
+   ],
+   "y_chinh": [
+    "Pi: the way is blocked",
+    "Asking: hold your principles and wait",
+    "The standstill will lift"
+   ]
+  },
+  "que-13-dong-nhan": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Tong Ren (Fellowship) when you ask about something: how to read it",
+     "doan": "Drawing Tong Ren when you ask about something means the matter calls for open cooperation with many people. The image is fire rising towards heaven. It goes well when you are fair and transparent and avoid cliques."
+    },
+    {
+     "tieu_de": "Examples of reading Tong Ren (Fellowship) in everyday life",
+     "danh_sach": [
+      "Asking about a cross-team project: yes, openly and fairly.",
+      "Asking whether to bring in partners: be transparent about money.",
+      "Asking about a conflict in a group: look for common ground."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Tong Ren (Fellowship): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Tong Ren (Fellowship) a good or a bad hexagram?",
+     "dap": "Tong Ren is favourable when the fellowship is open. Line two warns that sticking to your own clan brings regret."
+    },
+    {
+     "hoi": "If I cast Tong Ren (Fellowship), which changing line is the most favourable?",
+     "dap": "In Tong Ren (Fellowship), the line text leans towards yes if the changing line is: nine at the beginning (line 1), nine in the fourth place (line 4), nine in the fifth place (line 5). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot stay blocked for ever, so Tong Ren, fellowship, follows Pi."
+    }
+   ],
+   "y_chinh": [
+    "Tong Ren: fellowship in the open",
+    "Asking: fair, open cooperation",
+    "Cliques make it small"
+   ]
+  },
+  "que-14-dai-huu": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Da You (Great Possession) when you ask about something: how to read it",
+     "doan": "Drawing Da You when you ask about something means you have plenty: resources, support or results. The image is fire high in the sky. It goes well if you share, stay modest and use it for good."
+    },
+    {
+     "tieu_de": "Examples of reading Da You (Great Possession) in everyday life",
+     "danh_sach": [
+      "Asking about using a bonus: invest responsibly and give some away.",
+      "Asking about leading a successful team: share the credit.",
+      "Asking about a good result: keep being modest."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Da You (Great Possession): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Da You (Great Possession) a good or a bad hexagram?",
+     "dap": "Da You is very favourable — supreme success. The early lines warn to stay mindful of difficulty and not show off."
+    },
+    {
+     "hoi": "If I cast Da You (Great Possession), which changing line is the most favourable?",
+     "dap": "In Da You (Great Possession), the line text leans towards yes if the changing line is: nine at the beginning (line 1), nine in the second place (line 2), six in the fifth place (line 5), nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Those who join others in fellowship gain much, so Da You, great possession, follows Tong Ren."
+    }
+   ],
+   "y_chinh": [
+    "Da You: great possession",
+    "Asking: share and stay modest",
+    "Do not show off"
+   ]
+  },
+  "que-15-khiem": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Qian (Modesty) when you ask about something: how to read it",
+     "doan": "Drawing Qian (Modesty) when you ask about something means the matter goes well through humility. The image is a mountain hidden in the earth. It goes well when you do much and say little."
+    },
+    {
+     "tieu_de": "Examples of reading Qian (Modesty) in everyday life",
+     "danh_sach": [
+      "Asking how to get noticed at work: through steady results, not self-promotion.",
+      "Asking about a family disagreement: give way at the right moment.",
+      "Asking about a big ambition: modest steps bring it about."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Qian (Modesty): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Qian (Modesty) a good or a bad hexagram?",
+     "dap": "Modesty is the only hexagram whose six lines are all favourable. The judgment says the noble person carries things through to a good end."
+    },
+    {
+     "hoi": "If I cast Qian (Modesty), which changing line is the most favourable?",
+     "dap": "In Qian (Modesty), the line text leans towards yes if the changing line is: six at the beginning (line 1), nine in the third place (line 3), six in the fourth place (line 4), six in the fifth place (line 5). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Those who have much must not be full of themselves, so Modesty follows Great Possession."
+    }
+   ],
+   "y_chinh": [
+    "Modesty: a mountain within the earth",
+    "Asking: do much, say little",
+    "Humility brings things through"
+   ]
+  },
+  "que-16-du": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Yu (Enthusiasm) when you ask about something: how to read it",
+     "doan": "Drawing Yu when you ask about something means there is enthusiasm and energy around the matter. The image is thunder bursting from the earth. It goes well if the excitement is matched by preparation."
+    },
+    {
+     "tieu_de": "Examples of reading Yu (Enthusiasm) in everyday life",
+     "danh_sach": [
+      "Asking about launching a project: use the team spirit, but prepare.",
+      "Asking about a family event: yes, organise it.",
+      "Asking about a purchase on impulse: wait until the excitement settles."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Yu (Enthusiasm): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Yu (Enthusiasm) a good or a bad hexagram?",
+     "dap": "Yu is favourable for rallying people, but the first line warns that boasting about it brings misfortune."
+    },
+    {
+     "hoi": "If I cast Yu (Enthusiasm), which changing line is the most favourable?",
+     "dap": "In Yu (Enthusiasm), the line text leans towards yes if the changing line is: nine in the fourth place (line 4). It leans towards not now if the changing line is: six at the beginning (line 1). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Great and modest brings joy, so Yu, enthusiasm, follows Modesty."
+    }
+   ],
+   "y_chinh": [
+    "Yu: thunder from the earth",
+    "Asking: enthusiasm with preparation",
+    "Do not boast"
+   ]
+  },
+  "que-17-tuy": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Sui (Following) when you ask about something: how to read it",
+     "doan": "Drawing Sui when you ask about something means the matter calls for adapting and following what is right. The image is thunder resting in the lake. It goes well when you go with the times without following blindly."
+    },
+    {
+     "tieu_de": "Examples of reading Sui (Following) in everyday life",
+     "danh_sach": [
+      "Asking about a company reorganisation: adapt, keep your values.",
+      "Asking whether to follow a mentor's advice: yes, if it is sound.",
+      "Asking whether to follow a trend with money: only one that has been tested."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sui (Following): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "The matter has reached its end",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Sui (Following) a good or a bad hexagram?",
+     "dap": "Sui is favourable and blameless if you stay upright. Line four warns that gaining followers can stir suspicion — stay transparent."
+    },
+    {
+     "hoi": "If I cast Sui (Following), which changing line is the most favourable?",
+     "dap": "In Sui (Following), the line text leans towards yes if the changing line is: nine in the fifth place (line 5). It leans towards not now if the changing line is: nine in the fourth place (line 4). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Joy brings followers, so Sui, following, follows Yu."
+    }
+   ],
+   "y_chinh": [
+    "Sui: following the time",
+    "Asking: adapt, but follow what is right",
+    "Do not follow blindly"
+   ]
+  },
+  "que-18-co": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Gu (Repairing Decay) when you ask about something: how to read it",
+     "doan": "Drawing Gu when you ask about something means there is an old problem that needs repairing. The image is stale air trapped under a mountain. It goes well if you find the root and fix it with a plan."
+    },
+    {
+     "tieu_de": "Examples of reading Gu (Repairing Decay) in everyday life",
+     "danh_sach": [
+      "Asking about a failing team: deal with the backlog first.",
+      "Asking about an old family quarrel: heal it step by step.",
+      "Asking about old debts: settle them."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Gu (Repairing Decay): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "The matter has reached its end",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Gu (Repairing Decay) a good or a bad hexagram?",
+     "dap": "Gu sounds bad but promises great success: repair work is welcome. Line four warns that tolerating the problem makes it worse."
+    },
+    {
+     "hoi": "If I cast Gu (Repairing Decay), which changing line is the most favourable?",
+     "dap": "In Gu (Repairing Decay), the line text leans towards yes if the changing line is: six in the fifth place (line 5). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Following others with pleasure lets things slide, and something has to be repaired; so Gu follows Sui."
+    }
+   ],
+   "y_chinh": [
+    "Gu: repairing what has decayed",
+    "Asking: find the root, repair with a plan",
+    "Do not cover it up"
+   ]
+  },
+  "que-19-lam": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Lin (Approach) when you ask about something: how to read it",
+     "doan": "Drawing Lin when you ask about something means the matter is growing and you are drawing closer to it. The image is earth overlooking the lake. It goes well if you stay close to people and remember the good run is limited."
+    },
+    {
+     "tieu_de": "Examples of reading Lin (Approach) in everyday life",
+     "danh_sach": [
+      "Asking about a new management role: listen to your team.",
+      "Asking about a relationship moving forward: stay sincere.",
+      "Asking about rising income: save part of it."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Lin (Approach): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Lin (Approach) a good or a bad hexagram?",
+     "dap": "Lin is very favourable now, but the judgment warns that 'in the eighth month there will be misfortune' — growth does not last for ever."
+    },
+    {
+     "hoi": "If I cast Lin (Approach), which changing line is the most favourable?",
+     "dap": "In Lin (Approach), the line text leans towards yes if the changing line is: nine in the second place (line 2), six in the fourth place (line 4), six in the fifth place (line 5), six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Once there is work, things can grow great; so Lin, approach, follows Gu."
+    }
+   ],
+   "y_chinh": [
+    "Lin: growth and approach",
+    "Asking: lead closely, kindly",
+    "The good run has a limit"
+   ]
+  },
+  "que-20-quan": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Guan (Contemplation) when you ask about something: how to read it",
+     "doan": "Drawing Guan when you ask about something means it is time to observe before acting — and to remember you are being observed. The image is wind moving over the land. It goes well when you look at the whole picture and at yourself."
+    },
+    {
+     "tieu_de": "Examples of reading Guan (Contemplation) in everyday life",
+     "danh_sach": [
+      "Asking about a new market: research first.",
+      "Asking about a partner: observe carefully before committing.",
+      "Asking about parenting: set the example."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Guan (Contemplation): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Guan (Contemplation) a good or a bad hexagram?",
+     "dap": "Guan is neutral to favourable; its value is in clear seeing. Lines one and two warn against a shallow or narrow view."
+    },
+    {
+     "hoi": "If I cast Guan (Contemplation), which changing line is the most favourable?",
+     "dap": "In Guan (Contemplation), the line text leans towards yes if the changing line is: six in the fourth place (line 4), nine in the fifth place (line 5), nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things that have grown great become something to be looked at; so Guan, contemplation, follows Lin."
+    }
+   ],
+   "y_chinh": [
+    "Guan: look before you act",
+    "Asking: see the whole picture",
+    "Others are watching you too"
+   ]
+  },
+  "que-21-phe-hap": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Shi He (Biting Through) when you ask about something: how to read it",
+     "doan": "Drawing Shi He when you ask about something means there is a clear obstacle that must be dealt with. The image is thunder and lightning. It goes well if you name it and handle it firmly and fairly."
+    },
+    {
+     "tieu_de": "Examples of reading Shi He (Biting Through) in everyday life",
+     "danh_sach": [
+      "Asking about a colleague breaking the rules: deal with it fairly.",
+      "Asking about a sticking point in a relationship: say it plainly.",
+      "Asking about money leaking away: stop it."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Shi He (Biting Through): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Shi He (Biting Through) a good or a bad hexagram?",
+     "dap": "Shi He brings success through firm justice. The top line warns that refusing to hear warnings ends badly."
+    },
+    {
+     "hoi": "If I cast Shi He (Biting Through), which changing line is the most favourable?",
+     "dap": "In Shi He (Biting Through), the line text leans towards yes if the changing line is: six in the second place (line 2). It leans towards not now if the changing line is: nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Once something can be looked at, it can be brought together; biting through joins what is apart. So Shi He follows Guan."
+    }
+   ],
+   "y_chinh": [
+    "Shi He: bite through the obstacle",
+    "Asking: name it, deal with it fairly",
+    "Do not ignore warnings"
+   ]
+  },
+  "que-22-bi": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Bi (Grace) when you ask about something: how to read it",
+     "doan": "Drawing Bi (Grace) when you ask about something means appearance and presentation matter, but only so far. The image is fire at the foot of a mountain. It goes well when form serves substance."
+    },
+    {
+     "tieu_de": "Examples of reading Bi (Grace) in everyday life",
+     "danh_sach": [
+      "Asking about a rebrand: polish, but keep the product strong.",
+      "Asking about a first date: be yourself, nicely presented.",
+      "Asking about spending on looks: moderately."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Bi (Grace): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Bi (Grace) a good or a bad hexagram?",
+     "dap": "Grace brings small success; it suits small matters. The top line says the highest grace is simplicity."
+    },
+    {
+     "hoi": "If I cast Bi (Grace), which changing line is the most favourable?",
+     "dap": "In Bi (Grace), the line text leans towards yes if the changing line is: six in the second place (line 2), six in the fourth place (line 4), nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot just come together carelessly; so Grace, adornment, follows Biting Through."
+    }
+   ],
+   "y_chinh": [
+    "Bi: grace and adornment",
+    "Asking: form should serve substance",
+    "Simplicity is the highest grace"
+   ]
+  },
+  "que-23-bac": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Bo (Splitting Apart) when you ask about something: how to read it",
+     "doan": "Drawing Bo when you ask about something means the foundation is being worn away. The image is a mountain eroded down to the ground. It goes well if you stop expanding and protect what matters most."
+    },
+    {
+     "tieu_de": "Examples of reading Bo (Splitting Apart) in everyday life",
+     "danh_sach": [
+      "Asking about a declining company: protect your skills and plan ahead.",
+      "Asking about a fading relationship: talk honestly.",
+      "Asking about an investment losing value: cut losses."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Bo (Splitting Apart): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "The matter has reached its end",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Bo (Splitting Apart) a good or a bad hexagram?",
+     "dap": "Bo is a difficult hexagram: it does not help to go anywhere. But the top line shows a large fruit left uneaten — the seed of renewal survives."
+    },
+    {
+     "hoi": "If I cast Bo (Splitting Apart), which changing line is the most favourable?",
+     "dap": "In Bo (Splitting Apart), the line text leans towards yes if the changing line is: six in the fifth place (line 5). It leans towards not now if the changing line is: six at the beginning (line 1), six in the second place (line 2), six in the fourth place (line 4). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: When adornment goes too far, it is exhausted; so Bo, splitting apart, follows Grace."
+    }
+   ],
+   "y_chinh": [
+    "Bo: the base is wearing away",
+    "Asking: stop expanding, protect the core",
+    "The seed of renewal survives"
+   ]
+  },
+  "que-24-phuc": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Fu (Return) when you ask about something: how to read it",
+     "doan": "Drawing Fu when you ask about something means the turning point has come and things begin to recover. The image is thunder stirring deep in the earth. It goes well if you start again in small steps."
+    },
+    {
+     "tieu_de": "Examples of reading Fu (Return) in everyday life",
+     "danh_sach": [
+      "Asking about recovering after a setback: start small, learn the lesson.",
+      "Asking about reconnecting with someone: go gently.",
+      "Asking about rebuilding finances: step by step."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Fu (Return): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Fu (Return) a good or a bad hexagram?",
+     "dap": "Fu is favourable: the return brings success. The top line warns that missing the chance to return brings long trouble."
+    },
+    {
+     "hoi": "If I cast Fu (Return), which changing line is the most favourable?",
+     "dap": "In Fu (Return), the line text leans towards yes if the changing line is: nine at the beginning (line 1), six in the second place (line 2). It leans towards not now if the changing line is: six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot be split apart for ever; when it reaches the bottom it comes back up. So Fu, return, follows Bo."
+    }
+   ],
+   "y_chinh": [
+    "Fu: the return",
+    "Asking: start again in small steps",
+    "Do not miss the turning point"
+   ]
+  },
+  "que-25-vo-vong": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Wu Wang (Innocence) when you ask about something: how to read it",
+     "doan": "Drawing Wu Wang when you ask about something means the matter goes well only if you act honestly, without scheming. The image is thunder rolling under heaven. Accept what is unexpected."
+    },
+    {
+     "tieu_de": "Examples of reading Wu Wang (Innocence) in everyday life",
+     "danh_sach": [
+      "Asking about a shortcut to success: do not take it.",
+      "Asking about a relationship: be sincere, not calculating.",
+      "Asking about a quick-profit offer: avoid it."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Wu Wang (Innocence): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Wu Wang (Innocence) a good or a bad hexagram?",
+     "dap": "Wu Wang promises great success if you are upright; if not, there is trouble. Line three warns that undeserved misfortune can still happen."
+    },
+    {
+     "hoi": "If I cast Wu Wang (Innocence), which changing line is the most favourable?",
+     "dap": "In Wu Wang (Innocence), the line text leans towards yes if the changing line is: nine at the beginning (line 1), six in the second place (line 2). It leans towards not now if the changing line is: nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Once you return to the right way, you are free of falseness; so Wu Wang, innocence, follows Fu."
+    }
+   ],
+   "y_chinh": [
+    "Wu Wang: honest and without scheming",
+    "Asking: act sincerely",
+    "Expect the unexpected"
+   ]
+  },
+  "que-26-dai-suc": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Da Xu (Great Taming) when you ask about something: how to read it",
+     "doan": "Drawing Da Xu when you ask about something means you are building up great strength and should hold it until the right time. The image is heaven contained within a mountain. It goes well with deep preparation and service."
+    },
+    {
+     "tieu_de": "Examples of reading Da Xu (Great Taming) in everyday life",
+     "danh_sach": [
+      "Asking about training for a bigger role: keep preparing.",
+      "Asking about a long-term goal: save and study deeply.",
+      "Asking whether to act now: wait for the green light."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Da Xu (Great Taming): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Da Xu (Great Taming) a good or a bad hexagram?",
+     "dap": "Da Xu is favourable; perseverance and going out to serve bring good fortune. The top line shows the way finally opening."
+    },
+    {
+     "hoi": "If I cast Da Xu (Great Taming), which changing line is the most favourable?",
+     "dap": "In Da Xu (Great Taming), the line text leans towards yes if the changing line is: nine in the third place (line 3), six in the fourth place (line 4), six in the fifth place (line 5), nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Free of falseness, one can accumulate; so Da Xu, great accumulation, follows Wu Wang."
+    }
+   ],
+   "y_chinh": [
+    "Da Xu: great strength held in check",
+    "Asking: prepare deeply",
+    "Act when the way opens"
+   ]
+  },
+  "que-27-di": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Yi (Nourishment) when you ask about something: how to read it",
+     "doan": "Drawing Yi when you ask about something means look at what you feed yourself and others — food, words and thoughts. The image is a jaw moving to chew. It goes well when you nourish what is right."
+    },
+    {
+     "tieu_de": "Examples of reading Yi (Nourishment) in everyday life",
+     "danh_sach": [
+      "Asking about a caring job: suitable.",
+      "Asking about a relationship: nourish it with kind words.",
+      "Asking about spending: spend on what nourishes you long term."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Yi (Nourishment): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Yi (Nourishment) a good or a bad hexagram?",
+     "dap": "Yi is favourable if you nourish the right things. Line one warns against envying others instead of using your own resources."
+    },
+    {
+     "hoi": "If I cast Yi (Nourishment), which changing line is the most favourable?",
+     "dap": "In Yi (Nourishment), the line text leans towards yes if the changing line is: six in the fourth place (line 4). It leans towards not now if the changing line is: nine at the beginning (line 1), six in the second place (line 2), six in the third place (line 3). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Once things are accumulated, they can be nourished; so Yi, nourishment, follows Da Xu."
+    }
+   ],
+   "y_chinh": [
+    "Yi: what you nourish",
+    "Asking: feed what is right",
+    "Watch your words and appetite"
+   ]
+  },
+  "que-28-dai-qua": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Da Guo (Great Excess) when you ask about something: how to read it",
+     "doan": "Drawing Da Guo when you ask about something means the load is far heavier than things can carry. The image is a sagging ridgepole. It goes well if you admit the overload and make a planned change."
+    },
+    {
+     "tieu_de": "Examples of reading Da Guo (Great Excess) in everyday life",
+     "danh_sach": [
+      "Asking about burnout at work: redistribute tasks.",
+      "Asking about a strained relationship: a real change is needed.",
+      "Asking about debts: restructure."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Da Guo (Great Excess): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Da Guo (Great Excess) a good or a bad hexagram?",
+     "dap": "Da Guo is tense but not hopeless: it furthers to have somewhere to go. Line three warns that stubbornly carrying on leads to collapse."
+    },
+    {
+     "hoi": "If I cast Da Guo (Great Excess), which changing line is the most favourable?",
+     "dap": "In Da Guo (Great Excess), the line text leans towards yes if the changing line is: six at the beginning (line 1), nine in the second place (line 2). It leans towards not now if the changing line is: nine in the third place (line 3), six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Without nourishment one cannot move; and great movement means excess; so Da Guo follows Yi."
+    }
+   ],
+   "y_chinh": [
+    "Da Guo: the beam is overloaded",
+    "Asking: admit it and change",
+    "Do not carry it until it breaks"
+   ]
+  },
+  "que-29-kham": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Kan (The Abyss) when you ask about something: how to read it",
+     "doan": "Drawing Kan when you ask about something means difficulties are coming one after another. The image is water upon water. It goes well if you stay sincere and steady and go through it step by step."
+    },
+    {
+     "tieu_de": "Examples of reading Kan (The Abyss) in everyday life",
+     "danh_sach": [
+      "Asking about a crisis at work: keep your principles.",
+      "Asking about trust in a relationship: be honest.",
+      "Asking about risky money moves: keep things safe."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Kan (The Abyss): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Kan (The Abyss) a good or a bad hexagram?",
+     "dap": "Kan is a hexagram of danger, but sincerity brings success in the heart. Lines one and three warn against getting used to danger or moving when every way is blocked."
+    },
+    {
+     "hoi": "If I cast Kan (The Abyss), which changing line is the most favourable?",
+     "dap": "In Kan (The Abyss), no line leans clearly towards yes; even the most favourable lines come with the condition of keeping things right. It leans towards not now if the changing line is: six at the beginning (line 1), six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot be in excess for ever; they fall into danger; so Kan follows Da Guo."
+    }
+   ],
+   "y_chinh": [
+    "Kan: danger upon danger",
+    "Asking: stay sincere and steady",
+    "Small steps through the danger"
+   ]
+  },
+  "que-30-ly": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Li (The Clinging Fire) when you ask about something: how to read it",
+     "doan": "Drawing Li when you ask about something means clarity and something to rely on. The image is fire that needs fuel to shine. It goes well when you hold on to what is right and stay gentle inside."
+    },
+    {
+     "tieu_de": "Examples of reading Li (The Clinging Fire) in everyday life",
+     "danh_sach": [
+      "Asking about a communications role: suitable.",
+      "Asking about a relationship: close but not dependent.",
+      "Asking about finances: be transparent."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Li (The Clinging Fire): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Li (The Clinging Fire) a good or a bad hexagram?",
+     "dap": "Li is favourable: perseverance brings success. Line four warns that what flares up too fast burns out fast."
+    },
+    {
+     "hoi": "If I cast Li (The Clinging Fire), which changing line is the most favourable?",
+     "dap": "In Li (The Clinging Fire), the line text leans towards yes if the changing line is: nine at the beginning (line 1), six in the second place (line 2), nine at the top (line 6). It leans towards not now if the changing line is: nine in the third place (line 3), nine in the fourth place (line 4). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Falling into danger, one must cling to something; so Li, the clinging, follows Kan."
+    }
+   ],
+   "y_chinh": [
+    "Li: brightness that clings",
+    "Asking: hold to what is right",
+    "Do not burn out fast"
+   ]
+  },
+  "que-31-ham": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Xian (Influence) when you ask about something: how to read it",
+     "doan": "Drawing Xian when you ask about something means a mutual attraction or influence is at work. The image is a lake resting on a mountain. It goes well with an open, receptive heart and sincerity."
+    },
+    {
+     "tieu_de": "Examples of reading Xian (Influence) in everyday life",
+     "danh_sach": [
+      "Asking about a new romance: be sincere, do not rush.",
+      "Asking about winning customers: through understanding.",
+      "Asking about acting on a feeling: wait a little."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Xian (Influence): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Xian (Influence) a good or a bad hexagram?",
+     "dap": "Xian is favourable, especially for relationships. Line two warns that acting at once on a feeling brings trouble."
+    },
+    {
+     "hoi": "If I cast Xian (Influence), which changing line is the most favourable?",
+     "dap": "In Xian (Influence), the line text leans towards yes if the changing line is: nine in the fourth place (line 4). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: After heaven and earth come man and woman; Xian, mutual influence, opens the second part of the book."
+    }
+   ],
+   "y_chinh": [
+    "Xian: mutual attraction",
+    "Asking: open, sincere, receptive",
+    "Do not act on impulse"
+   ]
+  },
+  "que-32-hang": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Heng (Duration) when you ask about something: how to read it",
+     "doan": "Drawing Heng when you ask about something means the matter is about endurance and commitment. The image is thunder and wind always together. It goes well with steady effort over time."
+    },
+    {
+     "tieu_de": "Examples of reading Heng (Duration) in everyday life",
+     "danh_sach": [
+      "Asking about staying in a job: commitment builds reputation.",
+      "Asking about a marriage: it lasts through commitment.",
+      "Asking about long-term investing: regular and steady."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Heng (Duration): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Heng (Duration) a good or a bad hexagram?",
+     "dap": "Heng is favourable and blameless. The first line warns that wanting permanence too fast backfires."
+    },
+    {
+     "hoi": "If I cast Heng (Duration), which changing line is the most favourable?",
+     "dap": "In Heng (Duration), no line leans clearly towards yes; even the most favourable lines come with the condition of keeping things right. It leans towards not now if the changing line is: six at the beginning (line 1), nine in the fourth place (line 4), six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: The way of husband and wife must last, so Heng, duration, follows Xian."
+    }
+   ],
+   "y_chinh": [
+    "Heng: lasting commitment",
+    "Asking: steady effort over time",
+    "Do not demand permanence too fast"
+   ]
+  },
+  "que-33-don": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Dun (Retreat) when you ask about something: how to read it",
+     "doan": "Drawing Dun when you ask about something means it is time to step back on purpose. The image is heaven withdrawing above the mountain. It goes well when you retreat to protect your strength, not out of fear."
+    },
+    {
+     "tieu_de": "Examples of reading Dun (Retreat) in everyday life",
+     "danh_sach": [
+      "Asking whether to leave a toxic workplace: yes, with a plan.",
+      "Asking about a tense relationship: give each other space.",
+      "Asking about a risky investment: pull out."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Dun (Retreat): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Dun (Retreat) a good or a bad hexagram?",
+     "dap": "Dun brings success through timely retreat. The first line warns that retreating last, at the tail, is dangerous."
+    },
+    {
+     "hoi": "If I cast Dun (Retreat), which changing line is the most favourable?",
+     "dap": "In Dun (Retreat), the line text leans towards yes if the changing line is: nine in the fourth place (line 4), nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot stay in one place for ever, so Dun, retreat, follows Heng."
+    }
+   ],
+   "y_chinh": [
+    "Dun: retreat in time",
+    "Asking: step back to protect yourself",
+    "Do not leave it too late"
+   ]
+  },
+  "que-34-dai-trang": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Da Zhuang (Great Power) when you ask about something: how to read it",
+     "doan": "Drawing Da Zhuang when you ask about something means you have a lot of strength and momentum. The image is thunder high in the sky. It goes well if you use it with restraint and good form."
+    },
+    {
+     "tieu_de": "Examples of reading Da Zhuang (Great Power) in everyday life",
+     "danh_sach": [
+      "Asking about pushing a project: you have momentum, do not overpower others.",
+      "Asking about a relationship: strong but gentle.",
+      "Asking about borrowing to grow: not too much."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Da Zhuang (Great Power): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Not yet time",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Da Zhuang (Great Power) a good or a bad hexagram?",
+     "dap": "Da Zhuang is favourable if you keep upright. Lines three and six warn of the ram that butts the fence and gets its horns stuck."
+    },
+    {
+     "hoi": "If I cast Da Zhuang (Great Power), which changing line is the most favourable?",
+     "dap": "In Da Zhuang (Great Power), no line leans clearly towards yes; even the most favourable lines come with the condition of keeping things right. It leans towards not now if the changing line is: nine at the beginning (line 1). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot retreat for ever, so Da Zhuang, great power, follows Dun."
+    }
+   ],
+   "y_chinh": [
+    "Da Zhuang: great power",
+    "Asking: strength with restraint",
+    "Do not butt the fence"
+   ]
+  },
+  "que-35-tan": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Jin (Progress) when you ask about something: how to read it",
+     "doan": "Drawing Jin when you ask about something means progress and recognition are coming. The image is the sun rising over the earth. It goes well when you advance through real ability and good character."
+    },
+    {
+     "tieu_de": "Examples of reading Jin (Progress) in everyday life",
+     "danh_sach": [
+      "Asking about a promotion: likely, if earned.",
+      "Asking about a relationship moving forward: positive.",
+      "Asking about income: rising."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Jin (Progress): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Jin (Progress) a good or a bad hexagram?",
+     "dap": "Jin is favourable — the prince is received three times in a day. Line four warns against advancing by greed like a hamster."
+    },
+    {
+     "hoi": "If I cast Jin (Progress), which changing line is the most favourable?",
+     "dap": "In Jin (Progress), the line text leans towards yes if the changing line is: six in the third place (line 3), six in the fifth place (line 5). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot stay powerful without advancing, so Jin, progress, follows Da Zhuang."
+    }
+   ],
+   "y_chinh": [
+    "Jin: progress like the sunrise",
+    "Asking: advance through real ability",
+    "Do not climb by greed"
+   ]
+  },
+  "que-36-minh-di": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Ming Yi (Darkening of the Light) when you ask about something: how to read it",
+     "doan": "Drawing Ming Yi when you ask about something means the environment is unfavourable and your light is being dimmed. The image is the sun sinking below the earth. It goes well if you keep your principles quietly and wait."
+    },
+    {
+     "tieu_de": "Examples of reading Ming Yi (Darkening of the Light) in everyday life",
+     "danh_sach": [
+      "Asking about an unfair boss: do good work, avoid confrontation.",
+      "Asking about being hurt in a relationship: look after yourself first.",
+      "Asking about business in a downturn: scale down."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ming Yi (Darkening of the Light): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Ming Yi (Darkening of the Light) a good or a bad hexagram?",
+     "dap": "Ming Yi is a hard hexagram, but perseverance in adversity is favourable. The top line shows that what rose by darkness falls."
+    },
+    {
+     "hoi": "If I cast Ming Yi (Darkening of the Light), which changing line is the most favourable?",
+     "dap": "In Ming Yi (Darkening of the Light), the line text leans towards yes if the changing line is: six in the second place (line 2). It leans towards not now if the changing line is: nine at the beginning (line 1), six in the fourth place (line 4), six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Advancing, one is bound to be hurt; so Ming Yi, the darkening of the light, follows Jin."
+    }
+   ],
+   "y_chinh": [
+    "Ming Yi: the light is wounded",
+    "Asking: keep your light inside",
+    "Wait for the dark to pass"
+   ]
+  },
+  "que-37-gia-nhan": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Jia Ren (The Family) when you ask about something: how to read it",
+     "doan": "Drawing Jia Ren when you ask about something means the matter is about home, roles and household order. The image is wind rising from the fire of the hearth. It goes well when roles are clear and words match deeds."
+    },
+    {
+     "tieu_de": "Examples of reading Jia Ren (The Family) in everyday life",
+     "danh_sach": [
+      "Asking about a family business: clear roles help.",
+      "Asking about living together: build shared routines.",
+      "Asking about household money: plan the budget together."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Jia Ren (The Family): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Jia Ren (The Family) a good or a bad hexagram?",
+     "dap": "Jia Ren is favourable, especially for family matters. Line three notes that a home that is a bit strict is better than one where anything goes."
+    },
+    {
+     "hoi": "If I cast Jia Ren (The Family), which changing line is the most favourable?",
+     "dap": "In Jia Ren (The Family), the line text leans towards yes if the changing line is: six in the fourth place (line 4), nine in the fifth place (line 5). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Hurt outside, one returns home; so Jia Ren, the family, follows Ming Yi."
+    }
+   ],
+   "y_chinh": [
+    "Jia Ren: the family",
+    "Asking: clear roles, words that match deeds",
+    "Lead the home with warmth"
+   ]
+  },
+  "que-38-khue": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Kui (Opposition) when you ask about something: how to read it",
+     "doan": "Drawing Kui when you ask about something means there are differences or opposition. The image is fire rising and the lake sinking. It goes well if you accept the differences and work together on small things."
+    },
+    {
+     "tieu_de": "Examples of reading Kui (Opposition) in everyday life",
+     "danh_sach": [
+      "Asking about a disagreement at work: find one small task to share.",
+      "Asking about a partner with different views: understand rather than correct.",
+      "Asking about shared money: keep things separate."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Kui (Opposition): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Kui (Opposition) a good or a bad hexagram?",
+     "dap": "Kui says small matters go well. The top line shows suspicion dissolving and reconciliation coming."
+    },
+    {
+     "hoi": "If I cast Kui (Opposition), which changing line is the most favourable?",
+     "dap": "In Kui (Opposition), the line text leans towards yes if the changing line is: nine in the second place (line 2), nine in the fourth place (line 4), six in the fifth place (line 5), nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: When the way of the family is exhausted, there is opposition; so Kui follows Jia Ren."
+    }
+   ],
+   "y_chinh": [
+    "Kui: opposition",
+    "Asking: accept differences",
+    "Start with small common ground"
+   ]
+  },
+  "que-39-kien": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Jian (Obstruction) when you ask about something: how to read it",
+     "doan": "Drawing Jian when you ask about something means the way is blocked. The image is water on a steep mountain. It goes well if you stop, look at your own part, and find help."
+    },
+    {
+     "tieu_de": "Examples of reading Jian (Obstruction) in everyday life",
+     "danh_sach": [
+      "Asking about a stalled project: ask for advice.",
+      "Asking about a rocky relationship: slow down.",
+      "Asking about money trouble: look for support."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Jian (Obstruction): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "You need people working with you",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Jian (Obstruction) a good or a bad hexagram?",
+     "dap": "Jian is a hard hexagram, but turning back and seeing the great person is favourable. The fifth line says friends come in the hardest moment."
+    },
+    {
+     "hoi": "If I cast Jian (Obstruction), which changing line is the most favourable?",
+     "dap": "In Jian (Obstruction), the line text leans towards yes if the changing line is: six in the fourth place (line 4), nine in the fifth place (line 5), six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Opposition brings difficulty, so Jian, obstruction, follows Kui."
+    }
+   ],
+   "y_chinh": [
+    "Jian: obstruction",
+    "Asking: stop and look at yourself",
+    "Help comes in the hardest moment"
+   ]
+  },
+  "que-40-giai": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Xie (Deliverance) when you ask about something: how to read it",
+     "doan": "Drawing Xie when you ask about something means the tension is releasing and the problem can be solved. The image is a storm breaking. It goes well if you settle the rest quickly and forgive."
+    },
+    {
+     "tieu_de": "Examples of reading Xie (Deliverance) in everyday life",
+     "danh_sach": [
+      "Asking about a long dispute: settle it.",
+      "Asking about an old grudge: let it go.",
+      "Asking about debts: pay them off."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Xie (Deliverance): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Xie (Deliverance) a good or a bad hexagram?",
+     "dap": "Xie is favourable: deliverance after trouble. Line three warns against taking a position you have not earned."
+    },
+    {
+     "hoi": "If I cast Xie (Deliverance), which changing line is the most favourable?",
+     "dap": "In Xie (Deliverance), the line text leans towards yes if the changing line is: six at the beginning (line 1), nine in the fourth place (line 4), six in the fifth place (line 5), six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot stay blocked for ever, so Xie, deliverance, follows Jian."
+    }
+   ],
+   "y_chinh": [
+    "Xie: deliverance",
+    "Asking: settle it and move on",
+    "Forgive and return to normal"
+   ]
+  },
+  "que-41-ton": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Sun (Decrease) when you ask about something: how to read it",
+     "doan": "Drawing Sun when you ask about something means it is time to cut back on purpose. The image is a lake giving water to the mountain. It goes well when you drop the excess and give sincerely where it matters."
+    },
+    {
+     "tieu_de": "Examples of reading Sun (Decrease) in everyday life",
+     "danh_sach": [
+      "Asking about costs at work: cut the unnecessary.",
+      "Asking about a relationship: ask for less.",
+      "Asking about spending: tighten up."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sun (Decrease): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Sun (Decrease) a good or a bad hexagram?",
+     "dap": "Sun is favourable with sincerity — even a simple offering is enough. Line three notes that sometimes fewer people work better than more."
+    },
+    {
+     "hoi": "If I cast Sun (Decrease), which changing line is the most favourable?",
+     "dap": "In Sun (Decrease), the line text leans towards yes if the changing line is: six in the third place (line 3), six in the fourth place (line 4), six in the fifth place (line 5). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Release brings some loss; so Sun, decrease, follows Xie."
+    }
+   ],
+   "y_chinh": [
+    "Sun: decrease with sincerity",
+    "Asking: cut back what is excess",
+    "Sincerity counts more than size"
+   ]
+  },
+  "que-42-ich": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Yi (Increase) when you ask about something: how to read it",
+     "doan": "Drawing Yi (Increase) when you ask about something means it is a time of growth and support. The image is wind and thunder strengthening each other. It goes well if you seize it and help others rise with you."
+    },
+    {
+     "tieu_de": "Examples of reading Yi (Increase) in everyday life",
+     "danh_sach": [
+      "Asking about expanding: yes, with support.",
+      "Asking about a relationship: build each other up.",
+      "Asking about investing: a time of increase."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Yi (Increase): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Yi (Increase) a good or a bad hexagram?",
+     "dap": "Increase is favourable — it furthers to undertake things. The top line warns that taking without giving invites attack."
+    },
+    {
+     "hoi": "If I cast Yi (Increase), which changing line is the most favourable?",
+     "dap": "In Yi (Increase), the line text leans towards yes if the changing line is: nine at the beginning (line 1), six in the fourth place (line 4), nine in the fifth place (line 5). It leans towards not now if the changing line is: nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Decrease that goes on long enough turns into increase; so Yi follows Sun."
+    }
+   ],
+   "y_chinh": [
+    "Yi: increase",
+    "Asking: grow and lift others",
+    "Share what you gain"
+   ]
+  },
+  "que-43-quai": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Guai (Breakthrough) when you ask about something: how to read it",
+     "doan": "Drawing Guai when you ask about something means a decision is due and must be made openly. The image is lake water risen to the sky. It goes well when you are decisive and transparent without using force."
+    },
+    {
+     "tieu_de": "Examples of reading Guai (Breakthrough) in everyday life",
+     "danh_sach": [
+      "Asking about ending a bad partnership: decide and announce it clearly.",
+      "Asking about a habit: break it now.",
+      "Asking about a losing investment: cut it."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Guai (Breakthrough): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Guai (Breakthrough) a good or a bad hexagram?",
+     "dap": "Guai calls for resolution with care: announcing the truth is dangerous but right. The top line warns that ignoring the alarm leads to trouble."
+    },
+    {
+     "hoi": "If I cast Guai (Breakthrough), which changing line is the most favourable?",
+     "dap": "In Guai (Breakthrough), no line leans clearly towards yes; even the most favourable lines come with the condition of keeping things right. It leans towards not now if the changing line is: six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Increase that goes on bursts out; so Guai, breakthrough, follows Yi."
+    }
+   ],
+   "y_chinh": [
+    "Guai: breakthrough",
+    "Asking: decide openly",
+    "Do not use force"
+   ]
+  },
+  "que-44-cau": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Gou (Coming to Meet) when you ask about something: how to read it",
+     "doan": "Drawing Gou when you ask about something means something unexpected is coming in, and it could grow quickly. The image is wind under heaven. It goes well if you check carefully before letting it in."
+    },
+    {
+     "tieu_de": "Examples of reading Gou (Coming to Meet) in everyday life",
+     "danh_sach": [
+      "Asking about a surprise opportunity: do your checks.",
+      "Asking about a sudden romance: slow down before committing.",
+      "Asking about an attractive offer: due diligence."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Gou (Coming to Meet): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "The matter has reached its end",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Gou (Coming to Meet) a good or a bad hexagram?",
+     "dap": "Gou warns not to 'marry that woman': a small influence grows. The first line says stop a small bad influence early."
+    },
+    {
+     "hoi": "If I cast Gou (Coming to Meet), which changing line is the most favourable?",
+     "dap": "In Gou (Coming to Meet), no line leans clearly towards yes; even the most favourable lines come with the condition of keeping things right. It leans towards not now if the changing line is: nine in the fourth place (line 4). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: After breakthrough there is meeting; so Gou, coming to meet, follows Guai."
+    }
+   ],
+   "y_chinh": [
+    "Gou: an unexpected meeting",
+    "Asking: check before letting it in",
+    "Curb small influences early"
+   ]
+  },
+  "que-45-tuy": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Cui (Gathering) when you ask about something: how to read it",
+     "doan": "Drawing Cui when you ask about something means people are gathering around a shared aim. The image is a lake collecting water over the land. It goes well with a leader, a shared goal and preparation for surprises."
+    },
+    {
+     "tieu_de": "Examples of reading Cui (Gathering) in everyday life",
+     "danh_sach": [
+      "Asking about a big meeting or event: yes, organise it well.",
+      "Asking about meeting both families: a good time.",
+      "Asking about pooling money: with discipline."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Cui (Gathering): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Cui (Gathering) a good or a bad hexagram?",
+     "dap": "Cui is favourable: great offerings bring good fortune. The fifth line says a leader not yet trusted wins people through steady integrity."
+    },
+    {
+     "hoi": "If I cast Cui (Gathering), which changing line is the most favourable?",
+     "dap": "In Cui (Gathering), the line text leans towards yes if the changing line is: six at the beginning (line 1), six in the second place (line 2), nine in the fourth place (line 4). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Meeting brings people together; so Cui, gathering, follows Gou."
+    }
+   ],
+   "y_chinh": [
+    "Cui: gathering together",
+    "Asking: a shared goal and a leader",
+    "Prepare for surprises"
+   ]
+  },
+  "que-46-thang": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Sheng (Pushing Upward) when you ask about something: how to read it",
+     "doan": "Drawing Sheng when you ask about something means steady upward progress. The image is a tree growing out of the earth. It goes well if you climb step by step with the help of respected people."
+    },
+    {
+     "tieu_de": "Examples of reading Sheng (Pushing Upward) in everyday life",
+     "danh_sach": [
+      "Asking about a promotion: rung by rung.",
+      "Asking about a relationship: growing.",
+      "Asking about a business: steady growth."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Sheng (Pushing Upward): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Sheng (Pushing Upward) a good or a bad hexagram?",
+     "dap": "Sheng is very favourable: do not worry. The top line warns against climbing blindly."
+    },
+    {
+     "hoi": "If I cast Sheng (Pushing Upward), which changing line is the most favourable?",
+     "dap": "In Sheng (Pushing Upward), the line text leans towards yes if the changing line is: six at the beginning (line 1), nine in the third place (line 3), six in the fourth place (line 4). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Gathering and moving upward is called rising; so Sheng follows Cui."
+    }
+   ],
+   "y_chinh": [
+    "Sheng: pushing upward",
+    "Asking: rise step by step",
+    "Do not climb blindly"
+   ]
+  },
+  "que-47-khon": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Kun (Oppression) when you ask about something: how to read it",
+     "doan": "Drawing Kun (Oppression) when you ask about something means resources are drained and words are not believed. The image is a lake with no water. It goes well if you keep your resolve and let your actions speak."
+    },
+    {
+     "tieu_de": "Examples of reading Kun (Oppression) in everyday life",
+     "danh_sach": [
+      "Asking about a project with no budget: focus on the core.",
+      "Asking about being misunderstood: act, do not argue.",
+      "Asking about money: save as much as you can."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Kun (Oppression): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Kun (Oppression) a good or a bad hexagram?",
+     "dap": "Kun is hard, yet the noble person who keeps upright still has success. The top line says that once you move, the trap loosens."
+    },
+    {
+     "hoi": "If I cast Kun (Oppression), which changing line is the most favourable?",
+     "dap": "In Kun (Oppression), the line text leans towards yes if the changing line is: six at the top (line 6). It leans towards not now if the changing line is: six in the third place (line 3). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Rising without stopping leads to exhaustion; so Kun, oppression, follows Sheng."
+    }
+   ],
+   "y_chinh": [
+    "Kun: the lake has run dry",
+    "Asking: talk less, act more",
+    "Keep your resolve"
+   ]
+  },
+  "que-48-tinh": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Jing (The Well) when you ask about something: how to read it",
+     "doan": "Drawing Jing when you ask about something means the matter is about a source that feeds everyone. The image is a well. It goes well if you look after the source and see the job through to the last step."
+    },
+    {
+     "tieu_de": "Examples of reading Jing (The Well) in everyday life",
+     "danh_sach": [
+      "Asking about core systems at work: maintain them.",
+      "Asking about a relationship: keep its original values.",
+      "Asking about income: keep the steady source."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Jing (The Well): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Jing (The Well) a good or a bad hexagram?",
+     "dap": "Jing is favourable if the work is completed: a broken jug just before the water brings misfortune. The top line shows the well open to all."
+    },
+    {
+     "hoi": "If I cast Jing (The Well), which changing line is the most favourable?",
+     "dap": "In Jing (The Well), the line text leans towards yes if the changing line is: nine in the fifth place (line 5), six at the top (line 6). It leans towards not now if the changing line is: six at the beginning (line 1), nine in the second place (line 2). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Exhausted above, one turns back below; so Jing, the well, follows Kun."
+    }
+   ],
+   "y_chinh": [
+    "Jing: the well",
+    "Asking: look after the source",
+    "Finish the last step"
+   ]
+  },
+  "que-49-cach": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Ge (Revolution) when you ask about something: how to read it",
+     "doan": "Drawing Ge when you ask about something means it is time for real change. The image is fire in the lake. It goes well when the time is ripe, people trust you and the change is well prepared."
+    },
+    {
+     "tieu_de": "Examples of reading Ge (Revolution) in everyday life",
+     "danh_sach": [
+      "Asking about changing jobs: yes, with preparation.",
+      "Asking about changing how you live together: talk it through first.",
+      "Asking about a new financial strategy: plan it well."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ge (Revolution): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Ge (Revolution) a good or a bad hexagram?",
+     "dap": "Ge brings supreme success when the change is fitting. Line three says discuss the change thoroughly before acting."
+    },
+    {
+     "hoi": "If I cast Ge (Revolution), which changing line is the most favourable?",
+     "dap": "In Ge (Revolution), the line text leans towards yes if the changing line is: six in the second place (line 2), nine in the fourth place (line 4), nine in the fifth place (line 5). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: The way of the well must be renewed; so Ge, revolution, follows Jing."
+    }
+   ],
+   "y_chinh": [
+    "Ge: revolution",
+    "Asking: change when the time is ripe",
+    "Win trust before changing"
+   ]
+  },
+  "que-50-dinh": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Ding (The Cauldron) when you ask about something: how to read it",
+     "doan": "Drawing Ding when you ask about something means building something lasting and nourishing talent. The image is fire under a cauldron. It goes well when the new is stabilised and the right people are in the right roles."
+    },
+    {
+     "tieu_de": "Examples of reading Ding (The Cauldron) in everyday life",
+     "danh_sach": [
+      "Asking about building a team: value talent.",
+      "Asking about settling into a new home: create routines.",
+      "Asking about assets: stable."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ding (The Cauldron): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Ding (The Cauldron) a good or a bad hexagram?",
+     "dap": "Ding is very favourable — supreme good fortune. Line four warns that taking on more than you can carry spills the meal."
+    },
+    {
+     "hoi": "If I cast Ding (The Cauldron), which changing line is the most favourable?",
+     "dap": "In Ding (The Cauldron), the line text leans towards yes if the changing line is: nine at the top (line 6). It leans towards not now if the changing line is: nine in the fourth place (line 4). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Nothing changes things like a cauldron; so Ding follows Ge."
+    }
+   ],
+   "y_chinh": [
+    "Ding: the cauldron",
+    "Asking: stabilise the new",
+    "Do not carry more than you can"
+   ]
+  },
+  "que-51-chan": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Zhen (Arousing Thunder) when you ask about something: how to read it",
+     "doan": "Drawing Zhen when you ask about something means a sudden shock or upheaval. The image is thunder upon thunder. It goes well if you stay calm and take stock of yourself."
+    },
+    {
+     "tieu_de": "Examples of reading Zhen (Arousing Thunder) in everyday life",
+     "danh_sach": [
+      "Asking about sudden changes at work: stay calm.",
+      "Asking about a storm in a relationship: get through it together.",
+      "Asking about a volatile market: do not panic."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Zhen (Arousing Thunder): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Zhen (Arousing Thunder) a good or a bad hexagram?",
+     "dap": "Zhen brings success: fear first, laughter later. Line four warns that freezing in the shock leaves you stuck."
+    },
+    {
+     "hoi": "If I cast Zhen (Arousing Thunder), which changing line is the most favourable?",
+     "dap": "In Zhen (Arousing Thunder), no line leans clearly towards yes; even the most favourable lines come with the condition of keeping things right. It leans towards not now if the changing line is: six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: The eldest son takes charge of the cauldron; so Zhen, thunder, follows Ding."
+    }
+   ],
+   "y_chinh": [
+    "Zhen: shock",
+    "Asking: stay calm, then laugh",
+    "Use the shock to take stock"
+   ]
+  },
+  "que-52-can": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Gen (Keeping Still) when you ask about something: how to read it",
+     "doan": "Drawing Gen when you ask about something means it is time to stop and be still. The image is mountain upon mountain. It goes well when you stop at the right moment and think within your own place."
+    },
+    {
+     "tieu_de": "Examples of reading Gen (Keeping Still) in everyday life",
+     "danh_sach": [
+      "Asking whether to act now: pause first.",
+      "Asking about a relationship: a quiet spell helps.",
+      "Asking about spending: stop new spending."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Gen (Keeping Still): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Gen (Keeping Still) a good or a bad hexagram?",
+     "dap": "Gen is blameless: stopping at the right time is wise. The top line says generous stillness brings good fortune."
+    },
+    {
+     "hoi": "If I cast Gen (Keeping Still), which changing line is the most favourable?",
+     "dap": "In Gen (Keeping Still), the line text leans towards yes if the changing line is: six in the fifth place (line 5). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot keep moving; they must stop; so Gen follows Zhen."
+    }
+   ],
+   "y_chinh": [
+    "Gen: keeping still",
+    "Asking: pause at the right moment",
+    "Calm the mind first"
+   ]
+  },
+  "que-53-tiem": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Jian (Gradual Progress) when you ask about something: how to read it",
+     "doan": "Drawing Jian (Development) when you ask about something means steady progress in the proper order. The image is a tree growing slowly on a mountain. It goes well if you do not skip stages."
+    },
+    {
+     "tieu_de": "Examples of reading Jian (Gradual Progress) in everyday life",
+     "danh_sach": [
+      "Asking about a career path: step by step.",
+      "Asking about a relationship: slow and sure.",
+      "Asking about savings: gradually."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Jian (Gradual Progress): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Jian (Gradual Progress) a good or a bad hexagram?",
+     "dap": "Jian is favourable, especially for marriage done properly. Line three warns that rushing past the natural pace goes wrong."
+    },
+    {
+     "hoi": "If I cast Jian (Gradual Progress), which changing line is the most favourable?",
+     "dap": "In Jian (Gradual Progress), the line text leans towards yes if the changing line is: six in the second place (line 2), nine at the top (line 6). It leans towards not now if the changing line is: nine in the third place (line 3). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot stay still for ever; so gradual progress follows keeping still."
+    }
+   ],
+   "y_chinh": [
+    "Jian: gradual progress",
+    "Asking: follow the order",
+    "Do not skip stages"
+   ]
+  },
+  "que-54-quy-muoi": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Gui Mei (The Marrying Maiden) when you ask about something: how to read it",
+     "doan": "Drawing Gui Mei when you ask about something means you may be accepting a lesser position out of haste. The image is thunder over the lake. It goes well if you see your place and limits clearly."
+    },
+    {
+     "tieu_de": "Examples of reading Gui Mei (The Marrying Maiden) in everyday life",
+     "danh_sach": [
+      "Asking about an unclear job offer: clarify your role first.",
+      "Asking about an unequal relationship: it needs balance.",
+      "Asking about committing quickly: do not rush."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Gui Mei (The Marrying Maiden): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Gui Mei (The Marrying Maiden) a good or a bad hexagram?",
+     "dap": "Gui Mei warns that going forward brings misfortune. The fifth line shows that modesty in a high place still brings good fortune."
+    },
+    {
+     "hoi": "If I cast Gui Mei (The Marrying Maiden), which changing line is the most favourable?",
+     "dap": "In Gui Mei (The Marrying Maiden), the line text leans towards yes if the changing line is: six in the fifth place (line 5). It leans towards not now if the changing line is: six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Progress means arriving somewhere; so Gui Mei, the marrying maiden, follows Jian."
+    }
+   ],
+   "y_chinh": [
+    "Gui Mei: the marrying maiden",
+    "Asking: know your place and limits",
+    "Do not accept less out of haste"
+   ]
+  },
+  "que-55-phong": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Feng (Abundance) when you ask about something: how to read it",
+     "doan": "Drawing Feng when you ask about something means abundance and a peak. The image is thunder and lightning together. It goes well if you enjoy and share it and prepare for the decline."
+    },
+    {
+     "tieu_de": "Examples of reading Feng (Abundance) in everyday life",
+     "danh_sach": [
+      "Asking about a big success: plan for the long term.",
+      "Asking about a happy relationship: take care of it.",
+      "Asking about money: keep a reserve."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Feng (Abundance): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Feng (Abundance) a good or a bad hexagram?",
+     "dap": "Feng is favourable: be like the sun at noon — but after noon it sets. The top line warns that shutting yourself away in wealth leads to isolation."
+    },
+    {
+     "hoi": "If I cast Feng (Abundance), which changing line is the most favourable?",
+     "dap": "In Feng (Abundance), the line text leans towards yes if the changing line is: nine at the beginning (line 1), six in the second place (line 2), nine in the fourth place (line 4), six in the fifth place (line 5). It leans towards not now if the changing line is: six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Arriving where one belongs makes for greatness; so Feng, abundance, follows Gui Mei."
+    }
+   ],
+   "y_chinh": [
+    "Feng: abundance at noon",
+    "Asking: share the peak",
+    "After noon the sun sets"
+   ]
+  },
+  "que-56-lu": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Lu (The Wanderer) when you ask about something: how to read it",
+     "doan": "Drawing Lu (The Wanderer) when you ask about something means the situation is temporary or you are away from home. The image is fire moving across a mountain. It goes well if you are careful, modest and travel light."
+    },
+    {
+     "tieu_de": "Examples of reading Lu (The Wanderer) in everyday life",
+     "danh_sach": [
+      "Asking about a posting abroad: be modest and careful.",
+      "Asking about long-distance love: keep in touch.",
+      "Asking about spending while away: keep it tight."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Lu (The Wanderer): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Lu (The Wanderer) a good or a bad hexagram?",
+     "dap": "Lu brings small success. The top line warns that carelessness and pride lose you your base."
+    },
+    {
+     "hoi": "If I cast Lu (The Wanderer), which changing line is the most favourable?",
+     "dap": "In Lu (The Wanderer), the line text leans towards yes if the changing line is: six in the second place (line 2), six in the fifth place (line 5). It leans towards not now if the changing line is: nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: When abundance is exhausted, one loses one's home; so Lu, the wanderer, follows Feng."
+    }
+   ],
+   "y_chinh": [
+    "Lu: the wanderer",
+    "Asking: careful, modest, light",
+    "Do not lose your base"
+   ]
+  },
+  "que-57-ton": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Xun (The Gentle Wind) when you ask about something: how to read it",
+     "doan": "Drawing Xun when you ask about something means gentle, steady influence works better than force. The image is wind following wind. It goes well when you understand first and repeat patiently."
+    },
+    {
+     "tieu_de": "Examples of reading Xun (The Gentle Wind) in everyday life",
+     "danh_sach": [
+      "Asking how to persuade a client: gently and repeatedly.",
+      "Asking about changing a partner's habit: little by little.",
+      "Asking about investing: small, regular amounts."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Xun (The Gentle Wind): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Xun (The Gentle Wind) a good or a bad hexagram?",
+     "dap": "Xun brings small success. Line three warns that hesitating again and again brings regret."
+    },
+    {
+     "hoi": "If I cast Xun (The Gentle Wind), which changing line is the most favourable?",
+     "dap": "In Xun (The Gentle Wind), the line text leans towards yes if the changing line is: six in the fourth place (line 4). It leans towards not now if the changing line is: nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: The wanderer has nowhere to stay, so must enter gently; so Xun follows Lu."
+    }
+   ],
+   "y_chinh": [
+    "Xun: the gentle wind",
+    "Asking: gentle, steady, repeated",
+    "Understand before acting"
+   ]
+  },
+  "que-58-doai": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Dui (The Joyous Lake) when you ask about something: how to read it",
+     "doan": "Drawing Dui when you ask about something means joy, sharing and communication. The image is two lakes linked together. It goes well when the joy is sincere and shared, not flattery."
+    },
+    {
+     "tieu_de": "Examples of reading Dui (The Joyous Lake) in everyday life",
+     "danh_sach": [
+      "Asking about a sales or team role: suitable.",
+      "Asking about a relationship: shared joy.",
+      "Asking about spending for fun: be careful."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Dui (The Joyous Lake): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Dui (The Joyous Lake) a good or a bad hexagram?",
+     "dap": "Dui is favourable if you stay upright. Line three warns that chasing pleasure from outside brings trouble."
+    },
+    {
+     "hoi": "If I cast Dui (The Joyous Lake), which changing line is the most favourable?",
+     "dap": "In Dui (The Joyous Lake), the line text leans towards yes if the changing line is: nine at the beginning (line 1), nine in the second place (line 2). It leans towards not now if the changing line is: six in the third place (line 3). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Entering gently brings joy; so Dui, the joyous, follows Xun."
+    }
+   ],
+   "y_chinh": [
+    "Dui: joy",
+    "Asking: sincere, shared joy",
+    "Not flattery"
+   ]
+  },
+  "que-59-hoan": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Huan (Dispersion) when you ask about something: how to read it",
+     "doan": "Drawing Huan when you ask about something means things are scattering or melting. The image is wind over water. It goes well if you dissolve rigidity and bring people back together around shared values."
+    },
+    {
+     "tieu_de": "Examples of reading Huan (Dispersion) in everyday life",
+     "danh_sach": [
+      "Asking about a team falling apart: reunite it around a goal.",
+      "Asking about distance in a relationship: find common ground again.",
+      "Asking about scattered money: bring it together."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Huan (Dispersion): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Go ahead",
+      "Leans towards yes"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Huan (Dispersion) a good or a bad hexagram?",
+     "dap": "Huan brings success: crossing the great water is favourable. Line four says leaving narrow cliques leads to a bigger union."
+    },
+    {
+     "hoi": "If I cast Huan (Dispersion), which changing line is the most favourable?",
+     "dap": "In Huan (Dispersion), the line text leans towards yes if the changing line is: six at the beginning (line 1), nine in the second place (line 2), six in the third place (line 3), six in the fourth place (line 4), nine in the fifth place (line 5), nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Joy disperses things; so Huan, dispersion, follows Dui."
+    }
+   ],
+   "y_chinh": [
+    "Huan: dispersion",
+    "Asking: melt rigidity, regather",
+    "Unite around shared values"
+   ]
+  },
+  "que-60-tiet": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Jie (Limitation) when you ask about something: how to read it",
+     "doan": "Drawing Jie when you ask about something means limits and measure. The image is a lake holding just as much as it can. It goes well with sensible limits, neither too loose nor too harsh."
+    },
+    {
+     "tieu_de": "Examples of reading Jie (Limitation) in everyday life",
+     "danh_sach": [
+      "Asking about a budget: set one you can keep.",
+      "Asking about boundaries in a relationship: healthy ones.",
+      "Asking about a study schedule: realistic."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Jie (Limitation): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Jie (Limitation) a good or a bad hexagram?",
+     "dap": "Jie brings success, but harsh limits cannot be kept. Line two warns that holding back when it is time to act is a mistake."
+    },
+    {
+     "hoi": "If I cast Jie (Limitation), which changing line is the most favourable?",
+     "dap": "In Jie (Limitation), the line text leans towards yes if the changing line is: six in the fourth place (line 4), nine in the fifth place (line 5). It leans towards not now if the changing line is: six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things cannot be scattered for ever; they need limits; so Jie follows Huan."
+    }
+   ],
+   "y_chinh": [
+    "Jie: limitation",
+    "Asking: sensible limits",
+    "Not too harsh"
+   ]
+  },
+  "que-61-trung-phu": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Zhong Fu (Inner Truth) when you ask about something: how to read it",
+     "doan": "Drawing Zhong Fu when you ask about something means trust and sincerity are the key. The image is wind moving over the lake. It goes well when you keep your word."
+    },
+    {
+     "tieu_de": "Examples of reading Zhong Fu (Inner Truth) in everyday life",
+     "danh_sach": [
+      "Asking about a business partnership: build trust first.",
+      "Asking about a relationship: be sincere.",
+      "Asking about a promise: keep it."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Zhong Fu (Inner Truth): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Go ahead",
+      "Leans towards yes"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Zhong Fu (Inner Truth) a good or a bad hexagram?",
+     "dap": "Zhong Fu is favourable: sincerity reaches even pigs and fishes. The top line warns against empty words that claim too much."
+    },
+    {
+     "hoi": "If I cast Zhong Fu (Inner Truth), which changing line is the most favourable?",
+     "dap": "In Zhong Fu (Inner Truth), the line text leans towards yes if the changing line is: nine in the second place (line 2), six in the fourth place (line 4), nine in the fifth place (line 5). It leans towards not now if the changing line is: nine at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: With limits there is trust; so Zhong Fu, inner truth, follows Jie."
+    }
+   ],
+   "y_chinh": [
+    "Zhong Fu: inner truth",
+    "Asking: keep your word",
+    "No empty promises"
+   ]
+  },
+  "que-62-tieu-qua": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Xiao Guo (Small Excess) when you ask about something: how to read it",
+     "doan": "Drawing Xiao Guo when you ask about something means only small things should be done now. The image is thunder over the mountain. It goes well with careful small steps and no big risks."
+    },
+    {
+     "tieu_de": "Examples of reading Xiao Guo (Small Excess) in everyday life",
+     "danh_sach": [
+      "Asking about a big expansion: not now.",
+      "Asking about a relationship: care about the small things.",
+      "Asking about investing: small amounts only."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Xiao Guo (Small Excess): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "Better to stop or pull back",
+      "Not right now"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Better to stop or pull back",
+      "Not right now"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Xiao Guo (Small Excess) a good or a bad hexagram?",
+     "dap": "Xiao Guo brings success in small matters, not great ones. The first and top lines warn the bird that flies too high meets misfortune."
+    },
+    {
+     "hoi": "If I cast Xiao Guo (Small Excess), which changing line is the most favourable?",
+     "dap": "In Xiao Guo (Small Excess), no line leans clearly towards yes; even the most favourable lines come with the condition of keeping things right. It leans towards not now if the changing line is: six at the beginning (line 1), nine in the third place (line 3), six at the top (line 6). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Those who trust act on it, a little beyond the usual; so Xiao Guo follows Zhong Fu."
+    }
+   ],
+   "y_chinh": [
+    "Xiao Guo: small excess",
+    "Asking: small, careful steps",
+    "Do not fly too high"
+   ]
+  },
+  "que-63-ky-te": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Ji Ji (After Completion) when you ask about something: how to read it",
+     "doan": "Drawing Ji Ji when you ask about something means the matter has been completed. The image is water over fire. It goes well if you protect what you have achieved and guard against things slipping."
+    },
+    {
+     "tieu_de": "Examples of reading Ji Ji (After Completion) in everyday life",
+     "danh_sach": [
+      "Asking about a finished project: maintain it.",
+      "Asking about a settled relationship: do not get careless.",
+      "Asking about profits: take them and guard against risk."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Ji Ji (After Completion): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Nine at the beginning (line 1)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Six in the second place (line 2)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the third place (line 3)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fourth place (line 4)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fifth place (line 5)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six at the top (line 6)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Ji Ji (After Completion) a good or a bad hexagram?",
+     "dap": "Ji Ji brings small success: good at the start, disorder at the end. The top line warns against going too far after success."
+    },
+    {
+     "hoi": "If I cast Ji Ji (After Completion), which changing line is the most favourable?",
+     "dap": "In Ji Ji (After Completion), no line leans clearly towards yes; even the most favourable lines come with the condition of keeping things right. This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Those who go beyond must cross over; so Ji Ji, after completion, follows Xiao Guo."
+    }
+   ],
+   "y_chinh": [
+    "Ji Ji: after completion",
+    "Asking: protect what you achieved",
+    "Good start, watch the end"
+   ]
+  },
+  "que-64-vi-te": {
+   "muc": [
+    {
+     "tieu_de": "Drawing Wei Ji (Before Completion) when you ask about something: how to read it",
+     "doan": "Drawing Wei Ji when you ask about something means the matter is not yet finished. The image is fire above water. It goes well if you stay careful in the last stretch and put each thing in its place."
+    },
+    {
+     "tieu_de": "Examples of reading Wei Ji (Before Completion) in everyday life",
+     "danh_sach": [
+      "Asking about an unfinished project: do not be complacent.",
+      "Asking about a relationship still taking shape: give it time.",
+      "Asking about an unclosed deal: not yet."
+     ]
+    }
+   ],
+   "bang": {
+    "tieu_de": "Wei Ji (Before Completion): where each changing line leans",
+    "chu_thich": "When a line changes, its text is read first. The middle column sums up where the line text leans; the last column is how the hexagram answers a 'should I' question. Drawn by the editorial team from the verdict words in the Zhou Yi line texts.",
+    "cot": [
+     "Changing line",
+     "The line text leans towards",
+     "If you ask 'should I'"
+    ],
+    "dong": [
+     [
+      "Six at the beginning (line 1)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the second place (line 2)",
+      "Hold steady, stay the course",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the third place (line 3)",
+      "Not yet time",
+      "Not in a hurry"
+     ],
+     [
+      "Nine in the fourth place (line 4)",
+      "It can be done, but keep it right",
+      "Yes, with conditions"
+     ],
+     [
+      "Six in the fifth place (line 5)",
+      "You need people working with you",
+      "Leans towards yes"
+     ],
+     [
+      "Nine at the top (line 6)",
+      "Be careful, easy to slip",
+      "Not in a hurry"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is Wei Ji (Before Completion) a good or a bad hexagram?",
+     "dap": "Wei Ji brings success if you do not rush: the little fox wets its tail just before the shore. The fifth line shows sincere leadership shining."
+    },
+    {
+     "hoi": "If I cast Wei Ji (Before Completion), which changing line is the most favourable?",
+     "dap": "In Wei Ji (Before Completion), the line text leans towards yes if the changing line is: six in the fifth place (line 5). This is a tendency drawn from the verdict words in the line texts; read the whole hexagram and the resulting hexagram for the full picture."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Zhou Yi (Book of Changes)",
+     "chuong": "Xu Gua (Sequence of the Hexagrams)",
+     "nghia": "The Sequence of the Hexagrams: Things can never be completely finished; so the book ends with Wei Ji, before completion."
+    }
+   ],
+   "y_chinh": [
+    "Wei Ji: before completion",
+    "Asking: careful on the last stretch",
+    "It is not finished yet"
+   ]
+  }
+ }
+}

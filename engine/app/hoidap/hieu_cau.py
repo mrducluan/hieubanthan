@@ -191,6 +191,9 @@ _HOI_LAI = {
               "Bát tự của tôi nói gì về hôn nhân?", "Đại vận hiện tại của tôi thế nào?"],
     "phongthuy": ["Hướng nào hợp với tôi để kê bàn làm việc?", "Bếp nên quay hướng nào cho hợp tôi?",
                   "Đầu giường nên quay hướng nào?", "Năm nay trong nhà nên giữ yên phía nào?"],
+    # EN-ALL GĐ 6: chỉ bản ngôn ngữ khác gọi (câu Kinh Dịch tiếng Anh luật không nhận ra điều gì)
+    "kinhdich": ["Tôi có nên chuyển việc lúc này không?", "Chuyện tình cảm với người ấy có tiến triển không?",
+                 "Tôi có nên mở việc kinh doanh riêng lúc này không?", "Tôi nên ứng xử thế nào với căng thẳng trong gia đình?"],
 }
 
 
@@ -207,6 +210,9 @@ def hoi_lai(mo_dun: str) -> dict | None:
     elif mo_dun == "phongthuy":
         ds = [L("hoi.hl.phongthuy.ban", ds[0]), L("hoi.hl.phongthuy.bep", ds[1]), L("hoi.hl.phongthuy.giuong", ds[2]),
               L("hoi.hl.phongthuy.nam_nay", ds[3])]
+    elif mo_dun == "kinhdich":
+        ds = [L("hoi.hl.kinhdich.viec", ds[0]), L("hoi.hl.kinhdich.tinh_cam", ds[1]), L("hoi.hl.kinhdich.kinh_doanh", ds[2]),
+              L("hoi.hl.kinhdich.gia_dinh", ds[3])]
     return {"cau": L("hoi.hl.cau", "Bạn muốn hỏi cụ thể về chuyện nào? Chọn một câu để có lời đáp đúng hơn:"), "chon": ds}
 
 

@@ -146,7 +146,7 @@
     "tien_bac": "Invest carefully, one step at a time.",
     "hoc_hanh": "Learn by the rules and standards."
    },
-   "trich_dan": "Zhou Yi (Book of Changes), hexagram 10 Lü (Treading) 履 (judgment, Tuan commentary, Great Image)"
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 10 Lu (Treading) 履 (judgment, Tuan commentary, Great Image)"
   },
   "11": {
    "y_chinh": "Flowing through: heaven and earth meet, those above and below understand each other; the small departs, the great arrives.",
@@ -790,7 +790,7 @@
     "tien_bac": "Keep spending tight when away.",
     "hoc_hanh": "Studying abroad or in a new place."
    },
-   "trich_dan": "Zhou Yi (Book of Changes), hexagram 56 Lü (The Wanderer) 旅 (judgment, Tuan commentary, Great Image)"
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 56 Lu (The Wanderer) 旅 (judgment, Tuan commentary, Great Image)"
   },
   "57": {
    "y_chinh": "Wind: gentle penetration, small success; it helps to see the great person; repeat the instructions so they sink in.",
@@ -931,5 +931,10 @@
    "y_nghia": "The circumstances are pressing on the person asking — the least favourable pattern in Plum Blossom; be careful or pause.",
    "luu_y": "Unfavourable is not fixed fate; ask what in the situation is working against you and whether it can be avoided."
   }
+ },
+ "source": {
+  "chu_dich": "Zhou Yi, the Book of Changes (Western Zhou; Ten Wings from the Warring States to Han) — ctext.org/book-of-changes",
+  "mai_hoa_dich_so": "Plum Blossom Numerology (Mei Hua Yi Shu) — Shao Yong (Northern Song)",
+  "tang_san_boc_dich": "Zeng Shan Bu Yi — Ye He Lao Ren (Qing)"
  }
 }

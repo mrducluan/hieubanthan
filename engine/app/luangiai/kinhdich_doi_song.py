@@ -23,6 +23,7 @@ from app.luangiai import kinhdich_hien as kd_hien
 from app.kb import kinhdich_kb as kbq
 from app.kb import ten as _tn
 from app.kb.loi import L
+from app import ngon_ngu
 
 LV_TEN = {"cong_viec": "công việc", "tinh_cam": "tình cảm", "gia_dinh": "gia đình", "tien_bac": "tiền bạc",
           "hoc_hanh": "học hành"}
@@ -447,7 +448,8 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     if gn["mai_hoa"] and chinh != "mai_hoa":
         doan.append(L("kd.doan.the_dung", "Nhìn theo thể–dụng: {y}.", y=gn["mai_hoa"]["tom_tat"]))
     if gn["luc_hao"] and gn["luc_hao"].get("dung_than") and chinh != "luc_hao" and gn["luc_hao"]["ly_do"]:
-        doan.append(L("kd.doan.hao_dd", "Nhìn theo hào đại diện cho việc: {y}.", y=gn["luc_hao"]["ly_do"][0]))
+        y0 = gn["luc_hao"]["ly_do"][0]           # EN-ALL GĐ 6: bản dịch bỏ dấu chấm đôi ("…xuất hiện..") — bản Việt giữ nguyên
+        doan.append(L("kd.doan.hao_dd", "Nhìn theo hào đại diện cho việc: {y}.", y=y0 if ngon_ngu.la_viet() else y0.rstrip(".")))
     if tl.get("khac_chieu"):                     # KD-V3: hai cách đọc khác chiều → nói rõ, không chọn bên
         doan.append(kbt.mau("hai_cach_khac"))
 

@@ -194,6 +194,9 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "ho.thuong": "quai", "ho.ha": "quai", ".thuong": "quai", ".ha": "quai", "the_ngu_hanh": "hanh", "dung_ngu_hanh": "hanh",
     "chi_nam": "chi", "chi_ngay": "chi", "can_ngay": "can", "thoi_diem_gieo.tuan_khong": "chi", "thoi_gian.tuan_khong": "chi",
     "ung_ky_so.don_vi": "don_vi_kd",
+    # EN-ALL GĐ 6 — hỏi đáp Kinh Dịch: mục quẻ trong gói bằng chứng (`bang_chung.muc[].ten` = tên quẻ Việt làm mã), mục Mai
+    # Hoa thể–dụng (`muc[].the`, `muc[].dung` = quái; ngũ hành của thể / dụng).
+    "muc.ten": "que_ten", "muc.the": "quai", "muc.dung": "quai", "muc.the_ngu_hanh": "hanh", "muc.dung_ngu_hanh": "hanh",
 }
 
 

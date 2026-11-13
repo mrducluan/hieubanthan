@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import re
 
+from app import ngon_ngu as _nn
 from app.calc.kinhdich_vendor import KHAC, SINH
 from app.hoidap import chung, hieu_cau as hc_chung, mo_dau
 from app.kb import kinhdich_doi_song_kb as kb_ds, kinhdich_kb as kbq, kinhdich_tra_loi_kb as kb
@@ -91,7 +92,8 @@ def hieu_cau(t: str, raw: str | None, ma_chu_de: str) -> dict:
     nhan = (cd.get("ten") or "").split(" (")[0].lower() if goc != "khac" else ""
     if not nhan:
         d = mo_dau.dieu_hoi(t, raw)
-        nhan = (d or {}).get("nhan_ro") or (d or {}).get("nhan") or kb.mau("viec_mac_dinh")
+        nhan = ((d or {}).get("nhan_ro") or (d or {}).get("nhan") if _nn.la_viet() else mo_dau.nhan_hien(d)) \
+            or kb.mau("viec_mac_dinh")       # EN-ALL GĐ 6: nhãn điều được hỏi theo ngôn ngữ (danh mục cố định `hoi.dh*`)
     nhan = nhan.removeprefix("chuyện ")
     return {"kieu": kieu, "vai": vai, "viec": goc, "ma_chu_de": ma_chu_de, "nhan_viec": nhan,
             "nguoi_kia": vai != "toi" or goc in CHU_DE_NGUOI or kieu == "nguoi_kia"}

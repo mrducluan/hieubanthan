@@ -200,7 +200,7 @@ def api_hieu_cau(inp: HieuCauInput) -> dict:
                 "kieu": None, "vai": None, "can_lam_ro": None}
     t = pl["cau_chuan_hoa"]
     ma = kd_ds.chu_de_tu_cau(t)
-    hc = ktl.hieu_cau(t, inp.cau_hoi, ma)
+    hc = ktl.hieu_cau(t, t if pl.get("_dich_y") else inp.cau_hoi, ma)     # EN-ALL GĐ 6: câu tiếng Anh → cụm đã dịch ý
     dt_ = ktl.dung_than(hc)
     cd = kd_ds.kb.chu_de(ma) or {}
     lr = kd_ds.can_lam_ro(t, None, pl["truong_phai"])

@@ -1250,7 +1250,7 @@ _KHUNG_HOANG_GD6 = _rx_en(
     r"should i (?:just )?(?:die|end it|kill myself)(?=\s*(?:[,.!?;\"']|$))",
     r"(?:can t|cannot|can not|could not|couldn t) (?:keep going|go on|carry on|keep living|live|survive) (?:\w+ ){0,2}without (?:him|her|them|"
     r"you|my \w+|my \w+ and my \w+)",
-    r"(?:tired|sick|exhausted|weary) of (?:fighting|struggling|trying)\b.{0,60}(?:time to (?:stop|go|give up)|want to stop|ready to stop|"
+    r"(?:tired|sick|exhausted|weary) of (?:fighting|struggling|trying)(?! (?:with|about|over|for|against|my|the|to (?!live|stay|keep)))\b.{0,60}(?:time to (?:stop|go|give up)|want to stop|ready to stop|"
     r"(?:just )?stop(?=\s*(?:[,.!?;]|$)))",
     r"(?:train|bridge|pills|rope|roof|cliff|tracks|river|car|gun|knife|jump)\b.{0,40}(?:is|as|be) my (?:way out|exit|escape|answer)",
     r"decided\b.{0,60}(?:my )?way out|(?:my|the) (?:only )?way out (?:is|will be) (?:the |a )?(?:train|bridge|pills|rope|roof|cliff|"
@@ -1260,6 +1260,10 @@ _KHUNG_HOANG_GD6 = _rx_en(
     r"(?: what i m (?:going to|gonna) do)?|already (?:know|decided) what i m (?:going to|gonna) do\b.{0,60}(?:letter|note)",
     r"(?:thanks|thank you) for everything\b.{0,20}(?:bye|goodbye)\b.{0,60}(?:turned off|switched off|not answering|won t answer|"
     r"isn t answering|phone (?:is )?off|blocked)",
+    r"(?:goodbye|farewell|final) (?:message|post|text|note|video|voice ?note|email)\b.{0,60}(?:not answering|isn t answering|won t answer|"
+    r"not picking up|isn t picking up|won t pick up|hasn t (?:replied|answered)|can t reach|unreachable|no answer|turned off|switched off)",
+    r"(?:stop fighting|let go of everything|give up on everything|give up for good)\b.{0,40}(?:for good|forever|permanently|once and for all)|"
+    r"let go of everything (?:for good|forever|permanently)",
     r"(?:said|says|saying) goodbye\b.{0,60}(?:locked|lock\w* (?:himself|herself|themselves|the door)|turned off (?:his|her|their) phone|"
     r"not answering|won t answer|bathroom|garage)|(?:locked|lock\w*)\b.{0,60}(?:said|says|saying) goodbye",
     r"(?:keep|kept|been|keeps) (?:standing|sitting|going|walking|leaning) (?:at|on|to|near|over) (?:the )?(?:edge|ledge|railing|parapet)",
@@ -1271,11 +1275,56 @@ _KHUNG_HOANG_GD6 = _rx_en(
     r"(?:living|life|being alive|going on|keep going)",
     r"(?:peace|rest|calm) in death|(?:best|right|good) (?:sign|time|day|hexagram|line|answer) to (?:finally )?(?:die|end (?:it|my life)|"
     r"let go of my life)",
+    # 9. không thể tiếp tục (vế câu kết thúc ngay, không có tân ngữ), sống – chết như một lựa chọn, cái chết "nhẹ nhõm hơn"
+    r"(?:can t|cannot|can not) go on(?: (?:anymore|any more|any longer))?(?=\s*(?:[,.!?;]|$))",
+    r"should i (?:live or die|die or live)|\blive or die\b|(?:decide|tell me) (?:if|whether) i (?:should )?(?:live|die)",
+    r"(?:death|dying|being dead) (?:would be|is|feels like|seems) (?:a |the )?(?:relief|easier|better|the answer|the only way|peace)|"
+    r"(?:easier|better) (?:to|if i) (?:just )?die|(?:easier|better) (?:for everyone )?if i (?:were|was) (?:dead|gone)",
+    r"(?:my life is|life is) (?:over|finished|done)(?=\s*(?:[,.!?;]|$))",
+    r"(?:not|no longer) (?:scared|afraid|frightened) (?:of|to) (?:death|dying|die) (?:anymore|any more|now)|"
+    r"(?:not|no longer) (?:scared|afraid) of (?:death|dying)\b.{0,30}(?:just want|want) (?:peace|it to end|rest)",
+    r"(?:i m|i am|im|i was) (?:meant|supposed|destined|fated) to die(?! (?:of|from|old|in my sleep at))",
+    # 10. phương tiện / kế hoạch: hỏi liều, lo tang lễ của chính mình, sắp xếp từ biệt + "lần gieo cuối"
+    r"how many (?:\w+ )?(?:pills|tablets|capsules|sleeping pills|painkillers) (?:would|will|does|do) (?:it|i need to|you need to) (?:take|need)|"
+    r"how (?:many|much) (?:\w+ ){0,2}(?:to|would it take to) (?:die|overdose|not wake up|end it)",
+    r"plan\w* (?:my )?(?:own )?funeral|(?:arrang|organis|organiz)\w* my (?:own )?funeral",
+    r"(?:said|saying|say) (?:all )?my goodbyes|(?:will|goodbyes)\b.{0,40}(?:final|last|one last) (?:reading|cast|hexagram|question)",
+    # 11. muốn theo người thân đã mất
+    r"(?:join|be with|see|go to) my (?:late|dead|deceased|departed) \w+|join (?:him|her|them) (?:in heaven|on the other side|soon|there)|"
+    r"(?:do not|don t|dont|can t|cannot) (?:want to |wanna )?(?:live|go on|keep living|exist|be here) without (?:her|him|them|you|my \w+)(?! (?:in|at|for|during) )",
+    # 12. người KHÁC nói muốn chết / tự hại (người hỏi đang đứng trước khủng hoảng của họ)
+    r"(?:she|he|they|my (?:\w+ ){0,2}\w+) (?:wrote|said|says|told me|texted|posted|mentioned|keeps saying) (?:that )?(?:she|he|they) "
+    r"(?:wants?|wanted|is going|was going|plans?|planned) to (?:die|end it|end (?:her|his|their) life)",
+    r"(?:shoot|hang|drown|poison|stab|cut) (?:himself|herself|themselves)|(?:has been|is|keeps|started|been|caught (?:her|him)) cutting "
+    r"(?:her|his|their|my)?\s?(?:own )?(?:arms?|wrists?|legs?|thighs?|skin|self|herself|himself)",
+    # 13. tự hại qua ăn uống
+    r"(?:making|make|made) myself (?:throw up|vomit|sick) after|(?:starv\w*) myself|(?:stop|stopped|quit) eating (?:until|so) i "
+    r"(?:disappear|die|vanish)|(?:haven t|have not|hadn t) eaten (?:in|for) (?:\d+|three|four|five|six|seven|several) days\b.{0,60}"
+    r"(?:disappear|die|point|care|want to stop)",
+    # 14. hỏi giá trị sự sống của chính mình; "chẳng ai quan tâm nếu tôi không còn"
+    r"(?:does|is) my (?:life|existence) (?:have (?:any )?|worth (?:any )?)(?:value|meaning|point|worth)|is my life worth (?:anything|living|it)|"
+    r"am i (?:even )?worth (?:anything|living|saving|keeping alive)",
+    r"(?:nobody|no one|noone) would (?:care|notice|miss me|even notice) if i (?:stopped existing|disappeared|died|was gone|were gone|"
+    r"wasn t here|weren t here|vanished)",
+    # 15. ẩn dụ rời bỏ cõi đời (hay gặp khi nói qua lời quẻ): rời / tách khỏi thế giới này, sang bên kia, bước cuối cùng,
+    # bước xuống biển / vực, "đã quyết đi tối nay", "đến lúc chết", không còn ở đây tuần tới, cuối đường
+    r"(?:leave|leaving|split from|depart\w* (?:from )?|exit|quit) (?:this|the) (?:world|earth|life)(?! (?:of|behind for a))",
+    r"cross (?:over )?to the other side|(?:take|taking) the (?:final|last) step|(?:follow|into) the (?:abyss|void|darkness) and (?:jump|fall)",
+    r"(?:walk|walking|swim|swimming|wade|wading) (?:out )?into the (?:sea|ocean|river|lake|water)(?: \w+){0,3} (?:tonight|today|tomorrow|"
+    r"unless|and not come back|and never come back|forever)",
+    r"(?:jump|jumping)\b.{0,30}(?:abyss|edge|cliff|ledge|bridge|roof)|(?:abyss|edge|cliff|ledge|bridge|roof)\b.{0,30}(?:and )?jump(?! (?:start|at the))",
+    r"decided to go (?:tonight|today|tomorrow|this weekend|soon)\b.{0,60}(?:bless|agree|approve|sign|hexagram|okay|ok)",
+    r"(?:time|sign|ok|okay|alright|right) (?:for me )?to die(?!\w)|sign to stop everything",
+    r"leav\w* for good\b.{0,20}not (?:a |on a )?(?:trip|holiday|vacation)|(?:do not|don t) think i ll (?:still )?be (?:here|around|alive) "
+    r"(?:next|by|in|much|for)",
+    r"(?:end|the end) of the (?:road|line) for me|never (?:have to )?(?:deal with|face|see) tomorrow|not have to (?:deal with|face) "
+    r"tomorrow (?:ever )?again",
 )
 
 
 def _khung_hoang_gd6(k: str) -> bool:
-    return bool(_KHUNG_HOANG_GD6.search(k))
+    # hai tín hiệu tự phủ nhận KHÁC NHAU trong một câu ("nobody loves me" + "tired of everything") — đủ thành khủng hoảng
+    return bool(_KHUNG_HOANG_GD6.search(k)) or len({m.group(0) for m in _VO_DUNG.finditer(k)}) >= 2
 
 
 # Cấp cứu đang xảy ra (GĐ 6): rắn / ong đốt kèm sưng, họng thắt lại sau khi bị đốt / ăn, tai nạn có người bất động, kẻ lạ
@@ -1286,6 +1335,17 @@ _CAP_CUU_GD6 = _rx_en(
     r"throat (?:is )?(?:tightening|tight|closing(?: up)?|swelling(?: up)?)|(?:lips|tongue|face) (?:is |are )?swelling(?: up)?\b.{0,40}(?:stung|bee|wasp|"
     r"ate|eating|peanut|nuts|shellfish|allerg\w*)",
     r"(?:crash|accident|collision)\b.{0,80}(?:isn t|is not|aren t|are not|not) (?:moving|breathing|responding|conscious)",
+    r"(?:is |s |are |started |keeps )choking\b(?! (?:on|with) (?:my|his|her|their) (?:words|tears|pride))|choking on (?:a |an |the |some )"
+    r"(?:grape|food|sweet|candy|coin|toy|piece|bone|nut|meat|button|lolly)",
+    r"fell (?:off|from|down)\b.{0,60}(?:can t move|cannot move|can t feel|cannot feel|not moving|unconscious|bleeding|broke|broken|"
+    r"hit (?:his|her|their|my) head)",
+    r"diabetic\b.{0,60}(?:shaking|sweating|confused|unconscious|drowsy|faint\w*|slurr\w*)|(?:low|high) (?:blood )?sugar\b.{0,40}"
+    r"(?:confused|faint\w*|unconscious|shaking|slurr\w*)",
+    r"electric(?:al)? shock|electrocut\w*",
+    r"(?:won t|will not|doesn t|does not|can t|cannot) stop bleeding|keeps bleeding|can t stop the bleeding",
+    r"fever\b.{0,40}(?:stiff neck|rash that (?:doesn t|does not|won t) fade|floppy|unresponsive|seizure|convuls\w*|won t wake)|"
+    r"stiff neck\b.{0,40}fever|fever of (?:4[0-2]|10[4-9])\b",
+    r"(?:flood\w*|flash flood|water)\b.{0,40}(?:rising|coming in|pouring in|up to (?:our|my|the) (?:knees|waist))",
 )
 _NGUY_NGUOI = _rx_en(
     r"(?:someone|somebody|a man|a guy|a stranger|strangers|men|people|intruders?|burglars?|thie(?:f|ves))\b.{0,30}(?:trying to |tried to )?"
@@ -1311,18 +1371,38 @@ _TU_CHOI_GD6: list[tuple[re.Pattern, str]] = [
             r"(?:make|making|see|watch) (?:my |our |the |that )?(?:neighbou?r|ex|boss|rival|colleague|coworker|competitor|landlord|"
             r"in laws?|sister in law|brother in law)\w* (?:s )?(?:\w+ ){0,2}(?:fail|suffer|go bankrupt|lose (?:it|everything|their \w+)|"
             r"get sick|get fired|break up|collapse)"), "ngoai_pham_vi"),
+    (_rx_en(r"(?:cast|put|place|lay|send) (?:a )?curse|curse (?:hexagram|spell)? ?(?:on|against) (?:my |the |that )?\w+|hex (?:on|against) (?:my|the)"),
+     "ngoai_pham_vi"),
+    (_rx_en(r"(?:hire|hiring|recruit\w*|pick|choose|select|fire|sack|promote)\b.{0,60}(?:applicants?|candidates?|staff|employees?|workers?)"
+            r"\b.{0,60}(?:hexagrams?|i ching|iching|coins|oracle|cast\w*|yijing)|(?:hexagrams?|i ching|oracle|cast\w*)\b.{0,60}"
+            r"(?:which (?:applicant|candidate|employee)|(?:hire|hiring|recruit\w*) (?:which|whom|who))|(?:applicants?|candidates?)\b.{0,60}"
+            r"(?:hire|pick|choose|select)\b.{0,60}(?:hexagrams?|i ching|coins|oracle|cast\w*)"), "ngoai_pham_vi"),
     (_rx_en(r"diagnos\w* (?:my|his|her|their|the|this) .{0,40}(?:pain|ache|illness|condition|symptoms?|rash|cough|lump|problem)|"
             r"diagnos\w* (?:me|him|her)\b"), "suc_khoe_the_chat"),
     (_rx_en(r"(?:date|day|year|month|when|time)\b.{0,30}(?:my \w+|he|she|they) (?:will|is going to|gonna) pass(?=\s*(?:[,.!?;]|$))|"
             r"(?:my \w+|he|she) (?:will|is going to|gonna) pass (?:on|this (?:year|month|week))"), "du_doan_cu_the"),
     (_rx_en(r"(?:unborn|the) baby\b.{0,40}(?:healthy|defects?|disab\w*|abnormal\w*|normal|syndrome)|"
             r"(?:defects?|abnormal\w*|syndrome)\b.{0,30}(?:baby|pregnan\w*|foetus|fetus)"), "suc_khoe_the_chat"),
-    (_rx_en(r"which (?:horse|team|dog|fighter|boxer|player|side|car) (?:will |is going to |gonna )?(?:win|wins|come first)|"
+    (_rx_en(r"which (?:\w+ ){0,2}(?:horse|team|dog|fighter|boxer|player|side|car) (?:will |is going to |gonna )?(?:win|wins|come first)|"
             r"(?:melbourne cup|grand national|kentucky derby|super bowl|world cup|derby) (?:winner|bet\w*)"), "may_rui"),
     (_rx_en(r"(?:buy|purchase|pay for|pay)\b.{0,50}(?:talisman|amulet|charm|crystal|bracelet|statue|ritual|ceremony|blessing)\b.{0,50}"
             r"(?:fix|cure|remove|change|break|neutrali[sz]e|undo|cancel)|(?:talisman|amulet|ritual|charm)\b.{0,80}should i (?:pay|buy)"),
      "ngoai_pham_vi"),
 ]
+
+
+# "Will we make it?" về MỘT MỐI QUAN HỆ (yêu xa, hôn nhân) không phải câu sống chết — bỏ cụm này trước khi xét luật sống chết
+# (câu có tín hiệu bệnh nặng thì giữ nguyên).
+_DOI_LUA_GD6 = _rx_en(r"relationship|long ?distance|marriage|married|together|couple|dating|engaged|boyfriend|girlfriend|partner|"
+                      r"husband|wife|fianc\w*|our love|the two of us|us two")
+_MAKE_IT_DOI = re.compile(r"(?<!\w)(?:will|can|could|would|do|does) (?:we|us two|the two of us|our relationship|this relationship|"
+                          r"our marriage|it) (?:ever |really |actually )?(?:make it|last|survive|work out)(?!\w)")
+
+
+def _bo_make_it_doi(k: str) -> str:
+    if _DOI_LUA_GD6.search(k) and not _BENH_NANG.search(k):
+        return _MAKE_IT_DOI.sub(" ", k)
+    return k
 
 
 def _tu_choi_gd6(k: str) -> str | None:
@@ -1585,8 +1665,9 @@ def _tu_choi_anh(kd: str) -> str | None:
         return "suc_khoe_the_chat"
     if _THAN_BENH_ANH.search(k):          # tiên lượng bệnh của người thân ("will she recover") → nhóm sức khoẻ người thân
         return "suc_khoe_the_chat"
+    k_tc, kd_tc = _bo_make_it_doi(k), _bo_make_it_doi(kd)       # EN-ALL GĐ 6: "will we make it" của một mối quan hệ
     for rx, loai in TU_CHOI_ANH:
-        if rx.search(k) or rx.search(kd):
+        if rx.search(k_tc) or rx.search(kd_tc):
             return loai
     if _CHON_MEM.search(k) and re.search(r"(?<!\w)" + _NHAN_SU + r"(?!\w)", k) and re.search(r"(?<!\w)" + _LA_SO_HO + r"(?!\w)", k):
         return "ngoai_pham_vi"

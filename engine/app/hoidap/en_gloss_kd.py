@@ -67,8 +67,9 @@ def _vi_tri_cau(cau: str) -> list[str]:
 
 
 def que_trong_cau(cau: str) -> tuple[int | None, list[int]]:
-    """(số quẻ bản người hỏi nêu / đã gieo, các hào động họ nêu). Không có → (None, [])."""
-    t = en_gloss.chuan(cau)
+    """(số quẻ bản người hỏi nêu / đã gieo, các hào động họ nêu). Không có → (None, []). So khớp trên chữ gốc thường hoá (bộ
+    chuẩn hoá chung đổi "got" → "have", sẽ mất ngữ cảnh "got 49")."""
+    t = " ".join(re.sub(r"[^a-z0-9 ]+", " ", (cau or "").lower().replace("’", "'").replace("'s", " s")).split())
     # sáu giá trị hào 6/7/8/9 (đồng xu) → CALC dựng quẻ
     m = re.search(r"(?<!\d)([6-9])[\s,/-]+([6-9])[\s,/-]+([6-9])[\s,/-]+([6-9])[\s,/-]+([6-9])[\s,/-]+([6-9])(?!\d)", cau or "")
     if m:
@@ -168,6 +169,7 @@ _TU_DIEN: list[tuple[str, str]] = [     # (mẫu, mã từ điển Kinh Dịch `
     (r"eight palaces|8 palaces|palace of the hexagram", "bat_cung"), (r"opposite hexagram|cuo gua|mutual opposite", "thac_quai"),
     (r"inverse hexagram|upside down|zong gua|reversed hexagram", "tong_quai"),
 ]
+_KHONG_I = re.compile(r"\bi ching\b|\bi chings\b")      # "I Ching" không phải đại từ "I"
 _CA_NHAN = re.compile(r"\b(?:my|me|mine|myself|i|i m|im|we|our|us)\b")
 _HOI_KT = re.compile(r"\b(?:what|whats|how|why|who|which|when was|is the|are the|does|do|explain|meaning|mean|difference|define|vs|versus|"
                      r"tell me about|is it|did)\b")
@@ -189,6 +191,7 @@ def tu_dien_kien_thuc(cau: str) -> list[str]:
 
 def _ca_nhan(t: str) -> bool:
     """Câu nói về việc của chính người hỏi ("my", "I"…) — trừ "how do I phrase / should I ask / can I ask" (hỏi cách dùng)."""
+    t = _KHONG_I.sub("yijing", t)
     bo = re.sub(r"\b(?:how (?:do|should|can) i (?:phrase|ask|read|cast|use|interpret|throw)|(?:should|can|may) i (?:ask|cast|recast|use|read)|"
                 r"do i (?:read|use|need)|am i (?:doing something wrong|reading|casting)|i keep getting|if i don t like)\b", " ", t)
     return bool(_CA_NHAN.search(bo))
@@ -206,7 +209,8 @@ _CHU_DE: list[tuple[str, str]] = [
     # vợ chồng lục đục / ngoại tình / ly hôn
     (r"divorc\w*|separat\w*|save (?:the |our |my )?marriage|marriage (?:counsel\w*|problems?|trouble)|distant from (?:my )?(?:husband|wife|spouse)|"
      r"forgive (?:my )?(?:husband|wife|spouse|partner)|(?:husband|wife|spouse|partner) (?:lied|lies|lying|cheated|cheats|is cheating|"
-     r"has an affair|had an affair)|cheat\w*|affair|unfaithful", "luc duc vo chong ngoai tinh"),
+     r"has an affair|had an affair)|(?:he|she|husband|wife|partner|boyfriend|girlfriend|spouse|bf|gf) (?:\w+ ){0,2}cheat\w*|cheated on me|"
+     r"cheated once|(?:an |the )affair|unfaithful", "luc duc"),
     # cưới hỏi
     (r"marry|married|marriage|wedding|engag\w*|propos\w*|fianc\w*|maid of honou?r|best man", "ket hon"),
     # tình cảm
@@ -224,13 +228,13 @@ _CHU_DE: list[tuple[str, str]] = [
     # thi cử, học hành
     (r"\bexams?\b|\bbar exam\b|\btests?\b|ielts|toefl|\bgre\b|gmat|\bsat\b|\bcpa\b|\bcfa\b|\bacca\b|board exam|entrance|"
      r"master s|masters|\bmba\b|\bphd\b|degree|\buni\b|university|college|secondary school|high school|\bschool\b|scholarship|"
-     r"\bstudy\w*|course|thesis|dissertation|learn\w*|drop out|dropout|gap year|medicine or|engineering|back to school", "hoc tiep ky thi"),
+     r"\bstudy\w*|course|thesis|dissertation|learn\w*|drop out|dropout|gap year|medicine or|engineering|back to school", "hoc tiep"),
     # kiện tụng, tranh chấp
     (r"lawsuit|\bsue\b|suing|\bcourt\b|legal action|lawyer|dispute|custody|inheritance|claim against|small claims|tribunal|"
-     r"confront (?:my |the )?landlord|deposit", "tranh chap kien"),
+     r"confront (?:my |the )?landlord|deposit", "tranh chap"),
     # đòi nợ, cho vay
     (r"\blent\b|\blend\w*|borrow\w*|\bowes?\b|\bowed\b|debts?|credit cards?|\bloan\b|guarantor|pay (?:me )?back|get (?:it|my money) back|"
-     r"repay\w*|mortgage", "cho vay doi no vay tien"),
+     r"repay\w*|mortgage", "doi no"),
     # bán nhà / mua nhà / xe
     (r"sell\w* (?:my |our |the |the family |his |her )?(?:flat|house|home|apartment|condo|property|land|unit)", "ban nha"),
     (r"buy\w* (?:a |my |our |the |first )?(?:flat|house|home|apartment|condo|property|land|unit)|rent or buy|buy or rent|"
@@ -238,18 +242,21 @@ _CHU_DE: list[tuple[str, str]] = [
     (r"\b(?:buy|buying|get|getting) (?:a |new |the )?car\b|\bnew car\b|\ba car\b", "mua xe"),
     # mất đồ
     (r"\blost (?:my |the |our )?(?:wallet|phone|ring|keys|passport|bag|cat|dog|watch|laptop)|stolen|missing (?:wallet|ring|cat|dog|"
-     r"item|keys)|find (?:my )?(?:lost|missing)", "mat do tim lai"),
+     r"item|keys)|find (?:my )?(?:lost|missing)", "mat do"),
     # hợp tác
-    (r"business partner|partnership|joint venture|co ?found\w*|partner (?:in|on) (?:the |a |my )?business|team up with", "hop tac doi tac"),
+    (r"business partner|partnership|joint venture|co ?found\w*|partner (?:in|on) (?:the |a |my )?business|team up with", "hop tac"),
     # kinh doanh, đầu tư
     (r"crypto|bitcoin|\bstocks?\b|\bshares\b|invest\w*|\bgold\b|portfolio|\bfunds?\b|\bproperty investment", "dau tu"),
     (r"(?:start|open|launch|run|expand|grow|close|keep)\w* (?:my |a |our |the |his |her )?(?:own )?(?:business|bakery|shop|store|cafe|"
      r"restaurant|startup|company|brand|online store|franchise|practice|clinic|second store|second shop|salon|studio|band)|"
      r"franchise|side (?:business|hustle)|\b(?:my|our|the|father s|dad s) (?:shop|store|restaurant|cafe|business|startup)\b|"
-     r"freelanc\w*|self employed|go(?:ing)? solo|\blaunch\b|clients?\b|customers?", "kinh doanh"),
+     r"freelanc\w*|self employed|go(?:ing)? solo|\blaunch\b|clients?\b|customers?|\b(?:restaurant|bakery|cafe|salon|"
+     r"online store|e ?commerce)\b", "kinh doanh"),
+    # sống bằng tiền tiết kiệm / bỏ tiền tiết kiệm vào đâu
+    (r"live (?:off|on) (?:my |our )?savings|(?:put|use|spend) (?:my |our )?(?:life )?savings|savings (?:into|on)", "tien tiet kiem"),
     # thăng tiến, phỏng vấn
     (r"interview|promot\w*|senior role|passed over|appraisal|performance review|shortlist\w*|selected|be chosen|management role|"
-     r"lead role|team lead", "thang chuc phong van"),
+     r"lead role|team lead", "thang chuc"),
     # chuyển việc
     (r"job offer|offer letter|accept\w* (?:the |an |a )?(?:job|offer|position|role)|new (?:job|role|position|team)|change (?:jobs?|careers?)|"
      r"career change|switch (?:jobs?|careers?)|job hunt\w*|(?:find|get|land) (?:a )?(?:new )?job|look\w* for (?:a )?(?:new )?(?:job|role|work)|"
@@ -257,24 +264,25 @@ _CHU_DE: list[tuple[str, str]] = [
      r"teaching|\w+ing)|return to work|corporate job|industry job|ngo|stay (?:at|in) (?:my )?(?:stable |current )?(?:job|role)|"
      r"take over the family business|transfer|job\b|career", "chuyen viec"),
     # giấy tờ, hợp đồng, visa
-    (r"visa|permit|residency|citizenship|paperwork|documents?|approv\w*|licen[cs]e|application|contract|sign\w* (?:the|a)|lease|"
-     r"renew\w*", "hop dong visa ho so duoc duyet"),
+    (r"visa|permit|residency|citizenship|paperwork|documents?|(?:be|get|got|been) approved|approval|licen[cs]e|application|contract|sign\w* (?:the|a)|lease|"
+     r"renew\w*", "giay to"),
     # sức khoẻ, nhịp sống (không phải câu cấp cứu / bệnh — bộ chặn chung đã xét trước)
     (r"health|burn ?t? ?out|burnout|exhausted|tired|energy|sleep\w*|insomnia|anxiety|anxious|stress\w*|smoking|quit smoking|diet|"
      r"weight|recover\w*|recovery|chemo|night shifts?|getting sick|keep getting sick|surgery|operation", "suc khoe"),
     # đi xa, chuyển chỗ ở
     (r"\bmove to\b|moving to|move (?:abroad|overseas|countries|cities|house|home|back)|relocat\w*|abroad|overseas|emigrat\w*|"
      r"immigrat\w*|go home\b|travel\w*|\btrip\b|holiday|\bsydney\b|\bperth\b|\bmelbourne\b|\bshanghai\b|\bhong kong\b|singapore office",
-     "di xa di nuoc ngoai"),
+     "di xa"),
     # tiền bạc chung
     (r"money|financ\w*|savings?|income|wealth|salary|\braise\b|pay rise|bonus|budget|cash|earn\w*|spend\w*", "tien bac"),
     # bạn bè, đồng nghiệp, đối thủ
-    (r"best friend|\bfriends?\b|coworkers?|co workers?|colleagues?|team ?mates?|rival|competitor", "ban be dong nghiep"),
+    (r"best friend|\bfriends?\b|coworkers?|co workers?|colleagues?|team ?mates?|rival|competitor", "ban be"),
 ]
 _TANG_LUONG = re.compile(r"\b(?:raise|pay rise|bonus|salary)\b")
 _VAI: list[tuple[str, str]] = [
     (r"\b(?:my|our) (?:son|daughter|kid|kids|child|children|baby|toddler|teen\w*|\d+ ?yo|\d+ year old)\b|\b\d+ ?yo\b", "con toi"),
-    (r"\b(?:my|our) (?:mum|mom|mother|mama)\b", "me toi"), (r"\b(?:my|our) (?:dad|father|papa)\b", "bo toi"),
+    (r"(?:^|[.?!] )(?:son|daughter|kid)\b|\b(?:son|daughter) (?:wants|is|has|keeps|won t|says|just)\b", "con toi"),
+    (r"\b(?:my|our)? ?(?:mum|mom|mother|mama)\b", "me toi"), (r"\b(?:my|our)? ?(?:dad|father|papa)\b", "bo toi"),
     (r"\b(?:my|our) parents\b|\bin ?laws?\b|\bparents\b", "bo me"),
     (r"\bmy (?:husband|hubby|hus)\b", "chong toi"), (r"\bmy (?:wife|wifey)\b", "vo toi"),
     (r"\bmy (?:partner|boyfriend|girlfriend|bf|gf|fianc\w*|ex)\b|\bex\b|crush", "nguoi yeu"),
@@ -321,7 +329,7 @@ def _cau_chinh(cau: str) -> list[str]:
 def _chu_de(cau: str, t: str) -> list[str]:
     """Cụm chủ đề (≤ 2: chủ đề chính + chủ đề thứ hai cho câu hai lựa chọn) — câu hỏi thật trước."""
     for c in _cau_chinh(cau):
-        ra = [vn for mau, vn in _CHU_DE if re.search(r"(?:" + mau + r")", c)]
+        ra = [vn for mau, vn in _CHU_DE if re.search(r"\b(?:" + mau + r")(?!\w)", c)]
         if ra:
             return list(dict.fromkeys(ra))[:3]
     return []
@@ -352,7 +360,7 @@ def _kieu(cau: str, t: str) -> str:
     if _KET_QUA.search(c):
         return "co duoc khong"
     if _XIN_QUE.search(c) or _XIN_QUE.search(t):
-        return "xin mot que dinh huong"
+        return "dinh huong xin mot que"
     if _CO_NEN.search(t):
         return "co nen khong"
     if _KET_QUA.search(t):
@@ -363,7 +371,9 @@ def _kieu(cau: str, t: str) -> str:
 def _hai_lua_chon(cau: str) -> bool:
     """"A or B" thật sự là hai việc (không phải "… or not", "… or wait", "… or is it too much")."""
     c = _cau_chinh(cau)[0]
-    if re.search(r"\bor (?:not|no|nah|wait|later|is it|just|should|am i|let it go|stay on|stay put)\b", c):
+    if re.search(r"\bor (?:not|no|nah|wait|later|is it|just|should|am i|let it go|stay on|stay put)\b|"
+                 r"\b(?:accept|yes|keep going|keep|stay|agree|go|confront) or (?:refuse|decline|no|reject|leave|not|close|quit|wait|"
+                 r"stop|just)\b", c):
         return False
     return bool(re.search(r"\b\w+(?: \w+){0,4} or (?:a |an |the |my |stay |go |move |do |take )?\w+", c)) and "?" in (cau or "")
 
@@ -397,6 +407,8 @@ def gloss(cau: str) -> str:
             return " ".join(ra)
         if gt:
             return gt
+    if gt == "gieo lai":
+        return gt
     # 2. quẻ người hỏi đã gieo được
     if so:
         ra.append(f"gieo duoc que so {so}" + (f" hao {hao[0]}" if hao else ""))
@@ -406,11 +418,13 @@ def gloss(cau: str) -> str:
         return gt
     # 3. chủ đề, vai, kiểu câu, mốc
     cd = _chu_de(cau, t)
+    if re.search(r"\b(?:buy\w*|purchas\w*) or sell\w*\b|\bsell\w* or (?:buy|purchas)\w*\b", t):
+        cd = ["mua hay ban nha"] + [x for x in cd if x not in ("mua nha", "ban nha")]     # bộ làm rõ hỏi lại: mua hay bán
     if "tien bac" in cd and _TANG_LUONG.search(t):
-        cd = [("tang luong tien bac" if x == "tien bac" else x) for x in cd]
+        cd = [("tien bac luong" if x == "tien bac" else x) for x in cd]
     vai = _vai(t)
     kieu = _kieu(cau, t)
-    if so and _Y_NGHIA.search(t) and kieu in ("", "xin mot que dinh huong"):
+    if so and _Y_NGHIA.search(t) and kieu in ("", "dinh huong xin mot que"):
         kieu = "y nghia"
     hai = _hai_lua_chon(cau) and len(cd) >= 2
     viec = " hay ".join(cd[:2]) if hai else " ".join(cd)

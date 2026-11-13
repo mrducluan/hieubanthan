@@ -33,7 +33,7 @@
  },
  "chu_de": {
   "chuyen_viec": {
-   "ten": "Changing jobs, a new job",
+   "ten": "Changing jobs or starting a new one",
    "hanh_dong": {
     "thuan": [
      "Set a date to give your answer — do not let the offer go cold.",
@@ -57,7 +57,7 @@
    ]
   },
   "thang_tien": {
-   "ten": "Promotion, interviews, being put forward",
+   "ten": "Promotions and interviews",
    "hanh_dong": {
     "thuan": [
      "Prepare 3 things you have achieved, with figures.",
@@ -81,7 +81,7 @@
    ]
   },
   "kinh_doanh": {
-   "ten": "Opening a shop, business, investing",
+   "ten": "Opening a shop, a business or investing",
    "hanh_dong": {
     "thuan": [
      "Try it small first; expand once you have real figures.",
@@ -105,7 +105,7 @@
    ]
   },
   "hop_tac": {
-   "ten": "Partnerships, business partners",
+   "ten": "Partnerships and business partners",
    "hanh_dong": {
     "thuan": [
      "Write a clear agreement on who does what and who gets what.",
@@ -129,7 +129,7 @@
    ]
   },
   "tien_no": {
-   "ten": "Money owed, debt collection",
+   "ten": "Money owed and getting it back",
    "hanh_dong": {
     "thuan": [
      "Remind them at the right time, to the right person, with a specific date.",
@@ -201,7 +201,7 @@
    ]
   },
   "xe_co": {
-   "ten": "Buying a car or vehicle",
+   "ten": "Buying a car or another vehicle",
    "hanh_dong": {
     "thuan": [
      "Test-drive on the roads you use every day.",
@@ -225,7 +225,7 @@
    ]
   },
   "thi_cu": {
-   "ten": "Exams, studies",
+   "ten": "Exams and studies",
    "hanh_dong": {
     "thuan": [
      "Revise the parts that come up most and do real papers against the clock.",
@@ -249,7 +249,7 @@
    ]
   },
   "giay_to": {
-   "ten": "Paperwork, contracts, visas, waiting for news",
+   "ten": "Paperwork, contracts, visas and waiting for news",
    "hanh_dong": {
     "thuan": [
      "Submit everything in one go; check every page before sending.",
@@ -297,7 +297,7 @@
    ]
   },
   "hon_nhan": {
-   "ten": "Engagement, marriage",
+   "ten": "Engagement and marriage",
    "hanh_dong": {
     "thuan": [
      "Talk clearly about three things: money, children and both families.",
@@ -321,7 +321,7 @@
    ]
   },
   "hon_nhan_tt": {
-   "ten": "Marriage in trouble, separation",
+   "ten": "A marriage in trouble or separation",
    "hanh_dong": {
     "thuan": [
      "Set aside a time to talk with no children and no phones.",
@@ -345,7 +345,7 @@
    ]
   },
   "gia_dinh": {
-   "ten": "Parents, family",
+   "ten": "Parents and family",
    "hanh_dong": {
     "thuan": [
      "Visit or call regularly, on a schedule.",
@@ -393,7 +393,7 @@
    ]
   },
   "suc_khoe": {
-   "ten": "Health, daily rhythm",
+   "ten": "Health and daily rhythm",
    "hanh_dong": {
     "thuan": [
      "Keep a fixed bedtime and cut down screens in the evening.",
@@ -417,7 +417,7 @@
    ]
   },
   "di_xa": {
-   "ten": "Travelling far, moving home, going abroad",
+   "ten": "Travelling far, moving home or going abroad",
    "hanh_dong": {
     "thuan": [
      "Settle your accommodation and job before you go.",
@@ -441,7 +441,7 @@
    ]
   },
   "mat_do": {
-   "ten": "Lost things, finding them again",
+   "ten": "Finding lost things",
    "hanh_dong": {
     "thuan": [
      "Go back to where you just were and ask whoever looks after the place.",
@@ -465,7 +465,7 @@
    ]
   },
   "tranh_chap": {
-   "ten": "Disputes, legal cases",
+   "ten": "Disputes and legal cases",
    "hanh_dong": {
     "thuan": [
      "Gather all papers, messages and witnesses.",
@@ -489,7 +489,7 @@
    ]
   },
   "ban_be": {
-   "ten": "Friends, colleagues, rivals",
+   "ten": "Friends, colleagues and rivals",
    "hanh_dong": {
     "thuan": [
      "Reach out first and arrange to meet.",
@@ -585,7 +585,7 @@
    ]
   },
   "hon_nhan_nu": {
-   "ten": "Engagement, marriage (that person is a woman)",
+   "ten": "Engagement and marriage (that person is a woman)",
    "hanh_dong": {
     "thuan": [
      "Talk clearly about three things: money, children and both families.",
@@ -609,7 +609,7 @@
    ]
   },
   "hon_nhan_nam": {
-   "ten": "Engagement, marriage (that person is a man)",
+   "ten": "Engagement and marriage (that person is a man)",
    "hanh_dong": {
     "thuan": [
      "Talk clearly about three things: money, children and both families.",
@@ -633,7 +633,7 @@
    ]
   },
   "hon_nhan_tt_nu": {
-   "ten": "Marriage in trouble, separation (that person is a woman)",
+   "ten": "A marriage in trouble or separation (that person is a woman)",
    "hanh_dong": {
     "thuan": [
      "Set aside a time to talk with no children and no phones.",
@@ -657,7 +657,7 @@
    ]
   },
   "hon_nhan_tt_nam": {
-   "ten": "Marriage in trouble, separation (that person is a man)",
+   "ten": "A marriage in trouble or separation (that person is a man)",
    "hanh_dong": {
     "thuan": [
      "Set aside a time to talk with no children and no phones.",

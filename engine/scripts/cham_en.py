@@ -465,9 +465,12 @@ def _kd_dung(q: dict, pl: dict, hc: dict) -> bool:
         return True
     if cd == "nguoi_khac":
         return (hc.get("kieu") == "nguoi_kia") or (hc.get("vai") not in (None, "toi"))
-    ma_cd = (hc.get("chu_de") or {}).get("ma")
+    from app.luangiai import kinhdich_doi_song as kd_ds  # noqa: PLC0415
+    ma_cd = (hc.get("chu_de") or {}).get("ma") or kd_ds.chu_de_tu_cau(pl.get("cau_chuan_hoa") or "")
     ds_cd, ds_lv = _KD_NHAN.get(cd, (set(), set()))
-    return ma_cd in ds_cd or pl.get("linh_vuc") in ds_lv
+    # câu gia đình: việc chính có thể là việc khác (bán nhà, nghỉ học, cưới…) — đúng tuyến khi vai là người nhà
+    gia = cd == "gia_dinh" and hc.get("vai") in ("con", "cha_me", "vo_chong")
+    return ma_cd in ds_cd or pl.get("linh_vuc") in ds_lv or gia
 
 
 def cham_kinhdich(holdout: bool = False, in_sai: bool = False) -> dict:
@@ -480,7 +483,7 @@ def cham_kinhdich(holdout: bool = False, in_sai: bool = False) -> dict:
     cau = [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()]
     c = dr.may_khach()
     dem, tong, dung = collections.Counter(), collections.Counter(), collections.Counter()
-    sai_nhan = collections.Counter()
+    sai_nhan, loi_at = collections.Counter(), collections.Counter()
     sai = []
     hao = [7, 8, 9, 7, 6, 8]
     with dr.dong_bang():
@@ -520,6 +523,8 @@ def cham_kinhdich(holdout: bool = False, in_sai: bool = False) -> dict:
                     if not moc_ok:
                         sai.append((q["id"], "MOC", q["moc"], moc, t, q["cau_hoi"]))
             dung[loai] += ok
+            if not ok and loai in ("khung_hoang", "cap_cuu", "tu_choi"):
+                loi_at[f"{loai}→{xl}/{pl.get('loai')}"] += 1     # tổng theo cặp — in được cả với holdout (không lộ câu)
             if dr.loi_en({"t": r.get("cau_tra_loi")}, {"q": q["cau_hoi"]}):
                 dem["con_chu_viet"] += 1
             if not ok:
@@ -529,7 +534,7 @@ def cham_kinhdich(holdout: bool = False, in_sai: bool = False) -> dict:
     kq = {"tong": sum(tong.values()), "dinh_tuyen": round((dung["ca_nhan"] + dung["kien_thuc"]) / max(thuong, 1), 3),
           **{k: f"{dung[k]}/{tong[k]}" for k in ("ca_nhan", "kien_thuc", "khung_hoang", "cap_cuu", "tu_choi") if tong[k]},
           "chan_nham": dem["chan_nham"], "moc_thoi_gian": f"{dem['moc_dung']}/{dem['moc_tong']}",
-          "tra_loi_con_chu_viet": dem["con_chu_viet"], "loi_500": dem["loi_500"]}
+          "tra_loi_con_chu_viet": dem["con_chu_viet"], "loi_500": dem["loi_500"], "an_toan_sai_theo_cap": dict(loi_at)}
     if not holdout:
         kq["sai_theo_nhan"] = dict(sai_nhan)
         if in_sai:

@@ -827,7 +827,8 @@ def que_mo(dq: dict | None, t: str, raw: str | None = None, moc: str | None = No
     from app.luangiai import kinhdich_doi_song as kd  # noqa: PLC0415
     dieu = dieu_hoi(t, raw)
     cd = dq.get("chu_de") or {}
-    ten_cd = "việc bạn hỏi" if cd.get("ma") in (None, "khac") else "chuyện " + thuong(cd["ten"].split(" (")[0])
+    ten_cd = (L("hoi.kd.mo.viec_hoi", "việc bạn hỏi") if cd.get("ma") in (None, "khac")
+              else L("hoi.kd.mo.chuyen", "chuyện {cd}", cd=thuong(cd["ten"].split(" (")[0])))
     kl = (dq.get("ket_luan") or "").split(": ", 1)[-1]
     so = None
     for h in dq.get("hop") or []:
@@ -841,29 +842,31 @@ def que_mo(dq: dict | None, t: str, raw: str | None = None, moc: str | None = No
     tl = dq.get("tra_loi") or {}
     if tl.get("cau_dau"):
         # KD-V3: câu đầu = nghiêng theo kiểu câu + lý do riêng của lần gieo; rồi phía người kia, điều cần gỡ, việc nên làm
-        phan = [f"{thuong(ten)} — {thuong(tl['cau_dau'].rstrip('.'))}"]
+        phan = [f"{thuong(ten) if _nn.la_viet() else ten} — {thuong(tl['cau_dau'].rstrip('.'))}"]
         if tl.get("nguoi_kia") and tl["kieu"] != "nguoi_kia":
             nk = tl["nguoi_kia"]
-            ai = f"Phía {nk['nguoi']}" if tl.get("vai") != "toi" and nk.get("nguoi") else "Phía người kia"
+            ai = (L("hoi.kd.mo.phia", "Phía {ai}", ai=nk["nguoi"]) if tl.get("vai") != "toi" and nk.get("nguoi")
+                  else L("hoi.kd.mo.phia_kia", "Phía người kia"))
             phan.append(f"{ai}: " + thuong(nk["loi"].rstrip(".")))
         if tl.get("can_go"):
-            phan.append("Điều cần gỡ trước: " + thuong(tl["can_go"][0]["loi"].rstrip(".")))
+            phan.append(L("hoi.kd.mo.can_go", "Điều cần gỡ trước: ") + thuong(tl["can_go"][0]["loi"].rstrip(".")))
         if viec and tl.get("vai") == "con":
-            viec = "cùng con, " + thuong(viec)
+            viec = L("hoi.kd.mo.cung_con", "cùng con, ") + thuong(viec)
     else:
-        phan = [f"{thuong(ten)} nghiêng về mức {dq['nhan_muc'].lower()}", kl]
+        phan = [L("hoi.kd.mo.nghieng", "{ten} nghiêng về mức {muc}", ten=thuong(ten) if _nn.la_viet() else ten,
+                  muc=dq["nhan_muc"].lower()), kl]
         if hdg:
-            phan.append("Hiểu đơn giản: " + hdg)
+            phan.append(L("hoi.kd.mo.hdg", "Hiểu đơn giản: ") + hdg)
     if viec:
-        phan.append("Việc nên làm: " + thuong(viec))
+        phan.append(L("hoi.kd.mo.viec", "Việc nên làm: ") + thuong(viec))
     if moc:
-        phan.append("Kinh Dịch xem thế của việc ở lúc gieo, không chấm riêng từng tháng hay từng năm — nếu đang cân "
-                    "hai mốc, chọn mốc bạn chuẩn bị kịp hơn")
+        phan.append(L("hoi.kd.mo.moc", "Kinh Dịch xem thế của việc ở lúc gieo, không chấm riêng từng tháng hay từng năm — nếu đang cân "
+                    "hai mốc, chọn mốc bạn chuẩn bị kịp hơn"))
     if hoi_dau_tu(t, dieu):
-        phan.append(KHONG_DAU_TU)
+        phan.append(L("hoi.md.khong_dau_tu", KHONG_DAU_TU))
     if la_quyet_dinh(t):
-        phan.append(KHONG_QUYET_QUE)
-    dau = dau_cau(dieu, ten_cd, f"vào {moc}" if moc else None)
+        phan.append(L("hoi.kd.mo.khong_quyet", KHONG_QUYET_QUE))
+    dau = dau_cau(dieu, ten_cd, L("hoi.kd.mo.vao", "vào {moc}", moc=moc) if moc else None)
     return f"{dau}: {thuong(ghep(*phan))}"
 
 

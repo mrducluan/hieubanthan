@@ -647,35 +647,84 @@ def kinhdich(goi: dict, que: dict | None) -> list[dict]:
             return []
         from app.kb import trang      # noqa: PLC0415
         slug = next((s for k, s in trang._ds_que() if str(k) == str(q["so"])), None)
-        return [k for k in [slug and _khoi_trang("que", slug, f"Quẻ {q['ten']}")] if k]
+        return [k for k in [slug and _khoi_trang("que", slug, L("hoi.kd.tq.que", "Quẻ {que}", que=_kd_ten(q["ten"])))] if k]
     qb = que["quai_ban"]
     bits = qb.get("bits_hao1_den_hao6") or []
     if len(bits) != 6:
         return []
     dong = set(que.get("hao_dong") or [])
     theo_vt: dict[int, dict] = {}
-    for m in goi["muc"]:
-        if m.get("loai") != "loi_kinh" or not str(m.get("tieu_de", "")).endswith(f"quẻ {qb['ten']}"):
-            continue
-        k = _TEN_HAO_RE.match(m["tieu_de"])
-        if not k:
-            continue
-        vt = next((v for w, v in _THU_HAO.items() if w in k.group(1).split()), None)
-        if vt:
-            theo_vt[vt] = {"ten": k.group(1), "nom_na": m.get("nom_na") or m.get("y") or "", "chu": bool(m.get("chu"))}
+    if ngon_ngu.la_viet():
+        for m in goi["muc"]:
+            if m.get("loai") != "loi_kinh" or not str(m.get("tieu_de", "")).endswith(f"quẻ {qb['ten']}"):
+                continue
+            k = _TEN_HAO_RE.match(m["tieu_de"])
+            if not k:
+                continue
+            vt = next((v for w, v in _THU_HAO.items() if w in k.group(1).split()), None)
+            if vt:
+                theo_vt[vt] = {"ten": k.group(1), "nom_na": m.get("nom_na") or m.get("y") or "", "chu": bool(m.get("chu"))}
+    else:
+        # EN-ALL GĐ 6: tiêu đề lời hào theo ngôn ngữ — so khớp với tiêu đề dựng bằng CÙNG hàm (`hoidap.kinhdich.tieu_de_hao`)
+        from app.hoidap.kinhdich import tieu_de_hao  # noqa: PLC0415
+        from app.kb import kinhdich_kb  # noqa: PLC0415
+        qv = kinhdich_kb.que_van(qb["so_king_wen"]) or {}
+        tieu_de = {tieu_de_hao(h, qb["ten"]): (i, h) for i, h in enumerate(qv.get("hao") or [], start=1)}
+        for m in goi["muc"]:
+            if m.get("loai") == "loi_kinh" and m.get("tieu_de") in tieu_de:
+                vt, h = tieu_de[m["tieu_de"]]
+                theo_vt[vt] = {"ten": h["ten"], "nom_na": m.get("nom_na") or m.get("y") or "", "chu": bool(m.get("chu")),
+                               "khop": m["tieu_de"]}
     muc = []
     for i, b in enumerate(bits, start=1):
         lk = theo_vt.get(i) if i in dong else None
-        x = {"nhan": f"Hào {i}", "vi_tri": i, "duong": bool(b), "dong": i in dong, "chu": bool(lk and lk["chu"]),
+        x = {"nhan": L("hoi.kd.tq.hao", "Hào {i}", i=i), "vi_tri": i, "duong": bool(b), "dong": i in dong, "chu": bool(lk and lk["chu"]),
              "sac": "chinh" if lk and lk["chu"] else "hop" if i in dong else "nhat",
-             "giai_thich": lk["nom_na"] if lk else ("Hào động ở lượt này." if i in dong
-                                                    else "Hào đứng yên ở lượt này — đọc theo lời chung của quẻ.")}
+             "giai_thich": lk["nom_na"] if lk else (L("hoi.kd.tq.dong", "Hào động ở lượt này.") if i in dong
+                                                    else L("hoi.kd.tq.yen", "Hào đứng yên ở lượt này — đọc theo lời chung của quẻ."))}
         if lk:
-            x["nhan"] = f"Hào {i} · {lk['ten'].removeprefix('Hào ')}"
-            x["khop"] = [lk["ten"]]
+            x["nhan"] = (f"Hào {i} · {lk['ten'].removeprefix('Hào ')}" if ngon_ngu.la_viet()
+                         else L("hoi.kd.tq.hao_ten", "Hào {i} · {ten}", i=i, ten=lk["ten"]))
+            x["khop"] = [lk.get("khop") or lk["ten"]] if not ngon_ngu.la_viet() else [lk["ten"]]
         muc.append(x)
-    return [{"kieu": "hao", "tieu_de": f"Quẻ {qb['ten']}: bấm từng hào", "muc": muc,
-             "ghi_chu": "Hào 1 ở dưới cùng. Hào sáng là hào động — phần quẻ đang chuyển; hào vàng là hào chủ."}]
+    return [{"kieu": "hao", "tieu_de": L("hoi.kd.tq.tieu_de", "Quẻ {que}: bấm từng hào", que=_kd_ten(qb["ten"])), "muc": muc,
+             "ghi_chu": L("hoi.kd.tq.ghi_chu", "Hào 1 ở dưới cùng. Hào sáng là hào động — phần quẻ đang chuyển; hào vàng là hào chủ.")}]
+
+
+def _kd_ten(ten: str) -> str:
+    from app.kb import ten as _ten  # noqa: PLC0415
+    return _ten.ten("que_ten", ten)
+
+
+# ---------------------------------------------------------------- Hỏi tiếp Kinh Dịch (EN-ALL GĐ 6, chỉ bản ngôn ngữ khác)
+# Câu chuẩn theo chủ đề đời sống (KB 20 chủ đề); câu tiếng Anh tự định tuyến đúng chủ đề (tests/test_en_kinhdich_hoi.py).
+HOI_KD = {
+    "chuyen_viec": "Tôi có nên chuyển việc lúc này không?", "thang_tien": "Buổi phỏng vấn sắp tới của tôi có thuận không?",
+    "kinh_doanh": "Tôi có nên mở việc kinh doanh riêng lúc này không?", "tien_no": "Tôi có đòi lại được khoản tiền đã cho vay không?",
+    "tinh_cam": "Chuyện tình cảm với người ấy có tiến triển không?", "hon_nhan": "Lúc này có nên tính chuyện cưới không?",
+    "gia_dinh": "Tôi nên ứng xử thế nào với căng thẳng trong gia đình?", "thi_cu": "Kỳ thi sắp tới của tôi có đậu không?",
+    "mua_nha": "Lúc này có nên mua nhà không?", "di_xa": "Tôi có nên chuyển ra nước ngoài sống không?",
+}
+_KD_GAN = {
+    "chuyen_viec": ("thang_tien", "kinh_doanh", "di_xa"), "thang_tien": ("chuyen_viec", "kinh_doanh", "thi_cu"),
+    "kinh_doanh": ("chuyen_viec", "tien_no", "mua_nha"), "hop_tac": ("kinh_doanh", "tien_no", "chuyen_viec"),
+    "tien_no": ("kinh_doanh", "mua_nha", "gia_dinh"), "ban_nha": ("mua_nha", "kinh_doanh", "di_xa"),
+    "mua_nha": ("kinh_doanh", "di_xa", "gia_dinh"), "xe_co": ("mua_nha", "kinh_doanh", "tien_no"),
+    "thi_cu": ("chuyen_viec", "thang_tien", "di_xa"), "giay_to": ("di_xa", "chuyen_viec", "mua_nha"),
+    "tinh_cam": ("hon_nhan", "gia_dinh", "di_xa"), "hon_nhan": ("tinh_cam", "gia_dinh", "mua_nha"),
+    "hon_nhan_tt": ("gia_dinh", "tinh_cam", "di_xa"), "gia_dinh": ("hon_nhan", "mua_nha", "tinh_cam"),
+    "con_cai": ("gia_dinh", "thi_cu", "di_xa"), "suc_khoe": ("gia_dinh", "chuyen_viec", "di_xa"),
+    "di_xa": ("chuyen_viec", "mua_nha", "gia_dinh"), "mat_do": ("tien_no", "gia_dinh", "chuyen_viec"),
+    "tranh_chap": ("tien_no", "giay_to", "kinh_doanh"), "ban_be": ("gia_dinh", "chuyen_viec", "tinh_cam"),
+}
+
+
+def hoi_tiep_kinhdich(pl: dict, ma_chu_de: str | None) -> list[str]:
+    """≤ 3 câu hỏi tiếp theo chủ đề vừa hỏi (câu chuẩn, theo ngôn ngữ lượt gọi); câu bị chặn / kiến thức → []."""
+    if pl.get("xu_ly") in ("an_toan", "tu_choi_nhe", "dan_huong") or pl.get("loai") in ("ky_thuat", "dac_biet"):
+        return []
+    goc = re.sub(r"_(nu|nam)$", "", ma_chu_de or "")
+    return [cau_hien(HOI_KD[k]) for k in _KD_GAN.get(goc, ("chuyen_viec", "tinh_cam", "kinh_doanh")) if k != goc and k in HOI_KD][:3]
 
 
 # ---------------------------------------------------------------- Câu chuẩn (thẻ chia sẻ + hỏi tiếp)
@@ -693,6 +742,8 @@ def cau_chuan_tat_ca() -> dict[str, list[str]]:
 # EN-AI (câu gợi ý trước, gõ tự do sau): 6 câu chuẩn mỗi mảng hiện thành chip ở khung hỏi đáp bản Anh — bấm là hỏi luôn.
 # Chỉ câu trong danh mục chuẩn (định tuyến đã kiểm, tests/test_phan_loai_en.py), theo chủ đề người mới hay hỏi.
 GOI_Y_DAU = {
+    "kinhdich": [HOI_KD["chuyen_viec"], HOI_KD["tinh_cam"], HOI_KD["kinh_doanh"], HOI_KD["thi_cu"], HOI_KD["mua_nha"],
+                 HOI_KD["gia_dinh"]],
     "battu": [HOI_BT["nghe_tien"], HOI_CUNG["Tài Bạch"], HOI_BT["hon_nhan"], HOI_BT["van"], HOI_BT["tinh_cach"], HOI_BT["ngu_hanh"]],
     "tuvi": [HOI_CUNG["Mệnh"], HOI_CUNG["Quan Lộc"], HOI_CUNG["Tài Bạch"], HOI_CUNG["Phu Thê"], HOI_CUNG["Tật Ách"],
              HOI_TV_THEM["ba_thang"]],
@@ -707,7 +758,8 @@ def goi_y_dau(mang: str) -> list[str]:
 def _ma_cau() -> dict[str, str]:
     """Câu chuẩn tiếng Việt → mã mẫu câu ổn định (`hoi_chuan.<mảng>.<khoá>`). Logic so khớp bên trên vẫn dùng chữ Việt."""
     ra: dict[str, str] = {}
-    for mang, bang in (("tuvi", HOI_CUNG), ("tuvi", HOI_TV_THEM), ("battu", HOI_BT), ("phongthuy", HOI_PT), ("thanso", HOI_TS)):
+    for mang, bang in (("tuvi", HOI_CUNG), ("tuvi", HOI_TV_THEM), ("battu", HOI_BT), ("phongthuy", HOI_PT), ("thanso", HOI_TS),
+                       ("kinhdich", HOI_KD)):
         for k, v in bang.items():
             ra.setdefault(v, f"hoi_chuan.{mang}.{_ma_khoa(k)}")
     return ra
