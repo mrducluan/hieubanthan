@@ -18,7 +18,7 @@ const DU_PHONG_EN: TenHien = {
     "Tây": "West", "Tây Bắc": "North-West", "Trung cung": "Centre", "Trung tâm": "Middle" },
   quai: { "Khảm": "Kan", "Khôn": "Kun", "Chấn": "Zhen", "Tốn": "Xun", "Càn": "Qian", "Đoài": "Dui", "Cấn": "Gen", "Ly": "Li" },
   du_nien: { "Sinh Khí": "Sheng Qi (Vitality)", "Thiên Y": "Tian Yi (Health)", "Diên Niên": "Yan Nian (Harmony)",
-    "Phục Vị": "Fu Wei (Stability)", "Hoạ Hại": "Huo Hai (Minor Mishaps)", "Lục Sát": "Liu Sha (Friction)", "Ngũ Quỷ": "Wu Gui (Disputes)",
+    "Phục Vị": "Fu Wei (Stability)", "Hoạ Hại": "Huo Hai (Minor Mishaps)", "Lục Sát": "Liu Sha (Friction)", "Ngũ Quỷ": "Wu Gui (Setbacks)",
     "Tuyệt Mệnh": "Jue Ming (Depletion)" },
   nhom_trach: { "Đông tứ mệnh": "East Group", "Tây tứ mệnh": "West Group", "Đông tứ trạch": "East-group house", "Tây tứ trạch": "West-group house" },
   // 24 sơn (ô chọn toạ sơn Huyền Không liệt kê đủ 24) + 9 sao bay.
