@@ -147,7 +147,9 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
         <div className="space-y-5" data-testid="ban-huyen-khong">
           {en ? (
             <p className="text-sm text-fg-muted">
-              {t("hk.van")}<b className="text-gold">{ban.van}</b>{t("hk.toa")}<b className="text-fg">{tn("son", ban.toa.son)}</b> ({tn("huong", ban.toa.phuong)}){t("hk.huong")}<b className="text-fg">{tn("son", ban.huong.son)}</b> ({tn("huong", ban.huong.phuong)}){t("hk.cuc")}<b className="text-gold">{tn("cuc_hk", ban.cuc_ten)}</b>{t("hk.luu_nien", { nam: String(ban.luu_nien.nam), sao: tn("sao_bay", ban.luu_nien.sao_tam) })}
+              {t("hk.van")}<b className="text-gold">{ban.van}</b>{en
+                ? <>{t("hk.toa")}<b className="text-fg">{tn("huong", ban.toa.phuong)}</b> · {tn("son", ban.toa.son)}{t("hk.huong")}<b className="text-fg">{tn("huong", ban.huong.phuong)}</b> · {tn("son", ban.huong.son)}</>
+                : <>{t("hk.toa")}<b className="text-fg">{tn("son", ban.toa.son)}</b> ({tn("huong", ban.toa.phuong)}){t("hk.huong")}<b className="text-fg">{tn("son", ban.huong.son)}</b> ({tn("huong", ban.huong.phuong)})</>}{t("hk.cuc")}<b className="text-gold">{tn("cuc_hk", ban.cuc_ten)}</b>{t("hk.luu_nien", { nam: String(ban.luu_nien.nam), sao: tn("sao_bay", ban.luu_nien.sao_tam) })}
             </p>
           ) : (
           <p className="text-sm text-fg-muted">
