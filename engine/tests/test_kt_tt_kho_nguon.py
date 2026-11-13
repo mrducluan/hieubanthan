@@ -204,3 +204,22 @@ def test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu():
     # ba cách điều kiện hệ thống đang khác sách — ghi cờ, CHƯA đổi phép nhận diện (đổi = đổi kết quả lá số)
     # KT-TT8: Quân thần khánh hội + Nguyệt sinh thương hải đã theo sách; hai cách còn lại giữ cách hiểu phổ biến
     assert {k for k, g in co.items() if g.get("khac_dieu_kien")} == {"ma_dau_doi_kiem", "loc_ma_boi_an"}
+
+
+def test_tu_quai_tren_trang_que_la_nguyen_van():
+    """KT-N1 — 64 trang quẻ: câu Tự Quái trích kèm phải là chuỗi con nguyên văn kho nguồn Truyện Nghĩa (bỏ dấu câu)."""
+    import json as _j
+    import re as _re
+    from pathlib import Path as _P
+    goc = _P(__file__).resolve().parent.parent
+    src = _j.loads((goc / "fixtures" / "nguon" / "chu_dich_truyen_nghia.json").read_text("utf-8"))
+    van = "".join(x["kinh"] for x in src["thien"]["tu_quai"])
+    trang = _j.loads((goc / "app" / "kb" / "data" / "bo_sung_que.json").read_text("utf-8"))["trang"]
+    co = 0
+    for k, pg in trang.items():
+        for t in pg.get("trich_dan", []):
+            if t.get("chuong") == "Tự quái truyện":
+                assert t.get("nguyen_van"), k
+                assert _re.sub(r"[，。\s]", "", t["nguyen_van"]) in van, k
+                co += 1
+    assert co == 64

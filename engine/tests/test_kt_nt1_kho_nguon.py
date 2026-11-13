@@ -53,7 +53,7 @@ def test_trich_cua_sach_co_kho_nguon_khop_nguyen_van():
         co += 1
         assert s.get("han"), f"{k}: thiếu nguyên văn chữ Hán"
         assert _sach_tron(s["han"]) in VAN[s["nguon"]], f"{k}: «{s['han']}» không có trong {s['nguon']}"
-    assert co >= 24
+    assert co >= 40
 
 
 def test_han_chi_o_sach_co_kho_nguon():

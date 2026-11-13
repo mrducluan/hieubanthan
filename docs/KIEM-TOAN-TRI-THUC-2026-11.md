@@ -466,3 +466,20 @@ Nhân tướng có nguyên văn chữ Hán (`han`) và test bắt buộc mọi c
 **Còn lại (không gấp)**: muốn đưa nội dung riêng của Liễu Trang / Ma Y vào lời luận thì phải có bản gõ; em có thể gõ dần từ PDF
 Liễu Trang theo từng thiên khi cần (chậm, phải soát).
 
+### 10.15 Ba việc dùng nguồn sẵn có (KT-N1, 2026-11-13)
+
+Anh giao làm nhóm 1 của đề xuất; em đánh giá từng việc trước khi làm.
+
+1. **Nhân tướng — thêm câu sách thật**: 105 nét chưa có câu trích. Phần lớn nét "cần lưu ý" chỉ có câu sách mang giọng phán
+   (nghèo, yểu, hình khắc) → **không đưa**. Thêm 18 câu trung tính, đúng ý nét (năm hình Kim / Mộc / Thuỷ / Hoả / Thổ, mắt, mũi,
+   môi, hàm, trán, xương – thịt, ánh mắt, quầng mắt, dáng mặt cân đối) → 43 câu, câu nào cũng có `han` khớp kho nguồn. Câu trích
+   ở "Vì sao nói vậy" và trang bộ vị nay hiện cả chữ Hán. **12 cung trên mặt**: KB theo lối Ma Y (Tài Bạch ở mũi, Huynh Đệ ở mày,
+   Quan Lộc ở trán); Thái Thanh Thần Giám chép lối cổ hơn (Tài Bạch ở Thiên Thương – Địa Khố, Huynh Đệ ở góc trán, Quan Lộc ở
+   chính diện). Hai lối cùng tồn tại; giữ lối Ma Y vì phổ biến, ghi lại để người duyệt biết.
+2. **Kinh Dịch — Tự Quái nguyên văn**: 64 trang quẻ có câu Tự Quái của đúng quẻ (cắt từ kho Truyện Nghĩa, test khớp nguyên văn);
+   phần diễn ý giữ nguyên bên dưới.
+3. **Tử vi — cách «Phụ Bật củng chủ»** (定贵局: «紫微守命二星来拱是也，夹之亦然»): Tử Vi thủ Mệnh, Tả Phù + Hữu Bật cùng về tam
+   phương tứ chính hoặc kẹp Mệnh; cùng ở Mệnh vẫn là Quân Thần Khánh Hội. 1.000 lá mẫu: 14 lá (88 lá Tử Vi thủ Mệnh). Nối cuối
+   danh sách (76 cách), cách cũ không đổi → không tăng `ENGINE_VERSION`. 16 dòng sách ghi "xem chú ở trên" là cách trùng tên câu
+   phú đã có, chưa rà thêm.
+
