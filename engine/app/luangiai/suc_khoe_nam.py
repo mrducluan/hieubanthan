@@ -210,7 +210,8 @@ def phongthuy_nam(quai: str, tu_nam: int, so_nam: int = SO_NAM, noi: str = "phò
         if not m:
             continue
         ra.append({"nam": n, "sao": so, "ly_do": [f"sao_{so}"], "hien_tai": n == tu_nam, "he": kb.he_hanh(m.get("hanh")),
-                   "can_cu": [f"Lưu niên {n}: sao {so} ({m['ten']}) bay tới phía {noi} (quái {quai})"]})
+                   "can_cu": [L("pt.skn.can_cu", "Lưu niên {n}: sao {so} ({ten}) bay tới phía {noi} (quái {quai})", n=n, so=so,
+                                  ten=_ten.ten("sao_bay", m["ten"]), noi=noi, quai=_ten.ten("quai", quai))]})
     return ra
 
 

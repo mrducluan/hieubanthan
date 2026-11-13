@@ -329,7 +329,7 @@ _PT_THEM = {  # mã bố trí → nhãn chủ đề thêm (ngoài bo_tri / dau_h
     "vo_chong_ngu": {"tinh_cam"}, "cai_nhau": {"tinh_cam"}, "nguoi_gia": {"suc_khoe"}, "nha_toi_am": {"suc_khoe"},
     "phong_tre": {"suc_khoe"}, "nha_cu_mua_lai": {"mua_nha"}, "can_ho": {"mua_nha", "huong_nha"}, "dat_meo": {"mua_nha"},
     "no_hau": {"mua_nha"}, "duong_lon_on": {"mua_nha"}, "ngo_cut": {"mua_nha"}, "nghia_trang": {"mua_nha"},
-    "song_truoc": {"mua_nha"}, "duong_dam": {"mua_nha", "van_phong"}, "nga_ba": {"mua_nha", "van_phong"},
+    "song_truoc": {"mua_nha"}, "tu_linh": {"mua_nha"}, "minh_duong": {"mua_nha"}, "duong_dam": {"mua_nha", "van_phong"}, "nga_ba": {"mua_nha", "van_phong"},
     "cay_trong_phong_ngu": {"suc_khoe"}, "giuong_sat_cua": {"suc_khoe"}, "xa_ngang": {"suc_khoe"},
     "cua_so_dau_giuong": {"suc_khoe"}, "phong_tren_khoang_trong": {"suc_khoe"}, "cau_thang_cua_phong": {"suc_khoe"},
 }

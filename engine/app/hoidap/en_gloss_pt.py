@@ -240,7 +240,7 @@ def gloss(cau: str) -> str:
             ra.append(f"phong ngu phia {huong[0]}")
         return " ".join(ra + nguoi)
     # 2c. tín ngưỡng / nghi lễ / phong thuỷ có cần không → giải thích chung
-    if re.search(r"\b(christian|muslim|catholic|religio\w*|faith|bless\w*|ritual|ceremony|superstition)\b", t):
+    if re.search(r"\b(christian|muslim|catholic|religio\w*|faith|bless\w*|ritual|ceremony)\b", t):
         return "phong thuy co khoa hoc co that khong"
     # 3. năm làm nhà / mua nhà / dọn nhà (tuổi làm nhà)
     if re.search(r"\b(good|right|best|lucky|auspicious) (year|time|month|date|day)s?\b|\bkim lau\b|\bwhich year\b|\bwhen should\b", t) and \
@@ -304,7 +304,7 @@ def gloss(cau: str) -> str:
             ra.append(f"{vat} {huong[0]}" + (" hop voi toi" if ca_nhan or nguoi else ""))
         else:
             ra.append(f"phia {huong[0]}")
-    elif vat and hop and not bt and re.search(r"\b(direction|face|facing|point|points|which way|toward|towards)\b", t):
+    elif vat and hop and not bt and not dn and re.search(r"\b(direction|face|facing|point|points|which way|toward|towards)\b", t):
         ra.append(f"{vat} nao hop voi toi")
     ra += bt
     # 9. nỗi lo theo mảng (CY-1)

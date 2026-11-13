@@ -1124,6 +1124,27 @@ _KHUNG_HOANG_GD5 = _rx_en(
     r"(?:want|wanna|going|ready|hope|hoping) to (?:be with|join|see) (?:him|her|them) (?:again )?soon",
     r"(?:wish|wishes|wished|wishing) (?:i|he|she|they|i d|he d|she d) (?:had |would have |d )?never (?:been born|existed)",
     r"(?:kill|hurt|harm|cut|cutting|hurting|harming|killing) (?:herself|himself|themselves)",
+    r"(?:end|ending|take|taking) (?:his|her|their) (?:own )?life",
+    r"(?:make|making) my death (?:painless|quick|peaceful|easy)|(?:painless|quick|peaceful) way to die",
+    r"(?:think|thinking|thought) (?:about|of) jumping\b.{0,60}|(?:window|balcony|floor|roof|ledge)\b.{0,60}(?:think|thinking|thought) "
+    r"(?:about|of) jumping",
+    r"(?:can t|cannot|can not|do not|don t) see (?:a|any) way out",
+    r"(?:best|right|good|peaceful|quietest|ideal) (?:spot|place|room|corner|direction) (?:in (?:the|my|this) (?:house|home|flat) )?to die",
+    r"(?:stop |keep )?wanting to die|(?:i |i still |i just |i really )(?:want|wanna) to die",
+    r"not (?:planning on|planning to be|going to be|gonna be) (?:being )?around (?:after|by|for|much longer|anymore|past)",
+    r"(?:if|when|after|once) (?:i am|i m|im) gone\b.{0,60}(?:better|improve\w*|happier|luck\w*|take (?:my|the) room|(?:son|daughter|kids|wife|"
+    r"husband) (?:take|have|get))",
+    r"(?:where|how) (?:should|do|can) i (?:put|hang|tie|hide) (?:the |a |my )?(?:rope|noose)|(?:rope|noose)\b.{0,40}(?:not visible|hidden|"
+    r"won t be seen|from the beam)",
+    r"how high (?:does|do|is|should|must) (?:the |my |a |this )?(?:balcony|window|floor|roof|ledge|building|bridge)\b.{0,40}(?:make sure|"
+    r"be sure|enough|certain)",
+    r"(?:this is|it s|today is|tonight is) my (?:last|final) (?:week|day|night|month|weekend)|decided (?:this|today|tonight) is (?:the|my) (?:last|end)",
+    r"(?:i |i just |i only )?want (?:everything|it all|all of it|the pain) to (?:stop|end) (?:forever|for good|permanently)?(?=\s*(?:[,.!?;]|$))",
+    r"(?:i am|i m) ready to go(?=\s*(?:[,.!?;]|$))",
+    r"(?:she|he|they) (?:ll|will|would|is going to|s going to|says she ll|says he ll) (?:jump|kill (?:her|him|them)sel(?:f|ves))",
+    r"voices (?:say|said|tell|told|telling|keep telling)|wants? me dead",
+    r"make it look like an accident",
+    r"charcoal\b.{0,60}(?:tape|airtight|seal\w*|close\w* (?:the|all the) (?:windows|room|door))|most airtight",
     r"(?:take|taking|swallow\w*) (?:them|it|those|these) all\b.{0,60}(?:peaceful|painless|quiet|calm)|"
     r"(?:take|taking|swallow\w*) all of (?:them|it|those)\b.{0,60}(?:peaceful|painless|quiet|calm)",
     r"(?:rope|noose|knife|blade|pills|tablets)\b.{0,60}asking for (?:reasons|no reason|a reason|personal reasons)",
@@ -1157,16 +1178,22 @@ _NHA_NGUY = _rx_en(
     r"keeps (?:beeping|going off))",
     r"(?:smoke|sparks?|flames?) (?:\w+ ){0,2}(?:coming|came|pouring) (?:out )?(?:from|of|out of)|(?:sparks?|sparking) (?:from|in|at) (?:the )?"
     r"(?:plug|socket|outlet|wire|wiring|switch)",
-    r"burning smell|smell of burning",
+    r"burning(?: \w+)? smell|smell of burning|(?:is |it s |are |keeps )sparking|smoke (?:is )?filling|full of smoke|filled with smoke",
+    r"fire (?:started|broke out|is spreading|spread)|started a fire|earthquake|(?:house|building|floor) is shaking",
     r"(?:on fire|caught fire|catching fire|set (?:\w+ ){0,3}on fire|is burning|are burning|house fire|kitchen fire)",
     r"water (?:\w+ ){0,3}(?:in|into|through|from|pouring through|coming out of) (?:the |an |my )?(?:electrical |power |plug )?(?:socket|outlet|"
     r"sockets|outlets|switch|fuse ?box|wiring)",
-    r"(?:ceiling|roof|wall)(?: \w+){0,4} (?:is |are )?(?:\w+ )?(?:cracking|sagging|caving|collapsing|bulging|coming down|falling)",
+    r"(?:ceiling|roof|wall)(?: \w+){0,4} (?:is |are )?(?:\w+ )?(?:cracking|sagging|caving|collapsing|collapsed|caved in|bulging|"
+    r"coming down|falling|fell in)",
+    r"flood\w*\b.{0,60}(?:power|electric\w*|sockets?|outlets?|wiring)|water\b.{0,30}coming in\b.{0,40}(?:power|electric\w*)",
+    r"(?:fell|fallen|collapsed|falls)\b.{0,40}(?:not moving|isn t moving|is not moving|won t wake|not responding|unresponsive)",
     r"(?:railing|balustrade|banister|handrail) (?:is |are )?(?:loose|broken|wobbly|coming off)",
     r"(?:headache|dizz\w*|nause\w*|vomit\w*|drowsy)\b.{0,80}(?:gas heater|heater|boiler|generator|stove|fireplace|charcoal)|"
     r"(?:gas heater|heater|boiler|generator|charcoal)\b.{0,80}(?:headache|dizz\w*|nause\w*|vomit\w*|drowsy)",
 )
-_NUOT_VAT = _rx_en(r"(?:kid|child|toddler|baby|son|daughter|he|she) (?:\w+ ){0,3}(?:swallowed|choking on|choked on|ate) (?:\w+ ){0,8}?"
+_NUOT_VAT = _rx_en(r"(?:toddler|baby|child|kid|son|daughter) (?:\w+ ){0,2}(?:drank|swallowed|ate|chewed)\b.{0,60}(?:vomit\w*|throwing up|"
+                   r"threw up|choking|drowsy|unconscious|coughing|not breathing)",
+                   r"(?:kid|child|toddler|baby|son|daughter|he|she) (?:\w+ ){0,3}(?:swallowed|choking on|choked on|ate) (?:\w+ ){0,8}?"
                    r"(?:crystals?|stones?|beads?|marbles?|coins?|magnets?|batter(?:y|ies)|gem\w*|pebbles?|pieces?)")
 
 

@@ -127,7 +127,8 @@
  "the_quai": {
   "y": "When a house is a 'replacement' facing (the back is more than 3° off the centre of its mountain), its qi is no longer purely one mountain. The Shen school uses the replacement chart: the stars entering the centre of the mountain and facing charts are swapped for 'replacement stars' by a mnemonic, while the direction of flight still follows the yin–yang of the original mountain. The period chart does not change.",
   "khau_quyet": "Zi, Gui, Jia and Shen go with Tan Lang (1); Ren, Mao, Yi, Wei and Kun with Ju Men (2); Qian, Hai, Chen, Xun, Si and Xu with Wu Qu (6); You, Xin, Chou, Gen and Bing with Po Jun (7); Yin, Wu, Geng and Ding with You Bi (9).",
-  "luu_y": "Schools differ on the threshold (3° or 4.5°), on the direction of flight after the swap and on how star 5 is handled. We follow the Shen school and have no independent source to cross-check yet, so always look at the standard chart too and re-measure with a compass."
+  "luu_y": "Schools differ on the threshold (3° or 4.5°), on the direction of flight after the swap and on how star 5 is handled. We follow the Shen school and have no independent source to cross-check yet, so always look at the standard chart too and re-measure with a compass.",
+  "nguon": "Shen's Xuan Kong Studies, book 2 (Replacement charts) — a public-domain classic; the explanation is an editorial draft."
  },
  "sao_doi_thuong": {
   "1": {
