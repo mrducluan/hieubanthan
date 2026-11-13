@@ -61,7 +61,7 @@
 | Tử vi | `bo_sung_hoa_cung.json` |  | Ban biên tập soạn |  |
 | Tử vi | `bo_sung_sao.json` |  | Ban biên tập soạn |  |
 | Tử vi | `su_kien_kb.json` |  | Ban biên tập soạn |  |
-| Tử vi | `tuvi_cach_cuc.json` |  | Tóm ý cổ thư, chưa khớp từng câu | 6 cách có `sach_ghi` khớp «định phú / quý cục» (test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu); 37 cách có cổ ca trỏ Cốt Tuỷ Phú; 4 cách điều kiện đang khác sách |
+| Tử vi | `tuvi_cach_cuc.json` |  | Tóm ý cổ thư, chưa khớp từng câu | 6 cách có `sach_ghi` khớp «định phú / quý cục» (test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu); 37 cách có cổ ca trỏ Cốt Tuỷ Phú; Quân thần khánh hội + Nguyệt sinh thương hải sửa theo sách (KT-TT8); Mã đầu đới kiếm, Lộc Mã bội ấn giữ cách phổ biến, gắn `khac_dieu_kien` |
 | Tử vi | `tuvi_co_thu.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
 | Tử vi | `tuvi_co_thu.json` | cau | Có nguyên văn đối chiếu | 84 câu Cốt Tuỷ Phú khớp từng chữ (giản ↔ phồn); phiên âm, nghĩa là nháp; chưa so bản khắc 1600 |
 | Tử vi | `tuvi_cung_sao_menh_kb.json` |  | Ban biên tập soạn |  |
@@ -93,7 +93,7 @@
 | Phong thuỷ | `phongthuy_doi_song.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_huyen_khong.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
 | Phong thuỷ | `phongthuy_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
-| Nhân tướng | `nhan_tuong_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | có câu trích sách nhưng chưa có kho nguồn |
+| Nhân tướng | `nhan_tuong_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-NT1: câu trích Băng Giám / Tâm Tướng Thiên / Linh Khu khớp kho nguồn `nhan_tuong_co_thu.json` (tests/test_kt_nt1_kho_nguon.py); Ma Y, Thần Tướng Toàn Biên, Thuỷ Kính chưa có kho nguồn |
 | Tarot | `tarot_kb.json` |  | Có nguyên văn đối chiếu | câu trích khớp Waite / Mathers / Book T; lớp Marseille, Thoth là tóm ý |
 | Thần số | `bo_sung_cap_so.json` |  | Ban biên tập soạn |  |
 | Thần số | `bo_sung_nam_ca_nhan.json` |  | Ban biên tập soạn |  |

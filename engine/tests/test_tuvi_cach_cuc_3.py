@@ -203,3 +203,35 @@ def test_api_tra_dieu_kien_dat():
         assert "du_kien" not in c and isinstance(c["dieu_kien"], str)   # dữ kiện thô không ra API
     c = next(c for c in d["cach_cuc"] if c["ma"] == "dao_hoa_pham_chu")
     assert {"loai": "can", "noi_dung": "Tử Vi ở Mệnh (Mão)"} in c["dieu_kien_dat"]
+
+
+# ---- KT-TT8: hai cách theo đúng chữ Toàn Thư (定贵局) ------------------------------------------------------
+def test_kt_tt8_quan_than_khanh_hoi_ta_huu_cung_o_menh():
+    """君臣庆会：紫微左右同守命 — Tử Vi + Tả Phù + Hữu Bật cùng ở cung Mệnh (Tả Hữu chỉ chiếu / giáp thì KHÔNG phải)."""
+    from tests._tuvi_1000 import la_1000
+    dem = 0
+    for la in la_1000():
+        l = cc._La(la)
+        ma = {x["ma"]: x for x in cc.nhan_dien(la)}
+        dung = "Tử Vi" in l.chinh(l.m) and {"Tả Phù", "Hữu Bật"} <= l.sao(l.m)
+        assert ("quan_than_khanh_hoi" in ma) == dung
+        if dung:
+            dem += 1
+            assert ma["quan_than_khanh_hoi"]["cung"] == ["Mệnh"]
+    assert dem >= 1
+
+
+def test_kt_tt8_nguyet_sinh_thuong_hai_dien_trach_o_ty():
+    """月生沧海：月在子宫守田宅 — Thái Âm ở cung Tý và cung ấy là Điền Trạch (không xét Mệnh, không cần Thiên Đồng)."""
+    from tests._tuvi_1000 import la_1000
+    dem = 0
+    for la in la_1000():
+        l = cc._La(la)
+        ma = {x["ma"]: x for x in cc.nhan_dien(la)}
+        dt_ = next(i for i in range(12) if l.ten(i) == "Điền Trạch")
+        dung = "Thái Âm" in l.chinh(dt_) and l.p[dt_]["earthlyBranch"] == "Tý"
+        assert ("nguyet_sinh_thuong_hai" in ma) == dung
+        if dung:
+            dem += 1
+            assert ma["nguyet_sinh_thuong_hai"]["cung"] == ["Điền Trạch"]
+    assert dem >= 5

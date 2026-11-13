@@ -33,7 +33,18 @@
 - [x] KT-TT4 (2026-11-12): lá số Bát tự thuộc cách cục đặc biệt (≈ 0,6 %) có thêm hộp "Một cách đọc khác" theo «Luận tạp cách» — anh không cần làm gì; khi có phiếu "Đúng với mình" em sẽ báo số.
 - [x] KT-TT5 (2026-11-12): bài đọc Kinh Dịch có thêm dòng "Thế chung của quẻ" (quẻ dễ tan / dễ kết / lòng chưa yên…) theo Tăng San Bốc Dịch — anh không cần làm gì.
 - [ ] KT-TT6 (2026-11-12): xem `docs/DO-TIN-KHO-TRI-THUC.md` (tệp nào đã có nguyên văn đối chiếu, tệp nào mới là tóm ý / biên tập) và cho em biết muốn nâng mức phần nào trước — em đề xuất thứ tự ở mục 10.10 của tài liệu kiểm toán.
-- [ ] KT-TT7 (2026-11-12): bốn cách cục Tử vi đang nhận diện KHÁC chữ Toàn Thư (bảng ở mục 10.11 tài liệu kiểm toán) — anh quyết sửa theo sách hay giữ; em đề xuất sửa Quân thần khánh hội + Nguyệt sinh thương hải, giữ hai cách còn lại.
+- [ ] **KT-NT1 (2026-11-13) — sách Nhân tướng em cần anh tải giúp** (proxy chặn máy chủ tải của archive.org; anh tải bản PDF
+  hoặc tệp chữ `…_djvu.txt` rồi gửi qua Drive, em nạp vào kho nguồn và đối chiếu 17 câu trích còn lại):
+  1. 神相全編 (Thần Tướng Toàn Biên, Trần Đoàn soạn, Viên Trung Triệt đính chính, Trí Hoà đường, bản Minh) —
+     https://archive.org/details/20260503_20260503_1256
+  2. 袁柳莊先生神相全編 (bản Liễu Trang, Quang Tự 15, Hiệu Kinh sơn phòng; dùng cho phần Liễu Trang) —
+     https://archive.org/details/20260503_20260503_1414
+  3. 水鏡集 (Thuỷ Kính Tập, Phạm Lai, Tảo Diệp sơn phòng) — https://archive.org/details/20260503_20260503_1427
+     (bản dự phòng: https://archive.org/details/20260507_20260507_0042)
+  4. 麻衣相法 / 麻衣神相 (Ma Y Thần Tướng, nguồn KB trích nhiều nhất): em CHƯA tìm được bản quét đáng tin. Anh có bản in đời
+     Thanh / Dân Quốc (bản quét PDF) thì gửi em; không có thì em đổi các câu ghi Ma Y sang câu có thật trong Thần Tướng Toàn Biên
+     (Ma Y nằm trong bộ này).
+- [x] KT-TT7 (2026-11-12, xong KT-TT8 2026-11-13: sửa Quân thần + Nguyệt sinh theo sách): bốn cách cục Tử vi đang nhận diện KHÁC chữ Toàn Thư (bảng ở mục 10.11 tài liệu kiểm toán) — anh quyết sửa theo sách hay giữ; em đề xuất sửa Quân thần khánh hội + Nguyệt sinh thương hải, giữ hai cách còn lại.
 - [ ] Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì các dòng Trình Di / Chu Hy / nghĩa sao nhỏ tự ẩn).
 - [ ] (Tuỳ chọn) Mời người rành Dịch / Tử vi đọc soát: 64 trang quẻ (lời Ngô Tất Tố bản điện tử còn lỗi gõ), 74 nghĩa sao nhỏ.
 - [x] **Gửi sách em không tự lấy được** (anh đã gửi thư mục Drive 9 tệp 2026-11-12) (Google Drive hoặc đính kèm; PDF chữ tốt hơn ảnh quét) — ưu tiên: (1) *Tử vi đẩu số tân biên* (Vân Đằng Thái Thứ Lang), (2) *Tử vi tổng hợp* (Nguyễn Phát Lộc), (4) *Tử Bình Chân Thuyên* bản chữ — mở `ctext.org/wiki.pl?if=gb&res=413248` trên trình duyệt rồi lưu PDF, (5) *Uyên Hải Tử Bình* bản đủ (ctext res=307303), (6) *Kinh Dịch* Ngô Tất Tố dịch / *Chu Dịch* Phan Bội Châu. Bảng đầy đủ: mục 6 của tài liệu.
@@ -323,7 +334,7 @@ Không có lỗi kỹ thuật — Google chưa tải các trang (xếp hàng). Q
       hỏi đáp thử "năm nào tôi cần để ý sức khoẻ?", "tôi có bị bệnh tim không?" — xem giọng có ổn không.
 - [ ] (Quyết định) Trả lời 7 câu hỏi ở `docs/DE-XUAT-Y-TUVI-BO-SUNG.md` mục 9 (200 ý viết lại từ lời giảng hiện đại) — trả lời xong em mới nối vào sản phẩm.
 - [ ] (Chuyên gia, dần dần) Đối chiếu 84 câu Cốt Tuỷ Phú với bản khắc / bản in (`docs/CO-THU-COT-TUY-PHU.md`), duyệt phiên âm + nghĩa.
-- [ ] (Quyết định nhỏ) Quân thần khánh hội: giữ "Tử Vi + 3/7 cát tinh" hay theo sách "phải đủ Tả Phù + Hữu Bật"? (`docs/DOI-CHIEU-ZIWEI-DOUSHU.md`)
+- [x] (Quyết định nhỏ, KT-TT8: theo sách) Quân thần khánh hội: giữ "Tử Vi + 3/7 cát tinh" hay theo sách "phải đủ Tả Phù + Hữu Bật"? (`docs/DOI-CHIEU-ZIWEI-DOUSHU.md`)
 - [ ] Search Console → Kiểm tra URL `https://hieuban.com/tu-vi/co-thu/cot-tuy-phu` → Yêu cầu lập chỉ mục.
 
 ### 4w. Học từ repo Tử vi ziwei-doushu (TV-ZW, 2026-11-04) — sau khi merge
