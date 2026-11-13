@@ -2209,5 +2209,13 @@
     "phu": "bài ca du niên cả 8 cung (khớp 56/56 ô bảng hướng), xếp hạng tám sao, lệ gửi cung nam 5 → Khôn, nữ 5 → Cấn"
    }
   }
+ },
+ "co_thu_sach": {
+  "tang_thu": "Táng Thư",
+  "trach_kinh": "Trạch Kinh",
+  "thanh_nang_ao_ngu": "Thanh Nang Áo Ngữ",
+  "thanh_nang_tu": "Thanh Nang Tự",
+  "thien_ngoc_kinh": "Thiên Ngọc Kinh",
+  "hiep_ky": "Hiệp Kỷ Biện Phương Thư"
  }
 }

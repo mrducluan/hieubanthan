@@ -14,7 +14,8 @@
   4 / 6 quyển hoặc bản dịch Việt của Nguyễn Anh Vũ), PDF **có lớp chữ**, mỗi tệp **dưới 10 MB** (tách nhỏ nếu cần).
   (2026-11-13) Hai kho GitHub anh gửi không có nguyên văn sách này — em chỉ dùng được làm bộ đối chiếu bảng (mục 7 tài liệu). Vẫn cần bản chữ của sách.
 - [ ] (Quyết định) Thế quái khi sao 5 nhập trung: giữ cách engine (thay bằng thế tinh của chính sơn) hay theo cách "sao 5 không thay"? Em đề xuất giữ tới khi có nguyên văn.
-- [ ] (Quyết định, PT-NG4) Có hiện **ngày Tuế Phá, ngày Thụ Tử** ở Xem ngày tốt như nhãn tập quán (không loại ngày) không? Em đề xuất: có, chỉ là nhãn.
+- [x] (Đã duyệt + đã làm 2026-11-13, PT-NG5) Có hiện **ngày Tuế Phá, ngày Thụ Tử** ở Xem ngày tốt như nhãn tập quán (không loại ngày) không? Em đề xuất: có, chỉ là nhãn.
+- [ ] (PT-NG5) Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường nhãn mới).
 - [ ] **Dương Trạch Tam Yếu (陽宅三要)**: tệp 91 MB là ảnh quét, không có chữ → cần bản có chữ (PDF chữ / Word / txt) hoặc bản dịch Việt gõ chữ.
 - [ ] Case *The Tarot* và Papus: tệp trên 10 MB bị cắt (Case chỉ đọc tới lá 2). Gửi lại bản dưới 10 MB hoặc tách 2–3 phần. (Papus em tự lấy từ archive.org.)
 - [ ] Chưa gửi: Dương Trạch Thập Thư (陽宅十書), Địa Lý Biện Chính bản có chú, Lỗ Ban Kinh (魯班經); chương Introduction của Mathers 1888.

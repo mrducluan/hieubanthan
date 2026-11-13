@@ -113,6 +113,7 @@ def tom_tat(d: dt.date) -> dict:
     return {"ngay": d.isoformat(), "am": f"{c['am']['ngay']}/{c['am']['thang']}", "can_chi": _gz(c["ngay_gz"]),
             "truc": KB["truc"][c["truc"]]["ten"], "than": KB["than"][c["than"]]["ten"], "hoang_dao": c["hoang_dao"],
             "ky_dan_gian": [KB["ky_dan_gian"][k]["ten"] for k in c["ky_dan_gian"]],
+            "nhan_tap_quan": [KB["nhan_tap_quan"][k]["ten"] for k in c.get("nhan_tap_quan", [])],
             # "Ngày đẹp" chung (RULES ở engine, web chỉ hiển thị): hoàng đạo + trực tốt + không rơi ngày kỵ dân gian.
             "dep": bool(c["hoang_dao"] and c["truc"] in TRUC_TOT and not c["ky_dan_gian"]
                         and "馀事勿取" not in c["nghi"] and "诸事不宜" not in c["ky"])}
@@ -252,6 +253,7 @@ def ngay_xem(d: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = N
         "thai_than": _thai(c["thai_than"]),
         "gio": gio, "gio_hoang_dao": [g for g in gio if g["hoang_dao"]], "ghi_chu_gio_ty": GHI_CHU_GIO_TY,
         "ky_dan_gian": [{"ma": k, **KB["ky_dan_gian"][k]} for k in c["ky_dan_gian"]],
+        "nhan_tap_quan": [{"ma": k, **KB["nhan_tap_quan"][k]} for k in c.get("nhan_tap_quan", [])],
         "tuoi": ({**t, "quan_he": _quan_he(c["ngay_gz"][1], t)} if t else None),
         "viec": viec_kq,
         "viec_lon": viec_lon,

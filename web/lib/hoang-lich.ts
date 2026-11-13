@@ -11,7 +11,7 @@ export interface GioNgay {
   xuat_hanh: { ten: string; tot: boolean; nghia: string };
 }
 export interface TomTatNgay {
-  ngay: string; am: string; can_chi: string; truc: string; than: string; hoang_dao: boolean; ky_dan_gian: string[];
+  ngay: string; am: string; can_chi: string; truc: string; than: string; hoang_dao: boolean; ky_dan_gian: string[]; nhan_tap_quan?: string[];
   con_ngay?: number; viec?: string; quan_he_tuoi?: string | null; diem_cong?: string[];
   /** Engine chấm "ngày đẹp" chung: hoàng đạo + trực tốt + không rơi ngày kỵ dân gian. */
   dep?: boolean;
@@ -30,6 +30,8 @@ export interface NgayTot {
   huong: { hy_than: string; tai_than: string; phuc_than: string }; thai_than: string;
   gio: GioNgay[]; gio_hoang_dao: GioNgay[]; ghi_chu_gio_ty?: string;
   ky_dan_gian: { ma: string; ten: string; nghia: string }[];
+  /** PT-NG5: nhãn tập quán (Tuế Phá, Thụ Tử) — chỉ để biết, không loại ngày. Engine cũ không có trường này. */
+  nhan_tap_quan?: { ma: string; ten: string; nghia: string; nguon: string; luu_y: string }[];
   tuoi: { nam_am: number; can_chi: string; uoc_luong: boolean; quan_he: QuanHeTuoi } | null;
   viec: { ma_viec: string; ten: string; danh_gia: "tot" | "binh" | "tranh"; ly_do: string[]; ngay_tot_gan: TomTatNgay | null } | null;
   /** 6b-1: 6 việc lớn theo đúng luật của trang "ngày tốt {việc} tháng" (engine cũ không có → tuỳ chọn). */

@@ -217,6 +217,50 @@ def _tom_la(l: dict, nguoc: bool) -> dict:
     return {"id": l["id"], "ten": l["ten"], "en": l["en"], "nguoc": nguoc, "so": l["so"], "bo": l["bo"], "nguyen_to": l["nguyen_to"], "loai": l["loai"]}
 
 
+_BO_NT = {"hoa": "gay", "thuy": "coc", "khi": "kiem", "dat": "tien"}
+
+
+def _can_cu_da_so(pt: dict) -> list[str]:
+    """Bộ chiếm quá nửa bàn (≥ 3 lá) → câu "A Majority of…" của Book T ở "Vì sao nói vậy"."""
+    n = len(pt["vi_tri"])
+    dem: dict[str, int] = {}
+    for v in pt["vi_tri"]:
+        bo = (_la(v["id"]) or {}).get("bo")
+        if bo:
+            dem[bo] = dem.get(bo, 0) + 1
+    for bo, c in dem.items():
+        m = kb.da_so().get(bo)
+        if m and c >= 3 and c * 2 > n:
+            return [L("tarot.tq.da_so_can_cu", "Book T: «{nv}»", nv=m["nguyen_van"])]
+    return []
+
+
+_KHOA_SO = {1: "at", 11: "tieu_dong", 12: "hiep_si", 13: "hoang_hau", 14: "vua"}
+
+
+def _hop_lap_la(pt: dict) -> list[dict]:
+    """PT-NG5: ba / bốn lá CÙNG SỐ trong một bàn (Book T) — lớp nghĩa nền của cả bàn, không phải dự báo.
+    Chỉ đếm lá bốn bộ; nghĩa lấy nguyên từ KB (đã viết trung tính), nguyên văn ở "Vì sao nói vậy"."""
+    dem: dict[int, list[str]] = {}
+    for v in pt["vi_tri"]:
+        if v["loai"] != "an_chinh" and v.get("so"):
+            dem.setdefault(int(v["so"]), []).append(_la(v["id"])["ten"])
+    ra, bang = [], kb.lap_la()
+    for so in sorted(dem):
+        n = min(len(dem[so]), 4)
+        khoa = _KHOA_SO.get(so, str(so))
+        m = (bang.get(khoa) or {}).get(str(n)) if n >= 3 else None
+        if not m:
+            continue
+        cau = str(m["nghia"])
+        tieu_de, _, than = cau.partition(": ")
+        than = than[:1].upper() + than[1:]
+        ra.append(kh.hop("cot_loi", tieu_de, than or cau,
+                         can_cu=[L("tarot.tq.lap_la_can_cu", "Book T (Golden Dawn), bảng lá cùng số: «{nv}» Các lá: {ds}.", nv=m["nguyen_van"], ds=", ".join(dem[so]))],
+                         ma=kh.ma_mau(MO_DUN, "tong_quan", "lap_la", khoa, n), phai="thoth"))
+    return ra
+
+
 def _chuong_tong_quan(pt: dict, tb: dict, hop_la: list[dict]) -> dict:
     c = kb.chuong()["tong_quan"]
     n = len(pt["vi_tri"])
@@ -230,13 +274,14 @@ def _chuong_tong_quan(pt: dict, tb: dict, hop_la: list[dict]) -> dict:
     if nt["troi"]:
         x = kb.nguyen_to()[nt["troi"]]
         hop.append(kh.hop("diem_manh", L("tarot.tq.nguyen_to_troi", "Nguyên tố trội: {ten}", ten=x['ten']), str(kb.mau("nguyen_to_troi")).format(ten=x["ten"], so=nt["dem"][nt["troi"]], tong=n, loi=x["loi"]),
-                          can_cu=[L("tarot.tq.dem_nguyen_to", "Đếm nguyên tố: {ds} (Golden Dawn: mỗi lá một nguyên tố).", ds=", ".join(f"{_ten_nt(k)} {v}" for k, v in nt["dem"].items()))],
+                          can_cu=[L("tarot.tq.dem_nguyen_to", "Đếm nguyên tố: {ds} (Golden Dawn: mỗi lá một nguyên tố).", ds=", ".join(f"{_ten_nt(k)} {v}" for k, v in nt["dem"].items()))] + _can_cu_da_so(pt),
                           ma=kh.ma_mau(MO_DUN, "tong_quan", "nguyen_to", nt["troi"]), phai="thoth"))
     for k in nt["thieu"]:
         x = kb.nguyen_to()[k]
         hop.append(kh.hop("luu_y", L("tarot.tq.khong_co_la", "Không có lá {ten} nào", ten=x['ten']), str(kb.mau("nguyen_to_thieu")).format(ten=x["ten"], thieu=kb.mau("thieu", k)),
                           huong_xu_ly=str(kb.mau("thieu", k)).split("—")[-1].strip().capitalize(), can_cu=[L("tarot.tq.thieu_can_cu", "Thiếu một nguyên tố trong trải bài ≥ 5 lá (Golden Dawn): phần đời ấy chưa được hỏi tới.")],
                           ma=kh.ma_mau(MO_DUN, "tong_quan", "thieu", k), phai="thoth"))
+    hop += _hop_lap_la(pt)
     sh = pt["so_hoc"]
     if len(sh["day"]) >= 2:
         day = " → ".join(str(s) for s in sh["day"])

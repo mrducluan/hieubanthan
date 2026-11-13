@@ -208,3 +208,28 @@ gọi theo tên của giới phong thuỷ Hồng Kông – Đài Loan thời nay
 - *Ngày Tuế Phá, ngày Thụ Tử*: đưa vào là đổi kết quả trang Xem ngày tốt đang chạy; chính kho kia ghi hai mục này là
   "tục kỵ của thông thư, không thuộc hệ Hiệp Kỷ". Cần anh quyết có hiện như nhãn tập quán (không loại ngày) hay không.
 - *Nhà vệ sinh ở cung sao vượng*: phải ghép mặt bằng với bàn phi tinh; lời đoán cần nguyên văn Thẩm thị.
+
+## 9. Đợt 5 (PT-NG5, 2026-11-13) — nhãn Tuế Phá / Thụ Tử + đưa tri thức cổ thư ra bài đọc
+
+Anh duyệt làm nhãn và giao em tự chọn việc làm tăng giá trị cho người dùng.
+
+**Hai nhãn ngày (Xem ngày tốt).** Em tìm được căn cứ ở chính Hiệp Kỷ Biện Phương Thư (bản Tứ khố):
+
+- *Thụ Tử* (quyển 6): lịch cũ có thần này — tháng Dần khởi ở Tuất, sáu tháng dương đi Tuất → Mão, sáu tháng âm đi Thìn → Dậu — và
+  sách triều Thanh **đã bỏ** khỏi bộ thần chính. Bảng em dùng khớp đúng quy tắc này (có test).
+- *Tuế Phá* (quyển 3): sách chỉ nói đây là **phương** đối diện Thái Tuế; gọi "ngày Tuế Phá" (chi ngày xung chi năm) là thói quen của
+  sách chọn ngày dân gian.
+
+Cách làm: trường riêng `nhan_tap_quan` (không nằm trong danh sách kiêng dân gian) → **không loại ngày, không đổi "ngày đẹp",
+không đổi kết quả chọn ngày theo việc**. Trang ngày hiện một dòng gập "Sách chọn ngày dân gian còn ghi: …", mở ra có nghĩa,
+gốc gác và câu "hệ thống không loại ngày vì nhãn này". Mỗi nhãn rơi vào khoảng 1/12 số ngày.
+
+**Tri thức đã nạp nay hiện cho người đọc** (trước chỉ nằm trong kho):
+
+| Việc | Ở đâu |
+|---|---|
+| Mỗi chương báo cáo "Nhà của bạn" có một câu cổ thư (nguyên văn + phiên âm + nghĩa) | "Vì sao nói vậy" của 4 chương đầu: Bát trạch · hình thế · nhà ở · lịch năm |
+| Bàn bài Tarot có ba / bốn lá cùng số → hộp nghĩa nền của cả bàn (Book T) | chương Tổng quan, mã kiểm chứng `ds.tarot.tong_quan.lap_la.*` |
+| Một bộ chiếm quá nửa bàn → câu "A Majority of…" của Book T | "Vì sao nói vậy" của hộp Nguyên tố trội |
+
+Không đổi mức, không đổi phép tính nào. Bản tiếng Anh giữ cùng cấu trúc (câu cổ thư chỉ hiện nguyên văn chữ Hán vì chưa có lời dịch được duyệt).
