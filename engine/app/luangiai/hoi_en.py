@@ -28,12 +28,74 @@ _RX_BAN_THAN = re.compile(r"\b(who am i|my (?:life path|number|numbers|personali
 _RX_HOP = re.compile(r"\b(compatib|match with|compatible|hop doi|together with my|with my (?:partner|boyfriend|girlfriend|husband|wife))")
 _RX_CACH_TINH = re.compile(r"\b(how (?:do you|is|to) (?:calculate|compute|work out)|calculated|formula|method|pythagor|chaldean|what is numerology|is numerology (?:real|accurate|true))\b")
 
+# CY-2 (2026-11-14): câu hỏi tiếng Anh về một mảng đời người dùng hay lo → đoạn "nên chú ý" (năm cá nhân nên chú ý, điều nên
+# để ý, việc nên làm, ranh giới — KB `chu_y_kb` bản phủ tiếng Anh, cùng hàm `chu_y_nam` của bản Việt). Thứ tự = ưu tiên.
+_CHU_Y_EN = [
+    ("giay_to", r"\b(legal|lawsuit|sue|sued|court|contract|paperwork|dispute)\b"),
+    ("hop_tac", r"\b(business partner|co-?founder|investor|supplier|vendor|joint venture|landlord)\b"),
+    ("tieu_nhan", r"\b(backstab\w*|gossip\w*|used by|using me|take advantage|sabotag\w*|enem(y|ies)|people around me)\b"),
+    ("xuat_ngoai", r"\b(abroad|overseas|emigrat\w*|immigrat\w*|visa)\b"),
+    ("hoc_hanh", r"\b(exams?|tests?|study|studies|studying|school|university|college|ielts|toefl|grades?)\b"),
+    ("con_cai", r"\b(child|children|kids?|son|daughter)\b"),
+    ("cong_danh", r"\b(promot\w*|a raise|pay rise)\b"),
+    ("mua_xe", r"\b(buy(ing)? a (new )?car|new car|car loan)\b"),
+    ("di_lai", r"\b(travel\w*|trips?|driving|drive|road|commut\w*|accidents?)\b"),
+    ("ban_be", r"\b(friends?|friendships?)\b"),
+    ("nha_cua", r"\b(house|home|apartment|flat|property|real estate|move house)\b"),
+    ("tien_bac", r"\b(money|financ\w*|debt|loans?|invest\w*|savings?|lose money|wealth)\b"),
+    ("cong_viec", r"\b(job|work|career|boss|fired|laid off|colleagues?|co-?workers?)\b"),
+    ("tinh_cam", r"\b(love|relationship|marriage|married|divorce|breakup|boyfriend|girlfriend|husband|wife|dating)\b"),
+    ("gia_dao", r"\b(family|parents?|mother|father|siblings?)\b"),
+]
+_LO_EN = re.compile(r"\b(watch out|watch for|careful|worr\w*|risk\w*|honest|trust\w*|safe|trouble|lose|pass|fail|will i|should i|"
+                    r"promot\w*|any)\b")
+
+
+def _mang_en(goc: str) -> str | None:
+    from app.hoidap import mo_dau  # noqa: PLC0415
+    t = f" {(goc or '').lower()} "
+    if mo_dau.la_nguoi_lam_an(t, goc):
+        return "hop_tac"
+    return next((m for m, rx in _CHU_Y_EN if re.search(rx, t)), None)
+
+
+def _doan_chu_y_en(mg: str, nguoi: dict, ngay_xem: dt.date, goc: str, dd: int) -> str:
+    """Đoạn "nên chú ý" của một mảng: (người cùng làm ăn: không đọc được lòng người kia) + năm cá nhân nên chú ý + điều
+    nên để ý + việc + ranh giới. Mọi chữ từ KB bản phủ tiếng Anh; năm từ cùng hàm của bản Việt (`chu_y_nam`)."""
+    from app.hoidap import mo_dau  # noqa: PLC0415
+    from app.kb import chu_y_kb as cykb  # noqa: PLC0415
+    from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+    nla = mg == "hop_tac" and mo_dau.la_nguoi_lam_an(goc.lower(), goc)
+    phan = [cykb.mau("nla_dau")] if nla else []
+    manh = ((kb2.chan_dung(dd) or {}).get("tong_quan") or {}).get("diem_manh") or []
+    if manh:                                  # lời hai mặt: một điểm mạnh từ chính con số của người hỏi
+        phan.append(L("thanso_en.diem_sang", "Bright spot for you (Life Path {so}): {x}.", so=dd, x=str(manh[0]).rstrip(".")))
+    ds = cyn.thanso_nam_nguoi(nguoi["ngay"], nguoi["thang"], mg, ngay_xem.year)
+    if ds:
+        phan.append(cyn.cau_mang(mg, ds, viec=cykb.mang(mg).get("viec_ngan")) if nla else cyn.cau_mang(mg, ds))
+    else:
+        phan.append(cykb.mau("khong_nam").format(mang=cykb.ten(mg)))
+    if cykb.de_y(mg):
+        phan.append(cykb.mau("de_y").format(de_y=cykb.de_y(mg)))
+    if nla and cykb.viec_ds(mg):
+        phan.append(cykb.mau("nla_viec").format(viec="; ".join(cykb.viec_ds(mg)[:4])))
+    elif not ds and cykb.viec(mg):
+        phan.append(L("chu_y.viec_nen_giu", " Việc nên giữ: {viec}.", viec=cykb.viec(mg)).strip())
+    if nla and re.search(r"\b(born|19\d\d|20\d\d)\b", goc):
+        phan.append(cykb.mau("nla_nam_sinh"))
+    if cykb.ranh_gioi(mg):
+        phan.append(cykb.ranh_gioi(mg))
+    return " ".join(p.strip() for p in phan if p and p.strip())
+
+
 LV_TEN = {"tinh_yeu": "love", "gia_dinh": "family", "su_nghiep": "work", "tai_chinh": "money", "suc_khoe": "well-being", "ban_than": "yourself"}
 MAT_CD = {"tinh_yeu": "tinh_cam", "su_nghiep": "cong_viec", "tai_chinh": "cong_viec", "ban_than": "tong_quan"}
 
 
 def phan_loai(cau: str) -> dict:
     t = f" {re.sub(r'\s+', ' ', (cau or '').strip().lower())} "
+    if _mang_en(cau) == "hop_tac":            # CY-2: người cùng làm ăn — chuyện việc làm ăn, không phải chuyện tình
+        return {"xu_ly": "linh_vuc", "linh_vuc": "su_nghiep"}
     if _RX_HOP.search(t):
         return {"xu_ly": "hop_doi", "linh_vuc": "tinh_yeu"}
     if _RX_CACH_TINH.search(t):
@@ -78,10 +140,12 @@ def tra_loi(cau: str, nguoi: dict, ngay_xem: dt.date | None = None) -> dict:
           "da_bat_llm": False, "loi_kiem_tra": [], "can_them": [], "do_phu": "day_du", "truc_quan": [], "hoi_lai": None}
     db = chung.dac_biet(t, goc)
     if db == "an_toan":
-        kq.update(cau_tra_loi=L("an_toan.khung_hoang", ""), phan_loai={**pl, "xu_ly": "an_toan"})
+        kq.update(cau_tra_loi=chung.mau_an_toan(goc, L("an_toan.khung_hoang", "")), phan_loai={**pl, "xu_ly": "an_toan"})
         return kq
     if db == "tu_choi_nhe":
-        kq.update(cau_tra_loi=L("an_toan.tu_choi", ""), phan_loai={**pl, "xu_ly": "tu_choi_nhe"})
+        from app.luangiai import an_toan as _at, chu_y_nam as _cyn  # noqa: PLC0415
+        gy = _cyn.goi_y_tu_choi(goc, _at.tu_choi(goc))           # 2026-11-14: lời "nên chú ý / nên làm" đúng loại
+        kq.update(cau_tra_loi=f"{L('an_toan.tu_choi', '')} {gy}".strip(), phan_loai={**pl, "xu_ly": "tu_choi_nhe"})
         return kq
     if db == "dan_huong":
         kq.update(cau_tra_loi=L("an_toan.dan_huong", ""), phan_loai={**pl, "xu_ly": "dan_huong"})
@@ -166,6 +230,13 @@ def tra_loi(cau: str, nguoi: dict, ngay_xem: dt.date | None = None) -> dict:
             doan.append(L("thanso_en.goi_y_hoi", "You can also ask about love, work, money, family, well-being, this year or this month."))
         can_cu.append(L("thanso_en.can_cu.cot_loi", "Life Path from the birth date ({quy_uoc}); Expression, Soul Urge and Personality from the name on the birth certificate.", quy_uoc=L(f"thanso.quy_uoc.{nguoi.get('quy_uoc') or 'tong_het'}", "")))
         hoi_tiep += [L("thanso_en.ht.love", "How do I tend to behave in love?"), L("thanso_en.ht.work", "How does my number show up at work?"), L("thanso_en.ht.year", "What is my personal year about?")]
+    mg = _mang_en(goc) if pl["xu_ly"] not in ("cach_tinh", "nghia_so") else None
+    if mg:
+        cy = _doan_chu_y_en(mg, nguoi, ngay_xem, goc, dd)
+        if mg == "hop_tac" or _LO_EN.search(goc.lower()):
+            doan.insert(0, cy)                 # câu lo / người cùng làm ăn: trả lời đúng điều được hỏi trước
+        else:
+            doan.append(cy)
     kq.update(cau_tra_loi=" ".join(d for d in doan if d), can_cu=can_cu, hoi_tiep=hoi_tiep[:3],
               bang_chung={"so": cs, "linh_vuc": pl["linh_vuc"]})
     return kq

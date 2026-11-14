@@ -367,8 +367,10 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
     # KD-V3: câu trả lời theo việc (kiểu câu × nghiêng + lý do riêng của lần gieo) thay câu kết luận chung của mức.
     from app.luangiai import kinhdich_tra_loi as ktl  # noqa: PLC0415
     tl = ktl.tra_loi(que, pl, goi, gn, muc, pt=luc_hao, chu_de=ma, cau_goc=pl.get("cau_goc"))
-    ket_luan = L("kd.ve_viec", "Về việc {viec}: {cau}", viec=ten_viec,
-                 cau=tl["cau_dau"] if tl.get("cau_dau") else kb.muc(muc).get("ket_luan", "")).strip()
+    cau_kl = tl["cau_dau"] if tl.get("cau_dau") else kb.muc(muc).get("ket_luan", "")
+    # Chủ đề "Việc khác": bản Việt giữ đúng câu cũ (mặc định hai mã giống nhau); bản Anh không viết "On something else:".
+    ket_luan = (L("kd.ve_viec_khac", "Về việc {viec}: {cau}", viec=ten_viec, cau=cau_kl) if ma == "khac"
+                else L("kd.ve_viec", "Về việc {viec}: {cau}", viec=ten_viec, cau=cau_kl)).strip()
 
     # ---- hộp nổi bật
     hop = [_hop("cot_loi", L("kd.hop.cot_loi", "Quẻ {que} — {nhan}", que=tq(ban["ten"]), nhan=kb.nhan_muc(muc)), ket_luan)]

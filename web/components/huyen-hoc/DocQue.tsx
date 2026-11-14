@@ -94,7 +94,7 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
     <div className="space-y-4" data-testid="doc-que">
       <div className="flex flex-wrap items-center gap-2">
         <ChipMuc muc={dq.muc} nhan={dq.nhan_muc} />
-        <span className="text-xs text-fg-faint">{c("dq.chu_de", { ten: dq.chu_de.ten, phai: tenPhai(gn.chinh) })}</span>
+        <span className="text-xs text-fg-faint">{c(dq.chu_de.ma === "khac" ? "dq.chu_de_khac" : "dq.chu_de", { ten: dq.chu_de.ten, phai: tenPhai(gn.chinh) })}</span>
         {dq.tra_loi?.nhan_tag && (
           <span className="rounded-full border border-line/70 px-2 py-0.5 text-xs text-fg-muted" data-testid="xu-huong-hao" title={dq.tra_loi.nguon_tag ? c("dq.lam_chu_title", { x: dq.tra_loi.nguon_tag }) : undefined}>
             {c("dq.lam_chu", { x: dq.tra_loi.nhan_tag })}

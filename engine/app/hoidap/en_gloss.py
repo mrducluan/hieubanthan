@@ -97,6 +97,10 @@ CHU_DE_EN: list[tuple[str, str, str]] = [
                              r"exercise|exersize|diet|weight|lungs?|kidneys?|liver|heart (health|problems?|condition|rate)|stomach|digest\w*|organs?|blood|skin|"
                              r"headaches?|back pain|wellbeing|well being|burnout|burn out|immune|physical|fitness|gym"),
     ("an_toan", "tai nan", r"accidents?|injur\w*|safe on the road|road safety|drive safely|safety"),
+    # CY-2 (2026-11-14): người cùng làm ăn / người chơi xấu — câu về người khác, đọc qua quan hệ bên ngoài (không phải nghề)
+    ("doi_tac", "doi tac lam an", r"(?:business partners?|co-?founders?|co founders?|cofounders?|investors?|suppliers?|vendors?|landlords?)"
+                                  r"(?=.{0,40}\b(?:honest\w*|trust\w*|reliable|cheat\w*|scam\w*|lie|lying|hid\w*|steal\w*|loyal\w*|watch)\b)"),
+    ("tieu_nhan", "tieu nhan", r"backstab\w*|gossip\w*|sabotag\w*|enem(?:y|ies)|play(?:s|ing)? dirty|take advantage of me|using me|used by"),
     ("con_gia_dinh", "gia dinh", rf"(?:my|our) (?:\w+ )?(?:{_CON})\b(?! of mine)"),   # chuyện của con → gia đình (người hỏi là cha mẹ)
     ("ngu_hanh", "thieu hanh gi", r"(what|which|lucky|best|good) colou?rs?|colou?rs? (should|to|for)|should i wear|what to wear|"
                                   r"which direction|direction (should|to|for)|face (which|north|south|east|west)|crystals?|bracelets?|"
@@ -507,7 +511,7 @@ _TV_CHU_DE = {"suc_khoe": "suc khoe", "an_toan": "tai nan", "con_gia_dinh": "con
               "gia_dinh_manh": "bo me", "hoc_hanh": "hoc hanh", "sinh_con": "nen sinh con nam nao", "con_cai": "con cai",
               "tinh_cam": "tinh duyen", "tien_bac": "tien bac", "ban_than_manh": "cung menh", "tinh_cam_nhe": "tinh duyen",
               "su_nghiep": "cong viec", "di_xa": "di xa", "phap_ly": "kien tung", "quan_he": "ban be", "hau_van": "hau van",
-              "tinh_cam_nguoi": "tinh duyen"}
+              "tinh_cam_nguoi": "tinh duyen", "doi_tac": "hop tac lam an", "tieu_nhan": "tieu nhan"}
 _TV_NHA = (r"(?:buy|buying|bought|own|owning|sell|selling|sold|renovat\w*|rent|renting|move|moving|build|building) (?:a |an |my |our |the |"
            r"new |first )*(?:house|home|flat|apartment|condo|property|properties|land|kitchen)|inherit\w* (?:a |the |some )?(?:property|house|land|home)|"
            r"move house|moving house|real estate|property|properties|landlord|own a home|home loan|mortgage|"

@@ -323,7 +323,7 @@ def goi_bang_chung(pl: dict, que: dict | None, mai_hoa: dict | None, tg: dict | 
                                           "linh_vuc")},
            "muc": [], "can_them": [], "mau": None, "luu_y": None}
     if pl["xu_ly"] == "an_toan":
-        goi["mau"] = kb.mau("an_toan")
+        goi["mau"] = chung.mau_an_toan(pl.get("cau_goc"), kb.mau("an_toan"))     # hành vi đã xảy ra → cấp cứu đứng đầu
         return chung.ket(goi)
     if pl["xu_ly"] == "tu_choi_nhe":
         goi["mau"] = _mau_nguy_hiem(pl.get("cau_goc")) or chung.mau_tu_choi(pl.get("cau_goc"), pl["cau_chuan_hoa"], kb.mau("tu_choi"))     # SK-1

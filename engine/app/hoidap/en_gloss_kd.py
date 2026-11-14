@@ -145,7 +145,8 @@ _GIAI_THICH: list[tuple[str, str]] = [   # (mẫu tiếng Anh, cụm `tu_khoa` c
     (r"relating hexagram|resulting hexagram|second hexagram|changed hexagram|future hexagram|primary (?:hexagram )?(?:and|vs|versus|or)|"
      r"what (?:it|the hexagram) changes (?:in)?to|turning into|changes? (?:in)?to", "que bien la gi"),
     (r"(?:no|zero|without|without any) (?:changing|moving) lines?|changing lines?|moving lines?|old yin|old yang|young yin|young yang|"
-     r"\b6 7 8 (?:and )?9\b|6 7 8 9|six seven eight|line values", "hao dong la gi"),
+     r"\b6 7 8 (?:and )?9\b|6 7 8 9|six seven eight|line values|"
+     r"(?:explain|about|mean\w*)(?: \w+){0,3} line [1-6]|line [1-6] (?:mean\w*|in detail)", "hao dong la gi"),
     (r"plum blossom|mei ?hua|meihua", "mai hoa la gi"),
     (r"use god|yong shen|useful god|which line (?:represents|stands for)", "dung than la gi"),
     (r"self line|other line|shi ying|shi and ying|subject line|object line", "the ung la gi"),
@@ -415,6 +416,10 @@ def gloss(cau: str) -> str:
         if gt:
             return gt
     if gt == "gieo lai":
+        return gt
+    # 1b. "What does the changing line mean for me?", "Explain line 1 in detail" — hỏi tiếp về hào của quẻ VỪA gieo (không nêu
+    # quẻ, không chủ đề mới) → giải thích hào động, không gieo một quẻ mới cho câu này.
+    if gt == "hao dong la gi" and not so and not _chu_de(cau, t):
         return gt
     # 2. quẻ người hỏi đã gieo được
     if so:

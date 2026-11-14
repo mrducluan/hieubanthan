@@ -77,7 +77,7 @@ export const CUM_EN: Readonly<Record<string, CumEn>> = {
     ten: "The 64 hexagrams", h1: "The 64 hexagrams of the I Ching",
     tieu_de_seo: "The 64 I Ching hexagrams: meaning, lines and judgement · Hieuban",
     mo_ta: "All 64 I Ching hexagrams: the judgement and six line texts in the original Chinese, with a plain-English meaning and how each reads for your question.",
-    tra_loi: "The I Ching (Book of Changes) has 64 hexagrams, each made of six lines that are either solid (yang) or broken (yin). This section has {so} page(s): for each hexagram, the judgement and the six line texts in the original Chinese, a translation, a plain-English meaning, and how it tends to read when you ask about work, money, love or a decision.",
+    tra_loi: "The I Ching (Book of Changes) has 64 hexagrams, each made of six lines that are either solid (yang) or broken (yin). This section has {so} pages, one for each hexagram: the judgement and the six line texts in the original Chinese, a translation, a plain-English meaning, and how it tends to read when you ask about work, money, love or a decision.",
   },
   "/phong-thuy/dau-hieu": {
     ten: "Home feng shui signs", h1: "Common feng shui signs in the home",

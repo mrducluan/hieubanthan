@@ -28,7 +28,9 @@ TRAN = {"thanso": 400}   # trần độ dài câu hỏi của từng route (khu�
 
 def _tan_cong() -> list[str]:
     hat = ["9", " ", "a ", "a (", "a (a", "a: ! ", "a: ! a (", "! (", "x, ", "2027 ", "born 1990 ", "faces n ",
-           "45 degrees ", "a hoá ", "Lộc (", "\t", "e "]
+           "45 degrees ", "a hoá ", "Lộc (", "\t", "e ",
+           # 2026-11-14: mẫu cấp cứu đứng đầu / người cùng làm ăn / thai (an_toan, chu_y_nam.goi_y_tu_choi)
+           "đã uống cả ", "i just took all ", "đối tác lừa ", "trai hay gái ", "my business partner honest "]
     ra = []
     for h in hat:
         s = (h * (500 // len(h) + 1))[:497]

@@ -43,7 +43,16 @@ KHUNG_HOANG: list[tuple[str, str | None]] = [
     (r"(chang|khong|thua) bang (chet|chet di|chet quach)", None),
     (r"met (qua|lam|moi|roi).{0,20}muon buong (het|xuoi|tay|bo het)" + _H
      + r"|muon buong xuoi (tat ca|het|cho xong)", None), (r"cham dut (tat ca|cuoc doi|moi thu|cuoc song)", None),
-    (r"(uong|nuot) het (ca )?(vi |lo |hop )?(thuoc|vi thuoc)", None), (r"mua san thuoc ngu", None),
+    (r"(uong|nuot) het (ca )?(vi |lo |hop )?(thuoc|vi thuoc)(?! (khang sinh|theo don|bo|vitamin|ho|cam|tranh thai|bac si ke|da day|giun))", None), (r"mua san thuoc ngu", None),
+    # Review 2026-11-14: "Tôi đã uống cả lọ thuốc ngủ" lọt mọi mảng (mẫu trên bắt buộc chữ "hết"). Uống / nuốt cả / nguyên /
+    # gần hết (lọ, vỉ, hộp, chai, nắm, vốc) thuốc; số viên lớn (≥ 10); thuốc ngủ / thuốc độc đã uống. Không bắt "uống hết vỉ
+    # thuốc kháng sinh theo đơn", "uống cả lọ vitamin", "uống thuốc ngủ có hại không".
+    (r"(uong|nuot|tong) (het|ca|nguyen|gan het|sach) (ca )?(mot )?(lo|vi|hop|chai|nam|von|tui|bao|lieu|dong|vien|loat) "
+     r"(thuoc|vien)(?! (khang sinh|theo don|bo|vitamin|ho|cam|tranh thai|bac si ke|da day|giun))", None),
+    (r"(uong|nuot|tong) (rat nhieu|ca dong|mot dong|may chuc|vai chuc|ca nam|mot nam|ca von|[1-9]\d) (vien )?(thuoc ngu|thuoc an than|"
+     r"thuoc doc|vien thuoc|vien)", None),
+    (r"(da|vua|moi|lo) (uong|nuot|tong) (het |ca |nhieu |rat nhieu )?(thuoc ngu|thuoc an than|thuoc doc|thuoc tru sau|thuoc chuot"
+     r"|thuoc diet co|thuoc sau|axit|xang|nuoc tay)(?! (de ngu|moi ngu|cho de ngu|theo don|bac si ke))", None),
     (r"nhay (xuong|lau|cau|song)|nhay tu tang", r"nhảy (xuống|lầu|cầu|sông)|nhảy từ tầng"),
     (r"cat tay|rach tay|tu hai (ban than|minh)|tu lam dau|(muon|hay|thuong) lam dau (ban than|chinh minh)",
      r"cắt tay|rạch tay|tự hại (bản thân|mình)|tự làm đau|(muốn|hay|thường) làm đau (bản thân|chính mình)"),
@@ -131,6 +140,17 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
     (r"(bi|mac|chua) tram cam|tram cam nang|thuoc (chong )?tram cam", r"trầm cảm|chống trầm cảm", "suc_khoe_the_chat"),
     (r"(hoi chung|bi) down", r"(hội chứng|bị) down", "suc_khoe_the_chat"),
     (r"(thai|be|con) .{0,25}di tat|di tat (bam sinh|thai)|bi di tat", r"dị tật", "suc_khoe_the_chat"),
+    # Review 2026-11-14 (lệch vi/en): đoán giới tính thai / có thai chưa / thai khoẻ không — bản Anh đã chặn (_THAI), bản Việt
+    # trả lời ("Con tôi trong bụng là trai hay gái?" ra "Nghiêng về CÓ"). "Sinh con năm nào hợp tuổi", "con trai tôi học hành
+    # thế nào", "khi nào tôi có con" vẫn trả lời bình thường.
+    (r"(trong bung|thai nhi|cai thai|bao thai|dua be|em be sap sinh|be sap sinh|dang (mang )?(thai|bau)|co bau|co thai|mang thai"
+     r"|mang bau|bau bi|sieu am)(?:.{0,40})(trai hay (con )?gai|gai hay (con )?trai|la (con )?(trai|gai) (khong|ko|chu|a)|nam hay nu)"
+     r"|(trai hay (con )?gai|gai hay (con )?trai)(?:.{0,30})(trong bung|thai nhi|cai thai|bau|thai(?!\w))"
+     r"|(toi|em|minh|vo toi|vo em|vo minh|ban gai toi|nguoi yeu toi|chi ay|co ay|con gai toi) (da |co phai )?(dang )?"
+     r"(co thai|co bau|mang thai|dinh bau|co tin vui|lo co bau) (chua|roi chua|hay chua|khong vay)"
+     r"|co phai (toi |em |minh )?(dang )?(co thai|co bau|mang thai)|(thai|thai nhi|em be trong bung|be trong bung) "
+     r"(co )?(khoe|on|binh thuong|phat trien tot|bi gi|co sao) (khong|ko|chu)",
+     None, "suc_khoe_the_chat"),
     (r"(bo|ngung) (uong )?thuoc (dieu tri|huyet ap|tieu duong|ung thu|bac si|chong tram cam)|(bo|ngung) hoa tri"
      r"|ngung dieu tri|thuoc nam thay (cho )?thuoc|(uong|dung) thuoc nam (thay|de chua)",
      r"(bỏ|ngưng|ngừng|dừng) (uống )?thuốc (điều trị|huyết áp|tiểu đường|tim|ung thư|tây|bác sĩ|chống trầm cảm)"
@@ -1520,10 +1540,17 @@ _THAI = _rx_en(r"(?:baby|unborn|fetus|foetus|pregnancy|bump) .{0,20}(?:is|be|wil
                r"baby .{0,15}(?:be |born )+(?:healthy|sick|ok|okay|normal|disabled|fine)|"
                r"miscarr\w*|stillbirth")
 _THAI_HOI = _rx_en(r"will|can|could|when|which|chance|able|going to|gonna|ever|or not|predict|show|is|am i")
-_NHAN_SU_RX = _rx_en(r"candidates?|applicants?|interns?|staff|employees?|workers?|assistants?|accountants?|nanny|nannies|maids?|"
-                     r"domestic helpers?|new hires?|hires|recruits?|team members?|job seekers?|cvs?|resumes?|interviewees?|suppliers?|"
-                     r"contractors?|vendors?|tenants?|investors?|co ?founders?|business partners?|subordinates?|"
-                     r"(?:my |the |our )workers?|sales ?(?:people|staff|team)")
+# Review 2026-11-14 (chủ dự án quyết): tách NGƯỜI LÀM THUÊ (ứng viên, nhân viên, người giúp việc — chọn / loại / xếp hạng
+# theo lá số hay lấy lá số của họ thì chặn) khỏi NGƯỜI CÙNG LÀM ĂN (đối tác, đồng sáng lập, nhà đầu tư, nhà cung cấp, khách
+# hàng, chủ nhà, người thuê) — câu "có trung thực / đáng tin / có lừa không" về người cùng làm ăn luôn được trả lời (theo
+# hướng "nên chú ý…, nên làm…"); chỉ CHỌN / LOẠI họ theo lá số của họ mới bị chặn.
+_NGUOI_LAM_THUE_RX = _rx_en(r"candidates?|applicants?|interns?|staff|employees?|workers?|assistants?|accountants?|nanny|nannies|maids?|"
+                            r"domestic helpers?|new hires?|hires|recruits?|team members?|job seekers?|cvs?|resumes?|interviewees?|"
+                            r"subordinates?|(?:my |the |our )workers?|sales ?(?:people|staff|team)")
+_NGUOI_LAM_AN_RX = _rx_en(r"(?:business|biz|jv|trading|silent|sleeping|equity|investment) partners?|co ?founders?|cofounders?|investors?|backers?|shareholders?|suppliers?|vendors?|"
+                          r"contractors?|subcontractors?|clients?|customers?|landlords?|landlady|tenants?|lessees?|lessors?|"
+                          r"distributors?|dealers?|agents?|brokers?|joint venture|jv partner")
+_NHAN_SU_RX = _NGUOI_LAM_THUE_RX            # tên cũ — luật chọn người làm thuê
 _LA_SO_HO_RX = _rx_en(r"(?:bazi|charts?|birth charts?|day masters?|elements?|zodiacs?|birth ?dates?|horoscopes?|numerology|life paths?) "
                       r"(?:of|for) (?:the |my |our |these |those |all |each |every |potential |new |some )?(?:\w+ )?(?:candidates?|applicants?|"
                       r"staff|employees?|workers?|interns?|hires?|team members?)|"
@@ -1537,6 +1564,13 @@ _LA_SO_HO_RX = _rx_en(r"(?:bazi|charts?|birth charts?|day masters?|elements?|zod
 _QUYET = _rx_en(r"which|who|best|rank|ranking|pick|choose|select|screen|filter|reject|hire|hiring|fire|firing|promote|promotion|"
                 r"good fit|fit|suitable|right person|good choice|go with|take on|recruit\w*|"
                 r"let go|lay off|sack|dismiss|trust|trustworthy|loyal|check|keep|shortlist|okay to|ok to")
+# Chọn / loại / xếp hạng NGƯỜI CÙNG LÀM ĂN theo lá số của họ ("which investor should I pick by their zodiac", "only rent to
+# tenants whose Kua matches") — không gồm trust / honest / loyal (câu đó được trả lời).
+_CHON_XEP = _rx_en(r"which|who among|best|rank|ranking|pick|choose|select|screen|filter|reject|shortlist|only (?:rent|sign|work|deal|"
+                   r"sell|partner)\w*(?: \w+)? (?:to|with)|refuse|turn away|blacklist")
+_TRUNG_THUC_EN = re.compile(r"(?<!\w)(dishonest|honest|honesty|trust\w*|steal\w*|stole|cheat\w*|scam\w*|con me|rip me off|loyal\w*|"
+                            r"betray\w*|lying|liar|lie to me|reliable|fraud\w*|embezzl\w*|backstab\w*|double cross\w*|screw me|"
+                            r"run off with|sincere|genuine|good faith|pay (?:me )?(?:back|on time))(?!\w)")
 
 
 # Dự đoán cụ thể ngoài phạm vi (bản Việt: "giá vàng", "đội nào thắng", "mấy đứa con", "tên gì") — giá, kết quả trận / bầu cử,
@@ -1594,7 +1628,7 @@ _LEN = _rx_en(r"secretly|in secret|without (?:telling|asking|letting|informing) 
               r"(?:know|find out)|(?:do not|don t|not) tell (?:him|her|them)")
 _NGUOI_NGOAI = _rx_en(r"(?:co ?workers?|colleagues?|neighbou?rs?|classmates?|roommates?|flatmates?|boss|manager|"
                       r"ex|ex (?:boyfriend|girlfriend|husband|wife|partner)|ex ?girlfriend|ex ?boyfriend|(?:sister|brother|mother|father|"
-                      r"daughter|son) in law|friend s (?:husband|wife|boyfriend|girlfriend|partner)|crush|stranger|celebrity|landlord|tenant|"
+                      r"daughter|son) in law|friend s (?:husband|wife|boyfriend|girlfriend|partner)|crush|stranger|celebrity|"
                       r"employee|employer|teacher|student|cousin s (?:husband|wife))")
 _PHAN_XET = _rx_en(r"cheat\w*|affair|lying|lies|lie to|liar|steal\w*|stole|betray\w*|divorc\w*|still (?:love|loves|like|likes|think|thinks)"
                    r"(?: about)? me|gay|pregnant|hiding (?:something|money)|in debt|faithful|loyal|seeing someone|sleeping with")
@@ -1641,12 +1675,14 @@ def _tu_choi_nghia(k: str) -> str | None:
             return "suc_khoe_the_chat"
         if _THAI.search(c) and _THAI_HOI.search(c):
             return "suc_khoe_the_chat"
-    if _NHAN_SU_RX.search(k) and _LA_SO_HO_RX.search(k) and _QUYET.search(k):
+    if _NGUOI_LAM_THUE_RX.search(k) and _LA_SO_HO_RX.search(k) and _QUYET.search(k):
         return "ngoai_pham_vi"
-    if _NHAN_SU_RX.search(k) and re.search(r"(?<!\w)(dishonest|honest|steal\w*|stole|cheat\w*|trustworthy|loyal|betray\w*|lazy|"
-                                           r"lying|liar|embezzl\w*|quit on me|leave me)(?!\w)", k) and \
-            re.search(r"(?<!\w)(which|who|is|are|will|would|does|can)(?!\w)", k):
-        return "ngoai_pham_vi"          # bản Việt "ai trung thực", "nhân viên … trung thực / giữ / chọn"
+    if _NGUOI_LAM_AN_RX.search(k) and _LA_SO_HO_RX.search(k) and _CHON_XEP.search(k) and not _NGUOI_LAM_THUE_RX.search(k):
+        return "ngoai_pham_vi"          # chọn / loại người cùng làm ăn THEO LÁ SỐ của họ
+    if _NGUOI_LAM_THUE_RX.search(k) and re.search(r"(?<!\w)(dishonest|honest|steal\w*|stole|cheat\w*|trustworthy|loyal|betray\w*|lazy|"
+                                                  r"lying|liar|embezzl\w*|quit on me|leave me)(?!\w)", k) and \
+            re.search(r"(?<!\w)(which|who|rank|ranking|most|least)(?!\w)", k):
+        return "ngoai_pham_vi"          # xếp hạng người làm thuê ("ai trung thực nhất") — câu về MỘT người thì trả lời
     return None
 
 
@@ -1738,6 +1774,12 @@ def khung_hoang(raw: str) -> bool:
 # "Không khí gia đình khó thở" là nghĩa bóng, trả lời bình thường.
 _CAP_CUU: list[tuple[str, str | None]] = [
     (r"(dau|tuc|nhoi) nguc", r"(đau|tức|nhói) ngực"),
+    # Review 2026-11-14: quá liều / ngộ độc ĐÃ xảy ra (kể cả uống nhầm) → gọi cấp cứu ngay. Câu hỏi chung ("uống quá liều có
+    # sao không") không có "đã / vừa / lỡ" → không thuộc nhóm này.
+    (r"(da|vua|moi|lo|bi|dang) (uong|nuot|dung|tiem) .{0,25}qua lieu|(da|vua|bi|lo) (bi )?(ngo doc|qua lieu)"
+     r"|(be|con|chau|em be) .{0,15}(nuot|uong|an) (phai |nham )?(thuoc|pin|nuoc tay|thuoc tru sau|thuoc chuot|hoa chat)",
+     r"(đã|vừa|mới|lỡ|bị|đang) (uống|nuốt|dùng|tiêm) .{0,25}quá liều|(đã|vừa|bị|lỡ) (bị )?(ngộ độc|quá liều)"
+     r"|(bé|con|cháu|em bé) .{0,15}(nuốt|uống|ăn) (phải |nhầm )?(thuốc|pin|nước tẩy|thuốc trừ sâu|thuốc chuột|hoá chất|hóa chất)"),
     (r"(?:^|[,.!?;] )" + _AI_KD + r" (dang |bi |thay |cu |tu nhien |hay bi )*kho tho(?! (vi|qua vi|voi|khi nghi|khi nhac))"
      r"|(bi|dang) kho tho(?! (vi|qua vi|voi))|kho tho .{0,20}(nguc|ngat|tim tai|choang)",
      r"(?:^|[,.!?;] )" + _AI + r" (đang |bị |thấy |cứ |tự nhiên |hay bị )*khó thở(?! (vì|quá vì|với|khi nghĩ|khi nhắc))"
@@ -1836,8 +1878,10 @@ _GIU_TU_CHOI = [
      r"|phau thuat|(nen|co nen) mo|chay than|nhap vien|uong thuoc gi",
      r"(bỏ|ngưng|ngừng|dừng) (uống )?thuốc|thuốc nam|(hoá|hóa) trị|xạ trị|điều trị|chữa (được|khỏi|bằng)|khỏi (được )?bệnh"
      r"|cho khỏi|phẫu thuật|(nên|có nên) mổ|chạy thận|nhập viện|uống thuốc gì"),
-    (r"thai nhi|(co|mang) thai|thai (\d|may|thang|ky)|mang bau|di tat|(hoi chung|bi) down|be .{0,10}(sinh ra|trong bung)",
-     r"thai|mang bầu|dị tật|(hội chứng|bị) down|bé .{0,10}(sinh ra|trong bụng)"),
+    (r"thai nhi|(co|mang) thai|thai (\d|may|thang|ky)|mang bau|di tat|(hoi chung|bi) down|be .{0,10}(sinh ra|trong bung)"
+     r"|trong bung|co bau|dinh bau|trai hay (con )?gai|gai hay (con )?trai",
+     r"thai|mang bầu|dị tật|(hội chứng|bị) down|bé .{0,10}(sinh ra|trong bụng)|trong bụng|có bầu|dính bầu"
+     r"|trai hay (con )?gái|gái hay (con )?trai"),
     (r"lanh hay ac|giai doan (\d|cuoi|dau)|tu ky|dong kinh", r"lành hay ác|giai đoạn (\d|cuối|đầu)|tự kỷ|động kinh"),
 ]
 _SUC_KHOE_KD = re.compile(r"(?<!\w)(benh|ung thu|khoi u|tieu duong|vo sinh|suc khoe|dau da day|xo gan|suy than)(?!\w)")
@@ -1873,3 +1917,110 @@ def nhom_suc_khoe(raw: str) -> str | None:
     if loai is None and not (_SUC_KHOE_KD.search(kd) or hoi_benh(raw)):
         return None
     return "nguoi_than" if nguoi_than(raw) else "hoi_benh"
+
+
+# ------------------------------------------------------------------ 2026-11-14: khủng hoảng + cấp cứu → CẤP CỨU ĐỨNG ĐẦU
+# Chủ dự án quyết: câu vừa khủng hoảng vừa có hành vi ĐÃ xảy ra / nguy hiểm tức thì (đã uống cả lọ thuốc, đã cắt, đang
+# chảy máu, đang đứng trên cao, triệu chứng cấp) → câu đầu là việc cần làm NGAY (gọi cấp cứu, mang vỏ thuốc, ấn chặt vết
+# thương), sau đó mới tới lời hỗ trợ + đường dây hiện có. Áp cho mọi mảng qua `loi_khung_hoang`.
+_DA_LAM: list[tuple[str, str | None]] = [
+    (r"(uong|nuot|tong) (het|ca|nguyen|gan het|sach) (ca )?(mot )?(lo|vi|hop|chai|nam|von|tui|bao|lieu|dong|vien|loat) (thuoc|vien)"
+     r"|(uong|nuot|tong) (rat nhieu|ca dong|mot dong|may chuc|vai chuc|ca nam|mot nam|ca von|[1-9]\d) (vien )?(thuoc|vien)"
+     r"|(da|vua|moi|lo) (uong|nuot|tong) (het |ca |nhieu |rat nhieu )?(thuoc ngu|thuoc an than|thuoc doc|thuoc tru sau|thuoc chuot"
+     r"|thuoc diet co|thuoc sau|axit|xang|nuoc tay)|qua lieu", None),
+    (r"(da|vua|moi|lai) (cat|rach|dam|cua) (tay|co tay|mach|ven|nguoi|bung|co)|dang chay mau|chay (rat )?nhieu mau"
+     r"|mau (chay|ra) (nhieu|khong ngung|khong cam|lenh lang)|(khong|chua) cam (duoc )?mau",
+     r"(đã|vừa|mới|lại) (cắt|rạch|đâm|cứa) (tay|cổ tay|mạch|ven|người|bụng|cổ)|đang chảy máu|chảy (rất )?nhiều máu"
+     r"|máu (chảy|ra) (nhiều|không ngừng|không cầm|lênh láng)|(không|chưa) cầm (được )?máu"),
+    (r"(dang|da|vua) (dung|ngoi|treo minh|leo|ra) (tren|o|len|ngoai|ben|sat) (san thuong|noc nha|noc|lan can|mep|cau|thanh cau"
+     r"|ban cong|tang thuong|tang \d+|cua so|mai nha|vach da|duong ray)|(da|vua) (that|treo) (co|day)|(dang|da) cam (dao|day)",
+     r"(đang|đã|vừa) (đứng|ngồi|treo mình|leo|ra) (trên|ở|lên|ngoài|bên|sát) (sân thượng|nóc nhà|nóc|lan can|mép|cầu|thành cầu"
+     r"|ban công|tầng thượng|tầng \d+|cửa sổ|mái nhà|vách đá|đường ray)|(đã|vừa) (thắt|treo) (cổ|dây)|(đang|đã) cầm (dao|dây)"),
+]
+_DA_LAM_ANH = _rx_en(
+    r"(?:i ve|i have|i just|i already|just|already|i) (?:\w+ ){0,2}(?:took|taken|swallowed|downed|drank|drunk|had) (?:like |about |around )?"
+    r"(?:all|all of|the whole|a whole|an entire|a full|a handful of|half|a bottle of|a box of|a pack of|a strip of|so many|a lot of|"
+    r"lots of|[1-9]\d|twenty|thirty|forty|fifty|my whole)(?: \w+){0,3}? (?:pills?|tablets?|meds|medications?|medicines?|sleeping pills|"
+    r"painkillers|paracetamol|panadol|tylenol)",
+    r"(?:i ve|i have|i just|i already|just) (?:\w+ ){0,1}(?:took|taken|swallowed|drank|drunk) (?:some |the )?(?:poison|bleach|pesticide|"
+    r"weed killer|rat poison|antifreeze)",
+    r"(?:i ve|i have|i just|i already|just) (?:\w+ ){0,1}(?:cut|slit|stabbed) (?:myself|my (?:wrists?|arms?|throat|legs?))",
+    r"overdosed|(?:i m|i am|im|it s|it is|wrist s|wrists are|arm is) (?:still )?bleeding|won t stop bleeding|losing (?:a lot of )?blood",
+    r"(?:i m|i am|im) (?:standing|sitting|sat|on|at|up on) (?:on |at )?(?:the |a |my |our )?(?:edge|ledge|railing|parapet|roof|rooftop|"
+    r"bridge|window ?sill|top floor|balcony edge|tracks)",
+)
+
+
+def cap_cuu_ngay(raw: str) -> bool:
+    """Câu KHỦNG HOẢNG mà hành vi đã xảy ra / nguy hiểm tức thì (đã uống cả lọ thuốc, đã cắt, đang chảy máu, đang đứng trên
+    cao, triệu chứng cấp) → lời đáp phải mở bằng việc gọi cấp cứu (`loi_khung_hoang`)."""
+    if not raw or not khung_hoang(raw):
+        return False
+    if cap_cuu(raw):
+        return True
+    cd, kd, co_dau = _hai_ban(raw)
+    if any(_khop(k, c, cd, kd, co_dau) for k, c in _DA_LAM):
+        return True
+    k = _sua_en(kd)
+    return bool(_DA_LAM_ANH.search(k) or _DA_LAM_ANH.search(kd))
+
+
+CAP_CUU_TRUOC_VI = ("Gọi 115 ngay hoặc nhờ người gần nhất đưa bạn tới cơ sở cấp cứu; nếu đã uống thuốc, mang theo vỏ thuốc; nếu "
+                    "đang chảy máu, ấn chặt vết thương bằng khăn sạch.")
+
+
+def loi_cap_cuu_truoc() -> str:
+    """Câu cấp cứu đứng đầu (theo ngôn ngữ lượt gọi — mẫu `an_toan.cap_cuu_truoc` của bản Anh nêu số từng nước)."""
+    from app.kb.loi import L  # noqa: PLC0415
+    return L("an_toan.cap_cuu_truoc", CAP_CUU_TRUOC_VI)
+
+
+def loi_khung_hoang(raw: str | None, mau: str | None) -> str:
+    """Lời đáp câu khủng hoảng: `mau` (lời hỗ trợ + đường dây hiện có của mảng); câu có hành vi đã xảy ra / nguy hiểm tức
+    thì → câu cấp cứu đứng ĐẦU. Không trùng lặp khi `mau` đã mở bằng câu đó."""
+    mau = mau or ""
+    if not (raw and cap_cuu_ngay(raw)):
+        return mau
+    dau = loi_cap_cuu_truoc()
+    return mau if mau.startswith(dau) else f"{dau} {mau}".strip()
+
+
+# ------------------------------------------------------------------ 2026-11-14: câu về NGƯỜI CÙNG LÀM ĂN (công khai)
+# Chủ dự án quyết: hỏi đối tác, đồng sáng lập, nhà đầu tư, người góp vốn, nhà cung cấp, khách hàng, chủ nhà, người thuê có
+# trung thực / đáng tin / có lừa không → PHẢI trả lời (bản Việt + Anh), theo hướng "nên chú ý…, nên làm…" — không khẳng
+# định ai tốt xấu. Bộ chặn không bao giờ từ chối câu này chỉ vì chữ trung thực / lừa / phản bội. Hàm dùng để ĐỊNH TUYẾN.
+_LAM_AN_VI = (r"doi tac|dong sang lap|co ?founder|nguoi (cung )?(gop|hun) von|gop von|hun von|nha dau tu|co dong|nha cung cap"
+              r"|nha cung ung|ben cung cap|khach hang|chu nha|chu tro|chu dat|chu cho thue|nguoi thue|khach thue|ben thue|ben mua|ben ban"
+              r"|nha thau|ben thau|dai ly|nha phan phoi|ban lam an|nguoi lam an|lam an chung|cung lam an|hop tac|ben kia|doi phuong lam an"
+              r"|nguoi cho vay|nguoi vay|con no|chu no|chu hang|nguoi mua (nha|dat|hang)|nguoi ban (nha|dat|hang)")
+_TIN_VI = (r"trung thuc|thanh that|that tha|dang tin|tin (duoc|tuong duoc)|co nen tin|lua|lua dao|gat|phan boi|gian (doi|lan|manh)"
+           r"|an chan|an gian|an bot|quyt|xu no|xu tien|chiem doat|om tien|bo tron|lat keo|tro mat|giu chu tin|chu tin|uy tin"
+           r"|song phang|tu te|co tam|ngay thang|dam sau lung|chot loi|tra no|tra tien|giu loi|lam an lau dai|co dang hop tac")
+_LAM_AN_RX = re.compile(r"(?<!\w)(?:" + _LAM_AN_VI + r")(?!\w)")
+_TIN_RX = re.compile(r"(?<!\w)(?:" + _TIN_VI + r")(?!\w)")
+
+
+def nguoi_lam_an(t: str | None, raw: str | None = None) -> bool:
+    """True khi câu hỏi về NGƯỜI CÙNG LÀM ĂN (đối tác, đồng sáng lập, nhà đầu tư, người góp vốn, nhà cung cấp, khách hàng,
+    chủ nhà, người thuê…) có đáng tin / trung thực / có lừa không — bản Việt (có / không dấu) và bản Anh. `t` = câu đã
+    chuẩn hoá (bỏ dấu) nếu có; `raw` = câu gốc. Câu chọn / loại người theo lá số của họ, câu xếp hạng người làm thuê → False
+    (vẫn là câu từ chối)."""
+    goc = raw or t or ""
+    if not goc.strip():
+        return False
+    kd = _hai_ban(goc)[1]
+    k = " ".join(x for x in (kd, _bo_dau(t or "").lower()) if x)
+    if _LAM_AN_RX.search(k) and _TIN_RX.search(k):
+        return True
+    ka = _sua_en(kd)
+    if _NGUOI_LAM_AN_RX.search(ka) and _TRUNG_THUC_EN.search(ka):
+        return not (_LA_SO_HO_RX.search(ka) and _CHON_XEP.search(ka))
+    # Câu về MỘT người làm cùng ("nhân viên của tôi có trung thực không", "is my employee honest") — trả lời giống người
+    # cùng làm ăn khi câu không bị bộ chặn xếp từ chối (xếp hạng "ai trung thực nhất", chọn / sa thải theo lá số).
+    lam_thue = (_LAM_THUE_VI.search(k) and _TIN_RX.search(k)) or (_NGUOI_LAM_THUE_RX.search(ka) and _TRUNG_THUC_EN.search(ka))
+    return bool(lam_thue) and not tu_choi(goc) and not _XEP_HANG_VI.search(k)
+
+
+_LAM_THUE_VI = re.compile(r"(?<!\w)(?:nhan vien|ke toan|thu quy|thu ky|tro ly|nguoi giup viec|giup viec|quan ly cua hang|"
+                          r"cap duoi|lai xe|tai xe|nguoi lam|tho)(?!\w)")
+_XEP_HANG_VI = re.compile(r"(?<!\w)(?:ai|nguoi nao|nhan vien nao|trong (?:\d+|hai|ba|bon|nam|cac|may) )(?!\w)")

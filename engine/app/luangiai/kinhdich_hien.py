@@ -50,6 +50,10 @@ def nguon(s: str | None) -> str | None:
     if s.startswith("engine, ") and s.endswith(", secrets CSPRNG"):
         pp = s[len("engine, "):-len(", secrets CSPRNG")]
         return L("kd.nguon.engine", "engine, {pp}, secrets CSPRNG", pp=L(f"kd.pp.{pp}", pp))
+    # Hỏi đáp (`hoidap.kinhdich`) ghi "engine gieo (<phương pháp>, CSPRNG)" — cùng câu hiển thị.
+    if s.startswith("engine gieo (") and s.endswith(", CSPRNG)"):
+        pp = s[len("engine gieo ("):-len(", CSPRNG)")]
+        return L("kd.nguon.engine", "engine, {pp}, secrets CSPRNG", pp=L(f"kd.pp.{pp}", pp))
     return s
 
 

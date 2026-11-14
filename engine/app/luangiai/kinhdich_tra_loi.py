@@ -280,6 +280,14 @@ def _ly_do(chinh: str, que: dict, goi: dict, gn: dict, pt: dict | None, dt: dict
         qh = mh["quan_he"][0]["quan_he"] if isinstance(mh.get("quan_he"), list) and mh["quan_he"] else None
         return L("kd.tl.theo_the_dung", "theo thể–dụng, {y}", y=quan_he_ten(qh or "", mh.get("tom_tat") or "")).rstrip(", ")
     lk = next((m for m in goi.get("muc", []) if m.get("loai") == "loi_kinh" and m.get("chu")), None)
+    if lk and not _nn.la_viet() and not lk.get("nom_na") and lk.get("han"):
+        # Bản Anh: lời làm chủ là QUÁI TỪ (0 / 3 / 6 hào động) không có "nói nôm na" → mượn câu nôm na của chính quẻ đó thay
+        # câu Đại tượng dịch sát ("the noble person discusses criminal cases…"). Bản Việt giữ nguyên.
+        for qq in (que.get("quai_ban"), que.get("quai_bien")):
+            qv = kbq.que_van(qq["so_king_wen"]) if qq else None
+            if qv and (qv.get("que_tu") or {}).get("han") == lk["han"] and qv.get("nom_na"):
+                lk = {**lk, "nom_na": qv["nom_na"]}
+                break
     if lk and (lk.get("nom_na") or lk.get("y")):
         s = (lk.get("nom_na") or lk.get("y") or "").strip().rstrip(".")
         s = s.split(L("kd.hdg_dau", "Hiểu đơn giản:"), 1)[-1].strip()

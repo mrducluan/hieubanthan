@@ -1517,7 +1517,7 @@
   },
   {
    "ma": "quai_tu",
-   "ten": "Judgment",
+   "ten": "Judgement",
    "bien_the": [
     "Judgment",
     "Judgement",
@@ -1536,12 +1536,13 @@
   },
   {
    "ma": "thoan_truyen",
-   "ten": "Commentary on the Judgment (Tuan Zhuan)",
+   "ten": "Commentary on the Judgement (Tuan Zhuan)",
    "bien_the": [
     "Tuan Zhuan",
+    "Commentary on the Judgement",
     "Commentary on the Judgment"
    ],
-   "de_hieu": "The part of the Ten Wings (the commentaries of the Confucian school) that explains the Judgment."
+   "de_hieu": "The part of the Ten Wings (the commentaries of the Confucian school) that explains the Judgement."
   },
   {
    "ma": "dai_tuong",

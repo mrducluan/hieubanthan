@@ -43,6 +43,21 @@ def viec(ma: str, hien_tai: bool = False) -> str:
     return (m.get("viec_nay") if hien_tai else None) or m.get("viec") or ""
 
 
+def de_y(ma: str) -> str:
+    """CY-2: điều nên để ý của mảng (một vế, không dấu chấm cuối) — lời hai mặt của hỏi đáp."""
+    return mang(ma).get("de_y") or ""
+
+
+def pt_bo_tri(ma: str) -> str:
+    """CY-2: một gợi ý bố trí trong nhà cho câu hỏi Phong thuỷ không về nhà (bàn làm việc, góc học, cửa…)."""
+    return mang(ma).get("pt_bo_tri") or ""
+
+
+def viec_ds(ma: str) -> list[str]:
+    """CY-2: danh sách việc cụ thể (người cùng làm ăn) — chọn vài việc cho đoạn trả lời."""
+    return [x for x in (mang(ma).get("viec_ds") or []) if isinstance(x, str)]
+
+
 def ranh_gioi(ma: str) -> str:
     return mang(ma).get("ranh_gioi") or ""
 

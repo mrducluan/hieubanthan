@@ -55,7 +55,10 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
       r"(quan|tiem|cua hang|shop) .{0,25}(vang khach|e am|it khach|ban cham|dong khach)"]),
     ("hop_tac", "chuyện góp vốn, làm ăn chung", "cong_viec",
      [r"gop von", r"hop tac", r"(?<!\w)hun ", r"doi tac", r"lam an (chung|voi)", r"chung von", r"goi von",
-      r"nha dau tu"]),
+      r"nha dau tu", r"co[ -]?founder", r"nha cung cap", r"cong su",
+      # CY-2: người làm ăn khác (khách hàng, chủ nhà, nhân viên…) chỉ khi câu hỏi về sự đáng tin của họ
+      r"(khach hang|chu nha|ben (thue|cho thue)|nhan vien|ke toan|nguoi (lam|lam an|gop von) (chung|voi|cung))"
+      r".{0,40}(trung thuc|dang tin|tin (duoc|tuong)|lua|gian|dang hoang|minh bach|tra tien|lam kho)"]),
     ("chon_nghe", "chuyện chọn nghề", "cong_viec",
      [r"(hop|chon|lam) (nghe|nganh)", r"nghe (gi|nao)", r"nganh (gi|nao)", r"nghe nghiep", r"huong nghiep",
       r"(van phong|ky thuat|giao tiep|ngan hang|cong chuc|nha nuoc).{0,30}(hay|hoac)", r"lam (nhan vien|cong chuc|nha nuoc)"]),
@@ -131,7 +134,7 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
     ("mua_xe", "chuyện mua xe", "tien_bac",
      [r"mua (xe|oto|o to)"]),
     ("kien_tung", "chuyện giấy tờ, hợp đồng, kiện tụng", "phap_ly",
-     [r"(?<!\w)kien (tung|cao|ai|nguoi|doi|ra|len|nhau|hang xom)", r"(thua|thang|vu|bi|di|khoi) kien", r"(?<!\w)toa (an|xu|tuyen)", r"tranh chap", r"giay to", r"hop dong", r"phap ly", r"thua ke", r"\bvisa\b",
+     [r"(?<!\w)kien (tung|cao|ai|nguoi|doi|ra|len|nhau|hang xom)", r"(thua|thang|vu|bi|di|khoi) kien", r"(?<!\w)toa (an|xu|tuyen)", r"tranh chap", r"giay to", r"hop dong", r"phap ly", r"phap luat", r"thua ke", r"\bvisa\b",
       r"ho so", r"(?<!\w)duyet"]),
     ("di_lai", "chuyện đi lại", "di_xa",          # review CY-1: đi lại = mảng ra ngoài (chương Bạn bè / đi lại), không phải sức khoẻ
      [r"lai xe", r"di duong", r"(?<!\w)xe (co|may)", r"giao thong"]),
@@ -213,6 +216,9 @@ NHAN_RO: list[tuple[str, tuple[str, ...], list[str]]] = [
     ("chuyện mở thêm chi nhánh", ("kinh_doanh",), [r"mo (them )?chi nhanh", r"chi nhanh (moi|thu)"]),
     ("chuyện đổi địa điểm kinh doanh", ("kinh_doanh",), [r"(doi|chuyen) (dia diem|mat bang)"]),
     ("chuyện quán vắng khách", ("kinh_doanh",), [r"vang khach", r"it khach", r"e am", r"ban cham"]),
+    ("chuyện người cùng làm ăn có đáng tin không", ("hop_tac",),
+     [r"trung thuc", r"dang tin", r"tin (duoc|tuong)", r"(?<!\w)lua", r"gian (doi|lan)", r"an gian", r"dang hoang",
+      r"minh bach", r"that tha", r"phan boi"]),
     ("chuyện gọi vốn", ("hop_tac",), [r"goi von", r"nha dau tu"]),
     ("chuyện ký hợp đồng với đối tác", ("hop_tac",), [r"hop dong", r"ky ket", r"(?<!\w)ky (ket|voi)"]),
     ("chuyện nói trước đông người", ("tu_tin",), [r"dam dong", r"dong nguoi", r"thuyet trinh", r"dien gia", r"noi truoc"]),
@@ -350,7 +356,14 @@ def nhan_hien(dieu: dict | None) -> str | None:
 CHUONG_THEO_MANG = {"cong_viec": "su_nghiep", "tien_bac": "tien_bac", "tinh_cam": "tinh_cam", "gia_dinh": "gia_dinh",
                     "con_cai": "gia_dinh", "suc_khoe": "suc_khoe", "hoc_hanh": "hoc_tap", "nha_cua": "nha_cua",
                     "di_xa": "quan_he", "quan_he": "quan_he", "phap_ly": None, "ban_than": "tong_quan"}
-CHUONG_THEO_MA = {"ve_gia": "cuoc_doi", "tim_do": None, "dam_me": "tong_quan", "mua_xe": "tien_bac"}
+CHUONG_THEO_MA = {"ve_gia": "cuoc_doi", "tim_do": None, "dam_me": "tong_quan", "mua_xe": "tien_bac",
+                  # CY-2 (2026-11-14): người cùng làm ăn đọc qua QUAN HỆ BÊN NGOÀI (Nô Bộc + Thiên Di / Tỷ Kiếp), không qua
+                  # chương công việc — câu hỏi là về người, không về nghề.
+                  "hop_tac": "quan_he"}
+
+
+# CY-2: mảng không có chương riêng ở một môn (Tử vi không có chương "học") → chương gần nhất vẫn giữ nhãn điều được hỏi.
+_CHUONG_GAN = {"hoc_tap": ("su_nghiep",)}
 
 
 def chuong_cua(dieu: dict | None) -> str | None:
@@ -569,6 +582,85 @@ def la_quyet_dinh(t: str) -> bool:
     return hieu_cau.kieu(t) in ("co_nen", "so_sanh")
 
 
+# ---------------------------------------------------------------- CY-2: lời hai mặt + người cùng làm ăn
+# Chủ dự án (2026-11-14): người dùng muốn cả mặt thuận LẪN lời nhắc "nên chú ý…" ở mọi chủ đề hay hỏi. Đoạn mở đầu đã có
+# mức / điểm chính + một việc; khi chưa có điều nên để ý thì thêm MỘT vế "Nên để ý: …" của mảng (KB `chu_y_kb.<mảng>.de_y`,
+# lời hành vi, không đoán biến cố). Câu về NGƯỜI CÙNG LÀM ĂN (đối tác, đồng sáng lập, nhà đầu tư, nhà cung cấp…) có trung
+# thực không: không phán người kia — mở bằng câu "không đọc được lòng người kia", đọc phía người hỏi, việc cụ thể tự giữ
+# quyền lợi, ranh giới pháp lý ở cuối (KB `chu_y_kb.hop_tac`).
+DIEU_CHU_Y = {"hop_tac": "hop_tac", "tieu_nhan": "tieu_nhan", "tin_nguoi": "tieu_nhan", "thi_cu": "hoc_hanh",
+              "con_cai": "con_cai", "thang_tien": "cong_danh", "lanh_dao": "cong_danh", "di_xa": "xuat_ngoai",
+              "di_lai": "di_lai", "mua_xe": "mua_xe", "kien_tung": "giay_to", "vay_no": "tien_bac", "giu_tien": "tien_bac",
+              "dau_tu": "tien_bac", "lam_giau": "tien_bac", "vo_chong": "tinh_cam", "tinh_duyen": "tinh_cam",
+              "ket_hon": "tinh_cam", "bo_me": "gia_dao", "anh_em": "gia_dao", "gia_dinh": "gia_dao", "mua_nha": "nha_cua",
+              "ban_nha": "nha_cua", "lam_nha": "nha_cua", "chuyen_nha": "nha_cua", "giu_viec": "cong_viec",
+              "doi_viec": "cong_viec", "cong_viec": "cong_viec", "kinh_doanh": "cong_viec", "dong_nghiep": "cong_viec",
+              "ban_be": "ban_be", "mo_long": "ban_be", "quy_nhan": "ban_be"}
+_CO_DE_Y = [r"[Nn]ên (để ý|chú ý|cẩn thận|tránh|dè)", r"[Dd]ễ vấp", r"[Cc]ần (lưu ý|chú ý|thận trọng)", r"[Ll]ưu ý",
+            r"[Ww]atch", r"[Cc]areful", r"[Aa]void", r"[Bb]e aware", r"[Pp]ay attention", r"[Ee]asy to (slip|trip|stumble)"]
+_CO_VIEC = [r"[Vv]iệc nên (làm|giữ)", r"(?<!\w)Nên:", r"[Ww]orth doing", r"[Tt]hings? to do", r"[Ww]hat to do", r"[Ss]tep to take"]
+_NAM_KIA = [r"(sinh|tuoi|born)( nam| in)? (19|20)\d\d", r"(?<!\w)(19|20)\d\d(?!\d)"]
+
+
+def la_nguoi_lam_an(t: str, raw: str | None = None) -> bool:
+    """Câu hỏi người cùng làm ăn có trung thực / đáng tin không (bộ nhận chung của lớp an toàn — một nguồn)."""
+    from app.luangiai import an_toan  # noqa: PLC0415
+    try:
+        return bool(an_toan.nguoi_lam_an(t, raw))
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def mang_chu_y(dieu: dict | None, t: str = "", raw: str | None = None) -> str | None:
+    """Mảng "nên chú ý" (KB chu_y_kb) của điều được hỏi; câu người cùng làm ăn → `hop_tac`."""
+    if la_nguoi_lam_an(t, raw):
+        return "hop_tac"
+    m = DIEU_CHU_Y.get((dieu or {}).get("ma") or "")
+    if not m:
+        from app.luangiai import chu_y_nam as _cyn  # noqa: PLC0415
+        m = _cyn.mang_hoi(t)
+        if not m and raw and not _nn.la_viet():
+            m = _cyn.mang_hoi(raw.lower())      # bản ngôn ngữ khác: từ khoá của bản phủ KB đọc trên câu gốc
+        m = None if m in ("van_han", "suc_khoe") else m
+    if m == "con_cai" and _co(t, [r"(?<!\w)thi (dai hoc|tot nghiep|vao|chuyen|cap|lop|do|truot)", r"on thi", r"ky thi"]):
+        m = "hoc_hanh"                        # "con tôi thi đại học" — chuyện thi cử của con
+    if m == "xuat_ngoai" and not _co(t, [r"du hoc", r"dinh cu", r"xuat ngoai", r"nuoc ngoai", r"xuat khau lao dong",
+                                          r"abroad", r"overseas", r"(?<!\w)(sang|qua|di) (nhat|han|uc|my|duc|canada)"]):
+        m = "di_lai"
+    return m
+
+
+def hai_mat(phan: list[str], dieu: dict | None, t: str, raw: str | None = None, viec_san: bool = True,
+            goc: str | None = None) -> list[str]:
+    """Thêm vào các vế của đoạn mở đầu: điều nên để ý (khi chưa có) và — câu người cùng làm ăn — câu mở "không đọc được
+    lòng người kia", việc tự giữ quyền lợi, ranh giới pháp lý. Chỉ chữ KB, không con số."""
+    from app.kb import chu_y_kb as _cykb  # noqa: PLC0415
+    raw = raw or goc                          # bản ngôn ngữ khác: `t` là cụm từ khoá đã dịch ý, câu gốc mang chữ "honest"…
+    mg = mang_chu_y(dieu, t, raw)
+    if not mg:
+        return phan
+    van = " ".join(p or "" for p in phan if p != _cykb.mau("thanso_dau"))   # câu khung "năm nào nên chú ý" không phải lời nhắc
+    nla = mg == "hop_tac" and la_nguoi_lam_an(t, raw)
+    ra = list(phan)
+    if nla:
+        ra.insert(0, _cykb.mau("nla_dau"))
+    dy = _cykb.de_y(mg)
+    if dy and (nla or not _co(van, _CO_DE_Y)):
+        ra.append(_cykb.mau("de_y").format(de_y=dy))
+    if nla:
+        ds = _cykb.viec_ds(mg)[:4]
+        if ds:
+            ra = [p for p in ra if not re.match(r"(Việc nên làm|What to do|Worth doing)", p or "")]
+            ra.append(_cykb.mau("nla_viec").format(viec="; ".join(ds)))
+        if _co(t, _NAM_KIA):
+            ra.append(_cykb.mau("nla_nam_sinh"))
+        if _cykb.ranh_gioi(mg):
+            ra.append(_cykb.ranh_gioi(mg))
+    elif not viec_san and not _co(van, _CO_VIEC) and _cykb.viec(mg):
+        ra.append(L("hoi.md.viec", "Việc nên làm: ") + thuong(bo_dau_cham(_cykb.viec(mg))))
+    return ra
+
+
 # ---------------------------------------------------------------- Tử vi · Bát tự (mức chương đời sống, mức từng năm)
 _NGUON = {"tuvi": "trên lá số", "battu": "theo tứ trụ"}
 
@@ -703,7 +795,8 @@ def _thang_cau(muc: list[dict]) -> tuple[str | None, str, str]:
     return None, "", ""
 
 
-def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None, khoa: tuple | None = None) -> str | None:
+def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None, khoa: tuple | None = None,
+                goc: str | None = None) -> str | None:
     """Đoạn mở đầu Tử vi / Bát tự: điều được hỏi + mức năm (khi hỏi năm) / tháng thuận (khi hỏi khung tháng) + mức mảng
     đời sống + một lý do + một việc. Chỉ từ các mục đã có trong gói (`so_nam`, `cua_so`, `doi_song`; Bát tự thêm
     `ngu_hanh`/`hanh` khi hỏi hành, `dai_van` khi hỏi vận)."""
@@ -799,7 +892,9 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None, khoa: tuple
         phan.append(L("hoi.md.khong_dau_tu", KHONG_DAU_TU))
     if la_quyet_dinh(t):
         phan.append(L("hoi.md.khong_quyet", KHONG_QUYET))
-    if dieu and ds and chuong_cua(dieu) and chuong_cua(dieu) != ds.get("chuong") and not (sn or th_cau or cs):
+    dieu0 = dieu
+    if dieu and ds and chuong_cua(dieu) and chuong_cua(dieu) != ds.get("chuong") and not (sn or th_cau or cs) \
+            and ds.get("chuong") not in _CHUONG_GAN.get(chuong_cua(dieu), ()):
         dieu = None
     if dieu:
         dau = dau_cau(dieu, "", moc)
@@ -813,6 +908,7 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None, khoa: tuple
         dau = dau_cau(None, ds["ten_mang"] if ds else L("hoi.md.viec_ban_hoi", "việc bạn hỏi"), moc)
     if cy_dau and not moc:
         dau = ve_mang(cy_dau["mang"])
+    phan = hai_mat(phan, dieu0, t, raw, viec_san=False, goc=goc or pl.get("cau_goc"))
     return f"{dau}: {thuong(ghep(*phan))}"
 
 
@@ -970,10 +1066,15 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
         # số không đoán sự việc + năm nên chú ý + việc + ranh giới), không mở bằng một nét chân dung lạc chủ đề.
         from app.kb import chu_y_kb as _cykb  # noqa: PLC0415
         phan = [_cykb.mau("thanso_dau"), bo_dau_cham(cy_dau["cau_nam"])]
+        # CY-2: lời hai mặt — một điểm mạnh từ chính con số của người hỏi (mục đầu của thân bài) trước lời nhắc năm
+        x = next((p for p in (_so_phan(m) for m in ([dau_muc] if dau_muc else []) + muc) if p), None)
+        if x and x[0]:
+            phan.insert(1, L("hoi.md.diem_manh", "Điểm mạnh của bạn: ") + x[0])
         if hoi_dau_tu(t, dieu):
             phan.append(KHONG_DAU_TU)
         if la_quyet_dinh(t):
             phan.append(KHONG_QUYET_SO)
+        phan = hai_mat(phan, dieu, t, raw, goc=pl.get("cau_goc"))
         return f"{ve_mang(cy_dau['mang'])}: {thuong(ghep(*phan))}"
     moc = None
     tg = hieu_cau.thoi_gian(t, ngay_xem or _ngay_xem(goi))
@@ -992,6 +1093,7 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
             phan.append(KHONG_DAU_TU)
         if la_quyet_dinh(t):
             phan.append(KHONG_QUYET_SO)
+        phan = hai_mat(phan, dieu, t, raw, viec_san=False, goc=pl.get("cau_goc"))
         return f"{dau_cau(dieu, _TEN_LV.get(pl.get('linh_vuc') or '', 'con số của bạn'), moc)}: {ghep(*phan)}"
     else:
         ung = []
@@ -1026,6 +1128,7 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
         phan.append(KHONG_DAU_TU)
     if la_quyet_dinh(t):
         phan.append(KHONG_QUYET_SO)
+    phan = hai_mat(phan, dieu, t, raw, viec_san=False, goc=pl.get("cau_goc"))
     dau = dau_cau(dieu, _TEN_LV.get(pl.get("linh_vuc") or "", "con số của bạn"), moc)
     return f"{dau}: {thuong(ghep(*phan))}"
 

@@ -46,8 +46,11 @@ TU_CHOI_HH = [
     r"co qua khoi", r"ket thuc doi", r"(de|hay|phai) chet(?!\w)", r"(?<!khoa )(?<!kham )benh (phoi|tim|gan|than|xuong|mau)",
     r"(gan|than|tim|phoi|ung thu|da day) hay (gan|than|tim|phoi|ung thu|da day)", r"uong thuoc gi",
     r"khoi (duoc )?benh", r"choi (lo|de)(?!\w)", r"so chot", r"danh con (gi|so)", r"so may de trung", r"danh .{0,12}(de|cho) trung",
-    r"lam hr|(?<!\w)hr(?!\w)", r"chu (cty|cong ty|doanh nghiep).{0,40}(ung vien|nhan vien|nhan|tuyen)",
-    r"nhan vien .{0,40}(nghi viec|trung thuc|giu|chon|nhan|sa thai)", r"tuyen (ke toan|nhan vien|nguoi|nhan su|thu ky)",
+    # Review 2026-11-14 (chủ dự án quyết): "nhân viên của tôi có trung thực không" được trả lời (theo hướng nên chú ý / nên
+    # làm, như câu về người cùng làm ăn — `an_toan.nguoi_lam_an`); vẫn chặn CHỌN / GIỮ / LOẠI / SA THẢI người theo lá số và
+    # XẾP HẠNG "ai trung thực".
+    r"lam hr|(?<!\w)hr(?!\w)", r"chu (cty|cong ty|doanh nghiep).{0,40}(ung vien|tuyen|(chon|giu|loai|nhan) (nguoi|nhan vien))",
+    r"nhan vien .{0,40}(nghi viec|giu|chon|nhan|sa thai)", r"tuyen (ke toan|nhan vien|nguoi|nhan su|thu ky)",
     r"ai trung thuc", r"(chon|giu|loai) nhan vien",
     # SK-1: câu sức khoẻ chung về CHÍNH mình được trả lời; vẫn từ chối (lời đáp gợi hệ cơ quan + đi khám): hỏi bệnh gì
     # kèm bộ phận cụ thể, hỏi bệnh của người khác, hỏi cách chữa.
@@ -98,6 +101,16 @@ def dac_biet(t: str, raw: str | None = None) -> str | None:
     if co(t, [m for m in TAM_LINH if not _at.bo_qua_mo_ho(m, raw)]):
         return "dan_huong"
     return None
+
+
+def mau_an_toan(goc: str | None, mau: str | None) -> str:
+    """Lời đáp câu khủng hoảng của mọi mảng: `mau` (lời hỗ trợ + đường dây của mảng), câu có hành vi đã xảy ra / nguy
+    hiểm tức thì (đã uống cả lọ thuốc, đã cắt, đang chảy máu, đang đứng trên cao, triệu chứng cấp) → câu gọi cấp cứu đứng
+    đầu (`an_toan.loi_khung_hoang`, chủ dự án quyết 2026-11-14)."""
+    return _at.loi_khung_hoang(goc, mau)
+
+
+nguoi_lam_an = _at.nguoi_lam_an          # câu về người cùng làm ăn (đối tác, nhà đầu tư, chủ nhà…) — luôn được trả lời
 
 
 def mau_tu_choi(goc: str | None, t: str, mau_chung: str, he_la_so: dict | None = None) -> str:

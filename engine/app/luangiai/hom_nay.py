@@ -255,7 +255,7 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
     if du_dinh and du_dinh.strip():
         loai = chung.dac_biet(chung.chuan_hoa(du_dinh), du_dinh)
         if loai == "an_toan":
-            ho_tro = thanso_v2.mau("an_toan")
+            ho_tro = chung.mau_an_toan(du_dinh, thanso_v2.mau("an_toan"))   # hành vi đã xảy ra → cấp cứu đứng đầu
         elif loai is None:
             nhan_dien = nhan_dien_y_dinh(du_dinh)
             nhan_ra = bool(nhan_dien)

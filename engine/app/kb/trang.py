@@ -152,7 +152,11 @@ def _muc_cau_truc_que(k: str) -> dict:
     tq = lambda x: _tn.ten("que_ten", x)  # noqa: E731 — EN-ALL GĐ 6: tên quẻ / quái / chi / hành… theo ngôn ngữ (bản Việt giữ nguyên)
     ten = lambda b: tq(que[str(so_cua[tuple(b)])]["ten"])  # noqa: E731
     bien = [kv._flip(bits, i) for i in range(6)]
-    dong = [[m["hao"][i], _tn.ten("am_duong", h["am_duong"]), _tn.ten("chi", h["dia_chi"]), _tn.ten("hanh", h["ngu_hanh"]),
+    def chi(x: str) -> str:
+        # Bản Anh: kèm con giáp ("Yin (Tiger)") — tên chi "Yin" đứng cạnh cột âm dương "Yin" dễ nhầm. Bản Việt giữ nguyên.
+        t, n = _tn.ten("chi", x), _tn.nghia("chi", x)
+        return t if ngon_ngu.la_viet() or not n or "(" in t else f"{t} ({n})"
+    dong = [[m["hao"][i], _tn.ten("am_duong", h["am_duong"]), chi(h["dia_chi"]), _tn.ten("hanh", h["ngu_hanh"]),
              _tn.ten("luc_than_kd", h["luc_than"]), _tn.ten("the_ung_kd", h["the_ung"]) if h["the_ung"] else "", ten(bien[i])]
             for i, h in enumerate(info["hao"])]
     lien = [kv.ho_quai(bits), kv.thac_quai(bits), kv.tong_quai(bits)] + bien

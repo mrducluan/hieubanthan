@@ -297,6 +297,8 @@ def goi_bang_chung(pl: dict, ls: dict | None, gioi_tinh: str | None, nam_xem: in
     if pl["xu_ly"] in ("an_toan", "tu_choi_nhe"):
         from app.kb import kinhdich_kb  # noqa: PLC0415 — mẫu dùng chung Huyền học
         goi["mau"] = kinhdich_kb.mau("an_toan" if pl["xu_ly"] == "an_toan" else "tu_choi")
+        if pl["xu_ly"] == "an_toan":              # hành vi đã xảy ra → cấp cứu đứng đầu
+            goi["mau"] = chung.mau_an_toan(pl.get("cau_goc"), goi["mau"])
         if pl["xu_ly"] == "tu_choi_nhe":          # SK-1: câu hỏi có bệnh → hệ cơ quan (hành yếu nhất) + đi khám
             he = None
             if ls:
@@ -860,7 +862,7 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi),
                               khoa=("hoi.bt", "truoc"))   # EN-3
     if pl["xu_ly"] not in chung.DAC_BIET:            # EN-3b: đoạn mở đầu trả lời đúng điều được hỏi
-        van = mo_dau.dat_dau(van, mo_dau.doi_song_mo(goi, pl["cau_chuan_hoa"], "battu", _raw(pl), khoa=("hoi.bt", "mo")), goi,
+        van = mo_dau.dat_dau(van, mo_dau.doi_song_mo(goi, pl["cau_chuan_hoa"], "battu", _raw(pl), khoa=("hoi.bt", "mo"), goc=pl.get("cau_goc")), goi,
                              khoa=("hoi.bt", "dat"))
     che_do_van, loi = "template", []
     if dung_llm and goi["muc"] and not goi["can_them"]:

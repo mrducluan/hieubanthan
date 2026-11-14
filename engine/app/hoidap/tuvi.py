@@ -67,7 +67,10 @@ CHU_DE_CUNG = [   # (cung, mẫu) — câu hỏi cá nhân không nêu tên cung
     ("Nô Bộc", [r"dong nghiep", r"cap duoi", r"ban be", r"choi xau", r"nguoi giup do", r"quy nhan",
                 r"doi tac", r"hop tac", r"hun hap", r"gop von", r"tieu nhan", r"ham hai", r"bi lua", r"lua dao",
                 r"(bi|di|dang|chuyen|vu|dinh|thang|thua|hay) kien(?!\w)", r"kien (tung|cao|doi|nhau|ai)", r"tranh chap", r"hop dong", r"giay to", r"loi dung",
-                r"nguoi xau", r"co doc", r"khong ai giup", r"dung ten"]),
+                r"nguoi xau", r"co doc", r"khong ai giup", r"dung ten",
+                # CY-2: người cùng làm ăn (đồng sáng lập, nhà đầu tư, nhà cung cấp…) — câu về người, đọc qua Nô Bộc
+                r"co[ -]?founder", r"nha dau tu", r"nha cung cap", r"nguoi gop von", r"cong su", r"thi phi", r"noi xau",
+                r"(khach hang|chu nha|nhan vien|ke toan).{0,40}(trung thuc|dang tin|tin (duoc|tuong)|lua|gian|dang hoang|minh bach|tra tien|lam kho)"]),
     # MT-ĐS B1: an toàn / đi lại → Thiên Di (+ Tật Ách khi nói sức khoẻ) — kiểu "có bị … không" trả lời bằng mảng
     # đi lại, không bằng biến cố (luu_y lo_so).
     ("Thiên Di", [r"tai nan", r"di lai", r"di duong", r"chay xe", r"lai xe", r"duong dai", r"xe may", r"an toan",
@@ -88,7 +91,7 @@ CHU_DE_CUNG = [   # (cung, mẫu) — câu hỏi cá nhân không nêu tên cung
     ("Quan Lộc", [r"su nghiep", r"cong viec", r"nghe", r"lam viec", r"thang chuc", r"kinh doanh",
                   r"nha nuoc", r"tu nhan", r"lam chu", r"khoi nghiep", r"cong danh", r"hoc hanh",
                   r"thi cu", r"lam quan", r"chuc vu", r"hop nghe", r"(?<!bat )tu toi", r"(bi|ngoi|vao|dinh) tu(?!\w)", r"di tu (khong|ko|toi|day|ra)", r"phap luat", r"phap ly",
-                  r"thi (do|dau|lai|dai hoc|cong chuc|khoi|vao|lop)", r"hoc (thac si|them|muon|gioi|dot|khoi)",
+                  r"thi (do|dau|lai|dai hoc|cong chuc|khoi|vao|lop|chung chi|ielts|toeic|tot nghiep|bang lai)", r"hoc (thac si|them|muon|gioi|dot|khoi)",
                   r"khoi (a|b|c|d)(?!\w)", r"nhan chuc", r"mat viec", r"doi viec", r"cong chuc", r"van xuong", r"hoa khoa",
                   r"thi cong chuc", r"thi dau", r"dau cong chuc",
                   # EN-3c: ngành nghề, đổi / tìm việc, học lên hay đi làm — đều là chuyện công danh
@@ -704,7 +707,7 @@ def goi_bang_chung(pl: dict, ls: dict | None, vh: dict | None, vh_toi: dict | No
            "muc": [], "can_them": [], "mau": None, "luu_y": None}
     muc = goi["muc"]
     if pl["xu_ly"] == "an_toan":
-        goi["mau"] = _mau_chung("an_toan")
+        goi["mau"] = chung.mau_an_toan(pl.get("cau_goc"), _mau_chung("an_toan"))     # hành vi đã xảy ra → cấp cứu đứng đầu
         return chung.ket(goi)
     if pl["xu_ly"] == "tu_choi_nhe":
         from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
@@ -1769,7 +1772,7 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi),
                               khoa=("hoi.tv", "truoc"))   # EN-3
     if pl["xu_ly"] not in chung.DAC_BIET:            # EN-3b: đoạn mở đầu trả lời đúng điều được hỏi
-        van = mo_dau.dat_dau(van, mo_dau.doi_song_mo(goi, pl["cau_chuan_hoa"], "tuvi", _raw(pl), khoa=("hoi.tv", "mo")), goi,
+        van = mo_dau.dat_dau(van, mo_dau.doi_song_mo(goi, pl["cau_chuan_hoa"], "tuvi", _raw(pl), khoa=("hoi.tv", "mo"), goc=pl.get("cau_goc")), goi,
                              khoa=("hoi.tv", "dat"))
     van = ybs.xep_cuoi(van, mo_dau._CHAN + chung._CHAN, khoa=("hoi.tv", "xep"))
     if NGUOI_THAN.get() and ls is not None and pl["xu_ly"] not in chung.DAC_BIET:

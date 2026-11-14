@@ -161,9 +161,11 @@ export const CHU_KINH_DICH_UI = {
 
   // ---------------------------------------------------------------- đọc quẻ (components/huyen-hoc/DocQue.tsx)
   "dq.phai_nghia_ly": m(DQ, "Nghĩa Lý (lời kinh)", "Meaning and Principle (the classic text)"),
-  "dq.phai_mai_hoa": m(DQ, "Mai Hoa (thể – dụng)", "Plum Blossom (self and use trigrams)"),
+  "dq.phai_mai_hoa": m(DQ, "Mai Hoa (thể – dụng)", "Plum Blossom (body and use trigrams)"),
   "dq.phai_luc_hao": m(DQ, "Lục Hào (dụng thần)", "Six Lines (the line for your matter)"),
   "dq.chu_de": m(DQ, "Chủ đề: {ten} · đọc chính theo {phai}", "Topic: {ten} · main reading: {phai}"),
+  // Chủ đề "Việc khác" (máy chưa nhận ra chủ đề): bản Việt giữ đúng câu trên; bản Anh không ghi "Topic: Something else".
+  "dq.chu_de_khac": m(DQ, "Chủ đề: {ten} · đọc chính theo {phai}", "Topic: general (no specific topic detected) · main reading: {phai}"),
   "dq.lam_chu": m(DQ, "Lời hào làm chủ: {x}", "Leading line says: {x}"),
   "dq.lam_chu_title": m(DQ, "Lời làm chủ: {x}", "Leading text: {x}"),
   "dq.viec_aria": m(DQ, "Việc nên làm", "What to do"),
