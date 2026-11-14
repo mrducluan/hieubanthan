@@ -3,7 +3,7 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-13 (WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-14 (WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
 ### 4as. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
 
@@ -30,6 +30,10 @@
   Thẩm thị (bản in lại 2009, chỉ cho mượn đọc) `archive.org/details/zengguangshenshi0000shen` · Papus 1896 `archive.org/details/tarotofbohemians00papu_0` ·
   Wirth 1927 `archive.org/details/wirth-o.-1860-1943.-tarot-des-imagiers-du-moyen-age-1927.` · Case 1947 (mượn đọc) `archive.org/details/tarotkeytowisdom0000paul`.
   Chưa tìm thấy: Dương Trạch Thập Thư, chương Introduction của Mathers 1888.
+- [x] (WS-2, 2026-11-14) Em tự lấy được **Dương Trạch Thập Thư** và **Thần Tướng Toàn Biên** (đủ bộ, chép trong Cổ Kim Đồ Thư Tập Thành 1725
+  trên Wikisource), Chiếu Đảm Kinh, và bản Tứ khố của Linh Thành Tinh Nghĩa, Thôi Quan Thiên, Phát Vi Luận → anh **không cần gửi** hai sách này nữa.
+- [ ] (WS-2) Sách còn thiếu — **link tải** ở mục 11 của tài liệu: Thẩm thị, Dương Trạch Tam Yếu, Bát Trạch Minh Kính, Lỗ Ban Kinh (bản khắc 3 MB
+  `archive.org/details/02090255.cn`), Tuyết Tâm Phú, Địa Lý Ngũ Quyết, Thủy Kính, Liễu Trang. Tải PDF, mở thử: nếu bôi đen được chữ thì gửi lên Drive.
 - [ ] (Quyết định) 6 đề xuất ở mục 5 của tài liệu: hiện "Sách xưa nói gì" trong báo cáo nhà · sửa nhãn nguồn Thanh Long – Bạch Hổ ·
   nối lớp "đa số" vào bài đọc Tarot · thành môn quyết · thước Lỗ Ban · sổ đối chiếu cho mọi KB.
 

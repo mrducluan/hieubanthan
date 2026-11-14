@@ -44,6 +44,7 @@ def _chu(s: str) -> str:
     s = re.sub(r"<(img|figure)[^>]*>", "〔圖〕", s)
     s = re.sub(r"<[^>]+>", "", s)
     s = html.unescape(s).replace("​", "")
+    s = re.sub(r"\{\{\{[^}]*\}\}\}", "", s)          # đề mục bản mẫu wiki chưa điền
     s = s.replace("〈", "〔").replace("〉", "〕")
     return _CHAM.sub("", s)
 
