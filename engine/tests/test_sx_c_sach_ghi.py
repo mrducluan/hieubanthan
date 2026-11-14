@@ -148,3 +148,27 @@ def test_kieu_hinh_nhom_c_khong_hien_cho_nguoi_chua_18():
     nho = sgm.nt_kieu_hinh(f"{c['ten_viet']} là gì", tuoi=15)
     assert "Hàm ý theo ghi chép xưa" in lon["loi"] and c["han"] in lon["loi"]
     assert "Hàm ý theo ghi chép xưa" not in nho["loi"] and c["han"] not in nho["loi"] and c["nhan_dang"] in nho["loi"]
+
+
+def test_tam_yeu_du_64_nha_64_bep_va_du_nien_khop_phep_tinh():
+    """Dương Trạch Tam Yếu (tóm ý): đủ 8 × 8 thế nhà cửa – chủ và 8 × 8 cặp bếp – cửa; du niên từng cặp = bảng du niên engine."""
+    ty = json.loads((DATA / "phongthuy_tam_yeu.json").read_text("utf-8"))
+    quai = list(pt.QUAI)
+    assert set(ty["nha"]) == {f"{a}_{b}" for a in quai for b in quai}
+    assert set(ty["bep"]) == {f"{a}_{b}" for a in quai for b in quai}
+    for k, m in ty["nha"].items():
+        cua, chu = k.split("_")
+        assert m["du_nien"] == pt.bang_huong(cua)[pt.QUAI[chu][1]], k
+        assert m.get("tom_y") is True and "han" not in m
+        assert set(m.get("bep_hop", [])) <= set(quai) and set(m.get("bep_nen_tranh", [])) <= set(quai)
+    for k, m in ty["bep"].items():
+        bep, cua = k.split("_")
+        assert m["du_nien"] == pt.bang_huong(cua)[pt.QUAI[bep][1]], k
+    assert len({m["y"] for m in ty["nha"].values()}) == 64
+
+
+def test_phongthuy_cua_chu_bep_lay_tam_yeu():
+    k = sgm.phongthuy(cua="Càn", chu="Đoài", bep="Khôn", tuoi=40)
+    n = next(x for x in k["nhom"] if x["ma"] == "cua_chu_bep")
+    assert len(n["muc"]) == 2 and all(m.get("tom_y") and "han" not in m and m["sach"] == "Dương Trạch Tam Yếu" for m in n["muc"])
+    assert "Sinh Khí" in n["muc"][0]["ve"]

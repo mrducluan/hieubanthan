@@ -1,0 +1,3093 @@
+{
+ "_nguon": "Tóm ý Dương Trạch Tam Yếu (Triệu Cửu Phong, đời Thanh) và Bát Trạch Minh Kính, qua bản dịch Việt; ban biên tập viết lại, không chép lời bản dịch.",
+ "source_id": "duong_trach_tam_yeu",
+ "school_id": "bat_trach",
+ "trang_thai": "nhap_ban_bien_tap",
+ "can_doi_chieu": true,
+ "nguyen_tac": [
+  {
+   "ma": "tam_yeu",
+   "tieu_de": "Ba chỗ cốt yếu: cửa, chủ, bếp",
+   "tom_y": true,
+   "y": "Một ngôi nhà có bảy chỗ đáng xét, nhưng ba chỗ quyết định là cửa chính, chỗ chủ và bếp. Ba chỗ này nuôi nhau hoặc ngang nhau và cùng rơi vào phía tốt thì nhà thịnh; chọi nhau và rơi vào phía xấu thì nhà suy. Tên sách lấy từ ba chỗ ấy.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "cua_la_goc",
+   "tieu_de": "Cửa chính là gốc để tính",
+   "tom_y": true,
+   "y": "Cửa chính là lối vào nhà; sách ví như người mẹ sinh ra mọi phía tốt xấu của chủ và bếp: lấy cửa làm mốc rồi mới tính các phía còn lại. Nói cửa là cửa chính của nhà, không phải cửa phòng hay cửa buồng bếp, và lấy điểm giữa cửa để định phía.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "chu_o_dau",
+   "tieu_de": "Chỗ gọi là chủ nằm ở đâu",
+   "tom_y": true,
+   "y": "Nhà một gian không vách ngăn thì chủ là phòng ở chính. Nhà nhiều lớp gian thì chủ là phía chính giữa mặt sau nhà; trong các gian, gian cao rộng nhất được coi là gian chúa, nơi sách xem là hệ trọng bậc nhất.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "bep_nuoi_nguoi",
+   "tieu_de": "Bếp nuôi người nên xếp ngang cửa và chủ",
+   "tom_y": true,
+   "y": "Bếp là nơi nuôi sống người trong nhà. Sách cho rằng phần lớn chuyện ốm đau từ ăn uống mà ra, nên bếp ở phía tốt thì bữa ăn có ích, ở phía xấu thì dễ sinh chuyện. Nói bếp là chỗ đặt lò nấu, khác với hướng miệng bếp.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "bon_loai_nha",
+   "tieu_de": "Bốn loại nhà theo số lớp gian",
+   "tom_y": true,
+   "y": "Sách chia nhà theo số lớp gian đếm từ mặt trước ra mặt sau, ngăn bằng tường vách có chừa cửa: một gian là tĩnh trạch, hai đến năm gian là động trạch, sáu đến mười là biến trạch, mười một đến mười lăm là hoá trạch. Tủ, bình phong, rèm không tính là vách.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "hai_nhom_dong_tay",
+   "tieu_de": "Hai nhóm Đông và Tây",
+   "tom_y": true,
+   "y": "Tám phía chia hai nhóm: nhóm Đông gồm Khảm, Ly, Chấn, Tốn; nhóm Tây gồm Càn, Khôn, Cấn, Đoài. Hai phía cùng nhóm gặp nhau ra du niên tốt, khác nhóm ra du niên xấu. Cửa và chủ cùng nhóm là nhà thuận; lẫn hai nhóm thì sách gọi là nhà Đông Tây lẫn lộn, khó phát.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "bep_cung_nhom",
+   "tieu_de": "Bếp phải cùng nhóm với nhà",
+   "tom_y": true,
+   "y": "Nhà nhóm Đông dùng bếp nhóm Đông, nhà nhóm Tây dùng bếp nhóm Tây thì mới thịnh; bếp khác nhóm là nhà với bếp chọi nhau. Nhà lẫn hai nhóm thì theo sách nên đặt bếp cùng nhóm với cửa, còn đủ ăn; đặt ngược lại thì sa sút.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "bon_du_nien_tot",
+   "tieu_de": "Bốn du niên tốt nói điều gì",
+   "tom_y": true,
+   "y": "Sinh Khí đem sức sống và nguồn lộc. Diên Niên làm bền cái đã có, nhất là tiền bạc, và là dấu của sức bền. Thiên Y như người thầy thuốc: gỡ rối, thêm phúc, lợi đất đai. Phục Vị chỉ là tốt phụ: đi với ba du niên kia thì tốt theo, đứng riêng thì ít.",
+   "nhom": "A",
+   "chu_de": "tong_quan",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "bon_du_nien_xau",
+   "tieu_de": "Bốn du niên xấu nói điều gì",
+   "tom_y": true,
+   "y": "Tuyệt Mệnh nặng nhất về hao người hao của. Ngũ Quỷ đem việc bất ngờ, ốm đau, chuyện lửa; sách nói bếp gặp nó là xấu nhất. Lục Sát thiên về ăn chơi, tình cảm rối và hao vật nuôi. Hoạ Hại nhẹ hơn cả: việc vặt, điều tiếng, nhà thưa người.",
+   "nhom": "B",
+   "chu_de": "tong_quan",
+   "ham_y": "Nên chú ý: bốn tên này là tên gọi mức độ của một phía trong nhà, sách dùng để chọn chỗ đặt cửa, chủ, bếp, không phải lời đoán cho người ở.",
+   "viec": "Khi xem nhà mình, ghi ra ba chỗ cửa, chủ, bếp đang ở phía nào trước, rồi mới đọc tới tên du niên.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "sao_tot_dung_cho",
+   "tieu_de": "Du niên tốt còn phải rơi đúng chỗ",
+   "tom_y": true,
+   "y": "Mỗi du niên có một hành: Sinh Khí, Phục Vị thuộc mộc; Diên Niên, Tuyệt Mệnh thuộc kim; Thiên Y, Hoạ Hại thuộc thổ; Ngũ Quỷ hoả; Lục Sát thuỷ. Du niên tốt rơi vào phía cùng hành là tốt nhất, phía nuôi nhau là tốt nhì, phía chọi nhau chỉ còn tốt ít.",
+   "nhom": "A",
+   "chu_de": "tong_quan",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "du_nien_hop_nhom",
+   "tieu_de": "Du niên nào hợp nhóm nhà nào",
+   "tom_y": true,
+   "y": "Sinh Khí và Phục Vị thuộc mộc nên hợp nhà nhóm Đông; Diên Niên thuộc kim và Thiên Y thuộc thổ nên hợp nhà nhóm Tây. Vì thế trong 64 kiểu nhà, sách xếp nhà nhóm Tây được Diên Niên và nhà nhóm Đông được Sinh Khí vào hàng đầu.",
+   "nhom": "A",
+   "chu_de": "tong_quan",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "du_cung_mem",
+   "tieu_de": "Nhà cần đủ cứng và mềm",
+   "tom_y": true,
+   "y": "Suốt 64 kiểu nhà, sách lặp một ý: cửa và chủ cùng dương cả hoặc cùng âm cả thì dù du niên tốt cũng chỉ thịnh lúc đầu, về sau nhà thưa người. Càn, Khảm, Cấn, Chấn là dương; Khôn, Tốn, Ly, Đoài là âm. Cách bù sách chỉ là đặt bếp ở phía có tính ngược lại.",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "nha_ba_tot",
+   "tieu_de": "Thế nhà ba tốt",
+   "tom_y": true,
+   "y": "Khi ba chỗ cửa, chủ, bếp đối nhau từng đôi ra đủ ba du niên Sinh Khí, Diên Niên, Thiên Y thì sách gọi là nhà ba tốt, ba sao lành cùng hội; đây là thế được khen nhiều nhất. Nhà nào có cửa và chủ cùng nhóm mà khác phía cũng có hai chỗ đặt bếp cho ra thế này.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "chinh_va_phu",
+   "tieu_de": "Cửa với bếp nặng hơn chủ với bếp",
+   "tom_y": true,
+   "y": "Du niên giữa cửa với chủ, giữa cửa với bếp là phần chính, ứng rõ và nặng. Du niên giữa chủ với bếp là phần phụ, ứng nhẹ hơn. Vì vậy bếp được tính từ cửa trước rồi mới xét thêm với chủ; phần riêng về 64 bếp của sách chỉ xét bếp với cửa.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "bon_cho_phu",
+   "tieu_de": "Bốn chỗ phụ chỉ thêm bớt",
+   "tom_y": true,
+   "y": "Ngoài ba chỗ chính còn bốn chỗ phụ: hướng miệng bếp, cửa phòng, cửa buồng bếp và cổng ngõ. Chúng chỉ thêm bớt chứ không lật được thế nhà. Trong bốn chỗ, hướng miệng bếp nặng hơn cả; cổng ngõ nhẹ nhất vì nằm ngoài ngôi nhà.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "menh_nguoi_o",
+   "tieu_de": "Mệnh người ở với nhà và bếp",
+   "tom_y": true,
+   "y": "Nhà và bếp cùng nhóm đã là tốt; chủ nhà cũng thuộc nhóm ấy thì thêm chừng ba phần. Mệnh người khác nhóm với nhà thì sách không bảo dọn đi mà chỉ cách gỡ: đặt giường, quay đầu giường và hướng miệng bếp về phía hợp mệnh người đó; miệng bếp nặng hơn giường.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "bep_theo_dieu_can",
+   "tieu_de": "Chọn bếp theo điều nhà đang cần",
+   "tom_y": true,
+   "y": "Sách chỉ ba bếp gỡ ba loại việc. Nhà thưa người, trẻ khó nuôi, ốm lâu, mong chuyện cưới hỏi thì dùng bếp Thiên Y. Học không thành, công danh chậm, túng thiếu thì dùng bếp Sinh Khí. Kém sức bền, khó giữ tiền thì dùng bếp Diên Niên.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "cua_sau_phia_xau",
+   "tieu_de": "Cửa sau, nhà tắm, nhà vệ sinh ở phía xấu",
+   "tom_y": true,
+   "y": "Cửa chính là lối vào nên phải ở phía tốt. Cửa sau, cửa hông là lối ra nên sách bảo mở ở phía xấu cho cái xấu đi ra; lỡ ở phía tốt thì chỉ bớt tốt, không hại. Nhà tắm, nhà vệ sinh, chuồng nuôi cũng nên ở phía xấu, và miệng bếp đừng nhìn về các chỗ ấy.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "cua_gon_mot_phia",
+   "tieu_de": "Cửa phải nằm gọn trong một phía",
+   "tom_y": true,
+   "y": "Cửa chính không nên vắt giữa hai phía, nửa bên này nửa bên kia: việc trong nhà dễ bất nhất, nhất là khi hai phía khác nhóm. Sách bảo dời cửa cho nằm trọn một phía, ít nhất hai phần ba. Nhà quay đúng giữa một phía thì hơn nhà lệch.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  {
+   "ma": "truoc_nha",
+   "tieu_de": "Dáng đất và những thứ trước mặt nhà",
+   "tom_y": true,
+   "y": "Sách góp thêm kinh nghiệm dân gian: đất trước hẹp sau rộng, nền trước thấp sau cao là tốt. Mương, rãnh, ao chắn ngang trước nhà hay trước bếp, đường hoặc hẻm chĩa thẳng vào mặt nhà, nóc nhà đối diện đâm vào đều bị kiêng: nhà khó khá, lúc đủ lúc thiếu.",
+   "nhom": "B",
+   "chu_de": "nha_cua",
+   "ham_y": "Nên chú ý mặt trước nhà: người xưa coi đây là chỗ cái tốt đi vào, bị chắn hay bị chĩa thì nhà hụt hơi.",
+   "viec": "Đứng ở cửa chính nhìn ra, ghi lại những thứ đang chắn hoặc chĩa vào; che bằng rèm, chậu cây, hoặc dùng cửa phụ làm lối ra vào chính.",
+   "nguon": "duong_trach_tam_yeu"
+  }
+ ],
+ "nha": {
+  "Khảm_Khảm": {
+   "cua": "Khảm",
+   "chu": "Khảm",
+   "du_nien": "Phục Vị",
+   "tuong": "Thuỷ nhược trùng phùng",
+   "tom_y": true,
+   "y": "Nước gặp nước: sách ghi lúc đầu làm ăn có lợi. Nhưng cửa và chủ đều cứng, sách ví như hai người đàn ông ở chung một nhà: về lâu người vợ và con nhỏ dễ chịu thiệt, chuyện con cái đến chậm, người ở lại dễ phải lo nhà một mình.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: nhà nhiều nước thì lạnh; cần thêm hơi ấm, tiếng người nữ và trẻ nhỏ.",
+   "viec": "Sách khen bếp ở Đông Nam (Tốn), kế đó là Nam (Ly); giữ nhà khô ráo, sáng, nhất là phòng của vợ và con.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Tốn",
+    "Ly"
+   ],
+   "bep_nen_tranh": [
+    "Cấn",
+    "Khôn"
+   ]
+  },
+  "Khảm_Khôn": {
+   "cua": "Khảm",
+   "chu": "Khôn",
+   "du_nien": "Tuyệt Mệnh",
+   "tuong": "Thuỷ thổ tương khắc",
+   "tom_y": true,
+   "y": "Nước của cửa gặp đất của chủ chặn lại. Sách xếp đây là thế nhà hao người: con trai giữa hoặc người nam trung niên cần giữ sức nhất, người nữ dễ phải gánh nhà một mình; cả nam lẫn nữ đều chóng mệt. Sách gắn với thận, bụng, chứng phù.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: ở nhà này sức khoẻ phải đặt trước việc làm ăn.",
+   "viec": "Cả nhà khám tổng quát mỗi năm, chú ý thận và tiêu hoá; nếu được, dời phòng ngủ chính về phía Đông Nam, Nam hoặc Đông.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Càn",
+    "Đoài"
+   ],
+   "bep_nen_tranh": [
+    "Cấn",
+    "Khôn",
+    "Tốn"
+   ]
+  },
+  "Khảm_Chấn": {
+   "cua": "Khảm",
+   "chu": "Chấn",
+   "du_nien": "Thiên Y",
+   "tuong": "Thuỷ lôi phát phúc",
+   "tom_y": true,
+   "y": "Nước nuôi sấm: sách gọi đây là nhà gỡ nghèo hay nhất. Những năm đầu người thêm đông, học hành công việc hanh thông, cả nhà vui và hay giúp người; giàu vừa chứ không giàu lớn. Vì cửa và chủ đều cứng, ở rất lâu thì chuyện con cái thưa dần.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: phúc này đến nhanh nhưng cần thêm phần mềm mới bền qua đời sau.",
+   "viec": "Sách khen nhất bếp ở Đông Nam (Tốn) cho nhà này; giữ thói quen giúp người như một nếp nhà, kể cho con cháu nghe.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Tốn",
+    "Ly"
+   ],
+   "bep_nen_tranh": [
+    "Cấn",
+    "Khôn",
+    "Càn"
+   ]
+  },
+  "Khảm_Tốn": {
+   "cua": "Khảm",
+   "chu": "Tốn",
+   "du_nien": "Sinh Khí",
+   "tuong": "Thuỷ mộc vinh hoa",
+   "tom_y": true,
+   "y": "Nước tưới cây, hoa nở: sách xếp đây là nhà phát nhất trong nhóm nhà phía Đông. Con cái sáng dạ và hiếu thuận, người nữ trong nhà nổi bật, đất đai thêm, công danh rạng, người đông, ở bao lâu cũng vậy. Tránh bếp ở Đông Bắc (Cấn) và Tây Nam (Khôn).",
+   "nhom": "A",
+   "chu_de": "cong_viec",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Ly",
+    "Chấn"
+   ],
+   "bep_nen_tranh": [
+    "Cấn",
+    "Khôn"
+   ]
+  },
+  "Khảm_Càn": {
+   "cua": "Khảm",
+   "chu": "Càn",
+   "du_nien": "Lục Sát",
+   "tuong": "Thuỷ tiết Càn khí",
+   "tom_y": true,
+   "y": "Nước rút sức của kim. Sách ghi nhà này có một quãng phát đạt, chừng mươi năm, rồi sa sút vì rượu chè, cờ bạc, chuyện trai gái; đường vợ chồng, con cái cần vun nhiều hơn nhà khác, và nhà dễ thưa người.",
+   "nhom": "C",
+   "chu_de": "tinh_duyen",
+   "ham_y": "Người xưa muốn dặn: lúc đang lên là lúc dễ hư nhất; giữ nếp ngay từ khi còn thuận.",
+   "viec": "Khi có khoản tiền lớn, gửi ngay phần cố định vào chỗ khó rút; hai vợ chồng cùng biết mọi khoản vay, khoản cho mượn.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Tốn"
+   ],
+   "bep_nen_tranh": [
+    "Cấn",
+    "Khôn",
+    "Chấn"
+   ]
+  },
+  "Khảm_Đoài": {
+   "cua": "Khảm",
+   "chu": "Đoài",
+   "du_nien": "Hoạ Hại",
+   "tuong": "Trạch ngộ thuỷ tiết",
+   "tom_y": true,
+   "y": "Đầm gặp nước rỉ: kim của chủ nuôi nước của cửa nên chính chủ bị rút sức. Sách ghi nhà này hao của, đường vợ chồng dễ dang dở phải làm lại, con gái út và người nữ trẻ dễ yếu; sách gắn thế này với phổi, họng.",
+   "nhom": "C",
+   "chu_de": "tien_bac",
+   "ham_y": "Người xưa muốn dặn: của trong nhà này chảy ra theo lối cửa; phải giữ từng chút và giữ sức cho người nữ trẻ.",
+   "viec": "Ghi sổ thu chi chung của hai vợ chồng; người nữ trẻ hay ho, viêm họng thì đi khám, giữ phòng ngủ khô và kín gió.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Tốn"
+   ],
+   "bep_nen_tranh": [
+    "Cấn",
+    "Khôn",
+    "Ly"
+   ]
+  },
+  "Khảm_Cấn": {
+   "cua": "Khảm",
+   "chu": "Cấn",
+   "du_nien": "Ngũ Quỷ",
+   "tuong": "Thuỷ ngộ sơn",
+   "tom_y": true,
+   "y": "Nước gặp núi chặn. Sách xếp đây là thế nhà nặng: chuyện con cái đến chậm, có con thì nuôi cũng vất vả hơn; nhà hay vướng kiện cáo, điều tiếng, ốm đau, mất mát. Sách nói trăm việc ở nhà này đều khó trôi chảy.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: nhà này phải dồn sức chăm trẻ và tránh xa chuyện hơn thua với người ngoài.",
+   "viec": "Mong con thì vợ chồng đi khám sớm; trẻ nhỏ ngủ ở phòng phía Đông Nam, Nam hoặc Đông nếu có; việc tiền bạc, đất đai với người ngoài đều làm giấy tờ.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Đoài",
+    "Càn"
+   ],
+   "bep_nen_tranh": [
+    "Cấn",
+    "Khôn",
+    "Khảm"
+   ]
+  },
+  "Khảm_Ly": {
+   "cua": "Khảm",
+   "chu": "Ly",
+   "du_nien": "Diên Niên",
+   "tuong": "Thuỷ hoả ký tế",
+   "tom_y": true,
+   "y": "Nước lửa đã điều hoà: cứng mềm đủ đôi, sách ghi vợ chồng xứng, có của có danh, đất đai, vật nuôi và người đều thêm. Vì nước lửa vốn chọi nhau, ở lâu thì người vợ dễ mệt, sách gắn với dạ dày và mắt; đặt bếp phía mộc thì gỡ được.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: nhà tốt vẫn có chỗ chọi nhau bên trong; thêm một nhịp cầu ở giữa là êm.",
+   "viec": "Nếu dời được bếp, chọn Đông Nam (Tốn) hoặc Đông (Chấn) như sách chỉ; người vợ khám mắt và dạ dày định kỳ.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Tốn",
+    "Chấn"
+   ],
+   "bep_nen_tranh": [
+    "Cấn",
+    "Khôn",
+    "Đoài"
+   ]
+  },
+  "Khôn_Khảm": {
+   "cua": "Khôn",
+   "chu": "Khảm",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Đất của cửa lấn nước của chủ. Sách xếp đây là thế nhà hao người: người nam tuổi trung niên hoặc con trai giữa cần để ý sức bền nhất; sách gắn thế này với thận, bụng và chứng phù. Đất đai, của cải cũng dễ lùi dần.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: người nam đang là trụ cột của nhà này phải giữ sức, đừng làm quá.",
+   "viec": "Người nam trung niên trong nhà đi khám tổng quát mỗi năm; nếu được, dời phòng ngủ chính về phía Tây Bắc, Tây hoặc Đông Bắc.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Càn",
+    "Đoài"
+   ],
+   "bep_nen_tranh": [
+    "Tốn",
+    "Khảm",
+    "Cấn"
+   ]
+  },
+  "Khôn_Khôn": {
+   "cua": "Khôn",
+   "chu": "Khôn",
+   "du_nien": "Phục Vị",
+   "tuong": "Trùng địa",
+   "tom_y": true,
+   "y": "Hai lớp đất chồng lên nhau: sách ghi nhà này lúc đầu khá lên nhờ ruộng vườn. Nhưng nhà toàn nét mềm, nên về lâu người nam dễ hao sức, con cái thưa, mọi việc dồn lên người nữ. Sách chỉ luôn cách bù: đặt bếp ở phía có nét cứng.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: nhà thiên về một phía thì chủ động bù phía còn lại, đừng để một người gánh cả.",
+   "viec": "Nếu dời được bếp, chọn Tây Bắc (Càn) hoặc Đông Bắc (Cấn) như sách chỉ; chia bớt việc quyết định trong nhà cho người nam.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Càn",
+    "Cấn"
+   ],
+   "bep_nen_tranh": [
+    "Tốn",
+    "Khảm"
+   ]
+  },
+  "Khôn_Chấn": {
+   "cua": "Khôn",
+   "chu": "Chấn",
+   "du_nien": "Hoạ Hại",
+   "tuong": "Nhân lâm long vị",
+   "tom_y": true,
+   "y": "Mộc của chủ chèn lên đất của cửa. Sách đọc là mẹ con khó hoà, và người mẹ dễ hao sức, nhất là quanh chuyện sinh nở. Nhà này được của thì thưa người, đông người thì chật tiền; sách gắn thế này với dạ dày và đường tiêu hoá.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: giữ sức cho người mẹ và giữ lời ăn tiếng nói giữa mẹ với con.",
+   "viec": "Người mẹ đi khám định kỳ, thai kỳ thì khám đúng hẹn; con cái nhận hẳn một việc nhà cố định mỗi ngày thay mẹ.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Ly"
+   ],
+   "bep_nen_tranh": [
+    "Tốn",
+    "Khảm",
+    "Càn"
+   ]
+  },
+  "Khôn_Tốn": {
+   "cua": "Khôn",
+   "chu": "Tốn",
+   "du_nien": "Ngũ Quỷ",
+   "tom_y": true,
+   "y": "Mộc của chủ khoét vào đất của cửa, hai bên đều thuộc nét mềm. Sách xếp đây là thế nhà nặng: người mẹ lớn tuổi cần giữ sức nhất, người nam cũng dễ hao; nhà dễ vướng tranh cãi, kiện cáo, và sa vào rượu chè, cờ bạc mà hao của.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: ở nhà này phải tránh xa những thú vui hao tiền hao sức, và chăm người mẹ già trước hết.",
+   "viec": "Đưa mẹ đi khám định kỳ, nhất là đường tiêu hoá; tiền lớn trong nhà phải hai người cùng biết, không vay để chơi.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Càn"
+   ],
+   "bep_nen_tranh": [
+    "Tốn",
+    "Khảm",
+    "Khôn"
+   ]
+  },
+  "Khôn_Càn": {
+   "cua": "Khôn",
+   "chu": "Càn",
+   "du_nien": "Diên Niên",
+   "tuong": "Địa khởi thiên môn",
+   "tom_y": true,
+   "y": "Sách ví như đất nâng cửa trời: cứng mềm đủ đôi, ngoài nuôi vào trong. Đây là nhà sách khen trọn vẹn: của đến nhanh, tính việc gì cũng dễ thành, vợ chồng thuận, con cháu ngoan, người già khoẻ. Dặn thêm: tránh bếp ở Đông Nam (Tốn), Bắc (Khảm) và Đông (Chấn).",
+   "nhom": "A",
+   "chu_de": "tien_bac",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Đoài",
+    "Cấn"
+   ],
+   "bep_nen_tranh": [
+    "Tốn",
+    "Khảm",
+    "Chấn"
+   ]
+  },
+  "Khôn_Đoài": {
+   "cua": "Khôn",
+   "chu": "Đoài",
+   "du_nien": "Thiên Y",
+   "tuong": "Địa trạch",
+   "tom_y": true,
+   "y": "Đất sinh ra đầm, ngoài nuôi vào trong: sách ghi nhà phát nhanh, người nữ hiền, ưa làm việc thiện. Nhưng cửa và chủ đều mềm nên về lâu người nam dễ hao sức, trẻ nhỏ cần chăm kỹ hơn, nhà hay nuông con gái, quý con rể.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: nhà hiền mà thiếu người đứng mũi thì khó bền; giữ sức cho người nam và dạy con có nếp.",
+   "viec": "Sách khen bếp ở Tây Bắc (Càn) hoặc Đông Bắc (Cấn) cho nhà này; trẻ nhỏ trong nhà thì khám và tiêm đúng lịch.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Càn",
+    "Cấn"
+   ],
+   "bep_nen_tranh": [
+    "Tốn",
+    "Khảm",
+    "Ly"
+   ]
+  },
+  "Khôn_Cấn": {
+   "cua": "Khôn",
+   "chu": "Cấn",
+   "du_nien": "Sinh Khí",
+   "tuong": "Địa sơn thổ trùng",
+   "tom_y": true,
+   "y": "Đất gặp núi, hai lớp thổ đủ cứng mềm: sách ghi nhà này dư dả đất đai, chăn nuôi được, người sống lâu, con cháu đông và hiếu. Sách xếp vào loại tốt hàng đầu, chỉ nhắc rằng ở rất lâu thì thế tốt mòn dần, nên chăm nhà đều tay.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Càn",
+    "Đoài"
+   ],
+   "bep_nen_tranh": [
+    "Tốn",
+    "Khảm"
+   ]
+  },
+  "Khôn_Ly": {
+   "cua": "Khôn",
+   "chu": "Ly",
+   "du_nien": "Lục Sát",
+   "tuong": "Nhân môn kiến hoả",
+   "tom_y": true,
+   "y": "Sách ví như lửa thấy cửa người: nhìn thì lửa nuôi đất, thực ra là rút sức, như cái hồ rỉ nước cạn dần. Nhà toàn nét mềm nên người nữ phải cầm trịch, người nam dễ hao sức, trong nhà hay lục đục; ở lâu thì nhà thưa người.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: của trong nhà này hao theo kiểu rỉ từng chút, hoà khí cũng vậy; phải bịt chỗ rỉ sớm.",
+   "viec": "Ghi lại mọi khoản chi nhỏ trong một tháng để thấy chỗ rỉ; việc lớn trong nhà thì cả vợ lẫn chồng cùng quyết.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Chấn"
+   ],
+   "bep_nen_tranh": [
+    "Tốn",
+    "Khảm",
+    "Đoài"
+   ]
+  },
+  "Chấn_Khảm": {
+   "cua": "Chấn",
+   "chu": "Khảm",
+   "du_nien": "Thiên Y",
+   "tuong": "Lôi thuỷ",
+   "tom_y": true,
+   "y": "Sấm gặp nước, nước nuôi gỗ: sách ghi những năm đầu thịnh lớn, trai gái đều ưa làm việc lành, ăn ở có nghĩa. Nhưng cửa và chủ đều cứng nên chuyện con cái đến chậm, người không thêm đông, về lâu vợ con dễ chịu thiệt.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: làm lành cho người ngoài thì cũng nhớ dành phần ấm cho vợ con.",
+   "viec": "Sách khen bếp ở Nam (Ly) hoặc Đông Nam (Tốn) cho nhà này; mỗi tuần dành trọn một buổi cho vợ con.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Ly",
+    "Tốn"
+   ],
+   "bep_nen_tranh": [
+    "Càn",
+    "Đoài",
+    "Cấn"
+   ]
+  },
+  "Chấn_Khôn": {
+   "cua": "Chấn",
+   "chu": "Khôn",
+   "du_nien": "Hoạ Hại",
+   "tuong": "Long nhập nhân môn",
+   "tom_y": true,
+   "y": "Sách ví như rồng vào cửa người: gỗ của cửa chèn đất của chủ. Người mẹ lớn tuổi cần giữ sức nhất, vợ chồng già dễ xa nhau; sách gắn thế này với dạ dày, lá lách, chứng phù. Lúc đầu nhà vẫn đông, về sau được của thì hụt người.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: giữ cho cha mẹ già được ở gần nhau và ăn uống điều độ.",
+   "viec": "Đưa mẹ đi khám tiêu hoá định kỳ; phòng cha mẹ nên ở phía Nam, Đông Nam hoặc Bắc của nhà, bữa tối cả nhà ăn sớm.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Ly"
+   ],
+   "bep_nen_tranh": [
+    "Càn",
+    "Đoài",
+    "Tốn"
+   ]
+  },
+  "Chấn_Chấn": {
+   "cua": "Chấn",
+   "chu": "Chấn",
+   "du_nien": "Phục Vị",
+   "tuong": "Chấn mộc trùng",
+   "tom_y": true,
+   "y": "Hai lớp gỗ chồng nhau: sách ghi những năm đầu phát cả của lẫn danh, vì hợp với nhóm nhà phía Đông. Nhưng cửa và chủ đều cứng nên người nữ trong nhà dễ hao sức, nhà không thêm người; ở rất lâu thì dễ có cảnh một người lo cả nhà.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: cây mọc dày quá thì che nhau; nhà này cần chỗ cho người nữ và trẻ nhỏ lớn lên.",
+   "viec": "Sách khen bếp ở Đông Nam (Tốn) hoặc Nam (Ly); người nữ trong nhà có một ngày nghỉ hẳn việc nhà mỗi tuần.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Tốn",
+    "Ly"
+   ],
+   "bep_nen_tranh": [
+    "Càn",
+    "Đoài"
+   ]
+  },
+  "Chấn_Tốn": {
+   "cua": "Chấn",
+   "chu": "Tốn",
+   "du_nien": "Diên Niên",
+   "tuong": "Lôi phong tương phối",
+   "tom_y": true,
+   "y": "Sấm gió gặp nhau, hai gỗ thành rừng: sách ghi nhà này phát rất nhanh. Sách ví như gỗ quý gặp cưa đục khéo thành đồ quý: học hành, thi cử, công danh nổi bật, người đang nghèo có thể đổi đời. Tránh bếp ở Tây Bắc (Càn), Tây (Đoài) và Tây Nam (Khôn).",
+   "nhom": "A",
+   "chu_de": "cong_viec",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Ly",
+    "Khảm"
+   ],
+   "bep_nen_tranh": [
+    "Càn",
+    "Đoài",
+    "Khôn"
+   ]
+  },
+  "Chấn_Càn": {
+   "cua": "Chấn",
+   "chu": "Càn",
+   "du_nien": "Ngũ Quỷ",
+   "tuong": "Long phi thiên thượng",
+   "tom_y": true,
+   "y": "Sách ví như rồng bay lên trời, lửa chạm cửa trời. Đây là thế nhà sách tả rất nặng: người cha, người ông cần giữ sức và giữ an toàn hơn cả; nhà dễ có chuyện lạ, ốm đau, kiện cáo lớn, mất mát, điều tiếng, đất đai lùi.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: nhà này tránh mọi việc liều, và để người lớn tuổi được yên.",
+   "viec": "Đưa cha, ông đi khám định kỳ; không cho vay, bảo lãnh bằng miệng; nếu được, dời phòng ngủ chính về phía Nam, Đông Nam hoặc Bắc.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khôn",
+    "Cấn"
+   ],
+   "bep_nen_tranh": [
+    "Càn",
+    "Đoài",
+    "Chấn"
+   ]
+  },
+  "Chấn_Đoài": {
+   "cua": "Chấn",
+   "chu": "Đoài",
+   "du_nien": "Tuyệt Mệnh",
+   "tuong": "Long tranh hổ đấu",
+   "tom_y": true,
+   "y": "Rồng tranh hổ đấu: gỗ và kim chọi thẳng, người nhỏ lấn người lớn. Sách xếp đây là thế nhà hao cả người lẫn của, người con cả phải lo nghĩ nhiều nhất; nhà dễ lẻ loi, thưa người. Sách gắn với lưng, hông và vùng ngực bụng.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: anh chị em trong nhà đừng tranh hơn thua; người lớn giữ sức, người nhỏ giữ lễ.",
+   "viec": "Việc chung của anh chị em thì họp và ghi biên bản ngắn; ai đau lưng, tức ngực kéo dài thì đi khám, không tự đoán.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Cấn",
+    "Khôn"
+   ],
+   "bep_nen_tranh": [
+    "Càn",
+    "Đoài",
+    "Ly"
+   ]
+  },
+  "Chấn_Cấn": {
+   "cua": "Chấn",
+   "chu": "Cấn",
+   "du_nien": "Lục Sát",
+   "tuong": "Long phó sơn trung",
+   "tom_y": true,
+   "y": "Rồng vào trong núi: gỗ của cửa chèn đất của chủ, hai bên đều cứng. Sách ghi nhà ít con, trẻ nhỏ và con trai út cần chăm nhất; người lớn cũng chóng mệt. Nhà hao của, dễ kiện cáo, mất mát; sách gắn với dạ dày, lá lách.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: chăm trẻ nhỏ như chăm mầm cây; đừng để việc tranh chấp bên ngoài lấn giờ của con.",
+   "viec": "Trẻ biếng ăn, chậm lớn thì đi khám dinh dưỡng; phòng trẻ nên ở phía Nam, Đông Nam hoặc Bắc, có nắng sáng.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Ly"
+   ],
+   "bep_nen_tranh": [
+    "Càn",
+    "Đoài",
+    "Khảm"
+   ]
+  },
+  "Chấn_Ly": {
+   "cua": "Chấn",
+   "chu": "Ly",
+   "du_nien": "Sinh Khí",
+   "tuong": "Lôi hoả quang minh",
+   "tom_y": true,
+   "y": "Sấm lửa sáng trưng: cứng ở ngoài nuôi mềm ở trong, gỗ gặp lửa bùng lên nên khí thế đi lên rất mạnh. Sách ghi con cái học giỏi, vợ chồng êm, nhà cửa rạng rỡ, đất đai và vật nuôi thêm, con cháu đầy nhà. Tránh bếp ở Tây Bắc (Càn) và Tây (Đoài).",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Tốn",
+    "Khảm"
+   ],
+   "bep_nen_tranh": [
+    "Càn",
+    "Đoài"
+   ]
+  },
+  "Tốn_Khảm": {
+   "cua": "Tốn",
+   "chu": "Khảm",
+   "du_nien": "Sinh Khí",
+   "tuong": "Ngũ tử đăng khoa",
+   "tom_y": true,
+   "y": "Gió gặp nước, nước nuôi gỗ: sách xếp đây là nhà rất lợi đường học hành, công danh, có câu năm con cùng đỗ. Trai gái đều có tài, con hiếu cháu hiền, vợ chồng kính nhau, đời nối đời vẻ vang, người ngày một đông. Tránh bếp ở Tây Nam (Khôn) và Đông Bắc (Cấn).",
+   "nhom": "A",
+   "chu_de": "cong_viec",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Chấn",
+    "Ly"
+   ],
+   "bep_nen_tranh": [
+    "Khôn",
+    "Cấn"
+   ]
+  },
+  "Tốn_Khôn": {
+   "cua": "Tốn",
+   "chu": "Khôn",
+   "du_nien": "Ngũ Quỷ",
+   "tuong": "Phong đáo nhân môn",
+   "tom_y": true,
+   "y": "Gió tới cửa người: gỗ của cửa khoét đất của chủ, ngoài lấn vào trong nên việc không hay đến rất nhanh. Người mẹ cần giữ sức trước nhất; nhà dễ kiện cáo, mất mát, điều tiếng, bà cháu khó hợp, cơ nghiệp mòn vì rượu chè ăn chơi.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: thấy dấu hiệu là gỡ ngay, đừng để lâu; và giữ cho mẹ được yên.",
+   "viec": "Đưa mẹ đi khám tiêu hoá định kỳ; nếu được, dời phòng ngủ của mẹ về phía Bắc, Đông hoặc Nam của nhà.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Càn",
+    "Đoài"
+   ],
+   "bep_nen_tranh": [
+    "Khôn",
+    "Cấn",
+    "Tốn"
+   ]
+  },
+  "Tốn_Chấn": {
+   "cua": "Tốn",
+   "chu": "Chấn",
+   "du_nien": "Diên Niên",
+   "tuong": "Phong lôi",
+   "tom_y": true,
+   "y": "Gió sấm cùng nổi: hai gỗ đủ cứng mềm gặp dao búa đẽo thành rường cột. Sách ghi công danh ở nhà này lên nhanh như lửa gặp gió: trước nghèo như cây còn vỏ, sau thành đồ quý. Tránh bếp ở Tây Nam (Khôn), Đông Bắc (Cấn) và Tây Bắc (Càn).",
+   "nhom": "A",
+   "chu_de": "cong_viec",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khảm",
+    "Ly"
+   ],
+   "bep_nen_tranh": [
+    "Khôn",
+    "Cấn",
+    "Càn"
+   ]
+  },
+  "Tốn_Tốn": {
+   "cua": "Tốn",
+   "chu": "Tốn",
+   "du_nien": "Phục Vị",
+   "tuong": "Trùng phong",
+   "tom_y": true,
+   "y": "Gió chồng lên gió: sách ghi lúc đầu có tiền, người nữ nắm việc và nắm của. Nhưng nhà toàn nét mềm nên người nữ vất vả, người nam dễ hao sức, nữ nhiều hơn nam; ở rất lâu thì chuyện con cái thưa, có khi nhờ con nuôi giữ nghiệp.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: người nữ giỏi cũng cần người đỡ; đừng để gió thổi mãi một chiều.",
+   "viec": "Sách khen nhất bếp ở Bắc (Khảm), kế đó là Đông (Chấn); người nam nhận hẳn một mảng việc nhà cố định.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khảm",
+    "Chấn"
+   ],
+   "bep_nen_tranh": [
+    "Khôn",
+    "Cấn"
+   ]
+  },
+  "Tốn_Càn": {
+   "cua": "Tốn",
+   "chu": "Càn",
+   "du_nien": "Hoạ Hại",
+   "tuong": "Phong thiên",
+   "tom_y": true,
+   "y": "Gió gặp trời: gỗ còn thô gặp dao búa sắc, nên chừng mười năm đầu vẫn có tiền, thêm người, có chút danh. Sau đó cứng lấn mềm: người nữ lớn trong nhà dễ hao sức, nhất là quanh chuyện sinh nở; sách gắn với mắt, lưng và hông.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: được mười năm đầu thì lo ngay cho mười năm sau, trước hết là sức của người nữ.",
+   "viec": "Người nữ lớn trong nhà khám định kỳ, mang thai thì khám đúng hẹn; nếu được, dời phòng ngủ chính về phía Bắc, Đông hoặc Nam.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khảm"
+   ],
+   "bep_nen_tranh": [
+    "Khôn",
+    "Cấn",
+    "Chấn"
+   ]
+  },
+  "Tốn_Đoài": {
+   "cua": "Tốn",
+   "chu": "Đoài",
+   "du_nien": "Lục Sát",
+   "tuong": "Phong sinh hiện hổ",
+   "tom_y": true,
+   "y": "Gió nổi thì hổ hiện: kim của chủ chém gỗ của cửa, hai bên đều mềm. Sách ghi người nữ lớn trong nhà là người chịu thiệt, các người nữ khó hoà nhau; cả nam lẫn nữ đều chóng mệt, nhà thưa người. Sách gắn với gân và xương khớp.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: chị em, mẹ con trong nhà nhường nhau một câu; người chị cả, người vợ cả cần được đỡ đần.",
+   "viec": "Giao bớt việc của người nữ lớn cho người khác theo lịch tuần; ai đau khớp kéo dài thì đi khám, tập giãn cơ mỗi sáng.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khảm"
+   ],
+   "bep_nen_tranh": [
+    "Khôn",
+    "Cấn",
+    "Ly"
+   ]
+  },
+  "Tốn_Cấn": {
+   "cua": "Tốn",
+   "chu": "Cấn",
+   "du_nien": "Tuyệt Mệnh",
+   "tuong": "Phong sơn",
+   "tom_y": true,
+   "y": "Gió bào núi: gỗ của cửa lấn đất của chủ, ngoài lấn vào trong. Sách xếp đây là thế nhà hao người: trẻ nhỏ cần chăm kỹ nhất, chuyện con cái hiếm, người nữ dễ phải gánh nhà một mình qua mấy lớp; nhà hay vướng kiện cáo, mất mát.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: nhà này quý nhất là trẻ nhỏ; mọi thứ khác xếp sau.",
+   "viec": "Giữ phòng trẻ kín gió, ấm; trẻ hay ốm vặt thì đi khám, đừng tự chữa; phòng ngủ chính nếu dời được thì về phía Bắc, Đông hoặc Nam.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Đoài",
+    "Càn"
+   ],
+   "bep_nen_tranh": [
+    "Khôn",
+    "Cấn",
+    "Khảm"
+   ]
+  },
+  "Tốn_Ly": {
+   "cua": "Tốn",
+   "chu": "Ly",
+   "du_nien": "Thiên Y",
+   "tuong": "Phong hoả",
+   "tom_y": true,
+   "y": "Gió thổi lửa sáng: sách ghi nhà giàu và có danh, người nữ tài trí hơn người, cả nhà ưa làm phúc, hay giúp người. Nhưng cửa và chủ đều mềm, nên về sau khó tiến thêm, người nam dễ hao sức, chuyện con cái đến chậm.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: sáng nhờ người nữ thì càng phải giữ sức cho người nam và lo đường con cái.",
+   "viec": "Sách khen bếp ở Bắc (Khảm) hoặc Đông (Chấn) cho nhà này; người nam trong nhà khám sức khoẻ mỗi năm.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khảm",
+    "Chấn"
+   ],
+   "bep_nen_tranh": [
+    "Khôn",
+    "Cấn",
+    "Đoài"
+   ]
+  },
+  "Càn_Khảm": {
+   "cua": "Càn",
+   "chu": "Khảm",
+   "du_nien": "Lục Sát",
+   "tuong": "Thiên môn lạc thuỷ",
+   "tom_y": true,
+   "y": "Sách ví như cửa trời rơi xuống nước. Lúc đầu có tiền vì cửa nuôi chủ, nhưng thế nhà dễ kéo người ta vào ăn chơi, tình cảm nhiều ngả; về lâu của cải hao dần, người nữ và con cái trong nhà chịu thiệt.",
+   "nhom": "C",
+   "chu_de": "tinh_duyen",
+   "ham_y": "Người xưa muốn dặn: ở nhà này phải giữ nếp sống chừng mực, rõ ràng trong tình cảm và tiền bạc.",
+   "viec": "Hai vợ chồng thống nhất một hạn mức tiêu riêng mỗi tháng; chuyện đi lại, quan hệ thì nói rõ với nhau từ đầu.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Tốn"
+   ],
+   "bep_nen_tranh": [
+    "Chấn",
+    "Ly",
+    "Cấn"
+   ]
+  },
+  "Càn_Khôn": {
+   "cua": "Càn",
+   "chu": "Khôn",
+   "du_nien": "Diên Niên",
+   "tuong": "Thiên môn đáo địa",
+   "tom_y": true,
+   "y": "Sách ví như cửa trời xuống tới đất: cứng mềm đủ đôi, vợ chồng thuận, con cháu hiếu, nhà khá lên và bền, người già được kính. Sách xếp đây vào loại nhà rất tốt, hiếm gặp. Điều cần giữ: đừng đặt bếp ở Đông (Chấn), Nam (Ly) và Đông Nam (Tốn).",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Cấn",
+    "Đoài"
+   ],
+   "bep_nen_tranh": [
+    "Chấn",
+    "Ly",
+    "Tốn"
+   ]
+  },
+  "Càn_Chấn": {
+   "cua": "Càn",
+   "chu": "Chấn",
+   "du_nien": "Ngũ Quỷ",
+   "tuong": "Quỷ nhập lôi môn",
+   "tom_y": true,
+   "y": "Cửa Càn đè lên chủ Chấn, ngoài lấn vào trong. Sách xếp đây là thế nhà nặng: việc không hay đến nhanh, dễ có tranh chấp, lời qua tiếng lại, mất mát, cha con khó hoà; người con cả là người sách bảo phải để ý nhiều nhất.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: nhà này cần giữ hoà khí cha con trước hết, và cẩn thận hơn với lửa, khoá cửa, giấy tờ.",
+   "viec": "Nếu được, chuyển phòng ngủ chính về phía Tây Nam, Đông Bắc hoặc Tây của nhà; mỗi tuần cha con ngồi ăn với nhau một bữa không điện thoại.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khôn",
+    "Cấn"
+   ],
+   "bep_nen_tranh": [
+    "Chấn",
+    "Ly",
+    "Càn"
+   ]
+  },
+  "Càn_Tốn": {
+   "cua": "Càn",
+   "chu": "Tốn",
+   "du_nien": "Hoạ Hại",
+   "tom_y": true,
+   "y": "Kim của cửa đẽo vào mộc của chủ: sách ghi quãng đầu vẫn có tiền, có tiếng, thêm người, nhưng hay đứt quãng. Ở lâu thì người nữ lớn trong nhà dễ hao sức, nhất là quanh chuyện sinh nở; sách gắn thế này với gan và gân xương.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: người nữ trong nhà cần được nghỉ ngơi và chăm kỹ hơn, nhất là lúc mang thai, sinh con.",
+   "viec": "Đặt lịch khám định kỳ cho người nữ lớn trong nhà, thai kỳ thì khám đúng hẹn; kê giường của họ ở phòng yên, xa cửa chính.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khảm"
+   ],
+   "bep_nen_tranh": [
+    "Chấn",
+    "Ly",
+    "Khôn"
+   ]
+  },
+  "Càn_Càn": {
+   "cua": "Càn",
+   "chu": "Càn",
+   "du_nien": "Phục Vị",
+   "tuong": "Càn Càn thuần dương",
+   "tom_y": true,
+   "y": "Cửa và chủ cùng ở Càn, hai phần cứng đặt cạnh nhau. Sách ghi mấy năm đầu làm ăn lên nhanh, nhưng nhà thiếu phần mềm nên về lâu người nữ dễ hao sức, chuyện con cái đến chậm. Sách xếp vào loại tốt ít, được trước khó giữ sau.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: nhà toàn nét cứng thì phải chủ động thêm phần mềm, đừng để việc nhà dồn lên vai người nữ.",
+   "viec": "Chia lại việc nhà cho đều giữa nam và nữ; nếu dời được bếp, sách khen nhất bếp ở Tây Nam (Khôn) cho nhà này.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khôn",
+    "Đoài"
+   ],
+   "bep_nen_tranh": [
+    "Chấn",
+    "Ly"
+   ]
+  },
+  "Càn_Đoài": {
+   "cua": "Càn",
+   "chu": "Đoài",
+   "du_nien": "Sinh Khí",
+   "tuong": "Thiên trạch",
+   "tom_y": true,
+   "y": "Sách ví như trời soi xuống đầm: hai kim hợp nhau, những năm đầu tiền của dồi dào, người đông và khoẻ. Nhưng sách cũng ví cửa và chủ như đôi lứa lệch tuổi: về lâu chuyện tình cảm trong nhà dễ lệch nhịp, nhiều ngả.",
+   "nhom": "C",
+   "chu_de": "tinh_duyen",
+   "ham_y": "Người xưa muốn dặn: nhà có của rồi thì giữ nếp; vợ chồng cần dành thời gian cho nhau để khỏi xa dần.",
+   "viec": "Mỗi tuần hai vợ chồng có một buổi riêng không bàn việc; sách khen bếp ở Tây Nam (Khôn) hoặc Đông Bắc (Cấn) cho nhà này.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khôn",
+    "Cấn"
+   ],
+   "bep_nen_tranh": [
+    "Chấn",
+    "Ly"
+   ]
+  },
+  "Càn_Cấn": {
+   "cua": "Càn",
+   "chu": "Cấn",
+   "du_nien": "Thiên Y",
+   "tuong": "Thiên lâm sơn thượng",
+   "tom_y": true,
+   "y": "Sách ví như trời đậu trên núi: nhà vững, người hiền, vườn ruộng thêm, ưa việc lành và kinh sách. Chỉ có điều cửa và chủ đều thuộc nét cứng, nên càng về sau nhà càng thưa người, chuyện con cái đến chậm, người nữ dễ hao sức.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: nhà tốt mà thiếu phần mềm thì chưa bền; cần thêm hơi ấm của người nữ và trẻ nhỏ.",
+   "viec": "Dành phòng sáng, thoáng nhất cho người nữ trong nhà; sách khen bếp ở Tây Nam (Khôn) hoặc Tây (Đoài) cho nhà này.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khôn",
+    "Đoài"
+   ],
+   "bep_nen_tranh": [
+    "Chấn",
+    "Ly",
+    "Khảm"
+   ]
+  },
+  "Càn_Ly": {
+   "cua": "Càn",
+   "chu": "Ly",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Lửa của chủ nung kim của cửa. Sách xếp đây là thế nhà hao: của khó giữ, dễ mất mát, người trong nhà dễ thấy lẻ loi; người đàn ông lớn tuổi là người sách bảo để ý nhất, và sách gắn thế này với mắt cùng những cơn nhức đầu.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: đừng để người lớn tuổi trong nhà gánh một mình; giữ sức quan trọng hơn giữ của.",
+   "viec": "Đưa người lớn tuổi đi khám tổng quát và khám mắt định kỳ; nếu được, chuyển phòng ngủ chính về phía Tây Nam, Đông Bắc hoặc Tây.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khôn",
+    "Cấn"
+   ],
+   "bep_nen_tranh": [
+    "Chấn",
+    "Ly",
+    "Đoài"
+   ]
+  },
+  "Đoài_Khảm": {
+   "cua": "Đoài",
+   "chu": "Khảm",
+   "du_nien": "Hoạ Hại",
+   "tuong": "Bạch hổ đầu giang",
+   "tom_y": true,
+   "y": "Sách ví như hổ trắng lao xuống sông: nước mài mòn kim, nên đây là nhà rò sức. Cơ nghiệp lùi dần vì rượu chè, cờ bạc, ăn chơi; vật nuôi hay hao; người nữ trẻ trong nhà dễ mệt mỏi. Sách ghi ở càng lâu càng hụt.",
+   "nhom": "C",
+   "chu_de": "tien_bac",
+   "ham_y": "Nên chú ý những khoản tiêu cho cuộc vui: người xưa coi đó là chỗ nhà này rò nhiều nhất.",
+   "viec": "Đặt một hạn mức tiền vui chơi mỗi tháng và ghi lại; khoản để dành thì chuyển đi ngay khi có lương.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Tốn"
+   ],
+   "bep_nen_tranh": [
+    "Ly",
+    "Chấn",
+    "Cấn"
+   ]
+  },
+  "Đoài_Khôn": {
+   "cua": "Đoài",
+   "chu": "Khôn",
+   "du_nien": "Thiên Y",
+   "tuong": "Trạch địa",
+   "tom_y": true,
+   "y": "Đầm nằm trên đất: sách ghi nhà phát về tiền, cả nhà chuộng điều thiện, năng lên chùa. Nhưng cửa và chủ đều mềm, nên nữ nhiều nam ít, chuyện con cái đến chậm; sách còn nói nhà hay có người khác họ về ở chung, tức là nhận con nuôi.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: phúc nhà này dày về của, mỏng về người; mong con thì nên lo sớm.",
+   "viec": "Vợ chồng mong con thì đi khám sớm, đừng chờ; sách khen nhất bếp ở Tây Bắc (Càn) cho nhà này, kế đó là Đông Bắc (Cấn).",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Càn",
+    "Cấn"
+   ],
+   "bep_nen_tranh": [
+    "Ly",
+    "Chấn",
+    "Tốn"
+   ]
+  },
+  "Đoài_Chấn": {
+   "cua": "Đoài",
+   "chu": "Chấn",
+   "du_nien": "Tuyệt Mệnh",
+   "tuong": "Hổ nhập long oa",
+   "tom_y": true,
+   "y": "Sách ví như hổ vào hang rồng, đông tây lẫn lộn. Đây là thế nhà hao sức: người hay mỏi mệt kéo dài, con trai cả và con gái cả cần để ý nhất; vợ chồng, cha con khó thuận, đất đai lùi. Sách gắn với lưng, hông và vùng ngực bụng.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: mệt kéo dài thì đừng cố; người con cả trong nhà cần được san bớt gánh.",
+   "viec": "Ai mệt kéo dài trên hai tuần thì đi khám; nếu được, chuyển phòng ngủ chính về phía Đông Bắc, Tây Nam hoặc Tây Bắc.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Cấn",
+    "Khôn"
+   ],
+   "bep_nen_tranh": [
+    "Ly",
+    "Chấn",
+    "Càn"
+   ]
+  },
+  "Đoài_Tốn": {
+   "cua": "Đoài",
+   "chu": "Tốn",
+   "du_nien": "Lục Sát",
+   "tuong": "Hổ phùng hạn địa",
+   "tom_y": true,
+   "y": "Sách ví như hổ gặp đất hiểm: kim của cửa chém mộc của chủ, hai bên đều mềm, như hai người nữ ở chung mà không hợp. Nhà hay có chuyện giữa chị em, mẹ chồng nàng dâu; người nam dễ hao sức; sách gắn với chứng đau nhức gân xương.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: hai người nữ trong một nhà cần ranh giới rõ, việc ai nấy quyết.",
+   "viec": "Phân rõ bếp núc, chi tiêu ai lo phần nào và viết ra; người hay đau nhức thì đi khám xương khớp, đừng tự uống thuốc lâu ngày.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khảm"
+   ],
+   "bep_nen_tranh": [
+    "Ly",
+    "Chấn",
+    "Khôn"
+   ]
+  },
+  "Đoài_Càn": {
+   "cua": "Đoài",
+   "chu": "Càn",
+   "du_nien": "Sinh Khí",
+   "tuong": "Trạch thiên",
+   "tom_y": true,
+   "y": "Đầm ngửa lên trời: hai kim hợp, đủ cứng mềm, sách ghi đất đai thêm, người đông. Nhưng sách ví cửa và chủ như vợ trẻ chồng già: về lâu việc tiền nong dồn về tay người nữ, đường vợ chồng dễ dang dở, phải làm lại.",
+   "nhom": "C",
+   "chu_de": "tinh_duyen",
+   "ham_y": "Người xưa muốn dặn: lệch nhau nhiều thì càng phải lo xa cho người ở lại, cả về tiền lẫn tình.",
+   "viec": "Hai vợ chồng cùng nắm sổ sách, giấy tờ nhà; sách khen bếp ở Đông Bắc (Cấn) hoặc Tây Nam (Khôn) cho nhà này.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Cấn",
+    "Khôn"
+   ],
+   "bep_nen_tranh": [
+    "Ly",
+    "Chấn"
+   ]
+  },
+  "Đoài_Đoài": {
+   "cua": "Đoài",
+   "chu": "Đoài",
+   "du_nien": "Phục Vị",
+   "tuong": "Trạch trùng",
+   "tom_y": true,
+   "y": "Hai đầm chồng nhau: sách ghi lúc đầu khá về tiền, người nữ trẻ là người cầm trịch trong nhà. Nhưng nhà toàn nét mềm nên về lâu người nam dễ hao sức, nhà thưa người dần. Sách chỉ cách bù: đặt bếp ở phía có nét cứng.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: người nữ giỏi giang là phúc, nhưng nhà vẫn cần người nam khoẻ và có tiếng nói.",
+   "viec": "Nếu dời được bếp, chọn Đông Bắc (Cấn) hoặc Tây Bắc (Càn) như sách chỉ; người nam trong nhà giữ một thói quen vận động đều.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Cấn",
+    "Càn"
+   ],
+   "bep_nen_tranh": [
+    "Ly",
+    "Chấn"
+   ]
+  },
+  "Đoài_Cấn": {
+   "cua": "Đoài",
+   "chu": "Cấn",
+   "du_nien": "Diên Niên",
+   "tuong": "Trạch sơn tăng phúc",
+   "tom_y": true,
+   "y": "Đầm tựa núi, gái trẻ gặp trai trẻ: sách ghi nhà thêm phúc, con thứ và người nhỏ tuổi dễ nên danh; con trai sáng dạ, con gái giỏi giang, cả nhà hiếu thuận, sống lâu, học hành đỗ đạt. Tránh đặt bếp ở Nam (Ly), Đông (Chấn) và Bắc (Khảm).",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khôn",
+    "Càn"
+   ],
+   "bep_nen_tranh": [
+    "Ly",
+    "Chấn",
+    "Khảm"
+   ]
+  },
+  "Đoài_Ly": {
+   "cua": "Đoài",
+   "chu": "Ly",
+   "du_nien": "Ngũ Quỷ",
+   "tuong": "Hổ hoả viêm chung",
+   "tom_y": true,
+   "y": "Sách ví như hổ bị lửa hun: lửa của chủ nung kim của cửa, hai bên đều mềm. Sách xếp đây là thế nhà nặng: người nữ trẻ cần để ý nhất, người nam cũng dễ hao; nhà hay tranh quyền, của cải tiêu tán. Sách gắn với phổi và đường thở.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: nhà này phải giữ sức cho lớp trẻ và giữ bếp lửa cho an toàn.",
+   "viec": "Ai ho kéo dài thì đi khám phổi; không hút thuốc trong nhà, kiểm tra bếp ga, ổ điện; nếu được, dời phòng ngủ chính về phía Đông Bắc, Tây Nam hoặc Tây Bắc.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Cấn",
+    "Khôn"
+   ],
+   "bep_nen_tranh": [
+    "Ly",
+    "Chấn",
+    "Đoài"
+   ]
+  },
+  "Cấn_Khảm": {
+   "cua": "Cấn",
+   "chu": "Khảm",
+   "du_nien": "Ngũ Quỷ",
+   "tuong": "Quỷ ngộ uông dương",
+   "tom_y": true,
+   "y": "Đất của cửa chặn nước của chủ. Sách xếp đây là thế nhà nặng: hay có việc bất ngờ quanh sông nước và lửa, tranh cãi, kiện cáo, mất mát; cha con, anh em khó thuận. Sách gắn thế này với những cơn đau tức ở bụng.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: nhà này cần cẩn thận gấp đôi với nước và lửa, và giữ cho người nhà còn nói chuyện được với nhau.",
+   "viec": "Rào kín ao, bể, giếng; kiểm tra bếp ga, dây điện; trẻ đi bơi phải có người lớn; anh em có việc tiền bạc thì viết ra giấy.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Đoài",
+    "Càn"
+   ],
+   "bep_nen_tranh": [
+    "Khảm",
+    "Tốn",
+    "Cấn"
+   ]
+  },
+  "Cấn_Khôn": {
+   "cua": "Cấn",
+   "chu": "Khôn",
+   "du_nien": "Sinh Khí",
+   "tuong": "Sơn địa",
+   "tom_y": true,
+   "y": "Núi đứng trên đất, hai lớp thổ đủ cứng mềm: sách ghi nhà này đất đai và cơ nghiệp cứ thêm lên, việc học việc làm hanh thông, vợ chồng cùng thọ, người ngày một đông. Điều sách dặn giữ: ở lâu thì để ý bụng dạ của trẻ nhỏ.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Đoài",
+    "Càn"
+   ],
+   "bep_nen_tranh": [
+    "Khảm",
+    "Tốn"
+   ]
+  },
+  "Cấn_Chấn": {
+   "cua": "Cấn",
+   "chu": "Chấn",
+   "du_nien": "Lục Sát",
+   "tuong": "Sơn lôi tương kiến",
+   "tom_y": true,
+   "y": "Núi gặp sấm, trong ngoài chọi nhau. Sách ghi nhà này khó yên, tiền bạc tản, và trẻ nhỏ là người chịu ảnh hưởng nhiều nhất; sách cũng gắn thế này với dạ dày, lá lách. Lúc đầu tuy chật vật nhưng còn đông người, về sau thưa dần.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: nhà có trẻ nhỏ thì người lớn nhịn nhau trước, và để mắt tới bữa ăn, giấc ngủ của trẻ.",
+   "viec": "Cho trẻ ngủ ở phòng yên, xa cửa chính; ăn đúng bữa, khám định kỳ; người lớn không cãi nhau trước mặt trẻ.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Ly"
+   ],
+   "bep_nen_tranh": [
+    "Khảm",
+    "Tốn",
+    "Càn"
+   ]
+  },
+  "Cấn_Tốn": {
+   "cua": "Cấn",
+   "chu": "Tốn",
+   "du_nien": "Tuyệt Mệnh",
+   "tuong": "Sơn ngộ phong môn",
+   "tom_y": true,
+   "y": "Núi gặp cửa gió, gió bào mòn núi. Sách xếp đây là thế nhà hao người: trẻ nhỏ khó nuôi hơn nhà khác, người nữ lớn dễ phải gánh nhà một mình, chuyện con cái đến chậm. Sách gắn thế này với dạ dày, lá lách và các chứng do gió lạnh.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: nhà này phải chăm trẻ nhỏ thật kỹ và đừng để người nữ gánh hết.",
+   "viec": "Chắn gió lùa ở phòng trẻ, giữ ấm chỗ ngủ; trẻ ăn kém, hay ốm thì đi khám sớm; nếu được, dời phòng ngủ chính về phía Tây, Tây Bắc hoặc Tây Nam.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Đoài",
+    "Càn"
+   ],
+   "bep_nen_tranh": [
+    "Khảm",
+    "Tốn",
+    "Khôn"
+   ]
+  },
+  "Cấn_Càn": {
+   "cua": "Cấn",
+   "chu": "Càn",
+   "du_nien": "Thiên Y",
+   "tuong": "Sơn khởi thiên trung",
+   "tom_y": true,
+   "y": "Sách ví như núi dựng giữa trời: nhà hiền, ưa làm phúc, con cái nên người, phát nhanh, người nam khoẻ lâu. Nhưng cửa và chủ đều cứng, nên về sau người nữ và trẻ nhỏ dễ chịu thiệt, nhà thưa người. Sách xếp vào loại tốt hạng nhì.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: phúc nhà này nghiêng về người nam; cần chủ động bù cho người nữ và con trẻ.",
+   "viec": "Sách khen bếp ở Tây (Đoài) hoặc Tây Nam (Khôn); phòng của người nữ và trẻ nhỏ nên là phòng có nắng sáng.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Đoài",
+    "Khôn"
+   ],
+   "bep_nen_tranh": [
+    "Khảm",
+    "Tốn",
+    "Chấn"
+   ]
+  },
+  "Cấn_Đoài": {
+   "cua": "Cấn",
+   "chu": "Đoài",
+   "du_nien": "Diên Niên",
+   "tuong": "Sơn trạch",
+   "tom_y": true,
+   "y": "Núi ôm đầm, trai trẻ gặp gái trẻ, ngoài nuôi vào trong: sách ghi nhà này đông người, giàu và có danh, phát nhanh, hay gặp của đến bất ngờ. Với nhóm nhà phía Tây, sách xếp thế này vào hàng đầu. Chỉ dặn tránh bếp ở Bắc (Khảm), Đông Nam (Tốn) và Nam (Ly).",
+   "nhom": "A",
+   "chu_de": "tien_bac",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Càn",
+    "Khôn"
+   ],
+   "bep_nen_tranh": [
+    "Khảm",
+    "Tốn",
+    "Ly"
+   ]
+  },
+  "Cấn_Cấn": {
+   "cua": "Cấn",
+   "chu": "Cấn",
+   "du_nien": "Phục Vị",
+   "tuong": "Trùng trùng điệp điệp",
+   "tom_y": true,
+   "y": "Núi chồng lên núi, hai lớp đất gộp một ruộng: sách ghi những năm đầu rất thuận tiền bạc. Nhưng nhà toàn nét cứng, nên về lâu người vợ và con nhỏ là người chịu thiệt, nhà cứ thưa dần như chợ sau buổi họp.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: có của mà vắng tiếng trẻ, vắng bàn tay người nữ thì nhà khó ấm.",
+   "viec": "Sách khen nhất bếp ở Tây (Đoài) cho nhà này; dành góc sáng, ấm nhất nhà làm chỗ cả nhà ngồi chung mỗi tối.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Đoài",
+    "Khôn"
+   ],
+   "bep_nen_tranh": [
+    "Khảm",
+    "Tốn"
+   ]
+  },
+  "Cấn_Ly": {
+   "cua": "Cấn",
+   "chu": "Ly",
+   "du_nien": "Hoạ Hại",
+   "tuong": "Sơn phùng hoả",
+   "tom_y": true,
+   "y": "Sách ví như núi gặp lửa, đất bị nung khô. Nhà này người nữ thường cứng cỏi, người nam nhún nhường, nên dễ sinh cãi vã, bên trọng bên khinh trong chuyện tình cảm. Ở lâu thì chuyện con cái đến chậm, người nữ nên để ý kinh nguyệt.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: trong nhà ai cũng cần được nghe; cứng quá hay nhịn quá đều làm nhà khô đi.",
+   "viec": "Hẹn một buổi mỗi tuần để vợ chồng nói điều chưa vừa lòng, người này nói xong mới tới người kia; người nữ khám phụ khoa định kỳ.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Chấn"
+   ],
+   "bep_nen_tranh": [
+    "Khảm",
+    "Tốn",
+    "Đoài"
+   ]
+  },
+  "Ly_Khảm": {
+   "cua": "Ly",
+   "chu": "Khảm",
+   "du_nien": "Diên Niên",
+   "tuong": "Âm dương chính phối",
+   "tom_y": true,
+   "y": "Sách gọi là cứng mềm phối đúng đôi: con gái giữa gặp con trai giữa, ngang vai nên thành cuộc giàu sang, đủ phúc, lộc và sức bền, con cháu đầy nhà. Điều sách dặn giữ: ở lâu thì người vợ dễ mệt, sách gắn với tim, bụng và mắt.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: đôi xứng nhau vẫn là nước với lửa; nhường nhau một nhịp thì bền.",
+   "viec": "Sách khen nhất bếp ở Đông Nam (Tốn) cho nhà này; người vợ khám tim mạch và mắt định kỳ.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Tốn",
+    "Chấn"
+   ],
+   "bep_nen_tranh": [
+    "Đoài",
+    "Càn",
+    "Cấn"
+   ]
+  },
+  "Ly_Khôn": {
+   "cua": "Ly",
+   "chu": "Khôn",
+   "du_nien": "Lục Sát",
+   "tuong": "Hoả đáo nhân môn",
+   "tom_y": true,
+   "y": "Lửa tới cửa người: lửa nung đất khô, nên trông như nuôi mà thực không nuôi. Lúc đầu vẫn có tiền, về sau chững lại; nhà toàn nét mềm nên khó thêm người, người nam dễ hao sức, người nữ dễ phải lo nhà một mình.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: thấy thuận trước mắt thì chưa vội mừng; lo giữ người trước khi lo thêm của.",
+   "viec": "Người nam trong nhà khám sức khoẻ mỗi năm; nếu được, dời phòng ngủ chính về phía Đông, Bắc hoặc Đông Nam.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Chấn"
+   ],
+   "bep_nen_tranh": [
+    "Đoài",
+    "Càn",
+    "Tốn"
+   ]
+  },
+  "Ly_Chấn": {
+   "cua": "Ly",
+   "chu": "Chấn",
+   "du_nien": "Sinh Khí",
+   "tuong": "Hoả lôi phát phúc",
+   "tom_y": true,
+   "y": "Lửa gặp sấm, gỗ nuôi lửa sáng: sách xếp đây là nhà đại phát cả của lẫn danh, con trai sáng dạ, con gái giỏi, thi cử thuận, người nữ hiền. Sách gọi là đất bằng nổi một tiếng sấm: người đang khó bỗng nên. Tránh bếp ở Tây (Đoài) và Tây Bắc (Càn).",
+   "nhom": "A",
+   "chu_de": "cong_viec",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khảm",
+    "Tốn"
+   ],
+   "bep_nen_tranh": [
+    "Đoài",
+    "Càn"
+   ]
+  },
+  "Ly_Tốn": {
+   "cua": "Ly",
+   "chu": "Tốn",
+   "du_nien": "Thiên Y",
+   "tuong": "Hoả phong",
+   "tom_y": true,
+   "y": "Lửa gặp gió: sách ghi nhà giàu và có danh, trai gái đều nhân hậu, biết lễ, người nữ quán xuyến. Lúc đầu phát mạnh; nhưng cửa và chủ đều mềm nên nhà ít người, về lâu chuyện con cái thưa, có khi con nuôi là người giữ nhà.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: nhà hiền, đủ của mà vắng người; nên lo chuyện con cái sớm.",
+   "viec": "Sách khen bếp ở Đông (Chấn) hoặc Bắc (Khảm); vợ chồng mong con thì đi khám sớm.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Chấn",
+    "Khảm"
+   ],
+   "bep_nen_tranh": [
+    "Đoài",
+    "Càn",
+    "Khôn"
+   ]
+  },
+  "Ly_Càn": {
+   "cua": "Ly",
+   "chu": "Càn",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Lửa của cửa nung kim của chủ. Sách xếp đây là thế nhà hao: người cha, người ông cần giữ sức nhất; của cải tản, nhà nữ nhiều nam ít, người nữ cầm trịch. Sách gắn thế này với mắt, đầu và những cơn ho do nóng trong.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: chăm người đàn ông lớn tuổi trong nhà như chăm cái cột cái.",
+   "viec": "Đưa cha, ông đi khám định kỳ, đo huyết áp đều; phòng của ông nên mát, thoáng, tránh nắng gắt buổi chiều.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khôn",
+    "Cấn"
+   ],
+   "bep_nen_tranh": [
+    "Đoài",
+    "Càn",
+    "Chấn"
+   ]
+  },
+  "Ly_Đoài": {
+   "cua": "Ly",
+   "chu": "Đoài",
+   "du_nien": "Ngũ Quỷ",
+   "tuong": "Ly Đoài hoả quang",
+   "tom_y": true,
+   "y": "Lửa của cửa nung kim của chủ. Sách xếp đây là thế nhà nặng, đặc biệt dặn chuyện lửa; con gái út và người nữ trẻ cần để ý nhất. Nhà hao của, dễ mất mát, gái nhiều trai ít, hay bị người ngoài lấn lướt; sách gắn với phổi, họng.",
+   "nhom": "C",
+   "chu_de": "nha_cua",
+   "ham_y": "Người xưa muốn dặn: cẩn thận lửa trước hết, rồi tới giữ sức cho lớp nữ trẻ trong nhà.",
+   "viec": "Kiểm tra bếp ga, dây điện, ổ sạc; không sạc xe điện qua đêm trong nhà; cả nhà biết chỗ cắt cầu dao; ai ho lâu thì đi khám.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Cấn",
+    "Khôn"
+   ],
+   "bep_nen_tranh": [
+    "Đoài",
+    "Càn",
+    "Ly"
+   ]
+  },
+  "Ly_Cấn": {
+   "cua": "Ly",
+   "chu": "Cấn",
+   "du_nien": "Hoạ Hại",
+   "tuong": "Hoả sơn",
+   "tom_y": true,
+   "y": "Lửa trên núi, đất bị nung khô: sách ghi thời gian đầu nhà vẫn phát cả của lẫn danh vì ngoài nuôi vào trong. Nhưng người nữ trong nhà cứng cỏi, hay lấn quyền, tiếng to tiếng nhỏ vang ra ngoài; ở lâu nhà khó thêm người, người nữ nên để ý kinh nguyệt.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: nhà phát mà ồn thì phúc mau tản; chuyện trong nhà nên đóng cửa bảo nhau.",
+   "viec": "Đặt lệ không to tiếng sau chín giờ tối, chuyện bất đồng để hôm sau nói; người nữ khám phụ khoa định kỳ.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khôn"
+   ],
+   "bep_nen_tranh": [
+    "Đoài",
+    "Càn",
+    "Khảm"
+   ]
+  },
+  "Ly_Ly": {
+   "cua": "Ly",
+   "chu": "Ly",
+   "du_nien": "Phục Vị",
+   "tuong": "Hoả diệm trùng trùng",
+   "tom_y": true,
+   "y": "Lửa chồng lên lửa, sáng rực: sách ghi lúc đầu có tiền, nhưng không giàu lớn. Hai lửa đều thuộc nét mềm nên nhà khó thêm người, người nam dễ hao sức; ở lâu thì chuyện con cái đến chậm, có khi phải nhận con nuôi.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: lửa sáng nhanh cũng tàn nhanh; nhà này cần thêm nước và thêm người.",
+   "viec": "Sách khen nhất bếp ở Bắc (Khảm), kế đó là Đông (Chấn); mong con thì đi khám sớm, đừng thức khuya kéo dài.",
+   "nguon": "duong_trach_tam_yeu",
+   "bep_hop": [
+    "Khảm",
+    "Chấn"
+   ],
+   "bep_nen_tranh": [
+    "Đoài",
+    "Càn"
+   ]
+  }
+ },
+ "bep": {
+  "Khảm_Khảm": {
+   "bep": "Khảm",
+   "cua": "Khảm",
+   "du_nien": "Phục Vị",
+   "tom_y": true,
+   "y": "Hai nước hợp nhau: sách ghi lúc đầu tiền của và cơ nghiệp rất thuận. Vì toàn nét cứng, về lâu nhà thưa người, cả nam lẫn nữ chóng mệt; sách gắn với chứng phù, đường tiết niệu và thai sản.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: bếp nhiều nước thì lạnh, phải giữ ấm và giữ khô.",
+   "viec": "Giữ bếp khô ráo, không để nước đọng; ai hay phù chân, tiểu khó thì đi khám thận; thai phụ khám đúng hẹn.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khảm_Khôn": {
+   "bep": "Khảm",
+   "cua": "Khôn",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Cửa Khôn lấn bếp Khảm, ngoài lấn vào trong: việc không hay đến nhanh và nặng, nhất là với con trai giữa. Sách gắn với tai, họng, chứng phù, kinh nguyệt không đều và sức yếu kéo dài.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời sớm, và đừng coi nhẹ những chứng mệt kéo dài.",
+   "viec": "Với cửa Khôn, bếp nên ở Tây Bắc, Tây hoặc Đông Bắc; ai phù, ù tai, mệt lâu ngày thì đi khám.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khảm_Chấn": {
+   "bep": "Khảm",
+   "cua": "Chấn",
+   "du_nien": "Thiên Y",
+   "tom_y": true,
+   "y": "Nước nuôi gỗ: sách ghi đây là bếp của nhà giàu sang bậc cao, nhà êm, phúc lộc thịnh, con cháu tài trí. Vì bếp và cửa đều cứng, về lâu người nữ dễ hao sức, nhà khó thêm người.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: được bếp tốt thì nhớ bù cho người nữ trong nhà.",
+   "viec": "Giảm bớt việc bếp núc cho người nữ; cả nhà chia nhau rửa dọn sau bữa.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khảm_Tốn": {
+   "bep": "Khảm",
+   "cua": "Tốn",
+   "du_nien": "Sinh Khí",
+   "tom_y": true,
+   "y": "Nước nuôi gỗ, cứng mềm đúng đôi: sách gọi là bếp rất tốt. Con trai giỏi giang, con gái tài sắc, ruộng nương và tiền của đều dày, thi cử đỗ liền, con hiếu cháu hiền, vật nuôi thịnh.",
+   "nhom": "A",
+   "chu_de": "cong_viec",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khảm_Càn": {
+   "bep": "Khảm",
+   "cua": "Càn",
+   "du_nien": "Lục Sát",
+   "tom_y": true,
+   "y": "Nước nhiều lại được kim tiếp thêm thành quá mức: sách ghi người cha dễ kiệt sức, con trai giữa dễ sa vào chuyện trai gái, người nữ hao sức quanh thai sản; trong nhà lộn xộn, thiếu sạch sẽ.",
+   "nhom": "C",
+   "chu_de": "tinh_duyen",
+   "ham_y": "Người xưa muốn dặn: cái gì quá cũng hại; giữ chừng mực trong ăn chơi và tình cảm.",
+   "viec": "Dọn bếp sạch, khô sau mỗi bữa; người cha ngủ trước mười một giờ; chuyện tình cảm của con thì cha mẹ trò chuyện sớm.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khảm_Đoài": {
+   "bep": "Khảm",
+   "cua": "Đoài",
+   "du_nien": "Hoạ Hại",
+   "tom_y": true,
+   "y": "Cửa Đoài rút sức bếp Khảm: con trai giữa là người chịu thiệt. Sách ghi con cháu khó khá, thai sản cần giữ kỹ; nhà dễ hao của, kiện cáo, mất mát và có chuyện hẹn hò lén lút.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: giữ thai, giữ con, giữ nếp; ba thứ ấy bếp này dễ làm hao.",
+   "viec": "Thai phụ khám đúng hẹn, nghỉ đủ; con đi đâu, với ai thì cha mẹ biết, trò chuyện chứ không cấm đoán.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khảm_Cấn": {
+   "bep": "Khảm",
+   "cua": "Cấn",
+   "du_nien": "Ngũ Quỷ",
+   "tom_y": true,
+   "y": "Cửa Cấn chặn bếp Khảm, ngoài lấn vào trong: sách xếp loại bếp nặng. Con trai giữa và trẻ nhỏ cần để ý sức khoẻ; anh em dễ chia lìa, vợ chồng dễ xa nhau; hay có chuyện nước, lửa, mất mát, việc quan.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời; chưa dời thì giữ hoà khí và giữ an toàn nước, lửa.",
+   "viec": "Với cửa Cấn, bếp nên ở Tây, Tây Bắc hoặc Tây Nam; che kín bể nước, khoá van ga sau khi nấu.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khảm_Ly": {
+   "bep": "Khảm",
+   "cua": "Ly",
+   "du_nien": "Diên Niên",
+   "tom_y": true,
+   "y": "Nước gặp lửa mà đúng đôi: sách ghi nhà có của có danh, người thêm rất đông, có thành không có bại. Vì nước vẫn lấn lửa, về lâu con gái giữa hoặc người vợ cần để ý tim và mắt.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: bếp tốt vẫn có một chỗ chọi; để ý sớm thì không sao.",
+   "viec": "Người nữ trung niên trong nhà khám tim mạch và mắt định kỳ; bếp đủ sáng, không nấu trong khói.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khôn_Khảm": {
+   "bep": "Khôn",
+   "cua": "Khảm",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Bếp Khôn lấn cửa Khảm: con trai giữa chịu thiệt, mẹ già cũng yếu. Sách gắn với chứng phù, bụng trướng, kinh nguyệt chậm, thai sản, tai và người gầy khô; cả nam lẫn nữ đều xơ xác, trẻ nhỏ khó chăm.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời sớm; trong nhà ai yếu thì đi khám, đừng chờ.",
+   "viec": "Với cửa Khảm, bếp nên ở Đông Nam, Nam hoặc Đông; cả nhà khám tổng quát mỗi năm, trẻ nhỏ theo dõi cân nặng.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khôn_Khôn": {
+   "bep": "Khôn",
+   "cua": "Khôn",
+   "du_nien": "Phục Vị",
+   "tom_y": true,
+   "y": "Hai lớp đất hợp nhau sinh kim: sách ghi tiền của chất đầy, dư dả; chăn nuôi, đồng áng, nghề dệt đều khá. Nhưng toàn nét mềm nên nữ nhiều nam ít, mẹ già cầm trịch, chuyện con cái thưa.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: của nhiều mà vắng người nam thì mẹ già vất vả.",
+   "viec": "San bớt việc quyết định cho con cháu; với cửa Khôn, bếp ở Tây Bắc (Càn) hoặc Đông Bắc (Cấn) thì bù được phần cứng.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khôn_Chấn": {
+   "bep": "Khôn",
+   "cua": "Chấn",
+   "du_nien": "Hoạ Hại",
+   "tom_y": true,
+   "y": "Cửa Chấn chèn bếp Khôn, ngoài lấn vào trong: người mẹ già chịu thiệt chính. Con cả dễ cãi mẹ, lấn em, sa vào cờ bạc; sách gắn với họng, dạ dày đầy trướng và da vàng ở người nữ.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: người con cả giữ lễ với mẹ, giữ tay với tiền.",
+   "viec": "Con cả không giữ tiền chung một mình, khoản chung nào cũng hai người cùng ký; mẹ già khám tiêu hoá định kỳ.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khôn_Tốn": {
+   "bep": "Khôn",
+   "cua": "Tốn",
+   "du_nien": "Ngũ Quỷ",
+   "tom_y": true,
+   "y": "Cửa Tốn khoét bếp Khôn: sách xếp loại bếp rất dữ, thiệt nhất là mẹ già; toàn nét mềm nên người nam dễ hao sức, bà cháu khó hợp, nhà như không có người làm chủ. Sách gắn với nghẹn, nấc, phù và bụng trướng.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: gặp bếp này thì dời; nhà cần một người đứng ra quyết và chăm mẹ già.",
+   "viec": "Với cửa Tốn, bếp nên ở Bắc, Đông hoặc Nam; mẹ già nuốt nghẹn, phù chân thì đi khám ngay.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khôn_Càn": {
+   "bep": "Khôn",
+   "cua": "Càn",
+   "du_nien": "Diên Niên",
+   "tom_y": true,
+   "y": "Đất nuôi kim, cứng mềm đủ đôi: sách gọi là bếp rất tốt, rất lợi. Của cải thịnh, con gái thanh tú; người làm quan thì thêm chức lộc, người thường thì nhà thêm người, thêm của.",
+   "nhom": "A",
+   "chu_de": "tien_bac",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khôn_Đoài": {
+   "bep": "Khôn",
+   "cua": "Đoài",
+   "du_nien": "Thiên Y",
+   "tom_y": true,
+   "y": "Đất nuôi kim: sách ghi tiền và cơ nghiệp tiến, trai gái đều nhân hậu, hiếu nghĩa. Nhưng mẹ và con gái út ở chung, toàn nét mềm: người nữ nắm nhà, chồng con dễ chịu thiệt; lúc đầu phát lớn, về sau kém.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: người nữ nắm nhà thì nhớ nâng chồng con lên cùng.",
+   "viec": "Việc lớn hỏi ý chồng con trước khi quyết; khen con trai, con rể một điều cụ thể mỗi tuần.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khôn_Cấn": {
+   "bep": "Khôn",
+   "cua": "Cấn",
+   "du_nien": "Sinh Khí",
+   "tom_y": true,
+   "y": "Hai lớp đất đủ cứng mềm đắp thành bờ luỹ, mẹ gặp con trai út: mẹ hiền con kính, nhà gom được nhiều tiền và của quý. Sách nhắc: lúc đầu thịnh, quãng giữa chững, dùng lâu thì kém dần.",
+   "nhom": "B",
+   "chu_de": "tien_bac",
+   "ham_y": "Nên chú ý giữ của lúc đang thịnh: người xưa thấy bếp này mạnh ở đoạn đầu.",
+   "viec": "Trích một phần cố định để dành ngay khi có thu nhập; mỗi năm soát lại nhà cửa, sửa chỗ hỏng nhỏ.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Khôn_Ly": {
+   "bep": "Khôn",
+   "cua": "Ly",
+   "du_nien": "Lục Sát",
+   "tom_y": true,
+   "y": "Lửa của cửa nung đất của bếp khô rang, toàn nét mềm: người nam hao sức, nhà thưa con. Con gái giữa nên để ý tim, mắt, kinh nguyệt; mẹ già để ý chứng phù. Sách còn ghi trai gái trong nhà hay bỏ đi xa.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: giữ người ở lại bằng hơi ấm, không phải bằng lời trách.",
+   "viec": "Người nữ khám phụ khoa, tim mạch định kỳ; con đi xa thì hẹn giờ gọi về mỗi tuần.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Chấn_Khảm": {
+   "bep": "Chấn",
+   "cua": "Khảm",
+   "du_nien": "Thiên Y",
+   "tom_y": true,
+   "y": "Cửa Khảm nuôi vào bếp Chấn: may mắn đến nhanh, nhà êm, tiền và đất đều tốt, lúc đầu giàu sang lớn. Vì bếp và cửa đều cứng, dùng lâu thì bớt dần, con cháu thưa, người nữ chịu thiệt.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: hưởng lúc đầu thì lo cho lúc sau, nhất là phần người nữ.",
+   "viec": "Để dành một phần cố định lúc đang thuận; người nữ trong nhà được quyết những việc liên quan tới mình.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Chấn_Khôn": {
+   "bep": "Chấn",
+   "cua": "Khôn",
+   "du_nien": "Hoạ Hại",
+   "tom_y": true,
+   "y": "Bếp Chấn chèn cửa Khôn: trước thiệt người mẹ già, sau tới con cháu nhánh trưởng; mẹ con khó hoà. Sách gắn với người gầy, da kém sắc, họng và thai sản; nhà dễ mang tiếng, người, vật nuôi, đất đai đều lùi.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: giữ sức cho mẹ và giữ lời với mẹ.",
+   "viec": "Mẹ già sụt cân, ăn kém thì đưa đi khám; con cả mỗi tuần ngồi ăn với mẹ một bữa, không cãi.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Chấn_Chấn": {
+   "bep": "Chấn",
+   "cua": "Chấn",
+   "du_nien": "Phục Vị",
+   "tom_y": true,
+   "y": "Hai cây cùng mọc: sách ghi tiền dư dả, đường công danh thuận, việc lớn nhỏ đều do con trai cả đứng ra. Nhưng lớp lớn phát thì lớp nhỏ kém; gỗ mạnh lấn đất nên người nữ chóng mệt, trẻ nhỏ khó chăm, con cái bướng.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: người anh cả gánh giỏi thì cũng phải để phần cho em út.",
+   "viec": "Giao cho con thứ, con út một việc có trách nhiệm thật; trẻ chậm nghe, chậm nói thì cho đi khám sớm.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Chấn_Tốn": {
+   "bep": "Chấn",
+   "cua": "Tốn",
+   "du_nien": "Diên Niên",
+   "tom_y": true,
+   "y": "Hai gỗ thành rừng, cứng mềm hợp ý: sách gọi là bếp Đông được ngôi. Có của có danh, đất đai tiến, con trai cả và con gái cả thuận nhau, con cháu hiển đạt, thi đỗ liền, anh em cùng phát.",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Chấn_Càn": {
+   "bep": "Chấn",
+   "cua": "Càn",
+   "du_nien": "Ngũ Quỷ",
+   "tom_y": true,
+   "y": "Cửa Càn chém vào bếp Chấn: con cháu nhánh trưởng, người vợ cả và người cha đều chịu thiệt. Sách gắn với họng, hen, gân xương; nhà dễ mất mát, bị việc quan làm khó, chuyện không hay nối nhau.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: gặp bếp này thì dời; và làm gì cũng giữ đúng phép.",
+   "viec": "Với cửa Càn, bếp nên ở Tây Nam, Đông Bắc hoặc Tây; giấy tờ nhà đất, thuế má để gọn một chỗ; ai hen, khó thở thì đi khám.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Chấn_Đoài": {
+   "bep": "Chấn",
+   "cua": "Đoài",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Gỗ và kim chọi nhau: sách xếp loại bếp rất nặng. Con cháu nhánh trưởng, con gái cả, con dâu cả chịu thiệt; người và của cùng sa sút. Sách gắn với tức ngực, đau hông, lưng và tê tay chân.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời sớm; người con cả đừng gắng quá sức.",
+   "viec": "Với cửa Đoài, bếp nên ở Đông Bắc, Tây Nam hoặc Tây Bắc; ai tê tay chân, tức ngực thì đi khám, không để lâu.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Chấn_Cấn": {
+   "bep": "Chấn",
+   "cua": "Cấn",
+   "du_nien": "Lục Sát",
+   "tom_y": true,
+   "y": "Bếp Chấn chèn cửa Cấn: con trai út chịu thiệt, anh em khó hoà. Sách gắn với ngoài da, đầy hơi, ăn kém, kinh nguyệt tắc và sinh nở khó; nhà dễ mang tiếng vì việc mờ ám, vật nuôi hao.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: anh nhường em một bước; ăn uống, sinh nở đều phải cẩn thận.",
+   "viec": "Ai đầy hơi, ăn kém kéo dài thì đi khám tiêu hoá; thai phụ sinh ở cơ sở y tế; việc làm ăn giữ sổ sách rõ ràng.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Chấn_Ly": {
+   "bep": "Chấn",
+   "cua": "Ly",
+   "du_nien": "Sinh Khí",
+   "tom_y": true,
+   "y": "Gỗ nuôi lửa sáng: sách xếp đây là bếp tốt bậc nhất của nhóm phía Đông, ví như rồng xanh vào nhà. Người nữ làm nên nhà, đất đai thêm, người nào cũng thanh tú, có tài, đỗ đạt nối nhau.",
+   "nhom": "A",
+   "chu_de": "cong_viec",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Tốn_Khảm": {
+   "bep": "Tốn",
+   "cua": "Khảm",
+   "du_nien": "Sinh Khí",
+   "tom_y": true,
+   "y": "Cửa Khảm nuôi vào bếp Tốn, cứng mềm hợp ý: sách ví như rồng xanh vào nhà, gọi là bếp tốt mọi mặt và tốt lớn. Con cháu vẻ vang, trước sau đều có của, vợ hiền con hiếu, nhà thuận.",
+   "nhom": "A",
+   "chu_de": "cong_viec",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Tốn_Khôn": {
+   "bep": "Tốn",
+   "cua": "Khôn",
+   "du_nien": "Ngũ Quỷ",
+   "tom_y": true,
+   "y": "Bếp Tốn khoét cửa Khôn: mẹ già chịu thiệt, con dâu cả sinh nở khó; hao người tốn của, nhà hay có chuyện lạ, việc quan và miệng tiếng quấy rầy. Sách gắn với dạ dày, lá lách, chứng phù và nghẹn họng.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: gặp bếp này thì dời; giữ sức cho mẹ già và sản phụ.",
+   "viec": "Với cửa Khôn, bếp nên ở Tây Bắc, Tây hoặc Đông Bắc; mẹ già và thai phụ khám đúng lịch.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Tốn_Chấn": {
+   "bep": "Tốn",
+   "cua": "Chấn",
+   "du_nien": "Diên Niên",
+   "tom_y": true,
+   "y": "Hai gỗ thành rừng, cứng mềm hợp ý: sách ghi bếp này rất tươi tốt, người và của cùng phát, có danh có lợi; trong khoảng sáu năm là thấy điều lành. Sách dặn đừng coi kim chém gỗ ở đây là xấu.",
+   "nhom": "A",
+   "chu_de": "tien_bac",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Tốn_Tốn": {
+   "bep": "Tốn",
+   "cua": "Tốn",
+   "du_nien": "Phục Vị",
+   "tom_y": true,
+   "y": "Hai gỗ gặp nhau sinh vượng: sách ghi người nữ rất đảm, gây dựng được cơ nghiệp. Vì toàn nét mềm nên khó lên mãi, người nam dễ hao sức, nhà thưa dần tới mức lẻ loi; sách gắn với chứng tê và gió lạnh.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: người nữ giỏi thì người nam càng phải giữ sức.",
+   "viec": "Người nam khám sức khoẻ mỗi năm; chắn gió lùa ở bếp và chỗ ngủ; với cửa Tốn, bếp ở Bắc, Đông hoặc Nam thì hơn.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Tốn_Càn": {
+   "bep": "Tốn",
+   "cua": "Càn",
+   "du_nien": "Hoạ Hại",
+   "tom_y": true,
+   "y": "Cửa Càn chém vào bếp Tốn, ngoài lấn vào trong nên việc đến bất ngờ. Người nữ lớn trong nhà chịu thiệt; hại cả người lẫn tài. Sách gắn với tê, đau gân xương do khí huyết kém thông, méo miệng, và chuyện giấy tờ.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: người nữ lớn trong nhà cần giữ ấm, vận động; giấy tờ làm cho kỹ.",
+   "viec": "Tập đi bộ, giãn cơ mỗi ngày; thấy tê nửa người, méo miệng thì gọi cấp cứu và đi khám ngay.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Tốn_Đoài": {
+   "bep": "Tốn",
+   "cua": "Đoài",
+   "du_nien": "Lục Sát",
+   "tom_y": true,
+   "y": "Hai nét mềm chọi nhau: người nữ trong nhà chịu thiệt, người nam dễ hao sức, người lớn tản đi, trẻ nhỏ hay đầy tức bụng. Sách ghi bếp này làm nhà thưa người; gắn với gân xương và sức yếu sau sinh.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời; sản phụ phải được nghỉ đủ.",
+   "viec": "Người mới sinh được nghỉ trọn ít nhất một tháng, khám lại sau sinh; với cửa Đoài, bếp nên ở Đông Bắc, Tây Nam hoặc Tây Bắc.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Tốn_Cấn": {
+   "bep": "Tốn",
+   "cua": "Cấn",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Bếp Tốn lấn cửa Cấn: con trai út chịu thiệt, người nữ lớn dễ gặp khó khi mang thai; người nữ cầm quyền trong nhà. Sách gắn với da kém sắc, đau bụng, táo, tê; lại hay có chuyện lửa, mất mát, việc quan.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời sớm; trông trẻ nhỏ và thai phụ cho kỹ.",
+   "viec": "Với cửa Cấn, bếp nên ở Tây, Tây Bắc hoặc Tây Nam; thai phụ khám đúng hẹn; khoá ga, tắt bếp trước khi rời nhà.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Tốn_Ly": {
+   "bep": "Tốn",
+   "cua": "Ly",
+   "du_nien": "Thiên Y",
+   "tom_y": true,
+   "y": "Gỗ nuôi lửa sáng: sách ghi người nữ sáng suốt, khéo dựng nhà dựng cửa; nhà trọn nghĩa, hay làm việc thiện, tiền, vải, thóc đều đầy. Chỉ hiềm hai nữ một nhà, toàn nét mềm, nên người nam dễ yếu, con cái thưa.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: của đủ rồi thì lo người.",
+   "viec": "Mong con thì vợ chồng đi khám sớm; người nam trong nhà giữ giờ ngủ và vận động đều.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Càn_Khảm": {
+   "bep": "Càn",
+   "cua": "Khảm",
+   "du_nien": "Lục Sát",
+   "tom_y": true,
+   "y": "Bếp Càn với cửa Khảm đều cứng, kim bị nước rút sức. Sách ghi người đàn ông lớn tuổi và người nữ dễ hao sức, trẻ nhỏ khó chăm, cha con dễ xa nhau; gắn với bụng, đường tiêu hoá, và khuyên dời bếp.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời sớm; trong lúc chưa dời thì ăn uống sạch và điều độ.",
+   "viec": "Ăn chín uống sôi, rửa tay trước bữa; ai đau bụng, đi ngoài kéo dài thì đi khám; với cửa Khảm, bếp nên ở Đông Nam, Nam hoặc Đông.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Càn_Khôn": {
+   "bep": "Càn",
+   "cua": "Khôn",
+   "du_nien": "Diên Niên",
+   "tom_y": true,
+   "y": "Cửa Khôn nuôi vào bếp Càn, cứng mềm đúng đôi: sách gọi là bếp tốt không gì hơn. Trên dưới thuận hoà, có nghĩa; cơ nghiệp đầy, người thêm, vật nuôi tốt; chừng bốn năm năm thì phát rõ, cha mẹ cùng khoẻ lâu.",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Càn_Chấn": {
+   "bep": "Càn",
+   "cua": "Chấn",
+   "du_nien": "Ngũ Quỷ",
+   "tom_y": true,
+   "y": "Bếp Càn chém cửa Chấn: sách xếp vào loại bếp nặng nhất. Cha con dễ bất hoà, con cả cháu cả cần để ý; nhà dễ mất mát, vướng việc quan; sách gắn với họng, phổi, gân xương, chừng bốn năm năm là thấy.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: gặp bếp này thì dời, đừng chần chừ.",
+   "viec": "Với cửa Chấn, bếp nên ở Nam, Đông Nam hoặc Bắc; chưa dời được thì ai ho kéo dài, tức ngực phải đi khám ngay.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Càn_Tốn": {
+   "bep": "Càn",
+   "cua": "Tốn",
+   "du_nien": "Hoạ Hại",
+   "tom_y": true,
+   "y": "Kim và gỗ chọi nhau: sách ghi người nữ lớn trong nhà dễ hao sức quanh chuyện sinh nở; người nhà hay tức ngực, đau hông; người cha dễ sa vào chuyện tình cảm ngoài luồng, nếp nhà lỏng.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: giữ sức cho người nữ lớn và giữ nếp cho người cha.",
+   "viec": "Thai phụ trong nhà khám đúng hẹn, không bê vác nặng; chuyện tình cảm thì vợ chồng nói thẳng với nhau sớm.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Càn_Càn": {
+   "bep": "Càn",
+   "cua": "Càn",
+   "du_nien": "Phục Vị",
+   "tom_y": true,
+   "y": "Bếp và cửa cùng ở Càn: sách ghi tiền của, cơ nghiệp lên nhanh. Nhưng toàn nét cứng nên vợ con dễ chịu thiệt, đường vợ chồng dễ phải làm lại; con trai cả, con gái cả cần được để ý.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: bếp này được của mà thiếu ấm; nên bù bằng sự chăm sóc vợ con.",
+   "viec": "Người nam trong nhà vào bếp nấu ít nhất hai bữa mỗi tuần; nếu dời được bếp thì chọn phía Tây Nam, Đông Bắc hoặc Tây.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Càn_Đoài": {
+   "bep": "Càn",
+   "cua": "Đoài",
+   "du_nien": "Sinh Khí",
+   "tom_y": true,
+   "y": "Hai kim hợp nhau sinh vượng: sách ghi tiền đầy rương, thóc đầy kho, con cháu sáng dạ, người nữ đẹp. Điều sách nhắc: người cha dễ thiên vị vợ bé, lơ là người vợ cả.",
+   "nhom": "B",
+   "chu_de": "tinh_duyen",
+   "ham_y": "Nên chú ý sự công bằng trong tình cảm: người xưa coi thiên vị là chỗ nhà này dễ nứt.",
+   "viec": "Việc lớn, tiền lớn đều bàn với người bạn đời chính thức trước khi quyết.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Càn_Cấn": {
+   "bep": "Càn",
+   "cua": "Cấn",
+   "du_nien": "Thiên Y",
+   "tom_y": true,
+   "y": "Kim gặp đất nuôi: sách ghi vườn ruộng, của cải tốt, công danh rạng, cha hiền con thảo, trai gái đều ưa việc lành. Vì bếp và cửa đều cứng, về lâu người nữ dễ hao sức, chuyện con cái thưa.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: bếp tốt cho của và nết, nhưng cần bù cho người nữ.",
+   "viec": "Để người nữ trong nhà có giờ nghỉ cố định mỗi ngày; mong con thì vợ chồng đi khám sớm.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Càn_Ly": {
+   "bep": "Càn",
+   "cua": "Ly",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Lửa của cửa đốt vào bếp Càn: sách ghi trong nhà hay hoảng. Người cha, người ông dễ ho kéo dài; con gái giữa cần cẩn thận lúc sinh nở; hay có chuyện lửa, giấy tờ, mất mát; sách gắn với tim và mắt.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: bếp này phải cẩn thận lửa và giữ phổi cho người lớn tuổi.",
+   "viec": "Mở cửa sổ hoặc bật hút mùi khi nấu; kiểm tra van ga mỗi tối; người lớn tuổi ho trên hai tuần thì đi khám.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Đoài_Khảm": {
+   "bep": "Đoài",
+   "cua": "Khảm",
+   "du_nien": "Hoạ Hại",
+   "tom_y": true,
+   "y": "Nước mài mòn kim: con gái út và con trai giữa chịu thiệt vì bếp này, người suy dần. Sách gắn với thai sản ở người nữ; với ho ra máu, chứng phù, tim ở người nam; nhà hao người.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: bếp này rút sức từng chút; nên dời và đừng coi nhẹ triệu chứng nhỏ.",
+   "viec": "Với cửa Khảm, bếp nên ở Đông Nam, Nam hoặc Đông; ho ra máu, phù, tức ngực thì đi khám ngay.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Đoài_Khôn": {
+   "bep": "Đoài",
+   "cua": "Khôn",
+   "du_nien": "Thiên Y",
+   "tom_y": true,
+   "y": "Đất nuôi kim, mẹ và con gái út ở chung: mẹ già cầm trịch, tài sản mỗi ngày một thêm, nhà hay làm phúc. Mẹ thương con gái út và trẻ nhỏ quá mức, trọng con rể; tiền phát mà con cháu đến muộn, ít.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: thương con thì dạy con tự lập; mong cháu thì lo sớm.",
+   "viec": "Giao cho con út tự lo một khoản chi của mình; vợ chồng trẻ mong con thì đi khám sớm.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Đoài_Chấn": {
+   "bep": "Đoài",
+   "cua": "Chấn",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Bếp Đoài chém cửa Chấn: trước thiệt con cả, cháu cả, sau tới con gái út và con gái cả; người và của cùng sa sút, trong nhà nặng nề, uất. Sách gắn với họng, tim, lưng và dặn để ý người nhà khi họ quá buồn.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời; và trong nhà ai buồn lâu thì đừng để họ một mình.",
+   "viec": "Với cửa Chấn, bếp nên ở Nam, Đông Nam hoặc Bắc; người nhà buồn bã kéo dài thì ngồi cùng, đưa đi khám tâm lý.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Đoài_Tốn": {
+   "bep": "Đoài",
+   "cua": "Tốn",
+   "du_nien": "Lục Sát",
+   "tom_y": true,
+   "y": "Kim và gỗ chọi nhau, toàn nét mềm: nhà thưa con, người nam lẫn người nữ đều chịu thiệt. Sách gắn với ho hen, tim và hông; lại hay có chuyện lửa, mất mát, chuyện tình cảm lén lút, người bỏ đi.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời; giữ phổi, giữ lửa và giữ nếp nhà.",
+   "viec": "Với cửa Tốn, bếp nên ở Bắc, Đông hoặc Nam; ho, khó thở kéo dài thì đi khám; khoá ga, tắt bếp trước khi ngủ.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Đoài_Càn": {
+   "bep": "Đoài",
+   "cua": "Càn",
+   "du_nien": "Sinh Khí",
+   "tom_y": true,
+   "y": "Hai kim đủ cứng mềm: nhà thuận, nhiều điều vừa ý, người và của cùng thịnh; sách ví như rồng xanh vào nhà, sinh người học giỏi, con trai vững vàng. Chỉ nhắc đôi vợ trẻ chồng già: chiều nhau quá thì hao sức.",
+   "nhom": "B",
+   "chu_de": "tinh_duyen",
+   "ham_y": "Nên chú ý chừng mực trong chuyện vợ chồng: người xưa coi quá chiều là chỗ hao của bếp này.",
+   "viec": "Người chồng lớn tuổi giữ giờ ngủ, vận động đều; hai vợ chồng cùng lo việc nhà thay vì một người chiều một người.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Đoài_Đoài": {
+   "bep": "Đoài",
+   "cua": "Đoài",
+   "du_nien": "Phục Vị",
+   "tom_y": true,
+   "y": "Hai kim hợp nhau: nhà lên. Nhưng toàn nét mềm nên con cháu thưa, người nhỏ lấn người lớn, người vợ trẻ một mình quyết hết làm nhà rối, khó vui lâu; sách gắn với tim, dạ dày và chứng biếng ăn.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: người trẻ nắm nhà thì nhớ hỏi người lớn một câu.",
+   "viec": "Việc lớn trong nhà hỏi ý cha mẹ, người lớn tuổi trước khi làm; ăn kém, sụt cân thì đi khám.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Đoài_Cấn": {
+   "bep": "Đoài",
+   "cua": "Cấn",
+   "du_nien": "Diên Niên",
+   "tom_y": true,
+   "y": "Đất nuôi kim, cứng mềm đúng đôi: vợ chồng hoà thuận, vừa có của vừa có danh, người và tài cùng thịnh. Sách gọi là bếp tốt trọn vẹn, ví như núi với đầm thông mạch nhau.",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Đoài_Ly": {
+   "bep": "Đoài",
+   "cua": "Ly",
+   "du_nien": "Ngũ Quỷ",
+   "tom_y": true,
+   "y": "Lửa của cửa nung bếp Đoài: trước thiệt bé gái, con gái út, sau tới người nam; hay bị mất mát, bị người có quyền làm khó. Sách gắn với nhức đầu, đỏ mắt, mất ngủ, ho và sinh nở khó; cơ nghiệp hao.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: gặp bếp này thì dời; con gái nhỏ trong nhà cần được che chở hơn.",
+   "viec": "Với cửa Ly, bếp nên ở Đông, Bắc hoặc Đông Nam; mất ngủ, ho kéo dài thì đi khám; thai phụ sinh ở cơ sở y tế.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Cấn_Khảm": {
+   "bep": "Cấn",
+   "cua": "Khảm",
+   "du_nien": "Ngũ Quỷ",
+   "tom_y": true,
+   "y": "Bếp Cấn chặn cửa Khảm: sách xếp loại bếp dữ. Nhà hay có chuyện lạ, con trai giữa và trẻ nhỏ khó yên, con cháu khó bảo; dễ vướng kiện cáo, chuyện lửa, chuyện sông nước và mất mát.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời; và phải trông trẻ thật kỹ quanh nước, lửa.",
+   "viec": "Với cửa Khảm, bếp nên ở Đông Nam, Nam hoặc Đông; không để trẻ một mình gần bếp đang nấu, gần ao hồ.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Cấn_Khôn": {
+   "bep": "Cấn",
+   "cua": "Khôn",
+   "du_nien": "Sinh Khí",
+   "tom_y": true,
+   "y": "Đất chồng lên đất thành núi, mẹ gặp con trai út: sách ghi nhà vui, cơ nghiệp tiến, con cái đông đủ và đàng hoàng, hay lễ Phật, ưa việc lành. Dùng lâu năm thì để ý dạ dày: ăn kém ngon, hay đau bụng.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: bếp tốt, chỉ cần giữ cái bụng.",
+   "viec": "Ăn đúng giờ, nhai kỹ; ai đau bụng, ăn kém kéo dài thì đi khám tiêu hoá.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Cấn_Chấn": {
+   "bep": "Cấn",
+   "cua": "Chấn",
+   "du_nien": "Lục Sát",
+   "tom_y": true,
+   "y": "Cửa Chấn chèn vào bếp Cấn, ngoài lấn vào trong nên việc đến gấp. Trẻ nhỏ khó yên; sách gắn với lá lách, dạ dày lạnh và thai sản; vợ con chịu thiệt. Sách còn nhắc chuyện người ngoài nhòm ngó nhà.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: giữ ấm bụng cho trẻ và giữ kín cửa nhà.",
+   "viec": "Trẻ ăn đồ ấm, chín; thai phụ khám đúng hẹn; kiểm tra khoá cửa, rèm che phòng ngủ và phòng tắm.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Cấn_Tốn": {
+   "bep": "Cấn",
+   "cua": "Tốn",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Cửa Tốn lấn bếp Cấn, mềm lấn cứng: người chồng và con trai chịu thiệt nặng, người nữ dễ phải gánh nhà một mình, có khi con nuôi quản việc. Sách gắn với lá lách, chứng phù và tê tay chân.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: giữ sức cho người chồng, người con trai; bếp này nên dời.",
+   "viec": "Với cửa Tốn, bếp nên ở Bắc, Đông hoặc Nam; người nam trong nhà khám tổng quát mỗi năm.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Cấn_Càn": {
+   "bep": "Cấn",
+   "cua": "Càn",
+   "du_nien": "Thiên Y",
+   "tom_y": true,
+   "y": "Đất nuôi kim, con theo cha: sách ghi cha hiền con thảo, nhà sáng sủa, phát giàu, hay đi chùa và làm phúc. Vì bếp và cửa đều cứng, con cháu nhánh trưởng kém thuận, dùng lâu thì vợ con dễ chịu thiệt.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: cha con hợp rồi thì nhớ tới vợ và con cả.",
+   "viec": "Mỗi tháng có một việc cả nhà cùng làm do người vợ chọn; hỏi han riêng người con cả.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Cấn_Đoài": {
+   "bep": "Cấn",
+   "cua": "Đoài",
+   "du_nien": "Diên Niên",
+   "tom_y": true,
+   "y": "Đất nuôi kim, trai út gặp gái út, xứng đôi: sách gọi là bếp tốt trọn vẹn. Của nhà phát lớn, công danh rạng, người nữ hiền, con quý cháu ngoan.",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Cấn_Cấn": {
+   "bep": "Cấn",
+   "cua": "Cấn",
+   "du_nien": "Phục Vị",
+   "tom_y": true,
+   "y": "Hai lớp đất chồng thành núi: sách ghi lúc đầu thuận, khá giả. Vì toàn nét cứng nên trẻ nhỏ hay ốm, người nữ chóng mệt; về lâu vì ăn uống mà sinh chứng đầy bụng, lòng không vui.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: bếp này hại ở cái ăn; ăn ít lại, sạch hơn thì gỡ được.",
+   "viec": "Bữa tối ăn trước bảy giờ, bớt đồ nếp, đồ dầu mỡ; trẻ biếng ăn, đầy bụng kéo dài thì đi khám.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Cấn_Ly": {
+   "bep": "Cấn",
+   "cua": "Ly",
+   "du_nien": "Hoạ Hại",
+   "tom_y": true,
+   "y": "Lửa nung đất khô rồi lửa cũng tàn: sách ghi người nữ nóng nảy làm người nam e dè; trước thiệt con trai út, sau thiệt con gái giữa; con cháu dễ bỏ nhà vì chuyện tình cảm. Sách gắn với mắt, tai và bụng.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: nóng một lời, khô cả nhà; hạ giọng xuống là giữ được con.",
+   "viec": "Khi giận thì rời bếp năm phút rồi mới nói; con tuổi mới lớn có chuyện tình cảm thì nghe trước, khuyên sau.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Ly_Khảm": {
+   "bep": "Ly",
+   "cua": "Khảm",
+   "du_nien": "Diên Niên",
+   "tom_y": true,
+   "y": "Con gái giữa gặp con trai giữa, vợ chồng đúng đôi: sách ghi tiền dày, công danh rạng, con cháu đầy nhà. Dùng lâu năm thì người vợ dễ mệt, sách gắn với tim và mắt; vì nước lửa vẫn chọi nên cái phát khó trọn.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: bếp tốt, chỉ cần để ý sớm phần tim và mắt của người vợ.",
+   "viec": "Người vợ khám tim mạch, khám mắt mỗi năm; bếp đủ sáng, nấu có quạt hút.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Ly_Khôn": {
+   "bep": "Ly",
+   "cua": "Khôn",
+   "du_nien": "Lục Sát",
+   "tom_y": true,
+   "y": "Lửa đốt đất khô, mẹ với con gái ở chung, toàn nét mềm: người nam dễ hao sức, trẻ nhỏ khó chăm, người nữ cũng chóng mệt; dùng mãi thì nhà thưa người. Sách gắn với tim và kinh nguyệt không thông.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: bếp này làm khô nhà; nên dời, và giữ sức cho cả nam lẫn nữ.",
+   "viec": "Với cửa Khôn, bếp nên ở Tây Bắc, Tây hoặc Đông Bắc; người nữ khám phụ khoa, người nam khám tim mạch định kỳ.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Ly_Chấn": {
+   "bep": "Ly",
+   "cua": "Chấn",
+   "du_nien": "Sinh Khí",
+   "tom_y": true,
+   "y": "Gỗ nuôi lửa, cứng mềm hợp ý, muôn vật sinh thành: sách ví như rồng xanh vào nhà, gọi là bếp giàu lớn sang lớn. Tiền và của quý tự tìm đến; trong nhà có người học rộng, thi cử đỗ liền.",
+   "nhom": "A",
+   "chu_de": "cong_viec",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Ly_Tốn": {
+   "bep": "Ly",
+   "cua": "Tốn",
+   "du_nien": "Thiên Y",
+   "tom_y": true,
+   "y": "Gỗ nuôi lửa: sách ghi người nữ gây dựng cơ nghiệp, nhà cửa, đất đai, của cải đều dày, cả nhà hay làm phúc. Vì toàn nét mềm nên con cháu ít; dùng lâu thì kém dần, sách gắn với nhức đầu, gió lạnh và sức yếu.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: của do người nữ dựng thì càng phải lo người nối.",
+   "viec": "Mong con thì vợ chồng đi khám sớm; hay nhức đầu, mệt kéo dài thì đi khám, đừng tự uống thuốc.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Ly_Càn": {
+   "bep": "Ly",
+   "cua": "Càn",
+   "du_nien": "Tuyệt Mệnh",
+   "tom_y": true,
+   "y": "Bếp Ly nung cửa Càn: trước thiệt người cha, người ông, kế tới con gái giữa. Sách gắn với ho, hen, da kém sắc, tê và mắt; hay có chuyện lửa, sông nước, mất mát, việc quan; hao của và thưa người là hai điều khó tránh.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: bếp này nên dời sớm nhất có thể; người lớn tuổi cần được chăm phổi và mắt.",
+   "viec": "Với cửa Càn, bếp nên ở Tây Nam, Đông Bắc hoặc Tây; cha, ông khám phổi và mắt định kỳ.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Ly_Đoài": {
+   "bep": "Ly",
+   "cua": "Đoài",
+   "du_nien": "Ngũ Quỷ",
+   "tom_y": true,
+   "y": "Lửa nung chảy kim, toàn nét mềm: người nam, người chồng trẻ và con gái út đều cần giữ sức. Sách gắn với phổi, người gầy, khát nhiều và thai sản; lại hay có chuyện lửa, mất mát, việc quan, chuyện lạ quấy nhà.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: gặp bếp này thì dời; phổi và bếp lửa là hai chỗ phải canh.",
+   "viec": "Với cửa Đoài, bếp nên ở Đông Bắc, Tây Nam hoặc Tây Bắc; ho, sụt cân, khát nhiều thì đi khám; khoá ga mỗi tối.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Ly_Cấn": {
+   "bep": "Ly",
+   "cua": "Cấn",
+   "du_nien": "Hoạ Hại",
+   "tom_y": true,
+   "y": "Lửa nung đất khô rang: lớp trẻ, người nhỏ tuổi chịu thiệt; con gái giữa tính nóng, mạnh bạo; người nữ nhiều chuyện làm người nam e ngại. Sách gắn với đầu óc nặng nề, mắt, táo và kinh nguyệt không đều.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: bớt nóng trong bếp thì bớt nóng trong nhà.",
+   "viec": "Uống đủ nước, ăn thêm rau; chuyện bực trong ngày không mang vào bữa cơm; người nữ khám phụ khoa định kỳ.",
+   "nguon": "duong_trach_tam_yeu"
+  },
+  "Ly_Ly": {
+   "bep": "Ly",
+   "cua": "Ly",
+   "du_nien": "Phục Vị",
+   "tom_y": true,
+   "y": "Hai lửa hợp lại cháy bùng: nhà phát ào ào, nhưng lửa không bền nên phát quá mức cũng không bền. Toàn nét mềm nên người nam dễ hao sức, nữ nhiều nam ít, trẻ nhỏ khó chăm; sách gắn với đờm, ho và tê tay chân.",
+   "nhom": "C",
+   "chu_de": "suc_ben",
+   "ham_y": "Người xưa muốn dặn: lên nhanh thì giữ lại, đừng tiêu hết theo đà.",
+   "viec": "Lúc đang thuận để dành một nửa phần dư; bếp đủ thoáng, có hút mùi; người nam ho, đờm lâu ngày thì đi khám.",
+   "nguon": "duong_trach_tam_yeu"
+  }
+ },
+ "minh_kinh": [
+  {
+   "ma": "luc_su",
+   "tieu_de": "Sáu thứ nhà nào cũng có",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Sách gom sáu thứ thiết yếu: cổng chính, lối đi, bếp, giếng, cối xay giã và nhà vệ sinh. Đặt đúng chỗ thì tiện và lành; đặt bừa thì chính đồ có ích lại thành chỗ gây phiền mà người ở không hay biết.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "loi_di_trong_san",
+   "tieu_de": "Lối đi trong sân nên vòng qua phía tốt",
+   "ap_dung": "loi_di",
+   "tom_y": true,
+   "y": "Lối đi nhỏ trong sân, quanh nhà nên bắt đầu ở phía tốt, vòng qua phía tốt rồi mới về cổng chính. Lối trong khuôn viên đừng vòng vèo quá; sách cho rằng vòng vèo thì thế nhà yếu đi.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "gieng_sau_cong_bep",
+   "tieu_de": "Giếng hệ trọng chỉ sau cổng và bếp",
+   "ap_dung": "gieng_nuoc",
+   "tom_y": true,
+   "y": "Giếng cho nước ăn và nước tắm rửa nên sách xếp tầm hệ trọng của nó ngay sau cổng và bếp, và bảo đào ở phía tốt, nơi mạch đất đang vượng.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "gieng_doi_bep",
+   "tieu_de": "Giếng không đối thẳng, không sát liền bếp",
+   "ap_dung": "gieng_nuoc",
+   "tom_y": true,
+   "y": "Sách kiêng giếng nằm đối thẳng cửa bếp hoặc sát liền bếp, cho rằng nước lửa nhìn nhau thì người nữ trong nhà khó hoà, dễ sinh chuyện tình cảm. Lỡ gặp thì đổi hướng bếp hoặc dời miệng giếng.",
+   "nhom": "B",
+   "chu_de": "gia_dinh",
+   "ham_y": "Nên chú ý chỗ nước và chỗ lửa trong nhà: người xưa muốn hai thứ này có khoảng cách.",
+   "viec": "Xem bồn rửa, bể nước có sát hoặc đối thẳng mặt bếp không; nếu có, kê một tấm chắn hoặc đổi chỗ đặt bếp nấu.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "gieng_huong_dao",
+   "tieu_de": "Bài ca chọn hướng đào giếng",
+   "ap_dung": "gieng_nuoc",
+   "tom_y": true,
+   "y": "Sách có bài ca xét chỗ đào giếng theo hai mươi bốn hướng: ba hướng Giáp, Canh, Nhâm được khen nhất, khoảng một nửa số hướng bị kiêng. Sách cũng dặn giếng trên núi thì đào ở chỗ mạch uốn mình; đào trên sống núi là không có nước.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": false
+  },
+  {
+   "ma": "nha_ve_sinh",
+   "tieu_de": "Nhà vệ sinh đặt ở phía xấu của mệnh",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Nhà vệ sinh là chỗ chứa đồ bẩn nên sách bảo đặt ở phía xấu trong mệnh người chủ để đè cái xấu xuống, đừng đặt nhầm vào phía tốt. Sách dặn nhà dù chật mấy cũng phải tính cho rõ chỗ này.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "phong_theo_menh",
+   "tieu_de": "Mỗi người ở phòng hợp mệnh mình",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Nhà nhiều thế hệ ở chung, chia phòng mà không chia bếp: người mệnh nhóm Đông ở phòng phía đông, người mệnh nhóm Tây ở phòng phía tây. Phòng dù chật mà hợp mệnh vẫn tốt; không cần theo lệ anh ở bên đông, em ở bên tây.",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "giuong_trong_phong_chung",
+   "tieu_de": "Cùng một phòng thì kê giường theo mệnh",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Chưa có phòng riêng thì chỗ đặt giường trong phòng chung cũng tính là nơi ở: người mệnh nhóm Tây kê giường ở phía tây giường cha mẹ, người mệnh nhóm Đông kê ở phía đông. Sách nói cách này không kể tầng trên tầng dưới, chỉ kể phía.",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "doi_giuong_de_nhat",
+   "tieu_de": "Trong mọi cách sửa nhà, dời giường là dễ nhất",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Sách nêu bốn điều một ngôi nhà nên có rồi nói thẳng là khó được cả bốn. Điều nào không sửa nổi thì dời giường: đây là cách đổi vận đỡ tốn công nhất. Người mệnh nhóm Tây mà đầu giường đang quay về phía nhóm Đông thì xoay lại là xong.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "phong_chinh_nhuong",
+   "tieu_de": "Phòng chính không hợp mệnh thì nhường",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Nếu phía tựa của phòng chính không hợp mệnh chủ nhà, sách khuyên chủ nhà kê giường ở phòng nhỏ hoặc nhà phụ hợp mệnh mình, còn phòng chính để con cháu hợp mệnh ở. Như vậy không ai chịu thiệt.",
+   "nhom": "A",
+   "chu_de": "gia_dinh",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "giuong_duoi_xa",
+   "tieu_de": "Giường không kê dưới xà",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Phía trên giường đừng để xà nhà chạy ngang. Sách cho rằng xà ngang phía chân giường thì hay mơ dữ, bóng đè; xà ngang phía đầu giường thì dễ sinh chứng ngầm trong người.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: phía trên chỗ nằm nên trống và nhẹ.",
+   "viec": "Dịch giường ra khỏi vị trí dưới xà, dầm; ngủ kém, hay giật mình kéo dài thì đi khám.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "dau_giuong_sinh_khi",
+   "tieu_de": "Đầu giường quay về phía Sinh Khí",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Kê giường thì căn theo cửa phòng: chân giường trở về phía xấu, đầu giường quay về phía Sinh Khí của mệnh mình. Sách gọi là tựa xấu hướng lành, cho rằng gỡ được chuyện không hay và mở đường tài lộc, con cái.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "giuong_can_sang",
+   "tieu_de": "Chỗ nằm cần sáng, tránh đối cửa phòng",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Chỗ nằm cần sáng sủa, đừng để tối; phòng khó mở cửa lấy sáng thì kê đầu giường gần chỗ có nắng. Giường tránh kê đối thẳng cửa phòng; lỡ đối thì đặt bình phong chắn giữa.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "dong_giuong",
+   "tieu_de": "Đóng giường: gỗ lành, không chắp nối",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Sách dặn giường không nối chân, không chắp gỗ cũ với gỗ mới, không cưa ngắn, không cắt hẹp; không dùng gỗ mọc gần mồ mả, đền miếu; nên chọn gỗ của loài cây có hoa có quả. Số thanh dát và các số đo nên là số lẻ.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "truoc_phong_ngu_trong",
+   "tieu_de": "Trước phòng ngủ không nên quá trống",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Phòng khách và phòng ngủ khác nhau: phía trước phòng khách để trống rộng cũng được, còn khoảng trống trước phòng ngủ mà quá rộng thì hơi ấm tản mất.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "truoc_cua_phong_ngu",
+   "tieu_de": "Trước cửa phòng ngủ không đắp non bộ",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Sách dặn không đắp hòn non bộ ngay trước cửa phòng ngủ, cho rằng không lợi cho người đang mang thai. Trước cửa nhà có bãi đá lởm chởm thì đường đi nước bước hay trắc trở; trước cửa là rừng rậm cũng bị kiêng.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: lối ra vào phòng ngủ phải phẳng, thoáng, không vướng.",
+   "viec": "Dọn chậu, đá, đồ trang trí khỏi lối trước cửa phòng ngủ; nhà có thai phụ thì gắn đèn đêm ở lối ra nhà vệ sinh.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "bep_viec_lon",
+   "tieu_de": "Bếp không phải chuyện vặt",
+   "ap_dung": "bep",
+   "tom_y": true,
+   "y": "Người ta hay coi bếp là việc nhỏ; sách thì xếp bếp vào năm việc hệ trọng nhất của nhà: con cháu nối dõi, giàu nghèo, sức bền, ốm đau và miếng ăn hằng ngày đều có gốc ở đây.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "be_bep_phia_xau",
+   "tieu_de": "Thân bếp ở phía xấu, cửa lò nhìn phía tốt",
+   "ap_dung": "bep",
+   "tom_y": true,
+   "y": "Sách này dạy khác Dương Trạch Tam Yếu: thân bếp, cùng nhà vệ sinh và cối xay, nên đặt ở phía xấu trong mệnh chủ nhà để đè cái xấu; còn cửa lò, nơi đưa củi vào, thì nhìn về phía tốt để đón cái lành. Ống khói cũng mở về phía xấu.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "bep_de_phia_tot",
+   "tieu_de": "Thân bếp đè phía tốt thì mất cái tốt đó",
+   "ap_dung": "bep",
+   "tom_y": true,
+   "y": "Theo sách, thân bếp đè lên phía nào thì đè luôn cái tốt của phía đó: đè Sinh Khí thì đường con cái và tài lộc trắc trở; đè Thiên Y thì hay ốm lâu; đè Diên Niên thì kém bền, chuyện cưới hỏi khó thành; đè Phục Vị thì túng.",
+   "nhom": "C",
+   "chu_de": "nha_cua",
+   "ham_y": "Người xưa muốn dặn: đừng để lửa bếp nằm lên chỗ quý nhất của nhà mình.",
+   "viec": "Vẽ sơ đồ nhà, chia tám phía rồi đánh dấu bếp đang ở phía nào so với mệnh chủ nhà trước khi tính chuyện dời.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "ve_so_do",
+   "tieu_de": "Vẽ sơ đồ nhà theo tỉ lệ rồi mới chia tám phía",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Sách dặn lấy một tờ giấy lớn, đo kỹ nền nhà và các phòng rồi vẽ thu nhỏ theo tỉ lệ, sau đó chia tám phía, ghi hai mươi bốn hướng lên sơ đồ. Khi ấy góc nào, gian nào thuộc phía tốt hay xấu mới rõ, không nên ước chừng.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "cua_lo_ung_nhanh",
+   "tieu_de": "Hướng cửa lò ứng rất nhanh",
+   "ap_dung": "bep",
+   "tom_y": true,
+   "y": "Sách cho rằng cửa lò ứng nhanh hơn mọi chỗ khác, chừng một hai tháng là thấy. Người mệnh nhóm Đông để cửa lò nhìn về các phía đông, người mệnh nhóm Tây để nhìn về các phía tây; tính theo lưng người ngồi nhóm lửa quay về phía hợp mệnh.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "bep_bon_cho_kieng",
+   "tieu_de": "Bốn chỗ sách kiêng đặt bếp",
+   "ap_dung": "bep",
+   "tom_y": true,
+   "y": "Sách kiêng bếp đặt phía trước nhà, bếp nằm dưới xà, bếp đối thẳng cửa, bếp sát nhà vệ sinh. Theo sách: dưới xà thì người nấu chóng mệt, đối cửa thì hao của, sát nhà vệ sinh thì hay nhức mắt và sinh nhiều chuyện rối.",
+   "nhom": "B",
+   "chu_de": "nha_cua",
+   "ham_y": "Nên chú ý bốn vị trí này khi xem bếp nhà mình: người xưa coi là bốn chỗ bếp dễ mất hơi.",
+   "viec": "Đứng ở bếp nhìn lên và nhìn quanh: có xà phía trên, có cửa đối thẳng, có sát tường nhà vệ sinh không; có thì che chắn hoặc dịch bếp.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "mieng_bep_bi_xoc",
+   "tieu_de": "Miệng bếp kỵ bị cửa, lối đi, nắng rọi thẳng",
+   "ap_dung": "bep",
+   "tom_y": true,
+   "y": "Miệng bếp không nên bị cửa hay lối đi đâm thẳng vào, cũng không nên để ánh sáng cửa sổ rọi thẳng lên; sách cho rằng người trong nhà vì thế mà hay đau yếu. Thân bếp tựa lưng về phía xấu, cửa lò nhìn về phía tốt của mệnh.",
+   "nhom": "C",
+   "chu_de": "nha_cua",
+   "ham_y": "Người xưa muốn dặn: lửa bếp cần một chỗ kín gió, không bị xộc thẳng.",
+   "viec": "Kê tấm chắn hoặc treo rèm giữa cửa và bếp; dời chỗ nấu ra khỏi luồng nắng gắt buổi chiều.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "dap_bep_dat_sach",
+   "tieu_de": "Đắp bếp bằng gạch mới, đất sạch",
+   "ap_dung": "bep",
+   "tom_y": true,
+   "y": "Sách cho số đo của bếp mỗi chiều một ý nghĩa: bốn mùa, mười hai tháng, tám gió. Phần còn dùng được là vật liệu: gạch phải mới, đất phải sạch, gạt bỏ lớp đất mặt rồi mới lấy lớp dưới, không để lẫn bụi bẩn.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": false
+  },
+  {
+   "ma": "tien_bac_cua_bep",
+   "tieu_de": "Muốn khá về tiền thì xét hướng cửa bếp",
+   "ap_dung": "bep",
+   "tom_y": true,
+   "y": "Về chuyện tiền, sách bảo xét cửa bếp so với mệnh: nhìn về Sinh Khí thì phát lớn, Thiên Y thì khá, Diên Niên thì đều đặn ngày nào cũng có, Phục Vị thì được món nhỏ. Sách chua thêm: người cưỡng cầu, kiếm tiền không ngay thẳng thì không ứng.",
+   "nhom": "A",
+   "chu_de": "tien_bac",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "lam_thien_khong_ung",
+   "tieu_de": "Người chăm làm việc thiện thì điều xấu không ứng",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Trước mỗi mục bàn về chuyện không may, sách đều chua một dòng: ai siêng tích đức, hay giúp người thì điều ấy không ứng. Tức là theo chính sách này, cách ăn ở của người trong nhà đứng trên phương hướng.",
+   "nhom": "A",
+   "chu_de": "tong_quan",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "goc_phuc",
+   "tieu_de": "Nhà không hợp: đổi cổng, rồi đổi phòng, rồi xoay giường",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Người mệnh nhóm Đông ở nhà nhóm Đông, nhóm Tây ở nhà nhóm Tây là có gốc phúc. Nhà không hợp mà khó chuyển thì đổi hướng cổng; cổng khó đổi thì chuyển phòng ngủ; phòng khó chuyển thì xoay giường. Sách nói làm vậy thì nhà nghèo cũng được phần.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "cong_chinh_hop_hai_be",
+   "tieu_de": "Cổng chính cần hợp cả mệnh lẫn thế nhà",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Cổng chính đặt ở bốn phía tốt của mệnh, tránh bốn phía xấu. Sách cân: chỉ hợp thế nhà mà không hợp mệnh là kém nhiều; chỉ hợp mệnh mà không hợp thế nhà là kém ít; hợp cả hai mới bền. Giường, bàn thờ, kho, cửa hàng cũng đặt ở phía tốt.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nam_loai_cua",
+   "tieu_de": "Năm loại cổng cửa và cái nào nặng nhất",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Sách chia năm loại: cổng chính, cổng giữa, cửa chung vào các phòng, cửa nách và cửa phòng. Nhà nhỏ ít phòng thì chỉ cần xét cổng chính. Nhà lớn nhiều phòng, phòng ở xa cổng thì cổng chính ứng không rõ, phải xét lối đi tới từng phòng và cửa phòng.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "cua_tot_tung_cap",
+   "tieu_de": "Cửa tốt tới đâu thì lành tới đó",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Cổng chính quay về phía tốt thì cả nhà được nhờ; cửa chung tốt thì khu ấy được nhờ; cửa phòng tốt thì riêng phòng ấy được nhờ. Sách viết: bản thân ngôi nhà không lành không dữ, lành dữ là ở cổng cửa và lối đi.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "cong_xau_kho_doi",
+   "tieu_de": "Cổng ở phía xấu mà không đổi được",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Cổng chính rơi vào phía xấu mà thế đất không cho đổi thì mở một cửa phòng quay về phía tốt để bù. Hoặc phòng khách vẫn quay ra trước, còn phòng ngủ đổi quay ra sau, có cửa và lối đi tốt; khi ấy mặt sau phòng ngủ xây kín, mặt trước chừa giếng trời.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "cua_khong_thang_lung",
+   "tieu_de": "Bốn thế nhà không mở cổng ngay giữa mặt trước",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Nhà tựa lưng về Chấn, Tốn, Càn hoặc Đoài thì không nên mở cổng ngay chính giữa mặt trước, vì cổng khi ấy rơi vào Tuyệt Mệnh hoặc Hoạ Hại so với lưng nhà. Nhà tựa về Khảm, Ly, Cấn, Khôn thì mở cổng thẳng từ sảnh chính ra được.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "cua_nach",
+   "tieu_de": "Cửa nách cũng đặt ở phía tốt",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Cửa nách là cửa nhỏ hai bên hông nhà, xưa dùng chuyển củi nước; sách bảo cũng đặt ở ba phía tốt để giúp thêm cho nhà. Cổng chính tốt, cửa nách cũng tốt thì trọn vẹn. Mở cửa bên phải đặt la bàn ở giữa nhà đo cho kỹ rồi mới mở.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "canh_cua_bang_nhau",
+   "tieu_de": "Hai cánh cửa phải to bằng nhau",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Cửa nhiều cánh thì cánh nào cũng phải to như nhau. Sách cho rằng cánh trái lớn hơn thì đường vợ chồng dễ phải làm lại, cánh phải lớn hơn thì người trong nhà dễ lẻ bóng.",
+   "nhom": "C",
+   "chu_de": "tinh_duyen",
+   "ham_y": "Người xưa muốn dặn: cửa cân thì nhà cân.",
+   "viec": "Đo lại hai cánh cửa chính; cánh nào xệ, lệch thì chỉnh bản lề cho đều.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "khong_nhieu_cua",
+   "tieu_de": "Không mở quá nhiều cửa, không ba cửa thẳng hàng",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Sách dặn không nên mở quá nhiều cửa vì hơi tốt tản mất; ba lớp cửa trong nhà đừng xếp thẳng một hàng mà nên so le. Tường sau nhà cũng không trổ cửa ngay chính giữa; cửa bên nên nằm gần hai góc tường, ở phía tốt.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "cua_doi_dien",
+   "tieu_de": "Những thứ cửa nhà không nên đối diện",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Cửa nhà đối thẳng cửa công sở, nhà giam, nhà kho, đền chùa, cổng thành đều bị sách xếp là bất lợi. Đường đâm thẳng vào cửa, hay đường vòng tới rồi quành ra xa như cánh cung chĩa vào, cũng vậy.",
+   "nhom": "B",
+   "chu_de": "nha_cua",
+   "ham_y": "Nên chú ý thứ nằm đối diện cửa chính: người xưa tránh để cửa nhà mình đối đầu với nơi đông người hoặc nơi nặng nề.",
+   "viec": "Đứng trong cửa nhìn thẳng ra và ghi lại thứ đối diện; nếu là đường đâm thẳng, đặt chậu cây hoặc bình phong ở lối vào.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "noc_cong",
+   "tieu_de": "Nóc cổng không cao hơn nhà chính",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Mái cổng đừng cao vượt nhà chính; sách cho rằng cổng lấn nhà thì dễ vướng kiện cáo và người nhỏ tuổi trong nhà chịu thiệt. Cổng chào che khuất nhà chính thì sinh điều tiếng, nhất là với người ở nhà trên.",
+   "nhom": "B",
+   "chu_de": "giay_to",
+   "ham_y": "Nên chú ý tương quan cổng và nhà: người xưa muốn nhà là chủ, cổng là khách.",
+   "viec": "Nhìn từ ngoài đường: nếu cổng, mái che cổng cao hơn mái hiên nhà thì hạ bớt hoặc tỉa gọn phần che khuất.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "o_chung_nhieu_loi",
+   "tieu_de": "Ở chung nhiều lối ra vào thì xét bếp",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Nếu ở chung với nhà khác, hai bên đều có cổng cửa và lối đi riêng thì hơi nhà tản, lành dữ đều khó ứng. Trường hợp ấy sách bảo lấy bếp làm chỗ dựa: bếp đặt ở hướng tốt là được.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "hai_cong_doi_nhau",
+   "tieu_de": "Hai cổng đối nhau, ba cửa liền nhau",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Hai cổng chính của hai nhà đối thẳng nhau bị sách gọi là thế cãi nhau, hay sinh bất hoà. Một nhà mở liền ba cửa xếp như chữ phẩm thì dễ có điều tiếng, tranh chấp. Trước cổng có nhiều ô cửa nhà khác chiếu vào cũng không lợi.",
+   "nhom": "B",
+   "chu_de": "ban_be",
+   "ham_y": "Nên chú ý quan hệ với nhà đối diện: người xưa đọc hai cổng đối nhau là hai miệng đối nhau.",
+   "viec": "Chào hỏi nhà đối diện trước; đặt chậu cây hoặc rèm ở cổng để hai cổng không nhìn thẳng vào nhau.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nen_vuong",
+   "tieu_de": "Nền nhà vuông vắn, không méo, không khuyết góc",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Nhà có nền vuông vắn, ngay ngắn thì dễ xem hướng và dễ tốt. Quá cao, quá rộng, quá hẹp, méo vẹo hay chỗ thò chỗ thụt thì sách cho là hao của hao người. Tám phía nên cân nhau; phía nào khuyết thì người ứng với phía đó chịu thiệt.",
+   "nhom": "B",
+   "chu_de": "nha_cua",
+   "ham_y": "Nên chú ý góc khuyết của nhà: người xưa coi mỗi góc ứng với một người trong nhà.",
+   "viec": "Vẽ mặt bằng nhà, xem góc nào bị cắt hoặc bỏ trống; dọn sạch, thắp sáng và dùng tới góc đó thay vì để làm kho bừa.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nen_tham_rong",
+   "tieu_de": "Nền nhà kỵ tham rộng",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Sách dặn khi làm nền nhà, điều nên tránh nhất là ham rộng: được chỗ này thì hụt chỗ kia. Nhà cao mà đất hẹp thì tiền và người đều hao; nhà thấp mà đất rộng thì trong một đời là khá.",
+   "nhom": "B",
+   "chu_de": "tien_bac",
+   "ham_y": "Nên chú ý tỉ lệ giữa nhà và đất: người xưa chuộng nhà vừa phải trên miếng đất rộng rãi.",
+   "viec": "Trước khi cơi nới thêm tầng, thêm phòng: tính lại số người thật sự ở và phần sân, khoảng thở còn lại.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nha_vua_nguoi",
+   "tieu_de": "Nhà vừa với số người ở",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Sách chép: nhà hẹp người đông là người thắng nhà, lành; nhà rộng người ít là nhà lấn người, không lành. Nhà ở khác công sở: công sở cần cao rộng, nhà ở cần gọn và tụ thì mới có phúc.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nha_doi_dien",
+   "tieu_de": "Nhà đối diện cao thấp, gần xa",
+   "ap_dung": "quanh_nha",
+   "tom_y": true,
+   "y": "Căn nhà trước mặt cao vừa phải, chủ khách cân xứng thì tốt. Quá cao là mình bị lấn, quá thấp là không xứng, quá gần là tức, quá xa là trống. Mái nhà trước mặt gần thì nhà mình nên thấp; xa thì có thể nhỉnh lên.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nha_xuong_cap",
+   "tieu_de": "Nhà dột, cột mục, cửa xiêu",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Nhà nghiêng, cửa vẹo, dột và lùa gió thì sách gọi là thế nhà đau ốm; tối tăm, nứt vỡ là thế nhà túng. Kèo cột mối mọt, mục ruỗng thì sách gắn với mắt và tai của người ở; xà nghiêng cột lệch thì hay sinh điều tiếng.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: nhà hỏng chỗ nào thì sửa chỗ đó sớm, đừng để người ở ốm theo nhà.",
+   "viec": "Mỗi năm một lần đi quanh nhà tìm chỗ dột, mối, nứt và sửa ngay chỗ nhỏ; mắt mờ, tai nghe kém thì đi khám.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nha_cu_nha_moi",
+   "tieu_de": "Nhà cũ kẹp giữa nhà mới",
+   "ap_dung": "quanh_nha",
+   "tom_y": true,
+   "y": "Sách chép: nhà cũ bị kẹp giữa hai nhà mới xây thì không nên ở; nhà mới nằm giữa hai nhà cũ thì lại là thế vượng. Nhà nửa cũ nửa mới là thế chật vật; nhà mới, gọn gàng sáng sủa là thế đang lên.",
+   "nhom": "B",
+   "chu_de": "nha_cua",
+   "ham_y": "Nên chú ý độ mới cũ của nhà mình so với hai bên: người xưa không muốn nhà mình là căn xuống cấp nhất dãy.",
+   "viec": "Sơn lại mặt tiền, sửa cổng, thay bóng đèn hiên: những việc nhỏ làm mặt nhà sáng lên ngang với hàng xóm.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "tang_tren_tang_duoi",
+   "tieu_de": "Tầng trên không lấn tầng dưới",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Tầng trên ví như trời, tầng dưới như đất; tầng trên cao vượt hẳn tầng dưới là trời lấn đất, sách cho là không lợi. Cửa phòng trên gác và dưới nhà quay hai hướng khác nhau thì trong nhà dễ có người trái ý, dễ mất mát.",
+   "nhom": "B",
+   "chu_de": "gia_dinh",
+   "ham_y": "Nên chú ý sự đồng thuận giữa tầng trên và tầng dưới: người xưa đọc đó là sự đồng lòng trong nhà.",
+   "viec": "Nhà nhiều tầng thì mỗi tuần cả nhà ăn chung một bữa ở tầng dưới; khoá kỹ cửa ban công tầng trên.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nha_cao_mot_minh",
+   "tieu_de": "Nhà cao vọt một mình, nhà bên cao đè xuống",
+   "ap_dung": "quanh_nha",
+   "tom_y": true,
+   "y": "Chỉ riêng nhà mình có tầng cao vọt lên thì gió lùa tứ bề, người ở phía dưới không yên. Bên cạnh có nhà cao đè xuống thì cao bên trái, bên trái chịu; cao bên phải, bên phải chịu.",
+   "nhom": "B",
+   "chu_de": "nha_cua",
+   "ham_y": "Nên chú ý phía nhà mình bị nhà cao hơn che: người xưa coi phía ấy là phía hụt.",
+   "viec": "Phòng nằm phía bị nhà bên che thì bật thêm đèn, giữ khô thoáng; nhà cao trơ trọi thì đóng kín cửa phía gió mạnh.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "so_gian_le",
+   "tieu_de": "Số gian nên lẻ",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Khi ngăn phòng, sách chuộng số lẻ: ba gian là lành, bốn gian thì không; năm gian thì nên để một gian trống. Lý do sách đưa: lẻ thuộc về sinh, chẵn thuộc về khắc; bố cục lẻ thì có gian giữa nên cân.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": false
+  },
+  {
+   "ma": "gieng_troi",
+   "tieu_de": "Giếng trời vuông vắn, sạch, khô",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Giếng trời giữ tài lộc của nhà: cần vuông vắn, phẳng, không xiên lệch, lồi lõm, không để bẩn và ẩm. Sách chép: chẳng gồ chẳng trũng, chẳng dài chẳng hẹp là thế của cải dồn về. Khuyết mé trái thì người nam chịu trước, khuyết mé phải thì người nữ chịu trước.",
+   "nhom": "A",
+   "chu_de": "tien_bac",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "truoc_cao_sau_thap",
+   "tieu_de": "Nhà trước cao sau thấp",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Nhà phía trước cao, phía sau thấp bị sách gọi là thế nhô đầu, cho rằng người ở dễ lẻ loi và chật vật. Phía trước và phía sau thấp, giữa vọt cao cũng không được khen.",
+   "nhom": "B",
+   "chu_de": "nha_cua",
+   "ham_y": "Nên chú ý độ cao trước sau của nhà: người xưa muốn nhà có chỗ tựa phía sau.",
+   "viec": "Nếu phía sau nhà thấp, trống: kê tủ cao, trồng hàng cây hoặc làm tường rào chắc ở phía sau để có chỗ tựa.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nuoc_mai",
+   "tieu_de": "Nước mái không dội xuống thềm, mái không chảy sang mái",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Sách kiêng nước mái nhỏ thẳng xuống thềm trước hoặc thềm sau, cho rằng người ở hay sinh chứng về máu huyết. Mái hiên dãy trước nhỏ nước lên mái dãy sau, hai mái nối liền nhau cũng bị xếp là không lợi.",
+   "nhom": "C",
+   "chu_de": "nha_cua",
+   "ham_y": "Người xưa muốn dặn: nước mưa phải có đường đi riêng, không dội vào chỗ người qua lại.",
+   "viec": "Lắp hoặc thông máng xối, ống thoát để nước mái không dội xuống bậc thềm; lau khô thềm sau mưa cho khỏi trơn.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "vat_nhon_chia_vao",
+   "tieu_de": "Xà, kèo, mái nhà khác chĩa vào nhà",
+   "ap_dung": "quanh_nha",
+   "tom_y": true,
+   "y": "Trước nhà bị đầu xà, rường kèo hay mái nhà khác chĩa thẳng vào thì sách gọi là thế xuyên tim. Sau nhà có vật hình mũi tên lao tới, đỉnh núi chiếu thẳng vào cổng chính cũng thuộc loại này và được dặn là rất nên tránh.",
+   "nhom": "B",
+   "chu_de": "nha_cua",
+   "ham_y": "Nên chú ý vật nhọn hướng vào nhà: người xưa không muốn cửa và lưng nhà bị thứ gì chĩa thẳng.",
+   "viec": "Nhìn từ cửa chính và từ cửa sổ sau: có góc mái, cột, biển hiệu nào chĩa vào không; có thì treo rèm hoặc trồng cây che tầm nhìn.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "quanh_nha_kieng",
+   "tieu_de": "Những nơi không nên ở sát",
+   "ap_dung": "quanh_nha",
+   "tom_y": true,
+   "y": "Sách dẫn lời người xưa: không nên ở sát công sở, đền miếu, lò mổ, chỗ ăn chơi, mộ cổ, cầu cống; ngõ sâu chật, tối là nơi hơi tù đọng. Cũng không nên cất nhà giữa đồng trống không một bóng nhà, hay trong núi sâu rừng vắng.",
+   "nhom": "B",
+   "chu_de": "nha_cua",
+   "ham_y": "Nên chú ý hàng xóm và cảnh quanh nhà: người xưa chọn chỗ có hơi người vừa đủ, không ồn, không quạnh.",
+   "viec": "Đi bộ một vòng vài trăm mét quanh nhà, ghi lại nơi ồn, nơi bẩn, nơi vắng; chọn lối đi về hằng ngày tránh những chỗ ấy.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "dao_ham_ho",
+   "tieu_de": "Không tuỳ tiện đào hầm hố quanh nhà",
+   "ap_dung": "quanh_nha",
+   "tom_y": true,
+   "y": "Dù ở quê hay ở phố, sách dặn không tuỳ tiện đào hầm, hố quanh nhà, nhất là ở phía mạch đất dẫn về nhà: nhẹ thì vướng kiện cáo, nặng thì người chủ chịu thiệt. Đứng trong nhà nhìn ra, phía nào có núi, có gò cao thì không đào phía ấy.",
+   "nhom": "B",
+   "chu_de": "nha_cua",
+   "ham_y": "Nên chú ý trước khi đào bới: người xưa coi nền đất quanh nhà là phần của nhà.",
+   "viec": "Trước khi đào bể, hầm, móng mới: hỏi kỹ sư kết cấu, xin phép đúng quy định và báo hàng xóm.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "sua_phia_nao_ung_phia_do",
+   "tieu_de": "Sửa phía nào thì ứng phía đó",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Thêm phòng, dỡ bớt, thay xà, lợp lại ngói, sửa cổng, xây bồn hoa đều là động vào một phía của nhà, và sách cho rằng lành dữ của phía ấy ứng ngay. Nên sửa ở bốn phía tốt của mệnh; phải đo nền nhà cho chính xác rồi mới định phía.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "menh_tren_huong_nha",
+   "tieu_de": "Mệnh người đứng trên hướng nhà",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Có người hỏi: bỏ mệnh mà sửa theo thế nhà thì sao? Sách đáp: nhà sửa được, mệnh thì không, nên theo mệnh. Người thời ấy hay bàn đông tây của nhà mà quên đông tây của mệnh; sách coi đó là sai, phải phối cả hai.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nen_kho_doi_o_phong_ben",
+   "tieu_de": "Nền nhà khó đổi hướng thì ở phòng bên",
+   "ap_dung": "phong_ngu",
+   "tom_y": true,
+   "y": "Nhà không hợp mệnh chủ mà nền không đổi được hướng: chủ nhà ở phòng nhỏ bên cạnh, hoặc làm thêm hành lang bên đó. Phòng cùng thế với nhà thì để con cháu hợp mệnh ở, cho thuê, hoặc làm phòng khách; miễn là mình không kê giường tại đó.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "phia_tot_nen_cao",
+   "tieu_de": "Phía tốt thì phòng ốc nên cao lớn",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Cách xem nhà của sách: lấy cổng làm mốc, đọc ra phía nào tốt phía nào xấu. Phía tốt mà phòng ốc cao lớn là lành; phía xấu mà xây cao lớn là không lành. Sao tốt còn phải gặp phía hợp hành với nó thì mới bền.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "nha_tinh_nha_dong",
+   "tieu_de": "Nhà một lớp là tĩnh, nhiều lớp là động",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Nhà chỉ một dãy, một sân là nhà tĩnh, xem theo bài tính cố định. Nhà nhiều dãy phòng song song, ba bốn lớp trở lên là nhà động; sách nói hơi nhà khi ấy chuyển động nên phải tính lật thêm một lượt từ cổng vào từng dãy.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "cong_cung_nhom_nha",
+   "tieu_de": "Nhà nhóm Đông không mở cổng nhóm Tây",
+   "ap_dung": "cua",
+   "tom_y": true,
+   "y": "Bốn phía Chấn, Tốn, Khảm, Ly là nhà nhóm Đông; Càn, Khôn, Cấn, Đoài là nhà nhóm Tây. Sách nói gọn: nhà nhóm Đông không mở cổng về phía nhóm Tây, nhà nhóm Tây không mở cổng về phía nhóm Đông.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "tam_bo_cuc_tranh",
+   "tieu_de": "Bố cục nên tránh: cổng chọi phòng chính",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Sách vẽ tám bố cục nên tránh, đều là cổng và phòng chính chọi nhau. Ví dụ cổng ở Càn, phòng chính ở Chấn thì người con trai cả chịu thiệt; cổng ở Chấn mà dựng nhà cao ở Càn thì người cha chịu thiệt.",
+   "nhom": "C",
+   "chu_de": "gia_dinh",
+   "ham_y": "Người xưa muốn dặn: cổng và phòng chính phải thuận nhau, vì mỗi phía ứng với một người thân.",
+   "viec": "Xác định cổng và phòng ngủ chính nhà mình thuộc hai phía nào; nếu khác nhóm, cân nhắc đổi phòng ngủ chính sang phòng cùng nhóm với cổng.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "thu_bac_du_nien",
+   "tieu_de": "Thứ bậc tám du niên theo Minh Kính",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Sách xếp: Sinh Khí và Diên Niên là tốt bậc trên, Thiên Y bậc giữa, Phục Vị tốt nhỏ; Tuyệt Mệnh và Ngũ Quỷ là xấu nặng, Hoạ Hại và Lục Sát xấu nhẹ hơn. Bốn phía tốt dùng để kê giường, trổ cổng, mở cửa phòng, đặt bàn thờ, kho, cửa hàng.",
+   "nhom": "A",
+   "chu_de": "tong_quan",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "ban_tho_phia_tot",
+   "tieu_de": "Bàn thờ đặt ở phía tốt",
+   "ap_dung": "ban_tho",
+   "tom_y": true,
+   "y": "Chỗ thờ tổ tiên, ban thổ địa, nhà thờ họ được sách xếp chung với giường, cổng và cửa phòng: đều phải ở bốn phía tốt của mệnh chủ nhà, kỵ bốn phía xấu; nhà đã rõ nhóm thì đặt ở phía cùng nhóm với thế nhà.",
+   "nhom": "A",
+   "chu_de": "nha_cua",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "vo_chong_cung_nhom",
+   "tieu_de": "Vợ chồng cùng nhóm mệnh",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Sách cho rằng vợ chồng cùng nhóm mệnh, cùng Đông hoặc cùng Tây, thì thuận và đông con; khác nhóm thì đường con cái chậm hơn, dễ lệch ý, tài lộc kém. Tốt nhất là mệnh vợ rơi vào phía Sinh Khí của chồng, kế đó là Diên Niên, Thiên Y.",
+   "nhom": "C",
+   "chu_de": "tinh_duyen",
+   "ham_y": "Người xưa muốn dặn: đây là cách xếp của một phái, và chính sách ấy chỉ cách gỡ bằng bếp chứ không bảo bỏ nhau.",
+   "viec": "Vợ chồng khác nhóm mệnh: thay vì lo, chọn một việc chung mỗi tuần để dễ thuận ý; sách thì chỉ cách xoay hướng miệng bếp.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "cuoi_hoi_doi_bep",
+   "tieu_de": "Chuyện cưới hỏi: sách chuộng đổi hướng bếp",
+   "ap_dung": "bep",
+   "tom_y": true,
+   "y": "Người đời hay dùng phép Lã Tài để xét hợp hôn; sách này cho rằng đổi hướng bếp mới là cách có hiệu quả nhất, và khi tính thì không tính riêng mệnh vợ mà ghép mệnh vợ với mệnh chồng.",
+   "nhom": "A",
+   "chu_de": "tinh_duyen",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "bai_ca_so_con",
+   "tieu_de": "Bài ca đếm con theo du niên vợ chồng",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Sách có bài ca đếm số con theo du niên giữa mệnh vợ và mệnh chồng, và xếp cặp rơi vào Tuyệt Mệnh là đường con cái hiếm, vợ chồng dễ lẻ bóng; cặp rơi vào Hoạ Hại thì ít con nhưng ở với nhau tới già.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: con số trong bài ca chỉ là cách xếp hạng tám du niên, không phải lời đoán cho một đôi cụ thể.",
+   "viec": "Mong con thì hai vợ chồng cùng đi khám sớm; đừng lấy bài ca xưa làm căn cứ để lo hay trách nhau.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "mong_con_xoay_bep",
+   "tieu_de": "Mong con: sách chỉ xoay miệng bếp",
+   "ap_dung": "bep",
+   "tom_y": true,
+   "y": "Về chuyện mong con, sách bảo cho miệng bếp nhìn về phía Phục Vị hoặc Sinh Khí của mệnh, còn thân bếp và nhà vệ sinh ở phía xấu. Sách cũng nói có người vì dùng nhầm phía mà đường con cái trắc trở.",
+   "nhom": "C",
+   "chu_de": "con_cai",
+   "ham_y": "Người xưa muốn dặn: đường con cái nằm ở nếp ăn nếp ở hằng ngày; sách còn chua rằng người thất đức thì không ứng.",
+   "viec": "Mong con thì đi khám sớm ở cơ sở y tế; việc xoay bếp, nếu làm, chỉ coi là giữ nếp nhà cho yên tâm.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  },
+  {
+   "ma": "phia_choi_va_co_the",
+   "tieu_de": "Phía chọi nhau ứng vào phần cơ thể nào",
+   "ap_dung": "chung",
+   "tom_y": true,
+   "y": "Sách ghép năm hành với năm tạng: mộc với gan, hoả với tim, thổ với lá lách và dạ dày, kim với phổi, thuỷ với thận. Lối vào hay hướng bếp rơi vào phía chọi với mệnh thì sách cho rằng phần cơ thể thuộc hành bị chọi là phần dễ yếu.",
+   "nhom": "C",
+   "chu_de": "suc_khoe",
+   "ham_y": "Người xưa muốn dặn: biết phần nào dễ yếu thì chăm phần đó trước; sách cũng chua rằng người đang có bệnh thì không lấy đó mà đoán.",
+   "viec": "Ghi lại phần cơ thể mình hay yếu và đi khám định kỳ phần đó; chuyện sức khoẻ thì theo lời bác sĩ.",
+   "nguon": "bat_trach_minh_kinh",
+   "con_ap_dung": true
+  }
+ ]
+}
