@@ -39,6 +39,8 @@ export interface LaSoBatTu {
   /** Trục 2 UX — câu lời thường về nhật chủ (KB đời sống) cho đầu trang; engine cũ không có → đầu trang chỉ còn nút. */
   /** SX-1: câu sách xưa ứng với lá số (engine chọn từ KB). */
   sach_xua?: { loai: string; ve: string; sach: string; han: string; y: string; phien_am?: string }[];
+  /** SX-C: lời sách về thần sát, thập thần, hành ngày sinh — ba nhóm đã nói giảm (chỉ bản Việt). */
+  sach_ghi?: import("@/components/huyen-hoc/SachXuaGhi").KhoiSachGhi | null;
   loi_thuong?: { hinh_tuong: string | null; chan_dung: string | null; cau_tu_soi: string | null } | null;
   /** VZ-3 — có khi engine ≥ bản này. */
   mo_rong?: {

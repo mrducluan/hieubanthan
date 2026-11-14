@@ -29,6 +29,8 @@ def _nv(kho: str, test: str, ghi_chu: str = "") -> dict:
 # tệp → {"muc": mức mặc định của tệp, "mang": mảng, "phan": {khoá gốc trong tệp: mức riêng}, "ghi_chu"}
 SO: dict[str, dict] = {
     # ---- Bát tự
+    "battu_sach_ghi.json": {"mang": "battu", **_nv("tam_menh_thong_hoi.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
+                                                "SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn")},
     "battu_dieu_hau.json": {"mang": "battu", **_nv("cung_thong_bao_giam.json", f"{_T}::test_dieu_hau_khop_nguyen_van_tung_o")},
     "battu_kb.json": {"mang": "battu", "muc": "tom_y_co_thu", "phan": {
         "co_tho": _nv("uyen_hai_tu_binh.json", f"{_T}::test_co_tho_nhat_chu_khop_nguyen_van_uyen_hai"),
@@ -41,6 +43,8 @@ SO: dict[str, dict] = {
     "bo_sung_nhat_chu.json": {"mang": "battu", "muc": "bien_tap"},
     "bo_sung_thap_than.json": {"mang": "battu", "muc": "bien_tap"},
     # ---- Tử vi
+    "tuvi_sach_ghi.json": {"mang": "tuvi", **_nv("tu_vi_dau_so_toan_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
+                                               "SX-C: 434 câu Toàn Thư quyển 3 (sao × cung) khớp kho nguồn; lời Việt là tóm ý đã nói giảm (A / B / C)")},
     "tuvi_kb.json": {"mang": "tuvi", "muc": "tom_y_co_thu", "phan": {
         "phu_tinh_cung": _nv("tu_vi_dau_so_toan_thu.json", f"{_T}::test_phu_tinh_cung_khop_nguyen_van_toan_thu"),
         "sao_nho": {"muc": "truyen_thong", "ghi_chu": "tóm ý Tử vi đẩu số tân biên + tên phái Trung Châu; từng mục có do_tin"},
@@ -76,6 +80,12 @@ SO: dict[str, dict] = {
     "kinhdich_doi_song.json": {"mang": "kinhdich", "muc": "bien_tap"},
     "bo_sung_que.json": {"mang": "kinhdich", "muc": "bien_tap"},
     # ---- Phong thuỷ
+    "phongthuy_cung_menh.json": {"mang": "phongthuy", **_nv("duong_trach_thap_thu.json", "tests/test_sx_c_sach_ghi.py::test_cung_menh_khop_phep_tinh",
+                                                     "SX-C: chín điều bố trí × 8 cung (東/西四位宅圖說); phương + du niên khớp phép tính Bát trạch")},
+    "phongthuy_sach_ghi.json": {"mang": "phongthuy", **_nv("duong_trach_thap_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
+                                                    "SX-C: 116 điều về thế nhà (論宅外形, 內形篇, 何知經…) khớp kho nguồn; vế 'vì sao hợp lẽ thường' là lời biên tập")},
+    "phongthuy_tam_yeu.json": {"mang": "phongthuy", "muc": "truyen_thong",
+                               "ghi_chu": "SX-C: tóm ý Dương Trạch Tam Yếu + Bát Trạch Minh Kính qua BẢN DỊCH Việt hiện đại (chưa có nguyên văn chữ Hán trong kho nguồn); du niên 64 nhà + 64 bếp khớp phép tính"},
     "phongthuy_kb.json": {"mang": "phongthuy", "muc": "tom_y_co_thu", "phan": {
         "du_nien": _nv("duong_trach_thap_thu.json", "tests/test_kt_pt1_kho_nguon.py::test_cau_trich_kb_la_nguyen_van",
                        "KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi "
@@ -87,6 +97,14 @@ SO: dict[str, dict] = {
     "phongthuy_do_thi.json": {"mang": "phongthuy", "muc": "bien_tap"},
     "bo_sung_dau_hieu.json": {"mang": "phongthuy", "muc": "bien_tap"},
     # ---- Nhân tướng · Tarot
+    "nhan_tuong_sach_ghi.json": {"mang": "nhantuong", **_nv("than_tuong_toan_bien.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
+                                                     "SX-C: câu Thần Tướng Toàn Biên gắn với nét khảo sát + 12 cung trên mặt")},
+    "nhan_tuong_kieu_hinh.json": {"mang": "nhantuong", **_nv("than_tuong_toan_bien.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
+                                                      "SX-C: 119 kiểu hình mày, mắt, mũi, tai, miệng (bài thơ từng kiểu) khớp kho nguồn; 7 mục gắn `ngo`")},
+    "nhan_tuong_lieu_trang.json": {"mang": "nhantuong", **_nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
+                                                       "SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn")},
+    "nhan_tuong_do_hinh.json": {"mang": "nhantuong", "muc": "tom_y_co_thu",
+                                "ghi_chu": "lớp phủ đồ hình: nhãn chữ Hán đọc trên bản khắc Thần Tướng Toàn Biên; toạ độ đo trên ảnh; lời Việt rút từ KB"},
     "nhan_tuong_kb.json": {"mang": "nhantuong", "muc": "tom_y_co_thu", "ghi_chu": "KT-NT1/2 + KT-N1 + KT-NT3: cả 70 câu trích sách (`dac_diem.*.sach`) khớp kho nguồn `nhan_tuong_co_thu.json` + `than_tuong_toan_bien.json` (Thần Tướng Toàn Biên bản Cổ Kim Đồ Thư Tập Thành, Băng Giám, Tâm Tướng Thiên, Linh Khu, 4 sách Tứ khố — tests/test_kt_nt1_kho_nguon.py); lời luận vẫn là tóm ý, trường `nguon` Ma Y / Thần Tướng Toàn Biên chỉ ghi phái"},
     "tarot_kb.json": {"mang": "tarot", **_nv("tarot_waite_1910.json", "tests/test_tarot_nguon.py::test_moi_trich_la_nguyen_van_cua_nguon",
                                              "câu trích khớp Waite / Mathers / Book T; lớp Marseille, Thoth là tóm ý")},

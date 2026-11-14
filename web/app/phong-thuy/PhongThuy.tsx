@@ -1,4 +1,5 @@
 "use client";
+import { SachXuaGhi, type KhoiSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
 import { useChu } from "@/components/cms/DauCms";
 import { useEffect, useState } from "react";
 import { Compass } from "lucide-react";
@@ -27,6 +28,8 @@ interface MenhQuai {
   so_sanh_moc?: Record<MocNam, { quai: string; nhom: string; nam_tinh: number }>; moc_khac?: boolean;
   /** UI-PT 1: nghĩa + "dùng cho" của 8 du niên (KB) cho la bàn sống. */
   du_nien_y?: Record<string, { loai: string; y_nghia: string; dung_cho: string }>;
+  /** SX-C: chín điều sách xưa dặn cho người cung này (phòng ở, cửa, bếp, giếng…). */
+  sach_ghi?: KhoiSachGhi | null;
 }
 
 const TEN_MOC: Record<MocNam, string> = { lap_xuan: "Lập xuân", tet_viet: "Tết (lịch Việt)", tet_trung: "Tết (lịch Trung Quốc)" };
@@ -102,6 +105,12 @@ export function PhongThuy() {
           document.getElementById("huyen-khong")?.scrollIntoView({ behavior: "smooth", block: "start" });
         }} />
       </div>
+      {mq?.sach_ghi && (
+        <div className="mx-auto mt-8 max-w-3xl">
+          <SachXuaGhi khoi={mq.sach_ghi} moDun="phongthuy" tieuDe={`Sách xưa dặn gì cho người cung ${mq.quai}`}
+            moTa="Chín điều bố trí chép trong sách Bát trạch đời Minh cho đúng cung mệnh của bạn: phòng ở, cửa, lối đi, bếp, giếng. Đọc để tham khảo; nhà ngày nay áp dụng được tới đâu thì ghi rõ ở từng điều." />
+        </div>
+      )}
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="nha-cua-ban"><NhaCuaBan sinh={sinh} doHuongGoiY={doHuong} /></div>
       <div className="mx-auto mt-8 max-w-5xl scroll-mt-24" id="khao-sat-nha"><KhaoSatNha sinh={sinh} doHuongGoiY={doHuong} /></div>
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="huyen-khong"><HuyenKhong doToaGoiY={doToa} /></div>

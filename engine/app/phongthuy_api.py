@@ -20,6 +20,7 @@ from app import nhat_ky
 from app.config import ENGINE_VERSION
 from app.hoidap import phongthuy as hoidap_pt
 from app.luangiai import phongthuy_bo_cuc as bo_cuc
+from app.luangiai import sach_ghi_mon
 from app.luangiai import phongthuy_tuoi as pt_tuoi
 
 router = APIRouter(prefix="/v1/phongthuy", tags=["phongthuy"])
@@ -59,6 +60,7 @@ def api_menh_quai(inp: SinhInput) -> dict:
     return {"engine_version": ENGINE_VERSION, **mq, "bang_huong": bang,
             "huong_cat": [h for h, d in bang.items() if d in pt.CAT],
             "du_nien_y": du_nien_y,
+            "sach_ghi": sach_ghi_mon.phongthuy(quai=mq["quai"]),      # SX-C: chín điều sách dặn cho người cung này
             "so_sanh_moc": ss, "moc_khac": len({x["quai"] for x in ss.values()}) > 1}
 
 

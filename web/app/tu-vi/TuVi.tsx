@@ -14,6 +14,7 @@ import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { TruongPhai, type ThangNhuan } from "@/components/huyen-hoc/TruongPhai";
 import { CachCuc } from "@/components/huyen-hoc/CachCuc";
 import { SachXuaNoi } from "@/components/huyen-hoc/SachXuaNoi";
+import { SachXuaGhi } from "@/components/huyen-hoc/SachXuaGhi";
 import { CungSaoMenh } from "@/components/huyen-hoc/CungSaoMenh";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DaiHanNhay, DongHoaHan } from "@/components/huyen-hoc/HanLaSo";
@@ -301,6 +302,7 @@ export function TuVi() {
             <ChuGiai />
             {ls.cach_cuc && <CachCuc ds={ls.cach_cuc} luuY={ls.cach_cuc_luu_y} onHoi={hoi} />}
             {!nt && <SachXuaNoi ds={ls.sach_xua} moDun="tuvi" />}
+            {!nt && <SachXuaGhi khoi={ls.sach_ghi} moDun="tuvi" tieuDe="Sách xưa ghi gì về từng cung của bạn" />}
             {ls.co_canh_bao.length > 0 && (
               <p className="text-xs text-fg-faint">{ls.co_canh_bao.map((c) => LOI_NHAN_CO[c.loai] ?? c.chi_tiet).join(" ")}</p>
             )}

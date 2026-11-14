@@ -44,7 +44,8 @@ Next.js 16 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth,
   khám "nên chú ý đi khám … để phát hiện sớm những bệnh hay gặp ở phần này như …" (`skn.bo_ve_benh` là chỗ duy nhất); không
   tên bệnh hiểm nghèo (ung thư, đột quỵ, suy thận… vẫn ở `cum_cam`), không gán bệnh cho người đọc ("dễ bị / sẽ mắc …" —
   `skn.doan_benh`, bộ kiểm AI chặn); mảng khác chưa nêu tên bệnh. Vẫn cấm: chẩn
-  đoán, "sẽ ốm / mắc bệnh", tuổi thọ / năm mất, khuyên bỏ thuốc; triệu chứng cấp cứu → khuyên đi khám ngay.
+  đoán, "sẽ ốm / mắc bệnh", tuổi thọ / năm mất, khuyên bỏ thuốc; triệu chứng cấp cứu → khuyên đi khám ngay. (Lời CỔ THƯ về thọ / bệnh
+  chỉ được dẫn theo khuôn nhóm C của SX-C bên dưới — hàm ý, nói giảm, kèm đi khám; đó là dẫn sách, không phải hệ thống đoán.)
 - Lời luận giải: đời thường, câu ngắn, thuật ngữ chỉ ở "Vì sao nói vậy"; cấm cụm "giọng AI" (danh sách `cum_cam` trong
   KB, test bắt).
 - **CY-1 (chủ dự án chốt 2026-11-04) — chủ đề người dùng quan tâm không né, nói bằng "nên chú ý…"**: tiền bạc / đầu tư,
@@ -53,6 +54,18 @@ Next.js 16 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth,
   + việc cụ thể + câu ranh giới (luật sư / không phải lời khuyên đầu tư / an toàn giao thông). Không bao giờ phán "sẽ phá sản /
   ly hôn / bị kiện / gặp tai nạn"; năm Vận hạn gọi là thuận không thành "năm nên chú ý". Vẫn chặn: tuổi thọ / năm mất, số lô đề
   (chỉ nhắc giữ tiền), chọn nhân viên theo lá số, khủng hoảng luôn ưu tiên.
+- **SX-C (chủ dự án chốt 2026-11-14) — lời cổ thư lấy HẾT phần có ích, hệ thống không tự phán**: mọi câu trích sách xưa đưa
+  vào lời (Tử vi, Bát tự, Nhân tướng, Phong thuỷ) đi qua MỘT khuôn + MỘT bộ kiểm `engine/app/kb/sach_ghi.py`: câu Hán phải là
+  chuỗi con kho nguồn; ba nhóm — **A** sách khen / mô tả / dặn → nói nguyên ý ("Sách xưa ghi «…» — …"); **B** sách chê tiền,
+  việc, tính nết, quan hệ → "Nên chú ý …" + một việc cụ thể (như CY-1); **C** sách đoán thọ, bệnh, hình khắc người thân,
+  chuyện con cái, phẩm hạnh theo giới → **vẫn đưa vào** dưới dạng "Sách xưa có nhắc… Hàm ý theo ghi chép xưa: …" — nói giảm,
+  nói vòng, kèm việc giữ gìn (sức khoẻ phải có ý đi khám) và câu kết "ghi chép của người xưa, không phải lời đoán riêng cho
+  bạn". Nhóm C: không số tuổi, không tên bệnh hiểm nghèo, không "bạn sẽ / sẽ bị", không hiện phiên âm; **không** vào tiêu đề
+  hộp, tóm tắt chương, "Điều quan trọng nhất", thẻ chia sẻ, thông báo đẩy, lời nhắc AI; người chưa đủ 18 tuổi không nhận;
+  không đổi mức nào. Sách chỉ có bản dịch hiện đại (Dương Trạch Tam Yếu, Bát Trạch Minh Kính) → mục `tom_y` do ban biên tập
+  viết lại, không chép lời bản dịch. Bùa, trấn yểm, vật phẩm, đoán thai / trẻ sơ sinh: không nạp vào lời. **Câu hỏi trực
+  tiếp** "sống tới bao nhiêu tuổi / năm nào mất / có bị <bệnh> không" và khủng hoảng **giữ nguyên cổng cũ** (SK-1b, an toàn).
+  Kế hoạch + bảng nói giảm: `docs/KE-HOACH-NAP-SACH-XUA.md`.
 - Đổi lịch âm: thuật toán Hồ Ngọc Đức, xử lý múi giờ VN trước 1975
 - Ranh giới giờ Tý: **ĐÃ CHỐT `SWITCH_AT_0000`** (quyết định người vận hành,
   2026-08-15) — sinh 23:00–23:59 thuộc ngày hôm đó, giờ Tý. Hằng

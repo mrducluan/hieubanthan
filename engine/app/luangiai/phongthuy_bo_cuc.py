@@ -157,6 +157,19 @@ def _viec_cho(ma: str, m: dict, loai_nha: str | None) -> list[dict]:
     return viec
 
 
+def _sach_ghi(b: "BoCuc", mq: dict | None, dau_hieu: list[str], sinh: dict | None) -> dict | None:
+    from app import config  # noqa: PLC0415
+    from app.luangiai import sach_ghi_mon  # noqa: PLC0415
+
+    def quai(vt: str) -> str | None:
+        h = b.vi_tri.get(vt)
+        return pt.HUONG_QUAI.get(h) if h and h != "Trung cung" else None
+
+    tuoi = config.hom_nay_vn().year - sinh["nam"] if sinh and sinh.get("nam") else None
+    return sach_ghi_mon.phongthuy(quai=mq["quai"] if mq else None, dau_hieu=dau_hieu, cua=quai("cua_chinh"),
+                                  chu=quai("phong_ngu_chinh"), bep=quai("bep"), tuoi=tuoi)
+
+
 def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
     """`sinh` = {"nam": int, "gioi_tinh": "nam"|"nu", "ngay": date|None} hoặc None (chỉ luận theo trạch).
     `goc_nhin` (Q4): "sach_xua" — dấu hiệu nói theo cổ thư / dân gian; "doi_song" — nói theo ánh sáng, gió, tiếng ồn, tầm nhìn
@@ -237,6 +250,8 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
         "luu_y": k["luu_y"],
         # Q1 / Q2 / Q6: dấu hiệu veto đã xác nhận (trần mức), mặt bằng vẽ tay, luật thực hành đang áp dụng.
         "veto_da_xac_nhan": [d["ma"] for d in dau_hieu if d["veto"]],
+        # SX-C: điều sách xưa ghi — theo cung mệnh, theo dấu hiệu đã xác nhận, theo cặp cửa – phòng chính – bếp.
+        "sach_ghi": _sach_ghi(b, mq, [d["ma"] for d in dau_hieu], sinh),
         "mat_bang": mat_bang,
         "quy_tac": _quy_tac(b.loai_nha, co),
         "goc_nhin": goc_nhin,

@@ -1,0 +1,1189 @@
+{
+ "_nguon": "Dương Trạch Thập Thư (陽宅十書) quyển 1 — «東四位宅圖說» và «西四位宅圖說»: chín điều bố trí cho từng cung mệnh. Câu Hán cắt từ kho nguồn; phương hướng đọc từ chính câu; lời Việt ráp theo mẫu (scripts/nap_cung_menh_sach.py).",
+ "source_id": "duong_trach_thap_thu",
+ "school_id": "bat_trach",
+ "trang_thai": "nhap_ban_bien_tap",
+ "can_doi_chieu": true,
+ "vo_chong_khac_nhom": {
+  "han": "大抵夫婦福德不同則當以夫為主耳",
+  "am": "Đại để phu phụ phúc đức bất đồng tắc đương dĩ phu vi chủ nhĩ.",
+  "y": "Vợ chồng khác nhóm mệnh thì sách xưa lấy người chồng làm chính để chọn nhà, rồi xếp gian ở cho người kia về phía hợp với họ. Ngày nay có thể hiểu là lấy người ở nhà nhiều nhất làm chính.",
+  "nhom": "A",
+  "chu_de": "nha_cua",
+  "nguon": "duong_trach_thap_thu"
+ },
+ "cung": {
+  "Khảm": [
+   {
+    "viec": "phong_o",
+    "ten": "Phòng ở",
+    "han": "福元宜居南房東間上上吉東房南間上吉北房中間亦吉",
+    "am": "Phúc nguyên nghi cư nam phòng đông gian thượng thượng cát đông phòng nam gian thượng cát bắc phòng trung gian diệc cát.",
+    "y": "Trong nhà nhiều dãy, nên ở gian phía Đông của dãy nhà phía Nam hoặc gian phía Nam của dãy nhà phía Đông; gian giữa dãy phía Bắc cũng được.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "nha",
+    "ten": "Nhà toạ hướng nào",
+    "han": "宅宜住坐北向南宅上上吉坐南向北宅上吉坐西向東宅亦吉惟坐東向西宅不宜居",
+    "am": "Trạch nghi trú toạ bắc hướng nam trạch thượng thượng cát toạ nam hướng bắc trạch thượng cát toạ tây hướng đông trạch diệc cát duy toạ đông hướng tây trạch bất nghi cư.",
+    "y": "Hợp nhất là nhà lưng quay về Bắc, mặt nhìn Nam; rồi tới nhà lưng Nam mặt Bắc và nhà lưng Tây mặt Đông. Nhà lưng Đông mặt Tây kém hợp vì khó mở cửa về phía tốt của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "cua",
+    "ten": "Cửa chính",
+    "han": "門宜走東南巽方巳字辰字生氣門上上吉正北坎方福德門上吉正南離方延年門亦吉",
+    "am": "Môn nghi tẩu đông nam tốn phương tỵ tự thìn tự sinh khí môn thượng thượng cát chính bắc khảm phương phúc đức môn thượng cát chính nam ly phương diên niên môn diệc cát.",
+    "y": "Cửa chính nên mở về phía Đông Nam (Sinh Khí), Bắc (Phục Vị) và Nam (Diên Niên).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Nam",
+      "du_nien": "Sinh Khí"
+     },
+     {
+      "phuong": "Bắc",
+      "du_nien": "Phục Vị"
+     },
+     {
+      "phuong": "Nam",
+      "du_nien": "Diên Niên"
+     }
+    ]
+   },
+   {
+    "viec": "loi_di",
+    "ten": "Lối đi lại",
+    "han": "宅中所行路宜由東方上吉",
+    "am": "Trạch trung sở hành lộ nghi do đông phương thượng cát.",
+    "y": "Lối đi lại chính trong nhà nên nằm về phía Đông.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông"
+     }
+    ]
+   },
+   {
+    "viec": "gieng",
+    "ten": "Giếng, nguồn nước",
+    "han": "井宜在宅東南辰巳方長生位大吉",
+    "am": "Tỉnh nghi tại trạch đông nam thìn tỵ phương trường sinh vị đại cát.",
+    "y": "Giếng hợp ở phía Đông Nam của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Nam"
+     }
+    ],
+    "ngay_nay": "Xưa là giếng; nay hiểu là bể nước, bồn nước, chỗ đặt máy bơm."
+   },
+   {
+    "viec": "bep",
+    "ten": "Bếp",
+    "han": "廚竈宜在宅東北甲寅字五鬼方大吉",
+    "am": "Trù táo nghi tại trạch đông bắc giáp dần tự ngũ quỷ phương đại cát.",
+    "y": "Bếp hợp đặt ở phía Đông Bắc (Ngũ Quỷ) của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Bắc",
+      "du_nien": "Ngũ Quỷ"
+     }
+    ]
+   },
+   {
+    "viec": "coi_xay",
+    "ten": "Chỗ ồn, chỗ nặng",
+    "han": "碾磨宜在宅東北五鬼方正西禍害方大吉",
+    "am": "Niễn ma nghi tại trạch đông bắc ngũ quỷ phương chính tây hoạ hại phương đại cát.",
+    "y": "Cối xay, cối giã hợp đặt ở phía Đông Bắc (Ngũ Quỷ) và Tây (Hoạ Hại) — sách để việc ồn và nặng ở phía kém của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Bắc",
+      "du_nien": "Ngũ Quỷ"
+     },
+     {
+      "phuong": "Tây",
+      "du_nien": "Hoạ Hại"
+     }
+    ],
+    "ngay_nay": "Xưa là cối xay, cối giã; nay là máy giặt, máy bơm, kho đồ nặng."
+   },
+   {
+    "viec": "chuong",
+    "ten": "Chỗ nuôi, chỗ để xe",
+    "han": "牛馬欄宜在宅東南生氣方大吉",
+    "am": "Ngưu mã lan nghi tại trạch đông nam sinh khí phương đại cát.",
+    "y": "Chuồng trâu ngựa hợp ở phía Đông Nam (Sinh Khí).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Nam",
+      "du_nien": "Sinh Khí"
+     }
+    ],
+    "ngay_nay": "Xưa là chuồng trâu ngựa; nay là chỗ để xe, chỗ nuôi thú."
+   },
+   {
+    "viec": "thoat_nuoc",
+    "ten": "Thoát nước",
+    "han": "放水宜在甲乙巨門方巨門水去來皆可",
+    "am": "Phóng thuỷ nghi tại giáp ất cự môn phương cự môn thuỷ khứ lai giai khả.",
+    "y": "Nước thải nên cho thoát về phía Đông.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông"
+     }
+    ]
+   }
+  ],
+  "Ly": [
+   {
+    "viec": "phong_o",
+    "ten": "Phòng ở",
+    "han": "福元宜居南房東間東房南間俱上上吉北房中間亦吉",
+    "am": "Phúc nguyên nghi cư nam phòng đông gian đông phòng nam gian câu thượng thượng cát bắc phòng trung gian diệc cát.",
+    "y": "Trong nhà nhiều dãy, nên ở gian phía Đông của dãy nhà phía Nam hoặc gian phía Nam của dãy nhà phía Đông; gian giữa dãy phía Bắc cũng được.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "nha",
+    "ten": "Nhà toạ hướng nào",
+    "han": "宅宜住坐北向南宅上上吉坐南向北宅上吉坐西向東宅亦吉惟坐東向西宅不宜居",
+    "am": "Trạch nghi trú toạ bắc hướng nam trạch thượng thượng cát toạ nam hướng bắc trạch thượng cát toạ tây hướng đông trạch diệc cát duy toạ đông hướng tây trạch bất nghi cư.",
+    "y": "Hợp nhất là nhà lưng quay về Bắc, mặt nhìn Nam; rồi tới nhà lưng Nam mặt Bắc và nhà lưng Tây mặt Đông. Nhà lưng Đông mặt Tây kém hợp vì khó mở cửa về phía tốt của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "cua",
+    "ten": "Cửa chính",
+    "han": "正北坎方壬字延年門亦上吉東方甲卯乙字生氣門亦大吉",
+    "am": "Chính bắc khảm phương nhâm tự diên niên môn diệc thượng cát đông phương giáp mão ất tự sinh khí môn diệc đại cát.",
+    "y": "Cửa chính nên mở về phía Đông Nam (Thiên Y), Bắc (Diên Niên) và Đông (Sinh Khí).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Nam",
+      "du_nien": "Thiên Y"
+     },
+     {
+      "phuong": "Bắc",
+      "du_nien": "Diên Niên"
+     },
+     {
+      "phuong": "Đông",
+      "du_nien": "Sinh Khí"
+     }
+    ]
+   },
+   {
+    "viec": "loi_di",
+    "ten": "Lối đi lại",
+    "han": "宅中所行路宜由東方上吉",
+    "am": "Trạch trung sở hành lộ nghi do đông phương thượng cát.",
+    "y": "Lối đi lại chính trong nhà nên nằm về phía Đông.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông"
+     }
+    ]
+   },
+   {
+    "viec": "gieng",
+    "ten": "Giếng, nguồn nước",
+    "han": "井宜在正東卯字方長生位大吉",
+    "am": "Tỉnh nghi tại chính đông mão tự phương trường sinh vị đại cát.",
+    "y": "Giếng hợp ở phía Đông của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông"
+     }
+    ],
+    "ngay_nay": "Xưa là giếng; nay hiểu là bể nước, bồn nước, chỗ đặt máy bơm."
+   },
+   {
+    "viec": "bep",
+    "ten": "Bếp",
+    "han": "廚竈宜在宅東北甲寅字禍害方大吉",
+    "am": "Trù táo nghi tại trạch đông bắc giáp dần tự hoạ hại phương đại cát.",
+    "y": "Bếp hợp đặt ở phía Đông Bắc (Hoạ Hại) của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Bắc",
+      "du_nien": "Hoạ Hại"
+     }
+    ]
+   },
+   {
+    "viec": "coi_xay",
+    "ten": "Chỗ ồn, chỗ nặng",
+    "han": "碾磨宜在宅正西五鬼方東北禍害方大吉",
+    "am": "Niễn ma nghi tại trạch chính tây ngũ quỷ phương đông bắc hoạ hại phương đại cát.",
+    "y": "Cối xay, cối giã hợp đặt ở phía Tây (Ngũ Quỷ) và Đông Bắc (Hoạ Hại) — sách để việc ồn và nặng ở phía kém của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây",
+      "du_nien": "Ngũ Quỷ"
+     },
+     {
+      "phuong": "Đông Bắc",
+      "du_nien": "Hoạ Hại"
+     }
+    ],
+    "ngay_nay": "Xưa là cối xay, cối giã; nay là máy giặt, máy bơm, kho đồ nặng."
+   },
+   {
+    "viec": "chuong",
+    "ten": "Chỗ nuôi, chỗ để xe",
+    "han": "牛馬欄宜在宅正東生氣方大吉",
+    "am": "Ngưu mã lan nghi tại trạch chính đông sinh khí phương đại cát.",
+    "y": "Chuồng trâu ngựa hợp ở phía Đông (Sinh Khí).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông",
+      "du_nien": "Sinh Khí"
+     }
+    ],
+    "ngay_nay": "Xưa là chuồng trâu ngựa; nay là chỗ để xe, chỗ nuôi thú."
+   },
+   {
+    "viec": "thoat_nuoc",
+    "ten": "Thoát nước",
+    "han": "放水避忌陰水只宜在乾破軍方",
+    "am": "Phóng thuỷ tị kỵ âm thuỷ chỉ nghi tại càn phá quân phương.",
+    "y": "Nước thải nên cho thoát về phía Tây Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Bắc"
+     }
+    ]
+   }
+  ],
+  "Chấn": [
+   {
+    "viec": "phong_o",
+    "ten": "Phòng ở",
+    "han": "福元宜住東房南間南房東間俱上吉北房中間亦吉",
+    "am": "Phúc nguyên nghi trú đông phòng nam gian nam phòng đông gian câu thượng cát bắc phòng trung gian diệc cát.",
+    "y": "Trong nhà nhiều dãy, nên ở gian phía Đông của dãy nhà phía Nam hoặc gian phía Nam của dãy nhà phía Đông; gian giữa dãy phía Bắc cũng được.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "nha",
+    "ten": "Nhà toạ hướng nào",
+    "han": "宅宜住坐北向南巽方巳字門宅上上吉坐南向北坎方壬字門宅吉坐西向東巽方辰字門宅亦吉惟坐東向西宅不宜居",
+    "am": "Trạch nghi trú toạ bắc hướng nam tốn phương tỵ tự môn trạch thượng thượng cát toạ nam hướng bắc khảm phương nhâm tự môn trạch cát toạ tây hướng đông tốn phương thìn tự môn trạch diệc cát duy toạ đông hướng tây trạch bất nghi cư.",
+    "y": "Hợp nhất là nhà lưng quay về Bắc, mặt nhìn Nam; rồi tới nhà lưng Nam mặt Bắc và nhà lưng Tây mặt Đông. Nhà lưng Đông mặt Tây kém hợp vì khó mở cửa về phía tốt của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "cua",
+    "ten": "Cửa chính",
+    "han": "門宜走東南巽方延年門正北坎方天乙巨門俱上吉正南離門亦吉",
+    "am": "Môn nghi tẩu đông nam tốn phương diên niên môn chính bắc khảm phương thiên ất cự môn câu thượng cát chính nam ly môn diệc cát.",
+    "y": "Cửa chính nên mở về phía Đông Nam (Diên Niên), Bắc (Thiên Y) và Nam.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Nam",
+      "du_nien": "Diên Niên"
+     },
+     {
+      "phuong": "Bắc",
+      "du_nien": "Thiên Y"
+     },
+     {
+      "phuong": "Nam"
+     }
+    ]
+   },
+   {
+    "viec": "loi_di",
+    "ten": "Lối đi lại",
+    "han": "宅中所行路宜由東方上吉",
+    "am": "Trạch trung sở hành lộ nghi do đông phương thượng cát.",
+    "y": "Lối đi lại chính trong nhà nên nằm về phía Đông.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông"
+     }
+    ]
+   },
+   {
+    "viec": "coi_xay",
+    "ten": "Chỗ ồn, chỗ nặng",
+    "han": "碾磨宜在宅西南禍害方西北五鬼方大吉",
+    "am": "Niễn ma nghi tại trạch tây nam hoạ hại phương tây bắc ngũ quỷ phương đại cát.",
+    "y": "Cối xay, cối giã hợp đặt ở phía Tây Nam (Hoạ Hại) và Tây Bắc (Ngũ Quỷ) — sách để việc ồn và nặng ở phía kém của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Nam",
+      "du_nien": "Hoạ Hại"
+     },
+     {
+      "phuong": "Tây Bắc",
+      "du_nien": "Ngũ Quỷ"
+     }
+    ],
+    "ngay_nay": "Xưa là cối xay, cối giã; nay là máy giặt, máy bơm, kho đồ nặng."
+   },
+   {
+    "viec": "gieng",
+    "ten": "Giếng, nguồn nước",
+    "han": "井宜在宅南丙字長生位大吉",
+    "am": "Tỉnh nghi tại trạch nam bính tự trường sinh vị đại cát.",
+    "y": "Giếng hợp ở phía Nam của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Nam"
+     }
+    ],
+    "ngay_nay": "Xưa là giếng; nay hiểu là bể nước, bồn nước, chỗ đặt máy bơm."
+   },
+   {
+    "viec": "bep",
+    "ten": "Bếp",
+    "han": "廚竈宜在西方庚字上大吉",
+    "am": "Trù táo nghi tại tây phương canh tự thượng đại cát.",
+    "y": "Bếp hợp đặt ở phía Tây của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây"
+     }
+    ]
+   },
+   {
+    "viec": "chuong",
+    "ten": "Chỗ nuôi, chỗ để xe",
+    "han": "牛馬欄宜在宅正南生氣方大吉",
+    "am": "Ngưu mã lan nghi tại trạch chính nam sinh khí phương đại cát.",
+    "y": "Chuồng trâu ngựa hợp ở phía Nam (Sinh Khí).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Nam",
+      "du_nien": "Sinh Khí"
+     }
+    ],
+    "ngay_nay": "Xưa là chuồng trâu ngựa; nay là chỗ để xe, chỗ nuôi thú."
+   },
+   {
+    "viec": "thoat_nuoc",
+    "ten": "Thoát nước",
+    "han": "放水宜在西方辛字庚字上大吉",
+    "am": "Phóng thuỷ nghi tại tây phương tân tự canh tự thượng đại cát.",
+    "y": "Nước thải nên cho thoát về phía Tây.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây"
+     }
+    ]
+   }
+  ],
+  "Tốn": [
+   {
+    "viec": "phong_o",
+    "ten": "Phòng ở",
+    "han": "福元宜居東房南間南房東間俱上吉北房中間亦吉",
+    "am": "Phúc nguyên nghi cư đông phòng nam gian nam phòng đông gian câu thượng cát bắc phòng trung gian diệc cát.",
+    "y": "Trong nhà nhiều dãy, nên ở gian phía Đông của dãy nhà phía Nam hoặc gian phía Nam của dãy nhà phía Đông; gian giữa dãy phía Bắc cũng được.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "nha",
+    "ten": "Nhà toạ hướng nào",
+    "han": "宅宜住坐北向南巽門宅上上吉坐南向北坎門宅上吉坐西向東巽門宅亦吉惟坐東向西宅不宜居",
+    "am": "Trạch nghi trú toạ bắc hướng nam tốn môn trạch thượng thượng cát toạ nam hướng bắc khảm môn trạch thượng cát toạ tây hướng đông tốn môn trạch diệc cát duy toạ đông hướng tây trạch bất nghi cư.",
+    "y": "Hợp nhất là nhà lưng quay về Bắc, mặt nhìn Nam; rồi tới nhà lưng Nam mặt Bắc và nhà lưng Tây mặt Đông. Nhà lưng Đông mặt Tây kém hợp vì khó mở cửa về phía tốt của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "cua",
+    "ten": "Cửa chính",
+    "han": "門宜走東南巽方巳字辰字福德門正北坎方生氣門俱上吉正南離方天乙門亦吉",
+    "am": "Môn nghi tẩu đông nam tốn phương tỵ tự thìn tự phúc đức môn chính bắc khảm phương sinh khí môn câu thượng cát chính nam ly phương thiên ất môn diệc cát.",
+    "y": "Cửa chính nên mở về phía Đông Nam (Phục Vị), Bắc (Sinh Khí) và Nam (Thiên Y).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Nam",
+      "du_nien": "Phục Vị"
+     },
+     {
+      "phuong": "Bắc",
+      "du_nien": "Sinh Khí"
+     },
+     {
+      "phuong": "Nam",
+      "du_nien": "Thiên Y"
+     }
+    ]
+   },
+   {
+    "viec": "loi_di",
+    "ten": "Lối đi lại",
+    "han": "宅中所行路宜由東方上吉",
+    "am": "Trạch trung sở hành lộ nghi do đông phương thượng cát.",
+    "y": "Lối đi lại chính trong nhà nên nằm về phía Đông.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông"
+     }
+    ]
+   },
+   {
+    "viec": "coi_xay",
+    "ten": "Chỗ ồn, chỗ nặng",
+    "han": "碾磨宜在宅西南五鬼方西北禍害方大吉",
+    "am": "Niễn ma nghi tại trạch tây nam ngũ quỷ phương tây bắc hoạ hại phương đại cát.",
+    "y": "Cối xay, cối giã hợp đặt ở phía Tây Nam (Ngũ Quỷ) và Tây Bắc (Hoạ Hại) — sách để việc ồn và nặng ở phía kém của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Nam",
+      "du_nien": "Ngũ Quỷ"
+     },
+     {
+      "phuong": "Tây Bắc",
+      "du_nien": "Hoạ Hại"
+     }
+    ],
+    "ngay_nay": "Xưa là cối xay, cối giã; nay là máy giặt, máy bơm, kho đồ nặng."
+   },
+   {
+    "viec": "gieng",
+    "ten": "Giếng, nguồn nước",
+    "han": "井宜在正北方長生位大吉",
+    "am": "Tỉnh nghi tại chính bắc phương trường sinh vị đại cát.",
+    "y": "Giếng hợp ở phía Bắc của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Bắc"
+     }
+    ],
+    "ngay_nay": "Xưa là giếng; nay hiểu là bể nước, bồn nước, chỗ đặt máy bơm."
+   },
+   {
+    "viec": "bep",
+    "ten": "Bếp",
+    "han": "廚竈宜在西方庚字上大吉",
+    "am": "Trù táo nghi tại tây phương canh tự thượng đại cát.",
+    "y": "Bếp hợp đặt ở phía Tây của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây"
+     }
+    ]
+   },
+   {
+    "viec": "chuong",
+    "ten": "Chỗ nuôi, chỗ để xe",
+    "han": "牛馬欄宜在正北生氣方大吉",
+    "am": "Ngưu mã lan nghi tại chính bắc sinh khí phương đại cát.",
+    "y": "Chuồng trâu ngựa hợp ở phía Bắc (Sinh Khí).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Bắc",
+      "du_nien": "Sinh Khí"
+     }
+    ],
+    "ngay_nay": "Xưa là chuồng trâu ngựa; nay là chỗ để xe, chỗ nuôi thú."
+   },
+   {
+    "viec": "thoat_nuoc",
+    "ten": "Thoát nước",
+    "han": "放水宜在西方辛字庚字俱上吉南方丁字亦可吉",
+    "am": "Phóng thuỷ nghi tại tây phương tân tự canh tự câu thượng cát nam phương đinh tự diệc khả cát.",
+    "y": "Nước thải nên cho thoát về phía Tây và Nam.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây"
+     },
+     {
+      "phuong": "Nam"
+     }
+    ]
+   }
+  ],
+  "Càn": [
+   {
+    "viec": "phong_o",
+    "ten": "Phòng ở",
+    "han": "福元宜居西房西樓上上吉次居北房西間福德吉北房東間天乙吉南房西間延年亦可居",
+    "am": "Phúc nguyên nghi cư tây phòng tây lâu thượng thượng cát thứ cư bắc phòng tây gian phúc đức cát bắc phòng đông gian thiên ất cát nam phòng tây gian diên niên diệc khả cư.",
+    "y": "Trong nhà nhiều dãy, nên ở dãy nhà phía Tây (hoặc tầng trên phía Tây); gian phía Tây của dãy Bắc hay dãy Nam cũng được. Sách dặn tránh gian chính giữa của dãy Bắc và dãy Nam.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "nha",
+    "ten": "Nhà toạ hướng nào",
+    "han": "宅宜住坐北向南坤門宅坐南向北乾門宅俱上吉坐東向西乾門坤門兌門宅俱上吉坐南向北宅艮方丑字門亦吉坐西向東宅艮方寅字門亦吉",
+    "am": "Trạch nghi trú toạ bắc hướng nam khôn môn trạch toạ nam hướng bắc càn môn trạch câu thượng cát toạ đông hướng tây càn môn khôn môn đoài môn trạch câu thượng cát toạ nam hướng bắc trạch cấn phương sửu tự môn diệc cát toạ tây hướng đông trạch cấn phương dần tự môn diệc cát.",
+    "y": "Hợp là nhà lưng Bắc mặt Nam mở cửa góc Tây Nam, nhà lưng Nam mặt Bắc mở cửa góc Tây Bắc; nhà lưng Đông mặt Tây cũng hợp. Nhà lưng Tây mặt Đông thì mở cửa lệch về góc Đông Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "cua",
+    "ten": "Cửa chính",
+    "han": "西南坤方未字申字延年門上吉正西辛字生氣門東北艮方寅字丑字門亦吉但不可正當艮字別法謂之鬼門",
+    "am": "Tây nam khôn phương mùi tự thân tự diên niên môn thượng cát chính tây tân tự sinh khí môn đông bắc cấn phương dần tự sửu tự môn diệc cát đãn bất khả chính đương cấn tự biệt pháp vị chi quỷ môn.",
+    "y": "Cửa chính nên mở về phía Tây Bắc (Phục Vị), Tây Nam (Diên Niên), Tây (Sinh Khí) và Đông Bắc. Sách dặn không đặt cửa đúng chính giữa hướng Đông Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Bắc",
+      "du_nien": "Phục Vị"
+     },
+     {
+      "phuong": "Tây Nam",
+      "du_nien": "Diên Niên"
+     },
+     {
+      "phuong": "Tây",
+      "du_nien": "Sinh Khí"
+     },
+     {
+      "phuong": "Đông Bắc"
+     }
+    ]
+   },
+   {
+    "viec": "loi_di",
+    "ten": "Lối đi lại",
+    "han": "宅中所行路宜由西方上吉",
+    "am": "Trạch trung sở hành lộ nghi do tây phương thượng cát.",
+    "y": "Lối đi lại chính trong nhà nên nằm về phía Tây.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây"
+     }
+    ]
+   },
+   {
+    "viec": "gieng",
+    "ten": "Giếng, nguồn nước",
+    "han": "井宜在宅正西方長生位大吉",
+    "am": "Tỉnh nghi tại trạch chính tây phương trường sinh vị đại cát.",
+    "y": "Giếng hợp ở phía Tây của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây"
+     }
+    ],
+    "ngay_nay": "Xưa là giếng; nay hiểu là bể nước, bồn nước, chỗ đặt máy bơm."
+   },
+   {
+    "viec": "bep",
+    "ten": "Bếp",
+    "han": "廚竈宜在宅南方丙字上大吉",
+    "am": "Trù táo nghi tại trạch nam phương bính tự thượng đại cát.",
+    "y": "Bếp hợp đặt ở phía Nam của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Nam"
+     }
+    ]
+   },
+   {
+    "viec": "coi_xay",
+    "ten": "Chỗ ồn, chỗ nặng",
+    "han": "碾磨宜在宅正東五鬼方東南禍害方大吉",
+    "am": "Niễn ma nghi tại trạch chính đông ngũ quỷ phương đông nam hoạ hại phương đại cát.",
+    "y": "Cối xay, cối giã hợp đặt ở phía Đông (Ngũ Quỷ) và Đông Nam (Hoạ Hại) — sách để việc ồn và nặng ở phía kém của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông",
+      "du_nien": "Ngũ Quỷ"
+     },
+     {
+      "phuong": "Đông Nam",
+      "du_nien": "Hoạ Hại"
+     }
+    ],
+    "ngay_nay": "Xưa là cối xay, cối giã; nay là máy giặt, máy bơm, kho đồ nặng."
+   },
+   {
+    "viec": "chuong",
+    "ten": "Chỗ nuôi, chỗ để xe",
+    "han": "牛馬欄宜在宅正西生氣方上吉",
+    "am": "Ngưu mã lan nghi tại trạch chính tây sinh khí phương thượng cát.",
+    "y": "Chuồng trâu ngựa hợp ở phía Tây (Sinh Khí).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây",
+      "du_nien": "Sinh Khí"
+     }
+    ],
+    "ngay_nay": "Xưa là chuồng trâu ngựa; nay là chỗ để xe, chỗ nuôi thú."
+   },
+   {
+    "viec": "thoat_nuoc",
+    "ten": "Thoát nước",
+    "han": "放水宜在東方甲字乙字北方壬字癸字俱吉",
+    "am": "Phóng thuỷ nghi tại đông phương giáp tự ất tự bắc phương nhâm tự quý tự câu cát.",
+    "y": "Nước thải nên cho thoát về phía Đông và Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông"
+     },
+     {
+      "phuong": "Bắc"
+     }
+    ]
+   }
+  ],
+  "Khôn": [
+   {
+    "viec": "phong_o",
+    "ten": "Phòng ở",
+    "han": "福元宜居西房西樓南間北間俱上上吉北房西間東間南房西間亦吉但房之中間未善耳北房中一間謂之絕命南房中一間謂之六煞",
+    "am": "Phúc nguyên nghi cư tây phòng tây lâu nam gian bắc gian câu thượng thượng cát bắc phòng tây gian đông gian nam phòng tây gian diệc cát đãn phòng chi trung gian mùi thiện nhĩ bắc phòng trung nhất gian vị chi tuyệt mệnh nam phòng trung nhất gian vị chi lục sát.",
+    "y": "Trong nhà nhiều dãy, nên ở dãy nhà phía Tây (hoặc tầng trên phía Tây); gian phía Tây của dãy Bắc hay dãy Nam cũng được. Sách dặn tránh gian chính giữa của dãy Bắc và dãy Nam.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "nha",
+    "ten": "Nhà toạ hướng nào",
+    "han": "宅宜住坐北向南坤門宅坐南向北乾門宅俱上上吉坐南向北艮方丑字門坐東向西坤門兌門乾門宅坐西向東艮方寅字門宅亦上吉",
+    "am": "Trạch nghi trú toạ bắc hướng nam khôn môn trạch toạ nam hướng bắc càn môn trạch câu thượng thượng cát toạ nam hướng bắc cấn phương sửu tự môn toạ đông hướng tây khôn môn đoài môn càn môn trạch toạ tây hướng đông cấn phương dần tự môn trạch diệc thượng cát.",
+    "y": "Hợp là nhà lưng Bắc mặt Nam mở cửa góc Tây Nam, nhà lưng Nam mặt Bắc mở cửa góc Tây Bắc; nhà lưng Đông mặt Tây cũng hợp. Nhà lưng Tây mặt Đông thì mở cửa lệch về góc Đông Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "cua",
+    "ten": "Cửa chính",
+    "han": "門宜走西北乾方亥字戌字延年門西南坤方未字申字福德門上吉東北艮方丑字寅字門亦吉但不宜正當艮字別法謂之鬼門",
+    "am": "Môn nghi tẩu tây bắc càn phương hợi tự tuất tự diên niên môn tây nam khôn phương mùi tự thân tự phúc đức môn thượng cát đông bắc cấn phương sửu tự dần tự môn diệc cát đãn bất nghi chính đương cấn tự biệt pháp vị chi quỷ môn.",
+    "y": "Cửa chính nên mở về phía Tây Bắc (Diên Niên), Tây Nam (Phục Vị) và Đông Bắc. Sách dặn không đặt cửa đúng chính giữa hướng Đông Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Bắc",
+      "du_nien": "Diên Niên"
+     },
+     {
+      "phuong": "Tây Nam",
+      "du_nien": "Phục Vị"
+     },
+     {
+      "phuong": "Đông Bắc"
+     }
+    ]
+   },
+   {
+    "viec": "loi_di",
+    "ten": "Lối đi lại",
+    "han": "宅中所行路宜由西方大吉",
+    "am": "Trạch trung sở hành lộ nghi do tây phương đại cát.",
+    "y": "Lối đi lại chính trong nhà nên nằm về phía Tây.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây"
+     }
+    ]
+   },
+   {
+    "viec": "gieng",
+    "ten": "Giếng, nguồn nước",
+    "han": "井宜在東北方長生位大吉",
+    "am": "Tỉnh nghi tại đông bắc phương trường sinh vị đại cát.",
+    "y": "Giếng hợp ở phía Đông Bắc của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Bắc"
+     }
+    ],
+    "ngay_nay": "Xưa là giếng; nay hiểu là bể nước, bồn nước, chỗ đặt máy bơm."
+   },
+   {
+    "viec": "bep",
+    "ten": "Bếp",
+    "han": "廚竈宜在宅北方癸字上大吉",
+    "am": "Trù táo nghi tại trạch bắc phương quý tự thượng đại cát.",
+    "y": "Bếp hợp đặt ở phía Bắc của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Bắc"
+     }
+    ]
+   },
+   {
+    "viec": "coi_xay",
+    "ten": "Chỗ ồn, chỗ nặng",
+    "han": "碾磨宜在宅正東禍害方東南五鬼方大吉",
+    "am": "Niễn ma nghi tại trạch chính đông hoạ hại phương đông nam ngũ quỷ phương đại cát.",
+    "y": "Cối xay, cối giã hợp đặt ở phía Đông (Hoạ Hại) và Đông Nam (Ngũ Quỷ) — sách để việc ồn và nặng ở phía kém của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông",
+      "du_nien": "Hoạ Hại"
+     },
+     {
+      "phuong": "Đông Nam",
+      "du_nien": "Ngũ Quỷ"
+     }
+    ],
+    "ngay_nay": "Xưa là cối xay, cối giã; nay là máy giặt, máy bơm, kho đồ nặng."
+   },
+   {
+    "viec": "chuong",
+    "ten": "Chỗ nuôi, chỗ để xe",
+    "han": "牛馬欄宜在東北生氣方大吉",
+    "am": "Ngưu mã lan nghi tại đông bắc sinh khí phương đại cát.",
+    "y": "Chuồng trâu ngựa hợp ở phía Đông Bắc (Sinh Khí).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông Bắc",
+      "du_nien": "Sinh Khí"
+     }
+    ],
+    "ngay_nay": "Xưa là chuồng trâu ngựa; nay là chỗ để xe, chỗ nuôi thú."
+   },
+   {
+    "viec": "thoat_nuoc",
+    "ten": "Thoát nước",
+    "han": "放水宜在東方甲字乙字北方壬字癸字俱吉",
+    "am": "Phóng thuỷ nghi tại đông phương giáp tự ất tự bắc phương nhâm tự quý tự câu cát.",
+    "y": "Nước thải nên cho thoát về phía Đông và Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông"
+     },
+     {
+      "phuong": "Bắc"
+     }
+    ]
+   }
+  ],
+  "Cấn": [
+   {
+    "viec": "phong_o",
+    "ten": "Phòng ở",
+    "han": "福元宜居西房西樓俱上上吉北房西間東間亦吉南房西間亦可居但房之中間未善耳北房中一間謂之五鬼南房中一間謂之六煞",
+    "am": "Phúc nguyên nghi cư tây phòng tây lâu câu thượng thượng cát bắc phòng tây gian đông gian diệc cát nam phòng tây gian diệc khả cư đãn phòng chi trung gian mùi thiện nhĩ bắc phòng trung nhất gian vị chi ngũ quỷ nam phòng trung nhất gian vị chi lục sát.",
+    "y": "Trong nhà nhiều dãy, nên ở dãy nhà phía Tây (hoặc tầng trên phía Tây); gian phía Tây của dãy Bắc hay dãy Nam cũng được. Sách dặn tránh gian chính giữa của dãy Bắc và dãy Nam.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "nha",
+    "ten": "Nhà toạ hướng nào",
+    "han": "宅宜住坐北向南坤門宅坐南向北乾門宅坐南向北艮方丑字門宅坐東向西坤兌乾門宅坐西向東艮方寅字門宅亦上吉",
+    "am": "Trạch nghi trú toạ bắc hướng nam khôn môn trạch toạ nam hướng bắc càn môn trạch toạ nam hướng bắc cấn phương sửu tự môn trạch toạ đông hướng tây khôn đoài càn môn trạch toạ tây hướng đông cấn phương dần tự môn trạch diệc thượng cát.",
+    "y": "Hợp là nhà lưng Bắc mặt Nam mở cửa góc Tây Nam, nhà lưng Nam mặt Bắc mở cửa góc Tây Bắc; nhà lưng Đông mặt Tây cũng hợp. Nhà lưng Tây mặt Đông thì mở cửa lệch về góc Đông Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "cua",
+    "ten": "Cửa chính",
+    "han": "門宜走西北乾方亥字戌字天乙門西南坤方未字申字生氣門俱上吉東北艮方丑字寅字福德門亦吉但不宜正當艮字別法謂之鬼門",
+    "am": "Môn nghi tẩu tây bắc càn phương hợi tự tuất tự thiên ất môn tây nam khôn phương mùi tự thân tự sinh khí môn câu thượng cát đông bắc cấn phương sửu tự dần tự phúc đức môn diệc cát đãn bất nghi chính đương cấn tự biệt pháp vị chi quỷ môn.",
+    "y": "Cửa chính nên mở về phía Tây Bắc (Thiên Y), Tây Nam (Sinh Khí) và Đông Bắc (Phục Vị). Sách dặn không đặt cửa đúng chính giữa hướng Đông Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Bắc",
+      "du_nien": "Thiên Y"
+     },
+     {
+      "phuong": "Tây Nam",
+      "du_nien": "Sinh Khí"
+     },
+     {
+      "phuong": "Đông Bắc",
+      "du_nien": "Phục Vị"
+     }
+    ]
+   },
+   {
+    "viec": "loi_di",
+    "ten": "Lối đi lại",
+    "han": "宅中所行路宜由西方大吉",
+    "am": "Trạch trung sở hành lộ nghi do tây phương đại cát.",
+    "y": "Lối đi lại chính trong nhà nên nằm về phía Tây.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây"
+     }
+    ]
+   },
+   {
+    "viec": "gieng",
+    "ten": "Giếng, nguồn nước",
+    "han": "井宜在西南長生位大吉",
+    "am": "Tỉnh nghi tại tây nam trường sinh vị đại cát.",
+    "y": "Giếng hợp ở phía Tây Nam của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Nam"
+     }
+    ],
+    "ngay_nay": "Xưa là giếng; nay hiểu là bể nước, bồn nước, chỗ đặt máy bơm."
+   },
+   {
+    "viec": "bep",
+    "ten": "Bếp",
+    "han": "廚竈宜在宅東方乙字上大吉",
+    "am": "Trù táo nghi tại trạch đông phương ất tự thượng đại cát.",
+    "y": "Bếp hợp đặt ở phía Đông của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông"
+     }
+    ]
+   },
+   {
+    "viec": "coi_xay",
+    "ten": "Chỗ ồn, chỗ nặng",
+    "han": "碾磨宜在宅正南禍害方正北五鬼方大吉",
+    "am": "Niễn ma nghi tại trạch chính nam hoạ hại phương chính bắc ngũ quỷ phương đại cát.",
+    "y": "Cối xay, cối giã hợp đặt ở phía Nam (Hoạ Hại) và Bắc (Ngũ Quỷ) — sách để việc ồn và nặng ở phía kém của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Nam",
+      "du_nien": "Hoạ Hại"
+     },
+     {
+      "phuong": "Bắc",
+      "du_nien": "Ngũ Quỷ"
+     }
+    ],
+    "ngay_nay": "Xưa là cối xay, cối giã; nay là máy giặt, máy bơm, kho đồ nặng."
+   },
+   {
+    "viec": "chuong",
+    "ten": "Chỗ nuôi, chỗ để xe",
+    "han": "牛馬欄宜在宅西南生氣方大吉",
+    "am": "Ngưu mã lan nghi tại trạch tây nam sinh khí phương đại cát.",
+    "y": "Chuồng trâu ngựa hợp ở phía Tây Nam (Sinh Khí).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Nam",
+      "du_nien": "Sinh Khí"
+     }
+    ],
+    "ngay_nay": "Xưa là chuồng trâu ngựa; nay là chỗ để xe, chỗ nuôi thú."
+   },
+   {
+    "viec": "thoat_nuoc",
+    "ten": "Thoát nước",
+    "han": "放水宜在南方丙字丁字俱上吉",
+    "am": "Phóng thuỷ nghi tại nam phương bính tự đinh tự câu thượng cát.",
+    "y": "Nước thải nên cho thoát về phía Nam.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Nam"
+     }
+    ]
+   }
+  ],
+  "Đoài": [
+   {
+    "viec": "phong_o",
+    "ten": "Phòng ở",
+    "han": "福元宜居西房西樓上吉次居北房西間生氣貪狼南房西間天乙巨門北房東間延年武曲亦吉但房之中間未善耳北房中間禍害南房中間五鬼",
+    "am": "Phúc nguyên nghi cư tây phòng tây lâu thượng cát thứ cư bắc phòng tây gian sinh khí tham lang nam phòng tây gian thiên ất cự môn bắc phòng đông gian diên niên vũ khúc diệc cát đãn phòng chi trung gian mùi thiện nhĩ bắc phòng trung gian hoạ hại nam phòng trung gian ngũ quỷ.",
+    "y": "Trong nhà nhiều dãy, nên ở dãy nhà phía Tây (hoặc tầng trên phía Tây); gian phía Tây của dãy Bắc hay dãy Nam cũng được. Sách dặn tránh gian chính giữa của dãy Bắc và dãy Nam.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "nha",
+    "ten": "Nhà toạ hướng nào",
+    "han": "宅宜住坐北向南坤門宅坐南向北乾門宅俱上上吉坐南向北艮方丑字門宅坐東向西坤門乾門兌門宅坐西向東艮方寅字門宅亦上吉",
+    "am": "Trạch nghi trú toạ bắc hướng nam khôn môn trạch toạ nam hướng bắc càn môn trạch câu thượng thượng cát toạ nam hướng bắc cấn phương sửu tự môn trạch toạ đông hướng tây khôn môn càn môn đoài môn trạch toạ tây hướng đông cấn phương dần tự môn trạch diệc thượng cát.",
+    "y": "Hợp là nhà lưng Bắc mặt Nam mở cửa góc Tây Nam, nhà lưng Nam mặt Bắc mở cửa góc Tây Bắc; nhà lưng Đông mặt Tây cũng hợp. Nhà lưng Tây mặt Đông thì mở cửa lệch về góc Đông Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu"
+   },
+   {
+    "viec": "cua",
+    "ten": "Cửa chính",
+    "han": "門宜走西北乾方亥字戌字生氣門西南坤方未字申字天乙門上吉次定宜走東北艮方丑字寅字延年門亦吉但不宜正當艮字別法謂之鬼門",
+    "am": "Môn nghi tẩu tây bắc càn phương hợi tự tuất tự sinh khí môn tây nam khôn phương mùi tự thân tự thiên ất môn thượng cát thứ định nghi tẩu đông bắc cấn phương sửu tự dần tự diên niên môn diệc cát đãn bất nghi chính đương cấn tự biệt pháp vị chi quỷ môn.",
+    "y": "Cửa chính nên mở về phía Tây Bắc (Sinh Khí), Tây Nam (Thiên Y) và Đông Bắc (Diên Niên). Sách dặn không đặt cửa đúng chính giữa hướng Đông Bắc.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Bắc",
+      "du_nien": "Sinh Khí"
+     },
+     {
+      "phuong": "Tây Nam",
+      "du_nien": "Thiên Y"
+     },
+     {
+      "phuong": "Đông Bắc",
+      "du_nien": "Diên Niên"
+     }
+    ]
+   },
+   {
+    "viec": "loi_di",
+    "ten": "Lối đi lại",
+    "han": "宅中所行路宜由西方上吉",
+    "am": "Trạch trung sở hành lộ nghi do tây phương thượng cát.",
+    "y": "Lối đi lại chính trong nhà nên nằm về phía Tây.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây"
+     }
+    ]
+   },
+   {
+    "viec": "gieng",
+    "ten": "Giếng, nguồn nước",
+    "han": "井宜在西北方長生位大吉",
+    "am": "Tỉnh nghi tại tây bắc phương trường sinh vị đại cát.",
+    "y": "Giếng hợp ở phía Tây Bắc của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Bắc"
+     }
+    ],
+    "ngay_nay": "Xưa là giếng; nay hiểu là bể nước, bồn nước, chỗ đặt máy bơm."
+   },
+   {
+    "viec": "bep",
+    "ten": "Bếp",
+    "han": "廚竈宜在北方癸字大吉",
+    "am": "Trù táo nghi tại bắc phương quý tự đại cát.",
+    "y": "Bếp hợp đặt ở phía Bắc của nhà.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Bắc"
+     }
+    ]
+   },
+   {
+    "viec": "coi_xay",
+    "ten": "Chỗ ồn, chỗ nặng",
+    "han": "碾磨在正東方絕命破軍正南方五鬼廉貞吉",
+    "am": "Niễn ma tại chính đông phương tuyệt mệnh phá quân chính nam phương ngũ quỷ liêm trinh cát.",
+    "y": "Cối xay, cối giã hợp đặt ở phía Đông (Tuyệt Mệnh) và Nam (Ngũ Quỷ) — sách để việc ồn và nặng ở phía kém của mình.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Đông",
+      "du_nien": "Tuyệt Mệnh"
+     },
+     {
+      "phuong": "Nam",
+      "du_nien": "Ngũ Quỷ"
+     }
+    ],
+    "ngay_nay": "Xưa là cối xay, cối giã; nay là máy giặt, máy bơm, kho đồ nặng."
+   },
+   {
+    "viec": "chuong",
+    "ten": "Chỗ nuôi, chỗ để xe",
+    "han": "牛馬欄宜在西北方生氣貪狼大吉",
+    "am": "Ngưu mã lan nghi tại tây bắc phương sinh khí tham lang đại cát.",
+    "y": "Chuồng trâu ngựa hợp ở phía Tây Bắc (Sinh Khí).",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Tây Bắc",
+      "du_nien": "Sinh Khí"
+     }
+    ],
+    "ngay_nay": "Xưa là chuồng trâu ngựa; nay là chỗ để xe, chỗ nuôi thú."
+   },
+   {
+    "viec": "thoat_nuoc",
+    "ten": "Thoát nước",
+    "han": "放水宜在南方丙字丁字上吉",
+    "am": "Phóng thuỷ nghi tại nam phương bính tự đinh tự thượng cát.",
+    "y": "Nước thải nên cho thoát về phía Nam.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "duong_trach_thap_thu",
+    "phuong": [
+     {
+      "phuong": "Nam"
+     }
+    ]
+   }
+  ]
+ }
+}

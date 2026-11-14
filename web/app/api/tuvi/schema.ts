@@ -161,6 +161,12 @@ export const LaSoOutput = z.object({
   // SX-1: câu sách xưa ứng với lá số (engine chọn từ KB; engine cũ / bản Anh không có).
   sach_xua: z.array(z.object({ loai: z.string(), ve: z.string(), sach: z.string(), han: z.string(), y: z.string(),
     phien_am: z.string().optional() })).optional(),
+  // SX-C: lời sách xưa về từng sao ở từng cung, ba nhóm đã nói giảm (engine chọn + viết; web chỉ hiển thị).
+  sach_ghi: z.object({
+    nhom: z.array(z.object({ ma: z.string(), ten: z.string(), muc: z.array(z.object({
+      ve: z.string(), sach: z.string(), loi: z.string(), nhom: z.enum(["A", "B", "C"]), chu_de: z.string(),
+      han: z.string().optional(), am: z.string().optional(), viec: z.string().optional(), ngay_nay: z.string().optional(), tom_y: z.boolean().optional() })) })),
+    cau_ket: z.string(), so_muc: z.number() }).nullable().optional(),
   // TV-ZW "Cùng sao Mệnh": tỉ lệ thời điểm sinh (mẫu 1940–2010 × 12 canh) có cùng chính tinh cung Mệnh — không phải
   // thống kê dân số. null khi chưa biết giờ sinh; engine cũ không có.
   cung_sao_menh: z.object({

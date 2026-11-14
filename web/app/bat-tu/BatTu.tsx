@@ -14,6 +14,7 @@ import { ChipPhai, DongGhiChu, DongPhai, KhungPhai, type PhaiDangDung } from "@/
 import { DoiChieuCach } from "@/components/huyen-hoc/DoiChieuCach";
 import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
 import { SachXuaNoi } from "@/components/huyen-hoc/SachXuaNoi";
+import { SachXuaGhi } from "@/components/huyen-hoc/SachXuaGhi";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
@@ -301,6 +302,7 @@ export function BatTu() {
           </div>
         )}
         {ls && <SachXuaNoi ds={ls.sach_xua} moDun="battu" en={en} />}
+        {ls && !en && <SachXuaGhi khoi={ls.sach_ghi} moDun="battu" tieuDe="Sách xưa ghi gì về các sao và hành của bạn" />}
         {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{CO_CO_LOI.has(c.loai) ? cb(`co.${c.loai}`) : c.chi_tiet}</p>)}
       </section>
 

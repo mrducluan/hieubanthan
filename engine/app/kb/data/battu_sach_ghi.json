@@ -1,0 +1,1278 @@
+{
+ "_nguon": "Tam Mệnh Thông Hội · Uyên Hải Tử Bình — thần sát, lục thân, tính tình, thân thể (nháp ban biên tập, SX-C 2026-11-14)",
+ "source_id": "tam_menh_thong_hoi",
+ "school_id": "tu_binh",
+ "trang_thai": "nhap_ban_bien_tap",
+ "can_doi_chieu": true,
+ "than_sat": {
+  "Kiếp Sát": [
+   {
+    "khi": "khi sao này gặp lúc vượng, có sao tốt đi cùng",
+    "han": "吉則聰慧敏給才智過人事不留行胸羅萬象高明爽迅",
+    "am": "Cát tắc thông tuệ mẫn cấp, tài trí quá nhân, sự bất lưu hành, hung la vạn tượng, cao minh sảng tấn.",
+    "y": "Gặp thế tốt, sách tả người có sao này sáng dạ, nhanh nhạy, tài trí hơn người, không để việc tồn đọng, hiểu rộng và xử trí gọn.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi sao này lấn át bản thân",
+    "han": "主非義取財因財害己或貪悋遭禍等事",
+    "am": "Chủ phi nghĩa thủ tài, nhân tài hại kỷ, hoặc tham lận tao hoạ đẳng sự.",
+    "y": "Sách gắn với chuyện kiếm tiền không đúng đường rồi chính đồng tiền ấy quay lại làm khổ mình, hoặc vì ham, vì tiếc của mà vướng rắc rối.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "ham_y": "Nên chú ý các khoản lợi đến quá dễ và những lần mình tiếc của mà cố giữ.",
+    "viec": "Tuần này xem lại một khoản thu hoặc một lời mời góp vốn chưa rõ nguồn; chưa rõ thì chưa nhận.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung (lời ca xưa)",
+    "han": "刼煞為灾不可當徒然奔走利名塲須防祖業消亡盡妻子如何得久長",
+    "am": "Kiếp sát vi tai bất khả đương, đồ nhiên bôn tẩu lợi danh trường, tu phòng tổ nghiệp tiêu vong tận, thê tử như hà đắc cửu trường.",
+    "y": "Sách gắn sao này với cảnh chạy vạy nhiều mà thu về ít, của nhà để lại khó giữ, chuyện vợ chồng con cái cần vun nhiều hơn người.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý giữ phần của cải nền và dành giờ cho người nhà, đừng dồn hết cho việc ngoài.",
+    "viec": "Tuần này chọn một buổi tối không nhận việc, ăn cơm trọn bữa với người nhà.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Vong Thần": [
+   {
+    "khi": "khi sao này gặp lúc vượng, có sao tốt đi cùng",
+    "han": "吉則峻厲有威謀畧算計見事如神事不露機",
+    "am": "Cát tắc tuấn lệ hữu uy, mưu lược toán kế, kiến sự như thần, sự bất lộ cơ.",
+    "y": "Gặp thế tốt, sách tả người có sao này nghiêm, có uy, giỏi tính toán, nhìn việc rất trúng và kín kẽ.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi sao này gặp lúc suy, có sao xấu đi cùng",
+    "han": "㓙則褊躁性窄顚詐狂妄浮蕩是非酒色風流官府獄訟",
+    "am": "Hung tắc biển táo tính trách, điên trá cuồng vọng, phù đãng thị phi, tửu sắc phong lưu, quan phủ ngục tụng.",
+    "y": "Gặp thế kém, sách tả tính nóng, hẹp lòng, nói quá sự thật, lông bông, hay dính thị phi, rượu và chuyện tình, dễ vướng cửa quan, tranh chấp.",
+    "nhom": "B",
+    "chu_de": "giay_to",
+    "ham_y": "Nên chú ý lời nói lúc nóng và mọi việc dính tới giấy tờ, cam kết.",
+    "viec": "Tuần này việc gì có tiền hoặc cam kết thì viết thành văn bản; có tranh chấp thì hỏi luật sư trước khi trả lời.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung (lời ca xưa)",
+    "han": "亡神七煞禍非輕用盡機關一不成尅子刑妻無祖業仕人猶恐有虛名",
+    "am": "Vong thần thất sát hoạ phi khinh, dụng tận cơ quan nhất bất thành, khắc tử hình thê vô tổ nghiệp, sĩ nhân do khủng hữu hư danh.",
+    "y": "Sách gắn sao này với cảnh tính đủ đường mà việc khó thành, ít nhờ được của nhà để lại, đường vợ con cần vun nhiều hơn người; có chức cũng dễ chỉ được tiếng.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý bớt tính toán vòng vo với người thân, nói thẳng điều mình cần.",
+    "viec": "Tuần này nói rõ với người bạn đời hoặc con một việc mình đang lo, không qua người thứ ba.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Dương Nhận": [
+   {
+    "khi": "nói chung (lời giải tên sao)",
+    "han": "祿過則刃生功成當退不退則過越其分",
+    "am": "Lộc quá tắc nhận sinh, công thành đương thoái, bất thoái tắc quá việt kỳ phận.",
+    "y": "Sách giải: lộc đầy quá thì sinh ra lưỡi dao — việc đã thành thì nên lùi, không lùi là vượt quá phần mình.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi chỉ có sao này, không có gì kìm",
+    "han": "如專羊刃主眼露性急㓙暴害物親近惡黨",
+    "am": "Như chuyên dương nhận, chủ nhãn lộ tính cấp, hung bạo hại vật, thân cận ác đảng.",
+    "y": "Sách tả người mắt lộ, tính gấp, nóng dữ, dễ làm tổn người và vật quanh mình, dễ gần bạn xấu.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý lúc nóng giận và chọn người mình chơi cùng.",
+    "viec": "Tuần này khi thấy mình sắp nổi nóng, rời chỗ đó mười phút rồi mới nói tiếp.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi vận tới gặp sao này",
+    "han": "運行羊刃財物耗散",
+    "am": "Vận hành dương nhận, tài vật hao tán.",
+    "y": "Tới giai đoạn gặp sao này, sách ghi tiền của dễ hao, dễ tản.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "ham_y": "Nên chú ý các khoản chi lớn, cho vay và bảo lãnh trong giai đoạn ấy.",
+    "viec": "Tuần này đặt một khoản chuyển tự động sang tài khoản để dành, dù nhỏ.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Cô Thần": [
+   {
+    "khi": "nói chung (cả Cô Thần và Quả Tú)",
+    "han": "凡人命犯孤寡主形孤骨露面無和氣不利六親生旺稍可死絶尤甚",
+    "am": "Phàm nhân mệnh phạm cô quả, chủ hình cô cốt lộ, diện vô hoà khí, bất lợi lục thân, sinh vượng sảo khả, tử tuyệt vưu thậm.",
+    "y": "Sách tả người có sao này dáng gầy lộ xương, nét mặt ít tươi, ít được nương tựa người thân; gặp lúc vượng thì nhẹ, gặp lúc suy thì rõ hơn.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý chủ động giữ các mối thân, đừng đợi người khác tìm mình.",
+    "viec": "Tuần này gọi cho một người thân lâu chưa nói chuyện, hỏi thăm trước.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi sao chỉ bạn đời cũng ở thế yếu (sách nói về nam)",
+    "han": "男命生於妻絶之中而逢孤辰平生難於婚偶",
+    "am": "Nam mệnh sinh ư thê tuyệt chi trung nhi phùng cô thần, bình sinh nan ư hôn ngẫu.",
+    "y": "Sách ghi khi sao chỉ bạn đời ở thế yếu mà gặp thêm sao này thì chuyện lứa đôi đến chậm, khó gặp người hợp.",
+    "nhom": "C",
+    "chu_de": "tinh_duyen",
+    "ham_y": "Nên chú ý mở rộng chỗ gặp gỡ và nói rõ điều mình mong ở một mối quan hệ.",
+    "viec": "Tuần này nhận lời một cuộc gặp mà bình thường mình hay từ chối.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung",
+    "han": "進者為陽不利父",
+    "am": "Tiến giả vi dương, bất lợi phụ.",
+    "y": "Sách xếp sao này về phía người cha: duyên nương tựa cha mỏng hơn, dễ phải sớm tự lập.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý chủ động vun với cha, dù ở xa.",
+    "viec": "Tuần này hỏi cha một chuyện thời trẻ của ông và ngồi nghe hết.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Quả Tú": [
+   {
+    "khi": "khi sao chỉ bạn đời cũng ở thế yếu (sách nói về nữ)",
+    "han": "女命生於夫絶之位而遇寡宿屢嫁不能偕老",
+    "am": "Nữ mệnh sinh ư phu tuyệt chi vị nhi ngộ quả tú, lũ giá bất năng giai lão.",
+    "y": "Sách ghi khi sao chỉ bạn đời ở thế yếu mà gặp thêm sao này thì đường vợ chồng cần vun nhiều hơn người, dễ lệch nhịp nếu không nói chuyện.",
+    "nhom": "C",
+    "chu_de": "tinh_duyen",
+    "ham_y": "Nên chú ý nói ra điều mình chưa vừa ý sớm, đừng để dồn.",
+    "viec": "Tuần này hẹn người bạn đời một buổi chỉ có hai người, không điện thoại.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung (cả Cô Thần và Quả Tú)",
+    "han": "男女生命見之雖親生兒女多不和順",
+    "am": "Nam nữ sinh mệnh kiến chi, tuy thân sinh nhi nữ đa bất hoà thuận.",
+    "y": "Sách ghi người có sao này thì con cái, dù là con ruột, cũng dễ không hợp ý, khó gần.",
+    "nhom": "C",
+    "chu_de": "con_cai",
+    "ham_y": "Nên chú ý nghe con nói hết trước khi dạy.",
+    "viec": "Tuần này dành nửa giờ làm cùng con một việc con thích, không nhắc chuyện học.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung",
+    "han": "退者為陰不利母",
+    "am": "Thoái giả vi âm, bất lợi mẫu.",
+    "y": "Sách xếp sao này về phía người mẹ: duyên nương tựa mẹ mỏng hơn, dễ phải sớm tự lo.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý chủ động vun với mẹ và để ý sức khoẻ của mẹ.",
+    "viec": "Tuần này đưa mẹ đi ăn hoặc gọi hỏi thăm, nhắc mẹ đi khám định kỳ.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Khôi Cương": [
+   {
+    "khi": "nói chung",
+    "han": "魁罡性嚴有操持而為人聰敏",
+    "am": "Khôi cương tính nghiêm, hữu thao trì, nhi vi nhân thông mẫn.",
+    "y": "Sách tả người sinh ngày này tính nghiêm, biết giữ mình và sáng dạ, nhanh nhẹn.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung",
+    "han": "主人性格聪明文章振发临事有断惟是好杀",
+    "am": "Chủ nhân tính cách thông minh, văn chương chấn phát, lâm sự hữu đoán, duy thị hiếu sát.",
+    "y": "Sách tả người sinh ngày này sáng dạ, viết giỏi, gặp việc thì quyết nhanh; chỉ có điều tính cứng, xử nặng tay.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý bớt gay gắt khi xử lý lỗi của người khác.",
+    "viec": "Tuần này trước khi phê bình ai, nói một điều người đó đã làm được.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi chỉ một ngày này mà bị xung từ nhiều phía",
+    "han": "倘日独处冲者太众必是小人刑责不已穷必彻骨",
+    "am": "Thảng nhật độc xử, xung giả thái chúng, tất thị tiểu nhân, hình trách bất dĩ, cùng tất triệt cốt.",
+    "y": "Sách ghi khi đó khó có vị thế, dễ bị trách phạt nối nhau và tiền bạc rất chật.",
+    "nhom": "B",
+    "chu_de": "giay_to",
+    "ham_y": "Nên chú ý làm đúng quy định và giữ một khoản để dành tự động.",
+    "viec": "Tuần này rà lại một nghĩa vụ đang nợ (thuế, phí, giấy phép) và làm cho xong; cần thì hỏi luật sư.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Kim Thần": [
+   {
+    "khi": "nói chung",
+    "han": "其人有刚断明敏之才倔强不可驯伏之志",
+    "am": "Kỳ nhân hữu cương đoán minh mẫn chi tài, quật cường bất khả tuần phục chi chí.",
+    "y": "Sách tả người có sao này quyết đoán, sáng suốt, ý chí cứng, khó ai uốn được.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "nói chung",
+    "han": "太刚必折不有以制之则宽猛不济",
+    "am": "Thái cương tất chiết, bất hữu dĩ chế chi, tắc khoan mãnh bất tế.",
+    "y": "Sách dặn: cứng quá thì gãy; không có gì kìm lại thì lúc rộng lúc gắt không đỡ được cho nhau.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý mềm lại ở những việc không cần thắng.",
+    "viec": "Tuần này chọn một việc nhỏ và để người khác làm theo cách của họ.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Thiên La": [
+   {
+    "khi": "nói chung (lời giải tên sao)",
+    "han": "陰陽終極則暗昧不明如人之在羅網",
+    "am": "Âm dương chung cực tắc ám muội bất minh, như nhân chi tại la võng.",
+    "y": "Sách giải: đây là chỗ khí âm dương đi tới tận cùng nên mờ tối, ví như người mắc trong lưới.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung",
+    "han": "是男怕天羅女怕地網",
+    "am": "Thị nam phạ thiên la, nữ phạ địa võng.",
+    "y": "Sách ghi nam để ý Thiên La nhiều hơn, nữ để ý Địa Võng nhiều hơn.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "sách nói về nam",
+    "han": "惟男命則迍滯齟齬妨祖尅妻",
+    "am": "Duy nam mệnh tắc truân trệ trở ngữ, phương tổ khắc thê.",
+    "y": "Sách ghi việc hay trắc trở, hay lệch ý với người khác, ít nhờ được nền nhà, đường vợ chồng cần vun nhiều hơn người.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý kiên nhẫn với thủ tục và nói chuyện đều với người bạn đời.",
+    "viec": "Tuần này làm dứt một thủ tục đang treo, và kể cho người bạn đời nghe một việc mình đang vướng.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Địa Võng": [
+   {
+    "khi": "nói chung (cả Thiên La và Địa Võng)",
+    "han": "人命帶此多主蹇滯",
+    "am": "Nhân mệnh đới thử, đa chủ kiển trệ.",
+    "y": "Người có sao này, sách ghi việc hay chậm, hay vướng.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "ham_y": "Nên chú ý chừa thêm thời gian cho việc có thủ tục.",
+    "viec": "Tuần này với một việc có hạn chót, tự đặt hạn sớm hơn ba ngày.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "sách nói về nữ",
+    "han": "惟女命破婚害子薄命抱疾",
+    "am": "Duy nữ mệnh phá hôn hại tử, bạc mệnh bão tật.",
+    "y": "Sách ghi chuyện hôn nhân dễ trắc trở, đường con cái phải bỏ nhiều công, phận vất vả và sức khoẻ cần giữ.",
+    "nhom": "C",
+    "chu_de": "tinh_duyen",
+    "ham_y": "Nên chú ý nói chuyện đều với người bạn đời và giữ sức.",
+    "viec": "Tuần này đặt lịch khám sức khoẻ định kỳ nếu đã quá một năm chưa khám.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Không Vong": [
+   {
+    "khi": "khi Không Vong gặp lúc vượng",
+    "han": "凡帶此煞生旺則氣度寛大動招虛名長大肥滿多意外無心之福",
+    "am": "Phàm đới thử sát, sinh vượng tắc khí độ khoan đại, động chiêu hư danh, trưởng đại phì mãn, đa ý ngoại vô tâm chi phúc.",
+    "y": "Gặp lúc vượng, sách tả người có Không Vong rộng lượng, làm gì cũng dễ được tiếng, lớn lên đầy đặn, hay gặp may ngoài dự tính.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi Không Vong gặp lúc suy",
+    "han": "死絶則一生成敗飄泊",
+    "am": "Tử tuyệt tắc nhất sinh thành bại phiêu bạc.",
+    "y": "Gặp lúc suy, sách ghi cả đời nhiều phen được rồi mất, hay nay đây mai đó.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "ham_y": "Nên chú ý giữ một chỗ đứng ổn định trước khi đổi việc, đổi nơi ở.",
+    "viec": "Tuần này viết ra ba thứ mình cần giữ nguyên dù có đổi việc.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "theo hành rơi vào Không Vong",
+    "han": "金空則響火空則明水空則清木空則折土空則崩",
+    "am": "Kim không tắc hưởng, hoả không tắc minh, thuỷ không tắc thanh, mộc không tắc chiết, thổ không tắc băng.",
+    "y": "Sách ví: kim rỗng thì kêu vang, lửa rỗng thì sáng, nước rỗng thì trong; còn gỗ rỗng thì gãy, đất rỗng thì lở — Không Vong hợp với Kim, Hỏa, Thủy, kém với Mộc và Thổ.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Hoa Cái": [
+   {
+    "khi": "nói chung",
+    "han": "華葢為術藝星",
+    "am": "Hoa cái vi thuật nghệ tinh.",
+    "y": "Sách gọi Hoa Cái là sao của nghề khéo và nghệ thuật.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung",
+    "han": "華蓋為庇䕃清神主人曠逹神清性靈恬淡寡慾一生不利財物",
+    "am": "Hoa cái vi tí ấm thanh thần, chủ nhân khoáng đạt thần thanh, tính linh điềm đạm quả dục, nhất sinh bất lợi tài vật.",
+    "y": "Sách gọi Hoa Cái là sao che chở, thanh sạch: người khoáng đạt, đầu óc trong, điềm đạm, ít ham muốn — nhưng cả đời không mạnh về tiền.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "ham_y": "Nên chú ý có một cách lo tiền chạy tự động, vì mình ít để tâm.",
+    "viec": "Tuần này cài chuyển tự động một khoản cố định sang tài khoản để dành.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung",
+    "han": "凡人命得華葢多主孤寡總貴亦不免孤獨作僧道藝術論",
+    "am": "Phàm nhân mệnh đắc hoa cái, đa chủ cô quả, tổng quý diệc bất miễn cô độc, tác tăng đạo nghệ thuật luận.",
+    "y": "Sách ghi người có Hoa Cái dễ thấy một mình, thành đạt rồi cũng vậy; sách xếp vào đường tu học, nghề nghệ thuật.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý chủ động giữ các mối thân, đừng thu mình quá lâu.",
+    "viec": "Tuần này rủ một người bạn hoặc người thân cùng làm điều mình vẫn hay làm một mình.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Tướng Tinh": [
+   {
+    "khi": "nói chung (lời giải tên sao)",
+    "han": "将星者如将劄中軍也",
+    "am": "Tướng tinh giả, như tướng trát trung quân dã.",
+    "y": "Sách ví sao này như vị tướng đóng giữa đội quân — người đứng giữa mà điều việc.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung",
+    "han": "凡将星常欲吉星相扶貴煞加臨乃為吉慶",
+    "am": "Phàm tướng tinh thường dục cát tinh tương phù, quý sát gia lâm, nãi vi cát khánh.",
+    "y": "Sách ghi Tướng Tinh cần có sao tốt, sao quý đi cùng nâng đỡ thì mới thành điều mừng.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Dịch Mã": [
+   {
+    "khi": "khi Dịch Mã gặp lúc vượng",
+    "han": "驛馬生旺主人氣韻凝峻通變趨時平生多聲望",
+    "am": "Dịch mã sinh vượng, chủ nhân khí vận ngưng tuấn, thông biến xu thời, bình sinh đa thanh vọng.",
+    "y": "Dịch Mã gặp lúc vượng, sách tả người có phong thái, biết xoay theo thời, cả đời được nhiều tiếng tốt.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi Dịch Mã gặp lúc suy",
+    "han": "死絶則為性有頭無尾或是或非一生少成漂泊不定",
+    "am": "Tử tuyệt tắc vi tính hữu đầu vô vĩ, hoặc thị hoặc phi, nhất sinh thiểu thành, phiêu bạc bất định.",
+    "y": "Dịch Mã gặp lúc suy, sách tả tính có đầu không đuôi, lúc thế này lúc thế khác, ít việc thành, hay nay đây mai đó.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "ham_y": "Nên chú ý làm xong việc đang dở trước khi đổi hướng.",
+    "viec": "Tuần này chọn một việc đang bỏ dở và làm cho xong hẳn.",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi trẻ nhỏ hoặc người lớn tuổi gặp vận Mã",
+    "han": "蓋老少並不堪乘馬以馬在五行中為動躍之神故也",
+    "am": "Cái lão thiếu tịnh bất kham thừa mã, dĩ mã tại ngũ hành trung vi động dược chi thần cố dã.",
+    "y": "Sách ghi trẻ nhỏ và người lớn tuổi đều không hợp cảnh 'cưỡi ngựa', vì Mã là sao của sự chuyển động, nhảy vọt.",
+    "nhom": "B",
+    "chu_de": "di_lai",
+    "ham_y": "Nên chú ý an toàn đi lại, chống ngã cho trẻ nhỏ và người lớn tuổi trong nhà.",
+    "viec": "Tuần này xem lại chỗ dễ trượt ngã trong nhà (bậc thềm, nhà tắm) và sửa một chỗ.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Đào Hoa": [
+   {
+    "khi": "nói chung",
+    "han": "凡是咸池多性巧更主風流貌比華性急又兼多業藝",
+    "am": "Phàm thị hàm trì đa tính xảo, cánh chủ phong lưu mạo tỉ hoa, tính cấp hựu kiêm đa nghiệp nghệ.",
+    "y": "Sách tả người có Đào Hoa (còn gọi Hàm Trì) khéo léo, phong lưu, dung mạo ưa nhìn, tính hơi gấp và biết nhiều nghề.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi Đào Hoa ở chỗ vượng",
+    "han": "咸池主藝術如在旺宫必術藝精奇高秀之士",
+    "am": "Hàm trì chủ nghệ thuật, như tại vượng cung, tất thuật nghệ tinh kỳ cao tú chi sĩ.",
+    "y": "Sách gắn Đào Hoa với nghề khéo, nghệ thuật; sao ở chỗ vượng thì tay nghề tinh, hơn người.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung (lời ca xưa)",
+    "han": "咸池四位五行中徧野桃花鬭嫩紅男女遇之皆酒色為其嬌艶弄春風",
+    "am": "Hàm trì tứ vị ngũ hành trung, biến dã đào hoa đấu nộn hồng, nam nữ ngộ chi giai tửu sắc, vị kỳ kiều diễm lộng xuân phong.",
+    "y": "Sách ví Đào Hoa như hoa đào nở đỏ khắp đồng: nam hay nữ có sao này đều dễ vướng chuyện rượu và tình.",
+    "nhom": "B",
+    "chu_de": "tinh_duyen",
+    "ham_y": "Nên chú ý rõ ràng trong quan hệ và biết điểm dừng ở các cuộc vui.",
+    "viec": "Tuần này tự đặt giờ về cho một cuộc vui và giữ đúng giờ ấy.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Thiên Ất Quý Nhân": [
+   {
+    "khi": "nói chung",
+    "han": "其神最尊貴所至之處一切㓙煞隱然而避",
+    "am": "Kỳ thần tối tôn quý, sở chí chi xứ, nhất thiết hung sát ẩn nhiên nhi tị.",
+    "y": "Sách coi đây là sao quý nhất: tới đâu thì các sao xấu tự lánh đi.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi sao này gặp lúc vượng, có sao tốt đi cùng",
+    "han": "天乙貴遇生旺則形貌軒昻性靈頴悟理義分明不喜雜術純粹大器身蘊道徳衆人欽愛",
+    "am": "Thiên ất quý ngộ sinh vượng tắc hình mạo hiên ngang, tính linh dĩnh ngộ, lý nghĩa phân minh, bất hỉ tạp thuật, thuần tuý đại khí, thân uẩn đạo đức, chúng nhân khâm ái.",
+    "y": "Gặp lúc vượng, sách tả người có sao này dáng đàng hoàng, sáng dạ, rõ lẽ phải, không ưa mẹo vặt, có đức nên được nhiều người quý.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi sao này gặp lúc suy",
+    "han": "死絶則執抝自是喜遊近貴",
+    "am": "Tử tuyệt tắc chấp ảo tự thị, hỉ du cận quý.",
+    "y": "Gặp lúc suy, sách ghi người có sao này dễ cố chấp, cho mình là đúng, thích gần người sang.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý nghe ý trái với mình, nhất là từ người dưới.",
+    "viec": "Tuần này hỏi một người hay nói thẳng xem mình đang cố chấp ở điểm nào.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Thiên Đức": [
+   {
+    "khi": "nói chung (lời giải chữ Đức)",
+    "han": "夫徳者利物濟人掩㓙作善之謂也",
+    "am": "Phù đức giả, lợi vật tế nhân, yểm hung tác thiện chi vị dã.",
+    "y": "Sách giải: 'đức' là làm lợi cho vật, giúp người, che điều dữ, làm điều lành.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "nói chung",
+    "han": "天徳者五行福徳之辰若人遇之主登台輔之位",
+    "am": "Thiên đức giả, ngũ hành phúc đức chi thần, nhược nhân ngộ chi, chủ đăng thai phụ chi vị.",
+    "y": "Sách gọi Thiên Đức là sao phúc đức; người có sao này dễ lên tới vị trí giúp việc lớn.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi sao nằm ở ngày hoặc giờ sinh",
+    "han": "天德原來大吉昌若逄時日最為良修文必定登科甲庶俗營謀百事强",
+    "am": "Thiên đức nguyên lai đại cát xương, nhược phùng thời nhật tối vi lương, tu văn tất định đăng khoa giáp, thứ tục doanh mưu bách sự cường.",
+    "y": "Sách ghi Thiên Đức vốn rất tốt, ở ngày hoặc giờ sinh là đẹp nhất: người theo học dễ đỗ đạt, người làm ăn thì mưu việc gì cũng thuận.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Nguyệt Đức": [
+   {
+    "khi": "nói chung",
+    "han": "人命若還逄月德百事所求多利益士農工商各相宜",
+    "am": "Nhân mệnh nhược hoàn phùng nguyệt đức, bách sự sở cầu đa lợi ích, sĩ nông công thương các tương nghi.",
+    "y": "Người có Nguyệt Đức, sách ghi cầu việc gì cũng dễ có lợi; làm nghề nào cũng hợp.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi lá số có sao xấu (cả Thiên Đức và Nguyệt Đức)",
+    "han": "凡命中帶㓙煞得此二徳扶化㓙不為甚",
+    "am": "Phàm mệnh trung đới hung sát, đắc thử nhị đức phù hoá, hung bất vi thậm.",
+    "y": "Lá số có sao xấu mà được hai sao Đức này đỡ thì điều xấu nhẹ đi nhiều.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Thái Cực Quý Nhân": [
+   {
+    "khi": "nói chung (lời giải tên sao)",
+    "han": "造化始終相保乃曰太極貴也",
+    "am": "Tạo hoá thuỷ chung tương bảo, nãi viết thái cực quý dã.",
+    "y": "Sách giải tên sao: việc có đầu có cuối, trước sau giữ được cho nhau, nên gọi là Thái Cực quý.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Lộc Thần": [
+   {
+    "khi": "nói chung (lời giải tên sao)",
+    "han": "祿爵祿也當得勢而享乃謂之祿",
+    "am": "Lộc, tước lộc dã; đương đắc thế nhi hưởng, nãi vị chi lộc.",
+    "y": "Sách giải: Lộc là bổng lộc — đúng lúc được thế mà hưởng thì gọi là Lộc.",
+    "nhom": "A",
+    "chu_de": "tien_bac",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi Lộc bị xung",
+    "han": "凡命帶祿最怕犯衝謂之破祿",
+    "am": "Phàm mệnh đới lộc, tối phạ phạm xung, vị chi phá lộc.",
+    "y": "Lá số có Lộc ngại nhất là bị xung — sách gọi là 'vỡ lộc', nguồn thu khó tụ lại.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "ham_y": "Nên chú ý đừng để một nguồn thu duy nhất gánh mọi khoản chi.",
+    "viec": "Tuần này ghi ra các nguồn thu đang có và một nguồn phụ có thể gây thêm.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Kim Dư": [
+   {
+    "khi": "nói chung",
+    "han": "祿前二辰號金轝遇此之人福最殊偏主聰明多富貴一生清泰亦無虞",
+    "am": "Lộc tiền nhị thần hiệu kim dư, ngộ thử chi nhân phúc tối thù, thiên chủ thông minh đa phú quý, nhất sinh thanh thái diệc vô ngu.",
+    "y": "Sách ghi người gặp sao Kim Dư có phúc rất riêng: thường sáng dạ, khá giả, một đời yên ổn ít lo.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi sao nằm ở ngày hoặc giờ sinh",
+    "han": "生日生時遇之為佳骨肉平生安泰得賢妻妾子孫茂盛",
+    "am": "Sinh nhật sinh thời ngộ chi vi giai, cốt nhục bình sinh an thái, đắc hiền thê thiếp, tử tôn mậu thịnh.",
+    "y": "Sao này ở ngày hoặc giờ sinh là đẹp: sách ghi người thân yên ổn, bạn đời hiền, con cháu sum vầy.",
+    "nhom": "A",
+    "chu_de": "gia_dinh",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ],
+  "Học Đường": [
+   {
+    "khi": "nói chung (lời giải tên sao)",
+    "han": "學堂者天地陰陽清秀之氣五行長生之神",
+    "am": "Học đường giả, thiên địa âm dương thanh tú chi khí, ngũ hành trường sinh chi thần.",
+    "y": "Sách giải: Học Đường là khí trong sáng của trời đất, là chỗ một hành bắt đầu lớn lên.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi Học Đường đi cùng quý nhân",
+    "han": "讀書人遇之主聰明智巧高科文翰",
+    "am": "Độc thư nhân ngộ chi, chủ thông minh trí xảo, cao khoa văn hàn.",
+    "y": "Người theo đường học mà có sao này, sách ghi sáng dạ, khéo, dễ đỗ cao và giỏi chữ nghĩa.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "tam_menh_thong_hoi"
+   },
+   {
+    "khi": "khi Học Đường bị hình, xung trong lá số",
+    "han": "但有刑衝破損讀書便不成",
+    "am": "Đãn hữu hình xung phá tổn, độc thư tiện bất thành.",
+    "y": "Sao này mà bị va chạm, tổn hại trong lá số thì sách ghi việc học dễ dang dở.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "ham_y": "Nên chú ý học đều tay, chia nhỏ mục tiêu thay vì dồn một đợt.",
+    "viec": "Tuần này chọn một thứ đang học dở và học 20 phút mỗi ngày, đủ năm ngày.",
+    "nguon": "tam_menh_thong_hoi"
+   }
+  ]
+ },
+ "thap_than": {
+  "Thương Quan": [
+   {
+    "khi": "nói chung",
+    "han": "伤官主人聪明美貌秀气",
+    "am": "Thương quan chủ nhân thông minh, mỹ mạo tú khí.",
+    "y": "Sách tả người mang Thương Quan sáng dạ, ưa nhìn, có nét thanh tú.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "nói chung",
+    "han": "伤官主人多才艺傲物气高常以天下之人不如己而贵人亦惮之众人亦恶之",
+    "am": "Thương quan chủ nhân đa tài nghệ, ngạo vật khí cao, thường dĩ thiên hạ chi nhân bất như kỷ; nhi quý nhân diệc đạn chi, chúng nhân diệc ố chi.",
+    "y": "Sách tả người mang Thương Quan nhiều tài, khí cao, hay cho rằng thiên hạ không ai bằng mình; nên người trên thì dè, người quanh thì không ưa.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý cách nói những lúc mình đúng.",
+    "viec": "Tuần này khi thấy mình đúng, hỏi người kia nghĩ sao trước khi nói ý mình.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Thương Quan gặp Chính Quan",
+    "han": "伤官见官为祸百端",
+    "am": "Thương quan kiến quan, vi hoạ bách đoan.",
+    "y": "Khi tính thích phá khuôn gặp đúng lúc phải theo khuôn phép, sách ghi rắc rối kéo tới đủ đường.",
+    "nhom": "B",
+    "chu_de": "giay_to",
+    "ham_y": "Nên chú ý chuyện giấy tờ, quy định và lời nói với người có quyền.",
+    "viec": "Tuần này rà một việc mình đang làm tắt quy trình và làm lại cho đúng; có tranh chấp thì hỏi luật sư.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "theo trụ có Thương Quan",
+    "han": "年带伤官父母不全月带伤官兄弟不完日带伤官妻妾不完时带伤官子息无传",
+    "am": "Niên đới thương quan, phụ mẫu bất toàn; nguyệt đới thương quan, huynh đệ bất hoàn; nhật đới thương quan, thê thiếp bất hoàn; thời đới thương quan, tử tức vô truyền.",
+    "y": "Sách xét theo từng trụ: Thương Quan ở năm thì duyên nương tựa cha mẹ mỏng hơn; ở tháng thì anh em ít dựa được nhau; ở ngày thì đường vợ chồng cần vun nhiều hơn; ở giờ thì đường con cái đến muộn hoặc phải bỏ nhiều công.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý chủ động vun với người thân ứng với trụ ấy, đừng đợi họ tìm mình.",
+    "viec": "Tuần này gọi hoặc ghé một người thân mình ít gần nhất, hỏi thăm trước.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Thất Sát": [
+   {
+    "khi": "nói chung",
+    "han": "有正官不如有偏官多有巨富大贵之人",
+    "am": "Hữu chính quan bất như hữu thiên quan, đa hữu cự phú đại quý chi nhân.",
+    "y": "Sách ghi: có Chính Quan chưa hẳn bằng có Thiên Quan (tên khác của Thất Sát) — nhiều người giàu lớn, sang lớn mang sao này.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "nói chung",
+    "han": "七杀却宜制伏亦不要制之太过盖物极则反为祸矣",
+    "am": "Thất sát khước nghi chế phục, diệc bất yếu chế chi thái quá; cái vật cực tắc phản vi hoạ hĩ.",
+    "y": "Sách dặn: sức ép này nên có cái kìm lại, nhưng kìm quá tay cũng hỏng — cái gì tới cùng cực thì quay ra thành rắc rối.",
+    "nhom": "B",
+    "chu_de": "tong_quan",
+    "ham_y": "Nên chú ý giữ kỷ luật vừa đủ, đừng ép mình tới kiệt.",
+    "viec": "Tuần này bớt một việc tự ép mình (thức khuya, làm thêm) và xem việc chính có tốt lên không.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Thất Sát quá nhiều",
+    "han": "如见杀多者主人凶夭贫薄",
+    "am": "Như kiến sát đa giả, chủ nhân hung yểu bần bạc.",
+    "y": "Khi sức ép này quá nhiều, sách gắn với sức bền về lâu dài chưa dày và tiền bạc mỏng.",
+    "nhom": "C",
+    "chu_de": "suc_ben",
+    "ham_y": "Nên chú ý giữ sức, ngủ đủ và có khoản để dành.",
+    "viec": "Tuần này ngủ đủ bảy tiếng ít nhất bốn đêm; quá một năm chưa khám tổng quát thì đặt lịch khám.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Thiên Ấn": [
+   {
+    "khi": "nói chung",
+    "han": "作事进退悔懒有始无终财源屡成屡败",
+    "am": "Tác sự tiến thoái hối lãn, hữu thuỷ vô chung, tài nguyên lũ thành lũ bại.",
+    "y": "Sách tả người mang sao này làm việc hay tiến rồi lùi, dễ nản, có đầu thiếu cuối; nguồn tiền nhiều lần được rồi lại mất.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "ham_y": "Nên chú ý làm xong một việc rồi mới mở việc khác.",
+    "viec": "Tuần này chỉ giữ một việc chính trên bàn, xong mới mở việc kế.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "nói chung",
+    "han": "凡命中犯此者犹尊长之制我身不得自由也",
+    "am": "Phàm mệnh trung phạm thử giả, do tôn trưởng chi chế ngã thân, bất đắc tự do dã.",
+    "y": "Sách ví sao này như có người trên luôn kìm mình, khó được tự do làm theo ý.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý phân biệt việc mình bị ép với việc mình tự chọn.",
+    "viec": "Tuần này tự quyết một việc nhỏ mà không hỏi ý ai, rồi chịu trách nhiệm với nó.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi lá số dựa vào nguồn ăn, nguồn tiền mà gặp sao này",
+    "han": "凡命中带此二者主福浅寿薄",
+    "am": "Phàm mệnh trung đới thử nhị giả, chủ phúc thiển thọ bạc.",
+    "y": "Sách gắn cảnh này với phúc mỏng và sức bền về lâu dài chưa dày.",
+    "nhom": "C",
+    "chu_de": "suc_ben",
+    "ham_y": "Nên chú ý ăn ngủ đúng giờ và giữ sức.",
+    "viec": "Tuần này ăn đủ ba bữa đúng giờ; quá một năm chưa khám tổng quát thì đặt lịch khám.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "với lá số nữ, khi Ấn và Thiên Ấn nhiều",
+    "han": "若见印綬梟神难得子也",
+    "am": "Nhược kiến ấn thụ kiêu thần, nan đắc tử dã.",
+    "y": "Với lá số nữ, sách ghi Ấn và Thiên Ấn nhiều thì đường con cái đến muộn hoặc phải bỏ nhiều công.",
+    "nhom": "C",
+    "chu_de": "con_cai",
+    "ham_y": "Nên chú ý: mong con thì nên đi khám sớm, cả hai người.",
+    "viec": "Tuần này nếu đang mong con, đặt lịch khám cho cả hai thay vì chờ thêm.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Kiếp Tài": [
+   {
+    "khi": "nói chung",
+    "han": "五阴见五阳为劫财主破耗防小人",
+    "am": "Ngũ âm kiến ngũ dương vi kiếp tài, chủ phá hao, phòng tiểu nhân.",
+    "y": "Sách gắn Kiếp Tài với chuyện hao của và cần đề phòng người chơi không đẹp.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "ham_y": "Nên chú ý các khoản cho vay, góp chung và người rủ làm ăn quá gấp.",
+    "viec": "Tuần này khoản nào cho mượn hoặc góp chung thì ghi lại bằng tin nhắn hoặc giấy.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "nói chung",
+    "han": "财者人之所欲方令弟兄见之多有争竞如夷齐能几人",
+    "am": "Tài giả, nhân chi sở dục; phương lệnh đệ huynh kiến chi, đa hữu tranh cạnh; như Di, Tề năng kỷ nhân.",
+    "y": "Sách viết: tiền là thứ ai cũng muốn; anh em cùng thấy thì dễ tranh nhau — nhường nhau được như Bá Di, Thúc Tề thì có mấy người.",
+    "nhom": "B",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý rõ ràng tiền bạc với anh chị em ngay từ đầu.",
+    "viec": "Tuần này nếu có khoản chung với anh chị em, ghi ra ai góp bao nhiêu, ai giữ.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Kiếp Tài (nam) hoặc Thương Quan (nữ) nhiều",
+    "han": "男命见劫财多剋妻女命见伤官多剋夫此极论也",
+    "am": "Nam mệnh kiến kiếp tài đa khắc thê, nữ mệnh kiến thương quan đa khắc phu; thử cực luận dã.",
+    "y": "Sách ghi lá số nam nhiều Kiếp Tài, lá số nữ nhiều Thương Quan thì đường vợ chồng cần vun nhiều hơn người — và chính sách cũng nói đây là cách nói tới cùng cực.",
+    "nhom": "C",
+    "chu_de": "tinh_duyen",
+    "ham_y": "Nên chú ý nói chuyện tiền bạc và ý riêng với người bạn đời cho rõ.",
+    "viec": "Tuần này cùng người bạn đời ngồi xem chi tiêu trong tháng, mỗi người nói một điều muốn đổi.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ]
+ },
+ "luc_than": {
+  "cha": [
+   {
+    "khi": "nói chung",
+    "han": "偏财是父乃印綬之官星也",
+    "am": "Thiên tài thị phụ, nãi ấn thụ chi quan tinh dã.",
+    "y": "Sách lấy Thiên Tài làm sao chỉ người cha — vì đó là sao đứng trên sao chỉ mẹ.",
+    "nhom": "A",
+    "chu_de": "gia_dinh",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "ví dụ ngày Giáp: sao chỉ cha ở chỗ vượng, có sao quý",
+    "han": "如戊临生旺贵人天月德地亦主有贵更得丙丁生助享父之福",
+    "am": "Như mậu lâm sinh vượng, quý nhân, thiên nguyệt đức địa, diệc chủ hữu quý; cánh đắc bính đinh sinh trợ, hưởng phụ chi phúc.",
+    "y": "Sao chỉ cha ở chỗ vượng, gặp sao quý thì sách ghi cha có vị thế; được thêm nguồn nuôi thì mình hưởng phúc của cha.",
+    "nhom": "A",
+    "chu_de": "gia_dinh",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi sao chỉ cha ở chỗ suy, bị kìm",
+    "han": "居衰败受制之处墓绝之地主父平常不得父力也",
+    "am": "Cư suy bại thụ chế chi xứ, mộ tuyệt chi địa, chủ phụ bình thường, bất đắc phụ lực dã.",
+    "y": "Sao chỉ cha ở chỗ suy, bị kìm thì sách ghi cha ở mức bình thường, mình ít nhờ được sức cha.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý sớm tự lập và vẫn chủ động vun với cha.",
+    "viec": "Tuần này tự lo một việc mình vẫn định nhờ cha, rồi kể cho cha nghe.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi sao chỉ cha bị lấn mạnh",
+    "han": "主剋父也不然主离异不睦或疾病残伤",
+    "am": "Chủ khắc phụ dã; bất nhiên, chủ ly dị bất mục, hoặc tật bệnh tàn thương.",
+    "y": "Khi sao chỉ cha bị lấn mạnh, sách gắn với duyên nương tựa cha mỏng hơn; nếu không thì cha con xa cách, ít hoà, hoặc sức khoẻ của cha cần để ý.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý chủ động vun với cha và để ý sức khoẻ của cha.",
+    "viec": "Tuần này gọi cho cha, hỏi lần khám sức khoẻ gần nhất và nhắc cha đi khám định kỳ.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "me": [
+   {
+    "khi": "nói chung",
+    "han": "正印者乃生我之身也",
+    "am": "Chính ấn giả, nãi sinh ngã chi thân dã.",
+    "y": "Sách lấy Chính Ấn — cái sinh ra mình — làm sao chỉ người mẹ.",
+    "nhom": "A",
+    "chu_de": "gia_dinh",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi sao chỉ mẹ ở chỗ đang lớn mạnh",
+    "han": "如印长生主母慈淑寿长益和子母",
+    "am": "Như ấn trường sinh, chủ mẫu từ thục thọ trường, ích hoà tử mẫu.",
+    "y": "Sao chỉ mẹ ở chỗ đang lớn mạnh thì sách ghi mẹ hiền, khoẻ lâu, mẹ con hoà thuận.",
+    "nhom": "A",
+    "chu_de": "gia_dinh",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi sao chỉ mẹ ở chỗ bị ép hoặc chỗ suy",
+    "han": "如临阳刃杀地或值绝墓孤寡主母不贤或有残疾不睦",
+    "am": "Như lâm dương nhận sát địa, hoặc trị tuyệt mộ cô quả, chủ mẫu bất hiền, hoặc hữu tàn tật bất mục.",
+    "y": "Sao chỉ mẹ ở chỗ bị ép hoặc chỗ suy, sách ghi mẹ tính khó, mẹ con dễ không hợp ý, hoặc sức khoẻ của mẹ cần để ý.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý nhường mẹ lời nói và để ý sức khoẻ của mẹ.",
+    "viec": "Tuần này ghé hoặc gọi mẹ, nghe mẹ nói mà không cãi lại; nhắc mẹ đi khám định kỳ.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi sao chỉ mẹ bị sao tiền lấn",
+    "han": "印綬见财剋母及祖母也",
+    "am": "Ấn thụ kiến tài, khắc mẫu cập tổ mẫu dã.",
+    "y": "Sao chỉ mẹ mà bị sao tiền lấn thì sách gắn với duyên nương tựa mẹ và bà mỏng hơn.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý đừng để chuyện tiền, chuyện việc lấn mất giờ dành cho mẹ.",
+    "viec": "Tuần này dành một buổi cho mẹ hoặc bà, không mang việc theo.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "anh_em": [
+   {
+    "khi": "nói chung (cách chia bốn trụ)",
+    "han": "年为祖上月为父母伯叔兄弟门户日为妻妾己身",
+    "am": "Niên vi tổ thượng, nguyệt vi phụ mẫu bá thúc huynh đệ môn hộ, nhật vi thê thiếp kỷ thân.",
+    "y": "Sách chia: trụ năm là ông bà tổ tiên; trụ tháng là cha mẹ, chú bác, anh em, cửa nhà; trụ ngày là mình và người bạn đời.",
+    "nhom": "A",
+    "chu_de": "gia_dinh",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "nói chung",
+    "han": "比肩者兄弟也",
+    "am": "Tỷ kiên giả, huynh đệ dã.",
+    "y": "Sách lấy Tỷ Kiên — cái ngang vai với mình — làm sao chỉ anh chị em.",
+    "nhom": "A",
+    "chu_de": "gia_dinh",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "ví dụ ngày Giáp: sao chỉ anh chị em quá nhiều",
+    "han": "甲乙寅卯既多则兄弟姊妹夺财不和争斗是非",
+    "am": "Giáp ất dần mão ký đa, tắc huynh đệ tỷ muội đoạt tài bất hoà, tranh đấu thị phi.",
+    "y": "Sao chỉ anh chị em quá nhiều thì sách ghi anh em dễ giành nhau chuyện tiền, không hoà, sinh lời qua tiếng lại.",
+    "nhom": "B",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý rõ ràng tiền bạc, của chung với anh chị em.",
+    "viec": "Tuần này việc gì chung tiền với anh chị em thì nhắn lại cho cả nhà cùng thấy con số.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi lá số nhiều Quan, Sát",
+    "han": "官杀多者难为兄弟",
+    "am": "Quan sát đa giả, nan vi huynh đệ.",
+    "y": "Lá số nhiều sao kìm ép thì sách ghi anh em ít dựa được nhau.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "ham_y": "Nên chú ý giữ liên lạc đều với anh chị em, đừng đợi có việc mới gọi.",
+    "viec": "Tuần này nhắn hỏi thăm từng anh chị em một câu, không kèm việc nhờ.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "vo_chong": [
+   {
+    "khi": "với lá số nữ",
+    "han": "取官为夫为福星财旺生官则夫纳福",
+    "am": "Thủ quan vi phu, vi phúc tinh; tài vượng sinh quan, tắc phu nạp phúc.",
+    "y": "Với lá số nữ, sách lấy Chính Quan làm sao chỉ chồng, cũng là sao phúc; sao tiền vượng nuôi được sao ấy thì chồng hưởng phúc.",
+    "nhom": "A",
+    "chu_de": "tinh_duyen",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "với lá số nam, khi trụ ngày hoặc trụ tháng có Tài, Quan",
+    "han": "日下月下坐财官主妻多内助更得妻财",
+    "am": "Nhật hạ nguyệt hạ toạ tài quan, chủ thê đa nội trợ, cánh đắc thê tài.",
+    "y": "Dưới trụ ngày, trụ tháng có sao tiền, sao chức thì sách ghi người vợ giúp được nhiều việc nhà, lại thêm của từ phía vợ.",
+    "nhom": "A",
+    "chu_de": "tinh_duyen",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi sao tiền nhiều mà bản thân yếu",
+    "han": "财多身弱妻反胜夫",
+    "am": "Tài đa thân nhược, thê phản thắng phu.",
+    "y": "Sao tiền nhiều mà bản thân yếu thì sách ghi người vợ nắm phần quyết nhiều hơn chồng.",
+    "nhom": "B",
+    "chu_de": "tinh_duyen",
+    "ham_y": "Nên chú ý bàn việc lớn cùng nhau, đừng để một người gánh hết quyết định.",
+    "viec": "Tuần này chọn một việc chi tiêu lớn sắp tới và hai người cùng ngồi quyết.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi trụ ngày rơi vào Không Vong",
+    "han": "日坐空亡难为妻妾",
+    "am": "Nhật toạ không vong, nan vi thê thiếp.",
+    "y": "Trụ ngày rơi vào Không Vong thì sách ghi đường vợ chồng cần vun nhiều hơn người.",
+    "nhom": "C",
+    "chu_de": "tinh_duyen",
+    "ham_y": "Nên chú ý dành giờ riêng cho hai người, đừng để việc lấp hết.",
+    "viec": "Tuần này hẹn người bạn đời một bữa chỉ có hai người.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "con": [
+   {
+    "khi": "với lá số nam",
+    "han": "七杀者子也",
+    "am": "Thất sát giả, tử dã.",
+    "y": "Với lá số nam, sách lấy Thất Sát làm sao chỉ con.",
+    "nhom": "A",
+    "chu_de": "con_cai",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "với lá số nữ",
+    "han": "女命取伤官是子食神是女",
+    "am": "Nữ mệnh thủ thương quan thị tử, thực thần thị nữ.",
+    "y": "Với lá số nữ, sách lấy Thương Quan chỉ con trai, Thực Thần chỉ con gái.",
+    "nhom": "A",
+    "chu_de": "con_cai",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi trụ giờ có Thương Quan hoặc Không Vong",
+    "han": "时上伤官及空亡难为子息",
+    "am": "Thời thượng thương quan cập không vong, nan vi tử tức.",
+    "y": "Trụ giờ có Thương Quan hoặc rơi vào Không Vong thì sách ghi đường con cái đến muộn hoặc phải bỏ nhiều công.",
+    "nhom": "C",
+    "chu_de": "con_cai",
+    "ham_y": "Nên chú ý: mong con thì nên đi khám sớm, đừng chờ.",
+    "viec": "Tuần này nếu đang mong con, hai người cùng đặt lịch khám.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Thương Quan gặp Chính Quan",
+    "han": "伤官见官子孙凶顽",
+    "am": "Thương quan kiến quan, tử tôn hung ngoan.",
+    "y": "Thương Quan gặp Chính Quan trong lá số thì sách ghi con cháu dễ bướng, khó bảo.",
+    "nhom": "C",
+    "chu_de": "con_cai",
+    "ham_y": "Nên chú ý nghe con nói hết rồi mới uốn.",
+    "viec": "Tuần này khi con làm trái ý, hỏi lý do của con trước khi nhắc.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ]
+ },
+ "tinh_net": {
+  "Mộc": [
+   {
+    "khi": "khi hành này là nét chính của lá số",
+    "han": "木曰曲直味酸主仁惻隐之心慈祥愷悌济物利民",
+    "am": "Mộc viết khúc trực, vị toan, chủ nhân; trắc ẩn chi tâm, từ tường khải đễ, tế vật lợi dân.",
+    "y": "Sách gắn Mộc với lòng nhân: hay thương người, hiền hoà dễ gần, thích giúp đời.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi hành này quá nhiều hoặc quá ít",
+    "han": "太过则折执物性偏不及少仁心生妒意",
+    "am": "Thái quá tắc chiết, chấp vật tính thiên; bất cập thiểu nhân, tâm sinh đố ý.",
+    "y": "Mộc quá nhiều thì dễ gãy, hay cố chấp, tính lệch một bên; Mộc quá ít thì kém lòng thương, dễ sinh ganh.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý lúc mình khăng khăng một ý, và lúc thấy ganh với người khác.",
+    "viec": "Tuần này thử làm theo ý người khác một lần ở việc nhỏ, xem kết quả ra sao.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Hỏa": [
+   {
+    "khi": "khi hành này là nét chính của lá số",
+    "han": "火曰炎上味苦主礼辞让之心恭敬威仪质重淳朴",
+    "am": "Hoả viết viêm thượng, vị khổ, chủ lễ; từ nhượng chi tâm, cung kính uy nghi, chất trọng thuần phác.",
+    "y": "Sách gắn Hỏa với chữ lễ: biết nhường, cung kính, có dáng nghiêm, chất phác.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi hành này là nét chính của lá số",
+    "han": "精神闪烁言语辞急意速心焦",
+    "am": "Tinh thần thiểm thước, ngôn ngữ từ cấp, ý tốc tâm tiêu.",
+    "y": "Sách tả người Hỏa thần sắc lanh lợi, nói nhanh, nghĩ nhanh, hay sốt ruột.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi hành này quá nhiều hoặc quá ít",
+    "han": "太过则足恭聪明性燥鬚赤不及则黄瘦尖巧妒毒有始无终",
+    "am": "Thái quá tắc túc cung thông minh, tính táo tu xích; bất cập tắc hoàng sấu, tiêm xảo đố độc, hữu thuỷ vô chung.",
+    "y": "Hỏa quá nhiều thì lễ phép quá mức, nhanh trí mà tính nóng khô; Hỏa quá ít thì người gầy vàng, khéo vặt, hay ganh, làm việc có đầu thiếu cuối.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý lúc nóng vội và những việc mình mở ra rồi bỏ.",
+    "viec": "Tuần này chọn một việc đã bỏ dở và làm xong trước khi nhận việc mới.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Thổ": [
+   {
+    "khi": "khi hành này là nét chính của lá số",
+    "han": "土曰稼穡勾陈味甘主信诚实之心敦厚至诚言行相顾",
+    "am": "Thổ viết giá sắc câu trần, vị cam, chủ tín; thành thực chi tâm, đôn hậu chí thành, ngôn hành tương cố.",
+    "y": "Sách gắn Thổ với chữ tín: thật thà, đôn hậu, nói và làm đi đôi.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi hành này là nét chính của lá số",
+    "han": "处事不轻度量宽厚",
+    "am": "Xử sự bất khinh, độ lượng khoan hậu.",
+    "y": "Sách tả người Thổ làm việc cẩn trọng, không xem nhẹ việc gì, độ lượng rộng.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi hành này quá nhiều hoặc quá ít",
+    "han": "太过则愚朴古执如痴不及则顏色似忧鼻低面偏声重浊朴实执拗",
+    "am": "Thái quá tắc ngu phác, cổ chấp như si; bất cập tắc nhan sắc tự ưu, tị đê diện thiên, thanh trọng trọc, phác thực chấp ảo.",
+    "y": "Thổ quá nhiều thì thật thà tới mức chậm, cố chấp theo nếp cũ; Thổ quá ít thì nét mặt hay như đang lo, giọng nặng, thật mà bướng.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý lúc mình giữ nếp cũ chỉ vì quen.",
+    "viec": "Tuần này đổi thử một thói quen làm việc theo gợi ý của người khác.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Kim": [
+   {
+    "khi": "khi hành này là nét chính của lá số",
+    "han": "金曰从革味辛辣也主义羞恶之心仗义疏财敢勇豪杰知廉耻",
+    "am": "Kim viết tòng cách, vị tân lạt dã, chủ nghĩa; tu ố chi tâm, trượng nghĩa sơ tài, cảm dũng hào kiệt, tri liêm sỉ.",
+    "y": "Sách gắn Kim với chữ nghĩa: biết thẹn trước điều sai, trọng nghĩa nhẹ tiền, dám làm, biết liêm sỉ.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi hành này là nét chính của lá số",
+    "han": "声音清响刚毅有决",
+    "am": "Thanh âm thanh hưởng, cương nghị hữu quyết.",
+    "y": "Sách tả người Kim giọng trong và vang, cứng cỏi, quyết đoán.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi hành này quá nhiều hoặc quá ít",
+    "han": "太过则自无仁心好斗贪欲不及则多三思少果决慳吝作事挫志",
+    "am": "Thái quá tắc tự vô nhân tâm, hiếu đấu tham dục; bất cập tắc đa tam tư, thiểu quả quyết, khan lận, tác sự toả chí.",
+    "y": "Kim quá nhiều thì kém lòng thương, thích hơn thua, ham muốn nhiều; Kim quá ít thì nghĩ đi nghĩ lại, thiếu quyết, hay tiếc của, làm việc dễ nhụt chí.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý lúc mình hơn thua không cần thiết, hoặc lúc chần chừ quá lâu.",
+    "viec": "Tuần này với một quyết định nhỏ, tự cho mình hạn một ngày rồi chốt.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Thủy": [
+   {
+    "khi": "khi hành này là nét chính của lá số",
+    "han": "水曰润下味咸主智是非之心志足多谋机关深远文学聪明",
+    "am": "Thuỷ viết nhuận hạ, vị hàm, chủ trí; thị phi chi tâm, chí túc đa mưu, cơ quan thâm viễn, văn học thông minh.",
+    "y": "Sách gắn Thủy với chữ trí: biết phân phải trái, chí lớn, nhiều mưu, tính xa, học giỏi, sáng dạ.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi hành này quá nhiều hoặc quá ít",
+    "han": "太过则孤介硬吝不得众情沉毒狠戾失信颠倒不及则胆小无谋",
+    "am": "Thái quá tắc cô giới ngạnh lận, bất đắc chúng tình, trầm độc ngận lệ, thất tín điên đảo; bất cập tắc đảm tiểu vô mưu.",
+    "y": "Thủy quá nhiều thì dễ khép mình, cứng và chặt, ít được lòng người, kín và gắt, hay sai hẹn; Thủy quá ít thì nhát, thiếu tính toán.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "ham_y": "Nên chú ý giữ lời hẹn và nói rõ ý mình để người khác dễ tin.",
+    "viec": "Tuần này đã hẹn gì thì ghi vào lịch và làm đúng giờ, không dời.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ]
+ },
+ "than_the": {
+  "Mộc": [
+   {
+    "khi": "nói chung (bảng can ứng tạng phủ)",
+    "han": "甲肝乙胆",
+    "am": "Giáp can, ất đảm.",
+    "y": "Sách gắn hành Mộc với gan và mật (can Giáp ứng gan, can Ất ứng mật); nên chăm phần này và đi khám định kỳ.",
+    "nhom": "A",
+    "chu_de": "suc_khoe",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Mộc là hành của mình mà gặp quá nhiều Kim",
+    "han": "木命见庚辛申酉多者肝胆病",
+    "am": "Mộc mệnh kiến canh tân thân dậu đa giả, can đảm bệnh.",
+    "y": "Lá số hành Mộc mà gặp quá nhiều Kim, sách gắn với gan và mật; nên chăm phần này và đi khám định kỳ.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "ham_y": "Nên chú ý giấc ngủ, rượu bia và đồ nhiều dầu mỡ.",
+    "viec": "Tuần này ngủ trước 11 giờ đêm ít nhất ba hôm; lâu chưa kiểm tra gan mật thì đặt lịch khám.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Mộc bị Kim lấn",
+    "han": "筋骨疼痛盖因木被金伤",
+    "am": "Cân cốt đông thống, cái nhân mộc bị kim thương.",
+    "y": "Sách gắn chuyện gân xương hay đau mỏi với thế Mộc bị Kim lấn; nên chăm gân cốt và đi khám khi đau kéo dài.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "ham_y": "Nên chú ý tư thế ngồi và việc vận động đều.",
+    "viec": "Tuần này giãn cơ mười phút mỗi ngày; chỗ nào đau quá hai tuần thì đi khám.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Hỏa": [
+   {
+    "khi": "nói chung (bảng can ứng tạng phủ)",
+    "han": "丙小肠丁心",
+    "am": "Bính tiểu trường, đinh tâm.",
+    "y": "Sách gắn hành Hỏa với ruột non và tim (can Bính ứng ruột non, can Đinh ứng tim); nên chăm phần này và đi khám định kỳ.",
+    "nhom": "A",
+    "chu_de": "suc_khoe",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Hỏa là hành của mình mà gặp Thủy đang mạnh",
+    "han": "火命见水及亥子旺地主小肠心经之患",
+    "am": "Hoả mệnh kiến thuỷ cập hợi tý vượng địa, chủ tiểu trường, tâm kinh chi hoạn.",
+    "y": "Lá số hành Hỏa mà gặp Thủy đang mạnh, sách gắn với ruột non và tim mạch; nên chăm phần này và đi khám định kỳ.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "ham_y": "Nên chú ý nhịp nghỉ, thức khuya và những lúc hồi hộp, tức ngực.",
+    "viec": "Tuần này đo huyết áp một lần; lâu chưa khám tim mạch thì đặt lịch khám.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Hỏa bị Thủy lấn",
+    "han": "眼暗目昏多是火遭水剋",
+    "am": "Nhãn ám mục hôn, đa thị hoả tao thuỷ khắc.",
+    "y": "Sách gắn chuyện mắt mờ, mắt mỏi với thế Hỏa bị Thủy lấn; nên chăm mắt và đi khám mắt định kỳ.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "ham_y": "Nên chú ý thời gian nhìn màn hình và ánh sáng chỗ làm việc.",
+    "viec": "Tuần này cứ 20 phút nhìn màn hình thì nhìn xa 20 giây; quá một năm chưa khám mắt thì đặt lịch khám.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Thổ": [
+   {
+    "khi": "nói chung (bảng can ứng tạng phủ)",
+    "han": "戊胃己脾乡",
+    "am": "Mậu vị, kỷ tỳ hương.",
+    "y": "Sách gắn hành Thổ với dạ dày và lá lách (can Mậu ứng dạ dày, can Kỷ ứng tỳ); nên chăm phần này và đi khám định kỳ.",
+    "nhom": "A",
+    "chu_de": "suc_khoe",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Thổ là hành của mình mà gặp Mộc đang mạnh",
+    "han": "土命见木及寅卯旺乡主脾胃经受伤",
+    "am": "Thổ mệnh kiến mộc cập dần mão vượng hương, chủ tỳ, vị kinh thụ thương.",
+    "y": "Lá số hành Thổ mà gặp Mộc đang mạnh, sách gắn với dạ dày và đường tiêu hoá; nên chăm phần này và đi khám định kỳ.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "ham_y": "Nên chú ý giờ ăn và thói quen bỏ bữa.",
+    "viec": "Tuần này ăn sáng đúng giờ cả bảy ngày; hay đau bụng, đầy hơi thì đặt lịch khám tiêu hoá.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Thổ yếu lại gặp Mộc mạnh",
+    "han": "土虚乘木旺之乡脾伤定论",
+    "am": "Thổ hư thừa mộc vượng chi hương, tỳ thương định luận.",
+    "y": "Sách ghi Thổ yếu lại đi vào vùng Mộc mạnh thì phần tỳ vị — việc ăn uống, hấp thu — là chỗ cần giữ nhất.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "ham_y": "Nên chú ý ăn chậm, ăn đủ bữa khi công việc dồn.",
+    "viec": "Tuần này ghi lại ba hôm mình ăn gì, lúc nào; ăn kém hoặc sụt cân kéo dài thì đi khám.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Kim": [
+   {
+    "khi": "nói chung (bảng can ứng tạng phủ)",
+    "han": "庚是大肠辛属肺",
+    "am": "Canh thị đại trường, tân thuộc phế.",
+    "y": "Sách gắn hành Kim với ruột già và phổi (can Canh ứng ruột già, can Tân ứng phổi); nên chăm phần này và đi khám định kỳ.",
+    "nhom": "A",
+    "chu_de": "suc_khoe",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Kim là hành của mình mà gặp Hỏa đang mạnh",
+    "han": "金命见火及巳午旺处主大肠肺经受病",
+    "am": "Kim mệnh kiến hoả cập tỵ ngọ vượng xứ, chủ đại trường, phế kinh thụ bệnh.",
+    "y": "Lá số hành Kim mà gặp Hỏa đang mạnh, sách gắn với ruột già và phổi, đường thở; nên chăm phần này và đi khám định kỳ.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "ham_y": "Nên chú ý khói thuốc, bụi và không khí nơi ở.",
+    "viec": "Tuần này mở cửa cho thoáng phòng ngủ mỗi sáng; ho kéo dài quá hai tuần thì đi khám.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Kim yếu lại gặp Hỏa mạnh",
+    "han": "金弱遇火炎之地血疾无疑",
+    "am": "Kim nhược ngộ hoả viêm chi địa, huyết tật vô nghi.",
+    "y": "Sách ghi Kim yếu lại gặp Hỏa bốc mạnh thì phần huyết là chỗ cần để ý; nên giữ nếp sinh hoạt đều và đi khám định kỳ.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "ham_y": "Nên chú ý dấu hiệu chảy máu bất thường, đừng tự chữa.",
+    "viec": "Tuần này uống đủ nước, ăn thêm rau; quá một năm chưa xét nghiệm máu thì đặt lịch khám tổng quát.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ],
+  "Thủy": [
+   {
+    "khi": "nói chung (bảng can ứng tạng phủ)",
+    "han": "壬是膀胱癸肾脏",
+    "am": "Nhâm thị bàng quang, quý thận tạng.",
+    "y": "Sách gắn hành Thủy với bàng quang và thận (can Nhâm ứng bàng quang, can Quý ứng thận); nên chăm phần này và đi khám định kỳ.",
+    "nhom": "A",
+    "chu_de": "suc_khoe",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Thủy là hành của mình mà gặp Thổ đang mạnh",
+    "han": "水命见土及四季旺月主膀胱肾经受病",
+    "am": "Thuỷ mệnh kiến thổ cập tứ quý vượng nguyệt, chủ bàng quang, thận kinh thụ bệnh.",
+    "y": "Lá số hành Thủy mà gặp Thổ đang mạnh, sách gắn với bàng quang và thận; nên chăm phần này và đi khám định kỳ.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "ham_y": "Nên chú ý uống đủ nước và thói quen nhịn tiểu.",
+    "viec": "Tuần này uống đủ nước mỗi ngày; lâu chưa kiểm tra thận, tiết niệu thì đặt lịch khám.",
+    "nguon": "uyen_hai_tu_binh"
+   },
+   {
+    "khi": "khi Thủy bị Thổ lấn",
+    "han": "下元冷疾只缘水值土伤",
+    "am": "Hạ nguyên lãnh tật, chỉ duyên thuỷ trị thổ thương.",
+    "y": "Sách gắn chứng lạnh, yếu ở vùng bụng dưới và thắt lưng với thế Thủy bị Thổ lấn; nên giữ ấm vùng này và đi khám khi khó chịu kéo dài.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "ham_y": "Nên chú ý giữ ấm lưng, bụng dưới và ngủ đủ.",
+    "viec": "Tuần này đừng ngồi liền một chỗ quá một giờ; đau lưng, tiểu bất thường kéo dài thì đi khám.",
+    "nguon": "uyen_hai_tu_binh"
+   }
+  ]
+ }
+}

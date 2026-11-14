@@ -21,7 +21,7 @@ from app import config, ngon_ngu
 from app.kb import ten as _ten
 from app.kb.loi import L
 from app.kb import tu_dien
-from app.luangiai import sach_xua
+from app.luangiai import hoan_canh, sach_ghi_mon, sach_xua
 from app.calc import can_chi, dia_ly, lunar, mui_gio, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao, tuvi_thai_tue_vn
 from app.calc import tuvi_luu_nguyet as calc_luu_nguyet
 from app.hoidap import tuvi as hoidap_tv
@@ -503,6 +503,9 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
     }
     # SX-1: câu sách xưa ứng với lá số này (chỉ chọn câu đã có trong KB; không biết giờ sinh thì cung là tạm → không hiện).
     ra["sach_xua"] = [] if inp.do_tin_gio is HourConfidence.UNKNOWN else sach_xua.tuvi(ra["cach_cuc"], ra["cung"])
+    # SX-C: lời Toàn Thư về từng sao ở từng cung của đúng lá số (ba nhóm A / B / C đã nói giảm; chưa đủ 18 tuổi bỏ nhóm C).
+    ra["sach_ghi"] = None if inp.do_tin_gio is HourConfidence.UNKNOWN else sach_ghi_mon.tuvi(
+        ra["cung"], hoan_canh.tuoi_tron(dv.duong_goc, config.hom_nay_vn()))
     return ra
 
 
