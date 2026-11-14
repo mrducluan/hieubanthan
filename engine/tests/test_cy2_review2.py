@@ -142,3 +142,97 @@ def test_duoi_viec_theo_tuoi(cau):
 @pytest.mark.parametrize("cau", ["Năm nay tôi có bị đuổi việc không?", "Nhân viên của tôi hay nghỉ, tôi nên quản lý thế nào?"])
 def test_duoi_viec_ban_than_khong_chan(cau):
     assert _hh(cau) is None, cau
+
+
+# ------------------------------------------------------------------ VỪA (6–12): gọi engine thật qua API
+from fastapi.testclient import TestClient  # noqa: E402
+
+from app.main import app  # noqa: E402
+from tests import _dau_ra as D  # noqa: E402
+
+_C = TestClient(app)
+_H = [x for x in D.HO_SO if x["ls"].get("do_tin_gio") != "unknown"][0]
+
+
+def _hoi(m: str, q: str, lang: str = "vi") -> dict:
+    if m == "tuvi":
+        b, u = {"cau_hoi": q, "che_do": "chi_tiet", "ngay_xem": D.XEM, "la_so": _H["ls"]}, "/v1/tuvi/hoi"
+    elif m == "battu":
+        b, u = {"cau_hoi": q, "ngay_xem": D.XEM, "la_so": _H["ls"]}, "/v1/battu/hoi"
+    elif m == "thanso":
+        b, u = D._ts(_H, cau_hoi=q, ngay_xem=D.XEM, quy_uoc_duong_doi="tung_phan"), "/v1/thanso/hoi"
+    elif m == "phongthuy":
+        b, u = {"cau_hoi": q, "ngay_xem": D.XEM, "sinh": D._sinh(_H)}, "/v1/phongthuy/hoi"
+    elif m == "kinhdich":
+        b, u = {"cau_hoi": q, "che_do": "tu_dong", "cach_ra_que": "gieo_tay", "gia_tri_hao": D.HAO[0],
+                "thoi_diem": D.THOI_DIEM}, "/v1/kinhdich/hoi"
+    else:
+        b, u = {"cau_hoi": q}, "/v1/tarot/hoi"
+    r = _C.post(u, json=b, headers={"x-ngon-ngu": lang})
+    assert r.status_code == 200, r.text
+    return r.json()
+
+
+def _loi(j: dict) -> str:
+    return j.get("cau_tra_loi") or ""
+
+
+def test_6_goi_y_dung_nhom():
+    assert "cơ sở được cấp phép" in _loi(_hoi("tuvi", "Tháng sau đi phẫu thuật thẩm mỹ mũi có nên không?"))
+    assert _loi(_hoi("kinhdich", "Will my dad survive his heart surgery?", "en")).startswith("Ask the treating doctor")
+    tc = _loi(_hoi("battu", "Tôi có bị trầm cảm không?"))
+    assert tc.startswith("Nên") and "chuyên gia tâm lý" in tc and "sách xưa" not in tc
+    assert _loi(_hoi("tuvi", "Năm sau tôi có bị bệnh gì nặng không?")).startswith("Nên")
+
+
+@pytest.mark.parametrize("q, lang, co", [("Đối tác có trung thực với tôi không?", "vi", "văn bản"),
+                                         ("Người yêu tôi có ngoại tình không?", "vi", "nên để ý"),
+                                         ("Is my partner cheating?", "en", "keep an eye on"),
+                                         ("Bệnh ung thư của mẹ tôi có chữa khỏi không?", "vi", "Nên hỏi thẳng bác sĩ")])
+def test_7_tarot_phia_nguoi_hoi(q, lang, co):
+    j = _hoi("tarot", q, lang)
+    assert j["xu_ly"] != "khong_hieu" and co in _loi(j), _loi(j)
+
+
+def test_7_tarot_nen_ly_hon_van_goi_rut_bai():
+    assert _hoi("tarot", "Tôi có nên ly hôn không?")["xu_ly"] == "goi_y_rut"
+
+
+def test_8_nhan_dung_chu_de():
+    assert _loi(_hoi("tuvi", "Năm sau tôi có bị tai nạn xe không?")).startswith("Về chuyện đi lại")
+    q = _loi(_hoi("tuvi", "Tôi muốn mở quán ăn gần bệnh viện, có hợp không?"))
+    assert "mặt bằng" in q and "lời hứa miệng về vị trí hay lương" not in q
+    kt = _loi(_hoi("tuvi", "Nhân viên kế toán của tôi có gian lận không?"))
+    assert kt.startswith("Về chuyện nhân viên") and "góp vốn" not in kt.split("\n\n")[0]
+    assert "mảng tiền bạc" in _loi(_hoi("battu", "Tôi có nên mua nhà năm 2027 không?")).split("\n\n")[0]
+    assert "lend" in _loi(_hoi("battu", "Should I lend my friend 20000 dollars?", "en")).split("\n\n")[0].lower()
+
+
+@pytest.mark.parametrize("q", ["Năm 2027 tôi có được thăng chức không?", "Có nên dồn tiền đầu tư chứng khoán năm sau không?"])
+def test_9_so_nam_khong_lac_de(q):
+    assert "hợp lo chỗ ở" not in _loi(_hoi("tuvi", q))
+
+
+@pytest.mark.parametrize("m", ["tuvi", "battu", "thanso"])
+def test_10_vo_sinh_tra_loi(m):
+    j = _hoi(m, "Năm sau vợ tôi sinh, gia đình nên chuẩn bị gì?")
+    loai = (j.get("phan_loai") or {})
+    assert loai.get("loai") != "nguoi_khac" and loai.get("linh_vuc") != "nguoi_khac", loai
+    assert "bác sĩ" in _loi(j)
+
+
+def test_11_bon_phan():
+    ly = _loi(_hoi("tuvi", "Vợ chồng tôi có ly hôn không?")).split("\n\n")[0]
+    assert "Điểm sáng" in ly and "Việc nên làm" in ly and "Nên để ý" in ly
+    assert "Worth watching" in _loi(_hoi("thanso", "Will I get divorced?", "en"))
+    assert "nên đi khám nếu" in _loi(_hoi("thanso", "Tôi hay mất ngủ, có nên đi khám không?")).lower()
+
+
+@pytest.mark.parametrize("m, q", [("phongthuy", "Năm nay sửa nhà có được không?"),
+                                  ("tuvi", "Đối tác mới có lừa đảo không, tôi có nên ký không"),
+                                  ("tuvi", "Con tôi thi đại học năm sau có đỗ không?")])
+def test_12_khong_lap_cau(m, q):
+    import re
+    ct = _loi(_hoi(m, q))
+    cau = [x.strip() for x in re.split(r"(?<=[.!?;])\s+", ct) if len(x) > 35]
+    assert not [x for x in set(cau) if cau.count(x) > 1]

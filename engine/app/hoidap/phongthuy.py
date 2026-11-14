@@ -689,7 +689,7 @@ def van_template(goi: dict) -> str:
     if goi.get("luu_y"):
         doan.append(goi["luu_y"])
     doan.append(L("hoi.ket", hoi_van.KET))
-    return "\n\n".join(doan)
+    return mo_dau.bo_cau_lap("\n\n".join(doan))   # CY-2 review 2: không in lại câu đã nói
 
 
 def _them_chu_y(goi: dict, pl: dict, nha: dict | None, nam_xem: int) -> None:

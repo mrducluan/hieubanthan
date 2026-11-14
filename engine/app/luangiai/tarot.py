@@ -1033,6 +1033,12 @@ def _tra_loi_la(l: dict, nguoc: bool, linh_vuc: str | None, vi_tri: dict | None 
             "la": l["id"], "nguoc": nguoc, "linh_vuc": linh_vuc, "ten_la": l["ten"], "cau_tu_soi": l["cau_tu_soi"]}
 
 
+_LO_DOI = re.compile(r"(?<!\w)(?:(?:nguoi yeu|ny|chong|vo|ban trai|ban gai|anh ay|co ay|partner|husband|wife|boyfriend|girlfriend|"
+                     r"spouse|fiance\w*)(?!\w).{0,40}(?:ngoai tinh|phan boi|lua doi|co nguoi khac|cam sung|bo (?:toi|em|minh)|"
+                     r"cheat\w*|affair|unfaithful|leave me|seeing someone)|(?:vo chong|hai vo chong)(?!\w).{0,30}(?:ly hon|ly than|chia tay)"
+                     r")(?!\w)")
+
+
 def hoi(cau: str, *, trai_bai: str | None = None, la: list[dict] | None = None, ngay_xem: dt.date | None = None) -> dict:
     """Hỏi đáp tất định: nghĩa lá (xuôi / ngược, theo lĩnh vực), lá ở một vị trí của trải bài vừa rút, trải bài, khái niệm.
     An toàn / từ chối / dẫn hướng dùng MỘT bộ chặn chung; câu hỏi về người khác → chuyển về điều chính mình làm được."""
@@ -1054,6 +1060,18 @@ def hoi(cau: str, *, trai_bai: str | None = None, la: list[dict] | None = None, 
         kq.update(cau_tra_loi=L("an_toan.dan_huong", chung.mau_dan_huong(t)), xu_ly="dan_huong")
         return kq
     linh_vuc = _linh_vuc(goc, None)
+    # CY-2 review 2: câu lo về người cùng làm ăn ("đối tác có trung thực không") hay về bạn đời ("người yêu có ngoại tình
+    # không", "is my partner cheating") — trả lời phía người hỏi như 5 mảng: nên để ý / việc nên làm / ranh giới (KB
+    # `chu_y_kb`), rồi gợi rút trải bài cho chính mình. Không đoán lòng người kia.
+    m_lo = "hop_tac" if chung.nguoi_lam_an(t, goc) else ("tinh_cam" if _LO_DOI.search(t) and not chung.co(t, [r"(co )?nen", r"should"]) else None)
+    if m_lo:
+        from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+        van = L("tarot.hoi.chu_y_nk", "Ở {ten}, nên để ý {de_y}. Việc nên làm: {viec}.", ten=cyn.kb.ten(m_lo),
+                de_y=cyn.kb.de_y(m_lo), viec=cyn.kb.viec(m_lo))
+        kq.update(cau_tra_loi=f"{van} {cyn.kb.ranh_gioi(m_lo)} {kb.mau('hoi', 'nguoi_khac')}", xu_ly="nguoi_khac",
+                  linh_vuc=linh_vuc or ("tien_bac" if m_lo == "hop_tac" else "tinh_cam"),
+                  hoi_tiep=[L("tarot.hoi.tiep_qh1", "Tôi nên làm gì với mối quan hệ này?"), L("tarot.hoi.tiep_qh2", "Lá nào nói về chuyện tin nhau?")])
+        return kq
     if chung.co(t, kb.tu_khoa("nguoi_khac")):
         kq.update(cau_tra_loi=str(kb.mau("hoi", "nguoi_khac")), xu_ly="nguoi_khac", linh_vuc=linh_vuc,
                   hoi_tiep=[L("tarot.hoi.tiep_qh1", "Tôi nên làm gì với mối quan hệ này?"), L("tarot.hoi.tiep_qh2", "Lá nào nói về chuyện tin nhau?")])

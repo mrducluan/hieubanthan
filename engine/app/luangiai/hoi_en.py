@@ -15,7 +15,7 @@ from app.kb import store, thanso_v2 as kb2
 from app.kb.loi import L
 
 _RX = {
-    "tinh_yeu": r"\b(love|relationship|partner|boyfriend|girlfriend|husband|wife|marriage|marry|dating|date|crush|romance|romantic|soulmate|ex\b|breakup|break up|single)",
+    "tinh_yeu": r"\b(love|relationship|partner|boyfriend|girlfriend|husband|wife|marriage|marry|dating|date|crush|romance|romantic|soulmate|ex\b|breakup|break up|single|divorc\w*|cheat\w*|affair|unfaithful|separat\w*)",
     "gia_dinh": r"\b(family|parents?|mother|father|mom|dad|children|kids?|son|daughter|sibling|brother|sister|in-laws?)\b",
     "su_nghiep": r"\b(career|job|work|boss|promotion|interview|business|company|colleagues?|co-?workers?|profession|study|studies|exam|school|university|quit|resign)\b",
     "tai_chinh": r"\b(money|finance|finances|financial|debt|loan|salary|income|savings?|invest(?:ing|ment)?|wealth|rich|budget|spend(?:ing)?|pay)\b",
@@ -44,7 +44,7 @@ _CHU_Y_EN = [
     ("nha_cua", r"\b(house|home|apartment|flat|property|real estate|move house)\b"),
     ("tien_bac", r"\b(money|financ\w*|debt|loans?|invest\w*|savings?|lose money|wealth)\b"),
     ("cong_viec", r"\b(job|work|career|boss|fired|laid off|colleagues?|co-?workers?)\b"),
-    ("tinh_cam", r"\b(love|relationship|marriage|married|divorce|breakup|boyfriend|girlfriend|husband|wife|dating)\b"),
+    ("tinh_cam", r"\b(love|relationship|marriage|married|divorc\w*|breakup|boyfriend|girlfriend|husband|wife|dating|cheat\w*|affair)\b"),
     ("gia_dao", r"\b(family|parents?|mother|father|siblings?)\b"),
 ]
 _LO_EN = re.compile(r"\b(watch out|watch for|careful|worr\w*|risk\w*|honest|trust\w*|safe|trouble|lose|pass|fail|will i|should i|"

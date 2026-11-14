@@ -138,7 +138,7 @@ DIEU_HOI: list[tuple[str, str, str, list[str]]] = [
      [r"(?<!\w)kien (tung|cao|ai|nguoi|doi|ra|len|nhau|hang xom)", r"(thua|thang|vu|bi|di|khoi) kien", r"(?<!\w)toa (an|xu|tuyen)", r"tranh chap", r"giay to", r"hop dong", r"phap ly", r"phap luat", r"thua ke", r"\bvisa\b",
       r"ho so", r"(?<!\w)duyet"]),
     ("di_lai", "chuyện đi lại", "di_xa",          # review CY-1: đi lại = mảng ra ngoài (chương Bạn bè / đi lại), không phải sức khoẻ
-     [r"lai xe", r"di duong", r"(?<!\w)xe (co|may)", r"giao thong"]),
+     [r"lai xe", r"di duong", r"(?<!\w)xe (co|may)", r"giao thong", r"tai nan", r"va cham", r"(dam|tong|lat|nga) xe"]),
     ("tim_do", "chuyện tìm lại đồ, người, vật thất lạc", "ban_than",
      [r"(lam |bi )?(mat|roi|lac|trom)\b.{0,30}(tim|ve|lai)", r"tim (lai|thay)", r"(?<!\w)bi trom", r"di lac"]),
     ("thu_cung", "chuyện nuôi thú cưng", "ban_than",
@@ -217,6 +217,9 @@ NHAN_RO: list[tuple[str, tuple[str, ...], list[str]]] = [
     ("chuyện mở thêm chi nhánh", ("kinh_doanh",), [r"mo (them )?chi nhanh", r"chi nhanh (moi|thu)"]),
     ("chuyện đổi địa điểm kinh doanh", ("kinh_doanh",), [r"(doi|chuyen) (dia diem|mat bang)"]),
     ("chuyện quán vắng khách", ("kinh_doanh",), [r"vang khach", r"it khach", r"e am", r"ban cham"]),
+    ("chuyện nhân viên và tiền nội bộ", ("hop_tac",),
+     [r"(nhan vien|ke toan|thu quy|thu ky|tro ly|cap duoi|nguoi lam|giup viec)(?!\w).{0,40}(trung thuc|dang tin|gian (doi|lan)"
+      r"|an (gian|bot|cap)|lua|tham o)"]),
     ("chuyện người cùng làm ăn có đáng tin không", ("hop_tac",),
      [r"trung thuc", r"dang tin", r"tin (duoc|tuong)", r"(?<!\w)lua", r"gian (doi|lan)", r"an gian", r"dang hoang",
       r"minh bach", r"that tha", r"phan boi"]),
@@ -551,7 +554,7 @@ def dat_dau(van: str, mo: str | None, goi: dict | None = None, khoa: tuple | Non
         q = _dsk.quyet
         dat = q(khoa + ("dat",), dat)
     if not dat or not mo or not van:
-        return van
+        return bo_cau_lap(van)
     van = _bo_nhan_sang(van, mo)
     da = _chuan(mo)
     doan = van.split("\n\n")
@@ -568,7 +571,44 @@ def dat_dau(van: str, mo: str | None, goi: dict | None = None, khoa: tuple | Non
             if p is None:
                 continue
         {"than": than, "sau": sau, "chan": chan}[dich].append(p)
-    return "\n\n".join([mo, *than, *sau, *chan])
+    return bo_cau_lap("\n\n".join([mo, *than, *sau, *chan]))
+
+
+def bo_cau_lap(van: str | None) -> str | None:
+    """CY-2 review 2: một câu dài (≥ 8 chữ) đã nói ở trên thì không in lại ở đoạn dưới (đoạn Ngũ Hoàng hai lần, câu luật sư,
+    câu "không đoán điểm" lặp). Đoạn không bỏ câu nào giữ nguyên chữ (kể cả xuống dòng bên trong); đoạn bỏ hết thì bỏ."""
+    if not van:
+        return van
+    da: set[str] = set()
+    ra = []
+    for p in van.split("\n\n"):
+        giu, bo = [], False
+        for c in _cac_cau(p):
+            k = _chuan(c)
+            if len(k.split()) >= 8:
+                if k in da:
+                    bo = True
+                    continue
+                da.add(k)
+            ve = re.split(r";\s+", c)
+            if len(ve) > 1:                      # vế sau dấu chấm phẩy đã nói ở câu trên ("…; không đoán điểm, …")
+                con = []
+                for i, v in enumerate(ve):
+                    kv = _chuan(v)
+                    if i and len(kv.split()) >= 6 and kv in da:
+                        bo = True
+                        continue
+                    if len(kv.split()) >= 6:
+                        da.add(kv)
+                    con.append(v)
+                c = "; ".join(con)
+                c = c if c.endswith((".", "!", "?", ":")) else c.rstrip(";, ") + "."
+            giu.append(c)
+        if not bo:
+            ra.append(p)
+        elif giu and len(" ".join(giu).split()) >= 4:
+            ra.append(" ".join(giu))
+    return "\n\n".join(ra)
 
 
 def _bo_nhan_sang(van: str, mo: str) -> str:
@@ -630,7 +670,8 @@ _BAO_LUC = [r"bao (hanh|luc)", r"danh dap", r"(bi|dang bi) (danh|xam hai|hanh ha
 
 
 _LO_NGHI = [r"(?<!\w)lo( la| rang)?(?!\w)", r"(?<!\w)nghi( ngo| la| rang)?(?!\w)", r"(?<!\w)so( la| rang)?(?!\w)", r"hinh nhu",
-            r"co ve", r"co (dang )?ngoai tinh (khong|ko)", r"\b(worried|suspect\w*|afraid|think)\b"]
+            r"co ve", r"co (dang )?ngoai tinh (khong|ko)", r"co (sap |se )?(ly (hon|di|than)|chia tay|bo nhau) (khong|ko)",
+            r"\b(worried|suspect\w*|afraid|think)\b"]
 
 
 def dong_cam(dieu: dict | None, t: str | None = None) -> str:
@@ -754,7 +795,7 @@ _CO_SANG = [r"[Đđ]iểm sáng", r"[Đđ]iểm mạnh", r"đang đỡ", r"đỡ
 _VIEC_DAU = re.compile(r"(Việc nên làm|What to do|Worth doing)")
 _HOI_CUNG = [r"cung (menh|huynh de|phu the|tu nu|tai bach|tat ach|thien di|no boc|quan loc|dien trach|phuc duc|phu mau)"]
 _RANH_RIENG = {"doi_no", "cho_vay", "di_vay", "cham_cha_me", "nha_chong"}
-_VIEC_KB = {"giay_to", "xuat_ngoai", "mua_xe", "tieu_nhan", "cong_danh", "doi_no", "cho_vay", "di_vay", "cham_cha_me", "nha_chong"}
+_VIEC_KB = {"giay_to", "xuat_ngoai", "mua_xe", "di_lai", "tieu_nhan", "cong_danh", "doi_no", "cho_vay", "di_vay", "cham_cha_me", "nha_chong"}
 _DUOI = re.compile(r"^(Đây là|Lời này|Kết quả thi|Lá số không|Quẻ không|Con số không|Đây không|This is|Exam results|"
                    r"The chart does not|Not a|This reading)")
 
@@ -767,8 +808,56 @@ def _chen(ra: list[str], x: str) -> list[str]:
     return ra[:i] + [x] + ra[i:]
 
 
+_NHAN_VIEN_EN = re.compile(r"\b(employees?|staff|accountants?|bookkeepers?|cashiers?|assistants?|workers?|manager)\b")
+
+
+def _theo(dieu: dict | None, t: str, raw: str | None, nla: bool) -> str | None:
+    """CY-2 review 2: tình huống cụ thể trong mảng — mở quán / kinh doanh (mảng công việc) không nhận lời nhắc của người làm
+    thuê; câu về nhân viên (mảng người cùng làm ăn) nhận lời nhắc quản lý tiền nội bộ, không lời nhắc góp vốn."""
+    if (dieu or {}).get("ma") == "kinh_doanh":
+        return "kinh_doanh"
+    if nla:
+        from app.luangiai import an_toan  # noqa: PLC0415
+        if an_toan._LAM_THUE_VI.search(t or "") or _NHAN_VIEN_EN.search((raw or "").lower()):
+            return "nhan_vien"
+    return None
+
+
+_DOC_THAN = [r"(bao gio|khi nao|nam nao|thang nao|lieu|co) .{0,15}co (nguoi yeu|ban trai|ban gai|ny)(?!\w)", r"(?<!\w)doc than",
+             r"(?<!\w)e (hoai|lau|mai|qua)(?!\w)", r"chua co (nguoi yeu|ai|ny)"]
+_NEN_KHAM = [r"(co )?nen (di )?(kham|gap bac si)", r"co can (di )?(kham|gap bac si)", r"di kham (duoc )?(khong|ko|chua)"]
+_SINH_NO = [r"(vo|chong|toi|em|minh|con dau|con gai) .{0,20}(sap sinh|sinh no|sinh con|sinh em be|mang thai|mang bau|co bau|"
+            r"sinh(?! (nam|ngay|thang|vao|luc|gio|\d)))(?!\w)", r"thai san", r"(?<!\w)sinh no"]
+
+
 def hai_mat(phan: list[str], dieu: dict | None, t: str, raw: str | None = None, viec_san: bool = True,
             goc: str | None = None, sang: str | None = None) -> list[str]:
+    """Bọc `_hai_mat`; CY-2 review 2: câu về chuyện sinh nở trong nhà ("năm sau vợ tôi sinh, gia đình nên chuẩn bị gì")
+    kèm ranh giới bác sĩ ở cuối."""
+    ra = _hai_mat(phan, dieu, t, raw, viec_san, goc, sang)
+    if _co(t or "", _NEN_KHAM):
+        # câu "có nên đi khám không" (mất ngủ, đau lưng, mệt…) → trả lời thẳng trước: nên đi khám khi kéo dài / nặng dần
+        nk = L("hoi.md.nen_kham", "Nên đi khám nếu tình trạng kéo dài hơn hai tuần, nặng dần hoặc ảnh hưởng tới sinh hoạt — "
+                                  "chỉ bác sĩ mới tìm được nguyên nhân.")
+        if _chuan(nk)[:30] not in _chuan(" ".join(ra)):
+            ra = [nk] + list(ra)
+    if _co(t or "", _DOC_THAN) and not _co(t or "", [r"(nguoi yeu|ny|ban trai|ban gai|chong|vo) (toi|em|minh|tui)"]):
+        # câu người đang độc thân ("bao giờ tôi có người yêu"): việc / lời nhắc "của hai người" lạc đề → việc gặp người mới
+        hai = re.compile(r"hai người|vợ chồng|người kia|người ấy|your partner|the two of you")
+        bo = [p for p in ra if hai.search(p or "") and _VIEC_DAU.match(p or "")]
+        if bo:
+            ra = [p for p in ra if p not in bo]
+            ra = _chen(ra, L("hoi.md.viec_doc_than", "Việc nên làm: mở rộng chỗ gặp người mới — một lớp học, nhóm sở thích, "
+                                                     "hoạt động đều đặn — và nhận lời khi người quen muốn giới thiệu."))
+    if _co(t or "", _SINH_NO):
+        rg = L("hoi.md.ranh_sinh", "Chuyện thai sản, sinh nở nên theo lịch khám và lời bác sĩ.")
+        if _chuan(rg)[:30] not in _chuan(" ".join(ra)):
+            ra = list(ra) + [rg]
+    return ra
+
+
+def _hai_mat(phan: list[str], dieu: dict | None, t: str, raw: str | None = None, viec_san: bool = True,
+             goc: str | None = None, sang: str | None = None) -> list[str]:
     """Thêm vào các vế của đoạn mở đầu: một điểm sáng (`sang` — chữ lấy từ chính gói bằng chứng, khi đoạn chưa có), điều
     nên để ý (khi chưa có) và — câu người cùng làm ăn — câu mở "không đọc được lòng người kia", việc tự giữ quyền lợi,
     ranh giới pháp lý. Câu kỳ thi (CY-3): việc cụ thể cho kỳ thi + ranh giới "không đoán điểm hay đỗ trượt". Chỉ chữ KB
@@ -793,7 +882,8 @@ def hai_mat(phan: list[str], dieu: dict | None, t: str, raw: str | None = None, 
     sang = sang or bo_dau_cham(_cykb.sang_chung(mg, con=con))
     if sang and not _co(van, _CO_SANG) and _chuan(sang) not in _chuan(van):
         ra = _chen(ra, _cykb.mau("sang").format(sang=thuong(sang)))
-    dy = _cykb.de_y(mg)
+    theo = _theo(dieu, t, raw, nla)
+    dy = _cykb.de_y(mg, theo)
     rieng = mg in _VIEC_KB and not nla and not viec_san
     if rieng:
         # CY-3: tình huống cụ thể (đòi nợ, chăm bố mẹ già, nhà chồng…) hay mảng đọc nhờ một chương chung (giấy tờ qua
@@ -817,14 +907,14 @@ def hai_mat(phan: list[str], dieu: dict | None, t: str, raw: str | None = None, 
             ra.append(rg)
         return ra
     if nla:
-        ds = _cykb.viec_ds(mg)[:4]
+        ds = _cykb.viec_ds(mg, theo=theo)[:4]
         if ds:
             ra = [p for p in ra if not re.match(r"(Việc nên làm|What to do|Worth doing)", p or "")]
             ra.append(_cykb.mau("nla_viec").format(viec="; ".join(ds)))
         if _co(t, _NAM_KIA):
             ra.append(_cykb.mau("nla_nam_sinh"))
-        if _cykb.ranh_gioi(mg):
-            ra.append(_cykb.ranh_gioi(mg))
+        if _cykb.ranh_gioi(mg, theo):
+            ra.append(_cykb.ranh_gioi(mg, theo))
     elif not viec_san and not _co(" ".join(ra), _CO_VIEC) and _cykb.viec(mg):
         ra = _chen(ra, L("hoi.md.viec", "Việc nên làm: ") + thuong(bo_dau_cham(_cykb.viec(mg))))
     return ra

@@ -535,7 +535,7 @@ def van_template(goi: dict) -> str:
     if goi.get("luu_y"):
         doan.append(goi["luu_y"])
     doan.append(L("hoi.ket", hoi_van.KET))
-    return "\n\n".join(doan)
+    return mo_dau.bo_cau_lap("\n\n".join(doan))   # CY-2 review 2: không in lại câu đã nói
 
 
 def _ket_som(pl: dict, goi: dict, van: str, **them) -> dict:

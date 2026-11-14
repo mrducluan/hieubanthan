@@ -151,7 +151,7 @@ NGUOI_KHAC = [
     r"tinh cach (cua )?(sep|nguoi yeu|chong|vo|bo|me|ban|nguoi yeu cu|anh|chi|em)",
     r"(nguoi yeu|ny) (toi |em |minh )?(co that long|co phai|yeu kieu|sinh)",
     r"(chong|vo|sep|me chong|bo chong|ban than|dong nghiep|em gai|anh trai|bo|me|ban trai|nguoi yeu|crush)"
-    r" (toi|em|minh|cua em|cua toi) (so chu dao|so \d|sinh|co that|la nguoi|kho tinh|co phai|yeu kieu|"
+    r" (toi|em|minh|cua em|cua toi) (so chu dao|so \d|sinh (nam|ngay|thang|vao|luc|gio|\d)|co that|la nguoi|kho tinh|co phai|yeu kieu|"
     r"can gi|co dang|co hay|hay thay|co tinh cam)",
     r"(nguoi nay|nguoi moi quen nay|nguoi moi quen|khach hang nay|dong nghiep nay|ban than toi|"
     r"nguoi toi thich) (co|la|sinh)",

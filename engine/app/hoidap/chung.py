@@ -129,7 +129,8 @@ def mau_tu_choi(goc: str | None, t: str, mau_chung: str, he_la_so: dict | None =
     if nhom == "nguoi_than":                 # sức khoẻ người khác: không đọc lá số của người hỏi (review SK-1)
         return suc_khoe_kb.mau("nguoi_than")   # không đọc gì → không kèm lời "nhắc phòng ngừa theo sách xưa"
     if nhom == "hoi_benh":
-        return f"{skn.doan_hoi_benh(t, he_la_so)} {skn.mien_tru()}"
+        d = skn.doan_hoi_benh(t, he_la_so)
+        return d if d == suc_khoe_kb.mau("hoi_tam_than") else f"{d} {skn.mien_tru()}"   # sức khoẻ tinh thần: không "sách xưa"
     # CY-1: câu may rủi / tai nạn nặng / tuyển dụng vẫn từ chối như cũ, nhưng kèm một lời nhắc "nên chú ý…" đúng mảng
     from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
     goi_y = cyn.goi_y_tu_choi(goc or t, _at.tu_choi(goc or t))
@@ -475,14 +476,31 @@ def hoi_lai_neu(pl: dict, mo_dun: str) -> dict | None:
     return hieu_cau.hoi_lai(mo_dun)
 
 
-def them_so_nam(goi: dict, dong: list[dict], nam_hoi: list[int], bo_qua_dau: tuple[str, ...]) -> None:
+# CY-2 review 2: lời "mảng nổi bật nhất năm" của dòng 10 năm chỉ giữ khi nói đúng mảng được hỏi ("hợp lo chỗ ở" lạc đề
+# ở câu tiền / thăng chức / xuất ngoại). Từ khoá theo mảng của điều được hỏi (`mo_dau.DIEU_HOI`).
+_TU_MANG = {"tien_bac": r"tiền|tài|lương|tích luỹ|tích lũy|chi tiêu|money|income|savings|spend",
+            "cong_viec": r"việc|công|vị trí|cấp trên|sếp|nghề|work|job|career|boss",
+            "tinh_cam": r"tình|vợ|chồng|hôn|người yêu|love|partner|marriage|spouse",
+            "gia_dinh": r"chuyện nhà|người nhà|trong nhà|gia đình|bố|mẹ|cha|anh chị|family|parents",
+            "con_cai": r"con|children|kids|child",
+            "nha_cua": r"nhà|chỗ ở|đất|home|house|property",
+            "di_xa": r"ngoài|đi lại|đi xa|xa|travel|abroad|outside",
+            "quan_he": r"bạn|người|ngoài|friends|people|outside",
+            "hoc_hanh": r"học|thi|study|exam|learning",
+            "suc_khoe": r"sức|khoẻ|khỏe|tâm trạng|health|energy|mood"}
+
+
+def them_so_nam(goi: dict, dong: list[dict], nam_hoi: list[int], bo_qua_dau: tuple[str, ...], mang: str | None = None) -> None:
     """EN-3: chèn mục `so_nam` (mức chung từng năm được hỏi, lấy từ dòng 10 năm của báo cáo — một nguồn) ngay sau các
-    mục đầu cố định `bo_qua_dau` (tứ trụ, tập quán sao hạn). Năm ngoài dòng 10 năm bỏ qua."""
+    mục đầu cố định `bo_qua_dau` (tứ trụ, tập quán sao hạn). Năm ngoài dòng 10 năm bỏ qua. `mang` = mảng của điều được
+    hỏi: lời mảng nổi bật của năm nói chuyện khác mảng này thì bỏ (chỉ giữ mức chung)."""
     from app.calc import lunar  # noqa: PLC0415
     theo = {d["nam"]: d for d in dong}
     ds = [theo[y] for y in nam_hoi if y in theo]
     if not ds:
         return
+    if mang in _TU_MANG:
+        ds = [d if re.search(_TU_MANG[mang], (d.get("y") or "").lower()) else {**d, "y": ""} for d in ds]
     vt = 0
     while vt < len(goi["muc"]) and vt < 2 and goi["muc"][vt]["loai"] in bo_qua_dau:
         vt += 1

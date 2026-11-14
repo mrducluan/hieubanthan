@@ -262,6 +262,11 @@ def thanso_nam(nam_ca_nhan_cua: dict[int, int], nam_hien_tai: int | None = None)
 def doan_hoi_benh(t_khong_dau: str, he_la_so: dict | None = None) -> str:
     """Câu hỏi NÊU tên bệnh / bộ phận ("tôi có bị … không"): không xác nhận, không phủ nhận — nói hệ cơ quan liên quan
     (theo câu hỏi; không rõ thì theo lá số) + đi khám để bác sĩ kiểm tra. Không nhắc lại tên bệnh."""
+    # CY-2 review 2: hỏi "có bị trầm cảm / lo âu / rối loạn … không" → lời hướng sức khoẻ tinh thần (người tin cậy, bác sĩ /
+    # chuyên gia tâm lý), không phải lời "đi khám tổng quát".
+    if re.search(r"(?<!\w)(tram cam|lo au|roi loan (lo au|luong cuc|cam xuc|tam than)|tam than phan liet|benh tam ly|benh tam than"
+                 r"|depress\w*|anxiety|bipolar|mental (health|illness))(?!\w)", t_khong_dau or "") and kb.mau("hoi_tam_than"):
+        return kb.mau("hoi_tam_than")
     he = _tron(kb.he_cau_hoi(t_khong_dau))
     if he:
         return kb.mau("hoi_benh").format(he=he["he"], kham=he["kham"])

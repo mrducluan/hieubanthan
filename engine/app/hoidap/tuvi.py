@@ -140,7 +140,7 @@ CON = [r"(cho|cua) con toi", r"la so cho con", r"be nha toi", r"sinh con nam nao
        r"con (gai|trai) (toi|minh|em)", r"(be|con) (moi|vua) sinh",          # HH-CT2
        r"(lap|xem|an|coi) la so (cho|cua) (con|be)"]                            # EN-3c
 NGUOI_KHAC = [r"cho (chong|vo|me|bo|ong|ba|anh|chi|em|ban gai|ban trai|ban|nguoi yeu|sep) toi",
-              r"(sep|chong|vo|me|bo|nguoi yeu|ban trai|ban gai|dong nghiep) toi (tuoi|sinh|co so|la nguoi)",
+              r"(sep|chong|vo|me|bo|nguoi yeu|ban trai|ban gai|dong nghiep) toi (tuoi|sinh (nam|ngay|thang|vao|luc|gio|\d)|co so|la nguoi)",
               r"xem (tu vi|la so) cho (?!toi)", r"tuoi \w+ \w+, tinh cach",
               r"(chong|vo|bo|me|sep|nguoi yeu|ban trai|ban gai) toi (nam nay|nam sau|nam toi) (co |bi |gap )?(han|xui|tot|the nao)",
               r"(chong|vo|bo|me|sep|nguoi yeu|ban trai|ban gai) toi (co |bi |gap )han"]
@@ -1675,7 +1675,7 @@ def van_template(goi: dict) -> str:
     if goi.get("luu_y"):
         doan.append(goi["luu_y"])
     doan.append(L("hoi.ket", hoi_van.KET))
-    return "\n\n".join(doan)
+    return mo_dau.bo_cau_lap("\n\n".join(doan))   # CY-2 review 2: không in lại câu đã nói
 
 
 # ------------------------------------------------------------------ điểm vào
@@ -1697,7 +1697,8 @@ def _them_so_nam(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict) -
     nam_am_xem = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, config.CALENDAR_MERIDIAN_TZ)[2]
     nam_am_sinh = lunar.solar_to_lunar(sinh["ngay"].day, sinh["ngay"].month, sinh["ngay"].year, tz)[2]
     dong = tvd.dong_muoi_nam(ls, tvd.cham_cung(ls), nam_am_xem, nam_am_sinh, sinh.get("gioi_tinh"))
-    chung.them_so_nam(goi, dong, nam_hoi, ("sao_han",))      # tập quán sao hạn giữ đứng đầu
+    dh = mo_dau.dieu_hoi(pl["cau_chuan_hoa"], _raw(pl), goc=pl.get("cau_goc")) or {}
+    chung.them_so_nam(goi, dong, nam_hoi, ("sao_han",), mang=dh.get("mang"))      # tập quán sao hạn giữ đứng đầu
 
 
 def tra_loi(cau_hoi: str, che_do: str = "tham_khao", sinh: dict | None = None,

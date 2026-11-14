@@ -35,6 +35,7 @@
  "hoi.bt.tt.vi_tri": " — {vt}",
  "hoi.bt.tt.so_lan": ", appearing {n} times among the stems and main hidden stems",
  "hoi.bt.tt.khong_lo": ", not showing among the stems or main hidden stems",
+ "hoi.bt.tt.y_chung": ": {y} Character: {tc}. When there is too much: {kn}; when it is missing: {kt}. For both men and women it points to {nam}.",
  "hoi.bt.tt.y": ": {y} Character: {tc}. When there is too much: {kn}; when it is missing: {kt}. For men it points to {nam}; for women, to {nu}.",
  "hoi.bt.the_tinh": "the spouse star (for a man)",
  "hoi.bt.phu_tinh": "the spouse star (for a woman)",

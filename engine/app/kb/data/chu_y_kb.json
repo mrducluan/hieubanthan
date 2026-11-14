@@ -81,7 +81,10 @@
    },
    "de_y": "lời hứa miệng về vị trí hay lương, việc ôm quá sức, và nghỉ ngang khi chưa có chỗ mới",
    "pt_bo_tri": "bàn làm việc có tựa tường đặc, nhìn thấy cửa, đủ sáng; dây điện, giấy tờ để gọn",
-   "sang_chung": "tay nghề và các mối quan hệ tốt bạn đã có là vốn mang theo được, dù ở chỗ nào"
+   "sang_chung": "tay nghề và các mối quan hệ tốt bạn đã có là vốn mang theo được, dù ở chỗ nào",
+   "de_y_theo": {
+    "kinh_doanh": "vay vốn quá sức để mở, chọn mặt bằng vội khi chưa xem kỹ lượng khách, và tiền nhà với tiền quán để chung một chỗ"
+   }
   },
   "tinh_cam": {
    "ten": "chuyện tình cảm",
@@ -319,7 +322,21 @@
     "school_id": "huyen_khong"
    },
    "pt_bo_tri": "chỗ bàn bạc, ký giấy tờ nên có tựa tường đặc và nhìn thấy cửa; giấy tờ góp vốn, hợp đồng cất chung một chỗ khô, có khoá",
-   "sang_chung": "bạn đang chủ động hỏi trước khi góp vốn — đó đã là cách tự giữ quyền lợi tốt"
+   "sang_chung": "bạn đang chủ động hỏi trước khi góp vốn — đó đã là cách tự giữ quyền lợi tốt",
+   "de_y_theo": {
+    "nhan_vien": "quyền chi tiền và quyền ghi sổ nằm trong tay một người, khoản thu chi không có chứng từ, và sổ sách lâu ngày không ai đối soát"
+   },
+   "viec_ds_theo": {
+    "nhan_vien": [
+     "tách người được chi tiền khỏi người ghi sổ, khoản chi lớn cần hai người cùng duyệt",
+     "đối soát sổ sách, sao kê ngân hàng mỗi tháng, có chứng từ cho từng khoản",
+     "giao việc và quyền hạn rõ ràng bằng văn bản, có quy trình bàn giao khi đổi người",
+     "khi có chênh lệch, hỏi thẳng và nhờ kế toán độc lập soát lại trước khi kết luận"
+    ]
+   },
+   "ranh_gioi_theo": {
+    "nhan_vien": "Đây là lời nhắc tự giữ quyền lợi, không phải lời đoán người kia làm gì; khi có thiệt hại, nên hỏi luật sư — đây không phải lời khuyên pháp lý."
+   }
   },
   "tieu_nhan": {
    "ten": "chuyện thị phi, người chơi xấu",

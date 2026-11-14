@@ -140,7 +140,7 @@ CHU_DE_EN: list[tuple[str, str, str]] = [
                                r"parents|family)"),
     ("tien_bac", "tien bac", r"money|wealth|wealthy|rich|finances?|financial\w*|income|salary|savings?|save|saving|invest\w*|"
                              r"stocks?|shares|crypto|forex|trading|trade|property|properties|real estate|condos?|mortgage|"
-                             r"refinanc\w*|debts?|loans?|borrow\w*|bankrupt\w*|profit|windfall|bonus|afford|side income|"
+                             r"refinanc\w*|debts?|loans?|borrow\w*|lend\w*|lent|bankrupt\w*|profit|windfall|bonus|afford|side income|"
                              r"pay rise|raise|lose money|losing money|inheritance|buy (a |an |my |our )?(new |used |second hand )?(house|car|home|flat|"
                              r"apartment|property|condo|bto|car)|own (a |my own )?(house|home|property|flat|apartment)|lease|budget|cash|earn\w*|"
                              r"paid|pay(?! attention)|bills|expenses|millionaire|passive income|assets|net worth|make a fortune|gold|stock market|\$\$|make more|earn more"),

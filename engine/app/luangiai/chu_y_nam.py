@@ -569,6 +569,8 @@ MANG_VAN_HAN = ("tien_bac", "cong_viec", "tinh_cam", "di_lai", "giay_to", "nha_c
 _GOI_Y_VI = {
     "thai": "Nên theo lịch khám thai và siêu âm ở cơ sở y tế — lá số hay con số không đoán được giới tính hay sức khoẻ của thai. Nếu "
             "muốn, bạn có thể hỏi về mảng con cái, gia đình của chính mình.",
+    "tham_my": "Với phẫu thuật hay làm đẹp, nên hỏi bác sĩ chuyên khoa và chọn cơ sở được cấp phép, hỏi rõ rủi ro và thời gian hồi "
+               "phục — lá số không quyết được việc này có hợp với bạn hay không.",
     "thuoc_mo": "Đừng tự dừng hay đổi thuốc, cũng đừng quyết chuyện mổ theo lá số hay con số; hãy hỏi bác sĩ đang điều trị trước khi "
                 "quyết. Nếu muốn, bạn có thể hỏi về nhịp nghỉ ngơi và năm nên chú ý sức khoẻ của mình.",
     "nguoi_than_benh": "Nên hỏi thẳng bác sĩ điều trị về tình trạng và những việc gia đình cần chuẩn bị, và dành thời gian "
@@ -592,9 +594,12 @@ _GOI_Y_VI = {
 _GOI_Y_NHOM_VI = [
     ("thai", r"thai nhi|co thai|co bau|mang thai|mang bau|dinh bau|trong bung|trai hay (con )?gai|gai hay (con )?trai|sieu am"
              r"|say thai|thai luu|sinh non|de non|thai (nay|do|lan nay)"),
+    ("tham_my", r"tham my|nang mui|cat mi|hut mo|nang nguc|don cam|got cam|cang da|tiem filler|filler|botox|phun xam|lam dep"),
     ("thuoc_mo", r"(bo|ngung|dung|doi) (uong )?thuoc|thuoc nam|hoa tri|xa tri|phau thuat|(nen|co nen) mo|mo hay|chay than"),
     ("nguoi_than_benh", r"(bo|me|ba|ong|cha|chong|vo|con|chau|anh|chi|em)( noi| ngoai| gai| trai)? (toi|em|minh|nha toi)(?!\w)"
-                        r".{0,40}(qua khoi|song duoc|con bao lau|song them|di (khong|ko)|mat (khong|ko))"),
+                        r".{0,40}(qua khoi|song duoc|con bao lau|song them|di (khong|ko)|mat (khong|ko)|chua (duoc|khoi)|khoi (benh|duoc)"
+                        r"|co khoi)|(benh|ung thu|u|tai bien|dot quy)(?!\w).{0,30}cua (bo|me|ba|ong|cha|chong|vo|con|chau|anh|chi|em)"
+                        r"( noi| ngoai| gai| trai)? (toi|em|minh)(?!\w).{0,30}(khoi|qua khoi|chua|song|qua noi)"),
     ("tuoi_tho", r"chet|qua doi|tu vong|song (duoc|den|them|bao)|tho (duoc|bao|may|den)|tuoi tho|con bao lau|qua khoi|bat dac"),
     ("yem", r"yem bua|bo bua|bua ngai|lam hai|tram yem"),
     ("nguoi_khac", r"(xem|doc|soi) (tuong|mat|la so|so) (cua |cho |giup )?(nguoi|anh ay|co ay|chong|vo|sep|dong nghiep|ban)"),
@@ -608,6 +613,7 @@ _GOI_Y_NHOM_VI = [
 ]
 _GOI_Y_NHOM_EN = [
     ("thai", r"pregnan\w*|baby s? (?:gender|sex)|boy or (?:a )?girl|girl or (?:a )?boy|unborn|fetus|foetus|miscarr\w*|ivf|iui"),
+    ("tham_my", r"cosmetic\w*|plastic surgery|nose job|rhinoplasty|botox|fillers?|liposuction|facelift|breast (?:augmentation|implants?)"),
     ("thuoc_mo", r"(?:stop|quit|skip|come off|go off|cut down|ditch) .{0,25}(?:meds|medication|medicine|pills|insulin|chemo\w*|treatment|"
                  r"antidepressants?)|surgery|operation|chemo\w*|dialysis|transplant"),
     ("nguoi_than_benh", r"(?:my (?:\w+ ){0,2}(?:mother|mom|mum|father|dad|husband|wife|son|daughter|grandma|grandpa|brother|sister)|he|she) "
@@ -624,7 +630,7 @@ _GOI_Y_NHOM_EN = [
 ]
 
 
-_GOI_Y_THU_TU = ("thai", "thuoc_mo", "nguoi_than_benh", "tuoi_tho", "yem", "xep_hang", "tuyen_dung", "nguoi_khac", "dau_tu",
+_GOI_Y_THU_TU = ("thai", "tham_my", "nguoi_than_benh", "thuoc_mo", "tuoi_tho", "yem", "xep_hang", "tuyen_dung", "nguoi_khac", "dau_tu",
                  "so_con_ten", "the_thao")
 
 
