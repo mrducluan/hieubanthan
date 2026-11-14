@@ -32,6 +32,16 @@ def _tieu_de(ten: str) -> str:
     return next((x for x in ung if len(x) <= 70), ung[-1][:70])
 
 
+def _bai_ca_cho(tuoi: list[dict]) -> list[dict]:
+    ra, da = [], set()
+    for x in tuoi:
+        c = kb.bai_ca_luu_nien(x["tuoi"])
+        if c and c["han"] not in da:
+            da.add(c["han"])
+            ra.append({"sach": c["sach"], "nguyen_van": c["han"], "nghia": c["y"]})
+    return ra[:4]
+
+
 def trang_bo_vi(ma: str, slug: str) -> dict:
     t = _t()
     bv = kb.bo_vi()[ma]
@@ -65,7 +75,9 @@ def trang_bo_vi(ma: str, slug: str) -> dict:
                     "doan": f"Lưu niên vận khí bộ vị chia mặt thành 100 vị trí theo tuổi mụ; {ten.split(' (')[0]} ứng với tuổi "
                                 f"{', '.join(str(x['tuoi']) for x in tuoi)}. Nam xem bên trái trước, nữ xem bên phải trước. Vùng đầy, sáng thì tuổi ấy nhẹ; "
                                 "vùng có nếp, tối thì tuổi ấy nên chủ động hơn — là cách nhìn của sách, không phải dự báo.",
-                    "bang": {"cot": ["Tuổi mụ", "Tên vị", "Bên"], "dong": [[str(b["tuoi"]), b["vi"], b["ben"]] for b in bang]}})
+                    "bang": {"cot": ["Tuổi mụ", "Tên vị", "Bên"], "dong": [[str(b["tuoi"]), b["vi"], b["ben"]] for b in bang]},
+                    # WS-4: câu bài ca lưu niên của sách ứng với các tuổi này (nguyên văn khớp kho nguồn)
+                    **({"trich_dan": ca} if (ca := _bai_ca_cho(tuoi)) else {})})
     if cau:
         muc.append({"tieu_de": "Cách tự quan sát trong gương",
                     "danh_sach": [f"{c['hoi']} {c['huong_dan']} Lựa chọn: {'; '.join(l['nhan'] for l in c['lua_chon'] if l['ma'] != 'khong_chac')}." for c in cau]})

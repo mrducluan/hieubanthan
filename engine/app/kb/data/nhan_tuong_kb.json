@@ -553,31 +553,31 @@
   },
   {
    "tuoi": 10,
-   "ten": "Thiên Thành",
+   "ten": "Nhân Luân",
    "bo_vi": "tai",
    "ben": "phai"
   },
   {
    "tuoi": 11,
-   "ten": "Thiên Thành",
+   "ten": "Nhân Luân",
    "bo_vi": "tai",
    "ben": "phai"
   },
   {
    "tuoi": 12,
-   "ten": "Thiên Khuếch",
+   "ten": "Địa Luân",
    "bo_vi": "tai",
    "ben": "phai"
   },
   {
    "tuoi": 13,
-   "ten": "Thiên Khuếch",
+   "ten": "Địa Luân",
    "bo_vi": "tai",
    "ben": "phai"
   },
   {
    "tuoi": 14,
-   "ten": "Thiên Khuếch",
+   "ten": "Địa Luân",
    "bo_vi": "tai",
    "ben": "phai"
   },
@@ -6189,5 +6189,414 @@
    "tai_lech_cao": 0.03,
    "mat_duoi_son_can": 0.03
   }
+ },
+ "bai_ca_luu_nien": {
+  "_ghi": "WS-4 (2026-11-14): «流年運氣部位歌» (Thần Tướng Toàn Biên, chép trong Cổ Kim Đồ Thư Tập Thành) cắt theo từng chặng tuổi. `han` là chuỗi con nguyên văn kho nguồn fixtures/nguon/than_tuong_toan_bien.json (test); `y` là tóm ý ban biên tập. Câu giọng phán («輪飛廓反必相刑», «人驚», đoạn kết «禍非輕…») không đưa.",
+  "sach": "Thần Tướng Toàn Biên",
+  "ten_bai": "Lưu niên vận khí bộ vị ca",
+  "chang": [
+   {
+    "tu": 1,
+    "den": 2,
+    "han": "天輪一二初年運",
+    "y": "Tuổi 1–2 vận đi ở vành tai trên (Thiên Luân) — sách gọi là vận đầu đời."
+   },
+   {
+    "tu": 3,
+    "den": 4,
+    "han": "三四周流至天城",
+    "y": "Tuổi 3–4 vận chảy sang Thiên Thành ở tai."
+   },
+   {
+    "tu": 5,
+    "den": 7,
+    "han": "天廓垂珠五六七",
+    "y": "Tuổi 5–7 ở Thiên Khuếch và dái tai (thuỳ châu)."
+   },
+   {
+    "tu": 8,
+    "den": 9,
+    "han": "八九天輪之上停",
+    "y": "Tuổi 8–9 vận dừng ở vành tai trên của tai bên kia."
+   },
+   {
+    "tu": 10,
+    "den": 11,
+    "han": "人輪十歲及十一",
+    "y": "Tuổi 10–11 ở giữa vành tai (Nhân Luân)."
+   },
+   {
+    "tu": 12,
+    "den": 14,
+    "han": "十二十三併十四地輪朝口壽康寧",
+    "y": "Tuổi 12–14 ở dái tai (Địa Luân); sách ghi dái tai hướng về phía miệng là dáng an lành."
+   },
+   {
+    "tu": 15,
+    "den": 15,
+    "han": "十五火星居正額",
+    "y": "Tuổi 15 lên chính giữa trán (Hoả Tinh)."
+   },
+   {
+    "tu": 16,
+    "den": 16,
+    "han": "十六天中骨法成",
+    "y": "Tuổi 16 ở Thiên Trung, chỗ sách xem xương trán đã thành hình."
+   },
+   {
+    "tu": 17,
+    "den": 18,
+    "han": "十七十八日月角",
+    "y": "Tuổi 17–18 ở Nhật Giác, Nguyệt Giác — hai góc trán."
+   },
+   {
+    "tu": 19,
+    "den": 19,
+    "han": "運逢十九應天庭",
+    "y": "Tuổi 19 ứng ở Thiên Đình."
+   },
+   {
+    "tu": 20,
+    "den": 21,
+    "han": "輔角二十二十一",
+    "y": "Tuổi 20–21 ở Phụ Giác, hai bên trán."
+   },
+   {
+    "tu": 22,
+    "den": 22,
+    "han": "二十二歲至司空",
+    "y": "Tuổi 22 tới Tư Không."
+   },
+   {
+    "tu": 23,
+    "den": 24,
+    "han": "二十三四邊城地",
+    "y": "Tuổi 23–24 ở Biên Thành, mép trán."
+   },
+   {
+    "tu": 25,
+    "den": 25,
+    "han": "二十五歲逢中正",
+    "y": "Tuổi 25 gặp Trung Chính."
+   },
+   {
+    "tu": 26,
+    "den": 26,
+    "han": "二十六上主丘陵",
+    "y": "Tuổi 26 ở Khâu Lăng."
+   },
+   {
+    "tu": 27,
+    "den": 27,
+    "han": "二十七年看塚墓",
+    "y": "Tuổi 27 xem ở Trủng Mộ — tên một vị trí ở thái dương, không phải điềm gì."
+   },
+   {
+    "tu": 28,
+    "den": 28,
+    "han": "二十八遇印堂平",
+    "y": "Tuổi 28 gặp Ấn Đường; sách mong chỗ này phẳng, thoáng."
+   },
+   {
+    "tu": 29,
+    "den": 30,
+    "han": "二十九三十山林部",
+    "y": "Tuổi 29–30 ở Sơn Lâm."
+   },
+   {
+    "tu": 31,
+    "den": 31,
+    "han": "三十一歲凌雲程",
+    "y": "Tuổi 31 ở Lăng Vân."
+   },
+   {
+    "tu": 32,
+    "den": 32,
+    "han": "人命若逢三十二額右黃光紫氣生",
+    "y": "Tuổi 32 ở bên phải trán (Tử Khí); sách mong chỗ này sáng sắc."
+   },
+   {
+    "tu": 33,
+    "den": 33,
+    "han": "三十三行繁霞上",
+    "y": "Tuổi 33 đi lên Phồn Hà."
+   },
+   {
+    "tu": 34,
+    "den": 34,
+    "han": "三十四有彩霞明",
+    "y": "Tuổi 34 ở Thái Hà, sách mong chỗ này sáng."
+   },
+   {
+    "tu": 35,
+    "den": 35,
+    "han": "三十五歲太陽位",
+    "y": "Tuổi 35 ở Thái Dương — đuôi mắt một bên."
+   },
+   {
+    "tu": 36,
+    "den": 36,
+    "han": "三十六上會太陰",
+    "y": "Tuổi 36 ở Thái Âm — đuôi mắt bên kia."
+   },
+   {
+    "tu": 37,
+    "den": 37,
+    "han": "陽正當三十七",
+    "y": "Tuổi 37 ở Trung Dương."
+   },
+   {
+    "tu": 38,
+    "den": 38,
+    "han": "三十八主亨",
+    "y": "Tuổi 38 ở Trung Âm; sách ghi là năm hanh thông."
+   },
+   {
+    "tu": 39,
+    "den": 39,
+    "han": "少陽年當三十九",
+    "y": "Tuổi 39 ở Thiếu Dương."
+   },
+   {
+    "tu": 40,
+    "den": 40,
+    "han": "少陰四十少弟兄",
+    "y": "Tuổi 40 ở Thiếu Âm."
+   },
+   {
+    "tu": 41,
+    "den": 41,
+    "han": "山根路遠四十一",
+    "y": "Tuổi 41 ở Sơn Căn — gốc mũi giữa hai mắt."
+   },
+   {
+    "tu": 42,
+    "den": 42,
+    "han": "四十二造精舍宮",
+    "y": "Tuổi 42 ở Tinh Xá."
+   },
+   {
+    "tu": 43,
+    "den": 43,
+    "han": "四十三歲登光殿",
+    "y": "Tuổi 43 lên Quang Điện."
+   },
+   {
+    "tu": 44,
+    "den": 44,
+    "han": "四旬有四年上增",
+    "y": "Tuổi 44 ở Niên Thượng, sống mũi."
+   },
+   {
+    "tu": 45,
+    "den": 45,
+    "han": "壽上又逢四十五",
+    "y": "Tuổi 45 ở Thọ Thượng, sống mũi."
+   },
+   {
+    "tu": 46,
+    "den": 47,
+    "han": "四十六七兩顴宮",
+    "y": "Tuổi 46–47 ở hai gò má (Quyền)."
+   },
+   {
+    "tu": 48,
+    "den": 48,
+    "han": "準頭喜居四十八",
+    "y": "Tuổi 48 ở Chuẩn Đầu — đầu mũi."
+   },
+   {
+    "tu": 49,
+    "den": 49,
+    "han": "四十九入蘭臺",
+    "y": "Tuổi 49 vào Lan Đài — cánh mũi."
+   },
+   {
+    "tu": 50,
+    "den": 50,
+    "han": "廷尉相逢正五十",
+    "y": "Tuổi 50 gặp Đình Uý — cánh mũi bên kia."
+   },
+   {
+    "tu": 51,
+    "den": 51,
+    "han": "人中五十一",
+    "y": "Tuổi 51 ở Nhân Trung."
+   },
+   {
+    "tu": 52,
+    "den": 53,
+    "han": "五十二三居仙庫",
+    "y": "Tuổi 52–53 ở Tiên Khố, hai bên nhân trung."
+   },
+   {
+    "tu": 54,
+    "den": 54,
+    "han": "五旬有四食倉盈",
+    "y": "Tuổi 54 ở Thực Thương; sách mong chỗ này đầy đặn."
+   },
+   {
+    "tu": 55,
+    "den": 55,
+    "han": "五五得請祿倉米",
+    "y": "Tuổi 55 ở Lộc Thương."
+   },
+   {
+    "tu": 56,
+    "den": 57,
+    "han": "五十六七法令明",
+    "y": "Tuổi 56–57 ở Pháp Lệnh; sách mong hai đường này rõ."
+   },
+   {
+    "tu": 58,
+    "den": 59,
+    "han": "五十八九遇虎耳",
+    "y": "Tuổi 58–59 ở Hổ Nhĩ."
+   },
+   {
+    "tu": 60,
+    "den": 60,
+    "han": "耳順之年遇水星",
+    "y": "Tuổi 60 (tuổi «nhĩ thuận») gặp Thuỷ Tinh — miệng."
+   },
+   {
+    "tu": 61,
+    "den": 61,
+    "han": "承漿正居六十一",
+    "y": "Tuổi 61 ở Thừa Tương, dưới môi."
+   },
+   {
+    "tu": 62,
+    "den": 63,
+    "han": "地庫六十二三逢",
+    "y": "Tuổi 62–63 ở Địa Khố."
+   },
+   {
+    "tu": 64,
+    "den": 64,
+    "han": "六十四居陂池內",
+    "y": "Tuổi 64 ở Pha Trì."
+   },
+   {
+    "tu": 65,
+    "den": 65,
+    "han": "六十五處鵝鴨鳴",
+    "y": "Tuổi 65 ở Nga Áp."
+   },
+   {
+    "tu": 66,
+    "den": 67,
+    "han": "六十六七穿金縷",
+    "y": "Tuổi 66–67 ở Kim Lũ."
+   },
+   {
+    "tu": 68,
+    "den": 69,
+    "han": "歸來六十八九程",
+    "y": "Tuổi 68–69 ở Quy Lai."
+   },
+   {
+    "tu": 70,
+    "den": 70,
+    "han": "踰矩之年逢頌公",
+    "y": "Tuổi 70 (tuổi «du củ») ở Tụng Đường."
+   },
+   {
+    "tu": 71,
+    "den": 71,
+    "han": "地閣頻添七十一",
+    "y": "Tuổi 71 ở Địa Các — cằm."
+   },
+   {
+    "tu": 72,
+    "den": 73,
+    "han": "七十二三多奴僕",
+    "y": "Tuổi 72–73 ở Nô Bộc."
+   },
+   {
+    "tu": 74,
+    "den": 75,
+    "han": "腮骨七十四五同",
+    "y": "Tuổi 74–75 ở Tai Cốt — xương quai hàm."
+   },
+   {
+    "tu": 76,
+    "den": 77,
+    "han": "七旬六七尋子位",
+    "y": "Tuổi 76–77 vòng quanh mặt bắt đầu ở vị Tý."
+   },
+   {
+    "tu": 78,
+    "den": 79,
+    "han": "七十八九丑牛耕",
+    "y": "Tuổi 78–79 ở vị Sửu."
+   },
+   {
+    "tu": 80,
+    "den": 81,
+    "han": "太公之年添一歲更臨寅虎",
+    "y": "Tuổi 80–81 ở vị Dần."
+   },
+   {
+    "tu": 82,
+    "den": 83,
+    "han": "八十二三卯兔宮",
+    "y": "Tuổi 82–83 ở vị Mão."
+   },
+   {
+    "tu": 84,
+    "den": 85,
+    "han": "八十四五辰龍行",
+    "y": "Tuổi 84–85 ở vị Thìn."
+   },
+   {
+    "tu": 86,
+    "den": 87,
+    "han": "八旬六七巳蛇中",
+    "y": "Tuổi 86–87 ở vị Tỵ."
+   },
+   {
+    "tu": 88,
+    "den": 89,
+    "han": "八十八九午馬輕",
+    "y": "Tuổi 88–89 ở vị Ngọ."
+   },
+   {
+    "tu": 90,
+    "den": 91,
+    "han": "九旬九一未羊明",
+    "y": "Tuổi 90–91 ở vị Mùi."
+   },
+   {
+    "tu": 92,
+    "den": 93,
+    "han": "九十二三猴結果",
+    "y": "Tuổi 92–93 ở vị Thân."
+   },
+   {
+    "tu": 94,
+    "den": 95,
+    "han": "九十四五聽雞聲",
+    "y": "Tuổi 94–95 ở vị Dậu."
+   },
+   {
+    "tu": 96,
+    "den": 97,
+    "han": "九十六七犬吠月",
+    "y": "Tuổi 96–97 ở vị Tuất."
+   },
+   {
+    "tu": 98,
+    "den": 99,
+    "han": "九十八九買豬吞",
+    "y": "Tuổi 98–99 ở vị Hợi."
+   },
+   {
+    "tu": 100,
+    "den": 100,
+    "han": "若問人生過百歲頤數朝上保長生",
+    "y": "Quá trăm tuổi, sách bảo vòng lại bắt đầu từ trên xuống."
+   }
+  ]
  }
 }

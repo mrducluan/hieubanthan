@@ -13,6 +13,7 @@ import { doanCoThuatNgu } from "@/components/hoi/ThuatNgu";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
 import { ghiMoPhai } from "@/lib/thoi-quen-doc";
+import { SachXuaNoi, type CauSachXua } from "@/components/huyen-hoc/SachXuaNoi";
 import { GoiMoCheo, type GoiMo } from "@/components/khung/GoiMoCheo";
 import { NhacToi } from "@/components/khung/NhacToi";
 import { useChuKD } from "@/components/kinh-dich/chu-kinh-dich";
@@ -43,6 +44,8 @@ export interface DocQueKq {
   mot_que_mot_viec?: string;
   /** KC-3: mã ý định chung + gợi mở sang mảng khác. */
   y_dinh_chung?: string | null; goi_mo?: GoiMo | null;
+  /** WS-5: câu Tăng San Bốc Dịch của chương ứng với việc được hỏi (engine cũ chưa có → khối tự ẩn). */
+  sach_xua?: CauSachXua[];
   /** KD-V3: gói trả lời theo việc (engine): kiểu câu, vai, nghiêng, xu hướng hào làm chủ, dụng thần theo việc. Chỉ hiển thị. */
   tra_loi?: { kieu?: string; vai?: string; nghieng?: string; nhan_nghieng?: string; nhan_tag?: string | null; nguon_tag?: string | null;
     khac_chieu?: string[]; dung_than?: { chinh?: string; ten?: string }; van_ai?: string } | null;
@@ -157,6 +160,8 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
           </ul>
         </div>
       )}
+      <SachXuaNoi ds={dq.sach_xua} moDun="kinhdich" tieuDe={c("dq.sach_xua_tieu_de")}
+        moTa={c("dq.sach_xua_mo_ta", { viec: dq.chu_de.ten.toLowerCase() })} />
       {dq.goi_mo && !en && <GoiMoCheo goiMo={dq.goi_mo} moDun="kinhdich" gon />}
 
       {/* ---- tầng học thuật: gập ---- */}

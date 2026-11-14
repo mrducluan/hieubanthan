@@ -147,7 +147,8 @@ def luu_nien_nam(tuoi_mu: int, gioi_tinh: str | None, tl: dict, khop: list[str],
         return None
     bv = kb.bo_vi().get(ln["bo_vi"]) or {}
     return {**ln, "nam": nam, "ten_bo_vi": bv.get("ten", ln["bo_vi"]), "vung": bv.get("vung"), "vi_tri": bv.get("vi_tri", ""),
-            "nhan_ben": kb.mau("nhan_ben", ln["ben"]) or "", "quan_sat": _quan_sat_vung(ln["bo_vi"], tl), "muc": _muc_vung(ln["bo_vi"], khop)}
+            "nhan_ben": kb.mau("nhan_ben", ln["ben"]) or "", "quan_sat": _quan_sat_vung(ln["bo_vi"], tl), "muc": _muc_vung(ln["bo_vi"], khop),
+            "bai_ca": kb.bai_ca_luu_nien(tuoi_mu)}    # WS-4: câu bài ca lưu niên của sách cho đúng tuổi
 
 
 def _chuong_nam_nay(tl: dict, khop: list[str], nam_sinh: dt.date | int | None, gioi_tinh: str | None, ngay_xem: dt.date) -> dict:
@@ -175,7 +176,8 @@ def _chuong_nam_nay(tl: dict, khop: list[str], nam_sinh: dt.date | int | None, g
         noi_dung += " " + str(kb.mau("nam_nay_muc", nay["muc"]))
     hop.append(kh.hop("thoi_diem", f"Năm {nam_xem_am} nhìn vào {nay['ten_bo_vi']}", noi_dung, muc=nay["muc"],
                       can_cu=[f"Lưu niên vận khí bộ vị: tuổi {tuoi} → vị {nay['vi']} ({nay['ten']}). {kb.mau('nhan_gioi_ben')}",
-                              f"Tuổi mụ = năm âm đang xem ({nam_xem_am}) − năm sinh âm ({ns_am}) + 1."],
+                              f"Tuổi mụ = năm âm đang xem ({nam_xem_am}) − năm sinh âm ({ns_am}) + 1."]
+                      + ([f"Sách xưa — {nay['bai_ca']['sach']}: «{nay['bai_ca']['han']}» {nay['bai_ca']['y']}"] if nay.get("bai_ca") else []),
                       ma=kh.ma_mau(MO_DUN, "nam_nay", nay["bo_vi"], nay["muc"] or "khong"), phai="tam_dinh_ngu_quan",
                       bo_vi=nay["bo_vi"], vung=nay["vung"], nam=nam_xem_am, tu_tuoi=tuoi, den_tuoi=tuoi))
     doan = [str(kb.mau("luu_nien_giai_thich")),
@@ -372,7 +374,9 @@ def hoi(cau: str, tra_loi: dict | None = None, *, nam_sinh: dt.date | int | None
         if ln:
             cau_tl = str(kb.mau("nam_nay" if ln["quan_sat"] else "nam_nay_khong_quan_sat")).format(
                 tuoi=tuoi, ten=ln["ten"], vung=ln["ten_bo_vi"], ben=ln["nhan_ben"], quan_sat="; ".join(ln["quan_sat"]))
-            kq.update(cau_tra_loi=f"{cau_tl} {kb.mau('luu_nien_giai_thich')}", vung=[ln["vung"]], bo_vi=ln["bo_vi"], xu_ly="luu_nien",
+            bc = ln.get("bai_ca")
+            sach = f" {bc['y']} (Sách {bc['sach']} ghi: «{bc['han']}».)" if bc else ""      # WS-4
+            kq.update(cau_tra_loi=f"{cau_tl}{sach} {kb.mau('luu_nien_giai_thich')}", vung=[ln["vung"]], bo_vi=ln["bo_vi"], xu_ly="luu_nien",
                       can_cu=[f"Lưu niên vận khí bộ vị: tuổi {tuoi} → vị {ln['vi']} ({ln['ten']}). {kb.mau('nhan_gioi_ben')}"],
                       hoi_tiep=[f"Tuổi {tuoi + 1} xem ở đâu?", "Ấn Đường của tôi nghĩa là gì?"])
             return kq

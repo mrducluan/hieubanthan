@@ -732,5 +732,96 @@
    "loi": "Đây chỉ là nét phụ của quẻ; phần chính vẫn là hào đại diện cho việc bạn hỏi.",
    "trich": "須以用神爲主"
   }
+ },
+ "sach_xua_viec": {
+  "_ghi": "WS-5 (2026-11-14): câu nguyên văn Tăng San Bốc Dịch theo chương ứng với việc được hỏi, cho khối «Sách xưa nói gì về việc bạn hỏi». `han` là chuỗi con của kho nguồn fixtures/nguon/tang_san_boc_dich.json, nằm sau tiêu đề `chuong` (test). Chỉ chọn câu nêu cách xem (hào nào làm chính, khi nào thuận); chương sức khoẻ, thai sản, con cái không đưa (chương ấy bàn chuyện sinh tử, đoán thai — trái quy tắc SK-1). `y` là tóm ý ban biên tập.",
+  "sach": "Tăng San Bốc Dịch",
+  "nhom": {
+   "cau_tai": {
+    "chuong": "求財章第六十八",
+    "ten_chuong": "Cầu tài",
+    "han": "公私占卜皆以財爲用神﹐子孫者乃生助財爻之元神也﹐俱宜旺而化吉﹐又宜生合世爻",
+    "y": "Hỏi chuyện tiền bạc, làm ăn, sách lấy hào tiền (Thê Tài) làm chính, hào nguồn sinh ra tiền (Tử Tôn) đi kèm. Hai hào này mạnh, biến ra tốt và hợp với hào của bạn thì việc thuận.",
+    "viec": [
+     "kinh_doanh",
+     "ban_nha"
+    ]
+   },
+   "vay_muon": {
+    "chuong": "借貸章第七十七",
+    "ten_chuong": "Vay mượn",
+    "han": "世逢兄﹐何須開口﹐應空破﹐難遂我心﹐財若空破﹐休指望。子興財發可相求",
+    "y": "Hỏi chuyện vay mượn, sách xem ba chỗ: hào của bạn, hào người kia và hào tiền. Hào tiền trống rỗng thì đừng trông nhiều; hào nguồn tiền đang động thì có thể mở lời.",
+    "viec": [
+     "tien_no"
+    ]
+   },
+   "hop_tac": {
+    "chuong": "開行開店及各色鋪面章第七十一",
+    "ten_chuong": "Mở hàng, mở tiệm",
+    "han": "世爲己﹐應爲人﹐大宜相合。財爲本﹐福爲基﹐最喜同興",
+    "y": "Làm ăn chung: hào của bạn (Thế) là mình, hào người kia (Ứng) là đối tác, hai hào hợp nhau là tốt. Tiền là vốn, hào Tử Tôn là nền — cả hai cùng mạnh là thuận nhất.",
+    "viec": [
+     "hop_tac"
+    ]
+   },
+   "cong_danh": {
+    "chuong": "在任吉凶章第五十七",
+    "ten_chuong": "Tại nhiệm",
+    "han": "官旺財興﹐仕途顯赫",
+    "y": "Hỏi chuyện công việc, chức vị, sách xem hào chức danh (Quan Quỷ): hào này mạnh, có hào tiền đi kèm thì đường làm việc sáng sủa.",
+    "viec": [
+     "chuyen_viec",
+     "thang_tien"
+    ]
+   },
+   "thi_cu": {
+    "chuong": "童試章第四十九",
+    "ten_chuong": "Đồng thí",
+    "han": "父旺官興﹐堪期首選",
+    "y": "Hỏi chuyện thi cử, sách xem hào bài thi, giấy báo (Phụ Mẫu) và hào danh vị (Quan Quỷ): cả hai cùng mạnh là dấu đỗ cao.",
+    "viec": [
+     "thi_cu"
+    ]
+   },
+   "phu_the": {
+    "chuong": "夫婦章第四十三",
+    "ten_chuong": "Phu phụ",
+    "han": "財福生身可遂唱隨之願。應爻合世堪爲睦和之兆",
+    "y": "Chuyện đôi lứa: hào tiền và hào niềm vui (Thê Tài, Tử Tôn) sinh cho hào của bạn là dấu hợp ý; hào người kia (Ứng) hợp với hào của bạn là dấu hoà thuận.",
+    "viec": [
+     "tinh_cam",
+     "hon_nhan",
+     "hon_nhan_tt"
+    ]
+   },
+   "xuat_hanh": {
+    "chuong": "出行章第九十一",
+    "ten_chuong": "Xuất hành",
+    "han": "世爲出行人﹐生旺有气則吉﹐動而化吉﹐及化子孫者更吉",
+    "y": "Đi xa: sách lấy hào của bạn (Thế) làm người đi. Hào này mạnh, có sức là thuận; động mà biến ra tốt, nhất là biến ra Tử Tôn, thì càng thuận.",
+    "viec": [
+     "di_xa"
+    ]
+   },
+   "tranh_chap": {
+    "chuong": "防非避訟章第九十五",
+    "ten_chuong": "Phòng phi tị tụng",
+    "han": "子孫動子孫持世必不成非",
+    "y": "Lo chuyện kiện tụng, tranh chấp: sách nói hào Tử Tôn đang động hoặc nằm ở hào của bạn thì chuyện khó thành to.",
+    "viec": [
+     "tranh_chap"
+    ]
+   },
+   "nha_cua": {
+    "chuong": "創造宮室章第一百零七",
+    "ten_chuong": "Sáng tạo cung thất",
+    "han": "父爻旺相﹐世位興隆﹐世父兩爻發動化吉大安宅盛﹐事事享通",
+    "y": "Làm nhà, mua nhà: sách xem hào căn nhà (Phụ Mẫu) và hào của bạn — hai hào mạnh, động mà biến ra tốt thì nhà yên, mọi việc trôi.",
+    "viec": [
+     "mua_nha"
+    ]
+   }
+  }
  }
 }

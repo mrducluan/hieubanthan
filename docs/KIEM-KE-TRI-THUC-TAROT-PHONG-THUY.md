@@ -366,3 +366,29 @@ Hiện ở: báo cáo **Nhà của bạn** (`sach_xua`, khối "Sách xưa nói 
 `/phong-thuy/huong-hop-tuoi/cung-*` (lời "người cung …", nguyên văn trong `<details>` có sẵn trong HTML máy chủ). Chỉ bản
 Việt. Không đổi mức, không đổi lời chương → không tăng `ENGINE_VERSION`. Câu sách đặt phòng cụ thể («宜居南房東間…»)
 và câu «東四修西多不吉» (giọng doạ) **không đưa**.
+
+## 13. Đợt 9 (WS-4, 2026-11-14) — bài ca lưu niên Thần Tướng Toàn Biên ra trang Nhân tướng
+
+KB `nhan_tuong_kb.bai_ca_luu_nien`: «流年運氣部位歌» cắt thành 67 chặng tuổi, phủ đủ 1–100 (quá 100 vòng lại như sách nói),
+mỗi chặng là chuỗi con nguyên văn kho nguồn `than_tuong_toan_bien.json` (test `engine/tests/test_ws4_bai_ca_luu_nien.py`,
+đúng thứ tự trong bài ca). Câu giọng phán («輪飛廓反必相刑», «人驚», đoạn kết «禍非輕…破敗») không đưa.
+
+- **Sửa theo chữ sách**: tuổi 10–11 là **Nhân Luân** (人輪), 12–14 là **Địa Luân** (地輪) — KB cũ ghi nhầm Thiên Thành,
+  Thiên Khuếch (vị trí trên mặt không đổi, chỉ đổi tên).
+- **Hiện ở**: bài đọc "Gương mặt của bạn" — nút "Sách xưa nói gì về tuổi …" dưới bản đồ mặt (bấm vùng sáng của năm nay
+  cũng mở), có nguyên văn; "Vì sao nói vậy" của hộp năm nay; hỏi đáp "tuổi X xem ở đâu"; 22 trang bộ vị có tuổi lưu niên
+  thêm câu bài ca ứng với các tuổi của vùng đó.
+- Không đổi mức → không tăng `ENGINE_VERSION`. Golden đầu ra bản Việt đổi có chủ đích (Nhân tướng, Chân dung mượn chương
+  Nhân tướng, trang bộ vị Tai); sổ ngày cập nhật đổi 22 trang bộ vị.
+- Kèm sửa e2e: hồ sơ mẫu của test Nhân tướng thiếu `v`, `tao_luc` nên trang không đọc được năm sinh — test cũ chỉ khớp tiêu
+  đề chương.
+
+## 14. Đợt 10 (WS-5, 2026-11-14) — câu Tăng San Bốc Dịch theo việc ra bài đọc quẻ
+
+KB `kinhdich_tra_loi.sach_xua_viec`: 9 câu nguyên văn Tăng San Bốc Dịch, mỗi câu thuộc chương bàn đúng một nhóm việc
+(Cầu tài · Vay mượn · Mở hàng · Tại nhiệm · Đồng thí · Phu phụ · Xuất hành · Phòng phi tị tụng · Sáng tạo cung thất),
+nối với mã việc của lớp "trả lời theo việc" (KD-V3). Test `engine/tests/test_ws5_sach_xua_kinhdich.py`: câu là chuỗi con
+kho nguồn và nằm trong đúng chương (không vượt tiêu đề chương kế). Chỉ chọn câu nêu cách xem (hào nào làm chính, khi nào
+thuận). **Không đưa**: chương Tật bệnh (bàn sinh tử), Thai dựng, Tử tự (đoán thai, con cái) — trái SK-1; giấy tờ, gia
+đình, mất đồ chưa có chương khớp. Hiện ở bài đọc quẻ (`sach_xua`, khối "Sách xưa nói gì về việc bạn hỏi" dùng chung
+`SachXuaNoi`), cả bản Anh (cùng số câu). Không đổi mức → không tăng `ENGINE_VERSION`.
