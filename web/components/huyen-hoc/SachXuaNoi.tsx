@@ -15,8 +15,12 @@ const CHU = {
     nguyen_van: "Original text", chan: "These books were written for readers of their own time. Treat them as culture and a mirror for reflection, not as a forecast of what will happen." },
 };
 
-export function SachXuaNoi({ ds, moDun, en = false }: { ds?: CauSachXua[] | null; moDun: "tuvi" | "battu"; en?: boolean }) {
-  const chu = en ? CHU.en : CHU.vi;
+/** WS-3: Phong thuỷ dùng chung khối này ("… về nhà của bạn"). `tinh` = trang dựng ở máy chủ (trang kiến thức): nguyên văn nằm
+ *  trong `<details>` thuần HTML — có sẵn trong HTML cho máy tìm kiếm, mở được không cần JS. */
+export function SachXuaNoi({ ds, moDun, en = false, tieuDe, moTa, tinh = false }: {
+  ds?: CauSachXua[] | null; moDun: "tuvi" | "battu" | "phongthuy"; en?: boolean; tieuDe?: string; moTa?: string; tinh?: boolean;
+}) {
+  const chu = { ...(en ? CHU.en : CHU.vi), ...(tieuDe ? { tieu_de: tieuDe } : {}) };
   const [mo, setMo] = useState<number | null>(null);
   if (!ds?.length) return null;
   return (
@@ -26,7 +30,7 @@ export function SachXuaNoi({ ds, moDun, en = false }: { ds?: CauSachXua[] | null
           <BookOpenText className="size-5 text-gold" aria-hidden /> {chu.tieu_de}
         </h2>
         <p className="mt-1 text-sm text-fg-muted">
-          {chu.mo_ta(ds.length)}
+          {moTa ?? chu.mo_ta(ds.length)}
         </p>
       </div>
       <ol className="grid gap-3 md:grid-cols-2">
@@ -34,6 +38,15 @@ export function SachXuaNoi({ ds, moDun, en = false }: { ds?: CauSachXua[] | null
           <li key={`${c.loai}-${i}`} className="rounded-xl border border-gold/25 bg-gold/[0.04] p-4">
             <p className="text-xs uppercase tracking-wide text-gold">{c.ve}</p>
             <p className="mt-1.5 text-[0.95rem] leading-relaxed">{c.y}</p>
+            {tinh ? (
+              <details className="mt-2 text-xs text-fg-muted">
+                <summary className="inline-flex min-h-[44px] cursor-pointer items-center gap-1 hover:text-fg">{chu.nguyen_van} · {c.sach}</summary>
+                <div className="mt-1 space-y-1 border-l-2 border-gold/40 pl-3 text-sm text-fg" data-testid="sach-xua-han">
+                  <p lang="zh-Hant" className="font-serif leading-relaxed">{c.han}</p>
+                  {c.phien_am && <p className="text-xs italic text-fg-muted">{c.phien_am}</p>}
+                </div>
+              </details>
+            ) : (<>
             <button type="button" aria-expanded={mo === i}
               className="mt-2 inline-flex min-h-[44px] items-center gap-1 text-xs text-fg-muted hover:text-fg"
               onClick={() => { const moi = mo === i ? null : i; setMo(moi); if (moi !== null) ghi("chart_interacted", { mo_dun: moDun, kind: "sach_xua_mo", muc: c.loai }); }}>
@@ -45,6 +58,7 @@ export function SachXuaNoi({ ds, moDun, en = false }: { ds?: CauSachXua[] | null
                 {c.phien_am && <p className="text-xs italic text-fg-muted">{c.phien_am}</p>}
               </div>
             )}
+            </>)}
           </li>
         ))}
       </ol>

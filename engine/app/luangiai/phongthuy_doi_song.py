@@ -707,7 +707,10 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
     chuong = [{k: v for k, v in c.items() if v is not None} for c in (c1, c2, c3, c4, c5)]
     da_tinh["veto_da_xac_nhan"] = [{"ma": d["ma"], "tieu_de": d["tieu_de"]} for d in veto]
     da_tinh["goc_nhin"] = goc_nhin
-    return {"mo_dun": "phongthuy", "phien_ban": "doi_song_1", "phai": "bat_trach_huyen_khong", "ten": "Nhà của bạn",
+    # WS-3: câu sách xưa theo đúng mệnh quái người đọc + người cùng nhà khác nhóm (chỉ bản Việt; không đổi mức / lời).
+    from app.luangiai import sach_xua  # noqa: PLC0415
+    sach = sach_xua.phongthuy(mq["quai"] if mq else None, tvs)
+    return {"mo_dun": "phongthuy", "phien_ban": "doi_song_1", "sach_xua": sach, "phai": "bat_trach_huyen_khong", "ten": "Nhà của bạn",
             "cot_loi": cot_loi, "chuong": chuong, "da_tinh": da_tinh, "thieu": thieu, "ket": kb.mau("ket"),
             "theo_y_dinh": theo_y_dinh, "nguyen_tac": "Hình thế là nền, lý khí là nhịp: dấu hiệu nhìn thấy và du niên với người ở quyết định mức; sao năm, sao tháng chỉ quyết định thời điểm.",
             "y_dinh_chung": "nha_cua", "goi_mo": __import__("app.kb.y_dinh_chung", fromlist=["goi_mo"]).goi_mo("nha_cua", "phongthuy"), **kb.meta()}

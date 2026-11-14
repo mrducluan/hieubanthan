@@ -349,3 +349,20 @@ Tài liệu học thuật có bản đọc được (để đối chiếu, có b
 - **Việc mở**: 14 kho WS-1 (Wikisource `action=raw`) còn giữ chấm câu của người gõ (CC BY-SA, không phải của sách). Chưa bỏ vì
   `kinhdich_tra_loi.json` đang trích nguyên văn Tăng San Bốc Dịch có dấu — bỏ dấu phải sửa đồng loạt câu trích + test. Nên làm
   khi nối các sách này vào lời hiển thị.
+
+## 12. Đợt 8 (WS-3, 2026-11-14) — câu sách Dương Trạch Thập Thư ra trang cho người đọc
+
+Lần đầu kho nguồn WS-2 đi ra lời hiển thị. RULES `engine/app/luangiai/sach_xua.phongthuy` (tất định) chỉ CHỌN câu nguyên văn
+đã có trong KB `phongthuy_kb.sach_xua_nha` (test: mỗi câu là chuỗi con kho nguồn `duong_trach_thap_thu.json`):
+
+| Câu | Khi nào hiện | Lời Việt |
+|---|---|---|
+| «福元在震巽坎離宮為東四位生人…主人所宜居» / bản Tây tứ | luôn (theo nhóm mệnh) | bốn phía tốt, cửa / lối / phòng nên về đó |
+| «{cung}宮為正福德宮…法曰{khẩu quyết}» | luôn (theo mệnh quái) | dựng từ bảng du niên engine (cùng nguồn với la bàn) — câu sách và hướng trên trang không thể lệch |
+| «假如夫東四位生命而妻則西四位…» | vợ / chồng khác nhóm (câu theo nhóm người chồng, như sách viết) | mỗi người chọn gian hợp mình, không phải đổi nhà |
+| «各隨生年定居…亦惟各修其福德所宜» | người cùng nhà khác nhóm (không phải vợ chồng) | mỗi người theo năm sinh chọn chỗ ở trong cùng một nhà |
+
+Hiện ở: báo cáo **Nhà của bạn** (`sach_xua`, khối "Sách xưa nói gì về nhà của bạn", sau các chương) và **8 trang cung phi**
+`/phong-thuy/huong-hop-tuoi/cung-*` (lời "người cung …", nguyên văn trong `<details>` có sẵn trong HTML máy chủ). Chỉ bản
+Việt. Không đổi mức, không đổi lời chương → không tăng `ENGINE_VERSION`. Câu sách đặt phòng cụ thể («宜居南房東間…»)
+và câu «東四修西多不吉» (giọng doạ) **không đưa**.

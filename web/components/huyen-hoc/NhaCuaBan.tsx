@@ -28,6 +28,7 @@ import { boCucGui, type HoSoNha } from "@/lib/ho-so-nha";
 import { NutChiaSeNha } from "@/components/chia-se/NutChiaSeNha";
 import { Undo2, Wrench } from "lucide-react";
 import { ChanQr } from "@/components/khung/ChanQr";
+import { SachXuaNoi, type CauSachXua } from "@/components/huyen-hoc/SachXuaNoi";
 
 type Sinh = { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
 interface ThanhVien { vai: "vo" | "chong" | "con" | "cha_me" | "khac"; nam: string; gioi_tinh: "nam" | "nu" }
@@ -51,6 +52,8 @@ interface TheoYDinh {
 }
 interface BaoCao {
   ten: string; cot_loi: Hop[]; chuong: Chuong[]; thieu: string[]; ket: string; goi_mo?: GoiMo | null; theo_y_dinh?: TheoYDinh | null; nguyen_tac?: string;
+  /** WS-3: câu Dương Trạch Thập Thư chọn theo mệnh quái của bạn + người cùng nhà khác nhóm. */
+  sach_xua?: CauSachXua[];
   da_tinh: { menh_quai: { quai: string; nhom: string } | null; huong_nha: string | null; trach: { quai: string; nhom: string } | null;
     thanh_vien: { ten_vai: string; quai: string; nhom: string; cung_nhom_voi_chu: boolean | null; huong_chung: string[] }[];
     veto_da_xac_nhan?: { ma: string; tieu_de: string }[]; goc_nhin?: GocNhin };
@@ -313,6 +316,8 @@ function BaoCaoNha({ bc, soSanh, onDaXuLy, onHoanTac, dang }: {
         ))}
       </nav>
       {bc.chuong.map((c, i) => <ChuongNha key={c.ma} c={c} so={i + 1} huongNha={bc.da_tinh.huong_nha} />)}
+      <SachXuaNoi ds={bc.sach_xua} moDun="phongthuy" tieuDe="Sách xưa nói gì về nhà của bạn"
+        moTa="Câu chép trong Dương Trạch Thập Thư ứng với đúng mệnh của bạn và người cùng nhà. Lời Việt là phần tóm ý của ban biên tập; bấm vào từng câu để xem nguyên văn." />
       {bc.goi_mo && <GoiMoCheo goiMo={bc.goi_mo} moDun="phongthuy" />}
       {bc.nguyen_tac && <p className="text-xs text-fg-faint" data-testid="nha-nguyen-tac">{bc.nguyen_tac}</p>}
       <p className="border-t border-line pt-4 text-sm text-fg-faint">{bc.ket}</p>
