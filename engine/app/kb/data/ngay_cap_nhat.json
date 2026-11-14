@@ -2,19 +2,19 @@
  "_ghi_chu": "SEO-L4 — ngày đăng / sửa thật của từng trang kiến thức. KHÔNG sửa tay: chạy `python scripts/ngay_cap_nhat.py` sau khi sửa KB hoặc mã dựng trang.",
  "trang": {
   "bo_vi/an-duong": {
-   "bam": "3c214c38af03f21a",
+   "bam": "c7040b8062ab61e5",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/chuan-dau": {
-   "bam": "f791af68f8bf2fa9",
+   "bam": "c9b0eef89c4a9f07",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/dia-cac": {
-   "bam": "afdee15fec009a20",
+   "bam": "e459bc29a29da6ef",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/dien-trach": {
    "bam": "c18a2bfcdd3a5a32",
@@ -27,9 +27,9 @@
    "sua": "2026-11-13"
   },
   "bo_vi/lan-dai": {
-   "bam": "9159f6147fa36c15",
+   "bam": "0fcce1466d0bd184",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/le-duong": {
    "bam": "50c59c8f78b65bd6",
@@ -37,94 +37,94 @@
    "sua": "2026-11-13"
   },
   "bo_vi/long-may": {
-   "bam": "d8c5515376d4d187",
+   "bam": "4e956b47653f0916",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/luong-quyen": {
-   "bam": "aabe6bb0d13a212e",
+   "bam": "75aae80dc5c3739b",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/mat": {
-   "bam": "85406b14c3aa6f9d",
+   "bam": "222819f2ab9c7c18",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/mieng": {
-   "bam": "8de1c4e9d0a9af24",
+   "bam": "00388c9eb1a081ab",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/ngu-vi": {
-   "bam": "f61c4145c0b36afe",
+   "bam": "6174cc685aeaaea1",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/nhan-trung": {
-   "bam": "d547d3086ab03994",
+   "bam": "002b6e5b6dee03b0",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/nhat-giac": {
-   "bam": "acc31b52e8799253",
+   "bam": "b64d98970bdceb6e",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/nien-thuong": {
-   "bam": "2845b76b4583a165",
+   "bam": "b5dacf58f0324165",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/no-boc": {
-   "bam": "a584f92779bbe80f",
+   "bam": "d28ede0fb09cd86c",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/phap-lenh": {
-   "bam": "1c1af7b5f94e0003",
+   "bam": "95776c045e93dd6c",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/son-can": {
-   "bam": "af281d2cb64e184b",
+   "bam": "95e87696d92d6317",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/tai": {
-   "bam": "1c8f1ff657dcd431",
+   "bam": "e459f8a5f3b15c22",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/thien-dinh": {
-   "bam": "10aa4619e7830c26",
+   "bam": "b746d2bea9ec2b37",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/thien-thuong": {
-   "bam": "5cc82cc602a3e404",
+   "bam": "4e20d8c102c533ce",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-14"
   },
   "bo_vi/thien-trung": {
-   "bam": "dbe4b8f41274c0bb",
+   "bam": "d3737aab1b81e7b9",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-14"
   },
   "bo_vi/thua-tuong": {
-   "bam": "632df8649ae22361",
+   "bam": "d860abc683a7b9af",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-14"
   },
   "bo_vi/trung-chinh": {
-   "bam": "04d3c8e7e4fa1641",
+   "bam": "0304365cbacc7740",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-14"
   },
   "bo_vi/tu-khong": {
-   "bam": "74173171f5f12189",
+   "bam": "7ff8efb613453f9b",
    "dang": "2026-11-06",
-   "sua": "2026-11-12"
+   "sua": "2026-11-14"
   },
   "cap_so/so-chu-dao-1-va-1": {
    "bam": "a0655c6a012f5a42",

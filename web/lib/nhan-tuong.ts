@@ -25,7 +25,9 @@ export interface KhaoSat {
 
 export type { MucVung } from "@/lib/nhan-tuong-chung";
 import type { MucVung } from "@/lib/nhan-tuong-chung";
-export interface LuuNienVi { tuoi: number; vi: number; ten: string; bo_vi: string; ben: "trai" | "phai" | "giua"; nam: number | null; ten_bo_vi: string; vung: string | null; nhan_ben: string; quan_sat: string[]; muc: Muc | null }
+export interface LuuNienVi { tuoi: number; vi: number; ten: string; bo_vi: string; ben: "trai" | "phai" | "giua"; nam: number | null; ten_bo_vi: string; vung: string | null; nhan_ben: string; quan_sat: string[]; muc: Muc | null;
+  /** WS-4: chặng «流年運氣部位歌» (Thần Tướng Toàn Biên) cho đúng tuổi — engine cũ chưa có thì thiếu. */
+  bai_ca?: { tu: number; den: number; han: string; y: string; sach: string; ten_bai: string } | null }
 export interface ChuongNhanTuong extends ChuongDoiSongMo {
   thieu?: string | null;
   luu_nien?: { nam_nay: LuuNienVi; toi: LuuNienVi[]; tuoi_mu: number; nam_am_xem: number };
