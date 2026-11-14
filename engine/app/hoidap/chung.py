@@ -133,7 +133,16 @@ def mau_tu_choi(goc: str | None, t: str, mau_chung: str, he_la_so: dict | None =
     # CY-1: câu may rủi / tai nạn nặng / tuyển dụng vẫn từ chối như cũ, nhưng kèm một lời nhắc "nên chú ý…" đúng mảng
     from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
     goi_y = cyn.goi_y_tu_choi(goc or t, _at.tu_choi(goc or t))
-    return f"{mau_chung} {goi_y}".strip() if goi_y else mau_chung
+    return goi_y_truoc(goi_y) if goi_y else mau_chung
+
+
+def goi_y_truoc(goi_y: str) -> str:
+    """2026-11-14 (chủ dự án): câu còn chặn mở bằng lời gợi ý "nên… / nên chú ý…" đúng loại, rồi mới tới một câu ngắn vì
+    sao không luận — thay cho câu chung dài đứng đầu."""
+    from app.kb.loi import L  # noqa: PLC0415
+    ket = L("tu_choi.ket", "Hệ thống không luận những câu kiểu này (may rủi, sống chết, chẩn đoán, đánh giá hay tác động lên "
+                           "người khác) để tránh nói điều không có căn cứ.")
+    return f"{goi_y} {ket}".strip()
 
 
 def them_chu_y(goi: dict, pl: dict, tinh, nam_hien_tai: int, mon_ten: str | None = None,

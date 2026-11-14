@@ -799,7 +799,8 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
             from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
             gy = cyn.goi_y_tu_choi(pl.get("cau_goc") or t, pl["tu_choi"])
             if gy:
-                goi["mau"] = f"{goi['mau']} {gy}"
+                from app.hoidap.chung import goi_y_truoc  # noqa: PLC0415
+                goi["mau"] = goi_y_truoc(gy)
         return _ket(goi)
 
     muc = goi["muc"]

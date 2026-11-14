@@ -239,5 +239,6 @@
  "tarot.tla.cho_can_canh": "Watch out for: {loi}.",
  "tarot.tla.tieu_de_phia_ban": "Your side",
  "tarot.tla.phia_ban_chu_y": "In {viec}, the cards point to what you already have and where you need to stay alert.",
- "thanso_en.diem_sang": "Bright spot for you (Life Path {so}): {x}."
+ "thanso_en.diem_sang": "Bright spot for you (Life Path {so}): {x}.",
+ "tu_choi.ket": "Readings stay away from questions like this (luck numbers, life and death, diagnosis, judging or influencing other people) so they never claim what they cannot know."
 }

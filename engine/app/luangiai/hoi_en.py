@@ -145,7 +145,7 @@ def tra_loi(cau: str, nguoi: dict, ngay_xem: dt.date | None = None) -> dict:
     if db == "tu_choi_nhe":
         from app.luangiai import an_toan as _at, chu_y_nam as _cyn  # noqa: PLC0415
         gy = _cyn.goi_y_tu_choi(goc, _at.tu_choi(goc))           # 2026-11-14: lời "nên chú ý / nên làm" đúng loại
-        kq.update(cau_tra_loi=f"{L('an_toan.tu_choi', '')} {gy}".strip(), phan_loai={**pl, "xu_ly": "tu_choi_nhe"})
+        kq.update(cau_tra_loi=(chung.goi_y_truoc(gy) if gy else L('an_toan.tu_choi', '')), phan_loai={**pl, "xu_ly": "tu_choi_nhe"})
         return kq
     if db == "dan_huong":
         kq.update(cau_tra_loi=L("an_toan.dan_huong", ""), phan_loai={**pl, "xu_ly": "dan_huong"})
