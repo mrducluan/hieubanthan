@@ -70,7 +70,7 @@ export const THANH_MANG: readonly ThanhMang[] = [
   // "Số trong tình yêu" nằm dưới /than-so (silo) nhưng thuộc ý định hợp đôi → thanh Hợp đôi trỏ cùng cụm.
   { tru: "/hop-doi", ma: "hopdoi", ten: "Hợp đôi", en: "Compatibility", muc: [
     { ma: "cong_cu", duong: "/hop-doi", nhan: "Xem hợp đôi", en: "Check compatibility" },
-    { ma: "hai_la_so", duong: "/tu-vi#hop-tham", nhan: "Xem lá số 2 người", en: "Two Zi Wei charts" },
+    { ma: "hai_la_so", duong: "/tu-vi#hop-tham", nhan: "Xem lá số 2 người", en: "Compare two charts" },
     { ma: "cap_so", duong: cum("hop-so"), nhan: "Cặp số hợp nhau", dem: "hop-so", en: "Number pairs" },
     { ma: "tinh_yeu", duong: cum("tinh-yeu"), nhan: "Số trong tình yêu", dem: "tinh-yeu", en: "Numbers in love" },
   ] },

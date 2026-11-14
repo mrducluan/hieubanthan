@@ -16,13 +16,18 @@ type Tach = { nhom: [string, string] | null; phu: [string, string][] };
 /** `tieuDe`: chữ H2 của nhóm — câu tự đứng được khi máy tìm kiếm / AI trích riêng một mục (AEO), khác `ten` ngắn của chip. */
 type Luat = { nhanNhom: string; viDu: string; tach: (b: BaiCum) => Tach; tieuDe: (ten: string) => string; loc?: { nhan: string; thuTu?: string[] }; thuTuNhom?: string[];
   /** EN-ALL: nhãn bản Anh (trang Anh dùng cùng luật; tiêu đề / đường dẫn bài tiếng Anh). Luật chưa có → bản Anh giữ lưới phẳng. */
-  en?: { nhanNhom: string; viDu: string; tieuDe: (ten: string) => string } };
+  en?: { nhanNhom: string; viDu: string; tieuDe: (ten: string) => string; tach?: (b: BaiCum) => Tach; loc?: { nhan: string; thuTu?: string[] } } };
 
 const cap = (ten: string): [string, string] => [maChu(ten), ten];
 
 /** "Tử Vi ở cung Mệnh: …" → sao = Tử Vi, cung = Mệnh. */
 const SAO_CUNG = /^(.+?) ở cung (.+?)\s*[:：—-]/;
 /** Thứ tự 12 cung trên lá số (Mệnh → Phụ Mẫu) cho chip lọc. */
+/** Bản Anh: "Zi Wei in the Life Palace: …" / "Hua Lu in the Life Palace: …" → sao / hoá = trước "in the", cung = sau. */
+const SAO_CUNG_EN = /^(.+?) in the (.+?)\s*[:—-]/;
+const tachSaoCungEn = (b: BaiCum): Tach => { const m = b.tieu_de.match(SAO_CUNG_EN); return m ? { nhom: cap(m[1]!), phu: [cap(m[2]!)] } : { nhom: null, phu: [] }; };
+/** Thứ tự 12 cung bản Anh (tên engine trả, chỉ để xếp chip lọc). */
+const THU_TU_CUNG_EN = ["Life", "Siblings", "Spouse", "Children", "Wealth", "Health", "Travel", "Friends", "Career", "Property", "Fortune", "Parents"].map((x) => maChu(`${x} Palace`));
 const THU_TU_CUNG = ["Mệnh", "Huynh Đệ", "Phu Thê", "Tử Nữ", "Tài Bạch", "Tật Ách", "Thiên Di", "Nô Bộc", "Quan Lộc", "Điền Trạch", "Phúc Đức", "Phụ Mẫu"].map(maChu);
 
 /** Quẻ "Thuần X" = quái X chồng lên chính nó; quẻ khác: chữ đầu là hình tượng quái trên. */
@@ -45,8 +50,10 @@ function quaiTren(tieuDe: string): string | null {
 
 const LUAT: Record<string, Luat> = {
   "sao-cung": { nhanNhom: "Theo sao", tieuDe: (t) => `Sao ${t} ở 12 cung`, viDu: "Thái Dương, Phu Thê…", loc: { nhan: "Theo cung", thuTu: THU_TU_CUNG },
+    en: { nhanNhom: "By star", viDu: "Tai Yang, Spouse Palace…", tieuDe: (t) => `${t} in the 12 palaces`, tach: tachSaoCungEn, loc: { nhan: "By palace", thuTu: THU_TU_CUNG_EN } },
     tach: (b) => { const m = b.tieu_de.match(SAO_CUNG); return m ? { nhom: cap(m[1]!), phu: [cap(m[2]!)] } : { nhom: null, phu: [] }; } },
   "tu-hoa": { nhanNhom: "Theo hoá", tieuDe: (t) => `${t} ở 12 cung`, viDu: "Hoá Kỵ, Tài Bạch…", loc: { nhan: "Theo cung", thuTu: THU_TU_CUNG },
+    en: { nhanNhom: "By transformation", viDu: "Hua Ji, Wealth Palace…", tieuDe: (t) => `${t} in the 12 palaces`, tach: tachSaoCungEn, loc: { nhan: "By palace", thuTu: THU_TU_CUNG_EN } },
     tach: (b) => { const m = b.tieu_de.match(SAO_CUNG); return m ? { nhom: cap(m[1]!), phu: [cap(m[2]!)] } : { nhom: null, phu: [] }; } },
   "kinh-dich": { nhanNhom: "Theo quái trên", tieuDe: (t) => `Quẻ có quái trên ${t.replace(" · ", " (")})`, viDu: "Càn, Thái, Vị Tế…", thuTuNhom: Object.keys(QUAI),
     tach: (b) => { const q = quaiTren(b.tieu_de); return { nhom: q ? [q, QUAI[q]!] : null, phu: [] }; } },
@@ -72,7 +79,7 @@ export function mucLucCum(khoa: string, ds: BaiCum[], en = false): MucLucCum | n
   if (!l || (en && !l.en)) return null;
   const nhom = new Map<string, NhomCum>(), loc = new Map<string, string>();
   for (const b of ds) {
-    const t = l.tach(b);
+    const t = (en && l.en?.tach ? l.en.tach : l.tach)(b);
     const [ma, ten] = t.nhom ?? ["khac", en ? "Other" : "Khác"];
     if (!nhom.has(ma)) nhom.set(ma, { ma, ten, tieuDe: ma === "khac" ? (en ? "Other pages" : "Các trang khác") : (en ? l.en!.tieuDe : l.tieuDe)(ten), bai: [] });
     nhom.get(ma)!.bai.push({ ...b, phu: t.phu.map(([m]) => m) });
@@ -83,6 +90,7 @@ export function mucLucCum(khoa: string, ds: BaiCum[], en = false): MucLucCum | n
   const dsNhom = xep([...nhom.entries()], l.thuTuNhom).map(([, n]) => n);
   // "Khác" luôn cuối.
   dsNhom.sort((a, b) => Number(a.ma === "khac") - Number(b.ma === "khac"));
-  const dsLoc = l.loc && loc.size ? { nhan: l.loc.nhan, ds: xep([...loc.entries()], l.loc.thuTu).map(([ma, ten]) => ({ ma, ten })) } : null;
+  const lLoc = en && l.en ? l.en.loc : l.loc;
+  const dsLoc = lLoc && loc.size ? { nhan: lLoc.nhan, ds: xep([...loc.entries()], lLoc.thuTu).map(([ma, ten]) => ({ ma, ten })) } : null;
   return { nhanNhom: en ? l.en!.nhanNhom : l.nhanNhom, viDu: en ? l.en!.viDu : l.viDu, nhom: dsNhom, loc: dsLoc };
 }

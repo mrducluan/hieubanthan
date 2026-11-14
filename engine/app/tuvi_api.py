@@ -14,10 +14,11 @@ import datetime as _dt
 from functools import lru_cache
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, BackgroundTasks, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 from app import config, ngon_ngu
+from app.narrative import phan_loai_en
 from app.kb import ten as _ten
 from app.kb.loi import L
 from app.kb import tu_dien
@@ -28,6 +29,8 @@ from app.hoidap import tuvi as hoidap_tv
 from app.luangiai import tuvi_luu_nguyet as luan_luu_nguyet
 from app.luangiai import tuvi_the_cung as the_cung
 from app.luangiai import cung_sao_menh
+from app.luangiai import tuvi_hien
+from app import ngon_ngu
 from app import nhat_ky
 from app.kb import trang_tuvi, tuvi_kb
 from app.config import ENGINE_VERSION, HourConfidence, Region
@@ -107,7 +110,7 @@ class _DauVao:
     def __init__(self, inp: TuanTrietInput):
         gio, phut = int(inp.birth_time[:2]), int(inp.birth_time[3:])
         if gio > 23 or phut > 59:
-            raise HTTPException(422, detail="Giờ sinh không hợp lệ")
+            raise HTTPException(422, detail=L("tv_loi.gio", "Giờ sinh không hợp lệ"))
 
         # ---- 0. Nơi sinh → vùng múi giờ / nước ngoài ------------------------
         nuoc_ngoai = inp.noi_sinh == dia_ly.NUOC_NGOAI or inp.vung is Region.ABROAD
@@ -115,11 +118,11 @@ class _DauVao:
         if inp.noi_sinh and not nuoc_ngoai:
             tinh = dia_ly.tra(inp.noi_sinh)
             if tinh is None:
-                raise HTTPException(422, detail="Nơi sinh không có trong danh sách tỉnh/thành")
+                raise HTTPException(422, detail=L("tv2.ht.loi.noi_sinh", "Nơi sinh không có trong danh sách tỉnh/thành"))
         if inp.gio_mua_he and not nuoc_ngoai:
-            raise HTTPException(422, detail="Giờ mùa hè chỉ áp dụng khi sinh ở nước ngoài")
+            raise HTTPException(422, detail=L("tv_loi.gio_mua_he", "Giờ mùa hè chỉ áp dụng khi sinh ở nước ngoài"))
         if inp.mui_gio and not nuoc_ngoai:
-            raise HTTPException(422, detail="Múi giờ nơi sinh chỉ áp dụng khi sinh ở nước ngoài")
+            raise HTTPException(422, detail=L("tv_loi.mui_gio", "Múi giờ nơi sinh chỉ áp dụng khi sinh ở nước ngoài"))
         # QTE-2: thành phố / vùng IANA → múi giờ chuẩn + giờ mùa hè tại ngày giờ sinh (thắng khai tay); không có → khai tay.
         self.gio_mua_he, self.utc_noi_sinh, self.mui_gio = inp.gio_mua_he, inp.utc_noi_sinh, None
         if inp.mui_gio and nuoc_ngoai:
@@ -131,7 +134,7 @@ class _DauVao:
         vung_khai = None if nuoc_ngoai else inp.vung
         if tinh and tinh["vung"]:
             if vung_khai and vung_khai.value != tinh["vung"]:
-                raise HTTPException(422, detail="Vùng khai báo mâu thuẫn với nơi sinh")
+                raise HTTPException(422, detail=L("tv_loi.vung", "Vùng khai báo mâu thuẫn với nơi sinh"))
             vung_khai = Region(tinh["vung"])
 
         # ---- 1. Âm lịch đầu vào? Đổi về dương trước đã --------------------
@@ -168,7 +171,7 @@ class _DauVao:
         self.doi_mat_troi: int | None = None   # phút đã dịch khi gio_sinh = "mat_troi" (so với giờ chuẩn của khung lịch)
         self.gio_chuan_truoc: _dt.datetime | None = None
         if inp.gio_sinh == "mat_troi" and self.kinh_do is None:
-            raise HTTPException(422, detail="Giờ sinh theo mặt trời thực cần nơi sinh có kinh độ (tỉnh Việt Nam hoặc thành phố trong danh sách)")
+            raise HTTPException(422, detail=L("tv_loi.mat_troi", "Giờ sinh theo mặt trời thực cần nơi sinh có kinh độ (tỉnh Việt Nam hoặc thành phố trong danh sách)"))
         if nuoc_ngoai:
             # config.ABROAD_LOCAL_TIME: giữ giờ địa phương, chỉ bỏ giờ mùa hè.
             if self.gio_mua_he:
@@ -176,10 +179,10 @@ class _DauVao:
             tb = timebase.CalendarTime(calendar_dt=clock_dt, clock_offset=None, tz_disputed=False)
         else:
             if duong_goc < _NGAY_THONG_NHAT_MUI_GIO and vung_khai is None:
-                raise HTTPException(422, detail=(
+                raise HTTPException(422, detail=L("tv_loi.truoc_1975", (
                     "Sinh trước 13/06/1975: bắt buộc khai 'vung' (north/south theo NƠI "
                     "SINH) vì hai miền dùng múi giờ khác nhau — kết quả có thể lệch cả "
-                    "ngày can chi."))
+                    "ngày can chi.")))
             vung = vung_khai or Region.NORTH   # sau 1975 hai vùng cùng UTC+7, chọn gì cũng vậy
             tb = timebase.to_calendar_time(clock_dt, vung)
         self.nuoc_ngoai, self.tinh = nuoc_ngoai, tinh
@@ -351,7 +354,7 @@ def api_tuan_triet(inp: TuanTrietInput) -> dict:
         "ngay_can_chi": ngay_cc,
         "ty_boundary_policy": (config.TY_BOUNDARY_POLICY.value
                                if config.TY_BOUNDARY_POLICY else None),
-        "tuan_triet": tt,
+        "tuan_triet": tt if ngon_ngu.la_viet() else tuvi_hien.tuan_triet(tt),
         "co_canh_bao": dv.flags,
     }
 
@@ -378,9 +381,8 @@ def _giai_nghia_sao(ten: str, do_sang: str | None, cung: str) -> dict | None:
 
 
 def _nghia_sao_nho(p: dict) -> dict[str, dict]:
-    """KT-TT: nghĩa ngắn của tạp diệu + sao bốn vòng đang đứng trong cung (KB `sao_nho`; chỉ bản tiếng Việt)."""
-    if not ngon_ngu.la_viet():
-        return {}
+    """KT-TT: nghĩa ngắn của tạp diệu + sao bốn vòng đang đứng trong cung (KB `sao_nho`; bản Anh qua bản phủ
+    en/tuvi_kb.json — khoá vẫn là MÃ tên sao, tên hiển thị ở `ten_hien`)."""
     ten = [x["name"] for x in p["adjectiveStars"]] + [p["changsheng12"], p["boshi12"], p["jiangqian12"], p["suiqian12"],
                                                       tuvi_thai_tue_vn.ten_nam_phai(p["suiqian12"])]
     ra = {t: {"nhom": m["nhom"], "y_nghia": m["y_nghia"], "do_tin": m["do_tin"]}
@@ -388,7 +390,7 @@ def _nghia_sao_nho(p: dict) -> dict[str, dict]:
     # KT-TT3: phụ tinh ở chính cung này theo Toàn Thư quyển 3 (6 cung về việc và nếp sống) — tóm ý + nguyên văn.
     for x in p["minorStars"]:
         if (m := tuvi_kb.phu_tinh_cung(x["name"], p["name"])):
-            ra[x["name"]] = {"nhom": "Phụ tinh ở cung này", "y_nghia": m["y"], "trich": m["trich"], "do_tin": "co_thu"}
+            ra[x["name"]] = {"nhom": L("tuvi.sao_nho.phu_tinh_cung", "Phụ tinh ở cung này"), "y_nghia": m["y"], "trich": m["trich"], "do_tin": "co_thu"}
     return ra
 
 
@@ -436,17 +438,18 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
 
     flags = list(dv.flags)
     if ti == 12:
-        flags.append({"loai": "ty_conflict", "chi_tiet": (
+        flags.append({"loai": "ty_conflict", "chi_tiet": L("tuvi_ls.co.ty_conflict", (
             "Sinh 23:00–23:59: tử vi (theo iztro) tính là giờ Tý của NGÀY HÔM SAU, "
             "còn thần số học/bát tự ở đây tính vẫn là ngày hôm đó. Hai phần có thể "
-            "lệch ngày — đây là quy ước, không phải lỗi.")})
-    flags.append({"loai": "nam_phai", "chi_tiet": (
+            "lệch ngày — đây là quy ước, không phải lỗi."))})
+    flags.append({"loai": "nam_phai", "chi_tiet": L("tuvi_ls.co.nam_phai", (
         "An sao theo iztro (Tử Vi Đẩu Số). Chính tinh, tứ hoá khớp aov.cc; bộ phụ "
         "tinh Nam phái (Việt) chưa được đối chiếu đầy đủ. Tuần/Triệt theo lối Việt (đóng giữa "
-        "hai cung) ở khoá tuan_triet.")})
+        "hai cung) ở khoá tuan_triet."))})
 
     ld, lm, ly, leap = dv.am
-    ra = {
+    viet = ngon_ngu.la_viet()
+    kq = {
         "engine_version": ENGINE_VERSION,
         "pham_vi": "an_sao_day_du",
         "iztro": la["iztro"],
@@ -492,9 +495,9 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
         } for p in la["palaces"]],
         # KB-TV3: `dieu_kien_dat` = điều kiện có / điểm cộng / điểm trừ (dữ kiện đã tính, chữ từ KB, chỉ thuật ngữ).
         "cach_cuc": [{**(tuvi_kb.cach_cuc(c["ma"]) or {}), "cung_lien_quan": c["cung"], "sat_hoi": c["sat_hoi"],
-                      "dieu_kien_dat": tuvi_kb.dieu_kien_dat(c["du_kien"])}
+                      "dieu_kien_dat": tuvi_kb.dieu_kien_dat(c["du_kien"]) if viet else tuvi_hien.dieu_kien_dat(c["du_kien"])}
                      for c in tuvi_cach_cuc.nhan_dien(la)],
-        "cach_cuc_luu_y": tuvi_kb.luu_y_pha_cach(),
+        "cach_cuc_luu_y": tuvi_kb.luu_y_pha_cach() if viet else L("tuvi_ls.cach_cuc_luu_y", tuvi_kb.luu_y_pha_cach()),
         # TV-ZW "Cùng sao Mệnh": tỉ lệ thời điểm sinh (mẫu 1940–2010 × 12 canh) có cùng chính tinh cung Mệnh — không
         # phải thống kê dân số. Không biết giờ sinh → cung Mệnh là tạm, không hiện.
         "cung_sao_menh": None if inp.do_tin_gio is HourConfidence.UNKNOWN else cung_sao_menh.tu_la_so(la),
@@ -502,8 +505,8 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
         "co_canh_bao": flags,
     }
     # SX-1: câu sách xưa ứng với lá số này (chỉ chọn câu đã có trong KB; không biết giờ sinh thì cung là tạm → không hiện).
-    ra["sach_xua"] = [] if inp.do_tin_gio is HourConfidence.UNKNOWN else sach_xua.tuvi(ra["cach_cuc"], ra["cung"])
-    return ra
+    kq["sach_xua"] = [] if inp.do_tin_gio is HourConfidence.UNKNOWN else sach_xua.tuvi(kq["cach_cuc"], kq["cung"])
+    return kq if viet else tuvi_hien.la_so(kq)
 
 
 class VanHanInput(BaseModel):
@@ -534,7 +537,7 @@ def api_van_han(inp: VanHanInput) -> dict:
         raise _loi_an_sao(e)
     can, chi = lunar.can_chi_nam(lunar.solar_to_lunar(ngay.day, ngay.month, ngay.year, 7.0)[2])
     return {"engine_version": ENGINE_VERSION, "ngay_xem": ngay.isoformat(), "nam_xem": ngay.year,
-            "can_chi_nam_xem": f"{can} {chi}", **vh}
+            "can_chi_nam_xem": f"{can} {chi}" if ngon_ngu.la_viet() else tuvi_hien.can_chi(f"{can} {chi}"), **vh}
 
 
 class LuuNguyetInput(BaseModel):
@@ -559,9 +562,10 @@ def api_luu_nguyet(inp: LuuNguyetInput) -> dict:
         kq = luan_luu_nguyet.lap_nam(sinh, nam, inp.la_so.luu_nguyet)
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
-    return {"engine_version": ENGINE_VERSION, **kq,
-            "cac_phai": {k: {"ten": v["ten"], "cach_tinh": v["cach_tinh"], "nguon": v["nguon"]}
-                         for k, v in calc_luu_nguyet.PHAI.items()}}
+    kq = {"engine_version": ENGINE_VERSION, **kq,
+          "cac_phai": {k: {"ten": v["ten"], "cach_tinh": v["cach_tinh"], "nguon": v["nguon"]}
+                       for k, v in calc_luu_nguyet.PHAI.items()}}
+    return kq if ngon_ngu.la_viet() else tuvi_hien.luu_nguyet(kq)
 
 
 class HoiTVInput(BaseModel):
@@ -575,10 +579,12 @@ class HoiTVInput(BaseModel):
     # LG-ĐS: ý định web tìm được ở kho vectơ (tim_y_dinh_gan). Chỉ mã trong Y_DINH_CAU_HINH, chỉ áp khi từ khoá không
     # nhận ra; mã lạ bị bỏ qua (không lỗi). Không bao giờ vượt bộ chặn khủng hoảng / ngoài phạm vi.
     y_dinh_goi_y: str | None = Field(default=None, pattern=r"^[a-z_]{2,40}$")
+    # EN-ALL GĐ 4: lá số gửi kèm là của NGƯỜI THÂN (web: đang xem người thân) → lời ngôi thứ ba, dòng mở đầu nói rõ.
+    nguoi_than: bool = False
 
 
 @router.post("/hoi")
-def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
+def api_hoi(inp: HoiTVInput, background: BackgroundTasks, request: Request) -> dict:
     """Phân loại → (lá số + vận hạn qua iztro) → gói bằng chứng KB → trả lời template."""
     sinh, flags = None, []
     if inp.la_so is not None:
@@ -589,12 +595,15 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
                 "luu_nguyet": inp.la_so.luu_nguyet}
         flags = list(dv.flags)
         if ti == 12:
-            flags.append({"loai": "ty_conflict", "chi_tiet": (
+            flags.append({"loai": "ty_conflict", "chi_tiet": L("hoi.tv.co.ty_conflict", (
                 "Sinh 23:00–23:59: tử vi (theo iztro) tính là giờ Tý của NGÀY HÔM SAU — "
-                "lá số có thể khác trang dùng quy ước khác.")})
+                "lá số có thể khác trang dùng quy ước khác."))})
     try:
-        kq = hoidap_tv.tra_loi(inp.cau_hoi.strip(), inp.che_do, sinh=sinh, ngay_xem=inp.ngay_xem,
-                               y_dinh_goi_y=inp.y_dinh_goi_y)
+        # EN-AI: câu gõ tự do tiếng Anh — lớp phân loại AI (tắt mặc định; env HOI_PHAN_LOAI_AI + công tắc quản trị
+        # qua header x-phan-loai-ai) chỉ gán nhãn an toàn / chủ đề; câu trả lời vẫn do engine dựng.
+        with phan_loai_en.ap_dung(inp.cau_hoi.strip(), "tuvi", request.headers.get("x-phan-loai-ai") == "1"):
+            kq = hoidap_tv.tra_loi(inp.cau_hoi.strip(), inp.che_do, sinh=sinh, ngay_xem=inp.ngay_xem,
+                                   y_dinh_goi_y=inp.y_dinh_goi_y, nguoi_than=inp.nguoi_than)
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)
     except ValueError as e:

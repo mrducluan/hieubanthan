@@ -8,7 +8,8 @@ import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
-import { type GiaTriHao, laDong, laDuong, NHAN_HAO, xuTuGiaTri } from "@/lib/dong-xu";
+import { type GiaTriHao, laDong, laDuong, xuTuGiaTri } from "@/lib/dong-xu";
+import { useChuKD } from "./chu-kinh-dich";
 
 /** Một đồng xu cổ (tròn, lỗ vuông). Mặt ngửa có bốn chấm chữ; mặt sấp trơn. */
 export function DongXu({ ngua, mo = false, hao, thuTu, className, onClick, pressed }: {
@@ -16,7 +17,8 @@ export function DongXu({ ngua, mo = false, hao, thuTu, className, onClick, press
   /** Có onClick → đồng xu là nút bật/tắt (bộ chọn tự gieo). */
   onClick?: () => void; pressed?: boolean;
 }) {
-  const nhan = `Hào ${hao}, đồng xu ${thuTu}: ${ngua == null ? "chưa gieo" : ngua ? "ngửa" : "sấp"}`;
+  const { c } = useChuKD();
+  const nhan = c("dx.xu_aria", { hao: String(hao), xu: String(thuTu), mat: ngua == null ? c("dx.chua_gieo") : ngua ? c("dx.ngua") : c("dx.sap") });
   const hinh = (
     <svg viewBox="0 0 40 40" className={cn("size-9 sm:size-10", className)} aria-hidden>
       <circle cx="20" cy="20" r="18" fill={ngua ? "rgb(var(--gold) / 0.22)" : "rgb(var(--surface-2) / 0.9)"} stroke={ngua ? "rgb(var(--gold))" : "rgb(var(--fg) / 0.45)"} strokeWidth="1.6" />
@@ -61,6 +63,7 @@ export function GieoDongXu({ giaTri, onXong }: {
   onXong: (boQua: boolean) => void;
 }) {
   const giam = useReducedMotion();
+  const { c, hao: nhanHao } = useChuKD();
   const [daLat, setDaLat] = useState(0);          // số hào đã hiện (0..6)
   const [dangLat, setDangLat] = useState(false);
   const [boQua, setBoQua] = useState(false);
@@ -123,10 +126,10 @@ export function GieoDongXu({ giaTri, onXong }: {
   return (
     <div className="glass rounded-2xl p-4" data-testid="gieo-dong-xu" data-da-lat={daLat}>
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <p className="font-serif text-lg text-fg">Gieo ba đồng xu</p>
-        <p className="text-xs text-fg-faint">Quẻ đã được gieo xong trên máy tính toán — bạn lật từng lần để xem, từ hào 1 (dưới) lên hào 6 (trên).</p>
+        <p className="font-serif text-lg text-fg">{c("dx.tieu_de")}</p>
+        <p className="text-xs text-fg-faint">{c("dx.phu")}</p>
       </div>
-      <ol className="mt-3 space-y-2" aria-label="Sáu lần gieo, hào 6 ở trên cùng">
+      <ol className="mt-3 space-y-2" aria-label={c("dx.aria_ds")}>
         {[6, 5, 4, 3, 2, 1].map((hao) => {
           const v = giaTri[hao - 1]!;
           const daHien = hao <= daLat;
@@ -134,7 +137,7 @@ export function GieoDongXu({ giaTri, onXong }: {
           const xu = daHien ? xuTuGiaTri(v) : [null, null, null];
           return (
             <li key={hao} className={cn("flex min-h-11 items-center gap-2 rounded-xl px-2 py-1 sm:gap-3", daHien && laDong(v) && "bg-gold/[0.07]")} data-testid={`hang-hao-${hao}`} data-hien={daHien ? 1 : 0}>
-              <span className="w-12 shrink-0 text-xs text-fg-faint">Hào {hao}</span>
+              <span className="w-12 shrink-0 text-xs text-fg-faint">{c("dx.hao", { n: String(hao) })}</span>
               <span className="flex items-center gap-1">
                 {xu.map((ngua, i) => (
                   dang ? (
@@ -149,29 +152,29 @@ export function GieoDongXu({ giaTri, onXong }: {
               </span>
               <VachHao v={daHien ? v : null} />
               <span className={cn("min-w-0 flex-1 truncate text-xs", daHien ? (laDong(v) ? "text-gold" : "text-fg-muted") : "text-fg-faint")}>
-                {daHien ? NHAN_HAO[v].ten : dang ? "đang lật…" : ""}
+                {daHien ? nhanHao(v).ten : dang ? c("dx.dang_lat") : ""}
               </span>
             </li>
           );
         })}
       </ol>
-      <p className="sr-only" aria-live="polite">{vuaLat != null ? `Hào ${daLat}: ${NHAN_HAO[vuaLat].ten}.` : ""}{hienTat ? " Đã đủ sáu hào, đang hiện quẻ." : ""}</p>
+      <p className="sr-only" aria-live="polite">{vuaLat != null ? c("dx.vua_lat", { n: String(daLat), ten: nhanHao(vuaLat).ten }) : ""}{hienTat ? c("dx.du_sau") : ""}</p>
       {!hienTat && (
         <div className="mt-3 flex flex-wrap items-center gap-2">
-          <Button type="button" size="sm" onClick={gieo} disabled={dangLat} data-testid="gieo-lan" aria-label={`Gieo lần ${daLat + 1}`}>
-            {dangLat ? "Đang lật…" : `Gieo lần ${daLat + 1}`}
+          <Button type="button" size="sm" onClick={gieo} disabled={dangLat} data-testid="gieo-lan" aria-label={c("dx.gieo_lan", { n: String(daLat + 1) })}>
+            {dangLat ? c("dx.dang_lat_nut") : c("dx.gieo_lan", { n: String(daLat + 1) })}
           </Button>
           <button type="button" onClick={hienHet} className="min-h-9 rounded-full px-3 text-xs text-fg-muted underline-offset-4 hover:text-fg hover:underline" data-testid="bo-qua-gieo">
-            Bỏ qua, xem luôn
+            {c("dx.bo_qua")}
           </button>
           {coCamBien && lac === "tat" && (
             <button type="button" onClick={batLac} className="min-h-9 rounded-full border border-line px-3 text-xs text-fg-muted hover:border-gold/60 hover:text-fg" data-testid="lac-gieo">
-              Lắc điện thoại để gieo
+              {c("dx.lac")}
             </button>
           )}
-          {lac === "bat" && <span className="text-xs text-jade" data-testid="lac-dang-bat" aria-live="polite">Đang nghe lắc — mỗi cú lắc là một lần gieo.</span>}
-          {lac === "tu_choi" && <span className="text-xs text-fg-faint">Máy chưa cho đọc cảm biến — bạn bấm nút gieo nhé.</span>}
-          <span className="text-xs text-fg-faint">{giam ? "Chế độ giảm chuyển động: đồng xu hiện ngay, không lật." : "Ba đồng xu lật theo kết quả đã gieo."}</span>
+          {lac === "bat" && <span className="text-xs text-jade" data-testid="lac-dang-bat" aria-live="polite">{c("dx.lac_bat")}</span>}
+          {lac === "tu_choi" && <span className="text-xs text-fg-faint">{c("dx.lac_tu_choi")}</span>}
+          <span className="text-xs text-fg-faint">{giam ? c("dx.giam") : c("dx.lat")}</span>
         </div>
       )}
     </div>

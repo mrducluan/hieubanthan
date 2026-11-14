@@ -6,6 +6,7 @@ import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
 import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
 import { LaSoVao } from "@/lib/la-so-vao";
+import { dauPhanLoaiAi } from "@/lib/phan-loai-ai";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
@@ -34,6 +35,7 @@ async function xuLy(req: Request): Promise<NextResponse> {
         "content-type": "application/json",
         ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}),
         ...dauNguoiGoi(req),
+        ...(await dauPhanLoaiAi(req)),
       },
       body: JSON.stringify(parsed.data),
       cache: "no-store",

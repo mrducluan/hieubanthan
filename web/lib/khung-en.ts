@@ -18,7 +18,7 @@ export const TEN_MENU_EN: Readonly<Record<string, { ten: string; mo_ta?: string 
   "/xem-ngay-tot": { ten: "Auspicious dates", mo_ta: "Lucky hours, what suits the day, find a good date" },
   "cha:/hop-doi": { ten: "Compatibility" },
   "/hop-doi": { ten: "Numerology compatibility", mo_ta: "Two Life Path numbers, no score" },
-  "/tu-vi#hop-tham": { ten: "Two Zi Wei charts", mo_ta: "Where two charts meet and how to meet halfway" },
+  "/tu-vi#hop-tham": { ten: "Compare two charts", mo_ta: "Where two charts meet and how to meet halfway" },
   "/hop-doi/cap-so": { ten: "Number pairs", mo_ta: "45 pairs: where they click, where they clash" },
   "cha:/huyen-hoc": { ten: "Chinese Metaphysics" },
   "/tu-vi": { ten: "Zi Wei Dou Shu", mo_ta: "Twelve-palace chart, the next three months" },

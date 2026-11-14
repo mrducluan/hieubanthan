@@ -41,9 +41,9 @@ const MA_JS = String.raw`(function () {
     return m;
   }
   function cham(ll) {
-    if (!m1) m1 = ghim(ll, "1", "Tâm nhà (kéo để chỉnh)");
+    if (!m1) m1 = ghim(ll, "1", __T1__);
     else if (!m2) {
-      m2 = ghim(ll, "2", "Trước mặt nhà (kéo để chỉnh)");
+      m2 = ghim(ll, "2", __T2__);
       line = new g.Polyline({ map: map, path: [m1.getPosition(), ll], strokeColor: "#e8c26a", strokeWeight: 3,
         icons: [{ icon: { path: g.SymbolPath.FORWARD_CLOSED_ARROW, scale: 4, strokeColor: "#e8c26a", fillColor: "#e8c26a", fillOpacity: 1 }, offset: "100%" }] });
     } else m2.setPosition(ll);
@@ -72,7 +72,7 @@ const MA_JS = String.raw`(function () {
     if (e.origin !== goc || e.source !== parent || !map) return;
     var d = e.data || {};
     if (d.lenh === "tim") {
-      new g.Geocoder().geocode({ address: String(d.q || "").slice(0, 200), region: "VN" }).then(function (r) {
+      new g.Geocoder().geocode(Object.assign({ address: String(d.q || "").slice(0, 200) }, __VUNG__)).then(function (r) {
         var k = r.results && r.results[0];
         if (!k) { gui({ su_kien: "tim", ok: false }); return; }
         map.setCenter(k.geometry.location); map.setZoom(19);
@@ -85,21 +85,35 @@ const MA_JS = String.raw`(function () {
     }
   });
   var s = document.createElement("script");
-  s.src = "https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(K) + "&v=weekly&loading=async&language=vi&region=VN&callback=__hbtSan";
+  s.src = "https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(K) + "&v=weekly&loading=async&" + __THAM_SO__ + "&callback=__hbtSan";
   s.async = true; s.nonce = __NONCE__;
   s.onerror = function () { gui({ su_kien: "loi", ma: "mang" }); };
   document.head.appendChild(s);
 })();`;
 
-export function GET(): Response {
+// EN-ALL GĐ 5: khung dùng chung hai ngôn ngữ — bản Anh (`?ngon_ngu=en`, do ChonTrenVeTinh gắn) đổi chữ ghim, tiêu đề, ngôn ngữ
+// bản đồ; không ưu tiên vùng Việt Nam khi tìm địa chỉ.
+const CHU = {
+  vi: { t1: "Tâm nhà (kéo để chỉnh)", t2: "Trước mặt nhà (kéo để chỉnh)", title: "Bản đồ vệ tinh", aria: "Bản đồ vệ tinh: bấm vào mái nhà, rồi bấm mặt đường trước cửa",
+    khong: "Không có bản đồ vệ tinh", ts: "language=vi&region=VN", vung: { region: "VN" } },
+  en: { t1: "Centre of home (drag to adjust)", t2: "In front of the home (drag to adjust)", title: "Satellite map", aria: "Satellite map: tap the roof, then the street in front of the door",
+    khong: "No satellite map", ts: "language=en", vung: {} },
+} as const;
+
+export function GET(req: Request): Response {
+  let ngonNgu: "vi" | "en" = "vi";
+  try { if (new URL(req.url).searchParams.get("ngon_ngu") === "en") ngonNgu = "en"; } catch { /* giữ vi */ }
+  const ch = CHU[ngonNgu];
   const khoa = (process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ?? "").trim();
-  if (!khoa) return new Response("Không có bản đồ vệ tinh", { status: 404, headers: { "x-robots-tag": "noindex" } });
+  if (!khoa) return new Response(ch.khong, { status: 404, headers: { "x-robots-tag": "noindex" } });
   const nonce = randomBytes(16).toString("base64");
-  const js = MA_JS.replace("__KHOA__", JSON.stringify(khoa)).replace("__NONCE__", JSON.stringify(nonce));
-  const html = `<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex"><title>Bản đồ vệ tinh</title>
+  const js = MA_JS.replace("__KHOA__", JSON.stringify(khoa)).replace("__NONCE__", JSON.stringify(nonce))
+    .replace("__T1__", JSON.stringify(ch.t1)).replace("__T2__", JSON.stringify(ch.t2)).replace("__VUNG__", JSON.stringify(ch.vung))
+    .replace("__THAM_SO__", JSON.stringify(ch.ts));
+  const html = `<!doctype html><html lang="${ngonNgu}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>${ch.title}</title>
 <style>html,body,#ban-do{height:100%;margin:0;background:#11131c}</style></head>
-<body><div id="ban-do" role="application" aria-label="Bản đồ vệ tinh: bấm vào mái nhà, rồi bấm mặt đường trước cửa"></div>
+<body><div id="ban-do" role="application" aria-label="${ch.aria}"></div>
 <script nonce="${nonce}">${js}</script></body></html>`;
   return new Response(html, {
     headers: {

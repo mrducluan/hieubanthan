@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import { VI_TRI } from "@/lib/tuvi-hien-thi";
 import { cn } from "@/lib/utils";
+import { useChuTuVi } from "@/components/huyen-hoc/chu-tu-vi";
 
 /** Bề rộng lá số khi phóng to — giữ chữ phụ tinh ~11px như bản cuộn ngang cũ. */
 const RONG_PHONG = 760;
@@ -20,6 +21,7 @@ export function KhungLaSo({ chon, children, chan, testId = "la-so-tu-vi", classN
   testId?: string; className?: string;
 }) {
   const [phong, setPhong] = useState(false);
+  const { c } = useChuTuVi();
   const cuon = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const k = cuon.current;
@@ -35,11 +37,11 @@ export function KhungLaSo({ chon, children, chan, testId = "la-so-tu-vi", classN
       <div className="mb-2 flex items-center gap-2 px-4 sm:hidden" data-testid="la-so-dieu-khien">
         <p className="flex flex-1 items-start gap-1.5 text-xs leading-snug text-fg-muted">
           <Move className="mt-px size-3.5 shrink-0 text-gold" aria-hidden />
-          {phong ? "Vuốt ngang để xem trọn lá số · chạm một cung để xem chi tiết." : "Đang xem gọn: tên cung và chính tinh · bấm Phóng to để xem đủ phụ tinh, rồi vuốt ngang · chạm một cung để xem chi tiết."}
+          {phong ? c("khung.phong_goi_y") : c("khung.gon_goi_y")}
         </p>
         <Button variant="secondary" size="sm" aria-pressed={phong} className="min-h-11 shrink-0"
           onClick={() => { setPhong((v) => !v); ghi("chart_interacted", { mo_dun: "tuvi", kind: phong ? "la_so_thu" : "la_so_phong" }); }}>
-          {phong ? <><Minimize2 aria-hidden /> Thu vừa màn hình</> : <><Maximize2 aria-hidden /> Phóng to</>}
+          {phong ? <><Minimize2 aria-hidden />{` ${c("khung.thu")}`}</> : <><Maximize2 aria-hidden />{` ${c("khung.phong")}`}</>}
         </Button>
       </div>
       <div ref={cuon} className={cn("px-4 pb-2 sm:px-0", phong && "overflow-x-auto overscroll-x-contain")} data-testid={testId} data-phong={phong ? "1" : "0"}>

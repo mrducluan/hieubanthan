@@ -148,7 +148,7 @@ async function TrangChuDeEn({ khoa, cd }: { khoa: string; cd: (typeof CHU_DE)[st
         <aside className="glass mt-12 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center" data-nosnippet="">
           <BookOpen className="size-6 shrink-0 text-gold" aria-hidden />
           <p className="flex-1 text-fg-muted">{loiMoi ?? c("moi.chung").replace(/\*/g, "")}</p>
-          <Button asChild><Link href={congCu}>{cd.mang === "/bat-tu" ? c("moi.nut_bat_tu") : c("moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
+          <Button asChild><Link href={congCu}>{cd.mang === "/bat-tu" ? c("moi.nut_bat_tu") : cd.mang === "/tu-vi" ? c("moi.nut_tu_vi") : cd.mang === "/phong-thuy" ? c("moi.nut_phong_thuy") : cd.mang === "/kinh-dich" ? c("moi.nut_kinh_dich") : c("moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
         </aside>
       )}
     </div>

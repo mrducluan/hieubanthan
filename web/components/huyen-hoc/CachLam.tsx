@@ -5,6 +5,7 @@ import { useId, useState } from "react";
 import { ChevronDown, CircleHelp } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
+import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 
 export type ViecHuongDan = "do_huong" | "do_huong_can_ho" | "ve_mat_bang" | "dat_phong" | "ban_do" | "ban_do_may_tinh";
 
@@ -28,83 +29,39 @@ function Hinh({ ma }: { ma: string }) {
   }
 }
 
-const BUOC: Record<ViecHuongDan, { tieu_de: string; buoc: { hinh: string; chu: string }[]; luu_y?: string }> = {
-  do_huong: {
-    tieu_de: "Cách đo hướng nhà bằng điện thoại",
-    buoc: [
-      { hinh: "cua", chu: "Đứng ngay ngưỡng cửa chính, bên trong nhà." },
-      { hinh: "lung", chu: "Quay lưng vào nhà, mặt nhìn ra ngoài đường." },
-      { hinh: "dien_thoai", chu: "Giữ điện thoại nằm ngang trước ngực, bấm Đo rồi Chốt khi số đứng yên." },
-    ],
-    luu_y: "Tránh xe máy, cột thép, loa, tủ lạnh trong 1 m. Đo 2–3 lần, lệch quá 5° thì đo lại ở điểm khác trước cửa.",
-  },
-  do_huong_can_ho: {
-    tieu_de: "Căn hộ chung cư: đo ở đâu?",
-    buoc: [
-      { hinh: "ban_cong", chu: "Đứng ở ban công hoặc cửa sổ lớn nhất của căn, mặt nhìn ra ngoài." },
-      { hinh: "dien_thoai", chu: "Giữ điện thoại nằm ngang, cách khung sắt, máy lạnh ít nhất 1 m, bấm Đo rồi Chốt." },
-      { hinh: "ban_do", chu: "Không đo được? Dùng “Lấy hướng từ bản đồ”: tâm căn hộ và điểm ngay dưới ban công." },
-    ],
-    luu_y: "Cửa căn hộ mở ra hành lang kín thường không dùng làm hướng nhà; nhiều sách lấy hướng theo mặt thoáng (ban công) hoặc theo toà nhà — bài đọc ghi rõ đang dùng cách nào.",
-  },
-  ve_mat_bang: {
-    tieu_de: "Cách vẽ mặt bằng trên lưới",
-    buoc: [
-      { hinh: "luoi", chu: "Hàng trên cùng là mặt trước nhà (phía cửa / ban công nhìn ra)." },
-      { hinh: "to", chu: "Chế độ “Tô ô”: bấm các ô nhà chiếm. Nhà chữ L thì bỏ trống góc khuyết. Có ảnh mặt bằng thì đặt ảnh làm nền để tô theo." },
-      { hinh: "phong", chu: "Chọn Cửa, WC, Ban công… rồi bấm ô tương ứng. Máy tự tính tâm nhà, khuyết góc, WC giữa nhà." },
-    ],
-  },
-  dat_phong: {
-    tieu_de: "Cách đặt phòng và đánh dấu dấu hiệu",
-    buoc: [
-      { hinh: "tam", chu: "Đứng ở giữa nhà, cầm la bàn (hoặc nhớ hướng cửa): phòng này nằm về phía nào so với tâm?" },
-      { hinh: "phong", chu: "Chọn phòng rồi bấm ô phương đó trên sơ đồ 9 phương (Bắc ở trên)." },
-      { hinh: "danh_dau", chu: "Đi một vòng, tích những dấu hiệu bạn thấy thật. Không chắc thì bỏ qua — chỉ luận cái đã xác nhận." },
-    ],
-  },
-  ban_do: {
-    tieu_de: "Lấy hướng từ bản đồ",
-    buoc: [
-      { hinh: "tam", chu: "Mở bản đồ, nhấn giữ vào giữa nhà bạn → chép toạ độ hoặc link vào ô “Tâm nhà”. Hoặc đứng giữa nhà bấm “Lấy vị trí hiện tại”." },
-      { hinh: "ban_do", chu: "Nhấn giữ vào điểm ngay trước mặt nhà (ngoài đường, dưới ban công) → ô “Điểm trước mặt nhà”." },
-      { hinh: "mat", chu: "Bấm Tính: góc từ tâm tới điểm trước là hướng nhà theo bắc thật. Toạ độ không lưu." },
-    ],
-    luu_y: "GPS trong nhà thường lệch 10–30 m; với nhà nhỏ nên dùng cách nhấn giữ trên bản đồ, chọn điểm trước nhà cách tâm ≥ 15 m.",
-  },
-  ban_do_may_tinh: {
-    tieu_de: "Lấy hướng trên máy tính (Google Maps)",
-    buoc: [
-      { hinh: "ban_do", chu: "Bấm “Mở Google Maps ảnh vệ tinh” (cho phép vị trí để bản đồ mở sẵn gần nhà bạn), phóng to tới khi thấy rõ mái nhà." },
-      { hinh: "tam", chu: "Chuột phải lên giữa mái nhà → bấm dòng số đầu tiên (Google tự chép) → quay lại đây bấm nút Dán ở ô “Tâm nhà”." },
-      { hinh: "mat", chu: "Chuột phải lên mặt đường ngay trước cửa nhà → chép → Dán ở ô “Điểm trước mặt nhà” → Tính." },
-    ],
-    luu_y: "Máy tính không có GPS: nút “Lấy vị trí hiện tại” chỉ đoán theo wifi (lệch hàng chục mét), không dùng để chấm hai điểm. Điểm trước nhà nên cách tâm ≥ 10 m.",
-  },
+/** Bước hướng dẫn: chữ ở bảng lib/chu/phong-thuy.ts (`cl.<việc>.tieu_de`, `.1`–`.3`, `.luu_y` nếu có). */
+const BUOC: Record<ViecHuongDan, { hinh: string[]; luu_y?: boolean }> = {
+  do_huong: { hinh: ["cua", "lung", "dien_thoai"], luu_y: true },
+  do_huong_can_ho: { hinh: ["ban_cong", "dien_thoai", "ban_do"], luu_y: true },
+  ve_mat_bang: { hinh: ["luoi", "to", "phong"] },
+  dat_phong: { hinh: ["tam", "phong", "danh_dau"] },
+  ban_do: { hinh: ["tam", "ban_do", "mat"], luu_y: true },
+  ban_do_may_tinh: { hinh: ["ban_do", "tam", "mat"], luu_y: true },
 };
 
 export function CachLam({ viec, moSan = false, className }: { viec: ViecHuongDan; moSan?: boolean; className?: string }) {
   const [mo, setMo] = useState(moSan);
   const id = useId();
   const h = BUOC[viec];
+  const { c } = useChuPT();
   return (
     <div className={cn("text-sm", className)} data-testid={`cach-lam-${viec}`}>
       <button type="button" aria-expanded={mo} aria-controls={id} data-testid="cach-lam-mo"
         onClick={() => { setMo((v) => !v); if (!mo) ghi("chart_interacted", { mo_dun: "phongthuy", kind: "cach_lam", viec }); }}
         className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-fg-muted hover:text-fg">
-        <CircleHelp className="size-3.5" aria-hidden /> Cách làm (30 giây) <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
+        <CircleHelp className="size-3.5" aria-hidden /> {c("cl.nut")} <ChevronDown className={cn("size-3.5 transition-transform", mo && "rotate-180")} aria-hidden />
       </button>
       <div id={id} hidden={!mo} className="mt-2 rounded-xl border border-line/70 bg-bg/40 p-3">
-        <p className="font-medium text-fg">{h.tieu_de}</p>
+        <p className="font-medium text-fg">{c(`cl.${viec}.tieu_de`)}</p>
         <ol className="mt-2 grid gap-3 sm:grid-cols-3">
-          {h.buoc.map((b, i) => (
+          {h.hinh.map((hinh, i) => (
             <li key={i} className="flex gap-2.5 sm:flex-col">
-              <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-gold/10 text-gold [&>svg]:size-8"><Hinh ma={b.hinh} /></span>
-              <span className="text-fg-muted"><b className="text-gold">{i + 1}.</b> {b.chu}</span>
+              <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-gold/10 text-gold [&>svg]:size-8"><Hinh ma={hinh} /></span>
+              <span className="text-fg-muted"><b className="text-gold">{i + 1}.</b> {c(`cl.${viec}.${i + 1}`)}</span>
             </li>
           ))}
         </ol>
-        {h.luu_y && <p className="mt-2 text-xs text-fg-faint">{h.luu_y}</p>}
+        {h.luu_y && <p className="mt-2 text-xs text-fg-faint">{c(`cl.${viec}.luu_y`)}</p>}
       </div>
     </div>
   );

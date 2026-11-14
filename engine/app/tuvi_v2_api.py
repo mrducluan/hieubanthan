@@ -100,6 +100,8 @@ class NguoiKiaInput(BaseModel):
     gender: Literal["nam", "nu"] | None = None
     noi_sinh: str | None = Field(default=None, max_length=40)
     vung: Region | None = None
+    # EN-ALL GĐ 4: sinh ở nước ngoài → mã thành phố / IANA (như hồ sơ chính); engine tự suy UTC + giờ mùa hè.
+    mui_gio: str | None = Field(default=None, min_length=2, max_length=64)
 
 
 class HopThamInput(BaseModel):
@@ -124,7 +126,7 @@ def api_hop_tham(inp: HopThamInput) -> dict:
         if k.birth_time and k.gender and k.noi_sinh:
             dv_k = _DauVao(TuanTrietInput(
                 birth_date=k.birth_date, birth_time=k.birth_time, gender=k.gender, calendar_type=k.calendar_type,
-                am_nhuan=k.am_nhuan, noi_sinh=k.noi_sinh, vung=k.vung, hoa_linh=inp.la_so.hoa_linh,
+                am_nhuan=k.am_nhuan, noi_sinh=k.noi_sinh, vung=k.vung, mui_gio=k.mui_gio, hoa_linh=inp.la_so.hoa_linh,
                 thang_nhuan=inp.la_so.thang_nhuan, lich=inp.la_so.lich))
             la_k = _la(_sinh(dv_k, k.gender))
             ls_kia, can_kia, nam_kia, ngay_kia = tom_tat(la_k), _can_nam(la_k, dv_k.can), dv_k.am_lap[2], dv_k.duong_goc

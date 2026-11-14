@@ -9945,7 +9945,7 @@
    "nghia_la": "{ten} ({en}){nguoc}: {y} Từ khoá: {tu_khoa}.",
    "nghia_linh_vuc": "Trong {linh_vuc}: {loi}",
    "trai_bai": "{ten}: {mo_ta} Các vị trí: {vi_tri}.",
-   "khong_hieu": "Mình chưa nhận ra bạn hỏi về lá nào hay trải bài nào. Hỏi tên một lá (vd 'Lá Tháp nghĩa gì', 'Ba Cốc ngược trong tình cảm'), một trải bài ('Celtic Cross là gì') hoặc một khái niệm ('lá ngược', 'ẩn chính').",
+   "khong_hieu": "Mình chưa nhận ra bạn hỏi về lá nào hay trải bài nào. Hỏi tên một lá (vd 'Lá Tháp nghĩa gì', 'Ba Cốc ngược trong tình cảm'), một trải bài ('Celtic Cross là gì') hoặc một khái niệm ('lá ngược', 'ẩn chính'). Nếu bạn đang băn khoăn chuyện của mình (công việc, tình cảm, một quyết định), nên gõ câu đó ở ô rút bài phía trên và hỏi về phía bạn — vd 'Mình nên làm gì để làm việc với sếp dễ hơn?' thay vì 'Sếp có ghét tôi không?'.",
    "nguoi_khac": "Tarot ở đây đọc cho chính người hỏi: lá bài không nói được người khác đang làm gì hay nghĩ gì — hỏi theo hướng 'tôi nên làm gì với chuyện này' thì trải bài trả lời được. Bạn có thể rút trải bài ba lá Tình huống – Điều cản – Lời khuyên cho chính mình; chuyện trong lòng người ấy, cách duy nhất biết được là hỏi thẳng.",
    "vi_tri": "Lá {ten}{nguoc} ở vị trí '{vi_tri}' ({hoi}): {y}"
   },

@@ -14,6 +14,8 @@ import type { HoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
 import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
 import { useDuong } from "@/components/khung/NgonNgu";
+import { banAnh } from "@/lib/duong-en";
+import { caoDinhTren } from "@/lib/thanh-mang";
 
 type MoDun = "tuvi" | "battu" | "chan_dung";
 
@@ -29,10 +31,11 @@ function conThieu(h: HoSo | null): string[] {
 
 export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null }) {
   const c = useChu();
-  const { c: cg } = useChuGiaoDien();
+  const { c: cg, en } = useChuGiaoDien();
   const d = useDuong();
   // Theo dõi tiêu đề (không phải cả khối): trên điện thoại khối cao hơn màn hình, tỉ lệ diện tích không bao giờ đủ ngưỡng.
   const ref = useRef<HTMLHeadingElement>(null);
+  const khoi = useRef<HTMLElement>(null);
   const daGhi = useRef(false);
   const thieu = conThieu(hoSo);
   // Đo: thấy khối → bấm gửi (profile_created do NhapHoSo ghi). Một lần mỗi lượt vào trang.
@@ -53,7 +56,7 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
 
   // Tên khối cố định (không trỏ vào h2): tiêu đề động "…còn thiếu: nơi sinh" sẽ trùng nhãn ô "Nơi sinh" của form.
   return (
-    <section aria-label={cg(moDun === "tuvi" ? "moi.aria_tuvi" : moDun === "battu" ? "moi.aria_battu" : "moi.aria_chan_dung")} data-testid="moi-lap-la-so"
+    <section ref={khoi} aria-label={cg(moDun === "tuvi" ? "moi.aria_tuvi" : moDun === "battu" ? "moi.aria_battu" : "moi.aria_chan_dung")} data-testid="moi-lap-la-so"
       className="relative overflow-hidden rounded-3xl border border-gold/45 bg-gradient-to-br from-gold/[0.09] via-surface/70 to-bg/40 p-5 shadow-[0_0_60px_-24px_rgb(var(--gold)/0.55)] sm:p-8">
       <div className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-gold/10 blur-3xl" aria-hidden />
       <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,27rem)] lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-6">
@@ -66,7 +69,17 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
         <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
           <div className="rounded-2xl border border-line/70 bg-bg/70 p-4 shadow-card sm:p-5">
             <NhapHoSo macDinh={hoSo} can="day_du" nutGui={c("moi.nut")}
-              onXong={() => ghi("chart_interacted", { mo_dun: moDun, kind: "moi_lap_gui", co_ho_so: Boolean(hoSo) })} />
+              onXong={() => {
+                ghi("chart_interacted", { mo_dun: moDun, kind: "moi_lap_gui", co_ho_so: Boolean(hoSo) });
+                // UX (EN-ALL GĐ 4, áp cả bản Việt): khối mời biến mất ngay khi có hồ sơ, trang co lại và trình duyệt đứng ở gần
+                // cuối trang (điện thoại thấy khối "Kiến thức…", không thấy lá số). Nhớ vị trí đầu khối TRƯỚC khi gỡ, rồi đưa
+                // đúng chỗ đó (nơi lá số hiện ra) lên dưới thanh đầu trang.
+                const el = khoi.current;
+                if (!el) return;
+                const y = el.getBoundingClientRect().top + window.scrollY;
+                const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+                window.setTimeout(() => window.scrollTo({ top: Math.max(0, y - caoDinhTren() - 12), behavior: giam ? "auto" : "smooth" }), 120);
+              }} />
             <p className="mt-3 flex items-start gap-1.5 text-xs leading-relaxed text-fg-faint">
               <Clock className="mt-0.5 size-3.5 shrink-0" aria-hidden />{c("moi.tran_an")}
             </p>
@@ -93,7 +106,7 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
           </figure>
           <p className="flex items-start gap-1.5 text-xs text-fg-faint">
             <MessageCircleQuestion className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-            <span>{c("moi.chua_san_sang")}{moDun === "tuvi" && <> <Link href={d("/tu-vi/la-so-mau")} className="text-gold underline underline-offset-2">{c("moi.la_so_mau")}</Link></>}</span>
+            <span>{c("moi.chua_san_sang")}{moDun === "tuvi" && (!en || banAnh("/tu-vi/la-so-mau")) && <> <Link href={d("/tu-vi/la-so-mau")} className="text-gold underline underline-offset-2">{c("moi.la_so_mau")}</Link></>}</span>
           </p>
         </div>
       </div>
@@ -123,20 +136,22 @@ function MinhHoaBaCach() {
 // Hình minh hoạ tĩnh: khung 12 cung (vòng ngoài lưới 4×4), cung Mệnh sáng, tam phương nối tới hai cung tam hợp.
 const CUNG = [
   // [cột, hàng, tên] — vòng 12 cung theo chiều kim đồng hồ từ góc dưới trái (Dần) như lá số in.
-  [0, 3, "Mệnh"], [0, 2, "Phụ Mẫu"], [0, 1, "Phúc Đức"], [0, 0, "Điền Trạch"], [1, 0, "Quan Lộc"], [2, 0, "Nô Bộc"],
-  [3, 0, "Thiên Di"], [3, 1, "Tật Ách"], [3, 2, "Tài Bạch"], [3, 3, "Tử Tức"], [2, 3, "Phu Thê"], [1, 3, "Huynh Đệ"],
+  // EN-ALL: tên là khoá chữ lib/chu/giao-dien.ts (moi.tv_*).
+  [0, 3, "menh"], [0, 2, "phu_mau"], [0, 1, "phuc_duc"], [0, 0, "dien_trach"], [1, 0, "quan_loc"], [2, 0, "no_boc"],
+  [3, 0, "thien_di"], [3, 1, "tat_ach"], [3, 2, "tai_bach"], [3, 3, "tu_tuc"], [2, 3, "phu_the"], [1, 3, "huynh_de"],
 ] as const;
 
 function MinhHoaTuVi() {
+  const { c } = useChuGiaoDien();
   const o = 58, w = 54, h = 40;
   const tam = (cot: number, hang: number) => [cot * o + w / 2 + 4, hang * (h + 4) + h / 2 + 4] as const;
   const [mx, my] = tam(0, 3), [qx, qy] = tam(1, 0), [tx, ty] = tam(3, 2);
   return (
     <svg viewBox="0 0 240 184" className="w-full max-w-sm" aria-hidden>
-      {CUNG.map(([cot, hang, ten]) => {
-        const menh = ten === "Mệnh", sang = ten === "Quan Lộc" || ten === "Tài Bạch";
+      {CUNG.map(([cot, hang, ma]) => {
+        const menh = ma === "menh", sang = ma === "quan_loc" || ma === "tai_bach", ten = c(`moi.tv_${ma}`);
         return (
-          <g key={ten}>
+          <g key={ma}>
             <rect x={cot * o + 4} y={hang * (h + 4) + 4} width={w} height={h} rx={6}
               className={cn(menh ? "fill-gold/20 stroke-gold" : sang ? "fill-gold/[0.07] stroke-gold/50" : "fill-surface/60 stroke-line")} strokeWidth={menh ? 1.4 : 0.8} />
             <text x={cot * o + 4 + w / 2} y={hang * (h + 4) + 4 + h / 2 + 3.5} textAnchor="middle"
@@ -146,8 +161,8 @@ function MinhHoaTuVi() {
       })}
       <polygon points={`${mx},${my} ${qx},${qy} ${tx},${ty}`} className="fill-gold/[0.06] stroke-gold/60" strokeWidth={0.8} strokeDasharray="3 2" />
       <rect x={64} y={72} width={112} height={38} rx={8} className="fill-bg/90" />
-      <text x={120} y={86} textAnchor="middle" className="fill-fg font-serif text-[11px]">Lá số của bạn</text>
-      <text x={120} y={102} textAnchor="middle" className="fill-fg-faint text-[8px]">12 cung · từng mảng đời</text>
+      <text x={120} y={86} textAnchor="middle" className="fill-fg font-serif text-[11px]">{c("moi.tv_giua")}</text>
+      <text x={120} y={102} textAnchor="middle" className="fill-fg-faint text-[8px]">{c("moi.tv_giua_phu")}</text>
     </svg>
   );
 }

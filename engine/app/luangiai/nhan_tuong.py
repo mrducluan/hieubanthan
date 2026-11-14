@@ -340,7 +340,7 @@ def hoi(cau: str, tra_loi: dict | None = None, *, nam_sinh: dt.date | int | None
     kq = {"cau_tra_loi": "", "can_cu": [], "hoi_tiep": [], "vung": [], "xu_ly": "tra_loi", "bo_vi": None}
     db = chung.dac_biet(t, goc)
     if db == "an_toan":
-        kq.update(cau_tra_loi=kinhdich_kb.mau("an_toan") or "", xu_ly="an_toan")
+        kq.update(cau_tra_loi=chung.mau_an_toan(goc, kinhdich_kb.mau("an_toan") or ""), xu_ly="an_toan")
         return kq
     # Luật riêng của mảng (đứng trước lời từ chối chung): không chọn người theo tướng, không xem tướng người khác.
     if chung.co(t, [re.escape(k) for k in kb.tu_khoa("tuyen_dung")]):

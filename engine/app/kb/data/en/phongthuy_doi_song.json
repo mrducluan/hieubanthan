@@ -1,0 +1,102 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 5 — bản phủ tiếng Anh (ban biên tập viết, chờ người bản xứ duyệt).",
+ "chuong": {
+  "ban_hop_huong": {
+   "tieu_de": "Which directions suit you",
+   "cau_hoi": "Which way should I face when I sleep and when I work?"
+  },
+  "ngoi_nha_voi_ban": {
+   "tieu_de": "This house and you",
+   "cau_hoi": "Does the house I live in (or plan to buy) suit me?"
+  },
+  "tung_phong": {
+   "tieu_de": "Room by room",
+   "cau_hoi": "Door, bed, stove — where should they go?"
+  },
+  "nam_nay": {
+   "tieu_de": "This year and the next 3 months",
+   "cau_hoi": "When should I repair, tidy up or break ground?"
+  },
+  "viec_nen_lam": {
+   "tieu_de": "What to do",
+   "cau_hoi": "If I only do three things, which come first?"
+  }
+ },
+ "muc": {
+  "thuan": {
+   "nhan": "Favourable"
+  },
+  "can_bang": {
+   "nhan": "Balanced"
+  },
+  "can_chu_dong": {
+   "nhan": "Needs care"
+  }
+ },
+ "nhom": {
+  "Đông tứ mệnh": "East group: suits North, South, East and South-East.",
+  "Tây tứ mệnh": "West group: suits West, North-West, South-West and North-East."
+ },
+ "du_nien_doi_thuong": {
+  "Sinh Khí": {
+   "mot_cau": "a side with momentum, good for the front door and a desk",
+   "dung": "front door, desk, the way you sit"
+  },
+  "Thiên Y": {
+   "mot_cau": "a calm, wholesome side, good for the stove and for older family members' bedrooms",
+   "dung": "stove control side, bedroom for older family members"
+  },
+  "Diên Niên": {
+   "mot_cau": "a steady, harmonious side, good for the couple's bedroom and the head of the bed",
+   "dung": "head of the bed, the couple's bedroom"
+  },
+  "Phục Vị": {
+   "mot_cau": "a still side, good for a study desk, the family altar or a reading corner",
+   "dung": "study desk, family altar, a quiet workroom"
+  },
+  "Hoạ Hại": {
+   "mot_cau": "a mildly weak side, fine for storage or a bathroom",
+   "dung": "storage, bathroom"
+  },
+  "Lục Sát": {
+   "mot_cau": "a side that gets muddled, fine for storage, a bathroom or stairs",
+   "dung": "storage, bathroom, stairs"
+  },
+  "Ngũ Quỷ": {
+   "mot_cau": "a side that drains, best for a bathroom or storage; not the front door",
+   "dung": "bathroom, storage"
+  },
+  "Tuyệt Mệnh": {
+   "mot_cau": "the weakest side, for rarely used spaces; avoid the front door and the head of the bed",
+   "dung": "rarely used spaces"
+  }
+ },
+ "vai": {
+  "chu": "you",
+  "vo": "your wife",
+  "chong": "your husband",
+  "cha_me": "your parents",
+  "khac": "your relative",
+  "con": "your child"
+ },
+ "mau": {
+  "can_sinh": "To know which directions suit you we need your birth year and sex (ideally your full date of birth, since the year turns at Li Chun, around 4 February).",
+  "can_huong": "To see how the house suits you we need its facing direction: measure with a phone compass at the front door (or the balcony if the apartment takes its main light from there), or pick one of the 8 directions.",
+  "can_bo_cuc": "Add where the front door, bedroom and kitchen are (seen from the centre of the home) in the Home survey, and this part will read room by room.",
+  "can_nam_xay": "With the year the house was built or the year you moved in, this part adds the time-based star layer (Flying Stars) for each room and each month.",
+  "hinh_the_truoc": "A home is first of all light, air, clear walkways and safety. What follows is worked out from the house's direction and building year as the old books describe — it only applies once those basics are sorted.",
+  "khac_nhom": "Two people in different East/West groups: no direction is good for both in Eight Mansions. The usual approach: the house and door follow the main earner, while the head of each bed and each desk follow each person's own destiny.",
+  "cung_nhom": "The whole household is in the same group: the good directions overlap, so arranging things is easy.",
+  "ban_cong": "Apartment: if your front door opens onto an enclosed corridor, many books take the balcony (where the main light and air come in) as the facing — you have chosen this method; switch it back in the direction step if you want to compare.",
+  "ket": "These are layout suggestions from the old books for you to weigh up, not predictions. Light, ventilation, safety and the household's routines matter more than direction. There is nothing you need to buy.",
+  "khong_vat_pham": "Every suggestion here is just rearranging furniture, light and how rooms are used — nothing to buy, nothing to wear or hang."
+ },
+ "thang_sao": {
+  "y": {
+   "thuan": "a good month to repair, tidy and rearrange on this side",
+   "can_bang": "an ordinary month: small repairs are fine, big jobs can wait",
+   "can_chu_dong": "a month to keep this side quiet: no knocking through, no ground-breaking, a tidy-up is enough"
+  }
+ }
+}

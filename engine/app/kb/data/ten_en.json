@@ -102,6 +102,21 @@
    "Thiên Đức": {"en": "Tian De", "han": "天德"}, "Điếu Khách": {"en": "Diao Ke", "han": "弔客"}, "Bệnh Phù": {"en": "Bing Fu", "han": "病符"}
   },
   "sao_luu_tien_to": {"Lưu": "Annual", "Vận": "Decade"},
+  "_ghi_chu_gd4": "EN-ALL GĐ 4 (agent A): thai_tue_vn = vòng Thái Tuế lối Việt (Nam phái); sao_luu = sao lưu niên / lưu đại hạn của iztro dạng mã; hoa_sao = Hoá Kỵ trong bảng độ sáng phụ tinh; do_sang_nam_phai = tên độ sáng lối Việt khác iztro (Hãm); tuan_triet = nguồn Tuần/Triệt; xu_huong = kết luận xu hướng lưu nguyệt (mã web tô màu).",
+  "thai_tue_vn": {
+   "Thái Tuế": {"en": "Tai Sui", "han": "太歲"}, "Thiếu Dương": {"en": "Shao Yang", "han": "少陽"}, "Tang Môn": {"en": "Sang Men", "han": "喪門"},
+   "Thiếu Âm": {"en": "Shao Yin", "han": "少陰"}, "Quan Phù": {"en": "Guan Fu (talisman)", "han": "官符"}, "Tử Phù": {"en": "Si Fu", "han": "死符"},
+   "Tuế Phá": {"en": "Sui Po", "han": "歲破"}, "Long Đức": {"en": "Long De", "han": "龍德"}, "Bạch Hổ": {"en": "Bai Hu", "han": "白虎"},
+   "Phúc Đức": {"en": "Fu De", "han": "福德"}, "Điếu Khách": {"en": "Diao Ke", "han": "弔客"}, "Trực Phù": {"en": "Zhi Fu", "han": "直符"}
+  },
+  "sao_luu": {
+   "Lưu Lộc": {"en": "Annual Lu Cun", "han": "流祿"}, "Lưu Mã": {"en": "Annual Tian Ma", "han": "流馬"}, "Lưu Dương": {"en": "Annual Qing Yang", "han": "流羊"}, "Lưu Đà": {"en": "Annual Tuo Luo", "han": "流陀"}, "Lưu Xương": {"en": "Annual Wen Chang", "han": "流昌"}, "Lưu Khúc": {"en": "Annual Wen Qu", "han": "流曲"}, "Lưu Khôi": {"en": "Annual Tian Kui", "han": "流魁"}, "Lưu Việt": {"en": "Annual Tian Yue", "han": "流鉞"}, "Lưu Loan": {"en": "Annual Hong Luan", "han": "流鸞"}, "Lưu Hỷ": {"en": "Annual Tian Xi", "han": "流喜"},
+   "Vận Lộc": {"en": "Decade Lu Cun", "han": "運祿"}, "Vận Mã": {"en": "Decade Tian Ma", "han": "運馬"}, "Vận Dương": {"en": "Decade Qing Yang", "han": "運羊"}, "Vận Đà": {"en": "Decade Tuo Luo", "han": "運陀"}, "Vận Xương": {"en": "Decade Wen Chang", "han": "運昌"}, "Vận Khúc": {"en": "Decade Wen Qu", "han": "運曲"}, "Vận Khôi": {"en": "Decade Tian Kui", "han": "運魁"}, "Vận Việt": {"en": "Decade Tian Yue", "han": "運鉞"}, "Vận Loan": {"en": "Decade Hong Luan", "han": "運鸞"}, "Vận Hỷ": {"en": "Decade Tian Xi", "han": "運喜"}
+  },
+  "hoa_sao": {"Hóa Kỵ": {"en": "Hua Ji (Obstacle)", "han": "化忌"}},
+  "tuan_triet": {"Tuần": {"en": "Xun (Void)", "han": "旬"}, "Triệt": {"en": "Jie (Cut-off)", "han": "截"}},
+  "tuan_triet_kieu": {"đóng trực tiếp": {"en": "sits here directly"}, "lan qua tam hợp": {"en": "spreads in through the triad"}},
+  "xu_huong": {"thuận hơn": {"en": "more favourable"}, "cân bằng": {"en": "balanced"}, "nhiều thử thách hơn": {"en": "more challenging"}},
   "cung": {
    "Mệnh": {"en": "Life Palace", "han": "命宮"}, "Phụ Mẫu": {"en": "Parents Palace", "han": "父母宮"}, "Phúc Đức": {"en": "Fortune Palace", "han": "福德宮"},
    "Điền Trạch": {"en": "Property Palace", "han": "田宅宮"}, "Quan Lộc": {"en": "Career Palace", "han": "官祿宮"}, "Nô Bộc": {"en": "Friends Palace", "han": "僕役宮"},
@@ -113,6 +128,7 @@
    "Miếu": {"en": "Temple (brightest)", "han": "廟"}, "Vượng": {"en": "Prosperous", "han": "旺"}, "Đắc": {"en": "Favourable", "han": "得"},
    "Lợi": {"en": "Beneficial", "han": "利"}, "Bình": {"en": "Neutral", "han": "平"}, "Bất": {"en": "Unfavourable", "han": "不"}, "Hạn": {"en": "Fallen (dimmest)", "han": "陷"}
   },
+  "do_sang_nam_phai": {"Hãm": {"en": "Fallen (dimmest)", "han": "陷"}},
   "hoa": {
    "Lộc": {"en": "Lu (Prosperity)", "han": "化祿"}, "Quyền": {"en": "Quan (Power)", "han": "化權"},
    "Khoa": {"en": "Ke (Fame)", "han": "化科"}, "Kỵ": {"en": "Ji (Obstacle)", "han": "化忌"}
@@ -135,11 +151,11 @@
    "Tý": {"en": "Zi", "han": "子", "nghia": "Rat"}, "Sửu": {"en": "Chou", "han": "丑", "nghia": "Ox"}, "Dần": {"en": "Yin", "han": "寅", "nghia": "Tiger"},
    "Mão": {"en": "Mao", "han": "卯", "nghia": "Rabbit"}, "Thìn": {"en": "Chen", "han": "辰", "nghia": "Dragon"}, "Tỵ": {"en": "Si", "han": "巳", "nghia": "Snake"},
    "Ngọ": {"en": "Wu", "han": "午", "nghia": "Horse"}, "Mùi": {"en": "Wei", "han": "未", "nghia": "Goat"}, "Thân": {"en": "Shen", "han": "申", "nghia": "Monkey"},
-   "Dậu": {"en": "You", "han": "酉", "nghia": "Rooster"}, "Tuất": {"en": "Xu", "han": "戌", "nghia": "Dog"}, "Hợi": {"en": "Hai", "han": "亥", "nghia": "Pig"}
+   "Dậu": {"en": "You (Rooster)", "han": "酉", "nghia": "Rooster"}, "Tuất": {"en": "Xu", "han": "戌", "nghia": "Dog"}, "Hợi": {"en": "Hai", "han": "亥", "nghia": "Pig"}
   },
   "hanh": {
    "Kim": {"en": "Metal", "han": "金"}, "Thủy": {"en": "Water", "han": "水"}, "Mộc": {"en": "Wood", "han": "木"},
-   "Hỏa": {"en": "Fire", "han": "火"}, "Thổ": {"en": "Earth", "han": "土"}
+   "Hỏa": {"en": "Fire", "han": "火"}, "Thổ": {"en": "Earth", "han": "土"}, "Thuỷ/Mộc": {"en": "Water / Wood", "han": "水/木"}
   },
   "am_duong": {"Âm": {"en": "Yin", "han": "陰"}, "Dương": {"en": "Yang", "han": "陽"}}
  },
@@ -221,14 +237,15 @@
    "Cấn": {"en": "Gen", "han": "艮", "nghia": "Mountain · North-East"}, "Ly": {"en": "Li", "han": "離", "nghia": "Fire · South"}
   },
   "du_nien": {
-   "Sinh Khí": {"en": "Sheng Qi (Life Generating)", "han": "生氣"}, "Thiên Y": {"en": "Tian Yi (Heavenly Doctor)", "han": "天醫"},
-   "Diên Niên": {"en": "Yan Nian (Longevity)", "han": "延年"}, "Phục Vị": {"en": "Fu Wei (Stability)", "han": "伏位"},
-   "Hoạ Hại": {"en": "Huo Hai (Mishaps)", "han": "禍害"}, "Lục Sát": {"en": "Liu Sha (Six Killings)", "han": "六煞"},
-   "Ngũ Quỷ": {"en": "Wu Gui (Five Ghosts)", "han": "五鬼"}, "Tuyệt Mệnh": {"en": "Jue Ming (Total Loss)", "han": "絕命"}
+   "Sinh Khí": {"en": "Sheng Qi (Vitality)", "han": "生氣"}, "Thiên Y": {"en": "Tian Yi (Health)", "han": "天醫"},
+   "Diên Niên": {"en": "Yan Nian (Harmony)", "han": "延年"}, "Phục Vị": {"en": "Fu Wei (Stability)", "han": "伏位"},
+   "Hoạ Hại": {"en": "Huo Hai (Minor Mishaps)", "han": "禍害"}, "Lục Sát": {"en": "Liu Sha (Friction)", "han": "六煞"},
+   "Ngũ Quỷ": {"en": "Wu Gui (Setbacks)", "han": "五鬼"}, "Tuyệt Mệnh": {"en": "Jue Ming (Depletion)", "han": "絕命"}
   },
   "huong": {
    "Bắc": {"en": "North"}, "Đông Bắc": {"en": "North-East"}, "Đông": {"en": "East"}, "Đông Nam": {"en": "South-East"},
-   "Nam": {"en": "South"}, "Tây Nam": {"en": "South-West"}, "Tây": {"en": "West"}, "Tây Bắc": {"en": "North-West"}, "Trung cung": {"en": "Centre"}
+   "Nam": {"en": "South"}, "Tây Nam": {"en": "South-West"}, "Tây": {"en": "West"}, "Tây Bắc": {"en": "North-West"}, "Trung cung": {"en": "Centre"},
+   "Trung tâm": {"en": "Middle"}
   },
   "nhom": {"Đông tứ mệnh": {"en": "East Group"}, "Tây tứ mệnh": {"en": "West Group"}, "Đông tứ trạch": {"en": "East-group house"}, "Tây tứ trạch": {"en": "West-group house"}},
   "sao_bay": {
@@ -236,7 +253,10 @@
    "Tứ Lục": {"en": "4 Green", "han": "四綠"}, "Ngũ Hoàng": {"en": "5 Yellow", "han": "五黃"}, "Lục Bạch": {"en": "6 White", "han": "六白"},
    "Thất Xích": {"en": "7 Red", "han": "七赤"}, "Bát Bạch": {"en": "8 White", "han": "八白"}, "Cửu Tử": {"en": "9 Purple", "han": "九紫"}
   },
-  "khai_niem": {"cung phi": {"en": "Kua number", "han": "命卦"}, "phi tinh": {"en": "Flying Stars", "han": "飛星"}, "bát trạch": {"en": "Eight Mansions", "han": "八宅"}}
+  "khai_niem": {"cung phi": {"en": "Kua number", "han": "命卦"}, "phi tinh": {"en": "Flying Stars", "han": "飛星"}, "bát trạch": {"en": "Eight Mansions", "han": "八宅"}},
+  "son": {"Tý": {"en": "Zi (N2)", "han": "子"}, "Quý": {"en": "Gui (N3)", "han": "癸"}, "Sửu": {"en": "Chou (NE1)", "han": "丑"}, "Cấn": {"en": "Gen (NE2)", "han": "艮"}, "Dần": {"en": "Yin (NE3)", "han": "寅"}, "Giáp": {"en": "Jia (E1)", "han": "甲"}, "Mão": {"en": "Mao (E2)", "han": "卯"}, "Ất": {"en": "Yi (E3)", "han": "乙"}, "Thìn": {"en": "Chen (SE1)", "han": "辰"}, "Tốn": {"en": "Xun (SE2)", "han": "巽"}, "Tỵ": {"en": "Si (SE3)", "han": "巳"}, "Bính": {"en": "Bing (S1)", "han": "丙"}, "Ngọ": {"en": "Wu (S2)", "han": "午"}, "Đinh": {"en": "Ding (S3)", "han": "丁"}, "Mùi": {"en": "Wei (SW1)", "han": "未"}, "Khôn": {"en": "Kun (SW2)", "han": "坤"}, "Thân": {"en": "Shen (SW3)", "han": "申"}, "Canh": {"en": "Geng (W1)", "han": "庚"}, "Dậu": {"en": "You (W2)", "han": "酉"}, "Tân": {"en": "Xin (W3)", "han": "辛"}, "Tuất": {"en": "Xu (NW1)", "han": "戌"}, "Càn": {"en": "Qian (NW2)", "han": "乾"}, "Hợi": {"en": "Hai (NW3)", "han": "亥"}, "Nhâm": {"en": "Ren (N1)", "han": "壬"}},
+  "cuc": {"Vượng sơn vượng hướng": {"en": "Prosperous Mountain, Prosperous Facing", "han": "旺山旺向"}, "Thượng sơn hạ thuỷ": {"en": "Up the Mountain, Down the Water", "han": "上山下水"}, "Song tinh đáo hướng": {"en": "Double Stars at the Facing", "han": "雙星到向"}, "Song tinh đáo toạ": {"en": "Double Stars at the Sitting", "han": "雙星到坐"}},
+  "trang_thai_sao": {"vượng": {"en": "timely"}, "sinh": {"en": "growing"}, "thoái": {"en": "retreating"}, "suy": {"en": "fading"}, "tử": {"en": "dormant"}}
  },
  "kinhdich": {
   "que_64": {
@@ -287,6 +307,61 @@
    "quẻ biến": {"en": "resulting hexagram", "han": "變卦"}, "quẻ hỗ": {"en": "nuclear hexagram", "han": "互卦"},
    "Mai Hoa": {"en": "Plum Blossom numerology", "han": "梅花易數"}, "lục hào": {"en": "Six Lines method", "han": "六爻"},
    "Thế": {"en": "Self line (Shi)", "han": "世"}, "Ứng": {"en": "Other line (Ying)", "han": "應"}
+  },
+  "que_ten": {
+   "Càn": {"en": "Qian (The Creative)", "han": "乾"}, "Khôn": {"en": "Kun (The Receptive)", "han": "坤"}, "Truân": {"en": "Zhun (Difficult Beginnings)", "han": "屯"},
+   "Mông": {"en": "Meng (Youthful Folly)", "han": "蒙"}, "Nhu": {"en": "Xu (Waiting)", "han": "需"}, "Tụng": {"en": "Song (Conflict)", "han": "訟"},
+   "Sư": {"en": "Shi (The Army)", "han": "師"}, "Tỷ": {"en": "Bi (Holding Together)", "han": "比"}, "Tiểu Súc": {"en": "Xiao Xu (Small Taming)", "han": "小畜"},
+   "Lý": {"en": "Lu (Treading)", "han": "履"}, "Thái": {"en": "Tai (Peace)", "han": "泰"}, "Bĩ": {"en": "Pi (Standstill)", "han": "否"},
+   "Đồng Nhân": {"en": "Tong Ren (Fellowship)", "han": "同人"}, "Đại Hữu": {"en": "Da You (Great Possession)", "han": "大有"}, "Khiêm": {"en": "Qian (Modesty)", "han": "謙"},
+   "Dự": {"en": "Yu (Enthusiasm)", "han": "豫"}, "Tùy": {"en": "Sui (Following)", "han": "隨"}, "Cổ": {"en": "Gu (Repairing Decay)", "han": "蠱"},
+   "Lâm": {"en": "Lin (Approach)", "han": "臨"}, "Quan": {"en": "Guan (Contemplation)", "han": "觀"}, "Phệ Hạp": {"en": "Shi He (Biting Through)", "han": "噬嗑"},
+   "Bí": {"en": "Bi (Grace)", "han": "賁"}, "Bác": {"en": "Bo (Splitting Apart)", "han": "剝"}, "Phục": {"en": "Fu (Return)", "han": "復"},
+   "Vô Vọng": {"en": "Wu Wang (Innocence)", "han": "無妄"}, "Đại Súc": {"en": "Da Xu (Great Taming)", "han": "大畜"}, "Di": {"en": "Yi (Nourishment)", "han": "頤"},
+   "Đại Quá": {"en": "Da Guo (Great Excess)", "han": "大過"}, "Khảm": {"en": "Kan (The Abyss)", "han": "坎"}, "Ly": {"en": "Li (The Clinging Fire)", "han": "離"},
+   "Hàm": {"en": "Xian (Influence)", "han": "咸"}, "Hằng": {"en": "Heng (Duration)", "han": "恆"}, "Độn": {"en": "Dun (Retreat)", "han": "遯"},
+   "Đại Tráng": {"en": "Da Zhuang (Great Power)", "han": "大壯"}, "Tấn": {"en": "Jin (Progress)", "han": "晉"}, "Minh Di": {"en": "Ming Yi (Darkening of the Light)", "han": "明夷"},
+   "Gia Nhân": {"en": "Jia Ren (The Family)", "han": "家人"}, "Khuê": {"en": "Kui (Opposition)", "han": "睽"}, "Kiển": {"en": "Jian (Obstruction)", "han": "蹇"},
+   "Giải": {"en": "Xie (Deliverance)", "han": "解"}, "Tổn": {"en": "Sun (Decrease)", "han": "損"}, "Ích": {"en": "Yi (Increase)", "han": "益"},
+   "Quải": {"en": "Guai (Breakthrough)", "han": "夬"}, "Cấu": {"en": "Gou (Coming to Meet)", "han": "姤"}, "Tụy": {"en": "Cui (Gathering)", "han": "萃"},
+   "Thăng": {"en": "Sheng (Pushing Upward)", "han": "升"}, "Khốn": {"en": "Kun (Oppression)", "han": "困"}, "Tỉnh": {"en": "Jing (The Well)", "han": "井"},
+   "Cách": {"en": "Ge (Revolution)", "han": "革"}, "Đỉnh": {"en": "Ding (The Cauldron)", "han": "鼎"}, "Chấn": {"en": "Zhen (Arousing Thunder)", "han": "震"},
+   "Cấn": {"en": "Gen (Keeping Still)", "han": "艮"}, "Tiệm": {"en": "Jian (Gradual Progress)", "han": "漸"}, "Quy Muội": {"en": "Gui Mei (The Marrying Maiden)", "han": "歸妹"},
+   "Phong": {"en": "Feng (Abundance)", "han": "豐"}, "Lữ": {"en": "Lu (The Wanderer)", "han": "旅"}, "Tốn": {"en": "Xun (The Gentle Wind)", "han": "巽"},
+   "Đoài": {"en": "Dui (The Joyous Lake)", "han": "兌"}, "Hoán": {"en": "Huan (Dispersion)", "han": "渙"}, "Tiết": {"en": "Jie (Limitation)", "han": "節"},
+   "Trung Phu": {"en": "Zhong Fu (Inner Truth)", "han": "中孚"}, "Tiểu Quá": {"en": "Xiao Guo (Small Excess)", "han": "小過"}, "Ký Tế": {"en": "Ji Ji (After Completion)", "han": "既濟"},
+   "Vị Tế": {"en": "Wei Ji (Before Completion)", "han": "未濟"}
+  },
+  "luc_than": {
+   "Phụ Mẫu": {"en": "Parent (Fu Mu)", "han": "父母"}, "Huynh Đệ": {"en": "Sibling (Xiong Di)", "han": "兄弟"}, "Tử Tôn": {"en": "Offspring (Zi Sun)", "han": "子孫"},
+   "Thê Tài": {"en": "Wealth (Qi Cai)", "han": "妻財"}, "Quan Quỷ": {"en": "Officer (Guan Gui)", "han": "官鬼"}
+  },
+  "the_ung": {
+   "Thế": {"en": "Self line (Shi)", "han": "世"}, "Ứng": {"en": "Other line (Ying)", "han": "應"}
+  },
+  "luc_thu": {
+   "Thanh Long": {"en": "Green Dragon", "han": "青龍"}, "Chu Tước": {"en": "Vermilion Bird", "han": "朱雀"}, "Câu Trần": {"en": "Gou Chen (Coiled Earth)", "han": "勾陳"},
+   "Đằng Xà": {"en": "Teng She (Flying Snake)", "han": "螣蛇"}, "Bạch Hổ": {"en": "White Tiger", "han": "白虎"}, "Huyền Vũ": {"en": "Black Tortoise", "han": "玄武"}
+  },
+  "vuong_suy": {
+   "vượng": {"en": "strong", "han": "旺"}, "tướng": {"en": "supported", "han": "相"}, "hưu": {"en": "resting", "han": "休"},
+   "tù": {"en": "confined", "han": "囚"}, "tử": {"en": "dormant", "han": "死"}, "suy": {"en": "weak", "han": "衰"},
+   "bình": {"en": "neutral", "han": "平"}, "lâm nhật": {"en": "same branch as the day", "han": "臨日"}, "nhật xung": {"en": "clashed by the day", "han": "日沖"},
+   "nhật hợp": {"en": "combined with the day", "han": "日合"}, "nhật sinh": {"en": "fed by the day", "han": "日生"}, "nhật khắc": {"en": "checked by the day", "han": "日剋"},
+   "không": {"en": "no link with the day"}
+  },
+  "hoa_hao": {
+   "tiến thần": {"en": "advancing", "han": "進神"}, "thoái thần": {"en": "retreating", "han": "退神"}, "hồi đầu sinh": {"en": "turns back to feed", "han": "回頭生"},
+   "hồi đầu khắc": {"en": "turns back to check", "han": "回頭剋"}, "hoá tiết": {"en": "drains itself", "han": "化洩"}, "hoá khắc xuất": {"en": "turns to control", "han": "化剋出"},
+   "hoá tỷ": {"en": "turns to the same element", "han": "化比"}, "phục ngâm": {"en": "repeats itself", "han": "伏吟"}, "phản ngâm": {"en": "flips back and forth", "han": "反吟"}
+  },
+  "the_bac": {
+   "Bát thuần": {"en": "pure hexagram (Self line 6)", "han": "八純"}, "1 thế": {"en": "Self line 1", "han": "一世"}, "2 thế": {"en": "Self line 2", "han": "二世"},
+   "3 thế": {"en": "Self line 3", "han": "三世"}, "4 thế": {"en": "Self line 4", "han": "四世"}, "5 thế": {"en": "Self line 5", "han": "五世"},
+   "Du hồn": {"en": "Wandering Soul", "han": "遊魂"}, "Quy hồn": {"en": "Returning Soul", "han": "歸魂"}
+  },
+  "don_vi": {
+   "ngày": {"en": "days"}, "tuần": {"en": "weeks"}, "tháng": {"en": "months"}
   }
  },
  "dia_ly": {

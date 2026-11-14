@@ -24,22 +24,26 @@ CHUA_XONG: dict[str, int] = {
     # (+ /v1/kb/status): sạch khi MỌI loại sạch → GĐ 11.
     "kb": 11,
     # GĐ 3 xong (2026-11-10): kb.trang.thap_than, kb.trang.nhat_chu, kb.trang.menh_nam.
-    "kb.trang.sao": 4, "kb.trang.cung": 4, "kb.trang.sao_cung": 4, "kb.trang.hoa_cung": 4, "kb.trang.co_thu": 4,
-    "kb.trang.dau_hieu": 5, "kb.trang.que": 6,
+    # GĐ 6 xong: kb.trang.que (chữ; khung vẫn lệch có chủ đích — lớp Ngô Tất Tố chỉ bản Việt, xem KHUNG_CHUA_XONG).
     "kb.trang.so": 7, "kb.trang.so_kep": 7, "kb.trang.cap_so": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7,
     "kb.trang.nam_ca_nhan": 7, "kb.trang.no_nghiep": 7, "kb.trang.la_bai": 7,
     "kb.trang.bo_vi": 8,
     # GĐ 3 — Bát tự
     # GĐ 3 xong: battu.la_so, battu.luu_nien, battu.doi_chieu_cach, battu.luan_giai, hoi.battu (2026-11-10, GĐ 3c).
     # GĐ 4 — Tử vi
-    "tuvi": 4, "tuvi.an_sao": 4, "tuvi.tuan_triet": 4, "tuvi.luan_giai": 4, "tuvi.van_han": 4, "tuvi.luu_nguyet": 4,
-    "tuvi.nhip_3_thang": 4, "tuvi.phi_hoa": 4, "tuvi.hop_tham": 4, "tuvi.dinh_gio": 4, "tuvi.la_so_mau": 4, "hoi.tuvi": 4,
+    # GĐ 4 xong (lá số): tuvi (danh sách lá số mẫu), tuvi.tuan_triet, tuvi.van_han, tuvi.luu_nguyet, tuvi.dinh_gio.
+    # GĐ 4 (agent B) xong: tuvi.luan_giai; tuvi.hop_tham (sạch sau bản phủ en/tuvi_y_bo_sung.json); tuvi.an_sao,
+    # tuvi.la_so_mau, kb.trang.co_thu (sạch sau bản phủ đủ en/tuvi_cach_cuc.json).
+    # GĐ 4 (agent E) xong: hoi.tuvi (hỏi đáp Tử vi: en_gloss._tuvi, hai lượt "bản Việt quyết", gói bằng chứng theo ngôn ngữ).
+    # GĐ 4 (agent C) xong: tuvi.phi_hoa, tuvi.nhip_3_thang. tuvi.hop_tham chờ bản phủ en/tuvi_y_bo_sung.json (agent B, hộp cach_doc_them).
     # GĐ 5 — Phong thuỷ
-    "phongthuy": 5, "phongthuy.bo_cuc": 5, "phongthuy.cung_phi": 5, "phongthuy.do_huong": 5, "phongthuy.do_thi": 5,
-    "phongthuy.huyen_khong": 5, "phongthuy.luan_giai": 5, "phongthuy.menh_quai": 5, "phongthuy.thang_nay": 5,
-    "phongthuy.viec_tuan": 5, "hoi.phongthuy": 5,
+    # GĐ 5 (engine) xong: phongthuy, phongthuy.bo_cuc, phongthuy.cung_phi, phongthuy.do_huong, phongthuy.do_thi,
+    # phongthuy.huyen_khong, phongthuy.luan_giai, phongthuy.menh_quai, phongthuy.thang_nay, phongthuy.viec_tuan,
+    # kb.trang.dau_hieu. GĐ 5 (hỏi đáp) xong: hoi.phongthuy.
     # GĐ 6 — Kinh Dịch
-    "kinhdich": 6, "kinhdich.hieu_cau": 6, "kinhdich.hoi": 6, "kinhdich.khoi_que": 6, "kinhdich.que_rieng": 6, "hoi.kinhdich": 6,
+    # GĐ 6 (engine) xong: kinhdich (chủ đề), kinhdich.khoi_que, kinhdich.que_rieng. kinhdich.hoi: phần bài đọc (doc_que, que,
+    # mai_hoa) sạch — còn tiêu đề lời kinh / bằng chứng / cờ / khối hình của nhánh hỏi đáp (hoidap/kinhdich.py, truc_quan).
+    # GĐ 6 (hỏi đáp, 2026-11-13) xong: kinhdich.hieu_cau, kinhdich.hoi, hoi.kinhdich (hoidap/en_gloss_kd + hai lượt "bản Việt quyết").
     # GĐ 7 — Thần số + Tarot đầy đủ
     "thanso.ba_goc_nhin": 7, "thanso.ban_do": 7, "thanso.cap_so": 7, "thanso.chaldea": 7, "thanso.chu_ky": 7, "thanso.do_nhay": 7,
     "thanso.doi_chieu_nam": 7, "thanso.hom_nay": 7, "thanso.hop_doi": 7, "thanso.ngu_canh": 7,
@@ -61,6 +65,9 @@ KHUNG_BO_QUA = {
     "hoi.thanso",        # QTE-3: bản Anh trả lời bằng `hoi_en` gọn — thay bằng bản đầy đủ ở GĐ 7
     "hoi.tuvi", "hoi.battu", "hoi.phongthuy", "hoi.kinhdich", "hoi.dac_biet", "nhan_tuong.hoi",   # câu hỏi tiếng Việt gửi bản Anh
     "tarot.hieu_cau", "tarot.hoi", "tarot.hoi_cau", "kinhdich.hieu_cau", "thanso.ngu_canh",
+    # GĐ 6: lớp CHỈ có bản Việt (Ngô Tất Tố: Trình Di, Chu Hy, Tiểu tượng; loại tượng Thuyết Quái) + `so_trong_goi` (số rút từ
+    # CHỮ của lời đáp, khác theo ngôn ngữ) — mọi khoá khác (mã, mức, số hộp, quẻ) giống bản Việt.
+    "kinhdich.hoi",
     "tarot.doc_bai",     # QTE-3: bản phủ tắt `truong_phai` / `viec_lv` (null) → ít hộp hơn; khôi phục ở GĐ 7
 }
 # Khung lệch CHƯA giải thích — phải sửa ở giai đoạn ghi kèm (ngôn ngữ không được đổi dữ kiện).
@@ -69,8 +76,8 @@ KHUNG_BO_QUA = {
 # KT-TT (2026-11-12): lớp tri thức mới CHỈ có bản Việt — bản dịch Ngô Tất Tố (Tiểu tượng, Trình Di, Chu Hy), loại tượng
 # tám quái, nghĩa sao nhỏ. Bản Anh chưa có các trường này; chuyển thể cùng giai đoạn của mảng (Tử vi GĐ 4, Kinh Dịch GĐ 6).
 KHUNG_CHUA_XONG: dict[str, int] = {"kb.trang.la_bai": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7, "goi_y_cheo": 7,
-                                   "kb.trang.bo_vi": 7, "kb.trang.menh_nam": 7, "kb.trang.sao_cung": 7,
-                                   "tuvi.an_sao": 4, "tuvi.la_so_mau": 4, "kb.trang.que": 6, "kinhdich.hoi": 6}
+                                   "kb.trang.bo_vi": 7, "kb.trang.menh_nam": 7,
+                                   "kb.trang.que": 6}
 
 
 @pytest.fixture(scope="module")

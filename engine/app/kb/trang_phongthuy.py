@@ -10,6 +10,7 @@ không sinh nghĩa mới — mọi câu nghĩa lấy nguyên từ KB; câu nối
 from __future__ import annotations
 
 from app import ngon_ngu
+from app.kb.loi import L
 
 DUONG_CONG_CU = "/phong-thuy#khao-sat-nha"
 DUONG_CUM = "/phong-thuy/dau-hieu"          # = web lib/chuyen-huong.json chu_de["dau-hieu"]
@@ -46,9 +47,14 @@ def _cau_dau(s: str) -> str:
 
 
 def _tieu_de(ten: str, tot: bool) -> str:
-    ung = ([f"{ten} trong phong thuỷ: ý nghĩa và cách giữ", f"{ten}: ý nghĩa phong thuỷ"] if tot else
-           [f"{ten} có sao không? Ý nghĩa và cách xử lý", f"{ten} có sao không? Cách xử lý", f"{ten}: phong thuỷ nói gì"])
-    return next((x for x in ung if len(x) <= 70), ung[-1][:70])
+    ung = ([L("pt.dh.td.tot1", "{ten} trong phong thuỷ: ý nghĩa và cách giữ", ten=ten), L("pt.dh.td.tot2", "{ten}: ý nghĩa phong thuỷ", ten=ten)] if tot else
+           [L("pt.dh.td.xau1", "{ten} có sao không? Ý nghĩa và cách xử lý", ten=ten), L("pt.dh.td.xau2", "{ten} có sao không? Cách xử lý", ten=ten),
+            L("pt.dh.td.xau3", "{ten}: phong thuỷ nói gì", ten=ten)])
+    vua = next((x for x in ung if len(x) <= 70), None)
+    if vua is None and not ngon_ngu.la_viet():
+        # Bản dịch: tên dài thì dùng chính tên (cắt ở ranh giới từ) — không cắt giữa chữ ("…what fen").
+        vua = ten if len(ten) <= 70 else ten[:70].rsplit(" ", 1)[0]
+    return vua if vua is not None else ung[-1][:70]
 
 
 def _quy_tac(ma: str) -> list[tuple[str, dict]]:
@@ -68,11 +74,11 @@ def trang_dau_hieu(ma: str, slug: str) -> dict:
     m = kb["bo_tri"][ma]
     dh = bc.DAU_HIEU[ma]
     ten, tot, veto = m["tieu_de"], bool(dh.get("tot")), bool(m.get("veto"))
-    nguon_y = "quan niệm dân gian" if m["nguon"] == "dan_gian" else "sách phong thuỷ xưa"
+    nguon_y = L("pt.dh.nguon_dg", "quan niệm dân gian") if m["nguon"] == "dan_gian" else L("pt.dh.nguon_ct", "sách phong thuỷ xưa")
     viec = m.get("viec") or []
     v0 = next((v["lam"] for v in viec if v["chi_phi"] == "khong_ton"), None)
     g = _do_thi()
-    phong = [bc.TEN_PHONG[p] for p in g.get("dau_hieu_phong", {}).get(ma, []) if p in bc.TEN_PHONG]
+    phong = [bc.ten_phong(p) for p in g.get("dau_hieu_phong", {}).get(ma, []) if p in bc.TEN_PHONG]
     yd_kb = t._doc("y_dinh_chung.json")["y_dinh"]
     y_dinh = [yd_kb[k]["ten"] for k, v in g["y_dinh"].items() if ma in v.get("dau_hieu", []) and k in yd_kb]
     qt = _quy_tac(ma)
@@ -81,51 +87,55 @@ def trang_dau_hieu(ma: str, slug: str) -> dict:
     viec_can_ho = bc._viec_cho(ma, m, "can_ho")
 
     # AUD-P0 (GEO): câu đầu tự đứng — nêu dấu hiệu + "phong thuỷ nhà ở" (không mở bằng "Đây là…").
-    tra_loi = ((f"{ten} là dấu hiệu tốt trong phong thuỷ nhà ở, theo {nguon_y}. " if tot else
-                f"{ten} là một trong những dấu hiệu phong thuỷ nhà ở nên xử lý trước. " if veto else
-                f"{ten} là một dấu hiệu được xét trong phong thuỷ nhà ở. ")
+    tra_loi = ((L("pt.dh.tl.tot", "{ten} là dấu hiệu tốt trong phong thuỷ nhà ở, theo {nguon}. ", ten=ten, nguon=nguon_y) if tot else
+                L("pt.dh.tl.veto", "{ten} là một trong những dấu hiệu phong thuỷ nhà ở nên xử lý trước. ", ten=ten) if veto else
+                L("pt.dh.tl.thuong", "{ten} là một dấu hiệu được xét trong phong thuỷ nhà ở. ", ten=ten))
                + _cau_dau(m["noi_dung"]) + " " + _cau_dau(m.get("giai_thich_hien_dai") or "")
-               + (f" Việc không tốn tiền: {v0}" if v0 else "")).strip()
-    muc = [{"tieu_de": "Sách xưa nói gì" if m["nguon"] != "dan_gian" else "Dân gian nói gì",
+               + (L("pt.dh.tl.v0", " Việc không tốn tiền: {v0}", v0=v0) if v0 else "")).strip()
+    muc = [{"tieu_de": L("pt.dh.m.sach", "Sách xưa nói gì") if m["nguon"] != "dan_gian" else L("pt.dh.m.dan_gian", "Dân gian nói gì"),
             "doan": m["noi_dung"]}]
     if m.get("giai_thich_hien_dai"):
-        muc.append({"tieu_de": "Nhìn theo đời sống hiện đại", "doan": m["giai_thich_hien_dai"]})
+        muc.append({"tieu_de": L("pt.dh.m.hien_dai", "Nhìn theo đời sống hiện đại"), "doan": m["giai_thich_hien_dai"]})
     if veto:
-        muc.append({"tieu_de": "Vì sao xếp vào nhóm nên xử lý trước",
-                    "doan": ("Hiểu Bản Thân xếp dấu hiệu này vào nhóm “xử lý trước”: khi bạn đã xác nhận nhà có nó, bài đọc "
-                             "Nhà của bạn giữ mức tối đa là Cân bằng cho phần liên quan cho tới khi bạn đánh dấu đã xử lý — "
-                             "hướng tốt, sao tốt không bù được chuyện ở ngay trước mắt. Hình thế là nền, lý khí là nhịp.")})
+        muc.append({"tieu_de": L("pt.dh.m.veto", "Vì sao xếp vào nhóm nên xử lý trước"),
+                    "doan": L("pt.dh.m.veto_doan", "Hiểu Bản Thân xếp dấu hiệu này vào nhóm “xử lý trước”: khi bạn đã xác nhận nhà có nó, bài đọc "
+                              "Nhà của bạn giữ mức tối đa là Cân bằng cho phần liên quan cho tới khi bạn đánh dấu đã xử lý — "
+                              "hướng tốt, sao tốt không bù được chuyện ở ngay trước mắt. Hình thế là nền, lý khí là nhịp.")})
     if viec:
-        muc.append({"tieu_de": "Việc nên làm theo chi phí",
-                    "doan": f"Gợi ý chung: {m['goi_y']} Bắt đầu từ việc 0 đồng; chỉ sửa chữa khi việc nhỏ chưa đủ.",
-                    "bang": {"cot": ["Chi phí", "Việc nên làm"],
-                             "dong": [[bc.CHI_PHI[v["chi_phi"]], v["lam"]] for v in viec]}})
-    if can_ho or viec_can_ho != viec:
+        cp = bc.chi_phi()
+        muc.append({"tieu_de": L("pt.dh.m.viec", "Việc nên làm theo chi phí"),
+                    "doan": L("pt.dh.m.viec_doan", "Gợi ý chung: {goi_y} Bắt đầu từ việc 0 đồng; chỉ sửa chữa khi việc nhỏ chưa đủ.", goi_y=m["goi_y"]),
+                    "bang": {"cot": [L("pt.dh.cot.chi_phi", "Chi phí"), L("pt.dh.cot.viec", "Việc nên làm")],
+                             "dong": [[cp[v["chi_phi"]], v["lam"]] for v in viec]}})
+    if can_ho or len(viec_can_ho) != len(viec):
         ds = [q["noi_dung"] for q in can_ho]
-        if viec_can_ho != viec:
-            ds.append("Việc làm được ở căn hộ: " + " · ".join(v["lam"] for v in viec_can_ho))
-        muc.append({"tieu_de": "Nếu bạn ở chung cư", "danh_sach": ds})
+        if len(viec_can_ho) != len(viec):
+            ds.append(L("pt.dh.can_ho_viec", "Việc làm được ở căn hộ: {ds}", ds=" · ".join(v["lam"] for v in viec_can_ho)))
+        muc.append({"tieu_de": L("pt.dh.m.can_ho", "Nếu bạn ở chung cư"), "danh_sach": ds})
     for q in chung:
         muc.append({"tieu_de": q["tieu_de"], "doan": q["noi_dung"]})
     if phong or y_dinh:
         doan = []
         if phong:
-            doan.append(f"Dấu hiệu thuộc nhóm {_TEN_NHOM.get(dh['nhom'], 'bố trí nhà')}, hay gặp ở: {', '.join(phong)}.")
+            doan.append(L("pt.dh.nhom_phong", "Dấu hiệu thuộc nhóm {nhom}, hay gặp ở: {phong}.",
+                          nhom=L(f"pt.dh.nhom.{dh['nhom']}", _TEN_NHOM.get(dh['nhom'], 'bố trí nhà')), phong=L("pt.noi", ", ").join(phong)))
         if y_dinh:
-            doan.append("Nên rà dấu hiệu này trước khi bạn đang băn khoăn về: " + "; ".join(y.lower() for y in y_dinh) + ".")
-        muc.append({"tieu_de": "Hay gặp ở đâu, liên quan chuyện gì", "doan": " ".join(doan)})
-    muc.append({"tieu_de": "Tự kiểm tra nhà bạn",
-                "danh_sach": [dh["hoi"], "Mở Khảo sát nhà, tích dấu hiệu bạn thấy — bài đọc Nhà của bạn sẽ xếp việc nên làm theo "
-                              "đúng hướng nhà và người ở; đã xử lý thì bấm “Tôi đã xử lý” để xem trước – sau."]})
+            doan.append(L("pt.dh.y_dinh", "Nên rà dấu hiệu này trước khi bạn đang băn khoăn về: {ds}.", ds="; ".join(y.lower() for y in y_dinh)))
+        muc.append({"tieu_de": L("pt.dh.m.o_dau", "Hay gặp ở đâu, liên quan chuyện gì"), "doan": " ".join(doan)})
+    muc.append({"tieu_de": L("pt.dh.m.tu_kiem", "Tự kiểm tra nhà bạn"),
+                "danh_sach": [bc.hoi(ma), L("pt.dh.tu_kiem_2", "Mở Khảo sát nhà, tích dấu hiệu bạn thấy — bài đọc Nhà của bạn sẽ xếp việc nên làm theo "
+                                             "đúng hướng nhà và người ở; đã xử lý thì bấm “Tôi đã xử lý” để xem trước – sau.")]})
 
-    hoi_dap = [{"hoi": (f"{ten} có tốt không?" if tot else f"{ten} có sao không?"), "dap": tra_loi}]
+    ten_l = ten[:1].lower() + ten[1:]          # bản dịch: "Is a mirror facing the bed a problem?" (không "Is A mirror…")
+    hoi_dap = [{"hoi": (L("pt.dh.hd.tot", "{ten} có tốt không?", ten=ten, ten_l=ten_l) if tot
+                        else L("pt.dh.hd.xau", "{ten} có sao không?", ten=ten, ten_l=ten_l)), "dap": tra_loi}]
     if v0:
-        hoi_dap.append({"hoi": f"Xử lý “{ten.lower()}” thế nào mà không tốn tiền?", "dap": v0})
+        hoi_dap.append({"hoi": L("pt.dh.hd.v0", "Xử lý “{ten}” thế nào mà không tốn tiền?", ten=ten.lower()), "dap": v0})
     if can_ho:
-        hoi_dap.append({"hoi": f"Ở chung cư thì xử lý “{ten.lower()}” ra sao?", "dap": can_ho[0]["noi_dung"]})
+        hoi_dap.append({"hoi": L("pt.dh.hd.can_ho", "Ở chung cư thì xử lý “{ten}” ra sao?", ten=ten.lower()), "dap": can_ho[0]["noi_dung"]})
     if kb["mau"].get("tu_choi_vat_pham"):
-        hoi_dap.append({"hoi": "Có cần mua vật phẩm phong thuỷ để hoá giải không?",
-                        "dap": kb["mau"]["tu_choi_vat_pham"] + " Việc nên làm ở trên đều là kê lại, đổi thói quen, sửa nhỏ."})
+        hoi_dap.append({"hoi": L("pt.dh.hd.vat_pham", "Có cần mua vật phẩm phong thuỷ để hoá giải không?"),
+                        "dap": kb["mau"]["tu_choi_vat_pham"] + L("pt.dh.hd.vat_pham_2", " Việc nên làm ở trên đều là kê lại, đổi thói quen, sửa nhỏ.")})
 
     ds = [x for x, _ in ds_dau_hieu() if bc.DAU_HIEU[x]["nhom"] == dh["nhom"]]
     i = ds.index(ma)
@@ -133,14 +143,14 @@ def trang_dau_hieu(ma: str, slug: str) -> dict:
     return {
         "loai": "dau_hieu", "slug": slug,
         "tieu_de": _tieu_de(ten, tot),
-        "mo_ta": t._cat(f"{ten}: {nguon_y} nói gì, nhìn theo đời sống hiện đại và việc nên làm theo 3 mức chi phí, bắt đầu "
-                        "từ việc 0 đồng."),
+        "mo_ta": t._cat(L("pt.dh.mo_ta", "{ten}: {nguon} nói gì, nhìn theo đời sống hiện đại và việc nên làm theo 3 mức chi phí, bắt đầu "
+                          "từ việc 0 đồng.", ten=ten, nguon=nguon_y, gy=(m.get("goi_y") or "")[:1].lower() + (m.get("goi_y") or "")[1:])),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
         "nguon": [kb["_nguon"]],
         "trang_thai": kb.get("trang_thai", "nhap_ai"),
         "lien_quan": list({x["slug"]: x for x in lien_quan}.values()),
-        "lien_ket_ngoai": [{"duong": DUONG_CONG_CU, "ten": "Khảo sát nhà — tích dấu hiệu, xem việc nên làm cho đúng nhà bạn"},
-                           {"duong": "/phong-thuy/huong-hop-tuoi", "ten": "Tuổi nào hợp hướng nào"}],
+        "lien_ket_ngoai": [{"duong": DUONG_CONG_CU, "ten": L("pt.dh.lk.khao_sat", "Khảo sát nhà — tích dấu hiệu, xem việc nên làm cho đúng nhà bạn")},
+                           {"duong": "/phong-thuy/huong-hop-tuoi", "ten": L("pt.dh.lk.huong_tuoi", "Tuổi nào hợp hướng nào")}],
         "minh_hoa": {"kieu": "dau_hieu", "nhom": dh["nhom"], "phong": phong[:3], "veto": veto, "tot": tot, "ten": ten},
     }
 

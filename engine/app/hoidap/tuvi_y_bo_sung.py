@@ -15,8 +15,11 @@ from __future__ import annotations
 
 import re
 
+from app import ngon_ngu
 from app.hoidap import chung
+from app.kb import ten as _ten
 from app.kb import tuvi_y_bo_sung as kyb
+from app.kb.loi import L
 from app.luangiai import tuvi_y_bo_sung as yb
 
 TIEN_TO_HOP = "Một cách đọc thêm: "
@@ -79,12 +82,19 @@ def _cham(s: str) -> str:
 def loi(m: dict, tien_to: str, nc: dict | None = None, cung: str | None = None) -> str:
     """Đoạn hiển thị: tiền tố + lời đời thường + việc nên làm (+ câu không thay lời bác sĩ khi nói sức khoẻ). Lời = bản
     tự đứng được của báo cáo (`yb.loi_hien`: không "nét này" trơ trọi, đúng nửa sáng / hãm, `{mang}` theo cung khớp)."""
+    from app.luangiai.doi_song_khuon import quyet  # noqa: PLC0415
     cung = cung or (m.get("cung_khop") or [None])[0]
-    van = (f"{tien_to}{_cham(_thuong(yb.loi_hien(m, nc, cung) or ''))} "
-           f"Việc nên làm: {_cham(_thuong(yb.viec_hien(m)))}")
-    if (m["loai"] == "suc_khoe_phong_ngua" or "sức khoẻ" in van or "sức khỏe" in van) and KHONG_THAY not in van:
-        van += " Lời này không thay lời bác sĩ."
+    van = (f"{_tien_to(tien_to)}{_cham(_thuong(yb.loi_hien(m, nc, cung) or ''))}"
+           + L("hoi.tv.yb.viec", " Việc nên làm: {v}", v=_cham(_thuong(yb.viec_hien(m)))))
+    # EN-ALL: câu "không thay lời bác sĩ" quyết theo chữ bản Việt (bản dịch theo đúng quyết định đó)
+    if quyet(("hoi.tv.yb", m["id"], "bac_si"), (m["loai"] == "suc_khoe_phong_ngua" or "sức khoẻ" in van or "sức khỏe" in van)
+             and KHONG_THAY not in van):
+        van += L("hoi.tv.yb.bac_si", " Lời này không thay lời bác sĩ.")
     return van
+
+
+def _tien_to(t: str) -> str:
+    return L("hoi.tv.yb.hop", TIEN_TO_HOP) if t == TIEN_TO_HOP else L("hoi.tv.yb.goc", TIEN_TO_GOC) if t == TIEN_TO_GOC else t
 
 
 def _muc(m: dict, vai: str, nc: dict | None = None, cung: str | None = None) -> dict:
@@ -94,7 +104,9 @@ def _muc(m: dict, vai: str, nc: dict | None = None, cung: str | None = None) -> 
     return {"loai": "y_bo_sung", "ma": m["id"], "vai": vai, "loai_y": m["loai"], "cung_khop": m.get("cung_khop", []),
             "source_id": m["source_id"], "school_id": m["school_id"], "trang_thai": m["trang_thai"],
             "loi_doi_thuong": yb.loi_hien(m, nc, cung) or "", "viec_nen_lam": yb.viec_hien(m),
-            "can_cu": "Cách đọc thêm — căn cứ: " + (dk or f"cung {cung}" if cung else dk or "lá số của bạn"),
+            "can_cu": L("hoi.tv.yb.can_cu", "Cách đọc thêm — căn cứ: ") + (
+                dk or L("hoi.tv.yb.cung", "cung {cung}", cung=_ten.ten("cung", cung)) if cung
+                else dk or L("hoi.tv.yb.la_so", "lá số của bạn")),
             "doi_thuong": loi(m, tien_to, nc, cung)}
 
 
@@ -107,6 +119,18 @@ _PHU_KD = {s: chung.chuan_hoa(s) for s in ("Hồng Loan", "Thiên Hỷ", "Lộc 
                                            "Linh Tinh", "Địa Không", "Địa Kiếp", "Cô Thần", "Quả Tú")}
 _HOI_DAI_HAN = [r"dai han", r"muoi nam", r"10 nam", r"giai doan"]
 _HOI_NAM = [r"(?<!\w)(?<!muoi )(?<!10 )nam (nay|sau|toi|20\d\d)", r"luu nien", r"tieu han"]
+
+
+_TIEN = re.compile(r"(?i)tiền|tài chính|thu nhập|giàu|của cải|tích (?:luỹ|lũy)|tiêu|kiếm|tài lộc|(?<!\w)lộc|làm ăn|kinh doanh|"
+                   r"đầu tư|(?<!\w)nợ|lương|chi tiêu|vốn|buôn bán|tài sản|tiết kiệm")
+
+
+def _noi_tien(m: dict) -> bool:
+    """Lời của ý (bản Việt — một nguồn để bản dịch cùng quyết định) có nói về tiền bạc không."""
+    from app import ngon_ngu as _nn  # noqa: PLC0415
+    with _nn.dung(_nn.MAC_DINH):
+        g = kyb.lay(m["id"]) or m
+    return bool(_TIEN.search(f"{g.get('loi_doi_thuong', '')} {g.get('viec_nen_lam', '')}"))
 
 
 def _neu_cung(pl: dict) -> bool:
@@ -157,6 +181,8 @@ def chon(pl: dict, nc: dict) -> list[dict]:
             return False
         if chi_dai_han and "dai_han" not in _ds(m["dieu_kien"].get("lop")):
             return False
+        if not han and cung_hoi == {"Tài Bạch"} and not _noi_tien(m):
+            return False                         # câu tiền bạc: ý nói về thăng tiến / nghề (cùng nhóm luật) là lạc mảng
         if chat:                                 # góc nhìn khác: luật phải nêu đích danh cung đang hỏi
             return bool(_cung_neu(m) & cung_hoi and noi & cung_hoi)
         if han:
@@ -243,30 +269,46 @@ def muc_phuong_phap(pl: dict) -> list[dict]:
         m = kyb.lay(ma)
         if not m:
             continue
-        van = (f"{_cham(m['loi_doi_thuong'])} Việc nên làm: {_cham(_thuong(m['viec_nen_lam']))}")   # không lộ ý nguồn
+        van = (f"{_cham(m['loi_doi_thuong'])}" + L("hoi.tv.yb.viec", " Việc nên làm: {v}", v=_cham(_thuong(m['viec_nen_lam']))))   # không lộ ý nguồn
         cung = [c for c in pl.get("cung") or [] if c in THU_TU_CUNG]
         if ma == "yb.pp.doi_cung_tam_phuong" and len(cung) >= 2:
             a, b = cung[0], cung[1]
             qh = _QUAN_HE.get((THU_TU_CUNG.index(b) - THU_TU_CUNG.index(a)) % 12)
-            van += (f" Với câu của bạn: {b} là {qh} của {a}, nên khi đọc {a} cần đọc cả {b}." if qh else
-                    f" Với câu của bạn: {b} không nằm trong tam phương hay cung kẹp của {a}; đọc {b} như một mảng riêng"
-                    " rồi đối chiếu.")
+            ta, tb = _ten.ten("cung", a), _ten.ten("cung", b)
+            van += (L("hoi.tv.yb.qh", " Với câu của bạn: {b} là {qh} của {a}, nên khi đọc {a} cần đọc cả {b}.", a=ta, b=tb,
+                      qh=L(f"hoi.tv.yb.qh.{(THU_TU_CUNG.index(b) - THU_TU_CUNG.index(a)) % 12}", qh)) if qh else
+                    L("hoi.tv.yb.qh_khong", " Với câu của bạn: {b} không nằm trong tam phương hay cung kẹp của {a}; đọc {b} như "
+                      "một mảng riêng rồi đối chiếu.", a=ta, b=tb))
         ra.append({"loai": "phuong_phap", "ma": ma, "noi_dung": van, "source_id": m["source_id"],
                    "school_id": m["school_id"], "trang_thai": m["trang_thai"]})
     return ra
 
 
 def la_doan_them(p: str) -> bool:
-    return p.startswith((TIEN_TO_HOP, TIEN_TO_GOC))
+    return p.startswith((TIEN_TO_HOP, TIEN_TO_GOC)) or (
+        not ngon_ngu.la_viet() and p.startswith((_tien_to(TIEN_TO_HOP), _tien_to(TIEN_TO_GOC))))
 
 
-def xep_cuoi(van: str, chan: tuple[str, ...]) -> str:
+def xep_cuoi(van: str, chan: tuple[str, ...], khoa: tuple | None = None) -> str:
     """Đoạn "Một cách đọc thêm / Một trường phái khác" đứng sau câu trả lời chính, ngay trước phần chân (tự soi, lưu ý,
-    lời tham khảo) — đoạn mở đầu dời chi tiết xuống dưới không đẩy nó lên giữa bài."""
+    lời tham khảo) — đoạn mở đầu dời chi tiết xuống dưới không đẩy nó lên giữa bài.
+
+    EN-ALL: `khoa` (lượt "bản Việt quyết") — thứ tự đoạn dựng theo chữ Việt (tiền tố, mẫu phần chân); bản dịch dùng đúng
+    hoán vị bản Việt đã chọn (số đoạn khác thì giữ nguyên)."""
     p = van.split("\n\n")
-    them_ = [x for x in p if la_doan_them(x)]
-    if not them_:
+    tt = _thu_tu_xep(p, chan)
+    if khoa is not None:
+        from app.luangiai import doi_song_khuon as _dsk  # noqa: PLC0415
+        tt = _dsk.quyet(khoa, tt)
+    if not tt or len(tt) != len(p):
         return van
-    con = [x for x in p if not la_doan_them(x)]
-    i = next((k for k, x in enumerate(con) if any(re.match(m, x) for m in chan)), len(con))
-    return "\n\n".join(con[:i] + them_ + con[i:])
+    return "\n\n".join(p[i] for i in tt)
+
+
+def _thu_tu_xep(p: list[str], chan: tuple[str, ...]) -> list[int] | None:
+    them_ = [k for k, x in enumerate(p) if la_doan_them(x)]
+    if not them_:
+        return None
+    con = [k for k, x in enumerate(p) if not la_doan_them(x)]
+    i = next((j for j, k in enumerate(con) if any(re.match(m, p[k]) for m in chan)), len(con))
+    return con[:i] + them_ + con[i:]

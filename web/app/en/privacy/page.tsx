@@ -18,6 +18,7 @@ export default function Page() {
         <li><b>Name and date of birth</b> (numerology): kept in your browser (localStorage) and sent to our calculation server only to compute your numbers. They are not stored on the server with your identity.</li>
         <li><b>Tarot cards you draw and the question you type</b>: sent only to build the reading. The question is not stored and is not returned by the server. Your drawing history is kept only in your browser.</li>
         <li><b>Questions in the question box</b>: answered from a fixed knowledge base. A filtered copy of the question text (no name, no date) may be kept for quality review of the answers.</li>
+        <li><b>Questions you type in the BaZi and Zi Wei Dou Shu question boxes</b>: answers are always built by our own calculation server. When the AI question check is switched on (currently off — the start date will be shown here), the question text alone — no name, no birth data, no chart — may be sent to a third-party AI provider (servers in the United States) only to label it for safety and topic, so that a message asking for help is recognised. It is not stored by us and not used to train AI models.</li>
         <li><b>Usage analytics</b> (Google Tag Manager / Analytics, PostHog): page views and anonymous interaction events. You can opt out of Google Analytics via the cookie settings on the Vietnamese site.</li>
       </ul>
       <h2>What we do not do</h2>

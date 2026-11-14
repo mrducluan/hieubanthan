@@ -1,0 +1,785 @@
+{
+ "_nguon": "EN-ALL GĐ 6 — bản phủ tiếng Anh của đọc quẻ đời thường (mức, nhóm việc, chủ đề, lục thú, động hoá, vị trí hào, làm rõ, mẫu). Ban biên tập viết từ nghĩa bản Việt; chờ người bản xứ duyệt. Không phủ 'tu_khoa' (nhận diện câu hỏi thuộc nhánh hỏi đáp) và 'cum_cam'.",
+ "_trang_thai": "bien_tap",
+ "trang_thai": {
+  "tuan_khong": "falling into a gap (the void): the time has not come yet; it will be clearer once this stretch has passed",
+  "nguyet_pha": "clashed by this month (month break): hard to complete this month; look again next month",
+  "am_dong": "still, but stirred by the day (hidden movement): it seems quiet, but it is shifting underneath",
+  "nhat_pha": "weak and clashed by the day (day break): today is not the moment",
+  "nhap_mo": "locked in (entering the storehouse): the matter is stuck, waiting for the day it opens",
+  "nhat_hop": "tied down by the day (day combination): the matter is on hold, waiting for a clashing day to free it"
+ },
+ "muc": {
+  "thuan": {
+   "nhan": "Favourable",
+   "mo_ta": "The hexagram leans favourable: what you asked about has momentum — the task is to keep the pace and do it the right way.",
+   "ket_luan": "This has momentum. Go ahead, but do it the right way."
+  },
+  "can_bang": {
+   "nhan": "Balanced",
+   "mo_ta": "The hexagram does not lean clearly either way: the outcome depends on how and when you act.",
+   "ket_luan": "This is not settled yet. The result lies in how you go about it and when."
+  },
+  "can_chu_dong": {
+   "nhan": "Needs care",
+   "mo_ta": "The hexagram shows resistance: not that it cannot be done, but that it needs more preparation, a different moment or a different approach.",
+   "ket_luan": "This is meeting resistance. Not a reason to give up — change the approach or the timing."
+  }
+ },
+ "nhom_hanh_dong": {
+  "thuan": "Do now",
+  "can_bang": "Do to see more clearly",
+  "can_chu_dong": "Avoid or hold back"
+ },
+ "chu_de": {
+  "chuyen_viec": {
+   "ten": "Changing jobs or starting a new one",
+   "hanh_dong": {
+    "thuan": [
+     "Set a date to give your answer — do not let the offer go cold.",
+     "Ask clearly what you will be doing in the first 3 months.",
+     "Ask for real figures on pay, bonuses and hours."
+    ],
+    "can_bang": [
+     "Write down 3 things you gain and 3 things you lose by going.",
+     "Talk openly with your current boss before deciding.",
+     "Keep the old door open while you try the new one."
+    ],
+    "can_chu_dong": [
+     "Do not hand in your notice until you have a firm job in hand.",
+     "Find out about the new place properly: ask someone who works there.",
+     "Let this busy spell pass, then think again."
+    ]
+   },
+   "cau_tiep": [
+    "What should I prepare before starting a new job?",
+    "How can I talk to my current boss tactfully?"
+   ]
+  },
+  "thang_tien": {
+   "ten": "Promotions and interviews",
+   "hanh_dong": {
+    "thuan": [
+     "Prepare 3 things you have achieved, with figures.",
+     "Ask for a conversation with the person who decides.",
+     "Take on one hard task so your ability shows."
+    ],
+    "can_bang": [
+     "Ask directly what the selection criteria are.",
+     "Find someone who went before you and ask about their experience.",
+     "Do your current job well; do not rush to ask for more."
+    ],
+    "can_chu_dong": [
+     "This is not the moment to push for an answer.",
+     "Look at what you still lack against the requirements.",
+     "Keep good relations even if it does not happen this round."
+    ]
+   },
+   "cau_tiep": [
+    "What should I show in the interview?",
+    "If it does not happen this time, what should I do next?"
+   ]
+  },
+  "kinh_doanh": {
+   "ten": "Opening a shop, a business or investing",
+   "hanh_dong": {
+    "thuan": [
+     "Try it small first; expand once you have real figures.",
+     "Write down the money you put in and when you expect it back.",
+     "Decide from the start who looks after the money."
+    ],
+    "can_bang": [
+     "Recalculate 6 months of cash flow, including months with no customers.",
+     "Ask two people in the trade about the real difficulties.",
+     "Do not borrow more to do it."
+    ],
+    "can_chu_dong": [
+     "Only use money your household could afford to lose.",
+     "Push back the opening date to prepare better.",
+     "Check whether your partners think about money the same way you do."
+    ]
+   },
+   "cau_tiep": [
+    "How much capital should I start with?",
+    "Should I do it alone or with others?"
+   ]
+  },
+  "hop_tac": {
+   "ten": "Partnerships and business partners",
+   "hanh_dong": {
+    "thuan": [
+     "Write a clear agreement on who does what and who gets what.",
+     "Start with one small project together.",
+     "Keep a steady rhythm of talking every week."
+    ],
+    "can_bang": [
+     "Ask people who have worked with them before.",
+     "Agree how you split both losses and profits.",
+     "Leave a way out if it does not work."
+    ],
+    "can_chu_dong": [
+     "Do not sign while anything is still unclear.",
+     "Keep your money and accounts separate.",
+     "Say openly what is bothering you."
+    ]
+   },
+   "cau_tiep": [
+    "What should I put in a partnership agreement?",
+    "What signs show it is time to end a partnership?"
+   ]
+  },
+  "tien_no": {
+   "ten": "Money owed and getting it back",
+   "hanh_dong": {
+    "thuan": [
+     "Remind them at the right time, to the right person, with a specific date.",
+     "Suggest paying back in instalments on a clear schedule.",
+     "Keep a record of every conversation."
+    ],
+    "can_bang": [
+     "Ask directly where they are stuck.",
+     "Accept part of it first rather than waiting for all of it.",
+     "Find a respected go-between to help."
+    ],
+    "can_chu_dong": [
+     "Stop lending more for now.",
+     "Keep papers and messages as evidence.",
+     "Treat this money as gone to spare yourself the worry — anything that comes back is a bonus."
+    ]
+   },
+   "cau_tiep": [
+    "How can I remind someone of a debt and keep the friendship?",
+    "When is it time to go to the law?"
+   ]
+  },
+  "mua_nha": {
+   "ten": "Buying a house or land",
+   "hanh_dong": {
+    "thuan": [
+     "Check the legal papers with the proper authority.",
+     "Visit the house in the evening and when it rains.",
+     "Agree a price with a deadline; do not drag it out."
+    ],
+    "can_bang": [
+     "Look at two more places to have something to compare with.",
+     "Work out a loan where the monthly repayment is under a third of your income.",
+     "Ask the neighbours about the area."
+    ],
+    "can_chu_dong": [
+     "Do not pay a deposit before reading the papers carefully.",
+     "Hire an independent person to check the legal side.",
+     "Step back for a moment — good prices will still be there."
+    ]
+   },
+   "cau_tiep": [
+    "What papers should I check before paying a deposit?",
+    "Does this house's facing suit my birth year?"
+   ]
+  },
+  "ban_nha": {
+   "ten": "Selling a house or land",
+   "hanh_dong": {
+    "thuan": [
+     "Get the papers ready so you can close quickly when a buyer comes.",
+     "Price it on real recent sales.",
+     "Fix the small things that make the house look brighter."
+    ],
+    "can_bang": [
+     "Set the lowest price you would accept before advertising.",
+     "Advertise through two channels and compare the enquiries.",
+     "Ask clearly whether the buyer already has the money."
+    ],
+    "can_chu_dong": [
+     "Do not rush to cut the price because of one criticism.",
+     "Ask yourself whether you really need to sell right now.",
+     "Be careful with buyers who push for a quick deposit."
+    ]
+   },
+   "cau_tiep": [
+    "How should I price it?",
+    "Should I sell now or wait a while?"
+   ]
+  },
+  "xe_co": {
+   "ten": "Buying a car or another vehicle",
+   "hanh_dong": {
+    "thuan": [
+     "Test-drive on the roads you use every day.",
+     "Count the monthly running costs, not just the price.",
+     "Close within the week, with the papers ready."
+    ],
+    "can_bang": [
+     "Compare two models and ask people who own them.",
+     "Have a mechanic you trust look at a used car.",
+     "Do not take a long loan to buy a car."
+    ],
+    "can_chu_dong": [
+     "Step back and see whether your current vehicle still works well.",
+     "Check the vehicle's history carefully.",
+     "Do not let the seller rush you."
+    ]
+   },
+   "cau_tiep": [
+    "Should I buy new or used?",
+    "What should I check when buying a used car?"
+   ]
+  },
+  "thi_cu": {
+   "ten": "Exams and studies",
+   "hanh_dong": {
+    "thuan": [
+     "Revise the parts that come up most and do real papers against the clock.",
+     "Get enough sleep the week before the exam.",
+     "Prepare your documents and route the day before."
+    ],
+    "can_bang": [
+     "Ask people who have taken it about the real difficulties.",
+     "Split revision into days, with someone to check on you.",
+     "Have a plan B in case the result is not what you hoped."
+    ],
+    "can_chu_dong": [
+     "Postpone if you can — if you are not ready, do not sit it yet.",
+     "Go back over the basics; do not rely on tricks.",
+     "Cut back on other things to focus."
+    ]
+   },
+   "cau_tiep": [
+    "How should I revise in the time left?",
+    "If I do not pass this time, what should I do?"
+   ]
+  },
+  "giay_to": {
+   "ten": "Paperwork, contracts, visas and waiting for news",
+   "hanh_dong": {
+    "thuan": [
+     "Submit everything in one go; check every page before sending.",
+     "Note the date you submitted and who received it.",
+     "Follow up on progress when it is due."
+    ],
+    "can_bang": [
+     "Ask clearly what is missing and add it straight away.",
+     "Keep spare copies in case it is sent back.",
+     "Read the penalty clauses carefully before signing."
+    ],
+    "can_chu_dong": [
+     "Do not sign while there is anything you do not understand.",
+     "Ask someone who knows to read the file again.",
+     "Allow extra time as a buffer."
+    ]
+   },
+   "cau_tiep": [
+    "Which clauses in the contract should I watch?",
+    "If my application is slow, who should I ask?"
+   ]
+  },
+  "tinh_cam": {
+   "ten": "Love and that special someone",
+   "hanh_dong": {
+    "thuan": [
+     "Say honestly what you want; do not guess what they think.",
+     "Arrange to meet in person, not just by message.",
+     "Keep a steady pace; do not rush."
+    ],
+    "can_bang": [
+     "Ask yourself: do I feel at ease when I am with this person?",
+     "Give both of you a clear period of time to reflect.",
+     "Talk with a friend who sees things clearly."
+    ],
+    "can_chu_dong": [
+     "Do not make big decisions while emotions are running high.",
+     "Take a step back and look after your own life.",
+     "Set clear boundaries around what you will not accept."
+    ]
+   },
+   "cau_tiep": [
+    "How should I open up to them?",
+    "How do I know whether to continue or stop?"
+   ]
+  },
+  "hon_nhan": {
+   "ten": "Engagement and marriage",
+   "hanh_dong": {
+    "thuan": [
+     "Talk clearly about three things: money, children and both families.",
+     "Set the date together; do not leave it all to one side.",
+     "Meet both families early."
+    ],
+    "can_bang": [
+     "Talk about what you each fear most about living together.",
+     "Give each other more time living close to understand each other.",
+     "Ask wise elders on both sides for advice."
+    ],
+    "can_chu_dong": [
+     "Do not force a timeline while one of you is still unsure.",
+     "Look at whether the things you often argue about can be solved.",
+     "See a marriage counsellor if needed."
+    ]
+   },
+   "cau_tiep": [
+    "What should the two of us discuss first?",
+    "How can our two families understand each other?"
+   ]
+  },
+  "hon_nhan_tt": {
+   "ten": "A marriage in trouble or separation",
+   "hanh_dong": {
+    "thuan": [
+     "Set aside a time to talk with no children and no phones.",
+     "Say what you need, without listing their faults.",
+     "Agree one small thing to do together this week."
+    ],
+    "can_bang": [
+     "Write down what is still there between you and what has been lost.",
+     "Ask an older person both of you trust.",
+     "Do not bring up separating while you are angry."
+    ],
+    "can_chu_dong": [
+     "Keep yourself and your children safe before anything else.",
+     "Take a short time apart with a set date to meet again.",
+     "Write down shared money and papers clearly."
+    ]
+   },
+   "cau_tiep": [
+    "Where should the two of us start talking?",
+    "Does the other person still want to keep the family together?"
+   ]
+  },
+  "gia_dinh": {
+   "ten": "Parents and family",
+   "hanh_dong": {
+    "thuan": [
+     "Visit or call regularly, on a schedule.",
+     "Ask your parents' view before deciding big things.",
+     "Split the jobs clearly between siblings."
+    ],
+    "can_bang": [
+     "Listen to everything first, then say your piece.",
+     "Pick a time when everyone is calm to talk.",
+     "Ask someone your parents trust to be the bridge."
+    ],
+    "can_chu_dong": [
+     "Do not argue about old matters right now.",
+     "Take care of the concrete things in front of you and let the gossip go.",
+     "Keep your own strength so you can keep caring for them in the long run."
+    ]
+   },
+   "cau_tiep": [
+    "How should I talk with my parents?",
+    "How can we share the family duties fairly between siblings?"
+   ]
+  },
+  "con_cai": {
+   "ten": "Children",
+   "hanh_dong": {
+    "thuan": [
+     "Spend time alone with your child every day, even briefly.",
+     "Ask your child what they want before arranging things.",
+     "Keep regular eating and sleeping habits."
+    ],
+    "can_bang": [
+     "Talk with teachers and people close to your child.",
+     "Lower expectations to what your child can manage.",
+     "Agree one way of raising them as a family."
+    ],
+    "can_chu_dong": [
+     "Do not make big decisions for your child.",
+     "Keep medical appointments if it is about health — do not guess.",
+     "Look for a professional instead of asking around."
+    ]
+   },
+   "cau_tiep": [
+    "How can I be there for my child right now?",
+    "How can the whole family agree on how to raise our child?"
+   ]
+  },
+  "suc_khoe": {
+   "ten": "Health and daily rhythm",
+   "hanh_dong": {
+    "thuan": [
+     "Keep a fixed bedtime and cut down screens in the evening.",
+     "Go for regular check-ups on time.",
+     "Move gently every day."
+    ],
+    "can_bang": [
+     "Write down a week of eating and sleeping to see where your energy drains.",
+     "Drop one thing you are carrying.",
+     "Ask the doctor what worries you instead of searching and guessing."
+    ],
+    "can_chu_dong": [
+     "Rest properly, without taking work with you.",
+     "Follow the doctor's instructions and do not stop halfway.",
+     "Ask a family member to go to appointments with you."
+    ]
+   },
+   "cau_tiep": [
+    "Which habit should I start changing first?",
+    "Where is my daily rhythm draining me?"
+   ]
+  },
+  "di_xa": {
+   "ten": "Travelling far, moving home or going abroad",
+   "hanh_dong": {
+    "thuan": [
+     "Settle your accommodation and job before you go.",
+     "Prepare your papers and 3 months of emergency money.",
+     "Arrange to meet someone you know at the destination."
+    ],
+    "can_bang": [
+     "Make a short trial trip first.",
+     "Work out whether you can come back if it does not suit you.",
+     "Talk it through properly with the family staying behind."
+    ],
+    "can_chu_dong": [
+     "Postpone until things at home are settled.",
+     "Read contracts and conditions carefully before signing.",
+     "Do not go through unknown middlemen."
+    ]
+   },
+   "cau_tiep": [
+    "What do I need to prepare before going?",
+    "Should I go alone or with the whole family?"
+   ]
+  },
+  "mat_do": {
+   "ten": "Finding lost things",
+   "hanh_dong": {
+    "thuan": [
+     "Go back to where you just were and ask whoever looks after the place.",
+     "Post in local community groups straight away.",
+     "Check the least likely places at home again."
+    ],
+    "can_bang": [
+     "Lock your accounts and report lost documents first.",
+     "Ask to see nearby security cameras.",
+     "Wait a few days — many things turn up on their own."
+    ],
+    "can_chu_dong": [
+     "Get documents replaced early; do not wait.",
+     "Learn from where you kept it.",
+     "Let it go if it is not very valuable."
+    ]
+   },
+   "cau_tiep": [
+    "Where should I look first?",
+    "Should I report lost documents straight away?"
+   ]
+  },
+  "tranh_chap": {
+   "ten": "Disputes and legal cases",
+   "hanh_dong": {
+    "thuan": [
+     "Gather all papers, messages and witnesses.",
+     "Consult a lawyer before filing anything.",
+     "Suggest meeting to talk before going to court."
+    ],
+    "can_bang": [
+     "Weigh the cost and time of pursuing it against what you could recover.",
+     "Find a neutral person to mediate.",
+     "Do not tell the story online."
+    ],
+    "can_chu_dong": [
+     "Stay calm and do not retaliate.",
+     "Prefer a settlement if that door is still open.",
+     "Protect your evidence; do not act in a hurry."
+    ]
+   },
+   "cau_tiep": [
+    "Should I settle or fight it to the end?",
+    "What evidence do I need to prepare?"
+   ]
+  },
+  "ban_be": {
+   "ten": "Friends, colleagues and rivals",
+   "hanh_dong": {
+    "thuan": [
+     "Reach out first and arrange to meet.",
+     "Be clear about money with friends.",
+     "Keep the promises you made."
+    ],
+    "can_bang": [
+     "Ask directly about what is bothering you.",
+     "Expect less and keep the relationship at a comfortable level.",
+     "Do not talk about one person to another."
+    ],
+    "can_chu_dong": [
+     "Keep some distance for a while.",
+     "Do not lend money right now.",
+     "Focus on your own work, not on comparing yourself."
+    ]
+   },
+   "cau_tiep": [
+    "How should I talk to my friend again?",
+    "How can I keep the friendship without being used?"
+   ]
+  },
+  "khac": {
+   "ten": "Something else",
+   "hanh_dong": {
+    "thuan": [
+     "Commit to one small step this week.",
+     "Tell the people involved what you plan to do.",
+     "Note a date to look back in 1 month."
+    ],
+    "can_bang": [
+     "Write down the gains and losses of each option.",
+     "Ask one more person outside the situation.",
+     "Wait for more information, then decide."
+    ],
+    "can_chu_dong": [
+     "No big moves for now.",
+     "Prepare the parts you control.",
+     "Set a date to review in 2 weeks."
+    ]
+   },
+   "cau_tiep": [
+    "Which step should I take first?",
+    "What in this situation is up to me?"
+   ]
+  },
+  "tinh_cam_nu": {
+   "ten": "Love and that special someone (that person is a woman)",
+   "hanh_dong": {
+    "thuan": [
+     "Say honestly what you want; do not guess what they think.",
+     "Arrange to meet in person, not just by message.",
+     "Keep a steady pace; do not rush."
+    ],
+    "can_bang": [
+     "Ask yourself: do I feel at ease when I am with this person?",
+     "Give both of you a clear period of time to reflect.",
+     "Talk with a friend who sees things clearly."
+    ],
+    "can_chu_dong": [
+     "Do not make big decisions while emotions are running high.",
+     "Take a step back and look after your own life.",
+     "Set clear boundaries around what you will not accept."
+    ]
+   },
+   "cau_tiep": [
+    "How should I open up to them?",
+    "How do I know whether to continue or stop?"
+   ]
+  },
+  "tinh_cam_nam": {
+   "ten": "Love and that special someone (that person is a man)",
+   "hanh_dong": {
+    "thuan": [
+     "Say honestly what you want; do not guess what they think.",
+     "Arrange to meet in person, not just by message.",
+     "Keep a steady pace; do not rush."
+    ],
+    "can_bang": [
+     "Ask yourself: do I feel at ease when I am with this person?",
+     "Give both of you a clear period of time to reflect.",
+     "Talk with a friend who sees things clearly."
+    ],
+    "can_chu_dong": [
+     "Do not make big decisions while emotions are running high.",
+     "Take a step back and look after your own life.",
+     "Set clear boundaries around what you will not accept."
+    ]
+   },
+   "cau_tiep": [
+    "How should I open up to them?",
+    "How do I know whether to continue or stop?"
+   ]
+  },
+  "hon_nhan_nu": {
+   "ten": "Engagement and marriage (that person is a woman)",
+   "hanh_dong": {
+    "thuan": [
+     "Talk clearly about three things: money, children and both families.",
+     "Set the date together; do not leave it all to one side.",
+     "Meet both families early."
+    ],
+    "can_bang": [
+     "Talk about what you each fear most about living together.",
+     "Give each other more time living close to understand each other.",
+     "Ask wise elders on both sides for advice."
+    ],
+    "can_chu_dong": [
+     "Do not force a timeline while one of you is still unsure.",
+     "Look at whether the things you often argue about can be solved.",
+     "See a marriage counsellor if needed."
+    ]
+   },
+   "cau_tiep": [
+    "What should the two of us discuss first?",
+    "How can our two families understand each other?"
+   ]
+  },
+  "hon_nhan_nam": {
+   "ten": "Engagement and marriage (that person is a man)",
+   "hanh_dong": {
+    "thuan": [
+     "Talk clearly about three things: money, children and both families.",
+     "Set the date together; do not leave it all to one side.",
+     "Meet both families early."
+    ],
+    "can_bang": [
+     "Talk about what you each fear most about living together.",
+     "Give each other more time living close to understand each other.",
+     "Ask wise elders on both sides for advice."
+    ],
+    "can_chu_dong": [
+     "Do not force a timeline while one of you is still unsure.",
+     "Look at whether the things you often argue about can be solved.",
+     "See a marriage counsellor if needed."
+    ]
+   },
+   "cau_tiep": [
+    "What should the two of us discuss first?",
+    "How can our two families understand each other?"
+   ]
+  },
+  "hon_nhan_tt_nu": {
+   "ten": "A marriage in trouble or separation (that person is a woman)",
+   "hanh_dong": {
+    "thuan": [
+     "Set aside a time to talk with no children and no phones.",
+     "Say what you need, without listing their faults.",
+     "Agree one small thing to do together this week."
+    ],
+    "can_bang": [
+     "Write down what is still there between you and what has been lost.",
+     "Ask an older person both of you trust.",
+     "Do not bring up separating while you are angry."
+    ],
+    "can_chu_dong": [
+     "Keep yourself and your children safe before anything else.",
+     "Take a short time apart with a set date to meet again.",
+     "Write down shared money and papers clearly."
+    ]
+   },
+   "cau_tiep": [
+    "Where should the two of us start talking?",
+    "Does the other person still want to keep the family together?"
+   ]
+  },
+  "hon_nhan_tt_nam": {
+   "ten": "A marriage in trouble or separation (that person is a man)",
+   "hanh_dong": {
+    "thuan": [
+     "Set aside a time to talk with no children and no phones.",
+     "Say what you need, without listing their faults.",
+     "Agree one small thing to do together this week."
+    ],
+    "can_bang": [
+     "Write down what is still there between you and what has been lost.",
+     "Ask an older person both of you trust.",
+     "Do not bring up separating while you are angry."
+    ],
+    "can_chu_dong": [
+     "Keep yourself and your children safe before anything else.",
+     "Take a short time apart with a set date to meet again.",
+     "Write down shared money and papers clearly."
+    ]
+   },
+   "cau_tiep": [
+    "Where should the two of us start talking?",
+    "Does the other person still want to keep the family together?"
+   ]
+  }
+ },
+ "luc_thu": {
+  "Thanh Long": {
+   "y": "happy news, good things, help from people who like you",
+   "doi_thuong": "the matter comes with joy and celebration, and help from people who think well of you"
+  },
+  "Chu Tước": {
+   "y": "words, paperwork, news, easy arguments",
+   "doi_thuong": "the matter involves what is said, papers and messages — say things clearly to avoid misunderstandings"
+  },
+  "Câu Trần": {
+   "y": "slowness, inertia, land, property, being held",
+   "doi_thuong": "the matter moves slowly, with lots of procedures, tied to land or an old place"
+  },
+  "Đằng Xà": {
+   "y": "worry, odd events, vagueness, roundabout ways",
+   "doi_thuong": "the matter is still vague and full of doubts, easy to overthink — ask until it is clear"
+  },
+  "Bạch Hổ": {
+   "y": "force, urgency, clashes, sharp edges",
+   "doi_thuong": "the matter is urgent and forceful, with some friction — act decisively and mind your safety"
+  },
+  "Huyền Vũ": {
+   "y": "the hidden, loss, secrets, deceit",
+   "doi_thuong": "part of the matter has not come to light; loss or concealment is possible — check carefully and keep your things safe"
+  }
+ },
+ "hoa": {
+  "tiến thần": {
+   "doi_thuong": "the matter takes one more step in the direction it is already going"
+  },
+  "thoái thần": {
+   "doi_thuong": "the matter steps back a beat and cools off unless you hold on to it"
+  },
+  "hồi đầu sinh": {
+   "doi_thuong": "this very change gives the matter extra strength"
+  },
+  "hồi đầu khắc": {
+   "doi_thuong": "the move is knocked back by its own result — if you act, plan your way out"
+  },
+  "hoá tiết": {
+   "doi_thuong": "the move drains your strength; you give more than you get"
+  },
+  "hoá khắc xuất": {
+   "doi_thuong": "you cut things back yourself — firm, but it takes effort"
+  },
+  "hoá tỷ": {
+   "doi_thuong": "it changes but stays the same in nature"
+  },
+  "phục ngâm": {
+   "doi_thuong": "marking time, groaning but not moving"
+  },
+  "phản ngâm": {
+   "doi_thuong": "flipping back and forth, changing your mind again and again"
+  }
+ },
+ "vi_tri_hao": {
+  "1": "the bottom line — the matter is at its very start, still early; look after the foundations",
+  "2": "line two — the matter has a footing and is under way inside; it needs people to work with",
+  "3": "line three — the matter reaches a threshold; it is easy to rush, so be careful during the change",
+  "4": "line four — the matter has just entered a new stage, close to the person who decides; keep to proper form",
+  "5": "line five — the matter is at its peak, the right moment to close, but you must live up to the position",
+  "6": "the top line — the matter has reached its end; think about wrapping up, do not try to drag it on"
+ },
+ "the_ung": "In a hexagram, the Self line stands for you and the Other line for the person or matter on the other side.",
+ "lam_ro": {
+  "mua_ban": {
+   "cau_hoi": "Are you buying or selling? The two are read from different lines of the hexagram.",
+   "lua_chon": [
+    {
+     "nhan": "I am buying"
+    },
+    {
+     "nhan": "I am selling"
+    }
+   ]
+  },
+  "tinh_cam": {
+   "cau_hoi": "Is there one person in particular? If so, tell us whether they are a woman or a man, so the reading looks at the right line for them. No one specific yet? Just skip.",
+   "lua_chon": [
+    {
+     "nhan": "They are a woman"
+    },
+    {
+     "nhan": "They are a man"
+    },
+    {
+     "nhan": "No one specific — skip"
+    }
+   ]
+  },
+  "hai_viec": {
+   "cau_hoi": "One hexagram can only shed light on one matter. Which would you like to look at first?"
+  }
+ },
+ "mau": {
+  "phuc_than": "What you asked about has not shown itself in the hexagram yet: the person or thing you care about is still in the background, and it is not yet time for it to appear.",
+  "khong_hao_dong": "There are no changing lines: the matter is quiet and no big shift is under way — read it by the hexagram's overall message.",
+  "suc_khoe": "This is a suggestion about daily rhythm from the old texts, not a substitute for a doctor — if anything feels wrong, get it checked.",
+  "luc_do": "Looking at the moment you asked, this matter has some support behind it — even though the hexagram's words still urge care. Use that support for the part you have already prepared well, and do not start anything new yet.",
+  "mot_que_mot_viec": "One hexagram, one matter: to ask about something else, ask a new question; for this matter, reflect on this hexagram rather than casting again."
+ }
+}

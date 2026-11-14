@@ -26,6 +26,8 @@ import type { LaSoBatTu, LuuNienBatTu } from "@/lib/battu-kieu";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang } from "@/lib/hoi-mang";
+import { useGoiYDau } from "@/lib/goi-y-dau";
+import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 import { kemTinhTrang, laSoTuHoSo, tenGoi, tenGoiEn, useHoSo } from "@/lib/hoso";
 import { taiAnhHtml } from "@/lib/tai-anh-html";
 import { cn } from "@/lib/utils";
@@ -58,7 +60,8 @@ export function BatTu() {
   const c = useChu();
   const { c: cb, en, tru } = useChuBatTu();
   const d = useDuong();
-  const GOI_Y = GOI_Y_KHOA.map((g) => ({ nhom: cb(g.nhom), cau: g.cau.map((k) => cb(k)) }));
+  // EN-AI: bản Anh — chip = câu chuẩn engine (bấm là hỏi luôn), ô gõ tự do vẫn ngay dưới.
+  const GOI_Y = useGoiYDau("battu", en, GOI_Y_KHOA.map((g) => ({ nhom: cb(g.nhom), cau: g.cau.map((k) => cb(k)) })), useChuHoiDap().c("goi_y"));
   const [gioTy, setGioTy] = useState<"da_ty" | "sang_ngay">("da_ty");
   // HTT-1: giờ sinh theo đồng hồ (mặc định) hay mặt trời thực tại kinh độ nơi sinh — engine lập lại tứ trụ.
   const [gioSinh, setGioSinh] = useState<"dong_ho" | "mat_troi">("dong_ho");
@@ -300,7 +303,7 @@ export function BatTu() {
             <div className="-mt-2 overflow-hidden rounded-[1.25rem] shadow-card"><ChanLaSo giaoDien={giaoDien} tieuDe={cb("chan.tieu_de")} duong={d("/bat-tu")} /></div>
           </div>
         )}
-        {ls && <SachXuaNoi ds={ls.sach_xua} moDun="battu" en={en} />}
+        {ls && <SachXuaNoi ds={ls.sach_xua} moDun="battu" />}
         {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{CO_CO_LOI.has(c.loai) ? cb(`co.${c.loai}`) : c.chi_tiet}</p>)}
       </section>
 

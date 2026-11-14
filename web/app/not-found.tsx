@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { Button } from "@/components/ui/button";
+import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
+import NotFoundEn from "@/app/en/not-found";
 
-export const metadata: Metadata = { title: "Không tìm thấy trang", robots: { index: false } };
+// EN-ALL GĐ 5: trang Việt được rewrite từ URL Anh (vd /en/feng-shui/home-signs/<slug lạ> → notFound() trong route Việt) dùng
+// 404 này — bản Anh hiện đúng trang 404 tiếng Anh (app/en/not-found.tsx). Bản Việt không đổi.
+export async function generateMetadata(): Promise<Metadata> {
+  if ((await ngonNguMayChu()).ngonNgu === "en") return { title: { absolute: "Page not found — Hieuban" }, robots: { index: false, follow: true } };
+  return { title: "Không tìm thấy trang", robots: { index: false } };
+}
 
-export default function NotFound() {
+export default async function NotFound() {
+  if ((await ngonNguMayChu()).ngonNgu === "en") return <NotFoundEn />;
   return (
     <div className="mx-auto max-w-md py-16 text-center">
       <p className="eyebrow">404</p>

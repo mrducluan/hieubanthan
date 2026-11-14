@@ -82,6 +82,8 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO: nhanOVao, goiY
   const cuoi = useRef<HTMLDivElement>(null);
   const soId = useRef(0);
   const daHoi = tin.filter((t) => t.ai === "ban");
+  // Bản Anh: dải câu gợi ý không lặp câu đã hỏi hoặc câu "Hỏi tiếp" của câu trả lời mới nhất (chữ bản Việt giữ như cũ).
+  const daGoiY = new Set([...daHoi.map((t) => t.van ?? ""), ...([...tin].reverse().find((t) => t.ai !== "ban")?.hoiTiep ?? [])]);
   // Mã mời cho thẻ chia sẻ câu trả lời — một lượt gọi cho cả khung, chỉ khi đã đăng nhập (không mỗi câu trả lời một lượt).
   const nguoi = useNguoiDung();
   const maMoi = useMaCuaToi(Boolean(nguoi) && tin.length > 0);
@@ -263,7 +265,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO: nhanOVao, goiY
           </nav>
         )}
         <div className="-mx-1 mb-3 flex gap-2 overflow-x-auto px-1 pb-1 [mask-image:linear-gradient(to_right,black_88%,transparent)] [scrollbar-width:none]" aria-label={hd.c("goi_y")}>
-          {goiY.flatMap((g) => g.cau.map((c) => (
+          {goiY.flatMap((g) => g.cau.filter((c) => !hd.en || !daGoiY.has(c)).map((c) => (
             <button key={c} type="button" disabled={dang} onClick={() => chonGoiY(c)} title={g.nhom}
               className="min-h-10 shrink-0 rounded-full border border-line bg-surface-2/60 px-3.5 py-2 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg active:scale-[0.97] disabled:opacity-50">
               {c}

@@ -42,20 +42,41 @@ def _goc(g: str) -> str:
     return ", ".join(ra)
 
 
-_QH = re.compile(r"^(?P<tru>.+?): (?P<gia>\S+) (?P<loai>.+?)(?P<them> \(.+\))?$")
+def _tach_qh(s: str) -> dict | None:
+    r"""Tách "năm – ngày: Ngọ–Ngọ tự hình (hoá Thổ)" → {tru, gia, loai, them} bằng vòng lặp chuỗi, cùng kết quả với
+    regex `^(.+?): (\S+) (.+?)( \(.+\))?$` (đã thay vì CodeQL: ReDoS) — thử từng ": " từ trái như regex lùi lại."""
+    k = s.find(": ", 1)
+    while k != -1:
+        tru, sau = s[:k], s[k + 2:]
+        j = 0
+        while j < len(sau) and not sau[j].isspace():
+            j += 1
+        if 0 < j < len(sau) - 1 and sau[j] == " ":
+            gia, loai = sau[:j], sau[j + 1:]
+            them = None
+            if loai.endswith(")"):
+                i = loai.find(" (", 1)
+                while i != -1:
+                    if len(loai) - i >= 4:
+                        loai, them = loai[:i], loai[i:]
+                        break
+                    i = loai.find(" (", i + 1)
+            return {"tru": tru, "gia": gia, "loai": loai, "them": them}
+        k = s.find(": ", k + 1)
+    return None
 
 
 def mo_ta_quan_he(q: dict) -> str:
     """"năm – ngày: Ngọ–Ngọ tự hình" → "Year – Day: Wu–Wu self-punishment" (dựng lại từ mã của chính mục)."""
-    m = _QH.match(q.get("mo_ta", ""))
+    m = _tach_qh(q.get("mo_ta", ""))
     if not m:
         return q.get("mo_ta", "")
-    tru = " – ".join(_tru(t) for t in m.group("tru").split(" – "))
-    gia = "–".join(_can_chi(x) for x in m.group("gia").split("–"))
-    loai = _ten.ten("quan_he", m.group("loai").strip())
+    tru = " – ".join(_tru(t) for t in m["tru"].split(" – "))
+    gia = "–".join(_can_chi(x) for x in m["gia"].split("–"))
+    loai = _ten.ten("quan_he", m["loai"].strip())
     them = ""
-    if m.group("them"):
-        t = m.group("them").strip()[1:-1]
+    if m["them"]:
+        t = m["them"].strip()[1:-1]
         if t.startswith("hoá "):
             them = " " + L("battu.qh.hoa", t, hanh=_ten.ten("hanh", t[4:]))
         elif t.endswith(" cục"):

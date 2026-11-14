@@ -115,10 +115,29 @@ QUY_TAC_EN: list[tuple[re.Pattern[str], str]] = [(re.compile(m), t) for m, t in 
 ]]
 
 
+# EN-ALL GĐ 4: tên Anh có chú giải trong ngoặc ("Lu (Prosperity)", "Temple (brightest)", "Xun (Void)") ghép vào khung câu
+# vốn đã có ngoặc → ngoặc lồng / ngoặc liền nhau. Gộp lại cho dễ đọc: "Qi Sha (Temple (brightest))" → "Qi Sha (Temple,
+# brightest)"; "Lu (Prosperity) (Tian Ji, stem Yi)" → "Lu (Prosperity; Tian Ji, stem Yi)". Chỉ trong một chuỗi JSON
+# (không vượt dấu nháy), chỉ bản ngôn ngữ khác tiếng Việt.
+_NGOAC_LONG = re.compile(r'\(([^()"\n]*?)\s*\(([^()"\n]*)\)([^()"\n]*)\)')
+_NGOAC_LIEN = re.compile(r'\(([^()"\n]*)\) \(([^()"\n]*)\)')
+
+
+def _gon_ngoac(van_ban: str) -> str:
+    for _ in range(3):
+        moi = _NGOAC_LONG.sub(lambda m: f"({m.group(1)}, {m.group(2)}{m.group(3)})", van_ban)
+        moi = _NGOAC_LIEN.sub(r"(\1; \2)", moi)
+        if moi == van_ban:
+            break
+        van_ban = moi
+    return van_ban
+
+
 def loc(van_ban: str) -> str:
     if not ngon_ngu.la_viet():
         for mau, thay in QUY_TAC_EN:
             van_ban = mau.sub(thay, van_ban)
+        van_ban = _gon_ngoac(van_ban)
     for mau, thay in QUY_TAC:
         van_ban = mau.sub(thay, van_ban)
     return van_ban

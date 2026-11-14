@@ -541,6 +541,70 @@ def _chan(cau: str | None) -> str | None:
     return "dan_huong" if db == "dan_huong" else None
 
 
+# CY-2 (2026-11-14): câu về NGƯỜI KHÁC (lòng người ấy, người cùng làm ăn có trung thực không) hoặc câu "nên chú ý gì /
+# watch out for" không phải câu có / không → bỏ chip nghiêng (Nghiêng về có…), mở bằng PHÍA BẠN: điểm sáng (lá thuận nhất),
+# chỗ cần canh (lá vướng nhất), rồi việc làm trong tuần (hộp lời khuyên có sẵn). Người cùng làm ăn thêm ranh giới pháp lý.
+_LAM_AN_GIAU = re.compile(r"(co[ -]?founder|doi tac|nha dau tu|nha cung cap|cong su|nguoi gop von|partner|investor|supplier)"
+                          r".{0,40}(giau|qua mat|an chan|hiding|hide|cheat)")
+_NGUOI_XAU = re.compile(r"loi dung|choi xau|noi xau|ham hai|tieu nhan|dam sau lung|backstab|using me|use me|gossip")
+_NEN_CHU_Y = re.compile(r"(nen|can) (chu y|de y|can than|canh|tranh|luu y)|\b(watch out|watch for|be careful|careful (about|with)|"
+                        r"look out|beware|keep an eye)\b")
+
+
+_MG_TEN_RIENG = {"con_cai", "giay_to", "xuat_ngoai", "mua_xe", "hop_tac", "tieu_nhan", "ban_be", "cong_danh", "hoc_hanh"}
+
+
+def _la_viet() -> bool:
+    from app import ngon_ngu  # noqa: PLC0415
+    return ngon_ngu.la_viet()
+
+
+_NHAN_CO_KHONG = re.compile(r"^(Nghiêng về (có|không)|Có điều kiện|Chưa nên vội|Leans? (yes|no)|Lean (yes|no)|Conditional|Not yet)[^:.]{0,12}:\s*",
+                            re.IGNORECASE)
+
+
+def _phia_ban(cau: str | None, hc: dict) -> dict:
+    if not (cau or "").strip():
+        return {}
+    from app.hoidap import mo_dau  # noqa: PLC0415
+    from app.luangiai.hoi import chuan_hoa_cau  # noqa: PLC0415
+    t = chuan_hoa_cau(cau)
+    nla = mo_dau.la_nguoi_lam_an(t, cau) or bool(_LAM_AN_GIAU.search(t))
+    khac = nla or hc.get("y_dinh") == "nguoi_khac" or bool(_NGUOI_XAU.search(t))
+    pb = khac or bool(_NEN_CHU_Y.search(t))
+    # CY-3: mảng "nên chú ý" của câu (danh mục cố định) — gọi đúng tên điều được hỏi khi loại việc của Tarot chưa có
+    # (con cái, giấy tờ, ra nước ngoài, mua xe…); câu về người cùng làm ăn luôn kèm ranh giới.
+    dieu = mo_dau.dieu_hoi(t, cau if _la_viet() else None, goc=cau)
+    mg = mo_dau.mang_chu_y(dieu, t, cau)
+    ra = {"_mg": mg} if mg else {}
+    if dieu and dieu.get("ma") in ("tim_do",):
+        ra["_viec_dh"] = mo_dau.nhan_hien(dieu)     # tên điều được hỏi (danh mục) khi Tarot chưa có loại việc
+    return {**ra, "_phia_ban": pb, "_nla": nla, "_khac": khac} if pb else ra
+
+
+def _loi_la(V: list[dict], vt: list[dict], lv: str | None, i: int) -> str:
+    l, tl, lvt = _lv_cua(V[i], lv)
+    return f"{_ten(l, V[i]['nguoc'])} ({vt[i]['ten']}) — {_cau_dau(_NHAN_CO_KHONG.sub('', lvt or l['tra_loi']['n' if V[i]['nguoc'] else 'x'])).rstrip('.')}"
+
+
+def _hop_phia_ban(hop0: dict, V: list[dict], vt: list[dict], lv: str | None, viec: str, khac: bool = True) -> tuple[dict, str]:
+    """Hộp đầu của câu "phía bạn": điểm sáng + chỗ cần canh từ chính các lá đã rút (không nghiêng có / không)."""
+    diem = {"tien": 1, "dieu_kien": 0, "cho": -1}
+    ds = sorted(range(len(V)), key=lambda i: (-diem[calc.nghieng_la(V[i]["id"], V[i]["nguoc"])], i))
+    sang, canh = ds[0], ds[-1]
+
+    def loi(i: int) -> str:
+        l, tl, lvt = _lv_cua(V[i], lv)
+        return f"{_ten(l, V[i]['nguoc'])} ({vt[i]['ten']}) — {_cau_dau(_NHAN_CO_KHONG.sub('', lvt or l['tra_loi']['n' if V[i]['nguoc'] else 'x'])).rstrip('.')}"
+    cau_dau = (L("tarot.tla.phia_ban", "Phía bạn trong {viec}: lá bài không nói được người khác, chỉ nói điều bạn đang có và chỗ bạn cần canh.",
+                 viec=viec) if khac else
+               L("tarot.tla.phia_ban_chu_y", "Trong {viec}, lá bài chỉ ra điều bạn đang có và chỗ bạn cần canh.", viec=viec))
+    nd = " ".join([cau_dau, L("tarot.tla.diem_sang", "Điểm sáng: {loi}.", loi=loi(sang)),
+                   L("tarot.tla.cho_can_canh", "Chỗ cần canh: {loi}.", loi=loi(canh))])
+    h = {**hop0, "tieu_de": L("tarot.tla.tieu_de_phia_ban", "Phía bạn"), "noi_dung": nd, "muc": None}
+    return h, cau_dau
+
+
 def tra_loi_cau(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date) -> dict:
     """Nghiêng + các hộp trả lời (không gồm lời chặn). Dùng chung cho chương 'Câu trả lời' và hỏi đáp."""
     M = kb.mau("tra_loi")
@@ -553,6 +617,11 @@ def tra_loi_cau(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date) -> dict:
     if yd == "lua_chon" and not hai:
         yd = "quyet_dinh"
     viec = L("tarot.chuyen", "chuyện {x}", x=hc['nhan_viec']) if hc.get("nhan_viec") else str(M["viec_mac_dinh"])
+    if hc.get("_viec_dh") and not hc.get("nhan_viec"):
+        viec = hc["_viec_dh"]
+    if hc.get("_mg") in _MG_TEN_RIENG:
+        from app.kb import chu_y_kb as _cykb  # noqa: PLC0415
+        viec = _cykb.ten(hc["_mg"])
     vt = tb["vi_tri"]
     V = pt["vi_tri"]
     if yd == "lua_chon":
@@ -580,6 +649,8 @@ def tra_loi_cau(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date) -> dict:
     def hop_vi_tri(i: int, nhan: str | None = None, ep_loai: str | None = None) -> dict:
         l, tl, lvt = _lv_cua(V[i], lv)
         ngi = calc.nghieng_la(l["id"], V[i]["nguoc"])
+        if hc.get("_phia_ban"):                 # CY-2: câu "phía bạn" không mang nhãn có / không của từng lá
+            tl = _NHAN_CO_KHONG.sub("", tl)
         than = tl + ((" " + L("tarot.trong_chuyen", "Trong chuyện {lv}: {loi}", lv=_ten_lv(lv), loi=lvt)) if lvt else "")
         return kh.hop(ep_loai or _LOAI_NG[ngi], f"{nhan or vt[i]['ten']}: {_ten(l, V[i]['nguoc'])}", than, huong_xu_ly=l["viec"],
                       can_cu=[L("tarot.can_cu.vi_tri", "Vị trí '{vt}': {hoi}.", vt=vt[i]['ten'], hoi=vt[i]['hoi']), L("tarot.can_cu.nghieng_suc", "Lá {la} nghiêng về {ng}; {suc}.", la=_ten(l, V[i]['nguoc']), ng=_ten_ng(ngi), suc=_suc_chu(V[i]['suc']['suc'])),
@@ -626,7 +697,22 @@ def tra_loi_cau(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date) -> dict:
                       huong_xu_ly=L("tarot.tla.theo_la_khuyen", "Theo lá lời khuyên ({la}): {viec}", la=_ten(kq, V[vai['khuyen']]['nguoc']), viec=lvk or kq['viec']),
                       can_cu=[L("tarot.tla.ds_viec_can_cu", "Danh sách việc theo loại việc bạn hỏi (ban biên tập); dòng cuối lấy từ lá ở vị trí lời khuyên.")],
                       ma=kh.ma_mau(MO_DUN, "tra_loi", "viec", hc.get("viec") or lv or "chung"), phai=PHAI_CHUNG))
-    return {"nghieng": ng, "y_dinh_doc": yd, "tieu_de": tieu_de, "cau_dau": cau_dau, "hop": hop, "la_chinh": i_chinh}
+    if hc.get("_phia_ban"):
+        hop[0], cau_dau = _hop_phia_ban(hop[0], V, vt, lv, viec, bool(hc.get("_khac")))
+        tieu_de = hop[0]["tieu_de"]
+    elif hc.get("co_cau") and yd != "lua_chon" and len(V) > 1:
+        # CY-3: câu có / không vẫn nói cả hai mặt — một điểm sáng (lá thuận nhất) và một chỗ cần canh (lá vướng nhất)
+        diem = {"tien": 1, "dieu_kien": 0, "cho": -1}
+        ds = sorted(range(len(V)), key=lambda i: (-diem[calc.nghieng_la(V[i]["id"], V[i]["nguoc"])], i))
+        them = []
+        if diem[calc.nghieng_la(V[ds[0]]["id"], V[ds[0]]["nguoc"])] >= 0:
+            them.append(L("tarot.tla.diem_sang", "Điểm sáng: {loi}.", loi=_loi_la(V, vt, lv, ds[0])))
+        if ds[-1] != ds[0] and diem[calc.nghieng_la(V[ds[-1]]["id"], V[ds[-1]]["nguoc"])] <= 0:
+            them.append(L("tarot.tla.cho_can_canh", "Chỗ cần canh: {loi}.", loi=_loi_la(V, vt, lv, ds[-1])))
+        if them:
+            hop[0] = {**hop[0], "noi_dung": hop[0]["noi_dung"].rstrip() + " " + " ".join(them)}
+    return {"nghieng": ng, "y_dinh_doc": yd, "tieu_de": tieu_de, "cau_dau": cau_dau, "hop": hop, "la_chinh": i_chinh,
+            "phia_ban": bool(hc.get("_phia_ban"))}
 
 
 def _ten_viec(hc: dict | None) -> str:
@@ -718,13 +804,13 @@ def _chuong_cau_chuyen(pt: dict, tb: dict, hc: dict) -> dict:
                      cau_tu_soi=L("tarot.cc.tu_soi", "Đọc lại câu chuyện: đoạn nào giống đời bạn nhất lúc này?"), doan_truoc=True)
 
 
-def _chuong_tra_loi(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date, chan: str | None) -> dict:
+def _chuong_tra_loi(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date, chan: str | None, cau: str | None = None) -> dict:
     c = kb.chuong()["tra_loi"]
     M = kb.mau("tra_loi")
     if chan:
         from app.hoidap import chung  # noqa: PLC0415
         from app.kb import kinhdich_kb  # noqa: PLC0415
-        loi = {"an_toan": L("an_toan.khung_hoang", kinhdich_kb.mau("an_toan") or str(M["an_toan"])), "tu_choi": L("an_toan.tu_choi", str(M["tu_choi"])), "dan_huong": L("an_toan.dan_huong", chung.mau_dan_huong(""))}[chan]
+        loi = {"an_toan": chung.mau_an_toan(cau, L("an_toan.khung_hoang", kinhdich_kb.mau("an_toan") or str(M["an_toan"]))), "tu_choi": L("an_toan.tu_choi", str(M["tu_choi"])), "dan_huong": L("an_toan.dan_huong", chung.mau_dan_huong(""))}[chan]
         return kh.chuong("tra_loi", c["tieu_de"], [loi], cau_hoi=c["cau_hoi"], chan=chan)
     tl = tra_loi_cau(pt, tb, hc, ngay_xem)
     doan = []
@@ -746,7 +832,15 @@ def _chuong_tra_loi(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date, chan: str |
         doan.append(str(M["suc_khoe"]))
     if hc["y_dinh"] in ("quyet_dinh", "lua_chon"):
         doan.append(str(M["quyet_cua_ban"]))
-    return kh.chuong("tra_loi", c["tieu_de"], doan, hop=tl["hop"], muc=_MUC_NG[tl["nghieng"]["nghieng"]], tom_tat=tl["cau_dau"], cau_hoi=c["cau_hoi"],
+    if hc.get("_nla") or hc.get("_mg") == "hop_tac":
+        from app.kb import chu_y_kb as _cykb  # noqa: PLC0415
+        doan.append(_cykb.ranh_gioi("hop_tac"))
+    elif hc.get("_mg") in ("hoc_hanh", "giay_to"):
+        from app.kb import chu_y_kb as _cykb  # noqa: PLC0415
+        if _cykb.ranh_gioi(hc["_mg"]):
+            doan.append(_cykb.ranh_gioi(hc["_mg"]))
+    return kh.chuong("tra_loi", c["tieu_de"], doan, hop=tl["hop"], muc=None if tl.get("phia_ban") else _MUC_NG[tl["nghieng"]["nghieng"]],
+                     tom_tat=tl["cau_dau"], cau_hoi=c["cau_hoi"],
                      cau_tu_soi=L("tarot.tla.tu_soi", "Nếu lá bài nói đúng điều bạn sợ nhất, tuần này bạn làm gì khác đi?"), nghieng=tl["nghieng"]["nghieng"])
 
 
@@ -763,7 +857,8 @@ def hieu_cau_cong_khai(cau: str | None, chu_de: str | None = None) -> dict:
     loi = None
     if chan == "an_toan":
         from app.kb import kinhdich_kb  # noqa: PLC0415
-        loi = L("an_toan.khung_hoang", kinhdich_kb.mau("an_toan") or "")
+        from app.hoidap import chung  # noqa: PLC0415
+        loi = chung.mau_an_toan(cau, L("an_toan.khung_hoang", kinhdich_kb.mau("an_toan") or ""))
     elif hc["y_dinh"] == "nguoi_khac":
         loi = str(kb.mau("tra_loi", "nguoi_khac"))
     return {**{k: hc[k] for k in ("y_dinh", "linh_vuc", "chu_de", "viec", "nhan_viec", "lua_chon", "co_cau")}, "chan": chan, "ten_y_dinh": ten_yd,
@@ -826,9 +921,10 @@ def bao_cao(trai_bai: str, la: list[dict], *, cau_hoi: str | None = None, chu_de
     from app.luangiai import tarot_cau_hoi  # noqa: PLC0415
     hc = tarot_cau_hoi.hieu_cau(cau_hoi, chu_de)
     chan = _chan(cau_hoi)
+    hc = {**hc, **_phia_ban(cau_hoi, hc)}            # CY-2 (không ra ngoài: `hieu_cau` chỉ chép các khoá danh mục)
     linh_vuc = hc["linh_vuc"]
     hop_la = [_hop_la(v, tb, linh_vuc, pt) for v in pt["vi_tri"]]
-    tra = _chuong_tra_loi(pt, tb, hc, ngay_xem, chan)
+    tra = _chuong_tra_loi(pt, tb, hc, ngay_xem, chan, cau_hoi)
     chuyen = None if chan else _chuong_cau_chuyen(pt, tb, hc)
     chuong = [tra, *([chuyen] if chuyen else []), _chuong_tong_quan(pt, tb, hop_la), _chuong_tung_la(hop_la, tb), _chuong_dong_chay(pt, tb),
               _chuong_ben_trong(pt, tb), _chuong_thoi_diem(pt, tb, ngay_xem), _chuong_viec(pt, tb, hc),
@@ -937,6 +1033,12 @@ def _tra_loi_la(l: dict, nguoc: bool, linh_vuc: str | None, vi_tri: dict | None 
             "la": l["id"], "nguoc": nguoc, "linh_vuc": linh_vuc, "ten_la": l["ten"], "cau_tu_soi": l["cau_tu_soi"]}
 
 
+_LO_DOI = re.compile(r"(?<!\w)(?:(?:nguoi yeu|ny|chong|vo|ban trai|ban gai|anh ay|co ay|partner|husband|wife|boyfriend|girlfriend|"
+                     r"spouse|fiance\w*)(?!\w).{0,40}(?:ngoai tinh|phan boi|lua doi|co nguoi khac|cam sung|bo (?:toi|em|minh)|"
+                     r"cheat\w*|affair|unfaithful|leave me|seeing someone)|(?:vo chong|hai vo chong)(?!\w).{0,30}(?:ly hon|ly than|chia tay)"
+                     r")(?!\w)")
+
+
 def hoi(cau: str, *, trai_bai: str | None = None, la: list[dict] | None = None, ngay_xem: dt.date | None = None) -> dict:
     """Hỏi đáp tất định: nghĩa lá (xuôi / ngược, theo lĩnh vực), lá ở một vị trí của trải bài vừa rút, trải bài, khái niệm.
     An toàn / từ chối / dẫn hướng dùng MỘT bộ chặn chung; câu hỏi về người khác → chuyển về điều chính mình làm được."""
@@ -948,15 +1050,28 @@ def hoi(cau: str, *, trai_bai: str | None = None, la: list[dict] | None = None, 
     kq = {"cau_tra_loi": "", "can_cu": [], "hoi_tiep": [], "xu_ly": "tra_loi", "la": None, "nguoc": False, "linh_vuc": None}
     db = chung.dac_biet(t, goc)
     if db == "an_toan":
-        kq.update(cau_tra_loi=L("an_toan.khung_hoang", kinhdich_kb.mau("an_toan") or ""), xu_ly="an_toan")
+        kq.update(cau_tra_loi=chung.mau_an_toan(goc, L("an_toan.khung_hoang", kinhdich_kb.mau("an_toan") or "")), xu_ly="an_toan")
         return kq
     if db == "tu_choi_nhe" or chung.co(t, kb.tu_khoa("ngoai")):
-        kq.update(cau_tra_loi=L("an_toan.tu_choi", chung.mau_tu_choi(goc, t, kinhdich_kb.mau("tu_choi") or "")), xu_ly="tu_choi_nhe")
+        # 2026-11-14: bản Anh cũng nhận lời "nên chú ý / nên làm" + nhóm sức khoẻ (cấp cứu…) — bản Việt không đổi
+        kq.update(cau_tra_loi=chung.mau_tu_choi(goc, t, L("an_toan.tu_choi", kinhdich_kb.mau("tu_choi") or "")), xu_ly="tu_choi_nhe")
         return kq
     if db == "dan_huong":
         kq.update(cau_tra_loi=L("an_toan.dan_huong", chung.mau_dan_huong(t)), xu_ly="dan_huong")
         return kq
     linh_vuc = _linh_vuc(goc, None)
+    # CY-2 review 2: câu lo về người cùng làm ăn ("đối tác có trung thực không") hay về bạn đời ("người yêu có ngoại tình
+    # không", "is my partner cheating") — trả lời phía người hỏi như 5 mảng: nên để ý / việc nên làm / ranh giới (KB
+    # `chu_y_kb`), rồi gợi rút trải bài cho chính mình. Không đoán lòng người kia.
+    m_lo = "hop_tac" if chung.nguoi_lam_an(t, goc) else ("tinh_cam" if _LO_DOI.search(t) and not chung.co(t, [r"(co )?nen", r"should"]) else None)
+    if m_lo:
+        from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
+        van = L("tarot.hoi.chu_y_nk", "Ở {ten}, nên để ý {de_y}. Việc nên làm: {viec}.", ten=cyn.kb.ten(m_lo),
+                de_y=cyn.kb.de_y(m_lo), viec=cyn.kb.viec(m_lo))
+        kq.update(cau_tra_loi=f"{van} {cyn.kb.ranh_gioi(m_lo)} {kb.mau('hoi', 'nguoi_khac')}", xu_ly="nguoi_khac",
+                  linh_vuc=linh_vuc or ("tien_bac" if m_lo == "hop_tac" else "tinh_cam"),
+                  hoi_tiep=[L("tarot.hoi.tiep_qh1", "Tôi nên làm gì với mối quan hệ này?"), L("tarot.hoi.tiep_qh2", "Lá nào nói về chuyện tin nhau?")])
+        return kq
     if chung.co(t, kb.tu_khoa("nguoi_khac")):
         kq.update(cau_tra_loi=str(kb.mau("hoi", "nguoi_khac")), xu_ly="nguoi_khac", linh_vuc=linh_vuc,
                   hoi_tiep=[L("tarot.hoi.tiep_qh1", "Tôi nên làm gì với mối quan hệ này?"), L("tarot.hoi.tiep_qh2", "Lá nào nói về chuyện tin nhau?")])

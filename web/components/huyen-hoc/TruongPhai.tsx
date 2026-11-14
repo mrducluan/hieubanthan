@@ -8,24 +8,10 @@ import { RotateCcw } from "lucide-react";
 import { ChipPhai, DongKhung, DongPhai, KhungPhai, type PhaiDangDung } from "@/components/huyen-hoc/KhungPhai";
 import type { PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import type { PhaiLuuNguyet } from "@/app/api/tuvi/schema";
+import { useChuTuVi } from "@/components/huyen-hoc/chu-tu-vi";
 
-/** TV-LN — tên ngắn 5 phái lưu nguyệt (cách tính đầy đủ do engine trả về, hiện ở khung Lưu nguyệt). */
-export const TEN_PHAI_LUU_NGUYET: Record<PhaiLuuNguyet, string> = {
-  dau_quan_thai_tue: "Đẩu Quân từ Thái Tuế (phổ biến)",
-  dau_quan_tieu_han: "Đẩu Quân từ Tiểu hạn",
-  tieu_han: "Tháng Giêng tại Tiểu hạn",
-  luu_nien: "Tháng Giêng tại cung lưu niên",
-  dia_chi_thang: "Theo địa chi của tháng",
-};
-
-/** Tên rất ngắn cho chip khi khung đóng. */
-const CHIP_LUU_NGUYET: Record<PhaiLuuNguyet, string> = {
-  dau_quan_thai_tue: "Hạn tháng: Đẩu Quân",
-  dau_quan_tieu_han: "Hạn tháng: Đẩu Quân · Tiểu hạn",
-  tieu_han: "Hạn tháng: tại Tiểu hạn",
-  luu_nien: "Hạn tháng: tại lưu niên",
-  dia_chi_thang: "Hạn tháng: địa chi tháng",
-};
+/** TV-LN — 5 phái lưu nguyệt (tên: khoá `ln.<mã>` / `chip_ln.<mã>` ở lib/chu/tu-vi.ts; cách tính đầy đủ do engine trả). */
+const PHAI_LN: PhaiLuuNguyet[] = ["dau_quan_thai_tue", "dau_quan_tieu_han", "tieu_han", "luu_nien", "dia_chi_thang"];
 
 type Viet = "viet" | "trung";
 /** HTT-1 — giờ sinh: đồng hồ (mặc định, như phần lớn sách Việt) hay giờ mặt trời thực tại kinh độ nơi sinh. */
@@ -33,12 +19,6 @@ export type GioSinh = "dong_ho" | "mat_troi";
 /** TV-NHUAN3 — cách tính tháng nhuận (engine `tuvi_an_sao.THANG_NHUAN`). */
 export type ThangNhuan = "thang_sau" | "thang_chinh" | "ca_thang_sau";
 type TN = ThangNhuan;
-const CHIP_NHUAN: Record<TN, string> = {
-  thang_sau: "Nhuận: nửa sau tính tháng sau",
-  thang_chinh: "Nhuận: như tháng chính",
-  ca_thang_sau: "Nhuận: cả tháng tính tháng sau",
-};
-
 export function TruongPhai(p: {
   lich: Viet; setLich: (v: Viet) => void; lichKhac: boolean;
   phaiDoSang: PhaiDoSang; setPhaiDoSang: (v: PhaiDoSang) => void;
@@ -50,18 +30,19 @@ export function TruongPhai(p: {
   /** Giữ trạng thái mở ở trang cha: lá số tạm biến mất mỗi lần engine an lại → khung không tự đóng khi vừa bấm. */
   mo?: boolean; doiMo?: (v: boolean) => void;
 }) {
+  const { c } = useChuTuVi();
   const dangDung: PhaiDangDung[] = [
-    { nhan: p.lich === "viet" ? "Lịch Việt" : "Lịch Trung Quốc", khac: p.lich !== "viet" },
-    { nhan: p.phaiDoSang === "nam" ? "Độ sáng Nam phái" : "Độ sáng phái Trung", khac: p.phaiDoSang !== "nam" },
-    { nhan: p.hoaLinh === "viet" ? "Hoả Linh lối Việt" : "Hoả Linh Trung Châu", khac: p.hoaLinh !== "viet" },
-    ...(p.setGioSinh ? [{ nhan: p.gioSinh === "mat_troi" ? "Giờ mặt trời thực" : "Giờ đồng hồ", khac: p.gioSinh === "mat_troi" }] : []),
-    { nhan: CHIP_LUU_NGUYET[p.luuNguyet], khac: p.luuNguyet !== "dau_quan_thai_tue" },
-    ...(p.coNhuan ? [{ nhan: CHIP_NHUAN[p.thangNhuan], khac: p.thangNhuan !== "thang_sau" }] : []),
+    { nhan: p.lich === "viet" ? c("phai.lich_viet") : c("phai.lich_trung"), khac: p.lich !== "viet" },
+    { nhan: p.phaiDoSang === "nam" ? c("phai.ds_nam") : c("phai.ds_trung"), khac: p.phaiDoSang !== "nam" },
+    { nhan: p.hoaLinh === "viet" ? c("phai.hl_viet") : c("phai.hl_trung"), khac: p.hoaLinh !== "viet" },
+    ...(p.setGioSinh ? [{ nhan: p.gioSinh === "mat_troi" ? c("phai.gio_mt") : c("phai.gio_dh"), khac: p.gioSinh === "mat_troi" }] : []),
+    { nhan: c(`chip_ln.${p.luuNguyet}`), khac: p.luuNguyet !== "dau_quan_thai_tue" },
+    ...(p.coNhuan ? [{ nhan: c(`chip_nhuan.${p.thangNhuan}`), khac: p.thangNhuan !== "thang_sau" }] : []),
   ];
   const daDoi = dangDung.some((d) => d.khac);
   const nhac = [
-    p.lichKhac && "Ngày sinh của bạn lệch giữa lịch Việt và lịch Trung Quốc — đổi lịch sẽ ra lá số khác.",
-    p.coNhuan && "Bạn sinh trong tháng nhuận — mỗi phái tính một kiểu, Mệnh và Cục có thể khác.",
+    p.lichKhac && c("nhac.lich_khac"),
+    p.coNhuan && c("nhac.nhuan"),
   ].filter(Boolean).join(" ");
 
   const veMacDinh = () => {
@@ -77,45 +58,41 @@ export function TruongPhai(p: {
     <KhungPhai testId="truong-phai" mo={p.mo} doiMo={p.doiMo}
       tomTat={<ChipPhai ds={dangDung} />}
       nhac={nhac || undefined}
-      moTa={<>Mỗi phái theo một nguồn sách — có lá số đổi phái gần như y nguyên, có lá khác hẳn. Mặc định theo{" "}
-        <b className="text-fg">lối Việt</b>; hỏi đáp và luận giải bên dưới đi theo đúng lựa chọn đang xem.</>}>
-      <DongPhai ten="Âm lịch" nhan="Âm lịch dùng để lập lá số" giaTri={p.lich} doi={p.setLich}
-        luaChon={[["viet", "Lịch Việt Nam"], ["trung", "Lịch Trung Quốc"]]}
-        noiBat={p.lichKhac} nhanNoiBat="Đổi là ra lá khác"
-        goiY={p.lichKhac
-          ? "Ngày sinh của bạn rơi vào đợt lịch Việt (UTC+7) và lịch Trung Quốc (UTC+8) lệch nhau — đổi lịch sẽ ra ngày/tháng âm khác, nên Mệnh, Cục và lời luận có thể khác."
-          : "Ngày sinh của bạn hai lịch trùng nhau — đổi lịch không làm lá số thay đổi. (Sổ tử vi, phần mềm Trung Quốc đổi âm theo lịch Trung Quốc.)"} />
-      <DongPhai ten="Độ sáng & tên sao" nhan="Bảng độ sáng sao" giaTri={p.phaiDoSang} doi={p.setPhaiDoSang}
-        luaChon={[["nam", "Nam phái"], ["trung", "Phái Trung"]]}
-        goiY="Bảng miếu/vượng/đắc/hãm và tên vòng Thái Tuế (Việt: Thái Tuế, Thiếu Dương, Tử Phù…; Trung: Tuế Kiện, Hối Khí, Tiểu Hao…). Vị trí sao không đổi." />
-      <DongPhai ten="Hoả Tinh, Linh Tinh" nhan="Cách an Hoả Tinh, Linh Tinh" giaTri={p.hoaLinh} doi={p.setHoaLinh}
-        luaChon={[["viet", "Lối Việt"], ["trung", "Trung Châu"]]}
-        goiY="Sách Việt đổi chiều an theo âm dương nam nữ; phái Trung Châu an cố định — có thể đổi cả cách cục (vd Hoả Tham ↔ Linh Tham)." />
+      moTa={<>{c("phai.mo_ta_1")}{" "}
+        <b className="text-fg">{c("phai.mo_ta_2")}</b>{c("phai.mo_ta_3")}</>}>
+      <DongPhai ten={c("phai.am_lich")} nhan={c("phai.am_lich_nhan")} giaTri={p.lich} doi={p.setLich}
+        luaChon={[["viet", c("phai.lich_vn")], ["trung", c("phai.lich_tq")]]}
+        noiBat={p.lichKhac} nhanNoiBat={c("phai.doi_khac")}
+        goiY={p.lichKhac ? c("phai.lich_goi_y_khac") : c("phai.lich_goi_y_trung")} />
+      <DongPhai ten={c("phai.ds")} nhan={c("phai.ds_nhan")} giaTri={p.phaiDoSang} doi={p.setPhaiDoSang}
+        luaChon={[["nam", c("phai.nam_phai")], ["trung", c("phai.phai_trung")]]}
+        goiY={c("phai.ds_goi_y")} />
+      <DongPhai ten={c("phai.hl")} nhan={c("phai.hl_nhan")} giaTri={p.hoaLinh} doi={p.setHoaLinh}
+        luaChon={[["viet", c("phai.loi_viet")], ["trung", c("phai.trung_chau")]]}
+        goiY={c("phai.hl_goi_y")} />
       {p.setGioSinh && (
-        <DongPhai testId="chon-gio-sinh" ten="Giờ sinh" nhan="Cách lấy giờ sinh" giaTri={p.gioSinh ?? "dong_ho"} doi={p.setGioSinh}
-          luaChon={[["dong_ho", "Theo đồng hồ"], ["mat_troi", "Theo mặt trời thực"]]}
-          goiY={p.coKinhDo
-            ? "Giờ đồng hồ là giờ hành chính của múi giờ; giờ mặt trời thực lệch theo kinh độ nơi sinh (4 phút mỗi độ) và theo mùa (tới ±16 phút). Sách Việt thường lập theo đồng hồ; một số thầy Trung Quốc lập theo mặt trời. Sinh gần ranh giới canh giờ thì hai cách ra lá khác — xem cả hai."
-            : "Cần nơi sinh có kinh độ (tỉnh Việt Nam, hoặc chọn đúng thành phố khi sinh ở nước ngoài) mới tính được giờ mặt trời thực — sửa ở hồ sơ."} />
+        <DongPhai testId="chon-gio-sinh" ten={c("phai.gio")} nhan={c("phai.gio_nhan")} giaTri={p.gioSinh ?? "dong_ho"} doi={p.setGioSinh}
+          luaChon={[["dong_ho", c("phai.theo_dong_ho")], ["mat_troi", c("phai.theo_mat_troi")]]}
+          goiY={p.coKinhDo ? c("phai.gio_goi_y_co") : c("phai.gio_goi_y_khong")} />
       )}
-      <DongKhung ten="Hạn tháng (lưu nguyệt)"
-        goiY="Các phái khác nhau ở cung khởi tháng Giêng — cùng một tháng có thể rơi vào cung khác. Lá số gốc không đổi; chỉ đổi cung của từng tháng ở khung Lưu nguyệt và câu trả lời về tháng.">
-        <select aria-label="Phái tính lưu nguyệt" value={p.luuNguyet} onChange={(e) => p.setLuuNguyet(e.target.value as PhaiLuuNguyet)}
+      <DongKhung ten={c("phai.ln")}
+        goiY={c("phai.ln_goi_y")}>
+        <select aria-label={c("phai.ln_nhan")} value={p.luuNguyet} onChange={(e) => p.setLuuNguyet(e.target.value as PhaiLuuNguyet)}
           className="h-10 w-full rounded-full border border-line bg-surface/60 px-3 text-sm text-fg focus:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:w-auto">
-          {(Object.keys(TEN_PHAI_LUU_NGUYET) as PhaiLuuNguyet[]).map((k) => <option key={k} value={k}>{TEN_PHAI_LUU_NGUYET[k]}</option>)}
+          {PHAI_LN.map((k) => <option key={k} value={k}>{c(`ln.${k}`)}</option>)}
         </select>
       </DongKhung>
       {p.coNhuan && (
-        <DongPhai testId="chon-thang-nhuan" ten="Tháng nhuận" nhan="Cách tính tháng nhuận" giaTri={p.thangNhuan} doi={p.setThangNhuan}
-          luaChon={[["thang_sau", "Nửa sau tính tháng sau"], ["thang_chinh", "Như tháng chính"], ["ca_thang_sau", "Cả tháng tính tháng sau"]]}
-          noiBat nhanNoiBat="Áp dụng với bạn"
-          goiY="Bạn sinh trong tháng nhuận — sách thì tính ngày 16 trở đi sang tháng sau (phổ biến), sách tính cả tháng như tháng chính, sách tính cả tháng như tháng sau. Mệnh, Cục và các sao có thể khác." />
+        <DongPhai testId="chon-thang-nhuan" ten={c("phai.nhuan")} nhan={c("phai.nhuan_nhan")} giaTri={p.thangNhuan} doi={p.setThangNhuan}
+          luaChon={[["thang_sau", c("phai.nhuan_sau")], ["thang_chinh", c("phai.nhuan_chinh")], ["ca_thang_sau", c("phai.nhuan_ca")]]}
+          noiBat nhanNoiBat={c("phai.ap_dung")}
+          goiY={c("phai.nhuan_goi_y")} />
       )}
       {daDoi && (
         <div className="border-t border-line/50 pt-3">
           <button type="button" onClick={veMacDinh} data-testid="phai-ve-mac-dinh"
             className="inline-flex min-h-9 items-center gap-1.5 text-sm text-fg-muted hover:text-gold">
-            <RotateCcw className="size-3.5" aria-hidden /> Về mặc định lối Việt
+            <RotateCcw className="size-3.5" aria-hidden /> {c("phai.ve_mac_dinh")}
           </button>
         </div>
       )}

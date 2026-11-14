@@ -1,0 +1,21 @@
+{
+ "_nguon": "EN-ALL GĐ 4 (agent A) — bản phủ tiếng Anh của tuvi_cung_sao_menh_kb.json: lời viết lại từ nghĩa, {slot} giữ nguyên; chờ người bản xứ duyệt.",
+ "_trang_thai": "bien_tap",
+ "muc": {
+  "pho_bien": {
+   "nhan": "fairly common",
+   "loi": "About 1 in every {mot_trong} birth moments has {mo_ta}, like you — fairly common. Same Life star, not the same life: the rest of the chart is what makes you you."
+  },
+  "it_gap": {
+   "nhan": "uncommon",
+   "loi": "Only about 1 in every {mot_trong} birth moments has {mo_ta}, like you — uncommon. Same Life star, not the same life: everyone with this set of stars lives it in their own way."
+  }
+ },
+ "mo_ta": {
+  "mot": "the star {sao} in the Life Palace",
+  "hai": "the star pair {sao} in the Life Palace",
+  "muon": "an empty Life Palace that borrows {sao} from the opposite palace"
+ },
+ "can_cu": "Counted over every Western-calendar day {mau} × 12 two-hour periods ({tong} birth moments), on the Vietnamese lunar calendar; every moment counts the same — these are not real people. The main-star combination of your Life Palace: {khoa} — {so} moments ({phan_tram} %), ranked {hang} of the {so_to_hop} possible combinations. The Life Palace is placed by birth month and hour, the Zi Wei star by lunar day and Bureau; gender does not move the main stars.",
+ "nhan_ngan": "1 in {mot_trong} birth moments shares this Life star"
+}

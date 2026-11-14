@@ -7,11 +7,33 @@ from __future__ import annotations
 
 import datetime as dt
 
-from app import config
+from app import config, ngon_ngu
 from app.calc import can_chi, lunar
 from app.calc import phongthuy as pt
 from app.calc import tietkhi as tk
 from app.kb import phongthuy_kb as kb
+from app.kb import ten as _ten
+from app.kb.loi import L
+
+
+def _h(x: str) -> str:
+    return _ten.ten("huong", x)
+
+
+def _dn(x: str) -> str:
+    return _ten.ten("du_nien", x)
+
+
+def _q(x: str) -> str:
+    return _ten.ten("quai", x)
+
+
+def _nh(x: str) -> str:
+    return _ten.ten("nhom_trach", x)
+
+
+def _ds(xs) -> str:
+    return L("pt.noi", ", ").join(xs)
 
 NAM_DAU, NAM_CUOI = 1960, 2005
 TEN_GIOI = {"nam": "nam", "nu": "nữ"}
@@ -35,11 +57,15 @@ def _ngay(d, m, y) -> str:
 
 
 def _can_chi(nam: int) -> str:
-    return " ".join(lunar.can_chi_nam(nam))
+    cc = " ".join(lunar.can_chi_nam(nam))
+    if ngon_ngu.la_viet():
+        return cc
+    from app.luangiai.phongthuy_hien import can_chi  # noqa: PLC0415
+    return can_chi(cc)
 
 
 def tieu_de(nam: int, gioi_tinh: str) -> str:
-    return f"Tuổi {_can_chi(nam)} {nam} {TEN_GIOI[gioi_tinh]} hợp hướng nào?"
+    return L(f"pt.tuoi.tieu_de.{gioi_tinh}", "Tuổi {cc} {nam} " + TEN_GIOI[gioi_tinh] + " hợp hướng nào?", cc=_can_chi(nam), nam=nam)
 
 
 def tuoi(nam: int, gioi_tinh: str) -> dict:
@@ -137,7 +163,8 @@ def tu_slug_gop(slug: str) -> int | None:
 
 def tieu_de_gop(nam: int) -> str:
     q_nam, q_nu = pt.menh_quai(nam, "nam")["quai"], pt.menh_quai(nam, "nu")["quai"]
-    return f"Tuổi {_can_chi(nam)} {nam} hợp hướng nào? Nam mệnh {q_nam}, nữ mệnh {q_nu}"
+    return L("pt.tuoi.tieu_de_gop", "Tuổi {cc} {nam} hợp hướng nào? Nam mệnh {q_nam}, nữ mệnh {q_nu}", cc=_can_chi(nam), nam=nam,
+             q_nam=_q(q_nam), q_nu=_q(q_nu))
 
 
 CAP_NHAT_GOP = "2026-10-22"
@@ -223,7 +250,7 @@ def _nhom(q: str) -> str:
 
 
 def tieu_de_cung(q: str) -> str:
-    return f"Cung {q} hợp hướng nào? Hướng tốt, hướng xấu của cung phi {q}"
+    return L("pt.cung.tieu_de", "Cung {q} hợp hướng nào? Hướng tốt, hướng xấu của cung phi {q}", q=_q(q))
 
 
 def danh_sach_cung() -> list[dict]:
@@ -269,52 +296,58 @@ def cung_phi(slug: str) -> dict:
                 for r in muc_luc_tuoi() for gt, k in (("nam", "nam_gioi"), ("nu", "nu_gioi")) if r[k]["quai"] == q]
     ds_nam = [str(x["nam"]) for x in nam_sinh if x["gioi_tinh"] == "nam"]
     ds_nu = [str(x["nam"]) for x in nam_sinh if x["gioi_tinh"] == "nu"]
-    ten_tot = ", ".join(f"{h['huong']} ({h['du_nien']})" for h in tot)
-    ten_xau = ", ".join(h["huong"] for h in xau)
-    ai = " và ".join(p for p in ((f"nam sinh năm {', '.join(ds_nam)}" if ds_nam else ""),
-                                 (f"nữ sinh năm {', '.join(ds_nu)}" if ds_nu else "")) if p)
+    ten_tot = _ds(f"{_h(h['huong'])} ({_dn(h['du_nien'])})" for h in tot)
+    ten_xau = _ds(_h(h["huong"]) for h in xau)
+    ai = L("pt.va", " và ").join(p for p in ((L("pt.cung.ai_nam", "nam sinh năm {ds}", ds=_ds(ds_nam)) if ds_nam else ""),
+                                             (L("pt.cung.ai_nu", "nữ sinh năm {ds}", ds=_ds(ds_nu)) if ds_nu else "")) if p)
     hanh = thong_tin.get("ngu_hanh")
-    tra_loi = (f"Cung phi {q} (mệnh quái số {so}{', hành ' + hanh if hanh else ''}, thuộc {nhom}) hợp 4 hướng: {ten_tot}"
-               f" — tốt nhất là {tot[0]['huong']}. Nên tránh: {ten_xau}. Trong các năm 1960–2005, {ai} có cung {q} "
-               "(tính theo Lập xuân: sinh trước Lập xuân thì lấy năm trước).")
+    Q, NH = _q(q), _nh(nhom)
+    tra_loi = (L("pt.cung.tra_loi_1", "Cung phi {q} (mệnh quái số {so}{hanh}, thuộc {nhom}) hợp 4 hướng: {tot}",
+                 q=Q, so=so, hanh=(L("pt.cung.hanh", ", hành {h}", h=_ten.ten("hanh", hanh)) if hanh else ""), nhom=NH, tot=ten_tot)
+               + L("pt.cung.tra_loi_2", " — tốt nhất là {h}. Nên tránh: {xau}. Trong các năm 1960–2005, {ai} có cung {q} "
+                   "(tính theo Lập xuân: sinh trước Lập xuân thì lấy năm trước).", h=_h(tot[0]["huong"]), xau=ten_xau, ai=ai, q=Q))
     cung_nhom = [{"slug": s, "quai": x} for x, _, s in CUNG_PHI if x != q and _nhom(x) == nhom]
     gy = {x["ma"]: x for x in goi_y}
+    hh = lambda k: _ds(_h(h) for h in gy[k]["huong"])  # noqa: E731
     hd = [
-        {"hoi": f"Cung {q} hợp hướng nhà nào?",
-         "dap": f"Cửa chính hợp nhất quay về {', '.join(gy['cua_chinh']['huong'])} — theo thứ tự "
-                f"{', '.join(gy['cua_chinh']['du_nien'])} của cung {q}. Nên tránh {ten_xau}."},
-        {"hoi": f"Cung {q} đặt bếp hướng nào?",
-         "dap": f"Theo nguyên tắc toạ hung hướng cát: thân bếp đặt ở phương xấu ({ten_xau}), miệng bếp quay về "
-                f"{', '.join(gy['mieng_bep']['huong'])}."},
-        {"hoi": f"Cung {q} kê đầu giường hướng nào?",
-         "dap": f"Đầu giường nên quay về {', '.join(gy['dau_giuong']['huong'])} (quan niệm dân gian)."},
-        {"hoi": f"Cung {q} ngồi làm việc quay mặt hướng nào?",
-         "dap": f"Ưu tiên quay mặt về {', '.join(gy['ban_lam_viec']['huong'])}."},
-        {"hoi": f"Những ai có cung phi {q}?",
-         "dap": f"Trong các năm 1960–2005: {ai}. Cung phi tính theo năm sinh và giới tính, nên vợ chồng cùng tuổi có thể khác cung."},
-        {"hoi": f"Cung {q} hợp với cung nào khi ở chung nhà?",
-         "dap": f"Cùng nhóm {nhom}: {', '.join(x['quai'] for x in cung_nhom)} — cùng cung {q}, cả bốn cung chung bốn hướng tốt. "
-                "Hai người khác nhóm thường ưu tiên mệnh người trụ cột cho cửa chính, phòng riêng theo mệnh từng người."},
-        {"hoi": f"Nhà đang quay về hướng xấu với cung {q} thì có phải đổi nhà không?",
-         "dap": (f"Không cần. Bát trạch xét nhiều chỗ chứ không riêng cửa chính: người cung {q} có thể kê đầu giường, bàn làm việc, "
-                 f"miệng bếp quay về {tot[0]['huong']} hoặc {tot[1]['huong']}; người cùng nhà khác cung thì xếp phòng theo mệnh từng người. "
-                 "Đây là quan niệm tham khảo, không phải lý do để bán hay sửa lớn căn nhà đang ở.")},
-        {"hoi": "Sinh tháng 1 hoặc đầu tháng 2 thì xem cung phi thế nào?",
-         "dap": "Bát trạch lấy mốc Lập xuân (khoảng 3–5/2 dương lịch): sinh trước ngày này thì tính theo năm trước. "
-                "Có sách lấy mốc Tết âm lịch — công cụ Phong thuỷ cho bạn chọn mốc và nhập đúng ngày sinh."},
+        {"hoi": L("pt.cung.hd1.hoi", "Cung {q} hợp hướng nhà nào?", q=Q),
+         "dap": L("pt.cung.hd1.dap", "Cửa chính hợp nhất quay về {h} — theo thứ tự {dn} của cung {q}. Nên tránh {xau}.",
+                  h=hh("cua_chinh"), dn=_ds(_dn(d) for d in gy["cua_chinh"]["du_nien"]), q=Q, xau=ten_xau)},
+        {"hoi": L("pt.cung.hd2.hoi", "Cung {q} đặt bếp hướng nào?", q=Q),
+         "dap": L("pt.cung.hd2.dap", "Theo nguyên tắc toạ hung hướng cát: thân bếp đặt ở phương xấu ({xau}), miệng bếp quay về {h}.",
+                  xau=ten_xau, h=hh("mieng_bep"))},
+        {"hoi": L("pt.cung.hd3.hoi", "Cung {q} kê đầu giường hướng nào?", q=Q),
+         "dap": L("pt.cung.hd3.dap", "Đầu giường nên quay về {h} (quan niệm dân gian).", h=hh("dau_giuong"))},
+        {"hoi": L("pt.cung.hd4.hoi", "Cung {q} ngồi làm việc quay mặt hướng nào?", q=Q),
+         "dap": L("pt.cung.hd4.dap", "Ưu tiên quay mặt về {h}.", h=hh("ban_lam_viec"))},
+        {"hoi": L("pt.cung.hd5.hoi", "Những ai có cung phi {q}?", q=Q),
+         "dap": L("pt.cung.hd5.dap", "Trong các năm 1960–2005: {ai}. Cung phi tính theo năm sinh và giới tính, nên vợ chồng cùng tuổi có thể khác cung.", ai=ai)},
+        {"hoi": L("pt.cung.hd6.hoi", "Cung {q} hợp với cung nào khi ở chung nhà?", q=Q),
+         "dap": L("pt.cung.hd6.dap", "Cùng nhóm {nhom}: {ds} — cùng cung {q}, cả bốn cung chung bốn hướng tốt. "
+                  "Hai người khác nhóm thường ưu tiên mệnh người trụ cột cho cửa chính, phòng riêng theo mệnh từng người.",
+                  nhom=NH, ds=_ds(_q(x["quai"]) for x in cung_nhom), q=Q)},
+        {"hoi": L("pt.cung.hd7.hoi", "Nhà đang quay về hướng xấu với cung {q} thì có phải đổi nhà không?", q=Q),
+         "dap": L("pt.cung.hd7.dap", "Không cần. Bát trạch xét nhiều chỗ chứ không riêng cửa chính: người cung {q} có thể kê đầu giường, bàn làm việc, "
+                  "miệng bếp quay về {h1} hoặc {h2}; người cùng nhà khác cung thì xếp phòng theo mệnh từng người. "
+                  "Đây là quan niệm tham khảo, không phải lý do để bán hay sửa lớn căn nhà đang ở.",
+                  q=Q, h1=_h(tot[0]["huong"]), h2=_h(tot[1]["huong"]))},
+        {"hoi": L("pt.cung.hd8.hoi", "Sinh tháng 1 hoặc đầu tháng 2 thì xem cung phi thế nào?"),
+         "dap": L("pt.cung.hd8.dap", "Bát trạch lấy mốc Lập xuân (khoảng 3–5/2 dương lịch): sinh trước ngày này thì tính theo năm trước. "
+                  "Có sách lấy mốc Tết âm lịch — công cụ Phong thuỷ cho bạn chọn mốc và nhập đúng ngày sinh.")},
     ]
     return {
         "slug": slug, "quai": q, "so": so, "nhom": nhom, "tieu_de": tieu_de_cung(q),
         "ngay_dang": CAP_NHAT_CUNG, "cap_nhat": CAP_NHAT_CUNG,
-        "mo_ta": (f"Cung phi {q} ({nhom}): 4 hướng tốt {', '.join(h['huong'] for h in tot)}, 4 hướng nên tránh, hướng cửa, "
-                  f"bếp, giường, bàn làm việc theo Bát trạch và danh sách năm sinh có cung {q}."),
+        "mo_ta": L("pt.cung.mo_ta", "Cung phi {q} ({nhom}): 4 hướng tốt {tot}, 4 hướng nên tránh, hướng cửa, "
+                   "bếp, giường, bàn làm việc theo Bát trạch và danh sách năm sinh có cung {q}.",
+                   q=Q, nhom=NH, tot=_ds(_h(h["huong"]) for h in tot)),
         "thong_tin": {k: thong_tin[k] for k in ("ngu_hanh", "phuong", "nguoi", "tinh_chat") if k in thong_tin},
         "huong_tot": tot, "huong_xau": xau, "bang_huong": bang, "goi_y": goi_y,
         "nam_sinh": nam_sinh, "cung_cung_nhom": cung_nhom,
         "cung_khac_nhom": [{"slug": s, "quai": x} for x, _, s in CUNG_PHI if _nhom(x) != nhom],
         "tra_loi_nhanh": tra_loi, "hoi_dap": hd,
         "sach_xua": __import__("app.luangiai.sach_xua", fromlist=["phongthuy"]).phongthuy(q, ca_nhan=False),   # WS-3
-        "nguon": "Bát trạch (Dương Trạch Tam Yếu) — bảng du niên; cung phi theo năm sinh và giới tính",
+        "nguon": L("pt.cung.nguon", "Bát trạch (Dương Trạch Tam Yếu) — bảng du niên; cung phi theo năm sinh và giới tính"),
         "luu_y": [kb.luu_y("bat_trach"), kb.bo_cuc()["luu_y"]],
         **{k: v for k, v in kb.meta().items() if k in ("trang_thai", "can_doi_chieu")},
     }
