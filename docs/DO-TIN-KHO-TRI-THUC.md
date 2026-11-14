@@ -37,6 +37,7 @@
 | `kinhdich_kb.json` | bat_quai | `chu_dich_truyen_nghia.json` | `test_loai_tuong_tam_quai_trich_dung_thuyet_quai` | loại tượng khớp Thuyết Quái |
 | `kinhdich_tra_loi.json` | tinh_chat_que | `tang_san_boc_dich.json` | `test_trich_la_nguyen_van_va_kb_du_loi` |  |
 | `kinhdich_truyen_nghia.json` | (cả tệp) | `chu_dich_truyen_nghia.json` | `test_ngo_tat_to_ghep_dung_hao_va_du_do_phu` | bản dịch Ngô Tất Tố ghép theo chữ Hán |
+| `phongthuy_kb.json` | du_nien | `duong_trach_thap_thu.json` | `test_cau_trich_kb_la_nguyen_van` | KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi 180 năm khớp sách (test_dai_du_nien_ca_khop_phep_tinh, test_bang_cung_phi_180_nam_khop_phep_tinh); lời ý nghĩa vẫn là tóm ý |
 | `tarot_kb.json` | (cả tệp) | `tarot_waite_1910.json` | `test_moi_trich_la_nguyen_van_cua_nguon` | câu trích khớp Waite / Mathers / Book T; lớp Marseille, Thoth là tóm ý |
 | `tuvi_co_thu.json` | cau | `tu_vi_dau_so_toan_thu.json` | `test_nguyen_van_khop_kho_nguon_toan_thu_tung_chu` | 84 câu Cốt Tuỷ Phú khớp từng chữ (giản ↔ phồn); phiên âm, nghĩa là nháp; chưa so bản khắc 1600 |
 | `tuvi_kb.json` | phu_tinh_cung | `tu_vi_dau_so_toan_thu.json` | `test_phu_tinh_cung_khop_nguyen_van_toan_thu` |  |
@@ -92,8 +93,9 @@
 | Phong thuỷ | `phongthuy_do_thi.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_doi_song.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_huyen_khong.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
-| Phong thuỷ | `phongthuy_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
-| Nhân tướng | `nhan_tuong_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-NT1/2 + KT-N1: cả 43 câu trích sách (`dac_diem.*.sach`) khớp kho nguồn `nhan_tuong_co_thu.json` (Băng Giám, Tâm Tướng Thiên, Linh Khu, 4 sách Tứ khố — tests/test_kt_nt1_kho_nguon.py); lời luận vẫn là tóm ý, trường `nguon` Ma Y / Thần Tướng Toàn Biên chỉ ghi phái |
+| Phong thuỷ | `phongthuy_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-PT1: 7 dấu hiệu `bo_tri` có câu nguyên văn (`sach`); phần còn lại chưa khớp từng câu |
+| Phong thuỷ | `phongthuy_kb.json` | du_nien | Có nguyên văn đối chiếu | KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi 180 năm khớp sách (test_dai_du_nien_ca_khop_phep_tinh, test_bang_cung_phi_180_nam_khop_phep_tinh); lời ý nghĩa vẫn là tóm ý |
+| Nhân tướng | `nhan_tuong_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-NT1/2 + KT-N1 + KT-NT3: cả 70 câu trích sách (`dac_diem.*.sach`) khớp kho nguồn `nhan_tuong_co_thu.json` + `than_tuong_toan_bien.json` (Thần Tướng Toàn Biên bản Cổ Kim Đồ Thư Tập Thành, Băng Giám, Tâm Tướng Thiên, Linh Khu, 4 sách Tứ khố — tests/test_kt_nt1_kho_nguon.py); lời luận vẫn là tóm ý, trường `nguon` Ma Y / Thần Tướng Toàn Biên chỉ ghi phái |
 | Tarot | `tarot_kb.json` |  | Có nguyên văn đối chiếu | câu trích khớp Waite / Mathers / Book T; lớp Marseille, Thoth là tóm ý |
 | Thần số | `bo_sung_cap_so.json` |  | Ban biên tập soạn |  |
 | Thần số | `bo_sung_nam_ca_nhan.json` |  | Ban biên tập soạn |  |

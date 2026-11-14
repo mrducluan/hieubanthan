@@ -2,19 +2,19 @@
  "_ghi_chu": "SEO-L4 — ngày đăng / sửa thật của từng trang kiến thức. KHÔNG sửa tay: chạy `python scripts/ngay_cap_nhat.py` sau khi sửa KB hoặc mã dựng trang.",
  "trang": {
   "bo_vi/an-duong": {
-   "bam": "3c214c38af03f21a",
+   "bam": "505fa175b5628f12",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/chuan-dau": {
-   "bam": "f791af68f8bf2fa9",
+   "bam": "ccf85475e662fe13",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/dia-cac": {
-   "bam": "afdee15fec009a20",
+   "bam": "cdf1e8fa9a4e6a17",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/dien-trach": {
    "bam": "c18a2bfcdd3a5a32",
@@ -22,14 +22,14 @@
    "sua": "2026-11-13"
   },
   "bo_vi/khuon-mat-tong-the": {
-   "bam": "beb470c790d37d4a",
+   "bam": "1a4a20055c774a12",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/lan-dai": {
-   "bam": "9159f6147fa36c15",
+   "bam": "ab70aaea28a6e619",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/le-duong": {
    "bam": "50c59c8f78b65bd6",
@@ -37,24 +37,24 @@
    "sua": "2026-11-13"
   },
   "bo_vi/long-may": {
-   "bam": "d8c5515376d4d187",
+   "bam": "b837b243dd601d7a",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/luong-quyen": {
-   "bam": "aabe6bb0d13a212e",
+   "bam": "6d2a82b9355454a0",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/mat": {
-   "bam": "85406b14c3aa6f9d",
+   "bam": "885795114d89952c",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/mieng": {
-   "bam": "8de1c4e9d0a9af24",
+   "bam": "32e28772e6e15179",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/ngu-vi": {
    "bam": "f61c4145c0b36afe",
@@ -62,14 +62,14 @@
    "sua": "2026-11-13"
   },
   "bo_vi/nhan-trung": {
-   "bam": "d547d3086ab03994",
+   "bam": "9bb9ba24ba6cefd3",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/nhat-giac": {
-   "bam": "acc31b52e8799253",
+   "bam": "44001ce4169edb00",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/nien-thuong": {
    "bam": "2845b76b4583a165",
@@ -77,9 +77,9 @@
    "sua": "2026-11-13"
   },
   "bo_vi/no-boc": {
-   "bam": "a584f92779bbe80f",
+   "bam": "ff022c3da8e7a513",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/phap-lenh": {
    "bam": "1c1af7b5f94e0003",
@@ -87,19 +87,19 @@
    "sua": "2026-11-13"
   },
   "bo_vi/son-can": {
-   "bam": "af281d2cb64e184b",
+   "bam": "3c0ca159e92256f5",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/tai": {
-   "bam": "1c8f1ff657dcd431",
+   "bam": "1def3e864218c905",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/thien-dinh": {
-   "bam": "10aa4619e7830c26",
+   "bam": "df65c66ac909af25",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-14"
   },
   "bo_vi/thien-thuong": {
    "bam": "5cc82cc602a3e404",
@@ -442,9 +442,9 @@
    "sua": "2026-11-03"
   },
   "dau_hieu/cay-truoc-cua-nha": {
-   "bam": "3b9dcf078a185b61",
+   "bam": "2b25d3dece637d9c",
    "dang": "2026-10-26",
-   "sua": "2026-11-03"
+   "sua": "2026-11-14"
   },
   "dau_hieu/cot-dien-cay-lon-truoc-cua": {
    "bam": "13821b9848fe3363",
@@ -452,9 +452,9 @@
    "sua": "2026-11-03"
   },
   "dau_hieu/cua-chinh-nhin-thang-ra-ban-cong-cua-so-lon": {
-   "bam": "2170b45de5c0aac3",
+   "bam": "f1067f90045aee63",
    "dang": "2026-10-26",
-   "sua": "2026-11-03"
+   "sua": "2026-11-14"
   },
   "dau_hieu/cua-phong-doi-nhau": {
    "bam": "486a39d1b742bcec",
@@ -472,9 +472,9 @@
    "sua": "2026-11-03"
   },
   "dau_hieu/duong-dam-thang-vao-nha": {
-   "bam": "900610c6d7248e12",
+   "bam": "f2a1b915f78c6d4f",
    "dang": "2026-10-26",
-   "sua": "2026-11-03"
+   "sua": "2026-11-14"
   },
   "dau_hieu/giuong-ban-duoi-xa-ngang": {
    "bam": "699727f5c4907bfb",
@@ -492,9 +492,9 @@
    "sua": "2026-11-03"
   },
   "dau_hieu/minh-duong": {
-   "bam": "981cd3b8e9924c9e",
+   "bam": "66bed81f921bccd0",
    "dang": "2026-10-26",
-   "sua": "2026-11-03"
+   "sua": "2026-11-14"
   },
   "dau_hieu/ngoi-quay-lung-ra-cua": {
    "bam": "2be62b70d26fbb74",
@@ -527,9 +527,9 @@
    "sua": "2026-11-03"
   },
   "dau_hieu/song-ho-truoc-nha": {
-   "bam": "a2ef78e328b56b14",
+   "bam": "28da1366a9eae19b",
    "dang": "2026-10-26",
-   "sua": "2026-11-03"
+   "sua": "2026-11-14"
   },
   "en_la_bai/ace-of-cups": {
    "bam": "ffe5d4459cc4e79e",

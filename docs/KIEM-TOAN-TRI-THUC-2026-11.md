@@ -532,3 +532,29 @@ Không đổi mức / phép tính → không tăng `ENGINE_VERSION`. Golden đ�
   lợi hơn cho người đọc đã làm ở SX-1: đưa đúng câu sách ứng với lá số của họ. Làm cụm này khi có người đọc soát, bắt đầu bằng
   8–10 thiên người ta hay hỏi (dụng thần, cách cục thành bại, tài – quan – ấn – thực).
 
+### 10.19 Thần Tướng Toàn Biên + Dương Trạch Thập Thư từ Cổ Kim Đồ Thư Tập Thành (KT-NT3 · KT-PT1, 2026-11-14)
+
+Chủ dự án gửi bộ database "physiognomy-kb" (đánh giá đủ: `docs/DANH-GIA-PHYSIOGNOMY-KB.md`). Phần dùng được nhất là **chỉ
+dẫn nguồn**: Thần Tướng Toàn Biên có bản gõ sạch trên Wikisource trong «欽定古今圖書集成 · 藝術典» quyển 631–644; cùng bộ,
+quyển 675–677 chép «陽宅十書» (Dương Trạch Thập Thư, Minh) — sách có phần gốc của Bát trạch. Hai sách Bát trạch trong
+database (Tam Yếu, Minh Kính) chỉ là bản dịch Việt hiện đại do máy đọc, không có chữ Hán → không dùng làm nguyên văn.
+
+- **Kho nguồn** (bộ nạp `scripts/nap_tap_thanh.py`): `than_tuong_toan_bien.json` (14 quyển, 699 mục, ~151 nghìn chữ) ·
+  `duong_trach_thap_thu.json` (3 quyển, 83 mục, ~30 nghìn chữ; quyển 678 «論符鎮» toàn bùa — không nạp). Tải lại thẳng từ
+  Wikisource (không chép từ database): 598 / 602 đoạn của database trùng từng chữ với bản tải lại.
+- **Dấu câu**: Wikisource ghi dấu chấm câu của bộ này do máy + người dùng thêm, giấy phép CC BY-SA; chính văn thuộc công
+  chúng → kho nguồn bỏ dấu câu, giữ 〈…〉 (chú chữ nhỏ của bản in). Trang nguồn ở mức "chưa hiệu đính" → `can_doi_chieu`.
+  **Việc còn lại**: soát các kho Wikisource nạp trước (Băng Giám, Tăng San Bốc Dịch, Cốt Tuỷ Phú…) theo cùng tiêu chí.
+- **Nhân tướng**: 27 câu trích mới (trung tính) cho nét tướng trước chỉ ghi tên sách → 70 câu có `han` khớp kho nguồn.
+  **Lỗi tìm ra khi đối chiếu «流年運氣部位歌»**: tuổi 10–11 = Nhân Luân (人輪), 12–14 = Địa Luân (地輪); KB cũ ghi Thiên Thành,
+  Thiên Khuếch (tên của tai trái). Đã sửa; 99 vị lưu niên mang chữ Hán, test khoá thứ tự theo bài ca. Ghi chú dị bản: câu
+  quyết tam đình của bản này chép «上停長老吉昌 … 下停長少吉祥», ngược bản phổ biến → không trích câu đó.
+- **Phong thuỷ**: 8 du niên có câu «吉星三 / 凶星五» (du niên ↔ cửu tinh ↔ hành); 7 dấu hiệu `bo_tri` có câu «論宅外形».
+  **Phép tính được sách xác nhận**: `phongthuy.bang_huong` khớp bài Đại du niên ca (8 × 7 ô); `phongthuy.menh_quai` khớp bảng
+  «三元甲子福德宮定局» đủ 180 năm nam / nữ, thử hai chu kỳ 1684–2043 (thượng nguyên Giáp Tý = 1504, 1684, 1864). Không sửa gì.
+- Hiển thị: mục "Nguyên văn sách xưa" trên trang dấu hiệu; hỏi đáp du niên / dấu hiệu nối câu sách (`hoidap.phongthuy._cau_sach`).
+- Test: `tests/test_kt_nt1_kho_nguon.py` (mở rộng), `tests/test_kt_pt1_kho_nguon.py` (mới). Sổ độ tin: `phongthuy_kb.du_nien`
+  lên mức "có nguyên văn đối chiếu". Golden đầu ra bản Việt đổi có chủ đích: 266 lượt hỏi đáp Phong thuỷ + 21 trang kiến thức.
+- Không dùng từ database: Thuỷ Kính (chữ rác), Địa Lý Ngũ Quyết (giản thể, máy đọc), 150 "luật" + 49 thuật ngữ máy tự rút,
+  toàn bộ Tarot (nguyên văn Bunning / Pollack còn bản quyền). Chờ: Liễu Trang (so với bản quét), 326 đồ hình (chưa tải lên).
+

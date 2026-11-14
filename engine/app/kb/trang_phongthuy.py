@@ -88,6 +88,10 @@ def trang_dau_hieu(ma: str, slug: str) -> dict:
                + (f" Việc không tốn tiền: {v0}" if v0 else "")).strip()
     muc = [{"tieu_de": "Sách xưa nói gì" if m["nguon"] != "dan_gian" else "Dân gian nói gì",
             "doan": m["noi_dung"]}]
+    if m.get("sach"):                      # KT-PT1: nguyên văn đã đối chiếu kho nguồn (test_kt_pt1_kho_nguon)
+        c = m["sach"]
+        muc.append({"tieu_de": "Nguyên văn sách xưa",
+                    "doan": f"{_kb()['source_ten'][c['nguon']]} chép: «{c['han']}» ({c['trich']}) — {c['y']}"})
     if m.get("giai_thich_hien_dai"):
         muc.append({"tieu_de": "Nhìn theo đời sống hiện đại", "doan": m["giai_thich_hien_dai"]})
     if veto:

@@ -501,595 +501,694 @@
    "tuoi": 1,
    "ten": "Thiên Luân",
    "bo_vi": "tai",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "天輪"
   },
   {
    "tuoi": 2,
    "ten": "Thiên Luân",
    "bo_vi": "tai",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "天輪"
   },
   {
    "tuoi": 3,
    "ten": "Thiên Thành",
    "bo_vi": "tai",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "天城"
   },
   {
    "tuoi": 4,
    "ten": "Thiên Thành",
    "bo_vi": "tai",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "天城"
   },
   {
    "tuoi": 5,
    "ten": "Thiên Khuếch",
    "bo_vi": "tai",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "天廓"
   },
   {
    "tuoi": 6,
    "ten": "Thiên Khuếch",
    "bo_vi": "tai",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "天廓"
   },
   {
    "tuoi": 7,
    "ten": "Thiên Khuếch",
    "bo_vi": "tai",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "天廓"
   },
   {
    "tuoi": 8,
    "ten": "Thiên Luân",
    "bo_vi": "tai",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "天輪"
   },
   {
    "tuoi": 9,
    "ten": "Thiên Luân",
    "bo_vi": "tai",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "天輪"
   },
   {
    "tuoi": 10,
-   "ten": "Thiên Thành",
+   "ten": "Nhân Luân",
    "bo_vi": "tai",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "人輪"
   },
   {
    "tuoi": 11,
-   "ten": "Thiên Thành",
+   "ten": "Nhân Luân",
    "bo_vi": "tai",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "人輪"
   },
   {
    "tuoi": 12,
-   "ten": "Thiên Khuếch",
+   "ten": "Địa Luân",
    "bo_vi": "tai",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "地輪"
   },
   {
    "tuoi": 13,
-   "ten": "Thiên Khuếch",
+   "ten": "Địa Luân",
    "bo_vi": "tai",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "地輪"
   },
   {
    "tuoi": 14,
-   "ten": "Thiên Khuếch",
+   "ten": "Địa Luân",
    "bo_vi": "tai",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "地輪"
   },
   {
    "tuoi": 15,
    "ten": "Hoả Tinh",
    "bo_vi": "thien_trung",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "火星"
   },
   {
    "tuoi": 16,
    "ten": "Thiên Trung",
    "bo_vi": "thien_trung",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "天中"
   },
   {
    "tuoi": 17,
    "ten": "Nhật Giác",
    "bo_vi": "nhat_nguyet_giac",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "日月角"
   },
   {
    "tuoi": 18,
    "ten": "Nguyệt Giác",
    "bo_vi": "nhat_nguyet_giac",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "日月角"
   },
   {
    "tuoi": 19,
    "ten": "Thiên Đình",
    "bo_vi": "thien_dinh",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "天庭"
   },
   {
    "tuoi": 20,
    "ten": "Phụ Giác",
    "bo_vi": "nhat_nguyet_giac",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "輔角"
   },
   {
    "tuoi": 21,
    "ten": "Phụ Giác",
    "bo_vi": "nhat_nguyet_giac",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "輔角"
   },
   {
    "tuoi": 22,
    "ten": "Tư Không",
    "bo_vi": "tu_khong",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "司空"
   },
   {
    "tuoi": 23,
    "ten": "Biên Thành",
    "bo_vi": "thien_thuong",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "邊城"
   },
   {
    "tuoi": 24,
    "ten": "Biên Thành",
    "bo_vi": "thien_thuong",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "邊城"
   },
   {
    "tuoi": 25,
    "ten": "Trung Chính",
    "bo_vi": "trung_chinh",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "中正"
   },
   {
    "tuoi": 26,
    "ten": "Khâu Lăng",
    "bo_vi": "thien_thuong",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "丘陵"
   },
   {
    "tuoi": 27,
    "ten": "Trủng Mộ",
    "bo_vi": "thien_thuong",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "塚墓"
   },
   {
    "tuoi": 28,
    "ten": "Ấn Đường",
    "bo_vi": "an_duong",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "印堂"
   },
   {
    "tuoi": 29,
    "ten": "Sơn Lâm",
    "bo_vi": "thien_thuong",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "山林"
   },
   {
    "tuoi": 30,
    "ten": "Sơn Lâm",
    "bo_vi": "thien_thuong",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "山林"
   },
   {
    "tuoi": 31,
    "ten": "Lăng Vân",
    "bo_vi": "long_may",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "凌雲"
   },
   {
    "tuoi": 32,
    "ten": "Tử Khí",
    "bo_vi": "long_may",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "紫氣"
   },
   {
    "tuoi": 33,
    "ten": "Phồn Hà",
    "bo_vi": "long_may",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "繁霞"
   },
   {
    "tuoi": 34,
    "ten": "Thái Hà",
    "bo_vi": "long_may",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "彩霞"
   },
   {
    "tuoi": 35,
    "ten": "Thái Dương",
    "bo_vi": "mat",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "太陽"
   },
   {
    "tuoi": 36,
    "ten": "Thái Âm",
    "bo_vi": "mat",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "太陰"
   },
   {
    "tuoi": 37,
    "ten": "Trung Dương",
    "bo_vi": "mat",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "中陽"
   },
   {
    "tuoi": 38,
    "ten": "Trung Âm",
    "bo_vi": "mat",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "中陰"
   },
   {
    "tuoi": 39,
    "ten": "Thiếu Dương",
    "bo_vi": "ngu_vi",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "少陽"
   },
   {
    "tuoi": 40,
    "ten": "Thiếu Âm",
    "bo_vi": "ngu_vi",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "少陰"
   },
   {
    "tuoi": 41,
    "ten": "Sơn Căn",
    "bo_vi": "son_can",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "山根"
   },
   {
    "tuoi": 42,
    "ten": "Tinh Xá",
    "bo_vi": "son_can",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "精舍"
   },
   {
    "tuoi": 43,
    "ten": "Quang Điện",
    "bo_vi": "son_can",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "光殿"
   },
   {
    "tuoi": 44,
    "ten": "Niên Thượng",
    "bo_vi": "song_mui",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "年上"
   },
   {
    "tuoi": 45,
    "ten": "Thọ Thượng",
    "bo_vi": "song_mui",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "壽上"
   },
   {
    "tuoi": 46,
    "ten": "Quyền",
    "bo_vi": "luong_quyen",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "顴"
   },
   {
    "tuoi": 47,
    "ten": "Quyền",
    "bo_vi": "luong_quyen",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "顴"
   },
   {
    "tuoi": 48,
    "ten": "Chuẩn Đầu",
    "bo_vi": "chuan_dau",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "準頭"
   },
   {
    "tuoi": 49,
    "ten": "Lan Đài",
    "bo_vi": "canh_mui",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "蘭臺"
   },
   {
    "tuoi": 50,
    "ten": "Đình Uý",
    "bo_vi": "canh_mui",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "廷尉"
   },
   {
    "tuoi": 51,
    "ten": "Nhân Trung",
    "bo_vi": "nhan_trung",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "人中"
   },
   {
    "tuoi": 52,
    "ten": "Tiên Khố",
    "bo_vi": "phap_lenh",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "仙庫"
   },
   {
    "tuoi": 53,
    "ten": "Tiên Khố",
    "bo_vi": "phap_lenh",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "仙庫"
   },
   {
    "tuoi": 54,
    "ten": "Thực Thương",
    "bo_vi": "phap_lenh",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "食倉"
   },
   {
    "tuoi": 55,
    "ten": "Lộc Thương",
    "bo_vi": "phap_lenh",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "祿倉"
   },
   {
    "tuoi": 56,
    "ten": "Pháp Lệnh",
    "bo_vi": "phap_lenh",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "法令"
   },
   {
    "tuoi": 57,
    "ten": "Pháp Lệnh",
    "bo_vi": "phap_lenh",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "法令"
   },
   {
    "tuoi": 58,
    "ten": "Hổ Nhĩ",
    "bo_vi": "ham",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "虎耳"
   },
   {
    "tuoi": 59,
    "ten": "Hổ Nhĩ",
    "bo_vi": "ham",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "虎耳"
   },
   {
    "tuoi": 60,
    "ten": "Thuỷ Tinh",
    "bo_vi": "mieng",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "水星"
   },
   {
    "tuoi": 61,
    "ten": "Thừa Tương",
    "bo_vi": "thua_tuong",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "承漿"
   },
   {
    "tuoi": 62,
    "ten": "Địa Khố",
    "bo_vi": "dia_cac",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "地庫"
   },
   {
    "tuoi": 63,
    "ten": "Địa Khố",
    "bo_vi": "dia_cac",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "地庫"
   },
   {
    "tuoi": 64,
    "ten": "Pha Trì",
    "bo_vi": "dia_cac",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "陂池"
   },
   {
    "tuoi": 65,
    "ten": "Nga Áp",
    "bo_vi": "dia_cac",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "鵝鴨"
   },
   {
    "tuoi": 66,
    "ten": "Kim Lũ",
    "bo_vi": "phap_lenh",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "金縷"
   },
   {
    "tuoi": 67,
    "ten": "Kim Lũ",
    "bo_vi": "phap_lenh",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "金縷"
   },
   {
    "tuoi": 68,
    "ten": "Quy Lai",
    "bo_vi": "ham",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "歸來"
   },
   {
    "tuoi": 69,
    "ten": "Quy Lai",
    "bo_vi": "ham",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "歸來"
   },
   {
    "tuoi": 70,
    "ten": "Tụng Đường",
    "bo_vi": "dia_cac",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "頌"
   },
   {
    "tuoi": 71,
    "ten": "Địa Các",
    "bo_vi": "dia_cac",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "地閣"
   },
   {
    "tuoi": 72,
    "ten": "Nô Bộc",
    "bo_vi": "ham",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "奴僕"
   },
   {
    "tuoi": 73,
    "ten": "Nô Bộc",
    "bo_vi": "ham",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "奴僕"
   },
   {
    "tuoi": 74,
    "ten": "Tai Cốt",
    "bo_vi": "ham",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "腮骨"
   },
   {
    "tuoi": 75,
    "ten": "Tai Cốt",
    "bo_vi": "ham",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "腮骨"
   },
   {
    "tuoi": 76,
    "ten": "Vị Tý",
    "bo_vi": "dia_cac",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "子"
   },
   {
    "tuoi": 77,
    "ten": "Vị Tý",
    "bo_vi": "dia_cac",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "子"
   },
   {
    "tuoi": 78,
    "ten": "Vị Sửu",
    "bo_vi": "ham",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "丑"
   },
   {
    "tuoi": 79,
    "ten": "Vị Sửu",
    "bo_vi": "ham",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "丑"
   },
   {
    "tuoi": 80,
    "ten": "Vị Dần",
    "bo_vi": "ham",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "寅"
   },
   {
    "tuoi": 81,
    "ten": "Vị Dần",
    "bo_vi": "ham",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "寅"
   },
   {
    "tuoi": 82,
    "ten": "Vị Mão",
    "bo_vi": "luong_quyen",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "卯"
   },
   {
    "tuoi": 83,
    "ten": "Vị Mão",
    "bo_vi": "luong_quyen",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "卯"
   },
   {
    "tuoi": 84,
    "ten": "Vị Thìn",
    "bo_vi": "thien_thuong",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "辰"
   },
   {
    "tuoi": 85,
    "ten": "Vị Thìn",
    "bo_vi": "thien_thuong",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "辰"
   },
   {
    "tuoi": 86,
    "ten": "Vị Tỵ",
    "bo_vi": "nhat_nguyet_giac",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "巳"
   },
   {
    "tuoi": 87,
    "ten": "Vị Tỵ",
    "bo_vi": "nhat_nguyet_giac",
-   "ben": "trai"
+   "ben": "trai",
+   "han": "巳"
   },
   {
    "tuoi": 88,
    "ten": "Vị Ngọ",
    "bo_vi": "thien_dinh",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "午"
   },
   {
    "tuoi": 89,
    "ten": "Vị Ngọ",
    "bo_vi": "thien_dinh",
-   "ben": "giua"
+   "ben": "giua",
+   "han": "午"
   },
   {
    "tuoi": 90,
    "ten": "Vị Mùi",
    "bo_vi": "nhat_nguyet_giac",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "未"
   },
   {
    "tuoi": 91,
    "ten": "Vị Mùi",
    "bo_vi": "nhat_nguyet_giac",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "未"
   },
   {
    "tuoi": 92,
    "ten": "Vị Thân",
    "bo_vi": "thien_thuong",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "猴"
   },
   {
    "tuoi": 93,
    "ten": "Vị Thân",
    "bo_vi": "thien_thuong",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "猴"
   },
   {
    "tuoi": 94,
    "ten": "Vị Dậu",
    "bo_vi": "luong_quyen",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "雞"
   },
   {
    "tuoi": 95,
    "ten": "Vị Dậu",
    "bo_vi": "luong_quyen",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "雞"
   },
   {
    "tuoi": 96,
    "ten": "Vị Tuất",
    "bo_vi": "ham",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "犬"
   },
   {
    "tuoi": 97,
    "ten": "Vị Tuất",
    "bo_vi": "ham",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "犬"
   },
   {
    "tuoi": 98,
    "ten": "Vị Hợi",
    "bo_vi": "ham",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "豬"
   },
   {
    "tuoi": 99,
    "ten": "Vị Hợi",
    "bo_vi": "ham",
-   "ben": "phai"
+   "ben": "phai",
+   "han": "豬"
   },
   {
    "tuoi": 100,
@@ -2331,9 +2430,10 @@
    "viec": "Với một dự định đang nghĩ lâu, đặt mốc 'làm thử' trong tuần này.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Thượng đình trường nhi phong long, phương nhi quảng khoát giả, chủ quý dã.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Phần trán dài mà đầy, vuông và rộng thì sách xem là quý (Thần Tướng Toàn Biên, thiên Diện tam đình).",
+    "han": "上停長而豐隆方而廣闊者主貴也"
    }
   },
   "tam_dinh_mui_dai": {
@@ -2354,9 +2454,10 @@
    "viec": "Dồn sức cho việc chính ở giai đoạn 30–50; tuổi trẻ nếu chậm hơn người khác cũng không sao.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Trung đình long nhi trực, tuấn nhi tĩnh giả, chủ thọ dã.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Phần giữa mặt cao mà thẳng, vững mà yên thì sách xem là bền sức (Thần Tướng Toàn Biên, thiên Diện tam đình).",
+    "han": "中停隆而直峻而靜者主壽也"
    }
   },
   "tam_dinh_cam_dai": {
@@ -2377,9 +2478,10 @@
    "viec": "Chọn việc có thể tích luỹ theo năm, không chọn việc chỉ hái trong một mùa.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Hạ đình bình nhi mãn, đoan nhi hậu giả, chủ phú dã.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Phần dưới mặt phẳng mà đầy, ngay mà dày thì sách xem là đủ đầy (Thần Tướng Toàn Biên, thiên Diện tam đình).",
+    "han": "下停平而滿端而厚者主富也"
    }
   },
   "tam_dinh_tran_ngan": {
@@ -2860,9 +2962,10 @@
    "viec": "Khi làm việc cường độ cao, thả lỏng hàm và vai gáy mỗi giờ một lần.",
    "uu_tien": 2,
    "sach": {
-    "trich": null,
+    "trich": "Cốt dữ nhục tương xứng, khí dữ huyết tương ứng.",
     "nguon": "than_tuong_toan_bien",
-    "y": null
+    "y": "Xương với thịt cân nhau, khí với huyết ứng nhau (Thần Tướng Toàn Biên, thiên Tướng cốt).",
+    "han": "骨與肉相稱氣與血相應"
    }
   },
   "cham_phang": {
@@ -2931,9 +3034,10 @@
    "viec": "Chọn người đi trước để hỏi, thay vì tự mò một mình.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Ngạch vi thiên, dục khoát nhi viên.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Trán ứng với trời, sách lấy rộng và tròn làm chuẩn — trán hẹp chỉ là lệch khỏi chuẩn ấy (Thần Tướng Toàn Biên).",
+    "han": "額為天欲闊而圓"
    }
   },
   "tran_go": {
@@ -3073,9 +3177,10 @@
    "viec": "Viết cho người đã nuôi mình một lời cảm ơn, dù không gửi.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
+    "trich": "Nhật nguyệt giác tu yếu cao, minh tịnh tắc phụ mẫu trường thọ khang ninh.",
     "nguon": "than_tuong_toan_bien",
-    "y": null
+    "y": "Hai góc trán là vùng sách gắn với cha mẹ: cao, sáng sạch thì đọc là cha mẹ khoẻ, thọ (Thần Tướng Toàn Biên, Thập nhị cung tổng quyết).",
+    "han": "日月角須要高明淨則父母長壽康寧"
    }
   },
   "may_thanh_dai": {
@@ -3192,9 +3297,10 @@
    "viec": "Tỉa khoảng giữa hai mày cho rộng bằng một ngón tay.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Yếu phong khoát bình chính, lưỡng mi thư triển.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Ấn Đường cần đầy, rộng, phẳng; hai mày giãn ra (Thần Tướng Toàn Biên, thiên Tướng Ấn Đường).",
+    "han": "要豐闊平正兩眉舒展"
    }
   },
   "dien_trach_rong": {
@@ -3474,9 +3580,10 @@
    "viec": "Chia sẻ một ý nghĩ với người tin cậy mỗi tuần.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Tế nhi thâm giả trường thọ.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Mắt nhỏ dài mà sâu thì sách xem là người bền (Thần Tướng Toàn Biên, thiên Tướng mục luận).",
+    "han": "細而深者長壽"
    }
   },
   "mat_xech": {
@@ -3569,9 +3676,10 @@
    "viec": "Ngủ đủ 3 đêm liền rồi mới quyết việc lớn; khám mắt nếu đỏ kéo dài.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "noi_kinh",
-    "y": null
+    "trich": "Ngụ tắc thần y ư nhãn.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Lúc thức, thần nương ở mắt — nên mắt mệt là thần đang mệt (Thần Tướng Toàn Biên, thiên Tướng mục luận).",
+    "han": "寤則神依於眼"
    },
    "he": "Mộc"
   },
@@ -3854,9 +3962,10 @@
    "viec": "Khám tổng quát ở tuổi 40 và để một khoản dự phòng 6 tháng chi tiêu.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Nghi cao bất nghi đê chiết.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Gốc mũi nên cao, không nên thấp gãy (Thần Tướng Toàn Biên, thiên Tướng Sơn Căn).",
+    "han": "宜高不宜低折"
    }
   },
   "son_can_nep": {
@@ -4071,9 +4180,10 @@
    "viec": "Ghi chi tiêu một tháng để thấy tiền đi đâu.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Chuẩn đầu phong đại, dữ nhân vô hại.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Đầu mũi đầy, to là người không hại ai (Thần Tướng Toàn Biên, thiên Tướng tỵ).",
+    "han": "準頭豐大與人無害"
    }
   },
   "chuan_dau_do": {
@@ -4143,9 +4253,10 @@
    "viec": "Đặt chuyển tiền để dành tự động ngay ngày nhận lương.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Huyệt khổng đại nhi tài bất tụ.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Lỗ mũi lớn, lộ thì của khó tụ (Thần Tướng Toàn Biên, thiên Tướng tỵ).",
+    "han": "穴孔大而財不聚"
    }
   },
   "canh_mui_xoe": {
@@ -4269,9 +4380,10 @@
    "viec": "Chọn vai 'người giỏi nhất về một việc' thay vì 'người đứng đầu'.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Diện thượng hữu cốt trác khởi, danh vi quyền cốt, chủ quyền thế.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Xương nổi trên mặt gọi là quyền cốt (gò má), sách gắn với quyền thế — nên gò má thấp được đọc là ít ham quyền (Thần Tướng Toàn Biên, thiên Tướng cốt).",
+    "han": "面上有骨卓起名為顴骨主權勢"
    }
   },
   "quyen_lech": {
@@ -4387,9 +4499,10 @@
    "viec": "Việc đã hứa thì ghi lại và làm đúng hạn.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Nhân trung đoan trực giả, trung nghĩa chi sĩ.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Nhân Trung ngay thẳng là người trọng nghĩa — sách đọc rãnh này theo chữ tín (Thần Tướng Toàn Biên, thiên Nhân Trung luận).",
+    "han": "人中端直者忠義之士"
    }
   },
   "phap_lenh_ro": {
@@ -4603,9 +4716,10 @@
    "viec": "Mỗi tuần từ chối một việc không phải của mình.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Thượng hạ câu hậu giả, trung tín chi nhân.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Hai môi đều dày là người trung tín (Thần Tướng Toàn Biên, thiên Luận thần).",
+    "han": "上下俱厚者忠信之人"
    }
   },
   "mieng_lech": {
@@ -4626,9 +4740,10 @@
    "viec": "Khám răng hàm mặt và tai mũi họng nếu ngủ hay há miệng.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "noi_kinh",
-    "y": null
+    "trich": "Thần sinh bất chính, ngôn từ nan định.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Môi không ngay thì lời khó nhất quán — nên sách dặn giữ lời (Thần Tướng Toàn Biên, thiên Luận thần).",
+    "han": "脣生不正言詞難定"
    },
    "he": "Thổ"
   },
@@ -4773,9 +4888,10 @@
    "viec": "Mỗi tháng tự thưởng một điều nhỏ khi xong việc.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Hài vi địa, dục phương nhi khoát.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Cằm ứng với đất, nên vuông và rộng (Thần Tướng Toàn Biên, thiên Tam tài tam đình luận).",
+    "han": "頦為地欲方而闊"
    }
   },
   "cam_che": {
@@ -4938,9 +5054,10 @@
    "viec": "Nhìn vào ba năm gần nhất để thấy mình đang đi lên.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": null
+    "trich": "Bất luận đại tiểu, chỉ yếu luân quách phân minh.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Tai không kể lớn nhỏ, chỉ cần vành tai rõ nét (Thần Tướng Toàn Biên, thiên Thập quan).",
+    "han": "不論大小止要輪廓分明"
    }
   },
   "tai_dai_nep": {
@@ -5037,9 +5154,10 @@
    "viec": "Hạ tốc độ nói bằng cách thở ra trước mỗi câu.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "bang_giam",
-    "y": null
+    "trich": "Thần thanh tắc khí hoà, khí hoà tắc thanh nhuận.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Thần yên thì hơi thở hoà, hơi thở hoà thì tiếng nói mới nhuận (Thần Tướng Toàn Biên, thiên Luận thanh).",
+    "han": "神清則氣和氣和則聲潤"
    }
   },
   "giong_nho_yeu": {
@@ -5061,9 +5179,10 @@
    "viec": "Đọc to một đoạn văn 5 phút mỗi ngày; khám hô hấp nếu hụt hơi khi nói ngắn.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
-    "nguon": "bang_giam",
-    "y": null
+    "trich": "Đan điền giả, thanh chi căn dã.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Đan điền (bụng dưới) là gốc của tiếng nói — thở sâu thì giọng mới đầy (Thần Tướng Toàn Biên, thiên Luận thanh).",
+    "han": "丹田者聲之根也"
    },
    "he": "Kim"
   },
@@ -5206,9 +5325,10 @@
    "viec": "Đi bộ chậm 10 phút mỗi ngày, không điện thoại.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
+    "trich": "Thái cấp tắc bạo, thái hoãn tắc trì.",
     "nguon": "than_tuong_toan_bien",
-    "y": null
+    "y": "Đi quá gấp thì thành hấp tấp, quá chậm thì thành trễ (Thần Tướng Toàn Biên, thiên Tướng hành luận).",
+    "han": "太急則暴太緩則遲"
    }
   },
   "dang_khom": {
@@ -5230,9 +5350,10 @@
    "viec": "Ngửa vai, mở ngực 1 phút mỗi giờ ngồi; tập lưng 3 lần mỗi tuần.",
    "uu_tien": 1,
    "sach": {
-    "trich": null,
+    "trich": "Cước bất dục chiết, đầu bất dục đê.",
     "nguon": "than_tuong_toan_bien",
-    "y": null
+    "y": "Khi đi, chân không nên khuỵu, đầu không nên cúi (Thần Tướng Toàn Biên, thiên Tướng hành luận).",
+    "han": "腳不欲折頭不欲低"
    },
    "he": "Kim"
   },
@@ -5278,9 +5399,10 @@
    "viec": "Soi gương buổi sáng một tuần: vùng giữa hai mày sáng hay xỉn đi những hôm bạn ngủ ít.",
    "uu_tien": 2,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": "Ấn Đường rộng khoảng hai ngón tay là chuẩn (Ma Y)."
+    "trich": "Lưỡng mi đầu giác yếu khoan bình.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Khoảng giữa hai đầu mày cần rộng và phẳng (Thần Tướng Toàn Biên, thiên Tướng Ấn Đường).",
+    "han": "兩眉頭角要寬平"
    }
   },
   "mat_vua": {
@@ -5301,9 +5423,10 @@
    "viec": "Trả lời câu \"ánh mắt\" ở phần Khảo sát: nhìn thẳng vào gương 5 giây rồi chọn.",
    "uu_tien": 2,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": "Mặt ngang bằng năm mắt là cân (phép tam đình ngũ nhãn)."
+    "trich": "Quan nhãn chi thiện ác, khả dĩ kiến thần chi thanh trọc dã.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Xem mắt là để thấy thần trong hay đục (Thần Tướng Toàn Biên, thiên Tướng mục luận).",
+    "han": "觀眼之善惡可以見神之清濁也"
    }
   },
   "canh_mui_vua": {
@@ -5349,9 +5472,10 @@
    "viec": "Để ý một tuần: khi nói chuyện, khoé miệng bạn hay hướng lên hay mím lại.",
    "uu_tien": 2,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": "Miệng là Xuất Nạp quan: vuông vức, khoé hướng lên là thuận (Ma Y)."
+    "trich": "Đoan hậu bất vọng đản.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Miệng ngay, dày, không nói bừa — sách gọi là có \"khẩu đức\" (Thần Tướng Toàn Biên, thiên Tướng khẩu).",
+    "han": "端厚不妄誕"
    }
   },
   "nhan_trung_vua": {
@@ -5373,9 +5497,10 @@
    "viec": "Giữ nhịp ngủ đều trong tuần này — sách xưa gắn vùng này với sức bền.",
    "uu_tien": 2,
    "sach": {
-    "trich": null,
+    "trich": "Dục trường nhi bất dục súc, trung thâm nhi ngoại khoát, trực nhi bất tà.",
     "nguon": "than_tuong_toan_bien",
-    "y": "Nhân Trung xem dài ngắn, sâu nông, thẳng lệch (Thần Tướng Toàn Biên)."
+    "y": "Nhân Trung nên dài, không co; giữa sâu, ngoài rộng; thẳng, không lệch (Thần Tướng Toàn Biên, thiên Nhân Trung luận).",
+    "han": "欲長而不欲縮中深而外闊直而不斜"
    }
   },
   "ham_vua": {
@@ -5397,9 +5522,10 @@
    "viec": "Nghĩ tới hai người đang giúp bạn nhiều nhất và nói một lời cảm ơn cụ thể.",
    "uu_tien": 2,
    "sach": {
-    "trich": null,
-    "nguon": "ma_y",
-    "y": "Hàm (Nô Bộc) đầy vững thì người dưới tin cậy (Ma Y)."
+    "trich": "Dục kỳ sung thực tương phụ, bất dục chi ly cô lộ.",
+    "nguon": "than_tuong_toan_bien",
+    "y": "Xương hai bên mặt nên đầy, đỡ lấy nhau; không nên rời rạc, trơ ra (Thần Tướng Toàn Biên, thiên Lục phủ luận).",
+    "han": "欲其充實相輔不欲支離孤露"
    }
   }
  },

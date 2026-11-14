@@ -27,6 +27,11 @@ def _lay(nhom: str, ma: str) -> dict | None:
     return {**m, **meta()} if m else None
 
 
+def ten_sach(ma: str) -> str:
+    """Tên hiển thị của sách có kho nguồn (KT-PT1)."""
+    return _d().get("source_ten", {}).get(ma, ma)
+
+
 def du_nien(ten: str) -> dict | None:
     return _lay("du_nien", ten)
 

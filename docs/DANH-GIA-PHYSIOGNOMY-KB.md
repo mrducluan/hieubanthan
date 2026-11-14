@@ -3,10 +3,9 @@
 Ngày 14/11/2026. Căn cứ: tài liệu bàn giao anh gửi (bản cập nhật 14/11/2026) + kịch bản trích xuất trên Drive
 ("Python Script PyMuPDF + Vision AI") + kho tri thức đang chạy trong repo.
 
-**Trạng thái: em CHƯA đọc được database.** Phiên làm việc chạy trên máy chủ đám mây, không với tới thư mục
-`/Users/mrducluan/…/physiognomy-kb` trên máy anh; trên Drive mới có sách nguồn (PDF, HTML), chưa có hai tệp `.sqlite`.
-Vì vậy tài liệu này đánh giá **theo mô tả**, chưa phải theo dữ liệu. Mọi con số của bộ database (1.879 tiết đoạn, 326 đồ hình,
-78 lá) là số tài liệu bàn giao ghi, em chưa kiểm.
+**Trạng thái (cập nhật cuối ngày 14/11): em ĐÃ đọc database** từ thư mục Drive anh chia sẻ (hai tệp `.sqlite`, tệp JSON
+Tarot, mã trích xuất; thư mục ảnh `assets/diagrams/` không có trong bản tải lên). Kết quả kiểm trên dữ liệu thật và phần đã
+nạp nằm ở **mục 8**; các mục 1–7 là đánh giá ban đầu theo tài liệu bàn giao, giữ lại để đối chiếu.
 
 Mục tiêu sản phẩm: nền móng độ đúng cho khâu QUAY LẠI (lời luận truy được về sách) + khâu THU HÚT (trang kiến thức có
 nguyên văn, đồ hình cổ). Đo: số phần ở mức "có nguyên văn đối chiếu" trong `docs/DO-TIN-KHO-TRI-THUC.md`
@@ -129,3 +128,62 @@ Phép tính không đổi → không tăng `ENGINE_VERSION`. Không migration, k
    phép tính Bát trạch đang có (một bộ tính).
 
 Ý 1 và 2 phụ thuộc chất lượng ảnh cắt và kết quả cổng kiểm mục 6.2.
+
+## 8. Kết quả sau khi đọc dữ liệu thật (14/11/2026)
+
+### 8.1 Database thật chứa gì
+
+| Sách (mã) | Số đoạn | Lấy từ đâu | Chất lượng đo được | Dùng thế nào |
+|---|---|---|---|---|
+| Thần Tướng Toàn Biên (SXQB) | 602 | Wikisource, bản chép trong **Cổ Kim Đồ Thư Tập Thành** quyển 631–644 | Rất tốt: 598 / 602 đoạn trùng từng chữ với bản em tự tải lại; chỗ khác với sách Tứ khố là dị thể (決 / 决, 強 / 强) và dị bản, không phải chữ rác | **Đã nạp** (em tải lại thẳng từ Wikisource để kiểm được về sau) |
+| Liễu Trang (YLZ) | 195 | ctext, bản người dùng gõ, lẫn chữ giản thể (准, 克) | Khá, chưa kiểm với bản quét | Chưa nạp — cần so 30 đoạn với PDF trên Drive |
+| Thuỷ Kính Tập (SKJ) | 362 | ctext, chữ máy nhận dạng | Kém: nhiều đoạn chữ rác (độ tin tự ghi 0,65) | Không dùng |
+| Thuỷ Long Kinh (SLK) | 78 + 221 hình | Wikisource, Tập Thành quyển 671–674 | Tốt | Chưa nạp — sách nói thế nước quanh mộ / nhà, ưu tiên thấp |
+| Địa Lý Ngũ Quyết (DLWJ) | 242 | Máy đọc bản in hiện đại, chữ giản thể | Trung bình | Không dùng làm nguyên văn |
+| **Dương Trạch Tam Yếu** (YZSY) | 162 | Máy đọc **bản dịch tiếng Việt** hiện đại | **Không có chữ Hán** (0 ký tự); lỗi nhận dạng dấu ("L' tư'ng ứng") | Không phải nguyên văn; bản dịch còn bản quyền → chỉ tham khảo |
+| **Bát Trạch Minh Kính** (BTMK) | 171 | Máy đọc bản dịch NXB Hà Nội 2009 | **Không có chữ Hán**; lỗi chính tả ("Cưu tinh", "Bắt quái") | như trên |
+| Tứ Đạn Tử, Tuyết Tâm Phú, Bạt Sa Kinh | 20 | Gõ tay vài đoạn | Ít | Chưa dùng |
+| 150 "luật", 49 thuật ngữ | — | Máy tự rút / tự nhớ (`vlm_gemini`, `model_knowledge`) | Không có câu sách đi kèm; có luật kiểu "thai hèn" | Không dùng |
+| Tarot 78 lá | 78 | Bunning, Pollack | Ô mô tả lá chép **nguyên văn tiếng Anh** của Bunning; tên Việt dạng "Nine of Wands — Chín Gậy"; từ khoá sai chính tả | Không dùng |
+
+Hai điều khác với tài liệu bàn giao:
+
+- "Dương Trạch Tam Yếu và Bát Trạch Minh Kính đã dịch 100 %" thực ra là **chỉ có bản dịch Việt**, không có nguyên văn —
+  nên hai sách này chưa lấp được chỗ thiếu câu sách của Bát trạch.
+- `tarot_knowledge_base.json` và `tarot_kb.sqlite` cũng chứa nguyên văn sách còn bản quyền, nhưng **chưa nằm trong danh
+  sách `.gitignore`** của tài liệu bàn giao. Anh thêm hai tệp này vào trước khi đẩy thư mục đó lên GitHub công khai.
+
+### 8.2 Phát hiện đáng giá nhất: database chỉ đường tới một nguồn tốt hơn
+
+Thần Tướng Toàn Biên có bản gõ sạch trên Wikisource, nằm trong bộ Cổ Kim Đồ Thư Tập Thành (in 1726) — lần trước em tìm theo
+tên sách nên không thấy. Cùng bộ đó, quyển 675–677 chép **Dương Trạch Thập Thư** (陽宅十書, đời Minh): sách có đúng phần
+gốc của Bát trạch (Đông – Tây tứ mệnh, bài Đại du niên ca, bảng cung phi 180 năm). Em nạp cả hai từ Wikisource.
+
+### 8.3 Đã nạp vào HieuBanThan (KT-NT3 + KT-PT1)
+
+| Việc | Kết quả |
+|---|---|
+| Kho nguồn `than_tuong_toan_bien.json` | 14 quyển, 699 mục, ~151 nghìn chữ |
+| Kho nguồn `duong_trach_thap_thu.json` | 3 quyển, 83 mục, ~30 nghìn chữ (quyển 4 toàn bùa trấn — không nạp) |
+| Nhân tướng: câu sách có nguyên văn | 43 → **70** (27 câu trung tính mới cho các nét tướng trước đây chỉ ghi tên sách) |
+| **Sửa lỗi** bảng lưu niên | Tuổi 10–11 là **Nhân Luân**, 12–14 là **Địa Luân** (KB cũ ghi Thiên Thành, Thiên Khuếch); 99 vị có chữ Hán, test khoá thứ tự theo bài «流年運氣部位歌» |
+| Phong thuỷ: câu sách có nguyên văn | 0 → **15** (8 du niên + 7 dấu hiệu: tứ linh, minh đường, đường đâm, cây chắn cửa, ba cửa thẳng hàng, nhà sáng, nước ôm) |
+| **Đối chiếu phép tính** Bát trạch với sách | Bảng du niên 8 quái × 8 hướng **khớp** bài Đại du niên ca; cung phi nam / nữ **khớp cả 180 năm** của bảng «三元甲子福德宮定局» (đã thử hai chu kỳ 1684–2043); không phải sửa phép tính nào |
+| Hiển thị | Trang dấu hiệu có mục "Nguyên văn sách xưa"; hỏi đáp về du niên / dấu hiệu kèm câu sách; "Vì sao nói vậy" của Nhân tướng hiện chữ Hán |
+
+Dấu chấm câu trên Wikisource do máy và người dùng thêm, phát hành theo giấy phép CC BY-SA; chính văn thì thuộc công chúng.
+Vì vậy hai kho nguồn mới **bỏ hết dấu câu**, chỉ giữ chữ (như các sách Tứ khố). Mọi trang Wikisource của hai sách đang ở mức
+"chưa hiệu đính" nên cả hai mang cờ `can_doi_chieu`.
+
+Không đổi phép tính, không đổi mức → không tăng `ENGINE_VERSION`. Không migration, không dependency, web không đổi.
+
+### 8.4 Chưa làm, theo thứ tự nên làm
+
+1. **Ảnh đồ hình**: thư mục `assets/diagrams/` chưa có trên Drive. Anh tải thêm thư mục này thì em kiểm 76 hình tướng
+   (bản đồ mặt, lưu niên, nốt ruồi) và làm ý tưởng 1–3 của mục 7.
+2. **Liễu Trang**: so mẫu với bản quét rồi nạp làm kho nguồn thứ ba của lối Ma Y.
+3. **Dương Trạch Thập Thư, phần còn lại**: «論宅外形» và «內形篇» còn khoảng 40 câu về dấu hiệu quanh nhà, trong nhà có thể
+   gắn cho KB `bo_tri` (chỉ lấy câu trung tính; sách có nhiều câu đoán hoạ).
+4. **Nguyên văn Dương Trạch Tam Yếu, Bát Trạch Minh Kính** (chữ Hán) vẫn thiếu — cần bản quét chữ Hán, không phải bản dịch.
+5. Soát lại giấy phép dấu câu của các kho nguồn Wikisource đã nạp trước đây (Băng Giám, Tăng San Bốc Dịch, Cốt Tuỷ Phú…):
+   nếu trang nguồn cũng ghi dấu câu theo CC BY-SA thì bỏ dấu câu như hai kho mới.

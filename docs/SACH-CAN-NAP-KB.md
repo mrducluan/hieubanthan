@@ -11,6 +11,11 @@ Còn lại không cần (nhóm E, có lý do).
 Chỗ hổng lớn nhất hiện nay là **Phong thuỷ**: kho nguồn chưa có một câu sách nào cho Bát trạch và Huyền Không,
 trong khi Tử vi, Bát tự, Kinh Dịch, Nhân tướng, Tarot đã có nguyên văn đối chiếu.
 
+> **Cập nhật 14/11/2026 (KT-NT3 + KT-PT1)**: đã tự nạp **Thần Tướng Toàn Biên** và **Dương Trạch Thập Thư** (bản chép trong
+> Cổ Kim Đồ Thư Tập Thành, Wikisource). Dương Trạch Thập Thư có phần gốc của Bát trạch (du niên, cung phi) nên Phong thuỷ
+> không còn "0 câu sách". Bát Trạch Minh Kính và Dương Trạch Tam Yếu vẫn cần **bản chữ Hán** — bản anh đã có là bản dịch
+> Việt. Chi tiết: `docs/DANH-GIA-PHYSIOGNOMY-KB.md` mục 8.
+
 ## Quy tắc bản quyền khi nạp
 
 - **Cổ thư** (tác giả mất từ lâu): chép nguyên văn vào kho nguồn, test bắt KB khớp từng chữ.

@@ -3,7 +3,8 @@
  "source": {
   "duong_trach_tam_yeu": "陽宅三要",
   "tang_thu": "葬書",
-  "ham_long_kinh": "撼龍經"
+  "ham_long_kinh": "撼龍經",
+  "duong_trach_thap_thu": "陽宅十書"
  },
  "trang_thai": "nhap_ai",
  "can_doi_chieu": true,
@@ -11,42 +12,90 @@
   "Sinh Khí": {
    "loai": "cát",
    "y_nghia": "Hướng tốt nhất: sinh sôi, phát triển, danh tiếng.",
-   "dung_cho": "cửa chính, bàn làm việc, hướng ngồi khi cần năng lượng"
+   "dung_cho": "cửa chính, bàn làm việc, hướng ngồi khi cần năng lượng",
+   "sach": {
+    "han": "生者生氣星貪狼星也一木",
+    "trich": "Sinh giả, Sinh Khí tinh, Tham Lang tinh dã, nhất mộc.",
+    "y": "Sinh Khí ứng với sao Tham Lang, hành Mộc, là một trong ba sao tốt.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "Thiên Y": {
    "loai": "cát",
    "y_nghia": "Hướng tốt: sức khoẻ, được giúp đỡ, bình ổn.",
-   "dung_cho": "phòng ngủ người lớn tuổi, hướng bếp (miệng bếp)"
+   "dung_cho": "phòng ngủ người lớn tuổi, hướng bếp (miệng bếp)",
+   "sach": {
+    "han": "天者天乙星巨門星也一土",
+    "trich": "Thiên giả, Thiên Ất tinh, Cự Môn tinh dã, nhất thổ.",
+    "y": "Thiên Y (sách chép là Thiên Ất) ứng với sao Cự Môn, hành Thổ, là một trong ba sao tốt.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "Diên Niên": {
    "loai": "cát",
    "y_nghia": "Hướng tốt: hoà hợp, bền lâu, quan hệ vợ chồng.",
-   "dung_cho": "phòng ngủ vợ chồng, đầu giường"
+   "dung_cho": "phòng ngủ vợ chồng, đầu giường",
+   "sach": {
+    "han": "延者延年星武曲星也一金",
+    "trich": "Diên giả, Diên Niên tinh, Vũ Khúc tinh dã, nhất kim.",
+    "y": "Diên Niên ứng với sao Vũ Khúc, hành Kim, là một trong ba sao tốt.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "Phục Vị": {
    "loai": "cát",
    "y_nghia": "Hướng yên: ổn định, tự tại, học hành, suy ngẫm.",
-   "dung_cho": "bàn học, bàn thờ, phòng làm việc tĩnh"
+   "dung_cho": "bàn học, bàn thờ, phòng làm việc tĩnh",
+   "sach": {
+    "han": "輔弼者一名伏唫",
+    "trich": "Phụ Bật giả, nhất danh Phục Ngâm.",
+    "y": "Phục Vị là chính cung của mình, ứng với sao Phụ Bật, còn gọi Phục Ngâm.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "Hoạ Hại": {
    "loai": "hung",
    "y_nghia": "Hướng xấu nhẹ: thị phi, trục trặc nhỏ.",
-   "dung_cho": "kho, nhà vệ sinh"
+   "dung_cho": "kho, nhà vệ sinh",
+   "sach": {
+    "han": "禍者禍害星祿存星也二土",
+    "trich": "Hoạ giả, Hoạ Hại tinh, Lộc Tồn tinh dã, nhị thổ.",
+    "y": "Hoạ Hại ứng với sao Lộc Tồn, hành Thổ.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "Lục Sát": {
    "loai": "hung",
    "y_nghia": "Hướng xấu: rối ren, bất hoà, tình cảm lộn xộn.",
-   "dung_cho": "kho, nhà vệ sinh, cầu thang"
+   "dung_cho": "kho, nhà vệ sinh, cầu thang",
+   "sach": {
+    "han": "六者六煞星文曲星也一水",
+    "trich": "Lục giả, Lục Sát tinh, Văn Khúc tinh dã, nhất thuỷ.",
+    "y": "Lục Sát ứng với sao Văn Khúc, hành Thuỷ.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "Ngũ Quỷ": {
    "loai": "hung",
    "y_nghia": "Hướng xấu: hao tổn, bất ngờ không hay, tranh chấp.",
-   "dung_cho": "nhà vệ sinh, kho; tránh đặt cửa chính"
+   "dung_cho": "nhà vệ sinh, kho; tránh đặt cửa chính",
+   "sach": {
+    "han": "五者五鬼星廉貞星也一火",
+    "trich": "Ngũ giả, Ngũ Quỷ tinh, Liêm Trinh tinh dã, nhất hoả.",
+    "y": "Ngũ Quỷ ứng với sao Liêm Trinh, hành Hoả.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "Tuyệt Mệnh": {
    "loai": "hung",
    "y_nghia": "Hướng xấu nhất: cạn kiệt, trắc trở lớn.",
-   "dung_cho": "nơi ít dùng; tránh cửa chính, đầu giường"
+   "dung_cho": "nơi ít dùng; tránh cửa chính, đầu giường",
+   "sach": {
+    "han": "絕者絕命星破軍星也二金",
+    "trich": "Tuyệt giả, Tuyệt Mệnh tinh, Phá Quân tinh dã, nhị kim.",
+    "y": "Tuyệt Mệnh ứng với sao Phá Quân, hành Kim.",
+    "nguon": "duong_trach_thap_thu"
+   }
   }
  },
  "quai": {
@@ -125,7 +174,13 @@
      "chi_phi": "sua_chua",
      "lam": "Vách ngăn thấp hay tủ giày cao ở sảnh (huyền quan); nhà phố có sân thì làm cổng, tường thấp hoặc hàng cây phía trước."
     }
-   ]
+   ],
+   "sach": {
+    "han": "凡宅不居當衝口處",
+    "trich": "Phàm trạch bất cư đương xung khẩu xứ.",
+    "y": "Nhà không nên ở chỗ đối thẳng miệng đường đâm tới.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "nga_ba": {
    "tieu_de": "Nhà ở ngã ba, ngã tư",
@@ -205,7 +260,13 @@
      "chi_phi": "sua_chua",
      "lam": "Lan can, rào chắn an toàn cho trẻ nếu bờ nước sát nhà."
     }
-   ]
+   ],
+   "sach": {
+    "han": "前後有水環抱貴",
+    "trich": "Tiền hậu hữu thuỷ hoàn bão quý.",
+    "y": "Trước sau có dòng nước ôm vòng lấy nhà là quý.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "nghia_trang": {
    "tieu_de": "Nhà gần nghĩa trang, bệnh viện",
@@ -280,7 +341,13 @@
      "chi_phi": "sua_chua",
      "lam": "Không xây thêm che kín phần sân trước nếu còn cách khác."
     }
-   ]
+   ],
+   "sach": {
+    "han": "明堂須當容萬馬",
+    "trich": "Minh đường tu đương dung vạn mã.",
+    "y": "Minh đường nên rộng “đủ chứa vạn ngựa”, cách nói ví von rằng khoảng trước nhà cần thoáng, rộng.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "tu_linh": {
    "tieu_de": "Tả Thanh Long, hữu Bạch Hổ",
@@ -293,7 +360,13 @@
     "huyen vu",
     "chu tuoc",
     "tu linh"
-   ]
+   ],
+   "sach": {
+    "han": "凡宅左有流水謂之青龍右有長道謂之白虎前有汙池謂之朱雀後有丘陵謂之元武為最貴地",
+    "trich": "Phàm trạch tả hữu lưu thuỷ vị chi Thanh Long, hữu hữu trường đạo vị chi Bạch Hổ, tiền hữu ô trì vị chi Chu Tước, hậu hữu khâu lăng vị chi Nguyên Vũ, vi tối quý địa.",
+    "y": "Nhà bên trái có dòng nước (Thanh Long), bên phải có đường dài (Bạch Hổ), trước có ao (Chu Tước), sau có gò đồi (Huyền Vũ, sách đời Thanh chép là Nguyên Vũ) là thế đất quý nhất.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "bep_doi_cua": {
    "tieu_de": "Bếp đối diện cửa chính",
@@ -736,7 +809,13 @@
      "chi_phi": "sua_chua",
      "lam": "Cây đường phố thì xin cơ quan quản lý cây xanh cắt tỉa; cây nhà trồng mà rễ đội nền thì bứng dời hoặc thay bằng cây tán gọn."
     }
-   ]
+   ],
+   "sach": {
+    "han": "大樹當門",
+    "trich": "Đại thụ đương môn.",
+    "y": "Sách xếp “cây lớn chắn giữa cửa” vào những điều nên tránh ở trước nhà.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "be_ca": {
    "tieu_de": "Bể cá trong nhà",
@@ -792,7 +871,13 @@
      "chi_phi": "sua_chua",
      "lam": "Vách sảnh bán kín kèm tủ giày cao 1,8–2,2 m ngay sau cửa chính."
     }
-   ]
+   ],
+   "sach": {
+    "han": "重重宅戶三門莫相對",
+    "trich": "Trùng trùng trạch hộ, tam môn mạc tương đối.",
+    "y": "Nhà nhiều lớp cửa thì ba cửa chớ để thẳng hàng với nhau.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "ban_tho_gio_thoi": {
    "tieu_de": "Điều hoà, quạt trần thổi thẳng vào bàn thờ",
@@ -1227,7 +1312,13 @@
      "chi_phi": "sua_chua",
      "lam": "Làm giếng trời hoặc ô lấy sáng giữa nhà, chữa dột, chống thấm tường khi sửa nhà."
     }
-   ]
+   ],
+   "sach": {
+    "han": "凡宅居滋潤光澤陽氣者吉",
+    "trich": "Phàm trạch cư tư nhuận quang trạch dương khí giả cát.",
+    "y": "Nhà ở tươi nhuận, sáng sủa, đủ dương khí thì tốt.",
+    "nguon": "duong_trach_thap_thu"
+   }
   },
   "dat_meo": {
    "tieu_de": "Đất hình méo, tam giác",
@@ -1758,5 +1849,8 @@
    "noi_dung": "Nhiều điều khó chịu trong nhà là do nếp dùng (bừa, bí, để đồ chắn lối) chứ không do hướng. Bài đọc luôn tách hai nhóm: việc của nhà (kê lại, sửa) và việc của thói quen (dọn, đóng cửa, giờ giấc). Không ghép sao Huyền Không với con số thần số — hai hệ không có cầu nối trong cổ thư; chỉ gợi mở sang mảng khác bằng ý định chung."
   }
  },
- "mau_an_toan": "Sách xưa gắn cặp sao này với {thu} — đây là lời nhắc chăm nhà cho cẩn thận, không phải dự báo."
+ "mau_an_toan": "Sách xưa gắn cặp sao này với {thu} — đây là lời nhắc chăm nhà cho cẩn thận, không phải dự báo.",
+ "source_ten": {
+  "duong_trach_thap_thu": "Dương Trạch Thập Thư"
+ }
 }

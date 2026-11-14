@@ -470,6 +470,14 @@ def _doan_nha(m: dict) -> str:
 
 
 # ------------------------------------------------------------------ NARRATIVE (template)
+def _cau_sach(m: dict) -> str:
+    """KT-PT1: câu nguyên văn đã đối chiếu kho nguồn (KB `sach`), nối sau lời đáp. Không có thì rỗng."""
+    c = m.get("sach")
+    if not c:
+        return ""
+    return f" Sách xưa ({kb.ten_sach(c['nguon'])}) chép: «{c['han']}» — {c['y']}"
+
+
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
     if l == "sao_han":
@@ -483,7 +491,7 @@ def _doan(m: dict) -> tuple[str, str | None]:
         dau = f"Hướng {m['huong']} " if m.get("huong") else ""
         vai = f"({m['vai']}) " if m.get("vai") else ""
         return (f"{dau}{vai}— {m['ten']} ({'hướng tốt' if m['cat_hung'] == 'cát' else 'hướng xấu'}): "
-                f"{m['y_nghia']} Hợp dùng cho: {m['dung_cho']}.", None)
+                f"{m['y_nghia']} Hợp dùng cho: {m['dung_cho']}.{_cau_sach(m)}", None)
     if l == "trach":
         s = f"Nhà hướng {m['huong']} thì toạ {m['toa']} → {m['quai']} trạch ({m['nhom']})."
         if "hop_nhom" in m:
@@ -499,7 +507,7 @@ def _doan(m: dict) -> tuple[str, str | None]:
         them = f" Nhìn theo đời sống: {m['giai_thich_hien_dai']}" if m.get("giai_thich_hien_dai") else ""
         v0 = next((v["lam"] for v in (m.get("viec") or []) if v["chi_phi"] == "khong_ton"), None)
         viec = f" Việc không tốn gì: {v0}" if v0 else ""
-        return f"{m['tieu_de']}{nhan}: {m['noi_dung']}{them} Gợi ý thực tế: {m['goi_y']}{viec}", None
+        return f"{m['tieu_de']}{nhan}: {m['noi_dung']}{them} Gợi ý thực tế: {m['goi_y']}{viec}{_cau_sach(m)}", None
     if l == "am_trach":
         return f"{m['tieu_de']}: {m['noi_dung']}", None
     if l == "sao_nam":
