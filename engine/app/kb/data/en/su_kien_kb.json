@@ -1,0 +1,24 @@
+{
+ "_nguon": "EN-ALL GĐ 4 — bản phủ tiếng Anh, phần Tử vi của su_kien_kb.json (sao_cung_menh, sao_toa_menh). EN-ALL GĐ 6: phần quẻ (que_cau_truc, ten_tuong).",
+ "_trang_thai": "bien_tap",
+ "source": {
+  "tuvi_vi_tri_v1": "Rules for placing the 14 main stars from the position of Zi Wei (Zi Wei Dou Shu Quan Shu) — computed deterministically, checked against 60 sample charts"
+ },
+ "sao_cung_menh": {
+  "tieu_de": "When {sao} is in the {cung}, which stars are in the Life Palace",
+  "luon_co": "When {sao} is in the {cung}, the Life Palace always holds {luon_co} (checked across all 12 positions of Zi Wei).",
+  "khong_co": "When {sao} is in the {cung}, the Life Palace does not hold one fixed star.",
+  "vo_chinh_dieu": "In {n} of the 12 positions the Life Palace has no main star at all — it is then read by borrowing the stars of the opposite palace.",
+  "cot": ["Main stars in the Life Palace", "Positions out of 12"],
+  "dong_vcd": "No main star"
+ },
+ "sao_toa_menh": {
+  "tieu_de": "When {sao} sits right in the Life Palace: which stars are in the Wealth, Career and Travel palaces",
+  "doan": "Across all 12 positions of the Zi Wei star: when {sao} sits right in the Life Palace, the three palaces read together with it — Wealth, Career and Travel (the trine and opposite palaces) — hold the stars in the table below; this is the framework that comes with {sao} on every chart with {sao} in the Life Palace.",
+  "cot": ["Palace", "Always holds", "Possibilities (positions out of 12)"],
+  "khong_co": "not fixed",
+  "cung": [["Wealth Palace"], ["Career Palace"], ["Travel Palace"]]
+ },
+ "que_cau_truc": {"tieu_de": "Structure of {ten}", "doan": "{ten} is made of the lower trigram {ha} and the upper trigram {thuong}. In the Eight Palaces it belongs to the {cung} palace (element {hanh}), type: {loai}; the Self line is line {the} and the Other line is line {ung}. Its nuclear hexagram is {ho}, its opposite (every line reversed) is {thac}, and its inverse (turned upside down) is {tong}. The table below shows the Na Jia branch and Six Relations of each line, and the hexagram you get when only that line changes.", "cot": ["Line", "Yin / yang", "Na Jia branch", "Element", "Six Relations", "Self / Other", "If this line changes"], "hao": ["Line 1 (bottom)", "Line 2", "Line 3", "Line 4", "Line 5", "Line 6 (top)"], "tra_loi": "{ten_day_du} ({ten_han}) is hexagram {so} of the I Ching: {y}", "chu_giai": ["Self line: the line that stands for the person asking; Other line: the line for the matter or the person on the other side.", "Na Jia: assigns each line an earthly branch, which gives the line its element.", "Six Relations: the role of a line relative to the element of its palace — Sibling, Offspring, Wealth, Officer, Parent.", "The nuclear hexagram combines lines 2–4 and 3–5 (what develops inside); the opposite reverses every line; the inverse turns all six lines upside down."]},
+ "ten_tuong": {"Càn": "Heaven", "Đoài": "Lake", "Ly": "Fire", "Chấn": "Thunder", "Tốn": "Wind", "Khảm": "Water", "Cấn": "Mountain", "Khôn": "Earth"}
+}

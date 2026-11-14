@@ -69,4 +69,9 @@ def test_ban_anh_bat_tu_cung_khung_khong_chu_viet():
     import re
     for x in en:
         assert not re.search(r"[ăâđêôơưĂÂĐÊÔƠƯàáảãạèéẻẽẹìíỉĩịòóỏõọùúủũụỳýỷỹỵ]", x["ve"] + x["y"] + x["sach"]), x
-    assert not C.post("/v1/tuvi/an-sao", json=b, headers={"x-ngon-ngu": "en"}).json()["sach_xua"]
+    # GĐ 4 (EN-ALL): Tử vi bản Anh cũng có sách xưa — cùng khung với bản Việt, không chữ Việt.
+    tv = C.post("/v1/tuvi/an-sao", json=b).json()["sach_xua"]
+    te = C.post("/v1/tuvi/an-sao", json=b, headers={"x-ngon-ngu": "en"}).json()["sach_xua"]
+    assert [(x["loai"], x["han"]) for x in tv] == [(x["loai"], x["han"]) for x in te]
+    for x in te:
+        assert not re.search(r"[ăâđêôơưĂÂĐÊÔƠƯàáảãạèéẻẽẹìíỉĩịòóỏõọùúủũụỳýỷỹỵ]", x["ve"] + x["y"] + x["sach"]), x

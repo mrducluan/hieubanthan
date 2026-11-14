@@ -26,7 +26,7 @@ export const CHU_CHUNG = {
   "ho_so.nut_xem": { nhom: HS, nhan: "Nút gửi mặc định", mac_dinh: "Xem con số của tôi", en: "See my numbers", toi_da: 40 },
   "ho_so.them_khong_bat_buoc": { nhom: HS, nhan: "Dòng mở phần thêm (không bắt buộc)", mac_dinh: "Thêm giờ, nơi sinh, tên gọi khác (tuỳ chọn)", en: "Add birth time, place, another name (optional)", toi_da: 100 },
   "ho_so.them_day_du": { nhom: HS, nhan: "Dòng mở phần thêm (mảng cần giờ sinh)", mac_dinh: "Giờ sinh, giới tính & nơi sinh (cần cho mảng này)", en: "Birth time, sex and place of birth (needed here)", toi_da: 100 },
-  "ho_so.them_gioi_tinh": { nhom: HS, nhan: "Dòng mở phần thêm (mảng cần giới tính)", mac_dinh: "Giới tính (cần cho mảng này)", en: "Sex (needed here)", toi_da: 100 },
+  "ho_so.them_gioi_tinh": { nhom: HS, nhan: "Dòng mở phần thêm (mảng cần giới tính)", mac_dinh: "Giới tính (cần cho mảng này)", en: "One more detail for this tool", toi_da: 100 },
   "ho_so.ten_khac": { nhom: HS, nhan: "Nhãn ô tên thường gọi", mac_dinh: "Tên thường gọi / cách viết khác", en: "Name you go by / other spelling", toi_da: 60 },
   "ho_so.gio_sinh": { nhom: HS, nhan: "Nhãn ô giờ sinh", mac_dinh: "Giờ sinh", en: "Time of birth", toi_da: 30 },
   "ho_so.gioi_tinh": { nhom: HS, nhan: "Nhãn ô giới tính", mac_dinh: "Giới tính", en: "Sex", toi_da: 30 },

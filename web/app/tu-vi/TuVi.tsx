@@ -39,21 +39,25 @@ import { ghi } from "@/lib/do-luong";
 import { useGiaoDien, type GiaoDien } from "@/lib/giao-dien-la-so";
 import { usePost } from "@/lib/goi-api";
 import { hoiMang, type HoiMangRes } from "@/lib/hoi-mang";
+import { useGoiYDau } from "@/lib/goi-y-dau";
+import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 import { gioHienThi, kemTinhTrang, laSoTuHoSo, useHoSo } from "@/lib/hoso";
 import { laSoNguoiThan, tenHien, useNguoiThan, type NguoiThan } from "@/lib/nguoi-than";
 import { taiAnhSvg } from "@/lib/tai-anh-svg";
 import { cn } from "@/lib/utils";
+import { useChuTuVi } from "@/components/huyen-hoc/chu-tu-vi";
+import { TenHienProvider } from "@/components/khung/TenHien";
+import { useDuong } from "@/components/khung/NgonNgu";
+import { gopTenHien, tenTheo } from "@/lib/ten-hien";
 
-// Cờ từ engine viết cho người phát triển — đổi sang lời dễ hiểu cho người đọc.
-const LOI_NHAN_CO: Record<string, string> = {
-  ty_conflict: "Bạn sinh 23:00–23:59: tử vi tính sang giờ Tý của ngày hôm sau, còn thần số và bát tự vẫn tính ngày hôm đó — đây là quy ước của từng môn, không phải lỗi.",
-  nam_phai: "Chính tinh và tứ hoá đã đối chiếu độc lập; Tuần/Triệt theo lối Việt; một số tạp diệu riêng của lối Việt đang được bổ sung.",
-};
+// Cờ từ engine viết cho người phát triển — đổi sang lời dễ hiểu cho người đọc (EN-ALL: chữ ở lib/chu/tu-vi.ts, khoá co.<loại>).
+const CO_CO_LOI = new Set(["ty_conflict", "nam_phai"]);
 
-const GOI_Y = [
-  { nhom: "Lá số", cau: ["Cung Mệnh của tôi nói gì về tính cách?", "Cung Quan Lộc của tôi nói gì về sự nghiệp?", "Cung Phu Thê của tôi thế nào?"] },
-  { nhom: "Hạn", cau: ["Đại hạn hiện tại của tôi là chủ đề gì?", "Năm nay lưu niên của tôi thế nào?", "Tháng sau của tôi thế nào?"] },
-  { nhom: "Kiến thức", cau: ["Tứ hoá là gì?", "Tham Lang ở cung Quan Lộc có ý nghĩa gì?"] },
+// Gợi ý câu hỏi theo nhóm (chữ ở lib/chu/tu-vi.ts).
+const GOI_Y_KHOA = [
+  { nhom: "hoi.nhom_la_so", cau: ["hoi.la_so_1", "hoi.la_so_2", "hoi.la_so_3"] },
+  { nhom: "hoi.nhom_han", cau: ["hoi.han_1", "hoi.han_2", "hoi.han_3"] },
+  { nhom: "hoi.nhom_kien_thuc", cau: ["hoi.kien_thuc_1", "hoi.kien_thuc_2"] },
 ];
 
 const namNayVN = () => Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho_Chi_Minh", year: "numeric" }).format(new Date()));
@@ -61,6 +65,10 @@ const namNayVN = () => Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho
 export function TuVi() {
   const hoSo = useHoSo();
   const c = useChu();
+  const { c: ct, en } = useChuTuVi();
+  const d = useDuong();
+  // EN-AI: bản Anh — chip = câu chuẩn engine (bấm là hỏi luôn), ô gõ tự do vẫn ngay dưới.
+  const GOI_Y = useGoiYDau("tuvi", en, GOI_Y_KHOA.map((g) => ({ nhom: ct(g.nhom), cau: g.cau.map((k) => ct(k)) })), useChuHoiDap().c("goi_y"));
   // TV-PHAI (chủ dự án chốt 2026-10-02): "hiện cả hai" — Hoả/Linh lối Việt | Trung Châu; nửa sau tháng nhuận.
   const [hoaLinh, setHoaLinh] = useState<"viet" | "trung">("viet");
   // HTT-1: giờ sinh theo đồng hồ (mặc định, như sách Việt) hay giờ mặt trời thực tại kinh độ nơi sinh — engine lập lại lá số.
@@ -110,8 +118,8 @@ export function TuVi() {
   // TV-NHUAN3: sinh trong tháng nhuận (mọi ngày — cách "cả tháng tính tháng sau" đổi cả nửa đầu tháng)
   const coNhuan = !!ls?.phai?.co_the_doi_thang_nhuan || !!ls?.phai?.sinh_thang_nhuan || thangNhuan !== "thang_sau";
   const nhacPhai = [
-    ls?.phai?.lich_khac && "Ngày sinh của bạn lệch giữa lịch Việt và lịch Trung Quốc — đổi lịch sẽ ra lá số khác.",
-    coNhuan && "Bạn sinh trong tháng nhuận — mỗi phái tính một kiểu, Mệnh và Cục có thể khác.",
+    ls?.phai?.lich_khac && ct("nhac.lich_khac"),
+    coNhuan && ct("nhac.nhuan"),
   ].filter(Boolean).join(" ");
   const chiChon = chon ?? chiMenh;
   const khongBietGio = !nt && hoSo?.do_tin_gio === "unknown";
@@ -152,19 +160,22 @@ export function TuVi() {
   };
 
   useBatDauDoc("tuvi", Boolean(ls) && !nt);
+  // EN-ALL: mã (cung…) giữ chữ Việt làm khoá; HIỆN qua `ten_hien` của phản hồi (bản Việt: nguyên mã).
+  const tenMa = tenTheo(gopTenHien(ls?.ten_hien, vh?.ten_hien), en);
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Orbit} hinh="tu-vi" ten="Xem Tử vi: năm nay bạn nên chú ý gì?" mo_ta="Việc đang chững, tiền vào rồi lại ra, chuyện tình cảm chưa rõ? Nhập ngày giờ sinh để có lá số 12 cung, rồi đọc từng mảng đời bằng lời thường: chỗ đang thuận, chỗ nên chú ý, việc nên làm." />;
+  const dau = <DauMang Icon={Orbit} hinh="tu-vi" ten={ct("dau.ten")} mo_ta={ct("dau.mo_ta")} />;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   return (
+    <TenHienProvider ten={[ls?.ten_hien, vh?.ten_hien, lnm?.ten_hien]}>
     <div>
       {dau}
 
       <XemNguoiThanCtx.Provider value={Boolean(nt)}>
-      <section aria-label="Lá số" className="space-y-4">
+      <section aria-label={ct("aria.la_so")} className="space-y-4">
         {(laSoBan || (dsNguoiThan?.length ?? 0) > 0) && <ChonNguoiXem dangXem={nt} onChon={chonNguoi} coBan={Boolean(laSoBan)} />}
         {!laSo && <MoiLapLaSo moDun="tuvi" hoSo={hoSo} />}
         {laSo && <p className="text-sm text-fg-faint">
-          Mới làm quen Tử vi? <Link href="/tu-vi/la-so-mau" className="text-gold underline">Xem 6 lá số mẫu được đọc từng bước</Link>, có giải nghĩa từng thuật ngữ.
+          {ct("la_so_mau.moi")} <Link href={d("/tu-vi/la-so-mau")} className="text-gold underline">{ct("la_so_mau.link")}</Link>{ct("la_so_mau.sau")}
         </p>}
         {laSo && !ls && !loi && <KhungTai dong={6} />}
         {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
@@ -173,17 +184,17 @@ export function TuVi() {
             {/* Thanh điều khiển */}
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <Tabs value={giaoDien} onValueChange={(v) => doiGiaoDien(v as GiaoDien)}>
-                <TabsList aria-label="Giao diện lá số">
-                  <TabsTrigger value="dem"><Moon className="mr-1.5 inline size-3.5" aria-hidden />Đêm sao</TabsTrigger>
-                  <TabsTrigger value="giay"><ScrollText className="mr-1.5 inline size-3.5" aria-hidden />Giấy cổ</TabsTrigger>
+                <TabsList aria-label={ct("giao_dien")}>
+                  <TabsTrigger value="dem"><Moon className="mr-1.5 inline size-3.5" aria-hidden />{ct("giao_dien.dem")}</TabsTrigger>
+                  <TabsTrigger value="giay"><ScrollText className="mr-1.5 inline size-3.5" aria-hidden />{ct("giao_dien.giay")}</TabsTrigger>
                 </TabsList>
               </Tabs>
-              <div className="order-2 flex items-center rounded-full border border-line bg-surface/60 p-1 sm:order-none" role="group" aria-label="Năm xem hạn">
-                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label="Năm trước" onClick={() => setNamXem((n) => Math.max(1900, n - 1))}><ChevronLeft className="size-4" /></button>
+              <div className="order-2 flex items-center rounded-full border border-line bg-surface/60 p-1 sm:order-none" role="group" aria-label={ct("nam_xem")}>
+                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label={ct("nam_truoc")} onClick={() => setNamXem((n) => Math.max(1900, n - 1))}><ChevronLeft className="size-4" /></button>
                 <span className="min-w-[5.5rem] text-center text-sm sm:min-w-[7.5rem]" aria-live="polite">
-                  Năm <b className="text-fg">{namXem}</b>{vh && vh.nam_xem === namXem ? <span className="hidden text-fg-faint sm:inline"> · {vh.can_chi_nam_xem}</span> : null}
+                  {ct("nam")} <b className="text-fg">{namXem}</b>{vh && vh.nam_xem === namXem ? <span className="hidden text-fg-faint sm:inline"> · {vh.can_chi_nam_xem}</span> : null}
                 </span>
-                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label="Năm sau" onClick={() => setNamXem((n) => Math.min(2100, n + 1))}><ChevronRight className="size-4" /></button>
+                <button type="button" className="vung-cham grid size-10 place-items-center rounded-full text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg" aria-label={ct("nam_sau")} onClick={() => setNamXem((n) => Math.min(2100, n + 1))}><ChevronRight className="size-4" /></button>
               </div>
               {/* TM-1: lớp hạn + trường phái gom vào "Hiển thị" (trước là 2 nút rời + khung riêng — đọc như thanh tab, điện thoại
                   gãy 3 hàng). Nhãn nút nói đang hiện lớp nào; có điều cần biết (lệch lịch, tháng nhuận) thì nhắc ngay dưới hàng. */}
@@ -192,9 +203,9 @@ export function TuVi() {
                 className={cn("order-3 inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3.5 text-sm transition-colors sm:order-none",
                   moPhai ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>
                 <SlidersHorizontal className="size-4" aria-hidden />
-                Hiển thị
-                <span className="hidden text-fg-faint sm:inline">· {lop.dai_han && lop.luu_nien ? "Đại hạn + lưu niên" : lop.dai_han ? "Đại hạn" : lop.luu_nien ? "Lưu niên" : "Không lớp hạn"}</span>
-                {(phaiKhac || nhacPhai) && <><span className="size-1.5 rounded-full bg-moon" aria-hidden /><span className="sr-only">(có lựa chọn khác mặc định hoặc điều cần biết)</span></>}
+                {ct("hien_thi")}
+                <span className="hidden text-fg-faint sm:inline">· {lop.dai_han && lop.luu_nien ? ct("hien_thi.ca_hai") : lop.dai_han ? ct("hien_thi.dai_han") : lop.luu_nien ? ct("hien_thi.luu_nien") : ct("hien_thi.khong")}</span>
+                {(phaiKhac || nhacPhai) && <><span className="size-1.5 rounded-full bg-moon" aria-hidden /><span className="sr-only">{ct("hien_thi.cham")}</span></>}
                 <ChevronDown className={cn("size-4 transition-transform motion-reduce:transition-none", moPhai && "rotate-180")} aria-hidden />
               </button>
               {/* Điện thoại: nút tải ảnh (chỉ biểu tượng) đứng cùng hàng giao diện → còn 2 hàng thay vì 3. */}
@@ -202,36 +213,35 @@ export function TuVi() {
                 if (!svgRef.current) return;
                 setDangTai(true);
                 setLoiAnh(null);
-                try { await taiAnhSvg(svgRef.current, `la-so-tu-vi-${ls.can_chi_nam.can}-${ls.can_chi_nam.chi}.png`); ghi("chart_interacted", { mo_dun: "tuvi", kind: "tai_anh" }); }
-                catch (e) { setLoiAnh(e instanceof Error ? e.message : "Chưa xuất được ảnh."); }
+                try { await taiAnhSvg(svgRef.current, en ? `${ct("anh.ten_tep")}.png` : `la-so-tu-vi-${ls.can_chi_nam.can}-${ls.can_chi_nam.chi}.png`); ghi("chart_interacted", { mo_dun: "tuvi", kind: "tai_anh" }); }
+                catch (e) { setLoiAnh(e instanceof Error ? e.message : ct("loi_anh")); }
                 finally { setDangTai(false); }
               }} aria-label={cc("doc.tai_anh")}><Download aria-hidden /> <span className="hidden sm:inline">{cc("doc.tai_anh")}</span></Button>
             </div>
             {!moPhai && nhacPhai && (
               <p className="flex items-start gap-1.5 text-xs leading-relaxed text-moon" data-testid="truong-phai-nhac">
                 <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-moon" aria-hidden />
-                <span>{nhacPhai} <button type="button" className="underline underline-offset-2" onClick={() => setMoPhai(true)}>Xem trường phái</button></span>
+                <span>{nhacPhai} <button type="button" className="underline underline-offset-2" onClick={() => setMoPhai(true)}>{ct("nhac.xem_phai")}</button></span>
               </p>
             )}
 
             {loiAnh && <p role="alert" className="text-sm text-cinnabar">{loiAnh}</p>}
             {khongBietGio && (
               <p className="rounded-xl bg-moon/10 px-4 py-3 text-sm text-fg" data-testid="nhac-khong-biet-gio-tuvi">
-                Bạn chưa biết giờ sinh: lá số dưới đây <b>an tạm theo giờ Ngọ (12:00)</b>. Mở khối “Định giờ sinh” để đối chiếu đủ
-                12 canh giờ với những năm bạn nhớ rõ, rồi tự sửa giờ trong hồ sơ.
+                {ct("khong_gio.1")}<b>{ct("khong_gio.2")}</b>{ct("khong_gio.3")}
               </p>
             )}
             {moPhai && (
               <div id="tv-hien-thi" className="space-y-3" data-testid="tv-hien-thi">
                 <div className="rounded-2xl border border-line/70 bg-surface/40 px-4 py-3 sm:px-5" role="group" aria-labelledby="tv-lop-han">
-                  <p id="tv-lop-han" className="text-sm font-semibold text-fg">Lớp hạn trên lá số</p>
-                  <p className="mt-1 text-xs leading-relaxed text-fg-muted">Tô lên lá số cung đại hạn (10 năm) và cung lưu niên của năm đang xem. Chỉ đổi cách hiển thị, không đổi lá số.</p>
+                  <p id="tv-lop-han" className="text-sm font-semibold text-fg">{ct("lop.tieu_de")}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-fg-muted">{ct("lop.mo_ta")}</p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {(["dai_han", "luu_nien"] as const).map((k) => (
                       <button key={k} type="button" aria-pressed={lop[k]} onClick={() => setLop((l) => ({ ...l, [k]: !l[k] }))}
                         className={cn("min-h-10 rounded-full border px-3.5 py-1.5 text-sm transition-colors",
                           lop[k] ? (k === "dai_han" ? "border-[rgb(126_172_255)] bg-[rgb(126_172_255)]/15 text-fg" : "border-gold bg-gold/15 text-fg") : "border-line text-fg-muted hover:text-fg")}>
-                        {k === "dai_han" ? "Lớp đại hạn" : "Lớp lưu niên"}
+                        {k === "dai_han" ? ct("lop.dai_han") : ct("lop.luu_nien")}
                       </button>
                     ))}
                   </div>
@@ -249,8 +259,8 @@ export function TuVi() {
               </div>
             )}
             {/* Lá số: điện thoại mặc định thu vừa màn hình, "Phóng to" để đọc chữ rõ rồi vuốt (Trục 1 — KhungLaSo) */}
-            <KhungLaSo chon={chiChon} chan={<ChanLaSo giaoDien={giaoDien} tieuDe="Lá số Tử vi" duong="/tu-vi" />}>
-              <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={nt ? tenHien(nt) : hoSo?.ho_ten} gioSinh={nt ? gioHienThi(nt) : gioHienThi(hoSo)}
+            <KhungLaSo chon={chiChon} chan={<ChanLaSo giaoDien={giaoDien} tieuDe={ct("chan.tieu_de")} duong={d("/tu-vi")} />}>
+              <LaSoTuVi ref={svgRef} ls={ls} vanHan={vh} lop={lop} giaoDien={giaoDien} ten={nt ? (en ? nt.ten_goi || `${ct(`qh.${nt.quan_he}`)} · ${nt.nam}` : tenHien(nt)) : hoSo?.ho_ten} gioSinh={nt ? gioHienThi(nt) : gioHienThi(hoSo)}
                 chon={chiChon} phaiDoSang={phaiDoSang} onChon={(c) => {
                   setChon(c); ghi("chart_interacted", { mo_dun: "tuvi", kind: "chon_cung" });
                   // Điện thoại: chi tiết cung nằm dưới lá số, ngoài tầm mắt → cuộn tới.
@@ -271,27 +281,25 @@ export function TuVi() {
             {/* TV-V2: bốn khối nâng cao — mỗi khối chỉ gọi engine khi người dùng mở (không 4 request mỗi lần vào trang). */}
             {laSoGoc && laSo && (
               <div className="space-y-3">
-                <KhoiMoLuoi id="phi-hoa" Icon={Waypoints} tieuDe="Đường bay tứ hoá"
-                  moTa="Can của từng cung hoá Lộc, Quyền, Khoa, Kỵ bay đến đâu trên lá số — những đường đáng để ý nhất."
+                <KhoiMoLuoi id="phi-hoa" Icon={Waypoints} tieuDe={ct("khoi.phi_hoa.tieu_de")}
+                  moTa={ct("khoi.phi_hoa.mo_ta")}
                   onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "phi_hoa" })}>
                   <PhiHoa laSo={laSoGoc} namXem={namXem} onChonCung={xemCung} onHoi={hoi} />
                 </KhoiMoLuoi>
-                <KhoiMoLuoi id="nhip-3-thang" Icon={CalendarClock} tieuDe="3 tháng tới"
-                  moTa="Nhịp từng tháng âm lịch sắp tới: thuận, bình hay cần thận trọng — kèm lý do, gợi ý và câu tự soi."
+                <KhoiMoLuoi id="nhip-3-thang" Icon={CalendarClock} tieuDe={ct("khoi.nhip.tieu_de")}
+                  moTa={ct("khoi.nhip.mo_ta")}
                   onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "nhip_3_thang" })}>
                   <NhipBaThang laSo={laSo} onHoi={hoi} onChonCungTen={(ten) => { const c = ls.cung.find((k) => k.ten === ten); if (c) xemCung(c.chi); }} />
                 </KhoiMoLuoi>
                 {/* NT-1: định giờ (sửa giờ trong hồ sơ của bạn) và xem 2 người (so với lá số của bạn) chỉ cho lá số của chính bạn. */}
                 {!nt && <>
-                <KhoiMoLuoi id="dinh-gio" Icon={Clock3} tieuDe="Định giờ sinh"
-                  moTa={khongBietGio
-                    ? "Chưa biết giờ sinh? Đối chiếu đủ 12 canh giờ với những năm bạn nhớ rõ."
-                    : "Không chắc giờ sinh? So lá số giờ trước, giờ đã nhập và giờ sau với những năm bạn nhớ rõ."}
+                <KhoiMoLuoi id="dinh-gio" Icon={Clock3} tieuDe={ct("khoi.dinh_gio.tieu_de")}
+                  moTa={khongBietGio ? ct("khoi.dinh_gio.mo_ta_khong") : ct("khoi.dinh_gio.mo_ta")}
                   onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "dinh_gio_mo" })}>
                   <DinhGioSinh laSo={laSoGoc} hoSo={hoSo} khongBietGio={khongBietGio} />
                 </KhoiMoLuoi>
-                <KhoiMoLuoi id="hop-tham" Icon={HeartHandshake} tieuDe="Xem lá số 2 người"
-                  moTa="Điểm tham khảo hợp – khắc theo mệnh, can chi, cung phi và tứ hoá Tử vi — kèm cách dung hoà."
+                <KhoiMoLuoi id="hop-tham" Icon={HeartHandshake} tieuDe={ct("khoi.hop_tham.tieu_de")}
+                  moTa={ct("khoi.hop_tham.mo_ta")}
                   onMoLanDau={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "hop_tham" })}>
                   <HopThamTuVi laSo={laSoGoc} onHoi={hoi} />
                 </KhoiMoLuoi>
@@ -302,7 +310,7 @@ export function TuVi() {
             {ls.cach_cuc && <CachCuc ds={ls.cach_cuc} luuY={ls.cach_cuc_luu_y} onHoi={hoi} />}
             {!nt && <SachXuaNoi ds={ls.sach_xua} moDun="tuvi" />}
             {ls.co_canh_bao.length > 0 && (
-              <p className="text-xs text-fg-faint">{ls.co_canh_bao.map((c) => LOI_NHAN_CO[c.loai] ?? c.chi_tiet).join(" ")}</p>
+              <p className="text-xs text-fg-faint">{ls.co_canh_bao.map((c) => (CO_CO_LOI.has(c.loai) ? ct(`co.${c.loai}`) : c.chi_tiet)).join(" ")}</p>
             )}
           </>
         )}
@@ -310,29 +318,30 @@ export function TuVi() {
 
       {/* NT-1: luận giải toàn bộ (trả Sao, lưu bài, góp ý) chỉ cho lá số của chính người dùng. */}
       {laSo && ls && !nt && (
-        <section aria-label="Luận giải toàn bộ" className="mt-10">
-          <LuanGiaiToanBo duongDan="/api/tuvi/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten="lá số Tử vi" />
-          <CuoiBaiDoc moDun="tuvi" cauHoi="Lá số và phần luận giải có giúp bạn hiểu mình hơn?" />
+        <section aria-label={ct("aria.luan_giai")} className="mt-10">
+          <LuanGiaiToanBo duongDan="/api/tuvi/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten={ct("luan_giai.ten")} />
+          {/* EN-ALL: bản Anh chưa có lối đi chéo mảng → bỏ khối CTA, giữ mốc đọc xong + góp ý (như Bát tự). */}
+          <CuoiBaiDoc moDun="tuvi" cauHoi={ct("luan_giai.cau_hoi")} khongCta={en} />
         </section>
       )}
 
-      <section ref={chatRef} aria-label="Hỏi Tử vi" className="mt-10 scroll-mt-24">
-        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || "Hỏi đáp chuyên sâu"}</h2>
+      <section ref={chatRef} aria-label={ct("aria.hoi")} className="mt-10 scroll-mt-24">
+        <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || ct("hoi.tieu_de")}</h2>
         {/* HD-CS đợt 2 (hướng C): "Xem trên lá số" trong câu trả lời chọn đúng cung trên lá số phía trên. */}
         <HanhDongTrucQuan.Provider value={laSo && ls ? { xemCung: xemTrenLaSo } : {}}>
         <KhungChat
           key={nt?.id ?? "ban"}
           moDun="tuvi"
-          loiChao={laSo ? "Hỏi về một cung, một sao, hoặc hạn hiện tại của bạn." : "Hỏi kiến thức chung về cung, sao, tứ hoá — hoặc bổ sung giờ sinh để hỏi về lá số của bạn."}
+          loiChao={laSo ? ct("hoi.loi_chao_co") : ct("hoi.loi_chao_khong")}
           goiY={GOI_Y}
           cauNgoai={cauNgoai}
           cauDienSan={cauDienSan}
-          nhanO="Câu hỏi Tử vi"
+          nhanO={ct("hoi.nhan_o")}
           dieuKhien={
             <Tabs value={cheDo} onValueChange={(v) => setCheDo(v as "tham_khao" | "chi_tiet")}>
-              <TabsList aria-label="Chế độ đọc">
-                <TabsTrigger value="tham_khao">Tham khảo</TabsTrigger>
-                <TabsTrigger value="chi_tiet">Chi tiết</TabsTrigger>
+              <TabsList aria-label={ct("hoi.che_do")}>
+                <TabsTrigger value="tham_khao">{ct("hoi.tham_khao")}</TabsTrigger>
+                <TabsTrigger value="chi_tiet">{ct("hoi.chi_tiet")}</TabsTrigger>
               </TabsList>
             </Tabs>
           }
@@ -340,14 +349,15 @@ export function TuVi() {
             phan_loai?: { cung?: string[]; xu_ly?: string }; goi_y_vec?: GoiYVec | null; co_the_goi_y?: boolean; nhan_ra_y_dinh?: boolean;
           }>(
             "/api/tuvi/hoi",
-            { cau_hoi: cau, che_do: cheDo, ...(laSo ? { la_so: laSo } : {}) },
+            { cau_hoi: cau, che_do: cheDo, ...(laSo ? { la_so: laSo } : {}), ...(nt ? { nguoi_than: true } : {}) },
             (d) => {
               // LG-ĐS: có câu gần nghĩa trong kho → hỏi lại "đúng ý bạn chứ?"; không có → cho chọn 1 trong 8 chủ đề.
               // v3 M1: phần hỏi lại này đi SAU câu trả lời (đọc trước, xác nhận sau); "Cung xem" vẫn ở trên.
-              sauTraLoi = d.goi_y_vec?.y_dinh ? <XacNhanYDinh cau={cau} goi={d.goi_y_vec} />
+              // EN-ALL: kho vectơ ý định chỉ có câu tiếng Việt → bản Anh không hỏi lại.
+              sauTraLoi = en ? null : d.goi_y_vec?.y_dinh ? <XacNhanYDinh cau={cau} goi={d.goi_y_vec} />
                 : d.co_the_goi_y && !d.nhan_ra_y_dinh && !["an_toan", "tu_choi_nhe", "dan_huong"].includes(d.phan_loai?.xu_ly ?? "")
                   ? <ChonYDinh cau={cau} /> : null;
-              return d.phan_loai?.cung?.length ? <p className="text-xs text-moon">Cung xem: {d.phan_loai.cung.join(", ")}</p> : null;
+              return d.phan_loai?.cung?.length ? <p className="text-xs text-moon">{ct("hoi.cung_xem", { ds: d.phan_loai.cung.map((x) => tenMa("cung", x)).join(", ") })}</p> : null;
             },
           ).then((kq) => (sauTraLoi ? { ...kq, sau: sauTraLoi, hoiLai: null } : kq)); }}   // EN-3: một khối hỏi lại
         />
@@ -355,25 +365,27 @@ export function TuVi() {
       </section>
       </XemNguoiThanCtx.Provider>
     </div>
+    </TenHienProvider>
   );
 }
 
 // Chú giải màu — giúp người mới đọc lá số.
 function ChuGiai() {
+  const { c, ten } = useChuTuVi();
   const hanh = [["Kim", "bg-[rgb(214_211_230)]"], ["Mộc", "bg-jade"], ["Thủy", "bg-[rgb(126_172_255)]"], ["Hỏa", "bg-cinnabar"], ["Thổ", "bg-gold"]];
   return (
     <details className="group rounded-2xl border border-line/70 bg-surface/40 px-4 py-3 text-sm">
-      <summary className="cursor-pointer text-fg-muted hover:text-fg">Cách đọc lá số</summary>
+      <summary className="cursor-pointer text-fg-muted hover:text-fg">{c("chu_giai.tieu_de")}</summary>
       <div className="mt-3 grid gap-3 text-fg-muted sm:grid-cols-2">
         <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span className="text-fg">Màu sao theo ngũ hành:</span>
-          {hanh.map(([t, m]) => <span key={t} className="inline-flex items-center gap-1.5"><span className={cn("size-2.5 rounded-full", m)} />{t}</span>)}
+          <span className="text-fg">{c("chu_giai.mau")}</span>
+          {hanh.map(([t, m]) => <span key={t} className="inline-flex items-center gap-1.5"><span className={cn("size-2.5 rounded-full", m)} />{ten("hanh", t)}</span>)}
         </p>
-        <p><span className="text-fg">Độ sáng:</span> (M) miếu · (V) vượng · (Đ) đắc · (L) lợi · (B) bình/bất · (H) hãm. Mặc định theo bảng Nam phái (sách Tử vi Việt) cho 14 chính tinh; chuyển "Phái Trung" để xem bảng Trung Hoa (có cả phụ tinh).</p>
-        <p><span className="text-fg">Hai cột phụ tinh:</span> trái là cát tinh và Hoá Lộc/Quyền/Khoa; phải là sát tinh, Hoá Kỵ và sao khác.</p>
-        <p><span className="text-fg">Tam phương tứ chính:</span> cung đang chọn nối tam giác với hai cung tam hợp; đường đứt là cung xung chiếu.</p>
-        <p><span className="text-fg">Đáy cung:</span> vòng Trường sinh; khi bật lớp vận hạn, ĐH./L. là tên cung đại hạn/lưu niên, chữ nghiêng tím là sao lưu.</p>
-        <p><span className="text-fg">Tuần, Triệt:</span> nhãn đặt giữa hai cung bị án ngữ (lối Việt).</p>
+        <p><span className="text-fg">{c("chu_giai.do_sang")}</span>{c("chu_giai.do_sang_chu")}</p>
+        <p><span className="text-fg">{c("chu_giai.cot")}</span>{c("chu_giai.cot_chu")}</p>
+        <p><span className="text-fg">{c("chu_giai.tam_phuong")}</span>{c("chu_giai.tam_phuong_chu")}</p>
+        <p><span className="text-fg">{c("chu_giai.day")}</span>{c("chu_giai.day_chu")}</p>
+        <p><span className="text-fg">{c("chu_giai.tt")}</span>{c("chu_giai.tt_chu")}</p>
       </div>
     </details>
   );

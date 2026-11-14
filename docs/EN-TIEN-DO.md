@@ -2,7 +2,7 @@
 
 > Thước đo tiến độ DUY NHẤT của `docs/PROMPT-EN-TOAN-BO.md`. Cập nhật sau mỗi commit đáng kể. Phiên bị ngắt: đọc tệp này +
 > `git log` rồi làm tiếp đúng chỗ.
-> Cập nhật lần cuối: 2026-11-11 (GĐ 0–2 đã merge qua #251; GĐ 3 Bát tự xong, chờ duyệt PR — mục 3d, câu hỏi mở ở mục 6).
+> Cập nhật lần cuối: 2026-11-13 (GĐ 3 đã merge qua #256; GĐ 4 Tử vi xong, GĐ 5 Phong thuỷ engine + hỏi đáp xong, web đang làm — mục 3e, 3f; hỏi đáp lai mục 6.4).
 
 ## 0. Trạng thái giai đoạn
 
@@ -11,17 +11,17 @@
 | 0 | Kiểm kê + golden | **xong** (2026-11-10) | golden bản Việt 10.509 lượt gọi (chụp lại sau khi merge main #246–#249), ổn định 2 lần chạy liên tiếp; khung test 5.2 chạy |
 | 1 | Nền web (rewrite, catalog nhiều ngôn ngữ, khung đầy đủ) | **xong** (PR #251) | khung, catalog, báo cáo + hỏi đáp chung song ngữ; 7 URL `/en` cũ chuyển hệ một-component trong giai đoạn từng mảng (mục 3b) |
 | 2 | Nền engine (tên riêng, `L()` cho khuôn chung, `slug_en`) | **xong phần nền** (mục 3c) | 7 nhóm route danh mục sạch; khuôn chuyên mảng (`truc_quan`, `mo_dau`, căn cứ `chu_y_nam`/`suc_khoe_nam`/`luu_y_mang`) làm cùng mảng |
-| 3 | Bát tự | **xong — chờ duyệt PR** (2026-11-11) | 5 nhóm route sạch; `/en/bazi` + 3 cụm kiến thức mở; hỏi đáp tiếng Anh (mục 3d) — câu hỏi mở: bộ dò khủng hoảng tiếng Anh (mục 6) |
-| 4 | Tử vi | chưa | 12 |
-| 5 | Phong thuỷ | chưa | 11 |
-| 6 | Kinh Dịch | chưa | 6 |
+| 3 | Bát tự | **xong** (PR #256) | 5 nhóm route sạch; `/en/bazi` + 3 cụm kiến thức mở; hỏi đáp tiếng Anh (mục 3d) — câu hỏi mở: bộ dò khủng hoảng tiếng Anh (mục 6) |
+| 4 | Tử vi | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/zi-wei-dou-shu` + 6 cụm kiến thức; hỏi đáp tiếng Anh (mục 3e) |
+| 5 | Phong thuỷ | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/feng-shui` + cụm dấu hiệu trong nhà (gồm `kb.trang.dau_hieu`, `hoi.phongthuy`) — mục 3f |
+| 6 | Kinh Dịch | **xong** (2026-11-14) | 6 nhóm route sạch; `/en/i-ching` + cụm 64 quẻ; hỏi đáp tiếng Anh — mục 3g |
 | 7 | Thần số + Tarot đầy đủ | chưa | 18 |
 | 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | chưa | 26 |
 | 9 | Tài khoản & kinh tế, Web Push theo ngôn ngữ, thẻ chia sẻ | chưa | 3 nhóm route + web |
 | 10 | CMS + Blog + pháp lý + hub | chưa | |
 | 11 | QC tổng | chưa | |
 
-Số nhóm route = số khoá còn trong `CHUA_XONG` của `engine/tests/test_dau_ra_en.py` (hiện **90**). Làm xong route nào, test
+Số nhóm route = số khoá còn trong `CHUA_XONG` của `engine/tests/test_dau_ra_en.py` (hiện **60**, 2026-11-14). Làm xong route nào, test
 tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2026-11-10) thêm 4 nhóm: `thanso.tuan`, `thanso.hom_nay_hai` (GĐ 7), `push.tuan` (GĐ 9), `kb.chuyen_gia` (GĐ 10) → **94**.
 
 ## 1. Quyết định của chủ dự án (hỏi một lần, 2026-11-10)
@@ -238,6 +238,87 @@ Kết luận đo: mỗi bộ độc lập mới vẫn tìm ra câu khủng hoả
 bộ dò dựa trên luật có trần với tiếng Anh tự do. Đã có lưới an toàn (dòng cố định) + tầng mềm; quyết định mở hỏi đáp bản Anh
 cho người dùng thật cần chủ dự án (mục 6).
 
+## 3e. Giai đoạn 4 — Tử vi (2026-11-11 → 13)
+
+- **Engine**: lớp hiển thị `luangiai/tuvi_hien.py` (CALC không đọc ngôn ngữ); mẫu câu `en/loi/tuvi.json`, `tuvi_v2.json`,
+  `tuvi_doi_song.json`, `trang_tuvi.json`, `hoi_tuvi.json`, `sach_xua_tuvi.json`; bản phủ `en/tuvi_kb.json` (gồm 74 sao nhỏ +
+  52 mục phụ tinh × cung), `tuvi_doi_song_kb`, `tuvi_y_bo_sung`, `tuvi_sao_luu_kb`, `tuvi_cach_cuc` (76 cách, cổ ca pinyin
+  "editorial translation"), `tuvi_phi_hoa_kb`, `tuvi_hai_nguoi_kb`, `bo_sung_hoa_cung`, `bo_sung_sao`, `bo_sung_cung`,
+  `tuvi_co_thu`, `tuvi_cung_sao_menh_kb`, `su_kien_kb`. `ten.muc()` nhận hai kiểu bỏ dấu (Thuỷ/Thủy, Hoả/Hỏa, Bát Toạ/Tọa).
+  Trang `sao_cung` bản Anh có ý chính rút từ chính trang tiếng Anh (`trang_tuvi.y_chinh_en`). `sach_xua` bản Anh: nguyên văn Hán
+  giữ nguyên + tóm ý bản phủ. `NguoiKiaInput.mui_gio` (Xem lá số 2 người, người kia sinh nước ngoài).
+- **Sửa cả hai ngôn ngữ (anh duyệt 2026-11-12)**: câu hỏi tiền chỉ nhận ý "đọc thêm" về tiền → golden `hoi_tuvi` đổi đúng
+  2/10.509 lượt (`hhq01487`, `d_tv026`).
+- **Hỏi đáp tiếng Anh** (`hoidap/tuvi.py` hai lượt, `nguoi_than: bool`): bộ `en/tuvi_dev.jsonl` (260) định tuyến 98,4 %, an toàn
+  100 %; **đóng băng `tuvi_holdout.jsonl` (200)**: định tuyến 82,6 %, khủng hoảng 14/26, cấp cứu 6/12, từ chối 16/18, mốc năm
+  33/35, chữ Việt / 500 = 0 → trần của luật, dẫn tới quyết định hỏi đáp lai (mục 6.4).
+- **Web**: `/en/zi-wei-dou-shu` + 6 cụm (main stars, palaces, star in palace, Four Transformations, sample charts, classics);
+  catalog `lib/chu/tu-vi.ts` (~420 khoá); chữ độ sáng M/W/D/L/P/B/X + chú giải; chọn nước → thành phố ở hồ sơ người thân /
+  hai người; `MucLucChuong` sửa vạch cuộn (áp cho cả bản Việt); `SachXuaNoi` đọc catalog báo cáo. E2E `en-zi-wei.spec.ts` 15/15.
+- **Review**: code độc lập (HIGH `_KHONG_TU_HAI` nuốt khủng hoảng thật — đã sửa + test khoá) + UX 3 vai (chữ Việt lọt, lỗi tiếng
+  Việt, aria, ngữ pháp câu ghép, đại từ lá số người thân, định dạng ngày) — đã sửa.
+- Còn: 37/168 trang sao-ở-cung bản Anh phần riêng < 30 % (quyết noindex ở web khi đo Search Console); đoạn trùng chữ trong
+  `tuvi_doi_song._chuong` bản Anh (thấp).
+
+## 3f. Giai đoạn 5 — Phong thuỷ (2026-11-13)
+
+- **Engine** (12 nhóm route sạch: `phongthuy`, `.bo_cuc`, `.cung_phi`, `.do_huong`, `.do_thi`, `.huyen_khong`, `.luan_giai`,
+  `.menh_quai`, `.thang_nay`, `.viec_tuan`, `kb.trang.dau_hieu`, `hoi.phongthuy`): lớp hiển thị `luangiai/phongthuy_hien.py`;
+  `en/loi/phongthuy.json` (~300 mã `pt.*`), bản phủ `phongthuy_kb`, `phongthuy_huyen_khong`, `phongthuy_doi_song`,
+  `phongthuy_do_thi`, `bo_sung_dau_hieu`, `tuoi_dan_gian_kb` (kim lâu, hoang ốc, tam tai, hạn năm — phần còn lại GĐ 8);
+  `ten_en` thêm 24 sơn, cục Huyền Không, trạng thái sao, "Middle" (Trung tâm).
+- **Hỏi đáp**: `hoidap/en_gloss_pt.py`, `en/loi/hoi_phongthuy.json`; an toàn tiếng Anh thêm khủng hoảng gắn nhà cửa + **nguy hiểm
+  trong nhà** (`an_toan.nha_nguy_hiem`: gas, CO, khói/điện, cháy, trần nứt, lan can, trẻ nuốt vật nhỏ → lời "ra chỗ thoáng,
+  gọi cấp cứu"); từ chối chọn giới tính thai, tuyển người theo năm sinh, đoán ngoại tình, dùng gương/dao hại người.
+  Số: dev (240) định tuyến 19 → 95,4 %, khủng hoảng 31/31, cấp cứu 14/14, từ chối 22/22, chặn nhầm 0; **đóng băng (180)**
+  định tuyến 70 %, khủng hoảng 11/23, cấp cứu 7/11, từ chối 11/16, chặn nhầm 1; chữ Việt / 500 = 0. Bản Việt 0 lệch.
+- **Còn**: web `/en/feng-shui` + cụm dấu hiệu (đang làm); 8 tình huống bố trí chưa có mục KB (TV đối cửa, bếp đảo, giày dép
+  chắn cửa, đầu giường sát WC, xương rồng, cửa mở vào tường, phòng ký túc xá); "mua nhà năm sau" đang trả bằng tuổi làm nhà (như
+  bản Việt); `phongthuy_tuoi.tuoi()` / `tuoi_gop()` (route cũ) chưa dịch thân bài; thống nhất "Seven Red / 7 Red", "main door /
+  front door" giữa `chu_y_kb` và `ten_en`.
+- **Thuật ngữ cần người bản xứ duyệt**: Kua (personal trigram), East/West Group, 24 sơn dạng "Zi (N2)", trạng thái sao timely /
+  growing / retreating / fading / dormant, Kim Lau / Hoang Oc / Tam Tai (phiên âm), Three Disasters, Year Breaker, Three Killings,
+  Tai Sui, "Door – master – stove", "the stove's control side".
+- **Review UX 3 vai (2026-11-13) đã sửa**: chữ Việt ở kiểm tra tuổi làm nhà, bảng khảo sát (cột "Best placed on", thẻ trên điện thoại), ngày "4 Feb 2026", số Kua "Kua 2 (Kun)", lời khi chưa có hồ sơ, hướng / năm / loại nhà điền sẵn từ hồ sơ nhà, nhãn la bàn, trang dấu hiệu ("Folk tradition holds…"); engine: sao năm (Ngũ Hoàng / Thái Tuế) không lạc sang sao hạn theo tuổi, tiêu đề hướng không cắt, "cửa đối cửa". Tên du niên dịu đi: Sheng Qi (Vitality), Tian Yi (Health), Yan Nian (Harmony), Huo Hai (Minor Mishaps), Liu Sha (Friction), Wu Gui (Setbacks), Jue Ming (Depletion) — cần người bản xứ duyệt cùng "Golden Tower", "house-age count", "Longevity Wanes", "Deserted House", "Three Calamities". Chưa làm: câu mở đầu hỏi đáp chưa trả lời thẳng (thứ tự đoạn do bản Việt quyết), bảng chi phí trang dấu hiệu dạng thẻ (component chung).
+
+## 3g. Giai đoạn 6 — Kinh Dịch (2026-11-13 → 14)
+
+- **Engine** (nhóm route sạch: `kinhdich`, `kinhdich.khoi_que`, `kinhdich.que_rieng`, `kinhdich.hieu_cau`, `kinhdich.hoi`,
+  `hoi.kinhdich`): lớp hiển thị `luangiai/kinhdich_hien.py`; `en/loi/kinhdich.json`; bản phủ `kinhdich_hao` (384 lời hào — **bản dịch
+  của ban biên tập**, không phải Legge 1882), `kinhdich_doi_song`, `kinhdich_tra_loi`, `bo_sung_que`; `ten_en` thêm 8 nhóm (quẻ, quái,
+  lục thân, lục thú, Thế/Ứng…). Lớp Ngô Tất Tố (Tiểu tượng, Trình Di, Chu Hy) + loại tượng Thuyết Quái **chỉ bản Việt** (bản dịch
+  tiếng Việt, không có bản Anh tương đương) — `kinhdich.hoi` ở `KHUNG_BO_QUA` có ghi lý do; `kb.trang.que` còn `KHUNG_CHUA_XONG`.
+- **Hỏi đáp** (`hoidap/en_gloss_kd.py`, `en/loi/hoi_kinhdich.json`, `tests/test_en_kinhdich_hoi.py`): nhận quẻ theo số / tên Anh /
+  pinyin / sáu giá trị xu, câu kiến thức, chủ đề, vai, mốc năm, "A or B" (làm rõ trước khi gieo); hai lượt "bản Việt quyết" (sáu hào
+  máy gieo + giờ gieo qua `quyet` → hai lượt đọc cùng một quẻ). An toàn tiếng Anh thêm nhóm khủng hoảng / cấp cứu / kẻ lạ đột nhập /
+  từ chối GĐ 6. Số: **dev (220)** định tuyến 27,8 → 97,5 %, khủng hoảng 29/29, cấp cứu 12/13, từ chối 20/20, chặn nhầm 1, mốc năm 8/8;
+  **đóng băng (160)** định tuyến 25 → 75,7 %, khủng hoảng 13/21, cấp cứu 7/10, từ chối 12/14, chặn nhầm 0; chữ Việt / 500 = 0. Bộ an
+  toàn chung + dev ba mảng trước không lùi.
+- **Chính sách đã chọn**: câu vừa khủng hoảng vừa cấp cứu (uống cả lọ thuốc) → nhánh khủng hoảng (lời đáp có câu gọi cấp cứu);
+  "business partner / co-founder / investor" + trust ở câu tiếng Anh vẫn vào luật nhân sự (bảo thủ hơn bản Việt Kinh Dịch) — chờ anh
+  quyết có nới cho Kinh Dịch không.
+- **Thuật ngữ cần người bản xứ duyệt**: changed / resulting hexagram, Response / Other line (Ying), Use God line, Officer / Wealth /
+  Parent / Offspring / Sibling line, body / use trigram (Mai Hoa), void branch, month breaker, "meaning-and-principle reading".
+
+## 3h. Chính sách chặn có ích + "nên chú ý" (CY-2, 2026-11-14, vi + en)
+
+- Đối tác / nhân viên có trung thực không: trả lời phía người hỏi ở mọi mảng (cả bản Anh); vẫn chặn chọn / xếp hạng / sa thải theo lá số.
+- Câu chặn mở bằng gợi ý "nên…" đúng loại (12 nhóm, mã `tu_choi.goi_y.*` + `tu_choi.ket` trong `en/loi_khuon.json`).
+- Khủng hoảng + cấp cứu: cấp cứu trước (bản Anh số theo nước: 911/999/000/111/112/995).
+- Bộ dev mới `dev_chu_y.jsonl` 160/160, `dev_chu_y_2.jsonl` 40/40 (10 câu Anh); chấm `scripts/cham_dev_chu_y.py [--tep]`.
+- Cần người bản xứ duyệt: lời `tu_choi.goi_y.*`, 12 mảng mới trong `en/chu_y_kb.json`.
+- Review độc lập 3 vòng (chạy engine thật, cả hai ngôn ngữ). Vòng 3 sửa: nói tránh "tôi đi luôn thì vợ con đỡ khổ",
+  "giá mà tôi chưa từng được sinh ra" → khủng hoảng; "ngã chảy máu đầu" → cấp cứu; câu Anh ngoại tình / ly hôn có lời
+  đồng cảm như bản Việt (câu Anh được đổi sang câu chuẩn Việt trước khi xét — nay xét cả câu gốc); "mang thai nên
+  kiêng gì / thai giáo hợp mệnh" → gợi ý theo bác sĩ sản khoa (nhóm `thai_cham`); Tarot câu đời thường không nhận ra
+  → mời gõ ở ô rút bài, hỏi về phía mình. Bộ câu: `tests/test_cy2_review2.py`, `fixtures/cau_hoi/an_toan_song_ngu.json`.
+- Thiếu sót quy trình đã rút ra: (1) bộ câu an toàn trước đây chỉ có câu Việt → lệch vi/en lọt qua; nay mỗi câu khủng
+  hoảng / cấp cứu / từ chối có cặp Anh–Việt cùng nhánh. (2) Câu Anh đi qua câu chuẩn Việt — luật nào đọc chữ phải xét
+  cả câu gốc. (3) Holdout `bh046` nhãn cũ ("đối tác có trung thực" = từ chối) trái chính sách CY-2 — không sửa holdout
+  đóng băng, ghi nhận câu đó tính lệch có chủ đích.
+- Còn để sau (thấp): "Lá số đẹp là lá số thế nào?" chưa đi nhánh kiến thức; "Có nên kiện công ty đòi lương" Kinh
+  Dịch gắn nhãn "tiền bạc" (lời vẫn đúng việc).
+
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
 1. ~~**Engine không tất định giữa các tiến trình**~~ — **ĐÃ SỬA**: hai chỗ lặp qua `set` rồi đưa ra đầu ra — `kb/tu_dien._mau`
@@ -332,6 +413,35 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
    Việt đổi có chủ đích (vài lượt hỏi đáp) — cần anh đồng ý.
 3. **Số đường dây nóng** trong tầng mềm + lưới an toàn (988 Mỹ, 116 123 Anh/Ireland, 1767 Singapore, Befrienders Malaysia
    03-7627 2929, 1553 Philippines, findahelpline.com): cần người kiểm lại trước khi mở bản Anh.
+4. **Hỏi đáp tiếng Anh "lai" — QUYẾT (2026-11-13, thay phần "(b) xét lại trước khi quảng bá" của mục 1)**: bộ dò luật chạm
+   trần (Tử vi đóng băng 14/26 khủng hoảng, 6/12 cấp cứu; Bát tự v4 26/30) → anh quyết GIỮ gõ tự do, làm cách tốt nhất:
+   - **Câu gợi ý trước, gõ tự do sau** (web `/en/bazi`, `/en/zi-wei-dou-shu`): 6 chip câu chuẩn của mảng (engine
+     `GET /v1/hoi/goi-y?mang=` — `truc_quan.GOI_Y_DAU`, mỗi câu đã kiểm định tuyến; web `/api/hoi/goi-y`, `lib/goi-y-dau.ts`),
+     bấm là hỏi luôn. Engine trả `hoi_lai` (độ tin thấp) → khối **"Did you mean one of these?"** đứng trước, lời đáp chung GẬP
+     ("Or read a general answer for now") — không đoán thay người hỏi. Bản Việt giữ nguyên chip + lời đáp như cũ.
+   - **Lớp phân loại AI** `engine/app/narrative/phan_loai_en.py` (tầng NARRATIVE, qua `ai_goi.goi_chat` + hạn mức RL-1): gửi
+     CHỈ chữ câu hỏi → JSON nhãn trong danh mục cố định (`an_toan` ∈ binh_thuong · ho_tro_mem · khung_hoang · cap_cuu ·
+     tu_choi:<mã>; `y_dinh` ∈ `en_gloss.Y_DINH_CUM` của mảng; `nam`). Nhãn đăng ký cho đúng câu trong lượt gọi
+     (`luangiai/nhan_ngoai.py`, contextvar); **luật hợp nhất**: `an_toan.py` vẫn chạy trước, nhãn AI chỉ NÂNG
+     (khung_hoang > cap_cuu > tu_choi > ho_tro_mem), không bao giờ hạ; ý định AI chỉ dùng khi luật `do_tin_thap`
+     (`hoidap/chung.thu_nhan_ngoai` → phân loại lại bằng cụm từ khoá của chủ đề, câu gốc vẫn qua mọi bộ chặn). AI không viết
+     lời trả lời. Hạn chót 2 s, không thử lại; lỗi / hết giờ / hết lượt / thiếu khoá / JSON hỏng / nhãn ngoài danh mục → luật như
+     cũ, không 5xx. Không log câu hỏi; bộ nhớ ngắn hạn khoá sha256, chỉ giữ nhãn, 10 phút. Chỉ lượt `x-ngon-ngu` khác `vi`
+     và câu không phải câu gõ tiếng Việt → bản Việt 0 lệch. Mô hình env `HOI_PHAN_LOAI_MODEL` (mặc định
+     `google/gemini-2.5-flash-lite`: nhỏ, rẻ, nhanh — hợp hạn chót 2 s; cùng họ mô hình `DOC_ANH_MODEL`).
+   - **Bật = HAI công tắc, mặc định TẮT**: env engine `HOI_PHAN_LOAI_AI=1` VÀ công tắc quản trị `hoi.phan_loai_ai_en`
+     (`/quan-tri/cai-dat`, nhóm "Hỏi đáp" — web gửi header `x-phan-loai-ai: 1`, chỉ ở lượt bản Anh).
+   - **Quyền riêng tư**: `/en/privacy` + bảng bên thứ ba của Chính sách riêng tư bản Việt đã thêm dòng (câu hỏi tiếng Anh có
+     thể gửi nhà cung cấp AI CHỈ để phân loại an toàn + chủ đề, không dữ liệu sinh, không lưu, không huấn luyện) — ghi "hiện
+     đang tắt; ngày bắt đầu sẽ ghi ở đây".
+   - Test: `engine/tests/test_phan_loai_en.py` (AI giả lập: đọc nhãn, luật hợp nhất, rơi về luật, hạn chót, route + header,
+     chip định tuyến rõ); e2e `en-bazi` / `en-zi-wei` (chip bấm là hỏi, "Did you mean…" + lời chung gập).
+   - **Việc của anh**: (1) chạy đo với khoá thật:
+     `cd engine && OPENROUTER_API_KEY=… PYTHONHASHSEED=0 PYTHONPATH=. .venv/bin/python scripts/do_phan_loai_en.py` (bảng tắt → bật
+     cho Bát tự dev / v1–v4, Tử vi dev / holdout, hai bộ an toàn; in độ trễ trung vị / p90 và số câu > 2 s; holdout chỉ in tổng;
+     `--het-gio 10` để đo chất lượng nhãn tách khỏi độ trễ; `HOI_PHAN_LOAI_MODEL=…` để so mô hình); (2) nếu số tốt (khủng
+     hoảng / cấp cứu tăng, chặn nhầm ≈ 0, p90 < 2 s): ghi ngày hiệu lực vào `/en/privacy` + bảng bên thứ ba bản Việt (đổi
+     `NGAY_HIEU_LUC`), đặt env Render `HOI_PHAN_LOAI_AI=1`, bật `hoi.phan_loai_ai_en` ở `/quan-tri/cai-dat`.
 
 ## 7. Nhật ký
 
@@ -348,3 +458,8 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
   Di, Chu Hy) ở bài đọc quẻ + trang quẻ, loại tượng tám quái ở câu trả lời Mai Hoa, nghĩa sao nhỏ `cung[].nghia_sao_nho` ở lá số Tử vi.
   Bản Anh **chưa có** các trường này (engine chỉ trả khi `ngon_ngu.la_viet()`), nên khung dữ kiện lệch ở `tuvi.an_sao`, `tuvi.la_so_mau`
   (→ chuyển thể ở GĐ 4) và `kb.trang.que`, `kinhdich.hoi` (→ GĐ 6) — đã ghi vào `KHUNG_CHUA_XONG`. Golden đầu ra bản Việt sinh lại có chủ đích.
+- **2026-11-11 → 13 — GĐ 4 Tử vi**: engine 12 nhóm route, hỏi đáp tiếng Anh + bộ dev/đóng băng, web `/en/zi-wei-dou-shu` + 6
+  cụm, review code + UX 3 vai; anh duyệt sửa hai ngôn ngữ (golden đổi 2 lượt); gộp main (KT-TT4…SX-1: sao nhỏ, sách xưa, bổ sung
+  sao/cung — đã chuyển thể).
+- **2026-11-13 — hỏi đáp lai** (mục 6.4) + **GĐ 5 Phong thuỷ** engine + hỏi đáp (mục 3f).
+- **2026-11-13 → 14 — GĐ 6 Kinh Dịch** (mục 3g); sửa 10 cảnh báo CodeQL (regex chậm / chèn regex) + test `test_hoi_redos.py` cho mọi route hỏi đáp.

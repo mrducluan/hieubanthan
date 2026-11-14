@@ -11,11 +11,13 @@ import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 import { KiemChungBai, ViSao } from "./HopNoiBat";
 import type { GocNhinKhac as GocNhinKhacT } from "./kieu";
+import { useChuBaoCao } from "./chu-bao-cao";
 
 export function GocNhinKhac({ g, chuong, moDun = "tuvi", thuatNgu }: { g: GocNhinKhacT; chuong: string; moDun?: string; thuatNgu?: ThuatNgu[] }) {
   const [mo, setMo] = useState(false);
   const id = useId();
   const { tyLe, phai, tat } = useContext(KiemChungBai);
+  const { c } = useChuBaoCao();
   const y = g.y.filter((x) => !x.dang_xem_lai);
   if (!y.length) return null;
   return (
@@ -27,7 +29,7 @@ export function GocNhinKhac({ g, chuong, moDun = "tuvi", thuatNgu }: { g: GocNhi
         }}
         className="flex min-h-11 w-full items-center gap-2 text-left text-sm font-medium text-fg-muted hover:text-fg print:hidden">
         <Compass className="size-4 shrink-0" aria-hidden />
-        <span className="flex-1">{g.tieu_de} <span className="font-normal text-fg-faint">· {y.length} ý tham khảo</span></span>
+        <span className="flex-1">{g.tieu_de} <span className="font-normal text-fg-faint">{c("gnk.so_y", { so: String(y.length) })}</span></span>
         <ChevronDown className={cn("size-4 shrink-0 transition-transform motion-reduce:transition-none", mo && "rotate-180")} aria-hidden />
       </button>
       <div id={id} hidden={!mo} className="print:block">
@@ -37,7 +39,7 @@ export function GocNhinKhac({ g, chuong, moDun = "tuvi", thuatNgu }: { g: GocNhi
             <li key={x.ma_mau ?? x.tieu_de} className="border-t border-line/60 pt-3 first:border-t-0 first:pt-0" data-testid="goc-nhin-khac-y">
               <p className="font-medium leading-snug text-fg">{x.tieu_de}</p>
               {x.noi_dung && x.noi_dung !== x.tieu_de && <p className="mt-1 text-sm leading-relaxed text-fg-muted">{x.noi_dung}</p>}
-              {x.huong_xu_ly && <p className="mt-1 text-sm leading-relaxed text-fg"><b className="font-semibold">Thử:</b> {x.huong_xu_ly}</p>}
+              {x.huong_xu_ly && <p className="mt-1 text-sm leading-relaxed text-fg"><b className="font-semibold">{c("gnk.thu")}</b> {x.huong_xu_ly}</p>}
               <ViSao canCu={x.can_cu} thuatNgu={thuatNgu} nho />
               {x.ma_mau && !tat && (
                 <div className="pt-2">

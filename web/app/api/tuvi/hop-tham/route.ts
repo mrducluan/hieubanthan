@@ -6,7 +6,7 @@
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
 import { themHocLuanGiai } from "@/lib/hoc-tuvi";
-import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
+import { dauNguoiGoi, loiEngine, loiChung, laBanAnh } from "@/lib/proxy";
 import { HopThamInput, HopThamOutput } from "../schema";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
@@ -16,7 +16,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   const parsed = HopThamInput.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json(
-      { error: "Đầu vào không hợp lệ", chi_tiet: parsed.error.flatten().fieldErrors },
+      { error: loiChung("dau_vao", laBanAnh(req)), chi_tiet: parsed.error.flatten().fieldErrors },
       { status: 422 },
     );
   }
@@ -39,12 +39,12 @@ export async function POST(req: Request): Promise<NextResponse> {
     if (engineRes.status === 422 && Object.keys(hoc).length) engineRes = await goi(parsed.data);
   } catch (e) {
     baoLoi(e, { noi: "api", duong: new URL(req.url).pathname });
-    return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });
+    return NextResponse.json({ error: loiChung("khong_ket_noi_phut", laBanAnh(req)) }, { status: 502 });
   }
 
   const body: unknown = await engineRes.json().catch(() => null);
   if (!engineRes.ok) {
-    const l = loiEngine(engineRes.status, body);
+    const l = loiEngine(engineRes.status, body, laBanAnh(req));
     return NextResponse.json({ error: l.error }, { status: l.status });
   }
 
@@ -53,7 +53,7 @@ export async function POST(req: Request): Promise<NextResponse> {
     // SEC-2 / mục 18: chi tiết lệch schema chỉ vào log + Sentry; người dùng thấy câu thường.
     console.error("[api/tuvi/hop-tham] engine lệch schema", out.error.flatten().fieldErrors);
     baoLoi(new Error("engine_lech_schema"), { duong: "/api/tuvi/hop-tham" });
-    return NextResponse.json({ error: "Máy tính toán đang cập nhật, thử lại sau ít phút." }, { status: 502 });
+    return NextResponse.json({ error: loiChung("cap_nhat", laBanAnh(req)) }, { status: 502 });
   }
   return NextResponse.json(out.data);
 }

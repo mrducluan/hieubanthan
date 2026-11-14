@@ -7,6 +7,13 @@ import type { BangChu } from "@/lib/chu-trang";
 const K = "Khung báo cáo";
 
 export const CHU_BAO_CAO = {
+  // SX-1 — khối "Sách xưa nói gì về lá số của bạn" (Tử vi, Bát tự). Câu sách + lời tóm ý do engine trả theo ngôn ngữ.
+  "sach_xua.tieu_de": { nhom: K, nhan: "Sách xưa: tiêu đề khối", mac_dinh: "Sách xưa nói gì về lá số của bạn", en: "What the classics say about your chart" },
+  "sach_xua.mo_ta": { nhom: K, nhan: "Sách xưa: lời dẫn ({so} = số câu)", mac_dinh: "{so} câu chép trong cổ thư ứng với đúng lá số này. Lời Việt là phần tóm ý của ban biên tập; bấm vào từng câu để xem nguyên văn.",
+    en: "{so} passages from the classical texts that match this chart. The English lines are our editors' summaries; open any card to see the original." },
+  "sach_xua.nguyen_van": { nhom: K, nhan: "Sách xưa: nút xem nguyên văn", mac_dinh: "Nguyên văn", en: "Original text" },
+  "sach_xua.chan": { nhom: K, nhan: "Sách xưa: dòng chân khối", mac_dinh: "Sách xưa viết cho người thời đó; đây là văn hoá để tham khảo và tự soi, không phải lời đoán trước điều gì sẽ xảy ra.",
+    en: "These books were written for readers of their own time. Treat them as culture and a mirror for reflection, not as a forecast of what will happen." },
   "muc.thuan": { nhom: K, nhan: "Mức: thuận", mac_dinh: "Thuận lợi", en: "Favourable" },
   "muc.can_bang": { nhom: K, nhan: "Mức: cân bằng", mac_dinh: "Cân bằng", en: "Balanced" },
   "muc.can_chu_dong": { nhom: K, nhan: "Mức: cần chủ động", mac_dinh: "Cần lưu ý", en: "Needs care" },
@@ -44,7 +51,7 @@ export const CHU_BAO_CAO = {
   "dang_o_day": { nhom: K, nhan: "Nhãn giai đoạn đang đi", mac_dinh: "Bạn đang ở đây", en: "You are here" },
   "tuoi_khoang": { nhom: K, nhan: "Khoảng tuổi", mac_dinh: "{tu}–{den} tuổi", en: "age {tu}–{den}" },
   "tu_den_ngay": { nhom: K, nhan: "Khoảng ngày của giai đoạn", mac_dinh: "từ {tu} đến {den}", en: "from {tu} to {den}" },
-  "cung": { nhom: K, nhan: "Cung của giai đoạn (khi engine không đặt nhãn)", mac_dinh: "cung {ten}", en: "{ten} palace" },
+  "cung": { nhom: K, nhan: "Cung của giai đoạn (khi engine không đặt nhãn)", mac_dinh: "cung {ten}", en: "{ten}" },
   "hai_cach_khac": { nhom: K, nhan: "Ghi chú hai cách đọc khác nhau", mac_dinh: "hai cách khác nhau", en: "the two methods differ" },
   "luu_y_mang": { nhom: K, nhan: "Tiêu đề khung lưu ý theo mảng", mac_dinh: "Cần lưu ý ở từng mảng hay hỏi", en: "What to watch in the areas people ask about most" },
   "luu_y_mang_dan": { nhom: K, nhan: "Lời dẫn khung lưu ý theo mảng", toi_da: 300,
@@ -70,4 +77,12 @@ export const CHU_BAO_CAO = {
   "chi_phi.it_tien": { nhom: K, nhan: "Chip chi phí: ít tiền", mac_dinh: "Ít tiền", en: "Low cost" },
   "chi_phi.sua_chua": { nhom: K, nhan: "Chip chi phí: sửa chữa", mac_dinh: "Sửa chữa", en: "Repair work" },
   "cau_tu_soi_dau": { nhom: K, nhan: "Đầu đoạn câu tự soi do engine viết (để tô màu)", mac_dinh: "Câu hỏi để tự soi", en: "A question to reflect on" },
+  // EN-ALL GĐ 4 — khối sao lưu năm (SaoLuuNam) + "Góc nhìn khác" (GocNhinKhac).
+  "sl.tieu_de": { nhom: K, nhan: "Sao lưu năm — tiêu đề ({nam})", mac_dinh: "Năm {nam} nhìn theo sao lưu", en: "{nam} through the year's moving stars" },
+  "sl.dan": { nhom: K, nhan: "Sao lưu năm — lời dẫn", mac_dinh: "Những điểm riêng của năm nay rơi vào mảng nào trong lá số của bạn — đọc thêm, không đổi mức của năm.", en: "Where this year's particular touches fall in your chart — extra reading; it does not change the year's level." },
+  "sl.nen": { nhom: K, nhan: "Sao lưu năm — chữ trước việc nên làm", mac_dinh: "Nên: ", en: "Try: " },
+  "sl.vi_sao": { nhom: K, nhan: "Sao lưu năm — nút căn cứ", mac_dinh: "Vì sao nói vậy", en: "Why we say this" },
+  "sl.can_cu": { nhom: K, nhan: "Sao lưu năm — dòng căn cứ ({ten}, {ds}, {can_chi})", mac_dinh: "{ten}: cung {ds} (năm {can_chi})", en: "{ten}: {ds} ({can_chi} year)" },
+  "gnk.so_y": { nhom: K, nhan: "Góc nhìn khác — số ý ({so})", mac_dinh: "· {so} ý tham khảo", en: "· {so} point(s) for reference" },
+  "gnk.thu": { nhom: K, nhan: "Góc nhìn khác — chữ trước hướng xử lý", mac_dinh: "Thử:", en: "Try:" },
 } as const satisfies BangChu;

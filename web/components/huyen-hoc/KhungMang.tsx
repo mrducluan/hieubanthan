@@ -11,6 +11,7 @@ import { ALT_HINH_MANG, HinhDauMang } from "@/components/huyen-hoc/HinhDauMang";
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 import { useNgonNgu } from "@/components/khung/NgonNgu";
 import type { HoSo } from "@/lib/hoso";
+import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
 
 // Khung chung cho các mảng Huyền học: tiêu đề + hỏi thêm dữ liệu đúng lúc (BirthSheet).
 // ND-2: H1, lời dẫn, khối "phía trên" có thể do CMS phủ (DauCms bọc ở page.tsx); trống → chữ truyền vào.
@@ -38,16 +39,18 @@ export function DauMang({ Icon, ten, mo_ta, hinh, children }: { Icon: LucideIcon
   );
 }
 
-export function XinThemDuLieu({ hoSo, ly_do, can = "day_du", nut = "Thêm giờ sinh, giới tính, nơi sinh" }: { hoSo: HoSo | null; ly_do: string; can?: "day_du" | "gioi_tinh"; nut?: string }) {
+export function XinThemDuLieu({ hoSo, ly_do, can = "day_du", nut: nutVao }: { hoSo: HoSo | null; ly_do: string; can?: "day_du" | "gioi_tinh"; nut?: string }) {
   const [mo, setMo] = useState(false);
+  const { c } = useChuGiaoDien();
+  const nut = nutVao ?? c("xin.nut");
   return (
     <div className="glass flex flex-col items-start gap-4 rounded-2xl p-5 sm:flex-row sm:items-center">
       <Clock className="size-6 shrink-0 text-moon" aria-hidden />
       <p className="flex-1 text-sm text-fg-muted">{ly_do}</p>
-      <Button variant="secondary" onClick={() => setMo(true)}>{hoSo ? nut : "Tạo hồ sơ"}</Button>
+      <Button variant="secondary" onClick={() => setMo(true)}>{hoSo ? nut : c("xin.tao")}</Button>
       <Sheet open={mo} onOpenChange={setMo}>
-        <SheetContent title={hoSo ? "Bổ sung hồ sơ" : "Tạo hồ sơ"} description="Lưu trên máy của bạn, dùng chung cho mọi mảng.">
-          <NhapHoSo macDinh={hoSo} can={can} nutGui="Lưu và xem" onXong={() => setMo(false)} />
+        <SheetContent title={hoSo ? c("xin.bo_sung") : c("xin.tao")} description={c("xin.mo_ta")}>
+          <NhapHoSo macDinh={hoSo} can={can} nutGui={c("xin.luu_xem")} onXong={() => setMo(false)} />
         </SheetContent>
       </Sheet>
     </div>

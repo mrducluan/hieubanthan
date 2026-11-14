@@ -11,6 +11,7 @@ qua `muc_trich()` và trỏ về trang trụ. Nguồn gốc nội bộ (bản ch
 from __future__ import annotations
 
 from app import ngon_ngu
+from app.kb.loi import L
 
 import re
 
@@ -42,10 +43,16 @@ def so_cau_nguyen_van(s: str) -> int:
     return len([x for x in re.split(r"[。！？]", s) if x.strip()])
 
 
+def sach() -> str:
+    """Tên bài phú hiển thị (bản Anh: pinyin + nghĩa)."""
+    return L("trang_ct.sach", SACH)
+
+
 def trich(c: dict, voi_neo: bool = True) -> dict:
-    """Một câu phú dạng trích dẫn (khớp `TrichDan` của web)."""
-    ra = {"sach": SACH, "chuong": f"câu {c['thu_tu']}", "nguyen_van": c["nguyen_van"], "phien_am": c["phien_am"],
-          "nghia": c["nghia"]}
+    """Một câu phú dạng trích dẫn (khớp `TrichDan` của web). Bản Anh: `phien_am` là pinyin (bản phủ KB), `nghia` là bản
+    dịch của ban biên tập; nguyên văn chữ Hán giữ nguyên."""
+    ra = {"sach": sach(), "chuong": L("trang_ct.cau", "câu {n}", n=c["thu_tu"]), "nguyen_van": c["nguyen_van"],
+          "phien_am": c["phien_am"], "nghia": c["nghia"]}
     if c.get("khi"):
         ra["khi"] = c["khi"]
     if c.get("chu_thich"):
@@ -77,10 +84,14 @@ def muc_trich(sao: str | None = None, cung: str | None = None, hoa: str | None =
     ds = cau_lien_quan(sao, cung, hoa)
     if not ds:
         return None
-    doi = " ".join(x for x in (f"Hoá {hoa}" if hoa else sao, f"ở cung {cung}" if cung else "") if x)
-    return {"ma": "co_thu", "tieu_de": f"{SACH} nói gì",
-            "doan": (f"Câu dưới đây trích {SACH}, bài phú ở {CHUONG_SACH.split(', ')[1]} của {CHUONG_SACH.split(', ')[0]}, "
-                     f"có nhắc {doi}. Lời phú là quan niệm sách xưa; nghĩa đời thường do ban biên tập viết lại."),
+    from app.kb import trang_tuvi as ttv
+    doi = " ".join(x for x in (L("trang_ct.hoa", "Hoá {h}", h=ttv.th(hoa)) if hoa else (ttv.ts(sao) if sao else sao),
+                              L("trang_ct.o_cung", "ở cung {cung}", cung=ttv.tc(cung)) if cung else "") if x)
+    return {"ma": "co_thu", "tieu_de": L("trang_ct.noi_gi", "{sach} nói gì", sach=sach()),
+            "doan": L("trang_ct.trich_doan",
+                      "Câu dưới đây trích {sach}, bài phú ở {quyen} của {toan_thu}, "
+                      "có nhắc {doi}. Lời phú là quan niệm sách xưa; nghĩa đời thường do ban biên tập viết lại.",
+                      sach=sach(), quyen=CHUONG_SACH.split(", ")[1], toan_thu=CHUONG_SACH.split(", ")[0], doi=doi),
             "trich_dan": [trich(c, voi_neo=False) for c in ds],
             "xem_them": [{"loai": "co_thu", "slug": SLUG}]}
 
@@ -113,14 +124,14 @@ def trang_co_thu(k: str, slug: str) -> dict:
     for i, ch in enumerate(d["chuong"], 1):
         ds = [c for c in cau if c["chuong"] == ch["ma"]]
         phan.append((i, ch, ds))
-    bang_phan = {"cot": ["Phần", "Câu", "Số câu"],
+    bang_phan = {"cot": [L("trang_ct.cot_phan", "Phần"), L("trang_ct.cot_cau", "Câu"), L("trang_ct.cot_so_cau", "Số câu")],
                  "dong": [[f"{i}. {ch['ten']}", f"{ds[0]['thu_tu']}–{ds[-1]['thu_tu']}", str(len(ds))]
                           for i, ch, ds in phan]}
-    muc = [{"tieu_de": "Bài phú này là gì, đọc thế nào",
+    muc = [{"tieu_de": L("trang_ct.la_gi", "Bài phú này là gì, đọc thế nào"),
             "doan": tr["gioi_thieu"].format(so_phan=len(phan)), "bang": bang_phan}]
     for i, ch, ds in phan:
-        muc.append({"tieu_de": f"Phần {i}. {ch['ten']}",
-                    "doan": f"{ch['gioi_thieu']} (câu {ds[0]['thu_tu']}–{ds[-1]['thu_tu']})",
+        muc.append({"tieu_de": L("trang_ct.phan", "Phần {i}. {ten}", i=i, ten=ch["ten"]),
+                    "doan": L("trang_ct.phan_doan", "{gt} (câu {a}–{b})", gt=ch["gioi_thieu"], a=ds[0]["thu_tu"], b=ds[-1]["thu_tu"]),
                     "trich_dan": [trich(c) for c in ds],
                     **({"xem_them": x} if (x := _link_phan(ds)) else {})})
     # Bảng cách cục bài phú nhắc tới: tên + câu + điều kiện (KB cách cục — cùng điều kiện engine dùng trên lá số).
@@ -128,13 +139,15 @@ def trang_co_thu(k: str, slug: str) -> dict:
     for c in cau:
         for m in c["cach_cuc"]:
             theo_cach.setdefault(m, []).append(c["thu_tu"])
-    muc.append({"tieu_de": "Các cách cục bài phú nhắc tới",
-                "doan": (f"{len(theo_cach)} cách cục dưới đây có trong bài phú và có điều kiện rõ trên lá số. Khi lập lá "
-                         "số, Hiểu Bản Thân dò đúng các điều kiện này; câu phú chỉ là lời bình của sách xưa."),
-                "bang": {"cot": ["Cách cục", "Câu", "Điều kiện trên lá số"],
+    muc.append({"tieu_de": L("trang_ct.cach_cuc", "Các cách cục bài phú nhắc tới"),
+                "doan": L("trang_ct.cach_cuc_doan",
+                          "{n} cách cục dưới đây có trong bài phú và có điều kiện rõ trên lá số. Khi lập lá "
+                          "số, Hiểu Bản Thân dò đúng các điều kiện này; câu phú chỉ là lời bình của sách xưa.", n=len(theo_cach)),
+                "bang": {"cot": [L("trang_ct.cot_cach", "Cách cục"), L("trang_ct.cot_cau", "Câu"),
+                                 L("trang_ct.cot_dieu_kien", "Điều kiện trên lá số")],
                          "dong": [[f"{cc[m]['ten']} ({cc[m]['ten_han']})", ", ".join(map(str, so)), cc[m]["dieu_kien"]]
                                   for m, so in theo_cach.items()]}})
-    muc.append({"tieu_de": "Đọc những câu phán nặng thế nào", "doan": tr["cach_doc"]})
+    muc.append({"tieu_de": L("trang_ct.phan_nang", "Đọc những câu phán nặng thế nào"), "doan": tr["cach_doc"]})
     t = _t()
     return {
         "loai": "co_thu", "slug": slug,
@@ -142,14 +155,19 @@ def trang_co_thu(k: str, slug: str) -> dict:
         "mo_ta": t._cat(tr["mo_ta"]),
         "tra_loi_nhanh": tr["tra_loi_nhanh"].format(so_cau=len(cau)),
         "muc": muc, "hoi_dap": list(tr["hoi_dap"]),
-        "nguon": [d["source"]["cot_tuy_phu"], "Phiên âm Hán Việt và nghĩa đời thường: Ban biên tập Hiểu Bản Thân."],
+        "nguon": [d["source"]["cot_tuy_phu"], L("trang_ct.nguon_bbt", "Phiên âm Hán Việt và nghĩa đời thường: Ban biên tập Hiểu Bản Thân.")],
         "trang_thai": d.get("trang_thai", "nhap_ai"),
         "lien_quan": [{"loai": "sao", "slug": "sao-tu-vi"}, {"loai": "cung", "slug": "cung-menh"},
                       {"loai": "sao", "slug": "sao-that-sat"}, {"loai": "hoa_cung", "slug": "hoa-loc-cung-menh"}],
         # Hình vòng 12 cung sáng cung Mệnh — bài phú xoay quanh cung Mệnh và tam phương tứ chính.
-        "minh_hoa": {"kieu": "cung", "chi_so": 0, "vong": list(t._doc("tuvi_kb.json")["cung"])},
+        "minh_hoa": {"kieu": "cung", "chi_so": 0, "vong": _vong_hien()},
     }
 
 
 TRANG = {"co_thu": (ds_co_thu, trang_co_thu)}
-TEN_NGAN = {"co_thu": lambda k: SACH}
+TEN_NGAN = {"co_thu": lambda k: sach()}
+
+
+def _vong_hien() -> list[str]:
+    from app.kb import trang_tuvi as ttv
+    return ttv.vong_hien()

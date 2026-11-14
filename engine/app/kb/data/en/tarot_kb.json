@@ -522,7 +522,7 @@
    "nghia_la": "{ten}{nguoc}: {y} Keywords: {tu_khoa}.",
    "nghia_linh_vuc": "In {linh_vuc}: {loi}",
    "trai_bai": "{ten}: {mo_ta} Positions: {vi_tri}.",
-   "khong_hieu": "I could not tell which card or spread you are asking about. Ask about a card by name (e.g. 'What does the Tower mean', 'Three of Cups reversed in love'), a spread ('What is the Celtic Cross') or a concept ('reversed cards', 'Major Arcana').",
+   "khong_hieu": "I could not tell which card or spread you are asking about. Ask about a card by name (e.g. 'What does the Tower mean', 'Three of Cups reversed in love'), a spread ('What is the Celtic Cross') or a concept ('reversed cards', 'Major Arcana'). If you are weighing something in your own life (work, love, a decision), type it into the draw box above and ask about your side — e.g. 'How can I work better with my boss?' rather than 'Does my boss hate me?'.",
    "nguoi_khac": "Tarot here reads for the person asking: the cards cannot tell what someone else is doing or thinking — ask 'what should I do about this' and the spread can answer. You can draw the three-card Situation – Obstacle – Advice spread for yourself; as for what is in the other person's heart, the only way to know is to ask them directly.",
    "vi_tri": "{ten}{nguoc} in the '{vi_tri}' position ({hoi}): {y}"
   },

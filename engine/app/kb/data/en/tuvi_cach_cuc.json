@@ -1,0 +1,611 @@
+{
+ "_trang_thai": "bien_tap",
+ "luu_y_pha_cach": "Chart patterns are only a frame of reference: when the six harsh stars (Qing Yang, Tuo Luo, Huo Xing, Ling Xing, Di Kong, Di Jie) gather on the Life Palace, the old books call it a 'broken pattern' — the good side is reduced and more effort and self-discipline are needed. No pattern decides anyone's fate.",
+ "cach": {
+  "tu_phu_dong_cung": {
+   "ten": "Zi Fu Tong Gong (Zi Wei and Tian Fu together)",
+   "dieu_kien": "Zi Wei and Tian Fu both sit in the Life Palace (in Yin or Shen).",
+   "y": "The emperor star and the treasury star together: a calm presence with a gift for organising, keeping and building up; people readily trust you with big tasks.",
+   "mat_toi": "Can be set in your ways, like to stay in control and resist change; sometimes you take on too much because you don't want to hand over authority.",
+   "loi_khuyen": "Use your steadiness to be the pillar, but practise listening and truly hand tasks over for others to decide.",
+   "co_ca": "Zi Fu tong gong zhong shen fu hou — editorial translation: Zi Wei and Tian Fu in one palace: a life of ample blessings."
+  },
+  "tu_phu_vu_tuong": {
+   "ten": "Zi Fu Wu Xiang (Zi Wei, Tian Fu, Wu Qu, Tian Xiang)",
+   "dieu_kien": "The Life Palace's three supporting palaces and opposite palace hold all of Zi Wei, Tian Fu, Wu Qu and Tian Xiang.",
+   "y": "A group of stars for organising and managing: suits structured settings, taking responsibility, and managing money and people.",
+   "mat_toi": "Heavy on order and appearances; can be rigid when a situation calls for flexibility.",
+   "loi_khuyen": "Building systems and processes is your strength — keep some soft space for creativity."
+  },
+  "phu_tuong_trieu_vien": {
+   "ten": "Fu Xiang Chao Yuan (Tian Fu and Tian Xiang facing the Life Palace)",
+   "dieu_kien": "Tian Fu and Tian Xiang both shine on the Life Palace from its supporting palaces (not sitting in it).",
+   "y": "Lifted from outside by the treasury and seal stars: you tend to find stable settings, protection from people above you and chances of position.",
+   "mat_toi": "If the Life Palace itself is weak, you may lean on circumstances and lack your own views.",
+   "loi_khuyen": "Accept support gladly, but build your own abilities too.",
+   "co_ca": "Fu Xiang tong lai hui ming gong quan jia shi lu — editorial translation: Tian Fu and Tian Xiang both meeting the Life Palace: the whole family lives on a good income."
+  },
+  "co_nguyet_dong_luong": {
+   "ten": "Ji Yue Tong Liang (Tian Ji, Tai Yin, Tian Tong, Tian Liang)",
+   "dieu_kien": "The Life Palace's three supporting palaces and opposite palace hold Tian Ji, Tai Yin, Tian Tong and Tian Liang.",
+   "y": "The old books say this pattern 'makes an official': suits working in organisations, specialist work, administration, education and service; life is fairly stable.",
+   "mat_toi": "Wary of risk and easily content with what you have; you weigh things up a lot and decide slowly.",
+   "loi_khuyen": "Build on deep expertise and thoroughness; now and then, test yourself with a bigger goal.",
+   "co_ca": "Ji Yue Tong Liang zuo li ren — editorial translation: Tian Ji, Tai Yin, Tian Tong and Tian Liang: one who serves as an official."
+  },
+  "sat_pha_tham": {
+   "ten": "Sha Po Lang (Qi Sha, Po Jun, Tan Lang)",
+   "dieu_kien": "The Life Palace holds Qi Sha, Po Jun or Tan Lang (the three always sit in a supporting triangle).",
+   "y": "A group of stars for change and breaking new ground: proactive and bold, with a life that changes direction several times; suits starting a business, trade and challenging work.",
+   "mat_toi": "Impatient and drawn to risk, with big wins and big losses; hard to settle in one place.",
+   "loi_khuyen": "Change is your engine — set rules for money and relationships so that change doesn't turn into breakage.",
+   "co_ca": "Qi Sha Po Jun yi chu wai — editorial translation: Qi Sha and Po Jun: it suits you to go out into the wider world."
+  },
+  "cuc_huong_ly_minh": {
+   "ten": "Ji Xiang Li Ming (the Pole Star facing the bright south)",
+   "dieu_kien": "Zi Wei sits in the Life Palace in Wu.",
+   "y": "The emperor star in its brightest place: a dignified, commanding manner that earns respect; suits leading roles.",
+   "mat_toi": "Strong pride and hard to admit mistakes; you need capable people around you (Zuo Fu, You Bi, Tian Kui, Tian Yue) to shine.",
+   "loi_khuyen": "Authority comes from serving others — stay humble so good people want to stay.",
+   "co_ca": "Zi Wei ju Wu wu sha cou wei zhi san gong — editorial translation: Zi Wei in Wu with no harsh stars gathering: a rank as high as the three chief ministers."
+  },
+  "that_sat_trieu_dau": {
+   "ten": "Qi Sha Chao Dou (Qi Sha paying court to the Dipper)",
+   "dieu_kien": "Qi Sha sits in the Life Palace in Yin or Shen (facing Zi Wei and Tian Fu).",
+   "y": "The general star turned toward the emperor star: brave, decisive, hard-working, able to build a life with your own two hands.",
+   "mat_toi": "Tough, lonely in your decisions and prone to clashes.",
+   "loi_khuyen": "Put your strength into long-term goals; learn a softer touch when dealing with people.",
+   "co_ca": "Qi Sha chao Dou jue lu rong chang — editorial translation: Qi Sha paying court to the Dipper: rank and income flourish."
+  },
+  "that_sat_nguong_dau": {
+   "ten": "Qi Sha Yang Dou (Qi Sha looking up to the Dipper)",
+   "dieu_kien": "Qi Sha sits in the Life Palace in Zi or Wu.",
+   "y": "The general star looking up to the emperor star: big ambitions, willing to take on hard work, an independent spirit.",
+   "mat_toi": "A life with many ups and downs; you can go to extremes when cornered.",
+   "loi_khuyen": "Prepare thoroughly before charging in; keep a calm adviser at your side.",
+   "co_ca": "Chao Dou yang Dou jue lu rong chang — editorial translation: Facing the Dipper, looking up to the Dipper: rank and income flourish."
+  },
+  "hung_tu_can_nguyen": {
+   "ten": "Xiong Su Qian Yuan (the strong star at the origin of Heaven)",
+   "dieu_kien": "Lian Zhen sits in the Life Palace in Yin or Shen.",
+   "y": "Lian Zhen in a strong position: principled and disciplined, capable in administrative and legal work, willing to take responsibility.",
+   "mat_toi": "Strict with yourself and others, easily tense.",
+   "loi_khuyen": "Principles are your strength — pair them with tolerance to keep your relationships."
+  },
+  "nhat_le_trung_thien": {
+   "ten": "Ri Li Zhong Tian (the sun shining at midday)",
+   "dieu_kien": "Tai Yang sits in the Life Palace in Wu.",
+   "y": "The midday sun: generous and warm, keen to contribute and be recognised; suits public-facing work, leadership and media.",
+   "mat_toi": "Worn out from giving too much, concerned about face, and prone to doing others' work for them.",
+   "loi_khuyen": "Dare to stand in front of a crowd but save your strength; set limits on carrying others' loads."
+  },
+  "nguyet_lang_thien_mon": {
+   "ten": "Yue Lang Tian Men (the bright moon at the Gate of Heaven)",
+   "dieu_kien": "Tai Yin sits in the Life Palace in Hai.",
+   "y": "The bright moon at the Gate of Heaven: refined and calm, good at building up savings, with a knack for property, homes and the arts.",
+   "mat_toi": "A rich inner life that can turn into worry and withdrawal.",
+   "loi_khuyen": "Nurture your inner life, but share your feelings with people you trust.",
+   "co_ca": "Yue lang Tian Men jin jue feng hou — editorial translation: The bright moon at the Gate of Heaven: rising in rank, even to a noble title."
+  },
+  "tho_tinh_nhap_mieu": {
+   "ten": "Shou Xing Ru Miao (the Longevity Star in its temple)",
+   "dieu_kien": "Tian Liang sits in the Life Palace in Wu.",
+   "y": "The protecting star well placed: a caring heart; suits counselling, healthcare, education and social work; troubles tend to find a way out.",
+   "mat_toi": "Likes to play the teacher and lecture; easily takes on other people's problems.",
+   "loi_khuyen": "Protect people by giving them the ability to stand on their own.",
+   "co_ca": "Liang ju Wu wei guan zi qing xian — editorial translation: Tian Liang in Wu: an official standing that is clean and distinguished."
+  },
+  "anh_tinh_nhap_mieu": {
+   "ten": "Ying Xing Ru Miao (the Hero Star in its temple)",
+   "dieu_kien": "Po Jun sits in the Life Palace in Zi or Wu.",
+   "y": "Po Jun in a strong position: willing to tear down the old and build the new, a pioneer who can handle the pressure of change.",
+   "mat_toi": "Breaks first and thinks later, which can be costly and cut ties.",
+   "loi_khuyen": "Before you tear something down, sketch out what you'll build.",
+   "co_ca": "Zi Wu Po Jun jia guan jin lu — editorial translation: Po Jun in Zi or Wu: promotion and more income."
+  },
+  "thach_trung_an_ngoc": {
+   "ten": "Shi Zhong Yin Yu (jade hidden in stone)",
+   "dieu_kien": "Ju Men sits in the Life Palace in Zi or Wu.",
+   "y": "Jade hidden in stone: talent that shows late, sharp analysis and a sharp tongue; success comes with patient polishing.",
+   "mat_toi": "Suspicious, and blunt words cause misunderstandings; youth brings plenty of gossip and friction.",
+   "loi_khuyen": "Say a little less and let results speak; keep sharpening your expertise over the long run.",
+   "co_ca": "Zi Wu Ju Men shi zhong yin yu — editorial translation: Ju Men in Zi or Wu: jade hidden in stone."
+  },
+  "cu_nhat_dong_cung": {
+   "ten": "Ju Ri Tong Gong (Ju Men and Tai Yang together)",
+   "dieu_kien": "Ju Men and Tai Yang both sit in the Life Palace (in Yin or Shen).",
+   "y": "Words meeting the light: suits professions that use words — teaching, media, law, diplomacy; reputation comes through openness.",
+   "mat_toi": "Prone to disputes over words and arguing to win.",
+   "loi_khuyen": "Use words to shed light on things, not to beat people.",
+   "co_ca": "Ju Ri tong gong guan feng san dai — editorial translation: Ju Men and Tai Yang in one palace: honours reaching three generations."
+  },
+  "cu_co_dong_lam": {
+   "ten": "Ju Ji Tong Lin (Ju Men and Tian Ji together)",
+   "dieu_kien": "Ju Men and Tian Ji both sit in the Life Palace, in Mao or You (Rooster).",
+   "y": "Intelligence and speech: quick-witted, good at strategy and research, and at running a nimble small business.",
+   "mat_toi": "Overthinks, changes your mind often and finds it hard to trust people.",
+   "loi_khuyen": "Pick one direction for long enough that your intelligence turns into results.",
+   "co_ca": "Ju Ji tong gong gong qing zhi wei — editorial translation: Ju Men and Tian Ji in one palace: a minister's rank."
+  },
+  "tham_vu_dong_hanh": {
+   "ten": "Tan Wu Tong Xing (Tan Lang and Wu Qu together)",
+   "dieu_kien": "Tan Lang and Wu Qu both sit in the Life Palace (in Chou or Wei).",
+   "y": "The old books say this pattern 'does not bloom in youth' — success often comes later, after thirty; you're good at making money once you've built up a base.",
+   "mat_toi": "Impatient and fun-loving when young, easily drifting off course.",
+   "loi_khuyen": "Patiently build up skills and capital; don't compare yourself with people who succeed early.",
+   "co_ca": "Xian pin hou fu Wu Tan tong shen ming zhi gong — editorial translation: Poor first, well-off later: Wu Qu and Tan Lang together in the Body and Life Palace."
+  },
+  "nhat_nguyet_dong_lam": {
+   "ten": "Ri Yue Tong Lin (sun and moon together)",
+   "dieu_kien": "Tai Yang and Tai Yin both sit in the Life Palace (in Chou or Wei).",
+   "y": "Yin and yang in one place: two sides in harmony — outgoing at times, inward at others; many talents and rich emotions.",
+   "mat_toi": "Prone to inner conflict and hard choices between two directions.",
+   "loi_khuyen": "Accept both sides of yourself; plan time for both busy and quiet work.",
+   "co_ca": "Ri Yue tong lin guan ju hou bo — editorial translation: Sun and moon together: an official rank among the nobility."
+  },
+  "minh_chau_xuat_hai": {
+   "ten": "Ming Zhu Chu Hai (the bright pearl rising from the sea)",
+   "dieu_kien": "The Life Palace in Wei has no main star, with Tai Yang in Mao and Tai Yin in Hai shining on it.",
+   "y": "The bright pearl rising from the sea: an empty Life Palace lit by a bright sun and moon — clever, likely to make a name, especially through learning.",
+   "mat_toi": "With an empty Life Palace, you are easily shaped by your surroundings.",
+   "loi_khuyen": "Choose your environment and the people you work with carefully — they are the 'light shining in' for you.",
+   "co_ca": "San he ming zhu sheng wang di wen bu chan gong — editorial translation: The bright pearl in the supporting palaces, in a strong position: steady steps toward the moon palace (success in the exams)."
+  },
+  "tam_ky_gia_hoi": {
+   "ten": "San Qi Jia Hui (the three wonders meeting)",
+   "dieu_kien": "Hua Lu, Hua Quan and Hua Ke all meet in the Life Palace's three supporting palaces and opposite palace.",
+   "y": "Prosperity, Power and Fame all together: chances for money, authority and recognition; your work is readily acknowledged.",
+   "mat_toi": "Likely to chase many goals at once and spread yourself thin.",
+   "loi_khuyen": "Pick a focus so your chances aren't spread too thin.",
+   "co_ca": "Ke Quan Lu gong ming yu zhao zhang — editorial translation: Fame, Power and Prosperity supporting the Life Palace: a reputation that shines."
+  },
+  "song_loc": {
+   "ten": "Shuang Lu (double Prosperity)",
+   "dieu_kien": "Lu Cun and Hua Lu both meet in the Life Palace's three supporting palaces and opposite palace.",
+   "y": "Two sources of prosperity: money comes from both steady effort and opportunity; suits long-term saving.",
+   "mat_toi": "Can be careless about money and spend on impulse.",
+   "loi_khuyen": "Turn good fortune into lasting assets: save and invest with discipline."
+  },
+  "loc_ma_giao_tri": {
+   "ten": "Lu Ma Jiao Chi (Prosperity and the Horse racing together)",
+   "dieu_kien": "Tian Ma sits in the same palace as Lu Cun or Hua Lu within the Life Palace's three supporting palaces and opposite palace.",
+   "y": "The horse carrying prosperity: money comes from moving around, trading, travelling far and changing settings.",
+   "mat_toi": "Busy and hard to settle; money comes fast and goes fast.",
+   "loi_khuyen": "Make the most of trips and far-flung connections; keep one financial 'safe harbour'.",
+   "co_ca": "Tian Lu Tian Ma jing ren jia di — editorial translation: Prosperity with the Heavenly Horse: outstanding success in the exams."
+  },
+  "ta_huu_dong_cung": {
+   "ten": "Zuo You Tong Gong (Zuo Fu and You Bi together)",
+   "dieu_kien": "Zuo Fu and You Bi both sit in the Life Palace.",
+   "y": "Two helper stars: plenty of people help you; good at bringing people together and working in teams.",
+   "mat_toi": "Can lean on others and find it hard to say no.",
+   "loi_khuyen": "Build a team — and learn to say 'no' at the right moment."
+  },
+  "xuong_khuc_dong_cung": {
+   "ten": "Chang Qu Tong Gong (Wen Chang and Wen Qu together)",
+   "dieu_kien": "Wen Chang and Wen Qu both sit in the Life Palace (in Chou or Wei this is called Wen Gui Wen Hua).",
+   "y": "Two scholar stars: clever and good at study, with a gift for writing, the arts and languages.",
+   "mat_toi": "Plenty of ideas but few followed through; easily moved and melancholy.",
+   "loi_khuyen": "Choose one field to go deep in; write and study in a structured way.",
+   "co_ca": "Wen Gui Wen Hua jiu chong gui xian — editorial translation: Wen Gui and Wen Hua: honour that reaches the highest court."
+  },
+  "ta_huu_giap_menh": {
+   "ten": "Zuo You Jia Ming (Zuo Fu and You Bi flanking the Life Palace)",
+   "dieu_kien": "Zuo Fu and You Bi sit in the two palaces on either side of the Life Palace.",
+   "y": "Support from both sides: family, friends and colleagues tend to help at the right moment.",
+   "mat_toi": "Less self-reliant once you're used to being helped.",
+   "loi_khuyen": "Repay and look after the relationships that lift you up."
+  },
+  "xuong_khuc_giap_menh": {
+   "ten": "Chang Qu Jia Ming (Wen Chang and Wen Qu flanking the Life Palace)",
+   "dieu_kien": "Wen Chang and Wen Qu sit in the two palaces on either side of the Life Palace.",
+   "y": "Surrounded by learning and culture: you easily find good teachers, good books and chances to study.",
+   "mat_toi": "Broad knowledge that can lack practice.",
+   "loi_khuyen": "Turn learning into doing: apply what you learn straight away.",
+   "co_ca": "Jia Chang jia Qu zhu gui xi — editorial translation: Flanked by Wen Chang and Wen Qu: a mark of honour."
+  },
+  "khoi_viet_hoi_menh": {
+   "ten": "Kui Yue Gong Ming (Tian Kui and Tian Yue supporting the Life Palace)",
+   "dieu_kien": "Tian Kui and Tian Yue both meet in the Life Palace's three supporting palaces and opposite palace.",
+   "y": "The stars of helpful people: you often meet people above you who help, with chances of promotion and exam success.",
+   "mat_toi": "Waiting for helpful people instead of taking the initiative.",
+   "loi_khuyen": "Seek out a teacher or mentor yourself; be prepared so you can grab the chance when it comes.",
+   "co_ca": "Tian Kui Tian Yue gai shi wen zhang — editorial translation: Tian Kui and Tian Yue: writing that surpasses its age."
+  },
+  "hoa_tham": {
+   "ten": "Huo Tan (Huo Xing with Tan Lang)",
+   "dieu_kien": "Tan Lang sits in the Life Palace together with Huo Xing.",
+   "y": "The old books see this as a 'fast rise' pattern: opportunities arrive unexpectedly, and a breakthrough is possible if you seize them.",
+   "mat_toi": "Quick to rise, quick to fall; prone to a hot temper and to getting carried away.",
+   "loi_khuyen": "When a good run comes, keep most of what you gain; avoid gambling further.",
+   "co_ca": "Tan Lang Huo Xing ju miao wang ming zhen zhu bang — editorial translation: Tan Lang with Huo Xing, bright and strong: a name known far and wide."
+  },
+  "linh_tham": {
+   "ten": "Ling Tan (Ling Xing with Tan Lang)",
+   "dieu_kien": "Tan Lang sits in the Life Palace together with Ling Xing.",
+   "y": "Like Huo Xing with Tan Lang but quieter: opportunities come through relationships and discreet strategy.",
+   "mat_toi": "Calculating, and prone to suspicion.",
+   "loi_khuyen": "Be open with your partners so opportunity doesn't turn into mistrust.",
+   "co_ca": "Tan Ling bing shou jiang xiang zhi ming — editorial translation: Tan Lang and Ling Xing together: the name of a general or minister."
+  },
+  "dao_hoa_pham_chu": {
+   "ten": "Tao Hua Fan Zhu (the peach-blossom star meeting the ruler: Zi Wei with Tan Lang)",
+   "dieu_kien": "Zi Wei and Tan Lang both sit in the Life Palace, in Mao or You (Rooster).",
+   "y": "The emperor star meets the peach-blossom star: charismatic, good socially, with many talents; a rich emotional and social life.",
+   "mat_toi": "Easily drawn into pleasure and romance; it takes self-cultivation for Zi Wei to keep Tan Lang in check.",
+   "loi_khuyen": "Channel your charm into your career and creativity; keep personal discipline.",
+   "co_ca": "Ji ju Mao You duo wei tuo su seng ren — editorial translation: The Pole Star in Mao or You: often someone who steps away from worldly life, like a monk."
+  },
+  "kinh_da_giap_menh": {
+   "ten": "Yang Tuo Jia Ming (Qing Yang and Tuo Luo flanking the Life Palace)",
+   "dieu_kien": "Qing Yang and Tuo Luo sit in the two palaces on either side of the Life Palace.",
+   "y": "Squeezed between two harsh stars: you easily feel pressure and obstacles from both sides, and have to rely on yourself a lot.",
+   "mat_toi": "Easily frustrated and feeling boxed in.",
+   "loi_khuyen": "Create your own space and back-up plans; be patient in getting past obstacles.",
+   "co_ca": "Jia Yang jia Tuo wei qi gai — editorial translation: Flanked by Qing Yang and Tuo Luo: the old text warns of hardship and want."
+  },
+  "hoa_linh_giap_menh": {
+   "ten": "Huo Ling Jia Ming (Huo Xing and Ling Xing flanking the Life Palace)",
+   "dieu_kien": "Huo Xing and Ling Xing sit in the two palaces on either side of the Life Palace.",
+   "y": "Surrounded by hot-headed pressure: a changeable environment where staying calm matters.",
+   "mat_toi": "Prone to anger and hasty decisions.",
+   "loi_khuyen": "Practise pausing before you react; choose a steadier environment."
+  },
+  "khong_kiep_giap_menh": {
+   "ten": "Kong Jie Jia Ming (Di Kong and Di Jie flanking the Life Palace)",
+   "dieu_kien": "Di Kong and Di Jie sit in the two palaces on either side of the Life Palace.",
+   "y": "Two scattering stars around you: money and plans can fall short unexpectedly; in return you often have unusual ideas.",
+   "mat_toi": "Prone to setbacks from far-fetched plans and speculation.",
+   "loi_khuyen": "Keep savings in reserve and avoid speculation; turn unusual ideas into tested creative work.",
+   "co_ca": "Jia Kong jia Jie zhu pin jian — editorial translation: Flanked by Di Kong and Di Jie: the old text warns of lean, humble times."
+  },
+  "ma_dau_doi_kiem": {
+   "ten": "Ma Tou Dai Jian (a sword on the horse's head)",
+   "dieu_kien": "Qing Yang sits in the Life Palace in Wu.",
+   "y": "A sword on the horse's head: brave, willing to go into tough places; suits competitive, highly disciplined work. The old books say that with good stars this person 'commands the frontier'.",
+   "mat_toi": "Too rigid and liable to snap, prone to clashing with others, and prone to taking risks when driving or in hard sports.",
+   "loi_khuyen": "Use your intensity with control; pay attention to safety in risky work.",
+   "co_ca": "Ma tou dai jian fei yao zhe ze zhu xing shang — editorial translation: A sword on the horse's head: the old text warns of injury — read it as a reminder to take safety seriously.",
+   "sach_ghi": {
+    "y": "Only Tian Ma together with Qing Yang makes this pattern — not Qing Yang sitting in the Wu palace."
+   }
+  },
+  "hoa_ky_thu_menh": {
+   "ten": "Hua Ji Shou Ming (Hua Ji in the Life Palace)",
+   "dieu_kien": "The birth-year Hua Ji sits in the Life Palace.",
+   "y": "Life's sticking point sits in yourself: quick to blame yourself, a perfectionist, easily misunderstood — and also driven to improve.",
+   "mat_toi": "Prone to pessimism and holding on to grievances.",
+   "loi_khuyen": "Name what keeps nagging at you and deal with it piece by piece; find someone who listens.",
+   "co_ca": "Ju Men Ji xing jie bu ji\nYun shen ming xian ji xiang feng\neditorial translation: Ju Men and the Ji star are both seen as unlucky; the old text says it is best they do not meet in the Life, Body or period palaces."
+  },
+  "menh_vo_chinh_dieu": {
+   "ten": "Ming Wu Zheng Yao (no main star in the Life Palace)",
+   "dieu_kien": "The Life Palace has no main star — it is read by borrowing the main stars of the opposite palace (Travel Palace).",
+   "y": "Flexible and adaptable, strongly influenced by your surroundings and the people around you; plenty of hidden ability.",
+   "mat_toi": "Prone to lacking direction and depending on circumstances.",
+   "loi_khuyen": "Choose your environment and colleagues carefully; build your own set of values as your 'main star'.",
+   "co_ca": "Ming wu zheng yao, yao zhe gu pin — editorial translation: No main star in the Life Palace: the old text warns of loneliness and lean times."
+  },
+  "than_menh_dong_cung": {
+   "ten": "Shen Ming Tong Gong (Body and Life in the same palace)",
+   "dieu_kien": "The Body Palace falls in the same palace as the Life Palace.",
+   "y": "Early and later life share one root: a consistent character who lives by your nature from start to finish; the strengths and weaknesses of the Life Palace are doubled.",
+   "mat_toi": "Hard to change habits; stubborn.",
+   "loi_khuyen": "Understand the strengths and weaknesses of your Life Palace well so you can make up for them early."
+  },
+  "quan_than_khanh_hoi": {
+   "ten": "Jun Chen Qing Hui (ruler and ministers meeting)",
+   "dieu_kien": "Zi Wei together with Zuo Fu and You Bi in the Life Palace (if Zuo Fu and You Bi only face or flank the Life Palace, it is not this pattern).",
+   "y": "A ruler (Zi Wei) with able ministers: a person of stature surrounded by talented people and helpers; suits leading a group.",
+   "mat_toi": "Used to being lifted up, so you may lean on others or like being praised.",
+   "loi_khuyen": "Keep good people by your side through respect and fairness; you still have to carry the decisions yourself.",
+   "sach_ghi": {
+    "y": "Zi Wei with Zuo Fu and You Bi sits in the Life Palace; meeting Tian Xiang, Wu Qu and Tai Yin as well makes it even better."
+   }
+  },
+  "duong_luong_xuong_loc": {
+   "ten": "Yang Liang Chang Lu (Tai Yang, Tian Liang, Wen Chang, Lu Cun)",
+   "dieu_kien": "Tai Yang, Tian Liang, Wen Chang and a Prosperity star (Lu Cun or Hua Lu) all meet in the Life Palace's three supporting palaces and opposite palace.",
+   "y": "The exam and study pattern: bright and studious, with a knack for degrees, certificates and specialist professions; people above notice you through real learning.",
+   "mat_toi": "Prone to putting too much weight on reputation and qualifications; pressure to always be the best.",
+   "loi_khuyen": "Invest in real learning and expertise — that is your biggest lever."
+  },
+  "liem_trinh_van_vu": {
+   "ten": "Lian Zhen Wen Wu (Lian Zhen, civil and martial)",
+   "dieu_kien": "Lian Zhen sits in the Life Palace in Yin or Shen, with Wu Qu and Wen Chang meeting in its three supporting palaces and opposite palace.",
+   "y": "Both a civil side (refined, courteous) and a martial side (decisive, practical); suits work that needs both brains and nerve.",
+   "mat_toi": "The two sides sometimes pull against each other: soft one moment, hard the next, hard to read.",
+   "loi_khuyen": "Choose work that uses both strengths; say clearly which 'mode' you're in so others can work with you.",
+   "co_ca": "Ming zhong Wen Wu xi chao yuan\nRu miao ping sheng fu qi quan\nChun cui wen neng gao zhe gui\nZheng zhan wu ding zhen san bian\neditorial translation: Civil and martial stars are welcome facing the Life Palace; in their temple they bring blessings all life long. Pure, the civil side wins top honours in the exams; in campaigns, the martial side holds the frontiers."
+  },
+  "dan_tri_que_tri": {
+   "ten": "Dan Chi – Gui Chi (the vermilion steps and the cassia steps)",
+   "dieu_kien": "Tai Yang sits in the Life Palace in Chen, Si or Wu (Dan Chi), or Tai Yin in You (Rooster), Xu or Hai (Gui Chi) — the star in a bright position.",
+   "y": "Sun by day, moon by night — the main star in its brightest place: talented and ambitious, likely to meet opportunities while still young.",
+   "mat_toi": "Standing out early can bring complacency or too many expectations.",
+   "loi_khuyen": "Use an early advantage to build a long-term foundation, not just to enjoy the name.",
+   "co_ca": "Er yao chang ming zheng de zhong\nCai hua sheng shi ding ying xiong\nShao nian ji de feng yun hui\nYi yue tian chi bian hua long\neditorial translation: The two lights shine in their proper place; talent and standing make a hero. Meeting the right moment while young, one leap into the heavenly pool and the carp becomes a dragon."
+  },
+  "nhat_chieu_loi_mon": {
+   "ten": "Ri Zhao Lei Men (the sun shining on the Thunder Gate)",
+   "dieu_kien": "Tai Yang sits in the Life Palace in Mao (the sun rising at the Thunder Gate, in the east).",
+   "y": "The rising morning sun: energetic, outgoing and full of life; often blossoms early and works with momentum.",
+   "mat_toi": "Too much enthusiasm can turn into haste and showing off.",
+   "loi_khuyen": "Keep your starting momentum with discipline; let results speak for you.",
+   "co_ca": "Tai Yang Mao wei gui kan kua\nBi zhu ping sheng fu gui jia\nChun cui shao nian deng jia di\nZheng zhan sheng shi dong yi hua\neditorial translation: Tai Yang in Mao is an honour worth praising, a mark of a prosperous life; pure, it brings top exam success while young; in campaigns, a reputation that stirs near and far."
+  },
+  "nhat_nguyet_tinh_minh": {
+   "ten": "Ri Yue Bing Ming (sun and moon both bright)",
+   "dieu_kien": "Tai Yang in Si and Tai Yin in You (Rooster) both meet in the Life Palace's three supporting palaces and opposite palace (the Life Palace is usually in Chou).",
+   "y": "Sun and moon both bright and shining on you: a mind balanced between reason and feeling, with bright prospects in study and reputation.",
+   "mat_toi": "Plenty of outside advantages can leave you short on inner strength.",
+   "loi_khuyen": "Turn 'borrowed' light into your own: master one trade in depth.",
+   "co_ca": "Er yao chang ming qi xiang xin\nShao nian xue wen bo sheng ming\nJi fan sheng zhuan gong ming sheng\nDing zuo chao zhong zhi li ren\neditorial translation: The two lights shine and everything feels fresh; learning in youth spreads one's name; after several promotions achievement flourishes, and one serves in governing at court."
+  },
+  "nguyet_sinh_thuong_hai": {
+   "ten": "Yue Sheng Cang Hai (the moon rising over the sea)",
+   "dieu_kien": "Tai Yin sits in the Zi palace and that palace is the Property Palace (the moon rising over the sea).",
+   "y": "A bright moon over the water, shining down on the house: good fortune with home and land; a settled place to live, with family assets building up slowly but lastingly.",
+   "mat_toi": "Easily attached to the old home and reluctant to move; good at keeping things but slow to renew them.",
+   "loi_khuyen": "Keep your gentleness but practise saying 'no' at the right moment.",
+   "sach_ghi": {
+    "y": "Tai Yin sits in the Zi palace and that palace is the Property Palace."
+   }
+  },
+  "nhat_nguyet_chieu_bich": {
+   "ten": "Ri Yue Zhao Bi (sun and moon shining on the wall)",
+   "dieu_kien": "Tai Yang and Tai Yin share the Property Palace in Chou or Wei.",
+   "y": "Sun and moon shining on the 'wall of the house': blessings in home, land and accumulated property; family life is usually warm.",
+   "mat_toi": "Prone to pinning too much hope on property and homes.",
+   "loi_khuyen": "Treat home as a place to rest, not a measure of success.",
+   "sach_ghi": {
+    "y": "Tai Yang and Tai Yin sit in the Property Palace; best when that palace is Chen, Xu, Chou or Wei."
+   }
+  },
+  "co_luong_gia_hoi": {
+   "ten": "Ji Liang Jia Hui (Tian Ji and Tian Liang meeting)",
+   "dieu_kien": "Tian Ji and Tian Liang share the Life Palace, or the Life Palace is in Yin, Shen, Chen or Xu with Tian Ji and Tian Liang meeting in its three supporting palaces and opposite palace.",
+   "y": "A strategic mind, good at analysis and at looking ahead for others; suits consulting, planning, teaching and research.",
+   "mat_toi": "Thinks and talks more than acts; easily becomes the 'adviser' who shies away from the front line.",
+   "loi_khuyen": "Turn ideas into concrete tasks with deadlines.",
+   "co_ca": "Ji Liang ru miao zui kan yan\nDe di jiao jun fu shou quan\nMiao suan shen ce ying gai shi\nWei feng lin lin zhang bing quan\neditorial translation: Tian Ji and Tian Liang in their temple are most worth mention; well placed, they bring blessings throughout life; brilliant plans and strategy beyond their age, an imposing presence in command."
+  },
+  "van_luong_chan_ky": {
+   "ten": "Wen Liang Zhen Ji (the scholar stars and Tian Liang upholding order)",
+   "dieu_kien": "Tian Liang sits in the Life Palace with Wen Chang meeting it, or Wen Chang sits in the Life Palace with Tian Liang meeting it from the three supporting palaces and opposite palace.",
+   "y": "The scholar star meets the 'teacher' star: upright, principled, with a measured voice; suits upholding order, education and legal work.",
+   "mat_toi": "Can be strict and given to moralising.",
+   "loi_khuyen": "Keep your principles but say things gently; lead by example more than by lecturing.",
+   "co_ca": "Wen xing geng zhi yu Tian Liang\nWei lie huang men niao fu xing\nGang ji chao zhong gong ye jian\nBi ren qing qi man qian kun\neditorial translation: An upright scholar star meeting Tian Liang ranks among the court officials and censors; upholding order at court builds lasting work, and its clear spirit fills heaven and earth."
+  },
+  "phu_cung_van_tinh": {
+   "ten": "Fu Gong Wen Xing (helper stars supporting the scholar stars)",
+   "dieu_kien": "Wen Chang sits in the Life Palace, with Zuo Fu meeting it from the three supporting palaces and opposite palace.",
+   "y": "Learning plus a helper: quick and gifted, with support in your brain work.",
+   "mat_toi": "Leaning on helpers and neglecting your own part.",
+   "loi_khuyen": "Acknowledge your helpers' work — that's how you keep them for the long run.",
+   "co_ca": "Fu xing gong ming zui kan yan\nMin jie cai hua zhong mo xian\nQing shi shuai chen jian wu ma\nZhong xu ru xiang zhun wei quan\neditorial translation: A helper star supporting the Life Palace is most worth mention: quick and gifted, ahead of everyone; at the least a governor, at the most a minister with real authority."
+  },
+  "tuong_tinh_dac_dia": {
+   "ten": "Jiang Xing De Di (the General Star well placed)",
+   "dieu_kien": "Wu Qu (the general star) sits in the Life Palace in Chou, Wei, Yin or Shen, with Hua Lu, Hua Quan, Hua Ke or Lu Cun meeting in its three supporting palaces and opposite palace.",
+   "y": "A fine general on good ground: decisive and practical, good at managing money and people; you see things through.",
+   "mat_toi": "Tough, putting results before feelings; can feel lonely at the top.",
+   "loi_khuyen": "Keep your decisiveness, and add a little softness with the people close to you.",
+   "co_ca": "Jiang xing ru miao shi wei xiang\nWei zheng guan gao dao chu qiang\nLue di gong cheng duo miao suan\nWei feng lin lin zhen bian jiang\neditorial translation: The General Star in its temple is truly a good sign: a proper post, high office, strong everywhere; many clever plans in taking ground and cities, an imposing presence guarding the borders."
+  },
+  "hoa_tinh_phan_quy": {
+   "ten": "Hua Xing Fan Gui (transformed stars turning to honour)",
+   "dieu_kien": "Tian Tong sits in the Life Palace in Xu carrying Hua Quan (Ding year), or Ju Men sits in the Life Palace in Chen or Xu carrying Hua Lu (Xin year).",
+   "y": "A star in a weak spot turned good by its transformation: a 'rough start, good finish' kind of person — hard early years, then better through change and effort.",
+   "mat_toi": "Easily discouraged and lacking confidence early on.",
+   "loi_khuyen": "See early hardship as a training stage — results show over the long road.",
+   "co_ca": "San xing bian hua zui wu qiong\nTong Xu xiang feng Ju bian long\nSheng zhi Ding Xin xu fu gui\nQing nian gong zheng miao tang zhong\neditorial translation: The three stars transform without end: Tian Tong in Xu, and Ju Men turning into a dragon; born in a Ding or Xin year, one rises to wealth and honour, upright at court while young."
+  },
+  "quyen_loc_hoi_menh": {
+   "ten": "Quan Lu Hui Ming (Power and Prosperity meeting the Life Palace)",
+   "dieu_kien": "Hua Quan and Hua Lu are both present in the Life Palace's three supporting palaces and opposite palace (without Hua Ke — all three make San Qi Jia Hui).",
+   "y": "Both 'power' (the ability to take charge) and 'prosperity' (money opportunities): work and career have momentum, and independence comes easily.",
+   "mat_toi": "So busy with power and money that reputation and relationships get less attention.",
+   "loi_khuyen": "Use your power to open up opportunities for others too — shared good fortune grows.",
+   "co_ca": "Ming feng Quan Lu shi kan kua\nQian zai gong ming fu gui jia\nDan jian ye ying shen fu hou\nPing sheng wen bu hao sheng ya\neditorial translation: Power and Prosperity in the Life Palace are truly worth praising: lasting achievement and a prosperous house; even one alone brings ample blessings and steady steps through a good life."
+  },
+  "loc_hop_uyen_uong": {
+   "ten": "Lu He Yuan Yang (Prosperity paired like mandarin ducks)",
+   "dieu_kien": "Lu Cun and Hua Lu both sit in the Life Palace.",
+   "y": "Two Prosperity stars paired like mandarin ducks: a knack with money, good at saving, and usually comfortable materially.",
+   "mat_toi": "Can value money too much and be reluctant to share.",
+   "loi_khuyen": "Keep your wealth by spending it in the right places — giving is also keeping.",
+   "co_ca": "Lu he yuan yang fu qi gao\nSi ren wen wu bi ying hao\nDui jin ji yu shen rong gui\nJue wei gao qian yi zi pao\neditorial translation: Prosperity paired like mandarin ducks brings great blessings; such a person is gifted in both civil and martial ways; gold and jade pile up, honour follows, and rank rises to the purple robe."
+  },
+  "loc_ma_boi_an": {
+   "ten": "Lu Ma Pei Yin (Prosperity and the Horse bearing the seal)",
+   "dieu_kien": "A Prosperity star (Lu Cun or Hua Lu), Tian Ma and Tian Xiang (the seal) all meet in the Life Palace's three supporting palaces and opposite palace.",
+   "y": "Prosperity, a horse (movement, opportunity) and a seal (position): business and work away from home go well and bring standing.",
+   "mat_toi": "Busy travelling, with little time for family.",
+   "loi_khuyen": "Choose trips that are worth it; keep a rhythm of rest.",
+   "sach_ghi": {
+    "y": "The palace just ahead of Tian Ma holds Lu and Tian Xiang together."
+   }
+  },
+  "minh_loc_am_loc": {
+   "ten": "Ming Lu An Lu (open and hidden Prosperity)",
+   "dieu_kien": "The Life Palace has Hua Lu and the palace in six-harmony with it has Lu Cun (or the other way round).",
+   "y": "Visible prosperity and hidden prosperity: besides your main income, there is quiet support and discreet helpful people.",
+   "mat_toi": "Prone to waiting for luck instead of putting in effort.",
+   "loi_khuyen": "Acknowledge and repay the people who quietly help you.",
+   "co_ca": "Ming Lu an Lu jin shang tian hua — editorial translation: Open and hidden Prosperity: flowers added to brocade."
+  },
+  "khoa_minh_loc_am": {
+   "ten": "Ke Ming Lu An (open Fame, hidden Prosperity)",
+   "dieu_kien": "Hua Ke sits in the Life Palace, and the palace in six-harmony with it has Lu Cun or Hua Lu.",
+   "y": "A good name shows on the outside (Fame) while gains arrive quietly behind it: reputation goes first, benefits follow.",
+   "mat_toi": "Worrying too much about your image.",
+   "loi_khuyen": "Keep your word — a real reputation brings benefits on its own.",
+   "co_ca": "Ke ming Lu an wei lie san tai — editorial translation: Open Fame, hidden Prosperity: a place among the highest offices."
+  },
+  "khoa_quyen_loc_giap": {
+   "ten": "Ke Quan Lu Jia Ming (Fame, Power and Prosperity flanking the Life Palace)",
+   "dieu_kien": "The two palaces next to the Life Palace each hold at least one of Hua Ke, Hua Quan or Hua Lu, with two or more in total.",
+   "y": "'Flanked' by good things: your surroundings (siblings, parents) are favourable, and you are often helped and lifted up.",
+   "mat_toi": "Relying on a favourable setting can leave you short of your own drive.",
+   "loi_khuyen": "Use the support you have, but practise standing on your own bit by bit.",
+   "co_ca": "Jia Quan jia Ke shi suo yi — editorial translation: Flanked by Power and Fame: what the world favours."
+  },
+  "song_loc_giap_menh": {
+   "ten": "Shuang Lu Jia Ming (double Prosperity flanking the Life Palace)",
+   "dieu_kien": "Lu Cun sits in one palace next to the Life Palace and Hua Lu in the other.",
+   "y": "Two Prosperity stars on either side: you easily benefit from family, relatives or your surroundings; long stretches of want are rare.",
+   "mat_toi": "Used to having things ready-made, so you may shy away from fending for yourself.",
+   "loi_khuyen": "Build an income source of your own.",
+   "co_ca": "Jia gui jia Lu shao ren zhi — editorial translation: Flanked by honour and Prosperity: a blessing few people notice."
+  },
+  "tai_loc_giap_ma": {
+   "ten": "Cai Lu Jia Ma (wealth and Prosperity flanking the Horse)",
+   "dieu_kien": "Tian Ma sits in the Life Palace, with Wu Qu (the wealth star) on one side and Hua Lu on the other.",
+   "y": "The horse flanked by money: the more you travel, move and trade, the more prosperity comes.",
+   "mat_toi": "Restless, and easily worn out by constant travel.",
+   "loi_khuyen": "Choose a clear direction so every trip brings a return.",
+   "sach_ghi": {
+    "y": "Tian Ma sits in the Life Palace with Wu Qu and Lu in the two neighbouring palaces; even better when Ma is in a place of growth or strength."
+   }
+  },
+  "quy_tinh_giap_menh": {
+   "ten": "Gui Xing Jia Ming (noble stars flanking the Life Palace)",
+   "dieu_kien": "The two palaces next to the Life Palace hold Tai Yang and Tai Yin, or Tian Kui and Tian Yue, one star on each side.",
+   "y": "'Flanked' by two noble stars: you often meet helpful people, and people of standing notice and lift you up.",
+   "mat_toi": "Prone to waiting for others to show you the way.",
+   "loi_khuyen": "Actively seek out and keep up relationships with teachers and sponsors.",
+   "co_ca": "Ming li wu xiong tian gui jia\nJi xing de yu hao sheng ya\nRuo fei han mo wen zhang shi\nYe shi feng yi zu shi jia\neditorial translation: No harsh stars in the Life Palace and noble stars on either side; meeting good stars brings a good life; if not a scholar of letters, then a household that never lacks food or clothing."
+  },
+  "quyen_sat_hoa_loc": {
+   "ten": "Quan Sha Hua Lu (Power and the harsh stars turning to Prosperity)",
+   "dieu_kien": "Qi Sha sits in the Life Palace, with harsh stars (Qing Yang, Tuo Luo, Huo Xing, Ling Xing) and Lu Cun, Hua Lu or Hua Quan meeting in its three supporting palaces and opposite palace.",
+   "y": "Harsh energy turned into authority by Prosperity and Power: a tough person who has come through many hard times and stood up again, with real presence.",
+   "mat_toi": "A forceful temperament that clashes easily; a life with plenty of storms.",
+   "loi_khuyen": "Turn toughness into staying power; choose battles worth fighting.",
+   "co_ca": "San sha jia lin miao wang gong\nXing qing gang meng zhen ying xiong\nJi fan xian di dou jing guo\nLin lin wei quan zhong xian tong\neditorial translation: Three harsh stars arriving in a bright, strong palace: a fierce temperament that stirs heroes; many dangerous places passed through, and an imposing authority."
+  },
+  "cu_phung_tu_sat": {
+   "ten": "Ju Feng Si Sha (Ju Men meeting the four harsh stars)",
+   "dieu_kien": "Ju Men sits in the Life Palace together with Qing Yang, Tuo Luo, Huo Xing or Ling Xing.",
+   "y": "The star of talk and gossip meets harsh stars: easily caught in back-and-forth words, misunderstandings and arguments; life has periods of going far from home.",
+   "mat_toi": "Too blunt, causing offence; often suspicious.",
+   "loi_khuyen": "Say less, write clearly, check before you believe; choose work that puts words to good use (consulting, teaching, law).",
+   "co_ca": "Ju Men luo xian zai shen gong\nSi sha pian yu ming li feng\nRuo shi ji xing wu jiu jie\nBi zao liu pei yuan fang zhong\neditorial translation: Ju Men fallen in the Body Palace, with the four harsh stars meeting in the Life Palace: if no good star eases it, the old text says one ends up far from home."
+  },
+  "menh_ly_phung_khong": {
+   "ten": "Ming Li Feng Kong (the Life Palace meeting the Void)",
+   "dieu_kien": "Di Kong or Di Jie sits in the Life Palace, with no Zi Wei, Tian Fu or Hua Lu there to ease it.",
+   "y": "Two 'void' stars in the Life Palace: unusual ideas and a pull toward the abstract; money and status come and go easily, while your inner life is rich.",
+   "mat_toi": "Easily let down when expectations aren't met; money is hard to hold on to.",
+   "loi_khuyen": "Set concrete goals with a financial plan; point your creativity at real work.",
+   "co_ca": "Kong yao lai lin ji yao wu\nQiu ming qiu li zong cheng xu\nQing xian gu du fang yan shou\nFu gui rong hua guo xi ju\neditorial translation: The Void star arrives with no good star: chasing fame and gain tends to come to nothing; a quiet, simple life suits best, and wealth and glory pass like a horse glimpsed through a crack."
+  },
+  "dong_luong_dan_than": {
+   "ten": "Tong Liang Yin Shen (Tian Tong and Tian Liang in Yin or Shen)",
+   "dieu_kien": "Tian Tong and Tian Liang both sit in the Life Palace in Yin or Shen.",
+   "y": "The blessing star meets the protecting star: gentle, helpful and tolerant; suits care work, service, education and community work.",
+   "mat_toi": "Likes an easy pace and avoids competition; moves around a lot and finds it hard to stay in one place for long.",
+   "loi_khuyen": "Pick a clear direction and set yourself milestones so your gentleness comes with results.",
+   "co_ca": "Yin Shen zui xi Tong Liang hui — editorial translation: In Yin or Shen, it is best to meet Tian Tong and Tian Liang."
+  },
+  "liem_tuong_dong_cung": {
+   "ten": "Lian Xiang Tong Gong (Lian Zhen and Tian Xiang together)",
+   "dieu_kien": "Lian Zhen and Tian Xiang both sit in the Life Palace (only possible in Zi or Wu).",
+   "y": "The star of order meets the seal star: serious, principled and self-controlled; suits work that needs trust and process, like administration, legal work and management.",
+   "mat_toi": "Can be rigid and concerned with face; quick-tempered when cornered.",
+   "loi_khuyen": "Keep your principles but leave room to negotiate; get paperwork and agreements clear to avoid trouble later."
+  },
+  "vu_sat_dong_cung": {
+   "ten": "Wu Sha Tong Gong (Wu Qu and Qi Sha together)",
+   "dieu_kien": "Wu Qu and Qi Sha both sit in the Life Palace in Mao or You (where the two stars are less bright).",
+   "y": "The wealth star meets the general star in a dimmer place: decisive and bold, able to handle heavy work; money matters need more discipline and care than for most people.",
+   "mat_toi": "Prone to rushing money decisions and then having to undo them; rarely willing to take a step back.",
+   "loi_khuyen": "Set money rules before you act (limits, paperwork, someone to double-check); sleep on big decisions."
+  },
+  "tu_vi_co_quan": {
+   "ten": "Zi Wei Gu Jun (Zi Wei as a lone ruler)",
+   "dieu_kien": "Zi Wei sits in the Life Palace without Tian Fu in the same palace, and with no Zuo Fu or You Bi in its three supporting palaces and opposite palace (the old books call this 'a ruler without ministers').",
+   "y": "A ruling star without helpers: self-respecting, with your own views, used to carrying things yourself; you do well when you can decide on your own.",
+   "mat_toi": "Prone to taking on everything and finding it hard to ask for help; sometimes you feel alone in your role.",
+   "loi_khuyen": "Find one or two partners you can trust and truly hand part of the work over to them."
+  },
+  "hoa_ky_thien_di": {
+   "ten": "Hua Ji in the Travel Palace",
+   "dieu_kien": "A main star carrying Hua Ji (by the birth-year stem) sits in the Travel Palace — the palace opposite the Life Palace.",
+   "y": "The palace of going out meets Ji: travel and work with strangers can bring small hitches and misunderstandings; things outside go well with careful preparation.",
+   "mat_toi": "Prone to worry when you have to go out — or the opposite, careless and then caught up in needless trouble.",
+   "loi_khuyen": "When travelling or meeting new partners, prepare papers and schedules carefully and spell out agreements from the start."
+  },
+  "liem_sat_duong": {
+   "ten": "Lian Sha Yang (Lian Zhen, Qi Sha, Qing Yang)",
+   "dieu_kien": "Lian Zhen, Qi Sha and Qing Yang are all present in the Life Palace's three supporting palaces and opposite palace.",
+   "y": "The star of order, the general star and Qing Yang together: strong-willed, ready to confront, unwilling to lose out; the old books remind people with this pattern to take care when travelling and with papers and contracts.",
+   "mat_toi": "Anger easily turns into clashes; prone to skipping procedural details.",
+   "loi_khuyen": "Travel slowly and safely, read papers carefully before signing; in a dispute, ask someone knowledgeable to stand in the middle."
+  },
+  "cu_hoa_duong": {
+   "ten": "Ju Huo Yang (Ju Men, Huo Xing, Qing Yang)",
+   "dieu_kien": "Ju Men, Huo Xing and Qing Yang are all present in the Life Palace's three supporting palaces and opposite palace.",
+   "y": "The star of speech meets two hot stars: irritation builds up easily and exchanges get tense; you need an outlet and a slower way of speaking.",
+   "mat_toi": "You tend to keep frustration inside and then let it out all at once; a small matter can wear you down for days.",
+   "loi_khuyen": "Release tension regularly (exercise, writing it down, talking to someone you trust); sleep on annoying matters before you speak.",
+   "co_ca": "Ju Huo Qing Yang zhong shen yi si — editorial translation: Ju Men, Huo Xing and Qing Yang: the old text uses its harshest words here — read it only as a reminder to let pressure out and seek support early."
+  },
+  "linh_xuong_da_vu": {
+   "ten": "Ling Chang Tuo Wu (Ling Xing, Wen Chang, Tuo Luo, Wu Qu)",
+   "dieu_kien": "Ling Xing, Wen Chang, Tuo Luo and Wu Qu are all present in the Life Palace's three supporting palaces and opposite palace.",
+   "y": "When these four stars meet, the old books advise keeping a sense of measure when big things happen unexpectedly and taking care around water; in everyday life it is someone who often has to handle urgent matters.",
+   "mat_toi": "In a muddle you may decide hastily, or put things off until they pile up.",
+   "loi_khuyen": "Have back-up plans ready for big matters; follow safety rules when swimming or on the water.",
+   "co_ca": "Ling Chang Luo Wu xian zhi tou he — editorial translation: Ling Xing, Wen Chang, Tuo Luo and Wu Qu: the old text warns of danger near water when the period arrives — read it as a reminder to follow water-safety rules."
+  },
+  "loc_ton_thu_menh": {
+   "ten": "Lu Cun in the Life Palace",
+   "dieu_kien": "Lu Cun sits in the Life Palace.",
+   "y": "The wealth-keeping star in the Life Palace: careful, good at saving, steady in business; money comes from regularity more than luck.",
+   "mat_toi": "Can be too cautious and reluctant to spend on yourself or others; Lu Cun is always flanked by Qing Yang and Tuo Luo, so pressure is common.",
+   "loi_khuyen": "Keep your saving habit but set aside a share for learning and relationships — that's an investment too."
+  },
+  "loc_ton_thu_than": {
+   "ten": "Lu Cun in the Body Palace",
+   "dieu_kien": "Lu Cun sits in the Body Palace (the Body Palace not sharing the Life Palace).",
+   "y": "Better at keeping money as the years go on: the second half of life is usually financially steady thanks to regular saving.",
+   "mat_toi": "Prone to putting financial safety first and avoiding change.",
+   "loi_khuyen": "Make a long-term savings plan early; now and then, try something new with careful planning."
+  },
+  "thien_ma_menh_di": {
+   "ten": "Tian Ma in the Life or Travel Palace",
+   "dieu_kien": "Tian Ma sits in the Life Palace or the Travel Palace (the palace opposite the Life Palace).",
+   "y": "The horse star on the Life–Travel axis: energetic, often on the move and changing places; suits work with travel, trade or working away from home.",
+   "mat_toi": "Hard to settle in one place, easily worn out by constant travel; little time for family.",
+   "loi_khuyen": "Choose trips with a clear purpose and keep a rhythm of rest."
+  },
+  "khoa_quyen_hoi_menh": {
+   "ten": "Ke Quan Hui Ming (Fame and Power meeting the Life Palace)",
+   "dieu_kien": "Hua Ke and Hua Quan (on main stars) are both present in the Life Palace's three supporting palaces and opposite palace, without Hua Lu (with Hua Lu as well, it is San Qi Jia Hui).",
+   "y": "Reputation (Fame) plus the strength to take charge (Power): trusted with responsibility and respected in your field; your name goes first, gains come later.",
+   "mat_toi": "Prone to valuing position and reputation over real income.",
+   "loi_khuyen": "Use your reputation to open steady income; state clearly what your work is worth.",
+   "co_ca": "Ke Quan dui gong yue san ji yu Yu men — editorial translation: Fame and Power supporting from opposite sides: leaping the three steps of Yu's Gate (great success in the exams)."
+  },
+  "co_nguyet_dong_luong_ba": {
+   "ten": "Three of Ji Yue Tong Liang (three of Tian Ji, Tai Yin, Tian Tong, Tian Liang)",
+   "dieu_kien": "The Life Palace's three supporting palaces and opposite palace hold exactly three of the four stars Tian Ji, Tai Yin, Tian Tong and Tian Liang (all four make the Ji Yue Tong Liang pattern).",
+   "y": "Close to the Ji Yue Tong Liang pattern: thorough, fond of stability, suited to specialist work within an organisation; this trait is lighter than with all four stars.",
+   "mat_toi": "Wary of risk, easily content to stay where it's familiar.",
+   "loi_khuyen": "Become solid in your speciality, and every few years set yourself a new step forward."
+  },
+  "phu_bat_cung_chu": {
+   "sach_ghi": {
+    "y": "Zi Wei sits in the Life Palace and the two stars Zuo Fu and You Bi turn towards it; the two stars flanking the Life Palace count the same."
+   },
+   "ten": "Fu Bi Gong Zhu (helpers turning towards the lord)",
+   "dieu_kien": "Zi Wei in the Life Palace; Zuo Fu and You Bi both in the Life Palace's three supporting palaces and opposite palace, or flanking the Life Palace on both sides (if both sit right in the Life Palace, it is the Jun Chen Qing Hui pattern instead).",
+   "y": "The lead star has helpers on many sides: whatever you do, people easily lend a hand or speak up for you; suits being the one out in front, as long as you know how to work with people.",
+   "mat_toi": "Used to having support, so you may get complacent or avoid doing the hard part yourself.",
+   "loi_khuyen": "Say clearly what you need others to help with and credit their work; the final decision is still yours to carry."
+  }
+ }
+}

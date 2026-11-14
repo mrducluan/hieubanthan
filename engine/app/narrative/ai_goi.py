@@ -53,10 +53,11 @@ class BiCat(RuntimeError):
 
 def goi_chat(messages: list[dict], *, nhiet_do: float, max_tokens: int, mo_hinh: str | None = None,
              het_gio: float = 45, nho: bool = True, tru_luot: bool = True,
-             kiem: "Callable[[str], list] | None" = None) -> str:
+             kiem: "Callable[[str], list] | None" = None, thu_lai: bool = True) -> str:
     """→ nội dung trả lời (chuỗi). Lỗi mạng / HTTP lần hai, hết lượt (`HetLuot`), bị cắt (`BiCat`), thiếu khoá → ném lỗi.
     `kiem` = bộ kiểm của nơi gọi — chỉ nhớ bản QUA kiểm (bản bị loại không lặp lại từ bộ nhớ). `tru_luot=False`: lời
-    gọi có hạn mức riêng (quản trị), không trừ lượt AI của người dùng. Hết giờ không thử lại (đã chờ đủ lâu)."""
+    gọi có hạn mức riêng (quản trị), không trừ lượt AI của người dùng. Hết giờ không thử lại (đã chờ đủ lâu).
+    `thu_lai=False`: lỗi lần đầu là lỗi luôn (lời gọi có hạn chót ngắn — phân loại câu hỏi, ≤ 2 giây)."""
     from app.narrative.llm import DEFAULT_MODEL  # noqa: PLC0415 — tránh vòng import
     key = os.environ.get("OPENROUTER_API_KEY")
     if not key:
@@ -71,13 +72,13 @@ def goi_chat(messages: list[dict], *, nhiet_do: float, max_tokens: int, mo_hinh:
                 return o[1]
     if tru_luot:
         _ngan_sach.kiem_luot()
-    for lan in range(2):
+    for lan in range(2 if thu_lai else 1):
         try:
             with httpx.Client(timeout=het_gio) as c:
                 r = c.post(OPENROUTER_URL, headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
                            json={"model": mo_hinh, "temperature": nhiet_do, "max_tokens": max_tokens,
                                  "messages": messages})
-            if r.status_code in _THU_LAI_MA and lan == 0:
+            if r.status_code in _THU_LAI_MA and lan == 0 and thu_lai:
                 time.sleep(1.5)
                 continue
             r.raise_for_status()
@@ -89,7 +90,7 @@ def goi_chat(messages: list[dict], *, nhiet_do: float, max_tokens: int, mo_hinh:
         except httpx.TimeoutException:
             raise
         except httpx.TransportError:
-            if lan == 0:
+            if lan == 0 and thu_lai:
                 time.sleep(1.5)
                 continue
             raise

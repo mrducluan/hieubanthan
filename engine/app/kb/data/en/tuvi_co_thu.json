@@ -1,0 +1,499 @@
+{
+ "_nguon": "EN-ALL GĐ 4 — bản phủ tiếng Anh của tuvi_co_thu.json: nguyên văn chữ Hán giữ nguyên (không phủ); phien_am = pinyin không dấu thanh; nghia / khi / chu_thich = bản dịch của ban biên tập (editorial translation, không chép bản dịch có bản quyền).",
+ "_trang_thai": "bien_tap",
+ "source": {
+  "cot_tuy_phu": "Dou Shu Gu Sui Fu (Rhapsody on the Marrow of Dou Shu) — Zi Wei Dou Shu Quan Shu, Volume One (traditionally attributed to Chen Tuan; Ming-dynasty woodblock edition)"
+ },
+ "trang": {
+  "tieu_de": "Dou Shu Gu Sui Fu: original text, pinyin and plain-English meaning",
+  "mo_ta": "The Dou Shu Gu Sui Fu from the Zi Wei Dou Shu Quan Shu: the full Chinese text, pinyin, a plain-English editorial translation and what each line means on a chart.",
+  "tra_loi_nhanh": "In Zi Wei Dou Shu, the Dou Shu Gu Sui Fu (Rhapsody on the Marrow of Dou Shu) is the rhapsody in Volume One of the Zi Wei Dou Shu Quan Shu (traditionally attributed to Chen Tuan, Ming-dynasty woodblock edition). It teaches how to read a chart: look at the chart pattern first and the stars after, and consider the Life Palace, the Body Palace and the timing cycles together. This page gives all {so_cau} lines in the original, with pinyin, a plain-English editorial translation and a note on when each line applies to a chart; the harshest verdicts are re-read for life today.",
+  "gioi_thieu": "'Gu sui' means 'bone marrow' — the core: the rhapsody packs the most basic ideas of Zi Wei Dou Shu into short, easy-to-remember couplets. Each line usually has two halves, and each half names a combination of stars followed by the old book's comment. On this page every line has four layers: the original text in traditional Chinese characters, the pinyin, a plain-English meaning written by the editorial team (an editorial translation, not a quotation from any published translation), and a 'This line applies to a chart when…' note that states the chart condition in plain words. The table below divides the rhapsody into {so_phan} parts by subject. The Chinese text follows the widely circulated Quan Shu and has been cross-checked between two copies; the editorial team is still comparing it with the Ming woodblock edition, and the few characters that differ between copies are noted at the line itself.",
+  "cach_doc": "The rhapsody was written by the yardsticks of an older society: official rank was success, poverty and early death were failure, and some lines judge women very harshly. This page keeps the original so you know what the book really says, but the meaning is re-read for life today: a star combination shows a strength that is easy to use or a point that needs care, not a fixed outcome. The rhapsody itself reminds us that people born at the same hour still live different lives, and that a good heart outweighs the chart. Any line touching on health is only a reminder to take preventive care — not a substitute for a doctor.",
+  "hoi_dap": [
+   {
+    "hoi": "What is the Dou Shu Gu Sui Fu?",
+    "dap": "It is the rhapsody in Volume One of the Zi Wei Dou Shu Quan Shu, summing up the core of reading a Zi Wei chart in short couplets: chart patterns, the nature of the stars, timing cycles and advice on how to live."
+   },
+   {
+    "hoi": "Who wrote the Dou Shu Gu Sui Fu?",
+    "dap": "The rhapsody is part of the Zi Wei Dou Shu Quan Shu, a book traditionally attributed to Chen Tuan (Master Xi Yi) of the Song dynasty, edited and printed in the Ming dynasty. The author of each individual rhapsody in the book is not recorded with certainty."
+   },
+   {
+    "hoi": "What does the line 'a Life Palace with no main star' mean in the Gu Sui Fu?",
+    "dap": "The original 命無正曜，夭折孤貧 says that a Life Palace with no main star means a hard life. Today's reading: a Life Palace with no main star borrows the stars of the opposite palace, people with this layout are often flexible, and they do well to choose a solid base and keep to one long-term direction."
+   },
+   {
+    "hoi": "Should I believe the harsh verdicts in the rhapsody?",
+    "dap": "Read them as documents of their time: the rhapsody uses the yardstick of official rank and very heavy language. Zi Wei Dou Shu is only a cultural reference; a star combination points to strengths and things to look after, while how you live, what you learn and what you choose are what really decide."
+   },
+   {
+    "hoi": "How do I know which lines apply to my chart?",
+    "dap": "Every line on the page has a 'This line applies to a chart when…' note giving the condition, for example Qi Sha sitting in the Life Palace in Yin or Shen. Draw up your Zi Wei chart from your date and time of birth, then compare the stars in your Life Palace and its trine and opposite palaces with that condition."
+   }
+  ]
+ },
+ "chuong": [
+  {
+   "ten": "Opening: chart pattern first, stars after",
+   "gioi_thieu": "The first eight lines set out how to read a chart: Zi Wei leads the stars and the timing cycles support the Body and Life Palaces; look at the chart pattern first and then at each star; people born at the same hour still live different lives, so no single mould fits."
+  },
+  {
+   "ten": "Stars flanking the Life Palace",
+   "gioi_thieu": "Three lines about the two palaces beside the Life Palace: good stars on both sides mean support, difficult stars on both sides mean pressure from what is close to you."
+  },
+  {
+   "ten": "The nature of the stars and the rhythm of wealth",
+   "gioi_thieu": "Seven lines on the nature of each group of stars and on being poor first and well-off later, or the reverse — a reminder that reading a star means weighing its brightness and companions, not its reputation."
+  },
+  {
+   "ten": "Patterns praised as noble (part one)",
+   "gioi_thieu": "Ten lines listing chart patterns the old book praises: Qi Sha facing the Dipper, Zi Wei and Tian Fu in the same palace, the Pole facing the bright south, the Three Wonders gathering, Sun and Moon together… The praise uses the official yardstick of old; today read it as strengths that are easy to put to use."
+  },
+  {
+   "ten": "Patterns praised as noble (part two)",
+   "gioi_thieu": "Eleven more lines: Qi Sha and Po Jun suited to building a career away from home, Ji–Yue–Tong–Liang suited to work inside an organisation, the Sun shining on the Gate of Thunder, the Moon bright at the Gate of Heaven, Tong and Liang in Yin and Shen, with a few historical figures as examples."
+  },
+  {
+   "ten": "Timing cycles and lessons from historical figures",
+   "gioi_thieu": "Eight lines about timing cycles meeting difficult stars, using historical figures (Qu Yuan, Xiang Yu, Shi Chong, Empress Lü…) as examples. This is how the old book illustrates its points, not verified charts of those people."
+  },
+  {
+   "ten": "Combinations the old book warns about",
+   "gioi_thieu": "Seven lines with the harshest verdicts of the rhapsody. This page keeps the original so readers know what the book says, but re-reads the meaning for life today: each combination shows a point that needs care, not a fixed outcome."
+  },
+  {
+   "ten": "Other noble patterns and two-sided ones",
+   "gioi_thieu": "Fourteen lines about Facing the Dipper, Looking up to the Dipper, the Red and Cassia Courts, Jade hidden in stone, Open and hidden prosperity, and cases where a star in a weak position turns noble thanks to a good transformation."
+  },
+  {
+   "ten": "Destiny, timing and how you live",
+   "gioi_thieu": "Three lines reminding us to read the Life and Body Palaces carefully, and placing a decent way of life above the chart: doing good means that even stars in fallen positions do you no harm."
+  },
+  {
+   "ten": "Temperament by star",
+   "gioi_thieu": "Four lines sorting temperaments by the stars in the Life Palace: the hard stars, the gentle stars, the skilful stars, and what happens when strong stars meet."
+  },
+  {
+   "ten": "The difficult stars and when they meet",
+   "gioi_thieu": "Six lines about the stars the old book calls fierce or harsh (Tan Lang, Lian Zhen, Po Jun, Qi Sha, Qing Yang, Tuo Luo, Huo Xing, Ling Xing, Kong, Jie, Hua Ji) and the stars of the year ring (Tai Sui, Guan Fu, Diao Ke, Sang Men)."
+  },
+  {
+   "ten": "Closing: the human heart and the logic of destiny",
+   "gioi_thieu": "Three closing lines: a good heart outweighs destiny, good fortune does not last once its time passes, and students must study thoroughly before saying anything about anyone."
+  }
+ ],
+ "cau": [
+  {
+   "phien_am": "Tai ji xing chan, nai qun xiu zhong xing zhi zhu, tian men yun xian, ji fu shen zhu ming zhi yuan, zai tian ze yun yong wu chang, zai ren ze ming you ge ju.",
+   "nghia": "The opening: Zi Wei, the star at the northern pole, is seen as the master of all the stars, while the timing cycles are what support the Body and the Life Palace. In the sky the stars turn without pause; on a chart that arrangement is read as a chart pattern."
+  },
+  {
+   "phien_am": "Xian ming ge ju, ci kan zhong xing. Huo you tong nian tong yue tong ri tong shi er sheng, ze you pin jian fu gui shou yao zhi yi.",
+   "nghia": "To read a chart, look at the chart pattern first and only then at the individual stars. The old book admits that people born in the same year, month, day and hour still differ in wealth and in how long they live, so a chart should not be read as a fixed verdict."
+  },
+  {
+   "phien_am": "Huo zai e xian, ji bai wan zhi jin yin. Huo zai wang xiang, zao lian nian zhi kun ku. Huo fu bu ke yi tu er wei, ji xiong bu ke yi li er duan.",
+   "nghia": "Some people in a period counted as bad still save a great deal; some in a fine period meet hardship year after year. So the book advises: fortune does not run along one road, and good and bad cannot be judged by one mould."
+  },
+  {
+   "phien_am": "Yao zhi yi shi zhi rong ku, ding kan wu xing zhi gong wei. Li ming ke zhi gui jian, an shen bian xiao gen ji.",
+   "nghia": "To know the ups and downs of a lifetime, the old book says to look at the five elements and the positions of the palaces. The Life Palace shows the general shape of a life; the Body Palace shows the ground you stand on."
+  },
+  {
+   "phien_am": "Di yi xian kan Fu De, zai san xi kao Qian Yi, fen dui gong zhi ti yong, ding san he zhi yuan liu.",
+   "nghia": "The reading order: first look at the Fortune Palace, then study the Travel Palace closely; tell the main palace apart from the opposite palace, then follow the three palaces in trine. This is the root of reading the trine and opposite palaces."
+  },
+  {
+   "phien_am": "Ming wu zheng yao, yao zhe gu pin. Ji you xiong xing, mei yu xia dian.",
+   "nghia": "The old book says a Life Palace with no main star means a hard, lonely life — a very harsh line. Today's reading: a Life Palace with no main star borrows the stars of the opposite palace, and people with this layout are often flexible and shaped by their surroundings, so they do well to choose a solid base and keep to one long-term direction. The second half: a good pattern mixed with a difficult star is like jade with a flaw — beautiful, but its weak spot needs care.",
+   "khi": "the Life Palace holds no main star"
+  },
+  {
+   "phien_am": "Ji de gen yuan jian gu, xu zhi he ju xiang sheng, jian gu ze fu gui yan shou, xiang sheng ze cai guan zhao zhu.",
+   "nghia": "Once the root of the chart is solid, you still need to see whether the elements of the palaces support one another. A solid root makes for a steady, lasting life; when the parts support each other, money and work show their results clearly."
+  },
+  {
+   "phien_am": "Ming hao shen hao xian hao dao lao rong chang. Ming shuai shen shuai xian shuai zhong shen qi gai.",
+   "nghia": "When the Life Palace, the Body Palace and the timing cycles are all good, the old book praises a life that thrives into old age; when all three are weak, it says very harshly that the whole life will be poor. The main point: look at all three layers together. When all three are weak, what you can do is keep a steady routine, learn a solid trade and spend carefully.",
+   "khi": "the Life Palace, the Body Palace and the timing cycles are all strong or all weak"
+  },
+  {
+   "phien_am": "Jia gui jia lu shao ren zhi, jia quan jia ke shi suo yi.",
+   "nghia": "A Life Palace flanked by benefactor stars or a prosperity star is something few people notice; flanked by Hua Quan and Hua Ke, the book says it suits the world well. The idea is that support comes from the two neighbouring palaces, like people close to you lending a hand.",
+   "khi": "the two palaces beside the Life Palace hold Tian Kui and Tian Yue, a prosperity star, or Hua Quan and Hua Ke"
+  },
+  {
+   "phien_am": "Jia ri jia yue shei neng yu, jia Chang jia Qu zhu gui xi.",
+   "nghia": "A Life Palace flanked by Tai Yang and Tai Yin is a rare pattern; flanked by Wen Chang and Wen Qu, the book says it brings a good name and respect through learning and the written word.",
+   "khi": "the two palaces beside the Life Palace hold Tai Yang and Tai Yin, or Wen Chang and Wen Qu"
+  },
+  {
+   "phien_am": "Jia Kong jia Jie zhu pin jian, jia Yang jia Tuo wei qi gai.",
+   "nghia": "When the Life Palace is flanked by Di Kong and Di Jie, or by Qing Yang and Tuo Luo, the old book speaks of a struggling life. Today's reading: pressure comes from the two sides closest to you, such as relatives, colleagues and expenses, so keep clear boundaries, plan your money and avoid standing guarantor for others.",
+   "khi": "the two palaces beside the Life Palace hold Di Kong and Di Jie, or Qing Yang and Tuo Luo"
+  },
+  {
+   "phien_am": "Lian Zhen Qi Sha fan wei ji fu zhi ren, Tian Liang Tai Yin que zuo piao peng zhi ke.",
+   "nghia": "Lian Zhen with Qi Sha, which you might take for hard stars, turns out to be someone who builds up wealth; Tian Liang with Tai Yin, by contrast, often travels about and finds it hard to settle in one place. The line is a reminder not to read stars by their reputation.",
+   "khi": "Lian Zhen with Qi Sha, or Tian Liang with Tai Yin, gather in the Life Palace"
+  },
+  {
+   "phien_am": "Lian Zhen zhu xia jian gu han, Tai Yin zhu yi sheng kuai le.",
+   "nghia": "The old book puts it briefly: Lian Zhen tends towards loneliness and want; Tai Yin gives a cheerful, easy life. Read today, set this line beside the star's brightness: the same star bright or fallen shows two different faces.",
+   "khi": "Lian Zhen or Tai Yin sits in the Life Palace"
+  },
+  {
+   "phien_am": "Xian pin hou fu Wu Tan tong shen ming zhi gong, xian fu hou pin zhi wei yun xian feng jie sha.",
+   "nghia": "When Wu Qu and Tan Lang share the Life Palace or the Body Palace, things are hard first and better later: money comes late, thanks to staying power. Doing well first and then sliding is usually because a timing cycle meets the Jie star and malefic stars, so in a hard period hold on to your money and avoid reckless investments.",
+   "khi": "Wu Qu and Tan Lang together in the Life Palace or the Body Palace"
+  },
+  {
+   "phien_am": "Chu shi rong hua Quan Lu shou cai guan zhi wei, sheng lai pin jian Jie Kong lin cai fu zhi xiang.",
+   "nghia": "Hua Quan and Hua Lu in the Wealth or Career Palace bring an early foothold; Di Jie and Di Kong in the Wealth or Fortune Palace make money hard to keep. In the second case, what you can do is keep an emergency fund and avoid putting all your money in one risky place.",
+   "khi": "Hua Quan and Hua Lu in the Wealth or Career Palace; or Di Kong and Di Jie in the Wealth or Fortune Palace"
+  },
+  {
+   "phien_am": "Wen Qu Wu Qu wei ren duo xue duo neng, Zuo Fu You Bi bing xing ke kuan ke hou.",
+   "nghia": "Wen Qu with Wu Qu gives someone widely learned and able to do many things; Zuo Fu and You Bi give a generous nature that treats others well.",
+   "khi": "Wen Qu with Wu Qu, or Zuo Fu with You Bi, in the Life Palace"
+  },
+  {
+   "phien_am": "Tian Fu Tian Xiang nai wei yi lu zhi shen, wei shi wei guan ding zhu heng tong zhi zhao.",
+   "nghia": "Tian Fu and Tian Xiang are the stars of food and clothing, of having enough; working in public service or in organisations tends to go smoothly.",
+   "khi": "Tian Fu or Tian Xiang in the Life Palace or the Career Palace"
+  },
+  {
+   "phien_am": "Miao er bu xiu ke ming xian yu xiong shen, fa bu zhu cai lu zhu chan yu ruo di.",
+   "nghia": "Rice that sprouts but never flowers: when Hua Ke, the star of studies and reputation, meets difficult stars, you study well but struggle to make a name. Gains that don't turn into lasting money: the star of prosperity sits in a dim spot. Build the foundations — qualifications, skills, managing money — so your effort isn't wasted.",
+   "khi": "Hua Ke meets malefic stars, or a prosperity star sits in a fallen palace"
+  },
+  {
+   "phien_am": "Qi Sha chao Dou jue lu rong chang, Zi Fu tong gong zhong shen fu hou.",
+   "nghia": "Qi Sha facing the Dipper (Qi Sha in Yin or Shen, facing Zi Wei) is praised by the book as bringing rank and rewards; Zi Wei and Tian Fu in the same palace bring deep blessings all life long.",
+   "khi": "Qi Sha in the Life Palace in Yin or Shen, or Zi Wei with Tian Fu in the Life Palace in Yin or Shen"
+  },
+  {
+   "phien_am": "Zi Wei ju Wu wu sha cou wei zhi san gong, Tian Fu lin Xu you xing fu yao jin yi zi.",
+   "nghia": "Zi Wei in the Wu palace with no malefic stars is praised by the book as rising to the highest office; Tian Fu in Xu helped by good stars 'wears gold and purple', a sign of high rank in old times. Today it reads as being readily trusted with responsible positions.",
+   "khi": "Zi Wei in the Life Palace in Wu without malefic stars, or Tian Fu in the Life Palace in Xu with auspicious stars gathering"
+  },
+  {
+   "phien_am": "Ke Quan Lu gong ming yu zhao zhang, Wu Qu miao yuan wei ming he yi.",
+   "nghia": "When Hua Ke, Hua Quan and Hua Lu all shine on the Life Palace, a good name spreads far; Wu Qu in a Temple or Prosperous position brings authority and renown.",
+   "khi": "Hua Lu, Hua Quan and Hua Ke all gather in the trine and opposite palaces of the Life Palace, or Wu Qu is Temple or Prosperous in the Life Palace"
+  },
+  {
+   "phien_am": "Ke ming Lu an wei lie san tai, Ri Yue tong lin guan ju hou bo.",
+   "nghia": "Hua Ke in the Life Palace with a prosperity star quietly supporting from the palace in six-harmony is praised as 'ranking among the three highest ministers'; Tai Yang and Tai Yin together in the Life Palace give a standing like that of a marquis or an earl. This is praise measured by the officialdom of old.",
+   "khi": "Hua Ke in the Life Palace and a prosperity star in the palace in six-harmony with it, or Tai Yang with Tai Yin in the Life Palace in Chou or Wei"
+  },
+  {
+   "phien_am": "Ju Ji tong gong gong qing zhi wei, Tan Ling bing shou jiang xiang zhi ming.",
+   "nghia": "Ju Men with Tian Ji in the same palace is praised by the book as reaching the rank of high minister, thanks to a sharp tongue and a quick mind; Tan Lang with Ling Xing together in the Life Palace brings a name like a general's or a minister's.",
+   "khi": "Ju Men with Tian Ji in the Life Palace in Mao or You, or Tan Lang with Ling Xing in the Life Palace"
+  },
+  {
+   "phien_am": "Tian Kui Tian Yue gai shi wen zhang, tian lu Tian Ma jing ren jia di.",
+   "nghia": "Tian Kui and Tian Yue give a gift for writing above others; a prosperity star meeting Tian Ma brings exam success that surprises people — today that means studies and a career that move fast because you are willing to move and change settings.",
+   "khi": "Tian Kui and Tian Yue gather in the Life Palace, or a prosperity star with Tian Ma in the trine and opposite palaces of the Life Palace"
+  },
+  {
+   "phien_am": "Zuo Fu Wen Chang hui ji xing zun ju ba zuo, Tan Lang Huo Xing ju miao wang ming zhen zhu bang.",
+   "nghia": "Zuo Fu and Wen Chang meeting further good stars bring high regard and an elevated seat; Tan Lang with Huo Xing in a Temple or Prosperous position brings a far-reaching name.",
+   "khi": "Zuo Fu and Wen Chang with auspicious stars gather in the Life Palace, or Tan Lang with Huo Xing sits in the Life Palace in a Temple or Prosperous position"
+  },
+  {
+   "phien_am": "Ju Ri tong gong guan feng san dai, Zi Fu chao yuan shi lu wan zhong.",
+   "nghia": "Ju Men and Tai Yang in the same palace are praised as bringing honour for three generations; Zi Wei and Tian Fu shining on the Life Palace bring plentiful rewards. Today it reads as a reputation and income with lasting foundations.",
+   "khi": "Ju Men with Tai Yang in the Life Palace in Yin or Shen, or Zi Wei and Tian Fu shining on the Life Palace"
+  },
+  {
+   "phien_am": "Ke Quan dui gong yue san ji yu Yu men, Ri Yue bing ming zuo jiu chong yu Yao dian.",
+   "nghia": "Hua Ke and Hua Quan shining on each other across opposite palaces are like a fish leaping the three steps of Yu's Gate — exams and promotions that leap ahead; Tai Yang and Tai Yin both bright are likened to someone helping the ruler in the palace of the sage-king Yao.",
+   "khi": "Hua Ke and Hua Quan in two opposite palaces among the trine and opposite palaces of the Life Palace, or Tai Yang and Tai Yin both bright and shining on the Life Palace",
+   "chu_thich": "The copy uses the character 汲; from the context (a fish leaping the three steps of Yu's Gate) it means 'step'."
+  },
+  {
+   "phien_am": "Fu Xiang tong lai hui ming gong quan jia shi lu, san he ming zhu sheng wang di wen bu chan gong.",
+   "nghia": "Tian Fu and Tian Xiang shining together on the Life Palace benefit the whole family; the Bright Pearl pattern, with Tai Yang and Tai Yin bright and shining from the trine, climbs steadily to the moon palace — in old times, passing the exams.",
+   "khi": "Tian Fu and Tian Xiang shine on the Life Palace from its trine, or Tai Yang and Tai Yin, bright, shine on the Life Palace from its trine"
+  },
+  {
+   "phien_am": "Qi Sha Po Jun yi chu wai, Ji Yue Tong Liang zuo li ren.",
+   "nghia": "Qi Sha or Po Jun in the Life Palace suits going out into the world to build a career, travelling far and changing settings; Tian Ji, Tai Yin, Tian Tong and Tian Liang gathering in the Life Palace suit work inside an organisation, administration and work that needs care.",
+   "khi": "Qi Sha or Po Jun in the Life Palace, or Tian Ji, Tai Yin, Tian Tong and Tian Liang gathering in the trine and opposite palaces of the Life Palace"
+  },
+  {
+   "phien_am": "Zi Fu Ri Yue ju wang di duan ding gong hou qi, Ri Yue Ke Lu Chou gong zhong ding shi fang bo gong.",
+   "nghia": "Zi Wei, Tian Fu, Tai Yang and Tai Yin all in strong positions mark, in the book's view, someone of great stature; Tai Yang and Tai Yin meeting Hua Ke and Hua Lu in the Chou palace are like the head of a whole region.",
+   "khi": "Zi Wei, Tian Fu, Tai Yang and Tai Yin in strong positions gather in the Life Palace, or Tai Yang and Tai Yin together in the Chou palace with Hua Ke and Hua Lu"
+  },
+  {
+   "phien_am": "Tian Liang Tian Ma xian piao dang wu yi, Lian Zhen sha bu jia sheng ming yuan bo.",
+   "nghia": "Tian Liang meeting Tian Ma in a fallen position tends to drift and find it hard to settle; Lian Zhen without malefic stars crowding in carries a good name far. For the first half, choose work that involves moving about but keep one fixed anchor such as a home, savings or a main trade.",
+   "khi": "Tian Liang with Tian Ma in a fallen palace, or Lian Zhen in the Life Palace without malefic stars"
+  },
+  {
+   "phien_am": "Ri zhao lei men fu gui rong hua, yue lang tian men jin jue feng hou.",
+   "nghia": "Tai Yang in the Mao palace — the sun shining on the gate of thunder — brings wealth and honour; Tai Yin in the Hai palace — the bright moon at the gate of heaven — brings promotion and rewards.",
+   "khi": "Tai Yang in the Life Palace in Mao, or Tai Yin in the Life Palace in Hai"
+  },
+  {
+   "phien_am": "Yin feng Fu Xiang wei deng yi pin zhi rong, mu feng Zuo You zun ju ba zuo zhi gui.",
+   "nghia": "A Life Palace in Yin meeting Tian Fu and Tian Xiang is praised as rising to the first rank; a Life Palace in a tomb palace (Chen, Xu, Chou, Wei) meeting Zuo Fu and You Bi sits in a respected seat.",
+   "khi": "the Life Palace in Yin with Tian Fu and Tian Xiang gathering, or the Life Palace in Chen, Xu, Chou or Wei with Zuo Fu and You Bi"
+  },
+  {
+   "phien_am": "Liang ju Wu wei guan zi qing xian, Qu yu Liang xing wei zhi tai gang.",
+   "nghia": "Tian Liang in the Wu palace means clean, well-regarded public service; Wen Qu meeting Tian Liang can hold a post overseeing rules and discipline — like inspection or legal compliance work today.",
+   "khi": "Tian Liang in the Life Palace in Wu, or Wen Qu meeting Tian Liang in the Life Palace"
+  },
+  {
+   "phien_am": "Ke Lu xun feng Zhou Bo xin ran ru xiang, wen xing an gong Jia Yi yun yi deng ke.",
+   "nghia": "The book uses historical figures as examples: Zhou Bo of the Han had Hua Ke and Hua Lu meeting and became chancellor; Jia Yi had literary stars quietly shining in and passed the exams early. This is how the old book illustrates its point, not verified charts of those people.",
+   "khi": "Hua Ke and Hua Lu meet in the Life Palace or its trine, or Wen Chang and Wen Qu quietly shine on the Life Palace"
+  },
+  {
+   "phien_am": "Qing Yang Huo Xing wei quan chu zhong, Tan Wu tong xing wei zhen bian yi.",
+   "nghia": "Qing Yang meeting Huo Xing gives someone commanding and more decisive than others; Tan Lang travelling with Wu Qu has the strength to hold distant frontiers — today, suited to opening new markets or managing difficult regions.",
+   "khi": "Qing Yang with Huo Xing in the Life Palace, or Tan Lang with Wu Qu in the Life Palace in Chou or Wei"
+  },
+  {
+   "phien_am": "Li Guang bu feng Qing Yang feng yu Li Shi, Yan Hui yao zhe Wen Chang xian yu Tian Shang.",
+   "nghia": "Two historical examples: Li Guang was able yet never ennobled, which the book links to Qing Yang meeting the Li Shi star; Yan Hui died young, which the book links to a fallen Wen Chang meeting Tian Shang. Today it is best read simply as: talent still needs the right time and the right people to support it, and you need to keep a rhythm of rest rather than pour everything into study.",
+   "khi": "Qing Yang meets Li Shi in the Life Palace, or Wen Chang is fallen in a palace with Tian Shang"
+  },
+  {
+   "phien_am": "Zhong You wei meng Lian Zhen ru miao yu Jiang Jun, Zi Yu cai neng Ju xiu Tong Liang chong qie he.",
+   "nghia": "Zhong You, a disciple of Confucius, was bold — the book ties this to Lian Zhen in its Temple meeting the Jiang Jun star; Zi Yu was gifted — Ju Men with Tian Tong and Tian Liang shining across and gathering. These are historical examples to illustrate the nature of the stars.",
+   "khi": "Lian Zhen in its Temple in the Life Palace meeting Jiang Jun, or Ju Men in the Life Palace with Tian Tong and Tian Liang shining on it"
+  },
+  {
+   "phien_am": "Yin Shen zui xi Tong Liang hui, Chen Xu ying xian xian Ju Men.",
+   "nghia": "A Life Palace in Yin or Shen goes very well with Tian Tong and Tian Liang; a Life Palace in Chen or Xu is wary of Ju Men, because the star is fallen there and easily caught in arguments — say less, write things down clearly, keep your word.",
+   "khi": "Tian Tong and Tian Liang in the Life Palace in Yin or Shen, or Ju Men in the Life Palace in Chen or Xu"
+  },
+  {
+   "phien_am": "Lu dao Ma dao ji Tai Sui zhi he Jie Kong, yun shuai xian shuai xi Zi Wei zhi jie xiong e.",
+   "nghia": "When the prosperity star and the Horse lose strength and meet a Tai Sui year combining with Di Jie and Di Kong, money and travel tend to snag; when a weak period meets Zi Wei, the book says some of the difficulty is eased. In years like that, keep plans cautious and have someone you trust to ask for advice.",
+   "khi": "a period with the prosperity star and the Horse in weak positions meeting Kong and Jie; or a weak period with Zi Wei"
+  },
+  {
+   "phien_am": "Gu pin duo you shou, fu gui ji yao wang.",
+   "nghia": "A paradox from the old book: the poor and solitary often live long, while hasty wealth and rank do not last. The hidden point: gains and losses tend to come together, so don't chase riches and forget to look after your strength."
+  },
+  {
+   "phien_am": "Diao Ke Sang Men Lü Zhu you duo lou zhi e, Guan Fu Tai Sui Gong Ye you lei xie zhi you.",
+   "nghia": "Two historical examples: Lady Lü Zhu of the Jin met misfortune at a high tower, which the book links to Diao Ke and Sang Men; Gongye Chang, a disciple of Confucius, was wrongly imprisoned, which the book links to Guan Fu and Tai Sui. Read today: in years with these stars, be careful with paperwork and words, and when sad things happen, find someone you trust to talk to.",
+   "khi": "a year or period with Diao Ke and Sang Men, or Guan Fu and Tai Sui, shining in"
+  },
+  {
+   "phien_am": "Xian zhi Tian Luo Di Wang Qu Yuan ni shui er shen wang, yun yu Di Jie Tian Kong Ruan Ji you pin qiong zhi ku.",
+   "nghia": "The book uses Qu Yuan of Chu as an example of a period entering the Heaven's Net and Earth's Snare (the Chen and Xu palaces), and Ruan Ji of the Jin falling on hard times when his period met Di Jie and Tian Kong (written Di Kong on Vietnamese-style charts). Read today: a period in these two palaces is often a time of feeling hemmed in, so avoid big decisions while upset and keep spending careful.",
+   "khi": "a 10-year period or minor yearly limit entering the Chen or Xu palace, or a period meeting Di Jie and Di Kong"
+  },
+  {
+   "phien_am": "Wen Chang Wen Qu hui Lian Zhen sang ming tian nian, ming kong xian kong wu ji cou gong ming ceng deng.",
+   "nghia": "The old book speaks very harshly about Wen Chang and Wen Qu meeting Lian Zhen. Today it is better read as a combination prone to taking risks and getting into trouble on impulse, so slow down before anything risky. The second half: when the Life Palace and the period both meet the Kong stars with no good stars, career progress is bumpy, so take the long road and build up step by step.",
+   "khi": "Wen Chang and Wen Qu gather with Lian Zhen in the Life Palace, or the Life Palace and the period both meet Kong stars without auspicious stars"
+  },
+  {
+   "phien_am": "Sheng feng Tian Kong you ru ban tian zhe chi, ming zhong yu Jie qia ru lang li xing chuan.",
+   "nghia": "A Life Palace meeting Tian Kong is like a bird with a broken wing in mid-air — plans are often left half-done; a Life Palace meeting Di Jie is like a boat in rough waves — a lot of upheaval. Both images suggest a way to live: work with a backup plan and don't put all your resources in one place.",
+   "khi": "Di Kong or Di Jie in the Life Palace"
+  },
+  {
+   "phien_am": "Xiang Yu ying xiong xian zhi Tian Kong er sang guo, Shi Chong hao fu xian xing Jie di yi wang jia.",
+   "nghia": "Two historical examples: the hero Xiang Yu lost his kingdom when his period reached Tian Kong; the wealthy Shi Chong saw his house fall when his period entered Di Jie. The book's point: when a period brings Kong or Jie, even the strong or rich should be careful and not rely forever on the position they hold.",
+   "khi": "a 10-year period or minor yearly limit entering a palace with Di Kong or Di Jie"
+  },
+  {
+   "phien_am": "Lü Hou zhuan quan liang chong tian lu Tian Ma, Yang Fei hao se san he Wen Qu Wen Chang.",
+   "nghia": "The book uses Empress Lü of the Han as an example of someone who held power through two layers of prosperity meeting Tian Ma, and Consort Yang of the Tang as an example of beauty and passion when Wen Qu and Wen Chang gather from the trine. These are judgements by old standards and should not be used to assess anyone else.",
+   "khi": "Lu Cun and Hua Lu with Tian Ma gather in the Life Palace, or Wen Chang and Wen Qu shine on the Life Palace from the trine"
+  },
+  {
+   "phien_am": "Tian Liang yu Ma nü ming jian er qie yin, Chang Qu jia chi nan ming gui er qie xian.",
+   "nghia": "The first half is the old book's harsh judgement of women with Tian Liang meeting Tian Ma; that yardstick is outdated, and today it should only be read as someone who moves around a lot and loves freedom, and who needs a stable base. The second half: a man with Wen Chang and Wen Qu flanking the Life Palace gains a name and respect.",
+   "khi": "Tian Liang meets Tian Ma in the Life Palace, or Wen Chang and Wen Qu sit in the two palaces beside the Life Palace"
+  },
+  {
+   "phien_am": "Ji ju Mao You duo wei tuo su seng ren, Zhen ju Mao You ding shi gong xu li bei.",
+   "nghia": "Zi Wei in Mao or You (always with Tan Lang) is said by the book to turn towards spiritual life and away from worldly things; Lian Zhen in Mao or You (with Po Jun) suits carrying out duties within an organisation. Today, one leans towards spiritual depth, the other suits work with clear rules.",
+   "khi": "Zi Wei in the Life Palace in Mao or You, or Lian Zhen in the Life Palace in Mao or You"
+  },
+  {
+   "phien_am": "Zuo Fu tong gong zun ju wan sheng, Lian Zhen Qi Sha liu dang tian ya.",
+   "nghia": "Zuo Fu standing with Tian Fu is praised as reaching a high seat; Lian Zhen with Qi Sha tends to travel far, here today and gone tomorrow. In the rhapsody, Lian Zhen with Qi Sha is both praised for building wealth (part three) and called a wanderer, which shows you must also look at the companion stars and brightness.",
+   "khi": "Zuo Fu with Tian Fu in the Life Palace, or Lian Zhen with Qi Sha in the Life Palace"
+  },
+  {
+   "phien_am": "Deng Tong e si yun feng Da Hao zhi xiang, Fu Zi jue liang xian dao Tian Shang zhi nei.",
+   "nghia": "Deng Tong of the Han was once the richest man yet ended his life in want, which the book links to a period meeting Da Hao; Confucius once ran out of food on the road, which the book links to a period entering Tian Shang. The lesson: when a period brings draining stars, keep an emergency fund and don't spend out of habits formed in good times.",
+   "khi": "a period entering a palace with Da Hao or Tian Shang"
+  },
+  {
+   "phien_am": "Ling Chang Luo Wu xian zhi tou he, Ju Huo Qing Yang zhong shen yi si.",
+   "nghia": "This is one of the harshest lines in the rhapsody, about Ling Xing, Wen Chang, Tuo Luo and Wu Qu meeting, and Ju Men, Huo Xing and Qing Yang meeting. Today it should only be read as a combination prone to pent-up pressure and feeling stuck: when you feel exhausted or very low, talk to someone close or see a mental health professional — that is the right thing to do, not something to fear.",
+   "khi": "Ling Xing, Wen Chang, Tuo Luo and Wu Qu gather in the Life Palace or a period, or Ju Men, Huo Xing and Qing Yang gather in the Life Palace",
+   "chu_thich": "This copy writes 羅 (for the Tuo Luo star, 陀羅); some copies write 陀 — both mean the same star."
+  },
+  {
+   "phien_am": "Ming li feng Kong bu piao liu ji zhu ji ku, ma tou dai jian fei yao zhe ze zhu xing shang.",
+   "nghia": "When the Life Palace meets a Kong star, the book says that if one does not drift, there will be other hardships; Qing Yang in the Wu palace (the horse's head carrying a sword) is a reminder to watch out for injuries. Read today: take preventive care — be careful on the move, get enough rest and have regular check-ups; this is the old book's view and not a substitute for a doctor.",
+   "khi": "Di Kong in the Life Palace, or Qing Yang in the Life Palace in Wu"
+  },
+  {
+   "phien_am": "Zi Wu Po Jun jia guan jin lu, Chang Tan ju ming fen gu sui shi.",
+   "nghia": "Po Jun in Zi or Wu brings promotion and more rewards; for Wen Chang with Tan Lang in the Life Palace the book uses extremely harsh words. Today it is better read as a combination that loves fun and likes to gamble, so avoid risky ventures and be careful on the road and with investments.",
+   "khi": "Po Jun in the Life Palace in Zi or Wu, or Wen Chang with Tan Lang in the Life Palace"
+  },
+  {
+   "phien_am": "Chao Dou yang Dou jue lu rong chang, Wen Gui Wen Hua jiu chong gui xian.",
+   "nghia": "Qi Sha facing the Dipper (in Yin or Shen) or looking up to the Dipper (in Zi or Wu) are both praised as bringing standing; Wen Chang and Wen Qu together in Chou or Wei (the Wen Gui Wen Hua pattern) bring respect in high places.",
+   "khi": "Qi Sha in the Life Palace in Yin, Shen, Zi or Wu, or Wen Chang and Wen Qu together in the Life Palace in Chou or Wei"
+  },
+  {
+   "phien_am": "Dan Chi Gui Chi zao sui qing yun zhi zhi, he lu gong lu ding wei ju bo zhi chen.",
+   "nghia": "Tai Yang and Tai Yin in bright positions (the Dan Chi and Gui Chi patterns) reach big goals early; prosperity stars combining with and shining on the Life Palace make someone a leader in their field.",
+   "khi": "Tai Yang in Chen, Si or Wu, or Tai Yin in You, Xu or Hai, holding the Life Palace, or prosperity stars shining on the Life Palace from the six-harmony or trine palaces"
+  },
+  {
+   "phien_am": "Yin Yang hui Chang Qu chu shi rong hua, Fu Bi yu cai guan yi fei zhuo zi.",
+   "nghia": "Tai Yin and Tai Yang meeting Wen Chang and Wen Qu bring early distinction; Zuo Fu and You Bi in the Wealth or Career Palace 'wear red and purple' — given responsibilities, with people to help.",
+   "khi": "Tai Yang and Tai Yin gather with Wen Chang and Wen Qu in the Life Palace, or Zuo Fu and You Bi in the Wealth or Career Palace"
+  },
+  {
+   "phien_am": "Ju Liang xiang hui Lian Zhen bing, he lu yuan yang yi shi rong.",
+   "nghia": "When Ju Men and Tian Liang meet and Lian Zhen joins them, with the mandarin-duck prosperity pattern (Lu Cun and Hua Lu meeting), the whole life is honoured.",
+   "khi": "Ju Men, Tian Liang and Lian Zhen gather in the Life Palace, with Lu Cun and Hua Lu meeting"
+  },
+  {
+   "phien_am": "Wu Qu xian gong duo shou yi, Tan Lang xian di zuo tu ren.",
+   "nghia": "Wu Qu in an idle palace (not well placed) means good hands and a living from skilled craft; for a fallen Tan Lang the old book says the butcher's trade — today read as suited to hands-on, technical or processing work; any honest trade is worthy.",
+   "khi": "Wu Qu in the Life Palace in a dim position, or Tan Lang fallen in the Life Palace"
+  },
+  {
+   "phien_am": "Tian lu chao yuan shen rong gui xian, Kui xing lin ming wei lie san tai.",
+   "nghia": "Lu Cun shining on the Life Palace brings personal distinction; Tian Kui in the Life Palace ranks you among the top and makes help from people of standing likely.",
+   "khi": "Lu Cun shines on the Life Palace, or Tian Kui is in the Life Palace"
+  },
+  {
+   "phien_am": "Wu Qu ju Qian Xu Hai shang, zui pa Tai Yin feng Tan Lang.",
+   "nghia": "Wu Qu in the Qian direction (the Xu and Hai palaces) fears most of all meeting Tai Yin and Tan Lang. The idea is that this combination easily stirs up excess desire for money and fun, so keep firm rules about spending.",
+   "khi": "Wu Qu in the Xu or Hai palace meeting Tai Yin and Tan Lang"
+  },
+  {
+   "phien_am": "Hua Lu huan wei hao, xiu xiang mu zhong cang.",
+   "nghia": "Hua Lu is good in itself, but don't let it lie in a tomb palace (Chen, Xu, Chou, Wei): there the prosperity is as if locked away and hard to use. In practice: when you have good fortune, put it to work rather than letting it sit.",
+   "khi": "Hua Lu in the Chen, Xu, Chou or Wei palace"
+  },
+  {
+   "phien_am": "Zi Wu Ju Men shi zhong yin yu, ming lu an lu jin shang tian hua.",
+   "nghia": "Ju Men in Zi or Wu is like jade hidden in stone — the talent is there but takes time to show; a prosperity star in the Life Palace plus a hidden one in the six-harmony palace is like flowers added to brocade.",
+   "khi": "Ju Men in the Life Palace in Zi or Wu, or a prosperity star in the Life Palace and another in the palace in six-harmony with it"
+  },
+  {
+   "phien_am": "Zi Wei Chen Xu yu Po Jun, fu er bu gui you xu ming.",
+   "nghia": "Zi Wei in Chen or Xu meeting Po Jun from the opposite palace has wealth but a name that doesn't quite match. Suggestion: to be respected, focus on work with clear results rather than on titles.",
+   "khi": "Zi Wei in the Life Palace in Chen or Xu, with Po Jun in the opposite palace"
+  },
+  {
+   "phien_am": "Chang Qu Po Jun feng xing ke duo lao lu, Tan Wu mu zhong ju san shi cai fa fu.",
+   "nghia": "Wen Chang and Wen Qu meeting Po Jun plus a punishment star bring a lot of toil; Tan Lang and Wu Qu in a tomb palace (Chou, Wei) only do well after about thirty — take the long road and don't give up early.",
+   "khi": "Wen Chang and Wen Qu meet Po Jun in the Life Palace, or Tan Lang with Wu Qu in the Life Palace in Chou or Wei"
+  },
+  {
+   "phien_am": "Tian Tong Xu gong wei fan bei, Ding ren hua ji zhu da gui.",
+   "nghia": "Tian Tong in the Xu palace 'turns its back' and is dim; but people born in a Ding year have Tian Tong taking Hua Quan, so it turns good, and the book praises it as very noble.",
+   "khi": "Tian Tong in the Life Palace in Xu and born in a Ding year"
+  },
+  {
+   "phien_am": "Ju Men Chen Xu wei xian di, Xin ren hua ji lu zheng rong.",
+   "nghia": "Ju Men in Chen or Xu is in a fallen position; for people born in a Xin year Ju Men takes Hua Lu, so it turns good and prosperity flourishes.",
+   "khi": "Ju Men in the Life Palace in Chen or Xu and born in a Xin year"
+  },
+  {
+   "phien_am": "Ji Liang You shang hua ji zhe, zong yu cai guan ye bu rong.",
+   "nghia": "Tian Ji or Tian Liang in the You palace, even with a good transformation, may have money and a post yet rarely shine. The point: don't look only at a good transformation — also look at where the star stands.",
+   "khi": "Tian Ji or Tian Liang in the Life Palace in You, even with a good transformation"
+  },
+  {
+   "phien_am": "Ri Yue zui xian fan bei nai wei shi hui, ming shen ding yao jing qiu kong cha fen shu.",
+   "nghia": "What Tai Yang and Tai Yin dislike most is 'turning their backs': standing in the dark and losing their light. Read the Life Palace and the Body Palace very carefully — a small slip throws off the whole reading.",
+   "khi": "Tai Yang or Tai Yin in a fallen palace for the Life Palace or the Body Palace"
+  },
+  {
+   "phien_am": "Yin zhi yan nian zeng bai fu, zhi yu xian di bu zao shang.",
+   "nghia": "Living decently and doing good without needing anyone to know brings long life and more blessings; even with stars in fallen positions you come to no harm. This is the old book's reminder that how you live matters more than the chart."
+  },
+  {
+   "phien_am": "Ming shi yun jian gao tian de yu, ming shuai xian ruo nen cao zao shuang.",
+   "nghia": "A solid Life Palace and a steady period are like a dry field getting rain; a weak Life Palace with a weak period too is like young grass hit by frost. At such times, slow down and keep what you have.",
+   "khi": "the Life Palace and the period both solid, or the Life Palace and the period both weak",
+   "chu_thich": "The copy uses the character 稿; from the context (a field getting rain) it means 'dry'."
+  },
+  {
+   "phien_am": "Lun ming bi tui xing shan e, Ju Po Qing Yang xing bi gang.",
+   "nghia": "Reading a chart means weighing the gentle stars and the fierce ones; Ju Men, Po Jun or Qing Yang in the Life Palace give a hard, direct temperament — useful when decisiveness is needed, but soften your words when working with people.",
+   "khi": "Ju Men, Po Jun or Qing Yang in the Life Palace"
+  },
+  {
+   "phien_am": "Fu Xiang Tong Liang xing bi hao, Huo Jie Kong Tan xing bu chang.",
+   "nghia": "Tian Fu, Tian Xiang, Tian Tong or Tian Liang in the Life Palace give a mild, likeable nature; Huo Xing, Di Jie, Di Kong or Tan Lang give a changeable one, quick to heat up and quick to cool — practise pausing for a beat before deciding.",
+   "khi": "Tian Fu, Tian Xiang, Tian Tong or Tian Liang in the Life Palace, or Huo Xing, Di Jie, Di Kong or Tan Lang in the Life Palace"
+  },
+  {
+   "phien_am": "Chang Qu Lu Ji qing xiu qiao, Yin Yang Zuo You zui ci xiang.",
+   "nghia": "Wen Chang, Wen Qu, Lu Cun or Tian Ji in the Life Palace give someone refined and skilful; Tai Yin, Tai Yang, Zuo Fu or You Bi give the kindest, gentlest nature.",
+   "khi": "Wen Chang, Wen Qu, Lu Cun or Tian Ji, or Tai Yin, Tai Yang, Zuo Fu or You Bi, in the Life Palace"
+  },
+  {
+   "phien_am": "Wu Po Zhen Tan chong he qu quan gu gui, Yang Tuo Qi Sha xiang za hu jian ze shang.",
+   "nghia": "Wu Qu, Po Jun, Lian Zhen and Tan Lang facing and combining with each other in full are still noble; if Qing Yang, Tuo Luo and Qi Sha get mixed in, harm comes easily. The point: with the same group of stars, it is which other stars join them that decides.",
+   "khi": "Wu Qu, Po Jun, Lian Zhen and Tan Lang gather in the Life Palace, or Qing Yang, Tuo Luo and Qi Sha gather in the Life Palace together"
+  },
+  {
+   "phien_am": "Tan Lang Lian Zhen Po Jun e, Qi Sha Qing Yang Tuo Luo xiong.",
+   "nghia": "The book groups Tan Lang, Lian Zhen and Po Jun as fierce stars, and Qi Sha, Qing Yang and Tuo Luo as harsh stars. 'Fierce' here means strong and hard to handle: used in the right place it becomes drive, in the wrong place it becomes friction."
+  },
+  {
+   "phien_am": "Huo Xing Ling Xing zhuan zuo huo, Jie Kong Shang Shi huo chong chong.",
+   "nghia": "Huo Xing and Ling Xing tend to stir up sudden trouble; Di Jie, Di Kong, Tian Shang and Tian Shi meeting pile one complication on another. In a period with these stars, work with a backup plan, double-check paperwork and be careful on the move.",
+   "khi": "a period with Huo Xing and Ling Xing, or Di Jie, Di Kong, Tian Shang and Tian Shi meeting"
+  },
+  {
+   "phien_am": "Ju Men ji xing jie bu ji, yun shen ming xian ji xiang feng.",
+   "nghia": "Neither Ju Men nor Hua Ji is a gentle star; what to avoid most is their meeting in the Life Palace, the Body Palace or a period — misunderstandings and gossip come easily. Say less, keep your word and put agreements in writing.",
+   "khi": "Ju Men and Hua Ji meet in the Life Palace, the Body Palace or a period"
+  },
+  {
+   "phien_am": "Geng jian Tai Sui Guan Fu zhi, guan fei kou she jue bu kong.",
+   "nghia": "If Tai Sui and Guan Fu arrive at the same time as well, paperwork troubles and arguments are hard to avoid. In such a year, follow procedures properly, keep your records and choose mediation before argument.",
+   "khi": "a period with Ju Men and Hua Ji that also meets Tai Sui and Guan Fu"
+  },
+  {
+   "phien_am": "Diao Ke Sang Men you xiang yu, guan jiao zai bing liang xiang gong.",
+   "nghia": "Meeting Diao Ke and Sang Men too, the book says sad news and illness can come at the same time. Read today: in such a year take preventive care, have regular check-ups and keep an eye on the older people at home; this is the old book's view and not a substitute for a doctor.",
+   "khi": "a period with Diao Ke and Sang Men meeting"
+  },
+  {
+   "phien_am": "Qi Sha shou shen zhong shi yao, Tan Lang ru ming bi wei chang.",
+   "nghia": "These two halves are very harsh verdicts of the old book about Qi Sha in the Body Palace and Tan Lang in the Life Palace. Hieuban does not use these words to judge anyone: Qi Sha shows someone who throws themselves into things and should know their limits; Tan Lang shows someone rich in feeling who loves company and should choose friends carefully and keep boundaries.",
+   "khi": "Qi Sha in the Body Palace, or Tan Lang in the Life Palace"
+  },
+  {
+   "phien_am": "Xin hao ming wei yi zhu shou, xin du ming gu yi yao wang.",
+   "nghia": "A good heart with a thin destiny still lives long; a cruel heart, however solid the destiny, does not last. The rhapsody comes back to the point that how you live weighs more than the chart."
+  },
+  {
+   "phien_am": "Jin ren ming you qian jin gui, yun qu zhi shi qi jiu chang.",
+   "nghia": "Even a destiny worth a thousand pieces of gold cannot be kept forever once its time has passed. In good times, put something by for the hard times."
+  },
+  {
+   "phien_am": "Shu nei bao cang duo shao li, xue zhe xu dang zi xi xiang.",
+   "nghia": "Zi Wei Dou Shu holds a great many principles, and the student must study them thoroughly. The closing line warns against reading one line of the rhapsody in haste and drawing conclusions about anyone."
+  }
+ ]
+}

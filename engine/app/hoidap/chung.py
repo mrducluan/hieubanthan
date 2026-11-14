@@ -32,7 +32,7 @@ _BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khon
 KD_SUC_KHOE = [r"dau da day", r"suc khoe cua toi the nao"]
 # Review CY-1: tuổi thọ / sống chết ("sống được bao lâu", "năm nào chết", "thọ bao nhiêu", "chết sớm"…) đã dời về bộ chung
 # `luangiai/an_toan.py` — cả 5 mảng cùng chặn (trước Thần số trả lời bằng chân dung số).
-TU_CHOI_THEM = [r"so de", r"doan benh",
+TU_CHOI_THEM = [_at.SO_DE_KD, r"doan benh",
                 r"benh gan",
                 # "yểm bùa nhà hàng xóm" = tác động lên người khác → từ chối; "nhà tôi có BỊ yểm bùa không" = nỗi sợ tâm
                 # linh → dẫn hướng (TAM_LINH) — EN-3d.
@@ -46,8 +46,11 @@ TU_CHOI_HH = [
     r"co qua khoi", r"ket thuc doi", r"(de|hay|phai) chet(?!\w)", r"(?<!khoa )(?<!kham )benh (phoi|tim|gan|than|xuong|mau)",
     r"(gan|than|tim|phoi|ung thu|da day) hay (gan|than|tim|phoi|ung thu|da day)", r"uong thuoc gi",
     r"khoi (duoc )?benh", r"choi (lo|de)(?!\w)", r"so chot", r"danh con (gi|so)", r"so may de trung", r"danh .{0,12}(de|cho) trung",
-    r"lam hr|(?<!\w)hr(?!\w)", r"chu (cty|cong ty|doanh nghiep).{0,40}(ung vien|nhan vien|nhan|tuyen)",
-    r"nhan vien .{0,40}(nghi viec|trung thuc|giu|chon|nhan|sa thai)", r"tuyen (ke toan|nhan vien|nguoi|nhan su|thu ky)",
+    # Review 2026-11-14 (chủ dự án quyết): "nhân viên của tôi có trung thực không" được trả lời (theo hướng nên chú ý / nên
+    # làm, như câu về người cùng làm ăn — `an_toan.nguoi_lam_an`); vẫn chặn CHỌN / GIỮ / LOẠI / SA THẢI người theo lá số và
+    # XẾP HẠNG "ai trung thực".
+    r"lam hr|(?<!\w)hr(?!\w)", r"chu (cty|cong ty|doanh nghiep).{0,40}(ung vien|tuyen|(chon|giu|loai|nhan) (nguoi|nhan vien))",
+    r"nhan vien .{0,40}(nghi viec|giu|chon|nhan|sa thai)", r"tuyen (ke toan|nhan vien|nguoi|nhan su|thu ky)",
     r"ai trung thuc", r"(chon|giu|loai) nhan vien",
     # SK-1: câu sức khoẻ chung về CHÍNH mình được trả lời; vẫn từ chối (lời đáp gợi hệ cơ quan + đi khám): hỏi bệnh gì
     # kèm bộ phận cụ thể, hỏi bệnh của người khác, hỏi cách chữa.
@@ -100,23 +103,47 @@ def dac_biet(t: str, raw: str | None = None) -> str | None:
     return None
 
 
+def mau_an_toan(goc: str | None, mau: str | None) -> str:
+    """Lời đáp câu khủng hoảng của mọi mảng: `mau` (lời hỗ trợ + đường dây của mảng), câu có hành vi đã xảy ra / nguy
+    hiểm tức thì (đã uống cả lọ thuốc, đã cắt, đang chảy máu, đang đứng trên cao, triệu chứng cấp) → câu gọi cấp cứu đứng
+    đầu (`an_toan.loi_khung_hoang`, chủ dự án quyết 2026-11-14)."""
+    return _at.loi_khung_hoang(goc, mau)
+
+
+nguoi_lam_an = _at.nguoi_lam_an          # câu về người cùng làm ăn (đối tác, nhà đầu tư, chủ nhà…) — luôn được trả lời
+
+
 def mau_tu_choi(goc: str | None, t: str, mau_chung: str, he_la_so: dict | None = None) -> str:
     """SK-1: lời đáp câu đã xếp từ chối. Triệu chứng cấp → khuyên đi khám NGAY; câu hỏi có bệnh / đoán bệnh → không
     xác nhận, không phủ nhận, gợi hệ cơ quan (theo câu hỏi, không rõ thì theo lá số `he_la_so`) + đi khám + câu không
     thay lời bác sĩ; còn lại (sống chết, chữa trị, thai nhi, may rủi…) → `mau_chung` như cũ."""
     from app.kb import suc_khoe_kb  # noqa: PLC0415
     from app.luangiai import suc_khoe_nam as skn  # noqa: PLC0415
+    if goc and _at.nha_nguy_hiem(goc):       # EN-ALL GĐ 5: nguy hiểm trong nhà (chỉ câu tiếng Anh) — ra ngoài / gọi cứu hộ
+        from app.kb.loi import L  # noqa: PLC0415
+        return L("hoi.pt.nha_nguy_hiem", "Đây là tình huống nguy hiểm trong nhà, không phải câu hỏi phong thuỷ: đưa mọi người ra "
+                 "chỗ thoáng, không bật tắt điện, gọi cứu hộ hoặc đường dây khẩn cấp ngay; an toàn rồi hãy hỏi lại.")
     nhom = _at.nhom_suc_khoe(goc or t)
     if nhom == "cap_cuu":
         return suc_khoe_kb.mau("cap_cuu")
     if nhom == "nguoi_than":                 # sức khoẻ người khác: không đọc lá số của người hỏi (review SK-1)
         return suc_khoe_kb.mau("nguoi_than")   # không đọc gì → không kèm lời "nhắc phòng ngừa theo sách xưa"
     if nhom == "hoi_benh":
-        return f"{skn.doan_hoi_benh(t, he_la_so)} {skn.mien_tru()}"
+        d = skn.doan_hoi_benh(t, he_la_so)
+        return d if d == suc_khoe_kb.mau("hoi_tam_than") else f"{d} {skn.mien_tru()}"   # sức khoẻ tinh thần: không "sách xưa"
     # CY-1: câu may rủi / tai nạn nặng / tuyển dụng vẫn từ chối như cũ, nhưng kèm một lời nhắc "nên chú ý…" đúng mảng
     from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
     goi_y = cyn.goi_y_tu_choi(goc or t, _at.tu_choi(goc or t))
-    return f"{mau_chung} {goi_y}".strip() if goi_y else mau_chung
+    return goi_y_truoc(goi_y) if goi_y else mau_chung
+
+
+def goi_y_truoc(goi_y: str) -> str:
+    """2026-11-14 (chủ dự án): câu còn chặn mở bằng lời gợi ý "nên… / nên chú ý…" đúng loại, rồi mới tới một câu ngắn vì
+    sao không luận — thay cho câu chung dài đứng đầu."""
+    from app.kb.loi import L  # noqa: PLC0415
+    ket = L("tu_choi.ket", "Hệ thống không luận những câu kiểu này (may rủi, sống chết, chẩn đoán, đánh giá hay tác động lên "
+                           "người khác) để tránh nói điều không có căn cứ.")
+    return f"{goi_y} {ket}".strip()
 
 
 def them_chu_y(goi: dict, pl: dict, tinh, nam_hien_tai: int, mon_ten: str | None = None,
@@ -421,6 +448,26 @@ def nam_hoi_hh(t: str, ngay_xem, kieu_nam: str) -> list[int]:
 
 
 
+def thu_nhan_ngoai(kq: dict, goc: str, mang: str, chay) -> dict:
+    """EN-AI: luật độ tin thấp (`do_tin_thap`, câu đang được trả lời bình thường) mà câu có nhãn chủ đề NGOÀI hợp lệ
+    (lớp phân loại AI câu tiếng Anh — `luangiai/nhan_ngoai`) → phân loại lại bằng cụm từ khoá của chủ đề đó (`chay(cụm)`,
+    vẫn qua mọi bộ chặn trên câu gốc). Luật tự tin, câu đặc biệt, không có nhãn → giữ nguyên `kq`."""
+    if not kq.get("do_tin_thap") or kq.get("xu_ly") not in ("tra_loi", "tra_loi_kem_luu_y"):
+        return kq
+    from app.hoidap import en_gloss  # noqa: PLC0415
+    from app.luangiai import nhan_ngoai  # noqa: PLC0415
+    n = nhan_ngoai.lay(goc)
+    cum = en_gloss.cum_y_dinh(mang, n.get("y_dinh"), n.get("nam")) if n else None
+    if not cum:
+        return kq
+    kq2 = chay(cum)
+    if kq2.get("xu_ly") not in ("tra_loi", "tra_loi_kem_luu_y"):
+        return kq
+    kq2["do_tin_thap"] = False
+    kq2["y_dinh_ngoai"] = n["y_dinh"]
+    return kq2
+
+
 def hoi_lai_neu(pl: dict, mo_dun: str) -> dict | None:
     """EN-3: khối "hỏi lại" khi câu rơi về mặc định (cờ `do_tin_thap`) và đang trả lời bình thường."""
     if not pl.get("do_tin_thap") or pl.get("xu_ly") not in ("tra_loi", "tra_loi_kem_luu_y"):
@@ -429,14 +476,31 @@ def hoi_lai_neu(pl: dict, mo_dun: str) -> dict | None:
     return hieu_cau.hoi_lai(mo_dun)
 
 
-def them_so_nam(goi: dict, dong: list[dict], nam_hoi: list[int], bo_qua_dau: tuple[str, ...]) -> None:
+# CY-2 review 2: lời "mảng nổi bật nhất năm" của dòng 10 năm chỉ giữ khi nói đúng mảng được hỏi ("hợp lo chỗ ở" lạc đề
+# ở câu tiền / thăng chức / xuất ngoại). Từ khoá theo mảng của điều được hỏi (`mo_dau.DIEU_HOI`).
+_TU_MANG = {"tien_bac": r"tiền|tài|lương|tích luỹ|tích lũy|chi tiêu|money|income|savings|spend",
+            "cong_viec": r"việc|công|vị trí|cấp trên|sếp|nghề|work|job|career|boss",
+            "tinh_cam": r"tình|vợ|chồng|hôn|người yêu|love|partner|marriage|spouse",
+            "gia_dinh": r"chuyện nhà|người nhà|trong nhà|gia đình|bố|mẹ|cha|anh chị|family|parents",
+            "con_cai": r"con|children|kids|child",
+            "nha_cua": r"nhà|chỗ ở|đất|home|house|property",
+            "di_xa": r"ngoài|đi lại|đi xa|xa|travel|abroad|outside",
+            "quan_he": r"bạn|người|ngoài|friends|people|outside",
+            "hoc_hanh": r"học|thi|study|exam|learning",
+            "suc_khoe": r"sức|khoẻ|khỏe|tâm trạng|health|energy|mood"}
+
+
+def them_so_nam(goi: dict, dong: list[dict], nam_hoi: list[int], bo_qua_dau: tuple[str, ...], mang: str | None = None) -> None:
     """EN-3: chèn mục `so_nam` (mức chung từng năm được hỏi, lấy từ dòng 10 năm của báo cáo — một nguồn) ngay sau các
-    mục đầu cố định `bo_qua_dau` (tứ trụ, tập quán sao hạn). Năm ngoài dòng 10 năm bỏ qua."""
+    mục đầu cố định `bo_qua_dau` (tứ trụ, tập quán sao hạn). Năm ngoài dòng 10 năm bỏ qua. `mang` = mảng của điều được
+    hỏi: lời mảng nổi bật của năm nói chuyện khác mảng này thì bỏ (chỉ giữ mức chung)."""
     from app.calc import lunar  # noqa: PLC0415
     theo = {d["nam"]: d for d in dong}
     ds = [theo[y] for y in nam_hoi if y in theo]
     if not ds:
         return
+    if mang in _TU_MANG:
+        ds = [d if re.search(_TU_MANG[mang], (d.get("y") or "").lower()) else {**d, "y": ""} for d in ds]
     vt = 0
     while vt < len(goi["muc"]) and vt < 2 and goi["muc"][vt]["loai"] in bo_qua_dau:
         vt += 1

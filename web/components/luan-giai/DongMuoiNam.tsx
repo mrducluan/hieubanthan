@@ -39,7 +39,8 @@ export function DongMuoiNam({ ds, thang }: { ds: NamVanHan[]; thang?: ThangToi[]
       </figcaption>
 
       <div className="mt-3 overflow-x-auto pb-1" data-testid="dong-muoi-nam-khung">
-        <ol className="relative grid min-w-[25rem] grid-cols-10" aria-label={cg("mn.aria")}>
+        {/* EN-ALL: nhãn cờ bản Anh dài hơn ("Three Calamities") → cột rộng hơn (cuộn trong khung), nhãn được xuống dòng. */}
+        <ol className={`relative grid grid-cols-10 ${en ? "min-w-[36rem]" : "min-w-[25rem]"}`} aria-label={cg("mn.aria")}>
           <span className="absolute left-[5%] right-[5%] top-[1.95rem] h-px bg-line" aria-hidden />
           {ds.map((x, i) => {
             const dang = x.nam === g.nam;
@@ -62,7 +63,7 @@ export function DongMuoiNam({ ds, thang }: { ds: NamVanHan[]; thang?: ThangToi[]
                 {co.length > 0 && (
                   <span className="flex flex-col items-center gap-0.5" data-testid="co-nam">
                     {co.map((c) => (
-                      <span key={c.ma} title={c.nhan} className="whitespace-nowrap rounded-full border border-moon/40 px-1 text-[0.56rem] leading-tight text-moon">
+                      <span key={c.ma} title={c.nhan} className={`${en ? "max-w-[3.4rem] rounded-md text-center" : "whitespace-nowrap rounded-full"} border border-moon/40 px-1 text-[0.56rem] leading-tight text-moon`}>
                         {cg(CO_NGAN[c.ma]!)}
                       </span>
                     ))}

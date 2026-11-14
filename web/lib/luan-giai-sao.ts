@@ -9,7 +9,7 @@
 import { createHmac } from "node:crypto";
 import { NextResponse } from "next/server";
 import type { ZodTypeAny } from "zod";
-import { dauNguoiGoi, goiEngineDaKiem as goiEngine, mienPhiBanAnh } from "@/lib/proxy";
+import { dauNguoiGoi, goiEngineDaKiem as goiEngine, laBanAnh, loiChung, mienPhiBanAnh } from "@/lib/proxy";
 import { layCauHinh } from "@/lib/cau-hinh";
 import { biMat, chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
 import { catXemTruoc, type BaoCaoDay } from "@/lib/sao-xem-truoc";
@@ -72,7 +72,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
                                     khoaTu: (d: Record<string, unknown>) => unknown = boTinhTrang,
                                     them?: () => Promise<Record<string, unknown>>): Promise<NextResponse> {
   const parsed = schema.safeParse(await req.json().catch(() => null));
-  if (!parsed.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
+  if (!parsed.success) return NextResponse.json({ error: loiChung("dau_vao", laBanAnh(req)) }, { status: 422 });
   const bs = them ? await them().catch(() => ({})) : {};
   const goiEngineDaKiem = async (data: unknown, p: string, dau: Record<string, string>) => {
     if (!Object.keys(bs).length) return goiEngine(data, p, dau);

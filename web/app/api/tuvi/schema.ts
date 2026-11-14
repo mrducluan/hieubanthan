@@ -145,7 +145,7 @@ export const LaSoOutput = z.object({
   chi_cung_than: z.string(),
   // VZ-1 (engine ≥ bản này): phần giữa lá số + Tuần/Triệt lối Việt. Optional để web chịu được engine cũ.
   menh_nap_am: z.object({ ten: z.string(), hanh: z.string(), han: z.string() }).optional(),
-  am_duong: z.object({ nam_sinh: z.string(), nhan: z.string(), ly: z.enum(["thuận", "nghịch"]) }).optional(),
+  am_duong: z.object({ nam_sinh: z.string(), nhan: z.string(), ly: z.string() }).optional(),   // bản Việt "thuận"/"nghịch"; bản Anh chữ Anh (chỉ hiển thị)
   menh_cuc: z.string().optional(),
   tuan_triet: z.object({ tuan: z.array(z.string()), triet: z.array(z.string()) }).optional(),
   // KB-2: cách cục quanh Mệnh (engine nhận diện, KB diễn giải — nháp AI).
@@ -173,6 +173,8 @@ export const LaSoOutput = z.object({
   phai: z.object({ hoa_linh: z.string(), thang_nhuan: z.string(), co_the_doi_thang_nhuan: z.boolean(),
     sinh_thang_nhuan: z.boolean().optional(),   // TV-NHUAN3: sinh trong tháng nhuận (mọi ngày)
     lich: z.string().optional(), lich_khac: z.boolean().optional(), luu_nguyet: z.string().optional() }).optional(),
+  /** EN-ALL GĐ 4: bản Anh kèm tên hiển thị của mọi MÃ trong phản hồi (lib/ten-hien.ts); bản Việt không có. */
+  ten_hien: z.record(z.string(), z.record(z.string(), z.string())).optional(),
 });
 export type LaSoOutputT = z.infer<typeof LaSoOutput>;
 
@@ -211,6 +213,8 @@ export const VanHanOutput = z.object({
   dai_han: LopHan.extend({ tu_tuoi: z.number(), den_tuoi: z.number(), dong_han: z.boolean().optional() }),
   tieu_han: z.object({ chi_so: z.number(), can: z.string(), chi: z.string(), cung_goc: z.string() }),
   luu_nien: LopHan,
+  /** EN-ALL GĐ 4: bản Anh kèm tên hiển thị của mọi MÃ trong phản hồi (lib/ten-hien.ts); bản Việt không có. */
+  ten_hien: z.record(z.string(), z.record(z.string(), z.string())).optional(),
 });
 export type VanHanOutputT = z.infer<typeof VanHanOutput>;
 
@@ -245,6 +249,8 @@ export const LuuNguyetOutput = z.object({
   cac_phai: z.record(z.string(), z.object({ ten: z.string(), cach_tinh: z.string(), nguon: z.string() })),
   uu_tien: z.string(),
   luu_y: z.string(),
+  /** EN-ALL GĐ 4: bản Anh kèm tên hiển thị của mọi MÃ trong phản hồi (lib/ten-hien.ts); bản Việt không có. */
+  ten_hien: z.record(z.string(), z.record(z.string(), z.string())).optional(),
 });
 export type LuuNguyetOutputT = z.infer<typeof LuuNguyetOutput>;
 
@@ -356,6 +362,7 @@ export const HopThamInput = z.object({
     gender: z.enum(["nam", "nu"]).optional(),
     noi_sinh: z.string().regex(/^[a-z0-9_-]{2,40}$/).optional(),
     vung: z.enum(["north", "south"]).optional(),
+    mui_gio: z.string().regex(/^[A-Za-z][A-Za-z0-9_+\-\/]{1,63}$/).optional(),
   }),
   quan_he: z.enum(QUAN_HE_HOP_THAM).default("nguoi_yeu"),
 });

@@ -1,0 +1,1023 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 5 — bản phủ tiếng Anh (ban biên tập viết, chờ người bản xứ duyệt).",
+ "du_nien": {
+  "Sinh Khí": {
+   "y_nghia": "Growth, momentum, reputation.",
+   "dung_cho": "front door, desk, the way you face when you need energy"
+  },
+  "Thiên Y": {
+   "y_nghia": "Health, support from others, steadiness.",
+   "dung_cho": "bedroom for older family members, the stove's control side"
+  },
+  "Diên Niên": {
+   "y_nghia": "Harmony, lasting bonds, the couple's relationship.",
+   "dung_cho": "the couple's bedroom, the head of the bed"
+  },
+  "Phục Vị": {
+   "y_nghia": "Stability, ease, study, reflection.",
+   "dung_cho": "study desk, family altar, a quiet workroom"
+  },
+  "Hoạ Hại": {
+   "y_nghia": "Gossip, small hitches.",
+   "dung_cho": "storage, bathroom"
+  },
+  "Lục Sát": {
+   "y_nghia": "Muddle, discord, messy feelings.",
+   "dung_cho": "storage, bathroom, stairs"
+  },
+  "Ngũ Quỷ": {
+   "y_nghia": "Losses, unwelcome surprises, disputes.",
+   "dung_cho": "bathroom, storage; avoid placing the front door here"
+  },
+  "Tuyệt Mệnh": {
+   "y_nghia": "The weakest direction: depletion, bigger setbacks.",
+   "dung_cho": "rarely used spaces; avoid the front door and the head of the bed"
+  }
+ },
+ "quai": {
+  "Khảm": {
+   "tinh_chat": "deep, adaptable"
+  },
+  "Khôn": {
+   "nguoi": "mother",
+   "tinh_chat": "tolerant, nurturing"
+  },
+  "Chấn": {
+   "nguoi": "eldest son",
+   "tinh_chat": "active, a starter"
+  },
+  "Tốn": {
+   "nguoi": "eldest daughter",
+   "tinh_chat": "gentle, far-reaching"
+  },
+  "Càn": {
+   "tinh_chat": "strong, a leader"
+  },
+  "Đoài": {
+   "nguoi": "youngest daughter",
+   "tinh_chat": "cheerful, sociable"
+  },
+  "Cấn": {
+   "nguoi": "youngest son",
+   "tinh_chat": "steady, a saver"
+  },
+  "Ly": {
+   "nguoi": "middle daughter",
+   "tinh_chat": "clear-sighted, warm-hearted"
+  }
+ },
+ "bo_tri": {
+  "duong_dam": {
+   "tieu_de": "A road running straight at the house",
+   "noi_dung": "Landform feng shui calls this a 'road arrow': qi and traffic rush straight at the door. In practice: noise, dust, and a risk of vehicles running in.",
+   "goi_y": "Set the door back, add a gate, a low wall or a screen of plants in front.",
+   "giai_thich_hien_dai": "A road or long corridor aimed at the door channels wind, dust and noise straight into the house; you always see cars or people heading your way, so it is hard to relax sitting near the door.",
+   "viec": [
+    {
+     "lam": "Move chairs and the desk off the straight line from the door; keep the door shut when not in use."
+    },
+    {
+     "lam": "A heavy curtain or a broad leafy plant just inside the door to break the wind and block the straight view."
+    },
+    {
+     "lam": "A low partition or a tall shoe cabinet in the entrance hall; a townhouse with a yard can add a gate, a low wall or a row of plants in front."
+    }
+   ]
+  },
+  "nga_ba": {
+   "tieu_de": "A house at a T-junction or crossroads",
+   "noi_dung": "Qi moves hard here, rushing in from several directions. In practice: noise and heavy foot traffic — better for a shop than a home.",
+   "goi_y": "To live in: keep the door off the line of the road and soundproof; for business: make the most of the frontage.",
+   "giai_thich_hien_dai": "A house at a junction takes noise, dust and headlights from several sides; the corner catches swirling wind, so dust builds up fast.",
+   "viec": [
+    {
+     "lam": "Use an inner room, away from the street, as the bedroom."
+    },
+    {
+     "lam": "Double glazing or heavy curtains in rooms facing the junction; plants along the frontage."
+    },
+    {
+     "lam": "Build a porch or a wide canopy and set the front door further in."
+    }
+   ]
+  },
+  "cot_dien": {
+   "tieu_de": "A power pole or big tree in front of the door",
+   "noi_dung": "A sharp obstacle in front of the door ('sha' qi). In practice: it blocks the way and raises electrical-safety worries.",
+   "goi_y": "Keep your distance and offset the door; ask the utility company to check electrical safety.",
+   "giai_thich_hien_dai": "A pole or big tree right by the door blocks light and the way in, is easy to bump into, and power lines near the house need a safety check.",
+   "viec": [
+    {
+     "lam": "Keep the entrance clear; don't lean bikes or things against the pole."
+    },
+    {
+     "lam": "Add a porch light to make up for the blocked light."
+    },
+    {
+     "lam": "Apply to have the pole moved or the tree trimmed under local rules when you renovate."
+    }
+   ]
+  },
+  "song_truoc": {
+   "tieu_de": "A river or lake in front of the house",
+   "noi_dung": "The Book of Burial: 'qi stops where it meets water' — water curving round the front is good; water running straight away or cutting sharply across is weaker.",
+   "goi_y": "Check whether the water curves round or runs straight; mind flood-season safety and damp.",
+   "giai_thich_hien_dai": "Water in front gives an open view and cooler air in hot months; the trade-off is damp, mosquitoes and watching small children near the edge.",
+   "viec": [
+    {
+     "lam": "Open the doors to the breeze off the water by day; close them late in the afternoon to cut damp and mosquitoes."
+    },
+    {
+     "lam": "Mosquito screens, and a dehumidifier if the ground floor is damp."
+    },
+    {
+     "lam": "A railing or safety fence for children if the water's edge is close to the house."
+    }
+   ]
+  },
+  "nghia_trang": {
+   "tieu_de": "A house near a cemetery or hospital",
+   "noi_dung": "The belief is that yin qi is heavy there. In practice: many people simply don't feel at ease.",
+   "goi_y": "If it unsettles you, add plants and light; decide by how the whole family feels.",
+   "giai_thich_hien_dai": "Facing a place where grieving people pass, or ambulance lights late at night, makes it hard to feel calm; in practice there is also noise and a heavy mood.",
+   "viec": [
+    {
+     "lam": "Turn chairs and beds towards the inside of the house; spend most of the day in rooms at the back."
+    },
+    {
+     "lam": "Curtains and plants at the windows on that side; warm lights in the living room."
+    },
+    {
+     "lam": "A solid fence or a row of tall plants to block the direct view."
+    }
+   ]
+  },
+  "no_hau": {
+   "tieu_de": "A plot that widens or narrows towards the back",
+   "noi_dung": "The belief: a plot wider at the back holds qi; one that narrows at the back lets qi slip away.",
+   "goi_y": "A plot that narrows at the back can still be laid out well; what matters is function and light.",
+   "giai_thich_hien_dai": "A plot wider at the back gives roomy rear space for bedrooms and an open back yard; one that narrows leaves the back cramped and hard to light and air.",
+   "viec": [
+    {
+     "lam": "Put the rooms that need quiet in the wide rear part."
+    },
+    {
+     "lam": "Narrow back: a large mirror or bright lighting in the narrow part so it feels less stuffy."
+    },
+    {
+     "lam": "Narrow back: open a small light well at the rear when you renovate."
+    }
+   ]
+  },
+  "minh_duong": {
+   "tieu_de": "The open space in front (ming tang)",
+   "noi_dung": "The open space before the house where qi gathers (Book of Burial, Classic of Moving the Dragon). A wide, bright, clean front space is good.",
+   "goi_y": "Keep the yard or porch in front of the door open and clean, with nothing piled up.",
+   "giai_thich_hien_dai": "An open yard or porch in front lets light and air in evenly and makes a wide entrance; being able to look into the distance rests the eyes and mind.",
+   "viec": [
+    {
+     "lam": "Keep the yard and porch clean, with nothing piled up and no vehicles blocking the door."
+    },
+    {
+     "lam": "A yard light and one or two low potted plants keep the space bright and lively."
+    },
+    {
+     "lam": "Don't build over the front yard if there is another way."
+    }
+   ]
+  },
+  "tu_linh": {
+   "tieu_de": "Green Dragon on the left, White Tiger on the right",
+   "noi_dung": "The four-animal model: the Black Tortoise behind (support), the Red Phoenix in front (open), and the left (Green Dragon) a little higher than the right (White Tiger). For a townhouse: a neighbour on the left that is taller or level is the easier case.",
+   "goi_y": "You can't change your neighbours' houses — focus on solid support behind (a full wall) and openness in front."
+  },
+  "bep_doi_cua": {
+   "tieu_de": "Stove facing the front door",
+   "noi_dung": "The Three Essentials of Yang Dwellings treats the door and the stove as two of the three key elements; a stove facing the door is exposed and catches draughts.",
+   "goi_y": "Turn the stove or add a partition; in practice this keeps the flame steady and the kitchen private.",
+   "giai_thich_hien_dai": "Opening the door shows the stove at once: draughts from the door blow the flame about, cooking smells drift back into the house, and the home loses privacy. A dry island with no cooktop does not count as a stove — it even screens the stove quite well.",
+   "viec": [
+    {
+     "lam": "Close the door while cooking; turn the way you stand if the cooktop is portable."
+    },
+    {
+     "lam": "A bead curtain, open shelving or a tall plant between the door and the stove."
+    },
+    {
+     "lam": "A ribbed glass screen, a bar counter or an island between the door and the cooktop."
+    }
+   ]
+  },
+  "wc_giua_nha": {
+   "tieu_de": "A bathroom in the middle of the house",
+   "noi_dung": "The belief: the centre is the 'heart' of the house, so a toilet there is not good. In practice: smells, damp, hard to ventilate.",
+   "goi_y": "Use mechanical ventilation and keep it dry and clean; in a new build, move it to a corner.",
+   "giai_thich_hien_dai": "A central bathroom usually has no window and relies on a shared duct; weak extraction leaves damp and smells hanging in the middle of the house and spreading to other rooms.",
+   "viec": [
+    {
+     "lam": "Keep the door shut, wipe the floor dry after showers, don't dry laundry in there."
+    },
+    {
+     "lam": "An extractor fan with enough power on a timer; close the toilet lid when flushing; essential oils or activated charcoal to absorb moisture."
+    },
+    {
+     "lam": "Separate the wet and dry zones, change which way the door opens (or use a concealed door); in an apartment the service shafts can't move, so don't knock walls down to relocate the room."
+    }
+   ]
+  },
+  "cau_thang_cua": {
+   "tieu_de": "Stairs facing the front door",
+   "noi_dung": "The belief: qi coming through the door runs straight up or down and does not gather. In practice: a cramped entrance and little privacy.",
+   "goi_y": "Add a partition or screen, or turn the foot of the stairs if you can.",
+   "giai_thich_hien_dai": "Stairs running straight at the door make the entrance cramped, let outsiders see straight upstairs, and pull draughts up the stairwell.",
+   "viec": [
+    {
+     "lam": "Keep the foot of the stairs clear, with nothing piled there."
+    },
+    {
+     "lam": "A low screen or shoe cabinet as a partial partition."
+    },
+    {
+     "lam": "Turn the foot of the stairs or add an entrance partition during a major renovation."
+    }
+   ]
+  },
+  "phong_ngu_tren_bep": {
+   "tieu_de": "A bedroom above the kitchen",
+   "noi_dung": "The belief: fire qi rising from below makes for unease. In practice: heat, smells, noise.",
+   "goi_y": "Insulate the floor and keep the bed off the spot directly above the stove.",
+   "giai_thich_hien_dai": "A bedroom floor right above the kitchen is warmer, and cooking smells and sounds carry up; sleep is easily disturbed.",
+   "viec": [
+    {
+     "lam": "Move the bed off the spot directly above the cooktop."
+    },
+    {
+     "lam": "A thick rug, and a kitchen extractor strong enough that smells don't rise."
+    },
+    {
+     "lam": "Insulate and soundproof the floor when you renovate; move the cooktop to another corner if you can."
+    }
+   ]
+  },
+  "guong_cua_chinh": {
+   "tieu_de": "A mirror facing the front door",
+   "noi_dung": "Folk belief: a mirror facing the front door 'pushes' the good qi and fortune that just came in back out; some people hang a bagua mirror outside the door to 'guard' it — that is a belief, not part of Compass School theory. In practice: people coming in are startled by their own reflection, light glares, and the entrance looks narrower.",
+   "goi_y": "Put the mirror on a side wall by the entrance (handy for a last look before going out) rather than facing the door.",
+   "giai_thich_hien_dai": "A mirror facing the door startles people with their own reflection and bounces light and the outside view into the house.",
+   "viec": [
+    {
+     "lam": "Move the mirror to the wall beside the door."
+    },
+    {
+     "lam": "Replace it with a picture or a small hanging shelf in the entrance."
+    }
+   ]
+  },
+  "guong_giuong": {
+   "tieu_de": "A mirror facing the bed",
+   "noi_dung": "Folk belief: a reflecting mirror unsettles sleep. In practice: reflected light, a start on waking.",
+   "goi_y": "Move the mirror to one side or cover it at night.",
+   "giai_thich_hien_dai": "A mirror facing the bed reflects light when you wake at night and can startle you; many people find it hard to sleep deeply.",
+   "viec": [
+    {
+     "lam": "Move the mirror or turn the mirrored wardrobe door away from the bed."
+    },
+    {
+     "lam": "A curtain over the mirror or frosted film at night."
+    }
+   ]
+  },
+  "ban_tho": {
+   "tieu_de": "Where to place the family altar",
+   "noi_dung": "Place it somewhere dignified with support behind (a solid wall), not facing a toilet and not under a beam; many families choose a good direction for the head of the household.",
+   "goi_y": "Quiet, clean and above eye level is dignified enough."
+  },
+  "cua_doi_nhau": {
+   "tieu_de": "Room doors facing each other",
+   "noi_dung": "The belief: two doors directly facing cause 'quarrelling'. In practice: little privacy, draughts.",
+   "goi_y": "Use a curtain, hang the doors to open away from each other, keep them closed.",
+   "giai_thich_hien_dai": "Two room doors facing each other let each room see into the other and carry sound straight across; in an apartment, a door facing the neighbour's door can also clash when both open.",
+   "viec": [
+    {
+     "lam": "Make a habit of closing room doors; keep the bed off the straight line between the two doors."
+    },
+    {
+     "lam": "A wooden bead curtain or a half-height screen just inside the door; in an apartment do everything inside your own door and hang nothing that points at the flat opposite."
+    },
+    {
+     "lam": "Move one of the two doors when you renovate the room."
+    }
+   ]
+  },
+  "nha_chu_l": {
+   "tieu_de": "An L-shaped house or a house with a missing corner",
+   "noi_dung": "Eight Mansions: a missing corner means a missing sector of the house (for example, missing the North-West means missing Qian). In practice: awkward, not-quite-square rooms.",
+   "goi_y": "Rearrange how rooms are used and use a garden or yard to fill the missing part; there is no need to buy objects to 'fix' it.",
+   "giai_thich_hien_dai": "An L-shaped house or one with a missing corner has dark corners, broken walkways and parts far from a window; it feels cramped and lopsided.",
+   "viec": [
+    {
+     "lam": "Use the missing part as a yard, storage or drying area; don't squeeze a bedroom into a dark corner."
+    },
+    {
+     "lam": "Bright lights and a mirror on a wall near the missing corner make the space feel more balanced."
+    },
+    {
+     "lam": "An awning or outdoor decking turns the missing part into a usable veranda."
+    }
+   ]
+  },
+  "xa_ngang": {
+   "tieu_de": "A bed or desk under an overhead beam",
+   "noi_dung": "The belief: a beam pressing down causes stress. In practice: a sense of being weighed down, and dust.",
+   "goi_y": "Move the bed or desk out from under the beam, or add a false ceiling.",
+   "giai_thich_hien_dai": "A beam right over the bed or desk feels oppressive when you look up, and air-conditioning airflow rolls down onto where you lie; many people sleep fitfully and wake often.",
+   "viec": [
+    {
+     "lam": "Move the bed or desk out of the beam's footprint — usually 40–60 cm is enough."
+    },
+    {
+     "lam": "Uplighting on the ceiling to soften the beam; a bed canopy or drape."
+    },
+    {
+     "lam": "A flat plasterboard ceiling or a stepped, rounded one to hide the beam (no need to touch the structure)."
+    }
+   ]
+  },
+  "quay_lung_cua": {
+   "tieu_de": "Sitting with your back to the door",
+   "noi_dung": "The 'supported' principle: sit with your back to a wall and the door in view (the command position). In practice: you feel secure and aren't startled.",
+   "goi_y": "Turn the desk so you can see the door, with your back to a solid wall.",
+   "giai_thich_hien_dai": "With your back to the door you can't see who comes in, so you keep looking round; it is hard to focus for long.",
+   "viec": [
+    {
+     "lam": "Turn the desk so you face the door at an angle, with your back to a wall."
+    },
+    {
+     "lam": "If you can't turn it, put a small mirror on the desk so you can see the door behind you."
+    }
+   ]
+  },
+  "bep_wc": {
+   "tieu_de": "Stove next to the bathroom",
+   "noi_dung": "The belief: water and fire clash, and unclean qi spreads. In practice: food hygiene.",
+   "goi_y": "Avoid a shared wall in a new build; keep the toilet door shut and ventilate well.",
+   "giai_thich_hien_dai": "A stove next to the bathroom is a food-hygiene issue: damp and smells from the bathroom drift to where you cook; a bathroom door opening onto the kitchen makes it worse.",
+   "viec": [
+    {
+     "lam": "Always keep the bathroom door shut; don't keep chopping boards or baskets against the shared wall."
+    },
+    {
+     "lam": "Run the bathroom extractor long enough after use; a glass screen or curtain between the two areas."
+    },
+    {
+     "lam": "Change which way the bathroom door opens, or move the cooktop away from the shared wall when you renovate."
+    }
+   ]
+  },
+  "phong_lam_viec": {
+   "tieu_de": "Study or desk",
+   "noi_dung": "The 'supported, facing the door' principle: back to a solid wall, the entrance in view; Eight Mansions often picks the sitter's Sheng Qi or Fu Wei direction.",
+   "goi_y": "A quiet spot with natural light from the side; avoid sitting right under a beam or by the bathroom door."
+  },
+  "phong_tre": {
+   "tieu_de": "Children's room, study corner",
+   "noi_dung": "Eight Mansions often picks the child's Fu Wei or Sheng Qi direction for the study desk.",
+   "goi_y": "Good natural light, quiet, a desk that faces the door, few distractions."
+  },
+  "nguoi_gia": {
+   "tieu_de": "A room for older family members",
+   "noi_dung": "Eight Mansions often picks that person's Tian Yi direction.",
+   "goi_y": "Ground floor, near a toilet, well lit, with safe non-slip walkways."
+  },
+  "vo_chong_ngu": {
+   "tieu_de": "The couple's bedroom",
+   "noi_dung": "Eight Mansions often picks the Yan Nian direction for the head of the couple's bed.",
+   "goi_y": "A tidy room, soft light, a bed with a headboard against a wall, few electronic devices; both partners agree on the layout."
+  },
+  "cai_nhau": {
+   "tieu_de": "A household that argues a lot",
+   "noi_dung": "Feng shui can't replace talking to each other. An open, well-lit room with less clutter can ease tension.",
+   "goi_y": "Keep one comfortable shared corner for the whole family; if conflict drags on, consider family counselling."
+  },
+  "cua_hang": {
+   "tieu_de": "Shops and offices",
+   "noi_dung": "Yang-dwelling rules apply to a business too: an open, bright, easy-to-find entrance; a solid cashier counter with support behind and a view of the door.",
+   "goi_y": "Choose a visible spot with an unblocked entrance; the owner's seat faces a good direction if possible."
+  },
+  "can_ho": {
+   "tieu_de": "Apartments",
+   "noi_dung": "Many people take the apartment's front door as the facing direction; others take the balcony or large window (where the light comes in). The two methods can give different results.",
+   "goi_y": "Be clear which one you use; put light, ventilation and a floor that isn't too damp first."
+  },
+  "hoa_giai": {
+   "tieu_de": "Making up for an unfavourable direction",
+   "noi_dung": "Eight Mansions suggests turning a side door, your seat, the head of the bed and the stove's control side towards the occupant's good directions ('sit on the weak, face the good').",
+   "goi_y": "Adjust the layout first; there is no need to buy expensive objects. We do not recommend any objects."
+  },
+  "cau_thang_giua_nha": {
+   "tieu_de": "Stairs in the middle of the house",
+   "noi_dung": "The belief: stairs right in the centre pierce the 'heart' of the house, stirring qi up and down so the household can't settle. In practice: central stairs cut the space up, block light and stop air flowing through the house.",
+   "goi_y": "Add a light well or lights so the middle of the house is bright; don't let the bottom step point straight at the front door; in a new build, set the stairs against a side wall.",
+   "giai_thich_hien_dai": "When the stairs take up the very centre, every room has to wrap around them: the ground floor is split in two, light from the front door and the light well can't get through, and footsteps and voices carry to every floor. The middle of the house ends up dark and it is hard to fit one continuous living room.",
+   "viec": [
+    {
+     "lam": "Keep the space under the stairs clear; open curtains and doors around the stairs by day so light reaches the middle of the house."
+    },
+    {
+     "lam": "Add wall lights along the stairs and in the middle of the house; stair runners or pads to soften footsteps."
+    },
+    {
+     "lam": "In a major renovation: open a light well above the stairs and swap solid balustrades for open ones; in a new build, set the stairs against a side wall."
+    }
+   ]
+  },
+  "cay_truoc_cua": {
+   "tieu_de": "A tree in front of the door",
+   "noi_dung": "Folk belief: a big tree standing squarely in front of the door 'blocks qi' from entering; modest greenery on either side of the door is considered good. In practice: a big tree by the door blocks light, its roots can crack the floor, and falling leaves bring damp, flies and mosquitoes; small, neat plants keep things cool and pleasant.",
+   "goi_y": "Don't plant a big tree in the middle of the entrance; choose plants of modest height that are easy to care for (pots on either side of the door, low shrubs); prune so the door stays open and bright. Choose plants for the climate and the care they need, not for promises about money.",
+   "giai_thich_hien_dai": "A big tree right in front of the door cuts light and the view of the street, falling leaves make the porch damp, and roots can lift the floor or crack the fence. But a tree also gives shade and blocks dust and noise — the issue is a tree standing in the middle of the entrance and too close, not having a tree at all.",
+   "viec": [
+    {
+     "lam": "Sweep leaves and keep the porch dry; keep the path from gate to door straight and clear, with no extra pots or clutter."
+    },
+    {
+     "lam": "Trim the lower branches so the door gets light and a view out; add a porch light; move big pots to either side of the door."
+    },
+    {
+     "lam": "For a street tree, ask the local parks authority to prune it; if your own tree's roots are lifting the floor, move it or replace it with a compact one."
+    }
+   ]
+  },
+  "be_ca": {
+   "tieu_de": "A fish tank in the house",
+   "noi_dung": "Folk belief: water stands for prosperity, so a clean fish tank in the living room is seen as good; it should not go in a bedroom or face the stove. In practice: a tank needs a filter, water changes and a light — a dirty tank brings smells and damp; a pump humming in the bedroom makes sleep hard.",
+   "goi_y": "If you like keeping fish: put the tank in the living room where it is easy to look after, away from sockets and harsh sun; keep the water clean. There is no need to add a fish tank just for feng shui — if you have one, keep it clean; if not, leave it.",
+   "giai_thich_hien_dai": "A fish tank is a body of water wired to electricity (filter, light, heater), so it needs a dry, raised socket and tidy cables; the filter hums at night and evaporation makes the room damper. In an airy living room that is easy to look after, it is pleasant; in a bedroom or next to the stove it is noisy, damp and hard to keep clean.",
+   "viec": [
+    {
+     "lam": "Change part of the water and wipe the glass regularly; don't keep the tank in a bedroom or right next to the cooktop; keep cables tidy and never across the water."
+    },
+    {
+     "lam": "A covered socket above the water line plus a residual-current device; a quiet filter and a timer for the light; a drip tray under the tank."
+    },
+    {
+     "lam": "For a large tank, use a dedicated load-bearing stand and waterproof the floor around it; the new spot must be airy and have a way to drain water."
+    }
+   ]
+  },
+  "cua_thong_ban_cong": {
+   "tieu_de": "Front door looking straight out to a balcony or large window",
+   "noi_dung": "Landform feng shui calls this a 'piercing arrow': qi entering the door rushes straight out to the balcony without settling in the house — 'open at the front, open at the back'. Very common in apartments.",
+   "goi_y": "Place something that breaks the straight view between the door and the balcony: a shoe cabinet, open shelving, a plant or a curtain; no special objects needed.",
+   "giai_thich_hien_dai": "Opening the front door shows straight through to the balcony: with both open, strong draughts pull dust in and slam doors, and people in the corridor can see the whole flat, so privacy is hard.",
+   "viec": [
+    {
+     "lam": "Place a sofa or bookcase across part of the straight line from door to balcony; close one of the two in strong wind."
+    },
+    {
+     "lam": "A double curtain at the balcony, a broad leafy plant or open shelving just inside the front door."
+    },
+    {
+     "lam": "A semi-solid entrance screen with a tall shoe cabinet (1.8–2.2 m) just inside the front door."
+    }
+   ]
+  },
+  "ban_tho_gio_thoi": {
+   "tieu_de": "Air conditioning or a ceiling fan blowing straight at the family altar",
+   "noi_dung": "Apartments often put the altar in the living room right under a ceiling fan or in front of the air-conditioning unit. Folk tradition calls this 'wind scattering qi': the draught blows the incense and candle flames and scatters ash.",
+   "goi_y": "Adjust the vanes or move the altar out of the airflow; fit a deflector to the air-conditioning unit.",
+   "giai_thich_hien_dai": "Air from the air conditioning or ceiling fan blowing straight at the incense bowl scatters ash and makes the flame flicker — messy, and a risk of catching curtains or paper.",
+   "viec": [
+    {
+     "lam": "Point the air-conditioning vanes elsewhere; don't run the ceiling fan on high while incense is burning."
+    },
+    {
+     "lam": "An air deflector on the indoor unit; a smoke-stain guard on the ceiling."
+    },
+    {
+     "lam": "Move the altar or the air-conditioning unit when you renovate the room."
+    }
+   ]
+  },
+  "ket_sat": {
+   "tieu_de": "Where to put the safe",
+   "noi_dung": "Folk belief: the safe holds your valuables, so it belongs somewhere hidden and solid, out of sight from the door; not right at the entrance or anywhere everyone passing can see it. In practice: this is first about security — a heavy safe needs a strong floor, a dry spot and to be hard to carry off.",
+   "goi_y": "Put the safe in a corner of the main bedroom or study, against a wall, out of view from the door; bolt it to the floor or wall if you can. No need to fuss over the exact direction — hidden and secure matters more.",
+   "giai_thich_hien_dai": "A safe visible from the door tells strangers where the valuables are; in a damp spot the papers inside go mouldy. A hidden corner with a strong, dry floor is both safer and more reassuring.",
+   "viec": [
+    {
+     "lam": "Move the safe to a hidden corner of the room, out of sight of the doorway; put important papers in moisture-proof bags."
+    },
+    {
+     "lam": "Bolt the safe to the floor or wall; add a moisture-absorbing pack inside and replace it regularly."
+    },
+    {
+     "lam": "Build a recessed niche or wooden cabinet to hide the safe when renovating; check the floor can bear the weight before placing a heavy safe."
+    }
+   ]
+  },
+  "ngo_cut": {
+   "tieu_de": "A house at the end of a dead-end lane",
+   "noi_dung": "Folk belief: the end of a dead-end lane is where qi 'gathers but cannot leave', and the lane often points straight at the door. In practice: the end of a lane is usually quiet with little traffic — what to watch is the escape route in an emergency, parking and light.",
+   "goi_y": "Keep the space in front of the door open, clean and lit; if the lane runs straight at the door, place a plant or a low screen so the path doesn't look straight into the house. There is no need to move just because you live at the end of a lane.",
+   "giai_thich_hien_dai": "A house at the end of a lane gets less dust and traffic noise, but fire engines struggle to get in, it can be dark at night, and rainwater can pool at the end. A porch light, a clear escape route and good drainage solve most of these worries.",
+   "viec": [
+    {
+     "lam": "Clear the space in front of the door so nothing blocks the way; know the lane's other exit and keep a small fire extinguisher at home."
+    },
+    {
+     "lam": "Fit a motion-sensor light by the door; place a plant or a low screen if the lane runs straight into the house."
+    },
+    {
+     "lam": "Raise the floor or dig a drainage channel in front of the door if water pools at the end of the lane when it rains."
+    }
+   ]
+  },
+  "gieng_cu": {
+   "tieu_de": "An old well in the garden or house",
+   "noi_dung": "Folk belief: an old well no longer used should be filled in properly, with an offering to the land as local custom has it, never in a hurry or with rubbish. In practice: an abandoned well is dangerous for small children and easily pollutes the groundwater.",
+   "goi_y": "If it is no longer used: cover it securely today, then fill it with clean sand and soil in layers (ask an experienced builder); whether to make an offering to the land is up to your family. Don't throw rubbish or waste into the well.",
+   "giai_thich_hien_dai": "An open well can cause people or pets to fall in; standing water breeds mosquitoes; waste dumped into it seeps into the whole neighbourhood's water. Filled properly, the ground won't sink later either.",
+   "viec": [
+    {
+     "lam": "Cover the mouth of the well with a strong board and seal it today; tell small children to stay away."
+    },
+    {
+     "lam": "Fit a concrete lid or a lockable metal grille if you can't fill it straight away."
+    },
+    {
+     "lam": "Have a builder fill it with clean sand and soil in compacted layers; if you plan to build over it, ask about the foundations there."
+    }
+   ]
+  },
+  "cua_so_dau_giuong": {
+   "tieu_de": "A window right behind or beside the head of the bed",
+   "noi_dung": "Folk belief: the head of the bed should rest against a solid wall ('support'); a window behind it makes for restless sleep. In practice: draughts, streetlight and noise through the window make sleep fitful.",
+   "goi_y": "If you can turn the bed, put the head against a solid wall. If you can't, draw heavy curtains, close the window at night and use a tall, solid headboard.",
+   "giai_thich_hien_dai": "Cold air blowing on your head and neck at night leaves you tired; early light through the window wakes you sooner than you want. A headboard against a solid wall keeps you warmer and quieter.",
+   "viec": [
+    {
+     "lam": "Close the window and draw the curtains at night; try turning the bed so the head rests against a solid wall."
+    },
+    {
+     "lam": "Hang blackout curtains; add a tall, solid headboard if you can't move the bed."
+    },
+    {
+     "lam": "When you renovate, lay the room out so the head of the bed isn't under a window; replace a draughty window."
+    }
+   ]
+  },
+  "giuong_sat_cua": {
+   "tieu_de": "A bed next to or in line with the door",
+   "noi_dung": "Folk belief: a bed in line with the room door or right by the door makes the sleeper jumpy and restless. In practice: people passing, the door opening and draughts break up your sleep.",
+   "goi_y": "Move the bed off the door's straight line, with the head against a wall and the door still in view. In a small rented room you can't rearrange, use a curtain or a low shelf between the door and the bed.",
+   "giai_thich_hien_dai": "Lying down, people feel safer when they can see the door without lying right in the walkway. A door opening straight onto the bed brings draughts, corridor light and noise.",
+   "viec": [
+    {
+     "lam": "Move the bed off the door's straight line if the room allows; close the door when you sleep."
+    },
+    {
+     "lam": "Hang a curtain or set a low shelf between door and bed; fit draught strips to cut wind and noise."
+    },
+    {
+     "lam": "When you renovate, change which way the door opens or where it sits so the bed isn't in the walkway."
+    }
+   ]
+  },
+  "wc_tren_bep": {
+   "tieu_de": "An upstairs bathroom above the kitchen",
+   "noi_dung": "Folk belief: a bathroom should not sit right above the stove or the altar, seen as 'uncleanliness pressing down on the cooking place'. In practice: the real concern is the waste pipe running through the kitchen ceiling — leaks, seepage, smells.",
+   "goi_y": "Check the kitchen ceiling for damp stains; the upstairs bathroom's drain pipe should be fully enclosed with an access panel for repairs. No need for demolition — keeping it dry and clean is what matters.",
+   "giai_thich_hien_dai": "A leaking drain pipe in the kitchen ceiling drips dirty water onto where you cook; damp turns the ceiling mouldy. Waterproofing the upstairs bathroom floor and checking the pipes regularly is enough.",
+   "viec": [
+    {
+     "lam": "Look for stains or damp on the kitchen ceiling; sniff for odd smells around the ceiling when the toilet upstairs is flushed."
+    },
+    {
+     "lam": "A plasterboard ceiling with an inspection hatch to check the pipes; replace the seals and sealant around the base of the upstairs toilet."
+    },
+    {
+     "lam": "Re-waterproof the upstairs bathroom floor; in a major renovation, run the drain down the wall instead of across the kitchen ceiling."
+    }
+   ]
+  },
+  "cay_trong_phong_ngu": {
+   "tieu_de": "Plants in the bedroom",
+   "noi_dung": "Folk belief: a bedroom should be calm with few large plants, since plants 'compete for qi' with the sleeper. In practice: a few small, easy-care pots are fine; big plants, damp soil and standing water in saucers are the real worry because of mould and mosquitoes.",
+   "goi_y": "Keep one or two small pots near the window, not right by the head of the bed; water just enough and don't let saucers hold standing water. If you are prone to pollen allergies, keep plants in the living room.",
+   "giai_thich_hien_dai": "Plants in a closed room at night don't use up any meaningful amount of air, but damp soil and water under the pot breed mould and mosquitoes; strongly scented flowers can make sleep harder.",
+   "viec": [
+    {
+     "lam": "Move pots away from the head of the bed; empty the saucers every day."
+    },
+    {
+     "lam": "Switch to small pots with drainage holes and a stand; choose plants that need little watering."
+    },
+    {
+     "lam": "If the bedroom is damp and gets little sun, add ventilation or a dehumidifier before bringing in plants."
+    }
+   ]
+  },
+  "gan_chua": {
+   "tieu_de": "A house near a pagoda, communal temple or church",
+   "noi_dung": "Folk belief: living right next to a pagoda, communal temple or church means qi is 'too still' or 'too crowded' for a home. In practice: what affects daily life is bells, loudspeakers, crowds on festival days and parking.",
+   "goi_y": "Before buying, visit on the full moon, the first day of the lunar month and festival days to gauge the noise and traffic. A front door that doesn't look straight at the gate gives more privacy; a curtain or light screening with plants is enough.",
+   "giai_thich_hien_dai": "Places of worship get crowded on their festival calendar: noise, incense smoke and cars parked by your door are real; ordinary days are quiet. Whether it suits you depends on your household's routine.",
+   "viec": [
+    {
+     "lam": "Ask the neighbours about the festival calendar and bell times; visit on a full-moon day before deciding to buy."
+    },
+    {
+     "lam": "Heavy curtains and well-sealed windows on the side facing the place of worship; a light row of plants in front."
+    },
+    {
+     "lam": "When you renovate, put bedrooms on the side away from the place of worship and fit soundproof doors."
+    }
+   ]
+  },
+  "cua_phong_doi_wc": {
+   "tieu_de": "Bedroom door facing the bathroom door",
+   "noi_dung": "Folk belief: a bedroom door looking straight at the bathroom door lets 'unclean qi' flow straight into the room. In practice: smells, damp and the sound of water from the bathroom get into the bedroom.",
+   "goi_y": "Always keep the bathroom door shut and run the extractor after use; hang a curtain or set a low shelf so the two doors don't look straight at each other. No need to swap rooms.",
+   "giai_thich_hien_dai": "Two facing doors make a straight draught: smells and damp from the bathroom reach the bedroom faster, and flushing at night wakes you more easily.",
+   "viec": [
+    {
+     "lam": "Close the bathroom door when not in use; open the bedroom window to air the room every morning."
+    },
+    {
+     "lam": "Fit an extractor fan and door seals to the bathroom; hang a curtain at the bedroom door."
+    },
+    {
+     "lam": "When you renovate, offset the bathroom door or add a small partition in the corridor."
+    }
+   ]
+  },
+  "bep_nuoc": {
+   "tieu_de": "Stove squeezed between the sink, fridge or washing machine",
+   "noi_dung": "Folk tradition calls this 'water and fire clashing': the stove (fire) right next to the sink, fridge or washing machine (water) is a poor match. In practice: water splashes onto the hob while you cook, heat makes the fridge work harder, and the cook has no room to stand.",
+   "goi_y": "Leave a stretch of worktop between the stove and the sink for prepping; keep the fridge and washing machine away from the side of the stove.",
+   "giai_thich_hien_dai": "A stove right by the sink means water and oil splash back and forth and the cook has nowhere to put things; a fridge next to the stove soaks up heat, uses more power and its seals wear out sooner. A gap between them is cleaner and easier to work with.",
+   "viec": [
+    {
+     "lam": "Clear a stretch of worktop between the stove and the sink for prepping; wipe around the stove after washing up."
+    },
+    {
+     "lam": "Fit a splash guard between the sink and the stove; move the fridge a little away from the side of the stove."
+    },
+    {
+     "lam": "When you refit the kitchen, order it fridge – sink – prep counter – stove; move the washing machine to a separate laundry area."
+    }
+   ]
+  },
+  "tranh_treo": {
+   "tieu_de": "Pictures and photos on the walls",
+   "noi_dung": "Folk belief: water pictures (waterfalls, rivers) should flow into the house and not hang behind the main seat; mountains or steady landscapes suit the wall behind a sofa or desk ('having support'); large photos or pictures over the bed should be hung securely and not be too heavy. In practice: a heavy picture above where you sit or sleep is a safety issue if it falls.",
+   "goi_y": "Behind the sofa, choose a steady landscape in calm colours; hang a waterfall picture on the wall facing the entrance with the water flowing into the house; for a wedding photo over the bed, choose a light frame, screwed in firmly or stood on a shelf.",
+   "giai_thich_hien_dai": "A seat with a solid wall and a calm picture behind it feels settled; a heavy picture right above your head at night makes many people uneasy, and it is dangerous if it falls.",
+   "viec": [
+    {
+     "lam": "Swap the pictures you already have: water pictures to the wall facing the door, mountains behind the chair; take heavy pictures down from above the bed."
+    },
+    {
+     "lam": "Switch to light frames and use load-rated hooks or a picture ledge instead of a single nail."
+    },
+    {
+     "lam": "When you renovate, keep a clear stretch of wall behind the sofa and desk, with picture lights."
+    }
+   ]
+  },
+  "dong_ho": {
+   "tieu_de": "Clocks in the house",
+   "noi_dung": "Folk belief: don't hang a clock right above the bed or directly facing it, nor facing the front door; repair or put away a broken clock. In practice: ticking and a glowing dial make sleep harder, and checking the time at night makes you anxious.",
+   "goi_y": "In the bedroom use a silent clock placed to the side, not hung facing you; in the living room hang it on a side wall, easy to see from your seat.",
+   "giai_thich_hien_dai": "A clock at eye level when lying down makes many people check the time over and over when they can't sleep, and the more anxious they get the more awake they are; steady ticking at night also makes sleep lighter.",
+   "viec": [
+    {
+     "lam": "Move the clock from the wall facing the bed to a side wall or another room; take the battery out of a broken clock."
+    },
+    {
+     "lam": "Switch to a silent sweep-hand clock with a soft-lit dial."
+    },
+    {
+     "lam": "When you renovate the bedroom, don't build a niche for a clock facing the bed; leave space on a side wall."
+    }
+   ]
+  },
+  "mau_son": {
+   "tieu_de": "Paint and tile colours by element",
+   "noi_dung": "Folk tradition picks colours by the element of your destiny: Metal suits white, grey and silver (its own element) plus yellow and earthy brown (Earth produces Metal); Wood suits green (its own) plus blue and black (Water produces Wood); Water suits blue and black (its own) plus white and grey (Metal produces Water); Fire suits red, pink and orange (its own) plus green (Wood produces Fire); Earth suits yellow and earthy brown (its own) plus red and orange (Fire produces Earth). Colour is a folk suggestion; it cannot change your luck.",
+   "goi_y": "Use your element's colours as accents (one feature wall, curtains, cushions) rather than painting the whole room; main walls are still best in light, soft colours so the home stays bright. Very dark floor tiles make a room feel stuffy and show dust — light or wood-tone floors are easier to live with.",
+   "giai_thich_hien_dai": "Wall and floor colours decide whether a room is bright or dim: light walls and a mid-tone floor make it feel spacious and save on lighting. Colours the occupants actually like matter just as much — using your element's colour in the details is enough.",
+   "viec": [
+    {
+     "lam": "Add your element's colours with what you have: cushions, a tablecloth, plant pots; clear away dark items from spots that lack light."
+    },
+    {
+     "lam": "Change curtains or a rug, or paint one feature wall in a colour that suits your element."
+    },
+    {
+     "lam": "When repainting or retiling, choose a fairly light floor and soft main walls, and keep your element's colour for small areas."
+    }
+   ]
+  },
+  "nen_thap": {
+   "tieu_de": "A floor lower than the street",
+   "noi_dung": "The old books see a floor sunk below the road in front as 'water pouring into the house', where qi can't gather. In practice, the clearest problem is heavy rain flooding in, a damp house and furniture at the foot of the walls wearing out fast.",
+   "goi_y": "Deal with water first: a raised threshold, a drain in front of the door, electrical items and valuables kept up high; raise the floor when you can.",
+   "giai_thich_hien_dai": "A house below the street takes rainwater and mud straight in; long-term damp makes walls mouldy and the air heavy — the discomfort is real, no need to talk about qi.",
+   "viec": [
+    {
+     "lam": "Keep electrical items, papers and valuables up off the floor; keep the drain in front of the door clear of rubbish."
+    },
+    {
+     "lam": "Fit a removable flood barrier at the door and a dehumidifier in rooms at floor level."
+    },
+    {
+     "lam": "Raise the floor or add a high step and a gutter in front of the house when you renovate."
+    }
+   ]
+  },
+  "nha_toi_am": {
+   "tieu_de": "A dark, damp, poorly lit house",
+   "noi_dung": "The old books value a house that is 'bright, dry and airy' — a dark, damp house leaves qi stagnant. In practice: no sun and damp mould make the air stuffy, wear out furniture and leave the occupants sluggish. This is the thing to fix before any question of direction.",
+   "goi_y": "Open up routes for light and air (a light well, windows, vents), fix leaks and damp walls first, then think about arrangement.",
+   "giai_thich_hien_dai": "Light and air decide whether a home is easy to live in: with enough sun it stays dry with little mould and needs fewer lights by day; dark, damp rooms leave people tired and reluctant to come home.",
+   "viec": [
+    {
+     "lam": "Open windows and vents every morning; clear things that block light along the middle of the house."
+    },
+    {
+     "lam": "Fit an extractor fan and a dehumidifier; use warm-white bright lighting in the middle of a narrow tube house."
+    },
+    {
+     "lam": "Add a light well or skylight in the middle of the house, fix leaks and damp-proof the walls when you renovate."
+    }
+   ]
+  },
+  "dat_meo": {
+   "tieu_de": "A misshapen or triangular plot",
+   "noi_dung": "The old books favour square plots that widen at the back; triangular plots with many sharp corners are seen as poor at holding qi. In practice: a misshapen plot is hard to fit square rooms on, sharp corners are wasted, and building costs more.",
+   "goi_y": "If you are weighing up a misshapen plot: sketch a floor plan to see how much usable square space is left; build a square block on the main part and use the sharp corners for a yard, garden or storage.",
+   "giai_thich_hien_dai": "Square rooms are easy to furnish and live in; a misshapen plot forces narrow, empty or awkward corners, so the usable value is lower than the area on the deed.",
+   "viec": [
+    {
+     "lam": "Sketch a floor plan on paper and shade the usable square part before you decide."
+    },
+    {
+     "lam": "Have someone draw two room layouts so you can compare the usable space."
+    },
+    {
+     "lam": "Build a square block on the main part of the plot; use the sharp corners as a yard, planter or storage."
+    }
+   ]
+  },
+  "goc_nhon": {
+   "tieu_de": "A sharp corner or wall edge of another building pointing at you",
+   "noi_dung": "Landform feng shui calls this 'corner sha': a corner, roof edge or outside wall edge pointing straight at a door or window. In practice: you always see a sharp edge thrusting towards you, which is uncomfortable over time; inside the house, sharp corners mean bumps and scrapes.",
+   "goi_y": "Block the straight view of the sharp corner with a curtain, a broad leafy plant or louvres; indoors, round off or pad cabinet and wall corners you often knock.",
+   "giai_thich_hien_dai": "A sharp edge right in your line of sight makes many people tense without knowing why; blocking part of the view is enough to feel easier. Sharp corners inside the house are simply easy to bump into.",
+   "viec": [
+    {
+     "lam": "Move your seat so it doesn't face the sharp corner head-on; draw a sheer curtain at that window."
+    },
+    {
+     "lam": "Place a broad leafy plant or a blind in front of the window facing the sharp corner; pad cabinet corners indoors."
+    },
+    {
+     "lam": "Add louvres or a hedge in front when you renovate the facade."
+    }
+   ]
+  },
+  "nha_cu_mua_lai": {
+   "tieu_de": "An older house bought second-hand, before moving in",
+   "noi_dung": "Folk custom: before moving into an older house people usually clean it thoroughly, repair and repaint, open it up to air, then choose a day to move in and light incense to announce themselves, following family custom. In practice: this is the time to check wiring, plumbing, waterproofing and termites — easiest while the house is empty.",
+   "goi_y": "Work in order: check electrics, plumbing, leaks and termites; repair, repaint and clean thoroughly; air the house for a few days; then move your things in and hold any ceremony your family follows.",
+   "giai_thich_hien_dai": "A house someone else lived in for years often has hidden faults: old wiring, leaking pipes, damp walls. Fixing them while the house is empty is cheaper and more reassuring; a deep clean that clears the old smell also helps it feel like 'your' home.",
+   "viec": [
+    {
+     "lam": "Open every door and window for several days and clear out what the previous owners left; list what needs fixing."
+    },
+    {
+     "lam": "Change the locks, check and replace old sockets and taps; treat for termites."
+    },
+    {
+     "lam": "Rewire, waterproof and repaint throughout before moving your things in."
+    }
+   ]
+  },
+  "phong_tren_khoang_trong": {
+   "tieu_de": "A bedroom above a garage or an empty space",
+   "noi_dung": "Folk belief: a bedroom over a garage, bike store or an empty space where nobody lives has 'no solid ground beneath it'. In practice: the floor above a garage is often cold, smells of fuel, and cars coming and going early or late break your sleep.",
+   "goi_y": "Soundproof and insulate the bedroom floor, keep the garage ventilated, and don't leave engines running in it; if you have a choice, light sleepers should take another room.",
+   "giai_thich_hien_dai": "The roller door, engines and exhaust fumes from the garage travel straight up to the room above; a floor with no warm room beneath it is cold underfoot at night.",
+   "viec": [
+    {
+     "lam": "Don't leave the engine running in the garage; open the garage door to let fumes clear before closing it."
+    },
+    {
+     "lam": "Lay a thick rug and rubber pads under the bed legs to cut noise; seal the door between the house and the garage."
+    },
+    {
+     "lam": "Fit a soundproof, insulated garage ceiling and an extractor fan in the garage when you renovate."
+    }
+   ]
+  },
+  "cau_thang_cua_phong": {
+   "tieu_de": "Stairs running straight at a bedroom door",
+   "noi_dung": "Folk belief: the foot or top of the stairs pointing straight at a bedroom door means 'qi rushes into the room'. In practice: the shared walkway ends right at the door, footsteps and landing light get in, and opening the door you bump into people on the stairs.",
+   "goi_y": "Close the bedroom door when you sleep; keep the bed off the line of the door; hang a curtain or screen just inside the door to block the view from the stairs.",
+   "giai_thich_hien_dai": "A bedroom door right at the top of the stairs is the busiest spot in the house; whoever is inside is disturbed and loses a sense of privacy.",
+   "viec": [
+    {
+     "lam": "Close the door when resting and move the bed off the straight line from the door."
+    },
+    {
+     "lam": "Hang a curtain or set a small screen inside the door; fit seals to cut noise."
+    },
+    {
+     "lam": "When you renovate, change which way the bedroom door opens or move it back from the top of the stairs."
+    }
+   ]
+  },
+  "duong_lon_on": {
+   "tieu_de": "A house right by a main road or motorway, with constant noise",
+   "noi_dung": "The old books say a house by a busy road with fast traffic has 'hurried qi' and struggles to stay calm. In practice: noise, dust and vibration are the biggest issues, especially for bedrooms facing the road.",
+   "goi_y": "Put bedrooms and the study at the back, away from the road; use double glazing, heavy curtains and a row of plants to cut dust on the street side.",
+   "giai_thich_hien_dai": "Constant noise makes sleep lighter and people more irritable even once they are used to it; road dust settles in the house fast. Cutting noise in the bedroom is the most worthwhile investment.",
+   "viec": [
+    {
+     "lam": "Move the bedroom to the back of the house if you can; close street-facing windows at rush hour."
+    },
+    {
+     "lam": "Acoustic curtains, door seals and earplugs at night; dense leafy plants on the front balcony."
+    },
+    {
+     "lam": "Fit double glazing on the street side and soundproof the bedroom walls when you renovate."
+    }
+   ]
+  }
+ },
+ "am_trach": {
+  "long_mach": {
+   "tieu_de": "The Book of Burial on dragon veins",
+   "noi_dung": "The Book of Burial (Guo Pu): 'qi rides the wind and scatters, meets water and stops' — choose a place that shelters from wind and gathers water."
+  },
+  "dat_mo": {
+   "tieu_de": "Choosing a burial site",
+   "noi_dung": "The classics look at the lie of the land (support behind, shelter from wind, water curving round), dry ground, no subsidence. In practice: follow the cemetery's planning rules and local procedures."
+  },
+  "anh_huong": {
+   "tieu_de": "Graves and descendants",
+   "noi_dung": "The Book of Burial's idea of 'resonance of shared qi' holds that graves affect descendants; this is a cultural belief that cannot be verified. We never attribute anyone's luck to a grave."
+  }
+ },
+ "giai_thich": {
+  "bat_trach": {
+   "tieu_de": "What is Eight Mansions?",
+   "noi_dung": "A method that sorts houses and people into 8 trigrams (East group: Kan, Li, Zhen, Xun; West group: Qian, Kun, Gen, Dui); each person has 4 good directions (Sheng Qi, Tian Yi, Yan Nian, Fu Wei) and 4 weaker ones. Foundation: The Three Essentials of Yang Dwellings."
+  },
+  "loan_dau_ly_khi": {
+   "tieu_de": "Form and Compass School",
+   "noi_dung": "The Form School looks at the real landscape (hills, water, roads, surrounding buildings); the Compass School looks at direction and time (Eight Mansions, Flying Stars). The ancients treated form as the root: 'form is the body, compass theory is the use'."
+  },
+  "huyen_khong": {
+   "tieu_de": "Flying Stars (Xuan Kong)",
+   "noi_dung": "A school that tracks 9 stars moving through 20-year periods and through each year; here we only calculate the annual star (5 Yellow) for reference and do not yet chart a house's period star chart."
+  },
+  "cung_phi_menh": {
+   "tieu_de": "Kua number is not the same as your element",
+   "noi_dung": "The Kua number (destiny trigram) is used for Eight Mansions and comes from your birth year and sex; your Na Yin element (for example 'Roadside Earth') is a different system and is not used to choose directions in Eight Mansions."
+  },
+  "tam_yeu": {
+   "tieu_de": "The Three Essentials of Yang Dwellings",
+   "noi_dung": "A book by Zhao Jiufeng (Qing dynasty): the three key elements of a home are the Door, the Master room (main bedroom) and the Stove; it looks at the Eight Mansions relation between them."
+  },
+  "khoa_hoc": {
+   "tieu_de": "Is feng shui scientific?",
+   "noi_dung": "Much of the Form School overlaps with architecture (light, air, damp, safety). The Compass School (directions by birth year, annual stars) is a cultural system that has not been scientifically verified."
+  },
+  "la_ban": {
+   "tieu_de": "Measuring direction with your phone",
+   "noi_dung": "A phone compass is easily thrown off by metal, magnets and steel in the walls; stand outside the door, away from cars and metal posts, take several readings, and allow for magnetic declination."
+  },
+  "vo_chong_khac_menh": {
+   "tieu_de": "A couple in different East/West groups",
+   "noi_dung": "The common approach: the door or house direction follows the main earner (usually the person on the deed or carrying the finances), while bedrooms, the head of the bed and desks follow each person. No arrangement suits both perfectly."
+  },
+  "ngu_hoang": {
+   "tieu_de": "The 5 Yellow star and the year you renovate",
+   "noi_dung": "In Flying Stars, the sector holding the 5 Yellow star (5) that year is one to avoid breaking ground or major demolition; the Grand Duke (Tai Sui) and Three Killings sectors are also avoided. This is a traditional convention, for reference."
+  },
+  "tuoi_lam_nha": {
+   "tieu_de": "Age for building a house (Kim Lau, Hoang Oc, Tam Tai)",
+   "noi_dung": "Vietnamese folk belief: avoid building a house in a Kim Lau year (lunar age divided by 9 leaves 1, 3, 6 or 8), an unlucky Hoang Oc year (Tam Dia Sat, Ngu Tho Tu, Luc Hoang Oc) or a Tam Tai year. This is not in the classical feng shui books; many families 'borrow the age' of another person."
+  },
+  "quai_huong": {
+   "tieu_de": "Directions and trigrams",
+   "noi_dung": "The eight directions match eight trigrams: North–Kan, North-East–Gen, East–Zhen, South-East–Xun, South–Li, South-West–Kun, West–Dui, North-West–Qian. The house trigram comes from the SITTING direction (opposite the facing)."
+  },
+  "dong_tay_tu_menh": {
+   "tieu_de": "Which directions suit the East group and the West group?",
+   "noi_dung": "In Eight Mansions, the East group (Kan, Li, Zhen, Xun) suits North, South, East and South-East; the West group (Qian, Kun, Gen, Dui) suits West, North-West, South-West and North-East. Within each group every trigram has its own order Sheng Qi → Tian Yi → Yan Nian → Fu Wei, so your birth year and sex are needed to know which direction is best for each person."
+  }
+ },
+ "mau": {
+  "can_nam_sinh": "To see which directions suit you we need your birth year and sex (ideally your full date of birth, since the Kua year turns at Li Chun, the Start of Spring, around 4 February).",
+  "hop": "For a couple we need both people's birth years and sexes. When two people are in different East/West groups, we show how to split directions person by person rather than choosing for you.",
+  "tu_choi_vat_pham": "We do not recommend objects to 'cure', 'attract wealth' or charms of any kind."
+ },
+ "luu_y": {
+  "bat_trach": "Eight Mansions is one school of Compass feng shui; feng shui here is cultural reference. Light, ventilation, safety and the occupants' needs matter more than direction.",
+  "dan_gian": "This item is a common folk belief, not a rule in the classical books — the practical reasons are given so you can weigh it yourself.",
+  "nam": "Annual stars and building-age rules are traditional conventions; don't put off necessary work (safety repairs) because of them.",
+  "am_trach": "Grave feng shui is a cultural belief; we never attribute anyone's luck to a grave.",
+  "vat_treo": "Mirrors, wind chimes or bagua plaques hung by the door: treat them as decoration and as a screen for the view — we don't class anything as a 'cure', and there is nothing you need to buy for a peaceful home. A mirror aimed straight at the house opposite easily causes friction with neighbours; taking it down lightens the doorway and the mood."
+ },
+ "bo_cuc": {
+  "vi_tri_phong": {
+   "cua_chinh": {
+    "tieu_de": "The front door (door)",
+    "noi_dung": "The Three Essentials of Yang Dwellings treats the door as one of the three key elements of a home: it should open in a good direction, Sheng Qi being the most favoured.",
+    "thuc_te": "The door welcomes people and light; just as important is a clear, unblocked entrance."
+   },
+   "phong_ngu_chinh": {
+    "tieu_de": "Main bedroom of the head of the household (master)",
+    "noi_dung": "The main earner's room should be in that person's own good direction: Tian Yi for health, Yan Nian for the couple, Sheng Qi for vitality.",
+    "thuc_te": "A bedroom needs quiet, enough darkness and ventilation; away from the kitchen and bathroom."
+   },
+   "bep": {
+    "tieu_de": "The stove",
+    "noi_dung": "The 'sit on the weak, face the good' principle: the body of the stove sits in a weak direction to 'press down' bad qi, while its control side faces a good direction.",
+    "thuc_te": "The kitchen needs ventilation, away from the front entrance and not against the bathroom."
+   },
+   "ve_sinh": {
+    "tieu_de": "Bathroom",
+    "noi_dung": "The common Eight Mansions view: put the bathroom in a weak direction, avoid the centre and avoid the Sheng Qi and Fu Wei directions.",
+    "thuc_te": "Most important is that it is dry, airy and kept shut; it should not open straight onto the kitchen or dining room."
+   },
+   "ban_tho": {
+    "tieu_de": "Family altar",
+    "noi_dung": "Many families place the altar in a good direction for the head of the household, backed by a solid wall, not facing a bathroom or under a beam.",
+    "thuc_te": "A dignified, quiet, clean spot is enough — there is no 'required' position."
+   },
+   "phong_lam_viec": {
+    "tieu_de": "Study or work corner",
+    "noi_dung": "Eight Mansions often picks the Sheng Qi (career) or Fu Wei (stability, focus) direction of the person working there.",
+    "thuc_te": "Natural light from the side, back to a wall, the entrance in view."
+   }
+  },
+  "huong_vat": {
+   "mieng_bep": {
+    "tieu_de": "Stove control side",
+    "noi_dung": "The control side of the stove (the way the cook faces) should point to a good direction — the 'face the good' in 'sit on the weak, face the good'."
+   },
+   "dau_giuong": {
+    "tieu_de": "Head of the bed",
+    "noi_dung": "The head of the bed (where the top of your head points when lying down) should face the sleeper's good direction."
+   },
+   "ban_lam_viec": {
+    "tieu_de": "Facing direction at your desk",
+    "noi_dung": "The way you face when working should be a good direction, ideally Sheng Qi or Fu Wei."
+   }
+  },
+  "tu_soi": [
+   "Which spot in the house do you find most uncomfortable (dark, stuffy, noisy, cluttered)? Does it match one of the points above?",
+   "If you could fix only one spot this month, which would make daily life easier for the whole household?",
+   "What do you most want from your home — rest, family time or work? How well does the current layout serve that?"
+  ],
+  "luu_y": "Feng shui here is a cultural lens for arranging the home more sensibly: fix the layout first (turn the bed, move the desk, improve airflow) — we don't recommend objects to 'cure' anything and we don't pronounce good or bad luck for health or money."
+ },
+ "quy_tac_thuc_hanh": {
+  "moc_lap_xuan": {
+   "tieu_de": "The feng shui year turns at Li Chun (Start of Spring)",
+   "noi_dung": "Annual stars, Flying Star periods and the BaZi year turn at the hour of Li Chun (around 3–5 February), not on the first day of Tet or 1 January. The Kua number also uses Li Chun by default; for the folk Tet-based count, the 'Start of year' switch lets you compare."
+  },
+  "hanh_lang_chung_cu": {
+   "tieu_de": "Apartments: deal with things inside your own door",
+   "noi_dung": "Narrow apartment corridors with doors facing doors are normal. Everything you do stays inside your own door: curtains, an entrance screen, frosted film, plants. Don't hang mirrors, pointed objects or anything aimed at your neighbour's door — it causes ill feeling and breaks building rules."
+  },
+  "khong_dap_ket_cau": {
+   "tieu_de": "Apartments: don't break beams or move service shafts",
+   "noi_dung": "Concrete beams and bathroom service shafts belong to the building's shared structure. There is no advice to 'knock out the bathroom and move it to another corner' or to 'cut the beam'. What you can do: shift the bed and desk, change which way the bathroom door opens, an extractor fan, a rounded plasterboard ceiling."
+  },
+  "dao_bep_khong_phai_bep": {
+   "tieu_de": "A kitchen island is not a stove",
+   "noi_dung": "Only a heat-producing cooktop (induction or gas) counts as the 'stove' when looking at stove direction or a stove facing the door. A dry island or bar counter doesn't count — it is actually a very good screen for the stove."
+  },
+  "ban_tho_gio": {
+   "tieu_de": "The altar and airflow from air conditioning or fans",
+   "noi_dung": "As well as not backing onto a bathroom wall and not sitting under a beam, an apartment altar should be out of the airflow of air conditioning or a ceiling fan blowing straight at the incense bowl (flame flickering, ash flying). An air deflector on the indoor unit is enough."
+  },
+  "nuoc_van_9": {
+   "tieu_de": "Period 9: don't add fish tanks or water features at random",
+   "noi_dung": "In Period 9 (2024–2043) the 9 Purple star is in charge, but water (a fish tank, a water feature) belongs only in the sector with the FACING star 9. Sectors with the MOUNTAIN star 9 (which wants stillness, not movement), or with stars 5 or 2 together, should have no water and no blazing red lights — keep them calm and clean."
+  },
+  "sua_nha_sua_thoi_quen": {
+   "tieu_de": "Fix the house or fix the habit?",
+   "noi_dung": "Much of what feels uncomfortable at home comes from how it is used (clutter, stuffiness, things blocking the way), not from direction. The reading always separates two groups: jobs for the house (rearranging, repairs) and jobs for habits (tidying, closing doors, routines). We don't match Flying Stars with numerology numbers — the classics give no bridge between the two systems; other areas are only suggested through shared intentions."
+  }
+ },
+ "mau_an_toan": "The old books link this pair of stars with {thu} — this is a reminder to look after your home with care, not a forecast.",
+ "_nguon": "Editorial draft drawing on The Three Essentials of Yang Dwellings, The Book of Burial and The Classic of Moving the Dragon (general knowledge), with folk beliefs labelled as such; not yet checked against the original texts."
+}

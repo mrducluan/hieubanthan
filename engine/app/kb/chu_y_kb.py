@@ -43,8 +43,41 @@ def viec(ma: str, hien_tai: bool = False) -> str:
     return (m.get("viec_nay") if hien_tai else None) or m.get("viec") or ""
 
 
-def ranh_gioi(ma: str) -> str:
-    return mang(ma).get("ranh_gioi") or ""
+def de_y(ma: str, theo: str | None = None) -> str:
+    """CY-2: điều nên để ý của mảng (một vế, không dấu chấm cuối) — lời hai mặt của hỏi đáp. `theo`: tình huống cụ thể
+    trong mảng (`de_y_theo`: mở quán / kinh doanh trong mảng công việc, nhân viên trong mảng người cùng làm ăn)."""
+    m = mang(ma)
+    return ((m.get("de_y_theo") or {}).get(theo) if theo else None) or m.get("de_y") or ""
+
+
+def pt_bo_tri(ma: str) -> str:
+    """CY-2: một gợi ý bố trí trong nhà cho câu hỏi Phong thuỷ không về nhà (bàn làm việc, góc học, cửa…)."""
+    return mang(ma).get("pt_bo_tri") or ""
+
+
+def viec_ds(ma: str, con: bool = False, theo: str | None = None) -> list[str]:
+    """CY-2: danh sách việc cụ thể (người cùng làm ăn, kỳ thi…) — chọn vài việc cho đoạn trả lời. `con`: bản việc cha mẹ
+    làm cùng con (`viec_ds_con`), không có thì bản thường; `theo`: tình huống cụ thể (`viec_ds_theo`)."""
+    m = mang(ma)
+    ds = ((m.get("viec_ds_theo") or {}).get(theo) if theo else None) or (m.get("viec_ds_con") if con else None) \
+        or m.get("viec_ds") or []
+    return [x for x in ds if isinstance(x, str)]
+
+
+def sang_chung(ma: str, con: bool = False) -> str:
+    """CY-3: điểm sáng chung của mảng (lời không đoán, không nêu dữ kiện) — chỉ dùng khi gói bằng chứng không có điểm sáng."""
+    m = mang(ma)
+    return (m.get("sang_chung_con") if con else None) or m.get("sang_chung") or ""
+
+
+def ten_con(ma: str) -> str:
+    """CY-3: tên mảng khi điều được hỏi là của con ("chuyện học hành, thi cử của con")."""
+    return mang(ma).get("ten_con") or ten(ma)
+
+
+def ranh_gioi(ma: str, theo: str | None = None) -> str:
+    m = mang(ma)
+    return ((m.get("ranh_gioi_theo") or {}).get(theo) if theo else None) or m.get("ranh_gioi") or ""
 
 
 def theo_mon(ma: str, mon: str) -> dict:

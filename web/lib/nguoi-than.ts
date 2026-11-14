@@ -22,6 +22,7 @@ export const TEN_QUAN_HE: Record<MaQuanHe, string> = {
 /** Câu cam kết lưu trữ — lời hứa về hệ thống (như "Chữ dùng chung" quy định: câu cam kết dữ liệu giữ trong code, đổi bằng PR
  *  cùng Chính sách quyền riêng tư). */
 export const CAM_KET_NGUOI_THAN = "Chỉ lưu trên máy này, không gửi lên tài khoản. Xoá bất cứ lúc nào.";
+export const CAM_KET_NGUOI_THAN_EN = "Stored only on this device, never sent to an account. Delete it any time.";
 
 const Dau = z.object({
   /** Tên gọi / biệt danh tuỳ chọn — để người dùng tự nhận ra ("Mẹ", "Bé Na"); không cần họ tên đầy đủ. */
@@ -38,6 +39,8 @@ const Dau = z.object({
   do_tin_gio: z.enum(["exact", "unknown"]).optional(),
   gioi_tinh: HoSo.shape.gioi_tinh,
   noi_sinh: HoSo.shape.noi_sinh,
+  /** EN-ALL GĐ 4: mã thành phố (sinh ở nước ngoài) — engine tự suy múi giờ / giờ mùa hè lúc sinh, như hồ sơ chính. */
+  mui_gio: HoSo.shape.mui_gio,
   vung: HoSo.shape.vung,
   lich_am: HoSo.shape.lich_am,
 });
@@ -158,6 +161,7 @@ export function laSoNguoiThan(nt: NguoiThan | null | undefined): ChartInputVao |
     birth_date: iso(nt), birth_time: khongBiet ? GIO_DAI_DIEN_KHONG_BIET : nt.gio!, gender: nt.gioi_tinh!, noi_sinh: nt.noi_sinh!,
     ...(nt.lich_nhap === "am" ? { calendar_type: "am" as const, ...(nt.am_nhuan ? { am_nhuan: true } : {}) } : {}),
     ...(nt.noi_sinh !== NUOC_NGOAI && nt.vung ? { vung: nt.vung } : {}),
+    ...(nt.noi_sinh === NUOC_NGOAI && nt.mui_gio ? { mui_gio: nt.mui_gio } : {}),
     ...(khongBiet ? { do_tin_gio: "unknown" as const } : {}),
   };
 }
