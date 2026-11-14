@@ -68,7 +68,7 @@ export function ChonHao({ giaTri, onChange }: {
   const du = vals.filter((v) => v != null).length;
 
   return (
-    <div className="rounded-xl border border-line/70 bg-bg/30 p-3 sm:col-span-2" data-testid="chon-hao">
+    <div className="min-w-0 rounded-xl border border-line/70 bg-bg/30 p-3 sm:col-span-2" data-testid="chon-hao">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <p className="text-sm font-medium text-fg">{c("ch.tieu_de")}<span className="text-xs font-normal text-fg-faint">{c("ch.dem", { du: String(du) })}</span></p>
         <p className="text-xs text-fg-faint"><ChuB chu={c("ch.huong_dan")} lop="text-gold" /></p>
@@ -82,7 +82,7 @@ export function ChonHao({ giaTri, onChange }: {
               <li key={hao} onClick={() => setHangDang(hao)}
                 className={cn("cursor-pointer rounded-lg px-1.5 py-1", dang && "bg-gold/[0.06] ring-1 ring-gold/30")} data-testid={`chon-hao-${hao + 1}`} data-gia-tri={v ?? ""} data-dang={dang ? 1 : 0}>
                 <div className="flex min-h-10 items-center gap-2">
-                  <button type="button" onClick={() => setHangDang(hao)} className="w-14 shrink-0 text-left text-xs text-fg-faint hover:text-fg" aria-label={c("ch.aria_lan", { n: String(hao + 1) })}>
+                  <button type="button" onClick={() => setHangDang(hao)} className="w-12 shrink-0 text-left text-xs text-fg-faint hover:text-fg" aria-label={c("ch.aria_lan", { n: String(hao + 1) })}>
                     {c("ch.lan", { n: String(hao + 1) })}
                   </button>
                   <span className="flex items-center gap-1">
@@ -90,13 +90,13 @@ export function ChonHao({ giaTri, onChange }: {
                       <DongXu key={i} ngua={x ? x[i]! : false} mo={!x} hao={hao + 1} thuTu={i + 1} pressed={!!x && !!x[i]} onClick={() => latXu(hao, i)} />
                     ))}
                   </span>
-                  <VachHao v={v} className="hidden min-[360px]:flex" />
+                  <VachHao v={v} className="hidden sm:flex" />
                   <span className={cn("min-w-0 flex-1 truncate text-xs", v == null ? "text-fg-faint" : v === 6 || v === 9 ? "text-gold" : "text-fg-muted")}>
                     {v == null ? c("ch.chua_chon") : nhanHao(v).ten}
                   </span>
                 </div>
                 {dang && (
-                  <div className="mt-1 flex flex-wrap gap-1 pl-14" role="group" aria-label={c("ch.aria_kieu", { n: String(hao + 1) })}>
+                  <div className="mt-1 flex flex-wrap gap-1 pl-12" role="group" aria-label={c("ch.aria_kieu", { n: String(hao + 1) })}>
                     {GIA_TRI_HAO.map((g) => (
                       <button key={g} type="button" onClick={(e) => { e.stopPropagation(); chonNhanh(hao, g); }} aria-pressed={v === g} data-testid={`hao-${hao + 1}-${g}`}
                         title={nhanHao(g).mo_ta}

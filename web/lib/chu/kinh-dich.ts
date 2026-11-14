@@ -96,7 +96,7 @@ export const CHU_KINH_DICH_UI = {
   "cg.tot_1": m(CG, "“Tôi có nên nhận vị trí quản lý trong quý này không?”", "“Should I take the manager position this quarter?”"),
   "cg.chua_1": m(CG, "“Đời tôi sau này thế nào?” (quá rộng, quẻ không soi được)", "“How will my life turn out?” (too broad for one hexagram)"),
   "cg.tot_2": m(CG, "“Chuyển sang công ty B trong tháng tới thì việc có thuận không?”", "“Would moving to company B next month go smoothly?”"),
-  "cg.chua_2": m(CG, "“Nên chuyển việc hay ở lại hay mở quán?” (ba việc trong một quẻ)", "“Should I change jobs, stay, or open a café?” (three matters in one hexagram)"),
+  "cg.chua_2": m(CG, "“Nên chuyển việc hay ở lại hay mở quán?” (ba việc trong một quẻ)", "“Should I change jobs, stay, or open a shop?” (three matters in one hexagram)"),
   "cg.tot_3": m(CG, "“Nói chuyện lại với người bạn cũ cuối tuần này có hợp lúc không?”", "“Is this weekend a good time to talk to my old friend again?”"),
   "cg.chua_3": m(CG, "Câu hỏi có/không về sống chết, bệnh tật, trúng số — quẻ không trả lời và hệ thống sẽ từ chối", "Yes/no questions about life and death, illness or winning the lottery — the hexagram does not answer these and the page will decline"),
   "cg.cuoi": m(CG, "Một quẻ cho một việc. Chọn chip chủ đề ở trên để máy tính toán chốt đúng góc nhìn trước khi gieo; hỏi lại cùng việc trong vài tuần thì nên đọc kỹ quẻ cũ (có trong “Quẻ đã gieo”) thay vì gieo lại.", "One hexagram for one matter. Pick a topic above so the reading takes the right angle before casting; if you ask about the same matter within a few weeks, reread the earlier hexagram (in “Hexagrams you've cast”) instead of casting again."),
