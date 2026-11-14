@@ -590,7 +590,8 @@ _GOI_Y_VI = {
     "vat_pham": "Không cần mua vật phẩm hay làm lễ để đổi vận — nên giữ tiền cho việc chính và tránh các khoản may rủi.",
 }
 _GOI_Y_NHOM_VI = [
-    ("thai", r"thai nhi|co thai|co bau|mang thai|mang bau|dinh bau|trong bung|trai hay (con )?gai|gai hay (con )?trai|sieu am"),
+    ("thai", r"thai nhi|co thai|co bau|mang thai|mang bau|dinh bau|trong bung|trai hay (con )?gai|gai hay (con )?trai|sieu am"
+             r"|say thai|thai luu|sinh non|de non|thai (nay|do|lan nay)"),
     ("thuoc_mo", r"(bo|ngung|dung|doi) (uong )?thuoc|thuoc nam|hoa tri|xa tri|phau thuat|(nen|co nen) mo|mo hay|chay than"),
     ("nguoi_than_benh", r"(bo|me|ba|ong|cha|chong|vo|con|chau|anh|chi|em)( noi| ngoai| gai| trai)? (toi|em|minh|nha toi)(?!\w)"
                         r".{0,40}(qua khoi|song duoc|con bao lau|song them|di (khong|ko)|mat (khong|ko))"),
@@ -599,6 +600,7 @@ _GOI_Y_NHOM_VI = [
     ("nguoi_khac", r"(xem|doc|soi) (tuong|mat|la so|so) (cua |cho |giup )?(nguoi|anh ay|co ay|chong|vo|sep|dong nghiep|ban)"),
     ("xep_hang", r"ai trung thuc|ai (gian|lua|phan boi|dang tin)|nhan vien nao .{0,20}(trung thuc|gian|dang tin)"),
     ("tuyen_dung", r"tuyen (ung vien|nhan vien|nguoi|ke toan|nhan su|thu ky)|ung vien|sa thai|(chon|giu|loai) nhan vien|nen tuyen"
+                   r"|duoi viec|cho (nhan vien|nguoi lam|ke toan|tro ly|thu ky|giup viec|tho)(?!\w).{0,30}nghi"
                    r"|tuoi nao .{0,25}(lam|vao lam) (nhan vien|ke toan|thu ky|tro ly|quan ly)"),
     ("dau_tu", r"gia (vang|dat|nha|xang|dola|do la|usd|bitcoin|coin)|chung khoan|co phieu|tien ao|bitcoin|crypto|ma (co phieu|nao tang)"),
     ("so_con_ten", r"may (dua )?con|bao nhieu (dua )?con|ten (gi|la gi)|(ten|chu cai) (cua )?(chong|vo|nguoi yeu) (tuong lai|sau nay)"),
@@ -637,7 +639,9 @@ def goi_y_tu_choi(raw: str, loai: str | None) -> str:
     t = chuan_hoa(raw or "")
     if re.search(r"vat pham|linh vat|(?<!\w)bua (may|hoa|tai|loc)|giai han|cung sao|talisman|amulet|lucky charm|crystals? (?:to|for)", t):
         return L("tu_choi.goi_y.vat_pham", _GOI_Y_VI["vat_pham"])   # hỏi vật phẩm → nói rõ không cần mua, trước lời may rủi
-    if loai == "may_rui" or re.search(r"(xo so|ve so|lo de|danh de|so de|ca do|ca cuoc|danh lo|so lo)", t):
+    if loai == "tuyen_dung":                 # trước lời may rủi: "chọn nhân viên tuổi nào theo lá số để tuyển"
+        return L("tu_choi.goi_y.tuyen_dung", _GOI_Y_VI["tuyen_dung"])
+    if loai == "may_rui" or re.search(r"(xo so|ve so|lo de|danh de|ca do|ca cuoc|danh lo)", t) or _at.so_de(raw or ""):
         return kb.mau("may_rui")
     en = _at._la_en(raw or "")
     k = _at._sua_en(_at._hai_ban(raw or "")[1]) if en else t

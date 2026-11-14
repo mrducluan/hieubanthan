@@ -121,8 +121,140 @@ KHUNG_HOANG: list[tuple[str, str | None]] = [
      r"(mẹ|bố|con|chồng|vợ|ông|bà|anh|chị|em) (tôi |mình |em )?vừa mất(?! việc| tiền| tích| ngủ| điện| nước)"),
 ]
 
+# CY-2 review 2 (2026-11-14): khủng hoảng gián tiếp tiếng Việt lọt trong khi câu Anh cùng nghĩa đã bắt — bộ câu song ngữ
+# `fixtures/cau_hoi/an_toan_song_ngu.json`. Viết theo NGHĨA (mọi người / gia đình nhẹ nhõm hơn khi không có mình; ngủ không
+# tỉnh lại; nhảy từ chỗ cao; thư tuyệt mệnh; gom thuốc; người thân đánh / ép; tự làm đau; vĩnh biệt…), không chép câu thử.
+_AI_KD2 = r"(toi|em|minh|con|tao|tui|to)"
+_AI2 = r"(tôi|em|mình|con|tao|tui|tớ)"
+_HO_KD = (r"(moi nguoi|ca nha|gia dinh|bo me|cha me|vo con|chong con|con cai|nguoi than|ai cung|tat ca|the gioi|ban be|nguoi ta"
+          r"|ho)( toi| minh| em| tao)?")
+_HO_CD = (r"(mọi người|cả nhà|gia đình|bố mẹ|cha mẹ|vợ con|chồng con|con cái|người thân|ai cũng|tất cả|thế giới|bạn bè|người ta"
+          r"|họ)( tôi| mình| em| tao)?")
+_HON_KD = (r"(se |chac |chac chan |co le |cung )*(song )?(vui|tot|on|nhe nhom|nhe nhang|nhe ganh|de tho|thanh than|hanh phuc"
+           r"|sung suong|thoai mai|de chiu|yen on|bot kho|do kho|do vat va|bot ganh nang|bot met) hon")
+_HON_CD = (r"(sẽ |chắc |chắc chắn |có lẽ |cũng )*(sống )?(vui|tốt|ổn|nhẹ nhõm|nhẹ nhàng|nhẹ gánh|dễ thở|thanh thản|hạnh phúc"
+           r"|sung sướng|thoải mái|dễ chịu|yên ổn|bớt khổ|đỡ khổ|đỡ vất vả|bớt gánh nặng|bớt mệt) hơn")
+_VANG_KD = (r"(neu|khi|mot khi|ma) (khong co|khong con|thieu|vang) " + _AI_KD2 + r"( nua| tren doi| tren the gioi| o doi nay)?" + _H
+            + r"|(neu|khi|mot khi) " + _AI_KD2 + r" (khong con|bien mat|chet|ra di|di roi|khong ton tai|khong con song|khong song nua)")
+_VANG_CD = (r"(nếu|khi|một khi|mà) (không có|không còn|thiếu|vắng) " + _AI2 + r"( nữa| trên đời| trên thế giới| ở đời này)?" + _H
+            + r"|(nếu|khi|một khi) " + _AI2 + r" (không còn|biến mất|chết|ra đi|đi rồi|không tồn tại|không còn sống|không sống nữa)")
+KHUNG_HOANG += [
+    # mọi người / gia đình sẽ tốt hơn nếu không có tôi (cả thứ tự đảo)
+    (_HO_KD + r" " + _HON_KD + r" (" + _VANG_KD + r")", _HO_CD + r" " + _HON_CD + r" (" + _VANG_CD + r")"),
+    (r"(khong co|thieu|vang) " + _AI_KD2 + r"( nua| tren doi)? (thi )?" + _HO_KD + r" " + _HON_KD
+     + r"|" + _AI_KD2 + r" (di|chet|bien mat|ra di|khong con)( roi| di| mat)? (thi )?(chac )?" + _HO_KD + r" " + _HON_KD,
+     r"(không có|thiếu|vắng) " + _AI2 + r"( nữa| trên đời)? (thì )?" + _HO_CD + r" " + _HON_CD
+     + r"|" + _AI2 + r" (đi|chết|biến mất|ra đi|không còn)( rồi| đi| mất)? (thì )?(chắc )?" + _HO_CD + r" " + _HON_CD),
+    # chẳng ai để ý / quan tâm nếu tôi biến mất (cả thứ tự đảo)
+    (r"(chang|khong|cung chang|cung khong) (ai|co ai) (de y|quan tam|nho|buon|can|nhan ra|biet)( den| toi)?( " + _AI_KD2
+     + r")? (neu|khi|du) " + _AI_KD2 + r" (bien mat|chet|khong con|ra di|mat di)"
+     + r"|(bien mat|chet|khong con|ra di|mat di)( di)? (thi )?(cung|thi cung) (chang|khong) (ai|co ai) (de y|quan tam|buon|nho|can|biet)"
+     + r"|(khong co|thieu) " + _AI_KD2 + r" (thi )?(cung )?(chang|khong) (ai|co ai) (de y|quan tam|buon|nho|can|biet)", None),
+    # ngủ không tỉnh lại (có mong muốn đứng trước), ngủ một giấc thật dài không tỉnh lại
+    (r"(muon|chi muon|uoc|uoc gi|mong|gia nhu|cau mong) .{0,30}(khong|chang) (bao gio |con |phai )?(tinh|thuc|ngoi) (day|lai|len)"
+     r"( nua)?(?! (som|kip|noi|duoc|dung gio|muon))",
+     r"(muốn|chỉ muốn|ước|ước gì|mong|giá như|cầu mong) .{0,30}(không|chẳng) (bao giờ |còn |phải )?(tỉnh|thức|ngoi) (dậy|lại|lên)"
+     r"( nữa)?(?! (sớm|kịp|nổi|được|đúng giờ|muộn))"),
+    (r"ngu mot giac (that |that la |rat )?(dai|sau) (va |roi |ma )?(khong|chang) (bao gio |con )?(tinh|thuc) (day|lai)",
+     r"ngủ một giấc (thật |thật là |rất )?(dài|sâu) (và |rồi |mà )?(không|chẳng) (bao giờ |còn )?(tỉnh|thức) (dậy|lại)"),
+    # nhảy từ chỗ cao xuống
+    (r"nhay (tu|khoi|qua) .{0,30}(cau|lau|tang|chung cu|toa nha|nha cao|san thuong|ban cong|noc nha|vach da|tren cao|cua so)"
+     r"(?! (choi|tap|bungee))",
+     r"nhảy (từ|khỏi|qua) .{0,30}(cầu|lầu|tầng|chung cư|toà nhà|tòa nhà|nhà cao|sân thượng|ban công|nóc nhà|vách đá|trên cao"
+     r"|cửa sổ)(?! (chơi|tập|bungee))"),
+    # thư tuyệt mệnh / vĩnh biệt / chọn ngày ra đi
+    (r"thu tuyet menh|tuyet menh thu|(vinh biet|tu biet) (moi nguoi|tat ca|ca nha|the gioi|cuoc doi|cuoc song|gia dinh|bo me)"
+     r"|loi tu biet|chao (tam biet )?(moi nguoi|ca nha) lan cuoi", None),
+    (r"(san sang|chon ngay|truoc khi " + _AI_KD2 + r"|den luc|da den luc|quyet dinh|chuan bi) ra di( roi| thoi| mai mai| vinh vien"
+     r"| cho xong)?" + _H,
+     r"(sẵn sàng|chọn ngày|trước khi " + _AI2 + r"|đến lúc|đã đến lúc|quyết định|chuẩn bị) ra đi( rồi| thôi| mãi mãi| vĩnh viễn"
+     r"| cho xong)?" + _H),
+    (r"(khong|chang) (dinh|muon|tinh|nghi minh se|chac se) song (toi|den|qua) (luc do|nam|ngay|thang|tet|sinh nhat|cuoi nam)", None),
+    (r"(se|chac|co le) (khong|chang) con (song |o )?(tren doi|tren the gioi|tren coi doi|tren tran gian)( nay)?( nua)?", None),
+    # gom / tích thuốc; uống quá nhiều / cả hộp thuốc (thuốc giảm đau, paracetamol…)
+    (r"(gom|tich|giau|du tru|de danh|cat giau) (gop |san |dan )?(thuoc ngu|thuoc an than|thuoc doc)"
+     r"|(gom|tich|giau|du tru|de danh) (gop |san |dan )?(thuoc|vien thuoc) (may|nhieu|vai|ca|\d+) (tuan|thang|hom|ngay)", None),
+    (r"(uong|nuot|tong) (het |ca |nguyen |gan het )?(ca )?(mot )?(lo|vi|hop|chai|nam|von|tui|cho|so|dong) (thuoc (ngu|an than|doc"
+     r"|giam dau|ha sot|tim|huyet ap)|paracetamol|panadol|efferalgan|hapacol|aspirin|ibuprofen|vien giam dau)"
+     r"|(da|vua|moi|lo|lai) (uong|nuot|tong) (qua nhieu|rat nhieu|ca dong|mot dong|may chuc|vai chuc|[1-9]\d) (vien )?"
+     r"(thuoc|vien|paracetamol|panadol)(?! (bo|bac|bo sung|vitamin|nam|theo don))"
+     r"|(uong|nuot|tong) (qua nhieu|rat nhieu|ca dong|mot dong|may chuc|vai chuc) (vien )?(thuoc|vien)(?! (bo|bac|bo sung|vitamin|nam"
+     r"|theo don))( \w+){0,2} roi" + _H
+     + r"|uong het (cho |so |dong |ca |may |nam )(thuoc ngu|thuoc an than|thuoc doc|thuoc)", None),
+    # người thân / bạn đời đánh, tát, nhốt, ép quan hệ
+    (r"(chong|vo|bo|ba|cha|me|anh trai|chi gai|em trai|anh|chi|ban trai|ban gai|nguoi yeu|ny|bo duong|cha duong|me ke|chu|bac"
+     r"|cau|ong|ba noi|ba ngoai|anh ta|anh ay|han|no|ho) (toi |em |minh )?.{0,25}(danh|tat|dap|dam|hanh ha|bop co|nhot) "
+     r"(toi|em|minh|me con toi|con toi|ca nha)(?! (gia|tieng|thuc|cau|bai|co|ban|dan|nhau|lai trong|o game|trong game)(?!\w))",
+     r"(chồng|vợ|bố|ba|cha|mẹ|anh trai|chị gái|em trai|anh|chị|bạn trai|bạn gái|người yêu|ny|bố dượng|cha dượng|mẹ kế|chú|bác"
+     r"|cậu|ông|bà nội|bà ngoại|anh ta|anh ấy|hắn|nó|họ) (tôi |em |mình )?.{0,25}(đánh|tát|đập|đấm|hành hạ|bóp cổ|nhốt) "
+     r"(tôi|em|mình|mẹ con tôi|con tôi|cả nhà)(?! (giá|tiếng|thức|cầu|bài|cờ|bản|đàn|nhau|lại trong|ở game|trong game)(?!\w))"),
+    (r"(ep|cuong ep|bat) " + _AI_KD2 + r" (phai )?(quan he|lam chuyen do|ngu voi|lam tinh)|cuong ep (quan he|tinh duc)", None),
+    # tự làm đau: cào / cắt / đốt tay đến chảy máu, để thấy còn cảm giác, mỗi khi buồn
+    (r"(cao|rach|cat|dot|chich|cua|dam|dap) (\w+ )?(co tay|tay|dui|chan|bung|da|nguoi|dau)( minh| cua minh)? .{0,25}"
+     r"(chay mau|ra mau|thay con cam giac|co cam giac|moi chiu duoc|cho do|moi khi (lo au|buon|cang thang|stress|that vong|tuc))"
+     r"|(lay|dung) (bat lua|thuoc la|tan thuoc|dao lam|lam|kim) (\w+ )?(dot|cat|rach|chich|dam|cao) (tay|da|nguoi|minh|co tay)", None),
+    (r"(nghi|muon|dinh|tinh) (den |toi )?(viec |chuyen )?(lao|dam|cho) xe (vao|xuong) (tuong|vuc|song|cot|xe tai|duong ray|tau"
+     r"|bien|ho|cau)|(lao|dam) (xe )?(vao|xuong) .{0,25}cho xong", None),
+    # nín thở dưới nước, chờ cơ thể gục, thà chết, mệt vì phải sống, sống còn ý nghĩa gì
+    (r"(nin tho|dim (minh|dau|nguoi)) (duoi|trong) (nuoc|bon tam|ho|song|be)( \w+){0,6} (uoc|muon|mong)", None),
+    (r"cho (co the|than xac|nguoi) (minh |toi )?(guc|buong|chet|dau hang|suy kiet|tat tho)|(guc|buong xuoi|chet|ngung tho|tat tho)"
+     r" .{0,12}cho xong|cho chet( cho xong| di| thoi)?" + _H, None),
+    (r"tha (la )?chet (con hon|cho xong|di con hon|cho roi)", None),
+    (r"met( moi)? (vi|voi) (phai |viec )?(song|ton tai|duoc song)( lam| qua| roi| nua| that su)*" + _H
+     + r"|(chan|so|ngan|ghet) (phai )?song( lam| qua| roi| nua)*" + _H,
+     r"mệt( mỏi)? (vì|với) (phải |việc )?(sống|tồn tại|được sống)( lắm| quá| rồi| nữa| thật sự)*" + _H
+     + r"|(chán|sợ|ngán|ghét) (phải )?sống( lắm| quá| rồi| nữa)*" + _H),
+    (r"song (con|thi con|con co) (y nghia|nghia ly) gi( nua)?|song (de )?lam gi nua",
+     r"sống (còn|thì còn|còn có) (ý nghĩa|nghĩa lý) gì( nữa)?|sống (để )?làm gì nữa"),
+    (r"tu ket lieu|tu sat|cach (de )?(chet|tu tu|tu sat|ket lieu)( \w+){0,3}|chet (khong|it) dau|chet (nhe nhang|em ai|nhanh nhat)",
+     r"tự kết liễu|tự sát|cách (để )?(chết|tự tử|tự sát|kết liễu)( \w+){0,3}|chết (không|ít) đau|chết (nhẹ nhàng|êm ái|nhanh nhất)"),
+]
+
+# CY-2 review 2: "so de" bỏ dấu trùng "số để" ("Lá số để xem năm nào hợp cưới?", "la so de lam gi") — mẫu không dấu chỉ
+# nhận "số đề / số lô" khi có ngữ cảnh xin số, đánh số, hôm nay, may mắn…; câu gõ có dấu dùng đúng chữ "số đề" (`MO_HO`).
+SO_DE_KD = (r"(?<!la )(?:(xin|cho|choi|danh|bat|soi|chot|nuoi|cap|ra|ve) (con |cap )?so (de|lo)|(?<!la )so (de|lo) (hom nay|ngay mai"
+            r"|toi nay|chieu nay|tuan nay|thang nay|may man|mien \w+|nao|gi|ve|trung|dep|bao nhieu|ra con|hop (voi|tuoi|menh)( toi"
+            r"| minh| em)? (hom nay|ngay mai|toi nay|nhat))(?!\w)|so (de|lo)" + _H + r")")
+SO_DE_CD = r"số (đề|lô)|lô đề"
+
 # ------------------------------------------------------------------ từ chối nhẹ (chẩn đoán, tuổi chết, may rủi…)
 TU_CHOI: list[tuple[str, str | None, str]] = [
+    # CY-2 review 2 (2026-11-14): đoán giới tính / sức khoẻ thai, sảy thai — bản Anh đã chặn, bản Việt còn lọt ("Thai này là
+    # trai hay gái?", "Bầu lần này con trai hay con gái?", "thai nhi có khoẻ mạnh không", "Năm sau tôi sinh con trai hay gái").
+    # Có bản có dấu: "thai" ≠ "Thái" (Thái Dương, Thái Lan). Câu chọn năm sinh con, chuẩn bị khi vợ sắp sinh vẫn trả lời.
+    (r"(thai|thai nhi|cai thai|bao thai|trong bung|bau|bau bi|lan bau|co bau|mang bau|mang thai|sieu am|em be sap sinh|be sap sinh"
+     r"|sap sinh|lan sinh nay)(?!\w).{0,40}(con )?(trai|gai) hay (con )?(gai|trai)|(con )?(trai|gai) hay (con )?(gai|trai).{0,30}"
+     r"(thai|trong bung|bau|sieu am)(?!\w)|(sinh|de|co thai|co bau|mang thai|mang bau) (duoc |ra )?(con |dua |be |em be )?(trai|gai)"
+     r"( dau long)? (hay|khong|ko|chu)(?!\w)|(thai|thai nhi|cai thai|em be trong bung|be trong bung)( nay| do| lan nay)? (co )?"
+     r"(khoe|khoe manh|on|on dinh|binh thuong|phat trien (tot|binh thuong)|bi gi|co sao|co van de gi)( \w+)? (khong|ko|chu)(?!\w)"
+     r"|(co |se |lai |bi )(bi )?(say thai|thai luu|sinh non|de non)",
+     r"(thai|thai nhi|cái thai|bào thai|trong bụng|bầu|bầu bí|lần bầu|có bầu|mang bầu|mang thai|siêu âm|em bé sắp sinh|bé sắp sinh"
+     r"|sắp sinh|lần sinh này)(?!\w).{0,40}(con )?(trai|gái) hay (con )?(gái|trai)|(con )?(trai|gái) hay (con )?(gái|trai).{0,30}"
+     r"(thai|trong bụng|bầu|siêu âm)(?!\w)|(sinh|đẻ|có thai|có bầu|mang thai|mang bầu) (được |ra )?(con |đứa |bé |em bé )?(trai|gái)"
+     r"( đầu lòng)? (hay|không|ko|chứ)(?!\w)|(thai|thai nhi|cái thai|em bé trong bụng|bé trong bụng)( này| đó| lần này)? (có )?"
+     r"(khoẻ|khỏe|khoẻ mạnh|khỏe mạnh|ổn|ổn định|bình thường|phát triển (tốt|bình thường)|bị gì|có sao|có vấn đề gì)( \w+)? "
+     r"(không|ko|chứ)(?!\w)|(có |sẽ |lại |bị )(bị )?(sảy thai|thai lưu|sinh non|đẻ non)", "suc_khoe_the_chat"),
+    # bỏ tiêm insulin / kháng sinh / thuốc chống đông theo lá số
+    (r"(bo|ngung|dung|thoi) (tiem |uong |dung )?(insulin|thuoc khang sinh|khang sinh|thuoc chong dong|thuoc tim)",
+     r"(bỏ|ngưng|ngừng|dừng|thôi) (tiêm |uống |dùng )?(insulin|thuốc kháng sinh|kháng sinh|thuốc chống đông|thuốc tim)",
+     "suc_khoe_the_chat"),
+    # đuổi / cho nghỉ / loại nhân viên vì tuổi, mệnh, lá số (không cần liền nhau)
+    (r"(duoi viec|cho nghi( viec)?|sa thai|cho thoi viec|loai|khong tuyen|tu choi tuyen) .{0,25}(nhan vien|nguoi lam|ke toan|tho"
+     r"|giup viec|tro ly|thu ky|cap duoi|ung vien|lai xe|tai xe|bao ve|thu quy)(?!\w).{0,40}(tuoi|menh|con giap|la so|bat tu|tu vi"
+     r"|so chu dao|than so|ngay sinh|nam sinh|khac|xung|ky)(?!\w)"
+     r"|(nhan vien|nguoi lam|ke toan|ung vien|tro ly|thu ky)(?!\w).{0,25}(tuoi|menh|con giap)(?!\w).{0,30}(duoi viec|cho nghi"
+     r"|sa thai|cho thoi viec|loai)|cho (nhan vien|nguoi lam|ke toan|tro ly|thu ky|giup viec|tho)(?!\w).{0,30}(nghi|thoi viec)"
+     r"(?!\w).{0,30}(tuoi|menh|con giap|la so|bat tu|khac|xung|ky)(?!\w)",
+     r"(đuổi việc|cho nghỉ( việc)?|sa thải|cho thôi việc|loại|không tuyển|từ chối tuyển) .{0,25}(nhân viên|người làm|kế toán|thợ"
+     r"|giúp việc|trợ lý|thư ký|cấp dưới|ứng viên|lái xe|tài xế|bảo vệ|thủ quỹ)(?!\w).{0,40}(tuổi|mệnh|con giáp|lá số|bát tự|tử vi"
+     r"|số chủ đạo|thần số|ngày sinh|năm sinh|khắc|xung|kỵ)(?!\w)"
+     r"|(nhân viên|người làm|kế toán|ứng viên|trợ lý|thư ký)(?!\w).{0,25}(tuổi|mệnh|con giáp)(?!\w).{0,30}(đuổi việc|cho nghỉ"
+     r"|sa thải|cho thôi việc|loại)|cho (nhân viên|người làm|kế toán|trợ lý|thư ký|giúp việc|thợ)(?!\w).{0,30}(nghỉ|thôi việc)"
+     r"(?!\w).{0,30}(tuổi|mệnh|con giáp|lá số|bát tự|khắc|xung|kỵ)(?!\w)", "tuyen_dung"),
+    # ngày / năm nào người thân sẽ mất; có qua khỏi … không (có từ chen giữa)
+    (r"(nam|thang|ngay|luc|khi|tuoi) nao .{0,25}(se mat|qua doi|ra di)" + _H + r"|(co|con) qua khoi( \w+){1,4} (khong|ko|chu)" + _H,
+     r"(năm|tháng|ngày|lúc|khi|tuổi) nào .{0,25}(sẽ mất|qua đời|ra đi)" + _H + r"|(có|còn) qua khỏi( \w+){1,4} (không|ko|chứ)"
+     + _H, "du_doan_cu_the"),
     # bệnh nặng / chẩn đoán / bỏ thuốc
     (r"(bi|co|mac|chan doan|khoi) u (gan|phoi|nao|vu|xo|tuyen giap|da day|buong trung|tu cung)",
      r"(bị|có|mắc|chẩn đoán|khối) u (gan|phổi|não|vú|xơ|tuyến giáp|dạ dày|buồng trứng|tử cung)", "suc_khoe_the_chat"),
@@ -179,7 +311,7 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
     (r"(co|con) qua khoi (khong|ko|duoc)|song (duoc )?(qua|den het) nam nay|con bao lau|song (duoc )?(den )?bao nhieu tuoi",
      r"(có|còn) qua khỏi (không|ko|được)|sống (được )?(qua|đến hết) năm nay|còn bao lâu|sống (được )?(đến )?bao nhiêu tuổi",
      "du_doan_cu_the"),
-    (r"(so|con so|xin so) (de|lo)(?! an| xuat)|lo de|danh de(?! an| xuat| nghi| tai| cu)|xo so|ve so|trung so|ca do|ca cuoc"
+    (SO_DE_KD + r"|lo de|danh de(?! an| xuat| nghi| tai| cu)|xo so|ve so|trung so|ca do|ca cuoc"
      r"|danh lo|so chot|danh con (gi|so)|(xem|soi|bat|cho) de (hom nay|ngay mai|toi nay|mien)|(?<!\w)de .{0,15}(ve|ra) con (gi|nao|so)", r"(số|con số|xin số) (đề|lô)(?! án| xuất)|lô đề|đánh đề(?! án| xuất| nghị| tài| cử)|xổ số|vé số|trúng số|cá độ|cá cược"
      r"|đánh lô|số chốt|đánh con (gì|số)|(xem|soi|bắt|cho) đề (hôm nay|ngày mai|tối nay|miền)|(?<!\w)đề .{0,15}(về|ra) con (gì|nào|số)", "may_rui"),
     (r"(gap|bi) tai nan (chet|nang|mat mang)|tai nan chet nguoi", r"(gặp|bị) tai nạn (chết|nặng|mất mạng)|tai nạn chết người",
@@ -253,6 +385,7 @@ MO_HO: dict[str, str] = {
     r"(?<!\w)(nang|nhieu) can(?!\w)": r"căn",
     r"can dong": r"căn đồng",
     r"(?<!tap )trung so": r"trúng số",
+    SO_DE_KD: SO_DE_CD,
     r"(la|co|thay|bi|nhu) hon ma|hon ma (theo|o|ve|nao)": r"hồn ma",
 }
 
@@ -1773,7 +1906,26 @@ def khung_hoang(raw: str) -> bool:
 # đầu vế ("Tôi khó thở quá"), "bị / đang khó thở", hoặc đi cùng đau ngực / ngất / tím tái — "Áp lực … làm tôi khó thở",
 # "Không khí gia đình khó thở" là nghĩa bóng, trả lời bình thường.
 _CAP_CUU: list[tuple[str, str | None]] = [
-    (r"(dau|tuc|nhoi) nguc", r"(đau|tức|nhói) ngực"),
+    (r"(dau|tuc|nhoi|that) (that |nhoi )?nguc", r"(đau|tức|nhói|thắt) (thắt |nhói )?ngực"),
+    # CY-2 review 2: chảy / ra máu nhiều, không cầm được máu; ngừng thở, không thở được, môi tím tái; ngã gục, gọi không
+    # tỉnh / không phản ứng, lơ mơ; dấu hiệu đột quỵ (méo miệng, một bên mặt xệ, yếu nửa người); đau bụng / đầu dữ dội.
+    # "chảy máu cam", "chảy máu chân răng" (không kèm "nhiều") không thuộc nhóm này.
+    (r"chay (rat |qua )?nhieu mau|(chay|ra) mau (rat |qua )?(nhieu|khong ngung|khong dung|khong cam|lien tuc|lenh lang|xoi xa)"
+     r"|ra (rat |qua )?nhieu mau|mat (rat |qua )?nhieu mau|(khong|chua) cam (duoc )?mau|bang huyet|(non|ho|oi) ra mau",
+     r"chảy (rất |quá )?nhiều máu|(chảy|ra) máu (rất |quá )?(nhiều|không ngừng|không dừng|không cầm|liên tục|lênh láng|xối xả)"
+     r"|ra (rất |quá )?nhiều máu|mất (rất |quá )?nhiều máu|(không|chưa) cầm (được )?máu|băng huyết|(nôn|ho|ói) ra máu"),
+    (r"ngung tho|tat tho|(khong|chang) con tho|(?:^|[,.!?;] )" + _AI_KD + r" (dang |bi )?(khong|chang) tho (duoc|noi)"
+     r"(?! (vi|voi|khi nghi))|(moi|mat|da|mong tay|nguoi) (bi )?(tim tai|tim ngat|tai xanh)",
+     r"ngừng thở|tắt thở|(không|chẳng) còn thở|(?:^|[,.!?;] )" + _AI + r" (đang |bị )?(không|chẳng) thở (được|nổi)"
+     r"(?! (vì|với|khi nghĩ))|(môi|mặt|da|móng tay|người) (bị )?(tím tái|tím ngắt|tái xanh)"),
+    (r"nga guc|guc xuong|nga quy|(goi|lay|vo) (mai |hoai |may cung |the nao cung )?(khong|chang) (tinh|day|phan ung)"
+     r"|(gan nhu |hoan toan )?(khong|chang) (con )?phan ung( gi)?( nua)?" + _H + r"|lo mo .{0,20}(va mo hoi|khong tinh)"
+     r"|(meo|lech) (mieng|mom|mat)|mot ben (mat|nguoi|mieng) (bi )?(meo|xe|te|liet|yeu|cung)|(te|yeu|liet) nua nguoi"
+     r"|dot ngot (noi kho|noi ngong|khong noi duoc|noi khong ro)|(dau|quan) (bung|dau|nguc) (du doi|kinh khung|khong chiu noi)",
+     r"ngã gục|gục xuống|ngã quỵ|(gọi|lay|vỗ) (mãi |hoài |mấy cũng |thế nào cũng )?(không|chẳng) (tỉnh|dậy|phản ứng)"
+     r"|(gần như |hoàn toàn )?(không|chẳng) (còn )?phản ứng( gì)?( nữa)?" + _H + r"|lơ mơ|lịm đi"
+     r"|(méo|lệch) (miệng|mồm|mặt)|một bên (mặt|người|miệng) (bị )?(méo|xệ|tê|liệt|yếu|cứng)|(tê|yếu|liệt) nửa người"
+     r"|đột ngột (nói khó|nói ngọng|không nói được|nói không rõ)|(đau|quặn) (bụng|đầu|ngực) (dữ dội|kinh khủng|không chịu nổi)"),
     # Review 2026-11-14: quá liều / ngộ độc ĐÃ xảy ra (kể cả uống nhầm) → gọi cấp cứu ngay. Câu hỏi chung ("uống quá liều có
     # sao không") không có "đã / vừa / lỡ" → không thuộc nhóm này.
     (r"(da|vua|moi|lo|bi|dang) (uong|nuot|dung|tiem) .{0,25}qua lieu|(da|vua|bi|lo) (bi )?(ngo doc|qua lieu)"
@@ -1848,6 +2000,12 @@ def nguoi_than(raw: str) -> bool:
     """Câu nói về sức khoẻ của người thân / người khác (người đó đứng trước chữ sức khoẻ, bệnh, bộ phận…)."""
     kd = _hai_ban(raw)[1]
     return bool(_NGUOI_THAN.search(kd)) or bool(_EN_NGUOI_THAN.search(kd))
+
+
+def so_de(raw: str) -> bool:
+    """Câu xin / hỏi số đề, số lô (chữ có dấu phân biệt "số đề" với "số để")."""
+    cd, kd, co_dau = _hai_ban(raw or "")
+    return _khop(SO_DE_KD, SO_DE_CD, cd, kd, co_dau)
 
 
 def tu_choi(raw: str) -> str | None:

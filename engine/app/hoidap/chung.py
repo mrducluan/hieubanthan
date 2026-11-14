@@ -32,7 +32,7 @@ _BO_CHAN_HH = {r"chac chan", r"tai nan", r"(bi|gap|co) tai nan", r"tai nan (khon
 KD_SUC_KHOE = [r"dau da day", r"suc khoe cua toi the nao"]
 # Review CY-1: tuổi thọ / sống chết ("sống được bao lâu", "năm nào chết", "thọ bao nhiêu", "chết sớm"…) đã dời về bộ chung
 # `luangiai/an_toan.py` — cả 5 mảng cùng chặn (trước Thần số trả lời bằng chân dung số).
-TU_CHOI_THEM = [r"so de", r"doan benh",
+TU_CHOI_THEM = [_at.SO_DE_KD, r"doan benh",
                 r"benh gan",
                 # "yểm bùa nhà hàng xóm" = tác động lên người khác → từ chối; "nhà tôi có BỊ yểm bùa không" = nỗi sợ tâm
                 # linh → dẫn hướng (TAM_LINH) — EN-3d.
