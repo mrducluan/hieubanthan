@@ -519,6 +519,8 @@ def _da_noi(c: str, da: str) -> bool:
     k = _chuan(c)
     if len(k.split()) >= 6 and k in da:
         return True
+    if re.match(r"\s*(Hiểu đơn giản|Hình ảnh|In plain terms|Picture it):", c):
+        return False                             # lời ví von của quẻ: điểm sáng chỉ mượn bài học ở đuôi, giữ phần ví von
     for m in re.finditer(r"[:—]\s*", c[:120]):
         k2 = _chuan(c[m.end():])
         if len(k2.split()) >= 6 and k2 in da:
