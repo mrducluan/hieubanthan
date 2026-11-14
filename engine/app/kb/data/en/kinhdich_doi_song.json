@@ -758,16 +758,16 @@
    ]
   },
   "tinh_cam": {
-   "cau_hoi": "To pick the right line for that person (in the Six Lines reading): is that person a woman or a man? You can skip this — the hexagram will then use the Other line for them.",
+   "cau_hoi": "Is there one person in particular? If so, tell us whether they are a woman or a man, so the reading looks at the right line for them. No one specific yet? Just skip.",
    "lua_chon": [
     {
-     "nhan": "That person is a woman"
+     "nhan": "They are a woman"
     },
     {
-     "nhan": "That person is a man"
+     "nhan": "They are a man"
     },
     {
-     "nhan": "Skip, use the Other line"
+     "nhan": "No one specific — skip"
     }
    ]
   },
