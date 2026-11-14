@@ -382,3 +382,13 @@ mỗi chặng là chuỗi con nguyên văn kho nguồn `than_tuong_toan_bien.jso
   Nhân tướng, trang bộ vị Tai); sổ ngày cập nhật đổi 22 trang bộ vị.
 - Kèm sửa e2e: hồ sơ mẫu của test Nhân tướng thiếu `v`, `tao_luc` nên trang không đọc được năm sinh — test cũ chỉ khớp tiêu
   đề chương.
+
+## 14. Đợt 10 (WS-5, 2026-11-14) — câu Tăng San Bốc Dịch theo việc ra bài đọc quẻ
+
+KB `kinhdich_tra_loi.sach_xua_viec`: 9 câu nguyên văn Tăng San Bốc Dịch, mỗi câu thuộc chương bàn đúng một nhóm việc
+(Cầu tài · Vay mượn · Mở hàng · Tại nhiệm · Đồng thí · Phu phụ · Xuất hành · Phòng phi tị tụng · Sáng tạo cung thất),
+nối với mã việc của lớp "trả lời theo việc" (KD-V3). Test `engine/tests/test_ws5_sach_xua_kinhdich.py`: câu là chuỗi con
+kho nguồn và nằm trong đúng chương (không vượt tiêu đề chương kế). Chỉ chọn câu nêu cách xem (hào nào làm chính, khi nào
+thuận). **Không đưa**: chương Tật bệnh (bàn sinh tử), Thai dựng, Tử tự (đoán thai, con cái) — trái SK-1; giấy tờ, gia
+đình, mất đồ chưa có chương khớp. Hiện ở bài đọc quẻ (`sach_xua`, khối "Sách xưa nói gì về việc bạn hỏi" dùng chung
+`SachXuaNoi`), cả bản Anh (cùng số câu). Không đổi mức → không tăng `ENGINE_VERSION`.

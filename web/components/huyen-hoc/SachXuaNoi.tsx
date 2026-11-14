@@ -13,7 +13,7 @@ export interface CauSachXua { loai: string; ve: string; sach: string; han: strin
 /** WS-3: Phong thuỷ dùng chung khối này ("… về nhà của bạn"). `tinh` = trang dựng ở máy chủ (trang kiến thức): nguyên văn nằm
  *  trong `<details>` thuần HTML — có sẵn trong HTML cho máy tìm kiếm, mở được không cần JS. */
 export function SachXuaNoi({ ds, moDun, tieuDe, moTa, tinh = false }: {
-  ds?: CauSachXua[] | null; moDun: "tuvi" | "battu" | "phongthuy"; tieuDe?: string; moTa?: string; tinh?: boolean;
+  ds?: CauSachXua[] | null; moDun: "tuvi" | "battu" | "phongthuy" | "kinhdich"; tieuDe?: string; moTa?: string; tinh?: boolean;
 }) {
   const { c: chu } = useChuBaoCao();
   const [mo, setMo] = useState<number | null>(null);

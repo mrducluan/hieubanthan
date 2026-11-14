@@ -144,3 +144,19 @@ def phongthuy(quai: str | None, thanh_vien: list[dict] | None = None, ca_nhan: b
         ra.append(muc("nha_nhieu_nguoi", L("pt.sach_xua.ve.nha_nhieu_nguoi", "Người cùng nhà khác nhóm với bạn"),
                       kb["nha_nhieu_nguoi"]["han"], L("pt.sach_xua.y.nha_nhieu_nguoi", kb["nha_nhieu_nguoi"]["y"])))
     return ra[:TOI_DA]
+
+
+# --------------------------------------------------------------------------------------- WS-5: Kinh Dịch (Lục Hào)
+def kinhdich(viec: str | None) -> list[dict]:
+    """WS-5 (2026-11-14) — "Sách xưa nói gì về việc bạn hỏi": câu nguyên văn Tăng San Bốc Dịch của chương ứng với việc
+    (mã `viec` của lớp trả lời theo việc). Chỉ câu nêu cách xem; việc không có chương phù hợp (sức khoẻ, con cái…) → [].
+    Bản Anh cùng số câu, lời qua mẫu `kd.sach_xua.*`."""
+    from app.kb import kinhdich_tra_loi_kb as kbt  # noqa: PLC0415
+    tim = kbt.sach_xua_viec(viec) if viec else None
+    if not tim:
+        return []
+    ma, m = tim
+    sach = L("kd.sach_xua.sach", "Tăng San Bốc Dịch")
+    ve = L("kd.sach_xua.ve", "Chương {chuong} — cách xem việc bạn hỏi",
+           chuong=L(f"kd.sach_xua.chuong.{ma}", m["ten_chuong"]))
+    return [{"loai": "viec", "ve": ve, "sach": sach, "han": m["han"], "y": L(f"kd.sach_xua.y.{ma}", m["y"])}]

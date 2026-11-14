@@ -484,6 +484,8 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
             "tra_loi": {k: tl.get(k) for k in ("kieu", "vai", "viec", "nhan_viec", "nghieng", "nhan_nghieng", "nghieng_phai",
                                                 "khac_chieu", "tag", "nhan_tag", "nguon_tag", "ly_do", "cau_dau", "nen",
                                                 "dung_than", "nguoi_kia", "can_go")},
+            # WS-5: câu Tăng San Bốc Dịch của chương ứng với việc được hỏi (chỉ chọn câu đã có trong KB, không đổi mức)
+            "sach_xua": __import__("app.luangiai.sach_xua", fromlist=["kinhdich"]).kinhdich(tl.get("viec")),
             "y_dinh_chung": _y_dinh_chung(ma), "goi_mo": _goi_mo(ma),
             "mot_que_mot_viec": kb.mau("mot_que_mot_viec"), **kb.meta()}
 

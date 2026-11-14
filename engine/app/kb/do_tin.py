@@ -72,6 +72,8 @@ SO: dict[str, dict] = {
         "mau": {"muc": "bien_tap"}, "giai_thich": {"muc": "bien_tap"}}},
     "kinhdich_tra_loi.json": {"mang": "kinhdich", "muc": "tom_y_co_thu", "phan": {
         "tinh_chat_que": _nv("tang_san_boc_dich.json", "tests/test_kt_tt5_tinh_chat_que.py::test_trich_la_nguyen_van_va_kb_du_loi"),
+        "sach_xua_viec": _nv("tang_san_boc_dich.json", "tests/test_ws5_sach_xua_kinhdich.py::test_cau_la_nguyen_van_trong_dung_chuong",
+                             "WS-5: câu Tăng San Bốc Dịch theo chương ứng với việc; lời Việt là tóm ý"),
         "mau": {"muc": "bien_tap"}, "kieu_cau": {"muc": "bien_tap"}}},
     "kinhdich_doi_song.json": {"mang": "kinhdich", "muc": "bien_tap"},
     "bo_sung_que.json": {"mang": "kinhdich", "muc": "bien_tap"},
