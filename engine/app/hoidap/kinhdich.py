@@ -59,6 +59,19 @@ THUAT_NGU = [r"que (bien|ho|chu|ban|thuan)", r"hao (dong|bien|the|ung|tinh)", r"
              r"hau thien", r"kinh dich", r"thoan tu", r"hao tu"]
 
 
+
+_NGHIENG_THE = [(re.compile(r"(?i)\bquẻ nghiêng về (nên làm|có)\b"), "thế quẻ đang thuận"),
+                (re.compile(r"(?i)\bquẻ nghiêng về (chưa nên lúc này|không)\b"), "thế quẻ khuyên chậm lại lúc này"),
+                (re.compile(r"(?i)\bthe hexagram leans towards (doing it|yes)\b"), "the shape of the hexagram is favourable"),
+                (re.compile(r"(?i)\bthe hexagram leans towards not now\b"), "the shape of the hexagram says slow down for now")]
+
+
+def _bo_nghieng(s: str) -> str:
+    for rx, thay in _NGHIENG_THE:
+        s = rx.sub(thay, s)
+    return s
+
+
 def td_kd(t: str) -> bool:
     """Câu có lời nhờ quyết định / dự đoán (không phải câu kiến thức thuần)."""
     return chung.co(t, QUYET_DINH + DU_DOAN)
@@ -689,6 +702,8 @@ def _tra_loi(pl: dict, cau_hoi: str, gia_tri_hao: list[int] | None = None, thoi_
                 # Review CY-1: câu LO ("có bị mất tiền / tai nạn / thắng kiện không") — đoạn mở đầu nói khung trước ("quẻ
                 # không trả lời có hay không…"), rồi mới tới lời quẻ — mức quẻ đứng đầu đọc thành câu trả lời có / không.
                 nhan, _, than = mo.partition(": ")
+                # CY-2 review 2: khung đã nói "không trả lời có hay không" → lời quẻ nói THẾ, không nói "nghiêng về nên làm / có"
+                than, mo = (_bo_nghieng(x) for x in (than, mo))
                 mo = f"{nhan}: {cyn.kinhdich_khung()} {mo_dau.hoa(than)}" if than else f"{cyn.kinhdich_khung()} {mo}"
         van = mo_dau.dat_dau(van, mo, goi, khoa=("hoi.kd", "dat"))
     che_do_van, loi = "template", []
