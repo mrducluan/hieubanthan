@@ -300,6 +300,14 @@ cho người dùng thật cần chủ dự án (mục 6).
 - **Thuật ngữ cần người bản xứ duyệt**: changed / resulting hexagram, Response / Other line (Ying), Use God line, Officer / Wealth /
   Parent / Offspring / Sibling line, body / use trigram (Mai Hoa), void branch, month breaker, "meaning-and-principle reading".
 
+## 3h. Chính sách chặn có ích + "nên chú ý" (CY-2, 2026-11-14, vi + en)
+
+- Đối tác / nhân viên có trung thực không: trả lời phía người hỏi ở mọi mảng (cả bản Anh); vẫn chặn chọn / xếp hạng / sa thải theo lá số.
+- Câu chặn mở bằng gợi ý "nên…" đúng loại (12 nhóm, mã `tu_choi.goi_y.*` + `tu_choi.ket` trong `en/loi_khuon.json`).
+- Khủng hoảng + cấp cứu: cấp cứu trước (bản Anh số theo nước: 911/999/000/111/112/995).
+- Bộ dev mới `dev_chu_y.jsonl` 160/160, `dev_chu_y_2.jsonl` 40/40 (10 câu Anh); chấm `scripts/cham_dev_chu_y.py [--tep]`.
+- Cần người bản xứ duyệt: lời `tu_choi.goi_y.*`, 12 mảng mới trong `en/chu_y_kb.json`.
+
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
 1. ~~**Engine không tất định giữa các tiến trình**~~ — **ĐÃ SỬA**: hai chỗ lặp qua `set` rồi đưa ra đầu ra — `kb/tu_dien._mau`
