@@ -42,6 +42,12 @@ export const CHU_HOI_DAP = {
   "tq.xem_tren": { nhom: K, nhan: "Bàn 12 cung — nút xem trên lá số", mac_dinh: "Xem trên lá số", en: "See it on the chart" },
   "tq.aria_cung": { nhom: K, nhan: "Bàn 12 cung — tên ô ({cung}, {sao})", mac_dinh: "Cung {cung}{sao}", en: "{cung}{sao}" },
   "tq.doc_ky": { nhom: K, nhan: "Khối hình minh hoạ — link đọc kỹ ({nhan})", mac_dinh: "Đọc kỹ: {nhan} →", en: "Read more: {nhan} →" },
+  // EN-ALL GĐ 6 — khối "hao" (quẻ Kinh Dịch bấm từng hào).
+  "tq.hao_aria": { nhom: K, nhan: "Quẻ bấm từng hào — tên danh sách", mac_dinh: "Sáu hào, hào 6 trên cùng", en: "Six lines, line 6 at the top" },
+  "tq.hao_dong_aria": { nhom: K, nhan: "Quẻ bấm từng hào — vế hào động (trình đọc)", mac_dinh: ", hào động", en: ", changing line" },
+  "tq.hao_chu_aria": { nhom: K, nhan: "Quẻ bấm từng hào — vế hào chủ (trình đọc)", mac_dinh: ", hào chủ", en: ", leading line" },
+  "tq.hao_chu": { nhom: K, nhan: "Quẻ bấm từng hào — nhãn hào chủ", mac_dinh: " · hào chủ", en: " · leading line" },
+  "tq.hao_dong": { nhom: K, nhan: "Quẻ bấm từng hào — nhãn hào động", mac_dinh: " · động", en: " · changing" },
   "tq.lb_title": { nhom: K, nhan: "La bàn 8 hướng — tên hình", mac_dinh: "La bàn tám hướng, hướng hợp được tô sáng", en: "Eight-direction compass, with your good directions highlighted" },
   "tq.lb_nha": { nhom: K, nhan: "La bàn 8 hướng — chữ giữa", mac_dinh: "Nhà", en: "Home" },
   "tq.lb_it_hop": { nhom: K, nhan: "La bàn 8 hướng — hướng ít hợp", mac_dinh: "ít hợp", en: "less suitable" },

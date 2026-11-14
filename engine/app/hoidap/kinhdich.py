@@ -634,7 +634,7 @@ def _tra_loi(pl: dict, cau_hoi: str, gia_tri_hao: list[int] | None = None, thoi_
                 ha, thuong = que["quai_ban"]["ha_quai"], que["quai_ban"]["thuong_quai"]
                 if len(que["hao_dong"]) == 1:
                     mai_hoa = {"the_dung": mh.the_dung(thuong, ha, que["hao_dong"][0]),
-                               "dau_vao": {"nguon": nguon}}
+                               "dau_vao": {"nguon": kd_hien.nguon(nguon)}}
             if mai_hoa is not None and len(que["hao_dong"]) == 1:          # KD-V2: toàn cục + ứng kỳ số
                 ha, thuong = que["quai_ban"]["ha_quai"], que["quai_ban"]["thuong_quai"]
                 mai_hoa["toan_cuc"] = mh.toan_cuc(thuong, ha, que["hao_dong"][0])

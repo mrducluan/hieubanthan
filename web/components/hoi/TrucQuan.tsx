@@ -474,17 +474,18 @@ function KhoiMinhHoa({ k }: { k: Extract<KhoiTrucQuan, { kieu: "minh_hoa" }> }) 
  *  na" của chính lời hào đó (engine lấy từ KB trong gói bằng chứng), hào tĩnh → một câu ngắn. */
 function Hao({ k }: { k: Extract<KhoiTrucQuan, { kieu: "hao" }> }) {
   const [chon, setChon] = useChon();
+  const { c } = useChuHoiDap();
   const m = chon === null ? null : k.muc[chon];
   return (
     <>
-      <ol className="mx-auto max-w-xs space-y-1.5" aria-label="Sáu hào, hào 6 trên cùng">
+      <ol className="mx-auto max-w-xs space-y-1.5" aria-label={c("tq.hao_aria")}>
         {[...k.muc].map((x, i) => ({ x, i })).reverse().map(({ x, i }) => {
           const s = x.sac ?? "nhat";
           const mau = x.dong ? NEN[s] : "bg-fg/70";
           return (
             <li key={x.vi_tri}>
               <button type="button" aria-pressed={chon === i} onClick={() => setChon(chon === i ? null : i)}
-                aria-label={`${x.nhan}${x.dong ? ", hào động" : ""}${x.chu ? ", hào chủ" : ""}`}
+                aria-label={`${x.nhan}${x.dong ? c("tq.hao_dong_aria") : ""}${x.chu ? c("tq.hao_chu_aria") : ""}`}
                 className={cn("flex min-h-10 w-full items-center gap-3 rounded-lg px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60",
                   chon === i ? "bg-surface/80" : "hover:bg-surface/50")}>
                 <span className="flex w-28 shrink-0 gap-2" aria-hidden>
@@ -492,7 +493,7 @@ function Hao({ k }: { k: Extract<KhoiTrucQuan, { kieu: "hao" }> }) {
                     : (<><span className={cn("h-3 w-1/2 rounded-sm", mau)} /><span className={cn("h-3 w-1/2 rounded-sm", mau)} /></>)}
                 </span>
                 <span className={cn("text-left text-xs", x.dong ? CHU[s] : "text-fg-faint")}>
-                  {x.nhan}{x.chu ? " · hào chủ" : x.dong ? " · động" : ""}
+                  {x.nhan}{x.chu ? c("tq.hao_chu") : x.dong ? c("tq.hao_dong") : ""}
                 </span>
               </button>
             </li>

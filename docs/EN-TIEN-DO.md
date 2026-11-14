@@ -14,14 +14,14 @@
 | 3 | Bát tự | **xong** (PR #256) | 5 nhóm route sạch; `/en/bazi` + 3 cụm kiến thức mở; hỏi đáp tiếng Anh (mục 3d) — câu hỏi mở: bộ dò khủng hoảng tiếng Anh (mục 6) |
 | 4 | Tử vi | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/zi-wei-dou-shu` + 6 cụm kiến thức; hỏi đáp tiếng Anh (mục 3e) |
 | 5 | Phong thuỷ | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/feng-shui` + cụm dấu hiệu trong nhà (gồm `kb.trang.dau_hieu`, `hoi.phongthuy`) — mục 3f |
-| 6 | Kinh Dịch | chưa | 6 |
+| 6 | Kinh Dịch | **xong** (2026-11-14) | 6 nhóm route sạch; `/en/i-ching` + cụm 64 quẻ; hỏi đáp tiếng Anh — mục 3g |
 | 7 | Thần số + Tarot đầy đủ | chưa | 18 |
 | 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | chưa | 26 |
 | 9 | Tài khoản & kinh tế, Web Push theo ngôn ngữ, thẻ chia sẻ | chưa | 3 nhóm route + web |
 | 10 | CMS + Blog + pháp lý + hub | chưa | |
 | 11 | QC tổng | chưa | |
 
-Số nhóm route = số khoá còn trong `CHUA_XONG` của `engine/tests/test_dau_ra_en.py` (hiện **67**, 2026-11-13). Làm xong route nào, test
+Số nhóm route = số khoá còn trong `CHUA_XONG` của `engine/tests/test_dau_ra_en.py` (hiện **60**, 2026-11-14). Làm xong route nào, test
 tự báo "đã sạch — xoá khỏi CHUA_XONG". Sau merge main #246–#249 (2026-11-10) thêm 4 nhóm: `thanso.tuan`, `thanso.hom_nay_hai` (GĐ 7), `push.tuan` (GĐ 9), `kb.chuyen_gia` (GĐ 10) → **94**.
 
 ## 1. Quyết định của chủ dự án (hỏi một lần, 2026-11-10)
@@ -281,6 +281,25 @@ cho người dùng thật cần chủ dự án (mục 6).
   Tai Sui, "Door – master – stove", "the stove's control side".
 - **Review UX 3 vai (2026-11-13) đã sửa**: chữ Việt ở kiểm tra tuổi làm nhà, bảng khảo sát (cột "Best placed on", thẻ trên điện thoại), ngày "4 Feb 2026", số Kua "Kua 2 (Kun)", lời khi chưa có hồ sơ, hướng / năm / loại nhà điền sẵn từ hồ sơ nhà, nhãn la bàn, trang dấu hiệu ("Folk tradition holds…"); engine: sao năm (Ngũ Hoàng / Thái Tuế) không lạc sang sao hạn theo tuổi, tiêu đề hướng không cắt, "cửa đối cửa". Tên du niên dịu đi: Sheng Qi (Vitality), Tian Yi (Health), Yan Nian (Harmony), Huo Hai (Minor Mishaps), Liu Sha (Friction), Wu Gui (Setbacks), Jue Ming (Depletion) — cần người bản xứ duyệt cùng "Golden Tower", "house-age count", "Longevity Wanes", "Deserted House", "Three Calamities". Chưa làm: câu mở đầu hỏi đáp chưa trả lời thẳng (thứ tự đoạn do bản Việt quyết), bảng chi phí trang dấu hiệu dạng thẻ (component chung).
 
+## 3g. Giai đoạn 6 — Kinh Dịch (2026-11-13 → 14)
+
+- **Engine** (nhóm route sạch: `kinhdich`, `kinhdich.khoi_que`, `kinhdich.que_rieng`, `kinhdich.hieu_cau`, `kinhdich.hoi`,
+  `hoi.kinhdich`): lớp hiển thị `luangiai/kinhdich_hien.py`; `en/loi/kinhdich.json`; bản phủ `kinhdich_hao` (384 lời hào — **bản dịch
+  của ban biên tập**, không phải Legge 1882), `kinhdich_doi_song`, `kinhdich_tra_loi`, `bo_sung_que`; `ten_en` thêm 8 nhóm (quẻ, quái,
+  lục thân, lục thú, Thế/Ứng…). Lớp Ngô Tất Tố (Tiểu tượng, Trình Di, Chu Hy) + loại tượng Thuyết Quái **chỉ bản Việt** (bản dịch
+  tiếng Việt, không có bản Anh tương đương) — `kinhdich.hoi` ở `KHUNG_BO_QUA` có ghi lý do; `kb.trang.que` còn `KHUNG_CHUA_XONG`.
+- **Hỏi đáp** (`hoidap/en_gloss_kd.py`, `en/loi/hoi_kinhdich.json`, `tests/test_en_kinhdich_hoi.py`): nhận quẻ theo số / tên Anh /
+  pinyin / sáu giá trị xu, câu kiến thức, chủ đề, vai, mốc năm, "A or B" (làm rõ trước khi gieo); hai lượt "bản Việt quyết" (sáu hào
+  máy gieo + giờ gieo qua `quyet` → hai lượt đọc cùng một quẻ). An toàn tiếng Anh thêm nhóm khủng hoảng / cấp cứu / kẻ lạ đột nhập /
+  từ chối GĐ 6. Số: **dev (220)** định tuyến 27,8 → 97,5 %, khủng hoảng 29/29, cấp cứu 12/13, từ chối 20/20, chặn nhầm 1, mốc năm 8/8;
+  **đóng băng (160)** định tuyến 25 → 75,7 %, khủng hoảng 13/21, cấp cứu 7/10, từ chối 12/14, chặn nhầm 0; chữ Việt / 500 = 0. Bộ an
+  toàn chung + dev ba mảng trước không lùi.
+- **Chính sách đã chọn**: câu vừa khủng hoảng vừa cấp cứu (uống cả lọ thuốc) → nhánh khủng hoảng (lời đáp có câu gọi cấp cứu);
+  "business partner / co-founder / investor" + trust ở câu tiếng Anh vẫn vào luật nhân sự (bảo thủ hơn bản Việt Kinh Dịch) — chờ anh
+  quyết có nới cho Kinh Dịch không.
+- **Thuật ngữ cần người bản xứ duyệt**: changed / resulting hexagram, Response / Other line (Ying), Use God line, Officer / Wealth /
+  Parent / Offspring / Sibling line, body / use trigram (Mai Hoa), void branch, month breaker, "meaning-and-principle reading".
+
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
 1. ~~**Engine không tất định giữa các tiến trình**~~ — **ĐÃ SỬA**: hai chỗ lặp qua `set` rồi đưa ra đầu ra — `kb/tu_dien._mau`
@@ -424,3 +443,4 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
   cụm, review code + UX 3 vai; anh duyệt sửa hai ngôn ngữ (golden đổi 2 lượt); gộp main (KT-TT4…SX-1: sao nhỏ, sách xưa, bổ sung
   sao/cung — đã chuyển thể).
 - **2026-11-13 — hỏi đáp lai** (mục 6.4) + **GĐ 5 Phong thuỷ** engine + hỏi đáp (mục 3f).
+- **2026-11-13 → 14 — GĐ 6 Kinh Dịch** (mục 3g); sửa 10 cảnh báo CodeQL (regex chậm / chèn regex) + test `test_hoi_redos.py` cho mọi route hỏi đáp.

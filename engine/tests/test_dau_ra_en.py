@@ -43,7 +43,7 @@ CHUA_XONG: dict[str, int] = {
     # GĐ 6 — Kinh Dịch
     # GĐ 6 (engine) xong: kinhdich (chủ đề), kinhdich.khoi_que, kinhdich.que_rieng. kinhdich.hoi: phần bài đọc (doc_que, que,
     # mai_hoa) sạch — còn tiêu đề lời kinh / bằng chứng / cờ / khối hình của nhánh hỏi đáp (hoidap/kinhdich.py, truc_quan).
-    "kinhdich.hieu_cau": 6, "kinhdich.hoi": 6, "hoi.kinhdich": 6,
+    # GĐ 6 (hỏi đáp, 2026-11-13) xong: kinhdich.hieu_cau, kinhdich.hoi, hoi.kinhdich (hoidap/en_gloss_kd + hai lượt "bản Việt quyết").
     # GĐ 7 — Thần số + Tarot đầy đủ
     "thanso.ba_goc_nhin": 7, "thanso.ban_do": 7, "thanso.cap_so": 7, "thanso.chaldea": 7, "thanso.chu_ky": 7, "thanso.do_nhay": 7,
     "thanso.doi_chieu_nam": 7, "thanso.hom_nay": 7, "thanso.hop_doi": 7, "thanso.ngu_canh": 7,
@@ -65,6 +65,9 @@ KHUNG_BO_QUA = {
     "hoi.thanso",        # QTE-3: bản Anh trả lời bằng `hoi_en` gọn — thay bằng bản đầy đủ ở GĐ 7
     "hoi.tuvi", "hoi.battu", "hoi.phongthuy", "hoi.kinhdich", "hoi.dac_biet", "nhan_tuong.hoi",   # câu hỏi tiếng Việt gửi bản Anh
     "tarot.hieu_cau", "tarot.hoi", "tarot.hoi_cau", "kinhdich.hieu_cau", "thanso.ngu_canh",
+    # GĐ 6: lớp CHỈ có bản Việt (Ngô Tất Tố: Trình Di, Chu Hy, Tiểu tượng; loại tượng Thuyết Quái) + `so_trong_goi` (số rút từ
+    # CHỮ của lời đáp, khác theo ngôn ngữ) — mọi khoá khác (mã, mức, số hộp, quẻ) giống bản Việt.
+    "kinhdich.hoi",
     "tarot.doc_bai",     # QTE-3: bản phủ tắt `truong_phai` / `viec_lv` (null) → ít hộp hơn; khôi phục ở GĐ 7
 }
 # Khung lệch CHƯA giải thích — phải sửa ở giai đoạn ghi kèm (ngôn ngữ không được đổi dữ kiện).
@@ -74,7 +77,7 @@ KHUNG_BO_QUA = {
 # tám quái, nghĩa sao nhỏ. Bản Anh chưa có các trường này; chuyển thể cùng giai đoạn của mảng (Tử vi GĐ 4, Kinh Dịch GĐ 6).
 KHUNG_CHUA_XONG: dict[str, int] = {"kb.trang.la_bai": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7, "goi_y_cheo": 7,
                                    "kb.trang.bo_vi": 7, "kb.trang.menh_nam": 7,
-                                   "kb.trang.que": 6, "kinhdich.hoi": 6}
+                                   "kb.trang.que": 6}
 
 
 @pytest.fixture(scope="module")

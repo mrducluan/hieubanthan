@@ -62,7 +62,7 @@ export function dauNgonNgu(req: Request): Record<string, string> {
  *  Mở thêm mảng tiếng Anh = thêm mã vào đây. Người gửi header giả chỉ nhận bản TIẾNG ANH của đúng mảng đã mở miễn phí. */
 export const MO_DUN_MIEN_PHI_EN = {
   luan_giai: new Set(["battu", "tuvi"]),
-  hoi: new Set(["battu", "phongthuy", "thanso", "tuvi"]),
+  hoi: new Set(["battu", "kinhdich", "phongthuy", "thanso", "tuvi"]),
 } as const;
 
 export function mienPhiBanAnh(req: Request, loai: keyof typeof MO_DUN_MIEN_PHI_EN, moDun: string): boolean {

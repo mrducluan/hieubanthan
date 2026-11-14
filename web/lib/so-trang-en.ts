@@ -73,6 +73,12 @@ export const CUM_EN: Readonly<Record<string, CumEn>> = {
     mo_ta: "Old verses of Zi Wei Dou Shu in the original Chinese with pinyin and a plain-English editorial translation, and what each line means on a real chart.",
     tra_loi: "The rules of Zi Wei Dou Shu were handed down as short verses in classical Chinese. This section gives the original text with pinyin, a plain-English translation by our editorial team, and what each line means when you read a chart. It has {so} page(s).",
   },
+  "/kinh-dich/que": {
+    ten: "The 64 hexagrams", h1: "The 64 hexagrams of the I Ching",
+    tieu_de_seo: "The 64 I Ching hexagrams: meaning, lines and judgement · Hieuban",
+    mo_ta: "All 64 I Ching hexagrams: the judgement and six line texts in the original Chinese, with a plain-English meaning and how each reads for your question.",
+    tra_loi: "The I Ching (Book of Changes) has 64 hexagrams, each made of six lines that are either solid (yang) or broken (yin). This section has {so} page(s): for each hexagram, the judgement and the six line texts in the original Chinese, a translation, a plain-English meaning, and how it tends to read when you ask about work, money, love or a decision.",
+  },
   "/phong-thuy/dau-hieu": {
     ten: "Home feng shui signs", h1: "Common feng shui signs in the home",
     tieu_de_seo: "Feng shui home signs: what they mean and what to do · Hieuban",
@@ -193,6 +199,42 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
     kien_thuc: {
       tieu_de: "Learn feng shui",
       cum: Object.fromEntries(["/phong-thuy/dau-hieu"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
+    },
+  },
+  "/kinh-dich": {
+    ten: "I Ching",
+    tieu_de_seo: "Free I Ching reading: cast a hexagram for one question · Hieuban",
+    mo_ta_seo: "Free I Ching reading: ask about one matter, cast three coins six times, and get a plain-English answer with the hexagram, changing lines and original text.",
+    tra_loi_nhanh: {
+      hoi: "How does this online I Ching reading work?",
+      dap: "Write the matter you are unsure about, then cast three coins six times. The page builds your hexagram, its changing lines and the hexagram it changes into — out of the 64 hexagrams and 384 lines — and answers your question in plain English, with the original text alongside. The hexagram is something to weigh, not a decision made for you.",
+      lien_ket: [{ href: "/en/i-ching/hexagrams", ten: "Meaning of the 64 hexagrams" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the I Ching reading",
+      doan: [
+        "Unsure about one thing — taking an offer, moving house, opening a shop, getting back in touch with someone? Cast one hexagram and get a short answer in plain words: whether the matter is flowing or needs a different approach, and what to do this week. The hexagram can be cast by the computer, by the hour, by two numbers or a direction you choose (Plum Blossom), or with real coins that you enter yourself — no step picks the hexagram for you.",
+        "The reading covers the primary hexagram, the changing lines and the resulting hexagram, and quotes the Book of Changes in the original Chinese (the judgement, the line texts and the Commentary on the Judgement) with a translation and a plain explanation. Each reading also notes the downside and gives you a question to reflect on.",
+        "If you ask the same thing again within a short time, the page reminds you, in the spirit of hexagram 4 (Youthful Folly): asking again and again muddies the answer. The reading is cultural reference; decisions stay with you.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "How should I ask the I Ching a question?", dap: "Ask about one specific matter that depends on your own choice, ideally with a time frame — for example, whether to accept this job offer this quarter. Avoid yes/no questions about fate, and avoid putting several options into one question." },
+        { hoi: "What is the difference between the casting methods?", dap: "The computer casting simulates three coins; Plum Blossom builds the hexagram from the lunar year, month, day and hour of asking (or from two numbers or a direction you pick); casting by hand means you toss real coins and enter the results. The hexagram is read the same way whichever method you use." },
+        { hoi: "What are changing lines?", dap: "When all three coins land the same way, that line is “moving” — it is where the matter is changing. Flip those lines and you get the resulting hexagram, which shows where things are heading." },
+        { hoi: "What if no lines are changing?", dap: "Then the main text is the judgement of the hexagram itself, with the Commentary on the Judgement translated alongside." },
+        { hoi: "Why are there three ways of reading the same hexagram?", dap: "Different schools read a hexagram differently: Meaning and Principle reads the classic text, Plum Blossom weighs the trigrams against each other, and Six Lines (Na Jia) looks at the line that stands for your matter and how the day and month support it. The page says which one leads your answer and keeps the other two folded below." },
+        { hoi: "Is it free? Is my question stored?", dap: "The I Ching reading is free in English. Your question passes through one reading and is not stored on our side; the list of hexagrams you have cast stays only on your device, and you can delete it at any time." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+        { href: "/en/tarot", ten: "Tarot reading" },
+      ] },
+    },
+    kien_thuc: {
+      tieu_de: "Learn the I Ching",
+      cum: Object.fromEntries(["/kinh-dich/que"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
     },
   },
 };

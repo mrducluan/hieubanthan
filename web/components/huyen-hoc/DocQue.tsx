@@ -15,6 +15,7 @@ import { ghi } from "@/lib/do-luong";
 import { ghiMoPhai } from "@/lib/thoi-quen-doc";
 import { GoiMoCheo, type GoiMo } from "@/components/khung/GoiMoCheo";
 import { NhacToi } from "@/components/khung/NhacToi";
+import { useChuKD } from "@/components/kinh-dich/chu-kinh-dich";
 
 export interface GocNhin { muc: Muc; nhan: string; tom_tat?: string; can_cu: string[] }
 export interface GocNhinLucHao extends GocNhin {
@@ -51,7 +52,7 @@ export interface DocQueKq {
 
 /** "Tuất" → "tuat" (mã nhắc chỉ a-z). */
 const maChi = (chi: string) => chi.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/gi, "d").toLowerCase();
-const TEN_PHAI: Record<string, string> = { nghia_ly: "Nghĩa Lý (lời kinh)", mai_hoa: "Mai Hoa (thể – dụng)", luc_hao: "Lục Hào (dụng thần)" };
+const PHAI3 = new Set(["nghia_ly", "mai_hoa", "luc_hao"]);
 
 function Gap({ id, Icon, tieuDe, children, testId, onMo }: { id: string; Icon: typeof BookOpen; tieuDe: string; children: React.ReactNode; testId?: string; onMo?: () => void }) {
   const [mo, setMo] = useState(false);
@@ -73,6 +74,9 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
   /** tên quẻ bản (nhãn mốc nhắc). */ tenQue?: string;
 }) {
   const [nhom, setNhom] = useState(0);
+  // EN-ALL GĐ 6: chữ cố định theo ngôn ngữ trang; mã (lục thân, chi, hành, lục thú, quái…) qua `ten_hien` (TenHienProvider ở nơi gọi).
+  const { c, en, ten, ngayNgan } = useChuKD();
+  const tenPhai = (k: string) => (PHAI3.has(k) ? c(`dq.phai_${k}`) : k);
   const [moPhai, setMoPhai] = useState<Record<string, boolean>>({});
   const gn = dq.goc_nhin;
   const cac = (["nghia_ly", "mai_hoa", "luc_hao"] as const).filter((k) => gn[k]);
@@ -90,10 +94,10 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
     <div className="space-y-4" data-testid="doc-que">
       <div className="flex flex-wrap items-center gap-2">
         <ChipMuc muc={dq.muc} nhan={dq.nhan_muc} />
-        <span className="text-xs text-fg-faint">Chủ đề: {dq.chu_de.ten} · đọc chính theo {TEN_PHAI[gn.chinh] ?? gn.chinh}</span>
+        <span className="text-xs text-fg-faint">{c("dq.chu_de", { ten: dq.chu_de.ten, phai: tenPhai(gn.chinh) })}</span>
         {dq.tra_loi?.nhan_tag && (
-          <span className="rounded-full border border-line/70 px-2 py-0.5 text-xs text-fg-muted" data-testid="xu-huong-hao" title={dq.tra_loi.nguon_tag ? `Lời làm chủ: ${dq.tra_loi.nguon_tag}` : undefined}>
-            Lời hào làm chủ: {dq.tra_loi.nhan_tag}
+          <span className="rounded-full border border-line/70 px-2 py-0.5 text-xs text-fg-muted" data-testid="xu-huong-hao" title={dq.tra_loi.nguon_tag ? c("dq.lam_chu_title", { x: dq.tra_loi.nguon_tag }) : undefined}>
+            {c("dq.lam_chu", { x: dq.tra_loi.nhan_tag })}
           </span>
         )}
       </div>
@@ -106,7 +110,7 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
       <div className="prose-vn space-y-2 text-[0.95rem] leading-relaxed text-fg-muted">{doanCoThuatNgu(dq.doan.join("\n\n"), thuatNgu)}</div>
 
       {dq.hanh_dong.length > 0 && (
-        <section aria-label="Việc nên làm" className="rounded-xl border border-line/70 bg-surface/40 p-3" data-testid="hanh-dong">
+        <section aria-label={c("dq.viec_aria")} className="rounded-xl border border-line/70 bg-surface/40 p-3" data-testid="hanh-dong">
           <div role="tablist" className="flex flex-wrap gap-1.5">
             {dq.hanh_dong.map((n, i) => (
               <button key={n.muc} role="tab" type="button" aria-selected={i === nhom} onClick={() => setNhom(i)}
@@ -124,14 +128,14 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
 
       {dq.cau_tu_soi && (
         <p className="rounded-xl bg-moon/10 px-4 py-2.5 text-moon" data-testid="cau-tu-soi">
-          <span className="text-xs font-semibold uppercase tracking-wider">Tự hỏi mình</span>
+          <span className="text-xs font-semibold uppercase tracking-wider">{c("dq.tu_hoi")}</span>
           <span className="mt-0.5 block italic">{dq.cau_tu_soi}</span>
         </p>
       )}
 
       {dq.cau_lien_quan.length > 0 && onHoi && (
         <div className="flex flex-wrap gap-2" data-testid="cau-lien-quan">
-          <span className="self-center text-xs text-fg-faint">Hỏi tiếp:</span>
+          <span className="self-center text-xs text-fg-faint">{c("dq.hoi_tiep")}</span>
           {dq.cau_lien_quan.map((c) => (
             <button key={c} type="button" onClick={() => onHoi(c)}
               className="rounded-full border border-line px-3 py-1 text-xs text-fg-muted hover:border-gold/60 hover:text-fg">{c}</button>
@@ -141,24 +145,24 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
 
       {ungKy.length > 0 && (
         <div className="rounded-xl border border-line/70 bg-bg/30 p-3 text-sm" data-testid="ung-ky">
-          <p className="text-xs font-semibold uppercase tracking-wider text-fg-faint">Mốc đáng để ý (nhịp gợi ý, không phải dự báo)</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-fg-faint">{c("dq.ung_ky")}</p>
           <ul className="mt-2 space-y-2">
             {ungKy.map((u) => (
               <li key={u.chi + u.ngay_gan_nhat} className="flex flex-wrap items-center gap-2">
-                <span>Ngày {u.chi} · {u.ngay_gan_nhat.slice(8, 10)}/{u.ngay_gan_nhat.slice(5, 7)} — {u.ly_do}</span>
-                <NhacToi ngay={u.ngay_gan_nhat} ma={`kd.ungky.${maChi(u.chi)}`} moDun="kinhdich"
-                  nhan={`Ngày ${u.chi} — mốc ứng kỳ${tenQue ? ` quẻ ${tenQue}` : ""} (${dq.chu_de.ten})`} duong="/kinh-dich" />
+                <span>{c("dq.ung_ky_dong", { chi: ten("chi", u.chi), ngay: ngayNgan(u.ngay_gan_nhat), ly_do: u.ly_do })}</span>
+                {!en && <NhacToi ngay={u.ngay_gan_nhat} ma={`kd.ungky.${maChi(u.chi)}`} moDun="kinhdich"
+                  nhan={`Ngày ${u.chi} — mốc ứng kỳ${tenQue ? ` quẻ ${tenQue}` : ""} (${dq.chu_de.ten})`} duong="/kinh-dich" />}
               </li>
             ))}
           </ul>
         </div>
       )}
-      {dq.goi_mo && <GoiMoCheo goiMo={dq.goi_mo} moDun="kinhdich" gon />}
+      {dq.goi_mo && !en && <GoiMoCheo goiMo={dq.goi_mo} moDun="kinhdich" gon />}
 
       {/* ---- tầng học thuật: gập ---- */}
       <ViSao canCu={dq.can_cu.map((c) => `${c.tieu_de}: ${c.noi_dung}`)} thuatNgu={thuatNgu} />
       <div className="space-y-2">
-        <Gap id={`${id}-goc-nhin`} Icon={Layers} tieuDe={`Ba cách đọc cùng một quẻ (${cac.length})`} testId="goc-nhin"
+        <Gap id={`${id}-goc-nhin`} Icon={Layers} tieuDe={c("dq.ba_cach", { n: String(cac.length) })} testId="goc-nhin"
           onMo={() => ghi("chart_interacted", { mo_dun: "kinhdich", kind: "mo_goc_nhin" })}>
           <div className="space-y-3">
             {cac.map((k) => {
@@ -167,7 +171,7 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
               return (
                 <div key={k} className={cn("rounded-lg border p-3", k === gn.chinh ? "border-gold/50" : "border-line/60")} data-phai={k}>
                   <button type="button" aria-expanded={mo} onClick={() => moCachDoc(k)} className="flex w-full flex-wrap items-center gap-2 text-left text-sm font-semibold text-fg">
-                    {TEN_PHAI[k]} <ChipMuc muc={g.muc} nhan={g.nhan} />{k === gn.chinh && <span className="text-xs font-normal text-gold">đang dùng</span>}
+                    {tenPhai(k)} <ChipMuc muc={g.muc} nhan={g.nhan} />{k === gn.chinh && <span className="text-xs font-normal text-gold">{c("dq.dang_dung")}</span>}
                     <ChevronDown className={cn("ml-auto size-4 text-fg-muted transition-transform", mo && "rotate-180")} aria-hidden />
                   </button>
                   {mo && <>
@@ -175,24 +179,24 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
                   {k === "luc_hao" && gn.luc_hao && (
                     <div className="mt-2 overflow-x-auto">
                       <table className="w-full text-xs">
-                        <thead><tr className="text-fg-faint"><th className="text-left">Hào</th><th className="text-left">Lục thân</th><th className="text-left">Chi</th><th className="text-left">Lục thú</th><th className="text-left">Ngày tháng</th><th className="text-left">Động / hoá</th></tr></thead>
+                        <thead><tr className="text-fg-faint"><th className="text-left">{c("dq.cot_hao")}</th><th className="text-left">{c("dq.cot_luc_than")}</th><th className="text-left">{c("dq.cot_chi")}</th><th className="text-left">{c("dq.cot_luc_thu")}</th><th className="text-left">{c("dq.cot_ngay_thang")}</th><th className="text-left">{c("dq.cot_dong")}</th></tr></thead>
                         <tbody>
                           {[...gn.luc_hao.hao].reverse().map((h) => (
                             <tr key={h.vi_tri} className={cn(h.dong && "text-gold")}>
-                              <td>{h.vi_tri}{h.the_ung ? ` (${h.the_ung})` : ""}</td><td>{h.luc_than}{h.phuc ? ` · phục ${h.phuc.luc_than}` : ""}</td>
-                              <td>{h.dia_chi} {h.ngu_hanh}</td><td>{h.luc_thu}</td><td>{h.tong}</td>
-                              <td>{h.dong ? (h.hoa ? `→ ${h.hoa.dia_chi} (${h.hoa.loai})` : "động") : ""}</td>
+                              <td>{h.vi_tri}{h.the_ung ? ` (${ten("the_ung_kd", h.the_ung)})` : ""}</td><td>{ten("luc_than_kd", h.luc_than)}{h.phuc ? c("dq.phuc", { x: ten("luc_than_kd", h.phuc.luc_than) }) : ""}</td>
+                              <td>{ten("chi", h.dia_chi)} {ten("hanh", h.ngu_hanh)}</td><td>{ten("luc_thu", h.luc_thu)}</td><td>{ten("vuong_suy", h.tong)}</td>
+                              <td>{h.dong ? (h.hoa ? `→ ${ten("chi", h.hoa.dia_chi)} (${ten("hoa_hao", h.hoa.loai)})` : c("dq.dong")) : ""}</td>
                             </tr>
                           ))}
                         </tbody>
                       </table>
                       {gn.luc_hao.ung_ky.length > 0 && (
-                        <p className="mt-2 text-xs text-fg-faint">Ứng kỳ (nhịp gợi ý): {gn.luc_hao.ung_ky.map((u) => `ngày ${u.chi} ${u.ngay_gan_nhat.slice(8, 10)}/${u.ngay_gan_nhat.slice(5, 7)} — ${u.ly_do}`).join("; ")}.</p>
+                        <p className="mt-2 text-xs text-fg-faint">{c("dq.ung_ky_lh", { ds: gn.luc_hao.ung_ky.map((u) => c("dq.ung_ky_lh_muc", { chi: ten("chi", u.chi), ngay: ngayNgan(u.ngay_gan_nhat), ly_do: u.ly_do })).join("; ") })}</p>
                       )}
                     </div>
                   )}
                   {k === "mai_hoa" && gn.mai_hoa && (
-                    <p className="mt-1 text-xs text-fg-faint">Thể {gn.mai_hoa.the} · Dụng {gn.mai_hoa.dung} · Hỗ {gn.mai_hoa.ho.ha}/{gn.mai_hoa.ho.thuong} · Biến {gn.mai_hoa.bien}.{gn.mai_hoa.luu_y ? ` ${gn.mai_hoa.luu_y}` : ""}</p>
+                    <p className="mt-1 text-xs text-fg-faint">{c("dq.mai_hoa", { the: ten("quai", gn.mai_hoa.the), dung: ten("quai", gn.mai_hoa.dung), ha: ten("quai", gn.mai_hoa.ho.ha), thuong: ten("quai", gn.mai_hoa.ho.thuong), bien: ten("quai", gn.mai_hoa.bien) })}{gn.mai_hoa.luu_y ? ` ${gn.mai_hoa.luu_y}` : ""}</p>
                   )}
                   <ul className="mt-2 space-y-1 border-l-2 border-line pl-3 text-xs text-fg-faint">{g.can_cu.map((c, i) => <li key={i}>{c}</li>)}</ul>
                   </>}
@@ -202,24 +206,24 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
           </div>
         </Gap>
         {dq.loi_kinh.length > 0 && (
-          <Gap id={`${id}-loi-kinh`} Icon={ScrollText} tieuDe="Lời kinh nguyên văn (Chu Dịch)" testId="loi-kinh" onMo={() => ghi("chart_interacted", { mo_dun: "kinhdich", kind: "mo_loi_kinh" })}>
+          <Gap id={`${id}-loi-kinh`} Icon={ScrollText} tieuDe={c("dq.loi_kinh")} testId="loi-kinh" onMo={() => ghi("chart_interacted", { mo_dun: "kinhdich", kind: "mo_loi_kinh" })}>
             <div className="space-y-3">
               {dq.loi_kinh.map((l, i) => (
                 <div key={i}>
-                  <p className="font-semibold text-fg">{l.chu ? "【Lời chủ】 " : ""}{l.tieu_de}</p>
+                  <p className="font-semibold text-fg">{l.chu ? c("dq.loi_chu") : ""}{l.tieu_de}</p>
                   <p className="text-fg-muted" style={{ fontFamily: "var(--font-han), serif" }}>「{l.han}」</p>
                   <p className="text-fg-muted">{l.dich}{l.y ? ` — ${l.y}` : ""}</p>
-                  {l.thoan && <p className="text-fg-faint">Thoán truyện: {l.thoan}</p>}
-                  {l.nom_na && <p className="text-fg-faint">Hiểu đơn giản: {l.nom_na}</p>}
+                  {l.thoan && <p className="text-fg-faint">{c("dq.thoan")}{l.thoan}</p>}
+                  {l.nom_na && <p className="text-fg-faint">{c("dq.nom_na")}{l.nom_na}</p>}
                   {l.tieu_tuong && (
                     <p className="text-fg-faint" data-testid="tieu-tuong">
-                      Tiểu tượng: <span style={{ fontFamily: "var(--font-han), serif" }}>「{l.tieu_tuong.han}」</span> — {l.tieu_tuong.dich}
+                      {c("dq.tieu_tuong")}<span style={{ fontFamily: "var(--font-han), serif" }}>「{l.tieu_tuong.han}」</span> — {l.tieu_tuong.dich}
                     </p>
                   )}
-                  {l.trinh && <p className="text-fg-faint" data-testid="loi-trinh-di">Trình Di giảng: {l.trinh}</p>}
-                  {l.chu_hy && <p className="text-fg-faint" data-testid="loi-chu-hy">Chu Hy giảng: {l.chu_hy}</p>}
+                  {l.trinh && <p className="text-fg-faint" data-testid="loi-trinh-di">{c("dq.trinh")}{l.trinh}</p>}
+                  {l.chu_hy && <p className="text-fg-faint" data-testid="loi-chu-hy">{c("dq.chu_hy")}{l.chu_hy}</p>}
                   {(l.trinh || l.chu_hy || l.tieu_tuong) && l.nguoi_dich && (
-                    <p className="text-xs text-fg-faint">Lời xưa theo bản dịch của {l.nguoi_dich}.</p>
+                    <p className="text-xs text-fg-faint">{c("dq.nguoi_dich", { x: l.nguoi_dich })}</p>
                   )}
                 </div>
               ))}
@@ -227,7 +231,7 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
           </Gap>
         )}
         {vanDayDu && (
-          <Gap id={`${id}-day-du`} Icon={BookOpen} tieuDe="Bản đọc đầy đủ theo sách" testId="ban-day-du" onMo={() => ghi("chart_interacted", { mo_dun: "kinhdich", kind: "mo_ban_day_du" })}>
+          <Gap id={`${id}-day-du`} Icon={BookOpen} tieuDe={c("dq.day_du")} testId="ban-day-du" onMo={() => ghi("chart_interacted", { mo_dun: "kinhdich", kind: "mo_ban_day_du" })}>
             <div className="space-y-2 text-fg-muted">{doanCoThuatNgu(vanDayDu, thuatNgu)}</div>
           </Gap>
         )}

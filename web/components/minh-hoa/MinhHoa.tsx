@@ -122,10 +122,10 @@ function HinhCapSo({ a, b }: { a: number; b: number }) {
 }
 
 // ---------------------------------------------------------------- quẻ: 6 hào (hào 1 dưới cùng)
-function HinhQue({ so, hao }: { so: number; hao: number[] }) {
+function HinhQue({ so, hao, c }: { so: number; hao: number[]; c: Chu }) {
   const x0 = 100, rong = 120, cao = 12, khe = 10, y0 = 42;
   return (
-    <Khung nhan={`Hình quẻ ${so} Kinh Dịch — sáu hào, đọc từ dưới lên`}>
+    <Khung nhan={c("mh.que", { so: String(so) })}>
       <circle cx={160} cy={120} r={104} className="fill-none stroke-gold/20" strokeWidth={1} />
       {[...hao].reverse().map((h, i) => {
         const y = y0 + i * (cao + khe);
@@ -349,7 +349,7 @@ export function MinhHoa({ mh, duong, gon = false, en = false, ten = MA }: { mh?:
   const hinh = (() => {
     switch (mh.kieu) {
       case "so": return <HinhSo {...mh} />;
-      case "que": return <HinhQue {...mh} />;
+      case "que": return <HinhQue {...mh} c={c} />;
       case "cap_so": return <HinhCapSo {...mh} />;
       case "sao": return <HinhSaoTuVi {...mh} c={c} tn={ten} />;
       case "cung": return <HinhCung {...mh} c={c} />;
