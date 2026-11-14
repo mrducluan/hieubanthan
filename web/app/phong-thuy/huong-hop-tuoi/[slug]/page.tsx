@@ -12,6 +12,7 @@ import { ArrowRight, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
+import { SachXuaNoi } from "@/components/huyen-hoc/SachXuaNoi";
 import { cungPhi, dsCungPhi, duongTuoi, type CungPhi, type HuongDuNien } from "@/lib/kien-thuc";
 import { anhBai, catMoTa, goiLd, ldAnh, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import { DuongDan } from "@/components/khung/DuongDan";
@@ -79,7 +80,9 @@ export default async function Page({ params: thamSo }: Props) {
       author: { "@type": "Organization", name: `Ban biên tập ${TEN_SITE}`, url: siteUrl() },
       editor: { "@id": `${siteUrl()}/tac-gia/duc-luan#nguoi` },
       publisher: { "@id": `${siteUrl()}/#to-chuc` }, isPartOf: { "@id": `${siteUrl()}/#website` },
-      isAccessibleForFree: true, citation: c.nguon, abstract: c.tra_loi_nhanh,
+      isAccessibleForFree: true,
+      citation: c.sach_xua?.length ? [c.nguon, "Dương Trạch Thập Thư (陽宅十書), chép trong Cổ Kim Đồ Thư Tập Thành, 1725"] : c.nguon,
+      abstract: c.tra_loi_nhanh,
       datePublished: c.ngay_dang, dateModified: c.cap_nhat,
       about: [
         { "@type": "Thing", name: "Phong thuỷ Bát trạch", sameAs: "https://en.wikipedia.org/wiki/Feng_shui" },
@@ -140,6 +143,13 @@ export default async function Page({ params: thamSo }: Props) {
           ))}
         </div>
       </section>
+
+      {c.sach_xua?.length ? (
+        <div className="mt-10">
+          <SachXuaNoi ds={c.sach_xua} moDun="phongthuy" tinh tieuDe={`Sách xưa nói gì về người cung ${c.quai}`}
+            moTa={`Câu chép trong Dương Trạch Thập Thư (bản trong Cổ Kim Đồ Thư Tập Thành, 1725) nói về người cung ${c.quai}. Lời Việt là phần tóm ý của ban biên tập; mở từng câu để xem nguyên văn.`} />
+        </div>
+      ) : null}
 
       <section className="mt-10" aria-labelledby="nam-sinh">
         <h2 id="nam-sinh" className="text-2xl">Năm sinh có cung {c.quai} (1960–2005)</h2>

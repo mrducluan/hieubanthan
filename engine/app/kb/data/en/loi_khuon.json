@@ -223,5 +223,21 @@
  "thanso_en.phan_chung": "Counter-question to test it: {x}",
  "thanso_en.so_khac": "Your other core numbers: {ds}.",
  "thanso_en.goi_y_hoi": "You can also ask about love, work, money, family, well-being, this year or this month.",
- "thanso_en.can_cu.cot_loi": "Life Path from the birth date ({quy_uoc}); Expression, Soul Urge and Personality from the name on the birth certificate."
+ "thanso_en.can_cu.cot_loi": "Life Path from the birth date ({quy_uoc}); Expression, Soul Urge and Personality from the name on the birth certificate.",
+ "pt.sach_xua.sach": "Yangzhai Shishu (Ten Books on Dwellings)",
+ "pt.sach_xua.ve.nhom": "You belong to the {nhom} ({quai} trigram)",
+ "pt.sach_xua.ve.nhom_cung": "People with the {quai} trigram belong to the {nhom}",
+ "pt.sach_xua.y.nhom.dong": "East Group people have their favourable stars in the North, South, East and South-East. The book advises opening doors, running paths, building the taller rooms and placing the head of the household on those sides.",
+ "pt.sach_xua.y.nhom.tay": "West Group people have their favourable stars in the North-West, South-West, North-East and West. The book advises opening doors, running paths, building the taller rooms and placing the head of the household on those sides.",
+ "pt.sach_xua.goc.ban": "your {quai} palace",
+ "pt.sach_xua.goc.cung": "the {quai} palace itself",
+ "pt.sach_xua.ve.du_nien": "The Great Wandering Year verse for {quai}",
+ "pt.sach_xua.y.du_nien": "The book takes {goc} as the starting point: doors, rooms, wells and stoves are all counted from it. Reading the verse round the eight directions gives four favourable sides: {tot}. The book ranks the other four as unfavourable and advises against the main door or main path there: {xau}.",
+ "pt.sach_xua.ve.vo_chong.vo": "You and your wife are in different groups",
+ "pt.sach_xua.ve.vo_chong.chong": "You and your husband are in different groups",
+ "pt.sach_xua.y.vo_chong": "The book discusses couples in different groups: unlike parents and grown children, a couple cannot live in separate courtyards, so each chooses the room that suits them within the same home. Being in different groups is no reason to move house.",
+ "pt.sach_xua.ve.nha_nhieu_nguoi": "Someone in your home is in a different group",
+ "pt.sach_xua.y.nha_nhieu_nguoi": "A home of many people in different groups: the book says each person follows their own birth year to choose where to live within the same house, however large the family.",
+ "pt.sach_xua.noi": "; ",
+ "pt.sach_xua.huong_dn": "{huong} — {dn}"
 }
