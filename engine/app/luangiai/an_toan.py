@@ -1324,7 +1324,11 @@ _KHUNG_HOANG_GD6 = _rx_en(
 
 def _khung_hoang_gd6(k: str) -> bool:
     # hai tín hiệu tự phủ nhận KHÁC NHAU trong một câu ("nobody loves me" + "tired of everything") — đủ thành khủng hoảng
-    return bool(_KHUNG_HOANG_GD6.search(k)) or len({m.group(0) for m in _VO_DUNG.finditer(k)}) >= 2
+    m = _KHUNG_HOANG_GD6.search(k)
+    # nhảy bungee / lặn vách đá: như nhóm đầu của KHUNG_HOANG_ANH — bỏ cụm "jump off …" rồi xét lại
+    if m and _NHAY_GT.search(k) and not _KHUNG_HOANG_GD6.search(_NHAY.sub(" ", k)):
+        m = None
+    return bool(m) or len({x.group(0) for x in _VO_DUNG.finditer(k)}) >= 2
 
 
 # Cấp cứu đang xảy ra (GĐ 6): rắn / ong đốt kèm sưng, họng thắt lại sau khi bị đốt / ăn, tai nạn có người bất động, kẻ lạ
