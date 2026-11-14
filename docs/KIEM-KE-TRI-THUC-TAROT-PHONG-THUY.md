@@ -289,3 +289,48 @@ Mới là **kho nguồn** (để đối chiếu và trích về sau), chưa có 
 3. Hoàng Kim Sách → câu sách theo 20 chủ đề hỏi quẻ.
 4. Mai Hoa Dịch Số «八卦萬物類占» → đối chiếu loại tượng tám quái đang dùng.
 
+
+## 11. Đợt 7 (WS-2, 2026-11-14) — sách không có trang riêng trên Wikisource: tìm nơi chép trọn
+
+Nguyên tắc vẫn như cũ: chỉ nạp bản có nguồn gốc kiểm được (bộ sách khâm định / bản Tứ khố), không nạp bản trôi nổi.
+
+### Đã nạp (đều `can_doi_chieu: true`)
+
+| Tệp `fixtures/nguon/` | Sách | Lấy từ | Cỡ |
+|---|---|---|---|
+| `duong_trach_thap_thu.json` | 陽宅十書 Dương Trạch Thập Thư (Vương Quân Vinh, Minh) — đủ 10 thiên, từ «論宅外形第一» tới «論符鎮第十» | 《欽定古今圖書集成》 (1725) 藝術典 quyển 675–678 trên Wikisource | 91 mục, ~23.800 chữ |
+| `than_tuong_toan_bien.json` | 神相全編 Thần Tướng Toàn Biên (Viên Trung Triệt đính chính, Minh) — đủ 14 phần | cùng bộ, quyển 631–644 | 445 mục, ~145.700 chữ |
+| `chieu_dam_kinh.json` | 照膽經 Chiếu Đảm Kinh (sách tướng) | cùng bộ, quyển 645–646 | 60 mục, ~24.000 chữ |
+| `kham_du_tu_kho.json` | 靈城精義 Linh Thành Tinh Nghĩa (Hà Phổ, Nam Đường) · 催官篇 Thôi Quan Thiên (Lại Văn Tuấn, Tống) · 發微論 Phát Vi Luận (Thái Nguyên Định, Tống) | bản Văn Uyên Các Tứ khố (Kanseki KR3g0025–0027) — thay bản Wikisource của Linh Thành đã loại ở WS-1 | 5 quyển, ~46.300 chữ |
+
+- Cổ Kim Đồ Thư Tập Thành là loại thư khâm định đời Thanh, in đồng 1725; Wikisource gõ lại từng trang từ bản chụp. **Chấm câu trên
+  Wikisource là của người gõ (CC BY-SA 4.0), không phải của sách → bộ nạp bỏ hết**, giữ chữ sách như bản Tứ khố (không chấm câu).
+- Bộ nạp: `engine/scripts/nap_co_kim_do_thu.py`, `engine/scripts/nap_kham_du_tu_kho.py`. Test: `engine/tests/test_ws2_kho_nguon_bo_sung.py`
+  (đủ chữ, đúng sách, không lẫn sách đứng trước trong cùng quyển, không còn dấu chấm câu thời nay).
+- **Không dùng cho lời hiển thị**: thiên «論符鎮第十» của Dương Trạch Thập Thư (bùa trấn, chôn vật) và các câu phán sống chết, khắc hại
+  trong Thần Tướng Toàn Biên — chỉ để đối chiếu. Phần dùng được: luận hình thế ngoài nhà, đại du niên, cửa, nước, hình thế trong nhà
+  (Dương Trạch Thập Thư thiên 1–8); bộ vị, 12 cung, lưu niên, khí sắc (Thần Tướng Toàn Biên) — đối chiếu được với KB Bát trạch và Nhân tướng.
+
+### Còn phải nhờ anh tải về (không có bản chữ kiểm được trên mạng mở)
+
+Bản trên archive.org là **ảnh quét**, máy phiên này không tải được tệp để kiểm lớp chữ; kinh nghiệm các lần trước: lớp chữ nhận dạng tự động
+của các bản quét 2026 không dùng được. Anh tải bản PDF, nếu có lớp chữ thì gửi lên Drive (mỗi tệp < 10 MB):
+
+| Sách | Link |
+|---|---|
+| 沈氏玄空學 Thẩm Thị Huyền Không Học | `archive.org/details/zengguangshenshi0000shen` (bản in lại, chỉ cho mượn đọc) |
+| 陽宅三要 Dương Trạch Tam Yếu (+ 地理五訣) | `archive.org/details/20260507_20260507_0914` |
+| 八宅明鏡 Bát Trạch Minh Kính | `archive.org/details/20260507_20260507_0702` |
+| 魯班經 Lỗ Ban Kinh | `archive.org/details/02090255.cn` (新鐫工師雕斲正式魯班木經匠家鏡, bản khắc, 3 MB) · `20260605_20260605_0605` · `1_20260605_20260605_0652` · `2_20260605_20260605_0658` |
+| 雪心賦 Tuyết Tâm Phú (+ 水龍經…) | `archive.org/details/20260509_20260509_0800` |
+| 地理五訣 Địa Lý Ngũ Quyết | `archive.org/details/20211030_20211030_0715` |
+| 陽宅大全 Dương Trạch Đại Toàn | `archive.org/details/02094260.cn` … `02094266.cn` · `20260508_20260508_0108` |
+| 神相水鏡集 Thần Tướng Thủy Kính Tập | `archive.org/details/20260507_20260507_0042` · `20260503_20260503_1427` |
+| 袁柳莊神相全編 (Liễu Trang) | `archive.org/details/20260503_20260503_1414` |
+
+Tài liệu học thuật có bản đọc được (để đối chiếu, có bản quyền → chỉ tóm ý): bản chú giải tiếng Nhật 陽宅十書 (chép từ Cổ Kim Đồ Thư Tập Thành)
+`omu.repo.nii.ac.jp/record/4433`, `/4450`; bản dịch chú 魯班経 `omu.repo.nii.ac.jp/record/4354`.
+
+**Chưa thấy bản nào có nguồn gốc rõ**: bản gõ chữ Thẩm Thị Huyền Không Học; 麻衣相法 Ma Y Tướng Pháp, 柳莊相法 Liễu Trang Tướng Pháp
+(bản lưu hành là bản biên tập muộn); 都天寶照經, 玄空秘旨, 紫白訣, 飛星賦, 相理衡真. ctext.org có vài sách này nhưng
+điều khoản trang cấm tải tự động → em không lấy; anh mở trang đọc được nếu cần.
