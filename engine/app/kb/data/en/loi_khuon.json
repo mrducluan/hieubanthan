@@ -244,5 +244,21 @@
  "tarot.tla.phia_ban_chu_y": "In {viec}, the cards point to what you already have and where you need to stay alert.",
  "thanso_en.diem_sang": "Bright spot for you (Life Path {so}): {x}.",
  "tu_choi.ket": "Readings stay away from questions like this (luck numbers, life and death, diagnosis, judging or influencing other people) so they never claim what they cannot know.",
- "thanso_en.sang": "Bright spot: {x}."
+ "thanso_en.sang": "Bright spot: {x}.",
+ "pt.sach_xua.sach": "Yangzhai Shishu (Ten Books on Dwellings)",
+ "pt.sach_xua.ve.nhom": "You belong to the {nhom} ({quai} trigram)",
+ "pt.sach_xua.ve.nhom_cung": "People with the {quai} trigram belong to the {nhom}",
+ "pt.sach_xua.y.nhom.dong": "East Group people have their favourable stars in the North, South, East and South-East. The book advises opening doors, running paths, building the taller rooms and placing the head of the household on those sides.",
+ "pt.sach_xua.y.nhom.tay": "West Group people have their favourable stars in the North-West, South-West, North-East and West. The book advises opening doors, running paths, building the taller rooms and placing the head of the household on those sides.",
+ "pt.sach_xua.goc.ban": "your {quai} palace",
+ "pt.sach_xua.goc.cung": "the {quai} palace itself",
+ "pt.sach_xua.ve.du_nien": "The Great Wandering Year verse for {quai}",
+ "pt.sach_xua.y.du_nien": "The book takes {goc} as the starting point: doors, rooms, wells and stoves are all counted from it. Reading the verse round the eight directions gives four favourable sides: {tot}. The book ranks the other four as unfavourable and advises against the main door or main path there: {xau}.",
+ "pt.sach_xua.ve.vo_chong.vo": "You and your wife are in different groups",
+ "pt.sach_xua.ve.vo_chong.chong": "You and your husband are in different groups",
+ "pt.sach_xua.y.vo_chong": "The book discusses couples in different groups: unlike parents and grown children, a couple cannot live in separate courtyards, so each chooses the room that suits them within the same home. Being in different groups is no reason to move house.",
+ "pt.sach_xua.ve.nha_nhieu_nguoi": "Someone in your home is in a different group",
+ "pt.sach_xua.y.nha_nhieu_nguoi": "A home of many people in different groups: the book says each person follows their own birth year to choose where to live within the same house, however large the family.",
+ "pt.sach_xua.noi": "; ",
+ "pt.sach_xua.huong_dn": "{huong} — {dn}"
 }

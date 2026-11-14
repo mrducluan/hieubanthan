@@ -2217,5 +2217,58 @@
   "thanh_nang_tu": "Thanh Nang Tự",
   "thien_ngoc_kinh": "Thiên Ngọc Kinh",
   "hiep_ky": "Hiệp Kỷ Biện Phương Thư"
+ },
+ "sach_xua_nha": {
+  "_ghi": "WS-3 (2026-11-14): câu nguyên văn Dương Trạch Thập Thư (chép trong Cổ Kim Đồ Thư Tập Thành, 1725) chọn theo mệnh quái người đọc cho khối «Sách xưa nói gì về nhà của bạn». `han` phải là chuỗi con của kho nguồn fixtures/nguon/duong_trach_thap_thu.json (test). Lời `y` là tóm ý của ban biên tập; lời của dòng khẩu quyết dựng từ bảng du niên của engine (một nguồn).",
+  "sach": "Dương Trạch Thập Thư",
+  "nhom": {
+   "Đông tứ mệnh": {
+    "han": "福元在震巽坎離宮為東四位生人其吉星俱在震巽坎離之方門所宜開路所宜行房樓所宜高大主人所宜居",
+    "y": "Người Đông tứ mệnh có sao tốt ở bốn phía Bắc, Nam, Đông và Đông Nam. Sách khuyên cửa nên mở, lối nên đi, phòng nên cao rộng và chủ nhà nên ở về các phía ấy."
+   },
+   "Tây tứ mệnh": {
+    "han": "福元在乾坤艮兌宮為西四位生人其吉星俱在乾坤艮兌之方門所宜開路所宜行房樓所宜高大主人所宜居",
+    "y": "Người Tây tứ mệnh có sao tốt ở bốn phía Tây Bắc, Tây Nam, Đông Bắc và Tây. Sách khuyên cửa nên mở, lối nên đi, phòng nên cao rộng và chủ nhà nên ở về các phía ấy."
+   }
+  },
+  "quai": {
+   "Càn": {
+    "han": "乾宮為正福德宮一切門房井竈等項皆從乾起法曰乾六天五禍絕延生"
+   },
+   "Khảm": {
+    "han": "坎宮為正福德宮一切門房井竈等項皆從坎起法曰坎五天生延絕禍六"
+   },
+   "Cấn": {
+    "han": "艮宮為正福德宮一切門房井竈等項皆從艮起法曰艮六絕禍生延天五"
+   },
+   "Chấn": {
+    "han": "震宮為正福德宮一切門房井竈等項皆從震起法曰震延生禍絕五天六"
+   },
+   "Tốn": {
+    "han": "巽宮為正福德宮一切門房井竈等項皆從巽起法曰巽天五六禍生絕延"
+   },
+   "Ly": {
+    "han": "離宮為正福德宮一切門房井竈等項皆從離起法曰離六五絕延禍生天"
+   },
+   "Khôn": {
+    "han": "坤宮為正福德宮一切門房井竈等項皆從坤起法曰坤天延絕生禍五六"
+   },
+   "Đoài": {
+    "han": "兌宮為正福德宮一切門房井竈等項皆從兌起法曰兌生禍延絕六五天"
+   }
+  },
+  "vo_chong": {
+   "Đông tứ mệnh": {
+    "han": "假如夫東四位生命而妻則西四位非如父子兄弟可分各院居也其居法當何如"
+   },
+   "Tây tứ mệnh": {
+    "han": "假如夫西四位生命而妻則東四位其居法當何如"
+   },
+   "y": "Sách bàn sẵn trường hợp vợ chồng khác nhóm: không chia viện ở riêng như cha con, anh em được, nên mỗi người chọn gian phòng hợp với mình ngay trong cùng một nhà. Khác mệnh không phải lý do để đổi nhà."
+  },
+  "nha_nhieu_nguoi": {
+   "han": "各隨生年定居此一宅分各院之法即有一父四子八孫亦惟各修其福德所宜",
+   "y": "Nhà nhiều người khác mệnh: sách dặn cứ theo năm sinh của từng người mà chọn chỗ ở hợp với mình trong cùng một nhà, dù đông con cháu cũng vậy."
+  }
  }
 }

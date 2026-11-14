@@ -129,6 +129,7 @@ def tuoi(nam: int, gioi_tinh: str) -> dict:
         "sinh_truoc_moc": {"nam_tinh": nam - 1, "quai": truoc["quai"], "nhom": truoc["nhom"],
                            "slug": f"tuoi-{nam - 1}-{gioi_tinh}" if nam - 1 >= NAM_DAU else None},
         "tra_loi_nhanh": tra_loi, "hoi_dap": hd,
+        "sach_xua": __import__("app.luangiai.sach_xua", fromlist=["phongthuy"]).phongthuy(q, ca_nhan=False),   # WS-3
         "nguon": "Bát trạch (Dương Trạch Tam Yếu) — bảng du niên; mệnh quái theo năm sinh và giới tính",
         "luu_y": [kb.luu_y("bat_trach"), kb.bo_cuc()["luu_y"]],
         **{k: v for k, v in kb.meta().items() if k in ("trang_thai", "can_doi_chieu")},
@@ -345,6 +346,7 @@ def cung_phi(slug: str) -> dict:
         "nam_sinh": nam_sinh, "cung_cung_nhom": cung_nhom,
         "cung_khac_nhom": [{"slug": s, "quai": x} for x, _, s in CUNG_PHI if _nhom(x) != nhom],
         "tra_loi_nhanh": tra_loi, "hoi_dap": hd,
+        "sach_xua": __import__("app.luangiai.sach_xua", fromlist=["phongthuy"]).phongthuy(q, ca_nhan=False),   # WS-3
         "nguon": L("pt.cung.nguon", "Bát trạch (Dương Trạch Tam Yếu) — bảng du niên; cung phi theo năm sinh và giới tính"),
         "luu_y": [kb.luu_y("bat_trach"), kb.bo_cuc()["luu_y"]],
         **{k: v for k, v in kb.meta().items() if k in ("trang_thai", "can_doi_chieu")},

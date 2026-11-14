@@ -93,3 +93,54 @@ def tuvi(cach_cuc: list[dict], cung: list[dict]) -> list[dict]:
                 ra.append({**_muc("phu_tinh", ve, "toan_thu", m["trich"], m["y_nghia"]), "sach": sach("toan_thu")})
                 break                                     # mỗi cung một câu
     return ra[:TOI_DA]
+
+
+# --------------------------------------------------------------------------------------- WS-3: Phong thuỷ (Bát trạch)
+_DN_TOT = ("Sinh Khí", "Thiên Y", "Diên Niên", "Phục Vị")
+_DN_XAU = ("Ngũ Quỷ", "Lục Sát", "Hoạ Hại", "Tuyệt Mệnh")
+
+
+def phongthuy(quai: str | None, thanh_vien: list[dict] | None = None, ca_nhan: bool = True) -> list[dict]:
+    """WS-3 (2026-11-14) — "Sách xưa nói gì về nhà của bạn": câu nguyên văn Dương Trạch Thập Thư ứng với mệnh quái người
+    đọc (nhóm Đông / Tây tứ mệnh · dòng khẩu quyết Đại du niên của chính cung) và người cùng nhà khác nhóm. `thanh_vien` =
+    đầu ra `_thanh_vien` của báo cáo (`vai`, `nhom`). Lời của dòng khẩu quyết dựng từ bảng du niên của engine — cùng một
+    nguồn với la bàn, nên câu sách và hướng trên trang không thể nói khác nhau. `ca_nhan=False` (trang kiến thức cung phi):
+    lời nói về "người cung …" thay cho "bạn". Bản Anh cùng số câu, lời qua mẫu `pt.sach_xua.*` (test_dau_ra_en)."""
+    from app.calc import phongthuy as pt  # noqa: PLC0415
+    from app.kb import phongthuy_kb  # noqa: PLC0415
+    kb = phongthuy_kb._d().get("sach_xua_nha") or {}
+    if not quai or quai not in pt.QUAI or not kb:
+        return []
+    nhom = pt.nhom(quai)
+    sach, ma_nhom = L("pt.sach_xua.sach", kb["sach"]), ("dong" if nhom.startswith("Đông") else "tay")
+    tq, tn = _ten.ten("quai", quai), _ten.ten("nhom_trach", nhom)
+
+    def muc(loai: str, ve: str, han: str, y: str) -> dict:
+        return {"loai": loai, "ve": ve, "sach": sach, "han": han, "y": y}
+
+    ra = [muc("nhom", L("pt.sach_xua.ve.nhom", "Bạn thuộc {nhom} (cung {quai})", nhom=tn, quai=tq) if ca_nhan else
+              L("pt.sach_xua.ve.nhom_cung", "Người cung {quai} thuộc {nhom}", nhom=tn, quai=tq),
+              kb["nhom"][nhom]["han"], L(f"pt.sach_xua.y.nhom.{ma_nhom}", kb["nhom"][nhom]["y"]))]
+    theo = {d: h for h, d in pt.bang_huong(quai).items()}
+    tot = L("pt.sach_xua.noi", ", ").join(L("pt.sach_xua.huong_dn", "{huong} ({dn})", huong=_ten.ten("huong", theo[d]),
+                                              dn=_ten.ten("du_nien", d)) for d in _DN_TOT)
+    xau = ", ".join(_ten.ten("huong", theo[d]) for d in _DN_XAU)
+    goc = (L("pt.sach_xua.goc.ban", "cung {quai} của bạn", quai=tq) if ca_nhan else
+           L("pt.sach_xua.goc.cung", "chính cung {quai}", quai=tq))
+    ra.append(muc("du_nien", L("pt.sach_xua.ve.du_nien", "Khẩu quyết Đại du niên của cung {quai}", quai=tq),
+                  kb["quai"][quai]["han"],
+                  L("pt.sach_xua.y.du_nien", "Sách lấy {goc} làm gốc: cửa, phòng, giếng, bếp đều tính từ cung này. Đọc câu khẩu "
+                    "quyết theo vòng tám phía ra bốn phía tốt: {tot}; bốn phía sách xếp là sao xấu, không nên mở cửa chính hay "
+                    "lối đi chính về đó: {xau}.", goc=goc, tot=tot, xau=xau)))
+    khac = [t for t in thanh_vien or [] if t.get("nhom") and t["nhom"] != nhom]
+    vc = next((t for t in khac if t.get("vai") in ("vo", "chong")), None)
+    if vc:
+        # câu sách viết theo người chồng: chồng Đông thì «夫東四位…妻則西四位», ngược lại thì câu kia
+        nhom_chong = nhom if vc["vai"] == "vo" else vc["nhom"]
+        ra.append(muc("vo_chong", L(f"pt.sach_xua.ve.vo_chong.{vc['vai']}", "Bạn và {vai} khác nhóm",
+                                    vai="vợ" if vc["vai"] == "vo" else "chồng"),
+                      kb["vo_chong"][nhom_chong]["han"], L("pt.sach_xua.y.vo_chong", kb["vo_chong"]["y"])))
+    elif khac:
+        ra.append(muc("nha_nhieu_nguoi", L("pt.sach_xua.ve.nha_nhieu_nguoi", "Người cùng nhà khác nhóm với bạn"),
+                      kb["nha_nhieu_nguoi"]["han"], L("pt.sach_xua.y.nha_nhieu_nguoi", kb["nha_nhieu_nguoi"]["y"])))
+    return ra[:TOI_DA]

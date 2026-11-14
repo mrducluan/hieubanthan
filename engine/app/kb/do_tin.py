@@ -76,7 +76,9 @@ SO: dict[str, dict] = {
     "kinhdich_doi_song.json": {"mang": "kinhdich", "muc": "bien_tap"},
     "bo_sung_que.json": {"mang": "kinhdich", "muc": "bien_tap"},
     # ---- Phong thuỷ
-    "phongthuy_kb.json": {"mang": "phongthuy", "muc": "tom_y_co_thu"},
+    "phongthuy_kb.json": {"mang": "phongthuy", "muc": "tom_y_co_thu", "phan": {
+        "sach_xua_nha": _nv("duong_trach_thap_thu.json", "tests/test_ws3_sach_xua_nha.py::test_moi_cau_la_nguyen_van_kho_nguon",
+                            "WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý")}},
     "phongthuy_huyen_khong.json": {"mang": "phongthuy", "muc": "tom_y_co_thu"},
     "phongthuy_doi_song.json": {"mang": "phongthuy", "muc": "bien_tap"},
     "phongthuy_do_thi.json": {"mang": "phongthuy", "muc": "bien_tap"},
