@@ -45,6 +45,7 @@ def _chu(s: str) -> str:
     s = re.sub(r"<[^>]+>", "", s)
     s = html.unescape(s).replace("​", "")
     s = re.sub(r"\{\{\{[^}]*\}\}\}", "", s)          # đề mục bản mẫu wiki chưa điền
+    s = re.sub(r"\{\{[A-Za-z]+\|", "", s).replace("}}", "")   # bản mẫu wiki không mở được (vd {{Annotation|…)
     s = s.replace("〈", "〔").replace("〉", "〕")
     return _CHAM.sub("", s)
 
@@ -63,7 +64,19 @@ def doc_quyen(trang: str) -> list[tuple[int, str, str]]:
     out = []
     for cap, ten, k in ra:
         doan = [re.sub(r"\s+", "", _chu(p)) for p in re.findall(r"<p[^>]*>(.*?)</p>", k, flags=re.S)]
-        out.append((cap, ten, "\n".join(d for d in doan if d)))
+        # người gõ đôi khi viết đề mục wiki liền trong đoạn («===剋父母===左偏損父…», «===論選擇第九〔〕») —
+        # tách thành mục riêng để đề mục không lẫn vào chữ sách
+        hien, dong = ten, []
+        for d in (x for x in doan if x):
+            for i, phan in enumerate(re.split(r"(={2,}[^=\n]+?(?:={2,}|〔〕|$))", d)):
+                if i % 2:
+                    if dong or hien != ten:
+                        out.append((cap, hien, "\n".join(dong)))
+                    hien, dong = re.sub(r"=|〔〕", "", phan).strip(), []
+                    cap = 3
+                elif phan:
+                    dong.append(phan)
+        out.append((cap, hien, "\n".join(dong)))
     return out
 
 
@@ -78,18 +91,26 @@ def nap_sach(render: Path, ma: str) -> dict:
             dau = 0 if q != quyen[0] else None
         if dau is None:
             raise ValueError(f"quyển {q}: không thấy đề mục {mo_dau}")
-        tap = mo_dau
+        # mục lục đầu quyển: mỗi dòng «tên sách〔các mục〕»
+        sach_khac = [k for k in re.findall(r"^([^〔〕\n]{2,16})〔", muc[0][2], flags=re.M) if not k.startswith(mo_dau)]
+        tap, treo = mo_dau, ""
         for cap, t, van in muc[dau:]:
-            # gặp đề mục cấp sách của sách khác → hết phần của sách
-            if cap == 4 and t and not t.startswith(mo_dau):
+            # gặp đề mục mang tên một sách KHÁC trong mục lục đầu quyển → hết phần của sách (chú thích hình
+            # cũng là đề mục cấp 4 nên không dừng theo cấp đề mục)
+            if t and any(t.startswith(k) for k in sach_khac):
                 break
             if t.startswith(mo_dau):
                 tap = t
                 if not van:
                     continue
                 t = ""
-            if len(van) < 40:
+            # giữ mọi mục có chữ: câu ca, khẩu quyết của sách thường chỉ một hai dòng; đề mục không có chữ
+            # riêng (tên thiên, chữ ở mục con) thì gắn vào tên mục ngay sau để không mất tên thiên
+            if not van:
+                treo = t or treo
                 continue
+            if treo:
+                t, treo = f"{treo} / {t}" if t else treo, ""
             so += 1
             thien.append({"so": so, "quyen": q, "ten": f"{tap} · {t}" if t else tap, "van": van})
     return {"_nguon": f"{ten_han} ({ten}) — {ghi}. Chép trong 《欽定古今圖書集成》 (Cổ Kim Đồ Thư Tập Thành, 1725), "

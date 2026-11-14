@@ -298,9 +298,9 @@ Nguyên tắc vẫn như cũ: chỉ nạp bản có nguồn gốc kiểm đượ
 
 | Tệp `fixtures/nguon/` | Sách | Lấy từ | Cỡ |
 |---|---|---|---|
-| `duong_trach_thap_thu.json` | 陽宅十書 Dương Trạch Thập Thư (Vương Quân Vinh, Minh) — đủ 10 thiên, từ «論宅外形第一» tới «論符鎮第十» | 《欽定古今圖書集成》 (1725) 藝術典 quyển 675–678 trên Wikisource | 91 mục, ~23.800 chữ |
-| `than_tuong_toan_bien.json` | 神相全編 Thần Tướng Toàn Biên (Viên Trung Triệt đính chính, Minh) — đủ 14 phần | cùng bộ, quyển 631–644 | 445 mục, ~145.700 chữ |
-| `chieu_dam_kinh.json` | 照膽經 Chiếu Đảm Kinh (sách tướng) | cùng bộ, quyển 645–646 | 60 mục, ~24.000 chữ |
+| `duong_trach_thap_thu.json` | 陽宅十書 Dương Trạch Thập Thư (Vương Quân Vinh, Minh) — đủ 10 thiên, từ «論宅外形第一» tới «論符鎮第十» | 《欽定古今圖書集成》 (1725) 藝術典 quyển 675–678 trên Wikisource | 139 mục, ~34.100 chữ |
+| `than_tuong_toan_bien.json` | 神相全編 Thần Tướng Toàn Biên (Viên Trung Triệt đính chính, Minh) — đủ 14 phần | cùng bộ, quyển 631–644 | 703 mục, ~152.800 chữ |
+| `chieu_dam_kinh.json` | 照膽經 Chiếu Đảm Kinh (sách tướng) | cùng bộ, quyển 645–646 | 69 mục, ~24.300 chữ |
 | `kham_du_tu_kho.json` | 靈城精義 Linh Thành Tinh Nghĩa (Hà Phổ, Nam Đường) · 催官篇 Thôi Quan Thiên (Lại Văn Tuấn, Tống) · 發微論 Phát Vi Luận (Thái Nguyên Định, Tống) | bản Văn Uyên Các Tứ khố (Kanseki KR3g0025–0027) — thay bản Wikisource của Linh Thành đã loại ở WS-1 | 5 quyển, ~46.300 chữ |
 
 - Cổ Kim Đồ Thư Tập Thành là loại thư khâm định đời Thanh, in đồng 1725; Wikisource gõ lại từng trang từ bản chụp. **Chấm câu trên
@@ -334,3 +334,18 @@ Tài liệu học thuật có bản đọc được (để đối chiếu, có b
 **Chưa thấy bản nào có nguồn gốc rõ**: bản gõ chữ Thẩm Thị Huyền Không Học; 麻衣相法 Ma Y Tướng Pháp, 柳莊相法 Liễu Trang Tướng Pháp
 (bản lưu hành là bản biên tập muộn); 都天寶照經, 玄空秘旨, 紫白訣, 飛星賦, 相理衡真. ctext.org có vài sách này nhưng
 điều khoản trang cấm tải tự động → em không lấy; anh mở trang đọc được nếu cần.
+
+### QC lại sau khi gộp (WS-2b, 2026-11-14)
+
+- **Lỗi đã sửa ở bộ nạp**: (1) bỏ mục dưới 40 chữ → mất 283 đoạn chữ sách (câu ca 13 bộ vị, khẩu quyết); nay giữ mọi mục có
+  chữ. (2) dừng khi gặp đề mục cấp 4 không mang tên sách → chú thích hình «陽宅外形吉凶圖說…» làm mất cả thiên «論福元第二»;
+  nay chỉ dừng khi gặp tên một sách KHÁC trong mục lục đầu quyển. (3) đề mục wiki gõ liền trong đoạn («===剋父母===…»,
+  «===論選擇第九») và bản mẫu không mở được («{{Annotation|») lọt vào chữ sách; nay tách thành mục / bỏ vỏ.
+  Độ phủ chữ mỗi quyển 99–100 % (quyển 631: 92 % vì đầu quyển là hai sách khác, cố ý bỏ). Dương Trạch Thập Thư đủ 10 thiên.
+- **Dùng sách mới để kiểm engine** (`engine/tests/test_ws2_kho_nguon_bo_sung.py`):
+  bài ca Đại du niên «乾六天五禍絕延生…» khớp bảng du niên Bát trạch **56/56 ô** (nguồn độc lập thứ ba, sau Hiệp Kỷ và Bát Trạch
+  Minh Kính); Đông / Tây tứ vị khớp; bảng 100 vị lưu niên của KB Nhân tướng khớp «流年運氣部位歌» ở 20 tuổi mốc (tên bộ vị +
+  thứ tự) → phần `luu_nien` của `nhan_tuong_kb.json` nâng lên mức `nguyen_van` trong sổ độ tin.
+- **Việc mở**: 14 kho WS-1 (Wikisource `action=raw`) còn giữ chấm câu của người gõ (CC BY-SA, không phải của sách). Chưa bỏ vì
+  `kinhdich_tra_loi.json` đang trích nguyên văn Tăng San Bốc Dịch có dấu — bỏ dấu phải sửa đồng loạt câu trích + test. Nên làm
+  khi nối các sách này vào lời hiển thị.
