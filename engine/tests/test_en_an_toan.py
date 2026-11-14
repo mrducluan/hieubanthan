@@ -385,7 +385,7 @@ def test_thai_san_theo_ban_viet(cau, ky_vong):
     ls = next(lg[3] for lg in dr.luot_goi(c) if lg[0].startswith("battu.la_so."))
     t = c.post("/v1/battu/hoi", json={"la_so": ls, "cau_hoi": cau, "ngay_xem": "2026-11-11"}, headers={"x-ngon-ngu": "en"}).json()["cau_tra_loi"]
     if ky_vong == "tu_choi":
-        assert t.startswith(("This question is outside", "Your chart cannot tell")), t[:120]
+        assert t.startswith(("This question is outside", "Your chart cannot tell", "Keep to your antenatal")), t[:120]
     elif ky_vong == "sinh_con":
         assert "doctor" in t.lower() and "Four Pillars cannot" in t, t[:200]
     else:

@@ -81,11 +81,16 @@ CHU_DE_CUNG = [   # (cung, mẫu) — câu hỏi cá nhân không nêu tên cung
     ("Tật Ách", [r"suc khoe", r"cang thang", r"ap luc", r"nghi ngoi", r"can bang", r"met moi", r"mat ngu", r"hay om",
                  r"om (yeu|dau)", r"dao keo", r"di kham", r"tai uong", r"yeu (hon|di)",
                  # SK-1: câu sức khoẻ chung, bộ phận ("có bị bệnh gì", "hay đau dạ dày", "kham suc khoe")
-                 r"(?<!\w)benh (gi|tat)", r"mac benh", r"dau (da day|bung|dau|lung|khop)", r"tieu hoa", r"kham (tong quat|dinh ky)"]),
+                 r"(?<!\w)benh (gi|tat)", r"mac benh", r"dau (da day|bung|dau|lung|khop)", r"tieu hoa", r"kham (tong quat|dinh ky)",
+                 # CY-3: hệ cơ quan người dùng hay hỏi (SK-2: lời chỉ nêu hệ cơ quan + đi khám)
+                 r"tim mach", r"huyet ap", r"(?<!\w)da day", r"ho hap", r"xuong khop", r"(?<!\w)gan than"]),
     ("Tài Bạch", [r"lam an", r"tien", r"tai chinh", r"giau", r"lam giau", r"thu nhap", r"tai loc", r"lua tien",
                   r"dau tu", r"no nan", r"tieu (hoang|xai|pha)", r"chi tieu",
                   # CY-1: lo chuyện tiền ("có bị phá sản / vỡ nợ / mất tiền không")
-                  r"pha san", r"vo no", r"mat (het )?tien", r"thua lo", r"lo von", r"hao tai"]),
+                  r"pha san", r"vo no", r"mat (het )?tien", r"thua lo", r"lo von", r"hao tai",
+                  # CY-3: vay mượn, quỵt nợ, đòi nợ — chuyện tiền của chính người hỏi
+                  r"(cho|di|duoc|xin) vay", r"vay (tien|no|ngan hang|von|muon)", r"cho muon", r"(?<!\w)quyt", r"doi no",
+                  r"(?<!\w)no (xau|cu)", r"tra no"]),
     ("Điền Trạch", [r"nha cua", r"nha dat", r"bat dong san", r"mua nha", r"nha o", r"dat dai", r"tai san", r"thua ke",
                     r"mua dat", r"ban dat", r"ban nha", r"xay nha", r"lam nha", r"sua nha", r"chung cu"]),
     ("Quan Lộc", [r"su nghiep", r"cong viec", r"nghe", r"lam viec", r"thang chuc", r"kinh doanh",
@@ -966,7 +971,7 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict,
     # EN-3b: câu không chỉ ra cung (hoặc chỉ "Năm nay") mà điều được hỏi rõ một mảng → mượn chương của mảng đó.
     cd = None
     if chuong in (None, "nam_nay"):
-        cd = mo_dau.chuong_cua(mo_dau.dieu_hoi(pl["cau_chuan_hoa"], _raw(pl), chuong))
+        cd = mo_dau.chuong_cua(mo_dau.dieu_hoi(pl["cau_chuan_hoa"], _raw(pl), chuong, goc=pl.get("cau_goc")))
     if not chuong and not cd:
         return None
     try:
@@ -985,6 +990,47 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict,
         goi["muc"].insert(goi["muc"].index(m) + 1, g)
     chung.ket(goi)
     return bc
+
+
+# CY-3 (2026-11-14): cung đọc thêm cho điểm sáng của câu về người cùng làm ăn (Nô Bộc + Thiên Di + Tài Bạch).
+_CUNG_DIEM_MANG = {"hop_tac": ("Nô Bộc", "Thiên Di", "Tài Bạch"), "tieu_nhan": ("Nô Bộc", "Quan Lộc")}
+
+
+def _them_cung_diem(goi: dict, pl: dict, ls: dict) -> None:
+    """CY-3: mức + lý do (đỡ / vướng) của đúng các cung của điều được hỏi, cùng hàm chấm cung của báo cáo đời sống
+    (`tuvi_doi_song.cham_cung`, `ly_do`) — cho đoạn mở đầu: một điểm sáng có thật trên lá số, và mức của từng cung việc
+    học khi hỏi kỳ thi (con: cung con cái trước). Khoá nội bộ `_cung_diem`, bỏ khỏi gói trước khi trả."""
+    from app.kb import chu_y_kb as cykb  # noqa: PLC0415
+    from app.luangiai import tuvi_doi_song as tds  # noqa: PLC0415
+    t = pl["cau_chuan_hoa"]
+    dieu = mo_dau.dieu_hoi(t, _raw(pl), goc=pl.get("cau_goc"))
+    mg = mo_dau.mang_chu_y(dieu, t, _raw(pl) or pl.get("cau_goc"))
+    hoc = (dieu or {}).get("ma") == "thi_cu"
+    if hoc:
+        tv = cykb.theo_mon("hoc_hanh", "tuvi")
+        cac = [tuple(x) for x in tv.get("cung_xem") or []]
+        if dieu.get("con") and tv.get("cung_con"):
+            cac = [tuple(tv["cung_con"])] + cac
+    else:
+        cac = [(c, None) for c in list(pl.get("cung") or [])[:2] + list(_CUNG_DIEM_MANG.get(mg or "", ()))]
+    try:
+        cc = tds.cham_cung(ls)
+    except Exception:  # noqa: BLE001 — lớp thêm, không làm hỏng hỏi đáp
+        return
+    ra, da = [], set()
+    for ten, nhan in cac:
+        if ten in da or ten not in cc:
+            continue
+        da.add(ten)
+        x = cc[ten]
+        ld = tds.ly_do(x)
+        nhan = nhan or tds._ten(ten)
+        ld = [(a.replace("mảng này", nhan).replace("this area", nhan), d) for a, d in ld]
+        ra.append({"ten": ten, "nhan": nhan, "muc": x["muc"], "nhan_muc": kds.nhan_muc(x["muc"]),
+                   "hoc": hoc, "tot": [tds._bo_day(a) for a, d in ld if d > 0][:2],
+                   "vuong": [tds._bo_day(a) for a, d in ld if d < 0][:2]})
+    if ra:
+        goi["_cung_diem"] = ra
 
 
 def _them_chu_y(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict, bc: dict | None) -> None:
@@ -1762,6 +1808,7 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
     if ls is not None and sinh and not goi["can_them"] and pl["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"):
         _them_so_nam(goi, pl, sinh, ngay_xem, ls)
         _them_chu_y(goi, pl, sinh, ngay_xem, ls, bc_ds)                  # CY-1
+        _them_cung_diem(goi, pl, ls)                                     # CY-3
     if ls is not None and sinh:
         chung.them_cua_so(goi, pl, "tuvi", sinh, ngay_xem, ls, ("sao_han",))   # EN-5.4
     if sinh:
@@ -1774,6 +1821,7 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
     if pl["xu_ly"] not in chung.DAC_BIET:            # EN-3b: đoạn mở đầu trả lời đúng điều được hỏi
         van = mo_dau.dat_dau(van, mo_dau.doi_song_mo(goi, pl["cau_chuan_hoa"], "tuvi", _raw(pl), khoa=("hoi.tv", "mo"), goc=pl.get("cau_goc")), goi,
                              khoa=("hoi.tv", "dat"))
+    goi.pop("_cung_diem", None)
     van = ybs.xep_cuoi(van, mo_dau._CHAN + chung._CHAN, khoa=("hoi.tv", "xep"))
     if NGUOI_THAN.get() and ls is not None and pl["xu_ly"] not in chung.DAC_BIET:
         van = L("hoi.tv.nt.dau", "Đây là lá số của người thân bạn đang xem: mọi chữ “bạn” trong lời đọc bên dưới là nói về "

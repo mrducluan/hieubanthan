@@ -108,7 +108,10 @@ CHU_DE_EN: list[tuple[str, str, str]] = [
                                   r"elements? (am i|do i|i need|i lack|missing|lacking)|lacking|(missing|lack|lacking|need|no|too much|"
                                   r"more|enough) (wood|fire|earth|metal|water)|favou?rable elements?|useful god"),
     ("gia_dinh_manh", "gia dinh", r"(parents|mom and dad|mum and dad|my (mother|mom|mum|father|dad|brother|sister)) .{0,15}"
-                                   r"(divorc\w*|marriage|separat\w*|fight\w*|argu\w*|split|break up)"),
+                                   r"(divorc\w*|marriage|separat\w*|fight\w*|argu\w*|split|break up)|"
+                                   # CY-3: cha mẹ già yếu → chuyện gia đình (không phải hậu vận của người hỏi)
+                                   r"my (aging |ageing |elderly )?(parents|mother|mom|mum|father|dad) (is |are )?(getting |growing )?"
+                                   r"(old|older|frail|elderly|aging|ageing|weak)"),
     ("hoc_hanh", "hoc hanh", r"study|studies|studying|exams?|school|university|uni|college|degree|masters|phd|grades?|"
                              r"education|learning|ielts|toefl|sat|gaokao|scholarship|subjects?|(a|an|online|short|the) course|courses|my major|a major|bar exam|"
                              r"thesis|graduat\w*|academic|retake|a levels?|o levels?|psle|test results?|driving test|pass (my|the|a|this) (\w+ )?test|"
@@ -140,7 +143,7 @@ CHU_DE_EN: list[tuple[str, str, str]] = [
                              r"refinanc\w*|debts?|loans?|borrow\w*|bankrupt\w*|profit|windfall|bonus|afford|side income|"
                              r"pay rise|raise|lose money|losing money|inheritance|buy (a |an |my |our )?(new |used |second hand )?(house|car|home|flat|"
                              r"apartment|property|condo|bto|car)|own (a |my own )?(house|home|property|flat|apartment)|lease|budget|cash|earn\w*|"
-                             r"paid|pay|bills|expenses|millionaire|passive income|assets|net worth|make a fortune|gold|stock market|\$\$|make more|earn more"),
+                             r"paid|pay(?! attention)|bills|expenses|millionaire|passive income|assets|net worth|make a fortune|gold|stock market|\$\$|make more|earn more"),
     ("ban_than_manh", "tinh cach", r"personality|traits?|who am i|who i (really )?am|core nature|what kind of person am i|"
                                    r"what (type|kind) of person|the type (who|of)|strengths?|weakness(es)?|blind spots?|"
                                    r"introvert|extrovert|thinker|doer|talents?|late bloomer|lucky person|strong will|"
@@ -150,6 +153,9 @@ CHU_DE_EN: list[tuple[str, str, str]] = [
                                    r"how do (others|people) see me|character"),
     ("gia_dinh", "gia dinh", _GIA),
     ("tinh_cam_nhe", "tinh duyen", r"relationships?|in love|love life|love luck"),
+    # CY-3: đi làm / sống ở nước ngoài — đi xa trước công việc ("go abroad to work in Japan")
+    ("di_xa", "di xa", r"(go|going|move|moving|work|working|study|studying|live|living) (abroad|overseas)|"
+                       r"(work|study|live|labou?r) in (japan|korea|taiwan|australia|canada|germany|singapore)|emigrat\w*"),
     ("su_nghiep", "cong viec", r"career|careers|job|jobs|work|working|boss|promotion|promoted|resign\w*|employer|profession|"
                                r"occupation|industr\w*|field|business|startup|start up|company|entrepreneur\w*|side hustle|"
                                r"interviews?|job offers?|the offer|offer from|office|colleagues?|coworkers?|co workers?|fired|laid off|layoffs?|freelanc\w*|"

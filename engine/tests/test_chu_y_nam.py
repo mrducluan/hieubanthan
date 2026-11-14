@@ -55,7 +55,9 @@ def test_kb_du_truong_va_nguon():
     assert d["source_id"] and d["school_id"] and d["trang_thai"] == "nhap_ai"
     assert set(kb.cac_mang()) == {"tien_bac", "cong_viec", "tinh_cam", "gia_dao", "nha_cua", "di_lai", "giay_to", "ban_be",
                                   # CY-2 (2026-11-14): mảng mới cho lời "nên chú ý" đầy đủ chủ đề
-                                  "hop_tac", "tieu_nhan", "hoc_hanh", "con_cai", "cong_danh", "xuat_ngoai", "mua_xe"}
+                                  "hop_tac", "tieu_nhan", "hoc_hanh", "con_cai", "cong_danh", "xuat_ngoai", "mua_xe",
+                                  # CY-3 (2026-11-14): tình huống cụ thể (vay mượn, chăm bố mẹ già, nhà chồng)
+                                  "doi_no", "cho_vay", "di_vay", "cham_cha_me", "nha_chong"}
     for m in kb.cac_mang():
         o = kb.mang(m)
         assert o["ten"] and o["viec"] and o["viec_nay"] and o["ranh_gioi"], m

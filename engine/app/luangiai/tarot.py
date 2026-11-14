@@ -506,6 +506,14 @@ _NEN_CHU_Y = re.compile(r"(nen|can) (chu y|de y|can than|canh|tranh|luu y)|\b(wa
                         r"look out|beware|keep an eye)\b")
 
 
+_MG_TEN_RIENG = {"con_cai", "giay_to", "xuat_ngoai", "mua_xe", "hop_tac", "tieu_nhan", "ban_be", "cong_danh", "hoc_hanh"}
+
+
+def _la_viet() -> bool:
+    from app import ngon_ngu  # noqa: PLC0415
+    return ngon_ngu.la_viet()
+
+
 _NHAN_CO_KHONG = re.compile(r"^(Nghiêng về (có|không)|Có điều kiện|Chưa nên vội|Leans? (yes|no)|Lean (yes|no)|Conditional|Not yet)[^:.]{0,12}:\s*",
                             re.IGNORECASE)
 
@@ -519,7 +527,19 @@ def _phia_ban(cau: str | None, hc: dict) -> dict:
     nla = mo_dau.la_nguoi_lam_an(t, cau) or bool(_LAM_AN_GIAU.search(t))
     khac = nla or hc.get("y_dinh") == "nguoi_khac" or bool(_NGUOI_XAU.search(t))
     pb = khac or bool(_NEN_CHU_Y.search(t))
-    return {"_phia_ban": pb, "_nla": nla, "_khac": khac} if pb else {}
+    # CY-3: mảng "nên chú ý" của câu (danh mục cố định) — gọi đúng tên điều được hỏi khi loại việc của Tarot chưa có
+    # (con cái, giấy tờ, ra nước ngoài, mua xe…); câu về người cùng làm ăn luôn kèm ranh giới.
+    dieu = mo_dau.dieu_hoi(t, cau if _la_viet() else None, goc=cau)
+    mg = mo_dau.mang_chu_y(dieu, t, cau)
+    ra = {"_mg": mg} if mg else {}
+    if dieu and dieu.get("ma") in ("tim_do",):
+        ra["_viec_dh"] = mo_dau.nhan_hien(dieu)     # tên điều được hỏi (danh mục) khi Tarot chưa có loại việc
+    return {**ra, "_phia_ban": pb, "_nla": nla, "_khac": khac} if pb else ra
+
+
+def _loi_la(V: list[dict], vt: list[dict], lv: str | None, i: int) -> str:
+    l, tl, lvt = _lv_cua(V[i], lv)
+    return f"{_ten(l, V[i]['nguoc'])} ({vt[i]['ten']}) — {_cau_dau(_NHAN_CO_KHONG.sub('', lvt or l['tra_loi']['n' if V[i]['nguoc'] else 'x'])).rstrip('.')}"
 
 
 def _hop_phia_ban(hop0: dict, V: list[dict], vt: list[dict], lv: str | None, viec: str, khac: bool = True) -> tuple[dict, str]:
@@ -552,6 +572,11 @@ def tra_loi_cau(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date) -> dict:
     if yd == "lua_chon" and not hai:
         yd = "quyet_dinh"
     viec = L("tarot.chuyen", "chuyện {x}", x=hc['nhan_viec']) if hc.get("nhan_viec") else str(M["viec_mac_dinh"])
+    if hc.get("_viec_dh") and not hc.get("nhan_viec"):
+        viec = hc["_viec_dh"]
+    if hc.get("_mg") in _MG_TEN_RIENG:
+        from app.kb import chu_y_kb as _cykb  # noqa: PLC0415
+        viec = _cykb.ten(hc["_mg"])
     vt = tb["vi_tri"]
     V = pt["vi_tri"]
     if yd == "lua_chon":
@@ -630,6 +655,17 @@ def tra_loi_cau(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date) -> dict:
     if hc.get("_phia_ban"):
         hop[0], cau_dau = _hop_phia_ban(hop[0], V, vt, lv, viec, bool(hc.get("_khac")))
         tieu_de = hop[0]["tieu_de"]
+    elif hc.get("co_cau") and yd != "lua_chon" and len(V) > 1:
+        # CY-3: câu có / không vẫn nói cả hai mặt — một điểm sáng (lá thuận nhất) và một chỗ cần canh (lá vướng nhất)
+        diem = {"tien": 1, "dieu_kien": 0, "cho": -1}
+        ds = sorted(range(len(V)), key=lambda i: (-diem[calc.nghieng_la(V[i]["id"], V[i]["nguoc"])], i))
+        them = []
+        if diem[calc.nghieng_la(V[ds[0]]["id"], V[ds[0]]["nguoc"])] >= 0:
+            them.append(L("tarot.tla.diem_sang", "Điểm sáng: {loi}.", loi=_loi_la(V, vt, lv, ds[0])))
+        if ds[-1] != ds[0] and diem[calc.nghieng_la(V[ds[-1]]["id"], V[ds[-1]]["nguoc"])] <= 0:
+            them.append(L("tarot.tla.cho_can_canh", "Chỗ cần canh: {loi}.", loi=_loi_la(V, vt, lv, ds[-1])))
+        if them:
+            hop[0] = {**hop[0], "noi_dung": hop[0]["noi_dung"].rstrip() + " " + " ".join(them)}
     return {"nghieng": ng, "y_dinh_doc": yd, "tieu_de": tieu_de, "cau_dau": cau_dau, "hop": hop, "la_chinh": i_chinh,
             "phia_ban": bool(hc.get("_phia_ban"))}
 
@@ -751,9 +787,13 @@ def _chuong_tra_loi(pt: dict, tb: dict, hc: dict, ngay_xem: dt.date, chan: str |
         doan.append(str(M["suc_khoe"]))
     if hc["y_dinh"] in ("quyet_dinh", "lua_chon"):
         doan.append(str(M["quyet_cua_ban"]))
-    if hc.get("_nla"):
+    if hc.get("_nla") or hc.get("_mg") == "hop_tac":
         from app.kb import chu_y_kb as _cykb  # noqa: PLC0415
         doan.append(_cykb.ranh_gioi("hop_tac"))
+    elif hc.get("_mg") in ("hoc_hanh", "giay_to"):
+        from app.kb import chu_y_kb as _cykb  # noqa: PLC0415
+        if _cykb.ranh_gioi(hc["_mg"]):
+            doan.append(_cykb.ranh_gioi(hc["_mg"]))
     return kh.chuong("tra_loi", c["tieu_de"], doan, hop=tl["hop"], muc=None if tl.get("phia_ban") else _MUC_NG[tl["nghieng"]["nghieng"]],
                      tom_tat=tl["cau_dau"], cau_hoi=c["cau_hoi"],
                      cau_tu_soi=L("tarot.tla.tu_soi", "Nếu lá bài nói đúng điều bạn sợ nhất, tuần này bạn làm gì khác đi?"), nghieng=tl["nghieng"]["nghieng"])

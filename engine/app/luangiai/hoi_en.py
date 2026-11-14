@@ -88,7 +88,7 @@ def _doan_chu_y_en(mg: str, nguoi: dict, ngay_xem: dt.date, goc: str, dd: int) -
     return " ".join(p.strip() for p in phan if p and p.strip())
 
 
-LV_TEN = {"tinh_yeu": "love", "gia_dinh": "family", "su_nghiep": "work", "tai_chinh": "money", "suc_khoe": "well-being", "ban_than": "yourself"}
+LV_TEN = {"tinh_yeu": "love", "gia_dinh": "family", "su_nghiep": "work", "tai_chinh": "money", "suc_khoe": "health and well-being", "ban_than": "yourself"}
 MAT_CD = {"tinh_yeu": "tinh_cam", "su_nghiep": "cong_viec", "tai_chinh": "cong_viec", "ban_than": "tong_quan"}
 
 
@@ -184,6 +184,11 @@ def tra_loi(cau: str, nguoi: dict, ngay_xem: dt.date | None = None) -> dict:
             x = _lv(dd, pl["linh_vuc"])
             if x:
                 doan.append(L("thanso_en.nam_lv", "On {lv}, your Life Path {so} usually reads like this: {x}", lv=LV_TEN[pl["linh_vuc"]], so=dd, x=x))
+            dm = ((cd.get("tong_quan") or {}).get("diem_manh") or [""])[0]
+            if dm:                              # CY-3: một điểm sáng từ chính con số của người hỏi
+                doan.append(L("thanso_en.sang", "Bright spot: {x}.", x=dm.rstrip(".")))
+            if pl["linh_vuc"] == "suc_khoe":
+                doan.append(L("an_toan.suc_khoe_nhac", "This is a note about pace and habits, not medical advice."))
         can_cu.append(L("thanso_en.can_cu.nam", "Personal year = day + month of birth + the calendar year, reduced to 1–9 (counted from 1 January, as on the reading page)."))
         hoi_tiep += [L("thanso_en.ht.month", "What about this month?"), L("thanso_en.ht.work", "How does my number show up at work?")]
     elif pl["xu_ly"] == "thang":

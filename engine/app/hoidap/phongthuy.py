@@ -93,7 +93,8 @@ HUONG_CA_NHAN = [r"hop huong", r"huong nha", r"huong gi", r"huong nao", r"cung p
 NAM_KW = [r"nam nay", r"nam sau", r"nam 20\d\d"]
 # SK-1: câu hỏi sức khoẻ (đã qua bộ chặn — không gồm sống chết / chữa trị)
 SUC_KHOE_KW = [r"suc khoe", r"(?<!\w)benh (gi|tat)", r"hay om", r"om dau", r"om yeu", r"dau (da day|bung|dau|lung|khop)",
-               r"kham (tong quat|dinh ky|suc khoe)", r"de y suc", r"chu y suc"]
+               r"kham (tong quat|dinh ky|suc khoe)", r"de y suc", r"chu y suc",
+               r"(?<!\w)da day", r"tieu hoa", r"tim mach", r"huyet ap", r"ho hap", r"xuong khop"]   # CY-3: hệ cơ quan
 NAM_VIEC = [r"sua nha", r"lam nha", r"sua (bep|phong|cong|cua|tuong|mai|lai nha)", r"sua chua", r"(dap|duc) (tuong|pha|bo)", r"dong tho", r"xay nha", r"ngu hoang", r"tranh dong", r"kim lau",
             r"hoang oc", r"tam tai", r"thai tue", r"xem tuoi"]
 HOP = [r"vo chong", r"ca hai", r"hai vo chong", r"vo toi", r"chong toi"]
@@ -734,15 +735,36 @@ def _cau_noi(goi: dict, pl: dict, cau_hoi: str) -> None:
     t = pl["cau_chuan_hoa"]
     dieu = mo_dau.dieu_hoi(t, cau_hoi if ngon_ngu.la_viet() else None)
     mg = mo_dau.mang_chu_y(dieu, t, cau_hoi)
-    if not mg or not cykb.pt_bo_tri(mg) or (mg not in ("hop_tac", "tieu_nhan")
-                                             and any(m.get("loai") == "bo_tri" for m in goi["muc"])):
+    if not mg:
+        return
+    sang = "" if mg == "nha_cua" else mo_dau.pt_sang(goi["muc"])      # hướng hợp nói về chỗ ngồi, không về mua đất
+    co_bt = any(m.get("loai") == "bo_tri" for m in goi["muc"])
+    if mg == "nha_cua" and not co_bt and not chung.co(t, [r"(?<!\w)sua", r"(?<!\w)xay", r"lam nha", r"dong tho", r"renovat", r"build"]):
+        return                                  # câu về chính ngôi nhà (mua, bán, hướng…): mục nhà đã trả lời thẳng
+    if mg == "nha_cua" or (co_bt and mg not in ("hop_tac", "tieu_nhan")) or not cykb.pt_bo_tri(mg):
+        # CY-3: câu đã có mục bố trí / câu về chính ngôi nhà — giữ mục đó, thêm MỘT mục ngắn hai mặt ngay sau mục đầu
+        # (điểm sáng từ hướng hợp của người hỏi, điều nên để ý, việc của mảng). Câu về một mảng không phải nhà thì gọi tên
+        # điều được hỏi ở đầu mục.
+        phan = mo_dau.hai_mat([], dieu, t, cau_hoi, viec_san=False, sang=sang)
+        if not phan:
+            return
+        nd = mo_dau.thuong(mo_dau.ghep(*phan))
+        nd = mo_dau.hoa(nd) if mg == "nha_cua" else f"{mo_dau.ve_mang(mg)}: {nd}"
+        i = next((k for k, x in enumerate(goi["muc"]) if x.get("loai") not in ("sao_han", "nha_rieng")), 0)
+        j = i
+        if co_bt:                               # mục trả lời thẳng (bố trí) giữ chỗ; lời hai mặt đứng sau nó
+            j = max(k for k, x in enumerate(goi["muc"]) if x.get("loai") == "bo_tri") + 1
+        elif mg == "nha_cua":
+            j = min(i + 1, len(goi["muc"]))
+        goi["muc"].insert(j, {"loai": "ghi_chu", "ma": "cau_noi", "mang": mg, "noi_dung": nd, **cykb.meta()})
+        chung.ket(goi)
         return
     if mo_dau.la_nguoi_lam_an(t, cau_hoi):      # "partner" ở câu người cùng làm ăn không phải phòng ngủ vợ chồng
         goi["muc"] = [m for m in goi["muc"] if not str(m.get("ma") or "").startswith("vo_chong")]
     cy = next((m for m in goi["muc"] if m.get("ma") == "chu_y_nam" and m.get("mang") == mg), None)
     phan = [cykb.mau("pt_noi").format(mang=cykb.ten(mg), bo_tri=cykb.pt_bo_tri(mg))]
-    phan = mo_dau.hai_mat(phan, dieu, t, cau_hoi, viec_san=bool(cy))
-    if not cy and mg != "hop_tac" and cykb.ranh_gioi(mg):
+    phan = mo_dau.hai_mat(phan, dieu, t, cau_hoi, viec_san=bool(cy), sang=sang)
+    if not cy and mg != "hop_tac" and cykb.ranh_gioi(mg) and cykb.ranh_gioi(mg) not in phan:
         phan.append(cykb.ranh_gioi(mg))
     nd = f"{mo_dau.ve_mang(mg)}: {mo_dau.thuong(mo_dau.ghep(*phan))}"
     i = next((k for k, x in enumerate(goi["muc"]) if x.get("loai") not in ("sao_han", "nha_rieng")), len(goi["muc"]))
@@ -803,8 +825,14 @@ def _tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = 
                 phuong = next((x["cung"] for x in vt if x["phong"] == "phong_ngu_chinh" and x["cung"] != "Trung cung"), None)
             except (ValueError, TypeError, KeyError):
                 phuong = None
-        goi["muc"].insert(0, {"loai": "ghi_chu", "ma": "suc_khoe_nam", "noi_dung": skn.phongthuy_doan_hoi(nam_xem, phuong),
-                              **skn.kb.meta()})
+        from app.kb import chu_y_kb as _cykb  # noqa: PLC0415
+        # CY-3: lời hai mặt — một điểm sáng (hướng hợp theo mệnh quái của người hỏi, hoặc việc tự làm được) + việc cụ thể
+        sang = mo_dau.pt_sang(goi["muc"]) or _cykb.mau("pt_sk_sang")
+        nd0, mt = skn.phongthuy_doan_hoi(nam_xem, phuong), skn.mien_tru()
+        co_mt = bool(mt) and mt in nd0
+        nd_sk = " ".join(x for x in (nd0.replace(mt, "").strip() if co_mt else nd0, _cykb.mau("sang").format(sang=sang),
+                                     _cykb.mau("pt_sk_viec"), mt if co_mt else "") if x)
+        goi["muc"].insert(0, {"loai": "ghi_chu", "ma": "suc_khoe_nam", "noi_dung": nd_sk, **skn.kb.meta()})
         if (g := chung.muc_suc_khoe_hoi(pl["cau_chuan_hoa"])):
             goi["muc"].insert(1, g)
         chung.ket(goi)
@@ -816,7 +844,7 @@ def _tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = 
         # Review CY-1: câu khủng hoảng quan hệ (ngoại tình, ly hôn…) — Phong thuỷ cũng mở bằng câu đồng cảm như 4 mảng kia
         # (đoạn mở đầu Phong thuỷ đang tắt nên câu này vào gói như một mục đứng đầu).
         goi["muc"].insert(0, {"loai": "ghi_chu", "ma": "dong_cam",
-                              "noi_dung": mo_dau.dong_cam(mo_dau.dieu_hoi(pl["cau_chuan_hoa"], cau_hoi))})
+                              "noi_dung": mo_dau.dong_cam(mo_dau.dieu_hoi(pl["cau_chuan_hoa"], cau_hoi), pl["cau_chuan_hoa"])})
         chung.ket(goi)
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi),
                               khoa=("hoi.pt", "truoc"))   # EN-3; EN-ALL: bản dịch theo thứ tự đoạn bản Việt

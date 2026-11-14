@@ -65,7 +65,7 @@ CHU_DE = [
                   r"muon (chong|vo)", r"phan boi", r"(?<!\w)e (mai|qua|dai)", r"nguoi cu", r"(?<!\w)ny(?!\w)", r"cach nhau \d+ tuoi",
                   r"(chong|vo) (em|toi|minh) tuoi"]),
     ("con_cai", [r"con cai", r"may con", r"co con", r"tin vui", r"hiem muon", r"con (toi|minh|em)", r"con sau nay",
-                 r"kho co con", r"cho con", r"(?<!\w)no (hoa|thuy|kim|moc|tho)"]),
+                 r"kho co con", r"cho con", r"(?<!\w)no (hoa|thuy|kim|moc|tho)", r"con (trai|gai) (toi|minh|em)"]),
     ("phap_ly", [r"(bi|di|dang|chuyen|vu|dinh|thang|thua|hay) kien(?!\w)", r"kien (tung|cao|doi|nhau|ai)", r"phap luat", r"pham phap", r"tieu nhan", r"giay to",
                  r"dieu tra", r"dung ten", r"(?<!bat )tu toi", r"(bi|ngoi|vao|dinh) tu(?!\w)", r"di tu (khong|ko|toi|day|ra)", r"tranh chap", r"tai bay", r"dam sau lung", r"hop dong"]),
     ("di_xa", [r"di xa", r"xuat khau", r"dinh cu", r"lap nghiep", r"thanh pho", r"nuoc ngoai", r"nuoc lanh", r"sang (uc|nhat|han|my|duc|canada)",
@@ -74,7 +74,9 @@ CHU_DE = [
                  r"xe tai", r"can than gi"]),
     ("hoc_hanh", [r"hoc hanh", r"thi (lai|dai hoc|dau|do|vao)", r"khoi (tu nhien|xa hoi|a|b|c|d)(?!\w)", r"nghien cuu",
                   r"hoc them", r"bang luat", r"thac si", r"tien si", r"hoc (gi|khoi|nganh|len|cao)", r"bang (cap|dai hoc)", r"lam thay", r"thay giao", r"long bong", r"thi .{0,15}dau (khong|ko)",
-                  r"thi gi", r"(?<!\w)rot (roi|dai hoc)", r"hoc van", r"duong hoc"]),
+                  r"thi gi", r"(?<!\w)rot (roi|dai hoc)", r"hoc van", r"duong hoc",
+                  # CY-3: kỳ thi người dùng hay hỏi
+                  r"thi (cong chuc|chung chi|ielts|toeic|tot nghiep|bang lai|chuyen)", r"on thi", r"ky thi", r"\bielts\b", r"chung chi"]),
     ("quan_he", [r"quy nhan", r"thien at", r"hop tac", r"nguoi lon tuoi", r"canh tranh", r"(?<!\w)ghet(?!\w)", r"ban be",
                  r"nguoi giup", r"giup do", r"nang do", r"tranh cong", r"dong nghiep",
                  r"ty kien nhieu", r"tam hop voi minh"]),
@@ -106,10 +108,13 @@ CHU_DE = [
                   r"thieu (kim|moc|thuy|hoa|tho)\b", r"(deo|mang|dung) (gi|da gi|vat gi)"]),
     ("loi_song", [r"loi song", r"sinh hoat", r"suc khoe", r"song the nao", r"mat ngu", r"nghi ngoi", r"kieng gi",
                   r"(?<!\w)yeu(?!\w)", r"(?<!\w)met(?!\w)", r"tim mach", r"dau xuong", r"hay lanh", r"an gi", r"co hon", r"nong tinh",
-                  r"(?<!\w)benh (gi|tat)", r"mac benh", r"dau (da day|bung|dau|lung|khop)", r"tieu hoa", r"kham (tong quat|dinh ky)"]),
+                  r"(?<!\w)benh (gi|tat)", r"mac benh", r"dau (da day|bung|dau|lung|khop)", r"tieu hoa", r"kham (tong quat|dinh ky)",
+                  r"huyet ap", r"(?<!\w)da day", r"ho hap", r"xuong khop"]),
     ("gia_dinh", [r"cha me", r"to tien", r"anh em", r"con cai", r"gan bo me", r"gia dinh", r"(?<!\w)bo (toi|em|minh)",
                   r"(?<!\w)me (toi|em|minh)", r"em trai", r"chi gai", r"anh trai", r"to nghiep", r"cham bo", r"cham me",
-                  r"(?<!\w)bo .{0,12}mat som", r"co nghiep", r"ve que"]),
+                  r"(?<!\w)bo .{0,12}mat som", r"co nghiep", r"ve que",
+                  # CY-3: nhà chồng / nhà vợ, cha mẹ già
+                  r"(me|bo) (chong|vo)", r"nha (chong|vo)", r"nang dau", r"con dau", r"(bo me|cha me) .{0,10}gia"]),
     ("thap_than", [r"thap than", r"tang can"]),
 ]
 TRU_TEN = {"nam": "năm", "thang": "tháng", "ngay": "ngày", "gio": "giờ"}
@@ -513,7 +518,7 @@ def _them_doi_song(goi: dict, pl: dict, sinh: dict, ngay_xem: dt.date, ls: dict)
             chuong = "tien_bac"
     # EN-3b: điều được hỏi (danh mục cố định) cụ thể hơn chủ đề phân loại ("khi nào tài vận khởi sắc" → Tiền bạc, không
     # phải Công việc) → mượn chương của điều được hỏi khi báo cáo có chương đó; câu năm/vận giữ "Năm nay" khi không rõ.
-    cd = mo_dau.chuong_cua(mo_dau.dieu_hoi(t, _raw(pl), chuong))
+    cd = mo_dau.chuong_cua(mo_dau.dieu_hoi(t, _raw(pl), chuong, goc=pl.get("cau_goc")))
     if not chuong and not cd:
         return None
     try:

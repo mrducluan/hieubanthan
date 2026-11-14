@@ -674,7 +674,7 @@ def _tra_loi(pl: dict, cau_hoi: str, gia_tri_hao: list[int] | None = None, thoi_
     van = chung.tra_loi_truoc(van_template(goi), goi["phan_loai"].get("cau_chuan_hoa") or chung.chuan_hoa_cau(cau_hoi),
                               khoa=("hoi.kd", "truoc"))   # EN-3
     if doc_que is not None and pl["xu_ly"] not in chung.DAC_BIET:     # EN-3b: đoạn mở đầu trả lời đúng điều được hỏi
-        mo = mo_dau.que_mo(doc_que, pl["cau_chuan_hoa"], raw, moc)
+        mo = mo_dau.que_mo(doc_que, pl["cau_chuan_hoa"], raw, moc, goc=pl.get("cau_goc"))
         # EN-3d: số trong "việc nên làm" (KB nhóm việc của quẻ, vd "dòng tiền 6 tháng") là dữ kiện của gói đọc quẻ —
         # đăng ký vào gói bằng chứng, nếu không bất biến "số phải có trong gói" bỏ cả đoạn mở đầu.
         viec0 = next((x["viec"][0] for x in doc_que.get("hanh_dong") or [] if x.get("muc") == doc_que.get("muc")

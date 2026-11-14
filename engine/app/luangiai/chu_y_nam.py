@@ -587,6 +587,7 @@ _GOI_Y_VI = {
     "so_con_ten": "Bạn có thể hỏi về mảng con cái hay tình cảm của chính mình — lá số nói được nhịp và việc nên chuẩn bị, "
                   "không nói con số hay cái tên.",
     "the_thao": "Nên coi kết quả trận đấu, bầu cử là chuyện để xem cho vui, không đặt tiền vào đó.",
+    "vat_pham": "Không cần mua vật phẩm hay làm lễ để đổi vận — nên giữ tiền cho việc chính và tránh các khoản may rủi.",
 }
 _GOI_Y_NHOM_VI = [
     ("thai", r"thai nhi|co thai|co bau|mang thai|mang bau|dinh bau|trong bung|trai hay (con )?gai|gai hay (con )?trai|sieu am"),
@@ -634,6 +635,8 @@ def goi_y_tu_choi(raw: str, loai: str | None) -> str:
     from app.luangiai import an_toan as _at  # noqa: PLC0415
     from app.luangiai.hoi import chuan_hoa  # noqa: PLC0415
     t = chuan_hoa(raw or "")
+    if re.search(r"vat pham|linh vat|(?<!\w)bua (may|hoa|tai|loc)|giai han|cung sao|talisman|amulet|lucky charm|crystals? (?:to|for)", t):
+        return L("tu_choi.goi_y.vat_pham", _GOI_Y_VI["vat_pham"])   # hỏi vật phẩm → nói rõ không cần mua, trước lời may rủi
     if loai == "may_rui" or re.search(r"(xo so|ve so|lo de|danh de|so de|ca do|ca cuoc|danh lo|so lo)", t):
         return kb.mau("may_rui")
     en = _at._la_en(raw or "")

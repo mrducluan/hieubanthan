@@ -21,6 +21,7 @@
  "tu_choi.goi_y.dau_tu": "Keep an emergency fund and do not put everything into one place; this is not investment advice. You can look at the years to take more care with money in your own reading.",
  "tu_choi.goi_y.so_con_ten": "You can ask about the children or love side of your own reading — it can show timing and what to prepare for, not a number or a name.",
  "tu_choi.goi_y.the_thao": "Treat match and election results as something to watch for fun, and keep money out of it.",
+  "tu_choi.goi_y.vat_pham": "There is no need to buy charms, crystals or rituals to change your luck — keep your money for what matters and stay away from gambles.",
  "an_toan.dan_huong": "This touches on spirits, curses or the departed — something tarot and numerology do not read. If a loss is behind the question, I am sorry. A counsellor, a faith community you trust, or simply a close friend will help more here than any card.",
  "an_toan.suc_khoe_nhac": "This is a note about pace and habits, not medical advice.",
  "tarot.ten_bai": "Your spread",
@@ -240,5 +241,6 @@
  "tarot.tla.tieu_de_phia_ban": "Your side",
  "tarot.tla.phia_ban_chu_y": "In {viec}, the cards point to what you already have and where you need to stay alert.",
  "thanso_en.diem_sang": "Bright spot for you (Life Path {so}): {x}.",
- "tu_choi.ket": "Readings stay away from questions like this (luck numbers, life and death, diagnosis, judging or influencing other people) so they never claim what they cannot know."
+ "tu_choi.ket": "Readings stay away from questions like this (luck numbers, life and death, diagnosis, judging or influencing other people) so they never claim what they cannot know.",
+ "thanso_en.sang": "Bright spot: {x}."
 }

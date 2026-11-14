@@ -362,6 +362,11 @@ def _tach_gioi_thieu(cau_hoi: str) -> tuple[str, str]:
         if re.fullmatch(r"(co |thi )?(nen|duoc|on|hop|tot|sao)?( (khong|ko|k|chua|a|nhi|the nao|ra sao))*\s*(a|nhe|nhi)?\s*",
                         chuan_hoa_cau(sau)):
             return "", chuan_hoa_cau(cau_hoi)
+        # CY-3: vế sau chỉ là câu hỏi chung không mang chủ đề ("Tôi đang kiện tụng đất đai, nên chú ý gì?", "…, tôi nên
+        # làm gì?") → chủ đề nằm ở vế đầu; giữ cả câu.
+        if re.fullmatch(r"(toi |minh |em )?(nen |can |phai )?(chu y|de y|luu y|can than|lam|xu ly) ?(gi|nhung gi|the nao|sao)?"
+                        r"( (a|nhe|nhi|vay|day))?\s*", chuan_hoa_cau(sau)):
+            return "", chuan_hoa_cau(cau_hoi)
         if re.search(GIOI_THIEU, chuan_hoa_cau(dau)) and chuan_hoa_cau(sau):
             return chuan_hoa_cau(dau), chuan_hoa_cau(sau)
     return "", chuan_hoa_cau(cau_hoi)

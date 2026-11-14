@@ -23,7 +23,8 @@
     }
    },
    "de_y": "money you lend out, signing as a guarantor, and investment tips that sound too sure",
-   "pt_bo_tri": "keep cash and property papers in a dry, locked place; keep the entrance tidy and free of old clutter"
+   "pt_bo_tri": "keep cash and property papers in a dry, locked place; keep the entrance tidy and free of old clutter",
+   "sang_chung": "tracking spending and keeping a cash buffer are habits you can build any month"
   },
   "cong_viec": {
    "ten": "your work",
@@ -41,7 +42,8 @@
     }
    },
    "de_y": "verbal promises about a role or pay, taking on more than you can carry, and quitting before a new job is lined up",
-   "pt_bo_tri": "put your desk with a solid wall behind you and a view of the door, with enough light; keep cables and papers tidy"
+   "pt_bo_tri": "put your desk with a solid wall behind you and a view of the door, with enough light; keep cables and papers tidy",
+   "sang_chung": "your skills and good working relationships go with you wherever you work"
   },
   "tinh_cam": {
    "ten": "your love life",
@@ -59,7 +61,8 @@
     }
    },
    "de_y": "big decisions made in anger, and small hurts left unsaid for too long",
-   "pt_bo_tri": "keep the bedroom quiet and dark enough for sleep, the bed against a wall; keep work papers and gadgets out of it"
+   "pt_bo_tri": "keep the bedroom quiet and dark enough for sleep, the bed against a wall; keep work papers and gadgets out of it",
+   "sang_chung": "saying clearly what you need is the first step to understanding each other better"
   },
   "gia_dao": {
    "ten": "family life",
@@ -76,7 +79,8 @@
     }
    },
    "de_y": "family money that is not clearly agreed, and hurts left unsaid for too long",
-   "pt_bo_tri": "keep one shared spot (dining table or living room) tidy and bright; keep the kitchen and altar clean and uncluttered"
+   "pt_bo_tri": "keep one shared spot (dining table or living room) tidy and bright; keep the kitchen and altar clean and uncluttered",
+   "sang_chung": "a regular meal or phone call together is small, but it keeps the warmth at home"
   },
   "nha_cua": {
    "ten": "your home",
@@ -98,7 +102,8 @@
      "5": "star 5 (Five Yellow) reaches the main door side; old texts advise keeping that side undisturbed"
     }
    },
-   "de_y": "paying a deposit before the papers are clear, and major repairs with no spare money"
+   "de_y": "paying a deposit before the papers are clear, and major repairs with no spare money",
+   "sang_chung": "paperwork, a cash buffer and time are the parts you control; with all three ready, home projects bring fewer surprises"
   },
   "di_lai": {
    "ten": "travel",
@@ -116,7 +121,8 @@
     }
    },
    "de_y": "driving when tired, night trips on unfamiliar roads, and long trips without checking the vehicle",
-   "pt_bo_tri": "keep the parking spot lit and the way in and out clear; keep keys and vehicle papers in one fixed place"
+   "pt_bo_tri": "keep the parking spot lit and the way in and out clear; keep keys and vehicle papers in one fixed place",
+   "sang_chung": "safe travel habits are something you keep up yourself, every day"
   },
   "giay_to": {
    "ten": "paperwork",
@@ -138,10 +144,11 @@
      "3": "star 3 (Three Jade) reaches the main door side; old texts link it with arguments and paperwork"
     }
    },
-   "de_y": "signing before reading everything, and keeping only one copy of important papers"
+   "de_y": "signing before reading everything, and keeping only one copy of important papers",
+   "sang_chung": "paperwork is the part you control: read carefully, keep copies and ask early, and you are rarely caught off guard"
   },
   "ban_be": {
-   "ten": "friends and outsiders",
+   "ten": "friends, coworkers and other people around you",
    "viec": "keep boundaries when invited to pool money or go into business together; put money matters with friends clearly in writing",
    "viec_nay": "write down clearly any money pooled or lent between friends; wait a few days before answering new business offers",
    "viec_ngan": "put money pooled or lent with friends in writing",
@@ -156,7 +163,8 @@
     }
    },
    "de_y": "invitations to pool money, and lending money with nothing in writing",
-   "pt_bo_tri": "keep the living room tidy and bright for guests; keep money and papers somewhere private, not where you receive people"
+   "pt_bo_tri": "keep the living room tidy and bright for guests; keep money and papers somewhere private, not where you receive people",
+   "sang_chung": "the few friends who have stayed with you for years are real support; keep in touch with them"
   },
   "hop_tac": {
    "ten": "the people you do business with",
@@ -187,7 +195,8 @@
     "sao": {
      "7": "star 7 (Seven Red) reaches the main door side; old texts link it with losses through outsiders and gossip"
     }
-   }
+   },
+   "sang_chung": "you are asking before putting money in, which is already a good way to protect your interests"
   },
   "tieu_nhan": {
    "ten": "gossip and people who play dirty",
@@ -209,15 +218,16 @@
     "sao": {
      "3": "star 3 (Three Jade) reaches the main door side; old texts link it with arguments and gossip"
     }
-   }
+   },
+   "sang_chung": "keeping your word and keeping your work transparent is the strongest shield against gossip"
   },
   "hoc_hanh": {
    "ten": "study and exams",
    "viec": "plan steady weekly revision and do practice papers under real exam timing; sleep enough in the days before the exam",
    "viec_nay": "turn what is left into a weekly revision plan and do at least one practice paper under exam timing",
    "viec_ngan": "revise on a plan and do timed practice papers",
-   "de_y": "cramming right before the exam, staying up late night after night, and signing up for too many things at once",
-   "ranh_gioi": "Exam results depend on preparation and how you feel on the day; this is a reminder to prepare, not a prediction of pass or fail.",
+   "de_y": "sleep being cut to make room for revision, pressure piling up, and revision being pushed into the last days before the exam",
+   "ranh_gioi": "Exam results depend on preparation and how one feels on the day; this is a reminder to prepare, not a prediction of marks, pass or fail.",
    "pt_bo_tri": "put the study desk against a wall with a view of the door and good side light; keep the desk clear and the phone out of reach while revising",
    "battu": {
     "ly": "a {tt} year: money and outside matters can pull energy away from study (wealth harming the resource star)"
@@ -226,7 +236,38 @@
     "so": {
      "5": "personal year 5, a scattered year when it is hard to sit still and revise"
     }
-   }
+   },
+   "viec_ds": [
+    "plan revision week by week, one clear part per week, with rest days",
+    "do practice papers under real timing and format, then go through every mistake",
+    "get enough sleep, especially the nights just before the exam",
+    "check paperwork, the exam schedule and the venue early"
+   ],
+   "viec_ds_con": [
+    "make a weekly revision plan with your child, rest days included, so they keep their own pace",
+    "let your child do timed practice papers, then go over the mistakes together without blame",
+    "keep your child's sleep and meals regular, especially in the weeks before the exam",
+    "sit down with your child to check applications, choices and deadlines early"
+   ],
+   "ten_con": "your child's studies and exams",
+   "tuvi": {
+    "cung_xem": [
+     [
+      "Quan Lộc",
+      "study and exams"
+     ],
+     [
+      "Phụ Mẫu",
+      "paperwork and teachers"
+     ]
+    ],
+    "cung_con": [
+     "Tử Nữ",
+     "children"
+    ]
+   },
+   "sang_chung": "every exam has a schedule, sample papers and a clear format, so steady revision shows progress week by week",
+   "sang_chung_con": "your attention to your child's exam season is already support; an adult who keeps meals, sleep and revision steady helps a child stay steady"
   },
   "con_cai": {
    "ten": "your children",
@@ -244,7 +285,8 @@
     "so": {
      "6": "personal year 6, a family year when your children need more of you"
     }
-   }
+   },
+   "sang_chung": "the time you set aside just for your child is the part you control, and it is the steadiest support you can give"
   },
   "cong_danh": {
    "ten": "promotion and career standing",
@@ -261,7 +303,8 @@
     "so": {
      "1": "personal year 1, a year of beginnings, good for a new role but easy to rush"
     }
-   }
+   },
+   "sang_chung": "your results are something you can record and present; people who make their work visible tend to get noticed"
   },
   "xuat_ngoai": {
    "ten": "moving or studying abroad",
@@ -279,7 +322,8 @@
     "so": {
      "5": "personal year 5, a year of change, good for moving but easy to rush"
     }
-   }
+   },
+   "sang_chung": "documents, language and a cash buffer are things you can start preparing now"
   },
   "mua_xe": {
    "ten": "buying a vehicle",
@@ -297,7 +341,53 @@
     "so": {
      "8": "personal year 8, a year of big expenses that need careful sums"
     }
-   }
+   },
+   "sang_chung": "you have time to compare prices, test drive and count the full running costs before deciding"
+  },
+  "doi_no": {
+   "ten": "getting money back from someone who owes you",
+   "viec": "keep the loan note, messages and transfer receipts; ask for repayment in writing and offer a part-payment plan; for large sums, use local mediation or ask a lawyer",
+   "de_y": "chasing the debt while angry, going through middlemen with no paperwork, and lending more in the hope of getting the old money back",
+   "ranh_gioi": "No reading can say whether you will get the money back; this is a reminder to keep evidence and ask properly, not legal advice.",
+   "sang_chung": "the loan note, messages and transfer receipts are things you can keep yourself, and they make asking for repayment clearer",
+   "viec_nay": "review the money you are owed, gather the evidence and send a written reminder",
+   "viec_ngan": "keep evidence, ask in writing"
+  },
+  "cho_vay": {
+   "ten": "lending money",
+   "viec": "only lend what you could afford to lose; write a simple loan note with a repayment date, and transfer rather than hand over cash",
+   "de_y": "lending out of embarrassment, loans with no paperwork, and borrowing in your own name for someone else",
+   "ranh_gioi": "This is a reminder to protect both your money and the relationship, not a prediction of whether you will be repaid.",
+   "sang_chung": "you are thinking it through before handing over money, which protects both the money and the friendship",
+   "viec_nay": "review what you have lent; lend only what you could lose, with a loan note",
+   "viec_ngan": "lend only what you could lose, in writing"
+  },
+  "di_vay": {
+   "ten": "borrowing money or taking a bank loan",
+   "viec": "work out the monthly repayment against income you can count on, compare the rate after any promotional period, and keep a few months of repayments in reserve",
+   "de_y": "repayments that sit too close to your income, floating rates after the promotional period, and borrowing from one loan to pay another",
+   "ranh_gioi": "This is not financial advice; for a large loan, work with real numbers and ask a professional.",
+   "sang_chung": "you are planning before you borrow, and a month-by-month repayment table is something you control",
+   "viec_nay": "draw up a monthly repayment table, compare the rate after the promotion and keep a reserve before signing",
+   "viec_ngan": "work out repayments, keep a reserve"
+  },
+  "cham_cha_me": {
+   "ten": "caring for ageing parents",
+   "viec": "take your parents for regular check-ups and keep a note of medicines and follow-up dates; arrange for someone nearby when needed, and call or visit regularly",
+   "de_y": "warning signs ignored because your parents do not like to complain, slippery spots at home, and all the caring falling on one person",
+   "ranh_gioi": "This is a reminder about care, not a substitute for a doctor; if your parents show unusual signs, take them to a doctor right away.",
+   "sang_chung": "the time you give your parents now is what they feel most clearly",
+   "viec_nay": "book regular check-ups for your parents and check the house for slippery spots",
+   "viec_ngan": "regular check-ups and regular visits"
+  },
+  "nha_chong": {
+   "ten": "your in-laws",
+   "viec": "choose a calm moment to talk and say what you need rather than blame; agree big family matters with your spouse first, then talk to the parents together",
+   "de_y": "arguing while upset, telling outsiders about in-law problems, and leaving your spouse out of every clash",
+   "ranh_gioi": "This is a reminder to keep the peace, not a verdict on who is right.",
+   "sang_chung": "you are looking for a way to keep the peace instead of letting things escalate, and that is the base for making up",
+   "viec_nay": "pick a calm moment this week to talk, and agree with your spouse first",
+   "viec_ngan": "talk when calm, agree with your spouse first"
   }
  },
  "mau": {
@@ -321,7 +411,21 @@
   "nla_dau": "No reading can see into another person's heart, so this answer is about your side: what you have going for you, what to watch, and what to do to protect your interests.",
   "nla_nam_sinh": "Another person's chart should only be read with their consent; this reading uses your chart only.",
   "nla_viec": "What to do: {viec}.",
-  "pt_noi": "Home feng shui does not answer {mang} directly; what it helps with is making the places where you live and work calmer and better suited to you. A layout tip: {bo_tri}."
+  "pt_noi": "Home feng shui does not answer {mang} directly; what it helps with is making the places where you live and work calmer and better suited to you. A layout tip: {bo_tri}.",
+  "sang": "Bright spot: {sang}.",
+  "hoc_viec": "What to do for the exam: {viec}.",
+  "hoc_muc": "{nguon}, here is how each area looks: {ds}",
+  "hoc_muc_mot": "{mang} — {muc}",
+  "hoc_con_la_so": "This is your own chart, so it speaks to how you support your child; for your child's own studies, set up your child's chart.",
+  "pt_sang": "the directions {huong} suit you; face your desk or bed head toward one of them",
+  "pt_sk_sang": "an airy, well-lit, uncluttered bedroom is something you can do right away, at no cost",
+  "pt_sk_viec": "What to do: book regular check-ups for the whole household; air out the bedroom every morning and clear things away from around the bed.",
+  "nam_de_y": "Worth watching: piling several big things into the same stretch, and signing or lending before reading everything.",
+  "nam_viec": "What to do: split the year's big tasks by quarter, keep a cash buffer, and book a routine health check early in the year.",
+  "nam_tuoi": "By custom, your own zodiac year is a year to slow down and take a little more care, not a bad year.",
+  "dc_sang": "Bright spot: pausing to ask, rather than acting straight away, is already a way of looking after yourself.",
+  "dc_viec": "What to do: write down what you have actually seen, separate from what you suspect; choose a calm moment for both of you to talk plainly; if needed, find someone you trust or a couples counsellor to think it through with.",
+  "dc_de_y": "Worth watching: drawing conclusions from one or two signs, and making big decisions while angry."
  },
  "hoi": {
   "giay_to": [
@@ -420,7 +524,11 @@
    "ban be",
    "friends",
    "friend",
-   "friendship"
+   "friendship",
+   "coworkers?",
+   "colleagues?",
+   "people around me",
+   "people at work"
   ],
   "hoc_hanh": [
    "thi cu",

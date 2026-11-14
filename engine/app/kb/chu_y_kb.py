@@ -53,9 +53,23 @@ def pt_bo_tri(ma: str) -> str:
     return mang(ma).get("pt_bo_tri") or ""
 
 
-def viec_ds(ma: str) -> list[str]:
-    """CY-2: danh sách việc cụ thể (người cùng làm ăn) — chọn vài việc cho đoạn trả lời."""
-    return [x for x in (mang(ma).get("viec_ds") or []) if isinstance(x, str)]
+def viec_ds(ma: str, con: bool = False) -> list[str]:
+    """CY-2: danh sách việc cụ thể (người cùng làm ăn, kỳ thi…) — chọn vài việc cho đoạn trả lời. `con`: bản việc cha mẹ
+    làm cùng con (`viec_ds_con`), không có thì bản thường."""
+    m = mang(ma)
+    ds = (m.get("viec_ds_con") if con else None) or m.get("viec_ds") or []
+    return [x for x in ds if isinstance(x, str)]
+
+
+def sang_chung(ma: str, con: bool = False) -> str:
+    """CY-3: điểm sáng chung của mảng (lời không đoán, không nêu dữ kiện) — chỉ dùng khi gói bằng chứng không có điểm sáng."""
+    m = mang(ma)
+    return (m.get("sang_chung_con") if con else None) or m.get("sang_chung") or ""
+
+
+def ten_con(ma: str) -> str:
+    """CY-3: tên mảng khi điều được hỏi là của con ("chuyện học hành, thi cử của con")."""
+    return mang(ma).get("ten_con") or ten(ma)
 
 
 def ranh_gioi(ma: str) -> str:

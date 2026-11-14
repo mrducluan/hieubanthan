@@ -282,7 +282,7 @@
  "hoi.dhr.chuyen_mua_dat": "buying land",
  "hoi.dhr.chuyen_xin_visa": "a visa application",
  "hoi.dhr.chuyen_thua_ke": "an inheritance",
- "hoi.dhr.chuyen_kien_tung": "a lawsuit",
+ "hoi.dhr.chuyen_kien_tung": "a lawsuit or other legal matter",
  "hoi.dhr.chuyen_hop_dong": "a contract",
  "hoi.dhr.chuyen_ly_hon": "divorce",
  "hoi.dhr.chuyen_lam_lanh_sau_cai_nhau": "making up after a fight",
@@ -315,5 +315,11 @@
  "hoi.sh.han.thien_la": "Heaven's Net",
  "hoi.sh.han.dia_vong": "Earth's Net",
  "hoi.sh.han.diem_vuong": "King Yama",
- "hoi.md.diem_manh": "Your strength: "
+ "hoi.md.diem_manh": "Your strength: ",
+ "hoi.dhr.chuyen_hoc_hanh_thi_cu_cua_con": "your child's studies and exams",
+ "hoi.md.de_y": "Worth watching: ",
+ "hoi.dhr.chuyen_voi_me_chong_nha_chong": "your in-laws",
+ "hoi.dhr.chuyen_voi_bo_me_vo_nha_vo": "your in-laws",
+ "hoi.dhr.chuyen_cham_bo_me_gia": "caring for ageing parents",
+ "hoi.dhr.chuyen_doi_no_bi_quyt_tien": "getting money back from someone who owes you"
 }

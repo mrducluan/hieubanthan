@@ -6,7 +6,7 @@
 một việc nên làm) · câu người làm ăn có ranh giới (không đọc được lòng người kia / luật sư) và Tarot không gắn chip
 có/không cho câu về người khác.
 
-    cd engine && .venv/bin/python scripts/cham_dev_chu_y.py [--sai] [--json out.json]
+    cd engine && .venv/bin/python scripts/cham_dev_chu_y.py [--sai] [--json out.json] [--tep fixtures/cau_hoi/dev_chu_y_2.jsonl]
 """
 from __future__ import annotations
 
@@ -71,8 +71,8 @@ def _van(md: str, k: dict) -> tuple[str, str, str | None]:
     return " ".join(ds[:2]), ans, (k.get("phan_loai") or {}).get("xu_ly")
 
 
-def cham(in_sai: bool = False) -> dict:
-    rows = [json.loads(x) for x in TEP.read_text(encoding="utf-8").splitlines()[1:] if x.strip()]
+def cham(in_sai: bool = False, tep: Path | None = None) -> dict:
+    rows = [json.loads(x) for x in (tep or TEP).read_text(encoding="utf-8").splitlines()[1:] if x.strip()]
     c = dr.may_khach()
     tong = collections.Counter()
     theo = collections.defaultdict(collections.Counter)
@@ -115,7 +115,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--sai", action="store_true")
     ap.add_argument("--json")
+    ap.add_argument("--tep", help="bộ khác cùng khuôn (vd fixtures/cau_hoi/dev_chu_y_2.jsonl)")
     a = ap.parse_args()
-    o = cham(a.sai)
+    o = cham(a.sai, Path(a.tep) if a.tep else None)
     if a.json:
         Path(a.json).write_text(json.dumps(o, ensure_ascii=False, indent=1), encoding="utf-8")
