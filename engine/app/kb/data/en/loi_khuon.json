@@ -66,6 +66,8 @@
  "tarot.tq.an_chinh_can_cu": "Major Arcana present: {ds}.",
  "tarot.tq.nguyen_to_troi": "Dominant element: {ten}",
  "tarot.tq.dem_nguyen_to": "Element count: {ds} (Golden Dawn: one element per card).",
+ "tarot.tq.lap_la_can_cu": "Book T (Golden Dawn), table of cards of the same number: «{nv}» Cards: {ds}.",
+ "tarot.tq.da_so_can_cu": "Book T: «{nv}»",
  "tarot.tq.khong_co_la": "No {ten} cards at all",
  "tarot.tq.thieu_can_cu": "A missing element in a spread of 5 or more cards (Golden Dawn): that part of life has not been asked about.",
  "tarot.tq.nhip_so": "Number rhythm: {day}",

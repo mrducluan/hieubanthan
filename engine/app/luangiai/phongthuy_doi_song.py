@@ -869,6 +869,10 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
     # KC-1: khoá rỗng không ghi (khuôn chung; web coi thiếu = None).
     for c in (c1, c2, c3, c4, c5):
         _thuong_chuong(c)
+    # PT-NG5: mỗi chương thêm một câu cổ thư đã đối chiếu nguyên văn vào "Vì sao nói vậy" (không đổi mức / lời).
+    from app import ngon_ngu  # noqa: PLC0415
+    for c, mang in ((c1, "bat_trach"), (c2, "loan_dau"), (c3, "duong_trach"), (c4, "lich_nam")):
+        c["can_cu"] = list(c.get("can_cu") or []) + kbp.sach_xua(mang, viet=ngon_ngu.la_viet())
     chuong = [{k: v for k, v in c.items() if v is not None} for c in (c1, c2, c3, c4, c5)]
     da_tinh["veto_da_xac_nhan"] = [{"ma": d["ma"], "tieu_de": d["tieu_de"]} for d in veto]
     da_tinh["goc_nhin"] = goc_nhin

@@ -163,3 +163,82 @@ def test_vung_hoang_dao_hoang_gia_khop_book_t(ma):
     b = kb.cung_hoang_dao()[ds[(ds.index(v["tu_cung"]) + 1) % 12]]["en"]
     mo_ta = _book_t(ma)["mo_ta"]
     assert a in mo_ta and b in mo_ta and v["do"] == 20, (ma, a, b)
+
+
+# PT-NG1 (2026-11-12): lớp "đa số" của Book T — bàn bài nghiêng về một bộ / nhóm lá.
+def test_da_so_la_nguyen_van_book_t():
+    ds = kb._d()["da_so"]
+    kho = _chuan(BOOK_T["coc_4"]["mo_ta"])          # bản OCR nối đoạn cách đọc vào cuối mục 4 Cốc
+    assert {"gay", "coc", "kiem", "tien", "an_chinh", "hoang_gia", "at"} <= set(ds)
+    for ma, m in ds.items():
+        if ma.startswith("_"):
+            continue
+        assert _chuan(m["nguyen_van"]) in kho and m["nghia"].strip(), ma
+    cam = [c.lower() for c in kb._d()["cum_cam"]]
+    chu = " ".join(m["nghia"] for k, m in ds.items() if not k.startswith("_")).lower() + " " + kb._d()["mau"]["khai_niem"]["da_so"].lower()
+    assert not [c for c in cam if c in chu]
+
+
+def test_hoi_dap_nhan_cau_hoi_da_so():
+    from app.luangiai import tarot as rules
+    kq = rules.hoi("Bàn bài của tôi nhiều lá Kiếm nghĩa là gì?")
+    assert kq["xu_ly"] == "khai_niem" and "nhiều Kiếm" in kq["cau_tra_loi"]
+
+
+# PT-NG2 (2026-11-12): Liber LXXVIII (Crowley, The Equinox I:8, 1912) — bản chép thứ hai, độc lập, của cùng văn bản Book T.
+LIBER = json.loads((NGUON / "tarot_liber_78.json").read_text(encoding="utf-8"))
+_UNG = {"Air": ("nguyen_to", "khi"), "Water": ("nguyen_to", "thuy"), "Spirit and Fire": ("nguyen_to", "hoa"), "Earth and Saturn": ("hanh_tinh", "tho_tinh")}
+
+
+def _ma_theo_en(nhom: str, en: str) -> str:
+    return next(k for k, v in kb._d()[nhom].items() if v["en"] == en)
+
+
+@pytest.mark.parametrize("ma", sorted(LIBER["la_so"]))
+def test_decan_36_la_khop_liber_78(ma):
+    r, d = LIBER["la_so"][ma], kb.mot_la(ma)["decan"]
+    assert d["cung"] == _ma_theo_en("cung_hoang_dao", r["cung"]) and d["hanh_tinh"] == _ma_theo_en("hanh_tinh", r["hanh_tinh"]), ma
+    bt = next(t for t in kb.mot_la(ma)["trich"] if t["sach"] == "book_t")
+    assert bt["ten"].lower().replace("oppression", "oppresion") == f"the lord of {r['ten']}".lower(), ma    # hai bản chép cùng tên
+
+
+def test_chiem_tinh_22_an_chinh_khop_liber_78():
+    assert len(LIBER["an_chinh"]) == 22
+    for r in LIBER["an_chinh"]:
+        so = {11: 8, 8: 11}.get(r["so_liber"], r["so_liber"])          # Liber 78: Fortitude 11, Justice 8; KB theo số Waite
+        ct = kb.mot_la(f"dai_{so}")["chiem_tinh"]
+        if r["ung"] in _UNG:
+            assert (ct["loai"], ct["ma"]) == _UNG[r["ung"]], r
+        elif r["ung"] in {v["en"] for v in kb._d()["hanh_tinh"].values()}:
+            assert (ct["loai"], ct["ma"]) == ("hanh_tinh", _ma_theo_en("hanh_tinh", r["ung"])), r
+        else:
+            assert (ct["loai"], ct["ma"]) == ("cung", _ma_theo_en("cung_hoang_dao", r["ung"])), r
+
+
+def test_pham_gia_khop_liber_78():
+    cau = " ".join(LIBER["pham_gia"])
+    assert "Swords are inimical to Pentacles." in cau and "Wands are inimical to Cups." in cau
+    assert calc.pham_gia("khi", "dat") == "xung" and calc.pham_gia("hoa", "thuy") == "xung"          # Kiếm–Tiền, Gậy–Cốc
+    assert calc.pham_gia("khi", "thuy") == "hop" and calc.pham_gia("khi", "hoa") == "hop" and calc.pham_gia("hoa", "dat") == "hop" and calc.pham_gia("hoa", "hoa") == "manh"
+
+
+def test_lap_la_va_da_so_la_nguyen_van_liber_78():
+    d = kb._d()
+    for ma, m in d["da_so"].items():
+        if not ma.startswith("_"):
+            assert LIBER["da_so"][ma] in m["nguyen_van"], ma
+    ll = d["lap_la"]
+    assert set(k for k in ll if not k.startswith("_")) == set(LIBER["lap_la"])
+    cam = [c.lower() for c in d["cum_cam"]]
+    for cap, hai in LIBER["lap_la"].items():
+        for n, nv in hai.items():
+            m = ll[cap][n]
+            assert m["nguyen_van"] == nv and m["nghia"].strip(), (cap, n)
+            assert not [c for c in cam if c in m["nghia"].lower()], (cap, n)
+
+
+@pytest.mark.parametrize("cau", ["Rút ra ba lá số 7 nghĩa là gì?", "Bàn bài có bốn lá Át thì sao?", "nhiều lá cùng số có ý gì không"])
+def test_hoi_dap_nhan_cau_hoi_la_lap(cau):
+    from app.luangiai import tarot as rules
+    kq = rules.hoi(cau)
+    assert kq["xu_ly"] == "khai_niem" and "cùng số" in kq["cau_tra_loi"], cau

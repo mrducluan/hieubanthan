@@ -122,6 +122,22 @@ def ky_dan_gian(ngay_am: int, thang_am: int) -> list[str]:
     return ra
 
 
+# PT-NG5: nhãn tập quán của thông thư dân gian — CHỈ là nhãn, không vào luật chọn ngày.
+# Thụ Tử: Hiệp Kỷ Biện Phương Thư q.6 ghi lịch cũ có thần này (tháng Dần khởi ở Tuất, sáu dương sáu âm xoay vòng) và đã bỏ.
+THU_TU = dict(zip("寅卯辰巳午未申酉戌亥子丑", "戌辰亥巳子午丑未寅申卯酉"))
+
+
+def nhan_tap_quan(chi_ngay: str, chi_thang: str, chi_nam: str) -> list[str]:
+    """Ngày Tuế Phá (chi ngày xung chi năm — Hiệp Kỷ q.3 chỉ nói Tuế Phá là PHƯƠNG; gọi theo ngày là thói quen
+    của thông thư) và ngày Thụ Tử (theo chi tháng tiết)."""
+    ra = []
+    if (ZHI.index(chi_ngay) - ZHI.index(chi_nam)) % 12 == 6:
+        ra.append("tue_pha")
+    if THU_TU[chi_thang] == chi_ngay:
+        ra.append("thu_tu")
+    return ra
+
+
 def quan_he_tuoi(chi_ngay: str, chi_tuoi: str) -> str | None:
     """Quan hệ địa chi ngày ↔ tuổi: xung > tam_hop > luc_hop > hai > trung (cùng chi); không có → None."""
     if (ZHI.index(chi_ngay) - ZHI.index(chi_tuoi)) % 12 == 6:
@@ -154,11 +170,12 @@ def ngay(d: dt.date, tz: float = CALENDAR_MERIDIAN_TZ) -> dict:
         gio.append({"chi": ZHI[h], "can": GAN[(can_i % 5 * 2 + h) % 10], "than": t, "hoang_dao": t in HOANG_DAO,
                     "ly_thuan_phong": ltp[h]})
     xung_chi = ZHI[(ZHI.index(chi) + 6) % 12]
+    nam_gz = "".join(GAN[lunar.CAN.index(x)] if i == 0 else ZHI[lunar.CHI.index(x)]
+                     for i, x in enumerate(lunar.can_chi_nam(ay)))
     return {
         "ngay": d.isoformat(), "tz": tz,
         "am": {"ngay": ad, "thang": am, "nam": ay, "nhuan": bool(nhuan)},
-        "nam_gz": "".join(GAN[lunar.CAN.index(x)] if i == 0 else ZHI[lunar.CHI.index(x)]
-                          for i, x in enumerate(lunar.can_chi_nam(ay))),
+        "nam_gz": nam_gz,
         "thang_gz": thang_gz, "ngay_gz": ngay_gz,
         "truc": TRUC[(ZHI.index(chi) - ZHI.index(thang_gz[1])) % 12],
         "than": than, "hoang_dao": than in HOANG_DAO,
@@ -172,4 +189,5 @@ def ngay(d: dt.date, tz: float = CALENDAR_MERIDIAN_TZ) -> dict:
         "thai_than": V.POSITION_TAI_DAY[_chi_so_60(ngay_gz)],
         "gio": gio,
         "ky_dan_gian": ky_dan_gian(ad, am),
+        "nhan_tap_quan": nhan_tap_quan(chi, thang_gz[1], nam_gz[1]),
     }

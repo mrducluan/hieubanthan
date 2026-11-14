@@ -95,3 +95,17 @@ def huyen_khong() -> dict:
 def bo_cuc() -> dict:
     """PT-V0 — vị trí phòng / hướng vật dụng theo du niên + câu tự soi + lưu ý cho luận từ bố cục nhà."""
     return _d()["bo_cuc"]
+
+
+def sach_xua(mang: str, so: int = 1, viet: bool = True) -> list[str]:
+    """PT-NG5: ≤ `so` câu cổ thư (nguyên văn đã đối chiếu kho nguồn) của một mảng, dựng thành dòng cho "Vì sao nói vậy"."""
+    d = _d()
+    ten = d.get("co_thu_sach") or {}
+    ra = []
+    for m in (d.get("co_thu") or {}).values():
+        if m.get("mang") == mang and len(ra) < so:
+            if viet:
+                ra.append(f"Sách xưa — {ten.get(m['sach'], m['sach'])}: «{m['nguyen_van']}» ({m['phien_am']}) {m['nghia']}")
+            else:                                          # bản dịch: cùng số dòng, chỉ nguyên văn (chưa có lời dịch được duyệt)
+                ra.append(f"Classical source: «{m['nguyen_van']}»")
+    return ra

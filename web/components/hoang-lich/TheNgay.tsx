@@ -106,6 +106,18 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
             {d.ky_dan_gian.map((k) => `${k.ten}: ${k.nghia}`).join(" · ")}
           </p>
         )}
+        {(d.nhan_tap_quan?.length ?? 0) > 0 && (
+          <details className="mt-3 text-sm" data-testid="nhan-tap-quan">
+            <summary className="cursor-pointer text-fg-muted">
+              Sách chọn ngày dân gian còn ghi: <b className="text-fg">{d.nhan_tap_quan!.map((k) => k.ten).join(", ")}</b>
+            </summary>
+            <ul className="mt-2 space-y-2 text-fg-muted">
+              {d.nhan_tap_quan!.map((k) => (
+                <li key={k.ma}><b className="text-fg">{k.ten}</b>: {k.nghia}. {k.nguon} {k.luu_y}</li>
+              ))}
+            </ul>
+          </details>
+        )}
         {d.tuoi && (
           <p className="mt-3 flex items-start gap-2 rounded-xl border border-gold/30 bg-gold/[0.06] p-3 text-sm" data-testid="tuoi-ban">
             <UserRound className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
