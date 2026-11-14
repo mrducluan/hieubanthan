@@ -32,6 +32,13 @@ KHUNG_HOANG: list[tuple[str, str | None]] = [
     # EN-3 (bộ dev): nói tránh — "đi luôn cho rảnh nợ", "kết thúc / buông hết mọi thứ cho xong" (không chặn "làm đi luôn
     # cho xong việc", "đi luôn cho kịp chuyến bay", "kết thúc mối quan hệ cho xong")
     (r"(?<!lam )(?<!noi )(?<!viet )di luon cho (ranh no|xong|nhe nguoi|nhe no|thoat)", None),
+    # Review CY-2 vòng 3: "Chắc tôi đi luôn thì vợ con đỡ khổ", "Tôi chết đi thì bố mẹ nhẹ gánh" — người nói đi / mất / biến
+    # mất THÌ người khác đỡ khổ (không bắt "đi luôn chuyến sớm thì vợ con đỡ phải chờ": "thì" phải liền sau động từ).
+    (r"(toi|minh|em|con|tao|tui) (chet|chet di|di luon|bien mat|ra di|bo di|khong con)( di| luon)? thi "
+     r"[a-z ]{0,40}(do kho|bot kho|khoi kho|nhe ganh|nhe no|nhe nhom|thanh than|hanh phuc hon|tot hon)", None),
+    # "Giá mà / ước gì tôi chưa từng được sinh ra" (không bắt "giá mà tôi được sinh ra ở Hà Nội")
+    (r"(gia (nhu|ma)|uoc (gi|chi)) (toi|minh|em|con|tao|tui) (chua tung|chua|khong bao gio|khong|dung) (duoc |bi )?"
+     r"(sinh ra|ton tai|co mat)(?! (o|tai|vao))", None),
     (r"(ket thuc|buong (het|bo)|bo het) moi thu cho (xong|roi|nhe|ranh)(?! voi| (di|de) | dau| dau oc| long)", None),
     # review EN-3: nói tránh còn lọt — "tôi là gánh nặng", "muốn đi luôn" (hết câu), "không muốn tỉnh dậy", "chẳng
     # bằng chết", "mệt quá muốn buông hết" (không chặn "gánh nặng tài chính", "đi luôn chuyến bay sáng mai")
@@ -272,6 +279,12 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
     (r"(bi|mac|chua) tram cam|tram cam nang|thuoc (chong )?tram cam", r"trầm cảm|chống trầm cảm", "suc_khoe_the_chat"),
     (r"(hoi chung|bi) down", r"(hội chứng|bị) down", "suc_khoe_the_chat"),
     (r"(thai|be|con) .{0,25}di tat|di tat (bam sinh|thai)|bi di tat", r"dị tật", "suc_khoe_the_chat"),
+    # CY-2 review 3: kiêng cữ / thai giáo khi mang thai "theo mệnh, theo phong tục" — đọc lá số ra lời lạc đề; nhường bác sĩ
+    # sản khoa (lời gợi ý nhóm `thai_cham`). Có dấu: "bầu" ≠ "bấu", "thai" ≠ "thái".
+    (r"(bau|ba bau|co bau|mang bau|mang thai|co thai|thai phu)( \d+ thang)? .{0,30}(kieng|nen an|nen lam|nen tranh|hop menh"
+     r"|theo menh|theo phong tuc)|thai giao .{0,30}(menh|la so|tuoi|hop)",
+     r"(bầu|bà bầu|có bầu|mang bầu|mang thai|có thai|thai phụ)( \d+ tháng)? .{0,30}(kiêng|nên ăn|nên làm|nên tránh|hợp mệnh"
+     r"|theo mệnh|theo phong tục)|thai giáo .{0,30}(mệnh|lá số|tuổi|hợp)", "suc_khoe_the_chat"),
     # Review 2026-11-14 (lệch vi/en): đoán giới tính thai / có thai chưa / thai khoẻ không — bản Anh đã chặn (_THAI), bản Việt
     # trả lời ("Con tôi trong bụng là trai hay gái?" ra "Nghiêng về CÓ"). "Sinh con năm nào hợp tuổi", "con trai tôi học hành
     # thế nào", "khi nào tôi có con" vẫn trả lời bình thường.
@@ -1907,6 +1920,9 @@ def khung_hoang(raw: str) -> bool:
 # "Không khí gia đình khó thở" là nghĩa bóng, trả lời bình thường.
 _CAP_CUU: list[tuple[str, str | None]] = [
     (r"(dau|tuc|nhoi|that) (that |nhoi )?nguc", r"(đau|tức|nhói|thắt) (thắt |nhói )?ngực"),
+    # Review CY-2 vòng 3: chấn thương đầu chảy máu ("Con tôi bị ngã chảy máu đầu") — có dấu thì phải "đầu" (không "đâu"),
+    # không tính "đầu gối".
+    (r"chay mau (o )?dau(?! goi)", r"chảy máu (ở )?đầu(?! gối)"),
     # CY-2 review 2: chảy / ra máu nhiều, không cầm được máu; ngừng thở, không thở được, môi tím tái; ngã gục, gọi không
     # tỉnh / không phản ứng, lơ mơ; dấu hiệu đột quỵ (méo miệng, một bên mặt xệ, yếu nửa người); đau bụng / đầu dữ dội.
     # "chảy máu cam", "chảy máu chân răng" (không kèm "nhiều") không thuộc nhóm này.

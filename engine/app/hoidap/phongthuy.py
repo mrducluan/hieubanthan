@@ -840,7 +840,7 @@ def _tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = 
         _them_chu_y(goi, pl, nha, nam_xem)                                  # CY-1
         if not goi["phan_loai"].get("theo_nha"):
             _cau_noi(goi, pl, cau_hoi)                                      # CY-2
-    if pl["xu_ly"] not in chung.DAC_BIET and mo_dau.khong_mo(pl["cau_chuan_hoa"]):
+    if pl["xu_ly"] not in chung.DAC_BIET and mo_dau.khong_mo(pl["cau_chuan_hoa"], pl.get("cau_goc")):
         # Review CY-1: câu khủng hoảng quan hệ (ngoại tình, ly hôn…) — Phong thuỷ cũng mở bằng câu đồng cảm như 4 mảng kia
         # (đoạn mở đầu Phong thuỷ đang tắt nên câu này vào gói như một mục đứng đầu).
         goi["muc"].insert(0, {"loai": "ghi_chu", "ma": "dong_cam",

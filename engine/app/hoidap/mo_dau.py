@@ -657,7 +657,10 @@ def _xep_doan(doan: list[str], da: str) -> list[tuple[str | None, bool]]:
 # thuận lợi" hay một việc vặt là lệch chủ đề, vô cảm. Không dựng đoạn mở đầu; phần thân giữ nguyên thứ tự cũ.
 KHUNG_HOANG_QH = [r"ngoai tinh", r"ly (hon|di|than)", r"phan boi", r"bao (hanh|luc)", r"danh dap", r"(?<!\w)co bo",
                   r"(chong|vo|nguoi yeu|anh ay|co ay) (danh|bo roi|bo di|bo|lua doi|phan boi)( toi| em| minh)?(?!\w)",
-                  r"(bi|dang bi) (danh|xam hai|hanh ha)", r"(?<!\w)cam sung", r"nguoi thu ba", r"(?<!\w)tieu tam"]
+                  r"(bi|dang bi) (danh|xam hai|hanh ha)", r"(?<!\w)cam sung", r"nguoi thu ba", r"(?<!\w)tieu tam",
+                  # CY-2 review 3: bản Anh ("Will my husband cheat on me?") nhận lời khuyên bàn chuyện tiền của chương
+                  r"\b(cheat\w*|affair|unfaithful|infidelity|divorc\w*|separation|abus\w*|mistress|the other woman)\b",
+                  r"\b(we|i)( are|'re| am|'m)? separat\w*", r"\b(hits?|beats?|hurts?) me\b"]
 
 
 DONG_CAM_QH = ("Chuyện bạn đang trải qua rất nặng lòng. Không lá số, quẻ hay con số nào quyết thay bạn việc giữ hay buông; "
@@ -671,7 +674,7 @@ _BAO_LUC = [r"bao (hanh|luc)", r"danh dap", r"(bi|dang bi) (danh|xam hai|hanh ha
 
 _LO_NGHI = [r"(?<!\w)lo( la| rang)?(?!\w)", r"(?<!\w)nghi( ngo| la| rang)?(?!\w)", r"(?<!\w)so( la| rang)?(?!\w)", r"hinh nhu",
             r"co ve", r"co (dang )?ngoai tinh (khong|ko)", r"co (sap |se )?(ly (hon|di|than)|chia tay|bo nhau) (khong|ko)",
-            r"\b(worried|suspect\w*|afraid|think)\b"]
+            r"\b(worried|suspect\w*|afraid|think)\b", r"\b(will|is|does|could|would)\b.{0,30}\b(cheat\w*|unfaithful|leave me|divorc\w*)"]
 
 
 def dong_cam(dieu: dict | None, t: str | None = None) -> str:
@@ -692,8 +695,9 @@ def dong_cam(dieu: dict | None, t: str | None = None) -> str:
     return loi
 
 
-def khong_mo(t: str) -> bool:
-    return _co(t, KHUNG_HOANG_QH)
+def khong_mo(t: str, raw: str | None = None) -> bool:
+    """`raw` = câu gốc: câu Anh được đổi sang câu chuẩn tiếng Việt ("tinh duyen cua toi") trước khi tới đây (CY-2 review 3)."""
+    return _co(t, KHUNG_HOANG_QH) or bool(raw and _co(raw.lower(), KHUNG_HOANG_QH))
 
 
 # ---------------------------------------------------------------- lời cố định của đoạn mở đầu
@@ -1105,8 +1109,8 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None, khoa: tuple
     ds = next((m for m in muc if m.get("loai") == "doi_song" and m.get("nhan_muc")), None)
     sn = next((m for m in muc if m.get("loai") == "so_nam" and m.get("nam")), None)
     cs = next((m for m in muc if m.get("loai") == "cua_so"), None)
-    if khong_mo(t):
-        return dong_cam(dieu_hoi(t, raw), t)           # câu trung tính, đồng cảm — không nêu mức (CY-3: việc phía người hỏi từ KB)
+    if khong_mo(t, raw or goc):
+        return dong_cam(dieu_hoi(t, raw), t + " " + (raw or goc or "").lower())           # câu trung tính, đồng cảm — không nêu mức (CY-3: việc phía người hỏi từ KB)
     nh_cau, nh_tk = _ngu_hanh_cau(muc) if (mon == "battu" and pl.get("chu_de") == "ngu_hanh") else ("", "")
     dv_cau = _dai_van_cau(muc) if (mon == "battu" and pl.get("loai") == "van" and re.search(r"dai van|\bvan\b", t)) else ""
     if ds and sn and ds.get("chuong") in ("nam_nay", "cuoc_doi"):
@@ -1264,8 +1268,8 @@ def sang_goi(goi: dict, ds: dict | None = None, uu_cung: bool = False) -> str:
 def que_mo(dq: dict | None, t: str, raw: str | None = None, moc: str | None = None, goc: str | None = None) -> str | None:
     """Điều được hỏi + mức quẻ (theo phái đang đọc) + nghĩa của mức + hình ảnh quẻ + việc đầu của nhóm việc đúng mức.
     Mọi chữ lấy từ `doc_que` (KB `kinhdich_doi_song` + "Hiểu đơn giản" của quẻ)."""
-    if khong_mo(t):
-        return dong_cam(dieu_hoi(t, raw), t)
+    if khong_mo(t, raw or goc):
+        return dong_cam(dieu_hoi(t, raw), t + " " + (raw or goc or "").lower())
     if not dq or not dq.get("nhan_muc"):
         return None
     from app.luangiai import kinhdich_doi_song as kd  # noqa: PLC0415
@@ -1403,8 +1407,8 @@ def so_mo(goi: dict, t: str, raw: str | None = None, ngay_xem=None, dau_muc: dic
             or pl.get("doi_tuong") not in (None, "ban_than") or pl.get("linh_vuc") in ("ky_thuat", "hop_doi") \
             or goi.get("thu_tu_co_dinh"):            # câu bấm từ bảng nỗi đau: đã trả lời đúng chỉ số của thẻ
         return None
-    if khong_mo(t):
-        return dong_cam(dieu_hoi(t, raw), t)
+    if khong_mo(t, raw):
+        return dong_cam(dieu_hoi(t, raw), t + " " + (raw or "").lower())
     from app.hoidap import hieu_cau  # noqa: PLC0415
     dieu = dieu_hoi(t, raw, goc=pl.get("cau_goc"))
     # CY-3: một điểm mạnh từ chính con số của người hỏi (không dùng khi câu hỏi về con — con số của cha mẹ không nói về con)

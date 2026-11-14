@@ -156,6 +156,9 @@ def tra_loi(cau: str, nguoi: dict, ngay_xem: dt.date | None = None) -> dict:
     can_cu: list[str] = []
     hoi_tiep: list[str] = []
     cd = kb2.chan_dung(dd) or {}
+    from app.hoidap import mo_dau as _md  # noqa: PLC0415
+    if _md.khong_mo(t, goc):                   # CY-2 review 3: ngoại tình / ly hôn / bạo hành — đồng cảm trước, như bản Việt
+        doan.append(_md.dong_cam(None, t + " " + goc.lower()))
     if pl["xu_ly"] == "hop_doi":
         doan.append(L("thanso_en.hop_doi", "Compatibility between two charts is not part of the English reading yet. What I can tell you is how your own Life Path {so} tends to love: {x}", so=dd, x=(cd.get("tinh_cam") or {}).get("cach_yeu", "")))
         hoi_tiep += [L("thanso_en.ht.love", "How do I tend to behave in love?"), L("thanso_en.ht.year", "What is my personal year about?")]

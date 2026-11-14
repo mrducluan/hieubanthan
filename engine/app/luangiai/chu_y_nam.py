@@ -566,7 +566,12 @@ MANG_VAN_HAN = ("tien_bac", "cong_viec", "tinh_cam", "di_lai", "giay_to", "nha_c
 # Review 2026-11-14 (chủ dự án quyết): MỌI loại câu còn bị chặn kèm 1–2 câu "nên chú ý… / nên làm…" đúng loại — dịu, không
 # phán, không phải lời khuyên chuyên môn. Bản Việt: chữ ở đây (mặc định của `L`); bản Anh: `kb/data/en/loi_khuon.json`
 # mã `tu_choi.goi_y.*`. Nhóm nhận bằng luật cố định trên câu đã bỏ dấu (Việt) hoặc câu tiếng Anh thường hoá.
+# CY-2 review 3: "Bầu 5 tháng nên kiêng gì theo phong tục", "Thai giáo cho con thế nào hợp mệnh tôi" (một nguồn với an_toan)
+_THAI_CHAM = (r"(bau|ba bau|co bau|mang bau|mang thai|co thai|thai phu)( \d+ thang)? .{0,30}(kieng|nen an|nen lam|nen tranh"
+              r"|hop menh|theo menh|theo phong tuc)|thai giao .{0,30}(menh|la so|tuoi|hop)")
 _GOI_Y_VI = {
+    "thai_cham": "Khi mang thai, nên theo lịch khám thai và lời dặn của bác sĩ sản khoa về ăn uống, nghỉ ngơi, thuốc men; các kiêng cữ "
+                 "theo phong tục nên hỏi lại bác sĩ trước khi làm theo — lá số hay con số không chọn thay việc này.",
     "thai": "Nên theo lịch khám thai và siêu âm ở cơ sở y tế — lá số hay con số không đoán được giới tính hay sức khoẻ của thai. Nếu "
             "muốn, bạn có thể hỏi về mảng con cái, gia đình của chính mình.",
     "tham_my": "Với phẫu thuật hay làm đẹp, nên hỏi bác sĩ chuyên khoa và chọn cơ sở được cấp phép, hỏi rõ rủi ro và thời gian hồi "
@@ -592,6 +597,7 @@ _GOI_Y_VI = {
     "vat_pham": "Không cần mua vật phẩm hay làm lễ để đổi vận — nên giữ tiền cho việc chính và tránh các khoản may rủi.",
 }
 _GOI_Y_NHOM_VI = [
+    ("thai_cham", _THAI_CHAM),
     ("thai", r"thai nhi|co thai|co bau|mang thai|mang bau|dinh bau|trong bung|trai hay (con )?gai|gai hay (con )?trai|sieu am"
              r"|say thai|thai luu|sinh non|de non|thai (nay|do|lan nay)"),
     ("tham_my", r"tham my|nang mui|cat mi|hut mo|nang nguc|don cam|got cam|cang da|tiem filler|filler|botox|phun xam|lam dep"),
@@ -612,6 +618,7 @@ _GOI_Y_NHOM_VI = [
     ("the_thao", r"doi nao thang|ai (se )?(thang|dac cu|trung cu)|ty so|ket qua tran"),
 ]
 _GOI_Y_NHOM_EN = [
+    ("thai_cham", r"pregnan\w* .{0,30}(?:avoid|eat|customs?|taboos?|traditions?)|prenatal education"),
     ("thai", r"pregnan\w*|baby s? (?:gender|sex)|boy or (?:a )?girl|girl or (?:a )?boy|unborn|fetus|foetus|miscarr\w*|ivf|iui"),
     ("tham_my", r"cosmetic\w*|plastic surgery|nose job|rhinoplasty|botox|fillers?|liposuction|facelift|breast (?:augmentation|implants?)"),
     ("thuoc_mo", r"(?:stop|quit|skip|come off|go off|cut down|ditch) .{0,25}(?:meds|medication|medicine|pills|insulin|chemo\w*|treatment|"
@@ -630,7 +637,7 @@ _GOI_Y_NHOM_EN = [
 ]
 
 
-_GOI_Y_THU_TU = ("thai", "tham_my", "nguoi_than_benh", "thuoc_mo", "tuoi_tho", "yem", "xep_hang", "tuyen_dung", "nguoi_khac", "dau_tu",
+_GOI_Y_THU_TU = ("thai_cham", "thai", "tham_my", "nguoi_than_benh", "thuoc_mo", "tuoi_tho", "yem", "xep_hang", "tuyen_dung", "nguoi_khac", "dau_tu",
                  "so_con_ten", "the_thao")
 
 

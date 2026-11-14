@@ -307,6 +307,17 @@ cho người dùng thật cần chủ dự án (mục 6).
 - Khủng hoảng + cấp cứu: cấp cứu trước (bản Anh số theo nước: 911/999/000/111/112/995).
 - Bộ dev mới `dev_chu_y.jsonl` 160/160, `dev_chu_y_2.jsonl` 40/40 (10 câu Anh); chấm `scripts/cham_dev_chu_y.py [--tep]`.
 - Cần người bản xứ duyệt: lời `tu_choi.goi_y.*`, 12 mảng mới trong `en/chu_y_kb.json`.
+- Review độc lập 3 vòng (chạy engine thật, cả hai ngôn ngữ). Vòng 3 sửa: nói tránh "tôi đi luôn thì vợ con đỡ khổ",
+  "giá mà tôi chưa từng được sinh ra" → khủng hoảng; "ngã chảy máu đầu" → cấp cứu; câu Anh ngoại tình / ly hôn có lời
+  đồng cảm như bản Việt (câu Anh được đổi sang câu chuẩn Việt trước khi xét — nay xét cả câu gốc); "mang thai nên
+  kiêng gì / thai giáo hợp mệnh" → gợi ý theo bác sĩ sản khoa (nhóm `thai_cham`); Tarot câu đời thường không nhận ra
+  → mời gõ ở ô rút bài, hỏi về phía mình. Bộ câu: `tests/test_cy2_review2.py`, `fixtures/cau_hoi/an_toan_song_ngu.json`.
+- Thiếu sót quy trình đã rút ra: (1) bộ câu an toàn trước đây chỉ có câu Việt → lệch vi/en lọt qua; nay mỗi câu khủng
+  hoảng / cấp cứu / từ chối có cặp Anh–Việt cùng nhánh. (2) Câu Anh đi qua câu chuẩn Việt — luật nào đọc chữ phải xét
+  cả câu gốc. (3) Holdout `bh046` nhãn cũ ("đối tác có trung thực" = từ chối) trái chính sách CY-2 — không sửa holdout
+  đóng băng, ghi nhận câu đó tính lệch có chủ đích.
+- Còn để sau (thấp): "Lá số đẹp là lá số thế nào?" chưa đi nhánh kiến thức; "Có nên kiện công ty đòi lương" Kinh
+  Dịch gắn nhãn "tiền bạc" (lời vẫn đúng việc).
 
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 
