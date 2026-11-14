@@ -3,7 +3,7 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-12 (PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-13 (WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
 ### 4as. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
 
@@ -15,7 +15,12 @@
   (2026-11-13) Hai kho GitHub anh gửi không có nguyên văn sách này — em chỉ dùng được làm bộ đối chiếu bảng (mục 7 tài liệu). Vẫn cần bản chữ của sách.
 - [ ] (Quyết định) Thế quái khi sao 5 nhập trung: giữ cách engine (thay bằng thế tinh của chính sơn) hay theo cách "sao 5 không thay"? Em đề xuất giữ tới khi có nguyên văn.
 - [x] (Đã duyệt + đã làm 2026-11-13, PT-NG5) Có hiện **ngày Tuế Phá, ngày Thụ Tử** ở Xem ngày tốt như nhãn tập quán (không loại ngày) không? Em đề xuất: có, chỉ là nhãn.
-- [ ] (PT-NG5) Sau khi gộp: **deploy engine trước web** (web cũ bỏ qua trường nhãn mới).
+- [ ] (PT-NG5) PR đã gộp 2026-11-13: **deploy engine trước web** (web cũ bỏ qua trường nhãn mới).
+- [x] (WS-1, 2026-11-13) Em tự dò Wikisource tiếng Trung: nạp được 14 sách vào kho nguồn (Tăng San Bốc Dịch đủ bộ, Hoàng Kim Sách, Hoả Châu Lâm,
+  Kinh Thị Dịch Truyện, Mai Hoa Dịch Số, Địa Lý Biện Chính, Thiên Ngọc Kinh Nội Truyện, Thanh Nang Kinh, Huyền Cơ Phú, Hám Long Kinh,
+  Nhân Tử Tu Tri, Trích Thiên Tuỷ + Xiển Vi, Thần Phong Thông Khảo); loại 9 sách bản kém tin. Chi tiết: mục 10 của tài liệu.
+  **Wikisource không có** Thẩm thị, Dương Trạch Tam Yếu, Bát Trạch Minh Kính, Dương Trạch Thập Thư, Lỗ Ban Kinh, các sách tướng Ma Y / Liễu Trang → các mục dưới vẫn cần anh gửi.
+- [ ] (WS-1, quyết định) Chọn việc dùng kho mới trước: câu sách Huyền Cơ Phú cho báo cáo nhà · Trích Thiên Tuỷ cho trang nhật chủ · Hoàng Kim Sách cho hỏi quẻ (mục 10 cuối).
 - [ ] **Dương Trạch Tam Yếu (陽宅三要)**: tệp 91 MB là ảnh quét, không có chữ → cần bản có chữ (PDF chữ / Word / txt) hoặc bản dịch Việt gõ chữ.
 - [ ] Case *The Tarot* và Papus: tệp trên 10 MB bị cắt (Case chỉ đọc tới lá 2). Gửi lại bản dưới 10 MB hoặc tách 2–3 phần. (Papus em tự lấy từ archive.org.)
 - [ ] Chưa gửi: Dương Trạch Thập Thư (陽宅十書), Địa Lý Biện Chính bản có chú, Lỗ Ban Kinh (魯班經); chương Introduction của Mathers 1888.
