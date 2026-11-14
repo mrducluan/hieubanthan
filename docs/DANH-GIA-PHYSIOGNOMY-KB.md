@@ -187,3 +187,54 @@ Không đổi phép tính, không đổi mức → không tăng `ENGINE_VERSION`
 4. **Nguyên văn Dương Trạch Tam Yếu, Bát Trạch Minh Kính** (chữ Hán) vẫn thiếu — cần bản quét chữ Hán, không phải bản dịch.
 5. Soát lại giấy phép dấu câu của các kho nguồn Wikisource đã nạp trước đây (Băng Giám, Tăng San Bốc Dịch, Cốt Tuỷ Phú…):
    nếu trang nguồn cũng ghi dấu câu theo CC BY-SA thì bỏ dấu câu như hai kho mới.
+
+## 9. Đợt nạp thứ hai (14/11/2026) — theo quyết định mới của chủ dự án
+
+Chủ dự án chốt: lấy **hết** phần có ích của sách xưa (kể cả câu sách đoán nặng, nhưng nói giảm), nạp Dương Trạch Tam Yếu,
+Bát Trạch Minh Kính, Liễu Trang, bổ sung nguồn cho Tarot, và làm lớp phủ đồ hình. Quy tắc mới là **SX-C** (ghi ở `CLAUDE.md`,
+kế hoạch ở `docs/KE-HOACH-NAP-SACH-XUA.md`).
+
+### 9.1 Ba nhóm lời sách
+
+| Nhóm | Sách nói gì | Cách đưa vào lời |
+|---|---|---|
+| A | khen, mô tả, phân loại, dặn cách làm | nói nguyên ý: "Sách xưa ghi «…» — …" |
+| B | chê chuyện tiền, việc, tính nết, quan hệ | "Nên chú ý …" + một việc cụ thể |
+| C | thọ, bệnh, hình khắc người thân, con cái, phẩm hạnh theo giới | "Sách xưa có nhắc… Hàm ý theo ghi chép xưa: …" — nói giảm, kèm việc giữ gìn |
+
+Nhóm C không có số tuổi, không tên bệnh hiểm nghèo, không "bạn sẽ…"; không lên tiêu đề hộp, thẻ chia sẻ, thông báo đẩy, lời
+nhắc AI; người chưa đủ 18 tuổi không nhận. Câu hỏi trực tiếp về tuổi thọ / năm mất / tên bệnh vẫn đi cổng an toàn cũ.
+
+### 9.2 Đã nạp
+
+| Nguồn | Tệp KB | Số mục (A / B / C) | Dùng ở đâu |
+|---|---|---|---|
+| Tử Vi Đẩu Số Toàn Thư quyển 3 | `tuvi_sach_ghi.json` | 434 (133 / 102 / 199) | khối "Sách xưa ghi gì về từng cung của bạn" trên lá số |
+| Tam Mệnh Thông Hội, Uyên Hải Tử Bình | `battu_sach_ghi.json` | 117 (53 / 30 / 34) | khối trên lá số Bát tự: thần sát, thập thần lộ can, hành ngày sinh |
+| Thần Tướng Toàn Biên | `nhan_tuong_sach_ghi.json` | 61 (21 / 30 / 10) | bài đọc Nhân tướng (theo nét đã chọn), hỏi đáp 12 cung |
+| Thần Tướng Toàn Biên | `nhan_tuong_kieu_hinh.json` | 119 (52 / 39 / 28) | hỏi đáp "mắt phượng là gì", "mày kiếm…" |
+| Liễu Trang tướng pháp | `nhan_tuong_lieu_trang.json` | 216 (131 / 61 / 24) | hỏi đáp bộ vị, 12 cung, dáng đi – ngồi – nằm – ăn – nói – cười |
+| Dương Trạch Thập Thư | `phongthuy_sach_ghi.json` | 116 (33 / 46 / 37) | khảo sát nhà: câu sách theo dấu hiệu đã xác nhận |
+| Dương Trạch Thập Thư | `phongthuy_cung_menh.json` | 73 (73 / 0 / 0) | "Sách xưa dặn gì cho người cung …" (chín điều × 8 cung) |
+
+Liễu Trang: kho nguồn `lieu_trang_tuong_phap.json` lấy từ bản gõ trong database của anh (192 mục). So với 27 trang đọc từ bản
+khắc 1889, chỉ khoảng 44 % cụm 6 chữ trùng từng chữ, và bản gõ có nhiều chữ lẫn (曰 thay 日, 發 thay 髮…), nên cả kho mang cờ
+"cần đối chiếu" và chỉ trích câu ngắn. Chưa tìm được bản gõ thứ hai để so (Wikisource không có sách này).
+
+Không đưa vào lời: đoán thai, giới tính thai, trẻ sơ sinh "dễ nuôi – khó nuôi"; bộ phận kín; bùa trấn; câu xếp hạng phẩm hạnh
+phụ nữ (chỉ lấy vài câu tả thói quen sửa được, viết không phân biệt giới).
+
+### 9.3 Dương Trạch Tam Yếu và Bát Trạch Minh Kính
+
+Trong database hai sách này chỉ có **bản dịch tiếng Việt** hiện đại (máy đọc từ PDF), không có chữ Hán. Em nạp **tri thức**
+(64 thế nhà cửa – chủ, 64 cặp bếp – cửa, các quy tắc) dưới dạng mục "tóm ý" do ban biên tập viết lại, không chép câu của
+bản dịch và không đưa văn bản đó vào repo. Lý do: quyền của người dịch không thuộc về anh hay em nên không ai trong hai ta
+"cho phép" được; còn ý và quy tắc của sách xưa thì ai cũng dùng được. Du niên của từng cặp được so với phép tính của engine.
+
+### 9.4 Lớp phủ đồ hình
+
+Bốn tệp SVG mẫu trong `assets/rendered_overlays/` dùng **toạ độ ước lượng trên một khuôn mặt giả định** (13 bộ vị cách đều
+trên một đường thẳng, không có ảnh khắc gỗ bên dưới), và có "Phụ mẫu cung" trong khi bản khắc «十二宮五官之圖» không có cung
+này. Bản database trên Drive cũng chưa có bảng `diagram_overlays`. Vì vậy em đo lại toạ độ **trực tiếp trên ảnh khắc gỗ**,
+vẽ chấm kiểm tra rồi mới ghi. Ảnh gốc không sửa điểm ảnh; lớp chú giải bật – tắt được; lời nốt ruồi theo ba nhóm ở 9.1,
+không màu đỏ.

@@ -172,3 +172,81 @@ def nhan_tuong(dac_diem: list[str], tuoi: int | None = None) -> dict | None:
         return None
     cac = [(m, m.get("ten") or "Nét bạn đã chọn") for ma in dac_diem for m in kb["dac_diem"].get(ma) or []]
     return khoi([("net", "Về các nét bạn đã chọn", cac)], tuoi)
+
+
+def _cau(cac: list[dict], tuoi: int | None, toi_da: int = 3) -> list[str]:
+    """Câu văn xuôi (hỏi đáp): nhóm A trước, rồi B, tối đa MỘT mục nhóm C; có nhóm C / sức khoẻ thì thêm câu kết."""
+    tre = tuoi is not None and tuoi < TUOI_NHOM_C
+    a = [m for m in cac if m["nhom"] == "A"]
+    b = [m for m in cac if m["nhom"] == "B"]
+    c = [] if tre else [m for m in cac if m["nhom"] == "C"][:1]
+    chon = (a[:toi_da - 1] + b[:1] + c)[:toi_da] if (b or c) else a[:toi_da]
+    ra = [sg.loi(m, co_am=m["nhom"] == "A") for m in chon]
+    if (ket := sg.cau_ket(chon)):
+        ra.append(ket)
+    return ra
+
+
+def nt_bo_vi(ma_bv: str | None, ma_cung: str | None = None, tuoi: int | None = None) -> list[str]:
+    """Hỏi đáp Nhân tướng: câu sách xưa về một bộ vị / một cung trên mặt (Thần Tướng Toàn Biên trước, Liễu Trang sau)."""
+    if not ngon_ngu.la_viet():
+        return []
+    cac: list[dict] = []
+    for ten in ("nhan_tuong_sach_ghi.json", "nhan_tuong_lieu_trang.json"):
+        try:
+            kb = _kb(ten)
+        except FileNotFoundError:
+            continue
+        if ma_cung:
+            cac += kb.get("cung", {}).get(ma_cung) or []
+        elif ma_bv:
+            cac += kb.get("bo_vi", {}).get(ma_bv) or []
+    return _cau(cac, tuoi)
+
+
+def nt_kieu_hinh(cau_goc: str, tuoi: int | None = None) -> dict | None:
+    """Câu hỏi nêu đúng tên một kiểu hình sách xưa đặt ("mắt phượng", "mày kiếm"…) → {ma, bo_vi, loi}. So trên câu CÒN DẤU
+    (bỏ dấu thì "tai lợn" trùng "tai lớn", "mắt cá" trùng "mắt cá chân" vẫn phải loại)."""
+    if not ngon_ngu.la_viet():
+        return None
+    g = " " + " ".join((cau_goc or "").lower().split()) + " "
+    if "mắt cá chân" in g:
+        return None
+    tot = None
+    for nhom, ds in _kb("nhan_tuong_kieu_hinh.json")["kieu"].items():
+        for m in ds:
+            for ten in (m["ten_viet"], m["ten"]):
+                k = f" {ten.lower()}"
+                i = g.find(k)
+                if i >= 0 and not g[i + len(k)].isalpha() and (tot is None or len(ten) > tot[0]):
+                    tot = (len(ten), nhom, m)
+    if not tot:
+        return None
+    _, nhom, m = tot
+    dong = [f"{m['ten_viet']} (sách gọi là {m['ten']}): {m['nhan_dang']}"]
+    if not (m["nhom"] == "C" and tuoi is not None and tuoi < TUOI_NHOM_C):
+        dong += _cau([m], tuoi)
+    dong.append("Đây là tên một kiểu hình trong sách tướng xưa; soi gương rồi tự xem mình gần kiểu nào, đừng vội nhận một kiểu.")
+    return {"ma": m["ma"], "nhom": nhom, "loi": " ".join(dong), "sach": SACH[m["nguon"]]}
+
+
+_DANG = (("di", r"dang di|buoc di|cach di|di dung"), ("ngoi", r"dang ngoi|cach ngoi|tu the ngoi"),
+         ("nam", r"dang nam|dang ngu|tu the ngu|nam ngu|khi ngu"), ("an", r"cach an|an uong|khi an"),
+         ("noi", r"cach noi|noi nang|loi an tieng noi|khi noi"), ("cuoi", r"tieng cuoi|cach cuoi|khi cuoi|nu cuoi"))
+
+
+def nt_dang_dieu(t_khong_dau: str, tuoi: int | None = None) -> dict | None:
+    """Câu hỏi về dáng đi, ngồi, nằm, ăn, nói, cười → câu Liễu Trang tướng pháp (phần sách bàn cử chỉ — sửa được)."""
+    import re  # noqa: PLC0415
+    if not ngon_ngu.la_viet():
+        return None
+    try:
+        kb = _kb("nhan_tuong_lieu_trang.json")["dang_dieu"]
+    except FileNotFoundError:
+        return None
+    for ma, mau in _DANG:
+        if re.search(mau, t_khong_dau):
+            cau = _cau(kb.get(ma) or [], tuoi)
+            if cau:
+                return {"ma": ma, "loi": " ".join(cau), "sach": SACH["lieu_trang_tuong_phap"]}
+    return None

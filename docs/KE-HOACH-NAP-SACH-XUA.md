@@ -98,3 +98,31 @@ Thần Tướng Toàn Biên quyển 10 có 102 mục về bàn tay (luận tay, 
 | Phong thuỷ | "Nhà của bạn": chương "Sách xưa dặn người cung …" | mệnh quái, dấu hiệu | 8 trang cung phi, trang dấu hiệu |
 | Tử vi | Khối "Sách xưa nói gì về lá số của bạn" mở cho cả câu nhóm B, C | sao ở cung | trang sao ở cung |
 | Bát tự | như trên | thần sát, lục thân | trang thập thần |
+
+## 7. Trạng thái (cập nhật 14/11/2026)
+
+| Việc | Trạng thái |
+|---|---|
+| Khuôn + bộ kiểm `kb/sach_ghi.py`, script `scripts/kiem_sach_ghi.py`, test `tests/test_sx_c_sach_ghi.py` | xong |
+| Quy tắc SX-C trong `CLAUDE.md` (kèm câu nối ở quy tắc sức khoẻ) | xong |
+| Tử vi: 434 câu Toàn Thư (sao × cung) → khối trên lá số | xong |
+| Bát tự: 117 câu (thần sát, thập thần, lục thân, tính nết, thân thể) → khối trên lá số | xong (phần lục thân chưa hiện — cần phép tính vượng / suy của sao chỉ người thân) |
+| Nhân tướng: 61 câu theo nét + 12 cung, 119 kiểu hình, 216 câu Liễu Trang → bài đọc + hỏi đáp | xong (trang kiến thức bộ vị chưa hiện kiểu hình) |
+| Phong thuỷ: 116 điều thế nhà + 73 điều theo cung mệnh → mệnh quái + khảo sát nhà | xong |
+| Dương Trạch Tam Yếu + Bát Trạch Minh Kính (tóm ý) | đang soạn |
+| Tarot: nguồn Papus / Case / Ouspensky | đang soạn |
+| Lớp phủ đồ hình (`/nhan-tuong/do-hinh`) | đang làm |
+| Hỏi đáp Tử vi / Bát tự / Phong thuỷ dùng lớp sách mới | chưa làm |
+| Khí sắc (Toàn Biên quyển 13–14), cách cục – xương thịt – dáng (quyển 3, 5, 11–12) | chưa làm |
+| Dương Trạch Thập Thư phần còn lại (mở cửa, thước cửa, thoát nước, xuyên cung) | chưa làm |
+| Bàn tay `/chi-tay` (mục 5) | chưa làm — cần hình bàn tay từ `assets/diagrams` |
+| Bản tiếng Anh của lớp sách | chưa làm (khối chỉ có ở bản Việt) |
+| Soát dấu câu các kho Wikisource nạp trước (Băng Giám, Tăng San Bốc Dịch, Cốt Tuỷ Phú) | chưa làm |
+
+Ghi chú khi dùng:
+
+- Phiên âm Hán Việt chỉ hiện ở mục nhóm A; nhóm B / C chỉ hiện chữ Hán (âm của câu nặng đọc lên vẫn nặng).
+- Trong 434 câu Tử vi, mọi câu ở cung Huynh Đệ, Tử Nữ và phần lớn Phụ Mẫu, Tật Ách mang nhóm C kể cả khi sách nói điều
+  tốt (bộ kiểm không cho chữ 克 / 刑 / 災 vào nhóm A) — nên khuôn hiển thị là "Hàm ý theo ghi chép xưa" dù ý tích cực.
+- Kho Toàn Thư có chữ ngờ chép sai ở vài ô (vd `羊玲` / `羊铃` cho Kình Dương – Linh Tinh); các ô ấy đã tránh hoặc ghi rõ.
+  Danh sách ở báo cáo của từng đợt soạn, cần người rành đọc lại khi duyệt.

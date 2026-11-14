@@ -125,3 +125,26 @@ def test_route_co_khoi_sach_ghi_va_khong_doi_truong_cu():
     assert {n["ma"] for n in bt["sach_ghi"]["nhom"]} >= {"than_sat", "tinh_net", "than_the"}
     kg = client.post("/v1/tuvi/an-sao", json={**b, "do_tin_gio": "unknown"}).json()
     assert kg["sach_ghi"] is None
+
+
+def test_hoi_dap_nhan_tuong_kieu_hinh_dang_dieu_bo_vi():
+    from app.luangiai import nhan_tuong as nt
+    r = nt.hoi("Mắt phượng là gì?", nam_sinh=1990)
+    assert r["xu_ly"] == "kieu_hinh" and "Phượng nhãn" in r["cau_tra_loi"] and "鳳眼" in r["cau_tra_loi"]
+    assert nt.hoi("tai lớn thì sao", nam_sinh=1990)["xu_ly"] != "kieu_hinh"          # "tai lớn" ≠ "tai lợn"
+    assert nt.hoi("mắt cá chân tôi đau", nam_sinh=1990)["xu_ly"] != "kieu_hinh"
+    d = nt.hoi("dáng đi nói gì về tôi", nam_sinh=1990)
+    assert d["xu_ly"] == "dang_dieu" and "Sách xưa ghi" in d["cau_tra_loi"]
+    b = nt.hoi("Ấn Đường rộng nghĩa là gì?", nam_sinh=1990)
+    assert "Sách xưa ghi thêm về chỗ này" in b["cau_tra_loi"] and "không phải nhận xét về gương mặt bạn" in b["cau_tra_loi"]
+    # câu xin xem tướng người khác vẫn bị từ chối trước khi tới kiểu hình
+    assert nt.hoi("Mắt phượng của sếp tôi nói gì về anh ấy?", nam_sinh=1990)["xu_ly"] == "tu_choi_nhe"
+
+
+def test_kieu_hinh_nhom_c_khong_hien_cho_nguoi_chua_18():
+    kb = json.loads((DATA / "nhan_tuong_kieu_hinh.json").read_text("utf-8"))["kieu"]
+    c = next(m for ds in kb.values() for m in ds if m["nhom"] == "C")
+    lon = sgm.nt_kieu_hinh(f"{c['ten_viet']} là gì", tuoi=30)
+    nho = sgm.nt_kieu_hinh(f"{c['ten_viet']} là gì", tuoi=15)
+    assert "Hàm ý theo ghi chép xưa" in lon["loi"] and c["han"] in lon["loi"]
+    assert "Hàm ý theo ghi chép xưa" not in nho["loi"] and c["han"] not in nho["loi"] and c["nhan_dang"] in nho["loi"]

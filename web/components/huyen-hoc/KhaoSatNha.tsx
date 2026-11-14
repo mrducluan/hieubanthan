@@ -3,6 +3,7 @@
 // hướng vật dụng). Web chỉ gom lựa chọn thành JSON bố cục; engine luận Bát trạch + kho tình huống (có nguồn).
 // Cùng JSON này sau này sẽ do ảnh/video điền sẵn (PT-V2) — người dùng chỉ việc xác nhận.
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
+import { SachXuaGhi, type KhoiSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
 import { useEffect, useRef, useState } from "react";
 import { Check, ClipboardList, Home, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,8 @@ interface MatBangKq {
 interface KetQua {
   /** Q1 / Q2 / Q4 / Q5 / Q6 */
   veto_da_xac_nhan: string[]; mat_bang: MatBangKq | null; quy_tac: { ma: string; tieu_de: string; noi_dung: string }[];
+  /** SX-C: câu sách xưa theo dấu hiệu đã xác nhận và cặp cửa – phòng chính – bếp. */
+  sach_ghi?: KhoiSachGhi | null;
   goc_nhin: GocNhin; chi_phi: Record<string, string>;
   da_tinh: {
     huong_nha: string | null; trach: { quai: string; nhom: string; toa: string } | null;
@@ -475,6 +478,9 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
           {d.vi_tri.every((x) => x.hop !== false) && kq.dien_giai.dau_hieu.length === 0 && <li className="text-sm text-fg-muted">Chưa thấy điểm nào cần điều chỉnh theo những gì bạn khai.</li>}
         </ul>
       </div>
+
+      <SachXuaGhi khoi={kq.sach_ghi} moDun="phongthuy" tieuDe="Sách xưa ghi gì về ngôi nhà này"
+        moTa="Câu trong sách Bát trạch xưa ứng với những điều nhà đang có và cách đặt cửa, phòng chính, bếp. Sách viết cho nhà thời đó; phần nào còn áp dụng được thì ghi rõ." />
 
       {kq.mat_bang && (
         <div data-testid="kq-mat-bang">
