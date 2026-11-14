@@ -125,7 +125,7 @@ test("dải gợi ý tiếng Anh: chỉ khi trình duyệt ưu tiên tiếng Anh
   const coVi = await request.get("/than-so", { headers: { "accept-language": "en-US,en;q=0.9,vi;q=0.8" } });
   expect(await coVi.text()).not.toContain("goi-y-tieng-anh");
   // Trang không có bản Anh → không có dải.
-  const khong = await request.get("/tu-vi", { headers: { "accept-language": "en-US,en;q=0.9" } });
+  const khong = await request.get("/hop-doi", { headers: { "accept-language": "en-US,en;q=0.9" } });
   expect(await khong.text()).not.toContain("goi-y-tieng-anh");
   await request.dispose();
   // Trình duyệt: link trỏ đúng bản Anh của trang, bấm X thì đặt cookie và dải biến mất.
