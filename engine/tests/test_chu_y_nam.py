@@ -53,7 +53,9 @@ def _hoi(md: str, c: str) -> dict:
 def test_kb_du_truong_va_nguon():
     d = kb._d()
     assert d["source_id"] and d["school_id"] and d["trang_thai"] == "nhap_ai"
-    assert set(kb.cac_mang()) == {"tien_bac", "cong_viec", "tinh_cam", "gia_dao", "nha_cua", "di_lai", "giay_to", "ban_be"}
+    assert set(kb.cac_mang()) == {"tien_bac", "cong_viec", "tinh_cam", "gia_dao", "nha_cua", "di_lai", "giay_to", "ban_be",
+                                  # CY-2 (2026-11-14): mảng mới cho lời "nên chú ý" đầy đủ chủ đề
+                                  "hop_tac", "tieu_nhan", "hoc_hanh", "con_cai", "cong_danh", "xuat_ngoai", "mua_xe"}
     for m in kb.cac_mang():
         o = kb.mang(m)
         assert o["ten"] and o["viec"] and o["viec_nay"] and o["ranh_gioi"], m
@@ -248,7 +250,8 @@ def test_van_giu_tu_choi_kem_loi_nhac(md):
     assert tn["phan_loai"]["xu_ly"] == "tu_choi_nhe" and "an toàn" in tn["cau_tra_loi"]
     assert kb.mau("tai_nan_nang") in tn["cau_tra_loi"]
     td = _hoi(md, "Có nên tuyển ứng viên sinh ngày 7/7/1997 không?")
-    assert td["phan_loai"]["xu_ly"] == "tu_choi_nhe" and "kỹ năng" in td["cau_tra_loi"]
+    # 2026-11-14: lời nhắc tuyển dụng = việc nên làm cụ thể (phỏng vấn, thử việc, hợp đồng, tham chiếu) — `goi_y_tu_choi`
+    assert td["phan_loai"]["xu_ly"] == "tu_choi_nhe" and "phỏng vấn kỹ" in td["cau_tra_loi"] and "thử việc" in td["cau_tra_loi"]
 
 
 def test_cau_chung_khong_bi_keo_vao():
