@@ -1,0 +1,4038 @@
+{
+ "_nguon": "Lớp phủ chú giải cho các đồ hình khắc gỗ của «神相全編» (Thần Tướng Toàn Biên, bản khắc đời Minh). Toạ độ `vt` = [x, y] chuẩn hoá 0..1 đo trên ảnh gốc và kiểm bằng ảnh vẽ chấm; `han` = chữ trên bản khắc (dị thể thì `han_kho` = dạng chữ trong kho nguồn fixtures/nguon/than_tuong_toan_bien.json). Lời Việt do ban biên tập viết theo khuôn nói giảm SX-C (kb/sach_ghi.py); nốt ruồi: `muc` A khen / B nên chú ý / C lời nặng đã nói giảm (không hiện phiên âm). Ảnh gốc không sửa điểm ảnh.",
+ "source_id": "than_tuong_toan_bien",
+ "school_id": "ma_y",
+ "trang_thai": "nhap_ban_bien_tap",
+ "can_doi_chieu": true,
+ "do_hinh": [
+  {
+   "ma": "muoi-hai-cung-ngu-quan",
+   "ten": "Mười hai cung và ngũ quan trên gương mặt",
+   "ten_han": "十二宮五官之圖",
+   "am": "Thập nhị cung ngũ quan chi đồ",
+   "sach": "Thần Tướng Toàn Biên",
+   "ban_khac": "bản khắc gỗ đời Minh",
+   "tep": "muoi-hai-cung-ngu-quan.webp",
+   "rong": 986,
+   "cao": 1400,
+   "mo_ta": "Hình này chia gương mặt thành các cung, mỗi cung là một mảng đời: tiền bạc, anh em, nhà cửa, con cái, đôi lứa… và ghi tên năm giác quan theo cách gọi của tướng pháp. Bản khắc ghi mười một cung; cung thứ mười hai, Tướng Mạo, là cả gương mặt nên không có nhãn. Ba chữ trên – giữa – dưới ở trục giữa chỉ là mốc ba phần của mặt. Người trong hình nhìn thẳng ra, nên bên phải hình là bên trái của khuôn mặt.",
+   "nhom": [
+    {
+     "ma": "cung",
+     "ten": "Mười hai cung"
+    },
+    {
+     "ma": "ngu_quan",
+     "ten": "Ngũ quan"
+    },
+    {
+     "ma": "ngu_nhac",
+     "ten": "Ngũ nhạc"
+    },
+    {
+     "ma": "vi_khac",
+     "ten": "Vị khác"
+    }
+   ],
+   "diem": [
+    {
+     "id": "menh",
+     "vt": [
+      0.51,
+      0.4237
+     ],
+     "han": "命宮",
+     "am": "Mệnh cung",
+     "ten": "Giữa hai đầu mày (cung Mệnh)",
+     "y": "Cung Mệnh nằm giữa hai đầu lông mày. Sách xem ở đây con người bạn nói chung và tinh thần lúc này: vùng này sáng, phẳng thì lòng đang yên.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "menh"
+     }
+    },
+    {
+     "id": "tai_bach",
+     "vt": [
+      0.51,
+      0.5986
+     ],
+     "han": "財帛",
+     "am": "Tài bạch",
+     "ten": "Sống mũi và đầu mũi (cung Tài Bạch)",
+     "y": "Cung Tài Bạch nằm ở mũi. Sách xem ở đây chuyện tiền bạc: cách kiếm và cách giữ của.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "tai_bach"
+     }
+    },
+    {
+     "id": "huynh_de_p",
+     "vt": [
+      0.3225,
+      0.3756
+     ],
+     "han": "兄弟",
+     "am": "Huynh đệ",
+     "ten": "Lông mày bên phải (cung Huynh Đệ)",
+     "y": "Cung Huynh Đệ nằm ở hai lông mày, nói về anh em, bạn bè, người ngang hàng.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "huynh_de"
+     }
+    },
+    {
+     "id": "huynh_de_t",
+     "vt": [
+      0.6908,
+      0.3756
+     ],
+     "han": "兄弟",
+     "am": "Huynh đệ",
+     "ten": "Lông mày bên trái (cung Huynh Đệ)",
+     "y": "Cung Huynh Đệ nằm ở hai lông mày, nói về anh em, bạn bè, người ngang hàng. Mày gọn, mọc xuôi được xem là dễ có bạn.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "huynh_de"
+     }
+    },
+    {
+     "id": "dien_trach_p",
+     "vt": [
+      0.3508,
+      0.4888
+     ],
+     "han": "田宅",
+     "am": "Điền trạch",
+     "ten": "Mí trên mắt phải (cung Điền Trạch)",
+     "y": "Cung Điền Trạch nằm ở khoảng giữa lông mày và mắt, nói về nhà cửa, của để dành, không gian gia đình.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "dien_trach"
+     }
+    },
+    {
+     "id": "dien_trach_t",
+     "vt": [
+      0.675,
+      0.4847
+     ],
+     "han": "田宅",
+     "am": "Điền trạch",
+     "ten": "Mí trên mắt trái (cung Điền Trạch)",
+     "y": "Cung Điền Trạch nằm ở khoảng giữa lông mày và mắt. Khoảng này rộng, đầy được xem là người biết lo chỗ ở.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "dien_trach"
+     }
+    },
+    {
+     "id": "nam_nu_p",
+     "vt": [
+      0.32,
+      0.554
+     ],
+     "han": "男女",
+     "am": "Nam nữ",
+     "ten": "Dưới mắt phải (cung Nam Nữ)",
+     "y": "Cung Nam Nữ nằm ngay dưới mắt, nay thường gọi là cung Tử Tức: nói về con cái, người nhỏ tuổi hơn, sức nuôi dưỡng.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "tu_tuc"
+     }
+    },
+    {
+     "id": "nam_nu_t",
+     "vt": [
+      0.6983,
+      0.5428
+     ],
+     "han": "男女",
+     "am": "Nam nữ",
+     "ten": "Dưới mắt trái (cung Nam Nữ)",
+     "y": "Cung Nam Nữ, tức Tử Tức, nằm ngay dưới mắt. Vùng này đầy, sáng được xem là người chăm được người nhỏ hơn mình.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "tu_tuc"
+     }
+    },
+    {
+     "id": "the_thiep_p",
+     "vt": [
+      0.2125,
+      0.5094
+     ],
+     "han": "妻妾",
+     "am": "Thê thiếp",
+     "ten": "Đuôi mắt phải (cung Thê Thiếp)",
+     "y": "Cung Thê Thiếp nằm ở đuôi mắt kéo ra thái dương, nay gọi là cung Phu Thê: nói về đời sống đôi lứa.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "phu_the"
+     }
+    },
+    {
+     "id": "the_thiep_t",
+     "vt": [
+      0.8083,
+      0.5047
+     ],
+     "han": "妻妾",
+     "am": "Thê thiếp",
+     "ten": "Đuôi mắt trái (cung Thê Thiếp)",
+     "y": "Cung Thê Thiếp, nay gọi là Phu Thê, nằm ở đuôi mắt: nói về cách bạn ở cạnh một người.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "phu_the"
+     }
+    },
+    {
+     "id": "tat_ach",
+     "vt": [
+      0.5083,
+      0.49
+     ],
+     "han": "疾厄",
+     "am": "Tật ách",
+     "ten": "Gốc mũi (cung Tật Ách)",
+     "y": "Cung Tật Ách nằm ở gốc mũi, giữa hai mắt. Sách xem ở đây sức bền và điều nên chăm sóc; chuyện sức khoẻ thì nghe bác sĩ.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "tat_ach"
+     }
+    },
+    {
+     "id": "thien_di_p",
+     "vt": [
+      0.2225,
+      0.3944
+     ],
+     "han": "遷移",
+     "am": "Thiên di",
+     "ten": "Góc trán bên phải (cung Thiên Di)",
+     "y": "Cung Thiên Di nằm ở góc trán, trên đuôi mày: nói về đi xa, đổi chỗ, mở ra bên ngoài.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "thien_di"
+     }
+    },
+    {
+     "id": "thien_di_t",
+     "vt": [
+      0.8017,
+      0.385
+     ],
+     "han": "遷移",
+     "am": "Thiên di",
+     "ten": "Góc trán bên trái (cung Thiên Di)",
+     "y": "Cung Thiên Di nằm ở góc trán, trên đuôi mày. Vùng này sáng sủa được xem là hợp đi xa, đổi chỗ.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "thien_di"
+     }
+    },
+    {
+     "id": "quan_loc",
+     "vt": [
+      0.505,
+      0.314
+     ],
+     "han": "官祿",
+     "am": "Quan lộc",
+     "ten": "Giữa trán (cung Quan Lộc)",
+     "y": "Cung Quan Lộc nằm giữa trán: nói về công việc, người trên, uy tín.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "quan_loc"
+     }
+    },
+    {
+     "id": "phuc_duc_p",
+     "vt": [
+      0.2808,
+      0.3216
+     ],
+     "han": "福德",
+     "am": "Phúc đức",
+     "ten": "Trán bên phải, trên mày (cung Phúc Đức)",
+     "y": "Cung Phúc Đức nằm hai bên trán, phía trên lông mày: nói về phúc phần và sự an ổn trong lòng.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "phuc_duc"
+     }
+    },
+    {
+     "id": "phuc_duc_t",
+     "vt": [
+      0.7267,
+      0.3099
+     ],
+     "han": "福德",
+     "am": "Phúc đức",
+     "ten": "Trán bên trái, trên mày (cung Phúc Đức)",
+     "y": "Cung Phúc Đức nằm hai bên trán, phía trên lông mày. Vùng này đầy đặn được xem là người dễ thấy đủ.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "phuc_duc"
+     }
+    },
+    {
+     "id": "no_boc_p",
+     "vt": [
+      0.4125,
+      0.8498
+     ],
+     "han": "奴僕",
+     "am": "Nô bộc",
+     "ten": "Cằm bên phải (cung Nô Bộc)",
+     "y": "Cung Nô Bộc nằm hai bên cằm: nói về người dưới, cộng sự và hậu vận.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "no_boc"
+     }
+    },
+    {
+     "id": "no_boc_t",
+     "vt": [
+      0.6292,
+      0.8474
+     ],
+     "han": "奴僕",
+     "am": "Nô bộc",
+     "ten": "Cằm bên trái (cung Nô Bộc)",
+     "y": "Cung Nô Bộc nằm hai bên cằm. Vùng này đầy, không lẹm được xem là người có cộng sự đỡ đần.",
+     "nhom": "cung",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "no_boc"
+     }
+    },
+    {
+     "id": "thai_thinh_p",
+     "vt": [
+      0.1442,
+      0.5446
+     ],
+     "han": "採聽",
+     "am": "Thái thính",
+     "ten": "Tai phải (quan Thái Thính)",
+     "y": "Tai là quan Thái Thính, nghĩa là nơi nghe và nhận. Tai dày, rõ vành được xem là người biết lắng nghe, sức bền tốt.",
+     "nhom": "ngu_quan",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "thai_thinh_t",
+     "vt": [
+      0.8942,
+      0.5282
+     ],
+     "han": "採聽",
+     "am": "Thái thính",
+     "ten": "Tai trái (quan Thái Thính)",
+     "y": "Tai là quan Thái Thính — quan thứ nhất trong năm quan của gương mặt, lo việc nghe và nhận.",
+     "nhom": "ngu_quan",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "bao_tho_p",
+     "vt": [
+      0.4,
+      0.3756
+     ],
+     "han": "保壽",
+     "am": "Bảo thọ",
+     "ten": "Lông mày phải (quan Bảo Thọ)",
+     "y": "Lông mày là quan Bảo Thọ, nghĩa là giữ sức bền lâu dài. Mày gọn, thanh, dài quá mắt được xem là nền tốt.",
+     "nhom": "ngu_quan",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "long_may"
+     }
+    },
+    {
+     "id": "bao_tho_t",
+     "vt": [
+      0.615,
+      0.3773
+     ],
+     "han": "保壽",
+     "am": "Bảo thọ",
+     "ten": "Lông mày trái (quan Bảo Thọ)",
+     "y": "Lông mày là quan Bảo Thọ — quan thứ hai trong năm quan, giữ cho mắt và giữ sức bền.",
+     "nhom": "ngu_quan",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "long_may"
+     }
+    },
+    {
+     "id": "giam_sat_p",
+     "vt": [
+      0.3917,
+      0.5528
+     ],
+     "han": "監察",
+     "am": "Giám sát",
+     "ten": "Mắt phải (quan Giám Sát)",
+     "y": "Mắt là quan Giám Sát, nghĩa là nơi xem xét. Sách coi ánh mắt là phần quan trọng nhất: mắt sáng, có thần thì việc gì cũng tỉnh.",
+     "nhom": "ngu_quan",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "mat"
+     }
+    },
+    {
+     "id": "giam_sat_t",
+     "vt": [
+      0.63,
+      0.5458
+     ],
+     "han": "監察",
+     "am": "Giám sát",
+     "ten": "Mắt trái (quan Giám Sát)",
+     "y": "Mắt là quan Giám Sát — quan thứ ba trong năm quan, lo việc nhìn và xét.",
+     "nhom": "ngu_quan",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "mat"
+     }
+    },
+    {
+     "id": "tham_bien",
+     "vt": [
+      0.5142,
+      0.6408
+     ],
+     "han": "審辨",
+     "am": "Thẩm biện",
+     "ten": "Mũi (quan Thẩm Biện)",
+     "y": "Mũi là quan Thẩm Biện, nghĩa là nơi phân biệt, cân nhắc. Trên bản khắc, hai chữ này kẹp hai bên chữ «tị» (mũi).",
+     "nhom": "ngu_quan",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "chuan_dau"
+     }
+    },
+    {
+     "id": "xuat_nap",
+     "vt": [
+      0.4833,
+      0.7729
+     ],
+     "han": "出納",
+     "am": "Xuất nạp",
+     "ten": "Miệng (quan Xuất Nạp)",
+     "y": "Miệng là quan Xuất Nạp, nghĩa là nơi ra vào: lời nói đi ra, đồ ăn đi vào. Sách xem ở đây ăn nói và chữ tín.",
+     "nhom": "ngu_quan",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "mieng"
+     }
+    },
+    {
+     "id": "nam_nhac",
+     "vt": [
+      0.505,
+      0.2612
+     ],
+     "han": "南嶽",
+     "am": "Nam nhạc",
+     "ten": "Trán (Nam Nhạc)",
+     "y": "Tướng pháp ví năm chỗ nhô của mặt như năm ngọn núi. Trán là Nam Nhạc: trán đầy, không lẹm được xem là nền tốt cho tuổi trẻ.",
+     "nhom": "ngu_nhac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_dinh"
+     }
+    },
+    {
+     "id": "trung_nhac",
+     "vt": [
+      0.5083,
+      0.5329
+     ],
+     "han": "中嶽",
+     "am": "Trung nhạc",
+     "ten": "Mũi (Trung Nhạc)",
+     "y": "Mũi là Trung Nhạc, ngọn núi ở giữa. Sách dặn mũi cần cao, đầy và được bốn ngọn kia chầu về thì mới vững.",
+     "nhom": "ngu_nhac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "song_mui"
+     }
+    },
+    {
+     "id": "dong_nhac",
+     "vt": [
+      0.7408,
+      0.6338
+     ],
+     "han": "東嶽",
+     "am": "Đông nhạc",
+     "ten": "Gò má trái (Đông Nhạc)",
+     "y": "Gò má bên trái là Đông Nhạc. Hai gò má cân, có thịt bao được xem là người cầm được việc.",
+     "nhom": "ngu_nhac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "luong_quyen"
+     }
+    },
+    {
+     "id": "tay_nhac",
+     "vt": [
+      0.2975,
+      0.6444
+     ],
+     "han": "西嶽",
+     "am": "Tây nhạc",
+     "ten": "Gò má phải (Tây Nhạc)",
+     "y": "Gò má bên phải là Tây Nhạc, đối với Đông Nhạc bên kia. Sách dặn hai bên không nên lệch nhau.",
+     "nhom": "ngu_nhac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "luong_quyen"
+     }
+    },
+    {
+     "id": "bac_nhac",
+     "vt": [
+      0.5225,
+      0.8492
+     ],
+     "han": "北嶽",
+     "am": "Bắc nhạc",
+     "ten": "Cằm (Bắc Nhạc)",
+     "y": "Cằm là Bắc Nhạc. Cằm đầy, hơi nhô ra đỡ lấy mặt được xem là hậu vận ổn.",
+     "nhom": "ngu_nhac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    },
+    {
+     "id": "thuy_tinh",
+     "vt": [
+      0.5542,
+      0.77
+     ],
+     "han": "水星",
+     "am": "Thuỷ tinh",
+     "ten": "Miệng (Thuỷ Tinh)",
+     "y": "Trong cách gọi năm sao trên mặt, miệng là Thuỷ Tinh. Bài lưu niên xem tuổi 60 ở đây.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "mieng"
+     }
+    },
+    {
+     "id": "dia_kho_p",
+     "vt": [
+      0.3492,
+      0.7817
+     ],
+     "han": "地庫",
+     "am": "Địa khố",
+     "ten": "Bên cằm phải (Địa Khố)",
+     "y": "Địa Khố nghĩa là kho dưới đất, nằm hai bên cằm. Sách xem vùng này sáng, đầy là về sau có của để dành.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    },
+    {
+     "id": "dia_kho_t",
+     "vt": [
+      0.6983,
+      0.7805
+     ],
+     "han": "地庫",
+     "am": "Địa khố",
+     "ten": "Bên cằm trái (Địa Khố)",
+     "y": "Địa Khố nằm hai bên cằm; bài lưu niên gắn với tuổi 62–63. Đầy đặn thì sách xem là tuổi già thư thả.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    }
+   ]
+  },
+  {
+   "ma": "luu-nien-van-khi",
+   "ten": "Lưu niên vận khí: mỗi tuổi một chỗ trên mặt",
+   "ten_han": "流年運氣之圖",
+   "am": "Lưu niên vận khí chi đồ",
+   "sach": "Thần Tướng Toàn Biên",
+   "ban_khac": "bản khắc gỗ đời Minh",
+   "tep": "luu-nien-van-khi.webp",
+   "rong": 952,
+   "cao": 1400,
+   "mo_ta": "Hình này gắn mỗi tuổi (tuổi mụ) với một chỗ trên mặt: tuổi nhỏ xem ở tai, rồi lên trán, xuống mày, mắt, mũi, miệng, cằm; con số cạnh mỗi tên là tuổi. Sách dặn nam xem bên trái trước, nữ xem bên phải trước. Vùng đầy, sáng thì tuổi ấy nhẹ; có nếp, tối thì nên chủ động hơn — đó là cách nhìn của sách, không phải dự báo. Người trong hình nhìn thẳng ra, nên bên phải hình là bên trái của khuôn mặt.",
+   "nhom": [
+    {
+     "ma": "luu_nien",
+     "ten": "Vị theo tuổi (1–75)"
+    },
+    {
+     "ma": "dia_chi",
+     "ten": "Mười hai chi (tuổi 76–99)"
+    }
+   ],
+   "diem": [
+    {
+     "id": "thien_trung",
+     "vt": [
+      0.5225,
+      0.2273
+     ],
+     "han": "天中",
+     "am": "Thiên Trung",
+     "ten": "Giữa trán, sát chân tóc",
+     "y": "Thiên Trung là vị của tuổi 16 (tuổi mụ) trong bài lưu niên, nằm ở giữa trán, sát chân tóc.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      16
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_trung"
+     }
+    },
+    {
+     "id": "thien_dinh",
+     "vt": [
+      0.5225,
+      0.2687
+     ],
+     "han": "天庭",
+     "am": "Thiên Đình",
+     "ten": "Giữa trán, phần trên",
+     "y": "Thiên Đình là vị của tuổi 19 (tuổi mụ) trong bài lưu niên, nằm ở giữa trán, phần trên.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      19
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_dinh"
+     }
+    },
+    {
+     "id": "tu_khong",
+     "vt": [
+      0.5225,
+      0.3101
+     ],
+     "han": "司空",
+     "am": "Tư Không",
+     "ten": "Giữa trán, phần giữa",
+     "y": "Tư Không là vị của tuổi 22 (tuổi mụ) trong bài lưu niên, nằm ở giữa trán, phần giữa.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      22
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tu_khong"
+     }
+    },
+    {
+     "id": "trung_chinh",
+     "vt": [
+      0.515,
+      0.3605
+     ],
+     "han": "中正",
+     "am": "Trung Chính",
+     "ten": "Giữa trán, ngay trên hai đầu mày",
+     "y": "Trung Chính là vị của tuổi 25 (tuổi mụ) trong bài lưu niên, nằm ở giữa trán, ngay trên hai đầu mày.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      25
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "trung_chinh"
+     }
+    },
+    {
+     "id": "an_duong",
+     "vt": [
+      0.515,
+      0.4048
+     ],
+     "han": "印堂",
+     "am": "Ấn Đường",
+     "ten": "Khoảng giữa hai đầu mày",
+     "y": "Ấn Đường là vị của tuổi 28 (tuổi mụ) trong bài lưu niên, nằm ở khoảng giữa hai đầu mày.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      28
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "an_duong"
+     }
+    },
+    {
+     "id": "son_can",
+     "vt": [
+      0.515,
+      0.4518
+     ],
+     "han": "山根",
+     "am": "Sơn Căn",
+     "ten": "Gốc mũi, giữa hai mắt",
+     "y": "Sơn Căn là vị của tuổi 41 (tuổi mụ) trong bài lưu niên, nằm ở gốc mũi, giữa hai mắt.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      41
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "son_can"
+     }
+    },
+    {
+     "id": "nien_thuong",
+     "vt": [
+      0.515,
+      0.4887
+     ],
+     "han": "年",
+     "am": "Niên Thượng",
+     "ten": "Sống mũi, đoạn trên",
+     "y": "Niên Thượng là vị của tuổi 44 (tuổi mụ) trong bài lưu niên, nằm ở sống mũi, đoạn trên. Bản khắc chỉ ghi chữ đầu của tên.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      44
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "song_mui"
+     },
+     "han_kho": "年上"
+    },
+    {
+     "id": "tho_thuong",
+     "vt": [
+      0.5108,
+      0.5346
+     ],
+     "han": "壽",
+     "am": "Thọ Thượng",
+     "ten": "Sống mũi, đoạn dưới",
+     "y": "Thọ Thượng là vị của tuổi 45 (tuổi mụ) trong bài lưu niên, nằm ở sống mũi, đoạn dưới. Bản khắc chỉ ghi chữ đầu của tên.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      45
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "song_mui"
+     },
+     "han_kho": "壽上"
+    },
+    {
+     "id": "chuan_dau",
+     "vt": [
+      0.515,
+      0.5811
+     ],
+     "han": "準頭",
+     "am": "Chuẩn Đầu",
+     "ten": "Đầu mũi",
+     "y": "Chuẩn Đầu là vị của tuổi 48 (tuổi mụ) trong bài lưu niên, nằm ở đầu mũi.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      48
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "chuan_dau"
+     }
+    },
+    {
+     "id": "nhan_trung",
+     "vt": [
+      0.5125,
+      0.6525
+     ],
+     "han": "人中",
+     "am": "Nhân Trung",
+     "ten": "Rãnh giữa mũi và môi trên",
+     "y": "Nhân Trung là vị của tuổi 51 (tuổi mụ) trong bài lưu niên, nằm ở rãnh giữa mũi và môi trên.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      51
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "nhan_trung"
+     }
+    },
+    {
+     "id": "thuy_tinh",
+     "vt": [
+      0.5067,
+      0.6944
+     ],
+     "han": "水星",
+     "am": "Thuỷ Tinh",
+     "ten": "Miệng",
+     "y": "Thuỷ Tinh là vị của tuổi 60 (tuổi mụ) trong bài lưu niên, nằm ở miệng.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      60
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "mieng"
+     }
+    },
+    {
+     "id": "thua_tuong",
+     "vt": [
+      0.5117,
+      0.7313
+     ],
+     "han": "承漿",
+     "am": "Thừa Tương",
+     "ten": "Chỗ lõm dưới môi dưới",
+     "y": "Thừa Tương là vị của tuổi 61 (tuổi mụ) trong bài lưu niên, nằm ở chỗ lõm dưới môi dưới.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      61
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thua_tuong"
+     }
+    },
+    {
+     "id": "tung_duong",
+     "vt": [
+      0.5733,
+      0.7228
+     ],
+     "han": "頌堂",
+     "am": "Tụng Đường",
+     "ten": "Dưới môi, hai bên Thừa Tương",
+     "y": "Tụng Đường là vị của tuổi 70 (tuổi mụ) trong bài lưu niên, nằm ở dưới môi, hai bên Thừa Tương. Bản khắc tách hai chữ của tên ra hai bên.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      70
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     },
+     "han_kho": "頌"
+    },
+    {
+     "id": "dia_cac",
+     "vt": [
+      0.51,
+      0.7806
+     ],
+     "han": "地閣",
+     "am": "Địa Các",
+     "ten": "Cằm",
+     "y": "Địa Các là vị của tuổi 71 (tuổi mụ) trong bài lưu niên, nằm ở cằm.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      71
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    },
+    {
+     "id": "nguyet_giac",
+     "vt": [
+      0.4275,
+      0.2449
+     ],
+     "han": "月角",
+     "am": "Nguyệt Giác",
+     "ten": "Trán bên phải, trên đầu mày",
+     "y": "Nguyệt Giác là vị của tuổi 18 (tuổi mụ) trong bài lưu niên, nằm ở trán bên phải, trên đầu mày.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      18
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "nhat_nguyet_giac"
+     }
+    },
+    {
+     "id": "phu_cot_p",
+     "vt": [
+      0.3942,
+      0.2449
+     ],
+     "han": "輔骨",
+     "am": "Phụ Cốt",
+     "ten": "Trán bên phải, cạnh Nguyệt Giác",
+     "y": "Phụ Cốt là vị của tuổi 21 (tuổi mụ) trong bài lưu niên, nằm ở trán bên phải, cạnh Nguyệt Giác. Bài ca trong sách gọi vị này là Phụ Giác.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      21
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "nhat_nguyet_giac"
+     },
+     "han_kho": "輔角"
+    },
+    {
+     "id": "bien_thanh_p",
+     "vt": [
+      0.3508,
+      0.2483
+     ],
+     "han": "边城",
+     "am": "Biên Thành",
+     "ten": "Trán bên phải, gần chân tóc",
+     "y": "Biên Thành là vị của tuổi 24 (tuổi mụ) trong bài lưu niên, nằm ở trán bên phải, gần chân tóc.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      24
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     },
+     "han_kho": "邊城"
+    },
+    {
+     "id": "son_lam_p",
+     "vt": [
+      0.3075,
+      0.2455
+     ],
+     "han": "山林",
+     "am": "Sơn Lâm",
+     "ten": "Góc trán bên phải",
+     "y": "Sơn Lâm là vị của tuổi 30 (tuổi mụ) trong bài lưu niên, nằm ở góc trán bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      30
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     }
+    },
+    {
+     "id": "trung_mo",
+     "vt": [
+      0.26,
+      0.2438
+     ],
+     "han": "塚墓",
+     "am": "Trủng Mộ",
+     "ten": "Góc trán bên phải, sát thái dương",
+     "y": "Trủng Mộ là vị của tuổi 27 (tuổi mụ) trong bài lưu niên, nằm ở góc trán bên phải, sát thái dương.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      27
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     }
+    },
+    {
+     "id": "lang_van_p",
+     "vt": [
+      0.4583,
+      0.305
+     ],
+     "han": "凌雲",
+     "am": "Lăng Vân",
+     "ten": "Trên đầu mày bên phải",
+     "y": "Lăng Vân là vị của tuổi 32 (tuổi mụ) trong bài lưu niên, nằm ở trên đầu mày bên phải. Bài ca gọi vị tuổi 32 là Tử Khí; bản khắc ghi Lăng Vân ở cả hai bên.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      32
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "long_may"
+     }
+    },
+    {
+     "id": "thai_ha_p",
+     "vt": [
+      0.3442,
+      0.339
+     ],
+     "han": "彩霞",
+     "am": "Thái Hà",
+     "ten": "Trên đuôi mày bên phải",
+     "y": "Thái Hà là vị của tuổi 34 (tuổi mụ) trong bài lưu niên, nằm ở trên đuôi mày bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      34
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "long_may"
+     }
+    },
+    {
+     "id": "nhat_giac",
+     "vt": [
+      0.6275,
+      0.2472
+     ],
+     "han": "日角",
+     "am": "Nhật Giác",
+     "ten": "Trán bên trái, trên đầu mày",
+     "y": "Nhật Giác là vị của tuổi 17 (tuổi mụ) trong bài lưu niên, nằm ở trán bên trái, trên đầu mày.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      17
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "nhat_nguyet_giac"
+     }
+    },
+    {
+     "id": "phu_cot_t",
+     "vt": [
+      0.6567,
+      0.2483
+     ],
+     "han": "輔骨",
+     "am": "Phụ Cốt",
+     "ten": "Trán bên trái, cạnh Nhật Giác",
+     "y": "Phụ Cốt là vị của tuổi 20 (tuổi mụ) trong bài lưu niên, nằm ở trán bên trái, cạnh Nhật Giác. Bài ca trong sách gọi vị này là Phụ Giác.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      20
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "nhat_nguyet_giac"
+     },
+     "han_kho": "輔角"
+    },
+    {
+     "id": "bien_thanh_t",
+     "vt": [
+      0.6967,
+      0.2466
+     ],
+     "han": "边城",
+     "am": "Biên Thành",
+     "ten": "Trán bên trái, gần chân tóc",
+     "y": "Biên Thành là vị của tuổi 23 (tuổi mụ) trong bài lưu niên, nằm ở trán bên trái, gần chân tóc.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      23
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     },
+     "han_kho": "邊城"
+    },
+    {
+     "id": "son_lam_t",
+     "vt": [
+      0.7342,
+      0.2455
+     ],
+     "han": "山林",
+     "am": "Sơn Lâm",
+     "ten": "Góc trán bên trái",
+     "y": "Sơn Lâm là vị của tuổi 29 (tuổi mụ) trong bài lưu niên, nằm ở góc trán bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      29
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     }
+    },
+    {
+     "id": "khau_lang",
+     "vt": [
+      0.7725,
+      0.2443
+     ],
+     "han": "丘陵",
+     "am": "Khâu Lăng",
+     "ten": "Góc trán bên trái, sát thái dương",
+     "y": "Khâu Lăng là vị của tuổi 26 (tuổi mụ) trong bài lưu niên, nằm ở góc trán bên trái, sát thái dương.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      26
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     }
+    },
+    {
+     "id": "lang_van_t",
+     "vt": [
+      0.5875,
+      0.305
+     ],
+     "han": "凌雲",
+     "am": "Lăng Vân",
+     "ten": "Trên đầu mày bên trái",
+     "y": "Lăng Vân là vị của tuổi 31 (tuổi mụ) trong bài lưu niên, nằm ở trên đầu mày bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      31
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "long_may"
+     }
+    },
+    {
+     "id": "thai_ha_t",
+     "vt": [
+      0.6925,
+      0.3356
+     ],
+     "han": "彩霞",
+     "am": "Thái Hà",
+     "ten": "Trên đuôi mày bên trái",
+     "y": "Thái Hà là vị của tuổi 33 (tuổi mụ) trong bài lưu niên, nằm ở trên đuôi mày bên trái. Bài ca gọi vị tuổi 33 là Phồn Hà; bản khắc ghi Thái Hà ở cả hai bên.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      33
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "long_may"
+     }
+    },
+    {
+     "id": "thai_am",
+     "vt": [
+      0.4167,
+      0.4059
+     ],
+     "han": "太陰",
+     "am": "Thái Âm",
+     "ten": "Đầu mắt bên phải",
+     "y": "Thái Âm là vị của tuổi 36 (tuổi mụ) trong bài lưu niên, nằm ở đầu mắt bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      36
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "mat"
+     }
+    },
+    {
+     "id": "trung_am",
+     "vt": [
+      0.3658,
+      0.3963
+     ],
+     "han": "中陰",
+     "am": "Trung Âm",
+     "ten": "Giữa mắt bên phải",
+     "y": "Trung Âm là vị của tuổi 38 (tuổi mụ) trong bài lưu niên, nằm ở giữa mắt bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      38
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "mat"
+     }
+    },
+    {
+     "id": "thieu_am",
+     "vt": [
+      0.3075,
+      0.3963
+     ],
+     "han": "少陰",
+     "am": "Thiếu Âm",
+     "ten": "Đuôi mắt bên phải",
+     "y": "Thiếu Âm là vị của tuổi 40 (tuổi mụ) trong bài lưu niên, nằm ở đuôi mắt bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      40
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ngu_vi"
+     }
+    },
+    {
+     "id": "thai_duong",
+     "vt": [
+      0.6508,
+      0.4048
+     ],
+     "han": "太陽",
+     "am": "Thái Dương",
+     "ten": "Đầu mắt bên trái",
+     "y": "Thái Dương là vị của tuổi 35 (tuổi mụ) trong bài lưu niên, nằm ở đầu mắt bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      35
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "mat"
+     }
+    },
+    {
+     "id": "trung_duong",
+     "vt": [
+      0.6925,
+      0.4025
+     ],
+     "han": "中陽",
+     "am": "Trung Dương",
+     "ten": "Giữa mắt bên trái",
+     "y": "Trung Dương là vị của tuổi 37 (tuổi mụ) trong bài lưu niên, nằm ở giữa mắt bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      37
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "mat"
+     }
+    },
+    {
+     "id": "thieu_duong",
+     "vt": [
+      0.7417,
+      0.4036
+     ],
+     "han": "少陽",
+     "am": "Thiếu Dương",
+     "ten": "Đuôi mắt bên trái",
+     "y": "Thiếu Dương là vị của tuổi 39 (tuổi mụ) trong bài lưu niên, nằm ở đuôi mắt bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      39
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ngu_vi"
+     }
+    },
+    {
+     "id": "quang_dien",
+     "vt": [
+      0.4475,
+      0.4796
+     ],
+     "han": "光殿",
+     "am": "Quang Điện",
+     "ten": "Cạnh gốc mũi, bên phải",
+     "y": "Quang Điện là vị của tuổi 43 (tuổi mụ) trong bài lưu niên, nằm ở cạnh gốc mũi, bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      43
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "son_can"
+     }
+    },
+    {
+     "id": "tinh_xa",
+     "vt": [
+      0.5825,
+      0.4887
+     ],
+     "han": "精舍",
+     "am": "Tinh Xá",
+     "ten": "Cạnh gốc mũi, bên trái",
+     "y": "Tinh Xá là vị của tuổi 42 (tuổi mụ) trong bài lưu niên, nằm ở cạnh gốc mũi, bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      42
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "son_can"
+     }
+    },
+    {
+     "id": "quyen_p",
+     "vt": [
+      0.2717,
+      0.4796
+     ],
+     "han": "顴",
+     "am": "Quyền",
+     "ten": "Gò má bên phải",
+     "y": "Quyền là vị của tuổi 47 (tuổi mụ) trong bài lưu niên, nằm ở gò má bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      47
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "luong_quyen"
+     }
+    },
+    {
+     "id": "quyen_t",
+     "vt": [
+      0.7467,
+      0.5023
+     ],
+     "han": "顴",
+     "am": "Quyền",
+     "ten": "Gò má bên trái",
+     "y": "Quyền là vị của tuổi 46 (tuổi mụ) trong bài lưu niên, nằm ở gò má bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      46
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "luong_quyen"
+     }
+    },
+    {
+     "id": "ho_nhi_p",
+     "vt": [
+      0.235,
+      0.5204
+     ],
+     "han": "虎耳",
+     "am": "Hổ Nhĩ",
+     "ten": "Má bên phải, phía trước tai",
+     "y": "Hổ Nhĩ là vị của tuổi 59 (tuổi mụ) trong bài lưu niên, nằm ở má bên phải, phía trước tai.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      59
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "ho_nhi_t",
+     "vt": [
+      0.7817,
+      0.5539
+     ],
+     "han": "虎耳",
+     "am": "Hổ Nhĩ",
+     "ten": "Má bên trái, phía trước tai",
+     "y": "Hổ Nhĩ là vị của tuổi 58 (tuổi mụ) trong bài lưu niên, nằm ở má bên trái, phía trước tai.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      58
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "quy_lai_p",
+     "vt": [
+      0.2458,
+      0.5896
+     ],
+     "han": "歸來",
+     "am": "Quy Lai",
+     "ten": "Má dưới bên phải, gần quai hàm",
+     "y": "Quy Lai là vị của tuổi 69 (tuổi mụ) trong bài lưu niên, nằm ở má dưới bên phải, gần quai hàm.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      69
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "quy_lai_t",
+     "vt": [
+      0.7817,
+      0.6066
+     ],
+     "han": "歸來",
+     "am": "Quy Lai",
+     "ten": "Má dưới bên trái, gần quai hàm",
+     "y": "Quy Lai là vị của tuổi 68 (tuổi mụ) trong bài lưu niên, nằm ở má dưới bên trái, gần quai hàm.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      68
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "dinh_uy",
+     "vt": [
+      0.44,
+      0.5782
+     ],
+     "han": "廷尉",
+     "am": "Đình Uý",
+     "ten": "Cánh mũi bên phải",
+     "y": "Đình Uý là vị của tuổi 50 (tuổi mụ) trong bài lưu niên, nằm ở cánh mũi bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      50
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "canh_mui"
+     }
+    },
+    {
+     "id": "lan_dai",
+     "vt": [
+      0.5783,
+      0.5782
+     ],
+     "han": "蘭臺",
+     "am": "Lan Đài",
+     "ten": "Cánh mũi bên trái",
+     "y": "Lan Đài là vị của tuổi 49 (tuổi mụ) trong bài lưu niên, nằm ở cánh mũi bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      49
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "canh_mui"
+     }
+    },
+    {
+     "id": "tien_kho_p",
+     "vt": [
+      0.4583,
+      0.6293
+     ],
+     "han": "仙庫",
+     "am": "Tiên Khố",
+     "ten": "Dưới cánh mũi bên phải",
+     "y": "Tiên Khố là vị của tuổi 53 (tuổi mụ) trong bài lưu niên, nằm ở dưới cánh mũi bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      53
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "phap_lenh"
+     }
+    },
+    {
+     "id": "tien_kho_t",
+     "vt": [
+      0.5658,
+      0.6315
+     ],
+     "han": "仙庫",
+     "am": "Tiên Khố",
+     "ten": "Dưới cánh mũi bên trái",
+     "y": "Tiên Khố là vị của tuổi 52 (tuổi mụ) trong bài lưu niên, nằm ở dưới cánh mũi bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      52
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "phap_lenh"
+     }
+    },
+    {
+     "id": "loc_thuong",
+     "vt": [
+      0.42,
+      0.6253
+     ],
+     "han": "祿倉",
+     "am": "Lộc Thương",
+     "ten": "Trên mép bên phải",
+     "y": "Lộc Thương là vị của tuổi 55 (tuổi mụ) trong bài lưu niên, nằm ở trên mép bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      55
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "phap_lenh"
+     }
+    },
+    {
+     "id": "thuc_thuong",
+     "vt": [
+      0.6075,
+      0.6315
+     ],
+     "han": "食倉",
+     "am": "Thực Thương",
+     "ten": "Trên mép bên trái",
+     "y": "Thực Thương là vị của tuổi 54 (tuổi mụ) trong bài lưu niên, nằm ở trên mép bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      54
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "phap_lenh"
+     }
+    },
+    {
+     "id": "phap_lenh_p",
+     "vt": [
+      0.3708,
+      0.6253
+     ],
+     "han": "法令",
+     "am": "Pháp Lệnh",
+     "ten": "Rãnh cười bên phải",
+     "y": "Pháp Lệnh là vị của tuổi 57 (tuổi mụ) trong bài lưu niên, nằm ở rãnh cười bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      57
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "phap_lenh"
+     }
+    },
+    {
+     "id": "phap_lenh_t",
+     "vt": [
+      0.6475,
+      0.6293
+     ],
+     "han": "法令",
+     "am": "Pháp Lệnh",
+     "ten": "Rãnh cười bên trái",
+     "y": "Pháp Lệnh là vị của tuổi 56 (tuổi mụ) trong bài lưu niên, nằm ở rãnh cười bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      56
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "phap_lenh"
+     }
+    },
+    {
+     "id": "nga_ap",
+     "vt": [
+      0.3583,
+      0.7041
+     ],
+     "han": "鵝鴨",
+     "am": "Nga Áp",
+     "ten": "Dưới mép bên phải",
+     "y": "Nga Áp là vị của tuổi 65 (tuổi mụ) trong bài lưu niên, nằm ở dưới mép bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      65
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    },
+    {
+     "id": "pha_tri",
+     "vt": [
+      0.6908,
+      0.708
+     ],
+     "han": "陂池",
+     "am": "Pha Trì",
+     "ten": "Dưới mép bên trái",
+     "y": "Pha Trì là vị của tuổi 64 (tuổi mụ) trong bài lưu niên, nằm ở dưới mép bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      64
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    },
+    {
+     "id": "kim_lu_p",
+     "vt": [
+      0.4033,
+      0.7041
+     ],
+     "han": "金縷",
+     "am": "Kim Lũ",
+     "ten": "Cuối rãnh cười bên phải",
+     "y": "Kim Lũ là vị của tuổi 67 (tuổi mụ) trong bài lưu niên, nằm ở cuối rãnh cười bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      67
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "phap_lenh"
+     }
+    },
+    {
+     "id": "kim_lu_t",
+     "vt": [
+      0.6442,
+      0.7063
+     ],
+     "han": "金縷",
+     "am": "Kim Lũ",
+     "ten": "Cuối rãnh cười bên trái",
+     "y": "Kim Lũ là vị của tuổi 66 (tuổi mụ) trong bài lưu niên, nằm ở cuối rãnh cười bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      66
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "phap_lenh"
+     }
+    },
+    {
+     "id": "dia_kho_p",
+     "vt": [
+      0.4075,
+      0.7732
+     ],
+     "han": "地庫",
+     "am": "Địa Khố",
+     "ten": "Bên cằm phải",
+     "y": "Địa Khố là vị của tuổi 63 (tuổi mụ) trong bài lưu niên, nằm ở bên cằm phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      63
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    },
+    {
+     "id": "dia_kho_t",
+     "vt": [
+      0.6075,
+      0.7795
+     ],
+     "han": "地庫",
+     "am": "Địa Khố",
+     "ten": "Bên cằm trái",
+     "y": "Địa Khố là vị của tuổi 62 (tuổi mụ) trong bài lưu niên, nằm ở bên cằm trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      62
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    },
+    {
+     "id": "no_boc_p",
+     "vt": [
+      0.3708,
+      0.7732
+     ],
+     "han": "奴僕",
+     "am": "Nô Bộc",
+     "ten": "Hàm dưới bên phải",
+     "y": "Nô Bộc là vị của tuổi 73 (tuổi mụ) trong bài lưu niên, nằm ở hàm dưới bên phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      73
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "no_boc_t",
+     "vt": [
+      0.6525,
+      0.7755
+     ],
+     "han": "奴僕",
+     "am": "Nô Bộc",
+     "ten": "Hàm dưới bên trái",
+     "y": "Nô Bộc là vị của tuổi 72 (tuổi mụ) trong bài lưu niên, nằm ở hàm dưới bên trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      72
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "tai_cot_t",
+     "vt": [
+      0.7775,
+      0.7069
+     ],
+     "han": "腮",
+     "am": "Tai Cốt",
+     "ten": "Góc hàm bên trái",
+     "y": "Tai Cốt là vị của tuổi 74 (tuổi mụ) trong bài lưu niên, nằm ở góc hàm bên trái. Bản khắc chỉ ghi một chữ.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      74
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     },
+     "han_kho": "腮骨"
+    },
+    {
+     "id": "tai_p_tren",
+     "vt": [
+      0.1408,
+      0.3838
+     ],
+     "han": "天輪",
+     "am": "Thiên Luân",
+     "ten": "Vành tai phải, phần trên",
+     "y": "Thiên Luân là vị của tuổi 8 và 9 (tuổi mụ) trong bài lưu niên, nằm ở vành tai phải, phần trên.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      8,
+      9
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "tai_p_giua",
+     "vt": [
+      0.1517,
+      0.4796
+     ],
+     "han": "人輪",
+     "am": "Nhân Luân",
+     "ten": "Vành tai phải, phần giữa",
+     "y": "Nhân Luân là vị của tuổi 10 và 11 (tuổi mụ) trong bài lưu niên, nằm ở vành tai phải, phần giữa.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      10,
+      11
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "tai_p_duoi",
+     "vt": [
+      0.1625,
+      0.5856
+     ],
+     "han": "地輪",
+     "am": "Địa Luân",
+     "ten": "Dái tai phải",
+     "y": "Địa Luân là vị của tuổi 12–14 (tuổi mụ) trong bài lưu niên, nằm ở dái tai phải.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      12,
+      13,
+      14
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "tai_t_tren",
+     "vt": [
+      0.8808,
+      0.3912
+     ],
+     "han": "天輪",
+     "am": "Thiên Luân",
+     "ten": "Vành tai trái, phần trên",
+     "y": "Thiên Luân là vị của tuổi 1 và 2 (tuổi mụ) trong bài lưu niên, nằm ở vành tai trái, phần trên.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      1,
+      2
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "tai_t_giua",
+     "vt": [
+      0.8583,
+      0.5034
+     ],
+     "han": "天城",
+     "am": "Thiên Thành",
+     "ten": "Vành tai trái, phần giữa",
+     "y": "Thiên Thành là vị của tuổi 3 và 4 (tuổi mụ) trong bài lưu niên, nằm ở vành tai trái, phần giữa.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      3,
+      4
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "tai_t_duoi",
+     "vt": [
+      0.8483,
+      0.6009
+     ],
+     "han": "天廓",
+     "am": "Thiên Khuếch",
+     "ten": "Dái tai trái",
+     "y": "Thiên Khuếch là vị của tuổi 5–7 (tuổi mụ) trong bài lưu niên, nằm ở dái tai trái.",
+     "nhom": "luu_nien",
+     "tuoi": [
+      5,
+      6,
+      7
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "chi_ngo",
+     "vt": [
+      0.52,
+      0.1927
+     ],
+     "han": "午",
+     "am": "Ngọ",
+     "ten": "Đỉnh trán",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Ngọ ứng với tuổi 88–89 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      88,
+      89
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_dinh"
+     }
+    },
+    {
+     "id": "chi_ty_ran",
+     "vt": [
+      0.3492,
+      0.2075
+     ],
+     "han": "巳",
+     "am": "Tỵ",
+     "ten": "Góc trán bên phải, sát chân tóc",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Tỵ ứng với tuổi 86–87 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      86,
+      87
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "nhat_nguyet_giac"
+     }
+    },
+    {
+     "id": "chi_mui",
+     "vt": [
+      0.6892,
+      0.2063
+     ],
+     "han": "未",
+     "am": "Mùi",
+     "ten": "Góc trán bên trái, sát chân tóc",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Mùi ứng với tuổi 90–91 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      90,
+      91
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "nhat_nguyet_giac"
+     }
+    },
+    {
+     "id": "chi_thin",
+     "vt": [
+      0.2017,
+      0.3169
+     ],
+     "han": "辰",
+     "am": "Thìn",
+     "ten": "Thái dương bên phải",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Thìn ứng với tuổi 84–85 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      84,
+      85
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     }
+    },
+    {
+     "id": "chi_than",
+     "vt": [
+      0.825,
+      0.3322
+     ],
+     "han": "申",
+     "am": "Thân",
+     "ten": "Thái dương bên trái",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Thân ứng với tuổi 92–93 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      92,
+      93
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     }
+    },
+    {
+     "id": "chi_mao",
+     "vt": [
+      0.1975,
+      0.4552
+     ],
+     "han": "卯",
+     "am": "Mão",
+     "ten": "Viền má bên phải, ngang mắt",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Mão ứng với tuổi 82–83 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      82,
+      83
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "luong_quyen"
+     }
+    },
+    {
+     "id": "chi_dau",
+     "vt": [
+      0.8158,
+      0.4824
+     ],
+     "han": "酉",
+     "am": "Dậu",
+     "ten": "Viền má bên trái, ngang mắt",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Dậu ứng với tuổi 94–95 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      94,
+      95
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "luong_quyen"
+     }
+    },
+    {
+     "id": "chi_dan",
+     "vt": [
+      0.2258,
+      0.6378
+     ],
+     "han": "寅",
+     "am": "Dần",
+     "ten": "Góc hàm bên phải",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Dần ứng với tuổi 80–81 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      80,
+      81
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "chi_tuat",
+     "vt": [
+      0.7742,
+      0.6548
+     ],
+     "han": "戌",
+     "am": "Tuất",
+     "ten": "Góc hàm bên trái",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Tuất ứng với tuổi 96–97 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      96,
+      97
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "chi_suu",
+     "vt": [
+      0.3333,
+      0.7619
+     ],
+     "han": "丑",
+     "am": "Sửu",
+     "ten": "Hàm dưới bên phải",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Sửu ứng với tuổi 78–79 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      78,
+      79
+     ],
+     "ben": "phai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "chi_hoi",
+     "vt": [
+      0.6925,
+      0.7585
+     ],
+     "han": "亥",
+     "am": "Hợi",
+     "ten": "Hàm dưới bên trái",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Hợi ứng với tuổi 98–99 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      98,
+      99
+     ],
+     "ben": "trai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "chi_ty",
+     "vt": [
+      0.5075,
+      0.818
+     ],
+     "han": "子",
+     "am": "Tý",
+     "ten": "Giữa cằm, sát viền dưới",
+     "y": "Sau tuổi 75, bài lưu niên đi một vòng quanh viền mặt theo mười hai chi, mỗi chi hai tuổi. Chi Tý ứng với tuổi 76–77 (tuổi mụ).",
+     "nhom": "dia_chi",
+     "tuoi": [
+      76,
+      77
+     ],
+     "ben": "giua",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    }
+   ]
+  },
+  {
+   "ma": "muoi-ba-bo-vi",
+   "ten": "Mười ba bộ vị trên trục giữa gương mặt",
+   "ten_han": "十三部位總要之圖",
+   "am": "Thập tam bộ vị tổng yếu chi đồ",
+   "sach": "Thần Tướng Toàn Biên",
+   "ban_khac": "bản khắc gỗ đời Minh",
+   "tep": "muoi-ba-bo-vi.webp",
+   "rong": 925,
+   "cao": 1400,
+   "mo_ta": "Hình này xếp mười ba vị nối nhau từ chân tóc xuống cằm, từ Thiên Trung tới Địa Các — bộ khung mà mọi bài tướng mặt đều dựa vào. Nửa bên phải hình còn chép dày tên các vị nằm ngang hàng với từng bộ vị; lớp chú giải này mới ghi trục giữa, hai tai và các nhãn lớn ở nửa bên trái hình. Người trong hình nhìn thẳng ra, nên bên phải hình là bên trái của khuôn mặt.",
+   "nhom": [
+    {
+     "ma": "bo_vi",
+     "ten": "Mười ba bộ vị"
+    },
+    {
+     "ma": "tai",
+     "ten": "Hai tai"
+    },
+    {
+     "ma": "vi_khac",
+     "ten": "Vị khác"
+    }
+   ],
+   "diem": [
+    {
+     "id": "thien_trung",
+     "vt": [
+      0.5342,
+      0.2401
+     ],
+     "han": "天中",
+     "am": "Thiên Trung",
+     "ten": "Giữa trán, sát chân tóc",
+     "y": "Vị thứ nhất. Sách xưa xem ở đây sự khởi đầu: nền nếp gia đình đầu đời và chuyện học hành thuở nhỏ.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_trung"
+     }
+    },
+    {
+     "id": "thien_dinh",
+     "vt": [
+      0.5342,
+      0.2841
+     ],
+     "han": "天庭",
+     "am": "Thiên Đình",
+     "ten": "Giữa trán, phần trên",
+     "y": "Vị thứ hai. Vùng trán giữa nói về cách nghĩ, tầm nhìn, tuổi trẻ và chuyện công việc sớm.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_dinh"
+     }
+    },
+    {
+     "id": "tu_khong",
+     "vt": [
+      0.5342,
+      0.3348
+     ],
+     "han": "司空",
+     "am": "Tư Không",
+     "ten": "Giữa trán, phần giữa",
+     "y": "Vị thứ ba. Cùng Trung Chính làm nên cung Quan Lộc: con đường công việc và người trên.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tu_khong"
+     }
+    },
+    {
+     "id": "trung_chinh",
+     "vt": [
+      0.5342,
+      0.3855
+     ],
+     "han": "中正",
+     "am": "Trung Chính",
+     "ten": "Giữa trán, ngay trên Ấn Đường",
+     "y": "Vị thứ tư. Sách xem ở đây sự nghiệp tuổi 25 và cách giữ vị trí.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "trung_chinh"
+     }
+    },
+    {
+     "id": "an_duong",
+     "vt": [
+      0.5342,
+      0.429
+     ],
+     "han": "印堂",
+     "am": "Ấn Đường",
+     "ten": "Khoảng giữa hai đầu mày",
+     "y": "Vị thứ năm, cũng là cung Mệnh: tổng thể con người và tinh thần lúc này. Sáng, phẳng thì lòng đang yên.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "an_duong"
+     }
+    },
+    {
+     "id": "son_can",
+     "vt": [
+      0.53,
+      0.4818
+     ],
+     "han": "山根",
+     "am": "Sơn Căn",
+     "ten": "Gốc mũi, giữa hai mắt",
+     "y": "Vị thứ sáu, cầu nối giữa trán và mũi. Sách xem ở đây sức bền ở tuổi 41.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "son_can"
+     }
+    },
+    {
+     "id": "nien_thuong",
+     "vt": [
+      0.53,
+      0.527
+     ],
+     "han": "年上",
+     "am": "Niên Thượng",
+     "ten": "Sống mũi, đoạn trên",
+     "y": "Vị thứ bảy, đoạn trên của sống mũi — cột trụ giữa mặt. Bài lưu niên xem tuổi 44 ở đây.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "song_mui"
+     }
+    },
+    {
+     "id": "tho_thuong",
+     "vt": [
+      0.53,
+      0.5721
+     ],
+     "han": "壽上",
+     "am": "Thọ Thượng",
+     "ten": "Sống mũi, đoạn dưới",
+     "y": "Vị thứ tám, đoạn dưới của sống mũi. Bài lưu niên xem tuổi 45 ở đây; sống mũi thẳng được xem là sức bền tốt.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "song_mui"
+     }
+    },
+    {
+     "id": "chuan_dau",
+     "vt": [
+      0.5317,
+      0.6217
+     ],
+     "han": "準頭",
+     "am": "Chuẩn Đầu",
+     "ten": "Đầu mũi",
+     "y": "Vị thứ chín, thuộc cung Tài Bạch: tiền bạc và cách giữ của; tuổi 48.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "chuan_dau"
+     }
+    },
+    {
+     "id": "nhan_trung",
+     "vt": [
+      0.5333,
+      0.6718
+     ],
+     "han": "人中",
+     "am": "Nhân Trung",
+     "ten": "Rãnh giữa mũi và môi trên",
+     "y": "Vị thứ mười, rãnh nối mũi với môi. Sách xem ở đây sức sống và chuyện con cái; tuổi 51.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "nhan_trung"
+     }
+    },
+    {
+     "id": "thuy_tinh",
+     "vt": [
+      0.5342,
+      0.7252
+     ],
+     "han": "水星",
+     "am": "Thuỷ Tinh",
+     "ten": "Miệng",
+     "y": "Vị thứ mười một. Miệng là quan Xuất Nạp: ăn nói, chữ tín, lộc ăn; tuổi 60.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "mieng"
+     }
+    },
+    {
+     "id": "thua_tuong",
+     "vt": [
+      0.5283,
+      0.7709
+     ],
+     "han": "承漿",
+     "am": "Thừa Tương",
+     "ten": "Chỗ lõm dưới môi dưới",
+     "y": "Vị thứ mười hai. Sách xem ở đây sự tiết độ trong ăn uống; tuổi 61.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thua_tuong"
+     }
+    },
+    {
+     "id": "dia_cac",
+     "vt": [
+      0.5308,
+      0.8293
+     ],
+     "han": "地閣",
+     "am": "Địa Các",
+     "ten": "Cằm",
+     "y": "Vị thứ mười ba. Cằm nói về hậu vận: nơi ở lúc về già, người dưới, sự ổn định.",
+     "nhom": "bo_vi",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    },
+    {
+     "id": "tai_p_tren",
+     "vt": [
+      0.1258,
+      0.4411
+     ],
+     "han": "天輪",
+     "am": "Thiên Luân",
+     "ten": "Vành tai phải, phần trên",
+     "y": "Vành tai chia ba phần Thiên – Nhân – Địa từ trên xuống. Tai dày, vành rõ được xem là nền sức bền từ nhỏ.",
+     "nhom": "tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "tai_p_giua",
+     "vt": [
+      0.1392,
+      0.5341
+     ],
+     "han": "人輪",
+     "am": "Nhân Luân",
+     "ten": "Vành tai phải, phần giữa",
+     "y": "Phần giữa của vành tai. Bài lưu niên xem tuổi 10–11 ở vành tai bên phải.",
+     "nhom": "tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "tai_p_duoi",
+     "vt": [
+      0.1475,
+      0.6305
+     ],
+     "han": "地輪",
+     "am": "Địa Luân",
+     "ten": "Vành tai phải, phần dưới",
+     "y": "Phần dưới của vành tai. Bài lưu niên xem tuổi 12–14 ở đây.",
+     "nhom": "tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "tai_p_chau",
+     "vt": [
+      0.15,
+      0.6702
+     ],
+     "han": "珠",
+     "am": "Châu",
+     "ten": "Dái tai phải",
+     "y": "Dái tai, sách gọi là thuỳ châu. Dái tai dày, hơi hướng về miệng được xem là nền tốt.",
+     "nhom": "tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     },
+     "han_kho": "垂珠"
+    },
+    {
+     "id": "tai_t_tren",
+     "vt": [
+      0.9392,
+      0.4653
+     ],
+     "han": "天輪",
+     "am": "Thiên Luân",
+     "ten": "Vành tai trái, phần trên",
+     "y": "Phần trên của vành tai. Bài lưu niên xem tuổi 1–2 ở vành tai bên trái.",
+     "nhom": "tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "tai_t_giua",
+     "vt": [
+      0.9308,
+      0.5545
+     ],
+     "han": "天城",
+     "am": "Thiên Thành",
+     "ten": "Vành tai trái, phần giữa",
+     "y": "Phần giữa của vành tai trái. Bài lưu niên xem tuổi 3–4 ở đây.",
+     "nhom": "tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "tai_t_duoi",
+     "vt": [
+      0.9225,
+      0.6443
+     ],
+     "han": "天郭",
+     "am": "Thiên Khuếch",
+     "ten": "Vành tai trái, phần dưới",
+     "y": "Phần dưới của vành tai trái. Bài lưu niên xem tuổi 5–7 ở đây.",
+     "nhom": "tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     },
+     "han_kho": "天廓"
+    },
+    {
+     "id": "tai_t_chau",
+     "vt": [
+      0.9208,
+      0.6856
+     ],
+     "han": "珠",
+     "am": "Châu",
+     "ten": "Dái tai trái",
+     "y": "Dái tai, sách gọi là thuỳ châu. Sách xem dái tai đầy là người giữ được của.",
+     "nhom": "tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     },
+     "han_kho": "垂珠"
+    },
+    {
+     "id": "hai",
+     "vt": [
+      0.5308,
+      0.8778
+     ],
+     "han": "頦",
+     "am": "Hài",
+     "ten": "Chỏm cằm",
+     "y": "Phần dưới cùng của cằm. Trong ba phần Thiên – Nhân – Địa của mặt, cằm là Địa: vuông, rộng thì sách xem là có chỗ dựa về sau.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    },
+    {
+     "id": "nguyet_giac",
+     "vt": [
+      0.4467,
+      0.2952
+     ],
+     "han": "月角",
+     "am": "Nguyệt Giác",
+     "ten": "Trán bên phải, trên đầu mày",
+     "y": "Nguyệt Giác cùng Nhật Giác bên kia làm nên cung Phụ Mẫu: nền tảng cha mẹ, chỗ dựa thuở nhỏ.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "nhat_nguyet_giac"
+     }
+    },
+    {
+     "id": "dich_ma",
+     "vt": [
+      0.2183,
+      0.3078
+     ],
+     "han": "驛馬",
+     "am": "Dịch Mã",
+     "ten": "Góc trán bên phải",
+     "y": "Dịch Mã nằm ở góc trán, thuộc cung Thiên Di: đi xa, đổi chỗ. Sách dặn vùng này nên sáng sủa, sạch thì hợp đi xa.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     }
+    },
+    {
+     "id": "phuc_duong",
+     "vt": [
+      0.2567,
+      0.3888
+     ],
+     "han": "福堂",
+     "am": "Phúc Đường",
+     "ten": "Trên lông mày bên phải",
+     "y": "Phúc Đường nằm phía trên lông mày. Sách ghi vùng này thường sáng nhuận thì hay có điều vui.",
+     "nhom": "vi_khac"
+    },
+    {
+     "id": "le_duong",
+     "vt": [
+      0.4575,
+      0.5341
+     ],
+     "han": "淚堂",
+     "am": "Lệ Đường",
+     "ten": "Ngay dưới mắt phải, sát mũi",
+     "y": "Lệ Đường là vành dưới của mắt, thuộc cung nói về con cái. Sách dặn vùng này nên đầy, không trũng.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "le_duong"
+     }
+    },
+    {
+     "id": "ngoa_tam",
+     "vt": [
+      0.4233,
+      0.5341
+     ],
+     "han": "臥蠶",
+     "am": "Ngoạ Tằm",
+     "ten": "Bọng nhỏ dưới mắt phải",
+     "y": "Ngoạ Tằm là gờ nhỏ ngay dưới mi dưới, trông như con tằm nằm. Cùng Lệ Đường thuộc cung nói về con cái, người nhỏ tuổi hơn.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "le_duong"
+     }
+    },
+    {
+     "id": "truong_nu",
+     "vt": [
+      0.3908,
+      0.5341
+     ],
+     "han": "長女",
+     "am": "Trưởng nữ",
+     "ten": "Dưới mắt phải, vị thứ nhất",
+     "y": "Ba vị dưới mắt bên này bản khắc gọi theo thứ tự con gái lớn, giữa, út; bên kia là ba vị con trai. Cả vùng nói về con cái.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "tu_tuc"
+     }
+    },
+    {
+     "id": "trung_nu",
+     "vt": [
+      0.3567,
+      0.5341
+     ],
+     "han": "中女",
+     "am": "Trung nữ",
+     "ten": "Dưới mắt phải, vị thứ hai",
+     "y": "Vị giữa trong ba vị dưới mắt bên này. Sách xưa xếp ba vị theo thứ tự con trong nhà; cả vùng thuộc cung nói về con cái.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "tu_tuc"
+     }
+    },
+    {
+     "id": "thieu_nu",
+     "vt": [
+      0.3208,
+      0.533
+     ],
+     "han": "少女",
+     "am": "Thiếu nữ",
+     "ten": "Dưới mắt phải, vị thứ ba",
+     "y": "Vị ngoài cùng trong ba vị dưới mắt bên này, ứng với người con út theo cách xếp của sách.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "cung",
+      "ma": "tu_tuc"
+     }
+    },
+    {
+     "id": "dinh_uy",
+     "vt": [
+      0.455,
+      0.6244
+     ],
+     "han": "廷尉",
+     "am": "Đình Uý",
+     "ten": "Cánh mũi bên phải",
+     "y": "Đình Uý là cánh mũi bên phải, cùng Lan Đài bên kia làm «kho» của cung Tài Bạch: dày, kín thì giữ được của.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "canh_mui"
+     }
+    },
+    {
+     "id": "lan_dai",
+     "vt": [
+      0.6,
+      0.625
+     ],
+     "han": "蘭臺",
+     "am": "Lan Đài",
+     "ten": "Cánh mũi bên trái",
+     "y": "Lan Đài là cánh mũi bên trái. Bài lưu niên xem tuổi 49 ở đây, tuổi 50 ở Đình Uý bên kia.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "canh_mui"
+     }
+    },
+    {
+     "id": "menh_mon_p",
+     "vt": [
+      0.1858,
+      0.5683
+     ],
+     "han": "命門",
+     "am": "Mệnh Môn",
+     "ten": "Trước tai phải",
+     "y": "Mệnh Môn là chỗ ngay trước lỗ tai. Sách dặn vùng này nên sáng, rộng rãi.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "menh_mon_t",
+     "vt": [
+      0.8792,
+      0.5793
+     ],
+     "han": "命門",
+     "am": "Mệnh Môn",
+     "ten": "Trước tai trái",
+     "y": "Mệnh Môn là chỗ ngay trước lỗ tai; trong bài ca mười ba bộ vị, nó thuộc hàng ngang với Thọ Thượng.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "tai"
+     }
+    },
+    {
+     "id": "huyen_bich_p",
+     "vt": [
+      0.1975,
+      0.6558
+     ],
+     "han": "懸壁",
+     "am": "Huyền Bích",
+     "ten": "Má dưới bên phải, cạnh dái tai",
+     "y": "Huyền Bích là phần má dưới gần dái tai. Sách xếp vào cung nói về người giúp việc, cộng sự: nên sáng nhuận.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "huyen_bich_t",
+     "vt": [
+      0.8708,
+      0.6746
+     ],
+     "han": "懸壁",
+     "am": "Huyền Bích",
+     "ten": "Má dưới bên trái, cạnh dái tai",
+     "y": "Huyền Bích bên trái; trong bài ca mười ba bộ vị, nó thuộc hàng ngang với Nhân Trung.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     }
+    },
+    {
+     "id": "tai_cot",
+     "vt": [
+      0.2575,
+      0.7786
+     ],
+     "han": "腮",
+     "am": "Tai",
+     "ten": "Góc hàm bên phải",
+     "y": "Xương góc hàm. Sách xem quai hàm vững là sức chịu đựng tốt; bài lưu niên gắn vùng này với tuổi 74–75.",
+     "nhom": "vi_khac",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     },
+     "han_kho": "腮骨"
+    }
+   ]
+  },
+  {
+   "ma": "not-ruoi-nam",
+   "ten": "Nốt ruồi trên mặt: hình vẽ cho nam",
+   "ten_han": "男子面痣之圖",
+   "am": "Nam tử diện chí chi đồ",
+   "sach": "Thần Tướng Toàn Biên",
+   "ban_khac": "bản khắc gỗ đời Minh",
+   "tep": "not-ruoi-nam.webp",
+   "rong": 867,
+   "cao": 1400,
+   "mo_ta": "Hình này chấm sẵn các vị trí nốt ruồi trên mặt và ghi cạnh mỗi chấm một lời ngắn của sách. Bản khắc vẽ riêng một hình cho nam, một hình cho nữ. Chấm trên lớp chú giải chia ba sắc: lời khen, lời nhắc nên chú ý, và lời sách nói nặng đã được diễn lại cho nhẹ. Nốt ruồi đổi màu, đổi cỡ thì đi khám da liễu. Người trong hình nhìn thẳng ra, nên bên phải hình là bên trái của khuôn mặt.",
+   "nhom": [
+    {
+     "ma": "not_ruoi_tran",
+     "ten": "Trên trán"
+    },
+    {
+     "ma": "not_ruoi_mat",
+     "ten": "Quanh mắt"
+    },
+    {
+     "ma": "not_ruoi_duoi",
+     "ten": "Mũi, má, miệng, cằm"
+    },
+    {
+     "ma": "not_ruoi_tai",
+     "ten": "Trên tai"
+    }
+   ],
+   "cau_khung": "Đây là ghi chép của người xưa, đọc để tham khảo, không phải lời đoán riêng cho bạn.",
+   "diem": [
+    {
+     "id": "tran_giua",
+     "vt": [
+      0.52,
+      0.3015
+     ],
+     "han": "妨父母",
+     "am": null,
+     "ten": "Giữa trán, sát chân tóc",
+     "y": "Sách xưa có nhắc chấm này, hàm ý duyên nương tựa cha mẹ mỏng hơn, dễ sớm tự lập. Nên chủ động gọi điện, về thăm cha mẹ đều hơn.",
+     "nhom": "not_ruoi_tran",
+     "muc": "C"
+    },
+    {
+     "id": "tran_t1",
+     "vt": [
+      0.585,
+      0.3025
+     ],
+     "han": "好官",
+     "am": "Hảo quan",
+     "ten": "Trán trên, lệch bên trái",
+     "y": "Sách xưa ghi «hảo quan» — nốt ruồi ở đây được xem là dấu thuận cho đường công việc, dễ được người trên tin.",
+     "nhom": "not_ruoi_tran",
+     "muc": "A"
+    },
+    {
+     "id": "tran_t2",
+     "vt": [
+      0.6417,
+      0.3061
+     ],
+     "han": "大官",
+     "am": "Đại quan",
+     "ten": "Trán trên bên trái",
+     "y": "Sách xưa ghi «đại quan» — người xưa xem là dấu của người gánh được việc lớn, có vị trí.",
+     "nhom": "not_ruoi_tran",
+     "muc": "A"
+    },
+    {
+     "id": "tran_t3",
+     "vt": [
+      0.7058,
+      0.3082
+     ],
+     "han": "兵死",
+     "am": null,
+     "ten": "Trán bên trái, gần chân tóc",
+     "y": "Sách xưa có nhắc chấm này, hàm ý nên cẩn thận hơn về an toàn ở nơi xô xát, đông người. Nên tránh việc liều và chỗ va chạm.",
+     "nhom": "not_ruoi_tran",
+     "muc": "C"
+    },
+    {
+     "id": "tran_t4",
+     "vt": [
+      0.7567,
+      0.3149
+     ],
+     "han": "不宜出入",
+     "am": "Bất nghi xuất nhập",
+     "ten": "Góc trán bên trái",
+     "y": "Sách xưa ghi «bất nghi xuất nhập», tức không hợp ra vào nhiều — nên chú ý chuyện đi lại: đi xa thì báo người nhà, xem kỹ xe trước khi đi.",
+     "nhom": "not_ruoi_tran",
+     "muc": "B"
+    },
+    {
+     "id": "mat_p_trong",
+     "vt": [
+      0.45,
+      0.4688
+     ],
+     "han": "貴",
+     "am": "Quý",
+     "ten": "Đầu mắt phải, sát sống mũi",
+     "y": "Sách xưa ghi «quý» — nốt ruồi ở đây người xưa xem là dấu được nể trọng.",
+     "nhom": "not_ruoi_mat",
+     "muc": "A"
+    },
+    {
+     "id": "mat_p_tren1",
+     "vt": [
+      0.4117,
+      0.476
+     ],
+     "han": "不利",
+     "am": "Bất lợi",
+     "ten": "Trên mắt phải, phía trong",
+     "y": "Sách xưa ghi «bất lợi» — nên chú ý: việc gì cũng chừa một phương án dự phòng, đừng dồn hết vào một cửa.",
+     "nhom": "not_ruoi_mat",
+     "muc": "B"
+    },
+    {
+     "id": "mat_p_tren2",
+     "vt": [
+      0.3783,
+      0.4744
+     ],
+     "han": "吉",
+     "am": "Cát",
+     "ten": "Trên mắt phải, đoạn giữa",
+     "y": "Sách xưa ghi «cát» — một vị trí được xem là thuận.",
+     "nhom": "not_ruoi_mat",
+     "muc": "A"
+    },
+    {
+     "id": "mat_p_tren3",
+     "vt": [
+      0.3358,
+      0.4719
+     ],
+     "han": "水厄",
+     "am": "Thuỷ ách",
+     "ten": "Trên mắt phải, phía ngoài",
+     "y": "Sách xưa ghi «thuỷ ách» — nên chú ý an toàn khi ở gần sông nước: đi thuyền, đi bơi thì mặc áo phao, không đi một mình.",
+     "nhom": "not_ruoi_mat",
+     "muc": "B"
+    },
+    {
+     "id": "mat_p_duoi_mat",
+     "vt": [
+      0.2258,
+      0.4744
+     ],
+     "han": "劫財",
+     "am": "Kiếp tài",
+     "ten": "Đuôi mắt phải, phía trên",
+     "y": "Sách xưa ghi «kiếp tài» — nên chú ý chuyện giữ tiền: của khó giữ nếu cho vay, góp vốn theo cảm tình. Nên có khoản để dành tự động.",
+     "nhom": "not_ruoi_mat",
+     "muc": "B"
+    },
+    {
+     "id": "tai_p_tren",
+     "vt": [
+      0.15,
+      0.476
+     ],
+     "han": "吉",
+     "am": "Cát",
+     "ten": "Vành tai phải, phần trên",
+     "y": "Sách xưa ghi «cát» — nốt ruồi trên vành tai được xem là thuận.",
+     "nhom": "not_ruoi_tai",
+     "muc": "A"
+    },
+    {
+     "id": "duoi_mat_p1",
+     "vt": [
+      0.4425,
+      0.5601
+     ],
+     "han": "殺妻",
+     "am": null,
+     "ten": "Dưới mắt phải, sát sống mũi",
+     "y": "Sách xưa có nhắc chấm dưới mắt này, hàm ý đường vợ chồng cần vun nhiều hơn người. Nên dành giờ cố định mỗi tuần cho hai người.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "duoi_mat_p2",
+     "vt": [
+      0.3867,
+      0.557
+     ],
+     "han": "喪父",
+     "am": null,
+     "ten": "Dưới mắt phải, đoạn giữa",
+     "y": "Sách xưa có nhắc chấm này, hàm ý duyên nương tựa người cha mỏng hơn, sớm phải tự lo. Nên chủ động hỏi han, đưa cha đi khám định kỳ.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "duoi_mat_p5",
+     "vt": [
+      0.2358,
+      0.5483
+     ],
+     "han": "淫",
+     "am": null,
+     "ten": "Dưới đuôi mắt phải",
+     "y": "Sách xưa có nhắc chấm gần đuôi mắt này, hàm ý người đào hoa, tình cảm nhiều ngả. Nên rõ ràng trong các mối quan hệ.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "dau_mui",
+     "vt": [
+      0.48,
+      0.6309
+     ],
+     "han": "凶",
+     "am": "Hung",
+     "ten": "Đầu mũi",
+     "y": "Sách xưa xếp nốt ruồi ở đầu mũi vào điều nên cẩn thận hơn, nhất là chuyện tiền. Nên chú ý ghi chi tiêu, không quyết khoản lớn lúc vội.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "mat_t_trong",
+     "vt": [
+      0.6158,
+      0.4755
+     ],
+     "han": "大貴",
+     "am": "Đại quý",
+     "ten": "Đầu mắt trái, sát sống mũi",
+     "y": "Sách xưa ghi «đại quý» — vị trí được xem là dấu của người có chỗ đứng, được nể.",
+     "nhom": "not_ruoi_mat",
+     "muc": "A"
+    },
+    {
+     "id": "mat_t_tren1",
+     "vt": [
+      0.665,
+      0.4688
+     ],
+     "han": "官",
+     "am": "Quan",
+     "ten": "Trên mắt trái, phía trong",
+     "y": "Sách xưa ghi «quan» — dấu thuận cho đường công việc.",
+     "nhom": "not_ruoi_mat",
+     "muc": "A"
+    },
+    {
+     "id": "mat_t_tren2",
+     "vt": [
+      0.7125,
+      0.4713
+     ],
+     "han": "水厄",
+     "am": "Thuỷ ách",
+     "ten": "Trên mắt trái, đoạn giữa",
+     "y": "Sách xưa ghi «thuỷ ách» — nên chú ý an toàn sông nước: không bơi ở chỗ lạ, đi thuyền thì mặc áo phao.",
+     "nhom": "not_ruoi_mat",
+     "muc": "B"
+    },
+    {
+     "id": "mat_t_tren3",
+     "vt": [
+      0.7633,
+      0.4739
+     ],
+     "han": "凶",
+     "am": "Hung",
+     "ten": "Trên mắt trái, phía ngoài",
+     "y": "Sách xưa xếp vị trí này vào điều nên cẩn thận hơn. Nên chú ý: việc lớn thì hỏi thêm một người mình tin trước khi quyết.",
+     "nhom": "not_ruoi_mat",
+     "muc": "B"
+    },
+    {
+     "id": "mat_t_duoi_mat",
+     "vt": [
+      0.8175,
+      0.476
+     ],
+     "han": "散財",
+     "am": "Tán tài",
+     "ten": "Đuôi mắt trái, phía trên",
+     "y": "Sách xưa ghi «tán tài» — tiền dễ đi theo các cuộc vui và lời nhờ vả. Nên chú ý đặt hạn mức chi mỗi tháng và giữ đúng.",
+     "nhom": "not_ruoi_mat",
+     "muc": "B"
+    },
+    {
+     "id": "tai_t_tren",
+     "vt": [
+      0.8758,
+      0.4626
+     ],
+     "han": "吉",
+     "am": "Cát",
+     "ten": "Vành tai trái, phần trên",
+     "y": "Sách xưa ghi «cát» — nốt ruồi trên vành tai được xem là thuận, người sáng dạ.",
+     "nhom": "not_ruoi_tai",
+     "muc": "A"
+    },
+    {
+     "id": "duoi_mat_t1",
+     "vt": [
+      0.6125,
+      0.5581
+     ],
+     "han": "自身",
+     "am": null,
+     "ten": "Dưới mắt trái, sát sống mũi",
+     "y": "Sách xưa có nhắc chấm này, hàm ý điều cần giữ là chính sức mình. Nên ngủ đủ, đi khám tổng quát mỗi năm, tránh việc liều.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "duoi_mat_t2",
+     "vt": [
+      0.645,
+      0.5607
+     ],
+     "han": "喪子",
+     "am": null,
+     "ten": "Dưới mắt trái, phía trong",
+     "y": "Sách xưa có nhắc chấm này, hàm ý đường con cái phải bỏ nhiều công hơn người. Nên dành giờ đều cho con; mong con thì đi khám sớm.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "duoi_mat_t3",
+     "vt": [
+      0.6992,
+      0.5586
+     ],
+     "han": "子息無",
+     "am": null,
+     "ten": "Dưới mắt trái, đoạn giữa",
+     "y": "Sách xưa có nhắc chấm này, hàm ý đường con cái đến muộn. Nên coi đây là việc của y khoa: mong con thì hai người cùng đi khám sớm.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "duoi_mat_t4",
+     "vt": [
+      0.7425,
+      0.5576
+     ],
+     "han": "少子",
+     "am": null,
+     "ten": "Dưới mắt trái, phía ngoài",
+     "y": "Sách xưa có nhắc chấm này, hàm ý nhà ít con. Nên nhớ ít hay nhiều không bằng thời gian ở cạnh con; mong con thì đi khám sớm.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "tai_t_duoi",
+     "vt": [
+      0.8592,
+      0.6154
+     ],
+     "han": "聰明",
+     "am": "Thông minh",
+     "ten": "Dái tai trái",
+     "y": "Sách xưa ghi «thông minh» — nốt ruồi ở tai được xem là dấu sáng dạ, học nhanh.",
+     "nhom": "not_ruoi_tai",
+     "muc": "A"
+    },
+    {
+     "id": "ma_t_mui",
+     "vt": [
+      0.6167,
+      0.6711
+     ],
+     "han": "水厄",
+     "am": "Thuỷ ách",
+     "ten": "Má trái, cạnh cánh mũi",
+     "y": "Sách xưa ghi «thuỷ ách» — nên chú ý an toàn khi gần nước; trẻ nhỏ trong nhà nên được học bơi sớm.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "tai_p_duoi",
+     "vt": [
+      0.1617,
+      0.6639
+     ],
+     "han": "孝",
+     "am": "Hiếu",
+     "ten": "Dái tai phải",
+     "y": "Sách xưa ghi «hiếu» — dấu của người nặng lòng với cha mẹ.",
+     "nhom": "not_ruoi_tai",
+     "muc": "A"
+    },
+    {
+     "id": "ma_p_ham",
+     "vt": [
+      0.2558,
+      0.7274
+     ],
+     "han": "客死",
+     "am": null,
+     "ten": "Má phải, gần quai hàm",
+     "y": "Sách xưa có nhắc chấm này, hàm ý người hay sống xa quê. Nên giữ liên lạc đều với nhà, mang đủ giấy tờ và bảo hiểm khi đi xa.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "C"
+    },
+    {
+     "id": "ma_p_mep",
+     "vt": [
+      0.33,
+      0.7248
+     ],
+     "han": "不宜牛馬",
+     "am": "Bất nghi ngưu mã",
+     "ten": "Má phải, ngang mép",
+     "y": "Sách xưa ghi «bất nghi ngưu mã», tức không hợp nuôi trâu ngựa — ngày nay nên chú ý khi đi xe và làm việc với máy móc, vật nuôi lớn.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "mep_p",
+     "vt": [
+      0.3842,
+      0.7248
+     ],
+     "han": "厄",
+     "am": "Ách",
+     "ten": "Trên mép bên phải",
+     "y": "Sách xưa ghi «ách», tức chỗ dễ vướng — nên chú ý lời ăn tiếng nói và chuyện ăn uống; việc gì cũng chậm lại một nhịp.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "cam_p",
+     "vt": [
+      0.4467,
+      0.778
+     ],
+     "han": "聰明",
+     "am": "Thông minh",
+     "ten": "Dưới môi, lệch bên phải",
+     "y": "Sách xưa ghi «thông minh» — nốt ruồi gần cằm ở vị trí này được xem là dấu nhanh trí.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "A"
+    },
+    {
+     "id": "cam_t1",
+     "vt": [
+      0.5692,
+      0.7852
+     ],
+     "han": "酒醉",
+     "am": "Tửu tuý",
+     "ten": "Dưới môi bên trái",
+     "y": "Sách xưa ghi «tửu tuý» — nên chú ý chuyện rượu bia: uống có chừng, đã uống thì không lái xe.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "cam_t2",
+     "vt": [
+      0.6308,
+      0.7837
+     ],
+     "han": "吉",
+     "am": "Cát",
+     "ten": "Cằm bên trái",
+     "y": "Sách xưa ghi «cát» — vị trí được xem là thuận cho hậu vận.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "A"
+    },
+    {
+     "id": "cam_t3",
+     "vt": [
+      0.68,
+      0.7827
+     ],
+     "han": "善",
+     "am": "Thiện",
+     "ten": "Cằm bên trái, phía ngoài",
+     "y": "Sách xưa ghi «thiện» — dấu của người hiền, dễ được quý.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "A"
+    },
+    {
+     "id": "ma_t_mep",
+     "vt": [
+      0.7358,
+      0.7388
+     ],
+     "han": "得大財",
+     "am": "Đắc đại tài",
+     "ten": "Má trái, ngang mép",
+     "y": "Sách xưa ghi «đắc đại tài» — vị trí được xem là có lộc về tiền bạc.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "A"
+    },
+    {
+     "id": "co",
+     "vt": [
+      0.5117,
+      0.889
+     ],
+     "han": "公侯",
+     "am": "Công hầu",
+     "ten": "Giữa cổ, dưới cằm",
+     "y": "Sách xưa ghi «công hầu» — nốt ruồi ở chỗ kín dưới cằm được xem là dấu quý.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "A"
+    }
+   ]
+  },
+  {
+   "ma": "not-ruoi-nu",
+   "ten": "Nốt ruồi trên mặt: hình vẽ cho nữ",
+   "ten_han": "女人面痣之圖",
+   "am": "Nữ nhân diện chí chi đồ",
+   "sach": "Thần Tướng Toàn Biên",
+   "ban_khac": "bản khắc gỗ đời Minh",
+   "tep": "not-ruoi-nu.webp",
+   "rong": 869,
+   "cao": 1400,
+   "mo_ta": "Hình này chấm sẵn các vị trí nốt ruồi trên mặt và ghi cạnh mỗi chấm một lời ngắn của sách. Bản khắc vẽ riêng một hình cho nữ, một hình cho nam; nhiều lời mang cách nhìn của thời xưa về vai người vợ, nay chỉ nên đọc như tư liệu. Chấm trên lớp chú giải chia ba sắc: lời khen, lời nhắc nên chú ý, và lời sách nói nặng đã được diễn lại cho nhẹ. Người trong hình nhìn thẳng ra, nên bên phải hình là bên trái của khuôn mặt.",
+   "nhom": [
+    {
+     "ma": "not_ruoi_tran",
+     "ten": "Trên trán"
+    },
+    {
+     "ma": "not_ruoi_mat",
+     "ten": "Quanh mắt"
+    },
+    {
+     "ma": "not_ruoi_duoi",
+     "ten": "Mũi, má, miệng, cằm"
+    },
+    {
+     "ma": "not_ruoi_tai",
+     "ten": "Trên tai"
+    }
+   ],
+   "cau_khung": "Đây là ghi chép của người xưa, đọc để tham khảo, không phải lời đoán riêng cho bạn.",
+   "diem": [
+    {
+     "id": "tran_p1",
+     "vt": [
+      0.425,
+      0.3242
+     ],
+     "han": "少奴",
+     "am": "Thiểu nô",
+     "ten": "Trán trên, lệch bên phải",
+     "y": "Sách xưa ghi «thiểu nô», tức ít người giúp việc — nay hiểu là việc gì cũng tự tay làm. Nên chú ý tập nhờ và giao bớt việc.",
+     "nhom": "not_ruoi_tran",
+     "muc": "B"
+    },
+    {
+     "id": "tran_giua",
+     "vt": [
+      0.5017,
+      0.3237
+     ],
+     "han": "再嫁",
+     "am": null,
+     "ten": "Giữa trán",
+     "y": "Sách xưa có nhắc chấm này, hàm ý đường đôi lứa có thể đi qua hơn một chặng. Nên chọn người chậm mà kỹ, chuyện khó thì nói ra sớm.",
+     "nhom": "not_ruoi_tran",
+     "muc": "C"
+    },
+    {
+     "id": "tran_t1",
+     "vt": [
+      0.5792,
+      0.3175
+     ],
+     "han": "妨夫",
+     "am": null,
+     "ten": "Trán trên, lệch bên trái",
+     "y": "Sách xưa có nhắc chấm này, hàm ý đường vợ chồng cần vun nhiều hơn người. Nên giữ thói quen nói chuyện thẳng với nhau mỗi ngày.",
+     "nhom": "not_ruoi_tran",
+     "muc": "C"
+    },
+    {
+     "id": "tran_t2",
+     "vt": [
+      0.6142,
+      0.318
+     ],
+     "han": "客死",
+     "am": null,
+     "ten": "Trán trên bên trái",
+     "y": "Sách xưa có nhắc chấm này, hàm ý người hay sống xa quê. Nên giữ liên lạc đều với nhà, mang đủ giấy tờ và bảo hiểm khi đi xa.",
+     "nhom": "not_ruoi_tran",
+     "muc": "C"
+    },
+    {
+     "id": "tran_t3",
+     "vt": [
+      0.6508,
+      0.319
+     ],
+     "han": "損夫",
+     "am": null,
+     "ten": "Trán bên trái, phía ngoài",
+     "y": "Sách xưa có nhắc chấm này, hàm ý người vợ hay phải gánh phần hơn trong nhà. Nên chia việc, chia chuyện tiền cho rõ và cùng quyết khoản lớn.",
+     "nhom": "not_ruoi_tran",
+     "muc": "C"
+    },
+    {
+     "id": "tran_t4",
+     "vt": [
+      0.6892,
+      0.3314
+     ],
+     "han": "產厄",
+     "am": null,
+     "ten": "Góc trán bên trái",
+     "y": "Sách xưa có nhắc chấm này, hàm ý cần giữ gìn lúc sinh nở. Nên coi đây là việc của y khoa: khám thai đủ lịch và sinh ở cơ sở y tế.",
+     "nhom": "not_ruoi_tran",
+     "muc": "C"
+    },
+    {
+     "id": "giua_may",
+     "vt": [
+      0.4717,
+      0.4214
+     ],
+     "han": "妨夫",
+     "am": null,
+     "ten": "Giữa hai đầu mày",
+     "y": "Sách xưa có nhắc chấm giữa hai mày, hàm ý vợ chồng dễ lệch nhịp nếu ít nói chuyện. Nên có một bữa cơm chung không điện thoại mỗi ngày.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "song_mui",
+     "vt": [
+      0.475,
+      0.5346
+     ],
+     "han": "厄",
+     "am": "Ách",
+     "ten": "Sống mũi",
+     "y": "Sách xưa ghi «ách», tức chỗ dễ vướng — nên chú ý chuyện tiền và sức: không ôm quá nhiều việc cùng lúc, có khoản dự phòng.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "mat_p_tren1",
+     "vt": [
+      0.25,
+      0.4607
+     ],
+     "han": "吉",
+     "am": "Cát",
+     "ten": "Trên đuôi mắt phải",
+     "y": "Sách xưa ghi «cát» — một vị trí được xem là thuận.",
+     "nhom": "not_ruoi_mat",
+     "muc": "A"
+    },
+    {
+     "id": "mat_p_tren2",
+     "vt": [
+      0.29,
+      0.4581
+     ],
+     "han": "夫離",
+     "am": null,
+     "ten": "Trên mắt phải, phía ngoài",
+     "y": "Sách xưa có nhắc chấm này, hàm ý vợ chồng hay phải ở xa nhau. Nên hẹn giờ gọi cố định và có kế hoạch về gần nhau.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "mat_p_trong",
+     "vt": [
+      0.3858,
+      0.4679
+     ],
+     "han": "獄",
+     "am": "Ngục",
+     "ten": "Trên mắt phải, sát sống mũi",
+     "y": "Sách xưa ghi một chữ chỉ chuyện kiện cáo — nên chú ý giấy tờ, tranh chấp: làm gì cũng có văn bản, cần thì hỏi luật sư.",
+     "nhom": "not_ruoi_mat",
+     "muc": "B"
+    },
+    {
+     "id": "duoi_mat_p1",
+     "vt": [
+      0.225,
+      0.5331
+     ],
+     "han": "劫盜",
+     "am": "Kiếp đạo",
+     "ten": "Dưới đuôi mắt phải",
+     "y": "Sách xưa ghi «kiếp đạo», tức dễ mất của — nên chú ý giữ đồ: khoá cửa, khoá xe cẩn thận, không để nhiều tiền mặt trong nhà.",
+     "nhom": "not_ruoi_mat",
+     "muc": "B"
+    },
+    {
+     "id": "duoi_mat_p2",
+     "vt": [
+      0.2625,
+      0.5336
+     ],
+     "han": "長吉",
+     "am": "Trường cát",
+     "ten": "Dưới mắt phải, phía ngoài",
+     "y": "Sách xưa ghi «trường cát» — vị trí được xem là thuận lâu dài.",
+     "nhom": "not_ruoi_mat",
+     "muc": "A"
+    },
+    {
+     "id": "duoi_mat_p4",
+     "vt": [
+      0.3517,
+      0.5393
+     ],
+     "han": "少子",
+     "am": null,
+     "ten": "Dưới mắt phải, phía trong",
+     "y": "Sách xưa có nhắc chấm này, hàm ý nhà ít con. Nên nhớ ít hay nhiều không bằng thời gian ở cạnh con; mong con thì đi khám sớm.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "duoi_mat_p5",
+     "vt": [
+      0.3875,
+      0.5398
+     ],
+     "han": "火厄",
+     "am": "Hoả ách",
+     "ten": "Dưới mắt phải, sát sống mũi",
+     "y": "Sách xưa ghi «hoả ách» — nên chú ý an toàn lửa điện: tắt bếp, rút sạc trước khi ra khỏi nhà, có bình chữa cháy nhỏ.",
+     "nhom": "not_ruoi_mat",
+     "muc": "B"
+    },
+    {
+     "id": "mat_t_trong",
+     "vt": [
+      0.5542,
+      0.4664
+     ],
+     "han": "宜蠶",
+     "am": "Nghi tàm",
+     "ten": "Đầu mắt trái",
+     "y": "Sách xưa ghi «nghi tàm», tức hợp nghề nuôi tằm — nay hiểu là khéo tay, hợp việc cần tỉ mỉ và bền bỉ.",
+     "nhom": "not_ruoi_mat",
+     "muc": "A"
+    },
+    {
+     "id": "mat_t_tren2",
+     "vt": [
+      0.6183,
+      0.4473
+     ],
+     "han": "貴夫",
+     "am": "Quý phu",
+     "ten": "Trên mắt trái, phía trong",
+     "y": "Sách xưa ghi «quý phu» — người xưa xem là dấu thuận cho đường chồng con, người bạn đời có chỗ đứng.",
+     "nhom": "not_ruoi_mat",
+     "muc": "A"
+    },
+    {
+     "id": "mat_t_tren3",
+     "vt": [
+      0.6517,
+      0.4442
+     ],
+     "han": "妨夫",
+     "am": null,
+     "ten": "Trên mắt trái, đoạn giữa",
+     "y": "Sách xưa có nhắc chấm này, hàm ý đường vợ chồng cần vun nhiều hơn. Nên nói rõ điều mình cần thay vì chờ người kia tự hiểu.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "mat_t_tren4",
+     "vt": [
+      0.6858,
+      0.4447
+     ],
+     "han": "長命",
+     "am": "Trường mệnh",
+     "ten": "Trên mắt trái, phía ngoài",
+     "y": "Sách xưa ghi «trường mệnh» — người xưa xem là dấu của sức bền, tuổi già khoẻ.",
+     "nhom": "not_ruoi_mat",
+     "muc": "A"
+    },
+    {
+     "id": "duoi_mat_t1",
+     "vt": [
+      0.5633,
+      0.5429
+     ],
+     "han": "凶",
+     "am": "Hung",
+     "ten": "Dưới mắt trái, sát sống mũi",
+     "y": "Sách xưa xếp vị trí này vào điều nên cẩn thận hơn. Nên chú ý: việc lớn thì chậm lại một nhịp và hỏi thêm người mình tin.",
+     "nhom": "not_ruoi_mat",
+     "muc": "B"
+    },
+    {
+     "id": "duoi_mat_t2",
+     "vt": [
+      0.6108,
+      0.5403
+     ],
+     "han": "妨子",
+     "am": null,
+     "ten": "Dưới mắt trái, phía trong",
+     "y": "Sách xưa có nhắc chấm này, hàm ý đường con cái phải bỏ nhiều công hơn người. Nên dành giờ riêng cho con mỗi ngày; mong con thì đi khám sớm.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "duoi_mat_t3",
+     "vt": [
+      0.6583,
+      0.5393
+     ],
+     "han": "哭夫",
+     "am": null,
+     "ten": "Dưới mắt trái, đoạn giữa",
+     "y": "Sách xưa có nhắc chấm dưới mắt này, hàm ý người hay lo và buồn vì chồng. Nên nhắc nhau đi khám sức khoẻ định kỳ và nói ra điều mình lo.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "duoi_mat_t4",
+     "vt": [
+      0.705,
+      0.5367
+     ],
+     "han": "好色",
+     "am": null,
+     "ten": "Dưới mắt trái, phía ngoài",
+     "y": "Sách xưa có nhắc chấm này, hàm ý người đa tình, dễ rung động. Nên rõ ràng trong các mối quan hệ.",
+     "nhom": "not_ruoi_mat",
+     "muc": "C"
+    },
+    {
+     "id": "go_ma_t",
+     "vt": [
+      0.765,
+      0.605
+     ],
+     "han": "敬夫",
+     "am": "Kính phu",
+     "ten": "Gò má trái, phía ngoài",
+     "y": "Sách xưa ghi «kính phu» — dấu của người biết trọng bạn đời, nhà cửa thuận hoà.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "A"
+    },
+    {
+     "id": "tai_p",
+     "vt": [
+      0.1242,
+      0.5341
+     ],
+     "han": "主聰明",
+     "am": "Chủ thông minh",
+     "ten": "Vành tai phải",
+     "y": "Sách xưa ghi «chủ thông minh» — nốt ruồi ở tai được xem là dấu sáng dạ.",
+     "nhom": "not_ruoi_tai",
+     "muc": "A"
+    },
+    {
+     "id": "ma_p1",
+     "vt": [
+      0.2875,
+      0.6882
+     ],
+     "han": "妬忌",
+     "am": "Đố kỵ",
+     "ten": "Má phải, ngang cánh mũi",
+     "y": "Sách xưa ghi «đố kỵ» — nên chú ý tính hay so mình với người. Việc nên làm: mỗi tối ghi một điều mình đã làm được.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "ma_p2",
+     "vt": [
+      0.3242,
+      0.6892
+     ],
+     "han": "水厄",
+     "am": "Thuỷ ách",
+     "ten": "Má phải, cạnh cánh mũi",
+     "y": "Sách xưa ghi «thuỷ ách» — nên chú ý an toàn khi ở gần sông nước: đi thuyền thì mặc áo phao, không bơi ở chỗ lạ.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "ham_p1",
+     "vt": [
+      0.2725,
+      0.7689
+     ],
+     "han": "水厄",
+     "am": "Thuỷ ách",
+     "ten": "Hàm dưới bên phải",
+     "y": "Sách xưa ghi «thuỷ ách» — nên chú ý an toàn sông nước, nhất là khi đi cùng trẻ nhỏ.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "ham_p2",
+     "vt": [
+      0.3108,
+      0.7658
+     ],
+     "han": "疾苦",
+     "am": null,
+     "ten": "Cằm bên phải",
+     "y": "Sách xưa có nhắc chấm này, hàm ý nên chăm sức khoẻ kỹ hơn người. Nên ngủ đủ, vận động đều và đi khám tổng quát mỗi năm.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "C"
+    },
+    {
+     "id": "nhan_trung",
+     "vt": [
+      0.475,
+      0.6711
+     ],
+     "han": "双生",
+     "am": null,
+     "ten": "Rãnh giữa mũi và môi trên",
+     "y": "Sách xưa có nhắc chấm ở Nhân Trung, hàm ý chuyện sinh đôi. Nên coi là ghi chép xưa; chuyện sinh nở thì theo lịch khám thai.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "C"
+    },
+    {
+     "id": "cam_giua",
+     "vt": [
+      0.4775,
+      0.7616
+     ],
+     "han": "少田宅",
+     "am": "Thiểu điền trạch",
+     "ten": "Giữa cằm, dưới môi",
+     "y": "Sách xưa ghi «thiểu điền trạch», tức ít nhà đất — nên chú ý chuyện chỗ ở: để dành sớm cho một nơi ổn định, giấy tờ nhà đất làm kỹ.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "ma_t1",
+     "vt": [
+      0.6383,
+      0.7022
+     ],
+     "han": "殺四子",
+     "am": null,
+     "ten": "Má trái, dưới gò má",
+     "y": "Sách xưa có nhắc chấm này, hàm ý đường con cái phải bỏ rất nhiều công. Nên coi đây là việc của y khoa: mong con, nuôi con thì khám đủ lịch.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "C"
+    },
+    {
+     "id": "ma_t2",
+     "vt": [
+      0.6842,
+      0.7058
+     ],
+     "han": "口舌",
+     "am": "Khẩu thiệt",
+     "ten": "Má trái, ngang mép",
+     "y": "Sách xưa ghi «khẩu thiệt» — nên chú ý lời ăn tiếng nói: chuyện chưa rõ thì chưa kể lại, đang nóng thì chưa nhắn tin.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "ma_t3",
+     "vt": [
+      0.7292,
+      0.7068
+     ],
+     "han": "妨夫",
+     "am": null,
+     "ten": "Má trái, phía ngoài",
+     "y": "Sách xưa có nhắc chấm này, hàm ý đường vợ chồng cần vun nhiều hơn người. Nên cùng nhau làm một việc chung mỗi tuần.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "C"
+    },
+    {
+     "id": "ham_t",
+     "vt": [
+      0.6375,
+      0.7849
+     ],
+     "han": "妨婢",
+     "am": "Phương tì",
+     "ten": "Hàm dưới bên trái",
+     "y": "Sách xưa ghi chấm này là khó giữ người giúp việc — nay nên chú ý cách giao việc: nói rõ, trả công sòng phẳng, bớt trách.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "B"
+    },
+    {
+     "id": "co",
+     "vt": [
+      0.4775,
+      0.8687
+     ],
+     "han": "殺夫",
+     "am": null,
+     "ten": "Giữa cổ, dưới cằm",
+     "y": "Sách xưa có nhắc chấm ở cổ này, hàm ý đường vợ chồng nhiều thử thách hơn người. Nên giữ sức cho cả hai và bàn với nhau trước việc lớn.",
+     "nhom": "not_ruoi_duoi",
+     "muc": "C"
+    }
+   ]
+  },
+  {
+   "ma": "luc-phu-tam-tai-tam-dinh",
+   "ten": "Lục phủ, tam tài, tam đình",
+   "ten_han": "六府三才三停之圖",
+   "am": "Lục phủ tam tài tam đình chi đồ",
+   "sach": "Thần Tướng Toàn Biên",
+   "ban_khac": "bản khắc gỗ đời Minh",
+   "tep": "luc-phu-tam-tai-tam-dinh.webp",
+   "rong": 913,
+   "cao": 1400,
+   "mo_ta": "Hình này chia mặt theo ba cách cùng lúc. Tam đình: ba phần trên – giữa – dưới ứng với ba chặng đời. Tam tài: trán là Thiên, mũi là Nhân, cằm là Địa. Lục phủ: sáu «kho» xương ở hai bên trán, hai gò má, hai bên hàm — đầy đặn, cân nhau thì sách xem là nền vững. Người trong hình nhìn thẳng ra, nên bên phải hình là bên trái của khuôn mặt.",
+   "nhom": [
+    {
+     "ma": "tam_tai",
+     "ten": "Tam tài"
+    },
+    {
+     "ma": "tam_dinh",
+     "ten": "Tam đình"
+    },
+    {
+     "ma": "luc_phu",
+     "ten": "Lục phủ"
+    }
+   ],
+   "diem": [
+    {
+     "id": "thien",
+     "vt": [
+      0.47,
+      0.225
+     ],
+     "han": "天",
+     "am": "Thiên",
+     "ten": "Trán (Thiên)",
+     "y": "Trong tam tài, trán là Thiên (trời). Sách dặn trán nên rộng và tròn đầy.",
+     "nhom": "tam_tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_dinh"
+     }
+    },
+    {
+     "id": "thuong_dinh",
+     "vt": [
+      0.47,
+      0.2685
+     ],
+     "han": "上停",
+     "am": "Thượng đình",
+     "ten": "Từ chân tóc tới lông mày",
+     "y": "Phần trên của mặt. Sách gắn với chặng đầu đời: tuổi nhỏ, việc học, nền gia đình.",
+     "nhom": "tam_dinh",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "khuon_mat"
+     }
+    },
+    {
+     "id": "nhan",
+     "vt": [
+      0.4758,
+      0.4875
+     ],
+     "han": "人",
+     "am": "Nhân",
+     "ten": "Mũi (Nhân)",
+     "y": "Trong tam tài, mũi là Nhân (người). Sách dặn mũi nên đầy và ngay ngắn.",
+     "nhom": "tam_tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "song_mui"
+     }
+    },
+    {
+     "id": "trung_dinh",
+     "vt": [
+      0.4725,
+      0.5359
+     ],
+     "han": "中停",
+     "am": "Trung đình",
+     "ten": "Từ lông mày tới đầu mũi",
+     "y": "Phần giữa của mặt. Sách gắn với chặng giữa đời: sức làm, sự nghiệp, tiền bạc.",
+     "nhom": "tam_dinh",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "khuon_mat"
+     }
+    },
+    {
+     "id": "dia",
+     "vt": [
+      0.4642,
+      0.7386
+     ],
+     "han": "地",
+     "am": "Địa",
+     "ten": "Cằm (Địa)",
+     "y": "Trong tam tài, cằm là Địa (đất). Sách dặn cằm nên vuông và rộng.",
+     "nhom": "tam_tai",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "dia_cac"
+     }
+    },
+    {
+     "id": "ha_dinh",
+     "vt": [
+      0.4642,
+      0.7891
+     ],
+     "han": "下停",
+     "am": "Hạ đình",
+     "ten": "Từ đầu mũi tới cằm",
+     "y": "Phần dưới của mặt. Sách gắn với chặng cuối đời: nhà cửa, con cháu, sự an ổn.",
+     "nhom": "tam_dinh",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "khuon_mat"
+     }
+    },
+    {
+     "id": "thuong_phu_p",
+     "vt": [
+      0.2483,
+      0.287
+     ],
+     "han": "天倉上府",
+     "am": "Thiên thương thượng phủ",
+     "ten": "Bên trán phải (kho trên)",
+     "y": "Hai bên trán là «kho trên» trong lục phủ. Sách dặn sáu kho nên đầy, đỡ lấy nhau, không lẹm.",
+     "nhom": "luc_phu",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     },
+     "han_kho": "天倉"
+    },
+    {
+     "id": "thuong_phu_t",
+     "vt": [
+      0.6392,
+      0.2815
+     ],
+     "han": "天倉上府",
+     "am": "Thiên thương thượng phủ",
+     "ten": "Bên trán trái (kho trên)",
+     "y": "«Kho trên» bên trái. Hai bên trán đầy đặn thì sách xem là tuổi trẻ có vốn, có người đỡ.",
+     "nhom": "luc_phu",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "thien_thuong"
+     },
+     "han_kho": "天倉"
+    },
+    {
+     "id": "trung_phu_p",
+     "vt": [
+      0.1742,
+      0.5489
+     ],
+     "han": "顴骨中府",
+     "am": "Quyền cốt trung phủ",
+     "ten": "Gò má phải (kho giữa)",
+     "y": "Hai gò má là «kho giữa» trong lục phủ. Có thịt bao, không nhọn thì sách xem là tuổi trung niên cầm được việc.",
+     "nhom": "luc_phu",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "luong_quyen"
+     },
+     "han_kho": "顴骨"
+    },
+    {
+     "id": "trung_phu_t",
+     "vt": [
+      0.7108,
+      0.544
+     ],
+     "han": "顴骨中府",
+     "am": "Quyền cốt trung phủ",
+     "ten": "Gò má trái (kho giữa)",
+     "y": "«Kho giữa» bên trái. Sách dặn hai gò má nên cân nhau, không bên cao bên thấp.",
+     "nhom": "luc_phu",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "luong_quyen"
+     },
+     "han_kho": "顴骨"
+    },
+    {
+     "id": "ha_phu_p",
+     "vt": [
+      0.2517,
+      0.731
+     ],
+     "han": "頤骨下府",
+     "am": "Di cốt hạ phủ",
+     "ten": "Xương hàm phải (kho dưới)",
+     "y": "Hai bên hàm là «kho dưới» trong lục phủ. Đầy đặn, cân nhau thì sách xem là về sau có của để dành.",
+     "nhom": "luc_phu",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     },
+     "han_kho": "頤骨"
+    },
+    {
+     "id": "ha_phu_t",
+     "vt": [
+      0.685,
+      0.7288
+     ],
+     "han": "頤骨下府",
+     "am": "Di cốt hạ phủ",
+     "ten": "Xương hàm trái (kho dưới)",
+     "y": "«Kho dưới» bên trái. Hàm đầy, không hóp thì sách xem là hậu vận có chỗ dựa.",
+     "nhom": "luc_phu",
+     "lien_ket": {
+      "loai": "bo_vi",
+      "ma": "ham"
+     },
+     "han_kho": "頤骨"
+    }
+   ]
+  }
+ ]
+}

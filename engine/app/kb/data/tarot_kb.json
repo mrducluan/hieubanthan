@@ -1,11 +1,11 @@
 {
- "_nguon": "Kho tri thức Tarot (TR-1) — ban biên tập Hiểu Bản Thân viết lại từ các sách phạm vi công cộng (Waite 1910, Book T, Mathers 1888, Papus 1889) và hình bài Marseille Conver 1760; Thoth (Crowley 1944), B.O.T.A. (Case 1947), Jodorowsky (2004) chỉ tóm ý, không chép. Nháp, chờ chuyên gia duyệt (can_doi_chieu). Không điểm số, không dự báo ngày, không bán vật phẩm.",
- "source": "Waite 1910 · Book T (Golden Dawn) · Marseille Conver 1760 · Thoth, B.O.T.A. (tóm ý)",
+ "_nguon": "Kho tri thức Tarot (TR-1) — ban biên tập Hiểu Bản Thân viết lại từ các sách phạm vi công cộng (Waite 1910, Book T, Mathers 1888, Papus 1889 — bản dịch Anh 1892, Case 1920, Ouspensky 1913) và hình bài Marseille Conver 1760; Thoth (Crowley 1944), B.O.T.A. (Case 1947), Jodorowsky (2004) chỉ tóm ý, không chép. Nháp, chờ chuyên gia duyệt (can_doi_chieu). Không điểm số, không dự báo ngày, không bán vật phẩm.",
+ "source": "Waite 1910 · Book T (Golden Dawn) · Mathers 1888 · Papus 1892 · Case 1920 · Ouspensky 1913 · Marseille Conver 1760 · Thoth, B.O.T.A. 1947 (tóm ý)",
  "source_id": "waite_1910",
  "school_id": "tarot_tong_hop",
  "trang_thai": "nhap_ai",
  "can_doi_chieu": true,
- "luu_y": "Hướng nhìn nhân vật đọc theo bản Marseille Conver — một số lá các bản in khác nhau; decan theo Book T với mốc ngày phổ biến (lệch ±1 ngày tuỳ năm). Lớp Waite, Book T và Mathers 1888 đã đối chiếu nguyên văn (xem doi_chieu, test test_tarot_nguon.py); lớp Marseille, Thoth (Crowley), B.O.T.A. vẫn là tóm ý chờ đối chiếu.",
+ "luu_y": "Hướng nhìn nhân vật đọc theo bản Marseille Conver — một số lá các bản in khác nhau; decan theo Book T với mốc ngày phổ biến (lệch ±1 ngày tuỳ năm). Câu trích Waite, Book T, Mathers 1888, Papus 1892, Case 1920, Ouspensky 1913 đã đối chiếu nguyên văn (xem doi_chieu, test test_tarot_nguon.py). Lời lớp Marseille và B.O.T.A. vẫn là tóm ý của ban biên tập: lớp Marseille đã soát với Mathers + Papus (22 lá sửa cho khớp), lớp B.O.T.A. của 22 ẩn chính đã soát với Case 1920 (2 lá sửa); lớp B.O.T.A. của 56 ẩn phụ và lớp Thoth (Crowley) chưa có nguyên văn đối chiếu.",
  "nguon": {
   "waite_1910": "The Pictorial Key to the Tarot (A. E. Waite, 1910)",
   "book_t": "Book T — The Tarot (Golden Dawn, khoảng 1888–1896)",
@@ -15,7 +15,10 @@
   "case_1947": "The Tarot: A Key to the Wisdom of the Ages (Paul Foster Case, 1947 — chỉ tóm ý)",
   "tdm_conver": "Tarot de Marseille, bản Nicolas Conver 1760 (hình bài phạm vi công cộng)",
   "jodorowsky_2004": "La Voie du Tarot (Jodorowsky & Costa, 2004 — chỉ tóm ý, không chép)",
-  "dan_gian_tarot": "cách đọc phổ biến trong cộng đồng tarot (truyền khẩu)"
+  "dan_gian_tarot": "cách đọc phổ biến trong cộng đồng tarot (truyền khẩu)",
+  "papus_1892": "The Tarot of the Bohemians (Papus, bản dịch Anh A. P. Morton, 1892)",
+  "case_1920": "An Introduction to the Study of the Tarot (Paul Foster Case, 1920)",
+  "ouspensky_1913": "The Symbolism of the Tarot (P. D. Ouspensky, bản dịch Anh A. L. Pogossky, 1913)"
  },
  "truong_phai": {
   "rws": {
@@ -850,7 +853,7 @@
     },
     "tdm": {
      "ten": "Le Mat",
-     "loi": "Lá không số, kẻ lang thang đi từ trái sang phải với con vật cắn gót — lực để đi tiếp, chưa có chỗ đến; việc: đi một bước thật, không cần kế hoạch hoàn chỉnh."
+     "loi": "Le Mat, lá không số: kẻ lang thang đi từ trái sang phải, con vật cắn gót mà không để ý — Papus đọc là việc làm thiếu cân nhắc, Mathers đọc là dại khờ, chao đảo; việc: trước khi bước tiếp, dừng lại xem mình đang đi về đâu."
     },
     "bota": {
      "loi": "Hình để tự hỏi: tôi có dám không biết không? Nếp nghĩ cần luyện: tin vào bước kế tiếp thay vì đòi thấy cả con đường."
@@ -871,6 +874,26 @@
      "nguyen_van_nguoc": "Hesitation, Instability, Trouble arising herefrom",
      "nghia": "Mathers: khờ, chuộc lỗi, dao động; ngược: do dự, bất ổn và rắc rối từ đó.",
      "bieu_tuong": "It signifies Folly, Expiation."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Inconsiderate Actions. Madness.",
+     "nghia": "Papus (nghĩa bói): việc làm thiếu cân nhắc, bốc đồng."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "This is an image of the state to which unresisted passion will reduce a man.",
+     "nghia": "Papus: hình ảnh của người để cơn ham muốn dắt đi mà không cưỡng lại."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "It always faces unknown possibilities of self-expression transcending any height it may have reached at a given time; hence the Fool faces west, toward a peak above and beyond his present station.",
+     "nghia": "Case: Chàng Khờ luôn quay mặt về điều chưa biết, hướng tới một đỉnh cao hơn chỗ đang đứng."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "The symbols have not lost their power, they retain it in themselves.",
+     "nghia": "Ouspensky: bốn biểu tượng trong tay nải của Chàng Khờ không mất sức, dù anh đã quên cách dùng."
     }
    ],
    "linh_vuc_nguoc": {
@@ -973,6 +996,26 @@
      "nguyen_van_nguoc": "Will applied to evil ends, Weakness of Will, Cunning, Knavishness",
      "nghia": "Mathers: ý chí, sức mạnh ý chí, khéo tay; ngược: ý chí dùng vào việc xấu, yếu ý chí, ranh mãnh.",
      "bieu_tuong": "He symbolises Will."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Male Inquirer.",
+     "nghia": "Papus (nghĩa bói): lá chỉ chính người hỏi, nếu là nam."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The Juggler holds the wand of the Mage in the left hand, which he raises, and the four great symbols of the Tarot are placed before him.",
+     "nghia": "Papus: người làm trò giơ cây gậy, bốn vật của bộ bài bày sẵn trước mặt."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "House: abode; location; concentration; specialization.",
+     "nghia": "Case: chữ Beth nghĩa là ngôi nhà — chỗ ở, vị trí, sự tập trung, làm chuyên một việc."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "With his hands he unites heaven and earth, and the four elements that form the world are controlled by him.",
+     "nghia": "Ouspensky: bằng hai tay, ông nối trời với đất; bốn nguyên tố làm nên thế giới nằm trong tay ông."
     }
    ],
    "linh_vuc_nguoc": {
@@ -1075,6 +1118,26 @@
      "nguyen_van_nguoc": "Conceit, Ignorance, Unskilfulness, Superficial Knowledge",
      "nghia": "Mathers: khoa học, trí tuệ, tri thức, học vấn; ngược: tự phụ, thiếu hiểu biết, vụng, biết hời hợt.",
      "bieu_tuong": "She represents Science, Wisdom, or Knowledge."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Female Inquirer.",
+     "nghia": "Papus (nghĩa bói): lá chỉ chính người hỏi, nếu là nữ."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "This is the picture of Isis, of Nature, whose veil must not be raised before the profane.",
+     "nghia": "Papus: hình nữ thần Isis, thiên nhiên còn che màn — điều chưa nên vén vội."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "He is the objective aspect of consciousness, the Cognizer of the universe and its laws; she is the subjective aspect, reflecting what he perceives, and recording it upon the scroll of the Memory of Nature.",
+     "nghia": "Case: Pháp Sư là phần ý thức nhìn ra ngoài; Nữ Tư Tế là phần bên trong, soi lại và ghi mọi điều vào cuộn ký ức."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "Look only on that which is invisible, and remember that in thee thyself, is the Temple and the gate to it and the mystery, and the initiation.",
+     "nghia": "Ouspensky: hãy nhìn vào điều mắt không thấy; ngôi đền, cánh cổng và điều bí ẩn đều ở trong chính mình."
     }
    ],
    "linh_vuc_nguoc": {
@@ -1177,6 +1240,26 @@
      "nguyen_van_nguoc": "Inaction, Frittering away of power, Want of Concentration Vacillation",
      "nghia": "Mathers: hành động, kế hoạch, khởi sự, chủ động; ngược: không làm, phí sức, thiếu tập trung, do dự.",
      "bieu_tuong": "She is the Symbol of Action, the result of the union of Science and Will."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Action. Initiative.",
+     "nghia": "Papus (nghĩa bói): hành động, chủ động bắt tay vào việc."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "This symbol would therefore signify ideas of generation, of embodiment in all the worlds.",
+     "nghia": "Papus: lá của sự sinh thành, của ý thành hình."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "Door, or womb: passage; transition; conception; development.",
+     "nghia": "Case: chữ Daleth nghĩa là cánh cửa, lòng mẹ — lối đi qua, sự chuyển tiếp, thai nghén và lớn lên."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "All around, beneath the sweet smile of the Empress, flowers and buds opened their dewy, green leaves.",
+     "nghia": "Ouspensky: quanh nụ cười của Hoàng Hậu, hoa và chồi đều mở lá."
     }
    ],
    "linh_vuc_nguoc": {
@@ -1279,6 +1362,26 @@
      "nguyen_van_nguoc": "Stoppage, Check, Immature, Unripe",
      "nghia": "Mathers: thành hình, hiệu quả, phát triển; ngược: ngưng trệ, bị chặn, non, chưa chín.",
      "bieu_tuong": "He represents Realisation."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Will.",
+     "nghia": "Papus (nghĩa bói): ý chí."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The position upon the cubic stone indicates realization in all the worlds.",
+     "nghia": "Papus: người ngồi trên khối vuông — điều đã định thành việc thật."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "Window: admits light and air; gives outlook. Sight: vision, contemplation, discernment.",
+     "nghia": "Case: chữ He nghĩa là cửa sổ — đón ánh sáng, cho tầm nhìn; gắn với việc nhìn, chiêm ngẫm, phân định."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "\"I am The Great Law,\" the Emperor said.",
+     "nghia": "Ouspensky: Hoàng Đế nói: 'Ta là Luật Lớn.'"
     }
    ],
    "linh_vuc_nguoc": {
@@ -1381,6 +1484,26 @@
      "nguyen_van_nguoc": "Over-kindness, weakness, Foolish exercise of generosity",
      "nghia": "Mathers: lòng nhân, làm ơn, tử tế, tốt lành; ngược: quá tốt bụng, yếu, rộng rãi khờ khạo.",
      "bieu_tuong": "He is the symbol of Mercy and Beneficence."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Inspiration.",
+     "nghia": "Papus (nghĩa bói): cảm hứng, điều được gợi cho."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The same idea of Esoterism, of secret Instruction, reappears; but the Tuition is now practical and oral, it no longer requires a book (third idea).",
+     "nghia": "Papus: vẫn là lời dạy kín, nhưng nay là dạy trực tiếp bằng lời, không cần sách."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "Hearing: unites man to man by speech, and man to Spirit by the Word of the Inner Voice.",
+     "nghia": "Case: việc nghe nối người với người qua lời nói, và nối người với tiếng nói bên trong."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "Look for the truth in yourself, not without yourself.",
+     "nghia": "Ouspensky: hãy tìm sự thật trong chính mình, đừng tìm bên ngoài."
     }
    ],
    "linh_vuc_nguoc": {
@@ -1483,6 +1606,26 @@
      "nguyen_van_nguoc": "Unwise Plans, Failure when put to the test",
      "nghia": "Mathers: sắp xếp khôn ngoan, thử thách vượt qua; ngược: kế hoạch dại, thất bại khi bị thử.",
      "bieu_tuong": "It is usually considered to mean Proof or Trial; but I am inclined to suggest Wise Disposition as its signification."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Love.",
+     "nghia": "Papus (nghĩa bói): tình yêu."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "In short, this hieroglyphic expresses the struggle between the passions and conscience, the antagonism of ideas.",
+     "nghia": "Papus: lá của sự giằng co giữa ham muốn và lương tâm."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "Smell: keen perception, sagacity, discrimination.",
+     "nghia": "Case: khứu giác — nhận biết tinh, sắc sảo, biết phân biệt."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "But Love is not a fall, it is a soaring above an abyss.",
+     "nghia": "Ouspensky: tình yêu không phải cú ngã, mà là bay lên trên vực."
     }
    ],
    "linh_vuc_nguoc": {
@@ -1585,6 +1728,26 @@
      "nguyen_van_nguoc": "Overthrown, Conquered by Obstacles at the last moment",
      "nghia": "Mathers: khải hoàn, thắng, vượt trở ngại; ngược: bị lật đổ, thua trở ngại ở phút cuối.",
      "bieu_tuong": "It represents Triumph, and Victory of Justice and Judgment."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Triumph. Providential Protection.",
+     "nghia": "Papus (nghĩa bói): chiến thắng, được che chở."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The Zain expresses victory in all the worlds.",
+     "nghia": "Papus: chữ của lá này nghĩa là thắng ở mọi mặt."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "Speech: mastery of language is mastery of thought; the practical occultist devotes much labor to the field of speech.",
+     "nghia": "Case: lời nói — làm chủ lời là làm chủ ý nghĩ."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "We see here, however, the wish to achieve, rather than achievement itself.",
+     "nghia": "Ouspensky: ở đây ta thấy lòng muốn đạt tới, chứ chưa phải điều đã đạt."
     }
    ],
    "linh_vuc_nguoc": {
@@ -1687,6 +1850,26 @@
      "nguyen_van_nguoc": "Abuse of Power, Overbearingness, Want of Fortitude",
      "nghia": "Mathers (lá số 11): quyền lực, sức mạnh, nghị lực; ngược: lạm quyền, lấn át, thiếu nghị lực.",
      "bieu_tuong": "She represents Strength."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Strength. Fortitude.",
+     "nghia": "Papus (nghĩa bói): sức mạnh, lòng vững."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "It is, in fact, the image of the power given by the sacred science (2nd arcanum) when justly applied (8).",
+     "nghia": "Papus: sức mạnh có được khi hiểu biết được dùng cho đúng."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "Strength, then, symbolizes control of the Astral Light by Understanding",
+     "nghia": "Case: lá Sức Mạnh là sự hiểu biết dẫn dắt được sức sống trong mình."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "Love alone can conquer wrath.",
+     "nghia": "Ouspensky: chỉ tình thương mới thắng được cơn giận."
     }
    ],
    "linh_vuc_nguoc": {
@@ -1789,6 +1972,26 @@
      "nguyen_van_nguoc": "Over-prudence, Timorousness, Fear",
      "nghia": "Mathers: thận trọng, cẩn trọng, cân nhắc; ngược: thận trọng quá, nhút nhát, sợ.",
      "bieu_tuong": "He is Prudence."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Prudence.",
+     "nghia": "Papus (nghĩa bói): thận trọng."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Experience won in the labour of life has rendered him a prudent old man, and prudence united to wisdom will safely lead him to the higher level, which he is anxious to attain (12th card).",
+     "nghia": "Papus: trải đời làm người ta cẩn trọng; cẩn trọng đi cùng hiểu biết thì lên được bậc cao hơn."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "The Hermit lives alone, isolated; and the picture shows him \"above all,\" on a snowy mountain-peak.",
+     "nghia": "Case: Ẩn Sĩ sống một mình, đứng trên tất cả, trên đỉnh núi tuyết."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "This lantern lights up the past, the present and the future for the Hermit, and opens the souls of people and the most intimate recesses of their hearts.",
+     "nghia": "Ouspensky: ngọn đèn soi quá khứ, hiện tại và tương lai cho Ẩn Sĩ, và mở ra chỗ sâu kín trong lòng người."
     }
    ],
    "linh_vuc_nguoc": {
@@ -1891,6 +2094,26 @@
      "nguyen_van_nguoc": "Ill-Fortune, Failure, Unexpected Ill-Luck",
      "nghia": "Mathers: may mắn, thành công, vận may bất ngờ; ngược: không may, thất bại, rủi bất ngờ.",
      "bieu_tuong": "It symbolises Fortune, good or bad."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Fortune. Destiny.",
+     "nghia": "Papus (nghĩa bói): vận may, vòng xoay của đời."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The second idea is expressed by the wheel, a line without beginning or end, the symbol of eternity.",
+     "nghia": "Papus: bánh xe là đường không đầu không cuối."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "It remains unmoved while the wheel turns, and symbolizes liberated humanity.",
+     "nghia": "Case: con nhân sư ngồi yên khi bánh xe quay, là hình ảnh con người đã tự do."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "All go, all return — the wheel of life ever turns.",
+     "nghia": "Ouspensky: mọi thứ đi rồi mọi thứ trở lại — bánh xe của đời cứ quay."
     }
    ],
    "linh_vuc_nguoc": {
@@ -1993,6 +2216,26 @@
      "nguyen_van_nguoc": "Bigotry, Want of Balance, Abuse of Justice, Over-severity, Inequality, Bias",
      "nghia": "Mathers (lá số 8, Themis): cân bằng, công bằng, công lý; ngược: cố chấp, mất cân bằng, quá khắt khe, thiên vị.",
      "bieu_tuong": "She symbolises Equilibrium and Justice."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Justice.",
+     "nghia": "Papus (nghĩa bói): công bằng."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The ideas expressed by this symbol are of Equilibrium in all its forms.",
+     "nghia": "Papus: lá của sự cân bằng ở mọi dạng."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "Work: action; Karma.",
+     "nghia": "Case: chữ Lamed gắn với công việc — hành động và điều hành động mang về."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "This sword is always raised to guard justice, and nothing can escape it.",
+     "nghia": "Ouspensky: thanh kiếm luôn giơ lên để giữ công bằng, không gì thoát khỏi nó."
     }
    ],
    "linh_vuc_nguoc": {
@@ -2095,6 +2338,26 @@
      "nguyen_van_nguoc": "Selfishness, Unbound, Partial sacrifice",
      "nghia": "Mathers: tự hy sinh, tận tụy, bị buộc; ngược: ích kỷ, không ràng buộc, hy sinh nửa vời.",
      "bieu_tuong": "He symbolises Sacrifice."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Trials. Sacrifice.",
+     "nghia": "Papus (nghĩa bói): thử thách, hy sinh."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A man hanging by one foot to a gibbet, resting upon two trees, each bearing six branches, which have been cut off.",
+     "nghia": "Papus: người treo một chân trên xà gác giữa hai thân cây đã chặt cành."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "the first mirror; reproduction; reflected life.",
+     "nghia": "Case: chữ Mem nghĩa là nước — tấm gương đầu tiên, sự sống được phản chiếu."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "And now he has found Truth and knows himself.",
+     "nghia": "Ouspensky: giờ người ấy đã tìm thấy Sự thật và biết chính mình."
     }
    ],
    "linh_vuc_nguoc": {
@@ -2197,6 +2460,26 @@
      "nguyen_van_nguoc": "Death just escaped, Partial change, Alteration for the better",
      "nghia": "Mathers: kết thúc, đổi thay, biến hình, đổi theo chiều xấu; ngược: vừa thoát hiểm, đổi một phần, đổi theo chiều tốt.",
      "bieu_tuong": "He signifies Transformation, or Change."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Death.",
+     "nghia": "Papus (nghĩa bói): một sự kết thúc."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The ideas expressed by this arcanum are those of destruction preceding or following regeneration.",
+     "nghia": "Papus: cái cũ bị dọn đi trước hoặc sau khi cái mới sinh ra."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "Motion: all motion is change.",
+     "nghia": "Case: chuyển động — mọi chuyển động đều là thay đổi."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "I understood that it rises while sinking and sinks while rising, and that life, in coming to birth, dies, and in dying, comes to birth.",
+     "nghia": "Ouspensky: mặt trời vừa lặn vừa mọc; sự sống lúc sinh ra đã đang khép lại, và lúc khép lại là đang sinh ra."
     }
    ],
    "linh_vuc_nguoc": {
@@ -2299,6 +2582,26 @@
      "nguyen_van_nguoc": "Ill-advised combinations, Disunion, Clashing interests, &c.",
      "nghia": "Mathers: kết hợp, hợp nhất, hoà vào nhau; ngược: kết hợp sai, chia rẽ, lợi ích va nhau.",
      "bieu_tuong": "She represents Combination."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Temperance. Economy.",
+     "nghia": "Papus (nghĩa bói): điều độ, tiết kiệm."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "This essence passes from one vase to the other without one drop being spilt.",
+     "nghia": "Papus: nước rót từ bình này sang bình kia không rơi một giọt."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "to indicate the principal function of the objective mind, which is the testing of ideas, received from within, by putting them to work in the outer plane.",
+     "nghia": "Case: việc chính của phần ý thức hướng ngoại là đem ý nhận được ở bên trong ra thử bằng việc làm."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "The rainbow stream between the cups is the present.",
+     "nghia": "Ouspensky: một chiếc cốc là quá khứ, chiếc kia là tương lai; dòng cầu vồng chảy giữa hai cốc là hiện tại."
     }
    ],
    "linh_vuc_nguoc": {
@@ -2401,6 +2704,26 @@
      "nguyen_van_nguoc": "Fatality for Evil",
      "nghia": "Mathers: điều như đã định sẵn theo chiều tốt; ngược: theo chiều xấu.",
      "bieu_tuong": "He is the image of Fate or Fatality, good or evil."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Immense Force. Illness.",
+     "nghia": "Papus (nghĩa bói): sức mạnh rất lớn; cũng là lúc ốm mệt."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "He stands upon a cube placed upon a sphere, to indicate the domination of Matter (the cube) over the Spirit (the Sphere).",
+     "nghia": "Papus: khối vuông đè lên quả cầu — vật chất đang lấn át tinh thần."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "Eye: the instrument of vision; orb; circle; limitation; bondage; appearances, Avidya.",
+     "nghia": "Case: chữ Ayin nghĩa là con mắt — cái nhìn, vòng giới hạn, sự trói buộc, vẻ bề ngoài."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "In order to see me, one must be able to see unfairly, incorrectly and narrowly.",
+     "nghia": "Ouspensky: muốn thấy Ác Quỷ, người ta phải nhìn một cách thiên lệch, sai và hẹp."
     }
    ],
    "linh_vuc_nguoc": {
@@ -2482,7 +2805,7 @@
     },
     "tdm": {
      "ten": "La Maison Dieu",
-     "loi": "La Maison Dieu, lá XVI: tháp nở hoa trên đỉnh, hai người rơi nhẹ như nhảy, hạt màu rải khắp nơi — Marseille đọc là mở tung, giải toả; việc: ra khỏi cái vỏ đang bó, bắt đầu bằng một lời nói thật."
+     "loi": "La Maison Dieu, lá XVI: sét đánh bật đỉnh tháp, hai người rơi xuống — Mathers và Papus đều đọc là đổ vỡ, mất mát, điều dựng sai bị lật; việc: tìm chỗ đang nứt trong việc này và sửa nó trước, bắt đầu bằng một lời nói thật."
     },
     "bota": {
      "loi": "Thức tỉnh bằng một tia chớp — nếp nghĩ cần luyện: chuyện vỡ là thông tin, không phải bản án."
@@ -2503,6 +2826,26 @@
      "nguyen_van_nguoc": "These in a more or less partial degree",
      "nghia": "Mathers: đổ nát, đứt gãy, lật nhào, mất, phá sản; ngược: những điều ấy ở mức nhẹ hơn.",
      "bieu_tuong": "It shows Ruin, Disruption."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Ruin. Deception.",
+     "nghia": "Papus (nghĩa bói): đổ vỡ, bị lừa."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The 16th card represents the material fall of Adam.",
+     "nghia": "Papus: hình ảnh cú ngã xuống đời sống vật chất."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "It forever breaks down existing forms in order to make room for new ones.",
+     "nghia": "Case: tia chớp luôn phá hình thức cũ để lấy chỗ cho hình thức mới."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "It should serve as a reminder of the inner Temple and as a protection against the outer; it should be as a lighthouse, in a dangerous place where men have often been wrecked and where ships should not go.",
+     "nghia": "Ouspensky: ngọn tháp lẽ ra là lời nhắc về ngôi đền bên trong, như ngọn hải đăng đặt ở chỗ nguy hiểm."
     }
    ],
    "linh_vuc_nguoc": {
@@ -2605,6 +2948,26 @@
      "nguyen_van_nguoc": "Hopes not fulfilled, Expectations disappointed or fulfilled in a minor degree",
      "nghia": "Mathers: hy vọng, mong đợi, hứa hẹn sáng; ngược: hy vọng không thành, mong đợi thất vọng hoặc chỉ thành một phần.",
      "bieu_tuong": "She is the star of Hope."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Hope.",
+     "nghia": "Papus (nghĩa bói): hy vọng."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The courage to bear these trials will come from above (the stars).",
+     "nghia": "Papus: can đảm để qua thử thách đến từ trên cao, như ánh sao."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "a diving into the depths of the mind for ideas-a fishing for truth.",
+     "nghia": "Case: thiền là lặn sâu vào tâm trí để tìm ý, như đi câu sự thật."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "Learn to unite your imagination with Her Imagination and nothing will ever be impossible for you.",
+     "nghia": "Ouspensky: học cách nối trí tưởng tượng của mình với trí tưởng tượng của Thiên nhiên."
     }
    ],
    "linh_vuc_nguoc": {
@@ -2689,7 +3052,7 @@
      "loi": "La Lune, lá XVIII: hai chó tru dưới trăng, con tôm trong hồ, hai tháp xa — lực mờ, hướng vào trong; việc: không quyết, viết ra điều mình sợ."
     },
     "bota": {
-     "loi": "Nếp nghĩ cũ trỗi dậy dưới dạng sợ — nếp nghĩ cần luyện: gọi tên nỗi sợ để nó về đúng kích thước."
+     "loi": "Đường đi lên có đoạn dốc, đoạn chững — lúc thấy mình giậm chân là lúc nếp mới đang thành; nếp nghĩ cần luyện: đi tiếp qua đoạn chững, và ngủ đủ để thân kịp hồi."
     }
    },
    "viec": "Viết nỗi sợ lớn nhất về chuyện này thành một câu; bên cạnh ghi bằng chứng CÓ và KHÔNG. Chưa làm gì khác.",
@@ -2707,6 +3070,26 @@
      "nguyen_van_nguoc": "Fluctuation, slight Deceptions, Trifling Mistakes",
      "nghia": "Mathers: chạng vạng, lừa dối, sai lầm; ngược: dao động, lừa nhẹ, lỗi nhỏ.",
      "bieu_tuong": "It symbolises Twilight, Deception, and Error."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Hidden Enemies. Danger.",
+     "nghia": "Papus (nghĩa bói): kẻ đối nghịch giấu mặt, điều nguy hiểm chưa thấy rõ."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The light, the symbol of the soul, no longer reaches us directly; the material world is only lighted by reflection.",
+     "nghia": "Papus: ánh sáng không còn tới thẳng, chỉ còn là ánh phản chiếu."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "The Path rises from a pool, similar to those of Temperance and the Star; and as it passes over rolling country, it is a succession of ascents and descents, and not a straight up-grade.",
+     "nghia": "Case: con đường đi từ hồ nước qua vùng đồi nhấp nhô, hết lên lại xuống, không phải một dốc thẳng."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "Under her wavering light the shadows lived their own peculiar life.",
+     "nghia": "Ouspensky: dưới ánh trăng chập chờn, những cái bóng sống đời riêng lạ lùng của chúng."
     }
    ],
    "linh_vuc_nguoc": {
@@ -2791,7 +3174,7 @@
      "loi": "Le Soleil, lá XIX: hai đứa trẻ dưới mặt trời, bức tường thấp sau lưng — lực sáng, chia sẻ; việc: làm việc này cùng một người, công khai."
     },
     "bota": {
-     "loi": "Tỉnh thức và tái sinh — nếp nghĩ cần luyện: để mình được vui mà không phải xứng đáng trước."
+     "loi": "Ánh sáng thẳng và đều thay cho ánh trăng lúc tỏ lúc mờ; đứa trẻ ra khỏi bức tường là lúc bớt bị hoàn cảnh giữ chân — nếp nghĩ cần luyện: làm việc ở chỗ sáng, rõ, giản dị như một đứa trẻ."
     }
    },
    "viec": "Khoe (đúng nghĩa) một việc bạn vừa làm xong với một người — và cảm ơn một người đã giúp.",
@@ -2809,6 +3192,26 @@
      "nguyen_van_nguoc": "These in a minor degree",
      "nghia": "Mathers: hạnh phúc, hài lòng, vui; ngược: những điều ấy ở mức nhỏ hơn.",
      "bieu_tuong": "It signifies Earthly Happiness."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Material Happiness. Lucky Marriage.",
+     "nghia": "Papus (nghĩa bói): hạnh phúc vật chất, hôn nhân may mắn."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The sun sends down his rays upon them, and drops of gold escape from him and fall upon the ground. The spirit resumes its ascendancy.",
+     "nghia": "Papus: mặt trời rải vàng xuống hai đứa trẻ; tinh thần sáng trở lại."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "In contrast to it, the nineteenth Key shows the direct, steady radiance of the Sun.",
+     "nghia": "Case: khác với ánh trăng, lá này cho thấy ánh sáng thẳng và đều của mặt trời."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "I shut my eyes for a moment and when I opened them again I saw that each ray of the Sun is the sceptre of the Emperor and bears life.",
+     "nghia": "Ouspensky: mỗi tia nắng là một cây quyền trượng và mang theo sự sống."
     }
    ],
    "linh_vuc_nguoc": {
@@ -2911,6 +3314,26 @@
      "nguyen_van_nguoc": "Postponement of Result, Delay, Matter re-opened later",
      "nghia": "Mathers: đổi mới, kết quả, việc được định đoạt; ngược: kết quả bị hoãn, chậm, việc mở lại sau.",
      "bieu_tuong": "It signifies Renewal, Result."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Change of Position.",
+     "nghia": "Papus (nghĩa bói): đổi vị trí, đổi cảnh."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "How can the reawakening of nature under the influence of the Word be better expressed?",
+     "nghia": "Papus: mọi thứ thức dậy trở lại khi có tiếng gọi."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "The child is the regenerated personality, rising from the tomb of material existence.",
+     "nghia": "Case: đứa trẻ là con người đã đổi mới, đứng dậy từ nấm mồ của đời sống cũ."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "Then I understood the mystery of birth in death.",
+     "nghia": "Ouspensky: lúc ấy tôi hiểu điều bí ẩn của sự sinh ra nằm ngay trong sự kết thúc."
     }
    ],
    "linh_vuc_nguoc": {
@@ -3013,6 +3436,26 @@
      "nguyen_van_nguoc": "Evil Reward, or Recompense",
      "nghia": "Mathers (Vũ trụ): hoàn thành, phần thưởng tốt; ngược: phần thưởng xấu, hoặc trả giá.",
      "bieu_tuong": "It represents Completion, Reward."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Assured Success.",
+     "nghia": "Papus (nghĩa bói): thành công được bảo đảm."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "This symbol represents Macrocosm and Microcosm, that is to say, God and the Creation, or the Law of the Absolute.",
+     "nghia": "Papus: hình ảnh cái toàn thể — trời đất và con người trong một vòng."
+    },
+    {
+     "sach": "case_1920",
+     "nguyen_van": "Power and Servitude: service is the secret of power; he who would rule Nature must obey her laws.",
+     "nghia": "Case: phụng sự là bí quyết của quyền năng; muốn điều khiển tự nhiên thì phải theo luật của nó."
+    },
+    {
+     "sach": "ouspensky_1913",
+     "nguyen_van": "Understand that the world which thou knowest is only one of the aspects of the infinite world, and things and phenomena are merely hieroglyphics of deeper ideas.",
+     "nghia": "Ouspensky: thế giới ta biết chỉ là một mặt của thế giới vô tận; sự vật là chữ viết của những ý sâu hơn."
     }
    ],
    "linh_vuc_nguoc": {
@@ -3110,6 +3553,11 @@
      "nguyen_van": "Ace of Sceptres.--Birth, Commencement, Beginning, Origin, Source",
      "nguyen_van_nguoc": "Persecution, Pursuits Voilence, Vexation, Cruelty, Tyranny",
      "nghia": "Mathers: sinh ra, khởi đầu, nguồn gốc; ngược: bị truy đuổi, bạo lực, phiền nhiễu, tàn nhẫn, chuyên quyền."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Commencement of an Enterprise.",
+     "nghia": "Papus: một việc bắt đầu."
     }
    ],
    "linh_vuc_nguoc": {
@@ -3217,6 +3665,11 @@
      "nguyen_van": "Deuce of Sceptres.--Riches, Fortune, Opulence, Magnificence, Grandeur",
      "nguyen_van_nguoc": "Surprise, Astonishment, Event, Extraordinary Occurrence",
      "nghia": "Mathers: giàu có, may mắn, sung túc, huy hoàng; ngược: bất ngờ, kinh ngạc, biến cố lạ."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition to the commencement of the Enter prise. The Enterprise is commenced when an unexpected obstacle suddenly prevents its execution.",
+     "nghia": "Papus: việc vừa bắt đầu thì gặp trở ngại bất ngờ làm chững lại."
     }
    ],
    "linh_vuc_nguoc": {
@@ -3292,7 +3745,7 @@
     },
     "tdm": {
      "ten": "Trois de Bâton",
-     "loi": "Trois de Bâton: ba gậy, một đứng giữa hai chéo — bùng lên lần đầu; việc: nối với một người ở xa."
+     "loi": "Trois de Bâton: ba gậy, một đứng giữa hai chéo — Mathers đọc là việc làm ăn, buôn bán, thương lượng; Papus: nền của việc đã vững, cứ làm tiếp; việc: làm bước kế tiếp của việc đã có nền, không chần chừ thêm."
     },
     "bota": {
      "loi": "Nhìn thấy kết quả trước khi nó về — nếp nghĩ cần luyện: kiên nhẫn có hình."
@@ -3324,6 +3777,11 @@
      "nguyen_van": "Three of Sceptres.--Enterprise, Undertaking, Commerce, Trade, Negotiation",
      "nguyen_van_nguoc": "Hope, Desire, Attempt, Wish",
      "nghia": "Mathers: khởi nghiệp, kinh doanh, buôn bán, thương lượng; ngược: hy vọng, ước muốn, thử."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Realization of the commencement of the Enterprise. The basis of the work is now definitely established, and the undertaking can be fearlessly continued.",
+     "nghia": "Papus: bước đầu đã thành; nền của việc đã vững, cứ mạnh dạn làm tiếp."
     }
    ],
    "linh_vuc_nguoc": {
@@ -3431,6 +3889,11 @@
      "nguyen_van": "Four of Sceptres.--Society, Union, Association, Concord, Harmony",
      "nguyen_van_nguoc": "Prosperity, Success, Happiness, Advantage",
      "nghia": "Mathers: xã hội, kết hợp, hiệp hội, hoà thuận; ngược: thịnh vượng, thành công, hạnh phúc, lợi."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Obstacles to the Enterprise. Nothing can be accomplished without obstacles. We therefore now find them appearing, and must prepare ourselves to overcome them.",
+     "nghia": "Papus: trở ngại xuất hiện; việc nào cũng có lúc vướng, cần chuẩn bị để vượt."
     }
    ],
    "linh_vuc_nguoc": {
@@ -3538,6 +4001,11 @@
      "nguyen_van": "Five of Sceptres.--Gold, Opulence, Gain, Heritage, Riches, Fortune, Money",
      "nguyen_van_nguoc": "Legal proceedings, Judgment, Law, Lawyer, Tribunal",
      "nghia": "Mathers: vàng, sung túc, lợi, thừa kế, của cải, tiền; ngược: kiện tụng, phán xét, luật, luật sư, toà."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition to the obstacles. Victory after surmounting them.",
+     "nghia": "Papus: chống lại trở ngại và thắng sau khi vượt qua."
     }
    ],
    "linh_vuc_nguoc": {
@@ -3613,7 +4081,7 @@
     },
     "tdm": {
      "ten": "Six de Bâton",
-     "loi": "Six de Bâton: sáu gậy chéo cân đối, hoa ở giữa — hoà hợp đẹp; việc: nhận lời khen bằng 'cảm ơn', không giải thích."
+     "loi": "Six de Bâton: sáu gậy chéo cân đối, hoa ở giữa — Mathers đọc là điều còn đang mong, đang thử; Papus: việc dễ hụt giữa chừng; việc: kiểm lại chỗ yếu nhất của việc đang làm trước khi mừng."
     },
     "bota": {
      "loi": "Thắng là lúc dễ mất mình nhất — nếp nghĩ cần luyện: thắng xong, quay lại nhìn đồng đội."
@@ -3645,6 +4113,11 @@
      "nguyen_van": "Six of Sceptres.--Attempt, Hope, Desire, Wish, Expectation",
      "nguyen_van_nguoc": "Infidelity, Treachery, Disloyalty, Perfidy",
      "nghia": "Mathers: thử, hy vọng, ước muốn, mong đợi; ngược: bất trung, phản bội, bội tín."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Realization of the opposition. At last the obstacles succeed. Failure of the Enterprise in the midst of its execution.",
+     "nghia": "Papus: trở ngại thắng thế; việc hỏng giữa chừng."
     }
    ],
    "linh_vuc_nguoc": {
@@ -3720,7 +4193,7 @@
     },
     "tdm": {
      "ten": "Sept de Bâton",
-     "loi": "Sept de Bâton: sáu gậy chéo, một gậy đứng giữa — cá nhân giữa tập thể; việc: chọn một trận để giữ, bỏ các trận khác."
+     "loi": "Sept de Bâton: sáu gậy chéo, một gậy đứng giữa — Mathers đọc là phần thắng, có lời; Papus: việc sẽ thành; việc: dồn sức vào việc đang chạy tốt nhất cho tới khi xong."
     },
     "bota": {
      "loi": "Can đảm là chọn, không phải chống — nếp nghĩ cần luyện: đặt câu 'cái này có đáng không' trước khi đứng lên."
@@ -3752,6 +4225,11 @@
      "nguyen_van": "Seven of Sceptres.--Success, Gain, Advantage, Profit, Victory",
      "nguyen_van_nguoc": "Indecision, Doubt, Hesitation, Embarrassment, Anxiety",
      "nghia": "Mathers: thành công, lợi, thắng; ngược: thiếu quyết đoán, nghi ngờ, do dự, lúng túng, lo."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Certain success to the Enterprise.",
+     "nghia": "Papus: việc sẽ thành."
     }
    ],
    "linh_vuc_nguoc": {
@@ -3827,7 +4305,7 @@
     },
     "tdm": {
      "ten": "Huit de Bâton",
-     "loi": "Huit de Bâton: tám gậy chéo đều — nhịp lặp, có trật tự; việc: trả lời mọi tin tồn trong một buổi."
+     "loi": "Huit de Bâton: tám gậy chéo đều — Mathers đọc là hiểu biết, quan sát, định hướng; Papus: việc chỉ thành một phần; việc: quan sát kỹ thêm một lượt rồi mới chỉnh hướng."
     },
     "bota": {
      "loi": "Tốc độ của ý nghĩ — nếp nghĩ cần luyện: nhanh ở tay, chậm ở quyết."
@@ -3859,6 +4337,11 @@
      "nguyen_van": "Eight of Sceptres.--Understanding, Observation, Direction",
      "nguyen_van_nguoc": "Quarrels, Intestine disputes, Discord",
      "nghia": "Mathers: hiểu, quan sát, định hướng; ngược: cãi vã, tranh chấp nội bộ, bất hoà."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition to its success. The Enterprise will only partially succeed.",
+     "nghia": "Papus: thành công bị cản; việc chỉ thành một phần."
     }
    ],
    "linh_vuc_nguoc": {
@@ -3934,7 +4417,7 @@
     },
     "tdm": {
      "ten": "Neuf de Bâton",
-     "loi": "Neuf de Bâton: tám gậy chéo, một gậy đứng xuyên — gần trọn vòng; việc: hạ hàng rào với một người."
+     "loi": "Neuf de Bâton: tám gậy chéo, một gậy đứng xuyên — Mathers đọc là nền nếp, kỷ luật, sắp xếp khéo; Papus: thành quả được giữ tiếp; việc: giữ đúng lịch đã đặt thêm một tuần nữa."
     },
     "bota": {
      "loi": "Kiên trì không phải cứng — nếp nghĩ cần luyện: phân biệt cảnh giác và sợ."
@@ -3966,6 +4449,11 @@
      "nguyen_van": "Nine of Sceptres.--Order, Discipline, Good Arrangement, Disposition",
      "nguyen_van_nguoc": "Obstacles, Crosses, Delay, Displeasure",
      "nghia": "Mathers: trật tự, kỷ luật, sắp xếp tốt; ngược: trở ngại, trái ý, chậm, bực."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Realization of success. Success is continued.",
+     "nghia": "Papus: thành công đã thật và còn tiếp tục."
     }
    ],
    "linh_vuc_nguoc": {
@@ -4041,7 +4529,7 @@
     },
     "tdm": {
      "ten": "Dix de Bâton",
-     "loi": "Dix de Bâton: tám gậy chéo, hai gậy đứng — quá đầy; việc: đặt hai cây gậy xuống."
+     "loi": "Dix de Bâton: tám gậy chéo, hai gậy đứng — Mathers đọc là chữ tín, sự bảo đảm; Papus: việc điều hành còn chưa ngã ngũ; việc: nói rõ ai chịu trách nhiệm phần nào."
     },
     "bota": {
      "loi": "Trách nhiệm chọn lọc — nếp nghĩ cần luyện: hỏi 'việc này có phải của tôi?' trước khi nhận."
@@ -4073,6 +4561,11 @@
      "nguyen_van": "Ten of Sceptres.--Confidence, Security, Honour, Good Faith",
      "nguyen_van_nguoc": "Treachery, Subterfuge, Duplicity, Bar",
      "nghia": "Mathers: tin cậy, an toàn, danh dự, thiện chí; ngược: phản bội, mưu mẹo, hai mặt."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Uncertainty in the management of the Enterprise.",
+     "nghia": "Papus: việc điều hành còn bấp bênh, chưa ngã ngũ."
     }
    ],
    "linh_vuc_nguoc": {
@@ -4148,7 +4641,7 @@
     },
     "tdm": {
      "ten": "Valet de Bâton",
-     "loi": "Valet de Bâton: người hầu cầm gậy, nhìn sang phải — học việc, hướng tới; việc: thử một việc mới và ghi lại."
+     "loi": "Valet de Bâton: người hầu cầm gậy, nhìn sang phải — Mathers đọc là người lạ tử tế, tin vui; Papus: lời nhắn từ người thân; việc: trả lời một lời nhắn đang chờ bạn."
     },
     "bota": {
      "loi": "Tò mò là lửa chưa có hình — nếp nghĩ cần luyện: giữ tò mò nhưng chọn một hướng."
@@ -4177,6 +4670,11 @@
      "nguyen_van": "Knave of Sceptres.--A Good Stranger, Good News, Pleasure, Satisfaction",
      "nguyen_van_nguoc": "Ill News, Displeasure, Chagrin, Worry",
      "nghia": "Mathers: người lạ tốt, tin vui, niềm vui, hài lòng; ngược: tin xấu, bực, phiền, lo."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A dark child, a friend. Also represents a message from a near relation.",
+     "nghia": "Papus: đứa trẻ tóc sẫm, là bạn; cũng là lời nhắn từ người thân."
     }
    ],
    "linh_vuc_nguoc": {
@@ -4281,6 +4779,11 @@
      "nguyen_van": "Knight of Sceptres.--Departure, Separation, Disunion",
      "nguyen_van_nguoc": "Rupture, Discord, Quarrel",
      "nghia": "Mathers: ra đi, chia cách, chia rẽ; ngược: đứt gãy, bất hoà, cãi vã."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A dark young man, a friend.",
+     "nghia": "Papus: chàng trai tóc sẫm, là bạn."
     }
    ],
    "vung_book_t": {
@@ -4389,6 +4892,11 @@
      "nguyen_van": "Queen of Sceptres.--Woman living in the country, Lady of the Manor, Love of Money, Avarice, Usury",
      "nguyen_van_nguoc": "A good a virtuous Woman, but strict and economical, Obstacles, Resistance, Opposition",
      "nghia": "Mathers: người phụ nữ ở quê, bà chủ đất, yêu tiền, keo, cho vay lãi; ngược: người tốt, đức hạnh nhưng nghiêm và tiết kiệm; trở ngại, chống đối."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A dark woman, a friend. Represents a serious woman, a very good counsellor, often the mother of a family.",
+     "nghia": "Papus: người phụ nữ tóc sẫm, là bạn; nghiêm túc, khéo khuyên, thường là người mẹ trong nhà."
     }
    ],
    "vung_book_t": {
@@ -4497,6 +5005,11 @@
      "nguyen_van": "King of Sceptres.--Man living in the country, Country Gentleman, Knowledge, Education",
      "nguyen_van_nguoc": "A naturally good but severe man, Counsel, Advice, Deliberation",
      "nghia": "Mathers: người đàn ông ở quê, điền chủ, tri thức, học vấn; ngược: người tốt nhưng nghiêm, lời khuyên, cân nhắc."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The King of Sceptres symbolizes a dark man, a friend. He generally represents a married man, the father of a family.",
+     "nghia": "Papus: người đàn ông tóc sẫm, là bạn; thường là người đã có gia đình, làm cha."
     }
    ],
    "vung_book_t": {
@@ -4598,6 +5111,11 @@
      "nguyen_van": "Ace of Cups.--Feasting, Banquet, Good Cheer",
      "nguyen_van_nguoc": "Change, Novelty, Metamorphosis, Inconstancy",
      "nghia": "Mathers: tiệc tùng, yến tiệc, vui vẻ; ngược: đổi thay, điều mới, biến hình, thất thường."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Commencement of a love affair.",
+     "nghia": "Papus: một chuyện tình bắt đầu."
     }
    ],
    "linh_vuc_nguoc": {
@@ -4705,6 +5223,11 @@
      "nguyen_van": "Deuce of Cups.--Love, Attachment, Friendship, Sincerity, Affection",
      "nguyen_van_nguoc": "Crossed desires, Obstacles, Opposition, Hindrance",
      "nghia": "Mathers: tình yêu, gắn bó, tình bạn, chân thành; ngược: ước muốn trái ngược, trở ngại, chống đối."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition to this commencement. Unimportant obstacles raised by one of the lovers.",
+     "nghia": "Papus: chuyện tình vừa chớm đã vướng; trở ngại nhỏ do một trong hai người."
     }
    ],
    "linh_vuc_nguoc": {
@@ -4812,6 +5335,11 @@
      "nguyen_van": "Three of Cups.--Success, Triumph, Victory, Favourable issue",
      "nguyen_van_nguoc": "Expedition of business, Quickness, Celerity, Vigilance",
      "nghia": "Mathers: thành công, thắng, kết cục thuận; ngược: việc đi nhanh, mau lẹ, cảnh giác."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Realization of this commencement. The love is mutual.",
+     "nghia": "Papus: tình cảm thành; hai người cùng yêu."
     }
    ],
    "linh_vuc_nguoc": {
@@ -4919,6 +5447,11 @@
      "nguyen_van": "Four of Cups.--Ennui, Displeasure, Discontent, Dissatisfaction",
      "nguyen_van_nguoc": "New Acquaintance, Conjecture, Sign, Presentiment",
      "nghia": "Mathers: chán, bực, bất mãn; ngược: người quen mới, phỏng đoán, dấu hiệu, linh cảm."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Serious obstacles to the love. They arise from other persons, not from the lovers.",
+     "nghia": "Papus: trở ngại lớn cho chuyện tình, đến từ người ngoài chứ không phải từ hai người."
     }
    ],
    "linh_vuc_nguoc": {
@@ -4994,7 +5527,7 @@
     },
     "tdm": {
      "ten": "Cinq de Coupe",
-     "loi": "Cinq de Coupe: bốn cốc, một cốc xen giữa — xáo trộn; việc: quay người lại nhìn hai cốc còn."
+     "loi": "Cinq de Coupe: bốn cốc, một cốc xen giữa — Mathers đọc là sự kết hợp, gắn bó, của thừa hưởng; Papus: thắng trở ngại sau một phen giằng co; việc: nói thẳng với người trong cuộc điều đang vướng rồi cùng gỡ."
     },
     "bota": {
      "loi": "Tiếc là tình thương chưa có chỗ đi — nếp nghĩ cần luyện: đặt tên cái mất, rồi đếm cái còn."
@@ -5026,6 +5559,11 @@
      "nguyen_van": "Five of Cups.--Union, Junction, Marriage, Inheritance",
      "nguyen_van_nguoc": "Arrival, Return, News, Surprise, False projects",
      "nghia": "Mathers: kết hợp, hôn nhân, thừa kế; ngược: tới nơi, trở về, tin tức, bất ngờ, dự án giả."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition to the obstacles. Victory over the obstacles after a struggle.",
+     "nghia": "Papus: chống lại trở ngại; thắng sau một phen giằng co."
     }
    ],
    "linh_vuc_nguoc": {
@@ -5133,6 +5671,11 @@
      "nguyen_van": "Six of Cups.--The Past, passed by, Faded, Vanished, Disappeared",
      "nguyen_van_nguoc": "The Future, that which is to come, Shortly, Soon",
      "nghia": "Mathers: quá khứ, đã qua, phai, biến mất; ngược: tương lai, điều sắp tới, sớm thôi."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "The obstacles triumph. Love destroyed in the midst of happiness. Widowhood.",
+     "nghia": "Papus: trở ngại thắng thế; tình tan giữa lúc hạnh phúc, cảnh goá bụa."
     }
    ],
    "linh_vuc_nguoc": {
@@ -5208,7 +5751,7 @@
     },
     "tdm": {
      "ten": "Sept de Coupe",
-     "loi": "Sept de Coupe: sáu cốc quanh một — một mình giữa nhiều; việc: chọn một cốc, bỏ sáu."
+     "loi": "Sept de Coupe: sáu cốc quanh một — Mathers đọc là một ý, một tình cảm, một dự định đang thành hình; Papus: đôi lứa thành; việc: viết dự định ấy ra giấy và chọn bước đầu."
     },
     "bota": {
      "loi": "Trí tưởng tượng cần tay — nếp nghĩ cần luyện: mơ rồi hỏi 'bước đầu là gì'."
@@ -5240,6 +5783,11 @@
      "nguyen_van": "Seven of Cups.--Idea, Sentiment, Reflection, Project",
      "nguyen_van_nguoc": "Plan, Design, Resolution, Decision",
      "nghia": "Mathers: ý tưởng, cảm nghĩ, suy ngẫm, dự án; ngược: kế hoạch, thiết kế, quyết tâm, quyết định."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Success assured to the lovers.",
+     "nghia": "Papus: đôi lứa sẽ thành."
     }
    ],
    "linh_vuc_nguoc": {
@@ -5315,7 +5863,7 @@
     },
     "tdm": {
      "ten": "Huit de Coupe",
-     "loi": "Huit de Coupe: tám cốc đều — nhịp đã đủ; việc: rời một thứ đã xong vai."
+     "loi": "Huit de Coupe: tám cốc đều — Mathers đọc là tình bạn, sự gắn bó, dịu dàng; Papus: tình cảm chỉ thành một phần; việc: làm một việc ân cần nhỏ cho người mình quý, không đòi đáp lại ngay."
     },
     "bota": {
      "loi": "Có những cái đủ phải bỏ mới lớn — nếp nghĩ cần luyện: biết lúc cái tốt đã hết vai."
@@ -5347,6 +5895,11 @@
      "nguyen_van": "Eight of Cups.--A fair Girl, Friendship, Attachment, Tenderness",
      "nguyen_van_nguoc": "Gaiety, Feasting, Joy, Pleasure",
      "nghia": "Mathers: cô gái sáng, tình bạn, gắn bó, dịu dàng; ngược: vui vẻ, tiệc tùng, niềm vui."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Partial failure of love. Love only partially succeeds.",
+     "nghia": "Papus: tình cảm hụt một phần; chỉ thành được nửa chừng."
     }
    ],
    "linh_vuc_nguoc": {
@@ -5454,6 +6007,11 @@
      "nguyen_van": "Nine of Cups.--Victory, Advantage, Success, Triumph, Difficulties surmounted",
      "nguyen_van_nguoc": "Faults, Errors, Mistakes, Imperfections",
      "nghia": "Mathers: thắng, lợi, thành công, vượt khó; ngược: lỗi, sai, thiếu sót."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Motherhood.",
+     "nghia": "Papus: làm mẹ."
     }
    ],
    "linh_vuc_nguoc": {
@@ -5561,6 +6119,11 @@
      "nguyen_van": "Ten of Cups.--The Town wherein one resides, Honour, Consideration, Esteem, Virtue, Glory, Reputation",
      "nguyen_van_nguoc": "Combat, Strife, Opposition, Differences, Dispute",
      "nghia": "Mathers: thị trấn nơi mình ở, danh dự, được trọng, đức hạnh, tiếng tốt; ngược: đấu đá, tranh chấp, bất đồng."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Uncertainty in the management of the love affair.",
+     "nghia": "Papus: chuyện tình còn bấp bênh, chưa rõ đi về đâu."
     }
    ],
    "linh_vuc_nguoc": {
@@ -5665,6 +6228,11 @@
      "nguyen_van": "Knave of Cups.--A fair Youth, Confidence, Probity, Discretion, Integrity",
      "nguyen_van_nguoc": "A Flatterer, Deception, Artifice",
      "nghia": "Mathers: thanh niên sáng, tin cậy, ngay thẳng, kín đáo; ngược: kẻ nịnh, lừa dối, mưu mẹo."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A fair child. A messenger. Birth.",
+     "nghia": "Papus: đứa trẻ tóc sáng; người đưa tin; một sự ra đời."
     }
    ],
    "linh_vuc_nguoc": {
@@ -5769,6 +6337,11 @@
      "nguyen_van": "Knight of Cups.--Arrival, Approach, Advance",
      "nguyen_van_nguoc": "Duplicity, Abuse of Confidence, Fraud, Cunning",
      "nghia": "Mathers: tới nơi, đến gần, tiến lên; ngược: hai mặt, lạm dụng lòng tin, gian lận."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A young fair man, a friend. The young man loved. The Lover.",
+     "nghia": "Papus: chàng trai tóc sáng, là bạn; người được yêu, người tình."
     }
    ],
    "vung_book_t": {
@@ -5877,6 +6450,11 @@
      "nguyen_van": "Queen of Cups.--A fair Woman, Success, Happiness, Advantage, Pleasure",
      "nguyen_van_nguoc": "A Woman in good position, but intermeddling, and to be distrusted; Success, but with some attendant trouble",
      "nghia": "Mathers: người phụ nữ sáng, thành công, hạnh phúc, lợi, vui; ngược: phụ nữ có vị thế nhưng hay xen vào, không đáng tin; thành công kèm rắc rối."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A fair woman, a friend. The woman loved. The Mistress.",
+     "nghia": "Papus: người phụ nữ tóc sáng, là bạn; người phụ nữ được yêu."
     }
    ],
    "vung_book_t": {
@@ -5985,6 +6563,11 @@
      "nguyen_van": "King of Cups.--A fair Man, Goodness, Kindness, Liberality, Generosity",
      "nguyen_van_nguoc": "A Man of good position, but shifty in his Dealings, Distrust, Doubt, Suspicion",
      "nghia": "Mathers: người đàn ông sáng, tốt lành, tử tế, hào phóng; ngược: người có vị thế nhưng lắt léo; nghi ngờ, không tin."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A fair man, a friend. This card also represents a barrister, judge, or ecclesiastic. It symbolizes a Bachelor.",
+     "nghia": "Papus: người đàn ông tóc sáng, là bạn; cũng là luật sư, thẩm phán hay người tu hành; người còn độc thân."
     }
    ],
    "vung_book_t": {
@@ -6086,6 +6669,11 @@
      "nguyen_van": "Ace of Swords.--Triumph, Fecundity, Fertility, Prosperity",
      "nguyen_van_nguoc": "Embarrassment, Foolish and Hopeless Love, Obstacle, Hindrance",
      "nghia": "Mathers: khải hoàn, sinh sôi, thịnh vượng; ngược: lúng túng, tình yêu dại và vô vọng, trở ngại."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Commencement of enmity.",
+     "nghia": "Papus: mối bất hoà bắt đầu."
     }
    ],
    "linh_vuc_nguoc": {
@@ -6161,7 +6749,7 @@
     },
     "tdm": {
      "ten": "Deux de Épée",
-     "loi": "Deux d'Épée: hai kiếm cong tạo ô, hoa ở giữa — hai lực cân; việc: đặt ngày sẽ chọn."
+     "loi": "Deux d'Épée: hai kiếm cong tạo ô, hoa ở giữa — Mathers đọc là tình bạn, sự vững vàng, can đảm; Papus: mối bất hoà không kéo dài; việc: chìa tay trước với người đang căng với mình."
     },
     "bota": {
      "loi": "Không chọn cũng là chọn — nếp nghĩ cần luyện: hỏi 'tôi cần biết thêm gì để chọn'."
@@ -6193,6 +6781,11 @@
      "nguyen_van": "Deuce of Swords.--Friendship, Valour, Firmness, Courage",
      "nguyen_van_nguoc": "False Friends, Treachery, Lies",
      "nghia": "Mathers: tình bạn, dũng cảm, vững vàng; ngược: bạn giả, phản bội, dối trá."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition to this commencement. The enmity does not last.",
+     "nghia": "Papus: bất hoà vừa chớm đã bị chặn; mối bất hoà không kéo dài."
     }
    ],
    "linh_vuc_nguoc": {
@@ -6300,6 +6893,11 @@
      "nguyen_van": "Three of Swords.--A Nun, Separation, Removal, Rupture, Quarrel",
      "nguyen_van_nguoc": "Error, Confusion, Misrule, Disorder",
      "nghia": "Mathers: nữ tu, chia cách, dời đi, đứt gãy, cãi vã; ngược: sai lầm, rối, lộn xộn."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Realization of the enmity. Hatred.",
+     "nghia": "Papus: bất hoà thành thật; lòng ghét."
     }
    ],
    "linh_vuc_nguoc": {
@@ -6407,6 +7005,11 @@
      "nguyen_van": "Four of Swords.--Solitude, Retreat, Abandonment, Solitary, Hermit",
      "nguyen_van_nguoc": "Economy, Precaution, Regulation of Expenditure",
      "nghia": "Mathers: cô độc, rút lui, bỏ lại, ẩn sĩ; ngược: tiết kiệm, đề phòng, chi tiêu có kỷ luật."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition to the hatred. Success against the enemy.",
+     "nghia": "Papus: chống lại lòng ghét; thắng được bên đối nghịch."
     }
    ],
    "linh_vuc_nguoc": {
@@ -6514,6 +7117,11 @@
      "nguyen_van": "Five of Swords.--Mourning, Sadness, Affliction",
      "nguyen_van_nguoc": "Losses Trouble (same signification, whether reversed or not.)",
      "nghia": "Mathers: tang, buồn, khổ; ngược: mất mát, rắc rối (xuôi ngược như nhau)."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition to this opposition. The enemy triumphs at the moment one fancies the victory is secured.",
+     "nghia": "Papus: thế đảo lại; bên đối nghịch thắng đúng lúc mình tưởng đã nắm phần thắng."
     }
    ],
    "linh_vuc_nguoc": {
@@ -6621,6 +7229,11 @@
      "nguyen_van": "Six of Swords.--Envoy, Messenger, Voyage, Travel",
      "nguyen_van_nguoc": "Declaration, Love proposed, Revelation, Surprise",
      "nghia": "Mathers: sứ giả, người đưa tin, chuyến đi; ngược: tuyên bố, tỏ tình, hé lộ, bất ngờ."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Equilibrium of the opposition. The enemy is rendered powerless at last.",
+     "nghia": "Papus: thế giằng co ngã ngũ; cuối cùng bên đối nghịch hết sức cản."
     }
    ],
    "linh_vuc_nguoc": {
@@ -6696,7 +7309,7 @@
     },
     "tdm": {
      "ten": "Sept de Épée",
-     "loi": "Sept d'Épée: sáu kiếm cong, một thẳng — xuyên trật tự; việc: nói thẳng một điều đang làm lén."
+     "loi": "Sept d'Épée: sáu kiếm cong, một thẳng — Mathers đọc là hy vọng, tin tưởng, dám thử; Papus: phía đối nghịch đang có lợi thế; việc: hỏi một lời khuyên tỉnh táo trước khi thử."
     },
     "bota": {
      "loi": "Lén là thiếu tin — nếp nghĩ cần luyện: hỏi 'nếu người kia biết thì sao'."
@@ -6728,6 +7341,11 @@
      "nguyen_van": "Seven of Swords.--Hope, Confidence, Desire, Attempt, Wish",
      "nguyen_van_nguoc": "Wise Advice, Good Counsel, Wisdom, Prudence, Circumspection",
      "nghia": "Mathers: hy vọng, tự tin, ước muốn, thử; ngược: lời khuyên khôn ngoan, cố vấn tốt, thận trọng."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Success assured to the enemy.",
+     "nghia": "Papus: bên đối nghịch nắm phần thắng."
     }
    ],
    "linh_vuc_nguoc": {
@@ -6803,7 +7421,7 @@
     },
     "tdm": {
      "ten": "Huit de Épée",
-     "loi": "Huit d'Épée: tám kiếm cong — nhịp khép; việc: bước ra khỏi vòng bằng một hành động nhỏ."
+     "loi": "Huit d'Épée: tám kiếm cong — Mathers đọc là lời chê trách, tiếng ra tiếng vào; Papus: phía đối nghịch chỉ thắng một phần; việc: tách lời chê có ích khỏi lời đồn, rồi sửa một điều."
     },
     "bota": {
      "loi": "Giới hạn là ý nghĩ — nếp nghĩ cần luyện: thử một bước trước khi kết luận 'không được'."
@@ -6835,6 +7453,11 @@
      "nguyen_van": "Eight of Swords.--Sickness, Calumny, Criticism, Blame",
      "nguyen_van_nguoc": "Treachery in the Past, Event, Accident, Remarkable Incident",
      "nghia": "Mathers: ốm, vu khống, chỉ trích, trách; ngược: phản bội trong quá khứ, biến cố, sự cố đáng nhớ."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Partial opposition to this success. The enemy only partially triumphs.",
+     "nghia": "Papus: phần thắng ấy bị cản bớt; bên đối nghịch chỉ thắng một phần."
     }
    ],
    "linh_vuc_nguoc": {
@@ -6910,7 +7533,7 @@
     },
     "tdm": {
      "ten": "Neuf de Épée",
-     "loi": "Neuf d'Épée: tám cong một thẳng — gần trọn, còn kẹt; việc: nói nỗi lo cho một người nghe."
+     "loi": "Neuf d'Épée: tám cong một thẳng — Mathers đọc là lương tâm, sự ngay thẳng; Papus: mối bất hoà còn kéo dài; việc: làm điều mình thấy đúng dù chưa ai ghi nhận."
     },
     "bota": {
      "loi": "Tâm trí ban đêm không đáng tin — nếp nghĩ cần luyện: hoãn mọi kết luận tới sáng."
@@ -6942,6 +7565,11 @@
      "nguyen_van": "Nine of Swords.--An Ecclesiastic, a Priest, Conscience. Probity, Good Faith, Integrity",
      "nguyen_van_nguoc": "Wise distrust, Suspicion, Fear, Doubt, Shady character",
      "nghia": "Mathers: tu sĩ, lương tâm, ngay thẳng, thiện chí; ngược: nghi ngờ có lý, sợ, không chắc, người mờ ám."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Certain duration of the hatred.",
+     "nghia": "Papus: lòng ghét còn kéo dài."
     }
    ],
    "linh_vuc_nguoc": {
@@ -7049,6 +7677,11 @@
      "nguyen_van": "Ten of Swords.--Tears, Affliction, Grief, Sorrow",
      "nguyen_van_nguoc": "Passing Success, Momentary Advantage",
      "nghia": "Mathers: nước mắt, khổ, buồn; ngược: thành công thoáng qua, lợi nhất thời."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Uncertainty in the enmity.",
+     "nghia": "Papus: mối bất hoà còn bấp bênh, chưa ngã ngũ."
     }
    ],
    "linh_vuc_nguoc": {
@@ -7153,6 +7786,11 @@
      "nguyen_van": "Knave of Swords.--A Spy, Overlooking, Authority",
      "nguyen_van_nguoc": "That which is unforeseen, Vigilance, Support",
      "nghia": "Mathers: kẻ do thám, giám sát, quyền; ngược: điều bất ngờ, cảnh giác, chỗ dựa."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A child, an enemy. Bad news. Delay.",
+     "nghia": "Papus: đứa trẻ ở phía đối nghịch; tin không vui; chậm trễ."
     }
    ],
    "linh_vuc_nguoc": {
@@ -7257,6 +7895,11 @@
      "nguyen_van": "Knight of Swords.--A Soldier, a man whose profession is arms, Skilfulness, Capacity, Address, Promptitude",
      "nguyen_van_nguoc": "A conceited fool, Ingenuousness, Simplicity",
      "nghia": "Mathers: người lính, nhà binh, khéo, có năng lực, nhanh nhẹn; ngược: kẻ tự phụ, ngây ngô, giản đơn."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A young, dark man, an enemy. He is also a spy.",
+     "nghia": "Papus: chàng trai tóc sẫm, ở phía đối nghịch; cũng là kẻ dò xét."
     }
    ],
    "vung_book_t": {
@@ -7365,6 +8008,11 @@
      "nguyen_van": "Queen of Swords.--Widowhood, Loss, Privation, Absence, Separation",
      "nguyen_van_nguoc": "A Bad Woman, ill-tempered and bigoted, Riches and Discord, Abundance together with Worry, Joy with Grief",
      "nghia": "Mathers: goá, mất, thiếu thốn, vắng, chia cách; ngược: người phụ nữ xấu tính, cố chấp; giàu mà bất hoà, vui lẫn buồn."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A dark wicked woman. The card also indicates her actions, gossip and calumnies.",
+     "nghia": "Papus: người phụ nữ tóc sẫm, ác ý; cũng là lời đồn và lời nói xấu."
     }
    ],
    "vung_book_t": {
@@ -7473,6 +8121,11 @@
      "nguyen_van": "King of Swords.--A Lawyer, a Man of Law, Power, Command, Superiority, Authority",
      "nguyen_van_nguoc": "A Wicked Man, Chagrin, Worry, Grief, Fear, Disturbance",
      "nghia": "Mathers: luật sư, người của luật, quyền lực, mệnh lệnh, uy quyền; ngược: người xấu, bực, lo, buồn, sợ, xáo trộn."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A dark, bad man. He is a soldier, a powerful enemy, who must be distrusted.",
+     "nghia": "Papus: người đàn ông tóc sẫm, không tốt; người lính, đối thủ mạnh, nên dè chừng."
     }
    ],
    "vung_book_t": {
@@ -7574,6 +8227,11 @@
      "nguyen_van": "Ace of Pentacles.--Perfect Contentment, Felicity, Prosperity, Triumph",
      "nguyen_van_nguoc": "Purse of Gold, Money, Gain, Help, Profit, Riches",
      "nghia": "Mathers: hài lòng trọn vẹn, hạnh phúc, thịnh vượng, khải hoàn; ngược: túi vàng, tiền, lợi, giúp đỡ, của cải."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Commencement of fortune. Inheritance. Gifts. Economy, etc., etc.",
+     "nghia": "Papus: của cải bắt đầu; thừa kế, quà tặng, tiết kiệm."
     }
    ],
    "linh_vuc_nguoc": {
@@ -7681,6 +8339,11 @@
      "nguyen_van": "Deuce of Pentacles.--Embarrassment, Worry, Difficulties",
      "nguyen_van_nguoc": "Letter, Missive, Epistle, Message",
      "nghia": "Mathers: lúng túng, lo, khó khăn; ngược: thư, tin nhắn, thông điệp."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition to this commencement. Difficulty in well establishing the first landmarks of good fortune.",
+     "nghia": "Papus: bước đầu gặp cản; khó đặt cho vững những mốc đầu của việc làm ăn."
     }
    ],
    "linh_vuc_nguoc": {
@@ -7756,7 +8419,7 @@
     },
     "tdm": {
      "ten": "Trois de Denier",
-     "loi": "Trois de Denier: ba đồng tam giác — mở ra, hợp tác; việc: bàn kế hoạch với hai người."
+     "loi": "Trois de Denier: ba đồng tam giác — Mathers đọc là được nâng lên, có vị thế; Papus: khoản lời nhỏ đầu tiên; việc: ghi nhận kết quả nhỏ đầu tiên và giữ phần ấy làm vốn."
     },
     "bota": {
      "loi": "Nghề là tinh thần đi qua tay — nếp nghĩ cần luyện: làm kỹ một việc nhỏ."
@@ -7788,6 +8451,11 @@
      "nguyen_van": "Three of Pentacles.--Nobility, Elevation, Dignity, Rank, Power",
      "nguyen_van_nguoc": "Children, Sons, Daughters, Youths, Commencement",
      "nghia": "Mathers: quý tộc, thăng tiến, phẩm giá, địa vị, quyền; ngược: con cái, người trẻ, khởi đầu."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Realization of this commencement of fortune. A small sum.",
+     "nghia": "Papus: bước đầu về tiền đã thành; một khoản nhỏ."
     }
    ],
    "linh_vuc_nguoc": {
@@ -7863,7 +8531,7 @@
     },
     "tdm": {
      "ten": "Quatre de Denier",
-     "loi": "Quatre de Denier: bốn đồng ô vuông, hoa giữa — ổn định, đóng; việc: buông một thứ đang ôm."
+     "loi": "Quatre de Denier: bốn đồng ô vuông, hoa giữa — Mathers đọc là niềm vui, sự hưởng thụ; Papus: tiền dễ hao; việc: cho mình một khoản vui có hạn mức đặt trước."
     },
     "bota": {
      "loi": "Giữ chặt là sợ — nếp nghĩ cần luyện: thử buông một ngón tay."
@@ -7895,6 +8563,11 @@
      "nguyen_van": "Four of Pentacles.--Pleasure, Gaiety, Enjoyment, Satisfaction",
      "nguyen_van_nguoc": "Obstacles, Hindrances",
      "nghia": "Mathers: niềm vui, vui vẻ, hưởng thụ, hài lòng; ngược: trở ngại, cản trở."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition of fortune. Loss of money.",
+     "nghia": "Papus: tiền của gặp cản; mất tiền."
     }
    ],
    "linh_vuc_nguoc": {
@@ -7970,7 +8643,7 @@
     },
     "tdm": {
      "ten": "Cinq de Denier",
-     "loi": "Cinq de Denier: bốn đồng và một đồng giữa — xáo trộn; việc: hỏi giúp một người."
+     "loi": "Cinq de Denier: bốn đồng và một đồng giữa — Mathers đọc là người thương, tình cảm ngọt ngào; Papus: một thành công sắp tới bù cho chỗ đã hao; việc: nói một lời dịu với người mình thương."
     },
     "bota": {
      "loi": "Thiếu là tạm — nếp nghĩ cần luyện: nhìn cửa sáng thay vì tuyết."
@@ -8002,6 +8675,11 @@
      "nguyen_van": "Five of Pentacles.--Lover or Mistress, Love, Sweetness, Affection, Pure and Chaste Love",
      "nguyen_van_nguoc": "Disgraceful Love, Imprudence, License, Profligacy",
      "nghia": "Mathers: người yêu, tình yêu, dịu ngọt, tình trong sáng; ngược: tình yêu đáng xấu hổ, thiếu thận trọng, phóng túng."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Opposition to this opposition. A success coming which will balance the loss.",
+     "nghia": "Papus: thế đảo lại; một thành công sắp tới bù cho chỗ đã mất."
     }
    ],
    "linh_vuc_nguoc": {
@@ -8109,6 +8787,11 @@
      "nguyen_van": "Six of Pentacles.--Presents, Gifts, Gratification",
      "nguyen_van_nguoc": "Ambition, Desire, Passion, Aim, Longing",
      "nghia": "Mathers: quà tặng, sự hài lòng; ngược: tham vọng, ham muốn, đam mê, mục tiêu, khao khát."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Realization of the opposition. Ruin.",
+     "nghia": "Papus: trở ngại thắng thế; trắng tay."
     }
    ],
    "linh_vuc_nguoc": {
@@ -8184,7 +8867,7 @@
     },
     "tdm": {
      "ten": "Sept de Denier",
-     "loi": "Sept de Denier: sáu đồng và một — một mình đứng ngoài; việc: đánh giá giữa chừng."
+     "loi": "Sept de Denier: sáu đồng và một — Mathers đọc là tiền bạc, khoản lời, của để dành; Papus: của cải lớn; việc: xem lại sổ thu chi và để riêng một phần."
     },
     "bota": {
      "loi": "Kiên nhẫn có mục tiêu — nếp nghĩ cần luyện: đặt mốc kiểm."
@@ -8216,6 +8899,11 @@
      "nguyen_van": "Seven of Pentacles.--Money, Finance, Treasure, Gain, Profit",
      "nguyen_van_nguoc": "Disturbance, Worry, Anxiety, Melancholy",
      "nghia": "Mathers: tiền, tài chính, kho báu, lợi; ngược: xáo trộn, lo, bất an, u sầu."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Success assured. A large fortune.",
+     "nghia": "Papus: thành công được bảo đảm; một gia tài lớn."
     }
    ],
    "linh_vuc_nguoc": {
@@ -8291,7 +8979,7 @@
     },
     "tdm": {
      "ten": "Huit de Denier",
-     "loi": "Huit de Denier: tám đồng đều — nhịp, lặp; việc: làm một việc 20 phút mỗi ngày trong 7 ngày."
+     "loi": "Huit de Denier: tám đồng đều — Mathers đọc là sự thật thà, khiêm tốn; Papus: dễ hụt ngay trước lúc chốt; việc: kiểm kỹ bước cuối trước khi coi là xong."
     },
     "bota": {
      "loi": "Thành thạo là lặp có ý — nếp nghĩ cần luyện: mỗi lần lặp thêm một chút ý."
@@ -8323,6 +9011,11 @@
      "nguyen_van": "Eight of Pentacles.--A dark Girl, Beauty, Candour, Chastity, Innocence, Modesty",
      "nguyen_van_nguoc": "Flattery, Usury, Hypocrisy, Shifty",
      "nghia": "Mathers: cô gái tóc sẫm, đẹp, thật thà, trong sáng, khiêm tốn; ngược: nịnh, cho vay lãi, đạo đức giả, lắt léo."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Partial success. Great loss of money at the moment apparently of definitely securing the fortune.",
+     "nghia": "Papus: thành một phần; mất khoản lớn đúng lúc tưởng đã nắm được."
     }
    ],
    "linh_vuc_nguoc": {
@@ -8430,6 +9123,11 @@
      "nguyen_van": "Nine of Pentacles.--Discretion, Circumspection, Prudence, Discernment",
      "nguyen_van_nguoc": "Deceit, Bad faith, Artifices, Deception",
      "nghia": "Mathers: kín đáo, thận trọng, sáng suốt; ngược: lừa, bội tín, mưu mẹo."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Equilibrium of Equilibrium. A durable fortune.",
+     "nghia": "Papus: thế cân vững; của cải bền."
     }
    ],
    "linh_vuc_nguoc": {
@@ -8537,6 +9235,11 @@
      "nguyen_van": "Ten of Pentacles.--House, Dwelling, Habitation, Family",
      "nguyen_van_nguoc": "Gambling, Dissipation, Robbery, Loss",
      "nghia": "Mathers: nhà, nơi ở, gia đình; ngược: cờ bạc, phóng túng, trộm cắp, mất."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "Uncertainty in the fortune. Great success and great reverses.",
+     "nghia": "Papus: tiền của còn bấp bênh; được lớn và mất lớn."
     }
    ],
    "linh_vuc_nguoc": {
@@ -8612,7 +9315,7 @@
     },
     "tdm": {
      "ten": "Valet de Denier",
-     "loi": "Valet de Denier: nhìn thẳng, đồng tiền trên tay — đang học; việc: đăng ký học một thứ cụ thể."
+     "loi": "Valet de Denier: nhìn thẳng, đồng tiền trên tay — Mathers đọc là người trẻ biết tiết kiệm, có nền nếp; Papus: người đưa thư; việc: lập một bảng chi tiêu đơn giản cho tháng này."
     },
     "bota": {
      "loi": "Học bằng tay — nếp nghĩ cần luyện: làm trước, hiểu sau."
@@ -8641,6 +9344,11 @@
      "nguyen_van": "Knave of Pentacles.--A dark Youth, Economy, Order, Rule, Management",
      "nguyen_van_nguoc": "Prodigality, Profusion, Waste, Dissipation",
      "nghia": "Mathers: thanh niên tóc sẫm, tiết kiệm, trật tự, quản lý; ngược: phung phí, hoang phí."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A fair child. A messenger. A letter.",
+     "nghia": "Papus: đứa trẻ tóc sáng; người đưa tin; một lá thư."
     }
    ],
    "linh_vuc_nguoc": {
@@ -8745,6 +9453,11 @@
      "nguyen_van": "Knight of Pentacles.--A useful Man, Trustworthy, Wisdom, Economy, Order, Regulation",
      "nguyen_van_nguoc": "A brave Man, but out of Employment, Idle, Unemployed, Negligent",
      "nghia": "Mathers: người hữu ích, đáng tin, khôn ngoan, tiết kiệm, ngăn nắp; ngược: người dũng cảm nhưng thất nghiệp, nhàn rỗi, lơ là."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A young, fair man. A stranger. An arrival.",
+     "nghia": "Papus: chàng trai tóc sáng; người lạ; có người tới."
     }
    ],
    "vung_book_t": {
@@ -8853,6 +9566,11 @@
      "nguyen_van": "Queen of Pentacles.--A dark Woman, a generous Woman, Liberality, Greatness of Soul, Generosity",
      "nguyen_van_nguoc": "Certain Evil, a suspicious Woman, a Woman justly regarded with Suspicion, Doubt, Mistrust",
      "nghia": "Mathers: người phụ nữ tóc sẫm, hào phóng, rộng lượng; ngược: điều xấu chắc, người phụ nữ đáng nghi, nghi ngờ, mất tin."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A fair woman, indifferent, or inimical.",
+     "nghia": "Papus: người phụ nữ tóc sáng, dửng dưng hoặc đối nghịch."
     }
    ],
    "vung_book_t": {
@@ -8961,6 +9679,11 @@
      "nguyen_van": "King of Pentacles.--A dark Man, Victory, Bravery, Courage, Success",
      "nguyen_van_nguoc": "An old and vicious Man, a Dangerous Man, Doubt, Fear, Peril, Danger",
      "nghia": "Mathers: người đàn ông tóc sẫm, thắng, dũng cảm, thành công; ngược: người già xấu tính, nguy hiểm; nghi ngờ, sợ, hiểm."
+    },
+    {
+     "sach": "papus_1892",
+     "nguyen_van": "A fair man, inimical or indifferent.",
+     "nghia": "Papus: người đàn ông tóc sáng, đối nghịch hoặc dửng dưng."
     }
    ],
    "vung_book_t": {
@@ -13639,6 +14362,24 @@
    "tep": "fixtures/nguon/tarot_mathers_1888.json",
    "ngay": "2026-11-07",
    "phu": "nghĩa 78 lá xuôi/ngược (Meanings of the Cards), biểu tượng 22 Key, ghi chú Etteilla, 3 cách trải bài, lá đại diện"
+  },
+  "papus_1892": {
+   "ban": "archive.org tarotofbohemians00papu (Redway 1896, BYU — bản chính) · tarotofbohemians00papu_0 (Redway 1896, Library of Congress) · cu31924028930571 (Chapman & Hall 1892, Cornell) · b24884510 (Rider 1910, Wellcome — chỉ góp phiếu); văn bản OCR _djvu.txt, lấy 2026-11-14",
+   "tep": "fixtures/nguon/tarot_papus_1892.json",
+   "ngay": "2026-11-14",
+   "phu": "nghĩa bói 78 lá (chương XX The Divining Tarot) + câu mô tả hình / ý 22 ẩn chính; chỉ giữ chữ hai bản quét cùng cho"
+  },
+  "case_1920": {
+   "ban": "archive.org IntroductionToTheStudyOfTheTarot — bản gõ lại hiện đại từ bản in 1920 (văn bản _djvu.txt), lấy 2026-11-14; đã bỏ chú thích của người biên tập hiện đại và hai câu phương hướng (Lamed, Nun) bị đổi theo tài liệu về sau",
+   "tep": "fixtures/nguon/tarot_case_1920.json",
+   "ngay": "2026-11-14",
+   "phu": "22 ẩn chính: bảng thuộc tính 22 chữ Hebrew (chương III) + các đoạn bàn từng lá (chương V–XII); không có nghĩa bói, không có ẩn phụ"
+  },
+  "ouspensky_1913": {
+   "ban": "archive.org the-symbolism-of-the-tarot-ouspensky_202012 (bản chính) · the-symbolism-of-the-tarot-ouspensky_202503 (đối chiếu; lời bình hiện đại ký D.T. không lấy); hai bản gõ lại độc lập, văn bản _djvu.txt, lấy 2026-11-14",
+   "tep": "fixtures/nguon/tarot_ouspensky_1913.json",
+   "ngay": "2026-11-14",
+   "phu": "22 bài bút ký chiêm nghiệm về ẩn chính; chỉ giữ câu hai bản gõ lại cùng có"
   }
  },
  "_tr2_hoang_gia": true,

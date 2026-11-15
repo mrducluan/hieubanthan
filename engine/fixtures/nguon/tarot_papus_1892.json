@@ -1,0 +1,875 @@
+{
+ "_nguon": {
+  "sach": "Papus (Gérard Encausse, 1865–1916), The Tarot of the Bohemians: The Most Ancient Book in the World — bản dịch Anh của A. P. Morton (London: Chapman & Hall, 1892; George Redway in lại 1896), từ Le Tarot des Bohémiens (Paris, 1889)",
+  "nam": 1892,
+  "pd": "phạm vi công cộng: xuất bản 1892 (trên 130 năm), tác giả mất 1916; bản dịch in trước 1929 (PD tại Mỹ)",
+  "ban": "archive.org tarotofbohemians00papu (Redway 1896, BYU — bản chính) · tarotofbohemians00papu_0 (Redway 1896, Library of Congress) · cu31924028930571 (Chapman & Hall 1892, Cornell) · b24884510 (Rider 1910, Wellcome — chỉ góp phiếu); văn bản OCR _djvu.txt, lấy 2026-11-14",
+  "url": [
+   "https://archive.org/details/tarotofbohemians00papu",
+   "https://archive.org/details/tarotofbohemians00papu_0",
+   "https://archive.org/details/cu31924028930571",
+   "https://archive.org/details/b24884510"
+  ],
+  "cach_lay": "chỉ giữ chữ mà ít nhất hai bản quét độc lập cho ra giống hệt nhau (scripts/nap_tarot_papus.py); không gõ tay",
+  "thu_tu": "thứ tự Marseille: 8 = Justice, 11 = Strength; lá Khờ (The Foolish Man) không số, đứng thứ 21 với chữ Shin; The Universe thứ 22 với chữ Tau. Chữ Hebrew theo lối Pháp (Lévi): Aleph = lá 1 — khác lối Golden Dawn. Sceptres = Wands; Knave = Page.",
+  "so_ban_quet": 4
+ },
+ "dai_1": {
+  "so_papus": 1,
+  "ten_en": "The Juggler",
+  "chu_cai": "Aleph",
+  "boi": "Male Inquirer.",
+  "doan": [
+   "The Aleph hieroglyphically expresses Man himself as a collective unity, the master principle, ruler of the earth.",
+   "Man, or the Microcosm, the Unity and the Principle in all the worlds, is the meaning of the primitive hieroglyphic, which, as we see, exactly renders the general ideas which we have established.",
+   "But attentive consideration of this first card of the Tarot will enlighten us still further.",
+   "Symbolism of the First Card of the Tarot.",
+   "If you take the first card of the Tarot and examine it attentively, you will see that the form of the juggler depicted upon it corresponds in all points with that of the letter Aleph.",
+   "The top of the figure is occupied by the divine sign of Universal Life oo placed upon the head of the Juggler.",
+   "The bottom of the figure represents the Earth ornamented with its productions, the symbol of Nature.",
+   "Lastly, the centre is occupied by the Man himself, placed behind a table covered with divers objects.",
+   "The right and left of the figure are occupied by the hands of the Juggler, one of them bent towards the Earth, the other raised towards Heaven.",
+   "The position of the hands represents the two principles, active and passive, of the Great All, and it corresponds with the two columns Jakin and Bohas of the temple of Solomon and of Freemasonry.",
+   "Man with one hand seeks for God in heaven, with the other he plunges below, to call up the demon to himself, and thus unites the divine and the diabolic in humanity.",
+   "If we wish to make a summary of the meaning of the symbol, so far as we have now deciphered it, we can represent it in this way —",
+   "Yet the symbolism of this first card of the Tarot does not end here.",
+   "The Juggler holds the wand of the Mage in the left hand, which he raises, and the four great symbols of the Tarot are placed before him.",
+   "Sceptre or Yod, symbol of the active Principle preeminent, and of God.",
+   "Cup or He, symbol of the passive Principle pre-eminent, or of the Universe.",
+   "Sword, Cross or Vau, symbol of the Equilibrist Principle pre-eminent, or of Man.",
+   "Pentacles or 2nd He, the cyclic symbol of Eternity, which unites the three first Principles in one Whole.",
+   "From the human point of view these symbols correspond with the four great human castes.",
+   "The men of Yod, or the Inventors, the Producers.",
+   "The Nobility of Intellect.",
+   "The men of He, or the depositaries of the great truths discovered by the men of Yod: the Savants, the Judges.",
+   "The men of Vau, or the guardians and defenders of the former: the Warriors.",
+   "The men of the 2nd He, the multitude from which the other classes are continually recruited: the People.",
+   "We already know that the first card of the Tarot is completed by the twenty-first (21 + 1 = 22), and we see why, if this first card represents Microcosm, the last would represent Macrocosm, and the eleventh card, which serves as the universal link to all the complements of the Tarot, represents the Vital reflex Current, which serves as a link between the worlds.",
+   "But we must not anticipate, so we will return to our first arcanum.",
+   "This symbol is the first of the whole Tarot,1 and it bears the Unity as its characteristic number.",
+   "The Unity-principle, the origin of which is impenetrable to human conceptions, is placed at the beginning of all things.",
+   "We cannot seize the origin of this primal cause, which we are content to assert according to the absolute law of analogies so well expressed by Eliphas Levi —",
+   "The three meanings of the first card respectively represent —",
+   "Lastly, the transition to the second He, which is not under consideration at present.",
+   "Each of them will also show the four aspects of Yod-he-vatc-he in the idea which it expresses.",
+   "But what is true of the ternary, is also true of the Septenary, so that the first Septenary, taken as a whole, will represent the Creator.",
+   "The second septenary will represent the Receiver.",
+   "The third the Transformer.",
+   "Lastly, the ternary of transition will represent the return of effects to causes, and of consequences to the principle.",
+   "Let us condense this all by saying —",
+   "We have now to recapitulate all the acceptations of the first card in a general figure.",
+   "As each card in the Tarot will have the same recapitulation, we think it may be useful to explain the scheme followed in this arrangement.",
+   "Below it, the name usually given to the card in the Tarot.",
+   "To the right of the figure are the significations in the Three Worlds: Divine, Human, and Natural.",
+   "The Hebrew letters placed upon the upper line of this key indicate the origin of the card under consideration, the Hebrew letters placed above it indicate the exact meaning of the card."
+  ]
+ },
+ "dai_2": {
+  "so_papus": 2,
+  "ten_en": "The High Priestess",
+  "chu_cai": "Beth",
+  "boi": "Female Inquirer.",
+  "doan": [
+   "The Beth hieroglyphically expresses the mouth of man as the organ of speech.",
+   "Speech is the production of man's inner self.",
+   "Therefore Beth expresses that inner self, central as a dwelling, to which one can retire without fear of disturbance.",
+   "From this ideas arise of a Sanctuary, an inviolate abode for man and for God.",
+   "But the Beth also expresses every production that emanates from this mysterious retreat, every internal activity, and from it issue ideas of Instruction, of the higher Knowledge, of Law, of Erudition, of occult Science or Kabbalah.",
+   "Beth corresponds with the number 2, and astronomically with the moon.",
+   "God himself, or God the Father, reflects himself, and gives birth to God the Man, or God the Son, the negative relatively to his creator.",
+   "As we have seen, man is the divine receiver, therefore this second card of the Tarot will express all the ideas of the first conceived negatively.",
+   "The first card represents a man standing; this, on the contrary, bears the figure of a seated woman.",
+   "The man, endowed with all the attributes of Power, was placed in the midst of nature.",
+   "The woman is adorned with all the attributes of Authority and persuasion, and she is placed under the porch of the temple of Isis, between two columns.",
+   "Idea of a sacred dwelling, of a divine recipient.",
+   "The two columns, like the arms of the Juggler, express the Positive and the Negative.",
+   "On her breast she bears the solar cross, and upon her knees lies an open book, which she half covers with her mantle.",
+   "This is the picture of Isis, of Nature, whose veil must not be raised before the profane.",
+   "The book indicates that the doctrines of Isis are hidden; but she divulges to the magi the secrets of the true Kabbalah, and of occult science.",
+   "We must admire this profound symbol.",
+   "The first card expressed Osiris in the three worlds; this second gives us the signification of Isis, the companion of Osiris —",
+   "In God it is the reflex of Osiris, the reflex of God the Father, Isis, or God the Son.",
+   "In Man it is the reflex of Adam of the absolute man: Eve, the woman, life (mn)."
+  ]
+ },
+ "dai_3": {
+  "so_papus": 3,
+  "ten_en": "The Empress",
+  "chu_cai": "Gimel",
+  "boi": "Action. Initiative.",
+  "doan": [
+   "The hieroglyphic meaning of the letter Gimel is the throat, the hand of man half closed in the act of prehension.",
+   "Hence it signifies all that incloses, all that is hollow, a canal, an inclosure.",
+   "The throat is the spot where the words conceived in the brain are formed, or I might almost say embodied, therefore the Gimel is the symbol of the material envelopment of spiritual forms, of organic generation under all its forms, of all the ideas springing from the corporeal organs or their actions.",
+   "Generation is the mystery by which the spirit unites itself to matter, by which the Divine becomes Human.",
+   "The signification of Venus-Urania, to which this card corresponds, is easily understood by the above explanations.",
+   "This symbol would therefore signify ideas of generation, of embodiment in all the worlds.",
+   "The human being becomes corporeal in the womb of a woman.",
+   "This woman is represented with wings, or in the centre of a radiating sun.",
+   "The eagle is the symbol of the soul and of life (Holy Spirit).",
+   "In the left hand she bears a sceptre forming the astrological sign of Venus.",
+   "The sceptre is held in the left hand to indicate the passive influence, which Nature, Venus-Urania, or the woman exercises in the generation of beings.",
+   "She wears a crown with twelve points, or twelve stars.",
+   "The sign of the diffusion of the vivifying Principle through all the worlds and of the sun, through the Zodiac.",
+   "The third card of the Tarot shows the result of the reciprocal action of the two first terms neutralizing each other in one principle.",
+   "It is the Neuter Element of Wronski, the basis of every system of reality.",
+   "The universal vivifying force.",
+   "In Man this would be the equilibrium of the Adam-Eve — Adam-Eve or Humanity.",
+   "In the Universe this would be the equilibrium of Natura naturans and of Natura naturata —"
+  ]
+ },
+ "dai_4": {
+  "so_papus": 4,
+  "ten_en": "The Emperor",
+  "chu_cai": "Daleth",
+  "boi": "Will.",
+  "doan": [
+   "The hieroglyphic meaning of Daleth is the womb.",
+   "It suggests the idea of an object giving plentiful nourishment, the source of future growth.",
+   "Like the 1, it is a sign of active creation; but this creation is the result of previous actions easily determinable, whilst the origin of the Unity is inaccessible to human conceptions.",
+   "The Daleth should be the image of the active vivifying principle of the Universe, Jupiter, the reflex of the Primal cause.",
+   "This symbol should express in the active form all that the preceding card expressed in the passive.",
+   "The man indicates the active; his position, however, shows that this activity is engendered by a superior term.",
+   "The 1st arcanum, the Juggler, the active absolute, was represented standing, looking to the front; the 4th arcanum, active relative, is seated in profile.",
+   "This man holds in his right hand the sceptre, the symbol of generation or of Venus $.",
+   "The man is bearded and wears a helmet with twelve points (six on each side).",
+   "He is seated upon a cubic stone, which bears the figure of an eagle.",
+   "The helmet indicates the rule of the Divine Will in the Universe, and its universal action in the creation of Life (eagle).",
+   "The position upon the cubic stone indicates realization in all the worlds.",
+   "Affirmation, — Negation, Discussion, Solution.",
+   "Domination of the Spirit over Matter.",
+   "Considered more attentively, the figure reproduces the symbol of Jupiter 2 +, represented by the fourth card of the Tarot.",
+   "The fourth card of the Tarot corresponds to the second He, and therefore bears two very distinct aspects.",
+   "It first expresses a term of transition uniting the first series (active and passive forces, the link between the two forces) to the following series; the passage from one world to the other.",
+   "But it also represents this term of transition, itself becoming the first term in the following series.",
+   "As the following series taken as a whole is negative relatively to the first, the fourth symbol represents the active influence of the first series 1, 2, 3, in the second series 4, 5, 6.",
+   "The 4 therefore expresses the reflections of the first card in all its details.",
+   "It acts towards the first series exactly as the second card acted towards the first.",
+   "This interprets its meaning —",
+   "Reflex of God the Father — The Will.",
+   "Reflex of Adam — The Power.",
+   "The soul of the Universe."
+  ]
+ },
+ "dai_5": {
+  "so_papus": 5,
+  "ten_en": "The Pope",
+  "chu_cai": "He",
+  "boi": "Inspiration.",
+  "doan": [
+   "The hieroglyphic meaning of He is aspiration, breath.",
+   "It is by aspiration that life is incessantly maintained and created.",
+   "Hence springs the idea of all that animates attributed to He.",
+   "But life specializes the being, by rendering it different from any other; hence the idea of the being itself attributed to this letter.",
+   "However, the action of life does not stop here.",
+   "Here we find the origin of the ideas of bond, of the reunion of opposing principles, of religion, attributed to He.",
+   "This letter is simple; astronomically it corresponds with the igneous sign of the Ram, which it explains.",
+   "This symbol expresses the following ideas —",
+   "The Initiate of the mysteries of Isis is seated between the two columns of the sanctuary.",
+   "He leans upon a triple cross, and makes the sign of Esoterism with his left hand.",
+   "The triple Cross represents the triple Lingam of Indian theogony; that is to say, the penetration of the creative power throughout the Divine, the Intellectual, and the Physical Worlds, which causes all the manifestations of universal life to appear (first idea).",
+   "The two columns symbolize: on the right, the Law; on the left, the Liberty to obey and to disobey, the essence of Being (second idea).",
+   "The Initiate wears a tiara.",
+   "Two crowned men kneel at his feet, one clothed in red, the other in black.",
+   "Here we find the active form of the symbolism expressed in passive form by the second card.",
+   "The same idea of Esoterism, of secret Instruction, reappears; but the Tuition is now practical and oral, it no longer requires a book (third idea).",
+   "The fifth card of the Tarot corresponds with the letter he of the sacred word.",
+   "It is the direct reflection of the 4th arcanum, and the indirect reflection of the 2nd arcanum.",
+   "Intelligence (characteristic of God the Son).",
+   "Reflex of the Soul of the World, or of the Universal creative fluid —",
+   "The Universal Life (characteristic of Natura naturata)."
+  ]
+ },
+ "dai_6": {
+  "so_papus": 6,
+  "ten_en": "The Lovers",
+  "chu_cai": "Vau",
+  "boi": "Love.",
+  "doan": [
+   "The hieroglyphic sign for the Vau is the eye, all that relates to light and brilliancy.",
+   "The eye establishes the link between the external world and ourselves; by it light and form are revealed to us.",
+   "The dominant idea expressed by this letter will therefore be that of a connection, of a link between antagonists.",
+   "We have already dwelt at some length upon the Vau, but we think it may be useful to quote Fabre d'Olivet's observations upon this letter in extenso —",
+   "This symbol represents reunion, antagonism, with all their consequences.",
+   "A beardless youth (our Juggler of the 1st arcanum), but without a hat, is standing motionless in the angle where two roads meet.",
+   "His arms form a diagonal cross upon his breast.",
+   "The repetition of the 1st arcanum under another form.",
+   "Here the man is not one of the Initiates.",
+   "He does not know how to direct the magnetic currents of the Astral Light; he is therefore plunged in the antagonism of the different ideas which he cannot master.",
+   "Two women, one on his right, the other on his left, each with one hand upon his shoulder, point to the two roads.",
+   "The woman on the right has a circle of gold upon her head, the one on the left is dishevelled and crowned with vine leaves.",
+   "The two arms of the Juggler, expressing the positive and negative, the two columns of the temple of Isis, expressing necessity and liberty, are here personified by the two women, who represent Vice and Virtue.",
+   "The spirit of Justice floats above this group in a radiant halo; he bends his bow and aims the arrow of Punishment at the personification of Vice.",
+   "In short, this hieroglyphic expresses the struggle between the passions and conscience, the antagonism of ideas.",
+   "But this antagonism is also the most powerful natural producer that exists in the world, when it resolves itself into Love, which attracts the opponents and unites them for ever.",
+   "This sixth card of the Tarot must be regarded under two aspects, which tend to the same signification.",
+   "As 3 of the 4, that is to say, as representing the 4th arcanum, or the reflection of 1 considered in its relation to union.",
+   "As balancing 4 and 5; this is shown in the triangle formed by the second ternary —",
+   "Each card balances the two others.",
+   "The 4 balances the 5 and the 6.",
+   "Its signification proceeds from this: —",
+   "The Equilibrium between Power and Authority —",
+   "The Equilibrium between the Universal soul and the Universal life—",
+   "The Universal Attraction."
+  ]
+ },
+ "dai_7": {
+  "so_papus": 7,
+  "ten_en": "The Chariot",
+  "chu_cai": "Zain",
+  "boi": "Triumph. Providential Protection.",
+  "doan": [
+   "The Zain expresses victory in all the worlds.",
+   "As a simple letter it corresponds with the astronomic sign of the Twins in the Zodiac.",
+   "The symbolism of this card corresponds in all points with the ideas which it expresses.",
+   "A Conqueror, crowned with a coronet, upon which rise three shining Pentagrams of gold, advances in a cubical chariot, surmounted by an azure, star-decked canopy supported by four columns.",
+   "This symbol reproduces the 1st and 21st arcana in another order of ideas.",
+   "The four columns represent the four animals of the 21st arcanum, and the four symbols of the 1st arcanum, symbols of the quaternary in all its acceptations.",
+   "The Conqueror has three right angles upon his cuirass, and he bears upon his shoulders the Urim and Thummim of the sovereign sacrificant, represented by the two crescents of the moon on the right and left; in his hand is a sceptre surmounted by a globe, a square, and a triangle.",
+   "Two sphinxes, one white, the other black, are harnessed to the chariot.",
+   "This symbol represents the sacred septenary in all its manifestations.",
+   "The two sphinxes correspond to the two principles, active and passive.",
+   "The Conqueror corresponds especially with the Sword and the Vau of the sacred name.",
+   "The 7th card of the Tarot shows the influence of the creation in the preservation of the Divine in the Human.",
+   "It represents the Yod or the God of the 2nd septenary.",
+   "The God of the 2nd septenary.",
+   "Man performing the function or God the Creator.",
+   "Nature performing the function of Adam."
+  ]
+ },
+ "dai_11": {
+  "so_papus": 8,
+  "ten_en": "Justice",
+  "chu_cai": "Heth",
+  "boi": "Justice.",
+  "doan": [
+   "Hieroglyphically the Heth expresses a field.",
+   "From it springs the idea of anything that requires labour, trouble, an effort.",
+   "Continued effort results in the establishment of an equilibrium, between the destruction of the works of man accomplished by nature, when left to herself, and the preservation of this work.",
+   "Astronomically the Heth corresponds to the sign of Cancer in the zodiac.",
+   "The ideas expressed by this symbol are of Equilibrium in all its forms.",
+   "A woman seen full face, and wearing an iron coronet, is seated upon a throne.",
+   "She is placed between the two columns of the temple.",
+   "The solar cross is traced upon her breast.",
+   "Here we find the continuation of the symbolism of the 2nd and 5th arcana.",
+   "The seated woman occupies the centre between the columns, the first idea of the equilibrium between Good and Evil.",
+   "She holds a sword, point upwards, in her right hand, and a balance in her left.",
+   "Occult science (2), at first theoretical, has become practical (5), and has been taught verbally.",
+   "Now it appears in all the pitilessness of consequences, terrible for the false Magi the Sword), but just toward the true Initiates (Balance).",
+   "This card is the complement of the eleventh, as the fifth was of the second.",
+   "In the 1st septenary all the cards which, by addition, formed the number 7, completed each other; in the 2nd septenary all the cards which, added together, form 19, act in the same way.",
+   "The eighth card of the Tarot represents the conception in preservative of the second card.",
+   "It synthetizes in itself the meaning of the second and of the fifth card of the Tarot, and represents the reflex of the seventh.",
+   "God the Son of the 2nd septenary.",
+   "The woman fulfilling the functions of God the Son.",
+   "Preserver of God the Son in Humanity.",
+   "Passive law of the 2nd septenary.",
+   "The woman of the 2nd septenary.",
+   "Nature fulfilling the function of Eve."
+  ]
+ },
+ "dai_9": {
+  "so_papus": 9,
+  "ten_en": "The Hermit",
+  "chu_cai": "Teth",
+  "boi": "Prudence.",
+  "doan": [
+   "Hieroglyphically the Teth represents a roof, and suggests the idea of a place of safety, a protection.",
+   "All the ideas arising from this letter are derived from the alliance of safety and protection given by wisdom.",
+   "Astronomically the Teth corresponds with the zodiacal sign of the Lion.",
+   "The following ideas are connected with this card —",
+   "An old man walking supported by a stick.",
+   "He carries before him a lighted lamp, half hidden by the great mantle which envelopes him.",
+   "This symbol is midway between the sixth and the twelfth.",
+   "Protection is indicated by the mantle which envelops the old man.",
+   "Wisdom by the half-hidden lamp.",
+   "The stick indicates that the Sage is always armed to fight against Injustice or Error.",
+   "By comparing this card with two others, the sixth and the twelfth, we shall see that the beardless young man in the former (6th) has chosen the right path.",
+   "Experience won in the labour of life has rendered him a prudent old man, and prudence united to wisdom will safely lead him to the higher level, which he is anxious to attain (12th card).",
+   "The arrow shot by the genius in the sixth arcanum has become his support, and the effulgent aureole which surrounded the genius is now imprisoned in the lamp which guides the Initiate.",
+   "This is the result of his prolonged efforts.",
+   "The ninth card of the Tarot represents the third conceived as preserver and recipient.",
+   "It also balances the seventh and the eighth.",
+   "Humanity fulfilling the function of God the Holy Spirit.",
+   "The human creative force.",
+   "The preserving power of Humanity.",
+   "The equilibrium of the Father and the Mother.",
+   "Equilibrium of Realization and Justice.",
+   "Nature accomplishing the function of humanity.",
+   "Equilibrium of the Astral Light and Elementary Existence.",
+   "The Natural Preserving Force."
+  ]
+ },
+ "dai_10": {
+  "so_papus": 10,
+  "ten_en": "The Wheel of Fortune",
+  "chu_cai": "Yod",
+  "boi": "Fortune. Destiny.",
+  "doan": [
+   "The hieroglyphic meaning of the Yod is the finger of man; the forefinger extended as a sign of command.",
+   "Two principal ideas are expressed by this symbol —",
+   "The idea of Command, of Supremacy.",
+   "The idea of the duration, of the eternal action of time.",
+   "The wheel of fortune suspended upon its axis.",
+   "The first idea is expressed by the ternary, Anubis or positive, Typhon or negative, the balanced Sphinx the ruler.",
+   "The second idea is expressed by the wheel, a line without beginning or end, the symbol of eternity.",
+   "The 10th arcanum is midway between the 7th and 13th arcana.",
+   "It expresses the incessant equilibrium, which modifies the creative realizations of the septenary by the necessary destruction by Death (arcanum 13).",
+   "The three arcana, 7, 10, 13, correspond exactly with the Hindu trinity or Trimurti.",
+   "Brahma = Creator = Arcanum 7.",
+   "Siva = Destroyer = Arcanum 13.",
+   "Vishnu = Preserver = Arcanum 10.",
+   "It represents the course of things according to the ternary law, which directs all the divine manifestations.",
+   "The tenth card of the Tarot commences the negative portion of the 2nd septenary, and expresses the notion of the septenary considered in its reflections.",
+   "It will therefore represent —",
+   "Reflex of will (see 4th arcanum).",
+   "Reflex of power and of realization.",
+   "Reflex of the universal soul.",
+   "Force Potential in its Manifestation."
+  ]
+ },
+ "dai_8": {
+  "so_papus": 11,
+  "ten_en": "Strength",
+  "chu_cai": "Kaph",
+  "boi": "Strength. Fortitude.",
+  "doan": [
+   "The hieroglyphic meaning of the Kaph is the hand of man, half closed and in the act of prehension, like the Gimel.",
+   "But the Kaph is reinforcement of the Gimel, so that we might say that it designates the hand of man in the act of grasping strongly.",
+   "Ideas of strength are therefore applied to this letter.",
+   "The number 11, the first after the decade, gives a different value to the Kaph, which designates a reflected transitory life, a kind of mould, which receives and restores every variety of form.",
+   "It is derived from the letter Heth, n (8), which is itself derived from the sign of absolute life, He n (5).",
+   "The Kaph is a double letter, corresponding astronomically with March and Tuesday.",
+   "Only two ideas are expressed by this arcanum —",
+   "This young girl wears the vital sign oo upon her head.",
+   "The 11th arcanum is midway between the 5th and 14th arcana.",
+   "In it we find the symbolism of the 8th arcanum transformed to the physical plane.",
+   "It is, in fact, the image of the power given by the sacred science (2nd arcanum) when justly applied (8).",
+   "The eleventh card of the Tarot shows us all the negative or reflective significations of the fifth, that is to say —",
+   "Reflex of the Intelligence (5).",
+   "Reflex of Authority, of Faith.",
+   "Reflex of the Universal Life.",
+   "Manifestation of the strength of the preceding arcanum.",
+   "Reflected and Transitory Life."
+  ]
+ },
+ "dai_12": {
+  "so_papus": 12,
+  "ten_en": "The Hanged Man",
+  "chu_cai": "Lamed",
+  "boi": "Trials. Sacrifice.",
+  "doan": [
+   "It is applied to all ideas of extension, of occupation, of possession.",
+   "As a last sign, it is the image of the power derived from elevation.",
+   "But the revelation of the law involves punishment for him who violates it, or elevation for him who understands it; and here we find the ideas of punishment, of violent death, voluntary or involuntary.",
+   "The Lamed, a simple letter, astronomically corresponds with the zodiacal sign of the Balance.",
+   "A man hanging by one foot to a gibbet, resting upon two trees, each bearing six branches, which have been cut off.",
+   "His eyes are open and his fair hair floats upon the wind.",
+   "His right leg crosses his left and so forms a cross.",
+   "This young man is again the Juggler whose transformations we have already followed in the 1st, 6th, and 7th arcana.",
+   "The 12th arcanum fills the centre between the 6th arcanum (Wisdom) and the 15th (Fatality).",
+   "These arcana represent the two women of the 6th arcanum, regarded in the spiritual sense.",
+   "Considered alchemically, the Hanged Man shows the sign of personality.",
+   "In the hermetic grade of the Rosy-Cross (18th degree of the Freemasonry of Scotland) one of the signs of recognition consists in crossing the legs like those of the Hanged Man.",
+   "It is needless to say that the origin and meaning of this sign is quite unknown to the Freemasons.",
+   "The twelfth card of the Tarot represents Equilibrist Power.",
+   "It neutralizes the oppositions of the tenth and eleventh cards.",
+   "Equilibrium of Necessity and Liberty —",
+   "Equilibrium of Power and Courage.",
+   "Equilibrium of the potential Manifestation (10), and of reflected Life (11).",
+   "Reflex of the astral Fluid."
+  ]
+ },
+ "dai_13": {
+  "so_papus": 13,
+  "ten_en": "Death",
+  "chu_cai": "Mem",
+  "boi": "Death.",
+  "doan": [
+   "The hieroglyphic meaning of the Mem is a woman, the companion of man, it therefore gives rise to ideas of fertility and formation.",
+   "It is pre-eminently the maternal and female, the local and plastic sign, the image of external and passive action.",
+   "In this case it develops the being in unlimited space.",
+   "The Mem is one of the three Mother letters.",
+   "Death, or the Skeleton Mower.",
+   "The ideas expressed by this arcanum are those of destruction preceding or following regeneration.",
+   "A skeleton mows down heads in a field, from which hands and feet spring up on all sides, as the scythe pursues its work.",
+   "The works of the head (conception) become immortal as soon as they are realized (heads and feet).",
+   "The 13th arcanum is explained by the 10th (Fortune) and by the 16th (Destruction), between which it stands.",
+   "The 13th arcanum is completed by the 18th, its complementary, as the fifth was of the second, and the twelfth of the seventh.",
+   "The thirteenth card of the Tarot is placed between the invisible and the visible worlds.",
+   "It is the universal link in nature, the means by which all the influences react from one world to the other.",
+   "The Universal Transforming Principle.",
+   "Destructive and creative.",
+   "The negative of realization —",
+   "The Astral light accomplishing the function of the Creator —",
+   "The Universal Plastic Force."
+  ]
+ },
+ "dai_14": {
+  "so_papus": 14,
+  "ten_en": "Temperance",
+  "chu_cai": "Nun",
+  "boi": "Temperance. Economy.",
+  "doan": [
+   "The hieroglyphic sense of the Nun is the offspring of the female; a son, a fruit of any kind, all things produced.",
+   "This letter has therefore become the image of the being produced or reflected, the sign of individual and corporeal existence.",
+   "Astronomically the Nun corresponds with the zodiacal sign of the Scorpion.",
+   "The following ideas are expressed by this symbol —",
+   "Combination of different fluids.",
+   "Individualization of existence.",
+   "The genius of the Sun pours the fluid of Life from a golden vase into a silver one.",
+   "This essence passes from one vase to the other without one drop being spilt.",
+   "The vital current placed upon her head in the 11th arcanum here passes from one vase into another, but will spread further in the 17th arcanum.",
+   "The fourteenth card of the Tarot shows us the fluid, hitherto carefully preserved, now freely circulated in nature.",
+   "Combination of active and passive fluids.",
+   "Entry of Spirit into Matter, and reaction of Matter upon the Spirit —",
+   "Reflex of Justice in the material world —",
+   "Individual and Corporeal Life."
+  ]
+ },
+ "dai_15": {
+  "so_papus": 15,
+  "ten_en": "The Devil",
+  "chu_cai": "Samech",
+  "boi": "Immense Force. Illness.",
+  "doan": [
+   "This idea of an impassable circle has given birth to that of Destiny, of Fatality, circumscribing the limits of the circle in which the human will can act freely; so that the Serpent forming a circle of his own body, biting his own tail, has always been the symbol of this Fatality, of this Destiny, encircling the world in its embrace.",
+   "As a letter, the Samedi is the link (Zain) reinforced and turned back upon itself.",
+   "As a simple letter, it corresponds with the zodiacal sign of Sagittarius.",
+   "In every cosmogony the Devil represents the mysterious astral force, the origin of which is revealed to us by the hieroglyphic of Samech.",
+   "But a little attentive consideration of the symbol will show us that it contains several of the details which we have already seen in other figures of the Tarot, but under a different aspect.",
+   "If we place the Juggler by the side of the Devil we shall see that the arms of the two personages are using the same gesture, but in an inverse sense.",
+   "The Juggler points his right hand towards the Universe, his left hand towards God; on the other hand the Devil raises his right hand into the air, whilst his left points to the earth.",
+   "Instead of the magic initiating wand of the Juggler, the Demon holds the lighted torch, the symbol of black magic and of Destruction.",
+   "By the side of the Devil, and balanced by him, are two personages reproducing the same symbolism that we find in the two women of the Lovers (6), and in the two supports of the gibbet of the Hanged Man (12).",
+   "The universal vivifying force represented by the 3rd arcanum has here become the universal destroying force.",
+   "The 15th arcanum symbolizes the False Spirit, or the Destiny of Fabre d'Olivet.",
+   "The Devil has materialized upon his head the universal fluid which surrounded the head of the Juggler; this is indicated by the two six-pointed horns which adorn him.",
+   "He stands upon a cube placed upon a sphere, to indicate the domination of Matter (the cube) over the Spirit (the Sphere).",
+   "The fifteenth card of the Tarot derives its signification from its own symbolism —",
+   "Fatality, the result of the fall of Adam-Eve.",
+   "The astral fluid, which individualizes.",
+   "Nahash, the Dragon of the Threshold."
+  ]
+ },
+ "dai_16": {
+  "so_papus": 16,
+  "ten_en": "The Lightning-struck Tower",
+  "chu_cai": "Ayin",
+  "boi": "Ruin. Deception.",
+  "doan": [
+   "It is the sign of Material sense.",
+   "Again degenerated, it expresses all that is crooked, false, perverse, and bad.",
+   "The Lightning-struck Tower.",
+   "This card contains the first allusion to a material building in our pack, but we shall find the same symbol reproduced in the 18th and 19th arcana.",
+   "Here it signifies the invisible or spiritual world, incarnated in the visible and material world.",
+   "The 16th card represents the material fall of Adam.",
+   "He will gradually become more materialized until the 18th arcanum, in which he attains the maximum of his materialization.",
+   "Materialization of God the Holy Spirit.",
+   "Entrance of the Holy Spirit into the visible World.",
+   "The Holy Spirit acting like the God of matter.",
+   "The materialization of the Adam-Eve, who have been spiritualized until now.",
+   "Entrance of the Adam-Eve into the visible World —",
+   "Materialization of the Universe-principle —"
+  ]
+ },
+ "dai_17": {
+  "so_papus": 17,
+  "ten_en": "The Stars",
+  "chu_cai": "Phe",
+  "boi": "Hope.",
+  "doan": [
+   "The Phe expresses the same hieroglyphic meaning as the Beth (2nd card), but in a more extended sense.",
+   "It is the sign of speech and of all connected with it.",
+   "Astronomically this letter responds to Mercury the God of Speech and of scientific or commercial diffusion, the God of Universal exchange between all beings and all worlds.",
+   "The ideas expressed by this symbol are those —",
+   "Of the expansion of fluids.",
+   "Of their eternal renewal.",
+   "A nude female figure pours the Water of Universal Life from two cups.",
+   "The genius of the Sun (14th arcanum) has now descended to earth under the form of this young girl, the image of eternal Youth.",
+   "The fluids, which she formerly poured from one vase to the other, she now throws upon the ground (first idea).",
+   "This young girl is crowned with seven stars; in the midst of them shines a very large and brilliant one.",
+   "Near her an ibis (or sometimes a butterfly) rests upon a flower.",
+   "Here we find the symbol of immortality.",
+   "The soul (ibis or butterfly) will survive the body, which is only a place of trial (the ephemeral flower).",
+   "The courage to bear these trials will come from above (the stars).",
+   "The fall of the Divine and of the Human into the Material has scarcely taken place, when a mysterious voice whispers courage to the Sinner, by showing him future re-instatement through trial.",
+   "Opposition to destruction.",
+   "Everything is eternal and immortal in God —",
+   "Creation of the human soul.",
+   "The fall is not irreparable.",
+   "The Visible Universe contains the source of its Divinization in itself."
+  ]
+ },
+ "dai_18": {
+  "so_papus": 18,
+  "ten_en": "The Moon",
+  "chu_cai": "Tzaddi",
+  "boi": "Hidden Enemies. Danger.",
+  "doan": [
+   "The Tzaddi is a simple letter; it corresponds with the zodiacal sign of Aquarius.",
+   "It is derived from the letter Samech D (15) and the letter Zain T (7), and it marks the secession of one or the other.",
+   "A meadow feebly lighted by the moon.",
+   "The light, the symbol of the soul, no longer reaches us directly; the material world is only lighted by reflection.",
+   "The meadow is bounded by a tower on each side.",
+   "Drops of blood are falling from the moon.",
+   "The material world is the last point which the spirit can reach, it can descend no lower; this is shown by the boundaries of the field.",
+   "The drops of blood represent the descent of the Spirit into Matter.",
+   "A path sprinkled with drops of blood loses itself in the horizon.",
+   "In the centre of the field a dog and a wolf are howling at the moon, a crayfish is climbing out of the water between the two animals.",
+   "The entry of the Spirit into Matter is so great a fall that everything conspires to augment it.",
+   "Servile spirits (the dog), savage souls (the wolf), and crawling creatures (the crayfish) are all present watching the fall of the soul, hoping to aid in its destruction.",
+   "End of divine Materialization.",
+   "Final point of involution —",
+   "End of the Materialization of man —",
+   "The Material Body and its Passions.",
+   "End of physical Materialization —"
+  ]
+ },
+ "dai_19": {
+  "so_papus": 19,
+  "ten_en": "The Sun",
+  "chu_cai": "Qoph",
+  "boi": "Material Happiness. Lucky Marriage.",
+  "doan": [
+   "The Qoph is therefore a particularly compressive, astringent, and cutting sign; it is the image of agglomerative, restricting form, and this gives rise to the idea of material existence.",
+   "Here is the progression of the sign —",
+   "This is a simple letter; it corresponds with the sign of the Gemini.",
+   "Two naked children are shut into a walled enclosure.",
+   "The sun sends down his rays upon them, and drops of gold escape from him and fall upon the ground.",
+   "The spirit resumes its ascendancy.",
+   "The walls indicate that we are still in the visible or material world.",
+   "The two children symbolize the two creative fluids, positive and negative, of the new creature.",
+   "Nature accomplishing the functions of God —",
+   "The body of man is renewed —"
+  ]
+ },
+ "dai_20": {
+  "so_papus": 20,
+  "ten_en": "The Judgment",
+  "chu_cai": "Resh",
+  "boi": "Change of Position.",
+  "doan": [
+   "The hieroglyphic meaning of the Resh is the head of man, and it is therefore associated with the idea of all that possesses in itself an original, determined movement.",
+   "It is the sign of motion itself, good or bad, and expresses the renewal of things with regard to their innate power of motion.",
+   "The Resh is a double letter, and responds astronomically to Saturn.",
+   "An angel with fiery wings, surrounded by a radiant halo, sounds the trumpet of the last judgment.",
+   "The instrument is decorated with a cross.",
+   "A tomb opens in the earth, and a man, woman, and child issue from it; their hands are joined in sign of adoration.",
+   "How can the reawakening of nature under the influence of the Word be better expressed?",
+   "We must admire the way in which the symbol answers to the corresponding Hebrew hieroglyphic.",
+   "Return to the divine World.",
+   "The Spirit finally regains possession of itself —",
+   "Original Determined Motion.",
+   "Life renews itself by its own motion —",
+   "The material world progresses one degree in its ascension towards God —"
+  ]
+ },
+ "dai_0": {
+  "so_papus": 21,
+  "ten_en": "The Foolish Man",
+  "chu_cai": "Shin",
+  "boi": "Inconsiderate Actions. Madness.",
+  "doan": [
+   "The Shin 1 expresses the same hieroglyphic meaning as the Zain (7th arcanum) and the Samech (15th): this is an arrow, an object directed to an aim.",
+   "Samedi expresses cyclic movement, and therefore absolute duration.",
+   "Shin is one of the three mother letters.",
+   "A careless-looking man, wearing a fool's cap, with torn clothes and a bundle upon his shoulder, goes quietly on his way, paying no attention to a dog which bites his leg.",
+   "He does not look where he is going, so walks towards a precipice, where a crocodile is waiting to devour him.",
+   "This is an image of the state to which unresisted passion will reduce a man.",
+   "It is the symbol of the Flesh and of its gratification.",
+   "From a moral point of view the following verses of Eliphas Levi well explain this symbol —",
+   "More rapid return to the Divine World.",
+   "Personality asserts itself —",
+   "The Motion of Relative Duration.",
+   "The intellect roughly appears under the influence of evolution —",
+   "The matter of the world attains the maximum of its material progression —"
+  ]
+ },
+ "dai_21": {
+  "so_papus": 22,
+  "ten_en": "The Universe",
+  "chu_cai": "Tau",
+  "boi": "Assured Success.",
+  "doan": [
+   "The Tau has the same hieroglyphic meaning as the Daleth (fourth card), the womb; but it is chiefly the sign of reciprocity, the image of all that is mutual and reciprocal.",
+   "In the primitive Hebrew alphabet the Teth was represented by a cross ( +).",
+   "This letter is double, and in astronomy it represents the Sun.",
+   "A nude female figure, holding a wand in each hand, is placed in the centre of an ellipsis, her legs crossed (like those of the Hanged Man in the twelfth card).",
+   "At the four angles of the card we find the four animals of the Apocalypse, and the four forms of the Sphinx: the Man, the Lion, the Bull, and the Eagle.",
+   "This symbol represents Macrocosm and Microcosm, that is to say, God and the Creation, or the Law of the Absolute.",
+   "The four figures placed at the four corners represent the four letters of the sacred name, or the four great symbols of the Tarot.",
+   "The Sceptre or yod = Fire.",
+   "The Sword or vau = Earth.",
+   "Between the sacred word that signifies God and the centre of the figure is a circle or an ellipsis, representing Nature and her regular and fatal course.",
+   "From this comes the name of Rota, wheel, given to it by Guillaume Postel.",
+   "The impenetrable Absolute or God... 1st septenary.",
+   "The soul of the Absolute or Man... 2nd septenary.",
+   "The body of the Absolute or the Universe 3rd septenary.",
+   "This twenty-first card of the Tarot therefore contains in itself a recapitulation of all our work, and proves to us the truth of our deductions.",
+   "A simple figure will sum up what we have said.",
+   "The four corners therefore reproduce the four great symbols of the Tarot.",
+   "Lastly, the centre reproduces the septenary law of the major arcana themselves.",
+   "As this septenary is in the centre of three circles, representing the three worlds, we see that the sense of the twenty-one arcana is once more determined (3x7= 21).",
+   "The following figure indicates the application of the twenty-first card to the Tarot itself.",
+   "We shall also see that this card of the Tarot gives the key of all our applications of the pack to the Year, to Philosophy, to the Kabbalah, etc., etc.",
+   "Involution and Evolution.",
+   "Figure containing the Symbolism of all the Major Arcana, enabling the Signification of each Card to be defined immediately.",
+   "Having completed our study of the twenty-two major arcana, considered separately, we will now review as clearly as possible the knowledge which may be gathered from the preceding explanations.",
+   "We have already established from the study of the first card, that three primary principles are considered throughout their evolution: the Universe, Man, and God.",
+   "Another gradation leads from Matter to God, the primitive origin of all things.",
+   "This double current of the progressive Materialization of the Divine, or Involution, and of the Progressive Divinization of the Material, or Evolution, has been too well studied by our eminent friend Ch.",
+   "But our present object is to review as clearly as possible the meanings of the major arcana of the Tarot, regarded from a synthetic point of view.",
+   "From the preceding chapters it will be seen that this study is really a Cosmogony, or study of the creation of the Universe, crowned by an Androgony, or study of the creation of Man, and even by an essay on Theogony, or study of the innate creation of God.",
+   "The Unity manifests itself to itself by three terms, the highest and most general terms which the human comprehension can grasp; terms which form the basis of all théogonies, and which designate the same principles under a multitude of varying names.",
+   "The first of these terms symbolizes Absolute activity in all its acceptations, the origin of all movement, of all masculine creative force.",
+   "God the Father: Osiris — Brahma — Jupiter.",
+   "The second of these terms symbolizes Absolute passivity in all its acceptations, the origin of all repose, of all feminine preserving force.",
+   "It is the humid principle of nature, even as the first is the igneous principle.",
+   "God the Son: Isis — Vishnu — Juno.",
+   "The third of these terms is the most important to us.",
+   "Synthetically it blends the two preceding terms in one Unity; all study should be commenced by it, for no being is conceivable unless it be considered synthetically, and the third term is the origin of all synthesis.",
+   "It is the mercurial principle in nature balancing the two first.",
+   "God the Holy Ghost: Horus — Siva — Vulcan.",
+   "It is necessary to give a few explanations before we proceed further, in order that the deductions which follow may be intelligible to our readers.",
+   "We have said that no being is conceivable unless it be considered synthetically: we must now explain this sentence.",
+   "Man, regarded synthetically, is composed of an acting, animated body.",
+   "If in the same way we wish to imagine by itself the principle which animates this body, which makes it live, the reality at once disappears.",
+   "It is impossible for us to separate the life from the idea of the body, to conceive what this thing may be which is called the human Life, if we wish to see in it a kind of metaphysical being.",
+   "It is on this point that materialistic savants find the most power in their arguments against exclusively idealist thinkers.",
+   "The difficulty increases considerably if it be a question of the principle which causes this body to act — of the Will, of the Soul.",
+   "Analysis here, as elsewhere, can be brought into use, but we cannot possibly conceive what the soul can be like unclothed in a form, that is to say, in a principle that differs from itself.",
+   "On the other hand, the moment we say A MAN, these three terms, thus synthetised, assume consistence and become the expression of a reality, and a being, formed of a body, a life and a will, defines itself quite clearly.",
+   "This is why the study of all realities should be commenced by this third term.",
+   "Henri Wronski has always adopted this method; he names this principle the Neuter Element, and places it at the commencement of all his studies.",
+   "Consequently, the Trinity, composed of the three terms which we have specified, should be considered under two aspects.",
+   "We should first look at the synthesis of this trinity, the cause of its reality.",
+   "The third term (God the Holy Spirit) contains these conditions in itself."
+  ]
+ },
+ "gay_vua": {
+  "ten_en": "King of Sceptres",
+  "boi": "The King of Sceptres symbolizes a dark man, a friend. He generally represents a married man, the father of a family."
+ },
+ "gay_hoang_hau": {
+  "ten_en": "Queen of Sceptres",
+  "boi": "A dark woman, a friend. Represents a serious woman, a very good counsellor, often the mother of a family."
+ },
+ "gay_hiep_si": {
+  "ten_en": "Knight of Sceptres",
+  "boi": "A dark young man, a friend."
+ },
+ "gay_tieu_dong": {
+  "ten_en": "Knave of Sceptres",
+  "boi": "A dark child, a friend. Also represents a message from a near relation."
+ },
+ "gay_1": {
+  "ten_en": "Ace of Sceptres",
+  "boi": "Commencement of an Enterprise."
+ },
+ "gay_2": {
+  "ten_en": "Two of Sceptres",
+  "boi": "Opposition to the commencement of the Enter prise. The Enterprise is commenced when an unexpected obstacle suddenly prevents its execution."
+ },
+ "gay_3": {
+  "ten_en": "Three of Sceptres",
+  "boi": "Realization of the commencement of the Enterprise. The basis of the work is now definitely established, and the undertaking can be fearlessly continued."
+ },
+ "gay_4": {
+  "ten_en": "Four of Sceptres",
+  "boi": "Obstacles to the Enterprise. Nothing can be accomplished without obstacles. We therefore now find them appearing, and must prepare ourselves to overcome them."
+ },
+ "gay_5": {
+  "ten_en": "Five of Sceptres",
+  "boi": "Opposition to the obstacles. Victory after surmounting them."
+ },
+ "gay_6": {
+  "ten_en": "Six of Sceptres",
+  "boi": "Realization of the opposition. At last the obstacles succeed. Failure of the Enterprise in the midst of its execution."
+ },
+ "gay_7": {
+  "ten_en": "Seven of Sceptres",
+  "boi": "Certain success to the Enterprise."
+ },
+ "gay_8": {
+  "ten_en": "Eight of Sceptres",
+  "boi": "Opposition to its success. The Enterprise will only partially succeed."
+ },
+ "gay_9": {
+  "ten_en": "Nine of Sceptres",
+  "boi": "Realization of success. Success is continued."
+ },
+ "gay_10": {
+  "ten_en": "Ten of Sceptres",
+  "boi": "Uncertainty in the management of the Enterprise."
+ },
+ "coc_vua": {
+  "ten_en": "King of Cups",
+  "boi": "A fair man, a friend. This card also represents a barrister, judge, or ecclesiastic. It symbolizes a Bachelor."
+ },
+ "coc_hoang_hau": {
+  "ten_en": "Queen of Cups",
+  "boi": "A fair woman, a friend. The woman loved. The Mistress."
+ },
+ "coc_hiep_si": {
+  "ten_en": "Knight of Cups",
+  "boi": "A young fair man, a friend. The young man loved. The Lover."
+ },
+ "coc_tieu_dong": {
+  "ten_en": "Knave of Cups",
+  "boi": "A fair child. A messenger. Birth."
+ },
+ "coc_1": {
+  "ten_en": "Ace of Cups",
+  "boi": "Commencement of a love affair."
+ },
+ "coc_2": {
+  "ten_en": "Two of Cups",
+  "boi": "Opposition to this commencement. Unimportant obstacles raised by one of the lovers."
+ },
+ "coc_3": {
+  "ten_en": "Three of Cups",
+  "boi": "Realization of this commencement. The love is mutual."
+ },
+ "coc_4": {
+  "ten_en": "Four of Cups",
+  "boi": "Serious obstacles to the love. They arise from other persons, not from the lovers."
+ },
+ "coc_5": {
+  "ten_en": "Five of Cups",
+  "boi": "Opposition to the obstacles. Victory over the obstacles after a struggle."
+ },
+ "coc_6": {
+  "ten_en": "Six of Cups",
+  "boi": "The obstacles triumph. Love destroyed in the midst of happiness. Widowhood."
+ },
+ "coc_7": {
+  "ten_en": "Seven of Cups",
+  "boi": "Success assured to the lovers."
+ },
+ "coc_8": {
+  "ten_en": "Eight of Cups",
+  "boi": "Partial failure of love. Love only partially succeeds."
+ },
+ "coc_9": {
+  "ten_en": "Nine of Cups",
+  "boi": "Motherhood."
+ },
+ "coc_10": {
+  "ten_en": "Ten of Cups",
+  "boi": "Uncertainty in the management of the love affair."
+ },
+ "kiem_vua": {
+  "ten_en": "King of Swords",
+  "boi": "A dark, bad man. He is a soldier, a powerful enemy, who must be distrusted."
+ },
+ "kiem_hoang_hau": {
+  "ten_en": "Queen of Swords",
+  "boi": "A dark wicked woman. The card also indicates her actions, gossip and calumnies."
+ },
+ "kiem_hiep_si": {
+  "ten_en": "Knight of Swords",
+  "boi": "A young, dark man, an enemy. He is also a spy."
+ },
+ "kiem_tieu_dong": {
+  "ten_en": "Knave of Swords",
+  "boi": "A child, an enemy. Bad news. Delay."
+ },
+ "kiem_1": {
+  "ten_en": "Ace of Swords",
+  "boi": "Commencement of enmity."
+ },
+ "kiem_2": {
+  "ten_en": "Two of Swords",
+  "boi": "Opposition to this commencement. The enmity does not last."
+ },
+ "kiem_3": {
+  "ten_en": "Three of Swords",
+  "boi": "Realization of the enmity. Hatred."
+ },
+ "kiem_4": {
+  "ten_en": "Four of Swords",
+  "boi": "Opposition to the hatred. Success against the enemy."
+ },
+ "kiem_5": {
+  "ten_en": "Five of Swords",
+  "boi": "Opposition to this opposition. The enemy triumphs at the moment one fancies the victory is secured."
+ },
+ "kiem_6": {
+  "ten_en": "Six of Swords",
+  "boi": "Equilibrium of the opposition. The enemy is rendered powerless at last."
+ },
+ "kiem_7": {
+  "ten_en": "Seven of Swords",
+  "boi": "Success assured to the enemy."
+ },
+ "kiem_8": {
+  "ten_en": "Eight of Swords",
+  "boi": "Partial opposition to this success. The enemy only partially triumphs."
+ },
+ "kiem_9": {
+  "ten_en": "Nine of Swords",
+  "boi": "Certain duration of the hatred."
+ },
+ "kiem_10": {
+  "ten_en": "Ten of Swords",
+  "boi": "Uncertainty in the enmity."
+ },
+ "tien_vua": {
+  "ten_en": "King of Pentacles",
+  "boi": "A fair man, inimical or indifferent."
+ },
+ "tien_hoang_hau": {
+  "ten_en": "Queen of Pentacles",
+  "boi": "A fair woman, indifferent, or inimical."
+ },
+ "tien_hiep_si": {
+  "ten_en": "Knight of Pentacles",
+  "boi": "A young, fair man. A stranger. An arrival."
+ },
+ "tien_tieu_dong": {
+  "ten_en": "Knave of Pentacles",
+  "boi": "A fair child. A messenger. A letter."
+ },
+ "tien_1": {
+  "ten_en": "Ace of Pentacles",
+  "boi": "Commencement of fortune. Inheritance. Gifts. Economy, etc., etc."
+ },
+ "tien_2": {
+  "ten_en": "Two of Pentacles",
+  "boi": "Opposition to this commencement. Difficulty in well establishing the first landmarks of good fortune."
+ },
+ "tien_3": {
+  "ten_en": "Three of Pentacles",
+  "boi": "Realization of this commencement of fortune. A small sum."
+ },
+ "tien_4": {
+  "ten_en": "Four of Pentacles",
+  "boi": "Opposition of fortune. Loss of money."
+ },
+ "tien_5": {
+  "ten_en": "Five of Pentacles",
+  "boi": "Opposition to this opposition. A success coming which will balance the loss."
+ },
+ "tien_6": {
+  "ten_en": "Six of Pentacles",
+  "boi": "Realization of the opposition. Ruin."
+ },
+ "tien_7": {
+  "ten_en": "Seven of Pentacles",
+  "boi": "Success assured. A large fortune."
+ },
+ "tien_8": {
+  "ten_en": "Eight of Pentacles",
+  "boi": "Partial success. Great loss of money at the moment apparently of definitely securing the fortune."
+ },
+ "tien_9": {
+  "ten_en": "Nine of Pentacles",
+  "boi": "Equilibrium of Equilibrium. A durable fortune."
+ },
+ "tien_10": {
+  "ten_en": "Ten of Pentacles",
+  "boi": "Uncertainty in the fortune. Great success and great reverses."
+ },
+ "_thieu": []
+}

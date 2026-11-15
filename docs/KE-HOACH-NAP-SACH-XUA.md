@@ -109,9 +109,9 @@ Thần Tướng Toàn Biên quyển 10 có 102 mục về bàn tay (luận tay, 
 | Bát tự: 117 câu (thần sát, thập thần, lục thân, tính nết, thân thể) → khối trên lá số | xong (phần lục thân chưa hiện — cần phép tính vượng / suy của sao chỉ người thân) |
 | Nhân tướng: 61 câu theo nét + 12 cung, 119 kiểu hình, 216 câu Liễu Trang → bài đọc + hỏi đáp | xong (trang kiến thức bộ vị chưa hiện kiểu hình) |
 | Phong thuỷ: 116 điều thế nhà + 73 điều theo cung mệnh → mệnh quái + khảo sát nhà | xong |
-| Dương Trạch Tam Yếu + Bát Trạch Minh Kính (tóm ý) | đang soạn |
-| Tarot: nguồn Papus / Case / Ouspensky | đang soạn |
-| Lớp phủ đồ hình (`/nhan-tuong/do-hinh`) | đang làm |
+| Dương Trạch Tam Yếu + Bát Trạch Minh Kính (tóm ý): 20 nguyên tắc, 64 nhà, 64 bếp, 68 điều Minh Kính; du niên 128/128 khớp engine | xong — khối "Cửa, phòng chính và bếp" ở khảo sát nhà |
+| Tarot: nguồn Papus 1892 (78 lá), Case 1920 (22 ẩn chính), Ouspensky 1913 (22 ẩn chính); 144 câu trích; sửa 22 lời Marseille + 2 lời B.O.T.A. theo nguồn | xong |
+| Lớp phủ đồ hình `/nhan-tuong/do-hinh`: 6 bản khắc (12 cung, 13 bộ vị, lưu niên, nốt ruồi nam / nữ, tam đình lục phủ), 233 điểm đo trên ảnh thật | xong |
 | Hỏi đáp Tử vi / Bát tự / Phong thuỷ dùng lớp sách mới | chưa làm |
 | Khí sắc (Toàn Biên quyển 13–14), cách cục – xương thịt – dáng (quyển 3, 5, 11–12) | chưa làm |
 | Dương Trạch Thập Thư phần còn lại (mở cửa, thước cửa, thoát nước, xuyên cung) | chưa làm |

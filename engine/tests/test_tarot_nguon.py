@@ -14,6 +14,12 @@ NGUON = Path(__file__).resolve().parents[1] / "fixtures" / "nguon"
 WAITE = json.loads((NGUON / "tarot_waite_1910.json").read_text(encoding="utf-8"))
 BOOK_T = json.loads((NGUON / "tarot_book_t.json").read_text(encoding="utf-8"))
 MATHERS = json.loads((NGUON / "tarot_mathers_1888.json").read_text(encoding="utf-8"))   # 5/6 chương sacred-texts, chủ dự án lưu PDF
+# TR-6: ba sách phạm vi công cộng nạp từ archive.org (scripts/nap_tarot_{papus,case,ouspensky}.py) — lớp Marseille (Papus),
+# gốc B.O.T.A. (Case 1920), bút ký chiêm nghiệm (Ouspensky). Chỉ giữ chữ hai bản quét / hai bản gõ lại cùng cho.
+PAPUS = json.loads((NGUON / "tarot_papus_1892.json").read_text(encoding="utf-8"))
+CASE = json.loads((NGUON / "tarot_case_1920.json").read_text(encoding="utf-8"))
+OUSPENSKY = json.loads((NGUON / "tarot_ouspensky_1913.json").read_text(encoding="utf-8"))
+AN_CHINH = [m for m in calc.BO_BAI if m.startswith("dai_")]
 
 
 # Book T đặt tên hoàng gia khác Waite: "King" cưỡi ngựa = Hiệp sĩ (Knight) của Waite, "Prince" trên cỗ xe = Vua (King),
@@ -28,6 +34,17 @@ def _book_t(ma: str) -> dict | None:
 
 def _chuan(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
+
+
+def _kho_moi(sach: str, ma: str) -> str:
+    """Toàn bộ nguyên văn của MỘT lá trong kho nguồn TR-6 (đã gộp khoảng trắng)."""
+    if sach == "papus_1892":
+        p = PAPUS[ma]
+        return _chuan(" ".join([p.get("boi", ""), *(p.get("doan") or [])]))
+    if sach == "case_1920":
+        c = CASE[ma]
+        return _chuan(" ".join([*c["chu_cai"]["y"], *(CASE["_chuong"][ch][i] for ch, i in c["doan"])]))
+    return _chuan(" ".join(OUSPENSKY[ma]["doan"]))
 
 
 def test_fixture_du_78_la_waite_va_52_la_book_t():
@@ -60,12 +77,70 @@ def test_moi_trich_la_nguyen_van_cua_nguon(ma):
             assert tr["nguyen_van"] == f"{m['ten_en']}.--{m['y_xuoi']}" and tr["nguyen_van_nguoc"] == m["y_nguoc"], ma
             if tr.get("bieu_tuong"):
                 assert tr["bieu_tuong"] == m["bieu_tuong"], ma
+        elif tr["sach"] in ("papus_1892", "case_1920", "ouspensky_1913"):
+            assert set(tr) == {"sach", "nguyen_van", "nghia"}, (ma, tr["sach"])
+            assert 0 < len(tr["nguyen_van"]) <= 300, (ma, tr["sach"])
+            assert _chuan(tr["nguyen_van"]) in _kho_moi(tr["sach"], ma), (ma, tr["sach"], tr["nguyen_van"][:60])
         else:
             raise AssertionError(f"{ma}: nguồn trích lạ {tr['sach']} — chỉ nguồn đã có fixture nguyên văn")
     # lá có trong Book T thì phải có trích Book T (36 lá số + 16 hoàng gia); Mathers 1888 có đủ 78 lá
     if _book_t(ma):
         assert any(tr["sach"] == "book_t" for tr in trich), ma
     assert any(tr["sach"] == "mathers_1888" for tr in trich), ma
+    # TR-6: Papus có nghĩa bói đủ 78 lá — mục Papus ĐẦU của mỗi lá là đúng nghĩa bói trong sách; 22 ẩn chính thêm Case + Ouspensky
+    papus = [tr for tr in trich if tr["sach"] == "papus_1892"]
+    assert papus and papus[0]["nguyen_van"] == PAPUS[ma]["boi"], ma
+    if ma in AN_CHINH:
+        assert len(papus) == 2 and {"case_1920", "ouspensky_1913"} <= {tr["sach"] for tr in trich}, ma
+
+
+def test_kho_nguon_tr6_du_la_va_dung_thu_tu():
+    """Papus 78 lá (thứ tự Marseille, chữ Hebrew lối Pháp), Case 22 lá (chữ Hebrew lối Golden Dawn), Ouspensky 22 lá."""
+    assert all(PAPUS[m].get("boi") for m in calc.BO_BAI) and PAPUS["_thieu"] == []
+    assert all(len(PAPUS[m].get("doan") or []) >= 5 for m in AN_CHINH)
+    assert PAPUS["dai_11"]["so_papus"] == 8 and PAPUS["dai_8"]["so_papus"] == 11          # Papus: 8 = Justice, 11 = Strength
+    assert PAPUS["dai_0"]["so_papus"] == 21 and PAPUS["dai_0"]["chu_cai"] == "Shin" and PAPUS["dai_1"]["chu_cai"] == "Aleph"
+    assert sorted(PAPUS[m]["so_papus"] for m in AN_CHINH) == list(range(1, 23))
+    assert all(CASE[m]["chu_cai"]["y"] and CASE[m]["doan"] for m in AN_CHINH)
+    assert all(len(OUSPENSKY[m]["doan"]) >= 3 for m in AN_CHINH) and OUSPENSKY["_thieu"] == []
+    assert OUSPENSKY["dai_7"]["so_ouspensky"] == "V" and OUSPENSKY["dai_5"]["so_ouspensky"] == "VII"     # Ouspensky đổi chỗ Cỗ Xe ↔ Giáo Hoàng
+    for d in (PAPUS, CASE, OUSPENSKY):
+        n = d["_nguon"]
+        assert n["nam"] < 1929 and "phạm vi công cộng" in n["pd"] and all(u.startswith("https://archive.org/details/") for u in n["url"])
+    # lời bình của người biên tập HIỆN ĐẠI không được lọt vào kho nguồn
+    assert not any("D.T." in c or "Tyson" in c for m in AN_CHINH for c in OUSPENSKY[m]["doan"])
+    assert "Paul Case in 1920" not in json.dumps({k: v for k, v in CASE.items() if k != "_nguon"}, ensure_ascii=False)
+
+
+def test_so_trich_theo_sach():
+    dem: dict[str, int] = {}
+    for m in calc.BO_BAI:
+        for s in {tr["sach"] for tr in kb.mot_la(m)["trich"]}:
+            dem[s] = dem.get(s, 0) + 1
+    assert dem == {"waite_1910": 78, "mathers_1888": 78, "book_t": 52, "papus_1892": 78, "case_1920": 22, "ouspensky_1913": 22}, dem
+    assert all(kb.ten_nguon(s) != s for s in dem)              # mã nguồn nào cũng có tên sách hiển thị (không lộ mã nội bộ)
+
+
+# Case 1920 (chương III) ghi chữ Hebrew + hành tinh / cung / nguyên tố của 22 ẩn chính — cùng lối Golden Dawn mà KB dùng.
+_CASE_CHU = {"Aleph": "Aleph", "Beth": "Beth", "Gimel": "Gimel", "Daleth": "Daleth", "He": "Heh", "Vau": "Vav", "Zain": "Zayin", "Cheth": "Cheth",
+             "Teth": "Teth", "Yod": "Yod", "Kaph": "Kaph", "Lamed": "Lamed", "Mem": "Mem", "Nun": "Nun", "Samekh": "Samekh", "Ayin": "Ayin",
+             "Peh": "Peh", "Tzaddi": "Tzaddi", "Qoph": "Qoph", "Resh": "Resh", "Shin": "Shin", "Tau": "Tav"}
+_CASE_CT = {"hanh_tinh": {"thuy_tinh": "Mercury", "mat_trang": "The Moon", "kim_tinh": "Venus", "moc_tinh": "Jupiter", "hoa_tinh": "Mars",
+                          "mat_troi": "Sun", "tho_tinh": "Saturn"},
+            "nguyen_to": {"khi": "Ruach", "thuy": "Water", "hoa": "Fire"}}
+
+
+@pytest.mark.parametrize("ma", AN_CHINH)
+def test_chu_hebrew_va_chiem_tinh_an_chinh_khop_case_1920(ma):
+    l, c = kb.mot_la(ma), CASE[ma]["chu_cai"]
+    assert l["duong"] == int(ma.split("_")[1]) + 11, ma                                   # con đường 11–32 theo thứ tự chữ
+    assert l["chu_cai"] == _CASE_CHU[c["ten"]], (ma, l["chu_cai"], c["ten"])                 # cùng chữ, chỉ khác cách phiên âm
+    ct = l["chiem_tinh"]
+    dau = [y.split(":")[0].strip() for y in c["y"]]                                       # tên thuộc tính đứng đầu mỗi câu
+    if ct["loai"] == "cung":
+        assert kb.cung_hoang_dao()[ct["ma"]]["en"] in dau, (ma, ct, dau)
+    else:
+        assert _CASE_CT[ct["loai"]][ct["ma"]] in dau, (ma, ct, dau)
 
 
 def test_mathers_du_78_la_va_thu_tu_marseille():

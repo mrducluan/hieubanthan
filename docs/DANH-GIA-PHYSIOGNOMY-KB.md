@@ -238,3 +238,20 @@ trên một đường thẳng, không có ảnh khắc gỗ bên dưới), và c
 này. Bản database trên Drive cũng chưa có bảng `diagram_overlays`. Vì vậy em đo lại toạ độ **trực tiếp trên ảnh khắc gỗ**,
 vẽ chấm kiểm tra rồi mới ghi. Ảnh gốc không sửa điểm ảnh; lớp chú giải bật – tắt được; lời nốt ruồi theo ba nhóm ở 9.1,
 không màu đỏ.
+
+### 9.5 Đã làm xong lớp phủ đồ hình
+
+| Bản khắc | Trang | Số điểm |
+|---|---|---|
+| 十二宮五官之圖 — 12 cung, ngũ quan, ngũ nhạc | `/nhan-tuong/do-hinh/muoi-hai-cung-ngu-quan` | 34 |
+| 流年運氣之圖 — vị trí từng tuổi | `/nhan-tuong/do-hinh/luu-nien-van-khi` | 77 |
+| 十三部位總要之圖 — 13 bộ vị trục giữa | `/nhan-tuong/do-hinh/muoi-ba-bo-vi` | 37 |
+| 男子面痣之圖 — nốt ruồi (hình vẽ cho nam) | `/nhan-tuong/do-hinh/not-ruoi-nam` | 37 |
+| 女人面痣之圖 — nốt ruồi (hình vẽ cho nữ) | `/nhan-tuong/do-hinh/not-ruoi-nu` | 36 |
+| 六府三才三停之圖 — lục phủ, tam tài, tam đình | `/nhan-tuong/do-hinh/luc-phu-tam-tai-tam-dinh` | 12 |
+
+Cách làm: KB `nhan_tuong_do_hinh.json` (git là nguồn) giữ toạ độ 0..1 đo trên ảnh + chữ Hán trên bản khắc + âm Hán Việt +
+tên + nghĩa Việt; engine `GET /v1/nhan-tuong/do-hinh[/{ma}]`; web vẽ chấm lên ảnh gốc (ảnh WebP tự phục vụ ở `/anh/do-hinh/`,
+không sửa điểm ảnh). Chạm vào gần chấm nào thì mở chấm gần nhất (chấm nốt ruồi nằm sát nhau), điện thoại có nút Phóng to,
+bàn phím đi bằng Tab; nút "Xem bản khắc gốc" tắt hết lớp phủ. Danh sách mọi chữ khắc in sẵn trong HTML cho Google và bot AI.
+Lời nốt ruồi theo ba nhóm A / B / C (không màu đỏ). Toạ độ đã kiểm bằng ảnh vẽ chấm cho cả sáu bản khắc.

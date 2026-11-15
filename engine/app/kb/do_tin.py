@@ -103,6 +103,8 @@ SO: dict[str, dict] = {
                                                       "SX-C: 119 kiểu hình mày, mắt, mũi, tai, miệng (bài thơ từng kiểu) khớp kho nguồn; 7 mục gắn `ngo`")},
     "nhan_tuong_lieu_trang.json": {"mang": "nhantuong", **_nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                        "SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn")},
+    "nhan_tuong_do_hinh.json": {"mang": "nhantuong", "muc": "tom_y_co_thu",
+                                "ghi_chu": "lớp phủ đồ hình: nhãn chữ Hán đọc trên bản khắc Thần Tướng Toàn Biên; toạ độ đo trên ảnh; lời Việt rút từ KB"},
     "nhan_tuong_kb.json": {"mang": "nhantuong", "muc": "tom_y_co_thu", "ghi_chu": "KT-NT1/2 + KT-N1 + KT-NT3: cả 70 câu trích sách (`dac_diem.*.sach`) khớp kho nguồn `nhan_tuong_co_thu.json` + `than_tuong_toan_bien.json` (Thần Tướng Toàn Biên bản Cổ Kim Đồ Thư Tập Thành, Băng Giám, Tâm Tướng Thiên, Linh Khu, 4 sách Tứ khố — tests/test_kt_nt1_kho_nguon.py); lời luận vẫn là tóm ý, trường `nguon` Ma Y / Thần Tướng Toàn Biên chỉ ghi phái"},
     "tarot_kb.json": {"mang": "tarot", **_nv("tarot_waite_1910.json", "tests/test_tarot_nguon.py::test_moi_trich_la_nguyen_van_cua_nguon",
                                              "câu trích khớp Waite / Mathers / Book T / Papus 1892 / Case 1920 / Ouspensky 1913; lời lớp Marseille, "
