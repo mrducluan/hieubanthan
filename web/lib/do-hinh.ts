@@ -1,7 +1,5 @@
 // Lớp phủ đồ hình Nhân tướng — đọc engine `/v1/nhan-tuong/do-hinh` (tầng KB: toạ độ 0..1 đo trên ảnh khắc gỗ, chữ Hán, âm,
 // nghĩa Việt). Web chỉ hiển thị; ảnh gốc tự phục vụ ở /anh/do-hinh/<tep> (tách khỏi đường dẫn trang), không sửa điểm ảnh.
-import { unstable_noStore as noStore } from "next/cache";
-
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
@@ -32,7 +30,7 @@ async function lay<T>(duong: string): Promise<T | null> {
     if (r.status === 404) return null;
     if (r.ok) return (await r.json()) as T;
   } catch { /* engine bận */ }
-  noStore();
+  // Ném lỗi → trang trả 5xx (Google thử lại sau), sitemap tự bỏ cụm này; không gọi noStore() ở đây vì sitemap cũng đi qua.
   throw new Error("engine đồ hình không phản hồi");
 }
 

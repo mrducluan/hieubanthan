@@ -2,7 +2,9 @@
 """SX-C (2026-11-14) — lớp "sách xưa ghi": mọi mục KB qua bộ kiểm, khối hiển thị đúng ba nhóm, không lộ cho người chưa 18."""
 from __future__ import annotations
 
+import datetime
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -69,8 +71,35 @@ def test_tuvi_chon_theo_do_sang():
     khi = [m.get("khi", "chung") for m in kb]
     assert "chung" in khi
     for do_sang, tt in (("Miếu", "sang"), ("Hãm", "ham"), ("Bình", None)):
-        k = sgm.tuvi(_cung("Tham Lang", do_sang))
-        assert k["so_muc"] == sum(1 for x in khi if x in ("chung", tt)), do_sang
+        k = sgm.tuvi(_cung("Tham Lang", do_sang), tuoi=30)
+        mong = sum(1 for m, x in zip(kb, khi) if x in ("chung", tt) and sgm._dieu_kien_dat(m["han"], "Tham Lang", {"Tham Lang"}, set()))
+        assert k["so_muc"] == mong, do_sang
+
+
+def test_tuvi_cau_sach_neu_sao_kem_phai_dung_voi_cung():
+    # câu nêu sao kèm → cung phải có sao đó; câu "không gặp …" → cung phải không có
+    assert not sgm._dieu_kien_dat("贪狼遇火铃", "Tham Lang", {"Tham Lang"}, set())
+    assert sgm._dieu_kien_dat("贪狼遇火铃", "Tham Lang", {"Tham Lang", "Hỏa Tinh"}, set())
+    assert sgm._dieu_kien_dat("贪狼无煞", "Tham Lang", {"Tham Lang"}, set())
+    assert not sgm._dieu_kien_dat("贪狼无煞", "Tham Lang", {"Tham Lang", "Kình Dương"}, set())
+    assert not sgm._dieu_kien_dat("紫微贪狼", "Tham Lang", {"Tham Lang"}, set())        # sao chính kèm phải đồng cung
+    assert sgm._dieu_kien_dat("贪狼化禄", "Tham Lang", {"Tham Lang"}, {"Lộc"})
+
+
+def test_khong_biet_tuoi_thi_khong_nhan_nhom_c():
+    cung = [{"ten": "Mệnh", "chinh_tinh": [{"ten": s, "do_sang_nam_phai": "Hãm"} for s in ("Thất Sát", "Phá Quân", "Cự Môn")],
+             "phu_tinh": []}]
+    assert "C" not in {m["nhom"] for n in (sgm.tuvi(cung) or {"nhom": []})["nhom"] for m in n["muc"]}
+    assert sgm.tuoi_tu(None, datetime.date(2026, 11, 15)) is None
+    assert sgm.tuoi_tu(2008, datetime.date(2026, 11, 15)) == 17          # chỉ năm sinh: tính thận trọng
+    assert sgm.tuoi_tu(datetime.date(2008, 1, 2), datetime.date(2026, 11, 15)) == 18
+
+
+def test_battu_chi_nhan_dieu_kien_kiem_duoc():
+    assert sgm._khi_bt("", None) and sgm._khi_bt("nói chung, ai có sao này", None)
+    assert sgm._khi_bt("với lá số nam", "nam") and not sgm._khi_bt("với lá số nam", "nu")
+    assert not sgm._khi_bt("với lá số nữ", None)
+    assert not sgm._khi_bt("khi nhật chủ vượng", "nam")                 # chưa có phép tính → không chọn
 
 
 def test_ba_nhom_hien_dung_khuon_va_tre_khong_nhan_nhom_c():
@@ -139,6 +168,13 @@ def test_hoi_dap_nhan_tuong_kieu_hinh_dang_dieu_bo_vi():
     assert "Sách xưa ghi thêm về chỗ này" in b["cau_tra_loi"] and "không phải nhận xét về gương mặt bạn" in b["cau_tra_loi"]
     # câu xin xem tướng người khác vẫn bị từ chối trước khi tới kiểu hình
     assert nt.hoi("Mắt phượng của sếp tôi nói gì về anh ấy?", nam_sinh=1990)["xu_ly"] == "tu_choi_nhe"
+    # câu đời thường trùng chữ với tên kiểu hình / dáng điệu không bị bắt nhầm
+    for cau in ("Tôi bị đau mắt cá", "Ăn mộc nhĩ có tốt không", "Đau ở hổ khẩu bàn tay", "Tôi đang nằm viện",
+                "Bé đang ngủ thì giật mình", "Hôm nay mắt say vì thức khuya"):
+        assert nt.hoi(cau, nam_sinh=1990)["xu_ly"] not in ("kieu_hinh", "dang_dieu"), cau
+    assert nt.hoi("Tôi muốn nâng mũi cho thành mũi rồng", nam_sinh=1990)["xu_ly"] == "phau_thuat"
+    assert nt.hoi("Bé nhà tôi có mắt rắn", nam_sinh=1990)["xu_ly"] == "tu_choi_nhe"
+    assert nt.hoi("nụ cười nói gì về tôi", nam_sinh=1990)["xu_ly"] == "dang_dieu"
 
 
 def test_kieu_hinh_nhom_c_khong_hien_cho_nguoi_chua_18():
@@ -172,3 +208,21 @@ def test_phongthuy_cua_chu_bep_lay_tam_yeu():
     n = next(x for x in k["nhom"] if x["ma"] == "cua_chu_bep")
     assert len(n["muc"]) == 2 and all(m.get("tom_y") and "han" not in m and m["sach"] == "Dương Trạch Tam Yếu" for m in n["muc"])
     assert "Sinh Khí" in n["muc"][0]["ve"]
+
+
+def test_thai_san_va_ten_chung_chi_noi_dang_giu_gin():
+    """SX-C2 (chủ dự án 2026-11-15): thai sản, kinh nguyệt, tên chứng hay gặp được nhắc — luôn kèm ý đi khám / giữ gìn."""
+    for ten in TEP:
+        for vt, m in sg.cac_muc(json.loads((DATA / ten).read_text("utf-8"))):
+            t = " ".join(m.get(k) or "" for k in ("y", "ham_y", "viec")).lower()
+            if any(x in t for x in ("thai", "sinh nở", "kinh nguyệt")) or re.search(r"(?<![\wÀ-ỹ])(?<!bằng )chứng (?!từ)", t):
+                assert "khám" in t or "giữ gìn" in t or "giữ sức" in t, (ten, vt)
+
+
+def test_do_hinh_nhom_b_c_khong_hien_phien_am():
+    d = json.loads((DATA / "nhan_tuong_do_hinh.json").read_text("utf-8"))
+    for h in d["do_hinh"]:
+        for p in h["diem"]:
+            if p.get("muc") in ("B", "C"):
+                assert not p.get("am"), p["id"]
+            assert not sg.kiem_loi(p["y"]), p["id"]

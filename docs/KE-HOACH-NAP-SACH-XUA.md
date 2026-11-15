@@ -40,7 +40,8 @@ Giữ nguyên, không đổi theo đợt này:
 | 賤, 下賤 | hạ tiện, hèn | "vất vả", "phải tự thân làm nhiều", "ít được nâng đỡ" |
 | 貧, 窮, 破財, 破家 | nghèo hèn, phá sản | "tiền bạc lúc đầu chật", "của khó giữ — nên có khoản để dành tự động" |
 | 牢獄, 官非, 訟 | tù tội | "dễ vướng chuyện giấy tờ, tranh chấp — nên làm gì cũng có văn bản; cần thì hỏi luật sư" |
-| 疾, 病, 眼疾, 殘疾 | tên bệnh, tàn tật | "sách gắn với <bộ phận / hệ cơ quan>; nên chăm phần này và đi khám định kỳ" |
+| 疾, 病, 眼疾, 殘疾 | tàn tật, "sẽ bị / dễ mắc <bệnh>" | "sách gắn với <bộ phận>; nên khám để sớm nhận ra chứng … hay gặp ở phần này" (tên chứng thường gặp ĐƯỢC nêu — SX-C2; bệnh hiểm nghèo thì không) |
+| 胎, 產, 墮胎, 難產 | sảy thai, khó sinh, hao người | "lúc mang thai, sinh nở cần giữ gìn kỹ; khám thai đúng lịch, sinh ở cơ sở y tế" (SX-C2: thai sản được nói, không đoán kết quả của thai) |
 | 凶, 大凶, 禍 | đại hung, tai hoạ | "nên cẩn thận hơn", "sách xếp vào điều nên tránh" |
 | 孤, 寡, 孤獨 | goá, cô độc suốt đời | "dễ thấy một mình", "nên chủ động giữ các mối thân" |
 | 奸, 詐, 毒 | gian, độc ác | "tính toán kỹ", "kín", "nên thẳng thắn hơn để người khác dễ tin" |

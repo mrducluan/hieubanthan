@@ -2883,7 +2883,7 @@
       0.3149
      ],
      "han": "不宜出入",
-     "am": "Bất nghi xuất nhập",
+     "am": null,
      "ten": "Góc trán bên trái",
      "y": "Sách xưa ghi «bất nghi xuất nhập», tức không hợp ra vào nhiều — nên chú ý chuyện đi lại: đi xa thì báo người nhà, xem kỹ xe trước khi đi.",
      "nhom": "not_ruoi_tran",
@@ -2909,7 +2909,7 @@
       0.476
      ],
      "han": "不利",
-     "am": "Bất lợi",
+     "am": null,
      "ten": "Trên mắt phải, phía trong",
      "y": "Sách xưa ghi «bất lợi» — nên chú ý: việc gì cũng chừa một phương án dự phòng, đừng dồn hết vào một cửa.",
      "nhom": "not_ruoi_mat",
@@ -2935,7 +2935,7 @@
       0.4719
      ],
      "han": "水厄",
-     "am": "Thuỷ ách",
+     "am": null,
      "ten": "Trên mắt phải, phía ngoài",
      "y": "Sách xưa ghi «thuỷ ách» — nên chú ý an toàn khi ở gần sông nước: đi thuyền, đi bơi thì mặc áo phao, không đi một mình.",
      "nhom": "not_ruoi_mat",
@@ -2948,7 +2948,7 @@
       0.4744
      ],
      "han": "劫財",
-     "am": "Kiếp tài",
+     "am": null,
      "ten": "Đuôi mắt phải, phía trên",
      "y": "Sách xưa ghi «kiếp tài» — nên chú ý chuyện giữ tiền: của khó giữ nếu cho vay, góp vốn theo cảm tình. Nên có khoản để dành tự động.",
      "nhom": "not_ruoi_mat",
@@ -3013,7 +3013,7 @@
       0.6309
      ],
      "han": "凶",
-     "am": "Hung",
+     "am": null,
      "ten": "Đầu mũi",
      "y": "Sách xưa xếp nốt ruồi ở đầu mũi vào điều nên cẩn thận hơn, nhất là chuyện tiền. Nên chú ý ghi chi tiêu, không quyết khoản lớn lúc vội.",
      "nhom": "not_ruoi_duoi",
@@ -3052,7 +3052,7 @@
       0.4713
      ],
      "han": "水厄",
-     "am": "Thuỷ ách",
+     "am": null,
      "ten": "Trên mắt trái, đoạn giữa",
      "y": "Sách xưa ghi «thuỷ ách» — nên chú ý an toàn sông nước: không bơi ở chỗ lạ, đi thuyền thì mặc áo phao.",
      "nhom": "not_ruoi_mat",
@@ -3065,7 +3065,7 @@
       0.4739
      ],
      "han": "凶",
-     "am": "Hung",
+     "am": null,
      "ten": "Trên mắt trái, phía ngoài",
      "y": "Sách xưa xếp vị trí này vào điều nên cẩn thận hơn. Nên chú ý: việc lớn thì hỏi thêm một người mình tin trước khi quyết.",
      "nhom": "not_ruoi_mat",
@@ -3078,7 +3078,7 @@
       0.476
      ],
      "han": "散財",
-     "am": "Tán tài",
+     "am": null,
      "ten": "Đuôi mắt trái, phía trên",
      "y": "Sách xưa ghi «tán tài» — tiền dễ đi theo các cuộc vui và lời nhờ vả. Nên chú ý đặt hạn mức chi mỗi tháng và giữ đúng.",
      "nhom": "not_ruoi_mat",
@@ -3169,7 +3169,7 @@
       0.6711
      ],
      "han": "水厄",
-     "am": "Thuỷ ách",
+     "am": null,
      "ten": "Má trái, cạnh cánh mũi",
      "y": "Sách xưa ghi «thuỷ ách» — nên chú ý an toàn khi gần nước; trẻ nhỏ trong nhà nên được học bơi sớm.",
      "nhom": "not_ruoi_duoi",
@@ -3208,7 +3208,7 @@
       0.7248
      ],
      "han": "不宜牛馬",
-     "am": "Bất nghi ngưu mã",
+     "am": null,
      "ten": "Má phải, ngang mép",
      "y": "Sách xưa ghi «bất nghi ngưu mã», tức không hợp nuôi trâu ngựa — ngày nay nên chú ý khi đi xe và làm việc với máy móc, vật nuôi lớn.",
      "nhom": "not_ruoi_duoi",
@@ -3221,7 +3221,7 @@
       0.7248
      ],
      "han": "厄",
-     "am": "Ách",
+     "am": null,
      "ten": "Trên mép bên phải",
      "y": "Sách xưa ghi «ách», tức chỗ dễ vướng — nên chú ý lời ăn tiếng nói và chuyện ăn uống; việc gì cũng chậm lại một nhịp.",
      "nhom": "not_ruoi_duoi",
@@ -3247,7 +3247,7 @@
       0.7852
      ],
      "han": "酒醉",
-     "am": "Tửu tuý",
+     "am": null,
      "ten": "Dưới môi bên trái",
      "y": "Sách xưa ghi «tửu tuý» — nên chú ý chuyện rượu bia: uống có chừng, đã uống thì không lái xe.",
      "nhom": "not_ruoi_duoi",
@@ -3345,7 +3345,7 @@
       0.3242
      ],
      "han": "少奴",
-     "am": "Thiểu nô",
+     "am": null,
      "ten": "Trán trên, lệch bên phải",
      "y": "Sách xưa ghi «thiểu nô», tức ít người giúp việc — nay hiểu là việc gì cũng tự tay làm. Nên chú ý tập nhờ và giao bớt việc.",
      "nhom": "not_ruoi_tran",
@@ -3436,7 +3436,7 @@
       0.5346
      ],
      "han": "厄",
-     "am": "Ách",
+     "am": null,
      "ten": "Sống mũi",
      "y": "Sách xưa ghi «ách», tức chỗ dễ vướng — nên chú ý chuyện tiền và sức: không ôm quá nhiều việc cùng lúc, có khoản dự phòng.",
      "nhom": "not_ruoi_duoi",
@@ -3475,7 +3475,7 @@
       0.4679
      ],
      "han": "獄",
-     "am": "Ngục",
+     "am": null,
      "ten": "Trên mắt phải, sát sống mũi",
      "y": "Sách xưa ghi một chữ chỉ chuyện kiện cáo — nên chú ý giấy tờ, tranh chấp: làm gì cũng có văn bản, cần thì hỏi luật sư.",
      "nhom": "not_ruoi_mat",
@@ -3488,7 +3488,7 @@
       0.5331
      ],
      "han": "劫盜",
-     "am": "Kiếp đạo",
+     "am": null,
      "ten": "Dưới đuôi mắt phải",
      "y": "Sách xưa ghi «kiếp đạo», tức dễ mất của — nên chú ý giữ đồ: khoá cửa, khoá xe cẩn thận, không để nhiều tiền mặt trong nhà.",
      "nhom": "not_ruoi_mat",
@@ -3527,7 +3527,7 @@
       0.5398
      ],
      "han": "火厄",
-     "am": "Hoả ách",
+     "am": null,
      "ten": "Dưới mắt phải, sát sống mũi",
      "y": "Sách xưa ghi «hoả ách» — nên chú ý an toàn lửa điện: tắt bếp, rút sạc trước khi ra khỏi nhà, có bình chữa cháy nhỏ.",
      "nhom": "not_ruoi_mat",
@@ -3592,7 +3592,7 @@
       0.5429
      ],
      "han": "凶",
-     "am": "Hung",
+     "am": null,
      "ten": "Dưới mắt trái, sát sống mũi",
      "y": "Sách xưa xếp vị trí này vào điều nên cẩn thận hơn. Nên chú ý: việc lớn thì chậm lại một nhịp và hỏi thêm người mình tin.",
      "nhom": "not_ruoi_mat",
@@ -3670,7 +3670,7 @@
       0.6882
      ],
      "han": "妬忌",
-     "am": "Đố kỵ",
+     "am": null,
      "ten": "Má phải, ngang cánh mũi",
      "y": "Sách xưa ghi «đố kỵ» — nên chú ý tính hay so mình với người. Việc nên làm: mỗi tối ghi một điều mình đã làm được.",
      "nhom": "not_ruoi_duoi",
@@ -3683,7 +3683,7 @@
       0.6892
      ],
      "han": "水厄",
-     "am": "Thuỷ ách",
+     "am": null,
      "ten": "Má phải, cạnh cánh mũi",
      "y": "Sách xưa ghi «thuỷ ách» — nên chú ý an toàn khi ở gần sông nước: đi thuyền thì mặc áo phao, không bơi ở chỗ lạ.",
      "nhom": "not_ruoi_duoi",
@@ -3696,7 +3696,7 @@
       0.7689
      ],
      "han": "水厄",
-     "am": "Thuỷ ách",
+     "am": null,
      "ten": "Hàm dưới bên phải",
      "y": "Sách xưa ghi «thuỷ ách» — nên chú ý an toàn sông nước, nhất là khi đi cùng trẻ nhỏ.",
      "nhom": "not_ruoi_duoi",
@@ -3735,7 +3735,7 @@
       0.7616
      ],
      "han": "少田宅",
-     "am": "Thiểu điền trạch",
+     "am": null,
      "ten": "Giữa cằm, dưới môi",
      "y": "Sách xưa ghi «thiểu điền trạch», tức ít nhà đất — nên chú ý chuyện chỗ ở: để dành sớm cho một nơi ổn định, giấy tờ nhà đất làm kỹ.",
      "nhom": "not_ruoi_duoi",
@@ -3761,7 +3761,7 @@
       0.7058
      ],
      "han": "口舌",
-     "am": "Khẩu thiệt",
+     "am": null,
      "ten": "Má trái, ngang mép",
      "y": "Sách xưa ghi «khẩu thiệt» — nên chú ý lời ăn tiếng nói: chuyện chưa rõ thì chưa kể lại, đang nóng thì chưa nhắn tin.",
      "nhom": "not_ruoi_duoi",
@@ -3787,7 +3787,7 @@
       0.7849
      ],
      "han": "妨婢",
-     "am": "Phương tì",
+     "am": null,
      "ten": "Hàm dưới bên trái",
      "y": "Sách xưa ghi chấm này là khó giữ người giúp việc — nay nên chú ý cách giao việc: nói rõ, trả công sòng phẳng, bớt trách.",
      "nhom": "not_ruoi_duoi",

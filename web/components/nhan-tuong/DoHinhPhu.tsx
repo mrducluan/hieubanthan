@@ -31,10 +31,15 @@ export function DoHinhPhu({ dh }: { dh: DoHinh }) {
     return () => window.removeEventListener("keydown", dong);
   }, []);
 
-  const mo = (p: DiemDoHinh) => {
+  // Rê chuột chỉ mở thẻ; đo lượt chỉ khi người dùng bấm / chạm / Tab (rê qua hàng chục chấm không thành hàng chục sự kiện).
+  const mo = (p: DiemDoHinh, doLuot = true) => {
     if (p.id === chon) return;
     setChon(p.id);
-    ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_hinh_diem", muc: dh.ma });
+    if (doLuot) ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_hinh_diem", muc: dh.ma });
+  };
+  const locNhom = (ma: string | null) => {
+    setLoc(ma);
+    if (ma && dang && dang.nhom !== ma) setChon(null);
   };
   // Chấm trên bản khắc nằm sát nhau (nốt ruồi cách nhau vài phần trăm khổ hình): chạm / rê vào đâu thì mở chấm GẦN NHẤT
   // trong bán kính tính theo điểm ảnh màn hình — nút từng chấm vẫn giữ cho bàn phím (Tab) và trình đọc màn hình.
@@ -67,12 +72,12 @@ export function DoHinhPhu({ dh }: { dh: DoHinh }) {
           </button>
           {hien && dh.nhom.length > 1 && (
             <div className="flex flex-wrap gap-1.5" role="group" aria-label="Lọc theo nhóm">
-              <button type="button" onClick={() => setLoc(null)} aria-pressed={loc === null}
+              <button type="button" onClick={() => locNhom(null)} aria-pressed={loc === null}
                 className={cn("min-h-[36px] rounded-full border px-3 text-xs", loc === null ? "border-gold/60 bg-gold/10 text-fg" : "border-line text-fg-muted")}>
                 Tất cả
               </button>
               {dh.nhom.map((n) => (
-                <button key={n.ma} type="button" onClick={() => setLoc(n.ma)} aria-pressed={loc === n.ma}
+                <button key={n.ma} type="button" onClick={() => locNhom(n.ma)} aria-pressed={loc === n.ma}
                   className={cn("min-h-[36px] rounded-full border px-3 text-xs", loc === n.ma ? "border-gold/60 bg-gold/10 text-fg" : "border-line text-fg-muted")}>
                   {n.ten}
                 </button>
@@ -84,7 +89,7 @@ export function DoHinhPhu({ dh }: { dh: DoHinh }) {
           data-testid="do-hinh-khung">
         <div ref={khung} className={cn("relative", phong ? "w-[200%] sm:w-full" : "w-full")}
           onClick={hien ? (e) => { const p = ganNhat(e.clientX, e.clientY, 40); if (p) mo(p); } : undefined}
-          onMouseMove={hien ? (e) => { const p = ganNhat(e.clientX, e.clientY, 18); if (p) mo(p); } : undefined}>
+          onMouseMove={hien ? (e) => { const p = ganNhat(e.clientX, e.clientY, 18); if (p) mo(p, false); } : undefined}>
           {/* eslint-disable-next-line @next/next/no-img-element -- ảnh gốc tự phục vụ, giữ đúng tỉ lệ để toạ độ khớp */}
           <img src={anhDoHinh(dh.tep)} width={dh.rong} height={dh.cao} alt={`${dh.ten} — bản khắc gỗ ${dh.ten_han} trong ${dh.nguon_hien_thi}`}
             className="block h-auto w-full select-none" loading="lazy" draggable={false} />

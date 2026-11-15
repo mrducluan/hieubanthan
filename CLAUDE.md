@@ -43,7 +43,7 @@ Next.js 16 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth,
   2026-11-12)**: Tử vi và Bát tự ĐƯỢC nêu tên 2–3 bệnh hay gặp của hệ cơ quan (KB trường `benh`) nhưng CHỈ trong vế khuyên đi
   khám "nên chú ý đi khám … để phát hiện sớm những bệnh hay gặp ở phần này như …" (`skn.bo_ve_benh` là chỗ duy nhất); không
   tên bệnh hiểm nghèo (ung thư, đột quỵ, suy thận… vẫn ở `cum_cam`), không gán bệnh cho người đọc ("dễ bị / sẽ mắc …" —
-  `skn.doan_benh`, bộ kiểm AI chặn); mảng khác chưa nêu tên bệnh. Vẫn cấm: chẩn
+  `skn.doan_benh`, bộ kiểm AI chặn); mảng khác chưa nêu tên bệnh, trừ lời cổ thư theo SX-C2 bên dưới. Vẫn cấm: chẩn
   đoán, "sẽ ốm / mắc bệnh", tuổi thọ / năm mất, khuyên bỏ thuốc; triệu chứng cấp cứu → khuyên đi khám ngay. (Lời CỔ THƯ về thọ / bệnh
   chỉ được dẫn theo khuôn nhóm C của SX-C bên dưới — hàm ý, nói giảm, kèm đi khám; đó là dẫn sách, không phải hệ thống đoán.)
 - Lời luận giải: đời thường, câu ngắn, thuật ngữ chỉ ở "Vì sao nói vậy"; cấm cụm "giọng AI" (danh sách `cum_cam` trong
@@ -63,7 +63,7 @@ Next.js 16 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth,
   bạn". Nhóm C: không số tuổi, không tên bệnh hiểm nghèo, không "bạn sẽ / sẽ bị", không hiện phiên âm; **không** vào tiêu đề
   hộp, tóm tắt chương, "Điều quan trọng nhất", thẻ chia sẻ, thông báo đẩy, lời nhắc AI; người chưa đủ 18 tuổi không nhận;
   không đổi mức nào. Sách chỉ có bản dịch hiện đại (Dương Trạch Tam Yếu, Bát Trạch Minh Kính) → mục `tom_y` do ban biên tập
-  viết lại, không chép lời bản dịch. Bùa, trấn yểm, vật phẩm, đoán thai / trẻ sơ sinh: không nạp vào lời. **Câu hỏi trực
+  viết lại, không chép lời bản dịch. Bùa, trấn yểm, vật phẩm: không nạp vào lời. **Thai sản, trẻ nhỏ, tên chứng hay gặp (SX-C2, chủ dự án 2026-11-15)**: lời sách xưa ĐƯỢC đưa vào ở mọi mảng nhưng chỉ dạng gợi ý giữ gìn — "lúc mang thai nên khám đúng lịch", "nên khám để sớm nhận ra chứng … hay gặp ở phần này" — không đoán kết quả của thai (sảy thai, khó sinh, sinh đôi…), không bệnh hiểm nghèo, không "sẽ bị / dễ mắc" (`sach_ghi._CAM_CUM`). **Câu hỏi trực
   tiếp** "sống tới bao nhiêu tuổi / năm nào mất / có bị <bệnh> không" và khủng hoảng **giữ nguyên cổng cũ** (SK-1b, an toàn).
   Kế hoạch + bảng nói giảm: `docs/KE-HOACH-NAP-SACH-XUA.md`.
 - Đổi lịch âm: thuật toán Hồ Ngọc Đức, xử lý múi giờ VN trước 1975

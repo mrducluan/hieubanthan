@@ -65,8 +65,11 @@ def api_la_so(inp: TuanTrietInput) -> dict:
           "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls), "cach_cuc_tbct": cach_tbct(ls)},
           "loi_thuong": loi_thuong(ls)}
     ra["sach_xua"] = sach_xua.battu(ls, ra["mo_rong"])       # SX-1: câu sách xưa ứng với lá số (chỉ bản Việt)
-    if ngon_ngu.la_viet():                                   # SX-C: lời sách về thần sát, thập thần, hành ngày sinh (đã nói giảm)
-        ra["sach_ghi"] = sach_ghi_mon.battu(ls, ra["mo_rong"], hoan_canh.tuoi_tron(sinh["lich"].date(), config.hom_nay_vn()))
+    # SX-C: lời sách về thần sát, thập thần, hành ngày sinh (đã nói giảm). Không biết giờ sinh → trụ giờ là tạm, thần sát
+    # của trụ giờ sai → không hiện (như Tử vi).
+    if ngon_ngu.la_viet():
+        ra["sach_ghi"] = None if inp.do_tin_gio is HourConfidence.UNKNOWN else sach_ghi_mon.battu(
+            ls, ra["mo_rong"], hoan_canh.tuoi_tron(sinh["lich"].date(), config.hom_nay_vn()), sinh["gioi_tinh"])
     if not ngon_ngu.la_viet():
         from app.luangiai import battu_hien  # noqa: PLC0415 — EN-ALL GĐ 3: câu CALC theo ngôn ngữ (bản Việt không qua đây)
         ra = battu_hien.la_so(ra)

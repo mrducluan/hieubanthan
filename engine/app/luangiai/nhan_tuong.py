@@ -290,8 +290,7 @@ def bao_cao(tra_loi: dict | None, *, nam_sinh: dt.date | int | None = None, gioi
     kh.ap_hoc(bc, trong_so, ca_nhan)
     # SX-C: câu Thần Tướng Toàn Biên gắn với đúng các nét đã chọn (đã nói giảm; chưa đủ 18 tuổi bỏ nhóm C).
     from app.luangiai import sach_ghi_mon  # noqa: PLC0415
-    ns = nam_sinh.year if isinstance(nam_sinh, dt.date) else nam_sinh
-    bc["sach_ghi"] = sach_ghi_mon.nhan_tuong(khop, ngay_xem.year - ns if ns else None)
+    bc["sach_ghi"] = sach_ghi_mon.nhan_tuong(khop, sach_ghi_mon.tuoi_tu(nam_sinh, ngay_xem))
     return bc
 
 
@@ -382,9 +381,10 @@ def hoi(cau: str, tra_loi: dict | None = None, *, nam_sinh: dt.date | int | None
             return kq
     # SX-C: câu hỏi nêu tên một KIỂU HÌNH sách xưa đặt ("mắt phượng", "mày kiếm"…) → bài thơ của đúng kiểu ấy (đã nói giảm).
     from app.luangiai import sach_ghi_mon  # noqa: PLC0415
-    ns_ = nam_sinh.year if isinstance(nam_sinh, dt.date) else nam_sinh
-    tuoi_ = ((ngay_xem or config.hom_nay_vn()).year - ns_) if ns_ else None
-    if (kh_ := sach_ghi_mon.nt_kieu_hinh(goc, tuoi_)):
+    tuoi_ = sach_ghi_mon.tuoi_tu(nam_sinh, ngay_xem or config.hom_nay_vn())
+    # Câu muốn sửa / phẫu thuật gương mặt ("nâng mũi thành mũi rồng") đi nhánh từ chối sửa tướng, không vào bài kiểu hình.
+    sua_truoc = chung.co(t, [re.escape(k) for k in kb.tu_khoa("phau_thuat")]) or chung.co(t, [r"\bsua\b", r"\bdoi\b"])
+    if not sua_truoc and (kh_ := sach_ghi_mon.nt_kieu_hinh(goc, tuoi_)):
         kq.update(cau_tra_loi=kh_["loi"], can_cu=[f"Nguồn: {kh_['sach']} — bài tả từng kiểu mày, mắt, mũi, tai, miệng."],
                   xu_ly="kieu_hinh", bo_vi=kh_["nhom"], hoi_tiep=["Ấn Đường rộng nghĩa là gì?", "Năm nay tuổi của tôi xem ở đâu?"])
         return kq
@@ -399,7 +399,7 @@ def hoi(cau: str, tra_loi: dict | None = None, *, nam_sinh: dt.date | int | None
         kq.update(cau_tra_loi="Mình không khuyên sửa gương mặt để 'đổi tướng'. Sách tướng xưa nói 'tướng tuỳ tâm sinh' — nét đổi theo thói quen; "
                               "chuyện thẩm mỹ là lựa chọn của bạn với bác sĩ, không liên quan tới vận.", xu_ly="phau_thuat")
         return kq
-    if not ma_bv and (dd_ := sach_ghi_mon.nt_dang_dieu(t, tuoi_)):
+    if not ma_bv and (dd_ := sach_ghi_mon.nt_dang_dieu(goc, tuoi_)):
         kq.update(cau_tra_loi=dd_["loi"], can_cu=[f"Nguồn: {dd_['sach']} — phần bàn dáng đi, ngồi, nằm, ăn, nói, cười."],
                   xu_ly="dang_dieu", hoi_tiep=["Ấn Đường rộng nghĩa là gì?", "Năm nay tuổi của tôi xem ở đâu?"])
         return kq

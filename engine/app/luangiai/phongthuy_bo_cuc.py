@@ -165,7 +165,7 @@ def _sach_ghi(b: "BoCuc", dau_hieu: list[str], sinh: dict | None) -> dict | None
         h = b.vi_tri.get(vt)
         return pt.HUONG_QUAI.get(h) if h and h != "Trung cung" else None
 
-    tuoi = config.hom_nay_vn().year - sinh["nam"] if sinh and sinh.get("nam") else None
+    tuoi = sach_ghi_mon.tuoi_tu((sinh.get("ngay") or sinh.get("nam")) if sinh else None, config.hom_nay_vn())
     # Chín điều theo cung mệnh đã hiện ở khối mệnh quái (`/v1/phongthuy/menh-quai`) — ở đây chỉ dấu hiệu + cửa, phòng chính, bếp.
     return sach_ghi_mon.phongthuy(dau_hieu=dau_hieu, cua=quai("cua_chinh"), chu=quai("phong_ngu_chinh"), bep=quai("bep"),
                                   tuoi=tuoi)

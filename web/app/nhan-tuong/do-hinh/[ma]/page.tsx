@@ -9,7 +9,7 @@ import { DuongDan } from "@/components/khung/DuongDan";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { DoHinhPhu } from "@/components/nhan-tuong/DoHinhPhu";
-import { goiLd, ldDuongDan, ldTrangWeb, metaTrang, urlDayDu } from "@/lib/seo";
+import { catMoTa, goiLd, ldDuongDan, ldTrangWeb, metaTrang, urlDayDu } from "@/lib/seo";
 import { duongDanCum } from "@/lib/duong-dan";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { anhDoHinh, layDoHinh, DUONG_DO_HINH } from "@/lib/do-hinh";
@@ -19,7 +19,7 @@ type P = { params: Promise<{ ma: string }> };
 async function metaGoc(p: P): Promise<Metadata> {
   const dh = await layDoHinh((await p.params).ma);
   if (!dh) return {};
-  return metaTrang({ tieuDe: `${dh.ten} (${dh.ten_han}) — đồ hình nhân tướng`, moTa: dh.mo_ta.slice(0, 158), duong: dh.duong });
+  return metaTrang({ tieuDe: `${dh.ten} — đồ hình nhân tướng`, moTa: catMoTa(dh.mo_ta), duong: dh.duong });
 }
 export const generateMetadata = async (...a: Parameters<typeof metaGoc>) => voiAnhChiaSe(await metaGoc(...a));
 
