@@ -5,6 +5,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ScanFace, ScanSearch } from "lucide-react";
 import { useChu } from "@/components/cms/DauCms";
+import Link from "@/components/khung/Lien";
 import { DauMang } from "@/components/huyen-hoc/KhungMang";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
@@ -128,6 +129,11 @@ export function NhanTuong() {
           <p className="mt-2 inline-flex items-center gap-1 text-xs text-fg-faint"><ScanSearch className="size-3.5" aria-hidden /> Vùng vừa hỏi đang sáng trên bản đồ phía trên.</p>
         )}
       </section>
+
+      <p className="mx-auto mt-8 max-w-5xl text-sm text-fg-muted" data-testid="nt-den-chi-tay">
+        Xem thêm bàn tay: <Link href="/chi-tay" className="text-gold underline underline-offset-2">Xem chỉ tay theo sách xưa</Link> — chụp
+        lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc chọn hình vân giống tay mình.
+      </p>
     </div>
   );
 }

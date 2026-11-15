@@ -44,10 +44,9 @@ def _tay(ngon: float = 1.0, ngang: float = 1.0, dot: dict | None = None, nam: tu
         x, y = gx * ngang, gy
         pts = [(x, y)]
         k = ngon * (dot or {}).get(f, 1.0)
-        h = _HUONG[f]
+        h0 = _HUONG[f]
         for j, L in enumerate(_DOT[f]):
-            if f in nam:
-                h = h + (150 if j == 0 else 110)                                # gập: đốt quay ngược về lòng bàn tay
+            h, L = (h0, L) if f not in nam else ((h0, L * 0.4) if j == 0 else (h0 + 180, L))  # gập: đốt 1 chĩa vào máy, 2–3 quặp xuống
             x, y = x + L * k * math.cos(math.radians(h)), y + L * k * math.sin(math.radians(h))
             pts.append((x, y))
         p[5 + 4 * i: 9 + 4 * i] = pts
@@ -86,7 +85,7 @@ def test_tay_mau_hop_le_va_roi_vao_dai_vua(tay, goc):
 
 def test_so_do_khong_doi_theo_khung_anh_va_xoay():
     a = ctd.do_tay(_anh(_tay(), ty_le=0.75), 0.75, "phai")["so_do"]
-    b = ctd.do_tay(_anh(_tay(), ty_le=1.6, goc=70, cao=0.5, tam=(0.5, 0.5)), 1.6, "phai")["so_do"]
+    b = ctd.do_tay(_anh(_tay(), ty_le=1.6, goc=70, cao=0.3, tam=(0.5, 0.5)), 1.6, "phai")["so_do"]
     assert a == b
 
 
@@ -208,7 +207,7 @@ def test_bo_kiem_han_kho():
 def test_doc_do_tay_nhom_c_theo_tuoi():
     kq = ctd.do_tay(_anh(_tay(ngon=1.2)), 0.75, "phai")
     r = kb.ket_qua_do_tay(kq, "phai", None)
-    assert r["hop_le"] and [m["ma"] for m in r["sach_ghi"]] == ["ngon-thon-dai", "long-thon-ho"]
+    assert r["hop_le"] and [m["ma"] for m in r["sach_ghi"]] == ["ngon-thon-dai", "long-thon-ho", "chu-khach-tuong-xung"]
     assert all(m["loi"].startswith("Sách xưa ghi «") for m in r["sach_ghi"])
     loi = kb.ket_qua_do_tay(ctd.do_tay(_anh(_tay(), "trai"), 0.75, "phai"), "phai", 30)
     assert loi["hop_le"] is False and loi["loi"] == "mu_ban_tay" and "tay phải" in loi["loi_nhac"]

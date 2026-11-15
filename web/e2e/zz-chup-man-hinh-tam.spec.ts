@@ -15,6 +15,8 @@ const ANH = readFileSync(join(__dirname, "..", "public", "anh", "do-hinh", "bat-
 for (const w of [1280, 390]) {
   test(`chụp ${w}`, async ({ page }) => {
     await page.setViewportSize({ width: w, height: 900 });
+    page.on("console", (m) => { if (m.type() === "error" || m.type() === "warning") console.log("CONSOLE", m.type(), m.text().slice(0, 300)); });
+    page.on("pageerror", (e) => console.log("PAGEERR", e.message.slice(0, 300)));
     await page.route("**/api/chi-tay/do-tay", (r) => r.fulfill({ json: KQ }));
     await page.addInitScript((d) => { (window as any).__ctTest = { diem: d }; }, DIEM);
     await page.goto("/chi-tay");
@@ -27,5 +29,10 @@ for (const w of [1280, 390]) {
     const sw = await page.evaluate(() => document.documentElement.scrollWidth);
     console.log("scrollWidth", w, sw);
     await k.screenshot({ path: `${OUT}/ct_anh_${w}.png` });
+    await page.getByTestId("doc-van-tay").scrollIntoViewIfNeeded();
+    await page.screenshot({ path: `${OUT}/ct_thanh_${w}.png` });
+    await page.locator("[data-testid=phong-van]").first().click();
+    await page.waitForTimeout(400);
+    await page.screenshot({ path: `${OUT}/ct_phong_${w}.png` });
   });
 }

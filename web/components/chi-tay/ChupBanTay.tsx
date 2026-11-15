@@ -169,6 +169,14 @@ export function ChupBanTay() {
     await doTay(r.diem, r.ty_le, l);
   };
 
+  // Điện thoại: thẻ cung nằm dưới ảnh → chạm vòng cung thì đưa thẻ vào tầm nhìn.
+  const theRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!mo || !theRef.current || window.matchMedia?.("(min-width: 1024px)").matches) return;
+    const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    theRef.current.scrollIntoView({ behavior: giam ? "auto" : "smooth", block: "nearest" });
+  }, [mo]);
+
   const rutDongY = () => { DONG_Y_CHI_TAY.thuHoi(); setTick(false); boAnh(); };
   const cung = useMemo(() => (kq?.hop_le ? kq.cung ?? [] : []), [kq]);
   const dang = cung.find((c) => c.ma === mo) ?? null;
@@ -322,7 +330,7 @@ export function ChupBanTay() {
 
             <aside className="space-y-3" aria-live="polite">
               {dang ? (
-                <div className="rounded-2xl border border-gold/40 bg-gold/[0.05] p-4" data-testid="ct-the-cung">
+                <div ref={theRef} className="scroll-mb-24 rounded-2xl border border-gold/40 bg-gold/[0.05] p-4" data-testid="ct-the-cung">
                   <div className="flex items-start justify-between gap-3">
                     <p className="font-serif text-3xl text-fg" lang="zh-Hant">{dang.han}</p>
                     <button type="button" onClick={() => setMo(null)} className="min-h-[40px] px-2 text-xs text-fg-muted hover:text-fg">Đóng</button>

@@ -72,12 +72,82 @@ def do_hinh() -> dict | None:
     return {**{k: v for k, v in d.items() if k != "diem"}, "diem": diem, "duong": "/chi-tay", "khac": []}
 
 
-def doc(ds_ma: list[str], tuoi: int | None) -> dict:
-    """Lời sách xưa cho các vân NGƯỜI DÙNG TỰ CHỌN (thứ tự: A → B → C). Không biết tuổi / chưa đủ 18 → bỏ nhóm C."""
-    chon = [m for ma in dict.fromkeys(ds_ma) if (m := lay(ma))]
+def _loc_c(chon: list[dict], tuoi: int | None) -> tuple[list[dict], int]:
+    """Không biết tuổi / chưa đủ 18 → bỏ nhóm C; sắp A → B → C (giữ thứ tự gốc trong cùng nhóm)."""
     co_c = tuoi is not None and tuoi >= TUOI_NHOM_C
     giu = [m for m in chon if m["nhom"] != "C" or co_c]
     giu.sort(key=lambda m: "ABC".index(m["nhom"]))
-    bo_c = len(chon) - len(giu)
-    return {"muc": [_mot(m) for m in giu], "bo_nhom_c": bo_c, "cau_ket": sach_ghi.cau_ket(giu) if giu else "",
-            "khong_ro": [ma for ma in ds_ma if not lay(ma)]}
+    return giu, len(chon) - len(giu)
+
+
+def _sach(m: dict) -> dict:
+    """Một câu sách (theo số đo / theo cung) cho người dùng: không `han_kho`, phiên âm chỉ ở nhóm A (như `_mot`)."""
+    ra = {k: m[k] for k in ("ma", "han", "nhom", "chu_de", "y")}
+    if m["nhom"] == "A":
+        ra["am"] = m["am"]
+    for k in ("ham_y", "viec"):
+        if m.get(k):
+            ra[k] = m[k]
+    ra["loi"] = sach_ghi.loi(m, co_am=False)
+    return ra
+
+
+# ---- CT-2: đo bàn tay trên ảnh + tám cung -------------------------------------------------------------------------
+def do_tay_cfg() -> dict:
+    return _d().get("do_tay") or {}
+
+
+def cung_tay() -> dict[str, dict]:
+    """Tám cung + Minh Đường (thứ tự trong KB), bỏ khoá ghi chú."""
+    return {k: v for k, v in (_d().get("cung_tay") or {}).items() if not k.startswith("_")}
+
+
+def sach_theo_nhan(ma_nhan: str) -> list[dict]:
+    return (_d().get("sach_do_tay") or {}).get(ma_nhan) or []
+
+
+def ket_qua_do_tay(kq: dict, tay: str, tuoi: int | None) -> dict:
+    """Ghép kết quả CALC `chi_tay_do.do_tay` với chữ KB: nhãn, câu sách theo số đo (SX-C), tám cung kèm lựa chọn tự soi.
+    Ảnh không dùng được → `loi_nhac` (lời nhắc chụp lại). Không trả ngưỡng / trọng số / `han_kho`."""
+    cfg = do_tay_cfg()
+    if not kq["hop_le"]:
+        ten = (cfg.get("ten_tay") or {}).get(tay, "")
+        return {"hop_le": False, "loi": kq["loi"], "loi_nhac": cfg["loi"][kq["loi"]].format(tay=ten), "so_do": None,
+                "nhan": [], "sach_ghi": [], "cung": [], "bo_nhom_c": 0, "cau_ket": ""}
+    nhan = [{"ma": n["ma"], "truc": n["truc"], "vua": n["vua"], "ten": cfg["nhan"][n["ma"]]["ten"],
+             "y": cfg["nhan"][n["ma"]]["y"]} for n in kq["nhan"]]
+    giu, bo_c = _loc_c([m for n in kq["nhan"] for m in sach_theo_nhan(n["ma"])], tuoi)
+    ct = cung_tay()
+    cung = [{"ma": c["ma"], "han": ct[c["ma"]]["han"], "am": ct[c["ma"]]["am"], "ten": ct[c["ma"]]["ten"], "vt": c["vt"],
+             "y": ct[c["ma"]]["y"], "lua_chon": [{"ma": x["ma"], "ten": x["ten"]} for x in ct[c["ma"]]["lua_chon"]]}
+            for c in kq["cung"]]
+    return {"hop_le": True, "loi": None, "loi_nhac": None, "so_do": kq["so_do"], "nhan": nhan,
+            "sach_ghi": [_sach(m) for m in giu], "cung": cung, "bo_nhom_c": bo_c,
+            "cau_ket": sach_ghi.cau_ket(giu) if giu else ""}
+
+
+def lua_chon_hop_le(cung: dict[str, str]) -> list[str]:
+    """Danh sách lỗi (rỗng = đạt) của các lựa chọn cung người dùng gửi."""
+    ct = cung_tay()
+    loi = []
+    for ma, lc in cung.items():
+        if ma not in ct:
+            loi.append(f"không có cung {ma!r}")
+        elif lc not in {x["ma"] for x in ct[ma]["lua_chon"]}:
+            loi.append(f"cung {ma!r} không có lựa chọn {lc!r}")
+    return loi
+
+
+def doc(ds_ma: list[str], tuoi: int | None, cung: dict[str, str] | None = None) -> dict:
+    """Lời sách xưa cho các vân và lựa chọn từng cung NGƯỜI DÙNG TỰ CHỌN (thứ tự: A → B → C). Không biết tuổi / chưa đủ 18
+    → bỏ nhóm C. `muc` = vân (thư viện), `muc_cung` = câu theo cung (thêm `cung`, `lua_chon` để web gắn vào cung)."""
+    chon = [m for ma in dict.fromkeys(ds_ma) if (m := lay(ma))]
+    giu, bo_c = _loc_c(chon, tuoi)
+    ct = cung_tay()
+    theo_cung = [(ma, lc, m) for ma in ct if (lc := (cung or {}).get(ma)) for m in (ct[ma].get("sach") or {}).get(lc) or []]
+    giu_cung, bo_c2 = _loc_c([m for _, _, m in theo_cung], tuoi)
+    cua = {id(m): (ma, lc) for ma, lc, m in theo_cung}
+    muc_cung = [{**_sach(m), "cung": cua[id(m)][0], "lua_chon": cua[id(m)][1]} for m in giu_cung]
+    tat_ca = giu + giu_cung
+    return {"muc": [_mot(m) for m in giu], "muc_cung": muc_cung, "bo_nhom_c": bo_c + bo_c2,
+            "cau_ket": sach_ghi.cau_ket(tat_ca) if tat_ca else "", "khong_ro": [ma for ma in ds_ma if not lay(ma)]}
