@@ -2239,5 +2239,201 @@
     ]
    }
   }
+ },
+ "duong_chi": {
+  "_ghi_chu": "Ba đường chỉ lớn + dáng vân, người dùng tự nhìn và chọn — lấy từ «論掌紋» và «許負相手篇» (Thần Tướng Toàn Biên quyển 10). Máy KHÔNG dò đường chỉ trên ảnh (docs/CHI-TAY-ANH.md mục 1).",
+  "gioi_thieu": "Sách gọi ba đường lớn trong lòng bàn tay là thiên (đường trên, dưới gốc các ngón), nhân (đường giữa) và địa (đường ôm gò ngón cái). Đường trên sách gắn với người trên và cha, đường giữa với của cải và trí khôn, đường dưới với mẹ và sức bền. Nhìn tay mình rồi chọn điều giống nhất.",
+  "cau": {
+   "ba_duong": {
+    "ten": "Ba đường lớn trông thế nào?",
+    "lua_chon": [
+     {
+      "ma": "lien",
+      "ten": "Rõ, liền, không bị cắt"
+     },
+     {
+      "ma": "dut",
+      "ten": "Có chỗ đứt hoặc bị vân khác cắt ngang"
+     }
+    ],
+    "sach": {
+     "lien": [
+      {
+       "ma": "ba-duong-sach",
+       "han": "三紋瑩淨無紋破者福祿之相也",
+       "am": "Tam văn oánh tịnh vô văn phá giả phúc lộc chi tướng dã",
+       "y": "Ba đường lớn sạch, sáng, không bị vân nào phá, sách xem là tướng có phúc lộc.",
+       "nhom": "A",
+       "chu_de": "tong_quan",
+       "nguon": "than_tuong_toan_bien",
+       "a_phu_dinh": true
+      }
+     ],
+     "dut": [
+      {
+       "ma": "ba-duong-dut",
+       "han": "大凡紋雖好而久破者皆為缺陷無成之相矣",
+       "am": "Đại phàm văn tuy hảo nhi cửu phá giả giai vi khuyết hãm vô thành chi tướng hĩ",
+       "y": "Đường chỉ đẹp mà bị phá lâu ngày, sách cho là việc dễ dở dang.",
+       "nhom": "B",
+       "chu_de": "cong_viec",
+       "nguon": "than_tuong_toan_bien",
+       "ham_y": "Nên chú ý làm việc đến nơi đến chốn: chia việc lớn thành bước nhỏ và theo hết từng bước.",
+       "viec": "Chọn một việc đang dở, viết ba bước còn lại và làm bước đầu trong tuần này."
+      }
+     ]
+    }
+   },
+   "do_sau": {
+    "ten": "Đường chỉ sâu hay nông?",
+    "lua_chon": [
+     {
+      "ma": "sau",
+      "ten": "Mảnh mà sâu, nét rõ"
+     },
+     {
+      "ma": "nong",
+      "ten": "Thô mà nông, nét mờ"
+     }
+    ],
+    "sach": {
+     "sau": [
+      {
+       "ma": "duong-sau",
+       "han": "紋細而深者吉",
+       "am": "Văn tế nhi thâm giả cát",
+       "y": "Đường chỉ mảnh mà sâu, sách xem là tốt.",
+       "nhom": "A",
+       "chu_de": "tong_quan",
+       "nguon": "than_tuong_toan_bien"
+      }
+     ],
+     "nong": [
+      {
+       "ma": "duong-nong",
+       "han": "紋麤而淺者賤",
+       "am": "Văn thô nhi thiển giả tiện",
+       "y": "Đường chỉ thô mà nông, sách xưa xếp vào tướng kém.",
+       "nhom": "B",
+       "chu_de": "tinh_net",
+       "nguon": "than_tuong_toan_bien",
+       "ham_y": "Nên chú ý bồi đắp nền nếp làm việc đều đặn — đường chỉ không đổi được, thói quen thì đổi được.",
+       "viec": "Giữ một thói quen nhỏ mỗi ngày (đọc 10 trang, đi bộ 20 phút) suốt 30 ngày."
+      }
+     ]
+    }
+   },
+   "duong_doc": {
+    "ten": "Có đường dọc chạy lên ngón tay không?",
+    "lua_chon": [
+     {
+      "ma": "thang_len",
+      "ten": "Có đường thẳng chạy lên một ngón"
+     },
+     {
+      "ma": "tan_ke_ngon",
+      "ten": "Có vân nhỏ tản ra kẽ ngón"
+     },
+     {
+      "ma": "khong",
+      "ten": "Không thấy"
+     }
+    ],
+    "sach": {
+     "thang_len": [
+      {
+       "ma": "doc-thang-len",
+       "han": "豎理直貫上指者百謀皆遂",
+       "am": "Thụ lý trực quán thượng chỉ giả bách mưu giai toại",
+       "y": "Đường dọc chạy thẳng lên tới ngón tay, sách xem là người mưu tính việc gì cũng thành.",
+       "nhom": "A",
+       "chu_de": "cong_viec",
+       "nguon": "than_tuong_toan_bien"
+      }
+     ],
+     "tan_ke_ngon": [
+      {
+       "ma": "doc-tan-ke",
+       "han": "亂理散出指縫者諸事破散",
+       "am": "Loạn lý tán xuất chỉ phùng giả chư sự phá tán",
+       "y": "Vân rối tản ra kẽ ngón, sách cho là việc dễ tản mát.",
+       "nhom": "B",
+       "chu_de": "cong_viec",
+       "nguon": "than_tuong_toan_bien",
+       "ham_y": "Nên chú ý dồn sức vào ít việc hơn, làm xong rồi mới mở việc mới.",
+       "viec": "Liệt kê các việc đang ôm, chọn ra hai việc quan trọng nhất cho tháng này."
+      }
+     ]
+    }
+   },
+   "van_nho": {
+    "ten": "Vân nhỏ khắp lòng bàn tay trông ra sao?",
+    "lua_chon": [
+     {
+      "ma": "to",
+      "ten": "Mảnh, rối như tơ"
+     },
+     {
+      "ma": "cam",
+      "ten": "Lấm tấm như cám rải"
+     },
+     {
+      "ma": "bam",
+      "ten": "Chằng chịt như vết băm"
+     },
+     {
+      "ma": "it",
+      "ten": "Ít vân nhỏ"
+     }
+    ],
+    "sach": {
+     "to": [
+      {
+       "ma": "van-to",
+       "han": "紋細如亂絲者聰明美貌",
+       "am": "Văn tế như loạn ti giả thông minh mỹ mạo",
+       "y": "Vân mảnh, rối như tơ, sách xem là người thông minh, ưa nhìn.",
+       "nhom": "A",
+       "chu_de": "tinh_net",
+       "nguon": "than_tuong_toan_bien"
+      }
+     ],
+     "cam": [
+      {
+       "ma": "van-cam",
+       "han": "紋如散糠者一生快樂",
+       "am": "Văn như tán khang giả nhất sinh khoái lạc",
+       "y": "Vân lấm tấm như cám rải, sách xem là người cả đời vui vẻ.",
+       "nhom": "A",
+       "chu_de": "tinh_net",
+       "nguon": "than_tuong_toan_bien"
+      }
+     ],
+     "bam": [
+      {
+       "ma": "van-bam-hua-phu",
+       "han": "手紋亂剉合有福祿永無災害",
+       "am": "Thủ văn loạn toả hợp hữu phúc lộc vĩnh vô tai hại",
+       "y": "Thiên Hứa Phụ tướng tay khen vân chằng chịt như băm là có phúc lộc, ít gặp chuyện rủi.",
+       "nhom": "A",
+       "chu_de": "tong_quan",
+       "nguon": "than_tuong_toan_bien",
+       "a_phu_dinh": true
+      },
+      {
+       "ma": "van-bam-luan-chuong",
+       "han": "紋如亂剉者一世貧苦",
+       "am": "Văn như loạn toả giả nhất thế bần khổ",
+       "y": "Thiên Luận chưởng văn lại cho vân như băm là đời vất vả — hai thiên trong cùng sách nói ngược nhau.",
+       "nhom": "B",
+       "chu_de": "tien_bac",
+       "nguon": "than_tuong_toan_bien",
+       "ham_y": "Nên chú ý giữ nền tài chính: hai thiên sách còn nói ngược nhau, điều mình làm được là giữ cách chi tiêu.",
+       "viec": "Ghi chi tiêu trong 30 ngày và cắt một khoản không cần thiết."
+      }
+     ]
+    }
+   }
+  }
  }
 }

@@ -130,3 +130,15 @@ def test_thu_vien_cau_ket_suc_khoe_va_nhom_c_khong_am():
     assert sach_ghi.CAU_KET_SUC_KHOE in tv["cau_ket"]
     assert all("am_ten" not in v and "am" not in v for v in tv["van"] if v["nhom"] == "C")
     assert all(v.get("a_phu_dinh") is None for v in tv["van"])          # cờ duyệt nội bộ không ra API
+
+
+def test_duong_chi_cau_hoi_va_cau_sach(may):
+    tv = kb.thu_vien()["duong_chi"]
+    assert {c["ma"] for c in tv["cau"]} == {"ba_duong", "do_sau", "duong_doc", "van_nho"}
+    assert "sach" not in json.dumps(tv)                       # câu sách chỉ trả khi người dùng chọn
+    r = may.post("/v1/chi-tay/doc", json={"duong": {"ba_duong": "lien", "van_nho": "bam"}})
+    j = r.json()
+    assert r.status_code == 200 and [m["ma"] for m in j["muc_duong"]] == ["ba-duong-sach", "van-bam-hua-phu", "van-bam-luan-chuong"]
+    assert all({"cau", "lua_chon", "loi"} <= set(m) for m in j["muc_duong"])
+    assert may.post("/v1/chi-tay/doc", json={"duong": {"ba_duong": "x"}}).status_code == 422
+    assert may.post("/v1/chi-tay/doc", json={"duong": {}}).status_code == 422

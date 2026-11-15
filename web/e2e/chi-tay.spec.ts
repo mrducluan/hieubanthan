@@ -24,3 +24,15 @@ test("chỉ tay: thư viện có trong HTML máy chủ, không tên nội bộ",
   expect(html).toContain("/anh/chi-tay/van/bai-tuong.webp");
   expect(html).not.toMatch(/SXQB|YLZ|sqlite|wikisource/i);
 });
+
+
+test("chỉ tay: tự soi ba đường chỉ lớn → câu sách, hai thiên nói ngược thì hiện cả hai", async ({ page }) => {
+  await page.goto("/chi-tay");
+  await page.locator("[data-testid=nut-duong][data-cau=ba_duong][data-ma=lien]").click();
+  await page.locator("[data-testid=nut-duong][data-cau=van_nho][data-ma=bam]").click();
+  await page.getByTestId("doc-van-tay").click();
+  const kq = page.getByTestId("ket-qua-van-tay");
+  await expect(kq.getByTestId("kq-duong")).toHaveCount(3);
+  await expect(kq).toContainText("三紋瑩淨");
+  await expect(kq).toContainText("nói ngược nhau");
+});

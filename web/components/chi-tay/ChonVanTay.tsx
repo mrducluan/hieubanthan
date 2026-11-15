@@ -9,15 +9,15 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
 import { ngaySinhIso, useHoSo } from "@/lib/hoso";
-import { anhVan, type VanTay } from "@/lib/chi-tay";
-import { boHet, datVan, useChonChiTay } from "@/lib/chi-tay-chon";
+import { anhVan, type DuongChi, type VanTay } from "@/lib/chi-tay";
+import { boHet, datDuong, datVan, useChonChiTay } from "@/lib/chi-tay-chon";
 
 /** Mỗi mục là một vân hoặc một cung (CT-2) — mục cung có thể không có tên Hán / ảnh. */
-type MucKq = Pick<VanTay, "ma" | "loi"> & { ten?: string; ten_han?: string; viec?: string; cung?: string };
+type MucKq = Pick<VanTay, "ma" | "loi"> & { ten?: string; ten_han?: string; viec?: string; cung?: string; cau?: string };
 /** `muc` = vân; `muc_cung` = câu sách theo lựa chọn từng cung (CT-2, có `cung` = mã cung). */
-type KetQua = { muc: MucKq[]; muc_cung?: MucKq[]; bo_nhom_c: number; cau_ket: string };
+type KetQua = { muc: MucKq[]; muc_cung?: MucKq[]; muc_duong?: MucKq[]; bo_nhom_c: number; cau_ket: string };
 
-export function ChonVanTay({ van, chuDe, tenCung = {} }: { van: VanTay[]; chuDe: { ma: string; ten: string }[]; tenCung?: Record<string, string> }) {
+export function ChonVanTay({ van, chuDe, tenCung = {}, duongChi }: { van: VanTay[]; chuDe: { ma: string; ten: string }[]; tenCung?: Record<string, string>; duongChi?: DuongChi }) {
   const hs = useHoSo();
   const [loc, setLoc] = useState<string | null>(null);
   const luu = useChonChiTay();
@@ -31,7 +31,10 @@ export function ChonVanTay({ van, chuDe, tenCung = {} }: { van: VanTay[]; chuDe:
   const chon = useMemo(() => { const ma = new Set(van.map((v) => v.ma)); return luu.van.filter((x) => ma.has(x)); }, [van, luu.van]);
   const cung = luu.cung;
   const soCung = Object.keys(cung).length;
-  const khoaChon = JSON.stringify([chon, cung]);
+  const duong = luu.duong;
+  const soDuong = Object.keys(duong).length;
+  const tenCau = useMemo(() => Object.fromEntries((duongChi?.cau ?? []).map((c) => [c.ma, c.ten])), [duongChi]);
+  const khoaChon = JSON.stringify([chon, cung, duong]);
   // Lựa chọn đổi khi đang chờ máy chủ → bỏ kết quả cũ về muộn (so khoá lựa chọn lúc gửi với khoá hiện tại).
   const khoaHienTai = useRef(khoaChon);
   useEffect(() => { khoaHienTai.current = khoaChon; setKq(null); }, [khoaChon]);
@@ -48,26 +51,52 @@ export function ChonVanTay({ van, chuDe, tenCung = {} }: { van: VanTay[]; chuDe:
   const bat = (ma: string) => datVan(chon.includes(ma) ? chon.filter((x) => x !== ma) : chon.length >= 30 ? chon : [...chon, ma]);
 
   const doc = async () => {
-    if (!chon.length && !soCung) return;
+    if (!chon.length && !soCung && !soDuong) return;
     setDang(true); setLoi(null);
     const khoaGui = khoaChon;
     try {
       const r = await fetch("/api/chi-tay/doc", {
         method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ ...(chon.length ? { van: chon } : {}), ...(soCung ? { cung } : {}), ...(hs ? { ngay_sinh: ngaySinhIso(hs) } : {}) }),
+        body: JSON.stringify({ ...(chon.length ? { van: chon } : {}), ...(soCung ? { cung } : {}), ...(soDuong ? { duong } : {}), ...(hs ? { ngay_sinh: ngaySinhIso(hs) } : {}) }),
       });
       if (!r.ok) throw new Error();
       const j = (await r.json()) as KetQua;
       if (khoaGui !== khoaHienTai.current) return;
       setKq(j);
       cuonToi.current = true;
-      ghi("chart_interacted", { mo_dun: "chitay", kind: "doc_van", so_van: chon.length, so_cung: soCung });
+      ghi("chart_interacted", { mo_dun: "chitay", kind: "doc_van", so_van: chon.length, so_cung: soCung, so_duong: soDuong });
     } catch { setLoi("Máy chủ đang bận, bạn thử lại sau ít phút."); }
     finally { setDang(false); }
   };
 
   return (
     <div data-testid="chon-van-tay">
+      {duongChi && duongChi.cau.length > 0 && (
+        <div className="mb-8 rounded-2xl border border-line/70 p-4" data-testid="duong-chi">
+          <h3 className="text-lg">Ba đường chỉ lớn của bạn</h3>
+          <p className="mt-1 text-sm text-fg-muted">{duongChi.gioi_thieu}</p>
+          <div className="mt-3 space-y-3">
+            {duongChi.cau.map((c) => (
+              <fieldset key={c.ma}>
+                <legend className="text-sm text-fg">{c.ten}</legend>
+                <div className="mt-1.5 flex flex-wrap gap-1.5">
+                  {c.lua_chon.map((l) => {
+                    const co = duong[c.ma] === l.ma;
+                    return (
+                      <button key={l.ma} type="button" aria-pressed={co} data-testid="nut-duong" data-cau={c.ma} data-ma={l.ma}
+                        onClick={() => datDuong(c.ma, co ? null : l.ma)}
+                        className={cn("min-h-[40px] rounded-full border px-3 text-sm", co ? "border-gold/60 bg-gold/10 text-fg" : "border-line text-fg-muted hover:border-gold/40")}>
+                        {co && <Check className="mr-1 inline size-3.5" aria-hidden />}{l.ten}
+                      </button>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-fg-faint">Máy không tự dò đường chỉ trên ảnh — bạn tự nhìn tay mình rồi chọn.</p>
+        </div>
+      )}
       <div className="mb-4 flex flex-wrap gap-1.5" role="group" aria-label="Lọc theo chủ đề">
         {[{ ma: null as string | null, ten: "Tất cả" }, ...chuDe].map((c) => (
           <button key={c.ma ?? "tat-ca"} type="button" onClick={() => setLoc(c.ma)} aria-pressed={loc === c.ma}
@@ -100,16 +129,16 @@ export function ChonVanTay({ van, chuDe, tenCung = {} }: { van: VanTay[]; chuDe:
         })}
       </ul>
       <div className="sticky bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-30 mt-5 md:bottom-3 flex flex-wrap items-center gap-3 rounded-2xl border border-gold/40 bg-bg/95 p-3 backdrop-blur">
-        <p className="text-sm text-fg-muted" data-testid="chon-tom-tat">{chon.length || soCung
-          ? `Đã chọn ${[chon.length ? `${chon.length} hình vân` : "", soCung ? `${soCung} cung trên ảnh tay` : ""].filter(Boolean).join(" và ")}.`
+        <p className="text-sm text-fg-muted" data-testid="chon-tom-tat">{chon.length || soCung || soDuong
+          ? `Đã chọn ${[chon.length ? `${chon.length} hình vân` : "", soCung ? `${soCung} cung trên ảnh tay` : "", soDuong ? `${soDuong} điều về đường chỉ` : ""].filter(Boolean).join(", ")}.`
           : "Chạm vào hình vân giống tay bạn (chọn được nhiều)."}</p>
-        {(chon.length > 0 || soCung > 0) && (
+        {(chon.length > 0 || soCung > 0 || soDuong > 0) && (
           <button type="button" onClick={() => { boHet(); setKq(null); }}
             className="inline-flex min-h-[40px] items-center gap-1 rounded-full border border-line px-3 text-sm">
             <X className="size-4" aria-hidden /> Bỏ chọn
           </button>
         )}
-        <button type="button" onClick={doc} disabled={(!chon.length && !soCung) || dang} data-testid="doc-van-tay"
+        <button type="button" onClick={doc} disabled={(!chon.length && !soCung && !soDuong) || dang} data-testid="doc-van-tay"
           className="ml-auto min-h-[44px] rounded-full bg-gold px-5 text-sm font-medium text-bg disabled:opacity-50">
           {dang ? "Đang đọc…" : "Xem sách xưa nói gì"}
         </button>
@@ -125,16 +154,16 @@ export function ChonVanTay({ van, chuDe, tenCung = {} }: { van: VanTay[]; chuDe:
       )}
       {kq && (
         <section id="ket-qua-chi-tay" className="mt-6 scroll-mt-24 space-y-4" aria-live="polite" data-testid="ket-qua-van-tay">
-          <h3 ref={tieuDeKq} tabIndex={-1} className="text-xl outline-none">{soCung ? "Sách xưa nói gì về bàn tay bạn" : "Sách xưa nói gì về những vân bạn chọn"}</h3>
-          {[...(kq.muc_cung ?? []), ...kq.muc].map((m, i) => (
-            <article key={`${i}-${m.ma}`} className="rounded-2xl border border-line/70 p-4" data-testid={m.cung ? "kq-cung" : "kq-van"}>
-              <p className="font-medium text-fg">{m.ten ?? (m.cung ? tenCung[m.cung] ?? `Cung ${m.cung}` : m.ma)}{" "}
+          <h3 ref={tieuDeKq} tabIndex={-1} className="text-xl outline-none">{soCung || soDuong ? "Sách xưa nói gì về bàn tay bạn" : "Sách xưa nói gì về những vân bạn chọn"}</h3>
+          {[...(kq.muc_duong ?? []), ...(kq.muc_cung ?? []), ...kq.muc].map((m, i) => (
+            <article key={`${i}-${m.ma}`} className="rounded-2xl border border-line/70 p-4" data-testid={m.cau ? "kq-duong" : m.cung ? "kq-cung" : "kq-van"}>
+              <p className="font-medium text-fg">{m.ten ?? (m.cau ? tenCau[m.cau] ?? "Đường chỉ" : m.cung ? tenCung[m.cung] ?? `Cung ${m.cung}` : m.ma)}{" "}
                 {m.ten_han && <span lang="zh-Hant" className="font-serif text-fg-muted">{m.ten_han}</span>}</p>
               <p className="mt-2 leading-relaxed">{m.loi}</p>
               {m.viec && <p className="mt-2 text-sm text-fg-muted"><span className="text-fg">Việc nên làm:</span> {m.viec}</p>}
             </article>
           ))}
-          {!kq.muc.length && !kq.muc_cung?.length && kq.bo_nhom_c === 0 && (
+          {!kq.muc.length && !kq.muc_cung?.length && !kq.muc_duong?.length && kq.bo_nhom_c === 0 && (
             <p className="text-sm text-fg-muted">Sách không có câu riêng cho những lựa chọn này (vd “bình thường”). Thử chọn thêm hình vân giống tay bạn.</p>
           )}
           {kq.bo_nhom_c > 0 && (

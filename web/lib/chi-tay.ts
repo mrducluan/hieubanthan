@@ -13,8 +13,11 @@ export interface VanTay {
   ma: string; ten: string; ten_han: string; am_ten: string; anh: string; rong: number; cao: number;
   han: string; am?: string; y: string; nhom: "A" | "B" | "C"; chu_de: string; ham_y?: string; viec?: string; loi: string;
 }
+export interface CauDuongChi { ma: string; ten: string; lua_chon: { ma: string; ten: string }[] }
+export interface DuongChi { gioi_thieu: string; cau: CauDuongChi[] }
 export interface ThuVienChiTay {
   nguon_hien_thi: string; chu_de: { ma: string; ten: string }[]; van: VanTay[]; cau_ket: string; do_hinh: DoHinh | null;
+  duong_chi?: DuongChi;
 }
 
 export async function layThuVienChiTay(): Promise<ThuVienChiTay> {

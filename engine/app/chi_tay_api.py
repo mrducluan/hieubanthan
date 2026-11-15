@@ -32,6 +32,7 @@ class DocIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     van: list[str] = Field(default_factory=list, max_length=30)
     cung: dict[str, str] | None = Field(default=None, max_length=12)
+    duong: dict[str, str] | None = Field(default=None, max_length=8)
     ngay_sinh: _dt.date | None = _NGAY_SINH
 
     @field_validator("van")
@@ -48,10 +49,17 @@ class DocIn(BaseModel):
             raise ValueError("; ".join(loi))
         return v
 
+    @field_validator("duong")
+    @classmethod
+    def _duong(cls, v: dict[str, str] | None) -> dict[str, str] | None:
+        if v and (loi := kb.duong_hop_le(v)):
+            raise ValueError("; ".join(loi))
+        return v
+
     @model_validator(mode="after")
     def _co_mot(self) -> "DocIn":
-        if not self.van and not self.cung:
-            raise ValueError("cần ít nhất một vân hoặc một lựa chọn cung")
+        if not self.van and not self.cung and not self.duong:
+            raise ValueError("cần ít nhất một vân, một lựa chọn cung hoặc một lựa chọn đường chỉ")
         return self
 
 
@@ -90,7 +98,7 @@ def api_thu_vien() -> dict:
 
 @router.post("/doc")
 def api_doc(inp: DocIn) -> dict:
-    return {"engine_version": ENGINE_VERSION, "pham_vi": "chi_tay", **kb.doc(inp.van, _tuoi(inp.ngay_sinh), inp.cung)}
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "chi_tay", **kb.doc(inp.van, _tuoi(inp.ngay_sinh), inp.cung, inp.duong)}
 
 
 @router.post("/do-tay")

@@ -8,8 +8,9 @@ const Ma = z.string().regex(/^[a-z_]{2,20}$/);
 const Input = z.object({
   van: z.array(z.string().regex(/^[a-z0-9-]{2,40}$/)).min(1).max(30).optional(),
   cung: z.record(Ma, Ma).refine((c) => { const n = Object.keys(c).length; return n >= 1 && n <= 12; }).optional(),
+  duong: z.record(Ma, Ma).refine((c) => { const n = Object.keys(c).length; return n >= 1 && n <= 8; }).optional(),
   ngay_sinh: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-}).strict().refine((d) => Boolean(d.van?.length || (d.cung && Object.keys(d.cung).length)));
+}).strict().refine((d) => Boolean(d.van?.length || (d.cung && Object.keys(d.cung).length) || (d.duong && Object.keys(d.duong).length)));
 
 export function POST(req: Request) {
   return goiEngine(req, Input, "/v1/chi-tay/doc");

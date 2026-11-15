@@ -8,9 +8,9 @@ import { useSyncExternalStore } from "react";
 import { KHOA_CHI_TAY } from "@/lib/chi-tay";
 
 export type Tay = "trai" | "phai";
-export interface ChonChiTay { van: string[]; cung: Record<string, string>; tay: Tay | null }
+export interface ChonChiTay { van: string[]; cung: Record<string, string>; duong: Record<string, string>; tay: Tay | null }
 
-const RONG: ChonChiTay = { van: [], cung: {}, tay: null };
+const RONG: ChonChiTay = { van: [], cung: {}, duong: {}, tay: null };
 const MA = /^[a-z_]{2,20}$/;
 const MA_VAN = /^[a-z0-9-]{2,40}$/;
 const nghe = new Set<() => void>();
@@ -24,11 +24,14 @@ function docKho(): ChonChiTay {
     if (!v || typeof v !== "object") return RONG;
     const o = v as Partial<Record<keyof ChonChiTay, unknown>>;
     const van = Array.isArray(o.van) ? o.van.filter((x): x is string => typeof x === "string" && MA_VAN.test(x)).slice(0, 30) : [];
-    const cung: Record<string, string> = {};
-    if (o.cung && typeof o.cung === "object") {
-      for (const [k, gt] of Object.entries(o.cung as Record<string, unknown>).slice(0, 12)) if (MA.test(k) && typeof gt === "string" && MA.test(gt)) cung[k] = gt;
-    }
-    return { van, cung, tay: o.tay === "trai" || o.tay === "phai" ? o.tay : null };
+    const ma = (x: unknown, toiDa: number) => {
+      const ra: Record<string, string> = {};
+      if (x && typeof x === "object") {
+        for (const [k, gt] of Object.entries(x as Record<string, unknown>).slice(0, toiDa)) if (MA.test(k) && typeof gt === "string" && MA.test(gt)) ra[k] = gt;
+      }
+      return ra;
+    };
+    return { van, cung: ma(o.cung, 12), duong: ma(o.duong, 8), tay: o.tay === "trai" || o.tay === "phai" ? o.tay : null };
   } catch { return RONG; }
 }
 
@@ -41,7 +44,7 @@ function doc(): ChonChiTay {
 function ghiKho(moi: ChonChiTay): void {
   hienTai = moi; daDoc = true;
   try {
-    if (!moi.van.length && !Object.keys(moi.cung).length && !moi.tay) localStorage.removeItem(KHOA_CHI_TAY);
+    if (!moi.van.length && !Object.keys(moi.cung).length && !Object.keys(moi.duong).length && !moi.tay) localStorage.removeItem(KHOA_CHI_TAY);
     else localStorage.setItem(KHOA_CHI_TAY, JSON.stringify({ v: 2, ...moi }));
   } catch { /* chế độ riêng tư */ }
   nghe.forEach((f) => f());
@@ -69,4 +72,10 @@ export function datCung(ma: string, luaChon: string | null): void {
   ghiKho({ ...doc(), cung: { ...con, [ma]: luaChon } });
 }
 export const boHetCung = () => ghiKho({ ...doc(), cung: {} });
+/** Đặt / bỏ lựa chọn tự soi một câu về đường chỉ (ba đường lớn, độ sâu, đường dọc, vân nhỏ). */
+export function datDuong(ma: string, luaChon: string | null): void {
+  if (!MA.test(ma) || (luaChon !== null && !MA.test(luaChon))) return;
+  const { [ma]: _cu, ...con } = doc().duong;
+  ghiKho({ ...doc(), duong: luaChon === null ? con : { ...con, [ma]: luaChon } });
+}
 export const boHet = () => ghiKho({ ...RONG, tay: doc().tay });

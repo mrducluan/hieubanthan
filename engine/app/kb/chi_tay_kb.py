@@ -63,7 +63,7 @@ def thu_vien() -> dict:
     "Ghi chép xưa"; câu kết đủ cả câu "nghe bác sĩ" khi thư viện có mục sức khoẻ (SK-1)."""
     van = [_mot(m) for m in ds_van()]
     return {"nguon_hien_thi": NGUON_HIEN_THI, "trang_thai": meta()["trang_thai"], "chu_de": chu_de(), "van": van,
-            "cau_ket": sach_ghi.cau_ket(ds_van()), "do_hinh": do_hinh()}
+            "cau_ket": sach_ghi.cau_ket(ds_van()), "do_hinh": do_hinh(), "duong_chi": duong_chi()}
 
 
 def do_hinh() -> dict | None:
@@ -130,6 +130,19 @@ def ket_qua_do_tay(kq: dict, tay: str, tuoi: int | None) -> dict:
             "cau_ket": sach_ghi.cau_ket(giu) if giu else ""}
 
 
+def duong_chi() -> dict:
+    """Câu hỏi tự soi ba đường chỉ lớn + dáng vân (không mang câu sách — câu sách chỉ trả khi người dùng chọn)."""
+    d = _d().get("duong_chi") or {}
+    return {"gioi_thieu": d.get("gioi_thieu", ""),
+            "cau": [{"ma": k, "ten": v["ten"], "lua_chon": v["lua_chon"]} for k, v in (d.get("cau") or {}).items()]}
+
+
+def duong_hop_le(duong: dict[str, str]) -> list[str]:
+    cau = (_d().get("duong_chi") or {}).get("cau") or {}
+    return [f"không có câu {k!r} / lựa chọn {v!r}" for k, v in duong.items()
+            if k not in cau or v not in {x["ma"] for x in cau[k]["lua_chon"]}]
+
+
 def lua_chon_hop_le(cung: dict[str, str]) -> list[str]:
     """Danh sách lỗi (rỗng = đạt) của các lựa chọn cung người dùng gửi."""
     ct = cung_tay()
@@ -142,7 +155,7 @@ def lua_chon_hop_le(cung: dict[str, str]) -> list[str]:
     return loi
 
 
-def doc(ds_ma: list[str], tuoi: int | None, cung: dict[str, str] | None = None) -> dict:
+def doc(ds_ma: list[str], tuoi: int | None, cung: dict[str, str] | None = None, duong: dict[str, str] | None = None) -> dict:
     """Lời sách xưa cho các vân và lựa chọn từng cung NGƯỜI DÙNG TỰ CHỌN (thứ tự: A → B → C). Không biết tuổi / chưa đủ 18
     → bỏ nhóm C. `muc` = vân (thư viện), `muc_cung` = câu theo cung (thêm `cung`, `lua_chon` để web gắn vào cung)."""
     chon = [m for ma in dict.fromkeys(ds_ma) if (m := lay(ma))]
@@ -152,6 +165,11 @@ def doc(ds_ma: list[str], tuoi: int | None, cung: dict[str, str] | None = None) 
     giu_cung, bo_c2 = _loc_c([m for _, _, m in theo_cung], tuoi)
     cua = {id(m): (ma, lc) for ma, lc, m in theo_cung}
     muc_cung = [{**_sach(m), "cung": cua[id(m)][0], "lua_chon": cua[id(m)][1]} for m in giu_cung]
-    tat_ca = giu + giu_cung
-    return {"muc": [_mot(m) for m in giu], "muc_cung": muc_cung, "bo_nhom_c": bo_c + bo_c2,
+    cau = (_d().get("duong_chi") or {}).get("cau") or {}
+    theo_duong = [(k, lc, m) for k in cau if (lc := (duong or {}).get(k)) for m in cau[k]["sach"].get(lc) or []]
+    giu_duong, bo_c3 = _loc_c([m for _, _, m in theo_duong], tuoi)
+    cua_d = {id(m): (k, lc) for k, lc, m in theo_duong}
+    muc_duong = [{**_sach(m), "cau": cua_d[id(m)][0], "lua_chon": cua_d[id(m)][1]} for m in giu_duong]
+    tat_ca = giu + giu_cung + giu_duong
+    return {"muc": [_mot(m) for m in giu], "muc_cung": muc_cung, "muc_duong": muc_duong, "bo_nhom_c": bo_c + bo_c2 + bo_c3,
             "cau_ket": sach_ghi.cau_ket(tat_ca) if tat_ca else "", "khong_ro": [ma for ma in ds_ma if not lay(ma)]}
