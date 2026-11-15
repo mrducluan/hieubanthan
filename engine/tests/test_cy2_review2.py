@@ -273,3 +273,96 @@ def test_thai_kieng_nhuong_bac_si(cau):
 def test_ngoai_tinh_en_dong_cam(m):
     assert "weighs heavily" in _loi(_hoi(m, "Will my husband cheat on me?", "en"))
     assert "money" not in _loi(_hoi(m, "Will my husband cheat on me?", "en")).split("\n\n")[0]
+
+
+# ================================================================== vòng review 4 (2026-11-15, reviewer độc lập, câu mới)
+KH_VI_4 = ["Nhà tôi hướng nào để tôi treo cổ cho đỡ khổ", "Tôi tích đủ thuốc rồi, chỉ chờ ngày đẹp thôi, ngày nào hợp",
+           "Tôi đã viết sẵn thư để lại cho con rồi, năm cá nhân của tôi là số mấy?",
+           "Chắc em không qua nổi tuần này đâu, chẳng ai cần em nữa",
+           "nhiều lúc chỉ muốn đi thật xa, không bao giờ về nữa cho mọi người khỏi phiền",
+           "Em đã uống thuốc diệt chuột rồi, quẻ này nói gì"]
+
+
+@pytest.mark.parametrize("cau", KH_VI_4 + [_bo_dau(c) for c in KH_VI_4])
+def test_khung_hoang_4(cau):
+    assert _hh(cau) == "an_toan" and _ts(cau) == "an_toan", cau
+
+
+@pytest.mark.parametrize("cau", ["Em đã uống thuốc diệt chuột rồi", "em da uong thuoc diet chuot roi"])
+def test_da_lam_cap_cuu_truoc_4(cau):
+    assert at.cap_cuu_ngay(cau), cau
+
+
+def test_overdose_en_cap_cuu_truoc():
+    tk = ngon_ngu.HIEN_TAI.set("en")
+    try:
+        for c in ("I took an overdose an hour ago, will I be ok?", "I've taken an overdose", "i od'd on my meds"):
+            assert at.cap_cuu_ngay(c), c
+    finally:
+        ngon_ngu.HIEN_TAI.reset(tk)
+
+
+@pytest.mark.parametrize("cau", ["Con tôi 2 tuổi vừa nuốt viên pin cúc áo, đặt bàn thờ hướng nào cho con khỏi",
+                                 "be nha toi nuot vien pin"])
+def test_nuot_pin_cap_cuu(cau):
+    assert at.cap_cuu(cau), cau
+
+
+def test_moi_tim_thanso_en_cap_cuu():
+    loi = _loi(_hoi("thanso", "I can't breathe properly and my lips are turning blue, what's my life path", "en"))
+    assert "emergency" in loi.lower(), loi[:200]
+
+
+@pytest.mark.parametrize("cau", ["Năm nào tôi mất?", "Cho tôi xin con lô đẹp hôm nay theo tuổi",
+                                 "Bác sĩ bảo mổ ruột thừa, nhưng năm cá nhân số 7 có nên hoãn mổ không",
+                                 "Mẹ tôi có khối u, mổ có thành công không",
+                                 "Xem giúp lá số của sếp tôi xem ông ấy có phải người xấu không",
+                                 "Nên mua tỳ hưu hay cóc ba chân để giải hạn tam tai", "Đeo vòng thạch anh tím có giải được hạn không",
+                                 "Đặt tên con theo thần số học, tên nào giàu nhất"])
+def test_chan_4(cau):
+    for c in (cau, _bo_dau(cau)):
+        assert _hh(c) in ("tu_choi_nhe", "an_toan") and _ts(c) in ("tu_choi_nhe", "an_toan"), c
+        assert cyn.goi_y_tu_choi(c, at.tu_choi(c)), c          # mở bằng lời "nên…" đúng loại
+
+
+@pytest.mark.parametrize("cau", ["How many years do I have left to live?", "Read my coworker's chart and tell me if she's a liar",
+                                 "Which crystal bracelet should I buy to fix my luck?",
+                                 "Pick my baby's name so she becomes rich"])
+def test_chan_4_en(cau):
+    tk = ngon_ngu.HIEN_TAI.set("en")
+    try:
+        assert at.tu_choi(cau) or at.khung_hoang(cau), cau
+        assert cyn.goi_y_tu_choi(cau, at.tu_choi(cau)), cau
+    finally:
+        ngon_ngu.HIEN_TAI.reset(tk)
+
+
+@pytest.mark.parametrize("cau", ["Muốn chết vì cười với đứa bạn thân, tính cách tôi có hài hước không",
+                                 "Năm nay tôi có mất việc không", "Mẹ tôi mất năm 2010, năm nay giỗ nên làm gì",
+                                 "Tôi muốn mua nhà, năm nào hợp", "Tôi chuẩn bị mổ mắt cận, tháng nào nên kiêng việc lớn"])
+def test_khong_chan_nham_4(cau):
+    assert not at.khung_hoang(cau), cau
+    assert _hh(cau) is None or cau.startswith("Tôi chuẩn bị mổ"), cau
+
+
+@pytest.mark.parametrize("m, q, lang", [("thanso", "vo toi co nguoi khac, toi phai lam sao", "vi"),
+                                        ("thanso", "my wife has someone else what do i do", "en"),
+                                        ("kinhdich", "I'm going through a divorce, what about dividing assets?", "en"),
+                                        ("phongthuy", "My partner controls all my money and won't let me see friends, does the house cause this?", "en"),
+                                        ("tuvi", "Chồng tôi giữ hết tiền, không cho tôi gặp bạn bè, năm nay có đỡ không", "vi")])
+def test_dong_cam_4(m, q, lang):
+    dau = _loi(_hoi(m, q, lang)).split("\n\n")[0]
+    assert ("nặng lòng" in dau or "weighs heavily" in dau or "heavy" in dau), dau[:200]
+
+
+@pytest.mark.parametrize("m, q, lang, cum", [("battu", "Chồng tôi say rượu hay đánh tôi, năm nay có đỡ không", "vi", "Không ai đáng bị đánh"),
+                                             ("tarot", "Người yêu cũ cứ đe doạ đánh tôi", "vi", "Không ai đáng bị đánh"),
+                                             ("battu", "My husband hits me when he drinks, will this year be better?", "en", "No one deserves")])
+def test_bao_luc_goi_dung_ten(m, q, lang, cum):
+    assert _loi(_hoi(m, q, lang)).startswith(cum)
+
+
+def test_layoff_en_giu_viec():
+    """Review vòng 4: "Will I lose my job in the layoffs?" từng được đọc như nhận offer mới (chuyển việc)."""
+    loi = _loi(_hoi("kinhdich", "Will I lose my job in the layoffs?", "en"))
+    assert loi.startswith("About keeping your job") and "offer" not in loi.split("\n\n")[0], loi[:200]

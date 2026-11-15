@@ -19,6 +19,21 @@
    "tu_dong": false
   },
   {
+   "ma": "la_so_dep",
+   "ten": "Lá số đẹp",
+   "bien_the": [
+    "lá số đẹp",
+    "lá số tốt",
+    "lá số xấu"
+   ],
+   "han": "好命盤",
+   "mo_dun": "tuvi",
+   "nhom": "khai_niem",
+   "de_hieu": "Không có lá số đẹp hay xấu tuyệt đối. Sách xưa thường khen lá số có chính tinh sáng (miếu, vượng) ở cung Mệnh, tam phương tứ chính có sao tốt (Tả Phù, Hữu Bật, Văn Xương, Văn Khúc, Hoá Lộc), ít sao khó (Không Kiếp, Kình Đà) và có cách cục được sách ghi. Nhưng mỗi lá số đều có mảng thuận và mảng cần chú ý; lá số chỉ cho biết xu hướng, cách sống và lựa chọn của bạn mới quyết định.",
+   "vi_du": "Giống mảnh đất: đất màu mỡ vẫn cần người chăm, đất cằn biết cách trồng vẫn ra quả.",
+   "tu_dong": true
+  },
+  {
    "ma": "cung",
    "ten": "Cung",
    "bien_the": [

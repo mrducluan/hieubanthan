@@ -601,20 +601,21 @@ _GOI_Y_NHOM_VI = [
     ("thai", r"thai nhi|co thai|co bau|mang thai|mang bau|dinh bau|trong bung|trai hay (con )?gai|gai hay (con )?trai|sieu am"
              r"|say thai|thai luu|sinh non|de non|thai (nay|do|lan nay)"),
     ("tham_my", r"tham my|nang mui|cat mi|hut mo|nang nguc|don cam|got cam|cang da|tiem filler|filler|botox|phun xam|lam dep"),
-    ("thuoc_mo", r"(bo|ngung|dung|doi) (uong )?thuoc|thuoc nam|hoa tri|xa tri|phau thuat|(nen|co nen) mo|mo hay|chay than"),
+    ("thuoc_mo", r"(hoan|lui|doi) (lich )?mo|ca mo|mo (co )?(thanh cong|on|suon se)|(bo|ngung|dung|doi) (uong )?thuoc|thuoc nam|hoa tri|xa tri|phau thuat|(nen|co nen) mo|mo hay|chay than"),
     ("nguoi_than_benh", r"(bo|me|ba|ong|cha|chong|vo|con|chau|anh|chi|em)( noi| ngoai| gai| trai)? (toi|em|minh|nha toi)(?!\w)"
                         r".{0,40}(qua khoi|song duoc|con bao lau|song them|di (khong|ko)|mat (khong|ko)|chua (duoc|khoi)|khoi (benh|duoc)"
                         r"|co khoi)|(benh|ung thu|u|tai bien|dot quy)(?!\w).{0,30}cua (bo|me|ba|ong|cha|chong|vo|con|chau|anh|chi|em)"
                         r"( noi| ngoai| gai| trai)? (toi|em|minh)(?!\w).{0,30}(khoi|qua khoi|chua|song|qua noi)"),
-    ("tuoi_tho", r"chet|qua doi|tu vong|song (duoc|den|them|bao)|tho (duoc|bao|may|den)|tuoi tho|con bao lau|qua khoi|bat dac"),
+    ("tuoi_tho", r"nao (toi|minh|em|tui) (se )?mat|chet|qua doi|tu vong|song (duoc|den|them|bao)|tho (duoc|bao|may|den)|tuoi tho|con bao lau|qua khoi|bat dac"),
     ("yem", r"yem bua|bo bua|bua ngai|lam hai|tram yem"),
-    ("nguoi_khac", r"(xem|doc|soi) (tuong|mat|la so|so) (cua |cho |giup )?(nguoi|anh ay|co ay|chong|vo|sep|dong nghiep|ban)"),
+    ("nguoi_khac", r"(xem|doc|soi) (giup )?(tuong|mat|la so|so) (cua |cho |giup )?(nguoi|anh ay|co ay|chong|vo|sep|dong nghiep|ban)"
+                   r"|(la so|tuoi|menh|tuong) (cua )?(sep|dong nghiep|nhan vien|hang xom|doi tac|nguoi ay|anh ay|co ay|ong ay)"),
     ("xep_hang", r"ai trung thuc|ai (gian|lua|phan boi|dang tin)|nhan vien nao .{0,20}(trung thuc|gian|dang tin)"),
     ("tuyen_dung", r"tuyen (ung vien|nhan vien|nguoi|ke toan|nhan su|thu ky)|ung vien|sa thai|(chon|giu|loai) nhan vien|nen tuyen"
                    r"|duoi viec|cho (nhan vien|nguoi lam|ke toan|tro ly|thu ky|giup viec|tho)(?!\w).{0,30}nghi"
                    r"|tuoi nao .{0,25}(lam|vao lam) (nhan vien|ke toan|thu ky|tro ly|quan ly)"),
     ("dau_tu", r"gia (vang|dat|nha|xang|dola|do la|usd|bitcoin|coin)|chung khoan|co phieu|tien ao|bitcoin|crypto|ma (co phieu|nao tang)"),
-    ("so_con_ten", r"may (dua )?con|bao nhieu (dua )?con|ten (gi|la gi)|(ten|chu cai) (cua )?(chong|vo|nguoi yeu) (tuong lai|sau nay)"),
+    ("so_con_ten", r"(dat|chon|doi) ten (cho )?con|ten nao (giau|may man)|may (dua )?con|bao nhieu (dua )?con|ten (gi|la gi)|(ten|chu cai) (cua )?(chong|vo|nguoi yeu) (tuong lai|sau nay)"),
     ("the_thao", r"doi nao thang|ai (se )?(thang|dac cu|trung cu)|ty so|ket qua tran"),
 ]
 _GOI_Y_NHOM_EN = [
@@ -625,14 +626,14 @@ _GOI_Y_NHOM_EN = [
                  r"antidepressants?)|surgery|operation|chemo\w*|dialysis|transplant"),
     ("nguoi_than_benh", r"(?:my (?:\w+ ){0,2}(?:mother|mom|mum|father|dad|husband|wife|son|daughter|grandma|grandpa|brother|sister)|he|she) "
                         r".{0,30}(?:recover|survive|pull through|make it|have left|how long)"),
-    ("tuoi_tho", r"die|dies|death|dying|pass away|lifespan|life expectancy|how long .{0,20}live|live (?:to|past|until)"),
+    ("tuoi_tho", r"(?:years?|time) (?:do i have )?left(?: to live)?|left to live|die|dies|death|dying|pass away|lifespan|life expectancy|how long .{0,20}live|live (?:to|past|until)"),
     ("yem", r"curse|hex|jinx|spell|black magic"),
     ("nguoi_khac", r"secretly|without (?:telling|asking)|behind (?:his|her|their) back|(?:his|her|their) (?:bazi|chart|face)"),
-    ("xep_hang", r"(?:which|who) .{0,30}(?:honest|trustworthy|loyal|liar|lying|steal\w*|cheat\w*)|most honest|least honest"),
+    ("xep_hang", r"(?:if|whether) (?:she|he|they) (?:is|s|are) (?:a )?(?:liar|lying|honest|cheat\w*)|(?:which|who) .{0,30}(?:honest|trustworthy|loyal|liar|lying|steal\w*|cheat\w*)|most honest|least honest"),
     ("tuyen_dung", r"hire|hiring|fire|firing|recruit\w*|candidates?|applicants?|employees?|staff|interns?|nanny|maids?|shortlist|"
                    r"tenants?|screen\w*"),
     ("dau_tu", r"gold|stocks?|shares?|crypto|bitcoin|btc|coins?|forex|property prices?|house prices?"),
-    ("so_con_ten", r"how many (?:children|kids|babies|sons|daughters)|name|initials?|first letter"),
+    ("so_con_ten", r"baby s? name|name (?:my|our) (?:baby|son|daughter|child)|how many (?:children|kids|babies|sons|daughters)|name|initials?|first letter"),
     ("the_thao", r"team|match|election|world cup|league|derby|race"),
 ]
 
@@ -650,7 +651,8 @@ def goi_y_tu_choi(raw: str, loai: str | None) -> str:
     from app.luangiai import an_toan as _at  # noqa: PLC0415
     from app.luangiai.hoi import chuan_hoa  # noqa: PLC0415
     t = chuan_hoa(raw or "")
-    if re.search(r"vat pham|linh vat|(?<!\w)bua (may|hoa|tai|loc)|giai han|cung sao|talisman|amulet|lucky charm|crystals? (?:to|for)", t):
+    if re.search(r"vat pham|linh vat|ty huu|coc ba chan|thach anh|(?<!\w)bua (may|hoa|tai|loc|ho menh|binh an|giai han)|giai han|cung sao"
+                 r"|talisman|amulet|lucky charm|crystals? (?:to|for|bracelet|stone)|crystal\w* .{0,20}(?:luck|fix)", t):
         return L("tu_choi.goi_y.vat_pham", _GOI_Y_VI["vat_pham"])   # hỏi vật phẩm → nói rõ không cần mua, trước lời may rủi
     if loai == "tuyen_dung":                 # trước lời may rủi: "chọn nhân viên tuổi nào theo lá số để tuyển"
         return L("tu_choi.goi_y.tuyen_dung", _GOI_Y_VI["tuyen_dung"])
