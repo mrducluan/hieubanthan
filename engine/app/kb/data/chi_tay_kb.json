@@ -1466,5 +1466,616 @@
     "nhom": "ngon"
    }
   ]
+ },
+ "do_tay": {
+  "_ghi_chu": "CT-2: đo bàn tay từ 21 điểm mốc (thứ tự MediaPipe Hand) do máy NGƯỜI DÙNG tìm trên ảnh của chính họ — ảnh không rời máy. Đơn vị = dài lòng bàn tay (cổ tay 0 → gốc ngón giữa 9). Ngón đo theo đường gấp khúc gốc ngón → đầu ngón (ngón cái từ khớp cổ tay 1). Ngưỡng là GIẢ ĐỊNH theo nhân trắc phổ biến (xương bàn + đốt ngón người trưởng thành) đổi sang hình học điểm mốc: điểm mốc nằm ở tâm khớp, không ở nếp da, nên tỉ lệ khác số đo nhân trắc theo nếp gấp; mẫu tay tổng hợp (ngón giữa / lòng ≈ 0,99 · rộng / dài ≈ 0,70 · trỏ / áp út ≈ 0,92) rơi giữa dải «vừa». Chưa hiệu chỉnh trên ảnh thật.",
+  "can_doi_chieu": true,
+  "nguong": {
+   "nho_nhat": 0.05,
+   "huong_min": 0.2,
+   "long_min": 0.45,
+   "long_max": 1.15,
+   "ngon_min": 0.6,
+   "ngon_max": 1.6,
+   "ngon_ngan": 0.91,
+   "ngon_dai": 1.07,
+   "long_dai": 0.63,
+   "long_rong": 0.77,
+   "ap_ut_dai": 0.88,
+   "tro_dai": 0.96
+  },
+  "loi": {
+   "khong_du_diem": "Máy chưa thấy rõ cả bàn tay. Chụp lại giúp mình: xoè cả bàn tay, thấy cả cổ tay, đủ sáng.",
+   "mu_ban_tay": "Ảnh này giống mu bàn tay, hoặc không phải tay {tay}. Chụp lòng bàn tay {tay} hướng vào máy giúp mình.",
+   "tay_nam": "Các ngón đang gập. Duỗi thẳng, xoè nhẹ các ngón rồi chụp lại giúp mình.",
+   "nghieng_qua": "Bàn tay đang nghiêng so với máy. Đặt lòng bàn tay song song với màn hình rồi chụp lại giúp mình."
+  },
+  "ten_tay": {
+   "trai": "trái",
+   "phai": "phải"
+  },
+  "nhan": {
+   "ngon_dai": {
+    "truc": "ngon",
+    "ten": "Ngón tay dài so với lòng bàn tay",
+    "y": "Ngón giữa dài hơn hẳn lòng bàn tay so với tỉ lệ thường gặp."
+   },
+   "ngon_vua": {
+    "truc": "ngon",
+    "ten": "Ngón tay dài vừa so với lòng bàn tay",
+    "y": "Ngón giữa và lòng bàn tay theo tỉ lệ thường gặp."
+   },
+   "ngon_ngan": {
+    "truc": "ngon",
+    "ten": "Ngón tay ngắn so với lòng bàn tay",
+    "y": "Ngón giữa ngắn hơn lòng bàn tay so với tỉ lệ thường gặp."
+   },
+   "long_dai": {
+    "truc": "long",
+    "ten": "Lòng bàn tay dài, thon",
+    "y": "Lòng bàn tay hẹp ngang so với chiều dài."
+   },
+   "long_vua": {
+    "truc": "long",
+    "ten": "Lòng bàn tay cân đối",
+    "y": "Chiều ngang và chiều dài lòng bàn tay theo tỉ lệ thường gặp."
+   },
+   "long_rong": {
+    "truc": "long",
+    "ten": "Lòng bàn tay rộng, vuông",
+    "y": "Lòng bàn tay rộng ngang so với chiều dài."
+   },
+   "tro_dai": {
+    "truc": "tro_ap_ut",
+    "ten": "Ngón trỏ dài so với ngón áp út",
+    "y": "Ngón trỏ dài hơn tỉ lệ thường gặp khi so với ngón áp út."
+   },
+   "tro_ap_ut_vua": {
+    "truc": "tro_ap_ut",
+    "ten": "Ngón trỏ và ngón áp út cân nhau",
+    "y": "Ngón trỏ so với ngón áp út theo tỉ lệ thường gặp."
+   },
+   "ap_ut_dai": {
+    "truc": "tro_ap_ut",
+    "ten": "Ngón áp út dài so với ngón trỏ",
+    "y": "Ngón áp út dài hơn tỉ lệ thường gặp khi so với ngón trỏ."
+   }
+  }
+ },
+ "sach_do_tay": {
+  "_ghi_chu": "CT-2: nhãn đo được → câu Thần Tướng Toàn Biên quyển 10 («論手», «相指掌», «相手»). Khuôn SX-C. Nhãn «vừa» của trục ngón và trục lòng bàn tay không gợi câu nào. Không đưa: 指短突者愚賤 (chỉ chê), 少年難養 (đoán sức khoẻ lúc nhỏ, đã qua), 短厚者性鄙好取 (cần độ dày, máy không đo).",
+  "ngon_dai": [
+   {
+    "ma": "ngon-thon-dai",
+    "han": "指纎長者聰俊",
+    "am": "Chỉ tiêm trường giả thông tuấn",
+    "y": "Ngón tay thon dài, sách xem là người sáng dạ, nhanh hiểu.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "ma": "long-thon-ho",
+    "han": "掌為虎指為龍只可龍吞虎不可虎吞龍",
+    "am": "Chưởng vi hổ, chỉ vi long, chỉ khả long thôn hổ, bất khả hổ thôn long",
+    "y": "Sách ví lòng bàn tay là hổ, ngón tay là rồng; ngón dài so với lòng bàn tay (rồng lấn hổ) là thế thuận.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "ngon_ngan": [
+   {
+    "ma": "long-dai-ngon-ngan",
+    "han": "掌長指短暗惹人嫌",
+    "am": "Chưởng trường chỉ đoản ám nhạ nhân hiềm",
+    "y": "Lòng bàn tay dài mà ngón ngắn, sách cho là dễ làm người khác phật ý mà mình không hay.",
+    "nhom": "B",
+    "chu_de": "ban_be",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý cách nói và cách nhờ việc người khác.",
+    "viec": "Trước khi nhờ ai việc gì, nói rõ vì sao cần, và cảm ơn khi việc xong."
+   }
+  ],
+  "long_dai": [
+   {
+    "ma": "long-dai-day",
+    "han": "掌長厚者貴",
+    "am": "Chưởng trường hậu giả quý",
+    "y": "Lòng bàn tay dài mà dày, sách xem là tướng quý. Chiều dài máy đo được; độ dày bạn tự nhìn.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "long_rong": [
+   {
+    "ma": "long-vuong-mem",
+    "han": "掌軟而方者福",
+    "am": "Chưởng nhuyễn nhi phương giả phúc",
+    "y": "Lòng bàn tay vuông vức mà mềm, sách xem là người có phúc. Độ vuông máy đo được; độ mềm bạn tự cảm nhận.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "tro_dai": [
+   {
+    "ma": "ngon-tro-dai",
+    "han": "二指長者平生近貴",
+    "am": "Nhị chỉ trường giả bình sinh cận quý",
+    "y": "Ngón thứ hai (ngón trỏ) dài, sách xem là người cả đời hay được gần người có vị thế, dễ có người nâng đỡ.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "tro_ap_ut_vua": [
+   {
+    "ma": "chu-khach-tuong-xung",
+    "han": "四指為賓中指為主賓主相濟為美",
+    "am": "Tứ chỉ vi tân, trung chỉ vi chủ, tân chủ tương tế vi mỹ",
+    "y": "Sách ghi ngón giữa là chủ, bốn ngón kia là khách; chủ và khách tương xứng là đẹp.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "ap_ut_dai": [
+   {
+    "ma": "ngon-ap-ut-dai",
+    "han": "四指長者小人不足性不耐煩",
+    "am": "Tứ chỉ trường giả tiểu nhân bất túc, tính bất nại phiền",
+    "y": "Ngón thứ tư (ngón áp út) dài, sách cho là tính hay sốt ruột, chưa chịu được việc kéo dài.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý giữ nhịp kiên nhẫn với việc cần nhiều thời gian.",
+    "viec": "Chia việc dài thành từng chặng nhỏ, đặt mốc xem lại mỗi tuần thay vì làm dồn rồi bỏ."
+   }
+  ]
+ },
+ "cung_tay": {
+  "_ghi_chu": "CT-2: tám cung + Minh Đường chiếu lên ảnh của người dùng bằng trọng số điểm mốc (`trong_so`, tổng = 1). Người dùng tự nhìn gò trên ảnh rồi chọn; lựa chọn → câu Ngọc Chưởng Ký (玉掌記) / Luận thủ (論手) / Tướng chưởng thiện ác (相掌善惡). Câu Ngọc Chưởng Ký trong kho nguồn có chú nhỏ chen giữa (乾〔右頤下〕宮…) → `han_kho`.",
+  "ly": {
+   "han": "離",
+   "am": "Ly",
+   "ten": "Gò dưới ngón giữa (cung Ly)",
+   "y": "Vùng sách xem đường học hành, công việc, tiếng tăm.",
+   "trong_so": {
+    "0": 0.16,
+    "9": 0.84,
+    "5": -0.0,
+    "17": 0.0
+   },
+   "lua_chon": [
+    {
+     "ma": "day",
+     "ten": "Gò nổi đầy"
+    },
+    {
+     "ma": "trung",
+     "ten": "Trũng, phẳng"
+    },
+    {
+     "ma": "van_cat",
+     "ten": "Có vân cắt ngang, có vết"
+    },
+    {
+     "ma": "binh",
+     "ten": "Bình thường"
+    }
+   ],
+   "sach": {
+    "day": [
+     {
+      "ma": "ly-cao",
+      "han": "離位突高必作功名之士",
+      "am": "Ly vị đột cao tất tác công danh chi sĩ",
+      "y": "Gò Ly nổi cao, sách xem là người làm nên công danh.",
+      "nhom": "A",
+      "chu_de": "cong_viec",
+      "nguon": "than_tuong_toan_bien",
+      "han_kho": "位突高必作功名之士"
+     }
+    ]
+   }
+  },
+  "khon": {
+   "han": "坤",
+   "am": "Khôn",
+   "ten": "Gò dưới ngón áp út, ngón út (cung Khôn)",
+   "y": "Vùng sách xem về mẹ, người nữ trong nhà và con cái.",
+   "trong_so": {
+    "0": 0.18,
+    "9": 0.82,
+    "5": -0.45,
+    "17": 0.45
+   },
+   "lua_chon": [
+    {
+     "ma": "day",
+     "ten": "Gò nổi đầy"
+    },
+    {
+     "ma": "trung",
+     "ten": "Trũng, phẳng"
+    },
+    {
+     "ma": "van_cat",
+     "ten": "Có vân cắt ngang, có vết"
+    },
+    {
+     "ma": "binh",
+     "ten": "Bình thường"
+    }
+   ],
+   "sach": {
+    "van_cat": [
+     {
+      "ma": "khon-pha",
+      "han": "坤宮帶破招兒女以凋零",
+      "am": "Khôn cung đới phá chiêu nhi nữ dĩ điêu linh",
+      "y": "Gò Khôn có vân cắt, sách xưa cho là đường con cái cần được chăm lo nhiều hơn.",
+      "nhom": "C",
+      "chu_de": "con_cai",
+      "nguon": "than_tuong_toan_bien",
+      "ham_y": "Người xưa muốn dặn: để ý sức khoẻ và việc học của con nhiều hơn.",
+      "viec": "Đưa con đi khám sức khoẻ định kỳ, và dành thời gian nghe con kể chuyện mỗi ngày.",
+      "han_kho": "宮帶破招兒女以凋零"
+     }
+    ]
+   }
+  },
+  "doai": {
+   "han": "兌",
+   "am": "Đoài",
+   "ten": "Cạnh bàn tay phía ngón út (cung Đoài)",
+   "y": "Vùng sách xem chuyện vợ chồng.",
+   "trong_so": {
+    "0": 0.4,
+    "9": 0.6,
+    "5": -0.61,
+    "17": 0.61
+   },
+   "lua_chon": [
+    {
+     "ma": "day",
+     "ten": "Gò nổi đầy"
+    },
+    {
+     "ma": "trung",
+     "ten": "Trũng, phẳng"
+    },
+    {
+     "ma": "van_cat",
+     "ten": "Có vân cắt ngang, có vết"
+    },
+    {
+     "ma": "binh",
+     "ten": "Bình thường"
+    }
+   ],
+   "sach": {
+    "van_cat": [
+     {
+      "ma": "doai-thuong",
+      "han": "兌位有傷定夫妻之鰥寡",
+      "am": "Đoài vị hữu thương định phu thê chi quan quả",
+      "y": "Vùng Đoài có vết, sách xưa cho là đường vợ chồng dễ có lúc xa cách.",
+      "nhom": "C",
+      "chu_de": "tinh_duyen",
+      "nguon": "than_tuong_toan_bien",
+      "ham_y": "Người xưa muốn dặn: tình vợ chồng cần được vun đắp đều đặn.",
+      "viec": "Dành một buổi cố định mỗi tuần cho hai người, cất điện thoại đi.",
+      "han_kho": "位有傷定夫妻之鰥寡"
+     }
+    ]
+   }
+  },
+  "can": {
+   "han": "乾",
+   "am": "Càn",
+   "ten": "Góc dưới cạnh bàn tay phía ngón út (cung Càn)",
+   "y": "Vùng sách xem về cha, người đứng đầu nhà và người con lớn.",
+   "trong_so": {
+    "0": 0.71,
+    "9": 0.29,
+    "5": -0.5,
+    "17": 0.5
+   },
+   "lua_chon": [
+    {
+     "ma": "day",
+     "ten": "Gò nổi đầy"
+    },
+    {
+     "ma": "trung",
+     "ten": "Trũng, phẳng"
+    },
+    {
+     "ma": "van_cat",
+     "ten": "Có vân cắt ngang, có vết"
+    },
+    {
+     "ma": "binh",
+     "ten": "Bình thường"
+    }
+   ],
+   "sach": {
+    "day": [
+     {
+      "ma": "can-cao",
+      "han": "乾宮高聳生長子之權豪",
+      "am": "Càn cung cao tủng sinh trưởng tử chi quyền hào",
+      "y": "Gò Càn nổi cao, sách xem là nhà có người con lớn giỏi giang, có tiếng nói.",
+      "nhom": "A",
+      "chu_de": "gia_dinh",
+      "nguon": "than_tuong_toan_bien",
+      "han_kho": "宮高聳生長子之權豪"
+     }
+    ]
+   }
+  },
+  "kham": {
+   "han": "坎",
+   "am": "Khảm",
+   "ten": "Giữa gốc bàn tay (cung Khảm)",
+   "y": "Vùng sách xem phúc ấm ông bà, nền nhà để lại.",
+   "trong_so": {
+    "0": 0.84,
+    "9": 0.16,
+    "5": -0.05,
+    "17": 0.05
+   },
+   "lua_chon": [
+    {
+     "ma": "day",
+     "ten": "Gò nổi đầy"
+    },
+    {
+     "ma": "trung",
+     "ten": "Trũng, phẳng"
+    },
+    {
+     "ma": "van_cat",
+     "ten": "Có vân cắt ngang, có vết"
+    },
+    {
+     "ma": "binh",
+     "ten": "Bình thường"
+    }
+   ],
+   "sach": {
+    "day": [
+     {
+      "ma": "kham-cao",
+      "han": "坎位高堆受前人之庇蔭",
+      "am": "Khảm vị cao đôi thụ tiền nhân chi tí ấm",
+      "y": "Gò Khảm đầy, sách xem là người được nhờ phúc của người đi trước.",
+      "nhom": "A",
+      "chu_de": "gia_dinh",
+      "nguon": "than_tuong_toan_bien",
+      "han_kho": "位高堆受前人之庇蔭"
+     }
+    ]
+   }
+  },
+  "can_co": {
+   "han": "艮",
+   "am": "Cấn",
+   "ten": "Gốc ngón cái (cung Cấn)",
+   "y": "Vùng gốc rễ, nền tảng; sách xem về cha con những năm đầu đời.",
+   "trong_so": {
+    "0": 0.76,
+    "9": 0.24,
+    "5": 0.29,
+    "17": -0.29
+   },
+   "lua_chon": [
+    {
+     "ma": "day",
+     "ten": "Gò nổi đầy"
+    },
+    {
+     "ma": "trung",
+     "ten": "Trũng, phẳng"
+    },
+    {
+     "ma": "van_cat",
+     "ten": "Có vân cắt ngang, có vết"
+    },
+    {
+     "ma": "binh",
+     "ten": "Bình thường"
+    }
+   ],
+   "sach": {
+    "trung": [
+     {
+      "ma": "can-co-ham",
+      "han": "艮宮剋陷損子父於初年",
+      "am": "Cấn cung khắc hãm tổn tử phụ ư sơ niên",
+      "y": "Gò Cấn trũng hoặc có vết, sách xưa cho là những năm đầu đời việc nhà nhiều lo, cha và con cần được để ý hơn.",
+      "nhom": "C",
+      "chu_de": "gia_dinh",
+      "nguon": "than_tuong_toan_bien",
+      "ham_y": "Người xưa muốn dặn: quan tâm sức khoẻ của cha và của con.",
+      "viec": "Nhắc cha đi khám sức khoẻ định kỳ, và để ý sức khoẻ con nhỏ trong nhà.",
+      "han_kho": "宮剋陷損子父於初年"
+     }
+    ],
+    "van_cat": [
+     {
+      "ma": "can-co-ban-co",
+      "han": "棋盤紋在艮宮者心本無事愁緒萬端",
+      "am": "Kỳ bàn văn tại Cấn cung giả tâm bản vô sự sầu tự vạn đoan",
+      "y": "Gò Cấn có vân đan như bàn cờ, sách cho là người hay lo nghĩ dù không có chuyện gì.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "ham_y": "Nên chú ý những lúc lo nghĩ quá mức cần thiết.",
+      "viec": "Khi thấy lo, viết ra ba việc làm được ngay hôm nay rồi làm việc đầu tiên."
+     }
+    ]
+   }
+  },
+  "chan": {
+   "han": "震",
+   "am": "Chấn",
+   "ten": "Giữa cạnh bàn tay phía ngón cái (cung Chấn)",
+   "y": "Vùng sách xem nhà cửa, ruộng vườn.",
+   "trong_so": {
+    "0": 0.53,
+    "9": 0.47,
+    "5": 0.45,
+    "17": -0.45
+   },
+   "lua_chon": [
+    {
+     "ma": "day",
+     "ten": "Gò nổi đầy"
+    },
+    {
+     "ma": "trung",
+     "ten": "Trũng, phẳng"
+    },
+    {
+     "ma": "van_cat",
+     "ten": "Có vân cắt ngang, có vết"
+    },
+    {
+     "ma": "binh",
+     "ten": "Bình thường"
+    }
+   ],
+   "sach": {
+    "day": [
+     {
+      "ma": "chan-cao",
+      "han": "震上高朝置田宅於一世",
+      "am": "Chấn thượng cao triều trí điền trạch ư nhất thế",
+      "y": "Gò Chấn nổi cao, sách xem là người cả đời gây dựng được nhà cửa.",
+      "nhom": "A",
+      "chu_de": "nha_cua",
+      "nguon": "than_tuong_toan_bien",
+      "han_kho": "上高朝置田宅於一世"
+     }
+    ]
+   }
+  },
+  "ton": {
+   "han": "巽",
+   "am": "Tốn",
+   "ten": "Gốc ngón trỏ, sát ngón cái (cung Tốn)",
+   "y": "Vùng sách xem sự ổn định của con người.",
+   "trong_so": {
+    "0": 0.25,
+    "9": 0.75,
+    "5": 0.42,
+    "17": -0.42
+   },
+   "lua_chon": [
+    {
+     "ma": "day",
+     "ten": "Gò nổi đầy"
+    },
+    {
+     "ma": "trung",
+     "ten": "Trũng, phẳng"
+    },
+    {
+     "ma": "van_cat",
+     "ten": "Vân rối, tản loạn"
+    },
+    {
+     "ma": "binh",
+     "ten": "Bình thường"
+    }
+   ],
+   "sach": {
+    "van_cat": [
+     {
+      "ma": "ton-tan-loan",
+      "han": "巽宮散亂多為游蕩之徒",
+      "am": "Tốn cung tán loạn đa vi du đãng chi đồ",
+      "y": "Gò Tốn vân tản loạn, sách xem là người hay đi đây đó, khó ở yên một chỗ.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "ham_y": "Nên chú ý giữ một nơi ổn định để vun việc và để dành tiền.",
+      "viec": "Chọn một việc chính, theo đủ ba tháng trước khi đổi sang việc khác.",
+      "han_kho": "宮散亂多為游蕩之徒"
+     }
+    ]
+   }
+  },
+  "minh_duong": {
+   "han": "明堂",
+   "am": "Minh Đường",
+   "ten": "Giữa lòng bàn tay (Minh Đường)",
+   "y": "Chỗ trũng giữa lòng bàn tay; sách xem chuyện tiền của.",
+   "trong_so": {
+    "0": 0.47,
+    "9": 0.53,
+    "5": -0.05,
+    "17": 0.05
+   },
+   "lua_chon": [
+    {
+     "ma": "trung",
+     "ten": "Bốn bên đầy, giữa hơi trũng"
+    },
+    {
+     "ma": "phang",
+     "ten": "Bốn bên mỏng, giữa phẳng"
+    },
+    {
+     "ma": "not_ruoi",
+     "ten": "Có nốt ruồi giữa lòng bàn tay"
+    },
+    {
+     "ma": "binh",
+     "ten": "Bình thường"
+    }
+   ],
+   "sach": {
+    "trung": [
+     {
+      "ma": "minh-duong-trung",
+      "han": "四畔豐起而中窪者富",
+      "am": "Tứ bạn phong khởi nhi trung oa giả phú",
+      "y": "Bốn bên lòng bàn tay đầy, giữa hơi trũng, sách xem là người có của.",
+      "nhom": "A",
+      "chu_de": "tien_bac",
+      "nguon": "than_tuong_toan_bien"
+     }
+    ],
+    "phang": [
+     {
+      "ma": "minh-duong-phang",
+      "han": "四畔肉薄而中平者貧",
+      "am": "Tứ bạn nhục bạc nhi trung bình giả bần",
+      "y": "Bốn bên lòng bàn tay mỏng, giữa phẳng, sách cho là tiền bạc khó giữ.",
+      "nhom": "B",
+      "chu_de": "tien_bac",
+      "nguon": "than_tuong_toan_bien",
+      "ham_y": "Nên chú ý giữ tiền: chi tiêu có kế hoạch.",
+      "viec": "Mỗi tháng trích riêng một phần thu nhập vào tài khoản tiết kiệm ngay khi nhận lương."
+     }
+    ],
+    "not_ruoi": [
+     {
+      "ma": "minh-duong-not-ruoi",
+      "han": "掌心生黑子者智而富",
+      "am": "Chưởng tâm sinh hắc tử giả trí nhi phú",
+      "y": "Giữa lòng bàn tay có nốt ruồi, sách xem là người khôn và có của.",
+      "nhom": "A",
+      "chu_de": "tien_bac",
+      "nguon": "than_tuong_toan_bien"
+     }
+    ]
+   }
+  }
  }
 }

@@ -10,7 +10,7 @@ import { Card } from "@/components/ui/card";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { coGoogle, docLuaChon, ghiLuaChon, hoiLai, SU_KIEN, trangThaiCookie, type LuaChon } from "@/lib/dong-y";
 import { ngayDongY, thuHoiDongY, useDongYDuLieu } from "@/lib/dong-y-du-lieu";
-import { DONG_Y_ANH_AI, DONG_Y_DO_MAT, ngayDongYAnhMat } from "@/lib/dong-y-anh-mat";
+import { DONG_Y_ANH_AI, DONG_Y_CHI_TAY, DONG_Y_DO_MAT, ngayDongYAnhMat } from "@/lib/dong-y-anh-mat";
 import { useDanhSachNha, useHoSoNha, xoaMoiNhaTrenMay } from "@/lib/ho-so-nha";
 import { useHoSo } from "@/lib/hoso";
 import { useKyUc } from "@/lib/ky-uc";
@@ -40,6 +40,7 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
   const dongY = useDongYDuLieu();
   const dongYAnh = DONG_Y_ANH_AI.use();
   const dongYDo = DONG_Y_DO_MAT.use();
+  const dongYTay = DONG_Y_CHI_TAY.use();
   const nha = useHoSoNha();
   const dsNha = useDanhSachNha();
   const nhac = useNhacViec();
@@ -86,6 +87,9 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
           <Dong ten="Thoả thuận đo gương mặt trên ảnh — chỉ gửi toạ độ điểm bạn chấm, ảnh không rời máy (Nhân tướng học)" testId="dl-do-mat"
             trangThai={dongYDo ? `Đã đồng ý ngày ${ngayDongYAnhMat(dongYDo) ?? "—"}.` : "Chưa đồng ý — trang Nhân tướng học hỏi khi bạn bấm đo."}
             nut={dongYDo ? <Button size="sm" variant="outline" className={NUT} data-testid="dl-do-mat-rut" onClick={() => { DONG_Y_DO_MAT.thuHoi(); setBao("Đã rút thoả thuận đo gương mặt trên ảnh."); }}>Rút thoả thuận</Button> : undefined} />
+          <Dong ten="Thoả thuận đo bàn tay trên ảnh — chỉ gửi 21 toạ độ điểm mốc, ảnh không rời máy (Xem chỉ tay)" testId="dl-chi-tay"
+            trangThai={dongYTay ? `Đã đồng ý ngày ${ngayDongYAnhMat(dongYTay) ?? "—"}.` : "Chưa đồng ý — trang Xem chỉ tay hỏi khi bạn chọn ảnh bàn tay."}
+            nut={dongYTay ? <Button size="sm" variant="outline" className={NUT} data-testid="dl-chi-tay-rut" onClick={() => { DONG_Y_CHI_TAY.thuHoi(); setBao("Đã rút thoả thuận đo bàn tay trên ảnh."); }}>Rút thoả thuận</Button> : undefined} />
           <Dong ten="Thoả thuận gửi ảnh gương mặt cho máy AI gợi ý nét mặt (Nhân tướng học; ảnh không lưu)" testId="dl-anh-mat"
             trangThai={dongYAnh ? `Đã đồng ý ngày ${ngayDongYAnhMat(dongYAnh) ?? "—"}.` : "Chưa đồng ý — chỉ hỏi khi bạn chọn cho máy AI xem ảnh."}
             nut={dongYAnh ? <Button size="sm" variant="outline" className={NUT} data-testid="dl-anh-mat-rut" onClick={() => { DONG_Y_ANH_AI.thuHoi(); setBao("Đã rút thoả thuận gửi ảnh gương mặt."); }}>Rút thoả thuận</Button> : undefined} />

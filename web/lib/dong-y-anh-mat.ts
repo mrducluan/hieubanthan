@@ -5,6 +5,8 @@
 //    máy chủ tính toán của Hiểu Bản Thân một lượt để đo tỉ lệ, không lưu. Không có bên thứ ba.
 //  • ANH-1 "máy AI gợi ý" (`am1`): ≤ 3 ảnh (đã thu nhỏ, bỏ EXIF trên máy) đi qua máy chủ tới dịch vụ AI nhận diện bên thứ ba
 //    một lượt; không lưu, không huấn luyện.
+//  • CT-2 "chụp lòng bàn tay" (`ct1`, trang Chỉ tay): ảnh KHÔNG rời máy; bộ tìm điểm mốc chạy trong trình duyệt, chỉ 21 toạ độ
+//    điểm mốc bàn tay (+ tỉ lệ khung ảnh) đi qua máy chủ tính toán một lượt để đo, không lưu. Không có bên thứ ba.
 // Mỗi thoả thuận lưu trên máy `{ phien_ban, luc }`; đổi phiên bản khi nội dung xử lý đổi → hỏi lại. `xoaHoSo()` xoá cả hai
 // (KHOA_THEO_HO_SO). Chỉ gửi mã bản lên đo lường.
 import { useSyncExternalStore } from "react";
@@ -64,6 +66,9 @@ export const KHOA_DONG_Y_ANH_MAT = "hbt.dong_y_anh_mat.v1";
 export const DONG_Y_DO_MAT = taoDongY(KHOA_DONG_Y_DO_MAT, "dm1");
 /** ANH-1: gửi ảnh cho dịch vụ AI bên thứ ba. */
 export const DONG_Y_ANH_AI = taoDongY(KHOA_DONG_Y_ANH_MAT, "am1");
+export const KHOA_DONG_Y_CHI_TAY = "hbt.dong_y_chi_tay.v1";
+/** CT-2: đo bàn tay trên ảnh (chỉ 21 điểm mốc, không ảnh). */
+export const DONG_Y_CHI_TAY = taoDongY(KHOA_DONG_Y_CHI_TAY, "ct1");
 
 export function ngayDongYAnhMat(d: DongYAnhMat | null | undefined): string | null {
   if (!d) return null;

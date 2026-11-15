@@ -92,7 +92,9 @@ export const KHOA_THEO_HO_SO = ["hbt.hom_nay", "hbt.la_bai.v1", "hbt.ba_la.v1", 
   // lần ghé Bản thân, nhắc chuỗi đã đóng.
   "hbt.hom_nay_y_dinh", "hbt.battu.doi_chieu.v1", "hbt.kc_sau.v1", "hbt.thanso_phieu", "hbt.ban_than_lan_ghe", "hbt.chuoi_do",
   // ANH-1/ANH-2: thoả thuận gửi ảnh cho AI + thoả thuận đo điểm mốc (lib/dong-y-anh-mat) — thu hồi đồng ý chung thì rút luôn.
-  "hbt.dong_y_anh_mat.v1", "hbt.dong_y_do_mat.v1"] as const;
+  "hbt.dong_y_anh_mat.v1", "hbt.dong_y_do_mat.v1",
+  // CT-2: thoả thuận đo bàn tay trên ảnh (ct1) + mã lựa chọn chỉ tay (vân, cung) của người này.
+  "hbt.dong_y_chi_tay.v1", "hbt.chi_tay.v1"] as const;
 
 /** NT-1: lá số người thân trên máy (lib/nguoi-than) — khoá đặt ở đây để `xoaHoSo()` xoá theo mà không nhập vòng. */
 export const KHOA_NGUOI_THAN = "hbt.nguoi_than.v1";

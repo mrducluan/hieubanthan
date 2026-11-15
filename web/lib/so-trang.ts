@@ -281,8 +281,8 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   } },
   { duong: "/chi-tay", nhom: "tinh", ten: "Xem chỉ tay theo sách xưa", o: O_TINH, mac_dinh: {   // chỉ tay quyển 10 Toàn Biên
     tieu_de_seo: "Xem chỉ tay theo sách xưa: 67 hình vân tay có chú giải", h1: "Xem chỉ tay theo sách xưa",
-    mo_ta_seo: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung bàn tay trên bản khắc gỗ, 67 hình vân tay kèm nguyên văn và lời giải dễ hiểu. Không cần chụp ảnh tay.",
-    loi_dan: "Ngửa bàn tay ra chỗ sáng, so với hình khắc trong sách, chọn hình giống tay mình để đọc sách xưa nói gì — không chụp ảnh, không lưu gì.",
+    mo_ta_seo: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung trên bản khắc gỗ và trên ảnh tay bạn (ảnh không rời máy), 67 hình vân kèm nguyên văn, lời dễ hiểu.",
+    loi_dan: "Chụp lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc ngửa tay ra chỗ sáng, chọn hình vân giống tay mình để đọc sách xưa nói gì.",
   } },
   { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm: Tết ngày nào, năm nào nhuận?",

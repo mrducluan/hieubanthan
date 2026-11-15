@@ -1,6 +1,7 @@
 // Xem chỉ tay theo sách xưa — Thần Tướng Toàn Biên quyển 10. Đồ hình tám cung bàn tay (lớp phủ chú giải trên bản khắc gỗ)
 // + công cụ tự soi: người dùng chọn hình vân giống tay mình → lời sách theo khuôn SX-C. Thư viện đủ 67 hình render ở máy chủ
-// (Google, bot AI đọc được không cần JS). Engine lỗi → 5xx. Web chỉ hiển thị, không ảnh tay người dùng.
+// (Google, bot AI đọc được không cần JS). Engine lỗi → 5xx. Web chỉ hiển thị.
+// CT-2: khối "Chụp lòng bàn tay" đầu trang — ảnh chỉ xử lý trên máy người dùng, chỉ 21 toạ độ điểm mốc gửi engine (ChupBanTay).
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -10,6 +11,7 @@ import { KhoiCms } from "@/components/cms/KhoiCms";
 import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { DoHinhPhu } from "@/components/nhan-tuong/DoHinhPhu";
 import { ChonVanTay } from "@/components/chi-tay/ChonVanTay";
+import { ChupBanTay } from "@/components/chi-tay/ChupBanTay";
 import { goiLd, ldDuongDan, ldTrangWeb, metaTrang, urlDayDu } from "@/lib/seo";
 import { duongDanCongCu } from "@/lib/duong-dan";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
@@ -18,7 +20,7 @@ import { anhVan, DUONG_CHI_TAY, layThuVienChiTay, tachCau } from "@/lib/chi-tay"
 
 const MAC = {
   tieuDe: "Xem chỉ tay theo sách xưa: 67 hình vân tay có chú giải",
-  moTa: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung bàn tay trên bản khắc gỗ, 67 hình vân tay kèm nguyên văn và lời giải dễ hiểu. Không cần chụp ảnh tay.",
+  moTa: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung trên bản khắc gỗ và trên ảnh tay bạn (ảnh không rời máy), 67 hình vân kèm nguyên văn, lời dễ hiểu.",
 };
 const NHAN: Record<string, string> = { A: "Sách ghi", B: "Nên chú ý", C: "Ghi chép xưa" };
 
@@ -32,7 +34,8 @@ export default async function Page() {
   const dd = duongDanCongCu(DUONG_CHI_TAY, "Xem chỉ tay");
   const tl = `Sách tướng xưa xem bàn tay theo tám cung bát quái (mỗi cung một mảng đời: cha, mẹ, vợ chồng, nhà cửa, công danh, tổ nghiệp)
     và theo hình vân. ${tv.nguon_hien_thi} khắc ${tv.van.length + 5} hình vân, mỗi hình một bài thơ bốn câu. Bạn tự soi tay mình,
-    chọn hình giống tay mình, trang này đọc nguyên văn và nói lại bằng lời thường — không chụp ảnh tay, không lưu gì lên máy chủ.`
+    chọn hình giống tay mình, trang này đọc nguyên văn và nói lại bằng lời thường. Nếu chụp ảnh lòng bàn tay, ảnh chỉ xử lý trên
+    máy bạn — chỉ 21 toạ độ điểm mốc gửi lên để đo và đặt tám cung lên đúng tay bạn, không lưu gì lên máy chủ.`
     .replace(/\s+/g, " ");
   const theoChuDe = tv.chu_de.map((c) => ({ ...c, van: tv.van.filter((v) => v.chu_de === c.ma) })).filter((c) => c.van.length);
   return (
@@ -47,6 +50,8 @@ export default async function Page() {
       <TieuDeMuc cap={1} nho="Nhân tướng học · bàn tay" lon={h1} mo_ta={nd.dau.loiDan ?? MAC.moTa} />
       <KhoiCms ds={nd.khoi.tren} duong={DUONG_CHI_TAY} viTri="tren" className="mb-6" />
       <div className="mb-8"><TraLoiNhanh chu={tl} /></div>
+
+      <ChupBanTay />
 
       {tv.do_hinh && (
         <section aria-labelledby="tam-cung" className="mb-12">
