@@ -191,3 +191,15 @@ test("chọn vân trên điện thoại 390×844: thanh 'Xem sách xưa' nằm t
   await expect(tieuDe).toBeInViewport();
   await expect(page.getByTestId("co-ket-qua")).toHaveAttribute("href", "#ket-qua-chi-tay");
 });
+
+test("engine thật: /api/chi-tay/do-tay đo 21 điểm → hợp lệ, có cung đặt trên ảnh; lựa chọn cung đọc được sách", async ({ request }) => {
+  const r = await request.post("/api/chi-tay/do-tay", { data: { dong_y: true, tay: "trai", ty_le: 0.75, diem: DIEM } });
+  expect(r.status()).toBe(200);
+  const d = await r.json() as { hop_le: boolean; cung: { ma: string; vt: number[]; lua_chon: { ma: string }[] }[] };
+  expect(d.hop_le).toBe(true);
+  expect(d.cung.length).toBeGreaterThanOrEqual(8);
+  for (const c of d.cung) { expect(c.vt[0]).toBeGreaterThanOrEqual(0); expect(c.vt[1]).toBeLessThanOrEqual(1); }
+  const c0 = d.cung.find((c) => c.ma === "ly")!;
+  const r2 = await request.post("/api/chi-tay/doc", { data: { cung: { ly: c0.lua_chon[0]!.ma } } });
+  expect(r2.status()).toBe(200);
+});
