@@ -226,3 +226,14 @@ def test_do_hinh_nhom_b_c_khong_hien_phien_am():
             if p.get("muc") in ("B", "C"):
                 assert not p.get("am"), p["id"]
             assert not sg.kiem_loi(p["y"]), p["id"]
+
+
+def test_loi_sach_khong_cum_giong_ai_hay_chung_chung():
+    """Lời sách xưa đi vào bài đọc và hỏi đáp → cùng luật giọng văn với lời luận (`cum_cam`, cụm chung chung)."""
+    from app.kb import tuvi_doi_song_kb as kds
+    cam, cum = kds.cum_cam(), kds.cum_chung_chung()
+    for ten in TEP:
+        for vt, m in sg.cac_muc(json.loads((DATA / ten).read_text("utf-8"))):
+            for k in ("y", "ham_y", "viec"):
+                t = m.get(k) or ""
+                assert not kds.tim_cum_cam(t, cam) and not kds.tim_cum_cam(t, cum), (ten, vt, k)

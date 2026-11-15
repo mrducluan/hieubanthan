@@ -55,7 +55,9 @@ _CAM_CUM = ("đoản mệnh", "đoản thọ", "tổn thọ", "giảm thọ", "m
             "bạn sẽ", "sẽ bị", "sẽ gặp", "sẽ mất", "sẽ mắc", "số bạn", "giải hạn", "vật phẩm", "cúng sao", "trấn yểm",
             "hình khắc", "tuổi thọ", "thọ yểu", "năm mất", "đoán bệnh",
             # Thai sản được nói (chủ dự án 2026-11-15) nhưng chỉ dạng giữ gìn / đi khám — không đoán kết quả của thai.
-            "sảy thai", "đoạ thai", "khó sinh", "sinh nở khó", "hao người", "trẻ khó nuôi")
+            "sảy thai", "đoạ thai", "khó sinh", "sinh nở khó", "hao người", "trẻ khó nuôi",
+            # Hình khắc người thân nói thẳng — viết "X cần được để ý, chăm sóc nhiều hơn" (SX-C, 2026-11-15).
+            "chịu thiệt", "trước thiệt", "sa sút")
 # Tên riêng mang chữ "nặng" (tên sao, tên du niên, thần sát) — bỏ ra trước khi soi chữ nặng.
 _TEN_RIENG = re.compile(r"破軍|破军|七殺|七杀|絕命|绝命|天刑|劫殺|劫杀|劫煞|病符|弔客|吊客|喪門|丧门|亡神|孤辰|寡宿|六煞|五鬼|禍害|祸害|"
                         r"化忌|忌星|地劫|羊刃|陽刃|阳刃|白虎|官符|死符|歲破|岁破|大耗|小耗|災煞|灾煞|傷官|伤官|七煞|天哭|破碎|截路")

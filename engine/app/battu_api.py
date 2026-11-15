@@ -132,6 +132,7 @@ def api_hoi(inp: HoiBTInput, background: BackgroundTasks) -> dict:
     sinh, flags = (None, [])
     if inp.la_so is not None:
         sinh, flags = _sinh(inp.la_so)
+        sinh["gio_tam"] = inp.la_so.do_tin_gio is HourConfidence.UNKNOWN   # SX-H: giờ tạm → không chọn câu sách xưa
     try:
         kq = hoidap_bt.tra_loi(inp.cau_hoi.strip(), sinh=sinh, ngay_xem=inp.ngay_xem)
     except ValueError as e:

@@ -589,7 +589,8 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks) -> dict:
         cal = dv.tb.calendar_dt
         ti = tuvi_an_sao.time_index(cal.hour, cal.minute)
         sinh = {"ngay": cal.date(), "ti": ti, "gioi_tinh": inp.la_so.gender, "tz_lich": dv.tz_lich, **dv.tuy_chon,
-                "luu_nguyet": inp.la_so.luu_nguyet}
+                "luu_nguyet": inp.la_so.luu_nguyet,
+                "gio_tam": inp.la_so.do_tin_gio is HourConfidence.UNKNOWN}   # SX-H: giờ tạm → không chọn câu sách xưa
         flags = list(dv.flags)
         if ti == 12:
             flags.append({"loai": "ty_conflict", "chi_tiet": (

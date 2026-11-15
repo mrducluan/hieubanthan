@@ -12,6 +12,8 @@ import re
 
 from app.calc import phongthuy as pt
 from app.hoidap import chung, hieu_cau, mo_dau
+from app.hoidap import sach_ghi_hoi as sgh
+from app.luangiai import sach_ghi_mon as sgm
 from app.kb import phongthuy_kb as kb
 from app.luangiai import hoi as _h, truc_quan
 from app.narrative import hoi_van
@@ -653,6 +655,10 @@ def tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = N
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
             che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
+    if not sgh.bo_qua(pl, goi, chung.DAC_BIET, sinh):                       # SX-H: câu sách xưa theo điều được hỏi
+        ns = (sinh.get("ngay") or sinh.get("nam")) if sinh else None
+        sgh.phongthuy(goi, pl["cau_chuan_hoa"], sinh, sgm.tuoi_tu(ns, ngay_xem))
+        van = sgh.chen(van, goi, mo_dau._CHAN + chung._CHAN)
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
     return {"hoi_lai": chung.hoi_lai_neu(pl, "phongthuy"), "phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
             "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": goi["co_canh_bao"],

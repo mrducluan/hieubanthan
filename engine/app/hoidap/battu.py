@@ -19,6 +19,8 @@ from app import config
 from app.calc import battu_mo_rong, battu as bt
 from app import ngon_ngu
 from app.hoidap import chung, en_gloss, hieu_cau, mo_dau, doi_song_muc as dsm
+from app.hoidap import sach_ghi_hoi as sgh
+from app.luangiai import sach_ghi_mon as sgm
 from app.kb import battu_kb as kb, ten as _ten
 from app.kb.loi import L
 from app.luangiai import an_toan as _at
@@ -857,6 +859,11 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
             che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
+    if ls is not None and not sgh.bo_qua(pl, goi, chung.DAC_BIET, sinh):     # SX-H: câu sách xưa theo điều được hỏi
+        t_ = pl["cau_chuan_hoa"]
+        ten = [ts for ts, k in THAN_SAT_KW.items() if chung.co(t_, [rf"(?<!\w){k}(?!\w)"])]
+        sgh.battu(goi, ls, t_, sgm.tuoi_tu(sinh["lich"].date(), ngay_xem), sinh.get("gioi_tinh"), ten)
+        van = sgh.chen(van, goi, mo_dau._CHAN + chung._CHAN)
     co = list(ls["co_canh_bao"]) if ls else []
     if ls:
         co.append({"loai": "thang_diem", "chi_tiet": kb.luu_y("thang_diem")})

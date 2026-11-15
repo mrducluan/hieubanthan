@@ -100,7 +100,7 @@ Thần Tướng Toàn Biên quyển 10 có 102 mục về bàn tay (luận tay, 
 | Tử vi | Khối "Sách xưa nói gì về lá số của bạn" mở cho cả câu nhóm B, C | sao ở cung | trang sao ở cung |
 | Bát tự | như trên | thần sát, lục thân | trang thập thần |
 
-## 7. Trạng thái (cập nhật 14/11/2026)
+## 7. Trạng thái (cập nhật 15/11/2026)
 
 | Việc | Trạng thái |
 |---|---|
@@ -113,7 +113,8 @@ Thần Tướng Toàn Biên quyển 10 có 102 mục về bàn tay (luận tay, 
 | Dương Trạch Tam Yếu + Bát Trạch Minh Kính (tóm ý): 20 nguyên tắc, 64 nhà, 64 bếp, 68 điều Minh Kính; du niên 128/128 khớp engine | xong — khối "Cửa, phòng chính và bếp" ở khảo sát nhà |
 | Tarot: nguồn Papus 1892 (78 lá), Case 1920 (22 ẩn chính), Ouspensky 1913 (22 ẩn chính); 144 câu trích; sửa 22 lời Marseille + 2 lời B.O.T.A. theo nguồn | xong |
 | Lớp phủ đồ hình `/nhan-tuong/do-hinh`: 6 bản khắc (12 cung, 13 bộ vị, lưu niên, nốt ruồi nam / nữ, tam đình lục phủ), 233 điểm đo trên ảnh thật | xong |
-| Hỏi đáp Tử vi / Bát tự / Phong thuỷ dùng lớp sách mới | chưa làm |
+| Hỏi đáp Tử vi / Bát tự / Phong thuỷ dùng lớp sách mới (SX-H) | xong — `hoidap/sach_ghi_hoi.py`: ≤ 2 câu theo chủ đề + phạm vi câu hỏi, không vào gói gửi AI; độ phủ đo bằng `scripts/do_sach_ghi_hoi.py` (Tử vi ~45 %, Bát tự 43–60 %, Phong thuỷ ~63 % câu về bản thân) |
+| QC 15/11: câu khoanh địa chi chỉ hiện ở cung đúng chi; Bát tự chỉ điều kiện kiểm được; Tam Yếu nói giảm "chịu thiệt / sa sút" (~80 câu); thai sản, tên chứng hay gặp dạng gợi ý (SX-C2) | xong |
 | Khí sắc (Toàn Biên quyển 13–14), cách cục – xương thịt – dáng (quyển 3, 5, 11–12) | chưa làm |
 | Dương Trạch Thập Thư phần còn lại (mở cửa, thước cửa, thoát nước, xuyên cung) | chưa làm |
 | Bàn tay `/chi-tay` (mục 5) | chưa làm — cần hình bàn tay từ `assets/diagrams` |

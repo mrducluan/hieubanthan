@@ -101,12 +101,30 @@ _NHOM_HAN: list[tuple[str, str]] = [
     (r"化禄|禄存|禄", "loc"), (r"化权|权", "quyen"), (r"化科|科", "khoa"), (r"化忌|忌", "ky"),
 ]
 _PHU_DINH = _re.compile(r"[无不]\s*[见遇加会]?$")
+# Câu sách khoanh cung theo địa chi: "在子午宫", "巳亥陷宫", "辰戌旺宫"… (chữ 子 đứng một mình là "con" — không tính).
+_CHI_HAN = "子丑寅卯辰巳午未申酉戌亥"
+_CHI_VIET = ("Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi")
+_CHI_CUNG = _re.compile(rf"([{_CHI_HAN}]{{1,6}})[庙旺陷平得利]{{0,2}}宫")
 
 
-def _dieu_kien_dat(han: str, sao: str, ten_sao: set[str], hoa: set[str]) -> bool:
+def _chi_dat(han: str, chi: str | None) -> bool:
+    """Câu sách nêu cung theo địa chi → cung đang xét phải ở một trong các địa chi ấy. Không biết địa chi của cung →
+    không chọn câu có điều kiện địa chi (thà thiếu còn hơn sai)."""
+    neu = {c for m in _CHI_CUNG.finditer(han) for c in m.group(1)}
+    if not neu:
+        return True
+    if chi not in _CHI_VIET:
+        return False
+    return _CHI_HAN[_CHI_VIET.index(chi)] in neu
+
+
+def _dieu_kien_dat(han: str, sao: str, ten_sao: set[str], hoa: set[str], chi: str | None = None) -> bool:
     """Mọi sao / nhóm sao câu sách nêu kèm (ngoài chính sao đang xét) phải đúng với cung: nêu có → cung phải có; nêu
-    "không …" (无 / 不见 …) → cung phải không có. Câu không nêu sao kèm nào → đạt."""
-    s = han
+    "không …" (无 / 不见 …) → cung phải không có. Câu khoanh cung theo địa chi → cung phải đúng địa chi đó.
+    Câu không nêu điều kiện nào → đạt."""
+    if not _chi_dat(han, chi):
+        return False
+    s = _CHI_CUNG.sub("　", han)
     for h, ten in _CHINH_HAN.items():
         for m in list(_re.finditer(h, s)):
             if ten == sao:
@@ -134,6 +152,11 @@ def tuvi(cung: list[dict], tuoi: int | None = None) -> dict | None:
     """`cung` = 12 cung đầu ra của lá số (`ten`, `chinh_tinh[{ten, do_sang_nam_phai, tu_hoa}]`, `phu_tinh[{ten, tu_hoa}]`).
     Chọn câu khi: (1) `khi` khớp độ sáng Nam phái của chính sao (`chung` luôn khớp; sao "Bình" chỉ nhận `chung`) VÀ
     (2) mọi sao / nhóm sao câu sách nêu kèm đều đúng với cung đó (`_dieu_kien_dat`). Điều kiện không khớp → không chọn."""
+    return khoi(tuvi_nhom(cung), tuoi)
+
+
+def tuvi_nhom(cung: list[dict]) -> list[tuple[str, str, list[tuple[dict, str]]]]:
+    """Phần chọn câu của `tuvi` (mục KB thô + "về điều gì") — dùng chung cho khối lá số và hỏi đáp."""
     kb = _kb("tuvi_sach_ghi.json")["muc"]
     theo_ten = {c["ten"]: c for c in cung}
     nhom = []
@@ -149,10 +172,10 @@ def tuvi(cung: list[dict], tuoi: int | None = None) -> dict | None:
             tt = _trang_thai(s.get("do_sang_nam_phai"))
             for m in (kb.get(s["ten"]) or {}).get(ten) or []:
                 k = m.get("khi", "chung")
-                if (k == "chung" or k == tt) and _dieu_kien_dat(m["han"], s["ten"], ten_sao, hoa):
+                if (k == "chung" or k == tt) and _dieu_kien_dat(m["han"], s["ten"], ten_sao, hoa, c.get("chi")):
                     cac.append((m, f"Sao {s['ten']} ở cung {ten}" + (f" · {_KHI_TV[k]}" if k in _KHI_TV else "")))
         nhom.append((ten, f"Cung {ten}", cac))
-    return khoi(nhom, tuoi)
+    return nhom
 
 
 # ───────────────────────── Bát tự ─────────────────────────
@@ -174,6 +197,11 @@ def battu(ls: dict, mo_rong: dict, tuoi: int | None = None, gioi: str | None = N
     """Thần sát có trong lá số (mỗi sao tối đa 2 câu) · bốn thập thần sách bàn riêng (khi lộ ở hàng can) · nét của hành
     ngày sinh · phần cơ thể sách gắn với hành ấy (+ câu "gặp hành khắc đang mạnh" khi hành khắc ngày sinh đúng là hành
     nhiều điểm nhất). `gioi` = "nam" / "nu" để chọn câu sách nói riêng một giới."""
+    return khoi(battu_nhom(ls, mo_rong, gioi), tuoi)
+
+
+def battu_nhom(ls: dict, mo_rong: dict, gioi: str | None = None) -> list[tuple[str, str, list[tuple[dict, str]]]]:
+    """Phần chọn câu của `battu` — dùng chung cho khối lá số và hỏi đáp."""
     kb = _kb("battu_sach_ghi.json")
     hanh = ls["nhat_chu"]["ngu_hanh"]
 
@@ -197,8 +225,8 @@ def battu(ls: dict, mo_rong: dict, tuoi: int | None = None, gioi: str | None = N
         k = (m.get("khi") or "")
         if k.startswith("nói chung") or (khac_manh and "là hành của mình" in k):
             the.append((m, kem(m, f"Ngày sinh thuộc hành {hanh}")))
-    return khoi([("than_sat", "Các sao trong lá số", ts), ("thap_than", "Vai nổi ở hàng can", tt),
-                 ("tinh_net", "Nét của hành ngày sinh", net), ("than_the", "Phần cơ thể sách gắn với hành này", the)], tuoi)
+    return [("than_sat", "Các sao trong lá số", ts), ("thap_than", "Vai nổi ở hàng can", tt),
+            ("tinh_net", "Nét của hành ngày sinh", net), ("than_the", "Phần cơ thể sách gắn với hành này", the)]
 
 
 # ───────────────────────── Phong thuỷ ─────────────────────────
@@ -206,6 +234,12 @@ def battu(ls: dict, mo_rong: dict, tuoi: int | None = None, gioi: str | None = N
 def phongthuy(quai: str | None = None, dau_hieu: list[str] | None = None, cua: str | None = None, chu: str | None = None,
               bep: str | None = None, tuoi: int | None = None) -> dict | None:
     """Điều sách dặn theo cung mệnh · theo dấu hiệu ĐÃ XÁC NHẬN của nhà · theo cặp cửa – chủ, bếp – cửa (khi KB có)."""
+    return khoi(phongthuy_nhom(quai, dau_hieu, cua, chu, bep), tuoi)
+
+
+def phongthuy_nhom(quai: str | None = None, dau_hieu: list[str] | None = None, cua: str | None = None,
+                   chu: str | None = None, bep: str | None = None) -> list[tuple[str, str, list[tuple[dict, str]]]]:
+    """Phần chọn câu của `phongthuy` — dùng chung cho khối mệnh quái / khảo sát nhà và hỏi đáp."""
     nhom = []
     if quai:
         cm = _kb("phongthuy_cung_menh.json")
@@ -228,7 +262,7 @@ def phongthuy(quai: str | None = None, dau_hieu: list[str] | None = None, cua: s
             if bep and (m := ty["bep"].get(f"{bep}_{cua}")):
                 cac.append((m, f"Bếp {bep}, cửa {cua} · {m['du_nien']}"))
             nhom.append(("cua_chu_bep", "Cửa, phòng chính và bếp", cac))
-    return khoi(nhom, tuoi)
+    return nhom
 
 
 # ───────────────────────── Nhân tướng ─────────────────────────
