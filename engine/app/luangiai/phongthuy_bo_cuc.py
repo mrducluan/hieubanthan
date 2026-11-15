@@ -179,6 +179,20 @@ def _viec_cho(ma: str, m: dict, loai_nha: str | None) -> list[dict]:
     return viec
 
 
+def _sach_ghi(b: "BoCuc", dau_hieu: list[str], sinh: dict | None) -> dict | None:
+    from app import config  # noqa: PLC0415
+    from app.luangiai import sach_ghi_mon  # noqa: PLC0415
+
+    def quai(vt: str) -> str | None:
+        h = b.vi_tri.get(vt)
+        return pt.HUONG_QUAI.get(h) if h and h != "Trung cung" else None
+
+    tuoi = sach_ghi_mon.tuoi_tu((sinh.get("ngay") or sinh.get("nam")) if sinh else None, config.hom_nay_vn())
+    # Chín điều theo cung mệnh đã hiện ở khối mệnh quái (`/v1/phongthuy/menh-quai`) — ở đây chỉ dấu hiệu + cửa, phòng chính, bếp.
+    return sach_ghi_mon.phongthuy(dau_hieu=dau_hieu, cua=quai("cua_chinh"), chu=quai("phong_ngu_chinh"), bep=quai("bep"),
+                                  tuoi=tuoi)
+
+
 @ngon_ngu.theo_viet
 def _giu_can_ho(ma: str) -> set[int]:
     return {i for i, v in enumerate((kb.bo_tri(ma) or {}).get("viec") or [])
@@ -266,6 +280,8 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
         "luu_y": k["luu_y"],
         # Q1 / Q2 / Q6: dấu hiệu veto đã xác nhận (trần mức), mặt bằng vẽ tay, luật thực hành đang áp dụng.
         "veto_da_xac_nhan": [d["ma"] for d in dau_hieu if d["veto"]],
+        # SX-C: điều sách xưa ghi — theo dấu hiệu đã xác nhận và cặp cửa – phòng chính – bếp (chỉ bản Việt).
+        "sach_ghi": _sach_ghi(b, [d["ma"] for d in dau_hieu], sinh) if ngon_ngu.la_viet() else None,
         "mat_bang": mat_bang if ngon_ngu.la_viet() or not mat_bang else _hien().mat_bang(mat_bang),
         "quy_tac": _quy_tac(b.loai_nha, co),
         "goc_nhin": goc_nhin,

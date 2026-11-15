@@ -77,7 +77,9 @@ KHUNG_BO_QUA = {
 # tám quái, nghĩa sao nhỏ. Bản Anh chưa có các trường này; chuyển thể cùng giai đoạn của mảng (Tử vi GĐ 4, Kinh Dịch GĐ 6).
 KHUNG_CHUA_XONG: dict[str, int] = {"kb.trang.la_bai": 7, "kb.trang.nghe": 7, "kb.trang.tinh_yeu": 7, "goi_y_cheo": 7,
                                    "kb.trang.bo_vi": 7, "kb.trang.menh_nam": 7,
-                                   "kb.trang.que": 6}
+                                   "kb.trang.que": 6,
+                                   # KT-PT1: mục "Nguyên văn sách xưa" của trang dấu hiệu chỉ có bản Việt (lớp sách xưa bản Anh chưa làm).
+                                   "kb.trang.dau_hieu": 7}
 
 
 @pytest.fixture(scope="module")

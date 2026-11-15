@@ -7,6 +7,7 @@ import { ghi } from "@/lib/do-luong";
 import { Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BaoCaoDoiSongView } from "@/components/luan-giai/BaoCaoDoiSong";
+import { SachXuaGhi, type KhoiSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
 import { BanDoMat } from "./BanDoMat";
 import { TEN_HINH, type BaoCaoNhanTuong as Bc, type BoVi, type VungMat } from "@/lib/nhan-tuong";
 
@@ -66,6 +67,10 @@ export function BaoCaoNhanTuong({ bc, boVi, ten, chanTrang }: { bc: Bc; boVi: Re
       <BaoCaoDoiSongView bc={bc} ten={ten} nhan="Gương mặt của bạn"
         hanhDong={<Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> In / lưu PDF</Button>}
         chanTrang={chanTrang} />
+      {/* SX-C: câu sách tướng xưa gắn với đúng các nét đã chọn (engine chọn + đã nói giảm; web chỉ hiển thị). */}
+      <div className="mt-8">
+        <SachXuaGhi khoi={(bc as { sach_ghi?: KhoiSachGhi | null }).sach_ghi} moDun="nhantuong" tieuDe="Sách tướng xưa ghi gì về các nét của bạn" />
+      </div>
     </div>
   );
 }

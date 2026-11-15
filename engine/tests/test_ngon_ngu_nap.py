@@ -127,8 +127,9 @@ def test_nho_theo_ngon_ngu_va_doi_so():
 def test_tang_kb_khong_con_lru_cache_hay_doc_json_tay():
     """Mọi module tầng KB sinh CHỮ phải nhớ qua `nap.nho` và đọc tệp qua `nap.doc` — lru_cache / read_text riêng sẽ
     đóng băng ngôn ngữ đầu tiên vào bộ nhớ. Ngoại lệ: sổ hệ thống không có chữ hiển thị (`tham_dinh`, `ngay_cap_nhat`,
-    `do_rieng`, `store` thần số Supabase, chính `nap`)."""
-    ngoai_le = {"nap.py", "loi.py", "tham_dinh.py", "ngay_cap_nhat.py", "do_rieng.py", "store.py", "__init__.py"}
+    `do_rieng`, `store` thần số Supabase, chính `nap`; `sach_ghi` — bộ kiểm SX-C đọc KHO NGUỒN chữ Hán
+    (`fixtures/nguon`, không theo ngôn ngữ, không phải chữ hiển thị) để so câu trích)."""
+    ngoai_le = {"nap.py", "loi.py", "tham_dinh.py", "ngay_cap_nhat.py", "do_rieng.py", "store.py", "__init__.py", "sach_ghi.py"}
     vi_pham = []
     for p in sorted(KB.glob("*.py")):
         if p.name in ngoai_le:

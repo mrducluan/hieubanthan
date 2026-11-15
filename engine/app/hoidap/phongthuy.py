@@ -13,6 +13,8 @@ import re
 from app import ngon_ngu
 from app.calc import phongthuy as pt
 from app.hoidap import chung, en_gloss, en_gloss_pt, hieu_cau, mo_dau
+from app.hoidap import sach_ghi_hoi as sgh
+from app.luangiai import sach_ghi_mon as sgm
 from app.kb import phongthuy_kb as kb
 from app.kb import ten as _ten
 from app.kb.loi import L
@@ -591,6 +593,14 @@ def _cc(s: str) -> str:
 
 
 # ------------------------------------------------------------------ NARRATIVE (template)
+def _cau_sach(m: dict) -> str:
+    """KT-PT1: câu nguyên văn đã đối chiếu kho nguồn (KB `sach`), nối sau lời đáp. Không có thì rỗng."""
+    c = m.get("sach")
+    if not c or not ngon_ngu.la_viet():
+        return ""
+    return f" Sách xưa ({kb.ten_sach(c['nguon'])}) chép: «{c['han']}» — {c['y']}"
+
+
 def _doan(m: dict) -> tuple[str, str | None]:
     l = m["loai"]
     if l == "sao_han":
@@ -607,7 +617,7 @@ def _doan(m: dict) -> tuple[str, str | None]:
         return (L("hoi.pt.du_nien" if dau or vai else "hoi.pt.du_nien.tron", "{dau}{vai}— {ten} ({loai}): {y} Hợp dùng cho: {dc}.",
                   dau=dau, vai=vai, ten=_dn(m["ten"]),
                   loai=L("hoi.pt.huong_tot", "hướng tốt") if m["cat_hung"] == "cát" else L("hoi.pt.huong_xau", "hướng xấu"),
-                  y=m["y_nghia"], dc=m["dung_cho"]), None)
+                  y=m["y_nghia"], dc=m["dung_cho"]) + _cau_sach(m), None)
     if l == "trach":
         s = L("hoi.pt.trach", "Nhà hướng {h} thì toạ {toa} → {q} trạch ({nhom}).", h=_hg(m["huong"]), toa=_hg(m["toa"]),
               q=_q(m["quai"]), nhom=_nhom(m["nhom"]))
@@ -629,7 +639,7 @@ def _doan(m: dict) -> tuple[str, str | None]:
         v0 = next((v["lam"] for v in (m.get("viec") or []) if v["chi_phi"] == "khong_ton"), None)
         viec = L("hoi.pt.viec_0", " Việc không tốn gì: {v}", v=v0) if v0 else ""
         return L("hoi.pt.bo_tri", "{td}{nhan}: {nd}{them} Gợi ý thực tế: {gy}{viec}", td=m["tieu_de"], nhan=nhan,
-                 nd=m["noi_dung"], them=them, gy=m["goi_y"], viec=viec), None
+                 nd=m["noi_dung"], them=them, gy=m["goi_y"], viec=viec) + _cau_sach(m), None
     if l == "am_trach":
         return f"{m['tieu_de']}: {m['noi_dung']}", None
     if l == "sao_nam":
@@ -861,6 +871,10 @@ def _tra_loi(cau_hoi: str, sinh: dict | None = None, ngay_xem: dt.date | None = 
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
             che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
+    if not sgh.bo_qua(pl, goi, chung.DAC_BIET, sinh):                       # SX-H: câu sách xưa theo điều được hỏi
+        ns = (sinh.get("ngay") or sinh.get("nam")) if sinh else None
+        sgh.phongthuy(goi, pl["cau_chuan_hoa"], sinh, sgm.tuoi_tu(ns, ngay_xem))
+        van = sgh.chen(van, goi, mo_dau._CHAN + chung._CHAN)
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
     return {"hoi_lai": chung.hoi_lai_neu(pl, "phongthuy"), "phan_loai": goi["phan_loai"], "bang_chung": goi, "cau_tra_loi": van, "che_do_van": che_do_van,
             "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": goi["co_canh_bao"],

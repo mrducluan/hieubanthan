@@ -82,8 +82,9 @@ Mạng của phiên chặn mọi host sách (DNS) kể cả tầng WebFetch → 
 |---|---|---|
 | Waite, *The Pictorial Key to the Tarot* (1910) | Project Gutenberg #43548 (de Laurence 1918 in lại nguyên văn, qua kho GITenberg trên GitHub) | `engine/fixtures/nguon/tarot_waite_1910.json`: 78 lá — mô tả Part II, nghĩa bói xuôi/ngược (§3, Part II), nghĩa thêm §4, phương pháp Celtic |
 | Book T (Golden Dawn, Mathers & Felkin, ~1888–96) | archive.org `book-t-the-tarot` (OCR), 2 bản | `tarot_book_t.json`: 36 lá số + 16 hoàng gia (tên, mô tả, nghĩa), luật phẩm giá, thứ tự decan |
-| Papus, *The Tarot of the Bohemians* (bản dịch Anh 1896) | archive.org `tarotofbohemians00papu` | đã tải (`scratchpad`), chưa trích — bảng ý nghĩa OCR dạng cột, cần đọc tay |
-| Paul Foster Case, *An Introduction to Tarot* (B.O.T.A., 1922) | archive.org `PaulFosterCase-Bota-IntroductionToTarot-1922` | đã tải, chưa trích (bài giảng 22 Key, OCR nhiễu) |
+| Papus, *The Tarot of the Bohemians* (bản dịch Anh A. P. Morton, 1892) | archive.org `tarotofbohemians00papu` + hai bản quét khác | **đã nạp (14/11/2026)** — `tarot_papus_1892.json`: 78 lá nghĩa bói + mô tả 22 ẩn chính; chỉ giữ chữ mà ít nhất hai bản quét cho ra giống nhau; 100 câu trích trong KB |
+| Paul Foster Case, *An Introduction to the Study of the Tarot* (New York, 1920) | archive.org `IntroductionToTheStudyOfTheTarot` | **đã nạp (14/11/2026)** — `tarot_case_1920.json`: bảng 22 chữ Hebrew + đoạn giảng 22 ẩn chính; 22 câu trích; bảng chữ / con đường / hành tinh của KB khớp sách (test). Bản bài giảng 1922 không dùng (không chắc đã xuất bản, người tải gắn giấy phép phi thương mại) |
+| P. D. Ouspensky, *The Symbolism of the Tarot* (bản dịch Anh A. L. Pogossky, 1913) | archive.org (hai bản gõ lại) | **đã nạp (14/11/2026)** — `tarot_ouspensky_1913.json`: 22 bút ký ẩn chính, chỉ giữ câu cả hai bản cùng có; 22 câu trích |
 | Mathers, *The Tarot: Its Occult Signification* (1888) | sacred-texts / hermetic trả 403 với máy → chủ dự án lưu 5/6 chương từ trình duyệt vào Drive "Tarot nguon" (thiếu Introduction, không cần cho KB) | `tarot_mathers_1888.json`: 78 lá xuôi/ngược (Meanings of the Cards, Mathers đánh số 8 = Justice, 11 = Strength), biểu tượng 22 Key, ghi chú Etteilla, 3 cách trải bài; mọi lá có trích Mathers |
 | Crowley *Book of Thoth* (1944), Jodorowsky (2004) | không phạm vi công cộng | chỉ tóm ý như cũ |
 

@@ -1,0 +1,1076 @@
+{
+ "_nguon": "Thần Tướng Toàn Biên (神相全編) — câu sách gắn với các nét của khảo sát (dac_diem) và 12 cung trên mặt (十二宮訣). Câu Hán cắt từ kho nguồn than_tuong_toan_bien; lời Việt do ban biên tập viết, đã nói giảm theo SX-C.",
+ "source_id": "than_tuong_toan_bien",
+ "school_id": "tam_dinh_ngu_quan",
+ "trang_thai": "nhap_ban_bien_tap",
+ "can_doi_chieu": true,
+ "dac_diem": {
+  "tam_dinh_tran_ngan": [
+   {
+    "ten": "Phần trán ngắn, hẹp",
+    "han": "上停尖狹缺陷者主多刑厄之災妨剋父母",
+    "am": "Thượng đình tiêm hiệp khuyết hãm giả, chủ đa hình ách chi tai, phương khắc phụ mẫu",
+    "y": "Sách xưa gắn phần trán hẹp, khuyết với tuổi nhỏ nhiều vất vả, ít được cha mẹ kề bên.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý tự chăm mối dây với gia đình khi đã lớn, đừng để khoảng cách cũ kéo dài.",
+    "viec": "Tuần này gọi cho cha mẹ hoặc người đã nuôi mình một cuộc, không vì việc gì."
+   }
+  ],
+  "cam_nhon_lem": [
+   {
+    "ten": "Cằm nhọn, lẹm",
+    "han": "下停長而狹尖薄者主無田宅",
+    "am": "Hạ đình trường nhi hiệp tiêm bạc giả, chủ vô điền trạch",
+    "y": "Sách ghi phần cằm dài mà hẹp, mỏng thì về sau khó giữ nhà đất.",
+    "nhom": "B",
+    "chu_de": "nha_cua",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý để dành cho chỗ ở từ sớm, đừng dồn hết vào tiêu dùng.",
+    "viec": "Tháng này trích một khoản cố định vào quỹ nhà, dù nhỏ."
+   }
+  ],
+  "mat_tam_giac_nguoc": [
+   {
+    "ten": "Mặt trên rộng dưới nhọn",
+    "han": "額闊頤尖迍否還從晚景",
+    "am": "Ngạch khoát di tiêm, truân bĩ hoàn tòng vãn cảnh",
+    "y": "Trán rộng mà cằm nhọn: sách ghi phần khó thường dồn về chặng sau của đời.",
+    "nhom": "B",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý chuẩn bị cho tuổi về sau ngay từ lúc đang thuận.",
+    "viec": "Tuần này xem lại khoản để dành dài hạn và bảo hiểm của mình."
+   }
+  ],
+  "may_dam_ngan": [
+   {
+    "ten": "Mày đậm, ngắn",
+    "han": "眉短於目心性孤獨",
+    "am": "Mi đoản ư mục, tâm tính cô độc",
+    "y": "Mày ngắn hơn mắt: sách tả người hay thu mình, ít chia sẻ.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý chủ động giữ vài mối thân, đừng đợi người khác tìm mình.",
+    "viec": "Tuần này hẹn một người bạn cũ đi ăn."
+   }
+  ],
+  "may_thua": [
+   {
+    "ten": "Mày thưa",
+    "han": "眉薄如無者多狡佞",
+    "am": "Mi bạc như vô giả, đa giảo nịnh",
+    "y": "Mày rất thưa: sách tả người khéo lựa lời, có lúc khéo quá mức.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý nói thẳng điều mình nghĩ ở việc quan trọng.",
+    "viec": "Lần họp tới, nói rõ một ý mình không đồng tình thay vì lựa cho êm."
+   }
+  ],
+  "may_roi": [
+   {
+    "ten": "Mày rối",
+    "han": "粗而濃逆而亂短而蹙者性又兇頑也",
+    "am": "Thô nhi nùng, nghịch nhi loạn, đoản nhi xúc giả, tính hựu hung ngoan dã",
+    "y": "Mày thô, mọc ngược, rối và ngắn: sách tả tính nóng, khó bảo.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý dừng một nhịp trước khi phản ứng.",
+    "viec": "Khi thấy nóng mặt, đếm tới mười rồi mới trả lời."
+   }
+  ],
+  "may_giao": [
+   {
+    "ten": "Hai mày giao nhau",
+    "han": "眉交不分早歲歸墳",
+    "am": "Mi giao bất phân, tảo tuế quy phần",
+    "y": "Hai đầu mày liền nhau: sách xưa xem là nét cần giữ sức từ sớm, vì người hay nghĩ ngợi, ôm lo vào mình.",
+    "nhom": "C",
+    "chu_de": "suc_ben",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý ngủ đủ, bớt ôm việc và đi khám định kỳ.",
+    "viec": "Đặt lịch khám tổng quát trong quý này nếu đã hơn một năm chưa khám."
+   }
+  ],
+  "an_duong_hep": [
+   {
+    "ten": "Ấn đường hẹp",
+    "han": "印堂中有骨隆隆起者貴尖狹貧乏",
+    "am": "Ấn đường trung hữu cốt long long khởi giả quý, tiêm hiệp bần phạp",
+    "y": "Khoảng giữa hai mày đầy đặn thì sách khen; hẹp, nhọn thì sách ghi là dễ thiếu trước hụt sau.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý lập kế hoạch chi tiêu, và bớt lo quá mức về tiền.",
+    "viec": "Ghi lại ba khoản chi lớn nhất của tháng này."
+   }
+  ],
+  "an_duong_nep_doc": [
+   {
+    "ten": "Nếp dọc giữa hai mày",
+    "han": "印堂中有三紋直下如川字者主多憂事也",
+    "am": "Ấn đường trung hữu tam văn trực hạ như xuyên tự giả, chủ đa ưu sự dã",
+    "y": "Ba nếp dọc giữa hai mày như chữ xuyên: sách ghi là người hay có chuyện phải lo.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý tách việc lo được với việc không lo được.",
+    "viec": "Tối nay viết ra ba điều đang lo, gạch điều nằm ngoài tay mình."
+   }
+  ],
+  "mat_tron_to": [
+   {
+    "ten": "Mắt tròn, to",
+    "han": "大而凸圓而怒者促壽",
+    "am": "Đại nhi đột, viên nhi nộ giả, xúc thọ",
+    "y": "Mắt to, lồi, tròn và hay trừng: sách xưa xem là nét hao sức, vì thần khí lộ ra ngoài nhiều.",
+    "nhom": "C",
+    "chu_de": "suc_ben",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý cho mắt và đầu óc được nghỉ, và đi khám mắt, huyết áp định kỳ.",
+    "viec": "Mỗi giờ nhìn màn hình thì nhắm mắt nghỉ một phút."
+   }
+  ],
+  "mat_xech": [
+   {
+    "ten": "Mắt xếch",
+    "han": "卓起者性急",
+    "am": "Trác khởi giả tính cấp",
+    "y": "Đuôi mắt xếch lên: sách tả người nóng vội.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý chậm lại ở quyết định lớn.",
+    "viec": "Việc nào muốn quyết ngay trong hôm nay thì để qua một đêm."
+   }
+  ],
+  "tam_bach_tren": [
+   {
+    "ten": "Lộ lòng trắng phía trên",
+    "han": "白不欲多黑不欲少",
+    "am": "Bạch bất dục đa, hắc bất dục thiểu",
+    "y": "Sách dặn: mắt không nên lộ nhiều lòng trắng, lòng đen không nên ít — ánh mắt đầy, tĩnh thì thần mới vững.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "ngu_vi_nep": [
+   {
+    "ten": "Nếp đuôi mắt",
+    "han": "眼尾生魚尾多財必主榮",
+    "am": "Nhãn vĩ sinh ngư vĩ, đa tài tất chủ vinh",
+    "y": "Sách ghi đuôi mắt có nếp hình đuôi cá là nét của người có của, được vẻ vang.",
+    "nhom": "A",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "son_can_thap": [
+   {
+    "ten": "Gốc mũi thấp",
+    "han": "山根蹙折鼻梁蹙小陷折者主貧乏無成",
+    "am": "Sơn căn xúc chiết, tị lương xúc tiểu hãm chiết giả, chủ bần phạp vô thành",
+    "y": "Gốc mũi thấp, gãy: sách ghi việc lớn khó thành một mạch, tiền bạc lúc thiếu.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý chia việc lớn thành chặng nhỏ và làm cho xong từng chặng.",
+    "viec": "Chọn một việc đang dở, đặt mốc xong phần đầu trong tuần này."
+   }
+  ],
+  "song_mui_go": [
+   {
+    "ten": "Sống mũi cao, gồ",
+    "han": "隆高有梁者主壽",
+    "am": "Long cao hữu lương giả chủ thọ",
+    "y": "Sách ghi sống mũi cao, có gờ rõ là nét của người bền sức.",
+    "nhom": "A",
+    "chu_de": "suc_ben",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "song_mui_thap": [
+   {
+    "ten": "Sống mũi thấp",
+    "han": "鼻梁無骨必夭壽沒",
+    "am": "Tị lương vô cốt tất yểu thọ một",
+    "y": "Sống mũi thấp, mềm như không có xương: sách xưa xem là nét cần giữ sức về lâu dài.",
+    "nhom": "C",
+    "chu_de": "suc_ben",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý nếp ăn ngủ đều và đi khám định kỳ, nhất là đường hô hấp.",
+    "viec": "Tập thở sâu năm phút mỗi sáng trong một tuần."
+   }
+  ],
+  "song_mui_lech": [
+   {
+    "ten": "Sống mũi lệch",
+    "han": "鼻準尖斜心事勾加",
+    "am": "Tị chuẩn tiêm tà, tâm sự câu gia",
+    "y": "Mũi nhọn, lệch: sách tả người nghĩ quanh, hay giữ ý riêng.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý nói rõ ý mình sớm để khỏi hiểu lầm.",
+    "viec": "Lần tới có điều không vừa ý, nói ngay bằng một câu ngắn."
+   }
+  ],
+  "chuan_dau_nhon": [
+   {
+    "ten": "Đầu mũi nhọn",
+    "han": "準頭尖薄孤貧削弱",
+    "am": "Chuẩn đầu tiêm bạc, cô bần tước nhược",
+    "y": "Đầu mũi nhọn, mỏng: sách ghi là dễ một mình xoay xở, tiền khó tụ.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý giữ một khoản dự phòng và nhờ người khi cần.",
+    "viec": "Tháng này để riêng một khoản bằng một tuần chi tiêu, không đụng tới."
+   }
+  ],
+  "chuan_dau_do": [
+   {
+    "ten": "Đầu mũi đỏ",
+    "han": "準頭帶紅必走西東",
+    "am": "Chuẩn đầu đới hồng, tất tẩu tây đông",
+    "y": "Đầu mũi hay ửng đỏ: sách ghi là người phải chạy ngược xuôi nhiều.",
+    "nhom": "B",
+    "chu_de": "di_lai",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý sắp việc cho đỡ phải đi lại vô ích.",
+    "viec": "Gom các việc phải ra ngoài trong tuần vào hai buổi."
+   }
+  ],
+  "quyen_tro": [
+   {
+    "ten": "Gò má trơ xương",
+    "han": "骨露者無立",
+    "am": "Cốt lộ giả vô lập",
+    "y": "Gò má trơ xương: sách ghi là khó đứng vững một chỗ lâu.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý bền với một hướng đã chọn trước khi đổi.",
+    "viec": "Viết ra một việc mình quyết theo ít nhất sáu tháng."
+   }
+  ],
+  "nhan_trung_nong": [
+   {
+    "han": "如淺狹不深則水壅而不流",
+    "am": "Như thiển hiệp bất thâm, tắc thuỷ ủng nhi bất lưu",
+    "y": "Sách ví nhân trung như con mương: nông và hẹp thì nước ứ, không chảy thông.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "ten": "Nhân trung nông",
+    "han": "上下平而淺者子息不生",
+    "am": "Thượng hạ bình nhi thiển giả, tử tức bất sinh",
+    "y": "Nhân trung phẳng và nông: sách xưa ghi chuyện con cái đến chậm.",
+    "nhom": "C",
+    "chu_de": "con_cai",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý đây là cách người xưa nhìn; chuyện con cái ngày nay là việc của y khoa, cần thì đi khám sớm.",
+    "viec": "Nếu đang mong con, đặt lịch khám tư vấn cho cả hai người."
+   }
+  ],
+  "nhan_trung_ngan": [
+   {
+    "ten": "Nhân trung ngắn",
+    "han": "人中短促子孫不足",
+    "am": "Nhân trung đoản xúc, tử tôn bất túc",
+    "y": "Nhân trung ngắn: sách xưa ghi đường con cháu thưa.",
+    "nhom": "C",
+    "chu_de": "con_cai",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý đây là ghi chép xưa; điều giữ được là sự gần gũi với con cháu mình đang có.",
+    "viec": "Dành một buổi tuần này cho người nhỏ tuổi trong nhà."
+   }
+  ],
+  "nhan_trung_lech": [
+   {
+    "ten": "Nhân trung lệch",
+    "han": "人中屈曲者無信之人",
+    "am": "Nhân trung khuất khúc giả, vô tín chi nhân",
+    "y": "Nhân trung cong, lệch: sách tả người hay sai hẹn, khó giữ lời.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý hứa ít và làm đúng điều đã hứa.",
+    "viec": "Tuần này chỉ nhận một lời hứa và làm trước hạn."
+   }
+  ],
+  "mieng_nho_mong": [
+   {
+    "han": "上下俱薄者妄語",
+    "am": "Thượng hạ câu bạc giả vọng ngữ",
+    "y": "Hai môi đều mỏng: sách tả người nói nhiều điều chưa chắc.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý kiểm lại trước khi kể lại chuyện của người khác.",
+    "viec": "Một ngày thử chỉ nói điều mình đã tự kiểm chứng."
+   },
+   {
+    "ten": "Miệng nhỏ, môi mỏng",
+    "han": "口小而短者貧",
+    "am": "Khẩu tiểu nhi đoản giả bần",
+    "y": "Miệng nhỏ, ngắn: sách ghi là tiền bạc khó rộng.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý mở thêm một nguồn thu thay vì chỉ thắt chi.",
+    "viec": "Liệt kê hai kỹ năng có thể đem lại thu nhập thêm."
+   }
+  ],
+  "moi_hong": [
+   {
+    "ten": "Môi hồng",
+    "han": "脣色紅如丹砂者貴而福",
+    "am": "Thần sắc hồng như đan sa giả, quý nhi phúc",
+    "y": "Sách ghi môi hồng tươi như son là nét của người có phúc, được quý.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "ham_banh": [
+   {
+    "ten": "Hàm bạnh",
+    "han": "腮骨大開闊耳後見者心毒",
+    "am": "Tai cốt đại khai khoát, nhĩ hậu kiến giả tâm độc",
+    "y": "Xương hàm bạnh, nhìn từ sau tai vẫn thấy: sách tả người quyết liệt, dễ nặng tay với người khác.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý mềm lời khi mình đang ở thế mạnh.",
+    "viec": "Lần tới khi thắng một cuộc tranh luận, để người kia nói câu cuối."
+   }
+  ],
+  "tai_mong_lat": [
+   {
+    "han": "耳薄向前賣盡田園",
+    "am": "Nhĩ bạc hướng tiền, mại tận điền viên",
+    "y": "Tai mỏng, vểnh ra trước: sách ghi là dễ bán dần nhà đất.",
+    "nhom": "B",
+    "chu_de": "nha_cua",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý không lấy tài sản lớn ra bù chi tiêu ngắn hạn.",
+    "viec": "Trước khi bán hay cầm một món lớn, chờ ba ngày và hỏi một người rành."
+   },
+   {
+    "ten": "Tai mỏng, vành lật",
+    "han": "耳反無輪祖業如塵",
+    "am": "Nhĩ phản vô luân, tổ nghiệp như trần",
+    "y": "Vành tai lật, không rõ viền: sách ghi của ông cha để lại khó giữ.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý tự gây dựng phần của mình, đừng trông vào của sẵn.",
+    "viec": "Mở một khoản tiết kiệm đứng tên mình, góp đều mỗi tháng."
+   }
+  ],
+  "net_buon": [
+   {
+    "ten": "Nét mặt buồn",
+    "han": "不愁似愁常如憂戚",
+    "am": "Bất sầu tự sầu, thường như ưu thích",
+    "y": "Không buồn mà trông như buồn: sách tả nét mặt hay vương vẻ lo.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý thả lỏng nét mặt; nếu nỗi buồn là thật và kéo dài thì tìm người để nói.",
+    "viec": "Mỗi sáng soi gương, thả lỏng trán và hàm trong mười giây."
+   }
+  ],
+  "giong_khan": [
+   {
+    "ten": "Giọng khàn",
+    "han": "神濁則氣促氣促則聲焦急而輕嘶也",
+    "am": "Thần trọc tắc khí xúc, khí xúc tắc thanh tiêu cấp nhi khinh tê dã",
+    "y": "Sách giải: thần mệt thì hơi gấp, hơi gấp thì giọng khô, gắt và khàn.",
+    "nhom": "B",
+    "chu_de": "suc_khoe",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý nghỉ giọng, uống đủ nước; khàn kéo dài quá hai tuần thì đi khám tai mũi họng.",
+    "viec": "Hôm nay uống đủ nước và nói chậm lại một nhịp."
+   }
+  ],
+  "phap_lenh_ro": [
+   {
+    "ten": "Pháp lệnh rõ",
+    "han": "五嶽豐隆法令分明",
+    "am": "Ngũ nhạc phong long, pháp lệnh phân minh",
+    "y": "Sách khen: các phần nổi của mặt đầy đặn, hai nếp pháp lệnh rõ ràng — nét của người làm việc có nguyên tắc.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "sac_sang": [
+   {
+    "ten": "Sắc mặt sáng nhuận",
+    "han": "面上光潤財祿日進",
+    "am": "Diện thượng quang nhuận, tài lộc nhật tiến.",
+    "y": "Sách khen mặt sáng, nhuận: người xưa coi đó là dấu hiệu việc làm ăn đang thuận dần lên.",
+    "nhom": "A",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "ten": "Sắc sáng thì lòng tĩnh",
+    "han": "色光則性靜色暗則情亂",
+    "am": "Sắc quang tắc tính tĩnh, sắc ám tắc tình loạn.",
+    "y": "Sách nói sắc mặt sáng thì lòng yên, sắc tối thì tâm rối — sắc mặt phản chiếu cả trạng thái bên trong.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "ten": "Xem sắc mặt lúc sáng sớm",
+    "han": "凡在於雞鳴之後平旦之前當血氣未亂飲食未進神色未雜",
+    "am": "Phàm tại ư kê minh chi hậu, bình đán chi tiền, đương huyết khí vị loạn, ẩm thực vị tiến, thần sắc vị tạp.",
+    "y": "Sách dặn xem sắc mặt lúc mới sáng, khi chưa ăn uống, chưa bận việc — lúc ấy sắc thật nhất. Tự soi cũng nên chọn lúc này, dưới ánh sáng tự nhiên, để không nhầm vì đèn hay vì mệt.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "sac_toi_sam": [
+   {
+    "ten": "Sắc mặt xỉn tối",
+    "han": "面上昧氣財祿日退",
+    "am": "Diện thượng muội khí, tài lộc nhật thoái.",
+    "y": "Sách chê sắc mặt xỉn tối, gắn với lúc tiền bạc, việc làm khó tiến.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý nhịp làm việc và chi tiêu trong giai đoạn thấy mình mệt mỏi, sắc mặt kém.",
+    "viec": "Tuần này ngủ đủ giấc, hoãn một khoản chi lớn chưa gấp cho tới khi thấy khoẻ lại."
+   },
+   {
+    "ten": "Sắc khô, sạm",
+    "han": "焦燥暗惡不獨難發多脾胃心腹之病",
+    "am": "Tiêu táo ám ác, bất độc nan phát, đa tỳ vị tâm phúc chi bệnh.",
+    "y": "Sách xưa gắn sắc mặt khô, sạm, tối với phần tỳ vị, bụng ngực.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý ăn uống điều độ và để ý tiêu hoá.",
+    "viec": "Ăn đúng bữa trong tuần này; nếu đau bụng, đầy hơi kéo dài thì đi khám tiêu hoá."
+   },
+   {
+    "ten": "Xem sắc mặt lúc sáng sớm",
+    "han": "凡在於雞鳴之後平旦之前當血氣未亂飲食未進神色未雜",
+    "am": "Phàm tại ư kê minh chi hậu, bình đán chi tiền, đương huyết khí vị loạn, ẩm thực vị tiến, thần sắc vị tạp.",
+    "y": "Sách dặn xem sắc mặt lúc mới sáng, khi chưa ăn uống, chưa bận việc — lúc ấy sắc thật nhất. Tự soi cũng nên chọn lúc này, dưới ánh sáng tự nhiên, để không nhầm vì đèn hay vì mệt.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "sac_vang_xin": [
+   {
+    "ten": "Hai thứ sắc vàng",
+    "han": "黃如蟹膏者生如枳殼者死",
+    "am": "Hoàng như giải cao giả sinh, như chỉ xác giả tử.",
+    "y": "Sách xưa phân hai thứ sắc vàng: vàng tươi như gạch cua là sắc còn khí lực; vàng khô xỉn như vỏ quả chỉ xác là sắc kém.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý gan và tiêu hoá khi da mặt vàng xỉn kéo dài.",
+    "viec": "Nếu sắc vàng kéo dài, kèm mệt hoặc vàng lòng trắng mắt thì đi khám sớm."
+   },
+   {
+    "ten": "Xem sắc mặt lúc sáng sớm",
+    "han": "凡在於雞鳴之後平旦之前當血氣未亂飲食未進神色未雜",
+    "am": "Phàm tại ư kê minh chi hậu, bình đán chi tiền, đương huyết khí vị loạn, ẩm thực vị tiến, thần sắc vị tạp.",
+    "y": "Sách dặn xem sắc mặt lúc mới sáng, khi chưa ăn uống, chưa bận việc — lúc ấy sắc thật nhất. Tự soi cũng nên chọn lúc này, dưới ánh sáng tự nhiên, để không nhầm vì đèn hay vì mệt.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "sac_trang_bech": [
+   {
+    "ten": "Hai thứ sắc trắng",
+    "han": "白如豬膏者生如枯骨者死",
+    "am": "Bạch như trư cao giả sinh, như khô cốt giả tử.",
+    "y": "Sách xưa phân hai thứ sắc trắng: trắng mịn như mỡ là sắc còn khí; trắng khô như xương là sắc kém.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý hơi thở, phổi và máu khi mặt trắng bệch, môi nhợt kéo dài.",
+    "viec": "Nếu hay chóng mặt, mệt, hụt hơi khi gắng sức thì đi khám và xét nghiệm máu."
+   },
+   {
+    "ten": "Xem sắc mặt lúc sáng sớm",
+    "han": "凡在於雞鳴之後平旦之前當血氣未亂飲食未進神色未雜",
+    "am": "Phàm tại ư kê minh chi hậu, bình đán chi tiền, đương huyết khí vị loạn, ẩm thực vị tiến, thần sắc vị tạp.",
+    "y": "Sách dặn xem sắc mặt lúc mới sáng, khi chưa ăn uống, chưa bận việc — lúc ấy sắc thật nhất. Tự soi cũng nên chọn lúc này, dưới ánh sáng tự nhiên, để không nhầm vì đèn hay vì mệt.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "sac_do_ung": [
+   {
+    "ten": "Sắc đỏ gắt",
+    "han": "赤色主血光口舌",
+    "am": "Xích sắc chủ huyết quang khẩu thiệt.",
+    "y": "Sách gắn sắc mặt đỏ gắt với lúc dễ va chạm, cãi vã.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý lời nói và tránh va chạm những lúc mặt nóng bừng, đang bực.",
+    "viec": "Lúc thấy nóng mặt, dừng lại vài hơi thở trước khi trả lời; việc quan trọng để sang hôm sau."
+   },
+   {
+    "ten": "Hai thứ sắc đỏ",
+    "han": "赤如雞冠者生如魾血者死",
+    "am": "Xích như kê quan giả sinh, như bi huyết giả tử.",
+    "y": "Sách xưa phân hai thứ sắc đỏ: đỏ tươi như mào gà là sắc còn khí; đỏ bầm như máu đọng là sắc kém.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý tim mạch, huyết áp khi mặt hay đỏ bừng, khô nóng.",
+    "viec": "Đo huyết áp vài lần trong tuần; nếu cao hoặc hay đánh trống ngực thì đi khám."
+   },
+   {
+    "ten": "Xem sắc mặt lúc sáng sớm",
+    "han": "凡在於雞鳴之後平旦之前當血氣未亂飲食未進神色未雜",
+    "am": "Phàm tại ư kê minh chi hậu, bình đán chi tiền, đương huyết khí vị loạn, ẩm thực vị tiến, thần sắc vị tạp.",
+    "y": "Sách dặn xem sắc mặt lúc mới sáng, khi chưa ăn uống, chưa bận việc — lúc ấy sắc thật nhất. Tự soi cũng nên chọn lúc này, dưới ánh sáng tự nhiên, để không nhầm vì đèn hay vì mệt.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "than_sac_gat": [
+   {
+    "ten": "Thần gấp, khí dư",
+    "han": "神太急氣有餘",
+    "am": "Thần thái cấp, khí hữu dư.",
+    "y": "Sách tả người thần sắc gấp, khí dư — dễ nóng vội, nói nhanh hơn nghĩ.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý nhịp nói và nhịp quyết định khi đang gấp.",
+    "viec": "Trước một cuộc nói chuyện khó, ghi ra ba ý cần nói và để người kia nói hết trước."
+   },
+   {
+    "ten": "Nhịn được việc",
+    "han": "君能含忍千般事",
+    "am": "Quân năng hàm nhẫn thiên ban sự.",
+    "y": "Với người thần khí mạnh, sách dặn: nhịn được trăm nghìn việc mới là người bản lĩnh.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "cot_nhuc_can": [
+   {
+    "ten": "Xương thịt cân nhau",
+    "han": "骨肉相稱福祿雙全",
+    "am": "Cốt nhục tương xứng, phúc lộc song toàn.",
+    "y": "Sách cho người xương và thịt cân nhau là phúc lộc đều đủ.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "cot_tro": [
+   {
+    "ten": "Xương nhiều, thịt ít",
+    "han": "肉少骨多有福無祿",
+    "am": "Nhục thiểu cốt đa, hữu phúc vô lộc.",
+    "y": "Sách nói người xương nhiều thịt ít thì có phúc mà tiền lộc mỏng.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý giữ sức và để dành tiền đều đặn, đừng dựa vào khoản lớn bất chợt.",
+    "viec": "Mỗi tháng trích một khoản nhỏ cố định để dành; ăn đủ bữa, ngủ đủ giấc."
+   }
+  ],
+  "nhuc_nhao": [
+   {
+    "ten": "Thịt nhiều, xương ít",
+    "han": "肉多骨少有祿無壽",
+    "am": "Nhục đa cốt thiểu, hữu lộc vô thọ.",
+    "y": "Sách xưa nói người thịt nhiều xương ít thì có lộc nhưng cần giữ gìn sức khoẻ lâu dài.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý cân nặng, vận động và khám sức khoẻ định kỳ.",
+    "viec": "Tuần này đi bộ nhanh mỗi ngày; nếu đã lâu chưa khám tổng quát thì đặt lịch đi khám."
+   }
+  ],
+  "dang_vung": [
+   {
+    "ten": "Ngồi như núi, đi như nước",
+    "han": "坐欲如山行欲如水體欲重步欲舒",
+    "am": "Toạ dục như sơn, hành dục như thuỷ, thể dục trọng, bộ dục thư.",
+    "y": "Sách dặn ngồi vững như núi, đi trôi như nước, thân chắc, bước thong thả — dáng vững đúng ý ấy.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "ten": "Bước chắc",
+    "han": "行步沉重榮貴",
+    "am": "Hành bộ trầm trọng, vinh quý.",
+    "y": "Sách khen bước đi chắc, nặng là dáng của người được trọng.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "dang_hap_tap": [
+   {
+    "ten": "Bước vội, nhẹ",
+    "han": "行步輕驟貧賤",
+    "am": "Hành bộ khinh sậu, bần tiện.",
+    "y": "Sách chê bước đi vội vã, nhẹ bẫng.",
+    "nhom": "B",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý nhịp làm việc: chậm lại trước các quyết định, đừng để vội kéo theo sai.",
+    "viec": "Tuần này mỗi khi vào cuộc gặp quan trọng, dừng lại vài hơi thở rồi mới nói."
+   }
+  ],
+  "dang_khom": [
+   {
+    "ten": "Đi đừng cúi đầu, khom gối",
+    "han": "腳不欲折頭不欲低",
+    "am": "Cước bất dục chiết, đầu bất dục đê.",
+    "y": "Sách dặn đi đứng đừng gập gối, đừng cúi đầu.",
+    "nhom": "B",
+    "chu_de": "suc_ben",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý tư thế: lưng thẳng, vai mở khi ngồi làm việc lâu.",
+    "viec": "Mỗi ngày giãn cơ vai lưng vài phút; nếu đau lưng, đau cổ kéo dài thì đi khám."
+   }
+  ],
+  "mat_vuong": [
+   {
+    "ten": "Dáng Kim đúng chất Kim",
+    "han": "似金得金剛毅深",
+    "am": "Tự Kim đắc Kim, cương nghị thâm.",
+    "y": "Sách nói người dáng Kim mà đúng chất Kim thì cương nghị, sâu sắc.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "ten": "Mỗi dáng có cái hợp của nó",
+    "han": "金不嫌方木不嫌瘦水不嫌肥火不嫌尖土不嫌濁",
+    "am": "Kim bất hiềm phương, Mộc bất hiềm sấu, Thuỷ bất hiềm phì, Hoả bất hiềm tiêm, Thổ bất hiềm trọc.",
+    "y": "Sách dặn mỗi dáng có cái hợp riêng: dáng Kim không chê vuông, Mộc không chê gầy, Thuỷ không chê đầy, Hoả không chê nhọn, Thổ không chê dày.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "mat_dai": [
+   {
+    "ten": "Dáng Mộc đúng chất Mộc",
+    "han": "似木得木貲財足",
+    "am": "Tự Mộc đắc Mộc, tư tài túc.",
+    "y": "Sách nói người dáng Mộc mà đúng chất Mộc thì của cải đủ đầy.",
+    "nhom": "A",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "ten": "Mỗi dáng có cái hợp của nó",
+    "han": "金不嫌方木不嫌瘦水不嫌肥火不嫌尖土不嫌濁",
+    "am": "Kim bất hiềm phương, Mộc bất hiềm sấu, Thuỷ bất hiềm phì, Hoả bất hiềm tiêm, Thổ bất hiềm trọc.",
+    "y": "Sách dặn mỗi dáng có cái hợp riêng: dáng Kim không chê vuông, Mộc không chê gầy, Thuỷ không chê đầy, Hoả không chê nhọn, Thổ không chê dày.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "mat_tron": [
+   {
+    "ten": "Dáng Thuỷ đúng chất Thuỷ",
+    "han": "似水得水文學貴",
+    "am": "Tự Thuỷ đắc Thuỷ, văn học quý.",
+    "y": "Sách nói người dáng Thuỷ mà đúng chất Thuỷ thì quý ở chữ nghĩa, học vấn.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "ten": "Mỗi dáng có cái hợp của nó",
+    "han": "金不嫌方木不嫌瘦水不嫌肥火不嫌尖土不嫌濁",
+    "am": "Kim bất hiềm phương, Mộc bất hiềm sấu, Thuỷ bất hiềm phì, Hoả bất hiềm tiêm, Thổ bất hiềm trọc.",
+    "y": "Sách dặn mỗi dáng có cái hợp riêng: dáng Kim không chê vuông, Mộc không chê gầy, Thuỷ không chê đầy, Hoả không chê nhọn, Thổ không chê dày.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "mat_hoa": [
+   {
+    "ten": "Dáng Hoả đúng chất Hoả",
+    "han": "似火得火見機果",
+    "am": "Tự Hoả đắc Hoả, kiến cơ quả.",
+    "y": "Sách nói người dáng Hoả mà đúng chất Hoả thì nhanh thấy thời cơ, quyết đoán.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "ten": "Mỗi dáng có cái hợp của nó",
+    "han": "金不嫌方木不嫌瘦水不嫌肥火不嫌尖土不嫌濁",
+    "am": "Kim bất hiềm phương, Mộc bất hiềm sấu, Thuỷ bất hiềm phì, Hoả bất hiềm tiêm, Thổ bất hiềm trọc.",
+    "y": "Sách dặn mỗi dáng có cái hợp riêng: dáng Kim không chê vuông, Mộc không chê gầy, Thuỷ không chê đầy, Hoả không chê nhọn, Thổ không chê dày.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "mat_tho": [
+   {
+    "ten": "Dáng Thổ đúng chất Thổ",
+    "han": "似土得土厚櫃庫",
+    "am": "Tự Thổ đắc Thổ, hậu quỹ khố.",
+    "y": "Sách nói người dáng Thổ mà đúng chất Thổ thì dày dặn, có của để dành.",
+    "nhom": "A",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "ten": "Mỗi dáng có cái hợp của nó",
+    "han": "金不嫌方木不嫌瘦水不嫌肥火不嫌尖土不嫌濁",
+    "am": "Kim bất hiềm phương, Mộc bất hiềm sấu, Thuỷ bất hiềm phì, Hoả bất hiềm tiêm, Thổ bất hiềm trọc.",
+    "y": "Sách dặn mỗi dáng có cái hợp riêng: dáng Kim không chê vuông, Mộc không chê gầy, Thuỷ không chê đầy, Hoả không chê nhọn, Thổ không chê dày.",
+    "nhom": "A",
+    "chu_de": "tinh_net",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "giong_tram": [
+   {
+    "ten": "Giọng phát từ bụng",
+    "han": "貴人之聲多出於丹田之中",
+    "am": "Quý nhân chi thanh đa xuất ư đan điền chi trung.",
+    "y": "Sách khen giọng nói phát từ bụng (đan điền): đầy, vang mà không gắt.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ],
+  "giong_cao_nhanh": [
+   {
+    "ten": "Lời chỉ ở đầu lưỡi",
+    "han": "皆發舌端之上促急而不達",
+    "am": "Giai phát thiệt đoan chi thượng, xúc cấp nhi bất đạt.",
+    "y": "Sách chê lời nói chỉ phát ở đầu lưỡi, gấp mà không tới người nghe.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý nói chậm, thở sâu khi trình bày việc quan trọng.",
+    "viec": "Trước buổi trình bày, tập nói chậm lại và dừng một nhịp sau mỗi ý."
+   }
+  ],
+  "giong_nho_yeu": [
+   {
+    "ten": "Giọng nhẹ, yếu",
+    "han": "聲輕者斷事無能",
+    "am": "Thanh khinh giả đoạn sự vô năng.",
+    "y": "Sách gắn giọng nói nhẹ, yếu với lúc khó dứt việc.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý luyện hơi thở và giọng khi cần nói trước đông người.",
+    "viec": "Mỗi sáng tập thở bụng vài phút; nếu khàn tiếng, hụt hơi kéo dài thì đi khám."
+   }
+  ]
+ },
+ "cung": {
+  "menh": [
+   {
+    "han": "光明如鏡學問皆通",
+    "am": "Quang minh như kính, học vấn giai thông",
+    "y": "Khoảng giữa hai mày sáng như gương: sách ghi là người học gì cũng thông.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "額窄眉枯破財迍邅",
+    "am": "Ngạch trách mi khô, phá tài truân chiên",
+    "y": "Trán hẹp, mày khô: sách ghi tiền bạc hay hao, đường đi lận đận.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý giữ tiền chặt hơn ở những quãng thấy mình vội.",
+    "viec": "Trước một khoản chi lớn, chờ một ngày rồi mới quyết."
+   }
+  ],
+  "tai_bach": [
+   {
+    "han": "截筒懸膽千倉萬箱",
+    "am": "Tiệt đồng huyền đảm, thiên thương vạn tương",
+    "y": "Mũi thẳng như ống trúc chẻ, tròn như túi mật treo: sách ghi là của cải đầy kho.",
+    "nhom": "A",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "莫教孔仰主無隔宿之糧",
+    "am": "Mạc giáo khổng ngưỡng, chủ vô cách túc chi lương",
+    "y": "Lỗ mũi hếch lộ: sách ghi tiền vào tay khó để qua đêm.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý tách tiền để dành ngay khi nhận được.",
+    "viec": "Ngày nhận lương, chuyển trước một phần sang tài khoản khác."
+   },
+   {
+    "han": "天薄地豐始貧終富",
+    "am": "Thiên bạc địa phong, thuỷ bần chung phú",
+    "y": "Trán mỏng mà cằm đầy: sách ghi đầu đời chật, về sau đủ đầy.",
+    "nhom": "B",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý bền chí ở chặng đầu, vì sách ghi phần sau khá hơn.",
+    "viec": "Ghi ra một mục tiêu năm năm và bước đầu tiên của nó."
+   }
+  ],
+  "huynh_de": [
+   {
+    "han": "眉秀而疏枝榦自然端正",
+    "am": "Mi tú nhi sơ, chi cán tự nhiên đoan chính",
+    "y": "Mày thanh và thưa vừa phải: sách ghi anh chị em nề nếp, đàng hoàng.",
+    "nhom": "A",
+    "chu_de": "gia_dinh",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "眉毛中斷兄弟分散",
+    "am": "Mi mao trung đoạn, huynh đệ phân tán",
+    "y": "Mày đứt giữa chừng: sách ghi anh chị em mỗi người một nơi.",
+    "nhom": "B",
+    "chu_de": "gia_dinh",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý chủ động giữ liên lạc.",
+    "viec": "Nhắn hỏi thăm một người anh chị em trong tuần này."
+   }
+  ],
+  "dien_trach": [
+   {
+    "han": "眼如點漆終身產業榮榮",
+    "am": "Nhãn như điểm tất, chung thân sản nghiệp vinh vinh",
+    "y": "Mắt đen láy như chấm sơn: sách ghi cả đời nhà cửa, cơ nghiệp vững.",
+    "nhom": "A",
+    "chu_de": "nha_cua",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "最怕赤脈侵睛初年破盡家園",
+    "am": "Tối phạ xích mạch xâm tình, sơ niên phá tận gia viên",
+    "y": "Tia đỏ lấn vào tròng mắt: sách ghi thời trẻ dễ hao nhà đất.",
+    "nhom": "B",
+    "chu_de": "nha_cua",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý không vội bán hay thế chấp chỗ ở; mắt đỏ lâu ngày thì đi khám.",
+    "viec": "Việc liên quan nhà đất, hỏi thêm một người rành trước khi ký."
+   }
+  ],
+  "tu_tuc": [
+   {
+    "han": "三陽平滿兒孫福祿榮昌",
+    "am": "Tam dương bình mãn, nhi tôn phúc lộc vinh xương",
+    "y": "Vùng dưới mắt đầy đặn: sách ghi con cháu được phúc lộc.",
+    "nhom": "A",
+    "chu_de": "con_cai",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "淚堂深陷定為男女無緣",
+    "am": "Lệ đường thâm hãm, định vi nam nữ vô duyên",
+    "y": "Vùng dưới mắt trũng sâu: sách xưa ghi duyên với con cái mỏng.",
+    "nhom": "C",
+    "chu_de": "con_cai",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý vùng này trũng thường do thiếu ngủ, mệt; giữ sức và dành thời gian cho con là điều làm được.",
+    "viec": "Tuần này ngủ sớm hơn ba mươi phút và dành một buổi tối cho con."
+   }
+  ],
+  "no_boc": [
+   {
+    "han": "頦圓豐滿侍立成群",
+    "am": "Hài viên phong mãn, thị lập thành quần",
+    "y": "Cằm tròn đầy: sách ghi người dưới theo giúp đông.",
+    "nhom": "A",
+    "chu_de": "ban_be",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "地閣尖斜受恩深而反成怨恨",
+    "am": "Địa các tiêm tà, thụ ân thâm nhi phản thành oán hận",
+    "y": "Cằm nhọn, lệch: sách ghi giúp người nhiều mà có khi bị trách ngược.",
+    "nhom": "B",
+    "chu_de": "ban_be",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý giúp có giới hạn và nói rõ từ đầu.",
+    "viec": "Lần tới nhận giúp ai, nói rõ mình giúp tới đâu."
+   }
+  ],
+  "phu_the": [
+   {
+    "han": "光潤無紋必保妻全四德",
+    "am": "Quang nhuận vô văn, tất bảo thê toàn tứ đức",
+    "y": "Đuôi mắt sáng, mịn, không nếp: sách ghi người bạn đời vẹn toàn.",
+    "nhom": "A",
+    "chu_de": "tinh_duyen",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "奸門深陷常作新郎",
+    "am": "Gian môn thâm hãm, thường tác tân lang",
+    "y": "Vùng đuôi mắt trũng sâu: sách xưa ghi đường vợ chồng dễ phải làm lại.",
+    "nhom": "C",
+    "chu_de": "tinh_duyen",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý chăm mối quan hệ đang có: nói chuyện đều, không để việc nhỏ dồn lại.",
+    "viec": "Tuần này hẹn người ấy một buổi không điện thoại."
+   }
+  ],
+  "tat_ach": [
+   {
+    "han": "年壽明潤康泰",
+    "am": "Niên thọ minh nhuận khang thái",
+    "y": "Sống mũi sáng, nhuận: sách ghi người khoẻ mạnh, yên ổn.",
+    "nhom": "A",
+    "chu_de": "suc_khoe",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "紋痕低陷連年速疾沉痾",
+    "am": "Văn ngân đê hãm, liên niên tốc tật trầm kha",
+    "y": "Gốc mũi có nếp, vết, lại trũng: sách xưa xem là nét hay đau ốm vặt nối nhau.",
+    "nhom": "C",
+    "chu_de": "suc_khoe",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý nếp ăn ngủ và đi khám định kỳ thay vì đợi có chuyện mới khám.",
+    "viec": "Đặt lịch khám tổng quát trong quý này."
+   }
+  ],
+  "thien_di": [
+   {
+    "han": "豐盈隆滿華彩無憂",
+    "am": "Phong doanh long mãn, hoa thái vô ưu",
+    "y": "Hai góc trán đầy đặn: sách ghi đi xa, đổi chỗ đều thuận.",
+    "nhom": "A",
+    "chu_de": "di_lai",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "額角低陷到老住場難覓",
+    "am": "Ngạch giác đê hãm, đáo lão trú trường nan mịch",
+    "y": "Góc trán thấp, lõm: sách ghi dễ phải đổi chỗ ở nhiều lần.",
+    "nhom": "B",
+    "chu_de": "di_lai",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý cân nhắc kỹ mỗi lần chuyển nhà, chuyển việc.",
+    "viec": "Trước khi quyết chuyển, viết ra ba điều được và ba điều mất."
+   }
+  ],
+  "quan_loc": [
+   {
+    "han": "光明瑩淨顯達超群",
+    "am": "Quang minh oánh tịnh, hiển đạt siêu quần",
+    "y": "Giữa trán sáng, sạch: sách ghi công việc hanh thông, nổi bật.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "伏犀貫頂一生不到訟庭",
+    "am": "Phục tê quán đỉnh, nhất sinh bất đáo tụng đình",
+    "y": "Có gờ xương chạy từ giữa mày lên đỉnh đầu: sách ghi cả đời ít dính chuyện kiện tụng.",
+    "nhom": "A",
+    "chu_de": "giay_to",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "宮痕理破常招橫事",
+    "am": "Cung ngân lý phá, thường chiêu hoạnh sự",
+    "y": "Giữa trán có vết, nếp cắt ngang: sách ghi hay gặp chuyện rắc rối bất ngờ.",
+    "nhom": "B",
+    "chu_de": "giay_to",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý giấy tờ, cam kết phải rõ ràng bằng văn bản.",
+    "viec": "Việc gì liên quan tiền hay hợp đồng, đọc kỹ rồi mới ký; cần thì hỏi luật sư."
+   }
+  ],
+  "phuc_duc": [
+   {
+    "han": "天地相朝德行須全五福",
+    "am": "Thiên địa tương triều, đức hạnh tu toàn ngũ phúc",
+    "y": "Trán và cằm chầu vào nhau: sách ghi người có đức, hưởng đủ phúc.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "頦圓額窄須知苦在初年",
+    "am": "Hài viên ngạch trách, tu tri khổ tại sơ niên",
+    "y": "Cằm tròn mà trán hẹp: sách ghi vất vả dồn ở tuổi trẻ, sau mới nhẹ.",
+    "nhom": "B",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý kiên nhẫn với chặng đầu.",
+    "viec": "Ghi lại một điều năm nay đã dễ hơn năm ngoái."
+   }
+  ],
+  "phu_mau": [
+   {
+    "han": "兩角入頂父母雙榮",
+    "am": "Lưỡng giác nhập đỉnh, phụ mẫu song vinh",
+    "y": "Hai gò trán cao, chạy lên đỉnh: sách ghi cha mẹ đều được vẻ vang.",
+    "nhom": "A",
+    "chu_de": "gia_dinh",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "低塌則幼失雙親",
+    "am": "Đê tháp tắc ấu thất song thân",
+    "y": "Hai gò trán thấp, lõm: sách xưa ghi tuổi nhỏ ít được cha mẹ kề bên.",
+    "nhom": "C",
+    "chu_de": "gia_dinh",
+    "nguon": "than_tuong_toan_bien",
+    "ham_y": "Nên chú ý điều giữ được hôm nay là sự gần gũi với người thân còn bên mình.",
+    "viec": "Tuần này về thăm hoặc gọi cho cha mẹ, người nuôi mình."
+   }
+  ],
+  "tuong_mao": [
+   {
+    "han": "三停俱等永保平生顯達",
+    "am": "Tam đình câu đẳng, vĩnh bảo bình sinh hiển đạt",
+    "y": "Ba phần mặt đều nhau: sách ghi cả đời hanh thông.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   },
+   {
+    "han": "額主初運鼻管中年地閣水星是為末主",
+    "am": "Ngạch chủ sơ vận, tị quản trung niên, địa các thuỷ tinh thị vi mạt chủ",
+    "y": "Sách chia: trán xem tuổi trẻ, mũi xem trung niên, cằm và miệng xem về già.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "than_tuong_toan_bien"
+   }
+  ]
+ }
+}

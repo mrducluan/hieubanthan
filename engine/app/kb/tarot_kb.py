@@ -13,6 +13,9 @@ TEN_NGUON = {
     "crowley_1944": "The Book of Thoth (Aleister Crowley, 1944)", "case_1947": "The Tarot (Paul Foster Case, 1947)",
     "tdm_conver": "Tarot de Marseille (Nicolas Conver, 1760)", "jodorowsky_2004": "La Voie du Tarot (Jodorowsky & Costa, 2004)",
     "dan_gian_tarot": "cách đọc phổ biến trong cộng đồng tarot",
+    # TR-6: ba sách phạm vi công cộng có kho nguồn nguyên văn (fixtures/nguon/tarot_{papus_1892,case_1920,ouspensky_1913}.json)
+    "papus_1892": "The Tarot of the Bohemians (Papus, 1892)", "case_1920": "An Introduction to the Study of the Tarot (Paul Foster Case, 1920)",
+    "ouspensky_1913": "The Symbolism of the Tarot (P. D. Ouspensky, 1913)",
 }
 TEN_NGUYEN_TO = {"hoa": "Lửa", "thuy": "Nước", "khi": "Khí", "dat": "Đất"}
 

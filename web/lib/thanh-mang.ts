@@ -59,6 +59,7 @@ export const THANH_MANG: readonly ThanhMang[] = [
   { tru: "/nhan-tuong", ma: "nhantuong", ten: "Nhân tướng", en: "Face reading", muc: [
     { ma: "cong_cu", duong: "/nhan-tuong", nhan: "Gương mặt của tôi", en: "My face" },
     { ma: "bo_vi", duong: cum("bo-vi"), nhan: "Bộ vị gương mặt", dem: "bo-vi", en: "Face areas" },
+    { ma: "do_hinh", duong: "/nhan-tuong/do-hinh", nhan: "Đồ hình sách xưa", en: "Classic face charts" },   // SX-C lớp phủ
     { ma: "hoi", duong: "/nhan-tuong#hoi-dap", nhan: "Hỏi về một vùng", en: "Ask about an area" },
   ] },
   // TR-1: Tarot — công cụ trải bài + cụm 78 lá.

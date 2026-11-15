@@ -22,7 +22,7 @@ from app.narrative import phan_loai_en
 from app.kb import ten as _ten
 from app.kb.loi import L
 from app.kb import tu_dien
-from app.luangiai import sach_xua
+from app.luangiai import hoan_canh, sach_ghi_mon, sach_xua
 from app.calc import can_chi, dia_ly, lunar, mui_gio, tuvi_cach_cuc, tuvi_do_sang_vn, timebase, tuan_triet_vendor, tuvi_an_sao, tuvi_thai_tue_vn
 from app.calc import tuvi_luu_nguyet as calc_luu_nguyet
 from app.hoidap import tuvi as hoidap_tv
@@ -506,6 +506,10 @@ def api_an_sao(inp: TuanTrietInput) -> dict:
     }
     # SX-1: câu sách xưa ứng với lá số này (chỉ chọn câu đã có trong KB; không biết giờ sinh thì cung là tạm → không hiện).
     kq["sach_xua"] = [] if inp.do_tin_gio is HourConfidence.UNKNOWN else sach_xua.tuvi(kq["cach_cuc"], kq["cung"])
+    # SX-C: lời Toàn Thư về từng sao ở từng cung của đúng lá số (ba nhóm A / B / C đã nói giảm; chưa đủ 18 tuổi bỏ nhóm C).
+    # Chỉ bản Việt (lời đã nói giảm chưa có bản dịch).
+    kq["sach_ghi"] = None if inp.do_tin_gio is HourConfidence.UNKNOWN or not viet else sach_ghi_mon.tuvi(
+        kq["cung"], hoan_canh.tuoi_tron(dv.duong_goc, config.hom_nay_vn()))
     return kq if viet else tuvi_hien.la_so(kq)
 
 
@@ -592,7 +596,8 @@ def api_hoi(inp: HoiTVInput, background: BackgroundTasks, request: Request) -> d
         cal = dv.tb.calendar_dt
         ti = tuvi_an_sao.time_index(cal.hour, cal.minute)
         sinh = {"ngay": cal.date(), "ti": ti, "gioi_tinh": inp.la_so.gender, "tz_lich": dv.tz_lich, **dv.tuy_chon,
-                "luu_nguyet": inp.la_so.luu_nguyet}
+                "luu_nguyet": inp.la_so.luu_nguyet,
+                "gio_tam": inp.la_so.do_tin_gio is HourConfidence.UNKNOWN}   # SX-H: giờ tạm → không chọn câu sách xưa
         flags = list(dv.flags)
         if ti == 12:
             flags.append({"loai": "ty_conflict", "chi_tiet": L("hoi.tv.co.ty_conflict", (

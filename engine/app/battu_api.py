@@ -9,13 +9,13 @@ from __future__ import annotations
 import datetime as _dt
 from typing import Literal
 
-from app import ngon_ngu
+from app import config, ngon_ngu
 from app.narrative import phan_loai_en
 from app.kb.loi import L
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.luangiai import sach_xua
+from app.luangiai import hoan_canh, sach_ghi_mon, sach_xua
 from app.calc import battu, battu_mo_rong
 from app.kb import tu_dien
 from app import nhat_ky
@@ -66,6 +66,11 @@ def api_la_so(inp: TuanTrietInput) -> dict:
           "mo_rong": {**battu_mo_rong.mo_rong(ls), "dieu_hau_ctbg": dieu_hau(ls), "cach_cuc_tbct": cach_tbct(ls)},
           "loi_thuong": loi_thuong(ls)}
     ra["sach_xua"] = sach_xua.battu(ls, ra["mo_rong"])       # SX-1: câu sách xưa ứng với lá số (chỉ bản Việt)
+    # SX-C: lời sách về thần sát, thập thần, hành ngày sinh (đã nói giảm). Không biết giờ sinh → trụ giờ là tạm, thần sát
+    # của trụ giờ sai → không hiện (như Tử vi).
+    if ngon_ngu.la_viet():
+        ra["sach_ghi"] = None if inp.do_tin_gio is HourConfidence.UNKNOWN else sach_ghi_mon.battu(
+            ls, ra["mo_rong"], hoan_canh.tuoi_tron(sinh["lich"].date(), config.hom_nay_vn()), sinh["gioi_tinh"])
     if not ngon_ngu.la_viet():
         from app.luangiai import battu_hien  # noqa: PLC0415 — EN-ALL GĐ 3: câu CALC theo ngôn ngữ (bản Việt không qua đây)
         ra = battu_hien.la_so(ra)
@@ -128,6 +133,7 @@ def api_hoi(inp: HoiBTInput, background: BackgroundTasks, request: Request) -> d
     sinh, flags = (None, [])
     if inp.la_so is not None:
         sinh, flags = _sinh(inp.la_so)
+        sinh["gio_tam"] = inp.la_so.do_tin_gio is HourConfidence.UNKNOWN   # SX-H: giờ tạm → không chọn câu sách xưa
     try:
         # EN-AI: câu gõ tự do tiếng Anh — lớp phân loại AI (tắt mặc định; env HOI_PHAN_LOAI_AI + công tắc quản trị
         # qua header x-phan-loai-ai) chỉ gán nhãn an toàn / chủ đề; câu trả lời vẫn do engine dựng.

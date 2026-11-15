@@ -274,6 +274,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Tra từng năm âm lịch: can chi, mệnh nạp âm, ngày Tết, tuổi Tam tai, năm tuổi, sao hạn, tuổi làm nhà, cưới hỏi, xông đất, sinh con — và xem 3 tháng, 12 tháng tới của riêng bạn.",
     loi_dan: "Mỗi năm âm lịch một trang: năm con gì, Tết ngày nào, tuổi nào Tam tai, xung năm — kèm mọi bảng tra theo tuổi của năm đó.",
   } },
+  { duong: "/nhan-tuong/do-hinh", nhom: "tinh", ten: "Đồ hình nhân tướng sách xưa", o: O_TINH, mac_dinh: {   // SX-C lớp phủ đồ hình
+    tieu_de_seo: "Đồ hình nhân tướng sách xưa có chú giải tiếng Việt", h1: "Đồ hình nhân tướng trong sách xưa",
+    mo_ta_seo: "Bản khắc gỗ Thần Tướng Toàn Biên: 12 cung, 13 bộ vị, lưu niên 1–100 tuổi, nốt ruồi nam nữ, tam đình lục phủ — chạm vào chữ khắc để đọc nghĩa tiếng Việt.",
+    loi_dan: "Bản khắc gỗ giữ nguyên, phủ thêm điểm chú giải: chạm vào chữ khắc để đọc âm Hán Việt và nghĩa bằng lời thường.",
+  } },
   { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm: Tết ngày nào, năm nào nhuận?",
     mo_ta_seo: "Lịch âm Việt Nam từng năm: ngày Tết, năm có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu. Kèm công cụ đổi ngày âm dương.",
@@ -411,6 +416,8 @@ const MAU_CUM_GOC: readonly MauCumTrang[] = [
     bien: ["nam", "nam_sinh", "can_chi", "can_chi_nam"], chu: CHU_NAM_TUOI },                            // NAM-3
   { mau_duong: "/sinh-o-nuoc-ngoai/{nuoc}", nhom: "cong_cu_con", ten: "Sinh ở nước ngoài · từng nước", o: O_CUM, nguon_kb: null,
     bien: ["nuoc", "ten", "nam"], chu: CHU_SINH_NN },                                                   // Ý3
+  { mau_duong: "/nhan-tuong/do-hinh/{ma}", nhom: "cong_cu_con", ten: "Đồ hình nhân tướng · từng bản khắc", o: O_CUM, nguon_kb: null,
+    bien: ["ma", "ten"] },                                                                            // SX-C lớp phủ đồ hình
   { mau_duong: "/lich-am/{nam}", nhom: "cong_cu_con", ten: "Lịch âm · từng năm", o: O_CUM, nguon_kb: null,
     bien: ["nam", "can_chi"], chu: CHU_LICH_AM_NAM },
   { mau_duong: "/phong-thuy/huong-xau-nam/{nam}", nhom: "cong_cu_con", ten: "Hướng xấu theo năm · từng năm", o: O_CUM, nguon_kb: null,
@@ -448,7 +455,7 @@ export function viDuMau(mau: MauCumTrang, nay = new Date()): string {
   const nam = String(vn.getUTCFullYear()), thang = String(vn.getUTCMonth() + 1);
   const ngay = `${nam}-${thang.padStart(2, "0")}-${String(vn.getUTCDate()).padStart(2, "0")}`;
   const gt: Record<string, string> = {
-    nam: mau.nhom === "tuoi" ? "1990" : nam, thang, ngay, nam_sinh: "1990", gioi: "nam", viec: "cuoi-hoi", slug: mau.nguon_kb?.vi_du ?? "duc-luan",
+    nam: mau.nhom === "tuoi" ? "1990" : nam, thang, ngay, nam_sinh: "1990", gioi: "nam", viec: "cuoi-hoi", slug: mau.nguon_kb?.vi_du ?? "duc-luan", ma: "muoi-hai-cung-ngu-quan",
     nuoc: "us",   // Ý3: cụm "Sinh ở nước ngoài"
   };
   return mau.mau_duong.replace(/\{([a-z_]+)\}/g, (m, b: string) => gt[b] ?? m);

@@ -5,6 +5,8 @@ Nguồn: app/kb/data/phongthuy_kb.json (nháp AI, `can_doi_chieu`; mục dân gi
 from __future__ import annotations
 
 from pathlib import Path
+
+from app import ngon_ngu
 from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "phongthuy_kb.json"
@@ -13,7 +15,12 @@ SOURCE_ID, SCHOOL_ID = "duong_trach_tam_yeu", "bat_trach"
 
 @nap.nho
 def _d() -> dict:
-    return nap.doc(_F.name)
+    d = nap.doc(_F.name)
+    if not ngon_ngu.la_viet():
+        # KT-PT1: câu sách (`sach`) mới có lời Việt (phiên âm + tóm ý) — chưa có bản dịch thì bản khác ngôn ngữ không mang.
+        d = {**d, **{n: {k: {x: y for x, y in v.items() if x != "sach"} for k, v in d[n].items()}
+                     for n in ("du_nien", "bo_tri") if n in d}}
+    return d
 
 
 def meta() -> dict:
@@ -25,6 +32,11 @@ def meta() -> dict:
 def _lay(nhom: str, ma: str) -> dict | None:
     m = _d()[nhom].get(ma)
     return {**m, **meta()} if m else None
+
+
+def ten_sach(ma: str) -> str:
+    """Tên hiển thị của sách có kho nguồn (KT-PT1)."""
+    return _d().get("source_ten", {}).get(ma, ma)
 
 
 def du_nien(ten: str) -> dict | None:

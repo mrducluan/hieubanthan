@@ -21,6 +21,7 @@ from app.calc import lunar, tuan_triet_vendor, tuvi_an_sao as az, tuvi_cach_cuc,
 from app.calc import tuvi_luu_nguyet as ln
 from app.hoidap import chung, en_gloss, hieu_cau, mo_dau, doi_song_muc as dsm
 from app.hoidap import tuvi_y_bo_sung as ybs
+from app.hoidap import sach_ghi_hoi as sgh
 from app.kb import tuvi_doi_song_kb as kds
 from app.kb import tuvi_kb as kb
 from app.kb import tuvi_phi_hoa_kb as pkb
@@ -29,6 +30,7 @@ from app.kb.loi import L
 from app.luangiai import hoi as _h, tuvi_luu_nguyet as lnl
 from app.luangiai import tuvi_nhip_3_thang as nhip3, tuvi_phi_hoa as phl
 from app.luangiai import truc_quan, tuvi_sao_luu as tvsl, tuvi_the_cung as the_cung
+from app.luangiai import sach_ghi_mon as sgm
 from app.luangiai import tuvi_hien as _th
 from app.luangiai.truc_quan import L3, NGUOI_THAN
 from app.narrative import hoi_van
@@ -1835,12 +1837,20 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
             che_do_van, van = ("llm", v) if not loi else ("template_fallback", van)
         except Exception as e:  # noqa: BLE001
             che_do_van, loi = "template_fallback", [f"llm lỗi: {mo_ta_loi(e)}"]
+    if ls is not None and not sgh.bo_qua(pl, goi, chung.DAC_BIET, sinh):     # SX-H: câu sách xưa về đúng cung được hỏi
+        t_ = pl["cau_chuan_hoa"]
+        sgh.tuvi(goi, ls, t_, _sao_nhac(t_) + _phu_nhac(t_), sgm.tuoi_tu(sinh["ngay"], ngay_xem))
+        van = sgh.chen(van, goi, mo_dau._CHAN + chung._CHAN, ybs.la_doan_them)
+    elif ls is None and pl["loai"] == "sao_cung" and pl.get("sao") and pl.get("cung") \
+            and not sgh.bo_qua(pl, goi, chung.DAC_BIET, sinh):                    # SX-H: câu kiến thức sao × cung
+        sgh.tuvi_kien_thuc(goi, pl["sao"][0], pl["cung"][0], sgm.tuoi_tu(sinh["ngay"], ngay_xem) if sinh else None)
+        van = sgh.chen(van, goi, mo_dau._CHAN + chung._CHAN, ybs.la_doan_them)
     co = []
     if ls is not None:
         co.append({"loai": "nam_phai", "chi_tiet": kb.luu_y("iztro")})
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
     return {"hoi_lai": chung.hoi_lai_neu(pl, "tuvi"), "phan_loai": goi["phan_loai"], "van_han": vh, "bang_chung": goi, "cau_tra_loi": van,
-            "can_cu": can_cu_template(goi), "truc_quan": truc_quan.tuvi(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_tuvi(goi, ls),
+            "can_cu": can_cu_template(goi) + (goi.get("sach_ghi_hoi") or {}).get("can_cu", []), "truc_quan": truc_quan.tuvi(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_tuvi(goi, ls),
             "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"],
             "co_canh_bao": co, "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong",
             # LG-ĐS: web chỉ tra kho vectơ khi co_the_goi_y (từ khoá không nhận ra, câu bản mệnh/hạn, không đặc biệt).

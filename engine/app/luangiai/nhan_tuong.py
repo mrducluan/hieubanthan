@@ -290,6 +290,9 @@ def bao_cao(tra_loi: dict | None, *, nam_sinh: dt.date | int | None = None, gioi
                       "ban_do": {v: calc.gop_muc([x for x in ds if x != "trung_tinh"]) or "trung_tinh" for v, ds in ban_do.items()},
                       "ngay_xem": ngay_xem.isoformat()}}
     kh.ap_hoc(bc, trong_so, ca_nhan)
+    # SX-C: câu Thần Tướng Toàn Biên gắn với đúng các nét đã chọn (đã nói giảm; chưa đủ 18 tuổi bỏ nhóm C).
+    from app.luangiai import sach_ghi_mon  # noqa: PLC0415
+    bc["sach_ghi"] = sach_ghi_mon.nhan_tuong(khop, sach_ghi_mon.tuoi_tu(nam_sinh, ngay_xem))
     return bc
 
 
@@ -380,6 +383,15 @@ def hoi(cau: str, tra_loi: dict | None = None, *, nam_sinh: dt.date | int | None
                       can_cu=[f"Lưu niên vận khí bộ vị: tuổi {tuoi} → vị {ln['vi']} ({ln['ten']}). {kb.mau('nhan_gioi_ben')}"],
                       hoi_tiep=[f"Tuổi {tuoi + 1} xem ở đâu?", "Ấn Đường của tôi nghĩa là gì?"])
             return kq
+    # SX-C: câu hỏi nêu tên một KIỂU HÌNH sách xưa đặt ("mắt phượng", "mày kiếm"…) → bài thơ của đúng kiểu ấy (đã nói giảm).
+    from app.luangiai import sach_ghi_mon  # noqa: PLC0415
+    tuoi_ = sach_ghi_mon.tuoi_tu(nam_sinh, ngay_xem or config.hom_nay_vn())
+    # Câu muốn sửa / phẫu thuật gương mặt ("nâng mũi thành mũi rồng") đi nhánh từ chối sửa tướng, không vào bài kiểu hình.
+    sua_truoc = chung.co(t, [re.escape(k) for k in kb.tu_khoa("phau_thuat")]) or chung.co(t, [r"\bsua\b", r"\bdoi\b"])
+    if not sua_truoc and (kh_ := sach_ghi_mon.nt_kieu_hinh(goc, tuoi_)):
+        kq.update(cau_tra_loi=kh_["loi"], can_cu=[f"Nguồn: {kh_['sach']} — bài tả từng kiểu mày, mắt, mũi, tai, miệng."],
+                  xu_ly="kieu_hinh", bo_vi=kh_["nhom"], hoi_tiep=["Ấn Đường rộng nghĩa là gì?", "Năm nay tuổi của tôi xem ở đâu?"])
+        return kq
     # bộ vị / cung
     # Cung (tên riêng, dài) so trước bộ vị — "cung Tài Bạch" không được bắt thành "tai".
     # Chỉ khi câu có đúng chữ "cung" (so trên câu gốc còn dấu: "cũng" bỏ dấu cũng thành "cung").
@@ -390,6 +402,10 @@ def hoi(cau: str, tra_loi: dict | None = None, *, nam_sinh: dt.date | int | None
     if sua and not ma_bv:
         kq.update(cau_tra_loi="Mình không khuyên sửa gương mặt để 'đổi tướng'. Sách tướng xưa nói 'tướng tuỳ tâm sinh' — nét đổi theo thói quen; "
                               "chuyện thẩm mỹ là lựa chọn của bạn với bác sĩ, không liên quan tới vận.", xu_ly="phau_thuat")
+        return kq
+    if not ma_bv and (dd_ := sach_ghi_mon.nt_dang_dieu(goc, tuoi_)):
+        kq.update(cau_tra_loi=dd_["loi"], can_cu=[f"Nguồn: {dd_['sach']} — phần bàn dáng đi, ngồi, nằm, ăn, nói, cười."],
+                  xu_ly="dang_dieu", hoi_tiep=["Ấn Đường rộng nghĩa là gì?", "Năm nay tuổi của tôi xem ở đâu?"])
         return kq
     if not ma_bv:
         kq.update(cau_tra_loi=str(kb.mau("hoi", "khong_hieu")), xu_ly="khong_hieu",
@@ -421,6 +437,9 @@ def hoi(cau: str, tra_loi: dict | None = None, *, nam_sinh: dt.date | int | None
         from app.kb import suc_khoe_kb  # noqa: PLC0415
         he = (suc_khoe_kb.he_hanh(bv["he"]) or {}).get("he") or bv["he"]
         dong.append(str(kb.mau("hoi", "khong_doan_benh")).format(he=he))
+    if (them_ := sach_ghi_mon.nt_bo_vi(ma_bv, ma_cung, tuoi_)):          # SX-C: sách xưa ghi thêm về bộ vị / cung này
+        dong.append("Sách xưa ghi thêm về chỗ này (là lời chung của sách, không phải nhận xét về gương mặt bạn):")
+        dong += them_
     kq.update(cau_tra_loi=" ".join(dong), can_cu=[c for c in can_cu if c] or [f"Nguồn: {kb.ten_nguon(kb.meta()['source_id'])}"],
               hoi_tiep=[f"Cung {kb.cung()[bv['cung']]['ten']} nói về gì?" if bv.get("cung") in kb.cung() else "Ấn Đường rộng nghĩa là gì?",
                         "Năm nay tuổi của tôi xem ở đâu?"])

@@ -7,6 +7,8 @@
   POST /do-anh           điểm người dùng tự chấm trên ảnh (toạ độ chuẩn hoá, KHÔNG ảnh) → tỉ lệ ba đình + lựa chọn điền sẵn
   POST /doc-anh          (mặc định tắt) máy gợi ý lựa chọn từ ảnh chân dung — mọi nhãn can_xac_nhan
   GET  /cau-hinh         {doc_anh: bật/tắt}
+  GET  /do-hinh          mục lục các đồ hình khắc gỗ có lớp phủ chú giải (Thần Tướng Toàn Biên, bản khắc đời Minh)
+  GET  /do-hinh/{ma}     một đồ hình: ảnh (tên tệp web tự phục vụ) + điểm ghim toạ độ 0..1 + chữ Hán, âm, nghĩa
 """
 from __future__ import annotations
 
@@ -19,6 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 from app.config import ENGINE_VERSION
 from app.calc import nhan_tuong as calc
 from app.calc import nhan_tuong_do as calc_do
+from app.kb import nhan_tuong_do_hinh as do_hinh_kb
 from app.luangiai import nhan_tuong as nt
 from app.tuvi_api import TuanTrietInput, _MaMau, _Phieu
 
@@ -216,3 +219,19 @@ def api_doc_anh(inp: DocAnhMatInput) -> dict:
 def api_cau_hinh() -> dict:
     from app.narrative import doc_anh_mat  # noqa: PLC0415
     return {"engine_version": ENGINE_VERSION, "doc_anh": doc_anh_mat.da_bat()}
+
+
+@router.get("/do-hinh")
+def api_do_hinh() -> dict:
+    """Mục lục đồ hình sách xưa (tầng KB, chỉ tra). Web vẽ lớp phủ; ảnh gốc không sửa."""
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "nhan_tuong_do_hinh", "nguon_hien_thi": do_hinh_kb.NGUON_HIEN_THI,
+            "trang_thai": do_hinh_kb.meta()["trang_thai"], "do_hinh": do_hinh_kb.danh_muc()}
+
+
+@router.get("/do-hinh/{ma}")
+def api_do_hinh_mot(ma: str) -> dict:
+    import re
+    d = do_hinh_kb.chi_tiet(ma) if re.fullmatch(r"[a-z0-9-]{2,60}", ma) else None
+    if d is None:
+        raise HTTPException(404, detail="Không có đồ hình này.")
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "nhan_tuong_do_hinh", **d}

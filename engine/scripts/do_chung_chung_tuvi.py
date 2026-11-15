@@ -69,6 +69,10 @@ CO_DINH = {
     "Khi các lớp nói khác nhau, ưu tiên mười năm trước, rồi đến năm, rồi mới đến tháng.",
     # CY-1: câu ranh giới cố định của từng mảng trong hộp "Năm nên chú ý {mảng} hơn" (KB chu_y_kb.mang.<mảng>.ranh_gioi)
     *(__import__("app.kb.chu_y_kb", fromlist=["x"]).ranh_gioi(m) for m in __import__("app.kb.chu_y_kb", fromlist=["x"]).cac_mang()),
+    # SX-H: tiêu đề + câu kết cố định của đoạn "Sách xưa ghi gì về điều bạn hỏi" (KB sach_ghi.CAU_KET…)
+    "Sách xưa ghi gì về điều bạn hỏi:",
+    "Đây là ghi chép của người xưa, đọc để tham khảo và giữ gìn, không phải lời đoán riêng cho bạn.",
+    "Chuyện sức khoẻ thì nghe bác sĩ, không nghe sách tướng số.",
     # hỏi đáp về sức khoẻ: câu miễn trừ cố định (tách câu theo dấu chấm)
     *(c.strip() for c in re.split(r"(?<=[.!?])\s+", __import__("app.kb.tuvi_kb", fromlist=["x"]).luu_y("tat_ach"))),
 }

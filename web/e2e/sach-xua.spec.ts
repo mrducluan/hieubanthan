@@ -28,3 +28,29 @@ test("Tử vi: khối sách xưa đứng sau cách cục", async ({ page }) => {
   await k.getByRole("button", { name: /Nguyên văn/ }).first().click();
   await expect(k.getByTestId("sach-xua-han")).toBeVisible();
 });
+
+// SX-C — khối "Sách xưa ghi" (ba nhóm A / B / C đã nói giảm), gập theo nhóm; mở một nhóm thấy câu + chữ Hán + câu kết.
+test("SX-C Tử vi: khối 'Sách xưa ghi gì về từng cung' gập sẵn, mở một cung thấy câu sách", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  const k = page.getByTestId("sach-ghi");
+  await expect(k).toBeVisible();
+  await expect(k.getByRole("heading", { name: "Sách xưa ghi gì về từng cung của bạn" })).toBeVisible();
+  await expect(k.locator("ol li")).toHaveCount(0);
+  await k.getByTestId("sach-ghi-nhom").first().click();
+  await expect(k.locator("ol li").first()).toContainText("Tử Vi Đẩu Số Toàn Thư");
+  await expect(k).toContainText("Đây là ghi chép của người xưa");
+  // nhóm C không hiện phiên âm (âm câu nặng đọc lên vẫn nặng)
+  for (const li of await k.locator("li[data-nhom=C]").all()) await expect(li.locator("span.italic")).toHaveCount(0);
+});
+
+test("SX-C Bát tự + Phong thuỷ: khối sách xưa có ở lá số Bát tự và ở mệnh quái", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/bat-tu");
+  await expect(page.getByTestId("sach-ghi").getByRole("heading", { name: "Sách xưa ghi gì về các sao và hành của bạn" })).toBeVisible();
+  await page.goto("/phong-thuy");
+  const pt = page.getByTestId("sach-ghi").first();
+  await expect(pt).toContainText("Sách xưa dặn gì cho người cung");
+  await pt.getByTestId("sach-ghi-nhom").first().click();
+  await expect(pt.locator("ol li")).toHaveCount(9);
+});
