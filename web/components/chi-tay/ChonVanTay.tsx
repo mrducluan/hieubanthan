@@ -32,7 +32,9 @@ export function ChonVanTay({ van, chuDe, tenCung = {} }: { van: VanTay[]; chuDe:
   const cung = luu.cung;
   const soCung = Object.keys(cung).length;
   const khoaChon = JSON.stringify([chon, cung]);
-  useEffect(() => { setKq(null); }, [khoaChon]);
+  // Lựa chọn đổi khi đang chờ máy chủ → bỏ kết quả cũ về muộn (so khoá lựa chọn lúc gửi với khoá hiện tại).
+  const khoaHienTai = useRef(khoaChon);
+  useEffect(() => { khoaHienTai.current = khoaChon; setKq(null); }, [khoaChon]);
   const ds = useMemo(() => van.filter((v) => !loc || v.chu_de === loc), [van, loc]);
   // Kết quả về → cuộn tới và đặt tiêu điểm vào tiêu đề (người dùng thấy ngay, trình đọc màn hình đọc từ đó); giảm chuyển động → nhảy.
   useEffect(() => {
@@ -48,13 +50,16 @@ export function ChonVanTay({ van, chuDe, tenCung = {} }: { van: VanTay[]; chuDe:
   const doc = async () => {
     if (!chon.length && !soCung) return;
     setDang(true); setLoi(null);
+    const khoaGui = khoaChon;
     try {
       const r = await fetch("/api/chi-tay/doc", {
         method: "POST", headers: { "content-type": "application/json" },
         body: JSON.stringify({ ...(chon.length ? { van: chon } : {}), ...(soCung ? { cung } : {}), ...(hs ? { ngay_sinh: ngaySinhIso(hs) } : {}) }),
       });
       if (!r.ok) throw new Error();
-      setKq((await r.json()) as KetQua);
+      const j = (await r.json()) as KetQua;
+      if (khoaGui !== khoaHienTai.current) return;
+      setKq(j);
       cuonToi.current = true;
       ghi("chart_interacted", { mo_dun: "chitay", kind: "doc_van", so_van: chon.length, so_cung: soCung });
     } catch { setLoi("Máy chủ đang bận, bạn thử lại sau ít phút."); }

@@ -30,7 +30,7 @@ export async function layThuVienChiTay(): Promise<ThuVienChiTay> {
 
 /** Bài thơ bảy chữ (hoặc năm chữ) tách dòng để đọc. */
 export function tachCau(han: string): string[] {
-  const n = han.length % 7 ? 5 : 7;
+  const n = han.length % 4 === 0 && han.length / 4 >= 4 ? han.length / 4 : han.length % 7 ? 5 : 7;   // bài bốn câu
   const ra: string[] = [];
   for (let i = 0; i < han.length; i += n) ra.push(han.slice(i, i + n));
   return ra;

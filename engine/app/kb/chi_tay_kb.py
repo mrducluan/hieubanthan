@@ -48,7 +48,7 @@ def chu_de() -> list[dict]:
 
 def _mot(m: dict) -> dict:
     """Một vân cho thư viện: thêm câu hiển thị theo khuôn SX-C. Phiên âm chỉ ở nhóm A (âm câu nặng đọc lên vẫn nặng)."""
-    ra = {k: m[k] for k in _KHOA_VAN}
+    ra = {k: m[k] for k in _KHOA_VAN if not (k == "am_ten" and m["nhom"] == "C")}
     if m["nhom"] == "A":
         ra["am"] = m["am"]
     for k in ("ham_y", "viec"):
@@ -59,10 +59,11 @@ def _mot(m: dict) -> dict:
 
 
 def thu_vien() -> dict:
-    """Toàn bộ thư viện vân tay (trang công khai: nhóm C đã nói giảm, có câu kết)."""
+    """Toàn bộ thư viện vân tay — trang kiến thức công khai (như đồ hình nhân tướng): nhóm C đã nói giảm, web gập lại dưới nhãn
+    "Ghi chép xưa"; câu kết đủ cả câu "nghe bác sĩ" khi thư viện có mục sức khoẻ (SK-1)."""
     van = [_mot(m) for m in ds_van()]
     return {"nguon_hien_thi": NGUON_HIEN_THI, "trang_thai": meta()["trang_thai"], "chu_de": chu_de(), "van": van,
-            "cau_ket": sach_ghi.CAU_KET, "do_hinh": do_hinh()}
+            "cau_ket": sach_ghi.cau_ket(ds_van()), "do_hinh": do_hinh()}
 
 
 def do_hinh() -> dict | None:

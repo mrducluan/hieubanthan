@@ -24,6 +24,10 @@
   {
    "ten_han": "妻妾紋",
    "ly_do": "đoán phẩm hạnh người vợ"
+  },
+  {
+   "ten_han": "偷花紋",
+   "ly_do": "buộc tội người đọc ham người đã có đôi, không có ích"
   }
  ],
  "chu_de": [
@@ -84,7 +88,7 @@
    "han": "春青夏赤秋宜白四季之中黑喜冬秋赤冬黃春見白夏間逢黑總為凶",
    "am": "Xuân thanh hạ xích thu nghi bạch, Tứ quý chi trung hắc hỷ đông, Thu xích đông hoàng xuân kiến bạch, Hạ gian phùng hắc tổng vi hung.",
    "y": "Sách xem màu lòng bàn tay theo mùa: xuân hơi xanh, hạ hơi đỏ, thu hơi trắng, đông hơi sẫm là thuận mùa; sắc trái mùa thì sách cho là kém.",
-   "nhom": "B",
+   "nhom": "C",
    "chu_de": "suc_khoe",
    "nguon": "than_tuong_toan_bien",
    "ham_y": "Nên chú ý khi lòng bàn tay đổi màu khác thường kéo dài — đó là điều nên hỏi bác sĩ, không phải chuyện số.",
@@ -100,7 +104,7 @@
    "cao": 688,
    "han": "拜相紋從乾位尋其文好似玉腰琴性情敦厚文章異常得君王眷顧深",
    "am": "Bái tướng văn tòng càn vị tầm, Kỳ văn hảo tự ngọc yêu cầm, Tính tình đôn hậu văn chương dị, Thường đắc quân vương quyến cố thâm.",
-   "y": "Vân mọc từ gò Càn (gốc bàn tay phía ngón út), dáng như cây đàn đeo ngang lưng. Sách khen người hiền hậu, chữ nghĩa giỏi, được người trên tin dùng.",
+   "y": "Vân mọc từ gò Càn (gốc bàn tay phía ngón út), dáng như cây đàn ngọc thắt eo. Sách khen người hiền hậu, chữ nghĩa giỏi, được người trên tin dùng.",
    "nhom": "A",
    "chu_de": "cong_viec",
    "nguon": "than_tuong_toan_bien"
@@ -130,7 +134,7 @@
    "cao": 688,
    "han": "兵符紋現掌中央年少登科仕路長節鉞定應權要職震戎邊衛擁旌幢",
    "am": "Binh phù văn hiện chưởng trung ương, Niên thiểu đăng khoa sĩ lộ trường, Tiết việt định ưng quyền yếu chức, Chấn nhung biên vệ ủng tinh tràng.",
-   "y": "Vân hình thẻ binh phù hiện giữa lòng bàn tay. Sách xem là dấu người sớm đỗ đạt, đường làm việc dài, được giao giữ việc quan trọng.",
+   "y": "Vân hình thẻ binh phù hiện giữa lòng bàn tay. Sách xem là dấu người sớm đỗ đạt, đường làm việc dài, được giao giữ việc lớn, cả việc trấn giữ nơi xa.",
    "nhom": "A",
    "chu_de": "cong_viec",
    "nguon": "than_tuong_toan_bien"
@@ -146,11 +150,10 @@
    "han": "紋帶金花印立身此生富貴不憂貧男兒指日封侯相女子他年國內人",
    "am": "Văn đới kim hoa ấn lập thân, Thử sinh phú quý bất ưu bần, Nam nhi chỉ nhật phong hầu tướng, Nữ tử tha niên quốc nội nhân.",
    "y": "Vân hình bông hoa đi cùng dấu ấn. Sách xem là người lập thân vững, đủ ăn đủ mặc không phải lo, được người ngoài coi trọng.",
-   "nhom": "B",
+   "nhom": "A",
    "chu_de": "tien_bac",
    "nguon": "than_tuong_toan_bien",
-   "ham_y": "Ý sách: nền vững thì không phải lo thiếu — nên giữ nếp chi tiêu có kế hoạch.",
-   "viec": "Giữ một khoản để dành đủ cho ba tháng chi tiêu."
+   "a_phu_dinh": true
   },
   {
    "ma": "nhan-tran",
@@ -176,7 +179,7 @@
    "rong": 285,
    "cao": 688,
    "han": "雙魚居放學堂中冠世文章顯祖宗文過天庭更紅潤為官必定至三公",
-   "am": "Song ngư cư phóng học đường trung, Quan thế văn chương hiển tổ tông, Văn quá thiên đình cánh hồng nhuận, Vi quan tất định chí tam công.",
+   "am": "Song ngư cư phóng học đường trung, Quán thế văn chương hiển tổ tông, Văn quá thiên đình cánh hồng nhuận, Vi quan tất định chí tam công.",
    "y": "Hai vân hình cá ở vùng Học đường. Sách khen người văn chương hơn người, làm rạng tổ tiên; vân dài lên phía trên, sắc hồng nhuận thì càng tốt.",
    "nhom": "A",
    "chu_de": "cong_viec",
@@ -237,7 +240,7 @@
    "cao": 688,
    "han": "獨朝文出正郎身若逢靴笏更聰明因官好好難和事必定中年祿位陞",
    "am": "Độc triều văn xuất chính lang thân, Nhược phùng ngoa hốt cánh thông minh, Nhân quan hảo hảo nan hoà sự, Tất định trung niên lộc vị thăng.",
-   "y": "Một đường vân chầu lên. Sách xem là người thông minh, hợp làm việc nơi công quyền, trung niên được lên chức.",
+   "y": "Một đường vân chầu lên. Sách xem là người thông minh, hợp làm việc nơi công quyền; có thêm vân hình hia, hốt thì trung niên được lên chức.",
    "nhom": "A",
    "chu_de": "cong_viec",
    "nguon": "than_tuong_toan_bien"
@@ -267,7 +270,7 @@
    "cao": 688,
    "han": "寶暈文奇二相形端如月暈掌中心如環定是封侯相錢樣須多穀與金",
    "am": "Bảo vựng văn kỳ nhị tướng hình, Đoan như nguyệt vựng chưởng trung tâm, Như hoàn định thị phong hầu tướng, Tiền dạng tu đa cốc dữ kim.",
-   "y": "Vân tròn như quầng trăng giữa lòng bàn tay, như chiếc vòng hay đồng tiền. Sách xem là dấu người có vị trí, lúa tiền dư dả.",
+   "y": "Vân tròn như quầng trăng giữa lòng bàn tay. Sách xem: dáng như chiếc vòng là người có vị trí; dáng như đồng tiền là lúa tiền dư dả.",
    "nhom": "A",
    "chu_de": "tien_bac",
    "nguon": "than_tuong_toan_bien"
@@ -281,7 +284,7 @@
    "rong": 285,
    "cao": 688,
    "han": "三日精榮現掌心文章年少冠儒林須知月闕高攀桂四海聲名值萬金",
-   "am": "Tam nhật tinh vinh hiện chưởng tâm, Văn chương niên thiểu quan nho lâm, Tu tri nguyệt khuyết cao phàn quế, Tứ hải thanh danh trị vạn kim.",
+   "am": "Tam nhật tinh vinh hiện chưởng tâm, Văn chương niên thiểu quán nho lâm, Tu tri nguyệt khuyết cao phàn quế, Tứ hải thanh danh trị vạn kim.",
    "y": "Ba vân sáng hiện giữa lòng bàn tay. Sách khen người văn chương sớm nổi trong giới học, tiếng tăm đi xa.",
    "nhom": "A",
    "chu_de": "cong_viec",
@@ -301,7 +304,7 @@
    "nhom": "C",
    "chu_de": "suc_ben",
    "nguon": "than_tuong_toan_bien",
-   "ham_y": "Người xưa muốn nói sức bền là thứ giữ được bằng nếp sống.",
+   "ham_y": "Ngày nay nên hiểu: sức bền giữ được bằng nếp sống điều độ.",
    "viec": "Giữ giấc ngủ đều, vận động mỗi ngày và đi khám định kỳ mỗi năm."
   },
   {
@@ -358,8 +361,8 @@
    "rong": 283,
    "cao": 688,
    "han": "筆陣紋生陣陣多文章德行勝鄒軻十年得意登科第福壽無疆著綺羅",
-   "am": "Bút trận văn sinh trận trận đa, Văn chương đức hạnh thắng trâu kha, Thập niên đắc ý đăng khoa đệ, Phúc thọ vô cương trước ỷ la.",
-   "y": "Vân như nét bút xếp nhiều lớp. Sách khen người văn chương, đức hạnh, mười năm dùi mài thì đỗ đạt, phúc dày.",
+   "am": "Bút trận văn sinh trận trận đa, Văn chương đức hạnh thắng Trâu Kha, Thập niên đắc ý đăng khoa đệ, Phúc thọ vô cương trước ỷ la.",
+   "y": "Vân như nét bút xếp nhiều lớp. Sách khen người văn chương, đức hạnh hơn người, đến lúc đắc ý thì đỗ đạt, phúc dày.",
    "nhom": "A",
    "chu_de": "cong_viec",
    "nguon": "than_tuong_toan_bien"
@@ -434,7 +437,7 @@
    "cao": 688,
    "han": "學堂紋小卻相宜清貴之中有福隨開廣主人為技藝大凡事事巧能為",
    "am": "Học đường văn tiểu khước tương nghi, Thanh quý chi trung hữu phúc tùy, Khai quảng chủ nhân vi kỹ nghệ, Đại phàm sự sự xảo năng vi.",
-   "y": "Vân Học đường nhỏ mà rõ. Sách xem là người khéo tay, có nghề, việc gì cũng làm khéo, sống thanh mà có phúc.",
+   "y": "Vân Học đường nhỏ thì hợp: sống thanh, có phúc; vân mở rộng ra là người theo nghề khéo tay, việc gì cũng làm khéo.",
    "nhom": "A",
    "chu_de": "cong_viec",
    "nguon": "than_tuong_toan_bien"
@@ -448,7 +451,7 @@
    "rong": 284,
    "cao": 688,
    "han": "拇指山根論學堂節如佛眼主文章金門選舉須科甲名譽清高遠播揚",
-   "am": "Mẫu chỉ sơn căn luận học đường, Tiết như phật nhãn chủ văn chương, Kim môn tuyển cử tu khoa giáp, Danh dự thanh cao viễn bá dương.",
+   "am": "Mẫu chỉ sơn căn luận học đường, Tiết như Phật nhãn chủ văn chương, Kim môn tuyển cử tu khoa giáp, Danh dự thanh cao viễn bá dương.",
    "y": "Học đường xem ở gốc ngón cái: đốt ngón có vân như hình mắt Phật. Sách xem là người giỏi chữ, thi cử có tên, tiếng thơm đi xa.",
    "nhom": "A",
    "chu_de": "cong_viec",
@@ -464,7 +467,7 @@
    "cao": 688,
    "han": "此紋圓滿主車輪必是皇朝館殿人更看文全名杖鼓封作諸侯百里臣",
    "am": "Thử văn viên mãn chủ xa luân, Tất thị hoàng triều quán điện nhân, Cánh khán văn toàn danh trượng cổ, Phong tác chư hầu bách lý thần.",
-   "y": "Vân tròn đầy như bánh xe. Sách xem là người làm việc ở nơi cao, được trọng vọng.",
+   "y": "Vân tròn đầy như bánh xe. Sách xem là người làm việc chữ nghĩa ở nơi cao, được trọng vọng.",
    "nhom": "A",
    "chu_de": "cong_viec",
    "nguon": "than_tuong_toan_bien"
@@ -511,7 +514,7 @@
    "cao": 688,
    "han": "小貴紋奇小貴官縱無官祿積閑錢那堪紅潤兼柔軟僧道須還管要權",
    "am": "Tiểu quý văn kỳ tiểu quý quan, Túng vô quan lộc tích nhàn tiền, Na kham hồng nhuận kiêm nhu nhuyễn, Tăng đạo tu hoàn quản yếu quyền.",
-   "y": "Vân tiểu quý. Sách xem là người có chút vị thế; không làm quan cũng tích được tiền; tay hồng nhuận, mềm thì càng tốt.",
+   "y": "Một dấu vân nhỏ mà rõ trong lòng bàn tay. Sách xem là người có chút vị thế; không làm quan cũng tích được tiền; tay hồng nhuận, mềm thì càng tốt.",
    "nhom": "A",
    "chu_de": "tien_bac",
    "nguon": "than_tuong_toan_bien"
@@ -540,12 +543,12 @@
    "rong": 285,
    "cao": 688,
    "han": "五指俱生川字紋人人益壽得延年男兒可比籛鏗老女子堪如王母仙",
-   "am": "Ngũ chỉ câu sinh xuyên tự văn, Nhân nhân ích thọ đắc diên niên, Nam nhi khả tỷ tiển khanh lão, Nữ tử kham như vương mẫu tiên.",
+   "am": "Ngũ chỉ câu sinh xuyên tự văn, Nhân nhân ích thọ đắc diên niên, Nam nhi khả tỷ Tiễn Khanh lão, Nữ tử kham như Vương Mẫu tiên.",
    "y": "Năm ngón đều có vân như chữ «xuyên» (ba nét dọc): sách xưa xem là dấu sức bền tốt, sống lâu khoẻ.",
    "nhom": "C",
    "chu_de": "suc_ben",
    "nguon": "than_tuong_toan_bien",
-   "ham_y": "Người xưa muốn nói sức bền cần được giữ bằng nếp sống điều độ.",
+   "ham_y": "Ngày nay nên hiểu: sức bền giữ được bằng nếp sống điều độ.",
    "viec": "Giữ giấc ngủ đều, ăn uống chừng mực và đi khám sức khoẻ định kỳ."
   },
   {
@@ -557,7 +560,7 @@
    "rong": 285,
    "cao": 688,
    "han": "折桂紋名有大才儒生及第擢高魁姮娥月裏頻相約一日登雲攀桂來",
-   "am": "Chiết quế văn danh hữu đại tài, Nho sinh cập đệ trạc cao khôi, Hằng nga nguyệt lý tần tương ước, Nhất nhật đăng vân phàn quế lai.",
+   "am": "Chiết quế văn danh hữu đại tài, Nho sinh cập đệ trạc cao khôi, Hằng Nga nguyệt lý tần tương ước, Nhất nhật đăng vân phàn quế lai.",
    "y": "Vân bẻ quế — người xưa ví đỗ đạt như bẻ cành quế. Sách xem là người có tài lớn, thi cử đỗ cao.",
    "nhom": "A",
    "chu_de": "cong_viec",
@@ -605,7 +608,7 @@
    "cao": 688,
    "han": "離紋沖亂多勞碌坎位如豐稱晚年八卦若盈孤賤相三山要厚主榮官",
    "am": "Ly văn xung loạn đa lao lục, Khảm vị như phong xứng vãn niên, Bát quái nhược doanh cô tiện tướng, Tam sơn yếu hậu chủ vinh quan.",
-   "y": "Vân ở gò Ly (dưới ngón giữa) rối, cắt nhau thì sách cho là nhiều vất vả; gò Khảm (gốc bàn tay) đầy thì tuổi già khá; ba gò đầy dày thì có vị trí.",
+   "y": "Vân ở gò Ly (dưới ngón giữa) rối, cắt nhau thì sách cho là nhiều vất vả; gò Khảm (gốc bàn tay) đầy thì tuổi già khá; ba gò đầy dày thì có vị trí. Sách còn một câu: tám gò cùng quá đầy lại là tướng cô độc.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "nguon": "than_tuong_toan_bien",
@@ -622,11 +625,11 @@
    "cao": 688,
    "han": "震豐色潤有男兒紋細誰知子息稀或遇其中還帶煞只宜招取別兒宜",
    "am": "Chấn phong sắc nhuận hữu nam nhi, Văn tế thùy tri tử tức hy, Hoặc ngộ kỳ trung hoàn đới sát, Chỉ nghi chiêu thủ biệt nhi nghi.",
-   "y": "Gò Chấn (giữa cạnh bàn tay phía ngón cái) đầy, sắc nhuận thì sách xem là đường con cái thuận; vân mảnh thì sách cho là con cái đến muộn.",
+   "y": "Gò Chấn (giữa cạnh bàn tay phía ngón cái) đầy, sắc nhuận thì sách xem là đường con cái thuận; vân mảnh thì sách cho là ít con, trong vân còn nét xấu thì sách gợi ý nhận con nuôi.",
    "nhom": "C",
    "chu_de": "con_cai",
    "nguon": "than_tuong_toan_bien",
-   "ham_y": "Người xưa muốn dặn hai vợ chồng chăm sóc sức khoẻ cho nhau.",
+   "ham_y": "Chuyện con cái là chuyện chung của hai người và của sức khoẻ — nên cùng nhau chăm lo.",
    "viec": "Mong con thì hai người cùng đi khám sớm; khi có tin vui thì khám thai đúng lịch."
   },
   {
@@ -639,7 +642,7 @@
    "cao": 688,
    "han": "銀河碎在天紋上必主妨妻再娶妻震坎亂紋沖剋破不宜祖業自興基",
    "am": "Ngân hà toái tại thiên văn thượng, Tất chủ phương thê tái thú thê, Chấn khảm loạn văn xung khắc phá, Bất nghi tổ nghiệp tự hưng cơ.",
-   "y": "Vân vỡ vụn trên đường trên cùng của bàn tay: đường vợ chồng cần vun đắp nhiều hơn người, và tự gây dựng việc riêng hợp hơn là dựa vào nghiệp cũ.",
+   "y": "Vân vỡ vụn trên đường trên cùng của bàn tay: sách xưa gắn với chuyện vợ chồng dễ có biến đổi, có khi lập gia đình lần nữa; gò Chấn, gò Khảm còn vân rối thì sách cho là tự gây dựng hợp hơn dựa vào nghiệp cũ.",
    "nhom": "C",
    "chu_de": "tinh_duyen",
    "nguon": "than_tuong_toan_bien",
@@ -673,7 +676,7 @@
    "cao": 688,
    "han": "文理如魚坎位藏妻饒相受富田莊因何子受官班爵賴得乾宮井字紋",
    "am": "Văn lý như ngư khảm vị tàng, Thê nhiêu tương thụ phú điền trang, Nhân hà tử thụ quan ban tước, Lại đắc càn cung tỉnh tự văn.",
-   "y": "Vân như hình cá ẩn ở gò Khảm (gốc bàn tay), thêm vân chữ «tỉnh» ở gò Càn. Sách xem là người được vợ con nhờ, có ruộng vườn, con cái làm nên.",
+   "y": "Vân như hình cá ẩn ở gò Khảm (gốc bàn tay). Sách xem là người được nhờ người bạn đời, có ruộng vườn; thêm vân chữ «tỉnh» ở gò Càn thì con cái làm nên.",
    "nhom": "A",
    "chu_de": "gia_dinh",
    "nguon": "than_tuong_toan_bien"
@@ -688,12 +691,11 @@
    "cao": 688,
    "han": "陰德紋從身位生常懷陰德合聰明凶危不犯心無事好善慈悲好念經",
    "am": "Âm đức văn tòng thân vị sinh, Thường hoài âm đức hợp thông minh, Hung nguy bất phạm tâm vô sự, Hiếu thiện từ bi hiếu niệm kinh.",
-   "y": "Vân âm đức mọc từ vùng thân. Sách xem là người hay nghĩ điều tốt, thông minh, lòng thanh thản, ít vướng chuyện nguy, hiền và mộ đạo.",
-   "nhom": "B",
+   "y": "Vân âm đức mọc từ phía ngón cái. Sách xem là người hay nghĩ điều tốt, thông minh, lòng thanh thản, ít vướng chuyện nguy, hiền và mộ đạo.",
+   "nhom": "A",
    "chu_de": "tinh_net",
    "nguon": "than_tuong_toan_bien",
-   "ham_y": "Ý sách: lòng thiện và sự bình tâm giúp mình tránh được nhiều chuyện — nên giữ.",
-   "viec": "Trước khi nói lời gay gắt, dừng lại một nhịp thở rồi mới nói."
+   "a_phu_dinh": true
   },
   {
    "ma": "tri-tue",
@@ -706,11 +708,10 @@
    "han": "智慧紋名遠譽揚其紋長直象文鎗平生動作常思慮慈善兼無橫禍殃",
    "am": "Trí tuệ văn danh viễn dự dương, Kỳ văn trường trực tượng văn thương, Bình sinh động tác thường tư lự, Từ thiện kiêm vô hoạnh hoạ ương.",
    "y": "Vân dài, thẳng như ngọn giáo. Sách xem là người tiếng tốt đi xa, làm gì cũng nghĩ kỹ, hiền lành, ít gặp chuyện bất ngờ.",
-   "nhom": "B",
+   "nhom": "A",
    "chu_de": "tinh_net",
    "nguon": "than_tuong_toan_bien",
-   "ham_y": "Nên giữ thói quen nghĩ kỹ trước khi làm — đó là điểm mạnh sách khen.",
-   "viec": "Với việc quan trọng, ghi lại lý do quyết định để lần sau xem lại."
+   "a_phu_dinh": true
   },
   {
    "ma": "son-quang",
@@ -778,7 +779,7 @@
   },
   {
    "ma": "sac-duc",
-   "ten": "Vân Sắc Dục",
+   "ten": "Vân cỏ rối",
    "ten_han": "色慾紋",
    "am_ten": "Sắc dục văn",
    "anh": "sac-duc.webp",
@@ -812,7 +813,7 @@
   },
   {
    "ma": "sac-lao",
-   "ten": "Vân Sắc Lao",
+   "ten": "Vân lá liễu",
    "ten_han": "色勞紋",
    "am_ten": "Sắc lao văn",
    "anh": "sac-lao.webp",
@@ -904,7 +905,7 @@
    "rong": 282,
    "cao": 688,
    "han": "花釵紋現主偷期巷陌風花只自知到處得人憐又惜貪歡樂處勝西施",
-   "am": "Hoa thoa văn hiện chủ thâu kỳ, Hạng mạch phong hoa chỉ tự tri, Đáo xứ đắc nhân liên hựu tích, Tham hoan lạc xứ thắng tây thi.",
+   "am": "Hoa thoa văn hiện chủ thâu kỳ, Hạng mạch phong hoa chỉ tự tri, Đáo xứ đắc nhân liên hựu tích, Tham hoan lạc xứ thắng Tây Thi.",
    "y": "Sách xem là người được nhiều người thương mến, ham vui, dễ có những hẹn hò kín.",
    "nhom": "C",
    "chu_de": "tinh_duyen",
@@ -930,23 +931,6 @@
    "viec": "Đặt một mục tiêu chung cho gia đình năm nay và cùng nhau làm."
   },
   {
-   "ma": "thau-hoa",
-   "ten": "Vân Thâu Hoa",
-   "ten_han": "偷花紋",
-   "am_ten": "Thâu hoa văn",
-   "anh": "thau-hoa.webp",
-   "rong": 285,
-   "cao": 688,
-   "han": "偷花紋見自多非別處風花戀暗期自有好花心不喜一心專戀別人妻",
-   "am": "Thâu hoa văn kiến tự đa phi, Biệt xứ phong hoa luyến ám kỳ, Tự hữu hảo hoa tâm bất hỷ, Nhất tâm chuyên luyến biệt nhân thê.",
-   "y": "Sách xem là người dễ để ý tới người đã có đôi.",
-   "nhom": "C",
-   "chu_de": "tinh_duyen",
-   "nguon": "than_tuong_toan_bien",
-   "ham_y": "Nên giữ ranh giới với người đã có gia đình.",
-   "viec": "Tránh gặp riêng, nhắn tin khuya với người đã có đôi."
-  },
-  {
    "ma": "hoa-cai-cung-the",
    "ten": "Vân Hoa Cái ở cung Thê",
    "ten_han": "華蓋紋",
@@ -956,10 +940,12 @@
    "cao": 688,
    "han": "妻宮華蓋蓋朝妻招得妻財逐後妻皆是五行并掌相他年更許有男兒",
    "am": "Thê cung hoa cái cái triều thê, Chiêu đắc thê tài trục hậu thê, Giai thị ngũ hành tịnh chưởng tướng, Tha niên cánh hứa hữu nam nhi.",
-   "y": "Ở cung vợ chồng có vân hoa cái chầu về. Sách xem là người được nhờ người bạn đời về tiền bạc, về sau con cái nối được việc nhà.",
-   "nhom": "A",
+   "y": "Ở cung vợ chồng có vân hoa cái chầu về: sách xưa xem là người được nhờ người bạn đời về tiền bạc, về sau có thể lập gia đình lần nữa, con cái nối được việc nhà.",
+   "nhom": "C",
    "chu_de": "gia_dinh",
-   "nguon": "than_tuong_toan_bien"
+   "nguon": "than_tuong_toan_bien",
+   "ham_y": "Nên vun đắp sự gắn bó và rõ ràng chuyện tiền bạc trong nhà.",
+   "viec": "Hai người cùng lập một quỹ chung và ghi lại các khoản lớn."
   },
   {
    "ma": "nhat-trung",
@@ -970,7 +956,7 @@
    "rong": 285,
    "cao": 688,
    "han": "妻宮只有一重紋沒個妻奴及弟兄若有兩紋并四畫許君後續好兒孫",
-   "am": "Thê cung chỉ hữu nhất trùng văn, Một cá thê nô cập đệ huynh, Nhược hữu lưỡng văn tịnh tứ hoạch, Hứa quân hậu dục hảo nhi tôn.",
+   "am": "Thê cung chỉ hữu nhất trùng văn, Một cá thê nô cập đệ huynh, Nhược hữu lưỡng văn tịnh tứ hoạch, Hứa quân hậu tục hảo nhi tôn.",
    "y": "Ở cung vợ chồng chỉ có một vân: sách xem là người ít người thân đỡ đần; có hai vân và bốn nét thì về sau con cháu tốt.",
    "nhom": "C",
    "chu_de": "gia_dinh",
@@ -980,7 +966,7 @@
   },
   {
    "ma": "van-cha",
-   "ten": "Vân nói về cha",
+   "ten": "Vân Khôi Tâm",
    "ten_han": "剋父紋",
    "am_ten": "Khắc phụ văn",
    "anh": "van-cha.webp",
@@ -988,12 +974,12 @@
    "cao": 688,
    "han": "天文劈索朝中指此是魁心成可喜更有二指縫中心少年剋父無所倚",
    "am": "Thiên văn phách sách triều trung chỉ, Thử thị khôi tâm thành khả hỷ, Cánh hữu nhị chỉ phùng trung tâm, Thiểu niên khắc phụ vô sở ỷ.",
-   "y": "Đường vân trên cùng tách ra hướng về ngón giữa, kèm vân ở kẽ hai ngón: sách xưa gắn với người sớm phải tự lập, ít được cha đỡ đần.",
+   "y": "Đường vân trên cùng tách nhánh hướng về ngón giữa: sách gọi là «khôi tâm», điều đáng mừng. Nếu kẽ hai ngón còn có vân nữa thì sách xưa gắn với chuyện sớm thiếu chỗ dựa của cha.",
    "nhom": "C",
    "chu_de": "gia_dinh",
    "nguon": "than_tuong_toan_bien",
    "ham_y": "Nên dành thời gian cho cha, hỏi han sức khoẻ của cha.",
-   "viec": "Đưa cha đi khám sức khoẻ định kỳ năm nay."
+   "viec": "Nếu cha còn khoẻ, năm nay đưa cha đi khám sức khoẻ định kỳ."
   },
   {
    "ma": "van-me",
@@ -1004,8 +990,8 @@
    "rong": 285,
    "cao": 688,
    "han": "太陰若有紋沖破必定親生母見之若是過房猶自可親生必定見閻君",
-   "am": "Thái âm nhược hữu văn xung phá, Tất định thân sinh mẫu kiến chi, Nhược thị quá phòng do tự khả, Thân sinh tất định kiến diêm quân.",
-   "y": "Gò Thái Âm (dưới cạnh bàn tay phía ngón út) có vân cắt ngang: sách xưa gắn với duyên nương tựa mẹ mỏng hơn, sớm phải tự lo.",
+   "am": "Thái âm nhược hữu văn xung phá, Tất định thân sinh mẫu kiến chi, Nhược thị quá phòng do tự khả, Thân sinh tất định kiến Diêm Quân.",
+   "y": "Phần dưới lòng bàn tay phía ngón cái (sách gọi là Thái Âm) có vân cắt ngang như trong hình: sách xưa gắn với duyên nương tựa mẹ mỏng hơn, sớm phải tự lo.",
    "nhom": "C",
    "chu_de": "gia_dinh",
    "nguon": "than_tuong_toan_bien",
@@ -1065,7 +1051,7 @@
   },
   {
    "ma": "vong-than",
-   "ten": "Vân Vong Thần",
+   "ten": "Vân ngang dọc",
    "ten_han": "亡神紋",
    "am_ten": "Vong thần văn",
    "anh": "vong-than.webp",
@@ -1082,7 +1068,7 @@
   },
   {
    "ma": "kiep-sat",
-   "ten": "Vân Kiếp Sát",
+   "ten": "Vân rối cắt nhau",
    "ten_han": "劫煞紋",
    "am_ten": "Kiếp sát văn",
    "anh": "kiep-sat.webp",
@@ -1099,7 +1085,7 @@
   },
   {
    "ma": "tam-sat",
-   "ten": "Vân Tam Sát",
+   "ten": "Vân lấn vùng vợ con",
    "ten_han": "三煞紋",
    "am_ten": "Tam sát văn",
    "anh": "tam-sat.webp",
@@ -1140,7 +1126,7 @@
    "rong": 285,
    "cao": 688,
    "han": "橫來酒食紋何似坤上差池入巽宮好似斜飛三燕子每逢橫俎貴交中",
-   "am": "Hoạnh lai tửu thực văn hà tự, Khôn thượng sai trì nhập tốn cung, Hảo tự tà phi tam yên tử, Mỗi phùng hoạnh trở quý giao trung.",
+   "am": "Hoạnh lai tửu thực văn hà tự, Khôn thượng si trì nhập tốn cung, Hảo tự tà phi tam yên tử, Mỗi phùng hoạnh trở quý giao trung.",
    "y": "Vân chạy ngang từ gò Khôn sang gò Tốn, như ba con én bay xiên. Sách xem là người hay được mời ăn uống, kết giao với người có vị trí.",
    "nhom": "A",
    "chu_de": "ban_be",

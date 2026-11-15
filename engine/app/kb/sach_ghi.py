@@ -136,6 +136,11 @@ def kiem_muc(m: dict, vi_tri: str = "") -> list[str]:
         if len(m.get(k) or "") > n:
             them(f"`{k}` dài quá {n} ký tự")
     tran = _TEN_RIENG.sub("", m.get("han") or "")
+    # `a_phu_dinh: true` — người duyệt xác nhận chữ nặng chỉ nằm trong vế phủ định của câu khen (不憂貧, 無禍亦無災, 不為凶):
+    # vẫn cho nhóm A, nhưng MỌI chữ nặng phải có chữ phủ định (不無免莫) trong vòng hai chữ trước / sau nó.
+    if m.get("a_phu_dinh") and all(re.search(r"[不無无免莫]", tran[max(0, x.start() - 2): x.end() + 2])
+                                     for x in _HAN_NANG.finditer(tran)):
+        tran = ""
     if m["nhom"] == "A" and _HAN_NANG.search(tran):
         them(f"câu sách có chữ nặng «{_HAN_NANG.search(tran).group()}» mà gắn nhóm A — phải là B hoặc C")
     if m["nhom"] in ("B", "C"):

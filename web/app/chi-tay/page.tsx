@@ -31,9 +31,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
   const [tv, nd] = await Promise.all([layThuVienChiTay(), layNoiDungTrang(DUONG_CHI_TAY)]);
   const h1 = nd.dau.h1 ?? "Xem chỉ tay theo sách xưa";
-  const dd = duongDanCongCu(DUONG_CHI_TAY, "Xem chỉ tay");
+  const dd = [...duongDanCongCu("/nhan-tuong", "Nhân tướng"), { ten: "Xem chỉ tay", duong: DUONG_CHI_TAY }];   // chỉ tay thuộc mảng Nhân tướng
   const tl = `Sách tướng xưa xem bàn tay theo tám cung bát quái (mỗi cung một mảng đời: cha, mẹ, vợ chồng, nhà cửa, công danh, tổ nghiệp)
-    và theo hình vân. ${tv.nguon_hien_thi} khắc ${tv.van.length + 5} hình vân, mỗi hình một bài thơ bốn câu. Bạn tự soi tay mình,
+    và theo hình vân. ${tv.nguon_hien_thi} khắc 72 hình vân, mỗi hình một bài thơ bốn câu. Bạn tự soi tay mình,
     chọn hình giống tay mình, trang này đọc nguyên văn và nói lại bằng lời thường. Nếu chụp ảnh lòng bàn tay, ảnh chỉ xử lý trên
     máy bạn — chỉ 21 toạ độ điểm mốc gửi lên để đo và đặt tám cung lên đúng tay bạn, không lưu gì lên máy chủ.`
     .replace(/\s+/g, " ");
@@ -75,8 +75,8 @@ export default async function Page() {
       <section aria-labelledby="thu-vien">
         <h2 id="thu-vien" className="text-2xl">Thư viện {tv.van.length} hình vân tay trong sách</h2>
         <p className="mt-2 text-sm text-fg-muted">
-          Nguyên văn {tv.nguon_hien_thi}. Lời sách đoán nặng (tình duyên, người thân) đã nói giảm và kèm việc nên làm. Năm hình sách
-          đoán về phẩm hạnh người vợ không đưa vào.
+          Nguyên văn {tv.nguon_hien_thi}. Lời sách đoán nặng (tình duyên, người thân) đã nói giảm và kèm việc nên làm. Sáu hình sách
+          đoán phẩm hạnh người khác (người vợ, người đã có đôi) không đưa vào. Lời «ghi chép xưa» gập lại, bấm để đọc.
         </p>
         {theoChuDe.map((c) => (
           <div key={c.ma} className="mt-8">
@@ -92,8 +92,18 @@ export default async function Page() {
                       <span className="ml-2 text-xs text-fg-faint">{NHAN[v.nhom]}</span></p>
                     <p className="mt-1 font-serif text-sm text-fg-muted" lang="zh-Hant">{tachCau(v.han).join("，")}</p>
                     {v.am && <p className="mt-0.5 text-xs italic text-fg-faint">{v.am}</p>}
-                    <p className="mt-1.5 text-sm leading-relaxed">{v.nhom === "C" ? "Hàm ý theo ghi chép xưa: " : ""}{v.y}{v.ham_y ? ` ${v.ham_y}` : ""}</p>
-                    {v.viec && <p className="mt-1 text-xs text-fg-muted">Việc nên làm: {v.viec}</p>}
+                    {v.nhom === "C" ? (
+                      <details className="mt-1.5 text-sm">
+                        <summary className="cursor-pointer text-fg-muted">Ghi chép xưa (đã nói giảm) — bấm để đọc</summary>
+                        <p className="mt-1 leading-relaxed">{v.y}{v.ham_y ? ` ${v.ham_y}` : ""}</p>
+                        {v.viec && <p className="mt-1 text-xs text-fg-muted">Việc nên làm: {v.viec}</p>}
+                      </details>
+                    ) : (
+                      <>
+                        <p className="mt-1.5 text-sm leading-relaxed">{v.y}{v.ham_y ? ` ${v.ham_y}` : ""}</p>
+                        {v.viec && <p className="mt-1 text-xs text-fg-muted">Việc nên làm: {v.viec}</p>}
+                      </>
+                    )}
                   </div>
                 </li>
               ))}

@@ -53,7 +53,10 @@ những gì họ tự xác nhận. Cùng nguyên tắc với ANH-3 (gương mặ
   "bo_nhom_c": 0, "cau_ket": "..." }
 ```
 
-- `hop_le: false` + `loi` (mã: `khong_du_diem`, `mu_ban_tay`, `tay_nam`, `nghieng_qua`) kèm lời tiếng Việt nhắc chụp lại.
+- `hop_le: false` + `loi` (mã: `khong_du_diem`, `mu_ban_tay`, `tay_nam`, `nghieng_qua`) + `loi_nhac` (lời tiếng Việt nhắc chụp lại).
+- `nhan[]` có thêm `truc`, `y`; `cung[]` có thêm `am` và `vai` (câu sách nói cung ấy là gì, «根基所屬»).
+- Toạ độ phải lấy trên ảnh KHÔNG lật gương (camera sau hoặc ảnh tải lên); ảnh camera trước bị lật đọc thành tay kia → engine
+  báo `mu_ban_tay` và lời nhắc gợi ý chọn đúng tay.
 - Số đo: độ dài theo đơn vị "dài lòng bàn tay" (cổ tay → gốc ngón giữa = 1). Không đo độ dày, màu, đường chỉ.
 - `cung[].vt` là toạ độ 0..1 TRÊN ẢNH người dùng, dựng từ khung bàn tay (cổ tay, gốc 5 ngón) — mỗi cung là một tổ hợp cố định
   của điểm mốc (bảng trong KB), không phụ thuộc tay trái / phải (bên ngón cái / bên ngón út).
@@ -61,7 +64,9 @@ những gì họ tự xác nhận. Cùng nguyên tắc với ANH-3 (gương mặ
 ### `POST /v1/chi-tay/doc` (mở rộng)
 
 Thêm `cung: { "<ma cung>": "<ma lựa chọn>" }` (tuỳ chọn); `van` thành tuỳ chọn nhưng phải có ít nhất một trong `van`, `cung`.
-Trả thêm các mục sách theo cung (Ngọc Chưởng Ký «乾宮高聳…», «艮宮剋陷…», Luận thủ «四畔豐起而中窪者富»…), chung khuôn SX-C.
+Trả thêm `muc_cung` (riêng với `muc` của vân): câu sách theo cung + lựa chọn, lấy từ «根基所屬» (bài thơ từng cung trên BÀN
+TAY, có cả vế gò đầy và vế trũng / vân phá) và «論手» cho Minh Đường, chung khuôn SX-C. Không dùng câu «玉掌記» cho cung: bản
+Cổ Kim Đồ Thư chú nhỏ đặt tám cung trong câu ấy lên MẶT (乾〔右頤下〕…), trình bày như câu về bàn tay là không trung thực.
 
 ## 4. Câu sách theo số đo (đo được thật)
 
@@ -70,7 +75,14 @@ Từ «論手», «相指掌», «許負相手篇» (kho nguồn `than_tuong_toa
 «四指長者… 性不耐煩» (ngón áp út dài → nhóm B), «掌長指短…» (nhóm B/C). Ngưỡng là nhân trắc phổ biến, ghi
 `can_doi_chieu`, có dải "vừa" (không gợi ý). Câu nặng nói giảm theo SX-C; chưa rõ tuổi / dưới 18 → không nhóm C.
 
-## 5. Ranh giới
+## 5. Đã làm (15/11/2026)
+
+- Engine `calc/chi_tay_do.py` (21 điểm → số đo, kiểm ảnh, chiếu chín cung), KB `do_tay` (ngưỡng `can_doi_chieu`, chưa hiệu
+  chỉnh trên ảnh thật), `sach_do_tay` (8 câu «論手» / «相指掌»), `cung_tay` (chín cung × 4 lựa chọn).
+- Web `ChupBanTay` (MediaPipe Hand Landmarker trên máy, đồng ý `ct1`, rút ở "Dữ liệu của tôi"), chính sách riêng tư `#anh-mat`.
+- Chưa: thử trên điện thoại thật (CI không có camera; e2e dùng điểm giả), hiệu chỉnh ngưỡng bằng ảnh thật có đồng ý.
+
+## 6. Ranh giới
 
 - Chỉ tay của chính mình; không nhận dạng danh tính; không lưu ảnh / toạ độ; không điểm số; không "đọc đường đời / tuổi thọ".
 - Thiếu mô hình / thiết bị yếu → vẫn dùng được phần tự chọn vân + chạm cung trên đồ hình sách (như hiện tại).

@@ -57,7 +57,7 @@ def test_moi_cau_la_nguyen_van():
 
 def test_ma_duy_nhat_anh_co_that():
     ma = [m["ma"] for m in kb.ds_van()]
-    assert len(ma) == len(set(ma)) == 67
+    assert len(ma) == len(set(ma)) == 66
     for m in kb.ds_van():
         assert re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", m["ma"])
         p = ANH_VAN / m["anh"]
@@ -94,11 +94,11 @@ def test_doc_bo_nhom_c_khi_chua_ro_tuoi():
     assert r["muc"][1]["loi"].startswith("Sách xưa có nhắc")
 
 
-def test_khong_dua_vao_5_hinh_doan_nguoi_khac():
+def test_khong_dua_vao_6_hinh_doan_nguoi_khac():
     ten = {m["ten_han"] for m in kb.ds_van()}
     for x in kb._d()["khong_dua_vao"]:
         assert x["ten_han"] not in ten or x["ten_han"] == "華蓋紋"
-    assert len(kb._d()["khong_dua_vao"]) == 5
+    assert len(kb._d()["khong_dua_vao"]) == 6
 
 
 @pytest.fixture(scope="module")
@@ -110,7 +110,7 @@ def test_route_thu_vien(may):
     r = may.get("/v1/chi-tay")
     assert r.status_code == 200
     j = r.json()
-    assert len(j["van"]) == 67 and j["do_hinh"]["ma"] == "bat-quai-ban-tay"
+    assert len(j["van"]) == 66 and j["do_hinh"]["ma"] == "bat-quai-ban-tay"
     chu = json.dumps(j, ensure_ascii=False)
     assert not re.search(r"wikisource|sqlite|drive|SXQB|YLZ|\.png|han_kho|_nguon", chu, re.I)
     assert all("am" not in v for v in j["van"] if v["nhom"] != "A") and all(v["am"] for v in j["van"] if v["nhom"] == "A")
@@ -123,3 +123,10 @@ def test_route_doc(may):
     assert [m["ma"] for m in r.json()["muc"]] == ["bai-tuong"] and r.json()["bo_nhom_c"] == 1
     assert may.post("/v1/chi-tay/doc", json={"van": ["../x"]}).status_code == 422
     assert may.post("/v1/chi-tay/doc", json={"van": []}).status_code == 422
+
+
+def test_thu_vien_cau_ket_suc_khoe_va_nhom_c_khong_am():
+    tv = kb.thu_vien()
+    assert sach_ghi.CAU_KET_SUC_KHOE in tv["cau_ket"]
+    assert all("am_ten" not in v and "am" not in v for v in tv["van"] if v["nhom"] == "C")
+    assert all(v.get("a_phu_dinh") is None for v in tv["van"])          # cờ duyệt nội bộ không ra API
