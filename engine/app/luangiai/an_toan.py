@@ -2195,7 +2195,7 @@ _BAO_LUC_RX = re.compile(
     r"|(?:chong|vo|bo|me|ba|nguoi yeu|ny|ban trai|ban gai|bo duong|me ke|cha duong)(?: toi| em| minh)? (?:hay |cu |lai |say ruou )*"
     r"(?:danh|tat|dap|hanh ha) (?:toi|em|minh|con)|bi (?:chong|vo|bo|me|nguoi yeu|ban trai|ban gai) (?:danh|tat|dap|hanh ha)"
     r"|abus\w*|domestic violence|(?:hits?|beats?|hurts?|chokes?|slaps?) me|threaten\w* to (?:kill|hurt|beat) me)(?!\w)")
-BAO_LUC_TRUOC_VI = ("Không ai đáng bị đánh, doạ hay kiểm soát như vậy. Nếu bạn đang gặp nguy hiểm, gọi 113 hoặc nhờ hàng xóm, "
+BAO_LUC_TRUOC_VI = ("Không ai đáng bị đánh, xâm hại, doạ hay kiểm soát như vậy. Nếu bạn đang gặp nguy hiểm, gọi 113 hoặc nhờ hàng xóm, "
                     "người thân đến ngay; trẻ em bị bạo hành gọi 111. Nếu được, tìm chỗ ở tạm an toàn và giữ lại tin nhắn, ảnh vết "
                     "thương ở nơi người kia không xem được.")
 
