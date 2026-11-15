@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from app.kb import nap
+from app.kb.loi import L
 
 CUNG_CHU_Y = ("Mệnh", "Tài Bạch", "Quan Lộc", "Phu Thê", "Điền Trạch")      # = tuvi_doi_song.CUNG_VAN_HAN
 _THU_TU = ("thai_tue", "loc", "kinh", "da", "ma", "khoi_viet", "xuong_khuc", "tang_mon", "bach_ho")
@@ -50,7 +51,8 @@ def cau_chu_y(chu_y: list[dict], nam_s: str) -> str:
     from app.luangiai.tuvi_doi_song import _vat   # noqa: PLC0415
     if not chu_y:
         return ""
-    return KB()["chu_y"].format(nam=nam_s, ds=", ".join(f"{m['ten']} ({_vat(m['cung'])})" for m in chu_y))
+    return KB()["chu_y"].format(nam=nam_s, ds=", ".join(L("tvsl.ten_vat", f"{m['ten']} ({_vat(m['cung'])})",
+                                                         ten=m["ten"], vat=_vat(m["cung"])) for m in chu_y))
 
 
 def doc(ls: dict, sl: dict, nam: int | None = None) -> dict:
@@ -59,14 +61,15 @@ def doc(ls: dict, sl: dict, nam: int | None = None) -> dict:
 
     k = KB()
     theo_chi = {c["chi"]: c["ten"] for c in ls["cung"]}
-    nam_s = str(nam) if nam else "này"
+    nam_s = str(nam) if nam else L("tvsl.nam_nay", "này")
     muc = []
     for ma, chi_ds in sorted(_vi_tri(sl).items(), key=lambda x: _THU_TU.index(x[0])):
         o = k["sao"][ma]
         chi_ds = list(dict.fromkeys(chi_ds))
         cac = [theo_chi[c] for c in chi_ds]          # cặp sao (Khôi Việt, Xương Khúc) ở hai cung → một dòng
-        chu = _chu(cac[0]) + "".join(f" và {_vat(c)}" for c in cac[1:])
-        loi, nen = o["loi"].format(Chu=chu, nam=nam_s), o["nen_lam"]
+        chu = _chu(cac[0]) + "".join(L("tvsl.va_vat", f" và {_vat(c)}", vat=_vat(c)) for c in cac[1:])
+        vat = _vat(cac[0]) + "".join(L("tvsl.va_vat", f" và {_vat(c)}", vat=_vat(c)) for c in cac[1:])
+        loi, nen = o["loi"].format(Chu=chu, nam=nam_s, vat=vat), o["nen_lam"]
         if ma in _CHU_Y and cac == ["Tật Ách"]:          # sao khó ở cung sức khoẻ → lời nhắc phòng ngừa, không đoán bệnh
             loi, nen = k["tat_ach"]["loi"].format(nam=nam_s), k["tat_ach"]["nen_lam"]
         muc.append({"ma": ma, "ten": o["ten"], "chi": chi_ds[0], "cung": cac[0], "cac_cung": cac,

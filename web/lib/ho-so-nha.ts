@@ -5,6 +5,15 @@
 // migration 0018) khi người dùng tự bấm "Lưu nhà vào tài khoản".
 import { useSyncExternalStore } from "react";
 import { z } from "zod";
+import { taoChu } from "@/lib/chu-trang";
+import { CHU_PHONG_THUY_UI } from "@/lib/chu/phong-thuy";
+import { tenTheo } from "@/lib/ten-hien";
+
+/** EN-ALL GĐ 5: chữ bản Anh của tên nhà / tên căn / loại nhà (bản Việt không dùng). */
+const PT_EN = taoChu(CHU_PHONG_THUY_UI, null, "en");
+const TEN_EN = tenTheo(null, true);
+/** Tên loại nhà theo ngôn ngữ (bản Việt = TEN_LOAI_NHA). */
+export const tenLoaiNha = (m: LoaiNha, en = false) => (en ? PT_EN(`hs.loai.${m}`) : TEN_LOAI_NHA[m]);
 
 export const KHOA_HO_SO_NHA = "hbt.nha.v1";
 const HUONG8 = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] as const;
@@ -108,7 +117,12 @@ export function nhaTuHoSo(n: HoSoNha | null | undefined): { huong_do?: number; h
   if (!n || (n.huong_do == null && !n.huong)) return null;
   return { ...(n.huong_do != null ? { huong_do: n.huong_do } : { huong: n.huong }), ...(n.nam_xay ? { nam_xay: n.nam_xay } : {}), ...(n.toa ? { toa: n.toa } : {}), theo: n.theo };
 }
-export function tenNha(n: HoSoNha | null | undefined): string {
+export function tenNha(n: HoSoNha | null | undefined, en = false): string {
+  if (en) {
+    // EN-ALL GĐ 5: chữ bản Anh từ bảng lib/chu/phong-thuy.ts (hướng qua tên Anh). Bản Việt giữ đúng chữ cũ bên dưới.
+    if (!n) return PT_EN("hs.nha_cua_ban");
+    return n.ten_goi || (n.huong_do != null ? PT_EN("hs.nha_huong", { huong: `${n.huong_do}°` }) : n.huong ? PT_EN("hs.nha_huong", { huong: TEN_EN("huong", n.huong) }) : PT_EN("hs.nha_cua_ban"));
+  }
   if (!n) return "nhà của bạn";
   return n.ten_goi || (n.huong_do != null ? `nhà hướng ${n.huong_do}°` : n.huong ? `nhà hướng ${n.huong}` : "nhà của bạn");
 }
@@ -192,6 +206,10 @@ export function chonCan(id: string): void {
 export function xoaCan(id: string): void {
   ghiDs(docDs().filter((c) => c.id !== id));
 }
-export function tenCan(c: Pick<HoSoNha, "ten_goi" | "huong_do" | "huong">, i: number): string {
+export function tenCan(c: Pick<HoSoNha, "ten_goi" | "huong_do" | "huong">, i: number, en = false): string {
+  if (en) {
+    const can = PT_EN("hs.can", { so: String(i + 1) });
+    return c.ten_goi || (c.huong_do != null ? `${can} · ${c.huong_do}°` : c.huong ? `${can} · ${TEN_EN("huong", c.huong)}` : can);
+  }
   return c.ten_goi || (c.huong_do != null ? `Căn ${i + 1} · ${c.huong_do}°` : c.huong ? `Căn ${i + 1} · ${c.huong}` : `Căn ${i + 1}`);
 }

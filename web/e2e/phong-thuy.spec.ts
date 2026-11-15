@@ -43,6 +43,13 @@ test("PT-ĐS: Nhà của bạn — đọc bằng lời thường, 5 chương, ng
   await c2.getByRole("button", { name: "Vì sao nói vậy" }).first().click();
   await expect(c2.getByTestId("can-cu").first()).toContainText("Diên Niên");
   await expect(bc).toContainText("Không cần mua gì thêm");
+  // WS-3: câu Dương Trạch Thập Thư theo đúng mệnh người đọc (Khảm) + vợ khác nhóm
+  const sx = bc.getByTestId("sach-xua");
+  await expect(sx.getByRole("heading", { name: "Sách xưa nói gì về nhà của bạn" })).toBeVisible();
+  await expect(sx).toContainText("Khẩu quyết Đại du niên của cung Khảm");
+  await expect(sx).toContainText("Bạn và vợ khác nhóm");
+  await sx.getByRole("button", { name: /Nguyên văn · Dương Trạch Thập Thư/ }).first().click();
+  await expect(sx.getByTestId("sach-xua-han")).toContainText("福元在震巽坎離宮");
   // HỌC-ĐS: hộp có nút kiểm chứng; chỉ MÃ ds.phongthuy.* + phái đi lên, không chữ
   const kc = bc.getByTestId("kiem-chung");
   expect(await kc.count()).toBeGreaterThan(2);
@@ -636,4 +643,15 @@ test("PT-V2: máy đọc ảnh chưa bật (chưa đặt khoá) → câu thườ
   await expect(da.getByRole("alert")).toHaveCount(0);
   await expect(da).not.toContainText(/50\d|lỗi|error/i);
   await page.getByTestId("khao-sat-nha").getByLabel("Có gương đối diện giường ngủ không?").check();
+});
+
+test("WS-3: trang cung phi có câu sách xưa, nguyên văn nằm sẵn trong HTML máy chủ", async ({ page, request }) => {
+  const html = await (await request.get("/phong-thuy/huong-hop-tuoi/cung-kham-bac")).text();
+  expect(html).toContain("坎宮為正福德宮");
+  await page.goto("/phong-thuy/huong-hop-tuoi/cung-kham-bac");
+  const sx = page.getByTestId("sach-xua");
+  await expect(sx.getByRole("heading", { name: "Sách xưa nói gì về người cung Khảm" })).toBeVisible();
+  await expect(sx).not.toContainText("bạn");
+  await sx.getByText(/Nguyên văn · Dương Trạch Thập Thư/).first().click();
+  await expect(sx.getByTestId("sach-xua-han").first()).toBeVisible();
 });

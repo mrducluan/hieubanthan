@@ -5,6 +5,8 @@ Nguồn: app/kb/data/phongthuy_kb.json (nháp AI, `can_doi_chieu`; mục dân gi
 from __future__ import annotations
 
 from pathlib import Path
+
+from app import ngon_ngu
 from app.kb import nap
 
 _F = Path(__file__).parent / "data" / "phongthuy_kb.json"
@@ -13,7 +15,12 @@ SOURCE_ID, SCHOOL_ID = "duong_trach_tam_yeu", "bat_trach"
 
 @nap.nho
 def _d() -> dict:
-    return nap.doc(_F.name)
+    d = nap.doc(_F.name)
+    if not ngon_ngu.la_viet():
+        # KT-PT1: câu sách (`sach`) mới có lời Việt (phiên âm + tóm ý) — chưa có bản dịch thì bản khác ngôn ngữ không mang.
+        d = {**d, **{n: {k: {x: y for x, y in v.items() if x != "sach"} for k, v in d[n].items()}
+                     for n in ("du_nien", "bo_tri") if n in d}}
+    return d
 
 
 def meta() -> dict:
@@ -100,3 +107,17 @@ def huyen_khong() -> dict:
 def bo_cuc() -> dict:
     """PT-V0 — vị trí phòng / hướng vật dụng theo du niên + câu tự soi + lưu ý cho luận từ bố cục nhà."""
     return _d()["bo_cuc"]
+
+
+def sach_xua(mang: str, so: int = 1, viet: bool = True) -> list[str]:
+    """PT-NG5: ≤ `so` câu cổ thư (nguyên văn đã đối chiếu kho nguồn) của một mảng, dựng thành dòng cho "Vì sao nói vậy"."""
+    d = _d()
+    ten = d.get("co_thu_sach") or {}
+    ra = []
+    for m in (d.get("co_thu") or {}).values():
+        if m.get("mang") == mang and len(ra) < so:
+            if viet:
+                ra.append(f"Sách xưa — {ten.get(m['sach'], m['sach'])}: «{m['nguyen_van']}» ({m['phien_am']}) {m['nghia']}")
+            else:                                          # bản dịch: cùng số dòng, chỉ nguyên văn (chưa có lời dịch được duyệt)
+                ra.append(f"Classical source: «{m['nguyen_van']}»")
+    return ra

@@ -48,7 +48,7 @@ test.describe("catalog /en/bazi", () => {
 
 test.describe("catalog cụm kiến thức /en/bazi/*", () => {
   test("mọi cụm kiến thức mở bản Anh qua rewrite có chữ máy chủ tiếng Anh (title ≤ 70, description ≤ 160)", () => {
-    const mo = CAP_DUONG.filter((x) => x.mo && !x.rieng && khoaTheoDuong(x.vi));
+    const mo = CAP_DUONG.filter((x) => x.mo && !x.rieng && khoaTheoDuong(x.vi) && x.en.startsWith("/en/bazi"));
     expect(mo.map((x) => x.en).sort()).toEqual(["/en/bazi/day-masters", "/en/bazi/element-by-birth-year", "/en/bazi/ten-gods"]);
     for (const c of mo) {
       const t = CUM_EN[c.vi];
@@ -231,6 +231,15 @@ test.describe("/en/bazi trên trình duyệt", () => {
     expect(await chuViet(page)).toEqual([]);
     const ngang = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(ngang).toBeLessThanOrEqual(0);
+
+    // EN-AI: câu gợi ý trước (câu chuẩn engine /v1/hoi/goi-y, bấm là hỏi luôn), ô gõ tự do vẫn ngay dưới.
+    const chip = page.getByRole("button", { name: "How are my finances?", exact: true });
+    await expect(chip).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByRole("button", { name: "What careers suit me?", exact: true })).toBeVisible();
+    await chip.click();
+    await expect(page.getByTestId("cau-hoi-ban").last()).toContainText("How are my finances?");
+    await expect(page.getByTestId("cau-tra-loi").last()).toContainText(/\w/, { timeout: 30_000 });
+    expect((await page.getByTestId("cau-tra-loi").last().innerText()).split("\n").filter((l) => VIET.test(l))).toEqual([]);
 
     // Hỏi đáp bằng tiếng Anh (engine /v1/battu/hoi trả lời theo ngôn ngữ lượt gọi — header do trình duyệt gửi kèm)
     await page.getByRole("textbox", { name: "Your BaZi question" }).fill("What is my Useful God?");

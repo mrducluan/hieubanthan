@@ -2,7 +2,7 @@
 // Web là proxy mỏng: validate bằng zod hai chiều, gọi engine, KHÔNG tự tính gì.
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
-import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
+import { dauNguoiGoi, loiEngine, loiChung, laBanAnh } from "@/lib/proxy";
 import { ChartInput, ChartOutput } from "../schema";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
@@ -13,13 +13,13 @@ export async function POST(req: Request): Promise<NextResponse> {
   try {
     raw = await req.json();
   } catch {
-    return NextResponse.json({ error: "Body không phải JSON" }, { status: 400 });
+    return NextResponse.json({ error: loiChung("khong_json", laBanAnh(req)) }, { status: 400 });
   }
 
   const parsed = ChartInput.safeParse(raw);
   if (!parsed.success) {
     return NextResponse.json(
-      { error: "Đầu vào không hợp lệ", chi_tiet: parsed.error.flatten().fieldErrors },
+      { error: loiChung("dau_vao", laBanAnh(req)), chi_tiet: parsed.error.flatten().fieldErrors },
       { status: 422 },
     );
   }
@@ -38,14 +38,14 @@ export async function POST(req: Request): Promise<NextResponse> {
     });
   } catch {
     return NextResponse.json(
-      { error: "Không kết nối được máy tính toán. Thử lại sau ít phút." },
+      { error: loiChung("khong_ket_noi_phut", laBanAnh(req)) },
       { status: 502 },
     );
   }
 
   const body: unknown = await engineRes.json().catch(() => null);
   if (!engineRes.ok) {
-    const l = loiEngine(engineRes.status, body);
+    const l = loiEngine(engineRes.status, body, laBanAnh(req));
     return NextResponse.json({ error: l.error }, { status: l.status });
   }
 
@@ -55,7 +55,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   if (!out.success) {
     baoLoi(new Error("engine_lech_schema"), { duong: "/api/tuvi/chart" });   // SEC-2: chi tiết chỉ gửi Sentry
     return NextResponse.json(
-      { error: "Máy tính toán đang cập nhật, thử lại sau ít phút." },
+      { error: loiChung("cap_nhat", laBanAnh(req)) },
       { status: 502 },
     );
   }

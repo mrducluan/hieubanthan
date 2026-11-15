@@ -108,12 +108,18 @@ def _dem(t: str, mau: list[str]) -> int:
 # EN-1: phần lớn mẫu khủng hoảng chuyển sang `luangiai/an_toan.py` (so khớp cả chữ CÓ dấu — bỏ dấu làm trùng nghĩa
 # "từ từ/tự tử", "bảo hành/bạo hành", "đánh giá/đánh tôi"…). Ở đây chỉ giữ mẫu không dấu KHÔNG mơ hồ.
 AN_TOAN = [r"giai doan cuoi", r"ket lieu", r"song cung chang", r"ket thuc som"]
+# Cụm tâm linh của `hoidap.chung.TAM_LINH` mà Thần số KHÔNG dẫn hướng (có lời riêng về nợ nghiệp / bài học kiếp trước;
+# "căn tu" trả lời bằng chỉ số tâm linh như kho câu hỏi đã gắn nhãn).
+TAM_LINH_THANSO_GIU = {r"tien kiep", r"nghiep (nang|chuong|bao)", r"duyen am"}
 
 TU_CHOI = {
     "may_rui": [r"danh de(?! an| xuat| nghi| tai| cu)", r"xo so", r"ve so", r"(?<!tap )trung so", r"lo de", r"ca cuoc", r"ca do",
                 r"so may man de", r"danh lo"],
     "tuyen_dung": [r"tuyen ung vien", r"ung vien", r"sa thai nhan vien", r"nhan vien so chu dao",
-                   r"nen tuyen", r"sa thai nhan vien nao"],
+                   r"nen tuyen", r"sa thai nhan vien nao",
+                   # 2026-11-14: nhất quán với 4 mảng Huyền học — XẾP HẠNG / CHỌN người làm thuê vẫn chặn; câu về MỘT người
+                   # ("nhân viên của tôi có trung thực không") và người cùng làm ăn được trả lời.
+                   r"ai trung thuc", r"(chon|giu|loai) nhan vien", r"nhan vien nao .{0,20}(trung thuc|gian|dang tin|lua|an cap)"],
     "suc_khoe_the_chat": [r"benh gi", r"mac benh", r"ung thu", r"dau da day", r"vo sinh(?! (nam )?(19\d{2}|200\d|201\d)(?!\w))",
                           r"sinh con duoc khong", r"co nen mo vao", r"phau thuat", r"song tho", r"an gi cho hop",
                           r"suc khoe cua toi the nao", r"khoi benh"],
@@ -145,7 +151,7 @@ NGUOI_KHAC = [
     r"tinh cach (cua )?(sep|nguoi yeu|chong|vo|bo|me|ban|nguoi yeu cu|anh|chi|em)",
     r"(nguoi yeu|ny) (toi |em |minh )?(co that long|co phai|yeu kieu|sinh)",
     r"(chong|vo|sep|me chong|bo chong|ban than|dong nghiep|em gai|anh trai|bo|me|ban trai|nguoi yeu|crush)"
-    r" (toi|em|minh|cua em|cua toi) (so chu dao|so \d|sinh|co that|la nguoi|kho tinh|co phai|yeu kieu|"
+    r" (toi|em|minh|cua em|cua toi) (so chu dao|so \d|sinh (nam|ngay|thang|vao|luc|gio|\d)|co that|la nguoi|kho tinh|co phai|yeu kieu|"
     r"can gi|co dang|co hay|hay thay|co tinh cam)",
     r"(nguoi nay|nguoi moi quen nay|nguoi moi quen|khach hang nay|dong nghiep nay|ban than toi|"
     r"nguoi toi thich) (co|la|sinh)",
@@ -356,6 +362,11 @@ def _tach_gioi_thieu(cau_hoi: str) -> tuple[str, str]:
         if re.fullmatch(r"(co |thi )?(nen|duoc|on|hop|tot|sao)?( (khong|ko|k|chua|a|nhi|the nao|ra sao))*\s*(a|nhe|nhi)?\s*",
                         chuan_hoa_cau(sau)):
             return "", chuan_hoa_cau(cau_hoi)
+        # CY-3: vế sau chỉ là câu hỏi chung không mang chủ đề ("Tôi đang kiện tụng đất đai, nên chú ý gì?", "…, tôi nên
+        # làm gì?") → chủ đề nằm ở vế đầu; giữ cả câu.
+        if re.fullmatch(r"(toi |minh |em )?(nen |can |phai )?(chu y|de y|luu y|can than|lam|xu ly) ?(gi|nhung gi|the nao|sao)?"
+                        r"( (a|nhe|nhi|vay|day))?\s*", chuan_hoa_cau(sau)):
+            return "", chuan_hoa_cau(cau_hoi)
         if re.search(GIOI_THIEU, chuan_hoa_cau(dau)) and chuan_hoa_cau(sau):
             return chuan_hoa_cau(dau), chuan_hoa_cau(sau)
     return "", chuan_hoa_cau(cau_hoi)
@@ -385,6 +396,12 @@ def phan_loai(cau_hoi: str) -> dict:
             lv = {"suc_khoe_the_chat": "suc_khoe"}.get(loai, "ngoai_pham_vi")
             dt = "nguoi_khac" if loai == "tuyen_dung" else "ban_than"
             return xong(lv, dt, "tu_choi_nhe", "du_doan")
+    # 2026-11-14: câu tâm linh (vong, căn, ma, bùa, trùng tang…) → dẫn hướng như 4 mảng Huyền học (trước Thần số trả chân
+    # dung số cho "Nhà tôi có vong theo không?"). Bỏ các cụm nghiệp / tiền kiếp / duyên âm — Thần số có lời riêng (nợ nghiệp).
+    from app.hoidap import chung as _ch  # noqa: PLC0415 — chung import module này
+    if not _co(t, [r"can tu"]) and \
+            _co(t, [m for m in _ch.TAM_LINH if m not in TAM_LINH_THANSO_GIU and not _at.bo_qua_mo_ho(m, cau_hoi)]):
+        return xong("tam_linh", "ban_than", "dan_huong", "loi_khuyen")
 
     gt = _giai_thich_khop(t)
     kq["giai_thich"] = gt
@@ -770,19 +787,25 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
     goi: dict = {"phan_loai": {k: pl[k] for k in ("linh_vuc", "y_dinh", "doi_tuong", "xu_ly")},
                  "muc": [], "can_them": [], "mau": None, "luu_y": None, "so_trong_goi": []}
     if xl == "an_toan":
-        goi["mau"] = kb.mau("an_toan")
+        goi["mau"] = _at.loi_khung_hoang(pl.get("cau_goc"), kb.mau("an_toan"))   # hành vi đã xảy ra → cấp cứu đứng đầu
         return goi
+    if xl == "dan_huong":
+        from app.hoidap import chung as _ch  # noqa: PLC0415
+        goi["mau"] = _ch.mau_dan_huong(t)
+        return _ket(goi)
     if xl == "tu_choi_nhe":
         goi["mau"] = kb.mau(pl["tu_choi"] or "du_doan_cu_the")
         nhom = _at.nhom_suc_khoe(pl.get("cau_goc") or t) if pl["tu_choi"] == "suc_khoe_the_chat" else None
         if nhom:
             goi["mau"] = _mau_suc_khoe_ts(nhom, t, nguoi, ngay_xem, pl.get("cau_goc"))
-        elif pl["tu_choi"] != "suc_khoe_the_chat":
-            # CY-1: may rủi → giữ tiền; tai nạn chết / nặng → an toàn đi lại; tuyển dụng → tuyển theo kỹ năng
+        else:
+            # CY-1 + 2026-11-14: mọi câu còn chặn kèm lời "nên chú ý / nên làm" đúng loại (giữ tiền, an toàn đi lại, phỏng
+            # vấn + thử việc, khám định kỳ, hỏi bác sĩ kê đơn, lịch khám thai…)
             from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
             gy = cyn.goi_y_tu_choi(pl.get("cau_goc") or t, pl["tu_choi"])
             if gy:
-                goi["mau"] = f"{goi['mau']} {gy}"
+                from app.hoidap.chung import goi_y_truoc  # noqa: PLC0415
+                goi["mau"] = goi_y_truoc(gy)
         return _ket(goi)
 
     muc = goi["muc"]

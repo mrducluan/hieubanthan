@@ -472,6 +472,13 @@ def api_cau_chuan() -> dict:
     return {"engine_version": ENGINE_VERSION, "cau": truc_quan.cau_chuan_tat_ca()}
 
 
+@app.get("/v1/hoi/goi-y")
+def api_goi_y_dau(mang: str) -> dict:
+    """EN-AI — câu gợi ý đầu khung hỏi đáp (chip, bấm là hỏi) theo mảng + ngôn ngữ lượt gọi; mảng lạ → danh sách rỗng."""
+    from app.luangiai import truc_quan
+    return {"engine_version": ENGINE_VERSION, "cau": truc_quan.goi_y_dau(mang)}
+
+
 @app.post("/v1/thanso/hoi")
 def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
     """Q&A v2 — phân loại câu hỏi (RULES) → gói bằng chứng từ KB → diễn đạt.

@@ -1,5 +1,6 @@
 // Trang kiến thức (SEO-B): nội dung từ KB của engine, render phía server để máy tìm kiếm và AI đọc được.
 // Chỉ dùng ở Server Component / route handler. Web chỉ hiển thị — không tự viết nghĩa. Lỗi engine → trả null/[] (trang vẫn render, cache tự làm mới).
+import type { CauSachXua } from "@/components/huyen-hoc/SachXuaNoi";
 
 import { duongTheoLuot, ganNgonNgu } from "@/lib/engine-ngon-ngu";
 import type { TenHien } from "@/lib/ten-hien";
@@ -305,6 +306,8 @@ export interface CungPhi {
   nam_sinh: { nam: number; gioi_tinh: "nam" | "nu"; can_chi: string; lap_xuan: string }[];
   cung_cung_nhom: { slug: string; quai: string }[]; cung_khac_nhom: { slug: string; quai: string }[];
   tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; nguon: string; luu_y: string[]; trang_thai: string;
+  /** WS-3: câu Dương Trạch Thập Thư về cung này (engine cũ chưa có → khối tự ẩn). */
+  sach_xua?: CauSachXua[];
 }
 export const SLUG_CUNG = /^cung-[a-z-]+$/;
 export async function dsCungPhi(): Promise<{ cung: MucCungPhi[]; tuoi: DongTuoiCung[] }> {

@@ -1,6 +1,7 @@
 // UI-KD — lịch sử quẻ đã gieo, CHỈ trên máy người dùng (localStorage `hbt.que.v1`, ≤ 20 quẻ). Không gửi lên máy chủ,
 // không gắn tài khoản. "Xem lại" = gọi lại engine với `cach_ra_que: gieo_tay` + đúng 6 giá trị cũ (tất định) — không gieo lại.
 import type { GiaTriHao } from "@/lib/dong-xu";
+import { dinhGio, dinhNgay } from "@/lib/dinh-dang";
 
 export const KHOA_LICH_SU_QUE = "hbt.que.v1";
 export const TOI_DA_QUE = 20;
@@ -19,6 +20,9 @@ export interface QueDaLuu {
   chu_de?: { ma: string; ten: string } | null;
   ten_que: string;
   ten_bien?: string | null;
+  /** EN-ALL GĐ 6: tên quẻ HIỂN THỊ lúc gieo ở bản Anh (`ten_hien.que_ten`); `ten_que` vẫn là mã (bản Việt hiện mã). */
+  ten_que_en?: string | null;
+  ten_bien_en?: string | null;
 }
 
 function doc(): QueDaLuu[] {
@@ -58,10 +62,11 @@ export function xoaHetQue(): void {
   try { localStorage.removeItem(KHOA_LICH_SU_QUE); } catch { /* bỏ qua */ }
 }
 
-/** "14:05 · 23/10" theo giờ máy. */
-export function nhanLuc(iso: string): string {
+/** "14:05 · 23/10" theo giờ máy. `ma` (EN-ALL): mã ngôn ngữ khác "vi" → "14:05 · 23 Oct" (Intl). */
+export function nhanLuc(iso: string, ma = "vi"): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return "";
   const hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0");
+  if (ma !== "vi") return `${dinhGio(`${hh}:${mm}`, ma)} · ${dinhNgay({ nam: d.getFullYear(), thang: d.getMonth() + 1, ngay: d.getDate() }, ma, "ngay_thang_ngan")}`;
   return `${hh}:${mm} · ${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}`;
 }

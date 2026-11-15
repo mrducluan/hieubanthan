@@ -48,7 +48,7 @@ _DN = re.compile("|".join(DU_NIEN))
 
 
 def _muc(ten: str) -> str:
-    return next(m["van"] for q in KHO["quyen"] for m in q["muc"] if m["ten"] == ten)
+    return next(t["van"] for t in KHO["thien"] if ten in t["ten"].split(" · ", 1)[-1].split(" / ")).replace("\n", "")
 
 
 def _am(han: str) -> str:

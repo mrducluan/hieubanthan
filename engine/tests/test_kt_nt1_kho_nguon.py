@@ -32,7 +32,7 @@ VAN = {**{k: _sach_tron(KHO["sach"][k]["van"]) for k in ("nguyet_ba", "ngoc_quan
        "bang_giam": _sach_tron("".join(c["van"] for c in KHO["sach"]["bang_giam"]["chuong"])),
        "tam_tuong_thien": _sach_tron(KHO["sach"]["tam_tuong_thien"]["van"]),
        "noi_kinh": _sach_tron(KHO["sach"]["noi_kinh"]["van"]),
-       "than_tuong_toan_bien": _sach_tron("".join(m["van"] for q in TTTB["quyen"] for m in q["muc"]))}
+       "than_tuong_toan_bien": _sach_tron("".join(t["van"] for t in TTTB["thien"]))}
 
 
 def _cac_trich():
@@ -72,16 +72,16 @@ def test_han_chi_o_sach_co_kho_nguon():
 # ---------------------------------------------------------------- KT-NT3: Thần Tướng Toàn Biên
 
 def _muc(ten: str) -> str:
-    return next(m["van"] for q in TTTB["quyen"] for m in q["muc"] if m["ten"] == ten)
+    """Khuôn `thien` của WS-2: tên "神相全編n · tên thiên" (có khi gộp "đồ / ca" bằng " / ")."""
+    return next(t["van"] for t in TTTB["thien"] if ten in t["ten"].split(" · ", 1)[-1].split(" / ")).replace("\n", "")
 
 
 def test_kho_than_tuong_toan_bien_du_14_quyen():
-    assert [q["tap_thanh"] for q in TTTB["quyen"]] == list(range(631, 645))
-    assert all(q["muc"] and q["revid"] for q in TTTB["quyen"])
-    assert sum(len(q["muc"]) for q in TTTB["quyen"]) >= 600
+    assert sorted({t["quyen"] for t in TTTB["thien"]}) == list(range(631, 645))
+    assert len(TTTB["thien"]) >= 600 and all(t["van"].strip() for t in TTTB["thien"])
     assert TTTB["can_doi_chieu"] is True
     assert "面之三停者" in _muc("面三停") and "欲識流年運氣行" in _muc("流年運氣部位歌")
-    assert "<" not in "".join(m["van"] for q in TTTB["quyen"] for m in q["muc"])          # không sót thẻ HTML
+    assert "<" not in "".join(t["van"] for t in TTTB["thien"])          # không sót thẻ HTML
 
 
 def test_cau_trich_than_tuong_toan_bien():

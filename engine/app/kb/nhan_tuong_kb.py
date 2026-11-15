@@ -57,6 +57,17 @@ def luu_nien() -> list[dict]:
     return _lay("luu_nien") or []
 
 
+def bai_ca_luu_nien(tuoi: int) -> dict | None:
+    """WS-4: chặng của «流年運氣部位歌» (Thần Tướng Toàn Biên) chứa tuổi mụ `tuoi` → {tu, den, han, y, sach}; quá 100 tuổi
+    thì vòng lại như sách nói («週而復始»)."""
+    bc = _lay("bai_ca_luu_nien") or {}
+    if not bc or tuoi < 1:
+        return None
+    t = (tuoi - 1) % 100 + 1
+    c = next((x for x in bc.get("chang", []) if x["tu"] <= t <= x["den"]), None)
+    return {**c, "sach": bc["sach"], "ten_bai": bc["ten_bai"]} if c else None
+
+
 def ngu_hinh() -> dict:
     return _lay("ngu_hinh") or {}
 

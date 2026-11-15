@@ -19,6 +19,12 @@ test("gieo tay: quẻ Lý biến Đoài — lời đời thường trước, b�
   // lớp đời thường (trước khi mở phần học thuật) không có giọng AI / từ doạ
   const van = (await dq.innerText()).toLowerCase();
   for (const cam of ["hành trình", "vũ trụ", "chắc chắn", "định mệnh", "đại hung", "tai hoạ"]) expect(van).not.toContain(cam);
+  // WS-5: câu Tăng San Bốc Dịch của chương ứng với việc (thăng tiến → chương Tại nhiệm), nguyên văn gập
+  const sx = dq.getByTestId("sach-xua");
+  await expect(sx.getByRole("heading", { name: "Sách xưa nói gì về việc bạn hỏi" })).toBeVisible();
+  await expect(sx).toContainText("Chương Tại nhiệm");
+  await sx.getByRole("button", { name: /Nguyên văn · Tăng San Bốc Dịch/ }).click();
+  await expect(sx.getByTestId("sach-xua-han")).toContainText("官旺財興");
   // tầng học thuật gập: chưa mở thì không thấy lời kinh
   await expect(ans).not.toContainText("Quẻ bản: Lý");
   await dq.getByRole("button", { name: /Lời kinh nguyên văn/ }).click();

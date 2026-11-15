@@ -250,6 +250,12 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
             ))}
           </div>
         </div>
+        {/* EN-ALL GĐ 4: người đọc Mỹ quen tháng trước ngày — bản Anh ghi rõ nhãn từng ô (thứ tự ô và dữ liệu gửi đi không đổi). */}
+        {en && (
+          <div className="-mb-1 grid grid-cols-[1fr_1fr_1.4fr] gap-2 text-center text-[0.7rem] uppercase tracking-wide text-fg-faint" aria-hidden data-testid="nhan-o-ngay">
+            <span>{g("hs.ngay")}</span><span>{g("hs.thang")}</span><span>{g("hs.nam")}</span>
+          </div>
+        )}
         <div className="grid grid-cols-[1fr_1fr_1.4fr] gap-2">
           <Input aria-label={g("hs.ngay")} name="ngay-sinh-ngay" autoComplete={lich === "duong" ? "bday-day" : "off"} inputMode="numeric" placeholder={g("hs.ngay")} value={ngay} className="text-center"
             onChange={(e) => { const v = chiSo(e.target.value, 2); setNgay(v); if (v.length === 2) thangRef.current?.focus(); }} />

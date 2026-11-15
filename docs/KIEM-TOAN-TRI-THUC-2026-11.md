@@ -354,7 +354,7 @@ xung sang hợp / hợp sang xung. 34 / 64 quẻ có ít nhất một nét → h
 tan / dễ kết / lúc đầu thuận về sau dễ rời").
 
 **Nguồn.** Tăng San Bốc Dịch (增刪卜易, Dã Hạc lão nhân, đời Thanh — công cộng), bản Wikisource tiếng Trung: nạp 4 chương engine
-đang dùng (六合, 六沖, 反伏, 歸魂遊魂) vào `engine/fixtures/nguon/tang_san_boc_dich.json` bằng `scripts/nap_tang_san_boc_dich.py`.
+đang dùng (六合, 六沖, 反伏, 歸魂遊魂) vào `engine/fixtures/nguon/tang_san_boc_dich.json` bằng `scripts/nap_tang_san_boc_dich.py` (WS-1 2026-11-13: thay bằng `scripts/nap_wikisource.py`, kho nay đủ 4 quyển).
 Bản gõ lại (trang ghi chất lượng 50 %) → `can_doi_chieu: true`.
 
 **Đã làm.**
@@ -539,7 +539,7 @@ dẫn nguồn**: Thần Tướng Toàn Biên có bản gõ sạch trên Wikisour
 quyển 675–677 chép «陽宅十書» (Dương Trạch Thập Thư, Minh) — sách có phần gốc của Bát trạch. Hai sách Bát trạch trong
 database (Tam Yếu, Minh Kính) chỉ là bản dịch Việt hiện đại do máy đọc, không có chữ Hán → không dùng làm nguyên văn.
 
-- **Kho nguồn** (bộ nạp `scripts/nap_tap_thanh.py`): `than_tuong_toan_bien.json` (14 quyển, 699 mục, ~151 nghìn chữ) ·
+- **Kho nguồn** (bộ nạp `scripts/nap_co_kim_do_thu.py` — khi gộp với WS-2 dùng chung kho nguồn khuôn `thien`): `than_tuong_toan_bien.json` (14 quyển, 699 mục, ~151 nghìn chữ) ·
   `duong_trach_thap_thu.json` (3 quyển, 83 mục, ~30 nghìn chữ; quyển 678 «論符鎮» toàn bùa — không nạp). Tải lại thẳng từ
   Wikisource (không chép từ database): 598 / 602 đoạn của database trùng từng chữ với bản tải lại.
 - **Dấu câu**: Wikisource ghi dấu chấm câu của bộ này do máy + người dùng thêm, giấy phép CC BY-SA; chính văn thuộc công

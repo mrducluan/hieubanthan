@@ -76,6 +76,8 @@ SO: dict[str, dict] = {
         "mau": {"muc": "bien_tap"}, "giai_thich": {"muc": "bien_tap"}}},
     "kinhdich_tra_loi.json": {"mang": "kinhdich", "muc": "tom_y_co_thu", "phan": {
         "tinh_chat_que": _nv("tang_san_boc_dich.json", "tests/test_kt_tt5_tinh_chat_que.py::test_trich_la_nguyen_van_va_kb_du_loi"),
+        "sach_xua_viec": _nv("tang_san_boc_dich.json", "tests/test_ws5_sach_xua_kinhdich.py::test_cau_la_nguyen_van_trong_dung_chuong",
+                             "WS-5: câu Tăng San Bốc Dịch theo chương ứng với việc; lời Việt là tóm ý"),
         "mau": {"muc": "bien_tap"}, "kieu_cau": {"muc": "bien_tap"}}},
     "kinhdich_doi_song.json": {"mang": "kinhdich", "muc": "bien_tap"},
     "bo_sung_que.json": {"mang": "kinhdich", "muc": "bien_tap"},
@@ -90,7 +92,9 @@ SO: dict[str, dict] = {
         "du_nien": _nv("duong_trach_thap_thu.json", "tests/test_kt_pt1_kho_nguon.py::test_cau_trich_kb_la_nguyen_van",
                        "KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi "
                        "180 năm khớp sách (test_dai_du_nien_ca_khop_phep_tinh, test_bang_cung_phi_180_nam_khop_phep_tinh); "
-                       "lời ý nghĩa vẫn là tóm ý")},
+                       "lời ý nghĩa vẫn là tóm ý"),
+        "sach_xua_nha": _nv("duong_trach_thap_thu.json", "tests/test_ws3_sach_xua_nha.py::test_moi_cau_la_nguyen_van_kho_nguon",
+                            "WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý")},
         "ghi_chu": "KT-PT1: 7 dấu hiệu `bo_tri` có câu nguyên văn (`sach`); phần còn lại chưa khớp từng câu"},
     "phongthuy_huyen_khong.json": {"mang": "phongthuy", "muc": "tom_y_co_thu"},
     "phongthuy_doi_song.json": {"mang": "phongthuy", "muc": "bien_tap"},
@@ -105,7 +109,13 @@ SO: dict[str, dict] = {
                                                        "SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn")},
     "nhan_tuong_do_hinh.json": {"mang": "nhantuong", "muc": "tom_y_co_thu",
                                 "ghi_chu": "lớp phủ đồ hình: nhãn chữ Hán đọc trên bản khắc Thần Tướng Toàn Biên; toạ độ đo trên ảnh; lời Việt rút từ KB"},
-    "nhan_tuong_kb.json": {"mang": "nhantuong", "muc": "tom_y_co_thu", "ghi_chu": "KT-NT1/2 + KT-N1 + KT-NT3: cả 70 câu trích sách (`dac_diem.*.sach`) khớp kho nguồn `nhan_tuong_co_thu.json` + `than_tuong_toan_bien.json` (Thần Tướng Toàn Biên bản Cổ Kim Đồ Thư Tập Thành, Băng Giám, Tâm Tướng Thiên, Linh Khu, 4 sách Tứ khố — tests/test_kt_nt1_kho_nguon.py); lời luận vẫn là tóm ý, trường `nguon` Ma Y / Thần Tướng Toàn Biên chỉ ghi phái"},
+    "nhan_tuong_kb.json": {"mang": "nhantuong", "muc": "tom_y_co_thu", "phan": {
+        "luu_nien": _nv("than_tuong_toan_bien.json",
+                        "tests/test_ws2_kho_nguon_bo_sung.py::test_luu_nien_nhan_tuong_khop_bai_ca_than_tuong_toan_bien",
+                        "WS-2: 20 tuổi mốc khớp tên bộ vị + thứ tự của «流年運氣部位歌»; WS-4 / KT-NT3: tuổi 10–14 sửa theo chữ sách (Nhân Luân, Địa Luân)"),
+        "bai_ca_luu_nien": _nv("than_tuong_toan_bien.json", "tests/test_ws4_bai_ca_luu_nien.py::test_moi_chang_la_nguyen_van_va_dung_thu_tu",
+                               "WS-4: bài ca cắt theo 67 chặng tuổi, phủ đủ 1–100; lời Việt là tóm ý")},
+        "ghi_chu": "KT-NT1/2 + KT-N1 + KT-NT3: cả 70 câu trích sách (`dac_diem.*.sach`) khớp kho nguồn `nhan_tuong_co_thu.json` + `than_tuong_toan_bien.json` (Thần Tướng Toàn Biên bản Cổ Kim Đồ Thư Tập Thành, Băng Giám, Tâm Tướng Thiên, Linh Khu, 4 sách Tứ khố — tests/test_kt_nt1_kho_nguon.py); lời luận vẫn là tóm ý, trường `nguon` Ma Y / Thần Tướng Toàn Biên chỉ ghi phái"},
     "tarot_kb.json": {"mang": "tarot", **_nv("tarot_waite_1910.json", "tests/test_tarot_nguon.py::test_moi_trich_la_nguyen_van_cua_nguon",
                                              "câu trích khớp Waite / Mathers / Book T / Papus 1892 / Case 1920 / Ouspensky 1913; lời lớp Marseille, "
                                              "B.O.T.A., Thoth vẫn là tóm ý (Marseille đã soát với Mathers + Papus, B.O.T.A. ẩn chính với Case 1920)")},

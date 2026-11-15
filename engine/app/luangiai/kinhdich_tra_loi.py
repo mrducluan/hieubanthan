@@ -18,9 +18,12 @@ from __future__ import annotations
 
 import re
 
+from app import ngon_ngu as _nn
 from app.calc.kinhdich_vendor import KHAC, SINH
 from app.hoidap import chung, hieu_cau as hc_chung, mo_dau
 from app.kb import kinhdich_doi_song_kb as kb_ds, kinhdich_kb as kbq, kinhdich_tra_loi_kb as kb
+from app.kb import ten as _tn
+from app.kb.loi import L
 
 # chủ đề nói về NGƯỜI (khi hoà điểm với chủ đề nói về VIỆC thì việc thắng, người thành vai)
 CHU_DE_NGUOI = ("con_cai", "gia_dinh", "ban_be", "tinh_cam", "hon_nhan", "hon_nhan_tt")
@@ -89,7 +92,8 @@ def hieu_cau(t: str, raw: str | None, ma_chu_de: str) -> dict:
     nhan = (cd.get("ten") or "").split(" (")[0].lower() if goc != "khac" else ""
     if not nhan:
         d = mo_dau.dieu_hoi(t, raw)
-        nhan = (d or {}).get("nhan_ro") or (d or {}).get("nhan") or kb.mau("viec_mac_dinh")
+        nhan = ((d or {}).get("nhan_ro") or (d or {}).get("nhan") if _nn.la_viet() else mo_dau.nhan_hien(d)) \
+            or kb.mau("viec_mac_dinh")       # EN-ALL GĐ 6: nhãn điều được hỏi theo ngôn ngữ (danh mục cố định `hoi.dh*`)
     nhan = nhan.removeprefix("chuyện ")
     return {"kieu": kieu, "vai": vai, "viec": goc, "ma_chu_de": ma_chu_de, "nhan_viec": nhan,
             "nguoi_kia": vai != "toi" or goc in CHU_DE_NGUOI or kieu == "nguoi_kia"}
@@ -107,11 +111,11 @@ def dung_than(hc: dict) -> dict:
     vai = hc["vai"]
     lt = kb.vai_luc_than(vai) if vai != "toi" else None
     if lt and (hc["viec"] in CHU_DE_NGUOI or d.get("chinh") == "Thế") and d.get("chinh") in ("Ứng", "Thế") and lt != "Ứng":
-        d["chinh"], d["ten"] = lt, f"hào đại diện cho {kb.vai(vai)}"      # việc về chính người đó (sức khoẻ, đi xa, gia đình)
+        d["chinh"], d["ten"] = lt, L("kd.tl.hao_cho", "hào đại diện cho {ai}", ai=kb.vai(vai))  # việc về chính người đó (sức khoẻ, đi xa, gia đình)
     elif lt and hc["viec"] not in CHU_DE_NGUOI and lt != d.get("chinh"):
-        d["vai"], d["ten_vai"] = lt, f"hào đại diện cho {kb.vai(vai)}"
+        d["vai"], d["ten_vai"] = lt, L("kd.tl.hao_cho", "hào đại diện cho {ai}", ai=kb.vai(vai))
     d.setdefault("chinh", "Ứng")
-    d.setdefault("ten", "hào đại diện cho việc được hỏi")
+    d.setdefault("ten", L("kd.tl.hao_viec_hoi", "hào đại diện cho việc được hỏi"))
     return d
 
 
@@ -125,10 +129,10 @@ def tag_hao_chu(que: dict, goi: dict) -> tuple[str, str | None]:
     if chu and chu["loai"] == "hao":
         t = kb.xu_huong_hao(chu["que"], chu["vi_tri"])
         if t:
-            return t, f"hào {chu['vi_tri']}"
+            return t, L("kd.tl.nguon_hao", "hào {n}", n=chu["vi_tri"])
     lk = next((m for m in goi.get("muc", []) if m.get("loai") == "loi_kinh" and m.get("chu")), None)
     muc = muc_loi_kinh(lk["han"]) if lk else "can_bang"
-    return _TAG_TU_MUC[muc], "quái từ"
+    return _TAG_TU_MUC[muc], L("kd.tl.nguon_que_tu", "quái từ")
 
 
 def nghieng_nghia_ly(tag: str, muc: str) -> str:
@@ -220,7 +224,7 @@ def can_go(que: dict, pt: dict | None, dt: dict, gn: dict, tag: str) -> list[dic
     """Điều cần gỡ trước (≤ 2), theo thứ tự: kỵ thần động → dụng thần không / phá / mộ → hào động hoá xấu → vị trí hào →
     quẻ biến khó → thể–dụng bất lợi."""
     ra: list[dict] = []
-    ten = dt.get("ten") or "hào đại diện cho việc"
+    ten = dt.get("ten") or L("kd.tl.hao_viec", "hào đại diện cho việc")
 
     def them(ma: str, **fmt) -> None:
         s = kb.can_go(ma)
@@ -236,7 +240,7 @@ def can_go(que: dict, pt: dict | None, dt: dict, gn: dict, tag: str) -> list[dic
             if h.get(ma):
                 them(ma)
         if h.get("dong") and h.get("hoa") and h["hoa"]["loai"] in ("hồi đầu khắc", "thoái thần", "hoá tiết", "phản ngâm"):
-            them("hoa_xau", loai=h["hoa"]["loai"])
+            them("hoa_xau", loai=_tn.ten("hoa_hao", h["hoa"]["loai"]))
     dong = que.get("hao_dong") or []
     if dong and dong[-1] == 3:
         them("hao_3")
@@ -251,7 +255,7 @@ def can_go(que: dict, pt: dict | None, dt: dict, gn: dict, tag: str) -> list[dic
         from app.luangiai.kinhdich_doi_song import muc_loi_kinh  # noqa: PLC0415
         qb = que["quai_bien"]
         if muc_loi_kinh(((kbq.que_van(qb["so_king_wen"]) or {}).get("que_tu") or {}).get("han", "")) == "can_chu_dong":
-            them("que_bien_xau", bien=qb["ten"])
+            them("que_bien_xau", bien=_tn.ten("que_ten", qb["ten"]))
     return ra[:2]
 
 
@@ -268,19 +272,28 @@ def _ly_do(chinh: str, que: dict, goi: dict, gn: dict, pt: dict | None, dt: dict
             if h.get("dong") and h.get("hoa"):
                 k = kb_ds.hoa(h["hoa"]["loai"]) or {}
                 if k.get("doi_thuong"):
-                    s += f", lại đang động: {k['doi_thuong']}"
-        return s.format(ten=dt.get("ten") or "hào đại diện cho việc")
+                    s += L("kd.tl.lai_dong", ", lại đang động: {y}", y=k["doi_thuong"])
+        return s.format(ten=dt.get("ten") or L("kd.tl.hao_viec", "hào đại diện cho việc"))
     if chinh == "mai_hoa" and gn.get("mai_hoa"):
-        from app.luangiai.kinhdich_doi_song import QUAN_HE_TEN  # noqa: PLC0415
+        from app.luangiai.kinhdich_doi_song import quan_he_ten  # noqa: PLC0415
         mh = gn["mai_hoa"]
         qh = mh["quan_he"][0]["quan_he"] if isinstance(mh.get("quan_he"), list) and mh["quan_he"] else None
-        return f"theo thể–dụng, {QUAN_HE_TEN.get(qh or '', mh.get('tom_tat') or '')}".rstrip(", ")
+        return L("kd.tl.theo_the_dung", "theo thể–dụng, {y}", y=quan_he_ten(qh or "", mh.get("tom_tat") or "")).rstrip(", ")
     lk = next((m for m in goi.get("muc", []) if m.get("loai") == "loi_kinh" and m.get("chu")), None)
+    if lk and not _nn.la_viet() and not lk.get("nom_na") and lk.get("han"):
+        # Bản Anh: lời làm chủ là QUÁI TỪ (0 / 3 / 6 hào động) không có "nói nôm na" → mượn câu nôm na của chính quẻ đó thay
+        # câu Đại tượng dịch sát ("the noble person discusses criminal cases…"). Bản Việt giữ nguyên.
+        for qq in (que.get("quai_ban"), que.get("quai_bien")):
+            qv = kbq.que_van(qq["so_king_wen"]) if qq else None
+            if qv and (qv.get("que_tu") or {}).get("han") == lk["han"] and qv.get("nom_na"):
+                lk = {**lk, "nom_na": qv["nom_na"]}
+                break
     if lk and (lk.get("nom_na") or lk.get("y")):
         s = (lk.get("nom_na") or lk.get("y") or "").strip().rstrip(".")
-        s = s.split("Hiểu đơn giản:", 1)[-1].strip()
+        s = s.split(L("kd.hdg_dau", "Hiểu đơn giản:"), 1)[-1].strip()
         s = s[0].lower() + s[1:]
-        return ("lời hào làm chủ ví " + s) if s.startswith("như ") else ("lời hào làm chủ: " + s)
+        nhu = L("kd.tl.nhu", "như ")
+        return (L("kd.tl.loi_vi", "lời hào làm chủ ví ") + s) if s.startswith(nhu) else (L("kd.tl.loi_chu", "lời hào làm chủ: ") + s)
     return kb.xu_huong(tag).get("y") or ""
 
 

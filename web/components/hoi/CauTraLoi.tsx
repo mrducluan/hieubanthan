@@ -47,6 +47,7 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
   const theo = banDoKhop(t.trucQuan);
   const coHinh = !!t.trucQuan?.some((k) => KIEU_BIET.has(k.kieu));
   const tiep = (t.hoiTiep ?? []).filter((c) => !daHoi.includes(c));
+  const gapChung = hd.en && !!t.hoiLai?.chon.length;   // EN-AI: bản Anh hỏi lại → lời đáp chung gập
   const loi: ReactNode = (
     <div className="min-w-0 space-y-4">
       {t.hoTro && (
@@ -70,14 +71,20 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
           </div>
         </div>
       )}
-      {t.van && (
+      {t.van && (gapChung ? (
+        // EN-AI: bản Anh — máy chưa hiểu chắc câu hỏi → không đoán thay: lời đáp chung gập lại dưới "Did you mean…".
+        <details className="group" data-testid="tra-loi-chung">
+          <summary className="cursor-pointer text-sm text-fg-muted hover:text-fg">{hd.c("tra_loi_chung")}</summary>
+          <div className="prose-vn mt-3 text-[1.05rem] leading-[1.75] text-fg">{doanCoThuatNgu(t.van, t.thuatNgu)}</div>
+        </details>
+      ) : (
         <div className="prose-vn text-[1.05rem] leading-[1.75] text-fg">
           {doanCoThuatNgu(t.van, t.thuatNgu, undefined, theo.size ? {
             theo, bam: (id) => { chieu(id); ghi("chart_interacted", { mo_dun: moDun, kind: "chu_sang_hinh" }); },
           } : undefined)}
         </div>
-      )}
-      {t.van && theo.size > 0 && <p className="text-xs text-fg-faint">{hd.c("chu_xanh")}</p>}
+      ))}
+      {t.van && !gapChung && theo.size > 0 && <p className="text-xs text-fg-faint">{hd.c("chu_xanh")}</p>}
       {t.van && <ViSao canCu={t.canCu} thuatNgu={t.thuatNgu} />}
       <KhungGiaiNghia ds={t.thuatNgu} />
       {t.canhBao?.map((c) => (

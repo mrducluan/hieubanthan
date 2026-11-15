@@ -1416,6 +1416,20 @@
    "nghia": "13 ngày cố định trong năm theo sách cổ — dân gian thường tránh việc trọng đại"
   }
  },
+ "nhan_tap_quan": {
+  "tue_pha": {
+   "ten": "Tuế Phá",
+   "nghia": "chi ngày xung với chi năm — sách chọn ngày phổ biến ở dân gian nhắc dè dặt việc lớn như động thổ, dời nhà",
+   "nguon": "Sách lịch triều Thanh chỉ nói Tuế Phá là một phương trong năm; gọi theo ngày là thói quen của sách chọn ngày dân gian.",
+   "luu_y": "Chỉ là nhãn để bạn biết; hệ thống không loại ngày vì nhãn này."
+  },
+  "thu_tu": {
+   "ten": "Thụ Tử",
+   "nghia": "ngày xếp theo tháng tiết trong lịch cũ — sách chọn ngày dân gian thường nhắc hoãn việc mừng, việc khởi đầu",
+   "nguon": "Sách lịch triều Thanh ghi lịch cũ có ngày này và đã bỏ khỏi bộ thần chính; sách chọn ngày dân gian vẫn giữ.",
+   "luu_y": "Chỉ là nhãn để bạn biết; hệ thống không loại ngày vì nhãn này."
+  }
+ },
  "quan_he_tuoi": {
   "xung": {
    "ten": "Lục xung",

@@ -90,12 +90,12 @@ test.describe("bảng đường dẫn", () => {
     expect(duongTheo("vi", "/than-so")).toBe("/than-so");
     expect(duongTheo("en", "/than-so")).toBe("/en/numerology");
     expect(duongTheo("en", "/tarot#la-ngay")).toBe("/en/tarot#la-ngay");
-    expect(duongTheo("en", "/tu-vi")).toBe("/tu-vi");               // chưa mở → link sang bản Việt
+    expect(duongTheo("en", "/nhan-tuong")).toBe("/nhan-tuong");     // chưa mở → link sang bản Việt
     expect(duongTheo("en", "https://example.com/tu-vi")).toBe("https://example.com/tu-vi");
     expect(duongTheo("en", "/en/tarot")).toBe("/en/tarot");
     expect(duongTheo("en", "#neo")).toBe("#neo");
     expect(capHreflang("/than-so?x=1")).toEqual({ vi: "/than-so", en: "/en/numerology" });
-    expect(capHreflang("/tu-vi")).toBeNull();
+    expect(capHreflang("/nhan-tuong")).toBeNull();
     expect(khongCoBanAnh("/quan-tri/cai-dat")).toBe(true);
     expect(khongCoBanAnh("/tu-vi")).toBe(false);
     expect(banVietCuaTrang("/en/numerology/life-path/7")).toBe("/than-so/y-nghia-so/so-7");
@@ -169,7 +169,7 @@ test.describe("trên trình duyệt", () => {
   });
 
   test("URL Anh của trang CHƯA mở: 404 tiếng Anh, không rewrite sang chữ Việt, không chuyển hướng", async ({ page }) => {
-    for (const u of ["/en/feng-shui", "/en/zi-wei-dou-shu", "/en/tu-vi"]) {
+    for (const u of ["/en/feng-shui/annual-afflictions", "/en/face-reading", "/en/nhan-tuong"]) {
       const r = await page.goto(u);
       expect(r!.status(), u).toBe(404);
       expect(new URL(page.url()).pathname, u).toBe(u);

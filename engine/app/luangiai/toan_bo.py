@@ -100,7 +100,7 @@ def gan_gio_tam(bc: dict, mo_dun: str = "tuvi") -> dict:
     phụ thuộc bản diễn đạt AI (trước: một câu trong đoạn, bản AI có thể lược mất)."""
     if bc.get("chuong"):
         g = GIO_TAM.get(mo_dun, GIO_TAM["tuvi"])
-        bc["gio_tam"] = L("bt_ds.gio_tam", g) if mo_dun == "battu" else g
+        bc["gio_tam"] = L("bt_ds.gio_tam", g) if mo_dun == "battu" else L("tvds.gio_tam", g) if mo_dun == "tuvi" else g
     return bc
 
 
@@ -139,7 +139,9 @@ def tuvi(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = No
     (mo_dun, chuong[].ma/tieu_de/cau_hoi/doan/moi_xem, ket, trang_thai, phi) cho SAO-2 và tầng diễn đạt."""
     bc = ds_tuvi.lap(sinh, ngay_xem, trong_so=trong_so, ca_nhan=ca_nhan)
     chuong = [{**c, "moi_xem": _moi_xem("tuvi", c["ma"], c["doan"], c)} for c in bc["chuong"]]
-    return {"mo_dun": "tuvi", **bc, "chuong": chuong, "ket": hoi_van.KET, "trang_thai": bc.get("trang_thai", "nhap_ai"),
+    for c in chuong:            # EN-ALL: câu hỏi mở của lời mời theo ngôn ngữ (bản Việt giữ nguyên chữ)
+        c["moi_xem"]["cau_hoi"] = L(f"tvds.moi_xem.{c['ma']}", c["moi_xem"]["cau_hoi"])
+    return {"mo_dun": "tuvi", **bc, "chuong": chuong, "ket": L("tvds.ket", hoi_van.KET), "trang_thai": bc.get("trang_thai", "nhap_ai"),
             "phi": PHI}
 
 

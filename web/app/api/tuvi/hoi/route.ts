@@ -7,10 +7,11 @@ import { voiCuaHoi } from "@/lib/cua-sao";
 import { NextResponse } from "next/server";
 import { baoLoi } from "@/lib/giam-sat";
 import { z } from "zod";
-import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
+import { dauNguoiGoi, goiEngineDaKiem, loiChung, laBanAnh } from "@/lib/proxy";
 import { LaSoVao } from "@/lib/la-so-vao";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { MO_HINH_NHUNG, NGUONG_Y_DINH } from "@/lib/hoc-tuvi";
+import { dauPhanLoaiAi } from "@/lib/phan-loai-ai";
 
 const LaSo = LaSoVao;
 
@@ -18,6 +19,8 @@ const Input = z.object({
   cau_hoi: z.string().min(3).max(500),
   che_do: z.enum(["tham_khao", "chi_tiet"]).default("tham_khao"),
   la_so: LaSo.optional(),
+  /** Đang xem lá số người thân (chỉ trên máy) → engine đáp ở ngôi thứ ba ("lá số này"). Chỉ là cờ, không mang dữ liệu. */
+  nguoi_than: z.boolean().optional(),
 }).strict();
 
 type TraLoi = { co_the_goi_y?: boolean; nhan_ra_y_dinh?: boolean; y_dinh_tu_goi_y?: boolean; phan_loai?: { xu_ly?: string } };
@@ -30,9 +33,9 @@ export async function POST(req: Request): Promise<NextResponse> {
 async function xuLy(req: Request): Promise<NextResponse> {
   const parsed = Input.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
-    return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
+    return NextResponse.json({ error: loiChung("dau_vao", laBanAnh(req)) }, { status: 422 });
   }
-  const dau = dauNguoiGoi(req);
+  const dau = { ...dauNguoiGoi(req), ...(await dauPhanLoaiAi(req)) };
   const kq = await goiEngineDaKiem(parsed.data, "/v1/tuvi/hoi", dau);
   if (!kq.ok) return kq.res;
   const goc = kq.body as TraLoi;

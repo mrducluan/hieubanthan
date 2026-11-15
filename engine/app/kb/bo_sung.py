@@ -71,7 +71,10 @@ def ap(t: dict) -> dict:
         them.append({"tieu_de": b["tieu_de"], **({"doan": b["chu_thich"]} if b.get("chu_thich") else {}),
                      "bang": {"cot": b["cot"], "dong": b["dong"]}, **({"bien_tap": True} if bien_tap else {})})
     if bs.get("trich_dan"):
-        them.append({"tieu_de": L("trang.sach_xua", "Sách xưa nói gì"), "trich_dan": bs["trich_dan"],
+        # Nguồn chỉ là tập quán truyền khẩu (dấu hiệu nhà) → bản dịch gọi đúng "tập quán" (chữ Việt mặc định giữ nguyên).
+        truyen_khau = all(any(k in (x.get("sach") or "") for k in ("truyền khẩu", "oral tradition")) for x in bs["trich_dan"])
+        them.append({"tieu_de": L("trang.sach_xua.dan_gian" if truyen_khau else "trang.sach_xua", "Sách xưa nói gì"),
+                     "trich_dan": bs["trich_dan"],
                      **({"bien_tap": True} if bien_tap else {})})
     # Thêm sau nội dung gốc; nếu mục cuối là "Câu hỏi tự soi" thì chèn trước nó để tự soi vẫn đứng cuối bài.
     # (Không chèn giữa các mục gốc — thứ tự mục gốc giữ nguyên.)

@@ -23,6 +23,8 @@ from app.kb import tu_dien
 from app.hoidap import kinhdich as hoidap_kd
 from app import nhat_ky
 from app.config import ENGINE_VERSION
+from app.kb.loi import L
+from app.luangiai import kinhdich_hien as kd_hien
 
 router = APIRouter(prefix="/v1/kinhdich", tags=["kinhdich"])
 
@@ -61,10 +63,11 @@ def api_khoi_que(inp: KhoiQueInput) -> dict:
 
     flags: list[dict] = []
     if not inp.tieu_chi_sai:
-        flags.append({"loai": "chua_chot_tieu_chi_sai", "chi_tiet": (
-            "Chưa chốt tiêu chí sai — luận đoán này không kiểm chứng được.")})
-    flags.append({"loai": "chua_tinh_vuong_suy", "chi_tiet": (
-        "Vượng suy theo nguyệt kiến / nhật thần và tuần không CHƯA được tính.")})
+        flags.append({"loai": "chua_chot_tieu_chi_sai", "chi_tiet": L(
+            "kd.co.chua_tieu_chi", "Chưa chốt tiêu chí sai — luận đoán này không kiểm chứng được.")})
+    flags.append({"loai": "chua_tinh_vuong_suy", "chi_tiet": L(
+        "kd.co.chua_vuong_suy", "Vượng suy theo nguyệt kiến / nhật thần và tuần không CHƯA được tính.")})
+    que = kd_hien.que(que)
 
     return {
         "engine_version": ENGINE_VERSION,
@@ -76,7 +79,7 @@ def api_khoi_que(inp: KhoiQueInput) -> dict:
             "tieu_chi_sai": inp.tieu_chi_sai,
             "thoi_diem": _dt.datetime.now(_dt.timezone.utc).isoformat(),
             "phuong_phap": inp.phuong_phap if inp.gia_tri_hao is None else None,
-            "nguon_ngau_nhien": nguon,
+            "nguon_ngau_nhien": kd_hien.nguon(nguon),
             "gia_tri_hao_1_den_6": vals,
         },
         **que,
@@ -142,6 +145,9 @@ def api_hoi(inp: HoiKDInput, background: BackgroundTasks) -> dict:
         from app.luangiai import kinhdich_tra_loi as ktl  # noqa: PLC0415
         kq["doc_que"] = ktl.dien_dat(kq["doc_que"])
     background.add_task(nhat_ky.ghi_huyenhoc, "kinhdich", inp.cau_hoi, kq, False)
+    if kq.get("que"):                       # EN-ALL GĐ 6: câu CALC (quy tắc đọc, nguồn, ứng kỳ số) theo ngôn ngữ — sau nhật ký
+        kq = {**kq, "que": kd_hien.que(kq["que"]), "mai_hoa": kd_hien.mai_hoa(kq.get("mai_hoa"))} if "mai_hoa" in kq \
+            else {**kq, "que": kd_hien.que(kq["que"])}
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "kinhdich")}
 
 
@@ -194,7 +200,7 @@ def api_hieu_cau(inp: HieuCauInput) -> dict:
                 "kieu": None, "vai": None, "can_lam_ro": None}
     t = pl["cau_chuan_hoa"]
     ma = kd_ds.chu_de_tu_cau(t)
-    hc = ktl.hieu_cau(t, inp.cau_hoi, ma)
+    hc = ktl.hieu_cau(t, t if pl.get("_dich_y") else inp.cau_hoi, ma)     # EN-ALL GĐ 6: câu tiếng Anh → cụm đã dịch ý
     dt_ = ktl.dung_than(hc)
     cd = kd_ds.kb.chu_de(ma) or {}
     lr = kd_ds.can_lam_ro(t, None, pl["truong_phai"])

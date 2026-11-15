@@ -1,0 +1,58 @@
+{
+ "_nguon": "EN-ALL GĐ 4 — bản phủ tiếng Anh của tuvi_sao_luu_kb.json (ban biên tập viết từ nghĩa).",
+ "_trang_thai": "bien_tap",
+ "sao": {
+  "loc": {
+   "ten": "Annual Lu Cun",
+   "loi": "In {nam}, things around {vat} hold steady and even — the gain comes from persistence, from doing things solidly rather than doing them big.",
+   "nen_lam": "Keep a steady rhythm in this area: keep what's going well running, and don't rush to expand."
+  },
+  "kinh": {
+   "ten": "Annual Qing Yang",
+   "loi": "In {nam}, around {vat} you may need to grab chances and move fast, with the odd head-on clash.",
+   "nen_lam": "State your conditions clearly from the start, and wait a day before replying when you're heated."
+  },
+  "da": {
+   "ten": "Annual Tuo Luo",
+   "loi": "In {nam}, things around {vat} may run slow, drag on, and get caught up in small fiddly matters.",
+   "nen_lam": "Add spare time to every task, take it step by step, and keep a note of what's still pending."
+  },
+  "ma": {
+   "ten": "Annual Tian Ma",
+   "loi": "In {nam}, there is movement around {vat}: travel, moving place, changing how things are done.",
+   "nen_lam": "If you plan to change something, prepare a way back first to be safe."
+  },
+  "khoi_viet": {
+   "ten": "Annual Tian Kui and Tian Yue",
+   "loi": "In {nam}, when it comes to {vat}, you're likely to meet people further along who are happy to show you the way.",
+   "nen_lam": "Take the initiative to ask experienced people, and don't be shy about asking for help."
+  },
+  "xuong_khuc": {
+   "ten": "Annual Wen Chang and Wen Qu",
+   "loi": "In {nam}, around {vat} anything that needs words goes well: studying, writing, paperwork, speaking clearly.",
+   "nen_lam": "Put anything that needs agreeing in writing; if you want to study, pick one course you can finish within the year."
+  },
+  "thai_tue": {
+   "ten": "Annual Tai Sui",
+   "loi": "In {nam}, everything to do with {vat} keeps drawing attention and coming to the surface — what happens there is hard to ignore.",
+   "nen_lam": "Put this area on your list of the year's main tasks, and deal with things early instead of letting them pile up."
+  },
+  "tang_mon": {
+   "ten": "Annual Sang Men",
+   "loi": "In {nam}, things around {vat} may weigh on you and lower your mood.",
+   "nen_lam": "Make time to check in on your loved ones, keep your sleep routine, and don't carry it all alone."
+  },
+  "bach_ho": {
+   "ten": "Annual Bai Hu",
+   "loi": "In {nam}, around {vat} urgent matters may need handling right away, or disputes over paperwork may come up.",
+   "nen_lam": "Keep your files and contracts clear; take more care than usual when travelling or doing heavy work."
+  }
+ },
+ "kep_loc": "The annual Qing Yang and Tuo Luo always sit on either side of the annual Lu Cun: the gain around {vat} in {nam} comes with things to compete for and delays around it — hold steady and you gain, rush and you lose.",
+ "chu_y": "In {nam}, {ds} land right on a main area of your life — not a bad omen, just a place to slow down and take more care.",
+ "can_cu": "Annual stars are placed by the stem and branch of the year viewed: Lu Cun by the stem, Qing Yang = Lu + 1, Tuo Luo = Lu − 1, Tian Ma by the year branch's trine, Tian Kui / Tian Yue and Wen Chang / Wen Qu by the stem; Tai Sui on the year branch, Sang Men = Tai Sui + 2, Bai Hu = Tai Sui + 8. Annual stars are extra reading for the year and do not change its level.",
+ "tat_ach": {
+  "loi": "In {nam}, look after your health more carefully than usual: keep your sleep rhythm, and take more care when travelling and doing heavy work.",
+  "nen_lam": "Have a health check-up during the year — this is a preventive reminder, not a substitute for a doctor."
+ }
+}

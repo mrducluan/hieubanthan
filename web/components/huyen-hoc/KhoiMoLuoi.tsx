@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useChuTuVi } from "@/components/huyen-hoc/chu-tu-vi";
 
 export function KhoiMoLuoi({ id, Icon, tieuDe, moTa, onMoLanDau, moSan = false, children }: {
   id: string; Icon: LucideIcon; tieuDe: string; moTa: string;
@@ -46,6 +47,7 @@ export function KhoiMoLuoi({ id, Icon, tieuDe, moTa, onMoLanDau, moSan = false, 
 
 /** Nhãn ba lớp: CÁCH TÍNH (engine) · DIỄN GIẢI (kho tri thức) · TỰ SOI (câu hỏi cho người đọc). */
 export function NhanLop({ lop }: { lop: "tinh" | "giai" | "soi" }) {
-  const t = { tinh: ["Cách tính", "text-jade"], giai: ["Diễn giải", "text-gold"], soi: ["Tự soi", "text-moon"] }[lop];
-  return <span className={cn("eyebrow", t[1])}>{t[0]}</span>;
+  const { c } = useChuTuVi();
+  const mau = { tinh: "text-jade", giai: "text-gold", soi: "text-moon" }[lop];
+  return <span className={cn("eyebrow", mau)}>{c(`lop.${lop}`)}</span>;
 }

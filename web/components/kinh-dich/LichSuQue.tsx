@@ -7,10 +7,9 @@ import { Button } from "@/components/ui/button";
 import { VeQueNho } from "@/components/huyen-hoc/VeQue";
 import { cn } from "@/lib/utils";
 import { docLichSuQue, nhanLuc, type QueDaLuu, xoaHetQue, xoaQue } from "@/lib/lich-su-que";
+import { useChuKD } from "./chu-kinh-dich";
 
-const TEN_CACH: Record<string, string> = {
-  may_gieo: "máy gieo", gieo_tay: "tự gieo", mai_hoa: "Mai Hoa theo giờ", mai_hoa_so: "Mai Hoa theo số", mai_hoa_phuong: "Mai Hoa theo phương",
-};
+const CACH = new Set(["may_gieo", "gieo_tay", "mai_hoa", "mai_hoa_so", "mai_hoa_phuong"]);
 
 export function LichSuQue({ lamMoi, onXemLai, dang = false, className }: {
   /** Đổi giá trị → đọc lại danh sách (sau khi có quẻ mới). */
@@ -21,6 +20,10 @@ export function LichSuQue({ lamMoi, onXemLai, dang = false, className }: {
 }) {
   const [ds, setDs] = useState<QueDaLuu[]>([]);
   const [mo, setMo] = useState(false);
+  const { c, en } = useChuKD();
+  // Bản Anh: tên quẻ lưu lúc gieo ở bản Anh (`ten_que_en`); quẻ gieo ở bản Việt chỉ có mã → hiện mã (tên phiên âm Hán Việt).
+  const tenQ = (q: QueDaLuu) => (en && q.ten_que_en ? q.ten_que_en : q.ten_que);
+  const tenB = (q: QueDaLuu) => (en && q.ten_bien_en ? q.ten_bien_en : q.ten_bien);
   useEffect(() => { setDs(docLichSuQue()); }, [lamMoi]);
   if (ds.length === 0) return null;
   return (
@@ -28,28 +31,28 @@ export function LichSuQue({ lamMoi, onXemLai, dang = false, className }: {
       <div className="flex flex-wrap items-center justify-between gap-2">
         <button type="button" onClick={() => setMo((v) => !v)} aria-expanded={mo} className="inline-flex items-center gap-2 text-left" data-testid="lich-su-que-mo">
           <History className="size-4 text-gold" aria-hidden />
-          <span id="lich-su-que-tieu-de" className="font-serif text-lg text-fg">Quẻ đã gieo <span className="text-sm text-fg-faint">({ds.length})</span></span>
+          <span id="lich-su-que-tieu-de" className="font-serif text-lg text-fg">{c("ls.tieu_de")}<span className="text-sm text-fg-faint">({ds.length})</span></span>
         </button>
-        <p className="text-xs text-fg-faint">Chỉ lưu trên máy này, tối đa 20 quẻ. Không gửi đi đâu.</p>
+        <p className="text-xs text-fg-faint">{c("ls.chi_may")}</p>
       </div>
       {mo && (
         <>
           <ul className="mt-3 divide-y divide-line/60">
             {ds.map((q) => (
               <li key={q.id} className="flex items-center gap-3 py-2.5" data-testid="lich-su-que-muc">
-                <VeQueNho giaTri={q.gia_tri_hao} rong="w-9" nhan={undefined} />
+                <VeQueNho giaTri={q.gia_tri_hao} rong="w-9" nhan={undefined} aria={en ? c("vq.aria_nho", { ds: tenQ(q) }) : undefined} />
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-serif text-[1.02rem] text-fg">
-                    {q.ten_que}{q.ten_bien ? <span className="text-fg-muted"> → {q.ten_bien}</span> : <span className="text-xs text-fg-faint"> · không hào động</span>}
+                    {tenQ(q)}{q.ten_bien ? <span className="text-fg-muted"> → {tenB(q)}</span> : <span className="text-xs text-fg-faint">{c("ls.khong_dong")}</span>}
                   </p>
                   <p className="truncate text-xs text-fg-muted" title={q.cau}>{q.cau}</p>
-                  <p className="text-[0.7rem] text-fg-faint">{nhanLuc(q.luc)}{q.chu_de?.ten ? ` · ${q.chu_de.ten}` : ""} · {TEN_CACH[q.cach] ?? q.cach}</p>
+                  <p className="text-[0.7rem] text-fg-faint">{nhanLuc(q.luc, en ? "en" : "vi")}{q.chu_de?.ten ? ` · ${q.chu_de.ten}` : ""} · {CACH.has(q.cach) ? c(`ls.cach_${q.cach}`) : q.cach}</p>
                 </div>
                 <div className="flex shrink-0 items-center gap-1">
-                  <Button type="button" size="sm" variant="outline" disabled={dang} onClick={() => onXemLai(q)} data-testid="xem-lai" aria-label={`Xem lại quẻ ${q.ten_que}`}>
-                    <RotateCcw aria-hidden /> <span className="hidden sm:inline">Xem lại</span>
+                  <Button type="button" size="sm" variant="outline" disabled={dang} onClick={() => onXemLai(q)} data-testid="xem-lai" aria-label={c("ls.xem_lai_aria", { ten: tenQ(q) })}>
+                    <RotateCcw aria-hidden /> <span className="hidden sm:inline">{c("ls.xem_lai")}</span>
                   </Button>
-                  <Button type="button" size="icon" variant="ghost" className="size-9" onClick={() => setDs(xoaQue(q.id))} data-testid="xoa-que" aria-label={`Xoá quẻ ${q.ten_que}`}>
+                  <Button type="button" size="icon" variant="ghost" className="size-9" onClick={() => setDs(xoaQue(q.id))} data-testid="xoa-que" aria-label={c("ls.xoa_aria", { ten: tenQ(q) })}>
                     <Trash2 aria-hidden />
                   </Button>
                 </div>
@@ -57,8 +60,8 @@ export function LichSuQue({ lamMoi, onXemLai, dang = false, className }: {
             ))}
           </ul>
           <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-fg-faint">
-            <span>“Xem lại” đọc đúng quẻ cũ (6 hào giữ nguyên), không gieo lại; ngày tháng Lục Hào lấy theo lúc gieo (đã lưu cùng quẻ).</span>
-            <button type="button" onClick={() => { xoaHetQue(); setDs([]); }} className="underline-offset-4 hover:text-fg hover:underline" data-testid="xoa-het-que">Xoá hết</button>
+            <span>{c("ls.giai_thich")}</span>
+            <button type="button" onClick={() => { xoaHetQue(); setDs([]); }} className="underline-offset-4 hover:text-fg hover:underline" data-testid="xoa-het-que">{c("ls.xoa_het")}</button>
           </div>
         </>
       )}

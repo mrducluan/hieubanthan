@@ -21,25 +21,34 @@ from app.hoidap import phongthuy as hd
 ROOT = Path(__file__).resolve().parent.parent
 KHO = json.loads((ROOT / "fixtures" / "nguon" / "duong_trach_thap_thu.json").read_text("utf-8"))
 KB = json.loads((ROOT / "app" / "kb" / "data" / "phongthuy_kb.json").read_text("utf-8"))
-VAN = "".join(m["van"] for q in KHO["quyen"] for m in q["muc"])
+# Khuôn `thien` của WS-2 (mỗi thiên một mục, tên "陽宅十書n · tên thiên"; quyển 678 là bùa trấn — chỉ nằm trong kho nguồn).
+VAN = "".join(t["van"] for t in KHO["thien"] if t["quyen"] != 678).replace("\n", "")
 
 QUAI = {"乾": "Càn", "坎": "Khảm", "艮": "Cấn", "震": "Chấn", "巽": "Tốn", "離": "Ly", "坤": "Khôn", "兌": "Đoài"}
 VONG = "乾坎艮震巽離坤兌"                      # thứ tự bài ca: đi vòng tám cung Hậu thiên từ Tây Bắc
 SAO = {"生": "Sinh Khí", "延": "Diên Niên", "天": "Thiên Y", "禍": "Hoạ Hại", "六": "Lục Sát", "五": "Ngũ Quỷ", "絕": "Tuyệt Mệnh"}
 
 
+def _ten(t: dict) -> list[str]:
+    return t["ten"].split(" · ", 1)[-1].split(" / ")
+
+
 def _muc(ten: str) -> str:
-    return next(m["van"] for q in KHO["quyen"] for m in q["muc"] if m["ten"] == ten)
+    return next(t["van"] for t in KHO["thien"] if ten in _ten(t)).replace("\n", "")
 
 
-def test_kho_nguon_du_ba_quyen_khong_co_bua():
-    assert [q["tap_thanh"] for q in KHO["quyen"]] == [675, 676, 677]
-    assert KHO["can_doi_chieu"] is True and all(q["revid"] and q["muc"] for q in KHO["quyen"])
-    ten = [m["ten"] for q in KHO["quyen"] for m in q["muc"]]
+def test_kho_nguon_du_cac_thien_bua_tran_khong_vao_kb():
+    assert sorted({t["quyen"] for t in KHO["thien"]}) == [675, 676, 677, 678]
+    assert KHO["can_doi_chieu"] is True
+    ten = [x for t in KHO["thien"] for x in _ten(t)]
     for t in ("論宅外形第一", "論福元第二", "論大遊年第三", "論穿宮九星第四", "論開門修造門第六", "論放水第七", "論宅內形第八"):
         assert t in ten, t
-    assert "論符鎮第十" not in ten and "符" not in "".join(ten)
     assert not re.search(r"[<>，。、；：「」《》]", VAN)                 # không thẻ HTML, không dấu câu Wikisource
+    # quyển 678 (論符鎮 — bùa trấn) có trong kho nguồn để đủ sách, nhưng không câu KB nào lấy từ đó (SX-C: không nạp bùa).
+    bua = "".join(t["van"] for t in KHO["thien"] if t["quyen"] == 678).replace("\n", "")
+    for f in ("phongthuy_sach_ghi.json", "phongthuy_cung_menh.json"):
+        for h in re.findall(r'"han": "([^"]+)"', (ROOT / "app" / "kb" / "data" / f).read_text("utf-8")):
+            assert h in VAN or h not in bua, (f, h)
 
 
 def test_dai_du_nien_ca_khop_phep_tinh():
@@ -60,7 +69,7 @@ def test_dai_du_nien_ca_khop_phep_tinh():
 def _bang_180() -> list[tuple[str, str]]:
     v = _muc("三元甲子福德宮定局")
     v = v[:v.index("以上三元甲子")]
-    o = re.findall(r"(〈男中寄坤〉|男[乾坎艮震巽離坤兌])(〈女中寄艮〉|女[乾坎艮震巽離坤兌])", v)
+    o = re.findall(r"([〈〔]男中寄坤[〉〕]|男[乾坎艮震巽離坤兌])([〈〔]女中寄艮[〉〕]|女[乾坎艮震巽離坤兌])", v)   # chú nhỏ 〈〉 hay 〔〕 tuỳ bản chép
     return [("Khôn" if "中" in a else QUAI[a[1]], "Cấn" if "中" in b else QUAI[b[1]]) for a, b in o]
 
 

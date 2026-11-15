@@ -1,0 +1,206 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu_en": "EN-ALL GĐ 4 (agent C) — bản phủ tiếng Anh cho \"Two charts together\": 120 câu khác nhau (5 tiêu chí × 3 mức × 8 quan hệ), không doạ, không phán chia tay, không vật phẩm. Ban biên tập viết lại, chờ người bản xứ duyệt.",
+ "tieu_chi": {
+  "menh": {"ten": "Birth-year nature", "mo_ta": "Your basic temperament and how you react when happy or tired."},
+  "can": {"ten": "How you think and decide", "mo_ta": "Whether the two of you easily agree when a choice has to be made."},
+  "chi": {"ten": "Zodiac animal", "mo_ta": "Daily habits, and how comfortable it feels to be around each other."},
+  "cung_phi": {"ten": "Home and shared space", "mo_ta": "Taste in where to live and work, and how to arrange a space."},
+  "tu_vi": {"ten": "Where the Zi Wei charts meet", "mo_ta": "Which areas of your life the other person's birth year lands in."}
+ },
+ "ket_luan": {"hop": "Good match", "binh_hoa": "Even", "can_dung_hoa": "Needs give and take"},
+ "tieu_de": {
+  "menh": {"hop": "Your natures give each other energy", "binh_hoa": "Similar natures, easy to read each other", "can_dung_hoa": "Different rhythms, so you need to give way"},
+  "can": {"hop": "You easily agree on how to do things", "binh_hoa": "Each has their own view, without getting in the way", "can_dung_hoa": "You may compete over which way to go"},
+  "chi": {"hop": "Matching zodiac animals, comfortable to be around", "binh_hoa": "Neutral zodiac animals, it depends on how you treat each other", "can_dung_hoa": "Zodiac animals that rub over small things"},
+  "cung_phi": {"hop": "Easy to choose a home or workplace together", "binh_hoa": "The same taste in places", "can_dung_hoa": "Different views on where to live and how to arrange it"},
+  "tu_vi": {"hop": "The other person brings ease right where this relationship lives", "binh_hoa": "The charts touch lightly; it is up to the two of you to grow it", "can_dung_hoa": "The core of this relationship easily fills up with expectations"}
+ },
+ "cau": {
+  "menh": {
+   "hop": {
+    "nguoi_yeu": {"y": "Your natures make up for each other: when one of you dips, the other can usually lift them back up.", "nen": "When your partner is tired, ask whether they want to talk or to be left in peace, then do exactly that."},
+    "vo_chong": {"y": "At home, the two of you split tasks by strengths without long discussions.", "nen": "Write down who is good at which household job and hand it over fully, so nobody has to remind anybody."},
+    "ban_be": {"y": "Being together usually leaves you both feeling better, and good news doubles.", "nen": "Keep a regular habit of meeting, such as coffee at the end of each month, so this good fit does not fade."},
+    "dong_nghiep": {"y": "Working on the same task, you pick up where the other leaves off: one starts, the other finishes.", "nen": "Split work by stage — who opens it, who polishes it — and note it clearly on the task board."},
+    "doi_tac": {"y": "Your strengths complement each other, so together you easily make a well-rounded business team.", "nen": "Put each side's contribution in writing, including the effort that is not measured in money."},
+    "sep": {"y": "You and your manager click easily: what you do is often exactly what they need.", "nen": "Send a short report each week so they can clearly see your contribution."},
+    "cha_me_con": {"y": "Parent and child lift each other: one person's advice usually suits the other's character.", "nen": "Spend one session a week doing something small together, like cooking a dish or going for a walk."},
+    "gia_dinh": {"y": "Among the relatives, the two of you are often the pair who help each other when the family has something on.", "nen": "Take on one family task together, such as organising an anniversary or a house repair, so this good fit gets put to use."}
+   },
+   "binh_hoa": {
+    "nguoi_yeu": {"y": "You share the same basic nature, so you read each other easily but can also dig your heels in at the same time.", "nen": "When you are both tense, agree that whoever says \"pause\" first gets ten quiet minutes from the other."},
+    "vo_chong": {"y": "As a couple you are alike at heart, so housework causes little disagreement, but you may both overlook the same thing.", "nen": "Every quarter, go over the things you both tend to forget, like paperwork, insurance and repairs."},
+    "ban_be": {"y": "You share the same taste and need little explaining, but you may both shy away from trying new things.", "nen": "Now and then, plan something neither of you has ever done, so the friendship has new stories."},
+    "dong_nghiep": {"y": "You work the same way, so coordination is smooth, but you may both miss the same angle.", "nen": "Before handing in shared work, ask a third person to read it over."},
+    "doi_tac": {"y": "You run business the same way, so you agree easily but lack someone to argue the other side.", "nen": "Bring in an outside adviser or independent accountant to review big decisions."},
+    "sep": {"y": "You and your manager think alike, so you rarely clash, but they may assume you already understand everything.", "nen": "Ask about the finish criteria right when you take on a task; do not guess from your own view."},
+    "cha_me_con": {"y": "Parent and child have similar characters: love comes easily, but so do the same kinds of anger.", "nen": "When one of you gets heated, the other leaves the room for a while and comes back to continue."},
+    "gia_dinh": {"y": "These relatives have similar natures and understand each other quickly, but old stories tend to be brought up again.", "nen": "Agree not to bring up the past at family meals."}
+   },
+   "can_dung_hoa": {
+    "nguoi_yeu": {"y": "Your basic rhythms differ: one wants speed, the other wants calm, and it is easy to misread each other when tired.", "nen": "Say clearly \"this is what I need right now\" instead of waiting for the other to guess."},
+    "vo_chong": {"y": "Under pressure you react differently, so money or children can easily turn into arguments.", "nen": "Set a fixed weekly time to discuss household matters, and do not settle big things outside it."},
+    "ban_be": {"y": "Your rhythms differ, and at times one of you finds the other too much or too cautious.", "nen": "Meet up for things you both enjoy, and invite each other less to things only one of you is keen on."},
+    "dong_nghiep": {"y": "You work at different speeds: one acts at once, the other needs to think it through, and you can get impatient with each other.", "nen": "Agree deadlines for each part from the start so nobody has to chase anybody."},
+    "doi_tac": {"y": "You have different appetites for risk: one side wants to expand, the other wants to hold steady.", "nen": "Agree in advance the most each side is willing to lose on a project, and write it into the contract."},
+    "sep": {"y": "You and your manager work differently, so their feedback can sound like criticism.", "nen": "Ask them to give feedback with concrete examples, and write it down so you get it right next time."},
+    "cha_me_con": {"y": "Parent and child live at different rhythms, so a reminder easily sounds like a reproach.", "nen": "Swap \"why don't you…\" for \"I'd like you to try…\" — short sentences, one thing at a time."},
+    "gia_dinh": {"y": "These relatives have different temperaments, so comments on each other's private matters easily hurt.", "nen": "Only give advice when asked; otherwise help with concrete actions."}
+   }
+  },
+  "can": {
+   "hop": {
+    "nguoi_yeu": {"y": "You easily agree on where to go out, how to spend money or long-term plans.", "nen": "Make the most of being in sync to plan the next six months together."},
+    "vo_chong": {"y": "As a couple you reach joint decisions quickly and rarely need to bring in a third person.", "nen": "Write down the big decisions you have made so you do not remember them differently later."},
+    "ban_be": {"y": "You easily get each other to try new things, because your ways of thinking fit.", "nen": "Learn a skill or run a small project together — this fit is likely to produce results."},
+    "dong_nghiep": {"y": "In meetings you tend to back each other's ideas and easily become the core of the team.", "nen": "Make a point of inviting others' input, so the team does not feel the two of you decide alone."},
+    "doi_tac": {"y": "You easily agree on strategy, and contract talks have few snags.", "nen": "Still settle everything with complete paperwork, because easy agreement is when details get skipped."},
+    "sep": {"y": "Your manager listens to your ideas easily, and your proposals have a good chance of approval.", "nen": "Bring numbers and a fallback plan with each proposal so they can approve it faster."},
+    "cha_me_con": {"y": "Parent and child easily agree when choosing a school, a career or a big family matter.", "nen": "Let the younger one speak first and the older one after — it keeps the child's confidence."},
+    "gia_dinh": {"y": "At home, the two of you easily agree when a shared family decision has to be made.", "nen": "Take the role of opening the discussion when relatives need to settle something, so others can follow easily."}
+   },
+   "binh_hoa": {
+    "nguoi_yeu": {"y": "Each of you has your own way of thinking, but you do not tread on each other's toes.", "nen": "Agree which matters one person decides and which ones you decide together."},
+    "vo_chong": {"y": "You think along two parallel tracks: small things are fine, but big things need time to discuss.", "nen": "For spending above a limit you set together, sleep on it before deciding."},
+    "ban_be": {"y": "You rarely agree straight away, but you rarely argue about it either.", "nen": "When planning an outing, each suggests two options and you pick the one you both listed."},
+    "dong_nghiep": {"y": "You work in two different ways without getting in each other's way.", "nen": "Split the work into separate parts and only combine them at the final step."},
+    "doi_tac": {"y": "You each see the market from your own angle: complementary, but slow to close decisions.", "nen": "Set a deadline for each decision; past it, go with the plan of whoever owns that area."},
+    "sep": {"y": "Your manager and you think differently but are not at odds.", "nen": "Ask what matters most to them in the task you are given, and stick to it."},
+    "cha_me_con": {"y": "Parent and child think like different generations: not opposed, but rarely of one mind.", "nen": "Ask \"what do you think?\" before giving your own view, even on small things."},
+    "gia_dinh": {"y": "Everyone in the family has their own view, but nobody wants to fight over who decides.", "nen": "Give each shared task one person in charge, and let the others give input once."}
+   },
+   "can_dung_hoa": {
+    "nguoi_yeu": {"y": "When a choice has to be made, you pull in two directions and each feels sure of being right.", "nen": "Try \"this time your way, next time mine\" and keep track so it stays fair."},
+    "vo_chong": {"y": "As a couple you may compete over who decides about money, the home or how to raise the children.", "nen": "Give each person their own decision areas outright; shared areas need both to nod."},
+    "ban_be": {"y": "You easily argue to the bitter end, even about things that do not matter.", "nen": "Set a playful rule: if a debate runs past five minutes, change the subject."},
+    "dong_nghiep": {"y": "You may compete over the direction of a shared project, and meetings can drag on.", "nen": "Ask the team lead to settle who decides which part at the very start of the project."},
+    "doi_tac": {"y": "You easily disagree about where to grow, especially when choosing between quick profit and lasting value.", "nen": "Write into your agreement how to break a deadlock, for example by asking a mediator you both trust."},
+    "sep": {"y": "You and your manager may disagree on how to do things, and you can feel your hands are tied.", "nen": "Do it their way once, record the result, then propose your way with figures."},
+    "cha_me_con": {"y": "Parent and child may clash when choosing a direction for the future.", "nen": "Each writes down three reasons and reads them to the other, without jumping to a conclusion yet."},
+    "gia_dinh": {"y": "These relatives easily argue over who is right when discussing family affairs or shared property.", "nen": "When shared matters involve money, write minutes signed by everyone."}
+   }
+  },
+  "chi": {
+   "hop": {
+    "nguoi_yeu": {"y": "Side by side, you feel at ease and your daily habits easily fit together.", "nen": "Keep a few shared rituals, like breakfast together; they keep this fit lasting."},
+    "vo_chong": {"y": "Your household routines fit easily: bedtime, mealtimes and tidying need little discussion.", "nen": "When a baby arrives or work changes, sit down early to reset the household routine before it drifts."},
+    "ban_be": {"y": "Going out together, sharing a room or travelling together all feel comfortable.", "nen": "Plan one longer trip together each year — this friendship travels well."},
+    "dong_nghiep": {"y": "Sitting near each other at work is pleasant, with few irritations over each other's habits.", "nen": "Ask to sit in the same team or close by when there is an urgent project."},
+    "doi_tac": {"y": "The two sides feel trust when meeting, and day-to-day communication flows.", "nen": "Use that trust to agree a regular reporting routine; do not rely on feelings alone."},
+    "sep": {"y": "Your manager feels at ease working with you, and the team atmosphere is lighter.", "nen": "Take on the tasks that need close coordination with them; that is where you shine."},
+    "cha_me_con": {"y": "Parent and child have matching routines, with few petty clashes under one roof.", "nen": "Protect the times when the whole family is together, like dinner; they grow more precious with the years."},
+    "gia_dinh": {"y": "These relatives get along, family gatherings are fun and awkward moments are rare.", "nen": "Be the ones who gather the whole family for the holidays; the two of you make a good bridge."}
+   },
+   "binh_hoa": {
+    "nguoi_yeu": {"y": "Your zodiac animals lean neither towards a match nor a snag — comfort depends on how you treat each other every day.", "nen": "Notice the small habits the other dislikes and cut them back one at a time."},
+    "vo_chong": {"y": "Nothing in your household routines gets in the way, but nothing fits by itself either.", "nen": "Discuss once, clearly, your hours, chores and guests, so nobody has to guess."},
+    "ban_be": {"y": "Your friendship is ordinary; how close you get depends on shared interests.", "nen": "Find a shared interest, like a sport or a favourite dish, as a reason to meet."},
+    "dong_nghiep": {"y": "Working together has no particular snags and no special chemistry.", "nen": "A lunch together helps you understand each other's work habits faster."},
+    "doi_tac": {"y": "Communication between the two sides is ordinary and needs time to warm up.", "nen": "Schedule regular face-to-face meetings in addition to online calls."},
+    "sep": {"y": "The relationship with your manager is ordinary: neither hard nor easy.", "nen": "Ask whether they prefer updates by message or in person."},
+    "cha_me_con": {"y": "Parent and child fit at an ordinary level; small clashes come and go.", "nen": "Give everyone a corner of the home to retreat to when they want quiet."},
+    "gia_dinh": {"y": "These two relatives are not very close, but there is nothing awkward between them either.", "nen": "Checking in on birthdays and holidays is enough to keep it warm."}
+   },
+   "can_dung_hoa": {
+    "nguoi_yeu": {"y": "You can rub each other the wrong way over small things: being late, leaving things around, replying slowly.", "nen": "Gather the small things and raise them once a week, rather than commenting all day long."},
+    "vo_chong": {"y": "Your household routines can drift apart: one likes quiet, the other company; one sleeps early, the other stays up.", "nen": "Agree quiet hours at home and which days guests are welcome."},
+    "ban_be": {"y": "On long outings you may grow tired of each other's habits.", "nen": "Meet in reasonable doses, and on longer trips keep some time for yourselves."},
+    "dong_nghiep": {"y": "Sitting close for long can grate: noise, ways of talking, working hours.", "nen": "Agree how to contact each other during work, for example messaging before coming over to the desk."},
+    "doi_tac": {"y": "The two sides can misunderstand each other day to day; one remark may be heard differently.", "nen": "Confirm everything by email or recorded messages; do not settle things on a spoken word alone."},
+    "sep": {"y": "Your daily working style and your manager's can get on each other's nerves.", "nen": "Ask in advance when and in what format they want reports, then keep to it."},
+    "cha_me_con": {"y": "Living together, parent and child may squabble over hours, food and phones.", "nen": "Set few rules but keep them consistently, with parents following them as well as children."},
+    "gia_dinh": {"y": "At family gatherings, these two may trade sharp words.", "nen": "Sit next to people you get on with and avoid divisive topics at the table."}
+   }
+  },
+  "cung_phi": {
+   "hop": {
+    "nguoi_yeu": {"y": "You easily like the same kind of home, the same favourite coffee shops and the same seats.", "nen": "When you think about moving in together, a home direction that suits you both is usually easy to find."},
+    "vo_chong": {"y": "As a couple you agree about where to live, so buying a home and arranging it causes few snags.", "nen": "Look up the directions that suit your birth years to choose desk and bed directions for both of you."},
+    "ban_be": {"y": "Sharing a room or a workplace feels comfortable for you both.", "nen": "If you are thinking of renting together, you are an easy pair to live with."},
+    "dong_nghiep": {"y": "Sitting in the same work area helps you both focus.", "nen": "Ask to sit near each other when the team rearranges desks."},
+    "doi_tac": {"y": "The two sides easily agree on where to put an office or shop.", "nen": "When choosing premises, both go and view before signing."},
+    "sep": {"y": "You and your manager feel comfortable working in the same room.", "nen": "Take on in-person working sessions with them rather than only online."},
+    "cha_me_con": {"y": "Parent and child fit well under one roof, rarely fighting over rooms or corners.", "nen": "Let your child arrange their study corner their own way; parents only suggest which way to face."},
+    "gia_dinh": {"y": "These relatives get along living nearby or together, with few disagreements about the house.", "nen": "When renovating a shared house, these two should plan the layout together."}
+   },
+   "binh_hoa": {
+    "nguoi_yeu": {"y": "You share the same taste in homes — easy to choose, but you may both overlook what is convenient for others.", "nen": "When choosing a home, ask an outsider to have a look so nothing is missed."},
+    "vo_chong": {"y": "As a couple you belong to the same direction group, so choosing a home is easy to agree on.", "nen": "One person's table of good directions is enough for both of you."},
+    "ban_be": {"y": "You like the same kind of places, so outings or living together need little discussion.", "nen": "Now and then try a new meeting spot so it does not get stale."},
+    "dong_nghiep": {"y": "You both like the same kind of seat, so you are easy to place side by side.", "nen": "Agree clearly on shared desks and supplies so nothing gets mixed up."},
+    "doi_tac": {"y": "The two sides have the same taste in business locations and choose quickly.", "nen": "Still view at least two places before deciding; easy agreement can lead to a rushed choice."},
+    "sep": {"y": "Your manager and you have the same taste in workspace.", "nen": "Offer ideas on the layout when the team moves office; your view is likely to be heard."},
+    "cha_me_con": {"y": "Parent and child choose places in a similar way, so living together is easy.", "nen": "Keep a private corner for your child even in a small home, so they have a place of their own."},
+    "gia_dinh": {"y": "These relatives like the same kind of home and rarely argue about housing.", "nen": "Take turns hosting gatherings at each other's homes; everyone will feel at ease."}
+   },
+   "can_dung_hoa": {
+    "nguoi_yeu": {"y": "You have different tastes in homes: one likes bright, the other private; one likes the city, the other quiet.", "nen": "If you move in together, each keeps a corner arranged their own way, and shared rooms get a middle-ground style."},
+    "vo_chong": {"y": "As a couple you may disagree when buying a home, choosing a direction or arranging furniture.", "nen": "Favour the direction that suits whoever holds the title, and set up each private study to suit the person who uses it."},
+    "ban_be": {"y": "Living together for long, you may get annoyed by how the other arranges things.", "nen": "Travelling together is fine; if you rent together, give each person their own room."},
+    "dong_nghiep": {"y": "Sitting right next to each other can feel cramped and make it hard to focus.", "nen": "If possible, sit one desk apart or face different directions."},
+    "doi_tac": {"y": "The two sides find it hard to agree on where to put an office or shop.", "nen": "Let whoever runs day-to-day operations choose the place, and let the other give input once."},
+    "sep": {"y": "Working in the same room as your manager may feel confining.", "nen": "Ask for a workspace of your own or some remote days if the company allows it."},
+    "cha_me_con": {"y": "Parent and child may disagree about rooms and when shared spaces are used.", "nen": "Give each person a room or a corner, and knock before going in."},
+    "gia_dinh": {"y": "Relatives living together may clash over the layout of the house and who uses which room.", "nen": "Separate clearly what is shared and what is private, and write it down so nobody has to keep reminding."}
+   }
+  },
+  "tu_vi": {
+   "hop": {
+    "nguoi_yeu": {"y": "The other person's birth year lands on your love life, your sense of self and your inner life in a favourable way: with them, you feel lighter.", "nen": "Tell them what you value about them, naming one specific thing they did this week."},
+    "vo_chong": {"y": "The chart shows the other person bringing ease into your marriage, your household and your peace of mind.", "nen": "Set one shared family goal for this year together, such as a savings target or a trip."},
+    "ban_be": {"y": "The other person touches your friendships and siblings in a good way: often the one who introduces and supports you.", "nen": "When you need to widen your circle, this friend is the first one to ask."},
+    "dong_nghiep": {"y": "The other person brings ease into your work and your relationships at the workplace.", "nen": "Suggest working together on important projects; the two of you get things done."},
+    "doi_tac": {"y": "The chart shows the other person touching your money and work in a helpful way.", "nen": "Start with one small deal, and expand step by step once it shows results."},
+    "sep": {"y": "This manager brings ease into your work: likely to open doors and hand you good assignments.", "nen": "Ask them for one piece of career advice each quarter; they can point you in the right direction."},
+    "cha_me_con": {"y": "The chart shows the two of you supporting each other in family life and in spirit.", "nen": "Write down a few pieces of advice or happy memories of each other, to read again when times are hard."},
+    "gia_dinh": {"y": "This relative brings ease into your ties with siblings, parents and home.", "nen": "When the family has something big on, this is the person to take charge of it with you."}
+   },
+   "binh_hoa": {
+    "nguoi_yeu": {"y": "The other person's birth year touches your chart lightly, leaning neither towards ease nor snags in love.", "nen": "Keep one evening a week just for the two of you — this relationship grows from things you do together."},
+    "vo_chong": {"y": "Your two charts touch at a moderate level; the marriage is shaped by how you nurture it.", "nen": "Once a month, ask each other \"what would we like to change this month?\" and pick one thing to do."},
+    "ban_be": {"y": "This friend touches your chart lightly; how close you are is up to the two of you.", "nen": "Message to check in when you do not need anything; that is how friendships last."},
+    "dong_nghiep": {"y": "Your charts touch at a moderate level at work; how well you coordinate depends on how you divide tasks.", "nen": "After each shared project, take fifteen minutes to name what went well and what to change."},
+    "doi_tac": {"y": "The chart shows no clear ease or snag around money and business with this person.", "nen": "Judge by real results after the first three months before putting in more capital."},
+    "sep": {"y": "This manager touches your work at a moderate level.", "nen": "Keep regular one-to-one meetings with them so the relationship grows through real work."},
+    "cha_me_con": {"y": "The parent's and child's charts touch lightly; closeness depends on the time you give each other.", "nen": "Once a week, a call or a meal just to chat, with no instructions."},
+    "gia_dinh": {"y": "This relative touches your chart at an ordinary level.", "nen": "Stay in touch regularly at family occasions; no more is needed."}
+   },
+   "can_dung_hoa": {
+    "nguoi_yeu": {"y": "The other person's birth year lands where you care most in love: easy to expect a lot, easy to feel hurt.", "nen": "Say plainly one thing you hope for at a time; do not wait for them to work it out."},
+    "vo_chong": {"y": "The chart shows marriage as the area you both take most to heart: a small remark can easily become a big deal.", "nen": "When angry, agree to talk again after an hour, never while tempers are hot."},
+    "ban_be": {"y": "This friend touches the part of you that worries about friends: borrowing and favours can get tangled.", "nen": "Keep money clear with this friend; if you lend, lend only what you are prepared not to get back."},
+    "dong_nghiep": {"y": "The chart shows shared work as where you misunderstand each other, especially about credit.", "nen": "Name who did each part in shared reports."},
+    "doi_tac": {"y": "The other person's birth year lands on your money and work in a way that calls for care.", "nen": "Keep a separate joint account, and require two signatures for large payments."},
+    "sep": {"y": "This manager touches your work in a pressured way: high demands, easy to feel displeased.", "nen": "Confirm the request by message after each assignment."},
+    "cha_me_con": {"y": "The chart shows parent and child worrying about each other too much, so love turns heavy.", "nen": "Each names one thing they want to handle themselves; the other only asks how it is going and does not take over."},
+    "gia_dinh": {"y": "This relative touches your home and sibling ties in a way where shared matters easily get tangled.", "nen": "Put shared property and money matters within the family clearly in writing."}
+   }
+  }
+ },
+ "tu_vi_chi_tiet": {"tot": "It shows most clearly in {mang}.", "vuong": "The place to watch is {mang}."},
+ "chua_tinh_cung_phi": "Not scored yet because one person's gender is missing — add it to get all five criteria. The total has been rescaled over the remaining four.",
+ "muc_tong": {
+  "de_hoa_hop": {"nhan": "Easy to get along", "mo_ta": "Most criteria lean towards a good fit. The two of you understand each other without much effort."},
+  "hop_neu_hieu": {"nhan": "A good match with understanding", "mo_ta": "Some areas fit, some differ. Knowing the differences in advance makes it easier to give way at the right moment."},
+  "can_dung_hoa_nhieu": {"nhan": "Needs a lot of give and take", "mo_ta": "Many criteria differ. The two of you need to say what you want and divide tasks more clearly than most pairs."},
+  "nhieu_khac_biet": {"nhan": "Many differences — talk things through", "mo_ta": "You differ in many ways. Different does not mean incompatible — it just means talking more clearly, and sooner."}
+ },
+ "goi_y": {
+  "nguoi_yeu": ["One phone-free date every week.", "Say one specific thank-you every day.", "When upset, say \"I need ten minutes\", then come back and keep talking."],
+  "vo_chong": ["A fifteen-minute family meeting each week: money, children, chores.", "Give each person their own decision areas.", "Keep one date night just for the two of you each month."],
+  "ban_be": ["Meet regularly, even when there is nothing special to talk about.", "Keep money clear when you go out together.", "Remember each other's important dates."],
+  "dong_nghiep": ["Settle who does which part at the hand-over meeting.", "Give clear credit in joint reports.", "Give feedback in private and praise in front of the team."],
+  "doi_tac": ["Put every agreement in writing.", "Hold a monthly meeting to reconcile the figures.", "Write down in advance how to handle disagreements."],
+  "sep": ["Confirm requests by message after taking on a task.", "Report progress before being asked.", "Ask for feedback regularly, note it down and act on it."],
+  "cha_me_con": ["Ask before advising.", "One shared meal a week with no talk of school or money.", "Parents say \"we trust you\" more often than giving instructions."],
+  "gia_dinh": ["When shared matters involve money, put it on paper.", "Meet at holidays and keep the topics light.", "Help each other with concrete actions rather than advice."]
+ },
+ "loi_dan": "This score is a reference, based on folk rules and the Zi Wei Dou Shu and Eight Mansions books. Whether a relationship goes well depends on how the two of you treat each other every day.",
+ "cach_doc_them": {
+  "nhan": "Another way to read it",
+  "tieu_de": {"phu_the_trung_menh_nguoi_kia": "The other person is close to the partner your chart describes", "hai_nguoi_sat_pha_tham": "Both of you like to make your own calls", "dong_tinh_bu_nhau": "One opens new paths, the other keeps things steady", "ban": "The partner your chart sketches", "kia": "The partner their chart sketches"},
+  "dan_kia": "Read from the other person's side — here \"you\" means the other person:",
+  "can_cu_chung": "A reading from a modern three-harmonies school of Zi Wei Dou Shu, rewritten by our editors in plain language. This part is not counted in the score."
+ }
+}

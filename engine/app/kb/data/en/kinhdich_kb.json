@@ -1,10 +1,940 @@
 {
- "_nguon": "EN-ALL GĐ 3c — bản phủ tiếng Anh, CHỈ các mẫu câu dùng chung cho hỏi đáp Huyền học (an toàn, từ chối, dẫn hướng, chia buồn). Phần Kinh Dịch còn lại chuyển thể ở GĐ 6. Ban biên tập viết từ nghĩa.",
+ "_nguon": "EN-ALL GĐ 3c — bản phủ tiếng Anh, CHỈ các mẫu câu dùng chung cho hỏi đáp Huyền học (an toàn, từ chối, dẫn hướng, chia buồn). Ban biên tập viết từ nghĩa. EN-ALL GĐ 6: 64 quẻ (ý chính, lời khuyên, mặt tối, câu tự soi, 5 lĩnh vực), thể–dụng Mai Hoa — tên quẻ ('ten') giữ chữ Việt làm mã (slug, web), tên hiển thị ở ten_en.json.",
  "_trang_thai": "bien_tap",
  "mau": {
   "an_toan": "I am really sorry you are going through this. Right now the most important thing is your safety — no hexagram, chart or house direction decides what your life is worth. If you are thinking about harming yourself or you are in danger, call your local emergency number now. In the US you can call or text 988; in the UK call Samaritans on 116 123; elsewhere, findahelpline.com lists free lines. Please talk to someone you trust today — family, a friend or a counsellor.",
   "tu_choi": "This question is outside what the classical arts can answer responsibly (lucky numbers, dates of life and death, diagnosing illness, judging people for hiring, or acting on someone else), so the system does not give a reading. If you like, ask instead how you yourself might handle the situation.",
   "dan_huong": "The system does not read spirits, karmic callings, curses or anything from the unseen world — and no one can read those from a birth date or a house direction. If you have been sleeping badly, waking with a start or feeling uneasy lately, a few things help right away: get enough sleep, stop reading news late at night, and tell someone close what is worrying you. If your family keeps an ancestral altar, treat it as a time to come together — the system does not guide rituals or recommend practitioners or objects. You can still ask about work, money, love or the rhythm of this year — things a chart, a hexagram or a house direction can speak to.",
   "chia_buon": "Our condolences to you and your family. Losses one after another wear everyone out, and it is natural to look for reasons beyond your control — what matters most now is that the people at home stay close, eat and sleep well, and share the load."
+ },
+ "que": {
+  "1": {
+   "y_chinh": "Strong creative force that never stops moving; the judgement promises success if you stay upright and steady (yuan heng li zhen). Great Image: the noble person strengthens themselves without rest.",
+   "loi_khuyen": "Take the initiative and keep going, but read the timing: while the dragon is still hidden, do not act; when you have climbed too high, know when to stop.",
+   "mat_toi": "Arrogance and the belief that you are always right — 'the dragon that climbs too high will have regrets'.",
+   "cau_tu_soi": "Are you moving forward because the time has come, or because you cannot bear standing still?",
+   "linh_vuc": {
+    "cong_viec": "A time to take on real responsibility and lead; it needs genuine ability underneath — do not skip steps.",
+    "tinh_cam": "Say what you feel first, but respect the other person's pace.",
+    "gia_dinh": "The one who holds the family up should lead by example rather than by orders.",
+    "tien_bac": "Room to grow; avoid putting all your money in because you feel confident.",
+    "hoc_hanh": "Study steadily with a long-term goal; avoid taking on too much at once."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 1 Qian (The Creative) 乾 (judgement, Tuan commentary, Great Image)"
+  },
+  "2": {
+   "y_chinh": "Yielding, generous and supportive, like the earth carrying all things; following brings gains, rushing ahead to lead brings you off course.",
+   "loi_khuyen": "Cooperate, support and persevere; let the right person lead and do your own part well.",
+   "mat_toi": "Gentleness turning into weakness — enduring in silence until you lose yourself.",
+   "cau_tu_soi": "Are you following because you trust that direction, or because you are afraid to decide for yourself?",
+   "linh_vuc": {
+    "cong_viec": "Support, operations, looking after customers; results come from staying the course.",
+    "tinh_cam": "Be generous and listen, but keep your own limits.",
+    "gia_dinh": "Keep the household's routines and nurture everyone — but do not carry it all alone.",
+    "tien_bac": "Build up savings steadily and safely; this is not the time for risk.",
+    "hoc_hanh": "Study the foundations patiently; learn from a good teacher."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 2 Kun (The Receptive) 坤 (judgement, Tuan commentary, Great Image)"
+  },
+  "3": {
+   "y_chinh": "Hardship at the start, like a sprout pushing up through soil; there is promise, but it is not yet time to travel far — find people to help you (it furthers to appoint helpers).",
+   "loi_khuyen": "Patiently set things in order from the root, find allies, and do not rush ahead alone.",
+   "mat_toi": "Giving up because the start is messy, or charging ahead before the ground is ready.",
+   "cau_tu_soi": "Is the current mess because the task is hard, or because you have not set your priorities yet?",
+   "linh_vuc": {
+    "cong_viec": "A start-up or new role: build the system and find people to back you.",
+    "tinh_cam": "A new relationship still feels unfamiliar; do not force it to move fast.",
+    "gia_dinh": "A new home, small children, lots of upheaval; divide the jobs clearly.",
+    "tien_bac": "High start-up costs; protect your cash flow.",
+    "hoc_hanh": "New to a hard subject; ask those who have gone before."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 3 Zhun (Difficult Beginnings) 屯 (judgement, Tuan commentary, Great Image)"
+  },
+  "4": {
+   "y_chinh": "Young and not yet clear; the judgement says: it is not I who seek the young fool, the young fool seeks me; the first question gets an answer, asking again and again is disrespectful.",
+   "loi_khuyen": "Admit what you do not know yet, find the right teacher and learn with discipline; do not ask the same question again hoping for a different answer.",
+   "mat_toi": "Assuming you already understand; or asking over and over to find the answer you want to hear.",
+   "cau_tu_soi": "Are you asking to understand, or to be told what you already want?",
+   "linh_vuc": {
+    "cong_viec": "A new position that needs learning on the job; humbly ask people who know the trade.",
+    "tinh_cam": "Still inexperienced; get to know each other before committing.",
+    "gia_dinh": "Teaching children takes patience and consistency.",
+    "tien_bac": "If you do not understand it yet, do not invest in it yet.",
+    "hoc_hanh": "Very good for study; choose your teacher and learn systematically."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 4 Meng (Youthful Folly) 蒙 (judgement, Tuan commentary, Great Image)"
+  },
+  "5": {
+   "y_chinh": "Waiting with trust (sincerity); clouds rise in the sky but the rain has not come; Great Image: eating, drinking and being at ease — keep up your strength while you wait.",
+   "loi_khuyen": "Wait for the right moment, prepare and save your energy; do not rush across the river while the water is still wild.",
+   "mat_toi": "Waiting passively, or growing impatient and spoiling the moment.",
+   "cau_tu_soi": "What exactly are you waiting for, and what have you prepared while you wait?",
+   "linh_vuc": {
+    "cong_viec": "Applications or results have not arrived; prepare a back-up plan.",
+    "tinh_cam": "Not the time yet; let the relationship grow naturally.",
+    "gia_dinh": "Family matters need time; do not force them.",
+    "tien_bac": "Do not rush to commit money; keep cash on hand.",
+    "hoc_hanh": "Revise steadily and wait for the exam with confidence."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 5 Xu (Waiting) 需 (judgement, Tuan commentary, Great Image)"
+  },
+  "6": {
+   "y_chinh": "Conflict; you have a case but feel blocked; stopping halfway brings good fortune, pushing it to the end brings trouble; it helps to see a fair judge (the great person), not to cross the great river.",
+   "loi_khuyen": "Look for mediation and end the dispute early; write a clear agreement from the start.",
+   "mat_toi": "Needing to win, dragging the argument out to save face.",
+   "cau_tu_soi": "What would winning this fight cost you — and are you willing to pay that price?",
+   "linh_vuc": {
+    "cong_viec": "Contract or colleague disputes; bring in a neutral third party.",
+    "tinh_cam": "Arguing about who is right; ask what each of you actually needs.",
+    "gia_dinh": "A family dispute; keep it inside the family.",
+    "tien_bac": "A money dispute; prefer mediation to going to court.",
+    "hoc_hanh": "Disagreeing with a teacher or classmate; talk it through on the facts."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 6 Song (Conflict) 訟 (judgement, Tuan commentary, Great Image)"
+  },
+  "7": {
+   "y_chinh": "The army, a large organised group; it goes well only under a rightful, experienced leader (the elder).",
+   "loi_khuyen": "Organise with discipline, keep a rightful goal, and hand authority to someone who has the trust of others.",
+   "mat_toi": "Using the group's strength for private ends; chaotic command.",
+   "cau_tu_soi": "Is your group following one clear leader, or are several people giving orders?",
+   "linh_vuc": {
+    "cong_viec": "Leading a team or a large project; assign roles and keep discipline.",
+    "tinh_cam": "You need to agree on shared 'rules of the game'.",
+    "gia_dinh": "The family needs a clear coordinator.",
+    "tien_bac": "A disciplined financial plan.",
+    "hoc_hanh": "Study in a group with a group leader."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 7 Shi (The Army) 師 (judgement, Tuan commentary, Great Image)"
+  },
+  "8": {
+   "y_chinh": "Closeness and union; look honestly into your own heart before you join; the one who comes too late meets misfortune.",
+   "loi_khuyen": "Choose the right people to bond with and reach out sincerely.",
+   "mat_toi": "Joining a clique for profit, or hesitating until the chance to connect is gone.",
+   "cau_tu_soi": "Are you tied to this group by shared values, or by fear of being left out?",
+   "linh_vuc": {
+    "cong_viec": "Cooperation and alliances; choose partners who share your values.",
+    "tinh_cam": "A time to grow close; take the first step, sincerely.",
+    "gia_dinh": "Relatives draw together; visit and keep in touch.",
+    "tien_bac": "Doing business together needs trust first.",
+    "hoc_hanh": "A study group suits you."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 8 Bi (Holding Together) 比 (judgement, Tuan commentary, Great Image)"
+  },
+  "9": {
+   "y_chinh": "Small accumulating; dense clouds but no rain yet; a small restraining force holds back a great one for now.",
+   "loi_khuyen": "Build up little by little and polish the small things (refinement); it is not yet time for the big achievement.",
+   "mat_toi": "Growing impatient at not seeing results and dropping it halfway.",
+   "cau_tu_soi": "Which small thing, done every day, will become your advantage later?",
+   "linh_vuc": {
+    "cong_viec": "Small improvements; build experience.",
+    "tinh_cam": "Nurture it bit by bit; not the moment for a big step.",
+    "gia_dinh": "Fix the small habits at home.",
+    "tien_bac": "Save small amounts regularly.",
+    "hoc_hanh": "Study one small part at a time."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 9 Xiao Xu (Small Taming) 小畜 (judgement, Tuan commentary, Great Image)"
+  },
+  "10": {
+   "y_chinh": "Treading on the tiger's tail and the tiger does not bite — be careful and keep good manners when near someone stronger.",
+   "loi_khuyen": "Walk with measure, know your place, be courteous yet steady.",
+   "mat_toi": "Recklessly overstepping your authority, or grovelling until you lose yourself.",
+   "cau_tu_soi": "Are you acting in keeping with your role in this situation?",
+   "linh_vuc": {
+    "cong_viec": "Working with a demanding boss; keep to the standards.",
+    "tinh_cam": "Respect each other's boundaries.",
+    "gia_dinh": "Show proper respect to your elders at home.",
+    "tien_bac": "Invest carefully, one step at a time.",
+    "hoc_hanh": "Learn by the rules and standards."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 10 Lu (Treading) 履 (judgement, Tuan commentary, Great Image)"
+  },
+  "11": {
+   "y_chinh": "Flowing through: heaven and earth meet, those above and below understand each other; the small departs, the great arrives.",
+   "loi_khuyen": "Use the favourable time to build foundations, and at the same time prepare for when it turns to 'standstill'.",
+   "mat_toi": "Complacency when everything is going smoothly.",
+   "cau_tu_soi": "What should you prepare now, in this good time, for the harder time later?",
+   "linh_vuc": {
+    "cong_viec": "Cooperation runs smoothly; expand with control.",
+    "tinh_cam": "In harmony; nurture it while things are good.",
+    "gia_dinh": "Peace at home; make time for each other.",
+    "tien_bac": "A good time; set up an emergency fund.",
+    "hoc_hanh": "Learning is effective; set a higher goal."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 11 Tai (Peace) 泰 (judgement, Tuan commentary, Great Image)"
+  },
+  "12": {
+   "y_chinh": "Standstill: heaven and earth do not meet, above and below do not communicate; the noble person holds back their gifts to avoid trouble and does not chase fame or profit.",
+   "loi_khuyen": "Draw back, keep your principles, do not force things; prepare for when the way opens.",
+   "mat_toi": "Pushing hard while things are blocked, or giving up your principles to get things done.",
+   "cau_tu_soi": "What can you hold firm right now, even if you cannot move forward?",
+   "linh_vuc": {
+    "cong_viec": "The environment is closed; keep up your quality and avoid conflict.",
+    "tinh_cam": "Two people struggling to understand each other; lower expectations, keep respect.",
+    "gia_dinh": "The mood at home is heavy; argue less.",
+    "tien_bac": "Tighten spending.",
+    "hoc_hanh": "Study quietly on your own."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 12 Pi (Standstill) 否 (judgement, Tuan commentary, Great Image)"
+  },
+  "13": {
+   "y_chinh": "Fellowship with people in the open field — fair-minded and open, it succeeds; cliques make it narrow.",
+   "loi_khuyen": "Look for common ground, cooperate openly, do not form factions.",
+   "mat_toi": "Only being close to people like yourself and shutting others out.",
+   "cau_tu_soi": "Who different from you are you opening up to?",
+   "linh_vuc": {
+    "cong_viec": "Cooperation across teams and communities.",
+    "tinh_cam": "Look for shared values.",
+    "gia_dinh": "Bring the extended family together.",
+    "tien_bac": "Pool money transparently.",
+    "hoc_hanh": "Open study groups."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 13 Tong Ren (Fellowship) 同人 (judgement, Tuan commentary, Great Image)"
+  },
+  "14": {
+   "y_chinh": "Great possession: having much, with clear sight at the top; Great Image: curb what is bad, promote what is good.",
+   "loi_khuyen": "Use your abundance to do good and stay modest.",
+   "mat_toi": "Showing off and wasting.",
+   "cau_tu_soi": "What are you using what you have to serve?",
+   "linh_vuc": {
+    "cong_viec": "Good results; share the credit.",
+    "tinh_cam": "A full happiness; do not take it for granted.",
+    "gia_dinh": "A comfortable household; keep simple habits.",
+    "tien_bac": "You have means; invest responsibly.",
+    "hoc_hanh": "Good results; keep being modest."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 14 Da You (Great Possession) 大有 (judgement, Tuan commentary, Great Image)"
+  },
+  "15": {
+   "y_chinh": "Modesty brings success, and the noble person carries things through to a good end; take from where there is too much and add where there is too little.",
+   "loi_khuyen": "Be modest without selling yourself short; do much and say little.",
+   "mat_toi": "False modesty to be praised, or low self-esteem.",
+   "cau_tu_soi": "Does your modesty come from the heart, or from fear of being noticed?",
+   "linh_vuc": {
+    "cong_viec": "Promotion through a quiet reputation.",
+    "tinh_cam": "Give way just enough.",
+    "gia_dinh": "Harmony comes from yielding at the right moments.",
+    "tien_bac": "Spend in moderation.",
+    "hoc_hanh": "Learn from everyone."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 15 Qian (Modesty) 謙 (judgement, Tuan commentary, Great Image)"
+  },
+  "16": {
+   "y_chinh": "Enthusiasm, readiness; it helps to install leaders and set the troops marching.",
+   "loi_khuyen": "Spark shared enthusiasm and prepare in advance; avoid getting carried away.",
+   "mat_toi": "Too busy having fun to prepare.",
+   "cau_tu_soi": "Is this enthusiasm matched by preparation?",
+   "linh_vuc": {
+    "cong_viec": "Launch a project with team spirit.",
+    "tinh_cam": "Shared joy; do not keep it on the surface.",
+    "gia_dinh": "Organise a family occasion.",
+    "tien_bac": "Avoid spending on impulse.",
+    "hoc_hanh": "Learn through what interests you."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 16 Yu (Enthusiasm) 豫 (judgement, Tuan commentary, Great Image)"
+  },
+  "17": {
+   "y_chinh": "Following: move with the times and follow what is right; staying upright keeps you free of blame.",
+   "loi_khuyen": "Adapt flexibly, but follow only what is rightful.",
+   "mat_toi": "Following the crowd blindly.",
+   "cau_tu_soi": "Are you following because you believe, or because it is convenient?",
+   "linh_vuc": {
+    "cong_viec": "Adapt to organisational change.",
+    "tinh_cam": "Go with the other person's rhythm while staying yourself.",
+    "gia_dinh": "Listen to your loved ones.",
+    "tien_bac": "Follow trends that have been tested.",
+    "hoc_hanh": "Follow the path of people who are good at it."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 17 Sui (Following) 隨 (judgement, Tuan commentary, Great Image)"
+  },
+  "18": {
+   "y_chinh": "Work on what has decayed (repairing what the parents left spoiled); think it over three days before and three days after.",
+   "loi_khuyen": "Find the root of the decay, repair it with a plan, and do not blame.",
+   "mat_toi": "Covering up the old problem or fixing it in a hurry.",
+   "cau_tu_soi": "What are you avoiding fixing because 'it has always been like this'?",
+   "linh_vuc": {
+    "cong_viec": "Restructuring; clearing the backlog.",
+    "tinh_cam": "Healing old wounds.",
+    "gia_dinh": "Settling a family matter that has dragged on.",
+    "tien_bac": "Dealing with old debts.",
+    "hoc_hanh": "Filling the gaps in your basic knowledge."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 18 Gu (Repairing Decay) 蠱 (judgement, Tuan commentary, Great Image)"
+  },
+  "19": {
+   "y_chinh": "Approaching, growing strong, overseeing; it is good, but 'in the eighth month there will be misfortune' — a peak does not last for ever.",
+   "loi_khuyen": "Use the momentum of growth, stay close to the people under you, and remember the time is limited.",
+   "mat_toi": "Getting careless while on the rise.",
+   "cau_tu_soi": "If this good run stops in a few months, what have you prepared?",
+   "linh_vuc": {
+    "cong_viec": "Given a management role; listen to your team.",
+    "tinh_cam": "The relationship is moving forward; stay sincere.",
+    "gia_dinh": "Keep a close, caring eye on the children.",
+    "tien_bac": "Income is rising; set some aside.",
+    "hoc_hanh": "Fast progress; keep it up."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 19 Lin (Approach) 臨 (judgement, Tuan commentary, Great Image)"
+  },
+  "20": {
+   "y_chinh": "Contemplation; those above set an example for those below to see.",
+   "loi_khuyen": "Stop and look at the whole picture, and look at yourself, before you act.",
+   "mat_toi": "Only watching from the sidelines, or watching others without looking at yourself.",
+   "cau_tu_soi": "If others looked at you right now, what would they learn?",
+   "linh_vuc": {
+    "cong_viec": "Assessment and market research.",
+    "tinh_cam": "Observe carefully before committing.",
+    "gia_dinh": "Set an example for your children.",
+    "tien_bac": "Research before putting money in.",
+    "hoc_hanh": "Learn by observing."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 20 Guan (Contemplation) 觀 (judgement, Tuan commentary, Great Image)"
+  },
+  "21": {
+   "y_chinh": "Biting through: something is caught between the teeth and must be bitten through; it helps to apply the law — make the rules clear.",
+   "loi_khuyen": "Deal with the obstacle decisively and fairly, with clear rules.",
+   "mat_toi": "Being too heavy-handed, or avoiding dealing with it.",
+   "cau_tu_soi": "Which specific obstacle needs to be named and dealt with now?",
+   "linh_vuc": {
+    "cong_viec": "Discipline, dealing with violations, untying the knot.",
+    "tinh_cam": "Say plainly what is standing between the two of you.",
+    "gia_dinh": "Set clear house rules.",
+    "tien_bac": "Collect what you are owed and stop the leaks.",
+    "hoc_hanh": "Tackle the hardest part first."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 21 Shi He (Biting Through) 噬嗑 (judgement, Tuan commentary, Great Image)"
+  },
+  "22": {
+   "y_chinh": "Grace, adornment; small success, good for small matters.",
+   "loi_khuyen": "Take just enough care with appearance to lift the substance.",
+   "mat_toi": "Form taking over from substance.",
+   "cau_tu_soi": "Does the image you are investing in truly reflect what is underneath?",
+   "linh_vuc": {
+    "cong_viec": "Branding and presentation; do not just polish the surface.",
+    "tinh_cam": "Take care of each other, but sincerely.",
+    "gia_dinh": "Decorate the house in moderation.",
+    "tien_bac": "Spend moderately on looks.",
+    "hoc_hanh": "Present well, but know your content."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 22 Bi (Grace) 賁 (judgement, Tuan commentary, Great Image)"
+  },
+  "23": {
+   "y_chinh": "Splitting apart: the yin encroaches on the yang and the base is being worn away; it does not help to go anywhere.",
+   "loi_khuyen": "Stop expanding, protect your foundations and wait for the tide to turn.",
+   "mat_toi": "Trying to act when the base is already weak.",
+   "cau_tu_soi": "What is quietly wearing you down that you have not stopped yet?",
+   "linh_vuc": {
+    "cong_viec": "The organisation is in decline; protect your abilities.",
+    "tinh_cam": "The relationship is fading; have an honest conversation.",
+    "gia_dinh": "Home routines are slipping; strengthen the roots.",
+    "tien_bac": "Cut your losses, keep your capital.",
+    "hoc_hanh": "Strengthen the basics."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 23 Bo (Splitting Apart) 剝 (judgement, Tuan commentary, Great Image)"
+  },
+  "24": {
+   "y_chinh": "Return: one yang line is born beneath five yin; going out and coming back without fault, it returns in seven days.",
+   "loi_khuyen": "Start again with small steps, correct mistakes early and come back to what is right.",
+   "mat_toi": "Repeating the old mistake and calling it a 'fresh start'.",
+   "cau_tu_soi": "What are you returning to — and how is it different from last time?",
+   "linh_vuc": {
+    "cong_viec": "Recovering after a setback; start again with the lessons learned.",
+    "tinh_cam": "Healing; start again slowly.",
+    "gia_dinh": "Visit and reconnect.",
+    "tien_bac": "Rebuild your finances step by step.",
+    "hoc_hanh": "Go back over the basics."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 24 Fu (Return) 復 (judgement, Tuan commentary, Great Image)"
+  },
+  "25": {
+   "y_chinh": "Innocence: in tune with the way of heaven and sincere, it succeeds; going against what is right brings trouble.",
+   "loi_khuyen": "Act honestly, without scheming, and accept the unexpected.",
+   "mat_toi": "Scheming, hoping for more than your effort deserves.",
+   "cau_tu_soi": "Are you hoping for a result you have not really sown?",
+   "linh_vuc": {
+    "cong_viec": "Do the right job; do not take shortcuts.",
+    "tinh_cam": "Be sincere, not calculating.",
+    "gia_dinh": "Be honest with your family.",
+    "tien_bac": "Avoid hoping to get rich quickly.",
+    "hoc_hanh": "Study for real; no cheating."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 25 Wu Wang (Innocence) 無妄 (judgement, Tuan commentary, Great Image)"
+  },
+  "26": {
+   "y_chinh": "Great taming: nurture the worthy and learn the good words and deeds of those before you; not eating at home brings good fortune (go out and serve).",
+   "loi_khuyen": "Build up deeply and hold your strength in check to use it at the right time.",
+   "mat_toi": "Storing up for ever and never using it.",
+   "cau_tu_soi": "Have you built up enough to step out and serve something bigger?",
+   "linh_vuc": {
+    "cong_viec": "Training and preparing for a bigger role.",
+    "tinh_cam": "Nurture a long-term relationship.",
+    "gia_dinh": "Build up reserves for the family.",
+    "tien_bac": "Save for a big goal.",
+    "hoc_hanh": "Study deeply and read widely."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 26 Da Xu (Great Taming) 大畜 (judgement, Tuan commentary, Great Image)"
+  },
+  "27": {
+   "y_chinh": "Nourishment: look at what you nourish and how you feed yourself; be careful with words and moderate in eating and drinking.",
+   "loi_khuyen": "Pay attention to what nourishes your body and mind, and to what you say.",
+   "mat_toi": "Feeding greed and desire, or living off others.",
+   "cau_tu_soi": "What are you nourishing in yourself every day?",
+   "linh_vuc": {
+    "cong_viec": "Work that cares for and nourishes others.",
+    "tinh_cam": "Nourish each other with kind words.",
+    "gia_dinh": "Family meals together.",
+    "tien_bac": "Spend on what nourishes you in the long run.",
+    "hoc_hanh": "Choose healthy sources to learn from."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 27 Yi (Nourishment) 頤 (judgement, Tuan commentary, Great Image)"
+  },
+  "28": {
+   "y_chinh": "Great excess: the ridgepole sags in the middle — the weight is more than it can bear; it helps to have somewhere to go — action is needed.",
+   "loi_khuyen": "Recognise that you are overloaded and dare to make a big change, with careful planning.",
+   "mat_toi": "Carrying the load until you break.",
+   "cau_tu_soi": "What in your life is carrying too much weight, and what do you need to put down?",
+   "linh_vuc": {
+    "cong_viec": "Overloaded; redistribute the work.",
+    "tinh_cam": "A strained relationship; a big change is needed.",
+    "gia_dinh": "A heavy family burden; share it.",
+    "tien_bac": "Debt beyond your means; restructure.",
+    "hoc_hanh": "Too many subjects at once; cut back."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 28 Da Guo (Great Excess) 大過 (judgement, Tuan commentary, Great Image)"
+  },
+  "29": {
+   "y_chinh": "Danger upon danger; keep your sincerity and your heart stays clear, like water that flows on without losing its trust.",
+   "loi_khuyen": "Go through the danger with steadiness and honesty, one step at a time.",
+   "mat_toi": "Panicking, or getting used to the danger.",
+   "cau_tu_soi": "What helps you hold steady in this hard time?",
+   "linh_vuc": {
+    "cong_viec": "One difficulty after another; keep your principles.",
+    "tinh_cam": "A test of trust.",
+    "gia_dinh": "The family is going through a hard time; stay together.",
+    "tien_bac": "Risky; keep things safe.",
+    "hoc_hanh": "A hard term; keep going."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 29 Kan (The Abyss) 坎 (judgement, Tuan commentary, Great Image)"
+  },
+  "30": {
+   "y_chinh": "Brightness that clings: fire needs something to cling to in order to shine; caring for the cow (gentle virtue) brings good fortune.",
+   "loi_khuyen": "Hold on to what is right, see clearly, and nurture gentleness inside.",
+   "mat_toi": "Depending on the wrong thing; burning fast and going out fast.",
+   "cau_tu_soi": "What are you relying on — and will it last?",
+   "linh_vuc": {
+    "cong_viec": "Work that needs clarity and communication.",
+    "tinh_cam": "Close but not dependent.",
+    "gia_dinh": "Keep the family warm.",
+    "tien_bac": "Keep your finances transparent.",
+    "hoc_hanh": "Study to understand clearly."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 30 Li (The Clinging Fire) 離 (judgement, Tuan commentary, Great Image)"
+  },
+  "31": {
+   "y_chinh": "Influence: attraction between man and woman, taking a wife brings good fortune; meet others with an open, empty heart.",
+   "loi_khuyen": "Open your heart, receive sincerely, do not impose.",
+   "mat_toi": "A passing thrill, surface emotion.",
+   "cau_tu_soi": "Are you truly listening, or just waiting for your turn to speak?",
+   "linh_vuc": {
+    "cong_viec": "Connect with customers through understanding.",
+    "tinh_cam": "A time of attraction; be sincere.",
+    "gia_dinh": "Understand your loved ones.",
+    "tien_bac": "Investments driven by feeling need checking.",
+    "hoc_hanh": "Learn through inspiration."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 31 Xian (Influence) 咸 (judgement, Tuan commentary, Great Image)"
+  },
+  "32": {
+   "y_chinh": "Duration: success, no blame, it helps to keep upright; the noble person stands firm and does not change direction.",
+   "loi_khuyen": "Stay steady in what is right and keep up good habits.",
+   "mat_toi": "Being rigid, persisting in what is wrong.",
+   "cau_tu_soi": "Which habit are you keeping only out of habit, not because it is right?",
+   "linh_vuc": {
+    "cong_viec": "Stay for the long run and build a reputation.",
+    "tinh_cam": "A marriage lasts through commitment.",
+    "gia_dinh": "A stable household routine.",
+    "tien_bac": "Regular long-term investing.",
+    "hoc_hanh": "Study a little every day."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 32 Heng (Duration) 恆 (judgement, Tuan commentary, Great Image)"
+  },
+  "33": {
+   "y_chinh": "Retreat: petty forces are growing and the noble person knows when to withdraw; small matters do well if you keep upright.",
+   "loi_khuyen": "Step back on purpose to save your strength and your principles — it is not running away.",
+   "mat_toi": "Clinging on in a losing position, or retreating out of fear.",
+   "cau_tu_soi": "Are you stepping back to protect yourself, or to avoid something you need to face?",
+   "linh_vuc": {
+    "cong_viec": "Leave a toxic project or environment, with a plan.",
+    "tinh_cam": "Step back to give each other room to breathe.",
+    "gia_dinh": "Avoid head-on clashes.",
+    "tien_bac": "Pull money out of risky places.",
+    "hoc_hanh": "Step back for now to consolidate."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 33 Dun (Retreat) 遯 (judgement, Tuan commentary, Great Image)"
+  },
+  "34": {
+   "y_chinh": "Great power: the yang is at its height; it helps to keep upright; the noble person does not follow what is improper.",
+   "loi_khuyen": "Use your strength with restraint and good form.",
+   "mat_toi": "Aggression — butting ahead like a ram charging a fence.",
+   "cau_tu_soi": "Is the strength you have right now serving something right?",
+   "linh_vuc": {
+    "cong_viec": "You have momentum; avoid overpowering others.",
+    "tinh_cam": "Strong yet gentle.",
+    "gia_dinh": "Do not use your authority to impose.",
+    "tien_bac": "Things are rising; do not borrow too heavily.",
+    "hoc_hanh": "Study with energy, but keep a steady pace."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 34 Da Zhuang (Great Power) 大壯 (judgement, Tuan commentary, Great Image)"
+  },
+  "35": {
+   "y_chinh": "Progress like the sun rising over the earth; you are given trust and responsibility; let your own virtue shine.",
+   "loi_khuyen": "Advance through real ability and a clear conscience.",
+   "mat_toi": "Advancing at any cost, competing.",
+   "cau_tu_soi": "Will this promotion make you better, or only higher?",
+   "linh_vuc": {
+    "cong_viec": "Promotion, recognition.",
+    "tinh_cam": "The relationship is moving forward positively.",
+    "gia_dinh": "Harmony at home.",
+    "tien_bac": "Income is rising.",
+    "hoc_hanh": "Clear progress."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 35 Jin (Progress) 晉 (judgement, Tuan commentary, Great Image)"
+  },
+  "36": {
+   "y_chinh": "The light is wounded: a dark time; it helps to keep upright through hardship, hiding your light while it still shines inside.",
+   "loi_khuyen": "Keep your principles quietly, protect yourself and wait for the right time.",
+   "mat_toi": "Showing off when you are under pressure, or letting go of your principles.",
+   "cau_tu_soi": "What inside you needs to stay bright even when things around you are dark?",
+   "linh_vuc": {
+    "cong_viec": "An unfavourable environment; do good work and avoid confrontation.",
+    "tinh_cam": "Hurt; look after yourself first.",
+    "gia_dinh": "Bearing a hard time together.",
+    "tien_bac": "Scale down and protect your capital.",
+    "hoc_hanh": "Study quietly."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 36 Ming Yi (Darkening of the Light) 明夷 (judgement, Tuan commentary, Great Image)"
+  },
+  "37": {
+   "y_chinh": "The family: it helps the woman to keep upright; a household with clear roles, words that have substance, actions that have order.",
+   "loi_khuyen": "Strengthen the household routines, keep roles clear, and let your actions match your words.",
+   "mat_toi": "Being domineering, or letting everything slide.",
+   "cau_tu_soi": "In your home, which promise has not yet been matched by action?",
+   "linh_vuc": {
+    "cong_viec": "A team culture that feels like family.",
+    "tinh_cam": "Build a shared way of living.",
+    "gia_dinh": "Very good for family matters.",
+    "tien_bac": "Manage household spending.",
+    "hoc_hanh": "Study with good habits."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 37 Jia Ren (The Family) 家人 (judgement, Tuan commentary, Great Image)"
+  },
+  "38": {
+   "y_chinh": "Opposition, things pulling apart: two people under one roof with different aims; small matters go well.",
+   "loi_khuyen": "Accept the differences, find small common ground and cooperate on small things.",
+   "mat_toi": "Trying to force others to be like you, or cutting them off.",
+   "cau_tu_soi": "What small common ground still exists between you and the person you disagree with?",
+   "linh_vuc": {
+    "cong_viec": "Different views; find a small task to do together.",
+    "tinh_cam": "Differences; understand rather than correct.",
+    "gia_dinh": "Tension between generations.",
+    "tien_bac": "Disagreement over shared money; keep things separate.",
+    "hoc_hanh": "Learn from a different point of view."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 38 Kui (Opposition) 睽 (judgement, Tuan commentary, Great Image)"
+  },
+  "39": {
+   "y_chinh": "Obstruction, like a lame foot before a dangerous mountain; the south-west is favourable, the north-east is not; it helps to see the great person; turn back and look at yourself.",
+   "loi_khuyen": "Stop and examine yourself, find someone to help, and take the safe way round.",
+   "mat_toi": "Charging straight into the danger.",
+   "cau_tu_soi": "Could this obstacle be pointing to something you need to fix in yourself?",
+   "linh_vuc": {
+    "cong_viec": "A stalled project; ask for advice.",
+    "tinh_cam": "A rocky relationship; slow down.",
+    "gia_dinh": "Hard times at home; sit down together.",
+    "tien_bac": "Money difficulties; look for support.",
+    "hoc_hanh": "A hard part; ask your teacher."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 39 Jian (Obstruction) 蹇 (judgement, Tuan commentary, Great Image)"
+  },
+  "40": {
+   "y_chinh": "Deliverance: the trouble has passed, the south-west is favourable; if there is nothing left to do, return; if there is, do it early; forgive mistakes and lighten punishment.",
+   "loi_khuyen": "Settle things quickly and completely, forgive, and go back to normal.",
+   "mat_toi": "Letting the aftermath drag on, holding on to grudges.",
+   "cau_tu_soi": "What is already over that you are still holding on to?",
+   "linh_vuc": {
+    "cong_viec": "Untie the knot; get things running again.",
+    "tinh_cam": "Forgive and make up.",
+    "gia_dinh": "Make peace at home.",
+    "tien_bac": "Pay off the small debts for good.",
+    "hoc_hanh": "You get through the hard part."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 40 Xie (Deliverance) 解 (judgement, Tuan commentary, Great Image)"
+  },
+  "41": {
+   "y_chinh": "Decrease: take from below to add above; with sincerity, even two simple bowls are enough as an offering.",
+   "loi_khuyen": "Hold back, cut what is excess, and give with purpose.",
+   "mat_toi": "Sacrificing too much, or being stingy.",
+   "cau_tu_soi": "What do you need to cut back to make room for what matters?",
+   "linh_vuc": {
+    "cong_viec": "Cut costs and unnecessary work.",
+    "tinh_cam": "Ask for less.",
+    "gia_dinh": "Ease conflict by giving way.",
+    "tien_bac": "Tighten the belt, spend less.",
+    "hoc_hanh": "Stop studying everything at once."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 41 Sun (Decrease) 損 (judgement, Tuan commentary, Great Image)"
+  },
+  "42": {
+   "y_chinh": "Increase: take from above to add below; it helps to have somewhere to go and to cross the great river; when you see good, follow it; when you have a fault, correct it.",
+   "loi_khuyen": "Seize the time of growth and help others rise with you.",
+   "mat_toi": "Grabbing too much and forgetting to share.",
+   "cau_tu_soi": "What good thing have you seen but not yet followed?",
+   "linh_vuc": {
+    "cong_viec": "Expansion, with support.",
+    "tinh_cam": "Build each other up.",
+    "gia_dinh": "Help your relatives.",
+    "tien_bac": "A time of increase; invest in what grows.",
+    "hoc_hanh": "Fast progress in study."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 42 Yi (Increase) 益 (judgement, Tuan commentary, Great Image)"
+  },
+  "43": {
+   "y_chinh": "Breakthrough: remove what is petty; announce it openly at court, honestly warn of the danger; it does not help to take up arms.",
+   "loi_khuyen": "Be decisive and open, and do not use force.",
+   "mat_toi": "Rushing, deciding without preparation.",
+   "cau_tu_soi": "Which decision is already clear to you but still not announced?",
+   "linh_vuc": {
+    "cong_viec": "Make a clear, open decision.",
+    "tinh_cam": "Say clearly what needs to end.",
+    "gia_dinh": "Set firm limits.",
+    "tien_bac": "Cut the losing position.",
+    "hoc_hanh": "Drop a bad habit."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 43 Guai (Breakthrough) 夬 (judgement, Tuan commentary, Great Image)"
+  },
+  "44": {
+   "y_chinh": "Coming to meet: one yin meets five yang; do not marry that woman (a small influence that keeps growing).",
+   "loi_khuyen": "Be alert to small influences slipping in; meet people, but keep yourself.",
+   "mat_toi": "Letting a small temptation grow.",
+   "cau_tu_soi": "Is there a small influence you are letting in that you know you should not?",
+   "linh_vuc": {
+    "cong_viec": "An unexpected opportunity; check it carefully.",
+    "tinh_cam": "An unexpected meeting; slow down before committing.",
+    "gia_dinh": "Watch out for small things growing into big ones.",
+    "tien_bac": "An attractive opportunity; do your due diligence.",
+    "hoc_hanh": "Avoid new distractions."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 44 Gou (Coming to Meet) 姤 (judgement, Tuan commentary, Great Image)"
+  },
+  "45": {
+   "y_chinh": "Gathering: the king goes to the ancestral temple, it helps to see the great person; a great offering brings good fortune; keep your tools ready for the unexpected.",
+   "loi_khuyen": "Gather people around a shared goal, with a leader, and prepare for surprises.",
+   "mat_toi": "Gathering a crowd without organising it.",
+   "cau_tu_soi": "What connects the people around you?",
+   "linh_vuc": {
+    "cong_viec": "Meetings, pooling resources.",
+    "tinh_cam": "Introductions, meeting both families.",
+    "gia_dinh": "Family reunions.",
+    "tien_bac": "Pool money with discipline.",
+    "hoc_hanh": "Study in a group with a goal."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 45 Cui (Gathering) 萃 (judgement, Tuan commentary, Great Image)"
+  },
+  "46": {
+   "y_chinh": "Pushing upward: like a tree growing out of the earth, small things building into big ones; see the great person, do not worry; heading south brings good fortune.",
+   "loi_khuyen": "Rise steadily, one step at a time, with the help of someone respected.",
+   "mat_toi": "Rushing to skip steps.",
+   "cau_tu_soi": "What is the smallest next step you can take?",
+   "linh_vuc": {
+    "cong_viec": "Gradual promotion.",
+    "tinh_cam": "The relationship grows.",
+    "gia_dinh": "The family grows.",
+    "tien_bac": "Steady growth.",
+    "hoc_hanh": "Moving up step by step in your studies."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 46 Sheng (Pushing Upward) 升 (judgement, Tuan commentary, Great Image)"
+  },
+  "47": {
+   "y_chinh": "Oppression: the lake has run dry; you speak and no one believes you; the great person who keeps upright still meets good fortune.",
+   "loi_khuyen": "Keep your resolve, talk less and let your actions show; save your energy.",
+   "mat_toi": "Complaining, trying hard to convince people.",
+   "cau_tu_soi": "In this tight spot, what can you still hold on to?",
+   "linh_vuc": {
+    "cong_viec": "Resources are blocked; focus on the core work.",
+    "tinh_cam": "Misunderstandings; actions rather than words.",
+    "gia_dinh": "A shared hardship; stay united.",
+    "tien_bac": "Running dry; save as much as you can.",
+    "hoc_hanh": "Studying in difficult circumstances."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 47 Kun (Oppression) 困 (judgement, Tuan commentary, Great Image)"
+  },
+  "48": {
+   "y_chinh": "The well: the town changes but the well does not; a shared source that feeds everyone; if the rope does not reach and the bucket breaks, that is misfortune.",
+   "loi_khuyen": "Look after the shared source, maintain it, and see the job through.",
+   "mat_toi": "Giving up just before it is finished; letting the source get polluted.",
+   "cau_tu_soi": "What is your long-term source of nourishment, and are you looking after it?",
+   "linh_vuc": {
+    "cong_viec": "Infrastructure and core processes.",
+    "tinh_cam": "Keep the original values of the relationship.",
+    "gia_dinh": "Keep good traditions.",
+    "tien_bac": "A stable source of income.",
+    "hoc_hanh": "Your foundation of knowledge."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 48 Jing (The Well) 井 (judgement, Tuan commentary, Great Image)"
+  },
+  "49": {
+   "y_chinh": "Revolution: on the right day you are believed; success, it helps to keep upright, and regret disappears.",
+   "loi_khuyen": "Change things when the time is ripe and people trust you; prepare well.",
+   "mat_toi": "Changing for the sake of change, in a hurry.",
+   "cau_tu_soi": "Is the change you want ripe enough, and do enough people trust it?",
+   "linh_vuc": {
+    "cong_viec": "Reorganising, changing jobs with preparation.",
+    "tinh_cam": "Change the way you live together.",
+    "gia_dinh": "Change old habits that no longer fit.",
+    "tien_bac": "Change your financial strategy.",
+    "hoc_hanh": "Change your study method."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 49 Ge (Revolution) 革 (judgement, Tuan commentary, Great Image)"
+  },
+  "50": {
+   "y_chinh": "The cauldron: cooking to honour the worthy; the new becomes stable; very good, success.",
+   "loi_khuyen": "Stabilise the new, nurture talent, and keep the right position.",
+   "mat_toi": "The cauldron's leg breaks — taking on more than you can carry.",
+   "cau_tu_soi": "What talent (yours or someone else's) are you nurturing?",
+   "linh_vuc": {
+    "cong_viec": "Build the organisation; value talented people.",
+    "tinh_cam": "Nurture shared values.",
+    "gia_dinh": "Settle into new household routines.",
+    "tien_bac": "Stable assets.",
+    "hoc_hanh": "Learn from a good teacher."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 50 Ding (The Cauldron) 鼎 (judgement, Tuan commentary, Great Image)"
+  },
+  "51": {
+   "y_chinh": "Thunder: first fear, then laughter and talk; the thunder roars for a hundred miles, yet the sacrificial ladle is not dropped.",
+   "loi_khuyen": "Stay calm through the upheaval; examine and correct yourself.",
+   "mat_toi": "Panicking, or being careless.",
+   "cau_tu_soi": "What is this shock reminding you to look at again?",
+   "linh_vuc": {
+    "cong_viec": "Sudden upheaval; stay calm.",
+    "tinh_cam": "Stormy times; get through them together.",
+    "gia_dinh": "Something unexpected at home.",
+    "tien_bac": "The market is volatile; do not panic.",
+    "hoc_hanh": "A surprise exam; keep calm."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 51 Zhen (Arousing Thunder) 震 (judgement, Tuan commentary, Great Image)"
+  },
+  "52": {
+   "y_chinh": "Keeping still: stopping at the back, not seeing the body; walking in the courtyard without seeing anyone; no blame.",
+   "loi_khuyen": "Stop at the right moment, quiet your mind, and keep your thoughts within your own place.",
+   "mat_toi": "Stopping until you are stuck.",
+   "cau_tu_soi": "What do you need to stop today?",
+   "linh_vuc": {
+    "cong_viec": "Pause and assess.",
+    "tinh_cam": "A necessary quiet spell.",
+    "gia_dinh": "Interfere less.",
+    "tien_bac": "Stop new spending.",
+    "hoc_hanh": "Rest to let things sink in."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 52 Gen (Keeping Still) 艮 (judgement, Tuan commentary, Great Image)"
+  },
+  "53": {
+   "y_chinh": "Gradual progress, like a wild goose flying stage by stage; a woman marrying into her husband's home brings good fortune.",
+   "loi_khuyen": "Move forward in order, without skipping stages.",
+   "mat_toi": "Impatience.",
+   "cau_tu_soi": "Which step in the sequence are you skipping?",
+   "linh_vuc": {
+    "cong_viec": "Promotion along a clear path.",
+    "tinh_cam": "Love that grows slowly but surely.",
+    "gia_dinh": "Prepare the wedding properly, step by step.",
+    "tien_bac": "Build up gradually.",
+    "hoc_hanh": "Study level by level."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 53 Jian (Gradual Progress) 漸 (judgement, Tuan commentary, Great Image)"
+  },
+  "54": {
+   "y_chinh": "The marrying maiden enters her husband's home in a secondary position; going forward brings misfortune, nothing is gained.",
+   "loi_khuyen": "See your position and limits clearly, and do not put yourself at a disadvantage.",
+   "mat_toi": "Accepting a lesser role because you are in a hurry.",
+   "cau_tu_soi": "Are you accepting a position beneath you because you are afraid of missing out?",
+   "linh_vuc": {
+    "cong_viec": "An unclear position; clarify your role first.",
+    "tinh_cam": "An unequal relationship; it needs balancing.",
+    "gia_dinh": "Your place in a new family.",
+    "tien_bac": "Do not rush to commit.",
+    "hoc_hanh": "Choose the right level."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 54 Gui Mei (The Marrying Maiden) 歸妹 (judgement, Tuan commentary, Great Image)"
+  },
+  "55": {
+   "y_chinh": "Abundance: the king reaches it; do not worry, be like the sun at noon — but after noon the sun begins to set.",
+   "loi_khuyen": "Enjoy and share the time of abundance, and prepare for the decline.",
+   "mat_toi": "Complacency at the top.",
+   "cau_tu_soi": "While you are at the peak, what are you preparing for the way down?",
+   "linh_vuc": {
+    "cong_viec": "A peak of success; plan for the long term.",
+    "tinh_cam": "Full happiness; take care of it.",
+    "gia_dinh": "A comfortable family.",
+    "tien_bac": "Plenty; keep a reserve.",
+    "hoc_hanh": "High results."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 55 Feng (Abundance) 豐 (judgement, Tuan commentary, Great Image)"
+  },
+  "56": {
+   "y_chinh": "The wanderer: small success; keeping upright on the road brings good fortune.",
+   "loi_khuyen": "In a strange place, be careful, modest and travel light.",
+   "mat_toi": "Arrogance in a foreign place, or feeling lost.",
+   "cau_tu_soi": "In this 'temporary' place, what of yourself do you need to keep?",
+   "linh_vuc": {
+    "cong_viec": "Business trips, working far away, temporary jobs.",
+    "tinh_cam": "Long-distance love, a temporary relationship.",
+    "gia_dinh": "Away from home; stay in touch.",
+    "tien_bac": "Keep spending tight when away.",
+    "hoc_hanh": "Studying abroad or in a new place."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 56 Lu (The Wanderer) 旅 (judgement, Tuan commentary, Great Image)"
+  },
+  "57": {
+   "y_chinh": "Wind: gentle penetration, small success; it helps to see the great person; repeat the instructions so they sink in.",
+   "loi_khuyen": "Act gently, steadily and repeatedly; understand before you act.",
+   "mat_toi": "Hesitating, agreeing with everyone.",
+   "cau_tu_soi": "Are you repeating your message with enough patience?",
+   "linh_vuc": {
+    "cong_viec": "Persuasion, soft negotiation.",
+    "tinh_cam": "Gently, little by little.",
+    "gia_dinh": "Give feedback gently and regularly.",
+    "tien_bac": "Small, regular investments.",
+    "hoc_hanh": "Learn by repetition."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 57 Xun (The Gentle Wind) 巽 (judgement, Tuan commentary, Great Image)"
+  },
+  "58": {
+   "y_chinh": "Joy, the lake: success, it helps to keep upright; friends study and practise together.",
+   "loi_khuyen": "Share joy, talk things through, learn with friends.",
+   "mat_toi": "Surface cheerfulness, flattery.",
+   "cau_tu_soi": "Where does your joy come from — and will it last?",
+   "linh_vuc": {
+    "cong_viec": "Communication, sales, a cheerful team.",
+    "tinh_cam": "Shared joy.",
+    "gia_dinh": "A happy mood at home.",
+    "tien_bac": "Avoid spending just for fun.",
+    "hoc_hanh": "Study with friends."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 58 Dui (The Joyous Lake) 兌 (judgement, Tuan commentary, Great Image)"
+  },
+  "59": {
+   "y_chinh": "Dispersion: the king goes to the ancestral temple; it helps to cross the great river — gather people again through a shared trust.",
+   "loi_khuyen": "Melt the rigidity and gather people around shared values.",
+   "mat_toi": "Letting everything drift away.",
+   "cau_tu_soi": "What could bring people together right now?",
+   "linh_vuc": {
+    "cong_viec": "A team falling apart; reunite it around a goal.",
+    "tinh_cam": "Distance; find your common ground again.",
+    "gia_dinh": "A scattered family; get together.",
+    "tien_bac": "Scattered money; bring it together.",
+    "hoc_hanh": "Refocus."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 59 Huan (Dispersion) 渙 (judgement, Tuan commentary, Great Image)"
+  },
+  "60": {
+   "y_chinh": "Limitation: success; but limits that are too harsh cannot be kept for long.",
+   "loi_khuyen": "Set reasonable, moderate limits.",
+   "mat_toi": "Being too strict, or having no limits.",
+   "cau_tu_soi": "Which of your limits is too loose — or too tight?",
+   "linh_vuc": {
+    "cong_viec": "Discipline with budget and time.",
+    "tinh_cam": "Healthy boundaries.",
+    "gia_dinh": "Moderate rules.",
+    "tien_bac": "Sensible saving.",
+    "hoc_hanh": "A study schedule you can keep up."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 60 Jie (Limitation) 節 (judgement, Tuan commentary, Great Image)"
+  },
+  "61": {
+   "y_chinh": "Inner truth: sincerity that reaches even pigs and fishes; it helps to cross the great river.",
+   "loi_khuyen": "Keep your word and win people over through sincerity.",
+   "mat_toi": "Blind trust.",
+   "cau_tu_soi": "Which promise do you need to keep for trust to be whole?",
+   "linh_vuc": {
+    "cong_viec": "Your reputation is an asset.",
+    "tinh_cam": "Trust each other sincerely.",
+    "gia_dinh": "Be sincere at home.",
+    "tien_bac": "Keep your word in business.",
+    "hoc_hanh": "Study with conviction."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 61 Zhong Fu (Inner Truth) 中孚 (judgement, Tuan commentary, Great Image)"
+  },
+  "62": {
+   "y_chinh": "Small excess: small things can be done, great things cannot; the flying bird leaves its call — do not go higher, come down.",
+   "loi_khuyen": "Do small things thoroughly, stay modest, take no big risks.",
+   "mat_toi": "Reaching for something bigger than you can handle.",
+   "cau_tu_soi": "Which small thing should you do really well instead of dreaming of something big?",
+   "linh_vuc": {
+    "cong_viec": "Perfect the details.",
+    "tinh_cam": "Pay attention to small things.",
+    "gia_dinh": "Look after the small things at home.",
+    "tien_bac": "Small amounts only.",
+    "hoc_hanh": "Small details."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 62 Xiao Guo (Small Excess) 小過 (judgement, Tuan commentary, Great Image)"
+  },
+  "63": {
+   "y_chinh": "After completion: small success, it helps to keep upright; good at the start, disorder at the end.",
+   "loi_khuyen": "Protect what you have achieved and guard against change after it is done.",
+   "mat_toi": "Letting go after success.",
+   "cau_tu_soi": "What could spoil what you have just achieved?",
+   "linh_vuc": {
+    "cong_viec": "The project is finished; maintain it.",
+    "tinh_cam": "Settled; do not get careless.",
+    "gia_dinh": "The big job is done; keep the routine.",
+    "tien_bac": "Take your profit; guard against risk.",
+    "hoc_hanh": "Goal reached; review it."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 63 Ji Ji (After Completion) 既濟 (judgement, Tuan commentary, Great Image)"
+  },
+  "64": {
+   "y_chinh": "Before completion: the little fox, almost across the river, gets its tail wet; nothing is gained by rushing.",
+   "loi_khuyen": "Be careful on the last stretch, the work is not over; see clearly before acting.",
+   "mat_toi": "Thinking it is finished when it is not.",
+   "cau_tu_soi": "Which final step are you taking lightly?",
+   "linh_vuc": {
+    "cong_viec": "The project is not finished; do not be complacent.",
+    "tinh_cam": "The relationship is still taking shape.",
+    "gia_dinh": "Unfinished business at home.",
+    "tien_bac": "The deal is not closed yet.",
+    "hoc_hanh": "The exam is close; revise carefully."
+   },
+   "trich_dan": "Zhou Yi (Book of Changes), hexagram 64 Wei Ji (Before Completion) 未濟 (judgement, Tuan commentary, Great Image)"
+  }
+ },
+ "the_dung": {
+  "dung_sinh_the": {
+   "ten": "Use feeds Body",
+   "y_nghia": "In Plum Blossom this is the most favourable pattern: the circumstances (Use) support the person asking (Body) — things come together easily and there is help.",
+   "luu_y": "Favourable does not mean you can sit back; notice who or what is supporting you."
+  },
+  "the_khac_dung": {
+   "ten": "Body controls Use",
+   "y_nghia": "The person asking has the upper hand over the circumstances — it can succeed, but it takes effort.",
+   "luu_y": "You can win, but it costs energy; count the cost first."
+  },
+  "ty_hoa": {
+   "ten": "Body and Use in harmony",
+   "y_nghia": "The same element — balanced; things move along with their natural rhythm.",
+   "luu_y": "Smooth, but it can stall; take the initiative."
+  },
+  "the_sinh_dung": {
+   "ten": "Body feeds Use",
+   "y_nghia": "The person asking has to give a lot (energy drains away) — it wears you down and things rarely go quite as hoped.",
+   "luu_y": "Look at where you are giving too much."
+  },
+  "dung_khac_the": {
+   "ten": "Use controls Body",
+   "y_nghia": "The circumstances are pressing on the person asking — the least favourable pattern in Plum Blossom; be careful or pause.",
+   "luu_y": "Unfavourable is not fixed fate; ask what in the situation is working against you and whether it can be avoided."
+  }
+ },
+ "source": {
+  "chu_dich": "Zhou Yi, the Book of Changes (Western Zhou; Ten Wings from the Warring States to Han) — ctext.org/book-of-changes",
+  "mai_hoa_dich_so": "Plum Blossom Numerology (Mei Hua Yi Shu) — Shao Yong (Northern Song)",
+  "tang_san_boc_dich": "Zeng Shan Bu Yi — Ye He Lao Ren (Qing)"
  }
 }

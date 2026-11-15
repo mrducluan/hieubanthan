@@ -131,12 +131,14 @@ def tuvi_giai_doan(ls: dict, nam_am_xem: int, nam_am_sinh: int, so_nam: int = SO
         ly, cu = [], []
         if c["ten"] == CUNG_SK:
             ly.append("dai_han")
-            cu.append(f"Đại hạn {tu}–{den} tuổi đi cung Tật Ách")
+            cu.append(L("tv.skn.dai_han", f"Đại hạn {tu}–{den} tuổi đi cung Tật Ách", tu=tu, den=den,
+                        cung=_ten.ten("cung", CUNG_SK)))
         if c.get("can"):
             ky = next(x for x in phi.phi_tu_can(c["can"], ls["cung"]) if x["hoa"] == "Kỵ")
             if ky["den_cung"] == CUNG_SK:
                 ly.append("ky_dai_han")
-                cu.append(f"Hoá Kỵ của can đại hạn {c['can']} ({ky['sao']}) nhập Tật Ách")
+                cu.append(L("tv.skn.ky_dai_han", f"Hoá Kỵ của can đại hạn {c['can']} ({ky['sao']}) nhập Tật Ách",
+                            can=_ten.ten("can", c["can"]), sao=_ten.ten("sao", ky["sao"]), cung=_ten.ten("cung", CUNG_SK)))
         if ly:
             ra.append({"tu": tu, "den": den, "nam_tu": nam_am_sinh + tu - 1, "nam_den": nam_am_sinh + den - 1,
                        "ly_do": ly, "can_cu": cu, "he": he0})
@@ -146,7 +148,9 @@ def tuvi_giai_doan(ls: dict, nam_am_xem: int, nam_am_sinh: int, so_nam: int = SO
 def cau_giai_doan(g: dict) -> str:
     he = _tron(g.get("he"))
     s = kb.mau("giai_doan").format(tu=g["tu"], den=g["den"], he=he["he"] if he else L("bt_ds.skn.tong_quat", "sức khoẻ tổng quát"))
-    return s.replace(" tuổi", f" tuổi (khoảng {g['nam_tu']}–{g['nam_den']})", 1)
+    return s.replace(L("tv.skn.moc_tuoi", " tuổi", den=g["den"]),
+                     L("tv.skn.khoang", f" tuổi (khoảng {g['nam_tu']}–{g['nam_den']})", den=g["den"], nam_tu=g["nam_tu"],
+                       nam_den=g["nam_den"]), 1)
 
 
 # ------------------------------------------------------------------ Bát tự
@@ -206,7 +210,8 @@ def phongthuy_nam(quai: str, tu_nam: int, so_nam: int = SO_NAM, noi: str = "phò
         if not m:
             continue
         ra.append({"nam": n, "sao": so, "ly_do": [f"sao_{so}"], "hien_tai": n == tu_nam, "he": kb.he_hanh(m.get("hanh")),
-                   "can_cu": [f"Lưu niên {n}: sao {so} ({m['ten']}) bay tới phía {noi} (quái {quai})"]})
+                   "can_cu": [L("pt.skn.can_cu", "Lưu niên {n}: sao {so} ({ten}) bay tới phía {noi} (quái {quai})", n=n, so=so,
+                                  ten=_ten.ten("sao_bay", m["ten"]), noi=noi, quai=_ten.ten("quai", quai))]})
     return ra
 
 
@@ -218,22 +223,25 @@ def phongthuy_doan_hoi(tu_nam: int, phuong_ngu: str | None = None, so_nam: int =
     if phuong_ngu:
         q = next((k for k, v in hk.QUAI.items() if v[1] == phuong_ngu), None)
         if q:
-            ds = phongthuy_nam(q, tu_nam, SO_NAM, noi=f"phòng ngủ chính ({phuong_ngu})")
+            pn = _ten.ten("huong", phuong_ngu) if _ten.muc("huong", phuong_ngu) else phuong_ngu
+            ds = phongthuy_nam(q, tu_nam, SO_NAM, noi=L("hoi.pt.sk.noi", "phòng ngủ chính ({h})", h=pn))
             if ds:
-                return (f"Theo nhà bạn đã lưu (phòng ngủ chính ở phía {phuong_ngu}): {cau_cac_nam(ds)} "
+                return (L("hoi.pt.sk.theo_nha", "Theo nhà bạn đã lưu (phòng ngủ chính ở phía {h}): ", h=pn) + f"{cau_cac_nam(ds)} "
                         f"{mien_tru()}")
-            return (f"Theo nhà bạn đã lưu, mười năm tới sao lưu niên sách xưa gắn với sức khoẻ không bay tới phía phòng ngủ "
-                    f"chính ({phuong_ngu}). {kb.mau('khong_nam')} {mien_tru()}")
+            return (L("hoi.pt.sk.khong_toi", "Theo nhà bạn đã lưu, mười năm tới sao lưu niên sách xưa gắn với sức khoẻ không bay tới "
+                      "phía phòng ngủ chính ({h}). ", h=pn) + f"{kb.mau('khong_nam')} {mien_tru()}")
     nam_phia = []
     for n in range(tu_nam, tu_nam + so_nam):
         q = next((k for k, v in hk.luu_nien(n)["cung"].items() if v == 2), None)
         if q and q in hk.QUAI:
-            nam_phia.append(f"năm {n} phía {hk.QUAI[q][1]}")
+            h = hk.QUAI[q][1]
+            nam_phia.append(L("hoi.pt.cy.nam_phia", "năm {n} phía {h}", n=n, h=_ten.ten("huong", h) if _ten.muc("huong", h) else h))
     he = _tron(kb.he_hanh("Thổ"))
-    s = ("Theo Huyền Không, sao 2 (Nhị Hắc — sách xưa gắn với sức khoẻ người ở) bay tới " + ", ".join(nam_phia) + ". "
-         "Năm sao này tới đúng phía phòng ngủ chính của bạn thì năm đó nên chú ý sức khoẻ bản thân hơn"
-         + (f", nhất là {he['he']}; sắp xếp đi {he['kham']} vào đầu năm" if he else "")
-         + ", giữ phòng thoáng, sạch, ít đồ đạc. Lưu hồ sơ nhà (vị trí phòng ngủ) để xem đúng năm cho nhà bạn.")
+    s = (L("hoi.pt.sk.dau", "Theo Huyền Không, sao 2 (Nhị Hắc — sách xưa gắn với sức khoẻ người ở) bay tới {ds}. "
+           "Năm sao này tới đúng phía phòng ngủ chính của bạn thì năm đó nên chú ý sức khoẻ bản thân hơn",
+           ds=L("hoi.pt.noi", ", ").join(nam_phia))
+         + (L("hoi.pt.sk.he", ", nhất là {he}; sắp xếp đi {kham} vào đầu năm", he=he["he"], kham=he["kham"]) if he else "")
+         + L("hoi.pt.sk.cuoi", ", giữ phòng thoáng, sạch, ít đồ đạc. Lưu hồ sơ nhà (vị trí phòng ngủ) để xem đúng năm cho nhà bạn."))
     return f"{s} {mien_tru()}"
 
 
@@ -254,6 +262,11 @@ def thanso_nam(nam_ca_nhan_cua: dict[int, int], nam_hien_tai: int | None = None)
 def doan_hoi_benh(t_khong_dau: str, he_la_so: dict | None = None) -> str:
     """Câu hỏi NÊU tên bệnh / bộ phận ("tôi có bị … không"): không xác nhận, không phủ nhận — nói hệ cơ quan liên quan
     (theo câu hỏi; không rõ thì theo lá số) + đi khám để bác sĩ kiểm tra. Không nhắc lại tên bệnh."""
+    # CY-2 review 2: hỏi "có bị trầm cảm / lo âu / rối loạn … không" → lời hướng sức khoẻ tinh thần (người tin cậy, bác sĩ /
+    # chuyên gia tâm lý), không phải lời "đi khám tổng quát".
+    if re.search(r"(?<!\w)(tram cam|lo au|roi loan (lo au|luong cuc|cam xuc|tam than)|tam than phan liet|benh tam ly|benh tam than"
+                 r"|depress\w*|anxiety|bipolar|mental (health|illness))(?!\w)", t_khong_dau or "") and kb.mau("hoi_tam_than"):
+        return kb.mau("hoi_tam_than")
     he = _tron(kb.he_cau_hoi(t_khong_dau))
     if he:
         return kb.mau("hoi_benh").format(he=he["he"], kham=he["kham"])

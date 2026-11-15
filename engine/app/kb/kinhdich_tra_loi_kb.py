@@ -117,3 +117,11 @@ def moi_chuoi() -> list[str]:
                 di(v)
     di(_d())
     return ra
+
+
+def sach_xua_viec(viec: str) -> tuple[str, dict] | None:
+    """WS-5: (mã nhóm, mục) câu Tăng San Bốc Dịch ứng với mã việc `viec`; việc không có chương phù hợp → None."""
+    for ma, m in (_lay("sach_xua_viec", "nhom") or {}).items():
+        if viec in (m.get("viec") or []):
+            return ma, m
+    return None

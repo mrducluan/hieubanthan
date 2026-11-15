@@ -33,7 +33,7 @@ NGUONG_TUVI = 2
 _LOP_NAM = {"ky_nhap", "ky_chieu", "luu_nien", "sao_luu"}     # lý do của riêng một năm (không phải lớp mười năm)
 _XUNG = {"lục xung"}
 _HINH = {"tương hình", "tự hình", "lục hại"}
-_TRU = {"nam": (0,), "thang_gio": (1, 3), "ngay": (2,), "ngay_xung": (2,)}
+_TRU = {"nam": (0,), "thang_gio": (1, 3), "ngay": (2,), "ngay_xung": (2,), "gio": (3,)}
 
 
 # ------------------------------------------------------------------ câu
@@ -109,42 +109,48 @@ def tuvi_nam_cung(ls: dict, nam_am_xem: int, nam_am_sinh: int, cung: str, so_nam
         # SK-1 giữ bất biến "Kỵ năm nhập Tật Ách luôn là năm nên chú ý" — Lộc cùng vào thì vẫn nhắc đi khám
         if (loc["den_cung"] == cung and (mang_thuong or ky["den_cung"] != cung)) or (mang_thuong and g.get("muc") == "thuan"):
             continue
-        dau = f"Năm {nam} ({can} {chi}): "
+        dau = L("tv.cyn.dau", f"Năm {nam} ({can} {chi}): ", nam=nam, can=_ten.ten("can", can), chi=_ten.ten("chi", chi))
+        tc, ks = _ten.ten("cung", cung), _ten.ten("sao", ky["sao"])
         ly, cu, bc = [], [], []
         if ky["den_cung"] == cung:
             ly.append("ky_nhap")
-            cu.append(f"{dau}Hoá Kỵ năm ({ky['sao']}) nhập cung {cung}")
+            cu.append(L("tv.cyn.ky_nhap", f"{dau}Hoá Kỵ năm ({ky['sao']}) nhập cung {cung}", dau=dau, sao=ks, cung=tc))
             if mang_thuong and goc_ky == cung:
                 ly.append("chong_ky")
-                cu.append(f"{dau}trùng cung Hoá Kỵ gốc (chồng Kỵ)")
+                cu.append(L("tv.cyn.chong_ky", f"{dau}trùng cung Hoá Kỵ gốc (chồng Kỵ)", dau=dau))
         elif ky["xung_cung"] == cung:
             ly.append("ky_chieu")
-            cu.append(f"{dau}Hoá Kỵ năm ({ky['sao']}) ở cung {ky['den_cung']}, chiếu sang {cung}")
+            cu.append(L("tv.cyn.ky_chieu", f"{dau}Hoá Kỵ năm ({ky['sao']}) ở cung {ky['den_cung']}, chiếu sang {cung}", dau=dau,
+                        sao=ks, den=_ten.ten("cung", ky["den_cung"]), cung=tc))
         c_ln = next(c for c in ls["cung"] if c["chi"] == chi)
         if c_ln["ten"] == cung:
             ly.append("luu_nien")
-            cu.append(f"{dau}cung lưu niên ({chi}) là {cung}")
+            cu.append(L("tv.cyn.luu_nien", f"{dau}cung lưu niên ({chi}) là {cung}", dau=dau, chi=_ten.ten("chi", chi), cung=tc))
         if mang_thuong and g.get("muc") == "can_chu_dong" and (g.get("_tac") or (None, None))[1] == cung:
             ly.append("van_han_can")
-            cu.append(f"{dau}chương Vận hạn chấm năm này Cần lưu ý vì Hoá Kỵ năm chạm cung {cung}")
+            cu.append(L("tv.cyn.van_han_can", f"{dau}chương Vận hạn chấm năm này Cần lưu ý vì Hoá Kỵ năm chạm cung {cung}",
+                        dau=dau, cung=tc))
         dh = next((c for c in ls["cung"] if c["dai_han"][0] <= tuoi <= c["dai_han"][1]), None)
         lop10 = []
         if dh:
             if dh["ten"] == cung:
-                lop10.append(("dai_han", f"Đại hạn {dh['dai_han'][0]}–{dh['dai_han'][1]} tuổi đi cung {cung}"))
+                lop10.append(("dai_han", L("tv.cyn.dai_han", f"Đại hạn {dh['dai_han'][0]}–{dh['dai_han'][1]} tuổi đi cung {cung}",
+                                           tu=dh["dai_han"][0], den=dh["dai_han"][1], cung=tc)))
             if dh.get("can"):
                 ky_dh = next(x for x in phi.phi_tu_can(dh["can"], ls["cung"]) if x["hoa"] == "Kỵ")
                 if ky_dh["den_cung"] == cung:
-                    lop10.append(("ky_dai_han", f"Hoá Kỵ của can đại hạn {dh['can']} ({ky_dh['sao']}) nhập {cung}"))
+                    lop10.append(("ky_dai_han", L("tv.cyn.ky_dai_han", f"Hoá Kỵ của can đại hạn {dh['can']} ({ky_dh['sao']}) nhập {cung}",
+                                                  can=_ten.ten("can", dh["can"]), sao=_ten.ten("sao", ky_dh["sao"]), cung=tc)))
         for ma, cau in lop10:
             if mang_thuong:
-                bc.append(f"Bối cảnh cả giai đoạn (không tính điểm cho từng năm): {cau}")
+                bc.append(L("tv.cyn.boi_canh", f"Bối cảnh cả giai đoạn (không tính điểm cho từng năm): {cau}", cau=cau))
             else:
                 ly.append(ma)
                 cu.append(f"{dau}{cau}")
         if k == 0 and sao_luu_ta:
             ly.append("sao_luu")
-            cu.append(f"{dau}sao lưu ở {cung}: {', '.join(sao_luu_ta)}")
+            cu.append(L("tv.cyn.sao_luu", f"{dau}sao lưu ở {cung}: {', '.join(sao_luu_ta)}", dau=dau, cung=tc,
+                        ds=", ".join(sao_luu_ta)))
         for ma, cau in (them or {}).get(nam, []):
             if ma not in ly:
                 ly.append(ma)
@@ -273,6 +279,13 @@ def thanso_nam_nguoi(ngay: int, thang: int, mang: str, nam0: int, so_nam: int = 
 
 
 # ------------------------------------------------------------------ Phong thuỷ
+def _cc_pt(n: int, y: str, noi: str, quai: str) -> str:
+    """Căn cứ năm của sao lưu niên (EN-ALL GĐ 5: bản Anh thay cụm "the main door side" theo đúng nơi)."""
+    y = y.replace("phía cửa chính", f"phía {noi} (quái {quai})")
+    y = y.replace("the main door side", L("pt.cy.noi", "phía {noi} (quái {quai})", noi=noi, quai=_ten.ten("quai", quai)))
+    return L("pt.cy.can_cu", "Lưu niên {n}: {y}", n=n, y=y)
+
+
 def phongthuy_nam(quai: str, tu_nam: int, mang: str, so_nam: int = SO_NAM, noi: str = "cửa chính") -> list[dict]:
     """Năm (Lập xuân) sao lưu niên KB của mảng bay tới quái `quai` (phía cửa chính)."""
     from app.calc import huyen_khong as hk  # noqa: PLC0415
@@ -282,7 +295,7 @@ def phongthuy_nam(quai: str, tu_nam: int, mang: str, so_nam: int = SO_NAM, noi: 
         so = hk.luu_nien(n)["cung"].get(quai)
         if str(so) in sao:
             ra.append({"nam": n, "sao": so, "ly_do": [f"sao{so}"], "hien_tai": n == tu_nam, "mang": mang,
-                       "can_cu": [f"Lưu niên {n}: {sao[str(so)].replace('phía cửa chính', f'phía {noi} (quái {quai})')}"]})
+                       "can_cu": [_cc_pt(n, sao[str(so)], noi, quai)]})
     return ra
 
 
@@ -511,22 +524,27 @@ def phongthuy_doan_hoi(mang: str, tu_nam: int, huong_cua: str | None = None, so_
     sao = kb.theo_mon(mang, "phongthuy").get("sao") or {}
     ten_m = kb.ten(mang)
     if not sao:
-        s = f"Phong thuỷ nhà không chỉ ra năm riêng cho {ten_m}. Việc nên giữ: {kb.viec(mang)}."
+        s = L("hoi.pt.cy.khong_nam", "Phong thuỷ nhà không chỉ ra năm riêng cho {m}. Việc nên giữ: {v}.", m=ten_m, v=kb.viec(mang))
         return f"{s} {kb.ranh_gioi(mang)}"
     if huong_cua:
         q = next((k for k, v in hk.QUAI.items() if v[1] == huong_cua), None)
         if q:
-            return doan_mang(mang, phongthuy_nam(q, tu_nam, mang, SO_NAM, f"cửa chính ({huong_cua})"),
-                             f"Theo nhà bạn đã lưu (cửa chính phía {huong_cua})")
+            hc = _ten.ten("huong", huong_cua) if _ten.muc("huong", huong_cua) else huong_cua
+            return doan_mang(mang, phongthuy_nam(q, tu_nam, mang, SO_NAM, L("hoi.pt.cy.noi", "cửa chính ({h})", h=hc)),
+                             L("hoi.pt.cy.theo_nha", "Theo nhà bạn đã lưu (cửa chính phía {h})", h=hc))
     so = int(next(iter(sao)))
     nam_phia = []
     for n in range(tu_nam, tu_nam + so_nam):
         q = next((k for k, v in hk.luu_nien(n)["cung"].items() if v == so), None)
         if q and q in hk.QUAI:
-            nam_phia.append(f"năm {n} phía {hk.QUAI[q][1]}")
-    s = (f"Theo Huyền Không, {sao[str(so)].split(' bay tới')[0]} bay tới " + ", ".join(nam_phia) + ". Năm sao này tới đúng "
-         f"phía cửa chính nhà bạn thì năm đó nên chú ý {ten_m} hơn: {kb.viec(mang)}. Lưu hồ sơ nhà (hướng cửa) để xem đúng "
-         "năm cho nhà bạn.")
+            h = hk.QUAI[q][1]
+            nam_phia.append(L("hoi.pt.cy.nam_phia", "năm {n} phía {h}", n=n, h=_ten.ten("huong", h) if _ten.muc("huong", h) else h))
+    sao_ten = sao[str(so)].split(' bay tới')[0]
+    if " reaches" in sao_ten:                     # bản phủ tiếng Anh của câu sao: "star 7 (Seven Red) reaches …"
+        sao_ten = sao_ten.split(" reaches")[0]
+    s = L("hoi.pt.cy.theo_hk", "Theo Huyền Không, {sao} bay tới {ds}. Năm sao này tới đúng phía cửa chính nhà bạn thì năm đó "
+          "nên chú ý {m} hơn: {v}. Lưu hồ sơ nhà (hướng cửa) để xem đúng năm cho nhà bạn.", sao=sao_ten,
+          ds=L("hoi.pt.noi", ", ").join(nam_phia), m=ten_m, v=kb.viec(mang))
     return f"{s} {kb.ranh_gioi(mang)}"
 
 
@@ -538,24 +556,121 @@ def kinhdich_khung() -> str:
 def kinhdich_doan_hoi(mang: str) -> str:
     """Hỏi đáp Kinh Dịch — quẻ đọc cho việc đang hỏi, không chấm riêng từng năm, không trả lời có / không: câu khung +
     việc nên giữ + ranh giới."""
-    return f"{kinhdich_khung()} Điều nên giữ về {kb.ten(mang)}: {kb.viec(mang)}. {kb.ranh_gioi(mang)}"
+    return L("hoi.kd.cy.doan", "{khung} Điều nên giữ về {ten}: {viec}. {ranh}", khung=kinhdich_khung(), ten=kb.ten(mang),
+             viec=kb.viec(mang), ranh=kb.ranh_gioi(mang))
 
 
 MANG_VAN_HAN = ("tien_bac", "cong_viec", "tinh_cam", "di_lai", "giay_to", "nha_cua", "ban_be", "gia_dao")
 
 
+# Review 2026-11-14 (chủ dự án quyết): MỌI loại câu còn bị chặn kèm 1–2 câu "nên chú ý… / nên làm…" đúng loại — dịu, không
+# phán, không phải lời khuyên chuyên môn. Bản Việt: chữ ở đây (mặc định của `L`); bản Anh: `kb/data/en/loi_khuon.json`
+# mã `tu_choi.goi_y.*`. Nhóm nhận bằng luật cố định trên câu đã bỏ dấu (Việt) hoặc câu tiếng Anh thường hoá.
+# CY-2 review 3: "Bầu 5 tháng nên kiêng gì theo phong tục", "Thai giáo cho con thế nào hợp mệnh tôi" (một nguồn với an_toan)
+_THAI_CHAM = (r"(bau|ba bau|co bau|mang bau|mang thai|co thai|thai phu)( \d+ thang)? .{0,30}(kieng|nen an|nen lam|nen tranh"
+              r"|hop menh|theo menh|theo phong tuc)|thai giao .{0,30}(menh|la so|tuoi|hop)")
+_GOI_Y_VI = {
+    "thai_cham": "Khi mang thai, nên theo lịch khám thai và lời dặn của bác sĩ sản khoa về ăn uống, nghỉ ngơi, thuốc men; các kiêng cữ "
+                 "theo phong tục nên hỏi lại bác sĩ trước khi làm theo — lá số hay con số không chọn thay việc này.",
+    "thai": "Nên theo lịch khám thai và siêu âm ở cơ sở y tế — lá số hay con số không đoán được giới tính hay sức khoẻ của thai. Nếu "
+            "muốn, bạn có thể hỏi về mảng con cái, gia đình của chính mình.",
+    "tham_my": "Với phẫu thuật hay làm đẹp, nên hỏi bác sĩ chuyên khoa và chọn cơ sở được cấp phép, hỏi rõ rủi ro và thời gian hồi "
+               "phục — lá số không quyết được việc này có hợp với bạn hay không.",
+    "thuoc_mo": "Đừng tự dừng hay đổi thuốc, cũng đừng quyết chuyện mổ theo lá số hay con số; hãy hỏi bác sĩ đang điều trị trước khi "
+                "quyết. Nếu muốn, bạn có thể hỏi về nhịp nghỉ ngơi và năm nên chú ý sức khoẻ của mình.",
+    "nguoi_than_benh": "Nên hỏi thẳng bác sĩ điều trị về tình trạng và những việc gia đình cần chuẩn bị, và dành thời gian "
+                       "ở bên người thân lúc này.",
+    "tuoi_tho": "Thay vì hỏi tuổi thọ, nên khám sức khoẻ tổng quát định kỳ mỗi năm và xem mục \"năm nên chú ý sức khoẻ\" "
+                "trong bài đọc của bạn để sắp lịch khám.",
+    "yem": "Không có cách nào tác động lên người khác bằng bùa hay lá số. Nếu đang có mâu thuẫn, nên nói chuyện thẳng, nhờ "
+           "người trung gian, hoặc hỏi luật sư khi có thiệt hại.",
+    "nguoi_khac": "Bạn có thể hỏi về gương mặt, lá số của chính mình; xem cho người khác thì nên để chính họ đồng ý và tự nhập.",
+    "xep_hang": "Không so lòng người bằng lá số hay con số. Nên đối soát sổ sách định kỳ, tách quyền chi tiền và ghi thoả thuận bằng "
+                "văn bản — cách này giữ được tiền và giữ được người.",
+    "tuyen_dung": "Khi tuyển hay giữ người, nên phỏng vấn kỹ, cho thử việc, ký hợp đồng rõ ràng và hỏi người từng làm cùng "
+                  "họ — công bằng cho người ứng tuyển và chắc hơn cho bạn.",
+    "dau_tu": "Nên giữ một khoản tiền dự phòng và không dồn hết vào một kênh; đây không phải lời khuyên đầu tư. Bạn có thể "
+              "xem năm nên chú ý tiền bạc trong bài đọc của mình.",
+    "so_con_ten": "Bạn có thể hỏi về mảng con cái hay tình cảm của chính mình — lá số nói được nhịp và việc nên chuẩn bị, "
+                  "không nói con số hay cái tên.",
+    "the_thao": "Nên coi kết quả trận đấu, bầu cử là chuyện để xem cho vui, không đặt tiền vào đó.",
+    "vat_pham": "Không cần mua vật phẩm hay làm lễ để đổi vận — nên giữ tiền cho việc chính và tránh các khoản may rủi.",
+}
+_GOI_Y_NHOM_VI = [
+    ("thai_cham", _THAI_CHAM),
+    ("thai", r"thai nhi|co thai|co bau|mang thai|mang bau|dinh bau|trong bung|trai hay (con )?gai|gai hay (con )?trai|sieu am"
+             r"|say thai|thai luu|sinh non|de non|thai (nay|do|lan nay)"),
+    ("tham_my", r"tham my|nang mui|cat mi|hut mo|nang nguc|don cam|got cam|cang da|tiem filler|filler|botox|phun xam|lam dep"),
+    ("thuoc_mo", r"(bo|ngung|dung|doi) (uong )?thuoc|thuoc nam|hoa tri|xa tri|phau thuat|(nen|co nen) mo|mo hay|chay than"),
+    ("nguoi_than_benh", r"(bo|me|ba|ong|cha|chong|vo|con|chau|anh|chi|em)( noi| ngoai| gai| trai)? (toi|em|minh|nha toi)(?!\w)"
+                        r".{0,40}(qua khoi|song duoc|con bao lau|song them|di (khong|ko)|mat (khong|ko)|chua (duoc|khoi)|khoi (benh|duoc)"
+                        r"|co khoi)|(benh|ung thu|u|tai bien|dot quy)(?!\w).{0,30}cua (bo|me|ba|ong|cha|chong|vo|con|chau|anh|chi|em)"
+                        r"( noi| ngoai| gai| trai)? (toi|em|minh)(?!\w).{0,30}(khoi|qua khoi|chua|song|qua noi)"),
+    ("tuoi_tho", r"chet|qua doi|tu vong|song (duoc|den|them|bao)|tho (duoc|bao|may|den)|tuoi tho|con bao lau|qua khoi|bat dac"),
+    ("yem", r"yem bua|bo bua|bua ngai|lam hai|tram yem"),
+    ("nguoi_khac", r"(xem|doc|soi) (tuong|mat|la so|so) (cua |cho |giup )?(nguoi|anh ay|co ay|chong|vo|sep|dong nghiep|ban)"),
+    ("xep_hang", r"ai trung thuc|ai (gian|lua|phan boi|dang tin)|nhan vien nao .{0,20}(trung thuc|gian|dang tin)"),
+    ("tuyen_dung", r"tuyen (ung vien|nhan vien|nguoi|ke toan|nhan su|thu ky)|ung vien|sa thai|(chon|giu|loai) nhan vien|nen tuyen"
+                   r"|duoi viec|cho (nhan vien|nguoi lam|ke toan|tro ly|thu ky|giup viec|tho)(?!\w).{0,30}nghi"
+                   r"|tuoi nao .{0,25}(lam|vao lam) (nhan vien|ke toan|thu ky|tro ly|quan ly)"),
+    ("dau_tu", r"gia (vang|dat|nha|xang|dola|do la|usd|bitcoin|coin)|chung khoan|co phieu|tien ao|bitcoin|crypto|ma (co phieu|nao tang)"),
+    ("so_con_ten", r"may (dua )?con|bao nhieu (dua )?con|ten (gi|la gi)|(ten|chu cai) (cua )?(chong|vo|nguoi yeu) (tuong lai|sau nay)"),
+    ("the_thao", r"doi nao thang|ai (se )?(thang|dac cu|trung cu)|ty so|ket qua tran"),
+]
+_GOI_Y_NHOM_EN = [
+    ("thai_cham", r"pregnan\w* .{0,30}(?:avoid|eat|customs?|taboos?|traditions?)|prenatal education"),
+    ("thai", r"pregnan\w*|baby s? (?:gender|sex)|boy or (?:a )?girl|girl or (?:a )?boy|unborn|fetus|foetus|miscarr\w*|ivf|iui"),
+    ("tham_my", r"cosmetic\w*|plastic surgery|nose job|rhinoplasty|botox|fillers?|liposuction|facelift|breast (?:augmentation|implants?)"),
+    ("thuoc_mo", r"(?:stop|quit|skip|come off|go off|cut down|ditch) .{0,25}(?:meds|medication|medicine|pills|insulin|chemo\w*|treatment|"
+                 r"antidepressants?)|surgery|operation|chemo\w*|dialysis|transplant"),
+    ("nguoi_than_benh", r"(?:my (?:\w+ ){0,2}(?:mother|mom|mum|father|dad|husband|wife|son|daughter|grandma|grandpa|brother|sister)|he|she) "
+                        r".{0,30}(?:recover|survive|pull through|make it|have left|how long)"),
+    ("tuoi_tho", r"die|dies|death|dying|pass away|lifespan|life expectancy|how long .{0,20}live|live (?:to|past|until)"),
+    ("yem", r"curse|hex|jinx|spell|black magic"),
+    ("nguoi_khac", r"secretly|without (?:telling|asking)|behind (?:his|her|their) back|(?:his|her|their) (?:bazi|chart|face)"),
+    ("xep_hang", r"(?:which|who) .{0,30}(?:honest|trustworthy|loyal|liar|lying|steal\w*|cheat\w*)|most honest|least honest"),
+    ("tuyen_dung", r"hire|hiring|fire|firing|recruit\w*|candidates?|applicants?|employees?|staff|interns?|nanny|maids?|shortlist|"
+                   r"tenants?|screen\w*"),
+    ("dau_tu", r"gold|stocks?|shares?|crypto|bitcoin|btc|coins?|forex|property prices?|house prices?"),
+    ("so_con_ten", r"how many (?:children|kids|babies|sons|daughters)|name|initials?|first letter"),
+    ("the_thao", r"team|match|election|world cup|league|derby|race"),
+]
+
+
+_GOI_Y_THU_TU = ("thai_cham", "thai", "tham_my", "nguoi_than_benh", "thuoc_mo", "tuoi_tho", "yem", "xep_hang", "tuyen_dung", "nguoi_khac", "dau_tu",
+                 "so_con_ten", "the_thao")
+
+
 def goi_y_tu_choi(raw: str, loai: str | None) -> str:
-    """Câu bị từ chối vẫn kèm một lời nhắc "nên chú ý…" đúng mảng: may rủi → giữ tiền; tai nạn chết / nặng → an toàn đi
-    lại (không bàn chuyện sống chết); tuyển dụng → tuyển theo kỹ năng. Câu khác → rỗng (giữ lời từ chối cũ)."""
+    """Câu bị từ chối vẫn kèm một lời nhắc "nên chú ý… / nên làm…" đúng loại: may rủi → giữ tiền; tai nạn chết / nặng → an
+    toàn đi lại; tuyển / sa thải theo lá số → phỏng vấn, thử việc, hợp đồng, tham chiếu; xếp hạng ai trung thực → đối soát,
+    tách quyền chi tiền, thoả thuận văn bản; tuổi thọ → khám định kỳ; bỏ thuốc / mổ → hỏi bác sĩ; thai → lịch khám thai;
+    giá vàng, cổ phiếu → tiền dự phòng (không phải lời khuyên đầu tư); số con, tên người sẽ gặp → hỏi mảng của chính mình;
+    yểm người khác / xem người khác → hỏi về chính mình. Không nhận ra nhóm → rỗng (giữ lời từ chối của mảng)."""
+    from app.luangiai import an_toan as _at  # noqa: PLC0415
     from app.luangiai.hoi import chuan_hoa  # noqa: PLC0415
     t = chuan_hoa(raw or "")
-    if loai == "may_rui":
+    if re.search(r"vat pham|linh vat|(?<!\w)bua (may|hoa|tai|loc)|giai han|cung sao|talisman|amulet|lucky charm|crystals? (?:to|for)", t):
+        return L("tu_choi.goi_y.vat_pham", _GOI_Y_VI["vat_pham"])   # hỏi vật phẩm → nói rõ không cần mua, trước lời may rủi
+    if loai == "tuyen_dung":                 # trước lời may rủi: "chọn nhân viên tuổi nào theo lá số để tuyển"
+        return L("tu_choi.goi_y.tuyen_dung", _GOI_Y_VI["tuyen_dung"])
+    if loai == "may_rui" or re.search(r"(xo so|ve so|lo de|danh de|ca do|ca cuoc|danh lo)", t) or _at.so_de(raw or ""):
         return kb.mau("may_rui")
-    if loai == "tuyen_dung" or re.search(r"tuyen (ung vien|nhan vien|nguoi|ke toan|nhan su|thu ky)|ung vien|sa thai nhan vien"
-                                          r"|(chon|giu|loai) nhan vien|nen tuyen", t):
-        return kb.mau("tuyen_dung")
-    if re.search(r"tai nan", t):
+    en = _at._la_en(raw or "")
+    k = _at._sua_en(_at._hai_ban(raw or "")[1]) if en else t
+    ds = dict(_GOI_Y_NHOM_EN if en else _GOI_Y_NHOM_VI)
+    for nhom in _GOI_Y_THU_TU:
+        mau = ds[nhom]
+        if nhom == "tuoi_tho" and re.search(r"(?<!\w)(?:tai nan|accident|crash)(?!\w)", k):
+            return kb.mau("tai_nan_nang")      # "năm nào gặp tai nạn chết" → thói quen đi lại an toàn
+        if re.search(r"(?<!\w)(?:" + mau + r")(?!\w)", k):
+            if nhom == "tuyen_dung" and loai not in ("tuyen_dung", "ngoai_pham_vi", None):
+                continue
+            return L(f"tu_choi.goi_y.{nhom}", _GOI_Y_VI[nhom])
+    if not en and re.search(r"tai nan", t):
         return kb.mau("tai_nan_nang")
-    if re.search(r"(xo so|ve so|lo de|danh de|so de|ca do|ca cuoc|danh lo|so lo)", t):
-        return kb.mau("may_rui")
+    if en and re.search(r"(?<!\w)(?:accident|crash)(?!\w)", k):
+        return kb.mau("tai_nan_nang")
+    if loai == "tuyen_dung":
+        return L("tu_choi.goi_y.tuyen_dung", _GOI_Y_VI["tuyen_dung"])
     return ""

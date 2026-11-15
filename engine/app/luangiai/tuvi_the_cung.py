@@ -9,8 +9,11 @@ Chỉ TRA KB, không gọi LLM, không sinh nghĩa mới.
 """
 from __future__ import annotations
 
+from app import ngon_ngu
+from app.kb import ten as _ten
 from app.kb import tuvi_doi_song_kb as kds
 from app.kb import tuvi_kb
+from app.kb.loi import L
 
 NHOM_CAT = ("Lục cát tinh", "Lộc")
 
@@ -33,6 +36,8 @@ def loi_sao_cung(sao: str, cung: str, do_sang: str | None, muon_tu: str | None =
     nhom = nhom_sang(do_sang)
     m = kds.sao_linh_vuc(sao, cung, nhom) or {}
     t = ten_mang(cung)
+    if not ngon_ngu.la_viet():
+        return _loi_sao_cung_dich(sao, cung, do_sang, muon_tu, ct, nhom, m, t)
     manh = m.get("manh") or f"Ở chuyện {t}, bạn mạnh ở chỗ {ct['diem_manh']}."
     vap = m.get("de_vap") or f"Ở chuyện {t}, bạn dễ vấp ở chỗ {ct['mat_toi']}."
     nen = m.get("loi_khuyen")
@@ -47,6 +52,28 @@ def loi_sao_cung(sao: str, cung: str, do_sang: str | None, muon_tu: str | None =
     if nd:
         cu.append(f"Sách nói {sao} ở cung {cung}: {nd}")
     return {"thuong_thay": thuong, "nen_lam": nen, "can_cu": cu}
+
+
+def _loi_sao_cung_dich(sao: str, cung: str, do_sang: str | None, muon_tu: str | None, ct: dict, nhom: str, m: dict,
+                       t: str) -> dict:
+    """EN-ALL GĐ 4 — bản ngôn ngữ khác của `loi_sao_cung`: cùng số câu, cùng thứ tự; chữ từ bản phủ KB (đời sống +
+    tuvi_kb) và mẫu `L()`; tên sao / cung / độ sáng / hành theo bảng tên."""
+    manh = m.get("manh") or L("tuvi_ls.the.manh", "", mang=t, y=ct["diem_manh"])
+    vap = m.get("de_vap") or L("tuvi_ls.the.vap", "", mang=t, y=ct["mat_toi"])
+    thuong = f"{vap} {manh}" if nhom == "ham" else f"{manh} {vap}"
+    ds = _ten.ten("do_sang", do_sang) if do_sang else L("tuvi_ls.the.chua_ro_do_sang", "chưa rõ độ sáng")
+    s, c = _ten.ten("sao", sao), _ten.ten("cung", cung)
+    vi_tri = (L("tuvi_ls.the.vi_tri_muon", "", sao=s, do_sang=ds, muon_tu=_ten.ten("cung", muon_tu), cung=c)
+              if muon_tu else L("tuvi_ls.the.vi_tri", "", sao=s, do_sang=ds, cung=c))
+    cu = [vi_tri, L("tuvi_ls.the.net_chung", "", sao=s, han=ct["ten_han"], hanh="/".join(_ten.ten("hanh", h) for h in ct["ngu_hanh"].replace("Thuỷ", "Thủy").replace("Hoả", "Hỏa").split("/")),
+                    tinh_chat=ct["tinh_chat"])]
+    sac = tuvi_kb.nhom_do_sang(do_sang)
+    if sac:
+        cu.append(ct["khi_sang" if sac == "sang" else "khi_ham"])
+    nd = tuvi_kb.sao_cung(sao, cung)
+    if nd:
+        cu.append(L("tuvi_ls.the.sach_noi", "", sao=s, cung=c, noi_dung=nd))
+    return {"thuong_thay": thuong, "nen_lam": m.get("loi_khuyen"), "can_cu": cu}
 
 
 def loi_phu_tinh(cung: str, sao: list[dict]) -> str | None:

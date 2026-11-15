@@ -13,6 +13,7 @@ from typing import Annotated, Literal
 from fastapi import APIRouter, HTTPException, Path as FPath, Query
 from pydantic import BaseModel, ConfigDict, Field
 
+from app.kb.loi import L
 from app import config
 from app.calc import dia_ly, lunar, mui_gio
 from app.config import Region
@@ -85,7 +86,7 @@ def _tz_lich(d: _dt.date, noi_sinh: str | None) -> float:
 @router.post("/v1/lich/doi")
 def api_doi_lich(inp: DoiLichInput) -> dict:
     if inp.noi_sinh and inp.noi_sinh != dia_ly.NUOC_NGOAI and dia_ly.tra(inp.noi_sinh) is None:
-        raise HTTPException(422, detail="Nơi sinh không có trong danh sách tỉnh/thành")
+        raise HTTPException(422, detail=L("tv2.ht.loi.noi_sinh", "Nơi sinh không có trong danh sách tỉnh/thành"))
     try:
         if inp.chieu == "am_sang_duong":
             args = (inp.ngay, inp.thang, inp.nam, 1 if inp.nhuan else 0)

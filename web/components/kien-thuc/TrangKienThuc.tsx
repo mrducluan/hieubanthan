@@ -375,7 +375,7 @@ async function TrangKienThucEn({ cd, t, duong, ma }: { cd: (typeof CHU_DE)[strin
             <p>{loiMoi ?? <LoiMoiChung c={c} />}</p>
             <p className="mt-2 text-sm">{c("bai.tat_ca")} <Link href={duongCum} className="text-gold underline underline-offset-2 hover:text-fg">{tenCum}</Link></p>
           </div>
-          <Button asChild><Link href={congCu}>{cd.mang === "/bat-tu" ? c("moi.nut_bat_tu") : c("moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
+          <Button asChild><Link href={congCu}>{cd.mang === "/bat-tu" ? c("moi.nut_bat_tu") : cd.mang === "/tu-vi" ? c("moi.nut_tu_vi") : cd.mang === "/phong-thuy" ? c("moi.nut_phong_thuy") : cd.mang === "/kinh-dich" ? c("moi.nut_kinh_dich") : c("moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
         </aside>
       )}
 
@@ -522,8 +522,8 @@ function ThanMuc({ m, c, lk }: { m: TrangKienThuc["muc"][number]; c: Chu; lk: Du
               {x.phien_am && <p className="text-sm italic text-fg-muted">{x.phien_am}</p>}
               {x.nghia && <p className="mt-1 leading-relaxed text-fg-muted">{x.nghia}</p>}
               {/* TV-CTP: điều kiện trên lá số bằng lời thường + chú thích chữ của bản chép. */}
-              {x.khi && <p className="mt-1 text-sm text-fg-muted"><span className="text-gold">Câu này nói về lá số khi</span> {x.khi}.</p>}
-              {x.chu_thich && <p className="mt-1 text-xs text-fg-faint">Chú thích: {x.chu_thich}</p>}
+              {x.khi && <p className="mt-1 text-sm text-fg-muted"><span className="text-gold">{c("bai.khi")}</span> {x.khi}.</p>}
+              {x.chu_thich && <p className="mt-1 text-xs text-fg-faint">{c("bai.chu_thich")}{x.chu_thich}</p>}
               <footer className="mt-1 text-xs text-fg-faint">— <cite>{x.sach}</cite>{x.chuong ? `, ${x.chuong}` : ""}</footer>
             </blockquote>
           ))}

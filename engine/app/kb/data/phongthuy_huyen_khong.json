@@ -2503,5 +2503,20 @@
     }
   },
   "_nguon_81": "81 tổ hợp sơn tinh – hướng tinh có thứ tự (sơn = người ở & sức khoẻ, hướng = tiền bạc & công việc). Nghĩa gốc: Huyền Không Tử Bạch Quyết, Phi Tinh Phú, Thẩm Thị Huyền Không Học (cổ thư công cộng) — viết lại trung tính, lời cảnh báo không doạ: không điểm số, không tên bệnh, không vật phẩm, không dự báo ốm đau. kich_hoat: sao lưu niên bay tới cung thì năm đó nên chủ động hơn (chu_dong) / là năm thuận (thuan). Nháp AI, chờ đối chiếu.",
-  "_an_toan": "Lưu ý an toàn (Q-lửa điện, 2026-10-22): bộ tài liệu Drive ghi 'trúng độc', 'tai nạn lửa điện', tên bệnh trong domain_impacts; ở đây viết lại thành lời nhắc chăm nhà cẩn thận hơn (lửa, điện, nước, vật nhọn, ẩm mốc, lối đi) theo ngũ hành cặp sao — không dự báo, không doạ. Lời mở đầu dùng chung: phongthuy_kb.mau_an_toan."
+  "_an_toan": "Lưu ý an toàn (Q-lửa điện, 2026-10-22): bộ tài liệu Drive ghi 'trúng độc', 'tai nạn lửa điện', tên bệnh trong domain_impacts; ở đây viết lại thành lời nhắc chăm nhà cẩn thận hơn (lửa, điện, nước, vật nhọn, ẩm mốc, lối đi) theo ngũ hành cặp sao — không dự báo, không doạ. Lời mở đầu dùng chung: phongthuy_kb.mau_an_toan.",
+  "doi_chieu": {
+    "ngay": "2026-11-12",
+    "test": "tests/test_phongthuy_nguon.py",
+    "the_quai": {
+      "khop_thanh_nang_ao_ngu": 12,
+      "ghi_chu": "12/24 sơn của bảng thế tinh (Khôn Nhâm Ất = 2; Cấn Bính Tân = 7; Tốn Thìn Hợi = 6; Giáp Quý Thân = 1) trùng bốn câu ai tinh của Thanh Nang Áo Ngữ bản Tứ khố; 12 sơn còn lại theo Thẩm thị, chưa có nguyên văn."
+    },
+    "luu_nien_luu_nguyet": "khớp Hiệp Kỷ Biện Phương Thư (tam nguyên tử bạch năm, tháng)",
+    "hai_muoi_bon_son": "khớp Hiệp Kỷ Biện Phương Thư",
+    "chua_doi_chieu": [
+      "hạ quái / thế quái (Thẩm Thị Huyền Không Học)",
+      "nghĩa 81 cặp sao (Tử Bạch Quyết, Phi Tinh Phú, Huyền Không Bí Chỉ, Huyền Cơ Phú)",
+      "thành môn quyết, linh thần – chính thần (chưa có trong engine)"
+    ]
+  }
 }

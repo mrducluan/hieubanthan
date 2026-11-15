@@ -1,0 +1,50 @@
+{
+ "_nguon": {
+  "sach": "Bát Trạch Minh Kính (八宅明鏡)",
+  "ban": "bản dịch tiếng Việt (NS Minh Lâm) — chủ dự án lưu PDF vào Google Drive 2026-11-12; trình đọc chỉ trả ~80 trang đầu",
+  "ghi_chu": "Bản dịch còn bản quyền → CHỈ ghi dữ kiện (bài ca du niên theo phiên âm Hán Việt, xếp hạng tám sao, lệ gửi cung) để đối chiếu phép tính; không chép lời dịch. Chưa có nguyên văn chữ Hán. Chép tay từ bản OCR, đã sửa lỗi nhận chữ.",
+  "ngay": "2026-11-12"
+ },
+ "du_nien_ca": {
+  "thu_tu": "Mỗi câu: cung gốc, rồi bảy sao lần lượt rơi vào bảy cung kế tiếp theo vòng Càn → Khảm → Cấn → Chấn → Tốn → Ly → Khôn → Đoài.",
+  "vong": [
+   "Càn",
+   "Khảm",
+   "Cấn",
+   "Chấn",
+   "Tốn",
+   "Ly",
+   "Khôn",
+   "Đoài"
+  ],
+  "cau": {
+   "Càn": "Lục Thiên Ngũ Hoạ Tuyệt Diên Sinh",
+   "Khảm": "Ngũ Thiên Sinh Diên Tuyệt Hoạ Lục",
+   "Cấn": "Lục Tuyệt Hoạ Sinh Diên Thiên Ngũ",
+   "Chấn": "Diên Sinh Hoạ Tuyệt Ngũ Thiên Lục",
+   "Tốn": "Thiên Ngũ Lục Hoạ Sinh Tuyệt Diên",
+   "Ly": "Lục Ngũ Tuyệt Diên Hoạ Sinh Thiên",
+   "Khôn": "Thiên Diên Tuyệt Sinh Hoạ Ngũ Lục",
+   "Đoài": "Sinh Hoạ Diên Tuyệt Lục Ngũ Thiên"
+  }
+ },
+ "xep_hang": {
+  "Sinh Khí": "thượng cát",
+  "Diên Niên": "thượng cát",
+  "Thiên Y": "trung cát",
+  "Phục Vị": "tiểu cát",
+  "Tuyệt Mệnh": "đại hung",
+  "Ngũ Quỷ": "đại hung",
+  "Hoạ Hại": "thứ hung",
+  "Lục Sát": "thứ hung"
+ },
+ "gui_cung": {
+  "cau_quyet": "Nam ngũ ký nhị, nữ ký bát",
+  "nam": "Khôn",
+  "nu": "Cấn"
+ },
+ "khong_dung": [
+  "'xoay bếp về Thiên Y thì bệnh không cần thuốc cũng giảm' — trái quy tắc sức khoẻ, không đưa vào KB",
+  "cô hư sát tháng cưới, giá thú chu đường — ngoài phạm vi phong thuỷ nhà ở"
+ ]
+}

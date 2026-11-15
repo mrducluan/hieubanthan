@@ -12,7 +12,7 @@ function utc(n: NgayVao): Date {
   return new Date(Date.UTC(n.nam, n.thang - 1, n.ngay));
 }
 
-export type KieuNgay = "day_du" | "dai" | "ngan" | "so" | "thang_nam" | "ngay_thang";
+export type KieuNgay = "day_du" | "dai" | "ngan" | "so" | "thang_nam" | "ngay_thang" | "ngay_thang_ngan";
 const KIEU: Record<KieuNgay, Intl.DateTimeFormatOptions> = {
   day_du: { weekday: "long", day: "numeric", month: "long", year: "numeric" },
   dai: { day: "numeric", month: "long", year: "numeric" },
@@ -20,6 +20,7 @@ const KIEU: Record<KieuNgay, Intl.DateTimeFormatOptions> = {
   so: { day: "2-digit", month: "2-digit", year: "numeric" },
   thang_nam: { month: "long", year: "numeric" },
   ngay_thang: { day: "numeric", month: "long" },
+  ngay_thang_ngan: { day: "numeric", month: "short" },
 };
 
 /** "2026-11-10" → vi "10 tháng 11, 2026" · en "10 November 2026" · en-us "November 10, 2026". */

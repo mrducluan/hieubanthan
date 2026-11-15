@@ -1,0 +1,3216 @@
+{
+ "_nguon": "EN-ALL GĐ 6 — bản phủ tiếng Anh của lời kinh Chu Dịch: quái từ, Đại tượng, Thoán truyện, 384 hào (+ Dụng Cửu / Dụng Lục). Nguyên văn Hán giữ nguyên (không phủ 'han'). Bản dịch Anh do ban biên tập dịch từ nguyên văn Hán (editorial translation), đối chiếu cách hiểu của các bản dịch tiếng Anh thông dụng; 'y' (ý) và 'nom_na' (In plain terms) là lời giải thích của ban biên tập — không dịch từ bản Việt của Ngô Tất Tố. Chờ người bản xứ duyệt.",
+ "_trang_thai": "bien_tap",
+ "que": {
+  "1": {
+   "que_tu": {
+    "dich": "The Creative: sublime success, furthering through perseverance."
+   },
+   "dai_tuong": {
+    "dich": "Heaven moves with strength; the noble person makes themselves strong without ceasing."
+   },
+   "nom_na": "Image: heaven upon heaven — strength following strength without pause. In plain terms: like someone with real inner power who wants to do something big: it can be done, but each stage has its own way of moving — do not charge ahead all the time.",
+   "thoan": {
+    "dich": "Great indeed is the originating power of the Creative! All things owe their beginning to it, and it governs heaven. Clouds move and rain falls, and all things take form. Seeing clearly the end and the beginning, the six positions are completed in time; riding the six dragons it governs the sky. The way of the Creative changes and transforms, so that each thing finds its true nature and destiny, preserving great harmony — this is what furthers through perseverance. It towers above all things, and all lands are at peace."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Hidden dragon. Do not act.",
+     "y": "The time is not yet ripe; build up your strength quietly.",
+     "nom_na": "Like a talented newcomer: learn and prepare first, do not show off yet."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Dragon appearing in the field. It furthers one to see the great person.",
+     "y": "Your ability starts to show; find someone who can guide you.",
+     "nom_na": "Like being noticed at work for the first time: a good moment to find a mentor."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The noble person is busy all day, and watchful at night. Danger, but no blame.",
+     "y": "Work hard and stay alert; that keeps you out of trouble.",
+     "nom_na": "Like someone with a lot of responsibility: busy all day, and checking things over in the evening — tiring, but safe."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Perhaps leaping up, perhaps staying in the deep. No blame.",
+     "y": "A turning point: you can leap or wait — choose freely, without blame.",
+     "nom_na": "Like standing at the edge of a big decision: you may jump or hold back, either is fine if you have thought it through."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Flying dragon in the heavens. It furthers one to see the great person.",
+     "y": "You are at your height; work with people of real stature.",
+     "nom_na": "Like a leader at the peak of their powers: the moment to act, alongside capable people."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Arrogant dragon will have cause to repent.",
+     "y": "Going too far brings regret; know when to stop.",
+     "nom_na": "Like someone who keeps pushing after reaching the top: the higher they go, the harder the fall."
+    }
+   ],
+   "dung": {
+    "dich": "All lines nine: a flight of dragons without a head. Good fortune.",
+    "y": "Strength that does not insist on leading brings good fortune.",
+    "nom_na": "Like a team of strong people where no one needs to be the boss: things go well."
+   }
+  },
+  "2": {
+   "que_tu": {
+    "dich": "The Receptive: sublime success, furthering through the perseverance of a mare. The noble person has somewhere to go: leading, they go astray; following, they find guidance. It furthers to find friends in the south-west and to lose friends in the north-east. Quiet perseverance brings good fortune."
+   },
+   "dai_tuong": {
+    "dich": "The earth's condition is receptive devotion; the noble person, with broad virtue, carries the outer world."
+   },
+   "nom_na": "Image: earth upon earth — wide, soft, carrying all things. In plain terms: this is a time for the supporting role: follow, lay the groundwork; steadiness and generosity get further than fighting to be first.",
+   "thoan": {
+    "dich": "Perfect indeed is the originating power of the Receptive! All things owe their birth to it, and it receives heaven with devotion. The Receptive in its breadth carries all things; its virtue joins with the limitless. Embracing and generous, bright and great, all kinds of beings flourish. The mare belongs to the earth and roams it without limit; gentle and devoted, it furthers through perseverance. When the noble person goes ahead to lead, they lose the way; when they follow with devotion, they find the constant path. Finding friends in the south-west means going with your own kind; losing friends in the north-east brings blessing in the end. The good fortune of quiet perseverance answers to the limitless earth."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "When there is hoarfrost underfoot, solid ice is not far off.",
+     "y": "Small signs show where things are heading; act early.",
+     "nom_na": "Like the first unpaid bill or the first sharp word: small now, but it grows if you ignore it."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Straight, square, great. Without practice, nothing that does not further.",
+     "y": "Be upright and true to your nature, and things go well by themselves.",
+     "nom_na": "Like an honest person doing their job well: no tricks needed, things work out."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Hidden lines. One is able to remain persevering. If you are in the king's service, seek no credit, but carry the work to the end.",
+     "y": "Keep your talent quiet and see the work through without claiming credit.",
+     "nom_na": "Like a capable assistant: does the work well, lets others take the stage, and is valued in the end."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "A tied-up sack. No blame, no praise.",
+     "y": "A time to be careful with your words and keep a low profile.",
+     "nom_na": "Like keeping your opinions to yourself in a tense meeting: no gain, but no trouble either."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "A yellow lower garment brings supreme good fortune.",
+     "y": "Modest virtue in a high place brings the greatest good fortune.",
+     "nom_na": "Like a respected person who stays humble: everyone trusts them."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Dragons fight in the meadow. Their blood is black and yellow.",
+     "y": "Pushing too far leads to a clash where both sides get hurt.",
+     "nom_na": "Like a quarrel that keeps escalating: in the end both people are hurt."
+    }
+   ],
+   "dung": {
+    "dich": "All lines six: lasting perseverance furthers.",
+    "y": "Steady perseverance over the long run is what brings benefit.",
+    "nom_na": "Like someone who keeps going patiently year after year: it pays off."
+   }
+  },
+  "3": {
+   "que_tu": {
+    "dich": "Difficulty at the Beginning: sublime success, furthering through perseverance. Do not set out to go anywhere; it furthers to appoint helpers."
+   },
+   "dai_tuong": {
+    "dich": "Clouds and thunder: the image of difficulty at the beginning; the noble person brings order out of confusion."
+   },
+   "nom_na": "Image: clouds and thunder churning but no rain yet — everything is just starting and still tangled. In plain terms: like opening a new shop or starting a new business: early hiccups are normal; you need helpers and to sort things out one by one, without trying to do everything.",
+   "thoan": {
+    "dich": "Difficulty at the beginning: the firm and the yielding first meet, and difficulties arise. Movement in the midst of danger brings great success through perseverance. The movement of thunder and rain fills everything; heaven creates things in chaos and darkness. It is right to appoint helpers, and not to rest."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Hesitation and hindrance. It furthers to remain persevering. It furthers to appoint helpers.",
+     "y": "Hold your ground at the start and gather people around you.",
+     "nom_na": "Like a project that cannot get going yet: stay put, keep it right, and find people to help."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Difficulties pile up. Horse and wagon part. Not a robber — he wants to woo when the time comes. The girl is chaste and does not pledge herself; after ten years she pledges herself.",
+     "y": "What looks like a threat may be an offer; but wait until the time is right.",
+     "nom_na": "Like an offer that comes too early: it is not bad, but it is not the moment — give it time."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Hunting deer without a forester, you only lose your way in the forest. The noble person sees the signs and prefers to give up; going on brings humiliation.",
+     "y": "Going ahead without guidance leads you astray; better to stop.",
+     "nom_na": "Like chasing a deal you do not understand without anyone to advise you: better to let it go."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Horse and wagon part. Seek union. Going brings good fortune; everything acts to further.",
+     "y": "Now is the time to reach out and join with others.",
+     "nom_na": "Like realising you cannot do it alone and asking for help: things start to move."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Difficulties in blessing. A little perseverance brings good fortune; great perseverance brings misfortune.",
+     "y": "Resources are tight; small steps work, big pushes do not.",
+     "nom_na": "Like having little money to work with: small, careful moves succeed, big gambles fail."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Horse and wagon part. Tears of blood flow.",
+     "y": "Stuck and despairing; it is time to find a new way.",
+     "nom_na": "Like being stuck for so long that you are worn out: stop and change direction."
+    }
+   ]
+  },
+  "4": {
+   "que_tu": {
+    "dich": "Youthful Folly has success. It is not I who seek the young fool; the young fool seeks me. At the first consultation I give an answer. Asking two or three times is importunate, and then I give no answer. Perseverance furthers."
+   },
+   "dai_tuong": {
+    "dich": "A spring wells up at the foot of the mountain: the image of youth; the noble person acts decisively and nurtures character."
+   },
+   "nom_na": "Image: a spring rising at the foot of the mountain — water that does not yet know where to flow. In plain terms: like a beginner who does not know the way yet: find the right teacher, ask sincerely once, and learn with discipline.",
+   "thoan": {
+    "dich": "Youthful folly: danger at the foot of the mountain; danger and standing still — that is folly. Youthful folly has success because it acts in success and hits the right time. It is not I who seek the young fool, the young fool seeks me — their will responds. At the first consultation I give an answer, because the teacher is firm and central. Asking two or three times is importunate, and the importunate get no answer — that is the folly of disrespect. To nurture what is right in the young is the work of the sage."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "To make a fool develop, it furthers to apply discipline. Remove the fetters; going on in that way brings humiliation.",
+     "y": "Some discipline is needed at the start, but not too much for too long.",
+     "nom_na": "Like training someone new: set clear rules, but do not keep them in a straitjacket."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "To bear with fools in kindliness brings good fortune. To take a wife brings good fortune. The son is capable of running the household.",
+     "y": "Patience and generosity with others bring good results.",
+     "nom_na": "Like a good older sibling who patiently helps the younger ones: the whole family benefits."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Do not take a maiden who, when she sees a man of wealth, loses possession of herself. Nothing furthers.",
+     "y": "Do not join with someone who loses themselves at the sight of money.",
+     "nom_na": "Like a partner who changes their mind as soon as a better offer appears: not someone to rely on."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Entangled folly brings humiliation.",
+     "y": "Stubbornly refusing to learn leaves you stuck.",
+     "nom_na": "Like someone who will not listen to anyone: they end up in a tight spot."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Childlike folly brings good fortune.",
+     "y": "An open, humble mind that is willing to learn brings good fortune.",
+     "nom_na": "Like a beginner who asks and listens: they learn fast."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "In punishing folly it does not further one to commit transgressions. It furthers one to prevent transgressions.",
+     "y": "Correct mistakes firmly, but to protect, not to hurt.",
+     "nom_na": "Like a strict parent: the point is to keep the child out of harm, not to punish for its own sake."
+    }
+   ]
+  },
+  "5": {
+   "que_tu": {
+    "dich": "Waiting. If you are sincere, you have light and success. Perseverance brings good fortune. It furthers to cross the great water."
+   },
+   "dai_tuong": {
+    "dich": "Clouds rise up to heaven: the image of waiting; the noble person eats, drinks and is joyous and of good cheer."
+   },
+   "nom_na": "Image: clouds have risen into the sky but the rain has not fallen. In plain terms: like waiting for an answer or a result: it will come; meanwhile eat well, keep your strength and prepare — do not rush across the river while the water is still wild.",
+   "thoan": {
+    "dich": "Waiting means holding back; danger lies ahead. Being firm and strong, one does not fall into it, so the meaning is that one is not trapped. Waiting, with sincerity, has light and success; perseverance brings good fortune, for one holds the place of heaven, upright and central. It furthers to cross the great water: going forward brings achievement."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Waiting in the meadow. It furthers to abide in what endures. No blame.",
+     "y": "Danger is still far off; keep to your normal routine.",
+     "nom_na": "Like waiting for news that is still a long way off: carry on with daily life as usual."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Waiting on the sand. There is some small gossip. The end brings good fortune.",
+     "y": "A little friction while you wait, but it ends well.",
+     "nom_na": "Like waiting while people talk: some annoyance, but it works out."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "Waiting in the mud brings about the arrival of the enemy.",
+     "y": "Waiting in a bad spot invites trouble; be careful.",
+     "nom_na": "Like stalling in a risky position: you make yourself an easy target."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Waiting in blood. Get out of the pit.",
+     "y": "You are in the thick of danger; find your way out calmly.",
+     "nom_na": "Like being caught in a crisis: stay calm and look for the exit."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Waiting at meat and wine. Perseverance brings good fortune.",
+     "y": "Relax and enjoy what you have while you wait for the right time.",
+     "nom_na": "Like taking time to rest and recharge before the next push: good."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "One falls into the pit. Three uninvited guests arrive. Honour them, and in the end there will be good fortune.",
+     "y": "Unexpected help arrives; welcome it with respect.",
+     "nom_na": "Like unexpected visitors who turn out to bring help: be polite and open."
+    }
+   ]
+  },
+  "6": {
+   "que_tu": {
+    "dich": "Conflict. You are sincere and are being obstructed. A cautious halt halfway brings good fortune; going through to the end brings misfortune. It furthers to see the great person. It does not further to cross the great water."
+   },
+   "dai_tuong": {
+    "dich": "Heaven and water go their opposite ways: the image of conflict; the noble person, in all their dealings, carefully considers the beginning."
+   },
+   "nom_na": "Image: heaven goes up and water flows down — two sides pulling in opposite directions. In plain terms: like a dispute where you think you are right: find a fair middle way early; pushing it to the end costs both sides.",
+   "thoan": {
+    "dich": "Conflict: firmness above, danger below; danger joined with strength makes conflict. Conflict — being sincere and obstructed, a cautious halt halfway brings good fortune, because the firm line comes and takes the centre. Going through to the end brings misfortune: conflict must not be carried to completion. It furthers to see the great person, who values what is central and correct. It does not further to cross the great water: one would fall into the abyss."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "If one does not perpetuate the affair, there is a little gossip. In the end, good fortune comes.",
+     "y": "Drop the dispute early; some talk, but it ends well.",
+     "nom_na": "Like letting a small argument go: a few words, then peace."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "One cannot engage in conflict; one returns home, gives way. The people of his town, three hundred households, remain free of guilt.",
+     "y": "Pulling back from a fight you cannot win protects everyone.",
+     "nom_na": "Like stepping back from a fight with someone much stronger: your family stays safe."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "To nourish oneself on ancient virtue induces perseverance. Danger. In the end, good fortune comes. If by chance you are in the service of a king, seek no works.",
+     "y": "Keep to what you already have and do not compete; it works out.",
+     "nom_na": "Like living on your savings and old reputation instead of fighting: safe in the end."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "One cannot engage in conflict. One turns back and submits to fate, changes one's attitude, and finds peace in perseverance. Good fortune.",
+     "y": "Change your stance and accept things; peace returns.",
+     "nom_na": "Like realising you were wrong and changing course: things calm down."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "To contend before him brings supreme good fortune.",
+     "y": "A fair judge settles the matter well.",
+     "nom_na": "Like taking a dispute to a fair mediator: it is resolved justly."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Even if by chance a leather belt is bestowed on one, by the end of a morning it will have been snatched away three times.",
+     "y": "What you win through conflict does not last.",
+     "nom_na": "Like winning an argument but losing the friendship: the victory slips away."
+    }
+   ]
+  },
+  "7": {
+   "que_tu": {
+    "dich": "The Army. The army needs perseverance and an experienced leader. Good fortune without blame."
+   },
+   "dai_tuong": {
+    "dich": "In the middle of the earth is water: the image of the army; the noble person, generous towards the people, increases their masses."
+   },
+   "nom_na": "Image: water hidden in the earth — a large force gathered and held. In plain terms: like running a big team: it works with a rightful aim, clear discipline and an experienced leader.",
+   "thoan": {
+    "dich": "The army means the masses; perseverance means being correct. One who can lead the masses rightly can become king. Firm and central, and met with response; going into danger yet staying devoted — with this one may afflict the world and the people still follow. Good fortune — and what blame could there be?"
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "An army must set forth in proper order. If the order is not good, misfortune threatens.",
+     "y": "Start with clear rules; without them, things go wrong.",
+     "nom_na": "Like starting a project without clear roles: chaos follows."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "In the midst of the army. Good fortune. No blame. The king bestows a triple decoration.",
+     "y": "The leader who stays with the team earns recognition.",
+     "nom_na": "Like a manager who works alongside their team: respected and rewarded."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Perchance the army carries corpses in the wagon. Misfortune.",
+     "y": "Too many people giving orders leads to failure.",
+     "nom_na": "Like a team with too many bosses: the project fails."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "The army retreats. No blame.",
+     "y": "A wise retreat is not a failure.",
+     "nom_na": "Like stepping back from a losing battle: you save your strength."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "There is game in the field. It furthers to catch it. No blame. Let the eldest lead the army. The younger transports corpses; then perseverance brings misfortune.",
+     "y": "Act against a real problem, but give the lead to the experienced person.",
+     "nom_na": "Like dealing with a genuine threat: put the most experienced person in charge, not the most eager."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "The great prince issues commands, founds states, vests families with fiefs. Inferior people should not be employed.",
+     "y": "When the work is done, reward people according to their worth.",
+     "nom_na": "Like closing a project: thank and reward people, but do not give key roles to the wrong ones."
+    }
+   ]
+  },
+  "8": {
+   "que_tu": {
+    "dich": "Holding Together brings good fortune. Inquire of the oracle once again whether you possess sublimity, constancy and perseverance; then there is no blame. Those who are uncertain gradually join. Whoever comes too late meets with misfortune."
+   },
+   "dai_tuong": {
+    "dich": "On the earth is water: the image of holding together; the kings of old founded the states and kept friendly relations with the feudal lords."
+   },
+   "nom_na": "Image: water on the earth — they flow together and stick close. In plain terms: like finding a team or community to belong to: check your own sincerity, then join wholeheartedly; do not wait until it is too late.",
+   "thoan": {
+    "dich": "Holding together brings good fortune. Holding together means mutual help: those below follow with devotion. Inquiring of the oracle again whether one has sublimity, constancy and perseverance, without blame — this is because of firmness in the centre. Those who are uncertain gradually join, because above and below respond to one another. Whoever comes too late meets with misfortune: their way has come to an end."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Hold to them in truth and loyalty; this is without blame. Truth, like a full earthen bowl: thus in the end good fortune comes from without.",
+     "y": "Sincerity at the start brings support from unexpected places.",
+     "nom_na": "Like a new member who is simply honest and loyal: good luck comes from where you did not expect."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Hold to them inwardly. Perseverance brings good fortune.",
+     "y": "Stay connected from the heart, without losing yourself.",
+     "nom_na": "Like being close to people while keeping your own values: good."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "You hold together with the wrong people.",
+     "y": "These are not the right people to bond with.",
+     "nom_na": "Like getting close to people who do not share your values: it will hurt."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Hold to them outwardly also. Perseverance brings good fortune.",
+     "y": "Openly support the right leader.",
+     "nom_na": "Like openly backing a good boss: things go well."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Manifestation of holding together. In the hunt the king uses beaters on three sides only and foregoes the game that runs off in front. The citizens need no warning. Good fortune.",
+     "y": "Draw people in without forcing them; let those who want to leave go.",
+     "nom_na": "Like a good leader who does not chase people: whoever stays, stays willingly."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "He finds no head for holding together. Misfortune.",
+     "y": "Without a clear centre or start, the bond fails.",
+     "nom_na": "Like trying to join a group too late, with no one to lead you in: you stay outside."
+    }
+   ]
+  },
+  "9": {
+   "que_tu": {
+    "dich": "Small Taming has success. Dense clouds, no rain from our western border."
+   },
+   "dai_tuong": {
+    "dich": "The wind drives across heaven: the image of small taming; the noble person refines the outward aspect of their nature."
+   },
+   "nom_na": "Image: wind blowing across the sky — clouds gather but no rain falls yet. In plain terms: like small savings and small improvements: the big result has not come, but everything you add now counts.",
+   "thoan": {
+    "dich": "Small taming: the yielding line holds its place and those above and below respond to it — this is called small taming. Strong yet gentle, firm in the centre and its will is carried out — so there is success. Dense clouds but no rain: it is still moving on. From our western border: the blessing has not yet spread."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Return to the way. How could there be blame in this? Good fortune.",
+     "y": "Go back to your own path; that is right.",
+     "nom_na": "Like returning to what you do best after a detour: good."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "He allows himself to be drawn into returning. Good fortune.",
+     "y": "Coming back together with others who think alike.",
+     "nom_na": "Like being brought back on track by a friend: good fortune."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The spokes burst out of the wagon wheels. Man and wife roll their eyes.",
+     "y": "Forcing things causes a breakdown and quarrels.",
+     "nom_na": "Like pushing too hard at home: the plan breaks down and the couple argue."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "If you are sincere, blood vanishes and fear gives way. No blame.",
+     "y": "Sincerity removes the danger and the fear.",
+     "nom_na": "Like clearing the air with honesty: tension and worry fade."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "If you are sincere and loyally attached, you are rich in your neighbour.",
+     "y": "Loyalty shared with others brings wealth to all.",
+     "nom_na": "Like a close-knit group of neighbours: everyone is better off."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "The rain comes, there is rest. This is due to the lasting effect of character. Perseverance brings the woman into danger. The moon is nearly full. If the noble person persists, misfortune comes.",
+     "y": "The goal is reached; stop here and do not push further.",
+     "nom_na": "Like finally getting what you saved for: enjoy it, and do not push your luck."
+    }
+   ]
+  },
+  "10": {
+   "que_tu": {
+    "dich": "Treading: treading on the tail of the tiger. It does not bite. Success."
+   },
+   "dai_tuong": {
+    "dich": "Heaven above, the lake below: the image of treading; the noble person discriminates between high and low and so settles the minds of the people."
+   },
+   "nom_na": "Image: heaven above, the lake below — the weaker walks behind the stronger, as if behind a tiger. In plain terms: like working with a demanding boss or a powerful partner: courteous, correct and careful at each step, and you will not get 'bitten'.",
+   "thoan": {
+    "dich": "Treading: the yielding treads upon the firm. Joyful and responding to the Creative — so one treads on the tiger's tail and it does not bite; success. Firm, central and correct, one treads the place of the ruler without reproach, and the light shines."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Simple conduct. Progress without blame.",
+     "y": "Keep things simple and true to yourself at the start.",
+     "nom_na": "Like someone new at work: simple and genuine, doing your own job well, is enough."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Treading a smooth, level course. The perseverance of a quiet person brings good fortune.",
+     "y": "A straight path with little ambition and a calm mind is good.",
+     "nom_na": "Like living straightforwardly without elbowing others: a calm mind and calm affairs."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "A one-eyed man is able to see, a lame man is able to tread. He treads on the tail of the tiger. The tiger bites the man. Misfortune. A warrior acts like this on behalf of his great prince.",
+     "y": "Overestimating yourself and taking risks is truly dangerous.",
+     "nom_na": "Like someone with little skill taking on an expert's job: real trouble follows."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "He treads on the tail of the tiger. Caution and circumspection lead ultimately to good fortune.",
+     "y": "Risky work done with constant care gets through.",
+     "nom_na": "Like a high-risk job done with constant checking: you get through in the end."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Resolute conduct. Perseverance with awareness of danger.",
+     "y": "Being decisive is necessary, but staying rigid is dangerous.",
+     "nom_na": "Like a decisive person: good, but if they never bend, one day they break."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Look to your conduct and weigh the favourable signs. When everything is fulfilled, supreme good fortune comes.",
+     "y": "Look back over the whole journey and learn from it — that is a blessing.",
+     "nom_na": "Like looking back at the end of the year on the road you have travelled and drawing lessons: that is a blessing."
+    }
+   ]
+  },
+  "11": {
+   "que_tu": {
+    "dich": "Peace. The small departs, the great approaches. Good fortune. Success."
+   },
+   "dai_tuong": {
+    "dich": "Heaven and earth unite: the image of peace; the ruler divides and completes the course of heaven and earth, furthers and regulates their gifts, and so helps the people."
+   },
+   "nom_na": "Image: earth above, heaven below — the two meet and everything flows. In plain terms: like a smooth period at work and at home: use it to build foundations, and remember that good times also turn.",
+   "thoan": {
+    "dich": "Peace: the small departs, the great approaches; good fortune, success. Heaven and earth unite and all things flow freely; above and below unite and share one will. Yang within and yin without, strength within and devotion without, the noble person within and the petty person without: the way of the noble person grows, the way of the petty person fades."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "When ribbon grass is pulled up, the sod comes with it. Each according to his kind. Undertakings bring good fortune.",
+     "y": "Act together with like-minded people.",
+     "nom_na": "Like pulling up grass and the roots coming with it: friends join in and things go well."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Bearing with the uncultured in gentleness, fording the river with resolution, not neglecting what is distant, not regarding one's companions: thus one may walk in the middle.",
+     "y": "Be generous and bold, remember the distant, and do not form cliques.",
+     "nom_na": "Like a fair-minded leader: accepting, brave, and not favouring friends."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "No plain not followed by a slope. No going not followed by a return. He who remains persevering in danger is without blame. Do not complain about this truth; enjoy the good fortune you still possess.",
+     "y": "Every peak is followed by a slope; stay steady and enjoy what you have.",
+     "nom_na": "Like knowing that a good run will end: keep your head and enjoy it while it lasts."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "He flutters down, not boasting of his wealth, together with his neighbour, guileless and sincere.",
+     "y": "Humble and sincere, you join with others easily.",
+     "nom_na": "Like someone who does not show off: people trust them naturally."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "The sovereign I gives his daughter in marriage. This brings blessing and supreme good fortune.",
+     "y": "A union across differences in status brings great blessing.",
+     "nom_na": "Like a respectful alliance between unequal sides: very good fortune."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "The wall falls back into the moat. Use no army now. Make your commands known within your own town. Perseverance brings humiliation.",
+     "y": "The good time is ending; do not fight it, tidy up close to home.",
+     "nom_na": "Like the end of a boom: do not force things, look after your own circle."
+    }
+   ]
+  },
+  "12": {
+   "que_tu": {
+    "dich": "Standstill. Evil people do not further the perseverance of the noble person. The great departs; the small approaches."
+   },
+   "dai_tuong": {
+    "dich": "Heaven and earth do not unite: the image of standstill; the noble person falls back on their inner worth to escape difficulties and does not seek honour or pay."
+   },
+   "nom_na": "Image: heaven above, earth below — moving apart, no exchange. In plain terms: like a time when nothing gets through, not at work and not at home: hold your principles, keep a low profile, and wait for the opening.",
+   "thoan": {
+    "dich": "Standstill: evil people do not further the perseverance of the noble person; the great departs, the small approaches. Heaven and earth do not unite and all things do not flow; above and below do not unite and there is no order in the world. Yin within and yang without, weak within and hard without, the petty person within and the noble person without: the way of the petty person grows, the way of the noble person fades."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "When ribbon grass is pulled up, the sod comes with it. Each according to his kind. Perseverance brings good fortune and success.",
+     "y": "Stick with like-minded people and hold your principles.",
+     "nom_na": "Like a group of honest people who stay together in a bad time: in the end it works out."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "They bear and endure; this means good fortune for inferior people. The standstill serves to help the great person to attain success.",
+     "y": "Those who flatter do well for now; the noble person bears the standstill and later succeeds.",
+     "nom_na": "Like refusing to curry favour in a bad environment: harder now, better later."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "They bear shame.",
+     "y": "Getting ahead by improper means brings shame.",
+     "nom_na": "Like gaining a position you know you do not deserve: it brings a quiet shame."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "He who acts at the command of the highest remains without blame. Those of like mind partake of the blessing.",
+     "y": "When the order is right, acting on it is safe and helps your companions.",
+     "nom_na": "Like taking action when you have proper backing: you and your colleagues benefit."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Standstill is giving way. Good fortune for the great person. 'What if it should fail, what if it should fail?' In this way he ties it to a cluster of mulberry shoots.",
+     "y": "The standstill begins to lift; stay alert and secure what you have.",
+     "nom_na": "Like a crisis easing: keep your guard up and tie things down firmly."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "The standstill comes to an end. First standstill, then good fortune.",
+     "y": "The blockage is over; joy follows.",
+     "nom_na": "Like the end of a long, difficult stretch: first stuck, then relief."
+    }
+   ]
+  },
+  "13": {
+   "que_tu": {
+    "dich": "Fellowship with people in the open. Success. It furthers to cross the great water. The perseverance of the noble person furthers."
+   },
+   "dai_tuong": {
+    "dich": "Heaven together with fire: the image of fellowship; the noble person organises the clans and makes distinctions between things."
+   },
+   "nom_na": "Image: fire rising towards heaven — the same direction, the same light. In plain terms: like working with people from different groups: being open, fair and transparent makes things succeed; cliques make them small.",
+   "thoan": {
+    "dich": "Fellowship: the yielding line holds its place and the centre and responds to the Creative — this is called fellowship. Fellowship with people in the open, success; it furthers to cross the great water — this is the work of the Creative. Clear and strong, central and correct, and responding: this is the uprightness of the noble person. Only the noble person can unite the wills of everyone under heaven."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Fellowship with people at the gate. No blame.",
+     "y": "Openness at the start, without favourites, is right.",
+     "nom_na": "Like welcoming everyone at the door: a good start."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Fellowship with people in the clan. Humiliation.",
+     "y": "Sticking only to your own circle brings regret.",
+     "nom_na": "Like only working with relatives or old friends: narrow and limiting."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "He hides weapons in the thicket; he climbs the high hill in front of it. For three years he does not rise up.",
+     "y": "Hidden suspicion and readiness to fight keep you stuck.",
+     "nom_na": "Like quietly preparing for a fight with a colleague: years go by and nothing changes."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "He climbs up on his wall; he cannot attack. Good fortune.",
+     "y": "Stopping before you attack is good fortune.",
+     "nom_na": "Like getting ready to argue, then realising it is wrong and holding back: good."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "People bound in fellowship first weep and lament, but afterwards they laugh. After great struggles they succeed in meeting.",
+     "y": "Hard at first, but the bond holds and joy follows.",
+     "nom_na": "Like friends separated by difficulties who finally meet again: tears, then laughter."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Fellowship with people in the meadow. No remorse.",
+     "y": "A modest, wider fellowship without great results, but no regret.",
+     "nom_na": "Like a loose community connection: nothing spectacular, but no regret."
+    }
+   ]
+  },
+  "14": {
+   "que_tu": {
+    "dich": "Possession in Great Measure. Supreme success."
+   },
+   "dai_tuong": {
+    "dich": "Fire high in heaven: the image of possession in great measure; the noble person curbs evil and furthers good, obeying the benevolent will of heaven."
+   },
+   "nom_na": "Image: fire high in the sky — shining on everything. In plain terms: like a time when you have plenty: share it, stay humble, and use it to do good.",
+   "thoan": {
+    "dich": "Possession in great measure: the yielding line holds the place of honour, great and central, and those above and below respond — this is called possession in great measure. Its virtue is firm and strong, clear and refined; it responds to heaven and moves with the time — so there is supreme success."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "No relationship with what is harmful; there is no blame in this. If one remains conscious of difficulty, one remains without blame.",
+     "y": "Stay away from what harms you and remember the hard times.",
+     "nom_na": "Like someone newly comfortable who still remembers being poor: no trouble."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "A big wagon for loading. One may undertake something. No blame.",
+     "y": "You have the capacity to carry a big task.",
+     "nom_na": "Like a solid vehicle that can carry a heavy load: take the job on."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "A prince offers it to the Son of Heaven. A petty person cannot do this.",
+     "y": "Offer what you have to a greater purpose.",
+     "nom_na": "Like a successful person who gives back to the community: only a generous heart can do it."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "He makes a difference between himself and his neighbour. No blame.",
+     "y": "Do not compete in showing off.",
+     "nom_na": "Like not trying to outdo the neighbours: no trouble."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "He whose truth is accessible, yet dignified, has good fortune.",
+     "y": "Sincere and approachable, yet with dignity.",
+     "nom_na": "Like a boss who is friendly but firm: respected."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "He is blessed by heaven. Good fortune. Nothing that does not further.",
+     "y": "When you are in tune with what is right, help comes from above.",
+     "nom_na": "Like someone whose good conduct brings luck from everywhere."
+    }
+   ]
+  },
+  "15": {
+   "que_tu": {
+    "dich": "Modesty creates success. The noble person carries things through."
+   },
+   "dai_tuong": {
+    "dich": "Within the earth, a mountain: the image of modesty; the noble person reduces what is too much and increases what is too little, weighing things and making them equal."
+   },
+   "nom_na": "Image: a mountain hidden inside the earth — something great that keeps itself low. In plain terms: like a capable person who does not show off: people trust and support them, and things turn out well.",
+   "thoan": {
+    "dich": "Modesty brings success. The way of heaven reaches down and shines; the way of earth is lowly and rises upward. The way of heaven diminishes the full and adds to the modest; the way of earth changes the full and flows towards the modest; spirits harm the full and bless the modest; people hate the full and love the modest. Modesty in a high place shines; in a low place it cannot be passed over. This is how the noble person reaches a good end."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "A noble person modest about their modesty may cross the great water. Good fortune.",
+     "y": "Deep modesty lets you take on big things.",
+     "nom_na": "Like a quiet expert who never brags: trusted with big tasks."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Modesty that comes to expression. Perseverance brings good fortune.",
+     "y": "Modesty that shows naturally is good.",
+     "nom_na": "Like a reputation for humility that grows on its own: good."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "A noble person of modesty and merit carries things to conclusion. Good fortune.",
+     "y": "Working hard and staying modest leads to a good outcome.",
+     "nom_na": "Like the hardest worker who never asks for credit: in the end everyone sees it."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Nothing that would not further modesty in movement.",
+     "y": "Show modesty in everything you do.",
+     "nom_na": "Like being modest in every small action: everything goes smoothly."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "No boasting of wealth before one's neighbour. It furthers to attack with force. Nothing that would not further.",
+     "y": "Modest, but firm when action is needed.",
+     "nom_na": "Like a humble person who still stands up firmly against wrongdoing: respected."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Modesty that comes to expression. It furthers to set armies marching to chastise one's own city and one's country.",
+     "y": "Use your modesty to put your own house in order.",
+     "nom_na": "Like someone who corrects their own team before blaming others: things improve."
+    }
+   ]
+  },
+  "16": {
+   "que_tu": {
+    "dich": "Enthusiasm. It furthers to install helpers and to set armies marching."
+   },
+   "dai_tuong": {
+    "dich": "Thunder comes resounding out of the earth: the image of enthusiasm; the ancient kings made music to honour merit and offered it to the Supreme Deity, inviting their ancestors to be present."
+   },
+   "nom_na": "Image: thunder bursting out of the earth — energy waking up. In plain terms: like the excitement at the start of a project or an event: use the energy to get everyone moving, but prepare properly and do not get carried away.",
+   "thoan": {
+    "dich": "Enthusiasm: the firm line finds response and its will is carried out; moving with devotion — that is enthusiasm. Because enthusiasm moves with devotion, heaven and earth are like it — how much more installing helpers and setting armies marching! Heaven and earth move with devotion, so the sun and moon do not stray and the four seasons do not err. The sage moves with devotion, so punishments are clear and the people obey. Great indeed is the meaning of the time of enthusiasm!"
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Enthusiasm that expresses itself brings misfortune.",
+     "y": "Boasting about your excitement or connections brings trouble.",
+     "nom_na": "Like bragging about who you know: it backfires."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Firm as a rock. Not a whole day. Perseverance brings good fortune.",
+     "y": "Stay firm and see the warning signs early.",
+     "nom_na": "Like someone who keeps a cool head when everyone is carried away: they act at the right time."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Enthusiasm that looks upward creates remorse. Hesitation brings remorse.",
+     "y": "Waiting for others to lift your mood brings regret.",
+     "nom_na": "Like always looking to the boss for approval: regret, and waiting too long makes it worse."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "The source of enthusiasm. He achieves great things. Doubt not. You gather friends around you as a hair clasp gathers the hair.",
+     "y": "You are the source of the energy; trust it and others gather.",
+     "nom_na": "Like the person whose enthusiasm holds the team together: do not doubt, people follow."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Persistently unwell, yet lives on.",
+     "y": "Under constant pressure, yet you hold on.",
+     "nom_na": "Like working under constant strain: it does not break you, but do not ignore it."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Deluded enthusiasm. But if after completion one changes, there is no blame.",
+     "y": "Lost in pleasure, but changing course in time is fine.",
+     "nom_na": "Like realising you have been partying too long and pulling yourself together: no harm done."
+    }
+   ]
+  },
+  "17": {
+   "que_tu": {
+    "dich": "Following has supreme success. Perseverance furthers. No blame."
+   },
+   "dai_tuong": {
+    "dich": "Thunder in the middle of the lake: the image of following; at nightfall the noble person goes indoors to rest."
+   },
+   "nom_na": "Image: thunder resting inside the lake — energy that yields to the season. In plain terms: like adapting to change at work: go with the times and follow what is right, but do not follow blindly.",
+   "thoan": {
+    "dich": "Following: the firm comes and places itself beneath the yielding; movement and joy — this is following. Great success through perseverance, without blame, and the whole world follows the time. Great indeed is the meaning of following the time!"
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "The standard is changing. Perseverance brings good fortune. To go out of the door in company produces deeds.",
+     "y": "Things are changing; stay principled and open to others.",
+     "nom_na": "Like a reorganisation at work: keep your values and meet new people — it pays off."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "If one clings to the little boy, one loses the strong man.",
+     "y": "Choosing the small means losing the big.",
+     "nom_na": "Like holding on to an easy, small option and missing a real opportunity."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "If one clings to the strong man, one loses the little boy. Through following one finds what one seeks. It furthers to remain persevering.",
+     "y": "Choosing what matters means letting go of the lesser; stay steady.",
+     "nom_na": "Like leaving a comfortable small job for a real mentor: you get what you are after."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Following creates success. Perseverance brings misfortune. To go one's way with sincerity brings clarity. How could there be blame in this?",
+     "y": "Gaining followers can cause suspicion; stay sincere and clear.",
+     "nom_na": "Like becoming popular at work: be transparent so no one thinks you are scheming."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Sincere in the good. Good fortune.",
+     "y": "Follow what is good wholeheartedly.",
+     "nom_na": "Like committing sincerely to a good cause: good fortune."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "He meets with firm allegiance and is still further bound. The king introduces him to the western mountain.",
+     "y": "A deep, lasting bond of loyalty.",
+     "nom_na": "Like a lifelong loyalty to a cause or a person: honoured."
+    }
+   ]
+  },
+  "18": {
+   "que_tu": {
+    "dich": "Work on What Has Been Spoiled has supreme success. It furthers to cross the great water. Before the starting point, three days; after the starting point, three days."
+   },
+   "dai_tuong": {
+    "dich": "The wind blows low on the mountain: the image of decay; the noble person stirs up the people and strengthens their spirit."
+   },
+   "nom_na": "Image: wind trapped at the foot of a mountain — air that does not move goes stale. In plain terms: like fixing an old problem everyone has ignored: find the root, plan the repair, and see it through.",
+   "thoan": {
+    "dich": "Work on what has been spoiled: the firm is above and the yielding below; gentle and standing still — that is decay. Work on what has been spoiled has supreme success, and the world is set in order. It furthers to cross the great water: going brings things to do. Three days before the start and three days after: every ending has a new beginning — that is the way of heaven."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Setting right what has been spoiled by the father. If there is a son, no blame rests upon the departed father. Danger. In the end, good fortune.",
+     "y": "Fixing an inherited problem; hard, but it ends well.",
+     "nom_na": "Like taking over a family business with problems and sorting them out: risky, but good in the end."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Setting right what has been spoiled by the mother. One must not be too persevering.",
+     "y": "Fix the problem gently, not harshly.",
+     "nom_na": "Like correcting a parent's mistake: be tactful, not rigid."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "Setting right what has been spoiled by the father. There will be a little remorse. No great blame.",
+     "y": "Some friction in fixing things, but no real harm.",
+     "nom_na": "Like changing the old way of doing things: a few hurt feelings, but no big mistake."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Tolerating what has been spoiled by the father. In continuing one sees humiliation.",
+     "y": "Letting the problem slide only makes it worse.",
+     "nom_na": "Like turning a blind eye to an old problem: it comes back to embarrass you."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Setting right what has been spoiled by the father. One meets with praise.",
+     "y": "Fixing things well brings recognition.",
+     "nom_na": "Like successfully turning around something that was failing: you are praised for it."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "He does not serve kings and princes; he sets himself higher goals.",
+     "y": "Stepping back from worldly affairs for a higher purpose.",
+     "nom_na": "Like leaving the race for status to do work that truly matters to you."
+    }
+   ]
+  },
+  "19": {
+   "que_tu": {
+    "dich": "Approach has supreme success. Perseverance furthers. When the eighth month comes, there will be misfortune."
+   },
+   "dai_tuong": {
+    "dich": "The earth above the lake: the image of approach; the noble person is inexhaustible in teaching and boundless in caring for and protecting the people."
+   },
+   "nom_na": "Image: earth rising above the lake — standing close and looking after what is below. In plain terms: like a time of growth and new responsibility: draw close to people, lead well, and remember the good run has a limit.",
+   "thoan": {
+    "dich": "Approach: the firm gradually grows. Joyful and devoted, firm in the centre and met with response, great success through what is right — this is the way of heaven. When the eighth month comes there will be misfortune: the decline will not be long in coming."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Joint approach. Perseverance brings good fortune.",
+     "y": "Approach together with others, staying principled.",
+     "nom_na": "Like starting something new with a good team: good."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Joint approach. Good fortune. Everything furthers.",
+     "y": "Working together, everything goes well.",
+     "nom_na": "Like a team that moves forward together: everything works out."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Comfortable approach. Nothing that would further. If one is induced to grieve over it, one becomes free of blame.",
+     "y": "Easy, careless approach brings no good; notice it and correct it.",
+     "nom_na": "Like coasting on charm: it gets you nowhere — notice it and change."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Complete approach. No blame.",
+     "y": "Coming close and fully engaged is right.",
+     "nom_na": "Like a manager who really gets involved: no mistake."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Wise approach. This is right for a great prince. Good fortune.",
+     "y": "Lead with wisdom, by choosing and trusting good people.",
+     "nom_na": "Like a wise leader who knows whom to rely on: good fortune."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Greathearted approach. Good fortune. No blame.",
+     "y": "Generous, sincere engagement brings good fortune.",
+     "nom_na": "Like someone experienced who generously helps the next generation: good."
+    }
+   ]
+  },
+  "20": {
+   "que_tu": {
+    "dich": "Contemplation. The ablution has been made, but not yet the offering. Full of trust, they look up to him."
+   },
+   "dai_tuong": {
+    "dich": "The wind blows over the earth: the image of contemplation; the kings of old visited the regions, observed the people and set up instruction."
+   },
+   "nom_na": "Image: wind moving over the land — touching everything and being seen everywhere. In plain terms: like taking a step back to look at the whole picture before acting, and remembering that others are watching you too.",
+   "thoan": {
+    "dich": "The great one is above for all to see, devoted and gentle, central and correct, contemplating the world. Contemplation — the ablution made but not yet the offering, full of trust they look up to him: those below look and are transformed. Contemplating the divine way of heaven, the four seasons never err; the sage uses the divine way to instruct, and the whole world submits."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Boylike contemplation. For an inferior person, no blame. For a noble person, humiliation.",
+     "y": "A shallow view is fine for a beginner, not for a leader.",
+     "nom_na": "Like judging by first impressions: forgivable when you are new, embarrassing when you are in charge."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Contemplation through the crack of the door. Furthering for the perseverance of a woman.",
+     "y": "A narrow view from your own corner.",
+     "nom_na": "Like peeking through a gap: you see only part of the picture."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Contemplation of my life decides the choice between advance and retreat.",
+     "y": "Look at your own life to decide whether to move forward or back.",
+     "nom_na": "Like reviewing your own track record before deciding on a new step."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Contemplation of the light of the kingdom. It furthers one to exert influence as the guest of a king.",
+     "y": "Seeing the bigger picture and serving it well.",
+     "nom_na": "Like visiting a successful company and being invited to contribute: good."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Contemplation of my life. The noble person is without blame.",
+     "y": "Examine yourself, especially the effect you have on others.",
+     "nom_na": "Like a leader checking whether their own behaviour is the right example."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Contemplation of his life. The noble person is without blame.",
+     "y": "Look at yourself from the outside, with detachment.",
+     "nom_na": "Like an elder reflecting calmly on their life: no blame."
+    }
+   ]
+  },
+  "21": {
+   "que_tu": {
+    "dich": "Biting Through has success. It is favourable to let justice be administered."
+   },
+   "dai_tuong": {
+    "dich": "Thunder and lightning: the image of biting through; the kings of old made firm the laws through clearly defined penalties."
+   },
+   "nom_na": "Image: thunder and lightning together — a decisive strike that clears the air. In plain terms: like a problem stuck in the middle of everything: name it, deal with it firmly and fairly, and things can move again.",
+   "thoan": {
+    "dich": "There is something between the jaws: this is called biting through. Biting through brings success. The firm and the yielding are separated; movement and clarity; thunder and lightning unite and shine. The yielding line holds the centre and rises; though not in its proper place, it is favourable to administer justice."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "His feet are fastened in the stocks, so that his toes disappear. No blame.",
+     "y": "A small correction early prevents bigger trouble.",
+     "nom_na": "Like a warning for a first small mistake: it stops a bigger one."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Bites through tender meat, so that his nose disappears. No blame.",
+     "y": "Dealing firmly with an easy case, perhaps too hard, but no blame.",
+     "nom_na": "Like being a bit too strict with a small issue: forgivable."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Bites on old dried meat and strikes on something poisonous. Slight humiliation. No blame.",
+     "y": "Tackling an old problem brings some unpleasantness, but no real fault.",
+     "nom_na": "Like digging into an old dispute: some bad feeling, but you were right to do it."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Bites on dried gristly meat. Receives metal arrows. It furthers one to be mindful of difficulties and to be persevering. Good fortune.",
+     "y": "A hard case needs firmness and care; it works out.",
+     "nom_na": "Like a tough negotiation: stay firm and careful and you succeed."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Bites on dried lean meat. Receives yellow gold. Persevering, aware of danger. No blame.",
+     "y": "Being fair and firm in a hard case is right.",
+     "nom_na": "Like making a fair but tough decision as a leader: no blame if you stay aware of the risks."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "His neck is fastened in the wooden cangue, so that his ears disappear. Misfortune.",
+     "y": "Refusing to listen to warnings leads to serious trouble.",
+     "nom_na": "Like ignoring every warning until it is too late."
+    }
+   ]
+  },
+  "22": {
+   "que_tu": {
+    "dich": "Grace has success. In small matters it is favourable to undertake something."
+   },
+   "dai_tuong": {
+    "dich": "Fire at the foot of the mountain: the image of grace; the noble person brings clarity to everyday affairs but dares not decide great controversies this way."
+   },
+   "nom_na": "Image: fire lighting up the foot of a mountain — beautiful, but only on the surface. In plain terms: like making something look good: presentation helps, but the substance underneath is what counts.",
+   "thoan": {
+    "dich": "Grace has success: the yielding comes and adorns the firm, so there is success. The firm rises and adorns the yielding, so in small matters it is favourable to undertake something. This is the pattern of heaven; clarity held within limits is the pattern of human culture. Contemplating the pattern of heaven one perceives the changing seasons; contemplating the pattern of human culture one can shape the world."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "He lends grace to his toes, leaves the carriage and walks.",
+     "y": "Choose simple honesty over a show.",
+     "nom_na": "Like walking rather than accepting a ride you have not earned."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Lends grace to the beard on his chin.",
+     "y": "Appearance follows substance.",
+     "nom_na": "Like a beard that only moves with the chin: looks depend on what is underneath."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "Graceful and moist. Constant perseverance brings good fortune.",
+     "y": "Things look good; keep up the effort so it lasts.",
+     "nom_na": "Like a good period that is pleasant: do not let it make you lazy."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Grace or simplicity? A white horse comes as if on wings. He is not a robber; he will woo at the right time.",
+     "y": "Choosing simplicity, a sincere connection arrives.",
+     "nom_na": "Like turning down flashy offers and finding a sincere partner instead."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Grace in hills and gardens. The roll of silk is meagre and small. Humiliation, but in the end good fortune.",
+     "y": "A modest offering, sincerely given, ends well.",
+     "nom_na": "Like a small gift that seems too little but is received warmly."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Simple grace. No blame.",
+     "y": "The highest grace is simplicity.",
+     "nom_na": "Like a plain, honest style that needs no decoration: no blame."
+    }
+   ]
+  },
+  "23": {
+   "que_tu": {
+    "dich": "Splitting Apart. It does not further one to go anywhere."
+   },
+   "dai_tuong": {
+    "dich": "The mountain rests on the earth: the image of splitting apart; those above can secure their position only by giving generously to those below."
+   },
+   "nom_na": "Image: a mountain worn away down to the ground — something being stripped bit by bit. In plain terms: like a time when your base is being eroded: stop expanding, protect what matters most, and wait for the turn.",
+   "thoan": {
+    "dich": "Splitting apart means stripping away: the yielding changes the firm. It does not further to go anywhere: the petty are growing. Devoted and standing still, one observes the image. The noble person heeds the rise and fall, the filling and emptying — that is the way of heaven."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "The leg of the bed is split. Those who persevere are destroyed. Misfortune.",
+     "y": "The base starts to be eaten away; take it seriously.",
+     "nom_na": "Like the first signs of a business losing its footing: deal with it."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "The bed is split at the edge. Those who persevere are destroyed. Misfortune.",
+     "y": "The erosion moves closer to you.",
+     "nom_na": "Like the trouble reaching your own desk: time to act carefully."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "He splits with them. No blame.",
+     "y": "Separating from a harmful group is right.",
+     "nom_na": "Like leaving a group that is doing harm: no blame."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "The bed is split up to the skin. Misfortune.",
+     "y": "The damage has reached you directly.",
+     "nom_na": "Like the problem now affecting you personally: protect yourself."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "A shoal of fishes. Favour comes through the court ladies. Everything acts to further.",
+     "y": "Bringing people into order through goodwill turns things around.",
+     "nom_na": "Like a good leader bringing everyone into line kindly: things improve."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "There is a large fruit still uneaten. The noble person receives a carriage. The house of the inferior person is split apart.",
+     "y": "What is good survives the decline and becomes the seed of renewal.",
+     "nom_na": "Like the one good thing left after a crisis: it is the start of the next chapter."
+    }
+   ]
+  },
+  "24": {
+   "que_tu": {
+    "dich": "Return. Success. Going out and coming in without error. Friends come without blame. To and fro goes the way. On the seventh day comes return. It furthers one to have somewhere to go."
+   },
+   "dai_tuong": {
+    "dich": "Thunder within the earth: the image of the turning point; the kings of old closed the passes at the time of the solstice, merchants did not travel and the ruler did not tour the provinces."
+   },
+   "nom_na": "Image: thunder stirring deep in the earth — the first sign of new life. In plain terms: like the moment after a setback when things begin to turn: start again in small steps and come back to what is right.",
+   "thoan": {
+    "dich": "Return, success: the firm comes back. Movement in devotion — so going out and coming in without error, friends come without blame. To and fro goes the way, on the seventh day comes return — this is the way of heaven. It furthers to have somewhere to go: the firm is growing. In return one sees the heart of heaven and earth."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Return from a short distance. No need for remorse. Great good fortune.",
+     "y": "Correct a mistake quickly and there is no regret.",
+     "nom_na": "Like noticing a wrong turn straight away and going back: very good."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Quiet return. Good fortune.",
+     "y": "Coming back gently, helped by good people.",
+     "nom_na": "Like returning to the right path with the help of a good friend."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Repeated return. Danger. No blame.",
+     "y": "Going back and forth is risky but not wrong.",
+     "nom_na": "Like falling into the same habit again and again but always trying: keep going."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Walking in the midst of others, one returns alone.",
+     "y": "Choosing the right path on your own.",
+     "nom_na": "Like leaving the crowd to do what is right."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Noblehearted return. No remorse.",
+     "y": "Returning sincerely, with your heart in it.",
+     "nom_na": "Like a sincere change of heart: no regret."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Missing the return. Misfortune. Misfortune from within and without. If armies are set marching in this way, one will in the end suffer a great defeat, disastrous for the ruler of the country. For ten years it will not be possible to attack again.",
+     "y": "Refusing to come back to the right way leads to a long, hard setback.",
+     "nom_na": "Like refusing to admit a mistake: the damage lasts a long time."
+    }
+   ]
+  },
+  "25": {
+   "que_tu": {
+    "dich": "Innocence. Supreme success. Perseverance furthers. If someone is not as they should be, they have misfortune, and it does not further them to undertake anything."
+   },
+   "dai_tuong": {
+    "dich": "Under heaven thunder rolls, and all things share in innocence; the kings of old, rich in virtue and in harmony with the time, fostered all beings."
+   },
+   "nom_na": "Image: thunder rolling under the sky — everything moves naturally, without scheming. In plain terms: like acting honestly and simply, without calculation: you stay in tune with things; trying to manipulate the outcome brings trouble.",
+   "thoan": {
+    "dich": "Innocence: the firm comes from outside and becomes master within. Movement and strength, firm in the centre and met with response: great success through what is right — this is the will of heaven. If someone is not as they should be, they have misfortune and should not undertake anything. Where can innocence go, when the will of heaven does not protect it?"
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Innocent behaviour brings good fortune.",
+     "y": "Acting from a sincere heart goes well.",
+     "nom_na": "Like starting something with honest intentions: good."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "If one does not count on the harvest while ploughing, nor on the use of the ground while clearing it, it furthers one to undertake something.",
+     "y": "Do the work without fixating on the reward.",
+     "nom_na": "Like doing your job well without constantly counting the payoff: things go well."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Undeserved misfortune. The cow that was tethered by someone is the wanderer's gain, the citizen's loss.",
+     "y": "Sometimes trouble comes that is not your fault.",
+     "nom_na": "Like being blamed for something someone else did: unfair, but it passes."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "He who can be persevering remains without blame.",
+     "y": "Keep to what is right and there is no fault.",
+     "nom_na": "Like holding to your principles under pressure: no blame."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Use no medicine in an illness incurred through no fault of your own. It will pass of itself.",
+     "y": "Trouble that is not of your making often passes by itself; do not overreact (a symbolic image, not medical advice).",
+     "nom_na": "Like a problem you did not cause: it often settles on its own — do not make it worse."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Innocent action brings misfortune. Nothing furthers.",
+     "y": "Acting at the wrong time, even with good intentions, brings trouble.",
+     "nom_na": "Like pushing ahead naively when it is time to stop: nothing good comes of it."
+    }
+   ]
+  },
+  "26": {
+   "que_tu": {
+    "dich": "The Taming Power of the Great. Perseverance furthers. Not eating at home brings good fortune. It furthers one to cross the great water."
+   },
+   "dai_tuong": {
+    "dich": "Heaven within the mountain: the image of the taming power of the great; the noble person acquaints themselves with many sayings of antiquity and deeds of the past, to strengthen their character."
+   },
+   "nom_na": "Image: heaven held inside a mountain — great strength stored and kept in check. In plain terms: like years of study and saving: build up deeply, hold back until the right time, then step out and serve.",
+   "thoan": {
+    "dich": "The taming power of the great: firm and strong, genuine and true, shining with light, renewing its virtue day by day. The firm rises and honours the worthy; it can hold strength in check — that is great correctness. Not eating at home brings good fortune: the worthy are nourished. It furthers to cross the great water: it responds to heaven."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Danger is at hand. It furthers one to desist.",
+     "y": "There is danger; better to stop for now.",
+     "nom_na": "Like an obstacle in your way: wait, do not force it."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "The axletrees are taken from the wagon.",
+     "y": "Holding still on purpose is the wise choice.",
+     "nom_na": "Like deciding not to drive in a storm: you stay put."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "A good horse that follows others. Awareness of danger, with perseverance, furthers. Practise chariot driving and armed defence daily. It furthers to have somewhere to go.",
+     "y": "The way is opening; keep training and stay careful.",
+     "nom_na": "Like getting the green light after long preparation: go, but keep practising."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "The headboard of a young bull. Great good fortune.",
+     "y": "Restrain things early, before they grow strong.",
+     "nom_na": "Like setting good habits in a young team: very good."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "The tusk of a gelded boar. Good fortune.",
+     "y": "Take away the cause rather than fighting the symptom.",
+     "nom_na": "Like removing the root of a problem instead of fighting it every day."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "One attains the way of heaven. Success.",
+     "y": "The time of holding back is over; the way is open.",
+     "nom_na": "Like the moment all your preparation pays off: the road is clear."
+    }
+   ]
+  },
+  "27": {
+   "que_tu": {
+    "dich": "The Corners of the Mouth (providing nourishment). Perseverance brings good fortune. Pay heed to the providing of nourishment and to what a person seeks to fill their own mouth with."
+   },
+   "dai_tuong": {
+    "dich": "At the foot of the mountain, thunder: the image of providing nourishment; the noble person is careful of their words and temperate in eating and drinking."
+   },
+   "nom_na": "Image: thunder under the mountain — like a jaw that moves to chew. In plain terms: like looking at what you feed yourself every day — food, words, thoughts — and what you feed others: nourish what is right.",
+   "thoan": {
+    "dich": "Nourishment: perseverance brings good fortune — nourishing what is right brings good fortune. Pay heed to the providing of nourishment: look at what someone nourishes. What a person seeks to fill their own mouth with: look at how they nourish themselves. Heaven and earth nourish all things; the sage nourishes the worthy and through them all the people. Great indeed is the time of nourishment!"
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "You let your magic tortoise go, and look at me with the corners of your mouth drooping. Misfortune.",
+     "y": "Envying others and neglecting your own resources.",
+     "nom_na": "Like looking at what others have and forgetting your own strengths: bad."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Turning to the summit for nourishment, deviating from the path to seek nourishment from the hill. Continuing to do this brings misfortune.",
+     "y": "Seeking support in the wrong places.",
+     "nom_na": "Like relying on the wrong people for your living: it ends badly."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Turning away from nourishment. Perseverance brings misfortune. Do not act thus for ten years. Nothing serves to further.",
+     "y": "Feeding on what is unhealthy does long-lasting harm.",
+     "nom_na": "Like a habit that feeds you the wrong things: it causes long-term harm."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Turning to the summit for provision of nourishment brings good fortune. Spying about with sharp eyes like a tiger with insatiable craving. No blame.",
+     "y": "Seeking help from above for a good cause is right.",
+     "nom_na": "Like a capable person looking eagerly for support for a worthy project: no blame."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Turning away from the path. To remain persevering brings good fortune. One should not cross the great water.",
+     "y": "You are not yet able to go it alone; stay steady.",
+     "nom_na": "Like a leader who still needs advisers: stay put, do not take a big risk."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "The source of nourishment. Awareness of danger brings good fortune. It furthers one to cross the great water.",
+     "y": "You are the one others rely on; carry it with care.",
+     "nom_na": "Like the person who feeds the whole family: a heavy duty, but you can take on big things."
+    }
+   ]
+  },
+  "28": {
+   "que_tu": {
+    "dich": "Preponderance of the Great. The ridgepole sags to breaking point. It furthers one to have somewhere to go. Success."
+   },
+   "dai_tuong": {
+    "dich": "The lake rises above the trees: the image of preponderance of the great; the noble person, when they stand alone, is unconcerned, and if they must withdraw from the world, they are undaunted."
+   },
+   "nom_na": "Image: lake water rising over the trees — far more weight than things can carry. In plain terms: like being overloaded at work or at home: admit it, and dare to make a well-planned change before something breaks.",
+   "thoan": {
+    "dich": "Preponderance of the great: the great is in excess. The ridgepole sags: the beginning and the end are weak. The firm is in excess but holds the centre; gentle and joyful in action — so it furthers to have somewhere to go, and there is success. Great indeed is the time of preponderance of the great!"
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "To spread white rushes underneath. No blame.",
+     "y": "Great caution at the start is right.",
+     "nom_na": "Like packing something fragile with extra care: no blame."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "A dry poplar sprouts at the root. An older man takes a young wife. Everything furthers.",
+     "y": "Renewal comes from an unexpected combination.",
+     "nom_na": "Like an old business revived by new energy: it works."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The ridgepole sags to breaking point. Misfortune.",
+     "y": "Pushing on stubbornly under too much weight leads to a break.",
+     "nom_na": "Like refusing help while carrying too much: something gives way."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "The ridgepole is braced. Good fortune. If there are ulterior motives, it is humiliating.",
+     "y": "With support, the load can be carried; stay clean.",
+     "nom_na": "Like getting the right help in time: good, as long as there are no hidden agendas."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "A withered poplar puts forth flowers. An older woman takes a husband. No blame. No praise.",
+     "y": "A late bloom that does not last long.",
+     "nom_na": "Like a short burst of activity at the end of a cycle: no harm, no lasting gain."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "One must go through the water. It goes over one's head. Misfortune. No blame.",
+     "y": "Taking on too much, you may go under, but your intention was not wrong.",
+     "nom_na": "Like taking on an impossible task out of duty: it may fail, but it is not a fault."
+    }
+   ]
+  },
+  "29": {
+   "que_tu": {
+    "dich": "The Abysmal repeated. If you are sincere, you have success in your heart, and whatever you do succeeds."
+   },
+   "dai_tuong": {
+    "dich": "Water flows on uninterruptedly and reaches its goal: the image of the abysmal repeated; the noble person walks in lasting virtue and carries on the business of teaching."
+   },
+   "nom_na": "Image: water upon water — one danger after another. In plain terms: like a hard stretch where problems keep coming: stay sincere and steady like flowing water, go through one step at a time, and you get through.",
+   "thoan": {
+    "dich": "The abysmal repeated is double danger. Water flows and does not overflow; it goes through danger and does not lose its trustworthiness. Success in the heart comes from firmness in the centre. Whatever you do succeeds: going on brings achievement. The danger of heaven cannot be climbed; the dangers of earth are mountains, rivers, hills; kings and princes use danger to protect their lands. Great indeed is the use of the time of danger!"
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Repetition of the abysmal. In the abyss one falls into a pit. Misfortune.",
+     "y": "Getting used to danger, you sink deeper.",
+     "nom_na": "Like getting used to a bad situation: you sink further into it."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "The abyss is dangerous. One should strive to attain small things only.",
+     "y": "In danger, aim only for small steps.",
+     "nom_na": "Like being in a crisis: go for small wins only."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Forward and backward, abyss on abyss. In danger like this, pause at first and wait, otherwise you will fall into a pit in the abyss. Do not act in this way.",
+     "y": "Danger in every direction; do not move yet.",
+     "nom_na": "Like every option looking risky: stop and wait."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "A jug of wine, a bowl of rice with it; earthen vessels simply handed in through the window. There is certainly no blame in this.",
+     "y": "In hard times, simple sincerity is enough.",
+     "nom_na": "Like a simple, honest gesture in a crisis: it is enough."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "The abyss is not filled to overflowing; it is filled only to the rim. No blame.",
+     "y": "The danger is levelling out; do not overreach.",
+     "nom_na": "Like the worst being nearly over: do not take on more than you need."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Bound with cords and ropes, shut in between thorn-hedged prison walls: for three years one does not find the way. Misfortune.",
+     "y": "Stuck by your own mistakes for a long time.",
+     "nom_na": "Like being trapped by your own choices: it takes a long time to get free."
+    }
+   ]
+  },
+  "30": {
+   "que_tu": {
+    "dich": "The Clinging. Perseverance furthers. It brings success. Care of the cow brings good fortune."
+   },
+   "dai_tuong": {
+    "dich": "That which is bright rises twice: the image of fire; the great person, by perpetuating this brightness, illumines the four quarters of the world."
+   },
+   "nom_na": "Image: fire upon fire — light that needs something to burn on. In plain terms: like someone who shines brightly: hold on to what is right and stay gentle inside, so the light does not burn out.",
+   "thoan": {
+    "dich": "The clinging means resting on something. Sun and moon rest on heaven, grain, grass and trees rest on the earth. Doubled clarity rests on what is right and so transforms and perfects the world. The yielding rests on what is central and correct, so there is success; therefore care of the cow brings good fortune."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "The footprints run criss-cross. If one is seriously intent, no blame.",
+     "y": "Starting out, many paths cross; stay serious and focused.",
+     "nom_na": "Like the busy start of a day: focus and you avoid mistakes."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Yellow light. Supreme good fortune.",
+     "y": "Balanced clarity brings great good fortune.",
+     "nom_na": "Like a calm, clear mind at the right moment: very good."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "In the light of the setting sun, people either beat the pot and sing or loudly bewail the approach of old age. Misfortune.",
+     "y": "Facing the end of a cycle, accept it rather than despair.",
+     "nom_na": "Like coming to the end of a stage of life: enjoy it calmly instead of grieving."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Its coming is sudden; it flames up, dies down, is thrown away.",
+     "y": "What flares up too fast burns out fast (a symbolic image).",
+     "nom_na": "Like someone who rises too fast and too loudly: they fade just as fast."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Tears in floods, sighing and lamenting. Good fortune.",
+     "y": "Sincere sorrow and change of heart bring good fortune.",
+     "nom_na": "Like deeply regretting a mistake and changing: it turns out well."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "The king uses him to march forth and chastise. Then it is best to remove the ringleaders and spare the followers. No blame.",
+     "y": "Deal with the root of the problem, not with everyone around it.",
+     "nom_na": "Like fixing what really causes the trouble, without punishing everyone: no blame."
+    }
+   ]
+  },
+  "31": {
+   "que_tu": {
+    "dich": "Influence. Success. Perseverance furthers. To take a maiden to wife brings good fortune."
+   },
+   "dai_tuong": {
+    "dich": "A lake on the mountain: the image of influence; the noble person encourages people to approach by their readiness to receive them."
+   },
+   "nom_na": "Image: a lake resting on a mountain — the two touch and respond to each other. In plain terms: like the start of a real connection: open, sincere and receptive — not pushing, not just a passing thrill.",
+   "thoan": {
+    "dich": "Influence means stimulation. The yielding is above and the firm below; the two forces stimulate and respond to each other. Keeping still and joyful, the man places himself below the woman; so there is success, perseverance furthers, and taking a maiden to wife brings good fortune. Heaven and earth stimulate each other and all things are created; the sage stimulates the hearts of people and the world has peace. Look at what stimulates things, and the nature of heaven, earth and all beings can be seen."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "The influence shows itself in the big toe.",
+     "y": "The very first stirrings, not yet acted on.",
+     "nom_na": "Like the first spark of interest: it has not shown in action yet."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "The influence shows itself in the calves of the legs. Misfortune. Tarrying brings good fortune.",
+     "y": "Rushing to act on a feeling brings trouble; wait.",
+     "nom_na": "Like wanting to act immediately on a feeling: better to wait."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The influence shows itself in the thighs. Holds to that which follows it. To continue is humiliating.",
+     "y": "Following every impulse leads to embarrassment.",
+     "nom_na": "Like going along with every passing urge: you regret it."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Perseverance brings good fortune. Remorse disappears. If a person is agitated in mind, and their thoughts go back and forth, only those friends on whom they fix their conscious thoughts will follow.",
+     "y": "Steady sincerity wins people; anxious scheming narrows your circle.",
+     "nom_na": "Like trying too hard to be liked: calm sincerity works better."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "The influence shows itself in the back of the neck. No remorse.",
+     "y": "A firm but limited influence; no regret.",
+     "nom_na": "Like a decision taken firmly and without fuss: no regret."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "The influence shows itself in the jaws, cheeks and tongue.",
+     "y": "Influence through words alone is shallow.",
+     "nom_na": "Like a lot of talk without action: it does not go deep."
+    }
+   ]
+  },
+  "32": {
+   "que_tu": {
+    "dich": "Duration. Success. No blame. Perseverance furthers. It furthers one to have somewhere to go."
+   },
+   "dai_tuong": {
+    "dich": "Thunder and wind: the image of duration; the noble person stands firm and does not change direction."
+   },
+   "nom_na": "Image: thunder and wind always together — a pair that lasts. In plain terms: like a long marriage or a long career: steady commitment and good habits keep it going.",
+   "thoan": {
+    "dich": "Duration means long-lasting. The firm is above and the yielding below; thunder and wind work together; gentle and moving; the firm and the yielding all respond — that is duration. Duration brings success without blame; perseverance furthers — enduring in one's way. The way of heaven and earth is lasting and never ends. It furthers to have somewhere to go: every ending has a new beginning. Sun and moon, held by heaven, shine for ever; the four seasons change and so endure; the sage endures in their way and the world is transformed. Look at what endures, and the nature of heaven, earth and all beings can be seen."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Seeking duration too hastily brings misfortune persistently. Nothing that would further.",
+     "y": "Wanting permanence too quickly backfires.",
+     "nom_na": "Like demanding a lifelong promise on a first date: it goes wrong."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Remorse disappears.",
+     "y": "Staying balanced, regret falls away.",
+     "nom_na": "Like keeping a steady middle way: regrets fade."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "He who does not give duration to his character meets with disgrace. Persistent humiliation.",
+     "y": "Being inconsistent costs you respect.",
+     "nom_na": "Like someone who keeps changing their word: people stop trusting them."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "No game in the field.",
+     "y": "Persisting in the wrong place gets you nothing.",
+     "nom_na": "Like fishing where there are no fish: no matter how long you stay."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Giving duration to one's character through perseverance. This is good fortune for a woman, misfortune for a man.",
+     "y": "Constancy must suit the situation; blind loyalty is not always right.",
+     "nom_na": "Like being loyal in a way that suits a supporting role but not a leading one."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Restlessness as an enduring condition brings misfortune.",
+     "y": "Constant restlessness ruins what lasts.",
+     "nom_na": "Like never settling, always shaking things up: it wears everything out."
+    }
+   ]
+  },
+  "33": {
+   "que_tu": {
+    "dich": "Retreat. Success. In what is small, perseverance furthers."
+   },
+   "dai_tuong": {
+    "dich": "Mountain under heaven: the image of retreat; the noble person keeps petty people at a distance, not angrily but with reserve."
+   },
+   "nom_na": "Image: the mountain rises but heaven withdraws ever higher — keeping a distance on purpose. In plain terms: like leaving a toxic situation in time: step back to protect your strength and principles — it is not running away.",
+   "thoan": {
+    "dich": "Retreat brings success: retreating, one succeeds. The firm holds its proper place and is met with response; it moves with the time. In what is small, perseverance furthers: the petty are slowly growing. Great indeed is the meaning of the time of retreat!"
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "At the tail in retreat. This is dangerous. One must not wish to undertake anything.",
+     "y": "Retreating too late is dangerous; do not start anything.",
+     "nom_na": "Like leaving last when everyone else has gone: risky — keep still."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "He holds him fast with yellow oxhide. No one can tear him loose.",
+     "y": "Hold firmly to what is right; no one can pull you away.",
+     "nom_na": "Like keeping a promise firmly while others leave: steadfast."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "A halted retreat is nerve-wracking and dangerous. To retain people as menservants and maidservants brings good fortune.",
+     "y": "Being tied down when you should leave is stressful; manage what is close to you.",
+     "nom_na": "Like wanting to quit but being held back by obligations: look after the small things you can control."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Voluntary retreat brings good fortune to the noble person and downfall to the petty person.",
+     "y": "Leaving willingly, at the right time, is good for the wise.",
+     "nom_na": "Like stepping away on your own terms: the wise benefit, the stubborn lose."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Friendly retreat. Perseverance brings good fortune.",
+     "y": "Leaving on good terms is good fortune.",
+     "nom_na": "Like leaving a job gracefully: good."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Cheerful retreat. Everything serves to further.",
+     "y": "Leaving freely, with nothing to regret.",
+     "nom_na": "Like retiring happily at the right time: everything goes well."
+    }
+   ]
+  },
+  "34": {
+   "que_tu": {
+    "dich": "The Power of the Great. Perseverance furthers."
+   },
+   "dai_tuong": {
+    "dich": "Thunder in heaven above: the image of the power of the great; the noble person does not tread upon paths that do not accord with established order."
+   },
+   "nom_na": "Image: thunder high in the sky — great power that is felt everywhere. In plain terms: like having a lot of momentum: use it with restraint and good form, not like a ram charging a fence.",
+   "thoan": {
+    "dich": "The power of the great: what is great is powerful. Firm and moving, therefore powerful. The power of the great furthers through perseverance: what is great is right. Through what is right and great, the nature of heaven and earth can be seen!"
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Power in the toes. Continuing brings misfortune. This is certainly true.",
+     "y": "Strength at the very start, pushed forward, brings trouble.",
+     "nom_na": "Like a newcomer pushing too hard: it backfires."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Perseverance brings good fortune.",
+     "y": "Strength held in balance is good.",
+     "nom_na": "Like being strong but steady: good."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The inferior person works through power. The noble person does not act thus. To continue is dangerous. A goat butts against a hedge and gets its horns entangled.",
+     "y": "Using force gets you stuck.",
+     "nom_na": "Like a ram charging a fence and getting its horns caught: force traps you."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Perseverance brings good fortune. Remorse disappears. The hedge opens; there is no entanglement. Power depends upon the axle of a big cart.",
+     "y": "Steady strength opens the way.",
+     "nom_na": "Like steady persistence that finally breaks through: the way opens."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Loses the goat with ease. No remorse.",
+     "y": "Giving up stubbornness easily brings no regret.",
+     "nom_na": "Like letting go of a fight easily: no regret."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "A goat butts against a hedge. It cannot go backward, it cannot go forward. Nothing serves to further. If one notes the difficulty, this brings good fortune.",
+     "y": "Stuck after pushing too hard; recognise it and things improve.",
+     "nom_na": "Like being stuck because you pushed: admit it and things get better."
+    }
+   ]
+  },
+  "35": {
+   "que_tu": {
+    "dich": "Progress. The powerful prince is honoured with horses in large numbers. In a single day he is granted audience three times."
+   },
+   "dai_tuong": {
+    "dich": "The sun rises over the earth: the image of progress; the noble person brightens their own bright virtue."
+   },
+   "nom_na": "Image: the sun rising over the land — brightness spreading. In plain terms: like being recognised and promoted: advance through real ability and good character.",
+   "thoan": {
+    "dich": "Progress means advancing. Brightness rises over the earth; devoted and clinging to the great light, the yielding advances and rises. So the powerful prince is honoured with many horses and in a single day is granted audience three times."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Progressing, but turned back. Perseverance brings good fortune. If one meets with no confidence, one should remain calm. No mistake.",
+     "y": "Blocked at first; stay steady and calm.",
+     "nom_na": "Like your first proposal being rejected: keep calm and keep going."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Progressing, but in sorrow. Perseverance brings good fortune. Then one obtains great happiness from one's ancestress.",
+     "y": "Progress with worry, but support comes.",
+     "nom_na": "Like moving forward while anxious: help comes from a caring elder."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "All are in accord. Remorse disappears.",
+     "y": "With everyone's support, regret falls away.",
+     "nom_na": "Like having the whole team behind you: good."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Progress like a hamster. Perseverance brings danger.",
+     "y": "Advancing by greed and stealth is dangerous.",
+     "nom_na": "Like climbing by grabbing things on the sly: risky."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Remorse disappears. Take not gain and loss to heart. Undertakings bring good fortune. Everything serves to further.",
+     "y": "Do not worry about gain or loss; go ahead.",
+     "nom_na": "Like doing your best without counting wins and losses: things go well."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Making progress with the horns is permissible only for the purpose of punishing one's own city. To be conscious of danger brings good fortune. No blame. Perseverance brings humiliation.",
+     "y": "Use force only to correct your own side.",
+     "nom_na": "Like using your authority only to fix your own team's mistakes: acceptable, with care."
+    }
+   ]
+  },
+  "36": {
+   "que_tu": {
+    "dich": "Darkening of the Light. In adversity it furthers one to be persevering."
+   },
+   "dai_tuong": {
+    "dich": "The light has sunk into the earth: the image of darkening of the light; the noble person lives with the great mass: veiling their light, yet still shining."
+   },
+   "nom_na": "Image: the sun sinking below the earth — a dark time. In plain terms: like being in an unfair environment: keep your principles quietly, protect yourself, and wait for the light to return.",
+   "thoan": {
+    "dich": "The light has sunk into the earth: darkening of the light. Inwardly clear and refined, outwardly yielding and devoted, one bears great adversity — King Wen did so. In adversity it furthers to be persevering: veiling one's light. Facing difficulty within and keeping one's will upright — Prince Ji did so."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Darkening of the light during flight. He lowers his wings. The noble person does not eat for three days on his wanderings. But he has somewhere to go. The host has occasion to gossip about him.",
+     "y": "Withdraw quickly, even at a cost, and accept the talk.",
+     "nom_na": "Like leaving a bad workplace quickly: some hardship and gossip, but right."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Darkening of the light injures him in the left thigh. He gives aid with the strength of a horse. Good fortune.",
+     "y": "Hurt but not beaten; help others with strength.",
+     "nom_na": "Like being wounded by events but still helping others: good fortune."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "Darkening of the light during the hunt in the south. Their great leader is captured. One must not expect perseverance too soon.",
+     "y": "The source of trouble is found, but change takes time.",
+     "nom_na": "Like finally finding the cause of a problem: do not expect it fixed overnight."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "He penetrates the left side of the belly. One gets at the very heart of the darkening of the light, and leaves gate and courtyard.",
+     "y": "You understand the situation fully; leave in time.",
+     "nom_na": "Like seeing exactly how bad things are inside: time to go."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Darkening of the light as with Prince Ji. Perseverance furthers.",
+     "y": "Hide your light to stay true in a hard place.",
+     "nom_na": "Like staying quietly principled where you cannot speak out: it is right."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Not light but darkness. First he climbed up to heaven, then he plunged into the depths of the earth.",
+     "y": "What rose by darkness falls by it.",
+     "nom_na": "Like someone who rose by wrongdoing: in the end they fall."
+    }
+   ]
+  },
+  "37": {
+   "que_tu": {
+    "dich": "The Family. The perseverance of the woman furthers."
+   },
+   "dai_tuong": {
+    "dich": "Wind comes forth from fire: the image of the family; the noble person has substance in their words and duration in their way of life."
+   },
+   "nom_na": "Image: wind rising from fire — warmth spreading from the hearth. In plain terms: like a home where everyone knows their role and words match deeds: warm, ordered and steady.",
+   "thoan": {
+    "dich": "The family: the woman has her right place within, the man has his right place without; that man and woman are in their right places is the great meaning of heaven and earth. The family has firm leaders — they are the parents. When the father is a father, the son a son, the elder brother an elder brother, the younger a younger, the husband a husband and the wife a wife, the way of the family is right; when the family is put right, the world is set in order."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Firm seclusion within the family. Remorse disappears.",
+     "y": "Clear rules from the start prevent regret.",
+     "nom_na": "Like setting house rules at the start: fewer problems later."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "She should not follow her whims. She must attend within to the food. Perseverance brings good fortune.",
+     "y": "Taking care of the home's daily needs is valuable.",
+     "nom_na": "Like the one who keeps the household running day to day: good fortune."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "When tempers flare up in the family, too great severity brings remorse. Good fortune nonetheless. When woman and child dally and laugh, it leads in the end to humiliation.",
+     "y": "Too strict is better than too loose, but balance matters.",
+     "nom_na": "Like a home that is a bit strict: some friction, but better than anything goes."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "She is the treasure of the house. Great good fortune.",
+     "y": "Caring well for the home brings prosperity.",
+     "nom_na": "Like a well-managed household: great good fortune."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "As a king he approaches his family. Fear not. Good fortune.",
+     "y": "Lead the family with love, not fear.",
+     "nom_na": "Like a parent who leads through warmth: good fortune."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "His work commands respect. In the end good fortune comes.",
+     "y": "Sincerity and dignity keep the family good.",
+     "nom_na": "Like an elder respected for their example: good in the end."
+    }
+   ]
+  },
+  "38": {
+   "que_tu": {
+    "dich": "Opposition. In small matters, good fortune."
+   },
+   "dai_tuong": {
+    "dich": "Above, fire; below, the lake: the image of opposition; amid all fellowship the noble person retains their individuality."
+   },
+   "nom_na": "Image: fire rising, the lake sinking — two forces moving apart. In plain terms: like two people under one roof with different aims: accept the differences and work together on small things.",
+   "thoan": {
+    "dich": "Opposition: fire moves upwards, the lake moves downwards; two daughters live together but their wills do not go the same way. Joyful and clinging to clarity, the yielding advances and rises, holds the centre and responds to the firm; so in small matters there is good fortune. Heaven and earth are opposite, yet their work is the same; man and woman are opposite, yet their wills meet; all things are opposite, yet their actions are alike. Great indeed is the use of the time of opposition!"
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Remorse disappears. If you lose your horse, do not run after it; it will come back of its own accord. When you see evil people, guard yourself against mistakes.",
+     "y": "Do not chase what has gone; it returns. Stay polite with difficult people.",
+     "nom_na": "Like a friendship that cooled: let it be, it may come back; be civil with people you dislike."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "One meets his lord in a narrow street. No blame.",
+     "y": "An informal meeting resolves the disagreement.",
+     "nom_na": "Like settling a dispute over a chance coffee: no blame."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "One sees the wagon dragged back, the oxen halted, a man's hair and nose cut off. Not a good beginning, but a good end.",
+     "y": "A rough start, but things come right in the end.",
+     "nom_na": "Like a terrible first meeting that later becomes a good relationship."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Isolated through opposition, one meets a like-minded man with whom one can associate in good faith. Despite the danger, no blame.",
+     "y": "Alone, you find someone you can trust.",
+     "nom_na": "Like feeling isolated and then finding a true ally."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Remorse disappears. The companion bites his way through the wrappings. If one goes to him, how could it be a mistake?",
+     "y": "A close ally breaks through the barrier; go to them.",
+     "nom_na": "Like a friend who makes the first move to reconcile: meet them."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Isolated through opposition, one sees one's companion as a pig covered with dirt, as a wagon full of devils. First one draws a bow against him, then one lays the bow aside. He is not a robber; he will woo at the right time. As one goes, rain falls; then good fortune comes.",
+     "y": "Suspicion distorts what you see; once it lifts, there is reconciliation.",
+     "nom_na": "Like imagining the worst about someone, then realising you were wrong: relief and good fortune."
+    }
+   ]
+  },
+  "39": {
+   "que_tu": {
+    "dich": "Obstruction. The south-west furthers. The north-east does not further. It furthers one to see the great person. Perseverance brings good fortune."
+   },
+   "dai_tuong": {
+    "dich": "Water on the mountain: the image of obstruction; the noble person turns their attention to themselves and moulds their character."
+   },
+   "nom_na": "Image: water on a steep mountain — a hard climb in every direction. In plain terms: like a project that is stuck: stop, look at your own part in it, find someone to help, and take the safer way round.",
+   "thoan": {
+    "dich": "Obstruction means difficulty: danger lies ahead. To see danger and know how to stop — that is wisdom! The south-west furthers: going there one reaches the centre. The north-east does not further: that way comes to an end. It furthers to see the great person: going brings achievement. Being in the proper place, perseverance brings good fortune and sets the country right. Great indeed is the use of the time of obstruction!"
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Going leads to obstructions, coming meets with praise.",
+     "y": "Waiting is better than pushing on.",
+     "nom_na": "Like holding back instead of forcing ahead: you are praised for it."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "The king's servant is beset by obstruction upon obstruction, but it is not his own fault.",
+     "y": "Facing obstacles in someone else's service is no fault of yours.",
+     "nom_na": "Like dealing with problems because of your job, not your own mistakes."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "Going leads to obstructions; hence he comes back.",
+     "y": "Turn back to those who need you.",
+     "nom_na": "Like returning to your family when the road ahead is blocked."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Going leads to obstructions, coming leads to union.",
+     "y": "Wait and join with others first.",
+     "nom_na": "Like waiting to build a coalition before acting."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "In the midst of the greatest obstructions, friends come.",
+     "y": "In the hardest moment, help arrives.",
+     "nom_na": "Like friends showing up when things are at their worst."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Going leads to obstructions, coming leads to great good fortune. It furthers one to see the great person.",
+     "y": "Come back and help; seek wise guidance.",
+     "nom_na": "Like an experienced person returning to help others through: great good fortune."
+    }
+   ]
+  },
+  "40": {
+   "que_tu": {
+    "dich": "Deliverance. The south-west furthers. If there is no longer anything where one has to go, return brings good fortune. If there is still something where one has to go, hastening brings good fortune."
+   },
+   "dai_tuong": {
+    "dich": "Thunder and rain set in: the image of deliverance; the noble person pardons mistakes and forgives misdeeds."
+   },
+   "nom_na": "Image: thunder and a storm breaking — the tension finally releases. In plain terms: like the moment a problem is finally solved: settle the rest quickly, forgive, and get back to normal.",
+   "thoan": {
+    "dich": "Deliverance: danger and movement — moving, one escapes danger: deliverance. The south-west furthers: going, one wins the people. Return brings good fortune: one reaches the centre. If there is still somewhere to go, hastening brings good fortune: going brings achievement. Heaven and earth are delivered and thunder and rain set in; when thunder and rain set in, the buds of fruit trees and plants all burst open. Great indeed is the time of deliverance!"
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Without blame.",
+     "y": "The trouble is over; rest.",
+     "nom_na": "Like the first quiet day after a crisis: no blame."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "One kills three foxes in the field and receives a yellow arrow. Perseverance brings good fortune.",
+     "y": "Removing the hidden troublemakers with fairness.",
+     "nom_na": "Like clearing out the hidden causes of a problem fairly: good fortune."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "If a man carries a burden on his back and nonetheless rides in a carriage, he thereby encourages robbers to draw near. Perseverance leads to humiliation.",
+     "y": "Taking a position you have not earned invites trouble.",
+     "nom_na": "Like showing off a status you do not have: it attracts problems."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Deliver yourself from your great toe. Then the companion comes, and him you can trust.",
+     "y": "Let go of the wrong attachments so true friends can come.",
+     "nom_na": "Like letting go of a bad influence so real friends can come close."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "If only the noble person can deliver himself, it brings good fortune. Thus he proves to inferior people that he is in earnest.",
+     "y": "Free yourself first; others will see you mean it.",
+     "nom_na": "Like breaking a bad habit yourself: others take you seriously."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "The prince shoots at a hawk on a high wall. He kills it. Everything serves to further.",
+     "y": "Remove the last obstacle decisively at the right time.",
+     "nom_na": "Like dealing with the final problem at the right moment: everything clears."
+    }
+   ]
+  },
+  "41": {
+   "que_tu": {
+    "dich": "Decrease combined with sincerity brings supreme good fortune without blame. One may be persevering in this. It furthers one to undertake something. How is this to be carried out? One may use two small bowls for the offering."
+   },
+   "dai_tuong": {
+    "dich": "At the foot of the mountain, the lake: the image of decrease; the noble person controls their anger and restrains their desires."
+   },
+   "nom_na": "Image: a lake at the foot of a mountain — the lake gives up water so the mountain stays green. In plain terms: like cutting back on purpose: drop the excess, hold back anger and wants, and give where it matters — sincerity counts more than size.",
+   "thoan": {
+    "dich": "Decrease: what is below is decreased and what is above is increased; the way goes upward. Decrease with sincerity brings supreme good fortune without blame; one may persevere and it furthers to undertake something. How is it to be carried out? Two small bowls may be used for the offering — two bowls must suit the time. Decreasing the firm and increasing the yielding has its time; decrease and increase, filling and emptying, go together with the time."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Going quickly when one's tasks are finished is without blame. But one must reflect on how much one may decrease others.",
+     "y": "Help others, but think about how much you can give.",
+     "nom_na": "Like helping a friend after your own work is done: good, but do not overdo it."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Perseverance furthers. To undertake something brings misfortune. Without decreasing oneself, one is able to bring increase to others.",
+     "y": "Help others without losing yourself.",
+     "nom_na": "Like supporting others while keeping your own footing: that is real help."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "When three people journey together, their number decreases by one. When one person journeys alone, they find a companion.",
+     "y": "Too many spoil the bond; alone, you find a true partner.",
+     "nom_na": "Like a three-way partnership that becomes two: sometimes fewer is better."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "If a person decreases their faults, it makes the other hasten to come and rejoice. No blame.",
+     "y": "Fixing your own flaws brings people closer.",
+     "nom_na": "Like dropping a bad habit: friends come back gladly."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Someone does indeed increase him. Ten pairs of tortoises cannot oppose it. Supreme good fortune.",
+     "y": "Blessings come that nothing can stop.",
+     "nom_na": "Like unexpected support that nothing can prevent: great good fortune."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "If one is increased without depriving others, there is no blame. Perseverance brings good fortune. It furthers one to undertake something. One obtains servants but no longer has a separate home.",
+     "y": "Gaining while also benefiting others; serve the wider good.",
+     "nom_na": "Like a leader who grows by helping everyone: good fortune."
+    }
+   ]
+  },
+  "42": {
+   "que_tu": {
+    "dich": "Increase. It furthers one to undertake something. It furthers one to cross the great water."
+   },
+   "dai_tuong": {
+    "dich": "Wind and thunder: the image of increase; when the noble person sees good, they imitate it; when they have faults, they rid themselves of them."
+   },
+   "nom_na": "Image: wind and thunder strengthening each other. In plain terms: like a time of growth and support: seize it, help others rise with you, follow good examples and correct your mistakes.",
+   "thoan": {
+    "dich": "Increase: what is above is decreased and what is below is increased; the people rejoice without limit. Coming down from above to those below, its way is greatly bright. It furthers to undertake something: central and correct, there is blessing. It furthers to cross the great water: the way of wood moves. Increase moves gently and advances day by day without limit. Heaven gives and earth brings forth; its increase has no bounds. The way of increase always goes together with the time."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "It furthers one to accomplish great deeds. Supreme good fortune. No blame.",
+     "y": "With support, take on something great.",
+     "nom_na": "Like being given resources for a big project: use them well."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Someone does indeed increase him; ten pairs of tortoises cannot oppose it. Constant perseverance brings good fortune. The king presents him before God. Good fortune.",
+     "y": "Blessings come; stay steady.",
+     "nom_na": "Like support arriving from all sides: keep your feet on the ground."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "One is enriched through unfortunate events. No blame, if you are sincere and walk in the middle, and report with a seal to the prince.",
+     "y": "Even hard events can bring benefit if you stay honest.",
+     "nom_na": "Like gaining experience from a crisis: stay honest and transparent."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "If you walk in the middle and report to the prince, he will follow. It furthers one to be used in the removal of the capital.",
+     "y": "A fair voice is listened to in big changes.",
+     "nom_na": "Like being trusted to advise on a major move: be balanced."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "If in truth you have a kind heart, ask not. Supreme good fortune. Truly, kindness will be recognised as your virtue.",
+     "y": "Sincere kindness needs no asking; it is recognised.",
+     "nom_na": "Like helping without being asked: people remember."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "He brings increase to no one. Indeed, someone even strikes him. He does not keep his heart constantly steady. Misfortune.",
+     "y": "Taking without giving brings attack.",
+     "nom_na": "Like grabbing for yourself and never sharing: people turn against you."
+    }
+   ]
+  },
+  "43": {
+   "que_tu": {
+    "dich": "Breakthrough. One must resolutely make the matter known at the court of the king. It must be announced truthfully. Danger. It is necessary to notify one's own city. It does not further to resort to arms. It furthers one to undertake something."
+   },
+   "dai_tuong": {
+    "dich": "The lake has risen up to heaven: the image of breakthrough; the noble person dispenses riches downward and refrains from resting on their virtue."
+   },
+   "nom_na": "Image: lake water risen to the sky — pressure that must break through. In plain terms: like a decision you have already made in your heart: announce it openly and honestly, decisively but without force.",
+   "thoan": {
+    "dich": "Breakthrough means resolution: the firm resolves the yielding. Strong and joyful, resolute and harmonious. One must make the matter known at the king's court: one yielding line rides on five firm ones. Announcing it truthfully, there is danger — the danger brings light. Notifying one's own city, it does not further to resort to arms: what is valued would be exhausted. It furthers to undertake something: the firm grows and the matter is concluded."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Mighty in the forward-striding toes. When one goes and is not equal to the task, one makes a mistake.",
+     "y": "Pushing ahead before you are ready is a mistake.",
+     "nom_na": "Like announcing a big change before you are prepared: it fails."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "A cry of alarm. Arms at evening and at night. Fear nothing.",
+     "y": "Stay alert and prepared; then there is nothing to fear.",
+     "nom_na": "Like keeping watch during a tense time: prepared, you need not worry."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "To be powerful in the cheekbones brings misfortune. The noble person is firmly resolved. He walks alone and is caught in the rain. He is bespattered, and people murmur against him. No blame.",
+     "y": "Act firmly, even if alone and misunderstood.",
+     "nom_na": "Like doing the right thing alone and being criticised: no blame in the end."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "There is no skin on his thighs, and walking comes hard. If a man would let himself be led like a sheep, remorse would disappear. But if these words are heard they will not be believed.",
+     "y": "Restless and stubborn; letting others lead would help.",
+     "nom_na": "Like refusing good advice out of pride: listen and things would ease."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "In dealing with weeds, firm resolution is necessary. Walking in the middle remains free of blame.",
+     "y": "Clear away the problem firmly, but fairly.",
+     "nom_na": "Like weeding a garden: be thorough but balanced."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "No cry. In the end misfortune comes.",
+     "y": "Ignoring the warning signs leads to trouble.",
+     "nom_na": "Like no one sounding the alarm: trouble arrives in the end."
+    }
+   ]
+  },
+  "44": {
+   "que_tu": {
+    "dich": "Coming to Meet. The maiden is powerful. One should not marry such a maiden."
+   },
+   "dai_tuong": {
+    "dich": "Under heaven, wind: the image of coming to meet; the prince acts when disseminating his commands and proclaiming them to the four quarters of heaven."
+   },
+   "nom_na": "Image: wind blowing under the sky — reaching everywhere, meeting everything. In plain terms: like an unexpected meeting or opportunity: it can grow fast, so check it carefully before letting it in.",
+   "thoan": {
+    "dich": "Coming to meet means encountering: the yielding meets the firm. One should not marry such a maiden: one cannot live with her long. Heaven and earth meet and all things are revealed. The firm meets the central and correct, and its way spreads through the world. Great indeed is the meaning of the time of coming to meet!"
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "It must be checked with a brake of bronze. Perseverance brings good fortune. If one lets it take its course, one experiences misfortune. Even a lean pig has it in him to rage around.",
+     "y": "Stop a small bad influence early.",
+     "nom_na": "Like curbing a small bad habit before it grows: good."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "There is a fish in the tank. No blame. Does not further guests.",
+     "y": "Keep the matter contained; do not spread it.",
+     "nom_na": "Like handling a problem quietly in-house: no blame."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "There is no skin on his thighs, and walking comes hard. If one is mindful of the danger, no great mistake is made.",
+     "y": "Uneasy and hesitant; staying careful avoids big mistakes.",
+     "nom_na": "Like being unsure whether to go ahead: careful, you avoid harm."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "No fish in the tank. This leads to misfortune.",
+     "y": "Losing touch with your people brings trouble.",
+     "nom_na": "Like a leader who has lost the support of their team."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "A melon covered with willow leaves. Hidden lines. Then it drops down to one from heaven.",
+     "y": "Quality hidden inside will show in time.",
+     "nom_na": "Like real talent kept modest: it is recognised in the end."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "He comes to meet with his horns. Humiliation. No blame.",
+     "y": "Meeting things with hostility isolates you, but it is not a fault.",
+     "nom_na": "Like meeting others with a cold shoulder: lonely, but not wrong."
+    }
+   ]
+  },
+  "45": {
+   "que_tu": {
+    "dich": "Gathering Together. Success. The king approaches his temple. It furthers one to see the great person. This brings success. Perseverance furthers. To bring great offerings creates good fortune. It furthers one to undertake something."
+   },
+   "dai_tuong": {
+    "dich": "Over the earth, the lake: the image of gathering together; the noble person renews their weapons in order to meet the unforeseen."
+   },
+   "nom_na": "Image: a lake collecting water over the land — many coming together. In plain terms: like a reunion or a big meeting: gather people around a shared goal, with a leader, and be ready for the unexpected.",
+   "thoan": {
+    "dich": "Gathering together means assembling. Devoted and joyful, firm in the centre and met with response — so there is gathering. The king approaches his temple to make offerings with filial piety. It furthers to see the great person, success: gathering in what is right. Great offerings bring good fortune and it furthers to undertake something: following the will of heaven. Look at what gathers things, and the nature of heaven, earth and all beings can be seen."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "If you are sincere, but not to the end, there will sometimes be confusion, sometimes gathering together. If you call out, then after one grasp of the hand you can laugh again. Regret not. Going is without blame.",
+     "y": "Unsure at first; once you reach out, it turns to joy.",
+     "nom_na": "Like hesitating to join a group, then being welcomed warmly."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Letting oneself be drawn brings good fortune and remains blameless. If one is sincere, it furthers one to bring even a small offering.",
+     "y": "Being drawn in sincerely is good; a small gesture is enough.",
+     "nom_na": "Like joining because you were invited: a simple, sincere gift is enough."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Gathering together amid sighs. Nothing that would further. Going is without blame. Slight humiliation.",
+     "y": "Feeling left out; reach out anyway.",
+     "nom_na": "Like feeling on the edge of a group: go and join — a little awkward, but fine."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Great good fortune. No blame.",
+     "y": "Working for the common good brings great fortune.",
+     "nom_na": "Like bringing everyone together for a good cause: great fortune."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "If in gathering together one has position, this brings no blame. If there are some who are not yet sincerely in the work, sublime and enduring perseverance is needed. Then remorse disappears.",
+     "y": "You have the position; earn the trust with steady integrity.",
+     "nom_na": "Like a new leader whom not everyone trusts yet: steady integrity wins them over."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Lamenting and sighing, floods of tears. No blame.",
+     "y": "Sorrow at being apart, but sincere.",
+     "nom_na": "Like grieving being left out: no blame."
+    }
+   ]
+  },
+  "46": {
+   "que_tu": {
+    "dich": "Pushing Upward has supreme success. One must see the great person. Fear not. Departure toward the south brings good fortune."
+   },
+   "dai_tuong": {
+    "dich": "Within the earth, wood grows: the image of pushing upward; the noble person of devoted character heaps up small things in order to achieve something high and great."
+   },
+   "nom_na": "Image: a tree growing up out of the earth — steady growth from small to tall. In plain terms: like a career that rises step by step: keep climbing steadily, with the help of respected people.",
+   "thoan": {
+    "dich": "The yielding pushes upward with the time; gentle and devoted, firm in the centre and met with response — so there is great success. One must see the great person; fear not: there will be blessing. Departure toward the south brings good fortune: the will is carried out."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Pushing upward that meets with confidence brings great good fortune.",
+     "y": "Rising with others' trust brings great fortune.",
+     "nom_na": "Like being welcomed into a new position: very good."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "If one is sincere, it furthers one to bring even a small offering. No blame.",
+     "y": "Sincerity matters more than show.",
+     "nom_na": "Like a simple, honest effort that is appreciated: no blame."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "One pushes upward into an empty city.",
+     "y": "The way ahead is open, with no resistance.",
+     "nom_na": "Like entering a market with no competition: smooth progress."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "The king offers him Mount Qi. Good fortune. No blame.",
+     "y": "Being honoured for your merit.",
+     "nom_na": "Like being given recognition for loyal work: good."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Perseverance brings good fortune. One pushes upward by steps.",
+     "y": "Rise step by step, steadily.",
+     "nom_na": "Like a promotion earned rung by rung: good."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Pushing upward in darkness. It furthers one to be unremittingly persevering.",
+     "y": "Climbing blindly; only steady effort helps.",
+     "nom_na": "Like pushing for more without seeing where it leads: only careful persistence helps."
+    }
+   ]
+  },
+  "47": {
+   "que_tu": {
+    "dich": "Oppression. Success. Perseverance. The great person brings about good fortune. No blame. When one has something to say, it is not believed."
+   },
+   "dai_tuong": {
+    "dich": "There is no water in the lake: the image of exhaustion; the noble person stakes their life on following their will."
+   },
+   "nom_na": "Image: a lake with its water drained away — dried up and hemmed in. In plain terms: like a time when resources run out and no one listens: keep your resolve, talk less, and let your actions speak.",
+   "thoan": {
+    "dich": "Oppression: the firm is covered over. In danger and yet joyful, oppressed yet not losing one's place — success; who but the noble person can do this? Perseverance — the great person brings good fortune, because they are firm and central. When one has something to say it is not believed: relying on words leads to dead ends."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "One sits oppressed under a bare tree and strays into a gloomy valley. For three years one sees nothing.",
+     "y": "Sinking into gloom makes things worse.",
+     "nom_na": "Like brooding in a hard time: you see no way out for a long while."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "One is oppressed while at meat and drink. The man with the scarlet knee bands is just coming. It furthers one to offer sacrifice. To set forth brings misfortune. No blame.",
+     "y": "Burdened even amid plenty; help is coming, wait for it.",
+     "nom_na": "Like feeling stuck despite comfort: wait for the help that is on its way."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "A man permits himself to be oppressed by stone, and leans on thorns and thistles. He enters his house and does not see his wife. Misfortune.",
+     "y": "Fighting the wrong battles leaves you without support.",
+     "nom_na": "Like pushing against what cannot move and losing your support at home."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "He comes very quietly, oppressed in a golden carriage. Humiliation, but the end is reached.",
+     "y": "Slow to help because of hesitation, but it gets there.",
+     "nom_na": "Like help that arrives late but still arrives."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "His nose and feet are cut off. Oppression at the hands of the man with the purple knee bands. Joy comes softly. It furthers one to make offerings and libations.",
+     "y": "Pressure from above eases slowly; stay sincere.",
+     "nom_na": "Like being squeezed by those above you: relief comes gradually."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "He is oppressed by creeping vines. He moves uncertainly and says, 'Movement brings remorse.' If one feels remorse over this and makes a start, good fortune comes.",
+     "y": "Fear of acting keeps you stuck; acting brings relief.",
+     "nom_na": "Like being trapped by your own worry: once you move, things get better."
+    }
+   ]
+  },
+  "48": {
+   "que_tu": {
+    "dich": "The Well. The town may be changed, but the well cannot be changed. It neither decreases nor increases. They come and go and draw from the well. If one gets down almost to the water and the rope does not go all the way, or the jug breaks, it brings misfortune."
+   },
+   "dai_tuong": {
+    "dich": "Water over wood: the image of the well; the noble person encourages the people at their work and exhorts them to help one another."
+   },
+   "nom_na": "Image: water drawn up by a wooden bucket — a source that feeds everyone. In plain terms: like the core resources of a home or business: look after the source and see the job through to the last step.",
+   "thoan": {
+    "dich": "Going down into the water and bringing water up — that is the well. The well nourishes without being exhausted. The town may be changed but not the well: because of firmness in the centre. Getting almost to the water but the rope not reaching: no achievement yet. The jug breaks: hence misfortune."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "One does not drink the mud of the well. No animals come to an old well.",
+     "y": "A neglected source is useless.",
+     "nom_na": "Like skills you have let lapse: no one comes to you for them."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "At the wellhole one shoots fishes. The jug is broken and leaks.",
+     "y": "Wasting a good resource on small things.",
+     "nom_na": "Like using a talent for trivial things: it is wasted."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The well is cleaned, but no one drinks from it. This is my heart's sorrow, for one might draw from it. If the king were clear-minded, good fortune might be enjoyed in common.",
+     "y": "Ready and capable, but not yet used.",
+     "nom_na": "Like a qualified person who is overlooked: it will be valued in time."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "The well is being lined. No blame.",
+     "y": "Repairing and improving yourself is right.",
+     "nom_na": "Like taking time to train and improve: no blame."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "In the well there is a clear, cold spring from which one can drink.",
+     "y": "A pure resource is ready to be used.",
+     "nom_na": "Like a source of real value that others can now benefit from."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "One draws from the well without hindrance. It is dependable. Supreme good fortune.",
+     "y": "A reliable source open to all brings great fortune.",
+     "nom_na": "Like sharing freely what you have: great good fortune."
+    }
+   ]
+  },
+  "49": {
+   "que_tu": {
+    "dich": "Revolution. On your own day you are believed. Supreme success, furthering through perseverance. Remorse disappears."
+   },
+   "dai_tuong": {
+    "dich": "Fire in the lake: the image of revolution; the noble person sets the calendar in order and makes the seasons clear."
+   },
+   "nom_na": "Image: fire inside the lake — two forces that cannot stay as they are. In plain terms: like a reorganisation or a big change in your life: change when the time is ripe and people trust you, and prepare it well.",
+   "thoan": {
+    "dich": "Revolution: water and fire extinguish each other; two daughters live together but their wills cannot agree — this is called revolution. On your own day you are believed: change, and then you are trusted. Clear and refined, and joyful; great success through what is right. When change is fitting, remorse disappears. Heaven and earth change and the four seasons are completed; Tang and Wu changed the mandate, in accord with heaven and in response to the people. Great indeed is the time of revolution!"
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Wrapped in the hide of a yellow cow.",
+     "y": "Not yet time to change; hold steady.",
+     "nom_na": "Like wanting change before conditions are ready: hold firm for now."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "When one's own day comes, one may create revolution. Starting brings good fortune. No blame.",
+     "y": "The time is right to change; go ahead.",
+     "nom_na": "Like the moment a change becomes clearly needed: act."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "Starting brings misfortune. Perseverance brings danger. When talk of revolution has gone the rounds three times, one may commit oneself, and people will believe.",
+     "y": "Do not rush; discuss the change thoroughly first.",
+     "nom_na": "Like consulting everyone before a reform: then people back it."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Remorse disappears. Men believe him. Changing the form of government brings good fortune.",
+     "y": "A trusted change brings good fortune.",
+     "nom_na": "Like a reform people believe in: it succeeds."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "The great person changes like a tiger. Even before he questions the oracle he is believed.",
+     "y": "A clear, bold change by a respected leader.",
+     "nom_na": "Like a leader whose big change is trusted at once."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "The noble person changes like a panther. The inferior person molts in the face. Starting brings misfortune. To remain persevering brings good fortune.",
+     "y": "The change is done; settle in and do not push further.",
+     "nom_na": "Like after a reform: consolidate rather than start new upheavals."
+    }
+   ]
+  },
+  "50": {
+   "que_tu": {
+    "dich": "The Cauldron. Supreme good fortune. Success."
+   },
+   "dai_tuong": {
+    "dich": "Fire over wood: the image of the cauldron; the noble person consolidates their fate by making their position correct."
+   },
+   "nom_na": "Image: fire under a cooking pot — turning raw things into nourishment. In plain terms: like building something lasting and putting the right people in the right roles: stabilise the new and nurture talent.",
+   "thoan": {
+    "dich": "The cauldron is an image: wood fed to the fire, cooking food. The sage cooks to make offerings to the Supreme Deity, and cooks on a great scale to nourish the sages and the worthy. Gentle, with clear ears and eyes; the yielding advances and rises, holds the centre and responds to the firm — so there is supreme success."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "A cauldron with legs upturned. Furthers removal of stagnating stuff. One takes a concubine for the sake of her son. No blame.",
+     "y": "Clearing out the old makes room for the new.",
+     "nom_na": "Like emptying out old habits before starting fresh: no blame."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "There is food in the cauldron. My comrades are envious, but they cannot harm me. Good fortune.",
+     "y": "You have real substance; envy cannot hurt you.",
+     "nom_na": "Like having real ability when others are jealous: you are fine."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The handle of the cauldron is altered. One is impeded in his way of life. The fat of the pheasant is not eaten. Once rain falls, remorse is spent. Good fortune comes in the end.",
+     "y": "Your talent is not used yet; it will come right.",
+     "nom_na": "Like being overlooked for now: in time you are recognised."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "The legs of the cauldron are broken. The prince's meal is spilled and his person is soiled. Misfortune.",
+     "y": "Taking on more than you can carry ends badly.",
+     "nom_na": "Like accepting a role too big for you: things spill over."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "The cauldron has yellow handles, golden carrying rings. Perseverance furthers.",
+     "y": "Balanced and capable; stay steady.",
+     "nom_na": "Like a well-run team with a fair leader: good."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "The cauldron has carrying rings of jade. Great good fortune. Nothing that would not act to further.",
+     "y": "Firm yet gentle, it all works out.",
+     "nom_na": "Like a project led with strength and kindness: great good fortune."
+    }
+   ]
+  },
+  "51": {
+   "que_tu": {
+    "dich": "The Arousing (shock, thunder) brings success. Shock comes — oh, oh! Laughing words — ha, ha! The shock terrifies for a hundred miles, and he does not let fall the sacrificial spoon and chalice."
+   },
+   "dai_tuong": {
+    "dich": "Thunder repeated: the image of shock; in fear and trembling the noble person sets their life in order and examines themselves."
+   },
+   "nom_na": "Image: thunder upon thunder — shock after shock. In plain terms: like sudden upheaval at home or at work: it frightens at first, but if you stay calm and take stock of yourself, you come out of it laughing.",
+   "thoan": {
+    "dich": "Shock brings success. Shock comes — oh, oh: fear brings good fortune. Laughing words — ha, ha: afterwards there is order. The shock terrifies for a hundred miles: it startles the distant and frightens the near. One who can stay calm can guard the ancestral temple and the altars and be master of the offering."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Shock comes — oh, oh! Then follow laughing words — ha, ha! Good fortune.",
+     "y": "Fear at first, relief afterwards.",
+     "nom_na": "Like a scare that turns out fine: you laugh about it later."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Shock comes bringing danger. A hundred thousand times you lose your treasures and must climb the nine hills. Do not go in pursuit of them. After seven days you will get them back again.",
+     "y": "Losses in a shock; do not chase them, they return.",
+     "nom_na": "Like losing money in a sudden crash: do not panic-chase it; things recover."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Shock comes and makes one distraught. If shock spurs to action, one remains free of misfortune.",
+     "y": "Use the shock to act sensibly.",
+     "nom_na": "Like turning a scare into a wake-up call: no harm."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Shock is mired.",
+     "y": "Paralysed by the shock.",
+     "nom_na": "Like freezing in a crisis: stuck."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Shock goes hither and thither. Danger. However, nothing at all is lost. Yet there are things to be done.",
+     "y": "Repeated shocks, but you hold your ground.",
+     "nom_na": "Like wave after wave of trouble: nothing lost if you stay at your post."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Shock brings ruin and terrified gazing around. Going ahead brings misfortune. If it has not yet touched one's own body but has reached one's neighbour first, there is no blame. One's comrades have something to talk about.",
+     "y": "Learn from others' troubles and stay calm.",
+     "nom_na": "Like seeing a crisis hit someone else first: stay calm and prepare."
+    }
+   ]
+  },
+  "52": {
+   "que_tu": {
+    "dich": "Keeping Still. Keeping his back still so that he no longer feels his body. He goes into his courtyard and does not see his people. No blame."
+   },
+   "dai_tuong": {
+    "dich": "Mountains standing close together: the image of keeping still; the noble person does not permit their thoughts to go beyond their situation."
+   },
+   "nom_na": "Image: mountain upon mountain — complete stillness. In plain terms: like pressing pause: stop at the right moment, calm your mind, and think within your own place before taking the next step.",
+   "thoan": {
+    "dich": "Keeping still means stopping. When it is time to stop, stop; when it is time to move, move. When movement and rest each come at the right time, the way is bright and clear. Keeping still in stopping means stopping in one's proper place. Above and below are opposed and do not meet. So he no longer feels his body, goes into his courtyard and does not see his people — no blame."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "Keeping his toes still. No blame. Continued perseverance furthers.",
+     "y": "Stop before you start in the wrong direction.",
+     "nom_na": "Like pausing before your first step: no blame."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "Keeping his calves still. He cannot rescue him whom he follows. His heart is not glad.",
+     "y": "You cannot stop what you are following; frustrating.",
+     "nom_na": "Like being swept along by others' decisions: you feel uneasy."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "Keeping his hips still. Making his sacrum stiff. Dangerous. The heart suffocates.",
+     "y": "Forcing yourself to be still makes it worse.",
+     "nom_na": "Like suppressing everything by force: the stress builds."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Keeping his trunk still. No blame.",
+     "y": "Calming yourself is right.",
+     "nom_na": "Like taking time to calm your own mind: good."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Keeping his jaws still. The words have order. Remorse disappears.",
+     "y": "Careful speech prevents regret.",
+     "nom_na": "Like thinking before speaking: fewer regrets."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Noblehearted keeping still. Good fortune.",
+     "y": "Deep, generous calm brings good fortune.",
+     "nom_na": "Like a settled, peaceful mind: good fortune."
+    }
+   ]
+  },
+  "53": {
+   "que_tu": {
+    "dich": "Development. The maiden is given in marriage. Good fortune. Perseverance furthers."
+   },
+   "dai_tuong": {
+    "dich": "On the mountain, a tree: the image of development; the noble person abides in dignity and virtue, in order to improve the mores."
+   },
+   "nom_na": "Image: a tree growing slowly on a mountain — rooted, step by step. In plain terms: like a relationship or a career built gradually: follow the proper order and do not skip stages.",
+   "thoan": {
+    "dich": "Development is advancing step by step: the maiden given in marriage brings good fortune. Advancing, one gains one's place: going brings achievement. Advancing in the right way, one can set the country right. Its place is firm and central. Still and gentle, its movement does not run out."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "The wild goose gradually draws near the shore. The young son is in danger. There is talk. No blame.",
+     "y": "A risky first step; some criticism, but no fault.",
+     "nom_na": "Like a beginner taking a first step: some talk, but no harm."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "The wild goose gradually draws near the cliff. Eating and drinking in peace and concord. Good fortune.",
+     "y": "A secure footing; enjoy it.",
+     "nom_na": "Like settling into a stable job: good."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The wild goose gradually draws near the plateau. The man goes forth and does not return. The woman carries a child but does not bring it forth. Misfortune. It furthers one to fight off robbers.",
+     "y": "Overstepping leaves things unfinished; protect what you have.",
+     "nom_na": "Like rushing past the natural pace: things go wrong — guard what matters."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "The wild goose goes gradually to the tree. Perhaps it will find a flat branch. No blame.",
+     "y": "An awkward position, but a safe spot can be found.",
+     "nom_na": "Like being in an uncomfortable role: find a stable footing."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "The wild goose gradually draws near the summit. For three years the woman has no child. In the end nothing can hinder her. Good fortune.",
+     "y": "A long wait, but in the end it succeeds.",
+     "nom_na": "Like a goal that takes years: in the end nothing can stop it."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "The wild goose gradually draws near the cloud heights. Its feathers can be used for the sacred dance. Good fortune.",
+     "y": "Having risen high, you become an example.",
+     "nom_na": "Like someone whose journey inspires others: good fortune."
+    }
+   ]
+  },
+  "54": {
+   "que_tu": {
+    "dich": "The Marrying Maiden. Undertakings bring misfortune. Nothing that would further."
+   },
+   "dai_tuong": {
+    "dich": "Thunder over the lake: the image of the marrying maiden; the noble person understands the transitory in the light of the eternity of the end."
+   },
+   "nom_na": "Image: thunder over the lake — movement driven by feeling. In plain terms: like accepting a lesser position because you are in a hurry: see your place and limits clearly, and do not put yourself at a disadvantage.",
+   "thoan": {
+    "dich": "The marrying maiden is the great meaning of heaven and earth. If heaven and earth did not meet, nothing would flourish. The marrying maiden is the end and beginning of humanity. Joyful and moving — that is the marrying maiden. Undertakings bring misfortune: the position is not proper. Nothing furthers: the yielding rides on the firm."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "The marrying maiden as a concubine. A lame man who is able to tread. Undertakings bring good fortune.",
+     "y": "A modest role, but you can still do good.",
+     "nom_na": "Like a junior role where you can still contribute well."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "A one-eyed man who is able to see. The perseverance of a solitary man furthers.",
+     "y": "Stay loyal and quiet even if your view is limited.",
+     "nom_na": "Like keeping faith in a situation you cannot fully see: steady."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "The marrying maiden as a slave. She marries as a concubine.",
+     "y": "Accepting a low position out of impatience.",
+     "nom_na": "Like taking any job out of desperation: it limits you."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "The marrying maiden draws out the allotted time. A late marriage comes in due course.",
+     "y": "Waiting for the right match is worth it.",
+     "nom_na": "Like waiting for the right offer: it comes in time."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "The sovereign I gave his daughter in marriage. The embroidered garments of the princess were not as gorgeous as those of the serving maid. The moon that is nearly full brings good fortune.",
+     "y": "Modesty in a high position brings good fortune.",
+     "nom_na": "Like a high-ranking person who dresses simply: respected."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "The woman holds the basket, but there are no fruits in it. The man stabs the sheep, but no blood flows. Nothing that acts to further.",
+     "y": "Going through the motions without substance.",
+     "nom_na": "Like a commitment that is only for show: nothing comes of it."
+    }
+   ]
+  },
+  "55": {
+   "que_tu": {
+    "dich": "Abundance has success. The king attains abundance. Be not sad. Be like the sun at midday."
+   },
+   "dai_tuong": {
+    "dich": "Both thunder and lightning come: the image of abundance; the noble person decides lawsuits and carries out punishments."
+   },
+   "nom_na": "Image: thunder and lightning together — everything at full brightness. In plain terms: like being at the peak of success: enjoy and share it, and prepare for when the sun begins to set.",
+   "thoan": {
+    "dich": "Abundance means greatness. Clarity and movement — so there is abundance. The king attains it: he values greatness. Be not sad, be like the sun at midday: shine on the whole world. When the sun stands at midday it begins to set; when the moon is full it begins to wane. The fullness and emptiness of heaven and earth wax and wane with the time — how much more so for people, how much more for spirits!"
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "When a man meets his destined ruler, they can be together ten days, and it is not a mistake. Going meets with recognition.",
+     "y": "Meeting the right partner; act together.",
+     "nom_na": "Like finding the right collaborator: go ahead."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "The curtain is of such fullness that the polestars can be seen at noon. Through going one meets with mistrust and hate. If one rouses him through truth, good fortune comes.",
+     "y": "You are not trusted yet; sincerity wins through.",
+     "nom_na": "Like being doubted by a boss: honest work wins them over."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The underbrush is of such abundance that the small stars can be seen at noon. He breaks his right arm. No blame.",
+     "y": "Blocked from acting; it is not your fault.",
+     "nom_na": "Like being sidelined at the peak: no blame."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "The curtain is of such fullness that the polestars can be seen at noon. He meets his ruler, who is of like kind. Good fortune.",
+     "y": "Finding an equal ally clears the way.",
+     "nom_na": "Like meeting someone on the same wavelength: good fortune."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Lines are coming. Blessing and fame draw near. Good fortune.",
+     "y": "Gathering capable people brings blessing.",
+     "nom_na": "Like bringing talented people into your team: success and praise."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "His house is in a state of abundance. He screens off his family. He peers through the gate and no longer perceives anyone. For three years he sees nothing. Misfortune.",
+     "y": "Shutting yourself away in your wealth leads to isolation.",
+     "nom_na": "Like a successful person who cuts everyone off: lonely and stuck."
+    }
+   ]
+  },
+  "56": {
+   "que_tu": {
+    "dich": "The Wanderer. Success through smallness. Perseverance brings good fortune to the wanderer."
+   },
+   "dai_tuong": {
+    "dich": "Fire on the mountain: the image of the wanderer; the noble person is clear-minded and cautious in imposing penalties, and protracts no lawsuits."
+   },
+   "nom_na": "Image: fire moving across a mountain — never staying in one place. In plain terms: like working away from home or living somewhere temporary: be careful, modest and travel light.",
+   "thoan": {
+    "dich": "The wanderer: success through smallness. The yielding holds the centre on the outside and is devoted to the firm; keeping still and clinging to clarity — so there is success through smallness, and perseverance brings good fortune to the wanderer. Great indeed is the meaning of the time of the wanderer!"
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "If the wanderer busies himself with trivial things, he draws down misfortune upon himself.",
+     "y": "Fussing over petty things abroad brings trouble.",
+     "nom_na": "Like squabbling over small things in a new place: it causes problems."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "The wanderer comes to an inn. He has his property with him. He wins the steadfastness of a young servant.",
+     "y": "A safe place and trusted help.",
+     "nom_na": "Like finding good lodgings and a reliable helper while away: good."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The wanderer's inn burns down. He loses the steadfastness of his young servant. Danger.",
+     "y": "Arrogance abroad loses you your support.",
+     "nom_na": "Like being rude in a foreign place and losing your helpers: risky."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "The wanderer rests in a shelter. He obtains his property and an axe. My heart is not glad.",
+     "y": "Secure but unsettled.",
+     "nom_na": "Like having what you need but not feeling at home."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "He shoots a pheasant. It drops with the first arrow. In the end this brings both praise and office.",
+     "y": "A small effort well placed brings recognition.",
+     "nom_na": "Like one good contribution that earns you a place."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "The bird's nest burns up. The wanderer laughs at first, then must needs lament and weep. Through carelessness he loses his cow. Misfortune.",
+     "y": "Carelessness and pride lose you your base.",
+     "nom_na": "Like laughing off risks while away and then losing everything."
+    }
+   ]
+  },
+  "57": {
+   "que_tu": {
+    "dich": "The Gentle. Success through what is small. It furthers one to have somewhere to go. It furthers one to see the great person."
+   },
+   "dai_tuong": {
+    "dich": "Winds following one upon the other: the image of the gently penetrating; the noble person spreads their commands abroad and carries out their undertakings."
+   },
+   "nom_na": "Image: wind following wind — gentle, but getting in everywhere. In plain terms: like persuading people or changing a habit: act gently, steadily and repeatedly, and understand before you act.",
+   "thoan": {
+    "dich": "The doubled gentle serves to repeat commands. The firm penetrates into what is central and correct and its will is carried out. The yielding all comply with the firm; so there is success through what is small, it furthers to have somewhere to go, and it furthers to see the great person."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "In advancing and in retreating, the perseverance of a warrior furthers.",
+     "y": "Indecision is cured by firm discipline.",
+     "nom_na": "Like going back and forth on a decision: pick one and commit like a soldier."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Penetration under the bed. Priests and magicians are used in great number. Good fortune. No blame.",
+     "y": "Search out the hidden cause thoroughly.",
+     "nom_na": "Like getting to the bottom of a hidden problem with expert help: good."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "Repeated penetration. Humiliation.",
+     "y": "Overthinking and hesitating repeatedly brings regret.",
+     "nom_na": "Like changing your mind again and again: embarrassing."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Remorse vanishes. During the hunt three kinds of game are caught.",
+     "y": "Acting modestly yet firmly brings rich results.",
+     "nom_na": "Like a well-planned effort that pays off on several fronts."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Perseverance brings good fortune. Remorse vanishes. Nothing that does not further. No beginning, but an end. Before the change, three days. After the change, three days. Good fortune.",
+     "y": "A bad start can be turned around with careful timing.",
+     "nom_na": "Like fixing a project that started badly: plan before and check after, and it ends well."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Penetration under the bed. He loses his property and his axe. Perseverance brings misfortune.",
+     "y": "Too much searching and giving way loses you your strength.",
+     "nom_na": "Like being so accommodating you lose your own footing."
+    }
+   ]
+  },
+  "58": {
+   "que_tu": {
+    "dich": "The Joyous. Success. Perseverance is favourable."
+   },
+   "dai_tuong": {
+    "dich": "Lakes resting one on the other: the image of the joyous; the noble person joins with friends for discussion and practice."
+   },
+   "nom_na": "Image: two lakes linked together — refreshing each other. In plain terms: like a cheerful team or good friends learning together: shared joy works, as long as it is sincere, not flattery.",
+   "thoan": {
+    "dich": "The joyous means pleasure. Firm in the centre and yielding outside, joy furthers through perseverance; so it accords with heaven and responds to people. When joy goes before the people, they forget their toil; when joy meets difficulty, the people forget even their fear of death. Great is the power of joy, how it encourages the people!"
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Contented joyousness. Good fortune.",
+     "y": "Calm, inner joy brings good fortune.",
+     "nom_na": "Like being content without needing more: good."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Sincere joyousness. Good fortune. Remorse disappears.",
+     "y": "Sincere joy removes regret.",
+     "nom_na": "Like genuine happiness with others: good."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Coming joyousness. Misfortune.",
+     "y": "Chasing pleasure from outside brings trouble.",
+     "nom_na": "Like seeking fun to escape: it backfires."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Joyousness that is weighed is not at peace. After ridding himself of mistakes a person has joy.",
+     "y": "Weighing different pleasures; choose the right one.",
+     "nom_na": "Like being torn between temptations: choosing well brings real joy."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Sincerity towards disintegrating influences is dangerous.",
+     "y": "Trusting the wrong people is dangerous.",
+     "nom_na": "Like trusting a flatterer: risky."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Seductive joyousness.",
+     "y": "Being drawn along by pleasure.",
+     "nom_na": "Like getting carried away by temptation."
+    }
+   ]
+  },
+  "59": {
+   "que_tu": {
+    "dich": "Dispersion. Success. The king approaches his temple. It furthers one to cross the great water. Perseverance furthers."
+   },
+   "dai_tuong": {
+    "dich": "The wind drives over the water: the image of dispersion; the kings of old sacrificed to the Lord and built temples."
+   },
+   "nom_na": "Image: wind blowing over water — breaking up the ice, scattering what was stuck. In plain terms: like a team or family drifting apart: melt the rigidity and bring people back together around shared values.",
+   "thoan": {
+    "dich": "Dispersion brings success. The firm comes and is not exhausted; the yielding gains its place outside and joins those above. The king approaches his temple: the king is in the centre. It furthers to cross the great water: riding on wood brings achievement."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "He brings help with the strength of a horse. Good fortune.",
+     "y": "Act fast at the first sign of scattering.",
+     "nom_na": "Like stepping in quickly when a team starts to drift: good."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "At the dispersion he hurries to that which supports him. Remorse disappears.",
+     "y": "Run to what gives you stability.",
+     "nom_na": "Like returning to your support system when things fall apart."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "He dissolves his self. No remorse.",
+     "y": "Letting go of ego brings no regret.",
+     "nom_na": "Like putting your own interests aside for the group: no regret."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "He dissolves his bond with his group. Supreme good fortune. Dispersion leads in turn to accumulation. This is something that ordinary people do not think of.",
+     "y": "Leaving narrow cliques leads to a bigger union.",
+     "nom_na": "Like breaking out of a small circle to build a bigger community."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "His loud cries are as dissolving as sweat. Dispersion! A king abides without blame.",
+     "y": "A clear call from a leader brings people together.",
+     "nom_na": "Like a leader's clear message that rallies everyone."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "He dissolves his blood. Departing, keeping at a distance, going out, is without blame.",
+     "y": "Get yourself and others out of harm's way.",
+     "nom_na": "Like leaving a dangerous situation in time: no blame."
+    }
+   ]
+  },
+  "60": {
+   "que_tu": {
+    "dich": "Limitation. Success. Galling limitation must not be persevered in."
+   },
+   "dai_tuong": {
+    "dich": "Water over the lake: the image of limitation; the noble person creates number and measure, and examines the nature of virtue and correct conduct."
+   },
+   "nom_na": "Image: a lake holding just as much water as it can — anything more spills over. In plain terms: like a budget or a schedule: set sensible limits, not too loose and not so harsh that you cannot keep them.",
+   "thoan": {
+    "dich": "Limitation brings success: the firm and the yielding are divided and the firm holds the centre. Galling limitation must not be persevered in: its way comes to an end. Joyful in going through danger, limiting oneself in the right place, central and correct, one gets through. Heaven and earth have their limits and the four seasons are completed. Through limits and measures, wealth is not wasted and the people are not harmed."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Not going out of the door and the courtyard is without blame.",
+     "y": "Holding back at the right time is wise.",
+     "nom_na": "Like staying home when it is not time to go out: no blame."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "Not going out of the gate and the courtyard brings misfortune.",
+     "y": "Holding back when it is time to act is a mistake.",
+     "nom_na": "Like missing an opportunity by being too cautious."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "He who knows no limitation will have cause to lament. No blame.",
+     "y": "Lack of limits brings regret; learn from it.",
+     "nom_na": "Like overspending and then regretting it: learn and adjust."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "Contented limitation. Success.",
+     "y": "Limits accepted calmly work well.",
+     "nom_na": "Like a budget you are happy with: success."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "Sweet limitation brings good fortune. Going brings esteem.",
+     "y": "Limits set with care and kindness win respect.",
+     "nom_na": "Like a leader who sets fair rules and follows them first: respected."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "Galling limitation. Perseverance brings misfortune. Remorse disappears.",
+     "y": "Too harsh limits backfire, though sometimes needed.",
+     "nom_na": "Like a strict diet that cannot be kept up: ease off."
+    }
+   ]
+  },
+  "61": {
+   "que_tu": {
+    "dich": "Inner Truth. Pigs and fishes. Good fortune. It furthers one to cross the great water. Perseverance furthers."
+   },
+   "dai_tuong": {
+    "dich": "Wind over the lake: the image of inner truth; the noble person discusses criminal cases in order to delay executions."
+   },
+   "nom_na": "Image: wind moving over the lake — stirring it from within. In plain terms: like trust built on keeping your word: real sincerity moves even the hardest people.",
+   "thoan": {
+    "dich": "Inner truth: the yielding is within and the firm holds the centre. Joyful and gentle — sincerity that transforms the country. Pigs and fishes, good fortune: trust reaches even pigs and fishes. It furthers to cross the great water: riding in a hollow wooden boat. Inner truth furthers through perseverance: it responds to heaven."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "Being prepared brings good fortune. If there are secret designs, it is disquieting.",
+     "y": "Inner calm and trust bring good fortune; hidden agendas do not.",
+     "nom_na": "Like trusting your own judgement without scheming: good."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "A crane calling in the shade. Its young answers it. I have a good goblet. I will share it with you.",
+     "y": "Sincerity calls out and is answered.",
+     "nom_na": "Like a heartfelt message that finds a warm reply."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "He finds a comrade. Now he beats the drum, now he stops. Now he sobs, now he sings.",
+     "y": "Depending on others, your mood swings.",
+     "nom_na": "Like letting someone else's moods control yours."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "The moon nearly at the full. The team horse goes astray. No blame.",
+     "y": "Letting go of a partner to stay on the right path.",
+     "nom_na": "Like parting ways to stay true to what is right: no blame."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "He possesses truth, which links together. No blame.",
+     "y": "Sincerity that binds people together.",
+     "nom_na": "Like a leader whose honesty holds the team together."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "Cockcrow penetrating to heaven. Perseverance brings misfortune.",
+     "y": "Empty words that claim too much bring trouble.",
+     "nom_na": "Like big promises with nothing behind them."
+    }
+   ]
+  },
+  "62": {
+   "que_tu": {
+    "dich": "Preponderance of the Small. Success. Perseverance furthers. Small things may be done; great things should not be done. The flying bird brings the message: it is not well to strive upward, it is well to remain below. Great good fortune."
+   },
+   "dai_tuong": {
+    "dich": "Thunder on the mountain: the image of preponderance of the small; in conduct the noble person gives preponderance to reverence, in mourning to grief, in expenditure to thrift."
+   },
+   "nom_na": "Image: thunder over the mountain — a voice that should stay low. In plain terms: like a time for careful small steps: do the small things thoroughly, stay modest, and take no big risks.",
+   "thoan": {
+    "dich": "Preponderance of the small: the small are in excess and there is success. Excess that furthers through perseverance moves with the time. The yielding holds the centre, so small things bring good fortune. The firm has lost its place and is not central, so great things should not be done. There is the image of a flying bird: it brings the message that it is not well to strive upward, it is well to stay below — great good fortune; going up is against the grain, going down goes with it."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "The bird meets with misfortune through flying.",
+     "y": "Rising too fast brings trouble.",
+     "nom_na": "Like trying to leap ahead too soon: it goes wrong."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "She passes by her ancestor and meets her ancestress. He does not reach his prince and meets the official. No blame.",
+     "y": "Going through the proper channel rather than straight to the top.",
+     "nom_na": "Like working through your manager instead of over their head: no blame."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "If one is not extremely careful, somebody may come up from behind and strike him. Misfortune.",
+     "y": "Not being careful enough leaves you open to harm.",
+     "nom_na": "Like being careless with your guard down: you may be caught out."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "No blame. He meets him without passing by. Going brings danger. One must be on guard. Do not act. Be constantly persevering.",
+     "y": "Do not force things; stay alert.",
+     "nom_na": "Like holding back and keeping watch: safe."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Dense clouds, no rain from our western territory. The prince shoots and hits him who is in the cave.",
+     "y": "Getting help from those who are hidden or overlooked.",
+     "nom_na": "Like finding the right person in an unexpected place."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "He passes him by, not meeting him. The flying bird leaves him. Misfortune. This means bad luck and injury.",
+     "y": "Overreaching without knowing your limits brings trouble.",
+     "nom_na": "Like flying too high and too far: you lose your way."
+    }
+   ]
+  },
+  "63": {
+   "que_tu": {
+    "dich": "After Completion. Success in small matters. Perseverance furthers. At the beginning good fortune, at the end disorder."
+   },
+   "dai_tuong": {
+    "dich": "Water over fire: the image of the condition after completion; the noble person takes thought of misfortune and arms themselves against it in advance."
+   },
+   "nom_na": "Image: water over fire — everything in its place, but the balance is delicate. In plain terms: like right after a big success: protect what you have achieved and guard against things slipping.",
+   "thoan": {
+    "dich": "After completion, success: the small succeed. Perseverance furthers: the firm and the yielding are correct and in their proper places. At the beginning good fortune: the yielding holds the centre. At the end, stopping brings disorder: its way comes to an end."
+   },
+   "hao": [
+    {
+     "ten": "Nine at the beginning (line 1)",
+     "dich": "He brakes his wheels. He gets his tail in the water. No blame.",
+     "y": "Hold back a little after success.",
+     "nom_na": "Like slowing down after a win: no blame."
+    },
+    {
+     "ten": "Six in the second place (line 2)",
+     "dich": "The woman loses the curtain of her carriage. Do not run after it; on the seventh day you will get it.",
+     "y": "What is lost will return; do not chase it.",
+     "nom_na": "Like losing something small after success: let it be, it comes back."
+    },
+    {
+     "ten": "Nine in the third place (line 3)",
+     "dich": "The Illustrious Ancestor disciplines the Devil's Country. After three years he conquers it. Inferior people must not be employed.",
+     "y": "A long effort; use only the right people.",
+     "nom_na": "Like a long hard project: choose your team carefully."
+    },
+    {
+     "ten": "Six in the fourth place (line 4)",
+     "dich": "The finest clothes turn to rags. Be careful all day long.",
+     "y": "Stay watchful; things can wear out.",
+     "nom_na": "Like checking for leaks after finishing a big job."
+    },
+    {
+     "ten": "Nine in the fifth place (line 5)",
+     "dich": "The neighbour in the east who slaughters an ox does not attain as much real happiness as the neighbour in the west with his small offering.",
+     "y": "Sincerity matters more than display.",
+     "nom_na": "Like a small, heartfelt gesture that means more than a lavish one."
+    },
+    {
+     "ten": "Six at the top (line 6)",
+     "dich": "He gets his head in the water. Danger.",
+     "y": "Going too far after success is dangerous.",
+     "nom_na": "Like celebrating too much and losing track: risky."
+    }
+   ]
+  },
+  "64": {
+   "que_tu": {
+    "dich": "Before Completion. Success. But if the little fox, after nearly completing the crossing, gets his tail in the water, there is nothing that would further."
+   },
+   "dai_tuong": {
+    "dich": "Fire over water: the image of the condition before transition; the noble person is careful in the differentiation of things, so that each finds its place."
+   },
+   "nom_na": "Image: fire above water — two forces not yet working together. In plain terms: like a project in its last stretch: it is not finished yet; stay careful, see things clearly, and put each thing in its place.",
+   "thoan": {
+    "dich": "Before completion, success: the yielding holds the centre. The little fox nearly completes the crossing: it has not yet got out of the middle. It gets its tail in the water and nothing furthers: it does not continue to the end. Though the lines are not in their proper places, the firm and the yielding respond to each other."
+   },
+   "hao": [
+    {
+     "ten": "Six at the beginning (line 1)",
+     "dich": "He gets his tail in the water. Humiliating.",
+     "y": "Rushing at the start leads to embarrassment.",
+     "nom_na": "Like starting before you are ready: you trip up."
+    },
+    {
+     "ten": "Nine in the second place (line 2)",
+     "dich": "He brakes his wheels. Perseverance brings good fortune.",
+     "y": "Hold back and wait; it is good.",
+     "nom_na": "Like pacing yourself: good."
+    },
+    {
+     "ten": "Six in the third place (line 3)",
+     "dich": "Before completion, attack brings misfortune. It furthers one to cross the great water.",
+     "y": "Not ready to force things, but a bold move with help can work.",
+     "nom_na": "Like not being able to finish alone: get help and then go for it."
+    },
+    {
+     "ten": "Nine in the fourth place (line 4)",
+     "dich": "Perseverance brings good fortune. Remorse disappears. Shock, thus to discipline the Devil's Country. For three years, great realms are awarded.",
+     "y": "Sustained effort brings reward.",
+     "nom_na": "Like a long push that finally pays off."
+    },
+    {
+     "ten": "Six in the fifth place (line 5)",
+     "dich": "Perseverance brings good fortune. No remorse. The light of the noble person is true. Good fortune.",
+     "y": "Sincere leadership shines.",
+     "nom_na": "Like a leader whose honesty is clear to all: good fortune."
+    },
+    {
+     "ten": "Nine at the top (line 6)",
+     "dich": "There is drinking of wine in genuine confidence. No blame. But if one wets one's head, one loses it, in truth.",
+     "y": "Celebrate with trust, but do not overdo it.",
+     "nom_na": "Like celebrating the end of a project: enjoy, but do not lose your head."
+    }
+   ]
+  }
+ }
+}

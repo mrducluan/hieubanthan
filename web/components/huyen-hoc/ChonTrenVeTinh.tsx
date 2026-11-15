@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { postJson } from "@/lib/goi-api";
 import { ghi } from "@/lib/do-luong";
 import type { KetQuaDoHuong } from "@/components/huyen-hoc/DoHuongDienThoai";
+import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 
 export const coBanDoVeTinh = () => (process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ?? "").trim() !== "";
 
@@ -37,6 +38,9 @@ export function ChonTrenVeTinh({ sinh, onDung }: {
   const khung = useRef<HTMLIFrameElement>(null);
   const luot = useRef(0);
   const sinhRef = useRef(sinh);
+  const { c: t, en, huong } = useChuPT();
+  const tRef = useRef(t);
+  useEffect(() => { tRef.current = t; }, [t]);
   useEffect(() => { sinhRef.current = sinh; }, [sinh]);
 
   const lenh = (o: Record<string, unknown>) => khung.current?.contentWindow?.postMessage(o, window.location.origin);
@@ -50,7 +54,7 @@ export function ChonTrenVeTinh({ sinh, onDung }: {
         const kq = await postJson<KetQua>("/api/phongthuy/huong-ban-do", { tam, truoc, ...(sinhRef.current ? { sinh: sinhRef.current } : {}) });
         if (toi === luot.current) setXem(kq);
       } catch (e) {
-        if (toi === luot.current) { setXem(null); setLoi(e instanceof Error ? e.message : "Chưa tính được từ hai điểm này."); }
+        if (toi === luot.current) { setXem(null); setLoi(e instanceof Error ? e.message : tRef.current("dh.loi_hai_diem_tinh")); }
       } finally { if (toi === luot.current) setDangTinh(false); }
     };
     const nghe = (e: MessageEvent) => {
@@ -59,13 +63,11 @@ export function ChonTrenVeTinh({ sinh, onDung }: {
       if (d?.nguon !== "hbt-ve-tinh") return;
       if (d.su_kien === "san") { setSan(true); setLoi(null); }
       else if (d.su_kien === "loi") {
-        setLoi(d.ma === "khoa"
-          ? "Bản đồ vệ tinh đang tạm dừng. Bạn vẫn lấy được hướng bằng cách dán toạ độ ở bên dưới."
-          : "Chưa tải được bản đồ vệ tinh (mạng chậm hoặc bị chặn). Thử lại sau, hoặc dán toạ độ ở bên dưới.");
+        setLoi(d.ma === "khoa" ? tRef.current("vt.loi_khoa") : tRef.current("vt.loi_tai"));
       } else if (d.su_kien === "tim") {
-        setLoi(d.ok ? null : "Không tìm thấy địa chỉ này — thử tên đường + phường / quận, hoặc kéo bản đồ tới nhà bạn.");
+        setLoi(d.ok ? null : tRef.current("vt.loi_tim"));
       } else if (d.su_kien === "vi_tri" && !d.ok) {
-        setLoi("Chưa lấy được vị trí máy — gõ địa chỉ vào ô tìm, hoặc kéo bản đồ tới nhà bạn.");
+        setLoi(tRef.current("vt.loi_vi_tri"));
       } else if (d.su_kien === "diem") {
         const b = Math.min(2, Math.max(0, Number(d.buoc) || 0));
         setBuoc(b);
@@ -84,15 +86,15 @@ export function ChonTrenVeTinh({ sinh, onDung }: {
   if (!mo) {
     return (
       <Button type="button" onClick={() => { setMo(true); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "ve_tinh_mo" }); }} data-testid="ve-tinh-mo">
-        <MapPinned aria-hidden /> Chọn trên ảnh vệ tinh
+        <MapPinned aria-hidden /> {t("vt.mo")}
       </Button>
     );
   }
 
-  const huongDan = !san ? <>Đang mở bản đồ vệ tinh…</>
-    : buoc === 0 ? <>Tìm tới nhà bạn rồi <b className="text-fg">bấm vào giữa mái nhà</b> (điểm 1).</>
-      : buoc === 1 ? <>Giờ <b className="text-fg">bấm vào mặt đường ngay trước cửa nhà</b> (điểm 2) — chỗ đứng nhìn thẳng vào cửa chính.</>
-        : <>Kéo điểm 1 hoặc 2 để chỉnh. Mũi tên chỉ hướng mặt nhà nhìn ra.</>;
+  const huongDan = !san ? <>{t("vt.dang_mo")}</>
+    : buoc === 0 ? <ChuB chu={t("vt.b0")} lop="text-fg" />
+      : buoc === 1 ? <ChuB chu={t("vt.b1")} lop="text-fg" />
+        : <>{t("vt.b2")}</>;
 
   return (
     <div className="space-y-2 rounded-xl border border-gold/40 bg-bg/40 p-3" data-testid="ve-tinh">
@@ -102,32 +104,32 @@ export function ChonTrenVeTinh({ sinh, onDung }: {
         lenh({ lenh: "tim", q: timKiem.trim() });
         ghi("chart_interacted", { mo_dun: "phongthuy", kind: "ve_tinh_tim" });
       }}>
-        <Input aria-label="Tìm địa chỉ trên bản đồ" placeholder="Gõ địa chỉ, tên đường…" value={timKiem} onChange={(e) => setTimKiem(e.target.value.slice(0, 200))} disabled={!san} />
-        <Button type="submit" size="sm" variant="secondary" disabled={!san} aria-label="Tìm"><Search aria-hidden /></Button>
-        <Button type="button" size="sm" variant="ghost" disabled={!san} onClick={() => lenh({ lenh: "vi_tri" })} aria-label="Về vị trí của tôi" title="Về vị trí của tôi"><LocateFixed aria-hidden /></Button>
+        <Input aria-label={t("vt.tim_aria")} placeholder={t("vt.tim_vi_du")} value={timKiem} onChange={(e) => setTimKiem(e.target.value.slice(0, 200))} disabled={!san} />
+        <Button type="submit" size="sm" variant="secondary" disabled={!san} aria-label={t("vt.tim")}><Search aria-hidden /></Button>
+        <Button type="button" size="sm" variant="ghost" disabled={!san} onClick={() => lenh({ lenh: "vi_tri" })} aria-label={t("vt.ve_vi_tri")} title={t("vt.ve_vi_tri")}><LocateFixed aria-hidden /></Button>
       </form>
       <p className="flex items-start gap-1.5 text-sm text-fg-muted" aria-live="polite" data-testid="ve-tinh-huong-dan">
         <Crosshair className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden /> <span>{huongDan}</span>
       </p>
-      <iframe ref={khung} src="/khung/ve-tinh" title="Bản đồ vệ tinh — bấm vào mái nhà rồi mặt đường trước cửa" allow="geolocation; fullscreen"
+      <iframe ref={khung} src={en ? "/khung/ve-tinh?ngon_ngu=en" : "/khung/ve-tinh"} title={t("vt.khung_title")} allow="geolocation; fullscreen"
         className="h-[min(60vh,420px)] w-full rounded-lg border-0 bg-surface" data-testid="ve-tinh-khung" />
       {(xem || dangTinh) && (
         <div className="flex flex-wrap items-center gap-3 rounded-lg border border-line/70 bg-bg/60 px-3 py-2" data-testid="ve-tinh-ket-qua" aria-live="polite">
           {xem ? (
-            <p className="text-sm">Mặt nhà nhìn về <b className="text-gold">{xem.huong}</b> · {Math.round(xem.do_huong)}°
-              <span className="text-fg-faint"> · hai điểm cách {Math.round(xem.khoang_cach_m)} m{xem.khoang_cach_m < 5 ? " — hơi gần, chấm điểm 2 xa hơn cho chắc" : ""}</span></p>
-          ) : <p className="text-sm text-fg-muted">Đang tính…</p>}
+            <p className="text-sm">{t("vt.mat_nha")}<b className="text-gold">{huong(xem.huong)}</b> · {Math.round(xem.do_huong)}°
+              <span className="text-fg-faint">{t("vt.cach", { m: String(Math.round(xem.khoang_cach_m)) })}{xem.khoang_cach_m < 5 ? t("vt.gan") : ""}</span></p>
+          ) : <p className="text-sm text-fg-muted">{t("vt.dang_tinh")}</p>}
           {xem && hai && (
             <Button type="button" size="sm" disabled={dangTinh} data-testid="ve-tinh-dung" onClick={() => {
               ghi("chart_interacted", { mo_dun: "phongthuy", kind: "ve_tinh_dung" });
               onDung(xem, hai.tam, hai.truoc);
-            }}>Dùng hướng này</Button>
+            }}>{t("vt.dung")}</Button>
           )}
         </div>
       )}
       <div className="flex flex-wrap items-center justify-between gap-2">
-        {buoc > 0 ? <Button type="button" size="sm" variant="ghost" onClick={() => lenh({ lenh: "lam_lai" })}><RotateCcw aria-hidden /> Chấm lại</Button> : <span />}
-        <p className="text-[11px] text-fg-faint">Ảnh vệ tinh của Google Maps. Toạ độ chỉ dùng để tính góc, không lưu.</p>
+        {buoc > 0 ? <Button type="button" size="sm" variant="ghost" onClick={() => lenh({ lenh: "lam_lai" })}><RotateCcw aria-hidden /> {t("vt.cham_lai")}</Button> : <span />}
+        <p className="text-[11px] text-fg-faint">{t("vt.chan")}</p>
       </div>
       {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
     </div>

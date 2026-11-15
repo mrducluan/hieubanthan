@@ -7,7 +7,7 @@ test("trang công cụ: H1 máy chủ, bản đồ mặt, khảo sát → bài �
   const html = await (await request.get("/nhan-tuong")).text();
   expect(html).toMatch(/<h1[^>]*>[^<]*Xem tướng mặt/);
   expect(html).toContain('data-testid="ban-do-mat"');
-  await napHoSo(page, { ho_ten: "Nguyễn Văn An", ngay: 24, thang: 10, nam: 1988, gioi_tinh: "nam" });
+  await napHoSo(page, { v: 1, ho_ten: "Nguyễn Văn An", ngay: 24, thang: 10, nam: 1988, gioi_tinh: "nam", tao_luc: "2026-09-30T00:00:00Z" });
   await page.goto("/nhan-tuong");
   await expect(page.getByTestId("khao-sat-guong")).toBeVisible();
   // bước 1: trả lời 3 câu; vùng đang hỏi sáng trên bản đồ
@@ -26,7 +26,14 @@ test("trang công cụ: H1 máy chủ, bản đồ mặt, khảo sát → bài �
   await expect(bc).toBeVisible({ timeout: 20_000 });
   await expect(bc).toContainText("Dáng mặt: Kim hình");
   await expect(bc.getByTestId("ban-do-mat").locator("[data-muc]")).not.toHaveCount(0);
-  await expect(bc).toContainText("Năm nay nhìn vào");
+  await expect(bc.getByTestId("ban-do-mat")).toContainText("Năm nay nhìn vào");      // hồ sơ có năm sinh → vùng lưu niên
+  // WS-4: "Sách xưa nói gì về tuổi …" (hoặc bấm vùng sáng của năm nay) → câu bài ca lưu niên của Thần Tướng Toàn Biên
+  await expect(bc.getByTestId("bai-ca-luu-nien")).toHaveCount(0);
+  await bc.getByTestId("nut-bai-ca").click();
+  await expect(bc.getByTestId("bai-ca-luu-nien")).toContainText(/Tuổi \d+(–\d+)? /);   // câu của đúng chặng tuổi (tuổi mụ đổi theo năm âm đang xem)
+  const bca = bc.getByTestId("bai-ca-luu-nien");
+  await expect(bca).toContainText("Thần Tướng Toàn Biên");
+  await expect(bca.locator('[lang="zh-Hant"]')).toContainText("«");
   await expect(bc.getByTestId("chip-muc").first()).toBeVisible();
   // câu trả lời còn trên máy sau khi tải lại
   await page.reload();

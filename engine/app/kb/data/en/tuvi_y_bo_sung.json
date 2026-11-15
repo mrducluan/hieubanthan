@@ -1,0 +1,783 @@
+{
+ "_trang_thai": "bien_tap",
+ "muc": [
+  {
+   "loi_doi_thuong": "No area of life stands alone: it is lit from the opposite side and from two supporting sides. An area that looks empty still has its own character, borrowed from the opposite side.",
+   "viec_nen_lam": "When reading one area, read the opposite area too before drawing conclusions."
+  },
+  {
+   "loi_doi_thuong": "A trait that shows up in a given area describes the people or matters of that area: a knack for keeping money in the siblings area describes your siblings, not you.",
+   "viec_nen_lam": "Read the trait as a description of the relative in question, then compare it with the real person."
+  },
+  {
+   "loi_doi_thuong": "Look at the whole ten-year period first, then the individual years: a good period still has a few slower years, and one slow year doesn't change the whole period.",
+   "viec_nen_lam": "Set goals by the long period, and each year only adjust your pace."
+  },
+  {
+   "loi_doi_thuong": "Your birth chart is only half the story; the period you're in now decides a lot about whether you can use your strengths.",
+   "viec_nen_lam": "Look at your current period to see which strength to put your energy into right now."
+  },
+  {
+   "loi_doi_thuong": "Each year one area of life comes to the fore; that year you tend to focus most on exactly that area.",
+   "viec_nen_lam": "At the start of the year, write down one concrete thing you want to do for the area that's coming to the fore."
+  },
+  {},
+  {},
+  {},
+  {
+   "loi_doi_thuong": "a period that needs care is usually much lighter if you prepare a few years ahead: an emergency fund, habits of rest, people you can trust.",
+   "viec_nen_lam": "Look ahead to the next ten-year period and pick one thing to start preparing now."
+  },
+  {},
+  {},
+  {
+   "loi_doi_thuong": "A place full of good news can still hide something easy to miss; a place where difficulties are obvious is often easier to guard against.",
+   "viec_nen_lam": "When everything is going well, keep up your habit of checking safety and paperwork as you would normally."
+  },
+  {
+   "loi_doi_thuong": "When a difficult point sits in a bright spot, you usually see it coming and have time to deal with it; in a dim spot it arrives more quietly, so regular checks are needed.",
+   "loi_do_sang": {
+    "sang": "Your difficult points usually show up early, so you have time to see them and deal with them.",
+    "ham": "Your difficult points tend to arrive quietly and are hard to see coming, so check things regularly yourself."
+   },
+   "viec_nen_lam": "Make a regular checklist — papers, vehicles, the house — for the area with the difficult point."
+  },
+  {
+   "loi_doi_thuong": "A difficult point standing alone, with nothing to support it, deserves more attention than the same point surrounded by plenty of support.",
+   "viec_nen_lam": "In that area, seek out people or sources of support before you need them."
+  },
+  {},
+  {
+   "loi_doi_thuong": "People born in a leap month can have their chart drawn up in several ways; a common one is to count it as the following month.",
+   "viec_nen_lam": "If you were born in a leap month, look at your chart both ways in the school settings."
+  },
+  {},
+  {
+   "loi_doi_thuong": "A partner who is good at nurturing the home lets you work with peace of mind, but that can't replace the two of you both looking after the relationship.",
+   "viec_nen_lam": "Each week, say out loud one specific thing the other person took care of for you."
+  },
+  {
+   "loi_doi_thuong": "Each year one area of life comes up in your own rotating cycle; men and women move in opposite directions, and after twelve years it comes back to the same place.",
+   "viec_nen_lam": "Look back twelve years at the same area to see what this year might resemble."
+  },
+  {
+   "loi_doi_thuong": "A hard start in life followed by smoother years is usually easier to live with than an early smooth run followed by hardship, because you've built up a store of experience.",
+   "viec_nen_lam": "If you're in a hard period, write down the lessons each year — they are capital for the next period."
+  },
+  {
+   "loi_doi_thuong": "The most favourable year is also the year you're most likely to let your guard down; what you thought couldn't happen tends to come right then.",
+   "viec_nen_lam": "In a favourable year, keep your spending and safety rules exactly as in an ordinary year."
+  },
+  {},
+  {
+   "loi_doi_thuong": "In the area with this trait, when trouble comes there is usually someone or something to step in in time — even so, it's worth preparing.",
+   "loi_ro": "When it comes to {mang}, when trouble comes there is usually someone or something to step in in time — even so, it's worth preparing.",
+   "viec_nen_lam": "Keep good relations with people who have a say in your organisation, because that's usually where your support comes from."
+  },
+  {
+   "loi_doi_thuong": "Away from familiar places you easily meet influential people who help, but you can also easily feel alone in a new place.",
+   "viec_nen_lam": "When you move somewhere new, join a group with a shared interest within the first month."
+  },
+  {
+   "loi_doi_thuong": "You're used to carrying things inside alone, rarely sharing even when there's someone beside you.",
+   "viec_nen_lam": "Choose one person to tell about what's worrying you, once a week."
+  },
+  {
+   "loi_doi_thuong": "You suit a role with real decision-making power rather than an empty title; using that power calls for keeping to your standards.",
+   "viec_nen_lam": "When taking on a new job, ask exactly what you can decide on your own and whom you report to."
+  },
+  {
+   "loi_doi_thuong": "You suit brain work within a system with clear processes: teaching, office work, finance, planning.",
+   "viec_nen_lam": "Look for a position with a clear career path, where your careful thinking gets recognised."
+  },
+  {
+   "loi_doi_thuong": "You suit work in public view, with discipline and responsibility towards many people, such as public service, legal work or external relations.",
+   "viec_nen_lam": "Choose an environment where public credibility is an asset, and protect it through transparency."
+  },
+  {
+   "loi_doi_thuong": "Your income tends to come in waves from your own work rather than as a steady monthly salary.",
+   "viec_nen_lam": "Build an emergency fund covering a few months of spending to get through low-income months."
+  },
+  {
+   "loi_doi_thuong": "If you run your own business, you may be busy day and night while the money you keep doesn't match; being the boss suits you better when there's extra support around authority and money.",
+   "viec_nen_lam": "Before starting your own business, trial it for a short time and work out your real profit after costs."
+  },
+  {
+   "loi_doi_thuong": "In your chart, this trait describes how you experience the men closest to you: your father, your partner, your son.",
+   "loi_ro": "Part of your chart describes how you experience the men closest to you: your father, your partner, your son.",
+   "viec_nen_lam": "When reading this part, think of each specific person and ask yourself what you expect from them."
+  },
+  {
+   "loi_doi_thuong": "Your partner may be very busy and spend periods away; many people suit someone mature who is comfortable with seeing each other less often but reliably.",
+   "viec_nen_lam": "Agree in advance how you'll stay in touch when one of you is away: when to call, who handles what at home."
+  },
+  {
+   "loi_doi_thuong": "You heat up fast but cool down fast too, without holding grudges; the people around you may not cool down as quickly.",
+   "viec_nen_lam": "After raising your voice, take the initiative to say something gentle the same day."
+  },
+  {
+   "loi_doi_thuong": "a good time to build up long-term assets such as property, step by step.",
+   "viec_nen_lam": "Plan to build up assets year by year rather than putting everything into one big purchase."
+  },
+  {
+   "loi_doi_thuong": "You're strong and willing to take on hard tasks others avoid; the person beside you needs to understand you prefer action to waiting.",
+   "viec_nen_lam": "Choose work with real challenge, and tell your family upfront about your busy rhythm."
+  },
+  {
+   "loi_doi_thuong": "things go well thanks to good relationships; better to bring people in than to work alone.",
+   "viec_nen_lam": "Try working together on a small shared project before putting in big money."
+  },
+  {
+   "loi_doi_thuong": "You have a quiet, discreet charm; people easily notice you without you having to try.",
+   "viec_nen_lam": "Keep clear boundaries in work relationships."
+  },
+  {
+   "loi_doi_thuong": "This trait suits both disciplined work and business; business runs more smoothly when your money side also has support, and it's best to keep love and money apart.",
+   "loi_ro": "You suit both disciplined work and business; business runs more smoothly when your money side also has support, and it's best to keep love and money apart.",
+   "viec_nen_lam": "Separate your business account from your personal spending from the very start."
+  },
+  {
+   "loi_doi_thuong": "You suit being in charge of an area of your own and know how to build wealth through discipline.",
+   "viec_nen_lam": "Take charge of an area with clear targets so you use this trait well.",
+   "viec_ro": "Take charge of an area with clear targets so you put your disciplined work to good use."
+  },
+  {
+   "loi_doi_thuong": "When heated or rushed, you can make reckless decisions; when travelling or doing physical work, keep safety rules of your own.",
+   "viec_nen_lam": "Set yourself a rule: no driving and no signing papers while angry."
+  },
+  {
+   "loi_doi_thuong": "Your life has turns that come unexpectedly; you tend to decide on a strong impulse and then carry the consequences alone.",
+   "viec_nen_lam": "For big matters, wait a night and ask someone you trust before deciding."
+  },
+  {
+   "loi_doi_thuong": "You can easily get carried away by fun, drinking, games of chance or emotional shopping.",
+   "viec_nen_lam": "Set a monthly limit for fun spending and tell someone close what that limit is."
+  },
+  {
+   "loi_doi_thuong": "When pressure builds up, you tend to withdraw and see things as more stuck than they are; that's the time to talk to someone you trust or a mental health professional — this is not a substitute for a doctor.",
+   "viec_nen_lam": "Save the number of a close friend and a counselling service, and look after your sleep during stressful weeks."
+  },
+  {
+   "loi_doi_thuong": "This calm, good-at-keeping trait gives you stability, but it can't wave away risk on its own; even in calm years, keep the habit of planning for the unexpected.",
+   "viec_nen_lam": "Keep an emergency fund and basic insurance even when everything is going fine."
+  },
+  {
+   "loi_doi_thuong": "You manage money well and work hard, but you think a lot before and after, so others sometimes find it hard to read you.",
+   "viec_nen_lam": "When discussing shared matters, say plainly what you want instead of leaving others to guess."
+  },
+  {
+   "loi_doi_thuong": "You suit managing and keeping order more than being on the front line where quick decisions and confrontation are needed.",
+   "viec_nen_lam": "When choosing work, favour places that need someone to keep things stable and manage resources."
+  },
+  {
+   "loi_doi_thuong": "You suit a steady income within an organisation and keeping your hands clean; what you need to add is a sense of timing, not insisting everything be right at once.",
+   "viec_nen_lam": "When you want to change something at work, break it into small steps quarter by quarter."
+  },
+  {
+   "loi_doi_thuong": "When you disagree, you tend to go quiet and do things your own way instead of saying so; resentment easily builds up inside.",
+   "viec_nen_lam": "Practise saying \"I don't agree yet because…\" as soon as something feels wrong."
+  },
+  {
+   "loi_doi_thuong": "Your mother and your partner may see household matters differently, and you often get caught in the middle.",
+   "viec_nen_lam": "Don't be the messenger; let the two of them discuss shared matters directly, and step in only when both need you."
+  },
+  {
+   "loi_doi_thuong": "Your talents lean towards art, performance and beauty rather than theory; people are easily drawn in by this charm.",
+   "viec_nen_lam": "Set aside fixed time each week for an art form you love."
+  },
+  {
+   "loi_doi_thuong": "Your work tends to involve hosting, meeting people and social meals.",
+   "viec_nen_lam": "Limit the number of hosting sessions each week and keep breakfast at home regular."
+  },
+  {
+   "loi_doi_thuong": "You suit the role of mediator, keeper of rules, or representative of an organisation dealing with the outside.",
+   "viec_nen_lam": "Look for a position where your fairness is a central part of the job."
+  },
+  {
+   "loi_doi_thuong": "You work best as a right hand, keeping things running smoothly for the leader; the position can be high while the final say isn't yours.",
+   "viec_nen_lam": "If you want a decision-making role, say so clearly and gradually take on work with final responsibility."
+  },
+  {
+   "loi_doi_thuong": "You're effective and trusted in a support role; without extra highlights around authority and money, a stable employed path suits you better than being your own boss.",
+   "viec_nen_lam": "Choose a leader you trust and can learn from, because the quality of your work is tied to that person."
+  },
+  {
+   "loi_doi_thuong": "Later on you tend to carry big tasks yourself and start over several times; results usually come after such times.",
+   "viec_nen_lam": "Each time you start over, keep some money and one trusted old contact as your support."
+  },
+  {
+   "loi_doi_thuong": "When very angry, you may say or do things that are hard to take back.",
+   "viec_nen_lam": "When you feel anger rising, leave for a few minutes before replying."
+  },
+  {
+   "loi_doi_thuong": "There are periods when you put in twice the effort for half the result, especially when your mind is pulled away by matters of the heart.",
+   "viec_nen_lam": "During such periods, take on fewer tasks and finish them one at a time."
+  },
+  {
+   "loi_doi_thuong": "you're likely to have to carry most of the work yourself, with few to share it.",
+   "viec_nen_lam": "At the very start of the period, find a mentor or a discussion group outside your workplace."
+  },
+  {
+   "loi_doi_thuong": "You value feelings more than money, love freedom and tend to take your skills to many places.",
+   "viec_nen_lam": "Choose a trade with portable skills, and still keep up regular savings."
+  },
+  {
+   "loi_doi_thuong": "Your love life may see some big changes; you tend to get together quickly on feeling.",
+   "viec_nen_lam": "Give a relationship time to go through a few seasons and a few disagreements before big decisions.",
+   "loi_nguoi_ay": "Their love life may see some big changes; the two of you may get together quickly on feeling."
+  },
+  {
+   "loi_doi_thuong": "when money flows in, invitations to have fun flow in too; keep your rhythm and you keep your money.",
+   "viec_nen_lam": "Set an automatic savings percentage for every large sum that comes in."
+  },
+  {
+   "loi_doi_thuong": "You have a way with crowds; careers that need charisma, like performing, sales or media, suit you, while your private life needs clear boundaries.",
+   "viec_nen_lam": "Keep your work social media accounts separate from your private life."
+  },
+  {
+   "loi_doi_thuong": "In you, this trait leans towards authority and decisiveness rather than romance; you suit leading a team.",
+   "loi_ro": "Your pull leans towards authority and decisiveness rather than romance; you suit leading a team.",
+   "viec_nen_lam": "Take on the team-lead role for a project with a clear deadline to test yourself."
+  },
+  {
+   "loi_doi_thuong": "Your chances of promotion tend to come with a change of workplace, a move, or a posting somewhere else.",
+   "viec_nen_lam": "When offered a transfer, weigh it carefully rather than turning it down straight away."
+  },
+  {
+   "loi_doi_thuong": "Your partner may be older than you or have a very different lifestyle; the old books say so, but it isn't always the case.",
+   "viec_nen_lam": "Learn about each other's romantic past properly before any big decision.",
+   "loi_nguoi_ay": "Their chart sketches a partner who may be older or have a very different lifestyle; the old books say so, but it isn't always the case."
+  },
+  {
+   "loi_doi_thuong": "There may be a period when love easily stalls even though both of you are keen; don't rush to force it.",
+   "viec_nen_lam": "Use that period to understand each other better, and move big decisions to an easier time."
+  },
+  {
+   "loi_doi_thuong": "When this trait is bright, words are a strength for teaching, persuading and negotiating; when dim, words easily turn into back-and-forth and misunderstanding.",
+   "loi_do_sang": {
+    "sang": "Words are your strength: teaching, persuading and negotiating all suit you.",
+    "ham": "Your words easily turn into back-and-forth and misunderstandings, more than you think."
+   },
+   "viec_nen_lam": "Close important matters in writing and reread before sending."
+  },
+  {
+   "loi_doi_thuong": "the school years may bring a gossipy group of friends; parents should know who their child is spending time with.",
+   "viec_nen_lam": "Parents can keep a weekly dinner conversation to hear their child talk about friends."
+  },
+  {
+   "loi_doi_thuong": "paperwork, contracts and verbal promises can easily turn into drawn-out disputes.",
+   "viec_nen_lam": "Review contracts carefully, keep receipts, and ask someone with legal expertise before signing."
+  },
+  {
+   "loi_doi_thuong": "When there's a dispute going on and you have to travel a lot, your mind can easily wander on the road.",
+   "viec_nen_lam": "On tense days, take public transport or let someone else drive."
+  },
+  {
+   "loi_doi_thuong": "The two of you argue more over words than over actions; without gentleness, small things become big.",
+   "viec_nen_lam": "When you argue, each restate the other's point once before giving your own.",
+   "loi_nguoi_ay": "For them, love easily gets tense over words more than actions; if you're both gentle, small things won't become big."
+  },
+  {
+   "loi_doi_thuong": "Words are your capital: persuading, trading, media; under stress, those words can turn sharp and stubborn.",
+   "viec_nen_lam": "Put your way with words into earning, and practise pausing a beat before any retort."
+  },
+  {
+   "loi_doi_thuong": "You're good at holding on to money, sometimes so tightly that family find it hard to ask.",
+   "viec_nen_lam": "Set aside a small sum each month to spend on family or yourself without having to agonise."
+  },
+  {
+   "loi_doi_thuong": "Your money comes from being willing to travel and keep moving; staying put makes it harder.",
+   "viec_nen_lam": "Choose work that involves travel or expanding elsewhere, and build travel costs into your prices."
+  },
+  {
+   "loi_doi_thuong": "business plans may run short of money or collapse halfway; not a time to put all your capital in.",
+   "loi_ro": "a year to keep a firm grip on cash flow: big plans may get stuck halfway, so it's not a time to put all your capital in.",
+   "viec_nen_lam": "Split your capital into several stages and keep part of it untouched."
+  },
+  {
+   "loi_doi_thuong": "In money matters, this drain is mostly absorbed by your solid financial base, costing only a little.",
+   "loi_ro": "When it comes to money, sudden drains are mostly absorbed by your solid financial base, costing only a little.",
+   "viec_nen_lam": "Still track spending monthly to spot small leaks."
+  },
+  {
+   "loi_doi_thuong": "disagreements with partners or family can flare up badly; walking out to go it alone in the heat of the moment is a common reaction.",
+   "loi_ro": "disagreements with partners or family can flare up badly; walking out to go it alone in the heat of the moment is a common reaction.",
+   "viec_nen_lam": "Before deciding to split off, sit down for one session with a neutral third person."
+  },
+  {
+   "loi_doi_thuong": "What holds you back sometimes comes from your own family, because they worry about you so much that they interfere.",
+   "viec_nen_lam": "Thank them for caring, then say clearly which things you want to decide yourself."
+  },
+  {
+   "loi_doi_thuong": "Your exam ability may be much better than others assume from appearances.",
+   "viec_nen_lam": "Don't let anyone judge your ability to study by how you look; sign up to try the exam you want."
+  },
+  {
+   "loi_doi_thuong": "people above you are likely to notice and support you; opportunities often come through recommendations.",
+   "loi_ro": "people above you are likely to notice and support you; opportunities often come through recommendations.",
+   "viec_nen_lam": "Report your work results to your direct manager every month."
+  },
+  {
+   "loi_doi_thuong": "You advance quickly through expertise and suit management in a corporate setting.",
+   "viec_nen_lam": "Choose a company where promotion follows ability, not seniority."
+  },
+  {
+   "loi_doi_thuong": "You study and memorise a lot, but tend to stop at theory.",
+   "viec_nen_lam": "For everything you learn, try one small practical use of it within the week."
+  },
+  {
+   "loi_doi_thuong": "You earn best through a certified expertise: medicine, law, accounting, engineering, design.",
+   "viec_nen_lam": "Invest in a professional certificate recognised in your field."
+  },
+  {
+   "loi_doi_thuong": "exams and applications need more preparation than usual, especially the parts you're not yet sure of.",
+   "loi_ro": "exams and applications need more preparation than usual, especially the parts you're not yet sure of.",
+   "viec_nen_lam": "Register a back-up option in advance, and revise with real past papers rather than more theory."
+  },
+  {
+   "loi_doi_thuong": "good for exams, certificates and admissions.",
+   "viec_nen_lam": "If you're planning to sit an exam or apply, prioritise doing it this year."
+  },
+  {
+   "loi_doi_thuong": "In this area you're used to being the one who helps others, and rarely get help back.",
+   "loi_ro": "When it comes to {mang}, you're used to being the one who helps others, and rarely get help back.",
+   "viec_nen_lam": "Practise asking someone for a small favour each week so they get the chance to help you."
+  },
+  {
+   "loi_doi_thuong": "You're a trustworthy right hand; leaders usually want you beside them.",
+   "viec_nen_lam": "If you like this role, choose a leader with vision to go the long road with."
+  },
+  {
+   "loi_doi_thuong": "You tend to leave home early to study or work far away and look after yourself.",
+   "viec_nen_lam": "Keep a fixed weekly time to call home."
+  },
+  {
+   "loi_doi_thuong": "You tend to work day and night, leave your hometown to build a life and stand on your own feet early; your temperament is fairly firm too.",
+   "viec_nen_lam": "Set a time to stop work each day and keep at least one full day off each week."
+  },
+  {
+   "loi_doi_thuong": "You usually have to fend for yourself rather than rely on family; their help comes little or late.",
+   "viec_nen_lam": "Build a circle of trusted friends like a second family."
+  },
+  {
+   "loi_doi_thuong": "The two of you may have periods with little time together because your working hours don't line up.",
+   "viec_nen_lam": "Keep one fixed shared meal each day, even a short one."
+  },
+  {
+   "loi_doi_thuong": "You're fair-minded and see things clearly, and wherever you work you're easily trusted.",
+   "viec_nen_lam": "Take on tasks that need someone neutral to decide, because that's where you're most effective."
+  },
+  {
+   "loi_doi_thuong": "this ten-year period is when you're most likely to be seen: good exams, good work, a good name.",
+   "viec_nen_lam": "Use this period to build long-term credibility: qualifications, big projects, networks."
+  },
+  {
+   "loi_doi_thuong": "You're often supported by people in positions on either side of you, especially when decisions need making.",
+   "viec_nen_lam": "Stay in touch with former mentors and let them know when you take a step forward."
+  },
+  {
+   "loi_doi_thuong": "You easily go along with those around you, especially when they sound certain; many troubles come from not stopping to think again.",
+   "viec_nen_lam": "For important advice, promise an answer the next day."
+  },
+  {
+   "loi_doi_thuong": "a good fit for a high-responsibility role in a disciplined organisation; promotion comes fast if you take on hard tasks.",
+   "viec_nen_lam": "Volunteer for a hard task with your name on it in the first year of the period."
+  },
+  {
+   "loi_doi_thuong": "a lot has to be driven by you alone, and money comes in fast but goes out just as fast.",
+   "viec_nen_lam": "Move part of every sum straight into an account that's hard to withdraw from."
+  },
+  {
+   "loi_doi_thuong": "You're firm and independent, used to deciding for yourself; the right partner is someone who respects that.",
+   "viec_nen_lam": "Tell your partner early on which things you want to decide yourself."
+  },
+  {
+   "loi_doi_thuong": "You usually do better when you leave familiar ground: doing business elsewhere, travelling far or going abroad.",
+   "viec_nen_lam": "Try taking on a project or course somewhere else to see whether it suits you."
+  },
+  {
+   "loi_doi_thuong": "Your money tends to come from trading or working with clients in other places.",
+   "viec_nen_lam": "Open a sales channel or partnership with a region beyond where you live."
+  },
+  {
+   "loi_doi_thuong": "You're steadier on familiar ground; doing business far away may bring you into contact with unpredictable people.",
+   "viec_nen_lam": "If you must travel far, go with someone who knows the work and stay in regular touch with home."
+  },
+  {
+   "loi_doi_thuong": "likely to bring movement: changing workplace, moving house, long business trips.",
+   "viec_nen_lam": "Prepare papers and a fund for moving at the start of the year."
+  },
+  {
+   "loi_doi_thuong": "You suit being your own boss or running a business: both decisive and good with money.",
+   "viec_nen_lam": "Start with a small model you decide on entirely yourself, then expand."
+  },
+  {
+   "loi_doi_thuong": "You're strong at managing money and people in a company, suited to a salaried management role rather than putting in your own capital.",
+   "viec_nen_lam": "Negotiate results-based rewards instead of putting your own money into a business."
+  },
+  {
+   "loi_doi_thuong": "A stable income within an organisation suits you better than running your own business; self-employed money tends to get tangled.",
+   "viec_nen_lam": "If you want a side job, choose something small that needs no borrowed capital."
+  },
+  {
+   "loi_doi_thuong": "Running your own business isn't your strong suit; your finances are steadier with a regular income.",
+   "viec_nen_lam": "Hand the shared household fund to the more careful person at home."
+  },
+  {
+   "loi_doi_thuong": "Money passes through your hands very quickly; even when a lot comes in, it goes easily.",
+   "viec_nen_lam": "Use a fixed-term savings account to keep money out of reach; for a child with this trait, parents should give money according to a plan.",
+   "viec_ro": "Use a fixed-term savings account to keep money out of reach; for children who spend quickly, parents should give money according to a plan."
+  },
+  {
+   "loi_doi_thuong": "When someone who's good at making money sits in a position controlling shared resources, money temptations come often; transparency is how to protect yourself.",
+   "viec_nen_lam": "For large expenses you approve, always require two signatures."
+  },
+  {
+   "loi_doi_thuong": "Climbing an administrative ladder suits you less; you're stronger working for yourself or on a project basis.",
+   "viec_nen_lam": "Choose work paid by output or project rather than waiting for yearly promotions."
+  },
+  {
+   "loi_doi_thuong": "If you do business, you suit being at the head with your siblings contributing like shareholders, rather than partnering with outside friends.",
+   "viec_nen_lam": "Put each person's contribution and profit share in writing, even with siblings."
+  },
+  {
+   "loi_doi_thuong": "Your family has a business background; you're likely to get financial help or starting capital from your parents.",
+   "viec_nen_lam": "Accept help along with a clear plan, and report back on the results to your parents."
+  },
+  {
+   "loi_doi_thuong": "Even if your family is well off, you usually rise through your own work rather than relying on an inheritance.",
+   "viec_nen_lam": "Set yourself a financial goal that's independent of your family."
+  },
+  {
+   "loi_doi_thuong": "Your parents love you a lot, but the way they look after you sometimes makes it hard for you to manage.",
+   "viec_nen_lam": "Tell your parents one specific thing they can help with, so their care goes to the right place."
+  },
+  {
+   "loi_doi_thuong": "You got used to looking after yourself early, relying little on family resources.",
+   "viec_nen_lam": "Set aside a separate fund for learning and upgrading your skills — that's your main capital."
+  },
+  {
+   "loi_doi_thuong": "You're close and devoted to your parents; the family's ways are a big support for you.",
+   "viec_nen_lam": "Keep a weekend meal with your parents."
+  },
+  {
+   "loi_doi_thuong": "in childhood, your parents stand in front of most difficulties for you.",
+   "viec_nen_lam": "Parents with a child in this period should stay closest to the child in the years of changing schools."
+  },
+  {
+   "loi_doi_thuong": "Whether a relationship lasts depends also on the peace inside you, not just on the person you choose.",
+   "viec_nen_lam": "Look after your own inner life — friends, hobbies, sleep — as part of keeping your family together."
+  },
+  {
+   "loi_doi_thuong": "Your partner has strong opinions and tends to decide many things at home; you may need to learn to give way a little.",
+   "viec_nen_lam": "Divide clearly the things each person decides alone and the things you discuss together.",
+   "loi_nguoi_ay": "Their chart sketches a partner with strong opinions who tends to decide many things at home; the two of you should practise giving way to each other."
+  },
+  {
+   "loi_doi_thuong": "Your partner usually has clear expertise and a name in their field; the two of you may well work in the same field.",
+   "viec_nen_lam": "Respect each other's professional hours, especially when work runs into the evenings.",
+   "loi_nguoi_ay": "Their chart sketches a partner with clear expertise and a name in their field; the two of you may well work in the same field."
+  },
+  {
+   "loi_doi_thuong": "The two of you may work in the same profession or field and understand each other through work.",
+   "viec_nen_lam": "Keep a time each day when you don't talk about work."
+  },
+  {
+   "loi_doi_thuong": "Your partner is your biggest support, helping you manage things and keep your wealth.",
+   "viec_nen_lam": "Talk big money decisions over with your partner first."
+  },
+  {
+   "loi_doi_thuong": "The relationship may have periods of distance or big change; what keeps you together is reaching out and stating expectations clearly.",
+   "viec_nen_lam": "Schedule a frank talk about expectations every quarter, even when things are calm.",
+   "loi_nguoi_ay": "For them, love may have periods of distance or big change; what keeps the two of you close is reaching out and stating expectations clearly."
+  },
+  {
+   "loi_doi_thuong": "Your partner is strong and capable; the two of you get on best when you share a common goal.",
+   "viec_nen_lam": "Set one shared goal for the year, like buying a home or studying, so you're pulling in the same direction."
+  },
+  {
+   "loi_doi_thuong": "In a period with this trait, the two of you may easily misunderstand each other's words, especially when you're both tired.",
+   "loi_ro": "the two of you may easily misunderstand each other's words, especially when you're both tired.",
+   "viec_nen_lam": "Each week, keep one session just for the two of you, without talking about money or the children."
+  },
+  {
+   "loi_doi_thuong": "Your partner is gentle, capable and caring; this is a big strength of your family.",
+   "viec_nen_lam": "Set family goals for the next few years together and divide tasks according to each person's strengths.",
+   "loi_nguoi_ay": "Their chart sketches a gentle, capable, caring partner — a point of support the two of you can keep together."
+  },
+  {
+   "loi_doi_thuong": "Your partner is capable and well liked; their help is a strength of your family.",
+   "viec_nen_lam": "Acknowledge the work your partner does and let them take the lead on things they're good at.",
+   "loi_nguoi_ay": "Their chart sketches a capable, well-liked partner; helping each other is the two of you's strength.",
+   "viec_nguoi_ay": "Acknowledge the work each of you does and let each take the lead on things they're good at."
+  },
+  {
+   "loi_doi_thuong": "One school of thought holds that deciding to marry after coming through a turbulent period lasts better than marrying in the middle of the turbulence.",
+   "viec_nen_lam": "If you're in an unsettled period, don't rush big decisions; use the time to understand each other better."
+  },
+  {
+   "loi_doi_thuong": "A year full of matters to do with people — family, friends, a partner — is also a year when marriage easily comes up for discussion.",
+   "viec_nen_lam": "If you're getting to know someone, choose this year to talk seriously about shared plans."
+  },
+  {
+   "loi_doi_thuong": "If your partner has always loved fun and a wide social circle, that rarely changes after marriage.",
+   "viec_nen_lam": "Agree on clear boundaries with others from the start, rather than hoping your partner will change."
+  },
+  {
+   "loi_doi_thuong": "You and your children may see things differently, especially as they grow up; spoken instructions have little effect.",
+   "viec_nen_lam": "Ask your child's view before deciding things about them, and keep the small promises you make to them."
+  },
+  {
+   "loi_doi_thuong": "Your children are likely to study or work far away and become independent early.",
+   "viec_nen_lam": "Prepare your child with independence skills early: cooking, managing money, getting around alone."
+  },
+  {
+   "loi_doi_thuong": "You have a knack with business friends; the people you know are usually well placed and willing to contribute.",
+   "viec_nen_lam": "Start partnerships in a year when money is going well, and avoid years of drain."
+  },
+  {
+   "loi_doi_thuong": "Partnering with friends can leave you carrying all the work, and pulling out later can damage the friendship; guaranteeing loans for others can easily become your burden.",
+   "viec_nen_lam": "Don't act as guarantor for loans; if you partner up, draw up a contract with an exit clause."
+  },
+  {
+   "loi_doi_thuong": "You often run errands for friends, putting in a lot of effort and rarely getting it back.",
+   "viec_nen_lam": "Before agreeing to help, ask how long the task will take and who covers the costs."
+  },
+  {
+   "loi_doi_thuong": "In partnerships, you suit putting in capital or providing expertise while a capable friend runs the day-to-day.",
+   "viec_nen_lam": "Put each person's voting rights in writing before investing."
+  },
+  {
+   "loi_doi_thuong": "You suit the role of running things, while capital usually comes from well-off friends.",
+   "viec_nen_lam": "Report on money regularly to those who put in capital, even if they don't ask."
+  },
+  {
+   "loi_doi_thuong": "The old books remind homes with this trait to pay attention to fire and electrical safety.",
+   "loi_ro": "The old books remind you to pay attention to fire and electrical safety in your home.",
+   "viec_nen_lam": "Check wiring and the gas stove regularly and keep a fire extinguisher within easy reach."
+  },
+  {
+   "loi_doi_thuong": "Pay attention to the security of belongings at home, especially when you're away for long.",
+   "viec_nen_lam": "Fit good locks and a door camera, and don't leave valuables in plain sight."
+  },
+  {
+   "loi_doi_thuong": "Your property papers can easily get caught up in disputes; be careful about whose name assets are held in.",
+   "viec_nen_lam": "Have someone with legal expertise check the paperwork before buying, and think carefully about whose name goes on the title."
+  },
+  {
+   "loi_doi_thuong": "You have a knack with property; the more you build up, the more it grows.",
+   "viec_nen_lam": "Buy within what you can repay, one asset at a time."
+  },
+  {
+   "loi_doi_thuong": "You suit working and having your own income all your life; long breaks in work can leave you feeling lost.",
+   "viec_nen_lam": "If you have to stop for a while, keep a small piece of work going so you don't lose the thread of your trade."
+  },
+  {
+   "loi_doi_thuong": "If you study or work far away, you tend to stay and build your life in the new place.",
+   "viec_nen_lam": "Before moving far, agree with your family on a plan for visits and caring for your parents."
+  },
+  {
+   "loi_doi_thuong": "Later on, your social role and responsibilities are where you put most of your energy.",
+   "viec_nen_lam": "Keep an interest outside work so you have somewhere to rest when work gets tense."
+  },
+  {
+   "loi_doi_thuong": "You're good at your field but rarely want to command; an adviser or expert role suits you better than managing many people.",
+   "viec_nen_lam": "Build a professional reputation: write, teach, share experience in your field."
+  },
+  {
+   "loi_doi_thuong": "You have both expertise and the ability to run things; you suit heading a specialist department.",
+   "viec_nen_lam": "Learn people-management skills to go from expert to manager."
+  },
+  {
+   "loi_doi_thuong": "For people in business, this trait means reputation: your name helps open doors.",
+   "loi_ro": "For people in business, reputation is your strength: your name helps open doors.",
+   "viec_nen_lam": "Look after your brand's credibility: keep your promises, deliver on time."
+  },
+  {
+   "loi_doi_thuong": "You earn through your own expertise and suit licensed independent professions.",
+   "viec_nen_lam": "Alongside your main work, take on teaching or writing about your field — it brings in clients and keeps your skills sharp."
+  },
+  {
+   "loi_doi_thuong": "You tend to study and gain qualifications far away, then come back near home to work.",
+   "viec_nen_lam": "While studying away, stay in touch with workplaces back home so you have somewhere to return to."
+  },
+  {
+   "loi_doi_thuong": "Your good name comes late: the quiet work you do today becomes known later on.",
+   "viec_nen_lam": "Keep a systematic record of your work and what you produce."
+  },
+  {
+   "loi_doi_thuong": "When you have to choose between two big things at once, like exams and a wedding, you can get torn and finish neither.",
+   "viec_nen_lam": "Choose one to do first, and write down the start date for the other."
+  },
+  {
+   "loi_doi_thuong": "Money comes, but with strings attached: profit on paper that's hard to collect, or income that easily causes disputes.",
+   "viec_nen_lam": "Only take work with a clear contract, and collect payment in stages."
+  },
+  {
+   "loi_doi_thuong": "this period suits stepping up to be your own boss or starting your own venture.",
+   "viec_nen_lam": "Prepare a plan and capital in the first year of the period so you can use the favourable timing."
+  },
+  {
+   "loi_doi_thuong": "A steady income from employment suits you; your way up is skill and experience.",
+   "viec_nen_lam": "Choose a workplace with a clear pay progression, and build your skills steadily every year."
+  },
+  {
+   "loi_doi_thuong": "In the area with this trait, you tend to dwell on one thing and find it hard to let go even when you know you should.",
+   "loi_ro": "When it comes to {mang}, you tend to dwell on one thing and find it hard to let go even when you know you should.",
+   "viec_nen_lam": "When you notice yourself going round in circles, write down what's worrying you and set a day to decide."
+  },
+  {},
+  {
+   "loi_doi_thuong": "in this period many things don't go the way you want; you can easily get fed up and want to quit halfway.",
+   "viec_nen_lam": "Set a review point after a year instead of quitting while you're annoyed."
+  },
+  {
+   "loi_doi_thuong": "in this period you may worry about the men close to you; caring early helps you feel more at ease.",
+   "viec_nen_lam": "Check in on your father and your partner more often in this period, especially about what they're worried about."
+  },
+  {
+   "loi_doi_thuong": "Your mother worries about you a lot, sometimes to the point of pressure; the bond between you is still very close.",
+   "viec_nen_lam": "Tell your mother one small piece of good news each week to ease her worries."
+  },
+  {
+   "loi_doi_thuong": "The two signs of happy events always mirror each other from opposite sides; where you see one, the other is there.",
+   "viec_nen_lam": "When checking a chart, confirm these two signs always sit in opposite areas."
+  },
+  {
+   "loi_doi_thuong": "Your marriage is likely to be influenced by your parents: an introduction, or a nudge from them.",
+   "viec_nen_lam": "Listen to your parents, but spend enough time alone with the person to judge for yourself."
+  },
+  {
+   "loi_doi_thuong": "One school of thought reads that children may come first or prompt the decision to marry.",
+   "viec_nen_lam": "Talk with the person about children and family plans early on."
+  },
+  {
+   "loi_doi_thuong": "Friends are likely to push you towards the decision to marry, or the person comes from your own circle of friends.",
+   "viec_nen_lam": "Before a big decision, listen to friends but write down your own reasons."
+  },
+  {
+   "loi_doi_thuong": "You decide your own marriage and rarely let anyone arrange it.",
+   "viec_nen_lam": "Since you decide yourself, also ask someone long married to see what you might be missing."
+  },
+  {
+   "loi_doi_thuong": "You have an eye for people: you can easily see who will do well later, and can also easily be swept up by appearances.",
+   "viec_nen_lam": "When you like someone, write down three things beyond looks that you value in them."
+  },
+  {
+   "loi_doi_thuong": "Your love life may have several chapters; later on, the person beside you may be quite a different age from you.",
+   "viec_nen_lam": "Be clear and respectful when closing a relationship, so the next chapter is lighter."
+  },
+  {
+   "loi_doi_thuong": "There may be a period when happy events like a wedding easily get delayed or change plan.",
+   "viec_nen_lam": "If you plan to marry in this period, allow extra preparation time and a back-up date."
+  },
+  {
+   "loi_doi_thuong": "a year likely to bring happy news in love or a wedding; many people feel more ready to take the next step.",
+   "viec_nen_lam": "If you're getting to know someone, use this year to talk seriously about a shared future."
+  },
+  {
+   "loi_doi_thuong": "Your love life is likely to have very different phases; in the later phase, you usually choose someone who suits you better.",
+   "viec_nen_lam": "State clearly from the start what each of you expects of your roles at home."
+  },
+  {
+   "loi_doi_thuong": "You're used to having your own space, even when in a couple; your partner needs to understand it isn't distance.",
+   "viec_nen_lam": "Agree on some time alone for each person every week.",
+   "loi_nguoi_ay": "They're used to having their own space, even when in a couple; it isn't distance, and the two of you should understand this about each other."
+  },
+  {
+   "loi_doi_thuong": "Big decisions about a relationship usually last better when you have enough experience and the two of you have known each other long enough.",
+   "viec_nen_lam": "Let the relationship go through at least a year, hard times included, before marrying."
+  },
+  {
+   "loi_doi_thuong": "Your partner is clever, sensitive and changes their mind often; an age gap sometimes helps the two of you balance each other.",
+   "viec_nen_lam": "When they change plans, ask why before reacting.",
+   "loi_nguoi_ay": "Their chart sketches a clever, sensitive partner who changes their mind often; an age gap sometimes helps the two of you balance each other.",
+   "viec_nguoi_ay": "When plans change, ask each other why before reacting."
+  },
+  {
+   "loi_doi_thuong": "You value mature, responsible people; a first love may not last, but once married it's usually lasting.",
+   "viec_nen_lam": "Don't rush to judge yourself by one break-up.",
+   "loi_nguoi_ay": "They value mature, responsible people; once committed, the relationship is usually lasting.",
+   "viec_nguoi_ay": "Don't rush to judge the relationship by one disagreement."
+  },
+  {
+   "loi_doi_thuong": "In love you tend to fall fast and cool off fast too.",
+   "viec_nen_lam": "Wait until the initial infatuation has passed before big decisions.",
+   "loi_nguoi_ay": "Their romantic pace is fast and you may get swept up in each other at first; the two of you need time to learn what lasts.",
+   "viec_nguoi_ay": "Wait until the initial infatuation has passed before big decisions."
+  },
+  {
+   "loi_doi_thuong": "A partner who suits you is usually gentle and sensible, and often comes from people you already know: classmates, colleagues, neighbours.",
+   "viec_nen_lam": "Pay attention to people you've known for a long time rather than only looking in new places.",
+   "loi_nguoi_ay": "Their chart sketches a gentle, sensible partner who often comes from people known for a long time: classmates, colleagues, neighbours.",
+   "viec_nguoi_ay": "Pay attention to the common ground the two of you have shared for a long time."
+  },
+  {
+   "loi_doi_thuong": "This person is quite close to the partner your chart sketches; that helps the two of you understand each other from the start.",
+   "viec_nen_lam": "Even if they fit the picture, talk money and children through clearly before big decisions."
+  },
+  {
+   "loi_doi_thuong": "You're both strong and both like to decide; you get on when you divide clearly who handles what.",
+   "viec_nen_lam": "Split decision areas: each person owns one area, and shared areas are discussed by both."
+  },
+  {
+   "loi_doi_thuong": "One likes starting new things, the other likes keeping routines; these two rhythms balance each other if neither looks down on the other.",
+   "viec_nen_lam": "Each month choose one new thing to do together and one old habit to keep together."
+  },
+  {
+   "loi_doi_thuong": "Two compatible charts may click more like close friends or siblings than like a couple; compatible doesn't mean becoming a couple.",
+   "viec_nen_lam": "Ask each other frankly what kind of relationship you each want."
+  },
+  {
+   "loi_doi_thuong": "When both of you are in a favourable period, that's the time for big shared projects; when one is struggling, the other is the support.",
+   "viec_nen_lam": "Before a big shared step like buying a home, look at both people's ten-year periods."
+  },
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {
+   "loi_doi_thuong": "The old books link this trait with the eyes — the left with the sun, the right with the moon — so take preventive care; this reminder is not a substitute for a doctor.",
+   "loi_ro": "The old books link this part of your chart with the eyes — the left with the sun, the right with the moon — so take preventive care; this reminder is not a substitute for a doctor.",
+   "viec_nen_lam": "Rest your eyes after every hour of screen time and have regular eye check-ups."
+  },
+  {
+   "loi_doi_thuong": "In a year with this trait, pay attention to your health and minor knocks, and arrange a general check-up — this is not a substitute for a doctor.",
+   "loi_ro": "a year to pay attention to your health and minor knocks, and arrange a general check-up — this is not a substitute for a doctor.",
+   "viec_nen_lam": "Book a general health check-up at the start of the year and keep a first-aid kit at home."
+  },
+  {
+   "loi_doi_thuong": "In this ten-year period, health is something to put first; regular preventive care helps you through more lightly — this is not a substitute for a doctor.",
+   "viec_nen_lam": "Choose a form of exercise you can keep up for a long time and have a check-up every year."
+  },
+  {
+   "loi_doi_thuong": "Old medical books hold that long-running worry drains your strength, especially the breathing and digestion; letting your mind rest is also caring for your body — this is not a substitute for a doctor.",
+   "viec_nen_lam": "Each day keep a stretch free of work thoughts, like walking or gardening, and see a doctor if tiredness lasts."
+  },
+  {
+   "loi_doi_thuong": "In a period with this trait, pay more attention than usual to your health and arrange a general check-up every year — this is not a substitute for a doctor.",
+   "loi_ro": "In this period, pay more attention than usual to your health and arrange a general check-up every year — this is not a substitute for a doctor.",
+   "viec_nen_lam": "At the start of the period, have a general check-up and keep up yearly follow-ups."
+  },
+  {
+   "loi_doi_thuong": "In a year with this trait, cut back on overwork, pay attention to your health and arrange a general check-up — this is not a substitute for a doctor.",
+   "loi_ro": "a year to cut back on overwork, pay attention to your health and arrange a general check-up — this is not a substitute for a doctor.",
+   "viec_nen_lam": "Book a general check-up in the first quarter and limit taking on extra heavy work during the year."
+  },
+  {
+   "loi_doi_thuong": "In a period with this trait, pay attention to your eyes, limit working in poor light and get your eyes checked — this is not a substitute for a doctor.",
+   "loi_ro": "In this period, pay attention to your eyes, limit working in poor light and get your eyes checked — this is not a substitute for a doctor.",
+   "viec_nen_lam": "Have an eye check in the first year of the period, and wear protective glasses for dusty work or work with sparks."
+  },
+  {},
+  {}
+ ]
+}

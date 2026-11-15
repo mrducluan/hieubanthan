@@ -10,8 +10,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from app import ngon_ngu
 from app.calc import tuvi_sao_menh as sm
 from app.kb import nap
+from app.kb import ten as _ten
+from app.kb.loi import L
 
 _F = Path(__file__).resolve().parents[1] / "kb" / "data" / "tuvi_cung_sao_menh_kb.json"
 
@@ -25,11 +28,25 @@ NGUONG_PHO_BIEN: float = _kb()["nguong_pho_bien"]
 
 
 def _so_vn(x: float, chu_so: int = 1) -> str:
+    if not ngon_ngu.la_viet():                       # EN-ALL: số theo cách viết của ngôn ngữ (4.2, 311,196)
+        return f"{x:.{chu_so}f}"
     return f"{x:.{chu_so}f}".replace(".", ",")
 
 
 def _nghin(n: int) -> str:
+    if not ngon_ngu.la_viet():
+        return f"{n:,}"
     return f"{n:,}".replace(",", ".")
+
+
+def _khoa_hien(khoa: str) -> str:
+    """Khoá tổ hợp ("Thiên Đồng + Cự Môn", "vô chính diệu (mượn …)") → chữ theo ngôn ngữ (bản Việt: nguyên khoá)."""
+    if ngon_ngu.la_viet():
+        return khoa
+    muon = khoa.startswith("vô chính diệu (mượn ")
+    goc = khoa[len("vô chính diệu (mượn "):-1] if muon else khoa
+    ten = " + ".join(_ten.ten("sao", x) for x in goc.split(" + "))
+    return L("tuvi_ls.csm.khoa_muon", "", sao=ten) if muon else ten
 
 
 def dung(sao: list[str], muon: bool) -> dict | None:
@@ -40,16 +57,16 @@ def dung(sao: list[str], muon: bool) -> dict | None:
         return None
     k = _kb()
     ten = [x for x in sm.CHINH_TINH if x in sao]
-    noi = " và ".join(ten)
+    noi = " và ".join(ten) if ngon_ngu.la_viet() else L("tuvi_ls.csm.noi", " và ").join(_ten.ten("sao", x) for x in ten)
     cum = (k["mo_ta"]["hai"] if len(ten) > 1 else k["mo_ta"]["mot"]).format(sao=noi)
     if muon:
-        cum = k["mo_ta"]["muon"].format(sao=cum.replace(" ở cung Mệnh", ""))
+        cum = k["mo_ta"]["muon"].format(sao=cum.replace(" ở cung Mệnh", "") if ngon_ngu.la_viet() else noi)
     muc = "pho_bien" if t["ty_le"] >= NGUONG_PHO_BIEN else "it_gap"
     mot_trong = round(1 / t["ty_le"])
-    bien = {"mot_trong": mot_trong, "mo_ta": cum, "mau": t["mau"], "tong": _nghin(t["tong"]), "khoa": t["khoa"],
+    bien = {"mot_trong": mot_trong, "mo_ta": cum, "mau": t["mau"], "tong": _nghin(t["tong"]), "khoa": _khoa_hien(t["khoa"]),
             "so": _nghin(t["so"]), "phan_tram": _so_vn(t["ty_le"] * 100), "hang": t["hang"], "so_to_hop": t["so_to_hop"]}
     return {
-        "sao": ten, "muon": muon, "khoa": t["khoa"], "ty_le": round(t["ty_le"], 5), "mot_trong": mot_trong,
+        "sao": ten, "muon": muon, "khoa": bien["khoa"], "ty_le": round(t["ty_le"], 5), "mot_trong": mot_trong,
         "phan_tram": bien["phan_tram"], "muc": muc, "nhan_muc": k["muc"][muc]["nhan"],
         "loi": k["muc"][muc]["loi"].format(**bien), "nhan_ngan": k["nhan_ngan"].format(**bien),
         "can_cu": k["can_cu"].format(**bien),

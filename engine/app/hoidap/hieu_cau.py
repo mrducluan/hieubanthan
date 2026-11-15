@@ -97,7 +97,7 @@ def thoi_gian(t: str, hom_nay: dt.date) -> list[dict]:
 
     thang_ev: list[tuple[int, dict]] = []
     for m in re.finditer(r"thang (1[0-2]|[1-9])(?![\d/-])", t):
-        if re.match(r"\s*(am|vua roi|vua qua|truoc|roi)\b", t[m.end():]):          # tháng âm / đã qua
+        if re.match(r"\s{0,5}(am|vua roi|vua qua|truoc|roi)\b", t[m.end():]):          # tháng âm / đã qua
             continue
         th = int(m.group(1))
         sau = [e for p, e in nam_ev if 0 < p - m.end() <= 14]                       # "tháng 3 năm 2027 / năm sau"
@@ -143,7 +143,7 @@ def nguoi_thu_hai(t: str) -> dict | None:
             if not k:
                 continue
             sau = t[k.end():k.end() + 30]
-            ns = re.match(r"\s*(?:(?:toi|minh|em)\s+)?(?:(?:sinh|sn|tuoi)\s*(?:nam\s*)?)?(19[3-9]\d|20[0-4]\d)", sau) \
+            ns = re.match(r"\s{0,5}(?:(?:toi|minh|em)\s+)?(?:(?:sinh|sn|tuoi)\s*(?:nam\s*)?)?(19[3-9]\d|20[0-4]\d)", sau) \
                 or re.search(r"(?:sinh|sn)\s*(?:nam\s*)?(19[3-9]\d|20[0-4]\d)", sau)
             ra = {"quan_he": qh, **({"nam_sinh": int(ns.group(1))} if ns else {})}
             cac = [int(x) for x in re.findall(r"(?:sinh|sn)\s*(?:nam\s*)?(19[3-9]\d|20[0-4]\d)", t)]
@@ -191,6 +191,9 @@ _HOI_LAI = {
               "Bát tự của tôi nói gì về hôn nhân?", "Đại vận hiện tại của tôi thế nào?"],
     "phongthuy": ["Hướng nào hợp với tôi để kê bàn làm việc?", "Bếp nên quay hướng nào cho hợp tôi?",
                   "Đầu giường nên quay hướng nào?", "Năm nay trong nhà nên giữ yên phía nào?"],
+    # EN-ALL GĐ 6: chỉ bản ngôn ngữ khác gọi (câu Kinh Dịch tiếng Anh luật không nhận ra điều gì)
+    "kinhdich": ["Tôi có nên chuyển việc lúc này không?", "Chuyện tình cảm với người ấy có tiến triển không?",
+                 "Tôi có nên mở việc kinh doanh riêng lúc này không?", "Tôi nên ứng xử thế nào với căng thẳng trong gia đình?"],
 }
 
 
@@ -201,6 +204,15 @@ def hoi_lai(mo_dun: str) -> dict | None:
     if mo_dun == "battu":
         ds = [L("hoi.hl.battu.nghe", ds[0]), L("hoi.hl.battu.tien", ds[1]), L("hoi.hl.battu.hon_nhan", ds[2]),
               L("hoi.hl.battu.dai_van", ds[3])]
+    elif mo_dun == "tuvi":
+        ds = [L("hoi.hl.tuvi.cong_viec", ds[0]), L("hoi.hl.tuvi.tien", ds[1]), L("hoi.hl.tuvi.tinh_duyen", ds[2]),
+              L("hoi.hl.tuvi.nam_nay", ds[3])]
+    elif mo_dun == "phongthuy":
+        ds = [L("hoi.hl.phongthuy.ban", ds[0]), L("hoi.hl.phongthuy.bep", ds[1]), L("hoi.hl.phongthuy.giuong", ds[2]),
+              L("hoi.hl.phongthuy.nam_nay", ds[3])]
+    elif mo_dun == "kinhdich":
+        ds = [L("hoi.hl.kinhdich.viec", ds[0]), L("hoi.hl.kinhdich.tinh_cam", ds[1]), L("hoi.hl.kinhdich.kinh_doanh", ds[2]),
+              L("hoi.hl.kinhdich.gia_dinh", ds[3])]
     return {"cau": L("hoi.hl.cau", "Bạn muốn hỏi cụ thể về chuyện nào? Chọn một câu để có lời đáp đúng hơn:"), "chon": ds}
 
 
