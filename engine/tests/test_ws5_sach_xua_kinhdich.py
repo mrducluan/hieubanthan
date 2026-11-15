@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """WS-5 — "Sách xưa nói gì về việc bạn hỏi": câu Tăng San Bốc Dịch theo chương ứng với việc. Câu là nguyên văn kho nguồn,
 nằm đúng trong chương ghi kèm; việc nhạy cảm (sức khoẻ, con cái) không có câu; bản Anh cùng số câu."""
+from app.kb.sach_ghi import chuan  # kho nguồn không giữ dấu câu thời nay
 import json
 import re
 from pathlib import Path
@@ -12,19 +13,19 @@ from app.kb import kinhdich_tra_loi_kb as kbt
 from app.luangiai import sach_xua
 
 NGUON = Path(__file__).parent.parent / "fixtures" / "nguon" / "tang_san_boc_dich.json"
-VAN = "".join(t["van"] for t in json.loads(NGUON.read_text("utf-8"))["thien"])
+VAN = chuan("".join(t["van"] for t in json.loads(NGUON.read_text("utf-8"))["thien"]))
 NHOM = kbt._lay("sach_xua_viec", "nhom")
 
 
 @pytest.mark.parametrize("ma", sorted(NHOM))
 def test_cau_la_nguyen_van_trong_dung_chuong(ma):
     m = NHOM[ma]
-    i = VAN.find(m["chuong"])
+    i = VAN.find(chuan(m["chuong"]))
     assert i >= 0, m["chuong"]
-    j = VAN.find(m["han"], i)
+    j = VAN.find(chuan(m["han"]), i)
     assert j >= 0, (ma, m["han"])
     # câu nằm trong chương ấy: không vượt qua tiêu đề chương kế tiếp
-    giua = VAN[i + len(m["chuong"]):j]
+    giua = VAN[i + len(chuan(m["chuong"])):j]
     assert not re.search(r"章第[一二三四五六七八九十百零又]+", giua), (ma, "câu nằm ở chương khác")
     assert m["y"].strip() and m["viec"]
 

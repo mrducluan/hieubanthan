@@ -9,6 +9,7 @@ import re
 from pathlib import Path
 
 from app import ngon_ngu
+from app.kb.sach_ghi import chuan as _c   # so khớp bỏ dấu câu: kho nguồn không giữ dấu câu thời nay
 from app.hoidap import tuvi as hoi_tuvi
 from app.kb import battu_kb, kinhdich_kb, trang, tuvi_kb
 
@@ -71,7 +72,7 @@ def test_dieu_hau_khop_nguyen_van_tung_o():
         for chi, ds in hang.items():
             o = fx[can][chi]
             cau = kb["trich"][can][chi]
-            assert cau == o["trich"] and len(cau) >= 8
+            assert _c(cau) == _c(o["trich"]) and len(cau) >= 8
             assert ds[:len(o["can_trong_cau"])] == o["can_trong_cau"], (can, chi)      # thứ tự theo đúng câu sách
             assert any(CAN[c] in cau for c in o["can_trong_cau"]), (can, chi)            # câu trích nêu can ấy (5 ô câu trích chỉ nêu can đầu)
             assert len(ds) == len(set(ds)) and 1 <= len(ds) <= 5
@@ -83,8 +84,8 @@ def test_dieu_hau_khop_nguyen_van_tung_o():
 def test_kho_nguon_tu_binh_chan_thuyen_du_47_thien():
     d = doc("fixtures/nguon/tu_binh_chan_thuyen.json")["thien"]
     assert [t["so"] for t in d] == list(range(1, 48))
-    assert d[7]["ten"] == "论用神" and "八字用神，专求月令" in d[7]["van"]
-    assert all(len(t["van"]) > 100 for t in d)
+    assert d[7]["ten"] == "论用神" and "八字用神专求月令" in d[7]["van"]
+    assert all(len(t["van"]) > 85 for t in d)          # đếm sau khi bỏ dấu câu thời nay
 
 
 # ----------------------------------------------------------------------------- Tử vi
@@ -136,11 +137,11 @@ def test_kho_nguon_uyen_hai_tu_binh():
 
 def test_co_tho_nhat_chu_khop_nguyen_van_uyen_hai():
     from app.kb import battu_kb, trang
-    van = {v for x in doc("fixtures/nguon/uyen_hai_tu_binh.json")["thien"] if x.get("thuoc") == "干支体象" for v in x["van"]}
+    van = {_c(v) for x in doc("fixtures/nguon/uyen_hai_tu_binh.json")["thien"] if x.get("thuoc") == "干支体象" for v in x["van"]}
     han = dict(zip(["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"], "甲乙丙丁戊己庚辛壬癸"))
     for can, h in han.items():
         ct = battu_kb.co_tho(can)
-        assert ct["han"] in van and ct["han"].startswith(h), can
+        assert _c(ct["han"]) in van and ct["han"].startswith(h), can
         assert 80 <= len(ct["y"]) <= 420 and not any(c in ct["y"] for c in ("chết", "hoạ", "tai ương", "yểu")), can
     tr = trang.lay("nhat_chu", "nhat-chu-giap")
     assert any("Uyên Hải" in m["tieu_de"] and "甲木天干作首排" in m["danh_sach"][0] for m in tr["muc"])
@@ -152,7 +153,7 @@ def test_q5_hy_ky_cach_cuc_khop_luan_dung_than():
     van = "".join(x["van"] for x in doc("fixtures/nguon/tu_binh_chan_thuyen.json")["thien"])
     for cau in ("七煞喜食神以制伏，忌财印以资扶", "七煞逢财无制，七煞格败也", "印喜官煞以相生，劫才以护印",
                 "食喜身旺以相生，生财以护食", "伤官喜佩印以制伏，生财以化伤"):
-        assert cau in van, cau
+        assert _c(cau) in _c(van), cau
     sat = dk.cach("that_sat")
     assert sat["hy"] == ["Thực Thương"] and sat["ky"] == ["Tài"] and sat["than_nhuoc"] == {"hy": ["Ấn"], "ky": ["Tài"]}
     for ma in ("chinh_an", "thien_an"):
@@ -166,7 +167,7 @@ def test_co_van_thap_than_khop_nguyen_van_uyen_hai():
     cv = kbd["co_van_thap_than"]
     assert set(cv) == set(kbd["thap_than"])
     for ten, o in cv.items():
-        assert o["han"] and all(h in van for h in o["han"]), ten
+        assert o["han"] and all(_c(h) in _c(van) for h in o["han"]), ten
         assert 100 <= len(o["y"]) <= 420, ten
         assert not any(c in o["y"].lower() for c in ("chết", "khắc vợ", "khắc chồng", "yểu", "tai hoạ", "hoạ")), ten
     with ngon_ngu.dung("en"):
@@ -176,7 +177,7 @@ def test_co_van_thap_than_khop_nguyen_van_uyen_hai():
 
 def test_phu_tinh_cung_khop_nguyen_van_toan_thu():
     """KT-TT3: 52 mục phụ tinh × cung — nguyên văn là đoạn của kho nguồn; chỉ 6 cung về việc và nếp sống."""
-    van = {x["van"] for x in doc("fixtures/nguon/tu_vi_dau_so_toan_thu.json")["muoi_hai_cung"]}
+    van = {_c(x["van"]) for x in doc("fixtures/nguon/tu_vi_dau_so_toan_thu.json")["muoi_hai_cung"]}
     ptc = doc("app/kb/data/tuvi_kb.json")["phu_tinh_cung"]
     cung = {c for ds in ptc.values() for c in ds}
     assert cung == {"Tài Bạch", "Quan Lộc", "Thiên Di", "Phúc Đức", "Điền Trạch", "Nô Bộc"}
@@ -184,7 +185,7 @@ def test_phu_tinh_cung_khop_nguyen_van_toan_thu():
     cam = ("chết", "yểu", "khắc", "hoạ", "phá sản", "tù", "nghèo hèn", "hạ tiện", "bỏ tổ", "trộm")
     for sao, ds in ptc.items():
         for c, m in ds.items():
-            assert m["trich"] in van, (sao, c)
+            assert _c(m["trich"]) in van, (sao, c)
             assert 40 <= len(m["y"]) <= 330 and not any(x in m["y"].lower() for x in cam), (sao, c, m["y"])
     assert tuvi_kb.phu_tinh_cung("Kình Dương", "Tài Bạch")["y"] and tuvi_kb.phu_tinh_cung("Kình Dương", "Phu Thê") is None
 
@@ -200,7 +201,7 @@ def test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu():
     co = {k: c["sach_ghi"] for k, c in cach.items() if c.get("sach_ghi")}
     assert len(co) >= 6
     for k, g in co.items():
-        assert g["han"] in van and g["y"] and "sẽ" not in g["y"], k
+        assert _c(g["han"]) in _c(van) and g["y"] and "sẽ" not in g["y"], k
     # ba cách điều kiện hệ thống đang khác sách — ghi cờ, CHƯA đổi phép nhận diện (đổi = đổi kết quả lá số)
     # KT-TT8: Quân thần khánh hội + Nguyệt sinh thương hải đã theo sách; hai cách còn lại giữ cách hiểu phổ biến
     assert {k for k, g in co.items() if g.get("khac_dieu_kien")} == {"ma_dau_doi_kiem", "loc_ma_boi_an"}

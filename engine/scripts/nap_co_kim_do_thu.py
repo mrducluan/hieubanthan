@@ -21,7 +21,7 @@ import sys
 from pathlib import Path
 
 NGUON = Path(__file__).resolve().parent.parent / "fixtures" / "nguon"
-NGAY = "2026-11-14"
+NGAY = "2026-11-15"
 GOC = "欽定古今圖書集成/博物彙編/藝術典"
 
 # mã kho → (tên Hán, tên Việt, các quyển của bộ loại thư, chữ mở đầu tên sách trong đề mục, school_id, ghi chú)
@@ -50,6 +50,33 @@ def _chu(s: str) -> str:
     return _CHAM.sub("", s)
 
 
+_KHOI = re.compile(r"<(div|table|style|ul|ol|dl|figure)\b[^>]*>(?:(?!<(?:div|table|style|ul|ol|dl|figure)\b)[\s\S])*?</\1>")
+
+
+def _doan(k: str) -> list[str]:
+    """Các đoạn chữ của một khối, ĐÚNG THỨ TỰ: mọi <p>…</p> (kể cả nằm trong khối khác) + chữ trần nằm ngoài mọi thẻ khối.
+
+    Chữ trần: chỗ ngắt trang (`pagenum`) kèm biểu tượng «考證» (khảo chứng, div tuyệt đối) làm MediaWiki không bọc đoạn trong
+    <p> — vd bài «猴口», «八方坑坎歌». Đọc riêng <p> thì rơi mất những đoạn ấy (lỗi WS-2, phải vá tay ở KT-NT3 / KT-PT1).
+    Chú thích hình, bảng, CSS bản mẫu nằm TRONG thẻ khối → không lấy (như trước)."""
+    k = re.sub(r"<span[^>]*class=\"pagenum[^\"]*\"[^>]*>.*?</span></span>", "", k, flags=re.S)
+    k = re.sub(r"<div style=\"position: ?absolute[^\"]*\">.*?</div>", "", k, flags=re.S)
+    k = re.sub(r"<style\b[^>]*>.*?(?:</style>|$)", "", k, flags=re.S)     # CSS bản mẫu (có thể bị cắt ở licenseContainer)
+    k = re.sub(r"<[^>]*$", "", k)                    # mẩu thẻ dở ở chỗ cắt trang (trước «licenseContainer»)
+    k = re.sub(r"&lt;h[2-6]\b[^\n]*", "", k)        # đề mục wiki gõ hỏng, hiện ra thành chữ «<h3 …>» (vd «金花印紋»)
+    doan: list[str] = []
+    k = re.sub(r"<p[^>]*>(.*?)</p>", lambda m: (doan.append(m.group(1)), f"\x00{len(doan) - 1}\x00")[1], k, flags=re.S)
+    while True:                                    # bỏ khối trong cùng trước, giữ dấu chỗ của <p> nằm bên trong
+        moi = _KHOI.sub(lambda m: "".join(re.findall(r"\x00\d+\x00", m.group(0))), k)
+        if moi == k:
+            break
+        k = moi
+    ra = []
+    for i, phan in enumerate(re.split(r"\x00(\d+)\x00", k)):
+        ra.append(doan[int(phan)] if i % 2 else phan)
+    return [x for x in ra if re.sub(r"\s+", "", _chu(x))]
+
+
 def doc_quyen(trang: str) -> list[tuple[int, str, str]]:
     """Một quyển → [(cấp, đề mục, chữ)] theo thứ tự; đề mục là mọi h2/h3/h4 trong phần văn bản (h4 = tên sách)."""
     a = trang.find("prp-pages-output")
@@ -63,7 +90,7 @@ def doc_quyen(trang: str) -> list[tuple[int, str, str]]:
         ra.append((int(khoi[i]), _chu(khoi[i + 1]).strip(), khoi[i + 2]))
     out = []
     for cap, ten, k in ra:
-        doan = [re.sub(r"\s+", "", _chu(p)) for p in re.findall(r"<p[^>]*>(.*?)</p>", k, flags=re.S)]
+        doan = [re.sub(r"\s+", "", _chu(p)) for p in _doan(k)]
         # người gõ đôi khi viết đề mục wiki liền trong đoạn («===剋父母===左偏損父…», «===論選擇第九〔〕») —
         # tách thành mục riêng để đề mục không lẫn vào chữ sách
         hien, dong = ten, []
@@ -117,7 +144,8 @@ def nap_sach(render: Path, ma: str) -> dict:
                       f"博物彙編 · 藝術典 quyển {quyen[0]}–{quyen[-1]}. Cổ thư công cộng.",
             "ban": f"Wikisource tiếng Trung, trang {GOC}/第{quyen[0]:03d}卷 … 第{quyen[-1]:03d}卷 (gõ lại từ bản chụp in đồng "
                    f"1725, lấy {NGAY} qua action=render) — CHƯA đối chiếu bản chụp; đã BỎ chấm câu thời nay của "
-                   "Wikisource (CC BY-SA, không phải của sách), chú nhỏ đặt trong 〔…〕, hình thay bằng 〔圖〕",
+                   "Wikisource (CC BY-SA, không phải của sách), chú nhỏ đặt trong 〔…〕, hình thay bằng 〔圖〕; bộ nạp đọc cả "
+                   "chữ trần ngoài <p> (bản WS-2 làm rơi ~25 đoạn, sửa 2026-11-15)",
             "can_doi_chieu": True, "source_id": ma, "school_id": truong, "thien": thien}
 
 

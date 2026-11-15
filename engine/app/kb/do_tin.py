@@ -107,6 +107,9 @@ SO: dict[str, dict] = {
                                                       "SX-C: 119 kiểu hình mày, mắt, mũi, tai, miệng (bài thơ từng kiểu) khớp kho nguồn; 7 mục gắn `ngo`")},
     "nhan_tuong_lieu_trang.json": {"mang": "nhantuong", **_nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                        "SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn")},
+    "chi_tay_kb.json": {"mang": "nhantuong", **_nv("than_tuong_toan_bien.json", "tests/test_chi_tay.py::test_moi_cau_la_nguyen_van",
+                                             "Chỉ tay: 67 bài thơ vân tay quyển 10 + câu Ngọc Chưởng Ký / Luận thủ của đồ hình tám cung khớp kho nguồn; "
+                                             "lời Việt nói giảm theo SX-C; 5 hình sách đoán về người vợ không đưa vào")},
     "nhan_tuong_do_hinh.json": {"mang": "nhantuong", "muc": "tom_y_co_thu",
                                 "ghi_chu": "lớp phủ đồ hình: nhãn chữ Hán đọc trên bản khắc Thần Tướng Toàn Biên; toạ độ đo trên ảnh; lời Việt rút từ KB"},
     "nhan_tuong_kb.json": {"mang": "nhantuong", "muc": "tom_y_co_thu", "phan": {

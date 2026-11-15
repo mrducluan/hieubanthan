@@ -2,6 +2,7 @@
 """KT-TT5 — tính chất quẻ Lục Hào (lục xung, lục hợp, du hồn, quy hồn, biến xung ↔ hợp) theo Tăng San Bốc Dịch.
 
 CALC chỉ NHẬN DIỆN từ nạp giáp + bát cung đã có; không đổi mức nào của bài đọc."""
+from app.kb.sach_ghi import chuan  # kho nguồn không giữ dấu câu thời nay
 import itertools
 import json
 from pathlib import Path
@@ -56,8 +57,8 @@ def test_trich_la_nguyen_van_va_kb_du_loi():
     van = "".join(t["van"] for t in json.loads(_NGUON.read_text("utf-8"))["thien"])
     for ma in ("luc_xung", "luc_hop", "du_hon", "quy_hon", "xung_hoa_hop", "hop_hoa_xung"):
         m = kbt.tinh_chat_que(ma)
-        assert m and m["loi"] and m["trich"] in van, ma
-    assert kbt.tinh_chat_que("chung")["trich"] in van
+        assert m and m["loi"] and chuan(m["trich"]) in chuan(van), ma
+    assert chuan(kbt.tinh_chat_que("chung")["trich"]) in chuan(van)
 
 
 def test_bai_doc_co_dong_the_que_va_khong_doi_muc(monkeypatch):

@@ -60,6 +60,7 @@ export const THANH_MANG: readonly ThanhMang[] = [
     { ma: "cong_cu", duong: "/nhan-tuong", nhan: "Gương mặt của tôi", en: "My face" },
     { ma: "bo_vi", duong: cum("bo-vi"), nhan: "Bộ vị gương mặt", dem: "bo-vi", en: "Face areas" },
     { ma: "do_hinh", duong: "/nhan-tuong/do-hinh", nhan: "Đồ hình sách xưa", en: "Classic face charts" },   // SX-C lớp phủ
+    { ma: "chi_tay", duong: "/chi-tay", nhan: "Chỉ tay", en: "Palm reading" },
     { ma: "hoi", duong: "/nhan-tuong#hoi-dap", nhan: "Hỏi về một vùng", en: "Ask about an area" },
   ] },
   // TR-1: Tarot — công cụ trải bài + cụm 78 lá.
@@ -83,8 +84,12 @@ export const khoaChu = (t: Pick<ThanhMang, "ma">, m: Pick<MucThanh, "ma">) => `t
 const boDuoi = (h: string) => h.split(/[?#]/)[0]!;
 
 /** Thanh của đường dẫn đang xem: theo đoạn đầu (trang trụ của silo). /tu-vi/sao-o-cung/x → Tử vi; /xem-sao-han → null. */
+// Trang công cụ nằm ngoài URL trụ nhưng thuộc một mảng (chỉ tay là phép tướng trong Thần Tướng Toàn Biên → Nhân tướng).
+const TRU_PHU: Record<string, string> = { "/chi-tay": "/nhan-tuong" };
+
 export function thanhCua(duong: string): ThanhMang | null {
-  const tru = `/${boDuoi(duong).split("/")[1] ?? ""}`;
+  const goc = `/${boDuoi(duong).split("/")[1] ?? ""}`;
+  const tru = TRU_PHU[goc] ?? goc;
   return THANH_MANG.find((t) => t.tru === tru) ?? null;
 }
 

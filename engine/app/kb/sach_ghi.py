@@ -40,7 +40,7 @@ NHOM = ("A", "B", "C")
 CHU_DE = ("tong_quan", "tinh_net", "cong_viec", "tien_bac", "tinh_duyen", "gia_dinh", "con_cai", "suc_khoe", "suc_ben",
           "di_lai", "nha_cua", "giay_to", "ban_be")
 _CAN_KHAM = ("suc_khoe", "suc_ben")
-_DAU = re.compile(r"[\s，。、；：？！「」『』《》〈〉“”‘’（）·,.;:?!()\[\]〔〕/\"'—–-]")
+_DAU = re.compile(r"[\s，。、；：？！「」『』《》〈〉“”‘’（）·,.;:?!()\[\]〔〕/\"'—–\-﹐﹑﹔﹕﹖﹗．…【】　]")
 # Chữ Hán báo hiệu câu sách đang đoán nặng → không được gắn nhóm A (phồn + giản).
 _HAN_NANG = re.compile(r"[死夭亡絕绝剋克刑妨淫賤贱孤寡疾病災灾厄牢獄狱貧贫窮穷凶殺杀破敗败禍祸傷伤哭喪丧盜盗]")
 # Lời tiếng Việt không được dùng (đã có cách nói giảm thay thế — xem docs/KE-HOACH-NAP-SACH-XUA.md mục 2).
