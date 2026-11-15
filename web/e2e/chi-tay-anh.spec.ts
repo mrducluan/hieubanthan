@@ -78,7 +78,8 @@ test("chụp lòng bàn tay (móc 21 điểm + engine giả): vòng cung trên �
   const docBody: unknown[] = [];
   await page.route("**/api/chi-tay/doc", async (route) => {
     docBody.push(route.request().postDataJSON());
-    await route.fulfill({ json: { muc: [{ ma: "cung_ly_day", ten: "Cung Ly nổi đầy", ten_han: "離宮高聳", loi: "Sách xưa ghi «離宮高聳» — dễ được biết tới." }], bo_nhom_c: 0, cau_ket: "" } });
+    // hình dạng engine thật: câu theo cung ở `muc_cung` (có `cung`, không có `ten`)
+    await route.fulfill({ json: { muc: [], muc_cung: [{ ma: "ly-cao", han: "若起文官加祿位", nhom: "A", y: "Gò Ly nổi cao…", loi: "Sách xưa ghi «若起文官加祿位» — Gò Ly nổi cao.", cung: "ly", lua_chon: "day" }], bo_nhom_c: 0, cau_ket: "", khong_ro: [] } });
   });
   await moTrang(page, { diem: DIEM });
 
@@ -117,7 +118,8 @@ test("chụp lòng bàn tay (móc 21 điểm + engine giả): vòng cung trên �
   // khối "Xem sách xưa nói gì" phía dưới gửi kèm cung (không cần chọn vân)
   await expect(page.getByTestId("chon-tom-tat")).toContainText("1 cung trên ảnh tay");
   await page.getByTestId("doc-van-tay").click();
-  await expect(page.getByTestId("ket-qua-van-tay")).toContainText("離宮高聳");
+  await expect(page.getByTestId("ket-qua-van-tay")).toContainText("若起文官加祿位");
+  await expect(page.getByTestId("kq-cung")).toContainText("cung Ly");   // tên cung lấy từ đồ hình sách
   expect(docBody).toHaveLength(1);
   expect(docBody[0]).toEqual({ cung: { ly: "day" } });
 
@@ -135,7 +137,7 @@ test("chụp lòng bàn tay (móc 21 điểm + engine giả): vòng cung trên �
 });
 
 test("chụp lòng bàn tay: ảnh không hợp lệ (engine) → lời nhắc + Chụp lại", async ({ page }) => {
-  await page.route("**/api/chi-tay/do-tay", (route) => route.fulfill({ json: { hop_le: false, loi: "mu_ban_tay", nhan: [], sach_ghi: [], cung: [], bo_nhom_c: 0, cau_ket: "" } }));
+  await page.route("**/api/chi-tay/do-tay", (route) => route.fulfill({ json: { hop_le: false, loi: "mu_ban_tay", loi_nhac: "Ảnh có vẻ là mu bàn tay — lật tay lại.", nhan: [], sach_ghi: [], cung: [], bo_nhom_c: 0, cau_ket: "" } }));
   await moTrang(page, { diem: DIEM });
   await page.getByTestId("ct-dong-y").check();
   await page.getByTestId("ct-input-tai").setInputFiles({ name: "tay.webp", mimeType: "image/webp", buffer: ANH });
@@ -155,4 +157,37 @@ test("chụp lòng bàn tay: bộ tìm điểm mốc không chạy được → 
   await expect(loi).toContainText("chưa chạy được");
   await expect(loi.locator("a[href='#tu-soi']")).toBeVisible();
   expect(goi).toBe(0);
+});
+
+test("chọn vân trên điện thoại 390×844: thanh 'Xem sách xưa' nằm trên tab dưới; phóng to hình; kết quả cuộn tới + tiêu điểm", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.route("**/api/chi-tay/doc", (route) => route.fulfill({ json: { muc: [{ ma: "bai-tuong", ten: "Vân Bái Tướng", ten_han: "拜相紋", loi: "Sách xưa ghi «拜相紋» — thử." }], bo_nhom_c: 0, cau_ket: "" } }));
+  await page.goto("/chi-tay");
+  // phóng to một hình → hộp có ảnh đủ + lời; "Giống tay tôi" chọn luôn
+  await page.locator("[data-testid=phong-van][data-ma=bai-tuong]").click();
+  const hop = page.getByTestId("phong-van-hop");
+  await expect(hop).toBeVisible();
+  await hop.getByTestId("phong-van-chon").click();
+  await expect(hop.getByTestId("phong-van-chon")).toHaveAttribute("aria-pressed", "true");
+  await page.keyboard.press("Escape");
+  await expect(hop).toHaveCount(0);
+  await expect(page.locator("[data-testid=nut-van][data-ma=bai-tuong]")).toHaveAttribute("aria-pressed", "true");
+
+  // nút trong thanh dính không bị tab dưới che
+  const nut = page.getByTestId("doc-van-tay");
+  await nut.scrollIntoViewIfNeeded();
+  const trung = await nut.evaluate((el) => {
+    const r = el.getBoundingClientRect();
+    const o = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+    return o === el || el.contains(o);
+  });
+  expect(trung).toBe(true);
+  // không có ô báo lỗi rỗng
+  await expect(page.getByTestId("chon-van-tay").locator("[role=alert]")).toHaveCount(0);
+
+  await nut.click();
+  const tieuDe = page.getByTestId("ket-qua-van-tay").getByRole("heading");
+  await expect(tieuDe).toBeFocused();
+  await expect(tieuDe).toBeInViewport();
+  await expect(page.getByTestId("co-ket-qua")).toHaveAttribute("href", "#ket-qua-chi-tay");
 });

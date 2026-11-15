@@ -159,7 +159,8 @@ def test_cung_trong_so_tong_bang_1_va_khop_do_hinh():
 
 def test_cung_tay_trai_khop_do_hinh_sach():
     """Đồ hình sách vẽ tay trái (ngón cái bên trái); chiếu tay trái mẫu → thứ tự trái/phải của các cung giống đồ hình."""
-    kq = ctd.do_tay(_anh(_tay(), "trai", ty_le=957 / 1224, cao=0.45, tam=(0.5, 0.55)), 957 / 1224, "trai")
+    kq = ctd.do_tay(_anh(_tay(), "trai", ty_le=957 / 1224, cao=0.38, tam=(0.5, 0.6)), 957 / 1224, "trai")
+    assert kq["hop_le"], kq
     vt = {c["ma"]: c["vt"] for c in kq["cung"]}
     hinh = {p["id"]: p["vt"] for p in kb._d()["do_hinh"]["diem"]}
     for a_, b_ in (("chan", "doai"), ("ton", "khon"), ("can_co", "can"), ("ton", "ly"), ("ly", "khon")):
@@ -180,14 +181,23 @@ def test_nguong_o_kb_va_can_doi_chieu():
 # --- KB sách theo số đo / theo cung -------------------------------------------------------------------------------
 def test_sach_do_tay_va_cung_qua_bo_kiem():
     van = sach_ghi.van_nguon("than_tuong_toan_bien")
-    chinh = sach_ghi.van_nguon_chinh_van("than_tuong_toan_bien")
     d = kb._d()
     so = 0
     for vt, m in sach_ghi.cac_muc({"a": d["sach_do_tay"], "b": d["cung_tay"]}):
         so += 1
         assert sach_ghi.kiem_muc(m, vt) == []
-        assert sach_ghi.chuan(m.get("han_kho") or m["han"]) in van and m["han"] in chinh
-    assert so >= 18
+        assert "han_kho" not in m and m["han"] in van
+    assert so >= 25
+    # Không dùng câu Ngọc Chưởng Ký (玉掌記): bản này đặt các cung đó lên MẶT (乾〔右頤下〕…). Câu cung lấy từ «根基所屬».
+    ngoc = next(t["van"] for t in json.loads((sach_ghi._NGUON / "than_tuong_toan_bien.json").read_text("utf-8"))["thien"]
+                if t["ten"].endswith("玉掌記"))
+    can_co = next(t["van"] for t in json.loads((sach_ghi._NGUON / "than_tuong_toan_bien.json").read_text("utf-8"))["thien"]
+                  if t["ten"].endswith("根基所屬"))
+    for ma, cg in kb.cung_tay().items():
+        assert cg["vai"]["nhom"] == "A" and cg["vai"]["han"] in can_co, ma
+        for ds in cg["sach"].values():
+            for m in ds:
+                assert sach_ghi.chuan(m["han"]) not in sach_ghi.chuan(ngoc), m["ma"]
     nhan = set(d["do_tay"]["nhan"])
     assert set(k for k in d["sach_do_tay"] if not k.startswith("_")) <= nhan
     for ma, c in kb.cung_tay().items():
@@ -195,13 +205,15 @@ def test_sach_do_tay_va_cung_qua_bo_kiem():
         assert 3 <= len(c["lua_chon"]) <= 4
 
 
-def test_bo_kiem_han_kho():
-    m = {"han": "乾宮高聳生長子之權豪", "han_kho": "宮高聳生長子之權豪", "am": "x", "y": "Gò Càn cao.", "nhom": "A",
-         "chu_de": "gia_dinh", "nguon": "than_tuong_toan_bien"}
-    assert sach_ghi.kiem_muc(m) == []
-    assert sach_ghi.kiem_muc({**m, "han": "坤宮高聳生長子之權豪"})               # chính văn không khớp
-    assert sach_ghi.kiem_muc({**m, "han_kho": "宮高聳生長子之權豪也"})            # đoạn kho không có
-    assert sach_ghi.kiem_muc({k: v for k, v in m.items() if k != "han_kho"})    # thiếu han_kho → câu không liền trong kho
+def test_ghim_do_hinh_khong_nhom_c_va_khong_ngoc_chuong_ky():
+    """Ghim công khai trên đồ hình: câu mặc định là A/B từ «根基所屬» / «論手», không câu nhóm C, không câu Ngọc Chưởng Ký."""
+    thien = json.loads((sach_ghi._NGUON / "than_tuong_toan_bien.json").read_text("utf-8"))["thien"]
+    ngoc = sach_ghi.chuan(next(t["van"] for t in thien if t["ten"].endswith("玉掌記")))
+    ghim = {p["id"]: p for p in kb._d()["do_hinh"]["diem"]}
+    for ma in kb.cung_tay():
+        p = ghim[ma]
+        assert p["muc"] in ("A", "B") and p["sach_ghi"]["han"] not in ngoc and "han_kho" not in p["sach_ghi"], ma
+    assert "áp út" in ghim["chu"]["y"] and "ngón giữa là chủ" in ghim["chu"]["y"]
 
 
 def test_doc_do_tay_nhom_c_theo_tuoi():
@@ -214,16 +226,19 @@ def test_doc_do_tay_nhom_c_theo_tuoi():
 
 
 def test_doc_theo_cung():
-    r = kb.doc([], None, {"can_co": "trung", "ly": "day", "minh_duong": "phang", "doai": "binh"})
+    r = kb.doc([], None, {"chan": "trung", "ly": "day", "minh_duong": "phang", "doai": "binh"})
     ma = [m["ma"] for m in r["muc_cung"]]
     assert ma == ["ly-cao", "minh-duong-phang"] and r["bo_nhom_c"] == 1      # A trước B; C bỏ vì chưa rõ tuổi
-    assert r["muc_cung"][0]["loi"].startswith("Sách xưa ghi «離位突高必作功名之士»")
-    r = kb.doc([], 30, {"can_co": "trung", "ly": "day"})
-    assert [m["ma"] for m in r["muc_cung"]] == ["ly-cao", "can-co-ham"] and r["bo_nhom_c"] == 0
+    assert r["muc_cung"][0]["loi"].startswith("Sách xưa ghi «若起文官加祿位仕者為官入廟堂»")
+    assert r["muc_cung"][0]["cung"] == "ly" and r["muc_cung"][0]["lua_chon"] == "day"
+    r = kb.doc([], 30, {"chan": "trung", "ly": "day"})
+    assert [m["ma"] for m in r["muc_cung"]] == ["ly-cao", "chan-ham"] and r["bo_nhom_c"] == 0
     c = r["muc_cung"][1]
-    assert "am" not in c and c["loi"].startswith("Sách xưa có nhắc «艮宮剋陷損子父於初年». Hàm ý")
+    assert "am" not in c and c["loi"].startswith("Sách xưa có nhắc «低陷此宮妻有剋». Hàm ý")
     assert r["cau_ket"].startswith(sach_ghi.CAU_KET)
-    assert not any("han_kho" in m for m in r["muc_cung"])
+    r = kb.doc([], 30, {"can_co": "van_cat"})                                  # một lựa chọn → hai câu (B rồi C)
+    assert [m["ma"] for m in r["muc_cung"]] == ["can-co-ban-co", "can-co-phi-cham"]
+    assert kb.doc([], 30, {"ly": "van_cat"})["muc_cung"][0]["ma"] == "ly-ham"   # sách gộp "trũng" với "vân phá"
 
 
 # --- route --------------------------------------------------------------------------------------------------------
@@ -248,7 +263,8 @@ def test_route_do_tay(may):
     assert {"ma", "ten", "vua"} <= set(j["nhan"][0])
     assert {"ma", "han", "nhom", "loi"} <= set(j["sach_ghi"][0])
     c = j["cung"][0]
-    assert {"ma", "han", "ten", "vt", "y", "lua_chon"} <= set(c) and c["lua_chon"][0].keys() == {"ma", "ten"}
+    assert {"ma", "han", "ten", "vt", "y", "vai", "lua_chon"} <= set(c) and c["lua_chon"][0].keys() == {"ma", "ten"}
+    assert set(c["vai"]) == {"han", "am", "loi"} and c["vai"]["loi"].startswith("Sách xưa ghi «")
     chu = json.dumps(j, ensure_ascii=False)
     assert not re.search(r"han_kho|trong_so|nguong|_ghi_chu|_nguon|sach_do_tay|wikisource|mediapipe", chu, re.I)
 
@@ -278,7 +294,7 @@ def test_route_doc_cung(may):
     r = may.post("/v1/chi-tay/doc", json={"cung": {"ly": "day", "khon": "van_cat"}})
     assert r.status_code == 200 and [m["ma"] for m in r.json()["muc_cung"]] == ["ly-cao"] and r.json()["bo_nhom_c"] == 1
     r = may.post("/v1/chi-tay/doc", json={"cung": {"khon": "van_cat"}, "van": ["bai-tuong"], "ngay_sinh": "1990-05-01"})
-    assert [m["ma"] for m in r.json()["muc_cung"]] == ["khon-pha"] and [m["ma"] for m in r.json()["muc"]] == ["bai-tuong"]
+    assert [m["ma"] for m in r.json()["muc_cung"]] == ["khon-van-loan"] and [m["ma"] for m in r.json()["muc"]] == ["bai-tuong"]
     assert "han_kho" not in r.text
     for sai in ({"cung": {"ly": "xxx"}}, {"cung": {"zz": "day"}}, {}, {"van": [], "cung": {}}, {"cung": {"ton": "phang"}}):
         assert may.post("/v1/chi-tay/doc", json=sai).status_code == 422, sai

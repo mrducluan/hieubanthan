@@ -23,15 +23,24 @@ DAU = re.compile(r"[，。、；：？！「」『』《》〈〉“”‘’…
 _HAN = re.compile(r"[一-鿿]")
 
 
+_THUC_THE = re.compile(r"(&[A-Z]+\d+;)")      # chữ ngoài bảng mã của Kanripo (&KR0951;) — giữ nguyên dấu «;»
+
+
 def bo_dau(s: str) -> str:
-    s = re.sub(r"[（(]", "〔", s)
-    s = re.sub(r"[）)]", "〕", s)
-    return DAU.sub("", s)
+    ra = []
+    for i, phan in enumerate(_THUC_THE.split(s)):
+        if i % 2:
+            ra.append(phan)
+            continue
+        phan = re.sub(r"[（(]", "〔", phan)
+        phan = re.sub(r"[）)]", "〕", phan)
+        ra.append(DAU.sub("", phan))
+    return "".join(ra)
 
 
 def _sua(x, khoa: str = ""):
     if isinstance(x, str):
-        return bo_dau(x) if khoa not in META and _HAN.search(x) else x
+        return bo_dau(x) if khoa not in META and not khoa.startswith("_") and _HAN.search(x) else x
     if isinstance(x, dict):
         return {k: _sua(v, k) for k, v in x.items()}
     if isinstance(x, list):

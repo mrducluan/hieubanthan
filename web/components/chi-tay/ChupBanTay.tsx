@@ -20,10 +20,10 @@ import { cn } from "@/lib/utils";
 
 interface LuaChonCung { ma: string; ten: string }
 export interface CungTay { ma: string; han: string; ten: string; ten_ngan?: string; vt: [number, number]; y: string; lua_chon: LuaChonCung[] }
-interface NhanDo { ma: string; ten: string; vua?: boolean }
+interface NhanDo { ma: string; ten: string; y?: string; vua?: boolean }
 interface SachGhiDo { ma: string; han?: string; nhom?: string; loi: string; viec?: string }
 export interface KqDoTay {
-  hop_le: boolean; loi: string | null; loi_chu?: string;
+  hop_le: boolean; loi: string | null; loi_nhac?: string | null; loi_chu?: string;
   nhan?: NhanDo[]; sach_ghi?: SachGhiDo[]; cung?: CungTay[]; bo_nhom_c?: number; cau_ket?: string;
 }
 
@@ -44,7 +44,7 @@ const LOI_ANH: Record<string, string> = {
   tay_nam: "Các ngón đang khép hoặc nắm lại. Xoè rộng các ngón rồi chụp lại.",
   nghieng_qua: "Bàn tay nghiêng quá. Giữ lòng bàn tay song song với máy rồi chụp lại.",
 };
-const loiAnh = (k: KqDoTay) => k.loi_chu || (k.loi && LOI_ANH[k.loi]) || k.loi || LOI_ANH.khong_du_diem!;
+const loiAnh = (k: KqDoTay) => k.loi_nhac || k.loi_chu || (k.loi && LOI_ANH[k.loi]) || k.loi || LOI_ANH.khong_du_diem!;
 /** Tên ngắn để ghi dưới vòng cung: phần trong ngoặc của tên engine ("Gò dưới ngón giữa (cung Ly)" → "cung Ly"). */
 const tenNgan = (c: CungTay) => c.ten_ngan ?? /\(([^)]+)\)\s*$/.exec(c.ten)?.[1] ?? c.ten;
 
@@ -371,7 +371,8 @@ export function ChupBanTay() {
                   <ul className="mt-2 space-y-1 text-sm">
                     {kq.nhan!.map((n) => (
                       <li key={n.ma} className={cn("flex gap-1.5", n.vua ? "text-fg-muted" : "text-fg")}>
-                        <span aria-hidden className={cn("mt-2 size-1.5 shrink-0 rounded-full", n.vua ? "bg-fg-faint" : "bg-gold")} />{n.ten}
+                        <span aria-hidden className={cn("mt-2 size-1.5 shrink-0 rounded-full", n.vua ? "bg-fg-faint" : "bg-gold")} />
+                        <span>{n.ten}{n.y && <span className="block text-xs text-fg-muted">{n.y}</span>}</span>
                       </li>
                     ))}
                   </ul>

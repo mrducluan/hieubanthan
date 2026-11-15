@@ -53,3 +53,12 @@ def test_kho_nguon_da_nap_lai_co_doan_tung_bi_rot():
     dt = {t["ten"]: t["van"] for t in json.loads((nguon / "duong_trach_thap_thu.json").read_text("utf-8"))["thien"]}
     assert "巽地坑池官司敗陽短陰山出暗風" in dt["陽宅十書一 · 八方坑坎歌"]
     assert all("ghi_chu" not in t for t in json.loads((nguon / "duong_trach_thap_thu.json").read_text("utf-8"))["thien"])
+
+
+def test_de_muc_wiki_go_hong_thanh_de_muc_that():
+    """«===<div><div style="float:left;">《呂純陽相賦》</div>…</div>===» + chữ trần: tên thiên giữ đúng, câu sách không thành tên."""
+    t = _trang('<p>前文一句</p>\n===<div><div style="float:left;">《呂純陽相賦》</div><div style="float:right;"></div>'
+               f'<div style="clear:both;"></div></div>==={NGAT}相貌有異富貴不同量肌肉之輕重\n<p>行似龍騰此相超群</p>')
+    muc = {ten: van for _, ten, van in nap.doc_quyen(t)}
+    assert "呂純陽相賦" in muc and muc["呂純陽相賦"].startswith("相貌有異富貴不同")
+    assert not any(ten.startswith("相貌有異") for ten in muc)

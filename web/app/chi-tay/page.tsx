@@ -67,7 +67,7 @@ export default async function Page() {
           Ngửa bàn tay ra chỗ sáng, nhìn kỹ các đường và dấu nhỏ (hình sao, chữ tỉnh, vòng tròn, các nét song song) rồi chạm vào hình
           giống tay bạn. Hình khắc gỗ xưa vẽ giản lược, chỉ cần giống dáng là được.
         </p>
-        <ChonVanTay van={tv.van} chuDe={tv.chu_de} />
+        <ChonVanTay van={tv.van} chuDe={tv.chu_de} tenCung={Object.fromEntries((tv.do_hinh?.diem ?? []).map((p) => [p.id, p.ten]))} />
       </section>
 
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG_CHI_TAY} viTri="duoi" className="mb-10" />

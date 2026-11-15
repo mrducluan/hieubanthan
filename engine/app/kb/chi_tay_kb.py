@@ -4,6 +4,8 @@
 Chỉ TRA `chi_tay_kb.json` (git là nguồn) và GHÉP lời theo khuôn SX-C (`sach_ghi.loi`): A nói nguyên ý, B "nên chú ý" + việc,
 C "Sách xưa có nhắc… Hàm ý theo ghi chép xưa…" (không phiên âm). Không sinh nghĩa, không đoán gì từ ảnh: người dùng tự soi bàn
 tay của mình rồi chọn hình vân giống tay mình. Ảnh do web tự phục vụ (`/anh/chi-tay/van/<ma>.webp`, `/anh/do-hinh/<tep>`).
+CT-2: ghép kết quả đo bàn tay (CALC `calc/chi_tay_do.py`, chỉ toạ độ điểm mốc) với nhãn + câu sách theo số đo (`sach_do_tay`)
+và tám cung (`cung_tay`: vai cung + lựa chọn tự soi → câu «根基所屬»). Không trả ngưỡng, trọng số.
 """
 from __future__ import annotations
 
@@ -119,7 +121,8 @@ def ket_qua_do_tay(kq: dict, tay: str, tuoi: int | None) -> dict:
     giu, bo_c = _loc_c([m for n in kq["nhan"] for m in sach_theo_nhan(n["ma"])], tuoi)
     ct = cung_tay()
     cung = [{"ma": c["ma"], "han": ct[c["ma"]]["han"], "am": ct[c["ma"]]["am"], "ten": ct[c["ma"]]["ten"], "vt": c["vt"],
-             "y": ct[c["ma"]]["y"], "lua_chon": [{"ma": x["ma"], "ten": x["ten"]} for x in ct[c["ma"]]["lua_chon"]]}
+             "y": ct[c["ma"]]["y"], "vai": {k: v for k, v in _sach(ct[c["ma"]]["vai"]).items() if k in ("han", "am", "loi")},
+             "lua_chon": [{"ma": x["ma"], "ten": x["ten"]} for x in ct[c["ma"]]["lua_chon"]]}
             for c in kq["cung"]]
     return {"hop_le": True, "loi": None, "loi_nhac": None, "so_do": kq["so_do"], "nhan": nhan,
             "sach_ghi": [_sach(m) for m in giu], "cung": cung, "bo_nhom_c": bo_c,

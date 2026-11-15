@@ -13,10 +13,11 @@ import { anhVan, type VanTay } from "@/lib/chi-tay";
 import { boHet, datVan, useChonChiTay } from "@/lib/chi-tay-chon";
 
 /** Mỗi mục là một vân hoặc một cung (CT-2) — mục cung có thể không có tên Hán / ảnh. */
-type MucKq = Pick<VanTay, "ma" | "ten" | "loi"> & { ten_han?: string; viec?: string };
-type KetQua = { muc: MucKq[]; bo_nhom_c: number; cau_ket: string };
+type MucKq = Pick<VanTay, "ma" | "loi"> & { ten?: string; ten_han?: string; viec?: string; cung?: string };
+/** `muc` = vân; `muc_cung` = câu sách theo lựa chọn từng cung (CT-2, có `cung` = mã cung). */
+type KetQua = { muc: MucKq[]; muc_cung?: MucKq[]; bo_nhom_c: number; cau_ket: string };
 
-export function ChonVanTay({ van, chuDe }: { van: VanTay[]; chuDe: { ma: string; ten: string }[] }) {
+export function ChonVanTay({ van, chuDe, tenCung = {} }: { van: VanTay[]; chuDe: { ma: string; ten: string }[]; tenCung?: Record<string, string> }) {
   const hs = useHoSo();
   const [loc, setLoc] = useState<string | null>(null);
   const luu = useChonChiTay();
@@ -120,13 +121,17 @@ export function ChonVanTay({ van, chuDe }: { van: VanTay[]; chuDe: { ma: string;
       {kq && (
         <section id="ket-qua-chi-tay" className="mt-6 scroll-mt-24 space-y-4" aria-live="polite" data-testid="ket-qua-van-tay">
           <h3 ref={tieuDeKq} tabIndex={-1} className="text-xl outline-none">{soCung ? "Sách xưa nói gì về bàn tay bạn" : "Sách xưa nói gì về những vân bạn chọn"}</h3>
-          {kq.muc.map((m, i) => (
-            <article key={`${i}-${m.ma}`} className="rounded-2xl border border-line/70 p-4">
-              <p className="font-medium text-fg">{m.ten} {m.ten_han && <span lang="zh-Hant" className="font-serif text-fg-muted">{m.ten_han}</span>}</p>
+          {[...(kq.muc_cung ?? []), ...kq.muc].map((m, i) => (
+            <article key={`${i}-${m.ma}`} className="rounded-2xl border border-line/70 p-4" data-testid={m.cung ? "kq-cung" : "kq-van"}>
+              <p className="font-medium text-fg">{m.ten ?? (m.cung ? tenCung[m.cung] ?? `Cung ${m.cung}` : m.ma)}{" "}
+                {m.ten_han && <span lang="zh-Hant" className="font-serif text-fg-muted">{m.ten_han}</span>}</p>
               <p className="mt-2 leading-relaxed">{m.loi}</p>
               {m.viec && <p className="mt-2 text-sm text-fg-muted"><span className="text-fg">Việc nên làm:</span> {m.viec}</p>}
             </article>
           ))}
+          {!kq.muc.length && !kq.muc_cung?.length && kq.bo_nhom_c === 0 && (
+            <p className="text-sm text-fg-muted">Sách không có câu riêng cho những lựa chọn này (vd “bình thường”). Thử chọn thêm hình vân giống tay bạn.</p>
+          )}
           {kq.bo_nhom_c > 0 && (
             <p className="text-sm text-fg-muted">
               {hs ? `${kq.bo_nhom_c} mục bạn chọn có lời sách chỉ dành cho người từ 18 tuổi, nên không hiện ở đây.`

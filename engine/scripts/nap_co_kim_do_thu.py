@@ -60,6 +60,9 @@ def _doan(k: str) -> list[str]:
     <p> — vd bài «猴口», «八方坑坎歌». Đọc riêng <p> thì rơi mất những đoạn ấy (lỗi WS-2, phải vá tay ở KT-NT3 / KT-PT1).
     Chú thích hình, bảng, CSS bản mẫu nằm TRONG thẻ khối → không lấy (như trước)."""
     k = re.sub(r"<span[^>]*class=\"pagenum[^\"]*\"[^>]*>.*?</span></span>", "", k, flags=re.S)
+    # đề mục wiki gõ hỏng dạng «===<div><div style="float:left;">《呂純陽相賦》</div>…</div>===» → đề mục thật, xuống dòng riêng
+    k = re.sub(r"={2,}\s*<div>\s*<div style=\"float:\s*left;?\">(.*?)</div>.*?<div style=\"clear:\s*both;?\"></div>\s*</div>\s*={2,}",
+               lambda m: f"<p>==={m.group(1)}===</p>", k, flags=re.S)
     k = re.sub(r"<div style=\"position: ?absolute[^\"]*\">.*?</div>", "", k, flags=re.S)
     k = re.sub(r"<style\b[^>]*>.*?(?:</style>|$)", "", k, flags=re.S)     # CSS bản mẫu (có thể bị cắt ở licenseContainer)
     k = re.sub(r"<[^>]*$", "", k)                    # mẩu thẻ dở ở chỗ cắt trang (trước «licenseContainer»)
@@ -95,7 +98,7 @@ def doc_quyen(trang: str) -> list[tuple[int, str, str]]:
         # tách thành mục riêng để đề mục không lẫn vào chữ sách
         hien, dong = ten, []
         for d in (x for x in doan if x):
-            for i, phan in enumerate(re.split(r"(={2,}[^=\n]+?(?:={2,}|〔〕|$))", d)):
+            for i, phan in enumerate(re.split(r"(={2,}[^=\n]+?={2,}|={2,}[^=\n]{1,24}?〔〕)", d)):
                 if i % 2:
                     if dong or hien != ten:
                         out.append((cap, hien, "\n".join(dong)))

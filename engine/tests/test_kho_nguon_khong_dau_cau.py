@@ -22,3 +22,9 @@ def test_bo_dau_giu_chu_chu_nho_va_xuong_dong():
     assert bd.bo_dau("天尊地卑，陽奇陰偶。（注：一）\n乾在內甲子") == "天尊地卑陽奇陰偶〔注一〕\n乾在內甲子"
     assert bd.bo_dau("世爲己﹐應爲人") == "世爲己應爲人"
     assert bd._sua({"_nguon": "《X》, bản gõ", "van": "甲，乙"}) == {"_nguon": "《X》, bản gõ", "van": "甲乙"}
+
+
+def test_giu_khoa_mo_ta_va_thuc_the_kanripo():
+    assert bd.bo_dau("甲&KR0951;乙，丙") == "甲&KR0951;乙丙"
+    assert bd._sua({"_mo_ta": "柳莊相法 — (Viên Trung Triệt, đời Minh). Chỉ giữ chữ."}) == \
+        {"_mo_ta": "柳莊相法 — (Viên Trung Triệt, đời Minh). Chỉ giữ chữ."}
