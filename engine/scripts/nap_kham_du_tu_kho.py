@@ -58,5 +58,6 @@ def nap(goc: Path) -> dict:
 
 if __name__ == "__main__":
     out = nap(Path(sys.argv[1]))
-    (NGUON / "kham_du_tu_kho.json").write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", "utf-8")
+    from bo_dau_cau_kho_nguon import _sua as bo_dau_cau   # kho nguồn không giữ dấu câu thời nay
+    (NGUON / "kham_du_tu_kho.json").write_text(json.dumps(bo_dau_cau(out), ensure_ascii=False, indent=1) + "\n", "utf-8")
     print("kham_du_tu_kho", len(out["thien"]), "quyển,", sum(len(t["van"]) for t in out["thien"]), "chữ")

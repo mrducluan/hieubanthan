@@ -3,6 +3,7 @@
 
 Golden = chính các mệnh ví dụ sách nêu. Hàm CHỈ nhận diện (bảo thủ), không đổi cách cục / dụng thần / mức nào.
 """
+from app.kb.sach_ghi import chuan  # kho nguồn không giữ dấu câu thời nay
 import json
 from pathlib import Path
 
@@ -71,7 +72,7 @@ def test_trich_la_nguyen_van():
         if t["ten"] == "论杂格")
     assert set(nc.TRICH) == {"chuyen_vuong", "hoa_khi", "tong_tai", "tong_sat"}
     for ma, c in nc.TRICH.items():
-        assert c in van, ma
+        assert chuan(c) in chuan(van), ma
 
 
 def test_hiem_tren_5000_la():

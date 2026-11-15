@@ -19,7 +19,7 @@
 | Tử vi | 1 | 3 | 4 | 6 |  |
 | Kinh Dịch | 2 | 2 |  | 2 |  |
 | Phong thuỷ | 2 | 2 | 1 | 3 |  |
-| Nhân tướng | 3 | 2 |  |  |  |
+| Nhân tướng | 4 | 2 |  |  |  |
 | Tarot | 1 |  |  |  |  |
 | Thần số |  |  | 11 | 12 |  |
 | Lịch · tuổi · tập quán |  | 1 | 4 |  |  |
@@ -34,6 +34,7 @@
 | `battu_kb.json` | co_tho | `uyen_hai_tu_binh.json` | `test_co_tho_nhat_chu_khop_nguyen_van_uyen_hai` |  |
 | `battu_kb.json` | co_van_thap_than | `uyen_hai_tu_binh.json` | `test_co_van_thap_than_khop_nguyen_van_uyen_hai` |  |
 | `battu_sach_ghi.json` | (cả tệp) | `tam_menh_thong_hoi.json` | `test_moi_muc_qua_bo_kiem` | SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn |
+| `chi_tay_kb.json` | (cả tệp) | `than_tuong_toan_bien.json` | `test_moi_cau_la_nguyen_van` | Chỉ tay: 67 bài thơ vân tay quyển 10 + câu đồ hình tám cung («根基所屬», Luận thủ) khớp kho nguồn; CT-2: câu theo số đo bàn tay (`sach_do_tay`: «論手», «相指掌») + vai và lựa chọn từng cung (`cung_tay`: «根基所屬») qua bộ kiểm SX-C (tests/test_chi_tay_do.py); ngưỡng đo `do_tay` là giả định nhân trắc, can_doi_chieu; lời Việt nói giảm theo SX-C; 5 hình sách đoán về người vợ không đưa vào |
 | `kinhdich_hao.json` | (cả tệp) | `chu_dich_truyen_nghia.json` | `test_loi_que_loi_hao_trong_kb_khop_ban_tu_kho` | kinh văn khớp nguyên văn; phần dịch và «Hiểu đơn giản» là nháp |
 | `kinhdich_kb.json` | bat_quai | `chu_dich_truyen_nghia.json` | `test_loai_tuong_tam_quai_trich_dung_thuyet_quai` | loại tượng khớp Thuyết Quái |
 | `kinhdich_tra_loi.json` | tinh_chat_que | `tang_san_boc_dich.json` | `test_trich_la_nguyen_van_va_kb_du_loi` |  |
@@ -113,6 +114,7 @@
 | Phong thuỷ | `phongthuy_kb.json` | sach_xua_nha | Có nguyên văn đối chiếu | WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý |
 | Phong thuỷ | `phongthuy_sach_ghi.json` |  | Có nguyên văn đối chiếu | SX-C: 116 điều về thế nhà (論宅外形, 內形篇, 何知經…) khớp kho nguồn; vế 'vì sao hợp lẽ thường' là lời biên tập |
 | Phong thuỷ | `phongthuy_tam_yeu.json` |  | Tập quán / sách hiện đại tóm ý | SX-C: tóm ý Dương Trạch Tam Yếu + Bát Trạch Minh Kính qua BẢN DỊCH Việt hiện đại (chưa có nguyên văn chữ Hán trong kho nguồn); du niên 64 nhà + 64 bếp khớp phép tính |
+| Nhân tướng | `chi_tay_kb.json` |  | Có nguyên văn đối chiếu | Chỉ tay: 67 bài thơ vân tay quyển 10 + câu đồ hình tám cung («根基所屬», Luận thủ) khớp kho nguồn; CT-2: câu theo số đo bàn tay (`sach_do_tay`: «論手», «相指掌») + vai và lựa chọn từng cung (`cung_tay`: «根基所屬») qua bộ kiểm SX-C (tests/test_chi_tay_do.py); ngưỡng đo `do_tay` là giả định nhân trắc, can_doi_chieu; lời Việt nói giảm theo SX-C; 5 hình sách đoán về người vợ không đưa vào |
 | Nhân tướng | `nhan_tuong_do_hinh.json` |  | Tóm ý cổ thư, chưa khớp từng câu | lớp phủ đồ hình: nhãn chữ Hán đọc trên bản khắc Thần Tướng Toàn Biên; toạ độ đo trên ảnh; lời Việt rút từ KB |
 | Nhân tướng | `nhan_tuong_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-NT1/2 + KT-N1 + KT-NT3: cả 70 câu trích sách (`dac_diem.*.sach`) khớp kho nguồn `nhan_tuong_co_thu.json` + `than_tuong_toan_bien.json` (Thần Tướng Toàn Biên bản Cổ Kim Đồ Thư Tập Thành, Băng Giám, Tâm Tướng Thiên, Linh Khu, 4 sách Tứ khố — tests/test_kt_nt1_kho_nguon.py); lời luận vẫn là tóm ý, trường `nguon` Ma Y / Thần Tướng Toàn Biên chỉ ghi phái |
 | Nhân tướng | `nhan_tuong_kb.json` | luu_nien | Có nguyên văn đối chiếu | WS-2: 20 tuổi mốc khớp tên bộ vị + thứ tự của «流年運氣部位歌»; WS-4 / KT-NT3: tuổi 10–14 sửa theo chữ sách (Nhân Luân, Địa Luân) |

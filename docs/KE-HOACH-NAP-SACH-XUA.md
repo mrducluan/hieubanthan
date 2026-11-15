@@ -75,7 +75,7 @@ chủ đề sức khoẻ thiếu ý đi khám; lời Việt còn từ chưa nói
 | 6 | Nhân tướng | Cách cục phú, quý, thọ, thành bại; xương thịt, dáng đi, ngồi, nằm, ăn; hình giống chim thú | Thần Tướng Toàn Biên q.3, q.5, q.11–12 | sau |
 | 7 | Phong thuỷ | Mở cửa, thước cửa, thoát nước 24 sơn, xuyên cung cửu tinh, chọn ngày khởi công | Dương Trạch Thập Thư q.2–3 | sau |
 | 8 | Nhân tướng | Liễu Trang (sau khi so mẫu với bản quét) | database chủ dự án | sau |
-| 9 | Bàn tay | Mảng riêng — mục 5 | Thần Tướng Toàn Biên q.10 | kế hoạch |
+| 9 | Bàn tay | Mảng riêng — mục 5 | Thần Tướng Toàn Biên q.10 | xong (bản đầu, 15/11) |
 
 ## 5. Mảng bàn tay (chỉ tay, vân tay) — làm riêng
 
@@ -100,7 +100,7 @@ Thần Tướng Toàn Biên quyển 10 có 102 mục về bàn tay (luận tay, 
 | Tử vi | Khối "Sách xưa nói gì về lá số của bạn" mở cho cả câu nhóm B, C | sao ở cung | trang sao ở cung |
 | Bát tự | như trên | thần sát, lục thân | trang thập thần |
 
-## 7. Trạng thái (cập nhật 15/11/2026, sau SX-D)
+## 7. Trạng thái (cập nhật 15/11/2026, sau chỉ tay)
 
 | Việc | Trạng thái |
 |---|---|
@@ -117,11 +117,12 @@ Thần Tướng Toàn Biên quyển 10 có 102 mục về bàn tay (luận tay, 
 | QC 15/11: câu khoanh địa chi chỉ hiện ở cung đúng chi; Bát tự chỉ điều kiện kiểm được; Tam Yếu nói giảm "chịu thiệt / sa sút" (~80 câu); thai sản, tên chứng hay gặp dạng gợi ý (SX-C2) | xong |
 | Khí sắc (Toàn Biên quyển 13–14) | xong (SX-D) — 6 nét sắc mặt / ánh mắt của khảo sát có câu sách: sáng nhuận, xỉn tối, khô sạm, ba thứ sắc vàng / trắng / đỏ "còn khí – kém" (nhóm C, kèm đi khám), thần gấp; lời dặn xem sắc lúc sáng sớm. Phép "đoán ngày theo sắc từng bộ vị" (khí sắc xuất một) không nạp — toàn câu đoán việc, không có dữ kiện để chọn |
 | Xương thịt – dáng – ngũ hình – giọng (Toàn Biên quyển 1, 3, 5, 10) | xong (SX-D) — 14 nét khảo sát: xương thịt (相骨肉), dáng đi / ngồi (相行論, 相坐), ngũ hình Kim Mộc Thuỷ Hoả Thổ (五行象說), giọng (論聲). Không nạp: phép so dáng với cầm thú ("rùa đi, rắn đi…" — đoán tính nết thô), "hình có dư / không đủ" (đoán thọ yểu cả bài) |
-| Cách cục tướng (quyển 3: các "格") | chưa làm — phần lớn là đoán sang hèn theo một nét, cần đối chiếu từng cách với nét khảo sát |
+| Cách cục tướng (quyển 3: các "格") | chưa làm — phương án đề xuất ở mục 8 (chờ anh duyệt) |
 | Dương Trạch Thập Thư phần còn lại | xong (SX-D) — mở cửa (cửa là chỗ khí ra vào, đổi cửa là việc lớn, tránh thứ đâm thẳng), thước Lỗ Ban (mục bố trí mới `thuoc_lo_ban`, hỏi đáp "kích thước cửa" không còn rơi sang hướng cá nhân), thoát nước (xem nước trước, nước sân một lối), bếp (火唵說, kèm khối "Cửa, phòng chính và bếp"), chia khu nhiều cửa (chung cư). Không nạp: chọn ngày sửa cửa, bùa trấn (quyển 678), phép xuyên cung theo tầng |
-| Bàn tay `/chi-tay` (mục 5) | chưa làm — cần hình bàn tay từ `assets/diagrams` |
+| Bàn tay `/chi-tay` (mục 5) | xong (bản đầu) — một trang `/chi-tay`: đồ hình «八卦十二宮圖» (Liễu Trang, 18 điểm đo trên bản khắc, câu Ngọc Chưởng Ký cho tám cung) + 67 hình vân quyển 10 (ảnh cắt từ trang sách, bài thơ nguyên văn, lời SX-C) + công cụ tự chọn vân → lời sách (chưa rõ tuổi / dưới 18 không có nhóm C). 5 hình sách đoán phẩm hạnh người vợ không đưa vào. Chưa làm: cụm trang con từng vân, hỏi đáp chỉ tay, bản tiếng Anh, đồ hình «三公奇紋» / «富貴奇紋» (chữ khắc mờ, không đọc chắc) |
 | Bản tiếng Anh của lớp sách | chưa làm (khối chỉ có ở bản Việt) |
-| Soát dấu câu các kho Wikisource nạp trước (Băng Giám, Tăng San Bốc Dịch, Cốt Tuỷ Phú) | chưa làm |
+| Soát dấu câu các kho Wikisource nạp trước (Băng Giám, Tăng San Bốc Dịch, Cốt Tuỷ Phú) | xong (15/11) — `scripts/bo_dau_cau_kho_nguon.py` bỏ dấu câu thời nay ở 24 kho nguồn chữ Hán (Wikisource + bản điện tử hiện đại); test `test_kho_nguon_khong_dau_cau.py` chặn nạp lại còn dấu câu; mọi phép so khớp đi qua `sach_ghi.chuan` |
+| Bộ nạp `nap_co_kim_do_thu.py` làm rơi đoạn | xong (15/11) — chữ trần ngoài `<p>` (chỗ ngắt trang + biểu tượng «考證») nay được đọc; nạp lại ba sách lấy thêm ~25 đoạn bị rơi (猴口, 八方坑坎歌, «眼上露堂», «坎巽二方房屋高大極富貴之兆»…); bỏ hai bản vá tay; test HTML mẫu không cần mạng |
 
 Ghi chú khi dùng:
 
@@ -130,3 +131,19 @@ Ghi chú khi dùng:
   tốt (bộ kiểm không cho chữ 克 / 刑 / 災 vào nhóm A) — nên khuôn hiển thị là "Hàm ý theo ghi chép xưa" dù ý tích cực.
 - Kho Toàn Thư có chữ ngờ chép sai ở vài ô (vd `羊玲` / `羊铃` cho Kình Dương – Linh Tinh); các ô ấy đã tránh hoặc ghi rõ.
   Danh sách ở báo cáo của từng đợt soạn, cần người rành đọc lại khi duyệt.
+
+## 8. Cách cục tướng (Toàn Biên quyển 3) — phương án đề xuất
+
+Quyển 3 có ~50 thiên "格" (富格例, 大富格, 貴格例, 壽相格, 福德格例, 聰明, 穩厚, 伎巧, 勞碌格, 貪食格, 孤格, 刑剋, 剋妻妾,
+惡死格, 溺水格…). Mỗi thiên là MỘT DANH SÁCH NÉT RỜI ("耳大貼肉、鼻如截筒、面黑身白… 主大富"), không phải tổ hợp có điều kiện
+như cách cục Tử vi; khoảng một nửa số nét không có trong khảo sát (tiếng như chuông, đại tiện, hai tay chấm gối…), một phần ba
+số thiên là đoán thọ yểu / hình khắc / chết nạn.
+
+Đề xuất (chọn trong 3 cách):
+
+1. **Không làm "chấm cách"** — gom đủ N nét thì phán "bạn thuộc Đại phú cách": độ chính xác giả, sách không có ngưỡng.
+2. **"Nét của bạn sách xếp vào cách nào" (khuyên làm)** — bảng tay nối ~60 nét sách ↔ mã nét khảo sát đã có; khi người dùng
+   chọn nét, bài đọc Nhân tướng thêm một dòng ở "Vì sao nói vậy": "Sách xếp nét này vào «Phú cách / Thông minh / Lao lục…»"
+   theo khuôn SX-C (A / B / C), mỗi câu là chuỗi con kho nguồn; không đổi mức chương, không tiêu đề hộp. Thiên đoán chết nạn
+   (惡死格, 溺水格, 火災格, 夭相) chỉ nhóm C, nói giảm thành lời dặn an toàn, hoặc bỏ.
+3. Trang kiến thức "Cách cục tướng trong sách xưa" (thư viện từng cách + nguyên văn) — làm sau (2), dùng chung bảng.

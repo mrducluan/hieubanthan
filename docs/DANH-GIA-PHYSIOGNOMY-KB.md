@@ -255,3 +255,16 @@ tên + nghĩa Việt; engine `GET /v1/nhan-tuong/do-hinh[/{ma}]`; web vẽ chấ
 không sửa điểm ảnh). Chạm vào gần chấm nào thì mở chấm gần nhất (chấm nốt ruồi nằm sát nhau), điện thoại có nút Phóng to,
 bàn phím đi bằng Tab; nút "Xem bản khắc gốc" tắt hết lớp phủ. Danh sách mọi chữ khắc in sẵn trong HTML cho Google và bot AI.
 Lời nốt ruồi theo ba nhóm A / B / C (không màu đỏ). Toạ độ đã kiểm bằng ảnh vẽ chấm cho cả sáu bản khắc.
+
+## 10. Đợt bổ sung 15/11/2026 — `diagram_overlays`, `assets/rendered_overlays`, `measured_woodcut_overlays.py`
+
+- **Ba lớp phủ mặt (12 cung, 13 bộ vị, nốt ruồi nam)**: không dùng. Hệ thống đã có 6 đồ hình đo trên chính các bản khắc ấy với
+  nhiều điểm hơn (34 / 37 / 37 điểm so với 28 / 13 / 18). Vẽ cả hai bộ toạ độ lên cùng ảnh: điểm của hệ thống nằm đúng chữ khắc;
+  điểm trong `measured_woodcut_overlays.py` lệch nhiều (Phúc Đức nằm ngoài mặt, Tài Bạch rơi vào nhân trung, các nốt ruồi chỉ
+  phủ 40 % trên của ảnh). Nhãn nốt ruồi trong tệp ghi lời phán thẳng ("khắc cha mẹ", "hình khắc vợ con", "tai nạn binh đao") —
+  trái SX-C; hệ thống đã có bản nói giảm ba nhóm.
+- **Ba lớp phủ bàn tay (`OVERLAY_PALM_*`)**: không có trong bảng `diagram_overlays` của tệp sqlite (chỉ có SVG); toạ độ ước
+  lượng. Dùng ẢNH gốc `YLZ_QING_p0012_fig01` (bát quái bàn tay) và các trang quyển 10 (`SXQB_MING_page_0364…0372`) làm nguồn
+  hình; toạ độ đo lại tay trên ảnh (18 điểm), chỉ ghim chữ khắc đọc chắc. Đồ hình «三公奇紋» (p362) và «富貴奇紋» (p363) chữ
+  khắc mờ, chưa đọc chắc → chưa làm lớp phủ.
+- **Kết quả**: trang `/chi-tay` (kế hoạch nạp sách xưa mục 5, 7).

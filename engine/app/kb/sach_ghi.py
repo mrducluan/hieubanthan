@@ -19,6 +19,8 @@ Mỗi mục là một dict phẳng:
   ham_y   (B, C bắt buộc) câu "Nên chú ý …" / điều người xưa muốn dặn
   viec    (B, C bắt buộc) một việc nhỏ làm được ngay; chủ đề sức khoẻ / sức bền phải có ý đi khám
   nguon   tên tệp kho nguồn (không đuôi), vd "than_tuong_toan_bien"
+  han_kho (tuỳ chọn) khi kho nguồn chen CHÚ NHỎ 〔…〕 giữa câu (vd 乾〔右頤下〕宮高聳…): `han_kho` là đoạn liền mạch có trong kho
+          (宮高聳…), `han` là câu chính văn đã bỏ chú nhỏ (乾宮高聳…) — bộ kiểm so `han` với kho nguồn đã bỏ chú nhỏ
 
 Mục TÓM Ý (`tom_y: true`) — cho sách chỉ có bản dịch Việt hiện đại, không có nguyên văn chữ Hán trong kho nguồn (Dương Trạch
 Tam Yếu, Bát Trạch Minh Kính): không có `han` / `am`; `nguon` là mã trong TEN_SACH_TOM_Y; `y` do ban biên tập viết lại bằng lời
@@ -40,7 +42,7 @@ NHOM = ("A", "B", "C")
 CHU_DE = ("tong_quan", "tinh_net", "cong_viec", "tien_bac", "tinh_duyen", "gia_dinh", "con_cai", "suc_khoe", "suc_ben",
           "di_lai", "nha_cua", "giay_to", "ban_be")
 _CAN_KHAM = ("suc_khoe", "suc_ben")
-_DAU = re.compile(r"[\s，。、；：？！「」『』《》〈〉“”‘’（）·,.;:?!()\[\]〔〕/\"'—–-]")
+_DAU = re.compile(r"[\s，。、；：？！「」『』《》〈〉“”‘’（）·,.;:?!()\[\]〔〕/\"'—–\-﹐﹑﹔﹕﹖﹗．…【】　]")
 # Chữ Hán báo hiệu câu sách đang đoán nặng → không được gắn nhóm A (phồn + giản).
 _HAN_NANG = re.compile(r"[死夭亡絕绝剋克刑妨淫賤贱孤寡疾病災灾厄牢獄狱貧贫窮穷凶殺杀破敗败禍祸傷伤哭喪丧盜盗]")
 # Lời tiếng Việt không được dùng (đã có cách nói giảm thay thế — xem docs/KE-HOACH-NAP-SACH-XUA.md mục 2).
@@ -92,6 +94,12 @@ def van_nguon(ten: str) -> str:
     return chuan("".join(_chuoi(json.loads((_NGUON / f"{ten}.json").read_text("utf-8")))))
 
 
+@lru_cache(maxsize=None)
+def van_nguon_chinh_van(ten: str) -> str:
+    """Như `van_nguon` nhưng bỏ hẳn chú nhỏ 〔…〕 (lời chú của người chép / hiệu đính chen giữa câu) — chỉ còn chính văn."""
+    return chuan("".join(re.sub(r"〔[^〕]*〕", "", s) for s in _chuoi(json.loads((_NGUON / f"{ten}.json").read_text("utf-8")))))
+
+
 def kiem_muc(m: dict, vi_tri: str = "") -> list[str]:
     """Danh sách lỗi của một mục (rỗng = đạt)."""
     loi: list[str] = []
@@ -117,12 +125,22 @@ def kiem_muc(m: dict, vi_tri: str = "") -> list[str]:
             return loi
         if m["han"] != chuan(m["han"]):
             them("`han` còn dấu câu / khoảng trắng")
-        if chuan(m["han"]) not in van_nguon(m["nguon"]):
+        if m.get("han_kho"):
+            if chuan(m["han_kho"]) not in van_nguon(m["nguon"]):
+                them(f"`han_kho` «{m['han_kho']}» không có trong kho nguồn {m['nguon']}")
+            if chuan(m["han_kho"]) not in m["han"] or chuan(m["han"]) not in van_nguon_chinh_van(m["nguon"]):
+                them(f"«{m['han']}» không khớp chính văn kho nguồn {m['nguon']} (đã bỏ chú nhỏ) hoặc không chứa `han_kho`")
+        elif chuan(m["han"]) not in van_nguon(m["nguon"]):
             them(f"«{m['han']}» không có trong kho nguồn {m['nguon']}")
     for k, n in _GIOI_HAN.items():
         if len(m.get(k) or "") > n:
             them(f"`{k}` dài quá {n} ký tự")
     tran = _TEN_RIENG.sub("", m.get("han") or "")
+    # `a_phu_dinh: true` — người duyệt xác nhận chữ nặng chỉ nằm trong vế phủ định của câu khen (不憂貧, 無禍亦無災, 不為凶):
+    # vẫn cho nhóm A, nhưng MỌI chữ nặng phải có chữ phủ định (不無免莫) trong vòng hai chữ trước / sau nó.
+    if m.get("a_phu_dinh") and all(re.search(r"[不無无免莫]", tran[max(0, x.start() - 2): x.end() + 2])
+                                     for x in _HAN_NANG.finditer(tran)):
+        tran = ""
     if m["nhom"] == "A" and _HAN_NANG.search(tran):
         them(f"câu sách có chữ nặng «{_HAN_NANG.search(tran).group()}» mà gắn nhóm A — phải là B hoặc C")
     if m["nhom"] in ("B", "C"):

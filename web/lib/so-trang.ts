@@ -279,6 +279,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Bản khắc gỗ Thần Tướng Toàn Biên: 12 cung, 13 bộ vị, lưu niên 1–100 tuổi, nốt ruồi nam nữ, tam đình lục phủ — chạm vào chữ khắc để đọc nghĩa tiếng Việt.",
     loi_dan: "Bản khắc gỗ giữ nguyên, phủ thêm điểm chú giải: chạm vào chữ khắc để đọc âm Hán Việt và nghĩa bằng lời thường.",
   } },
+  { duong: "/chi-tay", nhom: "tinh", ten: "Xem chỉ tay theo sách xưa", o: O_TINH, mac_dinh: {   // chỉ tay quyển 10 Toàn Biên
+    tieu_de_seo: "Xem chỉ tay theo sách xưa: 67 hình vân tay có chú giải", h1: "Xem chỉ tay theo sách xưa",
+    mo_ta_seo: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung trên bản khắc gỗ và trên ảnh tay bạn (ảnh không rời máy), 67 hình vân kèm nguyên văn, lời dễ hiểu.",
+    loi_dan: "Chụp lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc ngửa tay ra chỗ sáng, chọn hình vân giống tay mình để đọc sách xưa nói gì.",
+  } },
   { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm: Tết ngày nào, năm nào nhuận?",
     mo_ta_seo: "Lịch âm Việt Nam từng năm: ngày Tết, năm có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu. Kèm công cụ đổi ngày âm dương.",

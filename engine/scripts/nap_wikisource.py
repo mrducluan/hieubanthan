@@ -171,5 +171,6 @@ if __name__ == "__main__":
         if d is None:
             print(f"{ma}: CHƯA có tệp thô — bỏ qua")
             continue
-        (NGUON / f"{ma}.json").write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", "utf-8")
+        from bo_dau_cau_kho_nguon import _sua as bo_dau_cau   # kho nguồn không giữ dấu câu thời nay (CC BY-SA của người gõ)
+        (NGUON / f"{ma}.json").write_text(json.dumps(bo_dau_cau(d), ensure_ascii=False, indent=1) + "\n", "utf-8")
         print(f"{ma}: {len(d['thien'])} thiên, {sum(len(t['van']) for t in d['thien'])} chữ")
