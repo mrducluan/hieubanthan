@@ -143,14 +143,16 @@ def _cau(m: dict) -> str:
     return f"{sg.loi(m, co_am=False)}{viec}"
 
 
-def gan(goi: dict, cac: list[tuple[dict, str]]) -> None:
-    """Ghi các mục đã chọn vào gói (khoá riêng `sach_ghi_hoi`, ngoài `muc`) để `chen` dựng đoạn + "Vì sao nói vậy"."""
+def gan(goi: dict, cac: list[tuple[dict, str]], nhan_trong_bai: bool = False) -> None:
+    """Ghi các mục đã chọn vào gói (khoá riêng `sach_ghi_hoi`, ngoài `muc`) để `chen` dựng đoạn + "Vì sao nói vậy".
+    `nhan_trong_bai`: câu kiến thức (không lá số) — nhãn "về điều gì" đứng ngay đầu đoạn, không có "Vì sao nói vậy"."""
     if not cac or not ngon_ngu.la_viet():
         return
     goi["sach_ghi_hoi"] = {
-        "doan": [_cau(m) for m, _ in cac],
+        "doan": [f"{ve}: {_cau(m)}" if nhan_trong_bai else _cau(m) for m, ve in cac],
         "cau_ket": sg.cau_ket([m for m, _ in cac]),
-        "can_cu": [f"Sách xưa ({sgm.SACH.get(m['nguon'], 'sách xưa')}) — {ve}" + (f": «{m['han']}»" if m.get("han") else "")
+        "can_cu": [] if nhan_trong_bai else
+                  [f"Sách xưa ({sgm.SACH.get(m['nguon'], 'sách xưa')}) — {ve}" + (f": «{m['han']}»" if m.get("han") else "")
                    for m, ve in cac],
         "muc": [{"ve": ve, "nhom": m["nhom"], "chu_de": m["chu_de"], "nguon": m["nguon"]} for m, ve in cac],
     }
@@ -210,7 +212,7 @@ def tuvi_kien_thuc(goi: dict, sao: str, cung: str, tuoi: int | None) -> None:
     ds = (sgm._kb("tuvi_sach_ghi.json")["muc"].get(sao) or {}).get(cung) or []
     cac = [(m, f"Sao {sao} ở cung {cung}" + (f" · {sgm._KHI_TV[m['khi']]}" if m.get("khi") in sgm._KHI_TV else ""))
            for m in ds]
-    gan(goi, chon([(cung, cung, cac)], None, tuoi, toi_da=3))
+    gan(goi, chon([(cung, cung, cac)], None, tuoi, toi_da=3), nhan_trong_bai=True)
 
 
 def battu(goi: dict, ls: dict, t: str, tuoi: int | None, gioi: str | None, ten_nhac: list[str]) -> None:
