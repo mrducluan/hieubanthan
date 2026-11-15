@@ -111,3 +111,17 @@ def test_so_trong_doan_sach_qua_bo_kiem_dau_ra():
     for cau in ("Tài lộc của tôi thế nào?", "Cung Mệnh của tôi nói gì?", "Tình duyên của tôi ra sao?"):
         kq = tuvi.tra_loi(cau, "tham_khao", TV, XEM)
         assert hoi_van.kiem_tra_dau_ra(kq["cau_tra_loi"], kq["bang_chung"]) == [], cau
+
+
+def test_thuoc_lo_ban_dinh_tuyen_va_khong_nhac_lai_cau_sach():
+    """SX-D (Dương Trạch Thập Thư phần còn lại): câu hỏi kích thước cửa / thước Lỗ Ban → mục bố trí riêng; câu sách đã
+    trích trong lời mục thì đoạn "Sách xưa ghi gì" không nhắc lại, cũng không lấy điều dặn theo cung mệnh thế chỗ."""
+    for cau in ("Thước Lỗ Ban là gì?", "Kích thước cửa chính bao nhiêu là đẹp?", "Cửa phòng ngủ rộng bao nhiêu thì hợp?"):
+        kq = phongthuy.tra_loi(cau, sinh=PT, ngay_xem=XEM)
+        assert kq["phan_loai"]["loai"] == "bo_tri", cau
+        assert kq["cau_tra_loi"].count("一切門窗通氣之處") == 1 and not _s(kq), cau
+
+
+def test_can_ho_nhan_cau_chia_khu_tinh_rieng():
+    kq = phongthuy.tra_loi("Nhà ở chung cư thì xem hướng cửa nào?", sinh=PT, ngay_xem=XEM)
+    assert any("牆隔斷" in d for d in _s(kq)["doan"])

@@ -100,7 +100,7 @@ Thần Tướng Toàn Biên quyển 10 có 102 mục về bàn tay (luận tay, 
 | Tử vi | Khối "Sách xưa nói gì về lá số của bạn" mở cho cả câu nhóm B, C | sao ở cung | trang sao ở cung |
 | Bát tự | như trên | thần sát, lục thân | trang thập thần |
 
-## 7. Trạng thái (cập nhật 15/11/2026)
+## 7. Trạng thái (cập nhật 15/11/2026, sau SX-D)
 
 | Việc | Trạng thái |
 |---|---|
@@ -115,8 +115,10 @@ Thần Tướng Toàn Biên quyển 10 có 102 mục về bàn tay (luận tay, 
 | Lớp phủ đồ hình `/nhan-tuong/do-hinh`: 6 bản khắc (12 cung, 13 bộ vị, lưu niên, nốt ruồi nam / nữ, tam đình lục phủ), 233 điểm đo trên ảnh thật | xong |
 | Hỏi đáp Tử vi / Bát tự / Phong thuỷ dùng lớp sách mới (SX-H) | xong — `hoidap/sach_ghi_hoi.py`: ≤ 2 câu theo chủ đề + phạm vi câu hỏi, không vào gói gửi AI; độ phủ đo bằng `scripts/do_sach_ghi_hoi.py` (Tử vi ~45 %, Bát tự 43–60 %, Phong thuỷ ~63 % câu về bản thân) |
 | QC 15/11: câu khoanh địa chi chỉ hiện ở cung đúng chi; Bát tự chỉ điều kiện kiểm được; Tam Yếu nói giảm "chịu thiệt / sa sút" (~80 câu); thai sản, tên chứng hay gặp dạng gợi ý (SX-C2) | xong |
-| Khí sắc (Toàn Biên quyển 13–14), cách cục – xương thịt – dáng (quyển 3, 5, 11–12) | chưa làm |
-| Dương Trạch Thập Thư phần còn lại (mở cửa, thước cửa, thoát nước, xuyên cung) | chưa làm |
+| Khí sắc (Toàn Biên quyển 13–14) | xong (SX-D) — 6 nét sắc mặt / ánh mắt của khảo sát có câu sách: sáng nhuận, xỉn tối, khô sạm, ba thứ sắc vàng / trắng / đỏ "còn khí – kém" (nhóm C, kèm đi khám), thần gấp; lời dặn xem sắc lúc sáng sớm. Phép "đoán ngày theo sắc từng bộ vị" (khí sắc xuất một) không nạp — toàn câu đoán việc, không có dữ kiện để chọn |
+| Xương thịt – dáng – ngũ hình – giọng (Toàn Biên quyển 1, 3, 5, 10) | xong (SX-D) — 14 nét khảo sát: xương thịt (相骨肉), dáng đi / ngồi (相行論, 相坐), ngũ hình Kim Mộc Thuỷ Hoả Thổ (五行象說), giọng (論聲). Không nạp: phép so dáng với cầm thú ("rùa đi, rắn đi…" — đoán tính nết thô), "hình có dư / không đủ" (đoán thọ yểu cả bài) |
+| Cách cục tướng (quyển 3: các "格") | chưa làm — phần lớn là đoán sang hèn theo một nét, cần đối chiếu từng cách với nét khảo sát |
+| Dương Trạch Thập Thư phần còn lại | xong (SX-D) — mở cửa (cửa là chỗ khí ra vào, đổi cửa là việc lớn, tránh thứ đâm thẳng), thước Lỗ Ban (mục bố trí mới `thuoc_lo_ban`, hỏi đáp "kích thước cửa" không còn rơi sang hướng cá nhân), thoát nước (xem nước trước, nước sân một lối), bếp (火唵說, kèm khối "Cửa, phòng chính và bếp"), chia khu nhiều cửa (chung cư). Không nạp: chọn ngày sửa cửa, bùa trấn (quyển 678), phép xuyên cung theo tầng |
 | Bàn tay `/chi-tay` (mục 5) | chưa làm — cần hình bàn tay từ `assets/diagrams` |
 | Bản tiếng Anh của lớp sách | chưa làm (khối chỉ có ở bản Việt) |
 | Soát dấu câu các kho Wikisource nạp trước (Băng Giám, Tăng San Bốc Dịch, Cốt Tuỷ Phú) | chưa làm |

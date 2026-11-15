@@ -1559,6 +1559,39 @@
      "lam": "Chống thấm lại tường nhà vệ sinh, bọc cách âm ống nước khi sửa nhà."
     }
    ]
+  },
+  "thuoc_lo_ban": {
+   "tieu_de": "Kích thước cửa theo thước Lỗ Ban",
+   "noi_dung": "Dương Trạch Thập Thư chép thước Lỗ Ban dùng đo cửa, cửa sổ và cả giường, tủ: mặt thước chia tám cung, bốn cung tốt (Tài, Nghĩa, Quan, Cát) xen bốn cung kém; đo cả chiều cao lẫn chiều rộng sao cho rơi vào cung tốt.",
+   "goi_y": "Chọn kích thước theo công năng trước: người đi lại thoải mái, đồ đạc khiêng lọt, đủ sáng và gió. Nếu muốn theo tập quán, nhờ thợ chỉnh vài phân cho số đo rơi vào cung tốt mà không làm cửa chật hơn.",
+   "nguon": "co_thu",
+   "tu_khoa": [
+    "lo ban",
+    "kich thuoc (cua|canh cua|o cua)",
+    "(do|chon|tinh) kich thuoc",
+    "cua [a-z ]{0,15}(cao|rong) bao nhieu"
+   ],
+   "giai_thich_hien_dai": "Thước Lỗ Ban là tập quán của thợ mộc để chọn kích thước cửa, đồ gỗ cho cân đối. Các loại thước đang bán chia cung khác nhau nên cùng một cửa có thể đo ra cung khác nhau; điều chắc chắn hơn là cửa vừa tầm người dùng.",
+   "viec": [
+    {
+     "chi_phi": "khong_ton",
+     "lam": "Đo lại cửa đang có, thử xem đi lại, khiêng đồ có vướng không trước khi nghĩ tới chuyện đổi kích thước."
+    },
+    {
+     "chi_phi": "it_tien",
+     "lam": "Mượn thước Lỗ Ban loại thợ ở địa phương hay dùng để tham khảo khi đóng tủ, giường mới."
+    },
+    {
+     "chi_phi": "sua_chua",
+     "lam": "Khi làm cửa mới, chốt kích thước theo công năng với thợ trước, rồi mới chỉnh vài phân theo cung tốt nếu muốn."
+    }
+   ],
+   "sach": {
+    "han": "一切門窗通氣之處縱量橫量皆合吉星為妙",
+    "trich": "Nhất thiết môn song thông khí chi xứ, tung lượng hoành lượng giai hợp cát tinh vi diệu.",
+    "y": "Mọi cửa, cửa sổ đều đo cả chiều dọc lẫn chiều ngang, rơi vào cung tốt là đẹp.",
+    "nguon": "duong_trach_thap_thu"
+   }
   }
  },
  "am_trach": {

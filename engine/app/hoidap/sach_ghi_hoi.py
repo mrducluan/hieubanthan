@@ -243,5 +243,10 @@ def phongthuy(goi: dict, t: str, sinh: dict | None, tuoi: int | None) -> None:
     if not dau_hieu and not quai:
         return
     nhom = sgm.phongthuy_nhom(quai=quai, dau_hieu=dau_hieu or None)
+    # Câu sách đã trích ngay trong lời mục bố trí (KT-PT1, trường `sach`) thì không nhắc lại ở đoạn sách xưa.
+    # Phạm vi chọn trước khi lọc: câu hỏi về một dấu hiệu mà câu sách duy nhất đã trích ở trên → không có đoạn,
+    # không lấy điều dặn theo cung mệnh (lạc đề) thế chỗ.
     pv = {"dau_hieu"} if dau_hieu and any(ma == "dau_hieu" and ds for ma, _, ds in nhom) else {"cung_menh"}
+    da = {m["sach"]["han"] for m in muc if isinstance(m.get("sach"), dict) and m["sach"].get("han")}
+    nhom = [(ma, ten, [(m, ve) for m, ve in ds if m.get("han") not in da]) for ma, ten, ds in nhom]
     gan(goi, chon(nhom, chu_de(t) or ["nha_cua"], tuoi, pv))

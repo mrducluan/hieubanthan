@@ -206,8 +206,12 @@ def test_tam_yeu_du_64_nha_64_bep_va_du_nien_khop_phep_tinh():
 def test_phongthuy_cua_chu_bep_lay_tam_yeu():
     k = sgm.phongthuy(cua="Càn", chu="Đoài", bep="Khôn", tuoi=40)
     n = next(x for x in k["nhom"] if x["ma"] == "cua_chu_bep")
-    assert len(n["muc"]) == 2 and all(m.get("tom_y") and "han" not in m and m["sach"] == "Dương Trạch Tam Yếu" for m in n["muc"])
-    assert "Sinh Khí" in n["muc"][0]["ve"]
+    ty, thap = n["muc"][:2], n["muc"][2:]
+    assert all(m.get("tom_y") and "han" not in m and m["sach"] == "Dương Trạch Tam Yếu" for m in ty)
+    assert "Sinh Khí" in ty[0]["ve"]
+    # Thập Thư (火唵說) đi kèm khi biết bếp: bếp ở phương kém, nhường phương tốt.
+    assert [m["sach"] for m in thap] == ["Dương Trạch Thập Thư"] and "火唵" in thap[0]["han"]
+    assert all(x["ma"] != "cua_chu_bep" or len(x["muc"]) == 1 for x in sgm.phongthuy(cua="Càn", chu="Đoài", tuoi=40)["nhom"])
 
 
 def test_thai_san_va_ten_chung_chi_noi_dang_giu_gin():
@@ -237,3 +241,27 @@ def test_loi_sach_khong_cum_giong_ai_hay_chung_chung():
             for k in ("y", "ham_y", "viec"):
                 t = m.get(k) or ""
                 assert not kds.tim_cum_cam(t, cam) and not kds.tim_cum_cam(t, cum), (ten, vt, k)
+
+
+def test_khi_sac_toan_bien_q13():
+    """SX-D: sáu nét sắc mặt / ánh mắt của khảo sát có câu Thần Tướng Toàn Biên (quyển 13–14); năm nét sắc mặt kèm lời dặn
+    xem sắc lúc sáng sớm; câu sức khoẻ (nhóm C) có ý đi khám và không tới người chưa đủ 18 tuổi."""
+    kb = json.loads((DATA / "nhan_tuong_sach_ghi.json").read_text("utf-8"))["dac_diem"]
+    for ma in ("sac_sang", "sac_vang_xin", "sac_trang_bech", "sac_toi_sam", "sac_do_ung"):
+        assert any("雞鳴之後" in m["han"] for m in kb[ma]), ma
+        for m in kb[ma]:
+            if m["nhom"] == "C":
+                assert "khám" in m["viec"], ma
+        assert "C" not in {m["nhom"] for n in sgm.nhan_tuong([ma], 16)["nhom"] for m in n["muc"]}
+    assert kb["than_sac_gat"]
+
+
+def test_xuong_thit_dang_giong_ngu_hinh_toan_bien():
+    """SX-D: xương thịt (相骨肉), dáng đi / ngồi (相行論, 相坐), ngũ hình (五行象說), giọng nói (論聲) có câu sách; câu nói
+    về thọ (肉多骨少有祿無壽) là nhóm C có ý đi khám, không tới người chưa đủ 18 tuổi."""
+    kb = json.loads((DATA / "nhan_tuong_sach_ghi.json").read_text("utf-8"))["dac_diem"]
+    for ma in ("cot_nhuc_can", "cot_tro", "nhuc_nhao", "dang_vung", "dang_hap_tap", "dang_khom", "mat_vuong", "mat_dai",
+               "mat_tron", "mat_hoa", "mat_tho", "giong_tram", "giong_cao_nhanh", "giong_nho_yeu"):
+        assert kb[ma], ma
+    assert [m["nhom"] for m in kb["nhuc_nhao"]] == ["C"] and "khám" in kb["nhuc_nhao"][0]["viec"]
+    assert sgm.nhan_tuong(["nhuc_nhao"], 17) is None                  # chỉ có câu nhóm C → người chưa đủ 18 không có khối

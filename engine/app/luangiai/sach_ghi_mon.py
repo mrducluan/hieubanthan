@@ -261,6 +261,8 @@ def phongthuy_nhom(quai: str | None = None, dau_hieu: list[str] | None = None, c
                 cac.append((m, f"Cửa {cua}, phòng chính {chu} · {m['du_nien']}"))
             if bep and (m := ty["bep"].get(f"{bep}_{cua}")):
                 cac.append((m, f"Bếp {bep}, cửa {cua} · {m['du_nien']}"))
+            if bep:   # Dương Trạch Thập Thư (火唵說): bếp ở phương kém, nhường phương tốt
+                cac += [(m, "Chỗ đặt bếp") for m in _kb("phongthuy_sach_ghi.json")["dieu"] if m.get("kem") == "bep"]
             nhom.append(("cua_chu_bep", "Cửa, phòng chính và bếp", cac))
     return nhom
 
