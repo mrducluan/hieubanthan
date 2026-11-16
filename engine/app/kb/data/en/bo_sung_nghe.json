@@ -1,0 +1,956 @@
+{
+ "_trang_thai": "bien_tap",
+ "_nguon": "EN-ALL GĐ 7 — bản tiếng Anh do ban biên tập viết lại từ bản Việt (giữ nguyên số liệu, bảng, nguồn); chờ người bản xứ duyệt.",
+ "source": {
+  "ten": "Hieuban editorial team — Life Path numbers and careers (supplement)",
+  "mo_ta": "Compiled by the Hieuban editorial team from the knowledge base and popular Pythagorean numerology (editorial draft, awaiting expert review). Suggestions based on tendencies, with no guarantee of a job or income."
+ },
+ "trang": {
+  "so-1-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Management or specialist roles: which suits a 1 better?",
+     "doan": "A 1 usually does well when they decide part of the work themselves, whatever their job title. As an employee, they suit opening up new areas or running their own project. As a boss, they decide fast but tend to keep everything for themselves and delegate little. What they need to practise is letting their team do things their own way when the results are still fine."
+    },
+    {
+     "tieu_de": "Does running their own business suit a 1?",
+     "doan": "Many 1s like running their own business because they get to decide, but whether it works depends on capital, skills and the market. They are good at getting things started and weaker at keeping the pace after the first few months. Having a partner who handles operations, or testing small with a side project first, is usually safer than diving straight in."
+    },
+    {
+     "tieu_de": "The career weak spots of a 1, and how to work on them",
+     "doan": "A common weak spot of a 1 is impatience and difficulty accepting feedback from people they don't respect. They may leave a good place just because approvals are slow. Something to do this week: pick a colleague who is better than you in one area, ask for their feedback on a task and try following it."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit a 1: why they fit and what to watch",
+    "chu_thich": "A table of suggestions based on personality tendencies, for reference when choosing a direction. Your real skills, circumstances and interests are what decide.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Start-ups, small business",
+      "Setting your own direction and owning the results.",
+      "Often missing someone to keep the books and run operations; find a partner early."
+     ],
+     [
+      "Sales that opens new markets",
+      "Suits a proactive nature that isn't afraid of rejection.",
+      "Easily bored once the market is settled; ask for a new area to stay motivated."
+     ],
+     [
+      "Project management, team leadership",
+      "Decides fast and gets the team moving.",
+      "Tends to do the team's work for them; delegate with deadlines and let them do it."
+     ],
+     [
+      "Solutions design engineering",
+      "Loves finding ways nobody has tried.",
+      "Dislikes routine maintenance; needs a person or a process to cover that part."
+     ],
+     [
+      "Coaching, sport",
+      "Enjoys challenges and leading from the front.",
+      "Can push others to their own pace; ask about the learner's pace first."
+     ],
+     [
+      "Project-based freelancing",
+      "Sets their own hours and chooses work they believe in.",
+      "Income goes up and down; keep a few months' buffer."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does a public-sector job suit a 1?",
+     "dap": "It can, if the position has clear autonomy or is a new area. A 1 is usually frustrated when everything goes through many layers of approval."
+    },
+    {
+     "hoi": "What should a 1 study?",
+     "dap": "A 1 usually suits fields with room for initiative: management, engineering, marketing, business law. Real interests and abilities are still what decide."
+    },
+    {
+     "hoi": "Why do 1s often change jobs?",
+     "dap": "A 1 usually leaves when they can no longer decide things or don't respect their manager. Before quitting, ask whether you could get more authority where you are."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "The Pythagorean tradition links 1 with will and beginnings. Popular books on careers describe a 1 as suited to pathfinding roles, stepping forward to take responsibility."
+    }
+   ],
+   "y_chinh": [
+    "A 1 suits roles where they decide part of the work",
+    "Good at starting; needs someone to keep operations running",
+    "As a boss, keeps everything; practise delegating with deadlines",
+    "This week: ask for feedback from someone better than you"
+   ]
+  },
+  "so-2-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Can a 2 lead a team?",
+     "doan": "Yes, especially in a style of management that listens and keeps the team close. As bosses, 2s are often liked by their staff for being fair and understanding. The hard part is saying no, giving direct feedback or letting someone go. Practising those conversations with a short script helps a 2 avoid dodging them."
+    },
+    {
+     "tieu_de": "What is a 2 like as a team member?",
+     "doan": "A 2 is often the one who keeps the team running smoothly: reminding people of deadlines, linking the different sides, covering when others are busy. They are rarely the loudest voice in the meeting. The shadow side is effort nobody names, which nobody clearly remembers at review time. Try this week: write down three things you did and send a summary to your manager."
+    },
+    {
+     "tieu_de": "The career weak spots of a 2, and how to work on them",
+     "doan": "A 2's weak spot is finding it hard to say 'no' and taking on more than they can handle out of politeness. They also shy away from asking for a raise. One way through is to prepare figures on your work first, then talk about pay; with the paperwork in hand, a 2 finds it easier to start the conversation."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit a 2: why they fit and what to watch",
+    "chu_thich": "The career groups below fit the 2's cooperative tendency. These are suggestions for reference and don't replace actually trying and learning a trade.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "HR, recruitment",
+      "Understands people and keeps the team atmosphere good.",
+      "Can take on other people's personal problems; set limits on listening time."
+     ],
+     [
+      "Customer care",
+      "Patient, able to listen even to someone who is angry.",
+      "Can take customers' emotions home; build a habit of unwinding after work."
+     ],
+     [
+      "Assistant, coordinator",
+      "Remembers details and links the different sides smoothly.",
+      "Lots of unnamed tasks; ask for a clear job description."
+     ],
+     [
+      "Negotiation, diplomacy",
+      "Finds common ground between two sides.",
+      "Shies away from holding a firm position; prepare your bottom line in advance."
+     ],
+     [
+      "Counselling, social work",
+      "Listens deeply and makes others feel safe.",
+      "Needs proper professional training and clinical supervision."
+     ],
+     [
+      "Music, subtle arts",
+      "Sensitive to nuance and small details.",
+      "Shy about self-promotion; get help from others with the introductions."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does business suit a 2?",
+     "dap": "A 2 usually suits a business with partners, or a service that rewards dedication. Standing alone in a role that means squeezing prices or chasing debts usually wears them out."
+    },
+    {
+     "hoi": "Does a 2 work better from home or in an office?",
+     "dap": "A 2 usually needs people around to find their rhythm. Working from home can still work if they stay in regular contact with the team."
+    },
+    {
+     "hoi": "How can a 2 find the courage to ask for a raise?",
+     "dap": "Prepare a list of what you have done, concrete figures and the amount you want, then book a time to talk. With the material ready, a 2 feels less like they are being a nuisance."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "The Pythagorean tradition links 2 with cooperation and balance between two sides. Popular books describe a 2 as doing well in roles that connect people, rather than standing alone."
+    }
+   ],
+   "y_chinh": [
+    "A 2 suits linking the sides and keeping a team close",
+    "Can be a boss: fair, understanding, needs to practise hard conversations",
+    "Unnamed effort: write it down and send a summary to your manager",
+    "Asking for a raise: prepare the figures before you speak"
+   ]
+  },
+  "so-3-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Does business suit a 3?",
+     "doan": "A 3 usually does well at selling, telling the brand's story and pulling in customers. The books, stock and taxes are easily forgotten. Whether business suits them depends on capital and the market too; for a 3, having someone who looks after the numbers helps an idea last longer."
+    },
+    {
+     "tieu_de": "What career should a 3 choose now that so much work uses AI?",
+     "doan": "A 3 usually suits the parts of work a machine struggles to do: understanding an audience, telling stories with feeling, standing in front of people. Writing and design still need someone with taste who knows how to choose. Learn the new tools to speed up the rough work, then put your energy into ideas and communication."
+    },
+    {
+     "tieu_de": "The career weak spots of a 3, and how to work on them",
+     "doan": "A common weak spot is starting a lot and finishing little, and losing interest at the editing stage. From the outside, a 3 looks talented but short on finished work. Try this week: pick one unfinished task, split it into three small steps and finish the first one before the weekend."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit a 3: why they fit and what to watch",
+    "chu_thich": "A 3 usually suits work with an audience, with words or images. The table is a suggestion for reference; real ability and opportunity are still what decide.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Communications, content creation",
+      "Has fresh ideas and knows how to say things the way listeners like.",
+      "Easily chases trends; stay with one topic long enough to build depth."
+     ],
+     [
+      "Journalism, writing, scriptwriting",
+      "Writes with rhythm and a voice of their own.",
+      "Deadlines slip easily; split big pieces into small parts with their own deadlines."
+     ],
+     [
+      "Teaching, training",
+      "Makes classes lively and memorable.",
+      "Prepare the dry parts carefully; don't rely only on improvising."
+     ],
+     [
+      "Design, performance",
+      "Sensitive to beauty and to how the audience reacts.",
+      "Income is uneven; keep a steady income source alongside."
+     ],
+     [
+      "Consultative sales",
+      "Builds rapport easily and tells a product's story in a compelling way.",
+      "Tends to over-promise; write down what you have promised each customer."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does office work suit a 3?",
+     "dap": "It does if the work involves communicating, presenting or creating. A job of entering the same data all day usually drains a 3 quickly."
+    },
+    {
+     "hoi": "What is a 3 like as a boss?",
+     "dap": "As a boss, a 3 usually spreads enthusiasm and keeps the team cheerful. They need a deputy or a process to track progress, because a 3 easily misses details."
+    },
+    {
+     "hoi": "Why do 3s often leave things unfinished?",
+     "dap": "The new part appeals to a 3 more than the finishing. When work moves to the editing stage, the excitement drops, so they need deadlines and someone working alongside them."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "The Pythagorean tradition links 3 with expression and creativity. Popular books describe a 3 as suited to work with an audience, with words, images or stories."
+    }
+   ],
+   "y_chinh": [
+    "A 3 suits work with an audience: writing, speaking, design, sales",
+    "Business: good at drawing customers, needs someone to handle the numbers",
+    "Use new tools for the rough work, save energy for ideas",
+    "This week: split one unfinished task into three steps, finish the first"
+   ]
+  },
+  "so-4-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Does a 4 suit a management seat or a hands-on one?",
+     "doan": "A 4 usually suits middle management: taking the goal, building the process, keeping the team doing it right. As employees, they are the ones trusted with important work. As bosses, a 4 is fair but can be seen as strict; explaining the reason behind each rule makes it easier for the team to follow."
+    },
+    {
+     "tieu_de": "What should a 4 do when they want to change careers?",
+     "doan": "A 4 usually changes careers slowly and only after careful calculation. That is a strength, but it also keeps them too long in work that no longer fits. Instead of waiting until they feel completely secure, a 4 can take a short course or a small project in the new field to try it first."
+    },
+    {
+     "tieu_de": "The career weak spots of a 4, and how to work on them",
+     "doan": "A 4's weak spot is sticking to old methods and shying away from work without instructions. When their field changes fast, they can feel left behind. Something to do this week: spend one session learning about a new tool in your field and write down one place you could use it."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit a 4: why they fit and what to watch",
+    "chu_thich": "A 4 usually suits work that needs precision and persistence. The table is a suggestion based on tendencies, not a required list.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Accounting, auditing",
+      "Careful with figures, keeps procedures steady.",
+      "Year-end closing can overload them; schedule time off to make up for it in advance."
+     ],
+     [
+      "Construction, civil engineering",
+      "Likes to see tangible results and work to a plan.",
+      "Can get rigid when the design changes; ask why it changed instead of objecting."
+     ],
+     [
+      "Operations, supply chain",
+      "Good at building systems that run smoothly.",
+      "Barely noticed when everything is fine; report results regularly."
+     ],
+     [
+      "Programming, data",
+      "Thinks step by step and copes well with detailed work.",
+      "Technology changes fast; set aside study time every week."
+     ],
+     [
+      "Administration, legal compliance",
+      "Reads carefully and sticks to the rules.",
+      "Can end up with the whole department's paperwork; be clear about the scope of your own job."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does running their own business suit a 4?",
+     "dap": "A 4 usually suits stable models with clear processes, such as services or small-scale production. They need to practise accepting some risk that can't be calculated in advance."
+    },
+    {
+     "hoi": "Do 4s get bored at work?",
+     "dap": "A 4 copes with repetition far better than most numbers. But doing the same thing forever without learning anything new, they can feel they are standing still."
+    },
+    {
+     "hoi": "What should a 4 learn next?",
+     "dap": "A 4 usually benefits from learning presentation skills and one new tool in their field. Both help their steady effort get noticed."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "The Pythagorean tradition links 4 with foundations and order. Popular books describe a 4 as doing well in work that needs precision, persistence and process."
+    }
+   ],
+   "y_chinh": [
+    "A 4 suits building processes and safeguarding quality",
+    "A fair boss; explaining reasons makes them seem less strict",
+    "Changing careers: try a short course or small project first",
+    "This week: learn about one new tool in your field"
+   ]
+  },
+  "so-5-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Does business suit a 5?",
+     "doan": "A 5 usually has a nose for opportunity, sells well and likes trying new models. They suit businesses with plenty of meeting people and travel. The shadow side is dropping an old model before it has had time to turn a profit. Set a trial period in advance, say six months, before deciding whether to stop or go on."
+    },
+    {
+     "tieu_de": "Can a 5 work in an office?",
+     "doan": "Yes, if the work has variety: many projects, client meetings, business trips. Sitting in one place running one process all year usually makes a 5 restless. Asking to rotate projects or take on some outward-facing work helps them stay motivated without changing jobs."
+    },
+    {
+     "tieu_de": "The career weak spots of a 5, and how to work on them",
+     "doan": "A common weak spot is a lack of depth from changing jobs quickly, and saying yes to too much. A 5's CV is full of experience but short on long-term achievements. Try this week: write down one skill you want to get really good at in the next two years and pick one small task to practise it."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit a 5: why they fit and what to watch",
+    "chu_thich": "A 5 usually suits work with lots of movement and meeting people. The table is a suggestion for reference; no career guarantees income or success.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Travel, hospitality, aviation",
+      "Gets to travel and meet new people every day.",
+      "Irregular hours; keep your sleep and personal time steady."
+     ],
+     [
+      "Sales, business development",
+      "Talks compellingly and adapts fast.",
+      "Tends to promise a lot; write down your commitments to each client."
+     ],
+     [
+      "Journalism, media",
+      "Loves news and copes with a rushed pace.",
+      "Spreads too thin easily; pick one beat to follow for the long term."
+     ],
+     [
+      "Event organising, entertainment",
+      "Handles situations well when everything changes at the last minute.",
+      "Work comes in seasons; save for the quiet months."
+     ],
+     [
+      "Freelancing, online business",
+      "Sets their own hours and chooses projects.",
+      "Income goes up and down; set aside a buffer before spending."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Should a 5 go freelance?",
+     "dap": "Freelancing fits a 5's need for autonomy. What it takes is financial discipline and a minimum work schedule they set for themselves."
+    },
+    {
+     "hoi": "What is a 5 like as a boss?",
+     "dap": "As a boss, a 5 is usually flexible and open to new ideas. They need a good deputy to track progress so that changes don't throw the team into confusion."
+    },
+    {
+     "hoi": "Is it a problem for a 5 to change jobs a lot?",
+     "dap": "Not if each change adds a clear skill. It is only a problem when they change out of boredom and take nothing with them."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "The Pythagorean tradition links 5 with freedom, change and experience. Popular books describe a 5 as suited to work with lots of movement, lots of people and lots of new situations."
+    }
+   ],
+   "y_chinh": [
+    "A 5 suits work with change, travel and meeting people",
+    "Business: set a trial period before dropping a model",
+    "In an office: ask to rotate projects instead of changing jobs",
+    "This week: pick one skill to master within two years"
+   ]
+  },
+  "so-6-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "What is a 6 usually like when managing a team?",
+     "doan": "As bosses, 6s are usually like an older sibling: looking after the team and remembering each person's circumstances. Staff feel cared for. The shadow side is that a 6 finds it hard to deal with someone who is underperforming, and often does the work for them and wears themselves out. Keeping caring for people separate from judging results helps a 6 be fair to the whole team."
+    },
+    {
+     "tieu_de": "Does business suit a 6?",
+     "doan": "A 6 usually suits service businesses built around people: a coffee shop, classes, beauty, home care. Customers come back for the dedication. The hardest part for a 6 is pricing: they often undercharge or throw in extras. Writing a price list from the start and sticking to it helps avoid doing a lot for little profit."
+    },
+    {
+     "tieu_de": "The career weak spots of a 6, and how to work on them",
+     "doan": "A 6's weak spot is taking on work because they can't bear to refuse, until they are overloaded. They also shy away from talking about their own pay and conditions. Try this week: when someone asks you to do something outside your role, answer 'let me check my schedule and get back to you' instead of agreeing straight away."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit a 6: why they fit and what to watch",
+    "chu_thich": "A 6 usually suits work caring for people and making living spaces beautiful. The table is a suggestion based on tendencies; choosing a career also depends on ability and circumstances.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Education, early years",
+      "Patient, able to look after each learner.",
+      "Easily takes work home; set a stopping time for marking and lesson planning."
+     ],
+     [
+      "Nursing, care work",
+      "Devoted and attentive to what others need.",
+      "Heavy shifts; take your breaks, and follow the profession's own rules on clinical matters."
+     ],
+     [
+      "Counselling, social work",
+      "Listens and wants others to do well.",
+      "Can take on other people's problems; needs limits and professional supervision."
+     ],
+     [
+      "Interior design, beauty",
+      "Has an eye for beauty and likes making spaces pleasant.",
+      "Tends to over-accommodate clients; set out scope and price clearly from the start."
+     ],
+     [
+      "Food, restaurants",
+      "Loves feeding people well.",
+      "Long hours; needs someone to handle the books and costs."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does freelancing suit a 6?",
+     "dap": "It can, especially care services or private tutoring. They need clear contracts or agreements so they don't end up working extra for free."
+    },
+    {
+     "hoi": "Why do 6s often get given a lot of work?",
+     "dap": "Because a 6 usually says yes and does it well, so people get used to asking. Being clear about the scope of your own job is how you keep your energy over the long run."
+    },
+    {
+     "hoi": "What field should a 6 choose straight out of school?",
+     "dap": "A 6 usually finds meaning in fields built around people, such as education, services or design. An internship helps them find out whether they prefer caring for people or making things beautiful."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "The Pythagorean tradition links 6 with responsibility, care and harmonious beauty. Popular books describe a 6 as suited to work serving people and families."
+    }
+   ],
+   "y_chinh": [
+    "A 6 suits caring work: teaching, service, beauty, food",
+    "As a boss, like an older sibling; keep care and assessment separate",
+    "Business: write a price list from the start and stick to it",
+    "This week: say 'let me check my schedule' before taking on work"
+   ]
+  },
+  "so-7-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Should a 7 move into management or follow the expert path?",
+     "doan": "A 7 usually suits the expert path more than managing a large team. They are good at answering hard questions and have little enthusiasm for meetings, motivating people and handling conflict. If they become a boss, a 7 suits leading a small team of very capable people, with a deputy who handles the people side."
+    },
+    {
+     "tieu_de": "Can a 7 run a business?",
+     "doan": "Yes, especially a business built on expertise: consulting, software, products that need careful research. The hard part is selling and self-promotion. Having a partner who handles sales, or writing regular pieces that share knowledge so customers find them, suits a 7 better than cold-calling."
+    },
+    {
+     "tieu_de": "The career weak spots of a 7, and how to work on them",
+     "doan": "A common weak spot of a 7 is distrusting others and keeping ideas in their head for too long. Colleagues may find them distant. Try this week: present a half-finished idea to someone you trust and ask them for one counter-argument."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit a 7: why they fit and what to watch",
+    "chu_thich": "A 7 usually suits specialist work where they can think long and work carefully. The table is a suggestion for reference; a number doesn't decide anyone's career.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Research, academia",
+      "Loves digging to the root of a question.",
+      "Can be perfectionist and slow to publish; set a deadline for the draft."
+     ],
+     [
+      "Data analysis, technology",
+      "Sees patterns others miss.",
+      "Reluctant to explain to non-specialists; practise one-page summaries."
+     ],
+     [
+      "Law, inspection, assessment",
+      "Reads closely, spots the gaps, keeps arguments tight.",
+      "Can come across as hard to please; mention what is good before what needs fixing."
+     ],
+     [
+      "Feature writing, editing",
+      "Brings depth and accuracy.",
+      "Can keep writing without finishing; limit the number of revisions."
+     ],
+     [
+      "Strategy consulting",
+      "Analyses complex situations calmly.",
+      "Needs to persuade decision-makers; practise short presentations."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does remote work suit a 7?",
+     "dap": "Usually, because a 7 works well in quiet with few interruptions. They need to keep the team updated so their effort doesn't go unseen."
+    },
+    {
+     "hoi": "Do 7s suit jobs that involve communication?",
+     "dap": "A 7 can do well in work that needs deep communication, such as interviewing or specialist teaching. It is constant small talk that drains them."
+    },
+    {
+     "hoi": "Why do 7s often leave when they think the boss isn't good?",
+     "dap": "A 7 finds it hard to work under someone they don't respect professionally. Before leaving, try to find a capable mentor inside or outside the company."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "The Pythagorean tradition links 7 with reflection, contemplation and truth. Popular books describe a 7 as suited to specialist roles where they can think long and work carefully."
+    }
+   ],
+   "y_chinh": [
+    "A 7 suits the expert path more than managing a big team",
+    "Business built on expertise; needs someone to handle sales",
+    "Write regularly to share knowledge so customers find you",
+    "This week: present a half-finished idea to someone you trust"
+   ]
+  },
+  "so-8-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "What is the leadership style of an 8?",
+     "doan": "As bosses, 8s are usually decisive, set high targets and are good at allocating resources. Teams working with an 8 usually hit their numbers. The shadow side is that relentless pressure for results drives good people away. Asking the team one question each week, such as 'what is slowing you down?', helps an 8 spot bottlenecks before losing people."
+    },
+    {
+     "tieu_de": "Can an 8 work as an employee?",
+     "doan": "Yes, if there is a clear path to promotion and rewards based on results. As employees, 8s usually take on high targets and want to be given authority step by step. Where everyone is paid the same regardless of what they do, an 8 loses motivation quickly."
+    },
+    {
+     "tieu_de": "Do 8s find it easy to succeed in business?",
+     "doan": "No number guarantees success. An 8 often has the makings of a businessperson: spotting opportunities, daring to decide, coping with pressure. The risk is overconfidence. Before each big decision, write down the worst-case scenario and the loss you can bear, then ask someone with no stake in it for their view."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit an 8: why they fit and what to watch",
+    "chu_thich": "An 8 usually suits work with scale, targets and decision-making power. The table is a suggestion for reference; no career guarantees income.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Business management",
+      "Sees the big picture and the numbers.",
+      "Can overlook how the team feels; have someone look after company culture."
+     ],
+     [
+      "Finance, banking",
+      "Calm with large sums, good at weighing risk.",
+      "Can get swept up in quick profits; stick to the rules you have set."
+     ],
+     [
+      "Real estate",
+      "Negotiates well and waits patiently for the right moment.",
+      "The market moves in cycles; don't put all your capital in one place."
+     ],
+     [
+      "Business law",
+      "Understands the rules of money and contracts.",
+      "Can work for weeks without a break; keep fixed days off."
+     ],
+     [
+      "B2B sales, major partners",
+      "Confident in front of big clients.",
+      "Often takes on impossible targets; agree on the goal before accepting it."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Do 8s tend to overwork?",
+     "dap": "There is a tendency, especially when a goal is close. A fixed rest schedule, treated like a work appointment, helps an 8 keep going over the long run."
+    },
+    {
+     "hoi": "What field suits an 8 straight out of school?",
+     "dap": "An 8 usually suits fields with a clear career path: finance, management, B2B sales, law. A role with measurable targets helps them see their ability early."
+    },
+    {
+     "hoi": "Does a public-sector job suit an 8?",
+     "dap": "It can, in a management role or one with clear promotion. An 8 is usually frustrated when their contribution doesn't count in their appraisal."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "The Pythagorean tradition links 8 with power, wealth and the balance between gain and loss. Popular books describe an 8 as suited to executive and decision-making roles."
+    }
+   ],
+   "y_chinh": [
+    "An 8 suits executive roles with targets and results-based rewards",
+    "As a boss: ask the team about bottlenecks weekly to keep good people",
+    "No number guarantees business success",
+    "Before a big decision: write the worst case and the loss you can bear"
+   ]
+  },
+  "so-9-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "How does a 9 lead others?",
+     "doan": "As bosses, 9s usually lead through values: they can say why the work is worth doing. People follow them because they believe. The shadow side is that a 9 shies away from discipline and costs, which become problems if left too long. A deputy who handles operations and budget keeps a 9's vision from breaking off halfway."
+    },
+    {
+     "tieu_de": "Can a 9 run a business?",
+     "doan": "Yes, especially a business with a clear social purpose: eco-friendly products, education, the arts. A 9 struggles with holding prices and collecting payment. Setting a minimum profit from the start, and treating it as the condition for being able to keep helping people, makes a 9 less hesitant."
+    },
+    {
+     "tieu_de": "What about when a 9 wants to change careers?",
+     "doan": "A 9 usually changes careers when the old work no longer feels meaningful. They tend to leave abruptly, leaving a lot unfinished. Try this week: write down three things you want to keep from your old work and three you want from the new one, then talk to someone who already does that new work."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit a 9: why they fit and what to watch",
+    "chu_thich": "A 9 usually suits work that is useful to many people. The table is a suggestion for reference; income and opportunity depend on the field, the employer and your skills.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Education, training",
+      "Passes on conviction and a broad outlook.",
+      "Income can be low; think long term before accepting."
+     ],
+     [
+      "Non-profits, social work",
+      "Matches the wish to do useful work.",
+      "Can burn out from giving too much; keep days off and a fund of your own."
+     ],
+     [
+      "Art, literature, film",
+      "Sensitive to shared human emotion.",
+      "Work is uneven; keep a stable job alongside."
+     ],
+     [
+      "Diplomacy, international relations",
+      "Understands and respects many cultures.",
+      "Lots of travel; keep in regular touch with loved ones."
+     ],
+     [
+      "Consulting, mentoring",
+      "Sees the big picture of other people's situations.",
+      "Gives free advice easily; be clear about which parts you charge for."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does a big company suit a 9?",
+     "dap": "It can, if the department does clearly useful work such as training, corporate social responsibility or community relations. A 9 loses heart in a role that only chases sales."
+    },
+    {
+     "hoi": "Why do 9s often work for free?",
+     "dap": "A 9 usually sees helping people as more important than money. Setting a number of volunteering hours per month in advance helps them keep helping for longer."
+    },
+    {
+     "hoi": "What should a 9 study?",
+     "dap": "A 9 usually suits broad fields such as sociology, languages, education or the arts. Adding a practical skill such as project management makes it easier to find work."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "The Pythagorean tradition links 9 with completion and compassion. Popular books describe a 9 as suited to serving the community and to work with a broad vision."
+    }
+   ],
+   "y_chinh": [
+    "A 9 leads through values and needs someone to run operations",
+    "Business with a social purpose; set a minimum profit",
+    "Changing careers abruptly can leave work unfinished",
+    "This week: talk to someone already doing the new work"
+   ]
+  },
+  "so-11-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "Is an 11 different from a 2 at work?",
+     "doan": "Yes. 11 is the high-intensity version of 2: still good at cooperating and understanding people, but with stronger intuition and a need for meaningful work. So an 11 suits an inspiring role more than an assistant role, and can also get more stressed in fiercely competitive settings."
+    },
+    {
+     "tieu_de": "Does an 11 suit leading ideas or carrying out instructions?",
+     "doan": "An 11 usually suits leading on ideas: creative lead, content director, lead lecturer. Paperwork, targets and discipline drain them. Pairing up with a strong operations person is how many 11s manage to stay in a leadership role for the long run."
+    },
+    {
+     "tieu_de": "The career weak spots of an 11, and how to work on them",
+     "doan": "An 11's weak spot is moods that rise and fall with the atmosphere at work, and more vision than practical steps. Some weeks they work very hard, other weeks they barely move. Try this week: choose one idea, write down the smallest next step and do it before thinking up anything new."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit an 11: why they fit and what to watch",
+    "chu_thich": "An 11 is usually considered as a 2 at high intensity: still suited to cooperative work, but leaning towards work that needs intuition and meaning. The table is a suggestion for reference.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Counselling, psychotherapy",
+      "Senses what others haven't said yet.",
+      "Needs proper professional training, supervision and a limit on the caseload."
+     ],
+     [
+      "Teaching, public speaking",
+      "Can inspire a crowd.",
+      "Drained after each session; leave rest time free after speaking."
+     ],
+     [
+      "Music, design, the arts",
+      "Good intuition for beauty and emotion.",
+      "Very self-critical; ask someone you trust for feedback."
+     ],
+     [
+      "Communications for social causes",
+      "Tells stories that make people want to act.",
+      "Easily takes on too many campaigns; pick one main project each quarter."
+     ],
+     [
+      "Creative research, product development",
+      "Sees trends early and has lots of new ideas.",
+      "Short on follow-through; team up with someone good at planning."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does a competitive environment suit an 11?",
+     "dap": "An 11 can cope but gets drained faster than others. They usually do best where people compete on the quality of ideas rather than on sales pressure."
+    },
+    {
+     "hoi": "Should an 11 go freelance?",
+     "dap": "It can work, with discipline around schedule and money. Working alone for a long time, an 11 can miss feedback, so they need a group to talk things through with regularly."
+    },
+    {
+     "hoi": "Why do 11s often feel they haven't done enough?",
+     "dap": "Because an 11 sees a vision bigger than what they have achieved so far. Writing down what they have finished each week helps them see their real progress."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "In Pythagorean numerology, 11 is a master number, usually read as the high-intensity version of 2 and linked to intuition and the ability to inspire. Popular books describe an 11 as suited to work that gives people direction, but prone to stress."
+    }
+   ],
+   "y_chinh": [
+    "11 is the high-intensity 2 at work",
+    "Suits leading ideas; needs someone to run operations",
+    "This week: write the smallest next step of one idea",
+    "Write down what you finished each week to see real progress"
+   ]
+  },
+  "so-22-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "How is a 22 different from a 4 at work?",
+     "doan": "22 is the high-intensity version of 4: still good at systems and detail, but aiming at much bigger undertakings. A 4 keeps one process running well; a 22 wants to build a whole organisation. The pressure is therefore heavier too, and they can end up carrying several people's work."
+    },
+    {
+     "tieu_de": "How does a 22 run a team?",
+     "doan": "As bosses, 22s usually have multi-year plans and are good at turning ideas into processes. Their team sees the direction clearly. The shadow side is finding it hard to delegate for fear others won't meet the standard. Try this week: pick one task you still do yourself, write a one-page guide and hand it to someone else."
+    },
+    {
+     "tieu_de": "Does starting a business suit a 22?",
+     "doan": "A 22 usually suits long-horizon ventures that need systems: manufacturing, technology, social enterprise. But no number guarantees success. Starting smaller than the plan in your head, and keeping family money separate from the project's capital, is the way to last."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit a 22: why they fit and what to watch",
+    "chu_thich": "A 22 is usually considered as a 4 at high intensity: still suited to systems work, but leaning towards large, long-term undertakings. The table is a suggestion for reference.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Architecture, urban planning",
+      "Sees both the whole and the details of a project.",
+      "Projects run for years; set small milestones to see progress."
+     ],
+     [
+      "Running large organisations",
+      "Good at building machinery that runs smoothly.",
+      "Finds it hard to trust and delegate; build a team of deputies with real authority."
+     ],
+     [
+      "Systems engineering",
+      "Understands how the parts connect.",
+      "Perfectionism slows things down; accept a working version first and a polished one later."
+     ],
+     [
+      "Public policy",
+      "Thinks for the many and for the long term.",
+      "Lots of red tape; be patient and find like-minded people."
+     ],
+     [
+      "Social enterprise",
+      "Combines practical planning with a big purpose.",
+      "Capital can run out; check cash flow every quarter."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Do 22s often get overloaded?",
+     "dap": "There is a tendency, because a 22 takes on work according to their vision rather than their capacity. A weekly schedule with fixed free time helps them keep their pace."
+    },
+    {
+     "hoi": "Can a 22 work as an employee?",
+     "dap": "Yes, in a role with clear responsibility and a part in big projects. A 22 gets bored doing a small piece without seeing the whole picture."
+    },
+    {
+     "hoi": "What should a 22 learn next?",
+     "dap": "A 22 usually benefits from learning to delegate and to mentor others. That is what turns a big plan into something real."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "In Pythagorean numerology, 22 is a master number, usually read as the high-intensity version of 4 and linked to the master builder. Popular books describe a 22 as suited to turning a vision into a system."
+    }
+   ],
+   "y_chinh": [
+    "22 is the high-intensity 4 at work",
+    "Suits building organisations and long-term systems",
+    "This week: write a one-page guide, hand one task over",
+    "Starting a business: begin smaller than the plan in your head"
+   ]
+  },
+  "so-33-hop-nghe-gi": {
+   "muc": [
+    {
+     "tieu_de": "How is a 33 different from a 6 at work?",
+     "doan": "33 is the high-intensity version of 6: still suited to caring and teaching work, but wanting to help a whole community rather than a small group. Their demands on themselves are therefore higher, and they work beyond their hours and strength more easily than a 6."
+    },
+    {
+     "tieu_de": "Does a 33 suit a teacher's role or a target-driven management role?",
+     "doan": "A 33 usually suits the role of teacher or community leader more than managing targets. As bosses, they are loved for their dedication but often carry their staff's work. As employees, they are the whole department's support. In any role, a 33 needs to write down clearly where their own job ends."
+    },
+    {
+     "tieu_de": "Can a 33 run a business?",
+     "doan": "Yes, with models built around care: learning centres, care services, art classes. The hardest part is charging the right price. Try this week: write down what one session of your work is worth, compare it with the market rate, and fix your price list if you are charging much less."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Career groups that suit a 33: why they fit and what to watch",
+    "chu_thich": "A 33 is usually considered as a 6 at high intensity: still suited to caring for people, but on a community scale. The table is a suggestion based on tendencies.",
+    "cot": [
+     "Career group",
+     "Why it fits",
+     "What to watch"
+    ],
+    "dong": [
+     [
+      "Education, training",
+      "Patient, sees each person's progress.",
+      "Easily gives extra lessons for free; set clear hours for help outside class."
+     ],
+     [
+      "Nursing, therapy",
+      "Devoted to people who need help.",
+      "Long, draining shifts; rotate shifts and rest on time as the profession requires."
+     ],
+     [
+      "Non-profits, community work",
+      "Wants to make a difference to many people.",
+      "Can burn out by taking everything on; share the work with volunteers."
+     ],
+     [
+      "Coaching, counselling",
+      "Helps others grow.",
+      "Can take on clients' problems; keep limits on each session."
+     ],
+     [
+      "Art classes, creative workshops",
+      "Uses beauty to help others feel at ease.",
+      "Shy about money talk; publish prices in advance."
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Do 33s often work for free?",
+     "dap": "There is a tendency, because a 33 finds it hard to refuse someone who needs help. Setting a number of free support hours each month helps them keep helping for longer."
+    },
+    {
+     "hoi": "Does sales-target pressure suit a 33?",
+     "dap": "Usually not comfortably. A 33 does best where results are measured by the progress of the people being helped."
+    },
+    {
+     "hoi": "What career should a 33 choose straight out of school?",
+     "dap": "A 33 usually finds meaning in education, care services and social work. Trying out a few workplaces helps them see whether they prefer hands-on work or organising programmes."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "nghia": "In Pythagorean numerology, 33 is a master number, usually read as the high-intensity version of 6 and linked to the teacher and to care. Popular books describe a 33 as suited to supportive work, but prone to giving beyond their strength."
+    }
+   ],
+   "y_chinh": [
+    "33 is the high-intensity 6 at work",
+    "Suits the role of teacher and community leader",
+    "As a boss or an employee, write down where your job ends",
+    "This week: compare your price for one session with the market rate"
+   ]
+  }
+ }
+}

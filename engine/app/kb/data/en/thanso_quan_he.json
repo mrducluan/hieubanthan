@@ -1,0 +1,16 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 (trang kiến thức cặp số): mới phủ vai người yêu (nguoi_yeu) + nguồn. Các vai khác (bạn bè, đồng nghiệp, sếp, gia đình) chưa có bản Anh.",
+ "source": {"ten": "Reference compilation (editorial draft, 2026) following the Balliett–Jordan tradition and common numerology books", "luu_y": "Draft shown by decision of the project owner (2026-09-30); a status column allows gradual review. A cultural reference, not a forecast."},
+ "theo_so": {
+  "1": {"nguoi_yeu": {"vai": "Takes the lead, likes to set the pace of the relationship, shows love through protective action.", "can": "Respect for their decisions and some freedom of their own.", "tranh": "Giving orders or comparing them with others; hurting their pride in front of other people.", "cach_noi": "Be direct and brief; offer choices instead of demands."}},
+  "2": {"nguoi_yeu": {"vai": "Gentle, considerate, remembers the small details.", "can": "Reassurance that they are loved, through words and steady presence.", "tranh": "Cold silence, or joking about their feelings.", "cach_noi": "Gently, with questions; ask them yourself, 'what are you thinking?'."}},
+  "3": {"nguoi_yeu": {"vai": "Fun, romantic, full of surprises, good at making the other person laugh.", "can": "Praise, being listened to, and a relationship that doesn't get monotonous.", "tranh": "Calling them childish, or being cool about their ideas.", "cach_noi": "Show interest in their stories; raise serious topics when things are relaxed."}},
+  "4": {"nguoi_yeu": {"vai": "Faithful, reliable, shows love through concrete things they do.", "can": "Stability, consistency and clear plans.", "tranh": "Broken promises, sudden changes, taking what they do for granted.", "cach_noi": "Be specific and clear; thank them for the small things they do."}},
+  "5": {"nguoi_yeu": {"vai": "Magnetic, adventurous, brings a sense of something new.", "can": "Freedom, trust and shared experiences.", "tranh": "Control, jealousy, holding on too tight.", "cach_noi": "Invite them to try something new together; talk about commitment as a choice, not a tie."}},
+  "6": {"nguoi_yeu": {"vai": "Caring, warm, focused on family and a shared future.", "can": "To have what they do appreciated, and commitment.", "tranh": "Taking their care for granted; being irresponsible.", "cach_noi": "Thank them specifically; tell them which parts you want to handle yourself."}},
+  "7": {"nguoi_yeu": {"vai": "Deep, private, slow to love and sincere.", "can": "Quiet time of their own and conversations with depth.", "tranh": "Pushing them to show their feelings right away; invading their privacy.", "cach_noi": "Ask open questions and wait while they think; talk about ideas and meaning."}},
+  "8": {"nguoi_yeu": {"vai": "Strong, protective, takes care of the material future.", "can": "Respect for their abilities and a partner who shares their drive.", "tranh": "Belittling their failures; fighting for power in public.", "cach_noi": "Be frank and clear; talk about shared goals."}},
+  "9": {"nguoi_yeu": {"vai": "Romantic, forgiving, lives by ideals.", "can": "To have their ideals understood and to be loved for their fragile side too.", "tranh": "Mocking their dreams; being selfish or petty.", "cach_noi": "Talk about meaning and values; gently bring things back to the concrete."}}
+ }
+}
