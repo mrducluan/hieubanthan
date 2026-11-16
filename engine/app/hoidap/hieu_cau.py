@@ -213,6 +213,9 @@ def hoi_lai(mo_dun: str) -> dict | None:
     elif mo_dun == "phongthuy":
         ds = [L("hoi.hl.phongthuy.ban", ds[0]), L("hoi.hl.phongthuy.bep", ds[1]), L("hoi.hl.phongthuy.giuong", ds[2]),
               L("hoi.hl.phongthuy.nam_nay", ds[3])]
+    elif mo_dun == "thanso":
+        ds = [L("hoi.hl.thanso.cong_viec", ds[0]), L("hoi.hl.thanso.tien", ds[1]), L("hoi.hl.thanso.tinh_yeu", ds[2]),
+              L("hoi.hl.thanso.nam_nay", ds[3])]
     elif mo_dun == "kinhdich":
         ds = [L("hoi.hl.kinhdich.viec", ds[0]), L("hoi.hl.kinhdich.tinh_cam", ds[1]), L("hoi.hl.kinhdich.kinh_doanh", ds[2]),
               L("hoi.hl.kinhdich.gia_dinh", ds[3])]
