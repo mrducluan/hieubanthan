@@ -270,9 +270,9 @@ def hien(kq: dict) -> dict:
     ra["ngay"] = [ngay_(n) for n in kq["ngay"]]
     ra["ngay_noi_bat"] = [ngay_(n) for n in kq["ngay_noi_bat"]]
     ra["thang"] = [{**m, "ngay": [ngay_(n) for n in m["ngay"]], "luu_y": [d(x) for x in m["luu_y"]]} for m in kq["thang"]]
-    ra["tom_tat"] = ((_L("lich.cn.tom", "Từ {tu} đến {den} có {so} ngày sách lịch ghi hợp {viec} và không xung tuổi ai trong "
+    ra["tom_tat"] = ((_L("lich.cn.tom_1" if len(kq["ngay"]) == 1 else "lich.cn.tom", "Từ {tu} đến {den} có {so} ngày sách lịch ghi hợp {viec} và không xung tuổi ai trong "
                                         "{k} người", tu=lth.ngay_dai(tu), den=lth.ngay_dai(den), so=len(kq["ngay"]), viec=tv, k=so_nguoi)
-                      + (_L("lich.cn.tom_sach", "; {so} ngày trong số đó không vướng lưu ý theo tuổi.", so=len(sach))
+                      + (_L("lich.cn.tom_sach_1" if len(sach) == 1 else "lich.cn.tom_sach", "; {so} ngày trong số đó không vướng lưu ý theo tuổi.", so=len(sach))
                          if len(sach) != len(kq["ngay"]) else "."))
                      if kq["ngay"] else
                      _L("lich.cn.tom_khong", "Trong khoảng này chưa có ngày nào vừa hợp {viec} vừa không xung tuổi cả {k} "
