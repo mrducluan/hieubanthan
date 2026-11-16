@@ -14,7 +14,7 @@ async function them(page: Page, vai: string, ten: string, nam: string, gt?: stri
   await f.getByRole("button", { name: "Lưu người này" }).click();
 }
 
-test("Nhà mình: thêm người nhà → bảng năm, cặp nổi bật, việc chung; tên không rời máy", async ({ page, request }) => {
+test("Nhà Tôi: thêm người nhà → bảng năm, cặp nổi bật, việc chung; tên không rời máy", async ({ page, request }) => {
   const html = await (await request.get("/gia-dinh")).text();
   expect(html).toMatch(/<meta name="robots" content="noindex/);
   await napHoSo(page, HO_SO_MAU);                         // 17/05/1990 nam → Canh Ngọ
@@ -55,7 +55,7 @@ test("Nhà mình: thêm người nhà → bảng năm, cặp nổi bật, việc
   expect(ev).not.toContain("Bé Na");
 });
 
-test("Nhà mình: 390px không cuộn ngang; lưu trên máy; Bản thân có lối vào", async ({ page }) => {
+test("Nhà Tôi: 390px không cuộn ngang; lưu trên máy; Bản thân có lối vào", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await napHoSo(page, HO_SO_MAU);
   await page.goto("/gia-dinh");
@@ -65,4 +65,21 @@ test("Nhà mình: 390px không cuộn ngang; lưu trên máy; Bản thân có l�
   expect(await page.evaluate(() => localStorage.getItem("hbt.gia_dinh.v1"))).toContain("Mẹ");
   await page.goto("/ban-than");
   await expect(page.getByTestId("loi-gia-dinh")).toHaveAttribute("href", "/gia-dinh");
+});
+
+// GD-MENU (2026-11-16): "Nhà Tôi" là menu con của Bản thân; ở /gia-dinh mục cha "Bản thân" sáng; thẻ ở /ban-than hiện số người.
+test("Nhà Tôi: có trong menu Bản thân, thẻ Bản thân hiện số người, lối vào ở Tài khoản", async ({ page }) => {
+  await napHoSo(page, HO_SO_MAU);
+  await page.goto("/ban-than");
+  await expect(page.getByTestId("loi-gia-dinh")).toContainText("Nhà Tôi");
+  await expect(page.getByTestId("loi-gia-dinh-so")).toHaveText("Thêm người nhà");
+  await page.goto("/gia-dinh");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Nhà Tôi");
+  await expect(page.locator('header a[href="/gia-dinh"]').first()).toBeAttached();
+  await them(page, "me", "Mẹ", "1966", "nu");
+  await expect(page.getByTestId("bang-nha")).toBeVisible({ timeout: 20_000 });
+  await page.goto("/ban-than");
+  await expect(page.getByTestId("loi-gia-dinh-so")).toHaveText("Đã có 1 người");
+  await page.goto("/tai-khoan");
+  await expect(page.getByTestId("dl-gia-dinh-mo")).toHaveAttribute("href", "/gia-dinh");
 });

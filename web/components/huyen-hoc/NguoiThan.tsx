@@ -6,7 +6,9 @@
 // Tử vi ẩn Luận giải toàn bộ (trả Sao), Định giờ sinh, Xem lá số 2 người. Đo lường chỉ MÃ (nguoi_than_luu/xem/xoa),
 // không tên, không ngày sinh.
 import { useId, useState } from "react";
-import { ChevronDown, Lock, Trash2, UserPlus, Users } from "lucide-react";
+import { ArrowRight, ChevronDown, Lock, Trash2, UserPlus, Users } from "lucide-react";
+import Lien from "@/components/khung/Lien";
+import { useNgonNgu } from "@/components/khung/NgonNgu";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { QUAN_HE_HOP_THAM } from "@/app/api/tuvi/schema";
 import { Button } from "@/components/ui/button";
@@ -192,6 +194,7 @@ export function ChonNguoiXem({ dangXem, onChon, coBan }: {
   const [mo, setMo] = useState(false);
   const [them, setThem] = useState(false);
   const idBang = useId();
+  const en = useNgonNgu().ngonNgu === "en";
   if (ds === undefined) return null;
   const chon = (nt: NguoiThan | null) => {
     onChon(nt); setMo(false); setThem(false);
@@ -214,6 +217,13 @@ export function ChonNguoiXem({ dangXem, onChon, coBan }: {
         </button>
         {dangXem && coBan && (
           <Button type="button" size="sm" variant="ghost" onClick={() => chon(null)} data-testid="nguoi-than-ve-ban">{c("nguoi_than.ve_ban")}</Button>
+        )}
+        {/* GD-MENU: trang Nhà Tôi chỉ có bản Việt → lối sang chỉ hiện ở bản Việt. */}
+        {!en && (
+          <Lien href="/gia-dinh" data-testid="nguoi-than-ca-nha" onClick={() => ghi("cross_cta_clicked", { tu: "tuvi_nguoi_than", den: "gia_dinh", ca_nhan: 1 })}
+            className="inline-flex min-h-10 items-center gap-1 px-2 text-sm text-gold underline-offset-4 hover:underline">
+            Xem cả nhà <ArrowRight className="size-4" aria-hidden />
+          </Lien>
         )}
       </div>
       {dangXem && (

@@ -39,8 +39,8 @@ const NGAY_TOT: LoiDi = { ma: "ngay_tot", href: "/xem-ngay-tot", ten: "Chọn ng
 const LOI_DI: Record<TrangNam, (nam: number) => LoiDi[]> = {
   nam: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), NHA_MINH(n)],
   tuoi: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), NHAN_TUONG],
-  sinh_con: (n) => [TU_VI(n), BAT_TU, HOP_DOI, PHONG_THUY],
-  cuoi_hoi: (n) => [TU_VI(n), HAI_NGUOI, HOP_DOI, NGAY_TOT],
+  sinh_con: (n) => [TU_VI(n), BAT_TU, HOP_DOI, NHA_MINH(n)],
+  cuoi_hoi: (n) => [TU_VI(n), HAI_NGUOI, NHA_MINH(n), NGAY_TOT],
   lich_am: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), NGAY_TOT],
 };
 const CHU: Record<TrangNam, { tieu_de: (nam: number) => string; cau: string }> = {

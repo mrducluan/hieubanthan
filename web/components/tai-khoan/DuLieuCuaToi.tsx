@@ -103,8 +103,8 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
           <Dong ten="Hồ sơ nhà (hướng, năm xây, người cùng ở, bố cục)" testId="dl-nha-may"
             trangThai={soNha ? `${soNha} căn trên máy này.` : "Không có."}
             nut={soNha ? <Button size="sm" variant="outline" className={NUT} onClick={() => { xoaMoiNhaTrenMay(); setBao("Đã xoá hồ sơ nhà trên máy này."); }}>Xoá hồ sơ nhà trên máy</Button> : undefined} />
-          <Dong ten="Người nhà ở trang Nhà mình (tên gọi, vai, năm sinh, giới tính, ngày sinh nếu có)" testId="dl-gia-dinh"
-            trangThai={giaDinh?.length ? `${giaDinh.length} người trên máy này.` : "Không có."}
+          <Dong ten="Người nhà ở trang Nhà Tôi (tên gọi, vai, năm sinh, giới tính, ngày sinh nếu có)" testId="dl-gia-dinh"
+            trangThai={<>{giaDinh?.length ? `${giaDinh.length} người trên máy này.` : "Không có."} <a href="/gia-dinh" className="text-gold underline" data-testid="dl-gia-dinh-mo">Mở trang Nhà Tôi</a></>}
             nut={giaDinh?.length ? <Button size="sm" variant="outline" className={NUT} onClick={() => { xoaCaNha(); setBao("Đã xoá người nhà trên máy này."); }}>Xoá người nhà trên máy</Button> : undefined} />
           <Dong ten="Lá số người thân (tên gọi, quan hệ, ngày giờ sinh, giới tính, nơi sinh)" testId="dl-nguoi-than"
             trangThai={nguoiThan?.length ? `${nguoiThan.length} người trên máy này — không gửi lên tài khoản.` : "Không có."}
