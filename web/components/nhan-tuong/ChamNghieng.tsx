@@ -10,6 +10,7 @@ import { urlAnhSach } from "@/lib/anh-tren-may";
 import { ghi } from "@/lib/do-luong";
 import type { DiemDo } from "@/lib/nhan-tuong";
 import { cn } from "@/lib/utils";
+import { useChuNhanTuong } from "./chu-nhan-tuong";
 
 type Diem = { x: number; y: number };
 export type GocNghieng = "nghieng_trai" | "nghieng_phai";
@@ -40,6 +41,7 @@ export function ChamNghieng({ goc, ten, ds, onDoi, anhBanDau }: {
   /** QBG-1: ảnh nghiêng vừa chụp bằng "Quét 3 góc" — nạp sẵn để người dùng chấm đường viền. */
   anhBanDau?: File | null;
 }) {
+  const { t, en } = useChuNhanTuong();
   const [url, setUrl] = useState<string | null>(null);
   const [tiLe, setTiLe] = useState<number | null>(null);
   const [diem, setDiem] = useState<Record<string, Diem>>({});
@@ -105,8 +107,8 @@ export function ChamNghieng({ goc, ten, ds, onDoi, anhBanDau }: {
       <label className="flex min-h-28 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl border border-dashed border-line/80 p-4 text-center text-xs text-fg-muted hover:border-gold/60 hover:text-fg" data-testid={`ng-chon-${goc}`}>
         <ImagePlus className="size-5 text-gold" aria-hidden />
         <span className="font-medium text-fg">{ten}</span>
-        <span>Quay hẳn sang một bên (thấy rõ đường viền trán, mũi, cằm), tóc vén khỏi trán và tai.</span>
-        <input type="file" accept="image/*" className="sr-only" data-testid={`ng-input-${goc}`} aria-label={`Chọn ảnh ${ten.toLowerCase()} (chỉ hiện trên máy)`}
+        <span>{t("ng.chon_mo")}</span>
+        <input type="file" accept="image/*" className="sr-only" data-testid={`ng-input-${goc}`} aria-label={en ? t("ng.aria_input", { ten: ten.toLowerCase() }) : `Chọn ảnh ${ten.toLowerCase()} (chỉ hiện trên máy)`}
           onChange={(e) => { void chon(e.target.files?.[0]); e.target.value = ""; }} />
       </label>
     );
@@ -115,18 +117,18 @@ export function ChamNghieng({ goc, ten, ds, onDoi, anhBanDau }: {
     <div className="space-y-2 rounded-xl border border-line/70 p-3" data-testid={`ng-${goc}`}>
       <div className="flex items-center justify-between gap-2 text-sm">
         <span className="font-medium text-fg">{ten}</span>
-        <span className={cn("text-xs", conThieu ? "text-fg-faint" : "text-jade")} data-testid={`ng-con-${goc}`}>{conThieu ? `Còn ${conThieu} điểm` : "Đã đủ điểm"}</span>
+        <span className={cn("text-xs", conThieu ? "text-fg-faint" : "text-jade")} data-testid={`ng-con-${goc}`}>{conThieu ? t("ng.con", { so: String(conThieu) }) : t("ng.du")}</span>
       </div>
       <p className="rounded-lg border border-gold/40 bg-gold/[0.06] px-3 py-2 text-xs" data-testid={`ng-dang-${goc}`} aria-live="polite">
-        {thongTin ? <><span className="text-fg-faint">Điểm {ds.indexOf(thongTin) + 1}/{ds.length}{thongTin.bat_buoc ? "" : " · không bắt buộc"}: </span><b className="text-fg">{thongTin.ten}</b> <span className="text-fg-muted">— {thongTin.mo}</span></>
-          : <span className="text-jade">Đã chấm xong — kéo chấm nếu cần chỉnh.</span>}
+        {thongTin ? <><span className="text-fg-faint">{en ? t("ng.diem", { so: String(ds.indexOf(thongTin) + 1), tong: String(ds.length), tuy: thongTin.bat_buoc ? "" : t("do.khong_bat_buoc") }) : <>Điểm {ds.indexOf(thongTin) + 1}/{ds.length}{thongTin.bat_buoc ? "" : " · không bắt buộc"}: </>}</span><b className="text-fg">{thongTin.ten}</b> <span className="text-fg-muted">— {thongTin.mo}</span></>
+          : <span className="text-jade">{t("ng.xong")}</span>}
       </p>
       <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_7rem]">
         <div ref={khung} className={cn("relative select-none touch-none", dang ? "cursor-crosshair" : "")}
           onPointerDown={xuong} onPointerMove={di} onPointerUp={() => setKeo(null)} onPointerCancel={() => setKeo(null)} data-testid={`ng-khung-${goc}`}
-          aria-label={`${ten} của bạn — chạm để đặt điểm đang chọn, kéo chấm để chỉnh`}>
+          aria-label={en ? t("ng.aria_khung", { ten: ten.toLowerCase() }) : `${ten} của bạn — chạm để đặt điểm đang chọn, kéo chấm để chỉnh`}>
           {/* eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng */}
-          <img src={url} alt={`${ten} bạn chọn (chỉ hiện trên máy)`} draggable={false} className="block w-full rounded-lg border border-line"
+          <img src={url} alt={en ? t("ng.alt", { ten: ten.toLowerCase() }) : `${ten} bạn chọn (chỉ hiện trên máy)`} draggable={false} className="block w-full rounded-lg border border-line"
             onLoad={(e) => { const i = e.currentTarget; if (i.naturalWidth && i.naturalHeight) setTiLe(i.naturalWidth / i.naturalHeight); }} />
           {ds.map((p, i) => diem[p.ma] && (
             <span key={p.ma} aria-hidden className={cn("pointer-events-none absolute grid size-4 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-[1.5px] text-[8px] font-semibold",
@@ -137,10 +139,10 @@ export function ChamNghieng({ goc, ten, ds, onDoi, anhBanDau }: {
         <div className="mx-auto w-24 sm:w-full"><HinhNghieng dang={dang} da={daDat} lat={goc === "nghieng_trai"} /></div>
       </div>
       <div className="flex flex-wrap items-center gap-2 text-xs">
-        <Button size="sm" variant="ghost" onClick={boLuot} disabled={!daDat.size}><Undo2 aria-hidden /> Bỏ điểm vừa chấm</Button>
-        <Button size="sm" variant="ghost" onClick={() => { setDiem({}); setDang(ds[0]?.ma ?? null); }} disabled={!daDat.size}><RotateCcw aria-hidden /> Chấm lại</Button>
-        <button type="button" className="ml-auto inline-flex items-center gap-1 text-fg-faint hover:text-fg" aria-label={`Bỏ ${ten.toLowerCase()}`}
-          onClick={() => { if (url) URL.revokeObjectURL(url); setUrl(null); setDiem({}); }}><X className="size-3.5" aria-hidden /> Bỏ ảnh</button>
+        <Button size="sm" variant="ghost" onClick={boLuot} disabled={!daDat.size}><Undo2 aria-hidden /> {t("do.bo_diem")}</Button>
+        <Button size="sm" variant="ghost" onClick={() => { setDiem({}); setDang(ds[0]?.ma ?? null); }} disabled={!daDat.size}><RotateCcw aria-hidden /> {t("ng.cham_lai")}</Button>
+        <button type="button" className="ml-auto inline-flex items-center gap-1 text-fg-faint hover:text-fg" aria-label={en ? t("ng.bo_aria", { ten: ten.toLowerCase() }) : `Bỏ ${ten.toLowerCase()}`}
+          onClick={() => { if (url) URL.revokeObjectURL(url); setUrl(null); setDiem({}); }}><X className="size-3.5" aria-hidden /> {t("do.bo_anh")}</button>
       </div>
     </div>
   );

@@ -21,6 +21,8 @@ import { cn } from "@/lib/utils";
 import { ChamNghieng, type AnhNghieng, type GocNghieng } from "./ChamNghieng";
 import { QuetBaGoc, type KetQuaQuet } from "./QuetBaGoc";
 import { DanhSachGoiY, type GoiYNet } from "./DanhSachGoiY";
+import { Dam, useChuNhanTuong } from "./chu-nhan-tuong";
+import { useDuong } from "@/components/khung/NgonNgu";
 
 type Diem = { x: number; y: number };
 interface KqDo { goi_y: GoiYNet[]; canh_bao: string[];
@@ -34,11 +36,8 @@ const MAU: Record<string, [number, number]> = {
   mep_phai: [59, 69], dinh_tai: [20, 38], dai_tai: [21, 60],
 };
 type TrangThaiTim = null | "dang" | KetQuaTim["trang_thai"];
-const LOI_TIM: Record<string, string> = {
-  khong_thay: "Máy chưa thấy rõ gương mặt trong ảnh — chọn ảnh chụp thẳng, đủ sáng, hoặc tự chấm theo hướng dẫn bên dưới.",
-  nhieu_mat: "Ảnh có nhiều hơn một gương mặt — chọn ảnh chỉ có bạn, hoặc tự chấm các điểm của chính bạn.",
-  loi: "Máy này chưa chạy được bộ tự tìm điểm (trình duyệt cũ hoặc thiếu bộ nhớ) — bạn tự chấm theo hướng dẫn bên dưới.",
-};
+// EN-ALL GĐ 8: lời theo ngôn ngữ ở lib/chu/nhan-tuong.ts (bản Việt = đúng chữ cũ).
+const LOI_TIM: Record<string, string> = { khong_thay: "do.loi_khong_thay", nhieu_mat: "do.loi_nhieu_mat", loi: "do.loi_may" };
 /** Vùng ảnh đang hiện (toạ độ 0..1 của ảnh). Ảnh bán thân: sau khi máy tìm thấy mặt, phóng vào mặt để chấm không chồng nhau. */
 type Vung = { x: number; y: number; w: number; h: number };
 const CA_ANH: Vung = { x: 0, y: 0, w: 1, h: 1 };
@@ -51,7 +50,8 @@ function vungMat(d: Record<string, Diem>): Vung | null {
   v.w = Math.min(1, x1 + bw * 0.45) - v.x; v.h = Math.min(1, y1 + bh * 0.12) - v.y;
   return v.w * v.h > 0.8 ? null : v;                 // mặt đã chiếm gần hết ảnh → không cần phóng
 }
-const so = (v: number) => v.toFixed(2).replace(".", ",");
+/** Số đo: bản Việt dấu phẩy thập phân, bản Anh dấu chấm. */
+const so = (v: number, en = false) => (en ? v.toFixed(2) : v.toFixed(2).replace(".", ","));
 
 function HinhMau({ dang, da }: { dang: string | null; da: Set<string> }) {
   return (
@@ -72,6 +72,8 @@ function HinhMau({ dang, da }: { dang: string | null; da: Set<string> }) {
 export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem }: {
   ks: KhaoSat; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void; onDungVaXem?: (tl: TraLoi) => void; dangXem?: boolean;
 }) {
+  const { t, en } = useChuNhanTuong();
+  const d = useDuong();
   const dsDiem: DiemDo[] = useMemo(() => ks.diem_do?.diem ?? [], [ks]);
   const batBuoc = useMemo(() => dsDiem.filter((d) => d.bat_buoc).map((d) => d.ma), [dsDiem]);
   const [url, setUrl] = useState<string | null>(null);
@@ -208,7 +210,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
       const r = await postJson<KqDo>("/api/nhan-tuong/do-mat", { diem, ti_le: Number(tiLe.toFixed(4)), dong_y: true, ...(ng.length ? { nghieng: ng } : {}) });
       setKq(r);
       ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat", so_goi_y: r.goi_y.length, so_diem: Object.keys(diem).length, so_anh_nghieng: nghiengDu.length });
-    } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đo được lúc này."); } finally { setTinh(false); }
+    } catch (e) { setLoi(e instanceof Error ? e.message : t("do.loi_do")); } finally { setTinh(false); }
   };
   // NT-2: đã đồng ý đo từ trước + máy tự đặt đủ điểm bắt buộc → đo luôn một lần cho mỗi ảnh (người dùng kéo chỉnh rồi bấm
   // "Đo lại" nếu cần). Chưa đồng ý thì vẫn chờ người dùng tích ô và bấm.
@@ -232,14 +234,14 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
         <div className="space-y-3">
           <label className="flex min-h-40 cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-gold/50 bg-bg/40 p-5 text-center text-sm text-fg-muted hover:border-gold hover:text-fg">
             <ImagePlus className="size-7 text-gold" aria-hidden />
-            <span className="font-medium text-fg">Chọn hoặc chụp một ảnh chính diện</span>
-            <span className="max-w-sm text-xs">Nhìn thẳng, đủ sáng, mặt tự nhiên (không cười), tóc không che trán. Máy bạn tự tìm điểm mốc — ảnh chỉ hiện trên máy, không tải lên.</span>
-            <input type="file" accept="image/*" capture="user" className="sr-only" data-testid="do-input" aria-label="Chọn ảnh chân dung (chỉ hiện trên máy)"
+            <span className="font-medium text-fg">{t("do.chon_anh")}</span>
+            <span className="max-w-sm text-xs">{t("do.chon_anh_mo")}</span>
+            <input type="file" accept="image/*" capture="user" className="sr-only" data-testid="do-input" aria-label={t("do.aria_input")}
               onChange={(e) => { void chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
           </label>
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <Button onClick={moQuet} data-testid="quet-mo"><ScanFace aria-hidden /> Quét 3 góc như Face ID</Button>
-            <span className="text-xs text-fg-faint">Máy tự chụp khi bạn nhìn thẳng, rồi quay từ từ sang trái, sang phải.</span>
+            <Button onClick={moQuet} data-testid="quet-mo"><ScanFace aria-hidden /> {t("do.quet")}</Button>
+            <span className="text-xs text-fg-faint">{t("do.quet_mo")}</span>
           </div>
         </div>
       ) : (
@@ -247,22 +249,22 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
           <div>
             {/* Điện thoại: thẻ hướng dẫn bên cạnh rơi xuống dưới ảnh → dòng này luôn nằm ngay trên chỗ chạm. */}
             <p className="mb-2 rounded-lg border border-gold/40 bg-gold/[0.06] px-3 py-2 text-sm lg:hidden" data-testid="do-dang-cham-dt" aria-hidden>
-              {tim === "dang" ? <span className="text-fg-muted">Máy bạn đang tự tìm điểm mốc…</span>
+              {tim === "dang" ? <span className="text-fg-muted">{t("do.dang_tim_ngan")}</span>
                 : thongTin
-                ? <><span className="text-xs text-fg-faint">Điểm {dsDiem.indexOf(thongTin) + 1}/{dsDiem.length}: </span><b className="text-fg">{thongTin.ten}</b><span className="block text-xs text-fg-muted">{thongTin.mo}</span></>
-                : <span className="text-jade">{tim === "xong" ? "Máy đã đặt sẵn các chấm — kéo chấm nào lệch." : "Đã chấm đủ điểm — kéo chấm nếu cần chỉnh."}</span>}
+                ? <><span className="text-xs text-fg-faint">{en ? t("do.diem_so", { so: String(dsDiem.indexOf(thongTin) + 1), tong: String(dsDiem.length) }) : <>Điểm {dsDiem.indexOf(thongTin) + 1}/{dsDiem.length}: </>}</span><b className="text-fg">{thongTin.ten}</b><span className="block text-xs text-fg-muted">{thongTin.mo}</span></>
+                : <span className="text-jade">{tim === "xong" ? t("do.da_dat_san") : t("do.da_du")}</span>}
             </p>
             <div ref={khung} className={cn("relative mx-auto w-full max-w-xl select-none touch-none", phongTo && "overflow-hidden rounded-xl border border-line", dang ? "cursor-crosshair" : "")}
               style={phongTo ? { aspectRatio: `${vung.w * tiLe!} / ${vung.h}` } : undefined}
               onPointerDown={xuong} onPointerMove={di} onPointerUp={len} onPointerCancel={len} data-testid="do-khung" tabIndex={0} onKeyDown={nhich}
-              aria-label="Ảnh của bạn — chạm để đặt điểm đang chọn, kéo chấm để chỉnh, mũi tên để nhích">
+              aria-label={t("do.aria_khung")}>
               {/* eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng */}
-              <img ref={anhRef} src={url} alt="Ảnh bạn chọn (chỉ hiện trên máy)" draggable={false} className={cn("block", phongTo ? "absolute" : "w-full rounded-xl border border-line")}
+              <img ref={anhRef} src={url} alt={t("do.alt_anh")} draggable={false} className={cn("block", phongTo ? "absolute" : "w-full rounded-xl border border-line")}
                 style={phongTo ? { maxWidth: "none", width: `${100 / vung.w}%`, left: `${(-vung.x / vung.w) * 100}%`, top: `${(-vung.y / vung.h) * 100}%` } : undefined}
                 onLoad={(e) => { const i = e.currentTarget; if (i.naturalWidth && i.naturalHeight) { setTiLe(i.naturalWidth / i.naturalHeight); void tuTim(i, false); } }} />
               {tim === "dang" && (
                 <div className="pointer-events-none absolute inset-0 grid place-items-center rounded-xl bg-bg/40" data-testid="do-dang-tim">
-                  <span className="inline-flex items-center gap-2 rounded-full bg-bg/90 px-3 py-1.5 text-sm text-fg shadow"><Loader2 className="size-4 animate-spin text-gold" aria-hidden /> Đang tìm điểm mốc trên máy bạn…</span>
+                  <span className="inline-flex items-center gap-2 rounded-full bg-bg/90 px-3 py-1.5 text-sm text-fg shadow"><Loader2 className="size-4 animate-spin text-gold" aria-hidden /> {t("do.dang_tim")}</span>
                 </div>
               )}
               {dsDiem.map((p, i) => { const k = diem[p.ma] && raKhung(diem[p.ma]!); return k && k.x >= 0 && k.x <= 1 && k.y >= 0 && k.y <= 1 && (
@@ -274,38 +276,44 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
             {tim === "xong" && (
               <p className="mt-2 rounded-lg border border-jade/40 bg-jade/[0.06] px-3 py-2 text-xs leading-relaxed text-fg-muted" data-testid="do-tu-tim-xong" aria-live="polite">
                 <ScanFace className="mr-1 inline size-3.5 text-jade" aria-hidden />
+                {en ? <>
+                  {t("do.tu_tim_xong", { so: String(Object.keys(diem).length) })}
+                  {canXem.includes("chan_toc") && <> <b className="text-gold">{t("do.chan_toc_nhan")}</b> {t("do.chan_toc_ghi")}</>}
+                  {" "}{t("do.tai_ghi")}
+                </> : <>
                 Máy bạn đã tự đặt {Object.keys(diem).length} điểm (ảnh không gửi đi đâu). Xem lại từng chấm, kéo chấm nào lệch.
                 {canXem.includes("chan_toc") && <> <b className="text-gold">Chân tóc (điểm 1, viền nét đứt)</b> được dò theo màu tóc — kiểm kỹ, nhất là khi tóc mái hoặc hói.</>}
                 {" "}Tai không bắt buộc: bấm “Đỉnh tai” trong danh sách để chấm thêm.
+                </>}
               </p>
             )}
-            {tim && tim !== "dang" && tim !== "xong" && <p className="mt-2 text-xs text-gold" data-testid="do-tu-tim-loi" aria-live="polite">{LOI_TIM[tim]}</p>}
+            {tim && tim !== "dang" && tim !== "xong" && <p className="mt-2 text-xs text-gold" data-testid="do-tu-tim-loi" aria-live="polite">{t(LOI_TIM[tim] ?? "do.loi_may")}</p>}
             <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
-              <Button size="sm" variant="ghost" onClick={() => { if (anhRef.current) void tuTim(anhRef.current, true); }} disabled={tim === "dang" || !tiLe} data-testid="do-tu-tim"><ScanFace aria-hidden /> Tự tìm lại</Button>
-              {vungPhong && <Button size="sm" variant="ghost" onClick={() => setPhong((v) => !v)} data-testid="do-phong">{phong ? "Xem cả ảnh" : "Phóng vào mặt"}</Button>}
-              <Button size="sm" variant="ghost" onClick={boLuot} disabled={!daDat.size}><Undo2 aria-hidden /> Bỏ điểm vừa chấm</Button>
-              <Button size="sm" variant="ghost" onClick={() => { luotTim.current++; setDiem({}); setDang(dsDiem[0]?.ma ?? null); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }} disabled={!daDat.size}><RotateCcw aria-hidden /> Chấm tay từ đầu</Button>
-              <Button size="sm" variant="ghost" onClick={moQuet} data-testid="quet-lai"><ScanFace aria-hidden /> Quét lại 3 góc</Button>
+              <Button size="sm" variant="ghost" onClick={() => { if (anhRef.current) void tuTim(anhRef.current, true); }} disabled={tim === "dang" || !tiLe} data-testid="do-tu-tim"><ScanFace aria-hidden /> {t("do.tu_tim_lai")}</Button>
+              {vungPhong && <Button size="sm" variant="ghost" onClick={() => setPhong((v) => !v)} data-testid="do-phong">{phong ? t("do.xem_ca_anh") : t("do.phong_mat")}</Button>}
+              <Button size="sm" variant="ghost" onClick={boLuot} disabled={!daDat.size}><Undo2 aria-hidden /> {t("do.bo_diem")}</Button>
+              <Button size="sm" variant="ghost" onClick={() => { luotTim.current++; setDiem({}); setDang(dsDiem[0]?.ma ?? null); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }} disabled={!daDat.size}><RotateCcw aria-hidden /> {t("do.cham_tay")}</Button>
+              <Button size="sm" variant="ghost" onClick={moQuet} data-testid="quet-lai"><ScanFace aria-hidden /> {t("do.quet_lai")}</Button>
               <label className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg">
-                <ImagePlus className="size-3.5" aria-hidden /> Đổi ảnh
+                <ImagePlus className="size-3.5" aria-hidden /> {t("do.doi_anh")}
                 <input type="file" accept="image/*" className="sr-only" onChange={(e) => { void chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
               </label>
-              <button type="button" aria-label="Bỏ ảnh" className="ml-auto inline-flex items-center gap-1 text-fg-faint hover:text-fg"
-                onClick={() => { luotTim.current++; if (url) URL.revokeObjectURL(url); setUrl(null); setDiem({}); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }}><X className="size-3.5" aria-hidden /> Bỏ ảnh</button>
+              <button type="button" aria-label={t("do.bo_anh")} className="ml-auto inline-flex items-center gap-1 text-fg-faint hover:text-fg"
+                onClick={() => { luotTim.current++; if (url) URL.revokeObjectURL(url); setUrl(null); setDiem({}); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }}><X className="size-3.5" aria-hidden /> {t("do.bo_anh")}</button>
             </div>
           </div>
           <aside className="space-y-3">
             <div className="rounded-xl border border-gold/40 bg-gold/[0.06] p-3" data-testid="do-dang-cham" aria-live="polite">
               {thongTin ? (
                 <>
-                  <p className="text-xs text-fg-faint">Điểm {dsDiem.indexOf(thongTin) + 1}/{dsDiem.length} · {nhom[thongTin.nhom] ?? ""}{thongTin.bat_buoc || (nhom[thongTin.nhom] ?? "").includes("không bắt buộc") ? "" : " · không bắt buộc"}</p>
+                  <p className="text-xs text-fg-faint">{en ? `${t("do.diem_so", { so: String(dsDiem.indexOf(thongTin) + 1), tong: String(dsDiem.length) }).replace(/: $/, "")} · ` : <>Điểm {dsDiem.indexOf(thongTin) + 1}/{dsDiem.length} · </>}{nhom[thongTin.nhom] ?? ""}{thongTin.bat_buoc || (nhom[thongTin.nhom] ?? "").includes(t("do.chu_khong_bat_buoc")) ? "" : t("do.khong_bat_buoc")}</p>
                   <p className="mt-0.5 font-medium text-fg">{thongTin.ten}</p>
                   <p className="mt-1 text-xs leading-snug text-fg-muted">{thongTin.mo}</p>
                 </>
-              ) : <p className="text-sm text-jade"><Check className="mr-1 inline size-4" aria-hidden />Đã chấm đủ điểm.</p>}
+              ) : <p className="text-sm text-jade"><Check className="mr-1 inline size-4" aria-hidden />{t("do.da_cham_du")}</p>}
               <div className="mx-auto mt-2 w-32"><HinhMau dang={dang} da={daDat} /></div>
             </div>
-            <ol className="grid max-h-48 grid-cols-2 gap-1 overflow-auto text-[11px] lg:max-h-none lg:grid-cols-1" aria-label="Các điểm cần chấm">
+            <ol className="grid max-h-48 grid-cols-2 gap-1 overflow-auto text-[11px] lg:max-h-none lg:grid-cols-1" aria-label={t("do.cac_diem")}>
               {dsDiem.map((p, i) => (
                 <li key={p.ma}>
                   <button type="button" onClick={() => setDang(p.ma)} aria-current={p.ma === dang ? "step" : undefined}
@@ -322,37 +330,41 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
 
       {url && dsNghieng.length > 0 && (
         <details key={coNghiengQuet ? "quet" : "tay"} open={coNghiengQuet || undefined} className="rounded-2xl border border-line/70 bg-bg/40 p-4" data-testid="do-nghieng">
-          <summary className="cursor-pointer text-sm font-medium text-fg">Thêm ảnh nghiêng (không bắt buộc) — đo thêm trán, gốc mũi, sống mũi, cằm, tai</summary>
-          <p className="mt-2 text-xs leading-relaxed text-fg-muted">Ảnh thẳng không thấy độ nổi của mặt. Một ảnh chụp ngang mặt (quay hẳn 90°) cho hệ thống đo thêm trán gồ hay phẳng, gốc mũi cao hay thấp, sống mũi gồ / thấp, cằm lẹm, vị trí tai. {coNghiengQuet && <b className="text-fg">Ảnh nghiêng vừa quét đã nạp sẵn bên dưới. </b>}Ảnh nghiêng cần bạn tự chấm 9 điểm trên đường viền (máy chỉ tự tìm được ở ảnh chính diện). Một bên là đủ; có cả hai bên thì hai ảnh phải cùng kết quả mới gợi ý. Ảnh cũng chỉ hiện trên máy bạn.</p>
+          <summary className="cursor-pointer text-sm font-medium text-fg">{t("do.nghieng_tom")}</summary>
+          {en ? <p className="mt-2 text-xs leading-relaxed text-fg-muted">{t("do.nghieng_mo")} {coNghiengQuet && <b className="text-fg">{t("do.nghieng_quet")} </b>}{t("do.nghieng_mo2")}</p>
+          : <p className="mt-2 text-xs leading-relaxed text-fg-muted">Ảnh thẳng không thấy độ nổi của mặt. Một ảnh chụp ngang mặt (quay hẳn 90°) cho hệ thống đo thêm trán gồ hay phẳng, gốc mũi cao hay thấp, sống mũi gồ / thấp, cằm lẹm, vị trí tai. {coNghiengQuet && <b className="text-fg">Ảnh nghiêng vừa quét đã nạp sẵn bên dưới. </b>}Ảnh nghiêng cần bạn tự chấm 9 điểm trên đường viền (máy chỉ tự tìm được ở ảnh chính diện). Một bên là đủ; có cả hai bên thì hai ảnh phải cùng kết quả mới gợi ý. Ảnh cũng chỉ hiện trên máy bạn.</p>}
           <div className="mt-3 grid gap-3 lg:grid-cols-2">
-            <ChamNghieng goc="nghieng_trai" ten="Ảnh nghiêng trái" ds={dsNghieng} onDoi={(a) => doiNghieng("nghieng_trai", a)} anhBanDau={nghiengQuet.nghieng_trai} />
-            <ChamNghieng goc="nghieng_phai" ten="Ảnh nghiêng phải" ds={dsNghieng} onDoi={(a) => doiNghieng("nghieng_phai", a)} anhBanDau={nghiengQuet.nghieng_phai} />
+            <ChamNghieng goc="nghieng_trai" ten={t("do.nghieng_trai")} ds={dsNghieng} onDoi={(a) => doiNghieng("nghieng_trai", a)} anhBanDau={nghiengQuet.nghieng_trai} />
+            <ChamNghieng goc="nghieng_phai" ten={t("do.nghieng_phai")} ds={dsNghieng} onDoi={(a) => doiNghieng("nghieng_phai", a)} anhBanDau={nghiengQuet.nghieng_phai} />
           </div>
         </details>
       )}
 
       <div className="rounded-2xl border border-line/70 bg-bg/70 p-4" data-testid="do-thoa-thuan">
-        <p className="flex items-center gap-2 text-sm font-semibold text-fg"><ShieldCheck className="size-4 text-gold" aria-hidden /> Thoả thuận đo gương mặt (ảnh không rời máy)</p>
-        <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">
+        <p className="flex items-center gap-2 text-sm font-semibold text-fg"><ShieldCheck className="size-4 text-gold" aria-hidden /> {t("do.tt_tieu_de")}</p>
+        {en ? <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">
+          <Dam s={t("do.tt_mo")} />{" "}
+          {t("do.tt_rut")} · <Link href={`${d("/chinh-sach-rieng-tu")}#anh-mat`} className="text-gold underline underline-offset-2">{t("do.tt_chinh_sach")}</Link>.
+        </p> : <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">
           Ảnh <b className="text-fg">không rời máy bạn</b>. Điểm mốc do máy bạn tự tìm ngay trong trình duyệt hoặc do bạn chấm. Chỉ toạ độ các điểm đó (ảnh chính diện, và ảnh nghiêng nếu bạn thêm) cùng tỉ lệ khung ảnh được gửi tới máy chủ tính toán của Hiểu Bản Thân <b className="text-fg">một lượt</b> để đo tỉ lệ theo sách tướng; không lưu, không chuyển cho bên thứ ba, không dùng để nhận ra bạn. Ảnh phải là của chính bạn, bạn đủ 18 tuổi.
           Rút thoả thuận ở đây hoặc ở <Link href="/tai-khoan#du-lieu-cua-toi" className="text-gold underline underline-offset-2">Dữ liệu của tôi</Link> · <Link href="/chinh-sach-rieng-tu#anh-mat" className="text-gold underline underline-offset-2">Chính sách riêng tư</Link>.
-        </p>
+        </p>}
         {dongY ? (
           <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-fg-muted" data-testid="do-da-dong-y">
-            <Check className="size-3.5 text-jade" aria-hidden /> Đã đồng ý ngày {ngayDongYAnhMat(dongY)} (bản {DONG_Y_DO_MAT.phienBan}).
-            <button type="button" className="underline underline-offset-2 hover:text-fg" onClick={() => { DONG_Y_DO_MAT.thuHoi(); setTick(false); }}>Rút thoả thuận</button>
+            <Check className="size-3.5 text-jade" aria-hidden /> {en ? t("do.da_dong_y", { ngay: ngayDongYAnhMat(dongY, "en") ?? "", ban: DONG_Y_DO_MAT.phienBan }) : <>Đã đồng ý ngày {ngayDongYAnhMat(dongY)} (bản {DONG_Y_DO_MAT.phienBan}).</>}
+            <button type="button" className="underline underline-offset-2 hover:text-fg" onClick={() => { DONG_Y_DO_MAT.thuHoi(); setTick(false); }}>{t("do.rut")}</button>
           </p>
         ) : (
           <label className="mt-2 flex items-start gap-2 text-sm text-fg">
             <input type="checkbox" className="mt-0.5 size-4 shrink-0 accent-[rgb(var(--gold))]" checked={tick} onChange={(e) => setTick(e.target.checked)} data-testid="do-dong-y" />
-            <span>Tôi đồng ý gửi toạ độ các điểm mốc trên ảnh của chính tôi để đo.</span>
+            <span>{t("do.dong_y")}</span>
           </label>
         )}
         <div className="mt-3 flex flex-wrap items-center gap-2">
-          <Button onClick={doNgay} disabled={!sanSang} data-testid="do-tinh"><Ruler aria-hidden /> {tinh ? "Đang đo…" : kq ? "Đo lại" : "Đo và gợi ý"}</Button>
-          {url && !du && <span className="text-xs text-fg-faint">Còn {batBuoc.filter((m) => !diem[m]).length} điểm bắt buộc.</span>}
-          {nghiengDu.length > 0 && <span className="text-xs text-jade" data-testid="do-kem-nghieng">Kèm {nghiengDu.length} ảnh nghiêng.</span>}
-          {nghiengThieu > 0 && <span className="text-xs text-fg-faint">Ảnh nghiêng chưa chấm đủ sẽ không được tính.</span>}
+          <Button onClick={doNgay} disabled={!sanSang} data-testid="do-tinh"><Ruler aria-hidden /> {tinh ? t("do.dang_do") : kq ? t("do.do_lai") : t("do.do")}</Button>
+          {url && !du && <span className="text-xs text-fg-faint">{t("do.con_diem", { so: String(batBuoc.filter((m) => !diem[m]).length) })}</span>}
+          {nghiengDu.length > 0 && <span className="text-xs text-jade" data-testid="do-kem-nghieng">{t("do.kem_nghieng", { so: String(nghiengDu.length) })}</span>}
+          {nghiengThieu > 0 && <span className="text-xs text-fg-faint">{t("do.nghieng_thieu")}</span>}
         </div>
         {loi && <p className="mt-2 text-sm text-cinnabar" data-testid="do-loi">{loi}</p>}
       </div>
@@ -360,20 +372,20 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
       {kq && (
         <div className="space-y-3">
           <div className="rounded-2xl border border-line/70 bg-surface/40 p-4 text-sm" data-testid="do-so-do">
-            <p className="font-medium text-fg">Số đo của bạn</p>
+            <p className="font-medium text-fg">{t("do.so_do")}</p>
             <dl className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-fg-muted sm:grid-cols-3">
-              {kq.so_do.tam_dinh && <div><dt className="inline">Ba đình: </dt><dd className="inline text-fg">{kq.so_do.tam_dinh.thuong}% · {kq.so_do.tam_dinh.trung}% · {kq.so_do.tam_dinh.ha}%</dd></div>}
-              <div><dt className="inline">Cao / ngang gò má: </dt><dd className="inline text-fg">{so(kq.so_do.cao_rong)}</dd></div>
-              <div><dt className="inline">Trán / gò má: </dt><dd className="inline text-fg">{so(kq.so_do.tran_ma)}</dd></div>
-              <div><dt className="inline">Hàm / gò má: </dt><dd className="inline text-fg">{so(kq.so_do.ham_ma)}</dd></div>
-              <div><dt className="inline">Mắt / ngang mặt: </dt><dd className="inline text-fg">{so(kq.so_do.mat_mat)}</dd></div>
-              <div><dt className="inline">Ấn Đường / khoé mắt: </dt><dd className="inline text-fg">{so(kq.so_do.may_khoe)}</dd></div>
+              {kq.so_do.tam_dinh && <div><dt className="inline">{t("do.sd_ba_dinh")}</dt><dd className="inline text-fg">{kq.so_do.tam_dinh.thuong}% · {kq.so_do.tam_dinh.trung}% · {kq.so_do.tam_dinh.ha}%</dd></div>}
+              <div><dt className="inline">{t("do.sd_cao_rong")}</dt><dd className="inline text-fg">{so(kq.so_do.cao_rong, en)}</dd></div>
+              <div><dt className="inline">{t("do.sd_tran_ma")}</dt><dd className="inline text-fg">{so(kq.so_do.tran_ma, en)}</dd></div>
+              <div><dt className="inline">{t("do.sd_ham_ma")}</dt><dd className="inline text-fg">{so(kq.so_do.ham_ma, en)}</dd></div>
+              <div><dt className="inline">{t("do.sd_mat_mat")}</dt><dd className="inline text-fg">{so(kq.so_do.mat_mat, en)}</dd></div>
+              <div><dt className="inline">{t("do.sd_may_khoe")}</dt><dd className="inline text-fg">{so(kq.so_do.may_khoe, en)}</dd></div>
             </dl>
             {kq.canh_bao.map((c, i) => <p key={i} className="mt-2 text-xs text-gold">{c}</p>)}
-            <p className="mt-2 text-xs text-fg-faint">Sắc da, nếp nhăn, độ dày thịt, ánh mắt, giọng nói ảnh không đo được — bạn trả lời ở phần Khảo sát.</p>
+            <p className="mt-2 text-xs text-fg-faint">{t("do.sd_ghi")}</p>
           </div>
           <DanhSachGoiY key={JSON.stringify(kq.goi_y)} ks={ks} goiY={kq.goi_y} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem} onDungVaXem={onDungVaXem} dangXem={dangXem} nguon="do"
-            chuRong="Các tỉ lệ của bạn nằm trong khoảng cân đối nên hệ thống không gợi ý nét nào nổi bật — trả lời Khảo sát để có bài đọc." />
+            chuRong={t("do.rong")} />
         </div>
       )}
     </div>

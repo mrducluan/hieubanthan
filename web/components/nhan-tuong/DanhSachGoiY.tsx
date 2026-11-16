@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import type { KhaoSat, TraLoi } from "@/lib/nhan-tuong";
 import { cn } from "@/lib/utils";
+import { useChuNhanTuong } from "./chu-nhan-tuong";
 
 export interface GoiYNet { cau: string; lua_chon: string; do_tin?: number; do?: string; vua?: boolean }
 
@@ -17,6 +18,7 @@ export function DanhSachGoiY({ ks, goiY, luuY, daTraLoi, onGoiY, onXem, onDungVa
   onDungVaXem?: (tl: TraLoi) => void; dangXem?: boolean;
   /** "do" = hệ thống đo · "ai" = máy AI gợi ý (mã đo lường). */ nguon: "do" | "ai"; chuRong?: string;
 }) {
+  const { t, en } = useChuNhanTuong();
   const cau = useMemo(() => Object.fromEntries(ks.cau_hoi.map((c) => [c.ma, c])), [ks]);
   const hopLe = goiY.filter((x) => cau[x.cau]?.lua_chon.some((l) => l.ma === x.lua_chon));
   const [chon, setChon] = useState<Record<string, boolean>>(() => Object.fromEntries(hopLe.map((x) => [x.cau, true])));
@@ -52,21 +54,24 @@ export function DanhSachGoiY({ ks, goiY, luuY, daTraLoi, onGoiY, onXem, onDungVa
     <div className="rounded-2xl border border-line/70 bg-bg/60 p-4 sm:p-5" data-testid={nguon === "do" ? "do-goi-y" : "anh-goi-y"}>
       {(luuY ?? []).map((l, i) => <p key={i} className="mb-1 text-xs text-fg-muted">{l}</p>)}
       {hopLe.length === 0 ? (
-        <p className="text-sm text-fg-muted">{chuRong ?? "Chưa có nét nào đủ rõ để gợi ý — bạn tự soi gương ở phần Khảo sát nhé."}</p>
+        <p className="text-sm text-fg-muted">{chuRong ?? t("gy.rong")}</p>
       ) : (
         <>
-          <p className="flex items-center gap-2 font-serif text-lg text-fg"><Sparkles className="size-4 text-gold" aria-hidden /> {nguon === "do" ? "Hệ thống đo được" : "Máy thấy"} {hopLe.length} nét{noiBat.length && vua.length ? ` (${noiBat.length} nổi bật)` : ""} — bạn xác nhận</p>
-          <p className="mt-1 text-xs text-fg-muted">Bỏ tích nét nào bạn thấy chưa đúng; nét còn lại điền vào khảo sát, bạn vẫn sửa được ở dưới.</p>
+          <p className="flex items-center gap-2 font-serif text-lg text-fg"><Sparkles className="size-4 text-gold" aria-hidden /> {en ? `${nguon === "do" ? t("gy.do_duoc") : t("gy.may_thay")} ${t("gy.so_net", { so: String(hopLe.length) })}${noiBat.length && vua.length ? t("gy.noi_bat", { so: String(noiBat.length) }) : ""}${t("gy.xac_nhan")}`
+            : <>{nguon === "do" ? "Hệ thống đo được" : "Máy thấy"} {hopLe.length} nét{noiBat.length && vua.length ? ` (${noiBat.length} nổi bật)` : ""} — bạn xác nhận</>}</p>
+          <p className="mt-1 text-xs text-fg-muted">{t("gy.bo_tich")}</p>
           {conLai > 0 && (
             <p className="mt-1 text-xs text-fg-muted" data-testid="goi-y-con-lai">
+              {en ? <>{t("gy.con_lai", { so: String(conLai) })}{" "}
+              <a href="#khao-sat" className="text-gold underline underline-offset-2">{t("gy.tra_loi_them")}</a> {t("gy.con_lai_2")}</> : <>
               Ảnh không đo được {conLai} câu còn lại (sắc da, độ đầy thịt, nếp, ánh mắt, giọng, dáng…) — bài đọc vẫn có đủ chương,{" "}
-              <a href="#khao-sat" className="text-gold underline underline-offset-2">trả lời thêm</a> thì chương nào cũng dày hơn.
+              <a href="#khao-sat" className="text-gold underline underline-offset-2">trả lời thêm</a> thì chương nào cũng dày hơn.</>}
             </p>
           )}
           {noiBat.length > 0 && <ul className="mt-3 grid gap-2 sm:grid-cols-2" data-testid="goi-y-noi-bat">{noiBat.map(the)}</ul>}
           {vua.length > 0 && (
             <div className="mt-3" data-testid="goi-y-vua">
-              <p className="text-xs font-medium uppercase tracking-wide text-fg-faint">Nét cân đối, trong khoảng thường</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-fg-faint">{t("gy.vua")}</p>
               <ul className="mt-2 grid gap-2 sm:grid-cols-2">{vua.map(the)}</ul>
             </div>
           )}
@@ -75,14 +80,14 @@ export function DanhSachGoiY({ ks, goiY, luuY, daTraLoi, onGoiY, onXem, onDungVa
               ? onDungVaXem
                 ? <>
                   <Button onClick={() => dung(true)} disabled={soChon === 0 || dangXem} data-testid={nguon === "do" ? "do-dung-xem" : "anh-dung-xem"}>
-                    <Check aria-hidden /> {dangXem ? "Đang đọc…" : `Dùng ${soChon} nét và xem bài đọc`}</Button>
-                  <button type="button" onClick={() => dung()} disabled={soChon === 0} className="text-sm text-gold underline underline-offset-4" data-testid={nguon === "do" ? "do-dung" : "anh-dung"}>Chỉ điền vào khảo sát</button>
+                    <Check aria-hidden /> {dangXem ? t("gy.dang_doc") : t("gy.dung_xem", { so: String(soChon) })}</Button>
+                  <button type="button" onClick={() => dung()} disabled={soChon === 0} className="text-sm text-gold underline underline-offset-4" data-testid={nguon === "do" ? "do-dung" : "anh-dung"}>{t("gy.chi_dien")}</button>
                 </>
-                : <Button onClick={() => dung()} disabled={soChon === 0} data-testid={nguon === "do" ? "do-dung" : "anh-dung"}><Check aria-hidden /> Dùng {soChon} nét đã tích</Button>
+                : <Button onClick={() => dung()} disabled={soChon === 0} data-testid={nguon === "do" ? "do-dung" : "anh-dung"}><Check aria-hidden /> {t("gy.dung", { so: String(soChon) })}</Button>
               : <>
-                <span className="text-sm text-jade" data-testid={nguon === "do" ? "do-da-dung" : "anh-da-dung"}>Đã điền {daDung} nét vào khảo sát.</span>
-                <Button onClick={onXem} disabled={dangXem} data-testid={nguon === "do" ? "do-xem-bai-doc" : "anh-xem-bai-doc"}>{dangXem ? "Đang đọc…" : "Xem bài đọc ngay"}</Button>
-                <a href="#khao-sat" className="text-sm text-gold underline underline-offset-4">Trả lời thêm các nét ảnh không đo được</a>
+                <span className="text-sm text-jade" data-testid={nguon === "do" ? "do-da-dung" : "anh-da-dung"}>{t("gy.da_dien", { so: String(daDung) })}</span>
+                <Button onClick={onXem} disabled={dangXem} data-testid={nguon === "do" ? "do-xem-bai-doc" : "anh-xem-bai-doc"}>{dangXem ? t("gy.dang_doc") : t("gy.xem_ngay")}</Button>
+                <a href="#khao-sat" className="text-sm text-gold underline underline-offset-4">{t("gy.tra_loi_net")}</a>
               </>}
           </div>
         </>

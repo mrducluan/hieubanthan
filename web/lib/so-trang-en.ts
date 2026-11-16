@@ -133,6 +133,13 @@ export const CUM_EN: Readonly<Record<string, CumEn>> = {
     mo_ta: "The home signs feng shui often mentions — a mirror facing the bed, a beam over the bed, doors in a line — what the old books say, and fixes that cost nothing.",
     tra_loi: "These are {so} signs inside and around a home that feng shui often talks about: a door facing a door, a stove facing the bathroom, stairs in the middle of the house, a bed under a beam, and more. Each page says what the sign is, what the old books and folk tradition say, how it looks through everyday life (light, air, noise, safety), and what you can do about it, starting with fixes that cost nothing.",
   },
+  // EN-ALL GĐ 8 — Nhân tướng học: cụm bộ vị gương mặt.
+  "/nhan-tuong/bo-vi": {
+    ten: "Areas of the face", h1: "The areas of the face in Chinese face reading",
+    tieu_de_seo: "Face reading areas: forehead, Yin Tang, nose, chin · Hieuban",
+    mo_ta: "The 25 areas of the face in classic Chinese face reading, from forehead to chin: where each sits, the ages it is read for, and what to look for.",
+    tra_loi: "Classic Chinese face reading divides the face into three zones (forehead, nose, chin), five features (brows, eyes, ears, nose, mouth) and named areas such as Yin Tang between the brows or Shan Gen at the root of the nose. Each area is linked to one part of life and to the ages it is read for. This section has {so} pages, one per area: where it is, what the old books say, how to look at it in a mirror, and a question to reflect on.",
+  },
 
 };
 
@@ -354,6 +361,103 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
     kien_thuc: {
       tieu_de: "Learn the I Ching",
       cum: Object.fromEntries(["/kinh-dich/que"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
+    },
+  },
+  // EN-ALL GĐ 8 — Nhân tướng học, Chân dung tổng hợp, Thời gian tới (rewrite của trang Việt, một cây component).
+  "/nhan-tuong": {
+    ten: "Face reading",
+    tieu_de_seo: "Free Chinese face reading: a guided look in the mirror · Hieuban",
+    mo_ta_seo: "Free Chinese face reading: answer a guided mirror survey or measure a photo that never leaves your device, and get an eight-chapter reading in plain English.",
+    tra_loi_nhanh: {
+      hoi: "How does this online face reading work?",
+      dap: "Look in a mirror and answer short questions in six steps — forehead, brows and eyes, nose, mouth and chin, ears, overall — or pick a straight-on photo and let your own device place landmarks on it (the photo is never uploaded). The page reads your answers through the three zones, five features and twelve palaces of classic face reading, in plain English. It only reads your own face.",
+      lien_ket: [{ href: "/en/face-reading/face-areas", ten: "The areas of the face" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the face reading",
+      doan: [
+        "Classic Chinese face reading looks at the face in three zones (forehead, middle face, lower face), five features and twelve named palaces, and links each area to one part of life. This page turns that into a guided look in the mirror: you choose what you see, area by area, and the reading puts it together in eight chapters — your face shape by the five elements, character, work and money, love and family, health habits, which area to watch this year, face and birth chart, and things to do.",
+        "You can also measure a straight-on photo of yourself. Your device finds about twenty landmarks in the browser and you check them; only those coordinates are sent for one calculation of the classic proportions, then discarded. The photo never leaves your device and is not stored. Things a photo cannot show — skin tone, lines, the look in your eyes — you answer in the survey.",
+        "The reading is cultural reference and self-reflection, not a judgement of anyone. There are no scores, it does not read other people, and it never suggests changing your face. Old books wrote for their own time; health notes are reminders to look after yourself, not a diagnosis.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Do I need a photo?", dap: "No. The six-step mirror survey is enough. A photo only helps you answer the questions about proportions faster, and it stays on your device." },
+        { hoi: "What happens to my photo?", dap: "Nothing leaves your device. Your browser finds landmarks on the photo and, only after you tick the agreement, sends their coordinates for one measurement that is not stored. You can withdraw the agreement at any time." },
+        { hoi: "Which tradition is used?", dap: "The survey and the reading follow the classic Chinese books on physiognomy — the three zones and five features, the twelve palaces, the hundred age positions and the five element face shapes — retold in plain English by our editorial team." },
+        { hoi: "Can it read someone else's face?", dap: "No. The page only reads the person using it, from what they see in their own mirror." },
+        { hoi: "Is it free?", dap: "Yes. The survey, the photo measurement and the eight-chapter reading are free in English. Your answers are saved only on your device." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/portrait", ten: "Your combined portrait" },
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+      ] },
+    },
+    kien_thuc: {
+      tieu_de: "Learn face reading",
+      cum: Object.fromEntries(["/nhan-tuong/bo-vi"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
+    },
+  },
+  "/chan-dung": {
+    ten: "Your combined portrait",
+    tieu_de_seo: "Zi Wei, BaZi and face reading side by side: your portrait · Hieuban",
+    mo_ta_seo: "Your Zi Wei Dou Shu chart, your BaZi chart and your own face, side by side for each area of life: where the three agree and where they differ. No scores.",
+    tra_loi_nhanh: {
+      hoi: "What is the combined portrait?",
+      dap: "It puts three ways of looking at you side by side, area by area — work, money, love, family, health and this year: your Zi Wei Dou Shu chart, your BaZi chart, and the face reading survey if you have done it. It shows where the three agree and where they see different sides, without adding them into one score.",
+      lien_ket: [{ href: "/en/face-reading", ten: "Face reading" }, { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the combined portrait",
+      doan: [
+        "Each system looks at you from a different side: Zi Wei Dou Shu looks at your circumstances (work, money, home, people), BaZi at your own energy (which elements are strong or thin), and face reading at what you see in yourself now. This page does not blend them into one number; it sets them side by side for each area of life and says clearly where they agree, where they differ, and why.",
+        "It needs your birth time, sex and place of birth for the two charts. The face reading survey adds a third view; without it, the page still reads the two charts. Each box in the reading is the original box from one system, so when you mark it as true for you, the vote goes back to that system.",
+        "The portrait is free in English. Your birth details are not stored on our side.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Does it add the three systems into a score?", dap: "No. Each area only shows the level each system gave in its own reading — Favourable, Balanced or Needs care — and then says whether they agree or see different sides. There is no total and no ranking." },
+        { hoi: "When they disagree, which one should I trust?", dap: "None of them is wrong; each shows one side. The page suggests using the most careful reading as your safety margin and the favourable one for plans you have prepared well. An area where several systems agree is more reliable than one only a single system mentions." },
+        { hoi: "What if I have not done the face reading survey?", dap: "You can still read the portrait with the two charts. The face reading column stays empty until you answer the mirror survey (about five minutes, no photo needed)." },
+        { hoi: "Is numerology part of it?", dap: "Not yet. Numerology works from the solar birth date and does not give a level for each area of life the way these three systems do, so it stays on its own page." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/face-reading", ten: "Face reading" },
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+        { href: "/en/year-ahead", ten: "Your year ahead" },
+      ] },
+    },
+  },
+  "/thoi-gian-toi": {
+    ten: "Your year ahead",
+    tieu_de_seo: "Your next 3 months, 12 months and year ahead, free · Hieuban",
+    mo_ta_seo: "Your next 3 months, 12 months and year ahead from your birth date: numerology months, Zi Wei and BaZi months, and Vietnamese age customs, in plain English.",
+    tra_loi_nhanh: {
+      hoi: "What does the year-ahead reading show?",
+      dap: "From your birth date it lays out the next three months, the next twelve months and the coming lunar year: your numerology Personal Months, the Zi Wei Dou Shu rhythm of each lunar month, the BaZi solar months, and the Vietnamese customs tied to your age. Months where several views agree come first. It is a rhythm to plan by, not a prediction.",
+      lien_ket: [{ href: "/en/numerology", ten: "Numerology from your name and birth date" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the year-ahead reading",
+      doan: [
+        "Want to know where to put your energy in the next three months, which of the next twelve months suit starting something new, and how the coming year opens? This page combines three views from your own birth date — numerology, Zi Wei Dou Shu and BaZi — with the Vietnamese customs tied to your age, and says it in plain words.",
+        "Your name and birth date are enough for Personal Months, the Personal Year and the age customs. Add your birth time, sex and place of birth to get the Zi Wei and BaZi rhythm of each month; months where both charts agree, whether to push ahead or to slow down, come first.",
+        "This is a suggested rhythm for planning your own time, not a forecast of events. The page does not offer rituals or sell objects, and your birth date is not stored on our side.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "How are the three views different?", dap: "Numerology counts Personal Months and Years from your solar birth day and month (the year starts on 1 January). Zi Wei Dou Shu reads each lunar month through the month's transformations on your chart. BaZi reads solar-term months, which change on the day each solar term begins, with the year starting at Li Chun. Because the calendars differ, the month boundaries do not line up exactly." },
+        { hoi: "When they disagree, which should I follow?", dap: "Start with the larger layers: the ten-year period, then the year, then the month. Months where both charts give the same level are listed first in the twelve-month chapter." },
+        { hoi: "When does the coming year start?", dap: "The lunar year starts at Lunar New Year (Vietnamese lunar calendar); the BaZi year starts at Li Chun (around 4 February); the numerology Personal Year starts on 1 January. Each part of the reading states which boundary it uses." },
+        { hoi: "Is it free?", dap: "Yes, the whole year-ahead reading is free in English." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/numerology", ten: "Numerology from your name and birth date" },
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+      ] },
     },
   },
 };
