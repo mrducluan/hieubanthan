@@ -875,7 +875,8 @@ def the_tra_loi(trai_bai: str, la: list[dict], *, y_dinh: str, viec: str | None 
         raise ValueError(f"Không có trải bài {trai_bai}")
     if y_dinh not in tc.Y_DINH:
         raise ValueError("Ý định không có trong danh mục")
-    ds_viec = {ma: (nhan, lv) for ma, nhan, lv, _ in tc.VIEC}
+    # Nhãn loại việc theo ngôn ngữ của lượt gọi (cùng danh mục mã: VIEC_EN trùng mã với VIEC).
+    ds_viec = {ma: (nhan, lv) for ma, nhan, lv, _ in (tc.VIEC_EN if tc._la_tieng_anh() else tc.VIEC)}  # noqa: SLF001
     if viec is not None and viec not in ds_viec:
         raise ValueError("Việc không có trong danh mục")
     if linh_vuc is not None and linh_vuc not in _TEN_LV_VI:

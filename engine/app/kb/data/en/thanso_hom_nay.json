@@ -1,0 +1,636 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản phủ tiếng Anh (ban biên tập, chờ người bản xứ duyệt).",
+ "source": {
+  "ten": "Reference edition (AI draft, 2026) in the Balliett–Jordan tradition and popular numerology books",
+  "luu_y": "Draft text, shown under the project owner's decision; reviewed gradually. A cultural reference, not a forecast."
+ },
+ "y_dinh": {
+  "cong_viec": {
+   "ten": "At work",
+   "cau_hoi": "Anything important at work today?"
+  },
+  "gap_go": {
+   "ten": "Meetings, negotiating",
+   "cau_hoi": "Do you have a meeting, a negotiation or an interview today?"
+  },
+  "hoc_tap": {
+   "ten": "Study, exams, reading",
+   "cau_hoi": "Are you planning to study, revise for an exam or read today?"
+  },
+  "tinh_cam": {
+   "ten": "Dates, someone you love",
+   "cau_hoi": "Do you have a date, or want to talk with someone you love today?"
+  },
+  "gia_dinh": {
+   "ten": "Home and family",
+   "cau_hoi": "Any chores today, or time for your parents or kids?"
+  },
+  "chi_tieu": {
+   "ten": "Spending, sorting money",
+   "cau_hoi": "Are you planning a big purchase or sorting out your money today?"
+  },
+  "van_dong": {
+   "ten": "Exercise, moving",
+   "cau_hoi": "Are you planning to work out or get moving today?"
+  },
+  "bat_dau": {
+   "ten": "Starting something new",
+   "cau_hoi": "Do you want to kick off a new task or project today?"
+  },
+  "di_chuyen": {
+   "ten": "Travel, moving place",
+   "cau_hoi": "Do you have a long trip or a move today?"
+  },
+  "nghi_ngoi": {
+   "ten": "Rest, looking after yourself",
+   "cau_hoi": "Do you want to rest and look after yourself today?"
+  },
+  "sang_tao": {
+   "ten": "Creating, ideas",
+   "cau_hoi": "Are you planning to write, draw, make content or think up ideas today?"
+  }
+ },
+ "ngay_pho_quat": {
+  "1": "The general mood of the day is beginning: many people want to start something new and speak their mind.",
+  "2": "The general mood of the day is cooperation: good for listening, giving way and working in pairs.",
+  "3": "The general mood of the day is communication: people chat, share and open up more easily.",
+  "4": "The general mood of the day is routine: good for hard work, getting organised and keeping commitments.",
+  "5": "The general mood of the day is movement: lots of small changes, good for staying flexible and trying new things.",
+  "6": "The general mood of the day is care: good for looking after family, community and shared responsibilities.",
+  "7": "The general mood of the day is stillness: good for reflection, careful research and a slower pace.",
+  "8": "The general mood of the day is practical: good for business talks, organising and clear decisions.",
+  "9": "The general mood of the day is closing: good for finishing, forgiving and giving."
+ },
+ "cau_hoi_noi_bat": {
+  "1": [
+   "Where today do you want to be the one who speaks first?",
+   "If you took just one first step towards what you have been hoping for, what would it be?",
+   "What do you want to decide for yourself today without waiting for anyone?",
+   "Which of your ideas deserves to be said out loud today?"
+  ],
+  "2": [
+   "Who do you want to listen to a little more closely today?",
+   "Which task would feel lighter if someone did it with you?",
+   "Who could you thank for working well with you lately?",
+   "In today's conversations, what would you like to ask instead of assert?"
+  ],
+  "3": [
+   "What story do you want to share with someone today?",
+   "Which idea do you want to sketch out on paper today?",
+   "Who would you like to send a cheerful hello to?",
+   "What could make you and the person next to you laugh together today?"
+  ],
+  "4": [
+   "Which small task, if finished today, would make the whole week lighter?",
+   "Which corner of your home or your computer do you want to tidy today?",
+   "Which habit do you want to keep up today?",
+   "How will you plan today so you still have room to breathe?"
+  ],
+  "5": [
+   "Which habit would you like to do differently today?",
+   "Is there a place near home you have never visited and would like to try?",
+   "If today's plan changes, what do you want to hold on to?",
+   "What new thing would you like to learn for just a few minutes?"
+  ],
+  "6": [
+   "Which relative would be glad to hear from you today?",
+   "How do you want to look after yourself today?",
+   "Which promise do you want to keep today?",
+   "What small thing could make your living space more comfortable?"
+  ],
+  "7": [
+   "Which question do you want to give careful thought to today?",
+   "Where and when do you want a quiet moment today?",
+   "Which book or topic do you want to dig deeper into?",
+   "What do you want to understand better before you decide?"
+  ],
+  "8": [
+   "Which decision do you already have enough information to make today?",
+   "Which part of your money do you want to sort out clearly today?",
+   "Which task do you want to hand to someone else so you can focus on the main thing?",
+   "Which goal do you want to write down with a number and a deadline?"
+  ],
+  "9": [
+   "What do you want to close so there is room for something new?",
+   "Which object or task are you willing to let go of today?",
+   "Who do you want to say thank you or sorry to?",
+   "Which unfinished task do you want to finish today?"
+  ]
+ },
+ "noi_dung": {
+  "1": {
+   "bat_dau": {
+    "nhan": "A good day to open the show",
+    "cach_lam": "Pick exactly one new task and take the first step before noon: send the email, set up the folder, make the opening call.",
+    "tu_soi": "Did you take the first step of your new task before your lunch break today?"
+   },
+   "cong_viec": {
+    "nhan": "Step up for the main piece of work",
+    "cach_lam": "Ask to take the part you want to lead and set out your approach in a few short sentences, instead of waiting to be assigned.",
+    "tu_soi": "Did you volunteer for a piece of work in today's meeting?"
+   },
+   "gap_go": {
+    "nhan": "Be the first to speak",
+    "cach_lam": "Prepare an opening line that says clearly what you want from the meeting, then say it in the first few minutes.",
+    "tu_soi": "In today's meeting, did you state your main wish right at the start?"
+   },
+   "sang_tao": {
+    "nhan": "New ideas worth writing down",
+    "cach_lam": "Write three rough ideas in fifteen minutes without judging them, then pick one to sketch further.",
+    "tu_soi": "Did you note down a new idea today before talking yourself out of it?"
+   },
+   "van_dong": {
+    "nhan": "Try a new exercise",
+    "cach_lam": "Swap one familiar exercise for one you have never done, at a manageable intensity so you still want to train tomorrow.",
+    "tu_soi": "Did you try a new move or route in today's workout?"
+   },
+   "hoc_tap": {
+    "nhan": "Learn the basics of a new topic",
+    "cach_lam": "Good for opening a new topic: read the overview, list your questions, and leave the deep dive for the coming days.",
+    "tu_soi": "Did you write down the questions you want answered before you started reading?"
+   },
+   "di_chuyen": {
+    "nhan": "Set off with a clear schedule",
+    "cach_lam": "Decide your own route and timing before you leave, and let the people who need to know with a short message.",
+    "tu_soi": "Before setting off, did you settle your route and tell the people who need to know?"
+   },
+   "chi_tieu": {
+    "nhan": "Spend to your own plan",
+    "cach_lam": "Write down the maximum for the purchase before you go shopping, then decide quickly within that limit.",
+    "tu_soi": "Did you set a spending limit before opening your wallet today?"
+   },
+   "gia_dinh": {
+    "nhan": "Take charge of one job at home",
+    "cach_lam": "Take on a household job people usually have to remind you about, finish it fully, then say it is done.",
+    "tu_soi": "Did you do a household job today before anyone had to remind you?"
+   },
+   "tinh_cam": {
+    "nhan": "Lead, but leave room for them",
+    "cach_lam": "The day has a take-charge rhythm, so when you suggest plans for a date offer two options to choose together, rather than deciding alone.",
+    "tu_soi": "When you asked your partner out today, did you let them help choose?"
+   },
+   "nghi_ngoi": {
+    "nhan": "Rest with a purpose of your own",
+    "cach_lam": "The day leans towards action, so turn your break into something you choose and schedule, like a solo walk or a few pages of a book.",
+    "tu_soi": "Did you pick a specific way to rest instead of scrolling your phone to pass the time?"
+   }
+  },
+  "2": {
+   "tinh_cam": {
+    "nhan": "A good day to listen to each other",
+    "cach_lam": "Have a conversation that is only for asking and listening, and repeat back what your partner just said before giving your view.",
+    "tu_soi": "Did you repeat back what your partner said before replying today?"
+   },
+   "gia_dinh": {
+    "nhan": "Share the housework gently",
+    "cach_lam": "Ask everyone at home which part they would like to take, divide the work that way, and do one small job together.",
+    "tu_soi": "Did you ask your family which part they wanted before dividing the chores?"
+   },
+   "gap_go": {
+    "nhan": "Find common ground first",
+    "cach_lam": "Open the meeting by asking about the other side's concerns, note two things you both want, then move on to the differences.",
+    "tu_soi": "In the meeting, what common ground did you find before discussing anything else?"
+   },
+   "nghi_ngoi": {
+    "nhan": "Rest slowly and quietly",
+    "cach_lam": "Pick a quiet way to rest, like a longer bath, soft music or a cup of tea, and turn off notifications while you do it.",
+    "tu_soi": "Did you turn off notifications while resting today?"
+   },
+   "hoc_tap": {
+    "nhan": "Learn with others",
+    "cach_lam": "Good for a study group or asking someone more experienced: bring two specific questions and write down how they explain things.",
+    "tu_soi": "Did you ask someone a specific question about what you are learning today?"
+   },
+   "cong_viec": {
+    "nhan": "Be a good team player",
+    "cach_lam": "Help a colleague where they are stuck, or review where your work and the team's work meet.",
+    "tu_soi": "Did you ask a colleague where they needed help before diving into your own work?"
+   },
+   "sang_tao": {
+    "nhan": "Edit and gather feedback",
+    "cach_lam": "Good for polishing something you already have or asking for feedback on a draft; write the feedback down before responding.",
+    "tu_soi": "Did you note down other people's feedback before explaining your own view?"
+   },
+   "di_chuyen": {
+    "nhan": "Travel with someone for an easier trip",
+    "cach_lam": "If you are travelling, ask someone to come along or ask a contact at your destination to show you around, and keep the schedule relaxed.",
+    "tu_soi": "Did you leave spare time in today's schedule so you did not have to rush?"
+   },
+   "van_dong": {
+    "nhan": "Exercise in step with others",
+    "cach_lam": "Good for training in pairs or groups, or for steady-rhythm exercise like walking, slow swimming or stretching.",
+    "tu_soi": "Did you invite someone to move with you today?"
+   },
+   "bat_dau": {
+    "nhan": "Start by asking for input",
+    "cach_lam": "The day leans towards cooperation, so the first step of a new task can be a talk with the people involved to hear their thoughts before you dive in.",
+    "tu_soi": "Before starting the new task, did you ask the people you will work with for their views?"
+   },
+   "chi_tieu": {
+    "nhan": "Talk it over with whoever shares the cost",
+    "cach_lam": "For a big purchase, discuss it with the person who will use it or chip in, write down what you both agree, then buy.",
+    "tu_soi": "Is there someone involved in today's purchase whose view you have already asked?"
+   }
+  },
+  "3": {
+   "sang_tao": {
+    "nhan": "A good day for ideas to flow",
+    "cach_lam": "Write, draw or film a quick draft in one sitting, getting all the ideas out first and polishing later.",
+    "tu_soi": "Did you finish a complete draft today, however rough?"
+   },
+   "gap_go": {
+    "nhan": "Talk openly and warmly",
+    "cach_lam": "Bring a short story that illustrates your point to make the meeting feel friendlier.",
+    "tu_soi": "In today's meeting, did you use a concrete example to help the other person picture it?"
+   },
+   "tinh_cam": {
+    "nhan": "Say the kind things out loud",
+    "cach_lam": "Give your partner a specific compliment or share a happy memory, in words rather than just an emoji.",
+    "tu_soi": "Did you say out loud one thing you value about your partner today?"
+   },
+   "hoc_tap": {
+    "nhan": "Learn by explaining it back",
+    "cach_lam": "After reading, try explaining it to someone else or record yourself; where you stumble is where you need to study more.",
+    "tu_soi": "Did you explain what you just learned to someone, or to yourself?"
+   },
+   "van_dong": {
+    "nhan": "Move for fun",
+    "cach_lam": "Pick a fun way to move, like dancing to music, playing ball with friends or cycling around town.",
+    "tu_soi": "Was there a moment in today's workout that made you laugh?"
+   },
+   "cong_viec": {
+    "nhan": "Present clearly and briefly",
+    "cach_lam": "Good for presentations, reports or updates; keep each message to three points so it does not ramble.",
+    "tu_soi": "Did the update you sent today fit into three main points?"
+   },
+   "bat_dau": {
+    "nhan": "Start with an introduction",
+    "cach_lam": "Begin the new task by telling a few people about it, and note the questions they ask so you know what needs clarifying.",
+    "tu_soi": "Who did you tell about the new task, and did you note their questions?"
+   },
+   "di_chuyen": {
+    "nhan": "Travel to meet people and see places",
+    "cach_lam": "If you are travelling, leave a gap in the schedule to stop somewhere new or chat with locals.",
+    "tu_soi": "On the road today, did you stop somewhere or learn something new from someone?"
+   },
+   "gia_dinh": {
+    "nhan": "Talk around the dinner table",
+    "cach_lam": "Make the meal a time for stories: everyone shares one good thing from their day, little ones included.",
+    "tu_soi": "At today's meal, did you ask everyone about one good thing in their day?"
+   },
+   "nghi_ngoi": {
+    "nhan": "Rest with small pleasures",
+    "cach_lam": "Rest in a light-hearted way, like a comedy, a call to an old friend or some colouring, as long as it makes you happy.",
+    "tu_soi": "Did today's break actually make you feel lighter?"
+   },
+   "chi_tieu": {
+    "nhan": "Shop from a written list",
+    "cach_lam": "A high-spirited day makes impulse buying easy, so write a list first and leave anything off the list in the basket until tomorrow.",
+    "tu_soi": "Was what you bought today on the list you wrote beforehand?"
+   }
+  },
+  "4": {
+   "cong_viec": {
+    "nhan": "Clear the backlog, work steadily",
+    "cach_lam": "Pick the two longest-standing tasks and finish them one at a time, closing unrelated tabs while you work.",
+    "tu_soi": "Which backlog task did you fully close today?"
+   },
+   "hoc_tap": {
+    "nhan": "Revise steadily to plan",
+    "cach_lam": "Split what you need to learn into small blocks with start and end times, and tick each block off when done.",
+    "tu_soi": "Did you study in the time blocks you set for today?"
+   },
+   "chi_tieu": {
+    "nhan": "Tidy up your spending",
+    "cach_lam": "Good for reviewing this month's spending, cancelling a subscription you do not use and setting a budget for next week.",
+    "tu_soi": "Did you find a recurring cost you no longer need today?"
+   },
+   "van_dong": {
+    "nhan": "Train steadily to plan",
+    "cach_lam": "Do the session you planned and note your sets or distance so you can compare with yourself next time.",
+    "tu_soi": "Did you record today's workout so you can track it?"
+   },
+   "gia_dinh": {
+    "nhan": "Sort out a corner of the home",
+    "cach_lam": "Choose one drawer, a kitchen corner or a child's wardrobe to tidy with your family, done in one session.",
+    "tu_soi": "Which corner of your home got properly tidied today?"
+   },
+   "bat_dau": {
+    "nhan": "Lay the foundation for something new",
+    "cach_lam": "If you are starting something new, spend the day building the frame: a task list, milestones and what you need to prepare.",
+    "tu_soi": "Does your new task have a list of steps and milestones yet?"
+   },
+   "gap_go": {
+    "nhan": "Prepare well before the meeting",
+    "cach_lam": "Bring documents and checked figures, and write down what needs to be agreed by the end.",
+    "tu_soi": "At the end of today's meeting, did you sum up what was agreed?"
+   },
+   "nghi_ngoi": {
+    "nhan": "Rest at the time you set",
+    "cach_lam": "Put a specific break in your calendar like an appointment, and stop when it comes even if the work is unfinished.",
+    "tu_soi": "Did you stop work at the break time you set?"
+   },
+   "tinh_cam": {
+    "nhan": "Show love through actions",
+    "cach_lam": "Do something practical for your partner, like fixing something, cooking their favourite dish or handling some paperwork for them.",
+    "tu_soi": "Did you do one specific thing to help your partner today?"
+   },
+   "di_chuyen": {
+    "nhan": "Travel with a checklist",
+    "cach_lam": "The day suits routine more than spontaneity, so before the trip list your things, documents and times so it runs smoothly.",
+    "tu_soi": "Did you check your documents and things to bring before setting off?"
+   },
+   "sang_tao": {
+    "nhan": "Create in a fixed time slot",
+    "cach_lam": "Ideas may come more slowly on a disciplined day, so sit down in a fixed time slot and work on the technical side, like tightening sentences or the layout.",
+    "tu_soi": "Did you sit through your planned creative slot today even before the ideas came?"
+   }
+  },
+  "5": {
+   "di_chuyen": {
+    "nhan": "A good day to hit the road",
+    "cach_lam": "Choose a different stretch of road or stop from last time, so your eyes and mind get refreshed.",
+    "tu_soi": "On today's trip, did you try a new route or a new stop?"
+   },
+   "bat_dau": {
+    "nhan": "Test fast, learn fast",
+    "cach_lam": "Start the new task as a small trial of a few hours, see the response, then decide whether to carry on.",
+    "tu_soi": "Did you make a small trial version instead of planning for too long?"
+   },
+   "van_dong": {
+    "nhan": "Change how you move",
+    "cach_lam": "Swap your usual routine for something completely different, like hill walking, swimming or a team sport.",
+    "tu_soi": "Did you move in a different way from usual today?"
+   },
+   "sang_tao": {
+    "nhan": "Mix in ideas from unfamiliar places",
+    "cach_lam": "Read or watch something outside your field, then bring one detail from it into what you are working on.",
+    "tu_soi": "Did you borrow an idea from another field for today's creative work?"
+   },
+   "gap_go": {
+    "nhan": "Stay flexible when negotiating",
+    "cach_lam": "Prepare two or three alternatives so the meeting has room to move when the other side makes an unexpected offer.",
+    "tu_soi": "Did you bring alternatives into today's meeting?"
+   },
+   "tinh_cam": {
+    "nhan": "Try a fresh kind of date",
+    "cach_lam": "Swap the usual spot for somewhere neither of you has been, or try cooking something new together.",
+    "tu_soi": "Was there anything new on today's date that you had not done together before?"
+   },
+   "hoc_tap": {
+    "nhan": "Learn through several channels",
+    "cach_lam": "Alternate reading, videos and hands-on practice in short stretches to keep your focus.",
+    "tu_soi": "Did you switch how you were studying when you noticed your attention slipping today?"
+   },
+   "cong_viec": {
+    "nhan": "Adapt to change",
+    "cach_lam": "When plans change, rewrite your priority list in five minutes and carry on, rather than sticking to the old schedule.",
+    "tu_soi": "When something came up today, did you reorder your priorities?"
+   },
+   "nghi_ngoi": {
+    "nhan": "Rest with a stroll",
+    "cach_lam": "Change scenery to rest: go to a park, a new cafe, or walk around an unfamiliar neighbourhood.",
+    "tu_soi": "Did you change your seat or surroundings to unwind today?"
+   },
+   "chi_tieu": {
+    "nhan": "If the urge to buy hits, wait",
+    "cach_lam": "The day is full of appetite for the new, so for big items write down the name and price and look again after a night's sleep; if you still need it, buy it.",
+    "tu_soi": "For today's big item, did you sleep on it before deciding?"
+   },
+   "gia_dinh": {
+    "nhan": "A change of air for the family",
+    "cach_lam": "A restless day can make chores feel cramped, so turn housework into something new, like cooking an unusual dish together or taking the family for a walk.",
+    "tu_soi": "Did you invite your family to do something new together today?"
+   }
+  },
+  "6": {
+   "gia_dinh": {
+    "nhan": "A good day to care for family",
+    "cach_lam": "Call your parents to check in, or spend a block of phone-free time with your kids.",
+    "tu_soi": "Did you give your family a block of undivided time today?"
+   },
+   "tinh_cam": {
+    "nhan": "Care through small things",
+    "cach_lam": "Notice a small need of your partner's, like a glass of water or a check-in message when they are busy, and do it without being asked.",
+    "tu_soi": "Did you do something small for your partner without waiting to be asked?"
+   },
+   "nghi_ngoi": {
+    "nhan": "Look after yourself",
+    "cach_lam": "Cook yourself a proper meal, go to bed earlier, or make your resting corner more comfortable.",
+    "tu_soi": "Did you do something caring for yourself today, as you would for someone you love?"
+   },
+   "sang_tao": {
+    "nhan": "Make your living space lovely",
+    "cach_lam": "Good for making something to give or for brightening your home: arrange some flowers, write a card, rearrange your desk.",
+    "tu_soi": "Did you make something small to give someone or to brighten your space today?"
+   },
+   "cong_viec": {
+    "nhan": "Round off your responsibilities",
+    "cach_lam": "Prioritise the tasks other people are waiting on you for, finish them and let them know.",
+    "tu_soi": "Was someone waiting on your work, and did you send it today?"
+   },
+   "gap_go": {
+    "nhan": "Listen to what the other side needs",
+    "cach_lam": "In a meeting or interview, ask what the other side needs to solve and say clearly which part you can help with.",
+    "tu_soi": "Did you ask what the other side needed before presenting what you offer?"
+   },
+   "hoc_tap": {
+    "nhan": "Learn to help others",
+    "cach_lam": "Choose to learn something you can use right away for family or your team, like a cooking skill or a basic first-aid tip.",
+    "tu_soi": "Did what you learned today help anyone in particular?"
+   },
+   "van_dong": {
+    "nhan": "Move with your loved ones",
+    "cach_lam": "Invite your family for a walk after dinner or play outside with your kids, keeping to the pace of the least energetic person.",
+    "tu_soi": "Did you get moving with a family member for a while today?"
+   },
+   "chi_tieu": {
+    "nhan": "Spend on home with care",
+    "cach_lam": "Good for spending on the home and family; ask whoever will use it before choosing.",
+    "tu_soi": "For what you bought for the home today, did you ask the people who will use it?"
+   },
+   "bat_dau": {
+    "nhan": "Start while keeping your promises",
+    "cach_lam": "The day is heavy with responsibility, so before starting anything new check the promises still open and give notice if you need to move them.",
+    "tu_soi": "Before taking on something new, did you review the promises still open?"
+   },
+   "di_chuyen": {
+    "nhan": "Travel, but remember those at home",
+    "cach_lam": "The day turns towards family, so if you have to travel, sort things at home first and set a time to call back.",
+    "tu_soi": "Before the trip, did you sort things at home and set a time to keep in touch?"
+   }
+  },
+  "7": {
+   "hoc_tap": {
+    "nhan": "A good day for deep study",
+    "cach_lam": "Choose one topic and read one good source closely in a long uninterrupted stretch, taking notes in your own words.",
+    "tu_soi": "Did you study in one long stretch today without opening social media?"
+   },
+   "nghi_ngoi": {
+    "nhan": "Quiet time of your own",
+    "cach_lam": "Give yourself some screen-free time alone: a walk, sitting still, a few lines in a journal.",
+    "tu_soi": "Did you have some truly alone time today?"
+   },
+   "sang_tao": {
+    "nhan": "Think slowly, write deeply",
+    "cach_lam": "Good for mulling over a big idea: write down the core question and answer it in a few careful paragraphs.",
+    "tu_soi": "Did you spend time going deep on one idea instead of jumping between many?"
+   },
+   "van_dong": {
+    "nhan": "Calm movement",
+    "cach_lam": "Good for yoga, stretching, walking alone or slow swimming, the kind of exercise that settles the mind.",
+    "tu_soi": "Did today's movement help your mind settle?"
+   },
+   "tinh_cam": {
+    "nhan": "Close in the quiet",
+    "cach_lam": "A gentle time together, like reading side by side, a quiet walk, or telling each other what is on your mind.",
+    "tu_soi": "Did you share with your partner what you are really thinking about today?"
+   },
+   "gia_dinh": {
+    "nhan": "A deep talk with one person",
+    "cach_lam": "Instead of juggling chores, sit and talk longer with one family member about what is on their mind.",
+    "tu_soi": "Did you ask a family member in depth about what is worrying them today?"
+   },
+   "cong_viec": {
+    "nhan": "Do the work that needs analysis",
+    "cach_lam": "Prioritise work that needs careful thought, like checking data, tracing the cause of an error or writing a proposal; move meetings to another day if you can.",
+    "tu_soi": "Did you make time today for the work that needs the most careful thought?"
+   },
+   "di_chuyen": {
+    "nhan": "A trip for reflection",
+    "cach_lam": "If you are travelling, bring a notebook or a book and use the journey to think rather than just scroll.",
+    "tu_soi": "On the road today, did you note down a thought worth keeping?"
+   },
+   "gap_go": {
+    "nhan": "Meet with your questions ready",
+    "cach_lam": "The day turns inward, so prepare the questions you want answered, speak little and listen closely, and ask for time to think before agreeing.",
+    "tu_soi": "In today's meeting, did you ask for time to think before agreeing on something important?"
+   },
+   "chi_tieu": {
+    "nhan": "Research before you spend",
+    "cach_lam": "The day suits research more than quick action, so compare, read reviews and write down why you need it, then decide once it is clear.",
+    "tu_soi": "Did you write down why you need the item before buying it?"
+   },
+   "bat_dau": {
+    "nhan": "Start with research",
+    "cach_lam": "The first step of a new task today can be reading up and writing down the questions to answer, leaving the action for days with a more outward rhythm.",
+    "tu_soi": "Have you written down the questions your new task needs to answer?"
+   }
+  },
+  "8": {
+   "cong_viec": {
+    "nhan": "A good day to settle big matters",
+    "cach_lam": "Make the decision that has been hanging, assign work with clear owners and deadlines, and put the decision in writing.",
+    "tu_soi": "Did you make a decision today that had been hanging for a while?"
+   },
+   "gap_go": {
+    "nhan": "Negotiate straight to the point",
+    "cach_lam": "State the figure or terms you want during the meeting, with a short reason, and ask clearly for the other side's terms.",
+    "tu_soi": "In the negotiation, did you state the terms you want clearly?"
+   },
+   "chi_tieu": {
+    "nhan": "Put your money in order",
+    "cach_lam": "Good for budgeting, splitting money into categories, paying bills that are due and noting your total income and spending.",
+    "tu_soi": "Do you know your total income and spending for this month today?"
+   },
+   "bat_dau": {
+    "nhan": "Start with a concrete plan",
+    "cach_lam": "Begin the new task with a measurable goal, a person responsible and a first checkpoint.",
+    "tu_soi": "Does your new task have a measurable goal and a first checkpoint?"
+   },
+   "hoc_tap": {
+    "nhan": "Learn something you can use right away",
+    "cach_lam": "Choose a skill that directly serves your work or personal finances, and practise applying it right after learning.",
+    "tu_soi": "Did you apply what you learned today to something real right away?"
+   },
+   "van_dong": {
+    "nhan": "Train with a measurable target",
+    "cach_lam": "Set a small target for the session, like one more set or holding the pace longer, and record the result.",
+    "tu_soi": "Did you set and hit a small target in today's workout?"
+   },
+   "di_chuyen": {
+    "nhan": "A neat, efficient trip",
+    "cach_lam": "Combine several errands into one trip, book tickets and accommodation in advance, and keep receipts for expenses.",
+    "tu_soi": "Did you fit several errands into today's trip?"
+   },
+   "gia_dinh": {
+    "nhan": "Organise the household clearly",
+    "cach_lam": "Hold a quick family meeting to split the week's chores and agree on shared spending.",
+    "tu_soi": "Has the whole family agreed who does what this week?"
+   },
+   "sang_tao": {
+    "nhan": "Turn an idea into a plan",
+    "cach_lam": "Take an idea you already have and write the steps to make it a finished product, with a deadline for the first step.",
+    "tu_soi": "Does your favourite idea have a next step and a deadline yet?"
+   },
+   "nghi_ngoi": {
+    "nhan": "Rest to decide more clearly",
+    "cach_lam": "It is a day of many decisions, so schedule short breaks between the big ones and treat them as part of your working day.",
+    "tu_soi": "Did you schedule breaks between the big tasks today?"
+   },
+   "tinh_cam": {
+    "nhan": "Leave work at the door when you are together",
+    "cach_lam": "The day is focused on practical matters, so when you meet your partner, switch off work talk and ask about their day.",
+    "tu_soi": "When you were with your partner today, did you put work talk aside?"
+   }
+  },
+  "9": {
+   "nghi_ngoi": {
+    "nhan": "A good day to let go",
+    "cach_lam": "Cross one task you no longer need off your list and use that space to rest properly.",
+    "tu_soi": "Which task that no longer matters did you cross off today?"
+   },
+   "gia_dinh": {
+    "nhan": "Close what is still open",
+    "cach_lam": "Say the thank-you or apology you still owe someone at home, or clear out old things to give away.",
+    "tu_soi": "Is there a thank-you or an apology to your family that you said out loud today?"
+   },
+   "sang_tao": {
+    "nhan": "Finish the unfinished work",
+    "cach_lam": "Pick a half-finished draft and complete it, accepting it is not perfect so you can close it.",
+    "tu_soi": "Did you finish a creative piece that had been left half done today?"
+   },
+   "tinh_cam": {
+    "nhan": "Be generous and light-hearted",
+    "cach_lam": "Recall something good your partner once did and let go of a small issue still sitting between you.",
+    "tu_soi": "Did you let go of a small issue with your partner today?"
+   },
+   "cong_viec": {
+    "nhan": "Finish and hand over",
+    "cach_lam": "Prioritise wrapping up projects, writing handover notes and summing up what you learned before taking on new work.",
+    "tu_soi": "Did you write down your takeaways from the finished task before moving on?"
+   },
+   "hoc_tap": {
+    "nhan": "Review and sum up",
+    "cach_lam": "Good for reviewing a whole chapter you have studied, summarising it on one page and noting the gaps.",
+    "tu_soi": "Did you sum up what you learned on one page today?"
+   },
+   "gap_go": {
+    "nhan": "Wrap up the agreement",
+    "cach_lam": "Use the meeting to settle the remaining open points, send a short summary afterwards and thank the other side.",
+    "tu_soi": "After the meeting, did you send a summary and a thank-you to the other side?"
+   },
+   "van_dong": {
+    "nhan": "Move to release tension",
+    "cach_lam": "Choose gentle exercise that helps you unwind, like a long walk, stretching or deep breathing at the end of the day.",
+    "tu_soi": "Did you feel more relaxed after today's movement?"
+   },
+   "di_chuyen": {
+    "nhan": "Declutter before moving",
+    "cach_lam": "If you are moving or travelling far, take the chance to get rid of things you do not use and pack light.",
+    "tu_soi": "Did you get rid of anything you no longer use before leaving?"
+   },
+   "bat_dau": {
+    "nhan": "Clear space for the new",
+    "cach_lam": "The day leans towards closing, so use it to finish old work and list what the new task needs, leaving the kickoff for the next day.",
+    "tu_soi": "Did you close an old task to make room for the new one?"
+   },
+   "chi_tieu": {
+    "nhan": "Give away and sell off",
+    "cach_lam": "The day suits giving more than buying, so pay off a small debt, sell what you do not use, and note any big purchase to think about tomorrow.",
+    "tu_soi": "Did you pay off or clear something still outstanding today?"
+   }
+  }
+ }
+}

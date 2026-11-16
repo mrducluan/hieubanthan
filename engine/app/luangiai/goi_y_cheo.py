@@ -32,6 +32,8 @@ from app.calc import battu, lunar, phongthuy as pt, thanso, thanso_mo_rong as mr
 from app.kb import battu_kb, store, thanso_v2, tuvi_doi_song_kb as kb_tv
 from app.luangiai import cung_sao_menh
 from app.kb import nap
+from app.kb import ten as _tn
+from app.kb.loi import L
 
 # Trang công cụ có khối "Đọc tiếp" (mã mảng ở web = khoá này).
 MANG_TRANG = ("than_so", "tu_vi", "bat_tu", "phong_thuy", "kinh_dich", "hop_doi", "hom_nay", "xem_ngay",
@@ -166,8 +168,9 @@ def _que_ngay(ngay_xem: dt.date) -> dict:
     from app.luangiai.hom_nay import _que_ngay as que
     q = que(ngay_xem)
     nn = (_que_hao().get(str(q["so"])) or {}).get("nom_na") or ""
-    if "Hiểu đơn giản:" in nn:
-        nn = nn.split("Hiểu đơn giản:", 1)[1]
+    moc = L("goi_y.kd.hieu_don_gian", "Hiểu đơn giản:")
+    if moc in nn:
+        nn = nn.split(moc, 1)[1]
     nn = nn.strip()
     if not _sach(nn):
         nn = q.get("loi_khuyen") or ""
@@ -251,7 +254,7 @@ def _the_tu_vi(h: HoSo, v: int) -> dict:
         return _chung("tu_vi")
     net = ung[(v // _SO_MAU) % len(ung)]
     md, ch = _mau(m, v)
-    ten = ", ".join(sm["sao"])
+    ten = ", ".join(_tn.ten("sao", x) for x in sm["sao"])
     nhan = (m["nhan_muon"] if sm["muon"] else m["nhan"]).format(sao=ten)
     return _the("tu_vi", nhan, md.format(net=_thuong(net)), ch, m["cta"], True)
 
@@ -268,7 +271,7 @@ def _the_bat_tu(h: HoSo, v: int) -> dict:
     md, ch = _mau(m, v)
     cau = md.format(hinh_tuong=nc["hinh_tuong"], tinh_chat=_bo_cham(tc))
     cau += " " + (m["than"].get(b["than"] or "", "") if b["than"] else m["thieu_gio_than"])
-    return _the("bat_tu", m["nhan"].format(can=b["can"], hanh=b["hanh"]), cau, ch, m["cta"], True,
+    return _the("bat_tu", m["nhan"].format(can=_tn.ten("can", b["can"]), hanh=_tn.ten("hanh", b["hanh"])), cau, ch, m["cta"], True,
                 b["thieu"] if not b["than"] else None)
 
 
@@ -278,9 +281,10 @@ def _the_phong_thuy(h: HoSo, v: int) -> dict:
     if cp is None:
         return _thieu("phong_thuy", "thieu_gioi_tinh", "gioi_tinh")
     md, ch = _mau(m, v)
-    ds = ", ".join(cp["ds_huong"][:-1]) + " và " + cp["ds_huong"][-1]
-    return _the("phong_thuy", m["nhan"].format(quai=cp["quai"], huong=cp["huong"]),
-                md.format(huong=cp["huong"], ds_huong=ds), ch, m["cta"], True)
+    h = [_tn.ten("huong", x) for x in cp["ds_huong"]]
+    ds = ", ".join(h[:-1]) + L("goi_y.va", " và ") + h[-1]
+    return _the("phong_thuy", m["nhan"].format(quai=_tn.ten("quai", cp["quai"]), huong=_tn.ten("huong", cp["huong"])),
+                md.format(huong=_tn.ten("huong", cp["huong"]), ds_huong=ds), ch, m["cta"], True)
 
 
 def _the_kinh_dich(ngay_xem: dt.date, v: int) -> dict:
@@ -289,7 +293,7 @@ def _the_kinh_dich(ngay_xem: dt.date, v: int) -> dict:
     if not q["nom_na"]:
         return _chung("kinh_dich")
     md, ch = _mau(m, v)
-    return _the("kinh_dich", m["nhan"].format(ten=q["ten"]), md.format(nom_na=q["nom_na"]), ch, m["cta"], False)
+    return _the("kinh_dich", m["nhan"].format(ten=_tn.ten("que_ten", q["ten"])), md.format(nom_na=q["nom_na"]), ch, m["cta"], False)
 
 
 def _the_hop_doi(h: HoSo, v: int) -> dict:
@@ -348,7 +352,7 @@ def goi_y(h: HoSo | None, mang_hien_tai: str, ngay_xem: dt.date) -> dict:
     k = _kb()
     return {"mang_hien_tai": mang_hien_tai, "ngay_xem": ngay_xem.isoformat(), "ca_nhan": h is not None, "the": the,
             "source_id": k["source_id"], "school_id": k["school_id"], "trang_thai": k["trang_thai"],
-            "luu_y": "Gợi ý đọc tiếp — mỗi câu ghép từ con số đã tính và kho tri thức, để tự soi, không phải dự báo."}
+            "luu_y": L("goi_y.luu_y", "Gợi ý đọc tiếp — mỗi câu ghép từ con số đã tính và kho tri thức, để tự soi, không phải dự báo.")}
 
 
 # --------------------------------------------------------------------------- Bản đồ 5 mảng
@@ -375,13 +379,13 @@ def ban_do_5_mang(h: HoSo, ngay_xem: dt.date) -> dict:
     q = _que_ngay(ngay_xem)
     sao = None
     if isinstance(sm, dict) and sm["sao"]:
-        sao = {"nhan": ", ".join(sm["sao"]), "muon": sm["muon"]}
+        sao = {"nhan": ", ".join(_tn.ten("sao", x) for x in sm["sao"]), "muon": sm["muon"]}
         cs = cung_sao_menh.dung(sm["sao"], sm["muon"])          # TV-ZW: chỉ tỉ lệ trên mẫu, không ngày giờ sinh
         if cs:
             sao["cung"] = {"mot_trong": cs["mot_trong"], "muc": cs["muc"]}
     kq = {
         "duong_doi": {"so": so, "tu_khoa": (store.nghia_so(so) or {}).get("tu_khoa")},
-        "nhat_chu": {"can": b["can"], "hanh": b["hanh"], "nhan": f"{b['can']} {b['hanh']}",
+        "nhat_chu": {"can": b["can"], "hanh": b["hanh"], "nhan": f"{_tn.ten('can', b['can'])} {_tn.ten('hanh', b['hanh'])}",
                      "hinh_tuong": nc.get("hinh_tuong")},
         "sao_menh": sao,
         "cung_phi": {"quai": cp["quai"], "huong": cp["huong"]} if cp else None,

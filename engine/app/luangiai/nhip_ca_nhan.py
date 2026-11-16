@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import datetime as dt
 
+from app.kb.loi import L
+
 from app.calc import thanso, thanso_mo_rong as mr
 from app.kb import store, thanso_v2
 
@@ -40,5 +42,5 @@ def nhip_ca_nhan(ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict:
         "nam_toi": _nam(ngay, thang, y + 1),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],
-        "luu_y": "Nhịp theo thần số học để tự soi — gợi chủ đề, không dự báo việc sẽ xảy ra.",
+        "luu_y": L("nhip.luu_y", "Nhịp theo thần số học để tự soi — gợi chủ đề, không dự báo việc sẽ xảy ra."),
     }

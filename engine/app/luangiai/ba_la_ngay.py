@@ -14,6 +14,7 @@ import re
 from app import config
 from app.calc import tarot as calc_tarot
 from app.kb import tarot_kb
+from app.kb.loi import L
 
 _KHUNG = re.compile(r"(\d\d):(\d\d)–(\d\d):(\d\d)")
 
@@ -58,5 +59,5 @@ def lap(ngay: int, thang: int, nam: int, ngay_xem: dt.date, *, ngay_ca_nhan: dic
         # không muối thì lá + ngày xem đủ để quét ngược ngày sinh → web phải giấu lá trên thẻ.
         "chia_se_tarot": bool(config.LA_NGAY_MUOI),
         "cau_cua_ngay": tom_lai,
-        "cach_chon": CACH_CHON,
+        "cach_chon": L("nhip.ba_la.cach_chon", CACH_CHON),
     }

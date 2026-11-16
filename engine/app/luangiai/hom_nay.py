@@ -15,6 +15,9 @@ from __future__ import annotations
 from app import ngon_ngu
 
 import datetime as dt
+import re
+
+from app.kb.loi import L
 import json
 from functools import lru_cache
 from pathlib import Path
@@ -158,9 +161,10 @@ def que_rieng(so_tren: int, so_duoi: int, thoi_diem: dt.datetime) -> dict:
     return kq
 
 
-@ngon_ngu.lru(maxsize=1)
 def _kb_battu() -> dict:
-    return json.loads((Path(__file__).parents[1] / "kb" / "data" / "battu_kb.json").read_text(encoding="utf-8"))
+    """KB Bát tự qua `nap.doc` (bản phủ theo ngôn ngữ, EN-ALL GĐ 7) — tiếng Việt y như đọc thẳng tệp."""
+    from app.kb import nap  # noqa: PLC0415
+    return nap.doc("battu_kb.json")
 
 
 def _nhip_bat_tu(ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict:
@@ -170,9 +174,17 @@ def _nhip_bat_tu(ngay: int, thang: int, nam: int, ngay_xem: dt.date) -> dict:
     can, chi = lunar.can_chi_ngay(ngay_xem)
     tt = battu.thap_than(nhat_chu, can)
     m = _kb_battu()["thap_than"].get(tt, {})
-    return {"nhat_chu": nhat_chu, "can_chi_ngay": f"{can} {chi}", "thap_than": tt, "nhom": m.get("nhom"),
+    if ngon_ngu.la_viet():
+        return {"nhat_chu": nhat_chu, "can_chi_ngay": f"{can} {chi}", "thap_than": tt, "nhom": m.get("nhom"),
+                "y_nghia": m.get("y_nghia"), "tinh_cach": m.get("tinh_cach"), "cau_tu_soi": m.get("cau_tu_soi"),
+                "cach_tinh": f"Can ngày hôm nay ({can}) so với nhật chủ {nhat_chu} của bạn (can ngày sinh) theo ngũ hành và âm dương."}
+    # EN-ALL GĐ 7: `nhat_chu`, `thap_than` giữ MÃ (tên hiển thị qua `ten_hien`); chữ còn lại theo ngôn ngữ.
+    from app.kb import ten as _tn  # noqa: PLC0415
+    from app.luangiai import lich_hien  # noqa: PLC0415
+    return {"nhat_chu": nhat_chu, "can_chi_ngay": lich_hien.can_chi(f"{can} {chi}"), "thap_than": tt,
+            "nhom": _tn.ten("nhom_thap_than", m["nhom"]) if m.get("nhom") else m.get("nhom"),
             "y_nghia": m.get("y_nghia"), "tinh_cach": m.get("tinh_cach"), "cau_tu_soi": m.get("cau_tu_soi"),
-            "cach_tinh": f"Can ngày hôm nay ({can}) so với nhật chủ {nhat_chu} của bạn (can ngày sinh) theo ngũ hành và âm dương."}
+            "cach_tinh": L("nhip.bat_tu.cach_tinh", "", can=_tn.ten("can", can), nhat_chu=_tn.ten("can", nhat_chu))}
 
 
 def _kb_que() -> dict:
@@ -213,6 +225,14 @@ def _viec_nho(so_ngay: int, ngay: int, thang: int, nam: int, ngay_xem: dt.date) 
     return None
 
 
+_LICH_MA = {
+    "Theo lịch, hôm nay là ngày tốt, hợp mở việc đã chuẩn bị": "nhip.tom_lai.lich.tot_truc",
+    "Theo lịch, hôm nay là ngày tốt nhưng việc lớn nên chọn giờ đẹp; việc thường cứ làm": "nhip.tom_lai.lich.tot",
+    "Theo lịch, hôm nay là ngày thường, hợp việc vừa sức": "nhip.tom_lai.lich.thuong_truc",
+    "Theo lịch, hôm nay là ngày thường, hợp việc quen tay hơn mở việc lớn": "nhip.tom_lai.lich.thuong",
+}
+
+
 def _tom_lai(so_ngay: int, nghia_thang: dict, hl: dict) -> str:
     """EN-2 (P2-15): MỘT câu ghép ngày cá nhân + chủ đề tháng + lịch (hoàng/hắc đạo, trực) — chỉ dữ kiện đã tính."""
     nghia = (thanso_v2.nghia_phu("ngay_ca_nhan", so_ngay) or "")
@@ -230,8 +250,14 @@ def _tom_lai(so_ngay: int, nghia_thang: dict, hl: dict) -> str:
     else:
         lich = "Theo lịch, hôm nay là ngày thường, hợp việc quen tay hơn mở việc lớn"
     thang = (nghia_thang.get("chu_de") or "").lower()
-    return (f"Hôm nay là ngày cá nhân {so_ngay} của bạn — {nghia[:1].lower() + nghia[1:]}"
-            + (f", trong {thang} của bạn" if thang else "") + f". {lich}.")
+    if ngon_ngu.la_viet():
+        return (f"Hôm nay là ngày cá nhân {so_ngay} của bạn — {nghia[:1].lower() + nghia[1:]}"
+                + (f", trong {thang} của bạn" if thang else "") + f". {lich}.")
+    # EN-ALL GĐ 7: cùng ba mảnh, mẫu câu theo ngôn ngữ ("A month for starting" → "within your month for starting").
+    lich = L(_LICH_MA[lich], lich)
+    thang = re.sub(r"^(a|an|the) ", "", thang)
+    return (L("nhip.tom_lai.dau", "", so=so_ngay, nghia=nghia[:1].lower() + nghia[1:])
+            + (L("nhip.tom_lai.thang", "", thang=thang) if thang else "") + f". {lich}.")
 
 
 def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
@@ -264,6 +290,8 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
     so_pq = mr.ngay_pho_quat(y, m, d)
     hl = _hoang_lich(ngay_xem, ngay, thang, nam, [x["ma"] for x in cac_y_dinh] or list(y_dinh or []))
     tom_lai = _tom_lai(so_ngay, nghia_thang, hl)
+    from app.luangiai import lich_hien  # noqa: PLC0415
+    hl = lich_hien.hoang_lich_hom_nay(hl)          # EN-ALL GĐ 7: chữ lịch theo ngôn ngữ SAU khi đã quyết bằng tên Việt
     viec_nho = _viec_nho(so_ngay, ngay, thang, nam, ngay_xem)
     cau_hoi_them = _cau_hoi_them(so_ngay, ngay_xem)
     que = _que_ngay(ngay_xem)
@@ -276,9 +304,9 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
         "ngay_xem": ngay_xem.isoformat(),
         "am_lich": {
             "ngay": ad, "thang": am, "nam": ay, "nhuan": bool(nhuan),
-            "can_chi_ngay": " ".join(lunar.can_chi_ngay(ngay_xem)),
-            "can_chi_thang": " ".join(lunar.can_chi_thang(am, ay)),
-            "can_chi_nam": " ".join(lunar.can_chi_nam(ay)),
+            "can_chi_ngay": lich_hien.can_chi(" ".join(lunar.can_chi_ngay(ngay_xem))),
+            "can_chi_thang": lich_hien.can_chi(" ".join(lunar.can_chi_thang(am, ay))),
+            "can_chi_nam": lich_hien.can_chi(" ".join(lunar.can_chi_nam(ay))),
         },
         "ngay_ca_nhan": _ngay(so_ngay),
         "thang_ca_nhan": {"so": so_thang, "thang": m, "chu_de": nghia_thang.get("chu_de"),
@@ -302,5 +330,5 @@ def the_hom_nay(ngay: int, thang: int, nam: int, ngay_xem: dt.date,
         "nhip_bat_tu": _nhip_bat_tu(ngay, thang, nam, ngay_xem),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],
-        "luu_y": "Nhịp theo thần số học để tự soi — gợi chủ đề, không dự báo việc sẽ xảy ra.",
+        "luu_y": L("nhip.luu_y", "Nhịp theo thần số học để tự soi — gợi chủ đề, không dự báo việc sẽ xảy ra."),
     }
