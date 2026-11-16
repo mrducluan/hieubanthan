@@ -55,6 +55,12 @@ def api_gia_dinh(inp: GiaDinhInput) -> dict:
     try:
         return G.bang(inp.nam or G.nam_am_hien_tai(), ds, la_so)
     except tuvi_an_sao.AnSaoLoi as e:
-        raise _loi_an_sao(e)
+        # QC: máy an sao bận → vẫn trả bảng nhà (phần theo năm sinh), chỉ thiếu khối "lá số của bạn".
+        if la_so is None:
+            raise _loi_an_sao(e)
+        try:
+            return G.bang(inp.nam or G.nam_am_hien_tai(), ds, None)
+        except ValueError as e2:
+            raise HTTPException(422, detail=str(e2))
     except ValueError as e:
         raise HTTPException(422, detail=str(e))

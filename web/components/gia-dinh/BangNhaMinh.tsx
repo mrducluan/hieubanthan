@@ -82,7 +82,10 @@ export function BangNhaMinh() {
     if (!khoa) { setKq(null); return; }
     let huy = false;
     setLoi(null);
-    postJson<BangKq>("/api/gia-dinh", JSON.parse(khoa))
+    const than = JSON.parse(khoa) as { la_so?: unknown };
+    // QC: engine bản cũ (deploy lệch) chưa nhận `la_so` → thử lại không kèm lá số, bảng theo năm sinh vẫn hiện.
+    postJson<BangKq>("/api/gia-dinh", than)
+      .catch((e: unknown) => { if (!than.la_so) throw e; const { la_so: _bo, ...con } = than; return postJson<BangKq>("/api/gia-dinh", con); })
       .then((r) => {
         if (huy) return;
         setKq(r);

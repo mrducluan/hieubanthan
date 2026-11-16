@@ -1502,5 +1502,5 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [x] **GD-1 đợt 1** — trang `/gia-dinh` (chỉ trên máy). Đợt 2 (lớp ngày giờ sinh, thẻ cặp sâu, link mời, chương Sao) và đợt 3 (đồng bộ tài khoản — cần luật sư về dữ liệu trẻ em) chờ anh giao.
 - [x] **GD-1 đợt 2** — từng cặp nhiều lớp, sơ đồ nhà, năm năm tới, lá số của anh nhìn về nhà mình. Deploy engine trước web.
 - [ ] **GD-1 đợt 3** — chạy migration **0039** (`supabase/migrations/0039_gia_dinh.sql`) trong Supabase → SQL Editor để nút "Lưu nhà mình vào
-  tài khoản" hoạt động (chưa chạy thì nút báo lỗi nhẹ, trang vẫn chạy). Bảng chỉ nhận vai + năm sinh + giới tính. **Nên hỏi luật sư** về việc lưu
-  năm sinh của người thứ ba / trẻ em trên máy chủ trước khi chạy. Kiểm: `/quan-tri` thẻ "Migration Supabase" có dòng 0039.
+  tài khoản" hoạt động (chưa chạy thì nút báo lỗi nhẹ, trang vẫn chạy). Bảng chỉ nhận vai + năm sinh + giới tính. Anh đã quyết (16/11/2026): năm sinh người trong gia đình được lưu và xem trên
+  hieuban khi người dùng tự tích đồng ý. Kiểm: `/quan-tri` thẻ "Migration Supabase" có dòng 0039.

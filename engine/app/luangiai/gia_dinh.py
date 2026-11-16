@@ -186,11 +186,17 @@ def _cap(ds: list[dict]) -> list[dict]:
             nhip, loai = "hai_mat", "hai_mat"
         nk = k["nhip_cap"]["thuan_1" if nhip == "thuan" and dy else nhip]
         viec_lop = next((x["nen"] for x in lop if x["muc"] == "de_y"), None) or next((x["nen"] for x in lop if x["muc"] == "thuan"), None)
+        # QC: cặp có trẻ dưới 18 không nhận lời "làm ăn chung"; hai trẻ với nhau thì việc nên làm là lời cho cha mẹ.
+        co_tre, hai_tre = a["duoi_18"] or b["duoi_18"], a["duoi_18"] and b["duoi_18"]
+        mang = [m for m in k["mang_cap"][nhom].get(nhip, []) if not (co_tre and m["mang"] == "Làm ăn chung")]
+        if hai_tre:
+            viec_lop = k["viec"]["hai_tre"]["nen_de_y" if nhip in ("de_y", "hai_mat") else "diem_sang"]
+            mang = []
         ra.append({"a": a["id"], "b": b["id"], "quan_he": qh, "loai": loai, "nhip": nhip, "nhom": nhom,
                    "tieu_de": k["cap"][qh]["tieu_de"] if (qh in _THUAN and nhip == "thuan") or (qh in _CAN_Y and nhip == "de_y") else nk["tieu_de"],
                    "noi_dung": nk["noi_dung"].format(t=th, d=dy + hm, n=len(xet)),
                    "viec": viec_lop or k["viec"][nhom]["nen_de_y" if nhip in ("de_y", "hai_mat") else "diem_sang"],
-                   "lop": lop, "mang": k["mang_cap"][nhom].get(nhip, []),
+                   "lop": lop, "mang": mang,
                    "so_lop": {"thuan": th, "de_y": dy + hm, "tong": len(xet)},
                    "can_cu": "; ".join(x["can_cu"] for x in lop)})
     ra.sort(key=lambda c: (0 if "ban_than" in (_vai(ds, c["a"]), _vai(ds, c["b"])) else 1, _THU_TU_NHIP[c["nhip"]]))

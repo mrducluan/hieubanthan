@@ -183,3 +183,13 @@ def test_gd2_la_so_cua_ban_va_api():
     for s in _chu({k: v for k, v in r.json().items() if k != "la_so_cua_ban"}):
         for c in CAM:
             assert c not in s.lower(), (c, s)
+
+
+def test_gd2_tre_em_khong_lam_an_chung():
+    kq = G.bang(2027, [{"id": "a", "vai": "ban_than", "nam_sinh": 1990}, {"id": "x", "vai": "con", "nam_sinh": 2016},
+                       {"id": "y", "vai": "con", "nam_sinh": 2022}, {"id": "z", "vai": "em", "nam_sinh": 2012}])
+    for c in kq["cap"]:
+        tre = [i for i in (c["a"], c["b"]) if i != "a"]
+        assert all(m["mang"] != "Làm ăn chung" for m in c["mang"]), c
+        if "a" not in (c["a"], c["b"]):
+            assert c["mang"] == [] and "bé" in c["viec"], c
