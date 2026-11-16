@@ -168,8 +168,9 @@ def _moc(t: str, hom_nay: dt.date) -> list[str]:
         ra.append(f"thang {_THANG[tm]}" + (f" nam {m.group(4)}" if m.group(4) else ""))
         if m.group(4):
             da_nam.add(m.group(4))
+    nam_sinh = set(re.findall(r"\b(?:born|birth|since)\b[^.]{0,20}?\b((?:19|20)\d\d)\b", t))   # regex cố định (CodeQL)
     for y in re.findall(r"\b(20\d\d)\b", t):
-        if y not in da_nam and not re.search(rf"\b(born|birth|since)\b[^.]{{0,20}}\b{y}\b", t):
+        if y not in da_nam and y not in nam_sinh:
             ra.append(f"nam {y}")
     bang = [(r"\bnext (three|3) years\b|\bcoming (three|3) years\b|\bnext few years\b", "ba nam toi"),
             (r"\bnext year\b|\bcoming year\b|\byear ahead\b", "nam sau"), (r"\bthis year\b|\bthe year\b(?! of)", "nam nay"),
