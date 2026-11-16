@@ -22,6 +22,7 @@ import { GhiGioiThieu } from "@/components/khung/GhiGioiThieu";
 import { GiamSat } from "@/components/khung/GiamSat";
 import { GtmNoScript } from "@/components/khung/GoogleTagManager";
 import { DoLuongGoogle } from "@/components/khung/DoLuongGoogle";
+import { MetaPixel, MetaPixelNoScript } from "@/components/khung/MetaPixel";
 import { HoiDongYCookie } from "@/components/khung/HoiDongYCookie";
 import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE } from "@/lib/seo";
 import { ThongBaoSite } from "@/components/khung/ThongBaoSite";
@@ -122,6 +123,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <GiamSat />
           <GhiVaoTrang />
           <DoLuongGoogle nonce={nonce} />
+        <MetaPixel nonce={nonce} />
+        <MetaPixelNoScript />
+          <MetaPixel nonce={nonce} />
+          <MetaPixelNoScript />
         </body>
       </html>
     );
@@ -167,6 +172,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <DangKyApp />
         <GhiVaoTrang />
         <DoLuongGoogle nonce={nonce} />
+        <MetaPixel nonce={nonce} />
+        <MetaPixelNoScript />
       </body>
     </html>
   );
