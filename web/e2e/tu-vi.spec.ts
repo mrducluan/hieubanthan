@@ -354,8 +354,11 @@ test("Đầu trang 6 mảng ở 1440px: cột chữ thẳng một mép, hình tr
     await expect(hinh.locator("title").first()).toHaveText((await hinh.getAttribute("aria-label")) ?? "");
     expect(await page.evaluate(() => document.documentElement.scrollWidth), duong).toBeLessThanOrEqual(1440);
     // "Trả lời nhanh" (SEO-N2) vẫn ngay dưới lời dẫn, rộng bằng cột chữ; hình nằm hẳn bên phải cột chữ.
-    const tl = await dau.getByTestId("tra-loi-nhanh-dau").boundingBox(), h1 = await dau.locator("h1").boundingBox(), hb = await hinh.boundingBox();
-    expect(tl && h1 && hb).toBeTruthy();
+    // boundingBox() không tự chờ (trả null nếu phần tử chưa hiện đúng lúc đó, vd trang đang tải lại) → chờ hiện trước, báo đúng trang.
+    const traLoi = dau.getByTestId("tra-loi-nhanh-dau");
+    await expect(traLoi, `${duong}: thiếu "Trả lời nhanh" (tra_loi_nhanh trong lib/so-trang.ts)`).toBeVisible();
+    const tl = await traLoi.boundingBox(), h1 = await dau.locator("h1").boundingBox(), hb = await hinh.boundingBox();
+    expect(tl && h1 && hb, duong).toBeTruthy();
     expect(Math.abs(tl!.x - h1!.x), duong).toBeLessThanOrEqual(1);
     expect(Math.abs(tl!.width - h1!.width), duong).toBeLessThanOrEqual(1);
     expect(hb!.x, duong).toBeGreaterThanOrEqual(tl!.x + tl!.width + 24);
