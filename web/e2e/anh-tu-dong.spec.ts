@@ -95,8 +95,8 @@ test.describe("trình duyệt thật + bộ đo thật", () => {
     expect(Object.keys(t).sort()).toEqual(["diem", "dong_y", "ti_le"]);
     expect(Object.keys(t.diem as object)).toHaveLength(20);
     expect(t.ti_le).toBeCloseTo(820 / 1024, 3);
-    // bộ đo tự phục vụ + số liệu hiệu năng của nó bị CSP chặn → không có yêu cầu nào tới máy chủ ngoài
-    expect(ngoai.filter((o) => !o.includes("posthog") && !o.includes("google-analytics") && !o.includes("googletagmanager"))).toEqual([]);
+    // bộ đo tự phục vụ + số liệu hiệu năng của nó bị CSP chặn → không có yêu cầu nào tới máy chủ ngoài (trừ đo lường trang: PostHog, Google, Meta Pixel — không mang ảnh)
+    expect(ngoai.filter((o) => !o.includes("posthog") && !o.includes("google-analytics") && !o.includes("googletagmanager") && !o.includes("facebook"))).toEqual([]);
   });
 
   test("NT-2: đã đồng ý đo → chọn ảnh là máy tự đặt điểm + tự đo; một nút điền và xem bài đọc; không chương nào báo trống vì thiếu số đo", async ({ page }) => {

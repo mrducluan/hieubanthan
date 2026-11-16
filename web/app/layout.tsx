@@ -123,8 +123,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <GiamSat />
           <GhiVaoTrang />
           <DoLuongGoogle nonce={nonce} />
-        <MetaPixel nonce={nonce} />
-        <MetaPixelNoScript />
           <MetaPixel nonce={nonce} />
           <MetaPixelNoScript />
         </body>
