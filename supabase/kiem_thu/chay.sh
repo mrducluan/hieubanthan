@@ -44,3 +44,4 @@ psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_nhat_ky_ghe_003
 psql -d "$DB" -q -At -F " | " -f kiem_thu/thu_ho_so_0033.sql
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_kiem_chung_0034.sql
 psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_cong_pay2s_0037.sql
+psql -d "$DB" -q -At -F " | " -v ON_ERROR_STOP=1 -f kiem_thu/thu_meta_0038.sql

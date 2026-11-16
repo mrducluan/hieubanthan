@@ -7,6 +7,7 @@ import Link from "@/components/khung/Lien";
 import { Check, Gift, Loader2, LockKeyhole, QrCode, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
+import { metaDongY } from "@/lib/meta-pixel";
 import { lopCot } from "@/lib/luoi";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import {
@@ -52,7 +53,7 @@ export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau, mienPhi = f
     try {
       const r = await fetch("/api/thanh-toan/tao-don", {
         method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
-        body: JSON.stringify({ goi: chon }),
+        body: JSON.stringify({ goi: chon, meta: metaDongY() }),
       });
       const j = (await r.json().catch(() => ({}))) as { checkoutUrl?: string; error?: string };
       if (!r.ok || !j.checkoutUrl) throw new Error(j.error ?? "Chưa tạo được đơn.");

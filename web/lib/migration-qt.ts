@@ -34,6 +34,7 @@ export const MIGRATION: readonly Migration[] = [
   { so: "0032", ten: "Nhật ký ngày ghé (Tháng của tôi)", dau: { bang: "nhat_ky_ghe" } },
   { so: "0033", ten: "Múi giờ nơi sinh trong hồ sơ", dau: { bang: "ho_so", cot: "utc_noi_sinh" } },
   { so: "0034", ten: "Phiếu kiểm chứng theo ngôn ngữ (lệch bản dịch)", dau: { bang: "kiem_chung_phieu", cot: "ngon_ngu" } },
+  { so: "0038", ten: "API chuyển đổi Meta (mã cookie theo đơn)", dau: { bang: "meta_don" } },
 ];
 
 /** Công tắc / số ở /quan-tri/cai-dat chỉ có tác dụng khi các migration này đã chạy (tiền tố khoá → số migration). */

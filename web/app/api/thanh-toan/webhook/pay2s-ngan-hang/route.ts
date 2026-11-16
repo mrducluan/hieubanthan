@@ -4,7 +4,8 @@
 // Khoản VÀO có nội dung chứa mã đơn (HBT + số) → hàm SQL nap_sao_tu_cong (idempotent theo mã đơn, tự so số tiền với đơn;
 // IPN và webhook cùng báo một đơn thì chỉ cộng một lần). Khoản không mang mã đơn → bỏ qua (tiền ủng hộ, tiền khác).
 // Pay2S dừng gửi lại khi nhận 200 / {"success": true}; lỗi DB → 500 để Pay2S gửi lại (tối đa 5 lần, mỗi 60 giây).
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
+import { guiCapiDon } from "@/lib/meta-capi";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { cauHinhPay2s, docHook, dungTokenHook, maDonTrongNoiDung } from "@/lib/thanh-toan/pay2s";
 
@@ -29,7 +30,9 @@ export async function POST(req: Request) {
       p_ma_don: maDon, p_so_tien: g.amount, p_cong: "pay2s", p_ma_giao_dich: `p2s-nh:${g.id}`.slice(0, 100),
     });
     if (error) return NextResponse.json({ success: false, error: "Chưa ghi được" }, { status: 500 });
-    ket_qua.push((data as { ket_qua?: string } | null)?.ket_qua ?? "");
+    const kq = (data as { ket_qua?: string } | null)?.ket_qua ?? "";
+    if (kq === "da_nap") { const m = maDon!; after(() => guiCapiDon(dv, m)); }   // META-CAPI
+    ket_qua.push(kq);
   }
   return NextResponse.json({ success: true, ket_qua });
 }

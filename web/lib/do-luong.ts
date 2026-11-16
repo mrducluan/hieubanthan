@@ -5,6 +5,9 @@
 import type { PostHog } from "posthog-js";
 import { ghiMangDaXem } from "@/lib/huy-hieu";
 import { choRanh } from "@/lib/cho-ranh";
+import { metaSuKien } from "@/lib/meta-pixel";
+import { docNguonQc } from "@/lib/nguon-qc";
+import { lamSachUrl } from "@/lib/lam-sach-url";
 
 export type SuKien =
   | "landing_viewed" | "reading_started" | "reading_completed" | "profile_created"
@@ -136,6 +139,7 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   du_ba: "number",      // BT-UI: daily_card_flipped — 1 = lá thứ ba (đã lật đủ ba lá của ngày)
   can_them: "string",   // BT-UI: ô "Bảy cách nhìn" còn thiếu gì trong hồ sơ (gio / gioi_tinh / noi_sinh)
   so_san_sang: "number", // BT-UI: số môn (trong 5 môn tính từ ngày sinh) đã sẵn sàng khi khối hiện ra
+  qc: "string",         // META-QC: "meta" = phiên này (hoặc ≤ 30 ngày trước) vào từ quảng cáo Facebook / Instagram (lib/nguon-qc.ts)
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */
@@ -158,23 +162,7 @@ export function locThuocTinh(p: Record<string, unknown> = {}): Record<string, st
 export const PHIEN_BAN = "gate_v1";
 const KHOA_MOI = "hbt.ma_moi";
 
-/** SEC-2: mã thẻ / lời mời (base64url JSON mang TÊN hiển thị) nằm trong URL (/the/…/<mã>, /hop-doi/<mã>, ?the=, ?ma=)
- *  → PostHog tự gắn $current_url / $pathname vào mọi sự kiện. Thay mã bằng ":ma" trước khi gửi; đo lường chỉ mang mã. */
-const MA_TRONG_URL = /^[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}$/;
-const MA_QUA_URL = /^[a-z0-9]{10}$/;
-export function lamSachUrl(u: string): string {
-  if (!/^(https?:\/\/|\/)/.test(u)) return u;   // "$direct", "" … giữ nguyên
-  try {
-    const x = new URL(u, "https://hieuban.com");
-    // SAO-V: mã quà /qua/<10 ký tự> cũng là khoá dùng một lần — không để lọt lên PostHog.
-    x.pathname = x.pathname.split("/").map((d, i, ds) => (MA_TRONG_URL.test(d) || (ds[i - 1] === "qua" && MA_QUA_URL.test(d)) ? ":ma" : d)).join("/");
-    for (const k of ["the", "ma"]) if (x.searchParams.has(k)) x.searchParams.set(k, ":ma");
-    x.hash = "";
-    return /^https?:/.test(u) ? x.toString() : x.pathname + x.search;
-  } catch {
-    return "";
-  }
-}
+export { lamSachUrl };
 function lamSachSuKien<T extends { properties?: Record<string, unknown> } | null>(su: T): T {
   const p = su?.properties;
   if (p) for (const k of ["$current_url", "$pathname", "$referrer", "$initial_current_url", "$initial_pathname"]) {
@@ -211,11 +199,13 @@ function nap(): Promise<PostHog | null> {
 }
 
 export function ghi(su_kien: SuKien, p: Record<string, unknown> = {}): void {
-  const props = { feature_version: PHIEN_BAN, ...locThuocTinh(p) };
+  const qc = typeof window !== "undefined" ? docNguonQc() : null;
+  const props = { feature_version: PHIEN_BAN, ...locThuocTinh(p), ...(qc ? { qc } : {}) };
   if ((process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_E2E === "1") && typeof window !== "undefined") {
     (window as unknown as { __hbt_su_kien?: unknown[] }).__hbt_su_kien ??= [];
     (window as unknown as { __hbt_su_kien: unknown[] }).__hbt_su_kien.push({ su_kien, ...props });
   }
+  metaSuKien(su_kien, props);   // Meta Pixel: bảng sự kiện ở lib/meta-pixel.ts
   void nap().then((p2) => p2?.capture(su_kien, props));
 }
 
