@@ -1,0 +1,188 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản phủ tiếng Anh (ban biên tập, chờ người bản xứ duyệt).",
+ "mang": {
+  "than_so": {
+   "ten": "Numerology",
+   "nhan": "Life Path {so}",
+   "cta": "See your 4 numbers",
+   "mo_dau": [
+    "Your birth date adds up to {so} — {tu_khoa}. One trait people with this number often have: {net}.",
+    "Your Life Path number is {so}. Numerology books often describe people with this number like this: {net}.",
+    "{so} is the number you carry from your birth date. What people who know you notice first: {net}."
+   ],
+   "cau_hoi": [
+    "But {so} also has a trait it keeps well hidden — can you guess what it is?",
+    "Are the other three numbers in your name pulling the same way, or the opposite?",
+    "Which year of your 9-year cycle are you in this year?"
+   ],
+   "chung": {
+    "cau": "From just your birth date and full name, numerology gives 4 numbers about how you think, what you quietly hope for and how others see you.",
+    "cau_hoi": "What is your Life Path number?",
+    "cta": "Enter your birth date — 30 seconds"
+   }
+  },
+  "tu_vi": {
+   "ten": "Zi Wei Dou Shu",
+   "nhan": "Life Palace: {sao}",
+   "nhan_muon": "Empty Life Palace, borrowing {sao}",
+   "cta": "See your Zi Wei chart",
+   "mo_dau": [
+    "The chart drawn from your birth time points to one trait in particular: {net}",
+    "Reading your chart, the first thing that stands out is how you stand among other people: {net}",
+    "Your birth time sketches out a rather distinctive trait: {net}"
+   ],
+   "cau_hoi": [
+    "And what does your chart say about money and love?",
+    "What is the ten-year period you are in now most favourable for?",
+    "In the next three months, which month is easiest for the big thing you are planning?"
+   ],
+   "chung": {
+    "cau": "A Zi Wei chart drawn from your birth time divides life into 12 areas: work, money, love, home, health…",
+    "cau_hoi": "Of those 12 areas, which one is going best for you right now?",
+    "cta": "Enter your birth time to draw the chart"
+   },
+   "thieu_gio": {
+    "cau": "Zi Wei needs your birth time to know where you stand across the 12 areas of life. Don't remember the time? Choose \"I don't know my time\" and you can still see a provisional chart.",
+    "cau_hoi": "Were you born in the early morning or late at night?",
+    "cta": "Add your birth time"
+   },
+   "thieu_noi_sinh": {
+    "cau": "People born before mid-1975 need a place of birth, because North and South Vietnam set their clocks differently then — one hour can change the whole chart.",
+    "cau_hoi": "Which province were you born in?",
+    "cta": "Add your place of birth"
+   }
+  },
+  "bat_tu": {
+   "ten": "Bazi",
+   "nhan": "Day Master {can} {hanh}",
+   "cta": "See your Four Pillars",
+   "mo_dau": [
+    "The day you were born carries the image of {hinh_tuong}: {tinh_chat}.",
+    "Bazi likens each person to an image from nature. Yours is {hinh_tuong} — {tinh_chat}.",
+    "Of the four pillars of your birth, the part that speaks about you is {hinh_tuong}: {tinh_chat}."
+   ],
+   "than": {
+    "vượng": "Your own strength runs fairly deep, suited to carrying things and deciding for yourself.",
+    "nhược": "Your own strength is a little below average; big projects go easier with people who pull together with you.",
+    "trung hoà": "Your own strength is moderate: you can manage alone, and you don't mind asking for help either."
+   },
+   "thieu_gio_than": "Add your birth time to see whether your own strength runs deep or thin.",
+   "cau_hoi": [
+    "Which element are you short of, and which habit would add just enough of it?",
+    "Is this ten-year period better for pushing ahead or for holding steady?",
+    "Which month this year is good for you to start something new?"
+   ],
+   "chung": {
+    "cau": "Bazi likens each person to an image from nature — a great tree, a flame, a stream, a gem… depending on the birth date.",
+    "cau_hoi": "What is your image?",
+    "cta": "Enter your birth date to see"
+   }
+  },
+  "phong_thuy": {
+   "ten": "Feng shui",
+   "nhan": "Gua {quai} · best direction {huong}",
+   "cta": "Measure your home's direction",
+   "mo_dau": [
+    "By your birth year, {huong} is the direction that suits you best — good for placing your desk or choosing where to sit when you need to focus.",
+    "Four directions suit you: {ds_huong}. The strongest is {huong}.",
+    "If you change just one thing at home, try turning your desk to face {huong} — the direction that suits your birth year best."
+   ],
+   "cau_hoi": [
+    "Which direction does your front door face?",
+    "Is the head of your bed facing a direction that suits you?",
+    "Which side of the house is your kitchen on?"
+   ],
+   "chung": {
+    "cau": "Each person suits four different house directions, worked out from birth year and gender — placing your desk, bed and door by them is the easiest place to start.",
+    "cau_hoi": "Which four directions suit you?",
+    "cta": "Enter your birth year to see"
+   },
+   "thieu_gioi_tinh": {
+    "cau": "Favourable directions depend on birth year and gender — in the same year, men and women suit different directions.",
+    "cau_hoi": "Add your gender to see which direction suits you best?",
+    "cta": "Add your gender"
+   }
+  },
+  "kinh_dich": {
+   "ten": "I Ching",
+   "nhan": "Hexagram of the day: {ten}",
+   "cta": "Cast a hexagram for your question",
+   "mo_dau": [
+    "Today's hexagram, told through everyday life — {nom_na}",
+    "There is one shared hexagram for everyone today; its meaning is close to everyday life — {nom_na}",
+    "Today's hexagram suggests one thing, put simply — {nom_na}"
+   ],
+   "cau_hoi": [
+    "What hexagram would your own dilemma bring?",
+    "If you asked about your own situation, would the hexagram say something different?",
+    "For what you are planning, is today a day to move forward or to wait?"
+   ],
+   "chung": {
+    "cau": "Each day has a shared hexagram drawn from the lunar date and hour. For your own question, cast your own hexagram.",
+    "cau_hoi": "What hexagram does your dilemma bring?",
+    "cta": "Cast a hexagram"
+   }
+  },
+  "hop_doi": {
+   "ten": "Compatibility",
+   "nhan": "Life Path {so} in love",
+   "cta": "See who you match with",
+   "mo_dau": [
+    "A Life Path {so} in love: {net}",
+    "A {so} like you usually gets on well with {net_nho}",
+    "What a Life Path {so} needs from the person beside them: {net_nho}"
+   ],
+   "cau_hoi": [
+    "What number does the person you are thinking of carry — where do your two numbers meet?",
+    "Send them a link to enter their own details — where do the two of you click?",
+    "Are you and the person closest to you on the same yearly rhythm?"
+   ],
+   "chung": {
+    "cau": "Placing two birth dates side by side shows where two people understand each other easily and where they tend to differ — no pass or fail.",
+    "cau_hoi": "Where do you and that person click?",
+    "cta": "Compare two people"
+   }
+  },
+  "hom_nay": {
+   "ten": "Your day",
+   "nhan": "Personal Day {so}",
+   "cta": "See your day",
+   "mo_dau": [
+    "Today is your own day number {so} — {chu_de}",
+    "Your rhythm today is number {so}: {chu_de}",
+    "For you alone, today carries the number {so} — {chu_de}"
+   ],
+   "cau_hoi": [
+    "Which number does your rhythm switch to tomorrow?",
+    "Does what you plan to do today fit the rhythm of the day?",
+    "Is your month opening up or winding down?"
+   ],
+   "chung": {
+    "cau": "Everyone has their own daily rhythm, worked out from the birth date — on the same day, one person is suited to meeting people, another to working alone.",
+    "cau_hoi": "Which day number are you on today?",
+    "cta": "See today"
+   }
+  },
+  "xem_ngay": {
+   "ten": "Choosing good days",
+   "nhan": "{so_gio} good hours today",
+   "cta": "Find a good day",
+   "mo_dau": [
+    "Today has {so_gio} good hours. The first good hour from the morning is {khung} — a good time to start something you want to go smoothly.",
+    "Need to schedule something important today? {khung} is the earliest good hour of the day.",
+    "By the almanac, {khung} this morning is a good hour; the whole day has {so_gio} slots like it."
+   ],
+   "cau_hoi": [
+    "Which day this week is good for what you are planning?",
+    "When is the next good day to open a business or set off on a trip?",
+    "How many days this month suit your zodiac sign?"
+   ],
+   "chung": {
+    "cau": "The old almanac divides each day into 12 double-hours, some good and some ordinary — picking the right hour for a big event is a habit many families still keep.",
+    "cau_hoi": "Which hours are good today?",
+    "cta": "Choose a good day"
+   }
+  }
+ }
+}

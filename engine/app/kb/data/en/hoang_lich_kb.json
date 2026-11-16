@@ -1,0 +1,649 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản phủ tiếng Anh, chỉ các khoá trang Hôm nay / Tuần này dùng (ban biên tập, chờ người bản xứ duyệt).",
+ "nghi_ky": {
+  "祭祀": {
+   "ten": "Offerings and rites"
+  },
+  "祈福": {
+   "ten": "Praying for blessings"
+  },
+  "求嗣": {
+   "ten": "Praying for a child"
+  },
+  "开光": {
+   "ten": "Consecrating statues"
+  },
+  "塑绘": {
+   "ten": "Making or painting altar statues"
+  },
+  "齐醮": {
+   "ten": "Prayer ceremonies"
+  },
+  "斋醮": {
+   "ten": "Prayer ceremonies"
+  },
+  "沐浴": {
+   "ten": "Bathing, cleansing"
+  },
+  "酬神": {
+   "ten": "Thanksgiving offerings"
+  },
+  "造庙": {
+   "ten": "Building or repairing temples"
+  },
+  "祀灶": {
+   "ten": "Offering to the Kitchen God"
+  },
+  "焚香": {
+   "ten": "Burning incense"
+  },
+  "谢土": {
+   "ten": "Thanking the land"
+  },
+  "出火": {
+   "ten": "Moving the stove or altar"
+  },
+  "雕刻": {
+   "ten": "Carving"
+  },
+  "嫁娶": {
+   "ten": "Weddings"
+  },
+  "订婚": {
+   "ten": "Engagement ceremony"
+  },
+  "纳采": {
+   "ten": "First visit to the bride's family"
+  },
+  "问名": {
+   "ten": "Families meeting"
+  },
+  "纳婿": {
+   "ten": "Welcoming a son-in-law home"
+  },
+  "归宁": {
+   "ten": "Bride's return visit"
+  },
+  "安床": {
+   "ten": "Setting up a bed"
+  },
+  "合帐": {
+   "ten": "Preparing the wedding room"
+  },
+  "冠笄": {
+   "ten": "Coming-of-age ceremony"
+  },
+  "订盟": {
+   "ten": "Making a pledge"
+  },
+  "进人口": {
+   "ten": "Welcoming someone into the household"
+  },
+  "裁衣": {
+   "ten": "Tailoring, buying new clothes"
+  },
+  "挽面": {
+   "ten": "Facial care"
+  },
+  "开容": {
+   "ten": "Beauty treatments"
+  },
+  "修坟": {
+   "ten": "Repairing a grave"
+  },
+  "启钻": {
+   "ten": "Reburial"
+  },
+  "破土": {
+   "ten": "Digging a grave"
+  },
+  "安葬": {
+   "ten": "Burial"
+  },
+  "立碑": {
+   "ten": "Setting a headstone"
+  },
+  "成服": {
+   "ten": "Starting mourning"
+  },
+  "除服": {
+   "ten": "Ending mourning"
+  },
+  "开生坟": {
+   "ten": "Building a tomb in advance"
+  },
+  "合寿木": {
+   "ten": "Making a coffin in advance"
+  },
+  "入殓": {
+   "ten": "Placing in the coffin"
+  },
+  "移柩": {
+   "ten": "Moving the coffin"
+  },
+  "普渡": {
+   "ten": "Offerings for wandering souls"
+  },
+  "入宅": {
+   "ten": "Moving into a new home"
+  },
+  "安香": {
+   "ten": "Setting up an altar"
+  },
+  "安门": {
+   "ten": "Fitting doors"
+  },
+  "修造": {
+   "ten": "Home repairs"
+  },
+  "起基": {
+   "ten": "Laying foundations"
+  },
+  "动土": {
+   "ten": "Breaking ground"
+  },
+  "上梁": {
+   "ten": "Raising the ridge beam"
+  },
+  "竖柱": {
+   "ten": "Raising pillars"
+  },
+  "开井开池": {
+   "ten": "Drilling wells, digging ponds"
+  },
+  "作陂放水": {
+   "ten": "Irrigation work"
+  },
+  "拆卸": {
+   "ten": "Dismantling"
+  },
+  "破屋": {
+   "ten": "Demolishing an old house"
+  },
+  "坏垣": {
+   "ten": "Knocking down walls"
+  },
+  "补垣": {
+   "ten": "Repairing walls"
+  },
+  "伐木做梁": {
+   "ten": "Preparing timber for building"
+  },
+  "作灶": {
+   "ten": "Building a kitchen"
+  },
+  "解除": {
+   "ten": "Clearing out, cleansing"
+  },
+  "开柱眼": {
+   "ten": "Drilling pillars"
+  },
+  "穿屏扇架": {
+   "ten": "Fitting partitions and door frames"
+  },
+  "盖屋合脊": {
+   "ten": "Roofing"
+  },
+  "开厕": {
+   "ten": "Building a toilet"
+  },
+  "造仓": {
+   "ten": "Building a storeroom"
+  },
+  "塞穴": {
+   "ten": "Sealing holes, pest-proofing"
+  },
+  "平治道涂": {
+   "ten": "Paving paths and yards"
+  },
+  "造桥": {
+   "ten": "Building bridges"
+  },
+  "作厕": {
+   "ten": "Building a toilet"
+  },
+  "筑堤": {
+   "ten": "Building embankments"
+  },
+  "开池": {
+   "ten": "Digging ponds"
+  },
+  "伐木": {
+   "ten": "Felling or pruning trees"
+  },
+  "开渠": {
+   "ten": "Digging ditches and drains"
+  },
+  "掘井": {
+   "ten": "Drilling a well"
+  },
+  "扫舍": {
+   "ten": "Deep-cleaning the house"
+  },
+  "放水": {
+   "ten": "Draining water"
+  },
+  "造屋": {
+   "ten": "Building a house"
+  },
+  "合脊": {
+   "ten": "Closing the roof ridge"
+  },
+  "造畜稠": {
+   "ten": "Building animal pens"
+  },
+  "修门": {
+   "ten": "Repairing doors"
+  },
+  "定磉": {
+   "ten": "Setting pillar bases"
+  },
+  "作梁": {
+   "ten": "Making beams"
+  },
+  "修饰垣墙": {
+   "ten": "Painting and repairing walls"
+  },
+  "架马": {
+   "ten": "Putting up scaffolding"
+  },
+  "开市": {
+   "ten": "Opening a business"
+  },
+  "挂匾": {
+   "ten": "Hanging a shop sign"
+  },
+  "纳财": {
+   "ten": "Collecting money, stocking up"
+  },
+  "求财": {
+   "ten": "Business matters"
+  },
+  "开仓": {
+   "ten": "Opening the stockroom, shipping goods"
+  },
+  "买车": {
+   "ten": "Buying a vehicle"
+  },
+  "置产": {
+   "ten": "Buying property"
+  },
+  "雇佣": {
+   "ten": "Hiring staff"
+  },
+  "出货财": {
+   "ten": "Shipping goods, paying out"
+  },
+  "安机械": {
+   "ten": "Installing machinery"
+  },
+  "造车器": {
+   "ten": "Making vehicles and tools"
+  },
+  "经络": {
+   "ten": "Weaving and sewing"
+  },
+  "酝酿": {
+   "ten": "Fermenting food and drink"
+  },
+  "作染": {
+   "ten": "Dyeing fabric"
+  },
+  "鼓铸": {
+   "ten": "Forging and casting metal"
+  },
+  "造船": {
+   "ten": "Building boats"
+  },
+  "割蜜": {
+   "ten": "Harvesting honey"
+  },
+  "栽种": {
+   "ten": "Planting"
+  },
+  "取渔": {
+   "ten": "Fishing"
+  },
+  "结网": {
+   "ten": "Mending fishing gear"
+  },
+  "牧养": {
+   "ten": "Raising livestock"
+  },
+  "安碓磑": {
+   "ten": "Installing mills and grinders"
+  },
+  "习艺": {
+   "ten": "Learning a trade or skill"
+  },
+  "入学": {
+   "ten": "Starting school"
+  },
+  "理发": {
+   "ten": "Haircut"
+  },
+  "探病": {
+   "ten": "Visiting the sick"
+  },
+  "见贵": {
+   "ten": "Meeting a boss or partner"
+  },
+  "乘船": {
+   "ten": "Travelling by boat"
+  },
+  "渡水": {
+   "ten": "Travelling by water"
+  },
+  "针灸": {
+   "ten": "Acupuncture"
+  },
+  "出行": {
+   "ten": "Setting out, travelling"
+  },
+  "移徙": {
+   "ten": "Moving house"
+  },
+  "分居": {
+   "ten": "Moving out on your own"
+  },
+  "剃头": {
+   "ten": "A baby's first haircut, head shaving"
+  },
+  "整手足甲": {
+   "ten": "Trimming nails"
+  },
+  "纳畜": {
+   "ten": "Buying animals"
+  },
+  "捕捉": {
+   "ten": "Pest control"
+  },
+  "畋猎": {
+   "ten": "Fishing, setting traps"
+  },
+  "教牛马": {
+   "ten": "Training animals"
+  },
+  "会亲友": {
+   "ten": "Seeing family and friends"
+  },
+  "赴任": {
+   "ten": "Starting a new job"
+  },
+  "求医": {
+   "ten": "Seeing a doctor"
+  },
+  "治病": {
+   "ten": "Medical treatment"
+  },
+  "词讼": {
+   "ten": "Filing a lawsuit, disputes"
+  },
+  "起基动土": {
+   "ten": "Laying foundations, breaking ground"
+  },
+  "破屋坏垣": {
+   "ten": "Demolishing houses and walls"
+  },
+  "盖屋": {
+   "ten": "Roofing a house"
+  },
+  "造仓库": {
+   "ten": "Building a storeroom"
+  },
+  "立券交易": {
+   "ten": "Signing contracts, deals"
+  },
+  "交易": {
+   "ten": "Deals"
+  },
+  "立券": {
+   "ten": "Signing documents"
+  },
+  "安机": {
+   "ten": "Installing machinery"
+  },
+  "会友": {
+   "ten": "Meeting friends"
+  },
+  "求医疗病": {
+   "ten": "Seeing a doctor"
+  },
+  "诸事不宜": {
+   "ten": "Postpone all major matters"
+  },
+  "馀事勿取": {
+   "ten": "Postpone everything else"
+  },
+  "行丧": {
+   "ten": "Holding a funeral"
+  },
+  "断蚁": {
+   "ten": "Getting rid of termites and ants"
+  },
+  "归岫": {
+   "ten": "Returning home"
+  },
+  "无": {
+   "ten": "—"
+  }
+ },
+ "truc": {
+  "建": {
+   "ten": "Jian (Establish)",
+   "y": "beginning, setting up",
+   "hop": "travel, meeting people, starting something new",
+   "tranh": "breaking ground, digging"
+  },
+  "除": {
+   "ten": "Chu (Remove)",
+   "y": "clearing out the old",
+   "hop": "cleaning up, medical treatment, clearing things away",
+   "tranh": "weddings, opening a business"
+  },
+  "满": {
+   "ten": "Man (Full)",
+   "y": "fullness, completion",
+   "hop": "business matters, offerings, opening the stockroom",
+   "tranh": "lawsuits, taking up a new post"
+  },
+  "平": {
+   "ten": "Ping (Balance)",
+   "y": "level, calm",
+   "hop": "road repairs, everyday tasks",
+   "tranh": "digging, starting big ventures"
+  },
+  "定": {
+   "ten": "Ding (Stable)",
+   "y": "stability",
+   "hop": "signing contracts, weddings, moving into a new home",
+   "tranh": "lawsuits, long trips"
+  },
+  "执": {
+   "ten": "Zhi (Initiate)",
+   "y": "holding on",
+   "hop": "building and repairs, planting, starting to pursue a goal",
+   "tranh": "moving house, travelling"
+  },
+  "破": {
+   "ten": "Po (Destruction)",
+   "y": "breaking apart",
+   "hop": "demolition, medical treatment",
+   "tranh": "most new beginnings"
+  },
+  "危": {
+   "ten": "Wei (Danger)",
+   "y": "precarious",
+   "hop": "offerings, small tasks, work that needs care",
+   "tranh": "climbing high, boat trips, risky ventures"
+  },
+  "成": {
+   "ten": "Cheng (Success)",
+   "y": "achievement",
+   "hop": "opening a business, weddings, starting school, signing contracts",
+   "tranh": "lawsuits"
+  },
+  "收": {
+   "ten": "Shou (Receive)",
+   "y": "gathering in",
+   "hop": "collecting money, collecting debts, harvesting",
+   "tranh": "burials, travelling"
+  },
+  "开": {
+   "ten": "Kai (Open)",
+   "y": "opening up",
+   "hop": "opening a business, starting school, weddings, travelling",
+   "tranh": "burials, interments"
+  },
+  "闭": {
+   "ten": "Bi (Close)",
+   "y": "closing",
+   "hop": "building embankments, filling holes, finishing things",
+   "tranh": "opening a business, travelling, starting big ventures"
+  }
+ },
+ "than": {
+  "青龙": {
+   "ten": "Azure Dragon"
+  },
+  "明堂": {
+   "ten": "Bright Hall"
+  },
+  "天刑": {
+   "ten": "Heavenly Punishment"
+  },
+  "朱雀": {
+   "ten": "Vermilion Bird"
+  },
+  "金匮": {
+   "ten": "Golden Coffer"
+  },
+  "天德": {
+   "ten": "Heavenly Virtue"
+  },
+  "白虎": {
+   "ten": "White Tiger"
+  },
+  "玉堂": {
+   "ten": "Jade Hall"
+  },
+  "天牢": {
+   "ten": "Heavenly Prison"
+  },
+  "玄武": {
+   "ten": "Black Tortoise"
+  },
+  "司命": {
+   "ten": "Life Governor"
+  },
+  "勾陈": {
+   "ten": "Hook Array"
+  }
+ },
+ "ly_thuan_phong": {
+  "dai_an": {
+   "ten": "Great Peace",
+   "nghia": "things go smoothly, safe journeys there and back"
+  },
+  "luu_lien": {
+   "ten": "Lingering",
+   "nghia": "things tend to drag on and run late — prepare well"
+  },
+  "toc_hy": {
+   "ten": "Quick Joy",
+   "nghia": "good news arrives fast, good for meeting people"
+  },
+  "xich_khau": {
+   "ten": "Red Mouth",
+   "nghia": "arguments come easily — keep your words gentle"
+  },
+  "tieu_cat": {
+   "ten": "Small Luck",
+   "nghia": "a little luck, someone lends a hand"
+  },
+  "khong_vong": {
+   "ten": "Emptiness",
+   "nghia": "things tend to fall short — pick another time if you can"
+  }
+ },
+ "ky_dan_gian": {
+  "tam_nuong": {
+   "ten": "Tam Nuong day",
+   "nghia": "the 3rd, 7th, 13th, 18th, 22nd and 27th of the lunar month — folk custom avoids weddings and openings"
+  },
+  "nguyet_ky": {
+   "ten": "Moon taboo day",
+   "nghia": "the 5th, 14th and 23rd of the lunar month — folk custom avoids long trips and big beginnings"
+  },
+  "duong_cong": {
+   "ten": "Yang Gong taboo day",
+   "nghia": "13 fixed days a year from an old book — folk custom avoids major undertakings"
+  }
+ },
+ "quan_he_tuoi": {
+  "xung": {
+   "ten": "Clash",
+   "nghia": "a day that clashes with your zodiac sign — think twice about big matters or choose another day"
+  },
+  "tam_hop": {
+   "ten": "Three Harmony",
+   "nghia": "a day in Three Harmony with your zodiac sign — good for work that needs joined effort"
+  },
+  "luc_hop": {
+   "ten": "Six Harmony",
+   "nghia": "a day in Six Harmony with your zodiac sign — good for meeting people and making connections"
+  },
+  "hai": {
+   "ten": "Harm",
+   "nghia": "a day in Harm with your zodiac sign — keep the peace and avoid disputes"
+  },
+  "trung": {
+   "ten": "Same sign",
+   "nghia": "a day that shares your zodiac sign — folk custom calls it your own day, keep a moderate pace"
+  }
+ },
+ "nhan_tap_quan": {
+  "tue_pha": {
+   "ten": "Year Breaker"
+  },
+  "thu_tu": {
+   "ten": "Receiving Death"
+  }
+ },
+ "viec": [
+  {
+   "ten": "Weddings"
+  },
+  {
+   "ten": "Opening a business"
+  },
+  {
+   "ten": "Moving into a new home"
+  },
+  {
+   "ten": "Breaking ground, building"
+  },
+  {
+   "ten": "Setting out, travelling"
+  },
+  {
+   "ten": "Signing contracts, deals"
+  },
+  {
+   "ten": "Business, collecting money"
+  },
+  {
+   "ten": "Buying a vehicle or property"
+  },
+  {
+   "ten": "Starting school, exams"
+  },
+  {
+   "ten": "Haircut"
+  },
+  {
+   "ten": "Burials, grave repairs"
+  }
+ ]
+}

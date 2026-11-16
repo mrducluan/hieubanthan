@@ -7,6 +7,8 @@ from __future__ import annotations
 
 import datetime as dt
 
+from app.kb.loi import L
+
 from app.luangiai import nhip_ca_nhan, tong_hop
 
 
@@ -24,5 +26,5 @@ def the_ngay(ho_ten: list[str] | None, ngay: int, thang: int, nam: int, ngay_xem
         "so_noi_bat": noi_bat,
         "nguon": nhip["nguon"], "source_id": nhip["source_id"], "school_id": nhip["school_id"],
         "trang_thai": nhip["trang_thai"],
-        "luu_y": "Nhịp theo thần số học để tự soi — gợi chủ đề, không dự báo việc sẽ xảy ra.",
+        "luu_y": L("nhip.luu_y", "Nhịp theo thần số học để tự soi — gợi chủ đề, không dự báo việc sẽ xảy ra."),
     }

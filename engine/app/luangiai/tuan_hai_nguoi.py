@@ -13,6 +13,9 @@ from app.calc import lunar, phongthuy, thanso_mo_rong as mr
 from app.config import CALENDAR_MERIDIAN_TZ, TZ_LICH_AM, Region, tz_lich_am
 from app.kb import nap, thanso_v2
 from app.luangiai import hoang_lich as hl
+from app.luangiai import lich_hien as lh
+from app.kb import ten as _tn
+from app.kb.loi import L
 
 THU = ("Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy", "Chủ Nhật")
 TOI_DA_NOI_BAT = 3
@@ -60,16 +63,16 @@ def _lop_ngay(n: dict, c: dict, tt: dict, qh: dict | None, t_tuoi: dict | None, 
     if "诸事不宜" in c["ky"]:
         lich_muc, lich_cau = "cham", kl["hoan"]
     elif n["kieng"]:
-        lich_muc, lich_cau = "binh", kl["kieng"].format(ky=", ".join(tt["ky_dan_gian"]))
+        lich_muc, lich_cau = "binh", kl["kieng"].format(ky=", ".join(lh.ds("ky_dan_gian", tt["ky_dan_gian"])))
     elif n["hoan"]:
-        lich_muc, lich_cau = "binh", kl["nen"].format(truc=truc["ten"])
+        lich_muc, lich_cau = "binh", kl["nen"].format(truc=lh.ten("truc", truc["ten"]))
     elif n["dep"] and n["co_viec_tot"]:
         # "Thuận" của lịch = lịch ghi đẹp VÀ trang ngày có ít nhất một việc lớn tốt — MỘT định nghĩa cho nhịp, dòng nổi bật, câu tuần.
-        lich_muc, lich_cau = "thuan", kl["dep"].format(hop=truc["hop"])
+        lich_muc, lich_cau = "thuan", kl["dep"].format(hop=lh.truc(truc["ten"], "hop"))
     else:
-        lich_muc, lich_cau = "binh", kl["binh"].format(truc=truc["ten"], hop=truc["hop"])
+        lich_muc, lich_cau = "binh", kl["binh"].format(truc=lh.ten("truc", truc["ten"]), hop=lh.truc(truc["ten"], "hop"))
     kt = k["tuoi"]
-    cc = t_tuoi["can_chi"] if t_tuoi else ""
+    cc = lh.can_chi(t_tuoi["can_chi"]) if t_tuoi else ""
     vuong = n["tuoi"] in VUONG_TUOI
     # Lục hại / trùng tuổi: không gắn chip mức (câu của lớp tự nói) và ngày đó không bao giờ là "thuận".
     tuoi_muc = "cham" if n["tuoi"] == "xung" else "thuan" if n["tuoi"] in ("tam_hop", "luc_hop") else None if vuong else "binh"
@@ -77,14 +80,14 @@ def _lop_ngay(n: dict, c: dict, tt: dict, qh: dict | None, t_tuoi: dict | None, 
     q = hom_nay._que_ngay(d)  # noqa: SLF001 — đúng quẻ đầu ngày của trang Hôm nay
     lop = [
         {"mon": "than_so", "ten": k["than_so"]["ten"], "nhan": k["than_so"]["nhan"].format(so=n["so"]), "cau": n["chu_de"], "muc": None},
-        {"mon": "lich", "ten": kl["ten"], "nhan": (kl["nhan_hd"] if n["hoang_dao"] else kl["nhan_hac"]).format(truc=truc["ten"]),
+        {"mon": "lich", "ten": kl["ten"], "nhan": (kl["nhan_hd"] if n["hoang_dao"] else kl["nhan_hac"]).format(truc=lh.ten("truc", truc["ten"])),
          "cau": lich_cau, "muc": lich_muc},
         {"mon": "tuoi", "ten": kt["ten"],
-         "nhan": kt["nhan"].format(ten=n["tuoi_ten"], can_chi=cc) if n["tuoi"] else kt["binh_nhan"].format(can_chi=cc),
-         "cau": kt["cau"].format(nghia=qh["nghia"]) if n["tuoi"] else kt["binh_cau"], "muc": tuoi_muc},
-        {"mon": "bat_tu", "ten": k["bat_tu"]["ten"], "nhan": k["bat_tu"]["nhan"].format(thap_than=bt["thap_than"], can_chi=bt["can_chi_ngay"]),
+         "nhan": kt["nhan"].format(ten=lh.quan_he(qh)["ten"], can_chi=cc) if n["tuoi"] else kt["binh_nhan"].format(can_chi=cc),
+         "cau": kt["cau"].format(nghia=lh.quan_he(qh)["nghia"]) if n["tuoi"] else kt["binh_cau"], "muc": tuoi_muc},
+        {"mon": "bat_tu", "ten": k["bat_tu"]["ten"], "nhan": k["bat_tu"]["nhan"].format(thap_than=_tn.ten("thap_than", bt["thap_than"]), can_chi=bt["can_chi_ngay"]),
          "cau": bt.get("y_nghia") or "", "muc": None, "duong": "/bat-tu"},
-        {"mon": "kinh_dich", "ten": k["kinh_dich"]["ten"], "nhan": k["kinh_dich"]["nhan"].format(ten=q["ten"]),
+        {"mon": "kinh_dich", "ten": k["kinh_dich"]["ten"], "nhan": k["kinh_dich"]["nhan"].format(ten=_tn.ten("que_ten", q["ten"])),
          "cau": q.get("y_chinh") or "", "muc": None, "duong": q.get("duong")},
     ]
     if "cham" in (lich_muc, tuoi_muc):
@@ -116,7 +119,7 @@ def tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date, gioi_tinh: str | No
         t_tuoi = hl.tuoi(nam, thang, ngay)
         qh = hl._quan_he(c["ngay_gz"][1], t_tuoi)  # noqa: SLF001 — cùng hàm với trang ngày
         tho.append((c, tt, qh, vl))
-        ds.append({"ngay": d.isoformat(), "thu": THU[i], "so": mr.ngay_ca_nhan(ngay, thang, d.year, d.month, d.day),
+        ds.append({"ngay": d.isoformat(), "thu": lh.thu(i), "so": mr.ngay_ca_nhan(ngay, thang, d.year, d.month, d.day),
                    "chu_de": None, "hoang_dao": tt["hoang_dao"], "dep": tt["dep"], "tuoi": qh["ma"] if qh else None,
                    "tuoi_ten": qh["ten"] if qh else None, "tuoi_nghia": qh["nghia"] if qh else None,
                    "kieng": bool(tt["ky_dan_gian"]), "vuong": (qh["ma"] if qh else None) in VUONG_TUOI,
@@ -132,10 +135,10 @@ def tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date, gioi_tinh: str | No
         n["viec_tot"] = [v["ten"] for v in vl if v["danh_gia"] == "tot"]
         n["gio_tot"] = [{"chi": hl._CHI[g["chi"]], "khung": hl._KHUNG[i]} for i, g in enumerate(c["gio"]) if g["hoang_dao"]]  # noqa: SLF001
         n["am"] = tt["am"]
-        ky = ", ".join(tt["ky_dan_gian"])
+        ky = ", ".join(lh.ds("ky_dan_gian", tt["ky_dan_gian"]))
         n["viec_luu_y"] = (k["viec_xung"] if n["tuoi"] == "xung" else k["viec_kieng"].format(ky=ky) if n["kieng"] else None) if n["viec_tot"] else None
         mau = k["tom"]
-        viec = ", ".join(x.lower() for x in n["viec_tot"][:2])
+        viec = ", ".join(lh.ten("viec", x).lower() for x in n["viec_tot"][:2])
         if n["nhip"] in ("cham", "lech"):
             khoa = n["nhip"]
         elif n["kieng"]:
@@ -146,14 +149,14 @@ def tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date, gioi_tinh: str | No
             khoa = "kha_viec" if n["nhip"] == "binh" else n["nhip"] + "_viec"
         else:
             khoa = n["nhip"]
-        n["tom"] = mau[khoa].format(viec=viec, ky=ky, ten=(n["tuoi_ten"] or "").lower())
+        n["tom"] = mau[khoa].format(viec=viec, ky=ky, ten=(lh.ten("quan_he_tuoi", n["tuoi_ten"]) if n["tuoi"] else n["tuoi_ten"] or "").lower())
     # Theo việc: ngày CÒN LẠI trong tuần sách lịch ghi tốt cho từng việc lớn (đúng luật trang ngày), bỏ ngày xung tuổi và
     # ngày dân gian thường kiêng (để khối này không nói ngược lớp lịch của chính ngày đó).
     viec_tuan = []
     for sv in hl.VIEC_SEO:
         ngay_hop = [n["ngay"] for n in ds if not n["da_qua"] and sv["ten"] in n["viec_tot"] and n["tuoi"] != "xung" and not n["kieng"]]
         if ngay_hop:
-            viec_tuan.append({"ma": sv["ma"], "ten": sv["ten"], "slug": sv["slug"], "ngay": ngay_hop})
+            viec_tuan.append({"ma": sv["ma"], "ten": lh.ten("viec", sv["ten"]), "slug": sv["slug"], "ngay": ngay_hop})
     # Mốc trong tuần: giao tiết / Lập xuân / Tết (đúng hàm mốc lịch của thông báo sáng), mùng 1, rằm, tháng cá nhân mới.
     from app.luangiai import sang_nay  # noqa: PLC0415
     moc = []
@@ -163,17 +166,19 @@ def tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date, gioi_tinh: str | No
             km = k["moc"]
             if m["ma"].startswith("tet."):
                 moc.append({"loai": "tet", "ngay": n["ngay"], "thu": n["thu"], "cau": "",
-                            "nhan": km["tet"].format(can_chi=" ".join(lunar.can_chi_nam(c["am"]["nam"])))})
+                            "nhan": km["tet"].format(can_chi=lh.can_chi(" ".join(lunar.can_chi_nam(c["am"]["nam"]))))})
             elif m["ma"] == "tiet.315":
                 moc.append({"loai": "giao_tiet", "ngay": n["ngay"], "thu": n["thu"], "nhan": km["lap_xuan"], "cau": km["lap_xuan_cau"]})
             else:
                 tk = sang_nay._kb()["tiet"][m["ma"].split(".", 1)[1]]  # noqa: SLF001
-                moc.append({"loai": "giao_tiet", "ngay": n["ngay"], "thu": n["thu"], "nhan": km["giao_tiet"].format(ten=tk["ten"]),
-                            "cau": km["giao_tiet_cau"].format(chi=tk["chi"])})
+                ma_tiet = m["ma"].split(".", 1)[1]
+                moc.append({"loai": "giao_tiet", "ngay": n["ngay"], "thu": n["thu"],
+                            "nhan": km["giao_tiet"].format(ten=L(f"lich.tiet.{ma_tiet}", tk["ten"])),
+                            "cau": km["giao_tiet_cau"].format(chi=_tn.ten("chi", tk["chi"]))})
         am = c["am"]
         if am["ngay"] in (1, 15) and not any(x["loai"] == "tet" and x["ngay"] == n["ngay"] for x in moc):
             moc.append({"loai": "mung_1" if am["ngay"] == 1 else "ram", "ngay": n["ngay"], "thu": n["thu"],
-                        "nhan": k["moc"]["mung_1" if am["ngay"] == 1 else "ram"].format(thang=f"{am['thang']}{' nhuận' if am.get('nhuan') else ''}"), "cau": ""})
+                        "nhan": k["moc"]["mung_1" if am["ngay"] == 1 else "ram"].format(thang=f"{am['thang']}{L('lich.nhuan', ' nhuận') if am.get('nhuan') else ''}"), "cau": ""})
         if d.day == 1:
             so_t = mr.thang_ca_nhan(ngay, thang, d.year, d.month)
             moc.append({"loai": "thang_ca_nhan", "ngay": n["ngay"], "thu": n["thu"], "nhan": k["moc"]["thang_ca_nhan"].format(so=so_t),
@@ -182,6 +187,8 @@ def tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date, gioi_tinh: str | No
     from app.luangiai import thoi_gian_lop  # noqa: PLC0415
     quai = phongthuy.menh_quai(nam, gioi_tinh, dt.date(nam, thang, ngay))["quai"] if gioi_tinh in ("nam", "nu") else None
     pt = thoi_gian_lop.phong_thuy_thang(ngay_xem, quai)
+    if not lh.la_viet():
+        pt = _phong_thuy_hien(pt, quai, ngay_xem)
     phong_thuy = {"ten": k["phong_thuy"]["ten"], "loi": pt["loi"], "can_cu": pt["can_cu"], "thieu_gioi_tinh": quai is None,
                   "duong": "/phong-thuy"}
     con = [n for n in ds if not n["da_qua"]]
@@ -189,11 +196,12 @@ def tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date, gioi_tinh: str | No
     def dong(loai: str, n: dict, **them) -> dict:
         d = dt.date.fromisoformat(n["ngay"])
         m = k["noi_bat"][loai]
-        can_cu = [f"Ngày cá nhân {n['so']}", "Ngày hoàng đạo" if n["hoang_dao"] else "Ngày hắc đạo"]
+        can_cu = [L("tuan.can_cu.so", "Ngày cá nhân {so}", so=n["so"]),
+                  L("tuan.can_cu.hd", "Ngày hoàng đạo") if n["hoang_dao"] else L("tuan.can_cu.hac", "Ngày hắc đạo")]
         if n["tuoi_ten"] and n["tuoi"]:
-            can_cu.append(f"{n['tuoi_ten']} với tuổi bạn")
+            can_cu.append(L("tuan.can_cu.tuoi", "{ten} với tuổi bạn", ten=lh.ten("quan_he_tuoi", n["tuoi_ten"])))
         return {"loai": loai, "ngay": n["ngay"], "thu": n["thu"],
-                "tieu_de": m["tieu_de"].format(thu=n["thu"], dm=f"{d.day}/{d.month}"),
+                "tieu_de": m["tieu_de"].format(thu=n["thu"], dm=lh.dm(d)),
                 "cau": m["cau"].format(**them) if them else m["cau"], "can_cu": can_cu}
 
     nb: list[dict] = []
@@ -207,7 +215,7 @@ def tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date, gioi_tinh: str | No
         # Tuần không có ngày lịch ghi đẹp → ngày tam hợp / lục hợp với tuổi (không vướng ngày kiêng dân gian) là ngày đáng chọn.
         hop = [n for n in con if n["nhip"] == "kha" and n["tuoi"] in ("tam_hop", "luc_hop") and n["hoang_dao"] and not n["kieng"] and not n["hoan"]]
         if hop:
-            nb.append(dong("hop_tuoi", hop[0], nghia=hop[0]["tuoi_nghia"]))
+            nb.append(dong("hop_tuoi", hop[0], nghia=lh.quan_he({"ma": hop[0]["tuoi"], "ten": hop[0]["tuoi_ten"], "nghia": hop[0]["tuoi_nghia"]})["nghia"]))
     xung = [n for n in con if n["tuoi"] == "xung"]
     if xung:
         nb.append(dong("cham", xung[0]))
@@ -229,11 +237,45 @@ def tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date, gioi_tinh: str | No
         n.pop("vuong", None)
         n.pop("hoan", None)
         n.pop("co_viec_tot", None)
+        if not lh.la_viet():                          # EN-ALL GĐ 7: tên Việt chỉ còn dùng để quyết định — hiển thị theo ngôn ngữ
+            if n["tuoi"]:
+                n["tuoi_ten"] = lh.ten("quan_he_tuoi", n["tuoi_ten"])
+            elif n["tuoi_ten"]:
+                n["tuoi_ten"] = L("lich.qh.binh.ten", n["tuoi_ten"])
+            n["viec_tot"] = [lh.ten("viec", x) for x in n["viec_tot"]]
     return {"tu": ds[0]["ngay"], "den": ds[6]["ngay"], "ngay": ds, "noi_bat": nb[:TOI_DA_NOI_BAT], "tom_tat": tom_tat,
             "viec_tuan": viec_tuan, "viec_tuan_luu_y": k["viec_tuan"]["luu_y"], "moc": moc, "phong_thuy": phong_thuy,
-            "tuoi": t_tuoi["can_chi"] if t_tuoi else None, "luu_y": k["luu_y"],
+            "tuoi": lh.can_chi(t_tuoi["can_chi"]) if t_tuoi else None, "luu_y": k["luu_y"],
             # Chữ giao diện gắn với nghĩa (tên nhịp, tên mức, câu dẫn, ghi chú môn không vào tuần) do engine soạn — web chỉ vẽ.
             "nhan": k["nhan"], **_meta()}
+
+
+def _phong_thuy_hien(pt: dict, quai: str | None, ngay_xem: dt.date) -> dict:
+    """EN-ALL GĐ 7 — dòng phong thuỷ tháng (`thoi_gian_lop.phong_thuy_thang`, lời Việt) dựng lại theo ngôn ngữ từ chính các
+    trường đã tính (góc hợp / góc tốt / góc nên giữ yên, chi tháng). Không tính lại phép nào."""
+    from app.calc import huyen_khong as HK  # noqa: PLC0415
+    from app.luangiai import thoi_gian_lop as tg  # noqa: PLC0415
+    h = lambda ph: _tn.ten("huong", ph)  # noqa: E731
+    hop, tot, yen = pt["goc_hop"], pt["goc_tot"], pt["yen"]
+    if hop:
+        chinh = L("tuan.pt.goc_hop", "", phuong=h(hop["phuong"]), y=L(f"tuan.pt.sao_tot.{hop['sao']}", ""))
+    elif tot:
+        chinh = L("tuan.pt.goc_tot", "", phuong=h(tot["phuong"]), y=L(f"tuan.pt.sao_tot.{tot['sao']}", ""))
+    else:
+        chinh = ""
+    loi_yen = (L("tuan.pt.goc_yen", "", phuong=h(yen[0])) if len(yen) == 1 else
+               L("tuan.pt.goc_yen_hai", "", a=h(yen[0]), b=h(yen[1])) if len(yen) >= 2 else "")
+    thieu = "" if quai else L("tuan.pt.thieu_gioi", "")
+    ln = HK.luu_nguyet_tai(ngay_xem)
+    g = hop or tot
+    ct = [L("tuan.pt.toi", "", sao=_tn.ten("sao_bay", g["ten_sao"]), phuong=h(g["phuong"]))
+          + (L("tuan.pt.du_nien", "", du_nien=_tn.ten("du_nien", hop["du_nien"])) if hop else "")] if g else []
+    ct += [L("tuan.pt.toi", "", sao=_tn.ten("sao_bay", HK.SAO[s]), phuong=h(tg.PHUONG[k]))
+           for k, s in ln["cung"].items() if k != "Trung cung" and s in tg.SAO_YEN]
+    can_cu = (L("tuan.pt.can_cu", "", chi=_tn.ten("chi", ln["chi_thang"]), tam=_tn.ten("sao_bay", HK.SAO[ln["tam"]]))
+              + (": " + ", ".join(ct) if ct else "")
+              + (L("tuan.pt.quai", "", quai=_tn.ten("quai", quai)) if quai else ""))
+    return {**pt, "loi": " ".join(x for x in (chinh, loi_yen, thieu) if x), "can_cu": can_cu}
 
 
 DUONG_TUAN = "/hom-nay#tuan-nay"

@@ -1,0 +1,212 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 (nhóm B) — bản phủ tiếng Anh cho số gốc 1–9 và số kép 10–31 (số ngày trong tháng) mà trang Hôm nay dùng. Số kép 32–52 + phần giới thiệu do phần Chaldea của Thần số bổ sung.",
+ "goc": {
+  "1": {
+   "ten": "The initiator",
+   "hanh_tinh": "Sun",
+   "xu_huong": "In the Chaldean tradition, 1 is usually described as the energy of beginnings, liking to set its own direction and to lead. People with this number are often said to decide quickly and to dislike waiting for others to agree.",
+   "mat_toi": "Can take its own view as the only right one and overlook the quiet people in the group.",
+   "goi_y": "This week, before a group decision, ask the person who speaks least for their view before you give yours.",
+   "cau_tu_soi": "Over the past week, did you decide something for the group without asking anyone?"
+  },
+  "2": {
+   "ten": "The peacemaker",
+   "hanh_tinh": "Moon",
+   "xu_huong": "2 is usually described as gentle, imaginative and sensitive to the mood around it. Tradition links this number to the Moon, so it stresses changing feelings and a talent for reading people.",
+   "mat_toi": "Can go along with others so much that it never says what it really wants, then quietly resents it.",
+   "goi_y": "This week, pick one moment when you would say 'whatever works' and replace it with a specific choice of your own.",
+   "cau_tu_soi": "Was the last time you turned down a request for help this week?"
+  },
+  "3": {
+   "ten": "The expander",
+   "hanh_tinh": "Jupiter",
+   "xu_huong": "3 is linked to Jupiter, so it is usually described as reaching for growth, learning and the ambition to rise. People with this number are often said to enjoy organising and teaching others what they know.",
+   "mat_toi": "Can take on too many plans at once and value the title more than finishing the job.",
+   "goi_y": "This week, cross off one thing you agreed to but no longer really want to do.",
+   "cau_tu_soi": "Are you chasing more than three plans without having finished any of them?"
+  },
+  "4": {
+   "ten": "The one who leaves the beaten path",
+   "hanh_tinh": "Uranus",
+   "xu_huong": "In the Chaldean school, 4 is usually described as seeing things from an unusual angle and liking to question the norm. People with this number are often said to work steadily, but in their own way.",
+   "mat_toi": "Can push back out of habit, making others hesitant to bring ideas to the table.",
+   "goi_y": "This week, when you are about to disagree with an idea, first name one point in it that makes sense to you.",
+   "cau_tu_soi": "In your last meeting or family meal, did you push back on someone's idea before hearing it all?"
+  },
+  "5": {
+   "ten": "The connector",
+   "hanh_tinh": "Mercury",
+   "xu_huong": "5 is linked to Mercury, so it is usually described as quick, articulate and fond of changing scenery. People with this number are often said to learn fast and make friends easily, but to get bored with repetition.",
+   "mat_toi": "Can drop things once the novelty wears off and promise more than it can keep up with.",
+   "goi_y": "This week, choose one unfinished task and give a whole session to moving it to the next step.",
+   "cau_tu_soi": "This month, did you abandon a course or a habit you had just started?"
+  },
+  "6": {
+   "ten": "The nurturer",
+   "hanh_tinh": "Venus",
+   "xu_huong": "6 is linked to Venus, so it is usually described as loving beauty, valuing harmony and drawing people in. People with this number are often said to take care of their home, friends and the atmosphere around them.",
+   "mat_toi": "Can dodge necessary friction to keep things pleasant, or take on other people's work for fear of upsetting them.",
+   "goi_y": "This week, tell someone close about one thing that is not working for you, gently, instead of staying silent.",
+   "cau_tu_soi": "Over the past week, did you take on someone else's task just to avoid tension?"
+  },
+  "7": {
+   "ten": "The dreamer",
+   "hanh_tinh": "Neptune",
+   "xu_huong": "7 is linked to Neptune, so it is usually described as intuitive, reflective and drawn to things that are hard to measure. People with this number are often said to like travelling far, reading deeply and needing quiet time of their own.",
+   "mat_toi": "Can drift into imagination and put off the practical tasks in front of it.",
+   "goi_y": "This week, write down an idea you have been nursing for a long time, with one small step you could take within two days.",
+   "cau_tu_soi": "Have you been putting off paperwork or a household task for more than a week?"
+  },
+  "8": {
+   "ten": "The persistent one",
+   "hanh_tinh": "Saturn",
+   "xu_huong": "8 is linked to Saturn, so it is usually described as serious, able to bear long pressure and to go the distance through persistence. People with this number are often said to show little and to be mistaken for cold.",
+   "mat_toi": "Can carry everything alone, keep difficulties to itself and be harder on itself than it needs to be.",
+   "goi_y": "This week, tell someone you trust about something that is weighing on you.",
+   "cau_tu_soi": "Over the past week, did you ask anyone for help with something that felt too much?"
+  },
+  "9": {
+   "ten": "The doer",
+   "hanh_tinh": "Mars",
+   "xu_huong": "9 is linked to Mars, so it is usually described as energetic, willing to face things head-on and eager to defend what it believes in. The Chaldean tradition treats 9 as a sacred number that appears only in totals and is never assigned to a letter.",
+   "mat_toi": "Can be hasty, speak sharply when blocked and act before hearing enough.",
+   "goi_y": "This week, when you feel annoyed, take one long breath before replying to that message or remark.",
+   "cau_tu_soi": "Over the past week, did you send a message while annoyed and then regret it?"
+  }
+ },
+ "kep": {
+  "10": {
+   "bieu_tuong": "The wheel of fortune",
+   "xu_huong": "In the Chaldean tradition this compound number is pictured as a turning wheel: ups and downs in turn, and the ability to start again after each turn. It is often linked to self-confidence and to having your name remembered.",
+   "mat_toi": "Can lean on good circumstances and neglect to prepare for when the wheel turns.",
+   "cau_tu_soi": "When a plan falls apart, do you start rebuilding within a week?"
+  },
+  "11": {
+   "bieu_tuong": "The clenched hand",
+   "xu_huong": "By tradition this compound number is pictured as a clenched hand or a lion held back: strength is there but is being held in. The theme is learning to trust the right people and to say clearly what you want.",
+   "mat_toi": "Can be too suspicious of others, or the opposite, trust fine promises too quickly.",
+   "cau_tu_soi": "Do you check an important promise in writing before relying on it?"
+  },
+  "12": {
+   "bieu_tuong": "The one who sacrifices",
+   "xu_huong": "This compound number is usually described through the image of someone who willingly sets aside their own needs to serve other people's goals. The traditional theme is learning to tell helping apart from being used.",
+   "mat_toi": "Can take the short end of the stick and then feel hurt without saying so.",
+   "cau_tu_soi": "This month, did you say 'no' to a request for unpaid extra work?"
+  },
+  "13": {
+   "bieu_tuong": "A season of change",
+   "xu_huong": "The Chaldean tradition links this compound number to changes of plan, home or way of life: the old closes so the new has room. It is often read as an invitation to clear out actively rather than cling on.",
+   "mat_toi": "Can change things in a hurry, throwing out what still has value just out of boredom.",
+   "cau_tu_soi": "Are you keeping a habit or an object you have not used for more than a year?"
+  },
+  "14": {
+   "bieu_tuong": "The connecting current",
+   "xu_huong": "This compound number is usually described as constant movement, meeting and bringing people and work together, suited to trade, exchange and travel. The theme is staying careful when everything moves fast.",
+   "mat_toi": "Can bet on other people's word without looking into things yourself.",
+   "cau_tu_soi": "The last time you agreed to put money or effort into a venture, did you read the terms yourself first?"
+  },
+  "15": {
+   "bieu_tuong": "The pull of words",
+   "xu_huong": "By tradition this compound number is linked to eloquence, charm and persuasion, with others glad to help. It is often described as a charm that can lift people up or bend them to your will.",
+   "mat_toi": "Can use tact to get what it wants and forget to ask whether the other person truly agrees.",
+   "cau_tu_soi": "Over the past week, did you persuade someone to do something they were still unsure about?"
+  },
+  "16": {
+   "bieu_tuong": "The tower of renewal",
+   "xu_huong": "The Chaldean tradition pictures this compound number as a tower struck by lightning: an old structure that no longer fits must make way. It is often read as a theme of rebuilding on a truer, humbler foundation.",
+   "mat_toi": "Can cling to a set plan even when many signs say it needs adjusting.",
+   "cau_tu_soi": "Are you carrying on with a plan only because you have already put work into it?"
+  },
+  "17": {
+   "bieu_tuong": "The guiding star",
+   "xu_huong": "Tradition calls this compound number the star of the wise: a steady spirit that overcomes trials to leave its mark. It is often linked to steadfastness and the wish to be remembered.",
+   "mat_toi": "Can be so concerned with a long-term image that it overlooks the people beside it today.",
+   "cau_tu_soi": "This week, did you spend a whole session with family without looking at your phone?"
+  },
+  "18": {
+   "bieu_tuong": "The moon and the two shores",
+   "xu_huong": "By tradition this compound number carries the image of a moon shining on two shores: a tug-of-war between material desire and inner life. The theme is noticing the conflict inside before it becomes a conflict outside.",
+   "mat_toi": "Can misread loved ones and keep resentment bottled up until it bursts out.",
+   "cau_tu_soi": "Recently, have you been angry with someone without telling them why?"
+  },
+  "19": {
+   "bieu_tuong": "The radiant sun",
+   "xu_huong": "Tradition calls this compound number the prince of heaven: light, recognition and the joy of having your effort seen. It is often described as favourable for setting clear goals and seeing them through.",
+   "mat_toi": "Can become complacent when praised and reluctant to hear criticism.",
+   "cau_tu_soi": "The last time you received feedback, did you ask for more detail instead of explaining yourself again?"
+  },
+  "20": {
+   "bieu_tuong": "The wake-up call",
+   "xu_huong": "The Chaldean tradition links this compound number to awakening: a call towards a new purpose, a new plan. It is often read as a good moment to revisit what you really want to pursue.",
+   "mat_toi": "Can hear the call but put it off while waiting for perfect conditions.",
+   "cau_tu_soi": "Do you have a plan you have been thinking about for more than six months without taking the first step?"
+  },
+  "21": {
+   "bieu_tuong": "The crown of maturity",
+   "xu_huong": "This compound number is usually described through the image of a crown of maturity: results that come after a long road and many trials. The theme is patience and trust in the process.",
+   "mat_toi": "Can think it has arrived and stop learning.",
+   "cau_tu_soi": "This month, did you learn a new skill outside your usual work?"
+  },
+  "22": {
+   "bieu_tuong": "The daydreaming traveller",
+   "xu_huong": "By tradition this compound number carries the image of a traveller lost in daydreams, trusting others and forgetting to watch the road. The theme is keeping your ideals while still checking reality yourself.",
+   "mat_toi": "Can let others make important decisions on its behalf.",
+   "cau_tu_soi": "Did you look over the household spending yourself this month?"
+  },
+  "23": {
+   "bieu_tuong": "The star of the Lion",
+   "xu_huong": "Tradition calls this compound number the royal star of the Lion: support from people in high places and favour for your own plans. It is often linked to confidence when presenting ideas.",
+   "mat_toi": "Can wait for others to open the way and do little preparation itself.",
+   "cau_tu_soi": "The last time you had a chance to present an idea, did you prepare it on paper beforehand?"
+  },
+  "24": {
+   "bieu_tuong": "Support from others",
+   "xu_huong": "The Chaldean tradition links this compound number to affection, creativity and help from those who came before. It is often described as good relationships opening doors that solo effort struggles to open.",
+   "mat_toi": "Can lean on connections and forget to build real ability.",
+   "cau_tu_soi": "Over the past week, did you thank someone specifically for helping you?"
+  },
+  "25": {
+   "bieu_tuong": "Strength from experience",
+   "xu_huong": "This compound number is usually described as strength formed through observation and experience, including the stumbles. The theme is turning old lessons into new steadiness.",
+   "mat_toi": "Can hold on to unhappy memories and keep retelling them.",
+   "cau_tu_soi": "After a recent mistake, did you write down what you learned from it?"
+  },
+  "26": {
+   "bieu_tuong": "A lesson in partnership",
+   "xu_huong": "By tradition this compound number points to business ties or partnerships that need careful thought. It is often read as a theme of choosing who to work with and spelling out responsibilities from the start.",
+   "mat_toi": "Can agree to help out of politeness without setting clear terms.",
+   "cau_tu_soi": "The last time you worked in a team, did you agree out loud who would do what?"
+  },
+  "27": {
+   "bieu_tuong": "The sceptre",
+   "xu_huong": "Tradition pictures this compound number as a sceptre: authority that comes from independent thinking and your own creativity. It is often described as favourable when you trust a plan of your own that you have thought through.",
+   "mat_toi": "Can be rigid, believing its way is the only way.",
+   "cau_tu_soi": "This week, did you try doing a familiar task the way someone else suggested?"
+  },
+  "28": {
+   "bieu_tuong": "Contradiction and trust",
+   "xu_huong": "The Chaldean tradition links this compound number to contradictions: a promising start that calls for care in where you place your trust. The theme is rebuilding through your own strength rather than relying on others.",
+   "mat_toi": "Can stake a whole plan on one person's promise.",
+   "cau_tu_soi": "Do you have a backup plan for an important matter that depends on someone else?"
+  },
+  "29": {
+   "bieu_tuong": "A test of trust",
+   "xu_huong": "This compound number is usually described through uncertainty in relationships and moments when truth and pretence are hard to tell apart. By tradition the theme is learning to listen to your intuition and ask directly instead of guessing.",
+   "mat_toi": "Can read things into other people's intentions and react to what it imagines.",
+   "cau_tu_soi": "The last time you doubted someone, did you ask them directly?"
+  },
+  "30": {
+   "bieu_tuong": "Reflection",
+   "xu_huong": "By tradition this compound number is linked to thoughtful reflection, looking back and putting the mind above material things. People with this number are often described as preferring to watch from the side rather than compete.",
+   "mat_toi": "Can seem distant, making loved ones feel it is hard to get close.",
+   "cau_tu_soi": "Over the past week, did you take the initiative to invite someone to meet up?"
+  },
+  "31": {
+   "bieu_tuong": "The self-sufficient hermit",
+   "xu_huong": "Tradition pictures this compound number as a self-sufficient person who lives by their own principles and has little need of crowds. The theme is balancing independence and connection.",
+   "mat_toi": "Can withdraw so far that it misses support that is already there.",
+   "cau_tu_soi": "This month, did you turn down more than two invitations to get together?"
+  }
+ }
+}
