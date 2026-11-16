@@ -1,6 +1,23 @@
 {
  "_trang_thai": "bien_tap",
- "_ghi_chu": "EN-ALL GĐ 7 (nhóm B) — bản phủ tiếng Anh cho số gốc 1–9 và số kép 10–31 (số ngày trong tháng) mà trang Hôm nay dùng. Số kép 32–52 + phần giới thiệu do phần Chaldea của Thần số bổ sung.",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản tiếng Anh của thanso_chaldean.json. Số gốc 1–9 và số kép 10–31 lấy nguyên văn bản của nhóm B (trang Hôm nay); số kép 32–52, giới thiệu, nguồn do nhóm A1 (Thần số) bổ sung. Diễn đạt lại theo Cheiro 1926, không chép sách; chờ người bản xứ duyệt.",
+ "source": {
+  "ten": "Hieuban editorial reference text (2026) on Chaldean numerology — after Cheiro, Book of Numbers (1926)",
+  "luu_y": "Draft written with AI assistance in new wording, not copied from the book; shown by decision of the project owner and reviewed gradually. A cultural reference, not a forecast."
+ },
+ "gioi_thieu": {
+  "ten_phai": "Chaldean",
+  "tom_tat": "By tradition, Chaldean numerology traces back to ancient Babylon and was popularised in English by Cheiro in the early twentieth century. Each letter carries a value from 1 to 8 according to its sound, while 9 is kept apart as a sacred number and given to no letter. This school puts weight on the name people actually call you and on the symbolic meaning of compound numbers.",
+  "khac_pitago": [
+   "A different letter table: letters are given values 1–8 by sound and vibration, not by their A, B, C order as in Pythagorean numerology.",
+   "No letter carries the number 9; 9 only appears when totals are added up.",
+   "Compound numbers 10–52 have their own symbolic meaning and are read before reducing to a root number.",
+   "The everyday name you go by (the name heard most) matters more than the full legal name on your documents.",
+   "No birth chart, arrows or pinnacles as in Pythagorean numerology.",
+   "No master numbers: 11 and 22 are read only as compound numbers, then reduced to 2 and 4."
+  ],
+  "cach_doc": "The root number shows the main tendency; the compound number adds shading and a symbolic image to that tendency. These are prompts for self-reflection, not a forecast of anyone's life."
+ },
  "goc": {
   "1": {
    "ten": "The initiator",
@@ -207,6 +224,132 @@
    "xu_huong": "Tradition pictures this compound number as a self-sufficient person who lives by their own principles and has little need of crowds. The theme is balancing independence and connection.",
    "mat_toi": "Can withdraw so far that it misses support that is already there.",
    "cau_tu_soi": "This month, did you turn down more than two invitations to get together?"
+  },
+  "32": {
+   "bieu_tuong": "Words That Connect",
+   "xu_huong": "The Chaldean tradition links this compound to the power of communication and the ability to gather many people around one idea. It is usually described as favourable when you hold on to your own judgement.",
+   "mat_toi": "Easily swept along by the majority and forgets what you had thought through.",
+   "cau_tu_soi": "The last time the whole group opposed your idea, did you keep it and give your reasons?"
+  },
+  "33": {
+   "bieu_tuong": "An Echo of Support",
+   "xu_huong": "By tradition this compound has no colour of its own but carries the spirit of support and warm affection. It is usually read as a theme of passing on the help you once received.",
+   "mat_toi": "Easily helps on impulse, then drops it when busy.",
+   "cau_tu_soi": "Did you keep one small promise of help this month?"
+  },
+  "34": {
+   "bieu_tuong": "An Echo of Experience",
+   "xu_huong": "Tradition groups this compound with the spirit of strength from experience. It is usually read as a theme of sharing your lessons so that those who come after stumble less.",
+   "mat_toi": "Easily gives too much advice when the other person only needs to be heard.",
+   "cau_tu_soi": "The last time someone confided in you, did you listen all the way through without jumping in with advice?"
+  },
+  "35": {
+   "bieu_tuong": "An Echo of Partnership",
+   "xu_huong": "By tradition this compound brings the theme of thinking carefully about your ties. It is usually read as a reminder to keep clear boundaries around money with people you know.",
+   "mat_toi": "Easily mixes friendship and business until it is hard to speak plainly.",
+   "cau_tu_soi": "Have you lent something or money to an acquaintance without agreeing a date to get it back?"
+  },
+  "36": {
+   "bieu_tuong": "An Echo of the Sceptre",
+   "xu_huong": "Tradition groups this compound with the spirit of the sceptre: authority from independent thinking. It is usually described as favouring travel and learning beyond familiar ground.",
+   "mat_toi": "Easily feels lonely in the lead without saying so.",
+   "cau_tu_soi": "This year, did you go somewhere new just to learn?"
+  },
+  "37": {
+   "bieu_tuong": "Harmonious Friendship",
+   "xu_huong": "In the Chaldean tradition this compound is linked to good friendships, harmonious affection and cooperation between two people. It is usually described as favouring working in pairs over working alone.",
+   "mat_toi": "Easily depends on one close friend and widens your circle too little.",
+   "cau_tu_soi": "This month, did you get to know one new person outside your usual group?"
+  },
+  "38": {
+   "bieu_tuong": "An Echo of Trust",
+   "xu_huong": "Tradition groups this compound with the theme of a test of trust. It is usually read as a reminder to state your expectations in a relationship instead of waiting for others to work them out.",
+   "mat_toi": "Easily disappointed when others fail to guess what you need.",
+   "cau_tu_soi": "In the past week, did you tell someone close to you clearly what you wanted, instead of waiting for them to notice?"
+  },
+  "39": {
+   "bieu_tuong": "An Echo of Reflection",
+   "xu_huong": "By tradition this compound carries the spirit of careful thought and looking back. It is usually described as suited to writing, research or putting your thoughts in order.",
+   "mat_toi": "Easily thinks for so long that the moment to act passes.",
+   "cau_tu_soi": "Is there a decision you have been weighing for more than a month without settling it?"
+  },
+  "40": {
+   "bieu_tuong": "An Echo of Self-Sufficiency",
+   "xu_huong": "Tradition groups this compound with the spirit of the self-sufficient person. It is usually read as a theme of keeping your own rhythm amid many outside demands.",
+   "mat_toi": "Easily treats asking for help as weakness.",
+   "cau_tu_soi": "In the past week, did you ask someone for a small favour you could perfectly well have done yourself?"
+  },
+  "41": {
+   "bieu_tuong": "An Echo of Words",
+   "xu_huong": "By tradition this compound carries the power of communication and the ability to bring people together. It is usually described as favouring teaching, public speaking or writing for a wide audience.",
+   "mat_toi": "Easily talks more than acts, so your words lose their weight.",
+   "cau_tu_soi": "This month, did you finish what you announced in front of everyone?"
+  },
+  "42": {
+   "bieu_tuong": "An Echo of Affection",
+   "xu_huong": "Tradition groups this compound with the spirit of affection and support. It is usually read as a theme of caring for long-standing relationships.",
+   "mat_toi": "Easily takes the care of people close to you for granted.",
+   "cau_tu_soi": "This week, did you call someone you had not been in touch with for a long time?"
+  },
+  "43": {
+   "bieu_tuong": "Great Upheaval",
+   "xu_huong": "The Chaldean tradition links this compound to upheaval and revolution: the old order is called into question. It is usually read as a theme of daring to change how you work when the old way no longer works.",
+   "mat_toi": "Easily tears everything down at once instead of changing it piece by piece.",
+   "cau_tu_soi": "The last time you wanted to change something, did you break it into small steps?"
+  },
+  "44": {
+   "bieu_tuong": "A Foundation Tested",
+   "xu_huong": "By tradition this compound sits close to the theme of partnerships that need careful thought. It is usually read as a reminder to check the foundation of something before building more on it.",
+   "mat_toi": "Easily expands too fast while the core is still shaky.",
+   "cau_tu_soi": "Do you review what is still unfinished before taking on something new?"
+  },
+  "45": {
+   "bieu_tuong": "An Echo of Authority",
+   "xu_huong": "By tradition this compound carries the spirit of the sceptre: authority built through consistency. It is usually described as favourable when you keep your word over a long time.",
+   "mat_toi": "Easily hard on people who cannot keep up with your standards.",
+   "cau_tu_soi": "In the past week, did you patiently show someone again how to do a task they had got wrong?"
+  },
+  "46": {
+   "bieu_tuong": "An Echo of Friendship",
+   "xu_huong": "Tradition groups this compound with the spirit of friendship and harmonious cooperation. It is usually read as a theme that working together is lighter than working alone.",
+   "mat_toi": "Easily avoids arguing with a close friend even when something needs saying.",
+   "cau_tu_soi": "Recently, have you given a close friend honest feedback?"
+  },
+  "47": {
+   "bieu_tuong": "An Echo of Intuition",
+   "xu_huong": "By tradition this compound carries the theme of telling apart what is true from what you hope is true. It is usually read as a reminder to check information before believing it.",
+   "mat_toi": "Easily trusts a first impression and ignores facts that point the other way.",
+   "cau_tu_soi": "Before sharing a piece of news online recently, did you check the source?"
+  },
+  "48": {
+   "bieu_tuong": "The Observer",
+   "xu_huong": "Tradition groups this compound with the spirit of reflection. It is usually read as a theme of stepping back to see the whole picture before reacting.",
+   "mat_toi": "Easily observes and comments but hesitates to get stuck in.",
+   "cau_tu_soi": "This week, did you do with your own hands something you used to only give opinions about?"
+  },
+  "49": {
+   "bieu_tuong": "An Echo of Independence",
+   "xu_huong": "By tradition this compound carries the spirit of the self-sufficient person. It is usually described as favouring self-study, doing things yourself and owning your choices.",
+   "mat_toi": "Easily rejects advice just to decide for yourself.",
+   "cau_tu_soi": "The last time someone gave you good advice, did you follow it?"
+  },
+  "50": {
+   "bieu_tuong": "An Echo of Communication",
+   "xu_huong": "Tradition groups this compound with the spirit of words that connect. It is usually read as a theme of exchanging ideas and learning from people in other fields.",
+   "mat_toi": "Easily scattered by talking to too many places at once.",
+   "cau_tu_soi": "Today, did you turn off notifications to finish one thing completely?"
+  },
+  "51": {
+   "bieu_tuong": "The Warrior",
+   "xu_huong": "The Chaldean tradition links this compound to the figure of the warrior: strength, rapid advance and the courage to take on the hard part. It is usually described as favouring people who build their own place.",
+   "mat_toi": "Easily treats everyone else as a rival and creates needless tension.",
+   "cau_tu_soi": "In the past week, did you compete with someone over something small?"
+  },
+  "52": {
+   "bieu_tuong": "An Echo of Upheaval",
+   "xu_huong": "Tradition groups this compound with the theme of great upheaval. It is usually read as an invitation to review outdated habits and replace them with ways that fit better.",
+   "mat_toi": "Easily keeps an old way of doing things just because it is familiar.",
+   "cau_tu_soi": "Did you change any work habit this month?"
   }
  }
 }

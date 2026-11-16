@@ -7,8 +7,10 @@ số kèm vết tính (chữ → giá trị), nghĩa gốc + nghĩa kép (có m�
 """
 from __future__ import annotations
 
+from app import ngon_ngu
 from app.calc import thanso, thanso_chaldean as ch, thanso_mo_rong as mr
 from app.kb import thanso_v2 as kb
+from app.kb.loi import L
 
 # Thứ tự hiển thị: phái Chaldea coi trọng tên thường gọi nhất.
 VI_TRI = [
@@ -27,10 +29,22 @@ VI_TRI_PITAGO = {"ngay_sinh": "ngay_sinh", "duong_doi": "duong_doi", "so_ten": "
                  "linh_hon": "linh_hon", "nhan_cach": "nhan_cach"}
 
 
+def _ten_vt(ma: str, ten: str) -> str:
+    return L(f"tsch.vt.{ma}", ten)
+
+
+def _mo_ta_vt(ma: str, mo_ta: str) -> str:
+    return L(f"tsch.vt_mo_ta.{ma}", mo_ta)
+
+
+def _ten_pt(k: str, ten: str) -> str:
+    return L(f"thanso.vi_tri.{k}", ten)
+
+
 def giao_diem(so: dict, ten_chinh: str, ngay: int, thang: int, nam: int) -> list[dict]:
     """Vị trí có số 13/14/16/19 ở ít nhất một phái: Pitago gọi nợ nghiệp, Chaldea đọc số kép — nối hai cách đọc."""
     no = {x["vi_tri"]: x["so"] for x in mr.no_nghiep(ten_chinh, ngay, thang, nam)}
-    ten = dict((ma, t) for ma, t, _ in VI_TRI)
+    ten = dict((ma, _ten_vt(ma, t)) for ma, t, _ in VI_TRI)
     kq = []
     for ma, vt in VI_TRI_PITAGO.items():
         p = no.get(vt)
@@ -53,18 +67,19 @@ def _vet_ten(ten: str) -> str:
 def _cach_tinh(ma: str, so: dict, ho_ten: str, ten_goi: str, ngay: int, thang: int, nam: int) -> str:
     duoi = f"= {so['tong']}"
     if so["kep"] is not None and so["kep"] != so["tong"]:
-        duoi += f" → kép {so['kep']}"
+        duoi += L("tsch.ct.kep", " → kép {so}", so=so["kep"])
     if so["goc"] != (so["kep"] or so["tong"]):
-        duoi += f" → gốc {so['goc']}"
+        duoi += L("tsch.ct.goc", " → gốc {so}", so=so["goc"])
     if ma == "ten_goi":
         return f"{_vet_ten(ten_goi)} {duoi}"
     if ma == "so_ten":
         return f"{_vet_ten(ho_ten)} {duoi}"
     if ma == "ngay_sinh":
-        return f"Ngày {ngay} {duoi}"
+        return L("tsch.ct.ngay", "Ngày {ngay} {duoi}", ngay=ngay, duoi=duoi)
     if ma == "duong_doi":
         return f"{' + '.join(f'{ngay}{thang}{nam}')} {duoi}"
-    return f"{'Nguyên âm' if ma == 'linh_hon' else 'Phụ âm'} của họ tên {duoi}"
+    return (L("tsch.ct.nguyen_am", "Nguyên âm của họ tên {duoi}", duoi=duoi) if ma == "linh_hon"
+            else L("tsch.ct.phu_am", "Phụ âm của họ tên {duoi}", duoi=duoi))
 
 
 def luan_chaldea(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: str = "tong_het") -> dict:
@@ -76,15 +91,16 @@ def luan_chaldea(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: st
     for ma, ten, mo_ta in VI_TRI:
         s = so[ma]
         muc = {
-            "ma": ma, "ten": ten, "mo_ta": mo_ta, "tong": s["tong"], "kep": s["kep"], "goc": s["goc"],
+            "ma": ma, "ten": _ten_vt(ma, ten), "mo_ta": _mo_ta_vt(ma, mo_ta), "tong": s["tong"], "kep": s["kep"], "goc": s["goc"],
             "cach_tinh": _cach_tinh(ma, s, ten_chinh, so["ten_goi"]["ten"], ngay, thang, nam),
             "nghia_goc": kb.chaldea_goc(s["goc"]), "nghia_kep": kb.chaldea_kep(s["kep"]),
         }
         if ma == "ten_goi":
-            muc["ten_goi"] = so["ten_goi"]["ten"]
+            # Bản dịch: tên thường gọi viết không dấu (đúng chữ cái phép tính Chaldea đọc — xem `cach_tinh`).
+            muc["ten_goi"] = so["ten_goi"]["ten"] if ngon_ngu.la_viet() else thanso.bo_dau(so["ten_goi"]["ten"])
         if ma in DOI_CHIEU:
             k, ten_pt = DOI_CHIEU[ma]
-            muc["pitago"] = {"ten": ten_pt, "so": pitago[k], "khac": pitago[k] != s["goc"]}
+            muc["pitago"] = {"ten": _ten_pt(k, ten_pt), "so": pitago[k], "khac": pitago[k] != s["goc"]}
         cac_so.append(muc)
     meta = kb.meta_chaldea()
     return {
@@ -97,7 +113,7 @@ def luan_chaldea(ho_ten: list[str], ngay: int, thang: int, nam: int, quy_uoc: st
         "giao_diem": giao_diem(so, ten_chinh, ngay, thang, nam),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],
-        "luu_y": "Thần số học là góc nhìn văn hoá để tự soi, không phải dự báo. Hai phái tính khác nhau nên có thể ra số khác nhau.",
+        "luu_y": L("tsch.luu_y", "Thần số học là góc nhìn văn hoá để tự soi, không phải dự báo. Hai phái tính khác nhau nên có thể ra số khác nhau."),
     }
 
 

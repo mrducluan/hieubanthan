@@ -1,0 +1,47 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản tiếng Anh của thanso_do_thi.json (đồ thị liên phái). Ban biên tập viết, chờ người bản xứ duyệt.",
+ "source": {
+  "ten": "Hieuban editorial reference text (2026) comparing the Pythagorean and Chaldean schools of numerology",
+  "luu_y": "Draft written with AI assistance, shown by decision of the project owner. A cultural reference, not a forecast."
+ },
+ "ten_phai": {
+  "pitago": "Pythagorean",
+  "chaldea": "Chaldean",
+  "chung": "Birth date"
+ },
+ "nhom": {
+  "ten_day_du": {"ten": "How you express yourself (from your full name)"},
+  "linh_hon": {"ten": "What is inside (the vowels of your name)"},
+  "nhan_cach": {"ten": "The outer impression (the consonants of your name)"}
+ },
+ "quan_he": {
+  "cong_huong": {
+   "ten": "Resonance",
+   "cach_doc": "When it comes to {nhom}, both schools arrive at {so} ({tu_khoa}). Different methods pointing to the same trait — this is the first place worth checking against yourself.",
+   "goi_y": "Read the shadow side of {so} carefully: the stronger a trait, the more easily its shadow shows."
+  },
+  "khac_nhip": {
+   "ten": "Different angles",
+   "cach_doc": "When it comes to {nhom}, each school arrives at a different number: {danh_sach}. Neither is wrong — each letter table looks at your name from its own angle.",
+   "goi_y": "Read these numbers and keep what you see in your actual behaviour; skip whatever does not fit."
+  },
+  "bo_sung": {
+   "ten": "Complementary",
+   "cach_doc": "{nhom}: the Pythagorean school sees karmic debt {so_a}, the Chaldean school sees compound number {so_b}. {cach_dung}",
+   "goi_y": "{tu_soi}"
+  },
+  "nhip_thoi_gian": {
+   "ten": "Timing",
+   "cach_doc": "{nam} is a Personal Year {so} — the same as your most prominent number ({tu_khoa}). A chance to watch this trait in your everyday life.",
+   "goi_y": "Use this year to practise the strong side of {so} and keep an eye on its shadow side."
+  }
+ },
+ "quy_tac_dien_dat": [
+  {"noi_dung": "Use everyday language and familiar images; any technical term needs a short explanation."},
+  {"noi_dung": "Do not make pronouncements about the future; never use \"you will\", \"certainly\", \"destiny\"."},
+  {"noi_dung": "Every positive trait comes with its shadow side and a question for self-reflection."},
+  {"noi_dung": "Use only the numbers and meanings in this package; do not add years, dates or events."},
+  {"noi_dung": "When the schools give different numbers, present them as two angles, without picking the right one."}
+ ]
+}
