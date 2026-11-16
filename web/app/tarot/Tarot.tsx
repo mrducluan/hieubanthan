@@ -205,7 +205,7 @@ export function Tarot() {
     <div>
       {dau}
       {/* Thanh bước — biết mình đang ở đâu trong 5 bước */}
-      <ol className="mx-auto mb-4 flex max-w-5xl items-center gap-1.5 text-xs text-fg-faint sm:gap-2" aria-label={t("buoc.aria")} data-testid="thanh-buoc">
+      <ol className="mx-auto mb-4 flex max-w-5xl flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-fg-faint sm:gap-x-2" aria-label={t("buoc.aria")} data-testid="thanh-buoc">
         {CAC_BUOC.map((b, i) => { const vt = CAC_BUOC.indexOf(buoc); const xong = i < vt, dangO = i === vt; return (
           <li key={b} className="flex items-center gap-1.5 sm:gap-2" aria-current={dangO ? "step" : undefined}>
             <span className={cn("inline-flex size-5 items-center justify-center rounded-full border text-[10px]", dangO ? "border-gold bg-gold/20 text-fg" : xong ? "border-gold/50 text-gold" : "border-line")}>{xong ? <Check className="size-3" aria-hidden /> : i + 1}</span>
