@@ -17,6 +17,7 @@ from zoneinfo import ZoneInfo
 from app import config
 from app.calc import lunar, mui_gio
 from app.kb import nap
+from app.kb.loi import L
 
 KB = "sinh_nuoc_ngoai_kb.json"
 # Thứ tự hiển thị = nước đông người Việt (QTE-1 mục 2) — chỉ nước có trong bảng múi giờ (test khoá).
@@ -36,13 +37,29 @@ def _nhan_utc(gio: float) -> str:
     return f"UTC{dau}{h}" + (f":{m:02d}" if m else "")
 
 
+def _ten(x: dict) -> str:
+    """Tên nước / thành phố theo ngôn ngữ: bản Việt `ten`, ngôn ngữ khác `ten_en` (bảng múi giờ có sẵn, không đổi dữ liệu)."""
+    return str(x["ten"]) if ngon_ngu.la_viet() else str(x.get("ten_en") or x["ten"])
+
+
 def _ten_ngan(t: dict) -> str:
     """"Sydney (New South Wales)" → "Sydney" cho câu văn; bảng vẫn hiện tên đầy đủ."""
-    return str(t["ten"]).split(" (")[0]
+    s = _ten(t).split(" (")[0]
+    return s if ngon_ngu.la_viet() else s.split(",")[0]   # "Los Angeles, CA" → "Los Angeles"
 
 
 def _dmy(d: dt.date) -> str:
+    if not ngon_ngu.la_viet():   # "17 Feb 2026" — không "17/02/2026" (người Mỹ đọc thành tháng 17)
+        return L("pt.ngay", "{d}/{thang}/{y}", d=d.day, thang=L(f"pt.thang_ten.{d.month}", str(d.month)), y=d.year)
     return f"{d.day:02d}/{d.month:02d}/{d.year}"
+
+
+def _sang(he: bool) -> str:
+    return L("snn.sang.mua_he", "mùa hè") if he else L("snn.sang.chuan", "giờ chuẩn")
+
+
+def _am(v) -> str:
+    return f"{v[0]}/{v[1]}" + (L("snn.nhuan", " nhuận") if v[3] else "")
 
 
 @ngon_ngu.lru(maxsize=512)
@@ -68,7 +85,7 @@ def doi_gio(zone: str, nam: int) -> tuple[dict, ...]:
                 if moi.utcoffset() != cu.utcoffset():
                     moc = (u2 + cu.utcoffset()).replace(tzinfo=None)   # giờ đồng hồ theo nếp cũ
                     ra.append({"ngay": moc.date().isoformat(), "gio": moc.strftime("%H:%M"),
-                               "sang": "mùa hè" if (moi.dst() or dt.timedelta(0)) > dt.timedelta(0) else "giờ chuẩn"})
+                               "sang": _sang((moi.dst() or dt.timedelta(0)) > dt.timedelta(0))})
                     break
                 u, cu = u2, moi
         t, truoc = t_sau, sau
@@ -80,7 +97,7 @@ def _thanh_pho(t: dict, nam: int) -> dict:
     moc = [dict(m) for m in doi_gio(t["zone"], nam)]
     lech = mui_gio.lech_mat_troi_phut(t.get("kinh_do"), chuan)
     return {
-        "ma": t["ma"], "ten": t["ten"], "ten_en": t.get("ten_en"), "zone": t["zone"],
+        "ma": t["ma"], "ten": _ten(t), "ten_en": t.get("ten_en"), "zone": t["zone"],
         "utc_chuan": chuan, "nhan_utc": _nhan_utc(chuan),
         "gio_mua_he": bool(moc), "doi_gio": moc,
         "kinh_do": t.get("kinh_do"), "vi_do": t.get("vi_do"),
@@ -114,8 +131,8 @@ def lich_am_lech(nam: int) -> dict:
         t = lunar.solar_to_lunar(d.day, d.month, d.year, tz_t)
         if v != t:
             ngay_lech.append({"ngay": d.isoformat(),
-                              "am_viet": f"{v[0]}/{v[1]}{' nhuận' if v[3] else ''}",
-                              "am_trung": f"{t[0]}/{t[1]}{' nhuận' if t[3] else ''}"})
+                              "am_viet": _am(v),
+                              "am_trung": _am(t)})
         d += dt.timedelta(days=1)
     tv = lunar.lunar_to_solar(1, 1, nam, 0, tz_v)
     tt = lunar.lunar_to_solar(1, 1, nam, 0, tz_t)
@@ -142,7 +159,7 @@ def _muc_luc(nam: int) -> tuple[dict, ...]:
             continue
         tp = [_thanh_pho(t, nam) for t in n["thanh_pho"]]
         utc = sorted({t["utc_chuan"] for t in tp})
-        ra.append({"ma": ma, "ten": n["ten"], "ten_en": n.get("ten_en"), "so_thanh_pho": len(tp),
+        ra.append({"ma": ma, "ten": _ten(n), "ten_en": n.get("ten_en"), "so_thanh_pho": len(tp),
                    "mui_gio": [_nhan_utc(u) for u in utc], "gio_mua_he": any(t["gio_mua_he"] for t in tp),
                    "nam_ban_cau": any(t["nam_ban_cau"] for t in tp),
                    "cong_tac": {"gio_mat_troi": any(t["canh_bao_mat_troi"] for t in tp),
@@ -157,7 +174,7 @@ def _dien(mau: str, **b) -> str:
 
 
 def _lech_ds(ds: list[dict]) -> str:
-    return ", ".join(f"{_dmy(dt.date.fromisoformat(x['ngay']))} (Việt {x['am_viet']} · Trung {x['am_trung']})" for x in ds[:6]) \
+    return ", ".join(L("snn.lech_ngay", "{ngay} (Việt {v} · Trung {t})", ngay=_dmy(dt.date.fromisoformat(x['ngay'])), v=x['am_viet'], t=x['am_trung']) for x in ds[:6]) \
         + ("…" if len(ds) > 6 else "")
 
 
@@ -168,7 +185,7 @@ def nuoc(ma: str, nam: int | None = None) -> dict | None:
     nam = nam or config.hom_nay_vn().year
     kb = _kb()
     mau = kb["mau"]
-    ten = n["ten"]
+    ten = _ten(n)
     tp = [_thanh_pho(t, nam) for t in n["thanh_pho"]]
     co_toa_do = [t for t in tp if t["lech_mat_troi_phut"] is not None]
     utc = sorted({t["utc_chuan"] for t in tp})
@@ -195,8 +212,8 @@ def nuoc(ma: str, nam: int | None = None) -> dict | None:
                     tet_trung=_dmy(dt.date.fromisoformat(la["tet_trung"])))
 
     tra_loi = " ".join(x for x in [_dien(mau["tom_tat_mo"], ten=ten), cau_mui_gio, cau_he,
-                                   ("Giờ mặt trời thực: " + cau_mat_troi) if canh_bao else "",
-                                   ("Mùa nơi sinh: " + cau_mua) if mua else ""] if x)
+                                   (L("snn.tl.mat_troi", "Giờ mặt trời thực: ") + cau_mat_troi) if canh_bao else "",
+                                   (L("snn.tl.mua", "Mùa nơi sinh: ") + cau_mua) if mua else ""] if x)
     hoi_dap = [{"hoi": _dien(h["hoi"], ten=ten),
                 "dap": _dien(h["dap"], ten=ten, gio_mua_he=cau_he, mui_gio=cau_mui_gio, lich_am=f"{cau_lich} {cau_tet}", mat_troi=cau_mat_troi)}
                for h in kb["hoi_dap_mau"]]

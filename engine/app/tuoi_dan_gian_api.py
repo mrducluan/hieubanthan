@@ -8,6 +8,7 @@ from typing import Annotated
 from fastapi import APIRouter, HTTPException, Path
 from pydantic import BaseModel, ConfigDict, Field
 
+from app.luangiai import nam_tuoi_hien as H
 from app.luangiai import trang_tuoi as TT
 from app.luangiai import tuoi_dan_gian as L
 
@@ -42,7 +43,7 @@ class LamNhaInput(_Sinh):
 @router.post("/v1/tuoi/lam-nha")
 def api_lam_nha(inp: LamNhaInput) -> dict:
     _kiem(inp, inp.nam_xay)
-    return L.xem_tuoi_lam_nha(inp.nam_sinh, inp.nam_xay, inp.thang_sinh, inp.ngay_sinh)
+    return H.lam_nha(L.xem_tuoi_lam_nha(inp.nam_sinh, inp.nam_xay, inp.thang_sinh, inp.ngay_sinh))
 
 
 @router.get("/v1/tuoi/lam-nha/{nam}/{nam_sinh}")
@@ -51,12 +52,12 @@ def api_lam_nha_cong_khai(nam: NamXem, nam_sinh: NamSinh, gon: bool = False) -> 
         raise HTTPException(422, detail="Năm sinh phải trước năm xem")
     # AUD-P1: `?gon=1` (web mới) = bản trang SEO — bỏ dữ kiện chung của năm, thêm 10 năm tới. Không có → bản cũ đầy đủ
     # (web cũ còn chạy trong lúc deploy lệch không vỡ).
-    return TT.lam_nha(nam, nam_sinh) if gon else L.xem_tuoi_lam_nha(nam_sinh, nam)
+    return H.lam_nha(TT.lam_nha(nam, nam_sinh) if gon else L.xem_tuoi_lam_nha(nam_sinh, nam))
 
 
 @router.get("/v1/tuoi/han-nam/{nam}")
 def api_han_nam(nam: NamXem) -> dict:
-    return L.han_nam_luan(nam)
+    return H.han_nam(L.han_nam_luan(nam))
 
 
 class XongDatInput(_Sinh):
@@ -66,25 +67,25 @@ class XongDatInput(_Sinh):
 @router.post("/v1/tuoi/xong-dat")
 def api_xong_dat(inp: XongDatInput) -> dict:
     _kiem(inp, inp.nam)
-    return L.xong_dat_luan(inp.nam, inp.nam_sinh, inp.thang_sinh, inp.ngay_sinh)
+    return H.xong_dat(L.xong_dat_luan(inp.nam, inp.nam_sinh, inp.thang_sinh, inp.ngay_sinh))
 
 
 @router.get("/v1/tuoi/xong-dat/{nam}/{nam_sinh}")
 def api_xong_dat_cong_khai(nam: NamXem, nam_sinh: NamSinh, gon: bool = False) -> dict:
     if nam_sinh > nam:
         raise HTTPException(422, detail="Năm sinh phải trước năm xem")
-    return TT.xong_dat(nam, nam_sinh) if gon else L.xong_dat_luan(nam, nam_sinh)   # AUD-P1: gon=1 → mùng 1 gọn, thêm Tết tới
+    return H.xong_dat(TT.xong_dat(nam, nam_sinh) if gon else L.xong_dat_luan(nam, nam_sinh))   # AUD-P1: gon=1 → mùng 1 gọn, thêm Tết tới
 
 
 # SEO-L1: bảng theo năm (không dữ liệu cá nhân → web cache được).
 @router.get("/v1/tuoi/lam-nha-nam/{nam}")
 def api_lam_nha_nam(nam: NamBang) -> dict:
-    return L.lam_nha_nam(nam)
+    return H.lam_nha_nam(L.lam_nha_nam(nam))
 
 
 @router.get("/v1/tuoi/xong-dat-nam/{nam}")
 def api_xong_dat_nam(nam: NamBang) -> dict:
-    return L.xong_dat_nam(nam)
+    return H.xong_dat_nam(L.xong_dat_nam(nam))
 
 
 # ---- MT-ĐS B3 — sao hạn Cửu Diệu + Bát hạn (miễn phí, tập quán) ----------------------------------------------------
@@ -96,12 +97,12 @@ class SaoHanInput(_Sinh):
 @router.post("/v1/tuoi/sao-han")
 def api_sao_han(inp: SaoHanInput) -> dict:
     _kiem(inp, inp.nam)
-    return L.sao_han_luan(inp.nam, inp.nam_sinh, inp.gioi_tinh, inp.thang_sinh, inp.ngay_sinh)
+    return H.sao_han(L.sao_han_luan(inp.nam, inp.nam_sinh, inp.gioi_tinh, inp.thang_sinh, inp.ngay_sinh))
 
 
 @router.get("/v1/tuoi/sao-han/{nam}")
 def api_sao_han_nam(nam: NamBang) -> dict:
-    return L.sao_han_nam(nam)
+    return H.sao_han_nam(L.sao_han_nam(nam))
 
 
 # ---- NAM-1 (2026-10-30): trang trụ "Năm {năm}" + sinh con / cưới năm đó (không dữ liệu cá nhân → web cache được) ----
@@ -110,21 +111,21 @@ from app.luangiai import nam_tong_quan as NTQ  # noqa: E402
 
 @router.get("/v1/nam/{nam}")
 def api_nam(nam: NamBang) -> dict:
-    return NTQ.tong_quan(nam)
+    return H.tong_quan(NTQ.tong_quan(nam))
 
 
 @router.get("/v1/nam/{nam}/sinh-con")
 def api_nam_sinh_con(nam: NamBang) -> dict:
-    return NTQ.sinh_con(nam)
+    return H.sinh_con(NTQ.sinh_con(nam))
 
 
 @router.get("/v1/nam/{nam}/cuoi-hoi")
 def api_nam_cuoi_hoi(nam: NamBang) -> dict:
-    return NTQ.cuoi_hoi(nam)
+    return H.cuoi_hoi(NTQ.cuoi_hoi(nam))
 
 
 @router.get("/v1/nam/{nam}/tuoi/{nam_sinh}")
 def api_nam_theo_tuoi(nam: NamBang, nam_sinh: Annotated[int, Path(ge=1930, le=2099)], gon: bool = False) -> dict:
     if nam_sinh >= nam:
         raise HTTPException(422, detail="Năm sinh phải trước năm xem")
-    return TT.nam_tuoi(nam, nam_sinh) if gon else NTQ.theo_tuoi(nam, nam_sinh)   # AUD-P1: gon=1 → tứ hoá, sao gọn + 10 năm tới
+    return H.theo_tuoi(TT.nam_tuoi(nam, nam_sinh) if gon else NTQ.theo_tuoi(nam, nam_sinh))   # AUD-P1: gon=1 → tứ hoá, sao gọn + 10 năm tới

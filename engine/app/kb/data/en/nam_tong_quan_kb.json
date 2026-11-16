@@ -1,0 +1,108 @@
+{
+  "_trang_thai": "bien_tap",
+  "_ghi_chu": "EN-ALL GĐ 8 (nhóm D) — bản phủ tiếng Anh cho trang \"Năm {năm}\", sinh con, cưới hỏi, Tử vi năm theo tuổi. Ban biên tập viết, trung tính như bản Việt; chờ người bản xứ duyệt.",
+  "source": {
+    "ten": "Vietnamese folk customs for choosing ages · Vietnamese lunar calendar (Ho Ngoc Duc)"
+  },
+  "quan_he_nam": {
+    "trung": {
+      "nhan": "Your zodiac year",
+      "loi": "The year shares your animal sign. Folk custom suggests keeping steady habits and planning big moves clearly; many people still marry or build as usual."
+    },
+    "xung": {
+      "nhan": "Clashes with the year",
+      "loi": "Your sign sits opposite the year's sign. Folk custom suggests taking big decisions slowly, checking paperwork carefully and keeping the peace at home."
+    },
+    "hinh": {
+      "nhan": "Friction with the year (Xing)",
+      "loi": "Folk custom reads this as a year of small bumps with others. Speak a beat slower, and in shared work write down who does what."
+    },
+    "hai": {
+      "nhan": "Harm with the year (Hai)",
+      "loi": "Folk custom reads this as a year of easy misunderstandings. Put agreements in writing and ask again before you blame."
+    },
+    "tam_hop": {
+      "nhan": "Triad ally of the year",
+      "loi": "Folk custom reads this as a year for meeting like-minded people. Good for widening your circle and working in a team."
+    },
+    "luc_hop": {
+      "nhan": "Paired ally of the year",
+      "loi": "Folk custom reads this as a year when help turns up. Good for partnerships, commitment and reconnecting with old contacts."
+    },
+    "binh": {
+      "nhan": "Neutral",
+      "loi": "No special tie with the year's sign. Plan big things around your family's real circumstances."
+    }
+  },
+  "tam_tai_loi": "Year {nam_thu} of the three Tam Tai years (Three Calamities). Folk custom advises extra thought before big undertakings such as building a house, a wedding or a large new venture; many families go ahead and let a relative of a suitable age stand in.",
+  "luu_y_chung": "This is a folk custom to consult when planning, not a prediction. Big decisions should rest on your family's real circumstances.",
+  "sinh_con": {
+    "chi": {
+      "tam_hop": "Triad ally of the child's sign",
+      "luc_hop": "Paired ally of the child's sign",
+      "trung": "Same animal sign as the child",
+      "xung": "Clashes with the child's sign",
+      "hinh": "Friction (Xing) with the child's sign",
+      "hai": "Harm (Hai) with the child's sign",
+      "binh": "Neither allied nor clashing"
+    },
+    "nap_am": {
+      "sinh": "Child's element nourishes the parent's",
+      "bị sinh": "Parent's element nourishes the child's",
+      "bình hoà": "Same element",
+      "khắc": "Child's element checks the parent's",
+      "bị khắc": "Parent's element checks the child's"
+    },
+    "nhom": {
+      "hop": "Considered a good match",
+      "binh": "Neither allied nor clashing",
+      "luu_y": "Folk custom suggests some thought"
+    },
+    "loi_nhom": {
+      "hop": "By earthly branch, the parent's sign forms a triad or a pair with the child's sign.",
+      "binh": "No triad, pair or clash by earthly branch; a few signs have a mild friction or harm tie in folk belief — shown in the branch column.",
+      "luu_y": "The parent's sign clashes with the child's by earthly branch. This is only a folk belief: love and upbringing decide how well parent and child get on."
+    },
+    "ranh_gioi": "Having a child is a matter of chance and health. The mother's health, the family's circumstances and your doctor's advice always come before the zodiac; do not force a birth date or medical intervention just to land on a 'good' year. This is not medical advice."
+  },
+  "cuoi_hoi": {
+    "cach_tinh": "Folk custom checks the Kim Lau (Golden Tower) rule for weddings by the bride's lunar age: lunar age = wedding year − lunar birth year + 1; if it leaves 1, 3, 6 or 8 when divided by 9, the year counts as a Kim Lau year. Some places also check the groom or count differently — the system follows the most common way and looks at the bride only.",
+    "muon_tuoi": "Families who keep the custom and find the wedding year is a Kim Lau year usually move the wedding into the next lunar year (after Tet), or hold the asking ceremony first and the wedding later. Many couples marry as planned.",
+    "ranh_gioi": "Kim Lau is a custom to consult. How well the two of you get on, how ready you are and both families' circumstances matter more than age."
+  },
+  "theo_tuoi": {
+    "chi": {
+      "tam_hop": "Folk custom reads this as a year for meeting like-minded people. Good for teamwork, widening your circle and saying yes to collaborations.",
+      "luc_hop": "Folk custom reads this as a year when help arrives at the right time. Good for reconnecting with old contacts, partnerships and long-term commitments.",
+      "trung": "Your zodiac year: folk custom suggests keeping steady habits and planning big moves clearly. Many people still marry, build or change jobs as usual.",
+      "xung": "Your sign clashes with the year: folk custom suggests taking big decisions slowly, checking paperwork carefully and keeping the peace at home.",
+      "hinh": "Folk custom reads this as a year of small bumps with others. Speak a beat slower, and in shared work write down who does what.",
+      "hai": "Folk custom reads this as a year of easy misunderstandings. Put agreements in writing and ask again before you blame."
+    },
+    "can": {
+      "ngu_hop": "The year's stem combines with your stem — folk custom reads this as an easy-going year for talking things through and meeting people who think like you.",
+      "sinh": "The year's stem nourishes yours — a year with support behind you: advice and help come when you ask.",
+      "bi_sinh": "Your stem nourishes the year's — a year of giving a lot: you look after others, so keep some energy for yourself.",
+      "khac": "The year's stem checks yours — pressure from work or from people above you. Break big tasks into smaller ones and keep a backup plan.",
+      "bi_khac": "Your stem checks the year's — a year where you have to take the wheel yourself. Good for work that needs decisions, but do not carry it all alone.",
+      "binh_hoa": "The year's stem shares your element — an even-paced year, good for working with like-minded people and talking things over."
+    },
+    "nap_am": {
+      "sinh": "The year's element nourishes yours — folk custom reads this as a year with extra energy, good for starting something within your means.",
+      "bị sinh": "Your element nourishes the year's — a year of putting a lot into shared work; keep a record of what you contribute.",
+      "khắc": "The year's element checks yours — folk custom suggests pacing yourself and not taking on too much at once.",
+      "bị khắc": "Your element checks the year's — you can set your own pace, but you may tire from carrying it alone; share the load early.",
+      "bình hoà": "Your element is the same as the year's — a familiar rhythm, good for steady, even work."
+    },
+    "ten_can": {
+      "ngu_hop": "combines with",
+      "sinh": "nourishes",
+      "bi_sinh": "is nourished by",
+      "khac": "checks",
+      "bi_khac": "is checked by",
+      "binh_hoa": "shares the element of"
+    },
+    "tu_hoa": "The four transformation stars of the {can_chi} year are the same for everyone; for you personally, what matters is which palaces Hua Lu and Hua Ji fall into on your own chart — that needs your birth date and time.",
+    "ranh_gioi": "This is a general reading by birth year — everyone born in the same year gets the same text. A Zi Wei or BaZi chart worked out from your own birth date and time is closer to you; when the two disagree, trust the reading from your chart."
+  }
+}

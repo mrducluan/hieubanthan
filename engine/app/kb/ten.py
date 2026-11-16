@@ -204,6 +204,8 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "nhip_bat_tu.nhat_chu": "can",
     # EN-ALL GĐ 8 — Xem ngày tốt: `than.loai` = "hoàng đạo" / "hắc đạo" (web tô màu theo mã).
     "than.loai": "hoang_dao",
+    # EN-ALL GĐ 8 (nhóm D) — hướng xấu theo năm: bàn phi tinh lưu niên (cung = 8 quái + "Trung cung").
+    "phi_tinh.cung": "cung_hk",
 }
 
 
