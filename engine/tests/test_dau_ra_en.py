@@ -21,12 +21,10 @@ CHUA_XONG: dict[str, int] = {
     # GĐ 2 — nền engine (tên riêng, khuôn dùng chung, danh mục)
     # GĐ 2 xong (2026-11-10): dia_ly, tu_dien, y_dinh, y_dinh.goi_mo, hoi (câu chuẩn), giao_thoa, timebase.
     # Trang kiến thức theo LOẠI (`kb.trang.<loai>`) — chuyển thể cùng giai đoạn của mảng. `kb` = mục lục /v1/kb/trang
-    # (+ /v1/kb/status): sạch khi MỌI loại sạch → GĐ 11.
-    "kb": 11,
+    # (+ /v1/kb/status): sạch khi MỌI loại sạch — xong ở GĐ 8 (2026-11-16).
     # GĐ 3 xong (2026-11-10): kb.trang.thap_than, kb.trang.nhat_chu, kb.trang.menh_nam.
     # GĐ 6 xong: kb.trang.que (chữ; khung vẫn lệch có chủ đích — lớp Ngô Tất Tố chỉ bản Việt, xem KHUNG_CHUA_XONG).
     # GĐ 7 xong (2026-11-16): kb.trang.so, so_kep, cap_so, nghe, tinh_yeu, nam_ca_nhan, no_nghiep, la_bai.
-    "kb.trang.bo_vi": 8,
     # GĐ 3 — Bát tự
     # GĐ 3 xong: battu.la_so, battu.luu_nien, battu.doi_chieu_cach, battu.luan_giai, hoi.battu (2026-11-10, GĐ 3c).
     # GĐ 4 — Tử vi
@@ -46,12 +44,9 @@ CHUA_XONG: dict[str, int] = {
     # GĐ 7 — Thần số + Tarot đầy đủ. Xong (2026-11-16, ba nhóm A1 / A2 / B): thanso.ba_goc_nhin, ban_do, cap_so, chaldea,
     # chu_ky, do_nhay, doi_chieu_nam, hom_nay, hop_doi, ngu_canh, nhip, noi_dau, the_ngay, tong_hop, tuan, hom_nay_hai,
     # tarot.the, goi_y_cheo, ban_do_5_mang.
-    # GĐ 8 — nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới
-    "lich": 8, "lich.chon_ngay": 8, "lich.doi": 8, "lich.nam": 8, "lich.ngay": 8, "lich.ngay_tot": 8,
-    "lich.thang": 8, "lich.thang_post": 8, "lich.viec_thang": 8, "nam": 8, "nam.cuoi_hoi": 8, "nam.sinh_con": 8, "nam.tuoi": 8,
-    "tuoi.han_nam": 8, "tuoi.lam_nha": 8, "tuoi.lam_nha_nam": 8, "tuoi.sao_han": 8, "tuoi.sao_han_nam": 8, "tuoi.xong_dat": 8,
-    "tuoi.xong_dat_nam": 8, "nhan_tuong": 8, "nhan_tuong.hoi": 8, "nhan_tuong.luan_giai": 8, "chan_dung": 8,
-    "thoi_gian_toi": 8, "sinh_nuoc_ngoai": 8,
+    # GĐ 8 xong (2026-11-16, ba nhóm C / D / E): lich, lich.chon_ngay, lich.doi, lich.nam, lich.ngay, lich.ngay_tot,
+    # lich.thang, lich.thang_post, lich.viec_thang, nam, nam.cuoi_hoi, nam.sinh_con, nam.tuoi, tuoi.* (7 route),
+    # sinh_nuoc_ngoai, nhan_tuong, nhan_tuong.hoi, nhan_tuong.luan_giai, kb.trang.bo_vi, chan_dung, thoi_gian_toi.
     # GĐ 9 — Web Push theo ngôn ngữ
     "push": 9, "push.sang_nay": 9, "push.thang_hai_la_so": 9,
     # GĐ 10 — tác giả / EEAT tiếng Anh
@@ -72,7 +67,7 @@ KHUNG_BO_QUA = {
 # KT-TT (2026-11-12): lớp tri thức mới CHỈ có bản Việt — bản dịch Ngô Tất Tố (Tiểu tượng, Trình Di, Chu Hy), loại tượng
 # tám quái, nghĩa sao nhỏ. Bản Anh chưa có các trường này; chuyển thể cùng giai đoạn của mảng (Tử vi GĐ 4, Kinh Dịch GĐ 6).
 KHUNG_CHUA_XONG: dict[str, int] = {"kb.trang.la_bai": 7, "goi_y_cheo": 7,
-                                   "kb.trang.bo_vi": 7, "kb.trang.menh_nam": 7,
+                                   "kb.trang.menh_nam": 7,
                                    "kb.trang.que": 6,
                                    # KT-PT1: mục "Nguyên văn sách xưa" của trang dấu hiệu chỉ có bản Việt (lớp sách xưa bản Anh chưa làm).
                                    "kb.trang.dau_hieu": 7}

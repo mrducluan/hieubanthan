@@ -459,7 +459,8 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
     if h_nq:
         tom_nam.append(_gan(h_nq, "hai_la_so"))
     # TG-V2: lớp từng tháng (con giáp · phong thuỷ · ngày đẹp) + Tử vi / Bát tự — tính một lần cho 12 tháng
-    from app.luangiai import nam_tong_quan as ntq  # noqa: PLC0415
+    from app.luangiai import nam_tong_quan as ntq
+    from app.luangiai import nam_tuoi_hien as _nth  # noqa: PLC0415
     quai = P.menh_quai(ngay_sinh.year, gioi_tinh, ngay_sinh)["quai"] if gioi_tinh else None
     ts12 = _thang_ts(d, m, hom_nay, 12)
     tv12 = _tv_thang(tv_sinh, hom_nay, 4, ls)[:14] if tv_sinh else []
@@ -468,9 +469,10 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
     thang12 = gop_thang(ts12, tv12, bt12, lop12)
     xep = _hop_xep(lop12, tv12, bt12)
     nsa = tdg.nam_am_sinh(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, tz_sinh)
-    tt = ntq.theo_tuoi(nam, nsa)
-    # EN-ALL GĐ 8: chọn điểm nhấn + mã kiểm chứng theo chữ bản Việt (bản Việt quyết); chữ hiển thị theo ngôn ngữ.
-    tt_vi = tt if ngon_ngu.la_viet() else ngon_ngu.theo_viet(ntq.theo_tuoi)(nam, nsa)
+    # EN-ALL GĐ 8: chọn điểm nhấn + mã kiểm chứng theo chữ bản Việt (bản Việt quyết); chữ hiển thị qua đúng lớp hiển thị
+    # của trang "Tử vi năm theo tuổi" (`nam_tuoi_hien.theo_tuoi`) — một nguồn chữ tiếng Anh cho cùng dữ kiện.
+    tt_vi = ngon_ngu.theo_viet(ntq.theo_tuoi)(nam, nsa)
+    tt = tt_vi if ngon_ngu.la_viet() else _nth.theo_tuoi(tt_vi)
     cg_nam = [_gan(kh.hop("diem_manh" if x["loai"] == "thuan" else "luu_y" if x["loai"] == "luu_y" else "loi_khuyen",
                           *_doi_thuong(x), can_cu=[x["tieu_de"], x["can_cu"]],
                           ma=kh.ma_mau("tgt", "con_giap", L.slug(v["can_cu"].split(":")[0]), v["loai"])), "con_giap")

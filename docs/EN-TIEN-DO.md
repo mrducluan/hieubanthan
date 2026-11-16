@@ -16,7 +16,7 @@
 | 5 | Phong thuỷ | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/feng-shui` + cụm dấu hiệu trong nhà (gồm `kb.trang.dau_hieu`, `hoi.phongthuy`) — mục 3f |
 | 6 | Kinh Dịch | **xong** (2026-11-14) | 6 nhóm route sạch; `/en/i-ching` + cụm 64 quẻ; hỏi đáp tiếng Anh — mục 3g |
 | 7 | Thần số + Tarot đầy đủ | **xong** (2026-11-16) | 19 nhóm route + 8 loại trang sạch, hỏi đáp đầy đủ, `/en/numerology` + `/en/tarot` một-component, 7 cụm mở — mục 3i; Hợp đôi web chưa mở |
-| 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | chưa | 26 |
+| 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | **engine xong** (2026-11-16) | 27 nhóm route + `kb.trang.bo_vi` + mục lục `kb` sạch — mục 3j; web `/en` cho các trang này chưa mở |
 | 9 | Tài khoản & kinh tế, Web Push theo ngôn ngữ, thẻ chia sẻ | chưa | 3 nhóm route + web |
 | 10 | CMS + Blog + pháp lý + hub | chưa | |
 | 11 | QC tổng | chưa | |
@@ -329,6 +329,27 @@ Ba nhóm chạy song song (worktree riêng, tệp mẫu câu riêng `en/loi/{tha
 - Cần quyết: tên thường gọi trong bài Chaldea bản Anh đang không dấu ("Luan") vì bộ kiểm coi tên có dấu là chữ Việt; mọi chữ Anh
   `bien_tap`, cần người bản xứ duyệt.
 
+## 3j. Giai đoạn 8 — lịch, năm & tuổi, Nhân tướng, Chân dung, Thời gian tới (engine, 2026-11-16)
+
+Ba nhóm song song (worktree riêng, tệp mẫu câu riêng `en/loi/{lich,nam_tuoi,nhan_tuong,chan_dung,thoi_gian}.json`):
+- **C lịch**: lich (việc, chọn ngày nhiều người), chon_ngay, doi, nam (lịch âm năm), ngay, ngay_tot, thang, thang_post, viec_thang.
+  Lớp hiển thị `luangiai/lich_trang_hien.py` chạy ở bước API khi lượt gọi không phải tiếng Việt, dựng lại chữ từ dữ kiện đã tính —
+  `hoang_lich.py` không đổi (Hôm nay, Tuần này, tuổi dân gian, Thời gian tới vẫn đọc tên Việt). `chon_ngay_nhieu`: nhãn Việt vẫn là
+  khoá gộp / xếp, chữ Anh dựng cùng lượt. Bản phủ `en/hoang_lich_kb.json` thêm 142 việc nên / kiêng, 151 thần sát, 28 tú, Bành Tổ.
+- **D năm & tuổi**: nam, nam.cuoi_hoi, nam.sinh_con, nam.tuoi, tuoi.{han_nam, lam_nha, lam_nha_nam, sao_han, sao_han_nam, xong_dat,
+  xong_dat_nam}, sinh_nuoc_ngoai. Lớp hiển thị `luangiai/nam_tuoi_hien.py` (hàm gốc `tuoi_dan_gian`, `nam_tong_quan`, `trang_tuoi` không
+  đổi); bản phủ `en/{nam_tong_quan_kb,sinh_nuoc_ngoai_kb}.json`, mở rộng `en/{tuoi_dan_gian_kb,sao_han_kb}.json`. Tục lệ giữ tên gốc kèm
+  nghĩa (Kim Lau, Tam Tai (Three Calamities), lunar age, xong dat).
+- **E**: nhan_tuong (+ hỏi đáp, luận giải), kb.trang.bo_vi (khớp khung nhờ ý chính tiếng Anh theo số ý bản Việt), chan_dung, thoi_gian_toi.
+  Bản phủ `en/{nhan_tuong_kb,chan_dung_kb,thoi_gian_lop_kb}.json`. Lời sách xưa bản Anh chỉ chữ Hán + ý tiếng Anh (không phiên âm).
+- Gộp: `ten.KHOA_MA` hai nhóm cùng thêm khoá (giữ cả hai). Thời gian tới lấy hộp con giáp qua đúng `nam_tuoi_hien.theo_tuoi` của
+  trang "Tử vi năm theo tuổi" (một nguồn chữ) — 40/41 lượt lỗi → 0. Mục lục `kb` sạch vì mọi loại trang đã sạch (trước ghi GĐ 11).
+- Đo sau gộp: golden bản Việt lệch 0/10509; holdout_v2 92 % / 81 % / an toàn 25/25; an toàn tiếng Anh 128/17/90, chặn nhầm 0.
+- Còn / cần quyết: Dậu hiện "You (Rooster)" trong can chi ("Xin You (Rooster)") theo bảng tên GĐ 7 — gọn lại thì sửa
+  `ten_en.json`; lời lỗi 422 và lỗi phép đo gương mặt (`do_anh.loi`) vẫn tiếng Việt (bộ đo không gọi ca lỗi); hỏi đáp Nhân tướng
+  chưa hiểu câu tiếng Anh; tên Cửu Diệu / Bát hạn ở Thời gian tới (`tgt.sao.*`) nên gộp về bảng tên chung; web `/en` cho lịch, năm,
+  tuổi, Nhân tướng, Chân dung, Thời gian tới chưa mở. Mọi chữ Anh `bien_tap`, chờ người bản xứ duyệt.
+
 ## 3h. Chính sách chặn có ích + "nên chú ý" (CY-2, 2026-11-14, vi + en)
 
 - Đối tác / nhân viên có trung thực không: trả lời phía người hỏi ở mọi mảng (cả bản Anh); vẫn chặn chọn / xếp hạng / sa thải theo lá số.
@@ -504,3 +525,4 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
   sao/cung — đã chuyển thể).
 - **2026-11-13 — hỏi đáp lai** (mục 6.4) + **GĐ 5 Phong thuỷ** engine + hỏi đáp (mục 3f).
 - **2026-11-13 → 14 — GĐ 6 Kinh Dịch** (mục 3g); sửa 10 cảnh báo CodeQL (regex chậm / chèn regex) + test `test_hoi_redos.py` cho mọi route hỏi đáp.
+- **2026-11-16 — GĐ 8 (engine)**: ba nhóm lịch / năm & tuổi / Nhân tướng + Chân dung + Thời gian tới; 27 nhóm route + bộ vị + mục lục `kb` sạch, bản Việt lệch 0 (mục 3j).
