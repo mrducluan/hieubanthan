@@ -3,16 +3,14 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Check } from "lucide-react";
 import { VongLacThu } from "./VongLacThu";
+import { useChuThanSo } from "./chu-than-so";
 
 // "Đang tính" có nghi thức — hiện ĐÚNG các bước engine làm, không giả vờ chậm quá ~1,6 s.
-const BUOC = [
-  "Quy từng chữ cái trong tên về số 1–9",
-  "Cộng từng chữ số của ngày tháng năm sinh",
-  "Rút gọn — giữ nguyên số cái 11, 22, 33",
-];
+const BUOC = ["nghi_thuc.b1", "nghi_thuc.b2", "nghi_thuc.b3"] as const;
 
 export function NghiThuc({ daCoKetQua, onXong }: { daCoKetQua: boolean; onXong: () => void }) {
   const giam = useReducedMotion();
+  const { c } = useChuThanSo();
   const [buoc, setBuoc] = useState(0);
 
   useEffect(() => {
@@ -37,7 +35,7 @@ export function NghiThuc({ daCoKetQua, onXong }: { daCoKetQua: boolean; onXong: 
           transition={{ duration: 2, repeat: Infinity }}
         />
       </div>
-      <p className="mt-6 font-serif text-2xl">Đang đọc những con số của bạn…</p>
+      <p className="mt-6 font-serif text-2xl">{c("nghi_thuc.tieu_de")}</p>
       <ul className="mt-5 w-full space-y-2 text-left text-sm">
         <AnimatePresence>
           {BUOC.slice(0, Math.max(buoc, 1)).map((b, i) => (
@@ -46,7 +44,7 @@ export function NghiThuc({ daCoKetQua, onXong }: { daCoKetQua: boolean; onXong: 
               <span className={`grid size-5 place-items-center rounded-full ${i < buoc ? "bg-jade/20 text-jade" : "bg-surface-2"}`}>
                 {i < buoc ? <Check className="size-3" aria-hidden /> : null}
               </span>
-              {b}
+              {c(b)}
             </motion.li>
           ))}
         </AnimatePresence>

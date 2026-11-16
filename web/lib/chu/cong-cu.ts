@@ -136,17 +136,18 @@ export const CHU_TAROT = gopBang(mangHuyenHoc(true, "Tarot · 4 trường phái 
   "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề", mac_dinh: "Hỏi về một lá, một trải bài", en: "Ask about a card or a spread", toi_da: 120 },
 });
 
+// EN-ALL GĐ 7: /en/numerology là rewrite của /than-so → mọi khoá có chiều `en`.
 export const CHU_THAN_SO = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề (chưa có hồ sơ)", mac_dinh: "Thần số học", toi_da: 60 },
-  "dau.dang_tai": { nhom: DAU, nhan: "Tiêu đề lúc đang tải", mac_dinh: "Thần số học theo họ tên và ngày sinh", toi_da: 120 },
-  "dau.chua_ho_so": { nhom: DAU, nhan: "Tiêu đề khi chưa có hồ sơ (trên ô nhập)", mac_dinh: "Nhập tên và ngày sinh để bắt đầu", toi_da: 120 },
-  "ket_qua.nhan_tren": { nhom: "Kết quả", nhan: "Dòng nhỏ trên tên người dùng", mac_dinh: "Thần số học của bạn", toi_da: 60 },
-  "bon_so.nho": { nhom: "Kết quả", nhan: "Mục bốn số — dòng nhỏ", mac_dinh: "Bốn con số cốt lõi", toi_da: 60 },
-  "bon_so.lon": { nhom: "Kết quả", nhan: "Mục bốn số — tiêu đề", mac_dinh: "Bốn con số nói gì về bạn", toi_da: 120 },
-  "chieu_sau.nho": { nhom: "Kết quả", nhan: "Mục chiều sâu — dòng nhỏ", mac_dinh: "Chiều sâu", toi_da: 60 },
-  "chieu_sau.lon": { nhom: "Kết quả", nhan: "Mục chiều sâu — tiêu đề", mac_dinh: "Các giai đoạn trong đời bạn", toi_da: 120 },
-  "hoi.nho": { nhom: "Hỏi đáp", nhan: "Mục hỏi — dòng nhỏ", mac_dinh: "Hỏi đáp chuyên sâu", toi_da: 60 },
-  "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề ({ten} = tên người dùng)", mac_dinh: "{ten}, bạn đang băn khoăn điều gì?", toi_da: 120 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề (chưa có hồ sơ)", mac_dinh: "Thần số học", en: "Numerology", toi_da: 60 },
+  "dau.dang_tai": { nhom: DAU, nhan: "Tiêu đề lúc đang tải", mac_dinh: "Thần số học theo họ tên và ngày sinh", en: "Numerology from your name and date of birth", toi_da: 120 },
+  "dau.chua_ho_so": { nhom: DAU, nhan: "Tiêu đề khi chưa có hồ sơ (trên ô nhập)", mac_dinh: "Nhập tên và ngày sinh để bắt đầu", en: "Enter your name and date of birth to begin", toi_da: 120 },
+  "ket_qua.nhan_tren": { nhom: "Kết quả", nhan: "Dòng nhỏ trên tên người dùng", mac_dinh: "Thần số học của bạn", en: "Your numerology", toi_da: 60 },
+  "bon_so.nho": { nhom: "Kết quả", nhan: "Mục bốn số — dòng nhỏ", mac_dinh: "Bốn con số cốt lõi", en: "Your four core numbers", toi_da: 60 },
+  "bon_so.lon": { nhom: "Kết quả", nhan: "Mục bốn số — tiêu đề", mac_dinh: "Bốn con số nói gì về bạn", en: "What your four numbers say about you", toi_da: 120 },
+  "chieu_sau.nho": { nhom: "Kết quả", nhan: "Mục chiều sâu — dòng nhỏ", mac_dinh: "Chiều sâu", en: "Going deeper", toi_da: 60 },
+  "chieu_sau.lon": { nhom: "Kết quả", nhan: "Mục chiều sâu — tiêu đề", mac_dinh: "Các giai đoạn trong đời bạn", en: "The stages of your life", toi_da: 120 },
+  "hoi.nho": { nhom: "Hỏi đáp", nhan: "Mục hỏi — dòng nhỏ", mac_dinh: "Hỏi đáp chuyên sâu", en: "Ask in depth", toi_da: 60 },
+  "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề ({ten} = tên người dùng)", mac_dinh: "{ten}, bạn đang băn khoăn điều gì?", en: "{ten}, what's on your mind?", toi_da: 120 },
 });
 
 export const CHU_HOP_DOI = gopBang(KHUNG, {

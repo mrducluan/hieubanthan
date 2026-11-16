@@ -1,4 +1,5 @@
 "use client";
+import "@/lib/en/hoso";   // EN-ALL: chuyển hồ sơ cũ của bản Anh (hbt.en.profile.v1) sang hồ sơ chung, chạy một lần
 // TR-5 (2026-11-10) — flow dẫn từng bước: chip "chuyện hay hỏi" bấm là có câu mẫu điền sẵn → engine hiểu câu và TỰ CHỌN trải
 // bài hợp (đổi được trong "Đổi trải bài") → xáo → rút (có nút rút giúp: lấy các lá trên cùng của bộ engine đã xáo, web không
 // random) → lật lá nào hiện nghĩa lá đó ngay theo vị trí → lật đủ thì tự vào bài đọc. Lá là tranh Rider–Waite 1909.

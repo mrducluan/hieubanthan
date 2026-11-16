@@ -1,14 +1,14 @@
 "use client";
 // EN-ALL GĐ 1 việc 4 — hồ sơ bản Anh là CÙNG hồ sơ chung của site (`hbt.hoso.v1`, lib/hoso.ts) + cách tính Đường đời chung
 // (`hbt.thanso_dd`, lib/quy-uoc-dd.ts): đổi ngôn ngữ không mất hồ sơ, người dùng không nhập lại. File này chỉ là lớp đổi
-// tên trường cho các trang /en còn viết riêng (Numerology, Tarot) cho tới khi chúng dùng thẳng component chung.
+// tên trường cho các trang /en còn viết riêng — GĐ 7: /en/numerology, /en/tarot đã dùng thẳng component chung, chỉ còn
+// phần chuyển hồ sơ cũ (trang Thần số, Tarot import file này để chạy chuyển trước lần render đầu).
 //
 // Hồ sơ cũ của bản Anh (`hbt.en.profile.v1`, QTE-3): đọc MỘT lần rồi chuyển sang hồ sơ chung — chỉ xoá khoá cũ sau khi đã
 // ghi xong hồ sơ chung; máy đã có hồ sơ chung thì hồ sơ chung thắng (khoá cũ bỏ đi, không ghi đè người dùng bản Việt).
 // Vẫn chỉ trên máy; "Clear" ở bản Anh = xoá hồ sơ trên máy như nút xoá của bản Việt.
-import { useCallback, useMemo } from "react";
-import { HoSo, KHOA_HO_SO, luuHoSo, useHoSo, xoaHoSo, capNhatHoSo, hoTenList } from "@/lib/hoso";
-import { docQuyUocDD, ghiQuyUocDD, useQuyUocDD, type QuyUocDD } from "@/lib/quy-uoc-dd";
+import { HoSo, KHOA_HO_SO, luuHoSo } from "@/lib/hoso";
+import { ghiQuyUocDD, type QuyUocDD } from "@/lib/quy-uoc-dd";
 
 const KHOA_QUY_UOC = "hbt.thanso_dd";   // cùng khoá với lib/quy-uoc-dd.ts
 
@@ -46,25 +46,3 @@ export function chuyenHoSoCu(): boolean {
 
 // Chuyển ngay khi module nạp ở trình duyệt (trước lần render đầu) → trang không lóe form "chưa có hồ sơ" rồi mới hiện hồ sơ.
 if (typeof window !== "undefined") chuyenHoSoCu();
-
-/** Hồ sơ chung đọc theo tên trường bản Anh. `undefined` lúc chưa đọc (SSR), `null` khi chưa có. */
-export function useProfileEn(): [ProfileEn | null | undefined, (p: ProfileEn | null) => void] {
-  const h = useHoSo();
-  const method = useQuyUocDD();
-  // Một đối tượng ổn định mỗi lần hồ sơ / cách tính đổi (trang dùng làm phụ thuộc của lời gọi engine).
-  const p = useMemo<ProfileEn | null | undefined>(() => (h === undefined ? undefined : h === null ? null
-    : { name: h.ho_ten, ...(h.ten_khac ? { nickname: h.ten_khac } : {}), day: h.ngay, month: h.thang, year: h.nam, method }), [h, method]);
-  const ghi = useCallback((x: ProfileEn | null) => {
-    if (!x) { xoaHoSo(); return; }
-    const ten = { ho_ten: x.name.trim(), ten_khac: x.nickname?.trim() || undefined, ngay: x.day, thang: x.month, nam: x.year };
-    // Cùng ngày sinh → chỉ đổi tên (giữ giờ, nơi sinh, giới tính đã nhập ở bản Việt); khác ngày sinh → hồ sơ mới.
-    const cu = h && h.ngay === x.day && h.thang === x.month && h.nam === x.year;
-    if (cu) capNhatHoSo(ten); else luuHoSo(ten);
-    if (x.method !== docQuyUocDD()) ghiQuyUocDD(x.method);
-  }, [h]);
-  return [p, ghi];
-}
-
-export function hoTen(p: ProfileEn): string[] {
-  return hoTenList({ ho_ten: p.name, ten_khac: p.nickname });
-}

@@ -67,7 +67,7 @@ export function YNghiaLa({ muc, chon, onChon, tieuDe: tieuDeVao, ghiChu, classNa
             {dang.viec && <p className="mt-2 text-sm text-fg"><b className="text-gold">{c("ynl.viec")}</b> {dang.viec}</p>}
             {dang.tuSoi && <p className="mt-2 text-sm italic text-fg-muted">{c("ynl.tu_hoi")} {dang.tuSoi}</p>}
             <p className="mt-3 text-sm">
-              <Link href={d("/tarot/la-bai", `/${slug(dang.la.ten)}`)} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 text-gold underline-offset-4 hover:underline" data-testid="link-la-day-du">
+              <Link href={d(`/tarot/la-bai/${slug(dang.la.ten)}`)} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 text-gold underline-offset-4 hover:underline" data-testid="link-la-day-du">
                 <BookOpen className="size-4" aria-hidden /> {c("ynl.day_du", { ten: dang.la.ten })}
               </Link>
             </p>

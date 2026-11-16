@@ -59,7 +59,7 @@ export function LaNgay({ hoSo, tieuDe = "Lá của ngày" }: { hoSo: HoSo | null
             <p className="mt-1 text-sm text-fg">{kq.la.y_xuoi}</p>
             <p className="mt-2 text-sm text-fg-muted"><b className="text-fg">{c("la_ngay.viec")}</b> {kq.la.viec}</p>
             <p className="mt-1 text-sm italic text-fg-muted">{kq.la.cau_tu_soi}</p>
-            <p className="mt-2 text-xs"><Link href={d("/tarot/la-bai", `/${slug(kq.la.ten)}`)} className="text-gold underline-offset-4 hover:underline">{c("la_ngay.doc_ky", { ten: kq.la.ten })}</Link></p>
+            <p className="mt-2 text-xs"><Link href={d(`/tarot/la-bai/${slug(kq.la.ten)}`)} className="text-gold underline-offset-4 hover:underline">{c("la_ngay.doc_ky", { ten: kq.la.ten })}</Link></p>
           </>
         )}
       </div>

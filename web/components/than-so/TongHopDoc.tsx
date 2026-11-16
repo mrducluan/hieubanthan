@@ -8,6 +8,7 @@ import { useEngineDoc } from "@/lib/dung-engine";
 import type { HoSo } from "@/lib/hoso";
 import type { QuyUocDD } from "@/lib/quy-uoc-dd";
 import { cn } from "@/lib/utils";
+import { useChuThanSo } from "./chu-than-so";
 
 interface SoNoiBat { goc: number; lan: number; phai: string[]; vi_tri: string[]; tu_khoa: string | null; mat_toi: string | null; phan_chung: string | null }
 interface TuongTac { quan_he: string; ten_quan_he: string; nhom: string; ten_nhom: string;
@@ -25,33 +26,34 @@ const MAU: Record<string, string> = {
 
 export function TongHopDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: QuyUocDD }) {
   const { kq, loi, thuLai } = useEngineDoc<BaiTongHop>("/api/thanso/tong-hop", hoSo, { quy_uoc_duong_doi: quyUoc });
+  const { c } = useChuThanSo();
   if (loi) return <BaoLoi loi={loi} thuLai={thuLai} />;
   if (!kq) return <KhungTai dong={3} />;
   return (
     <div className="space-y-10" data-testid="bai-tong-hop">
       <section aria-labelledby="th-noi-bat">
-        <TieuDeMuc id="th-noi-bat" nho="Tổng hợp hai phái" lon="Điều nhiều cách tính cùng chỉ ra" mo_ta={kq.cach_doc} />
+        <TieuDeMuc id="th-noi-bat" nho={c("th.nho")} lon={c("th.lon")} mo_ta={kq.cach_doc} />
         {kq.so_noi_bat.length === 0 ? (
-          <p className="text-sm text-fg-muted">Các phái không trùng con số nào ở những phép tính độc lập — mỗi phái là một góc nhìn riêng, đọc từng phái để đối chiếu.</p>
+          <p className="text-sm text-fg-muted">{c("th.khong_trung")}</p>
         ) : (
           <div className="grid gap-4 md:grid-cols-2">
             {kq.so_noi_bat.slice(0, 4).map((s) => (
               <Card key={s.goc} data-testid={`noi-bat-${s.goc}`}>
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-xl">Số {s.goc}</h3>
-                  <span className="text-xs text-gold">{s.lan} nguồn tính độc lập</span>
+                  <h3 className="text-xl">{c("th.so", { so: String(s.goc) })}</h3>
+                  <span className="text-xs text-gold">{c("th.nguon_tinh", { n: String(s.lan) })}</span>
                 </div>
                 {s.tu_khoa && <p className="mt-1 text-sm">{s.tu_khoa}</p>}
                 <ul className="mt-2 flex flex-wrap gap-1.5">{s.vi_tri.map((v) => <li key={v} className="rounded-full bg-gold/10 px-2 py-0.5 text-xs">{v}</li>)}</ul>
-                {s.mat_toi && <p className="mt-2 text-sm text-cinnabar">Mặt tối: {s.mat_toi}</p>}
-                {s.phan_chung && <p className="mt-1 text-sm text-fg-muted">Tự soi: {s.phan_chung}</p>}
+                {s.mat_toi && <p className="mt-2 text-sm text-cinnabar">{c("ch.mat_toi", { chu: s.mat_toi })}</p>}
+                {s.phan_chung && <p className="mt-1 text-sm text-fg-muted">{c("ch.tu_soi", { chu: s.phan_chung })}</p>}
               </Card>
             ))}
           </div>
         )}
       </section>
       <section aria-labelledby="th-tuong-tac">
-        <TieuDeMuc id="th-tuong-tac" nho="Đồ thị liên phái" lon="Các phái gặp nhau và khác nhau ở đâu" mo_ta={kq.ghi_chu_duong_doi} />
+        <TieuDeMuc id="th-tuong-tac" nho={c("th.do_thi_nho")} lon={c("th.do_thi_lon")} mo_ta={kq.ghi_chu_duong_doi} />
         <div className="grid gap-3 md:grid-cols-2">
           {kq.tuong_tac.map((t) => (
             <article key={`${t.quan_he}-${t.nhom}`} data-testid={`tuong-tac-${t.nhom}`} className={cn("rounded-xl border p-4", MAU[t.quan_he])}>
@@ -66,7 +68,7 @@ export function TongHopDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: QuyUocDD }) {
           ))}
         </div>
       </section>
-      <p className="text-xs text-fg-faint">{kq.luu_y} Nguồn: {kq.nguon}.</p>
+      <p className="text-xs text-fg-faint">{c("ch.nguon", { luu_y: kq.luu_y, nguon: kq.nguon })}</p>
     </div>
   );
 }

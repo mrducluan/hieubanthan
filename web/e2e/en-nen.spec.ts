@@ -47,7 +47,10 @@ test.describe("bảng đường dẫn", () => {
     for (const u of ["/en", "/en/numerology", "/en/numerology/life-path", "/en/tarot", "/en/tarot/cards", "/en/privacy", "/en/terms"]) {
       expect(CAP_DUONG.find((c) => c.en === u)?.mo, u).toBe(true);
       expect(suaDuongLac(u), u).toBeNull();
-      expect(dichRewrite(u), u).toBeNull();      // còn là trang riêng → không rewrite
+      // EN-ALL GĐ 7: Numerology, Tarot (+ Life Path, 78 lá) đã chuyển sang hệ một-component (rewrite trang Việt); trang vào /en
+      // và pháp lý vẫn là trang riêng.
+      if (["/en", "/en/privacy", "/en/terms"].includes(u)) expect(dichRewrite(u), u).toBeNull();
+      else expect(dichRewrite(u), u).not.toBeNull();
     }
   });
 

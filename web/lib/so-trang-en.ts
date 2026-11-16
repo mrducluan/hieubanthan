@@ -249,6 +249,41 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
       cum: Object.fromEntries(["/phong-thuy/dau-hieu"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
     },
   },
+  "/than-so": {
+    ten: "Numerology",
+    tieu_de_seo: "Free numerology calculator: Life Path, Expression, Soul Urge · Hieuban",
+    mo_ta_seo: "Free numerology calculator: your Life Path, Expression, Soul Urge and Personality numbers from your name and birth date, each step shown. No sign-up.",
+    tra_loi_nhanh: {
+      hoi: "What does this numerology calculator give you?",
+      dap: "Enter your full name and date of birth to get your Life Path, Expression, Soul Urge and Personality numbers, each with the step-by-step sum, a four-sided portrait, your pinnacles and personal years, and your birth chart grid. There are two ways to add the Life Path and two schools (Pythagorean and Chaldean). Free, no account.",
+      lien_ket: [{ href: "/en/numerology/life-path", ten: "What each number means" }, { href: "/en/numerology/personal-year", ten: "Personal Years 1–9" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the numerology calculator",
+      doan: [
+        "Numerology turns the letters of your name and the digits of your birth date into a few core numbers. The Life Path comes from your birth date; Expression, Soul Urge and Personality come from your name. Every number here comes with the sum that produced it, so you can check it yourself.",
+        "Each core number is a set of tendencies, not a verdict: you get its strengths, its blind spots and a short checklist to tick the traits that fit you. The portrait reads your Life Path through love, work and turning points, with a personal layer from your other numbers.",
+        "There are two common ways to add the Life Path (reducing each part first, or adding every digit at once); for some dates they give different numbers, and the page shows both. You can also switch to the Chaldean school, or see where the two schools point the same way. The reading is cultural reference, not a prediction.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Is it free?", dap: "Yes. The numerology reading in English is free and needs no account." },
+        { hoi: "Which numerology is this?", dap: "Pythagorean numerology by default — letters A–Z map to 1–9 and master numbers 11, 22 and 33 are kept — with the Chaldean school (Cheiro) as an option." },
+        { hoi: "Why are there two ways to add my Life Path?", dap: "Western books reduce the day, month and year separately before adding; many sites add every digit at once. For some dates the two give different numbers, so you choose and the page shows both." },
+        { hoi: "Does it predict anything?", dap: "No. Each number comes with a shadow side and a question to test whether it fits you. Personal years are a rhythm to compare with your life, not a forecast." },
+        { hoi: "Is my name stored?", dap: "Your profile stays in this browser by default. Your name and date of birth are sent only to compute the numbers and are not stored with your identity." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/tarot", ten: "Tarot reading" },
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/compatibility/number-pairs", ten: "Life Path compatibility" },
+      ] },
+    },
+    kien_thuc: {
+      tieu_de: "Learn numerology",
+      cum: Object.fromEntries(["/than-so/y-nghia-so", "/than-so/nghe-nghiep", "/than-so/tinh-yeu", "/than-so/nam-ca-nhan", "/than-so/no-nghiep", "/than-so/so-kep"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
+    },
+  },
   "/tarot": {
     ten: "Tarot",
     tieu_de_seo: "Free tarot reading: draw your own cards for one question · Hieuban",

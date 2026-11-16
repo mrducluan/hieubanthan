@@ -5,12 +5,14 @@
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { hoTenList, type HoSo } from "@/lib/hoso";
 import type { QuyUocDD } from "@/lib/quy-uoc-dd";
+import { useChuThanSo } from "./chu-than-so";
 
 export function BanDoConSo({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: QuyUocDD }) {
+  const { c } = useChuThanSo();
   const than = { ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam, quy_uoc_duong_doi: quyUoc };
   return (
-    <section id="ban-do-con-so" aria-label="Bản đồ con số" className="scroll-mt-24" data-testid="ban-do-con-so">
-      <LuanGiaiToanBo duongDan="/api/thanso/ban-do-con-so" laSo={than} than={than} ten="bản đồ con số" moDun="thanso" tuMo />
+    <section id="ban-do-con-so" aria-label={c("ban_do.aria")} className="scroll-mt-24" data-testid="ban-do-con-so">
+      <LuanGiaiToanBo duongDan="/api/thanso/ban-do-con-so" laSo={than} than={than} ten={c("ban_do.ten")} moDun="thanso" tuMo />
     </section>
   );
 }
