@@ -769,7 +769,7 @@ def _muc_chu_y(pl: dict, nguoi: dict, ngay_xem: _dt.date) -> dict:
     if mg == "van_han":
         m = cyn.muc_van_han({x: cyn.thanso_nam_nguoi(nguoi["ngay"], nguoi["thang"], x, y) for x in cyn.MANG_VAN_HAN},
                             [y, y + 1], pl.get("khong_noi_chac"))
-        tieu = "Năm nay và năm sau nên chú ý gì"
+        tieu = L("tsq.hoi.tieu_van_han", "Năm nay và năm sau nên chú ý gì")
     else:
         from app.hoidap import hieu_cau  # noqa: PLC0415
         nam_hoi = sorted({y + (1 if x.get("tuong_doi") == "nam_sau" else 0) if x.get("tuong_doi")
@@ -976,13 +976,13 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
         nam0 = ngay_xem.year
         ds = _sk_nam_ts(nguoi, nam0)
         if ds:
-            muc.append({"loai": "giai_thich", "ma": "suc_khoe_nam", "tieu_de": "Năm nên chú ý sức khoẻ hơn",
+            muc.append({"loai": "giai_thich", "ma": "suc_khoe_nam", "tieu_de": L("tsq.hoi.tieu_suc_khoe", "Năm nên chú ý sức khoẻ hơn"),
                         "noi_dung": f"{ds} {_skn_mt()}", "source_id": "thanso_pitago", "school_id": "pitago"})
     if pl.get("chu_y") and dt_ == "ban_than" and nguoi and nguoi.get("ngay") and nguoi.get("thang"):
         muc.insert(0, _muc_chu_y(pl, nguoi, ngay_xem))                  # CY-1: năm nên chú ý của mảng đứng đầu
     elif pl.get("khong_noi_chac") and muc:
         from app.kb import chu_y_kb as cykb  # noqa: PLC0415
-        muc.insert(0, {"loai": "giai_thich", "ma": "khong_noi_chac", "tieu_de": "Điều con số nói được",
+        muc.insert(0, {"loai": "giai_thich", "ma": "khong_noi_chac", "tieu_de": L("tsq.hoi.tieu_khong_noi_chac", "Điều con số nói được"),
                        "noi_dung": f"{cykb.mau('khong_noi_chac')} {cykb.mau('thanso_dau')}",
                        "source_id": "thanso_pitago", "school_id": "pitago"})
     ma_luu_y = (LUU_Y_THEO_LV.get(lv) or ("thoi_diem" if pl["y_dinh"] == "thoi_diem" else None)

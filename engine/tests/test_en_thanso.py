@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""QTE — Thần số tiếng Anh: bản phủ `kb/data/en/thanso_*.json` + mẫu câu `loi_khuon.json` + hỏi đáp gọn `hoi_en` phải phủ
+"""QTE — Thần số tiếng Anh: bản phủ `kb/data/en/thanso_*.json` + mẫu câu `loi_khuon.json` + hỏi đáp `hoi_en` phải phủ
 MỌI chữ hiện ra của bài đọc `/v1/thanso/luan-giai`, trang số `/v1/thanso/so/{n}` và `/v1/thanso/hoi`; bản Việt không đổi."""
 from __future__ import annotations
 
@@ -63,22 +63,23 @@ def test_trang_so(so):
     assert client.get("/v1/thanso/so/10").status_code == 404
 
 
-@pytest.mark.parametrize("cau,xu_ly,lv", [
-    ("What does my life path number say about me?", "ban_than", "ban_than"),
-    ("How do I behave in a relationship?", "linh_vuc", "tinh_yeu"),
-    ("Should I worry about money this year?", "nam", "tai_chinh"),
-    ("What is this month about for me?", "thang", None),
-    ("How does my number show up at work?", "linh_vuc", "su_nghiep"),
-    ("I feel stressed and tired all the time", "linh_vuc", "suc_khoe"),
-    ("What does number 7 mean?", "nghia_so", None),
-    ("How is the life path calculated?", "cach_tinh", None),
-    ("Am I compatible with my boyfriend?", "hop_doi", "tinh_yeu"),
-    ("Tell me something", "chung", "ban_than"),
+@pytest.mark.parametrize("cau,lv", [
+    ("What does my life path number say about me?", "ban_than"),
+    ("How do I behave in a relationship?", "tinh_yeu"),
+    ("Should I worry about money this year?", "tai_chinh"),
+    ("What is this month about for me?", "thoi_van"),
+    ("How does my number show up at work?", "su_nghiep"),
+    ("I feel stressed and tired all the time", "suc_khoe"),
+    ("What does number 7 mean?", "ky_thuat"),
+    ("How is the life path calculated?", "ky_thuat"),
+    ("Am I compatible with my boyfriend?", "hop_doi"),
+    ("Tell me something", "ban_than"),
 ])
-def test_hoi_dap_tieng_anh(cau, xu_ly, lv):
+def test_hoi_dap_tieng_anh(cau, lv):
+    # GĐ 7 nhóm H: phân loại theo khuôn bản Việt (luangiai.hoi.phan_loai), xem tests/test_en_thanso_hoi.py
     with ngon_ngu.dung("en"):
         kq = hoi_en.tra_loi(cau, NGUOI, XEM)
-    assert kq["phan_loai"]["xu_ly"] == xu_ly and kq["phan_loai"]["linh_vuc"] == lv, kq["phan_loai"]
+    assert kq["phan_loai"]["linh_vuc"] == lv and kq["phan_loai"]["xu_ly"] in ("tra_loi", "tra_loi_kem_luu_y"), kq["phan_loai"]
     assert len(kq["cau_tra_loi"]) > 40 and kq["hoi_tiep"]
     _khong_viet(kq, bo_qua=(".ho_ten[0]", ".ho_ten[1]"))
     assert "you will" not in kq["cau_tra_loi"].lower()

@@ -501,9 +501,10 @@ def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
     nguoi = {"ho_ten": inp.ho_ten, "ngay": inp.ngay, "thang": inp.thang, "nam": inp.nam,
              "quy_uoc": inp.quy_uoc_duong_doi}
     if not ngon_ngu.la_viet():
-        # QTE: tiếng Anh → bản hỏi đáp gọn tất định (KB có bản phủ); từ điển / câu liên quan là chữ Việt nên để trống.
+        # EN-ALL GĐ 7 (nhóm H): tiếng Anh → cùng bộ phân loại + gói bằng chứng bản Việt, lời theo ngôn ngữ (hoi_en);
+        # từ điển / câu liên quan là chữ Việt nên để trống.
         from app.luangiai import hoi_en  # noqa: PLC0415
-        kq = hoi_en.tra_loi(inp.cau_hoi.strip(), nguoi, inp.ngay_xem)
+        kq = hoi_en.tra_loi(inp.cau_hoi.strip(), nguoi, inp.ngay_xem, kia, phai=inp.phai)
         background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
         return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": [], "cau_lien_quan": []}
     kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem, phai=inp.phai)
