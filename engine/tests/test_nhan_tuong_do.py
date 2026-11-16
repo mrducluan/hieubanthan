@@ -163,3 +163,18 @@ def test_mat_trung_binh_theo_vien_khong_bat_nham_tren_rong():
     d = {**mau(), "thai_trai": (0.306, 0.37), "thai_phai": (0.694, 0.37), "ham_trai": (0.344, 0.66), "ham_phai": (0.656, 0.66)}
     kq = goi(d)
     assert "khuon_mat" not in kq or kq["khuon_mat"] != "tren_rong_duoi_nhon"
+
+
+def test_api_do_mat_tieng_anh():
+    """EN-ALL GĐ 8: dòng giải thích số đo (`goi_y[].do`, cảnh báo) theo ngôn ngữ; số thập phân kiểu Anh; bản Việt giữ dấu phẩy."""
+    import re
+    viet = re.compile(r"[ăâđêôơưàáạảãầấậẩẫằắặẳẵèéẹẻẽềếệểễìíịỉĩòóọỏõồốộổỗờớợởỡùúụủũừứựửữỳýỵỷỹ]", re.I)
+    diem = {k: {"x": v[0], "y": v[1]} for k, v in {**mau(), "chan_toc": (0.5, 0.10)}.items()}
+    en = client.post("/v1/nhan-tuong/do-mat", json={"diem": diem, "ti_le": 1.0, "dong_y": True},
+                     headers={"x-ngon-ngu": "en"}).json()
+    dong = [g["do"] for g in en["goi_y"]] + list(en.get("canh_bao") or [])
+    assert dong and not [s for s in dong if viet.search(s)]
+    assert not any(re.search(r"\d,\d", s) for s in dong)
+    vi = client.post("/v1/nhan-tuong/do-mat", json={"diem": diem, "ti_le": 1.0, "dong_y": True}).json()
+    assert [g["cau"] for g in vi["goi_y"]] == [g["cau"] for g in en["goi_y"]]
+    assert any(re.search(r"\d,\d", g["do"]) for g in vi["goi_y"])

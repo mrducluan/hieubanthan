@@ -15,7 +15,9 @@ from __future__ import annotations
 import math
 
 from app.calc import nhan_tuong as nt
+from app import ngon_ngu
 from app.kb import nhan_tuong_kb as kb
+from app.kb.loi import L
 
 # Câu khảo sát đo được từ hình học + các lựa chọn hàm này có thể gợi ý.
 # NT-2: nét nằm trong khoảng thường → lựa chọn "vừa" (`vua` / `can_doi`, cờ `vua: True`) — ảnh đo được thì trả lời luôn,
@@ -43,7 +45,8 @@ GOC_CANH_BAO = 3.0
 
 
 def _so(v: float) -> str:
-    return f"{v:.2f}".replace(".", ",")
+    t = f"{v:.2f}"
+    return t if not ngon_ngu.la_viet() else t.replace(".", ",")
 
 
 def _ten(ma: str) -> str:
@@ -204,8 +207,8 @@ def _do_thang(diem: dict, ti_le: float) -> dict:
         bien = ng["tai_lech_cao"] * H
         mat_y = (p["mat_ngoai_trai"][1] + p["mat_ngoai_phai"][1]) / 2
         dinh, dai = p["dinh_tai"][1], p["dai_tai"][1]
-        tren = "ngang hoặc cao hơn" if dinh <= may_y + bien else "thấp hơn"
-        duoi = "ngang hoặc thấp hơn" if dai >= p["chan_mui"][1] - bien else "cao hơn"
+        tren = L("ntd.tai.ngang_cao", "ngang hoặc cao hơn") if dinh <= may_y + bien else L("ntd.tai.thap", "thấp hơn")
+        duoi = L("ntd.tai.ngang_thap", "ngang hoặc thấp hơn") if dai >= p["chan_mui"][1] - bien else L("ntd.tai.cao", "cao hơn")
         sd["tai"] = {"dinh_so_may": r((dinh - may_y) / H), "dai_so_chan_mui": r((dai - p["chan_mui"][1]) / H)}
         if dinh > mat_y:
             them("tai", "nho_thap", "tai", dinh_tai=tren, dai_tai=duoi)
@@ -362,8 +365,8 @@ def do_nghieng(diem: dict, ti_le: float) -> dict:
         bien = ng["tai_lech_cao"] * H
         may_y, mat_y = cao(p["an_duong"]), cao(p["son_can"]) + ng["mat_duoi_son_can"] * H
         dinh, dai = cao(p["dinh_tai"]), cao(p["dai_tai"])
-        tren = "ngang hoặc cao hơn" if dinh <= may_y + bien else "thấp hơn"
-        duoi = "ngang hoặc thấp hơn" if dai >= cao(p["chan_mui"]) - bien else "cao hơn"
+        tren = L("ntd.tai.ngang_cao", "ngang hoặc cao hơn") if dinh <= may_y + bien else L("ntd.tai.thap", "thấp hơn")
+        duoi = L("ntd.tai.ngang_thap", "ngang hoặc thấp hơn") if dai >= cao(p["chan_mui"]) - bien else L("ntd.tai.cao", "cao hơn")
         if dinh > mat_y:
             them("tai", "nho_thap", "tai_nghieng", dinh_tai=tren, dai_tai=duoi)
         elif dinh <= may_y + bien and dai >= cao(p["chan_mui"]) - bien:

@@ -157,10 +157,7 @@ test.describe("/en/face-reading", () => {
     await napHoSo(page, HO_SO_EN);
     const than: unknown[] = [];
     page.on("request", (q) => { if (q.url().includes("/api/nhan-tuong/do-mat")) than.push(q.postDataJSON()); });
-    // BIẾT TRƯỚC (engine, báo ở EN-TIEN-DO mục 3j): `goi_y[].do` của /v1/nhan-tuong/do-mat còn tiếng Việt ở bản Anh — web
-    // không tự dịch (một bộ chữ ở engine). Test bỏ đúng các dòng đó, mọi chữ khác phải tiếng Anh.
-    const doEngine: string[] = [];
-    page.on("response", async (q) => { if (q.url().includes("/api/nhan-tuong/do-mat")) for (const g of ((await q.json().catch(() => ({}))) as { goi_y?: { do?: string }[] }).goi_y ?? []) if (g.do) doEngine.push(g.do.trim()); });
+    // EN-ALL GĐ 8: dòng giải thích số đo (`goi_y[].do`) engine trả theo ngôn ngữ — trang Anh không còn chữ Việt nào.
     await page.goto("/en/face-reading");
     await expect(page.getByTestId("anh-chan-dung")).toBeVisible({ timeout: 20_000 });
     const PNG = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==", "base64");
@@ -186,14 +183,14 @@ test.describe("/en/face-reading", () => {
     await expect(gy).toContainText("you confirm");
     await expect(page.getByTestId("do-so-do")).toContainText("Height / cheekbone width: 1.63");
     await expect(page.getByTestId("do-da-dong-y")).toContainText("Agreed on");
-    expect((await chuViet(page)).filter((l) => !doEngine.includes(l.trim()))).toEqual([]);
+    expect(await chuViet(page)).toEqual([]);
     expect(than).toHaveLength(1);
     expect(Object.keys(than[0] as object).sort()).toEqual(["diem", "dong_y", "ti_le"]);
     await page.getByTestId("do-dung").click();
     await expect(page.getByTestId("do-da-dung")).toContainText("features filled in the survey");
     await page.getByTestId("do-xem-bai-doc").click();
     await expect(page.getByTestId("bao-cao-nhan-tuong")).toBeVisible({ timeout: 30_000 });
-    expect((await chuViet(page)).filter((l) => !doEngine.includes(l.trim()))).toEqual([]);
+    expect(await chuViet(page)).toEqual([]);
   });
 
   test("điện thoại 390px: không cuộn ngang, không chữ Việt", async ({ page }) => {
