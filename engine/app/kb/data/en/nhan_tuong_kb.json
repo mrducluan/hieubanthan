@@ -2731,6 +2731,30 @@
     "ten": "Bottom of the earlobe",
     "mo": "The lowest point of the earlobe."
    }
-  ]
+  ],
+  "loi": {
+   "khuon_mat": "Face height is {cao_rong} times the cheekbone width; the forehead is {tran_ma} and the jaw {ham_ma} of the cheekbone width.",
+   "tam_dinh": "Forehead, middle and chin take {thuong}% – {trung}% – {ha}% of the face length (the classic standard: about one third each).",
+   "long_may": "The gap between the inner brow ends is {may_khoe} times the gap between the inner eye corners (old texts: the Yin Tang about two fingers wide).",
+   "an_duong": "The gap between the inner brow ends is {may_khoe} times the gap between the inner eye corners. Check the brightness and lines of this area yourself.",
+   "mat_hinh_nghieng": "The outer eye corner sits {nghieng_mat} eye-lengths above the inner corner (positive = upturned, negative = downturned).",
+   "mat_hinh_nho": "Each eye is {mat_mat} of the cheekbone width (the 'five eyes' standard: about 0.2 — the face is five eyes wide).",
+   "canh_mui": "The nose wings are {mui_khoe} times the gap between the inner eye corners (standard: about equal). Check the fleshiness of the wings yourself.",
+   "mieng": "The mouth is {mieng_mui} times the nose width; the mouth corners sit {khoe_mieng} mouth-widths above the middle of the lips.",
+   "mieng_lech": "The two mouth corners differ in height by {lech_mieng} of the mouth width (already corrected for head tilt).",
+   "nhan_trung": "Nose base to the middle of the lips is {nhan_trung} of the lower face (usually about one third).",
+   "ham": "The jaw is {ham_ma} of the cheekbone width.",
+   "song_mui": "The nose base is off the midline between the eyes by {lech_mui} of the inner-eye gap.",
+   "tai": "The top of the ear is {dinh_tai} the brows; the earlobe is {dai_tai} the nose base (old texts: ears level with the brows and lobes reaching the nose base are good ears).",
+   "canh_bao_quay": "The face in the photo is turned slightly to one side — left/right measurements (nose, mouth offset) were skipped; a straight-on photo works best.",
+   "canh_bao_nghieng": "The head in the photo is tilted ({goc}°) — the system straightened it along the line of the outer eye corners before measuring.",
+   "tran": "In profile, the mid-forehead stands {tran_cong} of the forehead height off the line from hairline to brow (usually about 0.05: a slight curve).",
+   "son_can": "The angle between forehead and nose bridge at the nose root is {goc_son_can}° (usually 115–135°; a wide angle = a high nose root, flowing from the forehead).",
+   "song_mui_nghieng": "The nose bridge bulges {gu_mui} of its length off the straight root–tip line; the tip projects {nho_mui} of the nose length (usually about 0.3).",
+   "cam_nghieng": "The facial convexity angle (brow centre – nose base – chin) is {loi_mat}° (usually 8–16°; larger = a receding chin).",
+   "tai_nghieng": "In profile: the top of the ear is {dinh_tai} the brows; the earlobe is {dai_tai} the nose base (old texts: ears level with the brows and lobes reaching the nose base are good ears).",
+   "canh_bao_hai_nghieng": "The two profile photos disagree on: {cau} — these features are not suggested yet; re-mark them so they match, or use one photo only.",
+   "tran_thang": "The forehead (at the brow tails) is {tran_ma} of the cheekbone width and takes {thuong}% of the face length. Fullness, bulge or dip needs a profile photo."
+  }
  }
 }

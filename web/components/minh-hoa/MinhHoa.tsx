@@ -326,10 +326,12 @@ function HinhDauHieu({ nhom, phong, veto, tot, ten, c }: { nhom: string; phong: 
 }
 
 /** `gon`: chỉ hình, không khung figure / dải QR — khi hình nằm trong một khung khác (khối hình của câu trả lời hỏi đáp). */
-function HinhBoVi({ vung, ten, cung }: { vung: string; ten: string; cung: string | null }) {
+function HinhBoVi({ vung, ten, cung, c, tiengAnh }: { vung: string; ten: string; cung: string | null; c: Chu; tiengAnh: boolean }) {
+  // EN-ALL GĐ 8: bản Anh đọc chữ ghi chú từ lib/chu/kien-thuc.ts (`mh.bo_vi_*`); bản Việt giữ đúng HTML cũ.
   return (
-    <BanDoMat tinh sang={[vung]} nhan={{ [vung]: ten }} chuThich
-      ghiChu={<span>{ten}{cung ? ` — cung ${cung}` : ""} (vùng sáng trên gương mặt giản lược)</span>} className="mx-auto max-w-md" />
+    <BanDoMat tinh en={tiengAnh} sang={[vung]} nhan={{ [vung]: ten }} chuThich
+      ghiChu={tiengAnh ? <span>{ten}{cung ? c("mh.bo_vi_cung", { cung }) : ""}{c("mh.bo_vi_sang")}</span>
+        : <span>{ten}{cung ? ` — cung ${cung}` : ""} (vùng sáng trên gương mặt giản lược)</span>} className="mx-auto max-w-md" />
   );
 }
 
@@ -360,7 +362,7 @@ export function MinhHoa({ mh, duong, gon = false, en = false, ten = MA }: { mh?:
       case "thap_than": return <HinhThapThan {...mh} c={c} />;
       case "nhat_chu": return <HinhNhatChu {...mh} c={c} ten={ten} />;
       case "dau_hieu": return <HinhDauHieu {...mh} c={c} />;
-      case "bo_vi": return <HinhBoVi {...mh} />;
+      case "bo_vi": return <HinhBoVi {...mh} c={c} tiengAnh={en} />;
       case "la_bai": return <HinhLaBai {...mh} c={c} tiengAnh={en} />;
       default: return null;
     }

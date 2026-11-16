@@ -90,5 +90,9 @@
  "nt.trang.chinh_xac_hoi": "Is reading your own face accurate?",
  "nt.trang.chinh_xac_dap": "A face you observe yourself is always truer than one someone else reads; this page only speaks about tendencies and habits, not about what will happen.",
  "nt.trang.cung_dap": "It covers {noi_ve}; areas included: {ds}.",
- "nt.trang.mo_ta": "{ten}: {nghia} Common traits, how the old books read them, the yearly ages and how to check it yourself in the mirror."
+ "nt.trang.mo_ta": "{ten}: {nghia} Common traits, how the old books read them, the yearly ages and how to check it yourself in the mirror.",
+ "ntd.tai.ngang_cao": "level with or above",
+ "ntd.tai.thap": "below",
+ "ntd.tai.ngang_thap": "level with or below",
+ "ntd.tai.cao": "above"
 }

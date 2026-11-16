@@ -10,23 +10,21 @@ import { ghi } from "@/lib/do-luong";
 import { CAC_BUOC, LOI_KHUNG, NGUONG, TEN_BUOC, chonMat, danhGia, gocMat, matDauDoQuayHan, sangVaNet, sangXam, theoKhungHien, tienDo, type Buoc, type GocMat, type LoiKhung } from "@/lib/quet-mat";
 import type { BoDoVideo } from "@/lib/quet-mat-bo-do";
 import { cn } from "@/lib/utils";
+import { useChuNhanTuong } from "./chu-nhan-tuong";
 
 export type KetQuaQuet = Partial<Record<Buoc, File>>;
 type TrangThai = "mo_camera" | "cho_bo_do" | "dang_quet" | "tay" | "loi";
 
-const HUONG_DAN: Record<Buoc, string> = {
-  thang: "Nhìn thẳng vào máy, giữ yên",
-  trai: "Quay đầu từ từ sang TRÁI, tới khi thấy rõ sống mũi và cằm",
-  phai: "Quay đầu từ từ sang PHẢI, tới khi thấy rõ sống mũi và cằm",
-};
+// EN-ALL GĐ 8: chữ theo ngôn ngữ ở lib/chu/nhan-tuong.ts (khoá `q.*`; bản Việt = đúng chữ cũ, gồm TEN_BUOC / LOI_KHUNG của
+// lib/quet-mat — test lib/quet-mat vẫn đọc hai bảng đó).
 const SO_VACH = 60;
 
 function loiCamera(e: unknown): string {
   const ten = e instanceof DOMException ? e.name : "";
-  if (ten === "NotAllowedError" || ten === "SecurityError") return "Bạn chưa cho phép dùng camera. Bấm biểu tượng ổ khoá cạnh địa chỉ trang để cho phép, hoặc dùng “Chọn ảnh”.";
-  if (ten === "NotFoundError" || ten === "OverconstrainedError") return "Không tìm thấy camera trên máy này — dùng “Chọn ảnh”.";
-  if (ten === "NotReadableError") return "Camera đang bị ứng dụng khác dùng — đóng ứng dụng đó rồi thử lại.";
-  return "Chưa mở được camera trên trình duyệt này — dùng “Chọn ảnh”.";
+  if (ten === "NotAllowedError" || ten === "SecurityError") return "q.loi_quyen";
+  if (ten === "NotFoundError" || ten === "OverconstrainedError") return "q.loi_khong_co";
+  if (ten === "NotReadableError") return "q.loi_ban";
+  return "q.loi_chung";
 }
 
 /** Vẽ khung hình camera (KHÔNG lật gương — ảnh đúng như người khác nhìn) ra tệp JPEG, cạnh dài ≤ 1600 px. */
@@ -44,6 +42,7 @@ const raTep = (c: HTMLCanvasElement, buoc: Buoc) => new Promise<File | null>((ok
   c.toBlob((b) => ok(b ? new File([b], `quet-${buoc}.jpg`, { type: "image/jpeg" }) : null), "image/jpeg", 0.92));
 
 export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void; onDong: () => void }) {
+  const { t: tc, en } = useChuNhanTuong();
   const video = useRef<HTMLVideoElement>(null);
   const luong = useRef<MediaStream | null>(null);
   const boDo = useRef<BoDoVideo | null>(null);
@@ -70,7 +69,7 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
     let huy = false;
     (async () => {
       setTrangThai("mo_camera"); setLoi(null);
-      if (!navigator.mediaDevices?.getUserMedia) { setTrangThai("loi"); setLoi("Trình duyệt này không mở được camera trong trang — dùng “Chọn ảnh”."); return; }
+      if (!navigator.mediaDevices?.getUserMedia) { setTrangThai("loi"); setLoi(tc("q.loi_trinh_duyet")); return; }
       try {
         tatCamera();
         const s = await navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: mat, width: { ideal: 1280 }, height: { ideal: 1280 } } });
@@ -82,12 +81,12 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
         setTrangThai(boDo.current ? "dang_quet" : "cho_bo_do");
       } catch (e) {
         if (huy) return;
-        setTrangThai("loi"); setLoi(loiCamera(e));
+        setTrangThai("loi"); setLoi(tc(loiCamera(e)));
         ghi("chart_interacted", { mo_dun: "nhantuong", kind: "quet_loi", ly_do: e instanceof DOMException ? e.name : "khac" });
       }
     })();
     return () => { huy = true; };
-  }, [mat]);
+  }, [mat, tc]);
   useEffect(() => () => { tatCamera(); boDo.current?.close(); boDo.current = null; }, []);
 
   // ----- bộ đo (nạp một lần) -----
@@ -213,7 +212,7 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
   const muiTenTrai = (buoc === "trai") === guong;     // camera trước lật gương: người quay trái → mặt trên màn hình quay sang trái
   const dangLam = buocIdx < CAC_BUOC.length;
   const loiNhac = !nhac ? null
-    : nhac === "quay_them" && buoc !== "thang" ? `Quay thêm sang ${buoc === "trai" ? "trái" : "phải"} chút nữa` : LOI_KHUNG[nhac];
+    : nhac === "quay_them" && buoc !== "thang" ? tc("q.quay_them", { ben: tc(buoc === "trai" ? "q.trai" : "q.phai") }) : en ? tc(`q.k_${nhac}`) : LOI_KHUNG[nhac];
   const xanh = td >= 1 && !loiNhac;
 
   return (
@@ -226,21 +225,21 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
       {/* đầu: một hàng tiêu đề + trạng thái + đóng; dưới là MỘT dòng hướng dẫn — chừa tối đa chỗ cho khung mặt */}
       <div className="relative z-10 bg-gradient-to-b from-black/80 via-black/40 to-transparent px-4 pb-6 pt-[max(0.75rem,env(safe-area-inset-top))]">
         <div className="flex items-center gap-2">
-          <p id="quet-tieu-de" className="shrink-0 text-base font-semibold">Quét khuôn mặt</p>
+          <p id="quet-tieu-de" className="shrink-0 text-base font-semibold">{tc("q.tieu_de")}</p>
           <p className="inline-flex min-w-0 items-center gap-1.5 truncate rounded-full bg-white/15 px-2.5 py-0.5 text-xs" data-testid="quet-trang-thai" aria-live="polite">
-            {trangThai === "mo_camera" ? <><Loader2 className="size-3 shrink-0 animate-spin" aria-hidden /> Đang mở camera…</>
-              : trangThai === "cho_bo_do" ? <><Loader2 className="size-3 shrink-0 animate-spin" aria-hidden /> Đang chuẩn bị…</>
-              : trangThai === "tay" ? "Bấm nút chụp khi đúng góc"
-              : trangThai === "loi" ? "Chưa mở được camera"
-              : dem ? <><span className="size-1.5 shrink-0 rounded-full bg-emerald-400" /> Giữ yên — sắp chụp</>
-              : <><span className={cn("size-1.5 shrink-0 rounded-full", loiNhac ? "bg-amber-300" : "bg-emerald-400")} /> {loiNhac ? "Đang canh góc" : "Đã thấy khuôn mặt"}</>}
+            {trangThai === "mo_camera" ? <><Loader2 className="size-3 shrink-0 animate-spin" aria-hidden /> {tc("q.mo_camera")}</>
+              : trangThai === "cho_bo_do" ? <><Loader2 className="size-3 shrink-0 animate-spin" aria-hidden /> {tc("q.chuan_bi")}</>
+              : trangThai === "tay" ? tc("q.bam_chup")
+              : trangThai === "loi" ? tc("q.chua_mo")
+              : dem ? <><span className="size-1.5 shrink-0 rounded-full bg-emerald-400" /> {tc("q.giu_yen")}</>
+              : <><span className={cn("size-1.5 shrink-0 rounded-full", loiNhac ? "bg-amber-300" : "bg-emerald-400")} /> {loiNhac ? tc("q.canh_goc") : tc("q.da_thay")}</>}
           </p>
-          <button ref={dongRef} type="button" onClick={onDong} aria-label="Đóng quét khuôn mặt" data-testid="quet-dong"
+          <button ref={dongRef} type="button" onClick={onDong} aria-label={tc("q.dong")} data-testid="quet-dong"
             className="ml-auto grid size-10 shrink-0 place-items-center rounded-full bg-white/15 hover:bg-white/25"><X className="size-5" aria-hidden /></button>
         </div>
         {dangLam && trangThai !== "loi" && (
           <p className="mt-3 text-center text-[15px] leading-snug" aria-live="polite" data-testid="quet-huong-dan">
-            <b className={cn(loiNhac && trangThai === "dang_quet" ? "text-amber-200" : "text-white")}>{trangThai === "dang_quet" && loiNhac ? loiNhac : HUONG_DAN[buoc]}</b>
+            <b className={cn(loiNhac && trangThai === "dang_quet" ? "text-amber-200" : "text-white")}>{trangThai === "dang_quet" && loiNhac ? loiNhac : tc(`q.hd_${buoc}`)}</b>
           </p>
         )}
       </div>
@@ -250,7 +249,7 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
         {trangThai === "loi" ? (
           <div className="mx-6 max-w-sm rounded-2xl bg-white/10 p-5 text-center text-sm" data-testid="quet-loi">
             <p>{loi}</p>
-            <button type="button" onClick={onDong} className="mt-4 rounded-full bg-white px-4 py-2 text-sm font-medium text-black">Quay lại chọn ảnh</button>
+            <button type="button" onClick={onDong} className="mt-4 rounded-full bg-white px-4 py-2 text-sm font-medium text-black">{tc("q.quay_lai")}</button>
           </div>
         ) : (
           <div className="relative aspect-[3/4] w-[min(86vw,58vh)]" data-testid="quet-khung">
@@ -279,31 +278,31 @@ export function QuetBaGoc({ onXong, onDong }: { onXong: (kq: KetQuaQuet) => void
 
       {/* chân: hàng 3 bước (đủ rộng, không xuống dòng) → hàng nút: đổi camera · chụp · bỏ qua */}
       <div className="relative z-10 bg-gradient-to-t from-black/85 via-black/50 to-transparent px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-6">
-        <ol className="mx-auto grid max-w-md grid-cols-3 gap-1.5" aria-label="Các góc cần quét">
+        <ol className="mx-auto grid max-w-md grid-cols-3 gap-1.5" aria-label={tc("q.cac_goc")}>
           {CAC_BUOC.map((b, i) => (
             <li key={b} aria-current={i === buocIdx ? "step" : undefined} data-testid={`quet-buoc-${b}`} data-xong={kq[b] ? "1" : "0"}
               className={cn("relative flex h-9 items-center justify-center gap-1 overflow-hidden whitespace-nowrap rounded-full px-2 text-xs font-medium",
                 i === buocIdx ? "bg-white text-black" : kq[b] ? "bg-emerald-500/35 text-white" : "bg-white/15 text-white/75")}>
               {anhNho[b] && <img src={anhNho[b]} alt="" className="absolute inset-0 size-full object-cover opacity-30" style={guong ? { transform: "scaleX(-1)" } : undefined} />}
               {kq[b] && <Check className="relative size-3.5 shrink-0" aria-hidden />}
-              <span className="relative">{TEN_BUOC[b]}</span>
+              <span className="relative">{en ? tc(`q.buoc_${b}`) : TEN_BUOC[b]}</span>
             </li>
           ))}
         </ol>
         <div className="mx-auto mt-3 grid max-w-md grid-cols-[1fr_auto_1fr] items-center">
-          <button type="button" onClick={() => setMat((m) => (m === "user" ? "environment" : "user"))} aria-label="Đổi camera trước / sau"
+          <button type="button" onClick={() => setMat((m) => (m === "user" ? "environment" : "user"))} aria-label={tc("q.doi_camera")}
             className="grid size-11 place-items-center justify-self-start rounded-full bg-white/15 hover:bg-white/25 disabled:opacity-40" disabled={trangThai === "loi"}><RefreshCcw className="size-5" aria-hidden /></button>
-          <button type="button" onClick={chupTay} aria-label={`Chụp ${TEN_BUOC[buoc].toLowerCase()} ngay`} data-testid="quet-chup"
+          <button type="button" onClick={chupTay} aria-label={en ? tc("q.chup_ngay", { buoc: tc(`q.buoc_${buoc}`).toLowerCase() }) : `Chụp ${TEN_BUOC[buoc].toLowerCase()} ngay`} data-testid="quet-chup"
             disabled={!dangLam || trangThai === "loi" || trangThai === "mo_camera"}
             className="grid size-[4.25rem] place-items-center rounded-full border-4 border-white/60 bg-white text-black disabled:opacity-40"><Camera className="size-7" aria-hidden /></button>
           {dangLam && buoc !== "thang" && trangThai !== "loi" ? (
-            <button type="button" onClick={boQua} data-testid="quet-bo-qua" aria-label="Bỏ qua góc này (ảnh nghiêng không bắt buộc)"
+            <button type="button" onClick={boQua} data-testid="quet-bo-qua" aria-label={tc("q.bo_qua_aria")}
               className="flex items-center gap-1 justify-self-end rounded-full bg-white/15 px-3 py-2 text-xs hover:bg-white/25">
-              <SkipForward className="size-3.5" aria-hidden /> Bỏ qua
+              <SkipForward className="size-3.5" aria-hidden /> {tc("q.bo_qua")}
             </button>
           ) : <span />}
         </div>
-        <p className="mt-2 text-center text-[10px] text-white/55">Camera chỉ chạy trên máy bạn — không ghi hình, không gửi ảnh đi.</p>
+        <p className="mt-2 text-center text-[10px] text-white/55">{tc("q.chan")}</p>
       </div>
     </div>
   );

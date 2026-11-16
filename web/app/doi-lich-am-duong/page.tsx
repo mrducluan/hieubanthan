@@ -13,15 +13,40 @@ import { duongLichAm } from "@/lib/lich-am";
 import { ND_DOI_LICH } from "./noi-dung";
 import { CHU_DOI_LICH } from "@/lib/chu/cong-cu";
 import { taoChu } from "@/lib/chu-trang";
+import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
+import { metaCongCuEn } from "@/lib/en/seo";
+import { chuLichMayChu, voiHreflang } from "@/lib/en/lich";
 
 export async function generateMetadata(): Promise<Metadata> {
+  // EN-ALL GĐ 8: /en/lunar-converter là rewrite của trang này.
+  if ((await ngonNguMayChu()).ngonNgu === "en") return metaCongCuEn(ND_DOI_LICH.duong);
   const tieuDe = "Đổi lịch âm dương: ngày âm hôm nay, can chi";
-  return apDungSeo(metaTrang({ tieuDe, moTa: ND_DOI_LICH.moTa, duong: ND_DOI_LICH.duong, anh: anhBai({ tieuDe: "Đổi lịch âm dương", mang: "lich" }) }),
-    await layNoiDungTrang(ND_DOI_LICH.duong));
+  return voiHreflang(apDungSeo(metaTrang({ tieuDe, moTa: ND_DOI_LICH.moTa, duong: ND_DOI_LICH.duong, anh: anhBai({ tieuDe: "Đổi lịch âm dương", mang: "lich" }) }),
+    await layNoiDungTrang(ND_DOI_LICH.duong)), ND_DOI_LICH.duong, "/en/lunar-converter");
 }
 
 export default async function Page() {
   const homNay = homNayVN(), nam = Number(homNay.slice(0, 4));
+  const l = await chuLichMayChu();
+  if (l.en) {
+    const ce = taoChu(CHU_DOI_LICH, null, "en");
+    return (
+      <TrangCongCu duong={ND_DOI_LICH.duong}>
+        <div className="mx-auto max-w-3xl">
+          <TieuDeTrang nho={ce("dau.nhan_tren")} lon={l.c("dl.lon")} mo_ta={l.c("dl.mo_ta")} />
+          <DoiLich homNay={homNay} />
+          <section aria-labelledby="lich-nam" className="mt-8">
+            <h2 id="lich-nam" className="text-xl">{ce("nam.tieu_de")}</h2>
+            <ul className="mt-2 flex flex-wrap gap-1.5">
+              {Array.from({ length: 7 }, (_, i) => nam - 2 + i).map((n) => (
+                <li key={n}><Link href={duongLichAm(n, true)} className="vung-cham inline-flex rounded-lg border border-line/70 px-2.5 py-1 text-sm hover:border-gold/50">{l.c("dl.lich_am", { nam: String(n) })}</Link></li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </TrangCongCu>
+    );
+  }
   const [nd, namAm] = await Promise.all([layNoiDungTrang(ND_DOI_LICH.duong), namAmHienTai()]);
   const c = taoChu(CHU_DOI_LICH, nd.chu);
   return (

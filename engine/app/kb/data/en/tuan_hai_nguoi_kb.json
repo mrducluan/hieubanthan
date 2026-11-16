@@ -31,6 +31,7 @@
   },
   "tom_tat": {
    "co_dep": "Between now and Sunday there are {so} days that are both good by the almanac and free of conflict with your zodiac sign{xung}.",
+   "co_dep_mot": "Between now and Sunday there is one day that is both good by the almanac and free of conflict with your zodiac sign{xung}.",
    "khong_dep": "Between now and Sunday there is no day that is both good by the almanac and free of conflict with your zodiac sign{xung} — a week for familiar tasks.",
    "xung": ", plus one day that clashes with your sign"
   },

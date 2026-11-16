@@ -113,15 +113,15 @@ export const CHU_TU_VI = gopBang(mangHuyenHoc(true, "Tử vi 12 cung · Âm lị
 export const CHU_BAT_TU = gopBang(mangHuyenHoc(true, "Bát tự tứ trụ · Ngũ hành", "BaZi · Four Pillars · Five elements"), moiLap(MOI_BAT_TU));
 export const CHU_PHONG_THUY = mangHuyenHoc(true, "Hướng nhà · bố trí · Bát trạch", "Home direction · layout · Eight Mansions");
 export const CHU_KINH_DICH = mangHuyenHoc(false, "Gieo quẻ · 64 quẻ · lời hào", "I Ching · 64 hexagrams · line texts");
-export const CHU_NHAN_TUONG = gopBang(mangHuyenHoc(true, "Tự soi gương · Tam đình · Ngũ quan"), {
-  "khao_sat.nho": { nhom: "Khảo sát", nhan: "Mục khảo sát — dòng nhỏ", mac_dinh: "Soi gương sáu bước", toi_da: 60 },
-  "khao_sat.lon": { nhom: "Khảo sát", nhan: "Mục khảo sát — tiêu đề", mac_dinh: "Bạn thấy gì trong gương?", toi_da: 120 },
-  "ban_do.nho": { nhom: "Bản đồ mặt", nhan: "Mục bản đồ — dòng nhỏ", mac_dinh: "Bản đồ gương mặt", toi_da: 60 },
-  "ban_do.lon": { nhom: "Bản đồ mặt", nhan: "Mục bản đồ — tiêu đề", mac_dinh: "Mỗi vùng mặt nói về một mảng đời", toi_da: 120 },
-  "bai_doc.nho": { nhom: "Bài đọc", nhan: "Mục bài đọc — dòng nhỏ", mac_dinh: "Bài đọc tám chương", toi_da: 60 },
-  "bai_doc.lon": { nhom: "Bài đọc", nhan: "Mục bài đọc — tiêu đề", mac_dinh: "Gương mặt của bạn", toi_da: 120 },
-  "hoi.nho": { nhom: "Hỏi đáp", nhan: "Mục hỏi — dòng nhỏ", mac_dinh: "Hỏi đáp chuyên sâu", toi_da: 60 },
-  "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề", mac_dinh: "Hỏi về một vùng trên mặt bạn", toi_da: 120 },
+export const CHU_NHAN_TUONG = gopBang(mangHuyenHoc(true, "Tự soi gương · Tam đình · Ngũ quan", "Mirror survey · Three zones · Five features"), {
+  "khao_sat.nho": { nhom: "Khảo sát", nhan: "Mục khảo sát — dòng nhỏ", mac_dinh: "Soi gương sáu bước", en: "Six steps at the mirror", toi_da: 60 },
+  "khao_sat.lon": { nhom: "Khảo sát", nhan: "Mục khảo sát — tiêu đề", mac_dinh: "Bạn thấy gì trong gương?", en: "What do you see in the mirror?", toi_da: 120 },
+  "ban_do.nho": { nhom: "Bản đồ mặt", nhan: "Mục bản đồ — dòng nhỏ", mac_dinh: "Bản đồ gương mặt", en: "Face map", toi_da: 60 },
+  "ban_do.lon": { nhom: "Bản đồ mặt", nhan: "Mục bản đồ — tiêu đề", mac_dinh: "Mỗi vùng mặt nói về một mảng đời", en: "Each area of the face speaks to one part of life", toi_da: 120 },
+  "bai_doc.nho": { nhom: "Bài đọc", nhan: "Mục bài đọc — dòng nhỏ", mac_dinh: "Bài đọc tám chương", en: "Your eight-chapter reading", toi_da: 60 },
+  "bai_doc.lon": { nhom: "Bài đọc", nhan: "Mục bài đọc — tiêu đề", mac_dinh: "Gương mặt của bạn", en: "Your face", toi_da: 120 },
+  "hoi.nho": { nhom: "Hỏi đáp", nhan: "Mục hỏi — dòng nhỏ", mac_dinh: "Hỏi đáp chuyên sâu", en: "Ask in depth", toi_da: 60 },
+  "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề", mac_dinh: "Hỏi về một vùng trên mặt bạn", en: "Ask about an area of your face", toi_da: 120 },
 });
 
 // TR-1: Tarot — năm bước (hỏi · xáo · rút · lật · đọc), lá của ngày, bài đọc 8 chương (mở bằng câu trả lời đúng câu hỏi — TR-2), hỏi đáp nghĩa lá.
@@ -158,49 +158,62 @@ export const CHU_HOP_DOI = gopBang(KHUNG, {
 });
 
 export const CHU_HOM_NAY = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Mỗi ngày một thẻ", toi_da: 60 },
-  "hoang_lich.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục hoàng lịch", mac_dinh: "Hoàng lịch hôm nay", toi_da: 80 },
-  "y_dinh.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục ý định", mac_dinh: "Hôm nay bạn định làm gì?", toi_da: 80 },
-  "noi_bat.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục câu hỏi nổi bật", mac_dinh: "Câu hỏi nổi bật hôm nay", toi_da: 80 },
-  "hom_qua.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục hỏi lại hôm qua", mac_dinh: "Hôm qua của bạn", toi_da: 80 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Mỗi ngày một thẻ", en: "A new card every day", toi_da: 60 },
+  "hoang_lich.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục hoàng lịch", mac_dinh: "Hoàng lịch hôm nay", en: "Today in the Chinese almanac", toi_da: 80 },
+  "y_dinh.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục ý định", mac_dinh: "Hôm nay bạn định làm gì?", en: "What are you planning today?", toi_da: 80 },
+  "noi_bat.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục câu hỏi nổi bật", mac_dinh: "Câu hỏi nổi bật hôm nay", en: "Questions for today", toi_da: 80 },
+  "hom_qua.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục hỏi lại hôm qua", mac_dinh: "Hôm qua của bạn", en: "Your yesterday", toi_da: 80 },
   "hom_qua.cau": { nhom: "Các mục", nhan: "Câu hỏi lại hôm qua ({ten} = việc, {nhip} = nhịp đã gợi ý)",
-    mac_dinh: "Hôm qua gợi ý cho việc {ten}: {nhip}. Với bạn có đúng vậy không?", toi_da: 160 },
-  "hom_qua.cam_on": { nhom: "Các mục", nhan: "Lời cảm ơn sau khi trả lời", mac_dinh: "Cảm ơn bạn — câu trả lời giúp gợi ý những ngày sau sát hơn với bạn.", toi_da: 160 },
+    mac_dinh: "Hôm qua gợi ý cho việc {ten}: {nhip}. Với bạn có đúng vậy không?", en: "Yesterday's suggestion for {ten}: {nhip}. Did that ring true for you?", toi_da: 160 },
+  "hom_qua.cam_on": { nhom: "Các mục", nhan: "Lời cảm ơn sau khi trả lời", mac_dinh: "Cảm ơn bạn — câu trả lời giúp gợi ý những ngày sau sát hơn với bạn.", en: "Thank you — your answer helps make the next days' suggestions fit you better.", toi_da: 160 },
   // SAO-HH
-  "ba_la.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề khối ba lá của ngày", mac_dinh: "Ba lá của ngày", toi_da: 80 },
-  "la_bai.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề khối lá bài đầu ngày", mac_dinh: "Lá bài đầu ngày", toi_da: 80 },
-  "hen.tieu_de": { nhom: "Các mục", nhan: "Nhãn “Hẹn với chính mình” (cạnh chuỗi ngày)", mac_dinh: "Hẹn với chính mình", toi_da: 60 },
+  "ba_la.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề khối ba lá của ngày", mac_dinh: "Ba lá của ngày", en: "Three cards for today", toi_da: 80 },
+  "la_bai.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề khối lá bài đầu ngày", mac_dinh: "Lá bài đầu ngày", en: "Card of the morning", toi_da: 80 },
+  "hen.tieu_de": { nhom: "Các mục", nhan: "Nhãn “Hẹn với chính mình” (cạnh chuỗi ngày)", mac_dinh: "Hẹn với chính mình", en: "A promise to yourself", toi_da: 60 },
 });
 
 export const CHU_XEM_NGAY = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Hoàng lịch mỗi ngày", toi_da: 60 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Hoàng lịch mỗi ngày", en: "The Chinese almanac, every day", toi_da: 60 },
 });
 export const CHU_LAM_NHA = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tuổi dân gian", toi_da: 60 },
-  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục tra theo năm sinh", mac_dinh: "Tra nhanh theo năm sinh", toi_da: 80 },
-  "theo_nam.dong": { nhom: "Tra nhanh", nhan: "Dòng trước danh sách năm ({nam} = năm làm nhà)", mac_dinh: "Làm nhà năm {nam}:", toi_da: 60 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tuổi dân gian", en: "Vietnamese folk custom", toi_da: 60 },
+  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục tra theo năm sinh", mac_dinh: "Tra nhanh theo năm sinh", en: "Quick look-up by birth year", toi_da: 80 },
+  "theo_nam.dong": { nhom: "Tra nhanh", nhan: "Dòng trước danh sách năm ({nam} = năm làm nhà)", mac_dinh: "Làm nhà năm {nam}:", en: "Building in {nam}:", toi_da: 60 },
 });
 export const CHU_XONG_DAT = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề ({tet} = năm Tết)", mac_dinh: "Tết {tet}", toi_da: 60 },
-  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục tra theo năm sinh ({tet} = năm Tết)", mac_dinh: "Tuổi xông đất Tết {tet} theo năm sinh gia chủ", toi_da: 100 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề ({tet} = năm Tết)", mac_dinh: "Tết {tet}", en: "Lunar New Year {tet}", toi_da: 60 },
+  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục tra theo năm sinh ({tet} = năm Tết)", mac_dinh: "Tuổi xông đất Tết {tet} theo năm sinh gia chủ", en: "First-footers for Lunar New Year {tet} by the host's birth year", toi_da: 100 },
 });
 // MT-ĐS B3 — sao hạn theo tuổi.
 export const CHU_SAO_HAN = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tục lệ theo tuổi", toi_da: 60 },
-  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục bảng theo năm", mac_dinh: "Bảng sao hạn theo năm sinh", toi_da: 100 },
-  "theo_nam.dong": { nhom: "Tra nhanh", nhan: "Chữ trước link bảng ({nam} = năm)", mac_dinh: "Năm {nam}:", toi_da: 60 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tục lệ theo tuổi", en: "A custom by age", toi_da: 60 },
+  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục bảng theo năm", mac_dinh: "Bảng sao hạn theo năm sinh", en: "Yearly star tables by year", toi_da: 100 },
+  "theo_nam.dong": { nhom: "Tra nhanh", nhan: "Chữ trước link bảng ({nam} = năm)", mac_dinh: "Năm {nam}:", en: "{nam}:", toi_da: 60 },
 });
 // SEO-L5 — công cụ đổi lịch âm dương.
 export const CHU_DOI_LICH = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Âm lịch Việt Nam", toi_da: 60 },
-  "nam.tieu_de": { nhom: "Lịch theo năm", nhan: "Tiêu đề mục lịch âm từng năm", mac_dinh: "Lịch âm theo năm", toi_da: 80 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Âm lịch Việt Nam", en: "Vietnamese lunar calendar", toi_da: 60 },
+  "nam.tieu_de": { nhom: "Lịch theo năm", nhan: "Tiêu đề mục lịch âm từng năm", mac_dinh: "Lịch âm theo năm", en: "Lunar calendar by year", toi_da: 80 },
 });
 export const CHU_HAN_NAM = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Phong thuỷ theo năm", toi_da: 60 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Phong thuỷ theo năm", en: "Feng shui by year", toi_da: 60 },
 });
 // NAM-2 — "Thời gian tới của bạn".
 // CD-1: chữ khối "Mời lập lá số" của /chan-dung (cần giờ + giới tính + nơi sinh như Tử vi / Bát tự).
 const MOI_CHAN_DUNG: MoiLap = {
+  en: {
+    nhan_tren: "About a minute",
+    tieu_de: "Set up your charts to see whether *three views* agree about you",
+    tieu_de_thieu: "{so} more detail(s) to combine the three views: {thieu}",
+    cau_phu: "Zi Wei Dou Shu and BaZi need your birth time, sex and place of birth. The face reading survey is the third view — the portrait works with or without it.",
+    nut: "See my combined portrait",
+    tran_an: "Don't remember your birth time? Choose “I do not know” under “This time is” — the page marks which parts read from a provisional time.",
+    nhan_tieu_de: "What you get",
+    ghi_chu_nhan: "The matrix and the full portrait are free.",
+    nhan: ["A matrix of *area of life × view*: work, money, love, family, health, this year", "Which areas the three views *agree* on, which they see differently and why", "The original box from each system, so you can mark what is true for you", "The element your charts need next to your face shape, and things to do gathered from all three"],
+    minh_hoa: "Illustration. Your real matrix appears as soon as you enter your details.",
+    chua_san_sang: "Not ready to enter anything? Look at each system first on its own page.",
+  },
   nhan_tren: "Khoảng một phút",
   tieu_de: "Lập lá số để thấy *ba cách nhìn* có cùng thấy một điều về bạn",
   tieu_de_thieu: "Còn {so} thông tin nữa là ghép được ba cách nhìn: {thieu}",
@@ -213,8 +226,8 @@ const MOI_CHAN_DUNG: MoiLap = {
   minh_hoa: "Minh hoạ. Ma trận thật hiện ngay sau khi bạn nhập.",
   chua_san_sang: "Chưa muốn nhập? Xem từng môn trước ở trang Tử vi, Bát tự, Nhân tướng học.",
 };
-export const CHU_CHAN_DUNG = gopBang(mangHuyenHoc(false, "Tử vi · Bát tự · Nhân tướng"), moiLap(MOI_CHAN_DUNG), {});
+export const CHU_CHAN_DUNG = gopBang(mangHuyenHoc(false, "Tử vi · Bát tự · Nhân tướng", "Zi Wei · BaZi · Face reading"), moiLap(MOI_CHAN_DUNG), {});
 
 export const CHU_THOI_GIAN_TOI = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Thần số · Tử vi · Bát tự · tập quán", toi_da: 60 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Thần số · Tử vi · Bát tự · tập quán", en: "Numerology · Zi Wei · BaZi · customs", toi_da: 60 },
 });

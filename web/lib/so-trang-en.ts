@@ -133,6 +133,13 @@ export const CUM_EN: Readonly<Record<string, CumEn>> = {
     mo_ta: "The home signs feng shui often mentions — a mirror facing the bed, a beam over the bed, doors in a line — what the old books say, and fixes that cost nothing.",
     tra_loi: "These are {so} signs inside and around a home that feng shui often talks about: a door facing a door, a stove facing the bathroom, stairs in the middle of the house, a bed under a beam, and more. Each page says what the sign is, what the old books and folk tradition say, how it looks through everyday life (light, air, noise, safety), and what you can do about it, starting with fixes that cost nothing.",
   },
+  // EN-ALL GĐ 8 — Nhân tướng học: cụm bộ vị gương mặt.
+  "/nhan-tuong/bo-vi": {
+    ten: "Areas of the face", h1: "The areas of the face in Chinese face reading",
+    tieu_de_seo: "Face reading areas: forehead, Yin Tang, nose, chin · Hieuban",
+    mo_ta: "The 25 areas of the face in classic Chinese face reading, from forehead to chin: where each sits, the ages it is read for, and what to look for.",
+    tra_loi: "Classic Chinese face reading divides the face into three zones (forehead, nose, chin), five features (brows, eyes, ears, nose, mouth) and named areas such as Yin Tang between the brows or Shan Gen at the root of the nose. Each area is linked to one part of life and to the ages it is read for. This section has {so} pages, one per area: where it is, what the old books say, how to look at it in a mirror, and a question to reflect on.",
+  },
 
 };
 
@@ -354,6 +361,314 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
     kien_thuc: {
       tieu_de: "Learn the I Ching",
       cum: Object.fromEntries(["/kinh-dich/que"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
+    },
+  },
+  // EN-ALL GĐ 8 — tập quán Việt theo tuổi + hướng xấu năm (rewrite của trang Việt; trang theo năm / tuổi dựng chữ ở lib/chu/nam-tuoi.ts).
+  "/xem-sao-han": {
+    ten: "Yearly star by age",
+    tieu_de_seo: "Vietnamese yearly star (sao han) by age and sex · Hieuban",
+    mo_ta_seo: "Which of the nine yearly stars the Vietnamese custom gives your age this year, for men and women, read in plain words with small things worth doing. No rituals.",
+    tra_loi_nhanh: {
+      hoi: "What is a yearly star (sao han)?",
+      dap: "A Vietnamese folk custom: nine stars rotate by lunar age from age 10, with a different order for men and women, so everyone of the same age and sex shares the same star. Enter your birth year and sex to see this year's star in plain words, with practical things to do. It is a custom to consult, not a prediction, and we teach no rituals.",
+      lien_ket: [{ href: "/en/vietnamese-customs/yearly-star/{nam}", ten: "Yearly star table {nam}" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the yearly star tool",
+      doan: [
+        "Yearly stars (sao han) are a Vietnamese custom set by lunar age and sex: the nine stars of the Cuu Dieu cycle rotate from age 10, and everyone of the same age and sex shares the same star. The tool works out the star from the almanac table, then reads it in everyday words: what to keep an eye on this year and small things worth doing.",
+        "It is a custom, not something worked out from your own date and time of birth. A Zi Wei Dou Shu or BaZi chart, built from your own birth data, is closer to you; when the two say different things, trust the reading from your own chart.",
+        "We do not teach rituals, recommend practitioners or sell charms. If your family keeps a New Year custom, keep it as a time to gather, and never pay anyone out of fear.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "How is the yearly star worked out?", dap: "Lunar age = the lunar year being read − your lunar birth year + 1. Men from age 10 go La Hou, Tu Xiu, Shui Yao, Tai Bai, Tai Yang, Yun Han, Ji Du, Tai Yin, Mu De and repeat; women start at Ji Du. Under 10 there is no star." },
+        { hoi: "Should I worry about La Hou or Ji Du?", dap: "They are the two stars people mention most. In everyday terms, La Hou is a year to talk less, listen more and keep papers in order; Ji Du is a year to worry less and look after family. No star decides in advance what will happen." },
+        { hoi: "Do I need a ritual to ward off a bad star?", dap: "We do not teach rituals. The useful thing is real action during the year: look after your health, your money and your word." },
+        { hoi: "Yearly star or personal chart: which is more accurate?", dap: "The yearly star is the same for everyone of the same age and sex; a chart built from your own date and time of birth is closer to you. We give the custom first, then the reading from your chart." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+        { href: "/en/vietnamese-customs/house-building-age", ten: "House-building and wedding age" },
+        { href: "/en/vietnamese-customs/first-footer", ten: "First-footer for Lunar New Year" },
+        { href: "/en/feng-shui/annual-afflictions", ten: "Annual afflictions" },
+      ] },
+    },
+  },
+  "/xem-tuoi-lam-nha": {
+    ten: "House-building and wedding age",
+    tieu_de_seo: "Vietnamese house-building and wedding age: Kim Lau, Tam Tai · Hieuban",
+    mo_ta_seo: "Does your lunar age in the planned year fall on Kim Lau, Hoang Oc or Tam Tai under Vietnamese custom? See the nearest clear years and directions to avoid.",
+    tra_loi_nhanh: {
+      hoi: "How does Vietnamese custom choose a year to build a house?",
+      dap: "It checks three things by lunar age: Kim Lau (lunar age divided by 9 leaves 1, 3, 6 or 8), Hoang Oc (a six-step count by decade) and Tam Tai (three years in a row by your sign's triad). Enter the birth year of the person named on the build and the planned year to see whether it is clear and which nearby years are.",
+      lien_ket: [{ href: "/en/vietnamese-customs/house-building-age/{nam}", ten: "House-building ages {nam}" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the house-building age tool",
+      doan: [
+        "Vietnamese folk custom checks three things before building a house or holding a wedding: Kim Lau (lunar age divided by 9 leaves 1, 3, 6 or 8), Hoang Oc (counting six steps by decade: Nhat Cat, Nhi Nghi, Tam Dia Sat, Tu Tan Tai, Ngu Tho Tu, Luc Hoang Oc) and Tam Tai (three consecutive years set by your sign's triad).",
+        "Age here is lunar age on the Vietnamese lunar calendar: the planned year minus the lunar birth year, plus one. Anyone born before Lunar New Year belongs to the previous lunar year, so enter your full date of birth (or use the profile on this device) to be exact.",
+        "The tool also shows the directions tradition advises leaving undisturbed during the year (Grand Duke, Year Breaker, Three Killings, Five Yellow, Two Black) and suggests the nearest clear years. It is a custom to consult when planning, not a prediction.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "What is Kim Lau?", dap: "A lunar age that leaves 1, 3, 6 or 8 when divided by 9 (Kim Lau of self, spouse, children or livestock). Folk custom tends to avoid building a house or marrying in a Kim Lau year." },
+        { hoi: "How is Hoang Oc counted?", dap: "Over six steps: age 10 is Nhat Cat, 20 Nhi Nghi, 30 Tam Dia Sat, 40 Tu Tan Tai, 50 Ngu Tho Tu, 60 Luc Hoang Oc; the units carry on from the decade's step. Landing on Tam Dia Sat, Ngu Tho Tu or Luc Hoang Oc is a year folk custom tends to avoid." },
+        { hoi: "Which years are Tam Tai?", dap: "Monkey, Rat, Dragon: Tiger, Rabbit, Dragon years. Tiger, Horse, Dog: Monkey, Rooster, Dog years. Pig, Rabbit, Goat: Snake, Horse, Goat years. Snake, Rooster, Ox: Pig, Rat, Ox years." },
+        { hoi: "What if the year does not suit my age?", dap: "Many families pick another year, or ask a relative of a suitable age to stand in for the ground-breaking (borrowing an age). The decision should rest on your real circumstances." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/feng-shui/annual-afflictions", ten: "Annual afflictions" },
+        { href: "/en/vietnamese-customs/first-footer", ten: "First-footer for Lunar New Year" },
+        { href: "/en/vietnamese-customs/yearly-star", ten: "Yearly star by age" },
+        { href: "/en/year", ten: "Lunar year guide" },
+      ] },
+    },
+  },
+  "/tuoi-xong-dat": {
+    ten: "First-footer for Lunar New Year",
+    tieu_de_seo: "First-footer for Lunar New Year (xong dat) by the host's age · Hieuban",
+    mo_ta_seo: "Choose a first-footer for Vietnamese Lunar New Year who suits the host: allied signs and elements, signs to avoid, and the auspicious hours of the first day.",
+    tra_loi_nhanh: {
+      hoi: "What is first-footing (xong dat)?",
+      dap: "The first person to step into a home after the turn of the Lunar New Year. Vietnamese custom picks someone whose sign and element suit both the new year and the head of the household. Enter the host's birth year to see the best-suited ages, the ages best avoided and the good hours of the first day.",
+      lien_ket: [{ href: "/en/vietnamese-customs/first-footer/{nam}", ten: "First-footer table {nam}" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the first-footer tool",
+      doan: [
+        "The first-footer (xong dat, xong nha) is the first person to enter the home after New Year's Eve. Folk custom picks an age that suits the new year and the head of the household, to start the year on a good note.",
+        "The tool checks: earthly branches allied (triad or pair) with the year and with the host; a heavenly stem that combines with or nourishes the host's; and a Na Yin element that nourishes or matches the host's. It leaves out ages that clash with the year or the host, and ages in Tam Tai.",
+        "It also lists the auspicious hours and travel directions of the first day, on the Vietnamese almanac. Most important of all is a first-footer who is cheerful, well and close to the family; the age is only a reference.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Which ages suit first-footing?", dap: "Ages whose sign is a triad or paired ally of the new year and of the host, whose stem combines with or nourishes the host's, whose element nourishes or matches the host's, and who are not in Tam Tai." },
+        { hoi: "Which ages are best avoided?", dap: "Signs that clash with the year (for example Ox in a Goat year), signs that clash with the host, and signs in their three Tam Tai years." },
+        { hoi: "At what time should the first-footer arrive?", dap: "Usually during an auspicious hour of the first day by the almanac; the tool lists the six auspicious hours and the travel directions of that day." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/vietnamese-customs/house-building-age", ten: "House-building and wedding age" },
+        { href: "/en/vietnamese-customs/yearly-star", ten: "Yearly star by age" },
+        { href: "/en/feng-shui/annual-afflictions", ten: "Annual afflictions" },
+        { href: "/en/year", ten: "Lunar year guide" },
+      ] },
+    },
+  },
+  "/phong-thuy/huong-xau-nam": {
+    ten: "Annual afflictions",
+    tieu_de_seo: "Annual afflictions: Grand Duke, Three Killings, Five Yellow · Hieuban",
+    mo_ta_seo: "The sides feng shui tradition says to leave undisturbed this year: Grand Duke, Year Breaker, Three Killings, Five Yellow, Two Black, with the flying star grid.",
+    tra_loi_nhanh: {
+      hoi: "Which directions should be left undisturbed this year?",
+      dap: "Each year tradition marks a few sides of the home not to dig, demolish or renovate heavily: the Grand Duke (Tai Sui) at the year's branch, the Year Breaker opposite it, the Three Killings, and where the Five Yellow and Two Black stars fly. The feng shui year changes at the Start of Spring, around 4 February.",
+    },
+    gioi_thieu: {
+      tieu_de: "About the annual afflictions page",
+      doan: [
+        "The Grand Duke (Tai Sui) sits at the direction of the year's branch, and the Year Breaker opposite it. The Three Killings are the three mountains opposite the year's triad. The Five Yellow and Two Black are where stars 5 and 2 fly in the annual flying star grid (Xuan Kong).",
+        "The feng shui year changes at the Start of Spring (around 4 February), not on 1 January or Lunar New Year.",
+        "Tradition advises leaving these sides undisturbed: no ground-breaking, no knocking through, no major renovation. We do not recommend or sell remedies.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Where is the Five Yellow this year?", dap: "Look for the square with the number 5 in the nine-palace grid on the page. Star 5 moves to a different palace every year in Lo Shu order." },
+        { hoi: "What are the Three Killings?", dap: "The three mountains opposite the triad of the year's branch: for example, in a Horse year (Tiger, Horse, Dog) the Three Killings sit in the North (Hai, Zi, Chou)." },
+        { hoi: "Do I need to avoid the Grand Duke direction when building?", dap: "Tradition advises against breaking ground or digging large foundations on the Grand Duke and Year Breaker sides during the year; building facing another way goes on as normal." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/feng-shui", ten: "Feng shui home reading" },
+        { href: "/en/vietnamese-customs/house-building-age", ten: "House-building and wedding age" },
+        { href: "/en/year", ten: "Lunar year guide" },
+      ] },
+    },
+  },
+  // EN-ALL GĐ 8 — Nhân tướng học, Chân dung tổng hợp, Thời gian tới (rewrite của trang Việt, một cây component).
+  "/nhan-tuong": {
+    ten: "Face reading",
+    tieu_de_seo: "Free Chinese face reading: a guided look in the mirror · Hieuban",
+    mo_ta_seo: "Free Chinese face reading: answer a guided mirror survey or measure a photo that never leaves your device, and get an eight-chapter reading in plain English.",
+    tra_loi_nhanh: {
+      hoi: "How does this online face reading work?",
+      dap: "Look in a mirror and answer short questions in six steps — forehead, brows and eyes, nose, mouth and chin, ears, overall — or pick a straight-on photo and let your own device place landmarks on it (the photo is never uploaded). The page reads your answers through the three zones, five features and twelve palaces of classic face reading, in plain English. It only reads your own face.",
+      lien_ket: [{ href: "/en/face-reading/face-areas", ten: "The areas of the face" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the face reading",
+      doan: [
+        "Classic Chinese face reading looks at the face in three zones (forehead, middle face, lower face), five features and twelve named palaces, and links each area to one part of life. This page turns that into a guided look in the mirror: you choose what you see, area by area, and the reading puts it together in eight chapters — your face shape by the five elements, character, work and money, love and family, health habits, which area to watch this year, face and birth chart, and things to do.",
+        "You can also measure a straight-on photo of yourself. Your device finds about twenty landmarks in the browser and you check them; only those coordinates are sent for one calculation of the classic proportions, then discarded. The photo never leaves your device and is not stored. Things a photo cannot show — skin tone, lines, the look in your eyes — you answer in the survey.",
+        "The reading is cultural reference and self-reflection, not a judgement of anyone. There are no scores, it does not read other people, and it never suggests changing your face. Old books wrote for their own time; health notes are reminders to look after yourself, not a diagnosis.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Do I need a photo?", dap: "No. The six-step mirror survey is enough. A photo only helps you answer the questions about proportions faster, and it stays on your device." },
+        { hoi: "What happens to my photo?", dap: "Nothing leaves your device. Your browser finds landmarks on the photo and, only after you tick the agreement, sends their coordinates for one measurement that is not stored. You can withdraw the agreement at any time." },
+        { hoi: "Which tradition is used?", dap: "The survey and the reading follow the classic Chinese books on physiognomy — the three zones and five features, the twelve palaces, the hundred age positions and the five element face shapes — retold in plain English by our editorial team." },
+        { hoi: "Can it read someone else's face?", dap: "No. The page only reads the person using it, from what they see in their own mirror." },
+        { hoi: "Is it free?", dap: "Yes. The survey, the photo measurement and the eight-chapter reading are free in English. Your answers are saved only on your device." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/portrait", ten: "Your combined portrait" },
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+      ] },
+    },
+    kien_thuc: {
+      tieu_de: "Learn face reading",
+      cum: Object.fromEntries(["/nhan-tuong/bo-vi"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
+    },
+  },
+  "/chan-dung": {
+    ten: "Your combined portrait",
+    tieu_de_seo: "Zi Wei, BaZi and face reading side by side: your portrait · Hieuban",
+    mo_ta_seo: "Your Zi Wei Dou Shu chart, your BaZi chart and your own face, side by side for each area of life: where the three agree and where they differ. No scores.",
+    tra_loi_nhanh: {
+      hoi: "What is the combined portrait?",
+      dap: "It puts three ways of looking at you side by side, area by area — work, money, love, family, health and this year: your Zi Wei Dou Shu chart, your BaZi chart, and the face reading survey if you have done it. It shows where the three agree and where they see different sides, without adding them into one score.",
+      lien_ket: [{ href: "/en/face-reading", ten: "Face reading" }, { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the combined portrait",
+      doan: [
+        "Each system looks at you from a different side: Zi Wei Dou Shu looks at your circumstances (work, money, home, people), BaZi at your own energy (which elements are strong or thin), and face reading at what you see in yourself now. This page does not blend them into one number; it sets them side by side for each area of life and says clearly where they agree, where they differ, and why.",
+        "It needs your birth time, sex and place of birth for the two charts. The face reading survey adds a third view; without it, the page still reads the two charts. Each box in the reading is the original box from one system, so when you mark it as true for you, the vote goes back to that system.",
+        "The portrait is free in English. Your birth details are not stored on our side.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Does it add the three systems into a score?", dap: "No. Each area only shows the level each system gave in its own reading — Favourable, Balanced or Needs care — and then says whether they agree or see different sides. There is no total and no ranking." },
+        { hoi: "When they disagree, which one should I trust?", dap: "None of them is wrong; each shows one side. The page suggests using the most careful reading as your safety margin and the favourable one for plans you have prepared well. An area where several systems agree is more reliable than one only a single system mentions." },
+        { hoi: "What if I have not done the face reading survey?", dap: "You can still read the portrait with the two charts. The face reading column stays empty until you answer the mirror survey (about five minutes, no photo needed)." },
+        { hoi: "Is numerology part of it?", dap: "Not yet. Numerology works from the solar birth date and does not give a level for each area of life the way these three systems do, so it stays on its own page." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/face-reading", ten: "Face reading" },
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+        { href: "/en/year-ahead", ten: "Your year ahead" },
+      ] },
+    },
+  },
+  "/thoi-gian-toi": {
+    ten: "Your year ahead",
+    tieu_de_seo: "Your next 3 months, 12 months and year ahead, free · Hieuban",
+    mo_ta_seo: "Your next 3 months, 12 months and year ahead from your birth date: numerology months, Zi Wei and BaZi months, and Vietnamese age customs, in plain English.",
+    tra_loi_nhanh: {
+      hoi: "What does the year-ahead reading show?",
+      dap: "From your birth date it lays out the next three months, the next twelve months and the coming lunar year: your numerology Personal Months, the Zi Wei Dou Shu rhythm of each lunar month, the BaZi solar months, and the Vietnamese customs tied to your age. Months where several views agree come first. It is a rhythm to plan by, not a prediction.",
+      lien_ket: [{ href: "/en/numerology", ten: "Numerology from your name and birth date" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the year-ahead reading",
+      doan: [
+        "Want to know where to put your energy in the next three months, which of the next twelve months suit starting something new, and how the coming year opens? This page combines three views from your own birth date — numerology, Zi Wei Dou Shu and BaZi — with the Vietnamese customs tied to your age, and says it in plain words.",
+        "Your name and birth date are enough for Personal Months, the Personal Year and the age customs. Add your birth time, sex and place of birth to get the Zi Wei and BaZi rhythm of each month; months where both charts agree, whether to push ahead or to slow down, come first.",
+        "This is a suggested rhythm for planning your own time, not a forecast of events. The page does not offer rituals or sell objects, and your birth date is not stored on our side.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "How are the three views different?", dap: "Numerology counts Personal Months and Years from your solar birth day and month (the year starts on 1 January). Zi Wei Dou Shu reads each lunar month through the month's transformations on your chart. BaZi reads solar-term months, which change on the day each solar term begins, with the year starting at Li Chun. Because the calendars differ, the month boundaries do not line up exactly." },
+        { hoi: "When they disagree, which should I follow?", dap: "Start with the larger layers: the ten-year period, then the year, then the month. Months where both charts give the same level are listed first in the twelve-month chapter." },
+        { hoi: "When does the coming year start?", dap: "The lunar year starts at Lunar New Year (Vietnamese lunar calendar); the BaZi year starts at Li Chun (around 4 February); the numerology Personal Year starts on 1 January. Each part of the reading states which boundary it uses." },
+        { hoi: "Is it free?", dap: "Yes, the whole year-ahead reading is free in English." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/numerology", ten: "Numerology from your name and birth date" },
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+      ] },
+    },
+  },
+  // EN-ALL GĐ 8 — lịch & Hôm nay.
+  "/xem-ngay-tot": {
+    ten: "Auspicious dates",
+    tieu_de_seo: "Auspicious dates: is today a good day? Chinese almanac · Hieuban",
+    mo_ta_seo: "Today in the Chinese almanac: Yellow or Black Path day, auspicious hours, what the almanac lists as favourable or to avoid, and good days for your plans.",
+    tra_loi_nhanh: {
+      hoi: "How do I know if a date is auspicious?",
+      dap: "Look at three things in the traditional Chinese almanac: whether the day is a Yellow Path (auspicious) or Black Path day, its Day Officer, and the activities the almanac lists as favourable or to avoid. A date suits a plan when that activity is listed as favourable and nothing gets in the way. Add your date of birth to leave out days that clash with your birth year. The almanac is cultural reference, not a forecast.",
+      lien_ket: [{ href: "/en/lunar-calendar", ten: "Lunar calendar by year" }, { href: "/en/lunar-converter", ten: "Lunar–solar date converter" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the auspicious-dates tool",
+      doan: [
+        "Each day has one of twelve spirits on duty: six Yellow Path (auspicious) spirits — Azure Dragon, Bright Hall, Golden Coffer, Heavenly Virtue, Jade Hall and Life Governor — and six Black Path ones. The Day Officer (Establish, Remove, Full, Balance, Stable, Initiate, Destruction, Danger, Success, Receive, Open, Close) comes from the day's branch and the solar month.",
+        "The lists of favourable and avoid activities follow the Xieji Bianfang Shu, the Qing-dynasty date-selection manual most almanacs draw on. The page also notes the folk taboo days kept in Vietnam (Tam Nuong, Moon taboo days, Duong Cong days).",
+        "If your date of birth is saved on this device, the page shows whether a day clashes with, suits or is neutral to your birth year, and leaves clashing days out when you search. Your date of birth is used for the calculation only and not stored on our side.",
+        "The almanac is cultural knowledge to consult, not a prediction — important plans still rest on practical preparation.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "What is a Yellow Path day?", dap: "A day guarded by one of the six auspicious spirits: Azure Dragon, Bright Hall, Golden Coffer, Heavenly Virtue, Jade Hall or Life Governor. The other six days of the cycle are Black Path days." },
+        { hoi: "How are the auspicious hours worked out?", dap: "A day has twelve two-hour periods. The cycle of twelve spirits also turns through the hours, starting from the day's branch, so every day has six auspicious hours." },
+        { hoi: "What does it mean that a day clashes with my birth year?", dap: "The day's earthly branch is opposite the branch of your birth year (for example, a Monkey day clashes with people born in a Tiger year). The almanac suggests thinking twice before using that day for a big event." },
+        { hoi: "Is the almanac month the lunar month?", dap: "No. Day Officers and day spirits follow the solar-term month, which changes on dates such as the Start of Spring, not on the first day of the lunar month. The page computes solar terms in Vietnam time." },
+        { hoi: "Is it free?", dap: "Yes. Looking up any day, month or good days for a plan is free, and your date of birth stays on your device." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/lunar-calendar", ten: "Lunar calendar by year" },
+        { href: "/en/lunar-converter", ten: "Lunar–solar date converter" },
+        { href: "/en/today", ten: "Your day today" },
+      ] },
+    },
+  },
+  "/doi-lich-am-duong": {
+    ten: "Lunar converter",
+    tieu_de_seo: "Lunar–solar date converter: today's lunar date · Hieuban",
+    mo_ta_seo: "Convert a solar date to the Vietnamese lunar calendar and back, with the stem and branch of the day, month and year, leap months and Chinese-calendar gaps.",
+    tra_loi_nhanh: {
+      hoi: "How do I convert a solar date to a lunar date?",
+      dap: "Choose the direction, enter the day, month and year, and press Convert. The page gives the date in the Vietnamese lunar calendar (Hanoi time), the stem and branch of the day, month and year, whether the lunar year has a leap month, and the Chinese-calendar date when the two calendars differ.",
+      lien_ket: [{ href: "/en/lunar-calendar", ten: "Lunar calendar by year" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the lunar–solar converter",
+      doan: [
+        "The Vietnamese lunar calendar is computed astronomically for Hanoi time (UTC+7): the first day of a month is the day of the new moon, and the leap month is the first month in a year with no major solar term.",
+        "The Chinese calendar uses Beijing time (UTC+8), so in some years Lunar New Year differs by a day between the two calendars, and occasionally by a whole month (as in 1985). The converter says so when the two calendars differ.",
+        "The result includes the stem and branch of the day, month and year and the length of the lunar month (29 or 30 days) — handy for old records, family anniversaries or full-moon days.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Why do the Vietnamese and Chinese lunar calendars sometimes differ?", dap: "They use different time zones (UTC+7 and UTC+8). When the new moon falls between 23:00 and midnight Hanoi time, the first day of the month differs by one day; in some years even the leap month differs." },
+        { hoi: "What is a leap month?", dap: "About every three lunar years one year has 13 months. The extra month is the leap month and takes the name of the month before it (for example, 2025 has a leap sixth month)." },
+        { hoi: "Is the converter free?", dap: "Yes, and nothing you enter is stored." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/auspicious-dates", ten: "Auspicious dates" },
+        { href: "/en/today", ten: "Your day today" },
+      ] },
+    },
+  },
+  "/hom-nay": {
+    ten: "Today",
+    tieu_de_seo: "Your day today: personal day number and the Chinese almanac · Hieuban",
+    mo_ta_seo: "A new card every day from your name and date of birth: your personal day number, three cards for today, the good hours, the Chinese almanac and your week ahead.",
+    tra_loi_nhanh: {
+      hoi: "What does the daily card show?",
+      dap: "Enter your name and date of birth once. Each day the page shows your personal day number (numerology) with a question to reflect on, three cards to flip — a tarot card, a number card and an hour card — the next auspicious hour, what the Chinese almanac says about the day, and your week at a glance. It is a nudge for reflection, not a forecast.",
+      lien_ket: [{ href: "/en/numerology", ten: "Your numerology reading" }, { href: "/en/auspicious-dates", ten: "Auspicious dates" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About your day today",
+      doan: [
+        "Your personal day number comes from your birth day and month plus today's date, reduced to 1–9 as in Pythagorean numerology. Each number has a theme for the day and a question to reflect on.",
+        "The three cards change every day: a tarot card that is yours for the day, a number card with a small task that fits it, and an hour card with the next auspicious hour by the traditional calendar. Everything is worked out on our side from the same rules every time — no draw for prizes, nothing to unlock.",
+        "You can also pick up to three things you plan to do today, or type a short note, and see how each one fits the rhythm of the day. Your note is only used to recognise the kind of task and is not stored.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "How is my personal day number worked out?", dap: "Add your birth day and month to today's day, month and year, then reduce the total to a single digit (1–9). The personal month and year numbers are worked out the same way." },
+        { hoi: "Do I need an account?", dap: "No. Your name and date of birth are saved only on this device." },
+        { hoi: "Is the daily card a prediction?", dap: "No. It is a theme and a question for the day, plus traditional calendar notes as cultural reference. Decisions stay with you." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/numerology", ten: "Numerology from your name and birth date" },
+        { href: "/en/tarot", ten: "Tarot reading" },
+        { href: "/en/auspicious-dates", ten: "Auspicious dates" },
+      ] },
     },
   },
 };

@@ -80,8 +80,11 @@ async function TrangCongCuEn({ duong, truoc, sau, children }: { duong: string; t
     const en = banAnh(c.duong), chu = t.kien_thuc!.cum[c.duong];
     return en && chu ? [{ duong: en, ...chu }] : [];
   }) : [];
+  // EN-ALL GĐ 8: `{nam}` trong link "Quick answer" = năm trang theo tuổi đang index (như bản Việt).
+  const namTl = t?.tra_loi_nhanh.lien_ket?.some((l) => l.href.includes("{nam}") || l.ten.includes("{nam}")) ? String(await namTuoiSeo()) : "";
   const traLoi = t ? { hoi: t.tra_loi_nhanh.hoi, dap: t.tra_loi_nhanh.dap,
-    lien_ket: (t.tra_loi_nhanh.lien_ket ?? []).filter((l) => l.href.startsWith("/en")) } : null;
+    lien_ket: (t.tra_loi_nhanh.lien_ket ?? []).filter((l) => l.href.startsWith("/en"))
+      .map((l) => ({ href: l.href.replaceAll("{nam}", namTl), ten: l.ten.replaceAll("{nam}", namTl) })) } : null;
   return (
     <>
       {t && <>
