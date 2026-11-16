@@ -47,7 +47,8 @@ def test_ngay_12_con_giap():
     for i, x in enumerate(cg):
         assert x["ma"] == hl.quan_he_tuoi(chi_ngay, hl.ZHI[i])
         assert x["ten"] and x["nghia"]
-    assert "Tuổi hợp ngày: Tỵ, Dậu (tam hợp), Tý (lục hợp)" in n["tra_loi_nhanh"]
+    assert "Tuổi hợp ngày" not in n["tra_loi_nhanh"]   # câu trả lời nhanh giữ trần 90 từ; bảng đã trả lời
+
 
 
 # ---- H2 tự đứng được (AEO): heading chung của cụm mang tên chủ thể của trang ----

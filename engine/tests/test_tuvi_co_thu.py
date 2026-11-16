@@ -192,7 +192,7 @@ def test_vi_du_sao_o_cung():
     t = trang.lay("sao_cung", "that-sat-cung-menh")
     m = next(m for m in t["muc"] if m.get("ma") == "co_thu")
     assert any("七殺朝斗" in d["nguyen_van"] for d in m["trich_dan"])
-    assert t["muc"][-1]["tieu_de"] == "Câu hỏi tự soi"          # tự soi vẫn đứng cuối
+    assert t["muc"][-1]["tieu_de"].startswith("Câu hỏi tự soi")          # tự soi vẫn đứng cuối
     assert tct.muc_trich(sao="Tử Vi", cung="Nô Bộc") is None
 
 

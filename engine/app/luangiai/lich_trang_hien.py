@@ -209,17 +209,6 @@ def _cau_viec_lon(ds: list[dict]) -> str:
             + (L("lich.vl.chua_xep", "; chưa xếp vào ngày tốt {ds}", ds="; ".join(tr)) if tr else "") + ".")
 
 
-def _cau_hop(cg: list[dict]) -> str:
-    """Câu "Tuổi hợp ngày" của `hoang_lich.ngay_xem` theo ngôn ngữ."""
-    th = [x["chi"] for x in cg if x["ma"] == "tam_hop"]
-    lh_ = [x["chi"] for x in cg if x["ma"] == "luc_hop"]
-    if not th and not lh_:
-        return ""
-    phan = ([L("lich.tl.hop_tam", "{ds} (tam hợp)", ds="; ".join(th))] if th else []) + \
-        ([L("lich.tl.hop_luc", "{ds} (lục hợp)", ds="; ".join(lh_))] if lh_ else [])
-    return L("lich.tl.hop", " Tuổi hợp ngày: {ds}.", ds="; ".join(phan))
-
-
 def ngay_xem(kq: dict) -> dict:
     if la_viet():
         return kq
@@ -285,7 +274,6 @@ def ngay_xem(kq: dict) -> dict:
         + _cau_viec_lon(kq["viec_lon"])
         + (L("lich.tl.ky_dg", " Dân gian thường tránh việc lớn vì là ngày {ds}.", ds=danh_sach(ky_dg)) if ky_dg else "")
         + L("lich.tl.xung", " Xung tuổi {xung}.", xung=kq["xung_tuoi"]["ten"])
-        + _cau_hop(kq.get("con_giap") or [])
         + L("lich.tl.gio", " Giờ hoàng đạo: {ds}.", ds=", ".join(gio_hd)))
     return kq
 

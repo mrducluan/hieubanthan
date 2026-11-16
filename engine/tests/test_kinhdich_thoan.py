@@ -30,5 +30,5 @@ def test_hao_dong_khong_chen_thoan():
 
 
 def test_trang_que_co_thoan():
-    m = next(m for m in trang.lay("que", "que-1-can")["muc"] if m["tieu_de"] == "Quái từ và Đại tượng")
+    m = next(m for m in trang.lay("que", "que-1-can")["muc"] if m["tieu_de"] == "Quái từ và Đại tượng của quẻ Càn")
     assert any(d.startswith("Thoán truyện 「大哉乾元") for d in m["danh_sach"])
