@@ -16,7 +16,7 @@
 | 5 | Phong thuỷ | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/feng-shui` + cụm dấu hiệu trong nhà (gồm `kb.trang.dau_hieu`, `hoi.phongthuy`) — mục 3f |
 | 6 | Kinh Dịch | **xong** (2026-11-14) | 6 nhóm route sạch; `/en/i-ching` + cụm 64 quẻ; hỏi đáp tiếng Anh — mục 3g |
 | 7 | Thần số + Tarot đầy đủ | **xong** (2026-11-16) | 19 nhóm route + 8 loại trang sạch, hỏi đáp đầy đủ, `/en/numerology` + `/en/tarot` một-component, 7 cụm mở — mục 3i; Hợp đôi web chưa mở |
-| 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | **engine xong** (2026-11-16) | 27 nhóm route + `kb.trang.bo_vi` + mục lục `kb` sạch — mục 3j; web `/en` cho các trang này chưa mở |
+| 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | **xong** (2026-11-16) | 27 nhóm route + `kb.trang.bo_vi` + mục lục `kb` sạch; web mở 14 trang gốc + cụm con (lịch, Hôm nay, năm & tuổi, Nhân tướng, Chân dung, Thời gian tới) — mục 3j |
 | 9 | Tài khoản & kinh tế, Web Push theo ngôn ngữ, thẻ chia sẻ | chưa | 3 nhóm route + web |
 | 10 | CMS + Blog + pháp lý + hub | chưa | |
 | 11 | QC tổng | chưa | |
@@ -348,13 +348,26 @@ Ba nhóm song song (worktree riêng, tệp mẫu câu riêng `en/loi/{lich,nam_t
 - Còn / cần quyết: Dậu hiện "You (Rooster)" trong can chi ("Xin You (Rooster)") theo bảng tên GĐ 7 — gọn lại thì sửa
   `ten_en.json`; lời lỗi 422 và lỗi phép đo gương mặt (`do_anh.loi`) vẫn tiếng Việt (bộ đo không gọi ca lỗi); hỏi đáp Nhân tướng
   chưa hiểu câu tiếng Anh; tên Cửu Diệu / Bát hạn ở Thời gian tới (`tgt.sao.*`) nên gộp về bảng tên chung; web `/en` cho lịch, năm,
-  tuổi, Nhân tướng, Chân dung, Thời gian tới chưa mở. Mọi chữ Anh `bien_tap`, chờ người bản xứ duyệt.
+  tuổi, Nhân tướng, Chân dung, Thời gian tới — làm ở PR web (dưới). Mọi chữ Anh `bien_tap`, chờ người bản xứ duyệt.
 - **Web lịch + Hôm nay** (worktree riêng): mở `/en/auspicious-dates` (+ ngày `/2026-11-16`, tháng `/2026-11`, việc `/weddings-2026-11` —
   đuôi Anh, đuôi Việt gõ ở bản Anh → 308), `/en/lunar-calendar` (+ năm), `/en/lunar-converter`, `/en/today`. Một cây component, catalog
   `lib/chu/{lich,hom-nay}.ts`, chữ máy chủ `lib/so-trang-en.ts`, hreflang hai chiều (trang Việt dùng `voiHreflang`), sitemap-en (ngày −7…+90,
   tháng −12…+24, việc tháng này…+6, lịch âm ±10 năm). Bản Anh ẩn: chia sẻ thẻ / ba lá, nhịp ghé + Sao + hẹn + tổng kết tháng, hỏi lại,
   nhắc việc, nhà, mời cài app, hai người hôm nay, quẻ riêng, CTA cuối bài, ảnh tóm tắt, khối CMS. HTML trang Việt: chỉ thêm hreflang ở 9 trang.
-  E2E `en-lich` 16/16. Engine còn: `than.loai` chữ Việt (không hiện), `tuan.tom_tat` "1 days", `/v1/lich/cac-nam` chưa có `ten_hien` cho `con_giap`.
+  E2E `en-lich` 16/16. Engine còn: `than.loai` chữ Việt (không hiện), `/v1/lich/cac-nam` chưa có `ten_hien` cho `con_giap` (web đổi qua
+  `CON_GIAP_EN`). Đã sửa khi gộp: số ít "one day / one month" (Tuần này, chọn ngày cả nhà, Bản đồ con số).
+- **Web năm & tuổi**: mở `/en/year` (+ năm, sinh con, cưới hỏi, theo tuổi), `/en/vietnamese-customs/{yearly-star,house-building-age,first-footer}`
+  (+ năm / tuổi), `/en/feng-shui/annual-afflictions`, `/en/born-abroad` (+ nước). Catalog `lib/chu/nam-tuoi.ts`, sitemap-en theo đúng
+  cửa sổ index bản Việt (`lib/sitemap-nam-tuoi.ts`). Đuôi URL giữ chữ Việt (`/en/year/2027/sinh-con`, `…/tuoi-1990`) — luật tiền tố đi nguyên
+  đuôi; đổi sang chữ Anh cần luật đổi đuôi + 308 (chờ quyết). Ảnh `/og/tom-tat` chỉ chữ Việt → bản Anh ẩn. HTML Việt: chỉ thêm hreflang ở 8
+  trang. E2E `en-nam-tuoi` 24/24.
+- **Web Nhân tướng, Chân dung, Thời gian tới**: mở `/en/face-reading` (+ cụm `/face-areas` 25 trang, slug Anh), `/en/portrait`, `/en/year-ahead`;
+  đo điểm mốc ảnh trên máy BẬT, gửi ảnh cho AI TẮT; thoả thuận `dm1` tiếng Anh, `/en/privacy` thêm mục "Face reading photos" (cần luật sư);
+  Chân dung + Thời gian tới miễn phí ở bản Anh (`MO_DUN_MIEN_PHI_EN`). Khung hỏi đáp Nhân tướng ẩn ở bản Anh (engine chưa hiểu câu tiếng Anh).
+  Đã sửa khi gộp: dòng giải thích số đo gương mặt (`do_anh.loi`) theo ngôn ngữ + số thập phân kiểu Anh. HTML Việt: chỉ thêm hreflang ở 5
+  trang. E2E `en-nhan-tuong` 12/12.
+- Sau gộp ba nhóm web: 8 spec `/en` liên quan 96/96 (một ca đỏ do bộ đệm fetch cũ trên máy, xoá `.next/cache/fetch-cache` thì qua — production
+  khoá mục lục theo bản deploy).
 
 ## 3h. Chính sách chặn có ích + "nên chú ý" (CY-2, 2026-11-14, vi + en)
 
@@ -532,3 +545,4 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
 - **2026-11-13 — hỏi đáp lai** (mục 6.4) + **GĐ 5 Phong thuỷ** engine + hỏi đáp (mục 3f).
 - **2026-11-13 → 14 — GĐ 6 Kinh Dịch** (mục 3g); sửa 10 cảnh báo CodeQL (regex chậm / chèn regex) + test `test_hoi_redos.py` cho mọi route hỏi đáp.
 - **2026-11-16 — GĐ 8 (engine)**: ba nhóm lịch / năm & tuổi / Nhân tướng + Chân dung + Thời gian tới; 27 nhóm route + bộ vị + mục lục `kb` sạch, bản Việt lệch 0 (mục 3j).
+- **2026-11-16 — GĐ 8 (web)**: ba nhóm web lịch + Hôm nay / năm & tuổi / Nhân tướng + Chân dung + Thời gian tới (mục 3j).
