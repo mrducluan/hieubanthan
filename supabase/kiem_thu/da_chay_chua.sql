@@ -45,6 +45,7 @@ select * from (values
   ('0033 múi giờ nơi sinh trong hồ sơ', exists (select 1 from information_schema.columns
                                            where table_schema = 'public' and table_name = 'ho_so'
                                              and column_name = 'utc_noi_sinh')),
+  ('0039 nhà mình trong tài khoản', to_regclass('public.gia_dinh') is not null),
   ('0034 phiếu kiểm chứng theo ngôn ngữ', exists (select 1 from information_schema.columns
                                            where table_schema = 'public' and table_name = 'kiem_chung_phieu'
                                              and column_name = 'ngon_ngu')),

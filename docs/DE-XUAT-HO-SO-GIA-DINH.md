@@ -1,6 +1,6 @@
 # Đề xuất: hồ sơ gia đình và "Bảng nhà mình" (GD-1)
 
-Ngày 2026-11-16 · trạng thái: **đợt 1 đã làm** (chủ dự án duyệt theo đề xuất: trần 8 người, danh mục vai mục 2, không điểm số, không ghép Bát tự chéo). Đợt 2–3 chưa làm · khâu QUAY LẠI + MỜI + NẠP Sao.
+Ngày 2026-11-16 · trạng thái: **đợt 1, 2, 3 đã làm** (2026-11-16; xem mục 7) (chủ dự án duyệt theo đề xuất: trần 8 người, danh mục vai mục 2, không điểm số, không ghép Bát tự chéo). Đợt 2–3 chưa làm · khâu QUAY LẠI + MỜI + NẠP Sao.
 Đo: `family_member_added{vai, lop}`, `family_viewed{so_nguoi}`, `chart_interacted{kind=gia_dinh_viec, muc}`,
 `share_clicked{gd}` → `referral_signup`.
 
@@ -108,3 +108,28 @@ cha mẹ; đang xem người thân thì ẩn Lưu / kiểm chứng; sự kiện 
 4. Chương nào mở bằng Sao.
 5. Đồng bộ tài khoản (đợt 3) chờ ý kiến luật sư về dữ liệu trẻ em.
 6. Bỏ hẳn ghép Bát tự chéo hai người.
+
+## 7. Đợt 2 + 3 đã làm (2026-11-16, sau QC đợt 1)
+
+QC đợt 1: bảng chỉ so **con giáp** nên mỏng, ai cùng tuổi cũng như nhau, không nói gì về tình cảm, tiền bạc, làm ăn.
+
+**Đợt 2 — nhiều lớp, một nguồn với công cụ đã có**
+- Mỗi cặp xem theo tới 6 lớp: con giáp · bản mệnh nạp âm · can năm · cung phi (cần giới tính) — mức và lời lấy đúng
+  ở kho "Xem lá số 2 người" (`tuvi_hai_nguoi`, không lấy điểm); có ngày sinh thêm **trụ ngày Bát tự** (can ngày ngũ hợp,
+  chi ngày hợp / xung — ghi rõ là nét phụ, sách xưa không có bảng riêng) và **nhịp năm thần số**.
+- Nhịp gộp của cặp (đếm lớp, không điểm): Điểm sáng ~21 % · Hai mặt ~48 % · Nên để ý ~30 % (đo 2.500 cặp năm sinh).
+- Từng mặt theo nhóm quan hệ: vợ chồng (tình cảm, tiền bạc, làm ăn chung) · cha mẹ – con (chuyện trò, học hành nghề
+  nghiệp) · anh em (làm ăn chung, việc nhà chung) · ông bà – cháu · người cùng nhà.
+- **Năm năm tới của nhà mình**: ai Tam tai, năm tuổi, xung với năm từng năm; gợi ý năm ít người lớn vướng nhất cho việc lớn.
+- **Lá số của bạn nói gì về nhà mình** (hồ sơ có giờ sinh): mức + tóm tắt + hộp của chương Gia đình, Tình cảm, Công việc,
+  Tiền bạc từ báo cáo đời sống Tử vi và Bát tự (mượn như hỏi đáp, một bộ tính); đường tứ hoá theo can năm sinh từng người
+  nhà vào cung trọng tâm của lá số bạn (Phu Thê, Tử Nữ, Phụ Mẫu, Huynh Đệ…) bằng đúng hàm của Xem lá số 2 người.
+- Web: sơ đồ nhà (nét lục / vàng đứt), thẻ cặp có chấm từng lớp + mục gập "từng mặt", ô ngày sinh tuỳ chọn.
+
+**Đợt 3 — migration 0039 (chờ chủ dự án chạy)**: bảng `gia_dinh` chỉ nhận vai + năm sinh + giới tính (hàm
+`gia_dinh_hop_le` chặn tên, ngày sinh ngay trong DB), ≤ 7 người, RLS chủ sở hữu; nút "Lưu nhà mình vào tài khoản" (tự tích
+đồng ý) + "Tải từ tài khoản"; xoá ở Dữ liệu của tôi. Nên hỏi luật sư về dữ liệu trẻ em trước khi chạy.
+
+**Vẫn không làm**: điểm "độ hợp cả nhà"; ghép dụng thần Bát tự chéo hai người (không nguồn, dụng thần luôn hai cách);
+đọc cung Tử Nữ / Phụ Mẫu như lời về một người thân cụ thể. **Chưa làm**: link mời người nhà tự nhập giờ sinh, lịch nhà
+12 tháng, chương mở bằng Sao, kiểm chứng `ds.gia_dinh.*` (cần sửa ràng buộc SQL), Web Push "tháng này của nhà".

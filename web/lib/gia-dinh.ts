@@ -5,7 +5,7 @@
 // tích sẵn). Không đồng bộ tài khoản (đợt 3, chờ luật sư); `xoaHoSo()` xoá luôn khoá này. Engine nhận mã ngắn `id`.
 import { useSyncExternalStore } from "react";
 import { z } from "zod";
-import { KHOA_GIA_DINH, SU_KIEN_NGUOI_THAN, type HoSo } from "@/lib/hoso";
+import { KHOA_GIA_DINH, SU_KIEN_NGUOI_THAN, laSoTuHoSo, type HoSo } from "@/lib/hoso";
 
 export const TOI_DA_GIA_DINH = 7;
 export const VAI_GIA_DINH = ["vo_chong", "con", "bo", "me", "anh_chi", "em", "ong_ba", "chau", "bo_me_ben_kia", "con_dau_re", "nguoi_cung_nha"] as const;
@@ -14,7 +14,7 @@ export const TEN_VAI: Record<VaiGiaDinh, string> = {
   ban_than: "Bạn", vo_chong: "Vợ / chồng", con: "Con", bo: "Bố", me: "Mẹ", anh_chi: "Anh / chị", em: "Em",
   ong_ba: "Ông / bà", chau: "Cháu", bo_me_ben_kia: "Bố / mẹ bên kia", con_dau_re: "Con dâu / rể", nguoi_cung_nha: "Người cùng nhà",
 };
-export const CAM_KET_GIA_DINH = "Chỉ lưu trên máy này, không gửi lên tài khoản. Tên gọi không rời máy. Xoá bất cứ lúc nào.";
+export const CAM_KET_GIA_DINH = "Lưu trên máy này. Tên gọi và ngày sinh của người nhà không rời máy. Xoá bất cứ lúc nào.";
 
 const Nguoi = z.object({
   id: z.string().regex(/^g[a-z0-9]{3,10}$/),
@@ -82,6 +82,21 @@ export function themNguoiNha(vao: Omit<NguoiNha, "id">, dongY: boolean): KetQuaT
   return { ok: true };
 }
 
+/** GD-1 đợt 3: nhập người nhà tải từ tài khoản (chỉ vai + năm sinh + giới tính) — bỏ người trùng vai + năm sinh đã có
+ *  trên máy (giữ bản trên máy vì có tên gọi / ngày sinh). → số người vừa thêm. */
+export function nhapTuTaiKhoan(vao: Pick<NguoiNha, "vai" | "nam_sinh" | "gioi_tinh">[]): number {
+  let ds = doc(), them = 0;
+  for (const x of vao) {
+    if (ds.length >= TOI_DA_GIA_DINH) break;
+    if (ds.some((y) => y.vai === x.vai && y.nam_sinh === x.nam_sinh)) continue;
+    if (x.vai === "vo_chong" && ds.some((y) => y.vai === "vo_chong")) continue;
+    const p = Nguoi.safeParse({ ...x, id: `g${Math.random().toString(36).slice(2, 8).padEnd(4, "0")}` });
+    if (p.success) { ds = [...ds, p.data]; them++; }
+  }
+  if (them) ghiKho(ds);
+  return them;
+}
+
 export function xoaNguoiNha(id: string) { ghiKho(doc().filter((x) => x.id !== id)); }
 export function xoaCaNha() { ghiKho([]); }
 
@@ -92,5 +107,7 @@ export function thanYeuCau(hoSo: HoSo | null, ds: NguoiNha[], nam?: number) {
       ...(hoSo.gioi_tinh ? { gioi_tinh: hoSo.gioi_tinh } : {}) }] : []),
     ...ds.map((x) => ({ id: x.id, vai: x.vai, nam_sinh: x.nam_sinh, ...(x.gioi_tinh ? { gioi_tinh: x.gioi_tinh } : {}), ...(x.ngay_sinh ? { ngay_sinh: x.ngay_sinh } : {}) })),
   ];
-  return { ...(nam ? { nam } : {}), nguoi };
+  // GD-2: hồ sơ của chính người dùng đủ giờ sinh (không phải "không biết giờ") → gửi kèm để engine đọc lá số của họ.
+  const laSo = hoSo?.do_tin_gio === "unknown" ? null : laSoTuHoSo(hoSo);
+  return { ...(nam ? { nam } : {}), nguoi, ...(laSo ? { la_so: laSo } : {}) };
 }

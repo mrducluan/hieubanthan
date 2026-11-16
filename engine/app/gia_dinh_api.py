@@ -8,7 +8,10 @@ from typing import Literal
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
+from app import config
+from app.calc import tuvi_an_sao
 from app.luangiai import gia_dinh as G
+from app.tuvi_api import TuanTrietInput, _DauVao, _loi_an_sao
 
 router = APIRouter(tags=["gia-dinh"])
 
@@ -26,6 +29,9 @@ class GiaDinhInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
     nam: int | None = Field(default=None, ge=1901, le=2098)
     nguoi: list[NguoiNha] = Field(min_length=1, max_length=G.TOI_DA)
+    # GD-2: lá số theo ngày giờ sinh của CHÍNH người dùng (như các route luận giải; không lưu) → khối "lá số của bạn".
+    la_so: TuanTrietInput | None = None
+    ngay_xem: _dt.date | None = None
 
 
 @router.post("/v1/gia-dinh")
@@ -38,7 +44,17 @@ def api_gia_dinh(inp: GiaDinhInput) -> dict:
                 raise HTTPException(422, detail="Năm sinh không khớp ngày sinh")
             x["ngay_sinh"] = p.ngay_sinh.isoformat()
         ds.append(x)
+    la_so = None
+    if inp.la_so:
+        dv = _DauVao(inp.la_so)
+        cal = dv.tb.calendar_dt
+        la_so = {"ngay_xem": inp.ngay_xem or config.hom_nay_vn(),
+                 "tv_sinh": {"ngay": cal.date(), "ti": tuvi_an_sao.time_index(cal.hour, cal.minute), "gioi_tinh": inp.la_so.gender,
+                             "tz_lich": dv.tz_lich, **dv.tuy_chon, "luu_nguyet": inp.la_so.luu_nguyet},
+                 "bt_sinh": {"lich": cal, "gioi_tinh": inp.la_so.gender, "gio_ty": inp.la_so.gio_ty, "utc_lich": dv.utc_lich}}
     try:
-        return G.bang(inp.nam or G.nam_am_hien_tai(), ds)
+        return G.bang(inp.nam or G.nam_am_hien_tai(), ds, la_so)
+    except tuvi_an_sao.AnSaoLoi as e:
+        raise _loi_an_sao(e)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))

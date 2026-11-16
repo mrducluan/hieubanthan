@@ -1498,5 +1498,9 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 
 ## LA-UI / NS-QT / GD-1 (2026-11-16) — lịch âm mới + hai đề xuất chờ anh quyết
 - **Deploy engine trước web** cho lịch âm mới (web gọi route mới `/v1/lich/nam-ngay/{năm}`; engine cũ thì trang chỉ thiếu khối lịch, không lỗi).
-- [x] **NS-QT** — đã làm theo đề xuất (môi trường đã mở `download.geonames.org`). Còn tuỳ anh: migration 0039 `ho_so.mui_gio` để đồng bộ nơi sinh nước ngoài lên tài khoản (hiện chỉ lưu trên máy).
+- [x] **NS-QT** — đã làm theo đề xuất (môi trường đã mở `download.geonames.org`). Còn tuỳ anh: migration (số sau 0039) `ho_so.mui_gio` để đồng bộ nơi sinh nước ngoài lên tài khoản (hiện chỉ lưu trên máy).
 - [x] **GD-1 đợt 1** — trang `/gia-dinh` (chỉ trên máy). Đợt 2 (lớp ngày giờ sinh, thẻ cặp sâu, link mời, chương Sao) và đợt 3 (đồng bộ tài khoản — cần luật sư về dữ liệu trẻ em) chờ anh giao.
+- [x] **GD-1 đợt 2** — từng cặp nhiều lớp, sơ đồ nhà, năm năm tới, lá số của anh nhìn về nhà mình. Deploy engine trước web.
+- [ ] **GD-1 đợt 3** — chạy migration **0039** (`supabase/migrations/0039_gia_dinh.sql`) trong Supabase → SQL Editor để nút "Lưu nhà mình vào
+  tài khoản" hoạt động (chưa chạy thì nút báo lỗi nhẹ, trang vẫn chạy). Bảng chỉ nhận vai + năm sinh + giới tính. **Nên hỏi luật sư** về việc lưu
+  năm sinh của người thứ ba / trẻ em trên máy chủ trước khi chạy. Kiểm: `/quan-tri` thẻ "Migration Supabase" có dòng 0039.

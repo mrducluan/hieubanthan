@@ -32,8 +32,17 @@ test("Nhà mình: thêm người nhà → bảng năm, cặp nổi bật, việc
   await expect(bang).toContainText("Bé Na");
   // 1990 Ngọ – 2018 Tuất tam hợp (điểm sáng); 1990 Ngọ – 1984 Tý xung (nên để ý)
   const cap = bang.getByTestId("cap-nha");
-  await expect(cap).toContainText("Điểm sáng");
-  await expect(cap).toContainText("Nên để ý");
+  // GD-2: mỗi cặp có nhịp gộp từ nhiều lớp (data-nhip) + các lớp + từng mặt; có sơ đồ nhà, lịch 5 năm, lá số của bạn
+  await expect(cap.locator("li[data-nhip]")).toHaveCount(3);
+  await expect(cap.locator('li[data-nhip]').first()).toContainText("Nên làm");
+  await cap.getByTestId("cap-mo").first().click();
+  await expect(cap.locator("details[open]").first()).toContainText("Vì sao nói vậy");
+  await expect(bang.getByTestId("so-do-nha").locator("circle")).toHaveCount(3);
+  await expect(bang.getByTestId("lich-nha").locator("ol > li")).toHaveCount(5);
+  const ls = bang.getByTestId("la-so-cua-ban");
+  await expect(ls).toContainText("Theo Tử vi");
+  await expect(ls).toContainText("Theo Bát tự");
+  await expect(ls).toContainText("Bé Na");
   await expect(bang.getByTestId("viec-chung").locator('a[href="/xem-ngay-tot#chon-ngay-nhieu"]')).toBeVisible();
   expect(gui.length).toBeGreaterThan(0);
   for (const g of gui) { expect(g).not.toContain("Bé Na"); expect(g).not.toContain("Anh Hai"); expect(g).not.toContain(HO_SO_MAU.ho_ten); }

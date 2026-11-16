@@ -65,10 +65,12 @@ def test_cap_noi_bat_va_lien_he():
     kq = G.bang(2027, [*NHA, {"id": "e", "vai": "anh_chi", "nam_sinh": 1984, "gioi_tinh": "nam"}])
     cap = {(c["a"], c["b"]): c for c in kq["cap"]}
     ac = cap.get(("a", "c")) or cap.get(("c", "a"))
-    assert ac and ac["quan_he"] == "tam_hop" and ac["loai"] == "diem_sang" and ac["nhom"] == "cha_me_con"
+    assert ac and ac["quan_he"] == "tam_hop" and ac["loai"] in ("diem_sang", "hai_mat") and ac["nhom"] == "cha_me_con"
     de = cap.get(("d", "e")) or cap.get(("e", "d"))
-    assert de and de["quan_he"] == "xung" and de["loai"] == "nen_de_y" and de["viec"]
-    assert ("a", "b") not in cap and ("b", "a") not in cap
+    assert de and de["quan_he"] == "xung" and de["loai"] in ("nen_de_y", "hai_mat") and de["viec"]
+    # GD-2: cặp có người dùng luôn hiện (kể cả con giáp không hợp không xung), kèm các lớp
+    ab = cap.get(("a", "b")) or cap.get(("b", "a"))
+    assert ab and ab["quan_he"] is None and {l["ma"] for l in ab["lop"]} >= {"chi", "menh", "can", "cung_phi"}
     # cặp có người dùng đứng trước
     assert kq["cap"][0]["a"] == "a" or kq["cap"][0]["b"] == "a"
 
@@ -115,3 +117,69 @@ def test_api():
     assert client.post("/v1/gia-dinh", json={"nguoi": [{**NHA[0], "ten": "Lan"}]}).status_code == 422   # không nhận tên
     assert client.post("/v1/gia-dinh", json={"nguoi": [{**NHA[0], "vai": "sep"}]}).status_code == 422
     assert client.post("/v1/gia-dinh", json={"nguoi": []}).status_code == 422
+
+
+# ------------------------------------------------------------------ GD-2 (2026-11-16): nhiều lớp, lịch nhà, lá số của bạn
+# Đối chiếu tay: 1990 Canh Ngọ = Lộ Bàng Thổ, 1992 Nhâm Thân = Kiếm Phong Kim → Thổ sinh Kim (thuận).
+# Can Canh (Kim) – Nhâm (Thuỷ): Kim sinh Thuỷ → tương sinh (thuận). Ngọ – Thân: không hợp không xung (bình).
+# Cung phi nam 1990 = Khảm, nữ 1992 = Đoài?  (không khoá tay — chỉ khoá rằng lớp có mặt và mức thuộc danh mục).
+def test_gd2_lop_tung_cap():
+    kq = G.bang(2027, NHA)
+    cap = {frozenset((c["a"], c["b"])): c for c in kq["cap"]}
+    ab = cap[frozenset(("a", "b"))]
+    lop = {l["ma"]: l for l in ab["lop"]}
+    assert lop["menh"]["muc"] == "thuan" and lop["can"]["muc"] == "thuan" and lop["chi"]["muc"] == "binh"
+    assert all(l["muc"] in ("thuan", "binh", "de_y", "hai_mat") and l["y"] and l["nen"] and l["ten"] for l in ab["lop"])
+    assert ab["nhip"] in ("thuan", "hai_mat", "de_y", "binh") and ab["tieu_de"] and ab["noi_dung"]
+    assert ab["nhom"] == "vo_chong" and {m["mang"] for m in ab["mang"]} >= {"Tình cảm", "Tiền bạc", "Làm ăn chung"}
+    # thiếu giới tính → không có lớp cung phi; thiếu ngày sinh → không có lớp trụ ngày / thần số
+    k2 = G.bang(2027, [{"id": "a", "vai": "ban_than", "nam_sinh": 1990}, {"id": "b", "vai": "em", "nam_sinh": 1996}])
+    ma = {l["ma"] for l in k2["cap"][0]["lop"]}
+    assert "cung_phi" not in ma and "tru_ngay" not in ma and "than_so" not in ma
+
+
+def test_gd2_lop_ngay_sinh():
+    # 12/05/1990 = ngày Ất Mùi?  không khoá tay can chi; khoá: đủ ngày sinh hai người → có lớp trụ ngày + thần số,
+    # và người có ngày sinh có năm cá nhân (mốc 1/1 dương như trang Hôm nay): 12+5+2027 → 1+2+5+2+0+2+7=19 → 1.
+    kq = G.bang(2027, [{"id": "a", "vai": "ban_than", "nam_sinh": 1990, "ngay_sinh": "1990-05-12", "gioi_tinh": "nam"},
+                       {"id": "b", "vai": "vo_chong", "nam_sinh": 1992, "ngay_sinh": "1992-08-20", "gioi_tinh": "nu"}])
+    p = {x["id"]: x for x in kq["nguoi"]}
+    assert p["a"]["nam_ca_nhan"]["so"] == 1 and p["a"]["nam_ca_nhan"]["chu_de"]
+    assert p["a"]["nhat_chu"]["can"] and p["a"]["nap_am"]["ten"] == "Lộ Bàng Thổ"
+    ma = {l["ma"] for l in kq["cap"][0]["lop"]}
+    assert {"tru_ngay", "than_so"} <= ma
+
+
+def test_gd2_lich_nha_5_nam():
+    kq = G.bang(2027, NHA)
+    ln = kq["lich_nha"]
+    assert [r["nam"] for r in ln["nam"]] == [2027, 2028, 2029, 2030, 2031]
+    # 2030 Canh Tuất: con 2018 (Tuất) năm tuổi; bố 1990 + mẹ 1966 (Ngọ, nhóm Dần Ngọ Tuất) Tam tai năm 3 (Thân Dậu Tuất)
+    r30 = next(r for r in ln["nam"] if r["nam"] == 2030)
+    theo = {(m["id"], m["ma"]) for m in r30["muc"]}
+    assert ("c", "trung") in theo and ("a", "tam_tai") in theo and ("d", "tam_tai") in theo
+    assert ln["goi_y"] and ln["ghi_chu"]
+    # năm gợi ý (nếu có) phải là năm ít người lớn vướng nhất
+    if ln["nam_nhe"]:
+        it = min(r["so_nguoi_lon"] for r in ln["nam"])
+        assert next(r for r in ln["nam"] if r["nam"] == ln["nam_nhe"])["so_nguoi_lon"] == it
+
+
+def test_gd2_la_so_cua_ban_va_api():
+    la = {"birth_date": "1990-05-12", "birth_time": "09:30", "gender": "nam", "noi_sinh": "ha-noi"}
+    nha = [{**NHA[0], "ngay_sinh": "1990-05-12"}, *NHA[1:]]
+    r = client.post("/v1/gia-dinh", json={"nam": 2027, "nguoi": nha, "la_so": la})
+    assert r.status_code == 200, r.text
+    ls = r.json()["la_so_cua_ban"]
+    for mon in ("tuvi", "battu"):
+        ch = {m["chuong"] for m in ls[mon]["mang"]}
+        assert ch >= {"gia_dinh", "tinh_cam", "su_nghiep", "tien_bac"}
+        assert all(m["tom_tat"] for m in ls[mon]["mang"])
+    nn = {x["id"]: x for x in ls["nguoi_nha"]}
+    assert set(nn) == {"b", "c", "d"} and all(1 <= len(x["dong"]) <= 3 and all(d["nghia"] for d in x["dong"]) for x in nn.values())
+    # không gửi la_so → không có khối; lá số mà không có ban_than → 422
+    assert client.post("/v1/gia-dinh", json={"nam": 2027, "nguoi": NHA}).json()["la_so_cua_ban"] is None
+    assert client.post("/v1/gia-dinh", json={"nam": 2027, "nguoi": NHA[1:], "la_so": la}).status_code == 422
+    for s in _chu({k: v for k, v in r.json().items() if k != "la_so_cua_ban"}):
+        for c in CAM:
+            assert c not in s.lower(), (c, s)

@@ -15,9 +15,11 @@ import { useDanhSachNha, useHoSoNha, xoaMoiNhaTrenMay } from "@/lib/ho-so-nha";
 import { useHoSo } from "@/lib/hoso";
 import { useKyUc } from "@/lib/ky-uc";
 import { useNguoiThan, xoaTatCaNguoiThan } from "@/lib/nguoi-than";
+import { useGiaDinh, xoaCaNha } from "@/lib/gia-dinh";
 import { useNhacViec, xoaNhac } from "@/lib/nhac-viec";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { nhaTaiKhoan, xoaNhaTaiKhoan } from "@/lib/tai-khoan-nha";
+import { giaDinhTaiKhoan, xoaGiaDinhTaiKhoan } from "@/lib/tai-khoan-gia-dinh";
 import { nhacTaiKhoan, xoaNhacTaiKhoan } from "@/lib/tai-khoan-nhac";
 
 /** Nút hành động trong danh sách: có viền rõ, cao ≥ 44px để chạm trên điện thoại (rà UX mục 15). */
@@ -50,6 +52,8 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
   const [cookie, setCookie] = useState<"dong_y" | "tu_choi" | null | undefined>(undefined);
   const [coGa, setCoGa] = useState(false);
   const [nhaTk, setNhaTk] = useState<boolean | null>(null);
+  const [gdTk, setGdTk] = useState<number | null>(null);
+  const giaDinh = useGiaDinh();
   const [nhacTk, setNhacTk] = useState<{ ngay: string; ma: string }[] | null>(null);
   const [hoiThuHoi, setHoiThuHoi] = useState(false);
   const [bao, setBao] = useState<string | null>(null);
@@ -62,10 +66,11 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
     return () => window.removeEventListener(SU_KIEN, nghe);
   }, []);
   useEffect(() => {
-    if (!user) { setNhaTk(null); setNhacTk(null); return; }
+    if (!user) { setNhaTk(null); setNhacTk(null); setGdTk(null); return; }
     let huy = false;
     // Bảng chưa có (migration chưa chạy) → lỗi nhẹ → coi như không có dữ liệu, không vỡ trang.
     nhaTaiKhoan(user.id).then((n) => { if (!huy) setNhaTk(Boolean(n)); }).catch(() => { if (!huy) setNhaTk(false); });
+    giaDinhTaiKhoan(user.id).then((n) => { if (!huy) setGdTk(n?.length ?? 0); }).catch(() => { if (!huy) setGdTk(0); });
     nhacTaiKhoan(user.id).then((ds) => { if (!huy) setNhacTk(ds.map((x) => ({ ngay: x.ngay, ma: x.ma }))); }).catch(() => { if (!huy) setNhacTk([]); });
     return () => { huy = true; };
   }, [user]);
@@ -98,6 +103,9 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
           <Dong ten="Hồ sơ nhà (hướng, năm xây, người cùng ở, bố cục)" testId="dl-nha-may"
             trangThai={soNha ? `${soNha} căn trên máy này.` : "Không có."}
             nut={soNha ? <Button size="sm" variant="outline" className={NUT} onClick={() => { xoaMoiNhaTrenMay(); setBao("Đã xoá hồ sơ nhà trên máy này."); }}>Xoá hồ sơ nhà trên máy</Button> : undefined} />
+          <Dong ten="Người nhà ở trang Nhà mình (tên gọi, vai, năm sinh, giới tính, ngày sinh nếu có)" testId="dl-gia-dinh"
+            trangThai={giaDinh?.length ? `${giaDinh.length} người trên máy này.` : "Không có."}
+            nut={giaDinh?.length ? <Button size="sm" variant="outline" className={NUT} onClick={() => { xoaCaNha(); setBao("Đã xoá người nhà trên máy này."); }}>Xoá người nhà trên máy</Button> : undefined} />
           <Dong ten="Lá số người thân (tên gọi, quan hệ, ngày giờ sinh, giới tính, nơi sinh)" testId="dl-nguoi-than"
             trangThai={nguoiThan?.length ? `${nguoiThan.length} người trên máy này — không gửi lên tài khoản.` : "Không có."}
             nut={nguoiThan?.length ? <Button size="sm" variant="outline" className={NUT} data-testid="dl-nguoi-than-xoa" onClick={() => { xoaTatCaNguoiThan(); setBao("Đã xoá lá số người thân trên máy này."); }}>Xoá người thân trên máy</Button> : undefined} />
@@ -128,6 +136,9 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
             <Dong ten="Nhà đã lưu vào tài khoản" testId="dl-nha-tk"
               trangThai={nhaTk === null ? "…" : nhaTk ? "Đang lưu." : "Không có."}
               nut={nhaTk ? <Button size="sm" variant="outline" className={NUT} onClick={() => xoaNhaTaiKhoan(user.id).then(() => { setNhaTk(false); setBao("Đã xoá nhà trong tài khoản."); }).catch((e) => setBao((e as Error).message))}>Xoá nhà trong tài khoản</Button> : undefined} />
+            <Dong ten="Người nhà đã lưu vào tài khoản (vai, năm sinh, giới tính)" testId="dl-gia-dinh-tk"
+              trangThai={gdTk === null ? "…" : gdTk ? `${gdTk} người.` : "Không có."}
+              nut={gdTk ? <Button size="sm" variant="outline" className={NUT} onClick={() => xoaGiaDinhTaiKhoan(user.id).then(() => { setGdTk(0); setBao("Đã xoá người nhà trong tài khoản."); }).catch((e) => setBao((e as Error).message))}>Xoá người nhà trong tài khoản</Button> : undefined} />
             <Dong ten="Mốc nhắc trong tài khoản (để gửi thông báo đúng ngày)" testId="dl-nhac-tk"
               trangThai={nhacTk === null ? "…" : nhacTk.length ? `${nhacTk.length} mốc.` : "Không có."}
               nut={nhacTk?.length ? <Button size="sm" variant="outline" className={NUT} onClick={async () => {
