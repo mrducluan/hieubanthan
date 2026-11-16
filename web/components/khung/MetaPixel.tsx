@@ -6,7 +6,9 @@
 // tới Meta); đổi ý → grant (tải lúc đó) / revoke.
 // Riêng tư: tắt autoConfig (Meta tự thu chữ trên nút + metadata trang) và pushState tự động; trang mang mã thẻ / lời mời / quà
 // (tên hiển thị trong URL) không gửi sự kiện nào — Meta không lọc URL được như PostHog (lib/lam-sach-url.ts).
-// Pixel ID là mã công khai (nằm trong HTML mọi trang dùng Pixel); env NEXT_PUBLIC_META_PIXEL_ID ghi đè, đặt "off" để tắt.
+// Pixel ID: lib/meta-id.ts (env NEXT_PUBLIC_META_PIXEL_ID ghi đè, "off" để tắt).
+// META-QC: vào từ quảng cáo (?fbclid=) → ghi cookie _fbc NGAY (không chờ fbevents.js nạp sau tương tác — lúc đó người dùng
+// có thể đã chuyển trang, mất fbclid). API chuyển đổi máy chủ đọc _fbc khi người dùng bấm nạp (lib/meta-capi.ts).
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -14,10 +16,10 @@ import { HOI_DONG_Y, SU_KIEN, type LuaChon } from "@/lib/dong-y";
 import { KHOA_DONG_Y } from "@/lib/ma-google";
 import { MA_QUA_URL, MA_TRONG_URL } from "@/lib/lam-sach-url";
 import { metaPageView } from "@/lib/meta-pixel";
+import { META_BAT, META_PIXEL_ID } from "@/lib/meta-id";
 
-const MAC_DINH = "2153819128819535";
-const PIXEL_ID = (process.env.NEXT_PUBLIC_META_PIXEL_ID ?? MAC_DINH).trim();
-const BAT = /^\d{8,20}$/.test(PIXEL_ID);
+const PIXEL_ID = META_PIXEL_ID;
+const BAT = META_BAT;
 
 type CuaSoFb = Window & { fbq?: (...a: unknown[]) => void; __hbt_fb_tat?: boolean; __hbt_fb_nap?: () => void };
 
@@ -26,6 +28,8 @@ const KHOI_DONG = `!function(w,d){if(w.fbq)return;var n=w.fbq=function(){n.callM
 if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];n.disablePushState=!0;
 var c=null;try{c=localStorage.getItem(${JSON.stringify(KHOA_DONG_Y)})}catch(e){}
 var cho=c==='dong_y'||(c===null&&${!HOI_DONG_Y});w.__hbt_fb_tat=!cho;if(!cho)n('consent','revoke');
+var fc=new URLSearchParams(location.search).get('fbclid');
+if(cho&&fc&&/^[A-Za-z0-9_-]{1,400}$/.test(fc)&&d.cookie.indexOf('.'+fc)<0)d.cookie='_fbc=fb.1.'+Date.now()+'.'+fc+';max-age=7776000;path=/;samesite=lax'+(/(^|\\.)hieuban\\.com$/.test(location.hostname)?';domain=.hieuban.com':'')+(location.protocol==='https:'?';secure':'');
 n('set','autoConfig',false,${JSON.stringify(PIXEL_ID)});n('init',${JSON.stringify(PIXEL_ID)});
 var p=location.pathname.split('/'),ma=/${MA_TRONG_URL.source}/,qua=/${MA_QUA_URL.source}/,co=false;
 for(var i=0;i<p.length;i++)if(ma.test(p[i])||(p[i-1]==='qua'&&qua.test(p[i])))co=true;

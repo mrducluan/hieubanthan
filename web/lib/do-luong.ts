@@ -5,7 +5,8 @@
 import type { PostHog } from "posthog-js";
 import { ghiMangDaXem } from "@/lib/huy-hieu";
 import { choRanh } from "@/lib/cho-ranh";
-import { metaLead } from "@/lib/meta-pixel";
+import { metaSuKien } from "@/lib/meta-pixel";
+import { docNguonQc } from "@/lib/nguon-qc";
 import { lamSachUrl } from "@/lib/lam-sach-url";
 
 export type SuKien =
@@ -138,6 +139,7 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   du_ba: "number",      // BT-UI: daily_card_flipped — 1 = lá thứ ba (đã lật đủ ba lá của ngày)
   can_them: "string",   // BT-UI: ô "Bảy cách nhìn" còn thiếu gì trong hồ sơ (gio / gioi_tinh / noi_sinh)
   so_san_sang: "number", // BT-UI: số môn (trong 5 môn tính từ ngày sinh) đã sẵn sàng khi khối hiện ra
+  qc: "string",         // META-QC: "meta" = phiên này (hoặc ≤ 30 ngày trước) vào từ quảng cáo Facebook / Instagram (lib/nguon-qc.ts)
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */
@@ -197,12 +199,13 @@ function nap(): Promise<PostHog | null> {
 }
 
 export function ghi(su_kien: SuKien, p: Record<string, unknown> = {}): void {
-  const props = { feature_version: PHIEN_BAN, ...locThuocTinh(p) };
+  const qc = typeof window !== "undefined" ? docNguonQc() : null;
+  const props = { feature_version: PHIEN_BAN, ...locThuocTinh(p), ...(qc ? { qc } : {}) };
   if ((process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_E2E === "1") && typeof window !== "undefined") {
     (window as unknown as { __hbt_su_kien?: unknown[] }).__hbt_su_kien ??= [];
     (window as unknown as { __hbt_su_kien: unknown[] }).__hbt_su_kien.push({ su_kien, ...props });
   }
-  if (su_kien === "profile_created") metaLead();   // Meta Pixel: Lead
+  metaSuKien(su_kien, props);   // Meta Pixel: bảng sự kiện ở lib/meta-pixel.ts
   void nap().then((p2) => p2?.capture(su_kien, props));
 }
 

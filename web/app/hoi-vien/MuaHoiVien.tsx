@@ -10,6 +10,7 @@ import Link from "@/components/khung/Lien";
 import { CheckCircle2, Clock, Loader2, MessageCircleQuestion, QrCode, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
+import { metaDongY } from "@/lib/meta-pixel";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { QUAY_VE } from "@/lib/sao-client";
 import { docHoiVien, giaMoiThang, ngayVn, TEN_HANG, thuocTinhHoiVien, vnd, type HangHoiVien, type HoiVien } from "@/lib/thanh-toan/hoi-vien";
@@ -43,7 +44,7 @@ export function ChonHangHoiVien({ cong, hang: ds, hanChung }: { cong: "pay2s" | 
       try { sessionStorage.setItem(QUAY_VE, "/tai-khoan#hoi-vien"); } catch { /* riêng tư */ }
       const r = await fetch("/api/thanh-toan/tao-don", {
         method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
-        body: JSON.stringify({ loai: "hoi_vien", hang: h }),
+        body: JSON.stringify({ loai: "hoi_vien", hang: h, meta: metaDongY() }),
       });
       const j = (await r.json().catch(() => ({}))) as { checkoutUrl?: string; error?: string };
       if (!r.ok || !j.checkoutUrl) throw new Error(j.error ?? "Chưa tạo được đơn.");

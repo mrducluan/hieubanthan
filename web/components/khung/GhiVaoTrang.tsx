@@ -8,10 +8,12 @@ import { ghi, lanDauTrongPhien, nhoMaMoi } from "@/lib/do-luong";
 import { laTrangKienThuc } from "@/lib/duong-silo";
 import { dangChayApp } from "@/lib/che-do-app";
 import { phanLoaiNguon } from "@/lib/nguon-vao";
+import { nhoNguonQc } from "@/lib/nguon-qc";
 
 export function GhiVaoTrang() {
   useEffect(() => {
     const u = new URL(window.location.href);
+    nhoNguonQc(u.href);   // META-QC: vào từ quảng cáo Meta → mọi sự kiện 30 ngày tới mang qc=meta
     const tu = u.searchParams.get("tu");
     if (tu === "push" && lanDauTrongPhien("tu.push")) ghi("chart_interacted", { kind: "push_mo" });   // bấm thông báo nhắc (sw.js)
     if (tu === "app" && lanDauTrongPhien("tu.app")) ghi("chart_interacted", { kind: "pwa_mo" });      // mở từ biểu tượng app đã cài

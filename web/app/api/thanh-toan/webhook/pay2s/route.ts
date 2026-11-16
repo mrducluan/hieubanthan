@@ -1,7 +1,8 @@
 // POST /api/thanh-toan/webhook/pay2s — IPN của Pay2S báo đã nhận tiền. CHỈ tin chữ ký m2signature (HMAC secret key) +
 // đúng partnerCode; không tin tham số URL quay về của trình duyệt. Số tiền được hàm SQL so với đơn (lấy từ goi_sao lúc
 // tạo) → sai thì không cộng Sao. Pay2S cần 200 + {"success": true} trong 30 giây, không thì gửi lại tối đa 5 lần.
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
+import { guiCapiDon } from "@/lib/meta-capi";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { cauHinhPay2s, kiemIpn } from "@/lib/thanh-toan/pay2s";
 
@@ -25,5 +26,7 @@ export async function POST(req: Request) {
   });
   // Lỗi DB → 500 để Pay2S gửi lại sau.
   if (error) return NextResponse.json({ success: false, error: "Chưa ghi được" }, { status: 500 });
-  return NextResponse.json({ success: true, ket_qua: (data as { ket_qua?: string } | null)?.ket_qua });
+  const kq = (data as { ket_qua?: string } | null)?.ket_qua;
+  if (kq === "da_nap") after(() => guiCapiDon(dv, d.maDon));   // META-CAPI: gửi sau khi đã trả lời Pay2S
+  return NextResponse.json({ success: true, ket_qua: kq });
 }

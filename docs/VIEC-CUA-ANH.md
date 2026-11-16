@@ -1468,3 +1468,19 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - Gợi ý cách làm nhanh: mỗi trang kể MỘT tình huống anh thật sự đã gặp (ẩn danh) hoặc một điều anh thấy khác sách; 5–10 phút/trang; làm
   trước 14 chính tinh + 12 cung + 3 trang dấu hiệu nhà đang có hiển thị.
 - Bài viết blog trong CMS: đã có sẵn mục chữ ký "Chuyên gia là tác giả / thẩm định" (anh tự tích xác nhận) — không cần ô riêng.
+
+## META-QC. Đo quảng cáo Meta: sự kiện chuẩn + API chuyển đổi (2026-11-16)
+
+- [ ] **MQ-1.** Chạy migration **0038** (`supabase/migrations/0038_meta_capi.sql`) trong Supabase → SQL Editor. Bảng `meta_don` chỉ máy chủ đọc
+  được, tự xoá sau 8 ngày. Kiểm: `/quan-tri` thẻ "Migration Supabase" có dòng 0038 đã chạy.
+- [ ] **MQ-2.** Meta Events Manager → chọn Pixel `2153819128819535` → **Settings** → **Conversions API** → **Generate access token** → chép vào
+  Vercel (dự án web) env **`META_CAPI_TOKEN`** (Production) → Redeploy. Chưa đặt thì web vẫn chạy, chỉ không gửi từ máy chủ.
+- [ ] **MQ-3.** (Thử trước khi chạy quảng cáo) Events Manager → **Test events** → chép mã thử (dạng `TEST12345`) vào env
+  **`META_CAPI_TEST_CODE`** → nạp thử một gói nhỏ → thấy "Purchase" hai nguồn (Browser + Server) gộp một ("Deduplicated"). Thử xong **xoá**
+  env này (để nguyên thì sự kiện thật chỉ hiện ở mục thử).
+- [ ] **MQ-4.** Events Manager → **Aggregated Event Measurement / Web events** xếp ưu tiên: Purchase > InitiateCheckout > Lead > ViewContent.
+- [ ] **MQ-5.** Chạy quảng cáo: tuần đầu tối ưu theo **Lead** (tạo hồ sơ) vì đơn nạp còn ít; khi ~50 Purchase/tuần thì chuyển tối ưu theo
+  **Purchase / giá trị**. Gắn link quảng cáo `?utm_source=facebook&utm_campaign=<tên>` (fbclid Meta tự thêm). Xem phễu người đến từ quảng
+  cáo ở `/quan-tri/tang-truong` → khung "Người đến từ quảng cáo Meta" (cần khoá PostHog như các khung khác).
+- Chữ quảng cáo: không ngầm nói biết đặc điểm riêng của người xem ("Bạn đang buồn chuyện tình cảm?") — chính sách Meta; nên viết "Xem lá số
+  Tử vi của bạn", "Năm 2027 của tuổi …".
