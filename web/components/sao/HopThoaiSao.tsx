@@ -22,7 +22,7 @@ import { useHoSo } from "@/lib/hoso";
 import { hoSoTaiKhoan, luuVaoTaiKhoan } from "@/lib/tai-khoan";
 import { maGioiThieuDaNho, nhanChaoMung, nhanThuongGioiThieu, quenMaGioiThieu } from "@/lib/sao";
 import {
-  dongNapDau, goiGoiY, hienNapDau, saoTangLanDau, soBaoCao, thuocTinhNap, type GoiHienThi, type NapDau,
+  dongNapDau, goiGoiY, goiNangCap, hienNapDau, saoTangLanDau, soBaoCao, thuocTinhNap, type GoiHienThi, type NapDau,
 } from "@/lib/thanh-toan/nap-dau";
 import { docHoiVien, hienDongHoiVien, type HoiVien } from "@/lib/thanh-toan/hoi-vien";
 import { useMucSao } from "@/lib/muc-sao";
@@ -312,6 +312,7 @@ export function NapNhanh({ can = 0, kind = "nap", nguon = "luan_giai", giaCau, m
   const nd = hienNapDau(napDau) ? napDau : null;
   const bcG = g ? soBaoCao(g.sao, giaBaoCao) : 0;
   const tangG = g && nd ? saoTangLanDau(g.sao, nd.phan_tram) : 0;
+  const nangCap = giaBaoCao > 0 ? goiNangCap(ds, chon, giaBaoCao) : null;   // GIA-99: một dòng đổi sang gói đích, số chênh thật
   return (
     <div className="grid gap-3">
       <div className="space-y-3 rounded-2xl border border-gold/50 bg-gold/[0.06] p-4" data-testid="nap-nhanh">
@@ -330,6 +331,13 @@ export function NapNhanh({ can = 0, kind = "nap", nguon = "luan_giai", giaCau, m
             {nguon === "hoi" ? (giaCau && soCau(g.sao, giaCau) > 0 ? ` · ${soCau(g.sao, giaCau)} câu hỏi` : "") : bcG > 0 ? ` · ≈ ${bcG} báo cáo` : ""}
             {g.mo_ta ? <span className="block text-xs text-fg-faint">{g.mo_ta}</span> : null}
           </p>
+        )}
+        {nguon !== "hoi" && nangCap && (
+          <button type="button" data-testid="goi-nang-cap" onClick={() => { setChon(nangCap.goi.ma); ghi("sao_prompt_answered", { kind, ket_qua: "nang_goi", nguon }); }}
+            className="w-full rounded-xl border border-gold/40 px-3 py-2 text-left text-xs text-fg-muted hover:border-gold">
+            Thêm <b className="text-fg">{vnd(nangCap.themVnd)}</b> → gói {nangCap.goi.ten}: <b className="text-fg">{nangCap.baoCao} báo cáo</b>
+            {nangCap.moiLan ? ` (≈ ${vnd(nangCap.moiLan)} mỗi lần xem)` : ""}. <span className="text-gold">Đổi sang gói này</span>
+          </button>
         )}
         <Button className="w-full" onClick={() => void nap()} disabled={dang || !g} data-testid="nap-nhanh-nut">
           {dang ? <Loader2 className="animate-spin" aria-hidden /> : <QrCode aria-hidden />}
@@ -365,7 +373,7 @@ export function NapNhanh({ can = 0, kind = "nap", nguon = "luan_giai", giaCau, m
       </div>
       {moiBan}
       {hienDongHoiVien(hoiVien) && <TheHoiVien hv={hoiVien} kind={kind} nguon={nguon} />}
-      <p className="text-xs text-fg-faint">Sao không đổi ra tiền · Sao mua không hết hạn · nạp xong bạn quay lại đúng trang này.</p>
+      <p className="text-xs text-fg-faint">Sao không đổi ra tiền · Sao mua không hết hạn · nạp xong bạn quay lại đúng trang này. <Link href="/goi-xem" className="text-gold hover:underline">Xem bảng giá các gói</Link></p>
     </div>
   );
 }

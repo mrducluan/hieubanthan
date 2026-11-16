@@ -34,11 +34,13 @@ export function khachDichVu(): SupabaseClient | null {
   return url && key ? createClient(url, key, KHONG_LUU) : null;
 }
 
-/** Gói hiển thị khi chưa đọc được bảng goi_sao (chưa bật tài khoản) — khớp dữ liệu mặc định migration 0012. */
+/** Gói hiển thị khi chưa đọc được bảng goi_sao (chưa bật tài khoản) — khớp bảng giá GIA-99 (supabase/bang-gia/2026-11_gia_99.sql).
+ *  Chim mồi: "Đôi" (2 báo cáo, không ưu đãi) đứng cạnh "Ba" (thêm 50.000 ₫ được báo cáo thứ ba) — cả hai đều là gói thật. */
 export const GOI_MAC_DINH = [
-  { ma: "thu", ten: "Thử", gia_vnd: 29000, sao: 30, nhan: null, mo_ta: "Gói nhỏ để thử" },
-  { ma: "pho_bien", ten: "Phổ biến", gia_vnd: 99000, sao: 110, nhan: "Phổ biến", mo_ta: "Tặng thêm 10%" },
-  { ma: "gia_dinh", ten: "Gia đình", gia_vnd: 199000, sao: 240, nhan: null, mo_ta: "Tặng thêm 20% — xem cho cả nhà, hợp đôi" },
+  { ma: "le_1", ten: "Một lần xem", gia_vnd: 99000, sao: 99, nhan: null, mo_ta: "Vừa đủ một Luận giải toàn bộ" },
+  { ma: "doi_2", ten: "Hai lần xem", gia_vnd: 199000, sao: 200, nhan: null, mo_ta: "Của bạn và một người thân" },
+  { ma: "ba_3", ten: "Ba lần xem", gia_vnd: 249000, sao: 300, nhan: "Phổ biến", mo_ta: "Thêm 50.000 ₫ so với gói Hai lần là có lần xem thứ ba" },
+  { ma: "ca_nha", ten: "Cả nhà", gia_vnd: 499000, sao: 620, nhan: null, mo_ta: "Sáu lần xem, dư Sao để hỏi thêm" },
 ] as const;
 export type GoiSao = { ma: string; ten: string; gia_vnd: number; sao: number; nhan: string | null; mo_ta: string | null };
 

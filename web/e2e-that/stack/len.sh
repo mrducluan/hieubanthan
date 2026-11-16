@@ -84,7 +84,9 @@ insert into cau_hinh (khoa, gia_tri) values
   ('sao.nhiem_vu.bat', 'true'),
   -- Fixture: giá báo cáo 10 để chuỗi "10 Sao chào mừng → tự mở báo cáo" chạy được; mặc định production là 29
   -- (chủ dự án chốt 26/10/2026) — khi đó chào mừng KHÔNG đủ, người dùng nạp gói Khởi đầu 19 Sao (kiểm ở e2e/nap-dau.spec.ts).
-  ('luan_giai.gia_sao', '10')
+  ('luan_giai.gia_sao', '10'),
+  -- GIA-99: ghim các số chuỗi thật đang kiểm (mặc định mới: câu hỏi 5 Sao, Bản đồ con số 49 Sao).
+  ('sao.hoi.gia', '3'), ('luan_giai.gia_sao.thanso', '0')
 on conflict (khoa) do update set gia_tri = excluded.gia_tri;
 SQL
 

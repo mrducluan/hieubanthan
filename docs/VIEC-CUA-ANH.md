@@ -12,6 +12,17 @@
 - [ ] **Brand SERP**: đặt env `MXH_FACEBOOK` / `MXH_YOUTUBE` / `MXH_TIKTOK`… (link trang chính thức) để Organization có `sameAs` — hiện trống, Google chưa có tín hiệu nối thương hiệu với các trang mạng xã hội. Nên tạo Google Business Profile tên "Hiểu Bản Thân (hieuban.com)".
 - [ ] **Hai bài blog CMS đang ở trang 1 mà 0 lượt nhấp** (sửa trong CMS, em không sửa được bài CMS từ code): "vòng tròn ngũ hành" (vị trí 7, 27 hiển thị) và "ngũ hành là gì" (vị trí 12). Gợi ý tiêu đề SEO: *"Vòng tròn ngũ hành: sơ đồ tương sinh, tương khắc dễ nhớ"* và *"Ngũ hành là gì? Kim Mộc Thủy Hỏa Thổ và cách sinh khắc"*; mô tả mở bằng câu trả lời 1 dòng.
 
+### 4au. GIA-99 — giá 99 Sao, gói mới, bật thu Sao (2026-11-16, `docs/GOI-XEM-VA-GIA-2026-11.md`)
+
+- [ ] Gộp PR và để Vercel deploy dự án **web**. Sau deploy `/goi-xem` mở được; mọi nơi vẫn ghi "đang miễn phí" cho tới bước 3.
+- [ ] Hoàn tất Pay2S ở mục 4aq (migration 0037, bốn biến `PAY2S_*`, thử nạp). Chưa xong bước này thì dù chạy bước 3, báo cáo vẫn miễn phí (web không khoá khi chưa có cổng nạp).
+- [ ] **Bật chính thức**: Supabase → SQL Editor → dán và chạy `supabase/bang-gia/2026-11_gia_99.sql` (một lần). Tệp này đổi giá báo cáo 99 Sao (Bản đồ con số 49), câu hỏi 5 Sao, bốn gói nạp mới, hội viên 599.000 ₫, hỏi chuyên gia 299.000 ₫, thưởng mời 33/33, tặng 20 % lần nạp đầu, và bật thu Sao Luận giải. Muốn quay lại: chạy `2026-11_gia_99.down.sql`.
+- [ ] Kiểm (5 phút, tài khoản thử): `/goi-xem` hiện giá + bảng "Ba cách trả"; `/nap-sao` có 4 gói, gói Ba lần xem ghi "≈ 83.000 ₫ mỗi lần xem · rẻ hơn 17%"; `/tu-vi` → Luận giải → chương 2 khoá, hộp nạp gợi ý gói Một lần xem và có dòng "Đổi sang gói này"; nạp gói 99.000 ₫ thật → báo cáo tự mở.
+- [ ] (Tuỳ chọn) Giới hạn hỏi đáp miễn phí mỗi ngày: `/quan-tri/cai-dat` → "Giới hạn hỏi đáp miễn phí mỗi ngày" (tệp SQL không bật hộ).
+- [ ] (Tuỳ chọn) Hội viên năm / Hỏi chuyên gia: công tắc bán vẫn do anh bật ở `/quan-tri/cai-dat`; tệp SQL chỉ đặt giá.
+- [ ] Sau 4 tuần: `/quan-tri/doanh-thu` → tỉ lệ từng gói. Gói Ba lần xem dưới 20 % số đơn thì báo em hạ gói lẻ xuống 79.000 ₫.
+- [ ] (Quyết định) Nối cổng Sao cho Xem lá số 2 người / Nhà của bạn / Chọn ngày cho cả nhà; gói ghép "Trọn bộ 2027"; "Lì xì báo cáo Tết" — mục 8 của tài liệu.
+
 ### 4as. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
 
 - [x] Mở mạng tới Wikisource, archive.org, Gutenberg (đã duyệt 2026-11-12). Dò lại: sách Tarot của Papus, Wirth em tự tải được;
