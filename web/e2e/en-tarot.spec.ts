@@ -20,6 +20,20 @@ async function chuViet(page: Page, vung = "main"): Promise<string[]> {
 }
 const ldTrang = async (page: Page) => (await page.locator('script[type="application/ld+json"]').allTextContents()).join("\n");
 const ngang = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+// Phần tử thò ra ngoài khung mà KHÔNG nằm trong vùng cuộn ngang nào — in ra khi test hỏng để biết đúng chỗ.
+const thoRa = (page: Page) => page.evaluate(() => {
+  const w = window.innerWidth;
+  const trongVungCuon = (e: Element) => {
+    for (let p = e.parentElement; p; p = p.parentElement) {
+      const o = getComputedStyle(p).overflowX;
+      if (o === "auto" || o === "scroll" || o === "hidden" || o === "clip") return true;
+    }
+    return false;
+  };
+  return [...document.querySelectorAll("body *")]
+    .filter((e) => { const b = e.getBoundingClientRect(); return b.width > 0 && b.right > w + 0.5 && !trongVungCuon(e); })
+    .slice(0, 8).map((e) => `${e.tagName}[${e.getAttribute("data-testid") ?? ""}] ${(e.className || "").toString().slice(0, 60)}`);
+});
 
 test.describe("catalog /en/tarot", () => {
   test("mọi khoá bảng chữ Tarot có chữ tiếng Anh, không dấu Việt, {biến} hợp lệ", () => {
@@ -126,7 +140,10 @@ test.describe("/en/tarot trên trình duyệt", () => {
     await page.goto("/en/tarot");
     await expect(page.locator("h1")).toBeVisible();
     await expect(page.getByTestId("goi-y-hoi")).toBeVisible({ timeout: 20_000 });
-    expect(await ngang(page)).toBeLessThanOrEqual(0);
+    await expect(page.getByTestId("la-ngay")).toBeVisible({ timeout: 15_000 });
+    await page.waitForLoadState("networkidle");
+    await expect.poll(async () => ({ ngang: Math.max(0, await ngang(page)), tho_ra: await thoRa(page) }), { timeout: 10_000 })
+      .toEqual({ ngang: 0, tho_ra: [] });
     expect(await chuViet(page)).toEqual([]);
   });
 });
