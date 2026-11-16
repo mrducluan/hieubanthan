@@ -1,0 +1,89 @@
+{
+  "_trang_thai": "bien_tap",
+  "_ghi": "EN-ALL GĐ 8 — bản phủ tiếng Anh của Chân dung tổng hợp (ban biên tập, chờ người bản xứ duyệt).",
+  "mon": {
+    "tuvi": {"ten": "Zi Wei Dou Shu", "mat": "looks at the circumstances around you: work, money, home, people"},
+    "battu": {"ten": "Bazi", "mat": "looks at your own strength: which elements are plentiful, which are missing"},
+    "nhantuong": {"ten": "Face reading", "mat": "looks at what you see in yourself now: features, complexion, bearing"}
+  },
+  "mang": {
+    "cong_viec": {"ten": "Work", "ngan": "work"},
+    "tien_bac": {"ten": "Money", "ngan": "money"},
+    "tinh_cam": {"ten": "Love", "ngan": "love"},
+    "gia_dinh": {"ten": "Family", "ngan": "family"},
+    "suc_khoe": {"ten": "Health", "ngan": "health"},
+    "nam_nay": {"ten": "This year", "ngan": "this year"}
+  },
+  "cung": {
+    "thuan": {
+      "tieu_de": "{mang}: {so} readings agree it is favourable",
+      "noi_dung": "{noi} — each looking at a different side — point the same way: {ngan} is where you already have strength. The trap in a favourable area is complacency and coasting on momentum.",
+      "huong_xu_ly": "Pick one {ngan} task you have been weighing for a long time and start it this month; set aside part of what you gain rather than putting it all back in."
+    },
+    "can_bang": {
+      "tieu_de": "{mang}: {so} readings agree on a steady pace",
+      "noi_dung": "{noi} all see {ngan} with no big push and no big stumble. Results depend more on your steady effort than on timing.",
+      "huong_xu_ly": "Set one small quarterly milestone for {ngan} and keep it; try anything new on a small scale before expanding."
+    },
+    "can_chu_dong": {
+      "tieu_de": "{mang}: {so} readings agree on going slowly",
+      "noi_dung": "{noi} all see {ngan} as needing more initiative than usual. This is a reminder to plan carefully, not an omen — when several readings agree, it is worth more attention than one alone.",
+      "huong_xu_ly": "Break big {ngan} tasks into small steps with a back-up plan; check paperwork and money twice before you sign."
+    }
+  },
+  "khac": {
+    "tieu_de": "{mang}: the readings see different sides",
+    "noi_dung": "{mat}. The readings do not contradict each other — each looks at a different side of the same area, so the levels can differ. Use the most cautious side as your safety frame and the favourable side for decisions you have prepared well.",
+    "da_so": "Two of the three readings see {muc_da_so}; {mon_le} sees {muc_le} — it {mat_le}.",
+    "hiem_trung": "Across sample charts, Zi Wei and Bazi rarely give the same level for {ngan} ({ti_le}% match, close to chance) — treat each as its own angle, not as two statements that contradict each other.",
+    "can_cu_thong_ke": "Agreement across methods on {n} sample charts: Zi Wei and Bazi give the same level in this area {ti_le}% of the time (chance would be {ngau_nhien}%, kappa {kappa}).",
+    "huong_xu_ly": {
+      "can_chu_dong": "Use the side that needs care as your frame: break big {ngan} tasks into steps with a back-up; use the favourable side for work you have prepared well.",
+      "can_bang": "Keep a steady pace as the base for {ngan}; save the favourable side for one task that is already prepared, rather than taking on lots of new ones.",
+      "thuan": "None of the readings sees a big stumble in {ngan} — choose the most important task and do it early."
+    }
+  },
+  "tong_quan": {
+    "mo_dau": "Three independent ways of looking — your Zi Wei chart (the circumstances around you), your Bazi chart (your own strength) and what you observed on your own face (where you are now) — set side by side for each area of life. In {so_cung} areas the readings give the same level; in {so_khac} they see different sides.",
+    "mo_dau_hai_mon": "Two independent charts — Zi Wei (the circumstances around you) and Bazi (your own strength) — set side by side for each area of life. In {so_cung} areas both give the same level; in {so_khac} they see different sides. Add the face survey for a third way of looking.",
+    "cach_doc": "Where several readings agree, that carries more weight than one alone; where they differ, neither is wrong — each is shining a light on a different side. No reading gives you a score.",
+    "ket": "This portrait is put together from readings you already have, with no new data added. If something does not feel right, tap “Not quite” on that box — the vote goes back to the reading that said it."
+  },
+  "chuong": {
+    "tong_quan": {"tieu_de": "Three ways of looking, one person", "cau_hoi": "Do three independent readings see the same thing in you, and where do they differ?"},
+    "con_nguoi": {"tieu_de": "Who you are, through three readings", "cau_hoi": "Which traits does each reading describe — and which do all three mention?"},
+    "cong_viec_tien": {"tieu_de": "Work and money", "cau_hoi": "Work and money: which reading sees it as favourable, which suggests slowing down, and what should you do first?"},
+    "tinh_cam_gia_dinh": {"tieu_de": "Love and family", "cau_hoi": "Your relationship and your family: do the three readings point to the same thing worth watching?"},
+    "suc_khoe": {"tieu_de": "Health and daily rhythm", "cau_hoi": "Which body systems do the readings suggest looking after, and in which years is an earlier check-up worthwhile?"},
+    "nang_luong": {"tieu_de": "The element your chart needs and your face shape", "cau_hoi": "Which element is your chart short of, which element does your face shape carry — do they make up for each other or pull apart?"},
+    "nam_nay": {"tieu_de": "This year through three readings", "cau_hoi": "What do the two charts both see this year, and which area of your face do the books say to look at?"},
+    "da_xac_nhan": {"tieu_de": "What you have confirmed — where the readings meet", "cau_hoi": "From the boxes you marked \"Resonates with me\", where in your life do two or more readings touch the same point?"},
+    "loi_khuyen": {"tieu_de": "Things to do, gathered from three readings", "cau_hoi": "If you only did three things in the next 90 days, what do the readings agree on?"}
+  },
+  "mau": {
+    "con_nguoi_mo": "Each reading describes you in its own language: Zi Wei through the stars in the Life palace, Bazi through the Day Master and the strongest element, face reading through the traits you saw yourself. Below is the most prominent trait from each — a trait that repeats in two or more readings is likely one the people close to you mention.",
+    "mang_mo": "Each area below shows the level from each reading, one combined box, then the original boxes from each reading so you can compare and mark “Resonates with me” for the reading that said it.",
+    "suc_khoe_mo": "Health here means preventive reminders: the body systems the old books link with stars, elements and areas of the face — and the years when an earlier check-up is worthwhile. No diagnosis, and not medical advice.",
+    "suc_khoe_mien_tru": "These are care reminders from three readings, not a diagnosis and not medical advice. If you have symptoms, see a doctor rather than waiting on a chart or a mirror.",
+    "nang_luong_mo": "Bazi shows which element your chart is short of (two methods of finding the useful element, always both shown); face reading groups your face shape by the five elements. When the two agree it feels light; when they pull apart, you make it up through habits, not by changing your face.",
+    "nang_luong_thieu": "No face survey yet — this chapter needs to know which element your face shape carries. For now there is only the element your chart needs by Bazi's two methods.",
+    "nam_nay_mo": "This year through three readings: Zi Wei reads the year's four transformations across the palaces, Bazi reads the year's element against your strength, and face reading points to the area of the face the yearly-position book reads at your age.",
+    "da_xac_nhan_mo": "This chapter is built from the boxes you yourself marked \"Resonates with me\" in your readings (Zi Wei, Bazi, Face reading, Number map, Your home…) while signed in — the system only compares the areas of life and levels those boxes already carried, without recalculating or changing any reading's level. The more you read and mark, the more personal this chapter becomes.",
+    "da_xac_nhan_khong_du": "You have not marked \"Resonates with me\" on two boxes yet (or you were not signed in, so your votes were not kept). Read one of the three readings and tap any box that rings true — next time, this chapter will show where the readings meet.",
+    "da_xac_nhan_co_chua_dung": "You also marked {so} boxes as not quite right — the system does not repeat those traits; the mismatch is logged for the editorial team to review the wording.",
+    "loi_khuyen_mo": "Things to do gathered from the boxes of all three readings, starting with areas where several readings suggest going slowly, then favourable areas you can make the most of. Pick one and do it for 21 days.",
+    "thieu_nhan_tuong": "No face survey yet — take the Survey on the Face reading page (5 minutes, no photo needed) to add a third way of looking.",
+    "muon_hop": "From {mon}"
+  },
+  "cau_tu_soi": {
+    "tong_quan": "In the areas where all three readings agree — does it feel true to you?",
+    "con_nguoi": "Of the traits that repeat in two or more readings — would the person closest to you nod?",
+    "cong_viec_tien": "Over the past three months, work or money — which did you put more effort into, and did the results match what the readings say?",
+    "tinh_cam_gia_dinh": "Who in your family do the readings all suggest you spend more time with?",
+    "suc_khoe": "Which habit from the past 30 days do you know is wearing you down?",
+    "nang_luong": "Which of your habits is making up for the element your chart says is missing?",
+    "nam_nay": "Which area does your biggest task this year fall into — and how do the readings see that area?",
+    "da_xac_nhan": "Of the things you agreed with, which did you know long ago — and which could you only admit once someone else said it?",
+    "loi_khuyen": "Of the actions above, which could you do this very week?"
+  }
+}

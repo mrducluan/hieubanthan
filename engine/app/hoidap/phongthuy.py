@@ -68,7 +68,7 @@ def _dn_huong(x: str) -> str:
 
 
 def _tach_ngoac(x: str) -> tuple[str, str] | None:
-    """"A (B)" → ("A", "B") tách ở " (" ĐẦU TIÊN — thay regex `(.+?) \((.+)\)` (CodeQL: ReDoS)."""
+    r""""A (B)" → ("A", "B") tách ở " (" ĐẦU TIÊN — thay regex `(.+?) \((.+)\)` (CodeQL: ReDoS)."""
     if not x.endswith(")") or " (" not in x:
         return None
     a, b = x[:-1].split(" (", 1)
