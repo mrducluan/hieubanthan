@@ -282,7 +282,7 @@ _RE_LD_CHU = re.compile(r"^(.+) với tuổi gia chủ$")
 _RE_NT_NAM = re.compile(r"^Tuổi (.+) \(xung năm (\S+)\)$")
 _RE_NT_CHU = re.compile(r"^Tuổi (.+) \(xung tuổi gia chủ (\S+)\)$")
 _RE_NT_TT = re.compile(r"^Tuổi (.+) \(đang trong Tam tai năm (\S+)\)$")
-_RE_GIO0 = re.compile(r"giờ hoàng đạo đầu tiên là (\S+) \(([^)]+)\)")
+_RE_GIO0 = re.compile(r"giờ hoàng đạo đầu tiên là ([^\s()]+) \(([^()]+)\)")
 
 
 def _nguoc(muc: str) -> dict[str, str]:
