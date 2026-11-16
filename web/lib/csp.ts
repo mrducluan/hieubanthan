@@ -25,10 +25,12 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
     "https://*.googlesyndication.com", "https://*.gstatic.com", "https://tagassistant.google.com"];
   // Thêm dịch vụ khác qua GTM (vd Meta Pixel: https://connect.facebook.net,https://www.facebook.com) mà không sửa code:
   // env CSP_THEM_MIEN = danh sách origin cách nhau bằng dấu phẩy → được thêm vào img/connect/frame-src.
+  // Meta Pixel (2026-11-16): fbevents.js + ping chuyển đổi.
+  const meta = ["https://connect.facebook.net", "https://www.facebook.com"];
   const them = (process.env.CSP_THEM_MIEN ?? "").split(",").map((x) => goc(x.trim())).filter((x): x is string => Boolean(x));
   const anhCms = [goc(process.env.CMS_URL), goc(process.env.CMS_ANH_URL)].filter((x): x is string => Boolean(x));
   const ketNoi = ["'self'", posthog, "https://*.posthog.com", ...google, ...them,
-    "https://*.ingest.sentry.io", "https://*.ingest.us.sentry.io", "https://*.ingest.de.sentry.io",
+    ...meta, "https://*.ingest.sentry.io", "https://*.ingest.us.sentry.io", "https://*.ingest.de.sentry.io",
     ...(supabase ? [supabase, supabase.replace(/^https:/, "wss:")] : []),
     ...(dev ? ["ws:", "http://localhost:*"] : [])];
   return [
@@ -37,7 +39,7 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
     `style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://fonts.googleapis.com`,
     // notfair.co: ảnh nằm trong thân bài blog NotFair (ảnh bìa đi qua /_next/image = 'self').
     // CMS: ảnh bài viết nằm ở CMS (CMS_URL) hoặc kho ảnh của CMS (CMS_ANH_URL, vd Supabase Storage công khai).
-    `img-src 'self' data: blob: https://notfair.co ${[...anhCms, ...google, ...them].join(" ")}`,
+    `img-src 'self' data: blob: https://notfair.co ${[...anhCms, ...google, ...meta, ...them].join(" ")}`,
     "font-src 'self' data: https://fonts.gstatic.com",
     `connect-src ${ketNoi.join(" ")}`,
     `frame-src 'self' https://www.youtube-nocookie.com https://www.googletagmanager.com https://tagassistant.google.com https://*.doubleclick.net ${them.join(" ")}`.trim(),

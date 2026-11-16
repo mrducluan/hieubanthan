@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { CheckCircle2, Clock, Loader2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
+import { metaPurchase } from "@/lib/meta-pixel";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { QUAY_VE } from "@/lib/sao-client";
 import { maDonQuayVe } from "@/lib/thanh-toan/ma-don";
@@ -49,6 +50,7 @@ export function KetQua() {
         try { daGhi = localStorage.getItem(k) === "1"; localStorage.setItem(k, "1"); } catch { /* bỏ qua */ }
         if (!daGhi) {
           ghi("payment_succeeded", { so_sao: d.sao, kind: d.loai ?? "sao" });
+          metaPurchase(d.so_tien, d.ma_don);   // Meta Pixel: Purchase (mỗi đơn một lần, cùng khoá với payment_succeeded)
           if (d.loai === "hoi_vien") ghi("membership_activated", { kind: "hoi_vien" });
         }
         return;
