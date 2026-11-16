@@ -15,7 +15,7 @@
 | 4 | Tử vi | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/zi-wei-dou-shu` + 6 cụm kiến thức; hỏi đáp tiếng Anh (mục 3e) |
 | 5 | Phong thuỷ | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/feng-shui` + cụm dấu hiệu trong nhà (gồm `kb.trang.dau_hieu`, `hoi.phongthuy`) — mục 3f |
 | 6 | Kinh Dịch | **xong** (2026-11-14) | 6 nhóm route sạch; `/en/i-ching` + cụm 64 quẻ; hỏi đáp tiếng Anh — mục 3g |
-| 7 | Thần số + Tarot đầy đủ | chưa | 18 |
+| 7 | Thần số + Tarot đầy đủ | **đang** (engine xong 2026-11-16) | 19 nhóm route + 8 loại trang sạch — mục 3i; hỏi đáp đầy đủ + web đang làm |
 | 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | chưa | 26 |
 | 9 | Tài khoản & kinh tế, Web Push theo ngôn ngữ, thẻ chia sẻ | chưa | 3 nhóm route + web |
 | 10 | CMS + Blog + pháp lý + hub | chưa | |
@@ -299,6 +299,22 @@ cho người dùng thật cần chủ dự án (mục 6).
   quyết có nới cho Kinh Dịch không.
 - **Thuật ngữ cần người bản xứ duyệt**: changed / resulting hexagram, Response / Other line (Ying), Use God line, Officer / Wealth /
   Parent / Offspring / Sibling line, body / use trigram (Mai Hoa), void branch, month breaker, "meaning-and-principle reading".
+
+## 3i. Giai đoạn 7 — Thần số + Tarot (2026-11-16)
+
+Ba nhóm chạy song song (worktree riêng, tệp mẫu câu riêng `en/loi/{thanso,trang_thanso,trang_tarot,nhip_ngay}.json`):
+- **A1 bài đọc Thần số**: ban_do (Bản đồ con số), chaldea, chu_ky, do_nhay, doi_chieu_nam, tong_hop, ba_goc_nhin, ngu_canh,
+  noi_dau, cap_so, hop_doi — bản phủ `en/thanso_{ban_do,chaldean,do_thi,doi_chieu,cap_so,quan_he,noi_dau,giai_thich,xu_ly}.json`,
+  `en/thanso_linh_vuc.json` thêm 5 lĩnh vực. Nỗi đau: câu hỏi luôn so với câu chuẩn bản Việt để hai bản chọn cùng câu.
+- **A2 trang kiến thức**: so, so_kep, cap_so, nghe, tinh_yeu, nam_ca_nhan, no_nghiep + 78 lá Tarot; 7 tệp `en/bo_sung_*.json`
+  (4.609 chuỗi, giữ số liệu / bảng / nguồn). Trang lá bài vẫn lệch khung có chủ đích (mục "bốn trường phái" tắt ở bản Anh — QTE-3).
+- **B nhịp ngày**: hom_nay (+ Ba lá), nhip, the_ngay, tuan, hom_nay_hai, goi_y_cheo, ban_do_5_mang, tarot.the; lớp hiển thị lịch
+  `luangiai/lich_hien.py` (tính + quyết định vẫn bằng tên Việt, chỉ đổi chữ ở bước hiển thị) + bản phủ `en/hoang_lich_kb.json`
+  (dùng lại ở GĐ 8). `push.tuan` sạch luôn.
+- Gộp: ba tệp phủ trùng (`thanso_chaldean`, `thanso_cap_so`, `thanso_quan_he`) gộp sâu — giữ bản A1 cho khoá chung.
+- Còn: hỏi đáp Thần số đầy đủ thay `hoi_en` (nhóm H), web `/en/numerology`, `/en/tarot` theo hệ một-component + mở cụm kiến thức (nhóm W).
+- Cần quyết: tên thường gọi trong bài Chaldea bản Anh đang không dấu ("Luan") vì bộ kiểm coi tên có dấu là chữ Việt; mọi chữ Anh
+  `bien_tap`, cần người bản xứ duyệt.
 
 ## 3h. Chính sách chặn có ích + "nên chú ý" (CY-2, 2026-11-14, vi + en)
 
