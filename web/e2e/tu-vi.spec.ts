@@ -1,6 +1,6 @@
 // Tử vi (HH-2): hồ sơ trên máy → lá số 12 cung (iztro) → hỏi.
 import { test, expect } from "@playwright/test";
-import { HO_SO_MAU, hoi, napHoSo } from "./_hoso";
+import { chonNoiSinh, HO_SO_MAU, hoi, napHoSo } from "./_hoso";
 
 test("có hồ sơ đủ giờ sinh: vẽ lá số, chọn cung → chi tiết → hỏi", async ({ page }) => {
   await napHoSo(page);
@@ -280,10 +280,8 @@ test("QTE-2 giai đoạn 0: sinh ở nước ngoài → chọn nước + thành 
   await napHoSo(page, cu);
   await page.goto("/tu-vi");
   await page.getByLabel("Nơi sinh").selectOption("nuoc_ngoai");
-  const nuoc = page.getByLabel("Nước nơi sinh");
-  await expect(nuoc.locator("option", { hasText: "Hoa Kỳ" })).toHaveCount(1);
-  await nuoc.selectOption("us");
-  await page.getByLabel("Thành phố / vùng").selectOption("us-san_jose");
+  await chonNoiSinh(page, "hs", "san jo", "San Jose");
+  await expect(page.getByTestId("hs-noi-da-chon")).toContainText("California, Hoa Kỳ · 37,34°B 121,89°T");
   // dòng xác nhận do engine tra tzdata: UTC−8, đang giờ mùa hè
   await expect(page.getByTestId("xac-nhan-mui-gio")).toContainText("UTC−8");
   await expect(page.getByTestId("xac-nhan-mui-gio")).toContainText("đang giờ mùa hè");
@@ -291,7 +289,7 @@ test("QTE-2 giai đoạn 0: sinh ở nước ngoài → chọn nước + thành 
   await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
   await expect(page.getByText(/Đã trừ 1 giờ mùa hè: giờ chuẩn địa phương 11:30/)).toBeVisible();
   const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1")!));
-  expect(h.mui_gio).toBe("us-san_jose");
+  expect(h.mui_gio).toBe("gn-5392171");
   expect(h.noi_sinh).toBe("nuoc_ngoai");
   expect(h.utc_noi_sinh).toBeUndefined();   // không khai tay → engine tự suy từ thành phố
 });

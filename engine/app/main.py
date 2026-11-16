@@ -172,6 +172,8 @@ app.include_router(y_dinh_router)
 app.include_router(push_router)
 app.include_router(tuvi_v2_router)
 app.include_router(kinhdich_router)
+from app.gia_dinh_api import router as gia_dinh_router  # noqa: E402 — GD-1
+app.include_router(gia_dinh_router)
 app.include_router(battu_router)
 app.include_router(phongthuy_router)
 app.include_router(lich_router)

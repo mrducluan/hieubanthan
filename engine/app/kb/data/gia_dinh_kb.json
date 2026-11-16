@@ -1,0 +1,355 @@
+{
+ "_nguon": "GD-1 đợt 1 (2026-11-16) — lời cho \"Bảng nhà mình\": quan hệ con giáp từng cặp người nhà, điều tập quán nhắc trong năm của từng người, hướng chung cả nhà. Chỉ ĐỌC kết quả tính sẵn (tuoi_dan_gian.quan_he_chi, pham_tam_tai, sao hạn, cung phi Bát trạch). Lời hành vi, không chấm điểm, không phán; tập quán ghi \"dân gian…\". Nháp ban biên tập, chờ chuyên gia đọc. GD-2 (2026-11-16): từng cặp xem theo nhiều lớp (con giáp, bản mệnh nạp âm, can năm, cung phi — lời từng lớp lấy ở tuvi_hai_nguoi_kb, một nguồn với Xem lá số 2 người; trụ ngày sinh, nhịp năm thần số — lời ở đây), mảng đời theo nhóm quan hệ, lịch nhà 5 năm.",
+ "source_id": "hbt_bien_tap_gia_dinh",
+ "school_id": "dan_gian_viet",
+ "trang_thai": "nhap_ai",
+ "cap": {
+  "tam_hop": {
+   "tieu_de": "Hai tuổi tam hợp: dễ đồng lòng",
+   "noi_dung": "Dân gian xếp hai tuổi này cùng một nhóm tam hợp. Hai người thường dễ cùng nhìn một hướng, việc chung ít phải giải thích nhiều."
+  },
+  "luc_hop": {
+   "tieu_de": "Hai tuổi lục hợp: dễ bù cho nhau",
+   "noi_dung": "Dân gian coi hai tuổi này là một cặp lục hợp. Chỗ người này thiếu thường là chỗ người kia làm tốt."
+  },
+  "trung": {
+   "tieu_de": "Cùng con giáp: hiểu nhịp của nhau",
+   "noi_dung": "Hai người cùng con giáp nên thường hiểu nhịp của nhau. Khi cả hai cùng nóng vội, nên có một người lùi lại trước."
+  },
+  "xung": {
+   "tieu_de": "Hai tuổi xung: dễ trái nhịp",
+   "noi_dung": "Dân gian xếp hai tuổi này vào nhóm xung: một người muốn làm ngay, người kia muốn chờ. Chuyện nhỏ dễ thành tranh luận nếu không nói rõ trước."
+  },
+  "hai": {
+   "tieu_de": "Hai tuổi lục hại: dễ hiểu lầm",
+   "noi_dung": "Dân gian xếp hai tuổi này vào nhóm lục hại: điều một người nghĩ là quan tâm, người kia có thể thấy là bị xen vào."
+  },
+  "hinh": {
+   "tieu_de": "Hai tuổi tương hình: dễ căng khi mệt",
+   "noi_dung": "Dân gian xếp hai tuổi này vào nhóm tương hình: lúc cả hai bận và mệt, lời nói dễ nặng hơn ý định."
+  }
+ },
+ "viec": {
+  "vo_chong": {
+   "diem_sang": "Giao cho nhau những việc lớn cần bàn chung (tiền nhà, việc học của con); hai bạn thường chốt nhanh mà ít sót.",
+   "nen_de_y": "Khoản chi lớn hoặc quyết định đổi việc, đổi nhà: hẹn bàn sau một đêm, mỗi người viết ra hai lý do của mình rồi mới nói."
+  },
+  "cha_me_con": {
+   "diem_sang": "Dành một buổi mỗi tuần làm một việc chung (đi bộ, nấu ăn, sửa đồ); hai người dễ nói chuyện khi cùng làm.",
+   "nen_de_y": "Khi muốn nhắc nhau, nói lý do trước rồi mới nói điều cần làm; tránh nhắc lại chuyện cũ lúc đang mệt."
+  },
+  "ong_chau": {
+   "diem_sang": "Để ông bà và cháu có thời gian riêng với nhau (kể chuyện, dạy một việc nhỏ); cả hai đều được lợi.",
+   "nen_de_y": "Thống nhất trước giữa bố mẹ và ông bà về giờ giấc, đồ ăn vặt, màn hình của con, để cháu không phải chọn bên."
+  },
+  "anh_em": {
+   "diem_sang": "Việc chung của gia đình (chăm bố mẹ, giỗ chạp) có thể chia theo chỗ mạnh của từng người.",
+   "nen_de_y": "Chuyện tiền bạc giữa anh chị em: ghi rõ ai góp gì, ai giữ gì, kể cả khoản nhỏ."
+  },
+  "gia_dinh": {
+   "diem_sang": "Những việc cần phối hợp trong nhà nên giao cho hai người này cùng làm.",
+   "nen_de_y": "Việc chung trong nhà nên chia rõ người làm và hạn xong, tránh để mỗi người tự hiểu một kiểu."
+  },
+  "hai_tre": {
+   "diem_sang": "Hai bé dễ chơi với nhau. Bố mẹ giao cho hai bé một việc nhỏ làm chung mỗi tuần, như tưới cây hay dọn đồ chơi.",
+   "nen_de_y": "Hai bé dễ tranh nhau. Bố mẹ đặt luật chung rõ ràng (lần lượt, đồ của ai người nấy giữ) và khen khi hai bé tự dàn xếp được."
+  }
+ },
+ "nguoi": {
+  "tam_tai": {
+   "ten": "Năm Tam tai (năm thứ {n})",
+   "nguoi_lon": "Dân gian coi năm nay là năm Tam tai thứ {n} của tuổi này, hay nhắc chậm lại với việc lớn. Việc nên làm: việc lớn (mua bán nhà, đầu tư, đổi việc) thì xem kỹ giấy tờ và hỏi thêm một người tin cậy trước khi quyết.",
+   "tre_em": "Dân gian coi năm nay là năm Tam tai thứ {n} của tuổi con, hay nhắc để mắt hơn khi con đi lại, chơi đùa. Việc nên làm: rà lại đường con đi học, mũ bảo hiểm, chỗ chơi gần nước; giữ lịch khám định kỳ của con."
+  },
+  "trung": {
+   "ten": "Năm tuổi",
+   "nguoi_lon": "Năm nay là năm tuổi (cùng con giáp với năm). Dân gian hay nhắc sống chậm và giữ sức. Việc nên làm: sắp lịch nghỉ ngơi đều, khám sức khoẻ tổng quát một lần trong năm.",
+   "tre_em": "Năm nay là năm tuổi của con. Việc nên làm: giữ nếp ngủ và ăn đều cho con, cùng con đặt một mục tiêu nhỏ cho năm học."
+  },
+  "xung": {
+   "ten": "Tuổi xung với năm",
+   "nguoi_lon": "Dân gian xếp tuổi này xung với năm nay: nhịp việc dễ thay đổi bất ngờ. Việc nên làm: giữ một khoản dự phòng, việc quan trọng có kế hoạch B.",
+   "tre_em": "Dân gian xếp tuổi con xung với năm nay: con có thể thay đổi nhiều (bạn mới, lớp mới). Việc nên làm: hỏi chuyện con mỗi tối vài phút, để con có chỗ kể."
+  },
+  "hinh": {
+   "ten": "Tuổi tương hình với năm",
+   "nguoi_lon": "Dân gian xếp tuổi này tương hình với năm nay: dễ căng thẳng khi việc dồn. Việc nên làm: chia việc lớn thành bước nhỏ và nói rõ khi cần người khác giúp.",
+   "tre_em": "Dân gian xếp tuổi con tương hình với năm nay: con dễ cáu khi mệt. Việc nên làm: để ý giờ ngủ của con, bớt lịch học thêm nếu con đuối."
+  },
+  "hai": {
+   "ten": "Tuổi lục hại với năm",
+   "nguoi_lon": "Dân gian xếp tuổi này lục hại với năm nay: dễ hiểu lầm trong lời nói. Việc nên làm: việc quan trọng thì nhắn lại bằng chữ sau khi nói miệng.",
+   "tre_em": "Dân gian xếp tuổi con lục hại với năm nay: con dễ hiểu lầm với bạn bè. Việc nên làm: khi con kể chuyện bạn, nghe hết rồi mới góp ý."
+  },
+  "hop": {
+   "ten": "Tuổi hợp với năm",
+   "nguoi_lon": "Dân gian xếp tuổi này hợp với năm nay. Việc nên làm: năm hợp để bắt đầu một việc đã định lâu (học thêm, đổi nếp sống, mở việc nhỏ).",
+   "tre_em": "Dân gian xếp tuổi con hợp với năm nay. Việc nên làm: cho con thử một môn mới hoặc một nhóm bạn mới."
+  },
+  "binh": {
+   "ten": "Năm bình thường với tuổi",
+   "nguoi_lon": "Năm nay không hợp cũng không xung với tuổi này theo tập quán. Việc nên làm: giữ nhịp đều, làm tiếp việc đang dở.",
+   "tre_em": "Năm nay không hợp cũng không xung với tuổi con theo tập quán. Việc nên làm: giữ nếp học, nếp chơi đều cho con."
+  }
+ },
+ "huong": {
+  "chung": "Cả nhà có chung các hướng tốt: {ds}. Bàn ăn, phòng sinh hoạt chung nên kê quay về một trong các hướng này.",
+  "hai_nhom": "Nhà có người nhóm Đông tứ mệnh và người nhóm Tây tứ mệnh, nên không có hướng tốt chung cho cả nhà. Phòng chung kê theo người ở đó nhiều nhất; đầu giường, bàn làm việc mỗi người theo hướng riêng.",
+  "thieu": "Thêm giới tính cho từng người để xem hướng tốt chung của cả nhà."
+ },
+ "tom_tat": {
+  "tam_tai": "{so} người vào năm Tam tai",
+  "trung": "{so} người gặp năm tuổi",
+  "xung": "{so} người có tuổi xung với năm",
+  "hop": "{so} người có tuổi hợp với năm"
+ },
+ "viec_chung": {
+  "chon_ngay": {
+   "ten": "Chọn ngày cho cả nhà",
+   "mo_ta": "Ngày hợp việc, không xung tuổi ai trong nhà (cưới, về nhà mới, khai trương…)."
+  },
+  "lam_nha": {
+   "ten": "Tuổi làm nhà năm {nam}",
+   "mo_ta": "Kim lâu, Hoang ốc, Tam tai theo tuổi người đứng tên."
+  },
+  "xong_dat": {
+   "ten": "Tuổi xông đất Tết {nam}",
+   "mo_ta": "Tuổi hợp với chủ nhà để mời xông đất."
+  }
+ },
+ "luu_y": "Con giáp, Tam tai, năm tuổi, sao hạn là tập quán dân gian để tham khảo khi sắp xếp việc nhà, không phải lời đoán về ai. Mọi việc lớn vẫn nên dựa trên điều kiện thật của gia đình.",
+ "lop": {
+  "ten": {
+   "chi": "Con giáp · nếp sinh hoạt",
+   "menh": "Bản mệnh năm sinh · tính nền",
+   "can": "Can năm · cách nghĩ, cách quyết",
+   "cung_phi": "Cung phi · chỗ ở chung",
+   "tru_ngay": "Ngày sinh (Bát tự) · sự gần gũi hằng ngày",
+   "than_so": "Thần số · nhịp năm nay"
+  },
+  "tru_ngay": {
+   "thuan": {
+    "y": "Ngày sinh của hai người thuộc cặp hợp nhau: ở gần nhau hằng ngày thường thấy dễ chịu, ít phải giữ ý.",
+    "nen": "Giữ một việc nhỏ làm cùng nhau mỗi ngày, như bữa sáng hay mười phút đi bộ."
+   },
+   "binh": {
+    "y": "Ngày sinh của hai người không hợp cũng không xung: gần gũi đến đâu là do thời gian dành cho nhau.",
+    "nen": "Hẹn một giờ cố định mỗi tuần chỉ dành cho hai người."
+   },
+   "hai_mat": {
+    "y": "Ngày sinh của hai người vừa có nét hợp vừa có nét trái: quý nhau nhưng ở sát nhau lâu dễ va chạm vặt.",
+    "nen": "Thân thì thân, mỗi người vẫn nên có một khoảng riêng trong ngày."
+   },
+   "de_y": {
+    "y": "Ngày sinh của hai người thuộc cặp trái nhịp: thói quen hằng ngày dễ làm phiền nhau dù không ai cố ý.",
+    "nen": "Nói rõ với nhau hai thói quen mình mong người kia nhường, đổi lại nhường hai thói quen của họ."
+   },
+   "ghi_chu": "Người học Tử Bình hay đặt hai trụ ngày cạnh nhau (can ngày ngũ hợp, chi ngày hợp hay xung). Sách xưa không có bảng riêng cho việc này, nên đây là nét phụ."
+  },
+  "than_so": {
+   "cung_so": {
+    "y": "Năm nay hai người cùng một con số năm cá nhân ({a}): cùng một nhịp, dễ hiểu điều người kia đang bận tâm.",
+    "nen": "Cùng đặt một mục tiêu chung cho năm, mỗi quý xem lại một lần."
+   },
+   "cung_ra": {
+    "y": "Năm nay cả hai cùng ở nhịp hướng ra ngoài ({a} và {b}): nhiều việc mới, dễ cùng bận.",
+    "nen": "Chốt trước những ngày cả hai cùng ở nhà, kẻo cả năm chỉ gặp nhau lúc mệt."
+   },
+   "cung_vao": {
+    "y": "Năm nay cả hai cùng ở nhịp hướng vào trong ({a} và {b}): hợp để vun việc nhà, sức khoẻ, học thêm.",
+    "nen": "Chọn một việc trong nhà hai người cùng làm cho xong trong năm."
+   },
+   "lech": {
+    "y": "Năm nay hai người khác nhịp ({a} và {b}): một người muốn mở việc mới, một người cần chậm lại.",
+    "nen": "Người đang nhịp nhanh báo trước lịch bận; người đang nhịp chậm nói rõ lúc nào cần được yên."
+   }
+  }
+ },
+ "nhip_cap": {
+  "thuan": {
+   "tieu_de": "Dễ đồng lòng",
+   "noi_dung": "{t} trên {n} cách xem cho thấy hai người thuận nhau, không cách nào báo trái nhịp."
+  },
+  "hai_mat": {
+   "tieu_de": "Vừa hợp vừa cần nhường",
+   "noi_dung": "Trong {n} cách xem, {t} cách thuận và {d} cách báo trái nhịp: hợp ở mặt này, cần nhường ở mặt kia."
+  },
+  "de_y": {
+   "tieu_de": "Dễ trái nhịp, nên nói rõ với nhau",
+   "noi_dung": "{d} trên {n} cách xem báo hai người dễ trái nhịp. Đây là chỗ cần thoả thuận rõ, không phải điều xấu."
+  },
+  "binh": {
+   "tieu_de": "Không thuận, không vướng",
+   "noi_dung": "Các cách xem đều ở mức bình thường: quan hệ của hai người do cách đối xử hằng ngày quyết định."
+  },
+  "thuan_1": {
+   "tieu_de": "Dễ đồng lòng",
+   "noi_dung": "{t} trên {n} cách xem cho thấy hai người thuận nhau, chỉ {d} cách cần nhường nhau một chút."
+  }
+ },
+ "mang_cap": {
+  "vo_chong": {
+   "thuan": [
+    {
+     "mang": "Tình cảm",
+     "chu": "Hai bạn dễ hiểu ý nhau. Điều cần giữ là đừng coi sự dễ ấy là đương nhiên: mỗi tuần một buổi chỉ có hai người."
+    },
+    {
+     "mang": "Tiền bạc",
+     "chu": "Chuyện tiền dễ thống nhất. Nên có một bảng thu chi chung, mỗi tháng cùng xem một lần."
+    },
+    {
+     "mang": "Làm ăn chung",
+     "chu": "Hai bạn có thể cùng làm một việc. Vẫn nên chia rõ ai quyết mảng nào và tách tiền nhà khỏi tiền kinh doanh."
+    }
+   ],
+   "hai_mat": [
+    {
+     "mang": "Tình cảm",
+     "chu": "Hai bạn hợp ở nhiều mặt nhưng có một mặt hay lệch. Gọi tên mặt đó ra và thống nhất cách xử lý khi nó xảy ra."
+    },
+    {
+     "mang": "Tiền bạc",
+     "chu": "Khoản thường ngày để một người lo; khoản lớn thì cả hai cùng gật, chờ qua một đêm rồi quyết."
+    },
+    {
+     "mang": "Làm ăn chung",
+     "chu": "Làm chung được nếu mỗi người một mảng riêng, có sổ sách rõ. Tránh hai người cùng quyết một việc."
+    }
+   ],
+   "de_y": [
+    {
+     "mang": "Tình cảm",
+     "chu": "Hai bạn nhìn việc từ hai phía khác nhau. Khi căng, tạm dừng 20 phút rồi nói tiếp, mỗi lần chỉ bàn một chuyện."
+    },
+    {
+     "mang": "Tiền bạc",
+     "chu": "Thoả thuận bằng con số: mức chi mỗi người tự quyết, trên mức đó phải bàn. Ghi lại để khỏi nhớ khác nhau."
+    },
+    {
+     "mang": "Làm ăn chung",
+     "chu": "Nếu làm ăn chung, viết thoả thuận rõ phần vốn, phần việc, cách chia; nên có người thứ ba giữ sổ."
+    }
+   ]
+  },
+  "cha_me_con": {
+   "thuan": [
+    {
+     "mang": "Chuyện trò",
+     "chu": "Hai người dễ nói chuyện. Tận dụng để nói cả những chuyện khó (tiền, sức khoẻ, dự định) khi còn dễ nói."
+    },
+    {
+     "mang": "Học hành, nghề nghiệp",
+     "chu": "Lời góp ý về học và nghề dễ được nghe. Người lớn nên hỏi ý con trước rồi mới góp ý."
+    }
+   ],
+   "hai_mat": [
+    {
+     "mang": "Chuyện trò",
+     "chu": "Thương nhau nhưng có chủ đề hễ nhắc là căng. Chọn lúc cả hai thoải mái, nói ngắn, một chuyện mỗi lần."
+    },
+    {
+     "mang": "Học hành, nghề nghiệp",
+     "chu": "Chuyện chọn trường, chọn nghề: mỗi bên viết ba lý do của mình rồi đọc cho nhau nghe."
+    }
+   ],
+   "de_y": [
+    {
+     "mang": "Chuyện trò",
+     "chu": "Hai thế hệ khác nhịp rõ. Đổi lời nhắc thành câu hỏi, và khen một việc trước khi góp ý một việc."
+    },
+    {
+     "mang": "Học hành, nghề nghiệp",
+     "chu": "Việc lớn của con (trường, nghề, nơi ở) nên để con trình bày kế hoạch; cha mẹ hỏi rủi ro, không quyết thay."
+    }
+   ]
+  },
+  "ong_chau": {
+   "thuan": [
+    {
+     "mang": "Gần gũi",
+     "chu": "Ông bà và cháu hợp nhau. Một buổi mỗi tuần để ông bà kể chuyện, dạy cháu một việc nhỏ."
+    }
+   ],
+   "hai_mat": [
+    {
+     "mang": "Gần gũi",
+     "chu": "Ông bà và cháu quý nhau nhưng khác nếp. Bố mẹ nói trước với ông bà vài quy ước của cháu."
+    }
+   ],
+   "de_y": [
+    {
+     "mang": "Gần gũi",
+     "chu": "Ông bà và cháu khác nếp rõ. Thống nhất giờ ăn, giờ ngủ, màn hình giữa bố mẹ và ông bà để cháu không phải chọn bên."
+    }
+   ]
+  },
+  "anh_em": {
+   "thuan": [
+    {
+     "mang": "Làm ăn chung",
+     "chu": "Anh chị em hợp để cùng làm một việc. Dù thân vẫn nên ghi rõ phần vốn, phần việc của mỗi người."
+    },
+    {
+     "mang": "Việc nhà chung",
+     "chu": "Việc chăm bố mẹ, giỗ chạp dễ chia. Lập một lịch phân công cả năm."
+    }
+   ],
+   "hai_mat": [
+    {
+     "mang": "Làm ăn chung",
+     "chu": "Làm chung được ở việc ngắn, rõ đầu rõ cuối. Việc dài hạn nên có giấy tờ và người thứ ba làm chứng."
+    },
+    {
+     "mang": "Việc nhà chung",
+     "chu": "Chia việc theo chỗ mạnh: người góp công, người góp tiền, ghi lại cho rõ."
+    }
+   ],
+   "de_y": [
+    {
+     "mang": "Làm ăn chung",
+     "chu": "Nên giúp nhau bằng lời khuyên, mối quen hơn là góp vốn chung. Nếu vẫn làm chung, mọi khoản đều ghi thành văn bản."
+    },
+    {
+     "mang": "Việc nhà chung",
+     "chu": "Việc có tiền (đất đai, chi phí chăm bố mẹ) nên họp cả nhà, có biên bản, tránh nhắn riêng từng người."
+    }
+   ]
+  },
+  "gia_dinh": {
+   "thuan": [
+    {
+     "mang": "Sống chung",
+     "chu": "Hai người dễ ở cùng nhau. Việc cần phối hợp trong nhà nên giao cho cặp này."
+    }
+   ],
+   "hai_mat": [
+    {
+     "mang": "Sống chung",
+     "chu": "Hợp ở mặt này, khác ở mặt kia. Chia rõ phần dùng chung và phần riêng trong nhà."
+    }
+   ],
+   "de_y": [
+    {
+     "mang": "Sống chung",
+     "chu": "Hai người khác nếp. Việc chung nên chia rõ người làm, hạn xong; chuyện riêng chỉ góp ý khi được hỏi."
+    }
+   ]
+  }
+ },
+ "lich_nha": {
+  "nhan": {
+   "tam_tai": "Tam tai năm {n}",
+   "trung": "Năm tuổi",
+   "xung": "Xung với năm"
+  },
+  "nhe": "Năm {nam} ({cc}) là năm ít người lớn trong nhà vướng tập quán nhất trong năm năm tới. Việc lớn của cả nhà (sửa nhà, chuyển chỗ ở, việc hỷ) có thể cân nhắc xếp vào năm này.",
+  "deu": "Năm năm tới năm nào nhà mình cũng có người vướng tập quán. Việc lớn nên để người không vướng năm đó đứng tên, đứng ra lo.",
+  "ghi_chu": "Bảng chỉ ghi Tam tai, năm tuổi và tuổi xung với năm theo tập quán. Đây là lời nhắc sắp xếp, không phải dự báo."
+ },
+ "la_so": {
+  "dan": "Phần trên chỉ dùng năm sinh nên ai cùng tuổi cũng như nhau. Phần này đọc từ lá số theo ngày giờ sinh của riêng bạn.",
+  "nguoi_nha": "Năm sinh của từng người nhà chạm vào lá số Tử vi của bạn ở đâu",
+  "thieu_gio": "Thêm giờ sinh vào hồ sơ của bạn để xem lá số Tử vi, Bát tự của bạn nói gì về gia đình, tình cảm, công việc, tiền bạc."
+ }
+}

@@ -1617,5 +1617,141 @@
    "tranh_truc": [],
    "tranh_dan_gian": []
   }
- ]
+ ],
+ "tiet_khi": {
+  "_ghi_chu": "24 tiết khí: tên Hán Việt quen dùng + nghĩa ngắn (dữ kiện lịch phổ thông). Khoá = kinh độ Mặt Trời (độ); thời điểm do calc/tietkhi tính.",
+  "315": {
+   "ten": "Lập xuân",
+   "nghia": "bắt đầu mùa xuân",
+   "loai": "tiet"
+  },
+  "330": {
+   "ten": "Vũ thuỷ",
+   "nghia": "mưa ẩm, mưa xuân",
+   "loai": "trung_khi"
+  },
+  "345": {
+   "ten": "Kinh trập",
+   "nghia": "sâu bọ thức dậy, có tiếng sấm đầu mùa",
+   "loai": "tiet"
+  },
+  "0": {
+   "ten": "Xuân phân",
+   "nghia": "giữa mùa xuân, ngày đêm dài bằng nhau",
+   "loai": "trung_khi"
+  },
+  "15": {
+   "ten": "Thanh minh",
+   "nghia": "trời trong sáng, mùa tảo mộ",
+   "loai": "tiet"
+  },
+  "30": {
+   "ten": "Cốc vũ",
+   "nghia": "mưa rào cho lúa và hoa màu",
+   "loai": "trung_khi"
+  },
+  "45": {
+   "ten": "Lập hạ",
+   "nghia": "bắt đầu mùa hè",
+   "loai": "tiet"
+  },
+  "60": {
+   "ten": "Tiểu mãn",
+   "nghia": "lúa bắt đầu chắc hạt, mưa nhiều dần",
+   "loai": "trung_khi"
+  },
+  "75": {
+   "ten": "Mang chủng",
+   "nghia": "mùa gieo cấy, ngũ cốc trổ bông",
+   "loai": "tiet"
+  },
+  "90": {
+   "ten": "Hạ chí",
+   "nghia": "giữa mùa hè, ngày dài nhất năm",
+   "loai": "trung_khi"
+  },
+  "105": {
+   "ten": "Tiểu thử",
+   "nghia": "nóng nhẹ",
+   "loai": "tiet"
+  },
+  "120": {
+   "ten": "Đại thử",
+   "nghia": "nóng nhất trong năm",
+   "loai": "trung_khi"
+  },
+  "135": {
+   "ten": "Lập thu",
+   "nghia": "bắt đầu mùa thu",
+   "loai": "tiet"
+  },
+  "150": {
+   "ten": "Xử thử",
+   "nghia": "hết nóng, trời dịu dần",
+   "loai": "trung_khi"
+  },
+  "165": {
+   "ten": "Bạch lộ",
+   "nghia": "sương trắng buổi sớm, trời se mát",
+   "loai": "tiet"
+  },
+  "180": {
+   "ten": "Thu phân",
+   "nghia": "giữa mùa thu, ngày đêm dài bằng nhau",
+   "loai": "trung_khi"
+  },
+  "195": {
+   "ten": "Hàn lộ",
+   "nghia": "sương lạnh",
+   "loai": "tiet"
+  },
+  "210": {
+   "ten": "Sương giáng",
+   "nghia": "sương mù xuống, trời trở lạnh",
+   "loai": "trung_khi"
+  },
+  "225": {
+   "ten": "Lập đông",
+   "nghia": "bắt đầu mùa đông",
+   "loai": "tiet"
+  },
+  "240": {
+   "ten": "Tiểu tuyết",
+   "nghia": "chớm rét (phương Bắc bắt đầu có tuyết)",
+   "loai": "trung_khi"
+  },
+  "255": {
+   "ten": "Đại tuyết",
+   "nghia": "rét đậm dần (phương Bắc tuyết dày)",
+   "loai": "tiet"
+  },
+  "270": {
+   "ten": "Đông chí",
+   "nghia": "giữa mùa đông, đêm dài nhất năm",
+   "loai": "trung_khi"
+  },
+  "285": {
+   "ten": "Tiểu hàn",
+   "nghia": "rét nhẹ",
+   "loai": "tiet"
+  },
+  "300": {
+   "ten": "Đại hàn",
+   "nghia": "rét nhất trong năm",
+   "loai": "trung_khi"
+  }
+ },
+ "le_duong": {
+  "_ghi_chu": "Ngày lễ, ngày kỷ niệm cố định theo DƯƠNG lịch hay được tra (dữ kiện phổ thông). Khoá = MM-DD.",
+  "01-01": "Tết Dương lịch",
+  "02-14": "Lễ Tình nhân",
+  "03-08": "Quốc tế Phụ nữ",
+  "04-30": "Ngày Thống nhất 30/4",
+  "05-01": "Quốc tế Lao động",
+  "06-01": "Quốc tế Thiếu nhi",
+  "09-02": "Quốc khánh",
+  "10-20": "Ngày Phụ nữ Việt Nam",
+  "11-20": "Ngày Nhà giáo Việt Nam",
+  "12-24": "Đêm Giáng sinh"
+ }
 }

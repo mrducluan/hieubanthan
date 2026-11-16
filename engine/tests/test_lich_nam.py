@@ -67,3 +67,46 @@ def test_cac_nam():
     assert ds[0]["thang_nhuan"] == 6 and ds[0]["so_ngay"] in (383, 384, 385)
     assert client.get("/v1/lich/cac-nam?tu=2025&den=2028").json()[2]["tet"] == "2027-02-06"
     assert client.get("/v1/lich/cac-nam?tu=2000&den=2060").status_code == 422
+
+
+# LA-UI (2026-11-16): lịch cả năm âm THEO TỪNG NGÀY cho component lịch trên /lich-am, /lich-am/{năm}, /nam/{năm} —
+# chỉ ghép `lunar` + `hoang_lich.tom_tat` + `tietkhi` (không phép tính mới). Đối chiếu tay: Lập xuân 2027 = 04/02/2027
+# (thuộc năm Bính Ngọ), Tết Đinh Mùi 06/02/2027, Thanh minh 05/04/2027, Đông chí 22/12/2027.
+def test_lich_ngay_2027():
+    import datetime as dt
+    from app.luangiai import hoang_lich as HL
+    kq = L.lich_ngay(2027)
+    goc = L.lich_nam(2027)
+    assert kq["nam"] == 2027 and kq["can_chi"] == "Đinh Mùi" and len(kq["thang"]) == 12
+    ngay = [n for t in kq["thang"] for n in t["ngay"]]
+    assert len(ngay) == goc["so_ngay"] and ngay[0]["d"] == "2027-02-06" and ngay[-1]["d"] == "2028-01-25"
+    # ngày liền nhau, ngày âm đếm 1..so_ngay trong từng tháng, khớp bảng tháng của lich_nam
+    for a, b in zip(ngay, ngay[1:]):
+        assert dt.date.fromisoformat(a["d"]) + dt.timedelta(days=1) == dt.date.fromisoformat(b["d"])
+    for t, g in zip(kq["thang"], goc["thang"]):
+        assert (t["thang"], t["nhuan"], t["mung_mot"], t["so_ngay"], t["can_chi"]) == (g["thang"], g["nhuan"], g["mung_mot"], g["so_ngay"], g["can_chi"])
+        assert [n["a"] for n in t["ngay"]] == list(range(1, t["so_ngay"] + 1))
+        assert t["so_hoang_dao"] == sum(n["hd"] for n in t["ngay"]) and t["so_dep"] == sum(n.get("dep", False) for n in t["ngay"])
+    assert kq["thang"][0]["ten"] == "Tháng Giêng" and kq["thang"][-1]["ten"] == "Tháng Chạp"
+    # một nguồn với trang ngày: hoàng đạo / trực / ngày đẹp / can chi lấy đúng `tom_tat`
+    for n in ngay[::17]:
+        s = HL.tom_tat(dt.date.fromisoformat(n["d"]))
+        assert (n["cc"], n["hd"], n["tr"], n["th"], n.get("dep", False), n.get("ky", [])) == (s["can_chi"], s["hoang_dao"], s["truc"], s["than"], s["dep"], s["ky_dan_gian"])
+    theo = {n["d"]: n for n in ngay}
+    assert theo["2027-02-06"]["le"] == ["Tết Nguyên đán (mùng 1 Tết)"] and theo["2027-02-06"]["thu"] == 5
+    assert theo["2027-04-05"]["tiet"] == "Thanh minh" and theo["2027-12-22"]["tiet"] == "Đông chí"
+    assert "Quốc khánh" in theo["2027-09-02"]["le"]
+    assert "2027-02-04" not in theo                       # Lập xuân 2027 rơi trước Tết → thuộc năm âm 2026
+    assert len(kq["tiet_khi"]) in (23, 24, 25) and all(x["ngay"] in theo for x in kq["tiet_khi"])
+    tm = next(x for x in kq["tiet_khi"] if x["ten"] == "Thanh minh")
+    assert tm["ngay"] == "2027-04-05" and tm["am"] and tm["nghia"]
+
+
+def test_lich_ngay_nhuan_va_api():
+    kq = L.lich_ngay(2025)
+    assert len(kq["thang"]) == 13 and [t["ten"] for t in kq["thang"] if t["nhuan"]] == ["Tháng 6 nhuận"]
+    r = client.get("/v1/lich/nam-ngay/2027")
+    assert r.status_code == 200 and r.json()["thang"][0]["ngay"][0]["a"] == 1
+    assert client.get("/v1/lich/nam-ngay/1800").status_code == 422
+    # Lập xuân trong năm âm 2026 (04/02/2027, trước Tết Đinh Mùi)
+    assert any(x["ten"] == "Lập xuân" and x["ngay"] == "2027-02-04" for x in L.lich_ngay(2026)["tiet_khi"])

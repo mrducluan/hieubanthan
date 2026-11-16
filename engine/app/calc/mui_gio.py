@@ -48,7 +48,16 @@ def _tp() -> dict[str, dict]:
 
 
 def thanh_pho(ma: str) -> dict | None:
-    return _tp().get(ma)
+    """Mã thành phố cũ ("us-san_jose") hoặc mã GeoNames ("gn-5392171", NS-QT) → {ma, ten, ten_en, zone, kinh_do, vi_do,
+    nuoc, ten_nuoc}. Hai loại mã đi cùng một đường: lá số chỉ cần vùng giờ + toạ độ."""
+    t = _tp().get(ma)
+    if t is None and (ma or "").startswith("gn-"):
+        from app.calc import dia_danh  # noqa: PLC0415 — tệp 3 MB, chỉ nạp khi có người dùng mã gn-
+        g = dia_danh.tra(ma)
+        if g:
+            t = {"ma": g["ma"], "ten": g["ten"], "ten_en": g["ten"], "zone": g["zone"], "kinh_do": g["kinh_do"],
+                 "vi_do": g["vi_do"], "nuoc": g["nuoc"].lower(), "ten_nuoc": g["ten_nuoc"]}
+    return t
 
 
 def nam_ban_cau_kha_dung(vi_do: float | None) -> bool:

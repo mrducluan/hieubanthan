@@ -35,6 +35,8 @@ export type SuKien =
   | "luan_giai_saved"
   // CTA-1: khối "Đọc tiếp về bạn" cuối phần xem — chỉ mã trang (tu), mã mảng đích (den), cờ cá nhân hoá, số chương khoá
   | "cross_cta_viewed" | "cross_cta_clicked" | "sao_cta_clicked" | "donate_cta_clicked"
+  // GD-1: hồ sơ gia đình — chỉ mã vai + lớp dữ liệu (co_gioi_tinh), số người; không tên, không năm sinh
+  | "family_member_added" | "family_viewed"
   // CTA-1: trò "Đoán số" trên thẻ Bản đồ 5 mảng — đúng/sai + mã biến thể câu mời
   | "guess_played"
   // SAO-V "Tặng một chương": tạo link quà / mở trang nhận quà / bấm nhận — chỉ mã mảng + cờ còn dùng + kết quả, KHÔNG mã quà

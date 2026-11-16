@@ -7,7 +7,9 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { namAmHienTai } from "@/lib/tuoi-dan-gian";
-import { cacNamLich, duongLichAm } from "@/lib/lich-am";
+import { cacNamLich, duongLichAm, lichNgayCongKhai } from "@/lib/lich-am";
+import { LichAmNam } from "@/components/lich-am/LichAmNam";
+import { homNayVN } from "@/lib/hoang-lich";
 import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import { TraLoiNhanh, HoiDapHien } from "@/components/seo/TraLoiNhanh";
 import { dmy } from "@/lib/nam";
@@ -38,7 +40,7 @@ export default async function Page() {
   const ds = Array.from({ length: 6 }, (_, i) => namAm - 2 + i);
   const h1 = nd.dau.h1 ?? "Lịch âm các năm: Tết ngày nào, năm nào nhuận?";
   // SEO-O: bảng Tết 15 năm (engine tính) + trả lời nhanh + hỏi đáp — trước trang chỉ có 6 ô năm (~190 chữ).
-  const bang = await cacNamLich(namAm - 2, namAm + 12);
+  const [bang, lich] = await Promise.all([cacNamLich(namAm - 2, namAm + 12), lichNgayCongKhai(namAm)]);
   const toi = bang?.find((x) => x.nam === namAm + 1);
   const tlNhanh = toi ? `Tết Nguyên đán ${toi.nam} (năm ${toi.can_chi}) rơi vào ngày ${dmy(toi.tet)} dương lịch; năm âm lịch ${toi.nam} `
     + (toi.thang_nhuan ? `có tháng ${toi.thang_nhuan} nhuận (13 tháng, ${toi.so_ngay} ngày).` : `có 12 tháng, ${toi.so_ngay} ngày.`) : null;
@@ -59,6 +61,8 @@ export default async function Page() {
         mo_ta={nd.dau.loiDan ?? "Tính theo giờ Hà Nội (thuật toán Hồ Ngọc Đức). Chọn một năm để xem Tết, tháng nhuận, mùng 1 và rằm từng tháng."} />
       <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mb-6" />
       {tlNhanh && <div className="mb-6"><TraLoiNhanh chu={tlNhanh} /></div>}
+      {/* LA-UI: lịch năm âm ĐANG ĐI (có hôm nay) — năm khác chọn ở các ô bên dưới. */}
+      {lich && <LichAmNam d={lich} homNay={homNayVN()} className="mb-6" />}
       <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
         {ds.map((n) => (
           <li key={n}><Link href={duongLichAm(n)} className="block rounded-xl border border-line/70 p-4 text-center hover:border-gold/50">

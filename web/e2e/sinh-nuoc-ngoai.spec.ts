@@ -2,7 +2,7 @@
 // hè, lệch giờ mặt trời, Nam bán cầu, lịch âm Việt – Trung) + gợi ý công tắc Trường phái trong form hồ sơ khi chọn thành phố
 // Nam bán cầu / xa kinh tuyến múi giờ. Kiểm HTML máy chủ (H1, Trả lời nhanh, schema), sitemap, .md, 404, không chữ kỹ thuật.
 import { test, expect } from "@playwright/test";
-import { napDongY } from "./_hoso";
+import { chonNoiSinh, napDongY } from "./_hoso";
 
 const CAM = /tzdata|zoneinfo|IANA|iztro|đại hung|xui xẻo|giải hạn|vật phẩm/i;
 
@@ -76,11 +76,7 @@ test("Ý6: form hồ sơ chọn Sydney → gợi ý hai cách xem + link; chọn
   await page.goto("/bat-tu");
   const form = page.locator("form").filter({ has: page.locator("#noi-sinh") }).first();
   await form.locator("#noi-sinh").selectOption("nuoc_ngoai");
-  const nuoc = form.locator("#nuoc-sinh");
-  await expect(nuoc).toBeEnabled({ timeout: 15_000 });
-  await nuoc.selectOption("au");
-  await expect(form.locator('#thanh-pho-sinh option[value="au-sydney"]')).toHaveCount(1, { timeout: 15_000 });
-  await form.locator("#thanh-pho-sinh").selectOption("au-sydney");
+  await chonNoiSinh(page, "hs", "sydney", "Sydney");
   const goiY = page.getByTestId("goi-y-cong-tac");
   await expect(goiY).toContainText("Sydney", { timeout: 15_000 });
   await expect(goiY).toContainText("mùa nơi sinh");
@@ -89,8 +85,7 @@ test("Ý6: form hồ sơ chọn Sydney → gợi ý hai cách xem + link; chọn
   // đo chỉ mã
   const suKien = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: { ten?: string; su_kien?: string; props?: Record<string, unknown> }[] }).__hbt_su_kien ?? []);
   expect(JSON.stringify(suKien)).toContain("goi_y_cong_tac_hien");
-  await nuoc.selectOption("jp");
-  await form.locator("#thanh-pho-sinh").selectOption("jp-tokyo");
+  await chonNoiSinh(page, "hs", "tokyo", "Tokyo");
   await expect(page.getByTestId("goi-y-cong-tac")).toHaveCount(0);
   await expect(form.locator('a[href="/sinh-o-nuoc-ngoai/jp"]')).toBeVisible();
 });

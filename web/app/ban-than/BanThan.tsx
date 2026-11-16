@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { useRouter } from "next/navigation";
-import { ArrowRight, BookOpen, CalendarCheck, CalendarRange, Compass, HeartHandshake, History, MessageCircle, Pencil, Sun } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarCheck, CalendarRange, Compass, HeartHandshake, History, MessageCircle, Pencil, Sun, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { Card } from "@/components/ui/card";
@@ -116,6 +116,15 @@ export function BanThan() {
                 <span className="flex items-center gap-2 font-medium text-fg"><Pencil className="size-5 shrink-0 text-gold" aria-hidden /> Sửa hồ sơ</span>
                 <span className="mt-1 text-sm text-fg-muted">Tên, ngày giờ sinh, nơi sinh</span>
               </button>
+              {/* GD-1: hồ sơ gia đình (năm của cả nhà) — hàng riêng để lưới 2 cột không lẻ ô. */}
+              <Link href="/gia-dinh" data-testid="loi-gia-dinh"
+                className="glass col-span-2 flex items-center justify-between gap-3 rounded-2xl p-4 transition-colors hover:border-gold/50">
+                <span>
+                  <span className="flex items-center gap-2 font-medium text-fg"><Users className="size-5 shrink-0 text-gold" aria-hidden /> Nhà mình</span>
+                  <span className="mt-1 block text-sm text-fg-muted">Thêm người nhà: năm nay cả nhà cần để ý gì, tuổi ai hợp ai</span>
+                </span>
+                <ArrowRight className="size-5 shrink-0 text-gold" aria-hidden />
+              </Link>
             </div>
             {/* Trục 2 UX: một dòng huy hiệu gần đầu trang (mục đầy đủ ở cuối trang). KV-THANG: hạng hội viên (riêng tư) cạnh đó. */}
             <div className="flex flex-wrap gap-2 empty:hidden">

@@ -1,6 +1,7 @@
 // EN-ALL GĐ 3d — /en/bazi: rewrite của /bat-tu (một cây component, ngôn ngữ là ngữ cảnh). Trang Anh không lộ chữ Việt
 // (chữ hiển thị + aria/title/placeholder), luồng hồ sơ → tứ trụ → chương đầu bài đọc bằng tiếng Anh, SEO (canonical,
 // hreflang hai chiều, một H1), nút "Tiếng Việt" về /bat-tu, và trang Việt /bat-tu không đổi chữ.
+import { chonNoiSinh } from "./_hoso";
 import { test, expect, type Page } from "@playwright/test";
 import { CHU_BAT_TU_UI } from "../lib/chu/bat-tu";
 import { CHU_GIAO_DIEN } from "../lib/chu/giao-dien";
@@ -208,10 +209,8 @@ test.describe("/en/bazi trên trình duyệt", () => {
     await page.selectOption("#gioi-tinh", "nam");
     await expect(page.locator("#noi-sinh")).toBeEnabled({ timeout: 20_000 });
     await page.selectOption("#noi-sinh", "nuoc_ngoai");
-    await expect(page.locator("#nuoc-sinh")).toBeEnabled({ timeout: 20_000 });
-    await page.selectOption("#nuoc-sinh", "us");
-    await page.selectOption("#thanh-pho-sinh", "us-new_york");
-    await expect(page.locator("#nuoc-sinh option:checked")).toHaveText("United States");
+    await chonNoiSinh(page, "hs", "new york", "New York City");
+    await expect(page.getByTestId("hs-noi-da-chon")).toContainText("United States");
     await page.getByRole("button", { name: "Agree and see my result" }).click();
 
     const lt = page.getByTestId("bat-tu-loi-thuong");

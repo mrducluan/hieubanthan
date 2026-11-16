@@ -3,6 +3,7 @@
 // Engine dựng toàn bộ dữ kiện (`/v1/nam/{nam}`); web chỉ hiển thị. Index năm âm hiện tại + năm sau.
 // EN-ALL GĐ 8: /en/year/{năm} là rewrite của trang này (chữ lib/chu/nam-tuoi.ts, tên riêng qua `ten_hien`).
 import { AnhTomTat } from "@/components/seo/AnhTomTat";
+import { MoiXemRieng } from "@/components/nam/MoiXemRieng";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -12,7 +13,9 @@ import { KhoiCms } from "@/components/cms/KhoiCms";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNamBang, duongHanNam, duongLamNhaNam, duongSaoHanNam, duongXongDatNam, namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { duongCuoiHoi, duongNam, duongNamTuoi, duongSinhCon, namCongKhai, namIndex } from "@/lib/nam";
-import { duongLichAm } from "@/lib/lich-am";
+import { duongLichAm, lichNgayCongKhai } from "@/lib/lich-am";
+import { LichAmNam } from "@/components/lich-am/LichAmNam";
+import { homNayVN } from "@/lib/hoang-lich";
 import { duongThang } from "@/lib/hoang-lich";
 import { duongTrang, slugEnCua } from "@/lib/kien-thuc";
 import { taoChu } from "@/lib/chu-trang";
@@ -41,7 +44,7 @@ async function metaGoc(p: P): Promise<Metadata> {
 export default async function Page(p: P) {
   const n = docNamBang((await p.params).nam);
   if (!n) notFound();
-  const d = await namCongKhai(n);
+  const [d, lich] = await Promise.all([namCongKhai(n), lichNgayCongKhai(n)]);
   if (!d) throw new Error("engine không phản hồi");
   const { ngonNgu } = await ngonNguMayChu(), { c: t, p: tp, en } = chuNamTuoi(ngonNgu), ten = tenTheo(d.ten_hien, en);
   const duong = duongNam(n), bien = { nam: String(n), can_chi: d.can_chi };
@@ -101,6 +104,9 @@ export default async function Page(p: P) {
         </dl>
         <p className="mt-2 text-xs text-fg-faint">{tp("nam.truoc_tet", { nam: n, can_chi: d.nam_truoc_tet.can_chi, nam_truoc: d.nam_truoc_tet.nam })}</p>
       </section>
+
+      {/* LA-UI: lịch cả năm âm (chỉ bản Việt) — sau câu trả lời nhanh + 12 ô dữ kiện của năm. */}
+      {!en && lich && <LichAmNam d={lich} homNay={homNayVN()} className="mt-6" />}
 
       {L("/thoi-gian-toi") && <section className="mt-8 rounded-2xl border border-line bg-surface/40 p-5" aria-labelledby="ca-nhan" data-nosnippet="">
         <h2 id="ca-nhan" className="text-xl">{c("ca_nhan.tieu_de", bien)}</h2>
@@ -195,6 +201,7 @@ export default async function Page(p: P) {
         {n > 2006 && <Link href={L(duongNam(n - 1))!} className="text-gold underline">{tp("c.nam_n", { nam: n - 1 })}</Link>}
         {n < 2099 && <Link href={L(duongNam(n + 1))!} className="text-gold underline">{tp("c.nam_n", { nam: n + 1 })}</Link>}
       </p>
+      <MoiXemRieng trang="nam" nam={n} className="mt-10" />
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </div>
   );
