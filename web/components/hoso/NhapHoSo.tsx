@@ -9,7 +9,9 @@ import { Label } from "@/components/ui/label";
 import { GIO_DAI_DIEN_KHONG_BIET, luuHoSo, moTaAm, ngayHopLe, NUOC_NGOAI, type HoSo } from "@/lib/hoso";
 import { postJson } from "@/lib/goi-api";
 import { useDanhSachTinh } from "@/lib/dia-ly";
-import { cacVungIana, nhanUtc, useDanhSachNuoc, vungMay, type KetQuaMuiGio } from "@/lib/mui-gio";
+import { nhanUtc, type KetQuaMuiGio } from "@/lib/mui-gio";
+import { ONoiSinh, type NoiSinh } from "@/components/hoso/ONoiSinh";
+import { coTrangNuoc } from "@/lib/nuoc-co-trang";
 import { ghi, layMaMoi, quenMaMoi } from "@/lib/do-luong";
 import { ghiDongY, thuHoiDongY, useDongYDuLieu } from "@/lib/dong-y-du-lieu";
 import { cn } from "@/lib/utils";
@@ -42,8 +44,6 @@ interface KetQuaDoi {
   am_viet?: { ngay: number; thang: number; nam: number; nhuan: boolean };
 }
 
-/** QTE-2: giá trị ô "Nước" khi thành phố không có trong danh sách → chọn mã vùng IANA. */
-const KHAC = "khac";
 
 // EN-6 BI-3: múi giờ chuẩn hay gặp (giờ mùa hè đã có ô riêng) — giá trị là số giờ lệch UTC; chữ ở lib/chu/giao-dien.ts (MUI_GIO_KHOA).
 
@@ -95,7 +95,9 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const [utcNoiSinh, setUtcNoiSinh] = useState(typeof macDinh?.utc_noi_sinh === "number" ? String(macDinh.utc_noi_sinh) : "");
   // QTE-2 giai đoạn 0: nước + thành phố nơi sinh (mã thành phố "us-san_jose" hoặc mã vùng IANA khi chọn "Khác").
   const [muiGio, setMuiGio] = useState<string>(macDinh?.mui_gio ?? "");
-  const [nuoc, setNuoc] = useState<string>(macDinh?.mui_gio ? (macDinh.mui_gio.includes("/") ? KHAC : macDinh.mui_gio.slice(0, 2)) : "");
+  // NS-QT: nơi đã chọn (engine trả kèm mã nước + cờ giờ mặt trời / Nam bán cầu); mã IANA tay → null.
+  const [noiChon, setNoiChon] = useState<NoiSinh | null>(null);
+  const nuoc = noiChon ? noiChon.nuoc.toLowerCase() : "";
   const [kqMuiGio, setKqMuiGio] = useState<KetQuaMuiGio | null>(null);
   const [vung, setVung] = useState<string>(macDinh?.vung ?? "");
   // EN-2 mục 5: tình trạng tự chọn (chỉ trên máy). Giữ giá trị cũ cả khi ô không hiện ở trang đang mở.
@@ -108,7 +110,6 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
   const thangRef = useRef<HTMLInputElement>(null);
   const namRef = useRef<HTMLInputElement>(null);
   const { tinh, loi: loiTinh, thuLai: taiLaiTinh } = useDanhSachTinh();
-  const { nuoc: dsNuoc, loi: loiNuoc, thuLai: taiLaiNuoc } = useDanhSachNuoc(noiSinh === NUOC_NGOAI);
 
   const d = Number(ngay), m = Number(thang), y = Number(nam);
   const duSo = d > 0 && m > 0 && nam.length === 4 && y >= 1900;
@@ -152,7 +153,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
 
   // Ý6: thành phố đã chọn mang cờ engine tính (`canh_bao_mat_troi`, `nam_ban_cau_kha_dung`) → một dòng gợi ý công tắc Trường
   // phái + link trang nước (Ý3). Web không tính gì; engine cũ không có cờ → không gợi ý. Đo chỉ mã (một lần mỗi thành phố).
-  const tpChon = noiSinh === NUOC_NGOAI && nuoc && nuoc !== KHAC ? dsNuoc?.find((n) => n.ma === nuoc)?.thanh_pho.find((t) => t.ma === muiGio) ?? null : null;
+  const tpChon = noiSinh === NUOC_NGOAI && noiChon && noiChon.ma === muiGio ? noiChon : null;
   const goiYCongTac = tpChon && (tpChon.canh_bao_mat_troi || tpChon.nam_ban_cau_kha_dung)
     ? [tpChon.canh_bao_mat_troi ? g("hs.gy_mat_troi") : null, tpChon.nam_ban_cau_kha_dung ? g("hs.gy_mua") : null].filter((x): x is string => Boolean(x)) : [];
   const goiYDaGhi = useRef<string | null>(null);
@@ -365,38 +366,8 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
             )}
             {noiSinh === NUOC_NGOAI && (
               <div className="space-y-2 sm:col-span-2" data-testid="noi-sinh-nuoc-ngoai">
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="nuoc-sinh">{g("hs.nuoc")}</Label>
-                    <Select id="nuoc-sinh" value={nuoc} onChange={(e) => { setNuoc(e.target.value); setMuiGio(""); }}
-                      disabled={!dsNuoc && !loiNuoc}>
-                      <option value="">{dsNuoc ? g("hs.chon_nuoc") : g("hs.dang_tai")}</option>
-                      {dsNuoc?.map((n) => <option key={n.ma} value={n.ma}>{en ? n.ten_en || n.ten : n.ten}</option>)}
-                      <option value={KHAC}>{g("hs.nuoc_khac")}</option>
-                    </Select>
-                    {loiNuoc && <button type="button" onClick={taiLaiNuoc} className="text-xs text-cinnabar underline">{loiNuoc} {g("hs.thu_lai")}</button>}
-                  </div>
-                  {nuoc && nuoc !== KHAC && (
-                    <div className="space-y-2">
-                      <Label htmlFor="thanh-pho-sinh">{g("hs.thanh_pho")}</Label>
-                      <Select id="thanh-pho-sinh" value={muiGio} onChange={(e) => setMuiGio(e.target.value)}>
-                        <option value="">{g("hs.chon_thanh_pho")}</option>
-                        {dsNuoc?.find((n) => n.ma === nuoc)?.thanh_pho.map((t) => <option key={t.ma} value={t.ma}>{en ? t.ten_en || t.ten : t.ten}</option>)}
-                      </Select>
-                    </div>
-                  )}
-                  {nuoc === KHAC && (
-                    <div className="space-y-2">
-                      <Label htmlFor="vung-iana">{g("hs.mui_gio_noi_sinh")}</Label>
-                      <Select id="vung-iana" value={muiGio} onChange={(e) => setMuiGio(e.target.value)}>
-                        <option value="">{g("hs.chon_mui_gio")}</option>
-                        {/* múi giờ của máy đang dùng lên đầu cho dễ chọn — KHÔNG tự điền: nơi sinh có thể khác nơi đang ở */}
-                        {vungMay() && <option value={vungMay()!}>{vungMay()!.replace(/_/g, " ")}{g("hs.may_ban")}</option>}
-                        {cacVungIana().filter((z) => z !== vungMay()).map((z) => <option key={z} value={z}>{z.replace(/_/g, " ")}</option>)}
-                      </Select>
-                    </div>
-                  )}
-                </div>
+                {/* NS-QT: ô gõ có gợi ý (GeoNames) thay hai ô chọn Nước → Thành phố; mã cũ + mã vùng IANA vẫn nhận. */}
+                <ONoiSinh id="hs" giaTri={muiGio} doi={setMuiGio} onNoi={setNoiChon} />
                 {kqMuiGio && (
                   <p className="text-xs text-fg-muted" data-testid="xac-nhan-mui-gio">
                     <ChuNhan lopNhan="font-bold text-fg" chu={g("hs.xac_nhan_mg", { utc: nhanUtc(kqMuiGio.utc_chuan) })} />
@@ -407,14 +378,14 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                 )}
                 {tpChon && goiYCongTac.length > 0 && (
                   <p className="rounded-lg border border-gold/30 bg-gold/5 px-3 py-2 text-xs text-fg-muted" data-testid="goi-y-cong-tac">
-                    <ChuNhan lopNhan="font-bold text-fg" chu={g("hs.gy_cau", { tp: (en ? tpChon.ten_en || tpChon.ten : tpChon.ten).split(" (")[0]!, so: goiYCongTac.length === 2 ? g("hs.gy_hai") : g("hs.gy_mot"), ds: goiYCongTac.join(", ") })} />
+                    <ChuNhan lopNhan="font-bold text-fg" chu={g("hs.gy_cau", { tp: tpChon.ten, so: goiYCongTac.length === 2 ? g("hs.gy_hai") : g("hs.gy_mot"), ds: goiYCongTac.join(", ") })} />
                     {" "}{g("hs.gy_bat")}{" "}
                     <Link href={`${dd("/bat-tu")}#truong-phai-bat-tu`} className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "bat_tu" })}>{g("hs.gy_bat_tu")}</Link>
                     {tpChon.canh_bao_mat_troi && coLink("/tu-vi") && <> · <Link href={`${dd("/tu-vi")}#truong-phai`} className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "tu_vi" })}>{g("hs.gy_tu_vi")}</Link></>}.
-                    {coLink(`/sinh-o-nuoc-ngoai/${nuoc}`) && <>{" "}<Link href={dd(`/sinh-o-nuoc-ngoai/${nuoc}`)} className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "trang_nuoc" })}>{g("hs.gy_nuoc")}</Link></>}
+                    {coTrangNuoc(nuoc) && coLink(`/sinh-o-nuoc-ngoai/${nuoc}`) && <>{" "}<Link href={dd(`/sinh-o-nuoc-ngoai/${nuoc}`)} className="text-gold underline" onClick={() => ghi("chart_interacted", { kind: "goi_y_cong_tac_bam", den: "trang_nuoc" })}>{g("hs.gy_nuoc")}</Link></>}
                   </p>
                 )}
-                {!goiYCongTac.length && nuoc && nuoc !== KHAC && coLink(`/sinh-o-nuoc-ngoai/${nuoc}`) && (
+                {!goiYCongTac.length && coTrangNuoc(nuoc) && coLink(`/sinh-o-nuoc-ngoai/${nuoc}`) && (
                   <p className="text-xs text-fg-faint"><Link href={dd(`/sinh-o-nuoc-ngoai/${nuoc}`)} className="underline hover:text-fg">{g("hs.nuoc_nhap")}</Link></p>
                 )}
                 <p className="text-xs text-fg-faint">{g("hs.chon_dung_tp")}</p>

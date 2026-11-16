@@ -30,12 +30,14 @@ const HOP_DOI: LoiDi = { ma: "hop_doi", href: "/hop-doi", ten: "Xem hợp đôi"
   mo_ta: "Hai ngày sinh đặt cạnh nhau: chỗ hợp, chỗ cần nhường." };
 const HAI_NGUOI: LoiDi = { ma: "hai_nguoi", href: "/tu-vi#hop-tham", ten: "Lá số hai người", Icon: Users,
   mo_ta: "Tử vi của hai bạn nhìn nhau thế nào, có điểm tham khảo." };
+const NHA_MINH = (nam: number): LoiDi => ({ ma: "gia_dinh", href: "/gia-dinh", ten: `Năm ${nam} của cả nhà`, Icon: Users,
+  mo_ta: "Thêm người nhà: ai năm tuổi, Tam tai, tuổi ai hợp ai." });
 const NGAY_TOT: LoiDi = { ma: "ngay_tot", href: "/xem-ngay-tot", ten: "Chọn ngày cho cả nhà", Icon: CalendarHeart,
   mo_ta: "Ngày hợp việc, không xung tuổi cô dâu, chú rể, bố mẹ." };
 
 /** Lối đi theo nội dung trang — lối đầu là nơi form đưa tới sau khi nhập. */
 const LOI_DI: Record<TrangNam, (nam: number) => LoiDi[]> = {
-  nam: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), PHONG_THUY],
+  nam: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), NHA_MINH(n)],
   tuoi: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), NHAN_TUONG],
   sinh_con: (n) => [TU_VI(n), BAT_TU, HOP_DOI, PHONG_THUY],
   cuoi_hoi: (n) => [TU_VI(n), HAI_NGUOI, HOP_DOI, NGAY_TOT],

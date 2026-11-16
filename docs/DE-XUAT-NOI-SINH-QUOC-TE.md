@@ -1,6 +1,6 @@
 # Đề xuất: nhập nơi sinh ngoài Việt Nam bằng ô gõ có gợi ý (NS-QT)
 
-Ngày 2026-11-16 · trạng thái: **đề xuất, chờ chủ dự án duyệt** · khâu THU HÚT (người Việt ở nước ngoài, bản `/en`).
+Ngày 2026-11-16 · trạng thái: **đã làm** (chủ dự án duyệt theo đề xuất: cities15000, bỏ hai ô chọn, giữ ô múi giờ làm lối thoát; chưa migration 0039, chưa nhập toạ độ tay) · khâu THU HÚT (người Việt ở nước ngoài, bản `/en`).
 Đo: tỉ lệ `profile_created` có nơi sinh nước ngoài hoàn tất, `chart_interacted{kind=noi_sinh_chon|noi_sinh_khong_thay}`.
 
 Máy trong phiên nghiên cứu không ra được mạng tới geonames.org, nên các con số về GeoNames và API ngoài là

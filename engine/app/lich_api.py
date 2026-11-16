@@ -44,6 +44,28 @@ def api_mui_gio() -> dict:
     return {"nuoc": ds}
 
 
+@router.get("/v1/dia-ly/tim")
+def api_tim_noi(q: Annotated[str, Query(min_length=1, max_length=40)], gh: Annotated[int, Query(ge=1, le=20)] = 8) -> dict:
+    """NS-QT — gợi ý nơi sinh ngoài Việt Nam khi người dùng gõ (GeoNames cities15000, CC BY 4.0). Không ghi lại chữ gõ."""
+    from app.calc import dia_danh  # noqa: PLC0415
+    return {"ket_qua": dia_danh.tim(q, gh, ngon_ngu.hien_tai())}
+
+
+@router.get("/v1/dia-ly/noi/{ma}")
+def api_noi(ma: Annotated[str, FPath(min_length=4, max_length=64)]) -> dict:
+    """NS-QT — một nơi theo mã (gn-… hoặc mã thành phố cũ): để form hồ sơ hiện lại tên + dòng phụ khi mở hồ sơ đã lưu."""
+    from app.calc import dia_danh  # noqa: PLC0415
+    g = dia_danh.tra(ma, ngon_ngu.hien_tai())
+    if g is None:
+        t = mui_gio.thanh_pho(ma)
+        if t is None:
+            raise HTTPException(404, detail="Không có nơi này")
+        en = ngon_ngu.hien_tai() != ngon_ngu.MAC_DINH
+        g = {"ma": t["ma"], "ten": (t.get("ten_en") if en else None) or t["ten"], "nuoc": t["nuoc"].upper(),
+             "phu": "", "vi_do": t.get("vi_do"), "kinh_do": t.get("kinh_do"), "zone": t["zone"]}
+    return dia_danh.them_co(g)
+
+
 class MuiGioInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
     mui_gio: str = Field(min_length=2, max_length=64, description="Mã thành phố (us-san_jose) hoặc mã vùng IANA")

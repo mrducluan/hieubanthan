@@ -139,6 +139,7 @@ SO: dict[str, dict] = {
     "sao_han_kb.json": {"mang": "lich", "muc": "truyen_thong"},
     "tuoi_dan_gian_kb.json": {"mang": "lich", "muc": "truyen_thong"},
     "nam_tong_quan_kb.json": {"mang": "lich", "muc": "truyen_thong"},
+    "gia_dinh_kb.json": {"mang": "lich", "muc": "truyen_thong", "ghi_chu": "GD-1: lời cặp con giáp, điều tập quán từng người — nháp"},
     "thoi_gian_lop_kb.json": {"mang": "lich", "muc": "truyen_thong"},
     # ---- Liên mảng (lời ghép, ranh giới, mẫu câu)
     "suc_khoe_kb.json": {"mang": "chung", "muc": "tom_y_co_thu", "ghi_chu": "hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2)"},

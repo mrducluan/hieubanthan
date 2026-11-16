@@ -1,0 +1,108 @@
+{
+ "_nguon": "GD-1 đợt 1 (2026-11-16) — lời cho \"Bảng nhà mình\": quan hệ con giáp từng cặp người nhà, điều tập quán nhắc trong năm của từng người, hướng chung cả nhà. Chỉ ĐỌC kết quả tính sẵn (tuoi_dan_gian.quan_he_chi, pham_tam_tai, sao hạn, cung phi Bát trạch). Lời hành vi, không chấm điểm, không phán; tập quán ghi \"dân gian…\". Nháp ban biên tập, chờ chuyên gia đọc.",
+ "source_id": "hbt_bien_tap_gia_dinh",
+ "school_id": "dan_gian_viet",
+ "trang_thai": "nhap_ai",
+ "cap": {
+  "tam_hop": {
+   "tieu_de": "Hai tuổi tam hợp: dễ đồng lòng",
+   "noi_dung": "Dân gian xếp hai tuổi này cùng một nhóm tam hợp. Hai người thường dễ cùng nhìn một hướng, việc chung ít phải giải thích nhiều."
+  },
+  "luc_hop": {
+   "tieu_de": "Hai tuổi lục hợp: dễ bù cho nhau",
+   "noi_dung": "Dân gian coi hai tuổi này là một cặp lục hợp. Chỗ người này thiếu thường là chỗ người kia làm tốt."
+  },
+  "trung": {
+   "tieu_de": "Cùng con giáp: hiểu nhịp của nhau",
+   "noi_dung": "Hai người cùng con giáp nên thường hiểu nhịp của nhau. Khi cả hai cùng nóng vội, nên có một người lùi lại trước."
+  },
+  "xung": {
+   "tieu_de": "Hai tuổi xung: dễ trái nhịp",
+   "noi_dung": "Dân gian xếp hai tuổi này vào nhóm xung: một người muốn làm ngay, người kia muốn chờ. Chuyện nhỏ dễ thành tranh luận nếu không nói rõ trước."
+  },
+  "hai": {
+   "tieu_de": "Hai tuổi lục hại: dễ hiểu lầm",
+   "noi_dung": "Dân gian xếp hai tuổi này vào nhóm lục hại: điều một người nghĩ là quan tâm, người kia có thể thấy là bị xen vào."
+  },
+  "hinh": {
+   "tieu_de": "Hai tuổi tương hình: dễ căng khi mệt",
+   "noi_dung": "Dân gian xếp hai tuổi này vào nhóm tương hình: lúc cả hai bận và mệt, lời nói dễ nặng hơn ý định."
+  }
+ },
+ "viec": {
+  "vo_chong": {
+   "diem_sang": "Giao cho nhau những việc lớn cần bàn chung (tiền nhà, việc học của con); hai bạn thường chốt nhanh mà ít sót.",
+   "nen_de_y": "Khoản chi lớn hoặc quyết định đổi việc, đổi nhà: hẹn bàn sau một đêm, mỗi người viết ra hai lý do của mình rồi mới nói."
+  },
+  "cha_me_con": {
+   "diem_sang": "Dành một buổi mỗi tuần làm một việc chung (đi bộ, nấu ăn, sửa đồ); hai người dễ nói chuyện khi cùng làm.",
+   "nen_de_y": "Khi muốn nhắc nhau, nói lý do trước rồi mới nói điều cần làm; tránh nhắc lại chuyện cũ lúc đang mệt."
+  },
+  "ong_chau": {
+   "diem_sang": "Để ông bà và cháu có thời gian riêng với nhau (kể chuyện, dạy một việc nhỏ); cả hai đều được lợi.",
+   "nen_de_y": "Thống nhất trước giữa bố mẹ và ông bà về giờ giấc, đồ ăn vặt, màn hình của con, để cháu không phải chọn bên."
+  },
+  "anh_em": {
+   "diem_sang": "Việc chung của gia đình (chăm bố mẹ, giỗ chạp) có thể chia theo chỗ mạnh của từng người.",
+   "nen_de_y": "Chuyện tiền bạc giữa anh chị em: ghi rõ ai góp gì, ai giữ gì, kể cả khoản nhỏ."
+  },
+  "gia_dinh": {
+   "diem_sang": "Những việc cần phối hợp trong nhà nên giao cho hai người này cùng làm.",
+   "nen_de_y": "Việc chung trong nhà nên chia rõ người làm và hạn xong, tránh để mỗi người tự hiểu một kiểu."
+  }
+ },
+ "nguoi": {
+  "tam_tai": {
+   "ten": "Năm Tam tai (năm thứ {n})",
+   "nguoi_lon": "Dân gian coi năm nay là năm Tam tai thứ {n} của tuổi này, hay nhắc chậm lại với việc lớn. Việc nên làm: việc lớn (mua bán nhà, đầu tư, đổi việc) thì xem kỹ giấy tờ và hỏi thêm một người tin cậy trước khi quyết.",
+   "tre_em": "Dân gian coi năm nay là năm Tam tai thứ {n} của tuổi con, hay nhắc để mắt hơn khi con đi lại, chơi đùa. Việc nên làm: rà lại đường con đi học, mũ bảo hiểm, chỗ chơi gần nước; giữ lịch khám định kỳ của con."
+  },
+  "trung": {
+   "ten": "Năm tuổi",
+   "nguoi_lon": "Năm nay là năm tuổi (cùng con giáp với năm). Dân gian hay nhắc sống chậm và giữ sức. Việc nên làm: sắp lịch nghỉ ngơi đều, khám sức khoẻ tổng quát một lần trong năm.",
+   "tre_em": "Năm nay là năm tuổi của con. Việc nên làm: giữ nếp ngủ và ăn đều cho con, cùng con đặt một mục tiêu nhỏ cho năm học."
+  },
+  "xung": {
+   "ten": "Tuổi xung với năm",
+   "nguoi_lon": "Dân gian xếp tuổi này xung với năm nay: nhịp việc dễ thay đổi bất ngờ. Việc nên làm: giữ một khoản dự phòng, việc quan trọng có kế hoạch B.",
+   "tre_em": "Dân gian xếp tuổi con xung với năm nay: con có thể thay đổi nhiều (bạn mới, lớp mới). Việc nên làm: hỏi chuyện con mỗi tối vài phút, để con có chỗ kể."
+  },
+  "hinh": {
+   "ten": "Tuổi tương hình với năm",
+   "nguoi_lon": "Dân gian xếp tuổi này tương hình với năm nay: dễ căng thẳng khi việc dồn. Việc nên làm: chia việc lớn thành bước nhỏ và nói rõ khi cần người khác giúp.",
+   "tre_em": "Dân gian xếp tuổi con tương hình với năm nay: con dễ cáu khi mệt. Việc nên làm: để ý giờ ngủ của con, bớt lịch học thêm nếu con đuối."
+  },
+  "hai": {
+   "ten": "Tuổi lục hại với năm",
+   "nguoi_lon": "Dân gian xếp tuổi này lục hại với năm nay: dễ hiểu lầm trong lời nói. Việc nên làm: việc quan trọng thì nhắn lại bằng chữ sau khi nói miệng.",
+   "tre_em": "Dân gian xếp tuổi con lục hại với năm nay: con dễ hiểu lầm với bạn bè. Việc nên làm: khi con kể chuyện bạn, nghe hết rồi mới góp ý."
+  },
+  "hop": {
+   "ten": "Tuổi hợp với năm",
+   "nguoi_lon": "Dân gian xếp tuổi này hợp với năm nay. Việc nên làm: năm hợp để bắt đầu một việc đã định lâu (học thêm, đổi nếp sống, mở việc nhỏ).",
+   "tre_em": "Dân gian xếp tuổi con hợp với năm nay. Việc nên làm: cho con thử một môn mới hoặc một nhóm bạn mới."
+  },
+  "binh": {
+   "ten": "Năm bình thường với tuổi",
+   "nguoi_lon": "Năm nay không hợp cũng không xung với tuổi này theo tập quán. Việc nên làm: giữ nhịp đều, làm tiếp việc đang dở.",
+   "tre_em": "Năm nay không hợp cũng không xung với tuổi con theo tập quán. Việc nên làm: giữ nếp học, nếp chơi đều cho con."
+  }
+ },
+ "huong": {
+  "chung": "Cả nhà có chung các hướng tốt: {ds}. Bàn ăn, phòng sinh hoạt chung nên kê quay về một trong các hướng này.",
+  "hai_nhom": "Nhà có người nhóm Đông tứ mệnh và người nhóm Tây tứ mệnh, nên không có hướng tốt chung cho cả nhà. Phòng chung kê theo người ở đó nhiều nhất; đầu giường, bàn làm việc mỗi người theo hướng riêng.",
+  "thieu": "Thêm giới tính cho từng người để xem hướng tốt chung của cả nhà."
+ },
+ "tom_tat": {
+  "tam_tai": "{so} người vào năm Tam tai",
+  "trung": "{so} người gặp năm tuổi",
+  "xung": "{so} người có tuổi xung với năm",
+  "hop": "{so} người có tuổi hợp với năm"
+ },
+ "viec_chung": {
+  "chon_ngay": {"ten": "Chọn ngày cho cả nhà", "mo_ta": "Ngày hợp việc, không xung tuổi ai trong nhà (cưới, về nhà mới, khai trương…)."},
+  "lam_nha": {"ten": "Tuổi làm nhà năm {nam}", "mo_ta": "Kim lâu, Hoang ốc, Tam tai theo tuổi người đứng tên."},
+  "xong_dat": {"ten": "Tuổi xông đất Tết {nam}", "mo_ta": "Tuổi hợp với chủ nhà để mời xông đất."}
+ },
+ "luu_y": "Con giáp, Tam tai, năm tuổi, sao hạn là tập quán dân gian để tham khảo khi sắp xếp việc nhà, không phải lời đoán về ai. Mọi việc lớn vẫn nên dựa trên điều kiện thật của gia đình."
+}

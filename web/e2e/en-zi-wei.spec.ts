@@ -1,6 +1,7 @@
 // EN-ALL GĐ 4 — /en/zi-wei-dou-shu: rewrite của /tu-vi (một cây component, ngôn ngữ là ngữ cảnh). Trang Anh không lộ chữ
 // Việt (chữ hiển thị + aria/title/placeholder, trừ tên người dùng gõ), lá số SVG vẽ với nhãn Anh ở cả hai giao diện, báo cáo
 // mở chương, cụm kiến thức + trang con, 308 slug, hreflang hai chiều, không cuộn ngang ở 390px.
+import { chonNoiSinh } from "./_hoso";
 import { test, expect, type Page } from "@playwright/test";
 import { CHU_TU_VI_UI } from "../lib/chu/tu-vi";
 import { CHU_TU_VI } from "../lib/chu/cong-cu";
@@ -178,9 +179,7 @@ test.describe("/en/zi-wei-dou-shu trên trình duyệt", () => {
     await page.selectOption("#gioi-tinh", "nam");
     await expect(page.locator("#noi-sinh")).toBeEnabled({ timeout: 20_000 });
     await page.selectOption("#noi-sinh", "nuoc_ngoai");
-    await expect(page.locator("#nuoc-sinh")).toBeEnabled({ timeout: 20_000 });
-    await page.selectOption("#nuoc-sinh", "us");
-    await page.selectOption("#thanh-pho-sinh", "us-new_york");
+    await chonNoiSinh(page, "hs", "new york", "New York City");
     await page.getByRole("button", { name: "Agree and see my result" }).click();
 
     const ls = page.getByTestId("la-so-tu-vi").locator("svg").first();
@@ -287,16 +286,14 @@ test.describe("/en/zi-wei-dou-shu trên trình duyệt", () => {
     await expect(page.locator("#ht-noi-sinh")).toBeEnabled({ timeout: 20_000 });
     await page.selectOption("#ht-noi-sinh", "nuoc_ngoai");
     await expect(page.getByTestId("ht-nuoc-ngoai")).toBeVisible();
-    await expect(page.locator("#ht-nuoc")).toBeEnabled({ timeout: 20_000 });
-    await page.selectOption("#ht-nuoc", "us");
-    await page.selectOption("#ht-thanh-pho", "us-new_york");
+    await chonNoiSinh(page, "ht", "new york", "New York City");
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
     expect((await f.innerText()).split("\n").filter((l) => VIET.test(l))).toEqual([]);
     const [yc] = await Promise.all([
       page.waitForRequest((r) => r.method() === "POST" && r.url().includes("/api/tuvi/hop-tham")),
       f.locator('button[type="submit"]').click(),
     ]);
-    expect(JSON.stringify(yc.postDataJSON())).toContain('"mui_gio":"us-new_york"');
+    expect(JSON.stringify(yc.postDataJSON())).toContain('"mui_gio":"gn-5128581"');
     const kq = page.getByTestId("hop-tham-ket-qua");
     await expect(kq).toBeVisible({ timeout: 40_000 });
     expect((await kq.innerText()).split("\n").filter((l) => VIET.test(l))).toEqual([]);

@@ -22,7 +22,7 @@
 | Nhân tướng | 4 | 2 |  |  |  |
 | Tarot | 1 |  |  |  |  |
 | Thần số |  |  | 11 | 12 |  |
-| Lịch · tuổi · tập quán |  | 1 | 4 |  |  |
+| Lịch · tuổi · tập quán |  | 1 | 5 |  |  |
 | Liên mảng · kỹ thuật |  | 1 |  | 11 | 7 |
 
 ## Phần đã có nguyên văn đối chiếu (test khoá)
@@ -146,6 +146,7 @@
 | Thần số | `thanso_noi_dau.json` |  | Ban biên tập soạn |  |
 | Thần số | `thanso_quan_he.json` |  | Tập quán / sách hiện đại tóm ý |  |
 | Thần số | `thanso_xu_ly.json` |  | Ban biên tập soạn |  |
+| Lịch · tuổi · tập quán | `gia_dinh_kb.json` |  | Tập quán / sách hiện đại tóm ý | GD-1: lời cặp con giáp, điều tập quán từng người — nháp |
 | Lịch · tuổi · tập quán | `hoang_lich_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | bảng nghi / kỵ theo sách lịch; tên Việt + nghĩa là nháp |
 | Lịch · tuổi · tập quán | `nam_tong_quan_kb.json` |  | Tập quán / sách hiện đại tóm ý |  |
 | Lịch · tuổi · tập quán | `sao_han_kb.json` |  | Tập quán / sách hiện đại tóm ý |  |

@@ -1,6 +1,6 @@
 # Đề xuất: hồ sơ gia đình và "Bảng nhà mình" (GD-1)
 
-Ngày 2026-11-16 · trạng thái: **đề xuất, chờ chủ dự án duyệt** · khâu QUAY LẠI + MỜI + NẠP Sao.
+Ngày 2026-11-16 · trạng thái: **đợt 1 đã làm** (chủ dự án duyệt theo đề xuất: trần 8 người, danh mục vai mục 2, không điểm số, không ghép Bát tự chéo). Đợt 2–3 chưa làm · khâu QUAY LẠI + MỜI + NẠP Sao.
 Đo: `family_member_added{vai, lop}`, `family_viewed{so_nguoi}`, `chart_interacted{kind=gia_dinh_viec, muc}`,
 `share_clicked{gd}` → `referral_signup`.
 
