@@ -1,0 +1,12 @@
+{
+ "_ghi": "EN-ALL GĐ 8 — mẫu câu tiếng Anh của Chân dung tổng hợp (luangiai/chan_dung_tong_hop.py).",
+ "cd.can_cu_mon": "{mon}: {mang} — {muc}",
+ "cd.mat": "{mon} ({mat}) sees it as {muc}",
+ "cd.chua_co": "not yet",
+ "cd.thieu.khao_sat": "No face survey yet.",
+ "cd.thieu.can_khao_sat": "Needs the face survey.",
+ "cd.hai_cach": " Method 1 (balancing strength): {c1}; method 2 (by birth month): {c2}.",
+ "cd.chua_ro": "not clear yet",
+ "cd.tu_mang": "From {mang}: {td}.",
+ "cd.nguon": "Zi Wei Dou Shu (Vietnamese Southern school) · Bazi (Zi Ping) · Face reading (Ma Yi, Shen Xiang Quan Bian) — combined, with no new data added"
+}
