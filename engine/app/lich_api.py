@@ -114,7 +114,8 @@ def api_doi_lich(inp: DoiLichInput) -> dict:
     am_d = {"ngay": am[0], "thang": am[1], "nam": am[2], "nhuan": bool(am[3])}
     v = lunar.solar_to_lunar(duong.day, duong.month, duong.year, _tz_lich(duong, inp.noi_sinh))
     am_viet = {"ngay": v[0], "thang": v[1], "nam": v[2], "nhuan": bool(v[3])}
-    return {
+    from app.luangiai import lich_trang_hien as _lth  # noqa: PLC0415 — EN-ALL GĐ 8: can chi theo ngôn ngữ
+    return _lth.doi({
         "duong": {"ngay": duong.day, "thang": duong.month, "nam": duong.year},
         "am": am_d,
         "am_trung_quoc": am_tq,
@@ -128,7 +129,7 @@ def api_doi_lich(inp: DoiLichInput) -> dict:
         "thang_nhuan_nam": lunar.thang_nhuan(am[2], tz),
         "so_ngay_thang": lunar.so_ngay_thang(am[1], am[2], int(am[3]), tz),
         "lich_mien_nam_utc8": inp.lich == "viet" and tz != config.CALENDAR_MERIDIAN_TZ,
-    }
+    })
 
 
 # SEO-L5: lịch âm cả năm (các tháng, Tết, nhuận) — không dữ liệu cá nhân.

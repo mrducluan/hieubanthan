@@ -14,7 +14,11 @@ import datetime as dt
 import json
 from pathlib import Path
 
+from app import ngon_ngu
 from app.calc import huyen_khong as HK
+from app.kb import nap
+from app.kb import ten as _tn
+from app.kb.loi import L
 from app.calc import phongthuy as P
 from app.calc import tuoi_dan_gian as t
 from app.luangiai.doi_song_chung import slug  # noqa: F401  (dùng lại ở thoi_gian_toi)
@@ -23,13 +27,34 @@ KB = json.loads((Path(__file__).parents[1] / "kb" / "data" / "thoi_gian_lop_kb.j
 SAO_TOT = (9, 1, 8)            # thứ tự ưu tiên ở vận 9
 SAO_YEN = (5, 2)
 PHUONG = {k: v[1] for k, v in HK.QUAI.items()}
-TEN_LOP = KB["ten_lop"]
+TEN_LOP = KB["ten_lop"]          # bản Việt (giữ cho mã cũ); chữ theo ngôn ngữ: `ten_lop()`
+
+
+def _kb() -> dict:
+    """EN-ALL GĐ 8: KB theo ngôn ngữ lượt gọi (bản phủ `kb/data/<nn>/thoi_gian_lop_kb.json`); bản Việt = `KB`."""
+    return KB if ngon_ngu.la_viet() else nap.doc("thoi_gian_lop_kb.json")
+
+
+def ten_lop(ma: str) -> str:
+    return _kb()["ten_lop"][ma]
+
+
+def _h(ph: str) -> str:
+    return _tn.ten("huong", ph)
+
+
+def _c(chi: str) -> str:
+    return _tn.ten("chi", chi)
+
+
+def _s(ten_sao: str) -> str:
+    return _tn.ten("sao_bay", ten_sao)
 
 
 def con_giap_thang(chi_tuoi: str, chi_thang: str) -> dict:
     q = t.quan_he_chi(chi_tuoi, chi_thang) or "binh"
-    o = KB["con_giap"][q]
-    return {"quan_he": q, "loai": o["loai"], "nhan": o["nhan"].format(chi_thang=chi_thang, chi_tuoi=chi_tuoi),
+    o = _kb()["con_giap"][q]
+    return {"quan_he": q, "loai": o["loai"], "nhan": o["nhan"].format(chi_thang=_c(chi_thang), chi_tuoi=_c(chi_tuoi)),
             "loi": o["loi"]}
 
 
@@ -50,11 +75,11 @@ def _goc(cung: dict, quai: str | None) -> tuple[dict | None, dict | None, list[s
 
 
 def _loi_goc(hop, tot, khoa_hop="goc_hop", khoa_tot="goc_tot", **them) -> str:
-    pt = KB["phong_thuy"]
+    pt = _kb()["phong_thuy"]
     if hop:
-        cau = pt[khoa_hop].format(phuong=hop["phuong"], y=pt["sao_tot"][str(hop["sao"])], **them)
+        cau = pt[khoa_hop].format(phuong=_h(hop["phuong"]), y=pt["sao_tot"][str(hop["sao"])], **them)
     elif tot:
-        cau = pt[khoa_tot].format(phuong=tot["phuong"], y=pt["sao_tot"][str(tot["sao"])], **them)
+        cau = pt[khoa_tot].format(phuong=_h(tot["phuong"]), y=pt["sao_tot"][str(tot["sao"])], **them)
     else:
         cau = ""
     return cau
@@ -63,23 +88,24 @@ def _loi_goc(hop, tot, khoa_hop="goc_hop", khoa_tot="goc_tot", **them) -> str:
 def phong_thuy_thang(giua: dt.date, quai: str | None) -> dict:
     ln = HK.luu_nguyet_tai(giua)
     hop, tot, yen = _goc(ln["cung"], quai)
-    pt = KB["phong_thuy"]
+    pt = _kb()["phong_thuy"]
     chinh = _loi_goc(hop, tot)
     ten_yen = {PHUONG[k]: HK.SAO[s] for k, s in ln["cung"].items() if k != "Trung cung" and s in SAO_YEN}
-    loi_yen = (pt["goc_yen"].format(phuong=yen[0]) if len(yen) == 1 else
-               pt["goc_yen_hai"].format(a=yen[0], b=yen[1]) if len(yen) >= 2 else "")
+    loi_yen = (pt["goc_yen"].format(phuong=_h(yen[0])) if len(yen) == 1 else
+               pt["goc_yen_hai"].format(a=_h(yen[0]), b=_h(yen[1])) if len(yen) >= 2 else "")
     thieu = "" if quai else pt["thieu_gioi"]
     return {"chi_thang": ln["chi_thang"], "goc_hop": hop, "goc_tot": tot, "yen": yen,
             "loi_chinh": chinh, "loi_yen": loi_yen, "loi_thieu": thieu,
             "loi": " ".join(x for x in (chinh, loi_yen, thieu) if x),
-            "can_cu": f"Sao tháng {ln['chi_thang']} (Huyền Không, trung cung {HK.SAO[ln['tam']]})"
-                      + _chi_tiet(hop, tot, ten_yen) + (f"; mệnh quái {quai} (Bát trạch)" if quai else "")}
+            "can_cu": L("tgl.can_cu_thang", "Sao tháng {chi} (Huyền Không, trung cung {tam})", chi=_c(ln['chi_thang']), tam=_s(HK.SAO[ln['tam']]))
+                      + _chi_tiet(hop, tot, ten_yen) + (L("tgl.quai", "; mệnh quái {quai} (Bát trạch)", quai=_tn.ten("quai", quai)) if quai else "")}
 
 
 def _chi_tiet(hop, tot, ten_yen: dict) -> str:
     g = hop or tot
-    ra = [f"{g['ten_sao']} tới {g['phuong']}" + (f" — {g['du_nien']} của mệnh" if hop else "")] if g else []
-    ra += [f"{s} tới {ph}" for ph, s in ten_yen.items()]
+    ra = [L("tgl.toi", "{sao} tới {phuong}", sao=_s(g['ten_sao']), phuong=_h(g['phuong']))
+          + (L("tgl.du_nien", " — {du_nien} của mệnh", du_nien=_tn.ten("du_nien", hop['du_nien'])) if hop else "")] if g else []
+    ra += [L("tgl.toi", "{sao} tới {phuong}", sao=_s(s), phuong=_h(ph)) for ph, s in ten_yen.items()]
     return ": " + ", ".join(ra) if ra else ""
 
 
@@ -93,7 +119,7 @@ def phong_thuy_nam(nam: int, quai: str | None) -> dict | None:
         return None
     ten_yen = {PHUONG[k]: HK.SAO[s] for k, s in ln["cung"].items() if k != "Trung cung" and s in SAO_YEN}
     return {"goc_hop": hop, "goc_tot": tot, "yen": yen, "loi": loi,
-            "can_cu": KB["phong_thuy"]["nam_can_cu"].format(nam=nam, tam=HK.SAO[ln["tam"]], quai=quai,
+            "can_cu": _kb()["phong_thuy"]["nam_can_cu"].format(nam=nam, tam=_s(HK.SAO[ln["tam"]]), quai=_tn.ten("quai", quai),
                                                             chi_tiet=_chi_tiet(hop, tot, ten_yen))}
 
 
@@ -113,6 +139,9 @@ def ngay_dep_thang(nam: int, thang: int, ngay_sinh: dt.date, so: int = 3, tu_nga
 
 
 def _dm(iso: str) -> str:
+    if not ngon_ngu.la_viet():
+        from app.luangiai import lich_hien  # noqa: PLC0415
+        return lich_hien.dm(dt.date.fromisoformat(iso))
     y, m, d = iso.split("-")
     return f"{int(d)}/{int(m)}"
 
@@ -133,45 +162,45 @@ def hang_lop(o: dict, truoc: dict | None = None) -> list[dict]:
     của tháng trước — EN-2 (ND-8): câu "góc … nên giữ yên" chỉ nói khi khác tháng trước (trước lặp 150 lần/10 hồ sơ);
     thiếu giới tính thì lời mời bổ sung chỉ nói ở tháng đầu."""
     cg, pt, nd = o["con_giap"], o["phong_thuy"], o["ngay_dep"]
-    kn = KB["ngay_dep"]
-    ds = ", ".join(f"{_dm(x['ngay'])} (âm {x['am']})" for x in nd)
+    kn = _kb()["ngay_dep"]
+    ds = ", ".join(L("tgl.ngay_am", "{ngay} (âm {am})", ngay=_dm(x['ngay']), am=x['am']) for x in nd)
     yen = pt.get("yen") or []
     if not truoc:
         cau_yen = pt.get("loi_yen") or ""
     elif set(yen) == set(((truoc or {}).get("phong_thuy") or {}).get("yen") or []):
-        cau_yen = "Các góc nên giữ yên như tháng trước." if yen else ""
+        cau_yen = L("tgl.yen_nhu_truoc", "Các góc nên giữ yên như tháng trước.") if yen else ""
     else:                     # đã giải thích "giữ yên" ở tháng đầu → các tháng sau chỉ nêu góc
-        cau_yen = f"Góc nên giữ yên: {' và '.join(yen)}." if yen else ""
+        cau_yen = L("tgl.yen", "Góc nên giữ yên: {ds}.", ds=L("tgl.va", " và ").join(_h(x) for x in yen)) if yen else ""
     loi_pt = " ".join(x for x in (pt.get("loi_chinh", pt["loi"]), cau_yen,
                                    pt.get("loi_thieu") if not truoc else "") if x)
     return [
-        {"ma": "con_giap", "nhan": TEN_LOP["con_giap"], "tieu": cg["nhan"], "loi": cg["loi"], "loai": cg["loai"]},
-        {"ma": "phong_thuy", "nhan": TEN_LOP["phong_thuy"], "loi": loi_pt or pt["loi"],
+        {"ma": "con_giap", "nhan": ten_lop("con_giap"), "tieu": cg["nhan"], "loi": cg["loi"], "loai": cg["loai"]},
+        {"ma": "phong_thuy", "nhan": ten_lop("phong_thuy"), "loi": loi_pt or pt["loi"],
          "loai": "thuan" if pt["goc_hop"] else "trung"},
-        {"ma": "ngay_dep", "nhan": TEN_LOP["ngay_dep"], "loi": kn["loi"].format(ds=ds) if nd else kn["khong_co"],
+        {"ma": "ngay_dep", "nhan": ten_lop("ngay_dep"), "loi": kn["loi"].format(ds=ds) if nd else kn["khong_co"],
          "loai": "trung"},
     ]
 
 
 def can_cu_lop(o: dict) -> list[str]:
-    return [f"Con giáp: tháng {o['chi_thang']} (tháng theo tiết chứa ngày 15) – tuổi {o['chi_tuoi']}",
-            o["phong_thuy"]["can_cu"], KB["ngay_dep"]["can_cu"]]
+    return [L("tgl.can_cu_cg", "Con giáp: tháng {chi} (tháng theo tiết chứa ngày 15) – tuổi {tuoi}", chi=_c(o['chi_thang']), tuoi=_c(o['chi_tuoi'])),
+            o["phong_thuy"]["can_cu"], _kb()["ngay_dep"]["can_cu"]]
 
 
 def tin_hieu(o: dict, muc_tv: str | None, muc_bt: str | None) -> dict:
     """Lớp nói thuận / lớp nhắc chậm của một tháng (để đếm, không chấm điểm)."""
     dau, cham = [], []
     if o["con_giap"]["loai"] == "thuan":
-        dau.append("con giáp hợp tuổi")
+        dau.append(L("tgl.th.cg_hop", "con giáp hợp tuổi"))
     elif o["con_giap"]["quan_he"] == "xung":
-        cham.append("tháng xung tuổi")
+        cham.append(L("tgl.th.xung", "tháng xung tuổi"))
     if o["phong_thuy"]["goc_hop"] and o["phong_thuy"]["goc_hop"]["sao"] == 9:
-        dau.append("góc nhà hợp bạn đón sao tốt")
-    for ten, m in (("Tử vi", muc_tv), ("Bát tự", muc_bt)):
+        dau.append(L("tgl.th.goc", "góc nhà hợp bạn đón sao tốt"))
+    for ma, m in (("tuvi", muc_tv), ("battu", muc_bt)):
         if m == "thuan":
-            dau.append(f"{ten} thuận")
+            dau.append(L(f"tgl.th.{ma}.thuan", {"tuvi": "Tử vi", "battu": "Bát tự"}[ma] + " thuận"))
         elif m == "can_chu_dong":
-            cham.append(f"{ten} cần lưu ý")
+            cham.append(L(f"tgl.th.{ma}.cham", {"tuvi": "Tử vi", "battu": "Bát tự"}[ma] + " cần lưu ý"))
     return {"thang": o["thang"], "dau": dau, "cham": cham}
 
 
@@ -179,12 +208,12 @@ def viec_chinh(o: dict, hop_de: str | None = None) -> str:
     """MỘT việc nên làm của tháng (EN-2 ND-8): tháng xung tuổi → giấy tờ, chưa vội ký; có ngày đẹp → việc quan trọng đặt
     vào ngày ấy; không thì việc tháng cá nhân gợi ý. Chỉ ghép dữ kiện đã tính."""
     if o["con_giap"]["quan_he"] == "xung":
-        return "Việc lớn trong tháng: đọc kỹ giấy tờ, chưa vội ký, hẹn thêm một ngày suy nghĩ."
+        return L("tgl.viec.xung", "Việc lớn trong tháng: đọc kỹ giấy tờ, chưa vội ký, hẹn thêm một ngày suy nghĩ.")
     if o["ngay_dep"]:
         x = o["ngay_dep"][0]
-        return (f"Việc quan trọng nhất tháng ({hop_de}) nên đặt vào ngày {_dm(x['ngay'])}." if hop_de
-                else f"Việc quan trọng nhất tháng nên đặt vào ngày {_dm(x['ngay'])}.")
-    return f"Dành tháng này cho: {hop_de}." if hop_de else ""
+        return (L("tgl.viec.ngay_de", "Việc quan trọng nhất tháng ({de}) nên đặt vào ngày {ngay}.", de=hop_de, ngay=_dm(x['ngay'])) if hop_de
+                else L("tgl.viec.ngay", "Việc quan trọng nhất tháng nên đặt vào ngày {ngay}.", ngay=_dm(x['ngay'])))
+    return L("tgl.viec.danh", "Dành tháng này cho: {de}.", de=hop_de) if hop_de else ""
 
 
 def tom_lai(th: dict) -> str:
@@ -192,16 +221,17 @@ def tom_lai(th: dict) -> str:
     ≥ 2 lớp cùng chiều và không lớp nào ngược — một lớp thì nói đúng là một điểm."""
     dau, cham = th["dau"], th["cham"]
     if len(dau) >= 2 and not cham:
-        return f"Tóm lại: tháng thuận — {', '.join(dau)}."
+        return L("tgl.tom.thuan", "Tóm lại: tháng thuận — {ds}.", ds=', '.join(dau))
     if len(cham) >= 2 and not dau:
-        return f"Tóm lại: tháng nên đi chậm một nhịp — {', '.join(cham)}."
+        return L("tgl.tom.cham", "Tóm lại: tháng nên đi chậm một nhịp — {ds}.", ds=', '.join(cham))
     if dau and not cham:
-        return f"Tóm lại: tháng đều nhịp, có một điểm thuận ({dau[0]})."
+        return L("tgl.tom.mot_thuan", "Tóm lại: tháng đều nhịp, có một điểm thuận ({x}).", x=dau[0])
     if cham and not dau:
-        return f"Tóm lại: tháng đều nhịp, có một điều nên để ý ({cham[0]})."
+        return L("tgl.tom.mot_cham", "Tóm lại: tháng đều nhịp, có một điều nên để ý ({x}).", x=cham[0])
     if dau and cham:
-        return f"Tóm lại: có điểm thuận ({', '.join(dau)}) lẫn điều nhắc chậm ({', '.join(cham)}) — việc lớn nên chuẩn bị kỹ."
-    return "Tóm lại: tháng đều nhịp, không cách xem nào lệch hẳn — cứ theo việc tháng cá nhân gợi ý."
+        return L("tgl.tom.ca_hai", "Tóm lại: có điểm thuận ({a}) lẫn điều nhắc chậm ({b}) — việc lớn nên chuẩn bị kỹ.",
+                 a=', '.join(dau), b=', '.join(cham))
+    return L("tgl.tom.deu", "Tóm lại: tháng đều nhịp, không cách xem nào lệch hẳn — cứ theo việc tháng cá nhân gợi ý.")
 
 
 def xep_thang(ds: list[dict], toi_da: int = 3) -> tuple[list[dict], list[dict]]:

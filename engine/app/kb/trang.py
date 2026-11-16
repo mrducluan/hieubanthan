@@ -595,6 +595,11 @@ def _hoan_tat(t: dict) -> dict:
         vi = ngon_ngu.theo_viet(_lay)(t["loai"], t["slug"]) or {}
         if yc := _ttv.y_chinh_en(t, len(vi.get("y_chinh") or [])):
             t["y_chinh"] = yc
+    elif not t.get("y_chinh") and not ngon_ngu.la_viet() and t.get("loai") == "bo_vi":
+        # EN-ALL GĐ 8: cùng khe như `y_chinh_tu_dong._bo_vi`, SỐ ý do bản Việt quyết, chữ rút từ trang tiếng Anh.
+        vi = ngon_ngu.theo_viet(_lay)(t["loai"], t["slug"]) or {}
+        if yc := _tnt.y_chinh_en(t, len(vi.get("y_chinh") or [])):
+            t["y_chinh"] = yc
     if t.get("y_chinh") and ngon_ngu.la_viet() and any(len(y) > _yct.TOI_DA for y in t["y_chinh"]):
         t["y_chinh"] = [y if len(y) <= _yct.TOI_DA else _yct._cat(y) for y in t["y_chinh"]]   # lá bài: ý dài tràn khung ảnh
     if ngon_ngu.la_viet():

@@ -1,6 +1,6 @@
 {
  "_trang_thai": "bien_tap",
- "_ghi_chu": "EN-ALL GĐ 5 — bản phủ tiếng Anh một phần (tên + nghĩa Kim lâu, Hoang ốc, Tam tai, hạn năm) cho bài đọc Nhà của bạn; phần còn lại làm ở GĐ 8.",
+ "_ghi_chu": "EN-ALL GĐ 5 — bản phủ tiếng Anh một phần (tên + nghĩa Kim lâu, Hoang ốc, Tam tai, hạn năm) cho bài đọc Nhà của bạn; GĐ 8 thêm nguồn, cách dân gian, quan hệ tuổi xông đất cho trang năm & tuổi.",
  "kim_lau": {
   "than": {"ten": "a Golden Tower year for yourself", "nghia": "folk belief says it affects the person building the house or the bride herself"},
   "the": {"ten": "a Golden Tower year for your spouse", "nghia": "folk belief says it affects the husband or wife"},
@@ -15,6 +15,11 @@
   "ngu_tho_tu": {"ten": "the “Longevity Wanes” step (5th) of the house-age count", "nghia": "folk tradition usually avoids building in this year"},
   "luc_hoang_oc": {"ten": "the “Deserted House” step (6th) of the house-age count", "nghia": "folk tradition usually avoids building in this year"}
  },
+ "source": {"ten": "Vietnamese folk customs for choosing ages · Xuan Kong annual flying stars"},
+ "cach_dan_gian": "When the planned year falls on an age folk custom tends to avoid, many families pick another year, or ask a relative of a suitable age to stand in for the ground-breaking ceremony (\"borrowing an age\", muon tuoi). This is a custom to consult; the decision should rest on your family's real circumstances.",
+ "quan_he_chi": {"tam_hop": "a triad ally", "luc_hop": "a paired ally", "trung": "the same sign", "xung": "a clash", "hai": "in harm (Hai)", "hinh": "in friction (Xing)"},
+ "can_voi_chu": {"ngu_hop": "stem combines with the host's stem", "sinh_chu": "stem nourishes the host's stem", "chu_sinh": "host's stem nourishes the visitor's", "khac_chu": "stem checks the host's stem", "chu_khac": "host's stem checks the visitor's", "binh": "stem is neutral"},
+ "nap_am": {"sinh": "element nourishes the host's", "bình hoà": "same element as the host", "bị sinh": "host's element nourishes the visitor's", "khắc": "element checks the host's", "bị khắc": "host's element checks the visitor's"},
  "tam_tai": {"ten": "Three Calamities", "nghia": "three years in a row when folk tradition advises care with big undertakings (building a house, a wedding, a big new venture)"},
  "han_nam": {
   "thai_tue": {"ten": "Grand Duke (Tai Sui)", "nghia": "the direction of the year — tradition advises against breaking ground or digging big foundations on this side"},
