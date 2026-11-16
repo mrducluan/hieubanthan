@@ -1482,5 +1482,9 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] **MQ-5.** Chạy quảng cáo: tuần đầu tối ưu theo **Lead** (tạo hồ sơ) vì đơn nạp còn ít; khi ~50 Purchase/tuần thì chuyển tối ưu theo
   **Purchase / giá trị**. Gắn link quảng cáo `?utm_source=facebook&utm_campaign=<tên>` (fbclid Meta tự thêm). Xem phễu người đến từ quảng
   cáo ở `/quan-tri/tang-truong` → khung "Người đến từ quảng cáo Meta" (cần khoá PostHog như các khung khác).
+- [ ] **MQ-6.** Xác minh tên miền: web đã có sẵn thẻ `facebook-domain-verification` trong `<head>` (mã `yc7164ai9ptzswsj79rn9aen2eduk8`,
+  env `FACEBOOK_DOMAIN_VERIFICATION` ghi đè). Sau khi bản mới lên production: Business Settings → Brand safety → Domains → hieuban.com →
+  **Verify Domain** (chọn "Add a meta-tag").
+- [ ] **MQ-7.** Pixel Hieuban → Settings → tắt **Automatic advanced matching** (bật thì Meta tự đọc ô nhập như email — trái Chính sách riêng tư).
 - Chữ quảng cáo: không ngầm nói biết đặc điểm riêng của người xem ("Bạn đang buồn chuyện tình cảm?") — chính sách Meta; nên viết "Xem lá số
   Tử vi của bạn", "Năm 2027 của tuổi …".
